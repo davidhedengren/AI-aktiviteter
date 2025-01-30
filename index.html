@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>Interaktivt Träd – BFS/DFS/Greedy/A* (kostnad endast för besökta kanter)</title>
+  <title>Sökalgoritmer i träd</title>
   <style>
     body {
       font-family: sans-serif;
@@ -78,17 +78,17 @@
   <h3>Förklaringar</h3>
   <ul>
     <li><strong>Startnod:</strong> <span class="color-box" style="background:green;"></span> </li>
- <li>
-      <strong>Målnod:</strong>   <span class="color-box" style="background:red;"></span> Vänsterklicka på en nod för att göra den till målnod.
+    <li>
+      <strong>Målnod:</strong> <span class="color-box" style="background:red;"></span> 
+      Vänsterklicka på en nod för att göra den till målnod.
       Klicka igen för att göra den till normal nod ( 
       <span class="color-box" style="background:white;"></span>).
       Du kan ha flera mål.
+    </li>
     <li><strong>Skapa nod:</strong> Klicka i en tom yta.</li>
     <li><strong>Flytta nod:</strong> Högerklicka på en nod och dra.</li>
     <li><strong>Radera nod:</strong> Ctrl + Vänsterklick på nod.</li>
     <li><strong>Skapa kant:</strong> Klicka på en nod och dra till en annan. Ange kostnad för kanten.</li>
-   
-    </li>
     <li>
       När du kör en sökning kommer blåa noder (<span class="color-box" style="background:lightskyblue;"></span>) 
       representera de noder som är utforskade under sökningen, och om en väg hittas markeras dess 
@@ -454,11 +454,9 @@ function bfsStep(){
   let current= st.queue.dequeue();
   st.expansionsCount++;
 
-  // Bara när vi verkligen “poppar” den => räkna sista kantens kostnad
   let lastEdgeCost = current.costSoFar - current.parentCostSoFar;
   st.expansionsCost += lastEdgeCost;
 
-  // Mål?
   if(endNodeIds.has(current.id)){
     for(let x of current.path) pathSet.add(x);
     drawAll();
@@ -468,7 +466,6 @@ function bfsStep(){
     return;
   }
 
-  // Expand
   let node=getNodeById(current.id);
   for(let ed of node.edges){
     let cId=ed.targetId;
@@ -532,7 +529,8 @@ function dfsStep(){
     if(!st.visited.has(ed.targetId)){
       st.visited.add(ed.targetId);
       let childCost= current.costSoFar + ed.cost;
-      stack.push({
+      // Endast här ändrat: stack -> st.stack
+      st.stack.push({
         id: ed.targetId,
         path: [...current.path, ed.targetId],
         costSoFar: childCost,
@@ -642,7 +640,6 @@ function aStarStep(){
   let current= st.pq.pop();
   st.expansionsCount++;
 
-  // skillnaden mellan costSoFar och parentCostSoFar:
   let lastEdgeCost = current.costSoFar - current.parentCostSoFar;
   st.expansionsCost += lastEdgeCost;
 
@@ -665,7 +662,6 @@ function aStarStep(){
       let hh= getNodeById(cId).h||0;
       let f= newG+ hh;
       let newPath=[...current.path,cId];
-      // parentCostSoFar => current.costSoFar
       let childObj= {
         id: cId,
         path: newPath,
