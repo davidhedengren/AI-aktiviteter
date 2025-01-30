@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Interaktivt Träd – BFS/DFS/Greedy/A* (kostnad endast för besökta kanter)</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+    }
+    #canvasContainer {
+      display: inline-block;
+      border: 1px solid #ccc;
+    }
+    #treeCanvas {
+      border: 1px solid gray;
+      background-color: #fefefe;
+    }
+    #info {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+    #controls {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    button, select, label {
+      margin-right: 8px;
+      margin-bottom: 6px;
+    }
+    .instructions {
+      margin-top: 15px;
+      line-height: 1.6em;
+      max-width: 700px;
+    }
+    .color-box {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 6px;
+      vertical-align: middle;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Sökalgoritmer i träd</h2>
+
+<div id="canvasContainer">
+  <canvas id="treeCanvas" width="900" height="600"></canvas>
+</div>
+
+<div id="controls">
+  <label>Algoritm:</label>
+  <select id="algSelect">
+    <option value="BFS">BFS</option>
+    <option value="DFS">DFS</option>
+    <option value="Greedy">Greedy Best-First</option>
+    <option value="A*">A*</option>
+  </select>
+
+  <button id="startBtn">Starta sökning</button>
+  <label><input type="checkbox" id="stepChk"/>Stegvis</label>
+  <button id="nextStepBtn">Nästa steg</button>
+  <button id="resetBtn">Rensa sökning</button>
+
+  <button id="saveBtn">Spara träd</button>
+  <input type="file" id="loadInput" style="display:none;" />
+  <button id="loadBtn">Ladda träd</button>
+  <button id="clearNodesBtn">Rensa noder (utom start)</button>
+</div>
+
+<div id="info"></div>
+
+<div class="instructions">
+  <h3>Förklaringar</h3>
+  <ul>
+    <li><strong>Startnod:</strong> <span class="color-box" style="background:green;"></span> </li>
+ <li>
+      <strong>Målnod:</strong>   <span class="color-box" style="background:red;"></span> Vänsterklicka på en nod för att göra den till målnod.
+      Klicka igen för att göra den till normal nod ( 
+      <span class="color-box" style="background:white;"></span>).
+      Du kan ha flera mål.
+    <li><strong>Skapa nod:</strong> Klicka i en tom yta.</li>
+    <li><strong>Flytta nod:</strong> Högerklicka på en nod och dra.</li>
+    <li><strong>Radera nod:</strong> Ctrl + Vänsterklick på nod.</li>
+    <li><strong>Skapa kant:</strong> Klicka på en nod och dra till en annan. Ange kostnad för kanten.</li>
+   
+    </li>
+    <li>
+      När du kör en sökning kommer blåa noder (<span class="color-box" style="background:lightskyblue;"></span>) 
+      representera de noder som är utforskade under sökningen, och om en väg hittas markeras dess 
+      noder som ljusgröna (<span class="color-box" style="background:lightgreen;"></span>).
+    </li>
+  </ul>
+  <p>
+    Kostnadsrapportering: Efter en sökning visar systemet hur många noder som utforskats, 
+    den totala sökkostnaden för alla utforskade noder
+    och den slutliga vägkostnaden till målet.
+  </p>
+</div>
+
+<script>
+// ===================== DATASTRUKTUR / RITNING =====================
+let nodes = [
+  {id:1, x:450, y:50, edges:[], h:0} // startnod
+];
+let startNodeId=1; 
+let endNodeIds=new Set();
+let nodeCounter=1; 
+
+const canvas=document.getElementById("treeCanvas");
+const ctx=canvas.getContext("2d");
+const NODE_RADIUS=20;
+
+function drawAll(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  // rita grid
+  ctx.strokeStyle="#eee";
+  ctx.lineWidth=1;
+  for(let x=0;x<canvas.width;x+=50){
+    ctx.beginPath();
+    ctx.moveTo(x,0); 
+    ctx.lineTo(x,canvas.height);
+    ctx.stroke();
+  }
+  for(let y=0;y<canvas.height;y+=50){
+    ctx.beginPath();
+    ctx.moveTo(0,y);
+    ctx.lineTo(canvas.width,y);
+    ctx.stroke();
+  }
+
+  // kanter
+  ctx.lineWidth=2;
+  ctx.strokeStyle="#666";
+  ctx.font="14px sans-serif";
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
+  for(let n of nodes){
+    n.edges = n.edges.filter(ed=> getNodeById(ed.targetId));
+    for(let ed of n.edges){
+      let c=getNodeById(ed.targetId);
+      ctx.beginPath();
+      ctx.moveTo(n.x,n.y);
+      ctx.lineTo(c.x,c.y);
+      ctx.stroke();
+      let mx=(n.x+c.x)/2, my=(n.y+c.y)/2;
+      ctx.fillStyle="#333";
+      ctx.fillText(ed.cost.toString(), mx,my);
+    }
+  }
+
+  // noder
+  for(let n of nodes){
+    let color="white";
+    if(n.id===startNodeId) color="green";
+    else if(endNodeIds.has(n.id)) color="red";
+    if(visitedSet.has(n.id)) color="lightskyblue";
+    if(pathSet.has(n.id)) color="lightgreen";
+
+    ctx.fillStyle=color;
+    ctx.beginPath();
+    ctx.arc(n.x,n.y,NODE_RADIUS,0,2*Math.PI);
+    ctx.fill();
+    ctx.strokeStyle="#333";
+    ctx.stroke();
+
+    ctx.fillStyle="#000";
+    ctx.fillText(n.id.toString(), n.x,n.y);
+  }
+}
+function getNodeById(id){
+  return nodes.find(n=> n.id===id);
+}
+function setInfo(msg){
+  document.getElementById("info").textContent=msg;
+}
+
+// =================== Interaktivitet (noder/kanter) ===================
+let draggingNode=null;
+let draggingRight=false;
+let dragOffset={x:0,y:0};
+let edgeDrag=false;
+let firstNode=null;
+
+canvas.addEventListener("contextmenu", e=> e.preventDefault());
+
+function getMousePos(e){
+  let r=canvas.getBoundingClientRect();
+  return {x:e.clientX-r.left, y:e.clientY-r.top};
+}
+function findNodeAt(x,y){
+  for(let n of nodes){
+    let dx=x-n.x, dy=y-n.y;
+    if(dx*dx+dy*dy<= NODE_RADIUS*NODE_RADIUS) return n;
+  }
+  return null;
+}
+
+function removeNode(n){
+  if(n.id===startNodeId){
+    setInfo("Kan ej ta bort startnoden.");
+    return;
+  }
+  nodes=nodes.filter(nd=> nd!==n);
+  for(let nd of nodes){
+    nd.edges=nd.edges.filter(ed=> ed.targetId!==n.id);
+  }
+  endNodeIds.delete(n.id);
+  resetSearch();
+  setInfo("Tog bort nod "+n.id);
+  drawAll();
+}
+function addOrUpdateEdge(fromN,toN,cost){
+  let ex= fromN.edges.find(ed=> ed.targetId===toN.id);
+  if(ex) ex.cost=cost;
+  else fromN.edges.push({targetId:toN.id,cost});
+}
+
+canvas.addEventListener("mousedown", e=>{
+  e.preventDefault();
+  let pos=getMousePos(e);
+  let clicked=findNodeAt(pos.x,pos.y);
+
+  if(e.button===2){
+    // höger => flytta
+    if(clicked){
+      draggingNode=clicked;
+      draggingRight=true;
+      dragOffset.x=pos.x - clicked.x;
+      dragOffset.y=pos.y - clicked.y;
+    }
+  } else if(e.button===0){
+    // vänster
+    if(clicked){
+      if(e.ctrlKey){
+        removeNode(clicked);
+        return;
+      }
+      firstNode=clicked;
+      edgeDrag=true;
+    } else {
+      // skapa
+      nodeCounter++;
+      let newN={id:nodeCounter,x:pos.x,y:pos.y,edges:[],h:0};
+      nodes.push(newN);
+      resetSearch();
+      setInfo("Skapade nod "+newN.id);
+      drawAll();
+    }
+  }
+});
+
+canvas.addEventListener("mousemove", e=>{
+  if(draggingRight && draggingNode){
+    let pos=getMousePos(e);
+    draggingNode.x= pos.x - dragOffset.x;
+    draggingNode.y= pos.y - dragOffset.y;
+    drawAll();
+  }
+});
+
+canvas.addEventListener("mouseup", e=>{
+  e.preventDefault();
+  let pos=getMousePos(e);
+  let r=findNodeAt(pos.x,pos.y);
+
+  if(e.button===2){
+    draggingNode=null;
+    draggingRight=false;
+    drawAll();
+  } else if(e.button===0){
+    if(edgeDrag && firstNode){
+      if(r && r!==firstNode){
+        let cStr= prompt(`Kostnad för kant mellan ${firstNode.id} och ${r.id}?`,"1");
+        if(!cStr){
+          setInfo("Avbryter kant.");
+        } else {
+          let c=parseFloat(cStr);
+          if(isNaN(c)|| c<=0){
+            setInfo("Ogiltig kostnad.");
+          } else {
+            addOrUpdateEdge(firstNode,r,c);
+            addOrUpdateEdge(r,firstNode,c);
+            resetSearch();
+            setInfo(`Kant: ${firstNode.id}<->${r.id}, cost=${c}`);
+            drawAll();
+          }
+        }
+      } else if(r && r===firstNode){
+        if(r.id===startNodeId){
+          setInfo("Kan ej göra startnoden till mål.");
+        } else {
+          if(endNodeIds.has(r.id)){
+            endNodeIds.delete(r.id);
+            setInfo(`Nod ${r.id} ej längre mål.`);
+          } else {
+            endNodeIds.add(r.id);
+            setInfo(`Nod ${r.id} är nu mål.`);
+          }
+          resetSearch();
+          drawAll();
+        }
+      }
+      firstNode=null;
+      edgeDrag=false;
+    }
+  }
+});
+window.addEventListener("mouseup", e=>{
+  draggingRight=false;
+  draggingNode=null;
+  edgeDrag=false;
+  firstNode=null;
+});
+
+// ================== SPARA/LADDA ==================
+document.getElementById("saveBtn").addEventListener("click",()=>{
+  let data={
+    nodes,
+    startNodeId,
+    endNodeIds: Array.from(endNodeIds)
+  };
+  let js= JSON.stringify(data);
+  let blob= new Blob([js],{type:'application/json'});
+  let url= URL.createObjectURL(blob);
+
+  let a=document.createElement("a");
+  a.href=url;
+  a.download="tree.json";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+document.getElementById("loadBtn").addEventListener("click",()=>{
+  document.getElementById("loadInput").click();
+});
+document.getElementById("loadInput").addEventListener("change", e=>{
+  let file=e.target.files[0];
+  if(!file)return;
+  let rdr=new FileReader();
+  rdr.onload=ev=>{
+    let data= JSON.parse(ev.target.result);
+    nodes=data.nodes||[];
+    startNodeId=data.startNodeId||1;
+    endNodeIds=new Set(data.endNodeIds||[]);
+    let maxId=1;
+    for(let nd of nodes){
+      if(nd.id>maxId) maxId=nd.id;
+    }
+    nodeCounter=maxId;
+    resetSearch();
+    setInfo("Träd laddat.");
+    drawAll();
+  };
+  rdr.readAsText(file);
+});
+document.getElementById("clearNodesBtn").addEventListener("click",()=>{
+  let st=getNodeById(startNodeId);
+  if(!st){
+    setInfo("Startnoden saknas, kan ej rensa.");
+    return;
+  }
+  nodes=[st];
+  st.edges=[];
+  endNodeIds.clear();
+  nodeCounter=st.id;
+  resetSearch();
+  setInfo("Rensade alla noder utom startnoden.");
+  drawAll();
+});
+
+// ================= SÖKNING ==================
+document.getElementById("resetBtn").addEventListener("click", resetSearch);
+document.getElementById("startBtn").addEventListener("click", startSearch);
+document.getElementById("nextStepBtn").addEventListener("click", onNextStep);
+
+let stepMode=false;
+document.getElementById("stepChk").addEventListener("change", e=>{
+  stepMode=e.target.checked;
+});
+
+let visitedSet=new Set();
+let pathSet=new Set();
+let BFS_STATE=null, DFS_STATE=null, GREEDY_STATE=null, ASTAR_STATE=null;
+let search_in_progress=false;
+
+function resetSearch(){
+  visitedSet.clear();
+  pathSet.clear();
+  BFS_STATE=DFS_STATE=GREEDY_STATE=ASTAR_STATE=null;
+  search_in_progress=false;
+  setInfo("");
+  drawAll();
+}
+function startSearch(){
+  if(!getNodeById(startNodeId)){
+    setInfo("Startnoden saknas!");
+    return;
+  }
+  if(endNodeIds.size===0){
+    setInfo("Ingen målnod vald.");
+    return;
+  }
+  resetSearch();
+  let alg=document.getElementById("algSelect").value;
+  if(alg==="BFS") startBFS();
+  else if(alg==="DFS") startDFS();
+  else if(alg==="Greedy") startGreedy();
+  else if(alg==="A*") startAstar();
+}
+function onNextStep(){
+  if(!search_in_progress) return;
+  let alg=document.getElementById("algSelect").value;
+  if(alg==="BFS")       bfsStep();
+  else if(alg==="DFS")  dfsStep();
+  else if(alg==="Greedy")greedyStep();
+  else if(alg==="A*")   aStarStep();
+}
+
+// ---------- BFS -----------
+class SimpleQueue {
+  constructor(){ this.q=[]; }
+  enqueue(x){ this.q.push(x); }
+  dequeue(){ return this.q.shift(); }
+  empty(){ return this.q.length===0; }
+}
+function startBFS(){
+  search_in_progress=true;
+  let q=new SimpleQueue();
+  // Vi lägger "parentCostSoFar=0" för startnoden
+  q.enqueue({id:startNodeId, path:[startNodeId], costSoFar:0, parentCostSoFar:0});
+
+  BFS_STATE={
+    queue:q,
+    visited:new Set([startNodeId]),
+    expansionsCount:0,
+    expansionsCost:0
+  };
+  bfsStep();
+}
+function bfsStep(){
+  if(!search_in_progress) return;
+  let st=BFS_STATE;
+  if(st.queue.empty()){
+    setInfo("Ingen väg funnen (BFS).");
+    search_in_progress=false;
+    return;
+  }
+  let current= st.queue.dequeue();
+  st.expansionsCount++;
+
+  // Bara när vi verkligen “poppar” den => räkna sista kantens kostnad
+  let lastEdgeCost = current.costSoFar - current.parentCostSoFar;
+  st.expansionsCost += lastEdgeCost;
+
+  // Mål?
+  if(endNodeIds.has(current.id)){
+    for(let x of current.path) pathSet.add(x);
+    drawAll();
+    let msg=`Utforskade=${st.expansionsCount}, Sök-kostnad=${st.expansionsCost}, Vägkostnad=${current.costSoFar}`;
+    setInfo(msg);
+    search_in_progress=false;
+    return;
+  }
+
+  // Expand
+  let node=getNodeById(current.id);
+  for(let ed of node.edges){
+    let cId=ed.targetId;
+    if(!st.visited.has(cId)){
+      st.visited.add(cId);
+      let childCost= current.costSoFar + ed.cost;
+      st.queue.enqueue({
+        id:cId,
+        path:[...current.path,cId],
+        costSoFar: childCost,
+        parentCostSoFar: current.costSoFar
+      });
+    }
+  }
+  visitedSet.add(current.id);
+  drawAll();
+  if(!stepMode) setTimeout(bfsStep,400);
+}
+
+// ---------- DFS -----------
+function startDFS(){
+  search_in_progress=true;
+  let stack=[];
+  stack.push({id:startNodeId, path:[startNodeId], costSoFar:0, parentCostSoFar:0});
+  DFS_STATE={
+    stack,
+    visited:new Set([startNodeId]),
+    expansionsCount:0,
+    expansionsCost:0
+  };
+  dfsStep();
+}
+function dfsStep(){
+  if(!search_in_progress)return;
+  let st=DFS_STATE;
+  if(st.stack.length===0){
+    setInfo("Ingen väg funnen (DFS).");
+    search_in_progress=false;
+    return;
+  }
+  let current= st.stack.pop();
+  st.expansionsCount++;
+
+  let lastEdgeCost = current.costSoFar - current.parentCostSoFar;
+  st.expansionsCost += lastEdgeCost;
+
+  if(endNodeIds.has(current.id)){
+    for(let x of current.path) pathSet.add(x);
+    drawAll();
+    let msg=`Utforskade=${st.expansionsCount}, Sök-kostnad=${st.expansionsCost}, Vägkostnad=${current.costSoFar}`;
+    setInfo(msg);
+    search_in_progress=false;
+    return;
+  }
+
+  let node=getNodeById(current.id);
+  let children=[...node.edges];
+  children.sort((a,b)=> a.targetId - b.targetId);
+  children.reverse();
+  for(let ed of children){
+    if(!st.visited.has(ed.targetId)){
+      st.visited.add(ed.targetId);
+      let childCost= current.costSoFar + ed.cost;
+      stack.push({
+        id: ed.targetId,
+        path: [...current.path, ed.targetId],
+        costSoFar: childCost,
+        parentCostSoFar: current.costSoFar
+      });
+    }
+  }
+  visitedSet.add(current.id);
+  drawAll();
+  if(!stepMode) setTimeout(dfsStep,400);
+}
+
+// ---------- Greedy -----------
+class PriorityQ {
+  constructor(){ this.data=[]; }
+  push(o){
+    this.data.push(o);
+    this.data.sort((a,b)=> a.priority - b.priority);
+  }
+  pop(){ return this.data.shift(); }
+  empty(){return this.data.length===0;}
+}
+function startGreedy(){
+  search_in_progress=true;
+  let pq=new PriorityQ();
+  let hVal= getNodeById(startNodeId).h||0;
+  pq.push({id:startNodeId, path:[startNodeId], costSoFar:0, parentCostSoFar:0, priority:hVal});
+  GREEDY_STATE={
+    pq,
+    visited:new Set([startNodeId]),
+    expansionsCount:0,
+    expansionsCost:0
+  };
+  greedyStep();
+}
+function greedyStep(){
+  if(!search_in_progress) return;
+  let st=GREEDY_STATE;
+  if(st.pq.empty()){
+    setInfo("Ingen väg funnen (Greedy).");
+    search_in_progress=false;
+    return;
+  }
+  let current= st.pq.pop();
+  st.expansionsCount++;
+
+  let lastEdgeCost = current.costSoFar - current.parentCostSoFar;
+  st.expansionsCost += lastEdgeCost;
+
+  if(endNodeIds.has(current.id)){
+    for(let x of current.path) pathSet.add(x);
+    drawAll();
+    let msg=`Utforskade=${st.expansionsCount}, Sök-kostnad=${st.expansionsCost}, Vägkostnad=${current.costSoFar}`;
+    setInfo(msg);
+    search_in_progress=false;
+    return;
+  }
+
+  let node=getNodeById(current.id);
+  for(let ed of node.edges){
+    if(!st.visited.has(ed.targetId)){
+      st.visited.add(ed.targetId);
+      let childCost= current.costSoFar + ed.cost;
+      let hh= getNodeById(ed.targetId).h||0;
+      st.pq.push({
+        id: ed.targetId,
+        path: [...current.path, ed.targetId],
+        costSoFar: childCost,
+        parentCostSoFar: current.costSoFar,
+        priority: hh
+      });
+    }
+  }
+  visitedSet.add(current.id);
+  drawAll();
+  if(!stepMode) setTimeout(greedyStep,400);
+}
+
+// ---------- A* -----------
+function startAstar(){
+  search_in_progress=true;
+  let pq=new PriorityQ();
+  let gScore={};
+  for(let n of nodes){
+    gScore[n.id]= Infinity;
+  }
+  gScore[startNodeId]=0;
+  let hVal= getNodeById(startNodeId).h||0;
+  pq.push({id:startNodeId, path:[startNodeId], costSoFar:0, parentCostSoFar:0, priority:hVal});
+
+  ASTAR_STATE={
+    pq,
+    gScore,
+    expansionsCount:0,
+    expansionsCost:0
+  };
+  aStarStep();
+}
+function aStarStep(){
+  if(!search_in_progress)return;
+  let st=ASTAR_STATE;
+  if(st.pq.empty()){
+    setInfo("Ingen väg funnen (A*).");
+    search_in_progress=false;
+    return;
+  }
+  let current= st.pq.pop();
+  st.expansionsCount++;
+
+  // skillnaden mellan costSoFar och parentCostSoFar:
+  let lastEdgeCost = current.costSoFar - current.parentCostSoFar;
+  st.expansionsCost += lastEdgeCost;
+
+  if(endNodeIds.has(current.id)){
+    for(let x of current.path) pathSet.add(x);
+    drawAll();
+    let msg=`Utforskade=${st.expansionsCount}, Sök-kostnad=${st.expansionsCost}, Vägkostnad=${current.costSoFar}`;
+    setInfo(msg);
+    search_in_progress=false;
+    return;
+  }
+
+  let node=getNodeById(current.id);
+  let gCur= st.gScore[current.id];
+  for(let ed of node.edges){
+    let cId= ed.targetId;
+    let newG= gCur+ ed.cost;
+    if(newG< st.gScore[cId]){
+      st.gScore[cId]= newG;
+      let hh= getNodeById(cId).h||0;
+      let f= newG+ hh;
+      let newPath=[...current.path,cId];
+      // parentCostSoFar => current.costSoFar
+      let childObj= {
+        id: cId,
+        path: newPath,
+        costSoFar: newG,
+        parentCostSoFar: current.costSoFar,
+        priority: f
+      };
+      st.pq.push(childObj);
+    }
+  }
+  visitedSet.add(current.id);
+  drawAll();
+  if(!stepMode) setTimeout(aStarStep,400);
+}
+
+// A*: visa f(n)
+canvas.addEventListener("mousemove", e=>{
+  let alg=document.getElementById("algSelect").value;
+  if(alg!=="A*"){
+    setInfo("");
+    return;
+  }
+  let st=ASTAR_STATE;
+  if(!st||!st.gScore){
+    setInfo("");
+    return;
+  }
+  let mp=getMousePos(e);
+  let n=findNodeAt(mp.x,mp.y);
+  if(!n){
+    setInfo("");
+    return;
+  }
+  let gVal= st.gScore[n.id];
+  if(gVal===Infinity){
+    setInfo(`Ej upptäckt. h=${n.h||0}`);
+    return;
+  }
+  let fVal= gVal+(n.h||0);
+  setInfo(`f(n)=g(n)+h(n)=${gVal}+${n.h||0}=${fVal}`);
+});
+
+// init
+drawAll();
+</script>
+</body>
+</html>
