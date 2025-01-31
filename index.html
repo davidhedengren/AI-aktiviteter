@@ -641,6 +641,10 @@ function drawAll(){
     ctx.lineTo(currentMousePos.x, currentMousePos.y);
     ctx.stroke();
   }
+ctx.font = "14px Arial";
+  ctx.fillStyle = "rgba(0, 0, 0, 0.5)"; // Svart med 50% transparens
+  ctx.textAlign = "right";
+  ctx.fillText("Skapad av David Hedengren", canvas.width - 10, canvas.height - 10);
 }
 
 function getNodeById(id){
