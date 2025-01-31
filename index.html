@@ -113,6 +113,7 @@
       <option value="">-- Välj ett träd --</option>
       <option value="Exempelträd 1">Exempelträd 1</option>
       <option value="Exempelträd 2">Exempelträd 2</option>
+      <option value="Exempelträd 3">Exempelträd 3</option>
       <!-- Lägg till fler träd här om du vill -->
     </select>
     
@@ -184,7 +185,7 @@
 <script>
 // ===================== DATASTRUKTUR / RITNING =====================
 let nodes = [
-  {id:1, x:399.1999988555908, y:47, edges:[], h:0} // startnod
+  {id:1, x:399, y:48, edges:[], h:0} // startnod
 ];
 let startNodeId = 1; 
 let endNodeIds = new Set();
@@ -205,26 +206,268 @@ let currentMousePos = null;
 const predefinedTrees = {
   "Exempelträd 1": {
     "nodes": [
-      {"id":1,"x":399.1999988555908,"y":47,"edges":[{"targetId":2,"cost":1},{"targetId":3,"cost":1}],"h":0},
-      {"id":2,"x":199.19999885559082,"y":151,"edges":[{"targetId":1,"cost":1},{"targetId":4,"cost":1},{"targetId":5,"cost":1}],"h":0},
-      {"id":3,"x":601.1999988555908,"y":151,"edges":[{"targetId":1,"cost":1},{"targetId":6,"cost":1},{"targetId":7,"cost":1}],"h":0},
-      {"id":4,"x":101.19999885559082,"y":250,"edges":[{"targetId":2,"cost":1},{"targetId":8,"cost":1},{"targetId":9,"cost":1}],"h":0},
-      {"id":5,"x":297.1999988555908,"y":251,"edges":[{"targetId":2,"cost":1},{"targetId":10,"cost":1},{"targetId":11,"cost":1}],"h":0},
-      {"id":6,"x":499.1999988555908,"y":251,"edges":[{"targetId":3,"cost":1},{"targetId":12,"cost":1},{"targetId":13,"cost":1}],"h":0},
-      {"id":7,"x":699.1999988555908,"y":252,"edges":[{"targetId":3,"cost":1},{"targetId":14,"cost":1},{"targetId":15,"cost":1}],"h":0},
-      {"id":8,"x":49.19999885559082,"y":347,"edges":[{"targetId":4,"cost":1}],"h":0},
-      {"id":9,"x":152.19999885559082,"y":350,"edges":[{"targetId":4,"cost":1}],"h":0},
-      {"id":10,"x":251.19999885559082,"y":352,"edges":[{"targetId":5,"cost":1}],"h":0},
-      {"id":11,"x":350.1999988555908,"y":352,"edges":[{"targetId":5,"cost":1}],"h":0},
-      {"id":12,"x":451.1999988555908,"y":352,"edges":[{"targetId":6,"cost":1}],"h":0},
-      {"id":13,"x":550.1999988555908,"y":352,"edges":[{"targetId":6,"cost":1}],"h":0},
-      {"id":14,"x":649.1999988555908,"y":351,"edges":[{"targetId":7,"cost":1}],"h":0},
-      {"id":15,"x":749.1999988555908,"y":351,"edges":[{"targetId":7,"cost":1}],"h":0}
+      {"id":1,"x":399,"y":48,"edges":[{"targetId":2,"cost":1},{"targetId":3,"cost":1}],"h":0},
+      {"id":2,"x":199,"y":151,"edges":[{"targetId":1,"cost":1},{"targetId":4,"cost":1},{"targetId":5,"cost":1}],"h":0},
+      {"id":3,"x":601,"y":151,"edges":[{"targetId":1,"cost":1},{"targetId":6,"cost":1},{"targetId":7,"cost":1}],"h":0},
+      {"id":4,"x":101,"y":250,"edges":[{"targetId":2,"cost":1},{"targetId":8,"cost":1},{"targetId":9,"cost":1}],"h":0},
+      {"id":5,"x":297,"y":251,"edges":[{"targetId":2,"cost":1},{"targetId":10,"cost":1},{"targetId":11,"cost":1}],"h":0},
+      {"id":6,"x":499,"y":251,"edges":[{"targetId":3,"cost":1},{"targetId":12,"cost":1},{"targetId":13,"cost":1}],"h":0},
+      {"id":7,"x":699,"y":252,"edges":[{"targetId":3,"cost":1},{"targetId":14,"cost":1},{"targetId":15,"cost":1}],"h":0},
+      {"id":8,"x":49,"y":347,"edges":[{"targetId":4,"cost":1}],"h":0},
+      {"id":9,"x":152,"y":350,"edges":[{"targetId":4,"cost":1}],"h":0},
+      {"id":10,"x":251,"y":352,"edges":[{"targetId":5,"cost":1}],"h":0},
+      {"id":11,"x":350,"y":352,"edges":[{"targetId":5,"cost":1}],"h":0},
+      {"id":12,"x":451,"y":352,"edges":[{"targetId":6,"cost":1}],"h":0},
+      {"id":13,"x":550,"y":352,"edges":[{"targetId":6,"cost":1}],"h":0},
+      {"id":14,"x":649,"y":351,"edges":[{"targetId":7,"cost":1}],"h":0},
+      {"id":15,"x":749,"y":351,"edges":[{"targetId":7,"cost":1}],"h":0}
     ],
     "startNodeId":1,
     "endNodeIds":[12] // Nod 12 är nu en målnod
   },
   "Exempelträd 2": {
+    "nodes": [
+      {
+        "id": 1,
+        "x": 399,
+        "y": 48,
+        "edges": [
+          {
+            "targetId": 2,
+            "cost": 2
+          },
+          {
+            "targetId": 3,
+            "cost": 5
+          }
+        ],
+        "h": 10
+      },
+      {
+        "id": 2,
+        "x": 292,
+        "y": 121,
+        "edges": [
+          {
+            "targetId": 1,
+            "cost": 2
+          },
+          {
+            "targetId": 4,
+            "cost": 2
+          },
+          {
+            "targetId": 5,
+            "cost": 4
+          }
+        ],
+        "h": 8
+      },
+      {
+        "id": 3,
+        "x": 513,
+        "y": 143,
+        "edges": [
+          {
+            "targetId": 1,
+            "cost": 5
+          },
+          {
+            "targetId": 6,
+            "cost": 1
+          }
+        ],
+        "h": 6
+      },
+      {
+        "id": 4,
+        "x": 203,
+        "y": 200,
+        "edges": [
+          {
+            "targetId": 2,
+            "cost": 2
+          },
+          {
+            "targetId": 7,
+            "cost": 1
+          }
+        ],
+        "h": 5
+      },
+      {
+        "id": 5,
+        "x": 348,
+        "y": 199,
+        "edges": [
+          {
+            "targetId": 2,
+            "cost": 4
+          },
+          {
+            "targetId": 8,
+            "cost": 2
+          }
+        ],
+        "h": 5
+      },
+      {
+        "id": 6,
+        "x": 596,
+        "y": 200,
+        "edges": [
+          {
+            "targetId": 3,
+            "cost": 1
+          },
+          {
+            "targetId": 9,
+            "cost": 2
+          }
+        ],
+        "h": 4
+      },
+      {
+        "id": 7,
+        "x": 149,
+        "y": 300,
+        "edges": [
+          {
+            "targetId": 4,
+            "cost": 1
+          },
+          {
+            "targetId": 10,
+            "cost": 3
+          }
+        ],
+        "h": 3
+      },
+      {
+        "id": 8,
+        "x": 448,
+        "y": 299,
+        "edges": [
+          {
+            "targetId": 5,
+            "cost": 2
+          },
+          {
+            "targetId": 11,
+            "cost": 1
+          }
+        ],
+        "h": 2
+      },
+      {
+        "id": 9,
+        "x": 649,
+        "y": 299,
+        "edges": [
+          {
+            "targetId": 6,
+            "cost": 2
+          },
+          {
+            "targetId": 12,
+            "cost": 2
+          }
+        ],
+        "h": 2
+      },
+      {
+        "id": 10,
+        "x": 145,
+        "y": 402,
+        "edges": [
+          {
+            "targetId": 7,
+            "cost": 3
+          },
+          {
+            "targetId": 13,
+            "cost": 2
+          }
+        ],
+        "h": 1
+      },
+      {
+        "id": 11,
+        "x": 350,
+        "y": 351,
+        "edges": [
+          {
+            "targetId": 8,
+            "cost": 1
+          },
+          {
+            "targetId": 14,
+            "cost": 1
+          }
+        ],
+        "h": 1
+      },
+      {
+        "id": 12,
+        "x": 598,
+        "y": 395,
+        "edges": [
+          {
+            "targetId": 9,
+            "cost": 2
+          },
+          {
+            "targetId": 15,
+            "cost": 1
+          }
+        ],
+        "h": 1
+      },
+      {
+        "id": 13,
+        "x": 144,
+        "y": 494,
+        "edges": [
+          {
+            "targetId": 10,
+            "cost": 2
+          }
+        ],
+        "h": 0
+      },
+      {
+        "id": 14,
+        "x": 346,
+        "y": 491,
+        "edges": [
+          {
+            "targetId": 11,
+            "cost": 1
+          }
+        ],
+        "h": 0
+      },
+      {
+        "id": 15,
+        "x": 595,
+        "y": 491,
+        "edges": [
+          {
+            "targetId": 12,
+            "cost": 1
+          }
+        ],
+        "h": 0
+      }
+    ],
+    "startNodeId": 1,
+    "endNodeIds": [
+      13,
+      14,
+      15
+    ]
+  },
+  "Exempelträd 3": {
     "nodes": [
       {"id":1,"x":399.1999988555908,"y":47,"edges":[{"targetId":2,"cost":3},{"targetId":3,"cost":4}],"h":0},
       {"id":2,"x":199.19999885559082,"y":151,"edges":[{"targetId":1,"cost":3},{"targetId":4,"cost":1},{"targetId":5,"cost":2}],"h":5},
@@ -234,7 +477,7 @@ const predefinedTrees = {
       {"id":6,"x":499.1999988555908,"y":251,"edges":[{"targetId":3,"cost":1},{"targetId":12,"cost":1},{"targetId":13,"cost":3}],"h":5},
       {"id":7,"x":699.1999988555908,"y":252,"edges":[{"targetId":3,"cost":2},{"targetId":14,"cost":4},{"targetId":15,"cost":2}],"h":2},
       {"id":8,"x":49.19999885559082,"y":347,"edges":[{"targetId":4,"cost":3}],"h":7},
-      {"id":9,"x":152.19999885559082,"y":350,"edges":[{"targetId":4,"cost":2},{"targetId":16,"cost":2},{"targetId":17,"cost":2}],"h":7},
+      {"id":9,"x":152.19999885559082,"y":350,"edges":[{"targetId":4,"cost":2},{"targetId":16,"cost":2},{"targetId":17,"cost":2}],"h":9},
       {"id":10,"x":251.19999885559082,"y":352,"edges":[{"targetId":5,"cost":1}],"h":4},
       {"id":11,"x":350.1999988555908,"y":352,"edges":[{"targetId":5,"cost":3},{"targetId":18,"cost":1},{"targetId":19,"cost":5}],"h":1},
       {"id":12,"x":451.1999988555908,"y":352,"edges":[{"targetId":6,"cost":1}],"h":6},
@@ -317,13 +560,34 @@ function drawAll(){
     n.edges = n.edges.filter(ed => getNodeById(ed.targetId));
     for(let ed of n.edges){
       let c = getNodeById(ed.targetId);
-      ctx.beginPath();
-      ctx.moveTo(n.x,n.y);
-      ctx.lineTo(c.x,c.y);
-      ctx.stroke();
-      let mx = (n.x + c.x)/2, my = (n.y + c.y)/2;
-      ctx.fillStyle="#333";
-      ctx.fillText(ed.cost.toString(), mx, my);
+      // Förhindra dubbla kanter genom att endast rita om n.id < c.id
+      if(n.id < c.id){
+        ctx.beginPath();
+        ctx.moveTo(n.x,n.y);
+        ctx.lineTo(c.x,c.y);
+        ctx.stroke();
+        
+        // Beräkna mittpunkten
+        let mx = (n.x + c.x)/2;
+        let my = (n.y + c.y)/2;
+        
+        // Beräkna offset för texten
+        let dx = c.x - n.x;
+        let dy = c.y - n.y;
+        let length = Math.sqrt(dx*dx + dy*dy);
+        if(length === 0) length = 1; // För att undvika division med noll
+        // En liten offset, t.ex. 10 pixlar
+        let offset = 10;
+        let offsetX = -dy / length * offset;
+        let offsetY = dx / length * offset;
+        
+        // Applicera offset
+        let labelX = mx + offsetX;
+        let labelY = my + offsetY;
+        
+        ctx.fillStyle="#333";
+        ctx.fillText(ed.cost.toString(), labelX, labelY);
+      }
     }
   }
 
