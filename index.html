@@ -88,6 +88,7 @@
     <li><strong>Skapa nod:</strong> Klicka i en tom yta.</li>
     <li><strong>Flytta nod:</strong> Högerklicka på en nod och dra.</li>
     <li><strong>Radera nod:</strong> Ctrl + Vänsterklick på nod.</li>
+    <li><strong>Lägga till heuristikvärde h(n) för en nod:</strong> Ctrl + Högerklick på nod.</li>
     <li><strong>Skapa kant:</strong> Klicka på en nod och dra till en annan. Ange kostnad för kanten.</li>
     <li>
       När du kör en sökning kommer blåa noder (<span class="color-box" style="background:lightskyblue;"></span>) 
@@ -107,13 +108,13 @@
 let nodes = [
   {id:1, x:450, y:50, edges:[], h:0} // startnod
 ];
-let startNodeId=1; 
-let endNodeIds=new Set();
-let nodeCounter=1; 
+let startNodeId = 1; 
+let endNodeIds = new Set();
+let nodeCounter = 1; 
 
-const canvas=document.getElementById("treeCanvas");
-const ctx=canvas.getContext("2d");
-const NODE_RADIUS=20;
+const canvas = document.getElementById("treeCanvas");
+const ctx = canvas.getContext("2d");
+const NODE_RADIUS = 20;
 
 function drawAll(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -140,16 +141,16 @@ function drawAll(){
   ctx.textAlign="center";
   ctx.textBaseline="middle";
   for(let n of nodes){
-    n.edges = n.edges.filter(ed=> getNodeById(ed.targetId));
+    n.edges = n.edges.filter(ed => getNodeById(ed.targetId));
     for(let ed of n.edges){
-      let c=getNodeById(ed.targetId);
+      let c = getNodeById(ed.targetId);
       ctx.beginPath();
       ctx.moveTo(n.x,n.y);
       ctx.lineTo(c.x,c.y);
       ctx.stroke();
-      let mx=(n.x+c.x)/2, my=(n.y+c.y)/2;
+      let mx = (n.x + c.x)/2, my = (n.y + c.y)/2;
       ctx.fillStyle="#333";
-      ctx.fillText(ed.cost.toString(), mx,my);
+      ctx.fillText(ed.cost.toString(), mx, my);
     }
   }
 
@@ -169,7 +170,15 @@ function drawAll(){
     ctx.stroke();
 
     ctx.fillStyle="#000";
-    ctx.fillText(n.id.toString(), n.x,n.y);
+    ctx.fillText(n.id.toString(), n.x, n.y);
+
+    // === NYTT: Visa h(n) om det inte är 0 ===
+    if(n.h !== 0) {
+      ctx.fillStyle = "blue";
+      // Rita texten strax ovanför noden
+      ctx.fillText("h=" + n.h, n.x, n.y - NODE_RADIUS - 12);
+    }
+    // === SLUT PÅ NYTT ===
   }
 }
 function getNodeById(id){
@@ -180,22 +189,22 @@ function setInfo(msg){
 }
 
 // =================== Interaktivitet (noder/kanter) ===================
-let draggingNode=null;
-let draggingRight=false;
-let dragOffset={x:0,y:0};
-let edgeDrag=false;
-let firstNode=null;
+let draggingNode = null;
+let draggingRight = false;
+let dragOffset = {x:0,y:0};
+let edgeDrag = false;
+let firstNode = null;
 
-canvas.addEventListener("contextmenu", e=> e.preventDefault());
+canvas.addEventListener("contextmenu", e => e.preventDefault());
 
 function getMousePos(e){
-  let r=canvas.getBoundingClientRect();
-  return {x:e.clientX-r.left, y:e.clientY-r.top};
+  let r = canvas.getBoundingClientRect();
+  return {x: e.clientX - r.left, y: e.clientY - r.top};
 }
 function findNodeAt(x,y){
   for(let n of nodes){
-    let dx=x-n.x, dy=y-n.y;
-    if(dx*dx+dy*dy<= NODE_RADIUS*NODE_RADIUS) return n;
+    let dx = x - n.x, dy = y - n.y;
+    if(dx*dx + dy*dy <= NODE_RADIUS*NODE_RADIUS) return n;
   }
   return null;
 }
@@ -205,9 +214,9 @@ function removeNode(n){
     setInfo("Kan ej ta bort startnoden.");
     return;
   }
-  nodes=nodes.filter(nd=> nd!==n);
+  nodes = nodes.filter(nd => nd!==n);
   for(let nd of nodes){
-    nd.edges=nd.edges.filter(ed=> ed.targetId!==n.id);
+    nd.edges = nd.edges.filter(ed => ed.targetId!==n.id);
   }
   endNodeIds.delete(n.id);
   resetSearch();
@@ -215,37 +224,54 @@ function removeNode(n){
   drawAll();
 }
 function addOrUpdateEdge(fromN,toN,cost){
-  let ex= fromN.edges.find(ed=> ed.targetId===toN.id);
-  if(ex) ex.cost=cost;
-  else fromN.edges.push({targetId:toN.id,cost});
+  let ex = fromN.edges.find(ed => ed.targetId===toN.id);
+  if(ex) ex.cost = cost;
+  else fromN.edges.push({targetId: toN.id, cost});
 }
 
-canvas.addEventListener("mousedown", e=>{
+canvas.addEventListener("mousedown", e => {
   e.preventDefault();
-  let pos=getMousePos(e);
-  let clicked=findNodeAt(pos.x,pos.y);
+  let pos = getMousePos(e);
+  let clicked = findNodeAt(pos.x, pos.y);
 
-  if(e.button===2){
-    // höger => flytta
-    if(clicked){
-      draggingNode=clicked;
-      draggingRight=true;
-      dragOffset.x=pos.x - clicked.x;
-      dragOffset.y=pos.y - clicked.y;
+  if(e.button === 2){
+    // högerklick
+    // === NYTT: Om Ctrl + högerklick => sätt heuristic för noden ===
+    if(e.ctrlKey && clicked){
+      let val = prompt(`Heuristikvärde för nod ${clicked.id}? (nuvarande h=${clicked.h})`, String(clicked.h));
+      if(val !== null){
+        let num = parseFloat(val);
+        if(isNaN(num)) num = 0;  // fallback till 0 om ogiltig inmatning
+        clicked.h = num;
+        setInfo(`Satte h(${clicked.id})=${num}`);
+        resetSearch(); // Starta om sökning om man ändrat en heuristik
+        drawAll();
+      }
+      return; // Avbryt här så vi inte fortsätter med dragning
     }
-  } else if(e.button===0){
-    // vänster
+    // === SLUT NYTT ===
+
+    // I övrigt: dragga noden
+    if(clicked){
+      draggingNode = clicked;
+      draggingRight = true;
+      dragOffset.x = pos.x - clicked.x;
+      dragOffset.y = pos.y - clicked.y;
+    }
+  }
+  else if(e.button === 0){
+    // vänsterklick
     if(clicked){
       if(e.ctrlKey){
         removeNode(clicked);
         return;
       }
-      firstNode=clicked;
-      edgeDrag=true;
+      firstNode = clicked;
+      edgeDrag = true;
     } else {
-      // skapa
+      // skapa nod
       nodeCounter++;
-      let newN={id:nodeCounter,x:pos.x,y:pos.y,edges:[],h:0};
+      let newN = {id: nodeCounter, x: pos.x, y: pos.y, edges:[], h:0};
       nodes.push(newN);
       resetSearch();
       setInfo("Skapade nod "+newN.id);
@@ -254,37 +280,37 @@ canvas.addEventListener("mousedown", e=>{
   }
 });
 
-canvas.addEventListener("mousemove", e=>{
+canvas.addEventListener("mousemove", e => {
   if(draggingRight && draggingNode){
-    let pos=getMousePos(e);
-    draggingNode.x= pos.x - dragOffset.x;
-    draggingNode.y= pos.y - dragOffset.y;
+    let pos = getMousePos(e);
+    draggingNode.x = pos.x - dragOffset.x;
+    draggingNode.y = pos.y - dragOffset.y;
     drawAll();
   }
 });
 
-canvas.addEventListener("mouseup", e=>{
+canvas.addEventListener("mouseup", e => {
   e.preventDefault();
-  let pos=getMousePos(e);
-  let r=findNodeAt(pos.x,pos.y);
+  let pos = getMousePos(e);
+  let r = findNodeAt(pos.x, pos.y);
 
   if(e.button===2){
-    draggingNode=null;
-    draggingRight=false;
+    draggingNode = null;
+    draggingRight = false;
     drawAll();
   } else if(e.button===0){
     if(edgeDrag && firstNode){
       if(r && r!==firstNode){
-        let cStr= prompt(`Kostnad för kant mellan ${firstNode.id} och ${r.id}?`,"1");
+        let cStr = prompt(`Kostnad för kant mellan ${firstNode.id} och ${r.id}?`,"1");
         if(!cStr){
           setInfo("Avbryter kant.");
         } else {
-          let c=parseFloat(cStr);
+          let c = parseFloat(cStr);
           if(isNaN(c)|| c<=0){
             setInfo("Ogiltig kostnad.");
           } else {
-            addOrUpdateEdge(firstNode,r,c);
-            addOrUpdateEdge(r,firstNode,c);
+            addOrUpdateEdge(firstNode, r, c);
+            addOrUpdateEdge(r, firstNode, c);
             resetSearch();
             setInfo(`Kant: ${firstNode.id}<->${r.id}, cost=${c}`);
             drawAll();
@@ -305,32 +331,32 @@ canvas.addEventListener("mouseup", e=>{
           drawAll();
         }
       }
-      firstNode=null;
-      edgeDrag=false;
+      firstNode = null;
+      edgeDrag = false;
     }
   }
 });
-window.addEventListener("mouseup", e=>{
-  draggingRight=false;
-  draggingNode=null;
-  edgeDrag=false;
-  firstNode=null;
+window.addEventListener("mouseup", e => {
+  draggingRight = false;
+  draggingNode = null;
+  edgeDrag = false;
+  firstNode = null;
 });
 
 // ================== SPARA/LADDA ==================
 document.getElementById("saveBtn").addEventListener("click",()=>{
-  let data={
+  let data = {
     nodes,
     startNodeId,
     endNodeIds: Array.from(endNodeIds)
   };
-  let js= JSON.stringify(data);
-  let blob= new Blob([js],{type:'application/json'});
-  let url= URL.createObjectURL(blob);
+  let js = JSON.stringify(data);
+  let blob = new Blob([js], {type:'application/json'});
+  let url = URL.createObjectURL(blob);
 
-  let a=document.createElement("a");
-  a.href=url;
-  a.download="tree.json";
+  let a = document.createElement("a");
+  a.href = url;
+  a.download = "tree.json";
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -340,19 +366,19 @@ document.getElementById("loadBtn").addEventListener("click",()=>{
   document.getElementById("loadInput").click();
 });
 document.getElementById("loadInput").addEventListener("change", e=>{
-  let file=e.target.files[0];
+  let file = e.target.files[0];
   if(!file)return;
-  let rdr=new FileReader();
-  rdr.onload=ev=>{
-    let data= JSON.parse(ev.target.result);
-    nodes=data.nodes||[];
-    startNodeId=data.startNodeId||1;
-    endNodeIds=new Set(data.endNodeIds||[]);
-    let maxId=1;
+  let rdr = new FileReader();
+  rdr.onload = ev=>{
+    let data = JSON.parse(ev.target.result);
+    nodes = data.nodes||[];
+    startNodeId = data.startNodeId||1;
+    endNodeIds = new Set(data.endNodeIds||[]);
+    let maxId = 1;
     for(let nd of nodes){
-      if(nd.id>maxId) maxId=nd.id;
+      if(nd.id>maxId) maxId = nd.id;
     }
-    nodeCounter=maxId;
+    nodeCounter = maxId;
     resetSearch();
     setInfo("Träd laddat.");
     drawAll();
@@ -360,15 +386,15 @@ document.getElementById("loadInput").addEventListener("change", e=>{
   rdr.readAsText(file);
 });
 document.getElementById("clearNodesBtn").addEventListener("click",()=>{
-  let st=getNodeById(startNodeId);
+  let st = getNodeById(startNodeId);
   if(!st){
     setInfo("Startnoden saknas, kan ej rensa.");
     return;
   }
-  nodes=[st];
-  st.edges=[];
+  nodes = [st];
+  st.edges = [];
   endNodeIds.clear();
-  nodeCounter=st.id;
+  nodeCounter = st.id;
   resetSearch();
   setInfo("Rensade alla noder utom startnoden.");
   drawAll();
@@ -379,13 +405,13 @@ document.getElementById("resetBtn").addEventListener("click", resetSearch);
 document.getElementById("startBtn").addEventListener("click", startSearch);
 document.getElementById("nextStepBtn").addEventListener("click", onNextStep);
 
-let stepMode=false;
+let stepMode = false;
 document.getElementById("stepChk").addEventListener("change", e=>{
-  stepMode=e.target.checked;
+  stepMode = e.target.checked;
 });
 
-let visitedSet=new Set();
-let pathSet=new Set();
+let visitedSet = new Set();
+let pathSet = new Set();
 let BFS_STATE=null, DFS_STATE=null, GREEDY_STATE=null, ASTAR_STATE=null;
 let search_in_progress=false;
 
@@ -407,7 +433,7 @@ function startSearch(){
     return;
   }
   resetSearch();
-  let alg=document.getElementById("algSelect").value;
+  let alg = document.getElementById("algSelect").value;
   if(alg==="BFS") startBFS();
   else if(alg==="DFS") startDFS();
   else if(alg==="Greedy") startGreedy();
@@ -415,7 +441,7 @@ function startSearch(){
 }
 function onNextStep(){
   if(!search_in_progress) return;
-  let alg=document.getElementById("algSelect").value;
+  let alg = document.getElementById("algSelect").value;
   if(alg==="BFS")       bfsStep();
   else if(alg==="DFS")  dfsStep();
   else if(alg==="Greedy")greedyStep();
@@ -432,7 +458,6 @@ class SimpleQueue {
 function startBFS(){
   search_in_progress=true;
   let q=new SimpleQueue();
-  // Vi lägger "parentCostSoFar=0" för startnoden
   q.enqueue({id:startNodeId, path:[startNodeId], costSoFar:0, parentCostSoFar:0});
 
   BFS_STATE={
@@ -529,7 +554,6 @@ function dfsStep(){
     if(!st.visited.has(ed.targetId)){
       st.visited.add(ed.targetId);
       let childCost= current.costSoFar + ed.cost;
-      // Endast här ändrat: stack -> st.stack
       st.stack.push({
         id: ed.targetId,
         path: [...current.path, ed.targetId],
@@ -661,7 +685,7 @@ function aStarStep(){
       st.gScore[cId]= newG;
       let hh= getNodeById(cId).h||0;
       let f= newG+ hh;
-      let newPath=[...current.path,cId];
+      let newPath=[...current.path, cId];
       let childObj= {
         id: cId,
         path: newPath,
@@ -677,7 +701,7 @@ function aStarStep(){
   if(!stepMode) setTimeout(aStarStep,400);
 }
 
-// A*: visa f(n)
+// A*: visa f(n) vid mousemove
 canvas.addEventListener("mousemove", e=>{
   let alg=document.getElementById("algSelect").value;
   if(alg!=="A*"){
