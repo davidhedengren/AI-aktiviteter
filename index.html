@@ -8,6 +8,10 @@
       font-family: sans-serif;
       margin: 20px;
     }
+    /* Flexbox layout för mainContainer */
+    #mainContainer {
+      display: flex;
+    }
     #canvasContainer {
       display: inline-block;
       border: 1px solid #ccc;
@@ -15,6 +19,18 @@
     #treeCanvas {
       border: 1px solid gray;
       background-color: #fefefe;
+    }
+    /* Styling för sidopanel med Exempelträd */
+    #predefinedTrees {
+      margin-left: 20px;
+      max-width: 250px;
+    }
+    #predefinedTrees h3 {
+      margin-bottom: 10px;
+    }
+    #predefinedTrees select {
+      width: 100%;
+      padding: 5px;
     }
     /* Styling for info and hoverInfo */
     #info, #hoverInfo {
@@ -61,8 +77,20 @@
 
 <h2>Sökalgoritmer i träd</h2>
 
-<div id="canvasContainer">
-  <canvas id="treeCanvas" width="900" height="600"></canvas>
+<div id="mainContainer">
+  <div id="canvasContainer">
+    <canvas id="treeCanvas" width="900" height="600"></canvas>
+  </div>
+  
+  <div id="predefinedTrees">
+    <h3>Exempelträd</h3>
+    <select id="predefinedSelect">
+      <option value="">-- Välj ett träd --</option>
+      <option value="Exempelträd 1">Exempelträd 1</option>
+      <option value="Exempelträd 2">Exempelträd 2</option>
+      <!-- Lägg till fler träd här om du vill -->
+    </select>
+  </div>
 </div>
 
 <div id="controls">
@@ -123,7 +151,7 @@
 <script>
 // ===================== DATASTRUKTUR / RITNING =====================
 let nodes = [
-  {id:1, x:450, y:50, edges:[], h:0} // startnod
+  {id:1, x:399.1999988555908, y:47, edges:[], h:0} // startnod
 ];
 let startNodeId = 1; 
 let endNodeIds = new Set();
@@ -139,6 +167,94 @@ let pathSet = new Set();
 
 // Variable to track current mouse position during edge drag
 let currentMousePos = null;
+
+// Exempelträd
+const predefinedTrees = {
+  "Exempelträd 1": {
+    "nodes": [
+      {"id":1,"x":399.1999988555908,"y":47,"edges":[{"targetId":2,"cost":1},{"targetId":3,"cost":1}],"h":0},
+      {"id":2,"x":199.19999885559082,"y":151,"edges":[{"targetId":1,"cost":1},{"targetId":4,"cost":1},{"targetId":5,"cost":1}],"h":0},
+      {"id":3,"x":601.1999988555908,"y":151,"edges":[{"targetId":1,"cost":1},{"targetId":6,"cost":1},{"targetId":7,"cost":1}],"h":0},
+      {"id":4,"x":101.19999885559082,"y":250,"edges":[{"targetId":2,"cost":1},{"targetId":8,"cost":1},{"targetId":9,"cost":1}],"h":0},
+      {"id":5,"x":297.1999988555908,"y":251,"edges":[{"targetId":2,"cost":1},{"targetId":10,"cost":1},{"targetId":11,"cost":1}],"h":0},
+      {"id":6,"x":499.1999988555908,"y":251,"edges":[{"targetId":3,"cost":1},{"targetId":12,"cost":1},{"targetId":13,"cost":1}],"h":0},
+      {"id":7,"x":699.1999988555908,"y":252,"edges":[{"targetId":3,"cost":1},{"targetId":14,"cost":1},{"targetId":15,"cost":1}],"h":0},
+      {"id":8,"x":49.19999885559082,"y":347,"edges":[{"targetId":4,"cost":1}],"h":0},
+      {"id":9,"x":152.19999885559082,"y":350,"edges":[{"targetId":4,"cost":1}],"h":0},
+      {"id":10,"x":251.19999885559082,"y":352,"edges":[{"targetId":5,"cost":1}],"h":0},
+      {"id":11,"x":350.1999988555908,"y":352,"edges":[{"targetId":5,"cost":1}],"h":0},
+      {"id":12,"x":451.1999988555908,"y":352,"edges":[{"targetId":6,"cost":1}],"h":0},
+      {"id":13,"x":550.1999988555908,"y":352,"edges":[{"targetId":6,"cost":1}],"h":0},
+      {"id":14,"x":649.1999988555908,"y":351,"edges":[{"targetId":7,"cost":1}],"h":0},
+      {"id":15,"x":749.1999988555908,"y":351,"edges":[{"targetId":7,"cost":1}],"h":0}
+    ],
+    "startNodeId":1,
+    "endNodeIds":[12] // Nod 12 är nu en målnod
+  },
+  "Exempelträd 2": {
+    "nodes": [
+      {"id":1,"x":399.1999988555908,"y":47,"edges":[{"targetId":2,"cost":3},{"targetId":3,"cost":4}],"h":0},
+      {"id":2,"x":199.19999885559082,"y":151,"edges":[{"targetId":1,"cost":3},{"targetId":4,"cost":1},{"targetId":5,"cost":2}],"h":5},
+      {"id":3,"x":601.1999988555908,"y":151,"edges":[{"targetId":1,"cost":4},{"targetId":6,"cost":1},{"targetId":7,"cost":2}],"h":3},
+      {"id":4,"x":101.19999885559082,"y":250,"edges":[{"targetId":2,"cost":1},{"targetId":8,"cost":3},{"targetId":9,"cost":2}],"h":6},
+      {"id":5,"x":297.1999988555908,"y":251,"edges":[{"targetId":2,"cost":2},{"targetId":10,"cost":1},{"targetId":11,"cost":3}],"h":3},
+      {"id":6,"x":499.1999988555908,"y":251,"edges":[{"targetId":3,"cost":1},{"targetId":12,"cost":1},{"targetId":13,"cost":3}],"h":5},
+      {"id":7,"x":699.1999988555908,"y":252,"edges":[{"targetId":3,"cost":2},{"targetId":14,"cost":4},{"targetId":15,"cost":2}],"h":2},
+      {"id":8,"x":49.19999885559082,"y":347,"edges":[{"targetId":4,"cost":3}],"h":7},
+      {"id":9,"x":152.19999885559082,"y":350,"edges":[{"targetId":4,"cost":2},{"targetId":16,"cost":2},{"targetId":17,"cost":2}],"h":7},
+      {"id":10,"x":251.19999885559082,"y":352,"edges":[{"targetId":5,"cost":1}],"h":4},
+      {"id":11,"x":350.1999988555908,"y":352,"edges":[{"targetId":5,"cost":3},{"targetId":18,"cost":1},{"targetId":19,"cost":5}],"h":1},
+      {"id":12,"x":451.1999988555908,"y":352,"edges":[{"targetId":6,"cost":1}],"h":6},
+      {"id":13,"x":550.1999988555908,"y":352,"edges":[{"targetId":6,"cost":3},{"targetId":20,"cost":3},{"targetId":21,"cost":2}],"h":6},
+      {"id":14,"x":649.1999988555908,"y":351,"edges":[{"targetId":7,"cost":4}],"h":0},
+      {"id":15,"x":749.1999988555908,"y":351,"edges":[{"targetId":7,"cost":2}],"h":3},
+      {"id":16,"x":106,"y":451.5859375,"edges":[{"targetId":9,"cost":2}],"h":8},
+      {"id":17,"x":183,"y":448.5859375,"edges":[{"targetId":9,"cost":2}],"h":9},
+      {"id":18,"x":303,"y":451.5859375,"edges":[{"targetId":11,"cost":1}],"h":3},
+      {"id":19,"x":391,"y":452.5859375,"edges":[{"targetId":11,"cost":5}],"h":0},
+      {"id":20,"x":515,"y":450.5859375,"edges":[{"targetId":13,"cost":3}],"h":7},
+      {"id":21,"x":599,"y":449.5859375,"edges":[{"targetId":13,"cost":2}],"h":7}
+    ],
+    "startNodeId":1,
+    "endNodeIds":[14,19]
+  }
+  // Lägg till fler träd efter behov
+};
+
+// Funktion för att ladda ett fördefinierat träd
+function loadPredefinedTree(treeName){
+  if(!predefinedTrees[treeName]){
+    alert("Det fördefinierade trädet finns inte.");
+    return;
+  }
+  const tree = predefinedTrees[treeName];
+  // Kopiera noder för att undvika referensproblem
+  nodes = JSON.parse(JSON.stringify(tree.nodes));
+  startNodeId = tree.startNodeId;
+  endNodeIds = new Set(tree.endNodeIds);
+  // Uppdatera nodeCounter
+  nodeCounter = Math.max(...nodes.map(n => n.id));
+  resetSearch();
+  setInfo(`Exempelträd "${treeName}" har laddats.`);
+  // Uppdatera hoverInfo beroende på vald algoritm
+  let currentAlg = document.getElementById("algSelect").value;
+  if(currentAlg === "A*"){
+    setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n)).");
+  } else {
+    setHoverInfo("");
+  }
+  drawAll();
+}
+
+// Event Listener för Exempelträd
+document.getElementById("predefinedSelect").addEventListener("change", (e) => {
+  const selectedTree = e.target.value;
+  if(selectedTree){
+    loadPredefinedTree(selectedTree);
+    // Återställ dropdown till default
+    e.target.value = "";
+  }
+});
 
 function drawAll(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -368,7 +484,7 @@ canvas.addEventListener("mouseup", e => {
             addOrUpdateEdge(firstNode, r, c);
             addOrUpdateEdge(r, firstNode, c);
             resetSearch();
-            setInfo(`Kant: ${firstNode.id}< - >${r.id}, Kostnad =${c}`);
+            setInfo(`Kant: ${firstNode.id}<->${r.id}, cost=${c}`);
           }
         }
       } else if(r && r === firstNode){
@@ -408,7 +524,7 @@ document.getElementById("saveBtn").addEventListener("click",()=>{
     startNodeId,
     endNodeIds: Array.from(endNodeIds)
   };
-  let js = JSON.stringify(data);
+  let js = JSON.stringify(data, null, 2); // För bättre läsbarhet
   let blob = new Blob([js], {type:'application/json'});
   let url = URL.createObjectURL(blob);
 
@@ -428,25 +544,32 @@ document.getElementById("loadInput").addEventListener("change", e=>{
   if(!file)return;
   let rdr = new FileReader();
   rdr.onload = ev=>{
-    let data = JSON.parse(ev.target.result);
-    nodes = data.nodes||[];
-    startNodeId = data.startNodeId||1;
-    endNodeIds = new Set(data.endNodeIds||[]);
-    let maxId = 1;
-    for(let nd of nodes){
-      if(nd.id > maxId) maxId = nd.id;
+    try {
+      let data = JSON.parse(ev.target.result);
+      if(!data.nodes || !data.startNodeId || !data.endNodeIds){
+        throw new Error("Ogiltigt format på JSON.");
+      }
+      nodes = data.nodes.map(n => ({...n})); // Kopiera noder
+      startNodeId = data.startNodeId;
+      endNodeIds = new Set(data.endNodeIds);
+      let maxId = 1;
+      for(let nd of nodes){
+        if(nd.id > maxId) maxId = nd.id;
+      }
+      nodeCounter = maxId;
+      resetSearch();
+      setInfo("Träd laddat.");
+      // Uppdatera hoverInfo beroende på vald algoritm
+      let currentAlg = document.getElementById("algSelect").value;
+      if(currentAlg === "A*"){
+        setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n)).");
+      } else {
+        setHoverInfo("");
+      }
+      drawAll();
+    } catch (error) {
+      alert("Fel vid inläsning av fil: " + error.message);
     }
-    nodeCounter = maxId;
-    resetSearch();
-    setInfo("Träd laddat.");
-    // Uppdatera hoverInfo beroende på vald algoritm
-    let currentAlg = document.getElementById("algSelect").value;
-    if(currentAlg === "A*"){
-      setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n)).");
-    } else {
-      setHoverInfo("");
-    }
-    drawAll();
   };
   rdr.readAsText(file);
 });
