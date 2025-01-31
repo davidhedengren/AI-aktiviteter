@@ -8,11 +8,13 @@
       font-family: sans-serif;
       margin: 20px;
     }
-    /* Flexbox layout för mainContainer */
+    /* Container för huvudinnehåll */
     #mainContainer {
       display: flex;
+      align-items: flex-start;
     }
     #canvasContainer {
+      position: relative;
       display: inline-block;
       border: 1px solid #ccc;
     }
@@ -31,20 +33,43 @@
     #predefinedTrees select {
       width: 100%;
       padding: 5px;
+      margin-bottom: 10px; /* Separation mellan dropdown och knappar */
     }
-    /* Styling for info and hoverInfo */
+    /* Styling för knappar under Exempelträd */
+    #predefinedTrees .treeButtons {
+      display: flex;
+      flex-direction: column;
+    }
+    #predefinedTrees .treeButtons button {
+      margin-bottom: 5px; /* Mellanrum mellan knapparna */
+    }
+    /* Styling för informationsfält */
     #info, #hoverInfo {
       margin-top: 10px;
       font-weight: bold;
       color: #333;
     }
     #controls {
-      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
       margin-bottom: 10px;
+      flex-wrap: wrap;
     }
-    button, select, label {
+    #leftControls, #rightControls {
+      display: flex;
+      align-items: center;
+    }
+    #leftControls button, #leftControls select, #leftControls label {
       margin-right: 8px;
       margin-bottom: 6px;
+    }
+    /* Justera "Rensa sökning" och "Rensa noder" med ytterligare margin-left */
+    #resetBtn {
+      margin-left: 4cm; /* Totalt 4cm från vänster */
+    }
+    #clearNodesBtn {
+      margin-left: 10px; /* Mellanrum mellan "Rensa sökning" och "Rensa noder" */
     }
     .instructions {
       margin-top: 15px;
@@ -69,7 +94,7 @@
       background-color: #e0e0ff;
       padding: 10px;
       border-radius: 5px;
-      font-size: 14px; /* Justera storleken för mindre text */
+      font-size: 14px; /* Mindre textstorlek */
     }
   </style>
 </head>
@@ -90,27 +115,35 @@
       <option value="Exempelträd 2">Exempelträd 2</option>
       <!-- Lägg till fler träd här om du vill -->
     </select>
+    
+    <!-- Knappar för att spara och ladda träd -->
+    <div class="treeButtons">
+      <button id="saveBtn">Spara träd</button>
+      <input type="file" id="loadInput" style="display:none;" />
+      <button id="loadBtn">Ladda träd</button>
+    </div>
   </div>
 </div>
 
 <div id="controls">
-  <label>Algoritm:</label>
-  <select id="algSelect">
-    <option value="BFS">BFS</option>
-    <option value="DFS">DFS</option>
-    <option value="Greedy">Greedy Best-First</option>
-    <option value="A*">A*</option>
-  </select>
+  <div id="leftControls">
+    <label>Algoritm:</label>
+    <select id="algSelect">
+      <option value="BFS">BFS</option>
+      <option value="DFS">DFS</option>
+      <option value="Greedy">Greedy Best-First</option>
+      <option value="A*">A*</option>
+    </select>
 
-  <button id="startBtn">Starta sökning</button>
-  <label><input type="checkbox" id="stepChk"/>Stegvis</label>
-  <button id="nextStepBtn">Nästa steg</button>
-  <button id="resetBtn">Rensa sökning</button>
-
-  <button id="saveBtn">Spara träd</button>
-  <input type="file" id="loadInput" style="display:none;" />
-  <button id="loadBtn">Ladda träd</button>
-  <button id="clearNodesBtn">Rensa noder (utom start)</button>
+    <button id="startBtn">Starta sökning</button>
+    <label><input type="checkbox" id="stepChk"/>Stegvis</label>
+    <button id="nextStepBtn">Nästa steg</button>
+  </div>
+  
+  <div id="rightControls">
+    <button id="resetBtn">Rensa sökning</button>
+    <button id="clearNodesBtn">Rensa noder</button>
+  </div>
 </div>
 
 <!-- Separerade informationsfält -->
@@ -258,7 +291,7 @@ document.getElementById("predefinedSelect").addEventListener("change", (e) => {
 
 function drawAll(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  // rita grid
+  // Rita grid
   ctx.strokeStyle="#eee";
   ctx.lineWidth=1;
   for(let x=0;x<canvas.width;x+=50){
@@ -274,7 +307,7 @@ function drawAll(){
     ctx.stroke();
   }
 
-  // kanter
+  // Rita kanter
   ctx.lineWidth=2;
   ctx.strokeStyle="#666";
   ctx.font="14px sans-serif";
@@ -294,8 +327,8 @@ function drawAll(){
     }
   }
 
-  // noder
-  let currentAlg = document.getElementById("algSelect").value; // === NYTT: Hämta aktuell algoritm ===
+  // Rita noder
+  let currentAlg = document.getElementById("algSelect").value;
   for(let n of nodes){
     let color = "white";
     
@@ -310,7 +343,7 @@ function drawAll(){
       (currentAlg === "Greedy" && GREEDY_STATE && GREEDY_STATE.frontier && GREEDY_STATE.frontier.has(n.id)) ||
       (currentAlg === "A*" && ASTAR_STATE && ASTAR_STATE.frontier && ASTAR_STATE.frontier.has(n.id))
     ) {
-      color = "orange"; // === NYTT: Frontier-noder ===
+      color = "orange"; // Frontier-noder
     } else if (visitedSet.has(n.id)) {
       color = "lightskyblue";
     }
@@ -326,16 +359,15 @@ function drawAll(){
     ctx.fillStyle="#000";
     ctx.fillText(n.id.toString(), n.x, n.y);
 
-    // === NYTT: Visa h(n) om det inte är 0 ===
+    // Visa h(n) om det inte är 0
     if(n.h !== 0) {
       ctx.fillStyle = "blue";
       // Rita texten strax ovanför noden
       ctx.fillText("h=" + n.h, n.x, n.y - NODE_RADIUS - 12);
     }
-    // === SLUT PÅ NYTT ===
   }
 
-  // === NYTT: Rita temporär kant vid edgeDrag ===
+  // Rita temporär kant vid edgeDrag
   if(edgeDrag && firstNode && currentMousePos){
     ctx.strokeStyle = "black";
     ctx.lineWidth = 2;
@@ -344,14 +376,16 @@ function drawAll(){
     ctx.lineTo(currentMousePos.x, currentMousePos.y);
     ctx.stroke();
   }
-  // === SLUT PÅ NYTT ===
 }
+
 function getNodeById(id){
   return nodes.find(n=> n.id===id);
 }
+
 function setInfo(msg){
   document.getElementById("info").textContent=msg;
 }
+
 function setHoverInfo(msg){
   document.getElementById("hoverInfo").textContent=msg;
 }
@@ -369,6 +403,7 @@ function getMousePos(e){
   let r = canvas.getBoundingClientRect();
   return {x: e.clientX - r.left, y: e.clientY - r.top};
 }
+
 function findNodeAt(x,y){
   for(let n of nodes){
     let dx = x - n.x, dy = y - n.y;
@@ -391,6 +426,7 @@ function removeNode(n){
   setInfo("Tog bort nod "+n.id);
   drawAll();
 }
+
 function addOrUpdateEdge(fromN,toN,cost){
   let ex = fromN.edges.find(ed => ed.targetId === toN.id);
   if(ex) ex.cost = cost;
@@ -403,13 +439,12 @@ canvas.addEventListener("mousedown", e => {
   let clicked = findNodeAt(pos.x, pos.y);
 
   if(e.button === 2){
-    // högerklick
-    // === NYTT: Om Ctrl + högerklick => sätt heuristic för noden ===
+    // Högerklick
     if(e.ctrlKey && clicked){
       let val = prompt(`Heuristikvärde för nod ${clicked.id}? (nuvarande h=${clicked.h})`, String(clicked.h));
       if(val !== null){
         let num = parseFloat(val);
-        if(isNaN(num)) num = 0;  // fallback till 0 om ogiltig inmatning
+        if(isNaN(num)) num = 0;  // Fallback till 0 om ogiltig inmatning
         clicked.h = num;
         setInfo(`Satte h(${clicked.id})=${num}`);
         resetSearch(); // Starta om sökresultat då heuristiken ändrats
@@ -417,9 +452,8 @@ canvas.addEventListener("mousedown", e => {
       }
       return; // Avbryt här så vi inte fortsätter med dragning
     }
-    // === SLUT NYTT ===
 
-    // I övrigt: dragga noden
+    // Dragga noden
     if(clicked){
       draggingNode = clicked;
       draggingRight = true;
@@ -428,7 +462,7 @@ canvas.addEventListener("mousedown", e => {
     }
   }
   else if(e.button === 0){
-    // vänsterklick
+    // Vänsterklick
     if(clicked){
       if(e.ctrlKey){
         removeNode(clicked);
@@ -437,7 +471,7 @@ canvas.addEventListener("mousedown", e => {
       firstNode = clicked;
       edgeDrag = true;
     } else {
-      // skapa nod
+      // Skapa nod
       nodeCounter++;
       let newN = {id: nodeCounter, x: pos.x, y: pos.y, edges:[], h:0};
       nodes.push(newN);
@@ -509,6 +543,7 @@ canvas.addEventListener("mouseup", e => {
     }
   }
 });
+
 window.addEventListener("mouseup", e => {
   draggingRight = false;
   draggingNode = null;
@@ -518,6 +553,7 @@ window.addEventListener("mouseup", e => {
 });
 
 // ================== SPARA/LADDA ==================
+// Event listeners för save och load
 document.getElementById("saveBtn").addEventListener("click",()=>{
   let data = {
     nodes,
@@ -536,9 +572,11 @@ document.getElementById("saveBtn").addEventListener("click",()=>{
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 });
+
 document.getElementById("loadBtn").addEventListener("click",()=>{
   document.getElementById("loadInput").click();
 });
+
 document.getElementById("loadInput").addEventListener("change", e=>{
   let file = e.target.files[0];
   if(!file)return;
@@ -573,6 +611,7 @@ document.getElementById("loadInput").addEventListener("change", e=>{
   };
   rdr.readAsText(file);
 });
+
 document.getElementById("clearNodesBtn").addEventListener("click",()=>{
   let st = getNodeById(startNodeId);
   if(!st){
@@ -687,6 +726,7 @@ function startBFS(){
   };
   bfsStep();
 }
+
 function bfsStep(){
   if(!search_in_progress) return;
   let st = BFS_STATE;
@@ -744,6 +784,7 @@ function startDFS(){
   };
   dfsStep();
 }
+
 function dfsStep(){
   if(!search_in_progress)return;
   let st = DFS_STATE;
@@ -801,10 +842,11 @@ function startGreedy(){
     visited: new Set([startNodeId]),
     expansionsCount: 0,
     expansionsCost: 0,
-    frontier: new Set([startNodeId]) // === NYTT: Frontier Set ===
+    frontier: new Set([startNodeId]) // Frontier Set
   };
   greedyStep();
 }
+
 function greedyStep(){
   if(!search_in_progress) return;
   let st = GREEDY_STATE;
@@ -815,7 +857,7 @@ function greedyStep(){
     return;
   }
   let current = st.pq.pop();
-  st.frontier.delete(current.id); // === NYTT: Ta bort från frontier ===
+  st.frontier.delete(current.id); // Ta bort från frontier
   st.expansionsCount++;
 
   let lastEdgeCost = current.costSoFar - current.parentCostSoFar;
@@ -844,7 +886,7 @@ function greedyStep(){
         parentCostSoFar: current.costSoFar,
         priority: hh
       });
-      st.frontier.add(ed.targetId); // === NYTT: Lägg till i frontier ===
+      st.frontier.add(ed.targetId); // Lägg till i frontier
     }
   }
   visitedSet.add(current.id);
@@ -869,10 +911,11 @@ function startAstar(){
     gScore,
     expansionsCount: 0,
     expansionsCost: 0,
-    frontier: new Set([startNodeId]) // === NYTT: Frontier Set ===
+    frontier: new Set([startNodeId]) // Frontier Set
   };
   aStarStep();
 }
+
 function aStarStep(){
   if(!search_in_progress)return;
   let st = ASTAR_STATE;
@@ -883,7 +926,7 @@ function aStarStep(){
     return;
   }
   let current = st.pq.pop();
-  st.frontier.delete(current.id); // === NYTT: Ta bort från frontier ===
+  st.frontier.delete(current.id); // Ta bort från frontier
   st.expansionsCount++;
 
   let lastEdgeCost = current.costSoFar - current.parentCostSoFar;
@@ -892,7 +935,7 @@ function aStarStep(){
   if(endNodeIds.has(current.id)){
     for(let x of current.path) pathSet.add(x);
     drawAll();
-    let msg = `Utforskade noder = ${st.expansionsCount}, Total kostnad för sökningen = ${st.expansionsCost}, Vägkostnad för den returnerade vägen = ${current.costSoFar}`;
+    let msg = `Utforskade noder = ${st.expansionsCount}, Total kostnad för sökningen = ${st.expansionsCost}, Vägkostnad = ${current.costSoFar}`;
     setInfo(msg);
     setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n))."); // Bevara instruktionen
     search_in_progress = false;
@@ -917,7 +960,7 @@ function aStarStep(){
         priority: f
       };
       st.pq.push(childObj);
-      st.frontier.add(cId); // === NYTT: Lägg till i frontier ===
+      st.frontier.add(cId); // Lägg till i frontier
     }
   }
   visitedSet.add(current.id);
