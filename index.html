@@ -94,7 +94,7 @@
   <ul>
     <li><strong>Startnod:</strong> <span class="color-box" style="background:green;"></span> </li>
     <li>
-      <strong>Målnod:</strong>Vänsterklicka på en nod för att göra den till målnod (<span class="color-box" style="background:red;"></span>).
+      <strong>Målnod:</strong> Vänsterklicka på en nod för att göra den till målnod (<span class="color-box" style="background:red;"></span>).
       Klicka igen för att göra den till normal nod ( 
       <span class="color-box" style="background:white;"></span>).
       Du kan ha flera mål.
@@ -136,6 +136,9 @@ const NODE_RADIUS = 20;
 // Sets to track visited nodes and path
 let visitedSet = new Set();
 let pathSet = new Set();
+
+// Variable to track current mouse position during edge drag
+let currentMousePos = null;
 
 function drawAll(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -215,6 +218,17 @@ function drawAll(){
     }
     // === SLUT PÅ NYTT ===
   }
+
+  // === NYTT: Rita temporär kant vid edgeDrag ===
+  if(edgeDrag && firstNode && currentMousePos){
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(firstNode.x, firstNode.y);
+    ctx.lineTo(currentMousePos.x, currentMousePos.y);
+    ctx.stroke();
+  }
+  // === SLUT PÅ NYTT ===
 }
 function getNodeById(id){
   return nodes.find(n=> n.id===id);
@@ -325,6 +339,10 @@ canvas.addEventListener("mousemove", e => {
     draggingNode.y = pos.y - dragOffset.y;
     drawAll();
   }
+  if(edgeDrag){
+    currentMousePos = getMousePos(e);
+    drawAll();
+  }
 });
 
 canvas.addEventListener("mouseup", e => {
@@ -350,8 +368,7 @@ canvas.addEventListener("mouseup", e => {
             addOrUpdateEdge(firstNode, r, c);
             addOrUpdateEdge(r, firstNode, c);
             resetSearch();
-            setInfo(`Kant: ${firstNode.id}<->${r.id}, cost=${c}`);
-            drawAll();
+            setInfo(`Kant: ${firstNode.id}< - >${r.id}, Kostnad =${c}`);
           }
         }
       } else if(r && r === firstNode){
@@ -366,11 +383,13 @@ canvas.addEventListener("mouseup", e => {
             setInfo(`Nod ${r.id} är nu mål.`);
           }
           resetSearch();
-          drawAll();
         }
       }
+      // Sätt variabler till null innan drawAll()
       firstNode = null;
       edgeDrag = false;
+      currentMousePos = null; // Reset temporary mouse position
+      drawAll();
     }
   }
 });
@@ -379,6 +398,7 @@ window.addEventListener("mouseup", e => {
   draggingNode = null;
   edgeDrag = false;
   firstNode = null;
+  currentMousePos = null; // Reset temporary mouse position
 });
 
 // ================== SPARA/LADDA ==================
