@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Sökalgoritmer i labyrint</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+      /* Förhindra textmarkering i hela sidan */
+      user-select: none;
+    }
+
+    /* Flexbox-container för labyrint och fördefinierade labyrinter */
+    #mainContainer {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    /* Canvas och dess container */
+    #canvasContainer {
+      position: relative;
+      border: 1px solid #ccc;
+      display: inline-block;
+      user-select: none; /* Förhindra textmarkering */
+    }
+
+    #mazeCanvas {
+      border: 1px solid gray;
+      user-select: none; /* Förhindra textmarkering */
+    }
+
+    /* Fördefinierade Labyrinter Sektion till höger om labyrinten */
+    #predefinedMazes {
+      margin-left: 20px; /* Avstånd mellan labyrinten och fördefinierade labyrinter */
+      max-width: 250px; /* Maxbredd för fördefinierade labyrinter */
+    }
+
+    #predefinedMazes label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    #predefinedMazes select {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+
+    #predefinedMazes button {
+      display: block;
+      width: 100%;
+      margin-bottom: 5px;
+      padding: 5px;
+    }
+
+    /* Kontrollsektionen under labyrinten */
+    #controls {
+      margin-top: 20px;
+      max-width: 900px;
+    }
+
+    #controls label {
+      display: inline-block;
+      margin-right: 8px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    #controls select, 
+    #controls button, 
+    #controls label input {
+      margin-right: 8px;
+      margin-bottom: 6px;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+
+    /* Enkel styling för legend-listan */
+    #legend {
+      margin-top: 15px;
+      line-height: 1.6em;
+      max-width: 900px;
+    }
+
+    #legend ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #legend li {
+      margin-bottom: 4px;
+    }
+
+    /* Hjälp-fyrkanter i legend */
+    .color-box {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 6px;
+      vertical-align: middle;
+      border: 1px solid #000;
+    }
+
+    /* En enkel style för heuristik-texten (f(n)) */
+    .heuristic-label {
+      position: absolute;
+      color: black;
+      font-size: 12px;
+      pointer-events: none; /* så man kan klicka igenom texten */
+      user-select: none;    /* Förhindra textmarkering */
+    }
+
+    /* Informationsfält */
+    #info {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 900px;
+    }
+
+    #hoverInfo {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
+      background-color: #e0e0ff;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px; /* Mindre textstorlek */
+      max-width: 900px;
+    }
+
+    /* Differentiate the two info boxes */
+    #info, #hoverInfo {
+      display: inline-block;
+      width: 100%;
+    }
+
+    /* Kostnadsfunktion Information - endast synlig vid A* */
+    #costFunctionInfo {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
+      background-color: #dff0d8;
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 900px;
+      display: none; /* Döljs som standard */
+    }
+  </style>
+</head>
+<body>
+
+<h2>Sökalgoritmer i labyrint</h2>
+
+<div id="mainContainer">
+  <!-- Labyrintens Canvas -->
+  <div id="canvasContainer">
+    <canvas id="mazeCanvas"></canvas>
+    <!-- Här kommer text overlays för heuristik-text f(n) att dyka upp -->
+  </div>
+
+  <!-- Fördefinierade Labyrinter till höger -->
+  <div id="predefinedMazes">
+    <label for="predefinedSelect">Exempel-labyrinter:</label>
+    <select id="predefinedSelect">
+      <option value="">-- Välj en labyrint --</option>
+      <option value="Exempel 1">Exempel 1</option>
+      <option value="Exempel 2">Exempel 2</option>
+      <option value="Exempel 3">Exempel 3</option>
+      <option value="Exempel 4">Exempel 4</option>
+    </select>
+
+    <button id="saveBtn">Spara labyrint</button>
+    <input type="file" id="loadInput" style="display:none;" />
+    <button id="loadBtn">Ladda labyrint</button>
+  </div>
+</div>
+
+<!-- Kontrollsektionen under labyrinten -->
+<div id="controls">
+  <label for="algorithmSelect">Vald algoritm:</label>
+  <select id="algorithmSelect">
+    <option value="A*">A*</option>
+    <option value="BFS">BFS</option>
+    <option value="DFS">DFS</option>
+    <option value="Greedy">Greedy Best-First</option>
+  </select>
+
+  <button id="startSearchBtn">Starta sökning</button>
+  <label>
+    <input type="checkbox" id="stepModeChk" />
+    Stegvis läge
+  </label>
+  <button id="nextStepBtn">Nästa steg</button>
+  <button id="resetBtn">Återställ</button>
+</div>
+
+<!-- Informationsfält -->
+<div id="info"></div>
+<div id="costFunctionInfo">Kostnadsfunktion: (håll musen över en cell för att se f(n))</div>
+<div id="hoverInfo"></div>
+
+<!-- Förklaringar av färger, kostnader och hur man skapar dem -->
+<div id="legend">
+  <h3>Förklaringar</h3>
+  <ul>
+    <li>
+      <span class="color-box" style="background: white;"></span> 
+      <strong>Vit</strong> (vanlig väg, kostnad 1) – Skapas genom att vänsterklicka på en svart ruta.
+    </li>
+    <li>
+      <span class="color-box" style="background: black;"></span>
+      <strong>Svart</strong> (vägg) – Skapas genom att vänsterklicka på en vit ruta.
+    </li>
+    <li>
+      <span class="color-box" style="background: #deb887;"></span>
+      <strong>Brun</strong> (kostnad 3) – Skapas genom att högerklicka 2 gånger.
+    </li>
+    <li>
+      <span class="color-box" style="background: blue;"></span>
+      <strong>Blå</strong> (kostnad 5) – Skapas genom att högerklicka 3 gånger.
+    </li>
+    <li>
+      <span class="color-box" style="background: red;"></span>
+      <strong>Röd</strong> (mål) – Skapas genom att högerklicka en gång.
+    </li>
+    <li>
+      <span class="color-box" style="background: lightskyblue;"></span>
+      <strong>Ljusblå</strong> (genomsökt) – Visas automatiskt av algoritmen för rutor som sökts igenom.
+    </li>
+    <li>
+      <span class="color-box" style="background: orange;"></span>
+      <strong>Orange</strong> (Kö) – Markering av algoritmens kö, alltså de rutor som ligger på tur att utforskas.
+    </li>
+    <li>
+      <span class="color-box" style="background: green;"></span>
+      <strong>Grön</strong> (start) – Anger startposition för sökningen. Klicka och dra för att flytta.
+    </li>
+  </ul>
+  <p>
+    <em>Vänsterklick</em> cyklar bara mellan svart och vit på en cell.<br/>
+    <em>Högerklick</em> cyklar mellan röd → brun → blå → svart → röd.<br/>
+  </p>
+  <p style="margin-top:8px;">
+    <em>Tips:</em> Vid A*-sökning kan du hålla muspekaren över en ruta för att se f(n)-värdet (kostnadsfunktionen).
+  </p>
+</div>
+
+<script>
+/* --- Konstanter för rutnätets storlek --- */
+const GRID_WIDTH = 30;
+const GRID_HEIGHT = 15;
+const CELL_SIZE = 30;
+
+/* --- Canvas och Context --- */
+const canvas = document.getElementById("mazeCanvas");
+canvas.width = GRID_WIDTH * CELL_SIZE;
+canvas.height = GRID_HEIGHT * CELL_SIZE;
+const ctx = canvas.getContext("2d");
+
+/* Container för att placera heuristik-text. */
+const canvasContainer = document.getElementById("canvasContainer");
+
+/* --- Initiera rutnätet --- */
+let grid = [];
+for (let r = 0; r < GRID_HEIGHT; r++) {
+  let row = [];
+  for (let c = 0; c < GRID_WIDTH; c++) {
+    row.push(1); // default svart
+  }
+  grid.push(row);
+}
+
+/* --- Start- och målpunkter --- */
+let start = [11, 7];
+let ends = [[5, 18]];
+// Sätt start och mål till vägar (0)
+grid[start[0]][start[1]] = 0;
+ends.forEach(e => {
+  grid[e[0]][e[1]] = 0;
+});
+
+/* --- Maps för heuristik-texter --- */
+let heuristicTexts = new Map(); // key: "r,c", value: DOM-element
+let f_values = new Map(); // key: "r,c", value: [f,h]
+
+/* --- Dra start-relaterade variabler --- */
+let is_dragging_start = false;
+let old_start = null;
+let potential_start = null;
+let dragging_point = null;
+let drag_start_pos = null;
+
+/* --- Result-div --- */
+let resultDiv = document.getElementById("info");
+let hoverInfoDiv = document.getElementById("hoverInfo");
+let costFunctionInfoDiv = document.getElementById("costFunctionInfo");
+
+/* --- Variabler för stegvis läge --- */
+let stepMode = false;
+let A_STAR_STATE = null;
+let GREEDY_STATE = null;
+let BFS_STATE = null;
+let DFS_STATE = null;
+let search_in_progress = false;
+
+/* --- Variabel för aktuell algoritm --- */
+let currentAlgorithm = null;
+
+/* 
+  === Global "search_cost" för att mäta totalkostnad för hela sökningen ===
+*/
+let search_cost = 0;
+
+/** Kollar om vi har några icke-1-rutor (dvs blå eller brun). */
+function hasNonOneSquares() {
+  for (let r=0; r<GRID_HEIGHT; r++){
+    for (let c=0; c<GRID_WIDTH; c++){
+      if (grid[r][c] === 2 || grid[r][c] === 3) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+/** Returnerar kostnaden för en cell (grid[r][c]). */
+function cellCost(r, c) {
+  if (grid[r][c] === 2) return 5;  // blå
+  if (grid[r][c] === 3) return 3;  // brun
+  if (grid[r][c] === 1) return Infinity; // svart (vägg)
+  return 1; // vit
+}
+
+/* Rensa och nollställ cost före en ny sökning. */
+function resetSearchCost() {
+  search_cost = 0;
+  resultDiv.style.backgroundColor = "";
+  hoverInfoDiv.textContent = "";
+  hoverInfoDiv.style.backgroundColor = "";
+  // Dölj kostnadsfunktion info om det var synligt tidigare
+  costFunctionInfoDiv.style.display = "none";
+}
+
+/* Sätt result-text + gör bakgrunden ljusgrön. */
+function setFinalResultText(txt, showCostFunction=false) {
+  resultDiv.textContent = txt;
+  resultDiv.style.backgroundColor = "lightgreen"; 
+  if (showCostFunction) {
+    costFunctionInfoDiv.style.display = "block";
+  } else {
+    costFunctionInfoDiv.style.display = "none";
+  }
+}
+
+/* Räkna kostnaden för just slutvägen. */
+function calcPathCost(path) {
+  let c = 0;
+  for (let [rr,cc] of path) {
+    c += cellCost(rr, cc);
+  }
+  return c;
+}
+
+/* ===================== Övriga funktioner ====================== */
+function heuristic(a, b) {
+  return Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
+}
+
+function get_neighbors(node) {
+  let [r, c] = node;
+  let neighbors = [];
+  let deltas = [[-1,0],[1,0],[0,-1],[0,1]];
+  for (let [dx, dy] of deltas) {
+    let nr = r + dx;
+    let nc = c + dy;
+    if (nr >= 0 && nr < GRID_HEIGHT && nc >= 0 && nc < GRID_WIDTH) {
+      neighbors.push([nr, nc]);
+    }
+  }
+  return neighbors;
+}
+
+function draw_grid() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let [_, label] of heuristicTexts) {
+    if (label.parentNode) {
+      label.parentNode.removeChild(label);
+    }
+  }
+  heuristicTexts.clear();
+  f_values.clear();
+
+  for (let r = 0; r < GRID_HEIGHT; r++) {
+    for (let c = 0; c < GRID_WIDTH; c++) {
+      let x1 = c * CELL_SIZE;
+      let y1 = r * CELL_SIZE;
+
+      let color;
+      if (grid[r][c] === 1) {
+        color = "black";       
+      } else if (grid[r][c] === 2) {
+        color = "blue";        
+      } else if (grid[r][c] === 3) {
+        color = "#deb887";     
+      } else {
+        color = "white";       
+      }
+
+      ctx.fillStyle = color;
+      ctx.strokeStyle = "gray";
+      ctx.fillRect(x1, y1, CELL_SIZE, CELL_SIZE);
+      ctx.strokeRect(x1, y1, CELL_SIZE, CELL_SIZE);
+    }
+  }
+
+  // Mål (röda)
+  for (let [er, ec] of ends) {
+    let x1 = ec * CELL_SIZE;
+    let y1 = er * CELL_SIZE;
+    ctx.fillStyle = "red";
+    ctx.fillRect(x1, y1, CELL_SIZE, CELL_SIZE);
+    ctx.strokeRect(x1, y1, CELL_SIZE, CELL_SIZE);
+  }
+
+  // Start (grön)
+  let sr, sc;
+  if (is_dragging_start && potential_start != null) {
+    [sr, sc] = potential_start;
+  } else {
+    [sr, sc] = start;
+  }
+  let x_start = sc * CELL_SIZE;
+  let y_start = sr * CELL_SIZE;
+  ctx.fillStyle = "green";
+  ctx.fillRect(x_start, y_start, CELL_SIZE, CELL_SIZE);
+  ctx.strokeRect(x_start, y_start, CELL_SIZE, CELL_SIZE);
+
+  ctx.font = "14px Arial";
+  ctx.fillStyle = "rgba(255, 255, 255, 0.5)"; // Vit med 50% transparens
+  ctx.textAlign = "right";
+  ctx.fillText("Skapad av David Hedengren", canvas.width - 10, canvas.height - 10);
+
+  ctx.fillStyle = "rgba(0, 0, 0, 0.5)"; // Svart med 50% transparens
+  ctx.textAlign = "right";
+  ctx.fillText("Skapad av David Hedengren", canvas.width - 10, 20);
+}
+
+function clear_heuristic_texts() {
+  for (let [_, label] of heuristicTexts) {
+    if (label && label.parentNode) {
+      label.parentNode.removeChild(label);
+    }
+  }
+  heuristicTexts.clear();
+  f_values.clear();
+}
+
+function clear_previous_search() {
+  draw_grid();
+  clear_heuristic_texts();
+  resultDiv.textContent = "";
+  resultDiv.style.backgroundColor = "";
+  hoverInfoDiv.textContent = "";
+  hoverInfoDiv.style.backgroundColor = "";
+  costFunctionInfoDiv.style.display = "none";
+}
+
+function mark_explored(r, c) {
+  if ((r === start[0] && c === start[1]) || ends.some(e => e[0]===r && e[1]===c)) {
+    return;
+  }
+  let x = c*CELL_SIZE, y = r*CELL_SIZE;
+  ctx.fillStyle = "lightskyblue";
+  ctx.fillRect(x, y, CELL_SIZE, CELL_SIZE);
+  ctx.strokeRect(x, y, CELL_SIZE, CELL_SIZE);
+}
+
+function color_frontier_cell(r, c) {
+  if ((r === start[0] && c === start[1]) || ends.some(e => e[0]===r && e[1]===c)) {
+    return;
+  }
+  let x = c * CELL_SIZE;
+  let y = r * CELL_SIZE;
+  ctx.fillStyle = "orange";
+  ctx.fillRect(x, y, CELL_SIZE, CELL_SIZE);
+  ctx.strokeRect(x, y, CELL_SIZE, CELL_SIZE);
+}
+
+function mark_path(path) {
+  for (let [r, c] of path) {
+    if (r === start[0] && c === start[1]) continue;
+    let isEnd = ends.some(e => e[0]===r && e[1]===c);
+    let color = isEnd ? "red" : "lightgreen";
+
+    let x = c*CELL_SIZE, y = r*CELL_SIZE;
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, CELL_SIZE, CELL_SIZE);
+    ctx.strokeRect(x, y, CELL_SIZE, CELL_SIZE);
+  }
+}
+
+/* ============= Algoritmer ============= */
+class PriorityQ {
+  constructor() {
+    this._data = [];
+  }
+  push(item) {
+    this._data.push(item);
+    this._data.sort((a, b) => a[0] - b[0]);
+  }
+  pop() {
+    return this._data.shift();
+  }
+  empty() {
+    return this._data.length === 0;
+  }
+}
+
+/* A* */
+function a_star_step(open_set, came_from, g_score, explored_cells) {
+  if (open_set.empty()) {
+    setFinalResultText("Ingen väg funnen");
+    search_in_progress = false;
+    return;
+  }
+  let [f_current, current] = open_set.pop();
+  let [row, col] = current;
+
+  // varje expanderad ruta → lägg till dess kostnad
+  search_cost += cellCost(row, col);
+
+  if (ends.some(e => e[0]===row && e[1]===col)) {
+    // återskapa väg
+    let path = [];
+    let curKey = `${row},${col}`;
+    while (came_from.has(curKey)) {
+      path.push(current);
+      current = came_from.get(curKey);
+      curKey = `${current[0]},${current[1]}`;
+    }
+    path.push(start);
+    path.reverse();
+
+    mark_path(path);
+
+    // Om vi har 2/3-rutor i labyrinten => visa kostnad
+    let msg = `Antal steg till mål: ${path.length-1}, Utforskade rutor: ${explored_cells-1}`;
+    if (hasNonOneSquares()) {
+      let finalCost = calcPathCost(path);
+      msg += `, Kostnad för slutgiltig väg: ${finalCost}, Kostnad för hela sökningen: ${search_cost}`;
+    }
+    setFinalResultText(msg, true); // Visa kostnadsfunktion info
+
+    search_in_progress = false;
+    return;
+  }
+
+  mark_explored(row, col);
+
+  for (let [nr, nc] of get_neighbors([row,col])) {
+    if (grid[nr][nc] === 1) continue; 
+    let current_g = g_score.get(`${row},${col}`);
+    let cost = cellCost(nr,nc);
+    let tentative_g = current_g + cost;
+    let neighborKey = `${nr},${nc}`;
+
+    if (!g_score.has(neighborKey) || tentative_g < g_score.get(neighborKey)) {
+      came_from.set(neighborKey, [row, col]);
+      g_score.set(neighborKey, tentative_g);
+      let h_score = ends.map(e => heuristic([nr,nc], e)).reduce((a,b) => Math.min(a,b), Infinity);
+      let f_score = tentative_g + h_score;
+      open_set.push([f_score, [nr,nc]]);
+
+      createHeuristicLabel(nr, nc, `${f_score}`);
+      f_values.set(`${nr},${nc}`, [f_score, h_score]);
+      color_frontier_cell(nr, nc);
+    }
+  }
+
+  explored_cells++;
+
+  if (stepMode) {
+    A_STAR_STATE = {open_set, came_from, g_score, explored_cells};
+  } else {
+    setTimeout(()=>{
+      a_star_step(open_set, came_from, g_score, explored_cells);
+    },150);
+  }
+}
+
+function start_a_star() {
+  if (ends.length === 0) {
+    setFinalResultText("Inga mål satts");
+    return;
+  }
+  clear_previous_search();
+  resetSearchCost();
+
+  let open_set = new PriorityQ();
+  let came_from = new Map();
+  let g_score = new Map();
+  let startKey = `${start[0]},${start[1]}`;
+  g_score.set(startKey, 0);
+
+  let h_score = ends.map(e => heuristic(start,e)).reduce((a,b) => Math.min(a,b), Infinity);
+  let f_score = h_score;
+  open_set.push([f_score, [start[0],start[1]]]);
+  A_STAR_STATE = {open_set, came_from, g_score, explored_cells:1};
+  search_in_progress = true;
+  currentAlgorithm = "A*";
+
+  a_star_step(open_set, came_from, g_score, 1);
+}
+
+/* Greedy Best-First */
+function greedy_best_first_step(open_set, explored, explored_cells) {
+  if (open_set.empty()) {
+    setFinalResultText("Ingen väg funnen");
+    search_in_progress = false;
+    return;
+  }
+  let [h_score, current, path] = open_set.pop();
+  let [row, col] = current;
+
+  search_cost += cellCost(row, col);
+
+  if (ends.some(e => e[0]===row && e[1]===col)) {
+    let finalPath = path.concat([current]);
+    mark_path(finalPath);
+
+    let msg = `Antal steg till mål: ${finalPath.length-1}, Utforskade rutor: ${explored_cells-1}`;
+    if (hasNonOneSquares()) {
+      let finalCost = calcPathCost(finalPath);
+      msg += `, Kostnad för slutgiltig väg: ${finalCost}, Kostnad för hela sökningen: ${search_cost}`;
+    }
+    setFinalResultText(msg, false); // Dölj kostnadsfunktion info
+
+    search_in_progress = false;
+    return;
+  }
+
+  explored.add(`${row},${col}`);
+  explored_cells++;
+  mark_explored(row, col);
+
+  for (let [nr,nc] of get_neighbors(current)) {
+    let key = `${nr},${nc}`;
+    if (explored.has(key) || grid[nr][nc] === 1) continue;
+    let h = ends.map(e => heuristic([nr,nc], e)).reduce((a,b)=>Math.min(a,b), Infinity);
+    open_set.push([h, [nr,nc], path.concat([current])]);
+    explored.add(key);
+
+    createHeuristicLabel(nr, nc, `${h}`);
+    f_values.set(`${nr},${nc}`, [h, h]);
+    color_frontier_cell(nr, nc);
+  }
+
+  if (stepMode) {
+    GREEDY_STATE = {open_set, explored, explored_cells};
+  } else {
+    setTimeout(()=>{
+      greedy_best_first_step(open_set, explored, explored_cells);
+    },150);
+  }
+}
+
+function start_greedy_best_first() {
+  if (ends.length===0) {
+    setFinalResultText("Inga mål satts");
+    return;
+  }
+  clear_previous_search();
+  resetSearchCost();
+
+  let open_set = new PriorityQ();
+  let h_score = ends.map(e => heuristic(start,e)).reduce((a,b) => Math.min(a,b), Infinity);
+  open_set.push([h_score, [start[0],start[1]], []]);
+  let explored = new Set();
+  GREEDY_STATE = {open_set, explored, explored_cells:1};
+  search_in_progress = true;
+  currentAlgorithm = "Greedy";
+
+  greedy_best_first_step(open_set, explored, 1);
+}
+
+/* BFS */
+class SimpleQueue {
+  constructor() {
+    this.q = [];
+  }
+  enqueue(item) {
+    this.q.push(item);
+  }
+  dequeue() {
+    return this.q.shift();
+  }
+  empty() {
+    return this.q.length === 0;
+  }
+}
+
+function bfs_step(queue, explored, explored_cells) {
+  if (queue.empty()) {
+    setFinalResultText("Ingen väg funnen");
+    search_in_progress = false;
+    return;
+  }
+  let [current, path] = queue.dequeue();
+  let [row, col] = current;
+
+  search_cost += cellCost(row, col);
+
+  if (ends.some(e=> e[0]===row && e[1]===col)) {
+    let fullPath = path.concat([current]);
+    mark_path(fullPath);
+
+    let msg = `Antal steg till mål: ${fullPath.length-1}, Utforskade rutor: ${explored_cells-1}`;
+    if (hasNonOneSquares()) {
+      let finalCost = calcPathCost(fullPath);
+      msg += `, Kostnad för slutgiltig väg: ${finalCost}, Kostnad för hela sökningen: ${search_cost}`;
+    }
+    setFinalResultText(msg, false); // Dölj kostnadsfunktion info
+
+    search_in_progress = false;
+    return;
+  }
+
+  mark_explored(row, col);
+  explored_cells++;
+
+  for (let [nr, nc] of get_neighbors([row,col])) {
+    let key = `${nr},${nc}`;
+    if (!explored.has(key) && grid[nr][nc] !== 1) {
+      queue.enqueue([[nr,nc], path.concat([current])]);
+      explored.add(key);
+      color_frontier_cell(nr, nc);
+    }
+  }
+
+  if (stepMode) {
+    BFS_STATE = {queue, explored, explored_cells};
+  } else {
+    setTimeout(()=>{
+      bfs_step(queue, explored, explored_cells);
+    },150);
+  }
+}
+
+function start_bfs() {
+  if (ends.length === 0) {
+    setFinalResultText("Inga mål satts");
+    return;
+  }
+  clear_previous_search();
+  resetSearchCost();
+
+  let queue = new SimpleQueue();
+  queue.enqueue([[start[0],start[1]], []]);
+  let explored = new Set();
+  explored.add(`${start[0]},${start[1]}`);
+  BFS_STATE = {queue, explored, explored_cells:1};
+  search_in_progress = true;
+  currentAlgorithm = "BFS";
+
+  bfs_step(queue, explored, 1);
+}
+
+/* DFS */
+let directions = [[-1,0],[0,1],[1,0],[0,-1]]; // upp, höger, ner, vänster
+
+function dfs_step(stack, explored, explored_cells) {
+  if (stack.length === 0) {
+    setFinalResultText("Ingen väg funnen");
+    search_in_progress = false;
+    return;
+  }
+  let [current, path, direction] = stack.pop();
+  let [row, col] = current;
+
+  search_cost += cellCost(row, col);
+
+  if (ends.some(e=> e[0]===row && e[1]===col)) {
+    let finalPath = path.concat([current]);
+    mark_path(finalPath);
+
+    let msg = `Antal steg till mål: ${finalPath.length-1}, Utforskade rutor: ${explored_cells-1}`;
+    if (hasNonOneSquares()) {
+      let finalCost = calcPathCost(finalPath);
+      msg += `, Kostnad för slutgiltig väg: ${finalCost}, Kostnad för hela sökningen: ${search_cost}`;
+    }
+    setFinalResultText(msg, false); // Dölj kostnadsfunktion info
+
+    search_in_progress = false;
+    return;
+  }
+
+  mark_explored(row, col);
+  explored.add(`${row},${col}`);
+  explored_cells++;
+
+  let order = [
+    (direction + 3) % 4,
+    direction,
+    (direction + 1) % 4,
+    (direction + 2) % 4
+  ];
+
+  for (let new_dir of order) {
+    let [dx, dy] = directions[new_dir];
+    let nr = row + dx;
+    let nc = col + dy;
+    if (nr>=0 && nr<GRID_HEIGHT && nc>=0 && nc<GRID_WIDTH) {
+      let key = `${nr},${nc}`;
+      if (!explored.has(key) && grid[nr][nc]!==1) {
+        stack.push([[nr,nc], path.concat([current]), new_dir]);
+        explored.add(key);
+        color_frontier_cell(nr, nc);
+      }
+    }
+  }
+
+  if (stepMode) {
+    DFS_STATE = {stack, explored, explored_cells};
+  } else {
+    setTimeout(()=>{
+      dfs_step(stack, explored, explored_cells);
+    },150);
+  }
+}
+
+function start_dfs() {
+  if (ends.length===0) {
+    setFinalResultText("Inga mål satts");
+    return;
+  }
+  clear_previous_search();
+  resetSearchCost();
+
+  let start_direction = 2; // nedåt
+  let stack = [[[start[0],start[1]], [], start_direction]];
+  let explored = new Set();
+  explored.add(`${start[0]},${start[1]}`);
+  DFS_STATE = {stack, explored, explored_cells:1};
+  search_in_progress = true;
+  currentAlgorithm = "DFS";
+
+  dfs_step(stack, explored, 1);
+}
+
+/* =============== Musinteraktioner =============== */
+function getCellFromMouse(e) {
+  let rect = canvas.getBoundingClientRect();
+  let mx = e.clientX - rect.left;
+  let my = e.clientY - rect.top;
+  let col = Math.floor(mx / CELL_SIZE);
+  let row = Math.floor(my / CELL_SIZE);
+  if (row<0||row>=GRID_HEIGHT||col<0||col>=GRID_WIDTH) return null;
+  return [row, col];
+}
+
+canvas.oncontextmenu = (e) => {
+  e.preventDefault();
+};
+
+canvas.addEventListener("mousedown",(e)=>{
+  e.preventDefault();
+  let cell = getCellFromMouse(e);
+  if (!cell) return;
+  drag_start_pos = cell;
+  let [row, col] = cell;
+  if (row===start[0] && col===start[1]) {
+    is_dragging_start = true;
+    old_start = [start[0], start[1]];
+    potential_start = [start[0], start[1]];
+    dragging_point = null;
+  } else {
+    dragging_point = "other";
+  }
+});
+
+canvas.addEventListener("mousemove",(e)=>{
+  e.preventDefault();
+  if (is_dragging_start) {
+    let cell = getCellFromMouse(e);
+    if (cell) {
+      potential_start = cell;
+      draw_grid();
+    }
+  } else if (dragging_point==="other" && e.buttons===1) {
+    let cell = getCellFromMouse(e);
+    if (cell) {
+      let [row, col] = cell;
+      if (grid[row][col] === 1) { // Korrigerad variabel från 'c' till 'col'
+        grid[row][col] = 0;
+      } else if (grid[row][col] === 0) {
+        grid[row][col] = 1;
+      }
+      draw_grid();
+    }
+  }
+});
+
+canvas.addEventListener("mouseup",(e)=>{
+  e.preventDefault();
+  let cell = getCellFromMouse(e);
+
+  if (is_dragging_start) {
+    is_dragging_start = false;
+    if (cell && (potential_start[0]!==old_start[0] || potential_start[1]!==old_start[1])) {
+      grid[old_start[0]][old_start[1]] = 1;
+      start = [potential_start[0], potential_start[1]];
+      grid[start[0]][start[1]] = 0;
+    }
+    draw_grid();
+    dragging_point = null;
+    old_start = null;
+    potential_start = null;
+    drag_start_pos = null;
+    return;
+  }
+
+  if (dragging_point === "other") {
+    if (e.button === 0) {
+      if (cell && cell[0]===drag_start_pos[0] && cell[1]===drag_start_pos[1]) {
+        let [r,c] = cell;
+        if (grid[r][c]===1) {
+          grid[r][c] = 0;
+        } else if (grid[r][c]===0) {
+          grid[r][c] = 1;
+        }
+        draw_grid();
+      }
+    } else if (e.button === 2) {
+      if (cell && cell[0]===drag_start_pos[0] && cell[1]===drag_start_pos[1]) {
+        let [r,c] = cell;
+        let inEnds = ends.some(e=> e[0]===r && e[1]===c);
+        if (inEnds) {
+          ends = ends.filter(e => !(e[0]===r && e[1]===c));
+          grid[r][c] = 3;
+        } else if (grid[r][c] === 3) {
+          grid[r][c] = 2;
+        } else if (grid[r][c] === 2) {
+          grid[r][c] = 1;
+        } else if (grid[r][c] === 1) {
+          ends.push([r,c]);
+          grid[r][c] = 0;
+        } else {
+          ends.push([r,c]);
+          grid[r][c] = 0;
+        }
+        draw_grid();
+      }
+    }
+  }
+
+  dragging_point = null;
+  old_start = null;
+  potential_start = null;
+  drag_start_pos = null;
+});
+
+/* Hover för att visa f(n) */
+canvas.addEventListener("mousemove",(e)=>{
+  let cell = getCellFromMouse(e);
+  if (!cell) {
+    hoverInfoDiv.textContent = "";
+    return;
+  }
+  let key = `${cell[0]},${cell[1]}`;
+  if (currentAlgorithm === "A*" && f_values.has(key)) {
+    let [fval, hval] = f_values.get(key);
+    let gval = fval - hval;
+    hoverInfoDiv.textContent = `f(n) = g(n) + h(n) = ${gval} + ${hval} = ${fval}`;
+    hoverInfoDiv.style.backgroundColor = "#e0e0ff";
+  } else {
+    hoverInfoDiv.textContent = "";
+    hoverInfoDiv.style.backgroundColor = "";
+  }
+});
+
+/* Skapa heuristik-labels */
+function createHeuristicLabel(r, c, txt) {
+  let labelKey = `${r},${c}`;
+  if (heuristicTexts.has(labelKey)) {
+    let oldLabel = heuristicTexts.get(labelKey);
+    if (oldLabel.parentNode) {
+      oldLabel.parentNode.removeChild(oldLabel);
+    }
+  }
+  let label = document.createElement("div");
+  label.className = "heuristic-label";
+  label.textContent = txt;
+  label.style.left = (c*CELL_SIZE + CELL_SIZE/2 - 8) + "px";
+  label.style.top = (r*CELL_SIZE + CELL_SIZE/2 - 6) + "px";
+  canvasContainer.appendChild(label);
+  heuristicTexts.set(labelKey, label);
+}
+
+/* ================== SPARA/LADDA ================== */
+/* Funktion för att spara labyrint */
+document.getElementById("saveBtn").addEventListener("click", ()=>{
+  let data = {
+    "grid": grid,
+    "start": start,
+    "ends": ends
+  };
+  let jsonStr = JSON.stringify(data, null, 2);
+  let blob = new Blob([jsonStr], {type:"application/json"});
+  let url = URL.createObjectURL(blob);
+
+  let a = document.createElement("a");
+  a.href = url;
+  a.download = "maze.json";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+/* Funktion för att ladda labyrint */
+document.getElementById("loadBtn").addEventListener("click", ()=>{
+  document.getElementById("loadInput").click();
+});
+
+document.getElementById("loadInput").addEventListener("change",(e)=>{
+  let file = e.target.files[0];
+  if (!file) return;
+  let reader = new FileReader();
+  reader.onload = (ev)=>{
+    try {
+      let data = JSON.parse(ev.target.result);
+      if (!data.grid || !data.start || !data.ends) {
+        throw new Error("Ogiltigt format på JSON.");
+      }
+      if (data.grid.length !== GRID_HEIGHT || data.grid[0].length !== GRID_WIDTH) {
+        throw new Error(`Grid-storleken måste vara ${GRID_HEIGHT} rader x ${GRID_WIDTH} kolumner.`);
+      }
+      grid = data.grid;
+      start = data.start;
+      ends = data.ends.map(e => [...e]);
+      // Se till att start och mål är markerade i grid
+      grid[start[0]][start[1]] = 0;
+      ends.forEach(e => {
+        grid[e[0]][e[1]] = 0;
+      });
+      clear_previous_search();
+      draw_grid();
+      setFinalResultText("Labyrinten har laddats.", currentAlgorithm === "A*");
+    } catch (error) {
+      alert("Fel vid inläsning av fil: " + error.message);
+    }
+  };
+  reader.readAsText(file);
+});
+
+/* ================== Fördefinierade Labyrinter ================== */
+const predefinedMazes = {
+  "Exempel 1": {
+    "grid": [
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,0,1,0,1,0,0,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,0,0,0,1,0,1,0,0,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,0,1,1,0,1,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,0,0,0,0,1,0,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ],
+    "start": [11, 7],
+    "ends": [[5, 18]]
+  },
+  "Exempel 2": {
+    "grid": [
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ],
+    "start": [11, 7],
+    "ends": [[5, 18]]
+  },
+  "Exempel 3": {
+    "grid": [
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ],
+    "start": [8, 13],
+    "ends": [
+      [2, 8],
+      [8, 19]
+    ]
+  },
+  "Exempel 4": {
+    "grid": [
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,0,1,3,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,0,1,3,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ],
+    "start": [11, 11],
+    "ends": [
+      [5, 11]
+    ]
+  }
+};
+
+/* Funktion för att ladda en fördefinierad labyrint */
+function loadPredefinedMaze(mazeName){
+  if(!predefinedMazes[mazeName]){
+    alert("Den fördefinierade labyrinten finns inte.");
+    return;
+  }
+  const maze = predefinedMazes[mazeName];
+  // Kopiera grid, start och ends exakt som de är
+  grid = maze.grid.map(row => row.slice());
+  start = [...maze.start];
+  ends = maze.ends.map(e => [...e]);
+  // Inga ytterligare modifieringar behövs eftersom grid redan innehåller start och mål
+  clear_previous_search();
+  draw_grid();
+  setFinalResultText(`Fördefinierad labyrint "${mazeName}" har laddats.`, currentAlgorithm === "A*");
+}
+
+/* Event Listener för fördefinierade labyrinter */
+document.getElementById("predefinedSelect").addEventListener("change", (e) => {
+  const selectedMaze = e.target.value;
+  if(selectedMaze){
+    loadPredefinedMaze(selectedMaze);
+    // Återställ dropdown till default
+    e.target.value = "";
+  }
+});
+
+/* ================= SÖKNING ================== */
+document.getElementById("startSearchBtn").addEventListener("click", ()=>{
+  let alg = document.getElementById("algorithmSelect").value;
+  currentAlgorithm = alg;
+  if (alg==="A*") {
+    start_a_star();
+  } else if (alg==="BFS") {
+    start_bfs();
+  } else if (alg==="DFS") {
+    start_dfs();
+  } else if (alg==="Greedy") {
+    start_greedy_best_first();
+  }
+});
+
+document.getElementById("stepModeChk").addEventListener("change",(e)=>{
+  stepMode = e.target.checked;
+});
+
+document.getElementById("nextStepBtn").addEventListener("click", ()=>{
+  if (!search_in_progress) return;
+  let alg = document.getElementById("algorithmSelect").value;
+  if (alg==="A*") {
+    if (A_STAR_STATE) {
+      let {open_set, came_from, g_score, explored_cells} = A_STAR_STATE;
+      A_STAR_STATE = null;
+      a_star_step(open_set, came_from, g_score, explored_cells);
+    }
+  } else if (alg==="Greedy") {
+    if (GREEDY_STATE) {
+      let {open_set, explored, explored_cells} = GREEDY_STATE;
+      GREEDY_STATE = null;
+      greedy_best_first_step(open_set, explored, explored_cells);
+    }
+  } else if (alg==="BFS") {
+    if (BFS_STATE) {
+      let {queue, explored, explored_cells} = BFS_STATE;
+      BFS_STATE = null;
+      bfs_step(queue, explored, explored_cells);
+    }
+  } else if (alg==="DFS") {
+    if (DFS_STATE) {
+      let {stack, explored, explored_cells} = DFS_STATE;
+      DFS_STATE = null;
+      dfs_step(stack, explored, explored_cells);
+    }
+  }
+});
+
+/* Funktion för att återställa labyrinten */
+document.getElementById("resetBtn").addEventListener("click", resetGrid);
+
+function resetGrid() {
+  ends = [];
+  for (let r=0; r<GRID_HEIGHT; r++){
+    for (let c=0; c<GRID_WIDTH; c++){
+      grid[r][c] = 1;
+    }
+  }
+  grid[start[0]][start[1]] = 0;
+  draw_grid();
+  // Dölj kostnadsfunktion info vid återställning
+  costFunctionInfoDiv.style.display = "none";
+}
+
+/* ========================== INIT ========================== */
+draw_grid();
+// Optional: Ladda en labyrint direkt vid initiering, t.ex. Exempel 1
+// loadPredefinedMaze("Exempel 1");
+</script>
+
+</body>
+</html>
