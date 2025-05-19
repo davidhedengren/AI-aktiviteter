@@ -1,1 +1,1293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Sökalgoritmer i träd</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+    }
+    /* Container för huvudinnehåll */
+    #mainContainer {
+      display: flex;
+      align-items: flex-start;
+    }
+    #canvasContainer {
+      position: relative;
+      display: inline-block;
+      border: 1px solid #ccc;
+    }
+    #treeCanvas {
+      border: 1px solid gray;
+      background-color: #fefefe;
+    }
+    /* Styling för sidopanel med Exempelträd */
+    #predefinedTrees {
+      margin-left: 20px;
+      max-width: 250px;
+    }
+    #predefinedTrees h3 {
+      margin-bottom: 10px;
+    }
+    #predefinedTrees select {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px; /* Separation mellan dropdown och knappar */
+    }
+    /* Styling för knappar under Exempelträd */
+    #predefinedTrees .treeButtons {
+      display: flex;
+      flex-direction: column;
+    }
+    #predefinedTrees .treeButtons button {
+      margin-bottom: 5px; /* Mellanrum mellan knapparna */
+    }
+    /* Styling för informationsfält */
+    #info, #hoverInfo {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+    #controls {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    #leftControls, #rightControls {
+      display: flex;
+      align-items: center;
+    }
+    #leftControls button, #leftControls select, #leftControls label {
+      margin-right: 8px;
+      margin-bottom: 6px;
+    }
+    /* Justera "Rensa sökning" och "Rensa noder" med ytterligare margin-left */
+    #resetBtn {
+      margin-left: 4cm; /* Totalt 4cm från vänster */
+    }
+    #clearNodesBtn {
+      margin-left: 10px; /* Mellanrum mellan "Rensa sökning" och "Rensa noder" */
+    }
+    .instructions {
+      margin-top: 15px;
+      line-height: 1.6em;
+      max-width: 700px;
+    }
+    .color-box {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 6px;
+      vertical-align: middle;
+      border: 1px solid #000;
+      border-radius: 50%;
+    }
+    /* Differentiate the two info boxes */
+    #info {
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    #hoverInfo {
+      background-color: #e0e0ff;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px; /* Mindre textstorlek */
+    }
+  </style>
+</head>
+<body>
 
+<h2>Sökalgoritmer i träd</h2>
+
+<div id="mainContainer">
+  <div id="canvasContainer">
+    <canvas id="treeCanvas" width="900" height="600"></canvas>
+  </div>
+  
+  <div id="predefinedTrees">
+    <h3>Exempelträd</h3>
+    <select id="predefinedSelect">
+      <option value="">-- Välj ett träd --</option>
+      <option value="Exempelträd 1">Exempelträd 1</option>
+      <option value="Exempelträd 2">Exempelträd 2</option>
+      <option value="Exempelträd 3">Exempelträd 3</option>
+      <!-- Lägg till fler träd här om du vill -->
+    </select>
+    
+    <!-- Knappar för att spara och ladda träd -->
+    <div class="treeButtons">
+      <button id="saveBtn">Spara träd</button>
+      <input type="file" id="loadInput" style="display:none;" />
+      <button id="loadBtn">Ladda träd</button>
+    </div>
+  </div>
+</div>
+
+<div id="controls">
+  <div id="leftControls">
+    <label>Algoritm:</label>
+    <select id="algSelect">
+      <option value="BFS">BFS</option>
+      <option value="DFS">DFS</option>
+      <option value="Greedy">Greedy Best-First</option>
+      <option value="A*">A*</option>
+    </select>
+
+    <button id="startBtn">Starta sökning</button>
+    <label><input type="checkbox" id="stepChk"/>Stegvis</label>
+    <button id="nextStepBtn">Nästa steg</button>
+  </div>
+  
+  <div id="rightControls">
+    <button id="resetBtn">Rensa sökning</button>
+    <button id="clearNodesBtn">Rensa noder</button>
+  </div>
+</div>
+
+<!-- Separerade informationsfält -->
+<div id="info"></div>
+<div id="hoverInfo"></div>
+
+<div class="instructions">
+  <h3>Förklaringar</h3>
+  <ul>
+    <li><strong>Startnod:</strong> <span class="color-box" style="background:green;"></span> </li>
+    <li>
+      <strong>Målnod:</strong> Vänsterklicka på en nod för att göra den till målnod (<span class="color-box" style="background:red;"></span>).
+      Klicka igen för att göra den till normal nod ( 
+      <span class="color-box" style="background:white;"></span>).
+      Du kan ha flera mål.
+    </li>
+    <li><strong>Skapa nod:</strong> Klicka i en tom yta.</li>
+    <li><strong>Skapa kant:</strong> Klicka på en nod och dra till en annan. Ange kostnad för kanten.</li>    
+    <li><strong>Flytta nod:</strong> Högerklicka på en nod och dra.</li>
+    <li><strong>Radera nod:</strong> Ctrl + Vänsterklick på nod.</li>
+    <li><strong>Lägga till heuristikvärde h(n) för en nod:</strong> Ctrl + Högerklick på nod.</li>
+   
+  </ul>
+  <p>
+      När du kör en sökning kommer blåa noder (<span class="color-box" style="background:lightskyblue;"></span>) 
+      representera de noder som är utforskade under sökningen, frontiern för A* och Greedy Best-First 
+      sökningar är markerade med orange (<span class="color-box" style="background:orange;"></span>), 
+      och om en väg hittas markeras dess noder som ljusgröna (<span class="color-box" style="background:lightgreen;"></span>).
+  </p>
+
+  <p>
+    Efter en sökning visar systemet <strong>hur många noder som utforskats</strong>, 
+    den <strong>totala sökkostnaden</strong> för alla utforskade noder
+    och <strong>vägkostnaden</strong> (den totala kostnaden för den väg algoritmen har funnit).
+  </p>
+</div>
+
+<script>
+// ===================== DATASTRUKTUR / RITNING =====================
+let nodes = [
+  {id:1, x:399, y:48, edges:[], h:0} // startnod
+];
+let startNodeId = 1; 
+let endNodeIds = new Set();
+let nodeCounter = 1; 
+
+const canvas = document.getElementById("treeCanvas");
+const ctx = canvas.getContext("2d");
+const NODE_RADIUS = 20;
+
+// Sets to track visited nodes and path
+let visitedSet = new Set();
+let pathSet = new Set();
+
+// Variable to track current mouse position during edge drag
+let currentMousePos = null;
+
+// Exempelträd
+const predefinedTrees = {
+  "Exempelträd 1": {
+    "nodes": [
+      {"id":1,"x":399,"y":48,"edges":[{"targetId":2,"cost":1},{"targetId":3,"cost":1}],"h":0},
+      {"id":2,"x":199,"y":151,"edges":[{"targetId":1,"cost":1},{"targetId":4,"cost":1},{"targetId":5,"cost":1}],"h":0},
+      {"id":3,"x":601,"y":151,"edges":[{"targetId":1,"cost":1},{"targetId":6,"cost":1},{"targetId":7,"cost":1}],"h":0},
+      {"id":4,"x":101,"y":250,"edges":[{"targetId":2,"cost":1},{"targetId":8,"cost":1},{"targetId":9,"cost":1}],"h":0},
+      {"id":5,"x":297,"y":251,"edges":[{"targetId":2,"cost":1},{"targetId":10,"cost":1},{"targetId":11,"cost":1}],"h":0},
+      {"id":6,"x":499,"y":251,"edges":[{"targetId":3,"cost":1},{"targetId":12,"cost":1},{"targetId":13,"cost":1}],"h":0},
+      {"id":7,"x":699,"y":252,"edges":[{"targetId":3,"cost":1},{"targetId":14,"cost":1},{"targetId":15,"cost":1}],"h":0},
+      {"id":8,"x":49,"y":347,"edges":[{"targetId":4,"cost":1}],"h":0},
+      {"id":9,"x":152,"y":350,"edges":[{"targetId":4,"cost":1}],"h":0},
+      {"id":10,"x":251,"y":352,"edges":[{"targetId":5,"cost":1}],"h":0},
+      {"id":11,"x":350,"y":352,"edges":[{"targetId":5,"cost":1}],"h":0},
+      {"id":12,"x":451,"y":352,"edges":[{"targetId":6,"cost":1}],"h":0},
+      {"id":13,"x":550,"y":352,"edges":[{"targetId":6,"cost":1}],"h":0},
+      {"id":14,"x":649,"y":351,"edges":[{"targetId":7,"cost":1}],"h":0},
+      {"id":15,"x":749,"y":351,"edges":[{"targetId":7,"cost":1}],"h":0}
+    ],
+    "startNodeId":1,
+    "endNodeIds":[12] // Nod 12 är nu en målnod
+  },
+  "Exempelträd 2": {
+    "nodes": [
+      {
+        "id": 1,
+        "x": 399,
+        "y": 48,
+        "edges": [
+          {
+            "targetId": 2,
+            "cost": 2
+          },
+          {
+            "targetId": 3,
+            "cost": 5
+          }
+        ],
+        "h": 10
+      },
+      {
+        "id": 2,
+        "x": 292,
+        "y": 121,
+        "edges": [
+          {
+            "targetId": 1,
+            "cost": 2
+          },
+          {
+            "targetId": 4,
+            "cost": 2
+          },
+          {
+            "targetId": 5,
+            "cost": 4
+          }
+        ],
+        "h": 8
+      },
+      {
+        "id": 3,
+        "x": 513,
+        "y": 143,
+        "edges": [
+          {
+            "targetId": 1,
+            "cost": 5
+          },
+          {
+            "targetId": 6,
+            "cost": 1
+          }
+        ],
+        "h": 6
+      },
+      {
+        "id": 4,
+        "x": 203,
+        "y": 200,
+        "edges": [
+          {
+            "targetId": 2,
+            "cost": 2
+          },
+          {
+            "targetId": 7,
+            "cost": 1
+          }
+        ],
+        "h": 5
+      },
+      {
+        "id": 5,
+        "x": 348,
+        "y": 199,
+        "edges": [
+          {
+            "targetId": 2,
+            "cost": 4
+          },
+          {
+            "targetId": 8,
+            "cost": 2
+          }
+        ],
+        "h": 5
+      },
+      {
+        "id": 6,
+        "x": 596,
+        "y": 200,
+        "edges": [
+          {
+            "targetId": 3,
+            "cost": 1
+          },
+          {
+            "targetId": 9,
+            "cost": 2
+          }
+        ],
+        "h": 4
+      },
+      {
+        "id": 7,
+        "x": 149,
+        "y": 300,
+        "edges": [
+          {
+            "targetId": 4,
+            "cost": 1
+          },
+          {
+            "targetId": 10,
+            "cost": 3
+          }
+        ],
+        "h": 3
+      },
+      {
+        "id": 8,
+        "x": 448,
+        "y": 299,
+        "edges": [
+          {
+            "targetId": 5,
+            "cost": 2
+          },
+          {
+            "targetId": 11,
+            "cost": 1
+          }
+        ],
+        "h": 2
+      },
+      {
+        "id": 9,
+        "x": 649,
+        "y": 299,
+        "edges": [
+          {
+            "targetId": 6,
+            "cost": 2
+          },
+          {
+            "targetId": 12,
+            "cost": 2
+          }
+        ],
+        "h": 2
+      },
+      {
+        "id": 10,
+        "x": 145,
+        "y": 402,
+        "edges": [
+          {
+            "targetId": 7,
+            "cost": 3
+          },
+          {
+            "targetId": 13,
+            "cost": 2
+          }
+        ],
+        "h": 1
+      },
+      {
+        "id": 11,
+        "x": 350,
+        "y": 351,
+        "edges": [
+          {
+            "targetId": 8,
+            "cost": 1
+          },
+          {
+            "targetId": 14,
+            "cost": 1
+          }
+        ],
+        "h": 1
+      },
+      {
+        "id": 12,
+        "x": 598,
+        "y": 395,
+        "edges": [
+          {
+            "targetId": 9,
+            "cost": 2
+          },
+          {
+            "targetId": 15,
+            "cost": 1
+          }
+        ],
+        "h": 1
+      },
+      {
+        "id": 13,
+        "x": 144,
+        "y": 494,
+        "edges": [
+          {
+            "targetId": 10,
+            "cost": 2
+          }
+        ],
+        "h": 0
+      },
+      {
+        "id": 14,
+        "x": 346,
+        "y": 491,
+        "edges": [
+          {
+            "targetId": 11,
+            "cost": 1
+          }
+        ],
+        "h": 0
+      },
+      {
+        "id": 15,
+        "x": 595,
+        "y": 491,
+        "edges": [
+          {
+            "targetId": 12,
+            "cost": 1
+          }
+        ],
+        "h": 0
+      }
+    ],
+    "startNodeId": 1,
+    "endNodeIds": [
+      13,
+      14,
+      15
+    ]
+  },
+  "Exempelträd 3": {
+    "nodes": [
+      {"id":1,"x":399.1999988555908,"y":47,"edges":[{"targetId":2,"cost":3},{"targetId":3,"cost":4}],"h":0},
+      {"id":2,"x":199.19999885559082,"y":151,"edges":[{"targetId":1,"cost":3},{"targetId":4,"cost":1},{"targetId":5,"cost":2}],"h":5},
+      {"id":3,"x":601.1999988555908,"y":151,"edges":[{"targetId":1,"cost":4},{"targetId":6,"cost":1},{"targetId":7,"cost":2}],"h":3},
+      {"id":4,"x":101.19999885559082,"y":250,"edges":[{"targetId":2,"cost":1},{"targetId":8,"cost":3},{"targetId":9,"cost":2}],"h":6},
+      {"id":5,"x":297.1999988555908,"y":251,"edges":[{"targetId":2,"cost":2},{"targetId":10,"cost":1},{"targetId":11,"cost":3}],"h":3},
+      {"id":6,"x":499.1999988555908,"y":251,"edges":[{"targetId":3,"cost":1},{"targetId":12,"cost":1},{"targetId":13,"cost":3}],"h":5},
+      {"id":7,"x":699.1999988555908,"y":252,"edges":[{"targetId":3,"cost":2},{"targetId":14,"cost":4},{"targetId":15,"cost":2}],"h":2},
+      {"id":8,"x":49.19999885559082,"y":347,"edges":[{"targetId":4,"cost":3}],"h":7},
+      {"id":9,"x":152.19999885559082,"y":350,"edges":[{"targetId":4,"cost":2},{"targetId":16,"cost":2},{"targetId":17,"cost":2}],"h":9},
+      {"id":10,"x":251.19999885559082,"y":352,"edges":[{"targetId":5,"cost":1}],"h":4},
+      {"id":11,"x":350.1999988555908,"y":352,"edges":[{"targetId":5,"cost":3},{"targetId":18,"cost":1},{"targetId":19,"cost":5}],"h":1},
+      {"id":12,"x":451.1999988555908,"y":352,"edges":[{"targetId":6,"cost":1}],"h":6},
+      {"id":13,"x":550.1999988555908,"y":352,"edges":[{"targetId":6,"cost":3},{"targetId":20,"cost":3},{"targetId":21,"cost":2}],"h":6},
+      {"id":14,"x":649.1999988555908,"y":351,"edges":[{"targetId":7,"cost":4}],"h":0},
+      {"id":15,"x":749.1999988555908,"y":351,"edges":[{"targetId":7,"cost":2}],"h":3},
+      {"id":16,"x":106,"y":451.5859375,"edges":[{"targetId":9,"cost":2}],"h":8},
+      {"id":17,"x":183,"y":448.5859375,"edges":[{"targetId":9,"cost":2}],"h":9},
+      {"id":18,"x":303,"y":451.5859375,"edges":[{"targetId":11,"cost":1}],"h":3},
+      {"id":19,"x":391,"y":452.5859375,"edges":[{"targetId":11,"cost":5}],"h":0},
+      {"id":20,"x":515,"y":450.5859375,"edges":[{"targetId":13,"cost":3}],"h":7},
+      {"id":21,"x":599,"y":449.5859375,"edges":[{"targetId":13,"cost":2}],"h":7}
+    ],
+    "startNodeId":1,
+    "endNodeIds":[14,19]
+  }
+  // Lägg till fler träd efter behov
+};
+
+// Funktion för att ladda ett fördefinierat träd
+function loadPredefinedTree(treeName){
+  if(!predefinedTrees[treeName]){
+    alert("Det fördefinierade trädet finns inte.");
+    return;
+  }
+  const tree = predefinedTrees[treeName];
+  // Kopiera noder för att undvika referensproblem
+  nodes = JSON.parse(JSON.stringify(tree.nodes));
+  startNodeId = tree.startNodeId;
+  endNodeIds = new Set(tree.endNodeIds);
+  // Uppdatera nodeCounter
+  nodeCounter = Math.max(...nodes.map(n => n.id));
+  resetSearch();
+  setInfo(`Exempelträd "${treeName}" har laddats.`);
+  // Uppdatera hoverInfo beroende på vald algoritm
+  let currentAlg = document.getElementById("algSelect").value;
+  if(currentAlg === "A*"){
+    setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n)).");
+  } else {
+    setHoverInfo("");
+  }
+  drawAll();
+}
+
+// Event Listener för Exempelträd
+document.getElementById("predefinedSelect").addEventListener("change", (e) => {
+  const selectedTree = e.target.value;
+  if(selectedTree){
+    loadPredefinedTree(selectedTree);
+    // Återställ dropdown till default
+    e.target.value = "";
+  }
+});
+
+function drawAll(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  // Rita grid
+  ctx.strokeStyle="#eee";
+  ctx.lineWidth=1;
+  for(let x=0;x<canvas.width;x+=50){
+    ctx.beginPath();
+    ctx.moveTo(x,0); 
+    ctx.lineTo(x,canvas.height);
+    ctx.stroke();
+  }
+  for(let y=0;y<canvas.height;y+=50){
+    ctx.beginPath();
+    ctx.moveTo(0,y);
+    ctx.lineTo(canvas.width,y);
+    ctx.stroke();
+  }
+
+  // Rita kanter
+  ctx.lineWidth=2;
+  ctx.strokeStyle="#666";
+  ctx.font="14px sans-serif";
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
+  for(let n of nodes){
+    n.edges = n.edges.filter(ed => getNodeById(ed.targetId));
+    for(let ed of n.edges){
+      let c = getNodeById(ed.targetId);
+      // Förhindra dubbla kanter genom att endast rita om n.id < c.id
+      if(n.id < c.id){
+        ctx.beginPath();
+        ctx.moveTo(n.x,n.y);
+        ctx.lineTo(c.x,c.y);
+        ctx.stroke();
+        
+        // Beräkna mittpunkten
+        let mx = (n.x + c.x)/2;
+        let my = (n.y + c.y)/2;
+        
+        // Beräkna offset för texten
+        let dx = c.x - n.x;
+        let dy = c.y - n.y;
+        let length = Math.sqrt(dx*dx + dy*dy);
+        if(length === 0) length = 1; // För att undvika division med noll
+        // En liten offset, t.ex. 10 pixlar
+        let offset = 10;
+        let offsetX = -dy / length * offset;
+        let offsetY = dx / length * offset;
+        
+        // Applicera offset
+        let labelX = mx + offsetX;
+        let labelY = my + offsetY;
+        
+        ctx.fillStyle="#333";
+        ctx.fillText(ed.cost.toString(), labelX, labelY);
+      }
+    }
+  }
+
+  // Rita noder
+  let currentAlg = document.getElementById("algSelect").value;
+  for(let n of nodes){
+    let color = "white";
+    
+    // Bestäm färg baserat på nodens status
+    if (pathSet.has(n.id)) {
+      color = "lightgreen";
+    } else if (n.id === startNodeId) {
+      color = "green";
+    } else if (endNodeIds.has(n.id)) {
+      color = "red";
+    } else if (
+      (currentAlg === "Greedy" && GREEDY_STATE && GREEDY_STATE.frontier && GREEDY_STATE.frontier.has(n.id)) ||
+      (currentAlg === "A*" && ASTAR_STATE && ASTAR_STATE.frontier && ASTAR_STATE.frontier.has(n.id))
+    ) {
+      color = "orange"; // Frontier-noder
+    } else if (visitedSet.has(n.id)) {
+      color = "lightskyblue";
+    }
+
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(n.x,n.y,NODE_RADIUS,0,2*Math.PI);
+    ctx.fill();
+    ctx.strokeStyle="#333";
+    ctx.stroke();
+
+    // Rita nodens ID
+    ctx.fillStyle="#000";
+    ctx.fillText(n.id.toString(), n.x, n.y);
+
+    // Visa h(n) om det inte är 0
+    if(n.h !== 0) {
+      ctx.fillStyle = "blue";
+      // Rita texten strax ovanför noden
+      ctx.fillText("h=" + n.h, n.x, n.y - NODE_RADIUS - 12);
+    }
+  }
+
+  // Rita temporär kant vid edgeDrag
+  if(edgeDrag && firstNode && currentMousePos){
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(firstNode.x, firstNode.y);
+    ctx.lineTo(currentMousePos.x, currentMousePos.y);
+    ctx.stroke();
+  }
+ctx.font = "14px Arial";
+  ctx.fillStyle = "rgba(0, 0, 0, 0.5)"; // Svart med 50% transparens
+  ctx.textAlign = "right";
+  ctx.fillText("Skapad av David Hedengren", canvas.width - 10, canvas.height - 10);
+}
+
+function getNodeById(id){
+  return nodes.find(n=> n.id===id);
+}
+
+function setInfo(msg){
+  document.getElementById("info").textContent=msg;
+}
+
+function setHoverInfo(msg){
+  document.getElementById("hoverInfo").textContent=msg;
+}
+
+// =================== Interaktivitet (noder/kanter) ===================
+let draggingNode = null;
+let draggingRight = false;
+let dragOffset = {x:0,y:0};
+let edgeDrag = false;
+let firstNode = null;
+
+canvas.addEventListener("contextmenu", e => e.preventDefault());
+
+function getMousePos(e){
+  let r = canvas.getBoundingClientRect();
+  return {x: e.clientX - r.left, y: e.clientY - r.top};
+}
+
+function findNodeAt(x,y){
+  for(let n of nodes){
+    let dx = x - n.x, dy = y - n.y;
+    if(dx*dx + dy*dy <= NODE_RADIUS*NODE_RADIUS) return n;
+  }
+  return null;
+}
+
+function removeNode(n){
+  if(n.id === startNodeId){
+    setInfo("Kan ej ta bort startnoden.");
+    return;
+  }
+  nodes = nodes.filter(nd => nd !== n);
+  for(let nd of nodes){
+    nd.edges = nd.edges.filter(ed => ed.targetId !== n.id);
+  }
+  endNodeIds.delete(n.id);
+  resetSearch();
+  setInfo("Tog bort nod "+n.id);
+  drawAll();
+}
+
+function addOrUpdateEdge(fromN,toN,cost){
+  let ex = fromN.edges.find(ed => ed.targetId === toN.id);
+  if(ex) ex.cost = cost;
+  else fromN.edges.push({targetId: toN.id, cost});
+}
+
+canvas.addEventListener("mousedown", e => {
+  e.preventDefault();
+  let pos = getMousePos(e);
+  let clicked = findNodeAt(pos.x, pos.y);
+
+  if(e.button === 2){
+    // Högerklick
+    if(e.ctrlKey && clicked){
+      let val = prompt(`Heuristikvärde för nod ${clicked.id}? (nuvarande h=${clicked.h})`, String(clicked.h));
+      if(val !== null){
+        let num = parseFloat(val);
+        if(isNaN(num)) num = 0;  // Fallback till 0 om ogiltig inmatning
+        clicked.h = num;
+        setInfo(`Satte h(${clicked.id})=${num}`);
+        resetSearch(); // Starta om sökresultat då heuristiken ändrats
+        drawAll();
+      }
+      return; // Avbryt här så vi inte fortsätter med dragning
+    }
+
+    // Dragga noden
+    if(clicked){
+      draggingNode = clicked;
+      draggingRight = true;
+      dragOffset.x = pos.x - clicked.x;
+      dragOffset.y = pos.y - clicked.y;
+    }
+  }
+  else if(e.button === 0){
+    // Vänsterklick
+    if(clicked){
+      if(e.ctrlKey){
+        removeNode(clicked);
+        return;
+      }
+      firstNode = clicked;
+      edgeDrag = true;
+    } else {
+      // Skapa nod
+      nodeCounter++;
+      let newN = {id: nodeCounter, x: pos.x, y: pos.y, edges:[], h:0};
+      nodes.push(newN);
+      resetSearch();
+      setInfo("Skapade nod "+newN.id);
+      drawAll();
+    }
+  }
+});
+
+canvas.addEventListener("mousemove", e => {
+  if(draggingRight && draggingNode){
+    let pos = getMousePos(e);
+    draggingNode.x = pos.x - dragOffset.x;
+    draggingNode.y = pos.y - dragOffset.y;
+    drawAll();
+  }
+  if(edgeDrag){
+    currentMousePos = getMousePos(e);
+    drawAll();
+  }
+});
+
+canvas.addEventListener("mouseup", e => {
+  e.preventDefault();
+  let pos = getMousePos(e);
+  let r = findNodeAt(pos.x, pos.y);
+
+  if(e.button === 2){
+    draggingNode = null;
+    draggingRight = false;
+    drawAll();
+  } else if(e.button === 0){
+    if(edgeDrag && firstNode){
+      if(r && r !== firstNode){
+        let cStr = prompt(`Kostnad för kant mellan ${firstNode.id} och ${r.id}?`,"1");
+        if(!cStr){
+          setInfo("Avbryter kant.");
+        } else {
+          let c = parseFloat(cStr);
+          if(isNaN(c)|| c <= 0){
+            setInfo("Ogiltig kostnad.");
+          } else {
+            addOrUpdateEdge(firstNode, r, c);
+            addOrUpdateEdge(r, firstNode, c);
+            resetSearch();
+            setInfo(`Kant: ${firstNode.id}<->${r.id}, cost=${c}`);
+          }
+        }
+      } else if(r && r === firstNode){
+        if(r.id === startNodeId){
+          setInfo("Kan ej göra startnoden till mål.");
+        } else {
+          if(endNodeIds.has(r.id)){
+            endNodeIds.delete(r.id);
+            setInfo(`Nod ${r.id} ej längre mål.`);
+          } else {
+            endNodeIds.add(r.id);
+            setInfo(`Nod ${r.id} är nu mål.`);
+          }
+          resetSearch();
+        }
+      }
+      // Sätt variabler till null innan drawAll()
+      firstNode = null;
+      edgeDrag = false;
+      currentMousePos = null; // Reset temporary mouse position
+      drawAll();
+    }
+  }
+});
+
+window.addEventListener("mouseup", e => {
+  draggingRight = false;
+  draggingNode = null;
+  edgeDrag = false;
+  firstNode = null;
+  currentMousePos = null; // Reset temporary mouse position
+});
+
+// ================== SPARA/LADDA ==================
+// Event listeners för save och load
+document.getElementById("saveBtn").addEventListener("click",()=>{
+  let data = {
+    nodes,
+    startNodeId,
+    endNodeIds: Array.from(endNodeIds)
+  };
+  let js = JSON.stringify(data, null, 2); // För bättre läsbarhet
+  let blob = new Blob([js], {type:'application/json'});
+  let url = URL.createObjectURL(blob);
+
+  let a = document.createElement("a");
+  a.href = url;
+  a.download = "tree.json";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById("loadBtn").addEventListener("click",()=>{
+  document.getElementById("loadInput").click();
+});
+
+document.getElementById("loadInput").addEventListener("change", e=>{
+  let file = e.target.files[0];
+  if(!file)return;
+  let rdr = new FileReader();
+  rdr.onload = ev=>{
+    try {
+      let data = JSON.parse(ev.target.result);
+      if(!data.nodes || !data.startNodeId || !data.endNodeIds){
+        throw new Error("Ogiltigt format på JSON.");
+      }
+      nodes = data.nodes.map(n => ({...n})); // Kopiera noder
+      startNodeId = data.startNodeId;
+      endNodeIds = new Set(data.endNodeIds);
+      let maxId = 1;
+      for(let nd of nodes){
+        if(nd.id > maxId) maxId = nd.id;
+      }
+      nodeCounter = maxId;
+      resetSearch();
+      setInfo("Träd laddat.");
+      // Uppdatera hoverInfo beroende på vald algoritm
+      let currentAlg = document.getElementById("algSelect").value;
+      if(currentAlg === "A*"){
+        setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n)).");
+      } else {
+        setHoverInfo("");
+      }
+      drawAll();
+    } catch (error) {
+      alert("Fel vid inläsning av fil: " + error.message);
+    }
+  };
+  rdr.readAsText(file);
+});
+
+document.getElementById("clearNodesBtn").addEventListener("click",()=>{
+  let st = getNodeById(startNodeId);
+  if(!st){
+    setInfo("Startnoden saknas, kan ej rensa.");
+    setHoverInfo("");
+    return;
+  }
+  nodes = [st];
+  st.edges = [];
+  endNodeIds.clear();
+  nodeCounter = st.id;
+  resetSearch();
+  setInfo("Rensade alla noder utom startnoden.");
+  // Uppdatera hoverInfo beroende på vald algoritm
+  let currentAlg = document.getElementById("algSelect").value;
+  if(currentAlg === "A*"){
+    setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n)).");
+  } else {
+    setHoverInfo("");
+  }
+  drawAll();
+});
+
+// ================= SÖKNING ==================
+document.getElementById("resetBtn").addEventListener("click", resetSearch);
+document.getElementById("startBtn").addEventListener("click", startSearch);
+document.getElementById("nextStepBtn").addEventListener("click", onNextStep);
+
+let stepMode = false;
+document.getElementById("stepChk").addEventListener("change", e=>{
+  stepMode = e.target.checked;
+});
+
+let BFS_STATE = null, DFS_STATE = null, GREEDY_STATE = null, ASTAR_STATE = null;
+let search_in_progress = false;
+
+// ---------- Queue Classes ----------
+class SimpleQueue {
+  constructor(){ this.q=[]; }
+  enqueue(x){ this.q.push(x); }
+  dequeue(){ return this.q.shift(); }
+  empty(){ return this.q.length===0; }
+}
+
+class PriorityQ {
+  constructor(){ this.data=[]; }
+  push(o){
+    this.data.push(o);
+    this.data.sort((a,b)=> a.priority - b.priority);
+  }
+  pop(){ return this.data.shift(); }
+  empty(){return this.data.length===0;}
+}
+
+// ---------- Search Functions ----------
+function resetSearch(){
+  visitedSet.clear();
+  pathSet.clear();
+  BFS_STATE = DFS_STATE = GREEDY_STATE = ASTAR_STATE = null;
+  search_in_progress = false;
+  setInfo("");
+  // Uppdatera hoverInfo beroende på vald algoritm
+  let currentAlg = document.getElementById("algSelect").value;
+  if(currentAlg === "A*"){
+    setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n)).");
+  } else {
+    setHoverInfo("");
+  }
+  drawAll();
+}
+
+function startSearch(){
+  if(!getNodeById(startNodeId)){
+    setInfo("Startnoden saknas!");
+    setHoverInfo("");
+    return;
+  }
+  if(endNodeIds.size === 0){
+    setInfo("Ingen målnod vald.");
+    setHoverInfo("");
+    return;
+  }
+  resetSearch();
+  let alg = document.getElementById("algSelect").value;
+  if(alg === "BFS") startBFS();
+  else if(alg === "DFS") startDFS();
+  else if(alg === "Greedy") startGreedy();
+  else if(alg === "A*") startAstar();
+}
+
+function onNextStep(){
+  if(!search_in_progress) return;
+  let alg = document.getElementById("algSelect").value;
+  if(alg === "BFS")       bfsStep();
+  else if(alg === "DFS")  dfsStep();
+  else if(alg === "Greedy")greedyStep();
+  else if(alg === "A*")   aStarStep();
+}
+
+// ---------- BFS -----------
+function startBFS(){
+  search_in_progress = true;
+  let q = new SimpleQueue();
+  // Lägg till startnoden med initiala värden
+  q.enqueue({id:startNodeId, path:[startNodeId], costSoFar:0, parentCostSoFar:0});
+
+  BFS_STATE = {
+    queue: q,
+    visited: new Set([startNodeId]),
+    expansionsCount: 0,
+    expansionsCost: 0
+  };
+  bfsStep();
+}
+
+function bfsStep(){
+  if(!search_in_progress) return;
+  let st = BFS_STATE;
+  if(st.queue.empty()){
+    setInfo("Ingen väg funnen (BFS).");
+    setHoverInfo(""); // Ingen kostnadsfunktion att visa
+    search_in_progress = false;
+    return;
+  }
+  let current = st.queue.dequeue();
+  st.expansionsCount++;
+
+  let lastEdgeCost = current.costSoFar - current.parentCostSoFar;
+  st.expansionsCost += lastEdgeCost;
+
+  if(endNodeIds.has(current.id)){
+    for(let x of current.path) pathSet.add(x);
+    drawAll();
+    let msg = `Utforskade noder = ${st.expansionsCount}, Total kostnad för sökningen = ${st.expansionsCost}, Vägkostnad = ${current.costSoFar}`;
+    setInfo(msg);
+    setHoverInfo(""); // Ingen kostnadsfunktion att visa
+    search_in_progress = false;
+    return;
+  }
+
+  let node = getNodeById(current.id);
+  for(let ed of node.edges){
+    let cId = ed.targetId;
+    if(!st.visited.has(cId)){
+      st.visited.add(cId);
+      let childCost = current.costSoFar + ed.cost;
+      st.queue.enqueue({
+        id: cId,
+        path: [...current.path, cId],
+        costSoFar: childCost,
+        parentCostSoFar: current.costSoFar
+      });
+    }
+  }
+  visitedSet.add(current.id);
+  drawAll();
+  if(!stepMode) setTimeout(bfsStep,400);
+}
+
+// ---------- DFS -----------
+function startDFS(){
+  search_in_progress = true;
+  let stack = [];
+  stack.push({id:startNodeId, path:[startNodeId], costSoFar:0, parentCostSoFar:0});
+  DFS_STATE = {
+    stack,
+    visited: new Set([startNodeId]),
+    expansionsCount: 0,
+    expansionsCost: 0
+  };
+  dfsStep();
+}
+
+function dfsStep(){
+  if(!search_in_progress)return;
+  let st = DFS_STATE;
+  if(st.stack.length === 0){
+    setInfo("Ingen väg funnen (DFS).");
+    setHoverInfo(""); // Ingen kostnadsfunktion att visa
+    search_in_progress = false;
+    return;
+  }
+  let current = st.stack.pop();
+  st.expansionsCount++;
+
+  let lastEdgeCost = current.costSoFar - current.parentCostSoFar;
+  st.expansionsCost += lastEdgeCost;
+
+  if(endNodeIds.has(current.id)){
+    for(let x of current.path) pathSet.add(x);
+    drawAll();
+    let msg = `Utforskade noder = ${st.expansionsCount}, Total kostnad för sökningen = ${st.expansionsCost}, Vägkostnad = ${current.costSoFar}`;
+    setInfo(msg);
+    setHoverInfo(""); // Ingen kostnadsfunktion att visa
+    search_in_progress = false;
+    return;
+  }
+
+  let node = getNodeById(current.id);
+  let children = [...node.edges];
+  children.sort((a,b)=> a.targetId - b.targetId);
+  children.reverse();
+  for(let ed of children){
+    if(!st.visited.has(ed.targetId)){
+      st.visited.add(ed.targetId);
+      let childCost = current.costSoFar + ed.cost;
+      st.stack.push({
+        id: ed.targetId,
+        path: [...current.path, ed.targetId],
+        costSoFar: childCost,
+        parentCostSoFar: current.costSoFar
+      });
+    }
+  }
+  visitedSet.add(current.id);
+  drawAll();
+  if(!stepMode) setTimeout(dfsStep,400);
+}
+
+// ---------- Greedy -----------
+function startGreedy(){
+  search_in_progress = true;
+  let pq = new PriorityQ();
+  let hVal = getNodeById(startNodeId).h || 0;
+  pq.push({id:startNodeId, path:[startNodeId], costSoFar:0, parentCostSoFar:0, priority:hVal});
+  GREEDY_STATE = {
+    pq,
+    visited: new Set([startNodeId]),
+    expansionsCount: 0,
+    expansionsCost: 0,
+    frontier: new Set([startNodeId]) // Frontier Set
+  };
+  greedyStep();
+}
+
+function greedyStep(){
+  if(!search_in_progress) return;
+  let st = GREEDY_STATE;
+  if(st.pq.empty()){
+    setInfo("Ingen väg funnen (Greedy).");
+    setHoverInfo(""); // Ingen kostnadsfunktion att visa
+    search_in_progress = false;
+    return;
+  }
+  let current = st.pq.pop();
+  st.frontier.delete(current.id); // Ta bort från frontier
+  st.expansionsCount++;
+
+  let lastEdgeCost = current.costSoFar - current.parentCostSoFar;
+  st.expansionsCost += lastEdgeCost;
+
+  if(endNodeIds.has(current.id)){
+    for(let x of current.path) pathSet.add(x);
+    drawAll();
+    let msg = `Utforskade noder = ${st.expansionsCount}, Total kostnad för sökningen = ${st.expansionsCost}, Vägkostnad = ${current.costSoFar}`;
+    setInfo(msg);
+    setHoverInfo(""); // Ingen kostnadsfunktion att visa
+    search_in_progress = false;
+    return;
+  }
+
+  let node = getNodeById(current.id);
+  for(let ed of node.edges){
+    if(!st.visited.has(ed.targetId)){
+      st.visited.add(ed.targetId);
+      let childCost = current.costSoFar + ed.cost;
+      let hh = getNodeById(ed.targetId).h || 0;
+      st.pq.push({
+        id: ed.targetId,
+        path: [...current.path, ed.targetId],
+        costSoFar: childCost,
+        parentCostSoFar: current.costSoFar,
+        priority: hh
+      });
+      st.frontier.add(ed.targetId); // Lägg till i frontier
+    }
+  }
+  visitedSet.add(current.id);
+  drawAll();
+  if(!stepMode) setTimeout(greedyStep,400);
+}
+
+// ---------- A* -----------
+function startAstar(){
+  search_in_progress = true;
+  let pq = new PriorityQ();
+  let gScore = {};
+  for(let n of nodes){
+    gScore[n.id] = Infinity;
+  }
+  gScore[startNodeId] = 0;
+  let hVal = getNodeById(startNodeId).h || 0;
+  pq.push({id:startNodeId, path:[startNodeId], costSoFar:0, parentCostSoFar:0, priority:hVal});
+
+  ASTAR_STATE = {
+    pq,
+    gScore,
+    expansionsCount: 0,
+    expansionsCost: 0,
+    frontier: new Set([startNodeId]) // Frontier Set
+  };
+  aStarStep();
+}
+
+function aStarStep(){
+  if(!search_in_progress)return;
+  let st = ASTAR_STATE;
+  if(st.pq.empty()){
+    setInfo("Ingen väg funnen (A*).");
+    setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n))."); // Bevara instruktionen
+    search_in_progress = false;
+    return;
+  }
+  let current = st.pq.pop();
+  st.frontier.delete(current.id); // Ta bort från frontier
+  st.expansionsCount++;
+
+  let lastEdgeCost = current.costSoFar - current.parentCostSoFar;
+  st.expansionsCost += lastEdgeCost;
+
+  if(endNodeIds.has(current.id)){
+    for(let x of current.path) pathSet.add(x);
+    drawAll();
+    let msg = `Utforskade noder = ${st.expansionsCount}, Total kostnad för sökningen = ${st.expansionsCost}, Vägkostnad = ${current.costSoFar}`;
+    setInfo(msg);
+    setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n))."); // Bevara instruktionen
+    search_in_progress = false;
+    return;
+  }
+
+  let node = getNodeById(current.id);
+  let gCur = st.gScore[current.id];
+  for(let ed of node.edges){
+    let cId = ed.targetId;
+    let newG = gCur + ed.cost;
+    if(newG < st.gScore[cId]){
+      st.gScore[cId] = newG;
+      let hh = getNodeById(cId).h || 0;
+      let f = newG + hh;
+      let newPath = [...current.path, cId];
+      let childObj = {
+        id: cId,
+        path: newPath,
+        costSoFar: newG,
+        parentCostSoFar: current.costSoFar,
+        priority: f
+      };
+      st.pq.push(childObj);
+      st.frontier.add(cId); // Lägg till i frontier
+    }
+  }
+  visitedSet.add(current.id);
+  drawAll();
+  if(!stepMode) setTimeout(aStarStep,400);
+}
+
+// A*: visa f(n) i hoverInfo endast vid A*
+canvas.addEventListener("mousemove", e=>{
+  let alg = document.getElementById("algSelect").value;
+  if(alg !== "A*"){
+    setHoverInfo("");
+    return;
+  }
+  let st = ASTAR_STATE;
+  if(!st || !st.gScore){
+    setHoverInfo("");
+    return;
+  }
+  let mp = getMousePos(e);
+  let n = findNodeAt(mp.x, mp.y);
+  if(!n){
+    setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n)).");
+    return;
+  }
+  let gVal = st.gScore[n.id];
+  if(gVal === Infinity){
+    setHoverInfo(`Ej upptäckt. h=${n.h || 0}`);
+    return;
+  }
+  let fVal = gVal + (n.h || 0);
+  setHoverInfo(`f(n)=g(n)+h(n)=${gVal}+${n.h || 0}=${fVal}`);
+});
+
+// ========================== INIT ==========================
+function initialize(){
+  drawAll();
+  // Initial setting of hoverInfo based on default selected algorithm
+  let currentAlg = document.getElementById("algSelect").value;
+  if(currentAlg === "A*"){
+    setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n)).");
+  } else {
+    setHoverInfo("");
+  }
+}
+initialize();
+
+// Uppdatera hoverInfo när algoritm ändras
+document.getElementById("algSelect").addEventListener("change", ()=>{
+  let currentAlg = document.getElementById("algSelect").value;
+  if(currentAlg === "A*"){
+    if(!search_in_progress){
+      setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n)).");
+    }
+  } else {
+    setHoverInfo("");
+  }
+});
+</script>
+</body>
+</html>
