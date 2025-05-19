@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <title>Q-Learning Simuering</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .page-container {
+      max-width: 1050px;
+      margin: 0 auto;
+    }
+    .header-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .header-container h1 {
+      margin-bottom: 10px;
+    }
+    #intro {
+      width: 100%;
+      padding: 10px;
+      text-align: justify;
+      font-size: 1em;
+      line-height: 1.5;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+    }
+    .main-container {
+      display: flex;
+      gap: 20px;
+    }
+    .left-wrapper {
+      width: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #canvas {
+      border: 1px solid #888;
+      background-color: #fff;
+      cursor: pointer;
+    }
+    .controls {
+      margin-top: 10px;
+      width: 100%;
+    }
+    .controls-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 5px;
+    }
+    #logText {
+      width: 100%;
+      height: 200px;
+      margin-top: 10px;
+      resize: none;
+    }
+    .right-wrapper {
+      width: 500px;
+    }
+    #description {
+      width: 100%;
+      padding: 20px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+      line-height: 1.5;
+      box-sizing: border-box;
+      background-color: #f9f9f9;
+    }
+    #hoverInfo {
+      position: absolute;
+      background-color: #fff;
+      border: 1px solid #888;
+      padding: 5px;
+      font-size: 0.9em;
+      display: none;
+      pointer-events: none;
+      z-index: 100;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <div class="header-container">
+      <h1>Q-learning simulering</h1>
+      <div id="intro">
+        <p>
+          Välkommen till denna Q-Learning simulering! I denna simulering tränas en agent att navigera genom en 10×10-matris till att samla in alla mynt och sedan ta sig till målcellen.
+        </p>
+      </div>
+    </div>
+    <div class="main-container">
+      <div class="left-wrapper">
+        <canvas id="canvas"></canvas>
+        <div class="controls">
+          <div class="controls-row">
+            <button id="trainButton">Starta träning</button>
+            <button id="pauseButton">Pausa</button>
+            <button id="qToggleButton">Visa Q-värden: Av</button>
+            <button id="policyButton">Visa Policy: Av</button>
+            <button id="resetButton">Återställ träning</button>
+            <button id="testButton" style="display: none;">Testa Modellen</button>
+          </div>
+          <div class="controls-row">
+            <label>Simuleringshastighet:
+              <input type="range" id="speedSlider" min="0" max="5000" value="100">
+            </label>
+          </div>
+          <div class="controls-row">
+            <label>
+              <input type="checkbox" id="stepModeCheckbox">
+              Stegvis läge
+            </label>
+            <button id="nextStepButton" disabled>Nästa steg</button>
+          </div>
+          <div class="controls-row">
+            <div id="infoLabel">Episod: 0, Steg: 0</div>
+          </div>
+          <div class="controls-row">
+            <label>
+              <input type="checkbox" id="editModeCheckbox">
+              Redigeringsläge
+            </label>
+          </div>
+          <div class="controls-row" id="paramInfo"></div>
+        </div>
+        <textarea id="logText" readonly></textarea>
+      </div>
+      <div class="right-wrapper">
+        <div id="description">
+          <p><strong>Begrepp:</strong></p>
+          <ul>
+            <li><em>State (s):</em> Agentens tillstånd, bestående av dess position samt den aktuella konfigurationen av åtestående mynt. (0,0,09,33 innebär att agenten är i cell (0,0) och har kvar mynt i cellerna (0,9) och (3,3)</li>
+            <li><em>Action (a):</em> Den valda handlingen (upp, höger, ner eller vänster).</li>
+            <li><em>Reward (r):</em> Belöningen eller straffet för en handling.</li>
+            <li><em>Next state (s'):</em> Tillståndet efter att handlingen utförts.</li>
+            <li><em>α (inlärningshastighet) &amp; γ (diskonteringsfaktor):</em> Parametrar som styr hur snabbt och med vilken vikt Q‑värdena uppdateras.</li>
+            <li><em>ε (epsilon):</em> Sannolikheten att agenten väljer en slumpmässig handling (utforskning) istället för den bästa kända handlingen (exploatering).</li>
+          </ul>
+          <p><strong>Miljö och belöningssystem:</strong></p>
+          <ul>
+            <li><em>Agenten:</em> Orange cirkel. Startar längst ner till vänster.</li>
+            <li><em>Mål:</em> Grön ruta. Om agenten når målet utan att ha samlat alla mynt ges ett straff på -20.</li>
+            <li><em>Mynt:</em> Gul cirkel. Varje mynt ger agenten en extra belöning på +10 poäng när det samlas in.</li>
+            <li><em>Stegstraff:</em> Varje steg kostar -0.1, vilket uppmuntrar till kortare vägar.</li>
+          </ul>
+          <p><strong>Rutornas färg ändras baserat på Q‑värden:</strong></p>
+          <ul>
+            <li>Ju lägre Q-värde en cell har desto rödare blir den – vilket indikerar sämre prestanda.</li>
+            <li>Ju högre Q-värde en cell har desto blåare blir den – vilket indikerar bättre prestanda.</li>
+            <li>Genom att klicka i "Visa Q-värden" kan du se aktuella Q-värden för samtliga actions i varje ruta.</li>
+            <li>Om du håller muspekaren över en cell visas de aktuella Q-värdena för den cellen.</li>
+          </ul>
+          <p><strong>Redigeringsläge:</strong></p>
+          <ul>
+            <li>När redigeringsläget är aktivt kan du:
+              <ul>
+                <li>Lägga till eller ta bort hinder med vänsterklick.</li>
+                <li>Lägga till eller ta bort mynt med högerklick.</li>
+                <li>Flytta start- och målceller genom att dra och släppa dem.</li>
+                <li>Redigera värdena för α, γ och ε för att se hur olika parametrar påverkar inlärningen.</li>
+              </ul>
+            </li>
+          </ul>
+          <p><strong>Övrigt:</strong></p>
+          <ul>
+            <li>När modellen har konvergerat ("tränats klart") kan du välja att "Visa Policy" för att se bästa action i respektive ruta.</li>
+            <li>I loggen visas beräkningen för uppdateringen av Q-värdet i cellen för varje steg, enligt formeln: 
+              $$ Q(s,a) = Q(s,a) + \alpha \Bigl( r + \gamma \max_{a'} Q(s',a') - Q(s,a) \Bigr) $$</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="hoverInfo"></div>
+  <script>
+    function getCoinKeyFrom(coinsArray) {
+      let coinsCopy = coinsArray.slice();
+      coinsCopy.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+      return coinsCopy.map(c => c[0] + "_" + c[1]).join(";");
+    }
+    const defaultCoins = [[0,9], [3,3], [9,0], [7,7]];
+    const customObstacles = [
+      [0,8], [1,8],
+      [2,2], [2,3], [2,4],
+      [3,2], [3,6],
+      [4,4], [4,5], [4,6], [4,8],
+      [5,3], [5,4], [5,8],
+      [6,4], [6,6], [6,8],
+      [7,6], [7,8],
+      [8,1], [8,6], [8,7], [8,8],
+      [9,1]
+    ];
+    const GRID_WIDTH = 10;
+    const GRID_HEIGHT = 10;
+    const CELL_SIZE = 50;
+    const COIN_REWARD = 10;
+    const EARLY_GOAL_PENALTY = -20;
+    const VISITED_COIN_PENALTY = -2;
+    const STEP_PENALTY = -0.1;
+    const INITIAL_Q = 5.0;
+    const EPSILON_DECAY = 0.995;
+    const MIN_EPSILON = 0.01;
+    class GridWorld {
+      constructor(width, height) {
+        this.width = width;
+        this.height = height;
+        this.obstacles = customObstacles.slice();
+        this.goal = [width - 1, height - 1];
+        this.defaultReward = STEP_PENALTY;
+        this.obstacleReward = -1;
+        this.goalReward = 10;
+      }
+      reset() { return [0, 0]; }
+      getActions(state) {
+        const actions = [];
+        let [x, y] = state;
+        if (y < this.height - 1) actions.push(0);
+        if (x < this.width - 1) actions.push(1);
+        if (y > 0) actions.push(2);
+        if (x > 0) actions.push(3);
+        return actions;
+      }
+      step(state, action) {
+        let [x, y] = state;
+        let nextState;
+        if (action === 0) { nextState = [x, y + 1]; }
+        else if (action === 1) { nextState = [x + 1, y]; }
+        else if (action === 2) { nextState = [x, y - 1]; }
+        else if (action === 3) { nextState = [x - 1, y]; }
+        else { nextState = state; }
+        if (this.isObstacle(nextState)) {
+          let reward = this.obstacleReward;
+          nextState = state;
+          return { nextState, reward, done: false };
+        } else if (this.isGoal(nextState)) {
+          return { nextState, reward: this.goalReward, done: true };
+        } else {
+          return { nextState, reward: this.defaultReward, done: false };
+        }
+      }
+      isObstacle(state) {
+        return this.obstacles.some(o => o[0] === state[0] && o[1] === state[1]);
+      }
+      isGoal(state) {
+        return state[0] === this.goal[0] && state[1] === this.goal[1];
+      }
+      resetEnvironment() {
+        this.obstacles = customObstacles.slice();
+        this.goal = [this.width - 1, this.height - 1];
+      }
+    }
+    class QLearningAgent {
+      constructor(width, height, actions, learningRate = 0.5, discount = 0.95, epsilon = 0.3) {
+        this.width = width;
+        this.height = height;
+        this.actions = actions;
+        this.alpha = learningRate;
+        this.gamma = discount;
+        this.epsilon = epsilon;
+        this.Q = {};
+        for (let x = 0; x < width; x++) {
+          for (let y = 0; y < height; y++) {
+            let coinKey = this.getDefaultCoinKey();
+            for (let a of actions) {
+              this.Q[this.key([x, y, coinKey], a)] = INITIAL_Q;
+            }
+          }
+        }
+        this.convergenceThreshold = 0.001;
+        this.consecutiveSmallUpdates = 0;
+        this.requiredSmallUpdates = 100;
+      }
+      getDefaultCoinKey() {
+        let coinsCopy = defaultCoins.slice();
+        coinsCopy.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+        return coinsCopy.map(c => c[0] + "_" + c[1]).join(";");
+      }
+      key(state, action) {
+        return `${state[0]},${state[1]},${state[2]},${action}`;
+      }
+      chooseAction(state, availableActions) {
+        if (Math.random() < this.epsilon) {
+          return availableActions[Math.floor(Math.random() * availableActions.length)];
+        } else {
+          const qs = availableActions.map(a => this.Q[this.key(state, a)] || INITIAL_Q);
+          const maxQ = Math.max(...qs);
+          const bestActions = availableActions.filter((a, i) => qs[i] === maxQ);
+          return bestActions[Math.floor(Math.random() * bestActions.length)];
+        }
+      }
+      update(state, action, reward, nextState, nextAvailableActions) {
+        const key = this.key(state, action);
+        const oldQ = this.Q[key] || INITIAL_Q;
+        let maxQNext = 0;
+        if (nextAvailableActions.length > 0) {
+          maxQNext = Math.max(...nextAvailableActions.map(a => this.Q[this.key(nextState, a)] || INITIAL_Q));
+        }
+        const target = reward + this.gamma * maxQNext;
+        const tdError = target - oldQ;
+        const newQ = oldQ + this.alpha * tdError;
+        this.Q[key] = newQ;
+        if (Math.abs(tdError) < this.convergenceThreshold) {
+          this.consecutiveSmallUpdates += 1;
+        } else {
+          this.consecutiveSmallUpdates = 0;
+        }
+        this.epsilon = Math.max(MIN_EPSILON, this.epsilon * EPSILON_DECAY);
+        const mapping = {0: "Upp", 1: "Höger", 2: "Ner", 3: "Vänster"};
+        return `$$
+Q\\bigl((${state[0]},${state[1]},${state[2]}),\\;\\text{${mapping[action]}}\\bigr)
+= ${oldQ.toFixed(2)} + ${this.alpha.toFixed(2)} \\Bigl( ${reward.toFixed(2)} + ${this.gamma.toFixed(2)} \\cdot ${maxQNext.toFixed(2)} - ${oldQ.toFixed(2)} \\Bigr)  = ${newQ.toFixed(2)}
+$$`;
+      }
+      getMaxQ(state, availableActions) {
+        if (availableActions.length > 0) {
+          return Math.max(...availableActions.map(a => this.Q[this.key(state, a)] || INITIAL_Q));
+        }
+        return 0;
+      }
+      checkConvergence() {
+        return this.consecutiveSmallUpdates >= this.requiredSmallUpdates;
+      }
+    }
+    class QLearningSimulation {
+      constructor() {
+        this.mode = "idle";
+        this.gridWidth = GRID_WIDTH;
+        this.gridHeight = GRID_HEIGHT;
+        this.cellSize = CELL_SIZE;
+        this.env = new GridWorld(this.gridWidth, this.gridHeight);
+        this.startPos = [0, 0];
+        this.goalPos = [this.gridWidth - 1, this.gridHeight - 1];
+        this.env.goal = this.goalPos.slice();
+        let alphaVal = parseFloat(document.getElementById("alphaParam") ? document.getElementById("alphaParam").value : 0.5) || 0.5;
+        let gammaVal = parseFloat(document.getElementById("gammaParam") ? document.getElementById("gammaParam").value : 0.95) || 0.95;
+        let epsilonVal = parseFloat(document.getElementById("epsilonParam") ? document.getElementById("epsilonParam").value : 0.3) || 0.3;
+        this.agent = new QLearningAgent(this.gridWidth, this.gridHeight, [0, 1, 2, 3], alphaVal, gammaVal, epsilonVal);
+        this.state = this.startPos.slice();
+        this.episode = 0;
+        this.stepCount = 0;
+        this.maxSteps = 500;
+        this.delay = Math.max(0, 1000 - parseInt(document.getElementById("speedSlider").value) / 5);
+        this.running = false;
+        this.paused = false;
+        this.editMode = false;
+        this.stepMode = false;
+        this.lastUpdateTime = null;
+        this.coins = JSON.parse(JSON.stringify(defaultCoins));
+        this.initialCoins = JSON.parse(JSON.stringify(defaultCoins));
+        this.showPolicy = false;
+        this.showQValues = false;
+        this.testMode = false;
+        this.testPath = [];
+        this.currentTestStep = 0;
+        this.draggingStart = false;
+        this.draggingGoal = false;
+        this.canvas = document.getElementById("canvas");
+        this.ctx = this.canvas.getContext("2d");
+        this.canvas.width = this.gridWidth * this.cellSize;
+        this.canvas.height = this.gridHeight * this.cellSize;
+        this.trainButton = document.getElementById("trainButton");
+        this.pauseButton = document.getElementById("pauseButton");
+        this.resetButton = document.getElementById("resetButton");
+        this.qToggleButton = document.getElementById("qToggleButton");
+        this.policyButton = document.getElementById("policyButton");
+        this.policyButton.style.display = "none";
+        this.speedSlider = document.getElementById("speedSlider");
+        this.stepModeCheckbox = document.getElementById("stepModeCheckbox");
+        this.nextStepButton = document.getElementById("nextStepButton");
+        this.editModeCheckbox = document.getElementById("editModeCheckbox");
+        this.infoLabel = document.getElementById("infoLabel");
+        this.logText = document.getElementById("logText");
+        this.paramInfo = document.getElementById("paramInfo");
+        this.testButton = document.getElementById("testButton");
+        this.updateParamInfo();
+        this.trainButton.addEventListener("click", () => {
+          this.showPolicy = false;
+          this.policyButton.style.display = "none";
+          this.startTraining();
+        });
+        this.pauseButton.addEventListener("click", () => this.togglePause());
+        this.resetButton.addEventListener("click", () => this.resetTraining());
+        this.qToggleButton.addEventListener("click", () => this.toggleQValues());
+        this.policyButton.addEventListener("click", () => this.togglePolicy());
+        this.speedSlider.addEventListener("input", (e) => this.updateSpeed(e));
+        this.editModeCheckbox.addEventListener("change", (e) => {
+          this.editMode = e.target.checked;
+          this.updateParamInfo();
+          this.updateInfoLabel();
+          this.drawGrid();
+          if (this.editMode) {
+            this.mode = "idle";
+            this.running = false;
+            this.log("Redigeringsläge aktiverat. Träningen pausad.");
+          } else {
+            let alphaVal = parseFloat(document.getElementById("alphaParam").value) || 0.5;
+            let gammaVal = parseFloat(document.getElementById("gammaParam").value) || 0.95;
+            let epsilonVal = parseFloat(document.getElementById("epsilonParam").value) || 0.3;
+            this.initialCoins = JSON.parse(JSON.stringify(this.coins));
+            this.agent = new QLearningAgent(this.gridWidth, this.gridHeight, [0, 1, 2, 3], alphaVal, gammaVal, epsilonVal);
+            this.episode = 0;
+            this.stepCount = 0;
+            this.state = this.startPos.slice();
+            this.mode = "idle";
+            this.log("Redigeringsläge avaktiverat. Tryck 'Starta träning' för att starta.");
+            this.drawGrid();
+            this.drawAgent();
+          }
+        });
+        this.stepModeCheckbox.addEventListener("change", (e) => {
+          this.stepMode = e.target.checked;
+          if (this.stepMode) {
+            this.log("Stegvis läge aktiverat. Auto-run pausad.");
+            this.pauseButton.disabled = true;
+            this.nextStepButton.disabled = false;
+          } else {
+            this.log("Stegvis läge avaktiverat.");
+            this.pauseButton.disabled = false;
+            this.nextStepButton.disabled = true;
+            if (!this.paused && (this.mode === "training" || this.mode === "testing")) {
+              this.runStep();
+            }
+          }
+        });
+        this.nextStepButton.addEventListener("click", () => this.runStep());
+        this.canvas.addEventListener("mousedown", (e) => this.handleMouseDown(e));
+        this.canvas.addEventListener("mousemove", (e) => this.handleMouseMove(e));
+        this.canvas.addEventListener("mouseup", (e) => this.handleMouseUp(e));
+        this.canvas.addEventListener("click", (e) => this.onCanvasClick(e));
+        this.canvas.addEventListener("contextmenu", (e) => this.onCanvasRightClick(e));
+        this.testButton.addEventListener("click", () => this.startTestMode());
+        this.canvas.addEventListener("mousemove", (e) => this.handleHover(e));
+        this.canvas.addEventListener("mouseout", (e) => this.hideHover(e));
+        this.drawGrid();
+        this.drawAgent();
+        this.updateInfoLabel();
+        requestAnimationFrame((ts) => this.simulationLoop(ts));
+      }
+      getCoinKey() {
+        let coinsCopy = this.coins.slice();
+        coinsCopy.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+        return coinsCopy.map(c => c[0] + "_" + c[1]).join(";");
+      }
+      getState() {
+        return [this.state[0], this.state[1], this.getCoinKey()];
+      }
+      updateParamInfo() {
+        this.paramInfo.innerHTML = 
+          `<span style="font-size:1em;">
+            &alpha; = <input type="number" id="alphaParam" style="width:60px;" step="0.01" value="${this.agent.alpha.toFixed(2)}" ${this.editMode ? "" : "disabled"}>
+            , &gamma; = <input type="number" id="gammaParam" style="width:60px;" step="0.01" value="${this.agent.gamma.toFixed(2)}" ${this.editMode ? "" : "disabled"}>
+            , &epsilon; = <input type="number" id="epsilonParam" style="width:60px;" step="0.01" value="${this.agent.epsilon.toFixed(2)}" ${this.editMode ? "" : "disabled"}>
+          </span>`;
+        document.getElementById("alphaParam").addEventListener("change", () => {
+          this.agent.alpha = parseFloat(document.getElementById("alphaParam").value) || 0.5;
+        });
+        document.getElementById("gammaParam").addEventListener("change", () => {
+          this.agent.gamma = parseFloat(document.getElementById("gammaParam").value) || 0.95;
+        });
+        document.getElementById("epsilonParam").addEventListener("change", () => {
+          this.agent.epsilon = parseFloat(document.getElementById("epsilonParam").value) || 0.3;
+        });
+      }
+      log(message) {
+        const lines = this.logText.value.split("\n");
+        if (lines.length > 100) {
+          this.logText.value = lines.slice(lines.length - 100).join("\n");
+        }
+        this.logText.value += message + "\n";
+        this.logText.scrollTop = this.logText.scrollHeight;
+      }
+      handleMouseDown(e) {
+        if (!this.editMode) return;
+        const rect = this.canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        let startPixelX = this.startPos[0] * this.cellSize + this.cellSize / 2;
+        let startPixelY = (this.gridHeight - 1 - this.startPos[1]) * this.cellSize + this.cellSize / 2;
+        let dx = mouseX - startPixelX;
+        let dy = mouseY - startPixelY;
+        if (Math.sqrt(dx * dx + dy * dy) < this.cellSize / 3) {
+          this.draggingStart = true;
+          return;
+        }
+        let goalPixelX = this.goalPos[0] * this.cellSize + this.cellSize / 2;
+        let goalPixelY = (this.gridHeight - 1 - this.goalPos[1]) * this.cellSize + this.cellSize / 2;
+        dx = mouseX - goalPixelX;
+        dy = mouseY - goalPixelY;
+        if (Math.sqrt(dx * dx + dy * dy) < this.cellSize / 3) {
+          this.draggingGoal = true;
+          return;
+        }
+      }
+      handleMouseMove(e) {
+        if (!this.editMode) return;
+        if (!this.draggingStart && !this.draggingGoal) return;
+        const rect = this.canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        const cellX = Math.floor(mouseX / this.cellSize);
+        const cellY = this.gridHeight - 1 - Math.floor(mouseY / this.cellSize);
+        if (this.draggingStart) {
+          this.startPos = [cellX, cellY];
+          this.state = this.startPos.slice();
+        }
+        if (this.draggingGoal) {
+          this.goalPos = [cellX, cellY];
+          this.env.goal = this.goalPos.slice();
+        }
+        this.drawGrid();
+        this.drawAgent();
+      }
+      handleMouseUp(e) {
+        if (!this.editMode) return;
+        this.draggingStart = false;
+        this.draggingGoal = false;
+      }
+      onCanvasClick(e) {
+        if (!this.editMode) return;
+        if (e.button === 2) return;
+        const rect = this.canvas.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const clickY = e.clientY - rect.top;
+        const x = Math.floor(clickX / this.cellSize);
+        const gridY = Math.floor(clickY / this.cellSize);
+        const y = (this.gridHeight - 1) - gridY;
+        if ((x === this.startPos[0] && y === this.startPos[1]) || (x === this.goalPos[0] && y === this.goalPos[1])) return;
+        const index = this.env.obstacles.findIndex(o => o[0] === x && o[1] === y);
+        if (index >= 0) {
+          this.env.obstacles.splice(index, 1);
+          this.log("Hinder borttaget vid (" + x + "," + y + ")");
+        } else {
+          this.env.obstacles.push([x, y]);
+          this.log("Hinder tillagt vid (" + x + "," + y + ")");
+        }
+        this.drawGrid();
+        this.drawAgent();
+      }
+      onCanvasRightClick(e) {
+        if (!this.editMode) return;
+        e.preventDefault();
+        const rect = this.canvas.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const clickY = e.clientY - rect.top;
+        const x = Math.floor(clickX / this.cellSize);
+        const gridY = Math.floor(clickY / this.cellSize);
+        const y = (this.gridHeight - 1) - gridY;
+        if ((x === this.startPos[0] && y === this.startPos[1]) || (x === this.goalPos[0] && y === this.goalPos[1])) return;
+        const index = this.coins.findIndex(c => c[0] === x && c[1] === y);
+        if (index >= 0) {
+          this.coins.splice(index, 1);
+          this.log("Mynt borttaget vid (" + x + "," + y + ")");
+        } else {
+          this.coins.push([x, y]);
+          this.log("Mynt tillagt vid (" + x + "," + y + ")");
+        }
+        this.initialCoins = JSON.parse(JSON.stringify(this.coins));
+        this.drawGrid();
+        this.drawAgent();
+      }
+      handleHover(e) {
+        if (this.editMode) {
+          this.hideHover();
+          return;
+        }
+        if (this.draggingStart || this.draggingGoal) {
+          this.hideHover();
+          return;
+        }
+        const rect = this.canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        const cellX = Math.floor(mouseX / this.cellSize);
+        const cellY = this.gridHeight - 1 - Math.floor(mouseY / this.cellSize);
+        if (cellX < 0 || cellX >= this.gridWidth || cellY < 0 || cellY >= this.gridHeight) {
+          this.hideHover();
+          return;
+        }
+        const coinKey = this.getCoinKey();
+        const actions = [0, 1, 2, 3];
+        const mapping = {0: "Upp", 1: "Höger", 2: "Ner", 3: "Vänster"};
+        let tooltipText = "";
+        for (let action of actions) {
+          const key = `${cellX},${cellY},${coinKey},${action}`;
+          let qVal = this.agent.Q[key];
+          if (qVal === undefined) {
+            qVal = INITIAL_Q;
+          }
+          tooltipText += `${mapping[action]}: ${qVal.toFixed(2)}<br>`;
+        }
+        const hoverDiv = document.getElementById("hoverInfo");
+        hoverDiv.innerHTML = tooltipText;
+        hoverDiv.style.left = (e.clientX + 10) + "px";
+        hoverDiv.style.top = (e.clientY + 10) + "px";
+        hoverDiv.style.display = "block";
+      }
+      hideHover() {
+        const hoverDiv = document.getElementById("hoverInfo");
+        hoverDiv.style.display = "none";
+      }
+      drawGrid() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        for (let y = 0; y < this.gridHeight; y++) {
+          for (let x = 0; x < this.gridWidth; x++) {
+            const canvasX = x * this.cellSize;
+            const canvasY = (this.gridHeight - 1 - y) * this.cellSize;
+            let fillColor;
+            if (this.env.isObstacle([x, y])) {
+              fillColor = "black";
+            } else if (this.env.isGoal([x, y])) {
+              fillColor = "green";
+            } else {
+              const availableActions = this.env.getActions([x, y]);
+              const maxQ = this.agent.getMaxQ([x, y, this.getCoinKey()], availableActions);
+              const t = Math.max(0, Math.min(maxQ, 10)) / 10;
+              if (t <= 0.5) {
+                const factor = Math.sqrt(t / 0.5);
+                const R = 255;
+                const G = Math.round(factor * 255);
+                const B = Math.round(factor * 255);
+                fillColor = `rgb(${R},${G},${B})`;
+              } else {
+                const factor = Math.sqrt((t - 0.5) / 0.5);
+                const R = Math.round(255 * (1 - factor));
+                const G = Math.round(255 * (1 - factor));
+                const B = 255;
+                fillColor = `rgb(${R},${G},${B})`;
+              }
+            }
+            this.ctx.fillStyle = fillColor;
+            this.ctx.fillRect(canvasX, canvasY, this.cellSize, this.cellSize);
+            this.ctx.strokeStyle = "gray";
+            this.ctx.strokeRect(canvasX, canvasY, this.cellSize, this.cellSize);
+            if (this.showQValues) {
+              this.ctx.fillStyle = "black";
+              this.ctx.font = "8px Arial";
+              this.ctx.textAlign = "center";
+              this.ctx.fillText("U:" + (this.agent.Q[this.agent.key([x, y, this.getCoinKey()], 0)] || INITIAL_Q).toFixed(1),
+                                 canvasX + this.cellSize/2, canvasY + 16);
+              this.ctx.textAlign = "right";
+              this.ctx.fillText("H:" + (this.agent.Q[this.agent.key([x, y, this.getCoinKey()], 1)] || INITIAL_Q).toFixed(1),
+                                 canvasX + this.cellSize - 2, canvasY + this.cellSize/2 + 4);
+              this.ctx.textAlign = "center";
+              this.ctx.fillText("N:" + (this.agent.Q[this.agent.key([x, y, this.getCoinKey()], 2)] || INITIAL_Q).toFixed(1),
+                                 canvasX + this.cellSize/2, canvasY + this.cellSize - 4);
+              this.ctx.textAlign = "left";
+              this.ctx.fillText("V:" + (this.agent.Q[this.agent.key([x, y, this.getCoinKey()], 3)] || INITIAL_Q).toFixed(1),
+                                 canvasX + 2, canvasY + this.cellSize/2 + 4);
+            }
+            if (this.coins.some(c => c[0] === x && c[1] === y)) {
+              this.ctx.beginPath();
+              this.ctx.fillStyle = "#FFFF66";
+              this.ctx.arc(canvasX + this.cellSize/2, canvasY + this.cellSize/2, this.cellSize/6, 0, 2 * Math.PI);
+              this.ctx.fill();
+              this.ctx.strokeStyle = "darkgoldenrod";
+              this.ctx.stroke();
+            }
+          }
+        }
+        if (this.editMode) {
+          let startX = this.startPos[0] * this.cellSize + this.cellSize/2;
+          let startY = (this.gridHeight - 1 - this.startPos[1]) * this.cellSize + this.cellSize/2;
+          this.ctx.beginPath();
+          this.ctx.fillStyle = "blue";
+          this.ctx.arc(startX, startY, this.cellSize/4, 0, 2 * Math.PI);
+          this.ctx.fill();
+          this.ctx.strokeStyle = "white";
+          this.ctx.stroke();
+          let goalX = this.goalPos[0] * this.cellSize + this.cellSize/2;
+          let goalY = (this.gridHeight - 1 - this.goalPos[1]) * this.cellSize + this.cellSize/2;
+          this.ctx.beginPath();
+          this.ctx.fillStyle = "red";
+          this.ctx.arc(goalX, goalY, this.cellSize/4, 0, 2 * Math.PI);
+          this.ctx.fill();
+          this.ctx.strokeStyle = "white";
+          this.ctx.stroke();
+          this.ctx.fillStyle = "rgba(128, 128, 128, 0.3)";
+          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+          this.ctx.fillStyle = "red";
+          this.ctx.font = "bold 20px Arial";
+          this.ctx.textAlign = "center";
+          this.ctx.fillText("REDIGERINGSLÄGE", this.canvas.width / 2, 30);
+        }
+        if (this.showPolicy) { this.drawPolicy(); }
+        this.ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+        this.ctx.font = "12px Arial";
+        this.ctx.textAlign = "right";
+        this.ctx.fillText("Skapad av David Hedengren", this.canvas.width - 5, this.canvas.height - 5);
+      }
+      drawPolicy() {
+        const arrowMapping = {0: "↑", 1: "→", 2: "↓", 3: "←"};
+        for (let y = 0; y < this.gridHeight; y++) {
+          for (let x = 0; x < this.gridWidth; x++) {
+            if (this.env.isObstacle([x, y]) || this.env.isGoal([x, y])) continue;
+            const availableActions = this.env.getActions([x, y]);
+            if (availableActions.length === 0) continue;
+            let bestAction = availableActions[0];
+            let bestQ = this.agent.Q[this.agent.key([x, y, this.getCoinKey()], bestAction)];
+            availableActions.forEach(a => {
+              const qVal = this.agent.Q[this.agent.key([x, y, this.getCoinKey()], a)];
+              if (qVal > bestQ) { bestQ = qVal; bestAction = a; }
+            });
+            const canvasX = x * this.cellSize;
+            const canvasY = (this.gridHeight - 1 - y) * this.cellSize;
+            this.ctx.fillStyle = "red";
+            this.ctx.font = "24px Arial";
+            this.ctx.textAlign = "center";
+            this.ctx.fillText(arrowMapping[bestAction],
+                               canvasX + this.cellSize/2, canvasY + this.cellSize/1.5);
+          }
+        }
+      }
+      drawAgent() {
+        const [x, y] = this.state;
+        const canvasX = x * this.cellSize;
+        const canvasY = (this.gridHeight - 1 - y) * this.cellSize;
+        const pad = this.cellSize * 0.2;
+        const size = this.cellSize * 0.6;
+        this.ctx.fillStyle = "orange";
+        this.ctx.beginPath();
+        this.ctx.arc(canvasX + pad + size/2, canvasY + pad + size/2, size/2, 0, 2 * Math.PI);
+        this.ctx.fill();
+      }
+      updateInfoLabel() {
+        this.infoLabel.textContent = "Episod: " + this.episode + ", Steg: " + this.stepCount;
+      }
+      toggleQValues() {
+        this.showQValues = !this.showQValues;
+        this.qToggleButton.textContent = this.showQValues ? "Visa Q-värden: På" : "Visa Q-värden: Av";
+        this.drawGrid();
+        this.drawAgent();
+      }
+      togglePolicy() {
+        this.showPolicy = !this.showPolicy;
+        this.policyButton.textContent = this.showPolicy ? "Visa Policy: På" : "Visa Policy: Av";
+        this.drawGrid();
+      }
+      updateSpeed(e) {
+        this.delay = Math.max(0, 1000 - parseInt(e.target.value) / 5);
+        if (this.agent.consecutiveSmallUpdates > 50) { this.delay = 50; }
+      }
+      togglePause() {
+        this.paused = !this.paused;
+        this.pauseButton.textContent = this.paused ? "Fortsätt" : "Pausa";
+      }
+      resetTraining() {
+        this.agent = new QLearningAgent(this.gridWidth, this.gridHeight, [0, 1, 2, 3]);
+        this.episode = 0;
+        this.stepCount = 0;
+        this.state = this.startPos.slice();
+        this.coins = JSON.parse(JSON.stringify(this.initialCoins));
+        this.mode = "idle";
+        this.log("Träningen har återställts.");
+        this.testButton.style.display = "none";
+        this.policyButton.style.display = "none";
+        this.drawGrid();
+        this.drawAgent();
+        this.updateInfoLabel();
+      }
+      resetEpisode() {
+        this.state = this.startPos.slice();
+        this.stepCount = 0;
+        this.coins = JSON.parse(JSON.stringify(this.initialCoins));
+      }
+      startTraining() {
+        this.env.goal = this.goalPos.slice();
+        const alphaVal = parseFloat(document.getElementById("alphaParam").value) || 0.5;
+        const gammaVal = parseFloat(document.getElementById("gammaParam").value) || 0.95;
+        const epsilonVal = parseFloat(document.getElementById("epsilonParam").value) || 0.3;
+        this.agent.alpha = alphaVal;
+        this.agent.gamma = gammaVal;
+        this.agent.epsilon = epsilonVal;
+        this.mode = "training";
+        this.episode = 0;
+        this.stepCount = 0;
+        this.state = this.startPos.slice();
+        this.delay = Math.max(0, 1000 - parseInt(this.speedSlider.value) / 5);
+        this.running = true;
+        this.testMode = false;
+        this.paused = false;
+        this.showPolicy = false;
+        this.policyButton.style.display = "none";
+        this.updateParamInfo();
+        this.log("Ny träning startad.");
+      }
+      runStep() {
+        if (this.testMode) { this.runTestStep(); }
+        else { this.runTrainingStep(); }
+      }
+      runTrainingStep() {
+        if (!this.running || this.paused) return;
+        if (this.mode !== "training" && this.mode !== "testing") return;
+        const currentState = this.getState();
+        const availableActions = this.env.getActions(this.state);
+        const action = this.agent.chooseAction(currentState, availableActions);
+        const result = this.env.step(this.state, action);
+        let nextStatePos = result.nextState;
+        let totalReward = result.reward;
+        const coinIndex = this.coins.findIndex(c => c[0] === nextStatePos[0] && c[1] === nextStatePos[1]);
+        if (coinIndex >= 0) {
+          this.log("Mynt insamlat vid (" + nextStatePos[0] + "," + nextStatePos[1] + ")! Extra reward: " + COIN_REWARD);
+          totalReward += COIN_REWARD;
+          this.coins.splice(coinIndex, 1);
+        } else {
+          const isDefaultCoinCell = defaultCoins.some(c => c[0] === nextStatePos[0] && c[1] === nextStatePos[1]);
+          if (isDefaultCoinCell) {
+            this.log("Penalty: Återbesökt tomt myntområde (" + nextStatePos[0] + "," + nextStatePos[1] + ")!");
+            totalReward += VISITED_COIN_PENALTY;
+          }
+        }
+        if (this.env.isGoal(nextStatePos) && this.coins.length > 0) {
+          this.log("Penalty: Målet nått utan att ha samlat alla mynt!");
+          totalReward += EARLY_GOAL_PENALTY;
+          nextStatePos = this.state;
+        }
+        this.log("Steg " + this.stepCount + ": (" + this.state[0] + "," + this.state[1] + ") -> (" + nextStatePos[0] + "," + nextStatePos[1] + ") med action " + action + ", reward " + totalReward.toFixed(2));
+        let calcStr = this.agent.update(currentState, action, totalReward, [nextStatePos[0], nextStatePos[1], this.getCoinKey()], this.env.getActions(nextStatePos));
+        let plainCalcStr = calcStr.replace(/\$\$/g, "")
+          .replace(/\\bigl\(/g, "(")
+          .replace(/\\bigr\)/g, ")")
+          .replace(/\\text\{([^}]+)\}/g, "$1")
+          .replace(/\\Bigl\(/g, "(")
+          .replace(/\\Bigr\)/g, ")")
+          .replace(/\\cdot/g, "*")
+          .replace(/\\;/g, " ")
+          .replace(/\\,/g, ",")
+          .trim();
+        this.log("Uppdatering av Q-värde för (" + currentState[0] + "," + currentState[1] + "): " + plainCalcStr);
+        this.state = nextStatePos;
+        this.stepCount++;
+        if ((result.done && this.coins.length === 0) || this.stepCount >= this.maxSteps) {
+          this.episode++;
+          this.resetEpisode();
+        }
+        if (this.agent.checkConvergence()) {
+          this.infoLabel.textContent = "KONVERGERAD! Episod: " + this.episode;
+          this.testButton.style.display = "inline-block";
+          this.policyButton.style.display = "inline-block";
+          this.running = false;
+          return;
+        }
+        this.drawGrid();
+        this.drawAgent();
+        this.updateInfoLabel();
+      }
+      runTestStep() {
+        if (this.currentTestStep >= this.testPath.length) {
+          this.testPath = this.generateOptimalPath();
+          this.currentTestStep = 0;
+          if (this.testPath.length === 0) {
+            this.log("Ingen giltig bana hittades!");
+            return;
+          }
+        }
+        this.state = this.testPath[this.currentTestStep];
+        const coinIndex = this.coins.findIndex(c => c[0] === this.state[0] && c[1] === this.state[1]);
+        if (coinIndex >= 0) {
+          this.coins.splice(coinIndex, 1);
+          this.log("Mynt insamlat vid (" + this.state[0] + "," + this.state[1] + ") under testläge!");
+        }
+        this.currentTestStep++;
+        this.drawGrid();
+        this.drawAgent();
+        if (this.currentTestStep >= this.testPath.length) {
+          this.log("Testbana slutförd!");
+        }
+      }
+      generateOptimalPath() {
+        let path = [];
+        let currentState = this.env.reset();
+        let localCoins = JSON.parse(JSON.stringify(this.coins));
+        let visited = new Set();
+        for (let i = 0; i < this.maxSteps; i++) {
+          const coinKey = getCoinKeyFrom(localCoins);
+          const stateKey = `${currentState[0]},${currentState[1]},${coinKey}`;
+          if (visited.has(stateKey)) break;
+          visited.add(stateKey);
+          path.push([...currentState]);
+          const availableActions = this.env.getActions(currentState);
+          const action = this.agent.chooseAction(
+            [currentState[0], currentState[1], coinKey],
+            availableActions
+          );
+          const result = this.env.step(currentState, action);
+          const coinIndex = localCoins.findIndex(c => c[0] === result.nextState[0] && c[1] === result.nextState[1]);
+          if (coinIndex >= 0) localCoins.splice(coinIndex, 1);
+          currentState = result.nextState;
+          if (this.env.isGoal(currentState) && localCoins.length === 0) break;
+        }
+        return path;
+      }
+      startTestMode() {
+        this.testMode = true;
+        this.paused = true;
+        this.state = this.env.reset();
+        this.coins = JSON.parse(JSON.stringify(this.initialCoins));
+        this.showQValues = true;
+        this.qToggleButton.textContent = "Visa Q-värden: På";
+        this.testPath = this.generateOptimalPath();
+        this.currentTestStep = 0;
+        this.log("\n--- TESTLÄGE AKTIVERAT ---");
+        this.testButton.disabled = true;
+        this.nextStepButton.disabled = false;
+        this.drawGrid();
+        this.drawAgent();
+      }
+      simulationLoop(timestamp) {
+        if (!this.lastUpdateTime) { this.lastUpdateTime = timestamp; }
+        if (!this.paused && !this.stepMode) {
+          const delta = timestamp - this.lastUpdateTime;
+          if (delta >= this.delay) {
+            this.lastUpdateTime = timestamp;
+            this.runStep();
+          }
+        } else {
+          this.lastUpdateTime = timestamp;
+        }
+        requestAnimationFrame((ts) => this.simulationLoop(ts));
+      }
+    }
+    window.onload = () => {
+      const simulation = new QLearningSimulation();
+      MathJax.typeset();
+    };
+  </script>
+</body>
+</html>
