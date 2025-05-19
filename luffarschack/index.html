@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Luffarschack i partiellt observerbar miljö</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 20px;
+    }
+    h2 {
+      margin-bottom: 8px;
+      font-weight: normal;
+    }
+    /* Etiketten överst med info */
+    #infoLabel {
+      background-color: #e0f0ff;
+      border: 1px solid #aaa;
+      padding: 8px 14px;
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      border-radius: 4px;
+    }
+    /* Spelplanen */
+    #gameContainer {
+      margin-top: 16px;
+      display: inline-block;
+      border: 1px solid #999;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      background-color: #fafafa;
+    }
+    .boardRow {
+      display: flex;
+    }
+    .boardCell {
+      width: 38px;
+      height: 38px;
+      margin: 1px;
+      font-size: 18px;
+      font-weight: bold;
+      background-color: #dfdfdf;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none; /* förhindra textmarkering */
+    }
+    .boardCell:hover {
+      background-color: #cfcfcf;
+    }
+    /* Kontroller */
+    .controls-area {
+      margin-top: 10px;
+    }
+    /* Dolda rutor (frågetecken) */
+    .hiddenHint {
+      color: #777;
+    }
+    /* Stor ruta mitt på skärmen som visar vems tur det är */
+    #centerMessage {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255,255,255,0.95);
+      border: 2px solid #888;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      padding: 20px 40px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+      border-radius: 8px;
+      z-index: 9999;
+      display: none; /* dold tills vi visar den */
+    }
+  </style>
+</head>
+<body>
+
+<h2>Luffarschack i partiellt observerbar miljö</h2>
+
+<!-- Etikett överst till vänster -->
+<div id="infoLabel">Spelare X's tur</div>
+
+<!-- Spelplan -->
+<div id="gameContainer"></div>
+
+<!-- Knapp för att starta om -->
+<div class="controls-area">
+  <button onclick="restartGame()">Starta om</button>
+</div>
+
+<!-- Meddelanderuta mitt på skärmen -->
+<div id="centerMessage">Det är X:s tur</div>
+
+<script>
+/* ==== Ursprungliga Python-konstanter ==== */
+const BOARD_SIZE = 20;
+const HIDDEN_PERCENTAGE = 0.20;
+const WIN_CONDITION = 5;
+
+/* ==== Globala variabler ==== */
+let currentPlayer = 'X';
+let board = []; // 2D-array, BOARD_SIZE x BOARD_SIZE
+let hiddenPositions = new Set(); // slumpvisa dolda rutor
+let gameContainer = document.getElementById("gameContainer");
+let infoLabel = document.getElementById("infoLabel");
+let centerMessage = document.getElementById("centerMessage");
+let cells = {}; // map (row,col) -> DOM-element
+let gameOver = false; // för att stoppa klick efter vinst
+
+initGame();
+
+/* === Funktion för att starta om spelet === */
+function restartGame(){
+  gameOver = false;
+  initGame();
+}
+
+/* === Initiera spelet === */
+function initGame(){
+  // Skapa tom board
+  board = [];
+  for(let i=0; i<BOARD_SIZE; i++){
+    let row = [];
+    for(let j=0; j<BOARD_SIZE; j++){
+      row.push(''); // tom
+    }
+    board.push(row);
+  }
+
+  // Beräkna hur många rutor som ska vara dolda
+  const numHidden = Math.floor(BOARD_SIZE * BOARD_SIZE * HIDDEN_PERCENTAGE);
+
+  // Skapa en array med alla positioner
+  let allPositions = [];
+  for(let i=0; i<BOARD_SIZE; i++){
+    for(let j=0; j<BOARD_SIZE; j++){
+      allPositions.push([i,j]);
+    }
+  }
+  // Slumpa fram dolda positioner
+  shuffleArray(allPositions);
+  hiddenPositions.clear();
+  for(let k=0; k<numHidden; k++){
+    let [r,c] = allPositions[k];
+    hiddenPositions.add(posKey(r,c));
+  }
+
+  // Rensa container
+  gameContainer.innerHTML = "";
+  cells = {};
+
+  // Byt spelare till X när spelet börjar
+  currentPlayer = 'X';
+  infoLabel.textContent = `Spelare ${currentPlayer}'s tur`;
+  infoLabel.style.color = getPlayerColor();
+  gameOver = false;
+
+  // Bygg rutnät i DOM
+  for(let i=0; i<BOARD_SIZE; i++){
+    let rowDiv = document.createElement("div");
+    rowDiv.className = "boardRow";
+    for(let j=0; j<BOARD_SIZE; j++){
+      let cellDiv = document.createElement("div");
+      cellDiv.className = "boardCell";
+
+      // Om dold
+      if(hiddenPositions.has(posKey(i,j))){
+        cellDiv.textContent = "?";
+        cellDiv.classList.add("hiddenHint");
+      } else {
+        cellDiv.textContent = "";
+      }
+
+      // Klick
+      cellDiv.addEventListener("click", ()=>onCellClick(i,j));
+      rowDiv.appendChild(cellDiv);
+      cells[posKey(i,j)] = cellDiv;
+    }
+    gameContainer.appendChild(rowDiv);
+  }
+}
+
+/* === Fisher-Yates shuffle === */
+function shuffleArray(arr){
+  for(let i=arr.length-1; i>0; i--){
+    let r = Math.floor(Math.random()*(i+1));
+    [arr[i], arr[r]] = [arr[r], arr[i]];
+  }
+}
+
+/* === Poskey === */
+function posKey(r,c){
+  return `${r},${c}`;
+}
+
+/* === Klick på en ruta === */
+function onCellClick(row, col){
+  if(gameOver) return; // om spelet är slut, ignorera
+
+  // Om dold ruta
+  if(hiddenPositions.has(posKey(row,col))){
+    if(board[row][col] === ''){
+      // Markera i "board" men visa ej
+      board[row][col] = currentPlayer;
+    }
+    switchPlayer();
+  } else {
+    // Ej dold
+    if(board[row][col] === ''){
+      // Tom => placera
+      board[row][col] = currentPlayer;
+      cells[posKey(row,col)].textContent = currentPlayer;
+      cells[posKey(row,col)].style.color = getPlayerColor();
+
+      if(checkWinner(currentPlayer)){
+        revealHiddenPositions();
+        alert(`Spelare ${currentPlayer} vinner!`);
+        gameOver = true;
+        return;
+      }
+      switchPlayer();
+    } else {
+      alert("Ogiltigt drag. Den här rutan är redan använd.");
+    }
+  }
+}
+
+/* === Byt spelare === */
+function switchPlayer(){
+  currentPlayer = (currentPlayer==='X'? 'O': 'X');
+  infoLabel.textContent = `Spelare ${currentPlayer}'s tur`;
+  infoLabel.style.color = getPlayerColor();
+  // Visa stor mitt-ruta i en sekund
+  showCenterMessage(`Det är ${currentPlayer}'s tur!`);
+}
+
+/* === Färg X/O === */
+function getPlayerColor(){
+  return currentPlayer==='X'? 'red':'blue';
+}
+
+/* === Vinst-check === */
+function checkWinner(player){
+  for(let i=0; i<BOARD_SIZE; i++){
+    for(let j=0; j<BOARD_SIZE; j++){
+      if(checkDirection(player,i,j,1,0) ||
+         checkDirection(player,i,j,0,1) ||
+         checkDirection(player,i,j,1,1) ||
+         checkDirection(player,i,j,1,-1)){
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function checkDirection(player, x, y, dx, dy){
+  let count = 0;
+  for(let step=0; step<WIN_CONDITION; step++){
+    let nx = x + step*dx;
+    let ny = y + step*dy;
+    if(nx<0 || nx>=BOARD_SIZE || ny<0 || ny>=BOARD_SIZE){
+      break;
+    }
+    if(board[nx][ny] === player){
+      count++;
+    } else {
+      break;
+    }
+  }
+  return (count===WIN_CONDITION);
+}
+
+/* === Avslöja dolda rutor === */
+function revealHiddenPositions(){
+  hiddenPositions.forEach(key=>{
+    let [r,c] = key.split(',').map(Number);
+    let val = board[r][c];
+    if(val===''){
+      val='-';
+    }
+    let cellDiv = cells[key];
+    cellDiv.textContent = val;
+    cellDiv.style.color = '#444';
+    cellDiv.classList.remove("hiddenHint");
+  });
+}
+
+/* === Visa stor mitt-ruta i 1 sekund === */
+function showCenterMessage(msg){
+  centerMessage.textContent = msg;
+  centerMessage.style.display = "block";
+  // Dölj automatiskt efter 1 s
+  setTimeout(()=>{
+    centerMessage.style.display = "none";
+  }, 1000);
+}
+</script>
+
+</body>
+</html>
