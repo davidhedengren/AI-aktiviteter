@@ -2,90 +2,275 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8">
-  <title>Q-Learning Simuering</title>
+  <title>Q-Learning Simulering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Fraunces:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
+    :root {
+      --bg:        #060810;
+      --surface:   #0c1020;
+      --surface2:  #111728;
+      --border:    #1a2238;
+      --border2:   #253050;
+      --text:      #eaf0fc;
+      --muted:     #96a8c8;
+      --subtle:    #c8d6f0;
+      --accent:    #4d80ff;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-serif: 'Fraunces', Georgia, serif;
     }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      background: var(--bg);
+      color: var(--text);
+      padding: 24px 28px 48px;
+      min-height: 100vh;
+    }
+
     .page-container {
       max-width: 1050px;
       margin: 0 auto;
     }
+
     .header-container {
       text-align: center;
       margin-bottom: 20px;
     }
+
     .header-container h1 {
-      margin-bottom: 10px;
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 26px;
+      color: #fff;
+      margin-bottom: 12px;
+      text-shadow: 0 0 30px rgba(77,128,255,.3);
     }
+
     #intro {
       width: 100%;
-      padding: 10px;
+      padding: 12px 16px;
       text-align: justify;
-      font-size: 1em;
-      line-height: 1.5;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      background-color: #f9f9f9;
+      font-size: 13px;
+      line-height: 1.7;
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      background: var(--surface);
+      color: var(--subtle);
     }
+
     .main-container {
       display: flex;
       gap: 20px;
     }
+
     .left-wrapper {
       width: 500px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+
     #canvas {
-      border: 1px solid #888;
-      background-color: #fff;
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.4);
       cursor: pointer;
     }
+
     .controls {
-      margin-top: 10px;
+      margin-top: 12px;
       width: 100%;
     }
+
     .controls-row {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
       justify-content: center;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
+      align-items: center;
     }
+
+    button {
+      padding: 7px 14px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      cursor: pointer;
+      transition: background .2s, box-shadow .2s;
+    }
+
+    button:hover {
+      background: #6698ff;
+      box-shadow: 0 0 12px rgba(77,128,255,.3);
+    }
+
+    button:disabled {
+      background: var(--surface2);
+      color: var(--muted);
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    #pauseButton, #resetButton {
+      background: var(--surface2);
+      color: var(--subtle);
+      border: 1px solid var(--border2);
+    }
+
+    #pauseButton:hover, #resetButton:hover {
+      border-color: var(--accent);
+      color: var(--text);
+      background: var(--surface2);
+      box-shadow: none;
+    }
+
+    #qToggleButton, #policyButton {
+      background: var(--surface2);
+      color: var(--subtle);
+      border: 1px solid var(--border2);
+    }
+
+    #qToggleButton:hover, #policyButton:hover {
+      border-color: var(--accent);
+      color: var(--text);
+      background: var(--surface2);
+      box-shadow: none;
+    }
+
+    label {
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    input[type="range"] {
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      accent-color: var(--accent);
+      width: 13px;
+      height: 13px;
+    }
+
+    input[type="number"] {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      padding: 4px 6px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      outline: none;
+    }
+
+    input[type="number"]:focus {
+      border-color: var(--accent);
+    }
+
+    input[type="number"]:disabled {
+      opacity: .5;
+    }
+
+    #infoLabel {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--subtle);
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      padding: 5px 12px;
+      border-radius: 5px;
+    }
+
     #logText {
       width: 100%;
-      height: 200px;
+      height: 180px;
       margin-top: 10px;
       resize: none;
+      background: var(--surface);
+      color: var(--muted);
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.6;
+      outline: none;
     }
+
+    #paramInfo {
+      font-size: 12px;
+      color: var(--subtle);
+    }
+
     .right-wrapper {
       width: 500px;
     }
+
     #description {
       width: 100%;
-      padding: 20px;
-      border: 1px solid #ccc;
-      font-size: 1em;
-      line-height: 1.5;
-      box-sizing: border-box;
-      background-color: #f9f9f9;
+      padding: 18px 20px;
+      border: 1px solid var(--border2);
+      font-size: 12px;
+      line-height: 1.8;
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--subtle);
     }
+
+    #description p {
+      margin-bottom: 8px;
+    }
+
+    #description strong {
+      color: var(--text);
+    }
+
+    #description em {
+      color: var(--text);
+      font-style: normal;
+    }
+
+    #description ul {
+      margin: 0 0 10px 18px;
+    }
+
+    #description li {
+      margin-bottom: 4px;
+    }
+
     #hoverInfo {
       position: absolute;
-      background-color: #fff;
-      border: 1px solid #888;
-      padding: 5px;
-      font-size: 0.9em;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: var(--subtle);
       display: none;
       pointer-events: none;
       z-index: 100;
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 16px rgba(0,0,0,.4);
+      font-family: var(--font-mono);
     }
+
+    /* MathJax color fix */
+    .MathJax { color: var(--subtle) !important; }
   </style>
 </head>
 <body>
@@ -112,7 +297,7 @@
           </div>
           <div class="controls-row">
             <label>Simuleringshastighet:
-              <input type="range" id="speedSlider" min="0" max="5000" value="100">
+              <input type="range" id="speedSlider" min="0" max="10000" value="0">
             </label>
           </div>
           <div class="controls-row">
@@ -174,7 +359,7 @@
           <p><strong>Övrigt:</strong></p>
           <ul>
             <li>När modellen har konvergerat ("tränats klart") kan du välja att "Visa Policy" för att se bästa action i respektive ruta.</li>
-            <li>I loggen visas beräkningen för uppdateringen av Q-värdet i cellen för varje steg, enligt formeln: 
+            <li>I loggen visas beräkningen för uppdateringen av Q-värdet i cellen för varje steg, enligt formeln:
               $$ Q(s,a) = Q(s,a) + \alpha \Bigl( r + \gamma \max_{a'} Q(s',a') - Q(s,a) \Bigr) $$</li>
           </ul>
         </div>
@@ -349,7 +534,8 @@ $$`;
         this.episode = 0;
         this.stepCount = 0;
         this.maxSteps = 500;
-        this.delay = Math.max(0, 1000 - parseInt(document.getElementById("speedSlider").value) / 5);
+        this.delay = Math.max(0, 120 - parseInt(document.getElementById("speedSlider").value) / 84);
+        this.stepsPerFrame = 1;
         this.running = false;
         this.paused = false;
         this.editMode = false;
@@ -455,8 +641,8 @@ $$`;
         return [this.state[0], this.state[1], this.getCoinKey()];
       }
       updateParamInfo() {
-        this.paramInfo.innerHTML = 
-          `<span style="font-size:1em;">
+        this.paramInfo.innerHTML =
+          `<span style="font-size:12px;color:var(--subtle);">
             &alpha; = <input type="number" id="alphaParam" style="width:60px;" step="0.01" value="${this.agent.alpha.toFixed(2)}" ${this.editMode ? "" : "disabled"}>
             , &gamma; = <input type="number" id="gammaParam" style="width:60px;" step="0.01" value="${this.agent.gamma.toFixed(2)}" ${this.editMode ? "" : "disabled"}>
             , &epsilon; = <input type="number" id="epsilonParam" style="width:60px;" step="0.01" value="${this.agent.epsilon.toFixed(2)}" ${this.editMode ? "" : "disabled"}>
@@ -569,23 +755,14 @@ $$`;
         this.drawAgent();
       }
       handleHover(e) {
-        if (this.editMode) {
-          this.hideHover();
-          return;
-        }
-        if (this.draggingStart || this.draggingGoal) {
-          this.hideHover();
-          return;
-        }
+        if (this.editMode) { this.hideHover(); return; }
+        if (this.draggingStart || this.draggingGoal) { this.hideHover(); return; }
         const rect = this.canvas.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
         const mouseY = e.clientY - rect.top;
         const cellX = Math.floor(mouseX / this.cellSize);
         const cellY = this.gridHeight - 1 - Math.floor(mouseY / this.cellSize);
-        if (cellX < 0 || cellX >= this.gridWidth || cellY < 0 || cellY >= this.gridHeight) {
-          this.hideHover();
-          return;
-        }
+        if (cellX < 0 || cellX >= this.gridWidth || cellY < 0 || cellY >= this.gridHeight) { this.hideHover(); return; }
         const coinKey = this.getCoinKey();
         const actions = [0, 1, 2, 3];
         const mapping = {0: "Upp", 1: "Höger", 2: "Ner", 3: "Vänster"};
@@ -593,9 +770,7 @@ $$`;
         for (let action of actions) {
           const key = `${cellX},${cellY},${coinKey},${action}`;
           let qVal = this.agent.Q[key];
-          if (qVal === undefined) {
-            qVal = INITIAL_Q;
-          }
+          if (qVal === undefined) qVal = INITIAL_Q;
           tooltipText += `${mapping[action]}: ${qVal.toFixed(2)}<br>`;
         }
         const hoverDiv = document.getElementById("hoverInfo");
@@ -605,8 +780,7 @@ $$`;
         hoverDiv.style.display = "block";
       }
       hideHover() {
-        const hoverDiv = document.getElementById("hoverInfo");
-        hoverDiv.style.display = "none";
+        document.getElementById("hoverInfo").style.display = "none";
       }
       drawGrid() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -639,7 +813,7 @@ $$`;
             }
             this.ctx.fillStyle = fillColor;
             this.ctx.fillRect(canvasX, canvasY, this.cellSize, this.cellSize);
-            this.ctx.strokeStyle = "gray";
+            this.ctx.strokeStyle = "#1a2238";
             this.ctx.strokeRect(canvasX, canvasY, this.cellSize, this.cellSize);
             if (this.showQValues) {
               this.ctx.fillStyle = "black";
@@ -684,15 +858,15 @@ $$`;
           this.ctx.fill();
           this.ctx.strokeStyle = "white";
           this.ctx.stroke();
-          this.ctx.fillStyle = "rgba(128, 128, 128, 0.3)";
+          this.ctx.fillStyle = "rgba(6,8,16,0.6)";
           this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-          this.ctx.fillStyle = "red";
-          this.ctx.font = "bold 20px Arial";
+          this.ctx.fillStyle = "#ff6a35";
+          this.ctx.font = "bold 18px 'JetBrains Mono', monospace";
           this.ctx.textAlign = "center";
-          this.ctx.fillText("REDIGERINGSLÄGE", this.canvas.width / 2, 30);
+          this.ctx.fillText("REDIGERINGSLÄGE", this.canvas.width / 2, 28);
         }
         if (this.showPolicy) { this.drawPolicy(); }
-        this.ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+        this.ctx.fillStyle = "rgba(255,255,255,0.25)";
         this.ctx.font = "12px Arial";
         this.ctx.textAlign = "right";
         this.ctx.fillText("Skapad av David Hedengren", this.canvas.width - 5, this.canvas.height - 5);
@@ -715,8 +889,7 @@ $$`;
             this.ctx.fillStyle = "red";
             this.ctx.font = "24px Arial";
             this.ctx.textAlign = "center";
-            this.ctx.fillText(arrowMapping[bestAction],
-                               canvasX + this.cellSize/2, canvasY + this.cellSize/1.5);
+            this.ctx.fillText(arrowMapping[bestAction], canvasX + this.cellSize/2, canvasY + this.cellSize/1.5);
           }
         }
       }
@@ -746,8 +919,9 @@ $$`;
         this.drawGrid();
       }
       updateSpeed(e) {
-        this.delay = Math.max(0, 1000 - parseInt(e.target.value) / 5);
-        if (this.agent.consecutiveSmallUpdates > 50) { this.delay = 50; }
+        const v = parseInt(e.target.value);
+        this.delay = Math.max(0, 120 - v / 84);
+        this.stepsPerFrame = v >= 9000 ? 50 : v >= 7000 ? 10 : v >= 5000 ? 3 : 1;
       }
       togglePause() {
         this.paused = !this.paused;
@@ -784,7 +958,9 @@ $$`;
         this.episode = 0;
         this.stepCount = 0;
         this.state = this.startPos.slice();
-        this.delay = Math.max(0, 1000 - parseInt(this.speedSlider.value) / 5);
+        const sv = parseInt(this.speedSlider.value);
+        this.delay = Math.max(0, 120 - sv / 84);
+        this.stepsPerFrame = sv >= 9000 ? 50 : sv >= 7000 ? 10 : sv >= 5000 ? 3 : 1;
         this.running = true;
         this.testMode = false;
         this.paused = false;
@@ -826,15 +1002,10 @@ $$`;
         this.log("Steg " + this.stepCount + ": (" + this.state[0] + "," + this.state[1] + ") -> (" + nextStatePos[0] + "," + nextStatePos[1] + ") med action " + action + ", reward " + totalReward.toFixed(2));
         let calcStr = this.agent.update(currentState, action, totalReward, [nextStatePos[0], nextStatePos[1], this.getCoinKey()], this.env.getActions(nextStatePos));
         let plainCalcStr = calcStr.replace(/\$\$/g, "")
-          .replace(/\\bigl\(/g, "(")
-          .replace(/\\bigr\)/g, ")")
+          .replace(/\\bigl\(/g, "(").replace(/\\bigr\)/g, ")")
           .replace(/\\text\{([^}]+)\}/g, "$1")
-          .replace(/\\Bigl\(/g, "(")
-          .replace(/\\Bigr\)/g, ")")
-          .replace(/\\cdot/g, "*")
-          .replace(/\\;/g, " ")
-          .replace(/\\,/g, ",")
-          .trim();
+          .replace(/\\Bigl\(/g, "(").replace(/\\Bigr\)/g, ")")
+          .replace(/\\cdot/g, "*").replace(/\\;/g, " ").replace(/\\,/g, ",").trim();
         this.log("Uppdatering av Q-värde för (" + currentState[0] + "," + currentState[1] + "): " + plainCalcStr);
         this.state = nextStatePos;
         this.stepCount++;
@@ -857,10 +1028,7 @@ $$`;
         if (this.currentTestStep >= this.testPath.length) {
           this.testPath = this.generateOptimalPath();
           this.currentTestStep = 0;
-          if (this.testPath.length === 0) {
-            this.log("Ingen giltig bana hittades!");
-            return;
-          }
+          if (this.testPath.length === 0) { this.log("Ingen giltig bana hittades!"); return; }
         }
         this.state = this.testPath[this.currentTestStep];
         const coinIndex = this.coins.findIndex(c => c[0] === this.state[0] && c[1] === this.state[1]);
@@ -871,9 +1039,7 @@ $$`;
         this.currentTestStep++;
         this.drawGrid();
         this.drawAgent();
-        if (this.currentTestStep >= this.testPath.length) {
-          this.log("Testbana slutförd!");
-        }
+        if (this.currentTestStep >= this.testPath.length) { this.log("Testbana slutförd!"); }
       }
       generateOptimalPath() {
         let path = [];
@@ -887,10 +1053,7 @@ $$`;
           visited.add(stateKey);
           path.push([...currentState]);
           const availableActions = this.env.getActions(currentState);
-          const action = this.agent.chooseAction(
-            [currentState[0], currentState[1], coinKey],
-            availableActions
-          );
+          const action = this.agent.chooseAction([currentState[0], currentState[1], coinKey], availableActions);
           const result = this.env.step(currentState, action);
           const coinIndex = localCoins.findIndex(c => c[0] === result.nextState[0] && c[1] === result.nextState[1]);
           if (coinIndex >= 0) localCoins.splice(coinIndex, 1);
@@ -920,7 +1083,11 @@ $$`;
           const delta = timestamp - this.lastUpdateTime;
           if (delta >= this.delay) {
             this.lastUpdateTime = timestamp;
-            this.runStep();
+            const steps = this.stepsPerFrame || 1;
+            for (let i = 0; i < steps; i++) {
+              this.runStep();
+              if (!this.running) break;
+            }
           }
         } else {
           this.lastUpdateTime = timestamp;
