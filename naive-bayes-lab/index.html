@@ -10,16 +10,21 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg:       #07090f;
-    --surface:  #0d1120;
-    --border:   #1c2640;
-    --text:     #dde4f0;
-    --muted:    #4a5570;
-    --subtle:   #8895b0;
-    --spam:     #f87239;
-    --ham:      #30d6b0;
-    --spam-bg:  rgba(248,114,57,.1);
-    --ham-bg:   rgba(48,214,176,.1);
+    --bg:        #060810;
+    --surface:   #0c1020;
+    --surface2:  #111728;
+    --border:    #1a2238;
+    --border2:   #253050;
+    --text:      #eaf0fc;
+    --muted:     #96a8c8;
+    --subtle:    #c8d6f0;
+    --spam:      #ff6a35;
+    --ham:       #1de99b;
+    --spam-bg:   rgba(255,77,46,.11);
+    --ham-bg:    rgba(29,233,155,.10);
+    --spam-glow: rgba(255,77,46,.30);
+    --ham-glow:  rgba(29,233,155,.28);
+    --accent:    #4d80ff;
     --font-mono: 'JetBrains Mono', monospace;
     --font-serif: 'Fraunces', Georgia, serif;
   }
@@ -35,19 +40,21 @@
 
   /* ── HEADER ── */
   header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
+    background: linear-gradient(135deg, #0c1020 0%, #10162a 100%);
+    border-bottom: 1px solid var(--border2);
     padding: 20px 28px 18px;
     display: flex;
     align-items: baseline;
     gap: 20px;
+    box-shadow: 0 2px 20px rgba(0,0,0,.5);
   }
   header h1 {
     font-family: var(--font-mono);
     font-size: 18px;
     font-weight: 700;
-    letter-spacing: .12em;
+    letter-spacing: .14em;
     color: #fff;
+    text-shadow: 0 0 24px rgba(77,128,255,.35);
   }
   header p {
     font-family: var(--font-serif);
@@ -59,7 +66,7 @@
   /* ── TABS ── */
   .tabs {
     background: var(--surface);
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border2);
     display: flex;
     gap: 2px;
     padding: 0 28px;
@@ -68,7 +75,7 @@
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: .1em;
-    color: var(--muted);
+    color: #a0b0cc;
     background: transparent;
     border: none;
     border-bottom: 2px solid transparent;
@@ -76,10 +83,10 @@
     cursor: pointer;
     transition: color .2s, border-color .2s;
   }
-  .tab-btn:hover { color: var(--text); }
+  .tab-btn:hover { color: #d0ddf0; }
   .tab-btn.active {
     color: #fff;
-    border-bottom-color: #fff;
+    border-bottom-color: var(--accent);
   }
 
   /* ── LAYOUT ── */
@@ -90,15 +97,16 @@
   /* ── CARDS ── */
   .card {
     background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    border: 1px solid var(--border2);
+    border-radius: 10px;
     padding: 18px 20px;
     margin-bottom: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.3);
   }
   .card:last-child { margin-bottom: 0; }
   .card-label {
     font-size: 10px;
-    letter-spacing: .14em;
+    letter-spacing: .16em;
     color: var(--muted);
     margin-bottom: 14px;
     display: block;
@@ -108,75 +116,96 @@
   input[type="text"], textarea {
     width: 100%;
     background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 5px;
+    border: 1px solid var(--border2);
+    border-radius: 6px;
     color: var(--text);
     font-family: var(--font-mono);
     font-size: 13px;
     padding: 9px 12px;
     outline: none;
-    transition: border-color .2s;
+    transition: border-color .2s, box-shadow .2s;
     resize: vertical;
   }
   input[type="text"]:focus,
-  textarea:focus { border-color: var(--subtle); }
+  textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(77,128,255,.15);
+  }
   textarea { height: 76px; margin-bottom: 12px; }
 
   .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 
+  /* ── CHIPS ── */
   .chip {
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: .08em;
-    border-radius: 4px;
-    padding: 4px 12px;
+    border-radius: 5px;
+    padding: 5px 14px;
     cursor: pointer;
     border: 1px solid;
-    transition: background .15s, color .15s;
+    transition: all .18s;
+    font-weight: 600;
   }
-  .chip-spam  { border-color: var(--spam); color: var(--spam); background: var(--spam-bg); }
-  .chip-ham   { border-color: var(--ham);  color: var(--ham);  background: var(--ham-bg);  }
-  .chip-spam.sel { background: var(--spam); color: #1a0800; font-weight: 700; }
-  .chip-ham.sel  { background: var(--ham);  color: #00180f; font-weight: 700; }
+  .chip-spam  { border-color: rgba(255,77,46,.6); color: var(--spam); background: var(--spam-bg); }
+  .chip-ham   { border-color: rgba(29,233,155,.5); color: var(--ham); background: var(--ham-bg); }
+  .chip-spam.sel {
+    background: var(--spam);
+    border-color: var(--spam);
+    color: #fff;
+    box-shadow: 0 0 14px var(--spam-glow);
+  }
+  .chip-ham.sel {
+    background: var(--ham);
+    border-color: var(--ham);
+    color: #041a0e;
+    box-shadow: 0 0 14px var(--ham-glow);
+  }
 
+  /* ── BUTTONS ── */
   .btn {
     font-family: var(--font-mono);
     font-size: 12px;
     letter-spacing: .07em;
-    background: #1d3a8a;
+    background: var(--accent);
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     padding: 9px 18px;
     cursor: pointer;
-    transition: background .2s;
+    transition: background .2s, box-shadow .2s;
     white-space: nowrap;
+    font-weight: 600;
   }
-  .btn:hover { background: #2550b8; }
+  .btn:hover {
+    background: #6698ff;
+    box-shadow: 0 0 16px rgba(77,128,255,.35);
+  }
   .btn-full { width: 100%; margin-top: 10px; }
-  .btn-danger { background: #7f1d1d; }
-  .btn-danger:hover { background: #b91c1c; }
+  .btn-danger { background: #c0392b; }
+  .btn-danger:hover { background: #e74c3c; box-shadow: 0 0 14px rgba(231,76,60,.35); }
   .btn-ghost {
     font-family: var(--font-mono);
     font-size: 12px;
     letter-spacing: .07em;
     background: transparent;
     color: var(--subtle);
-    border: 1px solid var(--border);
-    border-radius: 5px;
+    border: 1px solid var(--border2);
+    border-radius: 6px;
     padding: 9px 18px;
     cursor: pointer;
     transition: all .2s;
     white-space: nowrap;
   }
   .btn-ghost:hover { border-color: var(--subtle); color: var(--text); }
-  .btn-generate { background: #134e27; }
-  .btn-generate:hover { background: #166534; }
-  .btn-generate:disabled { background: #0d2e17; color: #4a7a5a; cursor: not-allowed; }
+  .btn-generate { background: #0d6e3e; }
+  .btn-generate:hover { background: #0f8a4d; box-shadow: 0 0 14px rgba(29,233,155,.25); }
+  .btn-generate:disabled { background: #0a3d25; color: #2a7a50; cursor: not-allowed; }
 
+  /* ── FILE DROP ── */
   .file-drop {
-    border: 1px dashed var(--border);
-    border-radius: 6px;
+    border: 1px dashed var(--border2);
+    border-radius: 8px;
     padding: 16px;
     text-align: center;
     cursor: pointer;
@@ -184,54 +213,58 @@
     margin-bottom: 10px;
     position: relative;
   }
-  .file-drop:hover { border-color: var(--subtle); background: rgba(136,149,176,.04); }
+  .file-drop:hover { border-color: var(--accent); background: rgba(77,128,255,.05); }
   .file-drop input[type="file"] { position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%; }
   .file-drop .drop-icon { font-size: 20px; margin-bottom: 4px; }
   .file-drop .drop-text { font-size: 12px; color: var(--subtle); }
   .file-drop .drop-sub  { font-size: 10px; color: var(--muted); margin-top: 3px; }
 
+  /* ── FORMAT BOX ── */
   .format-box {
     background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 5px;
+    border: 1px solid var(--border2);
+    border-radius: 6px;
     padding: 10px 12px;
     font-size: 11px;
-    color: var(--muted);
+    color: var(--subtle);
     margin-bottom: 10px;
     line-height: 1.7;
   }
-  .format-box code { display:block; color: var(--subtle); margin-top: 4px; letter-spacing: .03em; }
+  .format-box code { display:block; color: var(--text); margin-top: 4px; letter-spacing: .03em; opacity: .75; }
 
+  /* ── GENERATE CONTROLS ── */
   .gen-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
   .gen-count {
     width: 70px;
     background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 5px;
+    border: 1px solid var(--border2);
+    border-radius: 6px;
     color: var(--text);
     font-family: var(--font-mono);
     font-size: 13px;
     padding: 8px 10px;
     outline: none;
     text-align: center;
+    transition: border-color .2s;
   }
-  .gen-count:focus { border-color: var(--subtle); }
+  .gen-count:focus { border-color: var(--accent); }
 
+  /* ── STATUS MESSAGES ── */
   .status-msg {
     font-size: 11px;
     padding: 8px 12px;
-    border-radius: 5px;
+    border-radius: 6px;
     margin-top: 10px;
     display: none;
   }
-  .status-msg.info    { background: rgba(48,214,176,.08); border:1px solid rgba(48,214,176,.2); color: var(--ham); display:block; }
-  .status-msg.error   { background: rgba(239,68,68,.08);  border:1px solid rgba(239,68,68,.2);  color: #f87171;   display:block; }
-  .status-msg.loading { background: rgba(136,149,176,.06);border:1px solid var(--border);       color: var(--subtle); display:block; }
+  .status-msg.info    { background: rgba(29,233,155,.08); border:1px solid rgba(29,233,155,.25); color: var(--ham); display:block; }
+  .status-msg.error   { background: rgba(255,77,46,.08);  border:1px solid rgba(255,77,46,.25);  color: #ff8060;   display:block; }
+  .status-msg.loading { background: rgba(255,255,255,.04);border:1px solid var(--border2);       color: var(--subtle); display:block; }
 
   .spinner {
     display: inline-block;
     width: 10px; height: 10px;
-    border: 2px solid var(--border);
+    border: 2px solid var(--border2);
     border-top-color: var(--ham);
     border-radius: 50%;
     animation: spin .7s linear infinite;
@@ -239,386 +272,279 @@
     vertical-align: middle;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .section-divider { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
-  /* ── KONFIDENSINDIKATOR ── */
+
+  /* ── CONFIDENCE BAR ── */
   .confidence-bar-wrap {
     margin-top: 14px;
-    background: rgba(0,0,0,.25);
-    border-radius: 6px;
-    padding: 12px 16px;
-    border: 1px solid rgba(255,255,255,.06);
+    background: rgba(0,0,0,.3);
+    border-radius: 8px;
+    padding: 14px 16px;
+    border: 1px solid var(--border2);
   }
-  .confidence-label { font-size: 10px; letter-spacing: .1em; color: rgba(255,255,255,.35); margin-bottom: 8px; }
+  .confidence-label { font-size: 10px; letter-spacing: .12em; color: var(--muted); margin-bottom: 8px; }
   .confidence-track {
     height: 12px; border-radius: 6px;
     background: rgba(255,255,255,.06);
-    position: relative; margin-bottom: 8px; overflow: visible;
+    position: relative; margin-bottom: 8px; overflow: hidden;
   }
   .confidence-fill {
     height: 100%; border-radius: 6px;
     transition: width .5s ease;
-    position: relative;
   }
   .confidence-zones {
-    display: flex; font-size: 9px; color: rgba(255,255,255,.25);
-    letter-spacing: .06em; justify-content: space-between; margin-top: 3px;
+    display: flex; font-size: 9px; color: var(--muted);
+    letter-spacing: .05em; justify-content: space-between; margin-top: 4px;
   }
   .confidence-verdict {
-    font-size: 13px; font-weight: 700; margin-top: 8px; letter-spacing: .05em;
+    font-size: 13px; font-weight: 700; margin-top: 10px; letter-spacing: .04em;
   }
 
-  /* ── TOKENISERING ── */
+  /* ── TOKENS ── */
   .token-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
   .token {
     font-size: 12px; padding: 4px 10px; border-radius: 4px;
     font-family: var(--font-mono); border: 1px solid;
     transition: all .2s;
   }
-  .token.kept    { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.15); color: var(--text); }
-  .token.stopped { background: transparent; border-color: var(--border); color: var(--muted); text-decoration: line-through; }
-  .token.short   { background: transparent; border-color: var(--border); color: var(--muted); text-decoration: line-through; }
+  .token.kept    { background: rgba(77,128,255,.12); border-color: rgba(77,128,255,.35); color: #c0d4ff; }
+  .token.stopped { background: transparent; border-color: var(--border2); color: var(--muted); text-decoration: line-through; }
+  .token.short   { background: transparent; border-color: var(--border2); color: var(--muted); text-decoration: line-through; }
   .token-legend  { display: flex; gap: 16px; font-size: 10px; color: var(--muted); margin-top: 10px; flex-wrap: wrap; }
 
-  /* ── MATH BREAKDOWN ── */
+  /* ── MATH STEPS ── */
   .math-step {
     background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    border: 1px solid var(--border2);
+    border-radius: 10px;
     margin-bottom: 12px;
     overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,.25);
   }
   .math-step-header {
     display: flex;
     align-items: center;
     gap: 12px;
     padding: 11px 16px;
-    border-bottom: 1px solid var(--border);
-    background: rgba(255,255,255,.02);
+    border-bottom: 1px solid var(--border2);
+    background: rgba(255,255,255,.025);
   }
-  .math-step-num {
-    font-size: 10px;
-    letter-spacing: .1em;
-    color: var(--muted);
-    min-width: 52px;
-  }
-  .math-step-word {
-    font-size: 14px;
-    font-weight: 600;
-    color: #fff;
-    flex: 1;
-  }
-  .math-step-shift {
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 3px;
-    border: 1px solid;
-  }
+  .math-step-num { font-size: 10px; letter-spacing: .1em; color: var(--muted); min-width: 52px; }
+  .math-step-word { font-size: 14px; font-weight: 700; color: #fff; flex: 1; }
+  .math-step-shift { font-size: 11px; padding: 3px 10px; border-radius: 4px; border: 1px solid; font-weight: 600; }
   .math-step-body { padding: 14px 16px; }
 
-  .math-prior-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 4px;
-  }
+  .math-prior-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 4px; }
   .math-prior-box {
     background: var(--bg);
-    border-radius: 6px;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    border: 1px solid var(--border2);
   }
-  .math-prior-box .mpb-cls { font-size: 10px; letter-spacing: .1em; margin-bottom: 6px; }
-  .math-prior-box .mpb-frac {
-    font-size: 13px;
-    color: var(--subtle);
-    margin-bottom: 4px;
-  }
+  .math-prior-box .mpb-cls { font-size: 10px; letter-spacing: .12em; margin-bottom: 6px; font-weight: 700; }
+  .math-prior-box .mpb-frac { font-size: 13px; color: var(--subtle); margin-bottom: 4px; }
   .math-prior-box .mpb-frac strong { color: #fff; }
-  .math-prior-box .mpb-bar {
-    height: 6px;
-    border-radius: 3px;
-    margin-top: 6px;
-  }
+  .math-prior-box .mpb-bar { height: 6px; border-radius: 3px; margin-top: 6px; }
 
-  .math-word-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
+  .math-word-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .math-word-box {
     background: var(--bg);
-    border-radius: 6px;
+    border-radius: 8px;
     padding: 12px 14px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border2);
   }
-  .math-word-box .mwb-cls   { font-size: 10px; letter-spacing: .1em; margin-bottom: 8px; }
-  .math-word-box .mwb-found { font-size: 11px; color: var(--muted); margin-bottom: 8px; line-height: 1.5; }
-  .math-word-box .mwb-found em { color: var(--subtle); font-style: normal; }
+  .math-word-box .mwb-cls   { font-size: 10px; letter-spacing: .12em; margin-bottom: 8px; font-weight: 700; }
+  .math-word-box .mwb-found { font-size: 11px; color: var(--subtle); margin-bottom: 8px; line-height: 1.6; }
+  .math-word-box .mwb-found em { color: var(--text); font-style: normal; }
   .math-word-box .mwb-formula {
     font-size: 12px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 7px 10px;
-    line-height: 2;
-    color: var(--muted);
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 5px;
+    padding: 8px 10px;
+    line-height: 2.1;
+    color: var(--subtle);
   }
   .math-word-box .mwb-formula strong { color: #fff; }
-  .math-word-box .mwb-formula .eq { color: var(--subtle); }
+  .math-word-box .mwb-formula .eq { color: var(--muted); }
 
-  .math-posterior {
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid var(--border);
-  }
+  .math-posterior { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border2); }
   .math-posterior-label { font-size: 10px; letter-spacing: .1em; color: var(--muted); margin-bottom: 8px; }
   .math-post-bar {
-    display: flex;
-    height: 26px;
-    border-radius: 4px;
-    overflow: hidden;
-    background: var(--border);
-    margin-bottom: 6px;
+    display: flex; height: 26px; border-radius: 5px;
+    overflow: hidden; background: var(--border); margin-bottom: 6px;
   }
   .math-post-bar .pb-spam { background: var(--spam); transition: width .4s ease; }
   .math-post-bar .pb-ham  { background: var(--ham);  transition: width .4s ease; }
-  .math-post-nums { display: flex; gap: 20px; font-size: 12px; }
+  .math-post-nums { display: flex; gap: 20px; font-size: 12px; font-weight: 600; }
   .math-post-nums .pn-spam { color: var(--spam); }
   .math-post-nums .pn-ham  { color: var(--ham);  }
 
-  /* ── FULL FORMULA PANEL ── */
+  /* ── FORMULA PANEL ── */
   .formula-toggle {
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: .07em;
     background: transparent;
-    border: 1px solid rgba(255,255,255,.15);
-    color: rgba(255,255,255,.6);
-    border-radius: 4px;
-    padding: 5px 14px;
+    border: 1px solid var(--border2);
+    color: var(--subtle);
+    border-radius: 5px;
+    padding: 6px 14px;
     cursor: pointer;
     margin-top: 14px;
     transition: all .2s;
     display: inline-block;
   }
-  .formula-toggle:hover { border-color: rgba(255,255,255,.4); color: #fff; }
+  .formula-toggle:hover { border-color: var(--accent); color: var(--text); }
 
   .formula-panel {
     margin-top: 14px;
     background: rgba(0,0,0,.3);
-    border: 1px solid rgba(255,255,255,.08);
-    border-radius: 6px;
+    border: 1px solid var(--border2);
+    border-radius: 8px;
     padding: 16px;
     display: none;
   }
   .formula-panel.open { display: block; }
-  .formula-panel .fp-title {
-    font-size: 10px;
-    letter-spacing: .12em;
-    color: rgba(255,255,255,.4);
-    margin-bottom: 12px;
-  }
+  .formula-panel .fp-title { font-size: 10px; letter-spacing: .14em; color: var(--muted); margin-bottom: 12px; }
   .formula-panel .fp-abstract {
-    font-size: 12px;
-    color: rgba(255,255,255,.5);
-    margin-bottom: 14px;
-    line-height: 1.7;
-    padding-bottom: 12px;
-    border-bottom: 1px solid rgba(255,255,255,.07);
+    font-size: 12px; color: var(--subtle); margin-bottom: 14px;
+    line-height: 1.8; padding-bottom: 12px;
+    border-bottom: 1px solid var(--border2);
   }
-  .formula-panel .fp-abstract strong { color: rgba(255,255,255,.85); }
+  .formula-panel .fp-abstract strong { color: var(--text); }
   .fp-class-block { margin-bottom: 14px; }
   .fp-class-block:last-child { margin-bottom: 0; }
-  .fp-class-name {
-    font-size: 11px;
-    letter-spacing: .1em;
-    margin-bottom: 8px;
-    font-weight: 700;
-  }
+  .fp-class-name { font-size: 11px; letter-spacing: .1em; margin-bottom: 8px; font-weight: 700; }
   .fp-line {
-    font-size: 11px;
-    color: rgba(255,255,255,.45);
-    line-height: 2;
-    padding: 6px 10px;
-    background: rgba(255,255,255,.03);
-    border-radius: 4px;
-    border: 1px solid rgba(255,255,255,.05);
-    overflow-x: auto;
-    white-space: nowrap;
+    font-size: 11px; color: var(--subtle); line-height: 2;
+    padding: 8px 12px; background: var(--surface2);
+    border-radius: 5px; border: 1px solid var(--border2);
+    overflow-x: auto; white-space: nowrap;
   }
-  .fp-line strong { color: rgba(255,255,255,.85); }
-  .fp-line .fp-op { color: rgba(255,255,255,.25); }
+  .fp-line strong { color: var(--text); }
+  .fp-line .fp-op { color: var(--muted); }
   .fp-result {
-    font-size: 12px;
-    margin-top: 8px;
-    padding: 8px 12px;
-    border-radius: 4px;
-    border: 1px solid;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    font-size: 12px; margin-top: 8px; padding: 8px 12px;
+    border-radius: 5px; border: 1px solid;
+    display: flex; justify-content: space-between; align-items: center;
   }
 
   /* ── EXAMPLE LIST ── */
   .ex-list {
-    max-height: 340px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding-right: 2px;
+    max-height: 340px; overflow-y: auto;
+    display: flex; flex-direction: column; gap: 5px; padding-right: 2px;
   }
   .ex-list::-webkit-scrollbar { width: 4px; }
   .ex-list::-webkit-scrollbar-track { background: transparent; }
-  .ex-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .ex-list::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
 
   .ex-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 7px 10px;
-    border-radius: 5px;
-    border: 1px solid transparent;
-    font-size: 12px;
+    display: flex; align-items: center; gap: 10px;
+    padding: 7px 10px; border-radius: 6px;
+    border: 1px solid transparent; font-size: 12px;
     animation: fadeIn .2s ease;
   }
-  .ex-item.spam { background: var(--spam-bg); border-color: rgba(248,114,57,.2); }
-  .ex-item.ham  { background: var(--ham-bg);  border-color: rgba(48,214,176,.2);  }
-  .ex-item .label-tag { font-size: 10px; letter-spacing: .08em; min-width: 34px; }
+  .ex-item.spam { background: rgba(255,77,46,.07); border-color: rgba(255,77,46,.2); }
+  .ex-item.ham  { background: rgba(29,233,155,.07); border-color: rgba(29,233,155,.2); }
+  .ex-item .label-tag { font-size: 10px; letter-spacing: .08em; min-width: 34px; font-weight: 700; }
   .ex-item .label-tag.spam { color: var(--spam); }
   .ex-item .label-tag.ham  { color: var(--ham);  }
   .ex-item .ex-text { flex: 1; color: var(--subtle); }
   .del-btn {
-    background: none;
-    border: none;
-    color: var(--muted);
-    cursor: pointer;
-    font-size: 15px;
-    padding: 0 3px;
-    line-height: 1;
-    transition: color .2s;
+    background: none; border: none; color: var(--muted);
+    cursor: pointer; font-size: 15px; padding: 0 3px;
+    line-height: 1; transition: color .2s;
   }
-  .del-btn:hover { color: #e05; }
+  .del-btn:hover { color: #ff5533; }
 
   /* ── STAT GRID ── */
   .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .stat-box {
-    border-radius: 6px;
-    padding: 12px 14px;
-    border: 1px solid;
+    border-radius: 10px; padding: 16px 18px; border: 1px solid;
+    position: relative; overflow: hidden;
   }
-  .stat-box.spam { background: var(--spam-bg); border-color: rgba(248,114,57,.3); }
-  .stat-box.ham  { background: var(--ham-bg);  border-color: rgba(48,214,176,.3);  }
-  .stat-box .cls-name { font-size: 10px; letter-spacing: .12em; margin-bottom: 2px; }
+  .stat-box::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    border-radius: 10px 10px 0 0;
+  }
+  .stat-box.spam {
+    background: linear-gradient(135deg, rgba(255,77,46,.12) 0%, rgba(255,77,46,.05) 100%);
+    border-color: rgba(255,77,46,.3);
+  }
+  .stat-box.spam::before { background: var(--spam); box-shadow: 0 0 12px var(--spam-glow); }
+  .stat-box.ham  {
+    background: linear-gradient(135deg, rgba(29,233,155,.10) 0%, rgba(29,233,155,.04) 100%);
+    border-color: rgba(29,233,155,.28);
+  }
+  .stat-box.ham::before  { background: var(--ham);  box-shadow: 0 0 12px var(--ham-glow);  }
+  .stat-box .cls-name { font-size: 10px; letter-spacing: .14em; margin-bottom: 4px; font-weight: 700; }
   .stat-box.spam .cls-name { color: var(--spam); }
   .stat-box.ham  .cls-name { color: var(--ham);  }
-  .stat-box .big-num { font-size: 28px; font-weight: 700; color: #fff; line-height: 1.1; }
+  .stat-box .big-num { font-size: 32px; font-weight: 700; color: #fff; line-height: 1.1; }
   .stat-box .stat-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
-  .stat-box .prior { font-size: 12px; color: var(--subtle); margin-top: 6px; }
+  .stat-box .prior { font-size: 12px; color: var(--subtle); margin-top: 8px; }
   .vocab-note { font-size: 11px; color: var(--muted); margin-top: 12px; }
 
-  /* ── BAR ROWS (Model tab) ── */
+  /* ── BAR ROWS ── */
   .bar-row {
-    display: grid;
-    grid-template-columns: 110px 1fr 56px 80px;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 7px;
+    display: grid; grid-template-columns: 110px 1fr 56px 80px;
+    gap: 10px; align-items: center; margin-bottom: 7px;
   }
   .bar-row .word { color: var(--text); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .bar-track { background: var(--border); border-radius: 3px; height: 16px; overflow: hidden; }
   .bar-fill { height: 100%; border-radius: 3px; transition: width .4s ease; }
   .bar-row .count { color: var(--muted); font-size: 11px; text-align: right; }
-  .bar-row .prob  { font-size: 12px; text-align: right; }
+  .bar-row .prob  { font-size: 12px; text-align: right; font-weight: 600; }
 
   /* ── COMPARE BARS ── */
   .compare-row {
-    display: grid;
-    grid-template-columns: 90px 1fr;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 6px;
+    display: grid; grid-template-columns: 90px 1fr;
+    gap: 10px; align-items: center; margin-bottom: 7px;
   }
   .compare-row .cword { color: var(--subtle); font-size: 12px; }
-  .split-bar { display: flex; height: 22px; border-radius: 3px; overflow: hidden; }
-  .split-spam { background: var(--spam); display: flex; align-items: center; justify-content: center; font-size: 10px; color: #1a0800; font-weight: 700; transition: width .4s; }
-  .split-ham  { background: var(--ham);  display: flex; align-items: center; justify-content: center; font-size: 10px; color: #001a0f; font-weight: 700; transition: width .4s; }
+  .split-bar { display: flex; height: 22px; border-radius: 4px; overflow: hidden; }
+  .split-spam { background: var(--spam); display: flex; align-items: center; justify-content: center; font-size: 10px; color: rgba(0,0,0,.7); font-weight: 700; transition: width .4s; }
+  .split-ham  { background: var(--ham);  display: flex; align-items: center; justify-content: center; font-size: 10px; color: rgba(0,0,0,.7); font-weight: 700; transition: width .4s; }
 
-  /* ── CLASSIFY TAB ── */
+  /* ── VERDICT CARD ── */
   .verdict-card {
-    border-radius: 8px;
-    padding: 18px 20px;
-    margin-bottom: 16px;
-    border: 2px solid;
+    border-radius: 10px; padding: 20px 22px; margin-bottom: 16px; border: 1px solid;
+    box-shadow: 0 4px 24px rgba(0,0,0,.4);
   }
-  .verdict-card.spam { background: var(--spam-bg); border-color: var(--spam); }
-  .verdict-card.ham  { background: var(--ham-bg);  border-color: var(--ham);  }
-  .verdict-label { font-size: 10px; letter-spacing: .14em; color: var(--muted); margin-bottom: 4px; }
-  .verdict-class { font-size: 34px; font-weight: 700; letter-spacing: .1em; line-height: 1; }
-  .verdict-class.spam { color: var(--spam); }
-  .verdict-class.ham  { color: var(--ham);  }
-  .verdict-probs { display: flex; gap: 20px; margin-top: 10px; }
-  .verdict-probs span { font-size: 13px; }
-
-  /* ── STEP TABLE ── */
-  .step-row {
-    display: grid;
-    grid-template-columns: 100px 1fr 90px;
-    gap: 12px;
-    align-items: center;
-    padding: 7px 8px;
-    border-radius: 4px;
+  .verdict-card.spam {
+    background: linear-gradient(135deg, rgba(255,77,46,.15) 0%, rgba(255,77,46,.06) 100%);
+    border-color: rgba(255,77,46,.5);
+    box-shadow: 0 4px 24px rgba(255,77,46,.15);
   }
-  .step-row:nth-child(odd) { background: var(--bg); }
-  .step-row .step-word { font-size: 13px; color: var(--text); }
-  .step-row .step-word.prior { font-size: 11px; font-style: italic; color: var(--muted); }
-  .step-bar { display: flex; height: 22px; border-radius: 3px; overflow: hidden; background: var(--border); }
-  .step-bar .sb-spam { background: var(--spam); transition: width .35s ease; }
-  .step-bar .sb-ham  { background: var(--ham);  transition: width .35s ease; }
-  .step-probs { font-size: 11px; display: flex; gap: 12px; }
-  .step-probs .sp { color: var(--spam); }
-  .step-probs .hp { color: var(--ham);  }
-
-  /* ── WORD DETAIL CARDS ── */
-  .word-detail-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 10px;
+  .verdict-card.ham  {
+    background: linear-gradient(135deg, rgba(29,233,155,.14) 0%, rgba(29,233,155,.05) 100%);
+    border-color: rgba(29,233,155,.45);
+    box-shadow: 0 4px 24px rgba(29,233,155,.12);
   }
-  .wd-card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 10px 12px;
-  }
-  .wd-word { color: #fff; font-size: 13px; font-weight: 600; border-bottom: 1px solid var(--border); padding-bottom: 6px; margin-bottom: 8px; }
-  .wd-row { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 3px; }
-  .wd-row .wd-cls.spam { color: var(--spam); }
-  .wd-row .wd-cls.ham  { color: var(--ham);  }
-  .wd-row .wd-n   { color: var(--muted); }
-  .wd-row .wd-p   { color: var(--subtle); }
-
-  /* ── FORMULA NOTE ── */
-  .formula-note {
-    font-size: 11px;
-    color: var(--muted);
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    padding: 8px 12px;
-    margin-bottom: 16px;
-    line-height: 1.8;
-  }
+  .verdict-label { font-size: 10px; letter-spacing: .16em; color: var(--muted); margin-bottom: 6px; }
+  .verdict-class { font-size: 36px; font-weight: 700; letter-spacing: .08em; line-height: 1; }
+  .verdict-class.spam { color: var(--spam); text-shadow: 0 0 20px var(--spam-glow); }
+  .verdict-class.ham  { color: var(--ham);  text-shadow: 0 0 20px var(--ham-glow);  }
+  .verdict-probs { display: flex; gap: 20px; margin-top: 12px; }
+  .verdict-probs span { font-size: 13px; font-weight: 600; }
 
   /* ── EMPTY STATE ── */
   .empty { text-align: center; padding: 48px 20px; color: var(--muted); font-size: 13px; }
   .empty strong { display: block; font-size: 15px; color: var(--subtle); margin-bottom: 6px; }
 
   /* ── LEGEND ── */
-  .legend { display: flex; gap: 16px; font-size: 11px; margin-top: 12px; }
+  .legend { display: flex; gap: 16px; font-size: 11px; margin-top: 12px; font-weight: 600; }
   .legend span::before { content: '■ '; }
   .legend .ls { color: var(--spam); }
   .legend .lh { color: var(--ham); }
+
+  /* ── FORMULA NOTE ── */
+  .formula-note {
+    font-size: 11px; color: var(--subtle);
+    background: var(--surface2); border: 1px solid var(--border2);
+    border-radius: 6px; padding: 10px 14px; margin-bottom: 16px; line-height: 1.8;
+  }
 
   /* ── ANIMATIONS ── */
   @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
@@ -644,24 +570,19 @@
   <button class="tab-btn"        data-tab="classify">③ KLASSIFICERA</button>
 </nav>
 
-<!-- ═══════════════════════════════════════════════════ TAB 0: INSTRUKTION -->
 <section id="tab-intro" class="tab-panel active">
   <div style="max-width:680px;margin:0 auto;padding:8px 0 32px">
-
     <p style="font-size:15px;color:var(--text);line-height:1.9;margin-bottom:28px">
       I det här labbet tränar du ett <strong>Naïve Bayes-filter</strong> — samma typ av algoritm som används i verkliga spamfilter.
       Du bestämmer vad modellen lär sig, och kan sedan se exakt hur matematiken fungerar när den klassificerar nya mejl.
     </p>
-
     <div style="border-left:2px solid var(--border);padding-left:20px;margin-bottom:28px">
       <p style="font-size:12px;color:var(--subtle);line-height:1.8;font-style:italic">
         Algoritmen kallas <em>naïve</em> (naiv) för att den antar att varje ord i ett mejl är oberoende av alla andra ord.
         I verkligheten stämmer det sällan — men förenklingen gör matematiken hanterbar och modellen förvånansvärt träffsäker.
       </p>
     </div>
-
     <div style="display:flex;flex-direction:column;gap:22px;margin-bottom:32px">
-
       <div>
         <div style="font-size:12px;font-weight:700;color:var(--text);letter-spacing:.06em;margin-bottom:6px">① TRÄNA</div>
         <p style="font-size:12px;color:var(--muted);line-height:1.8">
@@ -670,7 +591,6 @@
           Det går också att skriva egna meningar eller ladda upp en fil i formatet <code style="color:var(--subtle)">SPAM,text</code> / <code style="color:var(--subtle)">HAM,text</code>.
         </p>
       </div>
-
       <div>
         <div style="font-size:12px;font-weight:700;color:var(--text);letter-spacing:.06em;margin-bottom:6px">② MODELL</div>
         <p style="font-size:12px;color:var(--muted);line-height:1.8">
@@ -678,7 +598,6 @@
           Jämförelsevisningen visar samma ord för båda klasser sida vid sida, så du ser vilka ord som verkligen skiljer dem åt.
         </p>
       </div>
-
       <div>
         <div style="font-size:12px;font-weight:700;color:var(--text);letter-spacing:.06em;margin-bottom:6px">③ KLASSIFICERA</div>
         <p style="font-size:12px;color:var(--muted);line-height:1.8">
@@ -687,20 +606,15 @@
           för att se Bayes formel med dina egna siffror.
         </p>
       </div>
-
     </div>
-
     <button class="btn" style="padding:11px 28px;font-size:13px" onclick="goToTrain()">
       Kom igång →
     </button>
-
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════ TAB 1: TRÄNA -->
 <section id="tab-train" class="tab-panel">
   <div class="two-col">
-
     <div>
       <div class="card">
         <span class="card-label">LÄGG TILL TRÄNINGSEXEMPEL</span>
@@ -712,7 +626,6 @@
           <button class="btn" style="margin-left:auto" onclick="addExample()">＋ LÄGG TILL</button>
         </div>
       </div>
-
       <div class="card">
         <span class="card-label">STATISTIK</span>
         <div class="stat-grid" id="stat-grid">
@@ -732,7 +645,6 @@
         <div class="vocab-note" id="vocab-note">Ordförråd: — ord</div>
       </div>
     </div>
-
     <div class="card" style="margin-bottom:0">
       <span class="card-label">
         TRÄNINGSDATA
@@ -742,12 +654,9 @@
       </span>
       <div class="ex-list" id="ex-list"></div>
     </div>
-
   </div>
 
-  <!-- ── MASSIMPORT + GENERERA ── -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px">
-
     <div class="card" style="margin-bottom:0">
       <span class="card-label">IMPORTERA TRÄNINGSDATA VIA FIL</span>
       <div class="format-box">
@@ -764,7 +673,6 @@
       </div>
       <div class="status-msg" id="import-status"></div>
     </div>
-
     <div class="card" style="margin-bottom:0">
       <span class="card-label">GENERERA TRÄNINGSDATA AUTOMATISKT</span>
       <p style="font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.7">
@@ -773,7 +681,7 @@
       </p>
       <div class="gen-row" style="margin-bottom:12px">
         <span style="font-size:11px;color:var(--muted)">ANTAL:</span>
-        <input type="number" class="gen-count" id="gen-count" value="20" min="4" max="200" step="2">
+        <input type="number" class="gen-count" id="gen-count" value="20" min="4" max="500" step="2">
         <button class="btn btn-generate" id="gen-btn" onclick="generateData()">⚡ GENERERA</button>
         <button class="btn-ghost" onclick="generateData(true)">+ Lägg till utan att rensa</button>
       </div>
@@ -795,28 +703,32 @@
       </div>
       <div class="status-msg" id="gen-status"></div>
     </div>
-
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════ TAB 2: MODELL -->
 <section id="tab-model" class="tab-panel">
   <div id="model-empty" class="empty"><strong>Ingen modell ännu</strong>Lägg till träningsdata i fliken Träna.</div>
   <div id="model-content" style="display:none">
-
     <div class="row" style="margin-bottom:18px;gap:8px">
       <span style="font-size:11px;color:var(--muted);letter-spacing:.08em">VISA KLASS:</span>
       <button class="chip chip-spam sel" id="mchip-spam" onclick="setModelClass('SPAM')">Skräppost</button>
       <button class="chip chip-ham"      id="mchip-ham"  onclick="setModelClass('HAM')">Ej skräppost</button>
     </div>
-
     <div class="card">
       <span class="card-label" id="model-bar-label">P(ORD | SPAM) — TOPPORD</span>
-      <div class="formula-note">
-        Formel med Laplace-utjämning:<br>
-        <strong style="color:var(--text)">P(ord | klass) = (antal(ord, klass) + 1) / (totalt(klass) + |V|)</strong>
-        &nbsp;— |V| = storleken på ordförrådet.<br>
-        <span style="color:var(--muted)">
+      <div id="model-bars"></div>
+    </div>
+    <div class="card">
+      <span class="card-label">JÄMFÖRELSE: SKRÄPPOST vs EJ SKRÄPPOST FÖR SAMMA ORD</span>
+      <div id="compare-bars"></div>
+      <div class="legend" id="compare-legend"><span class="ls">Skräppost</span><span class="lh">Ej skräppost</span></div>
+    </div>
+    <div class="card">
+      <span class="card-label">LAPLACE-UTJÄMNING</span>
+      <div class="formula-note" style="margin-bottom:0">
+        Formel för beräkning av sannolikheten för orden: <strong style="color:var(--text)">P(ord | klass) = (antal(ord, klass) + 1) / (totalt(klass) + |V|)</strong>
+        &nbsp;— där |V| är storleken på ordförrådet.<br><br>
+        <span style="color:var(--subtle)">
         <strong style="color:var(--subtle)">Varför +1?</strong>
         Om ett ord aldrig förekommit i träningsdatan för en klass skulle P = 0/totalt = 0.
         Eftersom modellen multiplicerar ihop alla ordssannolikheter skulle <em>ett enda okänt ord</em> göra hela produkten noll — och klassificeringen kraschade.
@@ -824,23 +736,13 @@
         För att hålla summan av alla sannolikheter till 1 kompenseras nämnaren med +|V|.
         </span>
       </div>
-      <div id="model-bars"></div>
     </div>
-
-    <div class="card">
-      <span class="card-label">JÄMFÖRELSE: SKRÄPPOST vs EJ SKRÄPPOST FÖR SAMMA ORD</span>
-      <div id="compare-bars"></div>
-      <div class="legend"><span class="ls">Skräppost</span><span class="lh">Ej skräppost</span></div>
-    </div>
-
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════ TAB 3: KLASSIFICERA -->
 <section id="tab-classify" class="tab-panel">
   <div id="classify-empty" class="empty"><strong>Ingen modell ännu</strong>Lägg till träningsdata i fliken Träna.</div>
   <div id="classify-content" style="display:none">
-
     <div class="card">
       <span class="card-label">TEXT ATT KLASSIFICERA</span>
       <div class="row">
@@ -848,9 +750,7 @@
         <button class="btn" onclick="classify()">KLASSIFICERA →</button>
       </div>
     </div>
-
     <div id="classify-result" style="display:none">
-
       <div class="verdict-card" id="verdict-card">
         <div class="verdict-label">KLASSIFICERAD SOM</div>
         <div class="verdict-class" id="verdict-class">—</div>
@@ -861,7 +761,6 @@
         </button>
         <div class="formula-panel" id="formula-panel"></div>
       </div>
-
       <div class="card" id="tokenization-card">
         <span class="card-label">STEG 1 — TOKENISERING OCH FILTRERING</span>
         <p style="font-size:11px;color:var(--muted);line-height:1.7;margin-bottom:12px">
@@ -880,17 +779,12 @@
           Verkliga system reducerar ofta ord till sin grundform för att öka träffsäkerheten.
         </p>
       </div>
-
       <div id="math-breakdown"></div>
-
     </div>
   </div>
 </section>
 
 <script>
-// ══════════════════════════════════════════════════════════════════
-//  DATA
-// ══════════════════════════════════════════════════════════════════
 const STOP = new Set([
   'och','att','det','är','en','på','de','med','som','för','inte','av',
   'om','så','men','har','vi','till','kan','ett','han','hon','sig','du',
@@ -900,19 +794,11 @@ const STOP = new Set([
 ]);
 
 let examples = [];
-
 let newLabel = "SPAM";
 let modelClass = "SPAM";
-
-// Visningsnamn – ändra här för att byta etiketter i hela gränssnittet
 const DISPLAY = { SPAM: 'Skräppost', HAM: 'Ej skräppost' };
-
-// Lagrar senaste klassificeringsdata för formelvisning
 let lastCalc = null;
 
-// ══════════════════════════════════════════════════════════════════
-//  NB CORE
-// ══════════════════════════════════════════════════════════════════
 function tokenize(text) {
   return (text.toLowerCase().match(/[a-zåäö]+/g) || [])
     .filter(w => w.length > 2 && !STOP.has(w));
@@ -961,12 +847,8 @@ function getClassifySteps(text, model) {
   return { steps, tokens };
 }
 
-// ══════════════════════════════════════════════════════════════════
-//  RENDER HELPERS
-// ══════════════════════════════════════════════════════════════════
 function pct(x) { return (x * 100).toFixed(1) + '%'; }
 function fmt4(x) { return x.toFixed(4); }
-
 function colorOf(cls) { return cls === 'SPAM' ? 'var(--spam)' : 'var(--ham)'; }
 
 function renderExList() {
@@ -1002,16 +884,13 @@ function renderModel() {
   const m = buildModel();
   const { wc, totals, vs, classes } = m;
   const cls = modelClass;
-  const other = classes.find(c => c !== cls);
 
-  // Update chip styles
   ['SPAM','HAM'].forEach(c => {
     const ch = document.getElementById(`mchip-${c.toLowerCase()}`);
     ch.className = `chip chip-${c.toLowerCase()}${c === cls ? ' sel' : ''}`;
   });
   document.getElementById('model-bar-label').textContent = `P(ORD | ${DISPLAY[cls]}) — TOPPORD`;
 
-  // Top-word bars
   const top = Object.entries(wc[cls] || {})
     .map(([w, count]) => ({ w, count, prob: (count + 1) / (totals[cls] + vs) }))
     .sort((a, b) => b.count - a.count).slice(0, 14);
@@ -1027,22 +906,25 @@ function renderModel() {
       <span class="prob" style="color:${colorOf(cls)}">${fmt4(prob)}</span>
     </div>`).join('');
 
-  // Compare bars (top spam words)
-  const topSpam = Object.entries(wc['SPAM'] || {})
+  const topWords = Object.entries(wc[cls] || {})
     .sort((a,b) => b[1]-a[1]).slice(0,10).map(([w]) => w);
+  const otherCls = classes.find(c => c !== cls) || (cls === 'SPAM' ? 'HAM' : 'SPAM');
 
-  document.getElementById('compare-bars').innerHTML = topSpam.map(w => {
-    const ps = ((wc.SPAM?.[w] || 0) + 1) / (totals.SPAM + vs);
-    const ph = ((wc.HAM?.[w]  || 0) + 1) / (totals.HAM  + vs);
+  document.getElementById('compare-legend').innerHTML =
+    `<span style="color:${colorOf(cls)}">${DISPLAY[cls]}</span><span style="color:${colorOf(otherCls)}">${DISPLAY[otherCls]}</span>`;
+
+  document.getElementById('compare-bars').innerHTML = topWords.map(w => {
+    const ps = (((wc[cls]      && wc[cls][w])      || 0) + 1) / (totals[cls]      + vs);
+    const ph = (((wc[otherCls] && wc[otherCls][w]) || 0) + 1) / (totals[otherCls] + vs);
     const t  = ps + ph;
-    const spPct = (ps/t*100).toFixed(1);
-    const haPct = (ph/t*100).toFixed(1);
+    const clsPct   = (ps/t*100).toFixed(1);
+    const otherPct = (ph/t*100).toFixed(1);
     return `
     <div class="compare-row">
       <span class="cword">${escHtml(w)}</span>
       <div class="split-bar">
-        <div class="split-spam" style="width:${spPct}%">${ps > 0.005 ? ps.toFixed(3) : ''}</div>
-        <div class="split-ham"  style="width:${haPct}%">${ph > 0.005 ? ph.toFixed(3) : ''}</div>
+        <div class="split-spam" style="width:${clsPct}%;background:${colorOf(cls)}">${ps > 0.005 ? ps.toFixed(3) : ''}</div>
+        <div class="split-ham"  style="width:${otherPct}%;background:${colorOf(otherCls)}">${ph > 0.005 ? ph.toFixed(3) : ''}</div>
       </div>
     </div>`;
   }).join('');
@@ -1056,14 +938,11 @@ function classify() {
   const { steps, tokens } = getClassifySteps(text, m);
   const { cc, wc, totals, vs, total, classes } = m;
 
-  // Lagra för formelvisning
   lastCalc = { m, steps, tokens, text };
 
-  // Återställ formel-panel
   document.getElementById('formula-panel').classList.remove('open');
   document.getElementById('formula-toggle-btn').textContent = 'ƒ Visa hela beräkningen';
 
-  // ── Verdict ──
   const final = steps[steps.length - 1];
   const pred  = Object.entries(final.posteriors).sort((a,b) => b[1]-a[1])[0][0];
   const conf  = final.posteriors[pred] || 0;
@@ -1074,14 +953,9 @@ function classify() {
   document.getElementById('verdict-probs').innerHTML    =
     classes.map(c => `<span style="color:${colorOf(c)}">${DISPLAY[c]}: <strong>${pct(final.posteriors[c])}</strong></span>`).join('');
 
-  // ── Konfidensindikator ──
   const confPct = conf * 100;
-  const confColor = confPct >= 85 ? colorOf(pred)
-                  : confPct >= 65 ? '#fbbf24'
-                  : '#94a3b8';
-  const confText = confPct >= 85 ? 'Mycket säker'
-                 : confPct >= 65 ? 'Ganska säker — men med viss osäkerhet'
-                 : 'Osäker — texten liknar båda klasserna';
+  const confColor = confPct >= 85 ? colorOf(pred) : confPct >= 65 ? '#fbbf24' : '#94a3b8';
+  const confText = confPct >= 85 ? 'Mycket säker' : confPct >= 65 ? 'Ganska säker — men med viss osäkerhet' : 'Osäker — texten liknar båda klasserna';
   const confNote = confPct >= 85 ? 'Sannolikhetsfördelningen är tydligt ensidig.'
                  : confPct >= 65 ? 'Modellen lutar åt ett håll men orden ger blandade signaler.'
                  : 'Orden i texten förekommer ungefär lika ofta i båda klasser. Mer träningsdata eller tydligare ord skulle hjälpa.';
@@ -1094,9 +968,8 @@ function classify() {
       <span>0%</span><span>Osäker &lt;65%</span><span>Ganska säker &lt;85%</span><span>Mycket säker ≥85%</span><span>100%</span>
     </div>
     <div class="confidence-verdict" style="color:${confColor}">${confPct.toFixed(1)}% — ${confText}</div>
-    <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:4px">${confNote}</div>`;
+    <div style="font-size:11px;color:var(--subtle);margin-top:4px">${confNote}</div>`;
 
-  // ── Tokenisering ──
   const rawWords = (text.toLowerCase().match(/[a-zåäö]+/g) || []);
   document.getElementById('token-display').innerHTML = rawWords.map(w => {
     if (w.length <= 2)     return `<span class="token short" title="För kort (≤2 tecken)">${escHtml(w)}</span>`;
@@ -1108,7 +981,6 @@ function classify() {
       `<span style="color:var(--muted);font-size:12px">Inga ord hittades i texten.</span>`;
   }
 
-  // ── Math breakdown ──
   let html = `
   <div class="card" style="margin-bottom:12px">
     <span class="card-label">MATEMATIK STEG FÖR STEG</span>
@@ -1119,7 +991,6 @@ function classify() {
     </p>
   </div>`;
 
-  // ── STEG 0: Prior ──
   const priorPost = steps[0].posteriors;
   html += `
   <div class="math-step">
@@ -1159,7 +1030,6 @@ function classify() {
     </div>
   </div>`;
 
-  // ── STEG 1…N: ett per ord ──
   if (tokens.length === 0) {
     html += `<div class="card"><p style="font-size:12px;color:var(--muted)">Inga meningsbärande ord hittades i texten efter filtrering av stoppord.</p></div>`;
   }
@@ -1170,10 +1040,7 @@ function classify() {
     const winner   = Object.entries(post).sort((a,b) => b[1]-a[1])[0][0];
     const prevWin  = Object.entries(prevPost).sort((a,b) => b[1]-a[1])[0][0];
     const flipped  = winner !== prevWin;
-
-    // shift amount for header badge
     const spamShift = ((post.SPAM||0) - (prevPost.SPAM||0)) * 100;
-    const shiftCls  = winner === 'SPAM' ? 'spam' : 'ham';
     const shiftTxt  = spamShift > 0
       ? `↑ ${Math.abs(spamShift).toFixed(1)}% mot Skräppost`
       : spamShift < 0
@@ -1203,9 +1070,7 @@ function classify() {
               <div class="mwb-cls" style="color:${colorOf(c)}">${DISPLAY[c].toUpperCase()}</div>
               <div class="mwb-found">
                 ${unseen
-                  ? `<em>Ordet hittades <strong style="color:#f87171">inte</strong> i ${DISPLAY[c].toLowerCase()}-mejl under träningen.</em><br>
-                     <strong style="color:#fbbf24">⚠ Utan Laplace-utjämning:</strong> P = 0/${n_tot} = 0 — och hela produkten för ${DISPLAY[c]} hade blivit noll, oavsett alla andra ord.<br>
-                     <strong style="color:var(--ham)">Med Laplace (+1):</strong> vi låtsas att ordet förekommit en gång. Liten sannolikhet, men inte noll.`
+                  ? `Ordet hittades <em><strong style="color:#ff9080">inte</strong></em> i ${DISPLAY[c].toLowerCase()}-mejl under träningen. Laplace-utjämning (+1) ger det en liten sannolikhet.`
                   : `Ordet hittades <em><strong style="color:${colorOf(c)}">${n_ord} gång${n_ord !== 1 ? 'er' : ''}</strong></em> i ${DISPLAY[c].toLowerCase()}-mejl under träningen.`}
               </div>
               <div class="mwb-formula">
@@ -1219,7 +1084,7 @@ function classify() {
           }).join('')}
         </div>
         <div class="math-posterior">
-          <div class="math-posterior-label">FÖRDELNING EFTER STEG ${idx + 1}${flipped ? ' — <span style="color:#fbbf24">⚡ KLASSBYTE</span> <span style="color:rgba(255,255,255,.35);font-size:10px;font-style:italic">(detta ord vände majoritetssannolikheten från ${DISPLAY[prevWin]} till ${DISPLAY[winner]})</span>' : ''}</div>
+          <div class="math-posterior-label">FÖRDELNING EFTER STEG ${idx + 1}${flipped ? ` — <span style="color:#fbbf24">⚡ KLASSBYTE</span> <span style="color:var(--muted);font-size:10px;font-style:italic">(detta ord vände majoritetssannolikheten från ${DISPLAY[prevWin]} till ${DISPLAY[winner]})</span>` : ''}</div>
           <div class="math-post-bar">
             <div class="pb-spam" style="width:${(post.SPAM||0)*100}%"></div>
             <div class="pb-ham"  style="width:${(post.HAM||0)*100}%"></div>
@@ -1232,7 +1097,6 @@ function classify() {
     </div>`;
   });
 
-  // ── Ordförrådsnot ──
   html += `
   <div class="card" style="margin-top:4px">
     <span class="card-label">ORDFÖRRÅD OCH LAPLACE-UTJÄMNING</span>
@@ -1260,17 +1124,7 @@ function toggleFormula() {
   const { m, steps, tokens } = lastCalc;
   const { cc, wc, totals, vs, total, classes } = m;
   const final = steps[steps.length - 1];
-  const pred  = Object.entries(final.posteriors).sort((a,b) => b[1]-a[1])[0][0];
 
-  // Räkna ut råa log-sannolikheter för visning
-  // Vi visar de faktiska produkterna (i normalskala, ej log) symboliskt
-  const rawScores = {};
-  classes.forEach(c => {
-    const prior = cc[c] / total;
-    const wordFactors = tokens.map(w => (wc[c][w]||0 + 1) / (totals[c] + vs));
-    rawScores[c] = wordFactors.reduce((a, b) => a * b, prior);
-  });
-  // Använd de normaliserade posteriors från steps för korrekthet
   const rawSum = classes.reduce((s, c) => {
     const prior = cc[c] / total;
     const wf    = tokens.map(w => { const n=wc[c][w]||0; return (n+1)/(totals[c]+vs); });
@@ -1282,13 +1136,12 @@ function toggleFormula() {
     <div class="fp-abstract">
       Bayes sats säger: <strong>P(A|B) = P(B|A) × P(A) / P(B)</strong><br>
       I vårt fall: <strong>P(klass | text) = P(text | klass) × P(klass) / P(text)</strong><br><br>
-      <span style="color:rgba(255,255,255,.4)">
+      <span style="color:var(--subtle)">
         P(text | klass) är produkten av alla ordssannolikheter.<br>
         P(klass) är priorsannolikheten (hur vanlig klassen är i träningsdatan).<br>
         P(text) — nämnaren — är densamma för alla klasser och behöver aldrig beräknas separat.
         Istället <em>normaliserar</em> vi: vi delar varje klassvärde med summan av alla klassvärden,
-        så att de summerar till 100%. Vilken klass som vinner förändras inte av det — vi gör det
-        bara för att få ett begripligt procenttal.
+        så att de summerar till 100%.
       </span>
     </div>`;
 
@@ -1299,10 +1152,8 @@ function toggleFormula() {
       const prob  = (count + 1) / (totals[c] + vs);
       return { w, count, prob };
     });
-
     const factors = [prior, ...wordFactors.map(f => f.prob)];
     const product = factors.reduce((a, b) => a * b, 1);
-
     const termStr = wordFactors.map(f =>
       `<strong>${f.prob.toFixed(5)}</strong><span class="fp-op"> [${escHtml(f.w)}: (${f.count}+1)/(${totals[c]}+${vs})]</span>`
     ).join(`<span class="fp-op"> × </span>`);
@@ -1314,16 +1165,15 @@ function toggleFormula() {
         P(text | ${DISPLAY[c]}) × P(${DISPLAY[c]})<br>
         = <strong>${prior.toFixed(5)}</strong><span class="fp-op"> [${cc[c]} mejl / ${total} totalt]</span>
         ${tokens.length > 0 ? `<span class="fp-op"> × </span>${termStr}` : ''}
-        ${tokens.length > 0 ? `<br><span class="fp-op">= råvärde </span><strong>${product.toExponential(4)}</strong>` : ''}
+        ${tokens.length > 0 ? `<br><span class="fp-op">= produkten (före normalisering): </span><strong>${product.toExponential(4)}</strong>` : ''}
       </div>
-      <div class="fp-result" style="border-color:${colorOf(c)}30;background:${colorOf(c)}08;color:${colorOf(c)}">
-        <span>Normaliserat: <span style="opacity:.6;font-size:11px">${product.toExponential(3)} / (summa av alla råvärden)</span></span>
+      <div class="fp-result" style="border-color:${colorOf(c)}40;background:${colorOf(c)}12;color:${colorOf(c)}">
+        <span style="color:var(--subtle)">Normaliserat resultat: <span style="font-size:11px;color:var(--muted)">${product.toExponential(3)} delat på summan av alla produkter</span></span>
         <strong style="font-size:16px">${pct(final.posteriors[c] || 0)}</strong>
       </div>
     </div>`;
   });
 
-  // Normaliseringssteget med faktiska siffror
   const productsPerClass = classes.map(c => {
     const prior = cc[c] / total;
     const wf    = tokens.map(w => { const n=wc[c][w]||0; return (n+1)/(totals[c]+vs); });
@@ -1332,18 +1182,21 @@ function toggleFormula() {
   const sumAll = productsPerClass.reduce((s, x) => s + x.product, 0);
 
   html += `
-    <div style="margin-top:14px;padding:12px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:6px">
-      <div style="font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-bottom:10px">NORMALISERINGSSTEGET — P(text) SOM GEMENSAM NÄMNARE</div>
-      <div style="font-size:11px;color:rgba(255,255,255,.45);line-height:2">
-        P(text) ≈ summan av alla råvärden = ${productsPerClass.map(x=>`<strong style="color:rgba(255,255,255,.7)">${x.product.toExponential(3)}</strong>`).join(' + ')} = <strong style="color:rgba(255,255,255,.7)">${sumAll.toExponential(3)}</strong><br>
+    <div style="margin-top:14px;padding:14px 16px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px">
+      <div style="font-size:10px;letter-spacing:.12em;color:var(--muted);margin-bottom:12px">NORMALISERINGSSTEGET</div>
+      <div style="font-size:12px;color:var(--subtle);line-height:2">
+        Vi summerar produkterna för alla klasser och delar sedan varje produkt på den summan.<br>
+        Det gör att svaren summerar till 100% — vi får procent istället för extremt små tal.<br><br>
+        Summa av alla produkter = ${productsPerClass.map(x=>`<strong style="color:var(--text)">${x.product.toExponential(3)}</strong>`).join(' + ')} = <strong style="color:var(--text)">${sumAll.toExponential(3)}</strong><br><br>
         ${productsPerClass.map(x => `
-          P(${DISPLAY[x.c]} | text) = ${x.product.toExponential(3)} / ${sumAll.toExponential(3)} = <strong style="color:${colorOf(x.c)}">${pct(final.posteriors[x.c]||0)}</strong>
+          P(${DISPLAY[x.c]} | text) = ${x.product.toExponential(3)} / ${sumAll.toExponential(3)} = <strong style="color:${colorOf(x.c)};font-size:14px">${pct(final.posteriors[x.c]||0)}</strong>
         `).join('<br>')}
       </div>
     </div>
-    <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:10px;line-height:1.7">
-      Råvärdena är extremt små tal — modellen beräknar dem i logaritmskala internt för att undvika avrundningsfel.
-      Ovan visas de konverterade tillbaka för läsbarhet.
+    <div style="font-size:11px;color:var(--muted);margin-top:12px;line-height:1.8;padding:10px 14px;background:rgba(255,255,255,.03);border-radius:6px;border:1px solid var(--border)">
+      💡 Produkterna är extremt små tal eftersom vi multiplicerat ihop många sannolikheter nära noll.
+      Det är normalt — det är storleken <em>relativt varandra</em> som avgör klassificeringen, inte det absoluta värdet.
+      Datorn räknar internt med logaritmer för att undvika precisionsproblem, och konverterar tillbaka i sista steget.
     </div>`;
 
   panel.innerHTML = html;
@@ -1355,9 +1208,6 @@ function renderClassify() {
   document.getElementById('classify-content').style.display = hasData ? 'block' : 'none';
 }
 
-// ══════════════════════════════════════════════════════════════════
-//  ACTIONS
-// ══════════════════════════════════════════════════════════════════
 function selectLabel(lbl) {
   newLabel = lbl;
   document.getElementById('chip-spam').className = 'chip chip-spam' + (lbl==='SPAM'?' sel':'');
@@ -1390,7 +1240,6 @@ function refresh() {
   document.getElementById('classify-result').style.display = 'none';
 }
 
-// ── RENSA ──────────────────────────────────────────────────────────
 function clearData() {
   if (examples.length === 0) return;
   if (!confirm(`Rensa alla ${examples.length} träningsexempel? Detta går inte att ångra.`)) return;
@@ -1398,14 +1247,12 @@ function clearData() {
   refresh();
 }
 
-// ── FILIMPORT ──────────────────────────────────────────────────────
 function importFile(event) {
   const file = event.target.files[0];
   if (!file) return;
   const status = document.getElementById('import-status');
   status.className = 'status-msg loading';
   status.innerHTML = '<span class="spinner"></span>Läser fil…';
-
   const reader = new FileReader();
   reader.onload = e => {
     const lines = e.target.result.split(/\r?\n/).filter(l => l.trim());
@@ -1425,7 +1272,6 @@ function importFile(event) {
     refresh();
     status.className = 'status-msg info';
     status.textContent = `✓ Importerade ${added} exempel${skipped ? ` · ${skipped} rader hoppades över` : ''}.`;
-    // Reset file input so same file can be re-imported
     event.target.value = '';
   };
   reader.onerror = () => {
@@ -1435,31 +1281,37 @@ function importFile(event) {
   reader.readAsText(file, 'UTF-8');
 }
 
-// ── EXEMPELBANK: 200 realistiska svenska mail ──────────────────────
 const EXAMPLE_BANK = [
-  // ── SKRÄPPOST: Lotterier & vinster (20) ──
-  {label:"SPAM", text:"Grattis! Du har valts ut som vinnare av vårt månatliga lotteri. Klicka här för att hämta ditt pris på 15 000 kr."},
-  {label:"SPAM", text:"Du har vunnit en iPhone 15 Pro i vår tävling! Bekräfta din leveransadress inom 24 timmar."},
+  {label:"SPAM", text:"Grattis! Du har valts ut som vinnare av månatliga lotteriet. Klicka här för att hämta ditt pris på 15 000 kr."},
+  {label:"SPAM", text:"Du har vunnit en iPhone 15 Pro i tävlingen! Bekräfta din leveransadress inom 24 timmar."},
   {label:"SPAM", text:"Du har vunnit 250 000 kr på EuroMillions! Ditt biljettsnummer matchade. Kontakta oss för utbetalning."},
-  {label:"SPAM", text:"Vinn en lyxresa för två till Maldiverna! Delta i vår enkät och du är med i dragningen. Tar bara 2 minuter."},
+  {label:"SPAM", text:"Vinn en lyxresa för två till Maldiverna! Delta i enkäten och du är med i dragningen. Tar bara 2 minuter."},
   {label:"SPAM", text:"GRATTIS! Du är en av fem utvalda vinnare denna månad. Din belöning på 8 500 kr väntar på att hämtas."},
   {label:"SPAM", text:"Du har vunnit ett presentkort på 2 000 kr hos Elgiganten! Klicka här och ange din kod: WIN2024."},
-  {label:"SPAM", text:"Vår dragning är klar och du är vinnare! Ditt pris: en weekendresa till Paris. Svara inom 48 timmar."},
-  {label:"SPAM", text:"Exklusivt: du har kvalificerat dig för vårt VIP-lotteri. Priset är 100 000 kr kontant. Bekräfta här."},
-  {label:"SPAM", text:"Ditt telefonnummer har vunnit i vår nationella utlottning. Pris: 50 000 kr. Ring oss på 0770-xxx-xxx."},
+  {label:"SPAM", text:"Dragningen är klar och du är vinnare! Ditt pris: en weekendresa till Paris. Svara inom 48 timmar."},
+  {label:"SPAM", text:"Exklusivt: du har kvalificerat dig för ett VIP-lotteri. Priset är 100 000 kr kontant. Bekräfta här."},
+  {label:"SPAM", text:"Ditt telefonnummer har vunnit i en nationell utlottning. Pris: 50 000 kr. Ring oss på 0770-xxx-xxx."},
   {label:"SPAM", text:"Sista chansen att hämta din vinst! Vi har försökt nå dig tre gånger. Klicka nu för att säkra ditt pris."},
-  {label:"SPAM", text:"Du deltog i vår tävling för ett år sedan och har nu vunnit storpriset. Hämta dina 75 000 kr idag."},
-  {label:"SPAM", text:"Grattis, du är utdragen som veckans vinnare! Kryssa för ditt önskade presentkort och vi skickar det hem."},
-  {label:"SPAM", text:"Du har vunnit en ny Volvo XC60 i vår bilutlottning. Kontakta oss omgående för att ta emot din vinst."},
+  {label:"SPAM", text:"Du deltog i en tävling för ett år sedan och har nu vunnit storpriset. Hämta dina 75 000 kr idag."},
+  {label:"SPAM", text:"Grattis, du är utdragen som veckans vinnare! Kryssa för önskat presentkort och vi skickar det hem."},
+  {label:"SPAM", text:"Du har vunnit en ny Volvo XC60 i en bilutlottning. Kontakta oss omgående för att ta emot din vinst."},
   {label:"SPAM", text:"Spela gratis och vinn stort! Registrera dig nu och få 500 kr i spelkrediter helt utan insättning."},
-  {label:"SPAM", text:"Vi har dragit vinnaren av vår sommarkampanj och det är DU. Pris: 5 nätters all inclusive i Spanien."},
-  {label:"SPAM", text:"Ditt mobilnummer är registrerat som vinnare i vårt jubileumslotteri. Vinst: Apple Watch. Svara JA."},
+  {label:"SPAM", text:"Sommarkampanjens vinnare är DU. Pris: 5 nätters all inclusive i Spanien. Bekräfta inom 48 timmar."},
+  {label:"SPAM", text:"Ditt mobilnummer är registrerat som vinnare i ett jubileumslotteri. Vinst: Apple Watch. Svara JA."},
   {label:"SPAM", text:"Hemliga rabatter och vinstchanser bara för dig! Registrera dig gratis och tävla om 10 000 kr varje vecka."},
-  {label:"SPAM", text:"Du är utvald bland 1 miljon användare att vinna vårt stordrag. Verifiera din identitet för att ta emot vinsten."},
-  {label:"SPAM", text:"Vinn ett års gratis bensin! Fyll i formuläret och du deltar automatiskt i vår utlottning bland alla svar."},
+  {label:"SPAM", text:"Du är utvald bland 1 miljon användare att vinna ett stordrag. Verifiera din identitet för att ta emot vinsten."},
+  {label:"SPAM", text:"Vinn ett års gratis bensin! Fyll i formuläret och du deltar automatiskt bland alla svar."},
   {label:"SPAM", text:"VIKTIGT: Din oinlösta vinst på 12 000 kr löper ut om 24 timmar. Logga in och hämta den nu."},
-
-  // ── SKRÄPPOST: Nätfiske – bank & konton (20) ──
+  {label:"SPAM", text:"GRATTIS! Telefonnummer 070-XXX XX XX har vunnit 25 000 kr i kvällens dragning. Bekräfta omgående."},
+  {label:"SPAM", text:"En lyxig spa-weekend för två väntar! Du är bland de tio lyckliga vinnarna denna månad. Svara nu."},
+  {label:"SPAM", text:"Jackpot! Ditt e-postkonto är registrerat som vinnare. Pris: 180 000 kr. Kontakta oss inom 72 timmar."},
+  {label:"SPAM", text:"Slutdragning genomförd! Ditt nummer är ett av tre som matchar stordragningen. Hämta 42 000 kr här."},
+  {label:"SPAM", text:"Chansen du väntade på: tävla om ett nytt kök värt 85 000 kr. Anmäl dig gratis på länken nedan."},
+  {label:"SPAM", text:"Betalning på 7 500 kr redo att skickas till dig. Bekräfta kontonumret för att ta emot pengarna."},
+  {label:"SPAM", text:"Tävlingsresultat: du har blivit utvald i kvällens superdragning. Pris: en Tesla Model 3. Svara inom 24 h."},
+  {label:"SPAM", text:"Särskild jubileumsdragning: 1 000 vinnare delar på 10 miljoner kr. Ditt nummer är ett av dem."},
+  {label:"SPAM", text:"Bekräfta ditt pris nu! Kontantvinst på 33 000 kr väntar på din underskrift. Löper ut fredag midnatt."},
+  {label:"SPAM", text:"Stor utlottning bland alla registrerade kunder. Ditt kundnummer drogs igår. Ring oss för att hämta ut vinsten."},
   {label:"SPAM", text:"BRÅDSKANDE: Ditt bankkonto har spärrats. Verifiera dina uppgifter omedelbart via länken nedan."},
   {label:"SPAM", text:"Ditt BankID behöver uppdateras för att fortsätta fungera. Klicka på länken och följ instruktionerna."},
   {label:"SPAM", text:"Viktig säkerhetsvarning från Nordea: vi har registrerat ett inloggningsförsök från okänd enhet. Bekräfta nu."},
@@ -1477,77 +1329,90 @@ const EXAMPLE_BANK = [
   {label:"SPAM", text:"Din domän löper ut om 2 dagar. Förnya nu för 99 kr/år för att behålla din webbplats och e-post."},
   {label:"SPAM", text:"Kontoverifiering krävs: logga in på din internetbank och godkänn den nya säkerhetspolicyn senast fredag."},
   {label:"SPAM", text:"Vi har noterat ovanlig aktivitet kopplad till ditt kortnummer. Ring oss direkt på 08-xxx-xxx för verifiering."},
-  {label:"SPAM", text:"Din telefon är infekterad med 3 virus! Installera vår gratisapp för att rensa dem innan skadorna blir permanenta."},
+  {label:"SPAM", text:"Din telefon är infekterad med 3 virus! Installera gratisappen för att rensa dem innan skadorna blir permanenta."},
   {label:"SPAM", text:"Microsofts tekniska support: vi har detekterat allvarliga fel i din dator. Ring 020-xxx-xxx omedelbart."},
   {label:"SPAM", text:"Ditt iCloud-lagringsutrymme är fullt. Dina foton raderas om 24 timmar om du inte uppgraderar nu."},
-
-  // ── SKRÄPPOST: Hälsa & kropp (15) ──
-  {label:"SPAM", text:"Gå ner 10 kg på 3 veckor med vår naturliga metod. Läkargodkänt. Inga biverkningar. Klicka för mer info."},
-  {label:"SPAM", text:"Rensar du blodet? Vår naturliga detoxkur tar bort gifter och ger dig mer energi. Nu 299 kr (ord. 695 kr)."},
+  {label:"SPAM", text:"Meddelande från Tele2: fakturan är förfallen. Betala 349 kr idag för att undvika avstängning."},
+  {label:"SPAM", text:"ALERT: Inloggning detekterad från okänt land på ditt Google-konto. Byt lösenord omedelbart via länken."},
+  {label:"SPAM", text:"Skatteåterbäring på 4 200 kr väntar. Fyll i bankuppgifter på länken nedan för snabb utbetalning."},
+  {label:"SPAM", text:"Din Kivra-brevlåda är full. Viktiga dokument kan inte levereras. Utöka utrymmet via länken nedan."},
+  {label:"SPAM", text:"Säkerhetsvarning: tre misslyckade inloggningsförsök på ditt bankkonto. Lås upp kontot nu."},
+  {label:"SPAM", text:"Ditt kortköp på 3 899 kr hos en okänd handlare har godkänts. Var inte du? Spärra kortet direkt."},
+  {label:"SPAM", text:"E-post från Försäkringskassan: beslut om din ersättning finns att läsa. Logga in med BankID nu."},
+  {label:"SPAM", text:"Sista påminnelse: deklarationen innehåller fel. Korrigera senast fredag för att undvika böter."},
+  {label:"SPAM", text:"Ditt abonnemang på HBO Max löper ut imorgon. Uppdatera betalningsmetod för att behålla tillgången."},
+  {label:"SPAM", text:"Paket från PostNord kvarhålls på tullen. Betala 39 kr i expeditionsavgift för frisläppning."},
+  {label:"SPAM", text:"Gå ner 10 kg på 3 veckor med en naturlig metod. Läkargodkänt. Inga biverkningar. Klicka för mer info."},
   {label:"SPAM", text:"Doktorn avslöjar: detta enkla trick botar din diabetes naturligt på 30 dagar. Läkemedelsindustrin hatar det."},
-  {label:"SPAM", text:"Vi erbjuder billiga receptbelagda läkemedel utan recept. Diskret leverans inom 48 timmar. Inga frågor."},
-  {label:"SPAM", text:"Exklusivt för dig: Viagra och Cialis utan recept. Diskret leverans direkt hem till dörren. Beställ idag."},
-  {label:"SPAM", text:"Stoppa håravfall på 7 dagar! Vår kliniskt testade serum återställer hårfästet. 60 dagars nöjdhetsgaranti."},
-  {label:"SPAM", text:"Sluta röka på 3 dagar! Vår metod är 94% effektiv. Pengarna tillbaka om du inte lyckas. Beställ nu."},
+  {label:"SPAM", text:"Billiga receptbelagda läkemedel utan recept. Diskret leverans inom 48 timmar. Inga frågor."},
+  {label:"SPAM", text:"Exklusivt: Viagra och Cialis utan recept. Diskret leverans direkt hem till dörren. Beställ idag."},
+  {label:"SPAM", text:"Stoppa håravfall på 7 dagar! Kliniskt testad serum återställer hårfästet. 60 dagars nöjdhetsgaranti."},
+  {label:"SPAM", text:"Sluta röka på 3 dagar! Metoden är 94% effektiv. Pengarna tillbaka om du inte lyckas. Beställ nu."},
   {label:"SPAM", text:"Denna naturliga ingrediens botar ledvärk permanent. Reumatologer vill inte att du ska veta om det."},
-  {label:"SPAM", text:"Bota din sömnlöshet ikväll! Vår naturliga kapsyl ger dig 8 timmars djupsömn utan beroende. Prova gratis."},
-  {label:"SPAM", text:"Öka din testosteron med 300%! Vår naturliga formel ger dig energi, muskler och välmående. Kliniskt bevisad."},
-  {label:"SPAM", text:"Skaka av dig 5 kilo på en vecka med vår detoxdiet. Används av kändisar. Resultat garanteras."},
-  {label:"SPAM", text:"Hemlig cancerkur döljs av läkemedelsindustrin. Naturläkaren avslöjar sanningen i detta gratisföreläsning."},
-  {label:"SPAM", text:"Återfå din ungdomliga hy! Vår peptidserum minskar rynkor med 47% på 4 veckor. Prova riskfritt."},
-  {label:"SPAM", text:"Klinisk studie söker deltagare mot betalning. Testa vårt kosttillskott och tjäna 3 000 kr. Anmäl dig nu."},
-  {label:"SPAM", text:"Höj ditt immunförsvar inför vintern! Vår unika kombination av örter och vitaminer håller dig frisk hela säsongen."},
-
-  // ── SKRÄPPOST: Investeringar & pengar (15) ──
+  {label:"SPAM", text:"Bota sömnlöshet ikväll! En naturlig kapsyl ger dig 8 timmars djupsömn utan beroende. Prova gratis."},
+  {label:"SPAM", text:"Öka testosteron med 300%! En naturlig formel ger dig energi, muskler och välmående. Kliniskt bevisad."},
+  {label:"SPAM", text:"Hemlig cancerkur döljs av läkemedelsindustrin. Naturläkaren avslöjar sanningen i gratisföreläsning."},
+  {label:"SPAM", text:"Återfå ungdomlig hy! Peptidserum minskar rynkor med 47% på 4 veckor. Prova riskfritt."},
+  {label:"SPAM", text:"Klinisk studie söker deltagare mot betalning. Testa kosttillskottet och tjäna 3 000 kr. Anmäl dig nu."},
+  {label:"SPAM", text:"Läkare avslöjar: ät detta varje morgon och du bränner tre gånger mer fett under dagen. Se videon nu."},
+  {label:"SPAM", text:"Slipp glasögon för alltid! Ny teknik korrigerar synen hemma utan operation. Levereras diskret hem."},
+  {label:"SPAM", text:"Bota tinnitus på 7 dagar! Öronläkare vill inte att du ska känna till denna enkla metod."},
+  {label:"SPAM", text:"Kliniskt bevisad: denna fruktsoppa sänker blodsockret på 14 dagar. Diabetiker rapporterar fantastiska resultat."},
+  {label:"SPAM", text:"Sluta snarka från dag ett! Tandskyddet som förändrar sömnen. Tillverkat i medicinsk silikon. Prova nu."},
+  {label:"SPAM", text:"94% av testpersonerna gick ner 8 kg på 3 veckor utan träning eller diet. Häpnadsväckande resultat."},
+  {label:"SPAM", text:"Permanent hårborttagning hemma för 299 kr! Professionellt resultat utan salongbesök. Beställ nu."},
+  {label:"SPAM", text:"Återfå ungdomlig hud på 21 dagar! Ny peptidkräm med kliniskt bevisad effekt. Prova riskfritt 30 dagar."},
   {label:"SPAM", text:"Investera i kryptovaluta och fördubbla ditt kapital på 60 dagar. Garanterad avkastning. Begränsat antal platser."},
   {label:"SPAM", text:"Tjäna 5 000 kr om dagen hemifrån! Inget startkapital krävs. Tusentals svenskar gör det redan. Anmäl dig."},
-  {label:"SPAM", text:"Vill du bli skuldfri på 30 dagar? Vår metod fungerar för alla. Klicka och läs hur tusentals lyckats."},
   {label:"SPAM", text:"Du har blivit utvald för ett exklusivt kreditkort utan kreditprövning. Gräns: 50 000 kr. Svara innan fredag."},
-  {label:"SPAM", text:"Vi söker svenska testpiloter för nytt casino. Spela för riktiga pengar med våra pengar. Behåll dina vinster."},
-  {label:"SPAM", text:"Vinn 10 000 kr varje vecka med vår beprövade sportspelsstrategi. Garanterad vinst eller pengarna tillbaka."},
+  {label:"SPAM", text:"Vinn 10 000 kr varje vecka med en beprövad sportspelsstrategi. Garanterad vinst eller pengarna tillbaka."},
   {label:"SPAM", text:"Bitcoin-miljonären avslöjar: hur jag tjänade 2 miljoner på 6 månader utan att arbeta. Gratis video här."},
   {label:"SPAM", text:"Exklusiv investeringsmöjlighet: nytt grönt bolag söker investerare. Förväntad avkastning 300% på 18 månader."},
-  {label:"SPAM", text:"Bli agent och tjäna provision hemifrån! Vidarebefordra bara betalningar åt våra kunder. Enkelt och lagligt."},
-  {label:"SPAM", text:"Tjäna pengar på Instagram utan att visa ansiktet! Vår kurs visar exakt hur. Startpris 197 kr denna vecka."},
+  {label:"SPAM", text:"Bli agent och tjäna provision hemifrån! Vidarebefordra bara betalningar åt kunder. Enkelt och lagligt."},
+  {label:"SPAM", text:"Tjäna pengar på Instagram utan att visa ansiktet! Kursen visar exakt hur. Startpris 197 kr denna vecka."},
   {label:"SPAM", text:"Hej! Jag är advokat och representerar dödsboet efter en klient med samma efternamn som du. Arv: 4,2 milj."},
   {label:"SPAM", text:"Snabblån 50 000 kr på 10 minuter! Ingen kreditkoll. 0% ränta första månaden. Ansök direkt här."},
-  {label:"SPAM", text:"Starta eget aktiebolag på 10 minuter! Vi fixar allt pappersarbete. Juridisk adress ingår. Klicka nu."},
-  {label:"SPAM", text:"Passiv inkomst på autopilot: vår robot handlar aktier åt dig dygnet runt. Genomsnittlig vinst: 1 800 kr/dag."},
-  {label:"SPAM", text:"Exklusiv inbjudan: webinar om hur du tjänar passiv inkomst online. Begränsat antal platser. Anmäl gratis."},
-
-  // ── SKRÄPPOST: Bluffar & övrigt (30) ──
+  {label:"SPAM", text:"Passiv inkomst på autopilot: en robot handlar aktier åt dig dygnet runt. Genomsnittlig vinst: 1 800 kr/dag."},
+  {label:"SPAM", text:"Bitcoin stiger 400% inom kort! Insiders vet vad som händer nästa vecka. Köp nu innan det är för sent."},
+  {label:"SPAM", text:"Aktiemäklaren som slog marknaden 11 år i rad delar sin strategi. Exklusivt för de första 50 anmälda."},
+  {label:"SPAM", text:"Nytt AI-bolag söker tidiga investerare. Minsta insats: 5 000 kr. Förväntad avkastning 800% på 2 år."},
+  {label:"SPAM", text:"Passiva inkomster från fastigheter utan att äga en enda! Lär dig metoden. Gratis webinar ikväll."},
+  {label:"SPAM", text:"Tjäna upp till 12 000 kr i månaden med enkla klick. Metoden är laglig och fungerar i hela Sverige."},
+  {label:"SPAM", text:"Kryptovalutahandlare sökes! Inga förkunskaper krävs. Börja tjäna pengar direkt från mobilen."},
+  {label:"SPAM", text:"Hemliga handelssignaler avslöjas: dessa tre aktier exploderar inom 30 dagar. Prenumerera för 99 kr/mån."},
+  {label:"SPAM", text:"Spara till pensionen med 18% garanterad årsränta. Europeisk insättningsgaranti. Öppna konto idag."},
   {label:"SPAM", text:"Hej! Jag är en nigeriansk prins och behöver din hjälp att överföra 2 miljoner dollar. Du får 30%."},
-  {label:"SPAM", text:"Hej! Jag såg din profil och tycker du verkar intressant. Jag är ny i Sverige, letar efter vän. Kan vi prata?"},
   {label:"SPAM", text:"FLASH-SALE: 90% rabatt på märkesplagg bara idag. Äkta varor till otroliga priser. Slut i lager snart!"},
-  {label:"SPAM", text:"Vi köper din bil oavsett skick! Betalning direkt kontant. Inga dolda avgifter. Ring oss nu."},
   {label:"SPAM", text:"Billiga flygbiljetter! Stockholm–Bangkok tur och retur från 1 499 kr. Bokningsbar bara nästa 3 timmar."},
-  {label:"SPAM", text:"Din identitet har läckt i ett dataintrång. Skydda dig nu med vår ID-skyddstjänst. Prova gratis i 30 dagar."},
+  {label:"SPAM", text:"Din identitet har läckt i ett dataintrång. Skydda dig nu med en ID-skyddstjänst. Prova gratis i 30 dagar."},
   {label:"SPAM", text:"Möt singlar nära dig! Tusentals ensamma i din stad söker just nu. Registrera dig gratis och börja chatta idag."},
-  {label:"SPAM", text:"Du har ärvt pengar av en avlägsen släkting i Kanada. Kontakta vår jurist snarast för att kräva ut arvet."},
-  {label:"SPAM", text:"Gratis iPhone! Fyll i vår enkät på 2 minuter och välj din modell. Vi skickar hem till dig utan kostnad."},
-  {label:"SPAM", text:"Sista chansen! Bekräfta ditt intresse för vår exklusiva tjänst innan klockan 23:59 ikväll."},
+  {label:"SPAM", text:"Du har ärvt pengar av en avlägsen släkting i Kanada. Kontakta juristen snarast för att kräva ut arvet."},
+  {label:"SPAM", text:"Gratis iPhone! Fyll i enkäten på 2 minuter och välj din modell. Vi skickar hem till dig utan kostnad."},
+  {label:"SPAM", text:"Sista chansen! Bekräfta ditt intresse för en exklusiv tjänst innan klockan 23:59 ikväll."},
   {label:"SPAM", text:"Du har ett meddelande som väntar. Klicka här för att läsa det. Meddelandet raderas automatiskt inom 12 timmar."},
-  {label:"SPAM", text:"Gratulerar, du har valts ut för vårt bonusprogram! Klicka för att aktivera dina 500 bonuspoäng innan de går ut."},
-  {label:"SPAM", text:"Vi söker distansarbetare för enkla dataregistreringsuppgifter. 250 kr/timme. Arbeta när du vill. Ansök nu."},
+  {label:"SPAM", text:"Gratulerar, du har valts ut för ett bonusprogram! Klicka för att aktivera dina 500 bonuspoäng innan de går ut."},
   {label:"SPAM", text:"Hemlig metod som banker inte vill att du ska känna till: så sparar du 40 000 kr per år på ditt bolån."},
-  {label:"SPAM", text:"Juridisk hjälp mot orimliga parkeringsböter! Vi återkräver din avgift. Betalar du bara om vi vinner."},
+  {label:"SPAM", text:"Juridisk hjälp mot orimliga parkeringsböter! Återkräver din avgift. Betalar du bara om vi vinner."},
   {label:"SPAM", text:"Ny lagstiftning ger dig rätt till 15 000 kr av din bank. Kräv dina pengar tillbaka via oss idag."},
   {label:"SPAM", text:"Exklusivt: köp märkesklockor direkt från fabrik utan mellanhänder. Rolex, Omega och TAG Heuer. 80% billigare."},
-  {label:"SPAM", text:"Din prenumeration på vår tjänst förnyas automatiskt med 899 kr/mån. Avsluta nu om du inte vill betala."},
-  {label:"SPAM", text:"Vår AI skriver ditt CV och personliga brev. Garanterat intervju eller pengarna tillbaka. Prova nu för 0 kr."},
+  {label:"SPAM", text:"En AI skriver ditt CV och personliga brev. Garanterat intervju eller pengarna tillbaka. Prova nu för 0 kr."},
   {label:"SPAM", text:"BREAKING: känd svensk kändis avslöjar sin hemlighet bakom framgången. Se videon innan den censureras."},
-  {label:"SPAM", text:"Har du blivit kontaktad av polisen om bedrägeri? Vi är specialistadvokater. Gratis första konsultation."},
   {label:"SPAM", text:"Träffa mogna damer och herrar nära dig! Helt gratis att registrera sig. Tusentals aktiva profiler i Sverige."},
-  {label:"SPAM", text:"Sätt pengar på vårt konto så skickar vi tillbaka det dubbla inom 24 timmar. Testad metod. Läs vittnesmål."},
-  {label:"SPAM", text:"Ditt abonnemang på vår streamingtjänst förnyas om 24 timmar för 129 kr/mån. Avsluta via länken nedan."},
-  {label:"SPAM", text:"Vi köper guld, silver och smycken till marknadens bästa pris. Ring oss och boka gratis värdering hemma."},
-  {label:"SPAM", text:"Lär dig spela gitarr på 30 dagar garanterat! Vår metod fungerar även om du aldrig spelat förut. Prova gratis."},
-  {label:"SPAM", text:"Sveriges billigaste privatläkare! Läkarbesök online från 199 kr. Recept, intyg och sjukintyg direkt."},
+  {label:"SPAM", text:"Sätt pengar på kontot så skickar vi tillbaka det dubbla inom 24 timmar. Testad metod. Läs vittnesmål."},
   {label:"SPAM", text:"Viktigt: du måste byta lösenord på ditt konto senast imorgon av säkerhetsskäl. Gör det via länken nedan."},
-  {label:"SPAM", text:"Studielån utan kreditkoll! Upp till 150 000 kr för utbildning. Låg ränta. Ansök på 5 minuter här."},
-  {label:"SPAM", text:"Du är förvald som betatestare för vår nya app. Testa gratis i 30 dagar och behåll appen om du gillar den."},
-
-  // ── EJ SKRÄPPOST: Jobbrelaterat (25) ──
+  {label:"SPAM", text:"Uppmärksamhet: IP-adressen har spårats till olaglig aktivitet online. Ring supporten direkt för att lösa det."},
+  {label:"SPAM", text:"Jag är en framgångsrik affärsman stationerad utomlands och söker en pålitlig kontakt i Sverige."},
+  {label:"SPAM", text:"Domännamnet dittnamn.se är till salu! En konkurrent har visat intresse. Säkra det idag för 299 kr."},
+  {label:"SPAM", text:"Klicka inte bort detta! Du har ett obetalt arvskrav som måste hanteras inom 30 dagar. Kontakta advokaten."},
+  {label:"SPAM", text:"Skuldsanering på 60 dagar! Advokatbyrån som hjälpt tusentals bli skuldfria. Ring för gratis rådgivning."},
+  {label:"SPAM", text:"Du har blivit taggad i ett foto! Klicka på länken för att se vem som delade bilden av dig online."},
+  {label:"SPAM", text:"Energiräkningarna minskar med 70%! Produkten som elbranschen försöker stoppa. Beställ direkt nu."},
+  {label:"SPAM", text:"Ny metod gör det möjligt att ta ut pensionen 10 år tidigare. Pensionsmyndigheten vill inte att du vet."},
+  {label:"SPAM", text:"Gratis solceller! Staten betalar 100% av installationen via nytt stödprogram. Ansök medan pengarna räcker."},
+  {label:"SPAM", text:"Hemlig databas avslöjar: så hittar du vem som googlade ditt namn. Kolla upp det nu på länken nedan."},
+  {label:"SPAM", text:"Din Windows-licens har gått ut. Datorn blockeras om 24 timmar. Förnya licensen på länken nedan."},
+  {label:"SPAM", text:"Stämningsansökan inlämnad mot dig. Öppna bifogad fil för att läsa detaljerna och undvika rättegång."},
+  {label:"SPAM", text:"Polisutredning pågår mot ditt personnummer. Kontakta ärendehandläggaren omgående för att undvika häktning."},
   {label:"HAM", text:"Hej, kan du skicka över mötesunderlaget innan klockan två? Chefen vill ha det inför måndagens genomgång."},
   {label:"HAM", text:"Rapporten är klar och skickad till dig igår kväll. Hör av dig om du har synpunkter innan vi skickar till kunden."},
   {label:"HAM", text:"Påminnelse: veckomötet har flyttats från tisdag till onsdag klockan 10. Samma länk gäller."},
@@ -1556,7 +1421,7 @@ const EXAMPLE_BANK = [
   {label:"HAM", text:"Har du möjlighet att ta en titt på mitt utkast till årsrapporten? Bifogat i detta mail. Återkoppla gärna i veckan."},
   {label:"HAM", text:"Systemet är uppe igen efter gårdagens driftstörning. Kontakta support om ni fortfarande upplever problem."},
   {label:"HAM", text:"Jag behöver din signatur på avtalet senast fredag. Kan du kika på det och återkomma?"},
-  {label:"HAM", text:"Vi söker en projektkoordinator till vårt team. Känner du någon som kan vara intresserad? Hör av dig!"},
+  {label:"HAM", text:"Vi söker en projektkoordinator till teamet. Känner du någon som kan vara intresserad? Hör av dig!"},
   {label:"HAM", text:"Glömde nämna på mötet: budgetgodkännandet är försenat med en vecka. Mer info kommer på fredag."},
   {label:"HAM", text:"Kvartalsresultaten ser bättre ut än väntat. Kallar till genomgång nästa tisdag klockan 14 i stora konferensrummet."},
   {label:"HAM", text:"Hej, jag är på semester 12–23 juli. Vid brådskande ärenden kontakta Lena på lena@foretaget.se."},
@@ -1573,8 +1438,15 @@ const EXAMPLE_BANK = [
   {label:"HAM", text:"Arbetar du med ISO-certifieringen? Behöver du hjälp med dokumentationen så hör av dig."},
   {label:"HAM", text:"Tack för att du täckte upp på mötet igår när jag var försenad. Jag återgäldar!"},
   {label:"HAM", text:"Kan du bekräfta att du fått min out-of-office-inställning att fungera? Testar inför semestern nästa vecka."},
-
-  // ── EJ SKRÄPPOST: Familj & vänner (25) ──
+  {label:"HAM", text:"Hej! Har du hunnit titta på offerterna från leverantörerna? Behöver svar innan fredagens möte."},
+  {label:"HAM", text:"Lunchbaggen din ligger kvar i köket på jobbet. Hämta den när du är inne nästa gång."},
+  {label:"HAM", text:"Hej teamet! Påminner om att tidrapporterna för mars ska vara klara senast 31:a. Tack!"},
+  {label:"HAM", text:"Driftsättning av det nya systemet sker natten till lördag. Planera för eventuell kort nedetid på morgonen."},
+  {label:"HAM", text:"Hej! Kan du ta med laptopen till mötet imorgon? Vi ska gå igenom koden tillsammans."},
+  {label:"HAM", text:"Rekryteringen är klar. Amina börjar den 1:a. Välkommen att hälsa på henne på måndagen!"},
+  {label:"HAM", text:"Hej! Ny parkeringspolicy gäller från måndag. Läs bifogat dokument och anmäl registreringsnumren."},
+  {label:"HAM", text:"Konferensrummet på plan 3 är fullt bokat torsdagen. Använd sal 1B för era eftermiddagsmöten istället."},
+  {label:"HAM", text:"Påminnelse om personaldag den 24 maj. Mer info om programmet skickas ut nästa vecka."},
   {label:"HAM", text:"Hej! Kan vi ses på fredag för lunch? Det har gått alldeles för lång tid sedan sist."},
   {label:"HAM", text:"Tack för en rolig kväll igår! Hoppas vi ses snart igen. Hälsa Sara!"},
   {label:"HAM", text:"Grattis på födelsedagen!! Hoppas du firar ordentligt. Vi syns på lördag som planerat."},
@@ -1600,8 +1472,19 @@ const EXAMPLE_BANK = [
   {label:"HAM", text:"Sjuk och liggandes på soffan. Kan du swisha mig 89 kr för apoteket om du är i närheten?"},
   {label:"HAM", text:"Resan till Portugal var helt underbar! Skickar bilder när jag sorterat dem. Kramar!"},
   {label:"HAM", text:"Hej kompis! Jag har hittat en lägenhet och skriver kontrakt nästa vecka. Äntligen!"},
-
-  // ── EJ SKRÄPPOST: Bokningar & leveranser (15) ──
+  {label:"HAM", text:"Vår katt är sjuk igen och ska till veterinären på fredag. Hoppas det inte är något allvarligt."},
+  {label:"HAM", text:"Vår trädgård börjar blomma nu! Måste du komma och se syrenerna, de är fantastiska i år."},
+  {label:"HAM", text:"Hej! Tänkte fråga om ni vill följa med på utflykt till Skansen i vår? Ungarna skulle gilla det."},
+  {label:"HAM", text:"Ska vi göra något tillsammans till våren? Gärna något utomhus. Vandring kanske?"},
+  {label:"HAM", text:"Hej! Vår granne ska sälja sin cykel. Vet du om någon som söker en bra mountainbike?"},
+  {label:"HAM", text:"Vi firar midsommar hos oss i år! Kom gärna dagen innan så pyntar vi ihop."},
+  {label:"HAM", text:"Vår bil är på service hela nästa vecka. Kan du skjutsa mig till jobbet måndag och tisdag?"},
+  {label:"HAM", text:"Hej farsan! Tänkte höra om ni mår bra. Ring mig när du har tid, har en del att berätta."},
+  {label:"HAM", text:"Vi sålde lägenheten igår! Flytten är satt till sista april. Fest planeras, ni är självklart inbjudna."},
+  {label:"HAM", text:"Hej! Barnen undrar om de får sova över hos er på fredag. Hör av dig när du kan!"},
+  {label:"HAM", text:"Har du och Karin tid att komma på middag nästa vecka? Tänkte laga köttbullar och potatis."},
+  {label:"HAM", text:"Sitter och städar vinden. Hittade massa saker från när vi var barn. Ska vi träffas och titta igenom dem?"},
+  {label:"HAM", text:"Hej lillan! Planen för resan i sommar – kan vi ringa och prata igenom det i helgen?"},
   {label:"HAM", text:"Din bokningsbekräftelse: hotell City, incheckning 14 juni kl 15:00, utcheckning 16 juni. Bokningsnr: 88421."},
   {label:"HAM", text:"Ditt paket från Zalando är på väg. Beräknad leverans: imorgon 8–12. Spåra din leverans med kod SE4421."},
   {label:"HAM", text:"Bokningsbekräftelse: barnhårklippning hos Frisör Nina, tisdag 18 april kl 10:30. Avbokning senast 24 h innan."},
@@ -1617,15 +1500,19 @@ const EXAMPLE_BANK = [
   {label:"HAM", text:"Din begagnade bok har skickats. Säljarens kommentar: hoppas du gillar den! Betygsätt köpet när den anlänt."},
   {label:"HAM", text:"Restaurang Operakällaren bekräftar din bordbokning för 4 personer lördag den 22 april klockan 19:00."},
   {label:"HAM", text:"Din prenumeration på DN startar 1 maj. Välkommen som läsare! Logga in för att anpassa dina nyhetspreferenser."},
-
-  // ── EJ SKRÄPPOST: Skola & föräldrakontakt (15) ──
+  {label:"HAM", text:"Bekräftelse: hyrbil bokad hos Hertz Arlanda, hämtning fredag 7 juni kl 14:00. Bokningsnummer H77832."},
+  {label:"HAM", text:"Ditt gym-abonnemang förnyas den 1 april för 299 kr. Hantera abonnemanget i appen."},
+  {label:"HAM", text:"Välkommen på introduktionskurs i keramik! Startar torsdagen 18 april kl 18:00. Ta med förkläde."},
+  {label:"HAM", text:"Din beställning hos IKEA är klar för avhämtning i varuhusets kundtjänst. Ordernummer 445521."},
+  {label:"HAM", text:"Bekräftelse: klippning hos David på Cuts, lördag 13 april kl 11:00. Avbokning senast 24 timmar innan."},
+  {label:"HAM", text:"Välkommen till Nyckeln Fastighetsbyrå. Visning av lägenheten på Bergsgatan 12 är bokad till fredag kl 17."},
+  {label:"HAM", text:"Din förhandsbeställda bok har skickats! Beräknad leverans 3–5 arbetsdagar. Välkommen som läsare."},
   {label:"HAM", text:"Hej föräldrar! Påminner om vårterminens avslutning den 14 juni kl 10:00 i gymnastiksalen. Välkomna!"},
   {label:"HAM", text:"Frida har glömt sin gympa-påse i skolan. Den finns hos oss i reception om ni vill hämta den."},
   {label:"HAM", text:"Klassens föräldramöte är den 28 mars kl 18:30 i klassrum 12B. Fika ingår. Hoppas vi ses!"},
   {label:"HAM", text:"Hej! Lovdag på fredag. Skolmat serveras inte. Glöm inte att anmäla era barn till fritids vid behov."},
   {label:"HAM", text:"Välkommen på utvecklingssamtal tisdag den 4 april kl 15:30. Bekräfta gärna om ni kan komma."},
   {label:"HAM", text:"Påminnelse om att skolfoton tas på onsdag. Kom gärna i hela kläderna! Bildpaketen beställs online."},
-  {label:"HAM", text:"Insamling till personal pågår. Swisha valfri summa till 123-456-78, märk med Lärarpresent."},
   {label:"HAM", text:"Vi har börjat med det nya matteprogrammet i 3B. Mer info om hur ni kan stötta hemma kommer nästa vecka."},
   {label:"HAM", text:"Anton var frånvarande idag utan anmälan. Vänligen meddela frånvaro via appen eller ring skolan."},
   {label:"HAM", text:"Läxan i vecka 14: läs kapitel 5–7 i NO-boken och förbered tre frågor till genomgången på torsdag."},
@@ -1634,8 +1521,12 @@ const EXAMPLE_BANK = [
   {label:"HAM", text:"Klassen säljer lotter till förmån för klassresan. Lotterna kostar 20 kr styck. Fråga era barn om ni vill köpa."},
   {label:"HAM", text:"Hej, Nina har haft lite magont idag men klarade sig bra. Lägg gärna med ett lättare mellanmål imorgon."},
   {label:"HAM", text:"Sista dagen att anmäla sommarkollo är 31 mars. Anmälningslänken skickades i förra veckans utskick."},
-
-  // ── EJ SKRÄPPOST: Vardagsärenden (20) ──
+  {label:"HAM", text:"Hej! I vår startar vi en ny läsecirkel för åk 4. Anmäl ert barn via länken senast 15 mars."},
+  {label:"HAM", text:"Klassens vårtermin avslutas med utomhusdag den 7 juni. Mer info om aktiviteterna kommer nästa vecka."},
+  {label:"HAM", text:"Påminnelse: NP i matematik äger rum torsdag den 25 april. Eleverna behöver miniräknare och linjal."},
+  {label:"HAM", text:"Elevhälsans sjuksköterska finns på plats tisdagar och torsdagar. Boka tid via skolans app."},
+  {label:"HAM", text:"Klass 5A bjuder in till musikal den 30 maj kl 14:00 och 18:00. Biljetter säljs i receptionen."},
+  {label:"HAM", text:"Hej! Felix är lite hängig idag men vi bedömer att han klarar sig. Hämta gärna lite tidigare."},
   {label:"HAM", text:"Hej grannar! Trapphuset städas måndag kl 10. Glöm inte att flytta cyklarna från källargången."},
   {label:"HAM", text:"Påminnelse: fordonsskatten förfaller till betalning den 30 april. Betala via appen eller bankgiro."},
   {label:"HAM", text:"Hej! Hittade en brun halsduk vid busskuren på Storgatan. Den ligger hos mig om den tillhör dig."},
@@ -1656,9 +1547,35 @@ const EXAMPLE_BANK = [
   {label:"HAM", text:"Din biljett till teaterföreställningen skickas som PDF i separat mail. Välkommen den 3 maj kl 19:00."},
   {label:"HAM", text:"Hej, det gäller bostadsannonsen. Är lägenheten fortfarande ledig? Jag är intresserad av visning."},
   {label:"HAM", text:"Påminnelse: kontrollbesiktningen för din bil ska göras senast i december. Boka tid i god tid."},
+  {label:"HAM", text:"Bostadsrättsföreningen planerar att måla om fasaden i vår. Rösta på förslaget på föreningens hemsida."},
+  {label:"HAM", text:"Hej! Sophämtningen ställs in på torsdag på grund av helgdag. Nästa tömning sker följande måndag."},
+  {label:"HAM", text:"Kvitto på inlämnad deklaration. Eventuell återbäring betalas ut senast 15 juni om allt stämmer."},
+  {label:"HAM", text:"Hej! Trädet utanför porten behöver beskäras. Kontaktat kommunen och de kommer nästa vecka."},
+  {label:"HAM", text:"Hej granne! Någon har parkerat framför garaget igen. Vet du vems bil det är med reg YAB 123?"},
+  {label:"HAM", text:"Biblioteket har fått in böckerna du efterfrågade. De finns för lån fram till den 20:e."},
+  {label:"HAM", text:"Tvättstugan är bokad fredag kl 9–13. Kom ihåg att städa efter dig och töm luddfiltren."},
+  {label:"HAM", text:"Hej! Hunden hittades vid parken. Den har halsband med telefonnummer men ingen svarar. Ring mig!"},
+  {label:"HAM", text:"Elbolaget byter elmätare i fastigheten den 22 april mellan 8–12. Strömmen stängs av ca 30 min."},
+  {label:"HAM", text:"Cykelverkstaden ringde: cykeln är klar att hämta. Öppet till 18 på vardagar."},
+  {label:"HAM", text:"Mötet med hyresvärden om renoveringen är framflyttat till onsdagen 17:e. Samma tid kl 18 gäller."},
+  {label:"HAM", text:"Hej! Ska du ha med till festen på lördag? Vi tänkte köra potluck, kolla så vi inte tar samma rätt."},
+  {label:"HAM", text:"Påminnelse om läkarbesök hos Dr. Lindgren måndag 15 april kl 10:30. Ring 08-xxx-xxx vid förhinder."},
+  {label:"HAM", text:"Dina provsvar är klara. Logga in på 1177.se med BankID för att läsa resultaten."},
+  {label:"HAM", text:"Hej! Apoteket meddelar att läkemedlet finns att hämta. Ta med legitimation och recept."},
+  {label:"HAM", text:"Välkommen till mammografin den 3 maj kl 09:15 på Södersjukhuset. Ta med remissen om du har en."},
+  {label:"HAM", text:"Hej! Sjukgymnastiken börjar den 8 april. Kom i bekväma kläder och ta med gymnastikskor."},
+  {label:"HAM", text:"Hej! Tennisklubben har lediga tider i vår. Är du intresserad av att börja spela igen?"},
+  {label:"HAM", text:"Körrepetitionen ställs in onsdag på grund av lokalbyte. Ny lokal meddelas inom kort. Tack för tålamodet."},
+  {label:"HAM", text:"Fototävlingens tema i vår är natur och årstidsväxlingar. Skicka in max tre bilder senast 1 maj."},
+  {label:"HAM", text:"Hallå! Ska vi se fotbollen tillsammans på lördag? Kan boka bord på puben om ni är intresserade."},
+  {label:"HAM", text:"Hej! Bridgesällskapet samlas hos Gunnar den 18:e. Ta med fikabidrag och kom gärna lite i förväg."},
+  {label:"HAM", text:"Hallå! Löpgruppen tränas nu på tisdagar istället för onsdagar. Samma tid och plats gäller."},
+  {label:"HAM", text:"Vi startar en studiecirkel om klimat och hållbarhet till hösten. Anmäl intresse till studieförbundet."},
+  {label:"HAM", text:"Hej! Stickcafét på biblioteket börjar igen i vår. Tisdagar kl 14–16. Alla välkomna, ta med handarbete."},
+  {label:"HAM", text:"Spelkvällen ställs in denna fredag men vi kör igen nästa vecka. Samma uppställning som vanligt."},
+  {label:"HAM", text:"Hej! Vi har startat en Whatsapp-grupp för grannskapet. Skicka ett meddelande så lägger vi till dig."},
 ];
 
-// ── GENERERA FRÅN BANK ─────────────────────────────────────────────
 function updateRatioLabel() {
   const r     = parseInt(document.getElementById('spam-ratio').value);
   const hamR  = 100 - r;
@@ -1676,7 +1593,7 @@ function updateRatioLabel() {
 }
 
 function generateData(keepExisting = false) {
-  const n      = Math.max(4, Math.min(200, parseInt(document.getElementById('gen-count').value) || 20));
+  const n      = Math.max(4, Math.min(500, parseInt(document.getElementById('gen-count').value) || 20));
   const ratio  = parseInt(document.getElementById('spam-ratio').value) / 100;
   const nSpam  = Math.max(1, Math.round(n * ratio));
   const nHam   = Math.max(1, n - nSpam);
@@ -1700,7 +1617,6 @@ function generateData(keepExisting = false) {
   }
 
   const picked = shuffle([...sample(spamPool, nSpam), ...sample(hamPool, nHam)]);
-
   if (!keepExisting) examples = [];
   picked.forEach(({ label, text }) => examples.push({ text, label }));
 
@@ -1710,9 +1626,6 @@ function generateData(keepExisting = false) {
   status.textContent = `✓ Lade till ${picked.length} exempel — ${nSpam} skräppost (${pctSpam}%) + ${nHam} ej skräppost (${100-pctSpam}%)${keepExisting ? ' — behöll befintliga' : ''}.`;
 }
 
-// ══════════════════════════════════════════════════════════════════
-//  TAB SWITCHING
-// ══════════════════════════════════════════════════════════════════
 function goToTrain() {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -1731,16 +1644,10 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
   });
 });
 
-// ══════════════════════════════════════════════════════════════════
-//  UTILS
-// ══════════════════════════════════════════════════════════════════
 function escHtml(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ══════════════════════════════════════════════════════════════════
-//  INIT
-// ══════════════════════════════════════════════════════════════════
 refresh();
 </script>
 </body>
