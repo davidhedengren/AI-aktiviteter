@@ -240,6 +240,44 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
   .section-divider { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+  /* ── KONFIDENSINDIKATOR ── */
+  .confidence-bar-wrap {
+    margin-top: 14px;
+    background: rgba(0,0,0,.25);
+    border-radius: 6px;
+    padding: 12px 16px;
+    border: 1px solid rgba(255,255,255,.06);
+  }
+  .confidence-label { font-size: 10px; letter-spacing: .1em; color: rgba(255,255,255,.35); margin-bottom: 8px; }
+  .confidence-track {
+    height: 12px; border-radius: 6px;
+    background: rgba(255,255,255,.06);
+    position: relative; margin-bottom: 8px; overflow: visible;
+  }
+  .confidence-fill {
+    height: 100%; border-radius: 6px;
+    transition: width .5s ease;
+    position: relative;
+  }
+  .confidence-zones {
+    display: flex; font-size: 9px; color: rgba(255,255,255,.25);
+    letter-spacing: .06em; justify-content: space-between; margin-top: 3px;
+  }
+  .confidence-verdict {
+    font-size: 13px; font-weight: 700; margin-top: 8px; letter-spacing: .05em;
+  }
+
+  /* ── TOKENISERING ── */
+  .token-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .token {
+    font-size: 12px; padding: 4px 10px; border-radius: 4px;
+    font-family: var(--font-mono); border: 1px solid;
+    transition: all .2s;
+  }
+  .token.kept    { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.15); color: var(--text); }
+  .token.stopped { background: transparent; border-color: var(--border); color: var(--muted); text-decoration: line-through; }
+  .token.short   { background: transparent; border-color: var(--border); color: var(--muted); text-decoration: line-through; }
+  .token-legend  { display: flex; gap: 16px; font-size: 10px; color: var(--muted); margin-top: 10px; flex-wrap: wrap; }
 
   /* ── MATH BREAKDOWN ── */
   .math-step {
@@ -600,13 +638,67 @@
 </header>
 
 <nav class="tabs">
-  <button class="tab-btn active" data-tab="train">① TRÄNA</button>
+  <button class="tab-btn active" data-tab="intro">★ INSTRUKTION</button>
+  <button class="tab-btn"        data-tab="train">① TRÄNA</button>
   <button class="tab-btn"        data-tab="model">② MODELL</button>
   <button class="tab-btn"        data-tab="classify">③ KLASSIFICERA</button>
 </nav>
 
+<!-- ═══════════════════════════════════════════════════ TAB 0: INSTRUKTION -->
+<section id="tab-intro" class="tab-panel active">
+  <div style="max-width:680px;margin:0 auto;padding:8px 0 32px">
+
+    <p style="font-size:15px;color:var(--text);line-height:1.9;margin-bottom:28px">
+      I det här labbet tränar du ett <strong>Naïve Bayes-filter</strong> — samma typ av algoritm som används i verkliga spamfilter.
+      Du bestämmer vad modellen lär sig, och kan sedan se exakt hur matematiken fungerar när den klassificerar nya mejl.
+    </p>
+
+    <div style="border-left:2px solid var(--border);padding-left:20px;margin-bottom:28px">
+      <p style="font-size:12px;color:var(--subtle);line-height:1.8;font-style:italic">
+        Algoritmen kallas <em>naïve</em> (naiv) för att den antar att varje ord i ett mejl är oberoende av alla andra ord.
+        I verkligheten stämmer det sällan — men förenklingen gör matematiken hanterbar och modellen förvånansvärt träffsäker.
+      </p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:22px;margin-bottom:32px">
+
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text);letter-spacing:.06em;margin-bottom:6px">① TRÄNA</div>
+        <p style="font-size:12px;color:var(--muted);line-height:1.8">
+          Börja med att klicka på <strong style="color:var(--text)">⚡ GENERERA</strong> — då fylls modellen med realistiska exempelmail automatiskt.
+          Du kan styra hur många och hur fördelningen mellan skräppost och vanliga mejl ser ut med reglaget.
+          Det går också att skriva egna meningar eller ladda upp en fil i formatet <code style="color:var(--subtle)">SPAM,text</code> / <code style="color:var(--subtle)">HAM,text</code>.
+        </p>
+      </div>
+
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text);letter-spacing:.06em;margin-bottom:6px">② MODELL</div>
+        <p style="font-size:12px;color:var(--muted);line-height:1.8">
+          Här ser du vad modellen lärt sig — vilka ord som är mest typiska för varje klass och deras sannolikheter.
+          Jämförelsevisningen visar samma ord för båda klasser sida vid sida, så du ser vilka ord som verkligen skiljer dem åt.
+        </p>
+      </div>
+
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text);letter-spacing:.06em;margin-bottom:6px">③ KLASSIFICERA</div>
+        <p style="font-size:12px;color:var(--muted);line-height:1.8">
+          Skriv in ett mejl och tryck Enter. Modellen visar hur texten tokeniseras, hur sannolikheten förskjuts ord för ord,
+          och hur säker den är på sin klassificering. Klicka på <strong style="color:var(--text)">ƒ Visa hela beräkningen</strong>
+          för att se Bayes formel med dina egna siffror.
+        </p>
+      </div>
+
+    </div>
+
+    <button class="btn" style="padding:11px 28px;font-size:13px" onclick="goToTrain()">
+      Kom igång →
+    </button>
+
+  </div>
+</section>
+
 <!-- ═══════════════════════════════════════════════════ TAB 1: TRÄNA -->
-<section id="tab-train" class="tab-panel active">
+<section id="tab-train" class="tab-panel">
   <div class="two-col">
 
     <div>
@@ -676,14 +768,30 @@
     <div class="card" style="margin-bottom:0">
       <span class="card-label">GENERERA TRÄNINGSDATA AUTOMATISKT</span>
       <p style="font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.7">
-        Genererar realistiska svenska exempelmail med AI. Hälften skräppost, hälften vanlig post.
-        Texterna är varierade och naturliga — bra som startpunkt eller för att testa modellen.
+        Genererar realistiska svenska exempelmail ur den inbyggda exempelbanken.
+        Variera fördelningen för att se hur ojämn träningsdata påverkar modellens beteende.
       </p>
-      <div class="gen-row">
+      <div class="gen-row" style="margin-bottom:12px">
         <span style="font-size:11px;color:var(--muted)">ANTAL:</span>
         <input type="number" class="gen-count" id="gen-count" value="20" min="4" max="200" step="2">
         <button class="btn btn-generate" id="gen-btn" onclick="generateData()">⚡ GENERERA</button>
         <button class="btn-ghost" onclick="generateData(true)">+ Lägg till utan att rensa</button>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px 14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <span style="font-size:10px;letter-spacing:.1em;color:var(--muted)">FÖRDELNING SKRÄPPOST / EJ SKRÄPPOST</span>
+          <span style="font-size:11px;color:var(--subtle)" id="ratio-label">50% / 50%</span>
+        </div>
+        <input type="range" id="spam-ratio" min="10" max="90" value="50" step="10"
+          style="width:100%;accent-color:var(--spam);cursor:pointer"
+          oninput="updateRatioLabel()">
+        <div style="display:flex;height:10px;border-radius:4px;overflow:hidden;margin-top:8px">
+          <div id="ratio-bar-spam" style="width:50%;background:var(--spam);transition:width .2s"></div>
+          <div id="ratio-bar-ham"  style="width:50%;background:var(--ham); transition:width .2s"></div>
+        </div>
+        <div style="font-size:10px;color:var(--muted);margin-top:8px;line-height:1.6" id="ratio-note">
+          Jämn fördelning — priorsannolikheten P(klass) påverkar inte klassificeringen nämnvärt.
+        </div>
       </div>
       <div class="status-msg" id="gen-status"></div>
     </div>
@@ -705,9 +813,16 @@
     <div class="card">
       <span class="card-label" id="model-bar-label">P(ORD | SPAM) — TOPPORD</span>
       <div class="formula-note">
-        Formel med Laplace-utjämning:
+        Formel med Laplace-utjämning:<br>
         <strong style="color:var(--text)">P(ord | klass) = (antal(ord, klass) + 1) / (totalt(klass) + |V|)</strong>
-        &nbsp;— |V| = storleken på ordförrådet.
+        &nbsp;— |V| = storleken på ordförrådet.<br>
+        <span style="color:var(--muted)">
+        <strong style="color:var(--subtle)">Varför +1?</strong>
+        Om ett ord aldrig förekommit i träningsdatan för en klass skulle P = 0/totalt = 0.
+        Eftersom modellen multiplicerar ihop alla ordssannolikheter skulle <em>ett enda okänt ord</em> göra hela produkten noll — och klassificeringen kraschade.
+        Lösningen är att låtsas att varje ord förekommit minst en gång (+1 i täljaren).
+        För att hålla summan av alla sannolikheter till 1 kompenseras nämnaren med +|V|.
+        </span>
       </div>
       <div id="model-bars"></div>
     </div>
@@ -740,10 +855,30 @@
         <div class="verdict-label">KLASSIFICERAD SOM</div>
         <div class="verdict-class" id="verdict-class">—</div>
         <div class="verdict-probs" id="verdict-probs"></div>
+        <div class="confidence-bar-wrap" id="confidence-wrap"></div>
         <button class="formula-toggle" onclick="toggleFormula()" id="formula-toggle-btn">
           ƒ Visa hela beräkningen
         </button>
         <div class="formula-panel" id="formula-panel"></div>
+      </div>
+
+      <div class="card" id="tokenization-card">
+        <span class="card-label">STEG 1 — TOKENISERING OCH FILTRERING</span>
+        <p style="font-size:11px;color:var(--muted);line-height:1.7;margin-bottom:12px">
+          Innan modellen kan räkna sannolikheter måste texten omvandlas till enskilda ord — det kallas <strong style="color:var(--text)">tokenisering</strong>.
+          Ord som är för vanliga för att säga något om klassen (stoppord) och mycket korta ord filtreras sedan bort.
+          Bara de kvarvarande orden används i klassificeringen.
+        </p>
+        <div class="token-wrap" id="token-display"></div>
+        <div class="token-legend">
+          <span><span style="color:var(--text)">■</span> Används i klassificeringen</span>
+          <span><span style="color:var(--muted)">■</span> Stoppord — filtreras bort (för vanligt)</span>
+          <span><span style="color:var(--muted)">■</span> För kort — filtreras bort (≤2 tecken)</span>
+        </div>
+        <p style="font-size:10px;color:var(--muted);margin-top:10px;line-height:1.6;font-style:italic">
+          Notera: ingen lemmatisering görs — "vinner" och "vinnare" räknas som olika ord.
+          Verkliga system reducerar ofta ord till sin grundform för att öka träffsäkerheten.
+        </p>
       </div>
 
       <div id="math-breakdown"></div>
@@ -931,12 +1066,47 @@ function classify() {
   // ── Verdict ──
   const final = steps[steps.length - 1];
   const pred  = Object.entries(final.posteriors).sort((a,b) => b[1]-a[1])[0][0];
+  const conf  = final.posteriors[pred] || 0;
   const vc    = document.getElementById('verdict-card');
   vc.className = `verdict-card ${pred.toLowerCase()}`;
   document.getElementById('verdict-class').textContent  = DISPLAY[pred];
   document.getElementById('verdict-class').className    = `verdict-class ${pred.toLowerCase()}`;
   document.getElementById('verdict-probs').innerHTML    =
     classes.map(c => `<span style="color:${colorOf(c)}">${DISPLAY[c]}: <strong>${pct(final.posteriors[c])}</strong></span>`).join('');
+
+  // ── Konfidensindikator ──
+  const confPct = conf * 100;
+  const confColor = confPct >= 85 ? colorOf(pred)
+                  : confPct >= 65 ? '#fbbf24'
+                  : '#94a3b8';
+  const confText = confPct >= 85 ? 'Mycket säker'
+                 : confPct >= 65 ? 'Ganska säker — men med viss osäkerhet'
+                 : 'Osäker — texten liknar båda klasserna';
+  const confNote = confPct >= 85 ? 'Sannolikhetsfördelningen är tydligt ensidig.'
+                 : confPct >= 65 ? 'Modellen lutar åt ett håll men orden ger blandade signaler.'
+                 : 'Orden i texten förekommer ungefär lika ofta i båda klasser. Mer träningsdata eller tydligare ord skulle hjälpa.';
+  document.getElementById('confidence-wrap').innerHTML = `
+    <div class="confidence-label">MODELLENS SÄKERHET</div>
+    <div class="confidence-track">
+      <div class="confidence-fill" style="width:${confPct}%;background:${confColor}"></div>
+    </div>
+    <div class="confidence-zones">
+      <span>0%</span><span>Osäker &lt;65%</span><span>Ganska säker &lt;85%</span><span>Mycket säker ≥85%</span><span>100%</span>
+    </div>
+    <div class="confidence-verdict" style="color:${confColor}">${confPct.toFixed(1)}% — ${confText}</div>
+    <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:4px">${confNote}</div>`;
+
+  // ── Tokenisering ──
+  const rawWords = (text.toLowerCase().match(/[a-zåäö]+/g) || []);
+  document.getElementById('token-display').innerHTML = rawWords.map(w => {
+    if (w.length <= 2)     return `<span class="token short" title="För kort (≤2 tecken)">${escHtml(w)}</span>`;
+    if (STOP.has(w))       return `<span class="token stopped" title="Stoppord">${escHtml(w)}</span>`;
+    return                        `<span class="token kept">${escHtml(w)}</span>`;
+  }).join('');
+  if (rawWords.length === 0) {
+    document.getElementById('token-display').innerHTML =
+      `<span style="color:var(--muted);font-size:12px">Inga ord hittades i texten.</span>`;
+  }
 
   // ── Math breakdown ──
   let html = `
@@ -1034,7 +1204,8 @@ function classify() {
               <div class="mwb-found">
                 ${unseen
                   ? `<em>Ordet hittades <strong style="color:#f87171">inte</strong> i ${DISPLAY[c].toLowerCase()}-mejl under träningen.</em><br>
-                     Laplace-utjämning: vi lägger till +1 så att sannolikheten inte blir noll.`
+                     <strong style="color:#fbbf24">⚠ Utan Laplace-utjämning:</strong> P = 0/${n_tot} = 0 — och hela produkten för ${DISPLAY[c]} hade blivit noll, oavsett alla andra ord.<br>
+                     <strong style="color:var(--ham)">Med Laplace (+1):</strong> vi låtsas att ordet förekommit en gång. Liten sannolikhet, men inte noll.`
                   : `Ordet hittades <em><strong style="color:${colorOf(c)}">${n_ord} gång${n_ord !== 1 ? 'er' : ''}</strong></em> i ${DISPLAY[c].toLowerCase()}-mejl under träningen.`}
               </div>
               <div class="mwb-formula">
@@ -1064,11 +1235,14 @@ function classify() {
   // ── Ordförrådsnot ──
   html += `
   <div class="card" style="margin-top:4px">
-    <span class="card-label">ORDFÖRRÅD FRÅN TRÄNINGSDATAN</span>
-    <p style="font-size:11px;color:var(--muted);line-height:1.7">
+    <span class="card-label">ORDFÖRRÅD OCH LAPLACE-UTJÄMNING</span>
+    <p style="font-size:11px;color:var(--muted);line-height:1.8">
       |V| = <strong style="color:var(--text)">${vs} unika ord</strong> totalt i träningsdatan.
-      ${classes.map(c => `${DISPLAY[c]}: <strong style="color:${colorOf(c)}">${totals[c]} ord</strong> totalt (summa av alla ord i alla ${cc[c]} mejl)`).join(' &nbsp;·&nbsp; ')}.
-      <br>|V| används i Laplace-formeln för att fördela sannolikhet jämnt bland alla okända ord.
+      ${classes.map(c => `${DISPLAY[c]}: <strong style="color:${colorOf(c)}">${totals[c]} ord</strong> totalt i ${cc[c]} mejl`).join(' &nbsp;·&nbsp; ')}.<br>
+      <strong style="color:var(--subtle)">Varför +|V| i nämnaren?</strong>
+      När vi lägger till +1 för varje ord i täljaren måste vi kompensera i nämnaren — annars summerar inte sannolikheterna till 1.
+      Eftersom ordförrådet har ${vs} unika ord, och vi lagt till +1 för vart och ett, adderas exakt +${vs} till nämnaren.
+      Det innebär att alla ord — även de som aldrig förekommit — får en liten men rättvis sannolikhet.
     </p>
   </div>`;
 
@@ -1485,15 +1659,32 @@ const EXAMPLE_BANK = [
 ];
 
 // ── GENERERA FRÅN BANK ─────────────────────────────────────────────
+function updateRatioLabel() {
+  const r     = parseInt(document.getElementById('spam-ratio').value);
+  const hamR  = 100 - r;
+  document.getElementById('ratio-label').textContent     = `${r}% / ${hamR}%`;
+  document.getElementById('ratio-bar-spam').style.width  = r + '%';
+  document.getElementById('ratio-bar-ham').style.width   = hamR + '%';
+  const note = r === 50
+    ? 'Jämn fördelning — priorsannolikheten P(klass) påverkar inte klassificeringen nämnvärt.'
+    : r >= 70
+      ? `${r}% skräppost — modellen får en hög prior P(Skräppost) = ${(r/100).toFixed(2)} och börjar redan lutat åt spam innan den sett ett enda ord. Tveksamma texter klassas oftare som skräppost.`
+      : r <= 30
+        ? `Bara ${r}% skräppost — låg prior P(Skräppost) = ${(r/100).toFixed(2)} gör modellen "snäll". Den behöver starka spamsignaler för att klassificera som skräppost.`
+        : `${r}% skräppost — lätt sned fördelning. Priorn väger lite mer åt ${r > 50 ? 'skräppost' : 'ej skräppost'}.`;
+  document.getElementById('ratio-note').textContent = note;
+}
+
 function generateData(keepExisting = false) {
   const n      = Math.max(4, Math.min(200, parseInt(document.getElementById('gen-count').value) || 20));
-  const half   = Math.floor(n / 2);
+  const ratio  = parseInt(document.getElementById('spam-ratio').value) / 100;
+  const nSpam  = Math.max(1, Math.round(n * ratio));
+  const nHam   = Math.max(1, n - nSpam);
   const status = document.getElementById('gen-status');
 
   const spamPool = EXAMPLE_BANK.filter(e => e.label === 'SPAM');
   const hamPool  = EXAMPLE_BANK.filter(e => e.label === 'HAM');
 
-  // Fisher-Yates shuffle
   function shuffle(arr) {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i--) {
@@ -1502,27 +1693,33 @@ function generateData(keepExisting = false) {
     }
     return a;
   }
-
-  // Sample with wrap-around if asking for more than pool size
   function sample(pool, count) {
     let result = [];
     while (result.length < count) result = result.concat(shuffle(pool));
     return result.slice(0, count);
   }
 
-  const picked = shuffle([...sample(spamPool, half), ...sample(hamPool, half)]);
+  const picked = shuffle([...sample(spamPool, nSpam), ...sample(hamPool, nHam)]);
 
   if (!keepExisting) examples = [];
   picked.forEach(({ label, text }) => examples.push({ text, label }));
 
   refresh();
   status.className = 'status-msg info';
-  status.textContent = `✓ Lade till ${picked.length} exempel (${half} skräppost + ${half} ej skräppost)${keepExisting ? ' — behöll befintliga' : ''}.`;
+  const pctSpam = Math.round(nSpam / picked.length * 100);
+  status.textContent = `✓ Lade till ${picked.length} exempel — ${nSpam} skräppost (${pctSpam}%) + ${nHam} ej skräppost (${100-pctSpam}%)${keepExisting ? ' — behöll befintliga' : ''}.`;
 }
 
 // ══════════════════════════════════════════════════════════════════
 //  TAB SWITCHING
 // ══════════════════════════════════════════════════════════════════
+function goToTrain() {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector('[data-tab="train"]').classList.add('active');
+  document.getElementById('tab-train').classList.add('active');
+}
+
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
