@@ -3,12 +3,43 @@
 <head>
   <meta charset="utf-8" />
   <title>Sökalgoritmer i labyrint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Fraunces:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg:        #060810;
+      --surface:   #0c1020;
+      --surface2:  #111728;
+      --border:    #1a2238;
+      --border2:   #253050;
+      --text:      #eaf0fc;
+      --muted:     #96a8c8;
+      --subtle:    #c8d6f0;
+      --accent:    #4d80ff;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-serif: 'Fraunces', Georgia, serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: sans-serif;
-      margin: 20px;
-      /* Förhindra textmarkering i hela sidan */
+      font-family: var(--font-mono);
+      font-size: 13px;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 24px 28px 48px;
+      min-height: 100vh;
       user-select: none;
+    }
+
+    h2 {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 20px;
+      text-shadow: 0 0 30px rgba(77,128,255,.3);
     }
 
     /* Flexbox-container för labyrint och fördefinierade labyrinter */
@@ -16,142 +47,245 @@
       display: flex;
       flex-direction: row;
       align-items: flex-start;
+      gap: 20px;
     }
 
     /* Canvas och dess container */
     #canvasContainer {
       position: relative;
-      border: 1px solid #ccc;
+      border: 1px solid var(--border2);
       display: inline-block;
-      user-select: none; /* Förhindra textmarkering */
+      user-select: none;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,.4);
     }
 
     #mazeCanvas {
-      border: 1px solid gray;
-      user-select: none; /* Förhindra textmarkering */
+      display: block;
+      user-select: none;
     }
 
-    /* Fördefinierade Labyrinter Sektion till höger om labyrinten */
+    /* Fördefinierade Labyrinter */
     #predefinedMazes {
-      margin-left: 20px; /* Avstånd mellan labyrinten och fördefinierade labyrinter */
-      max-width: 250px; /* Maxbredd för fördefinierade labyrinter */
+      max-width: 220px;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      padding: 16px;
     }
 
     #predefinedMazes label {
       display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
+      margin-bottom: 8px;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: .12em;
+      color: var(--muted);
     }
 
     #predefinedMazes select {
       width: 100%;
-      padding: 5px;
-      margin-bottom: 10px;
+      padding: 7px 10px;
+      margin-bottom: 12px;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border2);
+      border-radius: 5px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      outline: none;
+    }
+
+    #predefinedMazes select:focus {
+      border-color: var(--accent);
     }
 
     #predefinedMazes button {
       display: block;
       width: 100%;
-      margin-bottom: 5px;
-      padding: 5px;
+      margin-bottom: 8px;
+      padding: 8px 10px;
+      background: var(--surface2);
+      color: var(--subtle);
+      border: 1px solid var(--border2);
+      border-radius: 5px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      cursor: pointer;
+      transition: border-color .2s, color .2s;
     }
 
-    /* Kontrollsektionen under labyrinten */
+    #predefinedMazes button:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    /* Kontrollsektionen */
     #controls {
       margin-top: 20px;
-      max-width: 900px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
     }
 
     #controls label {
-      display: inline-block;
-      margin-right: 8px;
-      margin-bottom: 6px;
-      font-weight: bold;
+      font-size: 11px;
+      letter-spacing: .08em;
+      color: var(--muted);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    #controls select, 
-    #controls button, 
-    #controls label input {
-      margin-right: 8px;
-      margin-bottom: 6px;
-      padding: 5px;
-      box-sizing: border-box;
-    }
-
-    /* Enkel styling för legend-listan */
-    #legend {
-      margin-top: 15px;
-      line-height: 1.6em;
-      max-width: 900px;
-    }
-
-    #legend ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    #legend li {
-      margin-bottom: 4px;
-    }
-
-    /* Hjälp-fyrkanter i legend */
-    .color-box {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      margin-right: 6px;
-      vertical-align: middle;
-      border: 1px solid #000;
-    }
-
-    /* En enkel style för heuristik-texten (f(n)) */
-    .heuristic-label {
-      position: absolute;
-      color: black;
+    #controls select {
+      padding: 7px 10px;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border2);
+      border-radius: 5px;
+      font-family: var(--font-mono);
       font-size: 12px;
-      pointer-events: none; /* så man kan klicka igenom texten */
-      user-select: none;    /* Förhindra textmarkering */
+      outline: none;
+    }
+
+    #controls select:focus {
+      border-color: var(--accent);
+    }
+
+    #controls button {
+      padding: 7px 16px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s, box-shadow .2s;
+    }
+
+    #controls button:hover {
+      background: #6698ff;
+      box-shadow: 0 0 14px rgba(77,128,255,.3);
+    }
+
+    #controls input[type="checkbox"] {
+      accent-color: var(--accent);
+      width: 14px;
+      height: 14px;
     }
 
     /* Informationsfält */
     #info {
-      margin-top: 10px;
-      font-weight: bold;
-      color: #333;
-      background-color: #f0f0f0;
-      padding: 10px;
-      border-radius: 5px;
-      max-width: 900px;
+      margin-top: 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      padding: 10px 14px;
+      border-radius: 6px;
     }
 
     #hoverInfo {
-      margin-top: 10px;
-      font-weight: bold;
-      color: #333;
-      background-color: #e0e0ff;
-      padding: 10px;
-      border-radius: 5px;
-      font-size: 14px; /* Mindre textstorlek */
-      max-width: 900px;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      padding: 10px 14px;
+      border-radius: 6px;
     }
 
-    /* Differentiate the two info boxes */
     #info, #hoverInfo {
       display: inline-block;
       width: 100%;
     }
 
-    /* Kostnadsfunktion Information - endast synlig vid A* */
     #costFunctionInfo {
-      margin-top: 10px;
-      font-weight: bold;
-      color: #333;
-      background-color: #dff0d8;
-      padding: 10px;
-      border-radius: 5px;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--subtle);
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-left: 3px solid var(--accent);
+      padding: 10px 14px;
+      border-radius: 0 6px 6px 0;
+      display: none;
+    }
+
+    /* Legend */
+    #legend {
+      margin-top: 20px;
       max-width: 900px;
-      display: none; /* Döljs som standard */
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      padding: 18px 20px;
+    }
+
+    #legend h3 {
+      font-size: 10px;
+      letter-spacing: .14em;
+      color: var(--muted);
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+
+    #legend ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0 0 12px 0;
+    }
+
+    #legend li {
+      margin-bottom: 7px;
+      font-size: 12px;
+      color: var(--subtle);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #legend li strong {
+      color: var(--text);
+    }
+
+    .color-box {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 3px;
+    }
+
+    #legend p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-top: 6px;
+    }
+
+    #legend em {
+      color: var(--subtle);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    .heuristic-label {
+      position: absolute;
+      color: rgba(255,255,255,.85);
+      font-size: 10px;
+      font-family: var(--font-mono);
+      pointer-events: none;
+      user-select: none;
     }
   </style>
 </head>
@@ -160,13 +294,10 @@
 <h2>Sökalgoritmer i labyrint</h2>
 
 <div id="mainContainer">
-  <!-- Labyrintens Canvas -->
   <div id="canvasContainer">
     <canvas id="mazeCanvas"></canvas>
-    <!-- Här kommer text overlays för heuristik-text f(n) att dyka upp -->
   </div>
 
-  <!-- Fördefinierade Labyrinter till höger -->
   <div id="predefinedMazes">
     <label for="predefinedSelect">Exempel-labyrinter:</label>
     <select id="predefinedSelect">
@@ -183,7 +314,6 @@
   </div>
 </div>
 
-<!-- Kontrollsektionen under labyrinten -->
 <div id="controls">
   <label for="algorithmSelect">Vald algoritm:</label>
   <select id="algorithmSelect">
@@ -199,49 +329,47 @@
     Stegvis läge
   </label>
   <button id="nextStepBtn">Nästa steg</button>
-  <button id="resetBtn">Återställ</button>
+  <button id="resetBtn" style="background:var(--surface2);color:var(--subtle);border:1px solid var(--border2);">Återställ</button>
 </div>
 
-<!-- Informationsfält -->
 <div id="info"></div>
 <div id="costFunctionInfo">Kostnadsfunktion: (håll musen över en cell för att se f(n))</div>
 <div id="hoverInfo"></div>
 
-<!-- Förklaringar av färger, kostnader och hur man skapar dem -->
 <div id="legend">
-  <h3>Förklaringar</h3>
+  <h3>FÖRKLARINGAR</h3>
   <ul>
     <li>
-      <span class="color-box" style="background: white;"></span> 
-      <strong>Vit</strong> (vanlig väg, kostnad 1) – Skapas genom att vänsterklicka på en svart ruta.
+      <span class="color-box" style="background: white;"></span>
+      <span><strong>Vit</strong> (vanlig väg, kostnad 1) – Skapas genom att vänsterklicka på en svart ruta.</span>
     </li>
     <li>
       <span class="color-box" style="background: black;"></span>
-      <strong>Svart</strong> (vägg) – Skapas genom att vänsterklicka på en vit ruta.
+      <span><strong>Svart</strong> (vägg) – Skapas genom att vänsterklicka på en vit ruta.</span>
     </li>
     <li>
       <span class="color-box" style="background: #deb887;"></span>
-      <strong>Brun</strong> (kostnad 3) – Skapas genom att högerklicka 2 gånger.
+      <span><strong>Brun</strong> (kostnad 3) – Skapas genom att högerklicka 2 gånger.</span>
     </li>
     <li>
       <span class="color-box" style="background: blue;"></span>
-      <strong>Blå</strong> (kostnad 5) – Skapas genom att högerklicka 3 gånger.
+      <span><strong>Blå</strong> (kostnad 5) – Skapas genom att högerklicka 3 gånger.</span>
     </li>
     <li>
       <span class="color-box" style="background: red;"></span>
-      <strong>Röd</strong> (mål) – Skapas genom att högerklicka en gång.
+      <span><strong>Röd</strong> (mål) – Skapas genom att högerklicka en gång.</span>
     </li>
     <li>
       <span class="color-box" style="background: lightskyblue;"></span>
-      <strong>Ljusblå</strong> (genomsökt) – Visas automatiskt av algoritmen för rutor som sökts igenom.
+      <span><strong>Ljusblå</strong> (genomsökt) – Visas automatiskt av algoritmen för rutor som sökts igenom.</span>
     </li>
     <li>
       <span class="color-box" style="background: orange;"></span>
-      <strong>Orange</strong> (Kö) – Markering av algoritmens kö, alltså de rutor som ligger på tur att utforskas.
+      <span><strong>Orange</strong> (Kö) – Markering av algoritmens kö, alltså de rutor som ligger på tur att utforskas.</span>
     </li>
     <li>
       <span class="color-box" style="background: green;"></span>
-      <strong>Grön</strong> (start) – Anger startposition för sökningen. Klicka och dra för att flytta.
+      <span><strong>Grön</strong> (start) – Anger startposition för sökningen. Klicka och dra för att flytta.</span>
     </li>
   </ul>
   <p>
@@ -265,7 +393,6 @@ canvas.width = GRID_WIDTH * CELL_SIZE;
 canvas.height = GRID_HEIGHT * CELL_SIZE;
 const ctx = canvas.getContext("2d");
 
-/* Container för att placera heuristik-text. */
 const canvasContainer = document.getElementById("canvasContainer");
 
 /* --- Initiera rutnätet --- */
@@ -273,7 +400,7 @@ let grid = [];
 for (let r = 0; r < GRID_HEIGHT; r++) {
   let row = [];
   for (let c = 0; c < GRID_WIDTH; c++) {
-    row.push(1); // default svart
+    row.push(1);
   }
   grid.push(row);
 }
@@ -281,15 +408,14 @@ for (let r = 0; r < GRID_HEIGHT; r++) {
 /* --- Start- och målpunkter --- */
 let start = [11, 7];
 let ends = [[5, 18]];
-// Sätt start och mål till vägar (0)
 grid[start[0]][start[1]] = 0;
 ends.forEach(e => {
   grid[e[0]][e[1]] = 0;
 });
 
 /* --- Maps för heuristik-texter --- */
-let heuristicTexts = new Map(); // key: "r,c", value: DOM-element
-let f_values = new Map(); // key: "r,c", value: [f,h]
+let heuristicTexts = new Map();
+let f_values = new Map();
 
 /* --- Dra start-relaterade variabler --- */
 let is_dragging_start = false;
@@ -314,12 +440,8 @@ let search_in_progress = false;
 /* --- Variabel för aktuell algoritm --- */
 let currentAlgorithm = null;
 
-/* 
-  === Global "search_cost" för att mäta totalkostnad för hela sökningen ===
-*/
 let search_cost = 0;
 
-/** Kollar om vi har några icke-1-rutor (dvs blå eller brun). */
 function hasNonOneSquares() {
   for (let r=0; r<GRID_HEIGHT; r++){
     for (let c=0; c<GRID_WIDTH; c++){
@@ -331,28 +453,25 @@ function hasNonOneSquares() {
   return false;
 }
 
-/** Returnerar kostnaden för en cell (grid[r][c]). */
 function cellCost(r, c) {
-  if (grid[r][c] === 2) return 5;  // blå
-  if (grid[r][c] === 3) return 3;  // brun
-  if (grid[r][c] === 1) return Infinity; // svart (vägg)
-  return 1; // vit
+  if (grid[r][c] === 2) return 5;
+  if (grid[r][c] === 3) return 3;
+  if (grid[r][c] === 1) return Infinity;
+  return 1;
 }
 
-/* Rensa och nollställ cost före en ny sökning. */
 function resetSearchCost() {
   search_cost = 0;
   resultDiv.style.backgroundColor = "";
   hoverInfoDiv.textContent = "";
   hoverInfoDiv.style.backgroundColor = "";
-  // Dölj kostnadsfunktion info om det var synligt tidigare
   costFunctionInfoDiv.style.display = "none";
 }
 
-/* Sätt result-text + gör bakgrunden ljusgrön. */
 function setFinalResultText(txt, showCostFunction=false) {
   resultDiv.textContent = txt;
-  resultDiv.style.backgroundColor = "lightgreen"; 
+  resultDiv.style.backgroundColor = "rgba(29,233,155,.12)";
+  resultDiv.style.borderColor = "rgba(29,233,155,.3)";
   if (showCostFunction) {
     costFunctionInfoDiv.style.display = "block";
   } else {
@@ -360,7 +479,6 @@ function setFinalResultText(txt, showCostFunction=false) {
   }
 }
 
-/* Räkna kostnaden för just slutvägen. */
 function calcPathCost(path) {
   let c = 0;
   for (let [rr,cc] of path) {
@@ -369,7 +487,6 @@ function calcPathCost(path) {
   return c;
 }
 
-/* ===================== Övriga funktioner ====================== */
 function heuristic(a, b) {
   return Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
 }
@@ -405,23 +522,22 @@ function draw_grid() {
 
       let color;
       if (grid[r][c] === 1) {
-        color = "black";       
+        color = "black";
       } else if (grid[r][c] === 2) {
-        color = "blue";        
+        color = "blue";
       } else if (grid[r][c] === 3) {
-        color = "#deb887";     
+        color = "#deb887";
       } else {
-        color = "white";       
+        color = "white";
       }
 
       ctx.fillStyle = color;
-      ctx.strokeStyle = "gray";
+      ctx.strokeStyle = "#1a2238";
       ctx.fillRect(x1, y1, CELL_SIZE, CELL_SIZE);
       ctx.strokeRect(x1, y1, CELL_SIZE, CELL_SIZE);
     }
   }
 
-  // Mål (röda)
   for (let [er, ec] of ends) {
     let x1 = ec * CELL_SIZE;
     let y1 = er * CELL_SIZE;
@@ -430,7 +546,6 @@ function draw_grid() {
     ctx.strokeRect(x1, y1, CELL_SIZE, CELL_SIZE);
   }
 
-  // Start (grön)
   let sr, sc;
   if (is_dragging_start && potential_start != null) {
     [sr, sc] = potential_start;
@@ -444,11 +559,11 @@ function draw_grid() {
   ctx.strokeRect(x_start, y_start, CELL_SIZE, CELL_SIZE);
 
   ctx.font = "14px Arial";
-  ctx.fillStyle = "rgba(255, 255, 255, 0.5)"; // Vit med 50% transparens
+  ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
   ctx.textAlign = "right";
   ctx.fillText("Skapad av David Hedengren", canvas.width - 10, canvas.height - 10);
 
-  ctx.fillStyle = "rgba(0, 0, 0, 0.5)"; // Svart med 50% transparens
+  ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
   ctx.textAlign = "right";
   ctx.fillText("Skapad av David Hedengren", canvas.width - 10, 20);
 }
@@ -468,6 +583,7 @@ function clear_previous_search() {
   clear_heuristic_texts();
   resultDiv.textContent = "";
   resultDiv.style.backgroundColor = "";
+  resultDiv.style.borderColor = "";
   hoverInfoDiv.textContent = "";
   hoverInfoDiv.style.backgroundColor = "";
   costFunctionInfoDiv.style.display = "none";
@@ -507,7 +623,6 @@ function mark_path(path) {
   }
 }
 
-/* ============= Algoritmer ============= */
 class PriorityQ {
   constructor() {
     this._data = [];
@@ -524,7 +639,6 @@ class PriorityQ {
   }
 }
 
-/* A* */
 function a_star_step(open_set, came_from, g_score, explored_cells) {
   if (open_set.empty()) {
     setFinalResultText("Ingen väg funnen");
@@ -534,11 +648,9 @@ function a_star_step(open_set, came_from, g_score, explored_cells) {
   let [f_current, current] = open_set.pop();
   let [row, col] = current;
 
-  // varje expanderad ruta → lägg till dess kostnad
   search_cost += cellCost(row, col);
 
   if (ends.some(e => e[0]===row && e[1]===col)) {
-    // återskapa väg
     let path = [];
     let curKey = `${row},${col}`;
     while (came_from.has(curKey)) {
@@ -551,13 +663,12 @@ function a_star_step(open_set, came_from, g_score, explored_cells) {
 
     mark_path(path);
 
-    // Om vi har 2/3-rutor i labyrinten => visa kostnad
     let msg = `Antal steg till mål: ${path.length-1}, Utforskade rutor: ${explored_cells-1}`;
     if (hasNonOneSquares()) {
       let finalCost = calcPathCost(path);
       msg += `, Kostnad för slutgiltig väg: ${finalCost}, Kostnad för hela sökningen: ${search_cost}`;
     }
-    setFinalResultText(msg, true); // Visa kostnadsfunktion info
+    setFinalResultText(msg, true);
 
     search_in_progress = false;
     return;
@@ -566,7 +677,7 @@ function a_star_step(open_set, came_from, g_score, explored_cells) {
   mark_explored(row, col);
 
   for (let [nr, nc] of get_neighbors([row,col])) {
-    if (grid[nr][nc] === 1) continue; 
+    if (grid[nr][nc] === 1) continue;
     let current_g = g_score.get(`${row},${col}`);
     let cost = cellCost(nr,nc);
     let tentative_g = current_g + cost;
@@ -620,7 +731,6 @@ function start_a_star() {
   a_star_step(open_set, came_from, g_score, 1);
 }
 
-/* Greedy Best-First */
 function greedy_best_first_step(open_set, explored, explored_cells) {
   if (open_set.empty()) {
     setFinalResultText("Ingen väg funnen");
@@ -641,7 +751,7 @@ function greedy_best_first_step(open_set, explored, explored_cells) {
       let finalCost = calcPathCost(finalPath);
       msg += `, Kostnad för slutgiltig väg: ${finalCost}, Kostnad för hela sökningen: ${search_cost}`;
     }
-    setFinalResultText(msg, false); // Dölj kostnadsfunktion info
+    setFinalResultText(msg, false);
 
     search_in_progress = false;
     return;
@@ -691,7 +801,6 @@ function start_greedy_best_first() {
   greedy_best_first_step(open_set, explored, 1);
 }
 
-/* BFS */
 class SimpleQueue {
   constructor() {
     this.q = [];
@@ -727,7 +836,7 @@ function bfs_step(queue, explored, explored_cells) {
       let finalCost = calcPathCost(fullPath);
       msg += `, Kostnad för slutgiltig väg: ${finalCost}, Kostnad för hela sökningen: ${search_cost}`;
     }
-    setFinalResultText(msg, false); // Dölj kostnadsfunktion info
+    setFinalResultText(msg, false);
 
     search_in_progress = false;
     return;
@@ -773,8 +882,7 @@ function start_bfs() {
   bfs_step(queue, explored, 1);
 }
 
-/* DFS */
-let directions = [[-1,0],[0,1],[1,0],[0,-1]]; // upp, höger, ner, vänster
+let directions = [[-1,0],[0,1],[1,0],[0,-1]];
 
 function dfs_step(stack, explored, explored_cells) {
   if (stack.length === 0) {
@@ -796,7 +904,7 @@ function dfs_step(stack, explored, explored_cells) {
       let finalCost = calcPathCost(finalPath);
       msg += `, Kostnad för slutgiltig väg: ${finalCost}, Kostnad för hela sökningen: ${search_cost}`;
     }
-    setFinalResultText(msg, false); // Dölj kostnadsfunktion info
+    setFinalResultText(msg, false);
 
     search_in_progress = false;
     return;
@@ -844,7 +952,7 @@ function start_dfs() {
   clear_previous_search();
   resetSearchCost();
 
-  let start_direction = 2; // nedåt
+  let start_direction = 2;
   let stack = [[[start[0],start[1]], [], start_direction]];
   let explored = new Set();
   explored.add(`${start[0]},${start[1]}`);
@@ -855,7 +963,6 @@ function start_dfs() {
   dfs_step(stack, explored, 1);
 }
 
-/* =============== Musinteraktioner =============== */
 function getCellFromMouse(e) {
   let rect = canvas.getBoundingClientRect();
   let mx = e.clientX - rect.left;
@@ -898,7 +1005,7 @@ canvas.addEventListener("mousemove",(e)=>{
     let cell = getCellFromMouse(e);
     if (cell) {
       let [row, col] = cell;
-      if (grid[row][col] === 1) { // Korrigerad variabel från 'c' till 'col'
+      if (grid[row][col] === 1) {
         grid[row][col] = 0;
       } else if (grid[row][col] === 0) {
         grid[row][col] = 1;
@@ -967,7 +1074,6 @@ canvas.addEventListener("mouseup",(e)=>{
   drag_start_pos = null;
 });
 
-/* Hover för att visa f(n) */
 canvas.addEventListener("mousemove",(e)=>{
   let cell = getCellFromMouse(e);
   if (!cell) {
@@ -979,14 +1085,13 @@ canvas.addEventListener("mousemove",(e)=>{
     let [fval, hval] = f_values.get(key);
     let gval = fval - hval;
     hoverInfoDiv.textContent = `f(n) = g(n) + h(n) = ${gval} + ${hval} = ${fval}`;
-    hoverInfoDiv.style.backgroundColor = "#e0e0ff";
+    hoverInfoDiv.style.backgroundColor = "";
   } else {
     hoverInfoDiv.textContent = "";
     hoverInfoDiv.style.backgroundColor = "";
   }
 });
 
-/* Skapa heuristik-labels */
 function createHeuristicLabel(r, c, txt) {
   let labelKey = `${r},${c}`;
   if (heuristicTexts.has(labelKey)) {
@@ -1004,8 +1109,6 @@ function createHeuristicLabel(r, c, txt) {
   heuristicTexts.set(labelKey, label);
 }
 
-/* ================== SPARA/LADDA ================== */
-/* Funktion för att spara labyrint */
 document.getElementById("saveBtn").addEventListener("click", ()=>{
   let data = {
     "grid": grid,
@@ -1025,7 +1128,6 @@ document.getElementById("saveBtn").addEventListener("click", ()=>{
   URL.revokeObjectURL(url);
 });
 
-/* Funktion för att ladda labyrint */
 document.getElementById("loadBtn").addEventListener("click", ()=>{
   document.getElementById("loadInput").click();
 });
@@ -1046,7 +1148,6 @@ document.getElementById("loadInput").addEventListener("change",(e)=>{
       grid = data.grid;
       start = data.start;
       ends = data.ends.map(e => [...e]);
-      // Se till att start och mål är markerade i grid
       grid[start[0]][start[1]] = 0;
       ends.forEach(e => {
         grid[e[0]][e[1]] = 0;
@@ -1061,7 +1162,6 @@ document.getElementById("loadInput").addEventListener("change",(e)=>{
   reader.readAsText(file);
 });
 
-/* ================== Fördefinierade Labyrinter ================== */
 const predefinedMazes = {
   "Exempel 1": {
     "grid": [
@@ -1154,34 +1254,28 @@ const predefinedMazes = {
   }
 };
 
-/* Funktion för att ladda en fördefinierad labyrint */
 function loadPredefinedMaze(mazeName){
   if(!predefinedMazes[mazeName]){
     alert("Den fördefinierade labyrinten finns inte.");
     return;
   }
   const maze = predefinedMazes[mazeName];
-  // Kopiera grid, start och ends exakt som de är
   grid = maze.grid.map(row => row.slice());
   start = [...maze.start];
   ends = maze.ends.map(e => [...e]);
-  // Inga ytterligare modifieringar behövs eftersom grid redan innehåller start och mål
   clear_previous_search();
   draw_grid();
   setFinalResultText(`Fördefinierad labyrint "${mazeName}" har laddats.`, currentAlgorithm === "A*");
 }
 
-/* Event Listener för fördefinierade labyrinter */
 document.getElementById("predefinedSelect").addEventListener("change", (e) => {
   const selectedMaze = e.target.value;
   if(selectedMaze){
     loadPredefinedMaze(selectedMaze);
-    // Återställ dropdown till default
     e.target.value = "";
   }
 });
 
-/* ================= SÖKNING ================== */
 document.getElementById("startSearchBtn").addEventListener("click", ()=>{
   let alg = document.getElementById("algorithmSelect").value;
   currentAlgorithm = alg;
@@ -1230,7 +1324,6 @@ document.getElementById("nextStepBtn").addEventListener("click", ()=>{
   }
 });
 
-/* Funktion för att återställa labyrinten */
 document.getElementById("resetBtn").addEventListener("click", resetGrid);
 
 function resetGrid() {
@@ -1242,14 +1335,10 @@ function resetGrid() {
   }
   grid[start[0]][start[1]] = 0;
   draw_grid();
-  // Dölj kostnadsfunktion info vid återställning
   costFunctionInfoDiv.style.display = "none";
 }
 
-/* ========================== INIT ========================== */
 draw_grid();
-// Optional: Ladda en labyrint direkt vid initiering, t.ex. Exempel 1
-// loadPredefinedMaze("Exempel 1");
 </script>
 
 </body>
