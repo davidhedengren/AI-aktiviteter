@@ -3,83 +3,136 @@
 <head>
   <meta charset="UTF-8"/>
   <title>Luffarschack i partiellt observerbar miljö</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Fraunces:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg:        #060810;
+      --surface:   #0c1020;
+      --surface2:  #111728;
+      --border:    #1a2238;
+      --border2:   #253050;
+      --text:      #eaf0fc;
+      --muted:     #96a8c8;
+      --subtle:    #c8d6f0;
+      --accent:    #4d80ff;
+      --spam:      #ff6a35;
+      --ham:       #1de99b;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-serif: 'Fraunces', Georgia, serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      margin: 20px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      background: var(--bg);
+      color: var(--text);
+      padding: 24px 28px 48px;
+      min-height: 100vh;
     }
+
     h2 {
-      margin-bottom: 8px;
-      font-weight: normal;
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 16px;
+      text-shadow: 0 0 30px rgba(77,128,255,.3);
     }
-    /* Etiketten överst med info */
+
     #infoLabel {
-      background-color: #e0f0ff;
-      border: 1px solid #aaa;
-      padding: 8px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      padding: 8px 16px;
       display: inline-block;
-      margin-bottom: 10px;
-      font-size: 16px;
-      font-weight: bold;
-      color: #333;
-      border-radius: 4px;
+      margin-bottom: 14px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      border-radius: 6px;
     }
-    /* Spelplanen */
+
     #gameContainer {
-      margin-top: 16px;
+      margin-top: 8px;
       display: inline-block;
-      border: 1px solid #999;
-      border-radius: 5px;
+      border: 1px solid var(--border2);
+      border-radius: 6px;
       overflow: hidden;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-      background-color: #fafafa;
+      box-shadow: 0 4px 24px rgba(0,0,0,.4);
+      background: var(--surface2);
     }
+
     .boardRow {
       display: flex;
     }
+
     .boardCell {
-      width: 38px;
-      height: 38px;
+      width: 34px;
+      height: 34px;
       margin: 1px;
-      font-size: 18px;
-      font-weight: bold;
-      background-color: #dfdfdf;
-      border: 1px solid #ccc;
+      font-size: 16px;
+      font-weight: 700;
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: 3px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      user-select: none; /* förhindra textmarkering */
+      user-select: none;
+      transition: background .15s;
     }
+
     .boardCell:hover {
-      background-color: #cfcfcf;
+      background: var(--surface2);
+      border-color: var(--accent);
     }
-    /* Kontroller */
-    .controls-area {
-      margin-top: 10px;
-    }
-    /* Dolda rutor (frågetecken) */
+
     .hiddenHint {
-      color: #777;
+      color: var(--border2);
     }
-    /* Stor ruta mitt på skärmen som visar vems tur det är */
+
+    .controls-area {
+      margin-top: 14px;
+    }
+
+    .controls-area button {
+      padding: 8px 20px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s, box-shadow .2s;
+    }
+
+    .controls-area button:hover {
+      background: #6698ff;
+      box-shadow: 0 0 14px rgba(77,128,255,.3);
+    }
+
     #centerMessage {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background-color: rgba(255,255,255,0.95);
-      border: 2px solid #888;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      box-shadow: 0 8px 32px rgba(0,0,0,.6);
       padding: 20px 40px;
-      font-size: 24px;
-      font-weight: bold;
-      color: #333;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      color: var(--text);
       text-align: center;
-      border-radius: 8px;
+      border-radius: 10px;
       z-index: 9999;
-      display: none; /* dold tills vi visar den */
+      display: none;
     }
   </style>
 </head>
@@ -87,67 +140,55 @@
 
 <h2>Luffarschack i partiellt observerbar miljö</h2>
 
-<!-- Etikett överst till vänster -->
 <div id="infoLabel">Spelare X's tur</div>
 
-<!-- Spelplan -->
 <div id="gameContainer"></div>
 
-<!-- Knapp för att starta om -->
 <div class="controls-area">
   <button onclick="restartGame()">Starta om</button>
 </div>
 
-<!-- Meddelanderuta mitt på skärmen -->
 <div id="centerMessage">Det är X:s tur</div>
 
 <script>
-/* ==== Ursprungliga Python-konstanter ==== */
 const BOARD_SIZE = 20;
 const HIDDEN_PERCENTAGE = 0.20;
 const WIN_CONDITION = 5;
 
-/* ==== Globala variabler ==== */
 let currentPlayer = 'X';
-let board = []; // 2D-array, BOARD_SIZE x BOARD_SIZE
-let hiddenPositions = new Set(); // slumpvisa dolda rutor
+let board = [];
+let hiddenPositions = new Set();
 let gameContainer = document.getElementById("gameContainer");
 let infoLabel = document.getElementById("infoLabel");
 let centerMessage = document.getElementById("centerMessage");
-let cells = {}; // map (row,col) -> DOM-element
-let gameOver = false; // för att stoppa klick efter vinst
+let cells = {};
+let gameOver = false;
 
 initGame();
 
-/* === Funktion för att starta om spelet === */
 function restartGame(){
   gameOver = false;
   initGame();
 }
 
-/* === Initiera spelet === */
 function initGame(){
-  // Skapa tom board
   board = [];
   for(let i=0; i<BOARD_SIZE; i++){
     let row = [];
     for(let j=0; j<BOARD_SIZE; j++){
-      row.push(''); // tom
+      row.push('');
     }
     board.push(row);
   }
 
-  // Beräkna hur många rutor som ska vara dolda
   const numHidden = Math.floor(BOARD_SIZE * BOARD_SIZE * HIDDEN_PERCENTAGE);
 
-  // Skapa en array med alla positioner
   let allPositions = [];
   for(let i=0; i<BOARD_SIZE; i++){
     for(let j=0; j<BOARD_SIZE; j++){
       allPositions.push([i,j]);
     }
   }
-  // Slumpa fram dolda positioner
   shuffleArray(allPositions);
   hiddenPositions.clear();
   for(let k=0; k<numHidden; k++){
@@ -155,17 +196,14 @@ function initGame(){
     hiddenPositions.add(posKey(r,c));
   }
 
-  // Rensa container
   gameContainer.innerHTML = "";
   cells = {};
 
-  // Byt spelare till X när spelet börjar
   currentPlayer = 'X';
   infoLabel.textContent = `Spelare ${currentPlayer}'s tur`;
   infoLabel.style.color = getPlayerColor();
   gameOver = false;
 
-  // Bygg rutnät i DOM
   for(let i=0; i<BOARD_SIZE; i++){
     let rowDiv = document.createElement("div");
     rowDiv.className = "boardRow";
@@ -173,7 +211,6 @@ function initGame(){
       let cellDiv = document.createElement("div");
       cellDiv.className = "boardCell";
 
-      // Om dold
       if(hiddenPositions.has(posKey(i,j))){
         cellDiv.textContent = "?";
         cellDiv.classList.add("hiddenHint");
@@ -181,7 +218,6 @@ function initGame(){
         cellDiv.textContent = "";
       }
 
-      // Klick
       cellDiv.addEventListener("click", ()=>onCellClick(i,j));
       rowDiv.appendChild(cellDiv);
       cells[posKey(i,j)] = cellDiv;
@@ -190,7 +226,6 @@ function initGame(){
   }
 }
 
-/* === Fisher-Yates shuffle === */
 function shuffleArray(arr){
   for(let i=arr.length-1; i>0; i--){
     let r = Math.floor(Math.random()*(i+1));
@@ -198,26 +233,20 @@ function shuffleArray(arr){
   }
 }
 
-/* === Poskey === */
 function posKey(r,c){
   return `${r},${c}`;
 }
 
-/* === Klick på en ruta === */
 function onCellClick(row, col){
-  if(gameOver) return; // om spelet är slut, ignorera
+  if(gameOver) return;
 
-  // Om dold ruta
   if(hiddenPositions.has(posKey(row,col))){
     if(board[row][col] === ''){
-      // Markera i "board" men visa ej
       board[row][col] = currentPlayer;
     }
     switchPlayer();
   } else {
-    // Ej dold
     if(board[row][col] === ''){
-      // Tom => placera
       board[row][col] = currentPlayer;
       cells[posKey(row,col)].textContent = currentPlayer;
       cells[posKey(row,col)].style.color = getPlayerColor();
@@ -235,21 +264,17 @@ function onCellClick(row, col){
   }
 }
 
-/* === Byt spelare === */
 function switchPlayer(){
   currentPlayer = (currentPlayer==='X'? 'O': 'X');
   infoLabel.textContent = `Spelare ${currentPlayer}'s tur`;
   infoLabel.style.color = getPlayerColor();
-  // Visa stor mitt-ruta i en sekund
   showCenterMessage(`Det är ${currentPlayer}'s tur!`);
 }
 
-/* === Färg X/O === */
 function getPlayerColor(){
-  return currentPlayer==='X'? 'red':'blue';
+  return currentPlayer==='X' ? 'var(--spam)' : 'var(--ham)';
 }
 
-/* === Vinst-check === */
 function checkWinner(player){
   for(let i=0; i<BOARD_SIZE; i++){
     for(let j=0; j<BOARD_SIZE; j++){
@@ -269,41 +294,31 @@ function checkDirection(player, x, y, dx, dy){
   for(let step=0; step<WIN_CONDITION; step++){
     let nx = x + step*dx;
     let ny = y + step*dy;
-    if(nx<0 || nx>=BOARD_SIZE || ny<0 || ny>=BOARD_SIZE){
-      break;
-    }
-    if(board[nx][ny] === player){
-      count++;
-    } else {
-      break;
-    }
+    if(nx<0 || nx>=BOARD_SIZE || ny<0 || ny>=BOARD_SIZE) break;
+    if(board[nx][ny] === player) count++;
+    else break;
   }
   return (count===WIN_CONDITION);
 }
 
-/* === Avslöja dolda rutor === */
 function revealHiddenPositions(){
   hiddenPositions.forEach(key=>{
     let [r,c] = key.split(',').map(Number);
     let val = board[r][c];
-    if(val===''){
-      val='-';
-    }
+    if(val==='') val='-';
     let cellDiv = cells[key];
     cellDiv.textContent = val;
-    cellDiv.style.color = '#444';
+    cellDiv.style.color = val === 'X' ? 'var(--spam)' : val === 'O' ? 'var(--ham)' : 'var(--muted)';
     cellDiv.classList.remove("hiddenHint");
   });
 }
 
-/* === Visa stor mitt-ruta i 1 sekund === */
 function showCenterMessage(msg){
   centerMessage.textContent = msg;
+  centerMessage.style.color = getPlayerColor();
+  centerMessage.style.borderColor = getPlayerColor() === 'var(--spam)' ? 'rgba(255,106,53,.4)' : 'rgba(29,233,155,.4)';
   centerMessage.style.display = "block";
-  // Dölj automatiskt efter 1 s
-  setTimeout(()=>{
-    centerMessage.style.display = "none";
-  }, 1000);
+  setTimeout(()=>{ centerMessage.style.display = "none"; }, 1000);
 }
 </script>
 
