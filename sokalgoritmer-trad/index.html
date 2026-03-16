@@ -340,7 +340,7 @@
     <li><strong>Lägga till heuristikvärde h(n) för en nod:</strong> Ctrl + Högerklick på nod.</li>
   </ul>
   <p>
-    När du kör en sökning kommer blåa noder (<span class="color-box" style="background:#ff6a35;"></span>)
+    När du kör en sökning kommer blåa noder (<span class="color-box" style="background:#4d80ff;"></span>)
     representera de noder som är utforskade under sökningen, kön för A* och Greedy Best-First
     sökningar är markerade med orange (<span class="color-box" style="background:orange;"></span>),
     och om en väg hittas markeras dess noder som ljusgröna (<span class="color-box" style="background:lightgreen;"></span>).
@@ -434,15 +434,15 @@ function drawAll(){
     ) {
       color = "orange";
     } else if (visitedSet.has(n.id)) {
-      color = "#ff6a35";
+      color = "#4d80ff";
     }
 
     ctx.fillStyle = color;
     ctx.beginPath();
     ctx.arc(n.x,n.y,NODE_RADIUS,0,2*Math.PI);
     ctx.fill();
-    ctx.strokeStyle = color === "white" ? "#3a4a6a" : color === "#ff6a35" ? "#ff8c55" : "#333";
-    ctx.lineWidth = color === "#ff6a35" ? 2.5 : 1.5;
+    ctx.strokeStyle = color === "white" ? "#3a4a6a" : color === "#4d80ff" ? "#6698ff" : "#333";
+    ctx.lineWidth = color === "#4d80ff" ? 2.5 : 1.5;
     ctx.stroke();
 
     ctx.fillStyle = "rgba(0,0,0,0.35)";
