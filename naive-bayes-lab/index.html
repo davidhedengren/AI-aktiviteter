@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Naïve Bayes Labbet</title>
+<title>Naïve Bayes Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Fraunces:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
 <style>
@@ -595,8 +595,8 @@
 <body>
 
 <header>
-  <h1>NAÏVE BAYES LAB</h1>
-  <p>Interaktivt klassificeringslaboratorium · övervakad inlärning</p>
+  <h1>NAÏVE BAYES-LABBET</h1>
+  <p>Interaktivt klassificeringslaboratorium</p>
 </header>
 
 <nav class="tabs">
@@ -1090,12 +1090,32 @@ function toggleFormula() {
 
   // Räkna ut råa log-sannolikheter för visning
   // Vi visar de faktiska produkterna (i normalskala, ej log) symboliskt
+  const rawScores = {};
+  classes.forEach(c => {
+    const prior = cc[c] / total;
+    const wordFactors = tokens.map(w => (wc[c][w]||0 + 1) / (totals[c] + vs));
+    rawScores[c] = wordFactors.reduce((a, b) => a * b, prior);
+  });
+  // Använd de normaliserade posteriors från steps för korrekthet
+  const rawSum = classes.reduce((s, c) => {
+    const prior = cc[c] / total;
+    const wf    = tokens.map(w => { const n=wc[c][w]||0; return (n+1)/(totals[c]+vs); });
+    return s + wf.reduce((a,b)=>a*b, prior);
+  }, 0);
+
   let html = `
     <div class="fp-title">NAÏVE BAYES KLASSIFICERINGSFORMEL</div>
     <div class="fp-abstract">
-      Modellen väljer den klass som ger <strong>högst värde</strong> av:<br>
-      <strong>P(klass | text) ∝ P(klass) × P(ord₁ | klass) × P(ord₂ | klass) × … × P(ordₙ | klass)</strong><br>
-      Varje faktor kommer direkt ur träningsdatan. Produkten normaliseras sedan till 100%.
+      Bayes sats säger: <strong>P(A|B) = P(B|A) × P(A) / P(B)</strong><br>
+      I vårt fall: <strong>P(klass | text) = P(text | klass) × P(klass) / P(text)</strong><br><br>
+      <span style="color:rgba(255,255,255,.4)">
+        P(text | klass) är produkten av alla ordssannolikheter.<br>
+        P(klass) är priorsannolikheten (hur vanlig klassen är i träningsdatan).<br>
+        P(text) — nämnaren — är densamma för alla klasser och behöver aldrig beräknas separat.
+        Istället <em>normaliserar</em> vi: vi delar varje klassvärde med summan av alla klassvärden,
+        så att de summerar till 100%. Vilken klass som vinner förändras inte av det — vi gör det
+        bara för att få ett begripligt procenttal.
+      </span>
     </div>`;
 
   classes.forEach(c => {
@@ -1106,7 +1126,6 @@ function toggleFormula() {
       return { w, count, prob };
     });
 
-    // Symbolisk multiplikationsrad
     const factors = [prior, ...wordFactors.map(f => f.prob)];
     const product = factors.reduce((a, b) => a * b, 1);
 
@@ -1118,22 +1137,39 @@ function toggleFormula() {
     <div class="fp-class-block">
       <div class="fp-class-name" style="color:${colorOf(c)}">${DISPLAY[c].toUpperCase()}</div>
       <div class="fp-line">
-        P(${DISPLAY[c]}) <span class="fp-op">×</span> ${tokens.length > 0 ? `P(ord | ${DISPLAY[c]})…` : '(inga ord att beräkna)'}<br>
+        P(text | ${DISPLAY[c]}) × P(${DISPLAY[c]})<br>
         = <strong>${prior.toFixed(5)}</strong><span class="fp-op"> [${cc[c]} mejl / ${total} totalt]</span>
         ${tokens.length > 0 ? `<span class="fp-op"> × </span>${termStr}` : ''}
-        ${tokens.length > 0 ? `<br><span class="fp-op">= </span><strong>${product.toExponential(4)}</strong> <span class="fp-op">(råvärde innan normalisering)</span>` : ''}
+        ${tokens.length > 0 ? `<br><span class="fp-op">= råvärde </span><strong>${product.toExponential(4)}</strong>` : ''}
       </div>
       <div class="fp-result" style="border-color:${colorOf(c)}30;background:${colorOf(c)}08;color:${colorOf(c)}">
-        <span>Normaliserat resultat:</span>
+        <span>Normaliserat: <span style="opacity:.6;font-size:11px">${product.toExponential(3)} / (summa av alla råvärden)</span></span>
         <strong style="font-size:16px">${pct(final.posteriors[c] || 0)}</strong>
       </div>
     </div>`;
   });
 
+  // Normaliseringssteget med faktiska siffror
+  const productsPerClass = classes.map(c => {
+    const prior = cc[c] / total;
+    const wf    = tokens.map(w => { const n=wc[c][w]||0; return (n+1)/(totals[c]+vs); });
+    return { c, product: wf.reduce((a,b)=>a*b, prior) };
+  });
+  const sumAll = productsPerClass.reduce((s, x) => s + x.product, 0);
+
   html += `
-    <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:12px;line-height:1.7">
-      Råvärdena är extremt små tal (produkter av många sannolikheter) — modellen beräknar dem i logaritmskala
-      internt för att undvika avrundningsfel. Ovan visas de konverterade tillbaka för läsbarhet.
+    <div style="margin-top:14px;padding:12px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:6px">
+      <div style="font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-bottom:10px">NORMALISERINGSSTEGET — P(text) SOM GEMENSAM NÄMNARE</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.45);line-height:2">
+        P(text) ≈ summan av alla råvärden = ${productsPerClass.map(x=>`<strong style="color:rgba(255,255,255,.7)">${x.product.toExponential(3)}</strong>`).join(' + ')} = <strong style="color:rgba(255,255,255,.7)">${sumAll.toExponential(3)}</strong><br>
+        ${productsPerClass.map(x => `
+          P(${DISPLAY[x.c]} | text) = ${x.product.toExponential(3)} / ${sumAll.toExponential(3)} = <strong style="color:${colorOf(x.c)}">${pct(final.posteriors[x.c]||0)}</strong>
+        `).join('<br>')}
+      </div>
+    </div>
+    <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:10px;line-height:1.7">
+      Råvärdena är extremt små tal — modellen beräknar dem i logaritmskala internt för att undvika avrundningsfel.
+      Ovan visas de konverterade tillbaka för läsbarhet.
     </div>`;
 
   panel.innerHTML = html;
