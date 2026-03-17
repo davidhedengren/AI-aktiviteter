@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minimax & Alfa-Beta-beskärning – Interaktiv simulering</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0f1117; --surface:#1a1d27; --surface2:#232735; --border:#2e3345;
+  --text:#e4e6ef; --text-dim:#8b8fa3;
+  --max-color:#34c759; --max-fill:rgba(52,199,89,0.12); --max-glow:rgba(52,199,89,0.4);
+  --min-color:#f0923b; --min-fill:rgba(240,146,59,0.12); --min-glow:rgba(240,146,59,0.4);
+  --accent:#5b8def; --green:#34c759; --orange:#f0923b; --red:#ef5b5b;
+  --val:#ffd866; --leaf-col:#9ca8ba; --prune:#ef5b5b;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+.hd{text-align:center;padding:20px 16px 12px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(52,199,89,0.04),transparent);}
+.hd h1{font-size:1.4em;font-weight:700;letter-spacing:-0.02em;margin-bottom:3px;}
+.hd h1 .g{color:var(--max-color);} .hd h1 .o{color:var(--min-color);}
+.hd p{color:var(--text-dim);font-size:0.84em;max-width:760px;margin:0 auto;line-height:1.5;}
+
+.app{display:grid;grid-template-columns:1fr 330px;max-width:1440px;margin:0 auto;height:calc(100vh - 76px);overflow:hidden;}
+
+/* Tree area */
+.ta{border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
+.tb{display:flex;align-items:center;gap:7px;padding:9px 12px;border-bottom:1px solid var(--border);background:var(--surface);flex-wrap:wrap;flex-shrink:0;}
+.sel{font-family:'DM Sans',sans-serif;font-size:0.82em;padding:6px 10px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;outline:none;}
+.sel:focus{border-color:var(--accent);}
+
+/* Mode tabs */
+.mtabs{display:flex;border:1px solid var(--border);border-radius:7px;overflow:hidden;margin-left:4px;}
+.mtab{font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:600;padding:6px 14px;border:none;background:var(--surface2);color:var(--text-dim);cursor:pointer;transition:0.2s;border-right:1px solid var(--border);}
+.mtab:last-child{border-right:none;}
+.mtab.act{background:var(--accent);color:#fff;}
+.mtab:hover:not(.act){color:var(--text);}
+
+.tog{display:flex;align-items:center;gap:6px;margin-left:auto;font-size:0.82em;font-weight:600;color:var(--text-dim);cursor:pointer;user-select:none;}
+.ttr{width:38px;height:20px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);position:relative;transition:0.25s;}
+.ttr.on{background:var(--green);border-color:var(--green);}
+.tkn{width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;transition:left 0.25s;box-shadow:0 1px 3px rgba(0,0,0,0.3);}
+.ttr.on .tkn{left:20px;}
+
+.cw{flex:1;position:relative;min-height:520px;background:#14161f;}
+.cw canvas{display:block;width:100%;height:100%;position:absolute;top:0;left:0;}
+
+/* Build mode banner */
+.build-bar{display:none;padding:10px 14px;background:rgba(91,141,239,0.08);border-bottom:1px solid var(--border);font-size:0.84em;color:var(--accent);text-align:center;line-height:1.5;}
+.build-bar.show{display:block;}
+.build-bar strong{color:var(--text);}
+
+.tl{display:flex;gap:12px;padding:7px 12px;border-top:1px solid var(--border);background:var(--surface);flex-wrap:wrap;flex-shrink:0;}
+.li{display:flex;align-items:center;gap:5px;font-size:0.72em;color:var(--text-dim);}
+.li svg{flex-shrink:0;}
+
+/* Sidebar */
+.sb{display:flex;flex-direction:column;background:var(--surface);overflow:hidden;height:100%;}
+.ss{padding:11px 13px;border-bottom:1px solid var(--border);flex-shrink:0;}
+.st{font-size:0.74em;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-dim);margin-bottom:8px;}
+.bg{display:flex;gap:5px;flex-wrap:wrap;}
+.btn{font-family:'DM Sans',sans-serif;padding:7px 13px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);color:var(--text);font-size:0.81em;font-weight:600;cursor:pointer;transition:0.2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.btn:hover{border-color:var(--accent);background:rgba(91,141,239,0.08);}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;}
+.btn.pri:hover{background:#4a7de0;}
+.btn.dn{border-color:var(--red);color:var(--red);}
+.btn.dn:hover{background:rgba(239,91,91,0.1);}
+.btn:disabled{opacity:0.35;cursor:default;pointer-events:none;}
+
+.speed-row{display:flex;align-items:center;gap:8px;margin-top:10px;}
+.speed-label{font-size:0.78em;font-weight:600;color:var(--text-dim);white-space:nowrap;}
+.speed-row input[type="range"]{-webkit-appearance:none;flex:1;height:5px;border-radius:3px;background:var(--surface2);outline:none;}
+.speed-row input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 6px rgba(91,141,239,0.3);}
+.speed-val{font-family:'JetBrains Mono',monospace;font-size:0.78em;color:var(--accent);min-width:28px;text-align:right;}
+
+.sr{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.bx{background:var(--surface2);border-radius:6px;padding:8px 10px;border:1px solid var(--border);}
+.bl{font-size:0.66em;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px;}
+.bv{font-family:'JetBrains Mono',monospace;font-size:0.98em;font-weight:600;}
+
+/* Log */
+.lw{flex:1;overflow:hidden;display:flex;flex-direction:column;min-height:0;}
+.lg{flex:1;overflow-y:auto;padding:5px 9px;scroll-behavior:smooth;}
+.lg::-webkit-scrollbar{width:4px;} .lg::-webkit-scrollbar-track{background:var(--surface);} .lg::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+.se{padding:6px 8px;border-radius:5px;margin-bottom:2px;font-size:0.78em;line-height:1.5;color:var(--text-dim);border-left:3px solid transparent;transition:background 0.15s;}
+.se.act{background:var(--surface2);color:var(--text);border-left-color:var(--accent);}
+.se.pe{border-left-color:var(--prune);}
+.sn{font-family:'JetBrains Mono',monospace;font-size:0.7em;color:var(--text-dim);margin-right:4px;}
+.nt{font-family:'JetBrains Mono',monospace;font-size:0.76em;padding:1px 5px;border-radius:3px;font-weight:600;}
+.nt.mx{background:rgba(52,199,89,0.15);color:var(--max-color);}
+.nt.mn{background:rgba(240,146,59,0.15);color:var(--min-color);}
+.nt.lf{background:rgba(156,168,186,0.12);color:var(--leaf-col);}
+.vl{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--val);}
+.hint{font-style:italic;color:rgba(255,255,255,0.35);font-size:0.92em;}
+.pt{color:var(--prune);font-weight:600;}
+.abt{font-family:'JetBrains Mono',monospace;font-weight:500;}
+.av{color:var(--max-color);} .bvl{color:var(--min-color);}
+
+.sum{margin:6px 9px 9px;padding:11px;border-radius:6px;background:var(--surface2);border:1px solid var(--border);font-size:0.8em;line-height:1.6;}
+.sum-h{font-weight:700;color:var(--green);margin-bottom:4px;}
+.sum-l{color:var(--text-dim);} .sum-l strong{color:var(--text);}
+.elg{display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-dim);font-size:0.84em;text-align:center;padding:16px;line-height:1.6;}
+
+/* Info */
+.ib{width:100%;padding:8px;background:none;border:none;border-top:1px solid var(--border);color:var(--text-dim);font-family:'DM Sans',sans-serif;font-size:0.78em;cursor:pointer;transition:color 0.2s;flex-shrink:0;}
+.ib:hover{color:var(--text);}
+.ic{padding:11px 13px;border-top:1px solid var(--border);font-size:0.78em;line-height:1.6;color:var(--text-dim);max-height:0;overflow:hidden;transition:max-height 0.3s;}
+.ic.open{max-height:500px;}
+.ic h4{color:var(--accent);font-size:0.88em;margin-bottom:4px;}
+.ic p{margin-bottom:6px;}
+.fm{font-family:'JetBrains Mono',monospace;background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:6px 10px;margin:6px 0;font-size:0.88em;color:var(--val);text-align:center;}
+
+/* Node popup (build mode) */
+.npop{position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px;z-index:150;box-shadow:0 8px 30px rgba(0,0,0,0.6);display:none;min-width:160px;}
+.npop.show{display:block;}
+.npop-t{font-size:0.78em;font-weight:600;color:var(--text-dim);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.04em;}
+.npop-btn{display:block;width:100%;font-family:'DM Sans',sans-serif;padding:8px 12px;margin-bottom:4px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);font-size:0.84em;font-weight:600;cursor:pointer;text-align:left;transition:0.15s;}
+.npop-btn:hover{border-color:var(--accent);background:rgba(91,141,239,0.1);}
+.npop-btn:last-child{margin-bottom:0;}
+.npop-btn.dn{border-color:var(--red);color:var(--red);}
+.npop-btn.dn:hover{background:rgba(239,91,91,0.1);}
+.npop-inp{display:flex;gap:5px;align-items:center;}
+.npop-inp input{width:70px;font-family:'JetBrains Mono',monospace;font-size:0.92em;padding:7px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--val);outline:none;text-align:center;}
+.npop-inp input:focus{border-color:var(--accent);}
+.npop-inp button{padding:7px 12px;}
+
+.tt{position:fixed;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:7px 11px;font-size:0.77em;pointer-events:none;opacity:0;transition:opacity 0.12s;z-index:100;box-shadow:0 4px 16px rgba(0,0,0,0.5);max-width:210px;line-height:1.5;}
+.tt.show{opacity:1;}
+
+@media(max-width:920px){
+  .app{grid-template-columns:1fr;}
+  .ta{border-right:none;border-bottom:1px solid var(--border);}
+  .cw{min-height:320px;}
+  .sb{max-height:55vh;overflow-y:auto;}
+}
+</style>
+</head>
+<body>
+
+<div class="hd">
+  <h1>Minimax med <span class="g">Alfa</span>-<span class="o">Beta</span>-beskärning</h1>
+  <p>Stega igenom minimax-algoritmen steg för steg. Bygg egna träd genom att klicka, eller välj ett färdigt exempel.</p>
+</div>
+
+<div class="app">
+  <div class="ta">
+    <div class="tb">
+      <select class="sel" id="treeSel" onchange="selectPreset(this.value)">
+        <option value="0">Exempelträd 1 – Grundläggande</option>
+        <option value="1">Exempelträd 2 – Flera beskärningar</option>
+        <option value="2">Exempelträd 3 – Djupare (4 nivåer)</option>
+        <option value="3">Exempelträd 4 – Djupt träd (5 nivåer, 16 löv)</option>
+      </select>
+      <div class="mtabs">
+        <button class="mtab act" id="mtRun" onclick="setMode('run')">▶ Kör</button>
+        <button class="mtab" id="mtBuild" onclick="setMode('build')">✎ Bygg</button>
+      </div>
+      <div class="tog" id="abWrap" onclick="toggleAB()">
+        <span>α-β</span>
+        <div class="ttr on" id="abTog"><div class="tkn"></div></div>
+      </div>
+    </div>
+    <div class="build-bar" id="buildBar">
+      Byggläge: <strong>Klicka på en nod</strong> för att lägga till barn eller ändra värde. Klicka <strong>Kör</strong> när du är klar.
+    </div>
+    <div class="cw"><canvas id="cv"></canvas></div>
+    <div class="tl">
+      <div class="li"><svg width="16" height="14"><polygon points="8,2 14,12 2,12" fill="none" stroke="var(--max-color)" stroke-width="2"/></svg> MAX</div>
+      <div class="li"><svg width="16" height="14"><polygon points="8,12 14,2 2,2" fill="none" stroke="var(--min-color)" stroke-width="2"/></svg> MIN</div>
+      <div class="li"><svg width="14" height="14"><circle cx="7" cy="7" r="5.5" fill="none" stroke="var(--leaf-col)" stroke-width="1.5"/></svg> Lövnod</div>
+      <div class="li"><span style="color:var(--prune);font-weight:700;font-size:1.1em">✕</span> Beskuren</div>
+    </div>
+  </div>
+
+  <div class="sb">
+    <div class="ss">
+      <div class="st">Kontroller</div>
+      <div class="bg">
+        <button class="btn pri" id="bStep" onclick="doStep()">▶ Steg</button>
+        <button class="btn" id="bPlay" onclick="togglePlay()">⏵ Starta sökning</button>
+        <button class="btn" id="bBack" onclick="doBack()">◀ Bakåt</button>
+        <button class="btn dn" onclick="doReset()">↺ Nollställ</button>
+      </div>
+      <div class="speed-row">
+        <span class="speed-label">Hastighet</span>
+        <input type="range" id="speedSlider" min="0" max="4" step="1" value="1" oninput="updateSpeed()">
+        <span class="speed-val" id="speedVal">1×</span>
+      </div>
+    </div>
+    <div class="ss">
+      <div class="st">Status</div>
+      <div class="sr">
+        <div class="bx"><div class="bl">Steg</div><div class="bv" id="sStep">0 / –</div></div>
+        <div class="bx"><div class="bl">Besökta noder</div><div class="bv" id="sVis">0</div></div>
+        <div class="bx"><div class="bl">Beskurna noder</div><div class="bv" id="sPru" style="color:var(--prune)">0</div></div>
+        <div class="bx"><div class="bl">Rotvärde</div><div class="bv" id="sRoot" style="color:var(--val)">–</div></div>
+      </div>
+    </div>
+    <div class="ss" style="padding-bottom:3px;"><div class="st">Steg-för-steg-logg</div></div>
+    <div class="lw"><div class="lg" id="log"><div class="elg">Klicka <strong>Steg</strong> eller <strong>Starta sökning</strong> för att starta.</div></div></div>
+    <button class="ib" id="iBtn" onclick="toggleInfo()">📖 Så fungerar minimax & alfa-beta ▾</button>
+    <div class="ic" id="iC">
+      <h4>Minimax-algoritmen</h4>
+      <p>MAX-spelaren (▲ grön) väljer draget med högst värde. MIN-spelaren (▼ orange) väljer draget med lägst värde.</p>
+      <h4>Alfa-beta-beskärning</h4>
+      <p><strong style="color:var(--max-color)">α</strong> = bästa garanterade värdet för MAX hittills.<br><strong style="color:var(--min-color)">β</strong> = bästa garanterade värdet för MIN hittills.</p>
+      <div class="fm">Om α ≥ β → beskär resterande grenar</div>
+      <p>Resultatet blir alltid detsamma – men färre noder undersöks.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Node popup for build mode -->
+<div class="npop" id="npop"></div>
+<div class="tt" id="tt"></div>
+
+<script>
+// ================================================================
+//  PRESETS
+// ================================================================
+const PRESETS = [
+  "((3,5),(6,9),(1,2))",
+  "((7,3,8),(2,6,1),(5,4,9))",
+  "(((3,17),(18,12)),((5,2),(4,1)))",
+  "((((15,20),(12,18)),((14,13),(12,16))),(((2,8),(5,11)),((9,3),(7,10))))",
+];
+
+// ================================================================
+//  STATE
+// ================================================================
+let tree=null, allNodes=[], steps=[], curStep=-1, hist=[], useAB=true, playing=false, playTmr=null;
+let mode='run';
+const SPEEDS=[700,420,200,80,25];
+let speedIdx=1; // 'run' | 'build'
+let buildTree_=null; // separate tree for build mode
+
+// ================================================================
+//  PARSE
+// ================================================================
+function parseTree(s){
+  s=s.trim(); let pos=0;
+  function ws(){while(pos<s.length&&s[pos]===' ')pos++;}
+  function pn(){
+    ws();
+    if(s[pos]==='('){pos++;const ch=[];while(true){ws();if(s[pos]===')'){pos++;break;}if(s[pos]===','){pos++;continue;}ch.push(pn());}if(!ch.length)throw"Tom nod";return{children:ch};}
+    let n='';while(pos<s.length&&'-0123456789.'.includes(s[pos])){n+=s[pos];pos++;}
+    const v=parseFloat(n);if(isNaN(v))throw"Ogiltigt tal";return{value:Math.round(v)};
+  }
+  const r=pn();ws();if(pos<s.length)throw"Extra tecken";return r;
+}
+
+function mkTree(def,id,d,mx){
+  const n={id:id.v++,depth:d,isMax:mx,isLeaf:!def.children,leafValue:def.value??null,children:[],
+    x:0,y:0,visited:false,active:false,complete:false,pruned:false,
+    computedValue:null,alpha:null,beta:null,showAB:false,edgeVis:false};
+  if(def.children)for(const c of def.children)n.children.push(mkTree(c,id,d+1,!mx));
+  return n;
+}
+function coll(n,a){a.push(n);for(const c of n.children)coll(c,a);}
+function md(n){if(n.isLeaf)return 0;let m=0;for(const c of n.children)m=Math.max(m,md(c)+1);return m;}
+function lay(n,x0,x1,d,mx,W,H){
+  const pt=50,pb=50,uh=H-pt-pb;n.y=pt+(d/Math.max(mx,1))*uh;
+  if(n.isLeaf){n.x=(x0+x1)/2;return;}
+  const cw=(x1-x0)/n.children.length;
+  for(let i=0;i<n.children.length;i++)lay(n.children[i],x0+i*cw,x0+(i+1)*cw,d+1,mx,W,H);
+  let s=0;for(const c of n.children)s+=c.x;n.x=s/n.children.length;
+}
+
+// ================================================================
+//  MINIMAX STEPS
+// ================================================================
+function buildSteps(){
+  steps=[];
+  function rec(n,a,b){
+    steps.push({t:'visit',nid:n.id,a,b});
+    if(n.isLeaf){steps.push({t:'leaf',nid:n.id,v:n.leafValue});return n.leafValue;}
+    if(n.isMax){
+      let v=-Infinity;
+      for(let i=0;i<n.children.length;i++){
+        const cv=rec(n.children[i],a,b);
+        steps.push({t:'back',nid:n.id,cid:n.children[i].id,cv,a,b});
+        const prevV=v;
+        if(cv>v)v=cv;a=Math.max(a,v);
+        steps.push({t:'upd',nid:n.id,v,a,b,mx:true,cv,prevV,changed:v!==prevV});
+        if(useAB&&a>=b){const pr=n.children.slice(i+1);if(pr.length){const ids=[];for(const p of pr)gAll(p,ids);steps.push({t:'prune',nid:n.id,pids:ids,a,b});}break;}
+      }
+      steps.push({t:'done',nid:n.id,v});return v;
+    }else{
+      let v=Infinity;
+      for(let i=0;i<n.children.length;i++){
+        const cv=rec(n.children[i],a,b);
+        steps.push({t:'back',nid:n.id,cid:n.children[i].id,cv,a,b});
+        const prevV=v;
+        if(cv<v)v=cv;b=Math.min(b,v);
+        steps.push({t:'upd',nid:n.id,v,a,b,mx:false,cv,prevV,changed:v!==prevV});
+        if(useAB&&a>=b){const pr=n.children.slice(i+1);if(pr.length){const ids=[];for(const p of pr)gAll(p,ids);steps.push({t:'prune',nid:n.id,pids:ids,a,b});}break;}
+      }
+      steps.push({t:'done',nid:n.id,v});return v;
+    }
+  }
+  rec(tree,-Infinity,Infinity);
+}
+function gAll(n,a){a.push(n.id);for(const c of n.children)gAll(c,a);}
+
+// ================================================================
+//  SNAPSHOTS
+// ================================================================
+function snap(){return allNodes.map(n=>({id:n.id,visited:n.visited,active:n.active,complete:n.complete,pruned:n.pruned,computedValue:n.computedValue,alpha:n.alpha,beta:n.beta,showAB:n.showAB,edgeVis:n.edgeVis}));}
+function rest(s){const m={};for(const x of s)m[x.id]=x;for(const n of allNodes)Object.assign(n,m[n.id]);}
+
+function applyStep(i){
+  const s=steps[i],nm={};for(const n of allNodes)nm[n.id]=n;
+  for(const n of allNodes)n.active=false;
+  const nd=nm[s.nid];
+  switch(s.t){
+    case'visit':nd.visited=nd.active=nd.edgeVis=true;if(useAB){nd.alpha=s.a;nd.beta=s.b;nd.showAB=true;}break;
+    case'leaf':nd.active=true;nd.computedValue=s.v;nd.complete=true;break;
+    case'back':nd.active=true;break;
+    case'upd':nd.active=true;nd.computedValue=s.v;if(useAB){nd.alpha=s.a;nd.beta=s.b;}break;
+    case'prune':nd.active=true;for(const pid of s.pids)nm[pid].pruned=true;break;
+    case'done':nd.active=true;nd.computedValue=s.v;nd.complete=true;break;
+  }
+}
+
+// ================================================================
+//  DRAWING
+// ================================================================
+function setupCv(){
+  const cv=document.getElementById('cv'),wr=cv.parentElement,dpr=devicePixelRatio||1;
+  const w=wr.clientWidth,h=wr.clientHeight;
+  cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+'px';cv.style.height=h+'px';
+  const ctx=cv.getContext('2d');ctx.scale(dpr,dpr);return{ctx,w,h};
+}
+
+function triPath(ctx,x,y,r,up){
+  ctx.beginPath();
+  if(up){ctx.moveTo(x,y-r);ctx.lineTo(x+r*.95,y+r*.7);ctx.lineTo(x-r*.95,y+r*.7);}
+  else{ctx.moveTo(x,y+r);ctx.lineTo(x+r*.95,y-r*.7);ctx.lineTo(x-r*.95,y-r*.7);}
+  ctx.closePath();
+}
+
+function draw(){
+  const{ctx,w,h}=setupCv();
+  const nCount=allNodes.length;
+  const sc=nCount>45?0.6:nCount>30?0.75:nCount>18?0.88:1;
+  const pad=nCount>45?14:nCount>30?22:nCount>18?34:44;
+  const d=md(tree);lay(tree,pad,w-pad,0,d,w,h);
+
+  // Dynamic sizing based on tree complexity
+  const RL=Math.round(17*sc), RI=Math.round(23*sc);
+  const fontBig=Math.round(15*sc)+'px', fontMed=Math.round(13*sc)+'px', fontSm=Math.round(11*sc)+'px';
+  const fontAB=Math.round(8*sc)+'px';
+  const pruneFont=Math.round(15*sc)+'px';
+
+  // edges (drawn first, nodes will paint over them)
+  function dEdge(n){
+    for(const c of n.children){
+      ctx.beginPath();ctx.moveTo(n.x,n.y);ctx.lineTo(c.x,c.y);
+      if(c.pruned){ctx.strokeStyle='rgba(239,91,91,0.5)';ctx.setLineDash([5,4]);ctx.lineWidth=2.4;}
+      else if(c.edgeVis){ctx.strokeStyle='rgba(255,255,255,0.75)';ctx.setLineDash([]);ctx.lineWidth=2.6;}
+      else{ctx.strokeStyle='rgba(255,255,255,0.5)';ctx.setLineDash([]);ctx.lineWidth=2.2;}
+      ctx.stroke();ctx.setLineDash([]);
+      if(c.pruned){const mx=(n.x+c.x)/2,my=(n.y+c.y)/2;ctx.font='bold '+pruneFont+' "DM Sans"';ctx.fillStyle='rgba(239,91,91,0.85)';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('✕',mx,my);}
+      dEdge(c);
+    }
+  }
+  dEdge(tree);
+
+  // nodes (drawn on top of edges)
+  // First pass: opaque background to cover edges behind nodes
+  function dNodeBg(n){
+    const x=n.x,y=n.y,R=n.isLeaf?RL:RI;
+    if(n.isLeaf){
+      ctx.beginPath();ctx.arc(x,y,R+1,0,Math.PI*2);
+      ctx.fillStyle='#14161f';ctx.fill();
+    }else{
+      triPath(ctx,x,y,R+2,n.isMax);
+      ctx.fillStyle='#14161f';ctx.fill();
+    }
+    for(const c of n.children)dNodeBg(c);
+  }
+  dNodeBg(tree);
+
+  // Second pass: actual styled nodes
+  function dNode(n){
+    const x=n.x,y=n.y,R=n.isLeaf?RL:RI;
+    ctx.save();
+
+    if(n.pruned){
+      if(n.isLeaf){
+        ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);
+        ctx.fillStyle='rgba(50,52,65,0.7)';ctx.fill();
+        ctx.strokeStyle='rgba(239,91,91,0.4)';ctx.lineWidth=1.8;ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([]);
+        ctx.fillStyle='rgba(255,255,255,0.28)';ctx.font='600 '+fontMed+' "JetBrains Mono"';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(n.leafValue!=null?String(n.leafValue):'?',x,y);
+      }else{
+        ctx.setLineDash([3,3]);
+        triPath(ctx,x,y,R,n.isMax);
+        ctx.fillStyle=n.isMax?'rgba(52,199,89,0.1)':'rgba(240,146,59,0.1)';ctx.fill();
+        ctx.strokeStyle=n.isMax?'rgba(52,199,89,0.3)':'rgba(240,146,59,0.3)';ctx.lineWidth=1.8;ctx.stroke();
+        ctx.setLineDash([]);
+      }
+      ctx.restore();for(const c of n.children)dNode(c);return;
+    }
+
+    if(n.isLeaf){
+      if(n.active){ctx.shadowColor='rgba(255,216,102,0.6)';ctx.shadowBlur=16;}
+      ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);
+      ctx.fillStyle=n.complete?'rgba(255,216,102,0.18)':n.visited?'rgba(60,65,85,0.95)':'rgba(35,38,55,0.95)';ctx.fill();
+      ctx.strokeStyle=n.complete?'rgba(255,216,102,0.85)':n.visited?'rgba(156,168,186,0.55)':'rgba(156,168,186,0.3)';
+      ctx.lineWidth=n.active?2.8:2.2;ctx.stroke();
+      ctx.shadowBlur=0;
+      ctx.fillStyle=n.complete?'#ffd866':'rgba(190,200,215,0.7)';
+      ctx.font='600 '+fontMed+' "JetBrains Mono"';ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(n.leafValue!=null?String(n.leafValue):'?',x,y);
+    }else{
+      const up=n.isMax;
+      if(n.active){ctx.shadowColor=up?'rgba(52,199,89,0.5)':'rgba(240,146,59,0.5)';ctx.shadowBlur=16;}
+      triPath(ctx,x,y,R,up);
+      if(n.active)ctx.fillStyle=up?'rgba(30,80,45,0.9)':'rgba(90,55,25,0.9)';
+      else if(n.complete)ctx.fillStyle=up?'rgba(25,60,35,0.85)':'rgba(70,45,20,0.85)';
+      else if(n.visited)ctx.fillStyle=up?'rgba(22,45,30,0.85)':'rgba(55,35,18,0.85)';
+      else ctx.fillStyle='rgba(25,28,40,0.92)';
+      ctx.fill();
+      ctx.strokeStyle=n.active?(up?'rgba(52,199,89,1)':'rgba(240,146,59,1)'):n.complete?(up?'rgba(52,199,89,0.9)':'rgba(240,146,59,0.9)'):n.visited?(up?'rgba(52,199,89,0.55)':'rgba(240,146,59,0.55)'):(up?'rgba(52,199,89,0.35)':'rgba(240,146,59,0.35)');
+      ctx.lineWidth=n.active?3:2.4;ctx.stroke();
+      ctx.shadowBlur=0;
+
+      // TEXT INSIDE TRIANGLE: show value if computed, else MAX/MIN
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      const tcy=up?y+2*sc:y-2*sc;
+      if(n.computedValue!==null){
+        ctx.font='700 '+fontBig+' "JetBrains Mono"';ctx.fillStyle='#ffd866';
+        ctx.fillText(String(n.computedValue),x,tcy);
+      }else{
+        ctx.font='700 '+fontSm+' "DM Sans"';
+        ctx.fillStyle=up?'rgba(52,199,89,0.7)':'rgba(240,146,59,0.7)';
+        ctx.fillText(up?'MAX':'MIN',x,tcy);
+      }
+
+      // Alpha-beta tucked tight against triangle edge
+      if(useAB&&n.showAB){
+        ctx.font='500 '+fontAB+' "JetBrains Mono"';ctx.textAlign='center';
+        const aS='α='+fmtAB(n.alpha),bS='β='+fmtAB(n.beta),fs=aS+' '+bS;
+        const tw=ctx.measureText(fs).width+6;
+        const aby=up?y+R*0.7+7*sc:y-R*0.7-7*sc;
+        ctx.fillStyle='rgba(12,14,20,0.92)';
+        ctx.beginPath();ctx.roundRect(x-tw/2,aby-6*sc,tw,12*sc,3);ctx.fill();
+        const aw=ctx.measureText(aS).width,gp=ctx.measureText(' ').width;
+        const sx2=x-(aw+gp+ctx.measureText(bS).width)/2;
+        ctx.textAlign='left';ctx.textBaseline='middle';
+        ctx.fillStyle='rgba(52,199,89,0.85)';ctx.fillText(aS,sx2,aby);
+        ctx.fillStyle='rgba(240,146,59,0.85)';ctx.fillText(bS,sx2+aw+gp,aby);
+      }
+    }
+    ctx.restore();
+    for(const c of n.children)dNode(c);
+  }
+  dNode(tree);
+
+  // Build mode: highlight clickable nodes
+  if(mode==='build'){
+    for(const n of allNodes){
+      const R=n.isLeaf?RL:RI;
+      ctx.save();
+      ctx.beginPath();
+      if(n.isLeaf&&n.children.length===0){
+        ctx.arc(n.x,n.y,R+4,0,Math.PI*2);
+        ctx.strokeStyle='rgba(91,141,239,0.25)';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);ctx.stroke();
+      }else if(!n.isLeaf){
+        triPath(ctx,n.x,n.y,R+4,n.isMax);
+        ctx.strokeStyle='rgba(91,141,239,0.15)';ctx.lineWidth=1;ctx.setLineDash([4,3]);ctx.stroke();
+      }
+      ctx.setLineDash([]);ctx.restore();
+    }
+  }
+}
+
+function fmtAB(v){return v===-Infinity?'−∞':v===Infinity?'+∞':String(v);}
+
+// ================================================================
+//  LOG
+// ================================================================
+function renderLog(){
+  const el=document.getElementById('log');
+  if(curStep<0){el.innerHTML='<div class="elg">Klicka <strong>Steg</strong> eller <strong>Starta sökning</strong> för att starta.</div>';return;}
+  const nm={};for(const n of allNodes)nm[n.id]=n;
+  let h='';
+  for(let i=0;i<=curStep;i++){
+    const s=steps[i],nd=nm[s.nid],tg=nd.isLeaf?'lf':(nd.isMax?'mx':'mn'),lb=nd.isLeaf?'Löv':(nd.isMax?'MAX':'MIN');
+    let t=`<span class="sn">${i+1}.</span>`,cl='';
+    switch(s.t){
+      case'visit':t+=`Besöker <span class="nt ${tg}">${lb} ${nd.id}</span>`;if(useAB)t+=` <span class="abt">(α=<span class="av">${fmtAB(s.a)}</span>, β=<span class="bvl">${fmtAB(s.b)}</span>)</span>`;break;
+      case'leaf':t+=`<span class="nt lf">Löv ${nd.id}</span> → <span class="vl">${s.v}</span>`;break;
+      case'back':t+=`Tillbaka till <span class="nt ${tg}">${lb} ${nd.id}</span> — barn gav <span class="vl">${s.cv}</span>`;break;
+      case'upd':{
+        t+=`<span class="nt ${tg}">${lb} ${nd.id}</span> → <span class="vl">${s.v}</span>`;
+        // Pedagogical hint
+        if(s.changed){
+          t+=` <span class="hint">(${s.cv} ${s.mx?'>' :'<'} ${fmtAB(s.prevV)} — nytt bästa!)</span>`;
+        }else{
+          t+=` <span class="hint">(${s.cv} ${s.mx?'≤':'≥'} ${s.v} — behåller ${s.v})</span>`;
+        }
+        if(useAB)t+=` <span class="abt">(α=<span class="av">${fmtAB(s.a)}</span>, β=<span class="bvl">${fmtAB(s.b)}</span>)</span>`;
+        break;
+      }
+      case'prune':t+=`<span class="pt">✂ Beskärning!</span> vid <span class="nt ${tg}">${lb} ${nd.id}</span> — <span class="abt">α=<span class="av">${fmtAB(s.a)}</span> ≥ β=<span class="bvl">${fmtAB(s.b)}</span></span> <span class="hint">(resten kan inte bli bättre)</span>`;cl='pe';break;
+      case'done':t+=`<span class="nt ${tg}">${lb} ${nd.id}</span> klar = <span class="vl">${s.v}</span>`;break;
+    }
+    h+=`<div class="se ${cl} ${i===curStep?'act':''}">${t}</div>`;
+  }
+  if(curStep===steps.length-1){
+    const vis=allNodes.filter(n=>n.visited).length,pru=allNodes.filter(n=>n.pruned).length,tot=allNodes.length;
+    h+=`<div class="sum"><div class="sum-h">✓ Klar</div><div class="sum-l">Rotvärde: <strong style="color:var(--val)">${tree.computedValue}</strong></div><div class="sum-l">Besökta: <strong>${vis}</strong>/${tot}${pru?` — Beskurna: <strong style="color:var(--prune)">${pru}</strong>`:''}</div>${pru?`<div class="sum-l" style="color:var(--green);margin-top:2px">Beskärningen sparade ${pru} nod${pru>1?'er':''}</div>`:''}</div>`;
+  }
+  el.innerHTML=h;el.scrollTop=el.scrollHeight;
+}
+
+function updateStats(){
+  const vis=allNodes.filter(n=>n.visited).length,pru=allNodes.filter(n=>n.pruned).length;
+  document.getElementById('sStep').textContent=`${Math.max(0,curStep+1)} / ${steps.length}`;
+  document.getElementById('sVis').textContent=vis;
+  document.getElementById('sPru').textContent=pru;
+  document.getElementById('sRoot').textContent=tree.complete?tree.computedValue:'–';
+  document.getElementById('bStep').disabled=curStep>=steps.length-1||mode==='build';
+  document.getElementById('bBack').disabled=curStep<0||mode==='build';
+}
+
+// ================================================================
+//  CONTROLS
+// ================================================================
+function doStep(){if(mode!=='run'||curStep>=steps.length-1)return;hist.push(snap());curStep++;applyStep(curStep);renderLog();draw();updateStats();}
+function doBack(){if(mode!=='run'||curStep<0||!hist.length)return;rest(hist.pop());curStep--;renderLog();draw();updateStats();}
+function doReset(){if(playing)togglePlay();curStep=-1;hist=[];for(const n of allNodes){n.visited=n.active=n.complete=n.pruned=n.edgeVis=n.showAB=false;n.computedValue=n.alpha=n.beta=null;}renderLog();draw();updateStats();}
+function togglePlay(){
+  if(mode==='build')return;
+  playing=!playing;const b=document.getElementById('bPlay');
+  if(playing){b.textContent='⏸ Pausa';b.classList.add('pri');startPlayTimer();}
+  else{b.textContent='⏵ Starta sökning';b.classList.remove('pri');clearInterval(playTmr);}
+}
+function startPlayTimer(){clearInterval(playTmr);playTmr=setInterval(()=>{if(curStep>=steps.length-1){togglePlay();return;}doStep();},SPEEDS[speedIdx]);}
+function updateSpeed(){
+  speedIdx=parseInt(document.getElementById('speedSlider').value);
+  const labels=['½×','1×','2×','5×','10×'];
+  document.getElementById('speedVal').textContent=labels[speedIdx];
+  if(playing)startPlayTimer();
+}
+function toggleAB(){useAB=!useAB;document.getElementById('abTog').classList.toggle('on',useAB);doReset();buildSteps();renderLog();draw();updateStats();}
+function selectPreset(v){if(playing)togglePlay();mode='run';updModeTabs();initFromStr(PRESETS[parseInt(v)]);}
+function toggleInfo(){const e=document.getElementById('iC');e.classList.toggle('open');document.getElementById('iBtn').textContent=e.classList.contains('open')?'📖 Så fungerar minimax & alfa-beta ▴':'📖 Så fungerar minimax & alfa-beta ▾';}
+
+// ================================================================
+//  MODE SWITCHING
+// ================================================================
+function setMode(m){
+  if(playing)togglePlay();
+  closePopup();
+  mode=m;
+  updModeTabs();
+  if(m==='build'){
+    // Reset algorithm state but keep tree
+    curStep=-1;hist=[];
+    for(const n of allNodes){n.visited=n.active=n.complete=n.pruned=n.edgeVis=n.showAB=false;n.computedValue=n.alpha=n.beta=null;}
+    renderLog();
+  }else{
+    // Validate tree has leaf values
+    let ok=true;
+    for(const n of allNodes)if(n.isLeaf&&n.leafValue===null){ok=false;break;}
+    if(!ok){
+      // Assign random values to unset leaves
+      for(const n of allNodes)if(n.isLeaf&&n.leafValue===null)n.leafValue=Math.floor(Math.random()*20)+1;
+    }
+    curStep=-1;hist=[];
+    buildSteps();renderLog();
+  }
+  draw();updateStats();
+}
+function updModeTabs(){
+  document.getElementById('mtRun').classList.toggle('act',mode==='run');
+  document.getElementById('mtBuild').classList.toggle('act',mode==='build');
+  document.getElementById('buildBar').classList.toggle('show',mode==='build');
+  document.getElementById('abWrap').style.display=mode==='build'?'none':'flex';
+}
+
+// ================================================================
+//  BUILD MODE - CLICK HANDLING
+// ================================================================
+const cv=document.getElementById('cv');
+cv.addEventListener('click',function(e){
+  if(mode!=='build')return;
+  const r=this.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;
+  let found=null;
+  for(const n of allNodes){
+    const R=n.isLeaf?17:23;
+    const dx=mx-n.x,dy=my-n.y;
+    if(dx*dx+dy*dy<(R+6)*(R+6)){found=n;break;}
+  }
+  if(found)showPopup(found,e.clientX,e.clientY);
+  else closePopup();
+});
+
+let popNode=null;
+function showPopup(n,px,py){
+  closePopup();
+  popNode=n;
+  const pop=document.getElementById('npop');
+  let h='';
+
+  if(n.isLeaf){
+    h+=`<div class="npop-t">Lövnod ${n.id}</div>`;
+    h+=`<div class="npop-inp" style="margin-bottom:8px;">
+      <input type="number" id="leafVal" value="${n.leafValue??''}" placeholder="Värde" min="-99" max="99">
+      <button class="btn pri" style="padding:7px 10px;font-size:0.82em" onclick="setLeafVal()">OK</button>
+    </div>`;
+    h+=`<button class="npop-btn" onclick="addChildren(2)">＋ Lägg till 2 barn</button>`;
+    h+=`<button class="npop-btn" onclick="addChildren(3)">＋ Lägg till 3 barn</button>`;
+    if(n.id!==0){
+      h+=`<button class="npop-btn dn" onclick="removeNode()">✕ Ta bort nod</button>`;
+    }
+  }else{
+    h+=`<div class="npop-t">${n.isMax?'MAX':'MIN'}-nod ${n.id}</div>`;
+    h+=`<button class="npop-btn" onclick="addChildren(1)">＋ Lägg till 1 barn</button>`;
+    h+=`<button class="npop-btn" onclick="addChildren(2)">＋ Lägg till 2 barn</button>`;
+    h+=`<button class="npop-btn" onclick="addChildren(3)">＋ Lägg till 3 barn</button>`;
+    if(n.id!==0){
+      h+=`<button class="npop-btn dn" onclick="removeNode()">✕ Ta bort delträd</button>`;
+    }
+  }
+
+  pop.innerHTML=h;
+  pop.classList.add('show');
+
+  // Position
+  const pw=pop.offsetWidth,ph2=pop.offsetHeight;
+  let lx=px+10,ly=py-ph2/2;
+  if(lx+pw>window.innerWidth-10)lx=px-pw-10;
+  if(ly<10)ly=10;
+  if(ly+ph2>window.innerHeight-10)ly=window.innerHeight-ph2-10;
+  pop.style.left=lx+'px';pop.style.top=ly+'px';
+
+  // Focus input if leaf
+  const inp=document.getElementById('leafVal');
+  if(inp){setTimeout(()=>{inp.focus();inp.select();},50);}
+}
+
+function closePopup(){document.getElementById('npop').classList.remove('show');popNode=null;}
+
+function setLeafVal(){
+  if(!popNode)return;
+  const inp=document.getElementById('leafVal');
+  const v=parseInt(inp.value);
+  if(isNaN(v)){inp.style.borderColor='var(--red)';return;}
+  popNode.leafValue=v;
+  closePopup();draw();
+}
+
+// Handle Enter in leaf value input
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&document.getElementById('leafVal')===document.activeElement){
+    e.preventDefault();setLeafVal();
+  }
+  if(e.key==='Escape')closePopup();
+  if(mode==='run'){
+    if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();doStep();}
+    if(e.key==='ArrowLeft'){e.preventDefault();doBack();}
+    if(e.key==='r')doReset();
+  }
+});
+
+function addChildren(count){
+  if(!popNode)return;
+  const n=popNode;
+  // If it was a leaf, convert to internal node
+  n.isLeaf=false;
+  n.leafValue=null;
+  const nextId={v:0};
+  // Find max id
+  for(const nd of allNodes)if(nd.id>=nextId.v)nextId.v=nd.id+1;
+
+  for(let i=0;i<count;i++){
+    const child={
+      id:nextId.v++,depth:n.depth+1,isMax:!n.isMax,isLeaf:true,leafValue:null,children:[],
+      x:0,y:0,visited:false,active:false,complete:false,pruned:false,
+      computedValue:null,alpha:null,beta:null,showAB:false,edgeVis:false
+    };
+    n.children.push(child);
+  }
+  // Rebuild allNodes
+  allNodes=[];coll(tree,allNodes);
+  // Fix depths recursively
+  fixDepths(tree,0);
+  closePopup();draw();
+}
+
+function fixDepths(n,d){
+  n.depth=d;n.isMax=(d%2===0);
+  for(const c of n.children)fixDepths(c,d+1);
+  n.isLeaf=n.children.length===0;
+}
+
+function removeNode(){
+  if(!popNode||popNode.id===0)return;
+  const target=popNode;
+  // Find parent
+  let parent=null;
+  function findParent(n){for(const c of n.children){if(c.id===target.id){parent=n;return;}findParent(c);}}
+  findParent(tree);
+  if(!parent)return;
+  parent.children=parent.children.filter(c=>c.id!==target.id);
+  if(parent.children.length===0){parent.isLeaf=true;parent.leafValue=null;}
+  allNodes=[];coll(tree,allNodes);
+  fixDepths(tree,0);
+  closePopup();draw();
+}
+
+// Close popup on outside click
+document.addEventListener('click',function(e){
+  if(mode!=='build')return;
+  const pop=document.getElementById('npop');
+  const cvEl=document.getElementById('cv');
+  if(!pop.contains(e.target)&&e.target!==cvEl){closePopup();}
+});
+
+// ================================================================
+//  TOOLTIP (run mode)
+// ================================================================
+cv.addEventListener('mousemove',function(e){
+  if(mode==='build'){
+    // In build mode: change cursor on hover
+    const r=this.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;
+    let found=false;
+    for(const n of allNodes){const R=n.isLeaf?17:23;const dx=mx-n.x,dy=my-n.y;if(dx*dx+dy*dy<(R+6)*(R+6)){found=true;break;}}
+    this.style.cursor=found?'pointer':'default';
+    document.getElementById('tt').classList.remove('show');
+    return;
+  }
+  const r=this.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top,tt=document.getElementById('tt');
+  let found=null;
+  for(const n of allNodes){const R=n.isLeaf?17:23;const dx=mx-n.x,dy=my-n.y;if(dx*dx+dy*dy<(R+5)*(R+5)){found=n;break;}}
+  if(found){
+    const lb=found.isLeaf?'Lövnod':(found.isMax?'MAX-nod':'MIN-nod');
+    let h=`<strong>${lb} ${found.id}</strong>`;
+    if(found.isLeaf)h+=`<br>Värde: ${found.leafValue}`;
+    if(found.computedValue!==null&&!found.isLeaf)h+=`<br>Beräknat: ${found.computedValue}`;
+    if(useAB&&found.showAB){h+=`<br><span style="color:var(--max-color)">α=${fmtAB(found.alpha)}</span> <span style="color:var(--min-color)">β=${fmtAB(found.beta)}</span>`;}
+    if(found.pruned)h+=`<br><span style="color:var(--prune)">Beskuren</span>`;
+    tt.innerHTML=h;tt.style.left=(e.clientX+12)+'px';tt.style.top=(e.clientY-8)+'px';tt.classList.add('show');this.style.cursor='pointer';
+  }else{tt.classList.remove('show');this.style.cursor='default';}
+});
+cv.addEventListener('mouseleave',()=>{document.getElementById('tt').classList.remove('show');});
+
+// ================================================================
+//  INIT
+// ================================================================
+function initFromStr(s){
+  const def=parseTree(s);
+  tree=mkTree(def,{v:0},0,true);
+  allNodes=[];coll(tree,allNodes);
+  curStep=-1;hist=[];
+  buildSteps();renderLog();draw();updateStats();
+}
+
+function initFreshBuild(){
+  // Start with a single root node
+  tree={id:0,depth:0,isMax:true,isLeaf:true,leafValue:null,children:[],
+    x:0,y:0,visited:false,active:false,complete:false,pruned:false,
+    computedValue:null,alpha:null,beta:null,showAB:false,edgeVis:false};
+  allNodes=[tree];
+  curStep=-1;hist=[];steps=[];
+  renderLog();draw();updateStats();
+}
+
+let rTmr;window.addEventListener('resize',()=>{clearTimeout(rTmr);rTmr=setTimeout(()=>{closePopup();draw();},80);});
+
+initFromStr(PRESETS[0]);
+</script>
+</body>
+</html>
