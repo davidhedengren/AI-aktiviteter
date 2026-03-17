@@ -29,7 +29,7 @@
       background: var(--bg);
       color: var(--text);
       font-family: var(--font-mono);
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
@@ -67,16 +67,6 @@
       padding: 64px 28px 48px;
       border-bottom: 1px solid var(--border2);
       background: linear-gradient(180deg, rgba(77,128,255,.06) 0%, transparent 100%);
-    }
-
-    .header-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: .22em;
-      color: var(--accent);
-      margin-bottom: 16px;
-      opacity: 0;
-      animation: fadeUp .5s ease .1s forwards;
     }
 
     header h1 {
@@ -117,7 +107,7 @@
     }
 
     .section-label {
-      font-size: 10px;
+      font-size: 14px;
       letter-spacing: .2em;
       color: var(--muted);
       margin-bottom: 20px;
@@ -177,18 +167,19 @@
     }
 
     .card-icon {
-      font-size: 22px;
+      font-size: 24px;
       margin-bottom: 12px;
       display: block;
     }
 
     .card-title {
       font-family: var(--font-mono);
-      font-size: 13px;
+      font-size: 17px;
       font-weight: 700;
       color: var(--text);
-      letter-spacing: .04em;
+      letter-spacing: .02em;
       margin-bottom: 6px;
+      line-height: 1.4;
       transition: color .2s;
     }
 
@@ -199,7 +190,7 @@
     .card-desc {
       font-family: var(--font-serif);
       font-style: italic;
-      font-size: 12px;
+      font-size: 14px;
       color: var(--muted);
       line-height: 1.6;
     }
@@ -219,7 +210,7 @@
     .section-intro {
       font-family: var(--font-serif);
       font-style: italic;
-      font-size: 14px;
+      font-size: 16px;
       color: var(--subtle);
       line-height: 1.8;
       margin-bottom: 24px;
@@ -299,7 +290,7 @@
       text-align: center;
       padding: 24px;
       border-top: 1px solid var(--border);
-      font-size: 11px;
+      font-size: 12px;
       color: var(--muted);
       letter-spacing: .06em;
     }
@@ -315,15 +306,16 @@
     .activity-card:nth-child(4) { animation-delay: .36s; }
     .activity-card:nth-child(5) { animation-delay: .43s; }
     .activity-card:nth-child(6) { animation-delay: .50s; }
+    
 
-    .colab-card:nth-child(1) { animation-delay: .57s; }
-    .colab-card:nth-child(2) { animation-delay: .64s; }
-    .colab-card:nth-child(3) { animation-delay: .71s; }
-    .colab-card:nth-child(4) { animation-delay: .78s; }
+    .colab-card:nth-child(1) { animation-delay: .64s; }
+    .colab-card:nth-child(2) { animation-delay: .71s; }
+    .colab-card:nth-child(3) { animation-delay: .78s; }
+    .colab-card:nth-child(4) { animation-delay: .85s; }
 
     .section-label:nth-of-type(1) { animation-delay: .1s; }
-    .section-label:nth-of-type(2) { animation-delay: .52s; }
-    .section-intro { animation-delay: .55s; }
+    .section-label:nth-of-type(2) { animation-delay: .59s; }
+    .section-intro { animation-delay: .62s; }
 
     @media (max-width: 600px) {
       header { padding: 40px 20px 32px; }
@@ -360,25 +352,26 @@
 
       <a class="activity-card" href="/minimax">
         <span class="card-icon">🔺</span>
-        <div class="card-title">Minimax med alfa-beta-beskärning</div>
+        <div class="card-title">Minimax med alfa‑beta‑beskärning</div>
       </a>
 
       <a class="activity-card" href="/q-learning">
         <span class="card-icon">🎮</span>
-        <div class="card-title">Q-learning-simulering</div>
+        <div class="card-title">Q‑learning‑simulering</div>
       </a>
 
       <a class="activity-card" href="/naive-bayes-lab">
         <span class="card-icon">🔤</span>
-        <div class="card-title">Naïve Bayes-labbet</div>
+        <div class="card-title">Naïve Bayes‑labbet</div>
       </a>
+
 
     </div>
 
-    <div class="section-label">💻 Implementera AI-algoritmer i kod</div>
+    <div class="section-label">💻 Implementera AI‑algoritmer i kod</div>
 
     <div class="section-intro">
-      Här får du testa hur några AI-algoritmer fungerar genom att köra färdiga kodblock i Google Colab. Du behöver inte kunna programmera utan det räcker att följa instruktionerna, göra små ändringar och se hur resultatet påverkas.
+      Här får du testa hur några AI‑algoritmer fungerar genom att köra färdiga kodblock i Google Colab. Du behöver inte kunna programmera utan det räcker att följa instruktionerna, göra små ändringar och se hur resultatet påverkas.
     </div>
 
     <div class="colab-grid">
@@ -390,12 +383,12 @@
 
       <a class="colab-card" href="https://colab.research.google.com/drive/14ansn4I8-QLbWg5twSQU37ipz5Nte10E" target="_blank">
         <span class="card-icon">🔵</span>
-        <div class="card-title">k-Närmaste Grannar</div>
+        <div class="card-title">k‑Närmaste Grannar</div>
       </a>
 
       <a class="colab-card" href="https://colab.research.google.com/drive/1Vt29gL2ig8qoLC50ynhHiipfJeqnPUnz#scrollTo=FkRJvBHG2Lt2" target="_blank">
         <span class="card-icon">📊</span>
-        <div class="card-title">k-Means klustring</div>
+        <div class="card-title">k‑Means klustring</div>
       </a>
 
       <a class="colab-card" href="https://colab.research.google.com/drive/1SsOd_1vat4qcTw4iy3-FQTRbz_EjsAYi#scrollTo=9JkgP2mvpKUc" target="_blank">
@@ -408,7 +401,7 @@
   </main>
 
   <footer>
-    AI-AKTIVITETER &nbsp;·&nbsp; Komplement till läroboken <em>AI – Teknik, samhälle och etik</em>
+    AI‑AKTIVITETER &nbsp;·&nbsp; Komplement till läroboken <em>AI – Teknik, samhälle och etik</em>
   </footer>
 
 </body>
