@@ -198,7 +198,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
       </div>
     </div>
     <div class="ss" style="padding-bottom:3px;"><div class="st">Steg-för-steg-logg</div></div>
-    <div class="lw"><div class="lg" id="log"><div class="elg">Klicka på <strong>Steg</strong> eller <strong>Starta sökning</strong> för att starta.</div></div></div>
+    <div class="lw"><div class="lg" id="log"><div class="elg">Tryck på <strong>Steg</strong> eller <strong>Starta sökning</strong>.</div></div></div>
     <button class="ib" id="iBtn" onclick="toggleInfo()">📖 Så fungerar minimax & alfa-beta ▾</button>
     <div class="ic" id="iC">
       <h4>Minimax-algoritmen</h4>
@@ -206,7 +206,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
       <h4>Alfa-beta-beskärning</h4>
       <p><strong style="color:var(--max-color)">α</strong> = bästa garanterade värdet för MAX hittills.<br><strong style="color:var(--min-color)">β</strong> = bästa garanterade värdet för MIN hittills.</p>
       <div class="fm">Om α ≥ β → beskär resterande grenar</div>
-      <p>Resultatet blir alltid detsamma – men färre noder behöver undersökas.</p>
+      <p>Resultatet blir alltid detsamma – men färre noder undersöks.</p>
     </div>
   </div>
 </div>
@@ -349,8 +349,8 @@ function draw(){
 
   // Dynamic sizing based on tree complexity
   const RL=Math.round(17*sc), RI=Math.round(23*sc);
-  const fontBig=Math.round(15*sc)+'px', fontMed=Math.round(13*sc)+'px', fontSm=Math.round(11*sc)+'px';
-  const fontAB=Math.round(8*sc)+'px';
+  const fontBig=Math.round(15*sc)+'px', fontMed=Math.round(13*sc)+'px', fontSm=Math.round(13*sc)+'px';
+  const fontAB=Math.round(13*sc)+'px';
   const pruneFont=Math.round(15*sc)+'px';
 
   // edges (drawn first, nodes will paint over them)
@@ -440,17 +440,17 @@ function draw(){
 
       // Alpha-beta tucked tight against triangle edge
       if(useAB&&n.showAB){
-        ctx.font='500 '+fontAB+' "JetBrains Mono"';ctx.textAlign='center';
+        ctx.font='600 '+fontAB+' "JetBrains Mono"';ctx.textAlign='center';
         const aS='α='+fmtAB(n.alpha),bS='β='+fmtAB(n.beta),fs=aS+' '+bS;
-        const tw=ctx.measureText(fs).width+6;
-        const aby=up?y+R*0.7+7*sc:y-R*0.7-7*sc;
+        const tw=ctx.measureText(fs).width+10;
+        const aby=up?y+R*0.7+11*sc:y-R*0.7-11*sc;
         ctx.fillStyle='rgba(12,14,20,0.92)';
-        ctx.beginPath();ctx.roundRect(x-tw/2,aby-6*sc,tw,12*sc,3);ctx.fill();
+        ctx.beginPath();ctx.roundRect(x-tw/2,aby-8*sc,tw,17*sc,3);ctx.fill();
         const aw=ctx.measureText(aS).width,gp=ctx.measureText(' ').width;
         const sx2=x-(aw+gp+ctx.measureText(bS).width)/2;
         ctx.textAlign='left';ctx.textBaseline='middle';
-        ctx.fillStyle='rgba(52,199,89,0.85)';ctx.fillText(aS,sx2,aby);
-        ctx.fillStyle='rgba(240,146,59,0.85)';ctx.fillText(bS,sx2+aw+gp,aby);
+        ctx.fillStyle='rgba(52,199,89,1)';ctx.fillText(aS,sx2,aby);
+        ctx.fillStyle='rgba(240,146,59,1)';ctx.fillText(bS,sx2+aw+gp,aby);
       }
     }
     ctx.restore();
@@ -483,7 +483,7 @@ function fmtAB(v){return v===-Infinity?'−∞':v===Infinity?'+∞':String(v);}
 // ================================================================
 function renderLog(){
   const el=document.getElementById('log');
-  if(curStep<0){el.innerHTML='<div class="elg">Klicka <strong>Steg</strong> eller <strong>Starta sökning</strong> för att starta.</div>';return;}
+  if(curStep<0){el.innerHTML='<div class="elg">Tryck på <strong>Steg</strong> eller <strong>Starta sökning</strong>.</div>';return;}
   const nm={};for(const n of allNodes)nm[n.id]=n;
   let h='';
   for(let i=0;i<=curStep;i++){
