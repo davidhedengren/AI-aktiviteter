@@ -153,8 +153,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
         <option value="3">Exempelträd 4 </option>
       </select>
       <div class="mtabs">
-        <button class="mtab act" id="mtRun" onclick="setMode('run')">▶ Körläge</button>
-        <button class="mtab" id="mtBuild" onclick="setMode('build')">✎ Byggläge</button>
+        <button class="mtab act" id="mtRun" onclick="setMode('run')">▶ Kör</button>
+        <button class="mtab" id="mtBuild" onclick="setMode('build')">✎ Bygg</button>
       </div>
       <div class="tog" id="abWrap" onclick="toggleAB()">
         <span>α-β</span>
@@ -162,7 +162,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
       </div>
     </div>
     <div class="build-bar" id="buildBar">
-      Byggläge: <strong>Klicka på en nod</strong> för att lägga till barn eller ändra värde. Klicka på <strong>Körläge</strong> när du är klar.
+      Byggläge: <strong>Klicka på en nod</strong> för att lägga till barn eller ändra värde. Klicka <strong>Kör</strong> när du är klar.
     </div>
     <div class="cw"><canvas id="cv"></canvas></div>
     <div class="tl">
@@ -230,7 +230,7 @@ const PRESETS = [
 //  STATE
 // ================================================================
 let tree=null, allNodes=[], steps=[], curStep=-1, hist=[], useAB=true, playing=false, playTmr=null;
-let mode='run';
+let mode='run', rootIsMax=true;
 const SPEEDS=[700,420,200,80,25];
 let speedIdx=1; // 'run' | 'build'
 let buildTree_=null; // separate tree for build mode
@@ -614,7 +614,9 @@ function showPopup(n,px,py){
     </div>`;
     h+=`<button class="npop-btn" onclick="addChildren(2)">＋ Lägg till 2 barn</button>`;
     h+=`<button class="npop-btn" onclick="addChildren(3)">＋ Lägg till 3 barn</button>`;
-    if(n.id!==0){
+    if(n.id===0){
+      h+=`<button class="npop-btn" onclick="swapRoot()">↕ Byt till ${n.isMax?'MIN':'MAX'} som rot</button>`;
+    }else{
       h+=`<button class="npop-btn dn" onclick="removeNode()">✕ Ta bort nod</button>`;
     }
   }else{
@@ -622,7 +624,9 @@ function showPopup(n,px,py){
     h+=`<button class="npop-btn" onclick="addChildren(1)">＋ Lägg till 1 barn</button>`;
     h+=`<button class="npop-btn" onclick="addChildren(2)">＋ Lägg till 2 barn</button>`;
     h+=`<button class="npop-btn" onclick="addChildren(3)">＋ Lägg till 3 barn</button>`;
-    if(n.id!==0){
+    if(n.id===0){
+      h+=`<button class="npop-btn" onclick="swapRoot()">↕ Byt till ${n.isMax?'MIN':'MAX'} som rot</button>`;
+    }else{
       h+=`<button class="npop-btn dn" onclick="removeNode()">✕ Ta bort delträd</button>`;
     }
   }
@@ -693,9 +697,15 @@ function addChildren(count){
 }
 
 function fixDepths(n,d){
-  n.depth=d;n.isMax=(d%2===0);
+  n.depth=d;n.isMax=(d%2===0)===rootIsMax;
   for(const c of n.children)fixDepths(c,d+1);
   n.isLeaf=n.children.length===0;
+}
+
+function swapRoot(){
+  rootIsMax=!rootIsMax;
+  fixDepths(tree,0);
+  closePopup();draw();
 }
 
 function removeNode(){
@@ -753,6 +763,7 @@ cv.addEventListener('mouseleave',()=>{document.getElementById('tt').classList.re
 //  INIT
 // ================================================================
 function initFromStr(s){
+  rootIsMax=true;
   const def=parseTree(s);
   tree=mkTree(def,{v:0},0,true);
   allNodes=[];coll(tree,allNodes);
