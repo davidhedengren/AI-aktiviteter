@@ -1,408 +1,639 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI-aktiviteter</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,300&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-aktiviteter</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #0a0e1a;
+    --bg-surface: #111827;
+    --bg-card: #161d2f;
+    --bg-card-hover: #1c2540;
+    --border-subtle: rgba(255,255,255,0.06);
+    --border-hover: rgba(255,255,255,0.12);
+    --text-primary: #e8ecf4;
+    --text-secondary: #8b95a9;
+    --text-muted: #5a6478;
 
-    :root {
-      --bg:        #060810;
-      --surface:   #0c1020;
-      --surface2:  #111728;
-      --border:    #1a2238;
-      --border2:   #253050;
-      --text:      #eaf0fc;
-      --muted:     #96a8c8;
-      --subtle:    #c8d6f0;
-      --accent:    #4d80ff;
-      --accent2:   #6698ff;
-      --gold:      #f5c842;
-      --font-mono: 'JetBrains Mono', monospace;
-      --font-serif: 'Fraunces', Georgia, serif;
-    }
+    --accent-cyan: #22d3ee;
+    --accent-cyan-bg: rgba(34,211,238,0.08);
+    --accent-violet: #a78bfa;
+    --accent-violet-bg: rgba(167,139,250,0.08);
+    --accent-rose: #fb7185;
+    --accent-rose-bg: rgba(251,113,133,0.08);
+    --accent-amber: #fbbf24;
+    --accent-amber-bg: rgba(251,191,36,0.08);
+    --accent-emerald: #34d399;
+    --accent-emerald-bg: rgba(52,211,153,0.08);
+    --accent-blue: #60a5fa;
+    --accent-blue-bg: rgba(96,165,250,0.08);
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-mono);
-      font-size: 14px;
-      line-height: 1.6;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(77,128,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(77,128,255,.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: 0;
-    }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body::after {
-      content: '';
-      position: fixed;
-      top: -200px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 400px;
-      background: radial-gradient(ellipse, rgba(77,128,255,.08) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
+  body {
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-    header {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 64px 28px 48px;
-      border-bottom: 1px solid var(--border2);
-      background: linear-gradient(180deg, rgba(77,128,255,.06) 0%, transparent 100%);
-    }
+  /* === Ambient background === */
+  .ambient {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .ambient::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(34,211,238,0.06) 0%, transparent 70%);
+    animation: float1 20s ease-in-out infinite;
+  }
+  .ambient::after {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(167,139,250,0.05) 0%, transparent 70%);
+    animation: float2 25s ease-in-out infinite;
+  }
+  @keyframes float1 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(80px, 60px); }
+  }
+  @keyframes float2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-60px, -40px); }
+  }
 
-    header h1 {
-      font-family: var(--font-serif);
-      font-size: clamp(28px, 5vw, 44px);
-      font-weight: 400;
-      color: #fff;
-      letter-spacing: -.01em;
-      line-height: 1.2;
-      margin-bottom: 14px;
-      text-shadow: 0 0 40px rgba(77,128,255,.3);
-      opacity: 0;
-      animation: fadeUp .5s ease .2s forwards;
-    }
+  /* === Noise overlay === */
+  .noise {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px;
+  }
 
-    header h1 em {
-      font-style: italic;
-      color: var(--accent2);
-    }
+  /* === Layout === */
+  .container {
+    position: relative;
+    z-index: 2;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
 
-    .header-sub {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 15px;
-      color: var(--muted);
-      max-width: 480px;
-      margin: 0 auto;
-      opacity: 0;
-      animation: fadeUp .5s ease .3s forwards;
-    }
+  /* === Hero === */
+  .hero {
+    text-align: center;
+    padding: 80px 0 20px;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(34,211,238,0.08);
+    border: 1px solid rgba(34,211,238,0.15);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent-cyan);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    animation: fadeInDown 0.6s ease-out;
+  }
+  .hero-badge svg {
+    width: 14px;
+    height: 14px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    animation: fadeInUp 0.7s ease-out;
+  }
+  .hero h1 em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    font-size: 17px;
+    color: var(--text-secondary);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.6;
+    animation: fadeInUp 0.8s ease-out;
+  }
 
-    main {
-      position: relative;
-      z-index: 1;
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 48px 28px 80px;
-    }
+  /* Book link */
+  .book-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+    padding: 10px 22px;
+    background: rgba(167,139,250,0.08);
+    border: 1px solid rgba(167,139,250,0.18);
+    border-radius: 100px;
+    color: var(--accent-violet);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.9s ease-out;
+  }
+  .book-link:hover {
+    background: rgba(167,139,250,0.14);
+    border-color: rgba(167,139,250,0.35);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(167,139,250,0.12);
+  }
+  .book-link svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  .book-link span {
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
 
-    .section-label {
-      font-size: 14px;
-      letter-spacing: .2em;
-      color: var(--muted);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      opacity: 0;
-      animation: fadeUp .4s ease forwards;
-    }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border2);
-    }
+  /* === Section headers === */
+  .section {
+    margin-top: 56px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+  .section-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+  .section-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
 
-    .activity-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 14px;
-      margin-bottom: 52px;
-    }
+  /* === Card grid === */
+  .grid {
+    display: grid;
+    gap: 14px;
+  }
+  .grid-sims {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid-code {
+    grid-template-columns: repeat(4, 1fr);
+  }
 
-    .activity-card {
-      display: block;
-      text-decoration: none;
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: 10px;
-      padding: 20px 22px;
-      transition: border-color .2s, transform .2s, box-shadow .2s;
-      opacity: 0;
-      animation: fadeUp .4s ease forwards;
-      position: relative;
-      overflow: hidden;
-    }
+  /* === Cards === */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    padding: 24px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .card:hover::before {
+    opacity: 1;
+  }
+  .card:hover .card-arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
 
-    .activity-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform .3s ease;
-    }
+  /* Card accent colors */
+  .card[data-accent="cyan"]::before { background: linear-gradient(90deg, var(--accent-cyan), transparent); }
+  .card[data-accent="violet"]::before { background: linear-gradient(90deg, var(--accent-violet), transparent); }
+  .card[data-accent="rose"]::before { background: linear-gradient(90deg, var(--accent-rose), transparent); }
+  .card[data-accent="amber"]::before { background: linear-gradient(90deg, var(--accent-amber), transparent); }
+  .card[data-accent="emerald"]::before { background: linear-gradient(90deg, var(--accent-emerald), transparent); }
+  .card[data-accent="blue"]::before { background: linear-gradient(90deg, var(--accent-blue), transparent); }
 
-    .activity-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(77,128,255,.18);
-    }
+  .card[data-accent="cyan"]:hover { box-shadow: 0 8px 32px rgba(34,211,238,0.08); }
+  .card[data-accent="violet"]:hover { box-shadow: 0 8px 32px rgba(167,139,250,0.08); }
+  .card[data-accent="rose"]:hover { box-shadow: 0 8px 32px rgba(251,113,133,0.08); }
+  .card[data-accent="amber"]:hover { box-shadow: 0 8px 32px rgba(251,191,36,0.08); }
+  .card[data-accent="emerald"]:hover { box-shadow: 0 8px 32px rgba(52,211,153,0.08); }
+  .card[data-accent="blue"]:hover { box-shadow: 0 8px 32px rgba(96,165,250,0.08); }
 
-    .activity-card:hover::before {
-      transform: scaleX(1);
-    }
+  /* Featured card */
+  .card-featured {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    padding: 28px 32px;
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(34,211,238,0.04) 100%);
+  }
+  .card-featured .card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card-featured .card-visual {
+    width: 200px;
+    height: 120px;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, rgba(34,211,238,0.1), rgba(167,139,250,0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-featured .card-visual svg {
+    width: 64px;
+    height: 64px;
+    opacity: 0.5;
+  }
+  .card-featured .card-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: inherit;
+  }
 
-    .card-icon {
-      font-size: 24px;
-      margin-bottom: 12px;
-      display: block;
-    }
+  .card-icon-wrap {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+  .card:hover .card-icon-wrap { transform: scale(1.08); }
 
-    .card-title {
-      font-family: var(--font-mono);
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: .02em;
-      margin-bottom: 6px;
-      line-height: 1.4;
-      transition: color .2s;
-    }
+  .card[data-accent="cyan"] .card-icon-wrap { background: var(--accent-cyan-bg); color: var(--accent-cyan); }
+  .card[data-accent="violet"] .card-icon-wrap { background: var(--accent-violet-bg); color: var(--accent-violet); }
+  .card[data-accent="rose"] .card-icon-wrap { background: var(--accent-rose-bg); color: var(--accent-rose); }
+  .card[data-accent="amber"] .card-icon-wrap { background: var(--accent-amber-bg); color: var(--accent-amber); }
+  .card[data-accent="emerald"] .card-icon-wrap { background: var(--accent-emerald-bg); color: var(--accent-emerald); }
+  .card[data-accent="blue"] .card-icon-wrap { background: var(--accent-blue-bg); color: var(--accent-blue); }
 
-    .activity-card:hover .card-title {
-      color: var(--accent2);
-    }
+  .card-icon-wrap svg {
+    width: 20px;
+    height: 20px;
+  }
 
-    .card-desc {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
+  .card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .card .card-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .card .card-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: auto;
+    padding-top: 4px;
+  }
 
-    .card-tag {
-      display: inline-block;
-      margin-top: 12px;
-      font-size: 10px;
-      letter-spacing: .1em;
-      color: var(--accent);
-      background: rgba(77,128,255,.1);
-      border: 1px solid rgba(77,128,255,.25);
-      border-radius: 4px;
-      padding: 2px 8px;
-    }
+  .card-arrow {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 24px;
+    height: 24px;
+    opacity: 0;
+    transform: translate(-4px, 4px);
+    transition: all 0.3s ease;
+    color: var(--text-secondary);
+  }
 
-    .section-intro {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 16px;
-      color: var(--subtle);
-      line-height: 1.8;
-      margin-bottom: 24px;
-      padding: 16px 20px;
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-left: 3px solid var(--accent);
-      border-radius: 0 8px 8px 0;
-      opacity: 0;
-      animation: fadeUp .4s ease forwards;
-    }
+  /* === Divider === */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+    margin: 56px 0 0;
+  }
 
-    .colab-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 12px;
-    }
+  /* === Code intro box === */
+  .code-intro {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-left: 3px solid var(--accent-emerald);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
 
-    .colab-card {
-      display: block;
-      text-decoration: none;
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: 10px;
-      padding: 18px 20px;
-      transition: border-color .2s, transform .2s, box-shadow .2s;
-      opacity: 0;
-      animation: fadeUp .4s ease forwards;
-      position: relative;
-      overflow: hidden;
-    }
+  /* === Colab tag === */
+  .colab-tag {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--accent-amber);
+    background: var(--accent-amber-bg);
+    border: 1px solid rgba(251,191,36,0.2);
+    border-radius: 4px;
+    padding: 2px 8px;
+  }
 
-    .colab-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform .3s ease;
-    }
+  /* === Footer === */
+  footer {
+    text-align: center;
+    padding: 48px 0 56px;
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  footer span {
+    color: var(--text-secondary);
+  }
+  footer a {
+    color: var(--accent-cyan);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(34,211,238,0.2);
+    transition: border-color 0.2s;
+  }
+  footer a:hover {
+    border-color: var(--accent-cyan);
+  }
 
-    .colab-card:hover {
-      border-color: var(--gold);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 28px rgba(245,200,66,.12);
-    }
+  /* === Animations === */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-    .colab-card:hover::before {
-      transform: scaleX(1);
-    }
+  .card {
+    animation: fadeInUp 0.5s ease-out both;
+  }
+  .card:nth-child(1) { animation-delay: 0.08s; }
+  .card:nth-child(2) { animation-delay: 0.14s; }
+  .card:nth-child(3) { animation-delay: 0.20s; }
+  .card:nth-child(4) { animation-delay: 0.26s; }
+  .card:nth-child(5) { animation-delay: 0.32s; }
+  .card:nth-child(6) { animation-delay: 0.38s; }
+  .card:nth-child(7) { animation-delay: 0.44s; }
 
-    .colab-card .card-title {
-      color: var(--text);
-    }
-
-    .colab-card:hover .card-title {
-      color: var(--gold);
-    }
-
-    .colab-tag {
-      display: inline-block;
-      margin-top: 12px;
-      font-size: 10px;
-      letter-spacing: .1em;
-      color: var(--gold);
-      background: rgba(245,200,66,.08);
-      border: 1px solid rgba(245,200,66,.25);
-      border-radius: 4px;
-      padding: 2px 8px;
-    }
-
-    footer {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 24px;
-      border-top: 1px solid var(--border);
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: .06em;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .activity-card:nth-child(1) { animation-delay: .15s; }
-    .activity-card:nth-child(2) { animation-delay: .22s; }
-    .activity-card:nth-child(3) { animation-delay: .29s; }
-    .activity-card:nth-child(4) { animation-delay: .36s; }
-    .activity-card:nth-child(5) { animation-delay: .43s; }
-    .activity-card:nth-child(6) { animation-delay: .50s; }
-    
-
-    .colab-card:nth-child(1) { animation-delay: .64s; }
-    .colab-card:nth-child(2) { animation-delay: .71s; }
-    .colab-card:nth-child(3) { animation-delay: .78s; }
-    .colab-card:nth-child(4) { animation-delay: .85s; }
-
-    .section-label:nth-of-type(1) { animation-delay: .1s; }
-    .section-label:nth-of-type(2) { animation-delay: .59s; }
-    .section-intro { animation-delay: .62s; }
-
-    @media (max-width: 600px) {
-      header { padding: 40px 20px 32px; }
-      main { padding: 32px 16px 60px; }
-      .activity-grid, .colab-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+  /* === Responsive === */
+  @media (max-width: 768px) {
+    .grid-sims { grid-template-columns: 1fr 1fr; }
+    .grid-code { grid-template-columns: 1fr 1fr; }
+    .card-featured { flex-direction: column; }
+    .card-featured .card-visual { width: 100%; height: 100px; }
+  }
+  @media (max-width: 500px) {
+    .grid-sims { grid-template-columns: 1fr; }
+    .grid-code { grid-template-columns: 1fr; }
+    .hero { padding: 56px 0 16px; }
+  }
+</style>
 </head>
 <body>
 
-  <header>
-    <h1>Välkommen till<br><em>AI-aktiviteter</em></h1>
-    <p class="header-sub">Interaktiva simuleringar och laborationer för Artificiell intelligens nivå 1</p>
+<div class="ambient"></div>
+<div class="noise"></div>
+
+<div class="container">
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      Artificiell intelligens 1
+    </div>
+    <h1>Välkommen till<br><em>AI‑aktiviteter</em></h1>
+    <p>Interaktiva simuleringar och laborationer som komplement till läroboken <em>AI&nbsp;–&nbsp;Teknik, samhälle och etik</em></p>
+    <a class="book-link" href="https://www.liber.se/webshop/product/ai-niva-1-teknik-samhalle-och-etik-9789147160037" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+      Läroboken hos Liber <span>→</span>
+    </a>
   </header>
 
-  <main>
-
-    <div class="activity-grid">
-
-      <a class="activity-card" href="/sokalgoritmer-labyrinter">
-        <span class="card-icon">🔍</span>
-        <div class="card-title">Sökalgoritmer i labyrinter</div>
-      </a>
-
-      <a class="activity-card" href="/sokalgoritmer-trad">
-        <span class="card-icon">🌲</span>
-        <div class="card-title">Sökalgoritmer i träd</div>
-      </a>
-
-      <a class="activity-card" href="/luffarschack">
-        <span class="card-icon">⭕</span>
-        <div class="card-title">Luffarschack i partiellt observerbar miljö</div>
-      </a>
-
-      <a class="activity-card" href="/minimax">
-        <span class="card-icon">🔺</span>
-        <div class="card-title">Minimax med alfa‑beta‑beskärning</div>
-      </a>
-
-      <a class="activity-card" href="/q-learning">
-        <span class="card-icon">🎮</span>
-        <div class="card-title">Q‑learning‑simulering</div>
-      </a>
-
-      <a class="activity-card" href="/naive-bayes-lab">
-        <span class="card-icon">🔤</span>
-        <div class="card-title">Naïve Bayes‑labbet</div>
-      </a>
-
-
+  <!-- Simuleringar -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background: var(--accent-violet-bg); color: var(--accent-violet);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <h2>Interaktiva simuleringar</h2>
     </div>
 
-    <div class="section-label">💻 Implementera AI‑algoritmer i kod</div>
+    <div class="grid grid-sims">
 
-    <div class="section-intro">
+      <!-- Featured card -->
+      <a class="card card-featured" data-accent="cyan" href="/sokalgoritmer-labyrinter">
+        <div class="card-content">
+          <div class="card-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3>Sökalgoritmer i labyrinter</h3>
+          <span class="card-desc">Utforska BFS, DFS, Dijkstra och A* – se hur de hittar vägen genom en labyrint steg för steg.</span>
+          <span class="card-tag">Kap. 2 · Grundläggande begrepp och sökalgoritmer · Sökalgoritmer</span>
+        </div>
+        <div class="card-visual">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M10 6.5h4M17.5 10v4M10 17.5h4M6.5 10v4" stroke-dasharray="2 2"/></svg>
+        </div>
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+
+      <!-- Regular cards -->
+      <a class="card" data-accent="emerald" href="/sokalgoritmer-trad">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Sökalgoritmer i träd</h3>
+        <span class="card-desc">Visualisera trädtraversering med BFS och DFS i en hierarkisk struktur.</span>
+        <span class="card-tag">Kap. 2 · Grundläggande begrepp och sökalgoritmer · Sökalgoritmer</span>
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+
+      <a class="card" data-accent="rose" href="/luffarschack">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        </div>
+        <h3>Luffarschack i partiellt observerbar miljö</h3>
+        <span class="card-desc">Spela mot en AI som inte ser hela brädet – upplev partiell observerbarhet.</span>
+        <span class="card-tag">Kap. 2 · Grundläggande begrepp och sökalgoritmer · Agentmiljöer</span>
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+
+      <a class="card" data-accent="amber" href="/minimax">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3>Minimax med alfa‑beta‑beskärning</h3>
+        <span class="card-desc">Se hur AI:n tänker flera steg framåt och beskär onödiga grenar i spelträdet.</span>
+        <span class="card-tag">Kap. 2 · Grundläggande begrepp och sökalgoritmer · Spelträd</span>
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+
+      <a class="card" data-accent="violet" href="/q-learning">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h3>Q‑learning‑simulering</h3>
+        <span class="card-desc">Träna en RL-agent att navigera ett rutnät genom belöningar och utforskning.</span>
+        <span class="card-tag">Kap. 3 · Maskininlärning · Förstärkningsinlärning</span>
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+
+      <a class="card" data-accent="blue" href="/naive-bayes-lab">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        </div>
+        <h3>Naïve Bayes‑labbet</h3>
+        <span class="card-desc">Klassificera text steg för steg och se hur sannolikheter uppdateras.</span>
+        <span class="card-tag">Kap. 3 · Maskininlärning · Övervakad inlärning</span>
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Kodlaborationer -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background: var(--accent-emerald-bg); color: var(--accent-emerald);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <h2>Implementera AI‑algoritmer i kod</h2>
+    </div>
+
+    <div class="code-intro">
       Här får du testa hur några AI‑algoritmer fungerar genom att köra färdiga kodblock i Google Colab. Du behöver inte kunna programmera utan det räcker att följa instruktionerna, göra små ändringar och se hur resultatet påverkas.
     </div>
 
-    <div class="colab-grid">
+    <div class="grid grid-code">
 
-      <a class="colab-card" href="https://colab.research.google.com/drive/1eaOeeAIimrkXw0LIZR5fGXEk8Wwact8R" target="_blank">
-        <span class="card-icon">📉</span>
-        <div class="card-title">Linjär regression med gradientnedstigning</div>
+      <a class="card" data-accent="rose" href="https://colab.research.google.com/drive/1eaOeeAIimrkXw0LIZR5fGXEk8Wwact8R" target="_blank">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <h3>Linjär regression med gradientnedstigning</h3>
+        <span class="colab-tag">Google Colab</span>
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
       </a>
 
-      <a class="colab-card" href="https://colab.research.google.com/drive/14ansn4I8-QLbWg5twSQU37ipz5Nte10E" target="_blank">
-        <span class="card-icon">🔵</span>
-        <div class="card-title">k‑Närmaste Grannar</div>
+      <a class="card" data-accent="cyan" href="https://colab.research.google.com/drive/14ansn4I8-QLbWg5twSQU37ipz5Nte10E" target="_blank">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><line x1="14.5" y1="9.5" x2="17.5" y2="6.5"/><line x1="9.5" y1="14.5" x2="6.5" y2="17.5"/></svg>
+        </div>
+        <h3>k‑Närmaste Grannar</h3>
+        <span class="colab-tag">Google Colab</span>
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
       </a>
 
-      <a class="colab-card" href="https://colab.research.google.com/drive/1Vt29gL2ig8qoLC50ynhHiipfJeqnPUnz#scrollTo=FkRJvBHG2Lt2" target="_blank">
-        <span class="card-icon">📊</span>
-        <div class="card-title">k‑Means klustring</div>
+      <a class="card" data-accent="amber" href="https://colab.research.google.com/drive/1Vt29gL2ig8qoLC50ynhHiipfJeqnPUnz#scrollTo=FkRJvBHG2Lt2" target="_blank">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="16" r="3"/><circle cx="16" cy="8" r="3"/></svg>
+        </div>
+        <h3>k‑Means klustring</h3>
+        <span class="colab-tag">Google Colab</span>
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
       </a>
 
-      <a class="colab-card" href="https://colab.research.google.com/drive/1SsOd_1vat4qcTw4iy3-FQTRbz_EjsAYi#scrollTo=9JkgP2mvpKUc" target="_blank">
-        <span class="card-icon">🌳</span>
-        <div class="card-title">BFS och DFS i träd</div>
+      <a class="card" data-accent="emerald" href="https://colab.research.google.com/drive/1SsOd_1vat4qcTw4iy3-FQTRbz_EjsAYi#scrollTo=9JkgP2mvpKUc" target="_blank">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>BFS och DFS i träd</h3>
+        <span class="colab-tag">Google Colab</span>
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
       </a>
 
     </div>
+  </section>
 
-  </main>
+  <div class="divider"></div>
 
   <footer>
-    AI‑AKTIVITETER &nbsp;·&nbsp; Komplement till läroboken <em>AI – Teknik, samhälle och etik</em>
+    <span>AI‑AKTIVITETER</span> · Komplement till läroboken <a href="https://www.liber.se/webshop/product/ai-niva-1-teknik-samhalle-och-etik-9789147160037" target="_blank"><em>AI – Teknik, samhälle och etik</em></a><br>
+    Av David Hedengren
   </footer>
+
+</div>
 
 </body>
 </html>
