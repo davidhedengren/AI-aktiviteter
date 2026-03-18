@@ -125,7 +125,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .dtable-lg td{padding:4px 7px;border-bottom:1px solid rgba(30,38,66,0.3);font-family:'JetBrains Mono',monospace;font-size:0.92em;}
 .dtable-lg .pass{color:var(--green);font-weight:600;} .dtable-lg .fail{color:var(--red);font-weight:600;}
 
-@media(max-width:1000px){.app{grid-template-columns:1fr;height:auto;}.lp{border-right:none;border-bottom:1px solid var(--border);}.center{min-height:420px;}.rp{max-height:300px;}}
+@media(max-width:1000px){body{height:auto;overflow:auto;}.app{grid-template-columns:1fr;height:auto;}.lp{border-right:none;border-bottom:1px solid var(--border);}.center{min-height:420px;}.rp{max-height:none;}}
 </style>
 </head>
 <body>
@@ -138,9 +138,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="intro-step"><div class="intro-num">2</div><div class="intro-step-text"><strong>Utforska beräkningarna</strong> – Stega genom nätverket neuron för neuron. Se hur varje neuron multiplicerar, summerar och aktiverar.</div></div>
       <div class="intro-step"><div class="intro-num">3</div><div class="intro-step-text"><strong>Gör egna förutsägelser</strong> – Ändra indatavärdena och se om nätverket svarar rätt.</div></div>
     </div>
-    <div class="intro-formula">output = f( Σ(vikt × input) + bias )</div>
     <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Starta simuleringen →</button>
-    <div class="intro-note">Linjer = kopplingar · Tjockare = starkare<br>Grönt = aktiv beräkning · Bias (+b) = neuronens startvärde</div>
   </div>
 </div>
 
