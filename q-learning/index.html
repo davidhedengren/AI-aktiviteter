@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="sv">
 <head>
@@ -269,7 +271,19 @@
       font-family: var(--font-mono);
     }
 
-    /* MathJax color fix */
+    .maze-select {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 5px;
+      border: 1px solid var(--border2);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      outline: none;
+    }
+    .maze-select:focus { border-color: var(--accent); }
+
     .MathJax { color: var(--subtle) !important; }
   </style>
 </head>
@@ -288,11 +302,18 @@
         <canvas id="canvas"></canvas>
         <div class="controls">
           <div class="controls-row">
+            <select class="maze-select" id="mazeSelect">
+              <option value="0">Standardmiljö</option>
+              <option value="1">Ormen</option>
+              <option value="2">Labyrinten</option>
+            </select>
             <button id="trainButton">Starta träning</button>
             <button id="pauseButton">Pausa</button>
+            <button id="resetButton">Återställ träning</button>
+          </div>
+          <div class="controls-row">
             <button id="qToggleButton">Visa Q-värden: Av</button>
             <button id="policyButton">Visa Policy: Av</button>
-            <button id="resetButton">Återställ träning</button>
             <button id="testButton" style="display: none;">Testa Modellen</button>
           </div>
           <div class="controls-row">
@@ -345,6 +366,12 @@
             <li>Genom att klicka i "Visa Q-värden" kan du se aktuella Q-värden för samtliga actions i varje ruta.</li>
             <li>Om du håller muspekaren över en cell visas de aktuella Q-värdena för den cellen.</li>
           </ul>
+          <p><strong>Välj miljö:</strong></p>
+          <ul>
+            <li><em>Standardmiljö:</em> Öppen miljö med utspridda hinder och 4 mynt.</li>
+            <li><em>Ormen:</em> Sicksack-korridorer som tvingar agenten att lära sig en lång väg med 3 mynt utspridda längs rutten.</li>
+            <li><em>Labyrinten:</em> En labyrint med korridorer, återvändsgränder och flera alternativa vägar – jämför med hur sökalgoritmer löser samma typ av problem.</li>
+          </ul>
           <p><strong>Redigeringsläge:</strong></p>
           <ul>
             <li>När redigeringsläget är aktivt kan du:
@@ -373,18 +400,65 @@
       coinsCopy.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
       return coinsCopy.map(c => c[0] + "_" + c[1]).join(";");
     }
-    const defaultCoins = [[0,9], [3,3], [9,0], [7,7]];
-    const customObstacles = [
-      [0,8], [1,8],
-      [2,2], [2,3], [2,4],
-      [3,2], [3,6],
-      [4,4], [4,5], [4,6], [4,8],
-      [5,3], [5,4], [5,8],
-      [6,4], [6,6], [6,8],
-      [7,6], [7,8],
-      [8,1], [8,6], [8,7], [8,8],
-      [9,1]
+
+    // ============================================================
+    //  MAZE PRESETS
+    // ============================================================
+    const MAZE_PRESETS = [
+      {
+        name: "Standardmiljö",
+        obstacles: [
+          [0,8],[1,8],
+          [2,2],[2,3],[2,4],
+          [3,2],[3,6],
+          [4,4],[4,5],[4,6],[4,8],
+          [5,3],[5,4],[5,8],
+          [6,4],[6,6],[6,8],
+          [7,6],[7,8],
+          [8,1],[8,6],[8,7],[8,8],
+          [9,1]
+        ],
+        coins: [[0,9],[3,3],[9,0],[7,7]],
+        start: [0,0],
+        goal: [9,9]
+      },
+      {
+        name: "Ormen",
+        obstacles: [
+          [0,9],[1,9],[2,9],[3,9],[4,9],[5,9],[6,9],[7,9],[8,9],
+          [1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7],[9,7],
+          [0,5],[1,5],[2,5],[3,5],[4,5],[5,5],[6,5],[7,5],[8,5],
+          [1,3],[2,3],[3,3],[4,3],[5,3],[6,3],[7,3],[8,3],[9,3],
+          [0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1],[8,1]
+        ],
+        coins: [[7,8],[3,4],[5,0]],
+        start: [0,0],
+        goal: [9,9]
+      },
+      {
+        name: "Labyrinten",
+        obstacles: [
+          [3,9],[4,9],[5,9],[6,9],[8,9],
+          [0,8],[1,8],[8,8],
+          [0,7],[1,7],[3,7],[4,7],[6,7],
+          [0,6],[1,6],[3,6],[4,6],[6,6],[7,6],[8,6],
+          [8,5],
+          [0,4],[1,4],[2,4],[4,4],[5,4],[6,4],[8,4],
+          [1,3],[6,3],[8,3],
+          [1,2],[3,2],[4,2],[8,2],[9,2],
+          [1,1],[3,1],[4,1],[5,1],[6,1],
+          [6,0],[7,0],[8,0]
+        ],
+        coins: [[0,9],[9,4],[9,0]],
+        start: [0,0],
+        goal: [9,9]
+      }
     ];
+
+    let currentPresetIndex = 0;
+    let defaultCoins = MAZE_PRESETS[0].coins.map(c => c.slice());
+    let customObstacles = MAZE_PRESETS[0].obstacles.map(o => o.slice());
+
     const GRID_WIDTH = 10;
     const GRID_HEIGHT = 10;
     const CELL_SIZE = 50;
@@ -568,6 +642,7 @@ $$`;
         this.logText = document.getElementById("logText");
         this.paramInfo = document.getElementById("paramInfo");
         this.testButton = document.getElementById("testButton");
+        this.mazeSelect = document.getElementById("mazeSelect");
         this.updateParamInfo();
         this.trainButton.addEventListener("click", () => {
           this.showPolicy = false;
@@ -579,6 +654,7 @@ $$`;
         this.qToggleButton.addEventListener("click", () => this.toggleQValues());
         this.policyButton.addEventListener("click", () => this.togglePolicy());
         this.speedSlider.addEventListener("input", (e) => this.updateSpeed(e));
+        this.mazeSelect.addEventListener("change", (e) => this.loadPreset(parseInt(e.target.value)));
         this.editModeCheckbox.addEventListener("change", (e) => {
           this.editMode = e.target.checked;
           this.updateParamInfo();
@@ -593,6 +669,7 @@ $$`;
             let gammaVal = parseFloat(document.getElementById("gammaParam").value) || 0.95;
             let epsilonVal = parseFloat(document.getElementById("epsilonParam").value) || 0.3;
             this.initialCoins = JSON.parse(JSON.stringify(this.coins));
+            defaultCoins = JSON.parse(JSON.stringify(this.coins));
             this.agent = new QLearningAgent(this.gridWidth, this.gridHeight, [0, 1, 2, 3], alphaVal, gammaVal, epsilonVal);
             this.episode = 0;
             this.stepCount = 0;
@@ -632,6 +709,43 @@ $$`;
         this.updateInfoLabel();
         requestAnimationFrame((ts) => this.simulationLoop(ts));
       }
+
+      // ── LOAD PRESET ──
+      loadPreset(idx) {
+        if (this.running) { this.running = false; }
+        if (this.playing) { this.playing = false; }
+        this.paused = false;
+        this.pauseButton.textContent = "Pausa";
+        currentPresetIndex = idx;
+        const preset = MAZE_PRESETS[idx];
+        customObstacles = preset.obstacles.map(o => o.slice());
+        defaultCoins = preset.coins.map(c => c.slice());
+        this.startPos = preset.start.slice();
+        this.goalPos = preset.goal.slice();
+        this.env = new GridWorld(this.gridWidth, this.gridHeight);
+        this.env.obstacles = customObstacles.slice();
+        this.env.goal = this.goalPos.slice();
+        this.coins = JSON.parse(JSON.stringify(defaultCoins));
+        this.initialCoins = JSON.parse(JSON.stringify(defaultCoins));
+        this.agent = new QLearningAgent(this.gridWidth, this.gridHeight, [0, 1, 2, 3]);
+        this.state = this.startPos.slice();
+        this.episode = 0;
+        this.stepCount = 0;
+        this.mode = "idle";
+        this.testMode = false;
+        this.showPolicy = false;
+        this.showQValues = false;
+        this.qToggleButton.textContent = "Visa Q-värden: Av";
+        this.policyButton.textContent = "Visa Policy: Av";
+        this.testButton.style.display = "none";
+        this.policyButton.style.display = "none";
+        this.log("Miljö bytt till: " + preset.name);
+        this.updateParamInfo();
+        this.drawGrid();
+        this.drawAgent();
+        this.updateInfoLabel();
+      }
+
       getCoinKey() {
         let coinsCopy = this.coins.slice();
         coinsCopy.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
@@ -1043,8 +1157,8 @@ $$`;
       }
       generateOptimalPath() {
         let path = [];
-        let currentState = this.env.reset();
-        let localCoins = JSON.parse(JSON.stringify(this.coins));
+        let currentState = this.startPos.slice();
+        let localCoins = JSON.parse(JSON.stringify(this.initialCoins));
         let visited = new Set();
         for (let i = 0; i < this.maxSteps; i++) {
           const coinKey = getCoinKeyFrom(localCoins);
@@ -1065,7 +1179,7 @@ $$`;
       startTestMode() {
         this.testMode = true;
         this.paused = true;
-        this.state = this.env.reset();
+        this.state = this.startPos.slice();
         this.coins = JSON.parse(JSON.stringify(this.initialCoins));
         this.showQValues = true;
         this.qToggleButton.textContent = "Visa Q-värden: På";
