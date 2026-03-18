@@ -154,6 +154,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div><div class="sec-t">Scenario</div>
       <select class="scenario-sel" id="scenarioSel" onchange="setScenario(this.value)">
         <option value="exam">📝 Klarar eleven provet?</option>
+        <option value="job">💼 Får jag sommarjobb?</option>
         <option value="abstract">🔢 Abstrakt</option>
       </select>
     </div>
@@ -222,6 +223,13 @@ const ALLVARS=[
   {key:'sleep',name:'Sömn',desc:'natten innan',unit:'h',min:0,max:10,def:60,weight:0.15},
   {key:'food',name:'Frukost',desc:'på provdagen',unit:'kcal',min:0,max:800,def:50,weight:0.05}
 ];
+const JOBVARS=[
+  {key:'interview',name:'Intervju',desc:'prestation 0–10',unit:'p',min:0,max:10,def:60,weight:0.30},
+  {key:'experience',name:'Erfarenhet',desc:'månader',unit:'mån',min:0,max:24,def:30,weight:0.25},
+  {key:'letter',name:'Personligt brev',desc:'kvalitet 0–10',unit:'p',min:0,max:10,def:55,weight:0.20},
+  {key:'grades',name:'Betygssnitt',desc:'meritpoäng',unit:'p',min:0,max:20,def:65,weight:0.15},
+  {key:'refs',name:'Referenser',desc:'antal',unit:'st',min:0,max:5,def:40,weight:0.10}
+];
 const ABSVARS=[
   {key:'x1',name:'x₁',desc:'',unit:'',min:0,max:1,def:50,weight:0.5},
   {key:'x2',name:'x₂',desc:'',unit:'',min:0,max:1,def:30,weight:0.3},
@@ -229,14 +237,14 @@ const ABSVARS=[
   {key:'x4',name:'x₄',desc:'',unit:'',min:0,max:1,def:20,weight:0.05}
 ];
 let curSc='exam';
-let varEnabled=[true,true,false,false]; // which vars are on
+let varEnabled=[true,true,false,false];
 let layers=[2,3,1],W=[],B=[],vals=[];
 let stepQueue=[],stepIdx=0,hlNeuron=null,hlEdges=[];
 let phase='train',trained=false,epoch=0,trainTimer=null;
 let stepHist=[],savedTrainData=null;
 
-function curVars(){return curSc==='exam'?ALLVARS:ABSVARS;}
-function activeVars(){return curVars().filter((_,i)=>varEnabled[i]);}
+function curVars(){if(curSc==='exam')return ALLVARS;if(curSc==='job')return JOBVARS;return ABSVARS;}
+function activeVars(){if(curSc==='job')return JOBVARS;return curVars().filter((_,i)=>varEnabled[i]);}
 function getIV(){const v=[];for(let i=0;i<layers[0];i++){const e=document.getElementById('inp'+i);v.push(e?parseFloat(e.value)/100:0);}return v;}
 function act_(x){const f=document.getElementById('actSel').value;if(f==='relu')return Math.max(0,x);if(f==='sigmoid')return 1/(1+Math.exp(-Math.max(-500,Math.min(500,x))));if(f==='tanh')return Math.tanh(x);return x;}
 function actDeriv(y){const f=document.getElementById('actSel').value;if(f==='relu')return y>0?1:0.01;if(f==='sigmoid')return y*(1-y);if(f==='tanh')return 1-y*y;return 1;}
@@ -358,14 +366,18 @@ function showNarr(l,j,contribs,sum,a){
 function updateTgt(){document.getElementById('targetVal').textContent=targetLabel(getIV());}
 function updateOut(){const last=layers.length-1;if(!vals[last]||!vals[last][0].computed)return;const o=vals[last][0].act;
   const conf=Math.round(Math.max(o,1-o)*100),pred=o>0.5,tgt=targetFn(getIV()),correct=(pred?1:0)===tgt;
-  document.getElementById('outputVal').textContent=curSc==='exam'?`${pred?'Ja':'Nej'} (${conf}% säker)`:`${o.toFixed(3)} → ${pred?'1':'0'}`;
+  document.getElementById('outputVal').textContent=curSc==='abstract'?`${o.toFixed(3)} → ${pred?'1':'0'}`:`${pred?'Ja':'Nej'} (${conf}% säker)`;
   document.getElementById('outputVal').style.color=pred?'var(--accent)':'var(--red)';
   document.getElementById('verdictVal').innerHTML=correct?'<span style="color:var(--green)">✓ Rätt!</span>':`<span style="color:var(--red)">✗ Fel</span> <span style="font-size:0.7em;color:var(--dim)">(rätt: ${tgt===1?'Ja':'Nej'})</span>`;}
-function setScenario(k){curSc=k;varEnabled=[true,true,false,false];fullReset();}
+function setScenario(k){curSc=k;
+  if(k==='job'){varEnabled=[true,true,true,true,true];layers=[5,4,3,1];}
+  else{varEnabled=[true,true,false,false];layers=[2,3,1];}
+  fullReset();}
 
 function renderVarList(){const cv=curVars();const el=document.getElementById('varList');let h='';
-  for(let i=0;i<cv.length;i++){const v=cv[i],on=varEnabled[i],base=i<2;
-    h+=`<div class="var-toggle ${on?'on':''}" onclick="${base?'':'toggleVar('+i+')'}"><span class="vdot"></span><span class="vname">${v.name}</span>${v.desc?`<span class="vdesc">${v.desc}</span>`:''}${base?'<span style="font-size:0.8em;color:var(--green)">✓</span>':''}</div>`;}
+  const allOn=curSc==='job';
+  for(let i=0;i<cv.length;i++){const v=cv[i],on=varEnabled[i],base=allOn||i<2;
+    h+=`<div class="var-toggle ${on?'on':''}" onclick="${base?'':'toggleVar('+i+')'}"><span class="vdot"></span><span class="vname">${v.name}</span>${v.desc?`<span class="vdesc">${v.desc}</span>`:''}${base&&on?'<span style="font-size:0.8em;color:var(--green)">✓</span>':''}</div>`;}
   el.innerHTML=h;}
 
 function toggleVar(i){if(i<2)return;varEnabled[i]=!varEnabled[i];fullReset();}
@@ -414,15 +426,15 @@ function drawNet(){const{ctx,w,h}=setupCv();ctx.fillStyle='#0a0c15';ctx.fillRect
     else{ctx.strokeStyle=`rgba(180,195,220,${0.2+0.15*op})`;ctx.lineWidth=th*0.7;ctx.shadowBlur=0;}
     ctx.beginPath();ctx.moveTo(pos[l][i].x,pos[l][i].y);ctx.lineTo(pos[l+1][j].x,pos[l+1][j].y);ctx.stroke();ctx.shadowBlur=0;
 
-    // Show weight value on trained edges - only when NOT exploring (predict/idle)
-    if(trained&&!isHl&&phase!=='explore'){
+    // Show weight value on trained edges when not actively stepping through neurons
+    if(trained&&!isHl&&(phase==='predict'||(phase==='explore'&&!hlNeuron))){
       const mx=(pos[l][i].x+pos[l+1][j].x)/2,my=(pos[l][i].y+pos[l+1][j].y)/2;
-      const wfs=R>26?9:8;
-      ctx.font=`500 ${wfs}px "JetBrains Mono"`;ctx.textAlign='center';
+      const wfs=R>26?10:9;
+      ctx.font=`600 ${wfs}px "JetBrains Mono"`;ctx.textAlign='center';
       const wtxt=wv.toFixed(2);const wtw=ctx.measureText(wtxt).width;
-      ctx.fillStyle='rgba(9,11,20,0.85)';
-      ctx.fillRect(mx-wtw/2-3,my-wfs/2-2,wtw+6,wfs+4);
-      ctx.fillStyle='rgba(180,195,220,0.5)';ctx.fillText(wtxt,mx,my+wfs/2-2);
+      ctx.fillStyle='rgba(9,11,20,0.88)';
+      ctx.fillRect(mx-wtw/2-4,my-wfs/2-3,wtw+8,wfs+6);
+      ctx.fillStyle='rgba(200,215,235,0.65)';ctx.fillText(wtxt,mx,my+wfs/2-2);
     }
 
     if(isHl){const edge=hlEdges.find(e=>e.l===l&&e.i===i&&e.j===j);if(edge){
@@ -463,7 +475,7 @@ function drawNet(){const{ctx,w,h}=setupCv();ctx.fillStyle='#0a0c15';ctx.fillRect
       else{ctx.font=`500 ${fontSize-1}px "DM Sans"`;ctx.fillStyle=`rgba(255,255,255,${0.22+0.1*op})`;ctx.fillText('?',x,y);}
       if(l>0){ctx.font=`500 ${R>26?9:8}px "JetBrains Mono"`;ctx.fillStyle=`rgba(255,255,255,${0.4*op})`;ctx.fillText(`+b ${B[l-1][i].toFixed(2)}`,x,y+R+12);}
       if(l===0){const av=activeVars();ctx.font=`600 ${R>26?11:9}px "DM Sans"`;ctx.fillStyle=`rgba(120,170,255,${0.65+0.2*op})`;ctx.fillText(av[i].name,x,y+R+13);}
-      if(l===layers.length-1){ctx.font=`600 ${R>26?11:9}px "DM Sans"`;ctx.fillStyle=`rgba(255,216,102,${0.65+0.2*op})`;ctx.fillText(curSc==='exam'?'Klarar provet?':'y',x,y+R+26);}
+      if(l===layers.length-1){const outLabel=curSc==='exam'?'Klarar provet?':curSc==='job'?'Får jobbet?':'y';ctx.font=`600 ${R>26?11:9}px "DM Sans"`;ctx.fillStyle=`rgba(255,216,102,${0.65+0.2*op})`;ctx.fillText(outLabel,x,y+R+26);}
     }}
   if(!trained){ctx.fillStyle='rgba(255,255,255,0.08)';ctx.font='700 18px "DM Sans"';ctx.textAlign='center';ctx.fillText('OTRÄNAT NÄTVERK',w/2,h-16);}}
 
