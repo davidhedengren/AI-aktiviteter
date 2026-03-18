@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Neurala nätverk – Interaktiv simulering</title>
+<title>Neurala nätverk-labbet – ai-aktiviteter.se</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--accent:#4d80ff;--accent2:#6698ff;--green:#34c759;--orange:#f0923b;--red:#ef5b5b;--gold:#ffd866;--wire:#34c759;}
@@ -132,7 +131,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <body>
 <div class="intro" id="intro">
   <div class="intro-card">
-    <h2>Välkommen till <span>Neurala Nätverk</span></h2>
+    <h2><span>Neurala nätverk‑labbet</span></h2>
     <p class="sub">Ett neuralt nätverk lär sig göra förutsägelser genom att träna på data. Här får du se hela processen steg för steg.</p>
     <div class="intro-steps">
       <div class="intro-step"><div class="intro-num">1</div><div class="intro-step-text"><strong>Träna nätverket</strong> – Nätverket börjar med slumpmässiga vikter. Genom att träna på hundratals exempel lär det sig vilka kopplingar som är viktiga.</div></div>
@@ -145,7 +144,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   </div>
 </div>
 
-<div class="hd"><h1>Interaktivt <span>Neuralt Nätverk</span></h1><p>Träna, utforska och gör förutsägelser med ett neuralt nätverk.</p></div>
+<div class="hd"><h1><span>Neurala nätverk‑labbet</span></h1><p>Träna, utforska och gör förutsägelser med ett neuralt nätverk.</p></div>
 
 <div class="app">
   <div class="lp">
@@ -196,6 +195,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         <span class="g-tag" onclick="togGloss(this,'gBias')">Bias (+b)</span>
         <span class="g-tag" onclick="togGloss(this,'gAct')">Aktivering</span>
         <span class="g-tag" onclick="togGloss(this,'gHidden')">Dolt lager</span>
+        <span class="g-tag" onclick="togGloss(this,'gOutput')">Utdata</span>
+        <span class="g-tag" onclick="togGloss(this,'gLoss')">Förlust</span>
         <span class="g-tag" onclick="togGloss(this,'gForward')">Framåtpass</span>
         <span class="g-tag" onclick="togGloss(this,'gEpoch')">Epok</span>
         <span class="g-tag" onclick="togGloss(this,'gPred')">Förutsägelse</span>
@@ -203,8 +204,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="g-def" id="gNeuron"><strong>Neuron</strong> – En beräkningsenhet (cirkel i nätverket). Den tar emot värden, multiplicerar dem med vikter, summerar och kör resultatet genom en aktiveringsfunktion.</div>
       <div class="g-def" id="gWeight"><strong>Vikt</strong> – Ett tal som bestämmer hur stark kopplingen mellan två neuroner är. Vikterna är det nätverket <em>lär sig</em> under träning. Tjockare linje = starkare vikt.</div>
       <div class="g-def" id="gBias"><strong>Bias (+b)</strong> – Ett startvärde som adderas i varje neuron innan aktiveringen. Det gör att neuronen kan aktiveras även om alla inputs är noll. Tänk på det som neuronens grundinställning.</div>
-      <div class="g-def" id="gAct"><strong>Aktiveringsfunktion</strong> – En matematisk funktion som bestämmer neuronens slutgiltiga värde. Sigmoid pressar t.ex. alla värden till mellan 0 och 1. Utan aktivering hade nätverket bara kunnat lära sig raka linjer.</div>
+      <div class="g-def" id="gAct"><strong>Aktivering</strong> – När en neuron "aktiveras" betyder det att den skickar vidare en signal till nästa lager. Aktiveringsfunktionen (t.ex. sigmoid) bestämmer <em>hur starkt</em> neuronen reagerar. Ett högt värde (nära 1) = neuronen aktiveras starkt. Ett lågt värde (nära 0) = neuronen är nästan inaktiv.</div>
       <div class="g-def" id="gHidden"><strong>Dolt lager</strong> – Lager mellan indata och utdata. Det är här nätverket hittar mönster i datan. Fler neuroner och lager = nätverket kan lära sig mer komplexa samband.</div>
+      <div class="g-def" id="gOutput"><strong>Utdata</strong> – Nätverkets slutgiltiga svar. Utdataneuronens värde representerar en <em>sannolikhet</em> mellan 0 och 1. Ett värde på 0.85 betyder att nätverket är 85% säkert på "Ja". Över 0.5 tolkas som Ja, under som Nej.</div>
+      <div class="g-def" id="gLoss"><strong>Förlust (loss)</strong> – Ett mått på hur mycket fel nätverket gör. Under träningen jämförs nätverkets förutsägelse med det rätta svaret – skillnaden blir förlusten. Låg förlust = nätverket gör få fel. Målet med träningen är att göra förlusten så nära noll som möjligt.</div>
       <div class="g-def" id="gForward"><strong>Framåtpass</strong> – Processen där data flödar genom nätverket från indata till utdata, lager för lager. Varje neuron beräknar sitt värde baserat på föregående lagers värden.</div>
       <div class="g-def" id="gEpoch"><strong>Epok</strong> – Ett varv genom all träningsdata. Under varje epok ser nätverket alla exempel en gång och justerar vikterna lite. Fler epoker = nätverket har övat mer.</div>
       <div class="g-def" id="gPred"><strong>Förutsägelse</strong> – Det svar nätverket ger för nya, okända indatavärden. Jämför med <strong style="color:var(--gold)">rätt svar</strong> (det korrekta svaret från datan) för att se om nätverket lärt sig rätt.</div>
@@ -238,6 +241,7 @@ function curVars(){return curSc==='exam'?ALLVARS:ABSVARS;}
 function activeVars(){return curVars().filter((_,i)=>varEnabled[i]);}
 function getIV(){const v=[];for(let i=0;i<layers[0];i++){const e=document.getElementById('inp'+i);v.push(e?parseFloat(e.value)/100:0);}return v;}
 function act_(x){const f=document.getElementById('actSel').value;if(f==='relu')return Math.max(0,x);if(f==='sigmoid')return 1/(1+Math.exp(-Math.max(-500,Math.min(500,x))));if(f==='tanh')return Math.tanh(x);return x;}
+function actDeriv(y){const f=document.getElementById('actSel').value;if(f==='relu')return y>0?1:0.01;if(f==='sigmoid')return y*(1-y);if(f==='tanh')return 1-y*y;return 1;}
 function actN(){return{relu:'ReLU',sigmoid:'σ',tanh:'tanh'}[document.getElementById('actSel').value]||'';}
 function actExplain(fn,x,y){
   if(fn==='σ')return `Värdet ${x.toFixed(3)} stoppas in i sigmoid-funktionen: σ(${x.toFixed(3)}) = 1/(1+e^(-${x.toFixed(2)})) = ${y.toFixed(3)}`;
@@ -265,10 +269,10 @@ function genData(n){const av=activeVars(),nI=av.length,xs=[],ys=[];
 
 function trainBatch(){const d=genData(30);const lr=0.8;let tl=0;if(!savedTrainData)savedTrainData=genData(200);
   for(let s=0;s<d.xs.length;s++){const a=[d.xs[s].slice()];let c=d.xs[s].slice();
-    for(let l=0;l<W.length;l++){const nx=[];for(let j=0;j<W[l].length;j++){let sm=B[l][j];for(let i=0;i<c.length;i++)sm+=W[l][j][i]*c[i];nx.push(1/(1+Math.exp(-Math.max(-500,Math.min(500,sm)))));}a.push(nx);c=nx;}
+    for(let l=0;l<W.length;l++){const nx=[];for(let j=0;j<W[l].length;j++){let sm=B[l][j];for(let i=0;i<c.length;i++)sm+=W[l][j][i]*c[i];nx.push(act_(sm));}a.push(nx);c=nx;}
     const o=a[a.length-1][0],t=d.ys[s],e=o-t;tl+=e*e;
-    const dl=[];for(let l=0;l<W.length;l++)dl.push(new Array(W[l].length).fill(0));dl[W.length-1][0]=e*o*(1-o);
-    for(let l=W.length-2;l>=0;l--)for(let j=0;j<W[l].length;j++){let sm=0;for(let k=0;k<W[l+1].length;k++)sm+=dl[l+1][k]*W[l+1][k][j];dl[l][j]=sm*a[l+1][j]*(1-a[l+1][j]);}
+    const dl=[];for(let l=0;l<W.length;l++)dl.push(new Array(W[l].length).fill(0));dl[W.length-1][0]=e*actDeriv(o);
+    for(let l=W.length-2;l>=0;l--)for(let j=0;j<W[l].length;j++){let sm=0;for(let k=0;k<W[l+1].length;k++)sm+=dl[l+1][k]*W[l+1][k][j];dl[l][j]=sm*actDeriv(a[l+1][j]);}
     for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++){for(let i=0;i<W[l][j].length;i++)W[l][j][i]-=lr*dl[l][j]*a[l][i];B[l][j]-=lr*dl[l][j];}}
   return tl/d.xs.length;}
 
@@ -406,14 +410,14 @@ function drawNet(){const{ctx,w,h}=setupCv();ctx.fillStyle='#0a0c15';ctx.fillRect
   // Connections - ALL GREEN with varying thickness
   for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++)for(let i=0;i<W[l][j].length;i++){
     const wv=W[l][j][i],abs=Math.min(Math.abs(wv),2),key=`${l}-${i}-${j}`,isHl=hlSet.has(key);
-    const sd=vals[l][i].computed,td=vals[l+1][j].computed,th=1+3*(abs/2);
+    const sd=vals[l][i].computed,td=vals[l+1][j].computed,th=1.2+3*(abs/2);
     if(isHl){ctx.strokeStyle='rgba(52,199,89,0.95)';ctx.lineWidth=th+2;ctx.shadowColor='rgba(52,199,89,0.4)';ctx.shadowBlur=10;}
-    else if(trained){ctx.strokeStyle=`rgba(180,195,220,${0.15+0.35*(abs/2)})`;ctx.lineWidth=th;ctx.shadowBlur=0;}
-    else{ctx.strokeStyle=`rgba(180,195,220,${0.06+0.04*op})`;ctx.lineWidth=1;ctx.shadowBlur=0;}
+    else if(trained){const edgeOp=hlNeuron?0.05+0.1*(abs/2):0.15+0.35*(abs/2);ctx.strokeStyle=`rgba(180,195,220,${edgeOp})`;ctx.lineWidth=hlNeuron?th*0.5:th;ctx.shadowBlur=0;}
+    else{ctx.strokeStyle=`rgba(180,195,220,${0.2+0.15*op})`;ctx.lineWidth=th*0.7;ctx.shadowBlur=0;}
     ctx.beginPath();ctx.moveTo(pos[l][i].x,pos[l][i].y);ctx.lineTo(pos[l+1][j].x,pos[l+1][j].y);ctx.stroke();ctx.shadowBlur=0;
 
-    // Show weight value on ALL trained (non-highlighted) edges
-    if(trained&&!isHl){
+    // Show weight value on trained edges - only when NOT exploring (predict/idle)
+    if(trained&&!isHl&&phase!=='explore'){
       const mx=(pos[l][i].x+pos[l+1][j].x)/2,my=(pos[l][i].y+pos[l+1][j].y)/2;
       const wfs=R>26?9:8;
       ctx.font=`500 ${wfs}px "JetBrains Mono"`;ctx.textAlign='center';
