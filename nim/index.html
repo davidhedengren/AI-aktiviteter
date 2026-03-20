@@ -16,7 +16,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .app{display:grid;grid-template-columns:1fr 320px;max-width:1060px;margin:0 auto;min-height:calc(100vh - 90px);}
 .left{padding:22px 26px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:18px;}
 .phase-tabs{display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
-.tab{flex:1;padding:10px 8px;text-align:center;font-size:0.78em;font-weight:700;color:var(--dim);background:var(--surface);cursor:por;transition:0.2s;border:none;font-family:'Syne',sans-serif;}
+.tab{flex:1;padding:10px 8px;text-align:center;font-size:0.78em;font-weight:700;color:var(--dim);background:var(--surface);cursor:pointer;transition:0.2s;border:none;font-family:'Syne',sans-serif;}
 .tab:hover{background:var(--surface2);color:var(--text);}
 .tab.active{background:var(--accent);color:#08090f;}
 .tab.done{background:rgba(61,214,140,0.12);color:var(--good);}
@@ -78,7 +78,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .qbg{position:absolute;inset:0;border-radius:5px;transition:background 0.35s,opacity 0.35s;}
 .qval{position:relative;z-index:1;}
 .qcell.dis{opacity:0.15;}
-.qcell.best{outline:2px solid var(--accent);outline-offset:-2px;}
+.qcell.best{outline:3px solid var(--accent);outline-offset:-3px;box-shadow:0 0 8px rgba(232,197,71,0.5);}
 .qrow.cur .qcell.best{outline-color:var(--accent2);}
 .legend{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
 .li{display:flex;align-items:center;gap:4px;font-size:0.67em;color:var(--dim);}
@@ -115,7 +115,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 <div class="intro" id="intro">
   <div class="intro-card">
     <h2>NIM med förstärkningsinlärning</h2>
-    <p class="sub">Se hur ett AI-system lär sig spela spelet NIM från grunden – Bara genom att spela mot sig själv</p>
+    <p class="sub">Se hur ett AI-system lär sig spela spelet NIM från grunden – inte genom att läsa regler, utan genom att träna.</p>
     <div class="intro-steps">
       <div class="intro-step"><div class="intro-num">1</div><div class="intro-step-text"><strong>Träna AI-systemet</strong> – Välj hur många spel AI:n ska öva på. Kolla hur Q-tabellen förändras under träningen!</div></div>
       <div class="intro-step"><div class="intro-num">2</div><div class="intro-step-text"><strong>Utforska Q-tabellen</strong> – Tabellen till höger visar vad AI:n lärt sig. Grönt = bra drag, rött = dåligt. Ser du ett mönster?</div></div>
@@ -374,12 +374,14 @@ function updateQInfo(){
   const wins=[];
   for(let s=1;s<=totalSticks;s++){
     const a=bestAct(s);
-    if(a!==null&&(s-a)%(maxTake+1)===0)wins.push(s+'→ta '+a);
+    const rem=s-a;
+    // Only show genuinely winning moves: leaves opponent in a losing position (rem % (maxTake+1) === 0 and rem > 0)
+    if(a!==null&&rem>0&&rem%(maxTake+1)===0)wins.push(s+'→ta '+a);
   }
   document.getElementById('qinfo').innerHTML=
     `<strong>AI:ns inlärda strategi</strong><br>
     Hemligheten: lämna alltid ett antal pinnar som är delbart med <strong>${maxTake+1}</strong> till motståndaren.<br><br>
-    Drag AI:n lärt sig: <span style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:0.95em">${wins.slice(0,9).join(', ')}</span><br><br>
+    Exempel på drag AI:n lärt sig: <span style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:0.95em">${wins.slice(0,8).join(', ')}</span><br><br>
     Ser du att guldramarna följer det mönstret?`;
 }
 
