@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NIM med förstärkningsinlärning</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#08090f;--surface:#0f1118;--surface2:#161a27;--border:#1f2538;--text:#e2e8f8;--dim:#6b7594;--accent:#e8c547;--accent2:#f0d96a;--good:#3dd68c;--bad:#f05252;--neutral:#4a7cdc;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 20% 10%,rgba(232,197,71,0.04) 0%,transparent 60%),radial-gradient(ellipse 40% 50% at 80% 80%,rgba(61,214,140,0.03) 0%,transparent 60%);pointer-events:none;}
+.hd{text-align:center;padding:28px 20px 18px;border-bottom:1px solid var(--border);}
+.hd h1{font-size:2em;font-weight:800;letter-spacing:-0.02em;color:var(--accent);margin-bottom:4px;}
+.hd p{color:var(--dim);font-size:0.82em;max-width:560px;margin:0 auto;}
+.app{display:grid;grid-template-columns:1fr 320px;max-width:1060px;margin:0 auto;min-height:calc(100vh - 90px);}
+.left{padding:22px 26px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:18px;}
+.phase-tabs{display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.tab{flex:1;padding:10px 8px;text-align:center;font-size:0.78em;font-weight:700;color:var(--dim);background:var(--surface);cursor:pointer;transition:0.2s;border:none;font-family:'Syne',sans-serif;}
+.tab:hover{background:var(--surface2);color:var(--text);}
+.tab.active{background:var(--accent);color:#08090f;}
+.tab.done{background:rgba(61,214,140,0.12);color:var(--good);}
+.tab.locked{opacity:0.3;cursor:default;pointer-events:none;}
+.sec-label{font-size:0.62em;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--dim);margin-bottom:8px;}
+.row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.row label{font-size:0.8em;color:var(--dim);min-width:100px;}
+.nim-sel{font-family:'Syne',sans-serif;font-size:0.8em;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);cursor:pointer;outline:none;}
+.btn{font-family:'Syne',sans-serif;font-weight:700;font-size:0.82em;padding:10px 16px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:0.2s;text-align:center;}
+.btn:hover{border-color:var(--accent);color:var(--accent);}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#08090f;}
+.btn.pri:hover{background:var(--accent2);}
+.btn.grn{background:rgba(61,214,140,0.1);border-color:var(--good);color:var(--good);}.btn.solid-grn{background:var(--good);border-color:var(--good);color:#08090f;font-size:0.9em;padding:11px 16px;}.btn.solid-grn:hover{background:#4ee89e;border-color:#4ee89e;}
+.btn:disabled{opacity:0.3;pointer-events:none;}
+.btn-row{display:flex;gap:8px;}
+.pbwrap{background:var(--surface2);border:1px solid var(--border);border-radius:6px;height:8px;overflow:hidden;margin-bottom:6px;}
+.pbfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--good));width:0%;transition:width 0.1s;border-radius:6px;}
+.tstat{font-family:'JetBrains Mono',monospace;font-size:0.76em;color:var(--dim);}
+.tstat span{color:var(--accent);font-weight:600;}
+.game-status{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 16px;font-size:0.88em;min-height:50px;display:flex;align-items:center;gap:10px;}
+.si{font-size:1.3em;}
+.st{line-height:1.4;}.st strong{color:var(--accent);}
+.sticks-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:26px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;min-height:110px;}
+.sticks-row{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;}
+.stick{width:13px;height:56px;border-radius:6px;background:linear-gradient(180deg,#f5d87a 0%,#c8a832 60%,#8a6e1a 100%);border:1px solid rgba(200,168,50,0.4);box-shadow:0 2px 8px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.15);transition:transform 0.15s,opacity 0.3s,background 0.15s;}
+.stick.gone{opacity:0;transform:translateY(-18px) scale(0.4);}
+.stick.sel{background:linear-gradient(180deg,#ff9a6a 0%,#e05020 60%,#903010 100%);transform:translateY(-8px);box-shadow:0 6px 16px rgba(240,82,82,0.5);border-color:rgba(240,82,82,0.6);}
+.scnt{font-family:'JetBrains Mono',monospace;font-size:0.78em;color:var(--dim);margin-top:2px;}
+.take-btns{display:flex;gap:8px;justify-content:center;}
+.tbtn{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9em;padding:10px 20px;border-radius:8px;border:2px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:0.2s;min-width:54px;}
+.tbtn:hover:not(:disabled){border-color:var(--accent);color:var(--accent);background:rgba(232,197,71,0.08);transform:translateY(-2px);}
+.tbtn:disabled{opacity:0.25;cursor:default;transform:none;}
+.thinking{display:flex;align-items:center;gap:8px;font-size:0.8em;color:var(--dim);padding:6px 0;}
+.tdots span{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);margin:0 2px;animation:db 1.2s infinite;}
+.tdots span:nth-child(2){animation-delay:.2s}.tdots span:nth-child(3){animation-delay:.4s}
+@keyframes db{0%,80%,100%{transform:scale(0.6);opacity:0.4}40%{transform:scale(1);opacity:1}}
+.rbanner{display:none;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;text-align:center;flex-direction:column;gap:8px;}
+.rbanner.show{display:flex;}
+.rbanner .big{font-size:2.2em;}
+.rbanner .rtitle{font-size:1.1em;font-weight:800;}
+.rbanner .rsub{font-size:0.78em;color:var(--dim);}
+.score-strip{display:flex;gap:8px;}
+.sbox{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center;}
+.sbox .sv{font-size:1.5em;font-weight:800;font-family:'JetBrains Mono',monospace;}
+.sbox .sl{font-size:0.62em;color:var(--dim);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;}
+.info-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:0.75em;line-height:1.6;color:var(--dim);}
+.info-box strong{color:var(--text);}.info-box .hl{color:var(--accent);font-weight:700;}
+
+/* RIGHT – Q-TABLE */
+.right{padding:20px 16px;background:var(--surface);overflow-y:auto;}
+.qt-title{font-size:0.88em;font-weight:700;color:var(--accent);margin-bottom:4px;}
+.qt-desc{font-size:0.71em;color:var(--dim);line-height:1.5;margin-bottom:12px;}
+.qhdr-row{display:grid;gap:4px;align-items:center;margin-bottom:4px;}
+.qhdr{font-size:0.6em;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--dim);text-align:center;}
+.qrow{display:grid;gap:4px;align-items:center;margin-bottom:4px;}
+.qrow.cur .qst{color:var(--accent);font-weight:700;}
+.qst{font-family:'JetBrains Mono',monospace;font-size:0.75em;color:var(--dim);text-align:right;padding-right:6px;}
+.qcell{border-radius:5px;padding:4px 5px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.72em;font-weight:600;position:relative;overflow:hidden;transition:background 0.35s,color 0.35s;min-height:26px;display:flex;align-items:center;justify-content:center;}
+.qbg{position:absolute;inset:0;border-radius:5px;transition:background 0.35s,opacity 0.35s;}
+.qval{position:relative;z-index:1;}
+.qcell.dis{opacity:0.15;}
+.qcell.best{outline:2px solid var(--accent);outline-offset:-2px;}
+.qrow.cur .qcell.best{outline-color:var(--accent2);}
+.legend{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
+.li{display:flex;align-items:center;gap:4px;font-size:0.67em;color:var(--dim);}
+.ld{width:10px;height:10px;border-radius:3px;}
+.qinfo{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:0.73em;line-height:1.6;color:var(--dim);margin-top:12px;}
+.qinfo strong{color:var(--text);}
+
+@media(max-width:760px){.app{grid-template-columns:1fr}.left{border-right:none;border-bottom:1px solid var(--border)}}
+</style>
+</head>
+<body>
+<style>
+.intro{position:fixed;inset:0;background:rgba(8,9,15,0.95);z-index:200;display:flex;align-items:center;justify-content:center;}
+.intro.hidden{display:none;}
+.intro-card{background:#0f1118;border:1px solid #1f2538;border-radius:14px;padding:28px 32px;max-width:500px;width:92%;max-height:88vh;overflow-y:auto;}
+.intro-card h2{font-size:1.2em;font-weight:800;color:#e8c547;margin-bottom:6px;text-align:center;}
+.intro-card .sub{color:#6b7594;font-size:0.84em;line-height:1.55;text-align:center;margin-bottom:16px;}
+.intro-steps{display:flex;flex-direction:column;gap:11px;margin:14px 0;}
+.intro-step{display:flex;gap:12px;align-items:flex-start;}
+.intro-num{width:28px;height:28px;border-radius:50%;background:rgba(232,197,71,0.12);color:#e8c547;font-weight:700;font-size:0.9em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(232,197,71,0.3);}
+.intro-step-text{font-size:0.84em;color:#6b7594;line-height:1.55;padding-top:4px;}.intro-step-text strong{color:#e2e8f8;}
+.nim-rules{margin-top:14px;border:1px solid #1f2538;border-radius:8px;overflow:hidden;}
+.nim-rules-toggle{width:100%;padding:10px 14px;background:#161a27;border:none;color:#6b7594;font-family:'Syne',sans-serif;font-size:0.82em;font-weight:700;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;}
+.nim-rules-toggle:hover{color:#e2e8f8;}
+.nim-rules-toggle .arr{transition:transform 0.2s;}
+.nim-rules-toggle.open .arr{transform:rotate(180deg);}
+.nim-rules-body{display:none;padding:12px 14px;font-size:0.8em;color:#6b7594;line-height:1.65;border-top:1px solid #1f2538;}
+.nim-rules-body.show{display:block;}
+.nim-rules-body strong{color:#e2e8f8;}
+.nim-rules-body .ex{font-family:'JetBrains Mono',monospace;background:#08090f;padding:8px 10px;border-radius:6px;margin:8px 0;font-size:0.9em;color:#e8c547;}
+.intro-start{display:block;width:100%;padding:12px;margin-top:16px;font-family:'Syne',sans-serif;font-size:0.95em;font-weight:700;background:#3dd68c;color:#08090f;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}
+.intro-start:hover{background:#4ee89e;}
+</style>
+<div class="intro" id="intro">
+  <div class="intro-card">
+    <h2>NIM med förstärkningsinlärning</h2>
+    <p class="sub">Se hur ett AI-system lär sig spela spelet NIM från grunden – inte genom att läsa regler, utan genom att träna.</p>
+    <div class="intro-steps">
+      <div class="intro-step"><div class="intro-num">1</div><div class="intro-step-text"><strong>Träna AI-systemet</strong> – Välj hur många spel AI:n ska öva på. Kolla hur Q-tabellen förändras under träningen!</div></div>
+      <div class="intro-step"><div class="intro-num">2</div><div class="intro-step-text"><strong>Utforska Q-tabellen</strong> – Tabellen till höger visar vad AI:n lärt sig. Grönt = bra drag, rött = dåligt. Ser du ett mönster?</div></div>
+      <div class="intro-step"><div class="intro-num">3</div><div class="intro-step-text"><strong>Spela mot AI:n</strong> – Utmana en halvlärd eller fullärd AI. Kan du slå den?</div></div>
+    </div>
+    <div class="nim-rules">
+      <button class="nim-rules-toggle" id="rulesToggle" onclick="toggleRules()"><span id="rulesBtnText">📖 Visa reglerna för NIM</span><span class="arr">▼</span></button>
+      <div class="nim-rules-body" id="rulesBody">
+        <strong>Mål:</strong> Undvik att ta den sista pinnen – den som gör det förlorar.<br><br>
+        <strong>Hur man spelar:</strong><br>
+        Spelare turas om. På din tur väljer du att ta <strong>1, 2 eller 3 pinnar</strong> (du måste ta minst 1).<br><br>
+        <strong>Exempel med 9 pinnar:</strong>
+        <div class="ex">Du tar 2 → 7 kvar<br>AI tar 3 → 4 kvar<br>Du tar 3 → 1 kvar<br>AI tvingas ta sista → AI förlorar!</div>
+        <strong>Tips:</strong> Det finns en matematisk hemlighet bakom spelet. Ser du den när du studerar Q-tabellen?
+      </div>
+    </div>
+    <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Starta simuleringen →</button>
+  </div>
+</div>
+<div class="hd">
+  <h1>NIM</h1>
+  <p>Se hur ett AI-system lär sig spela NIM med förstärkningsinlärning – testa sedan att spela mot det!</p>
+</div>
+<div class="app">
+  <div class="left">
+    <div class="phase-tabs">
+      <button class="tab active" id="tabTrain" onclick="goPhase('train')">① Träna AI-systemet</button>
+      <button class="tab locked" id="tabPlay" onclick="goPhase('play')">② Spela mot AI</button>
+    </div>
+
+    <!-- TRAIN -->
+    <div id="trainPhase">
+      <div class="sec-label">Inställningar</div>
+      <div class="row"><label>Antal pinnar</label>
+        <select class="nim-sel" id="sticksSel" onchange="onSettingsChange()">
+          <option value="9">9 pinnar</option>
+          <option value="12" selected>12 pinnar</option>
+          <option value="15">15 pinnar</option>
+        </select>
+      </div>
+      <div class="row"><label>Max per drag</label>
+        <select class="nim-sel" id="maxTakeSel" onchange="onSettingsChange()">
+          <option value="2">1–2 pinnar</option>
+          <option value="3" selected>1–3 pinnar</option>
+          <option value="4">1–4 pinnar</option>
+        </select>
+      </div>
+      <div class="row"><label>Antal träningar</label>
+        <select class="nim-sel" id="epSel">
+          <option value="25">25 spel</option>
+          <option value="50">50 spel</option>
+          <option value="150" selected>150 spel</option>
+          <option value="500">500 spel</option>
+        </select>
+      </div>
+      <div class="row"><label>Hastighet</label>
+        <select class="nim-sel" id="speedSel">
+          <option value="normal" selected>🚶 Normal</option>
+          <option value="fast">⚡ Snabb</option>
+        </select>
+      </div>
+      <button class="btn solid-grn" id="trainBtn" onclick="startTraining()">🧠 Starta träning</button>
+      <div id="trainProg" style="display:none">
+        <div class="pbwrap"><div class="pbfill" id="pbFill"></div></div>
+        <div class="tstat">Spel: <span id="stEp">0</span>/<span id="stMax">0</span></div>
+        <div class="tstat">Utforskar: <span id="stEps">100</span>% &nbsp;|&nbsp; Utnyttjar: <span id="stExpl">0</span>%</div>
+      </div>
+      <div id="trainDone" style="display:none">
+        <div class="tstat" style="margin-bottom:8px">✅ Träningen klar!</div>
+        <button class="btn grn" onclick="goPhase('play')">Spela mot AI:n →</button>
+      </div>
+      <div class="nim-rules" style="margin-top:0">
+        <button class="nim-rules-toggle" id="infoToggle" onclick="toggleInfo()"><span id="infoBtnText">💡 Hur fungerar förstärkningsinlärning?</span><span class="arr">▼</span></button>
+        <div class="nim-rules-body" id="infoBody" style="color:var(--dim)">
+          Tänk dig att du lär dig ett spel utan instruktioner – bara genom att spela om och om igen och notera vad som funkade. Det är precis vad AI-systemet gör.<br><br>För varje situation i spelet lär det sig ett <strong>Q-värde</strong> – ett betyg på hur bra ett visst drag brukar vara. Om ett drag leder till vinst höjs betyget, och om det leder till förlust sänks det. I början provar AI-systemet drag nästan slumpmässigt – det <em>utforskar</em>. Ju fler träningar, desto mer börjar det <em>utnyttja</em> vad det lärt sig och väljer de drag med högst betyg. Statistiken under träningen visar hur den balansen förskjuts. Tabellen till höger visar vilket betyg respektive drag har i varje situation.
+        </div>
+      </div>
+    </div>
+
+    <!-- PLAY -->
+    <div id="playPhase" style="display:none">
+      <div class="row"><label>Du spelar</label>
+        <select class="nim-sel" id="whoFirst">
+          <option value="human">Först (du börjar)</option>
+          <option value="ai">Sist (AI börjar)</option>
+          <option value="random">Slumpmässigt</option>
+        </select>
+      </div>
+      <div class="score-strip">
+        <div class="sbox"><div class="sv" id="scH">0</div><div class="sl">Du</div></div>
+        <div class="sbox"><div class="sv" id="scA">0</div><div class="sl">AI</div></div>
+        <div class="sbox"><div class="sv" id="scG">0</div><div class="sl">Spel</div></div>
+      </div>
+      <div class="game-status" id="gStatus"><span class="si">🎯</span><div class="st">Tryck <strong>Nytt spel</strong> för att börja.</div></div>
+      <div class="sticks-wrap">
+        <div class="sticks-row" id="sticksRow"></div>
+        <div class="scnt" id="scnt"></div>
+      </div>
+      <div class="take-btns" id="takeBtns"></div>
+      <div class="thinking" id="thinking" style="display:none">
+        <span>AI tänker</span><span class="tdots"><span></span><span></span><span></span></span>
+      </div>
+      <div class="rbanner" id="rbanner">
+        <div class="big" id="rEmoji"></div>
+        <div class="rtitle" id="rTitle"></div>
+        <div class="rsub" id="rSub"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn pri" onclick="newGame()">Nytt spel</button>
+        <button class="btn" onclick="goPhase('train')">← Träna mer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q-TABLE -->
+  <div class="right">
+    <div class="qt-title">Q-tabell – AI:ns hjärna</div>
+    <div class="qt-desc">Varje rad = antal kvarvarande pinnar. Varje kolumn = drag. <strong style="color:var(--good)">Grönt</strong> = bra drag, <strong style="color:var(--bad)">rött</strong> = dåligt. Guldram = bästa draget i tillståndet.</div>
+    <div class="qhdr-row" id="qhdrRow"></div>
+    <div id="qtable"></div>
+    <div class="legend">
+      <div class="li"><div class="ld" style="background:rgba(61,214,140,0.7)"></div>Bra drag</div>
+      <div class="li"><div class="ld" style="background:rgba(240,82,82,0.7)"></div>Dåligt drag</div>
+      <div class="li"><div class="ld" style="outline:2px solid var(--accent);outline-offset:-2px;border-radius:3px;"></div>Bästa draget</div>
+    </div>
+    <div class="qinfo" id="qinfo">Träna AI:n för att se Q-tabellen fyllas i.</div>
+  </div>
+</div>
+
+<script>
+let Q={}, totalSticks=12, maxTake=3, trained=false;
+let gameSticks=0, humanTurn=true, gameOver=true;
+let scH=0,scA=0,scG=0;
+let curPhase='train';
+
+// ── Q-LEARNING ──
+function getQ(s,a){const k=String(s);return Q[k]?.[a]??0;}
+function setQ(s,a,v){const k=String(s);if(!Q[k])Q[k]={};Q[k][a]=v;}
+function validActs(s){const r=[];for(let i=1;i<=maxTake;i++)if(i<=s)r.push(i);return r;}
+function bestAct(s){const a=validActs(s);if(!a.length)return null;return a.reduce((b,x)=>getQ(s,x)>getQ(s,b)?x:b,a[0]);}
+function epsGreedy(s,eps){if(Math.random()<eps){const a=validActs(s);return a[Math.floor(Math.random()*a.length)];}return bestAct(s);}
+
+function trainEpisode(eps,alpha){
+  let state=totalSticks, hist=[[],[]], turn=0;
+  while(state>0){
+    const a=epsGreedy(state,eps);
+    hist[turn].push([state,a]);
+    state-=a;
+    if(state===0){
+      // turn player took last stick → loses
+      for(const [s,ac] of hist[turn])    setQ(s,ac,getQ(s,ac)+alpha*(-1-getQ(s,ac)));
+      for(const [s,ac] of hist[1-turn])  setQ(s,ac,getQ(s,ac)+alpha*(1-getQ(s,ac)));
+      return 1-turn; // winner
+    }
+    turn=1-turn;
+  }
+}
+
+function startTraining(){
+  totalSticks=+document.getElementById('sticksSel').value;
+  maxTake=+document.getElementById('maxTakeSel').value;
+  const episodes=+document.getElementById('epSel').value;
+  Q={};trained=false;
+  document.getElementById('trainBtn').disabled=true;
+  document.getElementById('trainProg').style.display='block';
+  document.getElementById('trainDone').style.display='none';
+  document.getElementById('stMax').textContent=episodes;
+  renderQHeaders();
+
+  const alpha=0.5;let done=0;
+  const speedMap={normal:{batch:1,delay:120},fast:{batch:3,delay:60}};
+  const spd=speedMap[document.getElementById('speedSel').value]||speedMap.normal;
+  function run(){
+    for(let i=0;i<spd.batch&&done<episodes;i++,done++){
+      const eps=Math.max(0.08,1-done/(episodes*1.2));
+      trainEpisode(eps,alpha);
+    }
+    const pct=done/episodes*100;
+    const eps=Math.min(100,Math.max(5,Math.round((1-done/(episodes*0.7))*100)));
+    const expl=100-eps;
+    document.getElementById('pbFill').style.width=pct+'%';
+    document.getElementById('stEp').textContent=done;
+    document.getElementById('stEps').textContent=eps;
+    document.getElementById('stExpl').textContent=expl;
+    renderQTable(-1);
+    if(done<episodes){setTimeout(run,spd.delay);return;}
+    // eval vs random – alternate who starts so position bias cancels out
+    let wins=0;
+    for(let t=0;t<300;t++){
+      let s=totalSticks;
+      // Even rounds: AI first (losing pos for 9). Odd rounds: AI second (winning pos for 9).
+      let aiTurn=t%2===0?0:1, turn=0;
+      while(s>0){
+        const a=(turn===aiTurn)?bestAct(s):(()=>{const acts=validActs(s);return acts[Math.floor(Math.random()*acts.length)];})();
+        s-=a;if(s===0){if(turn===aiTurn)wins++;break;}turn=1-turn;
+      }
+    }
+    trained=true;
+    document.getElementById('trainBtn').disabled=false;
+    document.getElementById('trainDone').style.display='block';
+    document.getElementById('tabPlay').classList.remove('locked');
+    renderQTable(-1);
+    updateQInfo();
+  }
+  run();
+}
+
+// ── Q-TABLE RENDER ──
+function renderQHeaders(){
+  const wrap=document.getElementById('qhdrRow');
+  const cols=['38px',...Array.from({length:maxTake},()=>'1fr')].join(' ');
+  wrap.style.gridTemplateColumns=cols;
+  wrap.innerHTML='<div></div>';
+  for(let a=1;a<=maxTake;a++){
+    const d=document.createElement('div');
+    d.className='qhdr';d.textContent='Ta '+a;
+    wrap.appendChild(d);
+  }
+}
+
+function renderQTable(hlState){
+  const wrap=document.getElementById('qtable');
+  wrap.innerHTML='';
+  const cols=['38px',...Array.from({length:maxTake},()=>'1fr')].join(' ');
+  for(let s=totalSticks;s>=1;s--){
+    const best=validActs(s).reduce((b,a)=>getQ(s,a)>getQ(s,b)?a:b,1);
+    const row=document.createElement('div');
+    row.className='qrow'+(s===hlState?' cur':'');
+    row.id='qr'+s;
+    row.style.gridTemplateColumns=cols;
+    const st=document.createElement('div');
+    st.className='qst';st.textContent=s+'🪵';
+    row.appendChild(st);
+    for(let a=1;a<=maxTake;a++){
+      const cell=document.createElement('div');
+      const ok=a<=s;
+      cell.className='qcell'+(ok&&a===best?' best':'')+(ok?'':' dis');
+      const v=getQ(s,a);
+      const bg=document.createElement('div');bg.className='qbg';
+      if(ok){
+        if(v>0.01) bg.style.background=`rgba(61,214,140,${Math.min(0.75,v*0.55+0.1)})`;
+        else if(v<-0.01) bg.style.background=`rgba(240,82,82,${Math.min(0.75,Math.abs(v)*0.55+0.1)})`;
+        else bg.style.background='rgba(74,124,220,0.07)';
+      }
+      cell.appendChild(bg);
+      const vd=document.createElement('div');vd.className='qval';
+      vd.textContent=ok?v.toFixed(2):'–';
+      cell.appendChild(vd);
+      row.appendChild(cell);
+    }
+    wrap.appendChild(row);
+  }
+}
+
+function updateQInfo(){
+  const wins=[];
+  for(let s=1;s<=totalSticks;s++){
+    const a=bestAct(s);
+    if(a!==null&&(s-a)%(maxTake+1)===0)wins.push(s+'→ta '+a);
+  }
+  document.getElementById('qinfo').innerHTML=
+    `<strong>AI:ns inlärda strategi</strong><br>
+    Hemligheten: lämna alltid ett antal pinnar som är delbart med <strong>${maxTake+1}</strong> till motståndaren.<br><br>
+    Drag AI:n lärt sig: <span style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:0.95em">${wins.slice(0,9).join(', ')}</span><br><br>
+    Ser du att guldramarna följer det mönstret?`;
+}
+
+// ── GAME ──
+function newGame(){
+  totalSticks=+document.getElementById('sticksSel').value;
+  maxTake=+document.getElementById('maxTakeSel').value;
+  gameSticks=totalSticks;gameOver=false;scG++;
+  document.getElementById('scG').textContent=scG;
+  document.getElementById('rbanner').classList.remove('show');
+  document.getElementById('thinking').style.display='none';
+  const who=document.getElementById('whoFirst').value;
+  humanTurn=who==='random'?Math.random()<0.5:who==='human';
+  renderSticks();renderTakeBtns();hlQRow(gameSticks);
+  if(humanTurn) setStatus('🎯',`<strong>Din tur!</strong> ${gameSticks} pinnar kvar. Ta 1–${maxTake}. Den som tar den <strong>sista</strong> pinnen förlorar.`);
+  else{setStatus('🤖','AI:n börjar...');setTimeout(aiTurn,800);}
+}
+
+function renderSticks(){
+  const row=document.getElementById('sticksRow');
+  row.innerHTML='';
+  for(let i=0;i<totalSticks;i++){
+    const s=document.createElement('div');
+    s.className='stick'+(i>=gameSticks?' gone':'');
+    s.id='st'+i;row.appendChild(s);
+  }
+  document.getElementById('scnt').textContent=gameSticks+' pinnar kvar';
+}
+
+function renderTakeBtns(){
+  const w=document.getElementById('takeBtns');w.innerHTML='';
+  for(let i=1;i<=maxTake;i++){
+    const b=document.createElement('button');
+    b.className='tbtn';b.textContent='Ta '+i;
+    b.disabled=!humanTurn||gameOver||i>gameSticks;
+    const n=i;b.onclick=()=>humanTake(n);
+    w.appendChild(b);
+  }
+}
+
+function humanTake(n){
+  if(!humanTurn||gameOver||n>gameSticks)return;
+  animTake(n,()=>{
+    gameSticks-=n;renderSticks();hlQRow(gameSticks);
+    if(gameSticks===0){endGame(false);}
+    else{humanTurn=false;renderTakeBtns();setStatus('🤖',`Du tog ${n}. <strong>AI:ns tur…</strong>`);setTimeout(aiTurn,650);}
+  });
+}
+
+function aiTurn(){
+  if(gameOver)return;
+  document.getElementById('thinking').style.display='flex';
+  setTimeout(()=>{
+    document.getElementById('thinking').style.display='none';
+    const a=bestAct(gameSticks);
+    if(!a){endGame(true);return;}
+    flashCell(gameSticks,a);
+    animTake(a,()=>{
+      gameSticks-=a;renderSticks();hlQRow(gameSticks);
+      if(gameSticks===0){endGame(true);}
+      else{humanTurn=true;renderTakeBtns();setStatus('🎯',`AI tog ${a}. <strong>Din tur</strong> – ${gameSticks} pinnar kvar.`);}
+    });
+  },550);
+}
+
+function animTake(n,cb){
+  const els=Array.from(document.querySelectorAll('.stick:not(.gone)')).slice(-n);
+  els.forEach(e=>e.classList.add('sel'));
+  setTimeout(()=>{els.forEach(e=>{e.classList.remove('sel');e.classList.add('gone');});setTimeout(cb,220);},320);
+}
+
+function endGame(humanWon){
+  gameOver=true;renderTakeBtns();
+  if(humanWon){scH++;document.getElementById('scH').textContent=scH;document.getElementById('rEmoji').textContent='🏆';document.getElementById('rTitle').textContent='Du vann!';document.getElementById('rSub').textContent='AI:n tog den sista pinnen.';}
+  else{scA++;document.getElementById('scA').textContent=scA;document.getElementById('rEmoji').textContent='🤖';document.getElementById('rTitle').textContent='AI:n vann!';document.getElementById('rSub').textContent='Du tog den sista pinnen. Försök igen!';}
+  document.getElementById('rbanner').classList.add('show');
+  hlQRow(-1);
+}
+
+function setStatus(icon,html){document.getElementById('gStatus').innerHTML=`<span class="si">${icon}</span><div class="st">${html}</div>`;}
+
+function hlQRow(s){
+  document.querySelectorAll('.qrow').forEach(r=>r.classList.remove('cur'));
+  if(s>0){const r=document.getElementById('qr'+s);if(r)r.classList.add('cur');}
+}
+
+function flashCell(s,a){
+  const row=document.getElementById('qr'+s);if(!row)return;
+  const cells=row.querySelectorAll('.qcell');const c=cells[a-1];
+  if(c){c.style.transform='scale(1.18)';c.style.transition='transform 0.18s';setTimeout(()=>{c.style.transform='';},380);}
+}
+
+// ── PHASES ──
+function goPhase(p){
+  if(p==='play'&&!trained)return;
+  curPhase=p;
+  document.getElementById('trainPhase').style.display=p==='train'?'block':'none';
+  document.getElementById('playPhase').style.display=p==='play'?'block':'none';
+  document.getElementById('tabTrain').className='tab'+(p==='train'?' active':trained?' done':'');
+  document.getElementById('tabPlay').className='tab'+(p==='play'?' active':'')+(!trained?' locked':'');
+  if(p==='play'){
+    scH=0;scA=0;scG=0;
+    ['scH','scA','scG'].forEach(id=>document.getElementById(id).textContent='0');
+    document.getElementById('rbanner').classList.remove('show');
+    gameOver=true;renderTakeBtns();renderSticks();hlQRow(-1);
+  }
+}
+
+function onSettingsChange(){
+  if(trained){
+    trained=false;Q={};
+    document.getElementById('trainDone').style.display='none';
+    document.getElementById('tabPlay').classList.add('locked');
+    document.getElementById('pbFill').style.width='0%';
+    document.getElementById('trainProg').style.display='none';
+    if(curPhase==='play')goPhase('train');
+  }
+  totalSticks=+document.getElementById('sticksSel').value;
+  maxTake=+document.getElementById('maxTakeSel').value;
+  renderQHeaders();renderQTable(-1);
+}
+
+
+function toggleInfo(){
+  const btn=document.getElementById('infoToggle');
+  const body=document.getElementById('infoBody');
+  btn.classList.toggle('open');
+  body.classList.toggle('show');
+  const isOpen=body.classList.contains('show');
+  document.getElementById('infoBtnText').textContent=isOpen?'💡 Dölj förklaring':'💡 Hur fungerar förstärkningsinlärning?';
+}
+function toggleRules(){
+  const btn=document.getElementById('rulesToggle');
+  const body=document.getElementById('rulesBody');
+  btn.classList.toggle('open');
+  body.classList.toggle('show');
+  const isOpen=body.classList.contains('show');
+  document.getElementById('rulesBtnText').textContent=isOpen?'📖 Dölj reglerna för NIM':'📖 Visa reglerna för NIM';
+}
+</script>
+</body>
+</html>
