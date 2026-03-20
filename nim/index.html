@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sv">
 <head>
@@ -78,7 +79,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .qbg{position:absolute;inset:0;border-radius:5px;transition:background 0.35s,opacity 0.35s;}
 .qval{position:relative;z-index:1;}
 .qcell.dis{opacity:0.15;}
-.qcell.best{outline:3px solid var(--accent);outline-offset:-3px;box-shadow:0 0 8px rgba(232,197,71,0.5);}
+.qcell.best{outline:3px solid var(--accent);outline-offset:-2px;background:rgba(232,197,71,0.25) !important;box-shadow:inset 0 0 0 2px rgba(232,197,71,0.6),0 0 10px rgba(232,197,71,0.4);}
 .qrow.cur .qcell.best{outline-color:var(--accent2);}
 .legend{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
 .li{display:flex;align-items:center;gap:4px;font-size:0.67em;color:var(--dim);}
@@ -169,6 +170,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
           <option value="50">50 spel</option>
           <option value="150" selected>150 spel</option>
           <option value="500">500 spel</option>
+          <option value="1000">1000 spel</option>
         </select>
       </div>
       <div class="row"><label>Hastighet</label>
@@ -184,7 +186,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         <div class="tstat">Utforskar: <span id="stEps">100</span>% &nbsp;|&nbsp; Utnyttjar: <span id="stExpl">0</span>%</div>
       </div>
       <div id="trainDone" style="display:none">
-        <div class="tstat" style="margin-bottom:8px">✅ Träningen klar!</div>
+        <div class="tstat" style="margin-bottom:8px"><span id="trainDoneMsg">✅ Träningen klar!</span></div>
         <button class="btn grn" onclick="goPhase('play')">Spela mot AI:n →</button>
       </div>
       <div class="nim-rules" style="margin-top:0">
@@ -285,22 +287,42 @@ function startTraining(){
   document.getElementById('stMax').textContent=episodes;
   renderQHeaders();
 
-  const alpha=0.5;let done=0;
+  const alpha=0.07;let done=0,convergenceCount=0;
   const speedMap={normal:{batch:1,delay:120},fast:{batch:3,delay:60}};
   const spd=speedMap[document.getElementById('speedSel').value]||speedMap.normal;
   function run(){
     for(let i=0;i<spd.batch&&done<episodes;i++,done++){
-      const eps=Math.max(0.08,1-done/(episodes*1.2));
+      const eps=Math.max(0.05,1-done/Math.max(episodes*0.7,200));
       trainEpisode(eps,alpha);
     }
     const pct=done/episodes*100;
-    const eps=Math.min(100,Math.max(5,Math.round((1-done/(episodes*0.7))*100)));
+    const eps=Math.min(100,Math.max(5,Math.round((1-done/Math.max(episodes*0.7,200))*100)));
     const expl=100-eps;
     document.getElementById('pbFill').style.width=pct+'%';
     document.getElementById('stEp').textContent=done;
     document.getElementById('stEps').textContent=eps;
     document.getElementById('stExpl').textContent=expl;
     renderQTable(-1);
+    // Early stopping: every 10 episodes, check if correct moves have positive Q
+    // and incorrect moves have negative Q in all winning positions
+    if(done>=50&&done%10===0){
+      let perfect=true;
+      for(let s=2;s<=totalSticks;s++){
+        const winningMove=validActs(s).find(a=>a<s&&(s-a)%(maxTake+1)===1);
+        if(winningMove!==undefined){
+          // Winning move must be positive, all others negative
+          if(getQ(s,winningMove)<=0.80){perfect=false;break;}
+          const allOthersNeg=validActs(s).filter(a=>a!==winningMove).every(a=>getQ(s,a)<0);
+          if(!allOthersNeg){perfect=false;break;}
+        }
+      }
+      if(perfect){
+        convergenceCount++;
+        if(convergenceCount>=3){done=episodes;}
+      } else {
+        convergenceCount=0;
+      }
+    }
     if(done<episodes){setTimeout(run,spd.delay);return;}
     // eval vs random – alternate who starts so position bias cancels out
     let wins=0;
@@ -316,6 +338,7 @@ function startTraining(){
     trained=true;
     document.getElementById('trainBtn').disabled=false;
     document.getElementById('trainDone').style.display='block';
+    document.getElementById('trainDoneMsg').textContent=done<+document.getElementById('epSel').value?`✅ Konvergerade efter ${done} spel!`:'✅ Träningen klar!';
     document.getElementById('tabPlay').classList.remove('locked');
     renderQTable(-1);
     updateQInfo();
@@ -352,7 +375,7 @@ function renderQTable(hlState){
     for(let a=1;a<=maxTake;a++){
       const cell=document.createElement('div');
       const ok=a<=s;
-      cell.className='qcell'+(ok&&a===best?' best':'')+(ok?'':' dis');
+      cell.className='qcell'+(ok&&a===best&&getQ(s,best)>0.80?' best':'')+(ok?'':' dis');
       const v=getQ(s,a);
       const bg=document.createElement('div');bg.className='qbg';
       if(ok){
@@ -372,15 +395,14 @@ function renderQTable(hlState){
 
 function updateQInfo(){
   const wins=[];
-  for(let s=1;s<=totalSticks;s++){
+  for(let s=totalSticks;s>=1;s--){
     const a=bestAct(s);
-    const rem=s-a;
-    // Only show genuinely winning moves: leaves opponent in a losing position (rem % (maxTake+1) === 0 and rem > 0)
-    if(a!==null&&rem>0&&rem%(maxTake+1)===0)wins.push(s+'→ta '+a);
+    // Show any state where the best action has a positive Q-value (green cell)
+    if(a!==null&&getQ(s,a)>0.80)wins.push(s+' pinnar kvar → ta '+a);
   }
   document.getElementById('qinfo').innerHTML=
     `<strong>AI:ns inlärda strategi</strong><br>
-    Hemligheten: lämna alltid ett antal pinnar som är delbart med <strong>${maxTake+1}</strong> till motståndaren.<br><br>
+    Hemligheten: lämna alltid ett antal pinnar som ger <strong>rest 1</strong> vid division med ${maxTake+1} – dvs. ${Array.from({length:4},(_,i)=>1+i*(maxTake+1)).filter(v=>v<=totalSticks).join(", ")}... – till motståndaren.<br><br>
     Exempel på drag AI:n lärt sig: <span style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:0.95em">${wins.slice(0,8).join(', ')}</span><br><br>
     Ser du att guldramarna följer det mönstret?`;
 }
@@ -502,6 +524,7 @@ function onSettingsChange(){
   totalSticks=+document.getElementById('sticksSel').value;
   maxTake=+document.getElementById('maxTakeSel').value;
   renderQHeaders();renderQTable(-1);
+  document.getElementById('qinfo').textContent='Träna AI-systemet för att se den inlärda strategin här.';
 }
 
 
