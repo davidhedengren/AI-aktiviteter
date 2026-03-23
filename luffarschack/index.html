@@ -49,7 +49,27 @@
       color: #fff;
       margin-bottom: 16px;
       text-shadow: 0 0 30px rgba(77,128,255,.3);
+      text-align: center;
     }
+
+    /* ← AI-aktiviteter back link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75em;
+      font-weight: 700;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 10px;
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      background: var(--surface);
+      transition: 0.2s;
+      margin-bottom: 16px;
+      display: inline-flex;
+    }
+    .back-link:hover { color: var(--text); border-color: var(--muted); }
 
     #infoLabel {
       background: var(--surface);
@@ -146,6 +166,8 @@
   </style>
 </head>
 <body>
+
+<a class="back-link" href="/">← AI-aktiviteter</a>
 
 <h2>Luffarschack i partiellt observerbar miljö</h2>
 
