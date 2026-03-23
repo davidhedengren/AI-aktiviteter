@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="sv">
 <head>
@@ -52,7 +51,28 @@
     .header-container {
       text-align: center;
       margin-bottom: 20px;
+      position: relative;
     }
+
+    /* ← AI-aktiviteter back link */
+    .back-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75em;
+      font-weight: 700;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 10px;
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      background: var(--surface);
+      transition: 0.2s;
+    }
+    .back-link:hover { color: var(--text); border-color: var(--muted); }
 
     .header-container h1 {
       font-family: var(--font-serif);
@@ -299,6 +319,7 @@
 <body>
   <div class="page-container">
     <div class="header-container">
+      <a class="back-link" href="/">← AI-aktiviteter</a>
       <h1>Q-learning simulering</h1>
       <div id="intro">
         <p>
@@ -410,9 +431,6 @@
       return coinsCopy.map(c => c[0] + "_" + c[1]).join(";");
     }
 
-    // ============================================================
-    //  MAZE PRESETS
-    // ============================================================
     const MAZE_PRESETS = [
       {
         name: "Standardmiljö",
@@ -719,7 +737,6 @@ $$`;
         requestAnimationFrame((ts) => this.simulationLoop(ts));
       }
 
-      // ── LOAD PRESET ──
       loadPreset(idx) {
         if (this.running) { this.running = false; }
         if (this.playing) { this.playing = false; }
