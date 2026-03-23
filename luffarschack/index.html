@@ -1,355 +1,314 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8"/>
-  <title>Luffarschack i partiellt observerbar miljö</title>
-  <!-- Google tag (gtag.js) -->
+<meta charset="UTF-8"/>
+<title>Luffarschack i partiellt observerbar miljö</title>
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-ZDWXTZZBBR');
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-ZDWXTZZBBR');
 </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Fraunces:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg:        #060810;
-      --surface:   #0c1020;
-      --surface2:  #111728;
-      --border:    #1a2238;
-      --border2:   #253050;
-      --text:      #eaf0fc;
-      --muted:     #96a8c8;
-      --subtle:    #c8d6f0;
-      --accent:    #4d80ff;
-      --spam:      #ff6a35;
-      --ham:       #1de99b;
-      --font-mono: 'JetBrains Mono', monospace;
-      --font-serif: 'Fraunces', Georgia, serif;
-    }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Fraunces:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
 
-    body {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      background: var(--bg);
-      color: var(--text);
-      padding: 24px 28px 48px;
-      min-height: 100vh;
-    }
+<style>
+:root {
+--bg:#060810;
+--surface:#0c1020;
+--surface2:#111728;
+--border:#1a2238;
+--border2:#253050;
+--text:#eaf0fc;
+--muted:#96a8c8;
+--accent:#4d80ff;
+--spam:#ff6a35;
+--ham:#1de99b;
+--font-mono:'JetBrains Mono', monospace;
+--font-serif:'Fraunces', serif;
+}
 
-    h2 {
-      font-family: var(--font-serif);
-      font-weight: 400;
-      font-size: 22px;
-      color: #fff;
-      margin-bottom: 16px;
-      text-shadow: 0 0 30px rgba(77,128,255,.3);
-      text-align: center;
-    }
+*{box-sizing:border-box;margin:0;padding:0;}
 
-    /* ← AI-aktiviteter back link */
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.75em;
-      font-weight: 700;
-      color: var(--muted);
-      text-decoration: none;
-      padding: 6px 10px;
-      border: 1px solid var(--border2);
-      border-radius: 6px;
-      background: var(--surface);
-      transition: 0.2s;
-      margin-bottom: 16px;
-      display: inline-flex;
-    }
-    .back-link:hover { color: var(--text); border-color: var(--muted); }
+body{
+font-family:var(--font-mono);
+background:var(--bg);
+color:var(--text);
+display:flex;
+justify-content:center;
+padding:30px;
+}
 
-    #infoLabel {
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      padding: 8px 16px;
-      display: inline-block;
-      margin-bottom: 14px;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: .06em;
-      border-radius: 6px;
-    }
+.container{
+width:fit-content;
+display:flex;
+flex-direction:column;
+gap:12px;
+}
 
-    #gameContainer {
-      margin-top: 8px;
-      display: inline-block;
-      border: 1px solid var(--border2);
-      border-radius: 6px;
-      overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0,0,0,.4);
-      background: var(--surface2);
-    }
+.header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
 
-    .boardRow {
-      display: flex;
-    }
+h2{
+font-family:var(--font-serif);
+font-weight:400;
+font-size:22px;
+text-align:center;
+flex:1;
+}
 
-    .boardCell {
-      width: 34px;
-      height: 34px;
-      margin: 1px;
-      font-size: 16px;
-      font-weight: 700;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      user-select: none;
-      transition: background .15s;
-    }
+.back-link{
+font-size:12px;
+padding:6px 10px;
+border:1px solid var(--border2);
+border-radius:6px;
+background:var(--surface);
+text-decoration:none;
+color:var(--muted);
+}
+.back-link:hover{color:var(--text);}
 
-    .boardCell:hover {
-      background: var(--surface2);
-      border-color: var(--accent);
-    }
+#gameContainer{
+border:1px solid var(--border2);
+border-radius:6px;
+overflow:hidden;
+background:var(--surface2);
+}
 
-    .hiddenHint {
-      color: var(--border2);
-    }
+.boardRow{display:flex;}
 
-    .controls-area {
-      margin-top: 14px;
-    }
+.boardCell{
+width:34px;
+height:34px;
+margin:1px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:700;
+background:var(--surface);
+border:1px solid var(--border);
+cursor:pointer;
+}
 
-    .controls-area button {
-      padding: 8px 20px;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background .2s, box-shadow .2s;
-    }
+.boardCell:hover{border-color:var(--accent);}
+.hiddenHint{color:var(--border2);}
 
-    .controls-area button:hover {
-      background: #6698ff;
-      box-shadow: 0 0 14px rgba(77,128,255,.3);
-    }
+#infoLabel{
+text-align:center;
+font-weight:700;
+}
 
-    #centerMessage {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      box-shadow: 0 8px 32px rgba(0,0,0,.6);
-      padding: 20px 40px;
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: .06em;
-      color: var(--text);
-      text-align: center;
-      border-radius: 10px;
-      z-index: 9999;
-      display: none;
-    }
-  </style>
+.controls-area{
+display:flex;
+justify-content:flex-start;
+}
+
+.controls-area button{
+padding:8px 20px;
+background:var(--accent);
+color:#fff;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+#centerMessage{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:var(--surface);
+border:1px solid var(--border2);
+padding:20px 40px;
+font-weight:700;
+display:none;
+z-index:999;
+}
+</style>
 </head>
+
 <body>
 
+<div class="container">
+
+<div class="header">
 <a class="back-link" href="/">← AI-aktiviteter</a>
-
-<h2>Luffarschack i partiellt observerbar miljö</h2>
-
-<div id="infoLabel">Spelare X's tur</div>
+<h2>Luffarschack</h2>
+<div style="width:110px;"></div>
+</div>
 
 <div id="gameContainer"></div>
 
+<div id="infoLabel">Spelare X's tur</div>
+
 <div class="controls-area">
-  <button onclick="restartGame()">Starta om</button>
+<button onclick="restartGame()">Starta om</button>
 </div>
 
-<div id="centerMessage">Det är X:s tur</div>
+</div>
+
+<div id="centerMessage"></div>
 
 <script>
-const BOARD_SIZE = 20;
-const HIDDEN_PERCENTAGE = 0.20;
-const WIN_CONDITION = 5;
+const BOARD_SIZE=20;
+const HIDDEN_PERCENTAGE=0.20;
+const WIN_CONDITION=5;
 
-let currentPlayer = 'X';
-let board = [];
-let hiddenPositions = new Set();
-let gameContainer = document.getElementById("gameContainer");
-let infoLabel = document.getElementById("infoLabel");
-let centerMessage = document.getElementById("centerMessage");
-let cells = {};
-let gameOver = false;
+let currentPlayer='X';
+let board=[];
+let hiddenPositions=new Set();
+let gameContainer=document.getElementById("gameContainer");
+let infoLabel=document.getElementById("infoLabel");
+let centerMessage=document.getElementById("centerMessage");
+let cells={};
+let gameOver=false;
 
 initGame();
 
 function restartGame(){
-  gameOver = false;
-  initGame();
+gameOver=false;
+initGame();
 }
 
 function initGame(){
-  board = [];
-  for(let i=0; i<BOARD_SIZE; i++){
-    let row = [];
-    for(let j=0; j<BOARD_SIZE; j++){
-      row.push('');
-    }
-    board.push(row);
-  }
+board=[];
+for(let i=0;i<BOARD_SIZE;i++){
+let row=[];
+for(let j=0;j<BOARD_SIZE;j++){row.push('');}
+board.push(row);
+}
 
-  const numHidden = Math.floor(BOARD_SIZE * BOARD_SIZE * HIDDEN_PERCENTAGE);
+const numHidden=Math.floor(BOARD_SIZE*BOARD_SIZE*HIDDEN_PERCENTAGE);
 
-  let allPositions = [];
-  for(let i=0; i<BOARD_SIZE; i++){
-    for(let j=0; j<BOARD_SIZE; j++){
-      allPositions.push([i,j]);
-    }
-  }
-  shuffleArray(allPositions);
-  hiddenPositions.clear();
-  for(let k=0; k<numHidden; k++){
-    let [r,c] = allPositions[k];
-    hiddenPositions.add(posKey(r,c));
-  }
+let allPositions=[];
+for(let i=0;i<BOARD_SIZE;i++){
+for(let j=0;j<BOARD_SIZE;j++){
+allPositions.push([i,j]);
+}}
+shuffleArray(allPositions);
 
-  gameContainer.innerHTML = "";
-  cells = {};
+hiddenPositions.clear();
+for(let k=0;k<numHidden;k++){
+let[r,c]=allPositions[k];
+hiddenPositions.add(posKey(r,c));
+}
 
-  currentPlayer = 'X';
-  infoLabel.textContent = `Spelare ${currentPlayer}'s tur`;
-  infoLabel.style.color = getPlayerColor();
-  gameOver = false;
+gameContainer.innerHTML="";
+cells={};
 
-  for(let i=0; i<BOARD_SIZE; i++){
-    let rowDiv = document.createElement("div");
-    rowDiv.className = "boardRow";
-    for(let j=0; j<BOARD_SIZE; j++){
-      let cellDiv = document.createElement("div");
-      cellDiv.className = "boardCell";
+currentPlayer='X';
+infoLabel.textContent=`Spelare ${currentPlayer}'s tur`;
+infoLabel.style.color=getPlayerColor();
+gameOver=false;
 
-      if(hiddenPositions.has(posKey(i,j))){
-        cellDiv.textContent = "?";
-        cellDiv.classList.add("hiddenHint");
-      } else {
-        cellDiv.textContent = "";
-      }
+for(let i=0;i<BOARD_SIZE;i++){
+let rowDiv=document.createElement("div");
+rowDiv.className="boardRow";
+for(let j=0;j<BOARD_SIZE;j++){
+let cellDiv=document.createElement("div");
+cellDiv.className="boardCell";
 
-      cellDiv.addEventListener("click", ()=>onCellClick(i,j));
-      rowDiv.appendChild(cellDiv);
-      cells[posKey(i,j)] = cellDiv;
-    }
-    gameContainer.appendChild(rowDiv);
-  }
+if(hiddenPositions.has(posKey(i,j))){
+cellDiv.textContent="?";
+cellDiv.classList.add("hiddenHint");
+}
+
+cellDiv.addEventListener("click",()=>onCellClick(i,j));
+rowDiv.appendChild(cellDiv);
+cells[posKey(i,j)]=cellDiv;
+}
+gameContainer.appendChild(rowDiv);
+}
 }
 
 function shuffleArray(arr){
-  for(let i=arr.length-1; i>0; i--){
-    let r = Math.floor(Math.random()*(i+1));
-    [arr[i], arr[r]] = [arr[r], arr[i]];
-  }
+for(let i=arr.length-1;i>0;i--){
+let r=Math.floor(Math.random()*(i+1));
+[arr[i],arr[r]]=[arr[r],arr[i]];
+}
 }
 
-function posKey(r,c){
-  return `${r},${c}`;
+function posKey(r,c){return `${r},${c}`;}
+
+function onCellClick(row,col){
+if(gameOver)return;
+
+if(hiddenPositions.has(posKey(row,col))){
+if(board[row][col]===''){board[row][col]=currentPlayer;}
+switchPlayer();
+}else{
+if(board[row][col]===''){
+board[row][col]=currentPlayer;
+cells[posKey(row,col)].textContent=currentPlayer;
+cells[posKey(row,col)].style.color=getPlayerColor();
+
+if(checkWinner(currentPlayer)){
+revealHiddenPositions();
+alert(`Spelare ${currentPlayer} vinner!`);
+gameOver=true;
+return;
 }
-
-function onCellClick(row, col){
-  if(gameOver) return;
-
-  if(hiddenPositions.has(posKey(row,col))){
-    if(board[row][col] === ''){
-      board[row][col] = currentPlayer;
-    }
-    switchPlayer();
-  } else {
-    if(board[row][col] === ''){
-      board[row][col] = currentPlayer;
-      cells[posKey(row,col)].textContent = currentPlayer;
-      cells[posKey(row,col)].style.color = getPlayerColor();
-
-      if(checkWinner(currentPlayer)){
-        revealHiddenPositions();
-        alert(`Spelare ${currentPlayer} vinner!`);
-        gameOver = true;
-        return;
-      }
-      switchPlayer();
-    } else {
-      alert("Ogiltigt drag. Den här rutan är redan använd.");
-    }
-  }
+switchPlayer();
+}
+}
 }
 
 function switchPlayer(){
-  currentPlayer = (currentPlayer==='X'? 'O': 'X');
-  infoLabel.textContent = `Spelare ${currentPlayer}'s tur`;
-  infoLabel.style.color = getPlayerColor();
-  showCenterMessage(`Det är ${currentPlayer}'s tur!`);
+currentPlayer=(currentPlayer==='X'?'O':'X');
+infoLabel.textContent=`Spelare ${currentPlayer}'s tur`;
+infoLabel.style.color=getPlayerColor();
+showCenterMessage(`Det är ${currentPlayer}'s tur`);
 }
 
 function getPlayerColor(){
-  return currentPlayer==='X' ? 'var(--spam)' : 'var(--ham)';
+return currentPlayer==='X'?'var(--spam)':'var(--ham)';
 }
 
 function checkWinner(player){
-  for(let i=0; i<BOARD_SIZE; i++){
-    for(let j=0; j<BOARD_SIZE; j++){
-      if(checkDirection(player,i,j,1,0) ||
-         checkDirection(player,i,j,0,1) ||
-         checkDirection(player,i,j,1,1) ||
-         checkDirection(player,i,j,1,-1)){
-        return true;
-      }
-    }
-  }
-  return false;
+for(let i=0;i<BOARD_SIZE;i++){
+for(let j=0;j<BOARD_SIZE;j++){
+if(checkDirection(player,i,j,1,0)||
+checkDirection(player,i,j,0,1)||
+checkDirection(player,i,j,1,1)||
+checkDirection(player,i,j,1,-1)){
+return true;
+}}}
+return false;
 }
 
-function checkDirection(player, x, y, dx, dy){
-  let count = 0;
-  for(let step=0; step<WIN_CONDITION; step++){
-    let nx = x + step*dx;
-    let ny = y + step*dy;
-    if(nx<0 || nx>=BOARD_SIZE || ny<0 || ny>=BOARD_SIZE) break;
-    if(board[nx][ny] === player) count++;
-    else break;
-  }
-  return (count===WIN_CONDITION);
+function checkDirection(player,x,y,dx,dy){
+let count=0;
+for(let step=0;step<WIN_CONDITION;step++){
+let nx=x+step*dx;
+let ny=y+step*dy;
+if(nx<0||nx>=BOARD_SIZE||ny<0||ny>=BOARD_SIZE)break;
+if(board[nx][ny]===player)count++;
+else break;
+}
+return(count===WIN_CONDITION);
 }
 
 function revealHiddenPositions(){
-  hiddenPositions.forEach(key=>{
-    let [r,c] = key.split(',').map(Number);
-    let val = board[r][c];
-    if(val==='') val='-';
-    let cellDiv = cells[key];
-    cellDiv.textContent = val;
-    cellDiv.style.color = val === 'X' ? 'var(--spam)' : val === 'O' ? 'var(--ham)' : 'var(--muted)';
-    cellDiv.classList.remove("hiddenHint");
-  });
+hiddenPositions.forEach(key=>{
+let[r,c]=key.split(',').map(Number);
+let val=board[r][c];
+if(val==='')val='-';
+let cellDiv=cells[key];
+cellDiv.textContent=val;
+cellDiv.style.color=val==='X'?'var(--spam)':val==='O'?'var(--ham)':'var(--muted)';
+cellDiv.classList.remove("hiddenHint");
+});
 }
 
 function showCenterMessage(msg){
-  centerMessage.textContent = msg;
-  centerMessage.style.color = getPlayerColor();
-  centerMessage.style.borderColor = getPlayerColor() === 'var(--spam)' ? 'rgba(255,106,53,.4)' : 'rgba(29,233,155,.4)';
-  centerMessage.style.display = "block";
-  setTimeout(()=>{ centerMessage.style.display = "none"; }, 1000);
+centerMessage.textContent=msg;
+centerMessage.style.display="block";
+setTimeout(()=>{centerMessage.style.display="none";},1000);
 }
 </script>
 
