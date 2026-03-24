@@ -46,7 +46,22 @@
     line-height: 1.6;
     min-height: 100vh;
   }
-
+/* ── BACK LINK ── */
+  .back-link {
+    position: absolute;
+    top: 50%; left: 16px;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 700;
+    color: var(--muted); text-decoration: none;
+    padding: 6px 10px;
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    background: var(--surface);
+    transition: 0.2s; white-space: nowrap; z-index: 2;
+  }
+  .back-link:hover { color: var(--text); border-color: var(--muted); }
   /* ── HEADER ── */
   header {
     background: linear-gradient(135deg, #0c1020 0%, #10162a 100%);
