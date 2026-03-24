@@ -112,8 +112,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="phase-bar" id="phaseBar"></div>
     <div><div class="sec-t">Scenario</div>
       <select class="scenario-sel" id="scenarioSel" onchange="setScenario(this.value)">
-        <option value="calc" selected>🧮 Beräkningsläge</option>
-        <option value="exam">📝 Klarar eleven provet?</option>
+        <option value="calc">🧮 Beräkningsläge</option>
+        <option value="exam" selected>📝 Klarar eleven provet?</option>
         <option value="gym">💪 Blir träningen effektiv?</option>
         <option value="abstract">🔬 Experimentläge</option>
       </select>
@@ -192,7 +192,7 @@ const ABSVARS=[
   {key:'x4',name:'x₄',desc:'',unit:'',min:0,max:1,def:20,weight:0.05}
 ];
 
-let curSc='calc';
+let curSc='exam';
 let varEnabled=[true,true,false,false];
 let layers=[2,3,1],W=[],B=[],vals=[];
 let stepQueue=[],stepIdx=0,hlNeuron=null,hlEdges=[];
