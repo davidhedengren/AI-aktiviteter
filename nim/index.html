@@ -198,7 +198,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
           <option value="150" selected>150 spel</option>
           <option value="500">500 spel</option>
           <option value="1000">1000 spel</option>
-          <option value="2000">2000 spel</option>
         </select>
       </div>
       <div class="row"><label>Hastighet</label>
@@ -359,18 +358,18 @@ function startTraining(){
   document.getElementById('stMax').textContent=episodes;
   renderQHeaders();
 
-  const alpha=0.02;let done=0,convergenceCount=0;
+  const alpha=0.03;let done=0,convergenceCount=0;
   const speedMap={normal:{batch:1,delay:120},fast:{batch:3,delay:60}};
   const spd=speedMap[document.getElementById('speedSel').value]||speedMap.normal;
 
   function run(){
     if(trainPaused)return;
     for(let i=0;i<spd.batch&&done<episodes;i++,done++){
-      const eps=Math.max(0.05,1-done/Math.max(episodes*0.9,800));
+      const eps=Math.max(0.05,1-done/Math.max(episodes*0.7,200));
       trainEpisode(eps,alpha);
     }
     const pct=done/episodes*100;
-    const epsVal=Math.min(100,Math.max(5,Math.round((1-done/Math.max(episodes*0.9,800))*100)));
+    const epsVal=Math.min(100,Math.max(5,Math.round((1-done/Math.max(episodes*0.7,200))*100)));
     const expl=100-epsVal;
     document.getElementById('pbFill').style.width=pct+'%';
     document.getElementById('stEp').textContent=done;
@@ -414,7 +413,7 @@ function pauseTraining(){
 function resumeTraining(){
   const episodes=+document.getElementById('epSel').value;
   const done0=parseInt(document.getElementById('stEp').textContent);
-  const alpha=0.02;let done=done0,convergenceCount=0;
+  const alpha=0.03;let done=done0,convergenceCount=0;
   const speedMap={normal:{batch:1,delay:120},fast:{batch:3,delay:60}};
   const spd=speedMap[document.getElementById('speedSel').value]||speedMap.normal;
   trainPaused=false;
@@ -422,11 +421,11 @@ function resumeTraining(){
   function run(){
     if(trainPaused)return;
     for(let i=0;i<spd.batch&&done<episodes;i++,done++){
-      const eps=Math.max(0.05,1-done/Math.max(episodes*0.9,800));
+      const eps=Math.max(0.05,1-done/Math.max(episodes*0.7,200));
       trainEpisode(eps,alpha);
     }
     const pct=done/episodes*100;
-    const epsVal=Math.min(100,Math.max(5,Math.round((1-done/Math.max(episodes*0.9,800))*100)));
+    const epsVal=Math.min(100,Math.max(5,Math.round((1-done/Math.max(episodes*0.7,200))*100)));
     document.getElementById('pbFill').style.width=pct+'%';
     document.getElementById('stEp').textContent=done;
     document.getElementById('stEps').textContent=epsVal;
