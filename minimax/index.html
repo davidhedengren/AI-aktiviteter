@@ -120,10 +120,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .tt{position:fixed;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:7px 11px;font-size:0.77em;pointer-events:none;opacity:0;transition:opacity 0.12s;z-index:100;box-shadow:0 4px 16px rgba(0,0,0,0.5);max-width:210px;line-height:1.5;}
 .tt.show{opacity:1;}
 @media(max-width:920px){
-  .app{grid-template-columns:1fr;}
+  body{overflow-y:auto;}
+  .app{grid-template-columns:1fr;height:auto;}
   .ta{border-right:none;border-bottom:1px solid var(--border);}
   .cw{min-height:320px;}
-  .sb{max-height:55vh;overflow-y:auto;}
+  .sb{max-height:none;overflow-y:visible;height:auto;}
 }
 </style>
 </head>
