@@ -24,7 +24,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .turn-dot{width:12px;height:12px;border-radius:50%;transition:0.3s;}
 
 .board{display:grid;border:2px solid var(--grid);border-radius:6px;overflow:hidden;background:var(--grid);gap:2px;box-shadow:0 4px 30px rgba(0,0,0,0.5);}
-.cell{width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;cursor:pointer;transition:all 0.12s;position:relative;background:#0d1128;}
+.cell{width:46px;height:46px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;cursor:pointer;transition:all 0.12s;position:relative;background:#0d1128;}
 .cell:hover:not(.placed):not(.won):not(.revealed){background:rgba(77,128,255,0.12);}
 
 .cell.hidden-cell{background:#0f1535;border:1px solid rgba(77,128,255,0.15);}
@@ -118,7 +118,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div><strong>Dolda rutor</strong> – Randiga rutor är dolda. Du kan lägga din markör där, men du ser inte vad som finns under.</div></div>
       <div class="step"><div class="step-num">2</div><div><strong>Blinda drag</strong> – Lägger du på en dold ruta vet du inte om draget lyckades. Om rutan redan var tagen av motståndaren går draget förlorat – du tappar din tur utan att ha placerat något.</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Fem i rad vinner</strong> – Samma regler som vanligt. Men strategin förändras helt när du inte ser allt.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Fem i rad vinner</strong> – Samma regler som vanligt. Den som först placerar 5 i rad vinner.</div></div>
     </div>
     <p class="sub">Detta kallas <strong>partiell observerbarhet</strong> – agenten ser bara en del av miljöns tillstånd. Hur påverkar det din förmåga att fatta bra beslut?</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show');startGame()">Starta spelet →</button>
