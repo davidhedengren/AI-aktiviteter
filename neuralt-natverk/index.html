@@ -89,7 +89,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .data-modal-info{font-size:0.78em;color:var(--dim);margin-bottom:8px;line-height:1.4;}
 .data-modal-scroll{flex:1;overflow-y:auto;border:1px solid var(--border);border-radius:6px;}.data-modal-scroll::-webkit-scrollbar{width:4px;}.data-modal-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 .dtable-lg{width:100%;border-collapse:collapse;font-size:0.75em;}.dtable-lg th{position:sticky;top:0;background:var(--surface2);padding:5px 7px;text-align:left;color:var(--dim);font-weight:600;border-bottom:1px solid var(--border);white-space:nowrap;}.dtable-lg td{padding:4px 7px;border-bottom:1px solid rgba(30,38,66,0.3);font-family:'JetBrains Mono',monospace;font-size:0.92em;}.dtable-lg .pass{color:var(--green);font-weight:600;}.dtable-lg .fail{color:var(--red);font-weight:600;}
-@media(max-width:1000px){body{height:auto;overflow:auto;}.app{grid-template-columns:1fr;height:auto;}.lp{border-right:none;border-bottom:1px solid var(--border);}.center{min-height:420px;}.rp{max-height:none;}}
+@media(max-width:1000px){body{height:auto;overflow:auto;}.app{grid-template-columns:1fr;height:auto;}.lp{border-right:none;border-bottom:1px solid var(--border);}.center{min-height:420px;}.rp{max-height:none;}.hd{padding:10px 16px 8px;}.back-link{position:static;transform:none;margin-bottom:6px;}}
 </style>
 </head>
 <body>
@@ -356,11 +356,11 @@ function setPhase(p){phase=p;renderPhaseBar();
 
 function renderCtrl(){const el=document.getElementById('controlArea');
   if(isCalc()){
-    el.innerHTML=`<div class="bg"><button class="btn" onclick="stepBack()">◀</button><button class="btn pri" onclick="stepNeuron()">▶ Nästa</button><button class="btn" onclick="runAllAnim()">⏩ Alla</button><button class="btn dn" onclick="resetPass()">↺</button></div><div class="hint">Heltalsvärden och ReLU – alla beräkningar går att följa för hand.</div>`;
+    el.innerHTML=`<div class="bg"><button class="btn" onclick="stepBack()">◀</button><button class="btn grn" onclick="stepNeuron()">▶ Nästa</button><button class="btn" onclick="runAllAnim()">⏩ Alla</button><button class="btn dn" onclick="resetPass()">↺</button></div><div class="hint">Heltalsvärden och ReLU – alla beräkningar går att följa för hand.</div>`;
   }else if(phase==='train'){
     el.innerHTML=`<div class="bg"><button class="btn grn" onclick="startTraining()">🧠 Träna modellen</button></div><div class="hint">Nätverket lär sig vikterna genom att träna på data.</div>`;
   }else if(phase==='explore'){
-    el.innerHTML=`<div class="bg"><button class="btn" onclick="stepBack()">◀</button><button class="btn pri" onclick="stepNeuron()">▶ Nästa</button><button class="btn" onclick="runAllAnim()">⏩ Alla</button><button class="btn dn" onclick="resetPass()">↺</button></div><div class="hint">Stega genom nätverket. ◀ går bakåt.</div><div class="bg" style="margin-top:4px"><button class="btn" onclick="goPhase('predict')">Förutsäg →</button></div>`;
+    el.innerHTML=`<div class="bg"><button class="btn" onclick="stepBack()">◀</button><button class="btn grn" onclick="stepNeuron()">▶ Nästa</button><button class="btn" onclick="runAllAnim()">⏩ Alla</button><button class="btn dn" onclick="resetPass()">↺</button></div><div class="hint">Stega genom nätverket. ◀ går bakåt.</div><div class="bg" style="margin-top:4px"><button class="btn" onclick="goPhase('predict')">Förutsäg →</button></div>`;
   }else{
     el.innerHTML=`<div class="hint" style="margin-bottom:4px">Ändra indatavärdena – nätverkets svar uppdateras direkt!</div><div class="bg"><button class="btn" onclick="goPhase('explore')">← Utforska</button><button class="btn" onclick="fullReset()">🔄 Börja om</button></div>`;}}
 
