@@ -65,6 +65,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .btn{font-family:'DM Sans',sans-serif;padding:7px 13px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);color:var(--text);font-size:0.81em;font-weight:600;cursor:pointer;transition:0.2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
 .btn:hover{border-color:var(--accent);background:rgba(91,141,239,0.08);}
 .btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;}
+.btn.go{background:var(--green);border-color:var(--green);color:#fff;}
+.btn.go:hover{background:#2bb84e;}
 .btn.pri:hover{background:#4a7de0;}
 .btn.dn{border-color:var(--red);color:var(--red);}
 .btn.dn:hover{background:rgba(239,91,91,0.1);}
@@ -125,6 +127,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   .ta{border-right:none;border-bottom:1px solid var(--border);}
   .cw{min-height:320px;}
   .sb{max-height:none;overflow-y:visible;height:auto;}
+  .hd{padding:10px 16px 8px;padding-left:16px;}
+  .back-link{position:static;transform:none;margin-bottom:6px;}
 }
 </style>
 </head>
@@ -171,7 +175,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
       <div class="st">Kontroller</div>
       <div class="bg">
         <button class="btn pri" id="bStep" onclick="doStep()">▶ Steg</button>
-        <button class="btn" id="bPlay" onclick="togglePlay()">⏵ Starta sökning</button>
+        <button class="btn go" id="bPlay" onclick="togglePlay()">⏵ Starta sökning</button>
         <button class="btn" id="bBack" onclick="doBack()">◀ Bakåt</button>
         <button class="btn dn" onclick="doReset()">↺ Nollställ</button>
       </div>
@@ -461,8 +465,8 @@ function doReset(){if(playing)togglePlay();curStep=-1;hist=[];for(const n of all
 function togglePlay(){
   if(mode==='build')return;
   playing=!playing;const b=document.getElementById('bPlay');
-  if(playing){b.textContent='⏸ Pausa';b.classList.add('pri');startPlayTimer();}
-  else{b.textContent='⏵ Starta sökning';b.classList.remove('pri');clearInterval(playTmr);}
+  if(playing){b.textContent='⏸ Pausa';b.classList.remove('go');startPlayTimer();}
+  else{b.textContent='⏵ Starta sökning';b.classList.remove('pri');b.classList.add('go');clearInterval(playTmr);}
 }
 function startPlayTimer(){clearInterval(playTmr);playTmr=setInterval(()=>{if(curStep>=steps.length-1){togglePlay();return;}doStep();},SPEEDS[speedIdx]);}
 function updateSpeed(){
