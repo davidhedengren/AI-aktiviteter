@@ -1,316 +1,231 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="sv">
 <head>
-<meta charset="UTF-8"/>
-<title>Luffarschack i partiellt observerbar miljö</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luffarschack – Partiell observerbarhet</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-ZDWXTZZBBR');
-</script>
-
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Fraunces:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
-
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
---bg:#060810;
---surface:#0c1020;
---surface2:#111728;
---border:#1a2238;
---border2:#253050;
---text:#eaf0fc;
---muted:#96a8c8;
---accent:#4d80ff;
---spam:#ff6a35;
---ham:#1de99b;
---font-mono:'JetBrains Mono', monospace;
---font-serif:'Fraunces', serif;
-}
+:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--accent:#4d80ff;--accent2:#6698ff;--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--x-color:#ff6a5e;--o-color:#34d399;--grid:#4a5580;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
+.back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
+.back-link:hover{color:var(--text);border-color:var(--dim);}
+.hd{width:100%;text-align:center;padding:10px 16px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
+.hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}.hd h1 span{color:var(--accent2);}
+.hd p{color:var(--dim);font-size:0.8em;max-width:600px;margin:0 auto;line-height:1.4;}
+.main{display:flex;gap:14px;padding:10px 14px;width:100%;position:relative;z-index:1;flex-wrap:wrap;justify-content:center;}
+.board-area{display:flex;flex-direction:column;gap:6px;align-items:center;position:relative;}
+.turn-bar{display:flex;align-items:center;justify-content:center;gap:10px;font-size:0.9em;font-weight:600;min-height:32px;}
+.turn-dot{width:12px;height:12px;border-radius:50%;transition:0.3s;}
 
-*{box-sizing:border-box;margin:0;padding:0;}
+.board{display:grid;border:2px solid var(--grid);border-radius:6px;overflow:hidden;background:var(--grid);gap:2px;box-shadow:0 4px 30px rgba(0,0,0,0.5);}
+.cell{width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;cursor:pointer;transition:all 0.12s;position:relative;background:#0d1128;}
+.cell:hover:not(.placed):not(.won):not(.revealed){background:rgba(77,128,255,0.12);}
 
-body{
-font-family:var(--font-mono);
-background:var(--bg);
-color:var(--text);
-display:flex;
-justify-content:center;
-padding:30px;
-}
+.cell.hidden-cell{background:#0f1535;border:1px solid rgba(77,128,255,0.15);}
+.cell.hidden-cell::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent,transparent 3px,rgba(100,140,255,0.12) 3px,rgba(100,140,255,0.12) 6px);pointer-events:none;}
+.cell.hidden-cell .fog{color:rgba(120,160,255,0.4);font-size:15px;font-weight:600;user-select:none;}
 
-.container{
-width:fit-content;
-display:flex;
-flex-direction:column;
-gap:12px;
-}
+.cell.x-mark{color:var(--x-color);}.cell.o-mark{color:var(--o-color);}
+.cell.placed{cursor:default;}
+.cell.won{animation:winPulse 0.6s ease infinite alternate;z-index:1;}
+.cell.blind-play{animation:blindFlash 0.5s ease;}
+.cell.last-move{box-shadow:inset 0 0 0 2px rgba(255,216,102,0.6);}
+.cell.revealed{background:rgba(77,128,255,0.08);border:1px dashed rgba(100,140,255,0.25);}
+.cell.revealed.x-mark{background:rgba(255,106,94,0.1);}
+.cell.revealed.o-mark{background:rgba(52,211,153,0.1);}
+@keyframes winPulse{from{background:rgba(255,216,102,0.12);}to{background:rgba(255,216,102,0.3);}}
+@keyframes blindFlash{0%{background:rgba(77,128,255,0.3);}100%{background:#0f1535;}}
 
-.header{
-display:flex;
-align-items:center;
-justify-content:space-between;
-}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;width:260px;display:flex;flex-direction:column;gap:12px;}
+.sec-t{font-size:0.68em;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--dim);margin-bottom:4px;}
+.setting-row{display:flex;align-items:center;gap:8px;}
+.setting-val{font-family:'JetBrains Mono',monospace;font-size:0.82em;color:var(--accent);min-width:30px;text-align:right;}
+input[type=range]{-webkit-appearance:none;flex:1;height:4px;border-radius:2px;background:var(--surface2);outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer;}
+.btn{font-family:'DM Sans',sans-serif;padding:8px 14px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);color:var(--text);font-size:0.82em;font-weight:600;cursor:pointer;transition:0.2s;text-align:center;width:100%;}
+.btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.08);}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;}.btn.pri:hover{background:#3d6de6;}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.stat-box{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:7px 9px;}
+.stat-label{font-size:0.62em;color:var(--dim);text-transform:uppercase;letter-spacing:0.04em;}
+.stat-val{font-family:'JetBrains Mono',monospace;font-size:0.95em;font-weight:700;}
 
-h2{
-font-family:var(--font-serif);
-font-weight:400;
-font-size:22px;
-text-align:center;
-flex:1;
-}
+.overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
+.overlay.show{display:flex;}
+.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;max-width:480px;width:92%;text-align:center;}
+.overlay-card h2{font-size:1.1em;font-weight:700;margin-bottom:6px;}.overlay-card h2 span{color:var(--accent2);}
+.overlay-card .sub{font-size:0.84em;color:var(--dim);line-height:1.55;margin-bottom:16px;}
+.overlay-card .steps{display:flex;flex-direction:column;gap:10px;margin:14px 0;text-align:left;}
+.overlay-card .step{display:flex;gap:10px;align-items:flex-start;font-size:0.82em;color:var(--dim);line-height:1.5;}
+.overlay-card .step strong{color:var(--text);}
+.step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
+.overlay-btn{display:block;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}.overlay-btn:hover{background:#3d6de6;}
 
-.back-link{
-font-size:12px;
-padding:6px 10px;
-border:1px solid var(--border2);
-border-radius:6px;
-background:var(--surface);
-text-decoration:none;
-color:var(--muted);
-}
-.back-link:hover{color:var(--text);}
+.win-banner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(9,11,20,0.96);border:2px solid var(--gold);border-radius:12px;padding:20px 28px;text-align:center;z-index:10;display:none;box-shadow:0 8px 40px rgba(0,0,0,0.7);min-width:260px;max-width:320px;}
+.win-banner.show{display:block;animation:popIn 0.3s ease;}
+@keyframes popIn{from{opacity:0;transform:translate(-50%,-50%) scale(0.9);}to{opacity:1;transform:translate(-50%,-50%) scale(1);}}
+.wb-title{font-size:1.3em;font-weight:700;margin-bottom:6px;}
+.wb-stats{display:flex;justify-content:center;gap:14px;margin:10px 0;font-size:0.78em;}
+.wb-stat{text-align:center;}.wb-stat .wv{font-family:'JetBrains Mono',monospace;font-size:1.15em;font-weight:700;}.wb-stat .wl{color:var(--dim);font-size:0.9em;}
+.wb-note{font-size:0.74em;color:var(--dim);font-style:italic;margin:8px 0;}
+.wb-btns{display:flex;flex-direction:column;gap:6px;}
 
-#gameContainer{
-border:1px solid var(--border2);
-border-radius:6px;
-overflow:hidden;
-background:var(--surface2);
-}
-
-.boardRow{display:flex;}
-
-.boardCell{
-width:34px;
-height:34px;
-margin:1px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:700;
-background:var(--surface);
-border:1px solid var(--border);
-cursor:pointer;
-}
-
-.boardCell:hover{border-color:var(--accent);}
-.hiddenHint{color:var(--border2);}
-
-#infoLabel{
-text-align:center;
-font-weight:700;
-}
-
-.controls-area{
-display:flex;
-justify-content:flex-start;
-}
-
-.controls-area button{
-padding:8px 20px;
-background:var(--accent);
-color:#fff;
-border:none;
-border-radius:6px;
-cursor:pointer;
-}
-
-#centerMessage{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-background:var(--surface);
-border:1px solid var(--border2);
-padding:20px 40px;
-font-weight:700;
-display:none;
-z-index:999;
-}
+@media(max-width:700px){.main{flex-direction:column;align-items:center;}.panel{width:100%;max-width:400px;}.cell{width:30px;height:30px;font-size:14px;}}
 </style>
 </head>
-
 <body>
-
-<div class="container">
-
-<div class="header">
-<a class="back-link" href="/">← AI-aktiviteter</a>
-<h2>Luffarschack</h2>
-<div style="width:110px;"></div>
+<div class="hd">
+  <a class="back-link" href="/">← AI-aktiviteter</a>
+  <h1>Luffarschack i <span>partiellt observerbar</span> miljö</h1>
+  <p>Spela luffarschack på ett bräde där delar av spelplanen är dolda – och upplev hur partiell observerbarhet påverkar strategin.</p>
+</div>
+<div class="main">
+  <div class="board-area">
+    <div class="turn-bar"><div class="turn-dot" id="turnDot"></div><span id="turnText">X börjar</span></div>
+    <div class="board" id="board"></div>
+    <div class="win-banner" id="winBanner"></div>
+  </div>
+  <div class="panel">
+    <div><div class="sec-t">Brädstorlek</div>
+      <div class="setting-row"><input type="range" id="sizeSlider" min="10" max="20" value="15" step="1" oninput="updateSize()"><span class="setting-val" id="sizeVal">15</span></div>
+    </div>
+    <button class="btn pri" onclick="startGame()">🔄 Nytt spel</button>
+    <div><div class="sec-t">Statistik</div>
+      <div class="stats-grid">
+        <div class="stat-box"><div class="stat-label">Blinda drag (X)</div><div class="stat-val" id="statBlindX" style="color:var(--x-color)">0</div></div>
+        <div class="stat-box"><div class="stat-label">Blinda drag (O)</div><div class="stat-val" id="statBlindO" style="color:var(--o-color)">0</div></div>
+        <div class="stat-box"><div class="stat-label">Totala drag</div><div class="stat-val" id="statTotal">0</div></div>
+        <div class="stat-box"><div class="stat-label">Dolda rutor</div><div class="stat-val" id="statHidden" style="color:var(--accent)">0</div></div>
+      </div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px;font-size:0.74em;color:var(--dim);line-height:1.55;">
+      <strong style="color:var(--accent);">Randiga rutor</strong> = dolda. Du kan lägga där, men du ser inte om motståndaren redan har den rutan.<br><br>
+      <strong style="color:var(--gold);">Fem i rad</strong> vinner. Efter spelet avslöjas alla dolda rutor.
+    </div>
+  </div>
 </div>
 
-<div id="gameContainer"></div>
-
-<div id="infoLabel">Spelare X's tur</div>
-
-<div class="controls-area">
-<button onclick="restartGame()">Starta om</button>
+<div class="overlay show" id="introOverlay">
+  <div class="overlay-card">
+    <h2>Luffarschack i <span>partiellt observerbar</span> miljö</h2>
+    <p class="sub">I vanligt luffarschack ser båda spelare hela brädet. Men vad händer om delar av spelplanen är <strong>dolda</strong>?</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div><strong>Dolda rutor</strong> – Randiga rutor är dolda. Du kan lägga din markör där, men du ser inte vad som finns under.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Blinda drag</strong> – Lägger du på en dold ruta vet du inte om draget lyckades. Om rutan redan var tagen av motståndaren går draget förlorat – du tappar din tur utan att ha placerat något.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Fem i rad vinner</strong> – Samma regler som vanligt. Men strategin förändras helt när du inte ser allt.</div></div>
+    </div>
+    <p class="sub">Detta kallas <strong>partiell observerbarhet</strong> – agenten ser bara en del av miljöns tillstånd. Hur påverkar det din förmåga att fatta bra beslut?</p>
+    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show');startGame()">Starta spelet →</button>
+  </div>
 </div>
-
-</div>
-
-<div id="centerMessage"></div>
 
 <script>
-const BOARD_SIZE=20;
-const HIDDEN_PERCENTAGE=0.20;
-const WIN_CONDITION=5;
+const HIDDEN_PCT=20,WIN=5;
+let SIZE=15,board=[],hidden=new Set(),cells=[],gameOver=false;
+let currentPlayer='X',blindX=0,blindO=0,totalMoves=0,lastMove=null;
 
-let currentPlayer='X';
-let board=[];
-let hiddenPositions=new Set();
-let gameContainer=document.getElementById("gameContainer");
-let infoLabel=document.getElementById("infoLabel");
-let centerMessage=document.getElementById("centerMessage");
-let cells={};
-let gameOver=false;
-
-initGame();
-
-function restartGame(){
-gameOver=false;
-initGame();
+function startGame(){
+  document.getElementById('winBanner').classList.remove('show');
+  SIZE=parseInt(document.getElementById('sizeSlider').value);
+  board=[];cells=[];hidden.clear();gameOver=false;currentPlayer='X';
+  blindX=0;blindO=0;totalMoves=0;lastMove=null;
+  for(let r=0;r<SIZE;r++){board[r]=[];for(let c=0;c<SIZE;c++)board[r][c]='';}
+  const all=[];for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)all.push([r,c]);
+  shuffle(all);const numH=Math.floor(SIZE*SIZE*HIDDEN_PCT/100);
+  for(let i=0;i<numH;i++)hidden.add(key(all[i][0],all[i][1]));
+  renderBoard();updateTurn();updateStats();
 }
 
-function initGame(){
-board=[];
-for(let i=0;i<BOARD_SIZE;i++){
-let row=[];
-for(let j=0;j<BOARD_SIZE;j++){row.push('');}
-board.push(row);
+function renderBoard(){
+  const el=document.getElementById('board');
+  el.style.gridTemplateColumns=`repeat(${SIZE},1fr)`;el.innerHTML='';cells=[];
+  for(let r=0;r<SIZE;r++){cells[r]=[];for(let c=0;c<SIZE;c++){
+    const cell=document.createElement('div');cell.className='cell';
+    if(hidden.has(key(r,c))){cell.classList.add('hidden-cell');cell.innerHTML='<span class="fog">?</span>';}
+    cell.addEventListener('click',()=>onCellClick(r,c));
+    el.appendChild(cell);cells[r][c]=cell;
+  }}
 }
 
-const numHidden=Math.floor(BOARD_SIZE*BOARD_SIZE*HIDDEN_PERCENTAGE);
-
-let allPositions=[];
-for(let i=0;i<BOARD_SIZE;i++){
-for(let j=0;j<BOARD_SIZE;j++){
-allPositions.push([i,j]);
-}}
-shuffleArray(allPositions);
-
-hiddenPositions.clear();
-for(let k=0;k<numHidden;k++){
-let[r,c]=allPositions[k];
-hiddenPositions.add(posKey(r,c));
+function onCellClick(r,c){
+  if(gameOver)return;
+  const isH=hidden.has(key(r,c));
+  const player=currentPlayer;
+  if(!isH&&board[r][c]!=='')return;
+  if(isH){
+    if(board[r][c]===''){board[r][c]=player;if(player==='X')blindX++;else blindO++;totalMoves++;}
+    else{if(player==='X')blindX++;else blindO++;totalMoves++;}
+    cells[r][c].classList.add('blind-play');
+  }else{
+    board[r][c]=player;totalMoves++;
+    showMark(r,c,player);
+  }
+  if(lastMove)cells[lastMove[0]][lastMove[1]].classList.remove('last-move');
+  if(!isH){cells[r][c].classList.add('last-move');lastMove=[r,c];}else{lastMove=null;}
+  if(checkWin(player)){endGame(player);return;}
+  if(isDraw()){endGame('draw');return;}
+  currentPlayer=currentPlayer==='X'?'O':'X';updateTurn();updateStats();
 }
 
-gameContainer.innerHTML="";
-cells={};
+function showMark(r,c,player){const cell=cells[r][c];cell.textContent=player;cell.classList.add(player==='X'?'x-mark':'o-mark','placed');}
 
-currentPlayer='X';
-infoLabel.textContent=`Spelare ${currentPlayer}'s tur`;
-infoLabel.style.color=getPlayerColor();
-gameOver=false;
+function checkWin(player){
+  const dirs=[[1,0],[0,1],[1,1],[1,-1]];
+  for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){
+    if(board[r][c]!==player)continue;
+    for(const[dr,dc] of dirs){let count=0;const line=[];
+      for(let s=0;s<WIN;s++){const nr=r+s*dr,nc=c+s*dc;
+        if(nr<0||nr>=SIZE||nc<0||nc>=SIZE)break;
+        if(board[nr][nc]===player){count++;line.push([nr,nc]);}else break;}
+      if(count>=WIN){highlightWin(line);return true;}
+    }}return false;
+}
+function isDraw(){for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)if(board[r][c]==='')return false;return true;}
+function highlightWin(line){for(const[r,c] of line)cells[r][c].classList.add('won');}
 
-for(let i=0;i<BOARD_SIZE;i++){
-let rowDiv=document.createElement("div");
-rowDiv.className="boardRow";
-for(let j=0;j<BOARD_SIZE;j++){
-let cellDiv=document.createElement("div");
-cellDiv.className="boardCell";
-
-if(hiddenPositions.has(posKey(i,j))){
-cellDiv.textContent="?";
-cellDiv.classList.add("hiddenHint");
-}
-
-cellDiv.addEventListener("click",()=>onCellClick(i,j));
-rowDiv.appendChild(cellDiv);
-cells[posKey(i,j)]=cellDiv;
-}
-gameContainer.appendChild(rowDiv);
-}
-}
-
-function shuffleArray(arr){
-for(let i=arr.length-1;i>0;i--){
-let r=Math.floor(Math.random()*(i+1));
-[arr[i],arr[r]]=[arr[r],arr[i]];
-}
-}
-
-function posKey(r,c){return `${r},${c}`;}
-
-function onCellClick(row,col){
-if(gameOver)return;
-
-if(hiddenPositions.has(posKey(row,col))){
-if(board[row][col]===''){board[row][col]=currentPlayer;}
-switchPlayer();
-}else{
-if(board[row][col]===''){
-board[row][col]=currentPlayer;
-cells[posKey(row,col)].textContent=currentPlayer;
-cells[posKey(row,col)].style.color=getPlayerColor();
-
-if(checkWinner(currentPlayer)){
-revealHiddenPositions();
-alert(`Spelare ${currentPlayer} vinner!`);
-gameOver=true;
-return;
-}
-switchPlayer();
-}
-}
+function endGame(winner){
+  gameOver=true;
+  hidden.forEach(k=>{const[r,c]=k.split(',').map(Number);const cell=cells[r][c];
+    cell.classList.remove('hidden-cell');cell.innerHTML='';cell.classList.add('revealed');
+    if(board[r][c])showMark(r,c,board[r][c]);
+  });
+  if(winner!=='draw')checkWin(winner);
+  updateStats();
+  const banner=document.getElementById('winBanner');let h='';
+  if(winner==='draw'){h=`<div class="wb-title" style="color:var(--dim)">Oavgjort!</div>`;}
+  else{h=`<div class="wb-title" style="color:${winner==='X'?'var(--x-color)':'var(--o-color)'}">Spelare ${winner} vinner!</div>`;}
+  h+=`<div class="wb-stats">
+    <div class="wb-stat"><div class="wv" style="color:var(--x-color)">${blindX}</div><div class="wl">Blinda (X)</div></div>
+    <div class="wb-stat"><div class="wv" style="color:var(--o-color)">${blindO}</div><div class="wl">Blinda (O)</div></div>
+    <div class="wb-stat"><div class="wv">${totalMoves}</div><div class="wl">Totalt</div></div>
+  </div>`;
+  h+=`<div class="wb-note">Dolda rutor har avslöjats!</div>`;
+  h+=`<div class="wb-btns"><button class="btn" onclick="document.getElementById('winBanner').classList.remove('show')" style="font-size:0.8em;">🔍 Visa brädet</button><button class="btn pri" onclick="startGame()" style="font-size:0.8em;">🔄 Nytt spel</button></div>`;
+  banner.innerHTML=h;
+  setTimeout(()=>banner.classList.add('show'),500);
 }
 
-function switchPlayer(){
-currentPlayer=(currentPlayer==='X'?'O':'X');
-infoLabel.textContent=`Spelare ${currentPlayer}'s tur`;
-infoLabel.style.color=getPlayerColor();
-showCenterMessage(`Det är ${currentPlayer}'s tur`);
+function updateTurn(){
+  const isX=currentPlayer==='X';
+  document.getElementById('turnDot').style.background=isX?'var(--x-color)':'var(--o-color)';
+  document.getElementById('turnText').textContent=`Spelare ${currentPlayer}`;
 }
-
-function getPlayerColor(){
-return currentPlayer==='X'?'var(--spam)':'var(--ham)';
+function updateStats(){
+  document.getElementById('statBlindX').textContent=blindX;
+  document.getElementById('statBlindO').textContent=blindO;
+  document.getElementById('statTotal').textContent=totalMoves;
+  document.getElementById('statHidden').textContent=hidden.size;
 }
-
-function checkWinner(player){
-for(let i=0;i<BOARD_SIZE;i++){
-for(let j=0;j<BOARD_SIZE;j++){
-if(checkDirection(player,i,j,1,0)||
-checkDirection(player,i,j,0,1)||
-checkDirection(player,i,j,1,1)||
-checkDirection(player,i,j,1,-1)){
-return true;
-}}}
-return false;
-}
-
-function checkDirection(player,x,y,dx,dy){
-let count=0;
-for(let step=0;step<WIN_CONDITION;step++){
-let nx=x+step*dx;
-let ny=y+step*dy;
-if(nx<0||nx>=BOARD_SIZE||ny<0||ny>=BOARD_SIZE)break;
-if(board[nx][ny]===player)count++;
-else break;
-}
-return(count===WIN_CONDITION);
-}
-
-function revealHiddenPositions(){
-hiddenPositions.forEach(key=>{
-let[r,c]=key.split(',').map(Number);
-let val=board[r][c];
-if(val==='')val='-';
-let cellDiv=cells[key];
-cellDiv.textContent=val;
-cellDiv.style.color=val==='X'?'var(--spam)':val==='O'?'var(--ham)':'var(--muted)';
-cellDiv.classList.remove("hiddenHint");
-});
-}
-
-function showCenterMessage(msg){
-centerMessage.textContent=msg;
-centerMessage.style.display="block";
-setTimeout(()=>{centerMessage.style.display="none";},1000);
-}
+function updateSize(){SIZE=parseInt(document.getElementById('sizeSlider').value);document.getElementById('sizeVal').textContent=SIZE;}
+function key(r,c){return r+','+c;}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}}
+startGame();
 </script>
-
 </body>
 </html>
