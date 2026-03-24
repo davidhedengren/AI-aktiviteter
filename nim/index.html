@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NIM med förstärkningsinlärning</title>
-  <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -18,11 +18,16 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 20% 10%,rgba(232,197,71,0.04) 0%,transparent 60%),radial-gradient(ellipse 40% 50% at 80% 80%,rgba(61,214,140,0.03) 0%,transparent 60%);pointer-events:none;}
-.hd{padding:18px 20px;border-bottom:1px solid var(--border);position:relative;}.hd-inner{max-width:1060px;margin:0 auto;display:flex;align-items:center;padding:0;}.hd-center{position:absolute;left:50%;transform:translateX(-50%);text-align:center;pointer-events:none;}.hd-center{text-align:center;}.hd-center h1{font-size:2em;font-weight:800;letter-spacing:-0.02em;color:var(--accent);margin-bottom:4px;}.hd-center p{color:var(--dim);font-size:0.82em;max-width:560px;margin:0 auto;}
-.back-link{display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;align-self:flex-start;}.back-link:hover{color:var(--text);border-color:var(--dim);}
 
+.hd{padding:14px 20px;border-bottom:1px solid var(--border);}
+.hd-inner{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:16px;}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;flex-shrink:0;}.back-link:hover{color:var(--text);border-color:var(--dim);}
+.hd-text{flex:1;text-align:center;}
+.hd-text h1{font-size:1.8em;font-weight:800;letter-spacing:-0.02em;color:var(--accent);margin-bottom:2px;}
+.hd-text p{color:var(--dim);font-size:0.82em;max-width:560px;margin:0 auto;}
+.hd-spacer{width:100px;flex-shrink:0;}
 
-.app{display:grid;grid-template-columns:1fr 320px;max-width:1060px;margin:0 auto;min-height:calc(100vh - 90px);}
+.app{display:grid;grid-template-columns:1fr 320px;max-width:1060px;margin:0 auto;min-height:calc(100vh - 80px);}
 .left{padding:22px 26px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:18px;}
 .phase-tabs{display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
 .tab{flex:1;padding:10px 8px;text-align:center;font-size:0.78em;font-weight:700;color:var(--dim);background:var(--surface);cursor:pointer;transition:0.2s;border:none;font-family:'Syne',sans-serif;}
@@ -39,12 +44,20 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .btn.pri{background:var(--accent);border-color:var(--accent);color:#08090f;}
 .btn.pri:hover{background:var(--accent2);}
 .btn.grn{background:rgba(61,214,140,0.1);border-color:var(--good);color:var(--good);}.btn.solid-grn{background:var(--good);border-color:var(--good);color:#08090f;font-size:0.9em;padding:11px 16px;}.btn.solid-grn:hover{background:#4ee89e;border-color:#4ee89e;}
+.btn.warn{background:rgba(240,82,82,0.1);border-color:var(--bad);color:var(--bad);}.btn.warn:hover{background:rgba(240,82,82,0.2);}
 .btn:disabled{opacity:0.3;pointer-events:none;}
 .btn-row{display:flex;gap:8px;}
+.train-btns{display:flex;gap:8px;}
+.train-btns .btn{flex:1;}
 .pbwrap{background:var(--surface2);border:1px solid var(--border);border-radius:6px;height:8px;overflow:hidden;margin-bottom:6px;}
 .pbfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--good));width:0%;transition:width 0.1s;border-radius:6px;}
 .tstat{font-family:'JetBrains Mono',monospace;font-size:0.76em;color:var(--dim);}
 .tstat span{color:var(--accent);font-weight:600;}
+.converge-msg{font-size:0.78em;padding:8px 10px;border-radius:6px;margin-top:6px;display:none;line-height:1.5;}
+.converge-msg.show{display:block;}
+.converge-msg.partial{background:rgba(232,197,71,0.08);border:1px solid rgba(232,197,71,0.2);color:var(--accent);}
+.converge-msg.full{background:rgba(61,214,140,0.08);border:1px solid rgba(61,214,140,0.2);color:var(--good);}
+.converge-msg.none{background:rgba(240,82,82,0.06);border:1px solid rgba(240,82,82,0.15);color:var(--bad);}
 .game-status{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 16px;font-size:0.88em;min-height:50px;display:flex;align-items:center;gap:10px;}
 .si{font-size:1.3em;}
 .st{line-height:1.4;}.st strong{color:var(--accent);}
@@ -74,7 +87,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .info-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:0.75em;line-height:1.6;color:var(--dim);}
 .info-box strong{color:var(--text);}.info-box .hl{color:var(--accent);font-weight:700;}
 
-/* RIGHT – Q-TABLE */
 .right{padding:20px 16px;background:var(--surface);overflow-y:auto;}
 .qt-title{font-size:0.88em;font-weight:700;color:var(--accent);margin-bottom:4px;}
 .qt-desc{font-size:0.71em;color:var(--dim);line-height:1.5;margin-bottom:12px;}
@@ -100,11 +112,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .qtoggle.on{border-color:var(--accent);color:var(--accent);background:rgba(232,197,71,0.08);}
 .qinfo strong{color:var(--text);}
 
-@media(max-width:760px){.app{grid-template-columns:1fr}.left{border-right:none;border-bottom:1px solid var(--border)}}
-</style>
-</head>
-<body>
-<style>
+@media(max-width:760px){.app{grid-template-columns:1fr}.left{border-right:none;border-bottom:1px solid var(--border)}.hd-spacer{display:none;}.hd-inner{flex-direction:column;gap:8px;}.back-link{align-self:flex-start;}.hd-text{text-align:center;}}
+
+/* Intro */
 .intro{position:fixed;inset:0;background:rgba(8,9,15,0.95);z-index:200;display:flex;align-items:center;justify-content:center;}
 .intro.hidden{display:none;}
 .intro-card{background:#0f1118;border:1px solid #1f2538;border-radius:14px;padding:28px 32px;max-width:500px;width:92%;max-height:88vh;overflow-y:auto;}
@@ -126,10 +136,13 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .intro-start{display:block;width:100%;padding:12px;margin-top:16px;font-family:'Syne',sans-serif;font-size:0.95em;font-weight:700;background:#3dd68c;color:#08090f;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}
 .intro-start:hover{background:#4ee89e;}
 </style>
+</head>
+<body>
+
 <div class="intro" id="intro">
   <div class="intro-card">
     <h2>NIM med förstärkningsinlärning</h2>
-    <p class="sub">Se hur ett AI-system lär sig spela spelet NIM från grunden – Bara genom att spela mot sig själv.</p>
+    <p class="sub">Se hur ett AI-system lär sig spela spelet NIM från grunden – bara genom att spela mot sig själv.</p>
     <div class="intro-steps">
       <div class="intro-step"><div class="intro-num">1</div><div class="intro-step-text"><strong>Träna AI-systemet</strong> – Välj hur många spel AI:n ska öva på. Kolla hur Q-tabellen förändras under träningen!</div></div>
       <div class="intro-step"><div class="intro-num">2</div><div class="intro-step-text"><strong>Utforska Q-tabellen</strong> – Tabellen till höger visar vad AI:n lärt sig. Grönt = bra drag, rött = dåligt. Ser du ett mönster?</div></div>
@@ -143,15 +156,18 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         Spelare turas om. På din tur väljer du att ta <strong>1, 2 eller 3 pinnar</strong> (du måste ta minst 1).<br><br>
         <strong>Exempel med 9 pinnar:</strong>
         <div class="ex">Du tar 2 → 7 kvar<br>AI tar 3 → 4 kvar<br>Du tar 3 → 1 kvar<br>AI tvingas ta sista → AI förlorar!</div>
-           </div>
+      </div>
     </div>
     <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Starta simuleringen →</button>
   </div>
 </div>
+
 <div class="hd"><div class="hd-inner">
   <a class="back-link" href="/">← AI-aktiviteter</a>
-  <div class="hd-center"><h1>NIM</h1><p>Se hur ett AI-system lär sig spela NIM med förstärkningsinlärning – testa sedan att spela mot det!</p></div>
+  <div class="hd-text"><h1>NIM</h1><p>Se hur ett AI-system lär sig spela NIM med förstärkningsinlärning – testa sedan att spela mot det!</p></div>
+  <div class="hd-spacer"></div>
 </div></div>
+
 <div class="app">
   <div class="left">
     <div class="phase-tabs">
@@ -159,7 +175,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <button class="tab locked" id="tabPlay" onclick="goPhase('play')">② Spela mot AI</button>
     </div>
 
-    <!-- TRAIN -->
     <div id="trainPhase">
       <div class="sec-label">Inställningar</div>
       <div class="row"><label>Antal pinnar</label>
@@ -183,6 +198,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
           <option value="150" selected>150 spel</option>
           <option value="500">500 spel</option>
           <option value="1000">1000 spel</option>
+          <option value="2000">2000 spel</option>
         </select>
       </div>
       <div class="row"><label>Hastighet</label>
@@ -191,14 +207,16 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
           <option value="fast">⚡ Snabb</option>
         </select>
       </div>
-      <button class="btn solid-grn" id="trainBtn" onclick="startTraining()">🧠 Starta träning</button>
+      <div class="train-btns" id="trainBtns">
+        <button class="btn solid-grn" id="trainBtn" onclick="startTraining()">🧠 Starta träning</button>
+      </div>
       <div id="trainProg" style="display:none">
         <div class="pbwrap"><div class="pbfill" id="pbFill"></div></div>
         <div class="tstat">Spel: <span id="stEp">0</span>/<span id="stMax">0</span></div>
         <div class="tstat">Utforskar: <span id="stEps">100</span>% &nbsp;|&nbsp; Utnyttjar: <span id="stExpl">0</span>%</div>
       </div>
+      <div class="converge-msg" id="convergeMsg"></div>
       <div id="trainDone" style="display:none">
-        <div class="tstat" style="margin-bottom:8px"><span id="trainDoneMsg">✅ Träningen klar!</span></div>
         <button class="btn grn" onclick="goPhase('play')">Spela mot AI:n →</button>
       </div>
       <div class="nim-rules" style="margin-top:0">
@@ -209,7 +227,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       </div>
     </div>
 
-    <!-- PLAY -->
     <div id="playPhase" style="display:none">
       <div class="row"><label>Du spelar</label>
         <select class="nim-sel" id="whoFirst">
@@ -245,7 +262,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
   </div>
 
-  <!-- Q-TABLE -->
   <div class="right">
     <div class="qt-title">Q-tabell – AI:ns hjärna</div>
     <div class="qt-desc">Varje rad = antal kvarvarande pinnar. Varje kolumn = drag. <strong style="color:var(--good)">Grönt</strong> = bra drag, <strong style="color:var(--bad)">rött</strong> = dåligt. Guldram = bästa draget i tillståndet.</div>
@@ -265,8 +281,8 @@ let Q={}, totalSticks=12, maxTake=3, trained=false;
 let gameSticks=0, humanTurn=true, gameOver=true;
 let scH=0,scA=0,scG=0;
 let curPhase='train';
+let trainPaused=false, trainTimer=null;
 
-// ── Q-LEARNING ──
 function getQ(s,a){const k=String(s);return Q[k]?.[a]??0;}
 function setQ(s,a,v){const k=String(s);if(!Q[k])Q[k]={};Q[k][a]=v;}
 function validActs(s){const r=[];for(let i=1;i<=maxTake;i++)if(i<=s)r.push(i);return r;}
@@ -280,12 +296,52 @@ function trainEpisode(eps,alpha){
     hist[turn].push([state,a]);
     state-=a;
     if(state===0){
-      // turn player took last stick → loses
       for(const [s,ac] of hist[turn])    setQ(s,ac,getQ(s,ac)+alpha*(-1-getQ(s,ac)));
       for(const [s,ac] of hist[1-turn])  setQ(s,ac,getQ(s,ac)+alpha*(1-getQ(s,ac)));
-      return 1-turn; // winner
+      return 1-turn;
     }
     turn=1-turn;
+  }
+}
+
+function checkConvergence(){
+  let goldFrames=0, sensing=0, totalPositions=0;
+  for(let s=2;s<=totalSticks;s++){
+    const acts=validActs(s);
+    const winningMove=acts.find(a=>a<s&&(s-a)%(maxTake+1)===1);
+    if(winningMove!==undefined){
+      totalPositions++;
+      const best=acts.reduce((b,a)=>getQ(s,a)>getQ(s,b)?a:b,acts[0]);
+      // Gold frame = best action is correct and Q > 0.80
+      if(best===winningMove&&getQ(s,best)>0.80)goldFrames++;
+      // Sensing = correct move has Q > 0.3 (starting to learn)
+      if(getQ(s,winningMove)>0.3)sensing++;
+    }
+  }
+  return{goldFrames, sensing, total:totalPositions};
+}
+
+function updateConvergeUI(conv){
+  const el=document.getElementById('convergeMsg');
+  const{goldFrames, sensing, total}=conv;
+  if(goldFrames>=total&&total>0){
+    el.className='converge-msg show full';
+    el.innerHTML='✅ <strong>AI:n har lärt sig den optimala strategin!</strong>';
+  }else if(goldFrames>=total*0.7){
+    el.className='converge-msg show full';
+    el.innerHTML='🎯 <strong>AI:n har nästan knäckt spelet</strong> – bara några positioner kvar att finslipa';
+  }else if(goldFrames>=3){
+    el.className='converge-msg show partial';
+    el.innerHTML='📈 <strong>AI:n blir allt säkrare på sin strategi</strong> – den vet vad den ska göra i många situationer';
+  }else if(goldFrames>=1){
+    el.className='converge-msg show partial';
+    el.innerHTML='💡 <strong>AI:n börjar lära sig en strategi</strong> – den har hittat några bra drag';
+  }else if(sensing>=2){
+    el.className='converge-msg show partial';
+    el.innerHTML='🔍 <strong>AI:n börjar ana ett mönster</strong> – vissa drag verkar bättre än andra';
+  }else{
+    el.className='converge-msg show none';
+    el.innerHTML='🎲 <strong>AI:n provar slumpmässiga drag</strong> – den har inte hittat något mönster ännu';
   }
 }
 
@@ -293,113 +349,150 @@ function startTraining(){
   totalSticks=+document.getElementById('sticksSel').value;
   maxTake=+document.getElementById('maxTakeSel').value;
   const episodes=+document.getElementById('epSel').value;
-  Q={};trained=false;
-  document.getElementById('trainBtn').disabled=true;
+  Q={};trained=false;trainPaused=false;
+  document.getElementById('trainBtns').innerHTML=
+    '<button class="btn warn" onclick="pauseTraining()">⏸ Pausa</button>'+
+    '<button class="btn" onclick="stopTraining()" style="flex:0;">✕ Avbryt</button>';
   document.getElementById('trainProg').style.display='block';
   document.getElementById('trainDone').style.display='none';
+  document.getElementById('convergeMsg').className='converge-msg';
   document.getElementById('stMax').textContent=episodes;
   renderQHeaders();
 
-  const alpha=0.07;let done=0,convergenceCount=0;
+  const alpha=0.02;let done=0,convergenceCount=0;
   const speedMap={normal:{batch:1,delay:120},fast:{batch:3,delay:60}};
   const spd=speedMap[document.getElementById('speedSel').value]||speedMap.normal;
+
   function run(){
+    if(trainPaused)return;
     for(let i=0;i<spd.batch&&done<episodes;i++,done++){
-      const eps=Math.max(0.05,1-done/Math.max(episodes*0.7,200));
+      const eps=Math.max(0.05,1-done/Math.max(episodes*0.9,800));
       trainEpisode(eps,alpha);
     }
     const pct=done/episodes*100;
-    const eps=Math.min(100,Math.max(5,Math.round((1-done/Math.max(episodes*0.7,200))*100)));
-    const expl=100-eps;
+    const epsVal=Math.min(100,Math.max(5,Math.round((1-done/Math.max(episodes*0.9,800))*100)));
+    const expl=100-epsVal;
     document.getElementById('pbFill').style.width=pct+'%';
     document.getElementById('stEp').textContent=done;
-    document.getElementById('stEps').textContent=eps;
+    document.getElementById('stEps').textContent=epsVal;
     document.getElementById('stExpl').textContent=expl;
     renderQTable(-1);
-    // Early stopping: every 10 episodes, check if correct moves have positive Q
-    // and incorrect moves have negative Q in all winning positions
-    if(done>=50&&done%10===0){
-      let perfect=true;
-      for(let s=2;s<=totalSticks;s++){
-        const winningMove=validActs(s).find(a=>a<s&&(s-a)%(maxTake+1)===1);
-        if(winningMove!==undefined){
-          // Winning move must be positive, all others negative
-          if(getQ(s,winningMove)<=0.80){perfect=false;break;}
-          const allOthersNeg=validActs(s).filter(a=>a!==winningMove).every(a=>getQ(s,a)<0);
-          if(!allOthersNeg){perfect=false;break;}
-        }
-      }
-      if(perfect){
+
+    // Check convergence every 15 episodes
+    if(done>=15&&done%15===0){
+      const conv=checkConvergence();
+      updateConvergeUI(conv);
+      if(conv.goldFrames>=conv.total&&conv.total>0){
         convergenceCount++;
         if(convergenceCount>=3){done=episodes;}
-      } else {
-        convergenceCount=0;
-      }
+      }else{convergenceCount=0;}
     }
-    if(done<episodes){setTimeout(run,spd.delay);return;}
-    // eval vs random – alternate who starts so position bias cancels out
-    let wins=0;
-    for(let t=0;t<300;t++){
-      let s=totalSticks;
-      // Even rounds: AI first (losing pos for 9). Odd rounds: AI second (winning pos for 9).
-      let aiTurn=t%2===0?0:1, turn=0;
-      while(s>0){
-        const a=(turn===aiTurn)?bestAct(s):(()=>{const acts=validActs(s);return acts[Math.floor(Math.random()*acts.length)];})();
-        s-=a;if(s===0){if(turn===aiTurn)wins++;break;}turn=1-turn;
-      }
-    }
-    trained=true;
-    document.getElementById('trainBtn').disabled=false;
-    document.getElementById('trainDone').style.display='block';
-    document.getElementById('trainDoneMsg').textContent=done<+document.getElementById('epSel').value?`✅ Konvergerade efter ${done} spel!`:'✅ Träningen klar!';
-    document.getElementById('tabPlay').classList.remove('locked');
-    renderQTable(-1);
-    updateQInfo();
+
+    if(done<episodes){trainTimer=setTimeout(run,spd.delay);return;}
+    finishTraining(done, episodes);
   }
   run();
 }
 
-// ── Q-TABLE RENDER ──
+function pauseTraining(){
+  trainPaused=!trainPaused;
+  if(trainPaused){
+    clearTimeout(trainTimer);
+    document.getElementById('trainBtns').innerHTML=
+      '<button class="btn solid-grn" onclick="pauseTraining()">▶ Fortsätt</button>'+
+      '<button class="btn" onclick="stopTraining()" style="flex:0;">✕ Avbryt</button>';
+  }else{
+    document.getElementById('trainBtns').innerHTML=
+      '<button class="btn warn" onclick="pauseTraining()">⏸ Pausa</button>'+
+      '<button class="btn" onclick="stopTraining()" style="flex:0;">✕ Avbryt</button>';
+    // Resume – re-trigger startTraining continuation
+    // We need to continue from where we left off
+    resumeTraining();
+  }
+}
+
+function resumeTraining(){
+  const episodes=+document.getElementById('epSel').value;
+  const done0=parseInt(document.getElementById('stEp').textContent);
+  const alpha=0.02;let done=done0,convergenceCount=0;
+  const speedMap={normal:{batch:1,delay:120},fast:{batch:3,delay:60}};
+  const spd=speedMap[document.getElementById('speedSel').value]||speedMap.normal;
+  trainPaused=false;
+
+  function run(){
+    if(trainPaused)return;
+    for(let i=0;i<spd.batch&&done<episodes;i++,done++){
+      const eps=Math.max(0.05,1-done/Math.max(episodes*0.9,800));
+      trainEpisode(eps,alpha);
+    }
+    const pct=done/episodes*100;
+    const epsVal=Math.min(100,Math.max(5,Math.round((1-done/Math.max(episodes*0.9,800))*100)));
+    document.getElementById('pbFill').style.width=pct+'%';
+    document.getElementById('stEp').textContent=done;
+    document.getElementById('stEps').textContent=epsVal;
+    document.getElementById('stExpl').textContent=100-epsVal;
+    renderQTable(-1);
+    if(done>=15&&done%15===0){
+      const conv=checkConvergence();
+      updateConvergeUI(conv);
+      if(conv.goldFrames>=conv.total&&conv.total>0){convergenceCount++;if(convergenceCount>=3){done=episodes;}}else{convergenceCount=0;}
+    }
+    if(done<episodes){trainTimer=setTimeout(run,spd.delay);return;}
+    finishTraining(done, episodes);
+  }
+  run();
+}
+
+function stopTraining(){
+  trainPaused=true;clearTimeout(trainTimer);
+  const done=parseInt(document.getElementById('stEp').textContent);
+  finishTraining(done, +document.getElementById('epSel').value);
+}
+
+function finishTraining(done, episodes){
+  trained=true;trainPaused=false;
+  document.getElementById('trainBtns').innerHTML=
+    '<button class="btn solid-grn" onclick="startTraining()">🧠 Träna om från början</button>';
+  document.getElementById('trainDone').style.display='block';
+  document.getElementById('tabPlay').classList.remove('locked');
+
+  const conv=checkConvergence();
+  updateConvergeUI(conv);
+
+  renderQTable(-1);
+  updateQInfo();
+}
+
+// Q-TABLE RENDER
 function renderQHeaders(){
   const wrap=document.getElementById('qhdrRow');
   const cols=['38px',...Array.from({length:maxTake},()=>'1fr')].join(' ');
   wrap.style.gridTemplateColumns=cols;
   wrap.innerHTML='<div></div>';
   for(let a=1;a<=maxTake;a++){
-    const d=document.createElement('div');
-    d.className='qhdr';d.textContent='Ta '+a;
-    wrap.appendChild(d);
+    const d=document.createElement('div');d.className='qhdr';d.textContent='Ta '+a;wrap.appendChild(d);
   }
 }
 
 function renderQTable(hlState){
-  const wrap=document.getElementById('qtable');
-  wrap.innerHTML='';
+  const wrap=document.getElementById('qtable');wrap.innerHTML='';
   const cols=['38px',...Array.from({length:maxTake},()=>'1fr')].join(' ');
   for(let s=totalSticks;s>=1;s--){
     const best=validActs(s).reduce((b,a)=>getQ(s,a)>getQ(s,b)?a:b,1);
-    const row=document.createElement('div');
-    row.className='qrow'+(s===hlState?' cur':'');
-    row.id='qr'+s;
-    row.style.gridTemplateColumns=cols;
-    const st=document.createElement('div');
-    st.className='qst';st.textContent=s+'🪵';
-    row.appendChild(st);
+    const row=document.createElement('div');row.className='qrow'+(s===hlState?' cur':'');row.id='qr'+s;row.style.gridTemplateColumns=cols;
+    const st=document.createElement('div');st.className='qst';st.textContent=s+'🪵';row.appendChild(st);
     for(let a=1;a<=maxTake;a++){
-      const cell=document.createElement('div');
-      const ok=a<=s;
+      const cell=document.createElement('div');const ok=a<=s;
       cell.className='qcell'+(ok&&a===best&&getQ(s,best)>0.80?' best':'')+(ok?'':' dis');
       const v=getQ(s,a);
       const bg=document.createElement('div');bg.className='qbg';
       if(ok){
-        if(v>0.01) bg.style.background=`rgba(61,214,140,${Math.min(0.75,v*0.55+0.1)})`;
-        else if(v<-0.01) bg.style.background=`rgba(240,82,82,${Math.min(0.75,Math.abs(v)*0.55+0.1)})`;
+        if(v>0.01)bg.style.background=`rgba(61,214,140,${Math.min(0.75,v*0.55+0.1)})`;
+        else if(v<-0.01)bg.style.background=`rgba(240,82,82,${Math.min(0.75,Math.abs(v)*0.55+0.1)})`;
         else bg.style.background='rgba(74,124,220,0.07)';
       }
       cell.appendChild(bg);
-      const vd=document.createElement('div');vd.className='qval';
-      vd.textContent=ok?v.toFixed(2):'–';
-      cell.appendChild(vd);
+      const vd=document.createElement('div');vd.className='qval';vd.textContent=ok?v.toFixed(2):'–';cell.appendChild(vd);
       row.appendChild(cell);
     }
     wrap.appendChild(row);
@@ -410,7 +503,6 @@ function updateQInfo(){
   const wins=[];
   for(let s=totalSticks;s>=1;s--){
     const a=bestAct(s);
-    // Show any state where the best action has a positive Q-value (green cell)
     if(a!==null&&getQ(s,a)>0.80)wins.push(s+' pinnar kvar → ta '+a);
   }
   document.getElementById('qinfo').innerHTML=
@@ -420,7 +512,7 @@ function updateQInfo(){
     Ser du att guldramarna följer det mönstret?`;
 }
 
-// ── GAME ──
+// GAME
 function newGame(){
   totalSticks=+document.getElementById('sticksSel').value;
   maxTake=+document.getElementById('maxTakeSel').value;
@@ -431,29 +523,22 @@ function newGame(){
   const who=document.getElementById('whoFirst').value;
   humanTurn=who==='random'?Math.random()<0.5:who==='human';
   renderSticks();renderTakeBtns();hlQRow(gameSticks);
-  if(humanTurn) setStatus('🎯',`<strong>Din tur!</strong> ${gameSticks} pinnar kvar. Ta 1–${maxTake}. Den som tar den <strong>sista</strong> pinnen förlorar.`);
+  if(humanTurn)setStatus('🎯',`<strong>Din tur!</strong> ${gameSticks} pinnar kvar. Ta 1–${maxTake}. Den som tar den <strong>sista</strong> pinnen förlorar.`);
   else{setStatus('🤖','AI:n börjar...');setTimeout(aiTurn,800);}
 }
 
 function renderSticks(){
-  const row=document.getElementById('sticksRow');
-  row.innerHTML='';
-  for(let i=0;i<totalSticks;i++){
-    const s=document.createElement('div');
-    s.className='stick'+(i>=gameSticks?' gone':'');
-    s.id='st'+i;row.appendChild(s);
-  }
+  const row=document.getElementById('sticksRow');row.innerHTML='';
+  for(let i=0;i<totalSticks;i++){const s=document.createElement('div');s.className='stick'+(i>=gameSticks?' gone':'');s.id='st'+i;row.appendChild(s);}
   document.getElementById('scnt').textContent=gameSticks+' pinnar kvar';
 }
 
 function renderTakeBtns(){
   const w=document.getElementById('takeBtns');w.innerHTML='';
   for(let i=1;i<=maxTake;i++){
-    const b=document.createElement('button');
-    b.className='tbtn';b.textContent='Ta '+i;
+    const b=document.createElement('button');b.className='tbtn';b.textContent='Ta '+i;
     b.disabled=!humanTurn||gameOver||i>gameSticks;
-    const n=i;b.onclick=()=>humanTake(n);
-    w.appendChild(b);
+    const n=i;b.onclick=()=>humanTake(n);w.appendChild(b);
   }
 }
 
@@ -492,24 +577,14 @@ function endGame(humanWon){
   gameOver=true;renderTakeBtns();
   if(humanWon){scH++;document.getElementById('scH').textContent=scH;document.getElementById('rEmoji').textContent='🏆';document.getElementById('rTitle').textContent='Du vann!';document.getElementById('rSub').textContent='AI:n tog den sista pinnen.';}
   else{scA++;document.getElementById('scA').textContent=scA;document.getElementById('rEmoji').textContent='🤖';document.getElementById('rTitle').textContent='AI:n vann!';document.getElementById('rSub').textContent='Du tog den sista pinnen. Försök igen!';}
-  document.getElementById('rbanner').classList.add('show');
-  hlQRow(-1);
+  document.getElementById('rbanner').classList.add('show');hlQRow(-1);
 }
 
 function setStatus(icon,html){document.getElementById('gStatus').innerHTML=`<span class="si">${icon}</span><div class="st">${html}</div>`;}
+function hlQRow(s){document.querySelectorAll('.qrow').forEach(r=>r.classList.remove('cur'));if(s>0){const r=document.getElementById('qr'+s);if(r)r.classList.add('cur');}}
+function flashCell(s,a){const row=document.getElementById('qr'+s);if(!row)return;const cells=row.querySelectorAll('.qcell');const c=cells[a-1];if(c){c.style.transform='scale(1.18)';c.style.transition='transform 0.18s';setTimeout(()=>{c.style.transform='';},380);}}
 
-function hlQRow(s){
-  document.querySelectorAll('.qrow').forEach(r=>r.classList.remove('cur'));
-  if(s>0){const r=document.getElementById('qr'+s);if(r)r.classList.add('cur');}
-}
-
-function flashCell(s,a){
-  const row=document.getElementById('qr'+s);if(!row)return;
-  const cells=row.querySelectorAll('.qcell');const c=cells[a-1];
-  if(c){c.style.transform='scale(1.18)';c.style.transition='transform 0.18s';setTimeout(()=>{c.style.transform='';},380);}
-}
-
-// ── PHASES ──
+// PHASES
 function goPhase(p){
   if(p==='play'&&!trained)return;
   curPhase=p;
@@ -518,17 +593,14 @@ function goPhase(p){
   document.getElementById('tabTrain').className='tab'+(p==='train'?' active':trained?' done':'');
   document.getElementById('tabPlay').className='tab'+(p==='play'?' active':'')+(!trained?' locked':'');
   if(p==='play'){
-    scH=0;scA=0;scG=0;
-    ['scH','scA','scG'].forEach(id=>document.getElementById(id).textContent='0');
+    scH=0;scA=0;scG=0;['scH','scA','scG'].forEach(id=>document.getElementById(id).textContent='0');
     document.getElementById('rbanner').classList.remove('show');
     gameOver=true;renderTakeBtns();renderSticks();hlQRow(-1);
-    // Hide Q-table by default in play mode
     document.querySelector('.right').classList.add('hidden');
     document.querySelector('.app').classList.add('no-qtable');
     document.getElementById('qtoggleBtn').classList.remove('on');
     document.getElementById('qtoggleBtn').textContent='📊 Visa Q-tabell';
-  } else {
-    // Always show Q-table in train mode
+  }else{
     document.querySelector('.right').classList.remove('hidden');
     document.querySelector('.app').classList.remove('no-qtable');
   }
@@ -541,39 +613,31 @@ function onSettingsChange(){
     document.getElementById('tabPlay').classList.add('locked');
     document.getElementById('pbFill').style.width='0%';
     document.getElementById('trainProg').style.display='none';
+    document.getElementById('convergeMsg').className='converge-msg';
     if(curPhase==='play')goPhase('train');
   }
   totalSticks=+document.getElementById('sticksSel').value;
   maxTake=+document.getElementById('maxTakeSel').value;
+  document.getElementById('trainBtns').innerHTML=
+    '<button class="btn solid-grn" onclick="startTraining()">🧠 Starta träning</button>';
   renderQHeaders();renderQTable(-1);
   document.getElementById('qinfo').textContent='Träna AI-systemet för att se den inlärda strategin här.';
 }
 
-
 function toggleInfo(){
-  const btn=document.getElementById('infoToggle');
-  const body=document.getElementById('infoBody');
-  btn.classList.toggle('open');
-  body.classList.toggle('show');
-  const isOpen=body.classList.contains('show');
-  document.getElementById('infoBtnText').textContent=isOpen?'💡 Dölj förklaring':'💡 Hur fungerar förstärkningsinlärning?';
+  const btn=document.getElementById('infoToggle');const body=document.getElementById('infoBody');
+  btn.classList.toggle('open');body.classList.toggle('show');
+  document.getElementById('infoBtnText').textContent=body.classList.contains('show')?'💡 Dölj förklaring':'💡 Hur fungerar förstärkningsinlärning?';
 }
 function toggleQTable(){
-  const right=document.querySelector('.right');
-  const app=document.querySelector('.app');
-  const btn=document.getElementById('qtoggleBtn');
-  const hidden=right.classList.toggle('hidden');
-  app.classList.toggle('no-qtable');
-  btn.classList.toggle('on',!hidden);
-  btn.textContent=hidden?'📊 Visa Q-tabell':'📊 Dölj Q-tabell';
+  const right=document.querySelector('.right');const app=document.querySelector('.app');const btn=document.getElementById('qtoggleBtn');
+  const hidden=right.classList.toggle('hidden');app.classList.toggle('no-qtable');
+  btn.classList.toggle('on',!hidden);btn.textContent=hidden?'📊 Visa Q-tabell':'📊 Dölj Q-tabell';
 }
 function toggleRules(){
-  const btn=document.getElementById('rulesToggle');
-  const body=document.getElementById('rulesBody');
-  btn.classList.toggle('open');
-  body.classList.toggle('show');
-  const isOpen=body.classList.contains('show');
-  document.getElementById('rulesBtnText').textContent=isOpen?'📖 Dölj reglerna för NIM':'📖 Visa reglerna för NIM';
+  const btn=document.getElementById('rulesToggle');const body=document.getElementById('rulesBody');
+  btn.classList.toggle('open');body.classList.toggle('show');
+  document.getElementById('rulesBtnText').textContent=body.classList.contains('show')?'📖 Dölj reglerna för NIM':'📖 Visa reglerna för NIM';
 }
 </script>
 </body>
