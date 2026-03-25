@@ -1,0 +1,498 @@
+
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beslutsgränser – ai-aktiviteter.se</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--accent:#4d80ff;--accent2:#6698ff;--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--classA:#ff6a5e;--classB:#4d80ff;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
+.back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
+.back-link:hover{color:var(--text);border-color:var(--dim);}
+.hd{width:100%;text-align:center;padding:12px 16px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
+.hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}.hd h1 span{color:var(--accent2);}
+.hd p{color:var(--dim);font-size:0.8em;max-width:620px;margin:0 auto;line-height:1.4;}
+.app{display:flex;gap:0;flex:1;position:relative;z-index:1;}
+.canvas-area{flex:1;display:flex;flex-direction:column;align-items:center;padding:14px;border-right:1px solid var(--border);gap:8px;}
+.canvas-wrap{position:relative;border:2px solid var(--border);border-radius:8px;overflow:hidden;box-shadow:0 4px 30px rgba(0,0,0,0.5);}
+#cv{display:block;cursor:crosshair;}
+.class-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;}
+.cls-btn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.82em;padding:7px 18px;border-radius:7px;border:2px solid transparent;cursor:pointer;transition:0.2s;background:transparent;}
+.cls-btn.A{color:var(--classA);border-color:rgba(255,106,94,0.2);background:rgba(255,106,94,0.06);}
+.cls-btn.A.active{border-color:var(--classA);background:rgba(255,106,94,0.18);box-shadow:0 0 12px rgba(255,106,94,0.2);}
+.cls-btn.B{color:var(--classB);border-color:rgba(77,128,255,0.2);background:rgba(77,128,255,0.06);}
+.cls-btn.B.active{border-color:var(--classB);background:rgba(77,128,255,0.18);box-shadow:0 0 12px rgba(77,128,255,0.2);}
+.canvas-hint{font-size:0.72em;color:var(--dim);}
+.train-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;}
+.tc-btn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.82em;padding:7px 16px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:0.2s;}
+.tc-btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.08);}
+.tc-btn.play{background:var(--green);border-color:var(--green);color:#fff;}.tc-btn.play:hover{background:#2ab84d;}
+.tc-btn.pause{background:rgba(255,214,102,0.12);border-color:var(--gold);color:var(--gold);}.tc-btn.pause:hover{background:rgba(255,214,102,0.2);}
+.tc-btn.dn{color:var(--red);border-color:rgba(239,91,91,0.3);}.tc-btn.dn:hover{background:rgba(239,91,91,0.08);}
+.speed-wrap{display:flex;align-items:center;gap:6px;font-size:0.74em;color:var(--dim);}
+.speed-wrap input[type=range]{-webkit-appearance:none;width:80px;height:4px;border-radius:2px;background:var(--surface2);outline:none;}
+.speed-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer;}
+.speed-label{font-family:'JetBrains Mono',monospace;font-size:0.9em;color:var(--accent);min-width:20px;}
+.legend-strip{display:none;align-items:center;gap:10px;font-size:0.71em;color:var(--dim);flex-wrap:wrap;justify-content:center;}
+.leg{display:flex;align-items:center;gap:4px;}
+.lsq{width:11px;height:11px;border-radius:2px;flex-shrink:0;}
+
+/* Panel */
+.panel{width:300px;background:var(--surface);border-left:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;}
+.panel-tabs{display:flex;border-bottom:1px solid var(--border);}
+.ptab{flex:1;padding:9px 8px;text-align:center;font-size:0.74em;font-weight:600;color:var(--dim);background:var(--surface);cursor:pointer;transition:0.2s;border:none;font-family:'DM Sans',sans-serif;border-bottom:2px solid transparent;}
+.ptab:hover{color:var(--text);}
+.ptab.active{color:var(--text);border-bottom-color:var(--accent);}
+.ptab.adv.active{color:var(--gold);border-bottom-color:var(--gold);}
+.panel-body{flex:1;overflow-y:auto;padding:14px;}
+.panel-view{display:none;flex-direction:column;gap:14px;}.panel-view.active{display:flex;}
+
+.sec-t{font-size:0.66em;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--dim);margin-bottom:5px;}
+.model-list{display:flex;flex-direction:column;gap:5px;}
+.model-tab{font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:600;padding:9px 12px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;text-align:left;transition:0.2s;width:100%;}
+.model-tab:hover{border-color:var(--accent);color:var(--text);}
+.model-tab.active{background:rgba(77,128,255,0.1);border-color:var(--accent);color:var(--accent);}
+.model-tab .msub{font-size:0.85em;font-weight:400;display:block;margin-top:1px;color:var(--dim);}
+.model-tab.active .msub{color:rgba(77,128,255,0.5);}
+.preset-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
+.pbtn{font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.74em;padding:8px 6px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;transition:0.2s;text-align:center;line-height:1.4;}
+.pbtn:hover{border-color:var(--accent);color:var(--text);}
+.pbtn .picon{font-size:1.2em;display:block;margin-bottom:1px;}
+.stat-box{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:9px 11px;}
+.stat-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-size:0.76em;}.stat-row:last-child{margin-bottom:0;}
+.sl{color:var(--dim);}.sv{font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:600;}
+.sv.ok{color:var(--green);}.sv.warn{color:var(--red);}
+.train-indicator{display:flex;align-items:center;gap:7px;margin-top:6px;font-size:0.72em;color:var(--dim);}
+.tdot{width:7px;height:7px;border-radius:50%;background:var(--dim);flex-shrink:0;}
+.tdot.on{background:var(--green);animation:blink 1s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.35}}
+.info-box{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:10px 12px;font-size:0.76em;line-height:1.6;color:var(--dim);}
+.info-box strong{color:var(--text);}.info-box .hl{color:var(--accent);font-weight:600;}
+.info-box .ca{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--classA);vertical-align:middle;margin:0 1px;}
+.info-box .cb{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--classB);vertical-align:middle;margin:0 1px;}
+
+/* Advanced panel */
+.adv-t{font-size:0.66em;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,214,102,0.7);margin-bottom:5px;}
+.act-row{display:flex;gap:5px;}
+.act-btn{flex:1;font-family:'DM Sans',sans-serif;font-size:0.78em;font-weight:600;padding:7px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;transition:0.2s;text-align:center;}
+.act-btn:hover:not(.active){border-color:var(--accent);color:var(--text);}
+.act-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(255,214,102,0.08);}
+.note{font-size:0.72em;color:var(--dim);line-height:1.5;margin-top:4px;}.note strong{color:var(--text);}
+.nviz-toggle{display:flex;align-items:center;gap:8px;font-size:0.8em;cursor:pointer;color:var(--dim);user-select:none;}
+.nviz-toggle input[type=checkbox]{accent-color:var(--gold);width:14px;height:14px;cursor:pointer;}
+.nviz-toggle:hover{color:var(--text);}
+.nsel-row{display:flex;gap:5px;margin-top:5px;}
+.nsel{flex:1;font-family:'DM Sans',sans-serif;font-size:0.77em;padding:6px 8px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);cursor:pointer;outline:none;}
+.nsel:focus{border-color:var(--gold);}.nsel:disabled{opacity:0.3;pointer-events:none;}
+.arch-wrap{display:flex;flex-direction:column;gap:6px;}
+.arch-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
+.arch-input{width:44px;font-family:'JetBrains Mono',monospace;font-size:0.88em;padding:5px 6px;border:1px solid var(--border);border-radius:5px;background:var(--surface2);color:var(--text);text-align:center;outline:none;}
+.arch-input:focus{border-color:var(--gold);}
+.arch-label{font-size:0.75em;color:var(--dim);}
+.btn{font-family:'DM Sans',sans-serif;padding:8px 14px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);color:var(--text);font-size:0.82em;font-weight:600;cursor:pointer;transition:0.2s;text-align:center;width:100%;}
+.btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.08);}
+.btn.sm{font-size:0.76em;padding:6px 10px;}
+
+.overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
+.overlay.show{display:flex;}
+.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;max-width:520px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;}
+.overlay-card h2{font-size:1.1em;font-weight:700;margin-bottom:6px;}.overlay-card h2 span{color:var(--accent2);}
+.overlay-card .sub{font-size:0.84em;color:var(--dim);line-height:1.55;margin-bottom:14px;}
+.overlay-card .steps{display:flex;flex-direction:column;gap:10px;margin:14px 0;text-align:left;}
+.overlay-card .step{display:flex;gap:10px;align-items:flex-start;font-size:0.82em;color:var(--dim);line-height:1.5;}
+.overlay-card .step strong{color:var(--text);}
+.step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
+.overlay-btn{display:block;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}.overlay-btn:hover{background:#3d6de6;}
+@media(max-width:820px){
+  .app{flex-direction:column;}
+  .canvas-area{border-right:none;border-bottom:1px solid var(--border);}
+  .panel{width:100%;border-left:none;}
+  .back-link{position:static;transform:none;margin-bottom:4px;}
+}
+</style>
+</head>
+<body>
+
+<div class="hd">
+  <a class="back-link" href="/">← AI-aktiviteter</a>
+  <h1>Visualisering av <span>beslutsgränser</span></h1>
+  <p>Rita datapunkter i två klasser och se hur olika modeller drar gränsen mellan dem.</p>
+</div>
+
+<div class="app">
+  <div class="canvas-area">
+    <div class="canvas-wrap"><canvas id="cv" width="500" height="500"></canvas></div>
+    <div class="class-row">
+      <button class="cls-btn A active" id="btnA" onclick="setClass(0)">● Klass A</button>
+      <button class="cls-btn B" id="btnB" onclick="setClass(1)">● Klass B</button>
+      <span class="canvas-hint">Vänsterklick = A · Högerklick = B</span>
+    </div>
+    <div class="train-row">
+      <button class="tc-btn play" id="btnPlay" onclick="togglePlay()">▶ Träna</button>
+      <button class="tc-btn" onclick="resetNet()">↺ Träna om</button>
+      <button class="tc-btn dn" onclick="clearAll()">✕ Rensa</button>
+      <div class="speed-wrap">
+        <span>Hastighet</span>
+        <input type="range" id="speedSlider" min="0" max="3" value="0" oninput="updateSpeed()">
+        <span class="speed-label" id="speedLabel">½×</span>
+      </div>
+    </div>
+    <div class="legend-strip" id="legendStrip">
+      <div class="leg"><div class="lsq" style="background:var(--classA)"></div>Klass A</div>
+      <div class="leg"><div class="lsq" style="background:var(--classB)"></div>Klass B</div>
+      <div class="leg" id="legMis" style="display:none"><div class="lsq" style="border:2px dashed var(--gold);border-radius:50%;background:transparent"></div>Felklassificerad</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-tabs">
+      <button class="ptab active" id="ptStd" onclick="setPanelTab('std')">Standard</button>
+      <button class="ptab adv" id="ptAdv" onclick="setPanelTab('adv')">🔬 Avancerat</button>
+    </div>
+    <div class="panel-body">
+
+      <!-- Standard view -->
+      <div class="panel-view active" id="viewStd">
+        <div>
+          <div class="sec-t">Modell</div>
+          <div class="model-list">
+            <button class="model-tab active" id="mLin" onclick="setModel('linear')">Linjär modell<span class="msub">Alltid en rak linje</span></button>
+            <button class="model-tab" id="mNN1" onclick="setModel('nn1')">1 dolt lager<span class="msub">Kan böja gränsen</span></button>
+            <button class="model-tab" id="mNN2" onclick="setModel('nn2')">2 dolda lager<span class="msub">Komplexa former</span></button>
+          </div>
+        </div>
+        <div>
+          <div class="sec-t">Färdiga mönster</div>
+          <div class="preset-grid">
+            <button class="pbtn" onclick="loadPreset('linear')"><span class="picon">/</span>Linjärt</button>
+            <button class="pbtn" onclick="loadPreset('xor')"><span class="picon">⊕</span>XOR</button>
+            <button class="pbtn" onclick="loadPreset('circles')"><span class="picon">◎</span>Cirkel</button>
+            <button class="pbtn" onclick="loadPreset('spiral')"><span class="picon">↺</span>Spiral</button>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="sec-t" style="margin-bottom:6px">Status</div>
+          <div class="stat-row"><span class="sl">Iterationer</span><span class="sv" id="sIter">0</span></div>
+          <div class="stat-row"><span class="sl">Förlust</span><span class="sv" id="sLoss">–</span></div>
+          <div class="stat-row"><span class="sl">Träffsäkerhet</span><span class="sv" id="sAcc">–</span></div>
+          <div class="stat-row"><span class="sl">Felklassificerade</span><span class="sv" id="sMis">–</span></div>
+          <div class="stat-row"><span class="sl">Klass A / B</span><span class="sv" id="sPoints">0 / 0</span></div>
+          <div class="train-indicator"><div class="tdot" id="tdot"></div><span id="tstatus">Rita punkter för att börja</span></div>
+        </div>
+        <div class="info-box" id="infoBox">
+          <strong>Linjär modell</strong> kan bara rita en rak beslutsgräns. Testa XOR – den misslyckas! Byt till 1 dolt lager och se skillnaden.
+        </div>
+      </div>
+
+      <!-- Advanced view -->
+      <div class="panel-view" id="viewAdv">
+        <div>
+          <div class="adv-t">Aktiveringsfunktion</div>
+          <div class="act-row">
+            <button class="act-btn active" id="actTanh" onclick="setActFn('tanh')">tanh</button>
+            <button class="act-btn" id="actRelu" onclick="setActFn('relu')">ReLU</button>
+          </div>
+          <div class="note" id="actNote"><strong>tanh</strong> ger värden −1 till +1. Mjuka, böjda gränser. Aktiv i hela intervallet.</div>
+        </div>
+        <div>
+          <div class="adv-t">Neuronaktivering</div>
+          <label class="nviz-toggle"><input type="checkbox" id="nvizCk" onchange="toggleNviz()"> Visa en neurons aktivering</label>
+          <div class="nsel-row" id="nselRow" style="opacity:0.35;pointer-events:none">
+            <select class="nsel" id="lyrSel" onchange="refreshNeuronSel();onNeuronChange()"></select>
+            <select class="nsel" id="nrnSel" onchange="onNeuronChange()"></select>
+          </div>
+          <div class="note">Varje neuron visar sitt eget <strong>aktiveringsvärde</strong> – rött = negativt, blått = positivt. En neuron klassificerar inte själv – det är först när alla neuroners signaler <strong>kombineras</strong> i utdatalagret som beslutsgränsen uppstår.</div>
+        </div>
+        <div>
+          <div class="adv-t">Arkitektur (neuroner per dolt lager)</div>
+          <div class="arch-wrap" id="archWrap"></div>
+          <button class="btn sm" style="margin-top:6px" onclick="applyArch()">Tillämpa & träna om</button>
+        </div>
+        <div class="info-box">
+          <strong>Tips</strong><br><br>
+          Aktivera <strong>neuronvisualisering</strong> och bläddra igenom neuronerna – se hur varje neuron delar upp planet på sitt eget sätt. Det är kombinationen av alla neuroner som skapar den slutliga beslutsgränsen.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="overlay show" id="introOverlay">
+  <div class="overlay-card">
+    <h2>Visualisering av <span>beslutsgränser</span></h2>
+    <p class="sub">En klassificeringsmodell lär sig dra en gräns mellan olika kategorier. Men hur ser den gränsen ut – och varför behövs ibland ett neuralt nätverk?</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div><strong>Börja med det linjära mönstret</strong> – Det är redan inladdat. Välj <strong>Linjär modell</strong> och tryck ▶ Träna. Se hur en rak linje separerar de två klasserna – det fungerar!</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Testa XOR-mönstret</strong> – Byt till mönstret <strong>XOR</strong> i högermenyn. Träna med linjär modell igen. Ser du att en rak linje <em>inte kan</em> lösa det? Punkter med guldring = felklassificerade.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Lägg till ett dolt lager</strong> – Byt modell till <strong>1 dolt lager</strong> och träna om. Se hur gränsen böjer sig och punkterna klassificeras rätt! Det är därför neurala nätverk behöver dolda lager.</div></div>
+    </div>
+    <p class="sub" style="margin-bottom:0;">💡 <strong style="color:var(--text)">Tips:</strong> I fliken <strong style="color:var(--gold)">Avancerat</strong> kan du aktivera <em>neuronvisualisering</em> – se hur varje enskild neuron i det dolda lagret delar upp ytan på sitt eget sätt. Det är kombinationen av alla neuroner som skapar den slutliga beslutsgränsen.</p>
+    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta simuleringen →</button>
+  </div>
+</div>
+
+<div class="overlay" id="advOverlay">
+  <div class="overlay-card">
+    <h2 style="color:var(--gold);">🔬 Avancerat läge</h2>
+    <p class="sub">Här kan du gräva djupare i hur modellen fungerar.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">1</div><div><strong>Neuronvisualisering</strong> – Aktivera den och bläddra igenom neuronerna i det dolda lagret. Varje neuron delar upp ytan på sitt eget sätt – den ena kanske reagerar på "övre vänstra hörnet", en annan på "diagonalen". Beslutsgränsen du ser i standardläge uppstår när alla neuroners bidrag kombineras i utdatalagret.</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">2</div><div><strong>Aktiveringsfunktion</strong> – Byt mellan <strong>tanh</strong> (mjuka kurvor) och <strong>ReLU</strong> (skarpa knickar). Se hur formen på beslutsgränsen förändras.</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">3</div><div><strong>Ändra arkitektur</strong> – Justera antalet neuroner per lager. Fler neuroner = mer flexibel gräns, men också långsammare träning.</div></div>
+    </div>
+    <button class="overlay-btn" style="background:var(--gold);color:#090b14;" onclick="document.getElementById('advOverlay').classList.remove('show')">Jag förstår →</button>
+  </div>
+</div>
+
+<script>
+const sigmoid=x=>1/(1+Math.exp(-Math.max(-20,Math.min(20,x))));
+const clamp=(x,lo,hi)=>Math.max(lo,Math.min(hi,x));
+const lerp=(a,b,t)=>a+(b-a)*t;
+
+class Net{
+  constructor(arch,actFn='tanh'){
+    this.arch=arch;this.actFn=actFn;this.W=[];this.b=[];
+    for(let l=0;l<arch.length-1;l++){
+      const fi=arch[l],fo=arch[l+1],sc=actFn==='relu'?Math.sqrt(2/fi):Math.sqrt(2/fi)*0.9;
+      this.W.push(Array.from({length:fo},()=>Array.from({length:fi},()=>(Math.random()-.5)*2*sc)));
+      this.b.push(new Array(fo).fill(0));
+    }
+  }
+  act(z){return this.actFn==='relu'?Math.max(0,z):Math.tanh(z);}
+  actG(a){return this.actFn==='relu'?(a>0?1:0):(1-a*a);}
+  forward(x){
+    const acts=[x.slice()];let a=x.slice();
+    for(let l=0;l<this.W.length;l++){
+      const last=l===this.W.length-1;const nxt=new Array(this.arch[l+1]);
+      for(let j=0;j<this.arch[l+1];j++){let z=this.b[l][j];for(let k=0;k<a.length;k++)z+=this.W[l][j][k]*a[k];nxt[j]=last?sigmoid(z):this.act(z);}
+      a=nxt;acts.push(a.slice());
+    }return acts;
+  }
+  predict(x){return this.forward(x).at(-1)[0];}
+  neuronAct(x,hLayer,nIdx){const acts=this.forward(x);const al=acts[hLayer+1];return al?(al[nIdx]??0):0;}
+  trainStep(data,lr){
+    if(!data.length)return 0;const n=data.length;
+    const gW=this.W.map(w=>w.map(r=>new Array(r.length).fill(0)));
+    const gb=this.b.map(b=>new Array(b.length).fill(0));let loss=0;
+    for(const{x,y}of data){
+      const acts=this.forward(x);const p=acts.at(-1)[0];
+      loss-=y*Math.log(p+1e-10)+(1-y)*Math.log(1-p+1e-10);
+      const D=new Array(this.W.length);D[this.W.length-1]=[p-y];
+      for(let l=this.W.length-2;l>=0;l--){const dn=D[l+1],ac=acts[l+1];const d=new Array(this.arch[l+1]);
+        for(let k=0;k<this.arch[l+1];k++){let s=0;for(let j=0;j<dn.length;j++)s+=this.W[l+1][j][k]*dn[j];d[k]=s*this.actG(ac[k]);}D[l]=d;}
+      for(let l=0;l<this.W.length;l++){const ap=acts[l],d=D[l];for(let j=0;j<d.length;j++){gb[l][j]+=d[j];for(let k=0;k<ap.length;k++)gW[l][j][k]+=d[j]*ap[k];}}
+    }
+    for(let l=0;l<this.W.length;l++){for(let j=0;j<this.W[l].length;j++){this.b[l][j]-=lr*gb[l][j]/n;for(let k=0;k<this.W[l][j].length;k++)this.W[l][j][k]-=lr*gW[l][j][k]/n;}}
+    return loss/n;
+  }
+}
+
+const CS=500,DR=2.6,BGRES=100;
+const BASE_ARCH={linear:[2,1],nn1:[2,18,1],nn2:[2,18,10,1]};
+const LR_MAP={tanh:0.17,relu:0.08};
+const SPEED_SPF=[1,3,8,25]; // steps per frame at each speed level
+const SPEED_LABELS=['½×','1×','2×','5×'];
+
+let points=[],curClass=0,curModel='nn1',actFn='tanh';
+let customArch=null;
+let net=null,itr=0,lastLoss=0,playing=false;
+let neuronViz=false,selLayer=0,selNeuron=0;
+let speedIdx=0;
+let advShown=false;
+
+const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+const tmp=document.createElement('canvas');tmp.width=BGRES;tmp.height=BGRES;
+const tctx=tmp.getContext('2d');
+
+const d2p=(x,y)=>[(x/DR+.5)*CS,(-y/DR+.5)*CS];
+const p2d=(px,py)=>[(px/CS-.5)*DR,-(py/CS-.5)*DR];
+const getArch=()=>customArch??BASE_ARCH[curModel];
+const getLR=()=>LR_MAP[actFn]??0.12;
+const hasBoth=()=>points.some(p=>p.cls===0)&&points.some(p=>p.cls===1);
+
+// ── Render ──
+function renderBg(){
+  if(!net||!hasBoth()){ctx.fillStyle='#090b14';ctx.fillRect(0,0,CS,CS);return;}
+  const id=tctx.createImageData(BGRES,BGRES);const d=id.data;
+  if(neuronViz&&net.arch.length>2){
+    let minA=Infinity,maxA=-Infinity;const grid=[];
+    for(let py=0;py<BGRES;py++){const row=[];for(let px=0;px<BGRES;px++){const[x,y]=p2d((px+.5)/BGRES*CS,(py+.5)/BGRES*CS);const a=net.neuronAct([x,y],selLayer,selNeuron);if(a<minA)minA=a;if(a>maxA)maxA=a;row.push(a);}grid.push(row);}
+    const range=Math.max(Math.abs(minA),Math.abs(maxA),0.01);
+    for(let py=0;py<BGRES;py++){for(let px=0;px<BGRES;px++){const t=(grid[py][px]/range+1)/2;const i=(py*BGRES+px)*4;
+      if(t>=0.5){const f=(t-0.5)*2;d[i]=Math.round(lerp(20,77,f));d[i+1]=Math.round(lerp(30,128,f));d[i+2]=Math.round(lerp(50,255,f));}
+      else{const f=(0.5-t)*2;d[i]=Math.round(lerp(20,255,f));d[i+1]=Math.round(lerp(30,80,f));d[i+2]=Math.round(lerp(50,60,f));}
+      d[i+3]=255;}}
+  }else{
+    for(let py=0;py<BGRES;py++){for(let px=0;px<BGRES;px++){
+      const[x,y]=p2d((px+.5)/BGRES*CS,(py+.5)/BGRES*CS);
+      const p=net.predict([x,y]);const conf=clamp(Math.abs(p-.5)*3.2,0,1);const sq=conf*conf;
+      const i=(py*BGRES+px)*4;
+      if(p>.5){d[i]=Math.round(lerp(9,77,sq));d[i+1]=Math.round(lerp(11,128,sq));d[i+2]=Math.round(lerp(20,255,sq));}
+      else{d[i]=Math.round(lerp(9,255,sq));d[i+1]=Math.round(lerp(11,106,sq));d[i+2]=Math.round(lerp(20,94,sq));}
+      d[i+3]=255;
+    }}
+  }
+  tctx.putImageData(id,0,0);
+  ctx.save();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+  ctx.drawImage(tmp,0,0,CS,CS);ctx.restore();
+}
+
+function renderGrid(){
+  ctx.strokeStyle='rgba(255,255,255,0.05)';ctx.lineWidth=1;
+  for(let i=0;i<=10;i++){const v=i*CS/10;ctx.beginPath();ctx.moveTo(v,0);ctx.lineTo(v,CS);ctx.stroke();ctx.beginPath();ctx.moveTo(0,v);ctx.lineTo(CS,v);ctx.stroke();}
+  ctx.strokeStyle='rgba(255,255,255,0.12)';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(CS/2,0);ctx.lineTo(CS/2,CS);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(0,CS/2);ctx.lineTo(CS,CS/2);ctx.stroke();
+}
+
+function isCorrect(pt){if(!net||!hasBoth()||itr===0)return true;const p=net.predict([pt.x,pt.y]);return pt.cls===0?p<=0.5:p>0.5;}
+
+function renderPoints(){
+  for(const pt of points){
+    const[px,py]=d2p(pt.x,pt.y);const ok=isCorrect(pt);
+    ctx.save();
+    if(!ok){ctx.setLineDash([3,2]);ctx.strokeStyle='#ffd866';ctx.lineWidth=2;ctx.beginPath();ctx.arc(px,py,12,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);}
+    ctx.shadowColor=pt.cls===0?'rgba(255,106,94,0.55)':'rgba(77,128,255,0.55)';
+    ctx.shadowBlur=9;ctx.beginPath();ctx.arc(px,py,7.5,0,Math.PI*2);
+    ctx.fillStyle=pt.cls===0?'#ff6a5e':'#4d80ff';ctx.fill();
+    ctx.shadowBlur=0;ctx.strokeStyle='rgba(255,255,255,0.7)';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.restore();
+  }
+}
+
+function draw(){ctx.clearRect(0,0,CS,CS);renderBg();renderGrid();renderPoints();}
+
+function calcAcc(){if(!net||!hasBoth()||itr===0)return null;let ok=0;for(const pt of points)if(isCorrect(pt))ok++;return{acc:ok/points.length,mis:points.length-ok};}
+
+function updateStats(){
+  document.getElementById('sIter').textContent=itr;
+  document.getElementById('sLoss').textContent=(hasBoth()&&itr>0)?lastLoss.toFixed(4):'–';
+  const nA=points.filter(p=>p.cls===0).length,nB=points.filter(p=>p.cls===1).length;
+  document.getElementById('sPoints').textContent=nA+' / '+nB;
+  const acc=calcAcc();const ae=document.getElementById('sAcc'),me=document.getElementById('sMis'),lm=document.getElementById('legMis');
+  if(!acc){ae.textContent='–';ae.className='sv';me.textContent='–';me.className='sv';lm.style.display='none';}
+  else{const pct=Math.round(acc.acc*100);ae.textContent=pct+'%';ae.className='sv'+(pct>=90?' ok':pct<70?' warn':'');me.textContent=acc.mis;me.className='sv'+(acc.mis>0?' warn':'');lm.style.display=acc.mis>0?'flex':'none';}
+  document.getElementById('legendStrip').style.display=hasBoth()?'flex':'none';
+  const dot=document.getElementById('tdot'),st=document.getElementById('tstatus');
+  if(points.length===0){dot.className='tdot';st.textContent='Rita punkter för att börja';}
+  else if(!hasBoth()){dot.className='tdot';st.textContent='Lägg till punkter i båda klasser';}
+  else if(playing){dot.className='tdot on';st.textContent='Tränar…';}
+  else if(itr===0){dot.className='tdot';st.textContent='Tryck ▶ Träna';}
+  else{dot.className='tdot';st.textContent=lastLoss<0.02?'✓ Konvergerad':'Pausad';}
+}
+
+// ── Training loop ──
+function loop(){
+  if(playing&&net&&hasBoth()){
+    const data=points.map(p=>({x:[p.x,p.y],y:p.cls}));
+    const spf=SPEED_SPF[speedIdx];
+    for(let i=0;i<spf;i++)lastLoss=net.trainStep(data,getLR());
+    itr+=spf;
+    if(itr>30000||lastLoss<0.002){playing=false;updPlayBtn();}
+  }
+  draw();updateStats();requestAnimationFrame(loop);
+}
+
+function updPlayBtn(){const b=document.getElementById('btnPlay');b.textContent=playing?'⏸ Pausa':'▶ Träna';b.className=playing?'tc-btn pause':'tc-btn play';}
+function updateSpeed(){speedIdx=parseInt(document.getElementById('speedSlider').value);document.getElementById('speedLabel').textContent=SPEED_LABELS[speedIdx];}
+
+// ── Controls ──
+function initNet(){net=new Net(getArch(),actFn);itr=0;lastLoss=0;playing=false;updPlayBtn();buildNeuronSelects();buildArchControls();}
+function togglePlay(){if(!hasBoth())return;if(itr===0)net=new Net(getArch(),actFn);playing=!playing;updPlayBtn();}
+function resetNet(){playing=false;initNet();}
+function clearAll(){points=[];playing=false;initNet();}
+function setClass(c){curClass=c;document.getElementById('btnA').classList.toggle('active',c===0);document.getElementById('btnB').classList.toggle('active',c===1);}
+
+const MODEL_INFO={
+  linear:'<strong>Linjär modell</strong> kan bara rita en rak beslutsgräns. Testa XOR – den misslyckas! Byt till 1 dolt lager och se skillnaden.',
+  nn1:'<strong>1 dolt lager (18 neuroner)</strong> – varje neuron reagerar på en kombination av x och y. Tillsammans böjer de gränsen. Öppna <strong>Avancerat</strong> och aktivera neuronvisualisering!',
+  nn2:'<strong>2 dolda lager (18+10 neuroner)</strong> – fler lager möjliggör mer komplexa gränser. Kan hantera spiraler och korsade mönster.'
+};
+
+function setModel(m){
+  curModel=m;customArch=null;
+  document.getElementById('mLin').classList.toggle('active',m==='linear');
+  document.getElementById('mNN1').classList.toggle('active',m==='nn1');
+  document.getElementById('mNN2').classList.toggle('active',m==='nn2');
+  document.getElementById('infoBox').innerHTML=MODEL_INFO[m];
+  initNet();
+}
+
+function setPanelTab(tab){
+  document.getElementById('ptStd').classList.toggle('active',tab==='std');
+  document.getElementById('ptAdv').classList.toggle('active',tab==='adv');
+  document.getElementById('viewStd').classList.toggle('active',tab==='std');
+  document.getElementById('viewAdv').classList.toggle('active',tab==='adv');
+  if(tab==='adv'&&!advShown){advShown=true;document.getElementById('advOverlay').classList.add('show');}
+}
+
+// Canvas interaction
+cv.addEventListener('mousedown',e=>{
+  e.preventDefault();const r=cv.getBoundingClientRect();
+  const px=(e.clientX-r.left)*CS/r.width,py=(e.clientY-r.top)*CS/r.height;
+  const[x,y]=p2d(px,py);const cls=e.button===2?1:curClass;
+  if(!points.some(p=>Math.hypot(p.x-x,p.y-y)<0.09)){points.push({x,y,cls});if(hasBoth()&&itr===0)net=new Net(getArch(),actFn);}
+});
+cv.addEventListener('contextmenu',e=>e.preventDefault());
+
+// Presets
+function clust(cx,cy,n,r){return Array.from({length:n},()=>({x:cx+(Math.random()-.5)*2*r,y:cy+(Math.random()-.5)*2*r}));}
+function loadPreset(name){
+  points=[];
+  if(name==='xor'){clust(-.58,-.58,13,.33).forEach(p=>points.push({...p,cls:0}));clust(.58,.58,13,.33).forEach(p=>points.push({...p,cls:0}));clust(-.58,.58,13,.33).forEach(p=>points.push({...p,cls:1}));clust(.58,-.58,13,.33).forEach(p=>points.push({...p,cls:1}));}
+  else if(name==='circles'){for(let i=0;i<18;i++){const a=Math.random()*Math.PI*2,r=Math.random()*.28;points.push({x:Math.cos(a)*r,y:Math.sin(a)*r,cls:0});}for(let i=0;i<24;i++){const a=Math.random()*Math.PI*2,r=.62+Math.random()*.32;points.push({x:Math.cos(a)*r,y:Math.sin(a)*r,cls:1});}}
+  else if(name==='spiral'){for(let i=0;i<22;i++){const t=i/22*Math.PI*1.7,r=.18+t*.23,nx=(Math.random()-.5)*.1,ny=(Math.random()-.5)*.1;points.push({x:r*Math.cos(t)+nx,y:r*Math.sin(t)+ny,cls:0});points.push({x:r*Math.cos(t+Math.PI)+nx,y:r*Math.sin(t+Math.PI)+ny,cls:1});}}
+  else if(name==='linear'){clust(-.55,.2,14,.42).forEach(p=>points.push({...p,cls:0}));clust(.55,-.2,14,.42).forEach(p=>points.push({...p,cls:1}));}
+  initNet();
+}
+
+// ── Advanced: Activation function ──
+const ACT_NOTE={tanh:'<strong>tanh</strong> ger värden −1 till +1. Mjuka, böjda gränser.',relu:'<strong>ReLU</strong> ger 0 för negativa, annars z. Skarpa knickar i gränsen.'};
+function setActFn(fn){actFn=fn;document.getElementById('actTanh').classList.toggle('active',fn==='tanh');document.getElementById('actRelu').classList.toggle('active',fn==='relu');document.getElementById('actNote').innerHTML=ACT_NOTE[fn];initNet();}
+
+// ── Advanced: Neuron viz ──
+function toggleNviz(){neuronViz=document.getElementById('nvizCk').checked;const row=document.getElementById('nselRow');row.style.opacity=neuronViz?'1':'0.35';row.style.pointerEvents=neuronViz?'auto':'none';}
+function buildNeuronSelects(){
+  const arch=getArch();const lSel=document.getElementById('lyrSel'),nSel=document.getElementById('nrnSel');
+  lSel.innerHTML='';const nHidden=arch.length-2;
+  for(let l=0;l<nHidden;l++){const o=document.createElement('option');o.value=l;o.textContent='Lager '+(l+1);lSel.appendChild(o);}
+  lSel.disabled=nHidden===0;nSel.disabled=nHidden===0;refreshNeuronSel();
+}
+function refreshNeuronSel(){
+  const arch=getArch();const l=parseInt(document.getElementById('lyrSel').value)||0;selLayer=l;
+  const nSel=document.getElementById('nrnSel');nSel.innerHTML='';const count=arch[l+1]||0;
+  for(let n=0;n<count;n++){const o=document.createElement('option');o.value=n;o.textContent='Neuron '+(n+1);nSel.appendChild(o);}selNeuron=0;
+}
+function onNeuronChange(){selLayer=parseInt(document.getElementById('lyrSel').value)||0;selNeuron=parseInt(document.getElementById('nrnSel').value)||0;}
+
+// ── Advanced: Architecture editor ──
+function buildArchControls(){
+  const arch=getArch();const wrap=document.getElementById('archWrap');wrap.innerHTML='';const nHidden=arch.length-2;
+  if(nHidden===0){wrap.innerHTML='<div class="note">Linjär modell har inga dolda lager.</div>';return;}
+  const row=document.createElement('div');row.className='arch-row';
+  for(let l=1;l<=nHidden;l++){
+    const lbl=document.createElement('span');lbl.className='arch-label';lbl.textContent='L'+l+':';
+    const inp=document.createElement('input');inp.type='number';inp.min='1';inp.max='64';inp.value=arch[l];inp.className='arch-input';inp.id='aL'+l;
+    row.appendChild(lbl);row.appendChild(inp);
+    if(l<nHidden){const arr=document.createElement('span');arr.textContent='→';arr.style.color='var(--dim)';row.appendChild(arr);}
+  }
+  wrap.appendChild(row);
+}
+function applyArch(){
+  const arch=getArch().slice();const nHidden=arch.length-2;
+  for(let l=1;l<=nHidden;l++){const inp=document.getElementById('aL'+l);if(inp){const v=parseInt(inp.value);if(v>=1&&v<=64)arch[l]=v;}}
+  customArch=arch;initNet();
+}
+
+setModel('linear');loadPreset('linear');loop();
+</script>
+</body>
+</html>
+
