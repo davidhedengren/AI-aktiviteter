@@ -239,7 +239,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div><strong>Börja med det linjära mönstret</strong> – Välj <strong>Linjär modell</strong> och tryck ▶ Träna. Se hur en rak linje separerar de två klasserna!</div></div>
       <div class="step"><div class="step-num">2</div><div><strong>Testa XOR-mönstret</strong> – Byt till mönstret <strong>XOR</strong> i högermenyn. Träna med linjär modell igen. Ser du att en rak linje <em>inte kan</em> klassificera punkterna?</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Lägg till ett dolt lager</strong> – Byt modell till <strong>1 dolt lager</strong> och träna om. Se hur gränsen böjer sig och punkterna klassificeras rätt!</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Lägg till ett dolt lager</strong> – Byt modell till <strong>Neuralt nätverk med 1 dolt lager</strong> och träna om. Se hur gränsen böjer sig och punkterna klassificeras rätt!</div></div>
     </div>
     <p class="sub" style="margin-bottom:0;">💡 <strong style="color:var(--text)">Tips:</strong> I fliken <strong style="color:var(--gold)">Avancerat</strong> kan du aktivera <em>neuronvisualisering</em> – Här kan du se hur varje enskild neuron i det dolda lagret delar upp ytan på sitt eget sätt. Det är kombinationen av alla neuroner som skapar den slutliga beslutsgränsen.</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta simuleringen →</button>
@@ -419,7 +419,7 @@ function clearAll(){points=[];playing=false;initNet();}
 function setClass(c){curClass=c;document.getElementById('btnA').classList.toggle('active',c===0);document.getElementById('btnB').classList.toggle('active',c===1);}
 
 const MODEL_INFO={
-  linear:'<strong>Linjär modell</strong> kan bara rita en rak beslutsgräns. Testa XOR – den misslyckas! Byt till 1 dolt lager och se skillnaden.',
+  linear:'<strong>Linjär modell</strong> kan bara rita en rak beslutsgräns. Testa XOR – den misslyckas! Byt till Neuralt nätverk med 1 dolt lager och se skillnaden.',
   nn1:'<strong>1 dolt lager (18 neuroner)</strong> – varje neuron reagerar på en kombination av x och y. Tillsammans böjer de gränsen. Öppna <strong>Avancerat</strong> och aktivera neuronvisualisering!',
   nn2:'<strong>2 dolda lager (18+10 neuroner)</strong> – fler lager möjliggör mer komplexa gränser. Kan hantera spiraler och korsade mönster.'
 };
