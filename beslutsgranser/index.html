@@ -130,7 +130,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
   <h1>Visualisering av <span>beslutsgränser</span></h1>
-  <p>Rita datapunkter i två klasser och se hur olika modeller drar gränsen mellan dem.</p>
+  <p>Rita datapunkter för två klasser och se hur olika modeller drar gränsen mellan dem.</p>
 </div>
 
 <div class="app">
@@ -194,7 +194,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
           <div class="train-indicator"><div class="tdot" id="tdot"></div><span id="tstatus">Rita punkter för att börja</span></div>
         </div>
         <div class="info-box" id="infoBox">
-          <strong>Linjär modell</strong> kan bara rita en rak beslutsgräns. Testa XOR – den misslyckas! Byt till 1 dolt lager och se skillnaden.
+          <strong>Linjär modell</strong> kan bara rita en rak beslutsgräns. Testa om den lyckas klassificera exempelvis ett XOR-mönster.
         </div>
       </div>
 
@@ -224,7 +224,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         </div>
         <div class="info-box">
           <strong>Tips</strong><br><br>
-          Aktivera <strong>neuronvisualisering</strong> och bläddra igenom neuronerna – se hur varje neuron delar upp planet på sitt eget sätt. Det är kombinationen av alla neuroner som skapar den slutliga beslutsgränsen.
+          Aktivera <strong>neuronvisualisering</strong> och se hur varje neuron delar upp planet på sitt eget sätt. Det är kombinationen av alla neuroner som skapar den slutliga beslutsgränsen.
         </div>
       </div>
 
@@ -235,13 +235,13 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
     <h2>Visualisering av <span>beslutsgränser</span></h2>
-    <p class="sub">En klassificeringsmodell lär sig dra en gräns mellan olika kategorier. Men hur ser den gränsen ut – och varför behövs ibland ett neuralt nätverk?</p>
+    <p class="sub">En klassificeringsmodell lär sig dra en gräns mellan olika kategorier. Undersök hur den gränsen ser ut och upptäck varför det ofta behövs ett neuralt nätverk?</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Börja med det linjära mönstret</strong> – Det är redan inladdat. Välj <strong>Linjär modell</strong> och tryck ▶ Träna. Se hur en rak linje separerar de två klasserna – det fungerar!</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Testa XOR-mönstret</strong> – Byt till mönstret <strong>XOR</strong> i högermenyn. Träna med linjär modell igen. Ser du att en rak linje <em>inte kan</em> lösa det? Punkter med guldring = felklassificerade.</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Lägg till ett dolt lager</strong> – Byt modell till <strong>1 dolt lager</strong> och träna om. Se hur gränsen böjer sig och punkterna klassificeras rätt! Det är därför neurala nätverk behöver dolda lager.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Börja med det linjära mönstret</strong> – Välj <strong>Linjär modell</strong> och tryck ▶ Träna. Se hur en rak linje separerar de två klasserna!</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Testa XOR-mönstret</strong> – Byt till mönstret <strong>XOR</strong> i högermenyn. Träna med linjär modell igen. Ser du att en rak linje <em>inte kan</em> klassificera punkterna?</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Lägg till ett dolt lager</strong> – Byt modell till <strong>1 dolt lager</strong> och träna om. Se hur gränsen böjer sig och punkterna klassificeras rätt!</div></div>
     </div>
-    <p class="sub" style="margin-bottom:0;">💡 <strong style="color:var(--text)">Tips:</strong> I fliken <strong style="color:var(--gold)">Avancerat</strong> kan du aktivera <em>neuronvisualisering</em> – se hur varje enskild neuron i det dolda lagret delar upp ytan på sitt eget sätt. Det är kombinationen av alla neuroner som skapar den slutliga beslutsgränsen.</p>
+    <p class="sub" style="margin-bottom:0;">💡 <strong style="color:var(--text)">Tips:</strong> I fliken <strong style="color:var(--gold)">Avancerat</strong> kan du aktivera <em>neuronvisualisering</em> – Här kan du se hur varje enskild neuron i det dolda lagret delar upp ytan på sitt eget sätt. Det är kombinationen av alla neuroner som skapar den slutliga beslutsgränsen.</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta simuleringen →</button>
   </div>
 </div>
@@ -249,11 +249,11 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="overlay" id="advOverlay">
   <div class="overlay-card">
     <h2 style="color:var(--gold);">🔬 Avancerat läge</h2>
-    <p class="sub">Här kan du gräva djupare i hur modellen fungerar.</p>
+    <p class="sub">Här kan du analysera modellen ytterligare.</p>
     <div class="steps">
       <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">1</div><div><strong>Neuronvisualisering</strong> – Aktivera den och bläddra igenom neuronerna i det dolda lagret. Varje neuron delar upp ytan på sitt eget sätt – den ena kanske reagerar på "övre vänstra hörnet", en annan på "diagonalen". Beslutsgränsen du ser i standardläge uppstår när alla neuroners bidrag kombineras i utdatalagret.</div></div>
-      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">2</div><div><strong>Aktiveringsfunktion</strong> – Byt mellan <strong>tanh</strong> (mjuka kurvor) och <strong>ReLU</strong> (skarpa knickar). Se hur formen på beslutsgränsen förändras.</div></div>
-      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">3</div><div><strong>Ändra arkitektur</strong> – Justera antalet neuroner per lager. Fler neuroner = mer flexibel gräns, men också långsammare träning.</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">2</div><div><strong>Aktiveringsfunktion</strong> – Byt mellan <strong>tanh</strong> (mjuka kurvor) och <strong>ReLU</strong> (skarpare kanter). Se hur formen på beslutsgränsen förändras.</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">3</div><div><strong>Ändra arkitektur</strong> – Justera antalet neuroner per lager. Här kan du upptäcka att fler neuroner ger en mer flexibel gräns, men också långsammare träning.</div></div>
     </div>
     <button class="overlay-btn" style="background:var(--gold);color:#090b14;" onclick="document.getElementById('advOverlay').classList.remove('show')">Jag förstår →</button>
   </div>
