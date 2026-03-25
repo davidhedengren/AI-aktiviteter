@@ -171,8 +171,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
           <div class="sec-t">Modell</div>
           <div class="model-list">
             <button class="model-tab active" id="mLin" onclick="setModel('linear')">Linjär modell<span class="msub">Alltid en rak linje</span></button>
-            <button class="model-tab" id="mNN1" onclick="setModel('nn1')">1 dolt lager<span class="msub">Kan böja gränsen</span></button>
-            <button class="model-tab" id="mNN2" onclick="setModel('nn2')">2 dolda lager<span class="msub">Komplexa former</span></button>
+            <button class="model-tab" id="mNN1" onclick="setModel('nn1')">Neuralt nätverk med 1 dolt lager<span class="msub">Kan böja gränsen</span></button>
+            <button class="model-tab" id="mNN2" onclick="setModel('nn2')">Neuralt nätverk med 2 dolda lager<span class="msub">Klarar av mer Komplexa former</span></button>
           </div>
         </div>
         <div>
@@ -235,7 +235,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
     <h2>Visualisering av <span>beslutsgränser</span></h2>
-    <p class="sub">En klassificeringsmodell lär sig dra en gräns mellan olika kategorier. Undersök hur den gränsen ser ut och upptäck varför det ofta behövs ett neuralt nätverk?</p>
+    <p class="sub">En klassificeringsmodell lär sig dra en gräns mellan olika kategorier. Undersök hur den gränsen ser ut och upptäck varför det ofta behövs ett neuralt nätverk</p>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div><strong>Börja med det linjära mönstret</strong> – Välj <strong>Linjär modell</strong> och tryck ▶ Träna. Se hur en rak linje separerar de två klasserna!</div></div>
       <div class="step"><div class="step-num">2</div><div><strong>Testa XOR-mönstret</strong> – Byt till mönstret <strong>XOR</strong> i högermenyn. Träna med linjär modell igen. Ser du att en rak linje <em>inte kan</em> klassificera punkterna?</div></div>
