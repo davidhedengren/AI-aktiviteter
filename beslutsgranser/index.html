@@ -462,7 +462,7 @@ function loadPreset(name){
 }
 
 // ── Advanced: Activation function ──
-const ACT_NOTE={tanh:'<strong>tanh</strong> ger värden −1 till +1. Mjuka, böjda gränser.',relu:'<strong>ReLU</strong> ger 0 för negativa, annars z. Skarpa knickar i gränsen.'};
+const ACT_NOTE={tanh:'<strong>tanh</strong> ger värden −1 till +1. Mjuka, böjda gränser.',relu:'<strong>ReLU</strong> ger 0 för negativa, annars z. Skarpa kanter i gränsen.'};
 function setActFn(fn){actFn=fn;document.getElementById('actTanh').classList.toggle('active',fn==='tanh');document.getElementById('actRelu').classList.toggle('active',fn==='relu');document.getElementById('actNote').innerHTML=ACT_NOTE[fn];initNet();}
 
 // ── Advanced: Neuron viz ──
