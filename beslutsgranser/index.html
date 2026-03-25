@@ -215,7 +215,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
             <select class="nsel" id="lyrSel" onchange="refreshNeuronSel();onNeuronChange()"></select>
             <select class="nsel" id="nrnSel" onchange="onNeuronChange()"></select>
           </div>
-          <div class="note">Varje neuron visar sitt eget <strong>aktiveringsvärde</strong> – rött = negativt, blått = positivt. En neuron klassificerar inte själv – det är först när alla neuroners signaler <strong>kombineras</strong> i utdatalagret som beslutsgränsen uppstår.</div>
+          <div class="note">Varje neuron visar sitt eget <strong>aktiveringsvärde</strong>.  Bläddra mellan de olika neuronerna och se hur varje neuron delar upp planet på sitt eget sätt. En neuron klassificerar inte själv – det är först när alla neuroners signaler <strong>kombineras</strong> i utdatalagret som beslutsgränsen uppstår.</div>
         </div>
         <div>
           <div class="adv-t">Arkitektur (neuroner per dolt lager)</div>
@@ -223,8 +223,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
           <button class="btn sm" style="margin-top:6px" onclick="applyArch()">Tillämpa & träna om</button>
         </div>
         <div class="info-box">
-          <strong>Tips</strong><br><br>
-          Aktivera <strong>neuronvisualisering</strong> och se hur varje neuron delar upp planet på sitt eget sätt. Det är kombinationen av alla neuroner som skapar den slutliga beslutsgränsen.
+        
         </div>
       </div>
 
@@ -419,9 +418,9 @@ function clearAll(){points=[];playing=false;initNet();}
 function setClass(c){curClass=c;document.getElementById('btnA').classList.toggle('active',c===0);document.getElementById('btnB').classList.toggle('active',c===1);}
 
 const MODEL_INFO={
-  linear:'<strong>Linjär modell</strong> kan bara rita en rak beslutsgräns. Testa XOR – den misslyckas! Byt till Neuralt nätverk med 1 dolt lager och se skillnaden.',
+  linear:'<strong>Linjär modell</strong> kan bara rita en rak beslutsgräns. Testa att ändra till exempelvis XOR och se att modellen misslyckas med att separera klasserna! Byt till Neuralt nätverk med 1 dolt lager och se skillnaden.',
   nn1:'<strong>1 dolt lager (18 neuroner)</strong> – varje neuron reagerar på en kombination av x och y. Tillsammans böjer de gränsen. Öppna <strong>Avancerat</strong> och aktivera neuronvisualisering!',
-  nn2:'<strong>2 dolda lager (18+10 neuroner)</strong> – fler lager möjliggör mer komplexa gränser. Kan hantera spiraler och korsade mönster.'
+  nn2:'<strong>2 dolda lager (18+10 neuroner)</strong> – fler lager möjliggör mer komplexa gränser. Kan bättre hantera exempelvis spiraler och korsade mönster.'
 };
 
 function setModel(m){
