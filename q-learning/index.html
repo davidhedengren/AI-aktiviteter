@@ -66,9 +66,50 @@ input[type="number"]:disabled{opacity:.5;}
 <body>
 <div class="hd"><a class="back-link" href="/">← AI-aktiviteter</a><h1><span>Q-learning</span> simulering</h1><p>Träna en agent att navigera ett rutnät med förstärkningsinlärning – se hur Q-värdena uppdateras i realtid.</p></div>
 <div class="page-container"><div class="main-container"><div class="left-wrapper"><canvas id="canvas"></canvas><div class="controls"><div class="controls-row"><select class="maze-select" id="mazeSelect"><option value="0">Standardmiljö</option><option value="1">Ormen</option><option value="2">Labyrinten</option></select><button id="trainButton">Starta träning</button><button id="pauseButton">Pausa</button><button id="resetButton">Återställ träning</button></div><div class="controls-row"><button id="qToggleButton">Visa Q-värden: Av</button><button id="policyButton">Visa Policy: Av</button><button id="testButton" style="display:none;">Testa Modellen</button></div><div class="controls-row"><label>Simuleringshastighet: <input type="range" id="speedSlider" min="0" max="10000" value="0"></label></div><div class="controls-row"><label><input type="checkbox" id="stepModeCheckbox"> Stegvis läge</label><button id="nextStepButton" disabled>Nästa steg</button></div><div class="controls-row"><div id="infoLabel">Episod: 0, Steg: 0</div></div><div class="controls-row"><label><input type="checkbox" id="editModeCheckbox"> Redigeringsläge</label></div><div class="controls-row" id="paramInfo"></div></div><textarea id="logText" readonly></textarea></div>
-<div class="right-wrapper"><div id="description"><p><strong>Begrepp:</strong></p><ul><li><em>State (s):</em> Agentens position + kvarvarande mynt.</li><li><em>Action (a):</em> Upp, höger, ner eller vänster.</li><li><em>Reward (r):</em> Belöning eller straff för en handling.</li><li><em>α, γ, ε:</em> Inlärningshastighet, diskonteringsfaktor, utforskning.</li></ul><p><strong>Miljö:</strong></p><ul><li>Orange cirkel = agent. Grön ruta = mål. Gula cirklar = mynt (+10).</li><li>Stegstraff: -0.1. Mål utan alla mynt: -20.</li></ul><p><strong>Q-värdesfärger:</strong></p><ul><li>Rött = lågt Q-värde. Blått = högt. Hovra för detaljer.</li></ul><p><strong>Miljöer:</strong></p><ul><li><em>Standard:</em> Öppen med hinder och 4 mynt.</li><li><em>Ormen:</em> Sicksack-korridorer, 3 mynt.</li><li><em>Labyrinten:</em> Korridorer och återvändsgränder.</li></ul><p><strong>Redigering:</strong> Vänsterklick = hinder, högerklick = mynt, dra start/mål.</p><p><strong>Formel:</strong> $$ Q(s,a) = Q(s,a) + \alpha \Bigl( r + \gamma \max_{a'} Q(s',a') - Q(s,a) \Bigr) $$</p></div></div></div></div>
+<div class="right-wrapper"><div id="description">
+        <p><strong>Begrepp:</strong></p>
+        <ul>
+          <li><em>State (s):</em> Agentens tillstånd, bestående av dess position samt den aktuella konfigurationen av återstående mynt. (0,0,09,33 innebär att agenten är i cell (0,0) och har kvar mynt i cellerna (0,9) och (3,3)</li>
+          <li><em>Action (a):</em> Den valda handlingen (upp, höger, ner eller vänster).</li>
+          <li><em>Reward (r):</em> Belöningen eller straffet för en handling.</li>
+          <li><em>Next state (s'):</em> Tillståndet efter att handlingen utförts.</li>
+          <li><em>α (inlärningshastighet) &amp; γ (diskonteringsfaktor):</em> Parametrar som styr hur snabbt och med vilken vikt Q‑värdena uppdateras.</li>
+          <li><em>ε (epsilon):</em> Sannolikheten att agenten väljer en slumpmässig handling (utforskning) istället för den bästa kända handlingen (utnyttjande).</li>
+        </ul>
+        <p><strong>Miljö och belöningssystem:</strong></p>
+        <ul>
+          <li><em>Agenten:</em> Orange cirkel. Startar längst ner till vänster.</li>
+          <li><em>Mål:</em> Grön ruta. Om agenten når målet utan att ha samlat alla mynt ges ett straff på -20.</li>
+          <li><em>Mynt:</em> Gul cirkel. Varje mynt ger agenten en extra belöning på +10 poäng när det samlas in.</li>
+          <li><em>Stegstraff:</em> Varje steg kostar -0.1, vilket uppmuntrar till kortare vägar.</li>
+        </ul>
+        <p><strong>Rutornas färg ändras baserat på Q‑värden:</strong></p>
+        <ul>
+          <li>Ju lägre Q-värde en cell har desto rödare blir den – vilket indikerar sämre prestanda.</li>
+          <li>Ju högre Q-värde en cell har desto blåare blir den – vilket indikerar bättre prestanda.</li>
+          <li>Genom att klicka i "Visa Q-värden" kan du se aktuella Q-värden för samtliga actions i varje ruta.</li>
+          <li>Om du håller muspekaren över en cell visas de aktuella Q-värdena för den cellen.</li>
+        </ul>
+            <p><strong>Redigeringsläge:</strong></p>
+        <ul>
+          <li>När redigeringsläget är aktivt kan du:
+            <ul>
+              <li>Lägga till eller ta bort hinder med vänsterklick.</li>
+              <li>Lägga till eller ta bort mynt med högerklick.</li>
+              <li>Flytta start- och målceller genom att dra och släppa dem.</li>
+              <li>Redigera värdena för α, γ och ε för att se hur olika parametrar påverkar inlärningen.</li>
+            </ul>
+          </li>
+        </ul>
+        <p><strong>Övrigt:</strong></p>
+        <ul>
+          <li>När modellen har konvergerat ("tränats klart") kan du välja att "Visa Policy" för att se bästa action i respektive ruta.</li>
+          <li>I loggen visas beräkningen för uppdateringen av Q-värdet i cellen för varje steg, enligt formeln:
+            $$ Q(s,a) = Q(s,a) + \alpha \Bigl( r + \gamma \max_{a'} Q(s',a') - Q(s,a) \Bigr) $$</li>
+        </ul>
+      </div></div></div></div>
 <div id="hoverInfo"></div>
-<div class="overlay show" id="introOverlay"><div class="overlay-card"><h2><span>Q-learning</span> simulering</h2><p class="sub">Se hur en agent lär sig navigera genom ett rutnät med förstärkningsinlärning – från slumpmässiga handlingar till optimal strategi.</p><div class="steps"><div class="step"><div class="step-num">1</div><div><strong>Välj miljö och starta träning</strong> – Välj bland tre miljöer (Standard, Ormen, Labyrinten) och tryck Starta träning. Agenten utforskar rutnätet, samlar mynt och lär sig genom belöningar och straff.</div></div><div class="step"><div class="step-num">2</div><div><strong>Följ inlärningen</strong> – Rutorna färgas baserat på Q-värden: rött = lågt, blått = högt. I loggen visas den exakta Q-värdesberäkningen för varje steg.</div></div><div class="step"><div class="step-num">3</div><div><strong>Testa den tränade agenten</strong> – När modellen konvergerat ("tränat klart") kan du välja att visa den inlärda policyn (pilar) och testa agenten steg för steg.</div></div></div><p class="sub" style="margin-bottom:0;">💡 <strong style="color:var(--text)">Tips:</strong> Aktivera <strong>Stegvis läge</strong> för att följa varje enskilt steg och se Q-värdesuppdateringen i loggen. Aktivera <strong>Redigeringsläge</strong> för att bygga egna miljöer.</p><button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta simuleringen →</button></div></div>
+<div class="overlay show" id="introOverlay"><div class="overlay-card"><h2><span>Q-learning</span> simulering</h2><p class="sub">Se hur en agent lär sig navigera genom ett rutnät med förstärkningsinlärning – från slumpmässiga handlingar till optimal strategi.</p><div class="steps"><div class="step"><div class="step-num">1</div><div><strong>Välj miljö och starta träning</strong> – Välj bland tre miljöer (Standard, Ormen, Labyrinten) och tryck Starta träning. Agenten utforskar rutnätet, samlar mynt och lär sig genom belöningar och straff.</div></div><div class="step"><div class="step-num">2</div><div><strong>Följ inlärningen</strong> – Rutorna färgas baserat på Q-värden: rött = lågt, blått = högt. Klicka <strong>Visa Q-värden</strong> för siffror. I loggen visas den exakta Q-värdesberäkningen för varje steg.</div></div><div class="step"><div class="step-num">3</div><div><strong>Testa den tränade agenten</strong> – När modellen konvergerat kan du visa den inlärda policyn (pilar) och testa agenten steg för steg.</div></div></div><p class="sub" style="margin-bottom:0;">💡 <strong style="color:var(--text)">Tips:</strong> Aktivera <strong>Stegvis läge</strong> för att följa varje enskilt steg och se Q-värdesuppdateringen i loggen. Aktivera <strong>Redigeringsläge</strong> för att bygga egna miljöer.</p><button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta simuleringen →</button></div></div>
 <script>
 function getCoinKeyFrom(coinsArray){let coinsCopy=coinsArray.slice();coinsCopy.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);return coinsCopy.map(c=>c[0]+"_"+c[1]).join(";");}
 const MAZE_PRESETS=[{name:"Standardmiljö",obstacles:[[0,8],[1,8],[2,2],[2,3],[2,4],[3,2],[3,6],[4,4],[4,5],[4,6],[4,8],[5,3],[5,4],[5,8],[6,4],[6,6],[6,8],[7,6],[7,8],[8,1],[8,6],[8,7],[8,8],[9,1]],coins:[[0,9],[3,3],[9,0],[7,7]],start:[0,0],goal:[9,9]},{name:"Ormen",obstacles:[[0,9],[1,9],[2,9],[3,9],[4,9],[5,9],[6,9],[7,9],[8,9],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7],[9,7],[0,5],[1,5],[2,5],[3,5],[4,5],[5,5],[6,5],[7,5],[8,5],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3],[7,3],[8,3],[9,3],[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1],[8,1]],coins:[[7,8],[3,4],[5,0]],start:[0,0],goal:[9,9]},{name:"Labyrinten",obstacles:[[3,9],[4,9],[5,9],[6,9],[8,9],[0,8],[1,8],[8,8],[0,7],[1,7],[3,7],[4,7],[6,7],[0,6],[1,6],[3,6],[4,6],[6,6],[7,6],[8,6],[8,5],[0,4],[1,4],[2,4],[4,4],[5,4],[6,4],[8,4],[1,3],[6,3],[8,3],[1,2],[3,2],[4,2],[8,2],[9,2],[1,1],[3,1],[4,1],[5,1],[6,1],[6,0],[7,0],[8,0]],coins:[[0,9],[9,4],[9,0]],start:[0,0],goal:[9,9]}];
