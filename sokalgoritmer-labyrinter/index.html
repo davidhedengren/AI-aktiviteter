@@ -2,65 +2,54 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sökalgoritmer i labyrint – ai-aktiviteter.se</title>
+<title>Q-Learning Simulering – ai-aktiviteter.se</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
 :root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--subtle:#b0bedc;--accent:#4d80ff;--accent2:#6698ff;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',sans-serif;font-size:13px;background:var(--bg);color:var(--text);min-height:100vh;user-select:none;display:flex;flex-direction:column;}
+body{font-family:'DM Sans',sans-serif;font-size:13px;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
-
 .back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .back-link:hover{color:var(--text);border-color:var(--dim);}
 .hd{width:100%;text-align:center;padding:12px 16px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
 .hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}.hd h1 span{color:var(--accent2);}
 .hd p{color:var(--dim);font-size:0.8em;max-width:620px;margin:0 auto;line-height:1.4;}
-
-.page-wrap{max-width:940px;margin:0 auto;padding:16px 20px 48px;position:relative;z-index:1;}
-
-#canvasContainer{position:relative;border:2px solid var(--border);display:inline-block;user-select:none;border-radius:8px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.4);}
-#mazeCanvas{display:block;user-select:none;}
-
-#controls{margin-top:14px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
-.controls-row{margin-top:8px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
-
-#controls label,.controls-row label{font-size:0.78em;letter-spacing:.04em;color:var(--dim);font-weight:600;display:flex;align-items:center;gap:6px;}
-
-#controls select,.controls-row select{padding:7px 10px;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;outline:none;transition:border-color .2s;}
-#controls select:focus,.controls-row select:focus{border-color:var(--accent);}
-
-#controls button,.controls-row button{padding:7px 16px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:background .2s,box-shadow .2s;}
-#controls button:hover,.controls-row button:hover{background:var(--accent2);box-shadow:0 0 14px rgba(77,128,255,.3);}
-
-#controls input[type="checkbox"]{accent-color:var(--accent);width:14px;height:14px;}
-
-.btn-ghost{padding:7px 16px;background:var(--surface2)!important;color:var(--subtle)!important;border:1px solid var(--border)!important;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;transition:border-color .2s,color .2s;}
-.btn-ghost:hover{border-color:var(--accent)!important;color:var(--text)!important;background:var(--surface2)!important;box-shadow:none!important;}
-
-#info{margin-top:14px;font-size:12px;font-weight:600;color:var(--text);background:var(--surface);border:1px solid var(--border);padding:10px 14px;border-radius:6px;max-width:940px;}
-#hoverInfo{margin-top:8px;font-size:12px;font-weight:600;color:var(--text);background:var(--surface2);border:1px solid var(--border);padding:10px 14px;border-radius:6px;max-width:940px;}
-#costFunctionInfo{margin-top:8px;font-size:12px;font-weight:600;color:var(--subtle);background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 6px 6px 0;display:none;max-width:940px;}
-
-#legend{margin-top:20px;max-width:940px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px 20px;}
-#legend h3{font-size:0.66em;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;font-weight:700;}
-#legend ul{list-style-type:none;padding:0;margin:0 0 12px 0;}
-#legend li{margin-bottom:7px;font-size:12px;color:var(--dim);display:flex;align-items:center;gap:8px;}
-#legend li strong{color:var(--text);}
-.color-box{display:inline-block;width:18px;height:18px;flex-shrink:0;border:1px solid rgba(255,255,255,.15);border-radius:3px;}
-#legend p{font-size:12px;color:var(--dim);line-height:1.7;margin-top:6px;}
-#legend em{color:var(--subtle);font-style:normal;font-weight:600;}
-
-.heuristic-label{position:absolute;color:rgba(255,255,255,.85);font-size:10px;font-family:'JetBrains Mono',monospace;pointer-events:none;user-select:none;}
-
-@media(max-width:940px){
-  #mazeCanvas{width:100%;height:auto;}
-  .back-link{position:static;transform:none;margin-bottom:4px;}
-  .hd{padding:10px 16px 8px;}
-}
+.page-container{max-width:1050px;margin:0 auto;padding:16px 20px 48px;position:relative;z-index:1;}
+.main-container{display:flex;gap:20px;}
+.left-wrapper{width:500px;display:flex;flex-direction:column;align-items:center;}
+#canvas{border:2px solid var(--border);border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.4);cursor:pointer;}
+.controls{margin-top:12px;width:100%;}
+.controls-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:6px;align-items:center;}
+button{padding:7px 14px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.04em;cursor:pointer;transition:background .2s,box-shadow .2s;}
+button:hover{background:var(--accent2);box-shadow:0 0 12px rgba(77,128,255,.3);}
+button:disabled{background:var(--surface2);color:var(--dim);cursor:not-allowed;box-shadow:none;}
+#pauseButton,#resetButton{background:var(--surface2);color:var(--subtle);border:1px solid var(--border);}
+#pauseButton:hover,#resetButton:hover{border-color:var(--accent);color:var(--text);background:var(--surface2);box-shadow:none;}
+#qToggleButton,#policyButton{background:var(--surface2);color:var(--subtle);border:1px solid var(--border);}
+#qToggleButton:hover,#policyButton:hover{border-color:var(--accent);color:var(--text);background:var(--surface2);box-shadow:none;}
+label{font-size:11px;color:var(--dim);display:flex;align-items:center;gap:6px;}
+input[type="range"]{accent-color:var(--accent);cursor:pointer;}
+input[type="checkbox"]{accent-color:var(--accent);width:13px;height:13px;}
+input[type="number"]{background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:4px 6px;font-family:'JetBrains Mono',monospace;font-size:12px;outline:none;}
+input[type="number"]:focus{border-color:var(--accent);}
+input[type="number"]:disabled{opacity:.5;}
+#infoLabel{font-size:12px;font-weight:600;color:var(--subtle);background:var(--surface);border:1px solid var(--border);padding:5px 12px;border-radius:6px;}
+#logText{width:100%;height:180px;margin-top:10px;resize:none;background:var(--surface);color:var(--dim);border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.6;outline:none;}
+#paramInfo{font-size:12px;color:var(--subtle);}
+.right-wrapper{width:500px;}
+#description{width:100%;padding:18px 20px;border:1px solid var(--border);font-size:12px;line-height:1.8;border-radius:8px;background:var(--surface);color:var(--dim);}
+#description p{margin-bottom:8px;}#description strong{color:var(--text);}#description em{color:var(--text);font-style:normal;}
+#description ul{margin:0 0 10px 18px;}#description li{margin-bottom:4px;}
+#hoverInfo{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--subtle);display:none;pointer-events:none;z-index:100;box-shadow:0 4px 16px rgba(0,0,0,.4);font-family:'JetBrains Mono',monospace;}
+.maze-select{font-family:'DM Sans',sans-serif;font-size:11px;padding:6px 10px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;outline:none;}
+.maze-select:focus{border-color:var(--accent);}
+.MathJax{color:var(--subtle)!important;}
 .overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
 .overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;max-width:540px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;}
@@ -71,590 +60,52 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .overlay-card .step strong{color:var(--text);}
 .step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
 .overlay-btn{display:block;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}.overlay-btn:hover{background:#3d6de6;}
+@media(max-width:1060px){.main-container{flex-direction:column;align-items:center;}.left-wrapper,.right-wrapper{width:100%;max-width:520px;}.back-link{position:static;transform:none;margin-bottom:4px;}.hd{padding:10px 16px 8px;}}
 </style>
 </head>
 <body>
-
-<div class="hd">
-  <a class="back-link" href="/">← AI-aktiviteter</a>
-  <h1>Sökalgoritmer i <span>labyrint</span></h1>
-  <p>Utforska BFS, DFS, Girig bäst-först och A* – se hur de hittar vägen genom en labyrint steg för steg.</p>
-</div>
-
-<div class="page-wrap">
-
-<div id="canvasContainer">
-  <canvas id="mazeCanvas"></canvas>
-</div>
-
-<div id="controls">
-  <label for="algorithmSelect">Algoritm:</label>
-  <select id="algorithmSelect">
-    <option value="A*">A*</option>
-    <option value="BFS">BFS</option>
-    <option value="DFS">DFS</option>
-    <option value="Greedy">Greedy Best-First</option>
-  </select>
-  <button id="startSearchBtn">Starta sökning</button>
-  <label><input type="checkbox" id="stepModeChk" /> Stegvis</label>
-  <button id="nextStepBtn">Nästa steg</button>
-  <button id="resetBtn" class="btn-ghost">Återställ</button>
-</div>
-
-<div id="controls2" class="controls-row">
-  <label for="predefinedSelect">Labyrint:</label>
-  <select id="predefinedSelect">
-    <option value="">-- Välj --</option>
-    <option value="Exempel 1">Exempel 1</option>
-    <option value="Exempel 2">Exempel 2</option>
-    <option value="Exempel 3">Exempel 3</option>
-    <option value="Exempel 4">Exempel 4</option>
-  </select>
-  <button id="saveBtn" class="btn-ghost">Spara</button>
-  <input type="file" id="loadInput" style="display:none;" />
-  <button id="loadBtn" class="btn-ghost">Ladda</button>
-</div>
-
-<div id="info"></div>
-<div id="costFunctionInfo">Kostnadsfunktion: (håll musen över en cell för att se f(n))</div>
+<div class="hd"><a class="back-link" href="/">← AI-aktiviteter</a><h1><span>Q-learning</span> simulering</h1><p>Träna en agent att navigera ett rutnät med förstärkningsinlärning – se hur Q-värdena uppdateras i realtid.</p></div>
+<div class="page-container"><div class="main-container"><div class="left-wrapper"><canvas id="canvas"></canvas><div class="controls"><div class="controls-row"><select class="maze-select" id="mazeSelect"><option value="0">Standardmiljö</option><option value="1">Ormen</option><option value="2">Labyrinten</option></select><button id="trainButton">Starta träning</button><button id="pauseButton">Pausa</button><button id="resetButton">Återställ träning</button></div><div class="controls-row"><button id="qToggleButton">Visa Q-värden: Av</button><button id="policyButton">Visa Policy: Av</button><button id="testButton" style="display:none;">Testa Modellen</button></div><div class="controls-row"><label>Simuleringshastighet: <input type="range" id="speedSlider" min="0" max="10000" value="0"></label></div><div class="controls-row"><label><input type="checkbox" id="stepModeCheckbox"> Stegvis läge</label><button id="nextStepButton" disabled>Nästa steg</button></div><div class="controls-row"><div id="infoLabel">Episod: 0, Steg: 0</div></div><div class="controls-row"><label><input type="checkbox" id="editModeCheckbox"> Redigeringsläge</label></div><div class="controls-row" id="paramInfo"></div></div><textarea id="logText" readonly></textarea></div>
+<div class="right-wrapper"><div id="description"><p><strong>Begrepp:</strong></p><ul><li><em>State (s):</em> Agentens position + kvarvarande mynt.</li><li><em>Action (a):</em> Upp, höger, ner eller vänster.</li><li><em>Reward (r):</em> Belöning eller straff för en handling.</li><li><em>α, γ, ε:</em> Inlärningshastighet, diskonteringsfaktor, utforskning.</li></ul><p><strong>Miljö:</strong></p><ul><li>Orange cirkel = agent. Grön ruta = mål. Gula cirklar = mynt (+10).</li><li>Stegstraff: -0.1. Mål utan alla mynt: -20.</li></ul><p><strong>Q-värdesfärger:</strong></p><ul><li>Rött = lågt Q-värde. Blått = högt. Hovra för detaljer.</li></ul><p><strong>Miljöer:</strong></p><ul><li><em>Standard:</em> Öppen med hinder och 4 mynt.</li><li><em>Ormen:</em> Sicksack-korridorer, 3 mynt.</li><li><em>Labyrinten:</em> Korridorer och återvändsgränder.</li></ul><p><strong>Redigering:</strong> Vänsterklick = hinder, högerklick = mynt, dra start/mål.</p><p><strong>Formel:</strong> $$ Q(s,a) = Q(s,a) + \alpha \Bigl( r + \gamma \max_{a'} Q(s',a') - Q(s,a) \Bigr) $$</p></div></div></div></div>
 <div id="hoverInfo"></div>
-
-<div id="legend">
-  <h3>Förklaringar</h3>
-  <ul>
-    <li><span class="color-box" style="background:white;"></span><span><strong>Vit</strong> (vanlig väg, kostnad 1) – Skapas genom att vänsterklicka på en svart ruta.</span></li>
-    <li><span class="color-box" style="background:black;"></span><span><strong>Svart</strong> (vägg) – Skapas genom att vänsterklicka på en vit ruta.</span></li>
-    <li><span class="color-box" style="background:#deb887;"></span><span><strong>Brun</strong> (kostnad 3) – Skapas genom att högerklicka 2 gånger.</span></li>
-    <li><span class="color-box" style="background:blue;"></span><span><strong>Blå</strong> (kostnad 5) – Skapas genom att högerklicka 3 gånger.</span></li>
-    <li><span class="color-box" style="background:red;"></span><span><strong>Röd</strong> (mål) – Skapas genom att högerklicka en gång.</span></li>
-    <li><span class="color-box" style="background:lightskyblue;"></span><span><strong>Ljusblå</strong> (genomsökt) – Visas automatiskt av algoritmen för rutor som sökts igenom.</span></li>
-    <li><span class="color-box" style="background:orange;"></span><span><strong>Orange</strong> (Kö) – Markering av algoritmens kö, alltså de rutor som ligger på tur att utforskas.</span></li>
-    <li><span class="color-box" style="background:green;"></span><span><strong>Grön</strong> (start) – Anger startposition för sökningen. Klicka och dra för att flytta.</span></li>
-  </ul>
-  <p><em>Vänsterklick</em> cyklar bara mellan svart och vit på en cell.<br/><em>Högerklick</em> cyklar mellan röd → brun → blå → svart → röd.</p>
-  <p style="margin-top:8px;"><em>Tips:</em> Vid A*-sökning kan du hålla muspekaren över en ruta för att se f(n)-värdet (kostnadsfunktionen).</p>
-</div>
-
-</div>
-
-<div class="overlay show" id="introOverlay">
-  <div class="overlay-card">
-    <h2>Sökalgoritmer i <span>labyrint</span></h2>
-    <p class="sub">Hur hittar en algoritm vägen genom en labyrint? Här kan du se fyra olika sökalgoritmer in action och jämföra hur de fungerar.</p>
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Välj en labyrint</strong> – Ladda en av de fördefinierade labyrinterna, eller bygg en egen genom att klicka på rutnätet. Vänsterklick skapar/tar bort väggar, högerklick sätter mål och kostnadsrutor.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Välj algoritm och sök</strong> – Testa <strong>BFS</strong> (bredden först), <strong>DFS</strong> (djupet först), <strong>Girig bäst-först</strong> eller <strong>A*</strong>. Tryck Starta sökning och se hur algoritmen utforskar labyrinten steg för steg.</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Jämför algoritmerna</strong> – Kör samma labyrint med olika algoritmer. Vilken hittar kortaste vägen? Vilken utforskar minst rutor? Aktivera <strong>Stegvis</strong> för att följa sökningen ett steg i taget.</div></div>
-    </div>
-    <p class="sub" style="margin-bottom:0;">💡 <strong style="color:var(--text)">Tips:</strong> Med <strong>A*</strong> kan du hålla musen över en ruta under sökningen för att se kostnadsfunktionen <em>f(n) = g(n) + h(n)</em> – den kombination av faktisk kostnad och uppskattad återstående kostnad som gör A* så effektiv.</p>
-    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta simuleringen →</button>
-  </div>
-</div>
-
+<div class="overlay show" id="introOverlay"><div class="overlay-card"><h2><span>Q-learning</span> simulering</h2><p class="sub">Se hur en agent lär sig navigera genom ett rutnät med förstärkningsinlärning – från slumpmässiga handlingar till optimal strategi.</p><div class="steps"><div class="step"><div class="step-num">1</div><div><strong>Välj miljö och starta träning</strong> – Välj bland tre miljöer (Standard, Ormen, Labyrinten) och tryck Starta träning. Agenten utforskar rutnätet, samlar mynt och lär sig genom belöningar och straff.</div></div><div class="step"><div class="step-num">2</div><div><strong>Följ inlärningen</strong> – Rutorna färgas baserat på Q-värden: rött = lågt, blått = högt. I loggen visas den exakta Q-värdesberäkningen för varje steg.</div></div><div class="step"><div class="step-num">3</div><div><strong>Testa den tränade agenten</strong> – När modellen konvergerat ("tränat klart") kan du välja att visa den inlärda policyn (pilar) och testa agenten steg för steg.</div></div></div><p class="sub" style="margin-bottom:0;">💡 <strong style="color:var(--text)">Tips:</strong> Aktivera <strong>Stegvis läge</strong> för att följa varje enskilt steg och se Q-värdesuppdateringen i loggen. Aktivera <strong>Redigeringsläge</strong> för att bygga egna miljöer.</p><button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta simuleringen →</button></div></div>
 <script>
-const GRID_WIDTH = 30;
-const GRID_HEIGHT = 15;
-const CELL_SIZE = 30;
-
-const canvas = document.getElementById("mazeCanvas");
-canvas.width = GRID_WIDTH * CELL_SIZE;
-canvas.height = GRID_HEIGHT * CELL_SIZE;
-const ctx = canvas.getContext("2d");
-
-const canvasContainer = document.getElementById("canvasContainer");
-
-let grid = [];
-for (let r = 0; r < GRID_HEIGHT; r++) {
-  let row = [];
-  for (let c = 0; c < GRID_WIDTH; c++) {
-    row.push(1);
-  }
-  grid.push(row);
-}
-
-let start = [11, 7];
-let ends = [[5, 18]];
-grid[start[0]][start[1]] = 0;
-ends.forEach(e => { grid[e[0]][e[1]] = 0; });
-
-let heuristicTexts = new Map();
-let f_values = new Map();
-
-let is_dragging_start = false;
-let old_start = null;
-let potential_start = null;
-let dragging_point = null;
-let drag_start_pos = null;
-
-let resultDiv = document.getElementById("info");
-let hoverInfoDiv = document.getElementById("hoverInfo");
-let costFunctionInfoDiv = document.getElementById("costFunctionInfo");
-
-let stepMode = false;
-let A_STAR_STATE = null;
-let GREEDY_STATE = null;
-let BFS_STATE = null;
-let DFS_STATE = null;
-let search_in_progress = false;
-let currentAlgorithm = null;
-let search_cost = 0;
-
-function hasNonOneSquares() {
-  for (let r=0; r<GRID_HEIGHT; r++)
-    for (let c=0; c<GRID_WIDTH; c++)
-      if (grid[r][c] === 2 || grid[r][c] === 3) return true;
-  return false;
-}
-
-function cellCost(r, c) {
-  if (grid[r][c] === 2) return 5;
-  if (grid[r][c] === 3) return 3;
-  if (grid[r][c] === 1) return Infinity;
-  return 1;
-}
-
-function resetSearchCost() {
-  search_cost = 0;
-  resultDiv.style.backgroundColor = "";
-  hoverInfoDiv.textContent = "";
-  hoverInfoDiv.style.backgroundColor = "";
-  costFunctionInfoDiv.style.display = "none";
-}
-
-function setFinalResultText(txt, showCostFunction=false) {
-  resultDiv.textContent = txt;
-  resultDiv.style.backgroundColor = "rgba(29,233,155,.12)";
-  resultDiv.style.borderColor = "rgba(29,233,155,.3)";
-  costFunctionInfoDiv.style.display = showCostFunction ? "block" : "none";
-}
-
-function calcPathCost(path) {
-  let c = 0;
-  for (let [rr,cc] of path) c += cellCost(rr, cc);
-  return c;
-}
-
-function heuristic(a, b) {
-  return Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
-}
-
-function get_neighbors(node) {
-  let [r, c] = node;
-  let neighbors = [];
-  let deltas = [[-1,0],[1,0],[0,-1],[0,1]];
-  for (let [dx, dy] of deltas) {
-    let nr = r + dx, nc = c + dy;
-    if (nr >= 0 && nr < GRID_HEIGHT && nc >= 0 && nc < GRID_WIDTH)
-      neighbors.push([nr, nc]);
-  }
-  return neighbors;
-}
-
-function draw_grid() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (let [_, label] of heuristicTexts)
-    if (label.parentNode) label.parentNode.removeChild(label);
-  heuristicTexts.clear();
-  f_values.clear();
-
-  for (let r = 0; r < GRID_HEIGHT; r++) {
-    for (let c = 0; c < GRID_WIDTH; c++) {
-      let x1 = c * CELL_SIZE, y1 = r * CELL_SIZE;
-      let color;
-      if (grid[r][c] === 1) color = "#111";
-      else if (grid[r][c] === 2) color = "#3366cc";
-      else if (grid[r][c] === 3) color = "#c8a050";
-      else color = "#e8ecf8";
-      ctx.fillStyle = color;
-      ctx.strokeStyle = "#1e2642";
-      ctx.fillRect(x1, y1, CELL_SIZE, CELL_SIZE);
-      ctx.strokeRect(x1, y1, CELL_SIZE, CELL_SIZE);
-    }
-  }
-
-  for (let [er, ec] of ends) {
-    let x1 = ec * CELL_SIZE, y1 = er * CELL_SIZE;
-    ctx.fillStyle = "#ef5b5b";
-    ctx.fillRect(x1, y1, CELL_SIZE, CELL_SIZE);
-    ctx.strokeRect(x1, y1, CELL_SIZE, CELL_SIZE);
-  }
-
-  let sr, sc;
-  if (is_dragging_start && potential_start != null) [sr, sc] = potential_start;
-  else [sr, sc] = start;
-  ctx.fillStyle = "#34c759";
-  ctx.fillRect(sc * CELL_SIZE, sr * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-  ctx.strokeRect(sc * CELL_SIZE, sr * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-}
-
-function clear_heuristic_texts() {
-  for (let [_, label] of heuristicTexts)
-    if (label && label.parentNode) label.parentNode.removeChild(label);
-  heuristicTexts.clear();
-  f_values.clear();
-}
-
-function clear_previous_search() {
-  draw_grid();
-  clear_heuristic_texts();
-  resultDiv.textContent = "";
-  resultDiv.style.backgroundColor = "";
-  resultDiv.style.borderColor = "";
-  hoverInfoDiv.textContent = "";
-  hoverInfoDiv.style.backgroundColor = "";
-  costFunctionInfoDiv.style.display = "none";
-}
-
-function mark_explored(r, c) {
-  if ((r === start[0] && c === start[1]) || ends.some(e => e[0]===r && e[1]===c)) return;
-  ctx.fillStyle = "lightskyblue";
-  ctx.fillRect(c*CELL_SIZE, r*CELL_SIZE, CELL_SIZE, CELL_SIZE);
-  ctx.strokeRect(c*CELL_SIZE, r*CELL_SIZE, CELL_SIZE, CELL_SIZE);
-}
-
-function color_frontier_cell(r, c) {
-  if ((r === start[0] && c === start[1]) || ends.some(e => e[0]===r && e[1]===c)) return;
-  ctx.fillStyle = "orange";
-  ctx.fillRect(c * CELL_SIZE, r * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-  ctx.strokeRect(c * CELL_SIZE, r * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-}
-
-function mark_path(path) {
-  for (let [r, c] of path) {
-    if (r === start[0] && c === start[1]) continue;
-    let isEnd = ends.some(e => e[0]===r && e[1]===c);
-    ctx.fillStyle = isEnd ? "#ef5b5b" : "lightgreen";
-    ctx.fillRect(c*CELL_SIZE, r*CELL_SIZE, CELL_SIZE, CELL_SIZE);
-    ctx.strokeRect(c*CELL_SIZE, r*CELL_SIZE, CELL_SIZE, CELL_SIZE);
-  }
-}
-
-class PriorityQ {
-  constructor() { this._data = []; }
-  push(item) { this._data.push(item); this._data.sort((a, b) => a[0] - b[0]); }
-  pop() { return this._data.shift(); }
-  empty() { return this._data.length === 0; }
-}
-
-function a_star_step(open_set, came_from, g_score, explored_cells) {
-  if (open_set.empty()) { setFinalResultText("Ingen väg funnen"); search_in_progress = false; return; }
-  let [f_current, current] = open_set.pop();
-  let [row, col] = current;
-  search_cost += cellCost(row, col);
-  if (ends.some(e => e[0]===row && e[1]===col)) {
-    let path = []; let curKey = `${row},${col}`;
-    while (came_from.has(curKey)) { path.push(current); current = came_from.get(curKey); curKey = `${current[0]},${current[1]}`; }
-    path.push(start); path.reverse(); mark_path(path);
-    let msg = `Antal steg till mål: ${path.length-1}, Utforskade rutor: ${explored_cells-1}`;
-    if (hasNonOneSquares()) { let finalCost = calcPathCost(path); msg += `, Kostnad för slutgiltig väg: ${finalCost}, Kostnad för hela sökningen: ${search_cost}`; }
-    setFinalResultText(msg, true); search_in_progress = false; return;
-  }
-  mark_explored(row, col);
-  for (let [nr, nc] of get_neighbors([row,col])) {
-    if (grid[nr][nc] === 1) continue;
-    let tentative_g = g_score.get(`${row},${col}`) + cellCost(nr,nc);
-    let neighborKey = `${nr},${nc}`;
-    if (!g_score.has(neighborKey) || tentative_g < g_score.get(neighborKey)) {
-      came_from.set(neighborKey, [row, col]);
-      g_score.set(neighborKey, tentative_g);
-      let h_score = ends.map(e => heuristic([nr,nc], e)).reduce((a,b) => Math.min(a,b), Infinity);
-      let f_score = tentative_g + h_score;
-      open_set.push([f_score, [nr,nc]]);
-      createHeuristicLabel(nr, nc, `${f_score}`);
-      f_values.set(`${nr},${nc}`, [f_score, h_score]);
-      color_frontier_cell(nr, nc);
-    }
-  }
-  explored_cells++;
-  if (stepMode) A_STAR_STATE = {open_set, came_from, g_score, explored_cells};
-  else setTimeout(()=>{ a_star_step(open_set, came_from, g_score, explored_cells); },150);
-}
-
-function start_a_star() {
-  if (ends.length === 0) { setFinalResultText("Inga mål satts"); return; }
-  clear_previous_search(); resetSearchCost();
-  let open_set = new PriorityQ(); let came_from = new Map(); let g_score = new Map();
-  g_score.set(`${start[0]},${start[1]}`, 0);
-  let h_score = ends.map(e => heuristic(start,e)).reduce((a,b) => Math.min(a,b), Infinity);
-  open_set.push([h_score, [start[0],start[1]]]);
-  A_STAR_STATE = {open_set, came_from, g_score, explored_cells:1};
-  search_in_progress = true; currentAlgorithm = "A*";
-  a_star_step(open_set, came_from, g_score, 1);
-}
-
-function greedy_best_first_step(open_set, explored, explored_cells) {
-  if (open_set.empty()) { setFinalResultText("Ingen väg funnen"); search_in_progress = false; return; }
-  let [h_score, current, path] = open_set.pop();
-  let [row, col] = current;
-  search_cost += cellCost(row, col);
-  if (ends.some(e => e[0]===row && e[1]===col)) {
-    let finalPath = path.concat([current]); mark_path(finalPath);
-    let msg = `Antal steg till mål: ${finalPath.length-1}, Utforskade rutor: ${explored_cells-1}`;
-    if (hasNonOneSquares()) { let finalCost = calcPathCost(finalPath); msg += `, Kostnad för slutgiltig väg: ${finalCost}, Kostnad för hela sökningen: ${search_cost}`; }
-    setFinalResultText(msg, false); search_in_progress = false; return;
-  }
-  explored.add(`${row},${col}`); explored_cells++; mark_explored(row, col);
-  for (let [nr,nc] of get_neighbors(current)) {
-    let key = `${nr},${nc}`;
-    if (explored.has(key) || grid[nr][nc] === 1) continue;
-    let h = ends.map(e => heuristic([nr,nc], e)).reduce((a,b)=>Math.min(a,b), Infinity);
-    open_set.push([h, [nr,nc], path.concat([current])]); explored.add(key);
-    createHeuristicLabel(nr, nc, `${h}`); f_values.set(`${nr},${nc}`, [h, h]);
-    color_frontier_cell(nr, nc);
-  }
-  if (stepMode) GREEDY_STATE = {open_set, explored, explored_cells};
-  else setTimeout(()=>{ greedy_best_first_step(open_set, explored, explored_cells); },150);
-}
-
-function start_greedy_best_first() {
-  if (ends.length===0) { setFinalResultText("Inga mål satts"); return; }
-  clear_previous_search(); resetSearchCost();
-  let open_set = new PriorityQ();
-  let h_score = ends.map(e => heuristic(start,e)).reduce((a,b) => Math.min(a,b), Infinity);
-  open_set.push([h_score, [start[0],start[1]], []]);
-  let explored = new Set();
-  GREEDY_STATE = {open_set, explored, explored_cells:1};
-  search_in_progress = true; currentAlgorithm = "Greedy";
-  greedy_best_first_step(open_set, explored, 1);
-}
-
-class SimpleQueue {
-  constructor() { this.q = []; }
-  enqueue(item) { this.q.push(item); }
-  dequeue() { return this.q.shift(); }
-  empty() { return this.q.length === 0; }
-}
-
-function bfs_step(queue, explored, explored_cells) {
-  if (queue.empty()) { setFinalResultText("Ingen väg funnen"); search_in_progress = false; return; }
-  let [current, path] = queue.dequeue();
-  let [row, col] = current;
-  search_cost += cellCost(row, col);
-  if (ends.some(e=> e[0]===row && e[1]===col)) {
-    let fullPath = path.concat([current]); mark_path(fullPath);
-    let msg = `Antal steg till mål: ${fullPath.length-1}, Utforskade rutor: ${explored_cells-1}`;
-    if (hasNonOneSquares()) { let finalCost = calcPathCost(fullPath); msg += `, Kostnad för slutgiltig väg: ${finalCost}, Kostnad för hela sökningen: ${search_cost}`; }
-    setFinalResultText(msg, false); search_in_progress = false; return;
-  }
-  mark_explored(row, col); explored_cells++;
-  for (let [nr, nc] of get_neighbors([row,col])) {
-    let key = `${nr},${nc}`;
-    if (!explored.has(key) && grid[nr][nc] !== 1) { queue.enqueue([[nr,nc], path.concat([current])]); explored.add(key); color_frontier_cell(nr, nc); }
-  }
-  if (stepMode) BFS_STATE = {queue, explored, explored_cells};
-  else setTimeout(()=>{ bfs_step(queue, explored, explored_cells); },150);
-}
-
-function start_bfs() {
-  if (ends.length === 0) { setFinalResultText("Inga mål satts"); return; }
-  clear_previous_search(); resetSearchCost();
-  let queue = new SimpleQueue();
-  queue.enqueue([[start[0],start[1]], []]);
-  let explored = new Set(); explored.add(`${start[0]},${start[1]}`);
-  BFS_STATE = {queue, explored, explored_cells:1};
-  search_in_progress = true; currentAlgorithm = "BFS";
-  bfs_step(queue, explored, 1);
-}
-
-let directions = [[-1,0],[0,1],[1,0],[0,-1]];
-
-function dfs_step(stack, explored, explored_cells) {
-  if (stack.length === 0) { setFinalResultText("Ingen väg funnen"); search_in_progress = false; return; }
-  let [current, path, direction] = stack.pop();
-  let [row, col] = current;
-  search_cost += cellCost(row, col);
-  if (ends.some(e=> e[0]===row && e[1]===col)) {
-    let finalPath = path.concat([current]); mark_path(finalPath);
-    let msg = `Antal steg till mål: ${finalPath.length-1}, Utforskade rutor: ${explored_cells-1}`;
-    if (hasNonOneSquares()) { let finalCost = calcPathCost(finalPath); msg += `, Kostnad för slutgiltig väg: ${finalCost}, Kostnad för hela sökningen: ${search_cost}`; }
-    setFinalResultText(msg, false); search_in_progress = false; return;
-  }
-  mark_explored(row, col); explored.add(`${row},${col}`); explored_cells++;
-  let order = [(direction + 3) % 4, direction, (direction + 1) % 4, (direction + 2) % 4];
-  for (let new_dir of order) {
-    let [dx, dy] = directions[new_dir];
-    let nr = row + dx, nc = col + dy;
-    if (nr>=0 && nr<GRID_HEIGHT && nc>=0 && nc<GRID_WIDTH) {
-      let key = `${nr},${nc}`;
-      if (!explored.has(key) && grid[nr][nc]!==1) { stack.push([[nr,nc], path.concat([current]), new_dir]); explored.add(key); color_frontier_cell(nr, nc); }
-    }
-  }
-  if (stepMode) DFS_STATE = {stack, explored, explored_cells};
-  else setTimeout(()=>{ dfs_step(stack, explored, explored_cells); },150);
-}
-
-function start_dfs() {
-  if (ends.length===0) { setFinalResultText("Inga mål satts"); return; }
-  clear_previous_search(); resetSearchCost();
-  let stack = [[[start[0],start[1]], [], 2]];
-  let explored = new Set(); explored.add(`${start[0]},${start[1]}`);
-  DFS_STATE = {stack, explored, explored_cells:1};
-  search_in_progress = true; currentAlgorithm = "DFS";
-  dfs_step(stack, explored, 1);
-}
-
-function getCellFromMouse(e) {
-  let rect = canvas.getBoundingClientRect();
-  let scaleX = canvas.width / rect.width;
-  let scaleY = canvas.height / rect.height;
-  let mx = (e.clientX - rect.left) * scaleX;
-  let my = (e.clientY - rect.top) * scaleY;
-  let col = Math.floor(mx / CELL_SIZE);
-  let row = Math.floor(my / CELL_SIZE);
-  if (row<0||row>=GRID_HEIGHT||col<0||col>=GRID_WIDTH) return null;
-  return [row, col];
-}
-
-canvas.oncontextmenu = (e) => { e.preventDefault(); };
-
-canvas.addEventListener("mousedown",(e)=>{
-  e.preventDefault();
-  let cell = getCellFromMouse(e); if (!cell) return;
-  drag_start_pos = cell;
-  let [row, col] = cell;
-  if (row===start[0] && col===start[1]) {
-    is_dragging_start = true; old_start = [start[0], start[1]];
-    potential_start = [start[0], start[1]]; dragging_point = null;
-  } else { dragging_point = "other"; }
-});
-
-canvas.addEventListener("mousemove",(e)=>{
-  e.preventDefault();
-  if (is_dragging_start) {
-    let cell = getCellFromMouse(e);
-    if (cell) { potential_start = cell; draw_grid(); }
-  } else if (dragging_point==="other" && e.buttons===1) {
-    let cell = getCellFromMouse(e);
-    if (cell) { let [row, col] = cell; if (grid[row][col]===1) grid[row][col]=0; else if (grid[row][col]===0) grid[row][col]=1; draw_grid(); }
-  }
-});
-
-canvas.addEventListener("mouseup",(e)=>{
-  e.preventDefault();
-  let cell = getCellFromMouse(e);
-  if (is_dragging_start) {
-    is_dragging_start = false;
-    if (cell && (potential_start[0]!==old_start[0] || potential_start[1]!==old_start[1])) {
-      grid[old_start[0]][old_start[1]] = 1; start = [potential_start[0], potential_start[1]]; grid[start[0]][start[1]] = 0;
-    }
-    draw_grid(); dragging_point = null; old_start = null; potential_start = null; drag_start_pos = null; return;
-  }
-  if (dragging_point === "other") {
-    if (e.button === 0) {
-      if (cell && cell[0]===drag_start_pos[0] && cell[1]===drag_start_pos[1]) {
-        let [r,c] = cell;
-        if (grid[r][c]===1) grid[r][c]=0; else if (grid[r][c]===0) grid[r][c]=1;
-        draw_grid();
-      }
-    } else if (e.button === 2) {
-      if (cell && cell[0]===drag_start_pos[0] && cell[1]===drag_start_pos[1]) {
-        let [r,c] = cell;
-        let inEnds = ends.some(e=> e[0]===r && e[1]===c);
-        if (inEnds) { ends = ends.filter(e => !(e[0]===r && e[1]===c)); grid[r][c] = 3; }
-        else if (grid[r][c] === 3) grid[r][c] = 2;
-        else if (grid[r][c] === 2) grid[r][c] = 1;
-        else if (grid[r][c] === 1) { ends.push([r,c]); grid[r][c] = 0; }
-        else { ends.push([r,c]); grid[r][c] = 0; }
-        draw_grid();
-      }
-    }
-  }
-  dragging_point = null; old_start = null; potential_start = null; drag_start_pos = null;
-});
-
-canvas.addEventListener("mousemove",(e)=>{
-  let cell = getCellFromMouse(e);
-  if (!cell) { hoverInfoDiv.textContent = ""; return; }
-  let key = `${cell[0]},${cell[1]}`;
-  if (currentAlgorithm === "A*" && f_values.has(key)) {
-    let [fval, hval] = f_values.get(key); let gval = fval - hval;
-    hoverInfoDiv.textContent = `f(n) = g(n) + h(n) = ${gval} + ${hval} = ${fval}`;
-  } else { hoverInfoDiv.textContent = ""; }
-});
-
-function createHeuristicLabel(r, c, txt) {
-  let labelKey = `${r},${c}`;
-  if (heuristicTexts.has(labelKey)) { let old = heuristicTexts.get(labelKey); if (old.parentNode) old.parentNode.removeChild(old); }
-  let label = document.createElement("div");
-  label.className = "heuristic-label"; label.textContent = txt;
-  label.style.left = (c*CELL_SIZE + CELL_SIZE/2 - 8) + "px";
-  label.style.top = (r*CELL_SIZE + CELL_SIZE/2 - 6) + "px";
-  canvasContainer.appendChild(label); heuristicTexts.set(labelKey, label);
-}
-
-document.getElementById("saveBtn").addEventListener("click", ()=>{
-  let data = {"grid": grid, "start": start, "ends": ends};
-  let blob = new Blob([JSON.stringify(data, null, 2)], {type:"application/json"});
-  let url = URL.createObjectURL(blob);
-  let a = document.createElement("a"); a.href = url; a.download = "maze.json";
-  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
-});
-
-document.getElementById("loadBtn").addEventListener("click", ()=>{ document.getElementById("loadInput").click(); });
-
-document.getElementById("loadInput").addEventListener("change",(e)=>{
-  let file = e.target.files[0]; if (!file) return;
-  let reader = new FileReader();
-  reader.onload = (ev)=>{
-    try {
-      let data = JSON.parse(ev.target.result);
-      if (!data.grid || !data.start || !data.ends) throw new Error("Ogiltigt format.");
-      if (data.grid.length !== GRID_HEIGHT || data.grid[0].length !== GRID_WIDTH) throw new Error(`Grid måste vara ${GRID_HEIGHT}x${GRID_WIDTH}.`);
-      grid = data.grid; start = data.start; ends = data.ends.map(e => [...e]);
-      grid[start[0]][start[1]] = 0; ends.forEach(e => { grid[e[0]][e[1]] = 0; });
-      clear_previous_search(); draw_grid();
-      setFinalResultText("Labyrinten har laddats.", currentAlgorithm === "A*");
-    } catch (error) { alert("Fel vid inläsning: " + error.message); }
-  };
-  reader.readAsText(file);
-});
-
-const predefinedMazes = {
-  "Exempel 1": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,0,1,0,0,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,1,0,1,0,0,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,0,1,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,1,0,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,7],"ends":[[5,18]]},
-  "Exempel 2": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,7],"ends":[[5,18]]},
-  "Exempel 3": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[8,13],"ends":[[2,8],[8,19]]},
-  "Exempel 4": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,11],"ends":[[5,11]]}
-};
-
-document.getElementById("predefinedSelect").addEventListener("change", (e) => {
-  const sel = e.target.value;
-  if (sel && predefinedMazes[sel]) {
-    const maze = predefinedMazes[sel];
-    grid = maze.grid.map(row => row.slice()); start = [...maze.start]; ends = maze.ends.map(e => [...e]);
-    clear_previous_search(); draw_grid();
-    setFinalResultText(`Fördefinierad labyrint "${sel}" har laddats.`, currentAlgorithm === "A*");
-    e.target.value = "";
-  }
-});
-
-document.getElementById("startSearchBtn").addEventListener("click", ()=>{
-  let alg = document.getElementById("algorithmSelect").value;
-  currentAlgorithm = alg;
-  if (alg==="A*") start_a_star();
-  else if (alg==="BFS") start_bfs();
-  else if (alg==="DFS") start_dfs();
-  else if (alg==="Greedy") start_greedy_best_first();
-});
-
-document.getElementById("stepModeChk").addEventListener("change",(e)=>{ stepMode = e.target.checked; });
-
-document.getElementById("nextStepBtn").addEventListener("click", ()=>{
-  if (!search_in_progress) return;
-  let alg = document.getElementById("algorithmSelect").value;
-  if (alg==="A*" && A_STAR_STATE) { let s=A_STAR_STATE; A_STAR_STATE=null; a_star_step(s.open_set, s.came_from, s.g_score, s.explored_cells); }
-  else if (alg==="Greedy" && GREEDY_STATE) { let s=GREEDY_STATE; GREEDY_STATE=null; greedy_best_first_step(s.open_set, s.explored, s.explored_cells); }
-  else if (alg==="BFS" && BFS_STATE) { let s=BFS_STATE; BFS_STATE=null; bfs_step(s.queue, s.explored, s.explored_cells); }
-  else if (alg==="DFS" && DFS_STATE) { let s=DFS_STATE; DFS_STATE=null; dfs_step(s.stack, s.explored, s.explored_cells); }
-});
-
-document.getElementById("resetBtn").addEventListener("click", ()=>{
-  ends = [];
-  for (let r=0; r<GRID_HEIGHT; r++) for (let c=0; c<GRID_WIDTH; c++) grid[r][c] = 1;
-  grid[start[0]][start[1]] = 0;
-  draw_grid(); costFunctionInfoDiv.style.display = "none";
-});
-
-draw_grid();
+function getCoinKeyFrom(coinsArray){let coinsCopy=coinsArray.slice();coinsCopy.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);return coinsCopy.map(c=>c[0]+"_"+c[1]).join(";");}
+const MAZE_PRESETS=[{name:"Standardmiljö",obstacles:[[0,8],[1,8],[2,2],[2,3],[2,4],[3,2],[3,6],[4,4],[4,5],[4,6],[4,8],[5,3],[5,4],[5,8],[6,4],[6,6],[6,8],[7,6],[7,8],[8,1],[8,6],[8,7],[8,8],[9,1]],coins:[[0,9],[3,3],[9,0],[7,7]],start:[0,0],goal:[9,9]},{name:"Ormen",obstacles:[[0,9],[1,9],[2,9],[3,9],[4,9],[5,9],[6,9],[7,9],[8,9],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7],[9,7],[0,5],[1,5],[2,5],[3,5],[4,5],[5,5],[6,5],[7,5],[8,5],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3],[7,3],[8,3],[9,3],[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1],[8,1]],coins:[[7,8],[3,4],[5,0]],start:[0,0],goal:[9,9]},{name:"Labyrinten",obstacles:[[3,9],[4,9],[5,9],[6,9],[8,9],[0,8],[1,8],[8,8],[0,7],[1,7],[3,7],[4,7],[6,7],[0,6],[1,6],[3,6],[4,6],[6,6],[7,6],[8,6],[8,5],[0,4],[1,4],[2,4],[4,4],[5,4],[6,4],[8,4],[1,3],[6,3],[8,3],[1,2],[3,2],[4,2],[8,2],[9,2],[1,1],[3,1],[4,1],[5,1],[6,1],[6,0],[7,0],[8,0]],coins:[[0,9],[9,4],[9,0]],start:[0,0],goal:[9,9]}];
+let currentPresetIndex=0;let defaultCoins=MAZE_PRESETS[0].coins.map(c=>c.slice());let customObstacles=MAZE_PRESETS[0].obstacles.map(o=>o.slice());
+const GRID_WIDTH=10;const GRID_HEIGHT=10;const CELL_SIZE=50;const COIN_REWARD=10;const EARLY_GOAL_PENALTY=-20;const VISITED_COIN_PENALTY=-2;const STEP_PENALTY=-0.1;const INITIAL_Q=5.0;const EPSILON_DECAY=0.995;const MIN_EPSILON=0.01;
+class GridWorld{constructor(w,h){this.width=w;this.height=h;this.obstacles=customObstacles.slice();this.goal=[w-1,h-1];this.defaultReward=STEP_PENALTY;this.obstacleReward=-1;this.goalReward=10;}reset(){return[0,0];}getActions(s){const a=[];let[x,y]=s;if(y<this.height-1)a.push(0);if(x<this.width-1)a.push(1);if(y>0)a.push(2);if(x>0)a.push(3);return a;}step(s,action){let[x,y]=s;let ns;if(action===0)ns=[x,y+1];else if(action===1)ns=[x+1,y];else if(action===2)ns=[x,y-1];else if(action===3)ns=[x-1,y];else ns=s;if(this.isObstacle(ns)){return{nextState:s,reward:this.obstacleReward,done:false};}else if(this.isGoal(ns)){return{nextState:ns,reward:this.goalReward,done:true};}else{return{nextState:ns,reward:this.defaultReward,done:false};}}isObstacle(s){return this.obstacles.some(o=>o[0]===s[0]&&o[1]===s[1]);}isGoal(s){return s[0]===this.goal[0]&&s[1]===this.goal[1];}resetEnvironment(){this.obstacles=customObstacles.slice();this.goal=[this.width-1,this.height-1];}}
+class QLearningAgent{constructor(w,h,actions,lr=0.5,disc=0.95,eps=0.3){this.width=w;this.height=h;this.actions=actions;this.alpha=lr;this.gamma=disc;this.epsilon=eps;this.Q={};for(let x=0;x<w;x++)for(let y=0;y<h;y++){let ck=this.getDefaultCoinKey();for(let a of actions)this.Q[this.key([x,y,ck],a)]=INITIAL_Q;}this.convergenceThreshold=0.001;this.consecutiveSmallUpdates=0;this.requiredSmallUpdates=100;}getDefaultCoinKey(){let c=defaultCoins.slice();c.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);return c.map(c=>c[0]+"_"+c[1]).join(";");}key(s,a){return`${s[0]},${s[1]},${s[2]},${a}`;}chooseAction(s,aa){if(Math.random()<this.epsilon)return aa[Math.floor(Math.random()*aa.length)];const qs=aa.map(a=>this.Q[this.key(s,a)]||INITIAL_Q);const mx=Math.max(...qs);const best=aa.filter((_,i)=>qs[i]===mx);return best[Math.floor(Math.random()*best.length)];}update(s,a,r,ns,naa){const k=this.key(s,a);const oldQ=this.Q[k]||INITIAL_Q;let mqn=0;if(naa.length>0)mqn=Math.max(...naa.map(a=>this.Q[this.key(ns,a)]||INITIAL_Q));const target=r+this.gamma*mqn;const td=target-oldQ;const nQ=oldQ+this.alpha*td;this.Q[k]=nQ;if(Math.abs(td)<this.convergenceThreshold)this.consecutiveSmallUpdates++;else this.consecutiveSmallUpdates=0;this.epsilon=Math.max(MIN_EPSILON,this.epsilon*EPSILON_DECAY);const m={0:"Upp",1:"Höger",2:"Ner",3:"Vänster"};return`$$\nQ\\bigl((${s[0]},${s[1]},${s[2]}),\\;\\text{${m[a]}}\\bigr)\n= ${oldQ.toFixed(2)} + ${this.alpha.toFixed(2)} \\Bigl( ${r.toFixed(2)} + ${this.gamma.toFixed(2)} \\cdot ${mqn.toFixed(2)} - ${oldQ.toFixed(2)} \\Bigr)  = ${nQ.toFixed(2)}\n$$`;}getMaxQ(s,aa){if(aa.length>0)return Math.max(...aa.map(a=>this.Q[this.key(s,a)]||INITIAL_Q));return 0;}checkConvergence(){return this.consecutiveSmallUpdates>=this.requiredSmallUpdates;}}
+class QLearningSimulation{constructor(){this.mode="idle";this.gridWidth=GRID_WIDTH;this.gridHeight=GRID_HEIGHT;this.cellSize=CELL_SIZE;this.env=new GridWorld(this.gridWidth,this.gridHeight);this.startPos=[0,0];this.goalPos=[this.gridWidth-1,this.gridHeight-1];this.env.goal=this.goalPos.slice();let aV=parseFloat(document.getElementById("alphaParam")?document.getElementById("alphaParam").value:0.5)||0.5;let gV=parseFloat(document.getElementById("gammaParam")?document.getElementById("gammaParam").value:0.95)||0.95;let eV=parseFloat(document.getElementById("epsilonParam")?document.getElementById("epsilonParam").value:0.3)||0.3;this.agent=new QLearningAgent(this.gridWidth,this.gridHeight,[0,1,2,3],aV,gV,eV);this.state=this.startPos.slice();this.episode=0;this.stepCount=0;this.maxSteps=500;this.delay=Math.max(0,120-parseInt(document.getElementById("speedSlider").value)/84);this.stepsPerFrame=1;this.running=false;this.paused=false;this.editMode=false;this.stepMode=false;this.lastUpdateTime=null;this.coins=JSON.parse(JSON.stringify(defaultCoins));this.initialCoins=JSON.parse(JSON.stringify(defaultCoins));this.showPolicy=false;this.showQValues=false;this.testMode=false;this.testPath=[];this.currentTestStep=0;this.draggingStart=false;this.draggingGoal=false;this.canvas=document.getElementById("canvas");this.ctx=this.canvas.getContext("2d");this.canvas.width=this.gridWidth*this.cellSize;this.canvas.height=this.gridHeight*this.cellSize;this.trainButton=document.getElementById("trainButton");this.pauseButton=document.getElementById("pauseButton");this.resetButton=document.getElementById("resetButton");this.qToggleButton=document.getElementById("qToggleButton");this.policyButton=document.getElementById("policyButton");this.policyButton.style.display="none";this.speedSlider=document.getElementById("speedSlider");this.stepModeCheckbox=document.getElementById("stepModeCheckbox");this.nextStepButton=document.getElementById("nextStepButton");this.editModeCheckbox=document.getElementById("editModeCheckbox");this.infoLabel=document.getElementById("infoLabel");this.logText=document.getElementById("logText");this.paramInfo=document.getElementById("paramInfo");this.testButton=document.getElementById("testButton");this.mazeSelect=document.getElementById("mazeSelect");this.updateParamInfo();this.trainButton.addEventListener("click",()=>{this.showPolicy=false;this.policyButton.style.display="none";this.startTraining();});this.pauseButton.addEventListener("click",()=>this.togglePause());this.resetButton.addEventListener("click",()=>this.resetTraining());this.qToggleButton.addEventListener("click",()=>this.toggleQValues());this.policyButton.addEventListener("click",()=>this.togglePolicy());this.speedSlider.addEventListener("input",(e)=>this.updateSpeed(e));this.mazeSelect.addEventListener("change",(e)=>this.loadPreset(parseInt(e.target.value)));this.editModeCheckbox.addEventListener("change",(e)=>{this.editMode=e.target.checked;this.updateParamInfo();this.updateInfoLabel();this.drawGrid();if(this.editMode){this.mode="idle";this.running=false;this.log("Redigeringsläge aktiverat.");}else{let a=parseFloat(document.getElementById("alphaParam").value)||0.5;let g=parseFloat(document.getElementById("gammaParam").value)||0.95;let ep=parseFloat(document.getElementById("epsilonParam").value)||0.3;this.initialCoins=JSON.parse(JSON.stringify(this.coins));defaultCoins=JSON.parse(JSON.stringify(this.coins));this.agent=new QLearningAgent(this.gridWidth,this.gridHeight,[0,1,2,3],a,g,ep);this.episode=0;this.stepCount=0;this.state=this.startPos.slice();this.mode="idle";this.log("Redigeringsläge avaktiverat.");this.drawGrid();this.drawAgent();}});this.stepModeCheckbox.addEventListener("change",(e)=>{this.stepMode=e.target.checked;if(this.stepMode){this.log("Stegvis läge aktiverat.");this.pauseButton.disabled=true;this.nextStepButton.disabled=false;}else{this.log("Stegvis läge avaktiverat.");this.pauseButton.disabled=false;this.nextStepButton.disabled=true;if(!this.paused&&(this.mode==="training"||this.mode==="testing"))this.runStep();}});this.nextStepButton.addEventListener("click",()=>this.runStep());this.canvas.addEventListener("mousedown",(e)=>this.handleMouseDown(e));this.canvas.addEventListener("mousemove",(e)=>this.handleMouseMove(e));this.canvas.addEventListener("mouseup",(e)=>this.handleMouseUp(e));this.canvas.addEventListener("click",(e)=>this.onCanvasClick(e));this.canvas.addEventListener("contextmenu",(e)=>this.onCanvasRightClick(e));this.testButton.addEventListener("click",()=>this.startTestMode());this.canvas.addEventListener("mousemove",(e)=>this.handleHover(e));this.canvas.addEventListener("mouseout",(e)=>this.hideHover(e));this.drawGrid();this.drawAgent();this.updateInfoLabel();requestAnimationFrame((ts)=>this.simulationLoop(ts));}
+loadPreset(idx){if(this.running)this.running=false;if(this.playing)this.playing=false;this.paused=false;this.pauseButton.textContent="Pausa";currentPresetIndex=idx;const p=MAZE_PRESETS[idx];customObstacles=p.obstacles.map(o=>o.slice());defaultCoins=p.coins.map(c=>c.slice());this.startPos=p.start.slice();this.goalPos=p.goal.slice();this.env=new GridWorld(this.gridWidth,this.gridHeight);this.env.obstacles=customObstacles.slice();this.env.goal=this.goalPos.slice();this.coins=JSON.parse(JSON.stringify(defaultCoins));this.initialCoins=JSON.parse(JSON.stringify(defaultCoins));this.agent=new QLearningAgent(this.gridWidth,this.gridHeight,[0,1,2,3]);this.state=this.startPos.slice();this.episode=0;this.stepCount=0;this.mode="idle";this.testMode=false;this.showPolicy=false;this.showQValues=false;this.qToggleButton.textContent="Visa Q-värden: Av";this.policyButton.textContent="Visa Policy: Av";this.testButton.style.display="none";this.policyButton.style.display="none";this.log("Miljö bytt till: "+p.name);this.updateParamInfo();this.drawGrid();this.drawAgent();this.updateInfoLabel();}
+getCoinKey(){let c=this.coins.slice();c.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);return c.map(c=>c[0]+"_"+c[1]).join(";");}getState(){return[this.state[0],this.state[1],this.getCoinKey()];}
+updateParamInfo(){this.paramInfo.innerHTML=`<span style="font-size:12px;color:var(--subtle);">&alpha; = <input type="number" id="alphaParam" style="width:60px;" step="0.01" value="${this.agent.alpha.toFixed(2)}" ${this.editMode?"":"disabled"}>, &gamma; = <input type="number" id="gammaParam" style="width:60px;" step="0.01" value="${this.agent.gamma.toFixed(2)}" ${this.editMode?"":"disabled"}>, &epsilon; = <input type="number" id="epsilonParam" style="width:60px;" step="0.01" value="${this.agent.epsilon.toFixed(2)}" ${this.editMode?"":"disabled"}></span>`;document.getElementById("alphaParam").addEventListener("change",()=>{this.agent.alpha=parseFloat(document.getElementById("alphaParam").value)||0.5;});document.getElementById("gammaParam").addEventListener("change",()=>{this.agent.gamma=parseFloat(document.getElementById("gammaParam").value)||0.95;});document.getElementById("epsilonParam").addEventListener("change",()=>{this.agent.epsilon=parseFloat(document.getElementById("epsilonParam").value)||0.3;});}
+log(m){const l=this.logText.value.split("\n");if(l.length>100)this.logText.value=l.slice(l.length-100).join("\n");this.logText.value+=m+"\n";this.logText.scrollTop=this.logText.scrollHeight;}
+handleMouseDown(e){if(!this.editMode)return;const r=this.canvas.getBoundingClientRect();const mx=e.clientX-r.left;const my=e.clientY-r.top;let sx=this.startPos[0]*this.cellSize+this.cellSize/2;let sy=(this.gridHeight-1-this.startPos[1])*this.cellSize+this.cellSize/2;let dx=mx-sx;let dy=my-sy;if(Math.sqrt(dx*dx+dy*dy)<this.cellSize/3){this.draggingStart=true;return;}let gx=this.goalPos[0]*this.cellSize+this.cellSize/2;let gy=(this.gridHeight-1-this.goalPos[1])*this.cellSize+this.cellSize/2;dx=mx-gx;dy=my-gy;if(Math.sqrt(dx*dx+dy*dy)<this.cellSize/3){this.draggingGoal=true;return;}}
+handleMouseMove(e){if(!this.editMode)return;if(!this.draggingStart&&!this.draggingGoal)return;const r=this.canvas.getBoundingClientRect();const mx=e.clientX-r.left;const my=e.clientY-r.top;const cx=Math.floor(mx/this.cellSize);const cy=this.gridHeight-1-Math.floor(my/this.cellSize);if(this.draggingStart){this.startPos=[cx,cy];this.state=this.startPos.slice();}if(this.draggingGoal){this.goalPos=[cx,cy];this.env.goal=this.goalPos.slice();}this.drawGrid();this.drawAgent();}
+handleMouseUp(e){if(!this.editMode)return;this.draggingStart=false;this.draggingGoal=false;}
+onCanvasClick(e){if(!this.editMode)return;if(e.button===2)return;const r=this.canvas.getBoundingClientRect();const cx=e.clientX-r.left;const cy=e.clientY-r.top;const x=Math.floor(cx/this.cellSize);const gy=Math.floor(cy/this.cellSize);const y=(this.gridHeight-1)-gy;if((x===this.startPos[0]&&y===this.startPos[1])||(x===this.goalPos[0]&&y===this.goalPos[1]))return;const i=this.env.obstacles.findIndex(o=>o[0]===x&&o[1]===y);if(i>=0){this.env.obstacles.splice(i,1);this.log("Hinder borttaget vid ("+x+","+y+")");}else{this.env.obstacles.push([x,y]);this.log("Hinder tillagt vid ("+x+","+y+")");}this.drawGrid();this.drawAgent();}
+onCanvasRightClick(e){if(!this.editMode)return;e.preventDefault();const r=this.canvas.getBoundingClientRect();const cx=e.clientX-r.left;const cy=e.clientY-r.top;const x=Math.floor(cx/this.cellSize);const gy=Math.floor(cy/this.cellSize);const y=(this.gridHeight-1)-gy;if((x===this.startPos[0]&&y===this.startPos[1])||(x===this.goalPos[0]&&y===this.goalPos[1]))return;const i=this.coins.findIndex(c=>c[0]===x&&c[1]===y);if(i>=0){this.coins.splice(i,1);this.log("Mynt borttaget vid ("+x+","+y+")");}else{this.coins.push([x,y]);this.log("Mynt tillagt vid ("+x+","+y+")");}this.initialCoins=JSON.parse(JSON.stringify(this.coins));this.drawGrid();this.drawAgent();}
+handleHover(e){if(this.editMode){this.hideHover();return;}if(this.draggingStart||this.draggingGoal){this.hideHover();return;}const r=this.canvas.getBoundingClientRect();const mx=e.clientX-r.left;const my=e.clientY-r.top;const cx=Math.floor(mx/this.cellSize);const cy=this.gridHeight-1-Math.floor(my/this.cellSize);if(cx<0||cx>=this.gridWidth||cy<0||cy>=this.gridHeight){this.hideHover();return;}const ck=this.getCoinKey();const acts=[0,1,2,3];const mp={0:"Upp",1:"Höger",2:"Ner",3:"Vänster"};let tt="";for(let a of acts){const k=`${cx},${cy},${ck},${a}`;let qv=this.agent.Q[k];if(qv===undefined)qv=INITIAL_Q;tt+=`${mp[a]}: ${qv.toFixed(2)}<br>`;}const hd=document.getElementById("hoverInfo");hd.innerHTML=tt;hd.style.left=(e.clientX+10)+"px";hd.style.top=(e.clientY+10)+"px";hd.style.display="block";}
+hideHover(){document.getElementById("hoverInfo").style.display="none";}
+drawGrid(){this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);for(let y=0;y<this.gridHeight;y++){for(let x=0;x<this.gridWidth;x++){const cx=x*this.cellSize;const cy=(this.gridHeight-1-y)*this.cellSize;let fc;if(this.env.isObstacle([x,y]))fc="#111";else if(this.env.isGoal([x,y]))fc="#34c759";else{const aa=this.env.getActions([x,y]);const mq=this.agent.getMaxQ([x,y,this.getCoinKey()],aa);const t=Math.max(0,Math.min(mq,10))/10;if(t<=0.5){const f=Math.sqrt(t/0.5);fc=`rgb(255,${Math.round(f*255)},${Math.round(f*255)})`;}else{const f=Math.sqrt((t-0.5)/0.5);fc=`rgb(${Math.round(255*(1-f))},${Math.round(255*(1-f))},255)`;}}this.ctx.fillStyle=fc;this.ctx.fillRect(cx,cy,this.cellSize,this.cellSize);this.ctx.strokeStyle="#1e2642";this.ctx.strokeRect(cx,cy,this.cellSize,this.cellSize);if(this.showQValues){this.ctx.fillStyle="black";this.ctx.font="8px 'DM Sans',sans-serif";this.ctx.textAlign="center";this.ctx.fillText("U:"+(this.agent.Q[this.agent.key([x,y,this.getCoinKey()],0)]||INITIAL_Q).toFixed(1),cx+this.cellSize/2,cy+16);this.ctx.textAlign="right";this.ctx.fillText("H:"+(this.agent.Q[this.agent.key([x,y,this.getCoinKey()],1)]||INITIAL_Q).toFixed(1),cx+this.cellSize-2,cy+this.cellSize/2+4);this.ctx.textAlign="center";this.ctx.fillText("N:"+(this.agent.Q[this.agent.key([x,y,this.getCoinKey()],2)]||INITIAL_Q).toFixed(1),cx+this.cellSize/2,cy+this.cellSize-4);this.ctx.textAlign="left";this.ctx.fillText("V:"+(this.agent.Q[this.agent.key([x,y,this.getCoinKey()],3)]||INITIAL_Q).toFixed(1),cx+2,cy+this.cellSize/2+4);}if(this.coins.some(c=>c[0]===x&&c[1]===y)){this.ctx.beginPath();this.ctx.fillStyle="#ffd866";this.ctx.arc(cx+this.cellSize/2,cy+this.cellSize/2,this.cellSize/6,0,2*Math.PI);this.ctx.fill();this.ctx.strokeStyle="darkgoldenrod";this.ctx.stroke();}}}if(this.editMode){let sx=this.startPos[0]*this.cellSize+this.cellSize/2;let sy=(this.gridHeight-1-this.startPos[1])*this.cellSize+this.cellSize/2;this.ctx.beginPath();this.ctx.fillStyle="#4d80ff";this.ctx.arc(sx,sy,this.cellSize/4,0,2*Math.PI);this.ctx.fill();this.ctx.strokeStyle="white";this.ctx.stroke();let gx=this.goalPos[0]*this.cellSize+this.cellSize/2;let gy=(this.gridHeight-1-this.goalPos[1])*this.cellSize+this.cellSize/2;this.ctx.beginPath();this.ctx.fillStyle="#ef5b5b";this.ctx.arc(gx,gy,this.cellSize/4,0,2*Math.PI);this.ctx.fill();this.ctx.strokeStyle="white";this.ctx.stroke();this.ctx.fillStyle="rgba(9,11,20,0.6)";this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);this.ctx.fillStyle="#ef5b5b";this.ctx.font="bold 18px 'DM Sans',sans-serif";this.ctx.textAlign="center";this.ctx.fillText("REDIGERINGSLÄGE",this.canvas.width/2,28);}if(this.showPolicy)this.drawPolicy();}
+drawPolicy(){const am={0:"↑",1:"→",2:"↓",3:"←"};for(let y=0;y<this.gridHeight;y++){for(let x=0;x<this.gridWidth;x++){if(this.env.isObstacle([x,y])||this.env.isGoal([x,y]))continue;const aa=this.env.getActions([x,y]);if(aa.length===0)continue;let ba=aa[0];let bq=this.agent.Q[this.agent.key([x,y,this.getCoinKey()],ba)];aa.forEach(a=>{const qv=this.agent.Q[this.agent.key([x,y,this.getCoinKey()],a)];if(qv>bq){bq=qv;ba=a;}});const cx=x*this.cellSize;const cy=(this.gridHeight-1-y)*this.cellSize;this.ctx.fillStyle="#ef5b5b";this.ctx.font="24px Arial";this.ctx.textAlign="center";this.ctx.fillText(am[ba],cx+this.cellSize/2,cy+this.cellSize/1.5);}}}
+drawAgent(){const[x,y]=this.state;const cx=x*this.cellSize;const cy=(this.gridHeight-1-y)*this.cellSize;const pad=this.cellSize*0.2;const sz=this.cellSize*0.6;this.ctx.fillStyle="orange";this.ctx.beginPath();this.ctx.arc(cx+pad+sz/2,cy+pad+sz/2,sz/2,0,2*Math.PI);this.ctx.fill();}
+updateInfoLabel(){this.infoLabel.textContent="Episod: "+this.episode+", Steg: "+this.stepCount;}
+toggleQValues(){this.showQValues=!this.showQValues;this.qToggleButton.textContent=this.showQValues?"Visa Q-värden: På":"Visa Q-värden: Av";this.drawGrid();this.drawAgent();}
+togglePolicy(){this.showPolicy=!this.showPolicy;this.policyButton.textContent=this.showPolicy?"Visa Policy: På":"Visa Policy: Av";this.drawGrid();}
+updateSpeed(e){const v=parseInt(e.target.value);this.delay=Math.max(0,120-v/84);this.stepsPerFrame=v>=9000?50:v>=7000?10:v>=5000?3:1;}
+togglePause(){this.paused=!this.paused;this.pauseButton.textContent=this.paused?"Fortsätt":"Pausa";}
+resetTraining(){this.agent=new QLearningAgent(this.gridWidth,this.gridHeight,[0,1,2,3]);this.episode=0;this.stepCount=0;this.state=this.startPos.slice();this.coins=JSON.parse(JSON.stringify(this.initialCoins));this.mode="idle";this.log("Träningen har återställts.");this.testButton.style.display="none";this.policyButton.style.display="none";this.drawGrid();this.drawAgent();this.updateInfoLabel();}
+resetEpisode(){this.state=this.startPos.slice();this.stepCount=0;this.coins=JSON.parse(JSON.stringify(this.initialCoins));}
+startTraining(){this.env.goal=this.goalPos.slice();const a=parseFloat(document.getElementById("alphaParam").value)||0.5;const g=parseFloat(document.getElementById("gammaParam").value)||0.95;const ep=parseFloat(document.getElementById("epsilonParam").value)||0.3;this.agent.alpha=a;this.agent.gamma=g;this.agent.epsilon=ep;this.mode="training";this.episode=0;this.stepCount=0;this.state=this.startPos.slice();const sv=parseInt(this.speedSlider.value);this.delay=Math.max(0,120-sv/84);this.stepsPerFrame=sv>=9000?50:sv>=7000?10:sv>=5000?3:1;this.running=true;this.testMode=false;this.paused=false;this.showPolicy=false;this.policyButton.style.display="none";this.updateParamInfo();this.log("Ny träning startad.");}
+runStep(){if(this.testMode)this.runTestStep();else this.runTrainingStep();}
+runTrainingStep(){if(!this.running||this.paused)return;if(this.mode!=="training"&&this.mode!=="testing")return;const cs=this.getState();const aa=this.env.getActions(this.state);const action=this.agent.chooseAction(cs,aa);const result=this.env.step(this.state,action);let nsp=result.nextState;let tr=result.reward;const ci=this.coins.findIndex(c=>c[0]===nsp[0]&&c[1]===nsp[1]);if(ci>=0){this.log("Mynt insamlat vid ("+nsp[0]+","+nsp[1]+")! Extra reward: "+COIN_REWARD);tr+=COIN_REWARD;this.coins.splice(ci,1);}else{const idc=defaultCoins.some(c=>c[0]===nsp[0]&&c[1]===nsp[1]);if(idc){this.log("Penalty: Återbesökt tomt myntområde ("+nsp[0]+","+nsp[1]+")!");tr+=VISITED_COIN_PENALTY;}}if(this.env.isGoal(nsp)&&this.coins.length>0){this.log("Penalty: Målet nått utan alla mynt!");tr+=EARLY_GOAL_PENALTY;nsp=this.state;}this.log("Steg "+this.stepCount+": ("+this.state[0]+","+this.state[1]+") -> ("+nsp[0]+","+nsp[1]+") action "+action+", reward "+tr.toFixed(2));let calc=this.agent.update(cs,action,tr,[nsp[0],nsp[1],this.getCoinKey()],this.env.getActions(nsp));let plain=calc.replace(/\$\$/g,"").replace(/\\bigl\(/g,"(").replace(/\\bigr\)/g,")").replace(/\\text\{([^}]+)\}/g,"$1").replace(/\\Bigl\(/g,"(").replace(/\\Bigr\)/g,")").replace(/\\cdot/g,"*").replace(/\\;/g," ").replace(/\\,/g,",").trim();this.log("Q-uppdatering ("+cs[0]+","+cs[1]+"): "+plain);this.state=nsp;this.stepCount++;if((result.done&&this.coins.length===0)||this.stepCount>=this.maxSteps){this.episode++;this.resetEpisode();}if(this.agent.checkConvergence()){this.infoLabel.textContent="KONVERGERAD! Episod: "+this.episode;this.testButton.style.display="inline-block";this.policyButton.style.display="inline-block";this.running=false;return;}this.drawGrid();this.drawAgent();this.updateInfoLabel();}
+runTestStep(){if(this.currentTestStep>=this.testPath.length){this.testPath=this.generateOptimalPath();this.currentTestStep=0;if(this.testPath.length===0){this.log("Ingen giltig bana!");return;}}this.state=this.testPath[this.currentTestStep];const ci=this.coins.findIndex(c=>c[0]===this.state[0]&&c[1]===this.state[1]);if(ci>=0){this.coins.splice(ci,1);this.log("Mynt insamlat vid ("+this.state[0]+","+this.state[1]+") under test!");}this.currentTestStep++;this.drawGrid();this.drawAgent();if(this.currentTestStep>=this.testPath.length)this.log("Testbana slutförd!");}
+generateOptimalPath(){let path=[];let cs=this.startPos.slice();let lc=JSON.parse(JSON.stringify(this.initialCoins));let vis=new Set();for(let i=0;i<this.maxSteps;i++){const ck=getCoinKeyFrom(lc);const sk=`${cs[0]},${cs[1]},${ck}`;if(vis.has(sk))break;vis.add(sk);path.push([...cs]);const aa=this.env.getActions(cs);const action=this.agent.chooseAction([cs[0],cs[1],ck],aa);const result=this.env.step(cs,action);const ci=lc.findIndex(c=>c[0]===result.nextState[0]&&c[1]===result.nextState[1]);if(ci>=0)lc.splice(ci,1);cs=result.nextState;if(this.env.isGoal(cs)&&lc.length===0)break;}return path;}
+startTestMode(){this.testMode=true;this.paused=true;this.state=this.startPos.slice();this.coins=JSON.parse(JSON.stringify(this.initialCoins));this.showQValues=true;this.qToggleButton.textContent="Visa Q-värden: På";this.testPath=this.generateOptimalPath();this.currentTestStep=0;this.log("\n--- TESTLÄGE AKTIVERAT ---");this.testButton.disabled=true;this.nextStepButton.disabled=false;this.drawGrid();this.drawAgent();}
+simulationLoop(ts){if(!this.lastUpdateTime)this.lastUpdateTime=ts;if(!this.paused&&!this.stepMode){const d=ts-this.lastUpdateTime;if(d>=this.delay){this.lastUpdateTime=ts;const s=this.stepsPerFrame||1;for(let i=0;i<s;i++){this.runStep();if(!this.running)break;}}}else{this.lastUpdateTime=ts;}requestAnimationFrame((t)=>this.simulationLoop(t));}}
+window.onload=()=>{const sim=new QLearningSimulation();MathJax.typeset();};
 </script>
 </body>
 </html>
