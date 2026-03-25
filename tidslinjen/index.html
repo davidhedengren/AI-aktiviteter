@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-tidslinjen – När då då?</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--subtle:#b0bedc;--accent:#4d80ff;--accent2:#6698ff;--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--orange:#ff9f43;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
+.back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
+.back-link:hover{color:var(--text);border-color:var(--dim);}
+.hd{width:100%;text-align:center;padding:12px 16px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
+.hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}.hd h1 span{color:var(--accent2);}
+.hd p{color:var(--dim);font-size:0.8em;max-width:620px;margin:0 auto;line-height:1.4;}
+.game-wrap{max-width:900px;margin:0 auto;padding:14px 16px 20px;flex:1;display:none;flex-direction:column;gap:10px;position:relative;z-index:1;width:100%;}
+.game-wrap.show{display:flex;}
+
+.score-bar{display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap;}
+.sb{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 12px;display:flex;align-items:center;gap:6px;font-size:0.8em;}
+.sb .sl{color:var(--dim);font-weight:600;}.sb .sv{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent);}
+.two-score{display:none;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 16px;}
+.two-score.show{display:flex;}
+.ts-p{text-align:center;min-width:60px;transition:transform 0.3s;}
+.ts-p .ts-name{font-size:0.62em;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;}
+.ts-p .ts-val{font-family:'JetBrains Mono',monospace;font-size:1.3em;font-weight:700;}
+.ts-p.p1 .ts-name{color:var(--accent);}.ts-p.p1 .ts-val{color:var(--accent);}
+.ts-p.p2 .ts-name{color:var(--orange);}.ts-p.p2 .ts-val{color:var(--orange);}
+.ts-p.active{transform:scale(1.1);}
+.ts-sep{font-family:'JetBrains Mono',monospace;font-size:1.1em;color:var(--dim);font-weight:700;margin:0 4px;}
+.streak-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 12px;font-size:0.8em;display:flex;align-items:center;gap:4px;transition:all 0.3s;}
+.streak-box.hot{border-color:var(--orange);background:rgba(255,159,67,0.08);box-shadow:0 0 12px rgba(255,159,67,0.15);}
+.streak-box.fire{border-color:#ef5b5b;background:rgba(239,91,91,0.1);box-shadow:0 0 16px rgba(239,91,91,0.2);animation:firePulse 0.8s ease infinite;}
+@keyframes firePulse{0%,100%{transform:scale(1);}50%{transform:scale(1.03);}}
+.streak-num{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--orange);font-size:1.05em;}
+.streak-fires{letter-spacing:-2px;}
+
+.card-area{display:flex;gap:14px;align-items:flex-start;min-height:180px;}
+.current-card{background:var(--surface);border:2px solid var(--accent);border-radius:12px;padding:18px 20px;flex:0 0 340px;box-shadow:0 4px 24px rgba(77,128,255,0.12);transition:all 0.4s;}
+.current-card.placing{opacity:0;transform:translateY(60px) scale(0.9);pointer-events:none;}
+.card-era{font-size:0.62em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
+.card-title{font-size:1.05em;font-weight:700;margin-bottom:8px;line-height:1.3;}
+.card-desc{font-size:0.8em;color:var(--dim);line-height:1.55;}
+.card-prompt{margin-top:12px;font-size:0.76em;color:var(--subtle);font-weight:600;}
+.card-remaining{margin-top:6px;font-size:0.68em;color:var(--dim);}
+.guess-area{flex:1;display:flex;flex-direction:column;gap:10px;}
+.guess-row{display:flex;gap:8px;align-items:center;}
+.year-input{font-family:'JetBrains Mono',monospace;font-size:1.4em;font-weight:700;width:120px;padding:10px 14px;background:var(--surface);border:2px solid var(--border);border-radius:8px;color:var(--text);text-align:center;outline:none;transition:border-color 0.2s;}
+.year-input:focus{border-color:var(--accent);}
+.btn{font-family:'DM Sans',sans-serif;padding:10px 20px;border:none;border-radius:8px;font-size:0.88em;font-weight:700;cursor:pointer;transition:0.2s;}
+.btn-place{background:var(--accent);color:#fff;}.btn-place:hover{background:var(--accent2);}
+.btn-place:disabled{background:var(--surface2);color:var(--dim);cursor:not-allowed;}
+
+.points-popup{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:rgba(9,11,20,0.75);backdrop-filter:blur(4px);}
+.points-popup.show{display:flex;}
+.pp-card{text-align:center;animation:ppIn 0.4s cubic-bezier(0.34,1.56,0.64,1);padding:30px 40px;border-radius:16px;border:2px solid;min-width:300px;}
+@keyframes ppIn{from{opacity:0;transform:scale(0.6) translateY(20px);}to{opacity:1;transform:none;}}
+.pp-emoji{font-size:3.5em;margin-bottom:6px;}
+.pp-label{font-size:0.85em;font-weight:600;margin-bottom:4px;}
+.pp-points{font-family:'JetBrains Mono',monospace;font-size:3em;font-weight:700;line-height:1;}
+.pp-detail{font-size:0.82em;margin-top:8px;font-weight:600;}
+.pp-year{font-family:'JetBrains Mono',monospace;font-size:1.05em;margin-top:6px;font-weight:600;}
+.pp-streak{margin-top:10px;font-size:1em;font-weight:700;}
+.pp-card.perfect{background:rgba(255,216,102,0.14);border-color:rgba(255,216,102,0.4);color:var(--gold);}
+.pp-card.close{background:rgba(52,199,89,0.12);border-color:rgba(52,199,89,0.35);color:var(--green);}
+.pp-card.order{background:rgba(77,128,255,0.12);border-color:rgba(77,128,255,0.35);color:var(--accent);}
+.pp-card.wrong{background:rgba(239,91,91,0.1);border-color:rgba(239,91,91,0.3);color:var(--red);}
+
+.turn-popup{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(9,11,20,0.85);backdrop-filter:blur(6px);}
+.turn-popup.show{display:flex;}
+.tp-card{text-align:center;animation:ppIn 0.4s cubic-bezier(0.34,1.56,0.64,1);padding:36px 50px;border-radius:16px;border:2px solid;min-width:280px;}
+.tp-card.p1{border-color:var(--accent);background:rgba(77,128,255,0.1);}
+.tp-card.p2{border-color:var(--orange);background:rgba(255,159,67,0.1);}
+.tp-emoji{font-size:2.5em;margin-bottom:8px;}
+.tp-title{font-size:1.3em;font-weight:700;margin-bottom:6px;}
+.tp-sub{font-size:0.82em;color:var(--dim);margin-bottom:16px;}
+.tp-btn{font-family:'DM Sans',sans-serif;padding:12px 32px;border:none;border-radius:8px;font-size:1em;font-weight:700;cursor:pointer;transition:0.2s;color:#fff;}
+.tp-btn.p1{background:var(--accent);}.tp-btn.p1:hover{background:var(--accent2);}
+.tp-btn.p2{background:var(--orange);}.tp-btn.p2:hover{background:#ffb366;}
+
+/* Timeline - axis in middle, cards above and below */
+.tl-section{margin-top:auto;padding-top:6px;}
+.tl-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+.tl-label{font-size:0.66em;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--dim);}
+.tl-count{font-size:0.72em;color:var(--dim);}
+.tl-wrap{position:relative;height:200px;width:100%;overflow:hidden;}
+.tl-axis{position:absolute;top:50%;left:0;right:0;height:3px;background:var(--border);border-radius:2px;transform:translateY(-50%);}
+.tl-tick{position:absolute;top:50%;transform:translate(-50%,-50%);font-family:'JetBrains Mono',monospace;font-size:0.58em;color:rgba(126,138,170,0.35);font-weight:600;margin-top:12px;}
+.tl-tick::before{content:'';position:absolute;bottom:100%;left:50%;width:1px;height:6px;background:rgba(126,138,170,0.15);transform:translateX(-50%);margin-bottom:2px;}
+.tl-tick.decade{color:rgba(126,138,170,0.5);font-size:0.6em;}
+.tl-tick.decade::before{height:10px;background:rgba(126,138,170,0.25);}
+
+/* Cards alternate above/below */
+.tl-card{position:absolute;display:flex;flex-direction:column;align-items:center;width:82px;animation:tlDrop 0.5s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes tlDrop{from{opacity:0;transform:translateX(-50%) scale(0.8);}to{opacity:1;transform:translateX(-50%) scale(1);}}
+.tl-card.above{bottom:calc(50% + 6px);transform:translateX(-50%);flex-direction:column-reverse;}
+.tl-card.below{top:calc(50% + 6px);transform:translateX(-50%);}
+.tl-card .tl-dot{width:10px;height:10px;border-radius:50%;border:3px solid;flex-shrink:0;}
+.tl-card.above .tl-dot{margin-bottom:0;margin-top:3px;}
+.tl-card.below .tl-dot{margin-top:0;margin-bottom:3px;}
+.tl-card .tl-name{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:3px 5px;font-size:0.56em;color:var(--subtle);line-height:1.2;text-align:center;max-width:80px;word-wrap:break-word;border-left:3px solid var(--accent);}
+.tl-card .tl-yr{font-family:'JetBrains Mono',monospace;font-size:0.58em;font-weight:700;margin-top:1px;}
+.tl-card.above .tl-yr{margin-top:0;margin-bottom:1px;order:-1;}
+.tl-card.perfect .tl-dot{border-color:var(--gold);background:var(--gold);}
+.tl-card.perfect .tl-yr{color:var(--gold);}
+.tl-card.perfect .tl-name{border-left-color:var(--gold);border-color:rgba(255,216,102,0.3);background:rgba(255,216,102,0.06);}
+.tl-card.close .tl-dot{border-color:var(--green);background:var(--green);}
+.tl-card.close .tl-yr{color:var(--green);}
+.tl-card.order .tl-dot{border-color:var(--accent);background:var(--accent);}
+.tl-card.order .tl-yr{color:var(--accent);}
+.tl-card.wrong .tl-dot{border-color:var(--red);background:var(--red);}
+.tl-card.wrong .tl-yr{color:var(--red);}
+.tl-card.wrong .tl-name{border-left-color:var(--red);}
+
+.overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
+.overlay.show{display:flex;}
+.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;max-width:520px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;}
+.overlay-card h2{font-size:1.1em;font-weight:700;margin-bottom:6px;}.overlay-card h2 span{color:var(--accent2);}
+.overlay-card .sub{font-size:0.84em;color:var(--dim);line-height:1.55;margin-bottom:14px;}
+.steps{display:flex;flex-direction:column;gap:10px;margin:14px 0;text-align:left;}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:0.82em;color:var(--dim);line-height:1.5;}.step strong{color:var(--text);}
+.step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
+.mode-btns{display:flex;flex-direction:column;gap:8px;margin:16px 0;}
+.mode-btn{font-family:'DM Sans',sans-serif;padding:14px 20px;border:2px solid var(--border);border-radius:10px;background:var(--surface2);color:var(--text);font-size:0.95em;font-weight:700;cursor:pointer;transition:0.2s;text-align:left;display:flex;align-items:center;gap:12px;}
+.mode-btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.06);}
+.mode-btn .mi{font-size:1.5em;flex-shrink:0;}
+.mode-btn .mt{flex:1;}.mode-btn .mt small{display:block;font-size:0.78em;font-weight:500;color:var(--dim);margin-top:2px;}
+.overlay-btn{display:block;width:100%;padding:12px;margin-top:10px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}.overlay-btn:hover{background:#3d6de6;}
+.end-card{text-align:center;}
+.big-score{font-family:'JetBrains Mono',monospace;font-size:3em;font-weight:700;color:var(--gold);margin:10px 0;}
+.end-sub{font-size:0.85em;color:var(--dim);margin-bottom:16px;}
+.end-stats{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
+.es{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 16px;text-align:center;min-width:80px;}
+.es .ev{font-family:'JetBrains Mono',monospace;font-size:1.2em;font-weight:700;}.es .el{font-size:0.68em;color:var(--dim);margin-top:2px;}
+.p-scores{display:flex;gap:12px;justify-content:center;margin:14px 0;}
+.ps{flex:1;max-width:200px;border-radius:10px;padding:14px;text-align:center;border:2px solid;}
+.ps.w{box-shadow:0 0 20px rgba(255,216,102,0.2);}
+.ps .pn{font-size:0.78em;font-weight:700;margin-bottom:4px;}
+.ps .psc{font-family:'JetBrains Mono',monospace;font-size:2em;font-weight:700;}
+@media(max-width:700px){.card-area{flex-direction:column;}.current-card{flex:none;width:100%;}.back-link{position:static;transform:none;margin-bottom:4px;}.hd{padding:10px 16px 8px;}.tl-card{width:60px;}.tl-card .tl-name{font-size:0.5em;max-width:58px;}}
+</style>
+</head>
+<body>
+<div class="hd">
+  <a class="back-link" href="/">← AI-aktiviteter</a>
+  <h1>AI-tidslinjen – <span>När då då?</span></h1>
+  <p>Placera historiska AI-händelser på tidslinjen. Hur väl känner du till AI:s historia?</p>
+</div>
+<div class="game-wrap" id="gameWrap">
+  <div class="score-bar">
+    <div class="two-score" id="twoScore">
+      <div class="ts-p p1" id="tsP1"><div class="ts-name">Spelare 1</div><div class="ts-val" id="ts1">0</div></div>
+      <div class="ts-sep">–</div>
+      <div class="ts-p p2" id="tsP2"><div class="ts-name">Spelare 2</div><div class="ts-val" id="ts2">0</div></div>
+    </div>
+    <div class="sb" id="soloScore"><span class="sl">Poäng</span><span class="sv" id="scoreVal">0</span></div>
+    <div class="sb"><span class="sl">Kort</span><span class="sv" id="cardCount">0/0</span></div>
+    <div class="streak-box" id="streakBox"><span class="streak-num" id="streakNum">0</span><span class="streak-fires" id="streakFires"></span></div>
+  </div>
+  <div class="card-area">
+    <div class="current-card" id="currentCard">
+      <div class="card-era" id="cardEra"></div>
+      <div class="card-title" id="cardTitle"></div>
+      <div class="card-desc" id="cardDesc"></div>
+      <div class="card-prompt">📅 Vilket år tror du att detta hände?</div>
+      <div class="card-remaining" id="cardRemaining"></div>
+    </div>
+    <div class="guess-area">
+      <div class="guess-row">
+        <input type="number" class="year-input" id="yearInput" min="1940" max="2025" placeholder="Årtal">
+        <button class="btn btn-place" id="placeBtn" onclick="submitGuess()">Placera →</button>
+      </div>
+    </div>
+  </div>
+  <div class="tl-section">
+    <div class="tl-top"><div class="tl-label">Tidslinje</div><div class="tl-count" id="tlCount">0 av 15 placerade</div></div>
+    <div class="tl-wrap" id="tlWrap"><div class="tl-axis"></div></div>
+  </div>
+</div>
+<div class="points-popup" id="pointsPopup"><div class="pp-card" id="ppCard"></div></div>
+<div class="turn-popup" id="turnPopup"><div class="tp-card" id="tpCard"></div></div>
+<div class="overlay show" id="modeOverlay">
+  <div class="overlay-card">
+    <h2>AI-tidslinjen – <span>När då då?</span></h2>
+    <p class="sub">Testa dina kunskaper om AI:s historia – placera händelserna på rätt plats i tidslinjen.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div><strong>Läs kortet</strong> – Varje kort beskriver en historisk AI-händelse. Gissa vilket år det hände.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Samla poäng</strong> – Rätt årtal ger 3 poäng, rätt decennium 2 poäng, rätt ordning 1 poäng.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Rätt svar i rad ger streak-bonus!</strong></div></div>
+    </div>
+    <div class="mode-btns">
+      <button class="mode-btn" onclick="startGame(1)"><span class="mi">🧠</span><span class="mt">1 spelare<small>Träna själv på AI-historien</small></span></button>
+      <button class="mode-btn" onclick="startGame(2)"><span class="mi">🤝</span><span class="mt">2 spelare<small>Turas om att placera kort</small></span></button>
+    </div>
+  </div>
+</div>
+<div class="overlay" id="endOverlay"><div class="overlay-card end-card" id="endCard"></div></div>
+
+<script>
+const EVENTS=[
+  {id:1,year:1950,title:"Turingtestet föreslås",desc:"Alan Turing publicerar artikeln \"Can Machines Think?\" och föreslår ett test för att avgöra om en maskin kan uppfattas som intelligent.",era:"Pionjärerna"},
+  {id:2,year:1955,title:"Logic Theorist utvecklas",desc:"Ett av de första AI-programmen. Det kan bevisa matematiska satser inom logik och visar att datorer kan utföra resonemang.",era:"Pionjärerna"},
+  {id:3,year:1956,title:"Dartmouthkonferensen",desc:"Forskare samlas på Dartmouth College och myntar begreppet \"artificiell intelligens\". AI blir ett forskningsfält.",era:"Pionjärerna"},
+  {id:4,year:1958,title:"Perceptronen presenteras",desc:"En tidig modell inspirerad av hjärnans nervceller som kan lära sig känna igen enkla mönster – föregångaren till dagens neurala nätverk.",era:"Pionjärerna"},
+  {id:5,year:1965,title:"DENDRAL – AI inom kemi",desc:"Ett av de första expertsystemen. Det analyserar kemiska ämnens struktur med hjälp av masspektrometri-data.",era:"Symbolisk AI"},
+  {id:6,year:1966,title:"ELIZA – första chatboten",desc:"ELIZA simulerar en terapeut genom att omformulera användarens påståenden till frågor och skapar en illusion av samtal.",era:"Symbolisk AI"},
+  {id:7,year:1973,title:"Lighthill-rapporten",desc:"En brittisk rapport kritiserar AI-forskningen hårt. Finansieringen minskar dramatiskt och den första AI-vintern inleds.",era:"AI-vinter"},
+  {id:8,year:1976,title:"MYCIN – medicinsk AI",desc:"Expertsystemet MYCIN kan ge förslag på antibiotikabehandlingar och visar potentialen för AI inom sjukvård.",era:"Expertsystem"},
+  {id:9,year:1997,title:"Deep Blue besegrar Kasparov",desc:"IBM:s schackdator besegrar världsmästaren Garry Kasparov. AI kan överträffa människor i strukturerade spelmiljöer.",era:"Genombrott"},
+  {id:10,year:2006,title:"Google Translate lanseras",desc:"Google lanserar sin översättningstjänst – ett tidigt exempel på AI-driven språkbehandling i stor skala.",era:"Språkmodeller"},
+  {id:11,year:2011,title:"Watson vinner Jeopardy",desc:"IBM:s Watson besegrar de bästa mästarna i frågesporten Jeopardy efter att ha tränats på 200 miljoner sidor text.",era:"Genombrott"},
+  {id:12,year:2012,title:"AlexNet – djupinlärning",desc:"AlexNet vinner bildigenkänningstävlingen ImageNet. Kombinationen av neurala nätverk, GPU:er och stora datamängder förändrar AI.",era:"Djupinlärning"},
+  {id:13,year:2016,title:"AlphaGo besegrar Go-mästaren",desc:"Googles AlphaGo besegrar världsmästaren i Go – ett spel med fler möjliga positioner än atomer i universum.",era:"Djupinlärning"},
+  {id:14,year:2018,title:"GPT-1 lanseras",desc:"OpenAI lanserar GPT-1, den första modellen i GPT-serien. Starten för en ny generation av stora språkmodeller.",era:"Språkmodeller"},
+  {id:15,year:2022,title:"ChatGPT släpps",desc:"ChatGPT blir fritt tillgängligt och når hundratals miljoner användare på några månader. Generativ AI exploderar.",era:"Generativ AI"}
+];
+const ERA_COL={"Pionjärerna":"#4d80ff","Symbolisk AI":"#a78bfa","AI-vinter":"#ef5b5b","Expertsystem":"#ff9f43","Genombrott":"#34c759","Djupinlärning":"#22d3ee","Språkmodeller":"#fb7185","Generativ AI":"#ffd866"};
+
+let mode=1,deck=[],placed=[],currentIdx=0;
+let scores=[0,0],streaks=[0,0],maxStreaks=[0,0],perfects=[0,0],currentPlayer=0;
+let totalCards=0,cardsPlaced=0;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function startGame(m){
+  mode=m;deck=shuffle([...EVENTS]);placed=[];currentIdx=0;cardsPlaced=0;
+  scores=[0,0];streaks=[0,0];maxStreaks=[0,0];perfects=[0,0];currentPlayer=0;
+  totalCards=EVENTS.length;
+  document.getElementById('modeOverlay').classList.remove('show');
+  document.getElementById('endOverlay').classList.remove('show');
+  document.getElementById('gameWrap').classList.add('show');
+  if(mode===2){document.getElementById('twoScore').classList.add('show');document.getElementById('soloScore').style.display='none';}
+  else{document.getElementById('twoScore').classList.remove('show');document.getElementById('soloScore').style.display='';}
+  renderTimeline();updateUI();showCard();
+}
+
+function showCard(){
+  if(currentIdx>=deck.length){if(cardsPlaced>=totalCards){endGame();return;}currentIdx=0;}
+  while(currentIdx<deck.length&&placed.find(p=>p.id===deck[currentIdx].id))currentIdx++;
+  if(currentIdx>=deck.length){if(cardsPlaced>=totalCards){endGame();return;}currentIdx=0;showCard();return;}
+  const ev=deck[currentIdx],cc=document.getElementById('currentCard');
+  cc.classList.remove('placing');
+  cc.style.borderColor=ERA_COL[ev.era]||'var(--accent)';
+  document.getElementById('cardEra').textContent=ev.era;
+  document.getElementById('cardEra').style.color=ERA_COL[ev.era]||'var(--accent)';
+  document.getElementById('cardTitle').textContent=ev.title;
+  document.getElementById('cardDesc').textContent=ev.desc;
+  document.getElementById('cardRemaining').textContent=`${totalCards-cardsPlaced} kort kvar`;
+  const inp=document.getElementById('yearInput');inp.value='';inp.disabled=false;inp.focus();
+  document.getElementById('placeBtn').disabled=false;
+  updateUI();
+}
+
+function submitGuess(){
+  const inp=document.getElementById('yearInput'),guess=parseInt(inp.value);
+  if(isNaN(guess)||guess<1900||guess>2030){inp.style.borderColor='var(--red)';setTimeout(()=>inp.style.borderColor='',500);return;}
+  const ev=deck[currentIdx],diff=Math.abs(guess-ev.year);
+  const sameDecade=Math.floor(guess/10)===Math.floor(ev.year/10);
+  let orderCorrect=true;
+  for(const p of placed){if(ev.year<p.year&&guess>p.guessYear)orderCorrect=false;if(ev.year>p.year&&guess<p.guessYear)orderCorrect=false;}
+
+  let points=0,level='wrong',emoji='❌',label='Inte riktigt...',detail='';
+  if(diff===0){points=3;level='perfect';emoji='🏆';label='Perfekt!';detail='Exakt rätt årtal!';perfects[currentPlayer]++;}
+  else if(sameDecade){points=2;level='close';emoji='✅';label='Rätt decennium!';detail=diff+' år ifrån.';}
+  else if(orderCorrect&&placed.length>0){points=1;level='order';emoji='📍';label='Rätt ordning!';detail=diff+' år ifrån.';}
+  else{points=0;level='wrong';detail=diff+' år ifrån.';}
+
+  let streakMsg='';
+  if(points===3){streaks[currentPlayer]++;if(streaks[currentPlayer]>maxStreaks[currentPlayer])maxStreaks[currentPlayer]=streaks[currentPlayer];
+    if(streaks[currentPlayer]>=3){const bonus=streaks[currentPlayer]-2;points+=bonus;streakMsg=`🔥 Streak ${streaks[currentPlayer]}! +${bonus} bonus`;}
+    else if(streaks[currentPlayer]>=2)streakMsg=`🔥 ${streaks[currentPlayer]} i rad!`;
+  }else streaks[currentPlayer]=0;
+
+  scores[currentPlayer]+=points;
+  if(points===0){const card=deck.splice(currentIdx,1)[0];const ins=currentIdx+1+Math.floor(Math.random()*(deck.length-currentIdx));deck.splice(Math.min(ins,deck.length),0,card);}
+  else{placed.push({...ev,guessYear:guess,points,level});placed.sort((a,b)=>a.year-b.year);cardsPlaced++;}
+
+  inp.disabled=true;document.getElementById('placeBtn').disabled=true;
+  document.getElementById('currentCard').classList.add('placing');
+  const turnChanges=mode===2&&points<2;
+
+  showPointsPopup(emoji,label,`+${points} poäng`,detail,`Rätt svar: ${ev.year}`,streakMsg,level,()=>{
+    renderTimeline();updateUI();
+    if(points>0)currentIdx++;
+    if(turnChanges){currentPlayer=currentPlayer===0?1:0;showTurnPopup(()=>showCard());}
+    else showCard();
+  });
+}
+
+function showPointsPopup(emoji,label,pts,detail,yearLine,streakMsg,level,cb){
+  const pp=document.getElementById('pointsPopup'),pc=document.getElementById('ppCard');
+  pc.className=`pp-card ${level}`;
+  pc.innerHTML=`<div class="pp-emoji">${emoji}</div><div class="pp-label">${label}</div><div class="pp-points">${pts}</div><div class="pp-detail">${detail}</div><div class="pp-year">${yearLine}</div>${streakMsg?`<div class="pp-streak">${streakMsg}</div>`:''}`;
+  pp.classList.add('show');
+  setTimeout(()=>{pp.classList.remove('show');cb();},1800);
+}
+
+function showTurnPopup(cb){
+  const tp=document.getElementById('turnPopup'),tc=document.getElementById('tpCard');
+  const pC=currentPlayer===0?'p1':'p2',col=currentPlayer===0?'var(--accent)':'var(--orange)';
+  tc.className=`tp-card ${pC}`;
+  tc.innerHTML=`<div class="tp-emoji">${currentPlayer===0?'🔵':'🟠'}</div><div class="tp-title" style="color:${col}">Spelare ${currentPlayer+1}</div><div class="tp-sub">Din tur!</div><button class="tp-btn ${pC}" onclick="document.getElementById('turnPopup').classList.remove('show');(${cb.toString()})();">Jag är redo →</button>`;
+  tp.classList.add('show');
+}
+
+function updateUI(){
+  document.getElementById('scoreVal').textContent=scores[0];
+  document.getElementById('ts1').textContent=scores[0];
+  document.getElementById('ts2').textContent=scores[1];
+  document.getElementById('tsP1').classList.toggle('active',currentPlayer===0);
+  document.getElementById('tsP2').classList.toggle('active',currentPlayer===1);
+  document.getElementById('cardCount').textContent=`${cardsPlaced}/${totalCards}`;
+  const s=streaks[currentPlayer];
+  document.getElementById('streakNum').textContent=s;
+  const fires=document.getElementById('streakFires'),box=document.getElementById('streakBox');
+  if(s>=5){fires.textContent='🔥🔥🔥';box.className='streak-box fire';}
+  else if(s>=3){fires.textContent='🔥🔥';box.className='streak-box hot';}
+  else if(s>=1){fires.textContent='🔥';box.className='streak-box';}
+  else{fires.textContent='';box.className='streak-box';}
+  document.getElementById('tlCount').textContent=`${cardsPlaced} av ${totalCards} placerade`;
+}
+
+function renderTimeline(){
+  const wrap=document.getElementById('tlWrap');
+  wrap.innerHTML='<div class="tl-axis"></div>';
+  const minY=1945,maxY=2027,range=maxY-minY;
+  for(let y=1950;y<=2020;y+=10){const pct=(y-minY)/range*100;const t=document.createElement('div');t.className='tl-tick decade';t.style.left=pct+'%';t.textContent=y;wrap.appendChild(t);}
+
+  // Sort placed by year, alternate above/below
+  const sorted=[...placed].sort((a,b)=>a.year-b.year);
+  for(let i=0;i<sorted.length;i++){
+    const p=sorted[i];
+    const pct=(p.year-minY)/range*100;
+    const above=i%2===0;
+    const card=document.createElement('div');
+    card.className=`tl-card ${p.level} ${above?'above':'below'}`;
+    card.style.left=pct+'%';
+    const name=document.createElement('div');name.className='tl-name';name.textContent=p.title;
+    name.style.borderLeftColor=ERA_COL[p.era]||'var(--accent)';
+    const dot=document.createElement('div');dot.className='tl-dot';
+    const yr=document.createElement('div');yr.className='tl-yr';yr.textContent=p.year;
+    if(above){card.appendChild(yr);card.appendChild(name);card.appendChild(dot);}
+    else{card.appendChild(dot);card.appendChild(name);card.appendChild(yr);}
+    wrap.appendChild(card);
+  }
+}
+
+function endGame(){
+  document.getElementById('gameWrap').classList.remove('show');
+  const eo=document.getElementById('endOverlay');eo.classList.add('show');
+  const ec=document.getElementById('endCard'),maxP=totalCards*3;
+  if(mode===1){
+    const pct=Math.round(scores[0]/maxP*100);
+    let emoji='🎯',comment='Bra jobbat!';
+    if(pct>=90){emoji='🏆';comment='Fantastiskt! Du kan AI-historien!';}
+    else if(pct>=70){emoji='🌟';comment='Imponerande!';}
+    else if(pct>=50){emoji='👍';comment='Bra grund! Läs kapitlet och testa igen.';}
+    else{emoji='📚';comment='Dags att läsa på!';}
+    ec.innerHTML=`<h2>${emoji} Spelet slut!</h2><div class="big-score">${scores[0]} / ${maxP}</div><div class="end-sub">${comment}</div><div class="end-stats"><div class="es"><div class="ev" style="color:var(--gold)">${perfects[0]}</div><div class="el">Perfekta</div></div><div class="es"><div class="ev" style="color:var(--orange)">${maxStreaks[0]}</div><div class="el">Bästa streak</div></div><div class="es"><div class="ev" style="color:var(--accent)">${totalCards}</div><div class="el">Kort</div></div></div><button class="overlay-btn" onclick="location.reload()">Spela igen</button>`;
+  }else{
+    const w=scores[0]>scores[1]?0:scores[1]>scores[0]?1:-1;
+    let title='Oavgjort! 🤝';if(w===0)title='Spelare 1 vinner! 🏆';if(w===1)title='Spelare 2 vinner! 🏆';
+    ec.innerHTML=`<h2>${title}</h2><div class="p-scores"><div class="ps ${w===0?'w':''}" style="border-color:var(--accent);${w===0?'background:rgba(77,128,255,0.08);':''}"><div class="pn" style="color:var(--accent)">Spelare 1</div><div class="psc" style="color:var(--accent)">${scores[0]}</div></div><div class="ps ${w===1?'w':''}" style="border-color:var(--orange);${w===1?'background:rgba(255,159,67,0.08);':''}"><div class="pn" style="color:var(--orange)">Spelare 2</div><div class="psc" style="color:var(--orange)">${scores[1]}</div></div></div><div class="end-stats"><div class="es"><div class="ev" style="color:var(--gold)">${perfects[0]} / ${perfects[1]}</div><div class="el">Perfekta</div></div><div class="es"><div class="ev" style="color:var(--orange)">${maxStreaks[0]} / ${maxStreaks[1]}</div><div class="el">Bästa streak</div></div></div><button class="overlay-btn" onclick="location.reload()">Spela igen</button>`;
+  }
+}
+
+document.getElementById('yearInput').addEventListener('keydown',e=>{if(e.key==='Enter')submitGuess();});
+window.addEventListener('resize',()=>{if(placed.length>0)renderTimeline();});
+</script>
+</body>
+</html>
