@@ -4,28 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI-tidslinjen – När då då?</title>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-ZDWXTZZBBR');
-</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--subtle:#b0bedc;--accent:#4d80ff;--accent2:#6698ff;--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--orange:#ff9f43;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);height:100vh;display:flex;flex-direction:column;overflow:hidden;}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
 .back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .back-link:hover{color:var(--text);border-color:var(--dim);}
 .hd{width:100%;text-align:center;padding:12px 16px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
 .hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}.hd h1 span{color:var(--accent2);}
 .hd p{color:var(--dim);font-size:0.8em;max-width:620px;margin:0 auto;line-height:1.4;}
-.game-wrap{max-width:900px;margin:0 auto;padding:14px 16px 20px;flex:1;display:none;flex-direction:column;gap:10px;position:relative;z-index:1;width:100%;}
+.game-wrap{max-width:900px;margin:0 auto;padding:14px 16px 20px;flex:1;display:none;flex-direction:column;gap:10px;position:relative;z-index:1;width:100%;min-height:0;}
 .game-wrap.show{display:flex;}
 
 .score-bar{display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap;}
@@ -48,13 +40,12 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .streak-fires{letter-spacing:-2px;}
 
 .card-area{display:flex;gap:14px;align-items:flex-start;min-height:180px;}
-.current-card{background:var(--surface);border:2px solid var(--accent);border-radius:12px;padding:18px 20px;flex:0 0 340px;box-shadow:0 4px 24px rgba(77,128,255,0.12);transition:all 0.4s;}
+.current-card{background:var(--surface);border:2px solid var(--accent);border-radius:12px;padding:20px 22px;flex:0 0 370px;box-shadow:0 4px 24px rgba(77,128,255,0.12);transition:all 0.4s;}
 .current-card.placing{opacity:0;transform:translateY(60px) scale(0.9);pointer-events:none;}
-.card-era{font-size:0.62em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
-.card-title{font-size:1.05em;font-weight:700;margin-bottom:8px;line-height:1.3;}
-.card-desc{font-size:0.8em;color:var(--dim);line-height:1.55;}
-.card-prompt{margin-top:12px;font-size:0.76em;color:var(--subtle);font-weight:600;}
-.card-remaining{margin-top:6px;font-size:0.68em;color:var(--dim);}
+.card-era{font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
+.card-title{font-size:1.1em;font-weight:700;margin-bottom:9px;line-height:1.3;}
+.card-desc{font-size:0.84em;color:var(--dim);line-height:1.6;}
+.card-prompt{margin-top:14px;font-size:0.78em;color:var(--subtle);font-weight:600;}
 .guess-area{flex:1;display:flex;flex-direction:column;gap:10px;}
 .guess-row{display:flex;gap:8px;align-items:center;}
 .year-input{font-family:'JetBrains Mono',monospace;font-size:1.4em;font-weight:700;width:120px;padding:10px 14px;background:var(--surface);border:2px solid var(--border);border-radius:8px;color:var(--text);text-align:center;outline:none;transition:border-color 0.2s;}
@@ -90,29 +81,28 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .tp-btn.p1{background:var(--accent);}.tp-btn.p1:hover{background:var(--accent2);}
 .tp-btn.p2{background:var(--orange);}.tp-btn.p2:hover{background:#ffb366;}
 
-/* Timeline - axis in middle, cards above and below */
-.tl-section{margin-top:auto;padding-top:6px;}
+/* Timeline */
+.tl-section{flex:1;display:flex;flex-direction:column;padding-top:6px;min-height:0;}
 .tl-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
 .tl-label{font-size:0.66em;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--dim);}
 .tl-count{font-size:0.72em;color:var(--dim);}
-.tl-wrap{position:relative;height:200px;width:100%;overflow:hidden;}
+.tl-wrap{position:relative;flex:1;min-height:180px;width:100%;overflow:hidden;}
 .tl-axis{position:absolute;top:50%;left:0;right:0;height:3px;background:var(--border);border-radius:2px;transform:translateY(-50%);}
-.tl-tick{position:absolute;top:50%;transform:translate(-50%,-50%);font-family:'JetBrains Mono',monospace;font-size:0.58em;color:rgba(126,138,170,0.35);font-weight:600;margin-top:12px;}
-.tl-tick::before{content:'';position:absolute;bottom:100%;left:50%;width:1px;height:6px;background:rgba(126,138,170,0.15);transform:translateX(-50%);margin-bottom:2px;}
-.tl-tick.decade{color:rgba(126,138,170,0.5);font-size:0.6em;}
-.tl-tick.decade::before{height:10px;background:rgba(126,138,170,0.25);}
+.tl-tick{position:absolute;top:50%;transform:translate(-50%,-50%);font-family:'JetBrains Mono',monospace;font-size:0.62em;color:rgba(126,138,170,0.35);font-weight:600;margin-top:14px;}
+.tl-tick::before{content:'';position:absolute;bottom:100%;left:50%;width:1px;height:7px;background:rgba(126,138,170,0.15);transform:translateX(-50%);margin-bottom:2px;}
+.tl-tick.decade{color:rgba(126,138,170,0.5);font-size:0.68em;}
+.tl-tick.decade::before{height:12px;background:rgba(126,138,170,0.25);}
 
-/* Cards alternate above/below */
-.tl-card{position:absolute;display:flex;flex-direction:column;align-items:center;width:82px;animation:tlDrop 0.5s cubic-bezier(0.34,1.56,0.64,1);}
+.tl-card{position:absolute;display:flex;flex-direction:column;align-items:center;width:100px;animation:tlDrop 0.5s cubic-bezier(0.34,1.56,0.64,1);}
 @keyframes tlDrop{from{opacity:0;transform:translateX(-50%) scale(0.8);}to{opacity:1;transform:translateX(-50%) scale(1);}}
-.tl-card.above{bottom:calc(50% + 6px);transform:translateX(-50%);flex-direction:column-reverse;}
-.tl-card.below{top:calc(50% + 6px);transform:translateX(-50%);}
-.tl-card .tl-dot{width:10px;height:10px;border-radius:50%;border:3px solid;flex-shrink:0;}
+.tl-card.above{bottom:calc(50% + 10px);transform:translateX(-50%);flex-direction:column-reverse;}
+.tl-card.below{top:calc(50% + 10px);transform:translateX(-50%);}
+.tl-card .tl-dot{width:14px;height:14px;border-radius:50%;border:3px solid;flex-shrink:0;}
 .tl-card.above .tl-dot{margin-bottom:0;margin-top:3px;}
 .tl-card.below .tl-dot{margin-top:0;margin-bottom:3px;}
-.tl-card .tl-name{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:3px 5px;font-size:0.56em;color:var(--subtle);line-height:1.2;text-align:center;max-width:80px;word-wrap:break-word;border-left:3px solid var(--accent);}
-.tl-card .tl-yr{font-family:'JetBrains Mono',monospace;font-size:0.58em;font-weight:700;margin-top:1px;}
-.tl-card.above .tl-yr{margin-top:0;margin-bottom:1px;order:-1;}
+.tl-card .tl-name{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:4px 6px;font-size:0.65em;color:var(--subtle);line-height:1.25;text-align:center;max-width:96px;word-wrap:break-word;border-left:3px solid var(--accent);}
+.tl-card .tl-yr{font-family:'JetBrains Mono',monospace;font-size:0.68em;font-weight:700;margin-top:2px;}
+.tl-card.above .tl-yr{margin-top:0;margin-bottom:2px;order:-1;}
 .tl-card.perfect .tl-dot{border-color:var(--gold);background:var(--gold);}
 .tl-card.perfect .tl-yr{color:var(--gold);}
 .tl-card.perfect .tl-name{border-left-color:var(--gold);border-color:rgba(255,216,102,0.3);background:rgba(255,216,102,0.06);}
@@ -149,7 +139,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .ps.w{box-shadow:0 0 20px rgba(255,216,102,0.2);}
 .ps .pn{font-size:0.78em;font-weight:700;margin-bottom:4px;}
 .ps .psc{font-family:'JetBrains Mono',monospace;font-size:2em;font-weight:700;}
-@media(max-width:700px){.card-area{flex-direction:column;}.current-card{flex:none;width:100%;}.back-link{position:static;transform:none;margin-bottom:4px;}.hd{padding:10px 16px 8px;}.tl-card{width:60px;}.tl-card .tl-name{font-size:0.5em;max-width:58px;}}
+@media(max-width:700px){.card-area{flex-direction:column;}.current-card{flex:none;width:100%;}.back-link{position:static;transform:none;margin-bottom:4px;}.hd{padding:10px 16px 8px;}.tl-wrap{min-height:200px;}.tl-card{width:70px;}.tl-card .tl-name{font-size:0.52em;max-width:66px;}.tl-card .tl-dot{width:10px;height:10px;}.tl-card .tl-yr{font-size:0.58em;}}
 </style>
 </head>
 <body>
@@ -175,7 +165,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="card-title" id="cardTitle"></div>
       <div class="card-desc" id="cardDesc"></div>
       <div class="card-prompt">📅 Vilket år tror du att detta hände?</div>
-      <div class="card-remaining" id="cardRemaining"></div>
     </div>
     <div class="guess-area">
       <div class="guess-row">
@@ -198,7 +187,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div><strong>Läs kortet</strong> – Varje kort beskriver en historisk AI-händelse. Gissa vilket år det hände.</div></div>
       <div class="step"><div class="step-num">2</div><div><strong>Samla poäng</strong> – Rätt årtal ger 3 poäng, rätt decennium 2 poäng, rätt ordning i förhållande till de andra korten ger 1 poäng.</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Streak🔥</strong> - Flera rätt svar i rad ger extra streak-bonus!</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Streak🔥</strong> – Flera rätt svar i rad ger extra streak-bonus!</div></div>
     </div>
     <div class="mode-btns">
       <button class="mode-btn" onclick="startGame(1)"><span class="mi">🧠</span><span class="mt">1 spelare<small>Träna själv på AI-historien</small></span></button>
@@ -257,7 +246,6 @@ function showCard(){
   document.getElementById('cardEra').style.color=ERA_COL[ev.era]||'var(--accent)';
   document.getElementById('cardTitle').textContent=ev.title;
   document.getElementById('cardDesc').textContent=ev.desc;
-  document.getElementById('cardRemaining').textContent=`${totalCards-cardsPlaced} kort kvar`;
   const inp=document.getElementById('yearInput');inp.value='';inp.disabled=false;inp.focus();
   document.getElementById('placeBtn').disabled=false;
   updateUI();
@@ -338,7 +326,6 @@ function renderTimeline(){
   const minY=1945,maxY=2027,range=maxY-minY;
   for(let y=1950;y<=2020;y+=10){const pct=(y-minY)/range*100;const t=document.createElement('div');t.className='tl-tick decade';t.style.left=pct+'%';t.textContent=y;wrap.appendChild(t);}
 
-  // Sort placed by year, alternate above/below
   const sorted=[...placed].sort((a,b)=>a.year-b.year);
   for(let i=0;i<sorted.length;i++){
     const p=sorted[i];
