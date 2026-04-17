@@ -113,6 +113,11 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .tl-card.wrong .tl-dot{border-color:var(--red);background:var(--red);}
 .tl-card.wrong .tl-yr{color:var(--red);}
 .tl-card.wrong .tl-name{border-left-color:var(--red);}
+.tl-band{position:absolute;top:50%;transform:translateY(-50%);height:10px;border-radius:3px;opacity:0.3;pointer-events:none;animation:tlDrop 0.5s ease;}
+.tl-band.perfect{background:var(--red);opacity:0.35;}
+.tl-band.close{background:var(--red);opacity:0.25;}
+.tl-band.order{background:var(--red);opacity:0.2;}
+.tl-band.wrong{background:var(--red);opacity:0.15;}
 
 .overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
@@ -165,7 +170,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="card-era" id="cardEra"></div>
       <div class="card-title" id="cardTitle"></div>
       <div class="card-desc" id="cardDesc"></div>
-      <div class="card-prompt">📅 Vilket år tror du att detta hände?</div>
+      <div class="card-prompt" id="cardPrompt">📅 Vilket år tror du att detta hände?</div>
     </div>
     <div class="guess-area">
       <div class="guess-row">
@@ -175,7 +180,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     </div>
   </div>
   <div class="tl-section">
-    <div class="tl-top"><div class="tl-label">Tidslinje</div><div class="tl-count" id="tlCount">0 av 15 placerade</div></div>
+    <div class="tl-top"><div class="tl-label">Tidslinje</div><div class="tl-count" id="tlCount">0 av 17 placerade</div></div>
     <div class="tl-wrap" id="tlWrap"><div class="tl-axis"></div></div>
   </div>
 </div>
@@ -214,7 +219,9 @@ const EVENTS=[
   {id:12,year:2012,title:"AlexNet – djupinlärning",desc:"AlexNet vinner bildigenkänningstävlingen ImageNet. Kombinationen av neurala nätverk, GPU:er och stora datamängder förändrar AI.",era:"Djupinlärning"},
   {id:13,year:2016,title:"AlphaGo besegrar Go-mästaren",desc:"Googles AlphaGo besegrar världsmästaren i Go – ett spel med fler möjliga positioner än atomer i universum.",era:"Djupinlärning"},
   {id:14,year:2018,title:"GPT-1 lanseras",desc:"OpenAI lanserar GPT-1, den första modellen i GPT-serien. Starten för en ny generation av stora språkmodeller.",era:"Språkmodeller"},
-  {id:15,year:2022,title:"ChatGPT släpps",desc:"ChatGPT blir fritt tillgängligt och når hundratals miljoner användare på några månader. Generativ AI exploderar.",era:"Generativ AI"}
+  {id:15,year:2022,title:"ChatGPT släpps",desc:"ChatGPT blir fritt tillgängligt och når hundratals miljoner användare på några månader. Generativ AI exploderar.",era:"Generativ AI"},
+  {id:16,year:1974,yearRange:[1966,1980],title:"Första AI-vintern",desc:"Finansieringen av AI-forskning minskar kraftigt efter kritik mot bristande resultat. Forskare hade lovat för mycket – verkligheten kom ikapp. En lång period av ointresse och nedskärningar följer.",era:"AI-vinter"},
+  {id:17,year:1990,yearRange:[1987,2010],title:"Andra AI-vintern",desc:"Expertsystemen visar sig dyra, svåra att underhålla och dåliga på att hantera oväntade situationer. Kommersiella förväntningar infrias inte och finansieringen minskar återigen kraftigt.",era:"AI-vinter"}
 ];
 const ERA_COL={"Pionjärerna":"#4d80ff","Symbolisk AI":"#a78bfa","AI-vinter":"#ef5b5b","Expertsystem":"#ff9f43","Genombrott":"#34c759","Djupinlärning":"#22d3ee","Språkmodeller":"#fb7185","Generativ AI":"#ffd866"};
 
@@ -247,6 +254,7 @@ function showCard(){
   document.getElementById('cardEra').style.color=ERA_COL[ev.era]||'var(--accent)';
   document.getElementById('cardTitle').textContent=ev.title;
   document.getElementById('cardDesc').textContent=ev.desc;
+  document.getElementById('cardPrompt').textContent=ev.yearRange?'❄️ Gissa ungefär när den började:':'📅 Vilket år tror du att detta hände?';
   const inp=document.getElementById('yearInput');inp.value='';inp.disabled=false;inp.focus();
   document.getElementById('placeBtn').disabled=false;
   updateUI();
@@ -261,10 +269,19 @@ function submitGuess(){
   for(const p of placed){if(ev.year<p.year&&guess>p.guessYear)orderCorrect=false;if(ev.year>p.year&&guess<p.guessYear)orderCorrect=false;}
 
   let points=0,level='wrong',emoji='❌',label='Inte riktigt...',detail='';
-  if(diff===0){points=3;level='perfect';emoji='🏆';label='Perfekt!';detail='Exakt rätt årtal!';perfects[currentPlayer]++;}
-  else if(sameDecade){points=2;level='close';emoji='✅';label='Rätt decennium!';detail=diff+' år ifrån.';}
-  else if(orderCorrect&&placed.length>0){points=1;level='order';emoji='📍';label='Rätt ordning!';detail=diff+' år ifrån.';}
-  else{points=0;level='wrong';detail=diff+' år ifrån.';}
+  if(ev.yearRange){
+    const [lo,hi]=ev.yearRange;
+    const nearDiff=Math.min(Math.abs(guess-lo),Math.abs(guess-hi));
+    if(guess>=lo&&guess<=hi){points=3;level='perfect';emoji='❄️';label='Rätt period!';detail=`Perioden var ${lo}–${hi}.`;perfects[currentPlayer]++;}
+    else if(nearDiff<=8){points=2;level='close';emoji='✅';label='Nära!';detail=`Perioden var ${lo}–${hi}.`;}
+    else if(orderCorrect&&placed.length>0){points=1;level='order';emoji='📍';label='Rätt ordning!';detail=`Perioden var ${lo}–${hi}.`;}
+    else{points=0;level='wrong';detail=`Perioden var ${lo}–${hi}.`;}
+  }else{
+    if(diff===0){points=3;level='perfect';emoji='🏆';label='Perfekt!';detail='Exakt rätt årtal!';perfects[currentPlayer]++;}
+    else if(sameDecade){points=2;level='close';emoji='✅';label='Rätt decennium!';detail=diff+' år ifrån.';}
+    else if(orderCorrect&&placed.length>0){points=1;level='order';emoji='📍';label='Rätt ordning!';detail=diff+' år ifrån.';}
+    else{points=0;level='wrong';detail=diff+' år ifrån.';}
+  }
 
   let streakMsg='';
   if(points===3){streaks[currentPlayer]++;if(streaks[currentPlayer]>maxStreaks[currentPlayer])maxStreaks[currentPlayer]=streaks[currentPlayer];
@@ -280,7 +297,7 @@ function submitGuess(){
   document.getElementById('currentCard').classList.add('placing');
   const turnChanges=mode===2&&points<2;
 
-  showPointsPopup(emoji,label,`+${points} poäng`,detail,`Rätt svar: ${ev.year}`,streakMsg,level,()=>{
+  showPointsPopup(emoji,label,`+${points} poäng`,detail,ev.yearRange?`Perioden: ${ev.yearRange[0]}–${ev.yearRange[1]}`:`Rätt svar: ${ev.year}`,streakMsg,level,()=>{
     renderTimeline();updateUI();
     if(points>0)currentIdx++;
     if(turnChanges){currentPlayer=currentPlayer===0?1:0;showTurnPopup(()=>showCard());}
@@ -332,13 +349,26 @@ function renderTimeline(){
     const p=sorted[i];
     const pct=(p.year-minY)/range*100;
     const above=i%2===0;
+
+    // Draw band for range cards
+    if(p.yearRange){
+      const bandLeft=(p.yearRange[0]-minY)/range*100;
+      const bandWidth=(p.yearRange[1]-p.yearRange[0])/range*100;
+      const band=document.createElement('div');
+      band.className=`tl-band ${p.level}`;
+      band.style.left=bandLeft+'%';
+      band.style.width=bandWidth+'%';
+      wrap.appendChild(band);
+    }
+
     const card=document.createElement('div');
     card.className=`tl-card ${p.level} ${above?'above':'below'}`;
     card.style.left=pct+'%';
     const name=document.createElement('div');name.className='tl-name';name.textContent=p.title;
     name.style.borderLeftColor=ERA_COL[p.era]||'var(--accent)';
     const dot=document.createElement('div');dot.className='tl-dot';
-    const yr=document.createElement('div');yr.className='tl-yr';yr.textContent=p.year;
+    const yr=document.createElement('div');yr.className='tl-yr';
+    yr.textContent=p.yearRange?`${p.yearRange[0]}–${p.yearRange[1]}`:p.year;
     if(above){card.appendChild(yr);card.appendChild(name);card.appendChild(dot);}
     else{card.appendChild(dot);card.appendChild(name);card.appendChild(yr);}
     wrap.appendChild(card);
