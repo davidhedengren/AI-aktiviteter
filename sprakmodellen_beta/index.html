@@ -180,7 +180,9 @@ input[type=range]:disabled{opacity:0.3;}
       <div class="stat-row"><span class="sl">Tokens (ord & tecken)</span><span class="sv" id="stTokens">0</span></div>
       <div class="stat-row"><span class="sl">Unika ord</span><span class="sv" id="stVocab">0</span></div>
       <div class="stat-row"><span class="sl">Kontexter i tabellen</span><span class="sv" id="stCtx">0</span></div>
+      <div class="stat-row"><span class="sl">Valmöjligheter per steg</span><span class="sv" id="stBranch">–</span></div>
     </div>
+    <div class="hint" id="qualityNote" style="display:none;"></div>
 
     <div class="coll">
       <button class="coll-toggle" onclick="toggleColl(this,'challBody')">🎯 Utmaningar<span class="arr">▼</span></button>
@@ -301,6 +303,7 @@ let temp = 1.0;
 let autoTimer = null;
 let busy = false;              // låser interaktion under "vald-ord-blink"
 let deadEnd = false;
+let truncated = false;         // sant om inklistrad text kortades vid bygget
 
 // ════════════════════════════════════════════════════════════
 //  Tokenisering & modellbygge
@@ -337,7 +340,7 @@ function buildModels(){
 function buildFromTextarea(){
   stopAuto();
   const text = document.getElementById('trainText').value;
-  const toks = tokenize(text);
+  let toks = tokenize(text);
   if(toks.length < 30){
     document.getElementById('stStatus').textContent = 'för kort text';
     document.getElementById('stStatus').className = 'sv';
@@ -345,6 +348,8 @@ function buildFromTextarea(){
       'Texten är för kort – modellen behöver <strong>minst ca 30 ord</strong> för att kunna räkna ordföljder. Skriv mer, eller välj en exempeltext.';
     return;
   }
+  truncated = false;
+  if(toks.length > 30000){ toks = toks.slice(0, 30000); truncated = true; }
   tokens = toks;
   buildModels();
   built = true;
@@ -372,12 +377,44 @@ function onTextEdit(){
   if(v !== PRESETS[sel.value]) sel.value = 'egen';
 }
 
+// Förväntat antal valmöjligheter per genereringssteg (viktat med hur
+// ofta varje kontext förekommer). Nära 1 ⇒ modellen kan bara
+// återberätta texten ordagrant.
+function branching(kk){
+  if(!built || models[kk].size === 0) return 0;
+  let num = 0, den = 0;
+  for(const counts of models[kk].values()){
+    let tot = 0;
+    for(const c of counts.values()) tot += c;
+    num += tot * counts.size;
+    den += tot;
+  }
+  return num / den;
+}
+
 function updateStats(){
   document.getElementById('stStatus').textContent = built ? '✓ byggd' : '–';
   document.getElementById('stStatus').className = built ? 'sv ok' : 'sv';
   document.getElementById('stTokens').textContent = tokens.length;
   document.getElementById('stVocab').textContent = built ? new Set(tokens).size : 0;
   document.getElementById('stCtx').textContent = built ? models[k].size : 0;
+
+  const bEl = document.getElementById('stBranch');
+  const qn = document.getElementById('qualityNote');
+  if(!built){ bEl.textContent = '–'; bEl.style.color = ''; qn.style.display = 'none'; return; }
+  const bf = branching(k);
+  bEl.textContent = bf.toFixed(2);
+  bEl.style.color = bf >= 1.5 ? 'var(--green)' : bf >= 1.1 ? 'var(--gold)' : 'var(--red)';
+
+  let note = '';
+  if(bf < 1.1){
+    note = `⚠️ <strong>Texten upprepar sig sällan</strong> – vid kontextlängd ${k} finns nästan aldrig mer än <strong>ett</strong> möjligt nästa ord. Modellen kan då bara återberätta texten ordagrant tills den tar slut. Prova <strong>kontextlängd 1</strong>, eller en längre text där ord och fraser återkommer.`;
+  }
+  if(truncated){
+    note += (note ? '<br><br>' : '') + 'ℹ️ Texten var mycket lång och kortades till 30 000 tokens vid bygget.';
+  }
+  qn.innerHTML = note;
+  qn.style.display = note ? 'block' : 'none';
 }
 
 // ════════════════════════════════════════════════════════════
@@ -430,7 +467,10 @@ function startGen(word){
       genTokens = tokens.slice(i, i + k);
     }
   }else{
-    const list = starts[k].length ? starts[k] : [0];
+    const all = starts[k].length ? starts[k] : [0];
+    // Undvik att sådda från en kontext som saknar fortsättning
+    const viable = all.filter(j => models[k].has(tokens.slice(j, j + k).join(SEP)));
+    const list = viable.length ? viable : all;
     const j = list[Math.floor(Math.random() * list.length)];
     genTokens = tokens.slice(j, j + k);
   }
@@ -481,9 +521,13 @@ function showDeadEnd(){
   deadEnd = true;
   stopAuto();
   const ctx = genTokens.slice(-k);
+  const bf = branching(k);
+  const why = bf < 1.1
+    ? `Texten upprepar sig sällan, så vid kontextlängd ${k} kan modellen bara följa den ordagrant – och nu tog den slut. Prova <strong>kontextlängd 1</strong>, eller klistra in en längre text med fler upprepningar.`
+    : `Det här är tabellmodellens svaghet: den kan bara exakta matchningar. ChatGPT:s neurala nätverk kan i stället <em>generalisera</em>.`;
   document.getElementById('ptable').innerHTML =
     `<div class="ptable-msg"><span class="big">🚧</span>
-     <div><strong>Återvändsgränd!</strong><br>Ordföljden «${esc(ctx.join(' '))}» förekommer bara allra sist i träningstexten – modellen har aldrig sett något ord komma efter den.<br><br>Det här är tabellmodellens svaghet: den kan bara exakta matchningar. ChatGPT:s neurala nätverk kan i stället <em>generalisera</em>.</div>
+     <div><strong>Återvändsgränd!</strong><br>Ordföljden «${esc(ctx.join(' '))}» förekommer bara allra sist i träningstexten – modellen har aldrig sett något ord komma efter den.<br><br>${why}</div>
      <button class="btn pri" onclick="deadEnd=false;startGen()">🔀 Börja om från nytt ställe</button></div>`;
   document.getElementById('narr').innerHTML =
     `Kontexten <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> har <strong>0 möjliga fortsättningar</strong>. Tryck på knappen i tabellen för att starta om.`;
