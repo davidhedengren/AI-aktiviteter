@@ -160,6 +160,11 @@ input[type=range]:disabled{opacity:0.3;}
         <option value="egen">✍️ Egen text…</option>
       </select>
       <textarea id="trainText" spellcheck="false" oninput="onTextEdit()"></textarea>
+      <div style="display:flex;gap:6px;margin-top:7px;">
+        <button class="btn ghost" style="flex:1;" onclick="document.getElementById('fileInput').click()">📄 Ladda upp fil (.txt / .pdf)</button>
+        <input type="file" id="fileInput" accept=".txt,.md,.pdf" multiple style="display:none" onchange="handleFiles(this.files)">
+      </div>
+      <div class="hint" id="fileStatus" style="display:none;"></div>
       <button class="btn grn" style="width:100%;margin-top:7px;" onclick="buildFromTextarea()">🧠 Bygg modellen</button>
       <div class="stale-note" id="staleNote">⚠️ Texten har ändrats – tryck <strong style="color:var(--text)">Bygg modellen</strong> igen.</div>
     </div>
@@ -192,7 +197,7 @@ input[type=range]:disabled{opacity:0.3;}
           <li>Byt till <span class="hl">kontextlängd 3</span> och generera igen. Jämför med träningstexten – hur mycket är ren kopia? Varför blir det så?</li>
           <li>Välj <span class="hl">Alltid vanligast (girig)</span> och auto-generera. Vad händer förr eller senare? Varför slumpar ChatGPT i stället för att alltid välja det troligaste ordet?</li>
           <li>Sänk <span class="hl">temperaturen</span> till 0.3 och höj den sedan till 2.0. Beskriv skillnaden i texten med egna ord.</li>
-          <li>Klistra in en <strong>egen text</strong> (minst ~150 ord). Hur mycket text behövs för att modellen ska bli bra? Vad händer med en text som aldrig upprepar sig?</li>
+          <li>Klistra in en <strong>egen text</strong> (minst ~150 ord) – eller ladda upp en hel bok! Fria svenska klassiker finns hos t.ex. Litteraturbanken och Projekt Runeberg. Hur förändras <span class="hl">valmöjligheterna per steg</span> när texten blir tusentals ord lång?</li>
         </ol>
       </div>
     </div>
@@ -264,7 +269,7 @@ input[type=range]:disabled{opacity:0.3;}
     <h2><span>Språkmodell</span>-labbet</h2>
     <p class="sub">ChatGPT skriver text genom att gissa nästa ord – om och om igen. Här bygger du en minivariant som gör samma sak, fast med en sannolikhetstabell du kan se rakt igenom.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Träna modellen</strong> – Välj en exempeltext eller klistra in en egen. Modellen räknar hur ofta varje ord följer på varje ordföljd i texten.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Träna modellen</strong> – Välj en exempeltext, klistra in en egen – eller ladda upp en hel bok (.txt/.pdf). Modellen räknar hur ofta varje ord följer på varje ordföljd i texten.</div></div>
       <div class="step"><div class="step-num">2</div><div><strong>Granska sannolikheterna</strong> – Tabellen till höger visar vilka ord som kan komma härnäst givet kontexten – och hur troliga de är.</div></div>
       <div class="step"><div class="step-num">3</div><div><strong>Generera text</strong> – Låt modellen skriva själv, eller klicka på orden i tabellen och styr texten. Testa olika kontextlängder och temperaturer!</div></div>
     </div>
@@ -337,6 +342,97 @@ function buildModels(){
   }
 }
 
+// ════════════════════════════════════════════════════════════
+//  Filuppladdning (.txt / .md / .pdf)
+//  pdf.js laddas först när någon faktiskt väljer en PDF, så att
+//  sidan förblir lätt för alla andra.
+// ════════════════════════════════════════════════════════════
+const MAX_CHARS = 700000;   // ≈ 100 000 tokens, en kort roman
+
+function setFileStatus(msg){
+  const el = document.getElementById('fileStatus');
+  el.innerHTML = msg;
+  el.style.display = msg ? 'block' : 'none';
+}
+
+// Textfiler: läs som UTF-8, men fall tillbaka till Latin-1 om
+// resultatet innehåller ersättningstecken (vanligt för äldre
+// svenska .txt-filer från Windows).
+async function readTxt(file){
+  const text = await file.text();
+  const broken = (text.match(/\uFFFD/g) || []).length;
+  if(broken > 2){
+    const buf = await file.arrayBuffer();
+    return new TextDecoder('iso-8859-1').decode(buf);
+  }
+  return text;
+}
+
+let pdfJsPromise = null;
+function ensurePdfJs(){
+  if(window.pdfjsLib) return Promise.resolve();
+  if(pdfJsPromise) return pdfJsPromise;
+  pdfJsPromise = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+    s.onload = () => {
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      resolve();
+    };
+    s.onerror = () => { pdfJsPromise = null; reject(new Error('Kunde inte ladda PDF-läsaren – kontrollera internetanslutningen.')); };
+    document.head.appendChild(s);
+  });
+  return pdfJsPromise;
+}
+
+async function extractPdf(file){
+  await ensurePdfJs();
+  const buf = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({data: buf}).promise;
+  const pages = [];
+  for(let p = 1; p <= pdf.numPages; p++){
+    setFileStatus(`📕 Läser <strong>${esc(file.name)}</strong> – sida ${p} av ${pdf.numPages}…`);
+    const page = await pdf.getPage(p);
+    const tc = await page.getTextContent();
+    pages.push(tc.items.map(it => it.str).join(' '));
+  }
+  // Laga avstavningar vid radbrytning: "exem- pel" → "exempel"
+  return pages.join('\n').replace(/([a-zåäö])- ([a-zåäö])/g, '$1$2');
+}
+
+async function handleFiles(fileList){
+  const files = [...fileList];
+  if(!files.length) return;
+  setFileStatus('⏳ Läser in…');
+  const parts = [];
+  try{
+    for(const f of files){
+      const name = f.name.toLowerCase();
+      if(name.endsWith('.pdf')) parts.push(await extractPdf(f));
+      else parts.push(await readTxt(f));
+    }
+  }catch(err){
+    setFileStatus('⚠️ ' + esc(err.message || 'Kunde inte läsa filen.'));
+    document.getElementById('fileInput').value = '';
+    return;
+  }
+  let text = parts.join('\n\n').trim();
+  if(text.length < 20){
+    setFileStatus('⚠️ Ingen text hittades i filen. Om det är en PDF kan den vara inskannad som bild – då finns inget textlager att läsa.');
+    document.getElementById('fileInput').value = '';
+    return;
+  }
+  let clipped = false;
+  if(text.length > MAX_CHARS){ text = text.slice(0, MAX_CHARS); clipped = true; }
+  document.getElementById('trainText').value = text;
+  document.getElementById('presetSel').value = 'egen';
+  if(built) document.getElementById('staleNote').classList.add('show');
+  const words = text.split(/\s+/).length;
+  setFileStatus(`✓ <strong>${files.map(f => esc(f.name)).join(' + ')}</strong> inläst – ca ${words.toLocaleString('sv-SE')} ord${clipped ? ' (texten kortades till de första ' + MAX_CHARS.toLocaleString('sv-SE') + ' tecknen)' : ''}. Tryck <strong>🧠 Bygg modellen</strong>!`);
+  document.getElementById('fileInput').value = '';   // tillåt samma fil igen
+}
+
 function buildFromTextarea(){
   stopAuto();
   const text = document.getElementById('trainText').value;
@@ -349,7 +445,7 @@ function buildFromTextarea(){
     return;
   }
   truncated = false;
-  if(toks.length > 30000){ toks = toks.slice(0, 30000); truncated = true; }
+  if(toks.length > 100000){ toks = toks.slice(0, 100000); truncated = true; }
   tokens = toks;
   buildModels();
   built = true;
@@ -411,7 +507,7 @@ function updateStats(){
     note = `⚠️ <strong>Texten upprepar sig sällan</strong> – vid kontextlängd ${k} finns nästan aldrig mer än <strong>ett</strong> möjligt nästa ord. Modellen kan då bara återberätta texten ordagrant tills den tar slut. Prova <strong>kontextlängd 1</strong>, eller en längre text där ord och fraser återkommer.`;
   }
   if(truncated){
-    note += (note ? '<br><br>' : '') + 'ℹ️ Texten var mycket lång och kortades till 30 000 tokens vid bygget.';
+    note += (note ? '<br><br>' : '') + 'ℹ️ Texten var mycket lång och kortades till 100 000 tokens vid bygget.';
   }
   qn.innerHTML = note;
   qn.style.display = note ? 'block' : 'none';
