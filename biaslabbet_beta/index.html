@@ -339,7 +339,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     </div>
 
     <div class="coll" id="amazonColl">
-      <button class="coll-toggle" onclick="toggleColl(this,'amazonBody')">📰 Verkliga fallet: Amazon<span class="arr">▼</span></button>
+      <button class="coll-toggle" onclick="toggleColl(this,'amazonBody')">📰 Det verkliga fallet med Amazon<span class="arr">▼</span></button>
       <div class="coll-body" id="amazonBody">
         2018 avslöjades att Amazon hade skrotat ett internt AI-verktyg för rekrytering. Verktyget hade tränats på tio års historiska ansökningar – som till stor del kom från män – och lärde sig att nedvärdera CV:n som antydde att den sökande var kvinna, till exempel genom föreningsnamn.<br><br>
         Amazon försökte ta bort de uppenbara signalerna, men kunde inte garantera att modellen inte hittade <strong>andra, indirekta vägar</strong> till samma slutsats. En variabel som på det sättet smyger in en skyddad egenskap bakvägen kallas en <strong>proxyvariabel</strong>.<br><br>
@@ -629,6 +629,9 @@ function weightsHTML(){
       <div class="wval ${w >= 0 ? 'pos' : 'neg'}">${(w >= 0 ? '+' : '') + w.toFixed(2)}</div>
     </div>`;
   }
+  if(m.useKon){
+    h += `<div class="hint" style="margin-top:8px;">Kön kodas som <strong>kvinna = 1, man = 0</strong>. En negativ vikt för kön betyder alltså att modellen drar ner chansen för kvinnor.</div>`;
+  }
   return h;
 }
 
@@ -648,9 +651,8 @@ function renderFairness(){
     <div style="height:9px"></div>
     <div class="verdict ${vCls}">${vTxt}</div>
     <details class="more" style="margin-top:10px;"><summary>Visa fler detaljer</summary>
-      <div class="fstats" style="margin-top:8px;">
-        <div class="fbox"><div class="fl">Gap mellan grupperna</div><div class="fv" style="color:${r.gap > 15 ? 'var(--red)' : r.gap > 5 ? 'var(--gold)' : 'var(--green)'}">${r.gap.toFixed(0)} pe</div></div>
-        <div class="fbox"><div class="fl">Träffsäkerhet</div><div class="fv">${r.acc.toFixed(0)}%</div></div>
+      <div class="fstats" style="margin-top:8px;grid-template-columns:1fr;">
+        <div class="fbox"><div class="fl">Gap mellan grupperna</div><div class="fv" style="color:${r.gap > 15 ? 'var(--red)' : r.gap > 5 ? 'var(--gold)' : 'var(--green)'}">${r.gap.toFixed(0)} procentenheter</div></div>
       </div>
       <div class="fstats" style="margin-top:6px;">
         <div class="fbox"><div class="fl">Missade talanger – kvinnor</div><div class="fv" style="color:var(--kvinna)">${r.missK} av ${r.lampK}</div></div>
