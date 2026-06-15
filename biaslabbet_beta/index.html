@@ -82,6 +82,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .realcase .rc-tag{display:block;font-size:0.82em;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;}
 .realcase strong{color:var(--text);}
 .realcase a{color:var(--accent2);cursor:pointer;text-decoration:underline;}
+.gstat-neutral{font-size:0.84em;line-height:1.6;color:var(--dim);background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:11px 13px;}
+.gstat-neutral strong{color:var(--subtle);}
 .await-box{text-align:center;padding:30px 22px;display:flex;flex-direction:column;align-items:center;gap:10px;}
 .await-icon{font-size:2.4em;opacity:0.55;}
 .await-title{font-size:1em;font-weight:700;color:var(--text);}
@@ -378,7 +380,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
       <div class="step"><div class="step-num">1</div><div><strong>Träna och granska</strong> – Låt modellen lära av historiken. Se sedan vad den lärt sig, hur den bedömer nya sökande och vad den svarar på två identiska CV:n där bara könet skiljer.</div></div>
       <div class="step"><div class="step-num">2</div><div><strong>Försök åtgärda</strong> – Dölj kön för modellen, ta bort variabler eller byt träningsdata. Räcker det att blunda för kön för att bli rättvis – eller hittar modellen en bakväg ändå?</div></div>
     </div>
-    <p class="sub" style="margin-bottom:0;">💡 Bygger på ett verkligt fall: Amazon tvingades 2018 skrota en rekryterings-AI som lärt sig nedvärdera kvinnors CV:n. All data i labbet är påhittad.</p>
+    <p class="sub" style="margin-bottom:0;">💡 Bygger på ett verkligt fall inom AI-rekrytering. All data i labbet är påhittad.</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Sätt igång →</button>
   </div>
 </div>
@@ -566,23 +568,32 @@ function avg(arr, fn){ return arr.reduce((a, p) => a + fn(p), 0) / arr.length; }
 function renderDataStats(){
   const K = TRAIN.filter(p => p.kvinna), M = TRAIN.filter(p => !p.kvinna);
   const hireFn = dataMode === 'fair' ? (p => p.lamplig ? 1 : 0) : (p => p.anstalld ? 1 : 0);
-  const rows = [
-    {lab: 'Snitt utbildningspoäng (0–10)', k: avg(K, p => p.utb), m: avg(M, p => p.utb), max: 10, fmt: v => v.toFixed(1)},
-    {lab: 'Snitt erfarenhet, år (0–10)',   k: avg(K, p => p.erf), m: avg(M, p => p.erf), max: 10, fmt: v => v.toFixed(1)},
-    {lab: 'Andel med uppehåll i CV',       k: avg(K, p => p.lucka > 0 ? 1 : 0), m: avg(M, p => p.lucka > 0 ? 1 : 0), max: 1, fmt: pct},
-    {lab: dataMode === 'fair' ? 'Andel anställda (rättvist facit)' : 'Andel anställda (historiken)',
-     k: avg(K, hireFn), m: avg(M, hireFn), max: 1, fmt: pct, key: true},
-  ];
-  let h = '';
-  for(const r of rows){
-    h += `<div class="gstat-row">
-      <div class="gstat-label">${r.lab}</div>
-      <div class="gbars">
-        <div class="gbar k"><span class="gwho">K</span><div class="gtrack"><div class="gfill" style="width:${(r.k / r.max * 100).toFixed(1)}%"></div></div><span class="gval">${r.fmt(r.k)}</span></div>
-        <div class="gbar m"><span class="gwho">M</span><div class="gtrack"><div class="gfill" style="width:${(r.m / r.max * 100).toFixed(1)}%"></div></div><span class="gval">${r.fmt(r.m)}</span></div>
-      </div></div>`;
+
+  if(!useKon){
+    // Kön avstängt: modellen ser inte grupperna, så vi avslöjar inte
+    // gruppskillnaderna här – eleven får upptäcka dem via vikterna.
+    document.getElementById('gstat').innerHTML =
+      `<div class="gstat-neutral">🚫 Modellen ser inte längre <strong>kön</strong>, så grupperna går inte att jämföra här.<br><br>
+       Den har fortfarande tillgång till <strong>utbildning, erfarenhet${useLucka ? ' och uppehåll i CV' : ''}</strong>. Träna om och se i <strong>"Vad modellen tittar på"</strong> vad den nu lägger vikt vid.</div>`;
+  }else{
+    const rows = [
+      {lab: 'Snitt utbildningspoäng (0–10)', k: avg(K, p => p.utb), m: avg(M, p => p.utb), max: 10, fmt: v => v.toFixed(1)},
+      {lab: 'Snitt erfarenhet, år (0–10)',   k: avg(K, p => p.erf), m: avg(M, p => p.erf), max: 10, fmt: v => v.toFixed(1)},
+      {lab: 'Andel med uppehåll i CV',       k: avg(K, p => p.lucka > 0 ? 1 : 0), m: avg(M, p => p.lucka > 0 ? 1 : 0), max: 1, fmt: pct},
+      {lab: dataMode === 'fair' ? 'Andel anställda (rättvist facit)' : 'Andel anställda (historiken)',
+       k: avg(K, hireFn), m: avg(M, hireFn), max: 1, fmt: pct, key: true},
+    ];
+    let h = '';
+    for(const r of rows){
+      h += `<div class="gstat-row">
+        <div class="gstat-label">${r.lab}</div>
+        <div class="gbars">
+          <div class="gbar k"><span class="gwho">K</span><div class="gtrack"><div class="gfill" style="width:${(r.k / r.max * 100).toFixed(1)}%"></div></div><span class="gval">${r.fmt(r.k)}</span></div>
+          <div class="gbar m"><span class="gwho">M</span><div class="gtrack"><div class="gfill" style="width:${(r.m / r.max * 100).toFixed(1)}%"></div></div><span class="gval">${r.fmt(r.m)}</span></div>
+        </div></div>`;
+    }
+    document.getElementById('gstat').innerHTML = h;
   }
-  document.getElementById('gstat').innerHTML = h;
 
   const hK = pct(avg(K, p => p.anstalld ? 1 : 0)), hM = pct(avg(M, p => p.anstalld ? 1 : 0));
   const lead = document.getElementById('dataLead');
