@@ -78,10 +78,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .more[open] summary::before{content:'▾ ';}
 .data-lead{font-size:0.88em;line-height:1.65;color:var(--subtle);}
 .data-lead strong{color:var(--text);}
-.realcase{background:rgba(255,216,102,0.06);border:1px solid rgba(255,216,102,0.22);border-radius:8px;padding:11px 13px;font-size:0.8em;line-height:1.55;color:var(--subtle);}
-.realcase .rc-tag{display:block;font-size:0.82em;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;}
-.realcase strong{color:var(--text);}
-.realcase a{color:var(--accent2);cursor:pointer;text-decoration:underline;}
 .gstat-neutral{font-size:0.84em;line-height:1.6;color:var(--dim);background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:11px 13px;}
 .gstat-neutral strong{color:var(--subtle);}
 .await-box{text-align:center;padding:30px 22px;display:flex;flex-direction:column;align-items:center;gap:10px;}
@@ -245,11 +241,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
   <div class="lp">
     <div id="modelChip" style="display:none;"></div>
 
-    <div class="realcase">
-      <span class="rc-tag">📰 Verkligt fall</span>
-      Amazon tvingades 2018 skrota en AI för rekrytering som lärt sig nedvärdera kvinnors CV:n. I det här labbet bygger du en liknande modell åt företaget <strong>Teknova AB</strong> och undersöker hur det kunde hända. <a onclick="openAmazon()">Läs mer →</a>
-    </div>
-
     <div>
       <div class="sec-t">Datan modellen tränas på</div>
       <div class="data-lead" id="dataLead"></div>
@@ -375,12 +366,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
   <div class="overlay-card">
     <h2><span>Bias</span>-labbet</h2>
     <p class="sub">En AI lär sig av data. Men vad händer när datan speglar gamla orättvisor? Här får du själv se hur diskriminering kan smyga sig in i ett AI-system – helt utan att någon programmerat den med flit.</p>
-    <p class="sub">Företaget Teknova AB vill låta en AI sköta första gallringen av jobbansökningar, och tränar den på sina egna anställningsbeslut från förr. Problemet: i historiken anställdes män betydligt oftare än kvinnor – trots likvärdiga meriter. Frågan du ska undersöka är vad en modell egentligen lär sig av sådan data, och om man kan göra något åt det.</p>
+    <p class="sub"><strong>Det hände på riktigt:</strong> Amazon tvingades 2018 skrota en AI för rekrytering som lärt sig nedvärdera kvinnors CV:n. I det här labbet bygger du en liknande modell åt det påhittade företaget <strong>Teknova AB</strong> och undersöker hur det kunde hända. Teknova tränar sin AI på sina egna anställningsbeslut från förr – men i historiken anställdes män betydligt oftare än kvinnor, trots likvärdiga meriter.</p>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div><strong>Träna och granska</strong> – Låt modellen lära av historiken. Se sedan vad den lärt sig, hur den bedömer nya sökande och vad den svarar på två identiska CV:n där bara könet skiljer.</div></div>
       <div class="step"><div class="step-num">2</div><div><strong>Försök åtgärda</strong> – Dölj kön för modellen, ta bort variabler eller byt träningsdata. Räcker det att blunda för kön för att bli rättvis – eller hittar modellen en bakväg ändå?</div></div>
     </div>
-    <p class="sub" style="margin-bottom:0;">💡 Bygger på ett verkligt fall inom AI-rekrytering. All data i labbet är påhittad.</p>
+    <p class="sub" style="margin-bottom:0;">💡 All data i labbet är påhittad – men problemet är på riktigt.</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Sätt igång →</button>
   </div>
 </div>
@@ -792,12 +783,6 @@ function closeDataModal(){ document.getElementById('dataModal').classList.remove
 function toggleColl(btn, id){
   btn.classList.toggle('open');
   document.getElementById(id).classList.toggle('show');
-}
-function openAmazon(){
-  const body = document.getElementById('amazonBody');
-  const btn = document.getElementById('amazonColl').querySelector('.coll-toggle');
-  if(!body.classList.contains('show')){ btn.classList.add('open'); body.classList.add('show'); }
-  body.scrollIntoView({behavior: 'smooth', block: 'center'});
 }
 function togGloss(tag, id){
   const def = document.getElementById(id);
