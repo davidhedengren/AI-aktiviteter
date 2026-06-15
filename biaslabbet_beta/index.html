@@ -376,18 +376,20 @@ function mulberry32(seed){
 //    påverkar INTE lämpligheten → ren proxyvariabel.
 // ════════════════════════════════════════════════════════════
 const BIAS_PENALTY = 1.7;     // hur mycket hårdare kvinnor bedömdes historiskt
+const LUCKA_PENALTY = 0.6;    // hur hårt rekryterarna straffade uppehåll i CV (per år)
 const TRH = 5;                // beslutströskel på meritpoängen (0–10)
 
 function genPerson(rand, kvinna){
   const utb = Math.round(rand() * 10);
   const erf = Math.round(rand() * 10);
   const merit = 0.5 * utb + 0.5 * erf;
-  const lamplig = (merit + (rand() * 2 - 1) * 0.8) >= TRH;            // facit
-  const histScore = merit + (rand() * 2 - 1) * 0.8 - (kvinna ? BIAS_PENALTY : 0);
-  const anstalld = histScore >= TRH;                                   // skevt facit
+  const lamplig = (merit + (rand() * 2 - 1) * 0.8) >= TRH;            // facit (lucka spelar ingen roll)
   const lucka = kvinna
     ? (rand() < 0.65 ? 1 + Math.floor(rand() * 3) : 0)                 // 65% har 1–3 år
     : (rand() < 0.12 ? 1 : 0);                                         // 12% har 1 år
+  // Historiskt straffades både kön och uppehåll i CV (uppehållet är en proxy för kön)
+  const histScore = merit + (rand() * 2 - 1) * 0.8 - (kvinna ? BIAS_PENALTY : 0) - lucka * LUCKA_PENALTY;
+  const anstalld = histScore >= TRH;                                   // skevt facit
   return {kvinna, utb, erf, lucka, anstalld, lamplig};
 }
 
@@ -408,7 +410,7 @@ const TEST  = genDataset(120, 120, 10115);  // balanserat testset med nya sökan
 let useKon = true, useLucka = true, dataMode = 'hist';
 let model = null;          // {w, b, feats, dataMode} – fryses vid träning
 let expCount = 0;
-let twinVals = {utb: 7, erf: 6, luckaA: 0, luckaB: 0};
+let twinVals = {utb: 7, erf: 5, luckaA: 0, luckaB: 0};
 
 const FEATDEFS = [
   {key: 'utb',   label: 'Utbildningspoäng',     get: p => p.utb / 10},
