@@ -199,7 +199,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 /* Intro-overlay */
 .overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
-.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;max-width:560px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;}
+.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 26px;max-width:460px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;}
 .overlay-card h2{font-size:1.1em;font-weight:700;margin-bottom:6px;}
 .overlay-card h2 span{color:var(--accent2);}
 .overlay-card .sub{font-size:0.84em;color:var(--dim);line-height:1.55;margin-bottom:14px;}
@@ -239,7 +239,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
       <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Arbetslivserfarenhet</span><span class="vlock" title="Alltid med">🔒</span></div>
       <div class="var-toggle on" id="vtKon" onclick="toggleVar('kon')"><span class="vdot"></span><span class="vname">Kön</span></div>
       <div class="var-toggle on" id="vtLucka" onclick="toggleVar('lucka')"><span class="vdot"></span><span class="vname">Uppehåll i CV (år)</span></div>
-      <div class="hint">Vilka uppgifter om de sökande modellen får se. Kan AI:n bli rättvis bara genom att blunda för kön?</div>
     </div>
 
     <div>
@@ -248,7 +247,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
         <option value="hist" selected>📜 Historiska beslut (som de faktiskt var)</option>
         <option value="fair">⚖️ Rättvisa beslut (utifrån verklig lämplighet)</option>
       </select>
-      <div class="hint">Med <strong>📜 historiska beslut</strong> lär sig modellen av rekryterarnas gamla ja/nej – inklusive deras fördomar.</div>
+      <div class="hint"><strong>📜 Historiska beslut</strong> innehåller rekryterarnas gamla fördomar. <strong>⚖️ Rättvisa beslut</strong> utgår från verklig lämplighet.</div>
     </div>
 
     <button class="btn grn" onclick="train()">🧠 Träna modellen</button>
@@ -277,7 +276,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     <!-- 3. Rättvisetestet -->
     <div class="card">
       <div class="sec-head"><h2>Rättvisetestet</h2><span class="sub">240 nya sökande med identiska meritfördelningar</span></div>
-      <div id="fairArea"><div class="placeholder-box">Här testas modellen på <strong>nya sökande</strong> den aldrig sett. Grupperna har lika meriter – får de lika svar?</div></div>
+      <div id="fairArea"><div class="placeholder-box">Testar modellen på <strong>nya sökande</strong> med lika meriter – får grupperna lika svar?</div></div>
     </div>
 
     <!-- 4. Tvillingtestet -->
@@ -348,13 +347,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
     <h2><span>Bias</span>-labbet</h2>
-    <p class="sub">Företaget Teknova AB vill låta en AI sköta första gallringen av jobbansökningar. Labbet guidar dig i fem steg – ett i taget – genom vad som händer när modellen tränas på företagets historik. För historiken bär på ett problem…</p>
+    <p class="sub">Företaget Teknova AB vill låta en AI gallra jobbansökningar. Den tränas på företagets tidigare anställningsbeslut – men historiken bär på ett problem.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Utforska datan</strong> – Kvinnor och män i datasetet har samma utbildning och erfarenhet i snitt. Men anställdes de lika ofta?</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Träna och granska</strong> – Modellen lär sig av historiken. Du får se exakt vad den tittar på, hur den behandlar nya sökande och hur den bedömer två identiska kandidater.</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Åtgärda</strong> – I sista steget låses verktygen upp: ta bort variabler, hitta proxyvariabeln, byt träningsdata. Räcker det att ta bort "Kön" – eller hittar modellen en bakväg?</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Träna och granska</strong> – Se vad modellen lär sig av historiken, hur den behandlar nya sökande och hur den bedömer två identiska kandidater.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Åtgärda</strong> – Ta bort variabler eller byt träningsdata. Räcker det att dölja kön – eller hittar modellen en bakväg?</div></div>
     </div>
-    <p class="sub" style="margin-bottom:0;">💡 <strong style="color:var(--text)">Bygger på ett verkligt fall:</strong> Amazon skrotade 2018 en rekryterings-AI som lärt sig nedvärdera kvinnors CV:n. Läs mer i rutan <em>"📰 Verkliga fallet"</em>. All data i labbet är påhittad.</p>
+    <p class="sub" style="margin-bottom:0;">💡 Bygger på ett verkligt fall: Amazon skrotade 2018 en rekryterings-AI som lärt sig nedvärdera kvinnors CV:n. All data här är påhittad.</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta simuleringen →</button>
   </div>
 </div>
@@ -561,7 +559,7 @@ function renderDataStats(){
   const hK = pct(avg(K, p => p.anstalld ? 1 : 0)), hM = pct(avg(M, p => p.anstalld ? 1 : 0));
   const lead = document.getElementById('dataLead');
   if(dataMode === 'hist'){
-    lead.innerHTML = `Modellen tränas på <strong>300 historiska ansökningar</strong> till Teknova AB. Kvinnor och män har i snitt <strong>likvärdiga meriter</strong> – ändå anställdes bara ${hK} av kvinnorna mot ${hM} av männen. Det är den skevheten modellen lär sig av.`;
+    lead.innerHTML = `Här är <strong>Teknovas tidigare anställningsbeslut</strong> – datan modellen ska tränas på. Kvinnor och män har likvärdiga meriter, men i historiken anställdes ${hK} av kvinnorna mot ${hM} av männen. Det är den skevheten modellen kommer att lära sig.`;
   }else{
     lead.innerHTML = `<strong>⚖️ Rättvist facit valt:</strong> modellen tränas nu på vem som <strong>verkligen var lämplig</strong> utifrån meriterna, i stället för på de historiska besluten. (I verkligheten finns sällan ett sådant facit – det är hela problemet.)`;
   }
@@ -585,7 +583,7 @@ function renderWeights(){
       <div class="wval ${w >= 0 ? 'pos' : 'neg'}">${(w >= 0 ? '+' : '') + w.toFixed(2)}</div>
     </div>`;
   }
-  h += `<div class="hint" style="margin-top:2px;">Positiv vikt (grön) höjer chansen att rekommenderas, negativ (röd) sänker den. Jämför med dina tidigare experiment i loggen – flyttar sig vikterna?</div>`;
+  h += `<div class="hint" style="margin-top:2px;">Grön vikt höjer chansen att rekommenderas, röd sänker den.</div>`;
   document.getElementById('weightsArea').innerHTML = h;
 }
 
