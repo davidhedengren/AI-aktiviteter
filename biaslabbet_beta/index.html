@@ -232,7 +232,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
   <h1><span>Bias</span>-labbet</h1>
-  <p>Träna en rekryterings-AI på skev historisk data – upptäck hur diskriminering uppstår, hitta proxyvariabeln och testa hur skevheten kan motverkas.</p>
+  <p>Träna en rekryterings-AI på skev historisk data – upptäck hur diskriminering uppstår, hitta den dolda omvägen modellen tar och testa hur skevheten kan motverkas.</p>
 </div>
 
 <div class="app">
@@ -331,7 +331,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
         </div>
         <div class="g-def" id="gBias"><strong>Bias (skevhet)</strong> – Systematiska fel som gör att en modell behandlar grupper olika. Uppstår oftast för att träningsdatan speglar mänskliga fördomar eller skev representation – "bias in, bias out".</div>
         <div class="g-def" id="gSkydd"><strong>Skyddad egenskap</strong> – Egenskaper som enligt diskrimineringslagen inte får ligga till grund för beslut, t.ex. kön, etnicitet, ålder, religion och funktionsnedsättning.</div>
-        <div class="g-def" id="gProxy"><strong>Proxyvariabel</strong> – En variabel som inte <em>är</em> en skyddad egenskap men som är starkt korrelerad med en. Modellen kan använda proxyn som en "bakväg" – t.ex. CV-uppehåll som proxy för kön, eller postnummer som proxy för etnicitet.</div>
+        <div class="g-def" id="gProxy"><strong>Proxyvariabel</strong> – En variabel som egentligen är något annat, men som råkar hänga tätt ihop med en förbjuden egenskap och därför kan användas som en dold "bakväg" till den. Exempel: CV-uppehåll hänger ihop med kön (föräldraledighet är vanligare bland kvinnor), och postnummer kan hänga ihop med etnicitet. Modellen behöver alltså inte se könet direkt för att ändå gynna eller missgynna ett kön.</div>
         <div class="g-def" id="gDirekt"><strong>Direkt diskriminering</strong> – Beslutet ändras när bara den skyddade egenskapen ändras. Tvillingtestet avslöjar detta: samma meriter, olika svar.</div>
         <div class="g-def" id="gIndirekt"><strong>Indirekt diskriminering</strong> – Ett till synes neutralt kriterium (t.ex. "inga uppehåll i CV:t") som i praktiken missgynnar en grupp mycket mer än en annan.</div>
         <div class="g-def" id="gGap"><strong>Rättvisemått</strong> – Sätt att mäta rättvisa. Här används <em>demografisk paritet</em>: andelen som rekommenderas ska vara ungefär lika mellan grupperna när meriterna är lika. Gapet mäts i procentenheter.</div>
@@ -342,8 +342,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
       <button class="coll-toggle" onclick="toggleColl(this,'amazonBody')">📰 Verkliga fallet: Amazon<span class="arr">▼</span></button>
       <div class="coll-body" id="amazonBody">
         2018 avslöjades att Amazon hade skrotat ett internt AI-verktyg för rekrytering. Verktyget hade tränats på tio års historiska ansökningar – som till stor del kom från män – och lärde sig att nedvärdera CV:n som antydde att den sökande var kvinna, till exempel genom föreningsnamn.<br><br>
-        Amazon försökte ta bort de uppenbara signalerna, men kunde inte garantera att modellen inte hittade <strong>andra, indirekta vägar</strong> till samma slutsats – exakt det du kan testa här med proxyvariabeln CV-uppehåll.<br><br>
-        <strong>Obs:</strong> I det här labbet är proxyvariabeln avsiktligt tydlig. I verkligheten kan det vara mycket svårare att upptäcka vilka variabler som fungerar som proxyer.
+        Amazon försökte ta bort de uppenbara signalerna, men kunde inte garantera att modellen inte hittade <strong>andra, indirekta vägar</strong> till samma slutsats. En variabel som på det sättet smyger in en förbjuden egenskap bakvägen kallas en <strong>proxyvariabel</strong> – och en sådan får du själv jaga rätt på här (CV-uppehållet).<br><br>
+        <strong>Obs:</strong> I det här labbet är den dolda omvägen avsiktligt ganska tydlig. I verkligheten kan det vara mycket svårare att upptäcka vilka variabler som fungerar som proxyer.
       </div>
     </div>
   </div>
@@ -718,7 +718,7 @@ function updateTwins(){
     v.innerHTML = `⚠️ <strong>Identiska meriter – olika bedömning.</strong> Det enda som skiljer Anna och Adam är kön${flips ? ', och det räcker för att svaret ska slå om' : ''}. Detta kallas <strong>direkt diskriminering</strong>.`;
   }else if(!sameLucka && !m.useKon){
     v.className = 'twin-verdict flag';
-    v.innerHTML = `⚠️ Modellen ser inte kön – men den straffar <strong>CV-uppehållet</strong>${flips ? ' så hårt att svaret slår om' : ''}. Eftersom uppehåll (t.ex. föräldraledighet) är mycket vanligare hos kvinnor drabbas gruppen ändå. Detta kallas <strong>indirekt diskriminering</strong>, och CV-uppehållet fungerar som <strong>proxyvariabel</strong>.`;
+    v.innerHTML = `⚠️ Modellen ser inte kön – men den straffar <strong>CV-uppehållet</strong>${flips ? ' så hårt att svaret slår om' : ''}. Eftersom uppehåll (t.ex. föräldraledighet) är mycket vanligare hos kvinnor drabbas gruppen ändå. Detta kallas <strong>indirekt diskriminering</strong>: CV-uppehållet har blivit en dold omväg till könet – en så kallad <strong>proxyvariabel</strong>.`;
   }else{
     v.className = 'twin-verdict flag';
     v.innerHTML = `⚠️ Bedömningarna skiljer sig åt. Fundera: hur mycket beror på kön och hur mycket på CV-uppehållet? Testa att göra uppehållen lika för att isolera könets effekt.`;
