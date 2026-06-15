@@ -84,8 +84,8 @@
   .token-wrap { display:flex;flex-wrap:wrap;gap:6px;margin-top:10px; }
   .token { font-size:13px;padding:4px 10px;border-radius:4px;font-family:'JetBrains Mono',monospace;border:1px solid;transition:all .2s; }
   .token.kept { background:rgba(77,128,255,.12);border-color:rgba(77,128,255,.35);color:#c0d4ff; }
-  .token.stopped { background:transparent;border-color:var(--border);color:var(--muted);text-decoration:line-through; }
-  .token.short { background:transparent;border-color:var(--border);color:var(--muted);text-decoration:line-through; }
+  .token.stopped { background:transparent;border-color:var(--border);color:var(--muted);opacity:.75; }
+  .token.short { background:transparent;border-color:rgba(255,216,102,.3);color:var(--gold);text-decoration:line-through;opacity:.8; }
   .token-legend { display:flex;gap:16px;font-size:11px;color:var(--muted);margin-top:10px;flex-wrap:wrap; }
   .math-step { background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.25); }
   .math-step-header { display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.02); }
@@ -422,9 +422,9 @@
         </p>
         <div class="token-wrap" id="token-display"></div>
         <div class="token-legend">
-          <span><span style="color:var(--text)">■</span> Används i klassificeringen</span>
-          <span><span style="color:var(--muted)">■</span> Stoppord — filtreras bort (för vanligt)</span>
-          <span><span style="color:var(--muted)">■</span> För kort — filtreras bort (≤2 tecken)</span>
+          <span><span style="color:#c0d4ff;border:1px solid rgba(77,128,255,.35);border-radius:3px;padding:0 5px;background:rgba(77,128,255,.12)">ab</span> Används i klassificeringen</span>
+          <span><span style="color:var(--muted);opacity:.75">ab</span> Stoppord — filtreras bort (för vanligt)</span>
+          <span><span style="color:var(--gold);text-decoration:line-through;opacity:.8">ab</span> För kort — filtreras bort (≤2 tecken)</span>
         </div>
         <p style="font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6;font-style:italic">
           Notera: ingen lemmatisering görs — "vinner" och "vinnare" räknas som olika ord.
