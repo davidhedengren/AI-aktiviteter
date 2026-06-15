@@ -291,7 +291,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 
     <!-- Vikterna -->
     <div class="card" id="cardWeights" style="display:none;">
-      <div class="sec-head"><h2>Vad modellen tittar på</h2><span class="sub">variablernas vikt i beslutet</span></div>
+      <div class="sec-head"><h2>Modellens inlärda vikter</h2><span class="sub">vad modellen lägger vikt vid i beslutet</span></div>
       <div id="weightsArea"></div>
     </div>
 
@@ -565,7 +565,7 @@ function renderDataStats(){
     // gruppskillnaderna här – eleven får upptäcka dem via vikterna.
     document.getElementById('gstat').innerHTML =
       `<div class="gstat-neutral">🚫 Modellen ser inte längre <strong>kön</strong>, så grupperna går inte att jämföra här.<br><br>
-       Den har fortfarande tillgång till <strong>utbildning, erfarenhet${useLucka ? ' och uppehåll i CV' : ''}</strong>. Träna om och se i <strong>"Vad modellen tittar på"</strong> vad den nu lägger vikt vid.</div>`;
+       Den har fortfarande tillgång till <strong>utbildning, erfarenhet${useLucka ? ' och uppehåll i CV' : ''}</strong>. Träna om och se i <strong>"Modellens inlärda vikter"</strong> vad den nu lägger vikt vid.</div>`;
   }else{
     const rows = [
       {lab: 'Snitt utbildningspoäng (0–10)', k: avg(K, p => p.utb), m: avg(M, p => p.utb), max: 10, fmt: v => v.toFixed(1)},
@@ -620,7 +620,7 @@ function modelChipHTML(m){
 function weightsHTML(){
   const m = model;
   const maxW = Math.max(2.5, ...m.w.map(Math.abs));
-  let h = `<div class="hint" style="margin:0 0 10px;">Modellen väger samman variablerna till ett beslut. Ju längre stapeln är, desto mer påverkar variabeln – <strong style="color:var(--green)">grön</strong> talar för anställning, <strong style="color:var(--red)">röd</strong> emot.</div>`;
+  let h = '';
   for(let i = 0; i < m.feats.length; i++){
     const w = m.w[i], width = Math.min(50, Math.abs(w) / maxW * 50);
     h += `<div class="wrow">
@@ -635,9 +635,9 @@ function weightsHTML(){
 function renderFairness(){
   const r = evaluate(model);
   let vCls, vTxt;
-  if(r.gap > 15){ vCls = 'bad';  vTxt = `🚨 Stor skillnad: gapet är <strong>${r.gap.toFixed(0)} procentenheter</strong> – trots att grupperna har identiska meriter rekommenderas männen mycket oftare.`; }
-  else if(r.gap > 5){ vCls = 'warn'; vTxt = `⚠️ Skillnaden har minskat men finns kvar: <strong>${r.gap.toFixed(0)} procentenheter</strong>. Var kommer den ifrån?`; }
-  else { vCls = 'ok'; vTxt = `✅ Gapet är nere på <strong>${r.gap.toFixed(1)} procentenheter</strong> – grupperna behandlas i stort sett lika.`; }
+  if(r.gap > 15){ vCls = 'bad';  vTxt = `🚨 Stor skillnad: männen rekommenderas mycket oftare än kvinnorna.`; }
+  else if(r.gap > 5){ vCls = 'warn'; vTxt = `⚠️ Skillnaden har minskat men finns kvar. Var kommer den ifrån?`; }
+  else { vCls = 'ok'; vTxt = `✅ Grupperna behandlas nu i stort sett lika.`; }
 
   document.getElementById('fairArea').innerHTML = `
     <div class="sec-t" style="margin-bottom:7px;">Andel som rekommenderas för anställning</div>
@@ -647,12 +647,9 @@ function renderFairness(){
     </div>
     <div style="height:9px"></div>
     <div class="verdict ${vCls}">${vTxt}</div>
-    <div style="height:10px"></div>
-    <div class="fstats" style="grid-template-columns:1fr;">
-      <div class="fbox"><div class="fl">Gap mellan grupperna</div><div class="fv" style="color:${r.gap > 15 ? 'var(--red)' : r.gap > 5 ? 'var(--gold)' : 'var(--green)'}">${r.gap.toFixed(0)} procentenheter</div></div>
-    </div>
-    <details class="more"><summary>Visa fler detaljer</summary>
+    <details class="more" style="margin-top:10px;"><summary>Visa fler detaljer</summary>
       <div class="fstats" style="margin-top:8px;">
+        <div class="fbox"><div class="fl">Gap mellan grupperna</div><div class="fv" style="color:${r.gap > 15 ? 'var(--red)' : r.gap > 5 ? 'var(--gold)' : 'var(--green)'}">${r.gap.toFixed(0)} pe</div></div>
         <div class="fbox"><div class="fl">Träffsäkerhet</div><div class="fv">${r.acc.toFixed(0)}%</div></div>
       </div>
       <div class="fstats" style="margin-top:6px;">
