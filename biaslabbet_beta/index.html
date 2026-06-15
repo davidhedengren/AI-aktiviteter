@@ -23,7 +23,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 .app{display:grid;grid-template-columns:285px 1fr 300px;max-width:1300px;margin:0 auto;width:100%;flex:1;position:relative;z-index:1;}
 .lp{padding:14px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:13px;}
-.cp{padding:14px 18px;display:flex;flex-direction:column;gap:16px;min-width:0;}
+.cp{padding:16px 20px;display:flex;flex-direction:column;gap:18px;min-width:0;}
 .rp{padding:14px;border-left:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;gap:12px;}
 
 .sec-t{font-size:0.66em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim);margin-bottom:6px;}
@@ -69,7 +69,13 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .coll-body .hl{color:var(--accent);font-weight:600;}
 
 /* Sektionskort i mitten */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:15px 17px;display:flex;flex-direction:column;gap:11px;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;}
+.sec-head h2{font-size:0.94em;font-weight:700;letter-spacing:-0.01em;}
+.more{font-size:0.78em;}
+.more summary{cursor:pointer;color:var(--dim);font-weight:600;list-style:none;padding:2px 0;transition:color 0.2s;}
+.more summary:hover{color:var(--text);}
+.more summary::before{content:'▸ ';font-size:0.85em;}
+.more[open] summary::before{content:'▾ ';}
 .placeholder-box{border:1px dashed var(--border);border-radius:8px;padding:22px;text-align:center;color:var(--dim);font-size:0.8em;line-height:1.6;}
 .placeholder-box strong{color:var(--text);}
 
@@ -87,7 +93,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .gbar.k .gfill{background:linear-gradient(90deg,#9b6ee0,var(--kvinna));}
 .gbar.m .gfill{background:linear-gradient(90deg,#3a64d0,var(--man));}
 .gval{font-family:'JetBrains Mono',monospace;font-size:0.74em;font-weight:600;text-align:right;color:var(--subtle);}
-.data-note{font-size:0.76em;color:var(--dim);line-height:1.55;background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:9px 11px;}
+.data-note{font-size:0.78em;color:var(--dim);line-height:1.6;background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:10px 13px;}
 .data-note strong{color:var(--text);}
 
 /* Vikter */
@@ -242,6 +248,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 
   <!-- ─── Vänster: experimentinställningar ─── -->
   <div class="lp">
+    <div id="modelChip" style="display:none;"></div>
     <div>
       <div class="sec-t">Indata till modellen</div>
       <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Utbildningspoäng</span><span class="vlock" title="Alltid med">🔒</span></div>
@@ -277,6 +284,26 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     </div>
 
     <div class="coll">
+      <button class="coll-toggle" onclick="toggleColl(this,'glossBody')">📖 Begrepp<span class="arr">▼</span></button>
+      <div class="coll-body" id="glossBody">
+        <div class="glossary">
+          <span class="g-tag" onclick="togGloss(this,'gBias')">Bias</span>
+          <span class="g-tag" onclick="togGloss(this,'gSkydd')">Skyddad egenskap</span>
+          <span class="g-tag" onclick="togGloss(this,'gProxy')">Proxyvariabel</span>
+          <span class="g-tag" onclick="togGloss(this,'gDirekt')">Direkt diskriminering</span>
+          <span class="g-tag" onclick="togGloss(this,'gIndirekt')">Indirekt diskriminering</span>
+          <span class="g-tag" onclick="togGloss(this,'gGap')">Rättvisemått</span>
+        </div>
+        <div class="g-def" id="gBias"><strong>Bias (skevhet)</strong> – Systematiska fel som gör att en modell behandlar grupper olika. Uppstår oftast för att träningsdatan speglar mänskliga fördomar eller skev representation – "bias in, bias out".</div>
+        <div class="g-def" id="gSkydd"><strong>Skyddad egenskap</strong> – Egenskaper som enligt diskrimineringslagen inte får ligga till grund för beslut, t.ex. kön, etnicitet, ålder, religion och funktionsnedsättning.</div>
+        <div class="g-def" id="gProxy"><strong>Proxyvariabel</strong> – En variabel som inte <em>är</em> en skyddad egenskap men som är starkt korrelerad med en. Modellen kan använda proxyn som en "bakväg" – t.ex. CV-uppehåll som proxy för kön, eller postnummer som proxy för etnicitet.</div>
+        <div class="g-def" id="gDirekt"><strong>Direkt diskriminering</strong> – Beslutet ändras när bara den skyddade egenskapen ändras. Tvillingtestet avslöjar detta: samma meriter, olika svar.</div>
+        <div class="g-def" id="gIndirekt"><strong>Indirekt diskriminering</strong> – Ett till synes neutralt kriterium (t.ex. "inga uppehåll i CV:t") som i praktiken missgynnar en grupp mycket mer än en annan.</div>
+        <div class="g-def" id="gGap"><strong>Rättvisemått</strong> – Sätt att mäta rättvisa. Här används <em>demografisk paritet</em>: andelen som rekommenderas ska vara ungefär lika mellan grupperna när meriterna är lika. Gapet mäts i procentenheter.</div>
+      </div>
+    </div>
+
+    <div class="coll">
       <button class="coll-toggle" onclick="toggleColl(this,'amazonBody')">📰 Verkliga fallet: Amazon<span class="arr">▼</span></button>
       <div class="coll-body" id="amazonBody">
         2018 avslöjades att Amazon hade skrotat ett internt AI-verktyg för rekrytering. Verktyget hade tränats på tio års historiska ansökningar – som till stor del kom från män – och lärde sig att nedvärdera CV:n som antydde att den sökande var kvinna, till exempel genom föreningsnamn.<br><br>
@@ -290,7 +317,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 
     <!-- 1. Datan -->
     <div class="card">
-      <div class="sec-head"><h2>1 · Datan i siffror</h2><span class="sub">300 historiska ansökningar till företaget Teknova AB</span></div>
+      <div class="sec-head"><h2>Datan i siffror</h2><span class="sub">300 historiska ansökningar till företaget Teknova AB</span></div>
       <div class="gstat" id="gstat"></div>
       <div class="data-note" id="dataNote"></div>
       <button class="btn ghost" style="align-self:flex-start;" onclick="openDataModal()">📋 Visa hela datasetet (300 rader)</button>
@@ -298,19 +325,19 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 
     <!-- 2. Vikter -->
     <div class="card">
-      <div class="sec-head"><h2>2 · Vad modellen lärde sig</h2><span class="sub">vikterna i den logistiska regressionen</span></div>
-      <div id="weightsArea"><div class="placeholder-box">Tryck <strong>🧠 Träna modellen</strong> för att se vikterna.<br>Vikterna avslöjar exakt vad modellen tittar på – och hur mycket.</div></div>
+      <div class="sec-head"><h2>Vad modellen lärde sig</h2><span class="sub">vikterna i den logistiska regressionen</span></div>
+      <div id="weightsArea"><div class="placeholder-box">Tryck <strong>🧠 Träna modellen</strong> för att se vikterna.</div></div>
     </div>
 
     <!-- 3. Rättvisetestet -->
     <div class="card">
-      <div class="sec-head"><h2>3 · Rättvisetestet</h2><span class="sub">240 nya sökande (120 kvinnor, 120 män) med identiska meritfördelningar</span></div>
-      <div id="fairArea"><div class="placeholder-box">Här testas den tränade modellen på <strong>nya sökande</strong> som den aldrig sett.<br>Grupperna har exakt lika meriter – får de lika svar?</div></div>
+      <div class="sec-head"><h2>Rättvisetestet</h2><span class="sub">240 nya sökande med identiska meritfördelningar</span></div>
+      <div id="fairArea"><div class="placeholder-box">Här testas modellen på <strong>nya sökande</strong> den aldrig sett. Grupperna har lika meriter – får de lika svar?</div></div>
     </div>
 
     <!-- 4. Tvillingtestet -->
     <div class="card">
-      <div class="sec-head"><h2>4 · Tvillingtestet</h2><span class="sub">två identiska kandidater – bedöms de lika?</span></div>
+      <div class="sec-head"><h2>Tvillingtestet</h2><span class="sub">två identiska kandidater – bedöms de lika?</span></div>
       <div id="twinArea"><div class="placeholder-box">Träna modellen först.</div></div>
     </div>
   </div>
@@ -324,23 +351,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     <div class="elog-head"><span>#</span><span>Kön/CV</span><span>Data</span><span></span><span style="text-align:right">Gap</span></div>
     <div class="elog" id="elog"><div class="elog-empty">Inga experiment ännu.<br>Träna modellen för att börja.</div></div>
 
-    <div style="margin-top:auto;">
-      <div class="sec-t">📖 Begrepp – klicka för förklaring</div>
-      <div class="glossary">
-        <span class="g-tag" onclick="togGloss(this,'gBias')">Bias</span>
-        <span class="g-tag" onclick="togGloss(this,'gSkydd')">Skyddad egenskap</span>
-        <span class="g-tag" onclick="togGloss(this,'gProxy')">Proxyvariabel</span>
-        <span class="g-tag" onclick="togGloss(this,'gDirekt')">Direkt diskriminering</span>
-        <span class="g-tag" onclick="togGloss(this,'gIndirekt')">Indirekt diskriminering</span>
-        <span class="g-tag" onclick="togGloss(this,'gGap')">Rättvisemått</span>
-      </div>
-      <div class="g-def" id="gBias"><strong>Bias (skevhet)</strong> – Systematiska fel som gör att en modell behandlar grupper olika. Uppstår oftast för att träningsdatan speglar mänskliga fördomar eller skev representation – "bias in, bias out".</div>
-      <div class="g-def" id="gSkydd"><strong>Skyddad egenskap</strong> – Egenskaper som enligt diskrimineringslagen inte får ligga till grund för beslut, t.ex. kön, etnicitet, ålder, religion och funktionsnedsättning.</div>
-      <div class="g-def" id="gProxy"><strong>Proxyvariabel</strong> – En variabel som inte <em>är</em> en skyddad egenskap men som är starkt korrelerad med en. Modellen kan använda proxyn som en "bakväg" – t.ex. CV-uppehåll som proxy för kön, eller postnummer som proxy för etnicitet.</div>
-      <div class="g-def" id="gDirekt"><strong>Direkt diskriminering</strong> – Beslutet ändras när bara den skyddade egenskapen ändras. Tvillingtestet avslöjar detta: samma meriter, olika svar.</div>
-      <div class="g-def" id="gIndirekt"><strong>Indirekt diskriminering</strong> – Ett till synes neutralt kriterium (t.ex. "inga uppehåll i CV:t") som i praktiken missgynnar en grupp mycket mer än en annan.</div>
-      <div class="g-def" id="gGap"><strong>Rättvisemått</strong> – Sätt att mäta rättvisa. Här används <em>demografisk paritet</em>: andelen som rekommenderas ska vara ungefär lika mellan grupperna när meriterna är lika. Gapet mäts i procentenheter.</div>
-    </div>
   </div>
 </div>
 
@@ -360,11 +370,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
     <h2><span>Bias</span>-labbet</h2>
-    <p class="sub">Företaget Teknova AB vill låta en AI sköta första gallringen av jobbansökningar. Modellen tränas på företagets historiska anställningsbeslut. Men historiken bär på ett problem…</p>
+    <p class="sub">Företaget Teknova AB vill låta en AI sköta första gallringen av jobbansökningar. Labbet guidar dig i fem steg – ett i taget – genom vad som händer när modellen tränas på företagets historik. För historiken bär på ett problem…</p>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div><strong>Utforska datan</strong> – Kvinnor och män i datasetet har samma utbildning och erfarenhet i snitt. Men anställdes de lika ofta?</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Träna och granska</strong> – Modellen lär sig av historiken. Vikterna avslöjar exakt vad den tittar på, och rättvisetestet visar hur den behandlar nya sökande.</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Åtgärda</strong> – Ta bort variabler, hitta proxyvariabeln, byt träningsdata. Räcker det att ta bort "Kön" – eller hittar modellen en bakväg?</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Träna och granska</strong> – Modellen lär sig av historiken. Du får se exakt vad den tittar på, hur den behandlar nya sökande och hur den bedömer två identiska kandidater.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Åtgärda</strong> – I sista steget låses verktygen upp: ta bort variabler, hitta proxyvariabeln, byt träningsdata. Räcker det att ta bort "Kön" – eller hittar modellen en bakväg?</div></div>
     </div>
     <p class="sub" style="margin-bottom:0;">💡 <strong style="color:var(--text)">Bygger på ett verkligt fall:</strong> Amazon skrotade 2018 en rekryterings-AI som lärt sig nedvärdera kvinnors CV:n. Läs mer i rutan <em>"📰 Verkliga fallet"</em>. All data i labbet är påhittad.</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta simuleringen →</button>
@@ -588,7 +598,7 @@ function modelChipHTML(m){
 function renderWeights(){
   const m = model;
   const maxW = Math.max(2.5, ...m.w.map(Math.abs));
-  let h = modelChipHTML(m) + '<div style="height:7px"></div>';
+  let h = '';
   for(let i = 0; i < m.feats.length; i++){
     const w = m.w[i], width = Math.min(50, Math.abs(w) / maxW * 50);
     h += `<div class="wrow">
@@ -609,8 +619,6 @@ function renderFairness(){
   else { vCls = 'ok'; vTxt = `✅ Gapet är nere på <strong>${r.gap.toFixed(1)} procentenheter</strong> – grupperna behandlas i stort sett lika.`; }
 
   document.getElementById('fairArea').innerHTML = `
-    ${modelChipHTML(model)}
-    <div style="height:9px"></div>
     <div class="sec-t" style="margin-bottom:7px;">Andel som rekommenderas för anställning</div>
     <div class="fair-big">
       <div class="fbar k"><span class="fwho">Kvinnor</span><div class="ftrack"><div class="ffill" style="width:${(r.pK * 100).toFixed(1)}%"></div></div><span class="fval" style="color:var(--kvinna)">${pct(r.pK)}</span></div>
@@ -620,12 +628,16 @@ function renderFairness(){
     <div class="verdict ${vCls}">${vTxt}</div>
     <div style="height:9px"></div>
     <div class="fstats">
-      <div class="fbox"><div class="fl">Missade talanger – kvinnor</div><div class="fv" style="color:var(--kvinna)">${r.missK} av ${r.lampK}</div></div>
-      <div class="fbox"><div class="fl">Missade talanger – män</div><div class="fv" style="color:var(--man)">${r.missM} av ${r.lampM}</div></div>
-      <div class="fbox"><div class="fl">Gap (procentenheter)</div><div class="fv" style="color:${r.gap > 15 ? 'var(--red)' : r.gap > 5 ? 'var(--gold)' : 'var(--green)'}">${r.gap.toFixed(1)}</div></div>
-      <div class="fbox"><div class="fl">Träffsäkerhet mot verklig lämplighet</div><div class="fv">${r.acc.toFixed(0)}%</div></div>
+      <div class="fbox"><div class="fl">Gap mellan grupperna</div><div class="fv" style="color:${r.gap > 15 ? 'var(--red)' : r.gap > 5 ? 'var(--gold)' : 'var(--green)'}">${r.gap.toFixed(0)} pe</div></div>
+      <div class="fbox"><div class="fl">Träffsäkerhet</div><div class="fv">${r.acc.toFixed(0)}%</div></div>
     </div>
-    <div class="hint">"Missade talanger" = verkligt lämpliga sökande som modellen ändå nekar. Skevheten är alltså inte bara orättvis – företaget går miste om kompetens.</div>`;
+    <details class="more"><summary>Visa fler detaljer</summary>
+      <div class="fstats" style="margin-top:8px;">
+        <div class="fbox"><div class="fl">Missade talanger – kvinnor</div><div class="fv" style="color:var(--kvinna)">${r.missK} av ${r.lampK}</div></div>
+        <div class="fbox"><div class="fl">Missade talanger – män</div><div class="fv" style="color:var(--man)">${r.missM} av ${r.lampM}</div></div>
+      </div>
+      <div class="hint" style="margin-top:6px;">"Missade talanger" = verkligt lämpliga sökande som modellen ändå nekar. Skevheten är inte bara orättvis – företaget går miste om kompetens.</div>
+    </details>`;
   return r;
 }
 
@@ -715,6 +727,9 @@ function logExperiment(r){
 }
 
 function renderAll(){
+  const mc = document.getElementById('modelChip');
+  mc.innerHTML = modelChipHTML(model);
+  mc.style.display = 'block';
   renderWeights();
   const r = renderFairness();
   renderTwins();
