@@ -11,7 +11,7 @@
 <style>
 :root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--subtle:#b0bedc;--accent:#4d80ff;--accent2:#6698ff;--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--kvinna:#c084fc;--man:#4d80ff;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;font-size:13px;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
 
 .back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
@@ -26,7 +26,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .cp{padding:16px 20px;display:flex;flex-direction:column;gap:18px;min-width:0;}
 .rp{padding:14px;border-left:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;gap:12px;}
 
-.sec-t{font-size:0.66em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim);margin-bottom:6px;}
+.sec-t{font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--dim);margin-bottom:6px;}
 .sec-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
 .sec-head h2{font-size:1em;font-weight:700;}
 .sec-head .sub{font-size:0.76em;color:var(--dim);}
@@ -38,7 +38,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .btn.grn:hover{background:#4ee89e;border-color:#4ee89e;}
 .btn.ghost{color:var(--dim);font-weight:600;}
 .btn.ghost:hover{color:var(--text);}
-.hint{font-size:0.72em;color:var(--dim);line-height:1.45;margin-top:5px;}
+.hint{font-size:0.78em;color:var(--dim);line-height:1.5;margin-top:5px;}
 .hint strong{color:var(--text);}
 
 /* Variabel-toggles (samma mönster som NN-labbet) */
@@ -78,6 +78,11 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .more[open] summary::before{content:'▾ ';}
 .data-lead{font-size:0.88em;line-height:1.65;color:var(--subtle);}
 .data-lead strong{color:var(--text);}
+.await-box{text-align:center;padding:30px 22px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.await-icon{font-size:2.4em;opacity:0.55;}
+.await-title{font-size:1em;font-weight:700;color:var(--text);}
+.await-text{font-size:0.84em;color:var(--dim);line-height:1.6;max-width:380px;}
+.await-text strong{color:var(--subtle);}
 .placeholder-box{border:1px dashed var(--border);border-radius:8px;padding:22px;text-align:center;color:var(--dim);font-size:0.8em;line-height:1.6;}
 .placeholder-box strong{color:var(--text);}
 
@@ -129,7 +134,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .verdict.ok{background:rgba(52,199,89,0.07);border-color:rgba(52,199,89,0.25);color:var(--green);}
 .fstats{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
 .fbox{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:9px 11px;}
-.fbox .fl{font-size:0.64em;color:var(--dim);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px;line-height:1.3;}
+.fbox .fl{font-size:0.7em;color:var(--dim);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px;line-height:1.3;}
 .fbox .fv{font-family:'JetBrains Mono',monospace;font-size:1em;font-weight:700;}
 
 /* Tvillingtestet */
@@ -160,10 +165,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 
 /* Begrepp (glossary, samma mönster som NN-labbet) */
 .glossary{display:flex;flex-wrap:wrap;gap:4px;}
-.g-tag{font-size:0.72em;font-weight:600;padding:4px 9px;border:1px solid var(--border);border-radius:4px;background:var(--surface2);color:var(--dim);cursor:pointer;transition:0.2s;}
+.g-tag{font-size:0.8em;font-weight:600;padding:5px 10px;border:1px solid var(--border);border-radius:4px;background:var(--surface2);color:var(--dim);cursor:pointer;transition:0.2s;}
 .g-tag:hover{border-color:var(--accent);color:var(--accent);}
 .g-tag.open{border-color:var(--accent);background:rgba(77,128,255,0.1);color:var(--accent);}
-.g-def{display:none;margin-top:6px;padding:9px 11px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:0.76em;line-height:1.6;color:var(--dim);}
+.g-def{display:none;margin-top:6px;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:0.86em;line-height:1.65;color:var(--subtle);}
 .g-def.show{display:block;}
 .g-def strong{color:var(--text);}
 
@@ -230,9 +235,20 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 
 <div class="app">
 
-  <!-- ─── Vänster: experimentinställningar ─── -->
+  <!-- ─── Vänster: allt om träningen (data → variabler → träningsdata → träna) ─── -->
   <div class="lp">
     <div id="modelChip" style="display:none;"></div>
+
+    <div>
+      <div class="sec-t">Datan modellen tränas på</div>
+      <div class="data-lead" id="dataLead"></div>
+      <details class="more" id="dataDetails">
+        <summary>Visa gruppernas siffror</summary>
+        <div class="gstat" id="gstat" style="margin-top:10px;"></div>
+        <button class="btn ghost" style="align-self:flex-start;margin-top:10px;" onclick="openDataModal()">📋 Visa hela datasetet (300 rader)</button>
+      </details>
+    </div>
+
     <div>
       <div class="sec-t">Indata till modellen</div>
       <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Utbildningspoäng</span><span class="vlock" title="Alltid med">🔒</span></div>
@@ -254,37 +270,36 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     <div class="stale-note" id="staleNote">⚠️ Inställningarna har ändrats – resultaten nedan gäller den <strong style="color:var(--text)">förra</strong> modellen. Träna om!</div>
   </div>
 
-  <!-- ─── Mitten: vikter → rättvisetest → tvillingar ─── -->
+  <!-- ─── Mitten: den tränade modellen ─── -->
   <div class="cp">
 
-    <!-- 1. Datan (komprimerad) -->
-    <div class="card">
-      <div class="data-lead" id="dataLead"></div>
-      <details class="more" id="dataDetails">
-        <summary>Visa gruppernas siffror</summary>
-        <div class="gstat" id="gstat" style="margin-top:10px;"></div>
-        <button class="btn ghost" style="align-self:flex-start;margin-top:10px;" onclick="openDataModal()">📋 Visa hela datasetet (300 rader)</button>
-      </details>
+    <!-- Väntemeddelande före första träningen -->
+    <div class="card" id="awaitCard">
+      <div class="await-box">
+        <div class="await-icon">🧠</div>
+        <div class="await-title">Den tränade modellen visas här</div>
+        <div class="await-text">Välj indata och träningsdata i vänsterspalten och tryck <strong>Träna modellen</strong>. Då ser du vad modellen lärt sig, hur rättvist den behandlar nya sökande och hur den bedömer två identiska kandidater.</div>
+      </div>
     </div>
 
-    <!-- 2. Rättvisetestet -->
-    <div class="card">
+    <!-- Rättvisetestet -->
+    <div class="card" id="cardFair" style="display:none;">
       <div class="sec-head"><h2>Rättvisetestet</h2><span class="sub">240 nya sökande med identiska meritfördelningar</span></div>
-      <div id="fairArea"><div class="placeholder-box">Testar modellen på <strong>nya sökande</strong> med lika meriter – får grupperna lika svar?</div></div>
+      <div id="fairArea"></div>
     </div>
 
-    <!-- 3. Tvillingtestet -->
-    <div class="card">
+    <!-- Tvillingtestet -->
+    <div class="card" id="cardTwins" style="display:none;">
       <div class="sec-head"><h2>Tvillingtestet</h2><span class="sub">två identiska kandidater – bedöms de lika?</span></div>
-      <div id="twinArea"><div class="placeholder-box">Träna modellen först.</div></div>
+      <div id="twinArea"></div>
     </div>
   </div>
 
   <!-- ─── Höger: utmaningar, begrepp, verkliga fallet ─── -->
   <div class="rp">
     <div class="coll">
-      <button class="coll-toggle" onclick="toggleColl(this,'challBody')">🧭 Så här utforskar du<span class="arr">▼</span></button>
-      <div class="coll-body" id="challBody">
+      <button class="coll-toggle open" onclick="toggleColl(this,'challBody')">🧭 Så här utforskar du<span class="arr">▼</span></button>
+      <div class="coll-body show" id="challBody">
         <p style="margin:0 0 9px;">Ett förslag på väg genom labbet. Träna om modellen efter varje ändring och se vad som händer med gapet och vikterna.</p>
         <ol>
           <li>Börja med <strong>alla variabler</strong> påslagna. Hur stort blir gapet mellan grupperna?</li>
@@ -558,9 +573,25 @@ function renderDataStats(){
   const hK = pct(avg(K, p => p.anstalld ? 1 : 0)), hM = pct(avg(M, p => p.anstalld ? 1 : 0));
   const lead = document.getElementById('dataLead');
   if(dataMode === 'hist'){
-    lead.innerHTML = `Här är <strong>Teknovas tidigare anställningsbeslut</strong> – datan modellen ska tränas på. Kvinnor och män har likvärdiga meriter, men i historiken anställdes ${hK} av kvinnorna mot ${hM} av männen. Det är den skevheten modellen kommer att lära sig.`;
+    let txt = `Här är <strong>Teknovas tidigare anställningsbeslut</strong> – datan modellen ska tränas på. Kvinnor och män har likvärdiga meriter, men i historiken anställdes ${hK} av kvinnorna mot ${hM} av männen. Det är den skevheten modellen kommer att lära sig.`;
+    if(!useKon && !useLucka){
+      txt += `<br><br>🚫 Modellen får <strong>varken se de sökandes kön eller uppehåll i CV</strong> under träningen – bara utbildning och erfarenhet.`;
+    }else if(!useKon){
+      txt += `<br><br>🚫 Du har dolt <strong>könet</strong>: modellen får inte längre se om en sökande är kvinna eller man under träningen. Räcker det för att den ska bli rättvis?`;
+    }else if(!useLucka){
+      txt += `<br><br>🚫 Du har dolt <strong>uppehållet i CV</strong>: modellen ser det inte längre under träningen.`;
+    }
+    lead.innerHTML = txt;
   }else{
-    lead.innerHTML = `<strong>⚖️ Rättvist facit valt:</strong> modellen tränas nu på vem som <strong>verkligen var lämplig</strong> utifrån meriterna, i stället för på de historiska besluten. (I verkligheten finns sällan ett sådant facit – det är hela problemet.)`;
+    let txt = `<strong>⚖️ Rättvist facit valt:</strong> modellen tränas nu på vem som <strong>verkligen var lämplig</strong> utifrån meriterna, i stället för på de historiska besluten. (I verkligheten finns sällan ett sådant facit – det är hela problemet.)`;
+    if(!useKon && !useLucka){
+      txt += `<br><br>🚫 Dessutom får modellen varken se <strong>kön eller uppehåll i CV</strong> under träningen.`;
+    }else if(!useKon){
+      txt += `<br><br>🚫 Dessutom har du dolt <strong>könet</strong> för modellen.`;
+    }else if(!useLucka){
+      txt += `<br><br>🚫 Dessutom har du dolt <strong>uppehållet i CV</strong> för modellen.`;
+    }
+    lead.innerHTML = txt;
   }
 }
 
@@ -694,6 +725,9 @@ function renderAll(){
   const mc = document.getElementById('modelChip');
   mc.innerHTML = modelChipHTML(model);
   mc.style.display = 'block';
+  document.getElementById('awaitCard').style.display = 'none';
+  document.getElementById('cardFair').style.display = '';
+  document.getElementById('cardTwins').style.display = '';
   renderFairness();
   renderTwins();
 }
@@ -704,6 +738,7 @@ function renderAll(){
 function toggleVar(key){
   if(key === 'kon'){ useKon = !useKon; document.getElementById('vtKon').classList.toggle('on', useKon); }
   if(key === 'lucka'){ useLucka = !useLucka; document.getElementById('vtLucka').classList.toggle('on', useLucka); }
+  renderDataStats();
   if(model) document.getElementById('staleNote').classList.add('show');
 }
 function onDataModeChange(v){
