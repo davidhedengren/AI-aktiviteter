@@ -78,6 +78,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .more[open] summary::before{content:'▾ ';}
 .data-lead{font-size:0.88em;line-height:1.65;color:var(--subtle);}
 .data-lead strong{color:var(--text);}
+.realcase{background:rgba(255,216,102,0.06);border:1px solid rgba(255,216,102,0.22);border-radius:8px;padding:11px 13px;font-size:0.8em;line-height:1.55;color:var(--subtle);}
+.realcase .rc-tag{display:block;font-size:0.82em;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;}
+.realcase strong{color:var(--text);}
+.realcase a{color:var(--accent2);cursor:pointer;text-decoration:underline;}
 .await-box{text-align:center;padding:30px 22px;display:flex;flex-direction:column;align-items:center;gap:10px;}
 .await-icon{font-size:2.4em;opacity:0.55;}
 .await-title{font-size:1em;font-weight:700;color:var(--text);}
@@ -239,6 +243,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
   <div class="lp">
     <div id="modelChip" style="display:none;"></div>
 
+    <div class="realcase">
+      <span class="rc-tag">📰 Verkligt fall</span>
+      Amazon tvingades 2018 skrota en AI för rekrytering som lärt sig nedvärdera kvinnors CV:n. I det här labbet bygger du en liknande modell åt företaget <strong>Teknova AB</strong> och undersöker hur det kunde hända. <a onclick="openAmazon()">Läs mer →</a>
+    </div>
+
     <div>
       <div class="sec-t">Datan modellen tränas på</div>
       <div class="data-lead" id="dataLead"></div>
@@ -263,7 +272,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
         <option value="hist" selected>📜 Historiska beslut</option>
         <option value="fair">⚖️ Rättvisa beslut</option>
       </select>
-      <div class="hint"><strong>📜 Historiska beslut</strong> är de faktiska ja/nej rekryterarna gav förr – med alla fördomar som fanns då. <strong>⚖️ Rättvisa beslut</strong> utgår i stället från vem som verkligen var lämplig för jobbet, oavsett kön.</div>
     </div>
 
     <button class="btn grn" onclick="train()">🧠 Träna modellen</button>
@@ -286,6 +294,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     <div class="card" id="cardFair" style="display:none;">
       <div class="sec-head"><h2>Rättvisetestet</h2><span class="sub">240 nya sökande med identiska meritfördelningar</span></div>
       <div id="fairArea"></div>
+    </div>
+
+    <!-- Vikterna -->
+    <div class="card" id="cardWeights" style="display:none;">
+      <div class="sec-head"><h2>Vad modellen tittar på</h2><span class="sub">variablernas vikt i beslutet</span></div>
+      <div id="weightsArea"></div>
     </div>
 
     <!-- Tvillingtestet -->
@@ -331,7 +345,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
       </div>
     </div>
 
-    <div class="coll">
+    <div class="coll" id="amazonColl">
       <button class="coll-toggle" onclick="toggleColl(this,'amazonBody')">📰 Verkliga fallet: Amazon<span class="arr">▼</span></button>
       <div class="coll-body" id="amazonBody">
         2018 avslöjades att Amazon hade skrotat ett internt AI-verktyg för rekrytering. Verktyget hade tränats på tio års historiska ansökningar – som till stor del kom från män – och lärde sig att nedvärdera CV:n som antydde att den sökande var kvinna, till exempel genom föreningsnamn.<br><br>
@@ -604,7 +618,7 @@ function modelChipHTML(m){
 function weightsHTML(){
   const m = model;
   const maxW = Math.max(2.5, ...m.w.map(Math.abs));
-  let h = '';
+  let h = `<div class="hint" style="margin:0 0 10px;">Modellen väger samman variablerna till ett beslut. Ju längre stapeln är, desto mer påverkar variabeln – <strong style="color:var(--green)">grön</strong> talar för anställning, <strong style="color:var(--red)">röd</strong> emot.</div>`;
   for(let i = 0; i < m.feats.length; i++){
     const w = m.w[i], width = Math.min(50, Math.abs(w) / maxW * 50);
     h += `<div class="wrow">
@@ -613,7 +627,6 @@ function weightsHTML(){
       <div class="wval ${w >= 0 ? 'pos' : 'neg'}">${(w >= 0 ? '+' : '') + w.toFixed(2)}</div>
     </div>`;
   }
-  h += `<div class="hint" style="margin-top:2px;">Grön vikt höjer chansen att rekommenderas, röd sänker den. Detta är vad modellen faktiskt tittar på.</div>`;
   return h;
 }
 
@@ -636,9 +649,6 @@ function renderFairness(){
     <div class="fstats" style="grid-template-columns:1fr;">
       <div class="fbox"><div class="fl">Gap mellan grupperna</div><div class="fv" style="color:${r.gap > 15 ? 'var(--red)' : r.gap > 5 ? 'var(--gold)' : 'var(--green)'}">${r.gap.toFixed(0)} procentenheter</div></div>
     </div>
-    <details class="more"><summary>🔍 Visa vikterna – vad modellen tittar på</summary>
-      <div style="margin-top:10px">${weightsHTML()}</div>
-    </details>
     <details class="more"><summary>Visa fler detaljer</summary>
       <div class="fstats" style="margin-top:8px;">
         <div class="fbox"><div class="fl">Träffsäkerhet</div><div class="fv">${r.acc.toFixed(0)}%</div></div>
@@ -727,8 +737,10 @@ function renderAll(){
   mc.style.display = 'block';
   document.getElementById('awaitCard').style.display = 'none';
   document.getElementById('cardFair').style.display = '';
+  document.getElementById('cardWeights').style.display = '';
   document.getElementById('cardTwins').style.display = '';
   renderFairness();
+  document.getElementById('weightsArea').innerHTML = weightsHTML();
   renderTwins();
 }
 
@@ -769,6 +781,12 @@ function closeDataModal(){ document.getElementById('dataModal').classList.remove
 function toggleColl(btn, id){
   btn.classList.toggle('open');
   document.getElementById(id).classList.toggle('show');
+}
+function openAmazon(){
+  const body = document.getElementById('amazonBody');
+  const btn = document.getElementById('amazonColl').querySelector('.coll-toggle');
+  if(!body.classList.contains('show')){ btn.classList.add('open'); body.classList.add('show'); }
+  body.scrollIntoView({behavior: 'smooth', block: 'center'});
 }
 function togGloss(tag, id){
   const def = document.getElementById(id);
