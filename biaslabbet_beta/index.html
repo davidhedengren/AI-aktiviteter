@@ -244,10 +244,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     <div>
       <div class="sec-t">Träningsdata (facit modellen lär sig av)</div>
       <select class="sel" id="dataSel" onchange="onDataModeChange(this.value)">
-        <option value="hist" selected>📜 Historiska beslut (som de faktiskt var)</option>
-        <option value="fair">⚖️ Rättvisa beslut (utifrån verklig lämplighet)</option>
+        <option value="hist" selected>📜 Historiska beslut</option>
+        <option value="fair">⚖️ Rättvisa beslut</option>
       </select>
-      <div class="hint"><strong>📜 Historiska beslut</strong> innehåller rekryterarnas gamla fördomar. <strong>⚖️ Rättvisa beslut</strong> utgår från verklig lämplighet.</div>
+      <div class="hint"><strong>📜 Historiska beslut</strong> är de faktiska ja/nej rekryterarna gav förr – med alla fördomar som fanns då. <strong>⚖️ Rättvisa beslut</strong> utgår i stället från vem som verkligen var lämplig för jobbet, oavsett kön.</div>
     </div>
 
     <button class="btn grn" onclick="train()">🧠 Träna modellen</button>
@@ -286,10 +286,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
       <button class="coll-toggle" onclick="toggleColl(this,'challBody')">🎯 Utmaningar<span class="arr">▼</span></button>
       <div class="coll-body" id="challBody">
         <ol>
-          <li>Träna med alla variabler. Hur stort blir gapet mellan grupperna? Titta på <span class="hl">vikten för Kön</span> – vad har modellen lärt sig?</li>
-          <li>Ta bort <span class="hl">Kön</span> och träna om. Försvinner skevheten helt? Jämför vikterna med förra experimentet – vilken variabel har "tagit över" könets roll?</li>
-          <li>Ta bort <span class="hl">CV-uppehållet</span> också. Vad händer med gapet – och med träffsäkerheten? Blev modellen sämre på sitt jobb av att bli rättvis?</li>
-          <li>Slå på alla variabler igen men byt till <span class="hl">⚖️ rättvis träningsdata</span>. Vad händer med vikten för Kön nu? Vad säger det om var problemet egentligen sitter?</li>
+          <li>Träna med alla variabler. Hur stort blir gapet mellan grupperna?</li>
+          <li>Ta bort <span class="hl">Kön</span> och träna om. Försvinner skevheten helt? Vilken variabel har "tagit över" könets roll?</li>
+          <li>Ta bort <span class="hl">CV-uppehållet</span> också. Vad händer med gapet? Försvann det helt?</li>
+          <li>Slå på alla variabler igen men byt till <span class="hl">⚖️ rättvis träningsdata</span>. Vad händer med vikten för Kön nu?</li>
           <li>I Tvillingtestet: ge Anna 1 års CV-uppehåll och Adam 0, med en modell tränad <em>utan</em> kön. Diskriminerar modellen ändå? Vad kallas den typen av diskriminering?</li>
         </ol>
       </div>
@@ -376,7 +376,7 @@ function mulberry32(seed){
 //    påverkar INTE lämpligheten → ren proxyvariabel.
 // ════════════════════════════════════════════════════════════
 const BIAS_PENALTY = 1.7;     // hur mycket hårdare kvinnor bedömdes historiskt
-const LUCKA_PENALTY = 0.6;    // hur hårt rekryterarna straffade uppehåll i CV (per år)
+const LUCKA_PENALTY = 0.3;    // hur hårt rekryterarna straffade uppehåll i CV (per år)
 const TRH = 5;                // beslutströskel på meritpoängen (0–10)
 
 function genPerson(rand, kvinna){
@@ -385,8 +385,8 @@ function genPerson(rand, kvinna){
   const merit = 0.5 * utb + 0.5 * erf;
   const lamplig = (merit + (rand() * 2 - 1) * 0.8) >= TRH;            // facit (lucka spelar ingen roll)
   const lucka = kvinna
-    ? (rand() < 0.65 ? 1 + Math.floor(rand() * 3) : 0)                 // 65% har 1–3 år
-    : (rand() < 0.12 ? 1 : 0);                                         // 12% har 1 år
+    ? (rand() < 0.50 ? 1 + Math.floor(rand() * 3) : 0)                 // 50% har 1–3 år
+    : (rand() < 0.08 ? 1 : 0);                                         // 8% har 1 år
   // Historiskt straffades både kön och uppehåll i CV (uppehållet är en proxy för kön)
   const histScore = merit + (rand() * 2 - 1) * 0.8 - (kvinna ? BIAS_PENALTY : 0) - lucka * LUCKA_PENALTY;
   const anstalld = histScore >= TRH;                                   // skevt facit
@@ -587,7 +587,7 @@ function renderFairness(){
   const r = evaluate(model);
   let vCls, vTxt;
   if(r.gap > 15){ vCls = 'bad';  vTxt = `🚨 Stor skillnad: gapet är <strong>${r.gap.toFixed(0)} procentenheter</strong> – trots att grupperna har identiska meriter rekommenderas männen mycket oftare.`; }
-  else if(r.gap > 5){ vCls = 'warn'; vTxt = `⚠️ Skillnaden har minskat men finns kvar: <strong>${r.gap.toFixed(0)} procentenheter</strong>. Var kommer den ifrån? Ledtråd: öppna vikterna nedan.`; }
+  else if(r.gap > 5){ vCls = 'warn'; vTxt = `⚠️ Skillnaden har minskat men finns kvar: <strong>${r.gap.toFixed(0)} procentenheter</strong>. Var kommer den ifrån?`; }
   else { vCls = 'ok'; vTxt = `✅ Gapet är nere på <strong>${r.gap.toFixed(1)} procentenheter</strong> – grupperna behandlas i stort sett lika.`; }
 
   document.getElementById('fairArea').innerHTML = `
