@@ -4,521 +4,206 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Naïve Bayes Lab</title>
- <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-ZDWXTZZBBR');
 </script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
 <style>
    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg:        #090b14;
-    --surface:   #0e1222;
-    --surface2:  #151a2e;
-    --border:    #1e2642;
-    --border2:   #253050;
-    --text:      #e8ecf8;
-    --muted:     #7e8aaa;
-    --subtle:    #b0bedc;
-    --spam:      #ff6a5e;
-    --ham:       #34d399;
-    --spam-bg:   rgba(255,106,94,.10);
-    --ham-bg:    rgba(52,211,153,.08);
-    --spam-glow: rgba(255,106,94,.30);
-    --ham-glow:  rgba(52,211,153,.28);
-    --accent:    #4d80ff;
-    --accent2:   #6698ff;
-    --gold:      #ffd866;
+    --bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--border2:#253050;
+    --text:#e8ecf8;--muted:#9aa6c4;--subtle:#c2cde6;
+    --spam:#ff6a5e;--ham:#34d399;--spam-bg:rgba(255,106,94,.10);--ham-bg:rgba(52,211,153,.08);
+    --spam-glow:rgba(255,106,94,.30);--ham-glow:rgba(52,211,153,.28);
+    --accent:#4d80ff;--accent2:#6698ff;--gold:#ffd866;
   }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),
-                      linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-  }
-
-  /* ── BACK LINK ── */
-  .back-link {
-    position: absolute;
-    top: 50%; left: 16px;
-    transform: translateY(-50%);
-    display: inline-flex;
-    align-items: center; gap: 6px;
-    font-size: 0.75em; font-weight: 700;
-    color: var(--muted); text-decoration: none;
-    padding: 6px 10px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: var(--surface);
-    transition: 0.2s; white-space: nowrap; z-index: 2;
-  }
-  .back-link:hover { color: var(--text); border-color: var(--muted); }
-
-  /* ── HEADER ── */
-  header {
-    background: linear-gradient(180deg,rgba(77,128,255,0.03),transparent);
-    border-bottom: 1px solid var(--border);
-    padding: 14px 28px 12px;
-    padding-left: 140px;
-    text-align: center;
-    position: relative;
-  }
-  header h1 {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1.3em;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    color: var(--text);
-  }
-  header h1 span { color: var(--accent2); }
-  header p {
-    font-size: 0.82em;
-    color: var(--muted);
-    max-width: 560px;
-    margin: 2px auto 0;
-  }
-
-  /* ── TABS ── */
-  .tabs {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    gap: 2px;
-    padding: 0 28px;
-  }
-  .tab-btn {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78em;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    color: var(--muted);
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid transparent;
-    padding: 11px 16px 9px;
-    cursor: pointer;
-    transition: color .2s, border-color .2s;
-  }
-  .tab-btn:hover { color: var(--subtle); }
-  .tab-btn.active {
-    color: var(--text);
-    border-bottom-color: var(--accent);
-  }
-
-  /* ── LAYOUT ── */
-  .tab-panel { display: none; padding: 20px 28px; }
-  .tab-panel.active { display: block; }
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-  /* ── CARDS ── */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 18px;
-    margin-bottom: 14px;
-    box-shadow: 0 2px 12px rgba(0,0,0,.3);
-  }
-  .card:last-child { margin-bottom: 0; }
-  .card-label {
-    font-size: 0.64em;
-    font-weight: 600;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 12px;
-    display: block;
-  }
-
-  /* ── FORM ELEMENTS ── */
-  input[type="text"], textarea {
-    width: 100%;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    padding: 9px 12px;
-    outline: none;
-    transition: border-color .2s, box-shadow .2s;
-    resize: vertical;
-  }
-  input[type="text"]:focus, textarea:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(77,128,255,.15);
-  }
-  textarea { height: 76px; margin-bottom: 12px; }
-  .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-
-  /* ── CHIPS ── */
-  .chip {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78em;
-    font-weight: 600;
-    letter-spacing: .04em;
-    border-radius: 5px;
-    padding: 5px 14px;
-    cursor: pointer;
-    border: 1px solid;
-    transition: all .18s;
-  }
-  .chip-spam  { border-color: rgba(255,106,94,.5); color: var(--spam); background: var(--spam-bg); }
-  .chip-ham   { border-color: rgba(52,211,153,.4); color: var(--ham); background: var(--ham-bg); }
-  .chip-spam.sel {
-    background: var(--spam); border-color: var(--spam);
-    color: #fff; box-shadow: 0 0 14px var(--spam-glow);
-  }
-  .chip-ham.sel {
-    background: var(--ham); border-color: var(--ham);
-    color: #041a0e; box-shadow: 0 0 14px var(--ham-glow);
-  }
-
-  /* ── BUTTONS ── */
-  .btn {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82em; font-weight: 600;
-    background: var(--accent); color: #fff;
-    border: none; border-radius: 6px;
-    padding: 9px 18px; cursor: pointer;
-    transition: background .2s, box-shadow .2s;
-    white-space: nowrap;
-  }
-  .btn:hover { background: #3d6de6; box-shadow: 0 0 14px rgba(77,128,255,.3); }
-  .btn-full { width: 100%; margin-top: 10px; }
-  .btn-danger { background: #c0392b; }
-  .btn-danger:hover { background: #e74c3c; box-shadow: 0 0 14px rgba(231,76,60,.35); }
-  .btn-ghost {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82em; font-weight: 600;
-    background: transparent; color: var(--subtle);
-    border: 1px solid var(--border); border-radius: 6px;
-    padding: 9px 18px; cursor: pointer;
-    transition: all .2s; white-space: nowrap;
-  }
-  .btn-ghost:hover { border-color: var(--subtle); color: var(--text); }
-  .btn-generate { background: #0d6e3e; }
-  .btn-generate:hover { background: #0f8a4d; box-shadow: 0 0 14px rgba(52,211,153,.25); }
-  .btn-generate:disabled { background: #0a3d25; color: #2a7a50; cursor: not-allowed; }
-
-  /* ── FILE DROP ── */
-  .file-drop {
-    border: 1px dashed var(--border);
-    border-radius: 8px; padding: 16px;
-    text-align: center; cursor: pointer;
-    transition: border-color .2s, background .2s;
-    margin-bottom: 10px; position: relative;
-  }
-  .file-drop:hover { border-color: var(--accent); background: rgba(77,128,255,.05); }
+  body { background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;min-height:100vh; }
+  body::before { content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none; }
+  .back-link { position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--muted);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2; }
+  .back-link:hover { color:var(--text);border-color:var(--muted); }
+  header { background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);border-bottom:1px solid var(--border);padding:14px 28px 12px;padding-left:140px;text-align:center;position:relative; }
+  header h1 { font-family:'DM Sans',sans-serif;font-size:1.3em;font-weight:700;letter-spacing:-0.01em;color:var(--text); }
+  header h1 span { color:var(--accent2); }
+  header p { font-size:0.82em;color:var(--muted);max-width:560px;margin:2px auto 0; }
+  .tabs { background:var(--surface);border-bottom:1px solid var(--border);display:flex;gap:2px;padding:0 28px; }
+  .tab-btn { font-family:'DM Sans',sans-serif;font-size:0.78em;font-weight:600;letter-spacing:0.04em;color:var(--muted);background:transparent;border:none;border-bottom:2px solid transparent;padding:11px 16px 9px;cursor:pointer;transition:color .2s,border-color .2s; }
+  .tab-btn:hover { color:var(--subtle); }
+  .tab-btn.active { color:var(--text);border-bottom-color:var(--accent); }
+  .tab-panel { display:none;padding:20px 28px; }
+  .tab-panel.active { display:block; }
+  .two-col { display:grid;grid-template-columns:1fr 1fr;gap:20px; }
+  .card { background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:14px;box-shadow:0 2px 12px rgba(0,0,0,.3); }
+  .card:last-child { margin-bottom:0; }
+  .card-label { font-size:0.78em;font-weight:700;letter-spacing:.01em;color:var(--subtle);margin-bottom:12px;display:block; }
+  input[type="text"], textarea { width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:9px 12px;outline:none;transition:border-color .2s,box-shadow .2s;resize:vertical; }
+  input[type="text"]:focus, textarea:focus { border-color:var(--accent);box-shadow:0 0 0 3px rgba(77,128,255,.15); }
+  textarea { height:76px;margin-bottom:12px; }
+  .row { display:flex;gap:10px;align-items:center;flex-wrap:wrap; }
+  .chip { font-family:'DM Sans',sans-serif;font-size:0.82em;font-weight:600;letter-spacing:.02em;border-radius:5px;padding:5px 14px;cursor:pointer;border:1px solid;transition:all .18s; }
+  .chip-spam { border-color:rgba(255,106,94,.5);color:var(--spam);background:var(--spam-bg); }
+  .chip-ham { border-color:rgba(52,211,153,.4);color:var(--ham);background:var(--ham-bg); }
+  .chip-spam.sel { background:var(--spam);border-color:var(--spam);color:#fff;box-shadow:0 0 14px var(--spam-glow); }
+  .chip-ham.sel { background:var(--ham);border-color:var(--ham);color:#041a0e;box-shadow:0 0 14px var(--ham-glow); }
+  .btn { font-family:'DM Sans',sans-serif;font-size:0.85em;font-weight:600;background:var(--accent);color:#fff;border:none;border-radius:6px;padding:9px 18px;cursor:pointer;transition:background .2s,box-shadow .2s;white-space:nowrap; }
+  .btn:hover { background:#3d6de6;box-shadow:0 0 14px rgba(77,128,255,.3); }
+  .btn-full { width:100%;margin-top:10px; }
+  .btn-danger { background:#c0392b; }
+  .btn-danger:hover { background:#e74c3c;box-shadow:0 0 14px rgba(231,76,60,.35); }
+  .btn-ghost { font-family:'DM Sans',sans-serif;font-size:0.85em;font-weight:600;background:transparent;color:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:9px 18px;cursor:pointer;transition:all .2s;white-space:nowrap; }
+  .btn-ghost:hover { border-color:var(--subtle);color:var(--text); }
+  .btn-generate { background:#0d6e3e; }
+  .btn-generate:hover { background:#0f8a4d;box-shadow:0 0 14px rgba(52,211,153,.25); }
+  .btn-generate:disabled { background:#0a3d25;color:#2a7a50;cursor:not-allowed; }
+  .file-drop { border:1px dashed var(--border);border-radius:8px;padding:16px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:10px;position:relative; }
+  .file-drop:hover { border-color:var(--accent);background:rgba(77,128,255,.05); }
   .file-drop input[type="file"] { position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%; }
-  .file-drop .drop-icon { font-size: 20px; margin-bottom: 4px; }
-  .file-drop .drop-text { font-size: 12px; color: var(--subtle); }
-  .file-drop .drop-sub  { font-size: 10px; color: var(--muted); margin-top: 3px; }
-
-  /* ── FORMAT BOX ── */
-  .format-box {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 6px; padding: 10px 12px;
-    font-size: 11px; color: var(--subtle);
-    margin-bottom: 10px; line-height: 1.7;
-  }
-  .format-box code { display:block; color: var(--text); margin-top: 4px; letter-spacing: .03em; opacity: .75; }
-
-  /* ── GENERATE CONTROLS ── */
-  .gen-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-  .gen-count {
-    width: 70px; background: var(--bg);
-    border: 1px solid var(--border); border-radius: 6px;
-    color: var(--text); font-family: 'DM Sans', sans-serif;
-    font-size: 13px; padding: 8px 10px; outline: none; text-align: center;
-    transition: border-color .2s;
-  }
-  .gen-count:focus { border-color: var(--accent); }
-
-  /* ── STATUS MESSAGES ── */
-  .status-msg {
-    font-size: 11px; padding: 8px 12px;
-    border-radius: 6px; margin-top: 10px; display: none;
-  }
-  .status-msg.info    { background: rgba(52,211,153,.08); border:1px solid rgba(52,211,153,.25); color: var(--ham); display:block; }
-  .status-msg.error   { background: rgba(255,106,94,.08);  border:1px solid rgba(255,106,94,.25);  color: #ff8060;   display:block; }
-  .status-msg.loading { background: rgba(255,255,255,.04);border:1px solid var(--border);       color: var(--subtle); display:block; }
-  .spinner {
-    display: inline-block; width: 10px; height: 10px;
-    border: 2px solid var(--border); border-top-color: var(--ham);
-    border-radius: 50%; animation: spin .7s linear infinite;
-    margin-right: 6px; vertical-align: middle;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* ── CONFIDENCE BAR ── */
-  .confidence-bar-wrap {
-    margin-top: 14px; background: rgba(0,0,0,.3);
-    border-radius: 8px; padding: 14px 16px; border: 1px solid var(--border);
-  }
-  .confidence-label { font-size: 10px; letter-spacing: .1em; color: var(--muted); margin-bottom: 8px; }
-  .confidence-track {
-    height: 12px; border-radius: 6px;
-    background: rgba(255,255,255,.06);
-    position: relative; margin-bottom: 8px; overflow: hidden;
-  }
-  .confidence-fill { height: 100%; border-radius: 6px; transition: width .5s ease; }
-  .confidence-zones {
-    display: flex; font-size: 9px; color: var(--muted);
-    letter-spacing: .05em; justify-content: space-between; margin-top: 4px;
-  }
-  .confidence-verdict { font-size: 13px; font-weight: 700; margin-top: 10px; letter-spacing: .04em; }
-
-  /* ── TOKENS ── */
-  .token-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-  .token {
-    font-size: 12px; padding: 4px 10px; border-radius: 4px;
-    font-family: 'JetBrains Mono', monospace; border: 1px solid;
-    transition: all .2s;
-  }
-  .token.kept    { background: rgba(77,128,255,.12); border-color: rgba(77,128,255,.35); color: #c0d4ff; }
-  .token.stopped { background: transparent; border-color: var(--border); color: var(--muted); text-decoration: line-through; }
-  .token.short   { background: transparent; border-color: var(--border); color: var(--muted); text-decoration: line-through; }
-  .token-legend  { display: flex; gap: 16px; font-size: 10px; color: var(--muted); margin-top: 10px; flex-wrap: wrap; }
-
-  /* ── MATH STEPS ── */
-  .math-step {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px; margin-bottom: 12px;
-    overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.25);
-  }
-  .math-step-header {
-    display: flex; align-items: center; gap: 12px;
-    padding: 11px 16px; border-bottom: 1px solid var(--border);
-    background: rgba(255,255,255,.02);
-  }
-  .math-step-num { font-size: 10px; letter-spacing: .08em; color: var(--muted); min-width: 52px; font-weight: 600; }
-  .math-step-word { font-size: 14px; font-weight: 700; color: #fff; flex: 1; }
-  .math-step-shift { font-size: 11px; padding: 3px 10px; border-radius: 4px; border: 1px solid; font-weight: 600; }
-  .math-step-body { padding: 14px 16px; }
-
-  .math-prior-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 4px; }
-  .math-prior-box {
-    background: var(--bg); border-radius: 8px;
-    padding: 12px 14px; border: 1px solid var(--border);
-  }
-  .math-prior-box .mpb-cls { font-size: 10px; letter-spacing: .1em; margin-bottom: 6px; font-weight: 700; }
-  .math-prior-box .mpb-frac { font-size: 13px; color: var(--subtle); margin-bottom: 4px; }
-  .math-prior-box .mpb-frac strong { color: #fff; }
-  .math-prior-box .mpb-bar { height: 6px; border-radius: 3px; margin-top: 6px; }
-
-  .math-word-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .math-word-box {
-    background: var(--bg); border-radius: 8px;
-    padding: 12px 14px; border: 1px solid var(--border);
-  }
-  .math-word-box .mwb-cls   { font-size: 10px; letter-spacing: .1em; margin-bottom: 8px; font-weight: 700; }
-  .math-word-box .mwb-found { font-size: 11px; color: var(--subtle); margin-bottom: 8px; line-height: 1.6; }
-  .math-word-box .mwb-found em { color: var(--text); font-style: normal; }
-  .math-word-box .mwb-formula {
-    font-size: 12px; background: var(--surface2);
-    border: 1px solid var(--border); border-radius: 5px;
-    padding: 8px 10px; line-height: 2.1; color: var(--subtle);
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .math-word-box .mwb-formula strong { color: #fff; }
-  .math-word-box .mwb-formula .eq { color: var(--muted); }
-
-  .math-posterior { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
-  .math-posterior-label { font-size: 10px; letter-spacing: .08em; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
-  .math-post-bar {
-    display: flex; height: 26px; border-radius: 5px;
-    overflow: hidden; background: var(--border); margin-bottom: 6px;
-  }
-  .math-post-bar .pb-spam { background: var(--spam); transition: width .4s ease; }
-  .math-post-bar .pb-ham  { background: var(--ham);  transition: width .4s ease; }
-  .math-post-nums { display: flex; gap: 20px; font-size: 12px; font-weight: 600; }
-  .math-post-nums .pn-spam { color: var(--spam); }
-  .math-post-nums .pn-ham  { color: var(--ham);  }
-
-  /* ── FORMULA PANEL ── */
-  .formula-toggle {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px; font-weight: 600;
-    background: transparent; border: 1px solid var(--border);
-    color: var(--subtle); border-radius: 5px;
-    padding: 6px 14px; cursor: pointer;
-    margin-top: 14px; transition: all .2s; display: inline-block;
-  }
-  .formula-toggle:hover { border-color: var(--accent); color: var(--text); }
-  .formula-panel {
-    margin-top: 14px; background: rgba(0,0,0,.3);
-    border: 1px solid var(--border); border-radius: 8px;
-    padding: 16px; display: none;
-  }
-  .formula-panel.open { display: block; }
-  .formula-panel .fp-title { font-size: 10px; letter-spacing: .12em; color: var(--muted); margin-bottom: 12px; font-weight: 600; }
-  .formula-panel .fp-abstract {
-    font-size: 12px; color: var(--subtle); margin-bottom: 14px;
-    line-height: 1.8; padding-bottom: 12px; border-bottom: 1px solid var(--border);
-  }
-  .formula-panel .fp-abstract strong { color: var(--text); }
-  .fp-class-block { margin-bottom: 14px; }
-  .fp-class-block:last-child { margin-bottom: 0; }
-  .fp-class-name { font-size: 11px; letter-spacing: .08em; margin-bottom: 8px; font-weight: 700; }
-  .fp-line {
-    font-size: 11px; color: var(--subtle); line-height: 2;
-    padding: 8px 12px; background: var(--surface2);
-    border-radius: 5px; border: 1px solid var(--border);
-    overflow-x: auto; white-space: nowrap;
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .fp-line strong { color: var(--text); }
-  .fp-line .fp-op { color: var(--muted); }
-  .fp-result {
-    font-size: 12px; margin-top: 8px; padding: 8px 12px;
-    border-radius: 5px; border: 1px solid;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-
-  /* ── EXAMPLE LIST ── */
-  .ex-list {
-    max-height: 340px; overflow-y: auto;
-    display: flex; flex-direction: column; gap: 5px; padding-right: 2px;
-  }
-  .ex-list::-webkit-scrollbar { width: 4px; }
-  .ex-list::-webkit-scrollbar-track { background: transparent; }
-  .ex-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-  .ex-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 7px 10px; border-radius: 6px;
-    border: 1px solid transparent; font-size: 12px;
-    animation: fadeIn .2s ease;
-  }
-  .ex-item.spam { background: rgba(255,106,94,.06); border-color: rgba(255,106,94,.15); }
-  .ex-item.ham  { background: rgba(52,211,153,.06); border-color: rgba(52,211,153,.15); }
-  .ex-item .label-tag { font-size: 10px; letter-spacing: .06em; min-width: 34px; font-weight: 700; }
-  .ex-item .label-tag.spam { color: var(--spam); }
-  .ex-item .label-tag.ham  { color: var(--ham);  }
-  .ex-item .ex-text { flex: 1; color: var(--subtle); }
-  .del-btn {
-    background: none; border: none; color: var(--muted);
-    cursor: pointer; font-size: 15px; padding: 0 3px;
-    line-height: 1; transition: color .2s;
-  }
-  .del-btn:hover { color: var(--spam); }
-
-  /* ── STAT GRID ── */
-  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .stat-box {
-    border-radius: 10px; padding: 16px 18px; border: 1px solid;
-    position: relative; overflow: hidden;
-  }
-  .stat-box::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    border-radius: 10px 10px 0 0;
-  }
-  .stat-box.spam {
-    background: linear-gradient(135deg, rgba(255,106,94,.10) 0%, rgba(255,106,94,.04) 100%);
-    border-color: rgba(255,106,94,.25);
-  }
-  .stat-box.spam::before { background: var(--spam); box-shadow: 0 0 12px var(--spam-glow); }
-  .stat-box.ham  {
-    background: linear-gradient(135deg, rgba(52,211,153,.08) 0%, rgba(52,211,153,.03) 100%);
-    border-color: rgba(52,211,153,.22);
-  }
-  .stat-box.ham::before  { background: var(--ham);  box-shadow: 0 0 12px var(--ham-glow);  }
-  .stat-box .cls-name { font-size: 10px; letter-spacing: .12em; margin-bottom: 4px; font-weight: 700; }
-  .stat-box.spam .cls-name { color: var(--spam); }
-  .stat-box.ham  .cls-name { color: var(--ham);  }
-  .stat-box .big-num { font-size: 32px; font-weight: 700; color: #fff; line-height: 1.1; font-family: 'JetBrains Mono', monospace; }
-  .stat-box .stat-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
-  .stat-box .prior { font-size: 12px; color: var(--subtle); margin-top: 8px; }
-  .vocab-note { font-size: 11px; color: var(--muted); margin-top: 12px; }
-
-  /* ── BAR ROWS ── */
-  .bar-row {
-    display: grid; grid-template-columns: 110px 1fr 56px 80px;
-    gap: 10px; align-items: center; margin-bottom: 7px;
-  }
-  .bar-row .word { color: var(--text); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .bar-track { background: var(--border); border-radius: 3px; height: 16px; overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 3px; transition: width .4s ease; }
-  .bar-row .count { color: var(--muted); font-size: 11px; text-align: right; font-family: 'JetBrains Mono', monospace; }
-  .bar-row .prob  { font-size: 12px; text-align: right; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
-
-  /* ── COMPARE BARS ── */
-  .compare-row {
-    display: grid; grid-template-columns: 90px 1fr;
-    gap: 10px; align-items: center; margin-bottom: 7px;
-  }
-  .compare-row .cword { color: var(--subtle); font-size: 12px; }
-  .split-bar { display: flex; height: 22px; border-radius: 4px; overflow: hidden; }
-  .split-spam { background: var(--spam); display: flex; align-items: center; justify-content: center; font-size: 10px; color: rgba(0,0,0,.7); font-weight: 700; transition: width .4s; }
-  .split-ham  { background: var(--ham);  display: flex; align-items: center; justify-content: center; font-size: 10px; color: rgba(0,0,0,.7); font-weight: 700; transition: width .4s; }
-
-  /* ── VERDICT CARD ── */
-  .verdict-card {
-    border-radius: 10px; padding: 20px 22px; margin-bottom: 16px; border: 1px solid;
-    box-shadow: 0 4px 24px rgba(0,0,0,.4);
-  }
-  .verdict-card.spam {
-    background: linear-gradient(135deg, rgba(255,106,94,.12) 0%, rgba(255,106,94,.04) 100%);
-    border-color: rgba(255,106,94,.4);
-  }
-  .verdict-card.ham  {
-    background: linear-gradient(135deg, rgba(52,211,153,.10) 0%, rgba(52,211,153,.04) 100%);
-    border-color: rgba(52,211,153,.35);
-  }
-  .verdict-label { font-size: 10px; letter-spacing: .14em; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
-  .verdict-class { font-size: 36px; font-weight: 700; letter-spacing: .06em; line-height: 1; }
-  .verdict-class.spam { color: var(--spam); text-shadow: 0 0 20px var(--spam-glow); }
-  .verdict-class.ham  { color: var(--ham);  text-shadow: 0 0 20px var(--ham-glow);  }
-  .verdict-probs { display: flex; gap: 20px; margin-top: 12px; }
-  .verdict-probs span { font-size: 13px; font-weight: 600; }
-
-  /* ── EMPTY STATE ── */
-  .empty { text-align: center; padding: 48px 20px; color: var(--muted); font-size: 13px; }
-  .empty strong { display: block; font-size: 15px; color: var(--subtle); margin-bottom: 6px; }
-
-  /* ── LEGEND ── */
-  .legend { display: flex; gap: 16px; font-size: 11px; margin-top: 12px; font-weight: 600; }
-  .legend span::before { content: '■ '; }
-  .legend .ls { color: var(--spam); }
-  .legend .lh { color: var(--ham); }
-
-  /* ── FORMULA NOTE ── */
-  .formula-note {
-    font-size: 11px; color: var(--subtle);
-    background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 6px; padding: 10px 14px; margin-bottom: 16px; line-height: 1.8;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
-  .tab-panel.active { animation: fadeIn .2s ease; }
-
-  @media (max-width: 700px) {
-    .two-col { grid-template-columns: 1fr; }
-    .bar-row { grid-template-columns: 80px 1fr 44px 68px; }
-    header { padding-left: 28px; }
-    .back-link { position: static; transform: none; margin-bottom: 6px; }
+  .file-drop .drop-icon { font-size:20px;margin-bottom:4px; }
+  .file-drop .drop-text { font-size:13px;color:var(--subtle); }
+  .file-drop .drop-sub { font-size:11px;color:var(--muted);margin-top:3px; }
+  .format-box { background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-size:12px;color:var(--subtle);margin-bottom:10px;line-height:1.7; }
+  .format-box code { display:block;color:var(--text);margin-top:4px;letter-spacing:.03em;opacity:.75; }
+  .gen-row { display:flex;gap:8px;align-items:center;flex-wrap:wrap; }
+  .gen-count { width:70px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:8px 10px;outline:none;text-align:center;transition:border-color .2s; }
+  .gen-count:focus { border-color:var(--accent); }
+  .status-msg { font-size:12px;padding:8px 12px;border-radius:6px;margin-top:10px;display:none; }
+  .status-msg.info { background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.25);color:var(--ham);display:block; }
+  .status-msg.error { background:rgba(255,106,94,.08);border:1px solid rgba(255,106,94,.25);color:#ff8060;display:block; }
+  .status-msg.loading { background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--subtle);display:block; }
+  .spinner { display:inline-block;width:10px;height:10px;border:2px solid var(--border);border-top-color:var(--ham);border-radius:50%;animation:spin .7s linear infinite;margin-right:6px;vertical-align:middle; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .confidence-bar-wrap { margin-top:14px;background:rgba(0,0,0,.3);border-radius:8px;padding:14px 16px;border:1px solid var(--border); }
+  .confidence-label { font-size:11px;letter-spacing:.05em;color:var(--muted);margin-bottom:8px; }
+  .confidence-track { height:12px;border-radius:6px;background:rgba(255,255,255,.06);position:relative;margin-bottom:8px;overflow:hidden; }
+  .confidence-fill { height:100%;border-radius:6px;transition:width .5s ease; }
+  .confidence-zones { display:flex;font-size:10px;color:var(--muted);letter-spacing:.02em;justify-content:space-between;margin-top:4px; }
+  .confidence-verdict { font-size:13px;font-weight:700;margin-top:10px;letter-spacing:.02em; }
+  .token-wrap { display:flex;flex-wrap:wrap;gap:6px;margin-top:10px; }
+  .token { font-size:13px;padding:4px 10px;border-radius:4px;font-family:'JetBrains Mono',monospace;border:1px solid;transition:all .2s; }
+  .token.kept { background:rgba(77,128,255,.12);border-color:rgba(77,128,255,.35);color:#c0d4ff; }
+  .token.stopped { background:transparent;border-color:var(--border);color:var(--muted);text-decoration:line-through; }
+  .token.short { background:transparent;border-color:var(--border);color:var(--muted);text-decoration:line-through; }
+  .token-legend { display:flex;gap:16px;font-size:11px;color:var(--muted);margin-top:10px;flex-wrap:wrap; }
+  .math-step { background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.25); }
+  .math-step-header { display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.02); }
+  .math-step-num { font-size:11px;letter-spacing:.04em;color:var(--muted);min-width:52px;font-weight:600; }
+  .math-step-word { font-size:14px;font-weight:700;color:#fff;flex:1; }
+  .math-step-shift { font-size:11px;padding:3px 10px;border-radius:4px;border:1px solid;font-weight:600; }
+  .math-step-body { padding:14px 16px; }
+  .math-prior-grid { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px; }
+  .math-prior-box { background:var(--bg);border-radius:8px;padding:12px 14px;border:1px solid var(--border); }
+  .math-prior-box .mpb-cls { font-size:11px;letter-spacing:.04em;margin-bottom:6px;font-weight:700; }
+  .math-prior-box .mpb-frac { font-size:13px;color:var(--subtle);margin-bottom:4px; }
+  .math-prior-box .mpb-frac strong { color:#fff; }
+  .math-prior-box .mpb-bar { height:6px;border-radius:3px;margin-top:6px; }
+  .math-word-grid { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
+  .math-word-box { background:var(--bg);border-radius:8px;padding:12px 14px;border:1px solid var(--border); }
+  .math-word-box .mwb-cls { font-size:11px;letter-spacing:.04em;margin-bottom:8px;font-weight:700; }
+  .math-word-box .mwb-found { font-size:12px;color:var(--subtle);margin-bottom:8px;line-height:1.6; }
+  .math-word-box .mwb-found em { color:var(--text);font-style:normal; }
+  .math-word-box .mwb-formula { font-size:12px;background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:8px 10px;line-height:2.1;color:var(--subtle);font-family:'JetBrains Mono',monospace; }
+  .math-word-box .mwb-formula strong { color:#fff; }
+  .math-word-box .mwb-formula .eq { color:var(--muted); }
+  .math-posterior { margin-top:12px;padding-top:12px;border-top:1px solid var(--border); }
+  .math-posterior-label { font-size:11px;letter-spacing:.04em;color:var(--muted);margin-bottom:8px;font-weight:600; }
+  .math-post-bar { display:flex;height:26px;border-radius:5px;overflow:hidden;background:var(--border);margin-bottom:6px; }
+  .math-post-bar .pb-spam { background:var(--spam);transition:width .4s ease; }
+  .math-post-bar .pb-ham { background:var(--ham);transition:width .4s ease; }
+  .math-post-nums { display:flex;gap:20px;font-size:12px;font-weight:600; }
+  .math-post-nums .pn-spam { color:var(--spam); }
+  .math-post-nums .pn-ham { color:var(--ham); }
+  .formula-toggle { font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;background:transparent;border:1px solid var(--border);color:var(--subtle);border-radius:5px;padding:6px 14px;cursor:pointer;margin-top:14px;transition:all .2s;display:inline-block; }
+  .formula-toggle:hover { border-color:var(--accent);color:var(--text); }
+  .formula-panel { margin-top:14px;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:8px;padding:16px;display:none; }
+  .formula-panel.open { display:block; }
+  .formula-panel .fp-title { font-size:11px;letter-spacing:.06em;color:var(--muted);margin-bottom:12px;font-weight:600; }
+  .formula-panel .fp-abstract { font-size:12px;color:var(--subtle);margin-bottom:14px;line-height:1.8;padding-bottom:12px;border-bottom:1px solid var(--border); }
+  .formula-panel .fp-abstract strong { color:var(--text); }
+  .fp-class-block { margin-bottom:14px; }
+  .fp-class-block:last-child { margin-bottom:0; }
+  .fp-class-name { font-size:12px;letter-spacing:.04em;margin-bottom:8px;font-weight:700; }
+  .fp-line { font-size:11px;color:var(--subtle);line-height:2;padding:8px 12px;background:var(--surface2);border-radius:5px;border:1px solid var(--border);overflow-x:auto;white-space:nowrap;font-family:'JetBrains Mono',monospace; }
+  .fp-line strong { color:var(--text); }
+  .fp-line .fp-op { color:var(--muted); }
+  .fp-result { font-size:12px;margin-top:8px;padding:8px 12px;border-radius:5px;border:1px solid;display:flex;justify-content:space-between;align-items:center; }
+  .ex-list { max-height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:5px;padding-right:2px; }
+  .ex-list::-webkit-scrollbar { width:4px; }
+  .ex-list::-webkit-scrollbar-track { background:transparent; }
+  .ex-list::-webkit-scrollbar-thumb { background:var(--border);border-radius:2px; }
+  .ex-item { display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:6px;border:1px solid transparent;font-size:12px;animation:fadeIn .2s ease; }
+  .ex-item.spam { background:rgba(255,106,94,.06);border-color:rgba(255,106,94,.15); }
+  .ex-item.ham { background:rgba(52,211,153,.06);border-color:rgba(52,211,153,.15); }
+  .ex-item .label-tag { font-size:11px;letter-spacing:.02em;min-width:34px;font-weight:700; }
+  .ex-item .label-tag.spam { color:var(--spam); }
+  .ex-item .label-tag.ham { color:var(--ham); }
+  .ex-item .ex-text { flex:1;color:var(--subtle); }
+  .del-btn { background:none;border:none;color:var(--muted);cursor:pointer;font-size:15px;padding:0 3px;line-height:1;transition:color .2s; }
+  .del-btn:hover { color:var(--spam); }
+  .stat-grid { display:grid;grid-template-columns:1fr 1fr;gap:12px; }
+  .stat-box { border-radius:10px;padding:16px 18px;border:1px solid;position:relative;overflow:hidden; }
+  .stat-box::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:10px 10px 0 0; }
+  .stat-box.spam { background:linear-gradient(135deg,rgba(255,106,94,.10) 0%,rgba(255,106,94,.04) 100%);border-color:rgba(255,106,94,.25); }
+  .stat-box.spam::before { background:var(--spam);box-shadow:0 0 12px var(--spam-glow); }
+  .stat-box.ham { background:linear-gradient(135deg,rgba(52,211,153,.08) 0%,rgba(52,211,153,.03) 100%);border-color:rgba(52,211,153,.22); }
+  .stat-box.ham::before { background:var(--ham);box-shadow:0 0 12px var(--ham-glow); }
+  .stat-box .cls-name { font-size:11px;letter-spacing:.04em;margin-bottom:4px;font-weight:700; }
+  .stat-box.spam .cls-name { color:var(--spam); }
+  .stat-box.ham .cls-name { color:var(--ham); }
+  .stat-box .big-num { font-size:32px;font-weight:700;color:#fff;line-height:1.1;font-family:'JetBrains Mono',monospace; }
+  .stat-box .stat-sub { font-size:12px;color:var(--muted);margin-top:2px; }
+  .stat-box .prior { font-size:12px;color:var(--subtle);margin-top:8px; }
+  .vocab-note { font-size:12px;color:var(--muted);margin-top:12px; }
+  .bar-row { display:grid;grid-template-columns:110px 1fr 56px 80px;gap:10px;align-items:center;margin-bottom:7px; }
+  .bar-row .word { color:var(--text);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+  .bar-track { background:var(--border);border-radius:3px;height:16px;overflow:hidden; }
+  .bar-fill { height:100%;border-radius:3px;transition:width .4s ease; }
+  .bar-row .count { color:var(--muted);font-size:11px;text-align:right;font-family:'JetBrains Mono',monospace; }
+  .bar-row .prob { font-size:12px;text-align:right;font-weight:600;font-family:'JetBrains Mono',monospace; }
+  .compare-row { display:grid;grid-template-columns:90px 1fr;gap:10px;align-items:center;margin-bottom:7px; }
+  .compare-row .cword { color:var(--subtle);font-size:12px; }
+  .split-bar { display:flex;height:22px;border-radius:4px;overflow:hidden; }
+  .split-spam { background:var(--spam);display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(0,0,0,.7);font-weight:700;transition:width .4s; }
+  .split-ham { background:var(--ham);display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(0,0,0,.7);font-weight:700;transition:width .4s; }
+  .verdict-card { border-radius:10px;padding:20px 22px;margin-bottom:16px;border:1px solid;box-shadow:0 4px 24px rgba(0,0,0,.4); }
+  .verdict-card.spam { background:linear-gradient(135deg,rgba(255,106,94,.12) 0%,rgba(255,106,94,.04) 100%);border-color:rgba(255,106,94,.4); }
+  .verdict-card.ham { background:linear-gradient(135deg,rgba(52,211,153,.10) 0%,rgba(52,211,153,.04) 100%);border-color:rgba(52,211,153,.35); }
+  .verdict-label { font-size:11px;letter-spacing:.06em;color:var(--muted);margin-bottom:6px;font-weight:600; }
+  .verdict-class { font-size:36px;font-weight:700;letter-spacing:.04em;line-height:1; }
+  .verdict-class.spam { color:var(--spam);text-shadow:0 0 20px var(--spam-glow); }
+  .verdict-class.ham { color:var(--ham);text-shadow:0 0 20px var(--ham-glow); }
+  .verdict-probs { display:flex;gap:20px;margin-top:12px; }
+  .verdict-probs span { font-size:13px;font-weight:600; }
+  .empty { text-align:center;padding:48px 20px;color:var(--muted);font-size:14px; }
+  .empty strong { display:block;font-size:15px;color:var(--subtle);margin-bottom:6px; }
+  .legend { display:flex;gap:16px;font-size:11px;margin-top:12px;font-weight:600; }
+  .legend span::before { content:'■ '; }
+  .legend .ls { color:var(--spam); }
+  .legend .lh { color:var(--ham); }
+  .formula-note { font-size:12px;color:var(--subtle);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:16px;line-height:1.8; }
+  .laplace-details { background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.3);overflow:hidden; }
+  .laplace-details summary { padding:14px 18px;cursor:pointer;font-size:0.9em;font-weight:600;color:var(--subtle);list-style:none;display:flex;align-items:center;gap:8px;transition:color .2s; }
+  .laplace-details summary::-webkit-details-marker { display:none; }
+  .laplace-details summary::before { content:'▸';color:var(--muted);transition:transform .2s;display:inline-block; }
+  .laplace-details[open] summary::before { transform:rotate(90deg); }
+  .laplace-details summary:hover { color:var(--text); }
+  .laplace-details .laplace-body { padding:0 18px 16px; }
+  /* Hopfällbar sektion för egna exempel */
+  .collapse-toggle { width:100%;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 16px;color:var(--subtle);font-family:'DM Sans',sans-serif;font-size:0.9em;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all .2s; }
+  .collapse-toggle:hover { border-color:var(--accent2);color:var(--text); }
+  .collapse-toggle .arr { transition:transform .2s;color:var(--muted); }
+  .collapse-toggle.open .arr { transform:rotate(180deg); }
+  .collapse-body { display:none;margin-top:14px; }
+  .collapse-body.open { display:block; }
+  @keyframes fadeIn { from { opacity:0;transform:translateY(-4px); } to { opacity:1;transform:none; } }
+  .tab-panel.active { animation:fadeIn .2s ease; }
+  @media (max-width:700px) {
+    .two-col { grid-template-columns:1fr; }
+    .bar-row { grid-template-columns:80px 1fr 44px 68px; }
+    header { padding-left:28px; }
+    .back-link { position:static;transform:none;margin-bottom:6px; }
   }
 </style>
 </head>
@@ -531,10 +216,10 @@
 </header>
 
 <nav class="tabs">
-  <button class="tab-btn active" data-tab="intro">★ INSTRUKTION</button>
-  <button class="tab-btn"        data-tab="train">① TRÄNA</button>
-  <button class="tab-btn"        data-tab="model">② MODELL</button>
-  <button class="tab-btn"        data-tab="classify">③ KLASSIFICERA</button>
+  <button class="tab-btn active" data-tab="intro">★ Instruktion</button>
+  <button class="tab-btn"        data-tab="train">① Träna</button>
+  <button class="tab-btn"        data-tab="model">② Modell</button>
+  <button class="tab-btn"        data-tab="classify">③ Klassificera</button>
 </nav>
 
 <section id="tab-intro" class="tab-panel active">
@@ -544,37 +229,36 @@
       Du bestämmer vad modellen lär sig, och kan sedan se hur matematiken bakom algoritmen fungerar när den klassificerar nya mejl.
     </p>
     <div style="border-left:2px solid var(--border);padding-left:20px;margin-bottom:28px">
-      <p style="font-size:12px;color:var(--subtle);line-height:1.8;font-style:italic">
+      <p style="font-size:13px;color:var(--subtle);line-height:1.8;font-style:italic">
         Algoritmen kallas <em>naïve</em> (naiv) för att den antar att varje ord i ett mejl är oberoende av alla andra ord.
         I verkligheten stämmer det sällan, men förenklingen gör matematiken hanterbar och modellen förvånansvärt träffsäker.
       </p>
     </div>
     <div style="display:flex;flex-direction:column;gap:22px;margin-bottom:32px">
       <div>
-        <div style="font-size:12px;font-weight:700;color:var(--text);letter-spacing:.06em;margin-bottom:6px">① TRÄNA</div>
-        <p style="font-size:12px;color:var(--muted);line-height:1.8">
-          Börja med att klicka på <strong style="color:var(--text)">⚡ GENERERA</strong> — då fylls modellen med exempelmail automatiskt.
-          Du kan styra hur många och hur fördelningen mellan skräppost och vanliga mejl ser ut med reglaget.
-          Det går också att skriva egna meningar eller ladda upp en textfil med träningsdata.
+        <div style="font-size:13px;font-weight:700;color:var(--text);letter-spacing:.02em;margin-bottom:6px">① Träna</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.8">
+          Klicka på <strong style="color:var(--text)">⚡ Generera</strong> så fylls modellen med exempelmejl automatiskt.
+          Du kan styra hur många och hur fördelningen mellan skräppost och vanliga mejl ser ut.
         </p>
       </div>
       <div>
-        <div style="font-size:12px;font-weight:700;color:var(--text);letter-spacing:.06em;margin-bottom:6px">② MODELL</div>
-        <p style="font-size:12px;color:var(--muted);line-height:1.8">
+        <div style="font-size:13px;font-weight:700;color:var(--text);letter-spacing:.02em;margin-bottom:6px">② Modell</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.8">
           Här ser du vad modellen lärt sig — vilka ord som är mest typiska för varje klass och deras sannolikheter.
           Jämförelsevisningen visar samma ord för båda klasser sida vid sida, så du ser vilka ord som verkligen skiljer dem åt.
         </p>
       </div>
       <div>
-        <div style="font-size:12px;font-weight:700;color:var(--text);letter-spacing:.06em;margin-bottom:6px">③ KLASSIFICERA</div>
-        <p style="font-size:12px;color:var(--muted);line-height:1.8">
+        <div style="font-size:13px;font-weight:700;color:var(--text);letter-spacing:.02em;margin-bottom:6px">③ Klassificera</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.8">
           Skriv in ett mejl och tryck Enter. Modellen visar hur texten tokeniseras, hur sannolikheten förskjuts ord för ord,
           och hur säker den är på sin klassificering. Klicka på <strong style="color:var(--text)">Visa hela beräkningen</strong>
           för att se Bayes formel med dina egna siffror.
         </p>
       </div>
     </div>
-    <button class="btn" style="padding:11px 28px;font-size:13px" onclick="goToTrain()">
+    <button class="btn" style="padding:11px 28px;font-size:14px" onclick="goToTrain()">
       Kom igång →
     </button>
   </div>
@@ -584,26 +268,46 @@
   <div class="two-col">
     <div>
       <div class="card">
-        <span class="card-label">LÄGG TILL TRÄNINGSEXEMPEL</span>
-        <textarea id="new-text" placeholder="Skriv en mening att träna modellen på…"></textarea>
-        <div class="row">
-          <span style="font-size:11px;color:var(--muted);letter-spacing:.08em">KLASS:</span>
-          <button class="chip chip-spam sel" id="chip-spam" onclick="selectLabel('SPAM')">Skräppost</button>
-          <button class="chip chip-ham"      id="chip-ham"  onclick="selectLabel('HAM')">Ej skräppost</button>
-          <button class="btn" style="margin-left:auto" onclick="addExample()">＋ LÄGG TILL</button>
+        <span class="card-label">Skapa träningsdata</span>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.7">
+          Genererar exempelmejl ur en inbyggd bank. Variera fördelningen för att se hur ojämn träningsdata påverkar modellen.
+        </p>
+        <div class="gen-row" style="margin-bottom:12px">
+          <span style="font-size:12px;color:var(--muted)">Antal:</span>
+          <input type="number" class="gen-count" id="gen-count" value="50" min="4" max="500" step="2">
+          <button class="btn btn-generate" id="gen-btn" onclick="generateData()">⚡ Generera</button>
+          <button class="btn-ghost" onclick="generateData(true)">+ Lägg till</button>
         </div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px 14px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span style="font-size:11px;color:var(--muted)">Fördelning skräppost / ej skräppost</span>
+            <span style="font-size:12px;color:var(--subtle)" id="ratio-label">50% / 50%</span>
+          </div>
+          <input type="range" id="spam-ratio" min="10" max="90" value="50" step="10"
+            style="width:100%;accent-color:var(--spam);cursor:pointer"
+            oninput="updateRatioLabel()">
+          <div style="display:flex;height:10px;border-radius:4px;overflow:hidden;margin-top:8px">
+            <div id="ratio-bar-spam" style="width:50%;background:var(--spam);transition:width .2s"></div>
+            <div id="ratio-bar-ham"  style="width:50%;background:var(--ham); transition:width .2s"></div>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.6" id="ratio-note">
+            Jämn fördelning — priorsannolikheten P(klass) påverkar inte klassificeringen nämnvärt.
+          </div>
+        </div>
+        <div class="status-msg" id="gen-status"></div>
       </div>
+
       <div class="card">
-        <span class="card-label">STATISTIK</span>
+        <span class="card-label">Statistik</span>
         <div class="stat-grid" id="stat-grid">
           <div class="stat-box spam">
-            <div class="cls-name">SKRÄPPOST</div>
+            <div class="cls-name">Skräppost</div>
             <div class="big-num" id="stat-spam-n">0</div>
             <div class="stat-sub">exempel</div>
             <div class="prior" id="stat-spam-p">P(Skräppost) = —</div>
           </div>
           <div class="stat-box ham">
-            <div class="cls-name">EJ SKRÄPPOST</div>
+            <div class="cls-name">Ej skräppost</div>
             <div class="big-num" id="stat-ham-n">0</div>
             <div class="stat-sub">exempel</div>
             <div class="prior" id="stat-ham-p">P(Ej skräppost) = —</div>
@@ -612,9 +316,10 @@
         <div class="vocab-note" id="vocab-note">Ordförråd: — ord</div>
       </div>
     </div>
+
     <div class="card" style="margin-bottom:0">
       <span class="card-label">
-        TRÄNINGSDATA
+        Träningsdata
         <span class="chip chip-spam sel" style="margin-left:8px;padding:2px 8px;font-size:10px" id="badge-spam">0</span>
         <span class="chip chip-ham sel"  style="margin-left:4px;padding:2px 8px;font-size:10px" id="badge-ham">0</span>
         <button class="btn btn-danger" style="margin-left:auto;padding:4px 12px;font-size:11px;float:right" onclick="clearData()">✕ Rensa allt</button>
@@ -623,52 +328,40 @@
     </div>
   </div>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px">
-    <div class="card" style="margin-bottom:0">
-      <span class="card-label">IMPORTERA TRÄNINGSDATA VIA FIL</span>
-      <div class="format-box">
-        Filen ska vara en <strong style="color:var(--text)">.csv</strong> eller <strong style="color:var(--text)">.txt</strong> — en rad per exempel, format:
-        <code>SPAM,Din text här</code>
-        <code>HAM,Din text här</code>
-        Etiketten måste vara <code style="display:inline">SPAM</code> eller <code style="display:inline">HAM</code> (versaler).
-      </div>
-      <div class="file-drop" id="file-drop">
-        <input type="file" accept=".csv,.txt" onchange="importFile(event)">
-        <div class="drop-icon">📂</div>
-        <div class="drop-text">Klicka för att välja fil</div>
-        <div class="drop-sub">.csv eller .txt · en rad per exempel</div>
-      </div>
-      <div class="status-msg" id="import-status"></div>
-    </div>
-    <div class="card" style="margin-bottom:0">
-      <span class="card-label">GENERERA TRÄNINGSDATA AUTOMATISKT</span>
-      <p style="font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.7">
-        Genererar exempelmail ur den inbyggda exempelbanken.
-        Variera fördelningen för att se hur ojämn träningsdata påverkar modellens beteende.
-      </p>
-      <div class="gen-row" style="margin-bottom:12px">
-        <span style="font-size:11px;color:var(--muted)">ANTAL:</span>
-        <input type="number" class="gen-count" id="gen-count" value="20" min="4" max="500" step="2">
-        <button class="btn btn-generate" id="gen-btn" onclick="generateData()">⚡ GENERERA</button>
-        <button class="btn-ghost" onclick="generateData(true)">+ Lägg till utan att rensa</button>
-      </div>
-      <div style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px 14px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-          <span style="font-size:10px;letter-spacing:.1em;color:var(--muted)">FÖRDELNING SKRÄPPOST / EJ SKRÄPPOST</span>
-          <span style="font-size:11px;color:var(--subtle)" id="ratio-label">50% / 50%</span>
+  <div style="margin-top:20px">
+    <button class="collapse-toggle" id="own-toggle" onclick="toggleOwn()">
+      <span>✎ Lägg till egna exempel eller importera fil <span style="color:var(--muted);font-weight:400">— frivilligt</span></span>
+      <span class="arr">▼</span>
+    </button>
+    <div class="collapse-body" id="own-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:14px">
+        <div class="card" style="margin-bottom:0">
+          <span class="card-label">Skriv ett eget exempel</span>
+          <textarea id="new-text" placeholder="Skriv en mening att träna modellen på…"></textarea>
+          <div class="row">
+            <span style="font-size:12px;color:var(--muted)">Klass:</span>
+            <button class="chip chip-spam sel" id="chip-spam" onclick="selectLabel('SPAM')">Skräppost</button>
+            <button class="chip chip-ham"      id="chip-ham"  onclick="selectLabel('HAM')">Ej skräppost</button>
+            <button class="btn" style="margin-left:auto" onclick="addExample()">＋ Lägg till</button>
+          </div>
         </div>
-        <input type="range" id="spam-ratio" min="10" max="90" value="50" step="10"
-          style="width:100%;accent-color:var(--spam);cursor:pointer"
-          oninput="updateRatioLabel()">
-        <div style="display:flex;height:10px;border-radius:4px;overflow:hidden;margin-top:8px">
-          <div id="ratio-bar-spam" style="width:50%;background:var(--spam);transition:width .2s"></div>
-          <div id="ratio-bar-ham"  style="width:50%;background:var(--ham); transition:width .2s"></div>
-        </div>
-        <div style="font-size:10px;color:var(--muted);margin-top:8px;line-height:1.6" id="ratio-note">
-          Jämn fördelning — priorsannolikheten P(klass) påverkar inte klassificeringen nämnvärt.
+        <div class="card" style="margin-bottom:0">
+          <span class="card-label">Importera från fil</span>
+          <div class="format-box">
+            En <strong style="color:var(--text)">.csv</strong> eller <strong style="color:var(--text)">.txt</strong> — en rad per exempel:
+            <code>SPAM,Din text här</code>
+            <code>HAM,Din text här</code>
+            Etiketten ska vara <code style="display:inline">SPAM</code> eller <code style="display:inline">HAM</code> (versaler).
+          </div>
+          <div class="file-drop" id="file-drop">
+            <input type="file" accept=".csv,.txt" onchange="importFile(event)">
+            <div class="drop-icon">📂</div>
+            <div class="drop-text">Klicka för att välja fil</div>
+            <div class="drop-sub">.csv eller .txt · en rad per exempel</div>
+          </div>
+          <div class="status-msg" id="import-status"></div>
         </div>
       </div>
-      <div class="status-msg" id="gen-status"></div>
     </div>
   </div>
 </section>
@@ -677,32 +370,24 @@
   <div id="model-empty" class="empty"><strong>Ingen modell ännu</strong>Lägg till träningsdata i fliken Träna.</div>
   <div id="model-content" style="display:none">
     <div class="row" style="margin-bottom:18px;gap:8px">
-      <span style="font-size:11px;color:var(--muted);letter-spacing:.08em">VISA KLASS:</span>
+      <span style="font-size:12px;color:var(--muted)">Visa klass:</span>
       <button class="chip chip-spam sel" id="mchip-spam" onclick="setModelClass('SPAM')">Skräppost</button>
       <button class="chip chip-ham"      id="mchip-ham"  onclick="setModelClass('HAM')">Ej skräppost</button>
     </div>
     <div class="card">
-      <span class="card-label" id="model-bar-label">P(ORD | SPAM) — TOPPORD</span>
+      <span class="card-label" id="model-bar-label">P(ord | Skräppost) — toppord</span>
+      <p style="font-size:12px;color:var(--muted);line-height:1.7;margin:-4px 0 12px">
+        Orden modellen tycker är mest typiska för klassen, sorterade efter hur ofta de förekommer i träningsdatan.
+      </p>
       <div id="model-bars"></div>
     </div>
     <div class="card">
-      <span class="card-label">JÄMFÖRELSE: SKRÄPPOST vs EJ SKRÄPPOST FÖR SAMMA ORD</span>
+      <span class="card-label">Jämförelse: skräppost vs ej skräppost för samma ord</span>
+      <p style="font-size:12px;color:var(--muted);line-height:1.7;margin:-4px 0 12px">
+        Ett ord skiljer klasserna åt bara om staplarna är olika långa. Är de ungefär lika långa säger ordet inget om vilken klass mejlet tillhör.
+      </p>
       <div id="compare-bars"></div>
       <div class="legend" id="compare-legend"><span class="ls">Skräppost</span><span class="lh">Ej skräppost</span></div>
-    </div>
-    <div class="card">
-      <span class="card-label">LAPLACE-UTJÄMNING</span>
-      <div class="formula-note" style="margin-bottom:0">
-        Formel för beräkning av sannolikheten för orden: <strong style="color:var(--text)">P(ord | klass) = (antal(ord, klass) + 1) / (totalt(klass) + |V|)</strong>
-        &nbsp;— där |V| är storleken på ordförrådet.<br><br>
-        <span style="color:var(--subtle)">
-        <strong style="color:var(--subtle)">Varför +1?</strong>
-        Om ett ord aldrig förekommit i träningsdatan för en klass skulle P = 0/totalt = 0.
-        Eftersom modellen multiplicerar ihop alla ordssannolikheter skulle <em>ett enda okänt ord</em> göra hela produkten noll — och klassificeringen kraschade.
-        Lösningen är att låtsas att varje ord förekommit minst en gång (+1 i täljaren).
-        För att hålla summan av alla sannolikheter till 1 kompenseras nämnaren med +|V|.
-        </span>
-      </div>
     </div>
   </div>
 </section>
@@ -711,15 +396,15 @@
   <div id="classify-empty" class="empty"><strong>Ingen modell ännu</strong>Lägg till träningsdata i fliken Träna.</div>
   <div id="classify-content" style="display:none">
     <div class="card">
-      <span class="card-label">TEXT ATT KLASSIFICERA</span>
+      <span class="card-label">Text att klassificera</span>
       <div class="row">
         <input type="text" id="classify-input" placeholder="Skriv en mening och se hur modellen resonerar…" onkeydown="if(event.key==='Enter')classify()">
-        <button class="btn" onclick="classify()">KLASSIFICERA →</button>
+        <button class="btn" onclick="classify()">Klassificera →</button>
       </div>
     </div>
     <div id="classify-result" style="display:none">
       <div class="verdict-card" id="verdict-card">
-        <div class="verdict-label">KLASSIFICERAD SOM</div>
+        <div class="verdict-label">Klassificerad som</div>
         <div class="verdict-class" id="verdict-class">—</div>
         <div class="verdict-probs" id="verdict-probs"></div>
         <div class="confidence-bar-wrap" id="confidence-wrap"></div>
@@ -729,8 +414,8 @@
         <div class="formula-panel" id="formula-panel"></div>
       </div>
       <div class="card" id="tokenization-card">
-        <span class="card-label">STEG 1 — TOKENISERING OCH FILTRERING</span>
-        <p style="font-size:11px;color:var(--muted);line-height:1.7;margin-bottom:12px">
+        <span class="card-label">Steg 1 — tokenisering och filtrering</span>
+        <p style="font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:12px">
           Innan modellen kan räkna sannolikheter måste texten omvandlas till enskilda ord — det kallas <strong style="color:var(--text)">tokenisering</strong>.
           Ord som är för vanliga för att säga något om klassen (stoppord) och mycket korta ord filtreras sedan bort.
           Bara de kvarvarande orden används i klassificeringen.
@@ -741,7 +426,7 @@
           <span><span style="color:var(--muted)">■</span> Stoppord — filtreras bort (för vanligt)</span>
           <span><span style="color:var(--muted)">■</span> För kort — filtreras bort (≤2 tecken)</span>
         </div>
-        <p style="font-size:10px;color:var(--muted);margin-top:10px;line-height:1.6;font-style:italic">
+        <p style="font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6;font-style:italic">
           Notera: ingen lemmatisering görs — "vinner" och "vinnare" räknas som olika ord.
           Verkliga system reducerar ofta ord till sin grundform för att öka träffsäkerheten.
         </p>
@@ -856,7 +541,7 @@ function renderModel() {
     const ch = document.getElementById(`mchip-${c.toLowerCase()}`);
     ch.className = `chip chip-${c.toLowerCase()}${c === cls ? ' sel' : ''}`;
   });
-  document.getElementById('model-bar-label').textContent = `P(ORD | ${DISPLAY[cls]}) — TOPPORD`;
+  document.getElementById('model-bar-label').textContent = `P(ord | ${DISPLAY[cls]}) — toppord`;
 
   const top = Object.entries(wc[cls] || {})
     .map(([w, count]) => ({ w, count, prob: (count + 1) / (totals[cls] + vs) }))
@@ -927,7 +612,7 @@ function classify() {
                  : confPct >= 65 ? 'Modellen lutar åt ett håll men orden ger blandade signaler.'
                  : 'Orden i texten förekommer ungefär lika ofta i båda klasser. Mer träningsdata eller tydligare ord skulle hjälpa.';
   document.getElementById('confidence-wrap').innerHTML = `
-    <div class="confidence-label">MODELLENS SÄKERHET</div>
+    <div class="confidence-label">Modellens säkerhet</div>
     <div class="confidence-track">
       <div class="confidence-fill" style="width:${confPct}%;background:${confColor}"></div>
     </div>
@@ -935,7 +620,7 @@ function classify() {
       <span>0%</span><span>Osäker &lt;65%</span><span>Ganska säker &lt;85%</span><span>Mycket säker ≥85%</span><span>100%</span>
     </div>
     <div class="confidence-verdict" style="color:${confColor}">${confPct.toFixed(1)}% — ${confText}</div>
-    <div style="font-size:11px;color:var(--subtle);margin-top:4px">${confNote}</div>`;
+    <div style="font-size:12px;color:var(--subtle);margin-top:4px">${confNote}</div>`;
 
   const rawWords = (text.toLowerCase().match(/[a-zåäö]+/g) || []);
   document.getElementById('token-display').innerHTML = rawWords.map(w => {
@@ -950,8 +635,8 @@ function classify() {
 
   let html = `
   <div class="card" style="margin-bottom:12px">
-    <span class="card-label">MATEMATIK STEG FÖR STEG</span>
-    <p style="font-size:11px;color:var(--muted);line-height:1.7;margin-bottom:0">
+    <span class="card-label">Matematik steg för steg</span>
+    <p style="font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:0">
       Naïve Bayes multiplicerar ihop sannolikheter från träningsdatan.
       Modellen börjar med hur vanliga klasserna är (prior) och uppdaterar sedan för varje ord i texten.
       Alla siffror nedan kommer direkt ur träningsdatan.
@@ -962,11 +647,11 @@ function classify() {
   html += `
   <div class="math-step">
     <div class="math-step-header">
-      <span class="math-step-num">STEG 0</span>
+      <span class="math-step-num">Steg 0</span>
       <span class="math-step-word">Startpunkt — hur vanliga är klasserna?</span>
     </div>
     <div class="math-step-body">
-      <p style="font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.6">
+      <p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.6">
         Innan modellen sett ett enda ord i texten vet den redan hur vanliga de olika klasserna är i träningsdatan.
         Det kallas <strong style="color:var(--text)">priorsannolikhet</strong>.
       </p>
@@ -975,17 +660,17 @@ function classify() {
           const n = cc[c], p = n / total;
           return `
           <div class="math-prior-box">
-            <div class="mpb-cls" style="color:${colorOf(c)}">${DISPLAY[c].toUpperCase()}</div>
+            <div class="mpb-cls" style="color:${colorOf(c)}">${DISPLAY[c]}</div>
             <div class="mpb-frac">
               P(${DISPLAY[c]}) = <strong>${n} mejl</strong> / <strong>${total} totalt</strong> = <strong>${p.toFixed(2)}</strong>
             </div>
-            <div style="font-size:10px;color:var(--muted)">${n} av dina ${total} träningsexempel är ${DISPLAY[c].toLowerCase()}</div>
+            <div style="font-size:11px;color:var(--muted)">${n} av dina ${total} träningsexempel är ${DISPLAY[c].toLowerCase()}</div>
             <div class="mpb-bar" style="background:${colorOf(c)};width:${p*100}%;max-width:100%"></div>
           </div>`;
         }).join('')}
       </div>
       <div class="math-posterior" style="margin-top:10px">
-        <div class="math-posterior-label">FÖRDELNING EFTER STEG 0</div>
+        <div class="math-posterior-label">Fördelning efter steg 0</div>
         <div class="math-post-bar">
           <div class="pb-spam" style="width:${(priorPost.SPAM||0)*100}%"></div>
           <div class="pb-ham"  style="width:${(priorPost.HAM||0)*100}%"></div>
@@ -1017,7 +702,7 @@ function classify() {
     html += `
     <div class="math-step">
       <div class="math-step-header">
-        <span class="math-step-num">STEG ${idx + 1}</span>
+        <span class="math-step-num">Steg ${idx + 1}</span>
         <span class="math-step-word">"${escHtml(step.word)}"</span>
         <span class="math-step-shift" style="color:${colorOf(winner)};border-color:${colorOf(winner)}20;background:${colorOf(winner)}10">
           ${flipped ? '⚡ ' : ''}${shiftTxt}
@@ -1034,7 +719,7 @@ function classify() {
             const unseen  = n_ord === 0;
             return `
             <div class="math-word-box">
-              <div class="mwb-cls" style="color:${colorOf(c)}">${DISPLAY[c].toUpperCase()}</div>
+              <div class="mwb-cls" style="color:${colorOf(c)}">${DISPLAY[c]}</div>
               <div class="mwb-found">
                 ${unseen
                   ? `Ordet hittades <em><strong style="color:#ff9080">inte</strong></em> i ${DISPLAY[c].toLowerCase()}-mejl under träningen. Laplace-utjämning (+1) ger det en liten sannolikhet.`
@@ -1051,7 +736,7 @@ function classify() {
           }).join('')}
         </div>
         <div class="math-posterior">
-          <div class="math-posterior-label">FÖRDELNING EFTER STEG ${idx + 1}${flipped ? ` — <span style="color:#fbbf24">⚡ KLASSBYTE</span> <span style="color:var(--muted);font-size:10px;font-style:italic">(detta ord vände majoritetssannolikheten från ${DISPLAY[prevWin]} till ${DISPLAY[winner]})</span>` : ''}</div>
+          <div class="math-posterior-label">Fördelning efter steg ${idx + 1}${flipped ? ` — <span style="color:#fbbf24">⚡ klassbyte</span> <span style="color:var(--muted);font-size:10px;font-style:italic">(detta ord vände majoritetssannolikheten från ${DISPLAY[prevWin]} till ${DISPLAY[winner]})</span>` : ''}</div>
           <div class="math-post-bar">
             <div class="pb-spam" style="width:${(post.SPAM||0)*100}%"></div>
             <div class="pb-ham"  style="width:${(post.HAM||0)*100}%"></div>
@@ -1065,17 +750,23 @@ function classify() {
   });
 
   html += `
-  <div class="card" style="margin-top:4px">
-    <span class="card-label">ORDFÖRRÅD OCH LAPLACE-UTJÄMNING</span>
-    <p style="font-size:11px;color:var(--muted);line-height:1.8">
-      |V| = <strong style="color:var(--text)">${vs} unika ord</strong> totalt i träningsdatan.
-      ${classes.map(c => `${DISPLAY[c]}: <strong style="color:${colorOf(c)}">${totals[c]} ord</strong> totalt i ${cc[c]} mejl`).join(' &nbsp;·&nbsp; ')}.<br>
-      <strong style="color:var(--subtle)">Varför +|V| i nämnaren?</strong>
-      När vi lägger till +1 för varje ord i täljaren måste vi kompensera i nämnaren — annars summerar inte sannolikheterna till 1.
-      Eftersom ordförrådet har ${vs} unika ord, och vi lagt till +1 för vart och ett, adderas exakt +${vs} till nämnaren.
-      Det innebär att alla ord — även de som aldrig förekommit — får en liten men rättvis sannolikhet.
-    </p>
-  </div>`;
+  <details class="laplace-details" style="margin-top:4px">
+    <summary>Varför lägger vi till +1? (Laplace-utjämning)</summary>
+    <div class="laplace-body">
+      <p style="font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:10px">
+        Om ett ord <strong style="color:var(--text)">aldrig</strong> förekommit i en klass under träningen skulle sannolikheten bli 0.
+        Eftersom modellen multiplicerar ihop alla ordssannolikheter skulle <em>ett enda okänt ord</em> dra hela produkten till noll — och klassificeringen vore förstörd.
+        Lösningen: låtsas att varje ord förekommit minst en gång genom att lägga till <strong style="color:var(--text)">+1 i täljaren</strong>.
+      </p>
+      <p style="font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:0">
+        <strong style="color:var(--subtle)">Och varför +|V| i nämnaren?</strong>
+        När vi lägger till +1 för varje ord måste nämnaren kompenseras — annars summerar inte sannolikheterna till 1.
+        Här är |V| = <strong style="color:var(--text)">${vs} unika ord</strong> i träningsdatan
+        (${classes.map(c => `${DISPLAY[c]}: <strong style="color:${colorOf(c)}">${totals[c]} ord</strong>`).join(', ')}),
+        så exakt +${vs} adderas till nämnaren. Då får alla ord — även de osedda — en liten men rättvis sannolikhet.
+      </p>
+    </div>
+  </details>`;
 
   document.getElementById('math-breakdown').innerHTML = html;
   document.getElementById('classify-result').style.display = 'block';
@@ -1092,14 +783,8 @@ function toggleFormula() {
   const { cc, wc, totals, vs, total, classes } = m;
   const final = steps[steps.length - 1];
 
-  const rawSum = classes.reduce((s, c) => {
-    const prior = cc[c] / total;
-    const wf    = tokens.map(w => { const n=wc[c][w]||0; return (n+1)/(totals[c]+vs); });
-    return s + wf.reduce((a,b)=>a*b, prior);
-  }, 0);
-
   let html = `
-    <div class="fp-title">NAÏVE BAYES KLASSIFICERINGSFORMEL</div>
+    <div class="fp-title">Naïve Bayes klassificeringsformel</div>
     <div class="fp-abstract">
       Bayes sats säger: <strong>P(A|B) = P(B|A) × P(A) / P(B)</strong><br>
       I vårt fall: <strong>P(klass | text) = P(text | klass) × P(klass) / P(text)</strong><br><br>
@@ -1127,7 +812,7 @@ function toggleFormula() {
 
     html += `
     <div class="fp-class-block">
-      <div class="fp-class-name" style="color:${colorOf(c)}">${DISPLAY[c].toUpperCase()}</div>
+      <div class="fp-class-name" style="color:${colorOf(c)}">${DISPLAY[c]}</div>
       <div class="fp-line">
         P(text | ${DISPLAY[c]}) × P(${DISPLAY[c]})<br>
         = <strong>${prior.toFixed(5)}</strong><span class="fp-op"> [${cc[c]} mejl / ${total} totalt]</span>
@@ -1150,7 +835,7 @@ function toggleFormula() {
 
   html += `
     <div style="margin-top:14px;padding:14px 16px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px">
-      <div style="font-size:10px;letter-spacing:.12em;color:var(--muted);margin-bottom:12px">NORMALISERINGSSTEGET</div>
+      <div style="font-size:11px;letter-spacing:.06em;color:var(--muted);margin-bottom:12px">Normaliseringssteget</div>
       <div style="font-size:12px;color:var(--subtle);line-height:2">
         Vi summerar produkterna för alla klasser och delar sedan varje produkt på den summan.<br>
         Det gör att svaren summerar till 100% — vi får procent istället för extremt små tal.<br><br>
@@ -1160,7 +845,7 @@ function toggleFormula() {
         `).join('<br>')}
       </div>
     </div>
-    <div style="font-size:11px;color:var(--muted);margin-top:12px;line-height:1.8;padding:10px 14px;background:rgba(255,255,255,.03);border-radius:6px;border:1px solid var(--border)">
+    <div style="font-size:12px;color:var(--muted);margin-top:12px;line-height:1.8;padding:10px 14px;background:rgba(255,255,255,.03);border-radius:6px;border:1px solid var(--border)">
       💡 Produkterna är extremt små tal eftersom vi multiplicerat ihop många sannolikheter nära noll.
       Det är normalt — det är storleken <em>relativt varandra</em> som avgör klassificeringen, inte det absoluta värdet.
       Datorn räknar internt med logaritmer för att undvika precisionsproblem, och konverterar tillbaka i sista steget.
@@ -1212,6 +897,11 @@ function clearData() {
   if (!confirm(`Rensa alla ${examples.length} träningsexempel? Detta går inte att ångra.`)) return;
   examples = [];
   refresh();
+}
+
+function toggleOwn() {
+  document.getElementById('own-toggle').classList.toggle('open');
+  document.getElementById('own-body').classList.toggle('open');
 }
 
 function importFile(event) {
@@ -1560,7 +1250,7 @@ function updateRatioLabel() {
 }
 
 function generateData(keepExisting = false) {
-  const n      = Math.max(4, Math.min(500, parseInt(document.getElementById('gen-count').value) || 20));
+  const n      = Math.max(4, Math.min(500, parseInt(document.getElementById('gen-count').value) || 50));
   const ratio  = parseInt(document.getElementById('spam-ratio').value) / 100;
   const nSpam  = Math.max(1, Math.round(n * ratio));
   const nHam   = Math.max(1, n - nSpam);
