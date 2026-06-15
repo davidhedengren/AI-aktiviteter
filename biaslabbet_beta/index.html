@@ -199,10 +199,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 /* Intro-overlay */
 .overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
-.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 26px;max-width:460px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;}
+.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:26px 30px;max-width:520px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;}
 .overlay-card h2{font-size:1.1em;font-weight:700;margin-bottom:6px;}
 .overlay-card h2 span{color:var(--accent2);}
-.overlay-card .sub{font-size:0.84em;color:var(--dim);line-height:1.55;margin-bottom:14px;}
+.overlay-card .sub{font-size:0.84em;color:var(--dim);line-height:1.6;margin-bottom:12px;text-align:left;}
 .overlay-card .steps{display:flex;flex-direction:column;gap:10px;margin:14px 0;text-align:left;}
 .overlay-card .step{display:flex;gap:10px;align-items:flex-start;font-size:0.82em;color:var(--dim);line-height:1.5;}
 .overlay-card .step strong{color:var(--text);}
@@ -283,14 +283,15 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
   <!-- ─── Höger: utmaningar, begrepp, verkliga fallet ─── -->
   <div class="rp">
     <div class="coll">
-      <button class="coll-toggle" onclick="toggleColl(this,'challBody')">🎯 Utmaningar<span class="arr">▼</span></button>
+      <button class="coll-toggle" onclick="toggleColl(this,'challBody')">🧭 Så här utforskar du<span class="arr">▼</span></button>
       <div class="coll-body" id="challBody">
+        <p style="margin:0 0 9px;">Ett förslag på väg genom labbet. Träna om modellen efter varje ändring och se vad som händer med gapet och vikterna.</p>
         <ol>
-          <li>Träna med alla variabler. Hur stort blir gapet mellan grupperna?</li>
-          <li>Ta bort <span class="hl">Kön</span> och träna om. Försvinner skevheten helt? Vilken variabel har "tagit över" könets roll?</li>
-          <li>Ta bort <span class="hl">CV-uppehållet</span> också. Vad händer med gapet? Försvann det helt?</li>
+          <li>Börja med <strong>alla variabler</strong> påslagna. Hur stort blir gapet mellan grupperna?</li>
+          <li>Stäng av <span class="hl">Kön</span> och träna om. Försvinner skevheten helt? Vilken variabel har "tagit över" könets roll?</li>
+          <li>Stäng av <span class="hl">CV-uppehållet</span> också. Vad händer med gapet? Försvann det helt?</li>
           <li>Slå på alla variabler igen men byt till <span class="hl">⚖️ rättvis träningsdata</span>. Vad händer med vikten för Kön nu?</li>
-          <li>I Tvillingtestet: ge Anna 1 års CV-uppehåll och Adam 0, med en modell tränad <em>utan</em> kön. Diskriminerar modellen ändå? Vad kallas den typen av diskriminering?</li>
+          <li>Gå till <strong>Tvillingtestet</strong>: ge Anna 1 års CV-uppehåll och Adam 0, med en modell tränad <em>utan</em> kön. Diskriminerar modellen ändå? Vad kallas den typen av diskriminering?</li>
         </ol>
       </div>
     </div>
@@ -319,7 +320,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
       <button class="coll-toggle" onclick="toggleColl(this,'amazonBody')">📰 Verkliga fallet: Amazon<span class="arr">▼</span></button>
       <div class="coll-body" id="amazonBody">
         2018 avslöjades att Amazon hade skrotat ett internt AI-verktyg för rekrytering. Verktyget hade tränats på tio års historiska ansökningar – som till stor del kom från män – och lärde sig att nedvärdera CV:n som antydde att den sökande var kvinna, till exempel genom föreningsnamn.<br><br>
-        Amazon försökte ta bort de uppenbara signalerna, men kunde inte garantera att modellen inte hittade <strong>andra, indirekta vägar</strong> till samma slutsats – exakt det du kan testa här med proxyvariabeln CV-uppehåll.
+        Amazon försökte ta bort de uppenbara signalerna, men kunde inte garantera att modellen inte hittade <strong>andra, indirekta vägar</strong> till samma slutsats – exakt det du kan testa här med proxyvariabeln CV-uppehåll.<br><br>
+        <strong>Obs:</strong> I det här labbet är proxyvariabeln avsiktligt tydlig. I verkligheten kan det vara mycket svårare att upptäcka vilka variabler som fungerar som proxyer.
       </div>
     </div>
   </div>
@@ -341,13 +343,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
     <h2><span>Bias</span>-labbet</h2>
-    <p class="sub">Företaget Teknova AB vill låta en AI gallra jobbansökningar. Den tränas på företagets tidigare anställningsbeslut – men historiken bär på ett problem.</p>
+    <p class="sub">En AI lär sig av data. Men vad händer när datan speglar gamla orättvisor? Här får du själv se hur diskriminering kan smyga sig in i ett AI-system – helt utan att någon programmerat den med flit.</p>
+    <p class="sub">Företaget Teknova AB vill låta en AI sköta första gallringen av jobbansökningar, och tränar den på sina egna anställningsbeslut från förr. Problemet: i historiken anställdes män betydligt oftare än kvinnor – trots likvärdiga meriter. Frågan du ska undersöka är vad en modell egentligen lär sig av sådan data, och om man kan göra något åt det.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Träna och granska</strong> – Se vad modellen lär sig av historiken, hur den behandlar nya sökande och hur den bedömer två identiska kandidater.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Åtgärda</strong> – Ta bort variabler eller byt träningsdata. Räcker det att dölja kön – eller hittar modellen en bakväg?</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Träna och granska</strong> – Låt modellen lära av historiken. Se sedan vad den lärt sig, hur den bedömer nya sökande och vad den svarar på två identiska CV:n där bara könet skiljer.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Försök åtgärda</strong> – Dölj kön för modellen, ta bort variabler eller byt träningsdata. Räcker det att blunda för kön för att bli rättvis – eller hittar modellen en bakväg ändå?</div></div>
     </div>
-    <p class="sub" style="margin-bottom:0;">💡 Bygger på ett verkligt fall: Amazon skrotade 2018 en rekryterings-AI som lärt sig nedvärdera kvinnors CV:n. All data här är påhittad.</p>
-    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta simuleringen →</button>
+    <p class="sub" style="margin-bottom:0;">💡 Bygger på ett verkligt fall: Amazon tvingades 2018 skrota en rekryterings-AI som lärt sig nedvärdera kvinnors CV:n. All data i labbet är påhittad.</p>
+    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Sätt igång →</button>
   </div>
 </div>
 
