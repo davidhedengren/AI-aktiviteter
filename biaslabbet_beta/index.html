@@ -267,19 +267,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
       </details>
     </div>
 
-    <!-- 2. Vikter -->
-    <div class="card">
-      <div class="sec-head"><h2>Vad modellen lärde sig</h2><span class="sub">vikterna i den logistiska regressionen</span></div>
-      <div id="weightsArea"><div class="placeholder-box">Tryck <strong>🧠 Träna modellen</strong> för att se vikterna.</div></div>
-    </div>
-
-    <!-- 3. Rättvisetestet -->
+    <!-- 2. Rättvisetestet -->
     <div class="card">
       <div class="sec-head"><h2>Rättvisetestet</h2><span class="sub">240 nya sökande med identiska meritfördelningar</span></div>
       <div id="fairArea"><div class="placeholder-box">Testar modellen på <strong>nya sökande</strong> med lika meriter – får grupperna lika svar?</div></div>
     </div>
 
-    <!-- 4. Tvillingtestet -->
+    <!-- 3. Tvillingtestet -->
     <div class="card">
       <div class="sec-head"><h2>Tvillingtestet</h2><span class="sub">två identiska kandidater – bedöms de lika?</span></div>
       <div id="twinArea"><div class="placeholder-box">Träna modellen först.</div></div>
@@ -289,8 +283,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
   <!-- ─── Höger: utmaningar, begrepp, verkliga fallet ─── -->
   <div class="rp">
     <div class="coll">
-      <button class="coll-toggle open" onclick="toggleColl(this,'challBody')">🎯 Utmaningar<span class="arr">▼</span></button>
-      <div class="coll-body show" id="challBody">
+      <button class="coll-toggle" onclick="toggleColl(this,'challBody')">🎯 Utmaningar<span class="arr">▼</span></button>
+      <div class="coll-body" id="challBody">
         <ol>
           <li>Träna med alla variabler. Hur stort blir gapet mellan grupperna? Titta på <span class="hl">vikten för Kön</span> – vad har modellen lärt sig?</li>
           <li>Ta bort <span class="hl">Kön</span> och träna om. Försvinner skevheten helt? Jämför vikterna med förra experimentet – vilken variabel har "tagit över" könets roll?</li>
@@ -571,7 +565,7 @@ function modelChipHTML(m){
     ${m.dataMode === 'fair' ? '⚖️ rättvis data' : '📜 historisk data'}</span>`;
 }
 
-function renderWeights(){
+function weightsHTML(){
   const m = model;
   const maxW = Math.max(2.5, ...m.w.map(Math.abs));
   let h = '';
@@ -583,15 +577,15 @@ function renderWeights(){
       <div class="wval ${w >= 0 ? 'pos' : 'neg'}">${(w >= 0 ? '+' : '') + w.toFixed(2)}</div>
     </div>`;
   }
-  h += `<div class="hint" style="margin-top:2px;">Grön vikt höjer chansen att rekommenderas, röd sänker den.</div>`;
-  document.getElementById('weightsArea').innerHTML = h;
+  h += `<div class="hint" style="margin-top:2px;">Grön vikt höjer chansen att rekommenderas, röd sänker den. Detta är vad modellen faktiskt tittar på.</div>`;
+  return h;
 }
 
 function renderFairness(){
   const r = evaluate(model);
   let vCls, vTxt;
   if(r.gap > 15){ vCls = 'bad';  vTxt = `🚨 Stor skillnad: gapet är <strong>${r.gap.toFixed(0)} procentenheter</strong> – trots att grupperna har identiska meriter rekommenderas männen mycket oftare.`; }
-  else if(r.gap > 5){ vCls = 'warn'; vTxt = `⚠️ Skillnaden har minskat men finns kvar: <strong>${r.gap.toFixed(0)} procentenheter</strong>. Var kommer den ifrån? Ledtråd: granska vikterna ovanför.`; }
+  else if(r.gap > 5){ vCls = 'warn'; vTxt = `⚠️ Skillnaden har minskat men finns kvar: <strong>${r.gap.toFixed(0)} procentenheter</strong>. Var kommer den ifrån? Ledtråd: öppna vikterna nedan.`; }
   else { vCls = 'ok'; vTxt = `✅ Gapet är nere på <strong>${r.gap.toFixed(1)} procentenheter</strong> – grupperna behandlas i stort sett lika.`; }
 
   document.getElementById('fairArea').innerHTML = `
@@ -602,13 +596,18 @@ function renderFairness(){
     </div>
     <div style="height:9px"></div>
     <div class="verdict ${vCls}">${vTxt}</div>
-    <div style="height:9px"></div>
-    <div class="fstats">
-      <div class="fbox"><div class="fl">Gap mellan grupperna</div><div class="fv" style="color:${r.gap > 15 ? 'var(--red)' : r.gap > 5 ? 'var(--gold)' : 'var(--green)'}">${r.gap.toFixed(0)} pe</div></div>
-      <div class="fbox"><div class="fl">Träffsäkerhet</div><div class="fv">${r.acc.toFixed(0)}%</div></div>
+    <div style="height:10px"></div>
+    <div class="fstats" style="grid-template-columns:1fr;">
+      <div class="fbox"><div class="fl">Gap mellan grupperna</div><div class="fv" style="color:${r.gap > 15 ? 'var(--red)' : r.gap > 5 ? 'var(--gold)' : 'var(--green)'}">${r.gap.toFixed(0)} procentenheter</div></div>
     </div>
+    <details class="more"><summary>🔍 Visa vikterna – vad modellen tittar på</summary>
+      <div style="margin-top:10px">${weightsHTML()}</div>
+    </details>
     <details class="more"><summary>Visa fler detaljer</summary>
       <div class="fstats" style="margin-top:8px;">
+        <div class="fbox"><div class="fl">Träffsäkerhet</div><div class="fv">${r.acc.toFixed(0)}%</div></div>
+      </div>
+      <div class="fstats" style="margin-top:6px;">
         <div class="fbox"><div class="fl">Missade talanger – kvinnor</div><div class="fv" style="color:var(--kvinna)">${r.missK} av ${r.lampK}</div></div>
         <div class="fbox"><div class="fl">Missade talanger – män</div><div class="fv" style="color:var(--man)">${r.missM} av ${r.lampM}</div></div>
       </div>
@@ -690,7 +689,6 @@ function renderAll(){
   const mc = document.getElementById('modelChip');
   mc.innerHTML = modelChipHTML(model);
   mc.style.display = 'block';
-  renderWeights();
   renderFairness();
   renderTwins();
 }
