@@ -336,11 +336,11 @@
     </div>
     <div class="o-step">
       <div class="o-step-h">② Modell</div>
-      <p>Se vad modellen lärt sig — vilka ord som är mest typiska för varje klass. Jämförelsen visar samma ord för båda klasser sida vid sida, så du ser vilka ord som verkligen skiljer dem åt.</p>
+      <p>Se vad modellen lärt sig — vilka ord som lutar mot skräppost och vilka som lutar mot vanliga mejl, och hur starkt.</p>
     </div>
     <div class="o-step">
       <div class="o-step-h">③ Klassificera</div>
-      <p>Skriv in ett mejl och tryck Enter. Modellen visar hur texten tokeniseras, hur sannolikheten förskjuts ord för ord, och hur säker den är. Matematiken bakom visas i tre steg som du kan fälla ut.</p>
+      <p>Skriv in ett mejl och tryck Enter. Du får ett svar med modellens säkerhet, och matematiken bakom visas i tre steg som du kan fälla ut.</p>
     </div>
     <button class="overlay-btn" onclick="closeIntro()">Kom igång →</button>
   </div>
@@ -352,13 +352,12 @@
       <div class="card">
         <span class="card-label">Skapa träningsdata</span>
         <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.7">
-          Genererar exempelmejl ur en inbyggd bank. Variera fördelningen för att se hur ojämn träningsdata påverkar modellen.
+          Genererar exempelmejl ur en inbyggd bank. Varje gång du klickar läggs fler exempel till i träningsmängden, så du kan bygga upp den efterhand. Variera fördelningen för att se hur ojämn träningsdata påverkar modellen.
         </p>
         <div class="gen-row" style="margin-bottom:12px">
           <span style="font-size:12px;color:var(--muted)">Antal:</span>
           <input type="number" class="gen-count" id="gen-count" value="50" min="4" max="500" step="2">
           <button class="btn btn-generate" id="gen-btn" onclick="generateData()">⚡ Generera</button>
-          <button class="btn-ghost" onclick="generateData(true)">+ Lägg till</button>
         </div>
         <div style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px 14px">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
@@ -412,7 +411,7 @@
 
   <div style="margin-top:20px">
     <button class="collapse-toggle" id="own-toggle" onclick="toggleOwn()">
-      <span>✎ Lägg till egna exempel eller importera fil <span style="color:var(--muted);font-weight:400">— frivilligt</span></span>
+      <span>✎ Lägg till egna exempel eller importera fil</span>
       <span class="arr">▼</span>
     </button>
     <div class="collapse-body" id="own-body">
@@ -454,7 +453,7 @@
     <div class="card">
       <span class="card-label">Vad modellen lärt sig</span>
       <p style="font-size:12px;color:var(--muted);line-height:1.7;margin:-4px 0 14px">
-        Varje ord lutar åt den klass där det är vanligast. Ju längre stapeln sträcker sig, desto starkare signal är ordet. Ord nära mitten förekommer ungefär lika ofta i båda klasser och säger därför nästan ingenting. Klicka på ett ord för de exakta sannolikheterna.
+        Varje ord lutar åt den klass där det är vanligast. Ju längre stapeln sträcker sig, desto starkare signal är ordet. Ord nära mitten förekommer ungefär lika ofta i båda klasser och säger därför nästan ingenting. Klicka på ett ord för de exakta sannolikheterna, eller på <strong>Visa fler ord</strong> för att se längre in mot mitten.
       </p>
       <div class="tug-scale">
         <span style="color:var(--ham)">◀ ej skräppost</span>
@@ -462,6 +461,7 @@
         <span style="color:var(--spam)">skräppost ▶</span>
       </div>
       <div id="tug-list"></div>
+      <div id="tug-more" style="text-align:center;margin-top:12px"></div>
     </div>
   </div>
 </section>
@@ -518,6 +518,8 @@ const STOP = new Set([
 let examples = [];
 let newLabel = "SPAM";
 const DISPLAY = { SPAM: 'Skräppost', HAM: 'Ej skräppost' };
+let modelShown = 18;   // antal ord som visas i dragkampsvyn (utökas med Visa fler)
+let modelWordsCache = null;
 
 function tokenize(text) {
   return (text.toLowerCase().match(/[a-zåäö]+/g) || [])
@@ -658,18 +660,36 @@ function renderModel() {
     const lean = Math.log(pS / pH);                // >0 lutar spam, <0 lutar ham
     words.push({ w, nS, nH, pS, pH, lean });
   });
+  // Sortera hela ordförrådet från mest spam → mest ham
+  words.sort((a,b) => b.lean - a.lean);
+  modelWordsCache = { words, totals, vs };
 
-  // Mest spam-lutande och mest ham-lutande, sammanslaget och sorterat från mest spam → mest ham
-  const spamLean = words.filter(x => x.lean > 0).sort((a,b) => b.lean - a.lean).slice(0, 9);
-  const hamLean  = words.filter(x => x.lean < 0).sort((a,b) => a.lean - b.lean).slice(0, 9);
-  const all = [...spamLean, ...hamLean].sort((a,b) => b.lean - a.lean);
+  // Börja om med standardantal varje gång modellen byggs om
+  modelShown = Math.min(18, words.length);
+  renderTugList();
+}
 
-  const maxLean = Math.max(1, ...all.map(x => Math.abs(x.lean)));
+// Ritar dragkampslistan utifrån modelShown (de mest extrema i varje riktning, inåt mot mitten)
+function renderTugList() {
+  if (!modelWordsCache) return;
+  const { words, totals, vs } = modelWordsCache;
+  const SPAM = 'SPAM';
+  const n = Math.min(modelShown, words.length);
 
-  document.getElementById('tug-list').innerHTML = all.map(x => {
+  // Ta de mest spam-lutande och mest ham-lutande så att totalt n ord visas,
+  // vilket naturligt drar in mittenord när n växer.
+  const half = Math.ceil(n / 2);
+  const topSpam = words.slice(0, half);
+  const topHam  = words.slice(Math.max(half, words.length - (n - topSpam.length)));
+  const shownWords = [...topSpam, ...topHam].sort((a,b) => b.lean - a.lean);
+
+  // Skala mot den starkaste lutningen i HELA modellen, så mittenord blir korta
+  const maxLean = Math.max(1, ...words.map(x => Math.abs(x.lean)));
+
+  document.getElementById('tug-list').innerHTML = shownWords.map(x => {
     const spam = x.lean > 0;
-    const frac = Math.abs(x.lean) / maxLean;        // 0..1
-    const widthPct = (frac * 50).toFixed(1);        // halva bredden max (center → kant)
+    const frac = Math.abs(x.lean) / maxLean;
+    const widthPct = (frac * 50).toFixed(1);
     const color = spam ? 'var(--spam)' : 'var(--ham)';
     const total = x.nS + x.nH;
     return `
@@ -690,7 +710,7 @@ function renderModel() {
         </div>
         <div class="tug-detail">
           <span style="color:var(--ham)">Ej skräppost: hittades ${x.nH} gång${x.nH!==1?'er':''}</span>
-          ${tex(`P(\\text{${texEsc(x.w)}} \\mid \\text{Ej skräppost}) = \\frac{${x.nH}+1}{${totals[HAM]}+${vs}} = ${x.pH.toFixed(5)}`, false)}
+          ${tex(`P(\\text{${texEsc(x.w)}} \\mid \\text{Ej skräppost}) = \\frac{${x.nH}+1}{${totals['HAM']}+${vs}} = ${x.pH.toFixed(5)}`, false)}
         </div>
         <div class="tug-verdict">Ordet är ${spam
           ? `<strong style="color:var(--spam)">${(x.pS/x.pH).toFixed(1)}× vanligare</strong> i skräppost`
@@ -699,7 +719,23 @@ function renderModel() {
     </details>`;
   }).join('');
 
+  // Visa fler-knapp
+  const moreWrap = document.getElementById('tug-more');
+  const remaining = words.length - n;
+  if (remaining > 0) {
+    const next = Math.min(10, remaining);
+    moreWrap.innerHTML = `<button class="btn-ghost" onclick="showMoreWords()">Visa fler ord (${remaining} kvar)</button>`;
+  } else {
+    moreWrap.innerHTML = words.length > 18
+      ? `<span style="font-size:11px;color:var(--muted)">Alla ${words.length} ord visas. Orden närmast mitten säger minst om klassen.</span>`
+      : '';
+  }
   renderMath(document.getElementById('tug-list'));
+}
+
+function showMoreWords() {
+  modelShown = Math.min(modelShown + 10, (modelWordsCache?.words.length || modelShown));
+  renderTugList();
 }
 
 function classify() {
@@ -856,7 +892,7 @@ function classify() {
           <strong style="color:${colorOf('HAM')}">ej skräppost har ${totals.HAM} ord</strong>, och ordförrådet |V| = <strong>${vs} unika ord</strong>.
         </div>
         ${rows}
-        <p class="journey-summary">Det är de här sannolikheterna som multipliceras ihop med priorn i <strong>steg 3</strong>.</p>
+        <p class="journey-summary">Det är de här sannolikheterna som i nästa steg multipliceras ihop med priorsannolikheterna från <strong>steg 1</strong>.</p>
       </div>
     </details>`;
   }
@@ -864,10 +900,10 @@ function classify() {
   // Steg 3: hela uträkningen, inbyggd direkt (ingen separat knapp)
   html += `
   <details class="step-card">
-    <summary><span class="step-badge">Steg 3</span><span class="step-title">Multiplicera ihop priorn med ordsannolikheterna</span><span class="step-expand">▸</span></summary>
+    <summary><span class="step-badge">Steg 3</span><span class="step-title">Multiplicera ihop priorsannolikheterna med ordsannolikheterna</span><span class="step-expand">▸</span></summary>
     <div class="step-body">
       <p style="font-size:12.5px;color:var(--muted);line-height:1.75;margin:0 0 14px">
-        Här ser du hur priorn och alla ordsannolikheter multipliceras ihop och normeras till det slutgiltiga svaret.
+        Här ser du hur priorsannolikheterna och alla ordsannolikheter multipliceras ihop och normeras till det slutgiltiga svaret.
       </p>
       ${buildFullCalc(m, steps, tokens)}
     </div>
@@ -947,9 +983,12 @@ function buildFullCalc(m, steps, tokens) {
         Produkterna ovan är pyttesmå tal som är svåra att jämföra. Vi delar därför varje klass tal med <strong style="color:var(--text)">summan av båda</strong> — då blir svaren procent som tillsammans blir 100%.
       </div>
       <div>
-        ${productsPerClass.map(x => tex(
-          `P(\\text{${DISPLAY[x.c]}} \\mid \\text{text}) = \\frac{${sciTex(x.product, 3)}}{${sumTex}} = ${pctTex(final.posteriors[x.c]||0)}`,
-          true)).join('')}
+        ${productsPerClass.map(x => {
+          const col = x.c === 'SPAM' ? '#ff6b6b' : '#4ade80';
+          return `<div style="margin:14px 0">${tex(
+            `\\textcolor{${col}}{P(\\text{${DISPLAY[x.c]}} \\mid \\text{text}) = \\frac{${sciTex(x.product, 3)}}{${sumTex}} = ${pctTex(final.posteriors[x.c]||0)}}`,
+            true)}</div>`;
+        }).join('')}
       </div>
     </div>`;
 
@@ -1346,7 +1385,7 @@ function updateRatioLabel() {
   document.getElementById('ratio-note').textContent = note;
 }
 
-function generateData(keepExisting = false) {
+function generateData(keepExisting = true) {
   const n      = Math.max(4, Math.min(500, parseInt(document.getElementById('gen-count').value) || 50));
   const ratio  = parseInt(document.getElementById('spam-ratio').value) / 100;
   const nSpam  = Math.max(1, Math.round(n * ratio));
@@ -1377,7 +1416,7 @@ function generateData(keepExisting = false) {
   refresh();
   status.className = 'status-msg info';
   const pctSpam = Math.round(nSpam / picked.length * 100);
-  status.textContent = `✓ Lade till ${picked.length} exempel — ${nSpam} skräppost (${pctSpam}%) + ${nHam} ej skräppost (${100-pctSpam}%)${keepExisting ? ' — behöll befintliga' : ''}.`;
+  status.textContent = `✓ Lade till ${picked.length} exempel (${nSpam} skräppost / ${nHam} ej skräppost). Träningsmängden är nu ${examples.length} exempel.`;
 }
 
 function closeIntro() {
