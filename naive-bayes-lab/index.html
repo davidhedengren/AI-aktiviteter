@@ -121,6 +121,18 @@
   .math-post-nums .pn-ham { color:var(--ham); }
   .flip-note { margin-top:10px;font-size:11.5px;line-height:1.6;color:var(--subtle);background:rgba(255,216,102,.08);border:1px solid rgba(255,216,102,.25);border-radius:6px;padding:8px 12px; }
   .flip-note strong { color:var(--text); }
+  /* ── Numrerade steg-kort (Klassificera) ── */
+  .step-card { background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.25);transition:border-color .2s,box-shadow .2s; }
+  .step-card:hover { border-color:rgba(255,216,102,.45); }
+  .step-card[open] { border-color:var(--gold);box-shadow:0 0 0 1px rgba(255,216,102,.25); }
+  .step-card > summary { display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer;list-style:none;background:rgba(255,255,255,.02); }
+  .step-card > summary::-webkit-details-marker { display:none; }
+  .step-badge { font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);background:rgba(255,216,102,.1);border:1px solid rgba(255,216,102,.3);border-radius:5px;padding:3px 9px;white-space:nowrap; }
+  .step-title { font-size:14px;font-weight:700;color:var(--text);flex:1; }
+  .step-expand { font-size:12px;color:var(--muted);transition:transform .2s; }
+  .step-card[open] > summary .step-expand { transform:rotate(90deg); }
+  .step-body { padding:14px 16px; }
+  .step-formula-link { font-size:11.5px;color:var(--subtle);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 12px;margin:0 0 12px;line-height:1.5; }
   /* ── Dragkampsvyn (Modell) ── */
   .tug-scale { display:flex;justify-content:space-between;align-items:center;font-size:10.5px;font-weight:700;letter-spacing:.03em;margin-bottom:10px;padding:0 2px; }
   .tug-row { border-bottom:1px solid var(--border);background:transparent;transition:background .15s; }
@@ -149,6 +161,8 @@
   .journey-card .journey-lead { font-size:12px;color:var(--muted);line-height:1.7;margin:-4px 0 10px; }
   .journey-formula-note { font-size:11.5px;color:var(--subtle);line-height:1.7;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:9px 12px;margin-bottom:14px; }
   .journey-formula-note strong { color:var(--text); }
+  .journey-summary { font-size:12.5px;color:var(--subtle);line-height:1.75;margin:14px 0 0;padding-top:14px;border-top:1px solid var(--border); }
+  .journey-summary strong { color:var(--text); }
   .journey-scale { display:flex;justify-content:space-between;font-size:10px;font-weight:600;letter-spacing:.03em;margin-bottom:8px;padding:0 2px; }
   .wordstep { border:1px solid var(--border);border-radius:8px;margin-bottom:6px;background:var(--bg);overflow:hidden;transition:border-color .2s,box-shadow .2s; }
   .wordstep:hover { border-color:rgba(255,216,102,.45); }
@@ -329,7 +343,7 @@
     </div>
     <div class="o-step">
       <div class="o-step-h">③ Klassificera</div>
-      <p>Skriv in ett mejl och tryck Enter. Modellen visar hur texten tokeniseras, hur sannolikheten förskjuts ord för ord, och hur säker den är. Klicka på <strong>Visa hela beräkningen</strong> för att se Bayes formel med dina egna siffror.</p>
+      <p>Skriv in ett mejl och tryck Enter. Modellen visar hur texten tokeniseras, hur sannolikheten förskjuts ord för ord, och hur säker den är. Matematiken bakom visas i tre steg som du kan fälla ut.</p>
     </div>
     <button class="overlay-btn" onclick="closeIntro()">Kom igång →</button>
   </div>
@@ -507,7 +521,6 @@ const STOP = new Set([
 let examples = [];
 let newLabel = "SPAM";
 const DISPLAY = { SPAM: 'Skräppost', HAM: 'Ej skräppost' };
-let lastCalc = null;
 
 function tokenize(text) {
   return (text.toLowerCase().match(/[a-zåäö]+/g) || [])
@@ -700,8 +713,6 @@ function classify() {
   const { steps, tokens } = getClassifySteps(text, m);
   const { cc, wc, totals, vs, total, classes } = m;
 
-  lastCalc = { m, steps, tokens, text };
-
   const final = steps[steps.length - 1];
   const pred  = Object.entries(final.posteriors).sort((a,b) => b[1]-a[1])[0][0];
   const conf  = final.posteriors[pred] || 0;
@@ -741,25 +752,27 @@ function classify() {
   }
 
   let html = `
-  <div class="card" style="margin-bottom:12px">
+  <div class="card" style="margin-bottom:12px;padding-bottom:16px">
     <span class="card-label">Matematiken bakom Naïve Bayes</span>
-    <p style="font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:0">
-      Modellen börjar med hur vanliga klasserna är (priorn) och tar sedan in ett ord i taget.
-      För varje ord justeras sannolikheten åt det håll ordet pekar. Alla siffror kommer direkt ur träningsdatan.
+    <p style="font-size:12px;color:var(--muted);line-height:1.7;margin:0 0 12px">
+      Allt bygger på <strong style="color:var(--text)">Bayes sats</strong>. Vi vill veta hur sannolik varje klass är givet texten:
     </p>
+    ${tex(`P(\\text{klass} \\mid \\text{text}) = \\frac{\\textcolor{#ffd866}{P(\\text{klass})}\\;\\textcolor{#6698ff}{P(\\text{text} \\mid \\text{klass})}}{\\textcolor{#9aa6c4}{P(\\text{text})}}`, true)}
+    <div class="fp-legend" style="margin-top:14px">
+      <div><span class="fp-dot" style="background:#ffd866"></span> <strong style="color:#ffd866">P(klass)</strong> — hur vanlig klassen är. <em>Detta räknar vi i steg 1.</em></div>
+      <div><span class="fp-dot" style="background:#6698ff"></span> <strong style="color:#6698ff">P(text | klass)</strong> — alla ordens sannolikheter. <em>Detta räknar vi i steg 2.</em></div>
+      <div><span class="fp-dot" style="background:#9aa6c4"></span> <strong style="color:#9aa6c4">P(text)</strong> — samma för båda klasser, så vi normaliserar bort den. <em>Detta sker i steg 3.</em></div>
+    </div>
   </div>`;
 
   const priorPost = steps[0].posteriors;
   html += `
-  <div class="math-step">
-    <div class="math-step-header">
-      <span class="math-step-num">Start</span>
-      <span class="math-step-word">Hur vanliga är klasserna?</span>
-    </div>
-    <div class="math-step-body">
+  <details class="step-card" open>
+    <summary><span class="step-badge">Steg 1</span><span class="step-title">Beräkna hur vanliga klasserna är</span><span class="step-expand">▸</span></summary>
+    <div class="step-body">
+      <p class="step-formula-link">Här beräknar vi <strong style="color:#ffd866">P(klass)</strong> — den gula delen av Bayes sats.</p>
       <p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.6">
-        Innan modellen sett ett enda ord i texten vet den redan hur vanliga de olika klasserna är i träningsdatan.
-        Det kallas <strong style="color:var(--text)">priorsannolikhet</strong>.
+        Innan modellen sett ett enda ord vet den redan hur vanliga klasserna är i träningsdatan. Det kallas <strong style="color:var(--text)">priorsannolikhet</strong>.
       </p>
       <div class="math-prior-grid">
         ${classes.map(c => {
@@ -776,7 +789,7 @@ function classify() {
         }).join('')}
       </div>
       <div class="math-posterior" style="margin-top:10px">
-        <div class="math-posterior-label">Fördelning efter starten</div>
+        <div class="math-posterior-label">Utgångsläge innan orden räknas in</div>
         <div class="math-post-bar">
           <div class="pb-spam" style="width:${(priorPost.SPAM||0)*100}%"></div>
           <div class="pb-ham"  style="width:${(priorPost.HAM||0)*100}%"></div>
@@ -786,7 +799,7 @@ function classify() {
         </div>
       </div>
     </div>
-  </div>`;
+  </details>`;
 
   if (tokens.length === 0) {
     html += `<div class="card"><p style="font-size:12px;color:var(--muted)">Inga meningsbärande ord hittades i texten efter filtrering av stoppord.</p></div>`;
@@ -847,33 +860,34 @@ function classify() {
     });
 
     html += `
-    <div class="card journey-card">
-      <span class="card-label">Ord för ord</span>
-      <p class="journey-lead">Varje ord justerar modellens bedömning åt vänster (ej skräppost) eller höger (skräppost). Klicka på ett ord för att se uträkningen bakom.</p>
-      <div class="journey-formula-note">
-        Sannolikheten för varje ord räknas som <strong>(antal + 1) / (totalt i klassen + |V|)</strong>, där
-        <strong style="color:${colorOf('SPAM')}">skräppost har ${totals.SPAM} ord</strong>,
-        <strong style="color:${colorOf('HAM')}">ej skräppost har ${totals.HAM} ord</strong>, och ordförrådet |V| = <strong>${vs} unika ord</strong>.
+    <details class="step-card">
+      <summary><span class="step-badge">Steg 2</span><span class="step-title">Beräkna sannolikheterna ord för ord</span><span class="step-expand">▸</span></summary>
+      <div class="step-body">
+        <p class="step-formula-link">Här beräknar vi <strong style="color:#6698ff">P(text | klass)</strong> — den blå delen av Bayes sats — ett ord i taget.</p>
+        <p class="journey-lead">Varje ord justerar modellens bedömning åt vänster (ej skräppost) eller höger (skräppost). Klicka på ett ord för att se uträkningen bakom.</p>
+        <div class="journey-formula-note">
+          Sannolikheten för varje ord räknas som <strong>(antal + 1) / (totalt i klassen + |V|)</strong>, där
+          <strong style="color:${colorOf('SPAM')}">skräppost har ${totals.SPAM} ord</strong>,
+          <strong style="color:${colorOf('HAM')}">ej skräppost har ${totals.HAM} ord</strong>, och ordförrådet |V| = <strong>${vs} unika ord</strong>.
+        </div>
+        <div class="journey-scale"><span style="color:var(--ham)">◀ ej skräppost</span><span style="color:var(--spam)">skräppost ▶</span></div>
+        ${rows}
+        <p class="journey-summary">Modellen har nu vägt in alla ord. Det slutgiltiga svaret får den genom att <strong>multiplicera ihop priorn med alla ordsannolikheter</strong> — se steg 3.</p>
       </div>
-      <div class="journey-scale"><span style="color:var(--ham)">◀ ej skräppost</span><span style="color:var(--spam)">skräppost ▶</span></div>
-      ${rows}
-    </div>`;
+    </details>`;
   }
 
-  // Avslutning direkt efter orden: knyt ihop → slutgiltigt svar, med formelknappen här
+  // Steg 3: hela uträkningen, inbyggd direkt (ingen separat knapp)
   html += `
-  <div class="card final-card" style="margin-top:12px">
-    <p style="font-size:12.5px;color:var(--subtle);line-height:1.75;margin-bottom:4px">
-      Modellen har nu vägt in alla ord. Det slutgiltiga svaret får den genom att <strong style="color:var(--text)">multiplicera ihop priorn med alla ordsannolikheter</strong> — en produkt per klass. Den klass som får störst produkt vinner.
-    </p>
-    <p style="font-size:12.5px;color:var(--muted);line-height:1.75;margin-bottom:14px">
-      Vill du se hela uträkningen med dina egna siffror?
-    </p>
-    <button class="formula-toggle" onclick="toggleFormula()" id="formula-toggle-btn" style="margin-top:0">
-      ƒ Visa hela beräkningen
-    </button>
-    <div class="formula-panel" id="formula-panel"></div>
-  </div>`;
+  <details class="step-card">
+    <summary><span class="step-badge">Steg 3</span><span class="step-title">Multiplicera ihop priorn med ordsannolikheterna</span><span class="step-expand">▸</span></summary>
+    <div class="step-body">
+      <p style="font-size:12.5px;color:var(--muted);line-height:1.75;margin:0 0 14px">
+        Här ser du hur priorn och alla ordsannolikheter multipliceras ihop och normeras till det slutgiltiga svaret.
+      </p>
+      ${buildFullCalc(m, steps, tokens)}
+    </div>
+  </details>`;
 
   html += `
   <details class="laplace-details" style="margin-top:12px">
@@ -899,29 +913,14 @@ function classify() {
   renderMath(document.getElementById('math-breakdown'));
 }
 
-function toggleFormula() {
-  const panel = document.getElementById('formula-panel');
-  const btn   = document.getElementById('formula-toggle-btn');
-  const isOpen = panel.classList.toggle('open');
-  btn.textContent = isOpen ? 'ƒ Dölj beräkningen' : 'ƒ Visa hela beräkningen';
-  if (!isOpen || !lastCalc) return;
-
-  const { m, steps, tokens } = lastCalc;
+function buildFullCalc(m, steps, tokens) {
   const { cc, wc, totals, vs, total, classes } = m;
   const final = steps[steps.length - 1];
 
   let html = `
-    <div class="fp-title">Naïve Bayes klassificeringsformel</div>
-    <div class="fp-abstract">
-      <div style="margin-bottom:8px">Bayes sats säger:</div>
-      ${tex(`P(\\text{klass} \\mid \\text{text}) = \\frac{\\textcolor{#6698ff}{P(\\text{text} \\mid \\text{klass})}\\;\\textcolor{#ffd866}{P(\\text{klass})}}{\\textcolor{#9aa6c4}{P(\\text{text})}}`, true)}
-      <div class="fp-legend">
-        <div><span class="fp-dot" style="background:#6698ff"></span> <strong style="color:#6698ff">P(text | klass)</strong> — alla ordens sannolikheter multiplicerade. <em>Detta är talen vi beräknade ovan.</em></div>
-        <div><span class="fp-dot" style="background:#ffd866"></span> <strong style="color:#ffd866">P(klass)</strong> — priorn, hur vanlig klassen är i träningsdatan.</div>
-        <div><span class="fp-dot" style="background:#9aa6c4"></span> <strong style="color:#9aa6c4">P(text)</strong> — samma för båda klasser, så vi behöver inte räkna den. I stället normaliserar vi på slutet.</div>
-      </div>
-      <div class="fp-bridge">Vi räknar alltså täljaren <strong style="color:#ffd866">prior</strong> × <strong style="color:#6698ff">ordsannolikheter</strong> för varje klass:</div>
-    </div>`;
+    <p style="font-size:12px;color:var(--subtle);line-height:1.7;margin:0 0 14px">
+      Vi räknar täljaren <strong style="color:#ffd866">prior</strong> × <strong style="color:#6698ff">ordsannolikheter</strong> för varje klass — alltså den gula och blå delen av Bayes sats överst.
+    </p>`;
 
   classes.forEach(c => {
     const prior = cc[c] / total;
@@ -957,7 +956,7 @@ function toggleFormula() {
   const sumAll = productsPerClass.reduce((s, x) => s + x.product, 0);
 
   html += `
-    <div style="margin-top:14px;padding:14px 16px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px">
+    <div style="margin-top:14px;padding:14px 16px;background:var(--bg);border:1px solid var(--border2);border-radius:8px">
       <div style="font-size:11px;letter-spacing:.06em;color:var(--muted);margin-bottom:10px">Sista steget: gör om till procent</div>
       <div style="font-size:12px;color:var(--subtle);line-height:1.8;margin-bottom:12px">
         Produkterna ovan är pyttesmå tal som är svåra att jämföra. Vi delar därför varje klass tal med summan av båda — då blir svaren <strong style="color:var(--text)">procent som tillsammans blir 100%</strong>.
@@ -969,8 +968,7 @@ function toggleFormula() {
       </div>
     </div>`;
 
-  panel.innerHTML = html;
-  renderMath(panel);
+  return html;
 }
 
 function renderClassify() {
