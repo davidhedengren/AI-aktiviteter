@@ -119,6 +119,30 @@
   .math-post-nums .pn-ham { color:var(--ham); }
   .flip-note { margin-top:10px;font-size:11.5px;line-height:1.6;color:var(--subtle);background:rgba(255,216,102,.08);border:1px solid rgba(255,216,102,.25);border-radius:6px;padding:8px 12px; }
   .flip-note strong { color:var(--text); }
+  /* ── Dragkampsvyn (Modell) ── */
+  .tug-scale { display:flex;justify-content:space-between;align-items:center;font-size:10.5px;font-weight:700;letter-spacing:.03em;margin-bottom:10px;padding:0 2px; }
+  .tug-row { border-bottom:1px solid var(--border);background:transparent;transition:background .15s; }
+  .tug-row:last-child { border-bottom:none; }
+  .tug-row[open] { background:var(--surface2); }
+  .tug-row summary { display:grid;grid-template-columns:110px 1fr 44px 16px;gap:12px;align-items:center;padding:8px 6px;cursor:pointer;list-style:none; }
+  .tug-row summary::-webkit-details-marker { display:none; }
+  .tug-word { font-size:13px;font-weight:600;font-family:'JetBrains Mono',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right; }
+  .tug-bar { position:relative;height:18px; }
+  .tug-center { position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--border2);transform:translateX(-50%); }
+  .tug-fill { position:absolute;top:50%;transform:translateY(-50%);height:12px;border-radius:3px;transition:width .3s ease; }
+  .tug-fill.spam { border-radius:0 3px 3px 0; }
+  .tug-fill.ham  { border-radius:3px 0 0 3px; }
+  .tug-n { font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;text-align:right; }
+  .tug-expand { font-size:11px;color:var(--muted);transition:transform .2s;text-align:center; }
+  .tug-row[open] .tug-expand { transform:rotate(90deg); }
+  .tug-body { padding:4px 6px 14px;display:flex;flex-direction:column;gap:10px; }
+  .tug-detail { background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:9px 11px; }
+  .tug-detail > span { display:block;font-size:11px;font-weight:600;margin-bottom:5px; }
+  .tug-verdict { font-size:11.5px;color:var(--subtle);line-height:1.6; }
+  @media (max-width:600px){
+    .tug-row summary { grid-template-columns:80px 1fr 36px;gap:8px; }
+    .tug-expand { display:none; }
+  }
   /* ── Resan ord för ord ── */
   .journey-card .journey-lead { font-size:12px;color:var(--muted);line-height:1.7;margin:-4px 0 10px; }
   .journey-formula-note { font-size:11.5px;color:var(--subtle);line-height:1.7;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:9px 12px;margin-bottom:14px; }
@@ -413,25 +437,17 @@
 <section id="tab-model" class="tab-panel">
   <div id="model-empty" class="empty"><strong>Ingen modell ännu</strong>Lägg till träningsdata i fliken Träna.</div>
   <div id="model-content" style="display:none">
-    <div class="row" style="margin-bottom:18px;gap:8px">
-      <span style="font-size:12px;color:var(--muted)">Visa klass:</span>
-      <button class="chip chip-spam sel" id="mchip-spam" onclick="setModelClass('SPAM')">Skräppost</button>
-      <button class="chip chip-ham"      id="mchip-ham"  onclick="setModelClass('HAM')">Ej skräppost</button>
-    </div>
     <div class="card">
-      <span class="card-label" id="model-bar-label">P(ord | Skräppost) — toppord</span>
-      <p style="font-size:12px;color:var(--muted);line-height:1.7;margin:-4px 0 12px">
-        Orden modellen tycker är mest typiska för klassen, sorterade efter hur ofta de förekommer i träningsdatan.
+      <span class="card-label">Vad modellen lärt sig</span>
+      <p style="font-size:12px;color:var(--muted);line-height:1.7;margin:-4px 0 14px">
+        Varje ord lutar åt den klass där det är vanligast. Ju längre stapeln sträcker sig, desto starkare signal är ordet. Ord nära mitten förekommer ungefär lika ofta i båda klasser och säger därför nästan ingenting. Klicka på ett ord för de exakta sannolikheterna.
       </p>
-      <div id="model-bars"></div>
-    </div>
-    <div class="card">
-      <span class="card-label">Jämförelse: skräppost vs ej skräppost för samma ord</span>
-      <p style="font-size:12px;color:var(--muted);line-height:1.7;margin:-4px 0 12px">
-        Ett ord skiljer klasserna åt bara om staplarna är olika långa. Är de ungefär lika långa säger ordet inget om vilken klass mejlet tillhör.
-      </p>
-      <div id="compare-bars"></div>
-      <div class="legend" id="compare-legend"><span class="ls">Skräppost</span><span class="lh">Ej skräppost</span></div>
+      <div class="tug-scale">
+        <span style="color:var(--ham)">◀ ej skräppost</span>
+        <span style="color:var(--muted);font-weight:400">lutar åt</span>
+        <span style="color:var(--spam)">skräppost ▶</span>
+      </div>
+      <div id="tug-list"></div>
     </div>
   </div>
 </section>
@@ -487,7 +503,6 @@ const STOP = new Set([
 
 let examples = [];
 let newLabel = "SPAM";
-let modelClass = "SPAM";
 const DISPLAY = { SPAM: 'Skräppost', HAM: 'Ej skräppost' };
 let lastCalc = null;
 
@@ -614,52 +629,64 @@ function renderModel() {
   if (!hasData) return;
 
   const m = buildModel();
-  const { wc, totals, vs, classes } = m;
-  const cls = modelClass;
+  const { wc, totals, vs } = m;
+  const SPAM = 'SPAM', HAM = 'HAM';
 
-  ['SPAM','HAM'].forEach(c => {
-    const ch = document.getElementById(`mchip-${c.toLowerCase()}`);
-    ch.className = `chip chip-${c.toLowerCase()}${c === cls ? ' sel' : ''}`;
+  // Samla alla ord och beräkna lutning (log-förhållande mellan klasserna).
+  // +1-utjämningen gör att sällsynta ord inte kan dominera.
+  const vocab = new Set([...Object.keys(wc[SPAM] || {}), ...Object.keys(wc[HAM] || {})]);
+  const words = [];
+  vocab.forEach(w => {
+    const nS = (wc[SPAM] && wc[SPAM][w]) || 0;
+    const nH = (wc[HAM]  && wc[HAM][w])  || 0;
+    if (nS + nH < 2) return;                       // golv: kräver minst 2 förekomster totalt
+    const pS = (nS + 1) / (totals[SPAM] + vs);
+    const pH = (nH + 1) / (totals[HAM]  + vs);
+    const lean = Math.log(pS / pH);                // >0 lutar spam, <0 lutar ham
+    words.push({ w, nS, nH, pS, pH, lean });
   });
-  document.getElementById('model-bar-label').textContent = `P(ord | ${DISPLAY[cls]}) — toppord`;
 
-  const top = Object.entries(wc[cls] || {})
-    .map(([w, count]) => ({ w, count, prob: (count + 1) / (totals[cls] + vs) }))
-    .sort((a, b) => b.count - a.count).slice(0, 14);
+  // Mest spam-lutande och mest ham-lutande, sammanslaget och sorterat från mest spam → mest ham
+  const spamLean = words.filter(x => x.lean > 0).sort((a,b) => b.lean - a.lean).slice(0, 9);
+  const hamLean  = words.filter(x => x.lean < 0).sort((a,b) => a.lean - b.lean).slice(0, 9);
+  const all = [...spamLean, ...hamLean].sort((a,b) => b.lean - a.lean);
 
-  const maxCount = top[0]?.count || 1;
-  document.getElementById('model-bars').innerHTML = top.map(({w, count, prob}) => `
-    <div class="bar-row">
-      <span class="word">${escHtml(w)}</span>
-      <div class="bar-track">
-        <div class="bar-fill" style="width:${(count/maxCount)*100}%;background:${colorOf(cls)}"></div>
-      </div>
-      <span class="count">n=${count}</span>
-      <span class="prob" style="color:${colorOf(cls)}">${fmt4(prob)}</span>
-    </div>`).join('');
+  const maxLean = Math.max(1, ...all.map(x => Math.abs(x.lean)));
 
-  const topWords = Object.entries(wc[cls] || {})
-    .sort((a,b) => b[1]-a[1]).slice(0,10).map(([w]) => w);
-  const otherCls = classes.find(c => c !== cls) || (cls === 'SPAM' ? 'HAM' : 'SPAM');
-
-  document.getElementById('compare-legend').innerHTML =
-    `<span style="color:${colorOf(cls)}">${DISPLAY[cls]}</span><span style="color:${colorOf(otherCls)}">${DISPLAY[otherCls]}</span>`;
-
-  document.getElementById('compare-bars').innerHTML = topWords.map(w => {
-    const ps = (((wc[cls]      && wc[cls][w])      || 0) + 1) / (totals[cls]      + vs);
-    const ph = (((wc[otherCls] && wc[otherCls][w]) || 0) + 1) / (totals[otherCls] + vs);
-    const t  = ps + ph;
-    const clsPct   = (ps/t*100).toFixed(1);
-    const otherPct = (ph/t*100).toFixed(1);
+  document.getElementById('tug-list').innerHTML = all.map(x => {
+    const spam = x.lean > 0;
+    const frac = Math.abs(x.lean) / maxLean;        // 0..1
+    const widthPct = (frac * 50).toFixed(1);        // halva bredden max (center → kant)
+    const color = spam ? 'var(--spam)' : 'var(--ham)';
+    const total = x.nS + x.nH;
     return `
-    <div class="compare-row">
-      <span class="cword">${escHtml(w)}</span>
-      <div class="split-bar">
-        <div class="split-spam" style="width:${clsPct}%;background:${colorOf(cls)}">${ps > 0.005 ? ps.toFixed(3) : ''}</div>
-        <div class="split-ham"  style="width:${otherPct}%;background:${colorOf(otherCls)}">${ph > 0.005 ? ph.toFixed(3) : ''}</div>
+    <details class="tug-row">
+      <summary>
+        <span class="tug-word" style="color:${color}">${escHtml(x.w)}</span>
+        <span class="tug-bar">
+          <span class="tug-center"></span>
+          <span class="tug-fill ${spam ? 'spam' : 'ham'}" style="width:${widthPct}%;${spam ? 'left:50%' : `right:50%`};background:${color}"></span>
+        </span>
+        <span class="tug-n">n=${total}</span>
+        <span class="tug-expand">▸</span>
+      </summary>
+      <div class="tug-body">
+        <div class="tug-detail">
+          <span style="color:var(--spam)">Skräppost: hittades ${x.nS} gång${x.nS!==1?'er':''}</span>
+          ${tex(`P(\\text{${texEsc(x.w)}} \\mid \\text{Skräppost}) = \\frac{${x.nS}+1}{${totals[SPAM]}+${vs}} = ${x.pS.toFixed(5)}`, false)}
+        </div>
+        <div class="tug-detail">
+          <span style="color:var(--ham)">Ej skräppost: hittades ${x.nH} gång${x.nH!==1?'er':''}</span>
+          ${tex(`P(\\text{${texEsc(x.w)}} \\mid \\text{Ej skräppost}) = \\frac{${x.nH}+1}{${totals[HAM]}+${vs}} = ${x.pH.toFixed(5)}`, false)}
+        </div>
+        <div class="tug-verdict">Ordet är ${spam
+          ? `<strong style="color:var(--spam)">${(x.pS/x.pH).toFixed(1)}× vanligare</strong> i skräppost`
+          : `<strong style="color:var(--ham)">${(x.pH/x.pS).toFixed(1)}× vanligare</strong> i ej skräppost`} — därför lutar det ${spam ? 'höger' : 'vänster'}.</div>
       </div>
-    </div>`;
+    </details>`;
   }).join('');
+
+  renderMath(document.getElementById('tug-list'));
 }
 
 function classify() {
@@ -966,11 +993,6 @@ function addExample() {
 function deleteEx(i) {
   examples.splice(i, 1);
   refresh();
-}
-
-function setModelClass(cls) {
-  modelClass = cls;
-  renderModel();
 }
 
 function refresh() {
