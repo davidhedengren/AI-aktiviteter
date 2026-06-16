@@ -12,6 +12,8 @@
   gtag('config', 'G-ZDWXTZZBBR');
 </script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <style>
    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -104,7 +106,7 @@
   .math-word-box .mwb-cls { font-size:11px;letter-spacing:.04em;margin-bottom:8px;font-weight:700; }
   .math-word-box .mwb-found { font-size:12px;color:var(--subtle);margin-bottom:8px;line-height:1.6; }
   .math-word-box .mwb-found em { color:var(--text);font-style:normal; }
-  .math-word-box .mwb-formula { font-size:12px;background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:8px 10px;line-height:2.1;color:var(--subtle);font-family:'JetBrains Mono',monospace; }
+  .math-word-box .mwb-formula { font-size:12px;background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:10px;color:var(--subtle);overflow-x:auto; }
   .math-word-box .mwb-formula strong { color:#fff; }
   .math-word-box .mwb-formula .eq { color:var(--muted); }
   .math-posterior { margin-top:12px;padding-top:12px;border-top:1px solid var(--border); }
@@ -115,20 +117,66 @@
   .math-post-nums { display:flex;gap:20px;font-size:12px;font-weight:600; }
   .math-post-nums .pn-spam { color:var(--spam); }
   .math-post-nums .pn-ham { color:var(--ham); }
+  .flip-note { margin-top:10px;font-size:11.5px;line-height:1.6;color:var(--subtle);background:rgba(255,216,102,.08);border:1px solid rgba(255,216,102,.25);border-radius:6px;padding:8px 12px; }
+  .flip-note strong { color:var(--text); }
+  /* ── Resan ord för ord ── */
+  .journey-card .journey-lead { font-size:12px;color:var(--muted);line-height:1.7;margin:-4px 0 10px; }
+  .journey-formula-note { font-size:11.5px;color:var(--subtle);line-height:1.7;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:9px 12px;margin-bottom:14px; }
+  .journey-formula-note strong { color:var(--text); }
+  .journey-scale { display:flex;justify-content:space-between;font-size:10px;font-weight:600;letter-spacing:.03em;margin-bottom:8px;padding:0 2px; }
+  .wordstep { border:1px solid var(--border);border-radius:8px;margin-bottom:6px;background:var(--bg);overflow:hidden;transition:border-color .2s; }
+  .wordstep:hover { border-color:var(--border2); }
+  .wordstep[open] { border-color:var(--accent); background:var(--surface2); }
+  .wordstep.flipped { border-color:rgba(255,216,102,.4); }
+  .wordstep summary { display:grid;grid-template-columns:24px minmax(70px,1fr) auto 120px 16px;gap:10px;align-items:center;padding:9px 12px;cursor:pointer;list-style:none; }
+  .wordstep summary::-webkit-details-marker { display:none; }
+  .ws-num { font-size:10px;font-weight:700;color:var(--muted);font-family:'JetBrains Mono',monospace;text-align:center; }
+  .ws-word { font-size:13.5px;font-weight:600;color:var(--text);font-family:'JetBrains Mono',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+  .ws-shift { font-size:11px;font-weight:600;white-space:nowrap;text-align:right; }
+  .ws-meter { display:block; }
+  .ws-meter-track { position:relative;display:block;height:8px;border-radius:4px;
+    background:linear-gradient(90deg, var(--ham-bg), rgba(255,255,255,.04) 50%, var(--spam-bg)); border:1px solid var(--border); }
+  .ws-meter-marker { position:absolute;top:50%;width:11px;height:11px;border-radius:50%;background:var(--text);border:2px solid var(--bg);transform:translate(-50%,-50%);box-shadow:0 0 6px rgba(0,0,0,.5);transition:left .3s ease; }
+  .ws-expand { font-size:11px;color:var(--muted);transition:transform .2s;text-align:center; }
+  .wordstep[open] .ws-expand { transform:rotate(90deg); }
+  .wordstep-body { padding:4px 12px 12px;border-top:1px solid var(--border); }
+  .wd-formulas { display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px; }
+  .wd-formula { background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:10px 12px; }
+  .wd-formula-cls { font-size:10px;font-weight:700;letter-spacing:.04em;margin-bottom:6px; }
+  .wd-formula .katex { font-size:1.05em; }
+  .wd-formula-note { font-size:10.5px;color:var(--muted);line-height:1.5;margin-top:6px; }
+  .wd-after { font-size:11.5px;color:var(--subtle);margin-top:10px;padding-top:10px;border-top:1px solid var(--border); }
+  @media (max-width:600px){
+    .wordstep summary { grid-template-columns:20px 1fr auto;grid-row-gap:8px; }
+    .ws-meter { grid-column:1/-1; }
+    .ws-expand { display:none; }
+    .wd-formulas { grid-template-columns:1fr; }
+  }
   .formula-toggle { font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;background:transparent;border:1px solid var(--border);color:var(--subtle);border-radius:5px;padding:6px 14px;cursor:pointer;margin-top:14px;transition:all .2s;display:inline-block; }
+  .final-card { background:linear-gradient(135deg,rgba(77,128,255,.06),transparent);border-color:var(--border2); }
   .formula-toggle:hover { border-color:var(--accent);color:var(--text); }
   .formula-panel { margin-top:14px;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:8px;padding:16px;display:none; }
   .formula-panel.open { display:block; }
   .formula-panel .fp-title { font-size:11px;letter-spacing:.06em;color:var(--muted);margin-bottom:12px;font-weight:600; }
   .formula-panel .fp-abstract { font-size:12px;color:var(--subtle);margin-bottom:14px;line-height:1.8;padding-bottom:12px;border-bottom:1px solid var(--border); }
   .formula-panel .fp-abstract strong { color:var(--text); }
+  .fp-legend { display:flex;flex-direction:column;gap:7px;margin-top:14px;font-size:11.5px;color:var(--subtle);line-height:1.5; }
+  .fp-legend em { color:var(--muted);font-style:italic; }
+  .fp-dot { display:inline-block;width:9px;height:9px;border-radius:2px;vertical-align:middle;margin-right:4px; }
+  .fp-bridge { margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--subtle);line-height:1.6; }
   .fp-class-block { margin-bottom:14px; }
   .fp-class-block:last-child { margin-bottom:0; }
   .fp-class-name { font-size:12px;letter-spacing:.04em;margin-bottom:8px;font-weight:700; }
-  .fp-line { font-size:11px;color:var(--subtle);line-height:2;padding:8px 12px;background:var(--surface2);border-radius:5px;border:1px solid var(--border);overflow-x:auto;white-space:nowrap;font-family:'JetBrains Mono',monospace; }
+  .fp-line { font-size:11px;color:var(--subtle);padding:10px 12px;background:var(--surface2);border-radius:5px;border:1px solid var(--border);overflow-x:auto; }
   .fp-line strong { color:var(--text); }
   .fp-line .fp-op { color:var(--muted); }
   .fp-result { font-size:12px;margin-top:8px;padding:8px 12px;border-radius:5px;border:1px solid;display:flex;justify-content:space-between;align-items:center; }
+  /* KaTeX-anpassning till labbets tema */
+  .tex { color:var(--text); }
+  .katex { font-size:1.04em; }
+  .katex-display { margin:0; text-align:left; }
+  .mwb-formula .katex-display, .fp-line .katex-display { white-space:normal; }
+  .mpb-frac .katex { font-size:1em; }
   .ex-list { max-height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:5px;padding-right:2px; }
   .ex-list::-webkit-scrollbar { width:4px; }
   .ex-list::-webkit-scrollbar-track { background:transparent; }
@@ -199,6 +247,21 @@
   .collapse-body.open { display:block; }
   @keyframes fadeIn { from { opacity:0;transform:translateY(-4px); } to { opacity:1;transform:none; } }
   .tab-panel.active { animation:fadeIn .2s ease; }
+  /* Intro-popup */
+  .overlay { position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center; }
+  .overlay.show { display:flex; }
+  .overlay-card { background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:26px 30px;max-width:560px;width:92%;max-height:90vh;overflow-y:auto; }
+  .overlay-card h2 { font-size:1.2em;font-weight:700;margin-bottom:10px;text-align:center; }
+  .overlay-card h2 span { color:var(--accent2); }
+  .overlay-card .o-lead { font-size:0.95em;color:var(--text);line-height:1.8;margin-bottom:20px; }
+  .overlay-card .o-step { display:flex;flex-direction:column;gap:4px;margin-bottom:16px; }
+  .overlay-card .o-step .o-step-h { font-size:0.92em;font-weight:700;color:var(--text);letter-spacing:.02em; }
+  .overlay-card .o-step p { font-size:0.88em;color:var(--muted);line-height:1.7;margin:0; }
+  .overlay-card .o-step strong { color:var(--text); }
+  .overlay-btn { display:block;width:100%;padding:12px;margin-top:8px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s; }
+  .overlay-btn:hover { background:#3d6de6; }
+  .info-btn { background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:5px 12px;font-family:'DM Sans',sans-serif;font-size:0.78em;font-weight:600;cursor:pointer;transition:.2s; }
+  .info-btn:hover { border-color:var(--accent2);color:var(--text); }
   @media (max-width:700px) {
     .two-col { grid-template-columns:1fr; }
     .bar-row { grid-template-columns:80px 1fr 44px 68px; }
@@ -213,58 +276,39 @@
  <a class="back-link" href="/">← AI-aktiviteter</a>
  <h1>Naïve <span>Bayes</span>-labbet</h1>
  <p>Ett interaktivt klassificeringslaboratorium</p>
+ <button class="info-btn" style="position:absolute;top:50%;right:16px;transform:translateY(-50%)" onclick="openIntro()">★ Instruktion</button>
 </header>
 
 <nav class="tabs">
-  <button class="tab-btn active" data-tab="intro">★ Instruktion</button>
-  <button class="tab-btn"        data-tab="train">① Träna</button>
+  <button class="tab-btn active" data-tab="train">① Träna</button>
   <button class="tab-btn"        data-tab="model">② Modell</button>
   <button class="tab-btn"        data-tab="classify">③ Klassificera</button>
 </nav>
 
-<section id="tab-intro" class="tab-panel active">
-  <div style="max-width:680px;margin:0 auto;padding:8px 0 32px">
-    <p style="font-size:15px;color:var(--text);line-height:1.9;margin-bottom:28px">
+<div class="overlay show" id="introOverlay">
+  <div class="overlay-card">
+    <h2>Naïve <span>Bayes</span>-labbet</h2>
+    <p class="o-lead">
       I det här labbet tränar du en <strong>Naïve Bayes-klassificerare</strong> — samma typ av algoritm som används i spamfilter.
       Du bestämmer vad modellen lär sig, och kan sedan se hur matematiken bakom algoritmen fungerar när den klassificerar nya mejl.
     </p>
-    <div style="border-left:2px solid var(--border);padding-left:20px;margin-bottom:28px">
-      <p style="font-size:13px;color:var(--subtle);line-height:1.8;font-style:italic">
-        Algoritmen kallas <em>naïve</em> (naiv) för att den antar att varje ord i ett mejl är oberoende av alla andra ord.
-        I verkligheten stämmer det sällan, men förenklingen gör matematiken hanterbar och modellen förvånansvärt träffsäker.
-      </p>
+    <div class="o-step">
+      <div class="o-step-h">① Träna</div>
+      <p>Klicka på <strong>⚡ Generera</strong> så fylls modellen med exempelmejl automatiskt. Du styr hur många och hur fördelningen mellan skräppost och vanliga mejl ser ut.</p>
     </div>
-    <div style="display:flex;flex-direction:column;gap:22px;margin-bottom:32px">
-      <div>
-        <div style="font-size:13px;font-weight:700;color:var(--text);letter-spacing:.02em;margin-bottom:6px">① Träna</div>
-        <p style="font-size:13px;color:var(--muted);line-height:1.8">
-          Klicka på <strong style="color:var(--text)">⚡ Generera</strong> så fylls modellen med exempelmejl automatiskt.
-          Du kan styra hur många och hur fördelningen mellan skräppost och vanliga mejl ser ut.
-        </p>
-      </div>
-      <div>
-        <div style="font-size:13px;font-weight:700;color:var(--text);letter-spacing:.02em;margin-bottom:6px">② Modell</div>
-        <p style="font-size:13px;color:var(--muted);line-height:1.8">
-          Här ser du vad modellen lärt sig — vilka ord som är mest typiska för varje klass och deras sannolikheter.
-          Jämförelsevisningen visar samma ord för båda klasser sida vid sida, så du ser vilka ord som verkligen skiljer dem åt.
-        </p>
-      </div>
-      <div>
-        <div style="font-size:13px;font-weight:700;color:var(--text);letter-spacing:.02em;margin-bottom:6px">③ Klassificera</div>
-        <p style="font-size:13px;color:var(--muted);line-height:1.8">
-          Skriv in ett mejl och tryck Enter. Modellen visar hur texten tokeniseras, hur sannolikheten förskjuts ord för ord,
-          och hur säker den är på sin klassificering. Klicka på <strong style="color:var(--text)">Visa hela beräkningen</strong>
-          för att se Bayes formel med dina egna siffror.
-        </p>
-      </div>
+    <div class="o-step">
+      <div class="o-step-h">② Modell</div>
+      <p>Se vad modellen lärt sig — vilka ord som är mest typiska för varje klass. Jämförelsen visar samma ord för båda klasser sida vid sida, så du ser vilka ord som verkligen skiljer dem åt.</p>
     </div>
-    <button class="btn" style="padding:11px 28px;font-size:14px" onclick="goToTrain()">
-      Kom igång →
-    </button>
+    <div class="o-step">
+      <div class="o-step-h">③ Klassificera</div>
+      <p>Skriv in ett mejl och tryck Enter. Modellen visar hur texten tokeniseras, hur sannolikheten förskjuts ord för ord, och hur säker den är. Klicka på <strong>Visa hela beräkningen</strong> för att se Bayes formel med dina egna siffror.</p>
+    </div>
+    <button class="overlay-btn" onclick="closeIntro()">Kom igång →</button>
   </div>
-</section>
+</div>
 
-<section id="tab-train" class="tab-panel">
+<section id="tab-train" class="tab-panel active">
   <div class="two-col">
     <div>
       <div class="card">
@@ -408,13 +452,9 @@
         <div class="verdict-class" id="verdict-class">—</div>
         <div class="verdict-probs" id="verdict-probs"></div>
         <div class="confidence-bar-wrap" id="confidence-wrap"></div>
-        <button class="formula-toggle" onclick="toggleFormula()" id="formula-toggle-btn">
-          ƒ Visa hela beräkningen
-        </button>
-        <div class="formula-panel" id="formula-panel"></div>
       </div>
       <div class="card" id="tokenization-card">
-        <span class="card-label">Steg 1 — tokenisering och filtrering</span>
+        <span class="card-label">Tokenisering och filtrering</span>
         <p style="font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:12px">
           Innan modellen kan räkna sannolikheter måste texten omvandlas till enskilda ord — det kallas <strong style="color:var(--text)">tokenisering</strong>.
           Ord som är för vanliga för att säga något om klassen (stoppord) och mycket korta ord filtreras sedan bort.
@@ -502,6 +542,46 @@ function getClassifySteps(text, model) {
 function pct(x) { return (x * 100).toFixed(1) + '%'; }
 function fmt4(x) { return x.toFixed(4); }
 function colorOf(cls) { return cls === 'SPAM' ? 'var(--spam)' : 'var(--ham)'; }
+
+// Gör en textsträng säker att stoppa in i \text{} i LaTeX.
+function texEsc(str) {
+  return String(str).replace(/[\\{}$&#%_^~]/g, m => ({
+    '\\':'\\textbackslash{}','{':'\\{','}':'\\}','$':'\\$','&':'\\&',
+    '#':'\\#','%':'\\%','_':'\\_','^':'\\textasciicircum{}','~':'\\textasciitilde{}'
+  }[m]));
+}
+// Konverterar ett tal till LaTeX-exponentialnotation: 1.23e-47 -> 1.23 \times 10^{-47}
+function sciTex(x, digits = 3) {
+  const s = Number(x).toExponential(digits);          // "1.230e-47"
+  const m = s.match(/^(-?\d+(?:\.\d+)?)e([+-]\d+)$/);
+  if (!m) return s.replace('%', '\\%');
+  const mant = m[1];
+  const exp  = parseInt(m[2], 10);
+  return `${mant} \\times 10^{${exp}}`;
+}
+// Procent säkert i LaTeX (escapar %).
+function pctTex(x) { return pct(x).replace('%', '\\%'); }
+// Producerar en platshållare som renderMath() senare fyller med KaTeX.
+// display=true ger centrerad blockformel, annars inline.
+function tex(latex, display) {
+  const d = display ? ' data-display="1"' : '';
+  return `<span class="tex" data-tex="${escHtml(latex)}"${d}></span>`;
+}
+// Renderar alla .tex-platshållare inom ett element via KaTeX.
+function renderMath(root) {
+  if (typeof katex === 'undefined') return; // CDN ej laddat – platshållare förblir tomma
+  (root || document).querySelectorAll('.tex').forEach(el => {
+    if (el.dataset.rendered) return;
+    try {
+      katex.render(el.dataset.tex, el, {
+        displayMode: el.dataset.display === '1',
+        throwOnError: false,
+        colorIsTextColor: true,
+      });
+      el.dataset.rendered = '1';
+    } catch (e) { el.textContent = el.dataset.tex; }
+  });
+}
 
 function renderExList() {
   const el = document.getElementById('ex-list');
@@ -592,9 +672,6 @@ function classify() {
 
   lastCalc = { m, steps, tokens, text };
 
-  document.getElementById('formula-panel').classList.remove('open');
-  document.getElementById('formula-toggle-btn').textContent = 'ƒ Visa hela beräkningen';
-
   const final = steps[steps.length - 1];
   const pred  = Object.entries(final.posteriors).sort((a,b) => b[1]-a[1])[0][0];
   const conf  = final.posteriors[pred] || 0;
@@ -635,11 +712,10 @@ function classify() {
 
   let html = `
   <div class="card" style="margin-bottom:12px">
-    <span class="card-label">Matematik steg för steg</span>
+    <span class="card-label">Matematiken bakom Naïve Bayes</span>
     <p style="font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:0">
-      Naïve Bayes multiplicerar ihop sannolikheter från träningsdatan.
-      Modellen börjar med hur vanliga klasserna är (prior) och uppdaterar sedan för varje ord i texten.
-      Alla siffror nedan kommer direkt ur träningsdatan.
+      Modellen börjar med hur vanliga klasserna är (priorn) och tar sedan in ett ord i taget.
+      För varje ord justeras sannolikheten åt det håll ordet pekar. Alla siffror kommer direkt ur träningsdatan.
     </p>
   </div>`;
 
@@ -647,8 +723,8 @@ function classify() {
   html += `
   <div class="math-step">
     <div class="math-step-header">
-      <span class="math-step-num">Steg 0</span>
-      <span class="math-step-word">Startpunkt — hur vanliga är klasserna?</span>
+      <span class="math-step-num">Start</span>
+      <span class="math-step-word">Hur vanliga är klasserna?</span>
     </div>
     <div class="math-step-body">
       <p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.6">
@@ -662,7 +738,7 @@ function classify() {
           <div class="math-prior-box">
             <div class="mpb-cls" style="color:${colorOf(c)}">${DISPLAY[c]}</div>
             <div class="mpb-frac">
-              P(${DISPLAY[c]}) = <strong>${n} mejl</strong> / <strong>${total} totalt</strong> = <strong>${p.toFixed(2)}</strong>
+              ${tex(`P(\\text{${DISPLAY[c]}}) = \\frac{${n}}{${total}} = ${p.toFixed(2)}`, true)}
             </div>
             <div style="font-size:11px;color:var(--muted)">${n} av dina ${total} träningsexempel är ${DISPLAY[c].toLowerCase()}</div>
             <div class="mpb-bar" style="background:${colorOf(c)};width:${p*100}%;max-width:100%"></div>
@@ -670,7 +746,7 @@ function classify() {
         }).join('')}
       </div>
       <div class="math-posterior" style="margin-top:10px">
-        <div class="math-posterior-label">Fördelning efter steg 0</div>
+        <div class="math-posterior-label">Fördelning efter starten</div>
         <div class="math-post-bar">
           <div class="pb-spam" style="width:${(priorPost.SPAM||0)*100}%"></div>
           <div class="pb-ham"  style="width:${(priorPost.HAM||0)*100}%"></div>
@@ -686,71 +762,91 @@ function classify() {
     html += `<div class="card"><p style="font-size:12px;color:var(--muted)">Inga meningsbärande ord hittades i texten efter filtrering av stoppord.</p></div>`;
   }
 
-  steps.slice(1).forEach((step, idx) => {
-    const prevPost = steps[idx].posteriors;
-    const post     = step.posteriors;
-    const winner   = Object.entries(post).sort((a,b) => b[1]-a[1])[0][0];
-    const prevWin  = Object.entries(prevPost).sort((a,b) => b[1]-a[1])[0][0];
-    const flipped  = winner !== prevWin;
-    const spamShift = ((post.SPAM||0) - (prevPost.SPAM||0)) * 100;
-    const shiftTxt  = spamShift > 0
-      ? `↑ ${Math.abs(spamShift).toFixed(1)}% mot Skräppost`
-      : spamShift < 0
-        ? `↓ ${Math.abs(spamShift).toFixed(1)}% mot Ej skräppost`
-        : 'ingen förändring';
+  // ── Resan ord för ord: kompakt lista med förskjutningsmätare ──
+  if (tokens.length > 0) {
+    let rows = '';
+    steps.slice(1).forEach((step, idx) => {
+      const prevPost = steps[idx].posteriors;
+      const post     = step.posteriors;
+      const winner   = Object.entries(post).sort((a,b) => b[1]-a[1])[0][0];
+      const prevWin  = Object.entries(prevPost).sort((a,b) => b[1]-a[1])[0][0];
+      const flipped  = winner !== prevWin;
+      const spamPct  = (post.SPAM || 0) * 100;          // markörens läge: 0=ham, 100=spam
+      const spamShift = ((post.SPAM||0) - (prevPost.SPAM||0)) * 100;
+      const dir = spamShift > 0 ? 'spam' : spamShift < 0 ? 'ham' : 'none';
+      const shiftLabel = dir === 'spam'
+        ? '→ mot skräppost'
+        : dir === 'ham'
+          ? '← mot ej skräppost'
+          : 'oförändrat';
+      const shiftColor = dir === 'spam' ? 'var(--spam)' : dir === 'ham' ? 'var(--ham)' : 'var(--muted)';
+
+      // formeldetaljer per klass (utfällbart)
+      const formulaRows = classes.map(c => {
+        const wi = step.wi[c], n_ord = wi.count, n_tot = totals[c];
+        const unseen = n_ord === 0;
+        return `
+          <div class="wd-formula">
+            <div class="wd-formula-cls" style="color:${colorOf(c)}">${DISPLAY[c]}</div>
+            ${tex(`P(\\text{${texEsc(step.word)}} \\mid \\text{${DISPLAY[c]}}) = \\frac{\\text{antal}+1}{\\text{totalt}+|V|} = \\frac{${n_ord}+1}{${n_tot}+${vs}} = ${wi.prob.toFixed(5)}`, false)}
+            <div class="wd-formula-note">${unseen
+              ? `Ordet fanns inte i ${DISPLAY[c].toLowerCase()} — Laplace-utjämning (vi lägger till 1 i täljaren) ger en liten chans.`
+              : `Hittades ${n_ord} gång${n_ord!==1?'er':''} i ${DISPLAY[c].toLowerCase()}.`}</div>
+          </div>`;
+      }).join('');
+
+      rows += `
+      <details class="wordstep${flipped ? ' flipped' : ''}">
+        <summary>
+          <span class="ws-num">${idx + 1}</span>
+          <span class="ws-word">${escHtml(step.word)}</span>
+          <span class="ws-shift" style="color:${shiftColor}">${shiftLabel}</span>
+          <span class="ws-meter">
+            <span class="ws-meter-track">
+              <span class="ws-meter-marker" style="left:${spamPct}%"></span>
+            </span>
+          </span>
+          <span class="ws-expand">▸</span>
+        </summary>
+        <div class="wordstep-body">
+          ${flipped ? `<div class="flip-note">⚡ <strong>Det här ordet vände beslutet</strong> — från ${DISPLAY[prevWin].toLowerCase()} till ${DISPLAY[winner].toLowerCase()}.</div>` : ''}
+          <div class="wd-formulas">${formulaRows}</div>
+          <div class="wd-after">Modellen står nu på <strong style="color:${colorOf('SPAM')}">${pct(post.SPAM||0)} skräppost</strong> / <strong style="color:${colorOf('HAM')}">${pct(post.HAM||0)} ej skräppost</strong>.</div>
+        </div>
+      </details>`;
+    });
 
     html += `
-    <div class="math-step">
-      <div class="math-step-header">
-        <span class="math-step-num">Steg ${idx + 1}</span>
-        <span class="math-step-word">"${escHtml(step.word)}"</span>
-        <span class="math-step-shift" style="color:${colorOf(winner)};border-color:${colorOf(winner)}20;background:${colorOf(winner)}10">
-          ${flipped ? '⚡ ' : ''}${shiftTxt}
-        </span>
+    <div class="card journey-card">
+      <span class="card-label">Ord för ord</span>
+      <p class="journey-lead">Varje ord justerar modellens bedömning åt vänster (ej skräppost) eller höger (skräppost). Klicka på ett ord för att se uträkningen bakom.</p>
+      <div class="journey-formula-note">
+        Sannolikheten för varje ord räknas som <strong>(antal + 1) / (totalt i klassen + |V|)</strong>, där
+        <strong style="color:${colorOf('SPAM')}">skräppost har ${totals.SPAM} ord</strong>,
+        <strong style="color:${colorOf('HAM')}">ej skräppost har ${totals.HAM} ord</strong>, och ordförrådet |V| = <strong>${vs} unika ord</strong>.
       </div>
-      <div class="math-step-body">
-        <div class="math-word-grid">
-          ${classes.map(c => {
-            const wi      = step.wi[c];
-            const n_ord   = wi.count;
-            const n_tot   = totals[c];
-            const teller  = n_ord + 1;
-            const namnare = n_tot + vs;
-            const unseen  = n_ord === 0;
-            return `
-            <div class="math-word-box">
-              <div class="mwb-cls" style="color:${colorOf(c)}">${DISPLAY[c]}</div>
-              <div class="mwb-found">
-                ${unseen
-                  ? `Ordet hittades <em><strong style="color:#ff9080">inte</strong></em> i ${DISPLAY[c].toLowerCase()}-mejl under träningen. Laplace-utjämning (+1) ger det en liten sannolikhet.`
-                  : `Ordet hittades <em><strong style="color:${colorOf(c)}">${n_ord} gång${n_ord !== 1 ? 'er' : ''}</strong></em> i ${DISPLAY[c].toLowerCase()}-mejl under träningen.`}
-              </div>
-              <div class="mwb-formula">
-                P("${escHtml(step.word)}" | ${DISPLAY[c]})<br>
-                <span class="eq">= (antal i klass + 1) / (totalt i klass + |V|)</span><br>
-                <span class="eq">= (${n_ord} + 1) / (${n_tot} + ${vs})</span><br>
-                <span class="eq">= ${teller} / ${namnare}</span><br>
-                = <strong>${wi.prob.toFixed(5)}</strong>
-              </div>
-            </div>`;
-          }).join('')}
-        </div>
-        <div class="math-posterior">
-          <div class="math-posterior-label">Fördelning efter steg ${idx + 1}${flipped ? ` — <span style="color:#fbbf24">⚡ klassbyte</span> <span style="color:var(--muted);font-size:10px;font-style:italic">(detta ord vände majoritetssannolikheten från ${DISPLAY[prevWin]} till ${DISPLAY[winner]})</span>` : ''}</div>
-          <div class="math-post-bar">
-            <div class="pb-spam" style="width:${(post.SPAM||0)*100}%"></div>
-            <div class="pb-ham"  style="width:${(post.HAM||0)*100}%"></div>
-          </div>
-          <div class="math-post-nums">
-            ${classes.map(c => `<span class="pn-${c.toLowerCase()}">${DISPLAY[c]}: <strong>${pct(post[c]||0)}</strong></span>`).join('')}
-          </div>
-        </div>
-      </div>
+      <div class="journey-scale"><span style="color:var(--ham)">◀ ej skräppost</span><span style="color:var(--spam)">skräppost ▶</span></div>
+      ${rows}
     </div>`;
-  });
+  }
+
+  // Avslutning direkt efter orden: knyt ihop → slutgiltigt svar, med formelknappen här
+  html += `
+  <div class="card final-card" style="margin-top:12px">
+    <p style="font-size:12.5px;color:var(--subtle);line-height:1.75;margin-bottom:4px">
+      Modellen har nu vägt in alla ord. Det slutgiltiga svaret får den genom att <strong style="color:var(--text)">multiplicera ihop priorn med alla ordsannolikheter</strong> — en produkt per klass. Den klass som får störst produkt vinner.
+    </p>
+    <p style="font-size:12.5px;color:var(--muted);line-height:1.75;margin-bottom:14px">
+      Vill du se hela uträkningen med dina egna siffror?
+    </p>
+    <button class="formula-toggle" onclick="toggleFormula()" id="formula-toggle-btn" style="margin-top:0">
+      ƒ Visa hela beräkningen
+    </button>
+    <div class="formula-panel" id="formula-panel"></div>
+  </div>`;
 
   html += `
-  <details class="laplace-details" style="margin-top:4px">
+  <details class="laplace-details" style="margin-top:12px">
     <summary>Varför lägger vi till +1? (Laplace-utjämning)</summary>
     <div class="laplace-body">
       <p style="font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:10px">
@@ -770,6 +866,7 @@ function classify() {
 
   document.getElementById('math-breakdown').innerHTML = html;
   document.getElementById('classify-result').style.display = 'block';
+  renderMath(document.getElementById('math-breakdown'));
 }
 
 function toggleFormula() {
@@ -786,15 +883,14 @@ function toggleFormula() {
   let html = `
     <div class="fp-title">Naïve Bayes klassificeringsformel</div>
     <div class="fp-abstract">
-      Bayes sats säger: <strong>P(A|B) = P(B|A) × P(A) / P(B)</strong><br>
-      I vårt fall: <strong>P(klass | text) = P(text | klass) × P(klass) / P(text)</strong><br><br>
-      <span style="color:var(--subtle)">
-        P(text | klass) är produkten av alla ordssannolikheter.<br>
-        P(klass) är priorsannolikheten (hur vanlig klassen är i träningsdatan).<br>
-        P(text) — nämnaren — är densamma för alla klasser och behöver aldrig beräknas separat.
-        Istället <em>normaliserar</em> vi: vi delar varje klassvärde med summan av alla klassvärden,
-        så att de summerar till 100%.
-      </span>
+      <div style="margin-bottom:8px">Bayes sats säger:</div>
+      ${tex(`P(\\text{klass} \\mid \\text{text}) = \\frac{\\textcolor{#6698ff}{P(\\text{text} \\mid \\text{klass})}\\;\\textcolor{#ffd866}{P(\\text{klass})}}{\\textcolor{#9aa6c4}{P(\\text{text})}}`, true)}
+      <div class="fp-legend">
+        <div><span class="fp-dot" style="background:#6698ff"></span> <strong style="color:#6698ff">P(text | klass)</strong> — alla ordens sannolikheter multiplicerade. <em>Detta är talen vi beräknade ovan.</em></div>
+        <div><span class="fp-dot" style="background:#ffd866"></span> <strong style="color:#ffd866">P(klass)</strong> — priorn, hur vanlig klassen är i träningsdatan.</div>
+        <div><span class="fp-dot" style="background:#9aa6c4"></span> <strong style="color:#9aa6c4">P(text)</strong> — samma för båda klasser, så vi behöver inte räkna den. I stället normaliserar vi på slutet.</div>
+      </div>
+      <div class="fp-bridge">Vi räknar alltså täljaren <strong style="color:#ffd866">prior</strong> × <strong style="color:#6698ff">ordsannolikheter</strong> för varje klass:</div>
     </div>`;
 
   classes.forEach(c => {
@@ -806,22 +902,19 @@ function toggleFormula() {
     });
     const factors = [prior, ...wordFactors.map(f => f.prob)];
     const product = factors.reduce((a, b) => a * b, 1);
-    const termStr = wordFactors.map(f =>
-      `<strong>${f.prob.toFixed(5)}</strong><span class="fp-op"> [${escHtml(f.w)}: (${f.count}+1)/(${totals[c]}+${vs})]</span>`
-    ).join(`<span class="fp-op"> × </span>`);
+    const priorTex = `\\underbrace{\\textcolor{#ffd866}{${prior.toFixed(5)}}}_{P(\\text{${DISPLAY[c]}})}`;
+    const termsTex = wordFactors.map(f =>
+      `\\underbrace{\\textcolor{#6698ff}{${f.prob.toFixed(5)}}}_{\\text{${texEsc(f.w)}}}`
+    ).join(' \\cdot ');
+    const lineTex = tokens.length > 0
+      ? `${priorTex} \\cdot ${termsTex} = ${sciTex(product, 4)}`
+      : `${priorTex}`;
 
     html += `
     <div class="fp-class-block">
       <div class="fp-class-name" style="color:${colorOf(c)}">${DISPLAY[c]}</div>
       <div class="fp-line">
-        P(text | ${DISPLAY[c]}) × P(${DISPLAY[c]})<br>
-        = <strong>${prior.toFixed(5)}</strong><span class="fp-op"> [${cc[c]} mejl / ${total} totalt]</span>
-        ${tokens.length > 0 ? `<span class="fp-op"> × </span>${termStr}` : ''}
-        ${tokens.length > 0 ? `<br><span class="fp-op">= produkten (före normalisering): </span><strong>${product.toExponential(4)}</strong>` : ''}
-      </div>
-      <div class="fp-result" style="border-color:${colorOf(c)}40;background:${colorOf(c)}12;color:${colorOf(c)}">
-        <span style="color:var(--subtle)">Normaliserat resultat: <span style="font-size:11px;color:var(--muted)">${product.toExponential(3)} delat på summan av alla produkter</span></span>
-        <strong style="font-size:16px">${pct(final.posteriors[c] || 0)}</strong>
+        ${tex(lineTex, true)}
       </div>
     </div>`;
   });
@@ -835,23 +928,19 @@ function toggleFormula() {
 
   html += `
     <div style="margin-top:14px;padding:14px 16px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px">
-      <div style="font-size:11px;letter-spacing:.06em;color:var(--muted);margin-bottom:12px">Normaliseringssteget</div>
-      <div style="font-size:12px;color:var(--subtle);line-height:2">
-        Vi summerar produkterna för alla klasser och delar sedan varje produkt på den summan.<br>
-        Det gör att svaren summerar till 100% — vi får procent istället för extremt små tal.<br><br>
-        Summa av alla produkter = ${productsPerClass.map(x=>`<strong style="color:var(--text)">${x.product.toExponential(3)}</strong>`).join(' + ')} = <strong style="color:var(--text)">${sumAll.toExponential(3)}</strong><br><br>
-        ${productsPerClass.map(x => `
-          P(${DISPLAY[x.c]} | text) = ${x.product.toExponential(3)} / ${sumAll.toExponential(3)} = <strong style="color:${colorOf(x.c)};font-size:14px">${pct(final.posteriors[x.c]||0)}</strong>
-        `).join('<br>')}
+      <div style="font-size:11px;letter-spacing:.06em;color:var(--muted);margin-bottom:10px">Sista steget: gör om till procent</div>
+      <div style="font-size:12px;color:var(--subtle);line-height:1.8;margin-bottom:12px">
+        Produkterna ovan är pyttesmå tal som är svåra att jämföra. Vi delar därför varje klass tal med summan av båda — då blir svaren <strong style="color:var(--text)">procent som tillsammans blir 100%</strong>.
       </div>
-    </div>
-    <div style="font-size:12px;color:var(--muted);margin-top:12px;line-height:1.8;padding:10px 14px;background:rgba(255,255,255,.03);border-radius:6px;border:1px solid var(--border)">
-      💡 Produkterna är extremt små tal eftersom vi multiplicerat ihop många sannolikheter nära noll.
-      Det är normalt — det är storleken <em>relativt varandra</em> som avgör klassificeringen, inte det absoluta värdet.
-      Datorn räknar internt med logaritmer för att undvika precisionsproblem, och konverterar tillbaka i sista steget.
+      <div>
+        ${productsPerClass.map(x => tex(
+          `P(\\text{${DISPLAY[x.c]}} \\mid \\text{text}) = \\frac{${sciTex(x.product, 3)}}{${sciTex(sumAll, 3)}} = ${pctTex(final.posteriors[x.c]||0)}`,
+          true)).join('')}
+      </div>
     </div>`;
 
   panel.innerHTML = html;
+  renderMath(panel);
 }
 
 function renderClassify() {
@@ -1283,11 +1372,11 @@ function generateData(keepExisting = false) {
   status.textContent = `✓ Lade till ${picked.length} exempel — ${nSpam} skräppost (${pctSpam}%) + ${nHam} ej skräppost (${100-pctSpam}%)${keepExisting ? ' — behöll befintliga' : ''}.`;
 }
 
-function goToTrain() {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelector('[data-tab="train"]').classList.add('active');
-  document.getElementById('tab-train').classList.add('active');
+function closeIntro() {
+  document.getElementById('introOverlay').classList.remove('show');
+}
+function openIntro() {
+  document.getElementById('introOverlay').classList.add('show');
 }
 
 document.querySelectorAll('.tab-btn').forEach(btn => {
