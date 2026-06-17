@@ -975,7 +975,7 @@ function classify() {
             <div class="wd-formula-cls" style="color:${colorOf(c)}">${DISPLAY[c]}</div>
             ${tex(`P(\\text{${texEsc(step.word)}} \\mid \\text{${DISPLAY[c]}}) = \\frac{\\text{antal}+1}{\\text{totalt}+|V|} = \\frac{${n_ord}+1}{${n_tot}+${vs}} = ${wi.prob.toFixed(5)}`, false)}
             <div class="wd-formula-note">${unseen
-              ? `Ordet fanns inte i ${DISPLAY[c].toLowerCase()} — Laplace-utjämning (vi lägger till 1 i täljaren) ger ändå en liten sannolikhet större än noll.`
+              ? `Ordet fanns inte i ${DISPLAY[c].toLowerCase()} under träningen.`
               : `Hittades ${n_ord} gång${n_ord!==1?'er':''} i ${DISPLAY[c].toLowerCase()}.`}</div>
           </div>`;
       }).join('');
