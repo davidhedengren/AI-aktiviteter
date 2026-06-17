@@ -38,6 +38,8 @@
   .tab-panel { display:none;padding:20px 28px; }
   .tab-panel.active { display:block; }
   .two-col { display:grid;grid-template-columns:1fr 1fr;gap:20px; }
+  .train-top { max-width:640px;margin:0 auto 14px; }
+  .train-list .ex-list { max-height:300px; }
   .card { background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:14px;box-shadow:0 2px 12px rgba(0,0,0,.3); }
   .card:last-child { margin-bottom:0; }
   .card-label { font-size:0.78em;font-weight:700;letter-spacing:.01em;color:var(--subtle);margin-bottom:12px;display:block; }
@@ -366,8 +368,7 @@
 </div>
 
 <section id="tab-train" class="tab-panel active">
-  <div class="two-col">
-    <div>
+  <div class="train-top">
       <div class="card">
         <span class="card-label">Skapa träningsdata</span>
         <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.7">
@@ -415,9 +416,9 @@
         </div>
         <div class="vocab-note" id="vocab-note">Ordförråd: — ord</div>
       </div>
-    </div>
+  </div>
 
-    <div class="card" style="margin-bottom:0">
+  <div class="card train-list" style="margin-bottom:0">
       <span class="card-label">
         Träningsdata
         <span class="chip chip-spam sel" style="margin-left:8px;padding:2px 8px;font-size:10px" id="badge-spam">0</span>
@@ -426,7 +427,6 @@
       </span>
       <div class="ex-list" id="ex-list"></div>
     </div>
-  </div>
 
   <div style="margin-top:20px">
     <button class="collapse-toggle" id="own-toggle" onclick="toggleOwn()">
