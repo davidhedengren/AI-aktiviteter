@@ -161,6 +161,10 @@
   .journey-card .journey-lead { font-size:12px;color:var(--muted);line-height:1.7;margin:-4px 0 10px; }
   .journey-formula-note { font-size:11.5px;color:var(--subtle);line-height:1.7;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:9px 12px;margin-bottom:14px; }
   .journey-formula-note strong { color:var(--text); }
+  .gen-formula { background:var(--bg);border:1px solid var(--border2);border-radius:8px;padding:14px 16px;margin:0 0 14px; }
+  .gen-formula .katex { font-size:1.15em; }
+  .gen-formula-note { font-size:11.5px;color:var(--subtle);line-height:1.7;margin:10px 0 0;text-align:left; }
+  .gen-formula-note strong { color:var(--text); }
   .journey-summary { font-size:12.5px;color:var(--subtle);line-height:1.75;margin:14px 0 0;padding-top:14px;border-top:1px solid var(--border); }
   .journey-summary strong { color:var(--text); }
   .journey-scale { display:flex;justify-content:space-between;font-size:10px;font-weight:600;letter-spacing:.03em;margin-bottom:8px;padding:0 2px; }
@@ -309,6 +313,11 @@
   #term-popover.show { display:block;animation:fadeIn .15s ease; }
   #term-popover .tp-term { display:block;font-weight:700;color:var(--text);margin-bottom:5px;font-size:12.5px;letter-spacing:.01em; }
   #term-popover .tp-term::before { content:'›';color:var(--accent2);margin-right:6px; }
+  .gloss-item { padding:13px 0;border-bottom:1px solid var(--border); }
+  .gloss-item:first-child { padding-top:0; }
+  .gloss-item:last-child { border-bottom:none;padding-bottom:0; }
+  .gloss-term { font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:4px; }
+  .gloss-def { font-size:12.5px;color:var(--subtle);line-height:1.7; }
   @media (max-width:700px) {
     .two-col { grid-template-columns:1fr; }
     .bar-row { grid-template-columns:80px 1fr 44px 68px; }
@@ -330,6 +339,7 @@
   <button class="tab-btn active" data-tab="train">① Träna</button>
   <button class="tab-btn"        data-tab="model">② Modell</button>
   <button class="tab-btn"        data-tab="classify">③ Klassificera</button>
+  <button class="tab-btn"        data-tab="glossary">Begrepp</button>
 </nav>
 
 <div class="overlay show" id="introOverlay">
@@ -515,6 +525,16 @@
   </div>
 </section>
 
+<section id="tab-glossary" class="tab-panel">
+  <div class="card">
+    <span class="card-label">Begrepp</span>
+    <p style="font-size:12px;color:var(--muted);line-height:1.7;margin:-4px 0 14px">
+      En ordlista över de viktigaste begreppen i labbet. Samma förklaringar dyker upp när du klickar på understrukna ord i texten.
+    </p>
+    <div id="glossary-list"></div>
+  </div>
+</section>
+
 <script>
 const STOP = new Set([
   'och','att','det','är','en','på','de','med','som','för','inte','av',
@@ -546,7 +566,7 @@ const GLOSSARY = {
   'tokenisering': { term:'Tokenisering', def:'Att dela upp en text i enskilda ord (tokens) som modellen kan räkna på.' },
   'stoppord':     { term:'Stoppord', def:'Mycket vanliga ord som "och", "att", "det". De filtreras bort eftersom de förekommer lika ofta i alla klasser och därför inte säger något om vilken klass texten tillhör.' },
   'ordforrad':    { term:'Ordförråd (|V|)', def:'Antalet unika ord modellen sett i all träningsdata. Skrivs |V| och används i nämnaren vid Laplace-utjämning.' },
-  'laplace':      { term:'Laplace-utjämning', def:'Att lägga till 1 i täljaren för varje ord, så att inget ord får sannolikheten noll. Annars skulle ett enda okänt ord dra hela produkten till noll.' },
+  'laplace':      { term:'Laplace-utjämning', def:'Att lägga till 1 i täljaren och |V| i nämnaren för varje ordsannolikhet. Utan den skulle ett ord som aldrig förekommit i en klass få sannolikheten noll — och eftersom alla ordsannolikheter multipliceras ihop skulle ett enda okänt ord dra hela produkten till noll. Med +1 får även osedda ord en liten sannolikhet större än noll.' },
   'sannolikhet':  { term:'Ordsannolikhet P(ord | klass)', def:'Hur sannolikt ett ord är i en viss klass, beräknat från hur ofta ordet förekommit i klassens träningsdata.' },
   'normalisera':  { term:'Normalisera', def:'Att räkna om tal så de blir jämförbara. Här delas varje klass produkt med summan av alla klassers produkter, så svaren blir procent som tillsammans blir 100 %.' },
   'evidens':      { term:'P(text) – evidensen', def:'Sannolikheten att se texten över huvud taget. Den är samma för alla klasser och behöver inte räknas separat: den är just summan i nämnaren när vi normaliserar.' },
@@ -607,6 +627,17 @@ function initGlossary() {
     }
   });
   if (typeof window !== 'undefined') window.addEventListener('resize', hide);
+}
+
+// Autogenererar begreppsöversikten i Begrepp-fliken från samma GLOSSARY.
+function renderGlossary() {
+  const el = document.getElementById('glossary-list');
+  if (!el) return;
+  el.innerHTML = Object.values(GLOSSARY).map(g => `
+    <div class="gloss-item">
+      <div class="gloss-term">${g.term}</div>
+      <div class="gloss-def">${g.def}</div>
+    </div>`).join('');
 }
 
 function tokenize(text) {
@@ -944,7 +975,7 @@ function classify() {
             <div class="wd-formula-cls" style="color:${colorOf(c)}">${DISPLAY[c]}</div>
             ${tex(`P(\\text{${texEsc(step.word)}} \\mid \\text{${DISPLAY[c]}}) = \\frac{\\text{antal}+1}{\\text{totalt}+|V|} = \\frac{${n_ord}+1}{${n_tot}+${vs}} = ${wi.prob.toFixed(5)}`, false)}
             <div class="wd-formula-note">${unseen
-              ? `Ordet fanns inte i ${DISPLAY[c].toLowerCase()} — Laplace-utjämning (vi lägger till 1 i täljaren) ger en liten chans.`
+              ? `Ordet fanns inte i ${DISPLAY[c].toLowerCase()} — Laplace-utjämning (vi lägger till 1 i täljaren) ger ändå en liten sannolikhet större än noll.`
               : `Hittades ${n_ord} gång${n_ord!==1?'er':''} i ${DISPLAY[c].toLowerCase()}.`}</div>
           </div>`;
       }).join('');
@@ -971,11 +1002,17 @@ function classify() {
       <summary><span class="step-badge">Steg 2</span><span class="step-title">Beräkna sannolikheterna ord för ord</span><span class="step-expand">▸</span></summary>
       <div class="step-body">
         <p class="step-formula-link">Här beräknar vi <strong style="color:#6698ff">P(text | klass)</strong> — den blå delen av Bayes sats.</p>
-        <p class="journey-lead">Varje ord har en sannolikhet i varje klass. Staplarna visar hur sannolikt ordet är i skräppost respektive ej skräppost. Klicka på ett ord för att se uträkningen bakom.</p>
+        <p class="journey-lead">Varje ord har en sannolikhet i varje klass. Den räknas ut så här:</p>
+        <div class="gen-formula">
+          ${tex(`P(\\text{ord} \\mid \\text{klass}) = \\frac{\\text{antal i klassen} + 1}{\\text{totalt antal ord i klassen} + |V|}`, true)}
+          <p class="gen-formula-note">
+            Vi lägger till <strong>+1</strong> i täljaren och <span class="term" data-term="ordforrad" tabindex="0" role="button">|V|</span> i nämnaren på grund av ${term('laplace')}. Det ser till att inget ord får sannolikheten noll.
+          </p>
+        </div>
+        <p class="journey-lead">Staplarna visar hur sannolikt varje ord är i skräppost respektive ej skräppost. Klicka på ett ord för att se uträkningen bakom.</p>
         <div class="journey-formula-note">
-          Sannolikheten för varje ord räknas som <strong>(antal + 1) / (totalt i klassen + |V|)</strong>, där
-          <strong style="color:${colorOf('SPAM')}">skräppost har ${totals.SPAM} ord</strong>,
-          <strong style="color:${colorOf('HAM')}">ej skräppost har ${totals.HAM} ord</strong>, och ${term('ordforrad','ordförrådet |V|')} = <strong>${vs} unika ord</strong>.
+          I den här texten har <strong style="color:${colorOf('SPAM')}">skräppost ${totals.SPAM} ord</strong> totalt,
+          <strong style="color:${colorOf('HAM')}">ej skräppost ${totals.HAM} ord</strong>, och ${term('ordforrad','ordförrådet |V|')} = <strong>${vs} unika ord</strong>.
         </div>
         ${rows}
         <p class="journey-summary">Det är de här sannolikheterna som i nästa steg multipliceras ihop med priorsannolikheterna från <strong>steg 1</strong>.</p>
@@ -992,25 +1029,6 @@ function classify() {
         Här ser du hur priorsannolikheterna och alla ordsannolikheter multipliceras ihop och normeras till det slutgiltiga svaret.
       </p>
       ${buildFullCalc(m, steps, tokens)}
-    </div>
-  </details>`;
-
-  html += `
-  <details class="laplace-details" style="margin-top:12px">
-    <summary>Vad innebär Laplace-utjämning?</summary>
-    <div class="laplace-body">
-      <p style="font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:10px">
-        Om ett ord <strong style="color:var(--text)">aldrig</strong> förekommit i en klass under träningen skulle sannolikheten bli 0.
-        Eftersom modellen multiplicerar ihop alla ordssannolikheter skulle <em>ett enda okänt ord</em> dra hela produkten till noll — och klassificeringen vore förstörd.
-        Lösningen: låtsas att varje ord förekommit minst en gång genom att lägga till <strong style="color:var(--text)">+1 i täljaren</strong>.
-      </p>
-      <p style="font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:0">
-        <strong style="color:var(--subtle)">Och varför +|V| i nämnaren?</strong>
-        När vi lägger till +1 för varje ord måste nämnaren kompenseras — annars summerar inte sannolikheterna till 1.
-        Här är |V| = <strong style="color:var(--text)">${vs} unika ord</strong> i träningsdatan
-        (${classes.map(c => `${DISPLAY[c]}: <strong style="color:${colorOf(c)}">${totals[c]} ord</strong>`).join(', ')}),
-        så exakt +${vs} adderas till nämnaren. Då får alla ord — även de osedda — en liten men rättvis sannolikhet.
-      </p>
     </div>
   </details>`;
 
@@ -1567,6 +1585,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
     if (btn.dataset.tab === 'model')    renderModel();
     if (btn.dataset.tab === 'classify') renderClassify();
+    if (btn.dataset.tab === 'glossary') renderGlossary();
   });
 });
 
