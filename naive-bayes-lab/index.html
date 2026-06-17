@@ -205,9 +205,11 @@
   .fp-class-block { margin-bottom:14px; }
   .fp-class-block:last-child { margin-bottom:0; }
   .fp-class-name { font-size:12px;letter-spacing:.04em;margin-bottom:8px;font-weight:700; }
-  .fp-line { font-size:11px;color:var(--subtle);padding:10px 12px;background:var(--surface2);border-radius:5px;border:1px solid var(--border);overflow-x:auto; }
+  .fp-line { font-size:11px;color:var(--subtle);padding:14px 14px;background:var(--surface2);border-radius:5px;border:1px solid var(--border);overflow-x:auto; }
   .fp-line strong { color:var(--text); }
   .fp-line .fp-op { color:var(--muted); }
+  .fp-line .katex { font-size:1.25em; }
+  .fp-norm .katex { font-size:1.15em; }
   .fp-result { font-size:12px;margin-top:8px;padding:8px 12px;border-radius:5px;border:1px solid;display:flex;justify-content:space-between;align-items:center; }
   /* KaTeX-anpassning till labbets tema */
   .tex { color:var(--text); }
@@ -300,6 +302,13 @@
   .overlay-btn:hover { background:#3d6de6; }
   .info-btn { background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:5px 12px;font-family:'DM Sans',sans-serif;font-size:0.78em;font-weight:600;cursor:pointer;transition:.2s; }
   .info-btn:hover { border-color:var(--accent2);color:var(--text); }
+  /* ── Klickbara begrepp (återanvändbart ordlistesystem) ── */
+  .term { border-bottom:1px dotted var(--accent2);cursor:help;color:inherit;transition:background .15s,border-color .15s;border-radius:2px; }
+  .term:hover, .term:focus { border-bottom-color:var(--accent);background:rgba(77,128,255,.12);outline:none; }
+  #term-popover { position:fixed;z-index:200;max-width:300px;background:var(--surface2);border:1px solid var(--border2);border-radius:9px;padding:13px 15px;box-shadow:0 8px 30px rgba(0,0,0,.55);font-size:12.5px;line-height:1.65;color:var(--subtle);display:none; }
+  #term-popover.show { display:block;animation:fadeIn .15s ease; }
+  #term-popover .tp-term { display:block;font-weight:700;color:var(--text);margin-bottom:5px;font-size:12.5px;letter-spacing:.01em; }
+  #term-popover .tp-term::before { content:'›';color:var(--accent2);margin-right:6px; }
   @media (max-width:700px) {
     .two-col { grid-template-columns:1fr; }
     .bar-row { grid-template-columns:80px 1fr 44px 68px; }
@@ -486,8 +495,8 @@
       <div class="card" id="tokenization-card">
         <span class="card-label">Tokenisering och filtrering</span>
         <p style="font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:12px">
-          Innan modellen kan räkna sannolikheter måste texten omvandlas till enskilda ord — det kallas <strong style="color:var(--text)">tokenisering</strong>.
-          Ord som är för vanliga för att säga något om klassen (stoppord) och mycket korta ord filtreras sedan bort.
+          Innan modellen kan räkna sannolikheter måste texten omvandlas till enskilda ord — det kallas <span class="term" data-term="tokenisering" tabindex="0" role="button"><strong style="color:var(--text)">tokenisering</strong></span>.
+          Ord som är för vanliga för att säga något om klassen (<span class="term" data-term="stoppord" tabindex="0" role="button">stoppord</span>) och mycket korta ord filtreras sedan bort.
           Bara de kvarvarande orden används i klassificeringen.
         </p>
         <div class="token-wrap" id="token-display"></div>
@@ -520,6 +529,85 @@ let newLabel = "SPAM";
 const DISPLAY = { SPAM: 'Skräppost', HAM: 'Ej skräppost' };
 let modelShown = 18;   // antal ord som visas i dragkampsvyn (utökas med Visa fler)
 let modelWordsCache = null;
+
+/* ══════════════════════════════════════════════════════════════
+   ÅTERANVÄNDBART BEGREPPSSYSTEM
+   Klickbara/hovrbara begrepp med förklaring i popover.
+   Kopiera GLOSSARY, term(), initGlossary() + tillhörande CSS
+   (.term, #term-popover) till andra labb. Markera begrepp med
+   term('nyckel') i genererad HTML, eller skriv en
+   <span class="term" data-term="nyckel">text</span> direkt.
+   ════════════════════════════════════════════════════════════ */
+const GLOSSARY = {
+  'bayes':        { term:'Bayes sats', def:'En regel för att räkna ut hur sannolik en klass är givet en text, utifrån hur sannolik texten är i varje klass och hur vanlig klassen är.' },
+  'naiv':         { term:'Naïve (naiv)', def:'Metoden kallas "naiv" för att den antar att varje ord är oberoende av de andra orden. Det stämmer sällan i verkligheten, men förenklingen fungerar förvånansvärt bra.' },
+  'prior':        { term:'Priorsannolikhet', def:'Hur vanlig en klass är i träningsdatan, innan modellen tittat på själva texten. Räknas som antal mejl i klassen delat med totalt antal mejl.' },
+  'klass':        { term:'Klass', def:'Kategorierna modellen väljer mellan. Här: skräppost eller ej skräppost.' },
+  'tokenisering': { term:'Tokenisering', def:'Att dela upp en text i enskilda ord (tokens) som modellen kan räkna på.' },
+  'stoppord':     { term:'Stoppord', def:'Mycket vanliga ord som "och", "att", "det". De filtreras bort eftersom de förekommer lika ofta i alla klasser och därför inte säger något om vilken klass texten tillhör.' },
+  'ordforrad':    { term:'Ordförråd (|V|)', def:'Antalet unika ord modellen sett i all träningsdata. Skrivs |V| och används i nämnaren vid Laplace-utjämning.' },
+  'laplace':      { term:'Laplace-utjämning', def:'Att lägga till 1 i täljaren för varje ord, så att inget ord får sannolikheten noll. Annars skulle ett enda okänt ord dra hela produkten till noll.' },
+  'sannolikhet':  { term:'Ordsannolikhet P(ord | klass)', def:'Hur sannolikt ett ord är i en viss klass, beräknat från hur ofta ordet förekommit i klassens träningsdata.' },
+  'normalisera':  { term:'Normalisera', def:'Att räkna om tal så de blir jämförbara. Här delas varje klass produkt med summan av alla klassers produkter, så svaren blir procent som tillsammans blir 100 %.' },
+  'evidens':      { term:'P(text) – evidensen', def:'Sannolikheten att se texten över huvud taget. Den är samma för alla klasser och behöver inte räknas separat: den är just summan i nämnaren när vi normaliserar.' },
+};
+
+function term(key, label) {
+  const g = GLOSSARY[key];
+  const text = label || (g ? g.term : key);
+  return `<span class="term" data-term="${key}" tabindex="0" role="button">${text}</span>`;
+}
+
+function initGlossary() {
+  let pop = document.getElementById('term-popover');
+  if (!pop) { pop = document.createElement('div'); pop.id = 'term-popover'; document.body.appendChild(pop); }
+  let pinned = false, current = null;
+
+  function show(el) {
+    const g = GLOSSARY[el.dataset.term];
+    if (!g) return;
+    pop.innerHTML = `<span class="tp-term">${g.term}</span>${g.def}`;
+    pop.classList.add('show');
+    const r = el.getBoundingClientRect();
+    const pw = pop.offsetWidth, ph = pop.offsetHeight;
+    let left = r.left + r.width / 2 - pw / 2;
+    left = Math.max(8, Math.min(left, window.innerWidth - pw - 8));
+    let top = r.bottom + 8;
+    if (top + ph > window.innerHeight - 8) top = r.top - ph - 8;
+    pop.style.left = left + 'px';
+    pop.style.top  = top + 'px';
+    current = el;
+  }
+  function hide() { pop.classList.remove('show'); pinned = false; current = null; }
+
+  document.addEventListener('click', e => {
+    const t = e.target.closest('.term');
+    if (t) {
+      e.stopPropagation();
+      if (pinned && current === t) { hide(); }
+      else { show(t); pinned = true; }
+    } else if (!e.target.closest('#term-popover')) {
+      hide();
+    }
+  });
+  document.addEventListener('mouseover', e => {
+    const t = e.target.closest('.term');
+    if (t && !pinned) show(t);
+  });
+  document.addEventListener('mouseout', e => {
+    const t = e.target.closest('.term');
+    if (t && !pinned) hide();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') hide();
+    if ((e.key === 'Enter' || e.key === ' ') && document.activeElement?.classList.contains('term')) {
+      e.preventDefault();
+      if (pinned && current === document.activeElement) hide();
+      else { show(document.activeElement); pinned = true; }
+    }
+  });
+  if (typeof window !== 'undefined') window.addEventListener('resize', hide);
+}
 
 function tokenize(text) {
   return (text.toLowerCase().match(/[a-zåäö]+/g) || [])
@@ -788,13 +876,13 @@ function classify() {
   <div class="card" style="margin-bottom:12px;padding-bottom:16px">
     <span class="card-label">Matematiken bakom Naïve Bayes</span>
     <p style="font-size:12px;color:var(--muted);line-height:1.7;margin:0 0 12px">
-      Naïve Bayes bygger på <strong style="color:var(--text)">Bayes sats</strong>. Vi vill veta hur sannolik varje klass är givet texten:
+      ${term('naiv','Naïve')} Bayes bygger på ${term('bayes','Bayes sats')}. Vi vill veta hur sannolik varje klass är givet texten:
     </p>
     ${tex(`P(\\text{klass} \\mid \\text{text}) = \\frac{\\textcolor{#ffd866}{P(\\text{klass})}\\;\\textcolor{#6698ff}{P(\\text{text} \\mid \\text{klass})}}{\\textcolor{#9aa6c4}{P(\\text{text})}}`, true)}
     <div class="fp-legend" style="margin-top:14px">
-      <div><span class="fp-dot" style="background:#ffd866"></span> <strong style="color:#ffd866">P(klass)</strong> — hur vanlig klassen är. <em>Detta räknar vi i steg 1.</em></div>
+      <div><span class="fp-dot" style="background:#ffd866"></span> <strong style="color:#ffd866">P(klass)</strong> — ${term('prior','hur vanlig klassen är')}. <em>Detta räknar vi i steg 1.</em></div>
       <div><span class="fp-dot" style="background:#6698ff"></span> <strong style="color:#6698ff">P(text | klass)</strong> — alla ordens sannolikheter. <em>Detta räknar vi i steg 2.</em></div>
-      <div><span class="fp-dot" style="background:#9aa6c4"></span> <strong style="color:#9aa6c4">P(text)</strong> — samma för båda klasser, så vi normaliserar bort den. <em>Detta sker i steg 3.</em></div>
+      <div><span class="fp-dot" style="background:#9aa6c4"></span> <strong style="color:#9aa6c4">${term('evidens','P(text)')}</strong> — samma för båda klasser, så vi ${term('normalisera','normaliserar')} bort den. <em>Detta sker i steg 3.</em></div>
     </div>
   </div>`;
 
@@ -805,7 +893,7 @@ function classify() {
     <div class="step-body">
       <p class="step-formula-link">Här beräknar vi <strong style="color:#ffd866">P(klass)</strong> — den gula delen av Bayes sats.</p>
       <p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.6">
-        Innan modellen sett ett enda ord vet den redan hur vanliga klasserna är i träningsdatan. Det kallas <strong style="color:var(--text)">priorsannolikhet</strong>.
+        Innan modellen sett ett enda ord vet den redan hur vanliga klasserna är i träningsdatan. Det kallas <span class="term" data-term="prior" tabindex="0" role="button"><strong style="color:var(--text)">priorsannolikhet</strong></span>.
       </p>
       <div class="math-prior-grid">
         ${classes.map(c => {
@@ -840,15 +928,13 @@ function classify() {
 
   // ── Steg 2: varje ords sannolikheter som egenskaper, med jämförande staplar ──
   if (tokens.length > 0) {
-    // gemensam skala: största ordsannolikheten bland alla ord/klasser → full stapel
-    let maxProb = 0;
-    steps.slice(1).forEach(step => classes.forEach(c => { maxProb = Math.max(maxProb, step.wi[c].prob); }));
-    if (maxProb <= 0) maxProb = 1;
-
     let rows = '';
     steps.slice(1).forEach((step, idx) => {
       const pS = step.wi['SPAM'] ? step.wi['SPAM'].prob : 0;
       const pH = step.wi['HAM']  ? step.wi['HAM'].prob  : 0;
+      // Normalisera per rad: den största av ordets två sannolikheter fyller full bredd,
+      // så förhållandet mellan klasserna syns tydligt för just det ordet.
+      const rowMax = Math.max(pS, pH) || 1;
 
       const formulaRows = classes.map(c => {
         const wi = step.wi[c], n_ord = wi.count, n_tot = totals[c];
@@ -869,8 +955,8 @@ function classify() {
           <span class="ws-num">${idx + 1}</span>
           <span class="ws-word">${escHtml(step.word)}</span>
           <span class="ws-probs">
-            <span class="ws-prob-row"><span class="ws-prob-lbl" style="color:var(--spam)">skräppost</span><span class="ws-prob-bar"><span class="ws-prob-fill" style="width:${(pS/maxProb)*100}%;background:var(--spam)"></span></span><span class="ws-prob-val">${pS.toFixed(4)}</span></span>
-            <span class="ws-prob-row"><span class="ws-prob-lbl" style="color:var(--ham)">ej skräppost</span><span class="ws-prob-bar"><span class="ws-prob-fill" style="width:${(pH/maxProb)*100}%;background:var(--ham)"></span></span><span class="ws-prob-val">${pH.toFixed(4)}</span></span>
+            <span class="ws-prob-row"><span class="ws-prob-lbl" style="color:var(--spam)">skräppost</span><span class="ws-prob-bar"><span class="ws-prob-fill" style="width:${(pS/rowMax)*100}%;background:var(--spam)"></span></span><span class="ws-prob-val">${pS.toFixed(4)}</span></span>
+            <span class="ws-prob-row"><span class="ws-prob-lbl" style="color:var(--ham)">ej skräppost</span><span class="ws-prob-bar"><span class="ws-prob-fill" style="width:${(pH/rowMax)*100}%;background:var(--ham)"></span></span><span class="ws-prob-val">${pH.toFixed(4)}</span></span>
           </span>
           <span class="ws-expand">▸</span>
         </summary>
@@ -889,7 +975,7 @@ function classify() {
         <div class="journey-formula-note">
           Sannolikheten för varje ord räknas som <strong>(antal + 1) / (totalt i klassen + |V|)</strong>, där
           <strong style="color:${colorOf('SPAM')}">skräppost har ${totals.SPAM} ord</strong>,
-          <strong style="color:${colorOf('HAM')}">ej skräppost har ${totals.HAM} ord</strong>, och ordförrådet |V| = <strong>${vs} unika ord</strong>.
+          <strong style="color:${colorOf('HAM')}">ej skräppost har ${totals.HAM} ord</strong>, och ${term('ordforrad','ordförrådet |V|')} = <strong>${vs} unika ord</strong>.
         </div>
         ${rows}
         <p class="journey-summary">Det är de här sannolikheterna som i nästa steg multipliceras ihop med priorsannolikheterna från <strong>steg 1</strong>.</p>
@@ -982,7 +1068,7 @@ function buildFullCalc(m, steps, tokens) {
       <div style="font-size:12px;color:var(--subtle);line-height:1.8;margin-bottom:12px">
         Produkterna ovan är pyttesmå tal som är svåra att jämföra. Vi delar därför varje klass tal med <strong style="color:var(--text)">summan av båda</strong> — då blir svaren procent som tillsammans blir 100%.
       </div>
-      <div>
+      <div class="fp-norm">
         ${productsPerClass.map(x => {
           const col = x.c === 'SPAM' ? '#ff6b6b' : '#4ade80';
           return `<div style="margin:14px 0">${tex(
@@ -1488,6 +1574,7 @@ function escHtml(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+initGlossary();
 refresh();
 </script>
 </body>
