@@ -72,6 +72,7 @@
   .tags:focus-within{border-color:var(--indigo);box-shadow:0 0 0 3px var(--indigo-soft)}
   .tag{display:inline-flex;align-items:center;gap:6px;background:var(--indigo-soft);color:var(--indigo-d);font-size:13px;font-weight:500;padding:4px 6px 4px 10px;border-radius:8px}
   .tag button{background:transparent;color:var(--indigo);font-size:13px;padding:0 2px;line-height:1} .tag button:hover{color:var(--weak)}
+  .tag.primary{background:var(--indigo);color:#fff} .tag.primary button{color:#fff;opacity:.8} .tag.primary button:hover{opacity:1;color:#fff}
   .tag-input{border:none!important;box-shadow:none!important;flex:1;min-width:120px;padding:5px 4px!important;width:auto!important}
   .parts{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
   .col-head-parts{font-size:12px;color:var(--faint);font-weight:500;margin-bottom:6px}
@@ -214,7 +215,7 @@
     <div class="panel">
       <div class="phead"><h2>Uppgifter</h2><span class="phint">Områden · svårighet · deluppgifter</span></div>
       <div class="pbody">
-        <div class="col-head-tasks"><span>Områden</span><span>Svårighetsgrad</span></div>
+        <div style="font-size:12.5px;color:var(--faint);margin-bottom:12px">Tagga områden i prioritetsordning – första taggen räknas som uppgiftens huvudområde och väger tyngst i analysen.</div>
         <div id="taskList"></div>
         <div id="taskEmpty" class="empty">Inga uppgifter än. Lägg till den första nedan.</div>
         <div class="btn-row">
@@ -354,6 +355,11 @@ function usedAreas(){ const o=[]; validTasks().forEach(t=>taskAreas(t).forEach(a
 function areaTaskCount(a){ return validTasks().filter(t=>taskAreas(t).includes(a)).length; }
 function areaMax(a){ return validTasks().filter(t=>taskAreas(t).includes(a)).reduce((s,t)=>s+taskMax(t),0); }
 function studentAreaPoints(s,a){ return validTasks().filter(t=>taskAreas(t).includes(a)).reduce((sum,t)=>sum+studentTaskPoints(s,t),0); }
+function tagWeight(i){ return 1/Math.pow(2,i); }
+function areaWInTask(t,a){ const idx=taskAreas(t).indexOf(a); return idx<0?0:tagWeight(idx); }
+function studentAreaPct(s,a){ let g=0,m=0; validTasks().forEach(t=>{ const w=areaWInTask(t,a); if(!w) return; g+=studentTaskPoints(s,t)*w; m+=taskMax(t)*w; }); return m?g/m:0; }
+function classAreaPct(a){ let g=0,m=0; activeStudents().forEach(s=>{ validTasks().forEach(t=>{ const w=areaWInTask(t,a); if(!w) return; g+=studentTaskPoints(s,t)*w; m+=taskMax(t)*w; }); }); return m?g/m:0; }
+const UNDERLAG=2;
 function totalMax(){ return validTasks().reduce((s,t)=>s+taskMax(t),0); }
 function activeStudents(){ return state.students.filter(s=>!s.absent); }
 function gridColumns(){ const cols=[]; validTasks().forEach((t,ti)=>t.parts.forEach((p,pi)=>cols.push({t,ti,p,pi,pc:t.parts.length}))); return cols; }
@@ -372,25 +378,28 @@ function levelStatsFor(fn){ const b={grund:{got:0,poss:0},medel:{got:0,poss:0},a
 function studentLevelStats(s){ return levelStatsFor(t=>({got:studentTaskPoints(s,t),poss:taskMax(t)})); }
 function classLevelStats(){ const act=activeStudents(); return levelStatsFor(t=>({got:act.reduce((a,st)=>a+studentTaskPoints(st,t),0),poss:taskMax(t)*act.length})); }
 function gradeDistribution(){ const d={A:0,B:0,C:0,D:0,E:0,F:0}; activeStudents().forEach(s=>{ const g=gradeFor(studentTotals(s).pts); if(g) d[g]++; }); return d; }
-function weakAreaPhrase(s,area,thr){ const inArea=validTasks().filter(t=>taskAreas(t).includes(area)); const grp=b=>inArea.filter(t=>bucketOf(t.level)===b);
-  const pctOf=arr=>{ const poss=arr.reduce((a,t)=>a+taskMax(t),0); if(!poss) return null; const got=arr.reduce((a,t)=>a+studentTaskPoints(s,t),0); return got/poss; };
-  const gp=pctOf(grp("grund")),ap=pctOf(grp("avancerat")); const mx=areaMax(area),areaPct=mx?studentAreaPoints(s,area)/mx:0;
-  if(gp!==null&&ap!==null&&gp>=0.7&&ap<thr) return area+" (grunderna sitter, träna svårare uppgifter)";
-  if(gp!==null&&gp<thr) return area+" (befäst grunderna)"; return area+" ("+pct(areaPct)+")"; }
+function difficultyNarrative(s){
+  const ls=studentLevelStats(s), order=["grund","medel","avancerat"];
+  const lbl={grund:"de grundläggande uppgifterna (nivå 1–2)",medel:"de medelsvåra (nivå 3)",avancerat:"de avancerade uppgifterna (nivå 4–5)"};
+  const present=order.filter(k=>ls[k].poss>0); if(present.length<2) return "";
+  const p={}; present.forEach(k=>p[k]=ls[k].got/ls[k].poss);
+  const nums=present.map(k=>lbl[k]+" "+pct(p[k])).join(", ");
+  let concl=""; const gp=p.grund, ap=p.avancerat;
+  if(gp!=null&&ap!=null){ if(gp>=0.7&&ap<0.5) concl=" Det tyder på god förståelse för grunderna men att de mer avancerade problemen behöver tränas."; else if(gp<0.5) concl=" De grundläggande momenten behöver befästas först."; else if(ap>=0.7) concl=" Eleven hanterar även de svårare uppgifterna väl."; }
+  return "Per svårighetsgrad: "+nums+"."+concl;
+}
 
 /* ===== 4. SAMMANFATTNINGAR ===== */
 function classSummary(thr){
-  const act=activeStudents(), areas=usedAreas();
-  const ar=areas.map(a=>{ const possible=areaMax(a)*act.length, got=act.reduce((s,st)=>s+studentAreaPoints(st,a),0);
-    const below=act.filter(st=>{const mx=areaMax(a);return mx?studentAreaPoints(st,a)/mx<thr:false;}).length; return {a,p:possible?got/possible:0,got,possible,below}; });
-  const totGot=ar.reduce((s,x)=>s+x.got,0),totPoss=ar.reduce((s,x)=>s+x.possible,0),overall=totPoss?totGot/totPoss:0;
-  const sorted=[...ar].sort((x,y)=>y.p-x.p), strong=sorted.filter(x=>x.p>=0.8), weak=[...ar].filter(x=>x.p<thr).sort((x,y)=>x.p-y.p);
+  const act=activeStudents();
+  const areas=usedAreas().filter(a=>areaTaskCount(a)>=UNDERLAG);
+  const ar=areas.map(a=>({a,p:classAreaPct(a),below:act.filter(st=>studentAreaPct(st,a)<thr).length}));
+  const tt=act.reduce((o,s)=>{const x=studentTotals(s);o.g+=x.pts;o.m+=x.max;return o;},{g:0,m:0}), overall=tt.m?tt.g/tt.m:0;
+  const strong=[...ar].sort((x,y)=>y.p-x.p).filter(x=>x.p>=0.8), weak=[...ar].filter(x=>x.p<thr).sort((x,y)=>x.p-y.p);
   let t="Klassen ("+act.length+" "+(act.length===1?"elev":"elever")+") fick i snitt "+pct(overall)+" på provet. ";
   if(strong.length) t+="Starkast "+(strong.length>1?"områden var ":"område var ")+joinSv(strong.map(x=>x.a+" ("+pct(x.p)+")"))+". ";
-  else if(sorted.length) t+="Bäst gick det på "+sorted[0].a+" ("+pct(sorted[0].p)+"). ";
   if(weak.length){ t+="Svagast "+(weak.length>1?"var områdena ":"var området ")+joinSv(weak.map(x=>x.a+" ("+pct(x.p)+")"))+". ";
-    const w=weak[0]; t+=w.below+" av "+act.length+" elever ligger under "+Math.round(thr*100)+" % på "+w.a+" – det området är värt att repetera gemensamt. ";
-  } else t+="Inget område ligger under gränsen på "+Math.round(thr*100)+" % – en jämn prestation. ";
+    const w=weak[0]; t+=w.below+" av "+act.length+" elever ligger under "+Math.round(thr*100)+" % på "+w.a+" – värt att repetera gemensamt. "; }
   const cl=classLevelStats(); if(cl.grund.poss&&cl.avancerat.poss) t+="På grunduppgifterna (nivå 1–2) når klassen "+pct(cl.grund.got/cl.grund.poss)+", på de svåra (nivå 4–5) "+pct(cl.avancerat.got/cl.avancerat.poss)+". ";
   if(gradesValid()){ const d=gradeDistribution(); const parts=["A","B","C","D","E","F"].filter(g=>d[g]>0).map(g=>d[g]+" "+g); if(parts.length) t+="Betygsfördelning: "+parts.join(", ")+". "; }
   const absent=state.students.length-act.length; if(absent>0) t+="("+absent+" "+(absent===1?"elev":"elever")+" frånvarande, räknas inte med.)";
@@ -398,18 +407,14 @@ function classSummary(thr){
 }
 function studentSummary(s,thr){
   if(s.absent) return ((s.name||"").trim()||"Eleven")+" var frånvarande vid provet och har inget resultat.";
-  const areas=usedAreas(), tot=studentTotals(s);
-  const ar=areas.map(a=>{const mx=areaMax(a);return {a,p:mx?studentAreaPoints(s,a)/mx:0};});
+  const tot=studentTotals(s), name=(s.name||"").trim()||"Eleven", g=tot.grade;
+  const areas=usedAreas().filter(a=>areaTaskCount(a)>=UNDERLAG);
+  const ar=areas.map(a=>({a,p:studentAreaPct(s,a)}));
   const strong=ar.filter(x=>x.p>=0.8).sort((x,y)=>y.p-x.p), weak=ar.filter(x=>x.p<thr).sort((x,y)=>x.p-y.p);
-  const name=(s.name||"").trim()||"Eleven", g=tot.grade;
   let t=name+" fick "+fmt(tot.pts)+" av "+fmt(tot.max)+" poäng ("+pct(tot.pct)+")"+(g?", vilket motsvarar betyget "+g:"")+". ";
   if(strong.length) t+="Starkast på "+joinSv(strong.map(x=>x.a))+". ";
-  if(weak.length) t+="Behöver träna mer på "+joinSv(weak.map(x=>weakAreaPhrase(s,x.a,thr)))+". ";
-  else t+="Inga områden ligger under gränsen – ett jämnt resultat. ";
-  const ls=studentLevelStats(s), gp=ls.grund.poss?ls.grund.got/ls.grund.poss:null, ap=ls.avancerat.poss?ls.avancerat.got/ls.avancerat.poss:null;
-  if(gp!==null&&ap!==null){ if(gp>=0.8&&ap<thr) t+="Sammantaget sitter grunderna väl, men de svårare uppgifterna behöver tränas mer. ";
-    else if(gp<thr) t+="Sammantaget behöver de grundläggande momenten befästas innan svårare uppgifter. ";
-    else if(ap>=0.8) t+="Klarar även de svåra uppgifterna bra. "; }
+  if(weak.length) t+="Behöver träna mer på "+joinSv(weak.map(x=>x.a+" ("+pct(x.p)+")"))+". ";
+  const dn=difficultyNarrative(s); if(dn) t+=dn+" ";
   const bl=borderlineInfo(s); if(bl) t+="Ligger bara "+fmt(bl.diff)+" p från betyget "+bl.letter+" – ett gränsfall värt att dubbelkolla. ";
   if(s.comment&&s.comment.trim()) t+=s.comment.trim();
   return t.trim();
@@ -430,22 +435,21 @@ function renderTasks(){
     const partsHtml=t.parts.map((p,pi)=>`<div class="prow"><span class="plabel">${partLabel(t,pi)}</span>
       <input class="num pmax" data-pid="${p.id}" type="number" min="0" step="0.5" placeholder="poäng" value="${p.max}">
       ${pc>1?`<button class="btn-mini del" data-rmpart="${p.id}" title="Ta bort deluppgift">✕</button>`:'<span></span>'}</div>`).join("");
-    card.innerHTML=`<div class="task-head"><span class="tnum">Uppgift ${i+1}</span><span class="tmeta">${fmt(taskMax(t))||"0"} p · ${t.level?"Nivå "+t.level:"nivå ej satt"}${pc>1?" · "+pc+" deluppg.":""}</span><span style="flex:1"></span>
+    card.innerHTML=`<div class="task-head"><span class="tnum">Uppgift ${i+1}</span><span style="flex:1"></span>
       <button class="btn-mini" data-act="up" title="Flytta upp">↑</button><button class="btn-mini" data-act="down" title="Flytta ner">↓</button>
-      <button class="btn-mini" data-act="dup" title="Duplicera">⧉</button><button class="btn-mini del" data-act="del" title="Ta bort">✕</button></div>
+      <button class="btn-mini del" data-act="del" title="Ta bort">✕</button></div>
       <div class="task-fields"><div><div class="tags" data-act="tags">
-        ${(t.areas||[]).map(a=>`<span class="tag">${esc(a)}<button data-area="${esc(a)}">×</button></span>`).join("")}
+        ${(t.areas||[]).map((a,ai)=>`<span class="tag${ai===0?' primary':''}">${esc(a)}<button data-area="${esc(a)}">×</button></span>`).join("")}
         <input class="tag-input" list="areaPool" placeholder="${(t.areas||[]).length?'lägg till…':'område'}"></div></div>
         <div><select data-act="lvl">${lvlOpts}</select></div></div>
-      <div class="parts"><div class="col-head-parts">${pc>1?"Deluppgifter · poäng":"Maxpoäng"}</div>${partsHtml}
+      <div class="parts">${pc>1?'<div class="col-head-parts">Deluppgifter · poäng</div>':''}${partsHtml}
         <button class="btn-ghost addpart" data-act="addpart">+ Lägg till deluppgift (a, b, c…)</button></div>`;
     card.querySelector('[data-act="del"]').addEventListener("click",()=>{ t.parts.forEach(p=>state.students.forEach(s=>delete s.scores[p.id])); state.tasks=state.tasks.filter(x=>x.id!==t.id); commitBuild(); });
     card.querySelector('[data-act="up"]').addEventListener("click",()=>moveTask(i,-1));
     card.querySelector('[data-act="down"]').addEventListener("click",()=>moveTask(i,1));
-    card.querySelector('[data-act="dup"]').addEventListener("click",()=>dupTask(i));
     card.querySelector('[data-act="addpart"]').addEventListener("click",()=>{ t.parts.push({id:nextId++,max:""}); commitBuild(); });
     card.querySelector('[data-act="lvl"]').addEventListener("change",e=>{ t.level=+e.target.value; commitBuild(); });
-    card.querySelectorAll(".pmax").forEach(inp=>inp.addEventListener("input",e=>{ const p=t.parts.find(x=>String(x.id)===inp.dataset.pid); if(p){ p.max=e.target.value; card.querySelector(".tmeta").textContent=(fmt(taskMax(t))||"0")+" p · "+(t.level?"Nivå "+t.level:"nivå ej satt")+(t.parts.length>1?" · "+t.parts.length+" deluppg.":""); renderOverview(); renderGradeScale(); renderGrid(); scheduleSave(); } }));
+    card.querySelectorAll(".pmax").forEach(inp=>inp.addEventListener("input",e=>{ const p=t.parts.find(x=>String(x.id)===inp.dataset.pid); if(p){ p.max=e.target.value; renderOverview(); renderGradeScale(); renderGrid(); scheduleSave(); } }));
     card.querySelectorAll("[data-rmpart]").forEach(b=>b.addEventListener("click",()=>{ const pid=b.dataset.rmpart; state.students.forEach(s=>delete s.scores[pid]); t.parts=t.parts.filter(x=>String(x.id)!==pid); commitBuild(); }));
     const tagsBox=card.querySelector('[data-act="tags"]'), tagInput=tagsBox.querySelector(".tag-input");
     tagsBox.querySelectorAll(".tag button").forEach(b=>b.addEventListener("click",()=>{ t.areas=t.areas.filter(a=>a!==b.dataset.area); focusTaskId=t.id; commitBuild(); }));
@@ -486,7 +490,7 @@ function renderGrid(){
   if(!ready||!state.students.length){ wrap.innerHTML=""; return; }
   // header (two rows)
   let r1=`<tr><th class="name-c" rowspan="2">Elev</th><th class="absc" rowspan="2">Frånv.</th>`;
-  validTasks().forEach((t,ti)=>{ r1+=`<th class="area-h grp" colspan="${t.parts.length}">U${ti+1}<span class="mx">${esc(taskAreas(t).join(", "))} · N${t.level||"–"}</span></th>`; });
+  validTasks().forEach((t,ti)=>{ r1+=`<th class="area-h grp" colspan="${t.parts.length}">${ti+1}<span class="mx">${esc(taskAreas(t).join(", "))}</span></th>`; });
   r1+=`<th class="rm-col" rowspan="2"></th></tr>`;
   let r2="<tr>"; cols.forEach(c=>{ r2+=`<th class="${c.pi===0?'grp':''}">${c.pc>1?letter(c.pi)+")":""}<span class="mx">max ${fmt(c.p.max)||"?"}</span></th>`; }); r2+="</tr>";
   const table=document.createElement("table"); table.className="grid"; table.innerHTML="<thead>"+r1+r2+"</thead>"; const tbody=document.createElement("tbody");
@@ -527,15 +531,15 @@ function renderAnalysis(){
   } else if(anyGrade){ ghead.classList.remove("hidden"); gc.classList.add("hidden"); gempty.classList.remove("hidden"); }
   else { ghead.classList.add("hidden"); gc.classList.add("hidden"); gempty.classList.add("hidden"); }
   const bars=$("#classBars"); bars.innerHTML="";
-  areas.forEach(a=>{ const possible=areaMax(a)*act.length, got=act.reduce((s,st)=>s+studentAreaPoints(st,a),0), p=possible?got/possible:0, b=band(p);
+  areas.forEach(a=>{ const p=classAreaPct(a), b=band(p), n=areaTaskCount(a);
     const row=document.createElement("div"); row.className="bar-row";
-    row.innerHTML=`<span class="bar-label">${esc(a)}</span><div class="bar-track"><div class="bar-fill" style="width:${(p*100).toFixed(0)}%;background:${b.fg}"></div></div><span class="bar-meta"><b style="color:${b.fg}">${(p*100).toFixed(0)} %</b> · ${fmt(got)}/${fmt(possible)} p</span>`; bars.appendChild(row); });
+    row.innerHTML=`<span class="bar-label">${esc(a)}</span><div class="bar-track"><div class="bar-fill" style="width:${(p*100).toFixed(0)}%;background:${b.fg}"></div></div><span class="bar-meta"><b style="color:${b.fg}">${(p*100).toFixed(0)} %</b> · ${n} uppg.</span>`; bars.appendChild(row); });
   const heat=document.createElement("table"); heat.className="heat";
   let h="<thead><tr><th class='name-h'>Elev</th>"; areas.forEach(a=>h+=`<th>${esc(a)}</th>`); h+="<th>Totalt</th>"+(gradesValid()?"<th>Betyg</th>":"")+"</tr></thead>"; heat.innerHTML=h;
   const hb=document.createElement("tbody");
   state.students.forEach(s=>{ const tr=document.createElement("tr"); tr.innerHTML=`<td class="namecell">${esc(s.name||"(namnlös)")}</td>`;
     if(s.absent){ areas.forEach(()=>{ const td=document.createElement("td"); td.className="cell na"; td.textContent="–"; tr.appendChild(td); }); const td=document.createElement("td"); td.className="cell na"; td.textContent="Frånv."; td.style.fontSize="11px"; tr.appendChild(td); if(gradesValid()){ const g=document.createElement("td"); g.className="cell na"; g.textContent="–"; tr.appendChild(g); } hb.appendChild(tr); return; }
-    areas.forEach(a=>{ const mx=areaMax(a),got=studentAreaPoints(s,a),p=mx?got/mx:0,b=band(p); const td=document.createElement("td"); td.className="cell"; td.style.background=b.bg; td.style.color=b.fg; td.title=`${a}: ${fmt(got)}/${fmt(mx)} p`; td.textContent=(p*100).toFixed(0)+"%"; tr.appendChild(td); });
+    areas.forEach(a=>{ const p=studentAreaPct(s,a),b=band(p); const td=document.createElement("td"); td.className="cell"; td.style.background=b.bg; td.style.color=b.fg; td.title=`${a}: ${(p*100).toFixed(0)} % (${areaTaskCount(a)} uppg.)`; td.textContent=(p*100).toFixed(0)+"%"; tr.appendChild(td); });
     const tt=studentTotals(s),tb=band(tt.pct); const ttd=document.createElement("td"); ttd.className="cell"; ttd.style.background=tb.bg; ttd.style.color=tb.fg; ttd.style.fontWeight="700"; ttd.textContent=(tt.pct*100).toFixed(0)+"%"; tr.appendChild(ttd);
     if(gradesValid()){ const g=document.createElement("td"); g.className="cell gradecell g-"+tt.grade; g.textContent=tt.grade; tr.appendChild(g); } hb.appendChild(tr); });
   heat.appendChild(hb); const hw=$("#heatWrap"); hw.innerHTML=""; hw.appendChild(heat);
@@ -544,7 +548,7 @@ function renderAnalysis(){
     const card=document.createElement("div"); card.className="scard";
     if(s.absent){ card.classList.add("is-absent"); card.innerHTML=`<div class="name"><span>${esc(s.name||"(namnlös)")}</span><span class="tot" style="font-weight:600">Frånvarande</span></div><div class="stext">Var frånvarande vid provet – inget resultat registrerat.</div>`; cards.appendChild(card); return; }
     const tt=studentTotals(s),tb=band(tt.pct);
-    const weak=areas.map(a=>{const mx=areaMax(a);return {a,p:mx?studentAreaPoints(s,a)/mx:0};}).filter(x=>x.p<thr).sort((x,y)=>x.p-y.p);
+    const weak=areas.filter(a=>areaTaskCount(a)>=UNDERLAG).map(a=>({a,p:studentAreaPct(s,a)})).filter(x=>x.p<thr).sort((x,y)=>x.p-y.p);
     const badge=tt.grade?`<span class="gradebadge g-${tt.grade}">${tt.grade}</span>`:`<span class="tot" style="color:${tb.fg};font-weight:600">${(tt.pct*100).toFixed(0)} %</span>`;
     const bl=borderlineInfo(s);
     let body=`<div class="name"><span>${esc(s.name||"(namnlös)")}</span>${badge}</div><div class="tot">${fmt(tt.pts)} av ${fmt(tt.max)} poäng · ${(tt.pct*100).toFixed(0)} %</div>`;
@@ -593,7 +597,7 @@ async function exportXlsx(){
   const ws4=wb.addWorksheet("Per elev och område",{views:[{state:"frozen",xSplit:1,ySplit:1}]}); ws4.columns=[{width:24},...areas.map(()=>({width:15})),{width:11}];
   ws4.addRow(["Elev",...areas,"Totalt"]); styleHeader(ws4,1);
   state.students.forEach(s=>{ if(s.absent){ ws4.addRow([s.name||"(namnlös)",...areas.map(()=>"–"),"Frånv."]); return; }
-    const cells=[s.name||"(namnlös)"]; areas.forEach(a=>{ const mx=areaMax(a); cells.push(mx?studentAreaPoints(s,a)/mx:0); }); cells.push(studentTotals(s).pct);
+    const cells=[s.name||"(namnlös)"]; areas.forEach(a=>{ cells.push(studentAreaPct(s,a)); }); cells.push(studentTotals(s).pct);
     const r=ws4.addRow(cells); for(let i=2;i<=cells.length;i++){ const cc=r.getCell(i); cc.numFmt="0 %"; const f=bandFillXL(cells[i-1]); cc.fill={type:"pattern",pattern:"solid",fgColor:{argb:f.bg}}; cc.font={color:{argb:f.fg}}; cc.alignment={horizontal:"center"}; } });
   const ws5=wb.addWorksheet("Råa poäng",{views:[{state:"frozen",xSplit:1,ySplit:1}]}); ws5.columns=[{width:24},...cols.map(()=>({width:14})),{width:10},{width:9},{width:9}];
   ws5.addRow(["Elev",...cols.map(c=>"U"+partCode(c.ti,c.pi,c.pc)+" (max "+fmt(c.p.max)+")"),"Summa","Max","Betyg"]); styleHeader(ws5,1);
@@ -607,11 +611,11 @@ async function exportXlsx(){
 function buildPrint(){
   const areas=usedAreas(), thr=THR, pa=$("#printArea"); pa.innerHTML=""; const head=(state.testName||"Provresultat");
   activeStudents().forEach(s=>{ const tt=studentTotals(s);
-    let rows=areas.map(a=>{ const mx=areaMax(a),got=studentAreaPoints(s,a),p=mx?got/mx:0; return `<tr><td>${esc(a)}</td><td class="n">${fmt(got)} / ${fmt(mx)}</td><td class="n">${(p*100).toFixed(0)} %</td></tr>`; }).join("");
+    let rows=areas.map(a=>{ const p=studentAreaPct(s,a); return `<tr><td>${esc(a)}</td><td class="n">${(p*100).toFixed(0)} %</td></tr>`; }).join("");
     const bl=borderlineInfo(s); const sec=document.createElement("div"); sec.className="pa-student";
     sec.innerHTML=`<div class="pa-h"><span class="pa-name">${esc(s.name||"(namnlös)")}</span><span class="pa-grade">${tt.grade||""}</span></div>
       <div class="pa-sub">${esc(head)} · ${fmt(tt.pts)} av ${fmt(tt.max)} poäng (${(tt.pct*100).toFixed(0)} %)${bl?" · gränsfall "+fmt(bl.diff)+" p från "+bl.letter:""}</div>
-      <table class="pa-tbl"><thead><tr><th>Område</th><th class="n">Poäng</th><th class="n">Resultat</th></tr></thead><tbody>${rows}</tbody></table>
+      <table class="pa-tbl"><thead><tr><th>Område</th><th class="n">Resultat</th></tr></thead><tbody>${rows}</tbody></table>
       <div class="pa-fb">${esc(studentSummary(s,thr))}</div>`; pa.appendChild(sec); });
 }
 function printStudents(){ if(!validTasks().length||!activeStudents().length){ alert("Det finns inga elevresultat att skriva ut."); return; } buildPrint(); window.print(); }
