@@ -38,6 +38,14 @@
   .phead h2{font-family:'Fraunces',serif;font-size:23px;font-weight:600;letter-spacing:-.01em;margin:0}
   .phint{color:var(--faint);font-size:13px;margin-left:auto;text-align:right}
   .pbody{padding:18px 26px 26px}
+  details.collapsible{padding:0}
+  details.collapsible>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:20px 26px}
+  details.collapsible>summary::-webkit-details-marker{display:none}
+  details.collapsible>summary h2{font-family:'Fraunces',serif;font-size:23px;font-weight:600;letter-spacing:-.01em;margin:0}
+  details.collapsible>summary:hover h2{color:var(--indigo)}
+  details.collapsible .chev{color:var(--faint);font-size:13px;transition:transform .2s;flex:none}
+  details.collapsible[open] .chev{transform:rotate(90deg)}
+  details.collapsible>.pbody{padding-top:4px}
   button{font-family:inherit;cursor:pointer;border:none;border-radius:11px;font-size:14px;font-weight:500;transition:background .14s,box-shadow .14s,transform .05s,border-color .14s,color .14s}
   button:active{transform:translateY(1px)}
   .btn{background:var(--indigo);color:#fff;padding:11px 18px;box-shadow:var(--shadow-sm)} .btn:hover{background:var(--indigo-d)}
@@ -97,7 +105,7 @@
   .summary-box{background:linear-gradient(180deg,#fbfaff,#f3f2fd);border:1px solid #ddd9f7;border-radius:14px;padding:18px 20px;font-size:16px;line-height:1.72;color:var(--ink)}
   .btn-copy{margin-top:11px} .copied{color:var(--good)!important;border-color:var(--good)!important}
   .sub-row{display:flex;align-items:center;justify-content:space-between;gap:12px} .btn-inline{font-size:12.5px;padding:7px 12px;font-weight:500}
-  .gradechart{display:flex;align-items:flex-end;gap:18px;height:150px;margin-top:8px;padding:0 6px;max-width:440px}
+  .gradechart{display:flex;align-items:flex-end;gap:18px;height:150px;margin-top:8px;padding:0 6px;max-width:560px}
   .gc-col{flex:1;max-width:80px;display:flex;flex-direction:column;justify-content:flex-end;height:100%;text-align:center}
   .gc-num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;margin-bottom:5px}
   .gc-bar{border-radius:9px 9px 0 0;min-height:4px} .gc-lbl{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--muted);font-weight:600;margin-top:8px}
@@ -123,8 +131,12 @@
   .scard .stext{font-size:13px;color:var(--muted);line-height:1.6;margin-top:13px;border-top:1px solid var(--line);padding-top:11px}
   .scard .cmt{margin-top:10px;min-height:38px;font-size:13px;resize:vertical} .scard .cardfoot{margin-top:auto;padding-top:12px}
   .legend{display:flex;gap:15px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:15px} .legend span{display:inline-flex;align-items:center;gap:6px} .swatch{width:13px;height:13px;border-radius:4px;display:inline-block}
-  .g-A{background:#1f8a5e}.g-C{background:#4566cf}.g-E{background:#dd853a}.g-F{background:#d24a40}.g-none{background:#9a92a1}
+  .g-A{background:#1f8a5e}.g-B{background:#5a9b32}.g-C{background:#4566cf}.g-D{background:#c79a22}.g-E{background:#dd853a}.g-F{background:#d24a40}.g-none{background:#9a92a1}
   .hidden{display:none!important}
+  .modal{position:fixed;inset:0;background:rgba(20,17,26,.5);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px}
+  .modal-box{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);max-width:420px;width:100%;padding:22px 24px}
+  .modal-msg{font-size:15.5px;line-height:1.55;margin-bottom:18px;color:var(--ink)}
+  .modal-btns{display:flex;gap:10px;justify-content:flex-end}
   /* Mörkt tema (varm koltonad) */
   :root[data-theme="dark"]{
     --bg:#1e1b24; --ink:#efeae3; --muted:#a79fb0; --faint:#7c7589;
@@ -146,7 +158,6 @@
   :root[data-theme="dark"] .tag{background:var(--indigo-soft);color:#cbc6fb}
   :root[data-theme="dark"] .tag button{color:#cbc6fb}
   :root[data-theme="dark"] .grades{background:#232029;border-color:var(--line)}
-  :root[data-theme="dark"] .qgen{background:#232029!important;border-color:var(--line-strong)!important}
   :root[data-theme="dark"] .ov-card,:root[data-theme="dark"] .lvlchip,:root[data-theme="dark"] .pastebox,:root[data-theme="dark"] .empty{background:#232029}
   :root[data-theme="dark"] table.grid th{background:#232029}
   :root[data-theme="dark"] table.grid td.name-c{background:var(--card)}
@@ -185,41 +196,31 @@
 
   <section class="tabpanel" id="tab-build">
     <div class="panel">
-      <div class="phead"><h2>Tidigare prov</h2><span class="phint">Sparas i den här webbläsaren</span></div>
-      <div class="pbody">
-        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
-          <div style="flex:1;min-width:200px"><label class="field" for="libSelect">Öppna ett sparat prov</label><select id="libSelect"><option value="">– välj sparat prov –</option></select></div>
-          <button class="btn-ghost" id="libOpen">Öppna</button><button class="btn-danger" id="libDelete">Ta bort</button>
-          <span class="spacer"></span><button class="btn" id="libSave">Spara nuvarande prov</button>
-        </div>
-        <div id="libEmpty" class="empty" style="margin-top:12px">Inga sparade prov än. Bygg ett prov nedan, ge det ett namn och tryck "Spara nuvarande prov".</div>
-      </div>
-    </div>
-    <div class="panel">
-      <div class="phead"><h2>Provets uppgifter</h2><span class="phint">Områden · svårighet · deluppgifter</span></div>
+      <div class="phead"><h2>Skapa prov</h2><span class="phint">Namn och betygsgränser</span></div>
       <div class="pbody">
         <div style="max-width:360px;margin-bottom:18px"><label class="field" for="testName">Provets namn</label><input id="testName" type="text" placeholder="t.ex. Fysik – Krafter och rörelse"></div>
-        <label class="field" style="margin-bottom:8px">Betygsgränser (poäng)</label>
+        <label class="field" style="margin-bottom:8px">Betygsgränser (poäng) – valfritt, lämna tomt om du inte vill sätta betyg</label>
         <div class="grades">
           <div class="g"><label class="field" for="gE">Gräns E</label><input id="gE" class="num" type="number" min="0" step="0.5" placeholder="–"></div>
+          <div class="g"><label class="field" for="gD">Gräns D</label><input id="gD" class="num" type="number" min="0" step="0.5" placeholder="valfritt"></div>
           <div class="g"><label class="field" for="gC">Gräns C</label><input id="gC" class="num" type="number" min="0" step="0.5" placeholder="–"></div>
+          <div class="g"><label class="field" for="gB">Gräns B</label><input id="gB" class="num" type="number" min="0" step="0.5" placeholder="valfritt"></div>
           <div class="g"><label class="field" for="gA">Gräns A</label><input id="gA" class="num" type="number" min="0" step="0.5" placeholder="–"></div>
           <div class="maxinfo">Maxpoäng: <b id="maxPts">0</b></div>
         </div>
         <div id="gradeScale"></div>
-        <div class="qgen" style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;background:#faf8f4;border:1px dashed var(--line-strong);border-radius:12px;padding:14px 16px;margin:18px 0 14px">
-          <div style="max-width:150px"><label class="field" for="qcount">Skapa flera uppgifter</label><input id="qcount" class="num" type="number" min="1" max="60" placeholder="antal"></div>
-          <button class="btn-ghost" id="genBtn">Skapa rader</button>
-        </div>
-        <div class="col-head-tasks"><span>Områden</span><span>Svårighetsnivå</span></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="phead"><h2>Uppgifter</h2><span class="phint">Områden · svårighet · deluppgifter</span></div>
+      <div class="pbody">
+        <div class="col-head-tasks"><span>Områden</span><span>Svårighetsgrad</span></div>
         <div id="taskList"></div>
         <div id="taskEmpty" class="empty">Inga uppgifter än. Lägg till den första nedan.</div>
         <div class="btn-row">
           <button class="btn" id="addTask">+ Lägg till uppgift</button>
           <span class="spacer"></span>
-          <button class="btn-ghost" id="saveTest">Exportera som fil (dela)</button>
-          <button class="btn-ghost" id="loadTest">Öppna fil</button>
-          <input id="fileInput" type="file" accept="application/json,.json" class="hidden">
+          <button class="btn-danger" id="clearBuild">Rensa</button>
         </div>
       </div>
     </div>
@@ -236,6 +237,26 @@
         <div class="lvldist" id="lvlDist"></div>
       </div>
     </div>
+    <details class="panel collapsible">
+      <summary><h2>Spara &amp; ladda prov</h2><span class="phint">Sparade prov och provfiler</span><span class="chev">▸</span></summary>
+      <div class="pbody">
+        <label class="field">Sparade prov (i den här webbläsaren)</label>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
+          <div style="flex:1;min-width:200px"><select id="libSelect" aria-label="Välj sparat prov"><option value="">– välj sparat prov –</option></select></div>
+          <button class="btn-ghost" id="libOpen">Ladda</button>
+          <button class="btn-danger" id="libDelete">Ta bort</button>
+          <span class="spacer"></span>
+          <button class="btn" id="libSave">Spara prov</button>
+        </div>
+        <div id="libEmpty" class="empty" style="margin-top:12px">Inga sparade prov än. Bygg ett prov ovan, ge det ett namn och tryck "Spara prov".</div>
+        <label class="field" style="margin-top:20px">Provfil (för att dela med kollegor)</label>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <button class="btn-ghost" id="loadTest">Ladda prov från fil</button>
+          <button class="btn-ghost" id="saveTest">Exportera prov</button>
+          <input id="fileInput" type="file" accept="application/json,.json" class="hidden">
+        </div>
+      </div>
+    </details>
   </section>
 
   <section class="tabpanel hidden" id="tab-results">
@@ -271,9 +292,9 @@
           <div class="sub">Sammanfattning · klassen</div>
           <div id="classText" class="summary-box"></div>
           <button class="btn-ghost btn-copy" data-copy="#classText">Kopiera texten</button>
-          <div class="sub">Betygsfördelning</div>
+          <div class="sub" id="gradeChartHead">Betygsfördelning</div>
           <div id="gradeChart" class="gradechart"></div>
-          <div id="gradeChartEmpty" class="empty hidden">Ange betygsgränser i fliken Skapa prov för att se fördelningen.</div>
+          <div id="gradeChartEmpty" class="empty hidden">Fyll i gränserna för E, C och A i fliken Skapa prov för att räkna betyg.</div>
           <div class="sub">Klassen per område</div>
           <div id="classBars"></div>
           <div class="sub">Översikt · elev × område</div>
@@ -294,6 +315,7 @@
 </div>
 <datalist id="areaPool"></datalist>
 <div id="printArea"></div>
+<div id="modal" class="modal hidden"><div class="modal-box"><div class="modal-msg" id="modalMsg"></div><div class="modal-btns"><button class="btn-ghost" id="modalCancel">Avbryt</button><button class="btn-danger" id="modalOk">Bekräfta</button></div></div></div>
 
 <script>
 "use strict";
@@ -303,13 +325,13 @@
 const LSKEY="provanalys_v2", LIBKEY="provanalys_library";
 const THR=0.4, BORDERLINE=2;
 let state, nextId=1, nextStudentId=1, saveTimer=null, gridCols=0;
-function defaultState(){ return {testName:"",areas:[],tasks:[],grades:{e:"",c:"",a:""},students:[]}; }
+function defaultState(){ return {testName:"",areas:[],tasks:[],grades:{e:"",d:"",c:"",b:"",a:""},students:[]}; }
 function save(){ try{ localStorage.setItem(LSKEY,JSON.stringify(state)); }catch(e){} }
 function scheduleSave(){ clearTimeout(saveTimer); saveTimer=setTimeout(save,250); }
 function loadStored(){ try{ const r=localStorage.getItem(LSKEY); return r?JSON.parse(r):null; }catch(e){ return null; } }
-function normalizeState(s){ const d=defaultState(); s=Object.assign(d,s||{}); s.grades=Object.assign({e:"",c:"",a:""},s.grades||{}); s.areas=Array.isArray(s.areas)?s.areas:[];
+function normalizeState(s){ const d=defaultState(); s=Object.assign(d,s||{}); s.grades=Object.assign({e:"",d:"",c:"",b:"",a:""},s.grades||{}); s.areas=Array.isArray(s.areas)?s.areas:[];
   s.tasks=(s.tasks||[]).map(t=>{ let parts; if(Array.isArray(t.parts)&&t.parts.length) parts=t.parts.map(p=>({id:p.id,max:p.max??""})); else parts=[{id:t.id,max:t.max??""}];
-    return {id:t.id,areas:Array.isArray(t.areas)?t.areas:[],level:t.level||3,parts}; });
+    return {id:t.id,areas:Array.isArray(t.areas)?t.areas:[],level:t.level||null,parts}; });
   s.students=(s.students||[]).map(st=>({id:st.id,name:st.name||"",scores:st.scores||{},absent:!!st.absent,comment:st.comment||""})); return s; }
 
 /* ===== 2. HJÄLP ===== */
@@ -320,7 +342,7 @@ function pct(p){ return Math.round(p*100)+" %"; }
 function esc(s){ return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 function joinSv(a){ if(!a.length) return ""; if(a.length===1) return a[0]; return a.slice(0,-1).join(", ")+" och "+a[a.length-1]; }
 function qual(p){ if(p>=0.8) return "ett mycket gott resultat"; if(p>=0.6) return "ett godkänt resultat"; return "ett svagt resultat"; }
-function bucketOf(l){ l=l||3; return l<=2?"grund":(l===3?"medel":"avancerat"); }
+function bucketOf(l){ if(!l) return null; return l<=2?"grund":(l===3?"medel":"avancerat"); }
 function letter(i){ return String.fromCharCode(97+i); }
 function partLabel(t,pi){ return t.parts.length>1 ? letter(pi)+")" : "Maxpoäng"; }
 function partCode(ti,pi,pc){ return (ti+1)+(pc>1?letter(pi):""); }
@@ -338,15 +360,18 @@ function gridColumns(){ const cols=[]; validTasks().forEach((t,ti)=>t.parts.forE
 
 /* ===== 3. ANALYS ===== */
 function gradesValid(){ const e=parseFloat(state.grades.e),c=parseFloat(state.grades.c),a=parseFloat(state.grades.a); return !isNaN(e)&&!isNaN(c)&&!isNaN(a)&&e<c&&c<a; }
-function gradeFor(p){ if(!gradesValid()) return ""; const e=+state.grades.e,c=+state.grades.c,a=+state.grades.a; if(p>=a) return "A"; if(p>=c) return "C"; if(p>=e) return "E"; return "F"; }
+function gradeBands(){ if(!gradesValid()) return null; const g=state.grades,e=+g.e,c=+g.c,a=+g.a; const b=[{g:"F",min:0},{g:"E",min:e}];
+  const dd=parseFloat(g.d); if(!isNaN(dd)&&dd>e&&dd<c) b.push({g:"D",min:dd}); b.push({g:"C",min:c});
+  const bb=parseFloat(g.b); if(!isNaN(bb)&&bb>c&&bb<a) b.push({g:"B",min:bb}); b.push({g:"A",min:a}); b.sort((x,y)=>x.min-y.min); return b; }
+function gradeFor(p){ const b=gradeBands(); if(!b) return ""; let g="F"; for(const x of b){ if(p>=x.min) g=x.g; } return g; }
 function studentTotals(s){ const vt=validTasks(); let pts=0; vt.forEach(t=>pts+=studentTaskPoints(s,t)); const max=totalMax(); return {pts,max,pct:max?pts/max:0,grade:gradeFor(pts)}; }
 function band(p){ if(p>=0.8) return {bg:"var(--good-bg)",fg:"var(--good)"}; if(p>=0.6) return {bg:"var(--okay-bg)",fg:"var(--okay)"}; if(p>=0.4) return {bg:"var(--mid-bg)",fg:"var(--mid)"}; return {bg:"var(--weak-bg)",fg:"var(--weak)"}; }
-function borderlineInfo(s){ if(!gradesValid()||s.absent) return null; const pts=studentTotals(s).pts; const bs=[{p:+state.grades.e,g:"E"},{p:+state.grades.c,g:"C"},{p:+state.grades.a,g:"A"}]; let best=null;
-  bs.forEach(b=>{ const d=b.p-pts; if(d>0&&d<=BORDERLINE&&(!best||d<best.diff)) best={letter:b.g,diff:d}; }); return best; }
-function levelStatsFor(fn){ const b={grund:{got:0,poss:0},medel:{got:0,poss:0},avancerat:{got:0,poss:0}}; validTasks().forEach(t=>{ const r=fn(t); if(!r) return; const k=bucketOf(t.level); b[k].got+=r.got; b[k].poss+=r.poss; }); return b; }
+function borderlineInfo(s){ if(s.absent) return null; const bands=gradeBands(); if(!bands) return null; const pts=studentTotals(s).pts; let best=null;
+  bands.forEach(x=>{ if(x.g==="F") return; const d=x.min-pts; if(d>0&&d<=BORDERLINE&&(!best||d<best.diff)) best={letter:x.g,diff:d}; }); return best; }
+function levelStatsFor(fn){ const b={grund:{got:0,poss:0},medel:{got:0,poss:0},avancerat:{got:0,poss:0}}; validTasks().forEach(t=>{ const r=fn(t); if(!r) return; const k=bucketOf(t.level); if(!k) return; b[k].got+=r.got; b[k].poss+=r.poss; }); return b; }
 function studentLevelStats(s){ return levelStatsFor(t=>({got:studentTaskPoints(s,t),poss:taskMax(t)})); }
 function classLevelStats(){ const act=activeStudents(); return levelStatsFor(t=>({got:act.reduce((a,st)=>a+studentTaskPoints(st,t),0),poss:taskMax(t)*act.length})); }
-function gradeDistribution(){ const d={A:0,C:0,E:0,F:0}; activeStudents().forEach(s=>{ const g=gradeFor(studentTotals(s).pts); if(g) d[g]++; }); return d; }
+function gradeDistribution(){ const d={A:0,B:0,C:0,D:0,E:0,F:0}; activeStudents().forEach(s=>{ const g=gradeFor(studentTotals(s).pts); if(g) d[g]++; }); return d; }
 function weakAreaPhrase(s,area,thr){ const inArea=validTasks().filter(t=>taskAreas(t).includes(area)); const grp=b=>inArea.filter(t=>bucketOf(t.level)===b);
   const pctOf=arr=>{ const poss=arr.reduce((a,t)=>a+taskMax(t),0); if(!poss) return null; const got=arr.reduce((a,t)=>a+studentTaskPoints(s,t),0); return got/poss; };
   const gp=pctOf(grp("grund")),ap=pctOf(grp("avancerat")); const mx=areaMax(area),areaPct=mx?studentAreaPoints(s,area)/mx:0;
@@ -367,7 +392,7 @@ function classSummary(thr){
     const w=weak[0]; t+=w.below+" av "+act.length+" elever ligger under "+Math.round(thr*100)+" % på "+w.a+" – det området är värt att repetera gemensamt. ";
   } else t+="Inget område ligger under gränsen på "+Math.round(thr*100)+" % – en jämn prestation. ";
   const cl=classLevelStats(); if(cl.grund.poss&&cl.avancerat.poss) t+="På grunduppgifterna (nivå 1–2) når klassen "+pct(cl.grund.got/cl.grund.poss)+", på de svåra (nivå 4–5) "+pct(cl.avancerat.got/cl.avancerat.poss)+". ";
-  if(gradesValid()){ const d=gradeDistribution(); const parts=["A","C","E","F"].filter(g=>d[g]>0).map(g=>d[g]+" "+g); if(parts.length) t+="Betygsfördelning: "+parts.join(", ")+". "; }
+  if(gradesValid()){ const d=gradeDistribution(); const parts=["A","B","C","D","E","F"].filter(g=>d[g]>0).map(g=>d[g]+" "+g); if(parts.length) t+="Betygsfördelning: "+parts.join(", ")+". "; }
   const absent=state.students.length-act.length; if(absent>0) t+="("+absent+" "+(absent===1?"elev":"elever")+" frånvarande, räknas inte med.)";
   return t.trim();
 }
@@ -392,7 +417,7 @@ function studentSummary(s,thr){
 
 /* ===== 5. RENDERING ===== */
 function renderAll(){ reflectInputs(); renderAreaPool(); renderTasks(); renderOverview(); renderGradeScale(); renderGrid(); renderAnalysis(); }
-function reflectInputs(){ $("#testName").value=state.testName||""; $("#gE").value=state.grades.e||""; $("#gC").value=state.grades.c||""; $("#gA").value=state.grades.a||""; }
+function reflectInputs(){ $("#testName").value=state.testName||""; $("#gE").value=state.grades.e||""; $("#gD").value=state.grades.d||""; $("#gC").value=state.grades.c||""; $("#gB").value=state.grades.b||""; $("#gA").value=state.grades.a||""; }
 function renderAreaPool(){ $("#areaPool").innerHTML=state.areas.map(a=>`<option value="${esc(a)}">`).join(""); }
 
 let focusTaskId=null;
@@ -400,17 +425,17 @@ function renderTasks(){
   const list=$("#taskList"); list.innerHTML=""; $("#taskEmpty").style.display=state.tasks.length?"none":"block";
   state.tasks.forEach((t,i)=>{
     const card=document.createElement("div"); card.className="task";
-    const lvlOpts=[1,2,3,4,5].map(l=>`<option value="${l}" ${+t.level===+l?"selected":""}>Nivå ${l}</option>`).join("");
+    const lvlOpts='<option value="" '+(!t.level?'selected':'')+' disabled hidden>svårighetsgrad</option>'+[1,2,3,4,5].map(l=>`<option value="${l}" ${+t.level===+l?"selected":""}>Nivå ${l}${l===1?" (grundläggande)":l===5?" (avancerad)":""}</option>`).join("");
     const pc=t.parts.length;
     const partsHtml=t.parts.map((p,pi)=>`<div class="prow"><span class="plabel">${partLabel(t,pi)}</span>
       <input class="num pmax" data-pid="${p.id}" type="number" min="0" step="0.5" placeholder="poäng" value="${p.max}">
       ${pc>1?`<button class="btn-mini del" data-rmpart="${p.id}" title="Ta bort deluppgift">✕</button>`:'<span></span>'}</div>`).join("");
-    card.innerHTML=`<div class="task-head"><span class="tnum">Uppgift ${i+1}</span><span class="tmeta">${fmt(taskMax(t))||"0"} p · Nivå ${t.level||3}${pc>1?" · "+pc+" deluppg.":""}</span><span style="flex:1"></span>
+    card.innerHTML=`<div class="task-head"><span class="tnum">Uppgift ${i+1}</span><span class="tmeta">${fmt(taskMax(t))||"0"} p · ${t.level?"Nivå "+t.level:"nivå ej satt"}${pc>1?" · "+pc+" deluppg.":""}</span><span style="flex:1"></span>
       <button class="btn-mini" data-act="up" title="Flytta upp">↑</button><button class="btn-mini" data-act="down" title="Flytta ner">↓</button>
       <button class="btn-mini" data-act="dup" title="Duplicera">⧉</button><button class="btn-mini del" data-act="del" title="Ta bort">✕</button></div>
       <div class="task-fields"><div><div class="tags" data-act="tags">
         ${(t.areas||[]).map(a=>`<span class="tag">${esc(a)}<button data-area="${esc(a)}">×</button></span>`).join("")}
-        <input class="tag-input" list="areaPool" placeholder="${(t.areas||[]).length?'lägg till…':'skriv område, Enter…'}"></div></div>
+        <input class="tag-input" list="areaPool" placeholder="${(t.areas||[]).length?'lägg till…':'område'}"></div></div>
         <div><select data-act="lvl">${lvlOpts}</select></div></div>
       <div class="parts"><div class="col-head-parts">${pc>1?"Deluppgifter · poäng":"Maxpoäng"}</div>${partsHtml}
         <button class="btn-ghost addpart" data-act="addpart">+ Lägg till deluppgift (a, b, c…)</button></div>`;
@@ -420,7 +445,7 @@ function renderTasks(){
     card.querySelector('[data-act="dup"]').addEventListener("click",()=>dupTask(i));
     card.querySelector('[data-act="addpart"]').addEventListener("click",()=>{ t.parts.push({id:nextId++,max:""}); commitBuild(); });
     card.querySelector('[data-act="lvl"]').addEventListener("change",e=>{ t.level=+e.target.value; commitBuild(); });
-    card.querySelectorAll(".pmax").forEach(inp=>inp.addEventListener("input",e=>{ const p=t.parts.find(x=>String(x.id)===inp.dataset.pid); if(p){ p.max=e.target.value; card.querySelector(".tmeta").textContent=(fmt(taskMax(t))||"0")+" p · Nivå "+(t.level||3)+(t.parts.length>1?" · "+t.parts.length+" deluppg.":""); renderOverview(); renderGradeScale(); renderGrid(); scheduleSave(); } }));
+    card.querySelectorAll(".pmax").forEach(inp=>inp.addEventListener("input",e=>{ const p=t.parts.find(x=>String(x.id)===inp.dataset.pid); if(p){ p.max=e.target.value; card.querySelector(".tmeta").textContent=(fmt(taskMax(t))||"0")+" p · "+(t.level?"Nivå "+t.level:"nivå ej satt")+(t.parts.length>1?" · "+t.parts.length+" deluppg.":""); renderOverview(); renderGradeScale(); renderGrid(); scheduleSave(); } }));
     card.querySelectorAll("[data-rmpart]").forEach(b=>b.addEventListener("click",()=>{ const pid=b.dataset.rmpart; state.students.forEach(s=>delete s.scores[pid]); t.parts=t.parts.filter(x=>String(x.id)!==pid); commitBuild(); }));
     const tagsBox=card.querySelector('[data-act="tags"]'), tagInput=tagsBox.querySelector(".tag-input");
     tagsBox.querySelectorAll(".tag button").forEach(b=>b.addEventListener("click",()=>{ t.areas=t.areas.filter(a=>a!==b.dataset.area); focusTaskId=t.id; commitBuild(); }));
@@ -441,16 +466,19 @@ function renderOverview(){
   const body=$("#ovBody"); body.innerHTML=""; $("#ovEmpty").style.display=areas.length?"none":"block";
   areas.forEach(a=>{ const p=areaMax(a); const tr=document.createElement("tr");
     tr.innerHTML=`<td>${esc(a)}</td><td class="n">${areaTaskCount(a)}</td><td class="n">${fmt(p)} p</td>`; body.appendChild(tr); });
-  const counts={1:0,2:0,3:0,4:0,5:0}; validTasks().forEach(t=>counts[t.level||3]++);
-  $("#lvlDist").innerHTML=[1,2,3,4,5].map(l=>`<span class="lvlchip">Nivå ${l} <b>${counts[l]}</b></span>`).join("");
+  const counts={1:0,2:0,3:0,4:0,5:0}; validTasks().forEach(t=>{ if(t.level) counts[t.level]++; });
+  $("#lvlDist").innerHTML=[1,2,3,4,5].map(l=>`<span class="lvlchip">Nivå ${l}: <b>${counts[l]}</b></span>`).join("");
 }
 function renderGradeScale(){
   const host=$("#gradeScale"), max=totalMax(); $("#maxPts").textContent=fmt(max)||"0";
-  const e=parseFloat(state.grades.e),c=parseFloat(state.grades.c),a=parseFloat(state.grades.a);
+  const a=parseFloat(state.grades.a);
   if(!(max>0)||!gradesValid()||a>max){ host.innerHTML=(a>max&&max>0)?`<div class="gs-labels" style="color:var(--weak)">A-gränsen (${fmt(a)}) är högre än maxpoängen (${fmt(max)}).</div>`:""; return; }
-  const segs=[{g:"F",lo:0,hi:e},{g:"E",lo:e,hi:c},{g:"C",lo:c,hi:a},{g:"A",lo:a,hi:max}];
-  let bar='<div class="gs-bar">'; segs.forEach(sg=>{ const w=(sg.hi-sg.lo)/max*100; if(w>0) bar+=`<div class="gs-seg g-${sg.g}" style="width:${w}%">${sg.g}</div>`; });
-  bar+='</div><div class="gs-labels"><span>E ≥ <b>'+fmt(e)+'</b> p</span><span>C ≥ <b>'+fmt(c)+'</b> p</span><span>A ≥ <b>'+fmt(a)+'</b> p</span><span>F under E</span></div>'; host.innerHTML=bar;
+  const bands=gradeBands();
+  let bar='<div class="gs-bar">';
+  bands.forEach((sg,i)=>{ const hi=(i+1<bands.length?bands[i+1].min:max); const w=(hi-sg.min)/max*100; if(w>0) bar+=`<div class="gs-seg g-${sg.g}" style="width:${w}%">${sg.g}</div>`; });
+  bar+='</div><div class="gs-labels">';
+  bands.forEach(sg=>{ if(sg.g!=="F") bar+='<span>'+sg.g+' ≥ <b>'+fmt(sg.min)+'</b> p</span>'; });
+  bar+='<span>F under E</span></div>'; host.innerHTML=bar;
 }
 function renderGrid(){
   const wrap=$("#gridWrap"), cols=gridColumns(); gridCols=cols.length;
@@ -458,7 +486,7 @@ function renderGrid(){
   if(!ready||!state.students.length){ wrap.innerHTML=""; return; }
   // header (two rows)
   let r1=`<tr><th class="name-c" rowspan="2">Elev</th><th class="absc" rowspan="2">Frånv.</th>`;
-  validTasks().forEach((t,ti)=>{ r1+=`<th class="area-h grp" colspan="${t.parts.length}">U${ti+1}<span class="mx">${esc(taskAreas(t).join(", "))} · N${t.level||3}</span></th>`; });
+  validTasks().forEach((t,ti)=>{ r1+=`<th class="area-h grp" colspan="${t.parts.length}">U${ti+1}<span class="mx">${esc(taskAreas(t).join(", "))} · N${t.level||"–"}</span></th>`; });
   r1+=`<th class="rm-col" rowspan="2"></th></tr>`;
   let r2="<tr>"; cols.forEach(c=>{ r2+=`<th class="${c.pi===0?'grp':''}">${c.pc>1?letter(c.pi)+")":""}<span class="mx">max ${fmt(c.p.max)||"?"}</span></th>`; }); r2+="</tr>";
   const table=document.createElement("table"); table.className="grid"; table.innerHTML="<thead>"+r1+r2+"</thead>"; const tbody=document.createElement("tbody");
@@ -491,11 +519,13 @@ function renderAnalysis(){
   $("#exportBtn").disabled=!ready; $("#printBtn").disabled=!ready; if(!ready) return;
   const thr=THR, areas=usedAreas(), act=activeStudents();
   $("#classText").textContent=classSummary(thr);
-  const gc=$("#gradeChart"); gc.innerHTML="";
-  if(gradesValid()){ $("#gradeChartEmpty").classList.add("hidden"); gc.classList.remove("hidden"); const d=gradeDistribution(); const mx=Math.max(1,...Object.values(d));
-    ["A","C","E","F"].forEach(g=>{ const h=Math.round(d[g]/mx*118)+4; const col=document.createElement("div"); col.className="gc-col";
+  const gc=$("#gradeChart"); gc.innerHTML=""; const ghead=$("#gradeChartHead"), gempty=$("#gradeChartEmpty");
+  const anyGrade=["e","d","c","b","a"].some(k=>String(state.grades[k]||"").trim()!=="");
+  if(gradesValid()){ ghead.classList.remove("hidden"); gc.classList.remove("hidden"); gempty.classList.add("hidden"); const d=gradeDistribution(); const mx=Math.max(1,...Object.values(d));
+    ["A","B","C","D","E","F"].forEach(g=>{ const h=Math.round(d[g]/mx*118)+4; const col=document.createElement("div"); col.className="gc-col";
       col.innerHTML=`<div class="gc-num">${d[g]}</div><div class="gc-bar g-${g}" style="height:${h}px"></div><div class="gc-lbl">${g}</div>`; gc.appendChild(col); });
-  } else { gc.classList.add("hidden"); $("#gradeChartEmpty").classList.remove("hidden"); }
+  } else if(anyGrade){ ghead.classList.remove("hidden"); gc.classList.add("hidden"); gempty.classList.remove("hidden"); }
+  else { ghead.classList.add("hidden"); gc.classList.add("hidden"); gempty.classList.add("hidden"); }
   const bars=$("#classBars"); bars.innerHTML="";
   areas.forEach(a=>{ const possible=areaMax(a)*act.length, got=act.reduce((s,st)=>s+studentAreaPoints(st,a),0), p=possible?got/possible:0, b=band(p);
     const row=document.createElement("div"); row.className="bar-row";
@@ -532,7 +562,7 @@ function renderAnalysis(){
 }
 
 /* ===== 6. EXPORT ===== */
-const GRADE_XL={A:{bg:"FFD9F0E4",fg:"FF115C3E"},C:{bg:"FFE0E6FB",fg:"FF26429C"},E:{bg:"FFF9E7D4",fg:"FF8F4E1B"},F:{bg:"FFF8DEDC",fg:"FF892824"},"":{bg:"FFFFFFFF",fg:"FF222222"}};
+const GRADE_XL={A:{bg:"FFD9F0E4",fg:"FF115C3E"},B:{bg:"FFE6F1D8",fg:"FF3D5E12"},C:{bg:"FFE0E6FB",fg:"FF26429C"},D:{bg:"FFF6EFD2",fg:"FF7A5E12"},E:{bg:"FFF9E7D4",fg:"FF8F4E1B"},F:{bg:"FFF8DEDC",fg:"FF892824"},"":{bg:"FFFFFFFF",fg:"FF222222"}};
 const HEAD_FILL="FF4B43C4";
 function styleHeader(ws,row){ const r=ws.getRow(row); r.height=20; r.eachCell(c=>{ c.font={bold:true,color:{argb:"FFFFFFFF"},size:11}; c.fill={type:"pattern",pattern:"solid",fgColor:{argb:HEAD_FILL}}; c.alignment={vertical:"middle"}; c.border={bottom:{style:"thin",color:{argb:"FFBBBBBB"}}}; }); }
 function bandFillXL(p){ if(p>=0.8) return {bg:"FFE3F2EA",fg:"FF1f6e4c"}; if(p>=0.6) return {bg:"FFEEF4DD",fg:"FF566f22"}; if(p>=0.4) return {bg:"FFF8EFDA",fg:"FF8a611f"}; return {bg:"FFFAE5E2",fg:"FF993730"}; }
@@ -558,7 +588,7 @@ async function exportXlsx(){
   ws3.addRow(["Område","Antal uppgifter","Poäng"]); styleHeader(ws3,1); const tot=totalMax();
   areas.forEach(a=>{ const p=areaMax(a); const r=ws3.addRow([a,areaTaskCount(a),p]); r.getCell(2).alignment={horizontal:"center"}; r.getCell(3).alignment={horizontal:"center"}; });
   ws3.addRow([]); const sr=ws3.addRow(["Totalt",validTasks().length,tot]); sr.font={bold:true};
-  ws3.addRow([]); const cl=[0,0,0,0,0,0]; vt.forEach(t=>cl[t.level||3]++); ws3.addRow(["Svårighetsnivå","Antal uppgifter"]).font={bold:true};
+  ws3.addRow([]); const cl=[0,0,0,0,0,0]; vt.forEach(t=>{ if(t.level) cl[t.level]++; }); ws3.addRow(["Svårighetsnivå","Antal uppgifter"]).font={bold:true};
   for(let l=1;l<=5;l++){ const r=ws3.addRow(["Nivå "+l,cl[l]]); r.getCell(2).alignment={horizontal:"center"}; }
   const ws4=wb.addWorksheet("Per elev och område",{views:[{state:"frozen",xSplit:1,ySplit:1}]}); ws4.columns=[{width:24},...areas.map(()=>({width:15})),{width:11}];
   ws4.addRow(["Elev",...areas,"Totalt"]); styleHeader(ws4,1);
@@ -588,8 +618,8 @@ function printStudents(){ if(!validTasks().length||!activeStudents().length){ al
 
 /* ===== Provfil + bibliotek ===== */
 function currentTestData(){ return {testName:state.testName,grades:state.grades,areas:state.areas,tasks:state.tasks.map(t=>({areas:t.areas,level:t.level,parts:t.parts.map(p=>({id:p.id,max:p.max}))}))}; }
-function applyTestData(d){ state.testName=d.testName||""; state.grades=Object.assign({e:"",c:"",a:""},d.grades||{}); state.areas=d.areas||[]; nextId=1;
-  state.tasks=(d.tasks||[]).map(t=>{ const tid=nextId++; let parts; if(Array.isArray(t.parts)&&t.parts.length) parts=t.parts.map(p=>({id:nextId++,max:p.max??""})); else parts=[{id:nextId++,max:t.max??""}]; return {id:tid,areas:t.areas||[],level:t.level||3,parts}; });
+function applyTestData(d){ state.testName=d.testName||""; state.grades=Object.assign({e:"",d:"",c:"",b:"",a:""},d.grades||{}); state.areas=d.areas||[]; nextId=1;
+  state.tasks=(d.tasks||[]).map(t=>{ const tid=nextId++; let parts; if(Array.isArray(t.parts)&&t.parts.length) parts=t.parts.map(p=>({id:nextId++,max:p.max??""})); else parts=[{id:nextId++,max:t.max??""}]; return {id:tid,areas:t.areas||[],level:t.level||null,parts}; });
   renderAll(); save(); }
 function saveTestFile(){ const blob=new Blob([JSON.stringify(currentTestData(),null,2)],{type:"application/json"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=((state.testName||"prov").replace(/[^\w åäöÅÄÖ-]/g,"").trim()||"prov")+".prov.json"; a.click(); URL.revokeObjectURL(a.href); }
 function loadTestFile(file){ const r=new FileReader(); r.onload=()=>{ try{ applyTestData(JSON.parse(r.result)); }catch(e){ alert("Kunde inte läsa filen – är det en sparad prov-fil?"); } }; r.readAsText(file); }
@@ -597,13 +627,13 @@ function libLoad(){ try{ return JSON.parse(localStorage.getItem(LIBKEY))||[]; }c
 function libStore(l){ try{ localStorage.setItem(LIBKEY,JSON.stringify(l)); }catch(e){} }
 function renderLibrary(selId){ const lib=libLoad().sort((a,b)=>b.savedAt-a.savedAt), sel=$("#libSelect");
   sel.innerHTML='<option value="">– välj sparat prov –</option>'+lib.map(p=>`<option value="${p.id}">${esc(p.name)} · ${new Date(p.savedAt).toLocaleDateString("sv-SE")}</option>`).join(""); if(selId) sel.value=selId; $("#libEmpty").style.display=lib.length?"none":"block"; }
-function libSaveCurrent(){ const name=(state.testName||"").trim(); if(!name){ alert("Ge provet ett namn (i fältet nedan) innan du sparar det i biblioteket."); return; } if(!validTasks().length){ alert("Lägg till minst en uppgift med poäng först."); return; }
+async function libSaveCurrent(){ const name=(state.testName||"").trim(); if(!name){ alert("Ge provet ett namn (i fältet nedan) innan du sparar det i biblioteket."); return; } if(!validTasks().length){ alert("Lägg till minst en uppgift med poäng först."); return; }
   const lib=libLoad(), ex=lib.find(p=>p.name.toLowerCase()===name.toLowerCase()); let sid;
-  if(ex){ if(!confirm('Det finns redan ett sparat prov som heter "'+name+'". Skriva över det?')) return; ex.data=currentTestData(); ex.savedAt=Date.now(); sid=ex.id; }
+  if(ex){ if(!(await askConfirm('Det finns redan ett sparat prov som heter "'+name+'". Skriva över det?',"Skriv över"))) return; ex.data=currentTestData(); ex.savedAt=Date.now(); sid=ex.id; }
   else { const e={id:"p"+Date.now().toString(36),name,savedAt:Date.now(),data:currentTestData()}; lib.push(e); sid=e.id; }
   libStore(lib); renderLibrary(sid); const b=$("#libSave"),old=b.textContent; b.textContent="Sparat ✓"; b.classList.add("copied"); setTimeout(()=>{b.textContent=old;b.classList.remove("copied");},1500); }
 function libOpen(){ const id=$("#libSelect").value; if(!id){ alert("Välj ett sparat prov i listan först."); return; } const p=libLoad().find(x=>x.id===id); if(p) applyTestData(p.data); }
-function libDelete(){ const id=$("#libSelect").value; if(!id){ alert("Välj ett sparat prov att ta bort."); return; } const p=libLoad().find(x=>x.id===id); if(!p) return; if(!confirm('Ta bort det sparade provet "'+p.name+'" ur biblioteket?')) return; libStore(libLoad().filter(x=>x.id!==id)); renderLibrary(); }
+async function libDelete(){ const id=$("#libSelect").value; if(!id){ alert("Välj ett sparat prov att ta bort."); return; } const p=libLoad().find(x=>x.id===id); if(!p) return; if(!(await askConfirm('Ta bort det sparade provet "'+p.name+'" ur biblioteket?',"Ta bort"))) return; libStore(libLoad().filter(x=>x.id!==id)); renderLibrary(); }
 function copyText(txt,btn){ navigator.clipboard.writeText(txt).then(()=>{ const old=btn.textContent; btn.textContent="Kopierat ✓"; btn.classList.add("copied"); setTimeout(()=>{btn.textContent=old;btn.classList.remove("copied");},1500); }).catch(()=>alert("Kunde inte kopiera automatiskt.")); }
 
 /* ===== Tema (ljust/mörkt) ===== */
@@ -613,16 +643,19 @@ function initTheme(){ let t="light"; try{ t=localStorage.getItem(THEMEKEY)||"lig
 
 /* ===== 7. INIT + WIRE ===== */
 function switchTab(name){ document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===name)); document.querySelectorAll(".tabpanel").forEach(p=>p.classList.toggle("hidden",p.id!=="tab-"+name)); if(name==="analyze") renderAnalysis(); if(name==="results") renderGrid(); window.scrollTo({top:0,behavior:"smooth"}); }
-function addTask(){ state.tasks.push({id:nextId++,areas:[],level:3,parts:[{id:nextId++,max:""}]}); commitBuild(); }
+function addTask(){ state.tasks.push({id:nextId++,areas:[],level:null,parts:[{id:nextId++,max:""}]}); commitBuild(); }
 function addStudent(){ state.students.push({id:nextStudentId++,name:"",scores:{},absent:false,comment:""}); renderGrid(); renderAnalysis(); save(); }
 function addStudentsBulk(text){ const names=text.split(/\r?\n/).map(line=>line.split(/\t|;/).map(c=>c.trim()).filter(Boolean).join(" ").trim()).filter(Boolean); if(!names.length){ alert("Klistra in minst ett namn."); return; }
   names.forEach(n=>state.students.push({id:nextStudentId++,name:n,scores:{},absent:false,comment:""})); $("#pasteArea").value=""; $("#pasteBox").classList.add("hidden"); renderGrid(); renderAnalysis(); save(); }
+function askConfirm(msg,okLabel){ return new Promise(res=>{ const m=$("#modal"),ok=$("#modalOk"),cancel=$("#modalCancel"); $("#modalMsg").textContent=msg; ok.textContent=okLabel||"Bekräfta"; m.classList.remove("hidden");
+  const done=v=>{ m.classList.add("hidden"); ok.onclick=null; cancel.onclick=null; m.onclick=null; res(v); };
+  ok.onclick=()=>done(true); cancel.onclick=()=>done(false); m.onclick=e=>{ if(e.target===m) done(false); }; }); }
+async function clearAll(){ if(await askConfirm("Rensa allt och börja om? Detta går inte att ångra.","Rensa allt")){ try{localStorage.removeItem(LSKEY);}catch(e){} state=defaultState(); nextId=1; nextStudentId=1; reflectInputs(); addTask(); addTask(); addStudent(); switchTab("build"); } }
 function wire(){
   document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
   $("#testName").addEventListener("input",e=>{ state.testName=e.target.value; scheduleSave(); });
-  ["e","c","a"].forEach(k=>$("#g"+k.toUpperCase()).addEventListener("input",e=>{ state.grades[k]=e.target.value; renderGradeScale(); renderAnalysis(); scheduleSave(); }));
+  ["e","d","c","b","a"].forEach(k=>$("#g"+k.toUpperCase()).addEventListener("input",e=>{ state.grades[k]=e.target.value; renderGradeScale(); renderAnalysis(); scheduleSave(); }));
   $("#addTask").addEventListener("click",addTask);
-  $("#genBtn").addEventListener("click",()=>{ const n=parseInt($("#qcount").value,10); if(!n||n<1){ alert("Skriv hur många uppgifter du vill skapa."); return; } for(let i=0;i<Math.min(n,60);i++) state.tasks.push({id:nextId++,areas:[],level:3,parts:[{id:nextId++,max:""}]}); $("#qcount").value=""; commitBuild(); });
   $("#addStudent").addEventListener("click",addStudent);
   $("#pasteToggle").addEventListener("click",()=>{ $("#pasteBox").classList.toggle("hidden"); if(!$("#pasteBox").classList.contains("hidden")) $("#pasteArea").focus(); });
   $("#pasteAdd").addEventListener("click",()=>addStudentsBulk($("#pasteArea").value));
@@ -632,7 +665,7 @@ function wire(){
   $("#fileInput").addEventListener("change",e=>{ if(e.target.files[0]) loadTestFile(e.target.files[0]); e.target.value=""; });
   $("#libSave").addEventListener("click",libSaveCurrent); $("#libOpen").addEventListener("click",libOpen); $("#libDelete").addEventListener("click",libDelete);
   $("#copyStudents").addEventListener("click",()=>copyText(state.students.map(s=>studentSummary(s,THR)).join("\n\n"),$("#copyStudents")));
-  $("#clearBtn").addEventListener("click",()=>{ if(confirm("Rensa allt och börja om? Detta går inte att ångra.")){ try{localStorage.removeItem(LSKEY);}catch(e){} state=defaultState(); nextId=1; nextStudentId=1; addTask(); addTask(); addStudent(); switchTab("build"); } });
+  $("#clearBtn").addEventListener("click",clearAll); $("#clearBuild").addEventListener("click",clearAll);
   document.addEventListener("click",e=>{ const b=e.target.closest(".btn-copy"); if(!b) return; const el=document.querySelector(b.dataset.copy); if(el) copyText(el.textContent,b); });
   $("#themeToggle").addEventListener("click",()=>applyTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark"));
 }
