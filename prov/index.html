@@ -247,7 +247,7 @@
           <button class="btn-ghost" id="pasteToggle">Klistra in elevlista</button>
         </div>
         <div id="pasteBox" class="pastebox hidden">
-          <label class="field" for="pasteArea">Klistra in namn – ett per rad</label>
+          <label class="field" for="pasteArea">Klistra in namn – ett per rad. Klistrar du in två kolumner från Excel (t.ex. förnamn + efternamn) slås de ihop automatiskt.</label>
           <textarea id="pasteArea" placeholder="Anna Andersson&#10;Bao Nguyen&#10;Carlos Díaz"></textarea>
           <div class="btn-row" style="margin-top:10px"><button class="btn" id="pasteAdd">Lägg till elever</button><button class="btn-ghost" id="pasteCancel">Avbryt</button></div>
         </div>
@@ -615,7 +615,7 @@ function initTheme(){ let t="light"; try{ t=localStorage.getItem(THEMEKEY)||"lig
 function switchTab(name){ document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===name)); document.querySelectorAll(".tabpanel").forEach(p=>p.classList.toggle("hidden",p.id!=="tab-"+name)); if(name==="analyze") renderAnalysis(); if(name==="results") renderGrid(); window.scrollTo({top:0,behavior:"smooth"}); }
 function addTask(){ state.tasks.push({id:nextId++,areas:[],level:3,parts:[{id:nextId++,max:""}]}); commitBuild(); }
 function addStudent(){ state.students.push({id:nextStudentId++,name:"",scores:{},absent:false,comment:""}); renderGrid(); renderAnalysis(); save(); }
-function addStudentsBulk(text){ const names=text.split("\n").map(x=>x.trim()).filter(Boolean); if(!names.length){ alert("Klistra in minst ett namn."); return; }
+function addStudentsBulk(text){ const names=text.split(/\r?\n/).map(line=>line.split(/\t|;/).map(c=>c.trim()).filter(Boolean).join(" ").trim()).filter(Boolean); if(!names.length){ alert("Klistra in minst ett namn."); return; }
   names.forEach(n=>state.students.push({id:nextStudentId++,name:n,scores:{},absent:false,comment:""})); $("#pasteArea").value=""; $("#pasteBox").classList.add("hidden"); renderGrid(); renderAnalysis(); save(); }
 function wire(){
   document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
