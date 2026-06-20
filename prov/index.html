@@ -779,6 +779,45 @@ async function exportXlsx(){
     const tt=studentTotals(s), bl=borderlineInfo(s); const r=ws1.addRow([s.name||"(namnlös)",tt.pts,tt.max,tt.max?tt.pts/tt.max:0,tt.grade||"–",bl?("Gränsfall: "+fmt(bl.diff)+" p från "+bl.letter):""]);
     r.getCell(2).alignment={horizontal:"center"}; r.getCell(3).alignment={horizontal:"center"}; r.getCell(4).numFmt="0 %"; r.getCell(4).alignment={horizontal:"center"};
     const g=GRADE_XL[tt.grade]||GRADE_XL[""]; const gc=r.getCell(5); gc.fill={type:"pattern",pattern:"solid",fgColor:{argb:g.bg}}; gc.font={bold:true,color:{argb:g.fg}}; gc.alignment={horizontal:"center"}; if(bl) r.getCell(6).font={color:{argb:"FF8a611f"},bold:true}; });
+  // ── Klassanalys (motsvarar översikten + de utfällbara flikarna på skärmen) ──
+  const act=activeStudents();
+  const ws6=wb.addWorksheet("Klassanalys"); ws6.columns=[{width:30},{width:18},{width:18},{width:16}];
+  const secTitle=txt=>{ const rr=ws6.addRow([txt]); rr.font={bold:true,size:13}; rr.height=22; return rr; };
+  const pctCell=(rr,col,p)=>{ const c=rr.getCell(col); c.value=p; c.numFmt="0 %"; const f=bandFillXL(p); c.fill={type:"pattern",pattern:"solid",fgColor:{argb:f.bg}}; c.font={color:{argb:f.fg},bold:true}; c.alignment={horizontal:"center"}; };
+  const nmx=s=>s.name||"(namnlös)";
+  if(gradesValid()){
+    secTitle("Betygsfördelning");
+    let hr=ws6.addRow(["Betyg","Antal","Andel"]); styleHeader(ws6,hr.number);
+    const dist=gradeDistribution(), den=act.length||1;
+    ["A","B","C","D","E","F"].forEach(gl=>{ const rr=ws6.addRow([gl,dist[gl],dist[gl]/den]); const gx=GRADE_XL[gl]||GRADE_XL[""]; const c1=rr.getCell(1); c1.fill={type:"pattern",pattern:"solid",fgColor:{argb:gx.bg}}; c1.font={bold:true,color:{argb:gx.fg}}; c1.alignment={horizontal:"center"}; rr.getCell(2).alignment={horizontal:"center"}; rr.getCell(3).numFmt="0 %"; rr.getCell(3).alignment={horizontal:"center"}; });
+    ws6.addRow([]);
+  }
+  secTitle("Klassens resultat per område");
+  let hrA=ws6.addRow(["Område","Antal uppgifter","Klassens resultat"]); styleHeader(ws6,hrA.number);
+  usedAreas().forEach(a=>{ const rr=ws6.addRow([a,areaTaskCount(a),null]); rr.getCell(2).alignment={horizontal:"center"}; pctCell(rr,3,classAreaPct(a)); });
+  ws6.addRow([]);
+  secTitle("Klassens resultat per uppgift");
+  let hrT=ws6.addRow(["Uppgift","Område","Klassens resultat"]); styleHeader(ws6,hrT.number);
+  vt.forEach((t,i)=>{ let g=0,m=0; act.forEach(s=>{ g+=studentTaskPoints(s,t); m+=taskMax(t); }); const rr=ws6.addRow([(i+1)+".",taskAreas(t).join(", "),null]); pctCell(rr,3,m?g/m:0); });
+  ws6.addRow([]);
+  const clv=classLevelStats(), lvOrder=["grund","medel","avancerat"], lvLbl={grund:"Grund (1–2)",medel:"Medel (3)",avancerat:"Avancerat (4–5)"}, lvPresent=lvOrder.filter(k=>clv[k].poss>0);
+  if(lvPresent.length){
+    secTitle("Klassens resultat per svårighetsnivå");
+    let hrL=ws6.addRow(["Nivå","Antal uppgifter","Klassens resultat"]); styleHeader(ws6,hrL.number);
+    const lvlCount=b=>vt.filter(t=>bucketOf(t.level)===b).length;
+    lvPresent.forEach(k=>{ const rr=ws6.addRow([lvLbl[k],lvlCount(k),null]); rr.getCell(2).alignment={horizontal:"center"}; pctCell(rr,3,clv[k].got/clv[k].poss); });
+    ws6.addRow([]);
+    if(clv.grund.poss){ const strug=act.filter(s=>{const x=studentLevelStats(s).grund; return x.poss&&x.got/x.poss<0.6;}); const rr=ws6.addRow(["Når inte 60 % på grunderna:",strug.length?strug.map(nmx).join(", "):"ingen"]); rr.getCell(1).font={bold:true}; ws6.mergeCells(rr.number,2,rr.number,4); rr.getCell(2).alignment={wrapText:true,vertical:"top"}; }
+    if(clv.avancerat.poss){ const mast=act.filter(s=>{const x=studentLevelStats(s).avancerat; return x.poss&&x.got/x.poss>=0.7;}); const rr=ws6.addRow(["Klarar de avancerade väl (≥70 %):",mast.length?mast.map(nmx).join(", "):"ingen"]); rr.getCell(1).font={bold:true}; ws6.mergeCells(rr.number,2,rr.number,4); rr.getCell(2).alignment={wrapText:true,vertical:"top"}; }
+    ws6.addRow([]);
+  }
+  const ps=act.map(s=>studentTotals(s).pts).sort((a,b)=>a-b);
+  if(ps.length){
+    secTitle("Resultatspridning (poäng)");
+    const qt=(arr,q)=>{ const n=arr.length; if(n===1) return arr[0]; const pos=(n-1)*q,base=Math.floor(pos),rest=pos-base; return arr[base+1]!==undefined?arr[base]+rest*(arr[base+1]-arr[base]):arr[base]; };
+    let hrS=ws6.addRow(["Mått","Poäng"]); styleHeader(ws6,hrS.number);
+    [["Lägsta",ps[0]],["Kvartil 1 (25 %)",qt(ps,0.25)],["Median",qt(ps,0.5)],["Kvartil 3 (75 %)",qt(ps,0.75)],["Högsta",ps[ps.length-1]]].forEach(p=>{ const rr=ws6.addRow([p[0],Math.round(p[1]*10)/10]); rr.getCell(2).alignment={horizontal:"center"}; });
+  }
   const ws2=wb.addWorksheet("Individuell feedback",{views:[{state:"frozen",ySplit:4}]}); ws2.columns=[{width:26},{width:108}];
   ws2.mergeCells("A1:B1"); ws2.getCell("A1").value="Sammanfattning – klassen"; ws2.getCell("A1").font={bold:true,size:13};
   ws2.mergeCells("A2:B2"); const c2=ws2.getCell("A2"); c2.value=classSummary(thr2); c2.alignment={wrapText:true,vertical:"top"}; ws2.getRow(2).height=Math.max(40,Math.ceil(c2.value.length/115)*15);
