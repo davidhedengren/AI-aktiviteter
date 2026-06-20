@@ -325,10 +325,10 @@
               <span><i class="swatch" style="background:var(--weak-bg);border:1px solid var(--weak)"></i>under 40 %</span>
             </div>
           </div>
-          <details class="dinline" id="moreDetails">
-            <summary>Mer detaljer<span class="chev">▸</span></summary>
-            <div class="dbody"><div id="levelDetails"></div></div>
-          </details>
+          <details class="dinline"><summary>Klassens resultat per område<span class="chev">▸</span></summary><div class="dbody"><div id="detArea"></div></div></details>
+          <details class="dinline"><summary>Klassens resultat per uppgift<span class="chev">▸</span></summary><div class="dbody"><div id="detTask"></div></div></details>
+          <details class="dinline" id="detLevelWrap"><summary>Klassens resultat per svårighetsnivå<span class="chev">▸</span></summary><div class="dbody"><div id="detLevel"></div></div></details>
+          <details class="dinline"><summary>Resultatspridning<span class="chev">▸</span></summary><div class="dbody"><div id="detSpread"></div></div></details>
           <div class="sub sub-row"><span>Per elev</span><button class="btn-ghost btn-inline" id="copyStudents">Kopiera alla elevtexter</button></div>
           <div id="cards" class="cards"></div>
         </div>
@@ -402,7 +402,7 @@ function classLevelStats(){ const act=activeStudents(); return levelStatsFor(t=>
 function gradeDistribution(){ const d={A:0,B:0,C:0,D:0,E:0,F:0}; activeStudents().forEach(s=>{ const g=gradeFor(studentTotals(s).pts); if(g) d[g]++; }); return d; }
 function difficultyNarrative(s){
   const ls=studentLevelStats(s), order=["grund","medel","avancerat"];
-  const lbl={grund:"de grundläggande uppgifterna (nivå 1–2)",medel:"de medelsvåra (nivå 3)",avancerat:"de avancerade (nivå 4–5)"};
+  const lbl={grund:"de grundläggande uppgifterna",medel:"de medelsvåra",avancerat:"de avancerade"};
   const present=order.filter(k=>ls[k].poss>0); if(present.length<2) return "";
   const p={}; present.forEach(k=>p[k]=ls[k].got/ls[k].poss);
   const name=(s.name||"").trim()||"eleven";
@@ -438,7 +438,7 @@ function studentSummary(s,thr){
   if(strong.length) t+="Starkast på "+joinSv(strong.map(x=>x.a))+". ";
   if(weak.length) t+="Behöver träna mer på "+joinSv(weak.map(x=>x.a+" ("+pct(x.p)+")"))+". ";
   const dn=difficultyNarrative(s); if(dn) t+=dn+" ";
-  const bl=borderlineInfo(s); if(bl) t+="Ligger bara "+fmt(bl.diff)+" p från betyget "+bl.letter+" – ett gränsfall värt att dubbelkolla. ";
+  const bl=borderlineInfo(s); if(bl) t+="Ligger bara "+fmt(bl.diff)+" p från betyget "+bl.letter+". ";
   if(s.comment&&s.comment.trim()) t+=s.comment.trim();
   return t.trim();
 }
@@ -583,60 +583,52 @@ function renderAnalysis(){
     const foot=document.createElement("div"); foot.className="cardfoot"; const cp=document.createElement("button"); cp.className="btn-ghost btn-inline"; cp.textContent="Kopiera feedback";
     cp.addEventListener("click",()=>copyText(studentSummary(s,thr),cp)); foot.appendChild(cp); card.appendChild(foot); cards.appendChild(card);
   });
-  renderLevelDetails();
+  renderDetails();
 }
-function renderLevelDetails(){
-  const host=$("#levelDetails"); if(!host) return;
+function renderDetails(){
+  const aEl=$("#detArea"), tEl=$("#detTask"), lEl=$("#detLevel"), sEl=$("#detSpread"), lWrap=$("#detLevelWrap");
+  if(!aEl) return;
   const act=activeStudents(), nm=s=>esc(s.name||"(namnlös)"), vt=validTasks();
-  if(!vt.length||!act.length){ host.innerHTML='<div class="empty">Ingen data ännu.</div>'; return; }
-  let html="";
-  // Per område
-  const ua=usedAreas();
-  if(ua.length){
-    html+='<div class="ld-h">Per område</div><div class="ld-bars">';
-    ua.forEach(a=>{ const p=classAreaPct(a), b=band(p), n=areaTaskCount(a); html+=`<div class="bar-row"><span class="bar-label">${esc(a)}</span><div class="bar-track"><div class="bar-fill" style="width:${(p*100).toFixed(0)}%;background:${b.fg}"></div></div><span class="bar-meta"><b style="color:${b.fg}">${(p*100).toFixed(0)} %</b> · ${n} uppg.</span></div>`; });
-    html+='</div>';
-  }
-  // Per uppgift (nummerordning)
-  const rows=vt.map((t,i)=>{ let g=0,m=0; act.forEach(s=>{ g+=studentTaskPoints(s,t); m+=taskMax(t); }); return {i:i+1,a:taskAreas(t).join(", "),p:m?g/m:0}; });
-  html+='<div class="ld-h">Per uppgift</div>';
-  html+='<div class="scroll"><table class="heat ld-tasks"><thead><tr><th class="name-h">Uppg.</th><th class="lcol">Område</th><th></th></tr></thead><tbody>';
-  rows.forEach(r=>{ const b=band(r.p); html+=`<tr><td class="namecell">${r.i}.</td><td class="lcol">${esc(r.a)}</td><td class="cell" style="background:${b.bg};color:${b.fg}">${(r.p*100).toFixed(0)}%</td></tr>`; });
-  html+='</tbody></table></div>';
+  if(!vt.length||!act.length){ [aEl,tEl,lEl,sEl].forEach(e=>{ if(e) e.innerHTML='<div class="empty">Ingen data ännu.</div>'; }); if(lWrap) lWrap.style.display=""; return; }
+  // Klassens resultat per område
+  const ua=usedAreas(); let ah='<div class="ld-bars">';
+  ua.forEach(a=>{ const p=classAreaPct(a), b=band(p), n=areaTaskCount(a); ah+=`<div class="bar-row"><span class="bar-label">${esc(a)}</span><div class="bar-track"><div class="bar-fill" style="width:${(p*100).toFixed(0)}%;background:${b.fg}"></div></div><span class="bar-meta"><b style="color:${b.fg}">${(p*100).toFixed(0)} %</b> · ${n} uppg.</span></div>`; });
+  aEl.innerHTML=ah+'</div>';
+  // Klassens resultat per uppgift (nummerordning)
+  let th='<div class="scroll"><table class="heat ld-tasks"><thead><tr><th class="name-h">Uppg.</th><th class="lcol">Område</th><th></th></tr></thead><tbody>';
+  vt.forEach((t,i)=>{ let g=0,m=0; act.forEach(s=>{ g+=studentTaskPoints(s,t); m+=taskMax(t); }); const p=m?g/m:0, b=band(p); th+=`<tr><td class="namecell">${i+1}.</td><td class="lcol">${esc(taskAreas(t).join(", "))}</td><td class="cell" style="background:${b.bg};color:${b.fg}">${(p*100).toFixed(0)}%</td></tr>`; });
+  tEl.innerHTML=th+'</tbody></table></div>';
   // Per svårighetsnivå
   const order=["grund","medel","avancerat"], lbl={grund:"Grund (1–2)",medel:"Medel (3)",avancerat:"Avancerat (4–5)"};
   const cl=classLevelStats(), present=order.filter(k=>cl[k].poss>0);
   if(present.length){
-    html+='<div class="ld-h">Per svårighetsnivå</div>';
+    if(lWrap) lWrap.style.display="";
     let h='<div class="scroll"><table class="heat"><thead><tr><th class="name-h">Elev</th>'+present.map(k=>`<th>${lbl[k]}</th>`).join("")+'</tr></thead><tbody>';
     state.students.forEach(s=>{ h+=`<tr><td class="namecell">${nm(s)}</td>`;
       if(s.absent){ present.forEach(()=>h+='<td class="cell na">–</td>'); h+='</tr>'; return; }
       const ls=studentLevelStats(s);
       present.forEach(k=>{ if(!ls[k].poss){ h+='<td class="cell na">–</td>'; return; } const p=ls[k].got/ls[k].poss, b=band(p); h+=`<td class="cell" style="background:${b.bg};color:${b.fg}">${(p*100).toFixed(0)}%</td>`; });
       h+='</tr>'; });
-    h+='</tbody></table></div>'; html+=h;
+    h+='</tbody></table></div>';
     const lines=[];
     if(cl.grund.poss){ const strug=act.filter(s=>{const x=studentLevelStats(s).grund; return x.poss&&x.got/x.poss<0.6;}); lines.push('<b>Når inte 60 % på grunderna (nivå 1–2):</b> '+(strug.length?strug.map(nm).join(", "):"ingen")); }
     if(cl.avancerat.poss){ const mast=act.filter(s=>{const x=studentLevelStats(s).avancerat; return x.poss&&x.got/x.poss>=0.7;}); lines.push('<b>Klarar de avancerade väl (≥70 %):</b> '+(mast.length?mast.map(nm).join(", "):"ingen")); }
-    html+='<div class="ld-lines">'+lines.map(l=>'<p>'+l+'</p>').join("")+'</div>';
-  } else {
-    html+='<div class="ld-lines"><p style="color:var(--faint)">Sätt svårighetsgrad på uppgifterna för att även se en sammanställning per nivå.</p></div>';
-  }
+    lEl.innerHTML=h+'<div class="ld-lines">'+lines.map(l=>'<p>'+l+'</p>').join("")+'</div>';
+  } else { if(lWrap) lWrap.style.display="none"; lEl.innerHTML=""; }
   // Resultatspridning + lådagram
   const ps=act.map(s=>studentTotals(s).pct).sort((a,b)=>a-b);
   const qt=(arr,q)=>{ const n=arr.length; if(n===1) return arr[0]; const pos=(n-1)*q, base=Math.floor(pos), rest=pos-base; return arr[base+1]!==undefined?arr[base]+rest*(arr[base+1]-arr[base]):arr[base]; };
   const q0=ps[0], q1=qt(ps,0.25), q2=qt(ps,0.5), q3=qt(ps,0.75), q4=ps[ps.length-1];
   const L=v=>(v*100).toFixed(1)+'%';
   const dots=act.map(s=>`<span class="bp-dot" style="left:${L(studentTotals(s).pct)}"></span>`).join("");
-  html+='<div class="ld-h">Resultatspridning</div>';
-  html+='<div class="ld-lines" style="margin-top:0"><p>Median '+pct(q2)+' · kvartiler '+pct(q1)+'–'+pct(q3)+' · lägsta '+pct(q0)+' · högsta '+pct(q4)+'.</p></div>';
-  html+='<div class="boxplot"><div class="bp-track">'
-      +'<div class="bp-line" style="left:'+L(q0)+';width:'+((q4-q0)*100).toFixed(1)+'%"></div>'
-      +'<div class="bp-cap" style="left:'+L(q0)+'"></div><div class="bp-cap" style="left:'+L(q4)+'"></div>'
-      +'<div class="bp-box" style="left:'+L(q1)+';width:'+((q3-q1)*100).toFixed(1)+'%"></div>'
-      +'<div class="bp-median" style="left:'+L(q2)+'"></div>'+dots
-      +'</div><div class="bp-axis"><span>0 %</span><span>50 %</span><span>100 %</span></div></div>';
-  host.innerHTML=html;
+  let sp='<div class="ld-lines" style="margin-top:0"><p>Median '+pct(q2)+' · kvartiler '+pct(q1)+'–'+pct(q3)+' · lägsta '+pct(q0)+' · högsta '+pct(q4)+'.</p></div>';
+  sp+='<div class="boxplot"><div class="bp-track">'
+    +'<div class="bp-line" style="left:'+L(q0)+';width:'+((q4-q0)*100).toFixed(1)+'%"></div>'
+    +'<div class="bp-cap" style="left:'+L(q0)+'"></div><div class="bp-cap" style="left:'+L(q4)+'"></div>'
+    +'<div class="bp-box" style="left:'+L(q1)+';width:'+((q3-q1)*100).toFixed(1)+'%"></div>'
+    +'<div class="bp-median" style="left:'+L(q2)+'"></div>'+dots
+    +'</div><div class="bp-axis"><span>0 %</span><span>50 %</span><span>100 %</span></div></div>';
+  sEl.innerHTML=sp;
 }
 
 /* ===== 6. EXPORT ===== */
