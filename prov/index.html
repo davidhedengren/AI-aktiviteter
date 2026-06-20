@@ -81,6 +81,18 @@
   details.dinline[open] .chev{transform:rotate(90deg)}
   details.dinline>.dbody{padding:0 16px 16px}
   .ld-lines{margin-top:12px} .ld-lines p{margin:7px 0;font-size:13.5px;line-height:1.5;color:var(--ink-soft)}
+  .ld-h{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:20px 0 9px} .ld-h:first-child{margin-top:6px}
+  .ld-tasks .lcol{text-align:left;padding:6px 10px;font-weight:400;font-size:13px}
+  .ld-bars{margin:2px 0 4px}
+  .boxplot{margin:6px 4px 2px}
+  .bp-track{position:relative;height:46px}
+  .bp-line{position:absolute;top:50%;height:2px;background:var(--line-strong);transform:translateY(-50%)}
+  .bp-box{position:absolute;top:50%;height:26px;transform:translateY(-50%);background:var(--indigo-soft);border:1.5px solid var(--indigo);border-radius:5px}
+  .bp-median{position:absolute;top:50%;height:26px;width:2.5px;transform:translate(-50%,-50%);background:var(--indigo)}
+  .bp-cap{position:absolute;top:50%;height:14px;width:2px;transform:translate(-50%,-50%);background:var(--line-strong)}
+  .bp-dot{position:absolute;top:50%;width:7px;height:7px;border-radius:50%;background:var(--indigo);opacity:.32;transform:translate(-50%,-50%);pointer-events:none}
+  .bp-axis{position:relative;display:flex;justify-content:space-between;font-size:11px;color:var(--faint);margin-top:2px}
+  :root[data-theme="dark"] .bp-box{background:var(--indigo-soft)}
   .tag-input{border:none!important;box-shadow:none!important;flex:1;min-width:120px;padding:5px 4px!important;width:auto!important}
   .parts{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
   .col-head-parts{font-size:12px;color:var(--faint);font-weight:500;margin-bottom:6px}
@@ -304,8 +316,6 @@
           <div class="sub" id="gradeChartHead">Betygsfördelning</div>
           <div id="gradeChart" class="gradechart"></div>
           <div id="gradeChartEmpty" class="empty hidden">Fyll i gränserna för E, C och A i fliken Skapa prov för att räkna betyg.</div>
-          <div class="sub">Klassen per område</div>
-          <div id="classBars"></div>
           <div class="sub">Översikt</div>
           <div class="heatcard"><div class="scroll"><div id="heatWrap"></div></div>
             <div class="legend">
@@ -392,13 +402,14 @@ function classLevelStats(){ const act=activeStudents(); return levelStatsFor(t=>
 function gradeDistribution(){ const d={A:0,B:0,C:0,D:0,E:0,F:0}; activeStudents().forEach(s=>{ const g=gradeFor(studentTotals(s).pts); if(g) d[g]++; }); return d; }
 function difficultyNarrative(s){
   const ls=studentLevelStats(s), order=["grund","medel","avancerat"];
-  const lbl={grund:"de grundläggande uppgifterna (nivå 1–2)",medel:"de medelsvåra (nivå 3)",avancerat:"de avancerade uppgifterna (nivå 4–5)"};
+  const lbl={grund:"de grundläggande uppgifterna (nivå 1–2)",medel:"de medelsvåra (nivå 3)",avancerat:"de avancerade (nivå 4–5)"};
   const present=order.filter(k=>ls[k].poss>0); if(present.length<2) return "";
   const p={}; present.forEach(k=>p[k]=ls[k].got/ls[k].poss);
-  const nums=present.map(k=>lbl[k]+" "+pct(p[k])).join(", ");
+  const name=(s.name||"").trim()||"eleven";
+  const segs=present.map((k,i)=>{ if(i===0) return "Av "+lbl[k]+" klarade "+name+" "+pct(p[k]); if(i===present.length-1) return " och av "+lbl[k]+" "+pct(p[k]); return ", av "+lbl[k]+" "+pct(p[k]); });
   let concl=""; const gp=p.grund, ap=p.avancerat;
   if(gp!=null&&ap!=null){ if(gp>=0.7&&ap<0.5) concl=" Det tyder på god förståelse för grunderna men att de mer avancerade problemen behöver tränas."; else if(gp<0.5) concl=" De grundläggande momenten behöver befästas först."; else if(ap>=0.7) concl=" Eleven hanterar även de svårare uppgifterna väl."; }
-  return "Per svårighetsgrad: "+nums+"."+concl;
+  return segs.join("")+"."+concl;
 }
 
 /* ===== 4. SAMMANFATTNINGAR ===== */
@@ -543,10 +554,6 @@ function renderAnalysis(){
       col.innerHTML=`<div class="gc-num">${d[g]}</div><div class="gc-bar g-${g}" style="height:${h}px"></div><div class="gc-lbl">${g}</div>`; gc.appendChild(col); });
   } else if(anyGrade){ ghead.classList.remove("hidden"); gc.classList.add("hidden"); gempty.classList.remove("hidden"); }
   else { ghead.classList.add("hidden"); gc.classList.add("hidden"); gempty.classList.add("hidden"); }
-  const bars=$("#classBars"); bars.innerHTML="";
-  areas.forEach(a=>{ const p=classAreaPct(a), b=band(p), n=areaTaskCount(a);
-    const row=document.createElement("div"); row.className="bar-row";
-    row.innerHTML=`<span class="bar-label">${esc(a)}</span><div class="bar-track"><div class="bar-fill" style="width:${(p*100).toFixed(0)}%;background:${b.fg}"></div></div><span class="bar-meta"><b style="color:${b.fg}">${(p*100).toFixed(0)} %</b> · ${n} uppg.</span>`; bars.appendChild(row); });
   const heat=document.createElement("table"); heat.className="heat";
   let h="<thead><tr><th class='name-h'>Elev</th>"; areas.forEach(a=>h+=`<th>${esc(a)}</th>`); h+="<th>Totalt</th>"+(gradesValid()?"<th>Betyg</th>":"")+"</tr></thead>"; heat.innerHTML=h;
   const hb=document.createElement("tbody");
@@ -579,25 +586,57 @@ function renderAnalysis(){
   renderLevelDetails();
 }
 function renderLevelDetails(){
-  const host=$("#levelDetails"); if(!host) return; host.innerHTML="";
+  const host=$("#levelDetails"); if(!host) return;
+  const act=activeStudents(), nm=s=>esc(s.name||"(namnlös)"), vt=validTasks();
+  if(!vt.length||!act.length){ host.innerHTML='<div class="empty">Ingen data ännu.</div>'; return; }
+  let html="";
+  // Per område
+  const ua=usedAreas();
+  if(ua.length){
+    html+='<div class="ld-h">Per område</div><div class="ld-bars">';
+    ua.forEach(a=>{ const p=classAreaPct(a), b=band(p), n=areaTaskCount(a); html+=`<div class="bar-row"><span class="bar-label">${esc(a)}</span><div class="bar-track"><div class="bar-fill" style="width:${(p*100).toFixed(0)}%;background:${b.fg}"></div></div><span class="bar-meta"><b style="color:${b.fg}">${(p*100).toFixed(0)} %</b> · ${n} uppg.</span></div>`; });
+    html+='</div>';
+  }
+  // Per uppgift (nummerordning)
+  const rows=vt.map((t,i)=>{ let g=0,m=0; act.forEach(s=>{ g+=studentTaskPoints(s,t); m+=taskMax(t); }); return {i:i+1,a:taskAreas(t).join(", "),p:m?g/m:0}; });
+  html+='<div class="ld-h">Per uppgift</div>';
+  html+='<div class="scroll"><table class="heat ld-tasks"><thead><tr><th class="name-h">Uppg.</th><th class="lcol">Område</th><th></th></tr></thead><tbody>';
+  rows.forEach(r=>{ const b=band(r.p); html+=`<tr><td class="namecell">${r.i}.</td><td class="lcol">${esc(r.a)}</td><td class="cell" style="background:${b.bg};color:${b.fg}">${(r.p*100).toFixed(0)}%</td></tr>`; });
+  html+='</tbody></table></div>';
+  // Per svårighetsnivå
   const order=["grund","medel","avancerat"], lbl={grund:"Grund (1–2)",medel:"Medel (3)",avancerat:"Avancerat (4–5)"};
   const cl=classLevelStats(), present=order.filter(k=>cl[k].poss>0);
-  if(!present.length){ host.innerHTML='<div class="empty">Sätt svårighetsgrad på uppgifterna för att se en sammanställning per nivå.</div>'; return; }
-  const act=activeStudents(), nm=s=>esc(s.name||"(namnlös)");
-  let h='<div class="scroll"><table class="heat"><thead><tr><th class="name-h">Elev</th>'+present.map(k=>`<th>${lbl[k]}</th>`).join("")+'</tr></thead><tbody>';
-  state.students.forEach(s=>{
-    h+=`<tr><td class="namecell">${nm(s)}</td>`;
-    if(s.absent){ present.forEach(()=>h+='<td class="cell na">–</td>'); h+='</tr>'; return; }
-    const ls=studentLevelStats(s);
-    present.forEach(k=>{ if(!ls[k].poss){ h+='<td class="cell na">–</td>'; return; } const p=ls[k].got/ls[k].poss, b=band(p); h+=`<td class="cell" style="background:${b.bg};color:${b.fg}">${(p*100).toFixed(0)}%</td>`; });
-    h+='</tr>';
-  });
-  h+='</tbody></table></div>';
-  const lines=[];
-  if(cl.grund.poss){ const strug=act.filter(s=>{const x=studentLevelStats(s).grund; return x.poss&&x.got/x.poss<0.6;}); lines.push('<b>Når inte 60 % på grunduppgifterna (nivå 1–2):</b> '+(strug.length?strug.map(nm).join(", "):"ingen")); }
-  if(cl.medel.poss){ const ok=act.filter(s=>{const x=studentLevelStats(s).medel; return x.poss&&x.got/x.poss>=0.6;}); lines.push('<b>Klarar de medelsvåra uppgifterna (nivå 3, ≥60 %):</b> '+(ok.length?ok.map(nm).join(", "):"ingen")); }
-  if(cl.avancerat.poss){ const mast=act.filter(s=>{const x=studentLevelStats(s).avancerat; return x.poss&&x.got/x.poss>=0.7;}); lines.push('<b>Klarar de avancerade uppgifterna (nivå 4–5) väl (≥70 %):</b> '+(mast.length?mast.map(nm).join(", "):"ingen")); }
-  host.innerHTML=h+'<div class="ld-lines">'+lines.map(l=>'<p>'+l+'</p>').join("")+'</div>';
+  if(present.length){
+    html+='<div class="ld-h">Per svårighetsnivå</div>';
+    let h='<div class="scroll"><table class="heat"><thead><tr><th class="name-h">Elev</th>'+present.map(k=>`<th>${lbl[k]}</th>`).join("")+'</tr></thead><tbody>';
+    state.students.forEach(s=>{ h+=`<tr><td class="namecell">${nm(s)}</td>`;
+      if(s.absent){ present.forEach(()=>h+='<td class="cell na">–</td>'); h+='</tr>'; return; }
+      const ls=studentLevelStats(s);
+      present.forEach(k=>{ if(!ls[k].poss){ h+='<td class="cell na">–</td>'; return; } const p=ls[k].got/ls[k].poss, b=band(p); h+=`<td class="cell" style="background:${b.bg};color:${b.fg}">${(p*100).toFixed(0)}%</td>`; });
+      h+='</tr>'; });
+    h+='</tbody></table></div>'; html+=h;
+    const lines=[];
+    if(cl.grund.poss){ const strug=act.filter(s=>{const x=studentLevelStats(s).grund; return x.poss&&x.got/x.poss<0.6;}); lines.push('<b>Når inte 60 % på grunderna (nivå 1–2):</b> '+(strug.length?strug.map(nm).join(", "):"ingen")); }
+    if(cl.avancerat.poss){ const mast=act.filter(s=>{const x=studentLevelStats(s).avancerat; return x.poss&&x.got/x.poss>=0.7;}); lines.push('<b>Klarar de avancerade väl (≥70 %):</b> '+(mast.length?mast.map(nm).join(", "):"ingen")); }
+    html+='<div class="ld-lines">'+lines.map(l=>'<p>'+l+'</p>').join("")+'</div>';
+  } else {
+    html+='<div class="ld-lines"><p style="color:var(--faint)">Sätt svårighetsgrad på uppgifterna för att även se en sammanställning per nivå.</p></div>';
+  }
+  // Resultatspridning + lådagram
+  const ps=act.map(s=>studentTotals(s).pct).sort((a,b)=>a-b);
+  const qt=(arr,q)=>{ const n=arr.length; if(n===1) return arr[0]; const pos=(n-1)*q, base=Math.floor(pos), rest=pos-base; return arr[base+1]!==undefined?arr[base]+rest*(arr[base+1]-arr[base]):arr[base]; };
+  const q0=ps[0], q1=qt(ps,0.25), q2=qt(ps,0.5), q3=qt(ps,0.75), q4=ps[ps.length-1];
+  const L=v=>(v*100).toFixed(1)+'%';
+  const dots=act.map(s=>`<span class="bp-dot" style="left:${L(studentTotals(s).pct)}"></span>`).join("");
+  html+='<div class="ld-h">Resultatspridning</div>';
+  html+='<div class="ld-lines" style="margin-top:0"><p>Median '+pct(q2)+' · kvartiler '+pct(q1)+'–'+pct(q3)+' · lägsta '+pct(q0)+' · högsta '+pct(q4)+'.</p></div>';
+  html+='<div class="boxplot"><div class="bp-track">'
+      +'<div class="bp-line" style="left:'+L(q0)+';width:'+((q4-q0)*100).toFixed(1)+'%"></div>'
+      +'<div class="bp-cap" style="left:'+L(q0)+'"></div><div class="bp-cap" style="left:'+L(q4)+'"></div>'
+      +'<div class="bp-box" style="left:'+L(q1)+';width:'+((q3-q1)*100).toFixed(1)+'%"></div>'
+      +'<div class="bp-median" style="left:'+L(q2)+'"></div>'+dots
+      +'</div><div class="bp-axis"><span>0 %</span><span>50 %</span><span>100 %</span></div></div>';
+  host.innerHTML=html;
 }
 
 /* ===== 6. EXPORT ===== */
