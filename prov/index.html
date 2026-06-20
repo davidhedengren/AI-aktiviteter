@@ -23,11 +23,15 @@
   html{-webkit-text-size-adjust:100%}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:15px;line-height:1.5}
   .wrap{max-width:1080px;margin:0 auto;padding:0 20px 100px}
-  header.top{padding:46px 0 14px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-  .theme-toggle{background:var(--card);border:1px solid var(--line-strong);width:44px;height:44px;border-radius:50%;font-size:19px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);flex:none;line-height:1}
-  .theme-toggle:hover{border-color:var(--indigo)}
-  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(32px,5.5vw,52px);letter-spacing:-.02em;margin:0;line-height:1}
+  header.top{padding:48px 0 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+  .brandwrap{min-width:0}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  .kicker .kdot{color:var(--indigo);margin:0 2px}
+  .theme-toggle{background:var(--card);border:1px solid var(--line-strong);width:44px;height:44px;border-radius:50%;font-size:19px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);flex:none;line-height:1;margin-top:4px}
+  .theme-toggle:hover{border-color:var(--indigo);transform:rotate(-12deg)}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(33px,5.6vw,56px);letter-spacing:-.025em;margin:0;line-height:1.02;font-optical-sizing:auto}
   h1 .swash{color:var(--indigo);font-style:italic}
+  .spectrum-rule{height:5px;width:min(420px,100%);margin-top:18px;border-radius:4px;background:linear-gradient(90deg,var(--weak),var(--mid) 38%,var(--okay) 64%,var(--good));box-shadow:0 1px 3px -1px rgba(36,31,43,.3)}
   .tabs{position:sticky;top:0;z-index:30;display:flex;gap:6px;background:rgba(242,239,234,.86);backdrop-filter:blur(8px);padding:14px 0 12px;margin-top:8px;flex-wrap:wrap}
   .tab{background:transparent;color:var(--muted);padding:11px 18px;border-radius:12px;font-weight:500;font-size:14.5px;border:1px solid transparent;display:flex;align-items:center;gap:9px}
   .tab .n{font-family:'JetBrains Mono',monospace;font-size:12px;background:#e7e1d7;color:var(--muted);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center}
@@ -195,6 +199,39 @@
   :root[data-theme="dark"] .btn-danger{background:var(--weak);color:#fff;border-color:var(--weak)}
   :root[data-theme="dark"] .btn-danger:hover{background:#e2594e;color:#fff}
 
+  /* — Designförfining — */
+  body{background:radial-gradient(1100px 540px at 50% -8%,#fbf9f5,transparent 70%),var(--bg);background-attachment:fixed}
+  :root[data-theme="dark"] body{background:radial-gradient(1100px 540px at 50% -8%,#28242f,transparent 70%),var(--bg)}
+  .panel{border:1px solid var(--line)}
+  .scard{transition:box-shadow .2s,transform .2s,border-color .2s}
+  .scard:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--line-strong)}
+  details.dinline{transition:border-color .2s,box-shadow .2s}
+  details.dinline:hover{border-color:var(--line-strong)}
+  details.dinline>summary:hover,details.dinline>summary:hover .chev{color:var(--indigo)}
+  details.dinline[open]{box-shadow:var(--shadow-sm)}
+  .ov-card{position:relative;overflow:hidden;transition:border-color .2s}
+  .ov-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--indigo);opacity:.55}
+  .ov-card .v{color:var(--indigo-d)}
+  :root[data-theme="dark"] .ov-card .v{color:var(--indigo)}
+  .tab{transition:background .15s,color .15s,box-shadow .15s}
+  .tab:hover:not(.active){background:rgba(255,255,255,.55)}
+  :root[data-theme="dark"] .tab:hover:not(.active){background:rgba(255,255,255,.06)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,.tab:focus-visible{outline:2px solid var(--indigo);outline-offset:2px}
+  /* Tydliga grepp */
+  .tabbar{display:inline-flex;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:5px;box-shadow:var(--shadow-sm);max-width:100%;flex-wrap:wrap}
+  .tab{border-radius:11px}
+  .tab.active{background:var(--indigo-soft);color:var(--indigo);box-shadow:none}
+  .tab.active .n{background:var(--indigo);color:#fff}
+  :root[data-theme="dark"] .tabbar{background:var(--card)}
+  :root[data-theme="dark"] .tab.active{background:var(--indigo-soft);color:#cbc6fb}
+  .phead{border-bottom:1px solid var(--line);padding-bottom:14px}
+  .phead h2::before{content:"";display:inline-block;width:7px;height:7px;border-radius:2px;background:var(--indigo);margin-right:11px;vertical-align:middle;transform:translateY(-1px)}
+  .sub{position:relative;padding-left:15px}
+  .sub::before{content:"";position:absolute;left:0;top:.18em;bottom:.18em;width:4px;border-radius:3px;background:linear-gradient(180deg,var(--good),var(--mid) 55%,var(--weak))}
+  .summary-box{border-left:4px solid var(--indigo)}
+
+  @media(prefers-reduced-motion:reduce){ *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important} }
+
   #printArea{display:none}
   @media print{ .wrap,.tabs,header.top{display:none!important} body{background:#fff} #printArea{display:block}
     .pa-student{page-break-after:always;padding:8mm 0;font-family:'Inter',sans-serif;color:#000} .pa-student:last-child{page-break-after:auto}
@@ -208,12 +245,19 @@
 </head>
 <body>
 <div class="wrap">
-  <header class="top"><h1>Davids prov- och resultat<span class="swash">analyserare</span></h1><button id="themeToggle" class="theme-toggle" title="Växla ljust/mörkt läge" aria-label="Växla ljust/mörkt läge">🌙</button></header>
-  <nav class="tabs">
+  <header class="top">
+    <div class="brandwrap">
+      <div class="kicker">Bygg <span class="kdot">·</span> registrera <span class="kdot">·</span> analysera</div>
+      <h1>Davids prov- och resultat<span class="swash">analyserare</span></h1>
+      <div class="spectrum-rule" aria-hidden="true"></div>
+    </div>
+    <button id="themeToggle" class="theme-toggle" title="Växla ljust/mörkt läge" aria-label="Växla ljust/mörkt läge">🌙</button>
+  </header>
+  <nav class="tabs"><div class="tabbar">
     <button class="tab active" data-tab="build"><span class="n">1</span>Skapa prov</button>
     <button class="tab" data-tab="results"><span class="n">2</span>Registrera elevresultat</button>
     <button class="tab" data-tab="analyze"><span class="n">3</span>Analysera resultat</button>
-  </nav>
+  </div></nav>
 
   <section class="tabpanel" id="tab-build">
     <div class="panel">
