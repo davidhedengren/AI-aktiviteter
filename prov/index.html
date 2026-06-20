@@ -603,13 +603,10 @@ function renderDetails(){
   const cl=classLevelStats(), present=order.filter(k=>cl[k].poss>0);
   if(present.length){
     if(lWrap) lWrap.style.display="";
-    let h='<div class="scroll"><table class="heat"><thead><tr><th class="name-h">Elev</th>'+present.map(k=>`<th>${lbl[k]}</th>`).join("")+'</tr></thead><tbody>';
-    state.students.forEach(s=>{ h+=`<tr><td class="namecell">${nm(s)}</td>`;
-      if(s.absent){ present.forEach(()=>h+='<td class="cell na">–</td>'); h+='</tr>'; return; }
-      const ls=studentLevelStats(s);
-      present.forEach(k=>{ if(!ls[k].poss){ h+='<td class="cell na">–</td>'; return; } const p=ls[k].got/ls[k].poss, b=band(p); h+=`<td class="cell" style="background:${b.bg};color:${b.fg}">${(p*100).toFixed(0)}%</td>`; });
-      h+='</tr>'; });
-    h+='</tbody></table></div>';
+    const lvlCount=b=>vt.filter(t=>bucketOf(t.level)===b).length;
+    let h='<div class="ld-bars">';
+    present.forEach(k=>{ const p=cl[k].got/cl[k].poss, b=band(p), n=lvlCount(k); h+=`<div class="bar-row"><span class="bar-label">${lbl[k]}</span><div class="bar-track"><div class="bar-fill" style="width:${(p*100).toFixed(0)}%;background:${b.fg}"></div></div><span class="bar-meta"><b style="color:${b.fg}">${(p*100).toFixed(0)} %</b> · ${n} uppg.</span></div>`; });
+    h+='</div>';
     const lines=[];
     if(cl.grund.poss){ const strug=act.filter(s=>{const x=studentLevelStats(s).grund; return x.poss&&x.got/x.poss<0.6;}); lines.push('<b>Når inte 60 % på grunderna (nivå 1–2):</b> '+(strug.length?strug.map(nm).join(", "):"ingen")); }
     if(cl.avancerat.poss){ const mast=act.filter(s=>{const x=studentLevelStats(s).avancerat; return x.poss&&x.got/x.poss>=0.7;}); lines.push('<b>Klarar de avancerade väl (≥70 %):</b> '+(mast.length?mast.map(nm).join(", "):"ingen")); }
