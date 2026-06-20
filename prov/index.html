@@ -230,6 +230,14 @@
   .sub::before{content:"";position:absolute;left:0;top:.18em;bottom:.18em;width:4px;border-radius:3px;background:linear-gradient(180deg,var(--good),var(--mid) 55%,var(--weak))}
   .summary-box{border-left:4px solid var(--indigo)}
 
+  /* Aktiv uppgift / aktiv elevrad */
+  .task{transition:border-color .15s,box-shadow .15s}
+  .task:focus-within{border-color:var(--indigo);box-shadow:0 0 0 3px var(--indigo-soft),var(--shadow-sm)}
+  .task:focus-within .tnum{color:var(--indigo)}
+  table.grid tbody tr:focus-within td{background:var(--indigo-soft)}
+  table.grid tbody tr:focus-within td.name-c{background:var(--indigo-soft);box-shadow:inset 3px 0 0 var(--indigo)}
+  table.grid tbody tr:focus-within input.score{border-color:var(--indigo)}
+
   @media(prefers-reduced-motion:reduce){ *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important} }
 
   #printArea{display:none}
