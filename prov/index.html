@@ -96,7 +96,12 @@
   .bp-median{position:absolute;top:50%;height:26px;width:2.5px;transform:translate(-50%,-50%);background:var(--indigo)}
   .bp-cap{position:absolute;top:50%;height:14px;width:2px;transform:translate(-50%,-50%);background:var(--line-strong)}
   .bp-dot{position:absolute;top:50%;width:7px;height:7px;border-radius:50%;background:var(--indigo);opacity:.32;transform:translate(-50%,-50%);pointer-events:none}
-  .bp-axis{position:relative;display:flex;justify-content:space-between;font-size:11px;color:var(--faint);margin-top:2px}
+  .bp-grade{position:absolute;top:1px;bottom:1px;width:1px;background:var(--line-strong);opacity:.85;transform:translateX(-50%);pointer-events:none}
+  .bp-axis{position:relative;height:15px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--faint);margin-top:5px}
+  .bp-axis span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+  .bp-ax-min{transform:none!important;left:0}
+  .bp-ax-max{transform:translateX(-100%)!important}
+  .bp-ax-g{font-weight:700;color:var(--muted)}
   :root[data-theme="dark"] .bp-box{background:var(--indigo-soft)}
   .tag-input{border:none!important;box-shadow:none!important;flex:1;min-width:120px;padding:5px 4px!important;width:auto!important}
   .parts{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
@@ -206,6 +211,9 @@
   .panel{border:1px solid var(--line)}
   .scard{transition:box-shadow .2s,transform .2s,border-color .2s}
   .scard:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--line-strong)}
+  .cards .scard{position:relative}
+  .cards:hover .scard{opacity:.2;filter:blur(2px);transition:opacity .25s ease,filter .25s ease,transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+  .cards:hover .scard:hover{opacity:1;filter:none;transform:translateY(-5px) scale(1.025);box-shadow:0 26px 50px -18px rgba(36,31,43,.55);border-color:var(--indigo);z-index:6}
   details.dinline{transition:border-color .2s,box-shadow .2s}
   details.dinline:hover{border-color:var(--line-strong)}
   details.dinline>summary:hover,details.dinline>summary:hover .chev{color:var(--indigo)}
@@ -464,6 +472,7 @@ function studentAreaPoints(s,a){ return validTasks().filter(t=>taskAreas(t).incl
 function tagWeight(i){ return 1/Math.pow(2,i); }
 function areaWInTask(t,a){ if(!taskAreas(t).includes(a)) return 0; const w=(t.weights&&t.weights[a]!=null)?t.weights[a]:1; return w; }
 function studentAreaPct(s,a){ let g=0,m=0; validTasks().forEach(t=>{ const w=areaWInTask(t,a); if(!w) return; g+=studentTaskPoints(s,t)*w; m+=taskMax(t)*w; }); return m?g/m:0; }
+function areaLost(s,a){ return validTasks().filter(t=>taskAreas(t).includes(a)).reduce((sum,t)=>sum+(taskMax(t)-studentTaskPoints(s,t)),0); }
 function classAreaPct(a){ let g=0,m=0; activeStudents().forEach(s=>{ validTasks().forEach(t=>{ const w=areaWInTask(t,a); if(!w) return; g+=studentTaskPoints(s,t)*w; m+=taskMax(t)*w; }); }); return m?g/m:0; }
 const UNDERLAG=2;
 function totalMax(){ return validTasks().reduce((s,t)=>s+taskMax(t),0); }
@@ -504,10 +513,30 @@ function difficultyNarrative(s){
   const present=order.filter(k=>ls[k].poss>0); if(present.length<2) return "";
   const p={}; present.forEach(k=>p[k]=ls[k].got/ls[k].poss);
   const name=(s.name||"").trim()||"eleven";
-  const segs=present.map((k,i)=>{ if(i===0) return "Av "+lbl[k]+" klarade "+name+" "+pct(p[k]); if(i===present.length-1) return " och av "+lbl[k]+" "+pct(p[k]); return ", av "+lbl[k]+" "+pct(p[k]); });
+  const segs=present.map((k,i)=>{ const v=fmt(ls[k].got)+" av "+fmt(ls[k].poss)+" p"; if(i===0) return "Av "+lbl[k]+" klarade "+name+" "+v; if(i===present.length-1) return " och av "+lbl[k]+" "+v; return ", av "+lbl[k]+" "+v; });
   let concl=""; const gp=p.grund, ap=p.avancerat;
   if(gp!=null&&ap!=null){ if(gp>=0.7&&ap<0.5) concl=" Det tyder på god förståelse för grunderna men att de mer avancerade problemen behöver tränas."; else if(gp<0.5) concl=" De grundläggande momenten behöver befästas först."; else if(ap>=0.7) concl=" Eleven hanterar även de svårare uppgifterna väl."; }
   return segs.join("")+"."+concl;
+}
+function weakDescriptor(s,area,thr){
+  const inArea=validTasks().filter(t=>taskAreas(t).includes(area));
+  const buckets={grund:{got:0,poss:0},medel:{got:0,poss:0},avancerat:{got:0,poss:0}};
+  inArea.forEach(t=>{ const k=bucketOf(t.level); if(!k) return; buckets[k].got+=studentTaskPoints(s,t); buckets[k].poss+=taskMax(t); });
+  let ag=0,am=0; inArea.forEach(t=>{ ag+=studentTaskPoints(s,t); am+=taskMax(t); });
+  const order=["grund","medel","avancerat"], present=order.filter(k=>buckets[k].poss>0);
+  const areaPct=studentAreaPct(s,area);
+  if(!present.length) return {pct:areaPct,levels:[],long:area,short:"",got:ag,poss:am};
+  const weak=present.filter(k=>buckets[k].got/buckets[k].poss<thr);
+  const gls=studentLevelStats(s).grund, basicsWeak=gls.poss>0 && (gls.got/gls.poss)<0.6;
+  let levels;
+  if(present.length>=2 && weak.length===present.length) levels=[];   // svag på alla nivåer → bara området
+  else levels=weak.slice();
+  if(basicsWeak) levels=levels.filter(k=>k==="grund");               // befäst grunderna först – peka inte mot svårare nivåer
+  if(!levels.length) return {pct:areaPct,levels:[],long:area,short:"",got:ag,poss:am};
+  let g=0,m=0; levels.forEach(k=>{ g+=buckets[k].got; m+=buckets[k].poss; });
+  const adj={grund:"grundläggande",medel:"medelsvåra",avancerat:"avancerade"}, sh={grund:"grund",medel:"medel",avancerat:"avancerat"};
+  const adjPhrase=levels.map(k=>adj[k]).join(" och ");
+  return {pct:m?g/m:areaPct,levels,long:adjPhrase+" uppgifter inom "+area,short:levels.map(k=>sh[k]).join("+"),got:g,poss:m};
 }
 
 /* ===== 4. SAMMANFATTNINGAR ===== */
@@ -531,10 +560,10 @@ function studentSummary(s,thr){
   const tot=studentTotals(s), name=(s.name||"").trim()||"Eleven", g=tot.grade;
   const areas=usedAreas().filter(a=>areaTaskCount(a)>=UNDERLAG);
   const ar=areas.map(a=>({a,p:studentAreaPct(s,a)}));
-  const strong=ar.filter(x=>x.p>=0.8).sort((x,y)=>y.p-x.p), weak=ar.filter(x=>x.p<thr).sort((x,y)=>x.p-y.p);
+  const strong=ar.filter(x=>x.p>=0.8).sort((x,y)=>y.p-x.p), weak=ar.filter(x=>x.p<thr).sort((x,y)=>areaLost(s,y.a)-areaLost(s,x.a));
   let t=name+" fick "+fmt(tot.pts)+" av "+fmt(tot.max)+" poäng ("+pct(tot.pct)+")"+(g?", vilket motsvarar betyget "+g:"")+". ";
   if(strong.length) t+="Starkast på "+joinSv(strong.map(x=>x.a))+". ";
-  if(weak.length) t+="Behöver träna mer på "+joinSv(weak.map(x=>x.a+" ("+pct(x.p)+")"))+". ";
+  if(weak.length) t+="Behöver träna mer på "+joinSv(weak.map(x=>{ const d=weakDescriptor(s,x.a,thr); return d.long+" ("+fmt(d.got)+" av "+fmt(d.poss)+" p)"; }))+". ";
   const dn=difficultyNarrative(s); if(dn) t+=dn+" ";
   const bl=borderlineInfo(s); if(bl) t+="Ligger bara "+fmt(bl.diff)+" p från betyget "+bl.letter+". ";
   if(s.comment&&s.comment.trim()) t+=s.comment.trim();
@@ -666,12 +695,12 @@ function renderAnalysis(){
     const card=document.createElement("div"); card.className="scard";
     if(s.absent){ card.classList.add("is-absent"); card.innerHTML=`<div class="name"><span>${esc(s.name||"(namnlös)")}</span><span class="tot" style="font-weight:600">Frånvarande</span></div><div class="stext">Var frånvarande vid provet – inget resultat registrerat.</div>`; cards.appendChild(card); return; }
     const tt=studentTotals(s),tb=band(tt.pct);
-    const weak=areas.filter(a=>areaTaskCount(a)>=UNDERLAG).map(a=>({a,p:studentAreaPct(s,a)})).filter(x=>x.p<thr).sort((x,y)=>x.p-y.p);
+    const weak=areas.filter(a=>areaTaskCount(a)>=UNDERLAG).map(a=>({a,p:studentAreaPct(s,a)})).filter(x=>x.p<thr).sort((x,y)=>areaLost(s,y.a)-areaLost(s,x.a));
     const badge=tt.grade?`<span class="gradebadge g-${tt.grade}">${tt.grade}</span>`:`<span class="tot" style="color:${tb.fg};font-weight:600">${(tt.pct*100).toFixed(0)} %</span>`;
     let body=`<div class="name"><span>${esc(s.name||"(namnlös)")}</span>${badge}</div><div class="tot">${fmt(tt.pts)} av ${fmt(tt.max)} poäng · ${(tt.pct*100).toFixed(0)} %</div>`;
     body+=gradeLineHTML(s,tt);
     body+=`<div class="lbl">Behöver träna mer på</div>`;
-    if(weak.length) weak.forEach(w=>{ const b=band(w.p); body+=`<span class="pill" style="background:${b.bg};color:${b.fg}">${esc(w.a)} · ${(w.p*100).toFixed(0)} %</span>`; });
+    if(weak.length) weak.forEach(w=>{ const d=weakDescriptor(s,w.a,thr); const b=band(d.pct); const lv=d.short?` · ${d.short}`:""; body+=`<span class="pill" style="background:${b.bg};color:${b.fg}">${esc(w.a)}${lv} · ${fmt(d.got)}/${fmt(d.poss)} p</span>`; });
     else body+=`<div class="good-note">Inga områden under gränsen 👍</div>`;
     card.innerHTML=body;
     const stext=document.createElement("div"); stext.className="stext"; stext.textContent=studentSummary(s,thr); card.appendChild(stext);
@@ -709,19 +738,24 @@ function renderDetails(){
     if(cl.avancerat.poss){ const mast=act.filter(s=>{const x=studentLevelStats(s).avancerat; return x.poss&&x.got/x.poss>=0.7;}); lines.push('<b>Klarar de avancerade väl (≥70 %):</b> '+(mast.length?mast.map(nm).join(", "):"ingen")); }
     lEl.innerHTML=h+'<div class="ld-lines">'+lines.map(l=>'<p>'+l+'</p>').join("")+'</div>';
   } else { if(lWrap) lWrap.style.display="none"; lEl.innerHTML=""; }
-  // Resultatspridning + lådagram
-  const ps=act.map(s=>studentTotals(s).pct).sort((a,b)=>a-b);
+  // Resultatspridning + lådagram (poäng)
+  const max=totalMax();
+  const ps=act.map(s=>studentTotals(s).pts).sort((a,b)=>a-b);
   const qt=(arr,q)=>{ const n=arr.length; if(n===1) return arr[0]; const pos=(n-1)*q, base=Math.floor(pos), rest=pos-base; return arr[base+1]!==undefined?arr[base]+rest*(arr[base+1]-arr[base]):arr[base]; };
   const q0=ps[0], q1=qt(ps,0.25), q2=qt(ps,0.5), q3=qt(ps,0.75), q4=ps[ps.length-1];
-  const L=v=>(v*100).toFixed(1)+'%';
-  const dots=act.map(s=>`<span class="bp-dot" style="left:${L(studentTotals(s).pct)}"></span>`).join("");
-  let sp='<div class="ld-lines" style="margin-top:0"><p>Median '+pct(q2)+' · kvartiler '+pct(q1)+'–'+pct(q3)+' · lägsta '+pct(q0)+' · högsta '+pct(q4)+'.</p></div>';
-  sp+='<div class="boxplot"><div class="bp-track">'
-    +'<div class="bp-line" style="left:'+L(q0)+';width:'+((q4-q0)*100).toFixed(1)+'%"></div>'
+  const L=v=>Math.max(0,Math.min(100,max?v/max*100:0)).toFixed(1)+'%';
+  const fp=v=>fmt(Math.round(v*10)/10);
+  const dots=act.map(s=>`<span class="bp-dot" style="left:${L(studentTotals(s).pts)}"></span>`).join("");
+  let grades='', axis='<span class="bp-ax-min" style="left:0">0</span>';
+  if(gradesValid()){ gradeBands().filter(b=>b.g!=="F"&&b.min>0).forEach(b=>{ grades+=`<div class="bp-grade" style="left:${L(b.min)}"></div>`; axis+=`<span class="bp-ax-g" style="left:${L(b.min)}">${b.g}</span>`; }); }
+  axis+=`<span class="bp-ax-max" style="left:100%">${fmt(max)} p</span>`;
+  let sp='<div class="ld-lines" style="margin-top:0"><p>Median '+fp(q2)+' p · kvartiler '+fp(q1)+'–'+fp(q3)+' p · lägsta '+fp(q0)+' p · högsta '+fp(q4)+' p.</p></div>';
+  sp+='<div class="boxplot"><div class="bp-track">'+grades
+    +'<div class="bp-line" style="left:'+L(q0)+';width:'+(Math.max(0,(q4-q0))/max*100).toFixed(1)+'%"></div>'
     +'<div class="bp-cap" style="left:'+L(q0)+'"></div><div class="bp-cap" style="left:'+L(q4)+'"></div>'
-    +'<div class="bp-box" style="left:'+L(q1)+';width:'+((q3-q1)*100).toFixed(1)+'%"></div>'
+    +'<div class="bp-box" style="left:'+L(q1)+';width:'+(Math.max(0,(q3-q1))/max*100).toFixed(1)+'%"></div>'
     +'<div class="bp-median" style="left:'+L(q2)+'"></div>'+dots
-    +'</div><div class="bp-axis"><span>0 %</span><span>50 %</span><span>100 %</span></div></div>';
+    +'</div><div class="bp-axis">'+axis+'</div></div>';
   sEl.innerHTML=sp;
 }
 
