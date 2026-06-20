@@ -529,9 +529,12 @@ function weakDescriptor(s,area,thr){
   const weak=present.filter(k=>buckets[k].got/buckets[k].poss<thr);
   const gls=studentLevelStats(s).grund, basicsWeak=gls.poss>0 && (gls.got/gls.poss)<0.6;
   let levels;
-  if(present.length>=2 && weak.length===present.length) levels=[];   // svag på alla nivåer → bara området
-  else levels=weak.slice();
-  if(basicsWeak) levels=levels.filter(k=>k==="grund");               // befäst grunderna först – peka inte mot svårare nivåer
+  if(present.length>=2 && weak.length===present.length){
+    levels=(basicsWeak && buckets.grund.poss>0) ? ["grund"] : [];   // svag på allt: elev utan säkrade grunder + grunduppgifter finns → peka på grunderna som ingång, annars hela området
+  } else {
+    levels=weak.slice();
+    if(basicsWeak) levels=levels.filter(k=>k==="grund");             // grunderna inte säkrade → peka inte mot svårare nivåer
+  }
   if(!levels.length) return {pct:areaPct,levels:[],long:area,short:"",got:ag,poss:am};
   let g=0,m=0; levels.forEach(k=>{ g+=buckets[k].got; m+=buckets[k].poss; });
   const adj={grund:"grundläggande",medel:"medelsvåra",avancerat:"avancerade"}, sh={grund:"grund",medel:"medel",avancerat:"avancerat"};
