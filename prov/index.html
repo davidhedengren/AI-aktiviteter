@@ -23,7 +23,8 @@
   html{-webkit-text-size-adjust:100%}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:15px;line-height:1.5}
   .wrap{max-width:1080px;margin:0 auto;padding:0 20px 100px}
-  header.top{padding:48px 0 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+  header.top{position:relative;overflow:hidden;margin-top:26px;padding:36px 36px 32px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:linear-gradient(180deg,rgba(255,253,250,.82),rgba(250,248,244,.5));border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);backdrop-filter:blur(10px)}
+  header.top::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.95) 50%,transparent)}
   .brandwrap{min-width:0}
   .kicker{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
   .kicker .kdot{color:var(--indigo);margin:0 2px}
@@ -238,7 +239,38 @@
   table.grid tbody tr:focus-within td.name-c{background:var(--indigo-soft);box-shadow:inset 3px 0 0 var(--indigo)}
   table.grid tbody tr:focus-within input.score{border-color:var(--indigo)}
 
-  @media(prefers-reduced-motion:reduce){ *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important} }
+  /* — Premiumlager — */
+  html{scroll-behavior:smooth}
+  :root{--blue:#3f6fd1}
+  :root[data-theme="dark"]{--blue:#7c9ff0}
+  :root[data-theme="dark"] header.top{background:linear-gradient(180deg,rgba(46,42,55,.72),rgba(39,36,48,.42));border-color:var(--line)}
+  :root[data-theme="dark"] header.top::before{background:linear-gradient(90deg,transparent,rgba(255,255,255,.13) 50%,transparent)}
+  .panel{position:relative}
+  .panel::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85) 50%,transparent);z-index:1;pointer-events:none}
+  :root[data-theme="dark"] .panel::before{background:linear-gradient(90deg,transparent,rgba(255,255,255,.12) 50%,transparent)}
+  #tab-build .panel{border-left:3px solid var(--indigo)}
+  #tab-results .panel{border-left:3px solid var(--blue)}
+  #tab-analyze .panel{border-left:3px solid var(--good)}
+  .task,.ov-card,.scard,.panel{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+  .gc-bar{position:relative;box-shadow:0 10px 22px -8px rgba(36,31,43,.3),inset 0 1px 0 rgba(255,255,255,.45)}
+  .gc-bar::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(255,255,255,0) 55%);pointer-events:none}
+  .heat td.cell{border-radius:13px;position:relative;transition:transform .18s ease,box-shadow .18s ease}
+  .heat td.cell:hover{transform:scale(1.12);box-shadow:0 10px 20px -6px rgba(36,31,43,.4);z-index:5}
+  .tabs{top:10px;background:transparent;backdrop-filter:none;padding:12px 0 14px}
+  :root[data-theme="dark"] .tabs{background:transparent}
+  .tabbar{background:rgba(255,255,255,.72);backdrop-filter:blur(16px) saturate(1.3)}
+  :root[data-theme="dark"] .tabbar{background:rgba(39,36,48,.74)}
+  .scard .name{font-size:19px}
+  .scard>.tot{padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:3px}
+  .scard .lbl{text-transform:uppercase;letter-spacing:.06em;font-weight:700;font-size:10.5px;color:var(--muted)}
+  .gradeline{margin:13px 0 20px;padding-top:3px}
+  .gl-track{position:relative;height:7px;border-radius:5px;background:var(--line)}
+  .gl-fill{position:absolute;left:0;top:0;bottom:0;border-radius:5px;opacity:.28}
+  .gl-tick{position:absolute;top:-2px;bottom:-2px;width:1.5px;background:var(--card);transform:translateX(-50%)}
+  .gl-lbl{position:absolute;top:12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:600;color:var(--faint);transform:translateX(-50%)}
+  .gl-marker{position:absolute;top:-7px;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:8px solid var(--ink);transform:translateX(-50%);filter:drop-shadow(0 1px 1px rgba(0,0,0,.22))}
+
+  @media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto!important} *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important} }
 
   #printArea{display:none}
   @media print{ .wrap,.tabs,header.top{display:none!important} body{background:#fff} #printArea{display:block}
@@ -448,6 +480,20 @@ function studentTotals(s){ const vt=validTasks(); let pts=0; vt.forEach(t=>pts+=
 function band(p){ if(p>=0.8) return {bg:"var(--good-bg)",fg:"var(--good)"}; if(p>=0.6) return {bg:"var(--okay-bg)",fg:"var(--okay)"}; if(p>=0.4) return {bg:"var(--mid-bg)",fg:"var(--mid)"}; return {bg:"var(--weak-bg)",fg:"var(--weak)"}; }
 function borderlineInfo(s){ if(s.absent) return null; const bands=gradeBands(); if(!bands) return null; const pts=studentTotals(s).pts; let best=null;
   bands.forEach(x=>{ if(x.g==="F") return; const d=x.min-pts; if(d>0&&d<=BORDERLINE&&(!best||d<best.diff)) best={letter:x.g,diff:d}; }); return best; }
+function gradeLineHTML(s,tt){
+  if(!gradesValid()||!tt.max) return "";
+  const bands=gradeBands(); if(!bands) return "";
+  const GCOL={A:"#1f8a5e",B:"#5a9b32",C:"#4566cf",D:"#c79a22",E:"#dd853a",F:"#d24a40"};
+  const pos=v=>Math.max(0,Math.min(100,v/tt.max*100));
+  const ticks=bands.filter(b=>b.g!=="F"&&b.min>0).map(b=>({L:b.g,x:pos(b.min)}));
+  if(!ticks.length) return "";
+  const sx=pos(tt.pts), col=GCOL[tt.grade]||"#6b6473";
+  let h='<div class="gradeline" aria-hidden="true"><div class="gl-track">';
+  h+=`<div class="gl-fill" style="width:${sx}%;background:${col}"></div>`;
+  ticks.forEach(t=>{ h+=`<div class="gl-tick" style="left:${t.x}%"></div><div class="gl-lbl" style="left:${t.x}%">${t.L}</div>`; });
+  h+=`<div class="gl-marker" style="left:${sx}%;border-top-color:${col}"></div>`;
+  return h+'</div></div>';
+}
 function levelStatsFor(fn){ const b={grund:{got:0,poss:0},medel:{got:0,poss:0},avancerat:{got:0,poss:0}}; validTasks().forEach(t=>{ const r=fn(t); if(!r) return; const k=bucketOf(t.level); if(!k) return; b[k].got+=r.got; b[k].poss+=r.poss; }); return b; }
 function studentLevelStats(s){ return levelStatsFor(t=>({got:studentTaskPoints(s,t),poss:taskMax(t)})); }
 function classLevelStats(){ const act=activeStudents(); return levelStatsFor(t=>({got:act.reduce((a,st)=>a+studentTaskPoints(st,t),0),poss:taskMax(t)*act.length})); }
@@ -622,9 +668,8 @@ function renderAnalysis(){
     const tt=studentTotals(s),tb=band(tt.pct);
     const weak=areas.filter(a=>areaTaskCount(a)>=UNDERLAG).map(a=>({a,p:studentAreaPct(s,a)})).filter(x=>x.p<thr).sort((x,y)=>x.p-y.p);
     const badge=tt.grade?`<span class="gradebadge g-${tt.grade}">${tt.grade}</span>`:`<span class="tot" style="color:${tb.fg};font-weight:600">${(tt.pct*100).toFixed(0)} %</span>`;
-    const bl=borderlineInfo(s);
     let body=`<div class="name"><span>${esc(s.name||"(namnlös)")}</span>${badge}</div><div class="tot">${fmt(tt.pts)} av ${fmt(tt.max)} poäng · ${(tt.pct*100).toFixed(0)} %</div>`;
-    if(bl) body+=`<div class="borderline">Gränsfall: ${fmt(bl.diff)} p från betyg ${bl.letter}</div>`;
+    body+=gradeLineHTML(s,tt);
     body+=`<div class="lbl">Behöver träna mer på</div>`;
     if(weak.length) weak.forEach(w=>{ const b=band(w.p); body+=`<span class="pill" style="background:${b.bg};color:${b.fg}">${esc(w.a)} · ${(w.p*100).toFixed(0)} %</span>`; });
     else body+=`<div class="good-note">Inga områden under gränsen 👍</div>`;
