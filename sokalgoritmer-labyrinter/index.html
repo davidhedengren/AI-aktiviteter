@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="sv">
 <head>
@@ -57,10 +55,25 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 .heuristic-label{position:absolute;color:rgba(255,255,255,.85);font-size:10px;font-family:'JetBrains Mono',monospace;pointer-events:none;user-select:none;}
 
+.lg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px 16px;margin-bottom:14px;}
+.lg-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--subtle);}
+.lg-note{font-size:11.5px;color:var(--dim);line-height:1.7;}
+.lg-note strong{color:var(--subtle);}
+
+#controls button:disabled,.controls-row button:disabled,.btn-ghost:disabled{opacity:.42;cursor:not-allowed;box-shadow:none;}
+#controls button:disabled:hover,.controls-row button:disabled:hover{box-shadow:none;}
+#controls select:disabled,.controls-row select:disabled{opacity:.5;cursor:not-allowed;}
+
 @media(max-width:940px){
-  #mazeCanvas{width:100%;height:auto;}
+  .page-wrap{padding:14px 12px 40px;}
+  #canvasContainer{display:block;max-width:100%;}
+  #mazeCanvas{width:100%;height:auto;display:block;}
   .back-link{position:static;transform:none;margin-bottom:4px;}
   .hd{padding:10px 16px 8px;}
+  #controls,.controls-row{gap:6px;}
+  #controls button,.controls-row button,#controls select,.controls-row select{padding:9px 14px;font-size:13px;}
+  #controls label,.controls-row label{font-size:0.82em;}
+  .lg-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));}
 }
 .overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
@@ -72,6 +85,33 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .overlay-card .step strong{color:var(--text);}
 .step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
 .overlay-btn{display:block;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}.overlay-btn:hover{background:#3d6de6;}
+
+/* ── Visuell polish ── */
+.hd h1{text-shadow:0 0 34px rgba(102,152,255,.22);}
+#canvasContainer{border:1px solid #1c2540;border-radius:12px;box-shadow:0 12px 44px rgba(0,0,0,.55),0 0 0 1px rgba(77,128,255,.06);}
+#info,#hoverInfo,#legend,#costFunctionInfo{box-shadow:0 6px 22px rgba(0,0,0,.30);}
+#controls button,.controls-row button{transition:background .18s ease,box-shadow .18s ease,transform .08s ease;}
+#controls button:active,.controls-row button:active{transform:translateY(1px);}
+#startSearchBtn{background:linear-gradient(180deg,#5b8bff,#3f6fe6);box-shadow:0 2px 12px rgba(77,128,255,.38);}
+#startSearchBtn:hover{background:linear-gradient(180deg,#6b97ff,#4a78ec);box-shadow:0 4px 18px rgba(77,128,255,.55);}
+.heuristic-label{color:#0d1422;font-weight:600;text-shadow:0 0 3px rgba(255,255,255,.55);}
+.result-panel{margin-top:14px;max-width:940px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0 16px;max-height:0;overflow:hidden;opacity:0;transform:translateY(-6px);transition:max-height .4s ease,opacity .35s ease,transform .35s ease,padding .4s ease;}
+.result-panel.show{max-height:500px;opacity:1;transform:none;padding:16px;box-shadow:0 8px 28px rgba(0,0,0,.4),0 0 0 1px rgba(52,211,153,.18);border-color:rgba(52,211,153,.35);}
+.result-panel.nopath.show{border-color:rgba(239,91,91,.4);box-shadow:0 8px 28px rgba(0,0,0,.4),0 0 0 1px rgba(239,91,91,.2);}
+.rp-head{font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.rp-badge{background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px;letter-spacing:.02em;}
+.rp-sub{font-size:12px;color:var(--dim);}
+.rp-chips{display:flex;flex-wrap:wrap;gap:10px;}
+.rp-chip{flex:1;min-width:90px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;}
+.rp-num{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--accent2);}
+.rp-lab{font-size:10.5px;color:var(--dim);letter-spacing:.03em;}
+.rp-cmp{margin-top:14px;border-top:1px solid var(--border);padding-top:12px;}
+.rp-cmp-title{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);font-weight:700;margin-bottom:8px;}
+.rp-table{width:100%;border-collapse:collapse;font-size:12px;}
+.rp-table th{text-align:left;color:var(--dim);font-weight:600;font-size:10.5px;padding:4px 8px;border-bottom:1px solid var(--border);}
+.rp-table td{padding:5px 8px;color:var(--subtle);border-bottom:1px solid rgba(30,38,66,.5);}
+.rp-table tr.rp-cur td{color:var(--text);font-weight:700;}
+.rp-table tr.rp-cur td:first-child{color:var(--accent2);}
 </style>
 </head>
 <body>
@@ -91,14 +131,14 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div id="controls">
   <label for="algorithmSelect">Algoritm:</label>
   <select id="algorithmSelect">
-    <option value="A*">A*</option>
     <option value="BFS">BFS</option>
     <option value="DFS">DFS</option>
+    <option value="A*">A*</option>
     <option value="Greedy">Greedy Best-First</option>
   </select>
   <button id="startSearchBtn">Starta sökning</button>
   <label><input type="checkbox" id="stepModeChk" /> Stegvis</label>
-  <button id="nextStepBtn">Nästa steg</button>
+  <button id="nextStepBtn" disabled>Nästa steg</button>
   <button id="resetBtn" class="btn-ghost">Återställ</button>
 </div>
 
@@ -117,22 +157,24 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 </div>
 
 <div id="info"></div>
+<div id="resultPanel" class="result-panel"></div>
 <div id="costFunctionInfo">Kostnadsfunktion: (håll musen över en cell för att se f(n))</div>
 <div id="hoverInfo"></div>
 
 <div id="legend">
   <h3>Förklaringar</h3>
   <ul>
-    <li><span class="color-box" style="background:white;"></span><span><strong>Vit</strong> (vanlig väg, kostnad 1) – Skapas genom att vänsterklicka på en svart ruta.</span></li>
-    <li><span class="color-box" style="background:black;"></span><span><strong>Svart</strong> (vägg) – Skapas genom att vänsterklicka på en vit ruta.</span></li>
-    <li><span class="color-box" style="background:#deb887;"></span><span><strong>Brun</strong> (kostnad 3) – Skapas genom att högerklicka 2 gånger.</span></li>
-    <li><span class="color-box" style="background:blue;"></span><span><strong>Blå</strong> (kostnad 5) – Skapas genom att högerklicka 3 gånger.</span></li>
-    <li><span class="color-box" style="background:red;"></span><span><strong>Röd</strong> (mål) – Skapas genom att högerklicka en gång.</span></li>
-    <li><span class="color-box" style="background:lightskyblue;"></span><span><strong>Ljusblå</strong> (genomsökt) – Visas automatiskt av algoritmen för rutor som sökts igenom.</span></li>
-    <li><span class="color-box" style="background:orange;"></span><span><strong>Orange</strong> (Kö) – Markering av algoritmens kö, alltså de rutor som ligger på tur att utforskas.</span></li>
-    <li><span class="color-box" style="background:green;"></span><span><strong>Grön</strong> (start) – Anger startposition för sökningen. Klicka och dra för att flytta.</span></li>
+    <li><span class="color-box" style="background:#34c759;"></span><span><strong>Start</strong> – sökningens startposition. Klicka och dra för att flytta den.</span></li>
+    <li><span class="color-box" style="background:#ef5b5b;"></span><span><strong>Mål</strong> – skapas genom att högerklicka en gång.</span></li>
+    <li><span class="color-box" style="background:#d7def0;"></span><span><strong>Vanlig väg</strong> (kostnad 1) – skapas genom att vänsterklicka på en vägg.</span></li>
+    <li><span class="color-box" style="background:#10141f;border-color:#2a3550;"></span><span><strong>Vägg</strong> – skapas genom att vänsterklicka på en öppen ruta.</span></li>
+    <li><span class="color-box" style="background:#d8a24e;"></span><span><strong>Kostnad 3</strong> – skapas genom att högerklicka två gånger.</span></li>
+    <li><span class="color-box" style="background:#3f6fd0;"></span><span><strong>Kostnad 5</strong> – skapas genom att högerklicka tre gånger.</span></li>
+    <li><span class="color-box" style="background:#6f9fd6;"></span><span><strong>Genomsökt</strong> – rutor som algoritmen redan har undersökt.</span></li>
+    <li><span class="color-box" style="background:#f0a94e;"></span><span><strong>Kö</strong> – rutor som ligger på tur att utforskas.</span></li>
+    <li><span class="color-box" style="background:#3ddc84;"></span><span><strong>Hittad väg</strong> – den färdiga vägen från start till mål.</span></li>
   </ul>
-  <p><em>Vänsterklick</em> cyklar bara mellan svart och vit på en cell.<br/><em>Högerklick</em> cyklar mellan röd → brun → blå → svart → röd.</p>
+  <p><em>Vänsterklick</em> växlar mellan vägg och öppen ruta.<br/><em>Högerklick</em> växlar mål → kostnad 3 → kostnad 5 → vägg.</p>
   <p style="margin-top:8px;"><em>Tips:</em> Vid A*-sökning kan du hålla muspekaren över en ruta för att se f(n)-värdet (kostnadsfunktionen).</p>
 </div>
 
@@ -141,13 +183,12 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
     <h2>Sökalgoritmer i <span>labyrint</span></h2>
-    <p class="sub">Hur hittar en algoritm vägen genom en labyrint? Här kan du se fyra olika sökalgoritmer in action och jämföra hur de fungerar.</p>
+    <p class="sub">Hur hittar en dator vägen genom en labyrint? Se fyra klassiska sökalgoritmer arbeta steg för steg.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Välj en labyrint</strong> – Ladda en av de fördefinierade labyrinterna, eller bygg en egen genom att klicka på rutnätet. Vänsterklick skapar/tar bort väggar, högerklick sätter mål och kostnadsrutor.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Välj algoritm och sök</strong> – Testa <strong>BFS</strong> (bredden först), <strong>DFS</strong> (djupet först), <strong>Girig bäst-först</strong> eller <strong>A*</strong>. Tryck Starta sökning och se hur algoritmen utforskar labyrinten steg för steg.</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Jämför algoritmerna</strong> – Kör samma labyrint med olika algoritmer. Vilken hittar kortaste vägen? Vilken utforskar minst rutor? Aktivera <strong>Stegvis</strong> för att följa sökningen ett steg i taget.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Välj en labyrint</strong> – ladda en färdig eller bygg en egen.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Välj algoritm och sök</strong> – BFS, DFS, Girig bäst-först eller A*, och tryck Starta sökning.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Jämför</strong> – kör samma labyrint med olika algoritmer. Vilken hittar kortast väg, och vilken utforskar minst rutor?</div></div>
     </div>
-    <p class="sub" style="margin-bottom:0;">💡 <strong style="color:var(--text)">Tips:</strong> Med <strong>A*</strong> kan du hålla musen över en ruta under sökningen för att se kostnadsfunktionen <em>f(n) = g(n) + h(n)</em> – den kombination av faktisk kostnad och uppskattad återstående kostnad som gör A* så effektiv.</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta simuleringen →</button>
   </div>
 </div>
@@ -196,9 +237,41 @@ let A_STAR_STATE = null;
 let GREEDY_STATE = null;
 let BFS_STATE = null;
 let DFS_STATE = null;
-let search_in_progress = false;
+let search_in_progress = false; setControlsSearching(false);
 let currentAlgorithm = null;
 let search_cost = 0;
+let runHistory = {};
+const ALG_LABEL = {"A*":"A*","BFS":"BFS","DFS":"DFS","Greedy":"Girig bäst-först"};
+
+function hideResultPanel(){ let p=document.getElementById("resultPanel"); if(p) p.className="result-panel"; }
+function mazeChanged(){ runHistory = {}; hideResultPanel(); }
+
+function finishSearch(o){
+  search_in_progress = false;
+  setControlsSearching(false);
+  costFunctionInfoDiv.style.display = (o.found && currentAlgorithm === "A*") ? "block" : "none";
+  resultDiv.textContent = ""; resultDiv.style.backgroundColor = ""; resultDiv.style.borderColor = "";
+  if (o.found) runHistory[currentAlgorithm] = o;
+  renderResultPanel(o);
+}
+
+function renderResultPanel(o){
+  let panel = document.getElementById("resultPanel");
+  if(!panel) return;
+  if(!o.found){
+    panel.className = "result-panel nopath show";
+    panel.innerHTML = '<div class="rp-head">Ingen v\u00e4g funnen</div><div class="rp-sub">Algoritmen kunde inte n\u00e5 m\u00e5let i den h\u00e4r labyrinten.</div>';
+    return;
+  }
+  let chips = '<div class="rp-chip"><span class="rp-num">'+o.steps+'</span><span class="rp-lab">steg till m\u00e5l</span></div>'
+            + '<div class="rp-chip"><span class="rp-num">'+o.explored+'</span><span class="rp-lab">utforskade rutor</span></div>';
+  if(o.hasCost){
+    chips += '<div class="rp-chip"><span class="rp-num">'+o.pathCost+'</span><span class="rp-lab">v\u00e4gens kostnad</span></div>'
+           + '<div class="rp-chip"><span class="rp-num">'+o.searchCost+'</span><span class="rp-lab">s\u00f6kningens kostnad</span></div>';
+  }
+  panel.className = "result-panel show";
+  panel.innerHTML = '<div class="rp-head"><span class="rp-badge">'+ALG_LABEL[currentAlgorithm]+'</span> hittade m\u00e5let</div><div class="rp-chips">'+chips+'</div>';
+}
 
 function hasNonOneSquares() {
   for (let r=0; r<GRID_HEIGHT; r++)
@@ -251,8 +324,21 @@ function get_neighbors(node) {
   return neighbors;
 }
 
+const TILE_INSET=1, TILE_R=5;
+function rr(x,y,w,h,rad){ctx.beginPath();ctx.moveTo(x+rad,y);ctx.arcTo(x+w,y,x+w,y+h,rad);ctx.arcTo(x+w,y+h,x,y+h,rad);ctx.arcTo(x,y+h,x,y,rad);ctx.arcTo(x,y,x+w,y,rad);ctx.closePath();}
+function paintCell(r,c,fill,glow,glowBlur,stroke){
+  const x=c*CELL_SIZE+TILE_INSET,y=r*CELL_SIZE+TILE_INSET,s=CELL_SIZE-TILE_INSET*2;
+  ctx.save();
+  if(glow){ctx.shadowColor=glow;ctx.shadowBlur=glowBlur||12;}
+  rr(x,y,s,s,TILE_R);ctx.fillStyle=fill;ctx.fill();
+  ctx.restore();
+  if(stroke){rr(x,y,s,s,TILE_R);ctx.strokeStyle=stroke;ctx.lineWidth=1;ctx.stroke();}
+}
+
 function draw_grid() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#0c1018";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
   for (let [_, label] of heuristicTexts)
     if (label.parentNode) label.parentNode.removeChild(label);
   heuristicTexts.clear();
@@ -260,32 +346,19 @@ function draw_grid() {
 
   for (let r = 0; r < GRID_HEIGHT; r++) {
     for (let c = 0; c < GRID_WIDTH; c++) {
-      let x1 = c * CELL_SIZE, y1 = r * CELL_SIZE;
-      let color;
-      if (grid[r][c] === 1) color = "#111";
-      else if (grid[r][c] === 2) color = "#3366cc";
-      else if (grid[r][c] === 3) color = "#c8a050";
-      else color = "#e8ecf8";
-      ctx.fillStyle = color;
-      ctx.strokeStyle = "#1e2642";
-      ctx.fillRect(x1, y1, CELL_SIZE, CELL_SIZE);
-      ctx.strokeRect(x1, y1, CELL_SIZE, CELL_SIZE);
+      if (grid[r][c] === 1) paintCell(r, c, "#10141f", null, null, "#212b45");
+      else if (grid[r][c] === 2) paintCell(r, c, "#3f6fd0");
+      else if (grid[r][c] === 3) paintCell(r, c, "#d8a24e");
+      else paintCell(r, c, "#d7def0");
     }
   }
 
-  for (let [er, ec] of ends) {
-    let x1 = ec * CELL_SIZE, y1 = er * CELL_SIZE;
-    ctx.fillStyle = "#ef5b5b";
-    ctx.fillRect(x1, y1, CELL_SIZE, CELL_SIZE);
-    ctx.strokeRect(x1, y1, CELL_SIZE, CELL_SIZE);
-  }
+  for (let [er, ec] of ends) paintCell(er, ec, "#ef5b5b", "rgba(239,91,91,.6)", 14);
 
   let sr, sc;
   if (is_dragging_start && potential_start != null) [sr, sc] = potential_start;
   else [sr, sc] = start;
-  ctx.fillStyle = "#34c759";
-  ctx.fillRect(sc * CELL_SIZE, sr * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-  ctx.strokeRect(sc * CELL_SIZE, sr * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+  paintCell(sr, sc, "#34c759", "rgba(52,199,89,.6)", 14);
 }
 
 function clear_heuristic_texts() {
@@ -308,25 +381,19 @@ function clear_previous_search() {
 
 function mark_explored(r, c) {
   if ((r === start[0] && c === start[1]) || ends.some(e => e[0]===r && e[1]===c)) return;
-  ctx.fillStyle = "lightskyblue";
-  ctx.fillRect(c*CELL_SIZE, r*CELL_SIZE, CELL_SIZE, CELL_SIZE);
-  ctx.strokeRect(c*CELL_SIZE, r*CELL_SIZE, CELL_SIZE, CELL_SIZE);
+  paintCell(r, c, "#6f9fd6");
 }
 
 function color_frontier_cell(r, c) {
   if ((r === start[0] && c === start[1]) || ends.some(e => e[0]===r && e[1]===c)) return;
-  ctx.fillStyle = "orange";
-  ctx.fillRect(c * CELL_SIZE, r * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-  ctx.strokeRect(c * CELL_SIZE, r * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+  paintCell(r, c, "#f0a94e", "rgba(240,169,78,.45)", 8);
 }
 
 function mark_path(path) {
   for (let [r, c] of path) {
     if (r === start[0] && c === start[1]) continue;
     let isEnd = ends.some(e => e[0]===r && e[1]===c);
-    ctx.fillStyle = isEnd ? "#ef5b5b" : "lightgreen";
-    ctx.fillRect(c*CELL_SIZE, r*CELL_SIZE, CELL_SIZE, CELL_SIZE);
-    ctx.strokeRect(c*CELL_SIZE, r*CELL_SIZE, CELL_SIZE, CELL_SIZE);
+    paintCell(r, c, isEnd ? "#ef5b5b" : "#3ddc84", isEnd ? "rgba(239,91,91,.6)" : "rgba(61,220,132,.55)", 13);
   }
 }
 
@@ -338,7 +405,8 @@ class PriorityQ {
 }
 
 function a_star_step(open_set, came_from, g_score, explored_cells) {
-  if (open_set.empty()) { setFinalResultText("Ingen väg funnen"); search_in_progress = false; return; }
+  if (!search_in_progress) return;
+  if (open_set.empty()) { finishSearch({found:false}); return; }
   let [f_current, current] = open_set.pop();
   let [row, col] = current;
   search_cost += cellCost(row, col);
@@ -346,9 +414,7 @@ function a_star_step(open_set, came_from, g_score, explored_cells) {
     let path = []; let curKey = `${row},${col}`;
     while (came_from.has(curKey)) { path.push(current); current = came_from.get(curKey); curKey = `${current[0]},${current[1]}`; }
     path.push(start); path.reverse(); mark_path(path);
-    let msg = `Antal steg till mål: ${path.length-1}, Utforskade rutor: ${explored_cells-1}`;
-    if (hasNonOneSquares()) { let finalCost = calcPathCost(path); msg += `, Kostnad för slutgiltig väg: ${finalCost}, Kostnad för hela sökningen: ${search_cost}`; }
-    setFinalResultText(msg, true); search_in_progress = false; return;
+    finishSearch({found:true, steps:path.length-1, explored:explored_cells-1, hasCost:hasNonOneSquares(), pathCost:calcPathCost(path), searchCost:search_cost}); return;
   }
   mark_explored(row, col);
   for (let [nr, nc] of get_neighbors([row,col])) {
@@ -384,15 +450,14 @@ function start_a_star() {
 }
 
 function greedy_best_first_step(open_set, explored, explored_cells) {
-  if (open_set.empty()) { setFinalResultText("Ingen väg funnen"); search_in_progress = false; return; }
+  if (!search_in_progress) return;
+  if (open_set.empty()) { finishSearch({found:false}); return; }
   let [h_score, current, path] = open_set.pop();
   let [row, col] = current;
   search_cost += cellCost(row, col);
   if (ends.some(e => e[0]===row && e[1]===col)) {
     let finalPath = path.concat([current]); mark_path(finalPath);
-    let msg = `Antal steg till mål: ${finalPath.length-1}, Utforskade rutor: ${explored_cells-1}`;
-    if (hasNonOneSquares()) { let finalCost = calcPathCost(finalPath); msg += `, Kostnad för slutgiltig väg: ${finalCost}, Kostnad för hela sökningen: ${search_cost}`; }
-    setFinalResultText(msg, false); search_in_progress = false; return;
+    finishSearch({found:true, steps:finalPath.length-1, explored:explored_cells-1, hasCost:hasNonOneSquares(), pathCost:calcPathCost(finalPath), searchCost:search_cost}); return;
   }
   explored.add(`${row},${col}`); explored_cells++; mark_explored(row, col);
   for (let [nr,nc] of get_neighbors(current)) {
@@ -427,15 +492,14 @@ class SimpleQueue {
 }
 
 function bfs_step(queue, explored, explored_cells) {
-  if (queue.empty()) { setFinalResultText("Ingen väg funnen"); search_in_progress = false; return; }
+  if (!search_in_progress) return;
+  if (queue.empty()) { finishSearch({found:false}); return; }
   let [current, path] = queue.dequeue();
   let [row, col] = current;
   search_cost += cellCost(row, col);
   if (ends.some(e=> e[0]===row && e[1]===col)) {
     let fullPath = path.concat([current]); mark_path(fullPath);
-    let msg = `Antal steg till mål: ${fullPath.length-1}, Utforskade rutor: ${explored_cells-1}`;
-    if (hasNonOneSquares()) { let finalCost = calcPathCost(fullPath); msg += `, Kostnad för slutgiltig väg: ${finalCost}, Kostnad för hela sökningen: ${search_cost}`; }
-    setFinalResultText(msg, false); search_in_progress = false; return;
+    finishSearch({found:true, steps:fullPath.length-1, explored:explored_cells-1, hasCost:hasNonOneSquares(), pathCost:calcPathCost(fullPath), searchCost:search_cost}); return;
   }
   mark_explored(row, col); explored_cells++;
   for (let [nr, nc] of get_neighbors([row,col])) {
@@ -460,15 +524,14 @@ function start_bfs() {
 let directions = [[-1,0],[0,1],[1,0],[0,-1]];
 
 function dfs_step(stack, explored, explored_cells) {
-  if (stack.length === 0) { setFinalResultText("Ingen väg funnen"); search_in_progress = false; return; }
+  if (!search_in_progress) return;
+  if (stack.length === 0) { finishSearch({found:false}); return; }
   let [current, path, direction] = stack.pop();
   let [row, col] = current;
   search_cost += cellCost(row, col);
   if (ends.some(e=> e[0]===row && e[1]===col)) {
     let finalPath = path.concat([current]); mark_path(finalPath);
-    let msg = `Antal steg till mål: ${finalPath.length-1}, Utforskade rutor: ${explored_cells-1}`;
-    if (hasNonOneSquares()) { let finalCost = calcPathCost(finalPath); msg += `, Kostnad för slutgiltig väg: ${finalCost}, Kostnad för hela sökningen: ${search_cost}`; }
-    setFinalResultText(msg, false); search_in_progress = false; return;
+    finishSearch({found:true, steps:finalPath.length-1, explored:explored_cells-1, hasCost:hasNonOneSquares(), pathCost:calcPathCost(finalPath), searchCost:search_cost}); return;
   }
   mark_explored(row, col); explored.add(`${row},${col}`); explored_cells++;
   let order = [(direction + 3) % 4, direction, (direction + 1) % 4, (direction + 2) % 4];
@@ -526,7 +589,7 @@ canvas.addEventListener("mousemove",(e)=>{
     if (cell) { potential_start = cell; draw_grid(); }
   } else if (dragging_point==="other" && e.buttons===1) {
     let cell = getCellFromMouse(e);
-    if (cell) { let [row, col] = cell; if (grid[row][col]===1) grid[row][col]=0; else if (grid[row][col]===0) grid[row][col]=1; draw_grid(); }
+    if (cell) { let [row, col] = cell; if (grid[row][col]===1) grid[row][col]=0; else if (grid[row][col]===0) grid[row][col]=1; mazeChanged(); draw_grid(); }
   }
 });
 
@@ -536,7 +599,7 @@ canvas.addEventListener("mouseup",(e)=>{
   if (is_dragging_start) {
     is_dragging_start = false;
     if (cell && (potential_start[0]!==old_start[0] || potential_start[1]!==old_start[1])) {
-      grid[old_start[0]][old_start[1]] = 1; start = [potential_start[0], potential_start[1]]; grid[start[0]][start[1]] = 0;
+      grid[old_start[0]][old_start[1]] = 1; start = [potential_start[0], potential_start[1]]; grid[start[0]][start[1]] = 0; mazeChanged();
     }
     draw_grid(); dragging_point = null; old_start = null; potential_start = null; drag_start_pos = null; return;
   }
@@ -545,7 +608,7 @@ canvas.addEventListener("mouseup",(e)=>{
       if (cell && cell[0]===drag_start_pos[0] && cell[1]===drag_start_pos[1]) {
         let [r,c] = cell;
         if (grid[r][c]===1) grid[r][c]=0; else if (grid[r][c]===0) grid[r][c]=1;
-        draw_grid();
+        mazeChanged(); draw_grid();
       }
     } else if (e.button === 2) {
       if (cell && cell[0]===drag_start_pos[0] && cell[1]===drag_start_pos[1]) {
@@ -556,7 +619,7 @@ canvas.addEventListener("mouseup",(e)=>{
         else if (grid[r][c] === 2) grid[r][c] = 1;
         else if (grid[r][c] === 1) { ends.push([r,c]); grid[r][c] = 0; }
         else { ends.push([r,c]); grid[r][c] = 0; }
-        draw_grid();
+        mazeChanged(); draw_grid();
       }
     }
   }
@@ -578,8 +641,12 @@ function createHeuristicLabel(r, c, txt) {
   if (heuristicTexts.has(labelKey)) { let old = heuristicTexts.get(labelKey); if (old.parentNode) old.parentNode.removeChild(old); }
   let label = document.createElement("div");
   label.className = "heuristic-label"; label.textContent = txt;
-  label.style.left = (c*CELL_SIZE + CELL_SIZE/2 - 8) + "px";
-  label.style.top = (r*CELL_SIZE + CELL_SIZE/2 - 6) + "px";
+  let rect = canvas.getBoundingClientRect();
+  let sx = (rect.width / canvas.width) || 1;
+  let sy = (rect.height / canvas.height) || 1;
+  label.style.left = ((c*CELL_SIZE + CELL_SIZE/2 - 8) * sx) + "px";
+  label.style.top = ((r*CELL_SIZE + CELL_SIZE/2 - 6) * sy) + "px";
+  label.style.fontSize = Math.max(6, Math.round(10 * sx)) + "px";
   canvasContainer.appendChild(label); heuristicTexts.set(labelKey, label);
 }
 
@@ -603,7 +670,7 @@ document.getElementById("loadInput").addEventListener("change",(e)=>{
       if (data.grid.length !== GRID_HEIGHT || data.grid[0].length !== GRID_WIDTH) throw new Error(`Grid måste vara ${GRID_HEIGHT}x${GRID_WIDTH}.`);
       grid = data.grid; start = data.start; ends = data.ends.map(e => [...e]);
       grid[start[0]][start[1]] = 0; ends.forEach(e => { grid[e[0]][e[1]] = 0; });
-      clear_previous_search(); draw_grid();
+      mazeChanged(); clear_previous_search(); draw_grid();
       setFinalResultText("Labyrinten har laddats.", currentAlgorithm === "A*");
     } catch (error) { alert("Fel vid inläsning: " + error.message); }
   };
@@ -622,22 +689,36 @@ document.getElementById("predefinedSelect").addEventListener("change", (e) => {
   if (sel && predefinedMazes[sel]) {
     const maze = predefinedMazes[sel];
     grid = maze.grid.map(row => row.slice()); start = [...maze.start]; ends = maze.ends.map(e => [...e]);
-    clear_previous_search(); draw_grid();
+    mazeChanged(); clear_previous_search(); draw_grid();
     setFinalResultText(`Fördefinierad labyrint "${sel}" har laddats.`, currentAlgorithm === "A*");
     e.target.value = "";
   }
 });
 
+function setControlsSearching(on){
+  ["startSearchBtn","algorithmSelect","predefinedSelect","saveBtn","loadBtn"].forEach(id=>{
+    let el=document.getElementById(id); if(el) el.disabled=on;
+  });
+  let b=document.getElementById("startSearchBtn");
+  if(b){ b.style.opacity = on ? "0.5" : ""; b.style.cursor = on ? "not-allowed" : ""; }
+  let ns=document.getElementById("nextStepBtn");
+  if(ns) ns.disabled = !(on && stepMode);
+}
+
 document.getElementById("startSearchBtn").addEventListener("click", ()=>{
+  if (search_in_progress) return;
   let alg = document.getElementById("algorithmSelect").value;
   currentAlgorithm = alg;
+  setControlsSearching(true);
+  hideResultPanel();
   if (alg==="A*") start_a_star();
   else if (alg==="BFS") start_bfs();
   else if (alg==="DFS") start_dfs();
   else if (alg==="Greedy") start_greedy_best_first();
+  if (!search_in_progress) setControlsSearching(false);
 });
 
-document.getElementById("stepModeChk").addEventListener("change",(e)=>{ stepMode = e.target.checked; });
+document.getElementById("stepModeChk").addEventListener("change",(e)=>{ stepMode = e.target.checked; let ns=document.getElementById("nextStepBtn"); if(ns) ns.disabled = !(stepMode && search_in_progress); });
 
 document.getElementById("nextStepBtn").addEventListener("click", ()=>{
   if (!search_in_progress) return;
@@ -649,6 +730,8 @@ document.getElementById("nextStepBtn").addEventListener("click", ()=>{
 });
 
 document.getElementById("resetBtn").addEventListener("click", ()=>{
+  search_in_progress = false; setControlsSearching(false);
+  mazeChanged();
   ends = [];
   for (let r=0; r<GRID_HEIGHT; r++) for (let c=0; c<GRID_WIDTH; c++) grid[r][c] = 1;
   grid[start[0]][start[1]] = 0;
