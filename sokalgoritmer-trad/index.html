@@ -16,13 +16,13 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .back-link:hover{color:var(--text);border-color:var(--dim);}
 .hd{width:100%;text-align:center;padding:12px 16px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
-.hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}.hd h1 span{color:var(--accent2);}
+.hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;text-shadow:0 0 34px rgba(102,152,255,.22);}.hd h1 span{color:var(--accent2);}
 .hd p{color:var(--dim);font-size:0.8em;max-width:620px;margin:0 auto;line-height:1.4;}
 
 .page-wrap{max-width:780px;margin:0 auto;padding:16px 20px 48px;position:relative;z-index:1;}
 
-#canvasContainer{position:relative;display:inline-block;border:2px solid var(--border);border-radius:8px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.4);}
-#treeCanvas{display:block;background-color:#080c18;}
+#canvasContainer{position:relative;display:inline-block;max-width:100%;border:1px solid #1c2540;border-radius:12px;overflow:hidden;box-shadow:0 12px 44px rgba(0,0,0,.55),0 0 0 1px rgba(77,128,255,.06);}
+#treeCanvas{display:block;background-color:#080c18;touch-action:none;}
 
 .controls-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
 .controls-row:first-of-type{margin-top:14px;}
@@ -30,23 +30,60 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .controls-row label{font-size:0.78em;letter-spacing:.04em;color:var(--dim);font-weight:600;display:flex;align-items:center;gap:6px;}
 .controls-row select{padding:7px 10px;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;outline:none;transition:border-color .2s;}
 .controls-row select:focus{border-color:var(--accent);}
-.controls-row button{padding:7px 16px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:background .2s,box-shadow .2s;}
+.controls-row button{padding:7px 16px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:background .2s,box-shadow .2s,transform .08s;}
 .controls-row button:hover{background:var(--accent2);box-shadow:0 0 14px rgba(77,128,255,.3);}
+.controls-row button:active{transform:translateY(1px);}
+.controls-row button:disabled{opacity:.42;cursor:not-allowed;box-shadow:none;}
+.controls-row select:disabled{opacity:.5;cursor:not-allowed;}
 .controls-row input[type="checkbox"]{accent-color:var(--accent);width:14px;height:14px;}
+#startBtn{background:linear-gradient(180deg,#5b8bff,#3f6fe6);box-shadow:0 2px 12px rgba(77,128,255,.38);}
+#startBtn:hover{background:linear-gradient(180deg,#6b97ff,#4a78ec);box-shadow:0 4px 18px rgba(77,128,255,.55);}
 .btn-ghost{background:var(--surface2)!important;color:var(--subtle)!important;border:1px solid var(--border)!important;box-shadow:none!important;}
 .btn-ghost:hover{border-color:var(--accent)!important;color:var(--text)!important;background:var(--surface2)!important;}
 
-#info{margin-top:14px;font-size:12px;font-weight:600;color:var(--text);background:var(--surface);border:1px solid var(--border);padding:10px 14px;border-radius:6px;width:100%;}
-#hoverInfo{margin-top:8px;font-size:12px;font-weight:600;color:var(--text);background:var(--surface2);border:1px solid var(--border);padding:10px 14px;border-radius:6px;width:100%;}
+/* Nod-verktygsrad */
+.node-toolbar{position:absolute;display:none;transform:translate(-50%,-100%);background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:5px;gap:5px;align-items:center;box-shadow:0 8px 24px rgba(0,0,0,.55);z-index:5;white-space:nowrap;}
+.node-toolbar.show{display:flex;}
+.nt-btn{padding:5px 9px;font-size:11px;font-weight:600;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--subtle);cursor:pointer;font-family:'DM Sans',sans-serif;transition:.15s;}
+.nt-btn:hover{border-color:var(--accent);color:var(--text);}
+.nt-btn.active{background:rgba(239,91,91,.18);border-color:rgba(239,91,91,.5);color:#ff9a9a;}
+.nt-del:hover{border-color:#ef5b5b!important;color:#ff9a9a!important;}
+.nt-h{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--dim);font-weight:600;}
+.nt-h input{width:44px;padding:4px 6px;font-size:11px;background:var(--surface);border:1px solid var(--border);border-radius:5px;color:var(--text);font-family:'JetBrains Mono',monospace;outline:none;}
+.nt-h input:focus{border-color:var(--accent);}
+.node-toolbar::after{content:'';position:absolute;left:50%;bottom:-5px;transform:translateX(-50%) rotate(45deg);width:8px;height:8px;background:var(--surface2);border-right:1px solid var(--border);border-bottom:1px solid var(--border);}
 
-.instructions{margin-top:20px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px 20px;}
-.instructions h3{font-size:0.66em;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;font-weight:700;}
-.instructions ul{list-style:none;padding:0;margin:0 0 12px 0;}
-.instructions li{margin-bottom:7px;font-size:12px;color:var(--dim);line-height:1.8;}
+/* Kant-redigerare */
+.edge-editor{position:absolute;display:none;transform:translate(-50%,-50%);z-index:6;align-items:center;gap:5px;background:var(--surface2);border:1px solid var(--accent);border-radius:7px;padding:5px 7px;box-shadow:0 6px 20px rgba(0,0,0,.55);}
+.edge-editor.show{display:flex;}
+.edge-editor span{font-size:10px;color:var(--dim);font-weight:600;letter-spacing:.03em;}
+.edge-editor input{width:48px;padding:4px 6px;font-size:12px;background:var(--surface);border:1px solid var(--border);border-radius:5px;color:var(--text);font-family:'JetBrains Mono',monospace;outline:none;}
+.edge-editor input:focus{border-color:var(--accent);}
+
+#info{margin-top:14px;font-size:12px;font-weight:600;color:var(--text);background:var(--surface);border:1px solid var(--border);padding:10px 14px;border-radius:8px;width:100%;box-shadow:0 6px 22px rgba(0,0,0,.30);}
+#hoverInfo{margin-top:8px;font-size:12px;font-weight:600;color:var(--subtle);background:var(--surface2);border:1px solid var(--border);padding:9px 14px;border-radius:8px;width:100%;}
+
+.instructions{margin-top:20px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;box-shadow:0 6px 22px rgba(0,0,0,.28);}
+.instructions h3{font-size:0.66em;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;font-weight:700;}
+.instructions ul{list-style:none;padding:0;margin:0;}
+.instructions li{margin-bottom:7px;font-size:12px;color:var(--dim);line-height:1.7;}
 .instructions li strong{color:var(--text);}
-.instructions p{font-size:12px;color:var(--dim);line-height:1.7;margin-top:8px;}
+.instructions p{font-size:12px;color:var(--dim);line-height:1.7;margin-top:10px;}
 .instructions em{color:var(--subtle);font-style:normal;font-weight:600;}
-.color-box{display:inline-block;width:14px;height:14px;border:1px solid rgba(255,255,255,.15);border-radius:50%;vertical-align:middle;margin:0 2px;}
+.lg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px 16px;}
+.lg-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--subtle);}
+.color-box{display:inline-block;width:14px;height:14px;border:1px solid rgba(255,255,255,.15);border-radius:50%;flex-shrink:0;}
+
+.result-panel{margin-top:14px;width:100%;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0 16px;max-height:0;overflow:hidden;opacity:0;transform:translateY(-6px);transition:max-height .4s ease,opacity .35s ease,transform .35s ease,padding .4s ease;}
+.result-panel.show{max-height:300px;opacity:1;transform:none;padding:16px;box-shadow:0 8px 28px rgba(0,0,0,.4),0 0 0 1px rgba(61,220,132,.18);border-color:rgba(61,220,132,.35);}
+.result-panel.nopath.show{border-color:rgba(239,91,91,.4);box-shadow:0 8px 28px rgba(0,0,0,.4),0 0 0 1px rgba(239,91,91,.2);}
+.rp-head{font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.rp-badge{background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px;letter-spacing:.02em;}
+.rp-sub{font-size:12px;color:var(--dim);}
+.rp-chips{display:flex;flex-wrap:wrap;gap:10px;}
+.rp-chip{flex:1;min-width:100px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;}
+.rp-num{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--accent2);}
+.rp-lab{font-size:10.5px;color:var(--dim);letter-spacing:.03em;}
 
 .overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
@@ -57,12 +94,16 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .overlay-card .step{display:flex;gap:10px;align-items:flex-start;font-size:0.82em;color:var(--dim);line-height:1.5;}
 .overlay-card .step strong{color:var(--text);}
 .step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
-.overlay-btn{display:block;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}.overlay-btn:hover{background:#3d6de6;}
+.overlay-btn{display:block;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;box-shadow:0 2px 12px rgba(77,128,255,.38);}.overlay-btn:hover{background:linear-gradient(180deg,#6b97ff,#4a78ec);}
 
 @media(max-width:800px){
+  .page-wrap{padding:14px 12px 40px;}
+  #canvasContainer{display:block;max-width:100%;}
   #treeCanvas{width:100%;height:auto;}
   .back-link{position:static;transform:none;margin-bottom:4px;}
   .hd{padding:10px 16px 8px;}
+  .controls-row button,.controls-row select{padding:9px 14px;font-size:13px;}
+  .lg-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));}
 }
 </style>
 </head>
@@ -78,6 +119,14 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 <div id="canvasContainer">
   <canvas id="treeCanvas" width="750" height="422"></canvas>
+  <div id="nodeToolbar" class="node-toolbar">
+    <button id="ntGoal" class="nt-btn">Mål</button>
+    <span class="nt-h">h <input id="ntH" type="number" step="1"></span>
+    <button id="ntDelete" class="nt-btn nt-del">Radera</button>
+  </div>
+  <div id="edgeEditor" class="edge-editor">
+    <span>kostnad</span><input id="eeInput" type="number" min="1" step="1">
+  </div>
 </div>
 
 <div class="controls-row">
@@ -90,7 +139,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   </select>
   <button id="startBtn">Starta sökning</button>
   <label><input type="checkbox" id="stepChk"/>Stegvis</label>
-  <button id="nextStepBtn">Nästa steg</button>
+  <button id="nextStepBtn" disabled>Nästa steg</button>
   <button id="resetBtn" class="btn-ghost">Rensa sökning</button>
   <button id="clearNodesBtn" class="btn-ghost">Rensa noder</button>
 </div>
@@ -110,29 +159,26 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 <div id="info"></div>
 <div id="hoverInfo"></div>
+<div id="resultPanel" class="result-panel"></div>
 
 <div class="instructions">
-  <h3>Förklaringar</h3>
+  <h3>Så bygger du trädet</h3>
   <ul>
-    <li><strong>Startnod:</strong> <span class="color-box" style="background:#34c759;"></span></li>
-    <li><strong>Målnod:</strong> Vänsterklicka på en nod för att göra den till målnod (<span class="color-box" style="background:#ef5b5b;"></span>). Klicka igen för att göra den till normal nod (<span class="color-box" style="background:#e8ecf8;"></span>). Du kan ha flera mål.</li>
-    <li><strong>Skapa nod:</strong> Klicka i en tom yta.</li>
-    <li><strong>Skapa kant:</strong> Klicka på en nod och dra till en annan. Ange kostnad för kanten.</li>
-    <li><strong>Flytta nod:</strong> Högerklicka på en nod och dra.</li>
-    <li><strong>Radera nod:</strong> Ctrl + Vänsterklick på nod.</li>
-    <li><strong>Lägga till heuristikvärde h(n) för en nod:</strong> Ctrl + Högerklick på nod.</li>
+    <li><strong>Skapa nod</strong> – klicka i en tom yta.</li>
+    <li><strong>Koppla noder</strong> – dra från en nod till en annan. En liten ruta dyker upp där du anger kantens kostnad.</li>
+    <li><strong>Flytta nod</strong> – dra noden till en tom plats.</li>
+    <li><strong>Markera nod</strong> – klicka på den. Då visas knappar för att göra den till <strong>mål</strong>, sätta <strong>heuristik h(n)</strong> eller <strong>radera</strong> den.</li>
+    <li><strong>Ändra kostnad</strong> – klicka mitt på en kant.</li>
   </ul>
-  <p>
-    När du kör en sökning kommer blåa noder (<span class="color-box" style="background:#4d80ff;"></span>)
-    representera de noder som är utforskade under sökningen, kön för A* och Greedy Best-First
-    sökningar är markerade med orange (<span class="color-box" style="background:orange;"></span>),
-    och om en väg hittas markeras dess noder som ljusgröna (<span class="color-box" style="background:lightgreen;"></span>).
-  </p>
-  <p>
-    Efter en sökning visar systemet <strong>hur många noder som utforskats</strong>,
-    den <strong>totala sökkostnaden</strong> för alla utforskade noder
-    och <strong>vägkostnaden</strong> (den totala kostnaden för den väg algoritmen har funnit).
-  </p>
+  <h3 style="margin-top:16px;">Färger under sökningen</h3>
+  <div class="lg-grid">
+    <span class="lg-item"><span class="color-box" style="background:#34c759;"></span>Startnod</span>
+    <span class="lg-item"><span class="color-box" style="background:#ef5b5b;"></span>Målnod</span>
+    <span class="lg-item"><span class="color-box" style="background:#4d80ff;"></span>Utforskad</span>
+    <span class="lg-item"><span class="color-box" style="background:#f0a94e;"></span>Kö (A* &amp; Greedy)</span>
+    <span class="lg-item"><span class="color-box" style="background:#3ddc84;"></span>Hittad väg</span>
+  </div>
+  <p>Efter sökningen visas antal utforskade noder, sökningens totalkostnad och vägkostnaden. Vid <em>A*</em>: håll muspekaren över en nod under sökningen för att se <em>f(n) = g(n) + h(n)</em>.</p>
 </div>
 
 </div>
@@ -140,21 +186,18 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
     <h2>Sökalgoritmer i <span>träd</span></h2>
-    <p class="sub">Visualisera hur olika sökalgoritmer söker igenom ett träd – och förstå skillnaderna mellan dem.</p>
+    <p class="sub">Se hur olika sökalgoritmer letar sig igenom ett träd – och förstå skillnaderna mellan dem.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Välj ett träd</strong> – Ladda ett av exempelträden, eller bygg ett eget. Klicka i tom yta för att skapa noder, dra mellan noder för att skapa kanter med kostnader.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Välj algoritm och sök</strong> – Testa <strong>BFS</strong>, <strong>DFS</strong>, <strong>Girig bäst-först</strong> eller <strong>A*</strong>. Aktivera <strong>Stegvis</strong> för att följa sökningen nod för nod.</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Jämför resultaten</strong> – Vilken algoritm hittar billigaste vägen? Vilken utforskar färst noder? Kör samma träd med olika algoritmer och jämför.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Välj ett träd</strong> – ladda ett exempel, eller bygg ett eget (klicka för nod, dra mellan noder för kant).</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Välj algoritm och sök</strong> – BFS, DFS, Girig bäst-först eller A*. Kryssa i Stegvis för att följa sökningen nod för nod.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Jämför</strong> – kör samma träd med olika algoritmer. Vilken hittar billigaste vägen, och vilken utforskar färst noder?</div></div>
     </div>
-    <p class="sub" style="margin-bottom:0;">💡 <strong style="color:var(--text)">Tips:</strong> Sätt <strong>heuristikvärden</strong> (Ctrl + högerklick) på noderna och testa A* – håll sedan musen över en nod under sökningen för att se <em>f(n) = g(n) + h(n)</em>.</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta simuleringen →</button>
   </div>
 </div>
 
 <script>
-let nodes = [
-  {id:1, x:399, y:48, edges:[], h:0}
-];
+let nodes = [{id:1, x:375, y:54, edges:[], h:0}];
 let startNodeId = 1;
 let endNodeIds = new Set();
 let nodeCounter = 1;
@@ -165,7 +208,21 @@ const NODE_RADIUS = 20;
 
 let visitedSet = new Set();
 let pathSet = new Set();
-let currentMousePos = null;
+
+function rr(x,y,w,h,rad){ctx.beginPath();ctx.moveTo(x+rad,y);ctx.arcTo(x+w,y,x+w,y+h,rad);ctx.arcTo(x+w,y+h,x,y+h,rad);ctx.arcTo(x,y+h,x,y,rad);ctx.arcTo(x,y,x+w,y,rad);ctx.closePath();}
+
+function getNodeById(id){ return nodes.find(n=>n.id===id); }
+
+function nodeStyle(n){
+  let alg=document.getElementById("algSelect").value;
+  if(pathSet.has(n.id)) return {fill:"#3ddc84",glow:"rgba(61,220,132,.55)",txt:"#05291a",border:"#2bbf6e"};
+  if(n.id===startNodeId) return {fill:"#34c759",glow:"rgba(52,199,89,.55)",txt:"#053018",border:"#2bb14f"};
+  if(endNodeIds.has(n.id)) return {fill:"#ef5b5b",glow:"rgba(239,91,91,.55)",txt:"#3a0808",border:"#e04848"};
+  let inFrontier=((alg==="Greedy"&&GREEDY_STATE&&GREEDY_STATE.frontier&&GREEDY_STATE.frontier.has(n.id))||(alg==="A*"&&ASTAR_STATE&&ASTAR_STATE.frontier&&ASTAR_STATE.frontier.has(n.id)));
+  if(inFrontier) return {fill:"#f0a94e",glow:"rgba(240,169,78,.5)",txt:"#3a2606",border:"#e09a3a"};
+  if(visitedSet.has(n.id)) return {fill:"#4d80ff",glow:"rgba(77,128,255,.5)",txt:"#ffffff",border:"#6698ff"};
+  return {fill:"#d7def0",glow:null,txt:"#0d1422",border:"#2a3550"};
+}
 
 function drawAll(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -173,135 +230,215 @@ function drawAll(){
   for(let x=0;x<canvas.width;x+=50){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke(); }
   for(let y=0;y<canvas.height;y+=50){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke(); }
 
-  ctx.lineWidth=2; ctx.font="13px 'JetBrains Mono', monospace"; ctx.textAlign="center"; ctx.textBaseline="middle";
   const hasMixedCosts = nodes.some(n => n.edges.some(ed => ed.cost !== 1));
-
   for(let n of nodes){
     n.edges = n.edges.filter(ed => getNodeById(ed.targetId));
     for(let ed of n.edges){
       let c = getNodeById(ed.targetId);
       if(n.id < c.id){
-        ctx.strokeStyle="#3a4a6a"; ctx.beginPath(); ctx.moveTo(n.x,n.y); ctx.lineTo(c.x,c.y); ctx.stroke();
+        let onPath = pathSet.has(n.id) && pathSet.has(c.id);
+        ctx.strokeStyle = onPath ? "#3ddc84" : "#2f3f63";
+        ctx.lineWidth = onPath ? 3 : 2;
+        ctx.beginPath(); ctx.moveTo(n.x,n.y); ctx.lineTo(c.x,c.y); ctx.stroke();
         if(hasMixedCosts || ed.cost !== 1){
-          let mx=(n.x+c.x)/2, my=(n.y+c.y)/2, dx=c.x-n.x, dy=c.y-n.y;
-          let length=Math.sqrt(dx*dx+dy*dy)||1, offset=12;
-          ctx.fillStyle="#b0bedc";
-          ctx.fillText(ed.cost.toString(), mx+(-dy/length*offset), my+(dx/length*offset));
+          let mx=(n.x+c.x)/2, my=(n.y+c.y)/2;
+          let label=ed.cost.toString();
+          ctx.font="600 11px 'JetBrains Mono', monospace"; ctx.textAlign="center"; ctx.textBaseline="middle";
+          let w=ctx.measureText(label).width+10, h=16;
+          rr(mx-w/2,my-h/2,w,h,5); ctx.fillStyle="#0e1424"; ctx.fill();
+          ctx.strokeStyle="#2a3550"; ctx.lineWidth=1; ctx.stroke();
+          ctx.fillStyle="#c2cde6"; ctx.fillText(label,mx,my);
         }
       }
     }
   }
 
-  let currentAlg = document.getElementById("algSelect").value;
-  for(let n of nodes){
-    let color = "#e8ecf8";
-    if(pathSet.has(n.id)) color = "lightgreen";
-    else if(n.id === startNodeId) color = "#34c759";
-    else if(endNodeIds.has(n.id)) color = "#ef5b5b";
-    else if((currentAlg==="Greedy"&&GREEDY_STATE&&GREEDY_STATE.frontier&&GREEDY_STATE.frontier.has(n.id))||(currentAlg==="A*"&&ASTAR_STATE&&ASTAR_STATE.frontier&&ASTAR_STATE.frontier.has(n.id))) color = "orange";
-    else if(visitedSet.has(n.id)) color = "#4d80ff";
-
-    ctx.fillStyle=color; ctx.beginPath(); ctx.arc(n.x,n.y,NODE_RADIUS,0,2*Math.PI); ctx.fill();
-    ctx.strokeStyle=color==="#e8ecf8"?"#3a4a6a":color==="#4d80ff"?"#6698ff":"#333";
-    ctx.lineWidth=color==="#4d80ff"?2.5:1.5; ctx.stroke();
-
-    ctx.fillStyle="rgba(0,0,0,0.35)"; ctx.font="11px 'JetBrains Mono', monospace";
-    ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.fillText(n.id.toString(), n.x, n.y);
-
-    if(n.h!==0){ ctx.fillStyle="#4d80ff"; ctx.font="11px 'JetBrains Mono', monospace"; ctx.fillText("h="+n.h, n.x, n.y-NODE_RADIUS-10); }
-  }
-
-  if(edgeDrag && firstNode && currentMousePos){
-    ctx.strokeStyle="#4d80ff"; ctx.lineWidth=1.5; ctx.setLineDash([4,4]);
-    ctx.beginPath(); ctx.moveTo(firstNode.x, firstNode.y); ctx.lineTo(currentMousePos.x, currentMousePos.y); ctx.stroke();
+  if(dragNode && dragMoved && linkTarget && currentMousePos){
+    ctx.strokeStyle="#6698ff"; ctx.lineWidth=2; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(dragNode.x, dragNode.y); ctx.lineTo(linkTarget.x, linkTarget.y); ctx.stroke();
     ctx.setLineDash([]);
   }
-}
 
-function getNodeById(id){ return nodes.find(n=>n.id===id); }
+  ctx.lineWidth=2; ctx.textAlign="center"; ctx.textBaseline="middle";
+  for(let n of nodes){
+    let s=nodeStyle(n);
+    ctx.save();
+    if(s.glow){ ctx.shadowColor=s.glow; ctx.shadowBlur=16; }
+    ctx.beginPath(); ctx.arc(n.x,n.y,NODE_RADIUS,0,2*Math.PI); ctx.fillStyle=s.fill; ctx.fill();
+    ctx.restore();
+    ctx.beginPath(); ctx.arc(n.x,n.y,NODE_RADIUS,0,2*Math.PI); ctx.strokeStyle=s.border; ctx.lineWidth=1.5; ctx.stroke();
+    if(linkTarget && linkTarget.id===n.id){ ctx.beginPath(); ctx.arc(n.x,n.y,NODE_RADIUS+4,0,2*Math.PI); ctx.strokeStyle="#6698ff"; ctx.lineWidth=2; ctx.stroke(); }
+    if(selectedNode && selectedNode.id===n.id){ ctx.beginPath(); ctx.arc(n.x,n.y,NODE_RADIUS+5,0,2*Math.PI); ctx.strokeStyle="#6698ff"; ctx.lineWidth=2; ctx.setLineDash([3,3]); ctx.stroke(); ctx.setLineDash([]); }
+    ctx.fillStyle=s.txt; ctx.font="600 12px 'JetBrains Mono', monospace"; ctx.fillText(n.id.toString(), n.x, n.y);
+    if(n.h!==0){
+      let label="h="+n.h; ctx.font="600 10px 'JetBrains Mono', monospace";
+      let w=ctx.measureText(label).width+8, hh=14, cx=n.x, cy=n.y-NODE_RADIUS-11;
+      rr(cx-w/2,cy-hh/2,w,hh,4); ctx.fillStyle="rgba(77,128,255,.16)"; ctx.fill();
+      ctx.strokeStyle="rgba(102,152,255,.5)"; ctx.lineWidth=1; ctx.stroke();
+      ctx.fillStyle="#a9c4ff"; ctx.fillText(label,cx,cy);
+    }
+  }
+}
 
 function setInfo(msg){
   let el=document.getElementById("info"); el.textContent=msg;
-  if(msg){ el.style.borderColor="rgba(29,233,155,.3)"; el.style.backgroundColor="rgba(29,233,155,.06)"; }
+  if(msg){ el.style.borderColor="rgba(61,220,132,.35)"; el.style.backgroundColor="rgba(61,220,132,.06)"; }
   else { el.style.borderColor=""; el.style.backgroundColor=""; }
 }
-
 function setHoverInfo(msg){ document.getElementById("hoverInfo").textContent=msg; }
+function defaultHover(){ let a=document.getElementById("algSelect").value; setHoverInfo(a==="A*"?"Håll muspekaren över en nod under sökningen för att se f(n).":""); }
 
-let draggingNode=null, draggingRight=false, dragOffset={x:0,y:0}, edgeDrag=false, firstNode=null;
+/* ---------- Interaktion ---------- */
+let selectedNode=null;
+let dragNode=null, dragOrigin=null, dragOffset={x:0,y:0}, dragMoved=false, downPos=null, linkTarget=null, currentMousePos=null;
+const DRAG_THRESH=5;
 
 canvas.addEventListener("contextmenu", e=>e.preventDefault());
 
-function getMousePos(e){ let r=canvas.getBoundingClientRect(); return {x:e.clientX-r.left, y:e.clientY-r.top}; }
-
-function findNodeAt(x,y){
-  for(let n of nodes){ let dx=x-n.x, dy=y-n.y; if(dx*dx+dy*dy<=NODE_RADIUS*NODE_RADIUS) return n; }
+function getPos(e){ let r=canvas.getBoundingClientRect(); return {x:(e.clientX-r.left)*(canvas.width/r.width), y:(e.clientY-r.top)*(canvas.height/r.height)}; }
+function findNodeAt(x,y){ for(let n of nodes){ let dx=x-n.x, dy=y-n.y; if(dx*dx+dy*dy<=NODE_RADIUS*NODE_RADIUS) return n; } return null; }
+function findEdgeAt(x,y){
+  for(let n of nodes){ for(let ed of n.edges){ let c=getNodeById(ed.targetId); if(!c||n.id>=c.id) continue;
+    let mx=(n.x+c.x)/2, my=(n.y+c.y)/2; if((x-mx)*(x-mx)+(y-my)*(y-my)<=16*16) return {a:n,b:c}; } }
   return null;
 }
+function addOrUpdateEdge(fromN,toN,cost){ let ex=fromN.edges.find(ed=>ed.targetId===toN.id); if(ex) ex.cost=cost; else fromN.edges.push({targetId:toN.id,cost}); }
 
 function removeNode(n){
-  if(n.id===startNodeId){ setInfo("Kan ej ta bort startnoden."); return; }
+  if(n.id===startNodeId){ setInfo("Startnoden kan inte raderas."); return; }
   nodes=nodes.filter(nd=>nd!==n);
   for(let nd of nodes) nd.edges=nd.edges.filter(ed=>ed.targetId!==n.id);
-  endNodeIds.delete(n.id); resetSearch(); setInfo("Tog bort nod "+n.id); drawAll();
+  endNodeIds.delete(n.id); resetSearch(); setInfo("Raderade nod "+n.id); drawAll();
 }
 
-function addOrUpdateEdge(fromN,toN,cost){
-  let ex=fromN.edges.find(ed=>ed.targetId===toN.id);
-  if(ex) ex.cost=cost; else fromN.edges.push({targetId:toN.id,cost});
-}
+canvas.addEventListener("pointerdown", e=>{
+  if(e.button!==0) return;
+  e.preventDefault(); hideEdgeEditor();
+  let pos=getPos(e); downPos=pos;
+  let n=findNodeAt(pos.x,pos.y);
+  if(n){ dragNode=n; dragOrigin={x:n.x,y:n.y}; dragOffset={x:pos.x-n.x,y:pos.y-n.y}; dragMoved=false; linkTarget=null; try{canvas.setPointerCapture(e.pointerId);}catch(_){ } }
+  else { dragNode=null; }
+});
 
-canvas.addEventListener("mousedown", e=>{
-  e.preventDefault(); let pos=getMousePos(e); let clicked=findNodeAt(pos.x,pos.y);
-  if(e.button===2){
-    if(e.ctrlKey&&clicked){
-      let val=prompt(`Heuristikvärde för nod ${clicked.id}? (nuvarande h=${clicked.h})`,String(clicked.h));
-      if(val!==null){ let num=parseFloat(val); if(isNaN(num))num=0; clicked.h=num; setInfo(`Satte h(${clicked.id})=${num}`); resetSearch(); drawAll(); }
-      return;
+canvas.addEventListener("pointermove", e=>{
+  let pos=getPos(e); currentMousePos=pos;
+  if(dragNode){
+    if(!dragMoved && Math.hypot(pos.x-downPos.x,pos.y-downPos.y)>DRAG_THRESH) dragMoved=true;
+    if(dragMoved){
+      let t=findNodeAt(pos.x,pos.y);
+      if(t && t!==dragNode){ linkTarget=t; dragNode.x=dragOrigin.x; dragNode.y=dragOrigin.y; }
+      else { linkTarget=null; dragNode.x=pos.x-dragOffset.x; dragNode.y=pos.y-dragOffset.y; if(selectedNode&&selectedNode.id===dragNode.id) positionToolbar(); }
+      drawAll();
     }
-    if(clicked){ draggingNode=clicked; draggingRight=true; dragOffset.x=pos.x-clicked.x; dragOffset.y=pos.y-clicked.y; }
-  } else if(e.button===0){
-    if(clicked){ if(e.ctrlKey){ removeNode(clicked); return; } firstNode=clicked; edgeDrag=true; }
-    else { nodeCounter++; let newN={id:nodeCounter,x:pos.x,y:pos.y,edges:[],h:0}; nodes.push(newN); resetSearch(); setInfo("Skapade nod "+newN.id); drawAll(); }
-  }
+  } else { updateHover(pos); }
 });
 
-canvas.addEventListener("mousemove", e=>{
-  if(draggingRight&&draggingNode){ let pos=getMousePos(e); draggingNode.x=pos.x-dragOffset.x; draggingNode.y=pos.y-dragOffset.y; drawAll(); }
-  if(edgeDrag){ currentMousePos=getMousePos(e); drawAll(); }
-});
-
-canvas.addEventListener("mouseup", e=>{
-  e.preventDefault(); let pos=getMousePos(e); let r=findNodeAt(pos.x,pos.y);
-  if(e.button===2){ draggingNode=null; draggingRight=false; drawAll(); }
-  else if(e.button===0){
-    if(edgeDrag&&firstNode){
-      if(r&&r!==firstNode){
-        let cStr=prompt(`Kostnad för kant mellan ${firstNode.id} och ${r.id}?`,"1");
-        if(!cStr) setInfo("Avbryter kant.");
-        else { let c=parseFloat(cStr); if(isNaN(c)||c<=0) setInfo("Ogiltig kostnad.");
-        else { addOrUpdateEdge(firstNode,r,c); addOrUpdateEdge(r,firstNode,c); resetSearch(); setInfo(`Kant: ${firstNode.id}<->${r.id}, cost=${c}`); } }
-      } else if(r&&r===firstNode){
-        if(r.id===startNodeId) setInfo("Kan ej göra startnoden till mål.");
-        else { if(endNodeIds.has(r.id)){ endNodeIds.delete(r.id); setInfo(`Nod ${r.id} ej längre mål.`); } else { endNodeIds.add(r.id); setInfo(`Nod ${r.id} är nu mål.`); } resetSearch(); }
+canvas.addEventListener("pointerup", e=>{
+  if(e.button!==0 && e.pointerType==="mouse"){ return; }
+  let pos=getPos(e);
+  if(dragNode){
+    if(dragMoved){
+      if(linkTarget){
+        addOrUpdateEdge(dragNode,linkTarget,1); addOrUpdateEdge(linkTarget,dragNode,1);
+        dragNode.x=dragOrigin.x; dragNode.y=dragOrigin.y;
+        resetSearch(); setInfo("Kant skapad: "+dragNode.id+"–"+linkTarget.id);
+        openEdgeEditor(dragNode,linkTarget);
       }
-      firstNode=null; edgeDrag=false; currentMousePos=null; drawAll();
+    } else {
+      if(selectedNode && selectedNode.id===dragNode.id) deselect();
+      else selectNode(dragNode);
+    }
+    linkTarget=null; dragNode=null; dragMoved=false; drawAll();
+  } else if(downPos){
+    let ed=findEdgeAt(pos.x,pos.y);
+    if(ed){ openEdgeEditor(ed.a,ed.b); }
+    else {
+      nodeCounter++; let nn={id:nodeCounter,x:pos.x,y:pos.y,edges:[],h:0}; nodes.push(nn);
+      resetSearch(); deselect(); setInfo("Skapade nod "+nn.id); drawAll();
     }
   }
+  downPos=null;
+  try{canvas.releasePointerCapture(e.pointerId);}catch(_){ }
 });
 
-window.addEventListener("mouseup", e=>{ draggingRight=false; draggingNode=null; edgeDrag=false; firstNode=null; currentMousePos=null; });
+canvas.addEventListener("dblclick", e=>{ let pos=getPos(e); let n=findNodeAt(pos.x,pos.y); if(n) toggleGoal(n); });
 
+function updateHover(pos){
+  let alg=document.getElementById("algSelect").value;
+  if(alg!=="A*"){ setHoverInfo(""); return; }
+  let st=ASTAR_STATE;
+  let n=findNodeAt(pos.x,pos.y);
+  if(!n){ defaultHover(); return; }
+  if(!st||!st.gScore){ setHoverInfo("h("+n.id+") = "+(n.h||0)); return; }
+  let g=st.gScore[n.id];
+  if(g===undefined||g===Infinity){ setHoverInfo("Ej upptäckt än. h="+(n.h||0)); return; }
+  setHoverInfo("f(n) = g(n) + h(n) = "+g+" + "+(n.h||0)+" = "+(g+(n.h||0)));
+}
+
+/* ---------- Nod-verktygsrad ---------- */
+function selectNode(n){ selectedNode=n; positionToolbar(); updateToolbar(); document.getElementById("nodeToolbar").classList.add("show"); drawAll(); }
+function deselect(){ selectedNode=null; document.getElementById("nodeToolbar").classList.remove("show"); }
+function positionToolbar(){
+  if(!selectedNode) return;
+  let r=canvas.getBoundingClientRect(); let sx=r.width/canvas.width, sy=r.height/canvas.height;
+  let tb=document.getElementById("nodeToolbar");
+  tb.style.left=(canvas.offsetLeft + selectedNode.x*sx)+"px";
+  tb.style.top=(canvas.offsetTop + selectedNode.y*sy - NODE_RADIUS*sy - 8)+"px";
+}
+function updateToolbar(){
+  let goalBtn=document.getElementById("ntGoal"), del=document.getElementById("ntDelete"), hIn=document.getElementById("ntH");
+  let isStart = selectedNode.id===startNodeId;
+  hIn.value = selectedNode.h||0;
+  goalBtn.classList.toggle("active", endNodeIds.has(selectedNode.id));
+  goalBtn.textContent = endNodeIds.has(selectedNode.id) ? "✓ Mål" : "Mål";
+  goalBtn.disabled = isStart; del.disabled = isStart;
+  goalBtn.style.opacity = isStart? .4: 1; del.style.opacity = isStart? .4: 1;
+}
+function toggleGoal(n){
+  if(n.id===startNodeId){ setInfo("Startnoden kan inte vara mål."); return; }
+  if(endNodeIds.has(n.id)){ endNodeIds.delete(n.id); setInfo("Nod "+n.id+" är inte längre mål."); }
+  else { endNodeIds.add(n.id); setInfo("Nod "+n.id+" är nu mål."); }
+  resetSearch(); if(selectedNode&&selectedNode.id===n.id) updateToolbar(); drawAll();
+}
+document.getElementById("ntGoal").addEventListener("click", ()=>{ if(selectedNode) toggleGoal(selectedNode); });
+document.getElementById("ntDelete").addEventListener("click", ()=>{ if(selectedNode){ removeNode(selectedNode); deselect(); } });
+document.getElementById("ntH").addEventListener("input", e=>{ if(!selectedNode)return; let v=parseFloat(e.target.value); if(isNaN(v))v=0; selectedNode.h=v; resetSearch(); drawAll(); });
+document.getElementById("ntH").addEventListener("keydown", e=>{ if(e.key==="Enter") e.target.blur(); });
+
+/* ---------- Kant-redigerare ---------- */
+let editingEdge=null;
+function openEdgeEditor(a,b){
+  editingEdge={a,b};
+  let r=canvas.getBoundingClientRect(); let sx=r.width/canvas.width, sy=r.height/canvas.height;
+  let mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+  let ee=document.getElementById("edgeEditor");
+  ee.style.left=(canvas.offsetLeft + mx*sx)+"px";
+  ee.style.top=(canvas.offsetTop + my*sy)+"px";
+  let cur=a.edges.find(ed=>ed.targetId===b.id);
+  let inp=document.getElementById("eeInput"); inp.value=cur?cur.cost:1;
+  ee.classList.add("show"); deselect(); setTimeout(()=>{inp.focus();inp.select();},10);
+}
+function hideEdgeEditor(){ document.getElementById("edgeEditor").classList.remove("show"); editingEdge=null; }
+function commitEdge(){
+  if(!editingEdge) return;
+  let v=parseFloat(document.getElementById("eeInput").value);
+  if(isNaN(v)||v<=0){ hideEdgeEditor(); return; }
+  addOrUpdateEdge(editingEdge.a,editingEdge.b,v); addOrUpdateEdge(editingEdge.b,editingEdge.a,v);
+  setInfo("Kant "+editingEdge.a.id+"–"+editingEdge.b.id+": kostnad "+v);
+  resetSearch(); hideEdgeEditor(); drawAll();
+}
+document.getElementById("eeInput").addEventListener("keydown", e=>{ if(e.key==="Enter"){ commitEdge(); } else if(e.key==="Escape"){ hideEdgeEditor(); } });
+document.getElementById("eeInput").addEventListener("blur", commitEdge);
+
+/* ---------- Spara / ladda / rensa ---------- */
 document.getElementById("saveBtn").addEventListener("click",()=>{
   let data={nodes,startNodeId,endNodeIds:Array.from(endNodeIds)};
   let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
   let url=URL.createObjectURL(blob); let a=document.createElement("a");
-  a.href=url; a.download="tree.json"; document.body.appendChild(a); a.click();
+  a.href=url; a.download="trad.json"; document.body.appendChild(a); a.click();
   document.body.removeChild(a); URL.revokeObjectURL(url);
 });
-
 document.getElementById("loadBtn").addEventListener("click",()=>{ document.getElementById("loadInput").click(); });
-
 document.getElementById("loadInput").addEventListener("change", e=>{
   let file=e.target.files[0]; if(!file)return;
   let rdr=new FileReader();
@@ -310,23 +447,16 @@ document.getElementById("loadInput").addEventListener("change", e=>{
       let data=JSON.parse(ev.target.result);
       if(!data.nodes||!data.startNodeId||!data.endNodeIds) throw new Error("Ogiltigt format.");
       nodes=data.nodes.map(n=>({...n})); startNodeId=data.startNodeId; endNodeIds=new Set(data.endNodeIds);
-      nodeCounter=Math.max(...nodes.map(n=>n.id)); resetSearch(); setInfo("Träd laddat.");
-      let currentAlg=document.getElementById("algSelect").value;
-      if(currentAlg==="A*") setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n))."); else setHoverInfo("");
-      drawAll();
+      nodeCounter=Math.max(...nodes.map(n=>n.id)); deselect(); hideEdgeEditor(); resetSearch(); setInfo("Träd laddat."); drawAll();
     } catch(error){ alert("Fel vid inläsning: "+error.message); }
   };
   rdr.readAsText(file);
 });
-
 document.getElementById("clearNodesBtn").addEventListener("click",()=>{
   let st=getNodeById(startNodeId);
   if(!st){ setInfo("Startnoden saknas."); return; }
-  nodes=[st]; st.edges=[]; endNodeIds.clear(); nodeCounter=st.id; resetSearch();
-  setInfo("Rensade alla noder utom startnoden.");
-  let currentAlg=document.getElementById("algSelect").value;
-  if(currentAlg==="A*") setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n))."); else setHoverInfo("");
-  drawAll();
+  nodes=[st]; st.edges=[]; endNodeIds.clear(); nodeCounter=st.id; deselect(); hideEdgeEditor(); resetSearch();
+  setInfo("Rensade alla noder utom startnoden."); drawAll();
 });
 
 const predefinedTrees = {
@@ -339,23 +469,17 @@ function loadPredefinedTree(treeName){
   if(!predefinedTrees[treeName]) return;
   const tree=predefinedTrees[treeName];
   nodes=JSON.parse(JSON.stringify(tree.nodes)); startNodeId=tree.startNodeId; endNodeIds=new Set(tree.endNodeIds);
-  nodeCounter=Math.max(...nodes.map(n=>n.id)); resetSearch();
-  setInfo(`Exempelträd "${treeName}" har laddats.`);
-  let currentAlg=document.getElementById("algSelect").value;
-  if(currentAlg==="A*") setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n))."); else setHoverInfo("");
-  drawAll();
+  nodeCounter=Math.max(...nodes.map(n=>n.id)); deselect(); hideEdgeEditor(); resetSearch();
+  setInfo('Exempelträd "'+treeName+'" har laddats.'); drawAll();
 }
+document.getElementById("predefinedSelect").addEventListener("change", e=>{ const sel=e.target.value; if(sel){ loadPredefinedTree(sel); e.target.value=""; } });
 
-document.getElementById("predefinedSelect").addEventListener("change", e=>{
-  const sel=e.target.value; if(sel){ loadPredefinedTree(sel); e.target.value=""; }
-});
-
-document.getElementById("resetBtn").addEventListener("click", resetSearch);
+document.getElementById("resetBtn").addEventListener("click", ()=>{ resetSearch(); drawAll(); });
 document.getElementById("startBtn").addEventListener("click", startSearch);
 document.getElementById("nextStepBtn").addEventListener("click", onNextStep);
 
 let stepMode=false;
-document.getElementById("stepChk").addEventListener("change", e=>{ stepMode=e.target.checked; });
+document.getElementById("stepChk").addEventListener("change", e=>{ stepMode=e.target.checked; let ns=document.getElementById("nextStepBtn"); ns.disabled=!(stepMode&&search_in_progress); });
 
 let BFS_STATE=null, DFS_STATE=null, GREEDY_STATE=null, ASTAR_STATE=null;
 let search_in_progress=false;
@@ -363,19 +487,45 @@ let search_in_progress=false;
 class SimpleQueue { constructor(){this.q=[];} enqueue(x){this.q.push(x);} dequeue(){return this.q.shift();} empty(){return this.q.length===0;} }
 class PriorityQ { constructor(){this.data=[];} push(o){this.data.push(o);this.data.sort((a,b)=>a.priority-b.priority);} pop(){return this.data.shift();} empty(){return this.data.length===0;} }
 
+function setSearching(on){
+  ["startBtn","algSelect","predefinedSelect","saveBtn","loadBtn","clearNodesBtn"].forEach(id=>{ let el=document.getElementById(id); if(el) el.disabled=on; });
+  let ns=document.getElementById("nextStepBtn"); if(ns) ns.disabled=!(on&&stepMode);
+}
+
+const ALG_LABEL={"BFS":"BFS","DFS":"DFS","Greedy":"Girig bäst-först","A*":"A*"};
+function hideResultPanel(){ let p=document.getElementById("resultPanel"); if(p) p.className="result-panel"; }
+function renderResultPanel(o){
+  let panel=document.getElementById("resultPanel"); if(!panel) return;
+  let alg=document.getElementById("algSelect").value;
+  if(!o.found){
+    panel.className="result-panel nopath show";
+    panel.innerHTML='<div class="rp-head">Ingen v\u00e4g funnen</div><div class="rp-sub">'+ALG_LABEL[alg]+' kunde inte n\u00e5 n\u00e5gon m\u00e5lnod i det h\u00e4r tr\u00e4det.</div>';
+    return;
+  }
+  let chips='<div class="rp-chip"><span class="rp-num">'+o.explored+'</span><span class="rp-lab">utforskade noder</span></div>'
+          +'<div class="rp-chip"><span class="rp-num">'+o.searchCost+'</span><span class="rp-lab">s\u00f6kningens kostnad</span></div>'
+          +'<div class="rp-chip"><span class="rp-num">'+o.pathCost+'</span><span class="rp-lab">v\u00e4gkostnad</span></div>';
+  panel.className="result-panel show";
+  panel.innerHTML='<div class="rp-head"><span class="rp-badge">'+ALG_LABEL[alg]+'</span> hittade m\u00e5let</div><div class="rp-chips">'+chips+'</div>';
+}
+function finishSearch(o){
+  search_in_progress=false; setSearching(false); defaultHover();
+  let el=document.getElementById("info"); el.textContent=""; el.style.borderColor=""; el.style.backgroundColor="";
+  renderResultPanel(o);
+}
+
 function resetSearch(){
   visitedSet.clear(); pathSet.clear();
   BFS_STATE=DFS_STATE=GREEDY_STATE=ASTAR_STATE=null; search_in_progress=false;
   let el=document.getElementById("info"); el.textContent=""; el.style.borderColor=""; el.style.backgroundColor="";
-  let currentAlg=document.getElementById("algSelect").value;
-  if(currentAlg==="A*") setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n))."); else setHoverInfo("");
-  drawAll();
+  setSearching(false); defaultHover(); hideResultPanel();
 }
 
 function startSearch(){
+  if(search_in_progress) return;
   if(!getNodeById(startNodeId)){setInfo("Startnoden saknas!");return;}
-  if(endNodeIds.size===0){setInfo("Ingen målnod vald.");return;}
-  resetSearch();
+  if(endNodeIds.size===0){setInfo("Ingen målnod vald – markera en nod och tryck Mål.");return;}
+  deselect(); hideEdgeEditor(); resetSearch(); setSearching(true);
   let alg=document.getElementById("algSelect").value;
   if(alg==="BFS")startBFS(); else if(alg==="DFS")startDFS(); else if(alg==="Greedy")startGreedy(); else if(alg==="A*")startAstar();
 }
@@ -386,90 +536,54 @@ function onNextStep(){
   if(alg==="BFS")bfsStep(); else if(alg==="DFS")dfsStep(); else if(alg==="Greedy")greedyStep(); else if(alg==="A*")aStarStep();
 }
 
-function startBFS(){
-  search_in_progress=true;
-  let q=new SimpleQueue(); q.enqueue({id:startNodeId,path:[startNodeId],costSoFar:0,parentCostSoFar:0});
-  BFS_STATE={queue:q,visited:new Set([startNodeId]),expansionsCount:0,expansionsCost:0}; bfsStep();
-}
+function reportResult(st,costSoFar){ setInfo("Utforskade noder = "+st.expansionsCount+",  Sökningens totalkostnad = "+st.expansionsCost+",  Vägkostnad = "+costSoFar); }
 
+function startBFS(){ search_in_progress=true; let q=new SimpleQueue(); q.enqueue({id:startNodeId,path:[startNodeId],costSoFar:0,parentCostSoFar:0}); BFS_STATE={queue:q,visited:new Set([startNodeId]),expansionsCount:0,expansionsCost:0}; bfsStep(); }
 function bfsStep(){
   if(!search_in_progress)return; let st=BFS_STATE;
-  if(st.queue.empty()){setInfo("Ingen väg funnen (BFS).");search_in_progress=false;return;}
+  if(st.queue.empty()){finishSearch({found:false});search_in_progress=false;setSearching(false);return;}
   let current=st.queue.dequeue(); st.expansionsCount++; st.expansionsCost+=current.costSoFar-current.parentCostSoFar;
-  if(endNodeIds.has(current.id)){for(let x of current.path)pathSet.add(x);drawAll();setInfo(`Utforskade noder = ${st.expansionsCount}, Total kostnad för sökningen = ${st.expansionsCost}, Vägkostnad = ${current.costSoFar}`);search_in_progress=false;return;}
+  if(endNodeIds.has(current.id)){for(let x of current.path)pathSet.add(x);drawAll();finishSearch({found:true,explored:st.expansionsCount,searchCost:st.expansionsCost,pathCost:current.costSoFar});search_in_progress=false;setSearching(false);return;}
   let node=getNodeById(current.id);
   for(let ed of node.edges){if(!st.visited.has(ed.targetId)){st.visited.add(ed.targetId);st.queue.enqueue({id:ed.targetId,path:[...current.path,ed.targetId],costSoFar:current.costSoFar+ed.cost,parentCostSoFar:current.costSoFar});}}
   visitedSet.add(current.id); drawAll(); if(!stepMode)setTimeout(bfsStep,400);
 }
 
-function startDFS(){
-  search_in_progress=true;
-  let stack=[{id:startNodeId,path:[startNodeId],costSoFar:0,parentCostSoFar:0}];
-  DFS_STATE={stack,visited:new Set([startNodeId]),expansionsCount:0,expansionsCost:0}; dfsStep();
-}
-
+function startDFS(){ search_in_progress=true; let stack=[{id:startNodeId,path:[startNodeId],costSoFar:0,parentCostSoFar:0}]; DFS_STATE={stack,visited:new Set([startNodeId]),expansionsCount:0,expansionsCost:0}; dfsStep(); }
 function dfsStep(){
   if(!search_in_progress)return; let st=DFS_STATE;
-  if(st.stack.length===0){setInfo("Ingen väg funnen (DFS).");search_in_progress=false;return;}
+  if(st.stack.length===0){finishSearch({found:false});search_in_progress=false;setSearching(false);return;}
   let current=st.stack.pop(); st.expansionsCount++; st.expansionsCost+=current.costSoFar-current.parentCostSoFar;
-  if(endNodeIds.has(current.id)){for(let x of current.path)pathSet.add(x);drawAll();setInfo(`Utforskade noder = ${st.expansionsCount}, Total kostnad för sökningen = ${st.expansionsCost}, Vägkostnad = ${current.costSoFar}`);search_in_progress=false;return;}
+  if(endNodeIds.has(current.id)){for(let x of current.path)pathSet.add(x);drawAll();finishSearch({found:true,explored:st.expansionsCount,searchCost:st.expansionsCost,pathCost:current.costSoFar});search_in_progress=false;setSearching(false);return;}
   let node=getNodeById(current.id); let children=[...node.edges]; children.sort((a,b)=>a.targetId-b.targetId); children.reverse();
   for(let ed of children){if(!st.visited.has(ed.targetId)){st.visited.add(ed.targetId);st.stack.push({id:ed.targetId,path:[...current.path,ed.targetId],costSoFar:current.costSoFar+ed.cost,parentCostSoFar:current.costSoFar});}}
   visitedSet.add(current.id); drawAll(); if(!stepMode)setTimeout(dfsStep,400);
 }
 
-function startGreedy(){
-  search_in_progress=true;
-  let pq=new PriorityQ(); let hVal=getNodeById(startNodeId).h||0;
-  pq.push({id:startNodeId,path:[startNodeId],costSoFar:0,parentCostSoFar:0,priority:hVal});
-  GREEDY_STATE={pq,visited:new Set([startNodeId]),expansionsCount:0,expansionsCost:0,frontier:new Set([startNodeId])}; greedyStep();
-}
-
+function startGreedy(){ search_in_progress=true; let pq=new PriorityQ(); let hVal=getNodeById(startNodeId).h||0; pq.push({id:startNodeId,path:[startNodeId],costSoFar:0,parentCostSoFar:0,priority:hVal}); GREEDY_STATE={pq,visited:new Set([startNodeId]),expansionsCount:0,expansionsCost:0,frontier:new Set([startNodeId])}; greedyStep(); }
 function greedyStep(){
   if(!search_in_progress)return; let st=GREEDY_STATE;
-  if(st.pq.empty()){setInfo("Ingen väg funnen (Greedy).");search_in_progress=false;return;}
+  if(st.pq.empty()){finishSearch({found:false});search_in_progress=false;setSearching(false);return;}
   let current=st.pq.pop(); st.frontier.delete(current.id); st.expansionsCount++; st.expansionsCost+=current.costSoFar-current.parentCostSoFar;
-  if(endNodeIds.has(current.id)){for(let x of current.path)pathSet.add(x);drawAll();setInfo(`Utforskade noder = ${st.expansionsCount}, Total kostnad för sökningen = ${st.expansionsCost}, Vägkostnad = ${current.costSoFar}`);search_in_progress=false;return;}
+  if(endNodeIds.has(current.id)){for(let x of current.path)pathSet.add(x);drawAll();finishSearch({found:true,explored:st.expansionsCount,searchCost:st.expansionsCost,pathCost:current.costSoFar});search_in_progress=false;setSearching(false);return;}
   let node=getNodeById(current.id);
   for(let ed of node.edges){if(!st.visited.has(ed.targetId)){st.visited.add(ed.targetId);let hh=getNodeById(ed.targetId).h||0;st.pq.push({id:ed.targetId,path:[...current.path,ed.targetId],costSoFar:current.costSoFar+ed.cost,parentCostSoFar:current.costSoFar,priority:hh});st.frontier.add(ed.targetId);}}
   visitedSet.add(current.id); drawAll(); if(!stepMode)setTimeout(greedyStep,400);
 }
 
-function startAstar(){
-  search_in_progress=true;
-  let pq=new PriorityQ(); let gScore={};
-  for(let n of nodes)gScore[n.id]=Infinity; gScore[startNodeId]=0;
-  let hVal=getNodeById(startNodeId).h||0;
-  pq.push({id:startNodeId,path:[startNodeId],costSoFar:0,parentCostSoFar:0,priority:hVal});
-  ASTAR_STATE={pq,gScore,expansionsCount:0,expansionsCost:0,frontier:new Set([startNodeId])}; aStarStep();
-}
-
+function startAstar(){ search_in_progress=true; let pq=new PriorityQ(); let gScore={}; for(let n of nodes)gScore[n.id]=Infinity; gScore[startNodeId]=0; let hVal=getNodeById(startNodeId).h||0; pq.push({id:startNodeId,path:[startNodeId],costSoFar:0,parentCostSoFar:0,priority:hVal}); ASTAR_STATE={pq,gScore,expansionsCount:0,expansionsCost:0,frontier:new Set([startNodeId])}; aStarStep(); }
 function aStarStep(){
   if(!search_in_progress)return; let st=ASTAR_STATE;
-  if(st.pq.empty()){setInfo("Ingen väg funnen (A*).");setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n)).");search_in_progress=false;return;}
+  if(st.pq.empty()){finishSearch({found:false});defaultHover();search_in_progress=false;setSearching(false);return;}
   let current=st.pq.pop(); st.frontier.delete(current.id); st.expansionsCount++; st.expansionsCost+=current.costSoFar-current.parentCostSoFar;
-  if(endNodeIds.has(current.id)){for(let x of current.path)pathSet.add(x);drawAll();setInfo(`Utforskade noder = ${st.expansionsCount}, Total kostnad för sökningen = ${st.expansionsCost}, Vägkostnad = ${current.costSoFar}`);setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n)).");search_in_progress=false;return;}
+  if(endNodeIds.has(current.id)){for(let x of current.path)pathSet.add(x);drawAll();finishSearch({found:true,explored:st.expansionsCount,searchCost:st.expansionsCost,pathCost:current.costSoFar});defaultHover();search_in_progress=false;setSearching(false);return;}
   let node=getNodeById(current.id); let gCur=st.gScore[current.id];
   for(let ed of node.edges){let cId=ed.targetId;let newG=gCur+ed.cost;if(newG<st.gScore[cId]){st.gScore[cId]=newG;let hh=getNodeById(cId).h||0;st.pq.push({id:cId,path:[...current.path,cId],costSoFar:newG,parentCostSoFar:current.costSoFar,priority:newG+hh});st.frontier.add(cId);}}
   visitedSet.add(current.id); drawAll(); if(!stepMode)setTimeout(aStarStep,400);
 }
 
-canvas.addEventListener("mousemove", e=>{
-  let alg=document.getElementById("algSelect").value;
-  if(alg!=="A*"){setHoverInfo("");return;}
-  let st=ASTAR_STATE; if(!st||!st.gScore){setHoverInfo("");return;}
-  let mp=getMousePos(e); let n=findNodeAt(mp.x,mp.y);
-  if(!n){setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n)).");return;}
-  let gVal=st.gScore[n.id];
-  if(gVal===Infinity){setHoverInfo(`Ej upptäckt. h=${n.h||0}`);return;}
-  setHoverInfo(`f(n)=g(n)+h(n)=${gVal}+${n.h||0}=${gVal+(n.h||0)}`);
-});
-
-document.getElementById("algSelect").addEventListener("change", ()=>{
-  let currentAlg=document.getElementById("algSelect").value;
-  if(currentAlg==="A*"){if(!search_in_progress)setHoverInfo("Kostnadsfunktion: (håll musen över en nod för att se f(n)).");}
-  else setHoverInfo("");
-});
+document.getElementById("algSelect").addEventListener("change", ()=>{ if(!search_in_progress) defaultHover(); });
+window.addEventListener("resize", ()=>{ if(selectedNode) positionToolbar(); });
 
 loadPredefinedTree("Exempelträd 1");
 </script>
