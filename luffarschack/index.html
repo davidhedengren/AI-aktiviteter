@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luffarschack i partiellt observerbar miljö</title>
+<title>Luffarschack – Partiell observerbarhet</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -26,8 +26,27 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .cell{display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;cursor:pointer;transition:background 0.12s;position:relative;background:var(--cellbg);color:#0d1422;}
 .cell:hover:not(.placed):not(.won):not(.revealed):not(.hidden-cell){background:var(--cellbg-hover);}
 
-.cell.hidden-cell{background:var(--hiddenbg);}
-.cell.hidden-cell:hover{background:#161d3e;}
+/* Dolda rutor: mörk bakgrund med diagonalt streck-mönster */
+.cell.hidden-cell{
+  background-color:var(--hiddenbg);
+  background-image:repeating-linear-gradient(
+    45deg,
+    rgba(77,128,255,0.07) 0px,
+    rgba(77,128,255,0.07) 2px,
+    transparent 2px,
+    transparent 8px
+  );
+}
+.cell.hidden-cell:hover{
+  background-color:#161d3e;
+  background-image:repeating-linear-gradient(
+    45deg,
+    rgba(77,128,255,0.12) 0px,
+    rgba(77,128,255,0.12) 2px,
+    transparent 2px,
+    transparent 8px
+  );
+}
 .cell.hidden-cell::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(77,128,255,0.12),transparent 70%);pointer-events:none;}
 .cell.hidden-cell .fog{color:rgba(150,175,255,0.42);font-weight:600;user-select:none;}
 
@@ -75,6 +94,21 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .overlay-card .step strong{color:var(--text);}
 .step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
 .overlay-btn{display:block;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}.overlay-btn:hover{background:#3d6de6;}
+
+/* Liten förhandsvisning av dold ruta i intropopupen */
+.hidden-preview{
+  display:inline-block;width:22px;height:22px;vertical-align:middle;
+  border-radius:3px;margin:0 3px;
+  background-color:var(--hiddenbg);
+  background-image:repeating-linear-gradient(
+    45deg,
+    rgba(77,128,255,0.12) 0px,
+    rgba(77,128,255,0.12) 2px,
+    transparent 2px,
+    transparent 8px
+  );
+  border:1px solid rgba(77,128,255,0.2);
+}
 
 .win-banner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(9,11,20,0.96);border:2px solid var(--gold);border-radius:12px;padding:20px 28px;text-align:center;z-index:10;display:none;box-shadow:0 8px 40px rgba(0,0,0,0.7);min-width:260px;max-width:320px;}
 .win-banner.show{display:block;animation:popIn 0.3s ease;}
@@ -124,8 +158,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     </div>
     <button class="btn pri" onclick="startGame()">Nytt spel</button>
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px;font-size:0.74em;color:var(--dim);line-height:1.55;">
-      <strong style="color:var(--accent2);">Mörka rutor</strong> är dolda – du kan lägga där, men du ser inte om motståndaren redan tagit rutan. Vid <strong style="color:var(--accent2);">0 %</strong> är hela brädet synligt (vanligt luffarschack).<br><br>
-      Spelar du <strong style="color:var(--accent2);">mot AI</strong> ser datorn lika lite som du – den måste också gissa i dimman.<br><br>
+      <strong style="color:var(--accent2);">Rutmönstrade rutor</strong> är dolda – du kan lägga där, men du ser inte om motståndaren redan tagit rutan.
+      Spelar du <strong style="color:var(--accent2);">mot AI</strong> ser datorn lika lite som du – den fattar beslut under samma osäkerhet.<br><br>
       <strong style="color:var(--gold);">Fem i rad</strong> vinner. Efter spelet avslöjas alla dolda rutor.
     </div>
   </div>
@@ -136,7 +170,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     <h2>Luffarschack i <span>partiellt observerbar</span> miljö</h2>
     <p class="sub">I vanligt luffarschack ser båda spelare hela brädet. Men vad händer om delar av spelplanen är <strong>dolda</strong>?</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Dolda rutor</strong> – Randiga rutor är dolda. Du kan lägga din markör där, men du ser inte vad som finns under.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Dolda rutor</strong> – Rutor med rutmönster <span class="hidden-preview"></span> är dolda. Du kan lägga din markör där, men du ser inte vad som finns under.</div></div>
       <div class="step"><div class="step-num">2</div><div><strong>Blinda drag</strong> – Lägger du på en dold ruta vet du inte om draget lyckades. Om rutan redan var tagen av motståndaren går draget förlorat – du tappar din tur utan att ha placerat något.</div></div>
       <div class="step"><div class="step-num">3</div><div><strong>Fem i rad vinner</strong> – Samma regler som vanligt. Den som först placerar 5 i rad vinner.</div></div>
     </div>
@@ -168,7 +202,27 @@ function startGame(){
   for(let r=0;r<SIZE;r++){board[r]=[];for(let c=0;c<SIZE;c++)board[r][c]='';}
   const all=[];for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)all.push([r,c]);
   shuffle(all);const numH=Math.floor(SIZE*SIZE*hiddenPct/100);
-  for(let i=0;i<numH;i++)hidden.add(key(all[i][0],all[i][1]));
+  // Spärr: max 2 dolda rutor i rad (horisontellt, vertikalt, diagonalt)
+  // Försök lägga till varje kandidat; hoppa över om det skulle skapa 3 i rad.
+  const DIRS=[[0,1],[1,0],[1,1],[1,-1]];
+  function wouldMake3(r,c){
+    for(const[dr,dc] of DIRS){
+      // Räkna sammanhängande dolda i båda riktningarna längs axeln
+      let run=1;
+      for(const sgn of [1,-1]){
+        let nr=r+dr*sgn,nc=c+dc*sgn;
+        while(nr>=0&&nr<SIZE&&nc>=0&&nc<SIZE&&hidden.has(key(nr,nc))){run++;nr+=dr*sgn;nc+=dc*sgn;}
+      }
+      if(run>=3)return true;
+    }
+    return false;
+  }
+  let placed=0,attempts=0;
+  for(let i=0;placed<numH&&i<all.length;i++){
+    const[r,c]=all[i];
+    if(!wouldMake3(r,c)){hidden.add(key(r,c));placed++;}
+    attempts++;
+  }
   renderBoard();updateTurn();updateStats();
 }
 
@@ -231,13 +285,17 @@ function maybeAI(){
     aiThinking=true;updateTurn();
     setTimeout(()=>{
       const mv=chooseAIMove();
-      if(mv){ if(hidden.has(key(mv.r,mv.c)))aiTried.add(key(mv.r,mv.c)); applyMove(mv.r,mv.c); }
+      if(mv){
+        // Registrera försökt dold ruta EFTER att draget valts, inte innan
+        if(hidden.has(key(mv.r,mv.c))) aiTried.add(key(mv.r,mv.c));
+        applyMove(mv.r,mv.c);
+      }
       aiThinking=false;updateTurn();updateStats();
     },480);
   }
 }
 
-/* ---- AI-agent under samma dimma (antar det värsta om det den inte ser) ---- */
+/* ---- AI-agent under samma dimma ---- */
 function inb(r,c){return r>=0&&r<SIZE&&c>=0&&c<SIZE;}
 function runValue(cnt,open){
   if(cnt>=5)return 100000;
@@ -247,7 +305,6 @@ function runValue(cnt,open){
   if(cnt>=1)return open===2?8:open>=1?2:0;
   return 0;
 }
-// Offensiv: bygga egna O-rader, men bara på det AI:n faktiskt ser (synliga O), kan ej bygga genom dimma
 function offenseScore(r,c){
   const dirs=[[1,0],[0,1],[1,1],[1,-1]];let tot=0;
   for(const[dr,dc] of dirs){
@@ -258,7 +315,7 @@ function offenseScore(r,c){
         const k=key(nr,nc);
         if(!hidden.has(k)&&board[nr][nc]==='O'){cnt++;}
         else if(!hidden.has(k)&&board[nr][nc]===''){open++;break;}
-        else break; // dold ruta eller X blockerar
+        else break;
         nr+=dr*sgn;nc+=dc*sgn;steps++;
       }
     }
@@ -266,14 +323,13 @@ function offenseScore(r,c){
   }
   return tot;
 }
-// Defensiv: värdet av att BLOCKERA ett X-hot här. Räknar X-rader (dolda = trolig X) som rutan kapar.
 function capRun(r,c,dr,dc){
   let run=0,nr=r+dr,nc=c+dc,steps=0;
   while(inb(nr,nc)&&steps<5){
     const k=key(nr,nc);
     if(!hidden.has(k)&&board[nr][nc]==='X')run+=1;
-    else if(hidden.has(k))run+=0.8; // osäker – trolig X
-    else break; // synlig tom ruta eller O avslutar raden
+    else if(hidden.has(k))run+=0.8;
+    else break;
     nr+=dr;nc+=dc;steps++;
   }
   return run;
@@ -288,22 +344,23 @@ function defenseScore(r,c){
   return best;
 }
 function playable(r,c){const k=key(r,c);if(hidden.has(k))return !aiTried.has(k);return board[r][c]==='';}
+
 function chooseAIMove(){
   let list=[];
   for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)if(playable(r,c))list.push([r,c]);
   if(list.length===0)return null;
   const cc=(SIZE-1)/2;
-  let best=null,bestScore=-1,bestHidden=null,bestHiddenScore=-1;
+  let best=null,bestScore=-Infinity;
   for(const[r,c] of list){
     let off=offenseScore(r,c),def=defenseScore(r,c);
+    // Kombinerat poäng: attack + försvar + centrumsattraktivitet + litet brus
     let s=off+def*1.05+Math.max(0,6-(Math.abs(r-cc)+Math.abs(c-cc))*0.3)+Math.random()*3;
-    let isH=hidden.has(key(r,c));
-    let sv=isH?s*0.85:s; // föredra synligt vid likvärdigt värde
+    // Dold ruta: ingen straffrabatt – AI:n ska behandla dem likvärdigt med synliga
+    // Enda undantaget: om poängen är låg (ingen taktisk anledning) föredra synlig
+    const isH=hidden.has(key(r,c));
+    const sv=(!isH||s>50)?s:s*0.7; // Undvik slumpmässig dimma bara vid lågt värde
     if(sv>bestScore){bestScore=sv;best={r,c};}
-    if(isH&&s>bestHiddenScore){bestHiddenScore=s;bestHidden={r,c};}
   }
-  // Sondera dimman ibland – men bara när inget kritiskt (fyra/femma) står på spel
-  if(best&&bestScore<4000&&bestHidden&&Math.random()<0.3) return bestHidden;
   return best;
 }
 
