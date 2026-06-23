@@ -21,8 +21,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 .page-wrap{max-width:940px;margin:0 auto;padding:16px 20px 48px;position:relative;z-index:1;}
 
-#canvasContainer{position:relative;border:2px solid var(--border);display:inline-block;user-select:none;border-radius:8px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.4);}
-#mazeCanvas{display:block;user-select:none;}
+#canvasContainer{position:relative;border:2px solid var(--border);display:inline-block;user-select:none;border-radius:8px;overflow:visible;box-shadow:0 4px 24px rgba(0,0,0,.4);}
+#mazeCanvas{display:block;user-select:none;border-radius:11px;}
 
 #controls{margin-top:14px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
 .controls-row{margin-top:8px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
@@ -98,21 +98,21 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 /* ---- Result overlay (pops over the maze) ---- */
 .result-overlay{position:absolute;inset:0;display:none;pointer-events:none;z-index:30;}
 .result-overlay.show,.result-overlay.pinned{display:block;}
-.ro-card{position:absolute;top:16px;left:50%;transform:translateX(-50%) translateY(-10px) scale(.95);
-  background:rgba(15,20,37,.95);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
-  border:1px solid rgba(61,220,132,.42);border-radius:14px;padding:15px 17px;min-width:300px;max-width:92%;
+.ro-card{position:absolute;top:12px;left:50%;transform:translateX(-50%) translateY(-10px) scale(.95);
+  background:rgba(15,20,37,.96);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
+  border:1px solid rgba(61,220,132,.42);border-radius:14px;padding:13px 14px;min-width:280px;max-width:94%;
   box-shadow:0 20px 54px rgba(0,0,0,.6),0 0 0 1px rgba(61,220,132,.14),0 0 42px rgba(61,220,132,.14);
   opacity:0;pointer-events:auto;transition:opacity .26s ease,transform .34s cubic-bezier(.18,.9,.32,1.28);}
 .result-overlay.show .ro-card{opacity:1;transform:translateX(-50%) translateY(0) scale(1);}
 .result-overlay.nopath .ro-card{border-color:rgba(239,91,91,.46);box-shadow:0 20px 54px rgba(0,0,0,.6),0 0 0 1px rgba(239,91,91,.16),0 0 38px rgba(239,91,91,.13);}
-.ro-head{font-size:15px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:13px;}
+.ro-head{font-size:15px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:11px;}
 .ro-badge{background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px;letter-spacing:.02em;flex-shrink:0;}
 .result-overlay.nopath .ro-badge{background:linear-gradient(180deg,#ef6b6b,#d94e4e);}
-.ro-sub{font-size:12px;color:var(--dim);line-height:1.55;max-width:280px;margin-bottom:14px;}
-.ro-metrics{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:14px;}
-.ro-metric{flex:1;min-width:84px;background:rgba(255,255,255,.045);border:1px solid var(--border);border-radius:9px;padding:9px 10px;display:flex;flex-direction:column;gap:3px;text-align:center;}
-.ro-num{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--accent2);line-height:1;}
-.ro-lab{font-size:9.5px;color:var(--dim);letter-spacing:.03em;text-transform:uppercase;font-weight:600;}
+.ro-sub{font-size:12px;color:var(--dim);line-height:1.55;max-width:280px;margin-bottom:12px;}
+.ro-metrics{display:flex;flex-wrap:nowrap;gap:6px;margin-bottom:12px;}
+.ro-metric{flex:1 1 0;min-width:0;background:rgba(255,255,255,.045);border:1px solid var(--border);border-radius:9px;padding:7px 4px;display:flex;flex-direction:column;gap:2px;text-align:center;}
+.ro-num{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--accent2);line-height:1;}
+.ro-lab{font-size:8.5px;color:var(--dim);letter-spacing:.02em;text-transform:uppercase;font-weight:600;line-height:1.15;}
 .ro-btn{width:100%;padding:10px;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;
   background:linear-gradient(180deg,#3ddc84,#23b86a);color:#04241a;box-shadow:0 4px 16px rgba(61,220,132,.32);transition:filter .16s,transform .08s;}
 .ro-btn:hover{filter:brightness(1.07);}
@@ -204,6 +204,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <option value="Exempel 2">Exempel 2</option>
     <option value="Exempel 3">Exempel 3</option>
     <option value="Exempel 4">Exempel 4</option>
+    <option value="Exempel 5">Exempel 5 (avancerad)</option>
   </select>
   <button id="saveBtn" class="btn-ghost">Spara</button>
   <input type="file" id="loadInput" style="display:none;" />
@@ -810,7 +811,8 @@ const predefinedMazes = {
   "Exempel 1": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,0,1,0,0,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,1,0,1,0,0,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,0,1,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,1,0,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,7],"ends":[[5,18]]},
   "Exempel 2": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,7],"ends":[[5,18]]},
   "Exempel 3": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[8,13],"ends":[[2,8],[8,19]]},
-  "Exempel 4": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,11],"ends":[[5,11]]}
+  "Exempel 4": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,11],"ends":[[5,11]]},
+  "Exempel 5": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,1,2,2,2,2,0,1,1],[1,0,1,0,1,1,1,0,1,0,1,1,1,3,1,3,1,1,1,2,1,0,1,2,1,2,1,0,1,1],[1,0,1,0,0,0,0,0,0,0,1,0,1,3,1,3,1,0,1,2,1,0,2,2,1,2,1,0,1,1],[1,0,1,0,1,1,1,1,1,1,1,0,1,3,1,3,1,0,1,2,1,1,1,1,1,2,1,0,1,1],[1,0,1,0,0,0,0,0,0,0,0,0,1,3,3,3,1,0,1,0,0,0,0,0,1,0,1,0,1,1],[1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,2,1,2,1,0,1,1],[1,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,1,0,1,1],[1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1],[1,0,0,0,1,3,1,0,1,3,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,1,1],[1,0,1,0,1,2,1,2,1,3,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1],[1,0,0,0,1,2,2,2,1,3,0,0,1,0,1,0,0,0,1,0,1,2,1,2,2,2,2,0,1,1],[1,0,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,2,1,1,1,1,1,0,1,1],[1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,2,2,2,2,2,2,2,0,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[1,1],"ends":[[9,7],[9,17],[1,21]]},
 };
 
 document.getElementById("predefinedSelect").addEventListener("change", (e) => {
