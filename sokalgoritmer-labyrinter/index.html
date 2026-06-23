@@ -40,7 +40,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .btn-ghost{padding:7px 16px;background:var(--surface2)!important;color:var(--subtle)!important;border:1px solid var(--border)!important;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;transition:border-color .2s,color .2s;}
 .btn-ghost:hover{border-color:var(--accent)!important;color:var(--text)!important;background:var(--surface2)!important;box-shadow:none!important;}
 
-#info{margin-top:14px;font-size:12px;font-weight:600;color:var(--text);background:var(--surface);border:1px solid var(--border);padding:10px 14px;border-radius:6px;max-width:940px;}
+#info{display:none;margin-top:14px;font-size:12px;font-weight:600;color:var(--text);background:var(--surface);border:1px solid var(--border);padding:10px 14px;border-radius:6px;max-width:940px;}
 #hoverInfo{margin-top:8px;font-size:12px;font-weight:600;color:var(--text);background:var(--surface2);border:1px solid var(--border);padding:10px 14px;border-radius:6px;max-width:940px;}
 #costFunctionInfo{margin-top:8px;font-size:12px;font-weight:600;color:var(--subtle);background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 6px 6px 0;display:none;max-width:940px;}
 
@@ -94,24 +94,55 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 #controls button:active,.controls-row button:active{transform:translateY(1px);}
 #startSearchBtn{background:linear-gradient(180deg,#5b8bff,#3f6fe6);box-shadow:0 2px 12px rgba(77,128,255,.38);}
 #startSearchBtn:hover{background:linear-gradient(180deg,#6b97ff,#4a78ec);box-shadow:0 4px 18px rgba(77,128,255,.55);}
-.heuristic-label{color:#0d1422;font-weight:600;text-shadow:0 0 3px rgba(255,255,255,.55);}
-.result-panel{margin-top:14px;max-width:940px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0 16px;max-height:0;overflow:hidden;opacity:0;transform:translateY(-6px);transition:max-height .4s ease,opacity .35s ease,transform .35s ease,padding .4s ease;}
-.result-panel.show{max-height:500px;opacity:1;transform:none;padding:16px;box-shadow:0 8px 28px rgba(0,0,0,.4),0 0 0 1px rgba(52,211,153,.18);border-color:rgba(52,211,153,.35);}
-.result-panel.nopath.show{border-color:rgba(239,91,91,.4);box-shadow:0 8px 28px rgba(0,0,0,.4),0 0 0 1px rgba(239,91,91,.2);}
-.rp-head{font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
-.rp-badge{background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px;letter-spacing:.02em;}
-.rp-sub{font-size:12px;color:var(--dim);}
-.rp-chips{display:flex;flex-wrap:wrap;gap:10px;}
-.rp-chip{flex:1;min-width:90px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;}
-.rp-num{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--accent2);}
-.rp-lab{font-size:10.5px;color:var(--dim);letter-spacing:.03em;}
-.rp-cmp{margin-top:14px;border-top:1px solid var(--border);padding-top:12px;}
-.rp-cmp-title{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);font-weight:700;margin-bottom:8px;}
-.rp-table{width:100%;border-collapse:collapse;font-size:12px;}
-.rp-table th{text-align:left;color:var(--dim);font-weight:600;font-size:10.5px;padding:4px 8px;border-bottom:1px solid var(--border);}
-.rp-table td{padding:5px 8px;color:var(--subtle);border-bottom:1px solid rgba(30,38,66,.5);}
-.rp-table tr.rp-cur td{color:var(--text);font-weight:700;}
-.rp-table tr.rp-cur td:first-child{color:var(--accent2);}
+.heuristic-label{color:#10182b;font-weight:500;text-shadow:0 0 2px rgba(255,255,255,.4);letter-spacing:-0.02em;}
+/* ---- Result overlay (pops over the maze) ---- */
+.result-overlay{position:absolute;inset:0;display:none;pointer-events:none;z-index:30;}
+.result-overlay.show,.result-overlay.pinned{display:block;}
+.ro-card{position:absolute;top:16px;left:50%;transform:translateX(-50%) translateY(-10px) scale(.95);
+  background:rgba(15,20,37,.95);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
+  border:1px solid rgba(61,220,132,.42);border-radius:14px;padding:15px 17px;min-width:300px;max-width:92%;
+  box-shadow:0 20px 54px rgba(0,0,0,.6),0 0 0 1px rgba(61,220,132,.14),0 0 42px rgba(61,220,132,.14);
+  opacity:0;pointer-events:auto;transition:opacity .26s ease,transform .34s cubic-bezier(.18,.9,.32,1.28);}
+.result-overlay.show .ro-card{opacity:1;transform:translateX(-50%) translateY(0) scale(1);}
+.result-overlay.nopath .ro-card{border-color:rgba(239,91,91,.46);box-shadow:0 20px 54px rgba(0,0,0,.6),0 0 0 1px rgba(239,91,91,.16),0 0 38px rgba(239,91,91,.13);}
+.ro-head{font-size:15px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:13px;}
+.ro-badge{background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px;letter-spacing:.02em;flex-shrink:0;}
+.result-overlay.nopath .ro-badge{background:linear-gradient(180deg,#ef6b6b,#d94e4e);}
+.ro-sub{font-size:12px;color:var(--dim);line-height:1.55;max-width:280px;margin-bottom:14px;}
+.ro-metrics{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:14px;}
+.ro-metric{flex:1;min-width:84px;background:rgba(255,255,255,.045);border:1px solid var(--border);border-radius:9px;padding:9px 10px;display:flex;flex-direction:column;gap:3px;text-align:center;}
+.ro-num{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--accent2);line-height:1;}
+.ro-lab{font-size:9.5px;color:var(--dim);letter-spacing:.03em;text-transform:uppercase;font-weight:600;}
+.ro-btn{width:100%;padding:10px;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;
+  background:linear-gradient(180deg,#3ddc84,#23b86a);color:#04241a;box-shadow:0 4px 16px rgba(61,220,132,.32);transition:filter .16s,transform .08s;}
+.ro-btn:hover{filter:brightness(1.07);}
+.ro-btn:active{transform:translateY(1px);}
+.result-overlay.nopath .ro-btn{background:linear-gradient(180deg,#49527a,#39425c);color:#fff;box-shadow:none;}
+.ro-pin{position:absolute;top:12px;left:12px;display:none;align-items:center;gap:9px;pointer-events:auto;cursor:pointer;
+  background:rgba(15,20,37,.93);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
+  border:1px solid rgba(61,220,132,.4);border-radius:10px;padding:7px 10px 7px 9px;
+  box-shadow:0 8px 26px rgba(0,0,0,.48);font-family:'DM Sans',sans-serif;
+  opacity:0;transform:translateY(-6px) scale(.96);transition:opacity .24s ease,transform .24s ease,border-color .2s;}
+.result-overlay.pinned .ro-pin{display:flex;opacity:1;transform:none;}
+.result-overlay.nopath .ro-pin{border-color:rgba(239,91,91,.42);}
+.ro-pin:hover{border-color:rgba(61,220,132,.7);}
+.result-overlay.nopath .ro-pin:hover{border-color:rgba(239,91,91,.7);}
+.ro-pin-metric{font-size:11.5px;color:var(--dim);white-space:nowrap;}
+.ro-pin-metric b{font-family:'JetBrains Mono',monospace;color:var(--accent2);font-size:13px;font-weight:700;margin-right:2px;}
+.ro-pin-exp{width:13px;height:13px;color:var(--dim);flex-shrink:0;}
+
+/* ---- In-canvas A* tooltip (f = g + h) ---- */
+#mazeTooltip{position:absolute;pointer-events:none;z-index:25;background:rgba(15,20,37,.96);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  border:1px solid rgba(77,128,255,.4);border-radius:8px;padding:7px 11px;font-family:'JetBrains Mono',monospace;font-size:12px;
+  color:var(--text);white-space:nowrap;box-shadow:0 10px 28px rgba(0,0,0,.55);opacity:0;transform:translateY(-4px);transition:opacity .14s ease,transform .14s ease;}
+#mazeTooltip.show{opacity:1;transform:none;}
+#mazeTooltip .tt-eq{color:var(--dim);}
+#mazeTooltip .tt-f{color:var(--accent2);font-weight:700;}
+#mazeTooltip .tt-g{color:#3ddc84;font-weight:700;}
+#mazeTooltip .tt-h{color:#f0a94e;font-weight:700;}
+
+/* old below-canvas hover/cost hints now live in-canvas */
+#hoverInfo,#costFunctionInfo{display:none!important;}
 </style>
 </head>
 <body>
@@ -126,6 +157,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 <div id="canvasContainer">
   <canvas id="mazeCanvas"></canvas>
+  <div id="mazeTooltip"></div>
+  <div id="resultOverlay" class="result-overlay"></div>
 </div>
 
 <div id="controls">
@@ -157,7 +190,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 </div>
 
 <div id="info"></div>
-<div id="resultPanel" class="result-panel"></div>
 <div id="costFunctionInfo">Kostnadsfunktion: (håll musen över en cell för att se f(n))</div>
 <div id="hoverInfo"></div>
 
@@ -243,34 +275,62 @@ let search_cost = 0;
 let runHistory = {};
 const ALG_LABEL = {"A*":"A*","BFS":"BFS","DFS":"DFS","Greedy":"Girig bäst-först"};
 
-function hideResultPanel(){ let p=document.getElementById("resultPanel"); if(p) p.className="result-panel"; }
-function mazeChanged(){ runHistory = {}; hideResultPanel(); }
+function hideResultOverlay(){ let o=document.getElementById("resultOverlay"); if(o){ o.className="result-overlay"; o.innerHTML=""; } }
+function mazeChanged(){ runHistory = {}; hideResultOverlay(); f_values.clear(); }
 
 function finishSearch(o){
   search_in_progress = false;
   setControlsSearching(false);
   costFunctionInfoDiv.style.display = (o.found && currentAlgorithm === "A*") ? "block" : "none";
-  resultDiv.textContent = ""; resultDiv.style.backgroundColor = ""; resultDiv.style.borderColor = "";
+  resultDiv.textContent = ""; resultDiv.style.display = "none"; resultDiv.style.backgroundColor = ""; resultDiv.style.borderColor = "";
   if (o.found) runHistory[currentAlgorithm] = o;
-  renderResultPanel(o);
+  renderResultOverlay(o);
 }
 
-function renderResultPanel(o){
-  let panel = document.getElementById("resultPanel");
-  if(!panel) return;
+function pinChevron(){return '<svg class="ro-pin-exp" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 4 10 8 6 12"/></svg>';}
+
+function buildResultMarkup(o){
+  let badge = '<span class="ro-badge">'+ALG_LABEL[currentAlgorithm]+'</span>';
   if(!o.found){
-    panel.className = "result-panel nopath show";
-    panel.innerHTML = '<div class="rp-head">Ingen v\u00e4g funnen</div><div class="rp-sub">Algoritmen kunde inte n\u00e5 m\u00e5let i den h\u00e4r labyrinten.</div>';
-    return;
+    return '<div class="ro-card">'
+      +'<div class="ro-head">'+badge+' ingen v\u00e4g funnen</div>'
+      +'<div class="ro-sub">Algoritmen kunde inte n\u00e5 m\u00e5let i den h\u00e4r labyrinten.</div>'
+      +'<button class="ro-btn" onclick="dismissResultOverlay()">Visa labyrint</button>'
+      +'</div>'
+      +'<button class="ro-pin" onclick="reopenResultOverlay()">'+badge
+        +'<span class="ro-pin-metric">ingen v\u00e4g</span>'+pinChevron()+'</button>';
   }
-  let chips = '<div class="rp-chip"><span class="rp-num">'+o.steps+'</span><span class="rp-lab">steg till m\u00e5l</span></div>'
-            + '<div class="rp-chip"><span class="rp-num">'+o.explored+'</span><span class="rp-lab">utforskade rutor</span></div>';
+  let metrics = '<div class="ro-metric"><span class="ro-num">'+o.steps+'</span><span class="ro-lab">steg till m\u00e5l</span></div>'
+    + '<div class="ro-metric"><span class="ro-num">'+o.explored+'</span><span class="ro-lab">utforskade</span></div>';
   if(o.hasCost){
-    chips += '<div class="rp-chip"><span class="rp-num">'+o.pathCost+'</span><span class="rp-lab">v\u00e4gens kostnad</span></div>'
-           + '<div class="rp-chip"><span class="rp-num">'+o.searchCost+'</span><span class="rp-lab">s\u00f6kningens kostnad</span></div>';
+    metrics += '<div class="ro-metric"><span class="ro-num">'+o.pathCost+'</span><span class="ro-lab">v\u00e4gkostnad</span></div>'
+      + '<div class="ro-metric"><span class="ro-num">'+o.searchCost+'</span><span class="ro-lab">s\u00f6kkostnad</span></div>';
   }
-  panel.className = "result-panel show";
-  panel.innerHTML = '<div class="rp-head"><span class="rp-badge">'+ALG_LABEL[currentAlgorithm]+'</span> hittade m\u00e5let</div><div class="rp-chips">'+chips+'</div>';
+  return '<div class="ro-card">'
+    +'<div class="ro-head">'+badge+' hittade m\u00e5let</div>'
+    +'<div class="ro-metrics">'+metrics+'</div>'
+    +'<button class="ro-btn" onclick="dismissResultOverlay()">Visa v\u00e4g</button>'
+    +'</div>'
+    +'<button class="ro-pin" onclick="reopenResultOverlay()">'+badge
+      +'<span class="ro-pin-metric"><b>'+o.steps+'</b> steg</span>'
+      +'<span class="ro-pin-metric"><b>'+o.explored+'</b> utforskade</span>'
+      +pinChevron()+'</button>';
+}
+
+function renderResultOverlay(o){
+  let el = document.getElementById("resultOverlay"); if(!el) return;
+  el.innerHTML = buildResultMarkup(o);
+  el.className = "result-overlay"+(o.found?"":" nopath");
+  void el.offsetWidth;            // reflow so the pop transition plays
+  el.classList.add("show");
+}
+function dismissResultOverlay(){   // "Visa v\u00e4g" \u2192 shrink to corner chip
+  let el = document.getElementById("resultOverlay"); if(!el) return;
+  el.classList.remove("show"); el.classList.add("pinned");
+}
+function reopenResultOverlay(){    // tap chip \u2192 full card again
+  let el = document.getElementById("resultOverlay"); if(!el) return;
+  el.classList.remove("pinned"); el.classList.add("show");
 }
 
 function hasNonOneSquares() {
@@ -296,6 +356,7 @@ function resetSearchCost() {
 }
 
 function setFinalResultText(txt, showCostFunction=false) {
+  resultDiv.style.display = "block";
   resultDiv.textContent = txt;
   resultDiv.style.backgroundColor = "rgba(29,233,155,.12)";
   resultDiv.style.borderColor = "rgba(29,233,155,.3)";
@@ -339,8 +400,6 @@ function draw_grid() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "#0c1018";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  for (let [_, label] of heuristicTexts)
-    if (label.parentNode) label.parentNode.removeChild(label);
   heuristicTexts.clear();
   f_values.clear();
 
@@ -362,16 +421,28 @@ function draw_grid() {
 }
 
 function clear_heuristic_texts() {
-  for (let [_, label] of heuristicTexts)
-    if (label && label.parentNode) label.parentNode.removeChild(label);
   heuristicTexts.clear();
   f_values.clear();
+}
+
+/* Draw a small centred label directly on the canvas (scales with canvas). */
+function drawLabelOnCanvas(r, c, txt) {
+  const x = (c + 0.5) * CELL_SIZE;
+  const y = (r + 0.5) * CELL_SIZE;
+  ctx.save();
+  ctx.font = 'bold 8px "JetBrains Mono", monospace';
+  ctx.fillStyle = 'rgba(10,14,28,0.80)';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(txt, x, y);
+  ctx.restore();
 }
 
 function clear_previous_search() {
   draw_grid();
   clear_heuristic_texts();
   resultDiv.textContent = "";
+  resultDiv.style.display = "none";
   resultDiv.style.backgroundColor = "";
   resultDiv.style.borderColor = "";
   hoverInfoDiv.textContent = "";
@@ -382,11 +453,15 @@ function clear_previous_search() {
 function mark_explored(r, c) {
   if ((r === start[0] && c === start[1]) || ends.some(e => e[0]===r && e[1]===c)) return;
   paintCell(r, c, "#6f9fd6");
+  let key = `${r},${c}`;
+  if (heuristicTexts.has(key)) drawLabelOnCanvas(r, c, heuristicTexts.get(key));
 }
 
 function color_frontier_cell(r, c) {
   if ((r === start[0] && c === start[1]) || ends.some(e => e[0]===r && e[1]===c)) return;
   paintCell(r, c, "#f0a94e", "rgba(240,169,78,.45)", 8);
+  let key = `${r},${c}`;
+  if (heuristicTexts.has(key)) drawLabelOnCanvas(r, c, heuristicTexts.get(key));
 }
 
 function mark_path(path) {
@@ -626,28 +701,38 @@ canvas.addEventListener("mouseup",(e)=>{
   dragging_point = null; old_start = null; potential_start = null; drag_start_pos = null;
 });
 
+const mazeTooltip = document.getElementById("mazeTooltip");
+function showMazeTooltip(html, e){
+  let rect = canvasContainer.getBoundingClientRect();
+  let x = e.clientX - rect.left, y = e.clientY - rect.top;
+  mazeTooltip.innerHTML = html;
+  mazeTooltip.classList.add("show");
+  let tw = mazeTooltip.offsetWidth, th = mazeTooltip.offsetHeight;
+  let left = Math.max(4, Math.min(x - tw/2, rect.width - tw - 4));
+  let top = y - th - 12;
+  if (top < 4) top = y + 18;
+  mazeTooltip.style.left = left + "px";
+  mazeTooltip.style.top = top + "px";
+}
+function hideMazeTooltip(){ if(mazeTooltip) mazeTooltip.classList.remove("show"); }
+
 canvas.addEventListener("mousemove",(e)=>{
   let cell = getCellFromMouse(e);
-  if (!cell) { hoverInfoDiv.textContent = ""; return; }
+  if (!cell) { hideMazeTooltip(); return; }
   let key = `${cell[0]},${cell[1]}`;
   if (currentAlgorithm === "A*" && f_values.has(key)) {
     let [fval, hval] = f_values.get(key); let gval = fval - hval;
-    hoverInfoDiv.textContent = `f(n) = g(n) + h(n) = ${gval} + ${hval} = ${fval}`;
-  } else { hoverInfoDiv.textContent = ""; }
+    showMazeTooltip(
+      '<span class="tt-eq">f =</span> <span class="tt-g">'+gval+'</span> '
+      +'<span class="tt-eq">+</span> <span class="tt-h">'+hval+'</span> '
+      +'<span class="tt-eq">=</span> <span class="tt-f">'+fval+'</span>', e);
+  } else { hideMazeTooltip(); }
 });
+canvas.addEventListener("mouseleave", hideMazeTooltip);
 
 function createHeuristicLabel(r, c, txt) {
-  let labelKey = `${r},${c}`;
-  if (heuristicTexts.has(labelKey)) { let old = heuristicTexts.get(labelKey); if (old.parentNode) old.parentNode.removeChild(old); }
-  let label = document.createElement("div");
-  label.className = "heuristic-label"; label.textContent = txt;
-  let rect = canvas.getBoundingClientRect();
-  let sx = (rect.width / canvas.width) || 1;
-  let sy = (rect.height / canvas.height) || 1;
-  label.style.left = ((c*CELL_SIZE + CELL_SIZE/2 - 8) * sx) + "px";
-  label.style.top = ((r*CELL_SIZE + CELL_SIZE/2 - 6) * sy) + "px";
-  label.style.fontSize = Math.max(6, Math.round(10 * sx)) + "px";
-  canvasContainer.appendChild(label); heuristicTexts.set(labelKey, label);
+  heuristicTexts.set(`${r},${c}`, txt);
+  // The label is drawn by color_frontier_cell / mark_explored right after this call
 }
 
 document.getElementById("saveBtn").addEventListener("click", ()=>{
@@ -710,7 +795,7 @@ document.getElementById("startSearchBtn").addEventListener("click", ()=>{
   let alg = document.getElementById("algorithmSelect").value;
   currentAlgorithm = alg;
   setControlsSearching(true);
-  hideResultPanel();
+  hideResultOverlay();
   if (alg==="A*") start_a_star();
   else if (alg==="BFS") start_bfs();
   else if (alg==="DFS") start_dfs();
