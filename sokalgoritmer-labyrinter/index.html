@@ -143,6 +143,18 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 /* old below-canvas hover/cost hints now live in-canvas */
 #hoverInfo,#costFunctionInfo{display:none!important;}
+
+/* ---- Playback controls ---- */
+.player{display:inline-flex;align-items:center;gap:6px;margin-left:4px;}
+#controls .icon-btn{width:38px;height:38px;padding:0;display:inline-flex;align-items:center;justify-content:center;
+  background:var(--surface2);color:var(--subtle);border:1px solid var(--border);border-radius:8px;cursor:pointer;
+  transition:border-color .18s,color .18s,background .18s,transform .08s,box-shadow .18s;box-shadow:none;}
+#controls .icon-btn svg{width:19px;height:19px;display:block;}
+#controls .icon-btn:hover:not(:disabled){background:var(--surface2);border-color:var(--accent);color:var(--text);box-shadow:0 0 12px rgba(77,128,255,.18);}
+#controls .icon-btn:active:not(:disabled){transform:translateY(1px);}
+#controls .icon-btn:disabled{opacity:.35;cursor:not-allowed;box-shadow:none;}
+#controls .icon-btn-primary{background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;border-color:transparent;box-shadow:0 2px 12px rgba(77,128,255,.38);}
+#controls .icon-btn-primary:hover:not(:disabled){background:linear-gradient(180deg,#6b97ff,#4a78ec);color:#fff;box-shadow:0 4px 18px rgba(77,128,255,.5);}
 </style>
 </head>
 <body>
@@ -167,12 +179,21 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <option value="BFS">BFS</option>
     <option value="DFS">DFS</option>
     <option value="A*">A*</option>
-    <option value="Greedy">Greedy Best-First</option>
+    <option value="Greedy">Girig bäst-först</option>
   </select>
   <button id="startSearchBtn">Starta sökning</button>
-  <label><input type="checkbox" id="stepModeChk" /> Stegvis</label>
-  <button id="nextStepBtn" disabled>Nästa steg</button>
-  <button id="resetBtn" class="btn-ghost">Återställ</button>
+  <div class="player">
+    <button id="prevStepBtn" class="icon-btn" title="Föregående steg" aria-label="Föregående steg">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 6h2v12H7zM20 6 11 12l9 6z"/></svg>
+    </button>
+    <button id="playBtn" class="icon-btn icon-btn-primary" title="Spela" aria-label="Spela"></button>
+    <button id="nextStepBtn" class="icon-btn" title="Nästa steg" aria-label="Nästa steg">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 6h2v12h-2zM4 6l9 6-9 6z"/></svg>
+    </button>
+    <button id="resetBtn" class="icon-btn" title="Nollställ sökning" aria-label="Nollställ sökning">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+    </button>
+  </div>
 </div>
 
 <div id="controls2" class="controls-row">
@@ -187,6 +208,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <button id="saveBtn" class="btn-ghost">Spara</button>
   <input type="file" id="loadInput" style="display:none;" />
   <button id="loadBtn" class="btn-ghost">Ladda</button>
+  <button id="clearMazeBtn" class="btn-ghost">Töm</button>
 </div>
 
 <div id="info"></div>
@@ -264,27 +286,28 @@ let resultDiv = document.getElementById("info");
 let hoverInfoDiv = document.getElementById("hoverInfo");
 let costFunctionInfoDiv = document.getElementById("costFunctionInfo");
 
-let stepMode = false;
-let A_STAR_STATE = null;
-let GREEDY_STATE = null;
-let BFS_STATE = null;
-let DFS_STATE = null;
-let search_in_progress = false; setControlsSearching(false);
 let currentAlgorithm = null;
 let search_cost = 0;
 let runHistory = {};
+
+// playback engine state
+let searchSteps = [];   // [{ops:[...], result|null}]
+let curStep = -1;       // -1 = nothing revealed yet
+let computedFor = null; // which algorithm searchSteps was built for
+let playTimer = null;
+let isPlaying = false;
+const PLAY_INTERVAL = 130;
+const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>';
+const ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
 const ALG_LABEL = {"A*":"A*","BFS":"BFS","DFS":"DFS","Greedy":"Girig bäst-först"};
 
 function hideResultOverlay(){ let o=document.getElementById("resultOverlay"); if(o){ o.className="result-overlay"; o.innerHTML=""; } }
-function mazeChanged(){ runHistory = {}; hideResultOverlay(); f_values.clear(); }
-
-function finishSearch(o){
-  search_in_progress = false;
-  setControlsSearching(false);
-  costFunctionInfoDiv.style.display = (o.found && currentAlgorithm === "A*") ? "block" : "none";
-  resultDiv.textContent = ""; resultDiv.style.display = "none"; resultDiv.style.backgroundColor = ""; resultDiv.style.borderColor = "";
-  if (o.found) runHistory[currentAlgorithm] = o;
-  renderResultOverlay(o);
+function mazeChanged(){
+  runHistory = {};
+  hideResultOverlay();
+  f_values.clear();
+  computedFor = null; searchSteps = []; curStep = -1;
+  if (typeof pausePlayback === "function") pausePlayback();
 }
 
 function pinChevron(){return '<svg class="ro-pin-exp" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 4 10 8 6 12"/></svg>';}
@@ -479,157 +502,176 @@ class PriorityQ {
   empty() { return this._data.length === 0; }
 }
 
-function a_star_step(open_set, came_from, g_score, explored_cells) {
-  if (!search_in_progress) return;
-  if (open_set.empty()) { finishSearch({found:false}); return; }
-  let [f_current, current] = open_set.pop();
-  let [row, col] = current;
-  search_cost += cellCost(row, col);
-  if (ends.some(e => e[0]===row && e[1]===col)) {
-    let path = []; let curKey = `${row},${col}`;
-    while (came_from.has(curKey)) { path.push(current); current = came_from.get(curKey); curKey = `${current[0]},${current[1]}`; }
-    path.push(start); path.reverse(); mark_path(path);
-    finishSearch({found:true, steps:path.length-1, explored:explored_cells-1, hasCost:hasNonOneSquares(), pathCost:calcPathCost(path), searchCost:search_cost}); return;
-  }
-  mark_explored(row, col);
-  for (let [nr, nc] of get_neighbors([row,col])) {
-    if (grid[nr][nc] === 1) continue;
-    let tentative_g = g_score.get(`${row},${col}`) + cellCost(nr,nc);
-    let neighborKey = `${nr},${nc}`;
-    if (!g_score.has(neighborKey) || tentative_g < g_score.get(neighborKey)) {
-      came_from.set(neighborKey, [row, col]);
-      g_score.set(neighborKey, tentative_g);
-      let h_score = ends.map(e => heuristic([nr,nc], e)).reduce((a,b) => Math.min(a,b), Infinity);
-      let f_score = tentative_g + h_score;
-      open_set.push([f_score, [nr,nc]]);
-      createHeuristicLabel(nr, nc, `${f_score}`);
-      f_values.set(`${nr},${nc}`, [f_score, h_score]);
-      color_frontier_cell(nr, nc);
-    }
-  }
-  explored_cells++;
-  if (stepMode) A_STAR_STATE = {open_set, came_from, g_score, explored_cells};
-  else setTimeout(()=>{ a_star_step(open_set, came_from, g_score, explored_cells); },150);
-}
-
-function start_a_star() {
-  if (ends.length === 0) { setFinalResultText("Inga mål satts"); return; }
-  clear_previous_search(); resetSearchCost();
-  let open_set = new PriorityQ(); let came_from = new Map(); let g_score = new Map();
-  g_score.set(`${start[0]},${start[1]}`, 0);
-  let h_score = ends.map(e => heuristic(start,e)).reduce((a,b) => Math.min(a,b), Infinity);
-  open_set.push([h_score, [start[0],start[1]]]);
-  A_STAR_STATE = {open_set, came_from, g_score, explored_cells:1};
-  search_in_progress = true; currentAlgorithm = "A*";
-  a_star_step(open_set, came_from, g_score, 1);
-}
-
-function greedy_best_first_step(open_set, explored, explored_cells) {
-  if (!search_in_progress) return;
-  if (open_set.empty()) { finishSearch({found:false}); return; }
-  let [h_score, current, path] = open_set.pop();
-  let [row, col] = current;
-  search_cost += cellCost(row, col);
-  if (ends.some(e => e[0]===row && e[1]===col)) {
-    let finalPath = path.concat([current]); mark_path(finalPath);
-    finishSearch({found:true, steps:finalPath.length-1, explored:explored_cells-1, hasCost:hasNonOneSquares(), pathCost:calcPathCost(finalPath), searchCost:search_cost}); return;
-  }
-  explored.add(`${row},${col}`); explored_cells++; mark_explored(row, col);
-  for (let [nr,nc] of get_neighbors(current)) {
-    let key = `${nr},${nc}`;
-    if (explored.has(key) || grid[nr][nc] === 1) continue;
-    let h = ends.map(e => heuristic([nr,nc], e)).reduce((a,b)=>Math.min(a,b), Infinity);
-    open_set.push([h, [nr,nc], path.concat([current])]); explored.add(key);
-    createHeuristicLabel(nr, nc, `${h}`); f_values.set(`${nr},${nc}`, [h, h]);
-    color_frontier_cell(nr, nc);
-  }
-  if (stepMode) GREEDY_STATE = {open_set, explored, explored_cells};
-  else setTimeout(()=>{ greedy_best_first_step(open_set, explored, explored_cells); },150);
-}
-
-function start_greedy_best_first() {
-  if (ends.length===0) { setFinalResultText("Inga mål satts"); return; }
-  clear_previous_search(); resetSearchCost();
-  let open_set = new PriorityQ();
-  let h_score = ends.map(e => heuristic(start,e)).reduce((a,b) => Math.min(a,b), Infinity);
-  open_set.push([h_score, [start[0],start[1]], []]);
-  let explored = new Set();
-  GREEDY_STATE = {open_set, explored, explored_cells:1};
-  search_in_progress = true; currentAlgorithm = "Greedy";
-  greedy_best_first_step(open_set, explored, 1);
-}
-
-class SimpleQueue {
-  constructor() { this.q = []; }
-  enqueue(item) { this.q.push(item); }
-  dequeue() { return this.q.shift(); }
-  empty() { return this.q.length === 0; }
-}
-
-function bfs_step(queue, explored, explored_cells) {
-  if (!search_in_progress) return;
-  if (queue.empty()) { finishSearch({found:false}); return; }
-  let [current, path] = queue.dequeue();
-  let [row, col] = current;
-  search_cost += cellCost(row, col);
-  if (ends.some(e=> e[0]===row && e[1]===col)) {
-    let fullPath = path.concat([current]); mark_path(fullPath);
-    finishSearch({found:true, steps:fullPath.length-1, explored:explored_cells-1, hasCost:hasNonOneSquares(), pathCost:calcPathCost(fullPath), searchCost:search_cost}); return;
-  }
-  mark_explored(row, col); explored_cells++;
-  for (let [nr, nc] of get_neighbors([row,col])) {
-    let key = `${nr},${nc}`;
-    if (!explored.has(key) && grid[nr][nc] !== 1) { queue.enqueue([[nr,nc], path.concat([current])]); explored.add(key); color_frontier_cell(nr, nc); }
-  }
-  if (stepMode) BFS_STATE = {queue, explored, explored_cells};
-  else setTimeout(()=>{ bfs_step(queue, explored, explored_cells); },150);
-}
-
-function start_bfs() {
-  if (ends.length === 0) { setFinalResultText("Inga mål satts"); return; }
-  clear_previous_search(); resetSearchCost();
-  let queue = new SimpleQueue();
-  queue.enqueue([[start[0],start[1]], []]);
-  let explored = new Set(); explored.add(`${start[0]},${start[1]}`);
-  BFS_STATE = {queue, explored, explored_cells:1};
-  search_in_progress = true; currentAlgorithm = "BFS";
-  bfs_step(queue, explored, 1);
-}
-
 let directions = [[-1,0],[0,1],[1,0],[0,-1]];
+function isGoal(r, c){ return ends.some(e => e[0]===r && e[1]===c); }
+function minH(r, c){ return ends.map(e => heuristic([r,c], e)).reduce((a,b)=>Math.min(a,b), Infinity); }
 
-function dfs_step(stack, explored, explored_cells) {
-  if (!search_in_progress) return;
-  if (stack.length === 0) { finishSearch({found:false}); return; }
-  let [current, path, direction] = stack.pop();
-  let [row, col] = current;
-  search_cost += cellCost(row, col);
-  if (ends.some(e=> e[0]===row && e[1]===col)) {
-    let finalPath = path.concat([current]); mark_path(finalPath);
-    finishSearch({found:true, steps:finalPath.length-1, explored:explored_cells-1, hasCost:hasNonOneSquares(), pathCost:calcPathCost(finalPath), searchCost:search_cost}); return;
-  }
-  mark_explored(row, col); explored.add(`${row},${col}`); explored_cells++;
-  let order = [(direction + 3) % 4, direction, (direction + 1) % 4, (direction + 2) % 4];
-  for (let new_dir of order) {
-    let [dx, dy] = directions[new_dir];
-    let nr = row + dx, nc = col + dy;
-    if (nr>=0 && nr<GRID_HEIGHT && nc>=0 && nc<GRID_WIDTH) {
-      let key = `${nr},${nc}`;
-      if (!explored.has(key) && grid[nr][nc]!==1) { stack.push([[nr,nc], path.concat([current]), new_dir]); explored.add(key); color_frontier_cell(nr, nc); }
+/* Precompute the whole search as a list of steps (one node-expansion each).
+   ops: {t:'ex',r,c} | {t:'fr',r,c,lbl?,fv?} | {t:'path',cells}            */
+function precomputeSearch(alg){
+  let steps = [];
+  let cur = null;
+  const begin = () => { cur = []; };
+  const commit = (result) => { steps.push({ops:cur, result:result||null}); cur = null; };
+
+  if (alg === "BFS"){
+    let queue = [[[start[0],start[1]], []]];
+    let explored = new Set([`${start[0]},${start[1]}`]);
+    let ec = 1, cost = 0;
+    while (queue.length){
+      let [current, path] = queue.shift(); let [row,col] = current; cost += cellCost(row,col);
+      begin();
+      if (isGoal(row,col)){ let full = path.concat([current]); cur.push({t:'path',cells:full});
+        commit({found:true, steps:full.length-1, explored:ec-1, hasCost:hasNonOneSquares(), pathCost:calcPathCost(full), searchCost:cost}); return steps; }
+      cur.push({t:'ex',r:row,c:col}); ec++;
+      for (let [nr,nc] of get_neighbors([row,col])){ let k = `${nr},${nc}`;
+        if (!explored.has(k) && grid[nr][nc] !== 1){ queue.push([[nr,nc], path.concat([current])]); explored.add(k); cur.push({t:'fr',r:nr,c:nc}); } }
+      commit();
     }
+    begin(); commit({found:false}); return steps;
   }
-  if (stepMode) DFS_STATE = {stack, explored, explored_cells};
-  else setTimeout(()=>{ dfs_step(stack, explored, explored_cells); },150);
+
+  if (alg === "DFS"){
+    let stack = [[[start[0],start[1]], [], 2]];
+    let explored = new Set([`${start[0]},${start[1]}`]);
+    let ec = 1, cost = 0;
+    while (stack.length){
+      let [current, path, direction] = stack.pop(); let [row,col] = current; cost += cellCost(row,col);
+      begin();
+      if (isGoal(row,col)){ let full = path.concat([current]); cur.push({t:'path',cells:full});
+        commit({found:true, steps:full.length-1, explored:ec-1, hasCost:hasNonOneSquares(), pathCost:calcPathCost(full), searchCost:cost}); return steps; }
+      cur.push({t:'ex',r:row,c:col}); ec++;
+      let order = [(direction+3)%4, direction, (direction+1)%4, (direction+2)%4];
+      for (let nd of order){ let [dx,dy] = directions[nd]; let nr = row+dx, nc = col+dy;
+        if (nr>=0 && nr<GRID_HEIGHT && nc>=0 && nc<GRID_WIDTH){ let k = `${nr},${nc}`;
+          if (!explored.has(k) && grid[nr][nc] !== 1){ stack.push([[nr,nc], path.concat([current]), nd]); explored.add(k); cur.push({t:'fr',r:nr,c:nc}); } } }
+      commit();
+    }
+    begin(); commit({found:false}); return steps;
+  }
+
+  if (alg === "A*"){
+    let open = new PriorityQ(); let came = new Map(); let g = new Map();
+    g.set(`${start[0]},${start[1]}`, 0);
+    open.push([minH(start[0],start[1]), [start[0],start[1]]]);
+    let ec = 1, cost = 0;
+    while (!open.empty()){
+      let [fc, current] = open.pop(); let [row,col] = current; cost += cellCost(row,col);
+      begin();
+      if (isGoal(row,col)){
+        let path = []; let ck = `${row},${col}`; let cu = current;
+        while (came.has(ck)){ path.push(cu); cu = came.get(ck); ck = `${cu[0]},${cu[1]}`; }
+        path.push(start); path.reverse(); cur.push({t:'path',cells:path});
+        commit({found:true, steps:path.length-1, explored:ec-1, hasCost:hasNonOneSquares(), pathCost:calcPathCost(path), searchCost:cost}); return steps;
+      }
+      cur.push({t:'ex',r:row,c:col});
+      for (let [nr,nc] of get_neighbors([row,col])){ if (grid[nr][nc] === 1) continue;
+        let tg = g.get(`${row},${col}`) + cellCost(nr,nc); let nk = `${nr},${nc}`;
+        if (!g.has(nk) || tg < g.get(nk)){ came.set(nk,[row,col]); g.set(nk,tg);
+          let hh = minH(nr,nc); let ff = tg + hh;
+          open.push([ff,[nr,nc]]); cur.push({t:'fr',r:nr,c:nc,lbl:`${ff}`,fv:[ff,hh]}); } }
+      ec++;
+      commit();
+    }
+    begin(); commit({found:false}); return steps;
+  }
+
+  if (alg === "Greedy"){
+    let open = new PriorityQ(); let explored = new Set();
+    open.push([minH(start[0],start[1]), [start[0],start[1]], []]);
+    let ec = 1, cost = 0;
+    while (!open.empty()){
+      let [hc, current, path] = open.pop(); let [row,col] = current; cost += cellCost(row,col);
+      begin();
+      if (isGoal(row,col)){ let full = path.concat([current]); cur.push({t:'path',cells:full});
+        commit({found:true, steps:full.length-1, explored:ec-1, hasCost:hasNonOneSquares(), pathCost:calcPathCost(full), searchCost:cost}); return steps; }
+      explored.add(`${row},${col}`); ec++; cur.push({t:'ex',r:row,c:col});
+      for (let [nr,nc] of get_neighbors(current)){ let k = `${nr},${nc}`;
+        if (explored.has(k) || grid[nr][nc] === 1) continue;
+        let hh = minH(nr,nc);
+        open.push([hh,[nr,nc], path.concat([current])]); explored.add(k);
+        cur.push({t:'fr',r:nr,c:nc,lbl:`${hh}`,fv:[hh,hh]}); }
+      commit();
+    }
+    begin(); commit({found:false}); return steps;
+  }
+  return steps;
 }
 
-function start_dfs() {
-  if (ends.length===0) { setFinalResultText("Inga mål satts"); return; }
-  clear_previous_search(); resetSearchCost();
-  let stack = [[[start[0],start[1]], [], 2]];
-  let explored = new Set(); explored.add(`${start[0]},${start[1]}`);
-  DFS_STATE = {stack, explored, explored_cells:1};
-  search_in_progress = true; currentAlgorithm = "DFS";
-  dfs_step(stack, explored, 1);
+/* ---- Playback engine ---- */
+function renderToStep(K){
+  draw_grid();                     // clears heuristicTexts & f_values, paints base maze
+  for (let i = 0; i <= K && i < searchSteps.length; i++){
+    for (let op of searchSteps[i].ops){
+      if (op.t === 'ex'){ mark_explored(op.r, op.c); }
+      else if (op.t === 'fr'){
+        if (op.lbl != null) heuristicTexts.set(`${op.r},${op.c}`, op.lbl);
+        if (op.fv) f_values.set(`${op.r},${op.c}`, op.fv);
+        color_frontier_cell(op.r, op.c);
+      }
+      else if (op.t === 'path'){ mark_path(op.cells); }
+    }
+  }
+}
+
+function updatePlayerUI(){
+  let prev = document.getElementById("prevStepBtn");
+  let next = document.getElementById("nextStepBtn");
+  let play = document.getElementById("playBtn");
+  let reset = document.getElementById("resetBtn");
+  let n = searchSteps.length;
+  if (prev) prev.disabled = curStep < 0;
+  if (next) next.disabled = (n === 0) || curStep >= n - 1;
+  if (reset) reset.disabled = (curStep < 0) && !isPlaying;
+  if (play) play.innerHTML = isPlaying ? ICON_PAUSE : ICON_PLAY;
+  if (play) play.title = isPlaying ? "Pausa" : "Spela";
+}
+
+function afterStep(){
+  let st = (curStep >= 0 && curStep < searchSteps.length) ? searchSteps[curStep] : null;
+  let atEnd = curStep === searchSteps.length - 1;
+  if (atEnd && st && st.result){
+    renderResultOverlay(st.result);
+    costFunctionInfoDiv.style.display = (st.result.found && computedFor === "A*") ? "block" : "none";
+  } else {
+    hideResultOverlay();
+  }
+  updatePlayerUI();
+}
+
+function ensureComputed(){
+  let alg = document.getElementById("algorithmSelect").value;
+  if (computedFor === alg && searchSteps.length) return true;
+  if (ends.length === 0){ setFinalResultText("Inga mål satts"); return false; }
+  currentAlgorithm = alg;
+  searchSteps = precomputeSearch(alg);
+  computedFor = alg; curStep = -1;
+  return searchSteps.length > 0;
+}
+
+function stepForward(){ if (curStep >= searchSteps.length - 1) return false; curStep++; renderToStep(curStep); afterStep(); return true; }
+function stepBack(){ if (curStep < 0) return false; curStep--; renderToStep(curStep); afterStep(); return true; }
+
+function pausePlayback(){ isPlaying = false; if (playTimer){ clearInterval(playTimer); playTimer = null; } updatePlayerUI(); }
+
+function startPlayback(){
+  if (!ensureComputed()) return;
+  if (curStep >= searchSteps.length - 1) { curStep = -1; renderToStep(-1); }  // restart if at end
+  isPlaying = true;
+  if (playTimer) clearInterval(playTimer);
+  playTimer = setInterval(() => { if (!stepForward()) pausePlayback(); }, PLAY_INTERVAL);
+  updatePlayerUI();
+}
+
+function togglePlay(){ if (isPlaying) pausePlayback(); else startPlayback(); }
+
+function resetPlayback(){
+  pausePlayback();
+  curStep = -1; renderToStep(-1);
+  hideResultOverlay();
+  resultDiv.textContent = ""; resultDiv.style.display = "none";
+  costFunctionInfoDiv.style.display = "none";
+  updatePlayerUI();
 }
 
 function getCellFromMouse(e) {
@@ -762,6 +804,8 @@ document.getElementById("loadInput").addEventListener("change",(e)=>{
   reader.readAsText(file);
 });
 
+const startMaze = {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,1,0,0,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,1,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[1, 8],"ends":[[1, 10], [11, 12], [9, 16]]};
+
 const predefinedMazes = {
   "Exempel 1": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,0,1,0,0,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,1,0,1,0,0,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,0,1,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,1,0,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,7],"ends":[[5,18]]},
   "Exempel 2": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,7],"ends":[[5,18]]},
@@ -780,50 +824,59 @@ document.getElementById("predefinedSelect").addEventListener("change", (e) => {
   }
 });
 
-function setControlsSearching(on){
-  ["startSearchBtn","algorithmSelect","predefinedSelect","saveBtn","loadBtn"].forEach(id=>{
-    let el=document.getElementById(id); if(el) el.disabled=on;
-  });
-  let b=document.getElementById("startSearchBtn");
-  if(b){ b.style.opacity = on ? "0.5" : ""; b.style.cursor = on ? "not-allowed" : ""; }
-  let ns=document.getElementById("nextStepBtn");
-  if(ns) ns.disabled = !(on && stepMode);
-}
-
 document.getElementById("startSearchBtn").addEventListener("click", ()=>{
-  if (search_in_progress) return;
-  let alg = document.getElementById("algorithmSelect").value;
-  currentAlgorithm = alg;
-  setControlsSearching(true);
-  hideResultOverlay();
-  if (alg==="A*") start_a_star();
-  else if (alg==="BFS") start_bfs();
-  else if (alg==="DFS") start_dfs();
-  else if (alg==="Greedy") start_greedy_best_first();
-  if (!search_in_progress) setControlsSearching(false);
+  pausePlayback();
+  if (!ensureComputed()) return;
+  curStep = -1;
+  startPlayback();
 });
 
-document.getElementById("stepModeChk").addEventListener("change",(e)=>{ stepMode = e.target.checked; let ns=document.getElementById("nextStepBtn"); if(ns) ns.disabled = !(stepMode && search_in_progress); });
+document.getElementById("playBtn").addEventListener("click", togglePlay);
 
 document.getElementById("nextStepBtn").addEventListener("click", ()=>{
-  if (!search_in_progress) return;
-  let alg = document.getElementById("algorithmSelect").value;
-  if (alg==="A*" && A_STAR_STATE) { let s=A_STAR_STATE; A_STAR_STATE=null; a_star_step(s.open_set, s.came_from, s.g_score, s.explored_cells); }
-  else if (alg==="Greedy" && GREEDY_STATE) { let s=GREEDY_STATE; GREEDY_STATE=null; greedy_best_first_step(s.open_set, s.explored, s.explored_cells); }
-  else if (alg==="BFS" && BFS_STATE) { let s=BFS_STATE; BFS_STATE=null; bfs_step(s.queue, s.explored, s.explored_cells); }
-  else if (alg==="DFS" && DFS_STATE) { let s=DFS_STATE; DFS_STATE=null; dfs_step(s.stack, s.explored, s.explored_cells); }
+  pausePlayback();
+  if (!ensureComputed()) return;
+  stepForward();
 });
 
-document.getElementById("resetBtn").addEventListener("click", ()=>{
-  search_in_progress = false; setControlsSearching(false);
+document.getElementById("prevStepBtn").addEventListener("click", ()=>{
+  pausePlayback();
+  stepBack();
+});
+
+document.getElementById("resetBtn").addEventListener("click", resetPlayback);
+
+document.getElementById("algorithmSelect").addEventListener("change", ()=>{
+  pausePlayback();
+  computedFor = null; searchSteps = []; curStep = -1;
+  currentAlgorithm = document.getElementById("algorithmSelect").value;
+  renderToStep(-1);
+  hideResultOverlay();
+  resultDiv.textContent = ""; resultDiv.style.display = "none";
+  costFunctionInfoDiv.style.display = "none";
+  updatePlayerUI();
+});
+
+document.getElementById("clearMazeBtn").addEventListener("click", ()=>{
   mazeChanged();
   ends = [];
   for (let r=0; r<GRID_HEIGHT; r++) for (let c=0; c<GRID_WIDTH; c++) grid[r][c] = 1;
   grid[start[0]][start[1]] = 0;
-  draw_grid(); costFunctionInfoDiv.style.display = "none";
+  draw_grid();
+  updatePlayerUI();
 });
 
-draw_grid();
+/* ---- Init: load a default maze so a search can be run right away ---- */
+(function initDefaultMaze(){
+  const def = startMaze;
+  grid = def.grid.map(row => row.slice());
+  start = [...def.start];
+  ends = def.ends.map(e => [...e]);
+  grid[start[0]][start[1]] = 0;
+  ends.forEach(e => { grid[e[0]][e[1]] = 0; });
+  draw_grid();
+  updatePlayerUI();
+})();
 </script>
 </body>
 </html>
