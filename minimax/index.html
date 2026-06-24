@@ -22,6 +22,7 @@
   --min-color:#f0923b; --min-fill:rgba(240,146,59,0.12); --min-glow:rgba(240,146,59,0.4);
   --accent:#5b8def; --green:#34c759; --orange:#f0923b; --red:#ef5b5b;
   --val:#ffd866; --leaf-col:#9ca8ba; --prune:#ef5b5b;
+  --dim:#8b8fa3;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
@@ -29,6 +30,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 /* back link */
 .back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--text-dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;}
 .back-link:hover{color:var(--text);border-color:var(--text-dim);}
+
+/* language link */
+.lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
+.lang-link:hover{color:var(--text);border-color:var(--dim);}
+.lang-link .flag{font-size:1.05em;line-height:1;}
 
 .hd{text-align:center;padding:20px 16px 12px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(52,199,89,0.04),transparent);position:relative;}
 .hd h1{font-size:1.4em;font-weight:700;letter-spacing:-0.02em;margin-bottom:3px;}
@@ -129,6 +135,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   .sb{max-height:none;overflow-y:visible;height:auto;}
   .hd{padding:10px 16px 8px;padding-left:16px;}
   .back-link{position:static;transform:none;margin-bottom:6px;}
+  .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}
 }
 </style>
 </head>
@@ -136,6 +143,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/minimax_ENG"><span class="flag">🇬🇧</span> English</a>
   <h1>Minimax med <span class="g">Alfa</span>-<span class="o">Beta</span>-beskärning</h1>
   <p>Stega igenom minimax-algoritmen och se hur alfa- och betavärdena uppdateras och grenar beskärs. Bygg egna träd, eller välj ett färdigt exempel.</p>
 </div>
