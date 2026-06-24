@@ -15,6 +15,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 .back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .back-link:hover{color:var(--text);border-color:var(--dim);}
+.lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
+.lang-link:hover{color:var(--text);border-color:var(--dim);}
+.lang-link .flag{font-size:1.05em;line-height:1;}
 .hd{width:100%;text-align:center;padding:12px 16px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
 .hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}.hd h1 span{color:var(--accent2);}
 .hd p{color:var(--dim);font-size:0.8em;max-width:620px;margin:0 auto;line-height:1.4;}
@@ -69,6 +72,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   #canvasContainer{display:block;max-width:100%;}
   #mazeCanvas{width:100%;height:auto;display:block;}
   .back-link{position:static;transform:none;margin-bottom:4px;}
+  .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}
   .hd{padding:10px 16px 8px;}
   #controls,.controls-row{gap:6px;}
   #controls button,.controls-row button,#controls select,.controls-row select{padding:9px 14px;font-size:13px;}
@@ -161,6 +165,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/sokalgoritmer-labyrinter_ENG"><span class="flag">🇬🇧</span> English</a>
   <h1>Sökalgoritmer i <span>labyrint</span></h1>
   <p>Utforska BFS, DFS, Girig bäst-först och A* – se hur de hittar vägen genom en labyrint steg för steg.</p>
 </div>
@@ -238,7 +243,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
     <h2>Sökalgoritmer i <span>labyrint</span></h2>
-    <p class="sub">Hur hittar en dator vägen genom en labyrint? Se fyra klassiska sökalgoritmer arbeta steg för steg.</p>
+    <p class="sub">Undersök hur en AI-agent kan navigera genom en labyrint. Se hur fyra klassiska sökalgoritmer arbetar steg för steg.</p>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div><strong>Välj en labyrint</strong> – ladda en färdig eller bygg en egen.</div></div>
       <div class="step"><div class="step-num">2</div><div><strong>Välj algoritm och sök</strong> – BFS, DFS, Girig bäst-först eller A*, och tryck Starta sökning.</div></div>
@@ -320,9 +325,7 @@ function buildResultMarkup(o){
       +'<div class="ro-head">'+badge+' ingen v\u00e4g funnen</div>'
       +'<div class="ro-sub">Algoritmen kunde inte n\u00e5 m\u00e5let i den h\u00e4r labyrinten.</div>'
       +'<button class="ro-btn" onclick="dismissResultOverlay()">Visa labyrint</button>'
-      +'</div>'
-      +'<button class="ro-pin" onclick="reopenResultOverlay()">'+badge
-        +'<span class="ro-pin-metric">ingen v\u00e4g</span>'+pinChevron()+'</button>';
+      +'</div>';
   }
   let metrics = '<div class="ro-metric"><span class="ro-num">'+o.steps+'</span><span class="ro-lab">steg till m\u00e5l</span></div>'
     + '<div class="ro-metric"><span class="ro-num">'+o.explored+'</span><span class="ro-lab">utforskade</span></div>';
@@ -334,11 +337,7 @@ function buildResultMarkup(o){
     +'<div class="ro-head">'+badge+' hittade m\u00e5let</div>'
     +'<div class="ro-metrics">'+metrics+'</div>'
     +'<button class="ro-btn" onclick="dismissResultOverlay()">Visa v\u00e4g</button>'
-    +'</div>'
-    +'<button class="ro-pin" onclick="reopenResultOverlay()">'+badge
-      +'<span class="ro-pin-metric"><b>'+o.steps+'</b> steg</span>'
-      +'<span class="ro-pin-metric"><b>'+o.explored+'</b> utforskade</span>'
-      +pinChevron()+'</button>';
+    +'</div>';
 }
 
 function renderResultOverlay(o){
@@ -348,13 +347,9 @@ function renderResultOverlay(o){
   void el.offsetWidth;            // reflow so the pop transition plays
   el.classList.add("show");
 }
-function dismissResultOverlay(){   // "Visa v\u00e4g" \u2192 shrink to corner chip
+function dismissResultOverlay(){   // "Visa v\u00e4g" \u2192 hide the popup completely
   let el = document.getElementById("resultOverlay"); if(!el) return;
-  el.classList.remove("show"); el.classList.add("pinned");
-}
-function reopenResultOverlay(){    // tap chip \u2192 full card again
-  let el = document.getElementById("resultOverlay"); if(!el) return;
-  el.classList.remove("pinned"); el.classList.add("show");
+  el.className = "result-overlay";
 }
 
 function hasNonOneSquares() {
@@ -805,7 +800,7 @@ document.getElementById("loadInput").addEventListener("change",(e)=>{
   reader.readAsText(file);
 });
 
-const startMaze = {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,1,0,0,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,1,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[1, 8],"ends":[[1, 10], [11, 12], [9, 16]]};
+const startMaze = {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,1,0,0,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,1,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[1,8],"ends":[[1,20],[11,12],[9,16]]};
 
 const predefinedMazes = {
   "Exempel 1": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,0,1,0,0,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,1,0,1,0,0,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,0,1,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,1,0,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,7],"ends":[[5,18]]},
