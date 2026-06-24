@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Search Algorithms in Mazes – ai-aktiviteter.se</title>
+<title>Search algorithms in mazes – ai-aktiviteter.se</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -17,6 +17,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .back-link:hover{color:var(--text);border-color:var(--dim);}
 .lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .lang-link:hover{color:var(--text);border-color:var(--dim);}
+.lang-link .flag{font-size:1.05em;line-height:1;}
 .hd{width:100%;text-align:center;padding:12px 16px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
 .hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}.hd h1 span{color:var(--accent2);}
 .hd p{color:var(--dim);font-size:0.8em;max-width:620px;margin:0 auto;line-height:1.4;}
@@ -71,6 +72,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   #canvasContainer{display:block;max-width:100%;}
   #mazeCanvas{width:100%;height:auto;display:block;}
   .back-link{position:static;transform:none;margin-bottom:4px;}
+  .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}
   .hd{padding:10px 16px 8px;}
   #controls,.controls-row{gap:6px;}
   #controls button,.controls-row button,#controls select,.controls-row select{padding:9px 14px;font-size:13px;}
@@ -88,6 +90,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
 .overlay-btn{display:block;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}.overlay-btn:hover{background:#3d6de6;}
 
+/* ── Visuell polish ── */
 .hd h1{text-shadow:0 0 34px rgba(102,152,255,.22);}
 #canvasContainer{border:1px solid #1c2540;border-radius:12px;box-shadow:0 12px 44px rgba(0,0,0,.55),0 0 0 1px rgba(77,128,255,.06);}
 #info,#hoverInfo,#legend,#costFunctionInfo{box-shadow:0 6px 22px rgba(0,0,0,.30);}
@@ -96,6 +99,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 #startSearchBtn{background:linear-gradient(180deg,#5b8bff,#3f6fe6);box-shadow:0 2px 12px rgba(77,128,255,.38);}
 #startSearchBtn:hover{background:linear-gradient(180deg,#6b97ff,#4a78ec);box-shadow:0 4px 18px rgba(77,128,255,.55);}
 .heuristic-label{color:#10182b;font-weight:500;text-shadow:0 0 2px rgba(255,255,255,.4);letter-spacing:-0.02em;}
+/* ---- Result overlay (pops over the maze) ---- */
 .result-overlay{position:absolute;inset:0;display:none;pointer-events:none;z-index:30;}
 .result-overlay.show,.result-overlay.pinned{display:block;}
 .ro-card{position:absolute;top:12px;left:50%;transform:translateX(-50%) translateY(-10px) scale(.95);
@@ -131,6 +135,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .ro-pin-metric b{font-family:'JetBrains Mono',monospace;color:var(--accent2);font-size:13px;font-weight:700;margin-right:2px;}
 .ro-pin-exp{width:13px;height:13px;color:var(--dim);flex-shrink:0;}
 
+/* ---- In-canvas A* tooltip (f = g + h) ---- */
 #mazeTooltip{position:absolute;pointer-events:none;z-index:25;background:rgba(15,20,37,.96);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
   border:1px solid rgba(77,128,255,.4);border-radius:8px;padding:7px 11px;font-family:'JetBrains Mono',monospace;font-size:12px;
   color:var(--text);white-space:nowrap;box-shadow:0 10px 28px rgba(0,0,0,.55);opacity:0;transform:translateY(-4px);transition:opacity .14s ease,transform .14s ease;}
@@ -140,8 +145,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 #mazeTooltip .tt-g{color:#3ddc84;font-weight:700;}
 #mazeTooltip .tt-h{color:#f0a94e;font-weight:700;}
 
+/* old below-canvas hover/cost hints now live in-canvas */
 #hoverInfo,#costFunctionInfo{display:none!important;}
 
+/* ---- Playback controls ---- */
 .player{display:inline-flex;align-items:center;gap:6px;margin-left:4px;}
 #controls .icon-btn{width:38px;height:38px;padding:0;display:inline-flex;align-items:center;justify-content:center;
   background:var(--surface2);color:var(--subtle);border:1px solid var(--border);border-radius:8px;cursor:pointer;
@@ -157,17 +164,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <body>
 
 <div class="hd">
-  <a class="back-link" href="/">← AI Activities</a>
-  <h1>Search Algorithms in a <span>Maze</span></h1>
-  <p>Explore BFS, DFS, Greedy Best-First, and A* – see how they find their way through a maze step by step.</p>
-  <a class="lang-link" href="https://www.ai-aktiviteter.se/sokalgoritmer-labyrinter" title="Swedish version">
-    <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" style="border-radius:3px;display:block;flex-shrink:0;">
-      <rect width="18" height="18" fill="#006AA7"/>
-      <rect y="7" width="18" height="4" fill="#FECC02"/>
-      <rect x="5" width="4" height="18" fill="#FECC02"/>
-    </svg>
-    SWE
-  </a>
+  <a class="back-link" href="/">← AI activities</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/sokalgoritmer-labyrinter"><span class="flag">🇸🇪</span> Svenska</a>
+  <h1>Search algorithms in a <span>maze</span></h1>
+  <p>Explore BFS, DFS, Greedy best-first and A* – see how they find the way through a maze step by step.</p>
 </div>
 
 <div class="page-wrap">
@@ -184,9 +184,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <option value="BFS">BFS</option>
     <option value="DFS">DFS</option>
     <option value="A*">A*</option>
-    <option value="Greedy">Greedy Best-First</option>
+    <option value="Greedy">Greedy best-first</option>
   </select>
-  <button id="startSearchBtn">Start Search</button>
+  <button id="startSearchBtn">Start search</button>
   <div class="player">
     <button id="prevStepBtn" class="icon-btn" title="Previous step" aria-label="Previous step">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 6h2v12H7zM20 6 11 12l9 6z"/></svg>
@@ -205,11 +205,11 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <label for="predefinedSelect">Maze:</label>
   <select id="predefinedSelect">
     <option value="">-- Select --</option>
-    <option value="Exempel 1">Example 1</option>
-    <option value="Exempel 2">Example 2</option>
-    <option value="Exempel 3">Example 3</option>
-    <option value="Exempel 4">Example 4</option>
-    <option value="Exempel 5">Example 5 (advanced)</option>
+    <option value="Example 1">Example 1</option>
+    <option value="Example 2">Example 2</option>
+    <option value="Example 3">Example 3</option>
+    <option value="Example 4">Example 4</option>
+    <option value="Example 5">Example 5 (advanced)</option>
   </select>
   <button id="saveBtn" class="btn-ghost">Save</button>
   <input type="file" id="loadInput" style="display:none;" />
@@ -224,29 +224,29 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div id="legend">
   <h3>Legend</h3>
   <ul>
-    <li><span class="color-box" style="background:#34c759;"></span><span><strong>Start</strong> – the starting position of the search. Click and drag to move it.</span></li>
+    <li><span class="color-box" style="background:#34c759;"></span><span><strong>Start</strong> – the search’s starting position. Click and drag to move it.</span></li>
     <li><span class="color-box" style="background:#ef5b5b;"></span><span><strong>Goal</strong> – created by right-clicking once.</span></li>
-    <li><span class="color-box" style="background:#d7def0;"></span><span><strong>Normal path</strong> (cost 1) – created by left-clicking on a wall.</span></li>
-    <li><span class="color-box" style="background:#10141f;border-color:#2a3550;"></span><span><strong>Wall</strong> – created by left-clicking on an open cell.</span></li>
+    <li><span class="color-box" style="background:#d7def0;"></span><span><strong>Normal path</strong> (cost 1) – created by left-clicking a wall.</span></li>
+    <li><span class="color-box" style="background:#10141f;border-color:#2a3550;"></span><span><strong>Wall</strong> – created by left-clicking an open cell.</span></li>
     <li><span class="color-box" style="background:#d8a24e;"></span><span><strong>Cost 3</strong> – created by right-clicking twice.</span></li>
     <li><span class="color-box" style="background:#3f6fd0;"></span><span><strong>Cost 5</strong> – created by right-clicking three times.</span></li>
     <li><span class="color-box" style="background:#6f9fd6;"></span><span><strong>Explored</strong> – cells the algorithm has already examined.</span></li>
-    <li><span class="color-box" style="background:#f0a94e;"></span><span><strong>Frontier</strong> – cells queued to be explored next.</span></li>
-    <li><span class="color-box" style="background:#3ddc84;"></span><span><strong>Found path</strong> – the completed path from start to goal.</span></li>
+    <li><span class="color-box" style="background:#f0a94e;"></span><span><strong>Queue</strong> – cells waiting to be explored.</span></li>
+    <li><span class="color-box" style="background:#3ddc84;"></span><span><strong>Found path</strong> – the final path from start to goal.</span></li>
   </ul>
-  <p><em>Left-click</em> toggles between wall and open cell.<br/><em>Right-click</em> cycles: goal → cost 3 → cost 5 → wall.</p>
-  <p style="margin-top:8px;"><em>Tip:</em> During A* search, hover over a cell to see its f(n) value (cost function).</p>
+  <p><em>Left-click</em> toggles between wall and open cell.<br/><em>Right-click</em> cycles goal → cost 3 → cost 5 → wall.</p>
+  <p style="margin-top:8px;"><em>Tip:</em> During an A* search you can hover over a cell to see the f(n) value (the cost function).</p>
 </div>
 
 </div>
 
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
-    <h2>Search Algorithms in a <span>Maze</span></h2>
-    <p class="sub">Explore how an AI agent finds its way through a maze. Watch 4 classic search algorithms work step by step.</p>
+    <h2>Search algorithms in a <span>maze</span></h2>
+    <p class="sub">Explore how an AI agent can navigate through a maze. See how four classic search algorithms work step by step.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Choose a maze</strong> – load a preset or build your own.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Choose an algorithm and search</strong> – BFS, DFS, Greedy Best-First, or A*, then press Start Search.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Choose a maze</strong> – load a ready-made one or build your own.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Choose an algorithm and search</strong> – BFS, DFS, Greedy best-first or A*, then press Start search.</div></div>
       <div class="step"><div class="step-num">3</div><div><strong>Compare</strong> – run the same maze with different algorithms. Which finds the shortest path, and which explores the fewest cells?</div></div>
     </div>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Start the simulation →</button>
@@ -296,15 +296,16 @@ let currentAlgorithm = null;
 let search_cost = 0;
 let runHistory = {};
 
-let searchSteps = [];
-let curStep = -1;
-let computedFor = null;
+// playback engine state
+let searchSteps = [];   // [{ops:[...], result|null}]
+let curStep = -1;       // -1 = nothing revealed yet
+let computedFor = null; // which algorithm searchSteps was built for
 let playTimer = null;
 let isPlaying = false;
 const PLAY_INTERVAL = 130;
 const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>';
 const ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
-const ALG_LABEL = {"A*":"A*","BFS":"BFS","DFS":"DFS","Greedy":"Greedy Best-First"};
+const ALG_LABEL = {"A*":"A*","BFS":"BFS","DFS":"DFS","Greedy":"Greedy best-first"};
 
 function hideResultOverlay(){ let o=document.getElementById("resultOverlay"); if(o){ o.className="result-overlay"; o.innerHTML=""; } }
 function mazeChanged(){
@@ -324,9 +325,7 @@ function buildResultMarkup(o){
       +'<div class="ro-head">'+badge+' no path found</div>'
       +'<div class="ro-sub">The algorithm could not reach the goal in this maze.</div>'
       +'<button class="ro-btn" onclick="dismissResultOverlay()">Show maze</button>'
-      +'</div>'
-      +'<button class="ro-pin" onclick="reopenResultOverlay()">'+badge
-        +'<span class="ro-pin-metric">no path</span>'+pinChevron()+'</button>';
+      +'</div>';
   }
   let metrics = '<div class="ro-metric"><span class="ro-num">'+o.steps+'</span><span class="ro-lab">steps to goal</span></div>'
     + '<div class="ro-metric"><span class="ro-num">'+o.explored+'</span><span class="ro-lab">explored</span></div>';
@@ -338,27 +337,19 @@ function buildResultMarkup(o){
     +'<div class="ro-head">'+badge+' found the goal</div>'
     +'<div class="ro-metrics">'+metrics+'</div>'
     +'<button class="ro-btn" onclick="dismissResultOverlay()">Show path</button>'
-    +'</div>'
-    +'<button class="ro-pin" onclick="reopenResultOverlay()">'+badge
-      +'<span class="ro-pin-metric"><b>'+o.steps+'</b> steps</span>'
-      +'<span class="ro-pin-metric"><b>'+o.explored+'</b> explored</span>'
-      +pinChevron()+'</button>';
+    +'</div>';
 }
 
 function renderResultOverlay(o){
   let el = document.getElementById("resultOverlay"); if(!el) return;
   el.innerHTML = buildResultMarkup(o);
   el.className = "result-overlay"+(o.found?"":" nopath");
-  void el.offsetWidth;
+  void el.offsetWidth;            // reflow so the pop transition plays
   el.classList.add("show");
 }
-function dismissResultOverlay(){
+function dismissResultOverlay(){   // "Show path" hides the popup completely
   let el = document.getElementById("resultOverlay"); if(!el) return;
-  el.classList.remove("show"); el.classList.add("pinned");
-}
-function reopenResultOverlay(){
-  let el = document.getElementById("resultOverlay"); if(!el) return;
-  el.classList.remove("pinned"); el.classList.add("show");
+  el.className = "result-overlay";
 }
 
 function hasNonOneSquares() {
@@ -453,6 +444,7 @@ function clear_heuristic_texts() {
   f_values.clear();
 }
 
+/* Draw a small centred label directly on the canvas (scales with canvas). */
 function drawLabelOnCanvas(r, c, txt) {
   const x = (c + 0.5) * CELL_SIZE;
   const y = (r + 0.5) * CELL_SIZE;
@@ -510,6 +502,8 @@ let directions = [[-1,0],[0,1],[1,0],[0,-1]];
 function isGoal(r, c){ return ends.some(e => e[0]===r && e[1]===c); }
 function minH(r, c){ return ends.map(e => heuristic([r,c], e)).reduce((a,b)=>Math.min(a,b), Infinity); }
 
+/* Precompute the whole search as a list of steps (one node-expansion each).
+   ops: {t:'ex',r,c} | {t:'fr',r,c,lbl?,fv?} | {t:'path',cells}            */
 function precomputeSearch(alg){
   let steps = [];
   let cur = null;
@@ -600,8 +594,9 @@ function precomputeSearch(alg){
   return steps;
 }
 
+/* ---- Playback engine ---- */
 function renderToStep(K){
-  draw_grid();
+  draw_grid();                     // clears heuristicTexts & f_values, paints base maze
   for (let i = 0; i <= K && i < searchSteps.length; i++){
     for (let op of searchSteps[i].ops){
       if (op.t === 'ex'){ mark_explored(op.r, op.c); }
@@ -625,7 +620,7 @@ function updatePlayerUI(){
   if (next) next.disabled = (n === 0) || curStep >= n - 1;
   if (reset) reset.disabled = (curStep < 0) && !isPlaying;
   if (play) play.innerHTML = isPlaying ? ICON_PAUSE : ICON_PLAY;
-  if (play) play.title = isPlaying ? "Pause" : "Play";
+  if (play) play.title = isPlaying ? "Pausa" : "Spela";
 }
 
 function afterStep(){
@@ -643,7 +638,7 @@ function afterStep(){
 function ensureComputed(){
   let alg = document.getElementById("algorithmSelect").value;
   if (computedFor === alg && searchSteps.length) return true;
-  if (ends.length === 0){ setFinalResultText("No goals have been set"); return false; }
+  if (ends.length === 0){ setFinalResultText("No goals set"); return false; }
   currentAlgorithm = alg;
   searchSteps = precomputeSearch(alg);
   computedFor = alg; curStep = -1;
@@ -657,7 +652,7 @@ function pausePlayback(){ isPlaying = false; if (playTimer){ clearInterval(playT
 
 function startPlayback(){
   if (!ensureComputed()) return;
-  if (curStep >= searchSteps.length - 1) { curStep = -1; renderToStep(-1); }
+  if (curStep >= searchSteps.length - 1) { curStep = -1; renderToStep(-1); }  // restart if at end
   isPlaying = true;
   if (playTimer) clearInterval(playTimer);
   playTimer = setInterval(() => { if (!stepForward()) pausePlayback(); }, PLAY_INTERVAL);
@@ -775,6 +770,7 @@ canvas.addEventListener("mouseleave", hideMazeTooltip);
 
 function createHeuristicLabel(r, c, txt) {
   heuristicTexts.set(`${r},${c}`, txt);
+  // The label is drawn by color_frontier_cell / mark_explored right after this call
 }
 
 document.getElementById("saveBtn").addEventListener("click", ()=>{
@@ -798,20 +794,20 @@ document.getElementById("loadInput").addEventListener("change",(e)=>{
       grid = data.grid; start = data.start; ends = data.ends.map(e => [...e]);
       grid[start[0]][start[1]] = 0; ends.forEach(e => { grid[e[0]][e[1]] = 0; });
       mazeChanged(); clear_previous_search(); draw_grid();
-      setFinalResultText("The maze has been loaded.", currentAlgorithm === "A*");
-    } catch (error) { alert("Error loading file: " + error.message); }
+      setFinalResultText("Maze loaded.", currentAlgorithm === "A*");
+    } catch (error) { alert("Error loading: " + error.message); }
   };
   reader.readAsText(file);
 });
 
-const startMaze = {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,1,0,0,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,1,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[1, 8],"ends":[[1, 10], [11, 12], [9, 16]]};
+const startMaze = {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,1,0,0,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,1,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[1,8],"ends":[[1,20],[11,12],[9,16]]};
 
 const predefinedMazes = {
-  "Exempel 1": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,0,1,0,0,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,1,0,1,0,0,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,0,1,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,1,0,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,7],"ends":[[5,18]]},
-  "Exempel 2": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,7],"ends":[[5,18]]},
-  "Exempel 3": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[8,13],"ends":[[2,8],[8,19]]},
-  "Exempel 4": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,11],"ends":[[5,11]]},
-  "Exempel 5": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,1,2,2,2,2,0,1,1],[1,0,1,0,1,1,1,0,1,0,1,1,1,3,1,3,1,1,1,2,1,0,1,2,1,2,1,0,1,1],[1,0,1,0,0,0,0,0,0,0,1,0,1,3,1,3,1,0,1,2,1,0,2,2,1,2,1,0,1,1],[1,0,1,0,1,1,1,1,1,1,1,0,1,3,1,3,1,0,1,2,1,1,1,1,1,2,1,0,1,1],[1,0,1,0,0,0,0,0,0,0,0,0,1,3,3,3,1,0,1,0,0,0,0,0,1,0,1,0,1,1],[1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,2,1,2,1,0,1,1],[1,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,1,0,1,1],[1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1],[1,0,0,0,1,3,1,0,1,3,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,1,1],[1,0,1,0,1,2,1,2,1,3,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1],[1,0,0,0,1,2,2,2,1,3,0,0,1,0,1,0,0,0,1,0,1,2,1,2,2,2,2,0,1,1],[1,0,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,2,1,1,1,1,1,0,1,1],[1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,2,2,2,2,2,2,2,0,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[1,1],"ends":[[9,7],[9,17],[1,21]]},
+  "Example 1": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,0,1,0,0,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,1,0,1,0,0,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,0,1,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,1,0,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,7],"ends":[[5,18]]},
+  "Example 2": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,7],"ends":[[5,18]]},
+  "Example 3": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[8,13],"ends":[[2,8],[8,19]]},
+  "Example 4": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,11],"ends":[[5,11]]},
+  "Example 5": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,1,2,2,2,2,0,1,1],[1,0,1,0,1,1,1,0,1,0,1,1,1,3,1,3,1,1,1,2,1,0,1,2,1,2,1,0,1,1],[1,0,1,0,0,0,0,0,0,0,1,0,1,3,1,3,1,0,1,2,1,0,2,2,1,2,1,0,1,1],[1,0,1,0,1,1,1,1,1,1,1,0,1,3,1,3,1,0,1,2,1,1,1,1,1,2,1,0,1,1],[1,0,1,0,0,0,0,0,0,0,0,0,1,3,3,3,1,0,1,0,0,0,0,0,1,0,1,0,1,1],[1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,2,1,2,1,0,1,1],[1,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,1,0,1,1],[1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1],[1,0,0,0,1,3,1,0,1,3,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,1,1],[1,0,1,0,1,2,1,2,1,3,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1],[1,0,0,0,1,2,2,2,1,3,0,0,1,0,1,0,0,0,1,0,1,2,1,2,2,2,2,0,1,1],[1,0,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,2,1,1,1,1,1,0,1,1],[1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,2,2,2,2,2,2,2,0,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[1,1],"ends":[[9,7],[9,17],[1,21]]},
 };
 
 document.getElementById("predefinedSelect").addEventListener("change", (e) => {
@@ -820,7 +816,7 @@ document.getElementById("predefinedSelect").addEventListener("change", (e) => {
     const maze = predefinedMazes[sel];
     grid = maze.grid.map(row => row.slice()); start = [...maze.start]; ends = maze.ends.map(e => [...e]);
     mazeChanged(); clear_previous_search(); draw_grid();
-    setFinalResultText(`Preset maze "${sel}" has been loaded.`, currentAlgorithm === "A*");
+    setFinalResultText(`Predefined maze "${sel}" loaded.`, currentAlgorithm === "A*");
     e.target.value = "";
   }
 });
@@ -867,6 +863,7 @@ document.getElementById("clearMazeBtn").addEventListener("click", ()=>{
   updatePlayerUI();
 });
 
+/* ---- Init: load a default maze so a search can be run right away ---- */
 (function initDefaultMaze(){
   const def = startMaze;
   grid = def.grid.map(row => row.slice());
