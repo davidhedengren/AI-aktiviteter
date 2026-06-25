@@ -1,1 +1,422 @@
-UNDER CONSTRUCTION
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gomoku – Partial Observability</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--accent:#4d80ff;--accent2:#6698ff;--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--x-color:#e5484d;--o-color:#13a594;--grid:#aeb8d6;--cellbg:#e9edf8;--cellbg-hover:#d6def2;--hiddenbg:#0e1430;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
+.back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
+.back-link:hover{color:var(--text);border-color:var(--dim);}
+.lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
+.lang-link:hover{color:var(--text);border-color:var(--dim);}
+.lang-link .flag{font-size:1.05em;line-height:1;}
+.hd{width:100%;text-align:center;padding:8px 16px 7px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
+.hd h1{font-size:1.08em;font-weight:700;letter-spacing:-0.02em;text-shadow:0 0 30px rgba(102,152,255,.2);}.hd h1 span{color:var(--accent2);}
+.hd p{color:var(--dim);font-size:0.8em;max-width:600px;margin:0 auto;line-height:1.4;}
+.main{display:flex;gap:18px;padding:14px;width:100%;position:relative;z-index:1;flex-wrap:wrap;justify-content:center;align-items:flex-start;}
+.board-area{display:flex;flex-direction:column;gap:8px;align-items:center;position:relative;}
+.turn-bar{display:flex;align-items:center;justify-content:center;gap:10px;font-size:1.28em;font-weight:700;min-height:42px;letter-spacing:.01em;}
+.turn-dot{width:15px;height:15px;border-radius:50%;transition:0.3s;}
+
+.board{display:grid;border:1px solid var(--grid);border-radius:10px;overflow:hidden;background:var(--grid);gap:1px;box-shadow:0 12px 48px rgba(0,0,0,0.6);}
+.cell{display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;cursor:pointer;transition:background 0.12s;position:relative;background:var(--cellbg);color:#0d1422;}
+.cell:hover:not(.placed):not(.won):not(.revealed):not(.hidden-cell){background:var(--cellbg-hover);}
+
+.cell.hidden-cell{
+  background-color:var(--hiddenbg);
+  background-image:repeating-linear-gradient(
+    45deg,
+    rgba(77,128,255,0.07) 0px,
+    rgba(77,128,255,0.07) 2px,
+    transparent 2px,
+    transparent 8px
+  );
+}
+.cell.hidden-cell:hover{
+  background-color:#161d3e;
+  background-image:repeating-linear-gradient(
+    45deg,
+    rgba(77,128,255,0.12) 0px,
+    rgba(77,128,255,0.12) 2px,
+    transparent 2px,
+    transparent 8px
+  );
+}
+.cell.hidden-cell::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(77,128,255,0.12),transparent 70%);pointer-events:none;}
+.cell.hidden-cell .fog{color:rgba(150,175,255,0.42);font-weight:600;user-select:none;}
+
+.cell.x-mark::before,.cell.x-mark::after{content:'';position:absolute;left:50%;top:50%;width:0.82em;height:0.16em;background:var(--x-color);border-radius:0.08em;}
+.cell.x-mark::before{transform:translate(-50%,-50%) rotate(45deg);}
+.cell.x-mark::after{transform:translate(-50%,-50%) rotate(-45deg);}
+.cell.o-mark::before{content:'';position:absolute;left:50%;top:50%;width:0.74em;height:0.74em;border:0.16em solid var(--o-color);border-radius:50%;transform:translate(-50%,-50%);}
+.cell.placed{cursor:default;}
+.cell.won{animation:winPulse 0.6s ease infinite alternate;z-index:1;}
+.cell.blind-play{animation:blindFlash 0.5s ease;}
+.cell.last-move{box-shadow:inset 0 0 0 2px rgba(230,170,40,0.9);}
+.cell.revealed{background:var(--cellbg);border:1px dashed rgba(77,128,255,0.45);}
+.cell.revealed.x-mark{background:rgba(229,72,77,0.16);}
+.cell.revealed.o-mark{background:rgba(19,165,148,0.16);}
+@keyframes winPulse{from{background:rgba(255,200,50,0.5);}to{background:rgba(255,200,50,0.9);}}
+@keyframes blindFlash{0%{background:rgba(77,128,255,0.5);}100%{background:var(--hiddenbg);}}
+
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;width:260px;display:flex;flex-direction:column;gap:12px;}
+.sec-t{font-size:0.68em;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--dim);margin-bottom:4px;}
+.setting-row{display:flex;align-items:center;gap:8px;}
+.setting-val{font-family:'JetBrains Mono',monospace;font-size:0.82em;color:var(--accent);min-width:30px;text-align:right;}
+input[type=range]{-webkit-appearance:none;flex:1;height:4px;border-radius:2px;background:var(--surface2);outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer;}
+.btn{font-family:'DM Sans',sans-serif;padding:8px 14px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);color:var(--text);font-size:0.82em;font-weight:600;cursor:pointer;transition:0.2s;text-align:center;width:100%;}
+.btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.08);}
+.btn.pri{background:linear-gradient(180deg,#5b8bff,#3f6fe6);border:none;color:#fff;padding:13px;font-size:0.92em;box-shadow:0 2px 14px rgba(77,128,255,0.4);}.btn.pri:hover{background:linear-gradient(180deg,#6b97ff,#4a78ec);box-shadow:0 4px 20px rgba(77,128,255,0.55);}
+.seg{display:flex;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:3px;gap:3px;}
+.seg-btn{flex:1;padding:7px 6px;font-size:0.78em;font-weight:600;border:none;border-radius:6px;background:transparent;color:var(--dim);cursor:pointer;font-family:'DM Sans',sans-serif;transition:0.15s;}
+.seg-btn.active{background:var(--accent);color:#fff;}
+.seg-btn:not(.active):hover{color:var(--text);}
+.sel{width:100%;padding:8px 10px;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:7px;font-family:'DM Sans',sans-serif;font-size:0.82em;font-weight:600;outline:none;cursor:pointer;}
+.sel:focus{border-color:var(--accent);}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.stat-box{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:7px 9px;}
+.stat-label{font-size:0.62em;color:var(--dim);text-transform:uppercase;letter-spacing:0.04em;}
+.stat-val{font-family:'JetBrains Mono',monospace;font-size:0.95em;font-weight:700;}
+
+.overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
+.overlay.show{display:flex;}
+.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;max-width:480px;width:92%;text-align:center;}
+.overlay-card h2{font-size:1.1em;font-weight:700;margin-bottom:6px;}.overlay-card h2 span{color:var(--accent2);}
+.overlay-card .sub{font-size:0.84em;color:var(--dim);line-height:1.55;margin-bottom:16px;}
+.overlay-card .steps{display:flex;flex-direction:column;gap:10px;margin:14px 0;text-align:left;}
+.overlay-card .step{display:flex;gap:10px;align-items:flex-start;font-size:0.82em;color:var(--dim);line-height:1.5;}
+.overlay-card .step strong{color:var(--text);}
+.step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
+.overlay-btn{display:block;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}.overlay-btn:hover{background:#3d6de6;}
+
+.hidden-preview{
+  display:inline-block;width:22px;height:22px;vertical-align:middle;
+  border-radius:3px;margin:0 3px;
+  background-color:var(--hiddenbg);
+  background-image:repeating-linear-gradient(
+    45deg,
+    rgba(77,128,255,0.12) 0px,
+    rgba(77,128,255,0.12) 2px,
+    transparent 2px,
+    transparent 8px
+  );
+  border:1px solid rgba(77,128,255,0.2);
+}
+
+.win-banner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(9,11,20,0.96);border:2px solid var(--gold);border-radius:12px;padding:20px 28px;text-align:center;z-index:10;display:none;box-shadow:0 8px 40px rgba(0,0,0,0.7);min-width:260px;max-width:320px;}
+.win-banner.show{display:block;animation:popIn 0.3s ease;}
+@keyframes popIn{from{opacity:0;transform:translate(-50%,-50%) scale(0.9);}to{opacity:1;transform:translate(-50%,-50%) scale(1);}}
+.wb-title{font-size:1.3em;font-weight:700;margin-bottom:6px;}
+.wb-stats{display:flex;justify-content:center;gap:14px;margin:10px 0;font-size:0.78em;}
+.wb-stat{text-align:center;}.wb-stat .wv{font-family:'JetBrains Mono',monospace;font-size:1.15em;font-weight:700;}.wb-stat .wl{color:var(--dim);font-size:0.9em;}
+.wb-note{font-size:0.74em;color:var(--dim);font-style:italic;margin:8px 0;}
+.wb-btns{display:flex;flex-direction:column;gap:6px;}
+
+@media(max-width:700px){
+  .main{flex-direction:column;align-items:center;gap:12px;}
+  .panel{width:100%;max-width:440px;}
+  .back-link{position:static;transform:none;margin:0 0 6px 0;}
+  .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}
+  .hd{padding:10px 16px 8px;}
+  .hd h1{font-size:1.02em;}
+}
+</style>
+</head>
+<body>
+<div class="hd">
+  <a class="back-link" href="/">← AI Activities</a>
+  <h1>Gomoku in a <span>partially observable</span> environment</h1>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/luffarschack"><span class="flag">🇸🇪</span> Svenska</a>
+</div>
+<div class="main">
+  <div class="board-area">
+    <div class="turn-bar"><div class="turn-dot" id="turnDot"></div><span id="turnText">X goes first</span></div>
+    <div class="board" id="board"></div>
+    <div class="win-banner" id="winBanner"></div>
+  </div>
+  <div class="panel">
+    <div><div class="sec-t">Opponent</div>
+      <div class="seg" id="modeSeg">
+        <button class="seg-btn active" id="modeHuman" onclick="setMode(false)">Two players</button>
+        <button class="seg-btn" id="modeAI" onclick="setMode(true)">vs AI</button>
+      </div>
+    </div>
+    <div><div class="sec-t">Board size</div>
+      <select id="sizeSelect" class="sel" onchange="startGame()">
+        <option value="10">Small · 10 × 10</option>
+        <option value="15" selected>Medium · 15 × 15</option>
+        <option value="20">Large · 20 × 20</option>
+      </select>
+    </div>
+    <div><div class="sec-t">Hidden cell ratio</div>
+      <div class="setting-row"><input type="range" id="hiddenSlider" min="0" max="50" value="20" step="5" oninput="updateHidden()" onchange="startGame()"><span class="setting-val" id="hiddenVal">20 %</span></div>
+    </div>
+    <button class="btn pri" onclick="startGame()">New game</button>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px;font-size:0.74em;color:var(--dim);line-height:1.55;">
+      <strong style="color:var(--accent2);">Patterned cells</strong> are hidden – you can place there, but you won't see whether your opponent has already taken the cell.
+      When playing <strong style="color:var(--accent2);">vs AI</strong>, the computer sees just as little as you – it makes decisions under the same uncertainty.<br><br>
+      <strong style="color:var(--gold);">Five in a row</strong> wins. All hidden cells are revealed when the game ends.
+    </div>
+  </div>
+</div>
+
+<div class="overlay show" id="introOverlay">
+  <div class="overlay-card">
+    <h2>Gomoku in a <span>partially observable</span> environment</h2>
+    <p class="sub">In regular Gomoku, both players can see the entire board. But what happens if parts of the board are <strong>hidden</strong>?</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div><strong>Hidden cells</strong> – Cells with a striped pattern <span class="hidden-preview"></span> are hidden. You can place your marker there, but you cannot see what is underneath.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Blind moves</strong> – When you place on a hidden cell, you don't know if the move succeeded. If your opponent already occupies that cell, your move is lost – you forfeit your turn without placing anything.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Five in a row wins</strong> – Same rules as usual. The first player to place 5 in a row wins.</div></div>
+    </div>
+    <p class="sub">This is called <strong>partial observability</strong> – the agent only sees part of the environment's state. How does it affect your ability to make good decisions?</p>
+    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show');startGame()">Start the game →</button>
+  </div>
+</div>
+
+<script>
+const WIN=5;
+let hiddenPct=20;
+let SIZE=15,board=[],hidden=new Set(),cells=[],gameOver=false;
+let currentPlayer='X',blindX=0,blindO=0,totalMoves=0,lastMove=null;
+let vsAI=false,aiThinking=false,aiTried=new Set();
+
+function setMode(ai){
+  vsAI=ai;
+  document.getElementById('modeHuman').classList.toggle('active',!ai);
+  document.getElementById('modeAI').classList.toggle('active',ai);
+  startGame();
+}
+
+function startGame(){
+  document.getElementById('winBanner').classList.remove('show');
+  SIZE=parseInt(document.getElementById('sizeSelect').value);
+  hiddenPct=parseInt(document.getElementById('hiddenSlider').value);
+  board=[];cells=[];hidden.clear();gameOver=false;currentPlayer='X';
+  blindX=0;blindO=0;totalMoves=0;lastMove=null;aiThinking=false;aiTried.clear();
+  for(let r=0;r<SIZE;r++){board[r]=[];for(let c=0;c<SIZE;c++)board[r][c]='';}
+  const all=[];for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)all.push([r,c]);
+  shuffle(all);const numH=Math.floor(SIZE*SIZE*hiddenPct/100);
+  const DIRS=[[0,1],[1,0],[1,1],[1,-1]];
+  function wouldMake3(r,c){
+    for(const[dr,dc] of DIRS){
+      let run=1;
+      for(const sgn of [1,-1]){
+        let nr=r+dr*sgn,nc=c+dc*sgn;
+        while(nr>=0&&nr<SIZE&&nc>=0&&nc<SIZE&&hidden.has(key(nr,nc))){run++;nr+=dr*sgn;nc+=dc*sgn;}
+      }
+      if(run>=3)return true;
+    }
+    return false;
+  }
+  let placed=0,attempts=0;
+  for(let i=0;placed<numH&&i<all.length;i++){
+    const[r,c]=all[i];
+    if(!wouldMake3(r,c)){hidden.add(key(r,c));placed++;}
+    attempts++;
+  }
+  renderBoard();updateTurn();updateStats();
+}
+
+function cellPxFor(){
+  const avail=Math.min((window.innerWidth||900)*0.92,560);
+  return Math.max(15,Math.floor((avail-(SIZE-1))/SIZE));
+}
+function applyCellSize(){
+  const px=cellPxFor();
+  const el=document.getElementById('board');
+  el.style.gridTemplateColumns=`repeat(${SIZE},${px}px)`;
+  const fs=Math.round(px*0.56), fog=Math.round(px*0.42);
+  for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){
+    const cell=cells[r] && cells[r][c]; if(!cell)continue;
+    cell.style.width=px+'px';cell.style.height=px+'px';cell.style.fontSize=fs+'px';
+    const f=cell.querySelector?cell.querySelector('.fog'):null; if(f)f.style.fontSize=fog+'px';
+  }
+}
+function renderBoard(){
+  const el=document.getElementById('board');
+  el.innerHTML='';cells=[];
+  for(let r=0;r<SIZE;r++){cells[r]=[];for(let c=0;c<SIZE;c++){
+    const cell=document.createElement('div');cell.className='cell';
+    if(hidden.has(key(r,c))){cell.classList.add('hidden-cell');cell.innerHTML='<span class="fog">?</span>';}
+    cell.addEventListener('click',()=>onCellClick(r,c));
+    el.appendChild(cell);cells[r][c]=cell;
+  }}
+  applyCellSize();
+}
+window.addEventListener('resize',()=>{ if(cells.length)applyCellSize(); });
+
+function onCellClick(r,c){
+  if(gameOver||aiThinking)return;
+  applyMove(r,c);
+  maybeAI();
+}
+
+function applyMove(r,c){
+  if(gameOver)return;
+  const isH=hidden.has(key(r,c));
+  const player=currentPlayer;
+  if(!isH&&board[r][c]!=='')return;
+  if(isH){
+    if(board[r][c]===''){board[r][c]=player;}
+    if(player==='X')blindX++;else blindO++;totalMoves++;
+    cells[r][c].classList.add('blind-play');
+  }else{
+    board[r][c]=player;totalMoves++;
+    showMark(r,c,player);
+  }
+  if(lastMove)cells[lastMove[0]][lastMove[1]].classList.remove('last-move');
+  if(!isH){cells[r][c].classList.add('last-move');lastMove=[r,c];}else{lastMove=null;}
+  if(checkWin(player)){endGame(player);return;}
+  if(isDraw()){endGame('draw');return;}
+  currentPlayer=currentPlayer==='X'?'O':'X';updateTurn();updateStats();
+}
+
+function maybeAI(){
+  if(vsAI&&!gameOver&&currentPlayer==='O'){
+    aiThinking=true;updateTurn();
+    setTimeout(()=>{
+      const mv=chooseAIMove();
+      if(mv){
+        if(hidden.has(key(mv.r,mv.c))) aiTried.add(key(mv.r,mv.c));
+        applyMove(mv.r,mv.c);
+      }
+      aiThinking=false;updateTurn();updateStats();
+    },480);
+  }
+}
+
+function inb(r,c){return r>=0&&r<SIZE&&c>=0&&c<SIZE;}
+function runValue(cnt,open){
+  if(cnt>=5)return 100000;
+  if(cnt>=4)return open>=1?12000:0;
+  if(cnt>=3)return open===2?1500:open>=1?180:0;
+  if(cnt>=2)return open===2?120:open>=1?15:0;
+  if(cnt>=1)return open===2?8:open>=1?2:0;
+  return 0;
+}
+function offenseScore(r,c){
+  const dirs=[[1,0],[0,1],[1,1],[1,-1]];let tot=0;
+  for(const[dr,dc] of dirs){
+    let cnt=1,open=0;
+    for(const sgn of [1,-1]){
+      let nr=r+dr*sgn,nc=c+dc*sgn,steps=0;
+      while(inb(nr,nc)&&steps<4){
+        const k=key(nr,nc);
+        if(!hidden.has(k)&&board[nr][nc]==='O'){cnt++;}
+        else if(!hidden.has(k)&&board[nr][nc]===''){open++;break;}
+        else break;
+        nr+=dr*sgn;nc+=dc*sgn;steps++;
+      }
+    }
+    tot+=runValue(cnt,open);
+  }
+  return tot;
+}
+function capRun(r,c,dr,dc){
+  let run=0,nr=r+dr,nc=c+dc,steps=0;
+  while(inb(nr,nc)&&steps<5){
+    const k=key(nr,nc);
+    if(!hidden.has(k)&&board[nr][nc]==='X')run+=1;
+    else if(hidden.has(k))run+=0.8;
+    else break;
+    nr+=dr;nc+=dc;steps++;
+  }
+  return run;
+}
+function capValue(run){if(run>=4)return 100000;if(run>=3)return 12000;if(run>=2)return 1500;if(run>=1)return 150;return 0;}
+function defenseScore(r,c){
+  const dirs=[[1,0],[0,1],[1,1],[1,-1]];let best=0;
+  for(const[dr,dc] of dirs){
+    let a=capRun(r,c,dr,dc),b=capRun(r,c,-dr,-dc);
+    best=Math.max(best,capValue(a),capValue(b),capValue(a+b));
+  }
+  return best;
+}
+function playable(r,c){const k=key(r,c);if(hidden.has(k))return !aiTried.has(k);return board[r][c]==='';}
+
+function chooseAIMove(){
+  let list=[];
+  for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)if(playable(r,c))list.push([r,c]);
+  if(list.length===0)return null;
+  const cc=(SIZE-1)/2;
+  let best=null,bestScore=-Infinity;
+  for(const[r,c] of list){
+    let off=offenseScore(r,c),def=defenseScore(r,c);
+    let s=off+def*1.05+Math.max(0,6-(Math.abs(r-cc)+Math.abs(c-cc))*0.3)+Math.random()*3;
+    const isH=hidden.has(key(r,c));
+    const sv=(!isH||s>50)?s:s*0.7;
+    if(sv>bestScore){bestScore=sv;best={r,c};}
+  }
+  return best;
+}
+
+function showMark(r,c,player){const cell=cells[r][c];cell.classList.add(player==='X'?'x-mark':'o-mark','placed');}
+
+function checkWin(player){
+  const dirs=[[1,0],[0,1],[1,1],[1,-1]];
+  for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){
+    if(board[r][c]!==player)continue;
+    for(const[dr,dc] of dirs){let count=0;const line=[];
+      for(let s=0;s<WIN;s++){const nr=r+s*dr,nc=c+s*dc;
+        if(nr<0||nr>=SIZE||nc<0||nc>=SIZE)break;
+        if(board[nr][nc]===player){count++;line.push([nr,nc]);}else break;}
+      if(count>=WIN){highlightWin(line);return true;}
+    }}return false;
+}
+function isDraw(){for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)if(board[r][c]==='')return false;return true;}
+function highlightWin(line){for(const[r,c] of line)cells[r][c].classList.add('won');}
+
+function endGame(winner){
+  gameOver=true;
+  hidden.forEach(k=>{const[r,c]=k.split(',').map(Number);const cell=cells[r][c];
+    cell.classList.remove('hidden-cell');cell.innerHTML='';cell.classList.add('revealed');
+    if(board[r][c])showMark(r,c,board[r][c]);
+  });
+  if(winner!=='draw')checkWin(winner);
+  updateStats();
+  const banner=document.getElementById('winBanner');let h='';
+  if(winner==='draw'){h=`<div class="wb-title" style="color:var(--dim)">Draw!</div>`;}
+  else{h=`<div class="wb-title" style="color:${winner==='X'?'var(--x-color)':'var(--o-color)'}">Player ${winner} wins!</div>`;}
+  h+=`<div class="wb-stats">
+    <div class="wb-stat"><div class="wv" style="color:var(--x-color)">${blindX}</div><div class="wl">Blind (X)</div></div>
+    <div class="wb-stat"><div class="wv" style="color:var(--o-color)">${blindO}</div><div class="wl">Blind (O)</div></div>
+    <div class="wb-stat"><div class="wv">${totalMoves}</div><div class="wl">Total</div></div>
+  </div>`;
+  h+=`<div class="wb-note">Hidden cells have been revealed!</div>`;
+  h+=`<div class="wb-btns"><button class="btn" onclick="document.getElementById('winBanner').classList.remove('show')" style="font-size:0.8em;">🔍 View board</button><button class="btn pri" onclick="startGame()" style="font-size:0.8em;">🔄 New game</button></div>`;
+  banner.innerHTML=h;
+  setTimeout(()=>banner.classList.add('show'),500);
+}
+
+function updateTurn(){
+  const isX=currentPlayer==='X';
+  const dot=document.getElementById('turnDot');
+  dot.style.background=isX?'var(--x-color)':'var(--o-color)';
+  dot.style.boxShadow='0 0 12px '+(isX?'rgba(229,72,77,.7)':'rgba(19,165,148,.7)');
+  let txt;
+  if(gameOver){txt=currentPlayer+'\'s turn';}
+  else if(vsAI){ txt = isX ? 'Your turn' : (aiThinking?'Computer thinking…':'Computer\'s turn'); }
+  else { txt = currentPlayer+'\'s turn'; }
+  document.getElementById('turnText').textContent=txt;
+}
+function setT(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
+function updateStats(){
+  setT('statBlindX',blindX);setT('statBlindO',blindO);setT('statTotal',totalMoves);
+}
+function updateHidden(){hiddenPct=parseInt(document.getElementById('hiddenSlider').value);document.getElementById('hiddenVal').textContent=hiddenPct+' %';}
+function key(r,c){return r+','+c;}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}}
+startGame();
+</script>
+</body>
+</html>
