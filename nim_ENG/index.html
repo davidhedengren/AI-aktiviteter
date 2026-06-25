@@ -537,7 +537,9 @@ function humanTake(n){
   animTake(n,()=>{
     gameSticks-=n;renderSticks();hlQRow(gameSticks);
     if(gameSticks===0){endGame(false);}
-    else{humanTurn=false;renderTakeBtns();setStatus('🤖',`You took ${n}. <strong>AI's turn…</strong>`);}
+    else{humanTurn=false;renderTakeBtns();setStatus('🤖',`You took ${n}. <strong>AI's turn…</strong>`);
+    setTimeout(aiTurn, 800);
+        }
   });
 }
 
