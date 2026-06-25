@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naïve Bayes Lab</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZDWXTZZBBR');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<style>
+   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--border2:#253050;
+    --text:#e8ecf8;--muted:#9aa6c4;--subtle:#c2cde6;
+    --spam:#ff6a5e;--ham:#34d399;--spam-bg:rgba(255,106,94,.10);--ham-bg:rgba(52,211,153,.08);
+    --spam-glow:rgba(255,106,94,.30);--ham-glow:rgba(52,211,153,.28);
+    --accent:#4d80ff;--accent2:#6698ff;--gold:#ffd866;
+  }
+  body { background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;min-height:100vh; }
+  body::before { content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none; }
+  .back-link { position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--muted);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2; }
+  .back-link:hover { color:var(--text);border-color:var(--muted); }
+  .lang-link { position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--muted);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2; }
+  .lang-link:hover { color:var(--text);border-color:var(--muted); }
+  .lang-link .flag { font-size:1.05em;line-height:1; }
+  header { background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);border-bottom:1px solid var(--border);padding:14px 28px 12px;padding-left:140px;text-align:center;position:relative; }
+  header h1 { font-family:'DM Sans',sans-serif;font-size:1.3em;font-weight:700;letter-spacing:-0.01em;color:var(--text); }
+  header h1 span { color:var(--accent2); }
+  header p { font-size:0.82em;color:var(--muted);max-width:560px;margin:2px auto 0; }
+  .tabs { background:var(--surface);border-bottom:1px solid var(--border);display:flex;gap:2px;padding:0 28px; }
+  .tab-btn { font-family:'DM Sans',sans-serif;font-size:0.78em;font-weight:600;letter-spacing:0.04em;color:var(--muted);background:transparent;border:none;border-bottom:2px solid transparent;padding:11px 16px 9px;cursor:pointer;transition:color .2s,border-color .2s; }
+  .tab-btn:hover { color:var(--subtle); }
+  .tab-btn.active { color:var(--text);border-bottom-color:var(--accent); }
+  .tab-panel { display:none;padding:20px 28px; }
+  .tab-panel.active { display:block; }
+  .two-col { display:grid;grid-template-columns:1fr 1fr;gap:20px; }
+  .train-top { max-width:760px;margin:0 auto 14px; }
+  .train-list .ex-list { max-height:300px; }
+  .card { background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:14px;box-shadow:0 2px 12px rgba(0,0,0,.3); }
+  .card:last-child { margin-bottom:0; }
+  .card-label { font-size:0.78em;font-weight:700;letter-spacing:.01em;color:var(--subtle);margin-bottom:12px;display:block; }
+  input[type="text"], textarea { width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:9px 12px;outline:none;transition:border-color .2s,box-shadow .2s;resize:vertical; }
+  input[type="text"]:focus, textarea:focus { border-color:var(--accent);box-shadow:0 0 0 3px rgba(77,128,255,.15); }
+  textarea { height:76px;margin-bottom:12px; }
+  .row { display:flex;gap:10px;align-items:center;flex-wrap:wrap; }
+  .chip { font-family:'DM Sans',sans-serif;font-size:0.82em;font-weight:600;letter-spacing:.02em;border-radius:5px;padding:5px 14px;cursor:pointer;border:1px solid;transition:all .18s; }
+  .chip-spam { border-color:rgba(255,106,94,.5);color:var(--spam);background:var(--spam-bg); }
+  .chip-ham { border-color:rgba(52,211,153,.4);color:var(--ham);background:var(--ham-bg); }
+  .chip-spam.sel { background:var(--spam);border-color:var(--spam);color:#fff;box-shadow:0 0 14px var(--spam-glow); }
+  .chip-ham.sel { background:var(--ham);border-color:var(--ham);color:#041a0e;box-shadow:0 0 14px var(--ham-glow); }
+  .btn { font-family:'DM Sans',sans-serif;font-size:0.85em;font-weight:600;background:var(--accent);color:#fff;border:none;border-radius:6px;padding:9px 18px;cursor:pointer;transition:background .2s,box-shadow .2s;white-space:nowrap; }
+  .btn:hover { background:#3d6de6;box-shadow:0 0 14px rgba(77,128,255,.3); }
+  .btn-full { width:100%;margin-top:10px; }
+  .btn-danger { background:#c0392b; }
+  .btn-danger:hover { background:#e74c3c;box-shadow:0 0 14px rgba(231,76,60,.35); }
+  .btn-ghost { font-family:'DM Sans',sans-serif;font-size:0.85em;font-weight:600;background:transparent;color:var(--subtle);border:1px solid var(--border);border-radius:6px;padding:9px 18px;cursor:pointer;transition:all .2s;white-space:nowrap; }
+  .btn-ghost:hover { border-color:var(--subtle);color:var(--text); }
+  .btn-generate { background:#0d6e3e; }
+  .btn-generate:hover { background:#0f8a4d;box-shadow:0 0 14px rgba(52,211,153,.25); }
+  .btn-generate:disabled { background:#0a3d25;color:#2a7a50;cursor:not-allowed; }
+  .file-drop { border:1px dashed var(--border);border-radius:8px;padding:16px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:10px;position:relative; }
+  .file-drop:hover { border-color:var(--accent);background:rgba(77,128,255,.05); }
+  .file-drop input[type="file"] { position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%; }
+  .file-drop .drop-icon { font-size:20px;margin-bottom:4px; }
+  .file-drop .drop-text { font-size:13px;color:var(--subtle); }
+  .file-drop .drop-sub { font-size:11px;color:var(--muted);margin-top:3px; }
+  .format-box { background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-size:12px;color:var(--subtle);margin-bottom:10px;line-height:1.7; }
+  .format-box code { display:block;color:var(--text);margin-top:4px;letter-spacing:.03em;opacity:.75; }
+  .gen-row { display:flex;gap:8px;align-items:center;flex-wrap:wrap; }
+  .gen-count { width:70px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:8px 10px;outline:none;text-align:center;transition:border-color .2s; }
+  .gen-count:focus { border-color:var(--accent); }
+  .status-msg { font-size:12px;padding:8px 12px;border-radius:6px;margin-top:10px;display:none; }
+  .status-msg.info { background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.25);color:var(--ham);display:block; }
+  .status-msg.error { background:rgba(255,106,94,.08);border:1px solid rgba(255,106,94,.25);color:#ff8060;display:block; }
+  .status-msg.loading { background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--subtle);display:block; }
+  .spinner { display:inline-block;width:10px;height:10px;border:2px solid var(--border);border-top-color:var(--ham);border-radius:50%;animation:spin .7s linear infinite;margin-right:6px;vertical-align:middle; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .confidence-bar-wrap { margin-top:14px;background:rgba(0,0,0,.3);border-radius:8px;padding:14px 16px;border:1px solid var(--border); }
+  .confidence-label { font-size:11px;letter-spacing:.05em;color:var(--muted);margin-bottom:8px; }
+  .confidence-track { height:12px;border-radius:6px;background:rgba(255,255,255,.06);position:relative;margin-bottom:8px;overflow:hidden; }
+  .confidence-fill { height:100%;border-radius:6px;transition:width .5s ease; }
+  .confidence-zones { display:flex;font-size:10px;color:var(--muted);letter-spacing:.02em;justify-content:space-between;margin-top:4px; }
+  .confidence-verdict { font-size:13px;font-weight:700;margin-top:10px;letter-spacing:.02em; }
+  .token-wrap { display:flex;flex-wrap:wrap;gap:6px;margin-top:10px; }
+  .token { font-size:13px;padding:4px 10px;border-radius:4px;font-family:'JetBrains Mono',monospace;border:1px solid;transition:all .2s; }
+  .token.kept { background:rgba(77,128,255,.12);border-color:rgba(77,128,255,.35);color:#c0d4ff; }
+  .token.stopped { background:transparent;border-color:var(--border);color:var(--muted);opacity:.75; }
+  .token.short { background:transparent;border-color:rgba(255,216,102,.3);color:var(--gold);text-decoration:line-through;opacity:.8; }
+  .token-legend { display:flex;gap:16px;font-size:11px;color:var(--muted);margin-top:10px;flex-wrap:wrap;align-items:center; }
+  .token-legend span { display:inline-flex;align-items:center; }
+  .tl-dot { display:inline-block;width:11px;height:11px;border-radius:3px;border:1px solid transparent;margin-right:6px;vertical-align:middle; }
+  .math-step { background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.25); }
+  .math-step-header { display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.02); }
+  .math-step-num { font-size:11px;letter-spacing:.04em;color:var(--muted);min-width:52px;font-weight:600; }
+  .math-step-word { font-size:14px;font-weight:700;color:#fff;flex:1; }
+  .math-step-shift { font-size:11px;padding:3px 10px;border-radius:4px;border:1px solid;font-weight:600; }
+  .math-step-body { padding:14px 16px; }
+  .math-prior-grid { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px; }
+  .math-prior-box { background:var(--bg);border-radius:8px;padding:12px 14px;border:1px solid var(--border); }
+  .math-prior-box .mpb-cls { font-size:11px;letter-spacing:.04em;margin-bottom:6px;font-weight:700; }
+  .math-prior-box .mpb-frac { font-size:13px;color:var(--subtle);margin-bottom:4px; }
+  .math-prior-box .mpb-frac strong { color:#fff; }
+  .math-prior-box .mpb-bar { height:6px;border-radius:3px;margin-top:6px; }
+  .math-word-grid { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
+  .math-word-box { background:var(--bg);border-radius:8px;padding:12px 14px;border:1px solid var(--border); }
+  .math-word-box .mwb-cls { font-size:11px;letter-spacing:.04em;margin-bottom:8px;font-weight:700; }
+  .math-word-box .mwb-found { font-size:12px;color:var(--subtle);margin-bottom:8px;line-height:1.6; }
+  .math-word-box .mwb-found em { color:var(--text);font-style:normal; }
+  .math-word-box .mwb-formula { font-size:12px;background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:10px;color:var(--subtle);overflow-x:auto; }
+  .math-word-box .mwb-formula strong { color:#fff; }
+  .math-word-box .mwb-formula .eq { color:var(--muted); }
+  .math-posterior { margin-top:12px;padding-top:12px;border-top:1px solid var(--border); }
+  .math-posterior-label { font-size:11px;letter-spacing:.04em;color:var(--muted);margin-bottom:8px;font-weight:600; }
+  .math-post-bar { display:flex;height:26px;border-radius:5px;overflow:hidden;background:var(--border);margin-bottom:6px; }
+  .math-post-bar .pb-spam { background:var(--spam);transition:width .4s ease; }
+  .math-post-bar .pb-ham { background:var(--ham);transition:width .4s ease; }
+  .math-post-nums { display:flex;gap:20px;font-size:12px;font-weight:600; }
+  .math-post-nums .pn-spam { color:var(--spam); }
+  .math-post-nums .pn-ham { color:var(--ham); }
+  .flip-note { margin-top:10px;font-size:11.5px;line-height:1.6;color:var(--subtle);background:rgba(255,216,102,.08);border:1px solid rgba(255,216,102,.25);border-radius:6px;padding:8px 12px; }
+  .flip-note strong { color:var(--text); }
+  .step-card { background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.25);transition:border-color .2s,box-shadow .2s; }
+  .step-card:hover { border-color:rgba(255,216,102,.45); }
+  .step-card[open] { border-color:var(--gold);box-shadow:0 0 0 1px rgba(255,216,102,.25); }
+  .step-card > summary { display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer;list-style:none;background:rgba(255,255,255,.02); }
+  .step-card > summary::-webkit-details-marker { display:none; }
+  .step-badge { font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);background:rgba(255,216,102,.1);border:1px solid rgba(255,216,102,.3);border-radius:5px;padding:3px 9px;white-space:nowrap; }
+  .step-title { font-size:14px;font-weight:700;color:var(--text);flex:1; }
+  .step-expand { font-size:12px;color:var(--muted);transition:transform .2s; }
+  .step-card[open] > summary .step-expand { transform:rotate(90deg); }
+  .step-body { padding:14px 16px; }
+  .step-formula-link { font-size:11.5px;color:var(--subtle);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 12px;margin:0 0 12px;line-height:1.5; }
+  .tug-scale { display:flex;justify-content:space-between;align-items:center;font-size:10.5px;font-weight:700;letter-spacing:.03em;margin-bottom:10px;padding:0 2px; }
+  .tug-row { border-bottom:1px solid var(--border);background:transparent;transition:background .15s; }
+  .tug-row:last-child { border-bottom:none; }
+  .tug-row[open] { background:var(--surface2); }
+  .tug-row summary { display:grid;grid-template-columns:110px 1fr 44px 16px;gap:12px;align-items:center;padding:8px 6px;cursor:pointer;list-style:none; }
+  .tug-row summary::-webkit-details-marker { display:none; }
+  .tug-word { font-size:13px;font-weight:600;font-family:'JetBrains Mono',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right; }
+  .tug-bar { position:relative;height:18px; }
+  .tug-center { position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--border2);transform:translateX(-50%); }
+  .tug-fill { position:absolute;top:50%;transform:translateY(-50%);height:12px;border-radius:3px;transition:width .3s ease; }
+  .tug-fill.spam { border-radius:0 3px 3px 0; }
+  .tug-fill.ham  { border-radius:3px 0 0 3px; }
+  .tug-n { font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;text-align:right; }
+  .tug-expand { font-size:11px;color:var(--muted);transition:transform .2s;text-align:center; }
+  .tug-row[open] .tug-expand { transform:rotate(90deg); }
+  .tug-body { padding:4px 6px 14px;display:flex;flex-direction:column;gap:10px; }
+  .tug-detail { background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:9px 11px; }
+  .tug-detail > span { display:block;font-size:11px;font-weight:600;margin-bottom:5px; }
+  .tug-verdict { font-size:11.5px;color:var(--subtle);line-height:1.6; }
+  @media (max-width:600px){
+    .tug-row summary { grid-template-columns:80px 1fr 36px;gap:8px; }
+    .tug-expand { display:none; }
+  }
+  .journey-card .journey-lead { font-size:12px;color:var(--muted);line-height:1.7;margin:-4px 0 10px; }
+  .journey-formula-note { font-size:11.5px;color:var(--subtle);line-height:1.7;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:9px 12px;margin-bottom:14px; }
+  .journey-formula-note strong { color:var(--text); }
+  .gen-formula { background:var(--bg);border:1px solid var(--border2);border-radius:8px;padding:14px 16px;margin:0 0 14px; }
+  .gen-formula .katex { font-size:1.15em; }
+  .gen-formula-note { font-size:11.5px;color:var(--subtle);line-height:1.7;margin:10px 0 0;text-align:left; }
+  .gen-formula-note strong { color:var(--text); }
+  .journey-summary { font-size:12.5px;color:var(--subtle);line-height:1.75;margin:14px 0 0;padding-top:14px;border-top:1px solid var(--border); }
+  .journey-summary strong { color:var(--text); }
+  .journey-scale { display:flex;justify-content:space-between;font-size:10px;font-weight:600;letter-spacing:.03em;margin-bottom:8px;padding:0 2px; }
+  .wordstep { border:1px solid var(--border);border-radius:8px;margin-bottom:6px;background:var(--bg);overflow:hidden;transition:border-color .2s,box-shadow .2s; }
+  .wordstep:hover { border-color:rgba(255,216,102,.45); }
+  .wordstep[open] { border-color:var(--gold);background:var(--surface2);box-shadow:0 0 0 1px rgba(255,216,102,.25); }
+  .wordstep summary { display:grid;grid-template-columns:24px minmax(60px,1fr) 200px 16px;gap:12px;align-items:center;padding:9px 12px;cursor:pointer;list-style:none; }
+  .wordstep summary::-webkit-details-marker { display:none; }
+  .ws-num { font-size:10px;font-weight:700;color:var(--muted);font-family:'JetBrains Mono',monospace;text-align:center; }
+  .ws-word { font-size:13.5px;font-weight:600;color:var(--text);font-family:'JetBrains Mono',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+  .ws-probs { display:flex;flex-direction:column;gap:4px; }
+  .ws-prob-row { display:grid;grid-template-columns:62px 1fr 44px;gap:7px;align-items:center; }
+  .ws-prob-lbl { font-size:9.5px;font-weight:600;text-align:right;white-space:nowrap; }
+  .ws-prob-bar { height:8px;background:var(--surface2);border:1px solid var(--border);border-radius:3px;overflow:hidden; }
+  .ws-prob-fill { display:block;height:100%;border-radius:2px;transition:width .3s ease; }
+  .ws-prob-val { font-size:9.5px;color:var(--muted);font-family:'JetBrains Mono',monospace;text-align:right; }
+  .ws-expand { font-size:11px;color:var(--muted);transition:transform .2s;text-align:center; }
+  .wordstep[open] .ws-expand { transform:rotate(90deg); }
+  .wordstep-body { padding:4px 12px 12px;border-top:1px solid var(--border); }
+  .wd-formulas { display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px; }
+  .wd-formula { background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:10px 12px; }
+  .wd-formula-cls { font-size:10px;font-weight:700;letter-spacing:.04em;margin-bottom:6px; }
+  .wd-formula .katex { font-size:1.05em; }
+  .wd-formula-note { font-size:10.5px;color:var(--muted);line-height:1.5;margin-top:6px; }
+  @media (max-width:600px){
+    .wordstep summary { grid-template-columns:20px 1fr;grid-row-gap:8px; }
+    .ws-probs { grid-column:1/-1; }
+    .ws-expand { display:none; }
+  }
+  .formula-toggle { font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;background:transparent;border:1px solid var(--border);color:var(--subtle);border-radius:5px;padding:6px 14px;cursor:pointer;margin-top:14px;transition:all .2s;display:inline-block; }
+  .final-card { background:linear-gradient(135deg,rgba(77,128,255,.06),transparent);border-color:var(--border2); }
+  .formula-toggle:hover { border-color:var(--accent);color:var(--text); }
+  .formula-panel { margin-top:14px;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:8px;padding:16px;display:none; }
+  .formula-panel.open { display:block; }
+  .formula-panel .fp-title { font-size:11px;letter-spacing:.06em;color:var(--muted);margin-bottom:12px;font-weight:600; }
+  .formula-panel .fp-abstract { font-size:12px;color:var(--subtle);margin-bottom:14px;line-height:1.8;padding-bottom:12px;border-bottom:1px solid var(--border); }
+  .formula-panel .fp-abstract strong { color:var(--text); }
+  .fp-legend { display:flex;flex-direction:column;gap:7px;margin-top:14px;font-size:11.5px;color:var(--subtle);line-height:1.5; }
+  .fp-legend em { color:var(--muted);font-style:italic; }
+  .fp-dot { display:inline-block;width:9px;height:9px;border-radius:2px;vertical-align:middle;margin-right:4px; }
+  .fp-bridge { margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--subtle);line-height:1.6; }
+  .fp-class-block { margin-bottom:14px; }
+  .fp-class-block:last-child { margin-bottom:0; }
+  .fp-class-name { font-size:12px;letter-spacing:.04em;margin-bottom:8px;font-weight:700; }
+  .fp-line { font-size:11px;color:var(--subtle);padding:14px 14px;background:var(--surface2);border-radius:5px;border:1px solid var(--border);overflow-x:auto; }
+  .fp-line strong { color:var(--text); }
+  .fp-line .fp-op { color:var(--muted); }
+  .fp-line .katex { font-size:1.25em; }
+  .fp-norm .katex { font-size:1.15em; }
+  .fp-result { font-size:12px;margin-top:8px;padding:8px 12px;border-radius:5px;border:1px solid;display:flex;justify-content:space-between;align-items:center; }
+  .tex { color:var(--text); }
+  .katex { font-size:1.04em; }
+  .katex-display { margin:0; text-align:left; }
+  .mwb-formula .katex-display, .fp-line .katex-display { white-space:normal; }
+  .mpb-frac .katex { font-size:1em; }
+  .ex-list { max-height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:5px;padding-right:2px; }
+  .ex-list::-webkit-scrollbar { width:4px; }
+  .ex-list::-webkit-scrollbar-track { background:transparent; }
+  .ex-list::-webkit-scrollbar-thumb { background:var(--border);border-radius:2px; }
+  .ex-item { display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:6px;border:1px solid transparent;font-size:12px;animation:fadeIn .2s ease; }
+  .ex-item.spam { background:rgba(255,106,94,.06);border-color:rgba(255,106,94,.15); }
+  .ex-item.ham { background:rgba(52,211,153,.06);border-color:rgba(52,211,153,.15); }
+  .ex-item .label-tag { font-size:11px;letter-spacing:.02em;min-width:34px;font-weight:700; }
+  .ex-item .label-tag.spam { color:var(--spam); }
+  .ex-item .label-tag.ham { color:var(--ham); }
+  .ex-item .ex-text { flex:1;color:var(--subtle); }
+  .del-btn { background:none;border:none;color:var(--muted);cursor:pointer;font-size:15px;padding:0 3px;line-height:1;transition:color .2s; }
+  .del-btn:hover { color:var(--spam); }
+  .stat-grid { display:grid;grid-template-columns:1fr 1fr;gap:12px; }
+  .stat-box { border-radius:10px;padding:16px 18px;border:1px solid;position:relative;overflow:hidden; }
+  .stat-box::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:10px 10px 0 0; }
+  .stat-box.spam { background:linear-gradient(135deg,rgba(255,106,94,.10) 0%,rgba(255,106,94,.04) 100%);border-color:rgba(255,106,94,.25); }
+  .stat-box.spam::before { background:var(--spam);box-shadow:0 0 12px var(--spam-glow); }
+  .stat-box.ham { background:linear-gradient(135deg,rgba(52,211,153,.08) 0%,rgba(52,211,153,.03) 100%);border-color:rgba(52,211,153,.22); }
+  .stat-box.ham::before { background:var(--ham);box-shadow:0 0 12px var(--ham-glow); }
+  .stat-box .cls-name { font-size:11px;letter-spacing:.04em;margin-bottom:4px;font-weight:700; }
+  .stat-box.spam .cls-name { color:var(--spam); }
+  .stat-box.ham .cls-name { color:var(--ham); }
+  .stat-box .big-num { font-size:32px;font-weight:700;color:#fff;line-height:1.1;font-family:'JetBrains Mono',monospace; }
+  .stat-box .stat-sub { font-size:12px;color:var(--muted);margin-top:2px; }
+  .stat-box .prior { font-size:12px;color:var(--subtle);margin-top:8px; }
+  .vocab-note { font-size:12px;color:var(--muted);margin-top:12px; }
+  .bar-row { display:grid;grid-template-columns:110px 1fr 56px 80px;gap:10px;align-items:center;margin-bottom:7px; }
+  .bar-row .word { color:var(--text);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+  .bar-track { background:var(--border);border-radius:3px;height:16px;overflow:hidden; }
+  .bar-fill { height:100%;border-radius:3px;transition:width .4s ease; }
+  .bar-row .count { color:var(--muted);font-size:11px;text-align:right;font-family:'JetBrains Mono',monospace; }
+  .bar-row .prob { font-size:12px;text-align:right;font-weight:600;font-family:'JetBrains Mono',monospace; }
+  .compare-row { display:grid;grid-template-columns:90px 1fr;gap:10px;align-items:center;margin-bottom:7px; }
+  .compare-row .cword { color:var(--subtle);font-size:12px; }
+  .split-bar { display:flex;height:22px;border-radius:4px;overflow:hidden; }
+  .split-spam { background:var(--spam);display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(0,0,0,.7);font-weight:700;transition:width .4s; }
+  .split-ham { background:var(--ham);display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(0,0,0,.7);font-weight:700;transition:width .4s; }
+  .verdict-card { border-radius:10px;padding:20px 22px;margin-bottom:16px;border:1px solid;box-shadow:0 4px 24px rgba(0,0,0,.4); }
+  .verdict-card.spam { background:linear-gradient(135deg,rgba(255,106,94,.12) 0%,rgba(255,106,94,.04) 100%);border-color:rgba(255,106,94,.4); }
+  .verdict-card.ham { background:linear-gradient(135deg,rgba(52,211,153,.10) 0%,rgba(52,211,153,.04) 100%);border-color:rgba(52,211,153,.35); }
+  .verdict-label { font-size:11px;letter-spacing:.06em;color:var(--muted);margin-bottom:6px;font-weight:600; }
+  .verdict-class { font-size:36px;font-weight:700;letter-spacing:.04em;line-height:1; }
+  .verdict-class.spam { color:var(--spam);text-shadow:0 0 20px var(--spam-glow); }
+  .verdict-class.ham { color:var(--ham);text-shadow:0 0 20px var(--ham-glow); }
+  .verdict-probs { display:flex;gap:20px;margin-top:12px; }
+  .verdict-probs span { font-size:13px;font-weight:600; }
+  .empty { text-align:center;padding:48px 20px;color:var(--muted);font-size:14px; }
+  .empty strong { display:block;font-size:15px;color:var(--subtle);margin-bottom:6px; }
+  .legend { display:flex;gap:16px;font-size:11px;margin-top:12px;font-weight:600; }
+  .legend span::before { content:'■ '; }
+  .legend .ls { color:var(--spam); }
+  .legend .lh { color:var(--ham); }
+  .formula-note { font-size:12px;color:var(--subtle);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-bottom:16px;line-height:1.8; }
+  .laplace-details { background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.3);overflow:hidden; }
+  .laplace-details summary { padding:14px 18px;cursor:pointer;font-size:0.9em;font-weight:600;color:var(--subtle);list-style:none;display:flex;align-items:center;gap:8px;transition:color .2s; }
+  .laplace-details summary::-webkit-details-marker { display:none; }
+  .laplace-details summary::before { content:'▸';color:var(--muted);transition:transform .2s;display:inline-block; }
+  .laplace-details[open] summary::before { transform:rotate(90deg); }
+  .laplace-details summary:hover { color:var(--text); }
+  .laplace-details .laplace-body { padding:0 18px 16px; }
+  .collapse-toggle { width:100%;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 16px;color:var(--subtle);font-family:'DM Sans',sans-serif;font-size:0.9em;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all .2s; }
+  .collapse-toggle:hover { border-color:var(--accent2);color:var(--text); }
+  .collapse-toggle .arr { transition:transform .2s;color:var(--muted); }
+  .collapse-toggle.open .arr { transform:rotate(180deg); }
+  .collapse-body { display:none;margin-top:14px; }
+  .collapse-body.open { display:block; }
+  @keyframes fadeIn { from { opacity:0;transform:translateY(-4px); } to { opacity:1;transform:none; } }
+  .tab-panel.active { animation:fadeIn .2s ease; }
+  .overlay { position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center; }
+  .overlay.show { display:flex; }
+  .overlay-card { background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:26px 30px;max-width:560px;width:92%;max-height:90vh;overflow-y:auto; }
+  .overlay-card h2 { font-size:1.2em;font-weight:700;margin-bottom:10px;text-align:center; }
+  .overlay-card h2 span { color:var(--accent2); }
+  .overlay-card .o-lead { font-size:0.95em;color:var(--text);line-height:1.8;margin-bottom:20px; }
+  .overlay-card .o-step { display:flex;flex-direction:column;gap:4px;margin-bottom:16px; }
+  .overlay-card .o-step .o-step-h { font-size:0.92em;font-weight:700;color:var(--text);letter-spacing:.02em; }
+  .overlay-card .o-step p { font-size:0.88em;color:var(--muted);line-height:1.7;margin:0; }
+  .overlay-card .o-step strong { color:var(--text); }
+  .overlay-btn { display:block;width:100%;padding:12px;margin-top:8px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s; }
+  .overlay-btn:hover { background:#3d6de6; }
+  .info-btn { background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:5px 12px;font-family:'DM Sans',sans-serif;font-size:0.78em;font-weight:600;cursor:pointer;transition:.2s; }
+  .info-btn:hover { border-color:var(--accent2);color:var(--text); }
+  .term { border-bottom:1px dotted var(--accent2);cursor:help;color:inherit;transition:background .15s,border-color .15s;border-radius:2px; }
+  .term:hover, .term:focus { border-bottom-color:var(--accent);background:rgba(77,128,255,.12);outline:none; }
+  #term-popover { position:fixed;z-index:200;max-width:300px;background:var(--surface2);border:1px solid var(--border2);border-radius:9px;padding:13px 15px;box-shadow:0 8px 30px rgba(0,0,0,.55);font-size:12.5px;line-height:1.65;color:var(--subtle);display:none; }
+  #term-popover.show { display:block;animation:fadeIn .15s ease; }
+  #term-popover .tp-term { display:block;font-weight:700;color:var(--text);margin-bottom:5px;font-size:12.5px;letter-spacing:.01em; }
+  #term-popover .tp-term::before { content:'›';color:var(--accent2);margin-right:6px; }
+  .gloss-item { padding:13px 0;border-bottom:1px solid var(--border); }
+  .gloss-item:first-child { padding-top:0; }
+  .gloss-item:last-child { border-bottom:none;padding-bottom:0; }
+  .gloss-term { font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:4px; }
+  .gloss-def { font-size:12.5px;color:var(--subtle);line-height:1.7; }
+  @media (max-width:700px) {
+    .two-col { grid-template-columns:1fr; }
+    .bar-row { grid-template-columns:80px 1fr 44px 68px; }
+    header { padding-left:28px; }
+    .back-link { position:static;transform:none;margin-bottom:6px; }
+    .lang-link { position:static;transform:none;margin-bottom:6px;margin-left:8px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+ <a class="back-link" href="/">← AI Activities</a>
+ <h1>Naïve <span>Bayes</span> Lab</h1>
+ <p>An interactive classification laboratory</p>
+ <button class="info-btn" style="position:absolute;top:50%;right:120px;transform:translateY(-50%)" onclick="openIntro()">★ Instructions</button>
+ <a class="lang-link" href="https://www.ai-aktiviteter.se/naivebayes"><span class="flag">🇸🇪</span> Svenska</a>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="train">① Train</button>
+  <button class="tab-btn"        data-tab="model">② Model</button>
+  <button class="tab-btn"        data-tab="classify">③ Classify</button>
+  <button class="tab-btn"        data-tab="glossary" style="margin-left:auto">Glossary</button>
+</nav>
+
+<div class="overlay show" id="introOverlay">
+  <div class="overlay-card">
+    <h2>Naïve <span>Bayes</span> Lab</h2>
+    <p class="o-lead">
+      In this lab you train a <strong>Naïve Bayes classifier</strong> — the same type of algorithm used in spam filters.
+      You decide what the model learns, and can then see how the mathematics behind the algorithm works when it classifies new emails.
+    </p>
+    <div class="o-step">
+      <div class="o-step-h">① Train</div>
+      <p>Click <strong>⚡ Generate</strong> to automatically populate the model with example emails. You control how many and the balance between spam and legitimate email.</p>
+    </div>
+    <div class="o-step">
+      <div class="o-step-h">② Model</div>
+      <p>See what the model has learned — which words lean toward spam and which toward legitimate email, and how strongly.</p>
+    </div>
+    <div class="o-step">
+      <div class="o-step-h">③ Classify</div>
+      <p>Type in an email and press Enter. You get a result showing the model's confidence, and you can follow all the calculations behind the classification.</p>
+    </div>
+    <button class="overlay-btn" onclick="closeIntro()">Get started →</button>
+  </div>
+</div>
+
+<section id="tab-train" class="tab-panel active">
+  <div class="train-top">
+      <div class="card">
+        <span class="card-label">Create training data</span>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.7">
+          Generates example emails from a built-in bank. Each time you click, more examples are added to the training set, so you can build it up gradually. Vary the balance to see how uneven training data affects the model.
+        </p>
+        <div class="gen-row" style="margin-bottom:12px">
+          <span style="font-size:12px;color:var(--muted)">Count:</span>
+          <input type="number" class="gen-count" id="gen-count" value="50" min="4" max="500" step="2">
+          <button class="btn btn-generate" id="gen-btn" onclick="generateData()">⚡ Generate</button>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px 14px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span style="font-size:11px;color:var(--muted)">Spam / legitimate ratio</span>
+            <span style="font-size:12px;color:var(--subtle)" id="ratio-label">50% / 50%</span>
+          </div>
+          <input type="range" id="spam-ratio" min="10" max="90" value="50" step="10"
+            style="width:100%;accent-color:var(--spam);cursor:pointer"
+            oninput="updateRatioLabel()">
+          <div style="display:flex;height:10px;border-radius:4px;overflow:hidden;margin-top:8px">
+            <div id="ratio-bar-spam" style="width:50%;background:var(--spam);transition:width .2s"></div>
+            <div id="ratio-bar-ham"  style="width:50%;background:var(--ham); transition:width .2s"></div>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.6" id="ratio-note">
+            Even distribution — the prior probability P(class) has little effect on classification.
+          </div>
+        </div>
+        <div class="status-msg" id="gen-status"></div>
+      </div>
+
+      <div class="card">
+        <span class="card-label">Statistics</span>
+        <div class="stat-grid" id="stat-grid">
+          <div class="stat-box spam">
+            <div class="cls-name">Spam</div>
+            <div class="big-num" id="stat-spam-n">0</div>
+            <div class="stat-sub">examples</div>
+            <div class="prior" id="stat-spam-p">P(Spam) = —</div>
+          </div>
+          <div class="stat-box ham">
+            <div class="cls-name">Legitimate</div>
+            <div class="big-num" id="stat-ham-n">0</div>
+            <div class="stat-sub">examples</div>
+            <div class="prior" id="stat-ham-p">P(Legitimate) = —</div>
+          </div>
+        </div>
+        <div class="vocab-note" id="vocab-note">Vocabulary: — words</div>
+      </div>
+  </div>
+
+  <div class="card train-list" style="margin-bottom:0">
+      <span class="card-label">
+        Training data
+        <span class="chip chip-spam sel" style="margin-left:8px;padding:2px 8px;font-size:10px" id="badge-spam">0</span>
+        <span class="chip chip-ham sel"  style="margin-left:4px;padding:2px 8px;font-size:10px" id="badge-ham">0</span>
+        <button class="btn btn-danger" style="margin-left:auto;padding:4px 12px;font-size:11px;float:right" onclick="clearData()">✕ Clear all</button>
+      </span>
+      <div class="ex-list" id="ex-list"></div>
+    </div>
+
+  <div style="margin-top:20px">
+    <button class="collapse-toggle" id="own-toggle" onclick="toggleOwn()">
+      <span>✎ Add your own examples or import a file</span>
+      <span class="arr">▼</span>
+    </button>
+    <div class="collapse-body" id="own-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:14px">
+        <div class="card" style="margin-bottom:0">
+          <span class="card-label">Write your own example</span>
+          <textarea id="new-text" placeholder="Write a sentence to train the model on…"></textarea>
+          <div class="row">
+            <span style="font-size:12px;color:var(--muted)">Class:</span>
+            <button class="chip chip-spam sel" id="chip-spam" onclick="selectLabel('SPAM')">Spam</button>
+            <button class="chip chip-ham"      id="chip-ham"  onclick="selectLabel('HAM')">Legitimate</button>
+            <button class="btn" style="margin-left:auto" onclick="addExample()">＋ Add</button>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:0">
+          <span class="card-label">Import from file</span>
+          <div class="format-box">
+            A <strong style="color:var(--text)">.csv</strong> or <strong style="color:var(--text)">.txt</strong> — one example per line:
+            <code>SPAM,Your text here</code>
+            <code>HAM,Your text here</code>
+            The label must be <code style="display:inline">SPAM</code> or <code style="display:inline">HAM</code> (uppercase).
+          </div>
+          <div class="file-drop" id="file-drop">
+            <input type="file" accept=".csv,.txt" onchange="importFile(event)">
+            <div class="drop-icon">📂</div>
+            <div class="drop-text">Click to select a file</div>
+            <div class="drop-sub">.csv or .txt · one example per line</div>
+          </div>
+          <div class="status-msg" id="import-status"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tab-model" class="tab-panel">
+  <div id="model-empty" class="empty"><strong>No model yet</strong>Add training data in the Train tab.</div>
+  <div id="model-content" style="display:none">
+    <div class="card">
+      <span class="card-label">What the model has learned</span>
+      <p style="font-size:12px;color:var(--muted);line-height:1.7;margin:-4px 0 14px">
+        Each word leans toward the class where it appears most often. The longer the bar, the stronger the signal. Words near the center appear roughly equally in both classes and say very little. Click a word to see exact probabilities, or click <strong>Show more words</strong> to see further toward the center.
+      </p>
+      <div class="tug-scale">
+        <span style="color:var(--ham)">◀ legitimate</span>
+        <span style="color:var(--muted);font-weight:400">leans toward</span>
+        <span style="color:var(--spam)">spam ▶</span>
+      </div>
+      <div id="tug-list"></div>
+      <div id="tug-more" style="text-align:center;margin-top:12px"></div>
+    </div>
+  </div>
+</section>
+
+<section id="tab-classify" class="tab-panel">
+  <div id="classify-empty" class="empty"><strong>No model yet</strong>Add training data in the Train tab.</div>
+  <div id="classify-content" style="display:none">
+    <div class="card">
+      <span class="card-label">Text to classify</span>
+      <div class="row">
+        <input type="text" id="classify-input" placeholder="Type a sentence and see how the model reasons…" onkeydown="if(event.key==='Enter')classify()">
+        <button class="btn" onclick="classify()">Classify →</button>
+      </div>
+    </div>
+    <div id="classify-result" style="display:none">
+      <div class="verdict-card" id="verdict-card">
+        <div class="verdict-label">Classified as</div>
+        <div class="verdict-class" id="verdict-class">—</div>
+        <div class="verdict-probs" id="verdict-probs"></div>
+        <div class="confidence-bar-wrap" id="confidence-wrap"></div>
+      </div>
+      <div class="card" id="tokenization-card">
+        <span class="card-label">Tokenization and filtering</span>
+        <p style="font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:12px">
+          Before the model can compute probabilities, the text must be split into individual words — this is called <span class="term" data-term="tokenization" tabindex="0" role="button"><strong style="color:var(--text)">tokenization</strong></span>.
+          Words that are too common to say anything about the class (<span class="term" data-term="stopwords" tabindex="0" role="button">stop words</span>) and very short words are then filtered out.
+          Only the remaining words are used in classification.
+        </p>
+        <div class="token-wrap" id="token-display"></div>
+        <div class="token-legend">
+          <span><span class="tl-dot" style="background:rgba(77,128,255,.5);border-color:rgba(77,128,255,.6)"></span> Used in classification</span>
+          <span><span class="tl-dot" style="background:var(--muted);opacity:.6"></span> Stop word — filtered out (too common)</span>
+          <span><span class="tl-dot" style="background:var(--gold);opacity:.7"></span> Too short — filtered out (≤2 characters)</span>
+        </div>
+        <p style="font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6;font-style:italic">
+          Note: no lemmatization is performed — "winning" and "winner" are counted as different words.
+          Real systems often reduce words to their base form to improve accuracy.
+        </p>
+      </div>
+      <div id="math-breakdown"></div>
+    </div>
+  </div>
+</section>
+
+<section id="tab-glossary" class="tab-panel">
+  <div class="card">
+    <span class="card-label">Glossary</span>
+    <p style="font-size:12px;color:var(--muted);line-height:1.7;margin:-4px 0 14px">
+      A glossary of the most important concepts in the lab. The same explanations appear when you click underlined words in the text.
+    </p>
+    <div id="glossary-list"></div>
+  </div>
+</section>
+
+<script>
+const STOP = new Set([
+  'the','and','for','that','this','with','are','was','were','have','has',
+  'been','from','they','will','would','could','should','not','but','can',
+  'all','one','our','your','you','its','his','her','their','we','it',
+  'is','in','to','a','an','of','on','at','by','or','be','do','if',
+  'as','up','out','so','my','he','she','me','us','him','her','who',
+  'did','get','got','had','his','how','may','than','too','very','just',
+  'any','now','new','also','more','when','what','into','over','only','then',
+  'there','these','those','each','such','both','same','after','back','own',
+  'here','well','even','still','down','way','about','before','through','where',
+]);
+
+let examples = [];
+let newLabel = "SPAM";
+const DISPLAY = { SPAM: 'Spam', HAM: 'Legitimate' };
+let modelShown = 18;
+let modelWordsCache = null;
+
+const GLOSSARY = {
+  'bayes':        { term:"Bayes' theorem", def:"A rule for calculating how probable a class is given a text, based on how probable the text is in each class and how common the class is." },
+  'naive':        { term:'Naïve', def:'The method is called "naïve" because it assumes each word is independent of all the others. This is rarely true in reality, but the simplification works surprisingly well.' },
+  'prior':        { term:'Prior probability', def:'How common a class is in the training data, before the model has looked at the actual text. Calculated as the number of emails in the class divided by the total number of emails.' },
+  'class':        { term:'Class', def:'The categories the model chooses between. Here: spam or legitimate email.' },
+  'tokenization': { term:'Tokenization', def:'Splitting a text into individual words (tokens) that the model can count.' },
+  'stopwords':    { term:'Stop words', def:'Very common words like "the", "and", "is". They are filtered out because they appear equally often in all classes and therefore say nothing about which class the text belongs to.' },
+  'vocabulary':   { term:'Vocabulary (|V|)', def:'The number of unique words the model has seen across all training data. Written |V| and used in the denominator for Laplace smoothing.' },
+  'laplace':      { term:'Laplace smoothing', def:'Adding 1 to the numerator and |V| to the denominator for each word probability. Without it, a word never seen in a class would get probability zero — and since all word probabilities are multiplied together, a single unknown word would drag the whole product to zero. With +1, even unseen words get a small probability greater than zero.' },
+  'probability':  { term:'Word probability P(word | class)', def:'How probable a word is in a given class, calculated from how often the word appeared in that class during training.' },
+  'normalize':    { term:'Normalize', def:'Rescaling numbers so they are comparable. Here, each class product is divided by the sum of all class products, so the results become percentages that together add up to 100%.' },
+  'evidence':     { term:'P(text) – the evidence', def:"The probability of seeing the text at all. It is the same for all classes and doesn't need to be calculated separately: it is exactly the sum in the denominator when we normalize." },
+};
+
+function term(key, label) {
+  const g = GLOSSARY[key];
+  const text = label || (g ? g.term : key);
+  return `<span class="term" data-term="${key}" tabindex="0" role="button">${text}</span>`;
+}
+
+function initGlossary() {
+  let pop = document.getElementById('term-popover');
+  if (!pop) { pop = document.createElement('div'); pop.id = 'term-popover'; document.body.appendChild(pop); }
+  let pinned = false, current = null;
+
+  function show(el) {
+    const g = GLOSSARY[el.dataset.term];
+    if (!g) return;
+    pop.innerHTML = `<span class="tp-term">${g.term}</span>${g.def}`;
+    pop.classList.add('show');
+    const r = el.getBoundingClientRect();
+    const pw = pop.offsetWidth, ph = pop.offsetHeight;
+    let left = r.left + r.width / 2 - pw / 2;
+    left = Math.max(8, Math.min(left, window.innerWidth - pw - 8));
+    let top = r.bottom + 8;
+    if (top + ph > window.innerHeight - 8) top = r.top - ph - 8;
+    pop.style.left = left + 'px';
+    pop.style.top  = top + 'px';
+    current = el;
+  }
+  function hide() { pop.classList.remove('show'); pinned = false; current = null; }
+
+  document.addEventListener('click', e => {
+    const t = e.target.closest('.term');
+    if (t) {
+      e.stopPropagation();
+      if (pinned && current === t) { hide(); }
+      else { show(t); pinned = true; }
+    } else if (!e.target.closest('#term-popover')) {
+      hide();
+    }
+  });
+  document.addEventListener('mouseover', e => {
+    const t = e.target.closest('.term');
+    if (t && !pinned) show(t);
+  });
+  document.addEventListener('mouseout', e => {
+    const t = e.target.closest('.term');
+    if (t && !pinned) hide();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') hide();
+    if ((e.key === 'Enter' || e.key === ' ') && document.activeElement?.classList.contains('term')) {
+      e.preventDefault();
+      if (pinned && current === document.activeElement) hide();
+      else { show(document.activeElement); pinned = true; }
+    }
+  });
+  if (typeof window !== 'undefined') window.addEventListener('resize', hide);
+}
+
+function renderGlossary() {
+  const el = document.getElementById('glossary-list');
+  if (!el) return;
+  el.innerHTML = Object.values(GLOSSARY).map(g => `
+    <div class="gloss-item">
+      <div class="gloss-term">${g.term}</div>
+      <div class="gloss-def">${g.def}</div>
+    </div>`).join('');
+}
+
+function tokenize(text) {
+  return (text.toLowerCase().match(/[a-z]+/g) || [])
+    .filter(w => w.length > 2 && !STOP.has(w));
+}
+
+function buildModel() {
+  const classes = [...new Set(examples.map(e => e.label))];
+  const cc = {}, wc = {}, totals = {};
+  classes.forEach(c => { cc[c] = 0; wc[c] = {}; totals[c] = 0; });
+  examples.forEach(({text, label}) => {
+    cc[label]++;
+    tokenize(text).forEach(w => {
+      wc[label][w] = (wc[label][w] || 0) + 1;
+      totals[label]++;
+    });
+  });
+  const vocab = new Set(classes.flatMap(c => Object.keys(wc[c])));
+  return { cc, wc, totals, vocab: [...vocab], vs: vocab.size, total: examples.length, classes };
+}
+
+function getClassifySteps(text, model) {
+  const { cc, wc, totals, vs, total, classes } = model;
+  const tokens = tokenize(text);
+  let lp = {};
+  classes.forEach(c => lp[c] = Math.log(cc[c] / total));
+
+  function toPosteriors(lp) {
+    const mx = Math.max(...Object.values(lp));
+    const s  = Object.values(lp).reduce((a, v) => a + Math.exp(v - mx), 0);
+    const p  = {};
+    classes.forEach(c => p[c] = Math.exp(lp[c] - mx) / s);
+    return p;
+  }
+
+  const steps = [{ word: 'Prior', posteriors: toPosteriors({...lp}), wi: null }];
+  tokens.forEach(w => {
+    const wi = {};
+    classes.forEach(c => {
+      const count = wc[c][w] || 0;
+      const prob  = (count + 1) / (totals[c] + vs);
+      wi[c] = { count, prob };
+      lp[c] += Math.log(prob);
+    });
+    steps.push({ word: w, posteriors: toPosteriors({...lp}), wi });
+  });
+  return { steps, tokens };
+}
+
+function pct(x) { return (x * 100).toFixed(1) + '%'; }
+function colorOf(cls) { return cls === 'SPAM' ? 'var(--spam)' : 'var(--ham)'; }
+
+function texEsc(str) {
+  return String(str).replace(/[\\{}$&#%_^~]/g, m => ({
+    '\\':'\\textbackslash{}','{':'\\{','}':'\\}','$':'\\$','&':'\\&',
+    '#':'\\#','%':'\\%','_':'\\_','^':'\\textasciicircum{}','~':'\\textasciitilde{}'
+  }[m]));
+}
+function sciTex(x, digits = 3) {
+  const s = Number(x).toExponential(digits);
+  const m = s.match(/^(-?\d+(?:\.\d+)?)e([+-]\d+)$/);
+  if (!m) return s.replace('%', '\\%');
+  return `${m[1]} \\times 10^{${parseInt(m[2], 10)}}`;
+}
+function pctTex(x) { return pct(x).replace('%', '\\%'); }
+function tex(latex, display) {
+  const d = display ? ' data-display="1"' : '';
+  return `<span class="tex" data-tex="${escHtml(latex)}"${d}></span>`;
+}
+function renderMath(root) {
+  if (typeof katex === 'undefined') return;
+  (root || document).querySelectorAll('.tex').forEach(el => {
+    if (el.dataset.rendered) return;
+    try {
+      katex.render(el.dataset.tex, el, { displayMode: el.dataset.display === '1', throwOnError: false, colorIsTextColor: true });
+      el.dataset.rendered = '1';
+    } catch (e) { el.textContent = el.dataset.tex; }
+  });
+}
+
+function renderExList() {
+  const el = document.getElementById('ex-list');
+  el.innerHTML = examples.map((ex, i) => `
+    <div class="ex-item ${ex.label.toLowerCase()}">
+      <span class="label-tag ${ex.label.toLowerCase()}">${DISPLAY[ex.label]}</span>
+      <span class="ex-text">${escHtml(ex.text)}</span>
+      <button class="del-btn" onclick="deleteEx(${i})" title="Remove">×</button>
+    </div>`).join('');
+}
+
+function renderStats() {
+  const m = examples.length >= 2 ? buildModel() : null;
+  ['SPAM','HAM'].forEach(c => {
+    const n = examples.filter(e => e.label === c).length;
+    document.getElementById(`stat-${c.toLowerCase()}-n`).textContent = n;
+    document.getElementById(`badge-${c.toLowerCase()}`).textContent = n;
+    document.getElementById(`stat-${c.toLowerCase()}-p`).textContent =
+      m ? `P(${DISPLAY[c]}) = ${(m.cc[c] / m.total).toFixed(2)}` : `P(${DISPLAY[c]}) = —`;
+  });
+  document.getElementById('vocab-note').textContent =
+    m ? `Vocabulary: ${m.vs} unique words` : 'Vocabulary: — words';
+}
+
+function renderModel() {
+  const hasData = examples.length >= 2;
+  document.getElementById('model-empty').style.display   = hasData ? 'none' : 'block';
+  document.getElementById('model-content').style.display = hasData ? 'block' : 'none';
+  if (!hasData) return;
+
+  const m = buildModel();
+  const { wc, totals, vs } = m;
+  const SPAM = 'SPAM', HAM = 'HAM';
+
+  const vocab = new Set([...Object.keys(wc[SPAM] || {}), ...Object.keys(wc[HAM] || {})]);
+  const words = [];
+  vocab.forEach(w => {
+    const nS = (wc[SPAM] && wc[SPAM][w]) || 0;
+    const nH = (wc[HAM]  && wc[HAM][w])  || 0;
+    if (nS + nH < 2) return;
+    const pS = (nS + 1) / (totals[SPAM] + vs);
+    const pH = (nH + 1) / (totals[HAM]  + vs);
+    const lean = Math.log(pS / pH);
+    words.push({ w, nS, nH, pS, pH, lean });
+  });
+  words.sort((a,b) => b.lean - a.lean);
+  modelWordsCache = { words, totals, vs };
+  modelShown = Math.min(18, words.length);
+  renderTugList();
+}
+
+function renderTugList() {
+  if (!modelWordsCache) return;
+  const { words, totals, vs } = modelWordsCache;
+  const SPAM = 'SPAM';
+  const n = Math.min(modelShown, words.length);
+  const half = Math.ceil(n / 2);
+  const topSpam = words.slice(0, half);
+  const topHam  = words.slice(Math.max(half, words.length - (n - topSpam.length)));
+  const shownWords = [...topSpam, ...topHam].sort((a,b) => b.lean - a.lean);
+  const maxLean = Math.max(1, ...words.map(x => Math.abs(x.lean)));
+
+  document.getElementById('tug-list').innerHTML = shownWords.map(x => {
+    const spam = x.lean > 0;
+    const frac = Math.abs(x.lean) / maxLean;
+    const widthPct = (frac * 50).toFixed(1);
+    const color = spam ? 'var(--spam)' : 'var(--ham)';
+    const total = x.nS + x.nH;
+    return `
+    <details class="tug-row">
+      <summary>
+        <span class="tug-word" style="color:${color}">${escHtml(x.w)}</span>
+        <span class="tug-bar">
+          <span class="tug-center"></span>
+          <span class="tug-fill ${spam ? 'spam' : 'ham'}" style="width:${widthPct}%;${spam ? 'left:50%' : 'right:50%'};background:${color}"></span>
+        </span>
+        <span class="tug-n">n=${total}</span>
+        <span class="tug-expand">▸</span>
+      </summary>
+      <div class="tug-body">
+        <div class="tug-detail">
+          <span style="color:var(--spam)">Spam: found ${x.nS} time${x.nS!==1?'s':''}</span>
+          ${tex(`P(\\text{${texEsc(x.w)}} \\mid \\text{Spam}) = \\frac{${x.nS}+1}{${totals[SPAM]}+${vs}} = ${x.pS.toFixed(5)}`, false)}
+        </div>
+        <div class="tug-detail">
+          <span style="color:var(--ham)">Legitimate: found ${x.nH} time${x.nH!==1?'s':''}</span>
+          ${tex(`P(\\text{${texEsc(x.w)}} \\mid \\text{Legitimate}) = \\frac{${x.nH}+1}{${totals['HAM']}+${vs}} = ${x.pH.toFixed(5)}`, false)}
+        </div>
+        <div class="tug-verdict">This word is ${spam
+          ? `<strong style="color:var(--spam)">${(x.pS/x.pH).toFixed(1)}× more common</strong> in spam`
+          : `<strong style="color:var(--ham)">${(x.pH/x.pS).toFixed(1)}× more common</strong> in legitimate email`} — that's why it leans ${spam ? 'right' : 'left'}.</div>
+      </div>
+    </details>`;
+  }).join('');
+
+  const moreWrap = document.getElementById('tug-more');
+  const remaining = words.length - n;
+  if (remaining > 0) {
+    moreWrap.innerHTML = `<button class="btn-ghost" onclick="showMoreWords()">Show more words (${remaining} remaining)</button>`;
+  } else {
+    moreWrap.innerHTML = words.length > 18
+      ? `<span style="font-size:11px;color:var(--muted)">All ${words.length} words shown. Words nearest the center say the least about the class.</span>`
+      : '';
+  }
+  renderMath(document.getElementById('tug-list'));
+}
+
+function showMoreWords() {
+  modelShown = Math.min(modelShown + 10, (modelWordsCache?.words.length || modelShown));
+  renderTugList();
+}
+
+function classify() {
+  const text = document.getElementById('classify-input').value.trim();
+  if (!text || examples.length < 2) return;
+
+  const m = buildModel();
+  const { steps, tokens } = getClassifySteps(text, m);
+  const { cc, wc, totals, vs, total, classes } = m;
+
+  const final = steps[steps.length - 1];
+  const pred  = Object.entries(final.posteriors).sort((a,b) => b[1]-a[1])[0][0];
+  const conf  = final.posteriors[pred] || 0;
+  const vc    = document.getElementById('verdict-card');
+  vc.className = `verdict-card ${pred.toLowerCase()}`;
+  document.getElementById('verdict-class').textContent  = DISPLAY[pred];
+  document.getElementById('verdict-class').className    = `verdict-class ${pred.toLowerCase()}`;
+  document.getElementById('verdict-probs').innerHTML    =
+    classes.map(c => `<span style="color:${colorOf(c)}">${DISPLAY[c]}: <strong>${pct(final.posteriors[c])}</strong></span>`).join('');
+
+  const confPct = conf * 100;
+  const confColor = confPct >= 85 ? colorOf(pred) : confPct >= 65 ? '#fbbf24' : '#94a3b8';
+  const confText = confPct >= 85 ? 'Very confident' : confPct >= 65 ? 'Fairly confident — but with some uncertainty' : 'Uncertain — the text resembles both classes';
+  const confNote = confPct >= 85 ? 'The probability distribution is clearly one-sided.'
+                 : confPct >= 65 ? 'The model leans one way but the words give mixed signals.'
+                 : 'The words in the text appear roughly equally in both classes. More training data or clearer words would help.';
+  document.getElementById('confidence-wrap').innerHTML = `
+    <div class="confidence-label">Model confidence</div>
+    <div class="confidence-track">
+      <div class="confidence-fill" style="width:${confPct}%;background:${confColor}"></div>
+    </div>
+    <div class="confidence-zones">
+      <span>0%</span><span>Uncertain &lt;65%</span><span>Fairly sure &lt;85%</span><span>Very confident ≥85%</span><span>100%</span>
+    </div>
+    <div class="confidence-verdict" style="color:${confColor}">${confPct.toFixed(1)}% — ${confText}</div>
+    <div style="font-size:12px;color:var(--subtle);margin-top:4px">${confNote}</div>`;
+
+  const rawWords = (text.toLowerCase().match(/[a-z]+/g) || []);
+  document.getElementById('token-display').innerHTML = rawWords.map(w => {
+    if (w.length <= 2)   return `<span class="token short" title="Too short (≤2 characters)">${escHtml(w)}</span>`;
+    if (STOP.has(w))     return `<span class="token stopped" title="Stop word">${escHtml(w)}</span>`;
+    return                      `<span class="token kept">${escHtml(w)}</span>`;
+  }).join('');
+  if (rawWords.length === 0) {
+    document.getElementById('token-display').innerHTML =
+      `<span style="color:var(--muted);font-size:12px">No words found in the text.</span>`;
+  }
+
+  let html = `
+  <div class="card" style="margin-bottom:12px;padding-bottom:16px">
+    <span class="card-label">The mathematics behind Naïve Bayes</span>
+    <p style="font-size:12px;color:var(--muted);line-height:1.7;margin:0 0 12px">
+      ${term('naive',"Naïve")} Bayes is based on ${term('bayes',"Bayes' theorem")}. We want to know how probable each class is given the text:
+    </p>
+    ${tex(`P(\\text{class} \\mid \\text{text}) = \\frac{\\textcolor{#ffd866}{P(\\text{class})}\\;\\textcolor{#6698ff}{P(\\text{text} \\mid \\text{class})}}{\\textcolor{#9aa6c4}{P(\\text{text})}}`, true)}
+    <div class="fp-legend" style="margin-top:14px">
+      <div><span class="fp-dot" style="background:#ffd866"></span> <strong style="color:#ffd866">P(class)</strong> — ${term('prior','how common the class is')}. <em>We calculate this in step 1.</em></div>
+      <div><span class="fp-dot" style="background:#6698ff"></span> <strong style="color:#6698ff">P(text | class)</strong> — all word probabilities. <em>We calculate this in step 2.</em></div>
+      <div><span class="fp-dot" style="background:#9aa6c4"></span> <strong style="color:#9aa6c4">${term('evidence','P(text)')}</strong> — the same for all classes, so we ${term('normalize','normalize')} it away. <em>This happens in step 3.</em></div>
+    </div>
+  </div>`;
+
+  const priorPost = steps[0].posteriors;
+  html += `
+  <details class="step-card" open>
+    <summary><span class="step-badge">Step 1</span><span class="step-title">Calculate how common the classes are</span><span class="step-expand">▸</span></summary>
+    <div class="step-body">
+      <p class="step-formula-link">Here we calculate <strong style="color:#ffd866">P(class)</strong> — the yellow part of Bayes' theorem.</p>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.6">
+        Before the model has seen a single word, it already knows how common each class is in the training data. This is called the <span class="term" data-term="prior" tabindex="0" role="button"><strong style="color:var(--text)">prior probability</strong></span>.
+      </p>
+      <div class="math-prior-grid">
+        ${classes.map(c => {
+          const n = cc[c], p = n / total;
+          return `
+          <div class="math-prior-box">
+            <div class="mpb-cls" style="color:${colorOf(c)}">${DISPLAY[c]}</div>
+            <div class="mpb-frac">
+              ${tex(`P(\\text{${DISPLAY[c]}}) = \\frac{${n}}{${total}} = ${p.toFixed(2)}`, true)}
+            </div>
+            <div style="font-size:11px;color:var(--muted)">${n} of your ${total} training examples are ${DISPLAY[c].toLowerCase()}</div>
+            <div class="mpb-bar" style="background:${colorOf(c)};width:${p*100}%;max-width:100%"></div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div class="math-posterior" style="margin-top:10px">
+        <div class="math-posterior-label">Starting point before any words are counted</div>
+        <div class="math-post-bar">
+          <div class="pb-spam" style="width:${(priorPost.SPAM||0)*100}%"></div>
+          <div class="pb-ham"  style="width:${(priorPost.HAM||0)*100}%"></div>
+        </div>
+        <div class="math-post-nums">
+          ${classes.map(c => `<span class="pn-${c.toLowerCase()}">${DISPLAY[c]}: <strong>${pct(priorPost[c]||0)}</strong></span>`).join('')}
+        </div>
+      </div>
+    </div>
+  </details>`;
+
+  if (tokens.length === 0) {
+    html += `<div class="card"><p style="font-size:12px;color:var(--muted)">No meaningful words found in the text after stop word filtering.</p></div>`;
+  }
+
+  if (tokens.length > 0) {
+    let rows = '';
+    steps.slice(1).forEach((step, idx) => {
+      const pS = step.wi['SPAM'] ? step.wi['SPAM'].prob : 0;
+      const pH = step.wi['HAM']  ? step.wi['HAM'].prob  : 0;
+      const rowMax = Math.max(pS, pH) || 1;
+
+      const formulaRows = classes.map(c => {
+        const wi = step.wi[c], n_ord = wi.count, n_tot = totals[c];
+        const unseen = n_ord === 0;
+        return `
+          <div class="wd-formula">
+            <div class="wd-formula-cls" style="color:${colorOf(c)}">${DISPLAY[c]}</div>
+            ${tex(`P(\\text{${texEsc(step.word)}} \\mid \\text{${DISPLAY[c]}}) = \\frac{\\text{count}+1}{\\text{total}+|V|} = \\frac{${n_ord}+1}{${n_tot}+${vs}} = ${wi.prob.toFixed(5)}`, false)}
+            <div class="wd-formula-note">${unseen
+              ? `The word was not seen in ${DISPLAY[c].toLowerCase()} during training.`
+              : `Found ${n_ord} time${n_ord!==1?'s':''} in ${DISPLAY[c].toLowerCase()}.`}</div>
+          </div>`;
+      }).join('');
+
+      rows += `
+      <details class="wordstep">
+        <summary>
+          <span class="ws-num">${idx + 1}</span>
+          <span class="ws-word">${escHtml(step.word)}</span>
+          <span class="ws-probs">
+            <span class="ws-prob-row"><span class="ws-prob-lbl" style="color:var(--spam)">spam</span><span class="ws-prob-bar"><span class="ws-prob-fill" style="width:${(pS/rowMax)*100}%;background:var(--spam)"></span></span><span class="ws-prob-val">${pS.toFixed(4)}</span></span>
+            <span class="ws-prob-row"><span class="ws-prob-lbl" style="color:var(--ham)">legitimate</span><span class="ws-prob-bar"><span class="ws-prob-fill" style="width:${(pH/rowMax)*100}%;background:var(--ham)"></span></span><span class="ws-prob-val">${pH.toFixed(4)}</span></span>
+          </span>
+          <span class="ws-expand">▸</span>
+        </summary>
+        <div class="wordstep-body">
+          <div class="wd-formulas">${formulaRows}</div>
+        </div>
+      </details>`;
+    });
+
+    html += `
+    <details class="step-card">
+      <summary><span class="step-badge">Step 2</span><span class="step-title">Calculate probabilities word by word</span><span class="step-expand">▸</span></summary>
+      <div class="step-body">
+        <p class="step-formula-link">Here we calculate <strong style="color:#6698ff">P(text | class)</strong> — the blue part of Bayes' theorem.</p>
+        <p class="journey-lead">Each word has a probability in each class. It is calculated like this:</p>
+        <div class="gen-formula">
+          ${tex(`P(\\text{word} \\mid \\text{class}) = \\frac{\\text{count in class} + 1}{\\text{total words in class} + |V|}`, true)}
+          <p class="gen-formula-note">
+            We add <strong>+1</strong> to the numerator and <span class="term" data-term="vocabulary" tabindex="0" role="button">|V|</span> to the denominator due to ${term('laplace','Laplace smoothing')}. This ensures no word gets a probability of zero.
+          </p>
+        </div>
+        <p class="journey-lead">The bars show how probable each word is in spam versus legitimate email. Click a word to see the calculation behind it.</p>
+        <div class="journey-formula-note">
+          In this text, <strong style="color:${colorOf('SPAM')}">spam has ${totals.SPAM} words</strong> total,
+          <strong style="color:${colorOf('HAM')}">legitimate has ${totals.HAM} words</strong>, and the ${term('vocabulary','vocabulary |V|')} = <strong>${vs} unique words</strong>.
+        </div>
+        ${rows}
+        <p class="journey-summary">These probabilities are multiplied together with the prior probabilities from <strong>step 1</strong> in the next step.</p>
+      </div>
+    </details>`;
+  }
+
+  html += `
+  <details class="step-card">
+    <summary><span class="step-badge">Step 3</span><span class="step-title">Multiply the prior probabilities with the word probabilities</span><span class="step-expand">▸</span></summary>
+    <div class="step-body">
+      <p style="font-size:12.5px;color:var(--muted);line-height:1.75;margin:0 0 14px">
+        Here you can see how the prior probabilities and all word probabilities are multiplied together and normalized to produce the final answer.
+      </p>
+      ${buildFullCalc(m, steps, tokens)}
+    </div>
+  </details>`;
+
+  document.getElementById('math-breakdown').innerHTML = html;
+  document.getElementById('classify-result').style.display = 'block';
+  renderMath(document.getElementById('math-breakdown'));
+}
+
+function buildFullCalc(m, steps, tokens) {
+  const { cc, wc, totals, vs, total, classes } = m;
+  const final = steps[steps.length - 1];
+
+  let html = `
+    <p style="font-size:12px;color:var(--subtle);line-height:1.7;margin:0 0 14px">
+      We compute the numerator <strong style="color:#ffd866">prior</strong> × <strong style="color:#6698ff">word probabilities</strong> for each class — the yellow and blue parts of Bayes' theorem above.
+    </p>`;
+
+  classes.forEach(c => {
+    const prior = cc[c] / total;
+    const wordFactors = tokens.map(w => {
+      const count = wc[c][w] || 0;
+      const prob  = (count + 1) / (totals[c] + vs);
+      return { w, count, prob };
+    });
+    const factors = [prior, ...wordFactors.map(f => f.prob)];
+    const product = factors.reduce((a, b) => a * b, 1);
+    const priorTex = `\\underbrace{\\textcolor{#ffd866}{${prior.toFixed(5)}}}_{P(\\text{${DISPLAY[c]}})}`;
+    const termsTex = wordFactors.map(f =>
+      `\\underbrace{\\textcolor{#6698ff}{${f.prob.toFixed(5)}}}_{\\text{${texEsc(f.w)}}}`
+    ).join(' \\cdot ');
+    const lineTex = tokens.length > 0
+      ? `${priorTex} \\cdot ${termsTex} = ${sciTex(product, 4)}`
+      : `${priorTex}`;
+
+    html += `
+    <div class="fp-class-block">
+      <div class="fp-class-name" style="color:${colorOf(c)}">${DISPLAY[c]}</div>
+      <div class="fp-line">${tex(lineTex, true)}</div>
+    </div>`;
+  });
+
+  const productsPerClass = classes.map(c => {
+    const prior = cc[c] / total;
+    const wf    = tokens.map(w => { const n=wc[c][w]||0; return (n+1)/(totals[c]+vs); });
+    return { c, product: wf.reduce((a,b)=>a*b, prior) };
+  });
+
+  const sumTex = productsPerClass.map(x => sciTex(x.product, 3)).join(' + ');
+  html += `
+    <div style="margin-top:14px;padding:14px 16px;background:var(--bg);border:1px solid var(--border2);border-radius:8px">
+      <div style="font-size:11px;letter-spacing:.06em;color:var(--muted);margin-bottom:10px">Final step: convert to percentages</div>
+      <div style="font-size:12px;color:var(--subtle);line-height:1.8;margin-bottom:12px">
+        The products above are tiny numbers that are hard to compare. We therefore divide each class's number by <strong style="color:var(--text)">the sum of both</strong> — this turns the answers into percentages that together add up to 100%.
+      </div>
+      <div class="fp-norm">
+        ${productsPerClass.map(x => {
+          const col = x.c === 'SPAM' ? '#ff6b6b' : '#4ade80';
+          return `<div style="margin:14px 0">${tex(
+            `\\textcolor{${col}}{P(\\text{${DISPLAY[x.c]}} \\mid \\text{text}) = \\frac{${sciTex(x.product, 3)}}{${sumTex}} = ${pctTex(final.posteriors[x.c]||0)}}`,
+            true)}</div>`;
+        }).join('')}
+      </div>
+    </div>`;
+
+  return html;
+}
+
+function renderClassify() {
+  const hasData = examples.length >= 2;
+  document.getElementById('classify-empty').style.display   = hasData ? 'none'  : 'block';
+  document.getElementById('classify-content').style.display = hasData ? 'block' : 'none';
+}
+
+function selectLabel(lbl) {
+  newLabel = lbl;
+  document.getElementById('chip-spam').className = 'chip chip-spam' + (lbl==='SPAM'?' sel':'');
+  document.getElementById('chip-ham').className  = 'chip chip-ham'  + (lbl==='HAM' ?' sel':'');
+}
+
+function addExample() {
+  const text = document.getElementById('new-text').value.trim();
+  if (!text) return;
+  examples.push({ text, label: newLabel });
+  document.getElementById('new-text').value = '';
+  refresh();
+}
+
+function deleteEx(i) {
+  examples.splice(i, 1);
+  refresh();
+}
+
+function refresh() {
+  renderExList();
+  renderStats();
+  renderModel();
+  renderClassify();
+  document.getElementById('classify-result').style.display = 'none';
+}
+
+function clearData() {
+  if (examples.length === 0) return;
+  if (!confirm(`Clear all ${examples.length} training examples? This cannot be undone.`)) return;
+  examples = [];
+  refresh();
+}
+
+function toggleOwn() {
+  document.getElementById('own-toggle').classList.toggle('open');
+  document.getElementById('own-body').classList.toggle('open');
+}
+
+function importFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const status = document.getElementById('import-status');
+  status.className = 'status-msg loading';
+  status.innerHTML = '<span class="spinner"></span>Reading file…';
+  const reader = new FileReader();
+  reader.onload = e => {
+    const lines = e.target.result.split(/\r?\n/).filter(l => l.trim());
+    let added = 0, skipped = 0;
+    lines.forEach(line => {
+      const comma = line.indexOf(',');
+      if (comma === -1) { skipped++; return; }
+      const label = line.slice(0, comma).trim().toUpperCase();
+      const text  = line.slice(comma + 1).trim();
+      if ((label === 'SPAM' || label === 'HAM') && text.length > 0) {
+        examples.push({ text, label });
+        added++;
+      } else {
+        skipped++;
+      }
+    });
+    refresh();
+    status.className = 'status-msg info';
+    status.textContent = `✓ Imported ${added} examples${skipped ? ` · ${skipped} rows skipped` : ''}.`;
+    event.target.value = '';
+  };
+  reader.onerror = () => {
+    status.className = 'status-msg error';
+    status.textContent = 'Could not read the file. Please try again.';
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
+const EXAMPLE_BANK = [
+  {label:"SPAM", text:"Congratulations! You have been selected as the winner of this month's lottery. Click here to claim your prize of $1,500."},
+  {label:"SPAM", text:"You have won an iPhone 15 Pro in our competition! Confirm your delivery address within 24 hours."},
+  {label:"SPAM", text:"You have won $25,000 on EuroMillions! Your ticket number matched. Contact us for payment."},
+  {label:"SPAM", text:"Win a luxury trip for two to the Maldives! Take part in the survey and you will be entered into the draw. Takes only 2 minutes."},
+  {label:"SPAM", text:"CONGRATULATIONS! You are one of five selected winners this month. Your reward of $850 is waiting to be claimed."},
+  {label:"SPAM", text:"You have won a $200 gift card at Best Buy! Click here and enter your code: WIN2024."},
+  {label:"SPAM", text:"The draw is complete and you are the winner! Your prize: a weekend trip to Paris. Reply within 48 hours."},
+  {label:"SPAM", text:"Exclusive: you have qualified for a VIP lottery. The prize is $10,000 cash. Confirm here."},
+  {label:"SPAM", text:"Your phone number has won in a national draw. Prize: $5,000. Call us at 1-800-xxx-xxxx."},
+  {label:"SPAM", text:"Last chance to claim your prize! We have tried to reach you three times. Click now to secure your prize."},
+  {label:"SPAM", text:"URGENT: Your bank account has been suspended. Verify your details immediately via the link below."},
+  {label:"SPAM", text:"Your BankID needs to be updated to keep working. Click the link and follow the instructions."},
+  {label:"SPAM", text:"Important security warning: we have registered a login attempt from an unknown device. Confirm now."},
+  {label:"SPAM", text:"Your Netflix payment failed. Update your card details here to keep your subscription."},
+  {label:"SPAM", text:"Your PayPal account is limited. Log in via the link below and verify your identity to restore it."},
+  {label:"SPAM", text:"We have detected suspicious activity on your account. Log in and confirm your identity now."},
+  {label:"SPAM", text:"Your delivery is waiting. Pay $2 in customs to release your package. Click the link."},
+  {label:"SPAM", text:"Important message: you have an unpaid balance of $320. Pay within 48 hours."},
+  {label:"SPAM", text:"Your Spotify account will be closed tomorrow if you do not confirm your email address via the link below."},
+  {label:"SPAM", text:"Security warning: someone tried to change your password. Click here to protect your account."},
+  {label:"SPAM", text:"Your email quota is full. Click here and verify your account within 24 hours or it will be permanently closed."},
+  {label:"SPAM", text:"Your Microsoft 365 subscription expires today. Renew now to avoid losing access to your files."},
+  {label:"SPAM", text:"Security warning: Your Apple ID has been used in a new country. Verify it is you via the link immediately."},
+  {label:"SPAM", text:"We have noted unusual activity linked to your card number. Call us directly at 1-800-xxx-xxxx for verification."},
+  {label:"SPAM", text:"Your phone is infected with 3 viruses! Install the free app to remove them before permanent damage occurs."},
+  {label:"SPAM", text:"Microsoft technical support: we have detected serious errors on your computer. Call 1-800-xxx-xxxx immediately."},
+  {label:"SPAM", text:"Your iCloud storage is full. Your photos will be deleted in 24 hours if you do not upgrade now."},
+  {label:"SPAM", text:"Lose 10 kg in 3 weeks with a natural method. Doctor approved. No side effects. Click for more info."},
+  {label:"SPAM", text:"Doctor reveals: this simple trick cures your diabetes naturally in 30 days. The pharmaceutical industry hates this."},
+  {label:"SPAM", text:"Cheap prescription drugs without a prescription. Discreet delivery within 48 hours. No questions asked."},
+  {label:"SPAM", text:"Stop hair loss in 7 days! Clinically tested serum restores the hairline. 60-day satisfaction guarantee."},
+  {label:"SPAM", text:"This natural ingredient cures joint pain permanently. Rheumatologists don't want you to know about this."},
+  {label:"SPAM", text:"Invest in cryptocurrency and double your capital in 60 days. Guaranteed return. Limited spots available."},
+  {label:"SPAM", text:"Earn $500 a day from home! No starting capital required. Thousands are already doing it. Sign up now."},
+  {label:"SPAM", text:"Bitcoin millionaire reveals: how I made $200,000 in 6 months without working. Free video here."},
+  {label:"SPAM", text:"Exclusive investment opportunity: new green company seeks investors. Expected return 300% in 18 months."},
+  {label:"SPAM", text:"Hi beautiful, I found your profile and got curious. I live abroad but am looking for a serious connection. Write back."},
+  {label:"SPAM", text:"Quick loan $5,000 in 10 minutes! No credit check. 0% interest the first month. Apply directly here."},
+  {label:"SPAM", text:"Passive income on autopilot: a robot trades stocks for you around the clock. Average profit: $180/day."},
+  {label:"SPAM", text:"FLASH SALE: 90% off branded clothing today only. Genuine goods at incredible prices. Limited stock!"},
+  {label:"SPAM", text:"Free iPhone! Fill in the survey in 2 minutes and choose your model. We ship it to you at no cost."},
+  {label:"SPAM", text:"Last chance! Confirm your interest in an exclusive service before 11:59 PM tonight."},
+  {label:"SPAM", text:"You have a message waiting. Click here to read it. The message will be automatically deleted within 12 hours."},
+  {label:"SPAM", text:"IMPORTANT: Your unclaimed prize of $1,200 expires in 24 hours. Log in and collect it now."},
+  {label:"SPAM", text:"Tax refund waiting! You have $420 to receive. Enter your bank details at the link below for quick payment."},
+  {label:"SPAM", text:"Your domain expires in 2 days. Renew now for $9.99/year to keep your website and email."},
+  {label:"SPAM", text:"Account verification required: log in to your bank and approve the new security policy by Friday."},
+  {label:"SPAM", text:"Lawsuit filed against you. Open the attached file to read the details and avoid court."},
+  {label:"SPAM", text:"Police investigation ongoing against your ID number. Contact the case officer immediately to avoid arrest."},
+  {label:"SPAM", text:"Your card purchase of $389 at an unknown merchant was approved. Wasn't you? Block the card now."},
+  {label:"HAM", text:"Hi, could you send over the meeting materials before two o'clock? The manager wants them before Monday's review."},
+  {label:"HAM", text:"The report is done and was sent to you yesterday evening. Let me know if you have any comments before we send it to the client."},
+  {label:"HAM", text:"Reminder: the weekly meeting has moved from Tuesday to Wednesday at 10. The same link applies."},
+  {label:"HAM", text:"I'm sick and can't come in today. I'll work from home if possible, otherwise I'll call in sick."},
+  {label:"HAM", text:"Thanks for a great presentation yesterday! The client seemed happy. We'll talk next week for a follow-up."},
+  {label:"HAM", text:"Could you take a look at my draft annual report? Attached to this email. Please get back to me this week."},
+  {label:"HAM", text:"The system is back up after yesterday's outage. Contact support if you are still experiencing issues."},
+  {label:"HAM", text:"I need your signature on the contract by Friday. Can you take a look at it and get back to me?"},
+  {label:"HAM", text:"We are looking for a project coordinator for the team. Do you know anyone who might be interested? Let me know!"},
+  {label:"HAM", text:"Forgot to mention in the meeting: the budget approval is delayed by one week. More info coming Friday."},
+  {label:"HAM", text:"The quarterly results look better than expected. Calling a review next Tuesday at 2 in the large conference room."},
+  {label:"HAM", text:"Hi, I'm on holiday July 12–23. For urgent matters contact Lisa at lisa@company.com."},
+  {label:"HAM", text:"Can we move Wednesday's client meeting to Thursday? I have a scheduling conflict that came up."},
+  {label:"HAM", text:"Invoice 2024-0342 is now paid. Receipt will be sent separately from the finance department."},
+  {label:"HAM", text:"We welcome Erik as a new colleague starting Monday! He's taking on the role of marketing manager."},
+  {label:"HAM", text:"Reminder that timesheets must be submitted by the last business day of the month."},
+  {label:"HAM", text:"Do you have access to the server folder for the Q3 project files? I can't find them in the usual location."},
+  {label:"HAM", text:"Product launch is on March 14. The press release needs to be approved by management by the 7th."},
+  {label:"HAM", text:"Onboarding for the new interns starts Monday at 9 in the lobby. Can you receive them?"},
+  {label:"HAM", text:"I'm forwarding the email from the supplier about the delivery delay. What do you think we should reply?"},
+  {label:"HAM", text:"Meeting invitation: strategy day April 15, 9:00–4:00 PM, Marriott Hotel. Confirm attendance by April 1."},
+  {label:"HAM", text:"Update: IT support is closed Friday afternoon due to internal training. Plan accordingly."},
+  {label:"HAM", text:"Are you working on the ISO certification? Let me know if you need help with the documentation."},
+  {label:"HAM", text:"Thanks for covering at the meeting yesterday when I was late. I owe you one!"},
+  {label:"HAM", text:"Hey! Can we meet for lunch on Friday? It's been way too long since we last got together."},
+  {label:"HAM", text:"Thanks for a fun evening yesterday! Hope we see each other again soon. Say hi to Sara!"},
+  {label:"HAM", text:"Happy birthday!! Hope you celebrate properly. See you on Saturday as planned."},
+  {label:"HAM", text:"Mom is wondering if you're coming for the holiday this year? Let her know before the weekend so she can plan the food."},
+  {label:"HAM", text:"Have you seen my keys? I think I left them at your place last night."},
+  {label:"HAM", text:"Hey little brother! I'll be in town next weekend. Do you have time for coffee on Saturday morning?"},
+  {label:"HAM", text:"We've booked the summer cottage June 26 to July 3. You are welcome to visit whenever it suits!"},
+  {label:"HAM", text:"Thanks for helping with the move! It went so much faster with your help. Dinner is on me."},
+  {label:"HAM", text:"Can you pick up the kids from training at five on Thursday? I'm stuck in a meeting."},
+  {label:"HAM", text:"We got a new kitten! Named Mango. Come and visit when you get the chance."},
+  {label:"HAM", text:"The photos from the holiday are uploaded in the shared album. Check them out when you have time!"},
+  {label:"HAM", text:"Don't forget that you promised to come to the concert next Friday. The tickets are already bought!"},
+  {label:"HAM", text:"Hey friend! How are you? We never see each other anymore. Should we plan something fun this autumn?"},
+  {label:"HAM", text:"Can you and John come for dinner on Saturday? I was thinking of cooking Thai. Reply so I know how many we are."},
+  {label:"HAM", text:"Dad's car needs to be picked up from the garage on Friday. Can you go? I'll send you the address."},
+  {label:"HAM", text:"Your booking confirmation: City Hotel, check-in June 14 at 3 PM, check-out June 16. Booking no: 88421."},
+  {label:"HAM", text:"Your package from Amazon is on its way. Estimated delivery: tomorrow 8–12. Track your delivery with code US4421."},
+  {label:"HAM", text:"Booking confirmation: children's haircut at Nina's Salon, Tuesday April 18 at 10:30. Cancellation at least 24h before."},
+  {label:"HAM", text:"Your order has been delivered and left in the mailbox. Thank you for shopping with us!"},
+  {label:"HAM", text:"Reminder: you have a dentist appointment on Thursday at 2:15 PM with Dr. Bergström."},
+  {label:"HAM", text:"Your complaint has been received and we will get back to you within 3 working days. Case number: 2024-8821."},
+  {label:"HAM", text:"Your Spotify subscription renews automatically on April 1 for $9.99. Manage your subscription here."},
+  {label:"HAM", text:"Welcome to Pilates class! Reminder: Tuesday April 20 at 6:30 PM, Downtown Health Center, studio 2."},
+  {label:"HAM", text:"Thank you for your payment! Receipt attached. We hope you are satisfied with your purchase. Contact us if you have questions."},
+  {label:"HAM", text:"Restaurant confirmed your table for 4 on Saturday April 22 at 7:00 PM."},
+  {label:"HAM", text:"Your subscription to The Times starts May 1. Welcome as a reader! Log in to customize your news preferences."},
+  {label:"HAM", text:"Confirmation: rental car booked at Hertz Airport, pickup Friday June 7 at 2 PM. Booking number H77832."},
+  {label:"HAM", text:"Your gym membership renews on April 1 for $29.99. Manage the subscription in the app."},
+  {label:"HAM", text:"Welcome to the introductory ceramics course! Starts Thursday April 18 at 6 PM. Bring an apron."},
+  {label:"HAM", text:"Your IKEA order is ready for pickup at the store's customer service. Order number 445521."},
+  {label:"HAM", text:"Confirmation: haircut at David's Cuts, Saturday April 13 at 11:00 AM. Cancellation at least 24 hours in advance."},
+  {label:"HAM", text:"Hi parents! Reminder about the end-of-spring-term ceremony on June 14 at 10 AM in the gym. You are welcome!"},
+  {label:"HAM", text:"Frida forgot her PE bag at school. It is with us in reception if you want to pick it up."},
+  {label:"HAM", text:"The class parent meeting is on March 28 at 6:30 PM in classroom 12B. Coffee included. Hope to see you!"},
+  {label:"HAM", text:"Hi! No school on Friday. School lunch will not be served. Remember to register your children for aftercare if needed."},
+  {label:"HAM", text:"Welcome to the parent-teacher conference on Tuesday April 4 at 3:30 PM. Please confirm if you can attend."},
+  {label:"HAM", text:"Reminder that school photos are taken on Wednesday. Feel free to dress up! Photo packages are ordered online."},
+  {label:"HAM", text:"Anton was absent today without notification. Please report absences via the app or call the school."},
+  {label:"HAM", text:"Homework for week 14: read chapters 5–7 in the science book and prepare three questions for Thursday's review."},
+  {label:"HAM", text:"School resumes after the Easter holidays on Monday April 8 at 8:10 as usual. Wishing you a happy Easter!"},
+  {label:"HAM", text:"Field trip to the Science Museum is booked for May 23. Permission slip will be sent home on the 10th."},
+  {label:"HAM", text:"Hi neighbors! The stairwell is being cleaned Monday at 10. Remember to move the bikes from the basement corridor."},
+  {label:"HAM", text:"Reminder: vehicle tax is due for payment on April 30. Pay via the app or bank transfer."},
+  {label:"HAM", text:"Hi! Found a brown scarf at the bus stop on Main Street. It's with me if it belongs to you."},
+  {label:"HAM", text:"The residents' association meeting is on May 22 at 7 PM in the common room. Agenda attached."},
+  {label:"HAM", text:"Hi, just called but you didn't answer. Get back to me when you have time. Nothing urgent."},
+  {label:"HAM", text:"The library's e-services are down for maintenance Tuesday 2–4 PM. Physical loans and returns are not affected."},
+  {label:"HAM", text:"Your parking permit application has been approved. The permit is valid from May 1 to April 30 next year."},
+  {label:"HAM", text:"We are holding an open house on Saturday 1–3 PM. Feel free to drop by! Light refreshments will be served."},
+  {label:"HAM", text:"Hi! We have changed the meeting time to 5:30 instead of 6:00. Does that still work for you?"},
+  {label:"HAM", text:"Waste sorting is changing from May. New containers for packaging will be set out during week 16. More info in the mailbox."},
+  {label:"HAM", text:"Found your wallet on the subway and handed it in to the lost and found office at Central Station."},
+  {label:"HAM", text:"The book club meets at Peter's place on April 11. Bring something nice to eat and have book 4 read!"},
+  {label:"HAM", text:"Hi! I'm running about 15 minutes late. Feel free to start without me if possible."},
+  {label:"HAM", text:"The taxi is booked to the airport Sunday at 5:30 AM. The driver's name is Hassan and the car is a grey Volvo."},
+  {label:"HAM", text:"Hi, this is from Home Care. We will come as usual on Thursday but a little later, around ten o'clock."},
+  {label:"HAM", text:"The running group gathers at City Park Saturday at 8:00 AM. Bring water. The route is about 8 km."},
+  {label:"HAM", text:"Hi! Can you water my plants while I'm away next week? The key is in the usual spot."},
+  {label:"HAM", text:"Your ticket to the theatre performance will be sent as a PDF in a separate email. Welcome on May 3 at 7 PM."},
+  {label:"HAM", text:"Hi, this is about the rental listing. Is the apartment still available? I'm interested in a viewing."},
+  {label:"HAM", text:"Reminder: your car's mandatory inspection must be done by December. Book an appointment in good time."},
+  {label:"HAM", text:"Your test results are ready. Log in with your ID to read the results."},
+  {label:"HAM", text:"Hi! The pharmacy says your medication is ready for pickup. Bring ID and your prescription."},
+  {label:"HAM", text:"Welcome to the mammography on May 3 at 9:15 AM at the hospital. Bring your referral if you have one."},
+  {label:"HAM", text:"Hi! Physiotherapy starts on April 8. Come in comfortable clothes and bring gym shoes."},
+  {label:"HAM", text:"Hi! The tennis club has available slots this spring. Are you interested in playing again?"},
+  {label:"HAM", text:"Choir rehearsal is cancelled Wednesday due to a venue change. New location will be announced shortly. Thanks for your patience."},
+  {label:"HAM", text:"Hey! Should we watch the game together on Saturday? I can book a table at the pub if you're interested."},
+  {label:"HAM", text:"The book group meets at Helen's on April 11. Bring something good to eat and have book 4 read!"},
+  {label:"HAM", text:"Hey! The running group now trains on Tuesdays instead of Wednesdays. Same time and place."},
+  {label:"HAM", text:"We are starting a study circle on climate and sustainability this autumn. Register your interest with the study association."},
+  {label:"HAM", text:"The games evening is cancelled this Friday but we're on again next week. Same group as usual."},
+  {label:"HAM", text:"Hi! We have started a WhatsApp group for the neighbourhood. Send a message and we'll add you."},
+  {label:"SPAM", text:"Unpaid invoice: $125 due today. Pay immediately to avoid debt collection and extra fees."},
+  {label:"SPAM", text:"Final reminder before debt collection. Your case will be handed over tomorrow if payment of $238 is not made. Pay here."},
+  {label:"SPAM", text:"We tried to deliver your package but a customs fee of $3 remains. Pay the fee via the link for delivery."},
+  {label:"SPAM", text:"Your package is waiting for pickup. A small shipping fee is required to complete delivery. Click to pay."},
+  {label:"SPAM", text:"Earn $3,000 a month from home! No prior knowledge required. Sign up today and start tomorrow."},
+  {label:"SPAM", text:"Job offer: work 2 hours a day and earn up to $800 a week. Reply for more information."},
+  {label:"SPAM", text:"Invest in crypto now and triple your money in 30 days. Guaranteed return. Get started with $50."},
+  {label:"SPAM", text:"Exclusive investment opportunity: our customers make 400% profit on bitcoin. Spots are limited. Register interest."},
+  {label:"SPAM", text:"Your Netflix payment failed. Update your card details within 24 hours to keep your account."},
+  {label:"SPAM", text:"Your account will be closed. Confirm your details immediately via the link to avoid suspension."},
+  {label:"SPAM", text:"Important notice about your account: unusual activity detected. Verify your account to unlock it."},
+  {label:"SPAM", text:"You have an unread voicemail. Log in with your password via the link to listen to the message."},
+  {label:"SPAM", text:"Lose 10 kg in two weeks with this natural miracle pill! Order now with 70% introductory discount."},
+  {label:"SPAM", text:"Doctors hate this trick! A simple method that melts belly fat overnight. Click for the secret."},
+  {label:"SPAM", text:"Your computer is infected with dangerous viruses. Call our support immediately at 1-800-xxx-xxxx to fix it."},
+  {label:"SPAM", text:"Microsoft support: we have detected serious problems on your device. Allow remote access to resolve it."},
+  {label:"SPAM", text:"Tax refund waiting! You have $187 to receive. Enter your bank details for payment today."},
+  {label:"SPAM", text:"Congratulations, your email was selected in Google's annual lottery! You have been awarded $95,000. Reply to claim."},
+  {label:"SPAM", text:"Today only: Rolex at 90% off in our clearance sale. Limited quantity, order before midnight."},
+  {label:"SPAM", text:"Your subscription is expiring. Renew now with one click and get three months free. Offer valid today only."},
+  {label:"SPAM", text:"You have a secret admirer! Someone near you is interested. Unlock the message by registering."},
+  {label:"SPAM", text:"Loan without credit check! Up to $5,000 directly into your account regardless of payment history. Apply in 2 minutes."},
+  {label:"HAM", text:"Hi! Reminder about the development reviews next week. Book a time in the calendar that suits you."},
+  {label:"HAM", text:"The minutes from the board meeting have been sent out. Please read through and let me know of any changes by Friday."},
+  {label:"HAM", text:"Hi! The invoice for the membership fee is attached. Last payment date is the 30th. Thank you for being a member."},
+  {label:"HAM", text:"We have updated the delivery terms. No action is required from you, but you can read more on our website."},
+  {label:"HAM", text:"Hi! The nursery has a planning day on the 5th and will be closed. Please do not bring children that day. Thank you!"},
+  {label:"HAM", text:"The class parent meeting is held Thursday at 6 PM in the classroom. We'll go through the spring term and upcoming trips."},
+  {label:"HAM", text:"Your annual statement from the bank is now available to download when you log in to online banking."},
+  {label:"HAM", text:"Hi! We're changing the coffee supplier at the office. Let us know if you have preferences before the order."},
+  {label:"HAM", text:"Thank you for your application! We have received it and will get back to you after the closing date on the 15th."},
+  {label:"HAM", text:"Reminder to submit the travel expense report for the conference by month end, otherwise payment will be delayed."},
+  {label:"HAM", text:"Hi! The car inspection is booked for Tuesday at 9. Leave the key at reception if you can't be there."},
+  {label:"HAM", text:"The water will be turned off in the building Wednesday 9 AM–12 PM for maintenance. Fill up what you need in advance."},
+  {label:"HAM", text:"Hi! The library says the book you reserved is now available for pickup. It will be held until Friday."},
+  {label:"HAM", text:"Thanks for tonight! It was really lovely. Next time I'll cook the food, that's decided."},
+  {label:"HAM", text:"Hi! Can you check if we have milk at home before you leave work? Otherwise I'll pick some up on the way."},
+  {label:"HAM", text:"Tomorrow's meeting is moved to 2 PM instead of 1. The same link applies. Let me know if that clashes for you."},
+  {label:"HAM", text:"Hi! Forgot to say that the package for you ended up here by mistake. You can pick it up whenever it suits."},
+  {label:"HAM", text:"We have received your fault report about the laundry room. A technician will come Thursday between 8 and 10."},
+  {label:"HAM", text:"Hi! Thanks for being willing to swap shifts with me on Saturday. I owe you one now."},
+  {label:"HAM", text:"Your appointment at the optician is confirmed: Wednesday April 12 at 4 PM. Bring your current glasses."},
+];
+
+function updateRatioLabel() {
+  const r    = parseInt(document.getElementById('spam-ratio').value);
+  const hamR = 100 - r;
+  document.getElementById('ratio-label').textContent     = `${r}% / ${hamR}%`;
+  document.getElementById('ratio-bar-spam').style.width  = r + '%';
+  document.getElementById('ratio-bar-ham').style.width   = hamR + '%';
+  const note = r === 50
+    ? 'Even distribution — the prior probability P(class) has little effect on classification.'
+    : r >= 70
+      ? `${r}% spam — the model gets a high prior P(Spam) = ${(r/100).toFixed(2)} and already leans toward spam before seeing a single word. Ambiguous texts are more often classified as spam.`
+      : r <= 30
+        ? `Only ${r}% spam — low prior P(Spam) = ${(r/100).toFixed(2)} makes the model "lenient". It needs strong spam signals to classify as spam.`
+        : `${r}% spam — slightly skewed distribution. The prior weighs a little more toward ${r > 50 ? 'spam' : 'legitimate email'}.`;
+  document.getElementById('ratio-note').textContent = note;
+}
+
+function generateData(keepExisting = true) {
+  const n      = Math.max(4, Math.min(500, parseInt(document.getElementById('gen-count').value) || 50));
+  const ratio  = parseInt(document.getElementById('spam-ratio').value) / 100;
+  const nSpam  = Math.max(1, Math.round(n * ratio));
+  const nHam   = Math.max(1, n - nSpam);
+  const status = document.getElementById('gen-status');
+
+  const spamPool = EXAMPLE_BANK.filter(e => e.label === 'SPAM');
+  const hamPool  = EXAMPLE_BANK.filter(e => e.label === 'HAM');
+
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+  function sample(pool, count) {
+    let result = [];
+    while (result.length < count) result = result.concat(shuffle(pool));
+    return result.slice(0, count);
+  }
+
+  const picked = shuffle([...sample(spamPool, nSpam), ...sample(hamPool, nHam)]);
+  if (!keepExisting) examples = [];
+  picked.forEach(({ label, text }) => examples.push({ text, label }));
+
+  refresh();
+  status.className = 'status-msg info';
+  status.textContent = `✓ Added ${picked.length} examples (${nSpam} spam / ${nHam} legitimate). Training set now has ${examples.length} examples.`;
+}
+
+function closeIntro() {
+  document.getElementById('introOverlay').classList.remove('show');
+}
+function openIntro() {
+  document.getElementById('introOverlay').classList.add('show');
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    if (btn.dataset.tab === 'model')    renderModel();
+    if (btn.dataset.tab === 'classify') renderClassify();
+    if (btn.dataset.tab === 'glossary') renderGlossary();
+  });
+});
+
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+initGlossary();
+refresh();
+</script>
+</body>
+</html>
