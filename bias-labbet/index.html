@@ -13,19 +13,19 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'DM Sans',sans-serif;font-size:15px;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
-
 .back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .back-link:hover{color:var(--text);border-color:var(--dim);}
-.hd{width:100%;text-align:center;padding:12px 16px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
+.lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
+.lang-link:hover{color:var(--text);border-color:var(--dim);}
+.lang-link .flag{font-size:1.05em;line-height:1;}
+.hd{width:100%;text-align:center;padding:12px 160px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
 .hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}
 .hd h1 span{color:var(--accent2);}
 .hd p{color:var(--dim);font-size:0.8em;max-width:640px;margin:0 auto;line-height:1.4;}
-
 .app{display:grid;grid-template-columns:285px 1fr 300px;max-width:1300px;margin:0 auto;width:100%;flex:1;position:relative;z-index:1;}
 .lp{padding:14px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:13px;}
 .cp{padding:16px 20px;display:flex;flex-direction:column;gap:18px;min-width:0;}
 .rp{padding:14px;border-left:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;gap:12px;}
-
 .sec-t{font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--dim);margin-bottom:6px;}
 .sec-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
 .sec-head h2{font-size:1em;font-weight:700;}
@@ -40,8 +40,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .btn.ghost:hover{color:var(--text);}
 .hint{font-size:0.78em;color:var(--dim);line-height:1.5;margin-top:5px;}
 .hint strong{color:var(--text);}
-
-/* Variabel-toggles (samma mönster som NN-labbet) */
 .var-toggle{display:flex;align-items:center;gap:7px;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);cursor:pointer;transition:0.2s;font-size:0.8em;color:var(--dim);margin-bottom:5px;user-select:none;}
 .var-toggle:hover{border-color:var(--accent);}
 .var-toggle.on{border-color:var(--green);background:rgba(52,199,89,0.08);color:var(--text);}
@@ -53,8 +51,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .var-toggle .vlock{font-size:0.85em;opacity:0.55;}
 .stale-note{display:none;font-size:0.74em;color:var(--gold);line-height:1.4;margin-top:6px;}
 .stale-note.show{display:block;}
-
-/* Collapsible */
 .coll{border:1px solid var(--border);border-radius:8px;overflow:hidden;}
 .coll-toggle{width:100%;padding:10px 12px;background:var(--surface2);border:none;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:700;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px;}
 .coll-toggle:hover{color:var(--text);}
@@ -67,8 +63,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .coll-body li{margin-bottom:9px;}
 .coll-body li:last-child{margin-bottom:0;}
 .coll-body .hl{color:var(--accent);font-weight:600;}
-
-/* Sektionskort i mitten */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;}
 .sec-head h2{font-size:0.94em;font-weight:700;letter-spacing:-0.01em;}
 .more{font-size:0.78em;}
@@ -85,10 +79,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .await-title{font-size:1em;font-weight:700;color:var(--text);}
 .await-text{font-size:0.84em;color:var(--dim);line-height:1.6;max-width:380px;}
 .await-text strong{color:var(--subtle);}
-.placeholder-box{border:1px dashed var(--border);border-radius:8px;padding:22px;text-align:center;color:var(--dim);font-size:0.8em;line-height:1.6;}
-.placeholder-box strong{color:var(--text);}
-
-/* Gruppstatistik */
 .gstat{display:flex;flex-direction:column;gap:8px;}
 .gstat-row{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;}
 .gstat-label{font-size:0.76em;color:var(--dim);line-height:1.3;}
@@ -104,8 +94,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .gval{font-family:'JetBrains Mono',monospace;font-size:0.74em;font-weight:600;text-align:right;color:var(--subtle);}
 .data-note{font-size:0.78em;color:var(--dim);line-height:1.6;background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:10px 13px;}
 .data-note strong{color:var(--text);}
-
-/* Vikter */
 .wrow{display:grid;grid-template-columns:130px 1fr 50px;gap:8px;align-items:center;margin-bottom:6px;}
 .wname{font-size:0.78em;color:var(--subtle);font-weight:600;text-align:right;line-height:1.25;}
 .wtrack{position:relative;height:16px;background:var(--bg);border-radius:4px;overflow:hidden;}
@@ -118,8 +106,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .wval.neg{color:var(--red);}
 .model-chip{display:inline-flex;align-items:center;gap:7px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:0.72em;color:var(--dim);font-family:'JetBrains Mono',monospace;}
 .model-chip strong{color:var(--subtle);font-weight:600;}
-
-/* Rättvisedashboard */
 .fair-big{display:flex;flex-direction:column;gap:7px;}
 .fbar{display:grid;grid-template-columns:64px 1fr 56px;gap:9px;align-items:center;}
 .fbar .fwho{font-size:0.78em;font-weight:700;}
@@ -138,8 +124,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .fbox{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:9px 11px;}
 .fbox .fl{font-size:0.7em;color:var(--dim);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px;line-height:1.3;}
 .fbox .fv{font-family:'JetBrains Mono',monospace;font-size:1em;font-weight:700;}
-
-/* Tvillingtestet */
 .twin-ctrl{display:flex;flex-direction:column;gap:7px;}
 .twin-row{display:grid;grid-template-columns:110px 1fr 36px;gap:9px;align-items:center;font-size:0.78em;color:var(--dim);}
 .twin-row .tv{font-family:'JetBrains Mono',monospace;color:var(--accent2);font-weight:600;text-align:right;}
@@ -164,8 +148,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .twin-verdict{font-size:0.8em;line-height:1.55;padding:9px 12px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);}
 .twin-verdict strong{color:var(--text);}
 .twin-verdict.flag{border-color:rgba(239,91,91,0.35);background:rgba(239,91,91,0.06);color:var(--subtle);}
-
-/* Begrepp (glossary, samma mönster som NN-labbet) */
 .glossary{display:flex;flex-wrap:wrap;gap:4px;}
 .g-tag{font-size:0.8em;font-weight:600;padding:5px 10px;border:1px solid var(--border);border-radius:4px;background:var(--surface2);color:var(--dim);cursor:pointer;transition:0.2s;}
 .g-tag:hover{border-color:var(--accent);color:var(--accent);}
@@ -173,15 +155,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .g-def{display:none;margin-top:6px;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:0.86em;line-height:1.65;color:var(--subtle);}
 .g-def.show{display:block;}
 .g-def strong{color:var(--text);}
-
-/* Tränings-popup */
 .train-msg{position:fixed;top:26%;left:50%;transform:translateX(-50%);background:rgba(14,18,34,0.96);border:1px solid var(--border);border-radius:12px;padding:18px 26px;text-align:center;z-index:60;display:none;min-width:280px;box-shadow:0 8px 40px rgba(0,0,0,0.6);}
 .train-msg.show{display:block;}
 .train-msg .ti{font-size:1.7em;margin-bottom:5px;}
 .train-msg .tt{font-size:0.92em;font-weight:700;margin-bottom:3px;}
 .train-msg .ts{font-family:'JetBrains Mono',monospace;font-size:0.8em;color:var(--gold);}
-
-/* Dataset-modal */
 .data-modal{position:fixed;inset:0;background:rgba(9,11,20,0.88);z-index:150;display:none;align-items:center;justify-content:center;}
 .data-modal.show{display:flex;}
 .data-modal-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;width:92%;max-width:680px;max-height:82vh;display:flex;flex-direction:column;gap:8px;}
@@ -202,8 +180,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .dtable tr.missad{background:rgba(239,91,91,0.06);}
 .dtable .gk{color:var(--kvinna);}
 .dtable .gm{color:var(--man);}
-
-/* Intro-overlay */
 .overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
 .overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:26px 30px;max-width:520px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;}
@@ -216,12 +192,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
 .overlay-btn{display:block;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}
 .overlay-btn:hover{background:#3d6de6;}
-
 @media(max-width:1020px){
   .app{grid-template-columns:1fr;}
   .lp{border-right:none;border-bottom:1px solid var(--border);}
   .rp{border-left:none;border-top:1px solid var(--border);}
   .back-link{position:static;transform:none;margin-bottom:4px;}
+  .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}
   .hd{padding:10px 16px 8px;}
   .twins{grid-template-columns:1fr;}
 }
@@ -233,16 +209,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
   <a class="back-link" href="/">← AI-aktiviteter</a>
   <h1><span>Bias</span>-labbet</h1>
   <p>Träna en rekryterings-AI på skev historisk data – upptäck hur diskriminering uppstår och hur svårt det är att bli av med.</p>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/bias-labbet_ENG"><span class="flag">🇬🇧</span> English</a>
 </div>
 
 <div class="app">
 
-  <!-- ─── Vänster: allt om träningen (data → variabler → träningsdata → träna) ─── -->
   <div class="lp">
     <div id="modelChip" style="display:none;"></div>
 
     <div class="coll">
-      <button class="coll-toggle" onclick="toggleColl(this,'challBody')">🧭 Så här utforskar du<span class="arr">▼</span></button>
+      <button class="coll-toggle" onclick="toggleColl(this,'challBody')">🧭 Så här kan du utforska labbet<span class="arr">▼</span></button>
       <div class="coll-body" id="challBody">
         <p style="margin:0 0 9px;">Ett förslag på väg genom labbet. Träna om modellen efter varje ändring och se vad som händer med gapet och vikterna.</p>
         <ol>
@@ -285,10 +261,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     <div class="stale-note" id="staleNote">⚠️ Inställningarna har ändrats – resultaten nedan gäller den <strong style="color:var(--text)">förra</strong> modellen. Träna om!</div>
   </div>
 
-  <!-- ─── Mitten: den tränade modellen ─── -->
   <div class="cp">
-
-    <!-- Väntemeddelande före första träningen -->
     <div class="card" id="awaitCard">
       <div class="await-box">
         <div class="await-icon">🧠</div>
@@ -297,28 +270,23 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
       </div>
     </div>
 
-    <!-- Rättvisetestet -->
     <div class="card" id="cardFair" style="display:none;">
       <div class="sec-head"><h2>Rättvisetestet</h2><span class="sub">240 nya sökande med identiska meritfördelningar</span></div>
       <div id="fairArea"></div>
     </div>
 
-    <!-- Vikterna -->
     <div class="card" id="cardWeights" style="display:none;">
       <div class="sec-head"><h2>Modellens inlärda vikter</h2><span class="sub">vad modellen lägger vikt vid i beslutet</span></div>
       <div id="weightsArea"></div>
     </div>
 
-    <!-- Tvillingtestet -->
     <div class="card" id="cardTwins" style="display:none;">
       <div class="sec-head"><h2>Tvillingtestet</h2><span class="sub">två identiska kandidater – bedöms de lika?</span></div>
       <div id="twinArea"></div>
     </div>
   </div>
 
-  <!-- ─── Höger: begrepp, verkliga fallet ─── -->
   <div class="rp">
-
     <div class="coll">
       <button class="coll-toggle" onclick="toggleColl(this,'glossBody')">📖 Begrepp<span class="arr">▼</span></button>
       <div class="coll-body" id="glossBody">
@@ -350,10 +318,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
   </div>
 </div>
 
-<!-- Tränings-popup -->
 <div class="train-msg" id="trainMsg"><div class="ti">🧠</div><div class="tt">Tränar modellen…</div><div class="ts" id="trainStat">Epok 0</div></div>
 
-<!-- Dataset-modal -->
 <div class="data-modal" id="dataModal">
   <div class="data-modal-card">
     <div class="data-modal-hd"><h3>📋 Träningsdatan – Teknova AB:s historik</h3><button class="data-modal-close" onclick="closeDataModal()">✕ Stäng</button></div>
@@ -362,7 +328,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
   </div>
 </div>
 
-<!-- Intro-overlay -->
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
     <h2><span>Bias</span>-labbet</h2>
@@ -378,10 +343,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 </div>
 
 <script>
-// ════════════════════════════════════════════════════════════
-//  Seedad slumpgenerator – samma dataset för alla elever,
-//  så att resultat går att jämföra i klassrummet
-// ════════════════════════════════════════════════════════════
 function mulberry32(seed){
   return function(){
     seed |= 0; seed = seed + 0x6D2B79F5 | 0;
@@ -391,31 +352,20 @@ function mulberry32(seed){
   };
 }
 
-// ════════════════════════════════════════════════════════════
-//  Syntetisk data
-//  – Meriter (utbildning, erfarenhet) har SAMMA fördelning för
-//    kvinnor och män.
-//  – "Verklig lämplighet" beror bara på meriterna.
-//  – Historiska beslut: samma grund, men kvinnor bedömdes mot
-//    en hårdare tröskel (den inbyggda fördomen).
-//  – CV-uppehåll: korrelerar med kön (föräldraledighet) men
-//    påverkar INTE lämpligheten → ren proxyvariabel.
-// ════════════════════════════════════════════════════════════
-const BIAS_PENALTY = 1.7;     // hur mycket hårdare kvinnor bedömdes historiskt
-const LUCKA_PENALTY = 0.3;    // hur hårt rekryterarna straffade uppehåll i CV (per år)
-const TRH = 5;                // beslutströskel på meritpoängen (0–10)
+const BIAS_PENALTY = 1.7;
+const LUCKA_PENALTY = 0.3;
+const TRH = 5;
 
 function genPerson(rand, kvinna){
   const utb = Math.round(rand() * 10);
   const erf = Math.round(rand() * 10);
   const merit = 0.5 * utb + 0.5 * erf;
-  const lamplig = (merit + (rand() * 2 - 1) * 0.8) >= TRH;            // facit (lucka spelar ingen roll)
+  const lamplig = (merit + (rand() * 2 - 1) * 0.8) >= TRH;
   const lucka = kvinna
-    ? (rand() < 0.50 ? 1 + Math.floor(rand() * 3) : 0)                 // 50% har 1–3 år
-    : (rand() < 0.08 ? 1 : 0);                                         // 8% har 1 år
-  // Historiskt straffades både kön och uppehåll i CV (uppehållet är en proxy för kön)
+    ? (rand() < 0.50 ? 1 + Math.floor(rand() * 3) : 0)
+    : (rand() < 0.08 ? 1 : 0);
   const histScore = merit + (rand() * 2 - 1) * 0.8 - (kvinna ? BIAS_PENALTY : 0) - lucka * LUCKA_PENALTY;
-  const anstalld = histScore >= TRH;                                   // skevt facit
+  const anstalld = histScore >= TRH;
   return {kvinna, utb, erf, lucka, anstalld, lamplig};
 }
 
@@ -427,14 +377,11 @@ function genDataset(nMan, nKvinna, seed){
   return out;
 }
 
-const TRAIN = genDataset(190, 110, 115);    // skev representation, som i Amazon-fallet
-const TEST  = genDataset(120, 120, 10115);  // balanserat testset med nya sökande
+const TRAIN = genDataset(190, 110, 115);
+const TEST  = genDataset(120, 120, 10115);
 
-// ════════════════════════════════════════════════════════════
-//  Tillstånd
-// ════════════════════════════════════════════════════════════
 let useKon = true, useLucka = true, dataMode = 'hist';
-let model = null;          // {w, b, feats, dataMode} – fryses vid träning
+let model = null;
 let expCount = 0;
 let twinVals = {utb: 7, erf: 5, luckaA: 0, luckaB: 0};
 
@@ -452,15 +399,11 @@ function activeFeats(){
 }
 function label(p, mode){ return (mode === 'fair' ? p.lamplig : p.anstalld) ? 1 : 0; }
 
-// ════════════════════════════════════════════════════════════
-//  Logistisk regression (batch-gradientnedstigning)
-//  Vald just för att vikterna är fullt inspekterbara.
-// ════════════════════════════════════════════════════════════
 const sigmoid = z => 1 / (1 + Math.exp(-Math.max(-30, Math.min(30, z))));
-const LAMBDA = 0.006;   // L2-regularisering: vikter utan verklig signal krymper mot 0
+const LAMBDA = 0.006;
 
 function predict(m, p, override){
-  if(!p) p = {utb: 0, erf: 0, kvinna: false, lucka: 0};   // tvillingtestet skickar allt via override
+  if(!p) p = {utb: 0, erf: 0, kvinna: false, lucka: 0};
   let z = m.b;
   for(let i = 0; i < m.feats.length; i++){
     const f = m.feats[i];
@@ -521,9 +464,6 @@ function train(){
   }, 16);
 }
 
-// ════════════════════════════════════════════════════════════
-//  Rättvisemått på testsetet
-// ════════════════════════════════════════════════════════════
 function evaluate(m){
   const g = {
     k: {n: 0, rec: 0, lampliga: 0, missade: 0},
@@ -539,7 +479,7 @@ function evaluate(m){
       s.lampliga++;
       if(!yes) s.missade++;
     }
-    if(yes === p.lamplig) correct++;       // träffsäkerhet mot verklig lämplighet
+    if(yes === p.lamplig) correct++;
   }
   const pK = g.k.rec / g.k.n, pM = g.m.rec / g.m.n;
   return {
@@ -551,9 +491,6 @@ function evaluate(m){
   };
 }
 
-// ════════════════════════════════════════════════════════════
-//  Rendering
-// ════════════════════════════════════════════════════════════
 function pct(x){ return Math.round(x * 100) + '%'; }
 function avg(arr, fn){ return arr.reduce((a, p) => a + fn(p), 0) / arr.length; }
 
@@ -562,8 +499,6 @@ function renderDataStats(){
   const hireFn = dataMode === 'fair' ? (p => p.lamplig ? 1 : 0) : (p => p.anstalld ? 1 : 0);
 
   if(!useKon){
-    // Kön avstängt: modellen ser inte grupperna, så vi avslöjar inte
-    // gruppskillnaderna här – eleven får upptäcka dem via vikterna.
     document.getElementById('gstat').innerHTML =
       `<div class="gstat-neutral">🚫 Modellen ser inte längre <strong>kön</strong>, så grupperna går inte att jämföra här.<br><br>
        Den har fortfarande tillgång till <strong>utbildning, erfarenhet${useLucka ? ' och uppehåll i CV' : ''}</strong>. Träna om och se i <strong>"Modellens inlärda vikter"</strong> vad den nu lägger vikt vid.</div>`;
@@ -746,9 +681,6 @@ function renderAll(){
   renderTwins();
 }
 
-// ════════════════════════════════════════════════════════════
-//  Kontroller
-// ════════════════════════════════════════════════════════════
 function toggleVar(key){
   if(key === 'kon'){ useKon = !useKon; document.getElementById('vtKon').classList.toggle('on', useKon); }
   if(key === 'lucka'){ useLucka = !useLucka; document.getElementById('vtLucka').classList.toggle('on', useLucka); }
