@@ -543,7 +543,8 @@ function humanTake(n){
     setStatus('🤖', `Du tog ${n}. <strong>AI:ns tur…</strong>`);
     setTimeout(aiTurn, 800);
     }
-
+  });
+}
 function aiTurn(){
   if(gameOver)return;
   document.getElementById('thinking').style.display='flex';
