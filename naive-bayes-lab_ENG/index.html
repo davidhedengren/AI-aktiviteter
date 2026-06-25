@@ -1379,10 +1379,10 @@ function generateData(keepExisting = true) {
 }
 
 function closeIntro() {
-  document.getElementById('introOverlay').classList.remove('show');
+  document.getElementById('introOverlay').style.display = 'none';
 }
 function openIntro() {
-  document.getElementById('introOverlay').classList.add('show');
+  document.getElementById('introOverlay').style.display = 'flex';
 }
 
 document.querySelectorAll('.tab-btn').forEach(btn => {
