@@ -27,6 +27,9 @@
   body::before { content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none; }
   .back-link { position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--muted);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2; }
   .back-link:hover { color:var(--text);border-color:var(--muted); }
+  .lang-link { position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--muted);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2; }
+  .lang-link:hover { color:var(--text);border-color:var(--muted); }
+  .lang-link .flag { font-size:1.05em;line-height:1; }
   header { background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);border-bottom:1px solid var(--border);padding:14px 28px 12px;padding-left:140px;text-align:center;position:relative; }
   header h1 { font-family:'DM Sans',sans-serif;font-size:1.3em;font-weight:700;letter-spacing:-0.01em;color:var(--text); }
   header h1 span { color:var(--accent2); }
@@ -123,7 +126,6 @@
   .math-post-nums .pn-ham { color:var(--ham); }
   .flip-note { margin-top:10px;font-size:11.5px;line-height:1.6;color:var(--subtle);background:rgba(255,216,102,.08);border:1px solid rgba(255,216,102,.25);border-radius:6px;padding:8px 12px; }
   .flip-note strong { color:var(--text); }
-  /* ── Numrerade steg-kort (Klassificera) ── */
   .step-card { background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.25);transition:border-color .2s,box-shadow .2s; }
   .step-card:hover { border-color:rgba(255,216,102,.45); }
   .step-card[open] { border-color:var(--gold);box-shadow:0 0 0 1px rgba(255,216,102,.25); }
@@ -135,7 +137,6 @@
   .step-card[open] > summary .step-expand { transform:rotate(90deg); }
   .step-body { padding:14px 16px; }
   .step-formula-link { font-size:11.5px;color:var(--subtle);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 12px;margin:0 0 12px;line-height:1.5; }
-  /* ── Dragkampsvyn (Modell) ── */
   .tug-scale { display:flex;justify-content:space-between;align-items:center;font-size:10.5px;font-weight:700;letter-spacing:.03em;margin-bottom:10px;padding:0 2px; }
   .tug-row { border-bottom:1px solid var(--border);background:transparent;transition:background .15s; }
   .tug-row:last-child { border-bottom:none; }
@@ -159,7 +160,6 @@
     .tug-row summary { grid-template-columns:80px 1fr 36px;gap:8px; }
     .tug-expand { display:none; }
   }
-  /* ── Resan ord för ord ── */
   .journey-card .journey-lead { font-size:12px;color:var(--muted);line-height:1.7;margin:-4px 0 10px; }
   .journey-formula-note { font-size:11.5px;color:var(--subtle);line-height:1.7;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:9px 12px;margin-bottom:14px; }
   .journey-formula-note strong { color:var(--text); }
@@ -217,7 +217,6 @@
   .fp-line .katex { font-size:1.25em; }
   .fp-norm .katex { font-size:1.15em; }
   .fp-result { font-size:12px;margin-top:8px;padding:8px 12px;border-radius:5px;border:1px solid;display:flex;justify-content:space-between;align-items:center; }
-  /* KaTeX-anpassning till labbets tema */
   .tex { color:var(--text); }
   .katex { font-size:1.04em; }
   .katex-display { margin:0; text-align:left; }
@@ -284,7 +283,6 @@
   .laplace-details[open] summary::before { transform:rotate(90deg); }
   .laplace-details summary:hover { color:var(--text); }
   .laplace-details .laplace-body { padding:0 18px 16px; }
-  /* Hopfällbar sektion för egna exempel */
   .collapse-toggle { width:100%;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 16px;color:var(--subtle);font-family:'DM Sans',sans-serif;font-size:0.9em;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all .2s; }
   .collapse-toggle:hover { border-color:var(--accent2);color:var(--text); }
   .collapse-toggle .arr { transition:transform .2s;color:var(--muted); }
@@ -293,7 +291,6 @@
   .collapse-body.open { display:block; }
   @keyframes fadeIn { from { opacity:0;transform:translateY(-4px); } to { opacity:1;transform:none; } }
   .tab-panel.active { animation:fadeIn .2s ease; }
-  /* Intro-popup */
   .overlay { position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center; }
   .overlay.show { display:flex; }
   .overlay-card { background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:26px 30px;max-width:560px;width:92%;max-height:90vh;overflow-y:auto; }
@@ -308,7 +305,6 @@
   .overlay-btn:hover { background:#3d6de6; }
   .info-btn { background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:5px 12px;font-family:'DM Sans',sans-serif;font-size:0.78em;font-weight:600;cursor:pointer;transition:.2s; }
   .info-btn:hover { border-color:var(--accent2);color:var(--text); }
-  /* ── Klickbara begrepp (återanvändbart ordlistesystem) ── */
   .term { border-bottom:1px dotted var(--accent2);cursor:help;color:inherit;transition:background .15s,border-color .15s;border-radius:2px; }
   .term:hover, .term:focus { border-bottom-color:var(--accent);background:rgba(77,128,255,.12);outline:none; }
   #term-popover { position:fixed;z-index:200;max-width:300px;background:var(--surface2);border:1px solid var(--border2);border-radius:9px;padding:13px 15px;box-shadow:0 8px 30px rgba(0,0,0,.55);font-size:12.5px;line-height:1.65;color:var(--subtle);display:none; }
@@ -325,6 +321,7 @@
     .bar-row { grid-template-columns:80px 1fr 44px 68px; }
     header { padding-left:28px; }
     .back-link { position:static;transform:none;margin-bottom:6px; }
+    .lang-link { position:static;transform:none;margin-bottom:6px;margin-left:8px; }
   }
 </style>
 </head>
@@ -334,7 +331,8 @@
  <a class="back-link" href="/">← AI-aktiviteter</a>
  <h1>Naïve <span>Bayes</span>-labbet</h1>
  <p>Ett interaktivt klassificeringslaboratorium</p>
- <button class="info-btn" style="position:absolute;top:50%;right:16px;transform:translateY(-50%)" onclick="openIntro()">★ Instruktion</button>
+ <button class="info-btn" style="position:absolute;top:50%;right:120px;transform:translateY(-50%)" onclick="openIntro()">★ Instruktion</button>
+ <a class="lang-link" href="https://www.ai-aktiviteter.se/naivebayes_ENG"><span class="flag">🇬🇧</span> English</a>
 </header>
 
 <nav class="tabs">
@@ -547,17 +545,9 @@ const STOP = new Set([
 let examples = [];
 let newLabel = "SPAM";
 const DISPLAY = { SPAM: 'Skräppost', HAM: 'Ej skräppost' };
-let modelShown = 18;   // antal ord som visas i dragkampsvyn (utökas med Visa fler)
+let modelShown = 18;
 let modelWordsCache = null;
 
-/* ══════════════════════════════════════════════════════════════
-   ÅTERANVÄNDBART BEGREPPSSYSTEM
-   Klickbara/hovrbara begrepp med förklaring i popover.
-   Kopiera GLOSSARY, term(), initGlossary() + tillhörande CSS
-   (.term, #term-popover) till andra labb. Markera begrepp med
-   term('nyckel') i genererad HTML, eller skriv en
-   <span class="term" data-term="nyckel">text</span> direkt.
-   ════════════════════════════════════════════════════════════ */
 const GLOSSARY = {
   'bayes':        { term:'Bayes sats', def:'En regel för att räkna ut hur sannolik en klass är givet en text, utifrån hur sannolik texten är i varje klass och hur vanlig klassen är.' },
   'naiv':         { term:'Naïve (naiv)', def:'Metoden kallas "naiv" för att den antar att varje ord är oberoende av de andra orden. Det stämmer sällan i verkligheten, men förenklingen fungerar förvånansvärt bra.' },
@@ -629,7 +619,6 @@ function initGlossary() {
   if (typeof window !== 'undefined') window.addEventListener('resize', hide);
 }
 
-// Autogenererar begreppsöversikten i Begrepp-fliken från samma GLOSSARY.
 function renderGlossary() {
   const el = document.getElementById('glossary-list');
   if (!el) return;
@@ -692,33 +681,27 @@ function pct(x) { return (x * 100).toFixed(1) + '%'; }
 function fmt4(x) { return x.toFixed(4); }
 function colorOf(cls) { return cls === 'SPAM' ? 'var(--spam)' : 'var(--ham)'; }
 
-// Gör en textsträng säker att stoppa in i \text{} i LaTeX.
 function texEsc(str) {
   return String(str).replace(/[\\{}$&#%_^~]/g, m => ({
     '\\':'\\textbackslash{}','{':'\\{','}':'\\}','$':'\\$','&':'\\&',
     '#':'\\#','%':'\\%','_':'\\_','^':'\\textasciicircum{}','~':'\\textasciitilde{}'
   }[m]));
 }
-// Konverterar ett tal till LaTeX-exponentialnotation: 1.23e-47 -> 1.23 \times 10^{-47}
 function sciTex(x, digits = 3) {
-  const s = Number(x).toExponential(digits);          // "1.230e-47"
+  const s = Number(x).toExponential(digits);
   const m = s.match(/^(-?\d+(?:\.\d+)?)e([+-]\d+)$/);
   if (!m) return s.replace('%', '\\%');
   const mant = m[1];
   const exp  = parseInt(m[2], 10);
   return `${mant} \\times 10^{${exp}}`;
 }
-// Procent säkert i LaTeX (escapar %).
 function pctTex(x) { return pct(x).replace('%', '\\%'); }
-// Producerar en platshållare som renderMath() senare fyller med KaTeX.
-// display=true ger centrerad blockformel, annars inline.
 function tex(latex, display) {
   const d = display ? ' data-display="1"' : '';
   return `<span class="tex" data-tex="${escHtml(latex)}"${d}></span>`;
 }
-// Renderar alla .tex-platshållare inom ett element via KaTeX.
 function renderMath(root) {
-  if (typeof katex === 'undefined') return; // CDN ej laddat – platshållare förblir tomma
+  if (typeof katex === 'undefined') return;
   (root || document).querySelectorAll('.tex').forEach(el => {
     if (el.dataset.rendered) return;
     try {
@@ -766,43 +749,35 @@ function renderModel() {
   const { wc, totals, vs } = m;
   const SPAM = 'SPAM', HAM = 'HAM';
 
-  // Samla alla ord och beräkna lutning (log-förhållande mellan klasserna).
-  // +1-utjämningen gör att sällsynta ord inte kan dominera.
   const vocab = new Set([...Object.keys(wc[SPAM] || {}), ...Object.keys(wc[HAM] || {})]);
   const words = [];
   vocab.forEach(w => {
     const nS = (wc[SPAM] && wc[SPAM][w]) || 0;
     const nH = (wc[HAM]  && wc[HAM][w])  || 0;
-    if (nS + nH < 2) return;                       // golv: kräver minst 2 förekomster totalt
+    if (nS + nH < 2) return;
     const pS = (nS + 1) / (totals[SPAM] + vs);
     const pH = (nH + 1) / (totals[HAM]  + vs);
-    const lean = Math.log(pS / pH);                // >0 lutar spam, <0 lutar ham
+    const lean = Math.log(pS / pH);
     words.push({ w, nS, nH, pS, pH, lean });
   });
-  // Sortera hela ordförrådet från mest spam → mest ham
   words.sort((a,b) => b.lean - a.lean);
   modelWordsCache = { words, totals, vs };
 
-  // Börja om med standardantal varje gång modellen byggs om
   modelShown = Math.min(18, words.length);
   renderTugList();
 }
 
-// Ritar dragkampslistan utifrån modelShown (de mest extrema i varje riktning, inåt mot mitten)
 function renderTugList() {
   if (!modelWordsCache) return;
   const { words, totals, vs } = modelWordsCache;
   const SPAM = 'SPAM';
   const n = Math.min(modelShown, words.length);
 
-  // Ta de mest spam-lutande och mest ham-lutande så att totalt n ord visas,
-  // vilket naturligt drar in mittenord när n växer.
   const half = Math.ceil(n / 2);
   const topSpam = words.slice(0, half);
   const topHam  = words.slice(Math.max(half, words.length - (n - topSpam.length)));
   const shownWords = [...topSpam, ...topHam].sort((a,b) => b.lean - a.lean);
 
-  // Skala mot den starkaste lutningen i HELA modellen, så mittenord blir korta
   const maxLean = Math.max(1, ...words.map(x => Math.abs(x.lean)));
 
   document.getElementById('tug-list').innerHTML = shownWords.map(x => {
@@ -838,11 +813,9 @@ function renderTugList() {
     </details>`;
   }).join('');
 
-  // Visa fler-knapp
   const moreWrap = document.getElementById('tug-more');
   const remaining = words.length - n;
   if (remaining > 0) {
-    const next = Math.min(10, remaining);
     moreWrap.innerHTML = `<button class="btn-ghost" onclick="showMoreWords()">Visa fler ord (${remaining} kvar)</button>`;
   } else {
     moreWrap.innerHTML = words.length > 18
@@ -957,14 +930,11 @@ function classify() {
     html += `<div class="card"><p style="font-size:12px;color:var(--muted)">Inga meningsbärande ord hittades i texten efter filtrering av stoppord.</p></div>`;
   }
 
-  // ── Steg 2: varje ords sannolikheter som egenskaper, med jämförande staplar ──
   if (tokens.length > 0) {
     let rows = '';
     steps.slice(1).forEach((step, idx) => {
       const pS = step.wi['SPAM'] ? step.wi['SPAM'].prob : 0;
       const pH = step.wi['HAM']  ? step.wi['HAM'].prob  : 0;
-      // Normalisera per rad: den största av ordets två sannolikheter fyller full bredd,
-      // så förhållandet mellan klasserna syns tydligt för just det ordet.
       const rowMax = Math.max(pS, pH) || 1;
 
       const formulaRows = classes.map(c => {
@@ -1020,7 +990,6 @@ function classify() {
     </details>`;
   }
 
-  // Steg 3: hela uträkningen, inbyggd direkt (ingen separat knapp)
   html += `
   <details class="step-card">
     <summary><span class="step-badge">Steg 3</span><span class="step-title">Multiplicera ihop priorsannolikheterna med ordsannolikheterna</span><span class="step-expand">▸</span></summary>
@@ -1412,189 +1381,4 @@ const EXAMPLE_BANK = [
   {label:"HAM", text:"Påminnelse om att skolfoton tas på onsdag. Kom gärna i hela kläderna! Bildpaketen beställs online."},
   {label:"HAM", text:"Vi har börjat med det nya matteprogrammet i 3B. Mer info om hur ni kan stötta hemma kommer nästa vecka."},
   {label:"HAM", text:"Anton var frånvarande idag utan anmälan. Vänligen meddela frånvaro via appen eller ring skolan."},
-  {label:"HAM", text:"Läxan i vecka 14: läs kapitel 5–7 i NO-boken och förbered tre frågor till genomgången på torsdag."},
-  {label:"HAM", text:"Skolstarten efter påsklovet är måndag den 8 april kl 8:10 som vanligt. Önskar er en glad påsk!"},
-  {label:"HAM", text:"Studiebesök på Tekniska museet är inbokat till den 23 maj. Blankett om tillstånd skickas hem den 10:e."},
-  {label:"HAM", text:"Klassen säljer lotter till förmån för klassresan. Lotterna kostar 20 kr styck. Fråga era barn om ni vill köpa."},
-  {label:"HAM", text:"Hej, Nina har haft lite magont idag men klarade sig bra. Lägg gärna med ett lättare mellanmål imorgon."},
-  {label:"HAM", text:"Sista dagen att anmäla sommarkollo är 31 mars. Anmälningslänken skickades i förra veckans utskick."},
-  {label:"HAM", text:"Hej! I vår startar vi en ny läsecirkel för åk 4. Anmäl ert barn via länken senast 15 mars."},
-  {label:"HAM", text:"Klassens vårtermin avslutas med utomhusdag den 7 juni. Mer info om aktiviteterna kommer nästa vecka."},
-  {label:"HAM", text:"Påminnelse: NP i matematik äger rum torsdag den 25 april. Eleverna behöver miniräknare och linjal."},
-  {label:"HAM", text:"Elevhälsans sjuksköterska finns på plats tisdagar och torsdagar. Boka tid via skolans app."},
-  {label:"HAM", text:"Klass 5A bjuder in till musikal den 30 maj kl 14:00 och 18:00. Biljetter säljs i receptionen."},
-  {label:"HAM", text:"Hej! Felix är lite hängig idag men vi bedömer att han klarar sig. Hämta gärna lite tidigare."},
-  {label:"HAM", text:"Hej grannar! Trapphuset städas måndag kl 10. Glöm inte att flytta cyklarna från källargången."},
-  {label:"HAM", text:"Påminnelse: fordonsskatten förfaller till betalning den 30 april. Betala via appen eller bankgiro."},
-  {label:"HAM", text:"Hej! Hittade en brun halsduk vid busskuren på Storgatan. Den ligger hos mig om den tillhör dig."},
-  {label:"HAM", text:"Bostadsrättsföreningens stämma är den 22 maj kl 19:00 i gemensamhetslokalen. Dagordning bifogas."},
-  {label:"HAM", text:"Hej, just ringt men du svarade inte. Hör av dig när du har tid. Inget bråttom."},
-  {label:"HAM", text:"Bibliotekets e-tjänster är nere för underhåll tisdag 14–16. Fysiska lån och returer påverkas inte."},
-  {label:"HAM", text:"Din ansökan om parkeringstillstånd är beviljad. Tillståndet gäller från 1 maj t.o.m. 30 april nästa år."},
-  {label:"HAM", text:"Vi håller öppet hus på lördag 13–15. Välkommen att titta in! Lättare förtäring serveras."},
-  {label:"HAM", text:"Hej! Vi har ändrat mötestiden till 17:30 istället för 18:00. Fungerar det fortfarande för dig?"},
-  {label:"HAM", text:"Sopsorteringen ändras från och med maj. Nya kärl för förpackningar ställs ut under vecka 16. Mer info i brevlådan."},
-  {label:"HAM", text:"Hittade din plånbok på tunnelbanan och lämnade in den till SL:s hittegodskontor på T-Centralen."},
-  {label:"HAM", text:"Bokklubben träffas hemma hos Petra den 11 april. Ta med något gott att äta och bok nummer 4 läst!"},
-  {label:"HAM", text:"Hej! Jag är försenad ungefär 15 minuter. Börja gärna utan mig om det är möjligt."},
-  {label:"HAM", text:"Taxin är bokad till flygplatsen söndag kl 05:30. Föraren heter Hassan och bilen är en grå Volvo."},
-  {label:"HAM", text:"Hej, det är från Hemtjänsten. Vi kommer som vanligt på torsdag men lite senare, runt klockan tio."},
-  {label:"HAM", text:"Löparlaget samlas vid Stadsparken lördag kl 8:00. Ta med vätska. Rundan är ca 8 km."},
-  {label:"HAM", text:"Hej! Kan du vattna mina blommor medan jag är borta nästa vecka? Nyckeln sitter på vanligt ställe."},
-  {label:"HAM", text:"Din biljett till teaterföreställningen skickas som PDF i separat mail. Välkommen den 3 maj kl 19:00."},
-  {label:"HAM", text:"Hej, det gäller bostadsannonsen. Är lägenheten fortfarande ledig? Jag är intresserad av visning."},
-  {label:"HAM", text:"Påminnelse: kontrollbesiktningen för din bil ska göras senast i december. Boka tid i god tid."},
-  {label:"HAM", text:"Bostadsrättsföreningen planerar att måla om fasaden i vår. Rösta på förslaget på föreningens hemsida."},
-  {label:"HAM", text:"Hej! Sophämtningen ställs in på torsdag på grund av helgdag. Nästa tömning sker följande måndag."},
-  {label:"HAM", text:"Kvitto på inlämnad deklaration. Eventuell återbäring betalas ut senast 15 juni om allt stämmer."},
-  {label:"HAM", text:"Hej! Trädet utanför porten behöver beskäras. Kontaktat kommunen och de kommer nästa vecka."},
-  {label:"HAM", text:"Hej granne! Någon har parkerat framför garaget igen. Vet du vems bil det är med reg YAB 123?"},
-  {label:"HAM", text:"Biblioteket har fått in böckerna du efterfrågade. De finns för lån fram till den 20:e."},
-  {label:"HAM", text:"Tvättstugan är bokad fredag kl 9–13. Kom ihåg att städa efter dig och töm luddfiltren."},
-  {label:"HAM", text:"Hej! Hunden hittades vid parken. Den har halsband med telefonnummer men ingen svarar. Ring mig!"},
-  {label:"HAM", text:"Elbolaget byter elmätare i fastigheten den 22 april mellan 8–12. Strömmen stängs av ca 30 min."},
-  {label:"HAM", text:"Cykelverkstaden ringde: cykeln är klar att hämta. Öppet till 18 på vardagar."},
-  {label:"HAM", text:"Mötet med hyresvärden om renoveringen är framflyttat till onsdagen 17:e. Samma tid kl 18 gäller."},
-  {label:"HAM", text:"Hej! Ska du ha med till festen på lördag? Vi tänkte köra potluck, kolla så vi inte tar samma rätt."},
-  {label:"HAM", text:"Påminnelse om läkarbesök hos Dr. Lindgren måndag 15 april kl 10:30. Ring 08-xxx-xxx vid förhinder."},
-  {label:"HAM", text:"Dina provsvar är klara. Logga in på 1177.se med BankID för att läsa resultaten."},
-  {label:"HAM", text:"Hej! Apoteket meddelar att läkemedlet finns att hämta. Ta med legitimation och recept."},
-  {label:"HAM", text:"Välkommen till mammografin den 3 maj kl 09:15 på Södersjukhuset. Ta med remissen om du har en."},
-  {label:"HAM", text:"Hej! Sjukgymnastiken börjar den 8 april. Kom i bekväma kläder och ta med gymnastikskor."},
-  {label:"HAM", text:"Hej! Tennisklubben har lediga tider i vår. Är du intresserad av att börja spela igen?"},
-  {label:"HAM", text:"Körrepetitionen ställs in onsdag på grund av lokalbyte. Ny lokal meddelas inom kort. Tack för tålamodet."},
-  {label:"HAM", text:"Fototävlingens tema i vår är natur och årstidsväxlingar. Skicka in max tre bilder senast 1 maj."},
-  {label:"HAM", text:"Hallå! Ska vi se fotbollen tillsammans på lördag? Kan boka bord på puben om ni är intresserade."},
-  {label:"HAM", text:"Hej! Bridgesällskapet samlas hos Gunnar den 18:e. Ta med fikabidrag och kom gärna lite i förväg."},
-  {label:"HAM", text:"Hallå! Löpgruppen tränas nu på tisdagar istället för onsdagar. Samma tid och plats gäller."},
-  {label:"HAM", text:"Vi startar en studiecirkel om klimat och hållbarhet till hösten. Anmäl intresse till studieförbundet."},
-  {label:"HAM", text:"Hej! Stickcafét på biblioteket börjar igen i vår. Tisdagar kl 14–16. Alla välkomna, ta med handarbete."},
-  {label:"HAM", text:"Spelkvällen ställs in denna fredag men vi kör igen nästa vecka. Samma uppställning som vanligt."},
-  {label:"HAM", text:"Hej! Vi har startat en Whatsapp-grupp för grannskapet. Skicka ett meddelande så lägger vi till dig."},
-
-  {label:"SPAM", text:"Obetald faktura: 1 249 kr förfaller idag. Betala omgående för att undvika inkasso och extra avgifter."},
-  {label:"SPAM", text:"Sista påminnelse innan inkasso. Ditt ärende överlämnas imorgon om betalning på 2 380 kr uteblir. Betala här."},
-  {label:"SPAM", text:"Vi har försökt leverera ditt paket men en tullavgift på 29 kr återstår. Betala avgiften via länken för leverans."},
-  {label:"SPAM", text:"Ditt paket väntar på utlämning. En liten fraktavgift krävs för att slutföra leveransen. Klicka för att betala."},
-  {label:"SPAM", text:"PostNord: ditt paket kunde inte levereras. Uppdatera leveransinformationen och betala 19 kr i tullavgift."},
-  {label:"SPAM", text:"Tjäna 30 000 kr i månaden hemifrån! Inga förkunskaper krävs. Anmäl dig idag och börja redan imorgon."},
-  {label:"SPAM", text:"Jobberbjudande: arbeta 2 timmar om dagen och tjäna upp till 8 000 kr i veckan. Svara för mer information."},
-  {label:"SPAM", text:"Investera i krypto nu och tredubbla dina pengar på 30 dagar. Garanterad avkastning. Kom igång med 500 kr."},
-  {label:"SPAM", text:"Exklusiv investeringschans: våra kunder gör 400% vinst på bitcoin. Platserna är begränsade. Anmäl intresse."},
-  {label:"SPAM", text:"Hej vackra, jag hittade din profil och blev nyfiken. Jag bor utomlands men söker seriös kontakt. Skriv tillbaka."},
-  {label:"SPAM", text:"Din Netflix-betalning misslyckades. Uppdatera dina kortuppgifter inom 24 timmar för att behålla ditt konto."},
-  {label:"SPAM", text:"Ditt konto kommer att stängas. Bekräfta dina uppgifter omedelbart via länken för att undvika avstängning."},
-  {label:"SPAM", text:"Viktigt meddelande om ditt Apple-ID: ovanlig aktivitet upptäckt. Verifiera ditt konto för att låsa upp det."},
-  {label:"SPAM", text:"Du har en oläst röstbrevlåda. Logga in med ditt lösenord via länken för att lyssna på meddelandet."},
-  {label:"SPAM", text:"Gå ner 10 kg på två veckor med detta naturliga mirakelpiller! Beställ nu med 70% introduktionsrabatt."},
-  {label:"SPAM", text:"Läkarna hatar detta trick! En enkel metod som smälter bukfett över natten. Klicka för hemligheten."},
-  {label:"SPAM", text:"Din dator är infekterad med farliga virus. Ring vår support omedelbart på 0200-xxx-xxx för att åtgärda."},
-  {label:"SPAM", text:"Microsoft-support: vi har upptäckt allvarliga problem på din enhet. Tillåt fjärråtkomst för att lösa det."},
-  {label:"SPAM", text:"Skatteåterbäring väntar! Du har 1 870 kr att få tillbaka. Ange dina bankuppgifter för utbetalning idag."},
-  {label:"SPAM", text:"Försäkringskassan: du har en utbetalning som väntar. Verifiera din identitet med BankID via länken nedan."},
-  {label:"SPAM", text:"Grattis, din e-postadress valdes i Googles årliga utlottning! Du har tilldelats 950 000 kr. Svara för anspråk."},
-  {label:"SPAM", text:"Endast idag: Rolex till 90% rabatt i vårt lagerrensningssortiment. Begränsat antal, beställ innan midnatt."},
-  {label:"SPAM", text:"Din prenumeration löper ut. Förnya nu med ett klick så får du tre månader gratis. Erbjudandet gäller idag."},
-  {label:"SPAM", text:"Du har fått en hemlig beundrare! Någon i din närhet är intresserad. Lås upp meddelandet genom att registrera dig."},
-  {label:"SPAM", text:"Lån utan kreditprövning! Upp till 50 000 kr direkt på kontot oavsett betalningsanmärkningar. Ansök på 2 minuter."},
-
-  {label:"HAM", text:"Hej! Påminner om utvecklingssamtalen nästa vecka. Boka en tid i kalendern som passar dig."},
-  {label:"HAM", text:"Protokollet från styrelsemötet är utskickat. Läs igenom och hör av dig med eventuella ändringar innan fredag."},
-  {label:"HAM", text:"Hej! Fakturan för medlemsavgiften är bifogad. Sista betalningsdag är den 30:e. Tack för att du är medlem."},
-  {label:"HAM", text:"Vi har uppdaterat leveransvillkoren. Inga åtgärder krävs från dig, men du kan läsa mer på vår webbplats."},
-  {label:"HAM", text:"Hej! Förskolan har planeringsdag den 5:e och håller stängt. Lämna inte barnen den dagen. Tack!"},
-  {label:"HAM", text:"Klassens föräldramöte hålls torsdag kl 18 i klassrummet. Vi går igenom vårterminen och kommande utflykter."},
-  {label:"HAM", text:"Din årsredovisning från banken finns nu tillgänglig att ladda ner när du loggar in på internetbanken."},
-  {label:"HAM", text:"Hej! Vi byter leverantör av kaffe på kontoret. Säg till om du har önskemål om sorter innan beställningen."},
-  {label:"HAM", text:"Tack för din ansökan! Vi har tagit emot den och återkommer efter sista ansökningsdag den 15:e."},
-  {label:"HAM", text:"Påminnelse om att lämna in reseräkningen för konferensen senast månadsskiftet, annars dröjer utbetalningen."},
-  {label:"HAM", text:"Hej! Bilbesiktningen är inbokad till tisdag kl 9. Lämna nyckeln i receptionen om du inte kan vara där."},
-  {label:"HAM", text:"Vattnet stängs av i fastigheten onsdag kl 9–12 för underhåll. Tappa upp det du behöver i förväg."},
-  {label:"HAM", text:"Hej! Biblioteket meddelar att boken du reserverat nu finns att hämta. Den ligger kvar till och med fredag."},
-  {label:"HAM", text:"Tack för ikväll! Det var jättemysigt. Nästa gång lagar jag maten, det är bestämt."},
-  {label:"HAM", text:"Hej! Kan du kolla om vi har mjölk hemma innan du åker från jobbet? Annars handlar jag på vägen."},
-  {label:"HAM", text:"Mötet imorgon flyttas till kl 14 istället för 13. Samma länk gäller. Säg till om det krockar för dig."},
-  {label:"HAM", text:"Hej! Glömde säga att paketet till dig kom hit av misstag. Du kan hämta det när det passar."},
-  {label:"HAM", text:"Vi har fått in din felanmälan om tvättstugan. En tekniker kommer på torsdag mellan 8 och 10."},
-  {label:"HAM", text:"Hej! Tack för att du ville byta pass med mig på lördag. Jag är skyldig dig en tjänst nu."},
-  {label:"HAM", text:"Din tidsbokning hos optikern är bekräftad: onsdag 12 april kl 16:00. Ta med dina nuvarande glasögon."},
-];
-
-function updateRatioLabel() {
-  const r     = parseInt(document.getElementById('spam-ratio').value);
-  const hamR  = 100 - r;
-  document.getElementById('ratio-label').textContent     = `${r}% / ${hamR}%`;
-  document.getElementById('ratio-bar-spam').style.width  = r + '%';
-  document.getElementById('ratio-bar-ham').style.width   = hamR + '%';
-  const note = r === 50
-    ? 'Jämn fördelning — priorsannolikheten P(klass) påverkar inte klassificeringen nämnvärt.'
-    : r >= 70
-      ? `${r}% skräppost — modellen får en hög prior P(Skräppost) = ${(r/100).toFixed(2)} och börjar redan lutat åt spam innan den sett ett enda ord. Tveksamma texter klassas oftare som skräppost.`
-      : r <= 30
-        ? `Bara ${r}% skräppost — låg prior P(Skräppost) = ${(r/100).toFixed(2)} gör modellen "snäll". Den behöver starka spamsignaler för att klassificera som skräppost.`
-        : `${r}% skräppost — lätt sned fördelning. Priorn väger lite mer åt ${r > 50 ? 'skräppost' : 'ej skräppost'}.`;
-  document.getElementById('ratio-note').textContent = note;
-}
-
-function generateData(keepExisting = true) {
-  const n      = Math.max(4, Math.min(500, parseInt(document.getElementById('gen-count').value) || 50));
-  const ratio  = parseInt(document.getElementById('spam-ratio').value) / 100;
-  const nSpam  = Math.max(1, Math.round(n * ratio));
-  const nHam   = Math.max(1, n - nSpam);
-  const status = document.getElementById('gen-status');
-
-  const spamPool = EXAMPLE_BANK.filter(e => e.label === 'SPAM');
-  const hamPool  = EXAMPLE_BANK.filter(e => e.label === 'HAM');
-
-  function shuffle(arr) {
-    const a = [...arr];
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
-  function sample(pool, count) {
-    let result = [];
-    while (result.length < count) result = result.concat(shuffle(pool));
-    return result.slice(0, count);
-  }
-
-  const picked = shuffle([...sample(spamPool, nSpam), ...sample(hamPool, nHam)]);
-  if (!keepExisting) examples = [];
-  picked.forEach(({ label, text }) => examples.push({ text, label }));
-
-  refresh();
-  status.className = 'status-msg info';
-  const pctSpam = Math.round(nSpam / picked.length * 100);
-  status.textContent = `✓ Lade till ${picked.length} exempel (${nSpam} skräppost / ${nHam} ej skräppost). Träningsmängden är nu ${examples.length} exempel.`;
-}
-
-function closeIntro() {
-  document.getElementById('introOverlay').classList.remove('show');
-}
-function openIntro() {
-  document.getElementById('introOverlay').classList.add('show');
-}
-
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-    if (btn.dataset.tab === 'model')    renderModel();
-    if (btn.dataset.tab === 'classify') renderClassify();
-    if (btn.dataset.tab === 'glossary') renderGlossary();
-  });
-});
-
-function escHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-initGlossary();
-refresh();
-</script>
-</body>
-</html>
+  {label:"HAM", text:"Läxan i vecka 14: läs kapitel 5–7 i NO-boken och förbered 
