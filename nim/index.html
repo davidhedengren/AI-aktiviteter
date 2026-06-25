@@ -538,6 +538,7 @@ function humanTake(n){
     gameSticks-=n;renderSticks();hlQRow(gameSticks);
     if(gameSticks===0){endGame(false);}
     else{humanTurn=false;renderTakeBtns();setStatus('🤖',`Du tog ${n}. <strong>AI:ns tur…</strong>`);}
+    setTimeout(aiTurn, 800);
   });
 }
 
