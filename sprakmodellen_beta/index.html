@@ -16,6 +16,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 .back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .back-link:hover{color:var(--text);border-color:var(--dim);}
+.lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
+.lang-link:hover{color:var(--text);border-color:var(--dim);}
+.lang-link .flag{font-size:1.05em;line-height:1;}
 .hd{width:100%;text-align:center;padding:12px 16px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
 .hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}
 .hd h1 span{color:var(--accent2);}
@@ -67,6 +70,16 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 .start-examples{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:0.72em;color:var(--dim);width:100%;}
 .ex-chip{font-family:'JetBrains Mono',monospace;font-size:0.92em;padding:3px 9px;border:1px solid rgba(255,159,67,0.4);border-radius:20px;background:rgba(255,159,67,0.08);color:var(--text);cursor:pointer;transition:0.15s;}
 .ex-chip:hover{background:rgba(255,159,67,0.18);border-color:var(--orange);}
+
+/* Info-tooltip (hover/fokus) */
+.lbl-tip{display:inline-flex;align-items:center;}
+.tip-ico{position:relative;display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;border:1px solid var(--dim);color:var(--dim);font-size:0.7em;font-style:italic;font-weight:700;cursor:help;margin-left:5px;font-family:'JetBrains Mono',monospace;}
+.tip-ico:hover,.tip-ico:focus{color:var(--text);border-color:var(--accent);outline:none;}
+.tip-box{position:absolute;bottom:150%;left:0;width:250px;max-width:72vw;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:0.94em;font-style:normal;font-weight:400;line-height:1.5;color:var(--subtle);box-shadow:0 8px 24px rgba(0,0,0,0.5);opacity:0;visibility:hidden;transition:opacity 0.15s;z-index:40;text-align:left;font-family:'DM Sans',sans-serif;pointer-events:none;}
+.tip-ico:hover .tip-box,.tip-ico:focus .tip-box{opacity:1;visibility:visible;}
+.tip-box b{color:var(--text);}
+.tip-box .ctx-hl{color:var(--orange);font-weight:700;}
+.tip-box .gpt-hl{color:var(--accent2);font-weight:700;}
 
 /* Collapsible (samma mönster som NIM) */
 .coll{border:1px solid var(--border);border-radius:8px;overflow:hidden;}
@@ -163,6 +176,7 @@ input[type=range]:disabled{opacity:0.3;}
   .lp{border-right:none;border-bottom:1px solid var(--border);}
   .rp{border-left:none;border-top:1px solid var(--border);}
   .back-link{position:static;transform:none;margin-bottom:4px;}
+  .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}
   .hd{padding:10px 16px 8px;}
 }
 </style>
@@ -171,6 +185,7 @@ input[type=range]:disabled{opacity:0.3;}
 
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/sprakmodellen_ENG"><span class="flag">🇬🇧</span> English</a>
   <h1><span>Språkmodell</span>-labbet</h1>
   <p>Bygg en egen liten språkmodell av valfri text – och se exakt hur den väljer nästa ord, ord för ord.</p>
 </div>
@@ -262,10 +277,10 @@ input[type=range]:disabled{opacity:0.3;}
         </select>
       </div>
       <div class="ctrl-row">
-        <label>Startord</label>
-        <input type="text" class="start-input" id="startWord" placeholder="t.ex. draken" onkeydown="if(event.key==='Enter')startFromWord()">
-        <button class="btn" onclick="startFromWord()">Starta härifrån</button>
-        <span class="start-err" id="startErr">Ordet finns inte i träningstexten.</span>
+        <label class="lbl-tip">Prompt<span class="tip-ico" tabindex="0" aria-label="Om prompten och kontextfönstret">i<span class="tip-box" id="promptTip"></span></span></label>
+        <input type="text" class="start-input" id="promptInput" placeholder="t.ex. draken flög över" onkeydown="if(event.key==='Enter')startFromPrompt()">
+        <button class="btn" onclick="startFromPrompt()">▶ Kör prompten</button>
+        <span class="start-err" id="promptErr">Skriv minst ett ord.</span>
       </div>
       <div class="ctrl-row" id="startExamplesRow" style="display:none;">
         <div class="start-examples" id="startExamples"></div>
@@ -536,6 +551,7 @@ function buildFromTextarea(){
   document.getElementById('staleNote').classList.remove('show');
   exampleStarts = topContentWords(4);
   renderStartExamples();
+  updatePromptTip();
   updateStats();
   startGen();   // sådda direkt så tabellen får liv
 }
@@ -565,12 +581,12 @@ function renderStartExamples(){
     .join('');
 }
 
-// Klick på ett exempel-startord (delegering)
+// Klick på ett exempel-startord (delegering) – fyller promptfältet
 document.getElementById('startExamples').addEventListener('click', e => {
   const chip = e.target.closest('.ex-chip');
   if(!chip) return;
-  document.getElementById('startWord').value = chip.dataset.w;
-  startFromWord();
+  document.getElementById('promptInput').value = chip.dataset.w;
+  startFromPrompt();
 });
 
 function loadPreset(key){
@@ -711,14 +727,81 @@ function restartGen(){
   startGen();
 }
 
-function startFromWord(){
+// ── Prompt: hela startfrasen styr vilken kontext modellen utgår från ──
+function startFromPrompt(){
   if(!built) return;
-  const word = document.getElementById('startWord').value.trim().toLowerCase();
-  if(!word) return;
-  const ok = startGen(word);
-  const err = document.getElementById('startErr');
-  err.classList.toggle('show', !ok);
-  if(!ok) setTimeout(() => err.classList.remove('show'), 2500);
+  const raw = document.getElementById('promptInput').value;
+  const ptoks = tokenize(raw);
+  const err = document.getElementById('promptErr');
+  if(ptoks.length === 0){
+    err.classList.add('show');
+    setTimeout(() => err.classList.remove('show'), 2500);
+    return;
+  }
+  err.classList.remove('show');
+  stopAuto();
+  deadEnd = false;
+  genTokens = ptoks.slice();   // hela prompten visas i textrutan
+  renderFromPrompt();
+}
+
+function renderFromPrompt(){
+  const hlFrom = Math.max(0, genTokens.length - k);
+  document.getElementById('genBox').innerHTML =
+    detokHTML(genTokens, hlFrom, true) + '<span class="cursor"></span>';
+  const ctx = genTokens.slice(-k);
+
+  // Fall 1: prompten är kortare än kontextlängden
+  if(ctx.length < k){
+    deadEnd = true;
+    promptBlocked(
+      `Din prompt har bara <strong>${genTokens.length}</strong> ${genTokens.length === 1 ? 'ord' : 'ord'}, men kontextlängden är <strong>${k}</strong>. ` +
+      `Lägg till fler ord i prompten – eller sänk kontextlängden till ${genTokens.length} – så har modellen en hel kontext att utgå från.`,
+      '✏️ Skriv en längre prompt');
+    return;
+  }
+  // Fall 2: modellen har aldrig sett den här kontexten (ingen generalisering)
+  if(!models[k].has(ctx.join(SEP))){
+    deadEnd = true;
+    document.getElementById('ctxChip').innerHTML =
+      '🧠 Modellens minne just nu: ' + ctx.map(t => `<span class="ct">${esc(t)}</span>`).join(' ') +
+      `<span class="ctx-count">Den här kontexten har setts <b>0</b> gånger i texten.</span>`;
+    promptBlocked(
+      `Den lilla modellen har <strong>aldrig sett</strong> ordföljden <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> i träningstexten – så den vet inte vad som kan komma efter. ` +
+      `En tabellmodell klarar bara exakta matchningar. <strong>ChatGPT</strong> skulle kunna gissa ändå, eftersom dess neurala nätverk kan <em>generalisera</em>.`,
+      '🔀 Börja om från en mening i texten');
+    return;
+  }
+  // Fall 3: kontexten finns → kör vanlig rendering
+  render(true);
+  if(genTokens.length > k){
+    const forgotten = genTokens.slice(0, -k).join(' ');
+    const narr = document.getElementById('narr');
+    narr.classList.remove('choice');
+    narr.innerHTML =
+      `Du skrev prompten <span style="color:var(--dim)">«${esc(forgotten)}</span> <span class="ctx-inline">${esc(ctx.join(' '))}»</span>. ` +
+      `Men med kontextlängd <strong>${k}</strong> tittar modellen <strong>bara</strong> på de ${k} sista orden – resten av prompten är redan "bortglömd". ` +
+      `Tryck <strong>✍️ Nästa ord</strong>.`;
+  }
+}
+
+function promptBlocked(narrHtml, btnLabel){
+  const narr = document.getElementById('narr');
+  narr.classList.remove('choice');
+  narr.innerHTML = narrHtml;
+  document.getElementById('ptable').innerHTML =
+    `<div class="ptable-msg"><span class="big">💬</span><div>${narrHtml}</div>
+     <button class="btn pri" onclick="deadEnd=false;startGen()">${btnLabel}</button></div>`;
+}
+
+// Uppdaterar info-tooltipen så siffrorna följer vald kontextlängd
+function updatePromptTip(){
+  const el = document.getElementById('promptTip');
+  if(!el) return;
+  el.innerHTML =
+    `Din prompt är <b>startfrasen</b> modellen bygger vidare på. Men med kontextlängd <span class="ctx-hl">${k}</span> minns modellen bara de <span class="ctx-hl">${k} senaste orden</span>. ` +
+    `Så fort texten passerat ${k} ord är resten av prompten <b>bortglömd</b> – bara de ${k} sista orden styr nästa ord.<br><br>` +
+    `<span class="gpt-hl">ChatGPT</span> har i stället ett kontextfönster på tusentals ord, så hela prompten påverkar varje steg.`;
 }
 
 function step(manualWord){
@@ -805,6 +888,7 @@ function stopAuto(){
 function onKChange(val){
   k = parseInt(val);
   updateStats();
+  updatePromptTip();
   if(!built) return;
   stopAuto();
   deadEnd = false;
