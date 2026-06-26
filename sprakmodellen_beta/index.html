@@ -55,6 +55,19 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 .hint{font-size:0.72em;color:var(--dim);line-height:1.45;margin-top:5px;}
 .hint strong{color:var(--text);}
 
+/* Förklarande statistik */
+.stat-help{font-size:0.68em;color:var(--dim);line-height:1.4;margin:-1px 0 9px;padding-left:1px;}
+.stat-row.headline{margin-bottom:2px;}
+.branch-wrap{margin-top:2px;}
+.branch-bar{height:9px;border-radius:4px;background:var(--bg);overflow:hidden;border:1px solid var(--border);}
+.branch-fill{height:100%;border-radius:4px;width:4%;transition:width 0.4s ease,background 0.3s;}
+.branch-lbl{font-size:0.68em;line-height:1.4;margin-top:5px;font-weight:600;}
+
+/* Klickbara exempel-startord */
+.start-examples{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:0.72em;color:var(--dim);width:100%;}
+.ex-chip{font-family:'JetBrains Mono',monospace;font-size:0.92em;padding:3px 9px;border:1px solid rgba(255,159,67,0.4);border-radius:20px;background:rgba(255,159,67,0.08);color:var(--text);cursor:pointer;transition:0.15s;}
+.ex-chip:hover{background:rgba(255,159,67,0.18);border-color:var(--orange);}
+
 /* Collapsible (samma mönster som NIM) */
 .coll{border:1px solid var(--border);border-radius:8px;overflow:hidden;}
 .coll-toggle{width:100%;padding:10px 12px;background:var(--surface2);border:none;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:700;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px;}
@@ -72,12 +85,25 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 /* Genererad text */
 .gen-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;min-height:190px;font-size:1.04em;line-height:1.9;color:var(--subtle);box-shadow:0 4px 24px rgba(0,0,0,0.3);}
 .gen-box .placeholder{color:var(--dim);font-style:italic;font-size:0.85em;}
-.ctx-tok{background:rgba(77,128,255,0.18);border:1px solid rgba(77,128,255,0.4);border-radius:4px;padding:1px 5px;color:var(--text);font-weight:600;}
+.ctx-tok{background:rgba(255,159,67,0.15);border:1px solid rgba(255,159,67,0.45);border-radius:4px;padding:1px 5px;color:var(--text);font-weight:600;}
+.new-tok{animation:popIn 0.4s ease;}
+@keyframes popIn{from{opacity:0;transform:translateY(-5px) scale(0.92);}to{opacity:1;transform:none;}}
 .cursor{display:inline-block;width:9px;height:1.05em;background:var(--accent);border-radius:1px;vertical-align:text-bottom;margin-left:3px;animation:blink 1s step-end infinite;}
 @keyframes blink{50%{opacity:0;}}
 .narr{font-size:0.8em;color:var(--dim);background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:9px 12px;line-height:1.5;}
-.narr .ctx-inline{font-family:'JetBrains Mono',monospace;color:var(--accent2);font-weight:600;}
+.narr.choice{border-left-color:var(--green);}
+.narr .ctx-inline{font-family:'JetBrains Mono',monospace;color:var(--orange);font-weight:600;}
+.narr .chosen-inline{font-family:'JetBrains Mono',monospace;color:var(--green);font-weight:700;}
 .narr strong{color:var(--text);}
+.narr .rare{color:var(--orange);font-weight:700;}
+
+/* Färglegend – gör de semantiska färgerna självförklarande */
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:0.7em;color:var(--dim);padding:2px 2px 0;}
+.legend span{display:inline-flex;align-items:center;gap:5px;}
+.legend i{width:11px;height:11px;border-radius:3px;display:inline-block;}
+.legend .sw-ctx{background:rgba(255,159,67,0.5);border:1px solid var(--orange);}
+.legend .sw-chosen{background:rgba(52,199,89,0.45);border:1px solid var(--green);}
+.legend .sw-dead{background:rgba(239,91,91,0.4);border:1px solid var(--red);}
 
 .ctrl-group{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:11px 12px;display:flex;flex-direction:column;gap:9px;}
 .ctrl-row{display:flex;gap:7px;align-items:center;flex-wrap:wrap;}
@@ -95,7 +121,9 @@ input[type=range]:disabled{opacity:0.3;}
 .rp-title{font-size:0.9em;font-weight:700;color:var(--gold);}
 .rp-desc{font-size:0.72em;color:var(--dim);line-height:1.5;}
 .ctx-chip{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:0.78em;color:var(--dim);line-height:1.6;}
-.ctx-chip .ct{font-family:'JetBrains Mono',monospace;background:rgba(77,128,255,0.14);border:1px solid rgba(77,128,255,0.35);border-radius:4px;padding:1px 5px;color:var(--text);font-weight:600;margin:0 1px;}
+.ctx-chip .ct{font-family:'JetBrains Mono',monospace;background:rgba(255,159,67,0.14);border:1px solid rgba(255,159,67,0.4);border-radius:4px;padding:1px 5px;color:var(--text);font-weight:600;margin:0 1px;}
+.ctx-chip .ctx-count{display:block;margin-top:6px;font-size:0.92em;color:var(--subtle);}
+.ctx-chip .ctx-count b{color:var(--gold);font-family:'JetBrains Mono',monospace;}
 .ptable{display:flex;flex-direction:column;gap:3px;flex:1;min-height:120px;}
 .phead{display:grid;grid-template-columns:1fr 76px 34px 42px;gap:6px;padding:0 8px;font-size:0.62em;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--dim);}
 .prow{display:grid;grid-template-columns:1fr 76px 34px 42px;gap:6px;align-items:center;padding:5px 8px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);cursor:pointer;transition:border-color 0.15s,background 0.15s,transform 0.15s;}
@@ -105,8 +133,8 @@ input[type=range]:disabled{opacity:0.3;}
 .prow .pfill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 0.3s;}
 .prow .pc{font-family:'JetBrains Mono',monospace;font-size:0.72em;color:var(--dim);text-align:right;}
 .prow .pp{font-family:'JetBrains Mono',monospace;font-size:0.78em;font-weight:600;color:var(--accent2);text-align:right;}
-.prow.picked{border-color:var(--gold);background:rgba(255,216,102,0.12);box-shadow:0 0 12px rgba(255,216,102,0.25);animation:pickPulse 0.35s ease;}
-.prow.picked .pp{color:var(--gold);}
+.prow.picked{border-color:var(--green);background:rgba(52,199,89,0.13);box-shadow:0 0 12px rgba(52,199,89,0.3);animation:pickPulse 0.35s ease;}
+.prow.picked .pp{color:var(--green);}
 @keyframes pickPulse{0%{transform:scale(1.04);}100%{transform:scale(1);}}
 .prow.greedy-top{border-color:rgba(255,216,102,0.45);}
 .prow.greedy-top .pw::after{content:' ▲';color:var(--gold);font-size:0.85em;}
@@ -157,6 +185,7 @@ input[type=range]:disabled{opacity:0.3;}
         <option value="saga" selected>📖 Sagan om glitterdraken</option>
         <option value="vader">🌦️ Väderrapporten</option>
         <option value="sport">⚽ Sportreferatet</option>
+        <option value="byn">📚 Byn Lyckeby – längre text</option>
         <option value="egen">✍️ Egen text…</option>
       </select>
       <textarea id="trainText" spellcheck="false" oninput="onTextEdit()"></textarea>
@@ -182,10 +211,18 @@ input[type=range]:disabled{opacity:0.3;}
     <div class="stat-box">
       <div class="sec-t" style="margin-bottom:8px;">Modellstatistik</div>
       <div class="stat-row"><span class="sl">Status</span><span class="sv" id="stStatus">–</span></div>
-      <div class="stat-row"><span class="sl">Tokens (ord & tecken)</span><span class="sv" id="stTokens">0</span></div>
-      <div class="stat-row"><span class="sl">Unika ord</span><span class="sv" id="stVocab">0</span></div>
-      <div class="stat-row"><span class="sl">Kontexter i tabellen</span><span class="sv" id="stCtx">0</span></div>
-      <div class="stat-row"><span class="sl">Valmöjligheter per steg</span><span class="sv" id="stBranch">–</span></div>
+      <div class="stat-row headline"><span class="sl">Tokens (ord & tecken)</span><span class="sv" id="stTokens">0</span></div>
+      <div class="stat-help">Varje ord och skiljetecken räknas som en egen token.</div>
+      <div class="stat-row headline"><span class="sl">Unika ord</span><span class="sv" id="stVocab">0</span></div>
+      <div class="stat-help">Modellens hela ordförråd – fler ord ger mer variation.</div>
+      <div class="stat-row headline"><span class="sl">Kontexter i tabellen</span><span class="sv" id="stCtx">0</span></div>
+      <div class="stat-help">Alla olika ordföljder modellen känner igen och kan fortsätta på.</div>
+      <div class="stat-row headline"><span class="sl">Valmöjligheter per steg</span><span class="sv" id="stBranch">–</span></div>
+      <div class="branch-wrap">
+        <div class="branch-bar"><div class="branch-fill" id="branchFill"></div></div>
+        <div class="branch-lbl" id="branchLbl"></div>
+      </div>
+      <div class="stat-help">I snitt så här många ord kan följa på en kontext. Nära 1 = modellen kan bara rabbla texten utantill.</div>
     </div>
     <div class="hint" id="qualityNote" style="display:none;"></div>
 
@@ -207,6 +244,11 @@ input[type=range]:disabled{opacity:0.3;}
   <div class="cp">
     <div class="gen-box" id="genBox"><span class="placeholder">Bygg modellen för att börja generera text.</span></div>
     <div class="narr" id="narr">Modellen är inte byggd ännu.</div>
+    <div class="legend">
+      <span><i class="sw-ctx"></i> kontext (modellens minne)</span>
+      <span><i class="sw-chosen"></i> valt ord</span>
+      <span><i class="sw-dead"></i> återvändsgränd</span>
+    </div>
 
     <div class="ctrl-group">
       <div class="ctrl-row">
@@ -224,6 +266,9 @@ input[type=range]:disabled{opacity:0.3;}
         <input type="text" class="start-input" id="startWord" placeholder="t.ex. draken" onkeydown="if(event.key==='Enter')startFromWord()">
         <button class="btn" onclick="startFromWord()">Starta härifrån</button>
         <span class="start-err" id="startErr">Ordet finns inte i träningstexten.</span>
+      </div>
+      <div class="ctrl-row" id="startExamplesRow" style="display:none;">
+        <div class="start-examples" id="startExamples"></div>
       </div>
       <div class="ctrl-row">
         <label>Ordval</label>
@@ -286,7 +331,44 @@ input[type=range]:disabled{opacity:0.3;}
 const PRESETS = {
   saga: `Det var en gång en liten drake som bodde i en mörk grotta. Draken var inte som andra drakar. Andra drakar sprutade eld, men den lilla draken sprutade glitter. Varje morgon flög draken över skogen och tittade på byn nedanför. I byn bodde en flicka som hette Elsa. Elsa var inte rädd för draken. Varje morgon vinkade hon till draken, och draken vinkade tillbaka med sin stora vinge. En dag kom en riddare till byn. Riddaren ville fånga draken, för riddaren trodde att alla drakar var farliga. Men Elsa sa till riddaren att den lilla draken inte var farlig. Riddaren trodde inte på Elsa. Riddaren red upp till den mörka grottan med sitt långa svärd. När riddaren kom fram till grottan sprutade draken glitter över riddaren. Riddaren började skratta. Riddaren hade aldrig sett en drake som sprutade glitter. Från den dagen var riddaren och draken bästa vänner, och varje morgon flög de tillsammans över skogen och vinkade till Elsa i byn.`,
   vader: `I dag blir det soligt i hela landet. I norra Sverige blir det soligt och kallt med temperaturer kring fem grader. I södra Sverige blir det soligt och varmt med temperaturer kring femton grader. I morgon drar ett regnområde in över landet. Regnet börjar i södra Sverige under morgonen och sprider sig norrut under dagen. I norra Sverige kan regnet övergå i snö under kvällen. Vinden blir måttlig i hela landet, men längs kusten kan vinden bli hård under eftermiddagen. På onsdag blir det växlande molnighet i hela landet. I södra Sverige kan det bli enstaka skurar under eftermiddagen. Temperaturer kring tio grader i södra Sverige och kring fem grader i norra Sverige. På torsdag blir det soligt igen i hela landet. Det blir varmt för årstiden med temperaturer kring femton grader. Till helgen drar ett nytt regnområde in över landet, och det blir blåsigt längs kusten.`,
-  sport: `Det blev en dramatisk match när hemmalaget mötte serieledarna. Hemmalaget tog ledningen redan i den femte minuten genom ett vackert mål av lagkaptenen. Publiken jublade på läktaren. Men serieledarna kvitterade i den tjugonde minuten efter ett misstag i försvaret. I den andra halvleken tog hemmalaget ledningen igen genom ett mål av den unga anfallaren. Publiken jublade ännu högre på läktaren. Serieledarna pressade hårt under de sista minuterna av matchen. Målvakten räddade hemmalaget gång på gång med fantastiska räddningar. I den sista minuten fick serieledarna en hörna. Alla spelare gick upp i straffområdet. Men målvakten räddade igen, och domaren blåste av matchen. Hemmalaget vann med två mål mot ett. Tränaren var mycket nöjd efter matchen. Tränaren sa att laget hade kämpat hela matchen och att publiken var den bästa publiken i hela serien.`
+  sport: `Det blev en dramatisk match när hemmalaget mötte serieledarna. Hemmalaget tog ledningen redan i den femte minuten genom ett vackert mål av lagkaptenen. Publiken jublade på läktaren. Men serieledarna kvitterade i den tjugonde minuten efter ett misstag i försvaret. I den andra halvleken tog hemmalaget ledningen igen genom ett mål av den unga anfallaren. Publiken jublade ännu högre på läktaren. Serieledarna pressade hårt under de sista minuterna av matchen. Målvakten räddade hemmalaget gång på gång med fantastiska räddningar. I den sista minuten fick serieledarna en hörna. Alla spelare gick upp i straffområdet. Men målvakten räddade igen, och domaren blåste av matchen. Hemmalaget vann med två mål mot ett. Tränaren var mycket nöjd efter matchen. Tränaren sa att laget hade kämpat hela matchen och att publiken var den bästa publiken i hela serien.`,
+  byn: `Det var en gång en by som hette Lyckeby. I Lyckeby fanns ett torg, en hamn, ett bageri och en gammal fyr. Och i Lyckeby bodde en katt som hette Murre. Murre var ingen vanlig katt. Andra katter jagade möss, men Murre jagade gåtor.
+
+Varje morgon vaknade Lyckeby av att tuppen gol. Varje morgon öppnade bagaren Bengt sitt bageri vid torget. Och varje morgon satt katten Murre på trappen utanför och väntade. God morgon, Murre, sa Bengt och skrattade så mjölet yrde. Vad har du för planer i dag? Men Murre svarade aldrig. Murre bara blinkade med sina gröna ögon och såg mycket klok ut.
+
+En morgon var allt fel. Bengt kom ut på torget och stannade tvärt. Alla bullar var borta. Hela bageriet var tomt på bullar. Mina bullar, ropade Bengt. Vem har tagit mina bullar? Men ingen i hela Lyckeby visste vem som hade tagit bullarna.
+
+Borgmästaren Bertil kom springande över torget. Borgmästaren Bertil var en rund liten man med en alldeles för stor hatt. Lugn, lugn, sa Bertil. Vi ska nog lösa den här gåtan. Men Bertil hade ingen aning om hur man löser en gåta. Det var just därför byn hade Murre.
+
+Murre reste sig långsamt från trappen. Murre nosade på torget. Murre nosade i luften. Sedan gick katten Murre mot hamnen, och hela byn följde efter. I hamnen satt fiskaren Frida och lagade sina nät. God morgon, sa Frida. Varför ser ni alla så hungriga ut? Någon har tagit Bengts bullar, sa Bertil. Och nu ska Murre lösa gåtan. Frida skrattade högt. En katt? Lösa en gåta? Men Murre bara blinkade.
+
+Murre hoppade upp på en båt. Murre hoppade från båten till bryggan. Murre stannade vid en hög med tomma korgar och tittade rakt upp mot fyren. Högst uppe på fyren satt tre tjocka måsar. Måsarna såg mycket nöjda ut. Och runt måsarna låg det smulor. Bullsmulor. Där är tjuvarna, ropade Bertil och pekade. Måsarna har tagit bullarna. Alla i Lyckeby tittade upp mot fyren. Måsarna bara skrek och flög sin väg. Murre bara blinkade.
+
+Bengt suckade. Nu får jag baka nya bullar, sa Bengt. Och i morgon gömmer jag dem bättre. Frida skrattade. Du borde be Murre vakta dem, sa Frida. Och så skrattade hela byn, och så var det morgon igen i Lyckeby.
+
+Nästa dag bakade Bengt nya bullar. Den här gången gömde Bengt bullarna i en stor burk. Den här gången stängde Bengt alla fönster. Och den här gången satt katten Murre på trappen och vaktade. Men nästa morgon var det fel igen. Den här gången var det inte bullarna. Den här gången var det fiskaren Fridas båt. Båten var borta. Hela hamnen var tom på Fridas båt. Min båt, ropade Frida. Vem har tagit min båt? Men ingen i hela Lyckeby visste vem som hade tagit båten.
+
+Borgmästaren Bertil kom springande igen. Lugn, lugn, sa Bertil. Vi ska nog lösa den här gåtan också. Men Bertil hade fortfarande ingen aning. Det var fortfarande därför byn hade Murre. Murre nosade på bryggan. Murre nosade på vattnet. Sedan satte sig katten Murre vid kanten och tittade länge ut mot havet. Långt där ute, nästan vid horisonten, guppade en liten prick. Det var båten. Båten hade bara slitit sig och seglat iväg alldeles själv.
+
+Bertil blev röd i ansiktet. En katt kan väl inte simma efter en båt, sa Bertil. Nej, sa Frida och log. Men en katt kan visa var båten är. Och Frida tog en annan båt och rodde ut, och hämtade hem sin egen båt igen. När Frida kom tillbaka satt Murre kvar på bryggan. Murre bara blinkade. Tack, Murre, sa Frida och klappade katten. Du är faktiskt klokare än hela byn tillsammans. Och så skrattade Frida, och så skrattade Bengt, och så var det morgon igen i Lyckeby.
+
+Nu började folk i Lyckeby förstå. När något försvann gick man inte längre till borgmästaren Bertil. Man gick till katten Murre. Murre, var är min hatt, frågade Bertil en dag. Och Murre gick lugnt fram till hunden Busen, som låg och tuggade på något stort och svart. Det var hatten. Busen hade tagit borgmästarens hatt. Murre bara blinkade. Murre, var är min nyckel, frågade gamla Greta en dag. Och Murre gick lugnt fram till brunnen på torget och tittade ner. Där, längst nere, glittrade nyckeln i vattnet. Greta hade tappat nyckeln i brunnen. Murre bara blinkade.
+
+Snart visste hela trakten om katten i Lyckeby. Folk kom från andra byar för att be Murre om hjälp. Murre, var är mitt får, frågade en bonde. Murre, var är min ring, frågade en brud. Och varje gång satte sig katten Murre ner, blinkade med sina gröna ögon, och hittade svaret. Ingen visste hur Murre gjorde det. Murre bara blinkade.
+
+En kväll drog en storm in över Lyckeby. Vinden ven runt fyren. Regnet smattrade mot rutorna. Och mitt i stormen slocknade fyren. Hela hamnen blev alldeles mörk. Utan fyren kunde inga båtar hitta hem. Och ute på havet, i mörkret, fanns fiskaren Frida i sin båt. Fyren har slocknat, ropade Bengt. Frida hittar aldrig hem i mörkret. Vad gör vi nu? Men ingen i hela Lyckeby visste vad de skulle göra. Borgmästaren Bertil sprang i cirklar under sin stora hatt. Det hjälpte inte alls.
+
+Då reste sig katten Murre. Murre sprang genom regnet. Murre sprang över torget. Murre sprang ända upp i den mörka fyren. Och högst uppe började Murre jama. Murre jamade och jamade så högt att ljudet bar ända ut till havet. Ute i mörkret hörde Frida ett svagt litet jam. Det är Murre, sa Frida. Murre visar mig vägen hem. Och Frida rodde mot ljudet, jam för jam, tills hon såg hamnen igen. När Frida steg i land satt Murre kvar högst uppe i fyren, alldeles genomblöt. Murre bara blinkade. Du räddade mig, Murre, sa Frida. En fyr lyser, men du hördes. Och från den kvällen kallade folk i Lyckeby ibland Murre för den lilla fyren.
+
+En dag kom en främling till Lyckeby. Det var en stor grå katt från en annan by. Den grå katten ställde sig på torget och fräste. Jag har hört att det finns en klok katt här, sa den grå katten. Men jag är klokare. Ingen i Lyckeby gillade den grå katten. Den grå katten ville tävla. Vi får se vem som löser en gåta först, sa den grå katten. Bengt gömde en bulle någonstans i hela byn. Hitta bullen, sa Bengt. Den som hittar den först vinner. Den grå katten sprang genast iväg. Den grå katten letade i hamnen. Den grå katten letade vid fyren. Den grå katten letade överallt och blev mycket trött. Men Murre satt bara still på trappen och blinkade. Tänker du inte leta, frågade Bertil. Men Murre reste sig lugnt, gick fram till Bengt, och satte sig vid Bengts ficka. För där, i fickan, låg bullen hela tiden. Bengt skrattade så mjölet yrde. Murre vann utan att ta ett enda steg. Den grå katten blev så förvånad att den genast flyttade tillbaka till sin egen by. Och Murre bara blinkade.
+
+Men en morgon var det den värsta gåtan av alla. Den här morgonen var det Murre själv som var borta. Katten Murre satt inte på trappen utanför bageriet. För första gången på många år var trappen tom. Var är Murre, ropade Bengt. Var är Murre, ropade Frida. Var är Murre, ropade borgmästaren Bertil. Men ingen i hela Lyckeby visste var Murre var. Och den här gången fanns det ingen katt som kunde lösa gåtan.
+
+Hela byn letade. Bengt letade i bageriet. Frida letade i hamnen. Bertil letade under sin stora hatt, för säkerhets skull. Gamla Greta letade vid brunnen. Men ingen hittade Murre. Till slut satte sig Frida ner på bryggan, precis där Murre brukade sitta. Frida tittade ut mot havet. Frida tittade upp mot fyren. Och högst uppe i fyren, i ett litet fönster, lyste ett par gröna ögon. Där är Murre, viskade Frida.
+
+Hela byn skyndade till fyren. Och där, högst uppe, låg katten Murre i en korg. Men Murre var inte ensam. I korgen låg fyra små kattungar. Fyra små kattungar med gröna ögon, precis som Murres egna. Bengt skrattade så mjölet yrde, fastän han inte hade något mjöl med sig. Frida torkade en tår. Borgmästaren Bertil tog av sig sin stora hatt. Så det var den gåtan du löste, sa Bertil tyst. Och Murre, för första gången på många år, svarade inte ens med en blinkning. Murre bara spann.
+
+Från den dagen fanns det fem katter i Lyckeby. Och varje morgon, när tuppen gol och Bengt öppnade sitt bageri, satt fem katter på trappen och väntade. Bengt skrattade. God morgon, sa Bengt. Vad har ni för planer i dag? Och de fem katterna bara blinkade. Och så var det morgon igen i Lyckeby. Som det alltid hade varit. Och som det alltid skulle vara.`
 };
 
 // ════════════════════════════════════════════════════════════
@@ -309,6 +391,7 @@ let autoTimer = null;
 let busy = false;              // låser interaktion under "vald-ord-blink"
 let deadEnd = false;
 let truncated = false;         // sant om inklistrad text kortades vid bygget
+let exampleStarts = [];        // frekventa innehållsord att starta från
 
 // ════════════════════════════════════════════════════════════
 //  Tokenisering & modellbygge
@@ -451,9 +534,44 @@ function buildFromTextarea(){
   built = true;
   deadEnd = false;
   document.getElementById('staleNote').classList.remove('show');
+  exampleStarts = topContentWords(4);
+  renderStartExamples();
   updateStats();
   startGen();   // sådda direkt så tabellen får liv
 }
+
+// Plocka ut några frekventa "innehållsord" som inbjudande startord.
+// Vanliga småord (och, i, en …) filtreras bort så förslagen blir konkreta.
+const STOPWORDS = new Set(['och','i','en','ett','som','var','på','till','med','det','den','att','för','av','de','är','han','hon','den','var','sin','sitt','inte','men','om','har','hade','blir','kan','vid','när','där','här','upp','över','under','efter','så','ur','mot','redan','gång','hela','andra']);
+function topContentWords(n){
+  const freq = new Map();
+  for(const t of tokens){
+    if(/^[.,!?;:]$/.test(t) || t.length < 4 || STOPWORDS.has(t)) continue;
+    freq.set(t, (freq.get(t) || 0) + 1);
+  }
+  return [...freq.entries()]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'sv'))
+    .slice(0, n)
+    .map(e => e[0]);
+}
+
+function renderStartExamples(){
+  const row = document.getElementById('startExamplesRow');
+  const el = document.getElementById('startExamples');
+  if(!built || !exampleStarts.length){ row.style.display = 'none'; return; }
+  row.style.display = 'flex';
+  el.innerHTML = 'Prova: ' + exampleStarts
+    .map(w => `<button type="button" class="ex-chip" data-w="${esc(w)}">${esc(w)}</button>`)
+    .join('');
+}
+
+// Klick på ett exempel-startord (delegering)
+document.getElementById('startExamples').addEventListener('click', e => {
+  const chip = e.target.closest('.ex-chip');
+  if(!chip) return;
+  document.getElementById('startWord').value = chip.dataset.w;
+  startFromWord();
+});
 
 function loadPreset(key){
   if(key === 'egen'){
@@ -497,10 +615,24 @@ function updateStats(){
 
   const bEl = document.getElementById('stBranch');
   const qn = document.getElementById('qualityNote');
-  if(!built){ bEl.textContent = '–'; bEl.style.color = ''; qn.style.display = 'none'; return; }
+  const bFill = document.getElementById('branchFill');
+  const bLbl = document.getElementById('branchLbl');
+  if(!built){
+    bEl.textContent = '–'; bEl.style.color = '';
+    bFill.style.width = '4%'; bFill.style.background = 'var(--border)';
+    bLbl.textContent = ''; qn.style.display = 'none'; return;
+  }
   const bf = branching(k);
+  const col = bf >= 1.5 ? 'var(--green)' : bf >= 1.1 ? 'var(--gold)' : 'var(--red)';
   bEl.textContent = bf.toFixed(2);
-  bEl.style.color = bf >= 1.5 ? 'var(--green)' : bf >= 1.1 ? 'var(--gold)' : 'var(--red)';
+  bEl.style.color = col;
+  // Mappa 1.0 → tomt, 2.5+ → fullt
+  bFill.style.width = Math.max(4, Math.min(100, (bf - 1) / 1.5 * 100)).toFixed(0) + '%';
+  bFill.style.background = col;
+  bLbl.style.color = col;
+  bLbl.textContent = bf >= 1.5 ? '🟢 Stor valfrihet – texten kan gå åt många håll'
+                   : bf >= 1.1 ? '🟡 Lagom valfrihet'
+                   : '🔴 Nästan ingen valfrihet – modellen rabblar mest texten';
 
   let note = '';
   if(bf < 1.1){
@@ -600,6 +732,12 @@ function step(manualWord){
   else if(mode === 'greedy') chosen = probs[0].w;
   else chosen = sampleFrom(probs);
 
+  // Spara underlaget för motiveringen (innan kontexten flyttas fram)
+  const prevCtx = genTokens.slice(-k);
+  const total = dist.reduce((a, b) => a + b.c, 0);
+  const chosenItem = dist.find(d => d.w === chosen);
+  const chosenC = chosenItem ? chosenItem.c : 0;
+
   // Blinka det valda ordet i tabellen innan det läggs till
   busy = true;
   renderTable(probs, chosen);
@@ -609,7 +747,8 @@ function step(manualWord){
   setTimeout(() => {
     genTokens.push(chosen);
     busy = false;
-    render();
+    render(true);
+    if(!deadEnd) narrChoice(prevCtx, chosen, chosenC, total);
   }, flashMs);
 }
 
@@ -705,7 +844,7 @@ function esc(s){
 
 // Tokens → läsbar HTML: stor bokstav efter meningsslut, inget
 // mellanslag före skiljetecken, kontexten markerad med chips.
-function detokHTML(toks, hlFrom){
+function detokHTML(toks, hlFrom, animateLast){
   let html = '', capitalize = true;
   for(let i = 0; i < toks.length; i++){
     const t = toks[i];
@@ -717,17 +856,19 @@ function detokHTML(toks, hlFrom){
     }
     if(/^[.!?]$/.test(t)) capitalize = true;
     const space = (i === 0 || isPunct) ? '' : ' ';
-    const inCtx = i >= hlFrom;
-    html += space + (inCtx ? `<span class="ctx-tok">${esc(disp)}</span>` : esc(disp));
+    const classes = [];
+    if(i >= hlFrom) classes.push('ctx-tok');
+    if(animateLast && i === toks.length - 1) classes.push('new-tok');
+    html += space + (classes.length ? `<span class="${classes.join(' ')}">${esc(disp)}</span>` : esc(disp));
   }
   return html;
 }
 
-function render(){
+function render(animate){
   // Genererad text
   const hlFrom = Math.max(0, genTokens.length - k);
   document.getElementById('genBox').innerHTML =
-    detokHTML(genTokens, hlFrom) + '<span class="cursor"></span>';
+    detokHTML(genTokens, hlFrom, animate) + '<span class="cursor"></span>';
 
   // Tabell + berättarrad
   const dist = getDist();
@@ -735,17 +876,36 @@ function render(){
   const probs = withProbs(dist);
   renderTable(probs);
   const ctx = genTokens.slice(-k);
-  document.getElementById('narr').innerHTML =
+  const narr = document.getElementById('narr');
+  narr.classList.remove('choice');
+  narr.innerHTML =
     `Modellen tittar på de senaste <strong>${k} ${k === 1 ? 'ordet' : 'orden'}</strong>: ` +
     `<span class="ctx-inline">«${esc(ctx.join(' '))}»</span> → hittar ` +
     `<strong>${probs.length}</strong> ${probs.length === 1 ? 'möjlig fortsättning' : 'möjliga fortsättningar'} i träningstexten. ` +
     `Tryck <strong>✍️ Nästa ord</strong> – eller klicka på ett ord i tabellen.`;
 }
 
+// Motivering efter ett ordval: "valde X eftersom det följde på «kontext»
+// N av M gånger". Gör modellens "tänkande" synligt.
+function narrChoice(prevCtx, w, c, total){
+  const pct = total ? Math.round(c / total * 100) : 0;
+  let extra = '';
+  if(c === 1) extra = ' <span class="rare">Ovanligt!</span> Det här ordet sågs bara <strong>en enda gång</strong> efter den kontexten – ändå kan det väljas.';
+  else if(pct <= 25) extra = ' Ett ganska <span class="rare">ovanligt</span> val – så undviker modellen att bli helt förutsägbar.';
+  const narr = document.getElementById('narr');
+  narr.classList.add('choice');
+  narr.innerHTML =
+    `Modellen valde <span class="chosen-inline">«${esc(w)}»</span> eftersom det följde på ` +
+    `<span class="ctx-inline">«${esc(prevCtx.join(' '))}»</span> <strong>${c} av ${total}</strong> ` +
+    `gånger i texten (${pct}%).${extra}`;
+}
+
 function renderTable(probs, picked){
   const ctx = genTokens.slice(-k);
+  const total = probs.reduce((a, b) => a + b.c, 0);
   document.getElementById('ctxChip').innerHTML =
-    'Kontext: ' + ctx.map(t => `<span class="ct">${esc(t)}</span>`).join(' ');
+    '🧠 Modellens minne just nu: ' + ctx.map(t => `<span class="ct">${esc(t)}</span>`).join(' ') +
+    `<span class="ctx-count">Den här kontexten har setts <b>${total}</b> ${total === 1 ? 'gång' : 'gånger'} i texten.</span>`;
 
   const maxP = probs.length ? Math.max(...probs.map(p => p.p)) : 1;
   const rows = probs.slice(0, MAX_ROWS);
