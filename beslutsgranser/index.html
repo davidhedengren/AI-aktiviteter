@@ -1,18 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Beslutsgränser – ai-aktiviteter.se</title>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-ZDWXTZZBBR');
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -23,7 +14,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
 .back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .back-link:hover{color:var(--text);border-color:var(--dim);}
-.hd{width:100%;text-align:center;padding:12px 16px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
+.lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
+.lang-link:hover{color:var(--text);border-color:var(--dim);}
+.lang-link .flag{font-size:1.05em;line-height:1;}
+.hd{width:100%;text-align:center;padding:12px 160px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
 .hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}.hd h1 span{color:var(--accent2);}
 .hd p{color:var(--dim);font-size:0.8em;max-width:620px;margin:0 auto;line-height:1.4;}
 .app{display:flex;gap:0;flex:1;position:relative;z-index:1;}
@@ -50,8 +44,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .legend-strip{display:none;align-items:center;gap:10px;font-size:0.71em;color:var(--dim);flex-wrap:wrap;justify-content:center;}
 .leg{display:flex;align-items:center;gap:4px;}
 .lsq{width:11px;height:11px;border-radius:2px;flex-shrink:0;}
-
-/* Panel */
 .panel{width:300px;background:var(--surface);border-left:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;}
 .panel-tabs{display:flex;border-bottom:1px solid var(--border);}
 .ptab{flex:1;padding:9px 8px;text-align:center;font-size:0.74em;font-weight:600;color:var(--dim);background:var(--surface);cursor:pointer;transition:0.2s;border:none;font-family:'DM Sans',sans-serif;border-bottom:2px solid transparent;}
@@ -60,7 +52,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .ptab.adv.active{color:var(--gold);border-bottom-color:var(--gold);}
 .panel-body{flex:1;overflow-y:auto;padding:14px;}
 .panel-view{display:none;flex-direction:column;gap:14px;}.panel-view.active{display:flex;}
-
 .sec-t{font-size:0.66em;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--dim);margin-bottom:5px;}
 .model-list{display:flex;flex-direction:column;gap:5px;}
 .model-tab{font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:600;padding:9px 12px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;text-align:left;transition:0.2s;width:100%;}
@@ -84,8 +75,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .info-box strong{color:var(--text);}.info-box .hl{color:var(--accent);font-weight:600;}
 .info-box .ca{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--classA);vertical-align:middle;margin:0 1px;}
 .info-box .cb{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--classB);vertical-align:middle;margin:0 1px;}
-
-/* Advanced panel */
 .adv-t{font-size:0.66em;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,214,102,0.7);margin-bottom:5px;}
 .act-row{display:flex;gap:5px;}
 .act-btn{flex:1;font-family:'DM Sans',sans-serif;font-size:0.78em;font-weight:600;padding:7px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;transition:0.2s;text-align:center;}
@@ -106,7 +95,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .btn{font-family:'DM Sans',sans-serif;padding:8px 14px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);color:var(--text);font-size:0.82em;font-weight:600;cursor:pointer;transition:0.2s;text-align:center;width:100%;}
 .btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.08);}
 .btn.sm{font-size:0.76em;padding:6px 10px;}
-
 .overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
 .overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;max-width:520px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;}
@@ -122,6 +110,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   .canvas-area{border-right:none;border-bottom:1px solid var(--border);}
   .panel{width:100%;border-left:none;}
   .back-link{position:static;transform:none;margin-bottom:4px;}
+  .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}
+  .hd{padding:10px 16px 8px;}
 }
 </style>
 </head>
@@ -129,8 +119,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
-     <h1>Visualisering av <span>beslutsgränser</span></h1>
+  <h1>Visualisering av <span>beslutsgränser</span></h1>
   <p>Rita datapunkter för två klasser och se hur olika modeller drar gränsen mellan dem.</p>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/beslutsgranser_ENG"><span class="flag">🇬🇧</span> English</a>
 </div>
 
 <div class="app">
@@ -164,8 +155,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <button class="ptab adv" id="ptAdv" onclick="setPanelTab('adv')">🔬 Avancerat</button>
     </div>
     <div class="panel-body">
-
-      <!-- Standard view -->
       <div class="panel-view active" id="viewStd">
         <div>
           <div class="sec-t">Modell</div>
@@ -198,7 +187,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         </div>
       </div>
 
-      <!-- Advanced view -->
       <div class="panel-view" id="viewAdv">
         <div>
           <div class="adv-t">Aktiveringsfunktion</div>
@@ -215,7 +203,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
             <select class="nsel" id="lyrSel" onchange="refreshNeuronSel();onNeuronChange()"></select>
             <select class="nsel" id="nrnSel" onchange="onNeuronChange()"></select>
           </div>
-          <div class="note">Varje neuron visar sitt eget <strong>aktiveringsvärde</strong>.  Bläddra mellan de olika neuronerna och se hur varje neuron delar upp planet på sitt eget sätt. En neuron klassificerar inte själv – det är först när alla neuroners signaler <strong>kombineras</strong> i utdatalagret som beslutsgränsen uppstår.</div>
+          <div class="note">Varje neuron visar sitt eget <strong>aktiveringsvärde</strong>. Bläddra mellan de olika neuronerna och se hur varje neuron delar upp planet på sitt eget sätt. En neuron klassificerar inte själv – det är först när alla neuroners signaler <strong>kombineras</strong> i utdatalagret som beslutsgränsen uppstår.</div>
         </div>
         <div>
           <div class="adv-t">Arkitektur (neuroner per dolt lager)</div>
@@ -223,11 +211,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
           <button class="btn sm" style="margin-top:6px" onclick="applyArch()">Tillämpa & träna om</button>
         </div>
         <div class="info-box">
-        <strong>Tips!</strong><br><br>
-        Byt aktiveringsfunktion till <span class="hl">ReLU</span> och aktivera neuronvisualisering. Ser du skillnaden? Med <strong>tanh</strong> visar neuronerna både röda (negativa) och blå (positiva) områden. Med <span class="hl">ReLU</span> ser du bara blått och mörkt – neuronen är antingen aktiv eller helt avstängd. Det är därför ReLU skapar skarpa kanter i beslutsgränsen medan tanh ger mjuka kurvor.
+          <strong>Tips!</strong><br><br>
+          Byt aktiveringsfunktion till <span class="hl">ReLU</span> och aktivera neuronvisualisering. Ser du skillnaden? Med <strong>tanh</strong> visar neuronerna både röda (negativa) och blå (positiva) områden. Med <span class="hl">ReLU</span> ser du bara blått och mörkt – neuronen är antingen aktiv eller helt avstängd. Det är därför ReLU skapar skarpa kanter i beslutsgränsen medan tanh ger mjuka kurvor.
         </div>
       </div>
-
     </div>
   </div>
 </div>
@@ -235,7 +222,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
     <h2>Visualisering av <span>beslutsgränser</span></h2>
-    <p class="sub">En klassificeringsmodell lär sig dra en gräns mellan olika kategorier. Undersök hur den gränsen ser ut och upptäck varför det ofta behövs ett neuralt nätverk</p>
+    <p class="sub">En klassificeringsmodell lär sig dra en gräns mellan olika kategorier. Undersök hur den gränsen ser ut och upptäck varför det ofta behövs ett neuralt nätverk.</p>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div><strong>Börja med det linjära mönstret</strong> – Välj <strong>Linjär modell</strong> och tryck ▶ Träna. Se hur en rak linje separerar de två klasserna!</div></div>
       <div class="step"><div class="step-num">2</div><div><strong>Testa ett annat mönster</strong> – Byt exempelvis till mönstret <strong>XOR</strong> i högermenyn. Träna med linjär modell igen. Ser du att en rak linje <em>inte kan</em> klassificera punkterna?</div></div>
@@ -305,7 +292,7 @@ class Net{
 const CS=500,DR=2.6,BGRES=100;
 const BASE_ARCH={linear:[2,1],nn1:[2,18,1],nn2:[2,18,10,1]};
 const LR_MAP={tanh:0.17,relu:0.08};
-const SPEED_SPF=[1,3,8,25]; // steps per frame at each speed level
+const SPEED_SPF=[1,3,8,25];
 const SPEED_LABELS=['½×','1×','2×','5×'];
 
 let points=[],curClass=0,curModel='nn1',actFn='tanh';
@@ -325,7 +312,6 @@ const getArch=()=>customArch??BASE_ARCH[curModel];
 const getLR=()=>LR_MAP[actFn]??0.12;
 const hasBoth=()=>points.some(p=>p.cls===0)&&points.some(p=>p.cls===1);
 
-// ── Render ──
 function renderBg(){
   if(!net||!hasBoth()){ctx.fillStyle='#090b14';ctx.fillRect(0,0,CS,CS);return;}
   const id=tctx.createImageData(BGRES,BGRES);const d=id.data;
@@ -396,7 +382,6 @@ function updateStats(){
   else{dot.className='tdot';st.textContent=lastLoss<0.02?'✓ Konvergerad':'Pausad';}
 }
 
-// ── Training loop ──
 function loop(){
   if(playing&&net&&hasBoth()){
     const data=points.map(p=>({x:[p.x,p.y],y:p.cls}));
@@ -411,7 +396,6 @@ function loop(){
 function updPlayBtn(){const b=document.getElementById('btnPlay');b.textContent=playing?'⏸ Pausa':'▶ Träna';b.className=playing?'tc-btn pause':'tc-btn play';}
 function updateSpeed(){speedIdx=parseInt(document.getElementById('speedSlider').value);document.getElementById('speedLabel').textContent=SPEED_LABELS[speedIdx];}
 
-// ── Controls ──
 function initNet(){net=new Net(getArch(),actFn);itr=0;lastLoss=0;playing=false;updPlayBtn();buildNeuronSelects();buildArchControls();}
 function togglePlay(){if(!hasBoth())return;if(itr===0)net=new Net(getArch(),actFn);playing=!playing;updPlayBtn();}
 function resetNet(){playing=false;initNet();}
@@ -441,7 +425,6 @@ function setPanelTab(tab){
   if(tab==='adv'&&!advShown){advShown=true;document.getElementById('advOverlay').classList.add('show');}
 }
 
-// Canvas interaction
 cv.addEventListener('mousedown',e=>{
   e.preventDefault();const r=cv.getBoundingClientRect();
   const px=(e.clientX-r.left)*CS/r.width,py=(e.clientY-r.top)*CS/r.height;
@@ -450,7 +433,6 @@ cv.addEventListener('mousedown',e=>{
 });
 cv.addEventListener('contextmenu',e=>e.preventDefault());
 
-// Presets
 function clust(cx,cy,n,r){return Array.from({length:n},()=>({x:cx+(Math.random()-.5)*2*r,y:cy+(Math.random()-.5)*2*r}));}
 function loadPreset(name){
   points=[];
@@ -461,11 +443,9 @@ function loadPreset(name){
   initNet();
 }
 
-// ── Advanced: Activation function ──
 const ACT_NOTE={tanh:'<strong>tanh</strong> ger värden −1 till +1. Mjuka, böjda gränser.',relu:'<strong>ReLU</strong> ger 0 för negativa, annars z. Skarpa kanter i gränsen.'};
 function setActFn(fn){actFn=fn;document.getElementById('actTanh').classList.toggle('active',fn==='tanh');document.getElementById('actRelu').classList.toggle('active',fn==='relu');document.getElementById('actNote').innerHTML=ACT_NOTE[fn];initNet();}
 
-// ── Advanced: Neuron viz ──
 function toggleNviz(){neuronViz=document.getElementById('nvizCk').checked;const row=document.getElementById('nselRow');row.style.opacity=neuronViz?'1':'0.35';row.style.pointerEvents=neuronViz?'auto':'none';}
 function buildNeuronSelects(){
   const arch=getArch();const lSel=document.getElementById('lyrSel'),nSel=document.getElementById('nrnSel');
@@ -480,7 +460,6 @@ function refreshNeuronSel(){
 }
 function onNeuronChange(){selLayer=parseInt(document.getElementById('lyrSel').value)||0;selNeuron=parseInt(document.getElementById('nrnSel').value)||0;}
 
-// ── Advanced: Architecture editor ──
 function buildArchControls(){
   const arch=getArch();const wrap=document.getElementById('archWrap');wrap.innerHTML='';const nHidden=arch.length-2;
   if(nHidden===0){wrap.innerHTML='<div class="note">Linjär modell har inga dolda lager.</div>';return;}
@@ -503,4 +482,3 @@ setModel('linear');loadPreset('linear');loop();
 </script>
 </body>
 </html>
-
