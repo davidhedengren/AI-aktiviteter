@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Timeline – When Was That?</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--subtle:#b0bedc;--accent:#4d80ff;--accent2:#6698ff;--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--orange:#ff9f43;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);height:100vh;display:flex;flex-direction:column;overflow:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
+.back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
+.back-link:hover{color:var(--text);border-color:var(--dim);}
+.lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
+.lang-link:hover{color:var(--text);border-color:var(--dim);}
+.lang-link .flag{font-size:1.05em;line-height:1;}
+.hd{width:100%;text-align:center;padding:12px 160px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
+.hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}.hd h1 span{color:var(--accent2);}
+.hd p{color:var(--dim);font-size:0.8em;max-width:620px;margin:0 auto;line-height:1.4;}
+.game-wrap{max-width:900px;margin:0 auto;padding:14px 16px 20px;flex:1;display:none;flex-direction:column;gap:10px;position:relative;z-index:1;width:100%;min-height:0;}
+.game-wrap.show{display:flex;}
+.score-bar{display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap;}
+.sb{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 12px;display:flex;align-items:center;gap:6px;font-size:0.8em;}
+.sb .sl{color:var(--dim);font-weight:600;}.sb .sv{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent);}
+.two-score{display:none;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px 16px;}
+.two-score.show{display:flex;}
+.ts-p{text-align:center;min-width:60px;transition:transform 0.3s;}
+.ts-p .ts-name{font-size:0.62em;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;}
+.ts-p .ts-val{font-family:'JetBrains Mono',monospace;font-size:1.3em;font-weight:700;}
+.ts-p.p1 .ts-name{color:var(--accent);}.ts-p.p1 .ts-val{color:var(--accent);}
+.ts-p.p2 .ts-name{color:var(--orange);}.ts-p.p2 .ts-val{color:var(--orange);}
+.ts-p.active{transform:scale(1.1);}
+.ts-sep{font-family:'JetBrains Mono',monospace;font-size:1.1em;color:var(--dim);font-weight:700;margin:0 4px;}
+.streak-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 12px;font-size:0.8em;display:flex;align-items:center;gap:4px;transition:all 0.3s;}
+.streak-box.hot{border-color:var(--orange);background:rgba(255,159,67,0.08);box-shadow:0 0 12px rgba(255,159,67,0.15);}
+.streak-box.fire{border-color:#ef5b5b;background:rgba(239,91,91,0.1);box-shadow:0 0 16px rgba(239,91,91,0.2);animation:firePulse 0.8s ease infinite;}
+@keyframes firePulse{0%,100%{transform:scale(1);}50%{transform:scale(1.03);}}
+.streak-num{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--orange);font-size:1.05em;}
+.streak-fires{letter-spacing:-2px;}
+.card-area{display:flex;gap:14px;align-items:flex-start;min-height:180px;}
+.current-card{background:var(--surface);border:2px solid var(--accent);border-radius:12px;padding:20px 22px;flex:0 0 370px;box-shadow:0 4px 24px rgba(77,128,255,0.12);transition:all 0.4s;}
+.current-card.placing{opacity:0;transform:translateY(60px) scale(0.9);pointer-events:none;}
+.card-era{font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
+.card-title{font-size:1.1em;font-weight:700;margin-bottom:9px;line-height:1.3;}
+.card-desc{font-size:0.84em;color:var(--dim);line-height:1.6;}
+.card-prompt{margin-top:14px;font-size:0.78em;color:var(--subtle);font-weight:600;}
+.guess-area{flex:1;display:flex;flex-direction:column;gap:10px;}
+.guess-row{display:flex;gap:8px;align-items:center;}
+.year-input{font-family:'JetBrains Mono',monospace;font-size:1.4em;font-weight:700;width:120px;padding:10px 14px;background:var(--surface);border:2px solid var(--border);border-radius:8px;color:var(--text);text-align:center;outline:none;transition:border-color 0.2s;}
+.year-input:focus{border-color:var(--accent);}
+.btn{font-family:'DM Sans',sans-serif;padding:10px 20px;border:none;border-radius:8px;font-size:0.88em;font-weight:700;cursor:pointer;transition:0.2s;}
+.btn-place{background:var(--accent);color:#fff;}.btn-place:hover{background:var(--accent2);}
+.btn-place:disabled{background:var(--surface2);color:var(--dim);cursor:not-allowed;}
+.points-popup{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:rgba(9,11,20,0.75);backdrop-filter:blur(4px);}
+.points-popup.show{display:flex;}
+.pp-card{text-align:center;animation:ppIn 0.4s cubic-bezier(0.34,1.56,0.64,1);padding:30px 40px;border-radius:16px;border:2px solid;min-width:300px;}
+@keyframes ppIn{from{opacity:0;transform:scale(0.6) translateY(20px);}to{opacity:1;transform:none;}}
+.pp-emoji{font-size:3.5em;margin-bottom:6px;}
+.pp-label{font-size:0.85em;font-weight:600;margin-bottom:4px;}
+.pp-points{font-family:'JetBrains Mono',monospace;font-size:3em;font-weight:700;line-height:1;}
+.pp-detail{font-size:0.82em;margin-top:8px;font-weight:600;}
+.pp-year{font-family:'JetBrains Mono',monospace;font-size:1.05em;margin-top:6px;font-weight:600;}
+.pp-streak{margin-top:10px;font-size:1em;font-weight:700;}
+.pp-card.perfect{background:rgba(255,216,102,0.14);border-color:rgba(255,216,102,0.4);color:var(--gold);}
+.pp-card.close{background:rgba(52,199,89,0.12);border-color:rgba(52,199,89,0.35);color:var(--green);}
+.pp-card.order{background:rgba(77,128,255,0.12);border-color:rgba(77,128,255,0.35);color:var(--accent);}
+.pp-card.wrong{background:rgba(239,91,91,0.1);border-color:rgba(239,91,91,0.3);color:var(--red);}
+.turn-popup{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(9,11,20,0.85);backdrop-filter:blur(6px);}
+.turn-popup.show{display:flex;}
+.tp-card{text-align:center;animation:ppIn 0.4s cubic-bezier(0.34,1.56,0.64,1);padding:36px 50px;border-radius:16px;border:2px solid;min-width:280px;}
+.tp-card.p1{border-color:var(--accent);background:rgba(77,128,255,0.1);}
+.tp-card.p2{border-color:var(--orange);background:rgba(255,159,67,0.1);}
+.tp-emoji{font-size:2.5em;margin-bottom:8px;}
+.tp-title{font-size:1.3em;font-weight:700;margin-bottom:6px;}
+.tp-sub{font-size:0.82em;color:var(--dim);margin-bottom:16px;}
+.tp-btn{font-family:'DM Sans',sans-serif;padding:12px 32px;border:none;border-radius:8px;font-size:1em;font-weight:700;cursor:pointer;transition:0.2s;color:#fff;}
+.tp-btn.p1{background:var(--accent);}.tp-btn.p1:hover{background:var(--accent2);}
+.tp-btn.p2{background:var(--orange);}.tp-btn.p2:hover{background:#ffb366;}
+.tl-section{flex:1;display:flex;flex-direction:column;padding-top:6px;min-height:0;}
+.tl-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+.tl-label{font-size:0.66em;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--dim);}
+.tl-count{font-size:0.72em;color:var(--dim);}
+.tl-wrap{position:relative;flex:1;min-height:180px;width:100%;overflow:hidden;}
+.tl-axis{position:absolute;top:50%;left:0;right:0;height:3px;background:var(--border);border-radius:2px;transform:translateY(-50%);}
+.tl-tick{position:absolute;top:50%;transform:translate(-50%,-50%);font-family:'JetBrains Mono',monospace;font-size:0.62em;color:rgba(126,138,170,0.35);font-weight:600;margin-top:14px;}
+.tl-tick::before{content:'';position:absolute;bottom:100%;left:50%;width:1px;height:7px;background:rgba(126,138,170,0.15);transform:translateX(-50%);margin-bottom:2px;}
+.tl-tick.decade{color:rgba(126,138,170,0.5);font-size:0.68em;}
+.tl-tick.decade::before{height:12px;background:rgba(126,138,170,0.25);}
+.tl-card{position:absolute;display:flex;flex-direction:column;align-items:center;width:100px;animation:tlDrop 0.5s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes tlDrop{from{opacity:0;transform:translateX(-50%) scale(0.8);}to{opacity:1;transform:translateX(-50%) scale(1);}}
+.tl-card.above{bottom:calc(50% + 10px);transform:translateX(-50%);flex-direction:column-reverse;}
+.tl-card.below{top:calc(50% + 10px);transform:translateX(-50%);}
+.tl-card .tl-dot{width:14px;height:14px;border-radius:50%;border:3px solid;flex-shrink:0;}
+.tl-card.above .tl-dot{margin-bottom:0;margin-top:3px;}
+.tl-card.below .tl-dot{margin-top:0;margin-bottom:3px;}
+.tl-card .tl-name{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:4px 6px;font-size:0.65em;color:var(--subtle);line-height:1.25;text-align:center;max-width:96px;word-wrap:break-word;border-left:3px solid var(--accent);}
+.tl-card .tl-yr{font-family:'JetBrains Mono',monospace;font-size:0.68em;font-weight:700;margin-top:2px;}
+.tl-card.above .tl-yr{margin-top:0;margin-bottom:2px;order:-1;}
+.tl-card.perfect .tl-dot{border-color:var(--gold);background:var(--gold);}
+.tl-card.perfect .tl-yr{color:var(--gold);}
+.tl-card.perfect .tl-name{border-left-color:var(--gold);border-color:rgba(255,216,102,0.3);background:rgba(255,216,102,0.06);}
+.tl-card.close .tl-dot{border-color:var(--green);background:var(--green);}
+.tl-card.close .tl-yr{color:var(--green);}
+.tl-card.order .tl-dot{border-color:var(--accent);background:var(--accent);}
+.tl-card.order .tl-yr{color:var(--accent);}
+.tl-card.wrong .tl-dot{border-color:var(--red);background:var(--red);}
+.tl-card.wrong .tl-yr{color:var(--red);}
+.tl-card.wrong .tl-name{border-left-color:var(--red);}
+.tl-band{position:absolute;top:50%;transform:translateY(-50%);height:10px;border-radius:3px;opacity:0.3;pointer-events:none;animation:tlDrop 0.5s ease;}
+.tl-band.perfect{background:var(--red);opacity:0.35;}
+.tl-band.close{background:var(--red);opacity:0.25;}
+.tl-band.order{background:var(--red);opacity:0.2;}
+.tl-band.wrong{background:var(--red);opacity:0.15;}
+.overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
+.overlay.show{display:flex;}
+.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;max-width:520px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;}
+.overlay-card h2{font-size:1.1em;font-weight:700;margin-bottom:6px;}.overlay-card h2 span{color:var(--accent2);}
+.overlay-card .sub{font-size:0.84em;color:var(--dim);line-height:1.55;margin-bottom:14px;}
+.steps{display:flex;flex-direction:column;gap:10px;margin:14px 0;text-align:left;}
+.step{display:flex;gap:10px;align-items:flex-start;font-size:0.82em;color:var(--dim);line-height:1.5;}.step strong{color:var(--text);}
+.step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
+.mode-btns{display:flex;flex-direction:column;gap:8px;margin:16px 0;}
+.mode-btn{font-family:'DM Sans',sans-serif;padding:14px 20px;border:2px solid var(--border);border-radius:10px;background:var(--surface2);color:var(--text);font-size:0.95em;font-weight:700;cursor:pointer;transition:0.2s;text-align:left;display:flex;align-items:center;gap:12px;}
+.mode-btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.06);}
+.mode-btn .mi{font-size:1.5em;flex-shrink:0;}
+.mode-btn .mt{flex:1;}.mode-btn .mt small{display:block;font-size:0.78em;font-weight:500;color:var(--dim);margin-top:2px;}
+.overlay-btn{display:block;width:100%;padding:12px;margin-top:10px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}.overlay-btn:hover{background:#3d6de6;}
+.end-card{text-align:center;}
+.big-score{font-family:'JetBrains Mono',monospace;font-size:3em;font-weight:700;color:var(--gold);margin:10px 0;}
+.end-sub{font-size:0.85em;color:var(--dim);margin-bottom:16px;}
+.end-stats{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
+.es{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 16px;text-align:center;min-width:80px;}
+.es .ev{font-family:'JetBrains Mono',monospace;font-size:1.2em;font-weight:700;}.es .el{font-size:0.68em;color:var(--dim);margin-top:2px;}
+.p-scores{display:flex;gap:12px;justify-content:center;margin:14px 0;}
+.ps{flex:1;max-width:200px;border-radius:10px;padding:14px;text-align:center;border:2px solid;}
+.ps.w{box-shadow:0 0 20px rgba(255,216,102,0.2);}
+.ps .pn{font-size:0.78em;font-weight:700;margin-bottom:4px;}
+.ps .psc{font-family:'JetBrains Mono',monospace;font-size:2em;font-weight:700;}
+@media(min-width:1400px){.game-wrap{max-width:1200px;}.current-card{flex:0 0 420px;padding:24px 26px;}.card-title{font-size:1.2em;}.card-desc{font-size:0.9em;}.year-input{font-size:1.6em;}.tl-card{width:115px;}.tl-card .tl-name{font-size:0.72em;max-width:110px;padding:5px 7px;}.tl-card .tl-dot{width:16px;height:16px;}.tl-card .tl-yr{font-size:0.75em;}.tl-tick.decade{font-size:0.74em;}}
+@media(max-width:700px){.card-area{flex-direction:column;}.current-card{flex:none;width:100%;}.back-link{position:static;transform:none;margin-bottom:4px;}.lang-link{position:static;transform:none;margin-bottom:4px;}.hd{padding:10px 16px 8px;}.tl-wrap{min-height:200px;}.tl-card{width:70px;}.tl-card .tl-name{font-size:0.52em;max-width:66px;}.tl-card .tl-dot{width:10px;height:10px;}.tl-card .tl-yr{font-size:0.58em;}}
+</style>
+</head>
+<body>
+<div class="hd">
+  <a class="back-link" href="/">← AI Activities</a>
+  <h1>The AI Timeline – <span>When Was That?</span></h1>
+  <p>Place historical AI events on the timeline. How well do you know the history of AI?</p>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/tidslinjen"><span class="flag">🇸🇪</span> Svenska</a>
+</div>
+<div class="game-wrap" id="gameWrap">
+  <div class="score-bar">
+    <div class="two-score" id="twoScore">
+      <div class="ts-p p1" id="tsP1"><div class="ts-name">Player 1</div><div class="ts-val" id="ts1">0</div></div>
+      <div class="ts-sep">–</div>
+      <div class="ts-p p2" id="tsP2"><div class="ts-name">Player 2</div><div class="ts-val" id="ts2">0</div></div>
+    </div>
+    <div class="sb" id="soloScore"><span class="sl">Score</span><span class="sv" id="scoreVal">0</span></div>
+    <div class="sb"><span class="sl">Cards</span><span class="sv" id="cardCount">0/0</span></div>
+    <div class="streak-box" id="streakBox"><span class="streak-num" id="streakNum">0</span><span class="streak-fires" id="streakFires"></span></div>
+  </div>
+  <div class="card-area">
+    <div class="current-card" id="currentCard">
+      <div class="card-era" id="cardEra"></div>
+      <div class="card-title" id="cardTitle"></div>
+      <div class="card-desc" id="cardDesc"></div>
+      <div class="card-prompt" id="cardPrompt">📅 What year do you think this happened?</div>
+    </div>
+    <div class="guess-area">
+      <div class="guess-row">
+        <input type="number" class="year-input" id="yearInput" min="1940" max="2025" placeholder="Year">
+        <button class="btn btn-place" id="placeBtn" onclick="submitGuess()">Place →</button>
+      </div>
+    </div>
+  </div>
+  <div class="tl-section">
+    <div class="tl-top"><div class="tl-label">Timeline</div><div class="tl-count" id="tlCount">0 of 17 placed</div></div>
+    <div class="tl-wrap" id="tlWrap"><div class="tl-axis"></div></div>
+  </div>
+</div>
+<div class="points-popup" id="pointsPopup"><div class="pp-card" id="ppCard"></div></div>
+<div class="turn-popup" id="turnPopup"><div class="tp-card" id="tpCard"></div></div>
+<div class="overlay show" id="modeOverlay">
+  <div class="overlay-card">
+    <h2>The AI Timeline – <span>When Was That?</span></h2>
+    <p class="sub">Test your knowledge of AI history – place the events in the right spot on the timeline.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div><strong>Read the card</strong> – Each card describes a historical AI event. Guess which year it happened.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Earn points</strong> – The exact year scores 3 points, the right decade scores 2 points, correct order relative to other cards scores 1 point.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Streak🔥</strong> – Several correct answers in a row earn extra streak bonus!</div></div>
+    </div>
+    <div class="mode-btns">
+      <button class="mode-btn" onclick="startGame(1)"><span class="mi">🧠</span><span class="mt">1 player<small>Practise AI history on your own</small></span></button>
+      <button class="mode-btn" onclick="startGame(2)"><span class="mi">🤝</span><span class="mt">2 players<small>Compete against a friend and see who gets the most points!</small></span></button>
+    </div>
+  </div>
+</div>
+<div class="overlay" id="endOverlay"><div class="overlay-card end-card" id="endCard"></div></div>
+
+<script>
+const EVENTS=[
+  {id:1,year:1950,title:"The Turing Test proposed",desc:"Alan Turing publishes the article \"Can Machines Think?\" and proposes a test for deciding whether a machine can be perceived as intelligent.",era:"The Pioneers"},
+  {id:2,year:1955,title:"Logic Theorist developed",desc:"One of the first AI programs. It can prove mathematical theorems in logic, demonstrating that computers can perform reasoning.",era:"The Pioneers"},
+  {id:3,year:1956,title:"The Dartmouth Conference",desc:"Researchers gather at Dartmouth College and coin the term \"artificial intelligence\". AI becomes a research field.",era:"The Pioneers"},
+  {id:4,year:1958,title:"The Perceptron introduced",desc:"An early model inspired by the brain's neurons that can learn to recognise simple patterns – the forerunner of today's neural networks.",era:"The Pioneers"},
+  {id:5,year:1965,title:"DENDRAL – AI in chemistry",desc:"One of the first expert systems. It analyses the structure of chemical compounds using mass spectrometry data.",era:"Symbolic AI"},
+  {id:6,year:1966,title:"ELIZA – the first chatbot",desc:"ELIZA simulates a therapist by rephrasing the user's statements as questions, creating an illusion of conversation.",era:"Symbolic AI"},
+  {id:7,year:1973,title:"The Lighthill Report",desc:"A British report harshly criticises AI research. Funding drops dramatically and the first AI winter begins.",era:"AI Winter"},
+  {id:8,year:1976,title:"MYCIN – medical AI",desc:"The expert system MYCIN can suggest antibiotic treatments, demonstrating the potential for AI in healthcare.",era:"Expert Systems"},
+  {id:9,year:1997,title:"Deep Blue defeats Kasparov",desc:"IBM's chess computer defeats world champion Garry Kasparov. AI can outperform humans in structured game environments.",era:"Breakthroughs"},
+  {id:10,year:2006,title:"Google Translate launches",desc:"Google launches its translation service – an early example of AI-driven language processing at large scale.",era:"Language Models"},
+  {id:11,year:2011,title:"Watson wins Jeopardy!",desc:"IBM's Watson defeats the best champions on the quiz show Jeopardy! after being trained on 200 million pages of text.",era:"Breakthroughs"},
+  {id:12,year:2012,title:"AlexNet – deep learning",desc:"AlexNet wins the ImageNet image recognition competition. The combination of neural networks, GPUs and large datasets transforms AI.",era:"Deep Learning"},
+  {id:13,year:2016,title:"AlphaGo defeats the Go champion",desc:"Google's AlphaGo defeats the world champion in Go – a game with more possible positions than atoms in the universe.",era:"Deep Learning"},
+  {id:14,year:2018,title:"GPT-1 released",desc:"OpenAI releases GPT-1, the first model in the GPT series. The start of a new generation of large language models.",era:"Language Models"},
+  {id:15,year:2022,title:"ChatGPT launched",desc:"ChatGPT becomes freely available and reaches hundreds of millions of users within months. Generative AI explodes.",era:"Generative AI"},
+  {id:16,year:1974,yearRange:[1966,1980],title:"First AI Winter",desc:"Funding for AI research dropped sharply after criticism of poor results. Researchers had promised too much – reality caught up. A long period of disinterest and cutbacks followed.",era:"AI Winter"},
+  {id:17,year:1990,yearRange:[1987,2010],title:"Second AI Winter",desc:"Expert systems proved expensive, hard to maintain and poor at handling unexpected situations. Commercial expectations were not met and funding fell again significantly.",era:"AI Winter"}
+];
+const ERA_COL={"The Pioneers":"#4d80ff","Symbolic AI":"#a78bfa","AI Winter":"#ef5b5b","Expert Systems":"#ff9f43","Breakthroughs":"#34c759","Deep Learning":"#22d3ee","Language Models":"#fb7185","Generative AI":"#ffd866"};
+
+let mode=1,deck=[],placed=[],currentIdx=0;
+let scores=[0,0],streaks=[0,0],maxStreaks=[0,0],perfects=[0,0],currentPlayer=0;
+let totalCards=0,cardsPlaced=0;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function startGame(m){
+  mode=m;deck=shuffle([...EVENTS]);placed=[];currentIdx=0;cardsPlaced=0;
+  scores=[0,0];streaks=[0,0];maxStreaks=[0,0];perfects=[0,0];currentPlayer=0;
+  totalCards=EVENTS.length;
+  document.getElementById('modeOverlay').classList.remove('show');
+  document.getElementById('endOverlay').classList.remove('show');
+  document.getElementById('gameWrap').classList.add('show');
+  if(mode===2){document.getElementById('twoScore').classList.add('show');document.getElementById('soloScore').style.display='none';}
+  else{document.getElementById('twoScore').classList.remove('show');document.getElementById('soloScore').style.display='';}
+  renderTimeline();updateUI();showCard();
+}
+
+function showCard(){
+  if(currentIdx>=deck.length){if(cardsPlaced>=totalCards){endGame();return;}currentIdx=0;}
+  while(currentIdx<deck.length&&placed.find(p=>p.id===deck[currentIdx].id))currentIdx++;
+  if(currentIdx>=deck.length){if(cardsPlaced>=totalCards){endGame();return;}currentIdx=0;showCard();return;}
+  const ev=deck[currentIdx],cc=document.getElementById('currentCard');
+  cc.classList.remove('placing');
+  cc.style.borderColor=ERA_COL[ev.era]||'var(--accent)';
+  document.getElementById('cardEra').textContent=ev.era;
+  document.getElementById('cardEra').style.color=ERA_COL[ev.era]||'var(--accent)';
+  document.getElementById('cardTitle').textContent=ev.title;
+  document.getElementById('cardDesc').textContent=ev.desc;
+  document.getElementById('cardPrompt').textContent=ev.yearRange?'❄️ Guess roughly when it started:':'📅 What year do you think this happened?';
+  const inp=document.getElementById('yearInput');inp.value='';inp.disabled=false;inp.focus();
+  document.getElementById('placeBtn').disabled=false;
+  updateUI();
+}
+
+function submitGuess(){
+  const inp=document.getElementById('yearInput'),guess=parseInt(inp.value);
+  if(isNaN(guess)||guess<1900||guess>2030){inp.style.borderColor='var(--red)';setTimeout(()=>inp.style.borderColor='',500);return;}
+  const ev=deck[currentIdx],diff=Math.abs(guess-ev.year);
+  const sameDecade=Math.floor(guess/10)===Math.floor(ev.year/10);
+  let orderCorrect=true;
+  for(const p of placed){if(ev.year<p.year&&guess>p.guessYear)orderCorrect=false;if(ev.year>p.year&&guess<p.guessYear)orderCorrect=false;}
+
+  let points=0,level='wrong',emoji='❌',label='Not quite...',detail='';
+  if(ev.yearRange){
+    const [lo,hi]=ev.yearRange;
+    const nearDiff=Math.min(Math.abs(guess-lo),Math.abs(guess-hi));
+    if(guess>=lo&&guess<=hi){points=3;level='perfect';emoji='❄️';label='Right period!';detail=`The period was ${lo}–${hi}.`;perfects[currentPlayer]++;}
+    else if(nearDiff<=8){points=2;level='close';emoji='✅';label='Close!';detail=`The period was ${lo}–${hi}.`;}
+    else if(orderCorrect&&placed.length>0){points=1;level='order';emoji='📍';label='Right order!';detail=`The period was ${lo}–${hi}.`;}
+    else{points=0;level='wrong';detail=`The period was ${lo}–${hi}.`;}
+  }else{
+    if(diff===0){points=3;level='perfect';emoji='🏆';label='Perfect!';detail='Exactly right!';perfects[currentPlayer]++;}
+    else if(sameDecade){points=2;level='close';emoji='✅';label='Right decade!';detail=diff+' year'+(diff===1?'':'s')+' off.';}
+    else if(orderCorrect&&placed.length>0){points=1;level='order';emoji='📍';label='Right order!';detail=diff+' year'+(diff===1?'':'s')+' off.';}
+    else{points=0;level='wrong';detail=diff+' year'+(diff===1?'':'s')+' off.';}
+  }
+
+  let streakMsg='';
+  if(points===3){streaks[currentPlayer]++;if(streaks[currentPlayer]>maxStreaks[currentPlayer])maxStreaks[currentPlayer]=streaks[currentPlayer];
+    if(streaks[currentPlayer]>=3){const bonus=streaks[currentPlayer]-2;points+=bonus;streakMsg=`🔥 Streak ${streaks[currentPlayer]}! +${bonus} bonus`;}
+    else if(streaks[currentPlayer]>=2)streakMsg=`🔥 ${streaks[currentPlayer]} in a row!`;
+  }else streaks[currentPlayer]=0;
+
+  scores[currentPlayer]+=points;
+  if(points===0){const card=deck.splice(currentIdx,1)[0];const ins=currentIdx+1+Math.floor(Math.random()*(deck.length-currentIdx));deck.splice(Math.min(ins,deck.length),0,card);}
+  else{placed.push({...ev,guessYear:guess,points,level});placed.sort((a,b)=>a.year-b.year);cardsPlaced++;}
+
+  inp.disabled=true;document.getElementById('placeBtn').disabled=true;
+  document.getElementById('currentCard').classList.add('placing');
+  const turnChanges=mode===2&&points<2;
+
+  showPointsPopup(emoji,label,`+${points} pts`,detail,ev.yearRange?`Period: ${ev.yearRange[0]}–${ev.yearRange[1]}`:`Correct answer: ${ev.year}`,streakMsg,level,()=>{
+    renderTimeline();updateUI();
+    if(points>0)currentIdx++;
+    if(turnChanges){currentPlayer=currentPlayer===0?1:0;showTurnPopup(()=>showCard());}
+    else showCard();
+  });
+}
+
+function showPointsPopup(emoji,label,pts,detail,yearLine,streakMsg,level,cb){
+  const pp=document.getElementById('pointsPopup'),pc=document.getElementById('ppCard');
+  pc.className=`pp-card ${level}`;
+  pc.innerHTML=`<div class="pp-emoji">${emoji}</div><div class="pp-label">${label}</div><div class="pp-points">${pts}</div><div class="pp-detail">${detail}</div><div class="pp-year">${yearLine}</div>${streakMsg?`<div class="pp-streak">${streakMsg}</div>`:''}`;
+  pp.classList.add('show');
+  setTimeout(()=>{pp.classList.remove('show');cb();},1800);
+}
+
+function showTurnPopup(cb){
+  const tp=document.getElementById('turnPopup'),tc=document.getElementById('tpCard');
+  const pC=currentPlayer===0?'p1':'p2',col=currentPlayer===0?'var(--accent)':'var(--orange)';
+  tc.className=`tp-card ${pC}`;
+  tc.innerHTML=`<div class="tp-emoji">${currentPlayer===0?'🔵':'🟠'}</div><div class="tp-title" style="color:${col}">Player ${currentPlayer+1}</div><div class="tp-sub">Your turn!</div><button class="tp-btn ${pC}" onclick="document.getElementById('turnPopup').classList.remove('show');(${cb.toString()})();">I'm ready →</button>`;
+  tp.classList.add('show');
+}
+
+function updateUI(){
+  document.getElementById('scoreVal').textContent=scores[0];
+  document.getElementById('ts1').textContent=scores[0];
+  document.getElementById('ts2').textContent=scores[1];
+  document.getElementById('tsP1').classList.toggle('active',currentPlayer===0);
+  document.getElementById('tsP2').classList.toggle('active',currentPlayer===1);
+  document.getElementById('cardCount').textContent=`${cardsPlaced}/${totalCards}`;
+  const s=streaks[currentPlayer];
+  document.getElementById('streakNum').textContent=s;
+  const fires=document.getElementById('streakFires'),box=document.getElementById('streakBox');
+  if(s>=5){fires.textContent='🔥🔥🔥';box.className='streak-box fire';}
+  else if(s>=3){fires.textContent='🔥🔥';box.className='streak-box hot';}
+  else if(s>=1){fires.textContent='🔥';box.className='streak-box';}
+  else{fires.textContent='';box.className='streak-box';}
+  document.getElementById('tlCount').textContent=`${cardsPlaced} of ${totalCards} placed`;
+}
+
+function renderTimeline(){
+  const wrap=document.getElementById('tlWrap');
+  wrap.innerHTML='<div class="tl-axis"></div>';
+  const minY=1945,maxY=2027,range=maxY-minY;
+  for(let y=1950;y<=2020;y+=10){const pct=(y-minY)/range*100;const t=document.createElement('div');t.className='tl-tick decade';t.style.left=pct+'%';t.textContent=y;wrap.appendChild(t);}
+  const sorted=[...placed].sort((a,b)=>a.year-b.year);
+  for(let i=0;i<sorted.length;i++){
+    const p=sorted[i];
+    const pct=(p.year-minY)/range*100;
+    const above=i%2===0;
+    if(p.yearRange){
+      const bandLeft=(p.yearRange[0]-minY)/range*100;
+      const bandWidth=(p.yearRange[1]-p.yearRange[0])/range*100;
+      const band=document.createElement('div');
+      band.className=`tl-band ${p.level}`;
+      band.style.left=bandLeft+'%';
+      band.style.width=bandWidth+'%';
+      wrap.appendChild(band);
+    }
+    const card=document.createElement('div');
+    card.className=`tl-card ${p.level} ${above?'above':'below'}`;
+    card.style.left=pct+'%';
+    const name=document.createElement('div');name.className='tl-name';name.textContent=p.title;
+    name.style.borderLeftColor=ERA_COL[p.era]||'var(--accent)';
+    const dot=document.createElement('div');dot.className='tl-dot';
+    const yr=document.createElement('div');yr.className='tl-yr';
+    yr.textContent=p.yearRange?`${p.yearRange[0]}–${p.yearRange[1]}`:p.year;
+    if(above){card.appendChild(yr);card.appendChild(name);card.appendChild(dot);}
+    else{card.appendChild(dot);card.appendChild(name);card.appendChild(yr);}
+    wrap.appendChild(card);
+  }
+}
+
+function endGame(){
+  document.getElementById('gameWrap').classList.remove('show');
+  const eo=document.getElementById('endOverlay');eo.classList.add('show');
+  const ec=document.getElementById('endCard'),maxP=totalCards*3;
+  if(mode===1){
+    const pct=Math.round(scores[0]/maxP*100);
+    let emoji='🎯',comment='Good effort!';
+    if(pct>=90){emoji='🏆';comment='Fantastic! You really know your AI history!';}
+    else if(pct>=70){emoji='🌟';comment='Impressive!';}
+    else if(pct>=50){emoji='👍';comment='Good foundation! Read up and try again.';}
+    else{emoji='📚';comment='Time to hit the books!';}
+    ec.innerHTML=`<h2>${emoji} Game over!</h2><div class="big-score">${scores[0]} / ${maxP}</div><div class="end-sub">${comment}</div><div class="end-stats"><div class="es"><div class="ev" style="color:var(--gold)">${perfects[0]}</div><div class="el">Perfect</div></div><div class="es"><div class="ev" style="color:var(--orange)">${maxStreaks[0]}</div><div class="el">Best streak</div></div><div class="es"><div class="ev" style="color:var(--accent)">${totalCards}</div><div class="el">Cards</div></div></div><button class="overlay-btn" onclick="location.reload()">Play again</button>`;
+  }else{
+    const w=scores[0]>scores[1]?0:scores[1]>scores[0]?1:-1;
+    let title='It\'s a draw! 🤝';if(w===0)title='Player 1 wins! 🏆';if(w===1)title='Player 2 wins! 🏆';
+    ec.innerHTML=`<h2>${title}</h2><div class="p-scores"><div class="ps ${w===0?'w':''}" style="border-color:var(--accent);${w===0?'background:rgba(77,128,255,0.08);':''}"><div class="pn" style="color:var(--accent)">Player 1</div><div class="psc" style="color:var(--accent)">${scores[0]}</div></div><div class="ps ${w===1?'w':''}" style="border-color:var(--orange);${w===1?'background:rgba(255,159,67,0.08);':''}"><div class="pn" style="color:var(--orange)">Player 2</div><div class="psc" style="color:var(--orange)">${scores[1]}</div></div></div><div class="end-stats"><div class="es"><div class="ev" style="color:var(--gold)">${perfects[0]} / ${perfects[1]}</div><div class="el">Perfect</div></div><div class="es"><div class="ev" style="color:var(--orange)">${maxStreaks[0]} / ${maxStreaks[1]}</div><div class="el">Best streak</div></div></div><button class="overlay-btn" onclick="location.reload()">Play again</button>`;
+  }
+}
+
+document.getElementById('yearInput').addEventListener('keydown',e=>{if(e.key==='Enter')submitGuess();});
+window.addEventListener('resize',()=>{if(placed.length>0)renderTimeline();});
+</script>
+</body>
+</html>
