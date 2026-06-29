@@ -33,7 +33,11 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .sel,textarea{font-family:'DM Sans',sans-serif;font-size:0.84em;width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);outline:none;transition:border-color 0.2s;}
 .sel{cursor:pointer;}
 .sel:focus,textarea:focus{border-color:var(--accent);}
-#kSel{font-size:1.04em;font-weight:600;padding:14px 13px;border-color:rgba(77,128,255,0.5);background:rgba(77,128,255,0.07);}
+.k-label{font-size:0.74em;color:var(--subtle);}
+#kSel{font-size:1.06em;font-weight:600;padding:13px 14px;border:1px solid rgba(176,190,220,0.3);border-radius:10px;background:var(--surface2);transition:border-color 0.25s,box-shadow 0.3s;}
+#kSel:hover{border-color:rgba(176,190,220,0.55);}
+/* Glow när steg 2 (kontexten) är aktivt – då är väljaren huvudkontrollen */
+.wrap.sx-context:not(.sx-choose) #kSel{border-color:var(--step-accent);box-shadow:0 0 0 3px var(--step-accent-soft);}
 textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;color:var(--subtle);}
 .btn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.84em;padding:9px 14px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:0.2s;text-align:center;}
 .btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.08);}
@@ -187,8 +191,8 @@ input[type=range]:disabled{opacity:0.3;}
 .step-badge{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:0.78em;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
 .setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;}
 .mini-t{display:block;font-size:0.64em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim);margin-bottom:8px;}
-.grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(320px,1fr);gap:24px;align-items:start;}
-.stage{display:flex;flex-direction:column;gap:16px;min-width:0;}
+.grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(340px,1fr);gap:24px;align-items:start;}
+.stage{display:flex;flex-direction:column;gap:22px;min-width:0;}
 .side{display:flex;flex-direction:column;gap:16px;min-width:0;}
 .coll{background:var(--surface);}
 .side .coll.sticky{position:sticky;top:12px;}
@@ -213,9 +217,10 @@ input[type=range]:disabled{opacity:0.3;}
 .gloss-item b{color:var(--accent2);}
 
 /* Träna-knapp: markeras när modellen behöver tränas om */
-.train-btn{margin-bottom:2px;}
+.train-btn{margin-bottom:2px;transition:background 0.3s,border-color 0.3s;}
 .train-btn.attn{animation:trainPulse 1.3s ease-in-out infinite;}
-@keyframes trainPulse{0%,100%{box-shadow:0 0 0 0 rgba(52,199,89,0.0);}50%{box-shadow:0 0 0 4px rgba(52,199,89,0.28);}}
+@keyframes trainPulse{0%,100%{box-shadow:0 0 0 0 rgba(77,128,255,0.0);}50%{box-shadow:0 0 0 4px rgba(77,128,255,0.30);}}
+.train-btn.just-trained{background:var(--green);border-color:var(--green);color:#090b14;}
 .train-status{font-size:0.74em;color:var(--green);line-height:1.4;margin-top:6px;min-height:1em;}
 .train-status strong{color:var(--text);}
 
@@ -256,8 +261,8 @@ input[type=range]:disabled{opacity:0.3;}
 .step-intro strong{color:var(--text);}
 .step-foot{display:flex;justify-content:space-between;gap:8px;margin-top:11px;}
 .step-foot.bottom{margin-top:4px;padding-top:22px;border-top:1px solid var(--border);align-items:stretch;}
-.step-foot.bottom #prevStep{flex:0 0 auto;padding:15px 18px;}
-.btn.big-next{flex:1;font-size:1.08em;font-weight:700;padding:15px 24px;}
+.step-foot.bottom #prevStep{flex:0 0 auto;padding:11px 16px;}
+.btn.big-next{flex:1;font-size:1em;font-weight:700;padding:11px 22px;}
 
 /* Visnings-grindar: visa bara det som hör till aktuellt steg */
 .gate-context,.gate-choose,.gate-data,.gate-prompt,.gate-pblock{display:none;}
@@ -345,7 +350,7 @@ input[type=range]:disabled{opacity:0.3;}
         <div class="preset-purpose" id="presetPurpose"></div>
       </div>
       <div class="gate-context">
-        <label class="mini-t"><span class="term" data-term="kontextlängd">Kontextlängd</span></label>
+        <label class="mini-t k-label"><span class="term" data-term="kontextlängd">Kontextlängd</span></label>
         <select class="sel" id="kSel" onchange="onKChange(this.value)">
           <option value="1">1 ord – tittar på senaste ordet</option>
           <option value="2" selected>2 ord – tittar på de två senaste</option>
@@ -353,7 +358,7 @@ input[type=range]:disabled{opacity:0.3;}
         </select>
       </div>
     </div>
-    <button class="btn grn train-btn" id="trainBtn" style="width:100%;" onclick="trainAnimated()">🧠 Träna modellen</button>
+    <button class="btn pri train-btn" id="trainBtn" style="width:100%;" onclick="trainAnimated()">🧠 Träna modellen</button>
     <div class="stale-note" id="staleNote">⚠️ Träningstexten har ändrats – tryck <strong style="color:var(--text)">Träna modellen</strong> för att uppdatera den.</div>
     <div class="train-status" id="trainStatus"></div>
     <div class="coll" style="margin-top:10px;">
@@ -373,7 +378,6 @@ input[type=range]:disabled{opacity:0.3;}
 
     <!-- ─── Steg 2: generera (scen) ─── -->
     <section class="stage">
-      <div class="card-h">✍️ Modellen skriver</div>
 
       <div class="prompt-bar gate-prompt">
         <label class="lbl-tip">Prompt<span class="tip-ico" tabindex="0" aria-label="Om prompten och kontextfönstret">i<span class="tip-box" id="promptTip"></span></span></label>
@@ -483,7 +487,7 @@ input[type=range]:disabled{opacity:0.3;}
 
   <div class="step-foot bottom">
     <button class="btn ghost" id="prevStep" onclick="goStep(curStep-1)">← Föregående</button>
-    <button class="btn grn big-next" id="nextStep" onclick="goStep(curStep+1)">Nästa steg →</button>
+    <button class="btn pri big-next" id="nextStep" onclick="goStep(curStep+1)">Nästa steg →</button>
   </div>
 </div>
 
@@ -746,7 +750,10 @@ function buildFromTextarea(){
   deadEnd = false;
   dirty = false;
   document.getElementById('staleNote').classList.remove('show');
-  document.getElementById('trainBtn').classList.remove('attn');
+  const tb = document.getElementById('trainBtn');
+  tb.classList.remove('attn');
+  tb.classList.add('just-trained');
+  setTimeout(() => tb.classList.remove('just-trained'), 1600);
   document.getElementById('trainStatus').innerHTML =
     `✓ Tränad på <strong>${tokens.length}</strong> tokens · <strong>${new Set(tokens).size}</strong> unika ord.`;
   exampleStarts = topContentWords(6);
