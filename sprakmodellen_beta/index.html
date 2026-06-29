@@ -138,11 +138,13 @@ input[type=range]:disabled{opacity:0.3;}
 .ctx-chip .ctx-count{display:block;margin-top:6px;font-size:0.92em;color:var(--subtle);}
 .ctx-chip .ctx-count b{color:var(--gold);font-family:'JetBrains Mono',monospace;}
 .ptable{display:flex;flex-direction:column;gap:3px;flex:1;min-height:120px;}
-.phead{display:grid;grid-template-columns:minmax(58px,0.85fr) 1.5fr 30px 48px;gap:7px;padding:0 9px;font-size:0.62em;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--dim);}
-.prow{display:grid;grid-template-columns:minmax(58px,0.85fr) 1.5fr 30px 48px;gap:7px;align-items:center;padding:7px 9px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);cursor:pointer;transition:border-color 0.15s,background 0.15s,transform 0.15s;}
+.phead{display:grid;grid-template-columns:minmax(96px,1.6fr) minmax(34px,0.9fr) 32px 44px;gap:7px;padding:0 9px;font-size:0.62em;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--dim);}
+.prow{display:grid;grid-template-columns:minmax(96px,1.6fr) minmax(34px,0.9fr) 32px 44px;gap:7px;align-items:center;padding:7px 9px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);cursor:pointer;transition:border-color 0.15s,background 0.15s,transform 0.15s;}
 .prow:hover{border-color:var(--accent);background:rgba(77,128,255,0.10);transform:translateX(-2px);}
 .ptable .prow:first-child{box-shadow:inset 3px 0 0 var(--accent2);}
-.prow .pw{font-family:'JetBrains Mono',monospace;font-size:0.94em;font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.prow .pw{font-family:'JetBrains Mono',monospace;font-size:0.9em;line-height:1.25;white-space:normal;word-break:break-word;}
+.prow .pw .pw-ctx{color:var(--dim);font-weight:400;}
+.prow .pw .pw-next{color:var(--text);font-weight:700;}
 .prow .pbar{height:14px;border-radius:5px;background:var(--bg);overflow:hidden;border:1px solid rgba(255,255,255,0.05);}
 .prow .pfill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 0.35s ease;box-shadow:0 0 8px rgba(77,128,255,0.4);}
 .prow .pc{font-family:'JetBrains Mono',monospace;font-size:0.72em;color:var(--dim);text-align:right;}
@@ -271,29 +273,6 @@ input[type=range]:disabled{opacity:0.3;}
 .ds-name{font-weight:700;font-size:0.86em;}
 .ds-tag{font-size:0.7em;color:var(--dim);}
 
-/* "Visa modellens minne" – knapp + animerad modal */
-.mem-btn{margin-top:10px;width:100%;padding:9px;border:1px solid var(--accent);background:rgba(77,128,255,0.08);color:var(--text);border-radius:9px;cursor:pointer;font-weight:700;font-size:0.86em;transition:0.15s;}
-.mem-btn:hover{background:rgba(77,128,255,0.18);}
-.mem-modal{position:fixed;inset:0;background:rgba(7,10,18,0.78);backdrop-filter:blur(3px);z-index:200;display:none;align-items:center;justify-content:center;padding:18px;}
-.mem-modal.show{display:flex;}
-.mem-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:16px;max-width:440px;width:100%;padding:26px 24px;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
-.mem-x{position:absolute;top:12px;right:14px;background:none;border:none;color:var(--dim);font-size:1.1em;cursor:pointer;}
-.mem-title{font-weight:800;font-size:1.05em;margin-bottom:14px;}
-.mem-body{min-height:120px;max-height:62vh;overflow-y:auto;font-size:0.92em;line-height:1.55;}
-.mem-stage{opacity:0;transform:translateY(6px);animation:memIn 0.4s ease forwards;margin-bottom:12px;}
-@keyframes memIn{to{opacity:1;transform:none;}}
-.mem-ctx{display:inline-flex;gap:6px;flex-wrap:wrap;margin:4px 0 2px;}
-.mem-ctx .ct{background:var(--accent);color:#fff;padding:3px 9px;border-radius:7px;font-weight:700;font-family:'JetBrains Mono',monospace;}
-.mem-lab{color:var(--dim);font-size:0.88em;}
-.mem-found{display:flex;flex-direction:column;gap:5px;margin-top:6px;}
-.mem-found .mf{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:5px 9px;font-family:'JetBrains Mono',monospace;font-size:0.9em;}
-.mem-found .mf b{color:var(--accent2);}
-.mem-prob{display:flex;flex-direction:column;gap:6px;margin-top:6px;}
-.mem-row{display:grid;grid-template-columns:90px 1fr 42px;align-items:center;gap:8px;}
-.mem-row .mw{font-weight:700;}
-.mem-bar{height:14px;background:var(--surface2);border-radius:7px;overflow:hidden;}
-.mem-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:7px;width:0;transition:width 0.7s ease;}
-.mem-row .mp{text-align:right;color:var(--gold);font-weight:700;}
 
 /* Säkerhetsmätare för aktuell kontext */
 .certainty{margin:9px 0 5px;}
@@ -320,7 +299,7 @@ input[type=range]:disabled{opacity:0.3;}
   <!-- ─── Stegnavigering: guidad trappa ─── -->
   <section class="stepper">
     <div class="steps-nav" id="stepsNav">
-      <button class="snav" data-s="1" onclick="goStep(1)">1 · Gissa nästa ord</button>
+      <button class="snav" data-s="1" onclick="goStep(1)">1 · Nästa ord</button>
       <button class="snav" data-s="2" onclick="goStep(2)">2 · Kontexten</button>
       <button class="snav" data-s="3" onclick="goStep(3)">3 · Slump &amp; temperatur</button>
       <button class="snav" data-s="4" onclick="goStep(4)">4 · Träningsdatan</button>
@@ -432,15 +411,14 @@ input[type=range]:disabled{opacity:0.3;}
     <aside class="side">
 
       <div class="coll sticky">
-        <button class="coll-toggle open" onclick="toggleColl(this,'tableBody')">📊 <span class="term" data-term="tabell">Sannolikhetstabell</span> – nästa ord<span class="arr">▼</span></button>
+        <button class="coll-toggle open" onclick="toggleColl(this,'tableBody')">🧠 <span class="term" data-term="tabell">Modellens minne</span><span class="arr">▼</span></button>
         <div class="coll-body show" id="tableBody">
-          <div class="rp-desc">Modellen räknade hur ofta varje ord följer på den markerade kontexten. Det är hela "hjärnan".</div>
+          <div class="rp-desc">Så här tänker modellen: den läser kontexten, letar upp alla ställen i texten där den förekommer, och räknar hur ofta varje ord följde. Det avgör nästa ord.</div>
           <div class="ctx-chip" id="ctxChip">Kontext: <em style="color:var(--dim)">–</em></div>
           <div class="certainty gate-context" id="certainty"></div>
-          <div class="phead"><span>Ord</span><span>Sannolikhet</span><span style="text-align:right">Antal</span><span style="text-align:right">%</span></div>
+          <div class="phead"><span>Kontext + nästa ord</span><span>Hur ofta</span><span style="text-align:right">Antal</span><span style="text-align:right">%</span></div>
           <div class="ptable" id="ptable"></div>
-          <div class="click-hint">👆 Klicka på ett ord för att välja det själv</div>
-          <button class="mem-btn" id="memBtn" onclick="showMemory()">🧠 Visa modellens minne</button>
+          <div class="click-hint">👆 Klicka på en rad för att välja det ordet själv</div>
         </div>
       </div>
 
@@ -490,24 +468,18 @@ input[type=range]:disabled{opacity:0.3;}
 </div>
 
 <!-- ─── Intro-overlay ─── -->
-<div class="mem-modal" id="memModal" onclick="if(event.target===this)closeMemory()">
-  <div class="mem-card">
-    <button class="mem-x" onclick="closeMemory()" aria-label="Stäng">✕</button>
-    <div class="mem-title">🧠 Modellens minne</div>
-    <div class="mem-body" id="memBody"></div>
-  </div>
-</div>
-
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
     <h2><span>Språkmodell</span>-labbet</h2>
-    <p class="sub">ChatGPT skriver text genom att gissa nästa ord – om och om igen. Här bygger du en egen minimodell som gör exakt samma sak, och följer varje gissning steg för steg.</p>
+    <p class="sub">Upptäck hur en språkmodell fungerar genom att steg för steg bygga, analysera och utvärdera en egen modell.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div>Se hur en dator kan <strong>gissa nästa ord</strong> – helt utan att förstå vad orden betyder.</div></div>
-      <div class="step"><div class="step-num">2</div><div>Utforska vad som styr gissningen: hur mycket modellen <strong>minns</strong>, hur den <strong>väljer</strong> ord och vilken <strong>text</strong> den tränats på.</div></div>
-      <div class="step"><div class="step-num">3</div><div>Sätt ihop allt själv – skriv <strong>egna texter och prompter</strong> och se vad modellen gör.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Hur väljer modellen nästa ord?</strong> Utforska hur modellen fortsätter en text och upptäck hur den väljer mellan olika möjliga ord.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Vad minns modellen?</strong> Undersök hur många tidigare ord modellen tittar bakåt på när den väljer nästa ord – och vad det gör med texten.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Hur påverkas modellens val?</strong> Experimentera med temperatur och olika sätt att välja nästa ord.</div></div>
+      <div class="step"><div class="step-num">4</div><div><strong>Hur formar träningsdatan modellen?</strong> Byt mellan olika texter och se hur modellens språk och beteende förändras.</div></div>
+      <div class="step"><div class="step-num">5</div><div><strong>Utforska modellen själv.</strong> Ladda upp egna texter, skriv egna prompter och undersök modellens möjligheter och begränsningar.</div></div>
     </div>
-    <p class="sub" style="margin-bottom:0;">💭 Fundera medan du går: vad skiljer den här lilla modellen från stora språkmodeller som <strong style="color:var(--text)">ChatGPT</strong> eller <strong style="color:var(--text)">Claude</strong>? Vilka <strong style="color:var(--text)">likheter</strong> och <strong style="color:var(--text)">skillnader</strong> finns det?</p>
+    <p class="sub" style="margin-bottom:0;">💭 Fundera medan du går: vad skiljer den här lilla modellen från stora språkmodeller som <strong style="color:var(--text)">ChatGPT</strong> eller <strong style="color:var(--text)">Claude</strong>?</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta →</button>
   </div>
 </div>
@@ -1175,87 +1147,6 @@ function refreshTable(){
   if(dist) renderTable(withProbs(dist));
 }
 
-// ── "Visa modellens minne": animera kontext → sök → räkna → sannolikhet ──
-let memTimers = [];
-function closeMemory(){
-  memTimers.forEach(clearTimeout); memTimers = [];
-  document.getElementById('memModal').classList.remove('show');
-}
-function distForContext(ctxTokens){
-  if(!models[k]) return null;
-  const counts = models[k].get(ctxTokens.join(SEP));
-  if(!counts) return null;
-  return [...counts.entries()].map(([w, c]) => ({w, c}))
-    .sort((a, b) => b.c - a.c || a.w.localeCompare(b.w, 'sv'));
-}
-// Hitta en kontext med många olika fortsättningar (snygg demo) –
-// hoppa över kontexter med skiljetecken, så det blir en riktig ordfras.
-function pickRichContext(){
-  if(!models[k]) return null;
-  const punct = /^[.,!?;:»«]$/;
-  let best = null, bestSize = 1;
-  for(const [key, counts] of models[k]){
-    if(key.split(SEP).some(t => punct.test(t))) continue;
-    if(counts.size > bestSize){ bestSize = counts.size; best = key; }
-  }
-  if(!best){   // reserv: tillåt vad som helst
-    for(const [key, counts] of models[k]){
-      if(counts.size > bestSize){ bestSize = counts.size; best = key; }
-    }
-  }
-  return best ? best.split(SEP) : null;
-}
-function showMemory(){
-  const body = document.getElementById('memBody');
-  const modal = document.getElementById('memModal');
-  memTimers.forEach(clearTimeout); memTimers = [];
-  body.innerHTML = '';
-  modal.classList.add('show');
-
-  if(!built){
-    body.innerHTML = '<div class="mem-stage">Träna modellen först – tryck 🧠 <strong>Träna modellen</strong>.</div>';
-    return;
-  }
-  // Använd nuvarande kontext om den har flera fortsättningar, annars en rik exempelkontext
-  let ctxTokens = genTokens.slice(-k);
-  let dist = distForContext(ctxTokens);
-  let usedExample = false;
-  if(!dist || dist.length < 2){
-    const rc = pickRichContext();
-    if(rc){ ctxTokens = rc; dist = distForContext(rc); usedExample = true; }
-  }
-  if(!dist){
-    body.innerHTML = '<div class="mem-stage">Skriv eller generera några ord först, så har modellen en kontext att minnas.</div>';
-    return;
-  }
-
-  const total = dist.reduce((a, b) => a + b.c, 0);
-  const top = dist.slice(0, 5);
-  const ctxStr = ctxTokens.join(' ');
-  const chips = ctxTokens.map(t => `<span class="ct">${esc(t)}</span>`).join('');
-
-  const add = (html, delay) => memTimers.push(setTimeout(() => {
-    const d = document.createElement('div');
-    d.className = 'mem-stage';
-    d.innerHTML = html;
-    body.appendChild(d);
-    body.scrollTop = body.scrollHeight;
-  }, delay));
-
-  add(`<div class="mem-lab">Kontext${usedExample ? ' (exempel ur texten)' : ''}:</div><div class="mem-ctx">${chips}</div>`, 50);
-  add(`<div class="mem-lab">🔍 Modellen letar igenom hela texten…</div>`, 900);
-  add(`<div class="mem-lab">Hittade fortsättningar:</div><div class="mem-found">`
-      + top.map(d => `<div class="mf">${esc(ctxStr)} <b>${esc(d.w)}</b></div>`).join('')
-      + `</div>`, 1900);
-  add(`<div class="mem-lab">✏️ Räknar hur ofta varje ord följde…</div>`, 3000);
-  add(`<div class="mem-lab">Sannolikhet för nästa ord:</div><div class="mem-prob" id="memProb">`
-      + top.map(d => { const pct = Math.round(100 * d.c / total);
-          return `<div class="mem-row"><span class="mw">${esc(d.w)}</span><div class="mem-bar"><i data-w="${pct}"></i></div><span class="mp">${pct}%</span></div>`; }).join('')
-      + `</div><div class="mem-lab" style="margin-top:12px">Det här – <strong style="color:var(--text)">kontext → sök → räkna → sannolikhet</strong> – är hela språkmodellen.</div>`, 4000);
-  memTimers.push(setTimeout(() => {
-    document.querySelectorAll('#memProb .mem-bar i').forEach(el => { el.style.width = el.dataset.w + '%'; });
-  }, 4250));
-}
 
 // ════════════════════════════════════════════════════════════
 //  Rendering
@@ -1327,9 +1218,10 @@ function renderTable(probs, picked){
   const ctx = genTokens.slice(-k);
   const total = probs.reduce((a, b) => a + b.c, 0);
   const mask = guessFirst && !reveal;
+  const ctxHtml = ctx.map(t => `<span class="ct">${esc(t)}</span>`).join(' ');
   document.getElementById('ctxChip').innerHTML =
-    '🧠 Modellens minne just nu: ' + ctx.map(t => `<span class="ct">${esc(t)}</span>`).join(' ') +
-    `<span class="ctx-count">Den här kontexten har setts <b>${total}</b> ${total === 1 ? 'gång' : 'gånger'} i texten.</span>`;
+    'Modellen letar efter: ' + ctxHtml +
+    `<span class="ctx-count">Hittade <b>${total}</b> ${total === 1 ? 'matchning' : 'matchningar'} i texten – så här ofta följde varje ord:</span>`;
 
   // Säkerhetsmätare: hur koncentrerad är fördelningen (oberoende av temperatur)?
   const topC = probs.length ? Math.max(...probs.map(p => p.c)) : 0;
@@ -1338,6 +1230,7 @@ function renderTable(probs, picked){
   const maxP = probs.length ? Math.max(...probs.map(p => p.p)) : 1;
   const rows = probs.slice(0, MAX_ROWS);
   const rest = probs.slice(MAX_ROWS);
+  const ctxPrefix = ctx.join(' ');
 
   let html = '';
   rows.forEach((r, i) => {
@@ -1349,7 +1242,7 @@ function renderTable(probs, picked){
     ].join(' ');
     const pct = r.p * 100;
     html += `<div class="${cls}" data-w="${esc(r.w)}">
-      <div class="pw">${esc(r.w)}</div>
+      <div class="pw"><span class="pw-ctx">${esc(ctxPrefix)}</span> <span class="pw-next">${esc(r.w)}</span></div>
       <div class="pbar">${mask ? '' : `<div class="pfill" style="width:${Math.max(2, r.p * 100).toFixed(1)}%"></div>`}</div>
       <div class="pc">${mask ? '·' : r.c + '×'}</div>
       <div class="pp">${mask ? '?' : (pct < 9.5 ? pct.toFixed(1) : Math.round(pct)) + '%'}</div>
@@ -1399,7 +1292,7 @@ function renderCertainty(p1, options, mask){
 // ── Stegnavigering: guidad trappa genom labbet ──
 let curStep = 1;
 const STEPS = [
-  {intro:'<strong>Datorn kan ingen svenska</strong> – ändå kan den gissa nästa ord. Tryck ✍️ <strong>Nästa ord</strong> några gånger och titta i sannolikhetstabellen: vad bygger gissningen egentligen på?',
+  {intro:'<strong>Datorn kan ingen svenska</strong> – ändå kan den gissa nästa ord. Tryck ✍️ <strong>Nästa ord</strong> några gånger och titta i <strong>modellens minne</strong>: vad bygger gissningen egentligen på?',
    rec:{ds:['vader'], k:1}},
   {intro:'Nu tränar vi på en <strong>stor svensk roman</strong>. <strong>Testa olika kontextlängder</strong> (1 → 2 → 3) och jämför: skriver modellen mer som riktig svenska – och hur ändras valmöjligheterna?',
    rec:{ds:['hemso'], k:2}},
