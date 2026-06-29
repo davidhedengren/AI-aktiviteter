@@ -1119,7 +1119,7 @@ function step(manualWord){
   renderTable(probs, chosen);
   const flashMs = autoTimer
     ? (document.getElementById('speedSel').value === 'fast' ? 90 : 260)
-    : 330;
+    : 750;
   setTimeout(() => {
     genTokens.push(chosen);
     busy = false;
@@ -1392,6 +1392,20 @@ function goStep(n){
     setDatasets(rec.ds);    // bockar i rätt texter + bygger träningstexten
     buildFromTextarea();     // träna direkt i guidat läge
   }
+  scrollToTop();             // börja varje steg högst upp (sist, efter ombyggnad)
+}
+
+// Pålitlig scroll till toppen – fungerar även på mobil (smooth ignoreras ofta där)
+function scrollToTop(){
+  const jump = () => {
+    window.scrollTo(0, 0);
+    if(document.scrollingElement) document.scrollingElement.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  };
+  jump();
+  requestAnimationFrame(jump);   // igen efter att layouten ritats om
+  setTimeout(jump, 60);          // och en gång till om innehållet just bytt höjd
 }
 
 // ── Dataset-syften: varför just den här texten? ──
