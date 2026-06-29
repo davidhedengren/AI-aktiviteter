@@ -186,7 +186,7 @@ input[type=range]:disabled{opacity:0.3;}
 .step-badge{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:0.78em;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
 .setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;}
 .mini-t{display:block;font-size:0.64em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim);margin-bottom:8px;}
-.grid{display:grid;grid-template-columns:minmax(0,1fr) 342px;gap:24px;align-items:start;}
+.grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(320px,1fr);gap:24px;align-items:start;}
 .stage{display:flex;flex-direction:column;gap:16px;min-width:0;}
 .side{display:flex;flex-direction:column;gap:16px;min-width:0;}
 .coll{background:var(--surface);}
@@ -254,6 +254,9 @@ input[type=range]:disabled{opacity:0.3;}
 .step-intro{font-size:0.88em;color:var(--subtle);line-height:1.55;margin-top:14px;background:linear-gradient(180deg,var(--step-accent-soft),transparent);border-left:3px solid var(--step-accent);border-radius:0 8px 8px 0;padding:12px 15px;transition:border-color 0.4s,background 0.4s;}
 .step-intro strong{color:var(--text);}
 .step-foot{display:flex;justify-content:space-between;gap:8px;margin-top:11px;}
+.step-foot.bottom{margin-top:4px;padding-top:22px;border-top:1px solid var(--border);align-items:stretch;}
+.step-foot.bottom #prevStep{flex:0 0 auto;padding:15px 18px;}
+.btn.big-next{flex:1;font-size:1.08em;font-weight:700;padding:15px 24px;}
 
 /* Visnings-grindar: visa bara det som hör till aktuellt steg */
 .gate-context,.gate-choose,.gate-data,.gate-prompt,.gate-pblock{display:none;}
@@ -323,10 +326,6 @@ input[type=range]:disabled{opacity:0.3;}
       <button class="snav" data-s="5" onclick="goStep(5)">5 · Fri utforskning</button>
     </div>
     <div class="step-intro" id="stepIntro"></div>
-    <div class="step-foot">
-      <button class="btn ghost" id="prevStep" onclick="goStep(curStep-1)">← Föregående</button>
-      <button class="btn pri" id="nextStep" onclick="goStep(curStep+1)">Nästa steg →</button>
-    </div>
   </section>
 
   <!-- ─── Träningsdata ─── -->
@@ -383,10 +382,10 @@ input[type=range]:disabled{opacity:0.3;}
       <div class="prompt-extra">
         <div class="prompt-status gate-pblock" id="promptStatus"></div>
         <span class="start-err" id="promptErr">Skriv minst ett ord.</span>
-        <div id="startExamplesRow" style="display:none;"><div class="start-examples" id="startExamples"></div></div>
       </div>
 
       <div class="gen-box" id="genBox"><span class="placeholder">Träna modellen så börjar den skriva.</span></div>
+      <div id="startExamplesRow" style="display:none;"><div class="start-examples" id="startExamples"></div></div>
       <div class="narr" id="narr">Modellen är inte tränad ännu.</div>
       <div class="legend">
         <span><i class="sw-ctx"></i> <span class="term" data-term="kontext">kontext</span> (minne)</span>
@@ -479,6 +478,11 @@ input[type=range]:disabled{opacity:0.3;}
       </div>
 
     </aside>
+  </div>
+
+  <div class="step-foot bottom">
+    <button class="btn ghost" id="prevStep" onclick="goStep(curStep-1)">← Föregående</button>
+    <button class="btn grn big-next" id="nextStep" onclick="goStep(curStep+1)">Nästa steg →</button>
   </div>
 </div>
 
