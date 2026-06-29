@@ -143,8 +143,13 @@ input[type=range]:disabled{opacity:0.3;}
 .prow:hover{border-color:var(--accent);background:rgba(77,128,255,0.10);transform:translateX(-2px);}
 .ptable .prow:first-child{box-shadow:inset 3px 0 0 var(--accent2);}
 .prow .pw{font-family:'JetBrains Mono',monospace;font-size:0.9em;line-height:1.25;white-space:normal;word-break:break-word;}
-.prow .pw .pw-ctx{color:var(--dim);font-weight:400;}
-.prow .pw .pw-next{color:var(--text);font-weight:700;}
+.prow .pw .pw-ctx{color:var(--dim);font-weight:400;font-size:0.84em;}
+.prow .pw .pw-next{color:var(--text);font-weight:700;font-size:1.06em;}
+
+/* Modellens minne = labbets signatur: ge panelen en egen, lugn inramning */
+.side .coll.sticky{border:1px solid rgba(77,128,255,0.32);border-radius:12px;overflow:hidden;box-shadow:0 6px 30px rgba(0,0,0,0.30);}
+.side .coll.sticky > .coll-toggle{color:var(--text);font-size:0.92em;background:rgba(77,128,255,0.10);}
+.side .coll.sticky > .coll-toggle .term{border-bottom-color:transparent;}
 .prow .pbar{height:14px;border-radius:5px;background:var(--bg);overflow:hidden;border:1px solid rgba(255,255,255,0.05);}
 .prow .pfill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 0.35s ease;box-shadow:0 0 8px rgba(77,128,255,0.4);}
 .prow .pc{font-family:'JetBrains Mono',monospace;font-size:0.72em;color:var(--dim);text-align:right;}
@@ -356,7 +361,7 @@ input[type=range]:disabled{opacity:0.3;}
 
     <!-- ─── Steg 2: generera (scen) ─── -->
     <section class="stage">
-      <div class="card-h">✍️ Generering</div>
+      <div class="card-h">✍️ Modellen skriver</div>
 
       <div class="prompt-bar gate-prompt">
         <label class="lbl-tip">Prompt<span class="tip-ico" tabindex="0" aria-label="Om prompten och kontextfönstret">i<span class="tip-box" id="promptTip"></span></span></label>
@@ -369,8 +374,8 @@ input[type=range]:disabled{opacity:0.3;}
         <div id="startExamplesRow" style="display:none;"><div class="start-examples" id="startExamples"></div></div>
       </div>
 
-      <div class="gen-box" id="genBox"><span class="placeholder">Bygg modellen för att börja generera text.</span></div>
-      <div class="narr" id="narr">Modellen är inte byggd ännu.</div>
+      <div class="gen-box" id="genBox"><span class="placeholder">Träna modellen så börjar den skriva.</span></div>
+      <div class="narr" id="narr">Modellen är inte tränad ännu.</div>
       <div class="legend">
         <span><i class="sw-ctx"></i> <span class="term" data-term="kontext">kontext</span> (minne)</span>
         <span><i class="sw-chosen"></i> valt ord</span>
@@ -402,7 +407,7 @@ input[type=range]:disabled{opacity:0.3;}
             <input type="range" id="tempSlider" min="0.3" max="2" step="0.1" value="1" oninput="onTempChange(this.value)">
             <span class="temp-val" id="tempVal">1.0</span>
           </div>
-          <div class="hint" id="tempHint">🌡️ Låg temperatur = försiktig och förutsägbar. Hög = vild och slumpmässig. Samma reglage finns på riktigt i ChatGPT!</div>
+          <div class="hint" id="tempHint">🌡️ Låg = försiktig och förutsägbar. Hög = vild och slumpmässig. Samma reglage finns i ChatGPT.</div>
         </div>
       </div>
     </section>
@@ -413,7 +418,6 @@ input[type=range]:disabled{opacity:0.3;}
       <div class="coll sticky">
         <button class="coll-toggle open" onclick="toggleColl(this,'tableBody')">🧠 <span class="term" data-term="tabell">Modellens minne</span><span class="arr">▼</span></button>
         <div class="coll-body show" id="tableBody">
-          <div class="rp-desc">Så här tänker modellen: den läser kontexten, letar upp alla ställen i texten där den förekommer, och räknar hur ofta varje ord följde. Det avgör nästa ord.</div>
           <div class="ctx-chip" id="ctxChip">Kontext: <em style="color:var(--dim)">–</em></div>
           <div class="certainty gate-context" id="certainty"></div>
           <div class="phead"><span>Kontext + nästa ord</span><span>Hur ofta</span><span style="text-align:right">Antal</span><span style="text-align:right">%</span></div>
@@ -577,7 +581,8 @@ function buildModels(){
 //  pdf.js laddas först när någon faktiskt väljer en PDF, så att
 //  sidan förblir lätt för alla andra.
 // ════════════════════════════════════════════════════════════
-const MAX_CHARS = 700000;   // ≈ 100 000 tokens, en kort roman
+const MAX_CHARS = 4000000;     // teckentak för uppladdad/inklistrad text (~700 000 tokens)
+const MAX_TOKENS = 1000000;    // tokentak vid träning – webbläsaren klarar mycket mer än förr
 
 function setFileStatus(msg){
   const el = document.getElementById('fileStatus');
@@ -677,7 +682,7 @@ function buildFromTextarea(){
     return;
   }
   truncated = false;
-  if(toks.length > 100000){ toks = toks.slice(0, 100000); truncated = true; }
+  if(toks.length > MAX_TOKENS){ toks = toks.slice(0, MAX_TOKENS); truncated = true; }
   tokens = toks;
   vocab = new Set(tokens);
   buildModels();
@@ -864,7 +869,7 @@ function updateStats(){
     note = `⚠️ <strong>Texten upprepar sig sällan</strong> – vid kontextlängd ${k} finns nästan aldrig mer än <strong>ett</strong> möjligt nästa ord. Modellen kan då bara återberätta texten ordagrant tills den tar slut. Prova <strong>kontextlängd 1</strong>, eller en längre text där ord och fraser återkommer.`;
   }
   if(truncated){
-    note += (note ? '<br><br>' : '') + 'ℹ️ Texten var mycket lång och kortades till 100 000 tokens vid bygget.';
+    note += (note ? '<br><br>' : '') + `ℹ️ Texten var mycket lång och kortades till ${MAX_TOKENS.toLocaleString('sv-SE')} tokens vid bygget.`;
   }
   qn.innerHTML = note;
   qn.style.display = note ? 'block' : 'none';
