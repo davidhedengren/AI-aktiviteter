@@ -139,8 +139,7 @@ input[type=range]:disabled{opacity:0.3;}
 .ctx-chip .ctx-count b{color:var(--gold);font-family:'JetBrains Mono',monospace;}
 .ptable{display:flex;flex-direction:column;gap:3px;flex:1;min-height:120px;}
 .phead{display:grid;grid-template-columns:minmax(96px,1.6fr) minmax(34px,0.9fr) 32px 44px;gap:7px;padding:0 9px;font-size:0.62em;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--dim);}
-.prow{display:grid;grid-template-columns:minmax(96px,1.6fr) minmax(34px,0.9fr) 32px 44px;gap:7px;align-items:center;padding:7px 9px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);cursor:pointer;transition:border-color 0.15s,background 0.15s,transform 0.15s;}
-.prow:hover{border-color:var(--accent);background:rgba(77,128,255,0.10);transform:translateX(-2px);}
+.prow{display:grid;grid-template-columns:minmax(96px,1.6fr) minmax(34px,0.9fr) 32px 44px;gap:7px;align-items:center;padding:7px 9px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);transition:background 0.15s;}
 .ptable .prow:first-child{box-shadow:inset 3px 0 0 var(--accent2);}
 .prow .pw{font-family:'JetBrains Mono',monospace;font-size:0.9em;line-height:1.25;white-space:normal;word-break:break-word;}
 .prow .pw .pw-ctx{color:var(--dim);font-weight:400;font-size:0.84em;}
@@ -400,7 +399,7 @@ input[type=range]:disabled{opacity:0.3;}
         <div class="coll-body show" id="chooseBody">
           <div class="ctrl-row">
             <select class="sel" id="modeSel" style="flex:1;min-width:170px;" onchange="onModeChange(this.value)">
-              <option value="weighted" selected>🎲 Viktad slump (som ChatGPT)</option>
+              <option value="weighted" selected>🎲 Viktad slump (slumpar efter sannolikhet)</option>
               <option value="greedy">👑 Alltid vanligast (girig)</option>
             </select>
             <label><span class="term" data-term="temperatur">Temperatur</span></label>
@@ -422,7 +421,6 @@ input[type=range]:disabled{opacity:0.3;}
           <div class="certainty gate-context" id="certainty"></div>
           <div class="phead"><span>Kontext + nästa ord</span><span>Hur ofta</span><span style="text-align:right">Antal</span><span style="text-align:right">%</span></div>
           <div class="ptable" id="ptable"></div>
-          <div class="click-hint">👆 Klicka på en rad för att välja det ordet själv</div>
         </div>
       </div>
 
@@ -454,16 +452,16 @@ input[type=range]:disabled{opacity:0.3;}
       <div class="coll gate-data">
         <button class="coll-toggle" onclick="toggleColl(this,'gptBody')">🤖 Hur hänger modellen ihop med ChatGPT?<span class="arr">▼</span></button>
         <div class="coll-body" id="gptBody">
-          Den här minimodellen och ChatGPT bygger på samma grundprincip – men skiljer sig enormt i skala.<br><br>
+          Den här minimodellen och ChatGPT bygger på samma grundprincip – att förutsäga nästa ord. Skillnaden är hur sannolikheterna räknas fram.<br><br>
           <strong style="color:var(--green)">Likheter</strong><br>
-          • Båda gissar <strong>nästa ord</strong> utifrån orden innan, om och om igen.<br>
-          • Båda räknar fram <span class="term" data-term="sannolikhet">sannolikheter</span> och väljer sedan ett ord ur dem.<br>
-          • <span class="term" data-term="temperatur">Temperaturen</span> fungerar likadant i båda.<br><br>
+          • Båda förutsäger nästa ord utifrån orden som kommit tidigare.<br>
+          • Båda beräknar en <span class="term" data-term="sannolikhet">sannolikhet</span> för många möjliga nästa ord och väljer sedan ett av dem.<br>
+          • <span class="term" data-term="temperatur">Temperaturen</span> påverkar valet av ord på samma sätt i båda modellerna.<br><br>
           <strong style="color:var(--orange)">Skillnader</strong><br>
-          • ChatGPT byter ut tabellen mot ett <span class="term" data-term="nätverk">neuralt nätverk</span> med miljarder vikter.<br>
-          • <span class="term" data-term="kontextfönster">Kontextfönstret</span> är tusentals ord – inte 1–3.<br>
-          • Träningstexten är en stor del av internet – inte några stycken.<br>
-          • Nätverket kan <span class="term" data-term="generalisering">generalisera</span> och gissa rimligt även för ordföljder det aldrig sett. Vår tabell klarar bara exakta matchningar.
+          • Den här modellen använder en tabell med exakta ordföljder. ChatGPT använder ett <span class="term" data-term="nätverk">neuralt nätverk</span> med miljarder parametrar.<br>
+          • ChatGPT kan ta hänsyn till tusentals tidigare ord, inte bara 1–3.<br>
+          • ChatGPT har tränats på en enorm mängd text från många olika källor.<br>
+          • ChatGPT kan känna igen liknande mönster och <span class="term" data-term="generalisering">generalisera</span>. Den här modellen kan bara använda ordföljder som den har sett tidigare.
         </div>
       </div>
 
@@ -1208,15 +1206,12 @@ function render(animate){
 // N av M gånger". Gör modellens "tänkande" synligt.
 function narrChoice(prevCtx, w, c, total){
   const pct = total ? Math.round(c / total * 100) : 0;
-  let extra = '';
-  if(c === 1) extra = ' <span class="rare">Ovanligt!</span> Det här ordet sågs bara <strong>en enda gång</strong> efter den kontexten – ändå kan det väljas.';
-  else if(pct <= 25) extra = ' Ett ganska <span class="rare">ovanligt</span> val – så undviker modellen att bli helt förutsägbar.';
   const narr = document.getElementById('narr');
   narr.classList.add('choice');
   narr.innerHTML =
     `Modellen valde <span class="chosen-inline">«${esc(w)}»</span> eftersom det följde på ` +
     `<span class="ctx-inline">«${esc(prevCtx.join(' '))}»</span> <strong>${c} av ${total}</strong> ` +
-    `gånger i texten (${pct}%).${extra}`;
+    `gånger i texten (${pct}%).`;
 }
 
 function renderTable(probs, picked){
@@ -1303,9 +1298,9 @@ const STEPS = [
    rec:{ds:['hemso'], k:2}},
   {intro:'Ska modellen <strong>alltid</strong> ta det vanligaste ordet? Testa <strong>girigt val</strong> mot <strong>viktad slump</strong>, och dra i <strong>temperaturen</strong>.',
    rec:{ds:['hemso'], k:2}},
-  {intro:'Modellen är bara så bra som sin text. <strong>Kryssa i flera texter</strong> (prova t.ex. Sport + Väder) eller byt helt till Shakespeare – och hör hur modellens "röst" ändras.',
+  {intro:'<strong>Träningsdatan formar modellen.</strong> Kryssa i flera texter (t.ex. Sport + Väder) eller byt till Shakespeare och undersök hur språk, ordval och fortsättningar förändras.',
    rec:{ds:['hemso'], k:2}},
-  {intro:'<strong>Allt är upplåst.</strong> Kombinera texter, kontextlängd, ordval, temperatur och prompt precis som du vill. Längst ned: hur hänger det ihop med ChatGPT?',
+  {intro:'<strong>Utforska fritt.</strong> Kombinera träningsdata, kontextlängd, temperatur och prompter för att undersöka hur modellen funkar. Avsluta med att jämföra den med ChatGPT.',
    rec:null}
 ];
 function goStep(n){
@@ -1344,12 +1339,6 @@ function showPresetPurpose(key){
   const el = document.getElementById('presetPurpose');
   if(el) el.textContent = PRESET_PURPOSE[key] || '';
 }
-
-// Klick på tabellrad = välj ordet manuellt (delegering)
-document.getElementById('ptable').addEventListener('click', e => {
-  const row = e.target.closest('.prow');
-  if(row && !busy && !deadEnd) step(row.dataset.w);
-});
 
 // Tangentbord: mellanslag / högerpil = nästa ord (utanför inmatningsfält)
 document.addEventListener('keydown', e => {
