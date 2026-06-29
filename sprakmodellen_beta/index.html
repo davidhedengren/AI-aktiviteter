@@ -526,13 +526,11 @@ const PRESETS = {
 
 // Ladda textfilerna från data/-mappen (fungerar på GitHub Pages)
 async function loadDatasets(){
-  const keys = ['vader','sport','hemso','shakespeare'];
-  const loadEl = document.getElementById('dsLoadStatus');
-  if(loadEl) loadEl.textContent = 'Laddar träningsdata…';
+  const files = { vader:'data/Vader.txt', sport:'data/Sport.txt', hemso:'data/Hemso.txt', shakespeare:'data/Shakespeare.txt' };
   try {
-    await Promise.all(keys.map(async k => {
-      const r = await fetch(`data/${k}.txt`);
-      if(!r.ok) throw new Error(`Kunde inte ladda data/${k}.txt`);
+    await Promise.all(Object.entries(files).map(async ([k, path]) => {
+      const r = await fetch(path);
+      if(!r.ok) throw new Error(`Kunde inte ladda ${path}`);
       PRESETS[k] = await r.text();
     }));
     if(loadEl) loadEl.remove();
