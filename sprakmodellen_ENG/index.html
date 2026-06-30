@@ -423,7 +423,7 @@ input[type=range]:disabled{opacity:0.3;}
             <input type="range" id="tempSlider" min="0.3" max="2" step="0.1" value="1" oninput="onTempChange(this.value)">
             <span class="temp-val" id="tempVal">1.0</span>
           </div>
-          <div class="hint" id="tempHint">🌡️ Low = cautious and predictable. High = wild and random. ChatGPT has the same dial.</div>
+          <div class="hint" id="tempHint">🌡️ Drag the slider and see what happens to the text.</div>
         </div>
       </div>
     </section>
@@ -511,7 +511,6 @@ input[type=range]:disabled{opacity:0.3;}
       <div class="step"><div class="step-num">4</div><div><strong>How does the training data shape the model?</strong> Switch between different texts and see how the model's language and behaviour change.</div></div>
       <div class="step"><div class="step-num">5</div><div><strong>Explore the model yourself.</strong> Upload your own texts, write your own prompts and investigate the model's possibilities and limitations.</div></div>
     </div>
-    <p class="sub" style="margin-bottom:0;">💭 Think as you go: what makes this little model different from large language models like <strong style="color:var(--text)">ChatGPT</strong> or <strong style="color:var(--text)">Claude</strong>?</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Start →</button>
   </div>
 </div>
@@ -1203,8 +1202,8 @@ function onModeChange(val){
   mode = val;
   document.getElementById('tempSlider').disabled = (mode === 'greedy');
   document.getElementById('tempHint').innerHTML = (mode === 'greedy')
-    ? '👑 Greedy mode: the model <strong>always</strong> picks the word with the highest probability (▲). Temperature has no effect.'
-    : '🌡️ Low temperature = cautious and predictable. High = wild and random. ChatGPT really has the same dial!';
+    ? '👑 Greedy mode: temperature has no effect on the choice here.'
+    : '🌡️ Drag the slider and see what happens to the text.';
   refreshTable();
 }
 
