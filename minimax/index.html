@@ -142,6 +142,15 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:
 .btn{padding:9px 14px;font-size:0.84em;border-radius:8px;}
 .mtab{font-size:0.82em;padding:7px 15px;}
 .bv{font-size:1.05em;}
+.step-row{display:flex;gap:7px;margin-bottom:8px;}
+.step-main{flex:1;font-size:0.98em;font-weight:700;padding:13px 16px;justify-content:center;}
+.back-btn{flex:0 0 auto;padding:13px 15px;font-size:0.95em;}
+.ctrl-hint{font-size:0.76em;color:var(--text-dim);margin-bottom:11px;line-height:1.4;}
+.ctrl-hint strong{color:var(--accent);}
+.bg2{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:2px;}
+.bg2 .btn{flex:1;justify-content:center;}
+.btn.ghost{background:transparent;border-color:var(--border);color:var(--text-dim);}
+.btn.ghost:hover{background:var(--surface2);color:var(--text);border-color:var(--text-dim);}
 
 /* Pedagogisk intro-overlay (som Språkmodell-labbet) */
 .overlay{position:fixed;inset:0;background:rgba(9,11,20,0.82);backdrop-filter:blur(5px);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
@@ -221,23 +230,31 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:
       <div class="li"><svg width="16" height="14"><polygon points="8,12 14,2 2,2" fill="none" stroke="var(--min-color)" stroke-width="2"/></svg> MIN</div>
       <div class="li"><svg width="14" height="14"><circle cx="7" cy="7" r="5.5" fill="none" stroke="var(--leaf-col)" stroke-width="1.5"/></svg> Lövnod</div>
       <div class="li"><span style="color:var(--prune);font-weight:700;font-size:1.1em">✕</span> Beskuren</div>
+      <div class="li"><span style="display:inline-block;width:18px;height:3px;background:var(--max-color);border-radius:2px;box-shadow:0 0 5px var(--max-glow)"></span> Vald väg</div>
     </div>
   </div>
 
   <div class="sb">
     <div class="ss">
       <div class="st">Kontroller</div>
-      <div class="bg">
-        <button class="btn pri" id="bStep" onclick="doStep()">▶ Steg</button>
-        <button class="btn go" id="bPlay" onclick="togglePlay()">⏵ Starta sökning</button>
-        <button class="btn" id="bBack" onclick="doBack()">◀ Bakåt</button>
+      <div class="step-row">
+        <button class="btn back-btn" id="bBack" onclick="doBack()" title="Ett steg bakåt">◀</button>
+        <button class="btn pri step-main" id="bStep" onclick="doStep()">▶ Nästa steg</button>
+      </div>
+      <div class="ctrl-hint">Tips: <strong>stega</strong> för att hänga med i algoritmens tänkande.</div>
+      <div class="bg2">
+        <button class="btn ghost" id="bPlay" onclick="togglePlay()">⏵ Spela upp automatiskt</button>
         <button class="btn dn" onclick="doReset()">↺ Nollställ</button>
       </div>
       <div class="speed-row">
-        <span class="speed-label">Hastighet</span>
+        <span class="speed-label">Uppspelningsfart</span>
         <input type="range" id="speedSlider" min="0" max="4" step="1" value="1" oninput="updateSpeed()">
         <span class="speed-val" id="speedVal">1×</span>
       </div>
+    </div>
+    <div class="why">
+      <div class="why-h">💡 Vad händer just nu?</div>
+      <div class="why-b" id="whyBox">Tryck <strong>▶ Nästa steg</strong> för att följa algoritmen ett steg i taget.</div>
     </div>
     <div class="ss">
       <div class="st">Status</div>
@@ -248,12 +265,8 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:
         <div class="bx wide"><div class="bl">Rotvärde (algoritmens svar)</div><div class="bv" id="sRoot" style="color:var(--val);font-size:1.35em">–</div></div>
       </div>
     </div>
-    <div class="why">
-      <div class="why-h">💡 Vad händer just nu?</div>
-      <div class="why-b" id="whyBox">Tryck <strong>▶ Steg</strong> eller <strong>Starta sökning</strong> för att följa algoritmen ett steg i taget.</div>
-    </div>
     <div class="ss" style="padding-bottom:3px;"><div class="st">Steg-för-steg-logg</div></div>
-    <div class="lw"><div class="lg" id="log"><div class="elg">Tryck på <strong>Steg</strong> eller <strong>Starta sökning</strong>.</div></div></div>
+    <div class="lw"><div class="lg" id="log"><div class="elg">Tryck på <strong>Nästa steg</strong> för att börja.</div></div></div>
     <button class="ib" id="iBtn" onclick="toggleInfo()">📖 Så fungerar minimax & alfa-beta ▾</button>
     <div class="ic" id="iC">
       <h4>Minimax-algoritmen</h4>
@@ -418,12 +431,27 @@ function draw(pulse,pf){
   const pathIds=new Set();
   if(act){let cur=act;while(cur){pathIds.add(cur.id);cur=parentOf(cur.id);}}
 
+  // Vald väg (principal variation): visas när sökningen är klar
+  const chosen=new Set();
+  if(tree&&tree.complete){
+    let cur=tree;
+    while(cur){
+      chosen.add(cur.id);
+      if(cur.isLeaf)break;
+      let pick=null;
+      for(const c of cur.children){if(!c.pruned&&c.computedValue!==null&&c.computedValue===cur.computedValue){pick=c;break;}}
+      if(!pick)break; cur=pick;
+    }
+  }
+
   function dEdge(n){
     for(const c of n.children){
+      const onChosen=chosen.has(c.id)&&chosen.has(n.id);
       const onPath=pathIds.has(c.id)&&!c.pruned;
       ctx.save();
       ctx.beginPath();ctx.moveTo(n.x,n.y);ctx.lineTo(c.x,c.y);
       if(c.pruned){ctx.strokeStyle='rgba(239,91,91,0.5)';ctx.setLineDash([5,4]);ctx.lineWidth=2.4;}
+      else if(onChosen){ctx.strokeStyle='rgba(52,199,89,1)';ctx.setLineDash([]);ctx.lineWidth=4;ctx.shadowColor='rgba(52,199,89,0.8)';ctx.shadowBlur=16;}
       else if(onPath){ctx.strokeStyle='rgba(255,255,255,0.95)';ctx.setLineDash([]);ctx.lineWidth=3.4;ctx.shadowColor='rgba(120,170,255,0.7)';ctx.shadowBlur=12;}
       else if(c.edgeVis){ctx.strokeStyle='rgba(255,255,255,0.42)';ctx.setLineDash([]);ctx.lineWidth=2.2;}
       else{ctx.strokeStyle='rgba(255,255,255,0.28)';ctx.setLineDash([]);ctx.lineWidth=2;}
@@ -448,6 +476,13 @@ function draw(pulse,pf){
   function dNode(n){
     const x=n.x,y=n.y,R=n.isLeaf?RL:RI;
     ctx.save();
+    if(chosen.has(n.id)&&!n.pruned){
+      ctx.save();ctx.shadowColor='rgba(52,199,89,0.9)';ctx.shadowBlur=Math.round(16*sc);
+      ctx.strokeStyle='rgba(52,199,89,0.95)';ctx.lineWidth=3;
+      if(n.isLeaf){ctx.beginPath();ctx.arc(x,y,R+4,0,Math.PI*2);ctx.stroke();}
+      else{triPath(ctx,x,y,R+5,n.isMax);ctx.stroke();}
+      ctx.restore();
+    }
     if(n.pruned){
       if(n.isLeaf){
         ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);
@@ -543,7 +578,7 @@ function fmtAB(v){return v===-Infinity?'−∞':v===Infinity?'+∞':String(v);}
 
 function updateWhy(){
   const el=document.getElementById('whyBox'); if(!el) return;
-  if(curStep<0){el.innerHTML='Tryck <strong>▶ Steg</strong> eller <strong>Starta sökning</strong> för att följa algoritmen ett steg i taget.';return;}
+  if(curStep<0){el.innerHTML='Tryck <strong>▶ Nästa steg</strong> för att följa algoritmen ett steg i taget.';return;}
   const nm={};for(const n of allNodes)nm[n.id]=n;
   const s=steps[curStep], nd=nm[s.nid];
   const who=nd.isLeaf?'noden':(nd.isMax?'<span class="hl-max">MAX</span>':'<span class="hl-min">MIN</span>');
@@ -578,7 +613,7 @@ function updateWhy(){
 function renderLog(){
   updateWhy();
   const el=document.getElementById('log');
-  if(curStep<0){el.innerHTML='<div class="elg">Tryck på <strong>Steg</strong> eller <strong>Starta sökning</strong>.</div>';return;}
+  if(curStep<0){el.innerHTML='<div class="elg">Tryck på <strong>Nästa steg</strong> för att börja.</div>';return;}
   const nm={};for(const n of allNodes)nm[n.id]=n;
   let h='';
   for(let i=0;i<=curStep;i++){
@@ -614,7 +649,7 @@ function renderLog(){
   }
   if(curStep===steps.length-1){
     const vis=allNodes.filter(n=>n.visited).length,pru=allNodes.filter(n=>n.pruned).length,tot=allNodes.length;
-    h+=`<div class="sum"><div class="sum-h">✓ Klar</div><div class="sum-l">Rotvärde: <strong style="color:var(--val)">${tree.computedValue}</strong></div><div class="sum-l">Besökta: <strong>${vis}</strong>/${tot}${pru?` — Beskurna: <strong style="color:var(--prune)">${pru}</strong>`:''}</div>${pru?`<div class="sum-l" style="color:var(--green);margin-top:2px">Beskärningen sparade ${pru} nod${pru>1?'er':''}</div>`:''}</div>`;
+    h+=`<div class="sum"><div class="sum-h">✓ Klar</div><div class="sum-l">Rotvärde: <strong style="color:var(--val)">${tree.computedValue}</strong></div><div class="sum-l">Besökta: <strong>${vis}</strong>/${tot}${pru?` — Beskurna: <strong style="color:var(--prune)">${pru}</strong>`:''}</div>${pru?`<div class="sum-l" style="color:var(--green);margin-top:2px">Beskärningen sparade ${pru} nod${pru>1?'er':''}</div>`:''}<div class="sum-l" style="color:var(--max-color);margin-top:3px">🟢 Den gröna vägen visar draget MAX väljer.</div></div>`;
   }
   el.innerHTML=h;el.scrollTop=el.scrollHeight;
 }
@@ -636,8 +671,8 @@ function doReset(){if(playing)togglePlay();curStep=-1;hist=[];for(const n of all
 function togglePlay(){
   if(mode==='build')return;
   playing=!playing;const b=document.getElementById('bPlay');
-  if(playing){b.textContent='⏸ Pausa';b.classList.remove('go');startPlayTimer();}
-  else{b.textContent='⏵ Starta sökning';b.classList.remove('pri');b.classList.add('go');clearInterval(playTmr);}
+  if(playing){b.textContent='⏸ Pausa';startPlayTimer();}
+  else{b.textContent='⏵ Spela upp automatiskt';clearInterval(playTmr);}
 }
 function startPlayTimer(){clearInterval(playTmr);playTmr=setInterval(()=>{if(curStep>=steps.length-1){togglePlay();return;}doStep();},SPEEDS[speedIdx]);}
 function updateSpeed(){
