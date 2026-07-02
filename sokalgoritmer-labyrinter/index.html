@@ -231,6 +231,7 @@ button:disabled{opacity:.42;cursor:not-allowed;}
     <li><span class="color-box" style="background:#d8a24e;"></span><span><strong>Kostnad 3</strong> – skapas genom att högerklicka två gånger.</span></li>
     <li><span class="color-box" style="background:#3f6fd0;"></span><span><strong>Kostnad 5</strong> – skapas genom att högerklicka tre gånger.</span></li>
     <li><span class="color-box" style="background:#6f9fd6;"></span><span><strong>Genomsökt</strong> – rutor som algoritmen redan har undersökt.</span></li>
+    <li><span class="color-box" style="background:transparent;border-color:#facc15;border-width:2px;"></span><span><strong>Guldram</strong> – visar exakt vilken ruta algoritmen just nu bearbetar.</span></li>
     <li><span class="color-box" style="background:linear-gradient(90deg,#ec4899 0 25%,#a06bff 25% 50%,#2dd4bf 50% 75%,#f59e0b 75%);"></span><span><strong>Kö</strong> – rutor på tur att utforskas. Färgen följer vald algoritm och pulserar mjukt.</span></li>
     <li><span class="color-box" style="background:#3ddc84;"></span><span><strong>Hittad väg</strong> – ritas från start till mål när målet hittats.</span></li>
   </ul>
@@ -275,25 +276,7 @@ const ALG_LABEL={'A*':'A*','BFS':'BFS','DFS':'DFS','Greedy':'Girig bäst-först'
 
 /* Färgverktyg */
 function hex2rgb(h){h=h.replace('#','');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
-function mixRGB(a,b,p){return[a[0]+(b[0]-a[0])*p,a[1]+(b[1]-a[1])*p,a[2]+(b[2]-a[2])*p];}
 function css(c,a){return 'rgba('+(c[0]|0)+','+(c[1]|0)+','+(c[2]|0)+','+(a==null?1:a)+')';}
-/* Nedkylning: algoritmfärg → ljusare → gråblå → genomsökt-blå (~300 ms) */
-const COOL_BREAKS=[0,.3,.65,1];
-const coolStopsCache={};
-function coolStops(alg){
-  if(coolStopsCache[alg])return coolStopsCache[alg];
-  const A=hex2rgb(THEMES[alg].accent);
-  return coolStopsCache[alg]=[A,mixRGB(A,[255,255,255],.4),hex2rgb('#8fa5c8'),hex2rgb('#6f9fd6')];
-}
-function coolColor(stops,p){
-  for(let i=1;i<COOL_BREAKS.length;i++){
-    if(p<=COOL_BREAKS[i]){
-      const t=(p-COOL_BREAKS[i-1])/(COOL_BREAKS[i]-COOL_BREAKS[i-1]);
-      return mixRGB(stops[i-1],stops[i],t);
-    }
-  }
-  return stops[3];
-}
 function easeOutBack(p){const k=1.55;return 1+(k+1)*Math.pow(p-1,3)+k*Math.pow(p-1,2);}
 
 /* Subtil golvvariation (±~1 % ljushet, deterministisk) */
@@ -313,7 +296,7 @@ let selectedAlg='BFS', currentAlgorithm=null;
 let searchSteps=[], curStep=-1, computedFor=null;
 let playTimer=null, isPlaying=false;
 const PLAY_INTERVAL=150;
-const D_IN=RM?1:160, D_COOL=RM?1:300, ACTIVE_MS=RM?1:420;
+const D_IN=RM?1:160, ACTIVE_MS=RM?1:220;
 
 /* Animationstillstånd */
 let cellAnim=new Map();      // "r,c" -> {st:'fr'|'ex', t}
@@ -594,7 +577,7 @@ function drawLabel(r,c,txt){
 function frame(){
   const now=performance.now();
   const alg=computedFor||selectedAlg;
-  const accHex=THEMES[alg].accent, accRGB=hex2rgb(accHex), stops=coolStops(alg);
+  const accHex=THEMES[alg].accent, accRGB=hex2rgb(accHex);
 
   ctx.clearRect(0,0,W,H);
   ctx.fillStyle='#0b0f1a';ctx.fillRect(0,0,W,H);
@@ -623,8 +606,7 @@ function frame(){
       const pulse=RM?1:(.80+.20*Math.sin(now/850+((r*7+c*13)%10)));
       paintTileScaled(r,c,.7+.3*sc,pulse,accHex,css(accRGB,.5),9);
     }else{
-      const p=Math.min(1,(now-st.t)/D_COOL);
-      paintTile(r,c,css(coolColor(stops,p)));
+      paintTile(r,c,'#6f9fd6');                              // genomsökt: fast färg direkt, ingen svans
     }
     const lbl=heurLabels.get(key);
     if(lbl!=null&&(now-st.t)>D_IN*.6)drawLabel(r,c,lbl);
@@ -640,16 +622,16 @@ function frame(){
     else if(now>dimState.holdEnd+dimState.fadeOut)dimState=null;
   }
 
-  /* Den ruta som just utforskas får en kort, tydlig ring – ingen rörlig punkt */
+  /* Den ruta som just utforskas: guldram, samma färg oavsett algoritm – syns alltid mot både kö- och genomsökt-färgen */
   if(activeCell&&now-activeCell.t0<ACTIVE_MS){
     const p=(now-activeCell.t0)/ACTIVE_MS;
     const{r,c}=activeCell;
     const x=(c+.5)*CELL,y=(r+.5)*CELL;
-    const s=(CELL-2)*(1+p*.3);
+    const s=(CELL-2)*(1+p*.22);
     ctx.save();
-    ctx.globalAlpha=1-p;
-    ctx.shadowColor=accHex;ctx.shadowBlur=10;
-    ctx.strokeStyle=accHex;ctx.lineWidth=2.2;
+    ctx.globalAlpha=1-p*p*p;                 // håller sig tydlig, faller sedan snabbt i slutet
+    ctx.shadowColor='#facc15';ctx.shadowBlur=10;
+    ctx.strokeStyle='#facc15';ctx.lineWidth=2.4;
     rr(x-s/2,y-s/2,s,s,6);ctx.stroke();
     ctx.restore();
   }
