@@ -161,7 +161,7 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:
   body{overflow-y:auto;}
   .app{grid-template-columns:1fr;height:auto;}
   .ta{border-right:none;border-bottom:1px solid var(--border);}
-  .cw{min-height:320px;}
+  .cw{min-height:420px;}
   .sb{max-height:none;overflow-y:visible;height:auto;}
   .lw{max-height:300px;}
   .hd{padding:10px 16px 8px;padding-left:16px;}
@@ -304,7 +304,7 @@ function mkTree(def,id,d,mx){
 function coll(n,a){a.push(n);for(const c of n.children)coll(c,a);}
 function md(n){if(n.isLeaf)return 0;let m=0;for(const c of n.children)m=Math.max(m,md(c)+1);return m;}
 function lay(n,x0,x1,d,mx,W,H){
-  const pt=84,pb=92,uh=H-pt-pb;n.y=pt+(d/Math.max(mx,1))*uh;
+  const pt=Math.max(46,H*0.12),pb=Math.max(50,H*0.13),uh=H-pt-pb;n.y=pt+(d/Math.max(mx,1))*uh;
   if(n.isLeaf){n.x=(x0+x1)/2;return;}
   const cw=(x1-x0)/n.children.length;
   for(let i=0;i<n.children.length;i++)lay(n.children[i],x0+i*cw,x0+(i+1)*cw,d+1,mx,W,H);
@@ -400,8 +400,13 @@ function animLoop(now){
 function draw(pulse,pf){
   const{ctx,w,h}=setupCv();
   const nCount=allNodes.length;
-  const sc=nCount>45?0.62:nCount>30?0.78:nCount>18?0.9:1;
-  const pad=nCount>45?20:nCount>30?34:nCount>18?48:66;
+  const leaves=Math.max(1,allNodes.filter(n=>n.isLeaf).length);
+  const depth=Math.max(1,md(tree));
+  let sc=nCount>45?0.62:nCount>30?0.78:nCount>18?0.9:1;
+  sc=Math.min(sc,(w/leaves)/82);        // horisontellt utrymme per löv
+  sc=Math.min(sc,(h/(depth+1))/94);     // vertikalt utrymme per nivå
+  sc=Math.max(0.42,sc);
+  const pad=Math.max(16,Math.min(66,w*0.05));
   const d=md(tree);lay(tree,pad,w-pad,0,d,w,h);
   const RL=Math.round(24*sc), RI=Math.round(34*sc);
   const fontBig=Math.round(15*sc)+'px', fontMed=Math.round(13*sc)+'px', fontSm=Math.round(13*sc)+'px';
@@ -431,8 +436,11 @@ function draw(pulse,pf){
 
   function dNodeBg(n){
     const x=n.x,y=n.y,R=n.isLeaf?RL:RI;
+    ctx.save();
+    ctx.shadowColor='rgba(0,0,0,0.5)';ctx.shadowBlur=Math.round(10*sc);ctx.shadowOffsetY=Math.round(4*sc);
     if(n.isLeaf){ctx.beginPath();ctx.arc(x,y,R+1,0,Math.PI*2);ctx.fillStyle='#0b0e1a';ctx.fill();}
     else{triPath(ctx,x,y,R+2,n.isMax);ctx.fillStyle='#0b0e1a';ctx.fill();}
+    ctx.restore();
     for(const c of n.children)dNodeBg(c);
   }
   dNodeBg(tree);
@@ -459,6 +467,7 @@ function draw(pulse,pf){
       ctx.fillStyle=n.complete?'rgba(255,216,102,0.18)':n.visited?'rgba(60,65,85,0.95)':'rgba(35,38,55,0.95)';ctx.fill();
       ctx.strokeStyle=n.complete?'rgba(255,216,102,0.85)':n.visited?'rgba(156,168,186,0.55)':'rgba(156,168,186,0.3)';
       ctx.lineWidth=n.active?2.8:2.2;ctx.stroke();ctx.shadowBlur=0;
+      {const hg=ctx.createLinearGradient(x,y-R,x,y+R*0.5);hg.addColorStop(0,'rgba(255,255,255,0.18)');hg.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=hg;ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);ctx.fill();}
       ctx.fillStyle=n.complete?'#ffd866':'rgba(190,200,215,0.7)';
       ctx.font='600 '+fontMed+' "JetBrains Mono"';ctx.textAlign='center';ctx.textBaseline='middle';
       ctx.fillText(n.leafValue!=null?String(n.leafValue):'?',x,y);
@@ -473,6 +482,7 @@ function draw(pulse,pf){
       ctx.fill();
       ctx.strokeStyle=n.active?(up?'rgba(52,199,89,1)':'rgba(255,159,67,1)'):n.complete?(up?'rgba(52,199,89,0.9)':'rgba(255,159,67,0.9)'):n.visited?(up?'rgba(52,199,89,0.55)':'rgba(255,159,67,0.55)'):(up?'rgba(52,199,89,0.35)':'rgba(255,159,67,0.35)');
       ctx.lineWidth=n.active?3:2.4;ctx.stroke();ctx.shadowBlur=0;
+      {const hg=ctx.createLinearGradient(x,y-R,x,y+R);hg.addColorStop(0,'rgba(255,255,255,0.15)');hg.addColorStop(0.55,'rgba(255,255,255,0)');triPath(ctx,x,y,R,up);ctx.fillStyle=hg;ctx.fill();}
       ctx.textAlign='center';ctx.textBaseline='middle';
       const tcy=up?y+2*sc:y-2*sc;
       if(n.computedValue!==null){ctx.font='700 '+fontBig+' "JetBrains Mono"';ctx.fillStyle='#ffd866';ctx.fillText(String(n.computedValue),x,tcy);}
@@ -573,20 +583,32 @@ function renderLog(){
   let h='';
   for(let i=0;i<=curStep;i++){
     const s=steps[i],nd=nm[s.nid],tg=nd.isLeaf?'lf':(nd.isMax?'mx':'mn'),lb=nd.isLeaf?'Löv':(nd.isMax?'MAX':'MIN');
+    const who=nd.isMax?'MAX':'MIN', goal=nd.isMax?'högsta':'lägsta';
+    const badge=`<span class="nt ${tg}">${lb} ${nd.id}</span>`;
+    const ab=useAB?` <span class="abt">(α=<span class="av">${fmtAB(s.a)}</span>, β=<span class="bvl">${fmtAB(s.b)}</span>)</span>`:'';
     let t=`<span class="sn">${i+1}.</span>`,cl='';
     switch(s.t){
-      case'visit':t+=`Besöker <span class="nt ${tg}">${lb} ${nd.id}</span>`;if(useAB)t+=` <span class="abt">(α=<span class="av">${fmtAB(s.a)}</span>, β=<span class="bvl">${fmtAB(s.b)}</span>)</span>`;break;
-      case'leaf':t+=`<span class="nt lf">Löv ${nd.id}</span> → <span class="vl">${s.v}</span>`;break;
-      case'back':t+=`Tillbaka till <span class="nt ${tg}">${lb} ${nd.id}</span> — barn gav <span class="vl">${s.cv}</span>`;break;
-      case'upd':{
-        t+=`<span class="nt ${tg}">${lb} ${nd.id}</span> → <span class="vl">${s.v}</span>`;
-        if(s.changed){t+=` <span class="hint">(${s.cv} ${s.mx?'>':'<'} ${fmtAB(s.prevV)} — nytt bästa!)</span>`;}
-        else{t+=` <span class="hint">(${s.cv} ${s.mx?'≤':'≥'} ${s.v} — behåller ${s.v})</span>`;}
-        if(useAB)t+=` <span class="abt">(α=<span class="av">${fmtAB(s.a)}</span>, β=<span class="bvl">${fmtAB(s.b)}</span>)</span>`;
+      case'visit':
+        if(nd.isLeaf){t+=`Går ner till ${badge}.`;}
+        else{t+=`${badge} börjar undersöka sina alternativ och letar efter det <strong>${goal}</strong> värdet.${ab}`;}
         break;
+      case'leaf':t+=`${badge} är värt <span class="vl">${s.v}</span> och skickas upp till föräldern.`;break;
+      case'back':t+=`Ett av ${badge}:s alternativ gav <span class="vl">${s.cv}</span>. ${who} jämför det nu med sitt bästa resultat hittills.`;break;
+      case'upd':{
+        const better=s.mx?'större':'mindre';
+        if(s.changed){
+          if(s.prevV===-Infinity||s.prevV===Infinity){t+=`Det är ${who}:s första alternativ, så <span class="vl">${s.v}</span> blir bästa värdet hittills.`;}
+          else{t+=`${who} uppdaterar sitt bästa värde från <span class="vl">${fmtAB(s.prevV)}</span> till <span class="vl">${s.v}</span> eftersom ${s.v} är ${better}.`;}
+        }else{
+          t+=`<span class="vl">${s.cv}</span> är inte ${better} än <span class="vl">${s.v}</span>, så ${who} behåller <span class="vl">${s.v}</span>.`;
+        }
+        t+=ab;break;
       }
-      case'prune':t+=`<span class="pt">✂ Beskärning!</span> vid <span class="nt ${tg}">${lb} ${nd.id}</span> — <span class="abt">α=<span class="av">${fmtAB(s.a)}</span> ≥ β=<span class="bvl">${fmtAB(s.b)}</span></span> <span class="hint">(resten kan inte bli bättre)</span>`;cl='pe';break;
-      case'done':t+=`<span class="nt ${tg}">${lb} ${nd.id}</span> klar = <span class="vl">${s.v}</span>`;break;
+      case'prune':t+=`<span class="pt">✂ Beskärning!</span> ${who}:s garanterade värde (α=<span class="av">${fmtAB(s.a)}</span>) är redan ≥ motståndarens (β=<span class="bvl">${fmtAB(s.b)}</span>). Resten av grenarna kan inte ändra svaret, så de hoppas över.`;cl='pe';break;
+      case'done':
+        if(nd.id===0){t+=`Klart! ${badge} blir <span class="vl">${s.v}</span> — det bästa MAX kan garantera.`;}
+        else{t+=`${badge} är färdig med värdet <span class="vl">${s.v}</span>, som skickas upp till föräldern.`;}
+        break;
     }
     h+=`<div class="se ${cl} ${i===curStep?'act':''}">${t}</div>`;
   }
@@ -657,7 +679,7 @@ cv.addEventListener('click',function(e){
   if(found)showPopup(found,e.clientX,e.clientY);else closePopup();
 });
 
-let popNode=null;
+let popNode=null, popOpenedAt=0;
 function showPopup(n,px,py){
   closePopup();popNode=n;
   const pop=document.getElementById('npop');let h='';
@@ -679,11 +701,18 @@ function showPopup(n,px,py){
     if(n.id===0){h+=`<div class="npop-sec">Rot</div><button class="npop-btn" onclick="swapRoot()">↕ Byt till ${n.isMax?'MIN':'MAX'}</button>`;}
     else{h+=`<div class="npop-sec">Ta bort</div><button class="npop-btn dn" onclick="removeNode()">✕ Ta bort delträd</button>`;}
   }
-  pop.innerHTML=h;pop.classList.add('show');
+  pop.innerHTML=h;pop.classList.add('show');popOpenedAt=Date.now();
   const pw=pop.offsetWidth,ph2=pop.offsetHeight;
-  let lx=px+10,ly=py-ph2/2;
-  if(lx+pw>window.innerWidth-10)lx=px-pw-10;
-  if(ly<10)ly=10;if(ly+ph2>window.innerHeight-10)ly=window.innerHeight-ph2-10;
+  let lx,ly;
+  if(window.innerWidth<=560){
+    lx=(window.innerWidth-pw)/2;                     // centrera horisontellt på mobil
+    ly=Math.min(py+14, window.innerHeight-ph2-12);
+    if(ly<12)ly=12;
+  }else{
+    lx=px+10;ly=py-ph2/2;
+    if(lx+pw>window.innerWidth-10)lx=px-pw-10;
+    if(ly<10)ly=10;if(ly+ph2>window.innerHeight-10)ly=window.innerHeight-ph2-10;
+  }
   pop.style.left=lx+'px';pop.style.top=ly+'px';
   const inp=document.getElementById('leafVal');if(inp){setTimeout(()=>{inp.focus();inp.select();},50);}
 }
@@ -729,6 +758,7 @@ function removeNode(){
 
 document.addEventListener('click',function(e){
   if(mode!=='build')return;
+  if(Date.now()-popOpenedAt<400)return;   // ignorera samma klick/tryck som just öppnade menyn
   const pop=document.getElementById('npop'),cvEl=document.getElementById('cv');
   if(!pop.contains(e.target)&&e.target!==cvEl){closePopup();}
 });
