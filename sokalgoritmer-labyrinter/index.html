@@ -6,7 +6,7 @@
 <title>Sökalgoritmer i labyrinter – ai-aktiviteter.se</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400..700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#090b14; --surface:#0e1222; --surface2:#151a2e; --border:#1e2642;
@@ -27,9 +27,9 @@ button{font-family:inherit;}
 .back-link:hover,.lang-link:hover{color:var(--text);border-color:var(--dim);}
 .lang-link .flag{font-size:1.05em;line-height:1;}
 .hd{width:100%;text-align:center;padding:30px 20px 26px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,.03),transparent);}
-.hd h1{font-size:1.55em;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;text-shadow:0 0 34px rgba(102,152,255,.22);}
+.hd h1{font-family:'Syne',sans-serif;font-size:1.55em;font-weight:800;letter-spacing:-.02em;margin-bottom:10px;text-shadow:0 0 34px rgba(102,152,255,.22);}
 .hd h1 span{color:var(--accent2);}
-.hd p{color:var(--dim);font-size:.86em;font-weight:450;max-width:520px;margin:0 auto;line-height:1.6;}
+.hd p{color:var(--dim);font-size:.86em;font-weight:400;max-width:520px;margin:0 auto;line-height:1.6;}
 
 .page-wrap{max-width:940px;margin:0 auto;padding:18px 20px 56px;position:relative;z-index:1;width:100%;}
 
@@ -96,10 +96,10 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 #legend{margin-top:22px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 20px;box-shadow:0 6px 22px rgba(0,0,0,.3);}
 #legend h3{font-size:.66em;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;font-weight:600;}
 #legend ul{list-style:none;margin:0 0 12px;}
-#legend li{margin-bottom:7px;font-size:12px;font-weight:450;color:var(--dim);display:flex;align-items:center;gap:8px;}
+#legend li{margin-bottom:7px;font-size:12px;font-weight:400;color:var(--dim);display:flex;align-items:center;gap:8px;}
 #legend li strong{color:var(--text);}
 .color-box{display:inline-block;width:18px;height:18px;flex-shrink:0;border:1px solid rgba(255,255,255,.15);border-radius:4px;}
-#legend p{font-size:12px;font-weight:450;color:var(--dim);line-height:1.7;margin-top:6px;}
+#legend p{font-size:12px;font-weight:400;color:var(--dim);line-height:1.7;margin-top:6px;}
 #legend em{color:var(--subtle);font-style:normal;font-weight:600;}
 
 /* ── Result overlay ── */
@@ -115,7 +115,7 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 .ro-head{font-size:15px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:12px;}
 .ro-badge{background:var(--alg);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.02em;flex-shrink:0;transition:background .25s ease;}
 .result-overlay.nopath .ro-badge{background:linear-gradient(180deg,#ef6b6b,#d94e4e);}
-.ro-sub{font-size:12px;font-weight:450;color:var(--dim);line-height:1.55;max-width:280px;margin-bottom:12px;}
+.ro-sub{font-size:12px;font-weight:400;color:var(--dim);line-height:1.55;max-width:280px;margin-bottom:12px;}
 .ro-metrics{display:flex;gap:7px;margin-bottom:13px;}
 .ro-metric{flex:1 1 0;min-width:0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:8px 4px;display:flex;flex-direction:column;gap:3px;text-align:center;}
 .ro-num{font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:var(--accent2);line-height:1;}
@@ -139,18 +139,28 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 .tt-note{font-size:9px;color:var(--dim);letter-spacing:.02em;}
 
 /* ── Intro overlay ── */
-.overlay{position:fixed;inset:0;background:rgba(9,11,20,.92);z-index:100;display:none;align-items:center;justify-content:center;}
+.overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
-.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:30px 34px;max-width:540px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6);}
-.overlay-card h2{font-size:1.1em;font-weight:700;margin-bottom:6px;}
-.overlay-card h2 span{color:var(--accent2);}
-.overlay-card .sub{font-size:.84em;font-weight:450;color:var(--dim);line-height:1.55;margin-bottom:14px;}
-.overlay-card .steps{display:flex;flex-direction:column;gap:10px;margin:14px 0;text-align:left;}
-.overlay-card .step{display:flex;gap:10px;align-items:flex-start;font-size:.82em;font-weight:450;color:var(--dim);line-height:1.5;}
-.overlay-card .step strong{color:var(--text);}
-.step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,.15);color:var(--accent);font-weight:700;font-size:.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,.3);}
-.overlay-btn{display:block;width:100%;padding:13px;margin-top:14px;font-size:.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.2s;}
-.overlay-btn:hover{background:#3d6de6;}
+.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:540px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
+@keyframes overlayIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.intro-viz{width:200px;height:92px;margin:0 auto 14px;display:block;}
+.iv-e{fill:none;stroke:rgba(255,255,255,.16);stroke-width:3;stroke-linecap:round;}
+.iv-node{stroke-width:2;}
+.iv-start{fill:rgba(52,199,89,.18);stroke:#34c759;}
+.iv-goal{fill:rgba(239,91,91,.18);stroke:#ef5b5b;}
+.iv-dot{fill:#fff;filter:drop-shadow(0 0 6px var(--alg));}
+.overlay-card h2{font-family:'Syne',sans-serif;font-size:1.4em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;}
+.overlay-card h2 span{background:linear-gradient(135deg,var(--text),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.overlay-card .sub{font-size:.87em;font-weight:400;color:var(--dim);line-height:1.6;margin-bottom:18px;}
+.overlay-card .steps{display:flex;flex-direction:column;gap:12px;margin:14px 0;text-align:left;}
+.overlay-card .step{display:flex;gap:12px;align-items:flex-start;font-size:.85em;font-weight:400;color:var(--dim);line-height:1.55;}
+.overlay-card .step strong{color:var(--text);font-weight:600;}
+.step-num{width:25px;height:25px;border-radius:50%;background:rgba(77,128,255,.14);color:var(--accent2);font-weight:700;font-size:.8em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,.28);padding-top:1px;}
+.overlay-tip{margin-top:16px;font-size:.8em;font-weight:400;color:var(--dim);text-align:center;line-height:1.55;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;}
+.overlay-tip strong{color:var(--text);}
+.overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:18px;font-size:.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 24px rgba(77,128,255,.28);}
+.overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
+.overlay-btn svg{width:15px;height:15px;flex-shrink:0;}
 
 @media(max-width:940px){
   .page-wrap{padding:14px 12px 44px;}
@@ -256,14 +266,21 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
+    <svg class="intro-viz" viewBox="0 0 200 92">
+      <path class="iv-e" d="M20 20 H80 V50 H140 V72"/>
+      <circle class="iv-dot" r="4"><animateMotion dur="4s" repeatCount="indefinite" path="M20 20 H80 V50 H140 V72"/></circle>
+      <circle class="iv-node iv-start" cx="20" cy="20" r="7"/>
+      <circle class="iv-node iv-goal" cx="140" cy="72" r="7"/>
+    </svg>
     <h2>Sökalgoritmer i <span>labyrint</span></h2>
     <p class="sub">Undersök hur en AI-agent kan navigera genom en labyrint. Se hur fyra klassiska sökalgoritmer arbetar steg för steg.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Välj en labyrint</strong> – ladda en färdig eller bygg en egen.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Välj algoritm och sök</strong> – BFS, DFS, Girig bäst-först eller A*, och tryck Starta sökning.</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Jämför</strong> – kör samma labyrint med olika algoritmer. Vilken hittar kortast väg, och vilken utforskar minst rutor?</div></div>
+      <div class="step"><div class="step-num">01</div><div><strong>Välj en labyrint</strong> – ladda en färdig eller bygg en egen.</div></div>
+      <div class="step"><div class="step-num">02</div><div><strong>Välj algoritm och sök</strong> – BFS, DFS, Girig bäst-först eller A*, och tryck Starta sökning.</div></div>
+      <div class="step"><div class="step-num">03</div><div><strong>Jämför</strong> – kör samma labyrint med olika algoritmer. Vilken hittar kortast väg, och vilken utforskar minst rutor?</div></div>
     </div>
-    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta simuleringen →</button>
+    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <p class="overlay-tip">Tips: håll muspekaren över en genomsökt ruta under A*-sökning för att se hela uträkningen <strong>f = g + h</strong>.</p>
   </div>
 </div>
 
