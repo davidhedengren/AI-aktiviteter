@@ -7,9 +7,9 @@
 <title>Bias-labbet – ai-aktiviteter.se</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#9aa6c4;--subtle:#c2cde6;--accent:#4d80ff;--accent2:#6698ff;--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--kvinna:#c084fc;--man:#4d80ff;}
+:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--border-soft:rgba(255,255,255,.06);--text:#e8ecf8;--dim:#9aa6c4;--subtle:#c2cde6;--accent:#4d80ff;--accent2:#6698ff;--accent-dim:rgba(77,128,255,.14);--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--kvinna:#c084fc;--man:#4d80ff;--r-md:14px;--r-lg:20px;--ease-out:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'DM Sans',sans-serif;font-size:15px;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
@@ -19,7 +19,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .lang-link:hover{color:var(--text);border-color:var(--dim);}
 .lang-link .flag{font-size:1.05em;line-height:1;}
 .hd{width:100%;text-align:center;padding:12px 160px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
-.hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}
+.hd h1{font-family:'Syne',sans-serif;font-size:1.3em;font-weight:800;letter-spacing:-0.02em;margin-bottom:2px;}
 .hd h1 span{color:var(--accent2);}
 .hd p{color:var(--dim);font-size:0.8em;max-width:640px;margin:0 auto;line-height:1.4;}
 .app{display:grid;grid-template-columns:285px 1fr 300px;max-width:1300px;margin:0 auto;width:100%;flex:1;position:relative;z-index:1;}
@@ -49,8 +49,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .var-toggle.on .vdot{background:var(--green);border-color:var(--green);}
 .var-toggle .vname{flex:1;font-weight:600;}
 .var-toggle .vlock{font-size:0.85em;opacity:0.55;}
-.stale-note{display:none;font-size:0.74em;color:var(--gold);line-height:1.4;margin-top:6px;}
-.stale-note.show{display:block;}
 .coll{border:1px solid var(--border);border-radius:8px;overflow:hidden;}
 .coll-toggle{width:100%;padding:10px 12px;background:var(--surface2);border:none;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:700;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px;}
 .coll-toggle:hover{color:var(--text);}
@@ -116,14 +114,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .fbar.k .ffill{background:linear-gradient(90deg,#9b6ee0,var(--kvinna));}
 .fbar.m .ffill{background:linear-gradient(90deg,#3a64d0,var(--man));}
 .fval{font-family:'JetBrains Mono',monospace;font-size:0.92em;font-weight:700;}
-.verdict{border-radius:8px;padding:10px 13px;font-size:0.82em;font-weight:600;line-height:1.5;border:1px solid;}
-.verdict.bad{background:rgba(239,91,91,0.08);border-color:rgba(239,91,91,0.3);color:var(--red);}
-.verdict.warn{background:rgba(255,216,102,0.07);border-color:rgba(255,216,102,0.25);color:var(--gold);}
-.verdict.ok{background:rgba(52,199,89,0.07);border-color:rgba(52,199,89,0.25);color:var(--green);}
-.fstats{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-.fbox{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:9px 11px;}
-.fbox .fl{font-size:0.7em;color:var(--dim);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px;line-height:1.3;}
-.fbox .fv{font-family:'JetBrains Mono',monospace;font-size:1em;font-weight:700;}
 .twin-ctrl{display:flex;flex-direction:column;gap:7px;}
 .twin-row{display:grid;grid-template-columns:110px 1fr 36px;gap:9px;align-items:center;font-size:0.78em;color:var(--dim);}
 .twin-row .tv{font-family:'JetBrains Mono',monospace;color:var(--accent2);font-weight:600;text-align:right;}
@@ -140,26 +130,48 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .twin .tcv b{color:var(--subtle);font-weight:600;}
 .tlucka{display:flex;align-items:center;gap:6px;font-size:0.74em;color:var(--dim);}
 .tlucka select{font-family:'JetBrains Mono',monospace;font-size:0.92em;padding:3px 6px;border:1px solid var(--border);border-radius:5px;background:var(--bg);color:var(--text);cursor:pointer;outline:none;}
-.tres{margin-top:auto;border-top:1px solid var(--border);padding-top:8px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.tres{margin-top:auto;border-top:1px solid var(--border);padding-top:8px;text-align:center;}
+.tstamp-wrap{text-align:center;margin:0 0 2px;}
 .tscore{font-family:'JetBrains Mono',monospace;font-size:0.78em;color:var(--subtle);line-height:1.3;}
-.tstamp{font-size:0.84em;font-weight:800;padding:3px 11px;border-radius:6px;border:2px solid;}
-.tstamp.ja{color:var(--green);border-color:var(--green);background:rgba(52,199,89,0.1);}
-.tstamp.nej{color:var(--red);border-color:var(--red);background:rgba(239,91,91,0.1);}
 .twin-verdict{font-size:0.8em;line-height:1.55;padding:9px 12px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);}
 .twin-verdict strong{color:var(--text);}
 .twin-verdict.flag{border-color:rgba(239,91,91,0.35);background:rgba(239,91,91,0.06);color:var(--subtle);}
-.glossary{display:flex;flex-wrap:wrap;gap:4px;}
-.g-tag{font-size:0.8em;font-weight:600;padding:5px 10px;border:1px solid var(--border);border-radius:4px;background:var(--surface2);color:var(--dim);cursor:pointer;transition:0.2s;}
-.g-tag:hover{border-color:var(--accent);color:var(--accent);}
-.g-tag.open{border-color:var(--accent);background:rgba(77,128,255,0.1);color:var(--accent);}
-.g-def{display:none;margin-top:6px;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:0.86em;line-height:1.65;color:var(--subtle);}
-.g-def.show{display:block;}
-.g-def strong{color:var(--text);}
-.train-msg{position:fixed;top:26%;left:50%;transform:translateX(-50%);background:rgba(14,18,34,0.96);border:1px solid var(--border);border-radius:12px;padding:18px 26px;text-align:center;z-index:60;display:none;min-width:280px;box-shadow:0 8px 40px rgba(0,0,0,0.6);}
-.train-msg.show{display:block;}
-.train-msg .ti{font-size:1.7em;margin-bottom:5px;}
-.train-msg .tt{font-size:0.92em;font-weight:700;margin-bottom:3px;}
-.train-msg .ts{font-family:'JetBrains Mono',monospace;font-size:0.8em;color:var(--gold);}
+.glossary{display:flex;flex-wrap:wrap;gap:6px;}
+.concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
+.concept-backdrop.show{opacity:1;pointer-events:auto;}
+.concept-card{position:fixed;top:50%;left:50%;z-index:301;width:340px;max-width:88vw;
+  perspective:1000px;
+  transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
+  transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .26s var(--ease-out);}
+.concept-card.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
+.concept-card-inner{position:relative;text-align:center;transform-style:preserve-3d;
+  background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;
+  transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
+  transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);
+  will-change:transform;}
+.concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+  padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,206,84,.15) 45%,transparent 65%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::before{opacity:1;}
+.concept-card-inner::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.09),transparent 60%);
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::after{opacity:1;}
+.concept-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);z-index:3;transform:translateZ(30px);}
+.concept-close:hover{border-color:var(--red);color:var(--red);transform:translateZ(30px) rotate(90deg);}
+.concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
+.concept-icon svg{width:28px;height:28px;}
+.concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
+.concept-def{font-size:.85em;line-height:1.6;color:var(--dim);margin-bottom:16px;position:relative;z-index:3;transform:translateZ(18px);}
+.concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;}
+.concept-illus{background:rgba(0,0,0,.25);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;transform:translateZ(10px);}
+.concept-illus svg{width:100%;height:auto;max-height:90px;}
+.g-tag{display:inline-flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:0.78em;font-weight:600;padding:6px 12px 6px 9px;border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--dim);cursor:pointer;transition:.2s var(--ease-spring);}
+.g-tag:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px);}
+.g-tag:active{transform:scale(.95);}
+.g-tag .g-ico{width:13px;height:13px;flex-shrink:0;opacity:.8;}
 .data-modal{position:fixed;inset:0;background:rgba(9,11,20,0.88);z-index:150;display:none;align-items:center;justify-content:center;}
 .data-modal.show{display:flex;}
 .data-modal-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;width:92%;max-width:680px;max-height:82vh;display:flex;flex-direction:column;gap:8px;}
@@ -180,18 +192,20 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .dtable tr.missad{background:rgba(239,91,91,0.06);}
 .dtable .gk{color:var(--kvinna);}
 .dtable .gm{color:var(--man);}
-.overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
+.overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
-.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:26px 30px;max-width:520px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;}
-.overlay-card h2{font-size:1.1em;font-weight:700;margin-bottom:6px;}
+.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:520px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s var(--ease-spring);}
+@keyframes overlayIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.overlay-card h2{font-family:'Syne',sans-serif;font-size:1.4em;font-weight:800;letter-spacing:-.01em;margin-bottom:6px;}
 .overlay-card h2 span{color:var(--accent2);}
-.overlay-card .sub{font-size:0.9em;color:var(--subtle);line-height:1.65;margin-bottom:12px;text-align:left;}
-.overlay-card .steps{display:flex;flex-direction:column;gap:10px;margin:14px 0;text-align:left;}
-.overlay-card .step{display:flex;gap:10px;align-items:flex-start;font-size:0.88em;color:var(--subtle);line-height:1.55;}
+.overlay-card .sub{font-size:0.87em;color:var(--subtle);line-height:1.6;margin-bottom:12px;text-align:left;}
+.overlay-card .steps{display:flex;flex-direction:column;gap:12px;margin:14px 0;text-align:left;}
+.overlay-card .step{display:flex;gap:12px;align-items:flex-start;font-size:0.85em;color:var(--subtle);line-height:1.55;}
 .overlay-card .step strong{color:var(--text);}
-.step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
-.overlay-btn{display:block;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}
-.overlay-btn:hover{background:#3d6de6;}
+.step-num{width:25px;height:25px;border-radius:50%;background:rgba(77,128,255,0.14);color:var(--accent2);font-weight:700;font-size:0.8em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.28);padding-top:1px;}
+.overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s var(--ease-spring);}
+.overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);}
+.overlay-btn svg{width:15px;height:15px;flex-shrink:0;}
 @media(max-width:1020px){
   .app{grid-template-columns:1fr;}
   .lp{border-right:none;border-bottom:1px solid var(--border);}
@@ -201,6 +215,81 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
   .hd{padding:10px 16px 8px;}
   .twins{grid-template-columns:1fr;}
 }
+
+/* ── Typografihierarki ── */
+.sec-t{font-size:12px;letter-spacing:.07em;}
+.sec-head h2{font-size:20px;font-weight:700;letter-spacing:-.01em;}
+.data-lead,.twin-verdict,.hint,.gstat-neutral{font-size:15px;line-height:1.7;}
+.hero-num{font-family:'JetBrains Mono',monospace;font-weight:900;font-size:36px;line-height:1;letter-spacing:-.02em;}
+
+/* ── Story-flow i vänsterspalten ── */
+.explore-trigger{display:inline-flex;align-items:center;gap:7px;font-family:'DM Sans',sans-serif;font-size:.8em;font-weight:700;padding:9px 14px;border:1px solid rgba(77,128,255,.35);border-radius:10px;background:rgba(77,128,255,.08);color:var(--accent2);cursor:pointer;transition:.2s var(--ease-spring);width:100%;justify-content:center;}
+.explore-trigger:hover{background:rgba(77,128,255,.14);transform:translateY(-1px);}
+.stage{display:flex;flex-direction:column;gap:11px;position:relative;transition:opacity .4s var(--ease-out);}
+.stage-hd{display:flex;align-items:center;gap:9px;}
+.stage-num{width:23px;height:23px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:.68em;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.35s var(--ease-out);}
+.stage-title{font-size:.72em;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);transition:.35s var(--ease-out);}
+.stage.active .stage-num{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 0 4px rgba(77,128,255,.16);}
+.stage.active .stage-title{color:var(--text);}
+.stage-connector{width:1px;height:16px;background:var(--border);margin-left:11px;}
+.lp.trained .stage-1,.lp.trained .stage-2{opacity:.55;}
+.lp.trained .stage-1:hover,.lp.trained .stage-2:hover{opacity:1;}
+
+/* ── Kort: hover-lyft, mjukare övergångar ── */
+.card{transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out),filter .35s var(--ease-out),opacity .35s var(--ease-out);}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(0,0,0,.3);}
+.card.stale{filter:blur(2.5px);opacity:.5;pointer-events:none;}
+.gfill,.ffill,.wfill{transition:width .7s cubic-bezier(.16,1,.3,1);}
+
+/* ── Tränknapp: aktivitetens CTA ── */
+.train-cta{position:relative;overflow:hidden;width:100%;padding:17px 20px;border-radius:14px;border:none;
+  background:linear-gradient(135deg,var(--green),#28b567);color:#04140a;font-family:'DM Sans',sans-serif;font-weight:800;font-size:1.02em;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:transform .25s var(--ease-spring),box-shadow .25s var(--ease-out),background .4s var(--ease-out);
+  box-shadow:0 8px 26px rgba(52,199,89,.25);isolation:isolate;}
+.train-cta:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(52,199,89,.35);}
+.train-cta:active{transform:scale(.98);}
+.train-cta::before{content:'';position:absolute;inset:-3px;border-radius:17px;z-index:-1;filter:blur(11px);
+  background:linear-gradient(135deg,var(--green),#8effc4,var(--green));opacity:0;transition:opacity .4s;animation:ctaPulse 2.6s ease-in-out infinite;}
+.train-cta.idle::before{opacity:.5;}
+.train-cta.stale-glow::before{opacity:.85;animation-duration:1.3s;}
+@keyframes ctaPulse{0%,100%{opacity:.3;}50%{opacity:.65;}}
+.train-cta-icon{font-size:1.25em;display:inline-block;transition:transform .3s var(--ease-spring);position:relative;z-index:1;}
+.train-cta.idle:hover .train-cta-icon{transform:rotate(-14deg) scale(1.12);}
+.train-cta-text{position:relative;z-index:1;}
+.train-cta-fill{position:absolute;left:0;top:0;bottom:0;background:rgba(255,255,255,.16);width:0%;transition:width .25s linear;z-index:0;}
+.train-cta.training{background:linear-gradient(135deg,#1a2340,#131c34);color:var(--text);cursor:default;box-shadow:none;}
+.train-cta.training::before{display:none;}
+.train-cta.training .train-cta-icon{animation:ctaSpin 1s linear infinite;}
+@keyframes ctaSpin{to{transform:rotate(360deg);}}
+.train-cta.done .train-cta-icon{animation:checkPop .45s var(--ease-spring);}
+@keyframes checkPop{from{transform:scale(0) rotate(-30deg);}to{transform:scale(1) rotate(0);}}
+.stale-chip{display:none;align-items:center;gap:5px;font-size:.68em;font-weight:700;color:var(--gold);background:rgba(255,216,102,.1);border:1px solid rgba(255,216,102,.3);border-radius:999px;padding:3px 9px;}
+.stale-chip.show{display:inline-flex;}
+
+/* ── Tvillingtest: experiment-känsla ── */
+.twin{position:relative;padding:18px 16px 15px;border-radius:14px;overflow:hidden;transition:border-color .3s,transform .3s var(--ease-out);}
+.twin:hover{transform:translateY(-3px);}
+.twin.flash{animation:twinFlash .5s var(--ease-out);}
+@keyframes twinFlash{0%{box-shadow:0 0 0 0 rgba(77,128,255,0);}30%{box-shadow:0 0 0 5px rgba(77,128,255,.22);}100%{box-shadow:0 0 0 0 rgba(77,128,255,0);}}
+.twin.k.flash{animation-name:twinFlashK;}
+@keyframes twinFlashK{30%{box-shadow:0 0 0 5px rgba(192,132,252,.26);}}
+.twin-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.7em;margin:0 auto 8px;background:var(--surface);border:2px solid;}
+.twin.k .twin-avatar{border-color:var(--kvinna);}
+.twin.m .twin-avatar{border-color:var(--man);}
+.twin .tname{text-align:center;justify-content:center;font-size:1em;}
+.twin-scan{position:absolute;left:0;right:0;top:-30%;height:40%;pointer-events:none;opacity:0;z-index:5;
+  background:linear-gradient(180deg,transparent,rgba(122,162,255,.28),transparent);}
+.twin.scanning .twin-scan{opacity:1;animation:scanSweep 0.7s var(--ease-out);}
+@keyframes scanSweep{0%{top:-30%;opacity:0;}15%{opacity:1;}100%{top:110%;opacity:0;}}
+.tstamp{position:relative;font-family:'Syne',sans-serif;font-size:.8em;font-weight:800;letter-spacing:.03em;padding:6px 14px;border-radius:5px;border:2px solid;
+  transform:rotate(-6deg);transition:transform .3s var(--ease-spring),opacity .3s;text-transform:uppercase;}
+.tstamp.pop{animation:stampPop .35s var(--ease-spring);}
+@keyframes stampPop{0%{transform:rotate(-6deg) scale(.4);opacity:0;}70%{transform:rotate(-6deg) scale(1.15);}100%{transform:rotate(-6deg) scale(1);opacity:1;}}
+.tstamp.ja{color:var(--green);border-color:var(--green);background:rgba(52,199,89,0.08);}
+.tstamp.nej{color:var(--red);border-color:var(--red);background:rgba(239,91,91,0.08);}
+.twin-row.flash-row .tv{animation:tvFlash .5s var(--ease-out);}
+@keyframes tvFlash{0%{color:var(--gold);}100%{color:var(--accent2);}}
 </style>
 </head>
 <body>
@@ -214,59 +303,56 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 
 <div class="app">
 
-  <div class="lp">
+  <div class="lp" id="lp">
     <div id="modelChip" style="display:none;"></div>
 
-    <div class="coll">
-      <button class="coll-toggle" onclick="toggleColl(this,'challBody')">🧭 Så här kan du utforska labbet<span class="arr">▼</span></button>
-      <div class="coll-body" id="challBody">
-        <p style="margin:0 0 9px;">Ett förslag på väg genom labbet. Träna om modellen efter varje ändring och se vad som händer med gapet och vikterna.</p>
-        <ol>
-          <li>Börja med <strong>alla variabler</strong> påslagna. Hur stort blir gapet mellan grupperna?</li>
-          <li>Stäng av <span class="hl">Kön</span> och träna om. Försvinner skevheten helt? Vilken variabel har "tagit över" könets roll?</li>
-          <li>Stäng av <span class="hl">CV-uppehållet</span> också. Vad händer med gapet? Försvann det helt?</li>
-          <li>Slå på alla variabler igen men byt till <span class="hl">⚖️ rättvis träningsdata</span>. Vad händer med vikten för Kön nu?</li>
-          <li>Gå till <strong>Tvillingtestet</strong>: ge Anna 1 års CV-uppehåll och Adam 0, med en modell tränad <em>utan</em> kön. Diskriminerar modellen ändå? Vad kallas den typen av diskriminering?</li>
-        </ol>
-      </div>
-    </div>
+    <span class="explore-trigger" onclick="openConcept('guide', event)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
+      Så här utforskar du labbet
+    </span>
 
-    <div>
-      <div class="sec-t">Datan modellen tränas på</div>
+    <div class="stage stage-1 active" id="stage1">
+      <div class="stage-hd"><div class="stage-num">01</div><div class="stage-title">Välj träningsdata</div></div>
       <div class="data-lead" id="dataLead"></div>
       <details class="more" id="dataDetails">
         <summary>Visa gruppernas siffror</summary>
         <div class="gstat" id="gstat" style="margin-top:10px;"></div>
         <button class="btn ghost" style="align-self:flex-start;margin-top:10px;" onclick="openDataModal()">📋 Visa hela datasetet (300 rader)</button>
       </details>
-    </div>
-
-    <div>
-      <div class="sec-t">Indata till modellen</div>
-      <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Utbildningspoäng</span><span class="vlock" title="Alltid med">🔒</span></div>
-      <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Arbetslivserfarenhet</span><span class="vlock" title="Alltid med">🔒</span></div>
-      <div class="var-toggle on" id="vtKon" onclick="toggleVar('kon')"><span class="vdot"></span><span class="vname">Kön</span></div>
-      <div class="var-toggle on" id="vtLucka" onclick="toggleVar('lucka')"><span class="vdot"></span><span class="vname">Uppehåll i CV (år)</span></div>
-    </div>
-
-    <div>
-      <div class="sec-t">Träningsdata (facit modellen lär sig av)</div>
       <select class="sel" id="dataSel" onchange="onDataModeChange(this.value)">
         <option value="hist" selected>📜 Historisk träningsdata</option>
         <option value="fair">⚖️ Rättvis träningsdata</option>
       </select>
     </div>
+    <div class="stage-connector"></div>
 
-    <button class="btn grn" onclick="train()">🧠 Träna modellen</button>
-    <div class="stale-note" id="staleNote">⚠️ Inställningarna har ändrats – resultaten nedan gäller den <strong style="color:var(--text)">förra</strong> modellen. Träna om!</div>
+    <div class="stage stage-2 active" id="stage2">
+      <div class="stage-hd"><div class="stage-num">02</div><div class="stage-title">Bestäm vad AI:n får se</div></div>
+      <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Utbildningspoäng</span><span class="vlock" title="Alltid med">🔒</span></div>
+      <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Arbetslivserfarenhet</span><span class="vlock" title="Alltid med">🔒</span></div>
+      <div class="var-toggle on" id="vtKon" onclick="toggleVar('kon')"><span class="vdot"></span><span class="vname">Kön</span></div>
+      <div class="var-toggle on" id="vtLucka" onclick="toggleVar('lucka')"><span class="vdot"></span><span class="vname">Uppehåll i CV (år)</span></div>
+    </div>
+    <div class="stage-connector"></div>
+
+    <div class="stage stage-3 active" id="stage3">
+      <div class="stage-hd"><div class="stage-num">03</div><div class="stage-title">Träna modellen</div></div>
+      <button class="train-cta idle" id="trainCta" onclick="train()">
+        <span class="train-cta-fill" id="trainCtaFill"></span>
+        <span class="train-cta-icon" id="trainCtaIcon">🧠</span>
+        <span class="train-cta-text" id="trainCtaText">Träna modellen</span>
+      </button>
+      <span class="stale-chip" id="staleChip">⚠️ Ej uppdaterad – träna om</span>
+    </div>
   </div>
 
   <div class="cp">
+    <div class="stage-hd" style="margin-bottom:2px;"><div class="stage-num" id="stage4Num">04</div><div class="stage-title">Undersök konsekvenserna</div></div>
     <div class="card" id="awaitCard">
       <div class="await-box">
         <div class="await-icon">🧠</div>
         <div class="await-title">Den tränade modellen visas här</div>
-        <div class="await-text">Välj indata och träningsdata i vänsterspalten och tryck <strong>Träna modellen</strong>. Då ser du vad modellen lärt sig, hur rättvist den behandlar nya sökande och hur den bedömer två identiska kandidater.</div>
+        <div class="await-text">Välj indata och träningsdata till vänster och tryck <strong>Träna modellen</strong>. Då ser du vad modellen lärt sig, hur rättvist den behandlar nya sökande och hur den bedömer två identiska kandidater.</div>
       </div>
     </div>
 
@@ -291,34 +377,22 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
       <button class="coll-toggle" onclick="toggleColl(this,'glossBody')">📖 Begrepp<span class="arr">▼</span></button>
       <div class="coll-body" id="glossBody">
         <div class="glossary">
-          <span class="g-tag" onclick="togGloss(this,'gBias')">Bias</span>
-          <span class="g-tag" onclick="togGloss(this,'gSkydd')">Skyddad egenskap</span>
-          <span class="g-tag" onclick="togGloss(this,'gProxy')">Proxyvariabel</span>
-          <span class="g-tag" onclick="togGloss(this,'gDirekt')">Direkt diskriminering</span>
-          <span class="g-tag" onclick="togGloss(this,'gIndirekt')">Indirekt diskriminering</span>
-          <span class="g-tag" onclick="togGloss(this,'gGap')">Rättvisemått</span>
+          <span class="g-tag" onclick="openConcept('bias', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M8 20h8"/><path d="M12 6L5 8.5M12 6l7 4"/><circle cx="5" cy="9.5" r="2.2"/><circle cx="19" cy="11" r="2.2"/></svg>Bias</span>
+          <span class="g-tag" onclick="openConcept('skydd', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>Skyddad egenskap</span>
+          <span class="g-tag" onclick="openConcept('proxy', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3.2" stroke-dasharray="2 2"/><circle cx="18" cy="12" r="3.2"/><path d="M9.5 12h5M13 9.5l1.5 2.5-1.5 2.5"/></svg>Proxyvariabel</span>
+          <span class="g-tag" onclick="openConcept('direkt', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="14" r="3"/><circle cx="17" cy="14" r="3"/><path d="M5 6l2 2 3-3M15 5l4 4"/></svg>Direkt diskriminering</span>
+          <span class="g-tag" onclick="openConcept('indirekt', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-6 8v6l-4 2v-8L4 4z"/></svg>Indirekt diskriminering</span>
+          <span class="g-tag" onclick="openConcept('gap', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M8 20h8"/><path d="M12 7L5 9M12 7l7 2"/><circle cx="5" cy="9" r="2.2"/><circle cx="19" cy="9" r="2.2"/></svg>Rättvisemått</span>
         </div>
-        <div class="g-def" id="gBias"><strong>Bias (skevhet)</strong> – Systematiska fel som gör att en modell behandlar grupper olika. Uppstår oftast för att träningsdatan speglar mänskliga fördomar eller skev representation – "bias in, bias out".</div>
-        <div class="g-def" id="gSkydd"><strong>Skyddad egenskap</strong> – Egenskaper som enligt diskrimineringslagen inte får ligga till grund för beslut, t.ex. kön, etnicitet, ålder, religion och funktionsnedsättning.</div>
-        <div class="g-def" id="gProxy"><strong>Proxyvariabel</strong> – En variabel som hänger så tätt ihop med en <em>skyddad egenskap</em> (t.ex. kön eller etnicitet) att en modell kan använda den som ersättare – och därmed missgynna en grupp utan att ens se den skyddade egenskapen. CV-uppehåll kan bli en proxy för kön, postnummer en proxy för etnicitet.</div>
-        <div class="g-def" id="gDirekt"><strong>Direkt diskriminering</strong> – Beslutet ändras när bara den skyddade egenskapen ändras. Tvillingtestet avslöjar detta: samma meriter, olika svar.</div>
-        <div class="g-def" id="gIndirekt"><strong>Indirekt diskriminering</strong> – Ett till synes neutralt kriterium (t.ex. "inga uppehåll i CV:t") som i praktiken missgynnar en grupp mycket mer än en annan.</div>
-        <div class="g-def" id="gGap"><strong>Rättvisemått</strong> – Sätt att mäta rättvisa. Här används <em>demografisk paritet</em>: andelen som rekommenderas ska vara ungefär lika mellan grupperna när meriterna är lika. Gapet mäts i procentenheter.</div>
       </div>
     </div>
 
-    <div class="coll" id="amazonColl">
-      <button class="coll-toggle" onclick="toggleColl(this,'amazonBody')">📰 Det verkliga fallet med Amazon<span class="arr">▼</span></button>
-      <div class="coll-body" id="amazonBody">
-        2018 avslöjades att Amazon hade skrotat ett internt AI-verktyg för rekrytering. Verktyget hade tränats på tio års historiska ansökningar – som till stor del kom från män – och lärde sig att nedvärdera CV:n som antydde att den sökande var kvinna, till exempel genom föreningsnamn.<br><br>
-        Amazon försökte ta bort de uppenbara signalerna, men kunde inte garantera att modellen inte hittade <strong>andra, indirekta vägar</strong> till samma slutsats. En variabel som på det sättet smyger in en skyddad egenskap bakvägen kallas en <strong>proxyvariabel</strong>.<br><br>
-        <strong>Obs:</strong> I det här labbet är proxyvariabeln avsiktligt ganska tydlig. I verkligheten kan det vara mycket svårare att upptäcka vilka variabler som fungerar som proxyer.
-      </div>
-    </div>
+    <span class="explore-trigger" onclick="openConcept('amazon', event)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v14a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/><path d="M4 8h16M8 4v4"/></svg>
+      Det verkliga fallet med Amazon
+    </span>
   </div>
 </div>
-
-<div class="train-msg" id="trainMsg"><div class="ti">🧠</div><div class="tt">Tränar modellen…</div><div class="ts" id="trainStat">Epok 0</div></div>
 
 <div class="data-modal" id="dataModal">
   <div class="data-modal-card">
@@ -332,13 +406,23 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
   <div class="overlay-card">
     <h2><span>Bias</span>-labbet</h2>
     <p class="sub">En AI lär sig av data. Men vad händer när datan speglar gamla orättvisor? Här får du själv se hur diskriminering kan smyga sig in i ett AI-system.</p>
-    <p class="sub">2018 tvingades Amazon skrota en AI för rekrytering som lärt sig nedvärdera kvinnors CV:n. I det här labbet bygger du en liknande modell åt det påhittade företaget <strong>Teknova AB</strong> och undersöker hur det kunde hända. Teknova tränar sin AI på sina egna anställningsbeslut från förr, men i historiken anställdes män betydligt oftare än kvinnor trots likvärdiga meriter.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Träna och granska</strong> – Låt modellen lära av historiken. Se sedan vad den lärt sig, hur den bedömer nya sökande och vad den svarar på två identiska CV:n där bara könet skiljer.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Försök åtgärda</strong> – Dölj de sökandes kön för modellen och undersök om det räcker för att den ska bli rättvis.</div></div>
+      <div class="step"><div class="step-num">01</div><div><strong>Träna och granska</strong> – Låt modellen lära av historiken. Se sedan vad den lärt sig, hur den bedömer nya sökande och vad den svarar på två identiska CV:n där bara könet skiljer.</div></div>
+      <div class="step"><div class="step-num">02</div><div><strong>Försök åtgärda</strong> – Dölj de sökandes kön för modellen och undersök om det räcker för att den ska bli rättvis.</div></div>
     </div>
     <p class="sub" style="margin-bottom:0;">💡 All data i labbet är påhittad, men den här typen av skevhet förekommer i verkliga AI-system.</p>
-    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Sätt igång →</button>
+    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
+</div>
+
+<div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
+<div class="concept-card" id="conceptCard">
+  <div class="concept-card-inner" id="conceptCardInner">
+    <button class="concept-close" onclick="closeConcept()">✕</button>
+    <div class="concept-icon" id="conceptIcon"></div>
+    <div class="concept-title" id="conceptTitle"></div>
+    <div class="concept-def" id="conceptDef"></div>
+    <div class="concept-illus" id="conceptIllus"></div>
   </div>
 </div>
 
@@ -388,7 +472,7 @@ let twinVals = {utb: 7, erf: 5, luckaA: 0, luckaB: 0};
 const FEATDEFS = [
   {key: 'utb',   label: 'Utbildningspoäng',     get: p => p.utb / 10},
   {key: 'erf',   label: 'Arbetslivserfarenhet', get: p => p.erf / 10},
-  {key: 'kon',   label: 'Kön (kvinna = 1)',     get: p => p.kvinna ? 1 : 0},
+  {key: 'kon',   label: 'Kön är "kvinna"',     get: p => p.kvinna ? 1 : 0},
   {key: 'lucka', label: 'Uppehåll i CV',        get: p => p.lucka / 3},
 ];
 
@@ -430,6 +514,8 @@ function trainEpoch(m, X, y, lr){
 }
 
 function train(){
+  const cta = document.getElementById('trainCta');
+  if(cta.classList.contains('training')) return;
   const feats = activeFeats();
   const rnd = mulberry32(7);
   const m = {
@@ -442,9 +528,20 @@ function train(){
   const X = TRAIN.map(p => feats.map(f => f.get(p)));
   const y = TRAIN.map(p => label(p, dataMode));
 
-  const msg = document.getElementById('trainMsg');
-  const stat = document.getElementById('trainStat');
-  msg.classList.add('show');
+  const icon = document.getElementById('trainCtaIcon');
+  const text = document.getElementById('trainCtaText');
+  const fill = document.getElementById('trainCtaFill');
+  cta.classList.remove('idle','done','stale-glow');
+  cta.classList.add('training');
+  icon.textContent = '⟳';
+  document.getElementById('staleChip').classList.remove('show');
+
+  const PHASES = [
+    {upto:0.22, text:'Analyserar historiken…'},
+    {upto:0.6,  text:'Lär samband…'},
+    {upto:0.92, text:'Optimerar vikter…'},
+    {upto:1.01, text:'Nästan klar…'},
+  ];
 
   const MAX_EPOCHS = 600, PER_TICK = 12;
   let epoch = 0, loss = 0;
@@ -452,13 +549,26 @@ function train(){
     for(let i = 0; i < PER_TICK && epoch < MAX_EPOCHS; i++, epoch++){
       loss = trainEpoch(m, X, y, 2.2);
     }
-    stat.textContent = `Epok ${epoch} / ${MAX_EPOCHS} — förlust ${loss.toFixed(3)}`;
+    const frac = epoch / MAX_EPOCHS;
+    fill.style.width = (frac*100) + '%';
+    const phase = PHASES.find(p => frac <= p.upto) || PHASES[PHASES.length-1];
+    text.textContent = phase.text;
     if(epoch >= MAX_EPOCHS){
       clearInterval(timer);
-      setTimeout(() => msg.classList.remove('show'), 280);
       model = m;
       expCount++;
-      document.getElementById('staleNote').classList.remove('show');
+      cta.classList.remove('training');
+      cta.classList.add('done');
+      icon.textContent = '✓';
+      text.textContent = 'Modellen färdigtränad';
+      fill.style.width = '100%';
+      setTimeout(() => {
+        fill.style.width = '0%';
+        icon.textContent = '🔄';
+        text.textContent = 'Träna om';
+        cta.classList.remove('done');
+        cta.classList.add('idle');
+      }, 1300);
       renderAll();
     }
   }, 16);
@@ -525,7 +635,7 @@ function renderDataStats(){
   const hK = pct(avg(K, p => p.anstalld ? 1 : 0)), hM = pct(avg(M, p => p.anstalld ? 1 : 0));
   const lead = document.getElementById('dataLead');
   if(dataMode === 'hist'){
-    let txt = `Här är <strong>Teknovas tidigare anställningsbeslut</strong> – datan modellen ska tränas på. Kvinnor och män har likvärdiga meriter, men i historiken anställdes ${hK} av kvinnorna mot ${hM} av männen. Det är den skevheten modellen kommer att lära sig.`;
+    let txt = `Här är <strong>Teknovas tidigare anställningsbeslut</strong> – datan modellen ska tränas på. Kvinnor och män har likvärdiga meriter, men i historiken anställdes ${hK} av kvinnorna mot ${hM} av männen. Det är den skevheten modellen kommer att lära sig.<br><br>Laborationen bygger på ett verkligt fall med Amazon – se <strong>"Det verkliga fallet med Amazon"</strong> till höger.`;
     if(!useKon && !useLucka){
       txt += `<br><br>🚫 Modellen får <strong>varken se de sökandes kön eller uppehåll i CV</strong> under träningen – bara utbildning och erfarenhet.`;
     }else if(!useKon){
@@ -565,37 +675,64 @@ function weightsHTML(){
       <div class="wval ${w >= 0 ? 'pos' : 'neg'}">${(w >= 0 ? '+' : '') + w.toFixed(2)}</div>
     </div>`;
   }
-  if(m.useKon){
-    h += `<div class="hint" style="margin-top:8px;">Kön kodas som <strong>kvinna = 1, man = 0</strong>. En negativ vikt för kön betyder alltså att modellen drar ner chansen för kvinnor.</div>`;
-  }
   return h;
+}
+
+function animateCount(el, from, to, duration, fmt){
+  fmt = fmt || (v => Math.round(v) + '%');
+  const start = performance.now();
+  function tick(now){
+    const t = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - t, 3);
+    el.textContent = fmt(from + (to - from) * eased);
+    if(t < 1) requestAnimationFrame(tick);
+    else el.textContent = fmt(to);
+  }
+  requestAnimationFrame(tick);
 }
 
 function renderFairness(){
   const r = evaluate(model);
-  let vCls, vTxt;
-  if(r.gap > 15){ vCls = 'bad';  vTxt = `🚨 Stor skillnad: männen rekommenderas mycket oftare än kvinnorna.`; }
-  else if(r.gap > 5){ vCls = 'warn'; vTxt = `⚠️ Skillnaden har minskat men finns kvar. Var kommer den ifrån?`; }
-  else { vCls = 'ok'; vTxt = `✅ Grupperna behandlas nu i stort sett lika.`; }
+  let vEmoji, vTxt;
+  if(r.gap > 15){ vEmoji = '🚨'; vTxt = `Stor skillnad: männen rekommenderas mycket oftare än kvinnorna.`; }
+  else if(r.gap > 5){ vEmoji = '⚠️'; vTxt = `Skillnaden har minskat men finns kvar. Var kommer den ifrån?`; }
+  else { vEmoji = '✅'; vTxt = `Grupperna behandlas nu i stort sett lika.`; }
+  const gapColor = r.gap > 15 ? '#ef5b5b' : r.gap > 5 ? '#ffce54' : '#34c759';
 
   document.getElementById('fairArea').innerHTML = `
     <div class="sec-t" style="margin-bottom:7px;">Andel som rekommenderas för anställning</div>
     <div class="fair-big">
-      <div class="fbar k"><span class="fwho">Kvinnor</span><div class="ftrack"><div class="ffill" style="width:${(r.pK * 100).toFixed(1)}%"></div></div><span class="fval" style="color:var(--kvinna)">${pct(r.pK)}</span></div>
-      <div class="fbar m"><span class="fwho">Män</span><div class="ftrack"><div class="ffill" style="width:${(r.pM * 100).toFixed(1)}%"></div></div><span class="fval" style="color:var(--man)">${pct(r.pM)}</span></div>
+      <div class="fbar k"><span class="fwho">Kvinnor</span><div class="ftrack"><div class="ffill" id="ffillK" style="width:0%"></div></div><span class="fval" id="fvalK" style="color:var(--kvinna);font-size:22px;font-family:'JetBrains Mono',monospace;font-weight:800;">0%</span></div>
+      <div class="fbar m"><span class="fwho">Män</span><div class="ftrack"><div class="ffill" id="ffillM" style="width:0%"></div></div><span class="fval" id="fvalM" style="color:var(--man);font-size:22px;font-family:'JetBrains Mono',monospace;font-weight:800;">0%</span></div>
     </div>
     <div style="height:9px"></div>
-    <div class="verdict ${vCls}">${vTxt}</div>
-    <details class="more" style="margin-top:10px;"><summary>Visa fler detaljer</summary>
-      <div class="fstats" style="margin-top:8px;grid-template-columns:1fr;">
-        <div class="fbox"><div class="fl">Gap mellan grupperna</div><div class="fv" style="color:${r.gap > 15 ? 'var(--red)' : r.gap > 5 ? 'var(--gold)' : 'var(--green)'}">${r.gap.toFixed(0)} procentenheter</div></div>
-      </div>
-      <div class="fstats" style="margin-top:6px;">
-        <div class="fbox"><div class="fl">Missade talanger – kvinnor</div><div class="fv" style="color:var(--kvinna)">${r.missK} av ${r.lampK}</div></div>
-        <div class="fbox"><div class="fl">Missade talanger – män</div><div class="fv" style="color:var(--man)">${r.missM} av ${r.lampM}</div></div>
-      </div>
-      <div class="hint" style="margin-top:6px;">"Missade talanger" = verkligt lämpliga sökande som modellen ändå nekar. Skevheten är inte bara orättvis – företaget går miste om kompetens.</div>
-    </details>`;
+    <span class="g-tag" onclick="openConcept('fairnessDetail', event)">
+      <svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      Visa fler detaljer
+    </span>`;
+
+  CONCEPTS.fairnessDetail = {
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>',
+    title:'Rättvisetestet i detalj',
+    def:`<strong>${vEmoji} ${vTxt}</strong><br><br>
+      Gapet mellan grupperna är <strong style="color:${gapColor}">${r.gap.toFixed(0)} procentenheter</strong>.<br><br>
+      Missade talanger – kvinnor: <strong>${r.missK} av ${r.lampK}</strong><br>
+      Missade talanger – män: <strong>${r.missM} av ${r.lampM}</strong><br><br>
+      Missade talanger är verkligt lämpliga sökande som modellen ändå nekar.`,
+    illus:`<svg viewBox="0 0 140 70"><line x1="10" y1="58" x2="130" y2="58" stroke="rgba(255,255,255,.12)"/>
+      <rect x="35" y="${58-Math.max(4,r.pK*44)}" width="22" height="${Math.max(4,r.pK*44)}" rx="3" fill="rgba(192,132,252,.25)" stroke="#c084fc" stroke-width="1.5"/>
+      <rect x="83" y="${58-Math.max(4,r.pM*44)}" width="22" height="${Math.max(4,r.pM*44)}" rx="3" fill="rgba(77,128,255,.25)" stroke="#4d80ff" stroke-width="1.5"/>
+      <text x="46" y="${58-Math.max(4,r.pK*44)-4}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#c084fc" font-weight="700">${Math.round(r.pK*100)}%</text>
+      <text x="94" y="${58-Math.max(4,r.pM*44)-4}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#4d80ff" font-weight="700">${Math.round(r.pM*100)}%</text></svg>`
+  };
+
+  requestAnimationFrame(() => {
+    const fk = document.getElementById('ffillK'), fm = document.getElementById('ffillM');
+    fk.style.width = (r.pK*100).toFixed(1)+'%';
+    fm.style.width = (r.pM*100).toFixed(1)+'%';
+    animateCount(document.getElementById('fvalK'), 0, r.pK*100, 800, v => Math.round(v)+'%');
+    animateCount(document.getElementById('fvalM'), 0, r.pM*100, 800, v => Math.round(v)+'%');
+  });
   return r;
 }
 
@@ -603,24 +740,40 @@ function renderTwins(){
   const m = model;
   document.getElementById('twinArea').innerHTML = `
     <div class="twin-ctrl">
-      <div class="twin-row"><span>Utbildningspoäng</span><input type="range" min="0" max="10" step="1" value="${twinVals.utb}" oninput="twinVals.utb=+this.value;updateTwins()"><span class="tv" id="tvUtb">${twinVals.utb}</span></div>
-      <div class="twin-row"><span>Erfarenhet (år)</span><input type="range" min="0" max="10" step="1" value="${twinVals.erf}" oninput="twinVals.erf=+this.value;updateTwins()"><span class="tv" id="tvErf">${twinVals.erf}</span></div>
+      <div class="twin-row" id="twinRowUtb"><span>Utbildningspoäng</span><input type="range" min="0" max="10" step="1" value="${twinVals.utb}" oninput="twinVals.utb=+this.value;onTwinChange(['twinAnna','twinAdam'],'twinRowUtb')"><span class="tv" id="tvUtb">${twinVals.utb}</span></div>
+      <div class="twin-row" id="twinRowErf"><span>Erfarenhet (år)</span><input type="range" min="0" max="10" step="1" value="${twinVals.erf}" oninput="twinVals.erf=+this.value;onTwinChange(['twinAnna','twinAdam'],'twinRowErf')"><span class="tv" id="tvErf">${twinVals.erf}</span></div>
     </div>
     <div class="twins">
-      <div class="twin k">
-        <div class="tname">👩 Anna</div>
+      <div class="twin k" id="twinAnna">
+        <div class="twin-scan"></div>
+        <div class="twin-avatar">👩</div>
+        <div class="tname">Anna</div>
+        <div class="tstamp-wrap"><span class="tstamp" id="annaStamp"></span></div>
         <div class="tcv">Utbildning: <b id="annaUtb"></b> · Erfarenhet: <b id="annaErf"></b> år<br>Kön: <b>kvinna</b></div>
-        <div class="tlucka">Uppehåll i CV: <select onchange="twinVals.luckaA=+this.value;updateTwins()">${[0,1,2,3].map(v=>`<option value="${v}" ${v===twinVals.luckaA?'selected':''}>${v} år</option>`).join('')}</select></div>
-        <div class="tres"><span class="tscore" id="annaScore"></span><span class="tstamp" id="annaStamp"></span></div>
+        <div class="tlucka" id="twinRowLuckaA">Uppehåll i CV: <select onchange="twinVals.luckaA=+this.value;onTwinChange(['twinAnna'],'twinRowLuckaA')">${[0,1,2,3].map(v=>`<option value="${v}" ${v===twinVals.luckaA?'selected':''}>${v} år</option>`).join('')}</select></div>
+        <div class="tres"><span class="tscore" id="annaScore"></span></div>
       </div>
-      <div class="twin m">
-        <div class="tname">👨 Adam</div>
+      <div class="twin m" id="twinAdam">
+        <div class="twin-scan"></div>
+        <div class="twin-avatar">👨</div>
+        <div class="tname">Adam</div>
+        <div class="tstamp-wrap"><span class="tstamp" id="adamStamp"></span></div>
         <div class="tcv">Utbildning: <b id="adamUtb"></b> · Erfarenhet: <b id="adamErf"></b> år<br>Kön: <b>man</b></div>
-        <div class="tlucka">Uppehåll i CV: <select onchange="twinVals.luckaB=+this.value;updateTwins()">${[0,1,2,3].map(v=>`<option value="${v}" ${v===twinVals.luckaB?'selected':''}>${v} år</option>`).join('')}</select></div>
-        <div class="tres"><span class="tscore" id="adamScore"></span><span class="tstamp" id="adamStamp"></span></div>
+        <div class="tlucka" id="twinRowLuckaB">Uppehåll i CV: <select onchange="twinVals.luckaB=+this.value;onTwinChange(['twinAdam'],'twinRowLuckaB')">${[0,1,2,3].map(v=>`<option value="${v}" ${v===twinVals.luckaB?'selected':''}>${v} år</option>`).join('')}</select></div>
+        <div class="tres"><span class="tscore" id="adamScore"></span></div>
       </div>
     </div>
     <div class="twin-verdict" id="twinVerdict"></div>`;
+  updateTwins();
+}
+
+function onTwinChange(cardIds, rowId){
+  cardIds.forEach(id => {
+    const card = document.getElementById(id);
+    if(card){ card.classList.add('scanning'); setTimeout(() => card.classList.remove('scanning'), 700); }
+  });
+  const row = document.getElementById(rowId);
+  if(row){ row.classList.add('flash-row'); setTimeout(() => row.classList.remove('flash-row'), 500); }
   updateTwins();
 }
 
@@ -664,8 +817,10 @@ function setTwinResult(who, p){
   document.getElementById(who + 'Score').textContent = 'Chans att rekommenderas: ' + (p * 100).toFixed(0) + '%';
   const stamp = document.getElementById(who + 'Stamp');
   const yes = p >= 0.5;
-  stamp.textContent = yes ? 'JA ✓' : 'NEJ ✗';
-  stamp.className = 'tstamp ' + (yes ? 'ja' : 'nej');
+  stamp.textContent = yes ? 'Rekommenderas' : 'Rekommenderas ej';
+  stamp.classList.remove('pop','ja','nej');
+  void stamp.offsetWidth;
+  stamp.classList.add(yes ? 'ja' : 'nej', 'pop');
 }
 
 function renderAll(){
@@ -676,21 +831,31 @@ function renderAll(){
   document.getElementById('cardFair').style.display = '';
   document.getElementById('cardWeights').style.display = '';
   document.getElementById('cardTwins').style.display = '';
+  ['cardFair','cardWeights','cardTwins'].forEach(id => document.getElementById(id).classList.remove('stale'));
+  document.getElementById('staleChip').classList.remove('show');
+  document.getElementById('lp').classList.add('trained');
   renderFairness();
   document.getElementById('weightsArea').innerHTML = weightsHTML();
   renderTwins();
+}
+
+function markStale(){
+  if(!model) return;
+  document.getElementById('staleChip').classList.add('show');
+  ['cardFair','cardWeights','cardTwins'].forEach(id => document.getElementById(id).classList.add('stale'));
+  document.getElementById('trainCta').classList.add('stale-glow');
 }
 
 function toggleVar(key){
   if(key === 'kon'){ useKon = !useKon; document.getElementById('vtKon').classList.toggle('on', useKon); }
   if(key === 'lucka'){ useLucka = !useLucka; document.getElementById('vtLucka').classList.toggle('on', useLucka); }
   renderDataStats();
-  if(model) document.getElementById('staleNote').classList.add('show');
+  markStale();
 }
 function onDataModeChange(v){
   dataMode = v;
   renderDataStats();
-  if(model) document.getElementById('staleNote').classList.add('show');
+  markStale();
 }
 
 function openDataModal(){
@@ -716,13 +881,103 @@ function toggleColl(btn, id){
   btn.classList.toggle('open');
   document.getElementById(id).classList.toggle('show');
 }
-function togGloss(tag, id){
-  const def = document.getElementById(id);
-  const wasOpen = def.classList.contains('show');
-  document.querySelectorAll('.g-def').forEach(d => d.classList.remove('show'));
-  document.querySelectorAll('.g-tag').forEach(t => t.classList.remove('open'));
-  if(!wasOpen){ def.classList.add('show'); tag.classList.add('open'); }
+
+const CONCEPTS={
+  amazon:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v14a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/><path d="M4 8h16M8 4v4"/></svg>',
+    title:'Det verkliga fallet: Amazon',
+    def:'2018 avslöjades att Amazon hade skrotat ett internt AI-verktyg för rekrytering. Verktyget hade tränats på tio års historiska ansökningar – som till stor del kom från män – och lärde sig att nedvärdera CV:n som antydde att den sökande var kvinna, t.ex. genom föreningsnamn.<br><br>Amazon försökte ta bort de uppenbara signalerna, men kunde inte garantera att modellen inte hittade <strong>andra, indirekta vägar</strong> till samma slutsats – en <em>proxyvariabel</em>.<br><br><strong>Obs:</strong> I det här labbet är proxyvariabeln avsiktligt tydlig. I verkligheten kan det vara mycket svårare att upptäcka vilka variabler som fungerar som proxyer.',
+    illus:'<svg viewBox="0 0 140 70"><rect x="44" y="8" width="52" height="54" rx="4" fill="rgba(255,255,255,.04)" stroke="#8791b3" stroke-width="1.3"/><line x1="52" y1="20" x2="88" y2="20" stroke="#8791b3" stroke-width="1.5"/><line x1="52" y1="28" x2="88" y2="28" stroke="#8791b3" stroke-width="1.5"/><line x1="52" y1="36" x2="72" y2="36" stroke="#8791b3" stroke-width="1.5"/><circle cx="70" cy="50" r="11" fill="#ef5b5b"/><path d="M66 46l8 8M74 46l-8 8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>'
+  },
+  guide:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>',
+    title:'Så här utforskar du labbet',
+    def:'<strong>1.</strong> Börja med alla variabler påslagna. Hur stort blir gapet mellan grupperna?<br><br><strong>2.</strong> Stäng av <em>Kön</em> och träna om. Försvinner skevheten helt? Vilken variabel "tar över" könets roll?<br><br><strong>3.</strong> Stäng av <em>CV-uppehållet</em> också. Vad händer med gapet nu?<br><br><strong>4.</strong> Slå på alla variabler igen men byt till <em>rättvis träningsdata</em>. Vad händer med vikten för Kön?<br><br><strong>5.</strong> Gå till Tvillingtestet: ge Anna 1 års CV-uppehåll och Adam 0, med en modell tränad <em>utan</em> kön. Diskriminerar den ändå?',
+    illus:''
+  },
+  bias:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M8 20h8"/><path d="M12 6L5 8.5M12 6l7 4"/><circle cx="5" cy="9.5" r="2.2"/><circle cx="19" cy="11" r="2.2"/></svg>',
+    title:'Bias (skevhet)',
+    def:'Systematiska fel som gör att en modell behandlar grupper olika. Uppstår oftast för att träningsdatan speglar mänskliga fördomar eller skev representation – <em>"bias in, bias out"</em>.',
+    illus:'<svg viewBox="0 0 140 70"><line x1="10" y1="58" x2="130" y2="58" stroke="rgba(255,255,255,.12)"/><rect x="35" y="38" width="22" height="20" rx="3" fill="rgba(192,132,252,.25)" stroke="#c084fc" stroke-width="1.5"/><rect x="83" y="14" width="22" height="44" rx="3" fill="rgba(77,128,255,.25)" stroke="#4d80ff" stroke-width="1.5"/><text x="46" y="32" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#c084fc" font-weight="700">35%</text><text x="94" y="10" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#4d80ff" font-weight="700">78%</text></svg>'
+  },
+  skydd:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>',
+    title:'Skyddad egenskap',
+    def:'Egenskaper som enligt diskrimineringslagen inte får ligga till grund för beslut, t.ex. <strong>kön, etnicitet, ålder, religion</strong> och funktionsnedsättning.',
+    illus:'<svg viewBox="0 0 140 70"><g fill="rgba(255,206,84,.12)" stroke="#ffce54" stroke-width="1.3"><rect x="8" y="26" width="38" height="20" rx="5"/><rect x="51" y="26" width="38" height="20" rx="5"/><rect x="94" y="26" width="38" height="20" rx="5"/></g><text x="27" y="39" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7.5" fill="#ffce54" font-weight="700">KÖN</text><text x="70" y="39" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7.5" fill="#ffce54" font-weight="700">ÅLDER</text><text x="113" y="39" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6.5" fill="#ffce54" font-weight="700">ETNICITET</text></svg>'
+  },
+  proxy:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3.2" stroke-dasharray="2 2"/><circle cx="18" cy="12" r="3.2"/><path d="M9.5 12h5M13 9.5l1.5 2.5-1.5 2.5"/></svg>',
+    title:'Proxyvariabel',
+    def:'En variabel som hänger så tätt ihop med en <em>skyddad egenskap</em> att en modell kan använda den som ersättare – och därmed missgynna en grupp utan att ens se den skyddade egenskapen. <strong>CV-uppehåll</strong> kan bli en proxy för kön.',
+    illus:'<svg viewBox="0 0 140 70"><text x="8" y="20" font-family="JetBrains Mono, monospace" font-size="9" fill="#8791b3">Kön</text><line x1="30" y1="10" x2="45" y2="24" stroke="#ef5b5b" stroke-width="1.5"/><line x1="45" y1="10" x2="30" y2="24" stroke="#ef5b5b" stroke-width="1.5"/><text x="8" y="58" font-family="JetBrains Mono, monospace" font-size="9" fill="#e8ecf8">CV-uppehåll</text><line x1="58" y1="52" x2="82" y2="38" stroke="#7aa2ff" stroke-width="2"/><path d="M77 36l6 -1 -1 6z" fill="#7aa2ff"/><circle cx="102" cy="36" r="16" fill="rgba(122,162,255,.15)" stroke="#7aa2ff" stroke-width="1.5"/><text x="102" y="40" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#7aa2ff" font-weight="700">AI</text></svg>'
+  },
+  direkt:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="14" r="3"/><circle cx="17" cy="14" r="3"/><path d="M5 6l2 2 3-3M15 5l4 4"/></svg>',
+    title:'Direkt diskriminering',
+    def:'Beslutet ändras när bara den skyddade egenskapen ändras. <strong>Tvillingtestet</strong> avslöjar detta: samma meriter, olika svar.',
+    illus:'<svg viewBox="0 0 140 70"><circle cx="40" cy="38" r="17" fill="rgba(192,132,252,.15)" stroke="#c084fc" stroke-width="1.5"/><circle cx="100" cy="38" r="17" fill="rgba(77,128,255,.15)" stroke="#4d80ff" stroke-width="1.5"/><text x="40" y="44" text-anchor="middle" font-size="15">👩</text><text x="100" y="44" text-anchor="middle" font-size="15">👨</text><circle cx="55" cy="20" r="8.5" fill="#ef5b5b"/><path d="M51.5 16.5l7 7M58.5 16.5l-7 7" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><circle cx="115" cy="20" r="8.5" fill="#34c759"/><path d="M111 20.5l3 3 6-7" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="70" y="66" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#8791b3">samma meriter</text></svg>'
+  },
+  indirekt:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-6 8v6l-4 2v-8L4 4z"/></svg>',
+    title:'Indirekt diskriminering',
+    def:'Ett till synes neutralt kriterium (t.ex. <em>"inga uppehåll i CV:t"</em>) som i praktiken missgynnar en grupp mycket mer än en annan.',
+    illus:'<svg viewBox="0 0 140 70"><path d="M20 12h100l-35 30v20l-30 12V42z" fill="rgba(255,255,255,.04)" stroke="#8791b3" stroke-width="1.3"/><text x="70" y="9" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#8791b3">"NEUTRALT" KRITERIUM</text><circle cx="47" cy="62" r="5" fill="#4d80ff"/><circle cx="60" cy="66" r="5" fill="#4d80ff"/><circle cx="80" cy="63" r="5" fill="#c084fc"/></svg>'
+  },
+  gap:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M8 20h8"/><path d="M12 7L5 9M12 7l7 2"/><circle cx="5" cy="9" r="2.2"/><circle cx="19" cy="9" r="2.2"/></svg>',
+    title:'Rättvisemått',
+    def:'Sätt att mäta rättvisa. Här används <em>demografisk paritet</em>: andelen som rekommenderas ska vara ungefär lika mellan grupperna när meriterna är lika. Gapet mäts i procentenheter.',
+    illus:'<svg viewBox="0 0 140 70"><line x1="10" y1="58" x2="130" y2="58" stroke="rgba(255,255,255,.12)"/><rect x="35" y="24" width="22" height="34" rx="3" fill="rgba(192,132,252,.25)" stroke="#c084fc" stroke-width="1.5"/><rect x="83" y="24" width="22" height="34" rx="3" fill="rgba(77,128,255,.25)" stroke="#4d80ff" stroke-width="1.5"/><text x="46" y="20" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#c084fc" font-weight="700">54%</text><text x="94" y="20" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#4d80ff" font-weight="700">55%</text></svg>'
+  }
+};
+
+function openConcept(id,ev){
+  ev.stopPropagation();
+  const btn=ev.currentTarget;const r=btn.getBoundingClientRect();
+  const bx=r.left+r.width/2,by=r.top+r.height/2;
+  const cx=window.innerWidth/2,cy=window.innerHeight/2;
+  const c=CONCEPTS[id];if(!c)return;
+  const card=document.getElementById('conceptCard');
+  document.getElementById('conceptIcon').innerHTML=c.icon;
+  document.getElementById('conceptTitle').textContent=c.title;
+  document.getElementById('conceptDef').innerHTML=c.def;
+  document.getElementById('conceptIllus').innerHTML=c.illus||'';
+  card.classList.remove('show');
+  card.style.transition='none';
+  card.style.setProperty('--dx',(bx-cx)+'px');
+  card.style.setProperty('--dy',(by-cy)+'px');
+  void card.offsetHeight;
+  card.style.transition='';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
 }
+function closeConcept(){
+  document.getElementById('conceptCard').classList.remove('show');
+  document.getElementById('conceptBackdrop').classList.remove('show');
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
+
+(function initCardTilt(){
+  const el=document.getElementById('conceptCardInner');if(!el)return;
+  const MAX_TILT=7;
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+    const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
+    el.style.setProperty('--mx',(px*100)+'%');
+    el.style.setProperty('--my',(py*100)+'%');
+    el.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    const sx=(px-0.5)*22,sy=(py-0.5)*22;
+    el.style.boxShadow=`${-sx}px ${20-sy}px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset`;
+  });
+  el.addEventListener('mouseleave',()=>{
+    el.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%');
+    el.style.boxShadow='';
+  });
+})();
 
 renderDataStats();
 </script>
