@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Minimax & Alfa-Beta-beskärning – Interaktiv simulering</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg:#090b14; --surface:#0e1222; --surface2:#151a2e; --border:#1e2642;
@@ -32,7 +32,7 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:
 .lang-link .flag{display:block;border-radius:2px;}
 
 .hd{text-align:center;padding:20px 16px 12px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(52,199,89,0.04),transparent);position:relative;}
-.hd h1{font-size:1.72em;font-weight:700;letter-spacing:-0.035em;margin-bottom:5px;}
+.hd h1{font-family:'Syne',sans-serif;font-size:1.72em;font-weight:800;letter-spacing:-0.035em;margin-bottom:5px;}
 .hd h1 .g{color:var(--max-color);} .hd h1 .o{color:var(--min-color);}
 .hd p{color:var(--text-dim);font-size:0.84em;max-width:760px;margin:0 auto;line-height:1.5;}
 
@@ -205,17 +205,19 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:
 
 
 /* Pedagogisk intro-overlay (som Språkmodell-labbet) */
-.overlay{position:fixed;inset:0;background:rgba(9,11,20,0.82);backdrop-filter:blur(5px);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
+.overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
 .overlay.show{display:flex;}
-.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:30px 32px;max-width:520px;width:100%;box-shadow:0 24px 70px rgba(0,0,0,0.55);}
-.overlay-card h2{font-size:1.5em;font-weight:700;letter-spacing:-0.02em;margin-bottom:8px;text-align:center;}
+.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:540px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
+@keyframes overlayIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.overlay-card h2{font-family:'Syne',sans-serif;font-size:1.4em;font-weight:800;letter-spacing:-0.01em;margin-bottom:8px;text-align:center;}
 .overlay-card h2 .g{color:var(--max-color);} .overlay-card h2 .o{color:var(--min-color);}
 .overlay-card .sub{color:var(--text-dim);font-size:0.95em;line-height:1.55;text-align:center;margin-bottom:22px;}
 .journey{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:24px;}
 .journey li{display:flex;gap:11px;align-items:flex-start;font-size:0.92em;line-height:1.5;color:var(--text);}
 .journey .ji{flex-shrink:0;width:24px;text-align:center;font-size:1.1em;}
-.overlay-btn{display:block;width:100%;padding:13px;border:none;border-radius:10px;background:var(--accent);color:#fff;font-family:'DM Sans',sans-serif;font-size:1em;font-weight:700;cursor:pointer;transition:0.2s;}
-.overlay-btn:hover{background:#3d6ff0;}
+.overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;border:none;border-radius:10px;background:var(--accent);color:#fff;font-family:'DM Sans',sans-serif;font-size:1em;font-weight:700;cursor:pointer;transition:.25s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 24px rgba(77,128,255,.28);}
+.overlay-btn:hover{background:#3d6ff0;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
+.overlay-btn svg{width:15px;height:15px;flex-shrink:0;}
 
 /* Animerat mini-spelträd i overlayn: en ljuspunkt vandrar genom trädet */
 .intro-viz{display:block;width:190px;height:88px;margin:0 auto 14px;}
@@ -276,7 +278,7 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:
       <li><span class="ji" style="color:var(--min-color)"><svg viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7v4m0 0-5.5 5.8M12 11l5.5 5.8"/></svg></span><span><strong>Bygg egna spelträd</strong> – ändra värden och struktur och testa dina egna idéer.</span></li>
       <li><span class="ji" style="color:var(--val)"><svg viewBox="0 0 24 24"><path d="M12 3l2.2 5.6L20 10l-5.8 1.4L12 17l-2.2-5.6L4 10l5.8-1.4z"/></svg></span><span><strong>Utforska fritt</strong> – jämför med och utan beskärning och se hur mycket arbete som sparas.</span></li>
     </ul>
-    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta →</button>
+    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 </div>
 
