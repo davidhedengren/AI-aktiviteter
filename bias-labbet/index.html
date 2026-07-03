@@ -635,7 +635,7 @@ function renderDataStats(){
   const hK = pct(avg(K, p => p.anstalld ? 1 : 0)), hM = pct(avg(M, p => p.anstalld ? 1 : 0));
   const lead = document.getElementById('dataLead');
   if(dataMode === 'hist'){
-    let txt = `Här är <strong>Teknovas tidigare anställningsbeslut</strong> – datan modellen ska tränas på. Kvinnor och män har likvärdiga meriter, men i historiken anställdes ${hK} av kvinnorna mot ${hM} av männen. Det är den skevheten modellen kommer att lära sig.<br><br>Laborationen bygger på ett verkligt fall med Amazon – se <strong>"Det verkliga fallet med Amazon"</strong> till höger.`;
+    let txt = `Här är <strong>Teknovas tidigare anställningsbeslut</strong> – datan modellen ska tränas på. Kvinnor och män har likvärdiga meriter, men i historiken anställdes ${hK} av kvinnorna mot ${hM} av männen. Det är den skevheten modellen kommer att lära sig.<br><br>Laborationen bygger på ett verkligt fall med Amazon`;
     if(!useKon && !useLucka){
       txt += `<br><br>🚫 Modellen får <strong>varken se de sökandes kön eller uppehåll i CV</strong> under träningen – bara utbildning och erfarenhet.`;
     }else if(!useKon){
