@@ -171,7 +171,7 @@ button:disabled{opacity:.42;cursor:not-allowed;}
   <a class="back-link" href="/">← AI-aktiviteter</a>
   <a class="lang-link" href="https://www.ai-aktiviteter.se/sokalgoritmer-labyrinter_ENG"><span class="flag">🇬🇧</span> English</a>
   <h1>Sökalgoritmer i <span>labyrint</span></h1>
-  <p>Bygg din egen labyrint och följ exakt hur BFS, DFS, Girig bäst-först och A* hittar vägen till målet.</p>
+  <p>Bygg din egen labyrint och följ hur BFS, DFS, Girig bäst-först och A* hittar vägen till målet.</p>
 </div>
 
 <div class="page-wrap">
@@ -241,16 +241,15 @@ button:disabled{opacity:.42;cursor:not-allowed;}
     <li><span class="color-box" style="background:#ef5b5b;"></span><span><strong>Mål</strong> – skapas genom att högerklicka en gång.</span></li>
     <li><span class="color-box" style="background:#d7def0;"></span><span><strong>Vanlig väg</strong> (kostnad 1) – skapas genom att vänsterklicka på en vägg.</span></li>
     <li><span class="color-box" style="background:#10141f;border-color:#2a3550;"></span><span><strong>Vägg</strong> – skapas genom att vänsterklicka på en öppen ruta.</span></li>
-    <li><span class="color-box" style="background:#d8a24e;"></span><span><strong>Kostnad 3</strong> – skapas genom att högerklicka två gånger.</span></li>
+    <li><span class="color-box" style="background:#8b5e34;"></span><span><strong>Kostnad 3</strong> – skapas genom att högerklicka två gånger.</span></li>
     <li><span class="color-box" style="background:#3f6fd0;"></span><span><strong>Kostnad 5</strong> – skapas genom att högerklicka tre gånger.</span></li>
     <li><span class="color-box" style="background:#6f9fd6;"></span><span><strong>Genomsökt</strong> – rutor som algoritmen redan har undersökt.</span></li>
-    <li><span class="color-box" style="background:transparent;border-color:#facc15;border-width:2px;"></span><span><strong>Guldram</strong> – visar exakt vilken ruta algoritmen just nu bearbetar.</span></li>
     <li><span class="color-box" style="background:#f0a94e;"></span><span><strong>Kö</strong> – rutor på tur att utforskas. Pulserar mjukt.</span></li>
     <li><span class="color-box" style="background:#3ddc84;"></span><span><strong>Hittad väg</strong> – ritas från start till mål när målet hittats.</span></li>
   </ul>
   <p><em>Vänsterklick</em> växlar mellan vägg och öppen ruta.<br><em>Högerklick</em> växlar mål → kostnad 3 → kostnad 5 → vägg.</p>
   <p style="margin-top:8px;"><em>Tips:</em> Vid A*-sökning kan du hålla muspekaren över en ruta för att se kostnadsfunktionen f = g + h.</p>
-  <p style="margin-top:8px;"><em>Tangentbord:</em> mellanslag = spela/pausa, ← → = stega, R = nollställ.</p>
+  <p style="margin-top:8px;">Tryck på mellanslag för att spela/pausa och använd piltangenterna för att stega dig fram.</p>
 </div>
 
 </div>
@@ -310,14 +309,13 @@ let selectedAlg='BFS', currentAlgorithm=null;
 let searchSteps=[], curStep=-1, computedFor=null;
 let playTimer=null, isPlaying=false;
 const PLAY_INTERVAL=150;
-const D_IN=RM?1:160, ACTIVE_MS=RM?1:220;
+const D_IN=RM?1:160;
 
 /* Animationstillstånd */
 let cellAnim=new Map();      // "r,c" -> {st:'fr'|'ex', t}
 let heurLabels=new Map(), fVals=new Map();
 let pathState=null;          // {cells,t0,dur}
 let dimState=null;           // regi: dimma allt → mål lyser → väg ritas → kort
-let activeCell=null;         // {r,c,t0} – rutan som just utforskas, får en kort highlight
 let particles=[];
 let popupTimer=null;
 
@@ -439,13 +437,13 @@ function applyOps(i,animate){
   for(const op of searchSteps[i].ops){
     if(op.t==='fr'){const k=op.r+','+op.c;cellAnim.set(k,{st:'fr',t});
       if(op.lbl!=null)heurLabels.set(k,op.lbl);if(op.fv)fVals.set(k,op.fv);}
-    else if(op.t==='ex'){cellAnim.set(op.r+','+op.c,{st:'ex',t});if(animate){activeCell={r:op.r,c:op.c,t0:t};spawnParticles(op.r,op.c,acc);}}
+    else if(op.t==='ex'){cellAnim.set(op.r+','+op.c,{st:'ex',t});if(animate){spawnParticles(op.r,op.c,acc);}}
     else if(op.t==='path'){startPathAnim(op.cells,animate);}
   }
 }
 function recomputeToStep(K){
   cellAnim.clear();heurLabels.clear();fVals.clear();
-  pathState=null;dimState=null;particles.length=0;activeCell=null;
+  pathState=null;dimState=null;particles.length=0;
   for(let i=0;i<=K&&i<searchSteps.length;i++)applyOps(i,false);
 }
 function afterStep(animated){
@@ -604,7 +602,7 @@ function frame(){
     const v=grid[r][c];
     if(v===1)drawWall(r,c);
     else if(v===2)paintTile(r,c,'#3f6fd0');
-    else if(v===3)paintTile(r,c,'#d8a24e');
+    else if(v===3)paintTile(r,c,'#8b5e34');
     else paintTile(r,c,floorColors[r][c]);
   }
 
@@ -632,20 +630,6 @@ function frame(){
     else a=Math.max(0,.12*(1-(now-dimState.holdEnd)/dimState.fadeOut));
     if(a>0){ctx.fillStyle='rgba(5,8,16,'+a+')';ctx.fillRect(0,0,W,H);}
     else if(now>dimState.holdEnd+dimState.fadeOut)dimState=null;
-  }
-
-  /* Den ruta som just utforskas: guldram, samma färg oavsett algoritm – syns alltid mot både kö- och genomsökt-färgen */
-  if(activeCell&&now-activeCell.t0<ACTIVE_MS){
-    const p=(now-activeCell.t0)/ACTIVE_MS;
-    const{r,c}=activeCell;
-    const x=(c+.5)*CELL,y=(r+.5)*CELL;
-    const s=(CELL-2)*(1+p*.22);
-    ctx.save();
-    ctx.globalAlpha=1-p*p*p;                 // håller sig tydlig, faller sedan snabbt i slutet
-    ctx.shadowColor='#facc15';ctx.shadowBlur=10;
-    ctx.strokeStyle='#facc15';ctx.lineWidth=2.4;
-    rr(x-s/2,y-s/2,s,s,6);ctx.stroke();
-    ctx.restore();
   }
 
   /* Vägen ritas – en grön ljuspunkt drar linjen, som kartnavigering */
