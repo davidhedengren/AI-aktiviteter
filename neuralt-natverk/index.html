@@ -78,16 +78,44 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .lp::-webkit-scrollbar,.rp::-webkit-scrollbar{width:5px;}.lp::-webkit-scrollbar-thumb,.rp::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 
 .sec-t{font-size:.65em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim2);margin-bottom:5px;}
-.scenario-sel,.sel{font-family:'DM Sans',sans-serif;font-size:.82em;width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);cursor:pointer;outline:none;transition:.2s;}
-.scenario-sel:hover,.sel:hover{border-color:var(--dim2);}
-.layer-ctrl{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:9px;}
-.layer-row{display:flex;align-items:center;gap:4px;margin-bottom:4px;}.layer-row:last-child{margin-bottom:0;}
-.layer-label{font-size:.75em;color:var(--dim);flex:1;font-weight:500;}.layer-label.in{color:var(--accent2);}.layer-label.out{color:var(--gold);}
-.layer-val{font-family:'JetBrains Mono',monospace;font-size:.85em;color:var(--text);width:20px;text-align:center;font-weight:600;}
-.lbtn{width:23px;height:23px;border:1px solid var(--border);border-radius:6px;background:rgba(255,255,255,.03);color:var(--text);font-size:.85em;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.18s var(--ease-spring);font-weight:700;}
-.lbtn:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px);}
-.lbtn:active{transform:scale(.92);}
-.layer-add{display:flex;gap:3px;margin-top:3px;}.layer-add .lbtn{flex:1;width:auto;font-size:.68em;height:23px;}
+.sel{font-family:'DM Sans',sans-serif;font-size:.82em;width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);cursor:pointer;outline:none;transition:.2s;}
+.sel:hover{border-color:var(--dim2);}
+
+/* scenario cards */
+.scenario-cards{display:flex;flex-direction:column;gap:6px;}
+.scenario-card{display:flex;align-items:flex-start;gap:10px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r-md);background:var(--surface2);cursor:pointer;transition:.2s var(--ease-out);}
+.scenario-card:hover{border-color:var(--dim2);background:rgba(255,255,255,.04);}
+.scenario-card.active{border-color:var(--accent);background:var(--accent-dim);box-shadow:0 0 0 1px rgba(77,128,255,.25) inset;}
+.scenario-card .sc-icon{font-size:1.15em;line-height:1;margin-top:1px;flex-shrink:0;}
+.scenario-card .sc-title{font-size:.82em;font-weight:700;color:var(--text);}
+.scenario-card .sc-desc{font-size:.7em;color:var(--dim2);margin-top:1px;line-height:1.35;}
+.scenario-card.active .sc-title{color:var(--accent2);}
+
+/* layer arch card */
+.layer-ctrl{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:10px;display:flex;flex-direction:column;gap:2px;}
+.layer-row{display:flex;align-items:center;justify-content:space-between;padding:6px 2px;border-bottom:1px solid var(--border-soft);}
+.layer-row:last-child{border-bottom:none;}
+.layer-label{font-size:.75em;color:var(--dim);font-weight:600;}.layer-label.in{color:var(--accent2);}.layer-label.out{color:var(--gold);}
+.layer-static-val{font-family:'JetBrains Mono',monospace;font-size:.85em;color:var(--text);font-weight:600;}
+.neuron-stepper{display:flex;align-items:center;gap:12px;}
+.ns-btn{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--text);display:flex;align-items:center;justify-content:center;font-size:.95em;cursor:pointer;transition:.18s var(--ease-spring);}
+.ns-btn:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:scale(1.08);}
+.ns-btn:active{transform:scale(.9);}
+.ns-val{font-family:'JetBrains Mono',monospace;font-size:.92em;font-weight:700;min-width:16px;text-align:center;color:var(--text);}
+
+.layer-actions{display:flex;flex-direction:column;gap:6px;margin-top:8px;}
+.layer-action-btn{display:flex;align-items:center;gap:8px;padding:9px 11px;border:1px dashed var(--border);border-radius:var(--r-sm);background:transparent;color:var(--dim);font-size:.76em;font-weight:600;cursor:pointer;transition:.2s var(--ease-out);width:100%;font-family:'DM Sans',sans-serif;}
+.layer-action-btn:hover{border-color:var(--accent);border-style:solid;color:var(--accent2);background:var(--accent-dim);}
+.layer-action-btn.danger:hover{border-color:rgba(239,91,107,.5);color:var(--red);background:rgba(239,91,107,.06);}
+.layer-action-btn svg{flex-shrink:0;}
+
+/* activation pills */
+.pill-row{display:flex;align-items:center;gap:6px;margin-bottom:5px;}
+.pill-row .pr-label{font-size:.72em;color:var(--dim);min-width:44px;font-weight:600;}
+.pill-group{display:flex;flex:1;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:999px;padding:2px;}
+.pill{flex:1;padding:5px 4px;border:none;background:transparent;color:var(--dim2);font-size:.68em;font-weight:700;border-radius:999px;cursor:pointer;transition:.18s var(--ease-out);font-family:'DM Sans',sans-serif;}
+.pill:hover{color:var(--text);}
+.pill.active{background:var(--accent);color:#fff;}
 .input-grid{display:flex;flex-direction:column;gap:6px;}
 .input-row{display:flex;align-items:center;gap:6px;}
 .input-label{font-size:.75em;color:var(--accent2);font-weight:600;min-width:68px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -111,14 +139,25 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .btn:disabled{opacity:.3;pointer-events:none;}
 .icon-sm{width:14px;height:14px;flex-shrink:0;}
 
-.phase-bar{display:flex;gap:0;margin-bottom:6px;border-radius:var(--r-sm);overflow:hidden;border:1px solid var(--border);}
-.phase{flex:1;padding:7px 3px;text-align:center;font-size:.65em;font-weight:600;color:var(--dim);background:var(--surface2);transition:.25s var(--ease-out);cursor:pointer;}.phase:hover{background:rgba(122,162,255,.06);}
-.phase.active{background:var(--accent-dim);color:var(--accent2);}.phase.done{background:rgba(51,209,122,.1);color:var(--green);}.phase.locked{cursor:default;opacity:.4;}
-.phase-num{display:inline-block;width:14px;height:14px;border-radius:50%;font-size:.82em;line-height:14px;text-align:center;margin-right:1px;border:1px solid currentColor;}
+.phase-wizard{position:relative;display:flex;justify-content:space-between;padding:6px 4px 4px;margin-bottom:2px;}
+.pw-track{position:absolute;top:15px;left:22px;right:22px;height:2px;background:var(--border);border-radius:2px;z-index:0;}
+.pw-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:2px;transition:width .45s var(--ease-out);}
+.pw-step{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;flex:1;}
+.pw-step.locked{cursor:default;}
+.pw-dot{width:15px;height:15px;border-radius:50%;background:var(--surface-solid);border:2px solid var(--border);transition:.3s var(--ease-spring);display:flex;align-items:center;justify-content:center;}
+.pw-step.active .pw-dot{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 5px var(--accent-dim);transform:scale(1.15);}
+.pw-step.done .pw-dot{border-color:var(--green);background:var(--green);}
+.pw-step.locked .pw-dot{opacity:.35;}
+.pw-label{font-size:.66em;font-weight:600;color:var(--dim2);transition:.25s;white-space:nowrap;}
+.pw-step.active .pw-label{color:var(--accent2);}
+.pw-step.done .pw-label{color:var(--green);}
+.pw-step.locked .pw-label{opacity:.4;}
+.pw-calc{flex:1;text-align:center;font-size:.72em;font-weight:700;color:var(--accent2);padding:6px 0;}
 .hint{font-size:.71em;color:var(--dim2);line-height:1.4;margin-top:4px;}
 
-.center{position:relative;overflow:hidden;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(24,30,54,.5),rgba(7,8,15,.2));border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:0 20px 60px rgba(0,0,0,.3) inset;}
-.center canvas{width:100%;height:100%;display:block;}
+.center{position:relative;overflow:hidden;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(24,30,54,.5),rgba(7,8,15,.2));border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:0 20px 60px rgba(0,0,0,.3) inset;display:flex;flex-direction:column;}
+.canvas-wrap{position:relative;flex:1 1 auto;min-height:0;}
+.canvas-wrap canvas{width:100%;height:100%;display:block;}
 .untrained-badge{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:.68em;font-weight:700;letter-spacing:.14em;color:rgba(255,255,255,.16);pointer-events:none;text-transform:uppercase;}
 
 .narr{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,rgba(14,17,32,.4),rgba(10,12,22,.96) 30%);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:16px 22px;font-size:.92em;line-height:1.6;color:var(--dim);z-index:5;min-height:64px;}
@@ -169,7 +208,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .data-modal-scroll{flex:1;overflow-y:auto;border:1px solid var(--border);border-radius:var(--r-sm);}.data-modal-scroll::-webkit-scrollbar{width:4px;}.data-modal-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 .dtable-lg{width:100%;border-collapse:collapse;font-size:.75em;}.dtable-lg th{position:sticky;top:0;background:var(--surface-solid);padding:6px 8px;text-align:left;color:var(--dim);font-weight:600;border-bottom:1px solid var(--border);white-space:nowrap;}.dtable-lg td{padding:5px 8px;border-bottom:1px solid rgba(255,255,255,.03);font-family:'JetBrains Mono',monospace;font-size:.92em;}.dtable-lg .pass{color:var(--green);font-weight:600;}.dtable-lg .fail{color:var(--red);font-weight:600;}
 
-@media(max-width:1000px){body{height:auto;overflow:auto;}.app{grid-template-columns:1fr;height:auto;}.lp{border-right:none;}.center{min-height:420px;}.rp{max-height:none;}.back-link{position:static;transform:none;margin-bottom:4px;}.lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}.hd-title-row{flex-wrap:wrap;}}
+@media(max-width:1000px){
+  body{height:auto;overflow:auto;}
+  .app{grid-template-columns:1fr;height:auto;padding:8px;gap:8px;}
+  .lp,.rp{padding:11px;}
+  .lp{border-right:none;}
+  .center{min-height:600px;}
+  .canvas-wrap{flex:1 1 340px;min-height:340px;}
+  .narr{position:static;flex:0 0 auto;max-height:240px;overflow-y:auto;border-top:1px solid var(--border);border-radius:0 0 var(--r-lg) var(--r-lg);backdrop-filter:none;background:rgba(10,12,22,.97);}
+  .train-msg{max-width:90%;padding:20px 20px;}
+  .rp{max-height:none;}
+  .back-link{position:static;transform:none;margin-bottom:4px;}
+  .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}
+  .hd-title-row{flex-wrap:wrap;}
+}
 @media (prefers-reduced-motion:reduce){.bg-mesh::before{animation:none;}*{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
 </style>
 </head>
@@ -202,22 +254,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 </div>
 <div class="app">
   <div class="lp">
-    <div class="phase-bar" id="phaseBar"></div>
+    <div class="phase-wizard" id="phaseBar"></div>
     <div><div class="sec-t">Scenario</div>
-      <select class="scenario-sel" id="scenarioSel" onchange="setScenario(this.value)">
-        <option value="calc" selected>🧮 Beräkningsläge</option>
-        <option value="exam">📝 Klarar eleven provet?</option>
-        <option value="gym">💪 Blir träningen effektiv?</option>
-        <option value="abstract">🔬 Experimentläge</option>
-      </select>
+      <div class="scenario-cards" id="scenarioCards"></div>
     </div>
-    <div id="archSection"><div><div class="sec-t">Arkitektur</div><div class="layer-ctrl" id="layerCtrl"></div><div class="layer-add"><button class="lbtn" onclick="addLayer()">＋ Lager</button><button class="lbtn" style="color:var(--red);border-color:rgba(239,91,107,.4);" onclick="removeLayer()">− Lager</button></div></div></div>
+    <div id="archSection"><div><div class="sec-t">Arkitektur</div><div class="layer-ctrl" id="layerCtrl"></div><div class="layer-actions"><button class="layer-action-btn" onclick="addLayer()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg> Lägg till dolt lager</button><button class="layer-action-btn danger" onclick="removeLayer()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14"/></svg> Ta bort lager</button></div></div></div>
     <div id="varSection"><div class="sec-t">Indatavariabler</div><div class="var-list" id="varList"></div></div>
     <div id="inputSection" style="display:none;"><div><div class="sec-t">Indatavärden</div><div class="input-grid" id="inputGrid"></div></div></div>
     <div id="actSection"><div class="sec-t">Aktivering</div><div id="actContent"></div></div>
     <div id="controlArea"></div>
   </div>
-  <div class="center"><canvas id="cv"></canvas><div class="untrained-badge" id="untrainedBadge" style="display:none">OTRÄNAT NÄTVERK</div><div class="train-msg" id="trainMsg"></div><div class="narr" id="narr"><div class="ne">Tryck <strong>Träna modellen</strong> för att börja.</div></div></div>
+  <div class="center"><div class="canvas-wrap" id="canvasWrap"><canvas id="cv"></canvas><div class="untrained-badge" id="untrainedBadge" style="display:none">OTRÄNAT NÄTVERK</div><div class="train-msg" id="trainMsg"></div></div><div class="narr" id="narr"><div class="ne">Tryck <strong>Träna modellen</strong> för att börja.</div></div></div>
   <div class="rp">
     <div id="resultBoxes">
       <div class="result-box pred-only hero" style="display:none"><div class="result-label">Rätt svar (från data)</div><div class="result-val" id="targetVal" style="color:var(--gold)">–</div></div>
@@ -266,6 +313,8 @@ const CALCVARS=[{key:'a',name:'Input A',desc:'',unit:'',min:0,max:10,def:70,weig
 const ALLVARS=[{key:'study',name:'Pluggtimmar',desc:'inför provet',unit:'h',min:0,max:20,def:65,weight:0.40,realStep:0.5},{key:'attend',name:'Närvaro',desc:'av lektionerna',unit:'%',min:0,max:100,def:80,weight:0.42,realStep:5},{key:'sleep',name:'Sömn',desc:'natten innan',unit:'h',min:0,max:10,def:60,weight:0.12,realStep:0.5},{key:'food',name:'Frukost',desc:'på provdagen',unit:'kcal',min:0,max:800,def:50,weight:0.06,realStep:50}];
 const GYMVARS=[{key:'sleep',name:'Sömn',desc:'senaste natten',unit:'h',min:0,max:12,def:60,weight:0,optimal:0.6,realStep:0.5},{key:'meal',name:'Sedan måltid',desc:'timmar sedan',unit:'h',min:0,max:6,def:40,weight:0,optimal:0.35,realStep:0.5},{key:'stress',name:'Stressnivå',desc:'1–10',unit:'',min:1,max:10,def:30,weight:0,optimal:0.2,realStep:1},{key:'recovery',name:'Återhämtning',desc:'timmar sedan träning',unit:'h',min:0,max:72,def:50,weight:0,optimal:0.42,realStep:1}];
 const ABSVARS=[{key:'x1',name:'x₁',desc:'',unit:'',min:0,max:1,def:50,weight:0.5},{key:'x2',name:'x₂',desc:'',unit:'',min:0,max:1,def:30,weight:0.3},{key:'x3',name:'x₃',desc:'',unit:'',min:0,max:1,def:70,weight:0.15},{key:'x4',name:'x₄',desc:'',unit:'',min:0,max:1,def:20,weight:0.05}];
+const SCENARIOS=[{key:'calc',icon:'🧮',title:'Beräkningsläge',desc:'Öva på matematiken bakom neurala nätverk'},{key:'exam',icon:'📝',title:'Klarar eleven provet?',desc:'Träna en modell på fiktiv men realistisk elevdata'},{key:'gym',icon:'💪',title:'Blir träningen effektiv?',desc:'Träna och undersök en modell där sambanden inte är helt linjära'},{key:'abstract',icon:'🔬',title:'Experimentläge',desc:'Bygg och testa fritt'}];
+function renderScenarioCards(){const el=document.getElementById('scenarioCards');el.innerHTML=SCENARIOS.map(s=>`<div class="scenario-card ${curSc===s.key?'active':''}" onclick="setScenario('${s.key}')"><span class="sc-icon">${s.icon}</span><div><div class="sc-title">${s.title}</div>${s.desc?`<div class="sc-desc">${s.desc}</div>`:''}</div></div>`).join('');}
 let curSc='calc',varEnabled=[true,true],layers=[2,3,1],W=[],B=[],vals=[];
 let stepQueue=[],stepIdx=0,hlNeuron=null,hlEdges=[],phase='explore',trained=false,epoch=0,trainTimer=null;
 let stepHist=[],savedTrainData=null,wDeltas=null,isTraining=false,hiddenRelu=false,layerActs=[],lossHistory=[],seenGuides=new Set();
@@ -311,7 +360,14 @@ function showPredictGuide(){if(seenGuides.has('predict'))return;seenGuides.add('
 function openDataModal(){if(!savedTrainData)return;const av=activeVars();const hasUnits=av.some(v=>v.unit);let h='<table class="dtable-lg"><thead><tr>';if(hasUnits)for(const v of av)h+=`<th>${v.name}${v.unit?'<br><span style="font-weight:400;opacity:0.6">('+v.unit+')</span>':''}</th>`;for(const v of av)h+=`<th>${v.name}<br><span style="font-weight:400;opacity:0.6">(0–1)</span></th>`;h+=`<th>Resultat</th></tr></thead><tbody>`;for(let r=0;r<savedTrainData.xs.length;r++){h+='<tr>';if(hasUnits)for(let i=0;i<savedTrainData.xs[r].length;i++){const n=savedTrainData.xs[r][i];h+=`<td style="color:var(--text)">${fmtReal(n,av[i])}</td>`;}for(let i=0;i<savedTrainData.xs[r].length;i++)h+=`<td>${savedTrainData.xs[r][i].toFixed(2)}</td>`;h+=`<td class="${savedTrainData.ys[r]===1?'pass':'fail'}">${savedTrainData.ys[r]===1?'Ja':'Nej'}</td></tr>`;}h+='</tbody></table>';document.getElementById('dataModalContent').innerHTML=h;document.getElementById('dataModal').classList.add('show');}
 function closeDataModal(){document.getElementById('dataModal').classList.remove('show');}
 function drawLossSpark(){const cv=document.getElementById('lossSpark');if(!cv||!lossHistory.length)return;const dpr=devicePixelRatio||1;const w=cv.clientWidth||220,h=cv.clientHeight||40;cv.width=w*dpr;cv.height=h*dpr;const ctx=cv.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);const max=Math.max(...lossHistory),min=Math.min(...lossHistory);const range=Math.max(max-min,1e-9);const n=lossHistory.length;ctx.strokeStyle='rgba(180,195,220,0.12)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,h-0.5);ctx.lineTo(w,h-0.5);ctx.stroke();const grad=ctx.createLinearGradient(0,0,0,h);grad.addColorStop(0,'rgba(51,209,122,0.28)');grad.addColorStop(1,'rgba(51,209,122,0.02)');ctx.beginPath();ctx.fillStyle=grad;ctx.moveTo(0,h);for(let i=0;i<n;i++){const x=n>1?(i/(n-1))*w:w/2;const y=h-((lossHistory[i]-min)/range)*(h-4)-2;ctx.lineTo(x,y);}ctx.lineTo(w,h);ctx.closePath();ctx.fill();ctx.beginPath();ctx.strokeStyle='rgba(51,209,122,0.95)';ctx.lineWidth=1.8;ctx.lineJoin='round';for(let i=0;i<n;i++){const x=n>1?(i/(n-1))*w:w/2;const y=h-((lossHistory[i]-min)/range)*(h-4)-2;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.stroke();const lastX=n>1?w:w/2,lastY=h-((lossHistory[n-1]-min)/range)*(h-4)-2;ctx.beginPath();ctx.fillStyle='rgba(51,209,122,1)';ctx.arc(lastX-1,lastY,2.8,0,Math.PI*2);ctx.fill();}
-function renderPhaseBar(){const el=document.getElementById('phaseBar');if(isCalc()){el.innerHTML='<div class="phase active" style="flex:1;">🧮 Beräkningsläge</div>';return;}el.innerHTML=`<div class="phase ${phase==='train'?'active':trained?'done':''}" onclick="goPhase('train')"><span class="phase-num">1</span> Träna</div><div class="phase ${phase==='explore'?'active':''} ${!trained&&phase==='train'?'locked':''}" onclick="goPhase('explore')"><span class="phase-num">2</span> Utforska</div><div class="phase ${phase==='predict'?'active':''} ${!trained?'locked':''}" onclick="goPhase('predict')"><span class="phase-num">3</span> Förutsäg</div>`;}
+function renderPhaseBar(){const el=document.getElementById('phaseBar');if(isCalc()){el.innerHTML='<div class="pw-calc">🧮 Beräkningsläge</div>';return;}
+  const steps=[{k:'train',lbl:'Träna'},{k:'explore',lbl:'Utforska'},{k:'predict',lbl:'Förutsäg'}];
+  const order={train:0,explore:1,predict:2};const curIdx=order[phase];
+  const fillPct=curIdx===0?0:curIdx===1?50:100;
+  let h=`<div class="pw-track"><div class="pw-fill" style="width:${fillPct}%"></div></div>`;
+  for(const s of steps){const idx=order[s.k];const isActive=phase===s.k;const isDone=(s.k==='train'&&trained)||(s.k==='explore'&&idx<curIdx);const isLocked=s.k!=='train'&&!trained;
+    h+=`<div class="pw-step ${isActive?'active':''} ${isDone&&!isActive?'done':''} ${isLocked?'locked':''}" onclick="goPhase('${s.k}')"><div class="pw-dot"></div><div class="pw-label">${s.lbl}</div></div>`;}
+  el.innerHTML=h;}
 function goPhase(p){if(isCalc())return;if(p!=='train'&&!trained)return;setPhase(p);if(p==='explore')resetPass();if(p==='predict'){resetPass();forwardFull();updateOut();drawNet();showPredictGuide();}}
 function setPhase(p){phase=p;renderPhaseBar();
   document.getElementById('inputSection').style.display=(p==='train'&&!isCalc())?'none':'contents';
@@ -334,22 +390,25 @@ function updateTgt(){if(isCalc())return;document.getElementById('targetVal').tex
 function updateOut(){if(isCalc())return;const last=layers.length-1;if(!vals[last]||!vals[last][0].computed)return;const o=vals[last][0].act;const conf=Math.round(Math.max(o,1-o)*100),pred=o>0.5,tgt=targetFn(getIV()),correct=(pred?1:0)===tgt;document.getElementById('outputVal').textContent=curSc==='abstract'?`${o.toFixed(3)} → ${pred?'1':'0'}`:`${pred?'Ja':'Nej'} (${conf}%)`;document.getElementById('outputVal').style.color=pred?'var(--accent2)':'var(--red)';document.getElementById('verdictVal').innerHTML=correct?`<span class="verdict-pill ok">${ICON_CHECK} Rätt</span>`:`<span class="verdict-pill bad">✗ Fel</span> <span style="font-size:.7em;color:var(--dim2)">rätt: ${tgt===1?'Ja':'Nej'}</span>`;}
 function setScenario(k){curSc=k;hiddenRelu=false;layerActs=[];if(k==='calc'){varEnabled=[true,true];layers=[2,3,1];}else if(k==='gym'){varEnabled=[true,true,true,true];layers=[4,1,1];setTimeout(showGymIntro,100);}else{varEnabled=[true,true,false,false];layers=[2,1,1];}fullReset();}
 function showGymIntro(){if(seenGuides.has('gym'))return;seenGuides.add('gym');const msg=document.getElementById('trainMsg');msg.innerHTML=`<div class="tm-icon" style="font-size:1.8em">💪</div><div class="tm-title">Blir träningen effektiv?</div><div class="tm-text" style="text-align:left;">Till skillnad från prov-scenariot är sambanden här mer komplicerade – <strong>mer av allt är inte alltid bättre</strong>. För lite sömn är dåligt, men att sova halva dagen hjälper inte heller. Att äta precis innan är lika dåligt som att vara helt fastande.<br><br>Det här gör att nätverket behöver <strong style="color:var(--accent2)">dolda lager</strong> för att klara uppgiften. Varje neuron i det dolda lagret kan specialisera sig på att upptäcka ett visst samband – en neuron kanske lär sig känna igen "lagom sovmönster", medan en annan reagerar på kombinationen av stress och återhämtning. Utdataneuronen väger sedan ihop alla dessa signaler till ett slutgiltigt svar.<br><br>Testa gärna: träna nätverket och utforska sedan vilka vikter de olika neuronerna har fått!</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Jag förstår →</button></div>`;msg.classList.add('show');}
-function renderActSection(){const el=document.getElementById('actContent');const sec=document.getElementById('actSection');if(isCalc()){el.innerHTML='<div style="font-size:0.82em;color:var(--green);font-weight:600;padding:4px 0;">ReLU <span style="color:var(--dim);font-weight:400;">– max(0, x)</span></div>';sec.style.display='block';}else if(curSc==='exam'||curSc==='gym'){const lbl=hiddenRelu?'<span style="color:var(--green)">ReLU</span> (dolda) + <span style="color:var(--accent2)">Sigmoid</span> (utdata)':'<span style="color:var(--accent2)">Sigmoid</span> (alla lager)';el.innerHTML=`<div style="font-size:0.82em;font-weight:600;padding:4px 0;">${lbl}</div><button class="btn" style="margin-top:4px;font-size:0.72em;padding:5px 8px;flex:none;" onclick="toggleHiddenRelu()">${hiddenRelu?'↩ Sigmoid i alla lager':'⚡ Testa ReLU i dolda lager'}</button>`;sec.style.display='block';}else{ensureLayerActs();let h='';for(let l=1;l<layers.length;l++){const isOut=l===layers.length-1;const lbl=isOut?'Utdata':`Dolt ${l}`;const cur=layerActs[l]||'sigmoid';h+=`<div style="display:flex;align-items:center;gap:5px;margin-bottom:3px;"><span style="font-size:0.74em;color:var(--dim);min-width:50px;">${lbl}</span><select class="sel" style="font-size:0.76em;padding:3px 5px;" onchange="setLayerAct(${l},this.value)"><option value="sigmoid"${cur==='sigmoid'?' selected':''}>Sigmoid</option><option value="relu"${cur==='relu'?' selected':''}>ReLU</option><option value="tanh"${cur==='tanh'?' selected':''}>Tanh</option></select></div>`;}el.innerHTML=h;sec.style.display='block';}}
+function renderActSection(){const el=document.getElementById('actContent');const sec=document.getElementById('actSection');if(isCalc()){el.innerHTML='<div style="font-size:0.82em;color:var(--green);font-weight:600;padding:4px 0;">ReLU <span style="color:var(--dim);font-weight:400;">– max(0, x)</span></div>';sec.style.display='block';}else if(curSc==='exam'||curSc==='gym'){const lbl=hiddenRelu?'<span style="color:var(--green)">ReLU</span> (dolda) + <span style="color:var(--accent2)">Sigmoid</span> (utdata)':'<span style="color:var(--accent2)">Sigmoid</span> (alla lager)';el.innerHTML=`<div style="font-size:0.82em;font-weight:600;padding:4px 0;">${lbl}</div><button class="btn" style="margin-top:4px;font-size:0.72em;padding:5px 8px;flex:none;" onclick="toggleHiddenRelu()">${hiddenRelu?'↩ Sigmoid i alla lager':'⚡ Testa ReLU i dolda lager'}</button>`;sec.style.display='block';}else{ensureLayerActs();let h='';for(let l=1;l<layers.length;l++){const isOut=l===layers.length-1;const lbl=isOut?'Utdata':`Dolt ${l}`;const cur=layerActs[l]||'sigmoid';h+=`<div class="pill-row"><span class="pr-label">${lbl}</span><div class="pill-group"><button class="pill ${cur==='relu'?'active':''}" onclick="setLayerAct(${l},'relu')">ReLU</button><button class="pill ${cur==='sigmoid'?'active':''}" onclick="setLayerAct(${l},'sigmoid')">Sigmoid</button><button class="pill ${cur==='tanh'?'active':''}" onclick="setLayerAct(${l},'tanh')">Tanh</button></div></div>`;}el.innerHTML=h;sec.style.display='block';}}
 function renderVarList(){if(isCalc()){document.getElementById('varList').innerHTML='';return;}const cv=curVars();const el=document.getElementById('varList');let h='';const allOn=curSc==='gym';for(let i=0;i<cv.length;i++){const v=cv[i],on=varEnabled[i],base=allOn||i<2;h+=`<div class="var-toggle ${on?'on':''}" onclick="${base?'':'toggleVar('+i+')'}"><span class="vdot"></span><span class="vname">${v.name}</span>${v.desc?`<span class="vdesc">${v.desc}</span>`:''}${base?'<span style="font-size:0.8em;opacity:0.55;margin-left:auto" title="Alltid aktiv">🔒</span>':''}</div>`;}el.innerHTML=h;}
 function toggleVar(i){if(i<2)return;varEnabled[i]=!varEnabled[i];fullReset();}
 function toggleHiddenRelu(){hiddenRelu=!hiddenRelu;fullReset();}
 function ensureLayerActs(){while(layerActs.length<layers.length){layerActs.push('sigmoid');}}
 function setLayerAct(l,v){ensureLayerActs();layerActs[l]=v;fullReset();}
-function renderLC(){const el=document.getElementById('layerCtrl');let h='';for(let l=0;l<layers.length;l++){const isIn=l===0,isOut=l===layers.length-1,lb=isIn?'Indata':isOut?'Utdata':`Dolt ${l}`,cl=isIn?'in':isOut?'out':'';const canEdit=!isCalc();h+=`<div class="layer-row"><span class="layer-label ${cl}">${lb}</span>${canEdit&&!isIn&&!isOut?`<button class="lbtn" onclick="chN(${l},-1)">−</button>`:'<span style="width:22px"></span>'}<span class="layer-val">${layers[l]}</span>${canEdit&&!isIn&&!isOut?`<button class="lbtn" onclick="chN(${l},1)">+</button>`:'<span style="width:22px"></span>'}</div>`;}el.innerHTML=h;}
+function renderLC(){const el=document.getElementById('layerCtrl');let h='';for(let l=0;l<layers.length;l++){const isIn=l===0,isOut=l===layers.length-1,lb=isIn?'Indata':isOut?'Utdata':`Dolt ${l}`,cl=isIn?'in':isOut?'out':'';const canEdit=!isCalc();
+  if(canEdit&&!isIn&&!isOut){h+=`<div class="layer-row"><span class="layer-label">${lb}</span><div class="neuron-stepper"><button class="ns-btn" onclick="chN(${l},-1)">−</button><span class="ns-val">${layers[l]}</span><button class="ns-btn" onclick="chN(${l},1)">+</button></div></div>`;}
+  else{h+=`<div class="layer-row"><span class="layer-label ${cl}">${lb}</span><span class="layer-static-val">${layers[l]}</span></div>`;}
+  }el.innerHTML=h;}
 function renderIS(){const av=activeVars();layers[0]=av.length;let h='';for(let i=0;i<av.length;i++){const v=av[i],d=v.def;const step=v.isCalc?10:1;const snapDef=v.isCalc?Math.round(d/10)*10:d;h+=`<div class="input-row"><span class="input-label">${v.name}</span><input type="range" class="input-slider" id="inp${i}" min="0" max="100" step="${step}" value="${snapDef}" oninput="onInp()"><span class="input-val" id="inpV${i}">${fmtReal(snapDef/100,v)}</span></div>`;}document.getElementById('inputGrid').innerHTML=h;for(let i=0;i<av.length;i++)onInp(true);}
 function snapNorm(norm,vo){if(!vo.realStep)return norm;const range=vo.max-vo.min;const real=vo.min+norm*range;const snapped=Math.round(real/vo.realStep)*vo.realStep;return Math.max(0,Math.min(1,(snapped-vo.min)/range));}
 function onInp(silent){const av=activeVars();for(let i=0;i<layers[0];i++){const raw=parseFloat(document.getElementById('inp'+i).value)/100;const snapped=isCalc()?raw:snapNorm(raw,av[i]);document.getElementById('inpV'+i).textContent=fmtReal(snapped,av[i]);}if(!silent){if(isCalc()||phase==='explore'){initV();stepHist=[];hlNeuron=null;hlEdges=[];if(!isCalc())updateTgt();document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';document.getElementById('narr').innerHTML='<div class="ne">Tryck <strong>▶ Nästa</strong> för att beräkna.</div>';drawNet();}else if(phase==='predict'&&trained){initV();forwardFull();hlNeuron=null;hlEdges=[];updateTgt();updateOut();drawNet();document.getElementById('narr').innerHTML='<div class="ne">Indatavärdena ändrades – svar uppdaterat.</div>';}else{initV();updateTgt();drawNet();}}}
 function chN(l,d){if(isCalc())return;if(l===layers.length-1)return;layers[l]=Math.max(1,Math.min(8,layers[l]+d));fullReset();}
 function addLayer(){if(isCalc()||layers.length>=5)return;layers.splice(layers.length-1,0,2);fullReset();}
 function removeLayer(){if(isCalc()||layers.length<=2)return;layers.splice(layers.length-2,1);fullReset();}
-function fullReset(){if(trainTimer){clearInterval(trainTimer);trainTimer=null;}trained=false;isTraining=false;epoch=0;savedTrainData=null;wDeltas=null;lossHistory=[];totalWeightUpdates=0;document.getElementById('trainMsg').classList.remove('show');document.getElementById('lossBox').style.display='none';renderLC();renderVarList();renderIS();initW();initV();if(isCalc()){phase='explore';trained=true;setPhase('explore');}else{setPhase('train');}updateTgt();document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';document.getElementById('epochVal').textContent='0';document.getElementById('narr').innerHTML=isCalc()?'<div class="ne">Tryck <strong>▶ Nästa</strong> för att stega genom nätverket. Aktiveringsfunktion: <strong>ReLU</strong> – negativa värden blir 0.<br><span style="font-size:0.88em;opacity:0.85">💡 Tips: klicka på en <strong style="color:var(--green)">koppling</strong> för att ändra dess vikt, eller på en <strong>neuron</strong> för att ändra dess bias.</span></div>':'<div class="ne">Tryck <strong>Träna modellen</strong> för att börja.</div>';drawNet();}
+function fullReset(){if(trainTimer){clearInterval(trainTimer);trainTimer=null;}trained=false;isTraining=false;epoch=0;savedTrainData=null;wDeltas=null;lossHistory=[];totalWeightUpdates=0;document.getElementById('trainMsg').classList.remove('show');document.getElementById('lossBox').style.display='none';renderScenarioCards();renderLC();renderVarList();renderIS();initW();initV();if(isCalc()){phase='explore';trained=true;setPhase('explore');}else{setPhase('train');}updateTgt();document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';document.getElementById('epochVal').textContent='0';document.getElementById('narr').innerHTML=isCalc()?'<div class="ne">Tryck <strong>▶ Nästa</strong> för att stega genom nätverket. Aktiveringsfunktion: <strong>ReLU</strong> – negativa värden blir 0.<br><span style="font-size:0.88em;opacity:0.85">💡 Tips: klicka på en <strong style="color:var(--green)">koppling</strong> för att ändra dess vikt, eller på en <strong>neuron</strong> för att ändra dess bias.</span></div>':'<div class="ne">Tryck <strong>Träna modellen</strong> för att börja.</div>';drawNet();}
 function setupCv(){const cv=document.getElementById('cv'),p=cv.parentElement,dpr=devicePixelRatio||1,w=p.clientWidth,h=p.clientHeight;cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+'px';cv.style.height=h+'px';const ctx=cv.getContext('2d');ctx.scale(dpr,dpr);return{ctx,w,h};}
-function nPos(w,h){const nL=layers.length,px=90,py=25,g=(w-2*px)/Math.max(nL-1,1),ps=[];for(let l=0;l<nL;l++){const n=layers[l],x=px+l*g;const avail=h-2*py-40;const ng=Math.min(90,avail/(n));const sy=h/2-(n-1)*ng/2;const lp=[];for(let i=0;i<n;i++)lp.push({x,y:sy+i*ng});ps.push(lp);}return ps;}
+function nPos(w,h){const narrEl=document.getElementById('narr');const overlay=getComputedStyle(narrEl).position==='absolute';const bottomReserve=overlay?(narrEl.offsetHeight+16):10;const nL=layers.length,px=90,py=25,g=(w-2*px)/Math.max(nL-1,1),ps=[];for(let l=0;l<nL;l++){const n=layers[l],x=px+l*g;const avail=h-2*py-bottomReserve;const ng=Math.min(90,avail/(n));const sy=h/2-(n-1)*ng/2;const lp=[];for(let i=0;i<n;i++)lp.push({x,y:sy+i*ng});ps.push(lp);}return ps;}
 function triggerPulse(){pulseStart=performance.now();if(pulseAnim)cancelAnimationFrame(pulseAnim);const loop=()=>{const t=performance.now()-pulseStart;if(t>900){pulseAnim=null;drawNet();return;}drawNet();pulseAnim=requestAnimationFrame(loop);};loop();}
 function drawNet(){const{ctx,w,h}=setupCv();ctx.fillStyle='#080a12';ctx.fillRect(0,0,w,h);const pos=nPos(w,h);const maxN=Math.max(...layers);const R=maxN<=3?30:maxN<=4?26:maxN<=6?22:18;const op=(trained||isCalc())?1:0.55;const hlSet=new Set(hlEdges.map(e=>`${e.l}-${e.i}-${e.j}`));
 const pulseT=pulseAnim?Math.min(1,(performance.now()-pulseStart)/650):1;
