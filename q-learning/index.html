@@ -1,4 +1,4 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
@@ -8,50 +8,69 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--border2:#253050;--text:#e8ecf8;--dim:#9aa6c4;--subtle:#c2cde6;--accent:#4d80ff;--accent2:#6698ff;--gold:#ffd866;}
+:root{
+  --bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--border2:#253050;
+  --border-soft:rgba(255,255,255,.06);
+  --text:#e8ecf8;--dim:#9aa6c4;--subtle:#c2cde6;
+  --accent:#4d80ff;--accent2:#6698ff;--accent-dim:rgba(77,128,255,.14);
+  --gold:#ffd866;--green:#33d17a;--red:#ef5b6b;
+  --r-md:14px;--r-lg:20px;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-text-size-adjust:100%;}
 body{font-family:'DM Sans',sans-serif;font-size:13px;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
-.back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
-.back-link:hover{color:var(--text);border-color:var(--dim);}
-.lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
-.lang-link:hover{color:var(--text);border-color:var(--dim);}
-.lang-link .flag{font-size:1.05em;line-height:1;}
-.hd{width:100%;text-align:center;padding:12px 16px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
-.hd h1{font-family:'Syne',sans-serif;font-size:1.3em;font-weight:800;letter-spacing:-0.02em;margin-bottom:2px;}.hd h1 span{color:var(--accent2);}
-.hd p{color:var(--dim);font-size:0.8em;max-width:620px;margin:0 auto;line-height:1.4;}
-.page-container{max-width:1050px;margin:0 auto;padding:16px 20px 48px;position:relative;z-index:1;}
-.main-container{display:flex;gap:20px;}
+button{font-family:inherit;}
+:focus-visible{outline:2px solid var(--accent2);outline-offset:2px;border-radius:8px;}
+
+/* ── Header (matchar labyrinten) ── */
+.back-link,.lang-link{position:absolute;top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:.2s;white-space:nowrap;z-index:2;}
+.back-link{left:16px;} .lang-link{right:16px;}
+.back-link:hover,.lang-link:hover{color:var(--text);border-color:var(--dim);}
+.lang-link .lang-ico{width:14px;height:14px;flex-shrink:0;}
+.hd{width:100%;text-align:center;padding:30px 20px 26px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,.03),transparent);}
+.hd h1{font-family:'Syne',sans-serif;font-size:1.55em;font-weight:800;letter-spacing:-.02em;margin-bottom:10px;text-shadow:0 0 34px rgba(102,152,255,.22);}
+.hd h1 span{color:var(--accent2);}
+.hd p{color:var(--dim);font-size:.86em;font-weight:400;max-width:520px;margin:0 auto;line-height:1.6;}
+
+.page-container{max-width:1050px;margin:0 auto;padding:18px 20px 48px;position:relative;z-index:1;width:100%;}
+.main-container{display:flex;gap:22px;}
 .left-wrapper{width:500px;display:flex;flex-direction:column;align-items:center;}
-#canvas{border:2px solid var(--border);border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.4);cursor:pointer;}
-.controls{margin-top:12px;width:100%;}
-.legend-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:10px;font-size:11px;color:var(--dim);}
+
+#canvas{border:1px solid #1c2540;border-radius:14px;cursor:pointer;box-shadow:0 20px 60px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.03),0 0 0 1px rgba(77,128,255,.06);}
+.controls{margin-top:14px;width:100%;}
+.legend-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:12px;font-size:11px;color:var(--dim);}
 .legend-row .lg-item{display:inline-flex;align-items:center;gap:5px;}
 .lg-dot{width:11px;height:11px;border-radius:50%;display:inline-block;}
 .lg-sq{width:11px;height:11px;border-radius:2px;display:inline-block;}
 .lg-grad{display:inline-flex;align-items:center;gap:6px;margin-left:auto;}
-.lg-bar{width:80px;height:10px;border-radius:3px;display:inline-block;background:linear-gradient(90deg,#ff6a5e,#ffffff,#6698ff);border:1px solid var(--border);}
-.controls-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:6px;align-items:center;}
-button{padding:7px 14px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.04em;cursor:pointer;transition:background .2s,box-shadow .2s;}
+.lg-bar{width:80px;height:10px;border-radius:3px;display:inline-block;background:linear-gradient(90deg,#ec423a,#566078,#78c2ff);border:1px solid var(--border);}
+.controls-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:8px;align-items:center;}
+
+button{padding:7px 14px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:11px;font-weight:600;letter-spacing:.04em;cursor:pointer;transition:background .18s,box-shadow .18s,transform .08s;}
 button:hover{background:var(--accent2);box-shadow:0 0 12px rgba(77,128,255,.3);}
+button:active{transform:translateY(1px);}
 button:disabled{background:var(--surface2);color:var(--dim);cursor:not-allowed;box-shadow:none;}
-#pauseButton,#resetButton{background:var(--surface2);color:var(--subtle);border:1px solid var(--border);}
-#pauseButton:hover,#resetButton:hover{border-color:var(--accent);color:var(--text);background:var(--surface2);box-shadow:none;}
-#qToggleButton,#policyButton{background:var(--surface2);color:var(--subtle);border:1px solid var(--border);}
+.primary{background:linear-gradient(180deg,#5b8bff,#3f6fe6);box-shadow:0 2px 12px rgba(77,128,255,.38);}
+.primary:hover{background:linear-gradient(180deg,#6b97ff,#4a78ec);box-shadow:0 4px 18px rgba(77,128,255,.55);}
+#pauseButton,#resetButton,#qToggleButton,#policyButton{background:var(--surface2);color:var(--subtle);border:1px solid var(--border);}
+#pauseButton:hover,#resetButton:hover,#qToggleButton:hover,#policyButton:hover{border-color:var(--accent);color:var(--text);background:var(--surface2);box-shadow:none;}
 .icon-btn{width:34px;height:30px;padding:0;font-size:14px;line-height:1;display:inline-flex;align-items:center;justify-content:center;}
 .icon-btn.primary{background:var(--accent);color:#fff;}
 .icon-btn.primary:hover{background:var(--accent2);}
-#qToggleButton.active,#policyButton.active{background:rgba(77,128,255,.20);border-color:var(--accent);color:var(--text);}
-#qToggleButton:hover,#policyButton:hover{border-color:var(--accent);color:var(--text);background:var(--surface2);box-shadow:none;}
+#qToggleButton.active,#policyButton.active{background:rgba(77,128,255,.20);border-color:var(--accent);color:var(--text);box-shadow:0 0 12px rgba(77,128,255,.3);}
+
 label{font-size:11px;color:var(--dim);display:flex;align-items:center;gap:6px;}
-input[type="range"]{accent-color:var(--accent);cursor:pointer;}
+input[type="range"]{accent-color:var(--accent2);cursor:pointer;}
 input[type="checkbox"]{accent-color:var(--accent);width:13px;height:13px;}
 input[type="number"]{background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:4px 6px;font-family:'JetBrains Mono',monospace;font-size:12px;outline:none;}
 input[type="number"]:focus{border-color:var(--accent);}
-input[type="number"]:disabled{opacity:.5;}
-#infoLabel{font-size:12px;font-weight:600;color:var(--subtle);background:var(--surface);border:1px solid var(--border);padding:5px 12px;border-radius:6px;}
-#infoLabel.converged{color:#34d399;border-color:rgba(52,211,153,.45);background:rgba(52,211,153,.10);}
-#logText{width:100%;height:180px;margin-top:10px;overflow-y:auto;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:6px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.5;}
+#infoLabel{font-size:12px;font-weight:600;color:var(--subtle);background:var(--surface);border:1px solid var(--border);padding:5px 12px;border-radius:8px;}
+#infoLabel.converged{color:#34d399;border-color:rgba(52,211,153,.45);background:rgba(52,211,153,.10);box-shadow:0 0 16px rgba(52,211,153,.3);}
+
+#logText{width:100%;height:180px;margin-top:12px;overflow-y:auto;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.5;box-shadow:0 6px 22px rgba(0,0,0,.32);}
 #logText::-webkit-scrollbar{width:5px;}#logText::-webkit-scrollbar-track{background:transparent;}#logText::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
 .log-row{padding:3px 7px;border-radius:4px;color:var(--dim);white-space:normal;word-break:break-word;}
 .log-row+.log-row{margin-top:1px;}
@@ -62,112 +81,190 @@ input[type="number"]:disabled{opacity:.5;}
 .log-row.ev-penalty{color:#ff8a7a;}
 .log-row.ev-info{color:var(--accent2);}
 .log-row .lq{color:var(--text);}
-#log-popover{position:fixed;z-index:200;max-width:300px;background:var(--surface2);border:1px solid var(--border2);border-radius:9px;padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:12px;line-height:1.6;color:var(--subtle);display:none;box-shadow:0 8px 30px rgba(0,0,0,.55);}
+#log-popover{position:fixed;z-index:400;max-width:300px;background:var(--surface2);border:1px solid var(--border2);border-radius:9px;padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:12px;line-height:1.6;color:var(--subtle);display:none;box-shadow:0 8px 30px rgba(0,0,0,.55);}
 #log-popover.show{display:block;}
 #log-popover strong{color:var(--text);}
-#paramInfo{font-size:12px;color:var(--subtle);}
-.param-panel{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin-top:4px;}
-.param-head{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;}
+
+/* ── Parameterpanel ── */
+.param-panel{width:100%;background:linear-gradient(180deg,rgba(77,128,255,.06),rgba(77,128,255,0) 55%),var(--surface);border:1px solid #23304f;border-radius:12px;padding:14px 16px;margin-top:6px;box-shadow:0 6px 22px rgba(0,0,0,.32);}
+.param-head{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;}
 .param-row{display:grid;grid-template-columns:1fr 130px 46px;gap:10px;align-items:center;margin-bottom:12px;}
 .param-label{font-size:12px;color:var(--subtle);line-height:1.3;}
 .param-label .psym{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--text);font-size:13px;margin-right:3px;}
 .param-row input[type="range"]{width:100%;}
-.param-val{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--accent2);text-align:right;}
+.param-val{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#9fc0ff;text-align:right;text-shadow:0 0 12px rgba(102,152,255,.5);}
 .epsilon-meter{margin-top:4px;padding-top:12px;border-top:1px solid var(--border);}
 .em-caption{font-size:10.5px;color:var(--dim);margin-bottom:6px;}
-.em-track{display:flex;height:16px;border-radius:5px;overflow:hidden;border:1px solid var(--border);}
-.em-explore{background:var(--gold);transition:width .25s ease;}
-.em-exploit{background:var(--accent);transition:width .25s ease;}
+.em-track{display:flex;height:20px;border-radius:7px;overflow:hidden;border:1px solid #20294a;box-shadow:inset 0 1px 3px rgba(0,0,0,.55);background:#0c1020;}
+.em-explore{background:linear-gradient(180deg,#ffe48a,#f0bd49);box-shadow:0 0 14px rgba(255,216,102,.4);transition:width .25s ease;}
+.em-exploit{background:linear-gradient(180deg,#74a2ff,#3f6fe0);box-shadow:0 0 14px rgba(77,128,255,.4);transition:width .25s ease;}
 .em-nums{display:flex;justify-content:space-between;font-size:10.5px;margin-top:6px;}
-.em-nums b{font-family:'JetBrains Mono',monospace;font-size:11.5px;}
+.em-nums b{font-family:'JetBrains Mono',monospace;font-size:12px;}
 .em-nums .em-l{color:var(--gold);}.em-nums .em-r{color:var(--accent2);}
+
+/* ── Begreppssystem (klickbara termer) ── */
 .term{border-bottom:1px dotted var(--accent2);cursor:help;color:inherit;transition:background .15s,border-color .15s;border-radius:2px;}
 .term:hover,.term:focus{border-bottom-color:var(--accent);background:rgba(77,128,255,.12);outline:none;}
-#term-popover{position:fixed;z-index:200;max-width:300px;background:var(--surface2);border:1px solid var(--border2);border-radius:9px;padding:13px 15px;box-shadow:0 8px 30px rgba(0,0,0,.55);font-size:12.5px;line-height:1.65;color:var(--subtle);display:none;}
+#term-popover{position:fixed;z-index:400;max-width:300px;background:var(--surface2);border:1px solid var(--border2);border-radius:9px;padding:13px 15px;box-shadow:0 8px 30px rgba(0,0,0,.55);font-size:12.5px;line-height:1.65;color:var(--subtle);display:none;}
 #term-popover.show{display:block;}
 #term-popover .tp-term{display:block;font-weight:700;color:var(--text);margin-bottom:5px;font-size:12.5px;}
 #term-popover .tp-term::before{content:'›';color:var(--accent2);margin-right:6px;}
-.desc-lead{color:var(--subtle);margin-bottom:14px;line-height:1.7;}
-.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin-bottom:14px;}
+
+/* ── Inlärningskurva ── */
+.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:16px;box-shadow:0 6px 22px rgba(0,0,0,.32);}
 .chart-title{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--subtle);margin-bottom:10px;}
 .chart-sub{font-weight:400;color:var(--dim);letter-spacing:0;}
 #chartCanvas{width:100%;height:auto;display:block;border-radius:4px;}
 .chart-empty{font-size:11.5px;color:var(--dim);line-height:1.6;margin-top:8px;}
-.formula-box{background:var(--bg);border:1px solid var(--border2);border-radius:8px;padding:16px;margin-bottom:14px;}
-.formula-title{font-size:10.5px;letter-spacing:.06em;color:var(--dim);margin-bottom:12px;text-transform:uppercase;font-weight:700;}
-.fx-hot{border-radius:6px;padding:4px;margin:-4px -4px 0;cursor:help;transition:background .15s;}
-.fx-hot:hover{background:rgba(77,128,255,.08);}
-.fx-hint{text-transform:none;letter-spacing:0;font-weight:400;color:var(--accent2);opacity:.8;}
-#qFormula{overflow-x:auto;overflow-y:hidden;}
-.pf{font-family:'JetBrains Mono',monospace;font-size:1.15em;font-weight:600;color:var(--text);white-space:nowrap;letter-spacing:.01em;text-align:center;padding:6px 2px;}
+
+/* ── Trigger-knappar för glaskorten ── */
+.launch-label{font-size:.66em;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);font-weight:600;margin-bottom:10px;}
+.info-launch{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.launch-card{grid-column:span 1;display:flex;align-items:center;gap:12px;text-align:left;
+  background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.008)),var(--surface);
+  border:1px solid var(--border);border-radius:14px;padding:13px 14px;cursor:pointer;color:var(--text);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+  transition:border-color .18s,transform .12s,box-shadow .18s,background .18s;letter-spacing:0;}
+.launch-card.wide{grid-column:1 / -1;}
+.launch-card:hover{border-color:rgba(77,128,255,.5);transform:translateY(-1px);box-shadow:0 10px 26px rgba(77,128,255,.12),inset 0 1px 0 rgba(255,255,255,.06);}
+.launch-card:active{transform:translateY(0);}
+.lc-ico{width:38px;height:38px;flex-shrink:0;border-radius:11px;background:var(--accent-dim);color:var(--accent2);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(77,128,255,.14);}
+.lc-ico svg{width:19px;height:19px;}
+.lc-txt{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.lc-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13.5px;letter-spacing:-.01em;line-height:1.2;}
+.lc-sub{font-size:10.5px;color:var(--dim);line-height:1.35;}
+.lc-arrow{margin-left:auto;color:var(--dim);flex-shrink:0;transition:transform .2s var(--ease-spring),color .2s;}
+.launch-card:hover .lc-arrow{transform:translateX(3px);color:var(--accent2);}
+.lc-arrow svg{width:15px;height:15px;display:block;}
+
+/* ── Glaskort (identiskt med labyrinten) ── */
+.concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
+.concept-backdrop.show{opacity:1;pointer-events:auto;}
+.concept-card{position:fixed;top:50%;left:50%;z-index:301;width:390px;max-width:90vw;
+  perspective:1000px;
+  transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
+  transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .26s var(--ease-out);}
+.concept-card.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
+.concept-card-inner{position:relative;text-align:center;transform-style:preserve-3d;
+  background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;
+  transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
+  transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);
+  will-change:transform;max-height:86vh;overflow-y:auto;}
+.concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+  padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,216,102,.15) 45%,transparent 65%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::before{opacity:1;}
+.concept-card-inner::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.09),transparent 60%);
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::after{opacity:1;}
+.concept-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);z-index:3;transform:translateZ(30px);padding:0;}
+.concept-close:hover{border-color:var(--red);color:var(--red);transform:translateZ(30px) rotate(90deg);background:rgba(255,255,255,.03);box-shadow:none;}
+.concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
+.concept-icon svg{width:28px;height:28px;}
+.concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
+.concept-def{font-size:.88em;line-height:1.6;color:var(--dim);position:relative;z-index:3;transform:translateZ(18px);transform-style:preserve-3d;}
+.concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;font-weight:600;}
+.concept-def .term{color:inherit;}
+
+/* 3D-rutor i glaskorten */
+.gc-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 8px;margin:16px 0 4px;transform-style:preserve-3d;}
+.gc-grid-3{grid-template-columns:repeat(3,minmax(0,1fr));}
+.gc-grid-2{grid-template-columns:repeat(2,minmax(0,1fr));}
+.gc-cell{display:flex;flex-direction:column;align-items:center;gap:7px;transform-style:preserve-3d;}
+.t3{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;position:relative;
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5);
+  background:linear-gradient(155deg,color-mix(in srgb,var(--tc) 72%,#fff) 0%,var(--tc) 44%,color-mix(in srgb,var(--tc) 60%,#000) 100%);
+  box-shadow:0 14px 24px -8px color-mix(in srgb,var(--tc) 55%,rgba(0,0,0,.65)),0 3px 8px rgba(0,0,0,.35),
+    inset 0 1.5px 0 rgba(255,255,255,.42),inset 0 -3px 6px rgba(0,0,0,.32),
+    0 0 0 1px color-mix(in srgb,var(--tc) 40%,rgba(255,255,255,.1));
+  transform:translateZ(16px) rotateX(9deg);}
+.t3.round{border-radius:50%;}
+.t3::after{content:'';position:absolute;left:3px;right:3px;top:2px;height:40%;border-radius:9px 9px 50% 50%/9px 9px 100% 100%;
+  background:linear-gradient(rgba(255,255,255,.32),rgba(255,255,255,0));pointer-events:none;}
+.t3.round::after{border-radius:50% 50% 50% 50%/60% 60% 40% 40%;left:5px;right:5px;top:4px;height:44%;}
+.t3.big{width:64px;height:64px;border-radius:16px;font-size:22px;transform:translateZ(22px) rotateX(9deg);}
+.t3-lab{font-size:11px;font-weight:700;color:var(--text);letter-spacing:.01em;line-height:1.2;text-align:center;}
+.t3-sub{font-size:9.5px;color:var(--dim);margin-top:-4px;font-family:'JetBrains Mono',monospace;}
+
+.gc-ctrl{margin-top:16px;display:flex;flex-direction:column;gap:10px;text-align:left;}
+.gc-ctrl-row{display:flex;align-items:flex-start;gap:10px;font-size:11.5px;color:var(--dim);line-height:1.5;}
+.mbtn{flex-shrink:0;min-width:82px;text-align:center;padding:4px 9px;border:1px solid var(--border);border-radius:8px;
+  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02));color:var(--subtle);
+  font-size:10.5px;font-weight:700;box-shadow:0 2px 5px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.08);font-family:'JetBrains Mono',monospace;}
+.mbtn.pos{color:#7ee6a8;border-color:rgba(51,209,122,.35);}
+.mbtn.neg{color:#ff9b8f;border-color:rgba(239,91,107,.35);}
+.gc-note{font-size:11.5px;color:var(--dim);line-height:1.65;margin-top:14px;text-align:left;}
+.gc-lead{font-size:.92em;line-height:1.7;color:var(--dim);text-align:left;}
+.gc-btn{width:100%;margin-top:18px;padding:11px;border:none;border-radius:11px;font-size:12.5px;font-weight:700;cursor:pointer;
+  background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;
+  box-shadow:0 8px 22px rgba(77,128,255,.32),inset 0 1px 0 rgba(255,255,255,.25);transition:filter .16s,transform .08s;}
+.gc-btn:hover{filter:brightness(1.07);background:linear-gradient(180deg,#5b8bff,#3f6fe6);box-shadow:0 8px 22px rgba(77,128,255,.32),inset 0 1px 0 rgba(255,255,255,.25);}
+.gc-btn:active{transform:translateY(1px);}
+
+/* Formel i glaskort */
+.gc-formula{background:var(--bg);border:1px solid var(--border2);border-radius:12px;padding:14px 10px;margin:16px 0 4px;overflow-x:auto;}
+.pf{font-family:'JetBrains Mono',monospace;font-size:1.02em;font-weight:600;color:var(--text);white-space:nowrap;letter-spacing:.01em;text-align:center;}
 .pf sub{font-size:.72em;}
 .pf .fa{color:#ffd866;} .pf .fr{color:#4ade80;} .pf .fg{color:#c084fc;} .pf .fm{color:#6698ff;}
-.formula-legend{display:flex;flex-direction:column;gap:7px;margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:11.5px;color:var(--subtle);line-height:1.5;}
-.formula-legend .fp-dot{display:inline-block;width:9px;height:9px;border-radius:2px;vertical-align:middle;margin-right:6px;}
-.info-sec{border:1px solid var(--border);border-radius:8px;margin-bottom:8px;background:var(--surface);overflow:hidden;}
-.info-sec>summary{padding:11px 14px;cursor:pointer;font-weight:600;color:var(--subtle);font-size:12px;list-style:none;display:flex;justify-content:space-between;align-items:center;transition:color .2s;}
-.info-sec>summary::-webkit-details-marker{display:none;}
-.info-sec>summary:hover{color:var(--text);}
-.info-sec>summary::after{content:'▸';color:var(--dim);transition:transform .2s;}
-.info-sec[open]>summary::after{transform:rotate(90deg);}
-.info-sec .sec-body{padding:2px 14px 12px;}
-.info-sec ul{margin:0 0 0 18px;}.info-sec li{margin-bottom:5px;}
-.right-wrapper{width:500px;}
-#description{width:100%;padding:18px 20px;border:1px solid var(--border);font-size:12px;line-height:1.8;border-radius:8px;background:var(--surface);color:var(--dim);}
-#description p{margin-bottom:8px;}#description strong{color:var(--text);}#description em{color:var(--text);font-style:normal;}
-#description ul{margin:0 0 10px 18px;}#description li{margin-bottom:4px;}
+.formula-legend{display:flex;flex-direction:column;gap:8px;margin-top:16px;text-align:left;font-size:11.5px;color:var(--subtle);line-height:1.5;}
+.formula-legend .fp-dot{display:inline-block;width:9px;height:9px;border-radius:2px;vertical-align:middle;margin-right:7px;}
+
+/* ── Hover-info över canvas ── */
 #hoverInfo{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--subtle);display:none;pointer-events:none;z-index:100;box-shadow:0 4px 16px rgba(0,0,0,.4);font-family:'JetBrains Mono',monospace;}
-.maze-select{font-family:'DM Sans',sans-serif;font-size:11px;padding:6px 10px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;outline:none;}
+.maze-select{font-family:'DM Sans',sans-serif;font-size:11px;padding:6px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;outline:none;}
 .maze-select:focus{border-color:var(--accent);}
+.right-wrapper{width:500px;}
+
+/* ── Intro-overlay (matchar labyrinten) ── */
 .overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
 .overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:540px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
 @keyframes overlayIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
-.overlay-card h2{font-family:'Syne',sans-serif;font-size:1.4em;font-weight:800;letter-spacing:-0.01em;margin-bottom:6px;}.overlay-card h2 span{color:var(--accent2);}
-.overlay-card .sub{font-size:0.87em;color:var(--dim);line-height:1.6;margin-bottom:14px;}
+.overlay-card h2{font-family:'Syne',sans-serif;font-size:1.4em;font-weight:800;letter-spacing:-.01em;margin-bottom:8px;}.overlay-card h2 span{color:var(--accent2);}
+.overlay-card .sub{font-size:.87em;color:var(--dim);line-height:1.6;margin-bottom:18px;}
 .overlay-card .steps{display:flex;flex-direction:column;gap:12px;margin:14px 0;text-align:left;}
-.overlay-card .step{display:flex;gap:12px;align-items:flex-start;font-size:0.85em;color:var(--dim);line-height:1.55;}
+.overlay-card .step{display:flex;gap:12px;align-items:flex-start;font-size:.85em;color:var(--dim);line-height:1.55;}
 .overlay-card .step strong{color:var(--text);}
-.step-num{width:25px;height:25px;border-radius:50%;background:rgba(77,128,255,0.14);color:var(--accent2);font-weight:700;font-size:0.8em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.28);padding-top:1px;}
-.overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s cubic-bezier(.34,1.56,.64,1);}
+.step-num{width:25px;height:25px;border-radius:50%;background:rgba(77,128,255,.14);color:var(--accent2);font-weight:700;font-size:.8em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,.28);padding-top:1px;}
+.overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:18px;font-size:.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 24px rgba(77,128,255,.28);}
 .overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
 .overlay-btn svg{width:15px;height:15px;flex-shrink:0;}
-.overlay-tip{margin-top:14px;font-size:0.8em;color:var(--dim);text-align:center;line-height:1.55;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;}
+.overlay-tip{margin-top:16px;font-size:.8em;color:var(--dim);text-align:center;line-height:1.55;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;}
 .overlay-tip strong{color:var(--text);}
-
-/* Animerad mini-förhandsvisning: agenten hoppar mot mål och plockar ett mynt på vägen */
 .intro-viz{display:block;width:200px;height:92px;margin:0 auto 14px;}
 .intro-viz .iv-cell{fill:rgba(255,255,255,.05);stroke:rgba(255,255,255,.15);stroke-width:1.5;}
 .intro-viz .iv-goal{fill:rgba(52,199,89,.18);stroke:#34c759;}
 .intro-viz .iv-coin{fill:var(--gold);filter:drop-shadow(0 0 4px rgba(255,216,102,.7));}
 .intro-viz .iv-agent{fill:#ff9b3d;filter:drop-shadow(0 0 6px rgba(255,155,60,.8));}
-@media(max-width:1060px){.main-container{flex-direction:column;align-items:center;}.left-wrapper,.right-wrapper{width:100%;max-width:520px;}.back-link{position:static;transform:none;margin-bottom:4px;}.lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}.hd{padding:10px 16px 8px;}}
-/* ── Visuell polish ── */
-.hd h1{text-shadow:0 0 34px rgba(102,152,255,.22);}
-#canvas{border:1px solid #1c2540;border-radius:12px;box-shadow:0 12px 44px rgba(0,0,0,.6),0 0 0 1px rgba(77,128,255,.08);}
-.chart-card,.info-sec,.param-panel,#description,#logText{box-shadow:0 6px 22px rgba(0,0,0,.32);}
-.param-panel{background:linear-gradient(180deg,rgba(77,128,255,.06),rgba(77,128,255,0) 55%),var(--surface);border-color:#23304f;}
-.param-head{color:var(--accent2);}
-.param-val{color:#9fc0ff;text-shadow:0 0 12px rgba(102,152,255,.5);transition:color .15s;}
-.param-row input[type=range]{accent-color:var(--accent2);}
-.em-track{height:20px;border-radius:7px;border:1px solid #20294a;box-shadow:inset 0 1px 3px rgba(0,0,0,.55);background:#0c1020;}
-.em-explore{background:linear-gradient(180deg,#ffe48a,#f0bd49);box-shadow:0 0 14px rgba(255,216,102,.4);}
-.em-exploit{background:linear-gradient(180deg,#74a2ff,#3f6fe0);box-shadow:0 0 14px rgba(77,128,255,.4);}
-.em-nums b{font-size:12px;}
-button{transition:background .18s ease,box-shadow .18s ease,transform .08s ease;}
-button:active{transform:translateY(1px);}
-.primary{background:linear-gradient(180deg,#5b8bff,#3f6fe6);box-shadow:0 2px 12px rgba(77,128,255,.38);}
-.primary:hover{background:linear-gradient(180deg,#6b97ff,#4a78ec);box-shadow:0 4px 18px rgba(77,128,255,.55);}
-.lg-bar{background:linear-gradient(90deg,#ec423a,#566078,#78c2ff);}
-.pre-train .chart-card,.pre-train #logText,.pre-train .log-label{opacity:.4;filter:saturate(.6);transition:opacity .5s ease,filter .5s ease;pointer-events:none;}
+
+.pre-train .chart-card,.pre-train #logText{opacity:.4;filter:saturate(.6);transition:opacity .5s ease,filter .5s ease;pointer-events:none;}
 .chart-card,#logText{transition:opacity .5s ease,filter .5s ease;}
-.toggle-btn.active,#qToggleButton.active,#policyButton.active{box-shadow:0 0 12px rgba(77,128,255,.3);}
-#infoLabel.converged{box-shadow:0 0 16px rgba(52,211,153,.3);}
+
+@media(max-width:1060px){
+  .main-container{flex-direction:column;align-items:center;}
+  .left-wrapper,.right-wrapper{width:100%;max-width:520px;}
+  .back-link,.lang-link{position:static;transform:none;margin:0 4px 6px;}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;}
+}
 </style>
 </head>
 <body>
-<div class="hd"><a class="back-link" href="/">← AI-aktiviteter</a><h1><span>Q-learning</span> simulering</h1><p>Träna en agent att navigera ett rutnät med förstärkningsinlärning – se hur Q-värdena uppdateras i realtid.</p><a class="lang-link" href="https://www.ai-aktiviteter.se/q-learning_ENG"><span class="flag">🇬🇧</span> English</a></div>
-<div class="page-container"><div class="main-container pre-train" id="mainContainer"><div class="left-wrapper"><canvas id="canvas"></canvas>
+<div class="hd">
+  <a class="back-link" href="/">← AI-aktiviteter</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/q-learning_ENG">
+    <svg class="lang-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.7 2.6 4 5.8 4 9s-1.3 6.4-4 9c-2.7-2.6-4-5.8-4-9s1.3-6.4 4-9z"/></svg>
+    English</a>
+  <h1><span>Q-learning</span> simulering</h1>
+  <p>Träna en agent att navigera ett rutnät med förstärkningsinlärning – se hur Q-värdena uppdateras i realtid.</p>
+</div>
+
+<div class="page-container"><div class="main-container pre-train" id="mainContainer">
+<div class="left-wrapper"><canvas id="canvas"></canvas>
 <div class="legend-row">
 <span class="lg-item"><span class="lg-dot" style="background:orange"></span>Agent</span>
 <span class="lg-item"><span class="lg-dot" style="background:#34c759"></span>Mål</span>
@@ -175,7 +272,11 @@ button:active{transform:translateY(1px);}
 <span class="lg-item"><span class="lg-sq" style="background:#111;border:1px solid #333"></span>Hinder</span>
 <span class="lg-grad"><span>lågt Q</span><span class="lg-bar"></span><span>högt Q</span></span>
 </div>
-<div class="controls"><div class="controls-row"><select class="maze-select" id="mazeSelect"><option value="0">Standardmiljö</option><option value="1">Ormen</option><option value="2">Labyrinten</option></select><button id="trainButton" class="primary" title="Starta träning">Starta träning</button><button id="pauseButton" class="icon-btn" title="Pausa" aria-label="Pausa">⏸</button><button id="resetButton" class="icon-btn" title="Återställ träning" aria-label="Återställ träning">↻</button><div id="infoLabel">Episod: 0, Steg: 0</div></div><div class="controls-row"><button id="qToggleButton" class="toggle-btn">Q-värden</button><button id="policyButton" class="toggle-btn">Policy</button><button id="testButton" style="display:none;">Testa modellen</button></div><div class="controls-row"><label>Hastighet <input type="range" id="speedSlider" min="0" max="10000" value="0"></label><label><input type="checkbox" id="stepModeCheckbox"> Stegvis</label><button id="nextStepButton" disabled>Nästa steg</button><label style="margin-left:auto;"><input type="checkbox" id="editModeCheckbox"> Redigera</label></div><div class="param-panel" id="paramInfo">
+<div class="controls">
+<div class="controls-row"><select class="maze-select" id="mazeSelect"><option value="0">Standardmiljö</option><option value="1">Ormen</option><option value="2">Labyrinten</option></select><button id="trainButton" class="primary" title="Starta träning">Starta träning</button><button id="pauseButton" class="icon-btn" title="Pausa" aria-label="Pausa">⏸</button><button id="resetButton" class="icon-btn" title="Återställ träning" aria-label="Återställ träning">↻</button><div id="infoLabel">Episod: 0, Steg: 0</div></div>
+<div class="controls-row"><button id="qToggleButton" class="toggle-btn">Q-värden</button><button id="policyButton" class="toggle-btn">Policy</button><button id="testButton" style="display:none;">Testa modellen</button></div>
+<div class="controls-row"><label>Hastighet <input type="range" id="speedSlider" min="0" max="10000" value="0"></label><label><input type="checkbox" id="stepModeCheckbox"> Stegvis</label><button id="nextStepButton" disabled>Nästa steg</button><label style="margin-left:auto;"><input type="checkbox" id="editModeCheckbox"> Redigera</label></div>
+<div class="param-panel" id="paramInfo">
 <div class="param-head">Parametrar – ändra när som helst, även under träning</div>
 <div class="param-row"><div class="param-label"><span class="term" data-term="alpha"><span class="psym">α</span> inlärningshastighet</span></div><input type="range" id="alphaParam" min="0.01" max="1" step="0.01" value="0.50"><div class="param-val" id="alphaVal">0.50</div></div>
 <div class="param-row"><div class="param-label"><span class="term" data-term="gamma"><span class="psym">γ</span> diskonteringsfaktor</span></div><input type="range" id="gammaParam" min="0" max="0.99" step="0.01" value="0.95"><div class="param-val" id="gammaVal">0.95</div></div>
@@ -186,52 +287,53 @@ button:active{transform:translateY(1px);}
 <div class="em-nums"><span class="em-l"><span class="term" data-term="utforskning">Utforskning</span> <b id="emExploreNum">90%</b></span><span class="em-r"><span class="term" data-term="utnyttjande">Utnyttjande</span> <b id="emExploitNum">10%</b></span></div>
 </div>
 </div></div><div id="logText"></div></div>
-<div class="right-wrapper"><div class="chart-card">
-        <div class="chart-title">Inlärningskurva <span class="chart-sub">– antal steg tills målet nås per episod</span></div>
-        <canvas id="chartCanvas" width="460" height="150"></canvas>
-        <div id="chartEmpty" class="chart-empty">Starta en träning så ritas kurvan: antalet steg per episod sjunker när agenten lär sig en kortare väg.</div>
-      </div><div id="description">
-        <p class="desc-lead">Agenten lär sig genom att prova sig fram. Den får <span class="term" data-term="beloning">belöningar</span> och straff, och uppdaterar ett <span class="term" data-term="qvarde">Q-värde</span> för varje <span class="term" data-term="handling">handling</span> i varje <span class="term" data-term="tillstand">tillstånd</span>. Målet är att hitta en <span class="term" data-term="policy">policy</span> som samlar alla mynt och når fram.</p>
 
-        <div class="formula-box">
-          <div class="fx-hot has-explain" data-explain="<strong>Bellmanekvationen i ord:</strong><br>För varje <span style='color:var(--accent2)'>handling</span> får agenten en belöning (<span style='color:#4ade80'>r</span>). Den tittar också på den bästa framtida belöning den tror sig kunna få från nästa tillstånd (<span style='color:#c084fc'>γ</span> · <span style='color:#6698ff'>max Q(s′,a′)</span>). Därefter uppdateras Q-värdet (Q(s,a)) så att det gradvis blir en bättre uppskattning av hur bra handlingen är. Hur stor förändringen blir bestäms av <span style='color:#ffd866'>α</span>.">
-          <div class="formula-title">Vid varje steg uppdateras Q-värdet enligt Bellmanekvationen</div>
-          <div id="qFormula"><div class="pf">Q(s,a) ← Q(s,a) + <span class="fa">α</span>[ <span class="fr">r</span> + <span class="fg">γ</span>·<span class="fm">max</span><sub>a'</sub><span class="fm"> Q(s',a')</span> − Q(s,a) ]</div></div>
-          </div>
-          <div class="formula-legend">
-            <div><span class="fp-dot" style="background:#ffd866"></span> <span class="term" data-term="alpha"><strong style="color:#ffd866">α</strong></span> – hur stort steg vi tar mot det nya värdet.</div>
-            <div><span class="fp-dot" style="background:#4ade80"></span> <span class="term" data-term="beloning"><strong style="color:#4ade80">r</strong></span> – belöningen agenten fick för steget.</div>
-            <div><span class="fp-dot" style="background:#c084fc"></span> <span class="term" data-term="gamma"><strong style="color:#c084fc">γ</strong></span> – hur mycket framtida belöningar väger.</div>
-            <div><span class="fp-dot" style="background:#6698ff"></span> <strong style="color:#6698ff">max Q(s′,a′)</strong> – det högsta Q-värdet i <span class="term" data-term="tillstand">nästa tillstånd</span>.</div>
-          </div>
-        </div>
+<div class="right-wrapper">
+<div class="chart-card">
+  <div class="chart-title">Inlärningskurva <span class="chart-sub">– antal steg tills målet nås per episod</span></div>
+  <canvas id="chartCanvas" width="460" height="150"></canvas>
+  <div id="chartEmpty" class="chart-empty">Starta en träning så ritas kurvan: antalet steg per episod sjunker när agenten lär sig en kortare väg.</div>
+</div>
 
-        <details class="info-sec"><summary>Miljö och belöningar</summary><div class="sec-body"><ul>
-          <li><em>Agenten:</em> orange cirkel, startar längst ner till vänster.</li>
-          <li><em>Mål:</em> grön ruta. Att nå målet utan alla mynt ger straffet −20.</li>
-          <li><em>Mynt:</em> gul cirkel, ger +10 när det samlas in.</li>
-          <li><em>Stegstraff:</em> varje steg kostar −0,1, vilket uppmuntrar kortare vägar.</li>
-        </ul></div></details>
+<div class="launch-label">Lär dig mer – tryck för förklaring</div>
+<div class="info-launch">
+  <button class="launch-card wide" onclick="openConcept('oversikt',event)">
+    <span class="lc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a7 7 0 0 0-4 12.7V18h8v-2.3A7 7 0 0 0 12 3Z"/><path d="M9 21h6"/></svg></span>
+    <span class="lc-txt"><span class="lc-title">Så fungerar Q-learning</span><span class="lc-sub">Belöningar, Q-värden och policy – på 30 sekunder.</span></span>
+    <span class="lc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+  </button>
+  <button class="launch-card wide" onclick="openConcept('bellman',event)">
+    <span class="lc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h9M5 20l7-8L5 4M10 20h9"/></svg></span>
+    <span class="lc-txt"><span class="lc-title">Bellmanekvationen</span><span class="lc-sub">Formeln som uppdaterar Q-värdet vid varje steg.</span></span>
+    <span class="lc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+  </button>
+  <button class="launch-card" onclick="openConcept('miljo',event)">
+    <span class="lc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></span>
+    <span class="lc-txt"><span class="lc-title">Miljö &amp; belöningar</span><span class="lc-sub">Mynt, mål, straff.</span></span>
+    <span class="lc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+  </button>
+  <button class="launch-card" onclick="openConcept('farger',event)">
+    <span class="lc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.7-.7 1.7-1.6 0-.4-.2-.8-.5-1.1-.3-.3-.4-.6-.4-1 0-.9.7-1.6 1.6-1.6H16c3.3 0 6-2.7 6-6 0-4.9-4.5-8.1-10-8.1Z"/></svg></span>
+    <span class="lc-txt"><span class="lc-title">Färger &amp; Q-värden</span><span class="lc-sub">Vad rutans färg betyder.</span></span>
+    <span class="lc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+  </button>
+  <button class="launch-card" onclick="openConcept('redigering',event)">
+    <span class="lc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span>
+    <span class="lc-txt"><span class="lc-title">Redigeringsläge</span><span class="lc-sub">Bygg egen miljö.</span></span>
+    <span class="lc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+  </button>
+  <button class="launch-card" onclick="openConcept('klar',event)">
+    <span class="lc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+    <span class="lc-txt"><span class="lc-title">När agenten är klar</span><span class="lc-sub">Policy &amp; testläge.</span></span>
+    <span class="lc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+  </button>
+</div>
 
-        <details class="info-sec"><summary>Färger och Q-värden</summary><div class="sec-body"><ul>
-          <li>Rutan blir <strong style="color:#ff6a5e">rödare</strong> vid lågt Q-värde och <strong style="color:#6698ff">blåare</strong> vid högt.</li>
-          <li><strong>Visa Q-värden</strong> skriver ut värdet för varje handling i rutan.</li>
-          <li>Håll muspekaren över en ruta för att se dess Q-värden.</li>
-        </ul></div></details>
+</div></div></div>
 
-        <details class="info-sec"><summary>Redigeringsläge</summary><div class="sec-body"><ul>
-          <li>Vänsterklick: lägg till eller ta bort hinder.</li>
-          <li>Högerklick: lägg till eller ta bort mynt.</li>
-          <li>Dra start- och målcellerna för att flytta dem.</li>
-          <li>Parametrarna α, γ och ε kan ändras när som helst i panelen under rutnätet.</li>
-        </ul></div></details>
-
-        <details class="info-sec"><summary>När agenten är klar</summary><div class="sec-body"><ul>
-          <li>När modellen <span class="term" data-term="konvergens">konvergerat</span> kan du välja <strong>Visa Policy</strong> för att se bästa handling i varje ruta.</li>
-          <li><strong>Testa Modellen</strong> låter agenten gå den inlärda vägen steg för steg.</li>
-        </ul></div></details>
-      </div></div></div></div>
 <div id="hoverInfo"></div>
+
+<!-- ── Intro-overlay ── -->
 <div class="overlay show" id="introOverlay"><div class="overlay-card">
   <svg class="intro-viz" viewBox="0 0 200 92" aria-hidden="true">
     <rect class="iv-cell" x="10" y="26" width="40" height="40" rx="6"/>
@@ -251,8 +353,20 @@ button:active{transform:translateY(1px);}
     <div class="step"><div class="step-num">03</div><div><strong>Justera parametrarna</strong> – ändra α, γ och ε och se hur det påverkar hur snabbt och stabilt agenten lär sig.</div></div>
   </div>
   <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-  <p class="overlay-tip">Håll muspekaren över formeln, loggen eller understrukna ord för förklaringar.</p>
+  <p class="overlay-tip">Tryck på korten till höger för förklaringar, eller håll muspekaren över loggen och understrukna ord.</p>
 </div></div>
+
+<!-- ── Glaskort: skelett ── -->
+<div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
+<div class="concept-card" id="conceptCard">
+  <div class="concept-card-inner" id="conceptCardInner">
+    <button class="concept-close" onclick="closeConcept()" aria-label="Stäng">✕</button>
+    <div class="concept-icon" id="conceptIcon"></div>
+    <div class="concept-title" id="conceptTitle"></div>
+    <div class="concept-def" id="conceptDef"></div>
+  </div>
+</div>
+
 <script>
 function getCoinKeyFrom(coinsArray){let coinsCopy=coinsArray.slice();coinsCopy.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);return coinsCopy.map(c=>c[0]+"_"+c[1]).join(";");}
 /* ── Återanvändbart begreppssystem (klickbara/hovrbara begrepp) ── */
@@ -271,6 +385,140 @@ const GLOSSARY={
 };
 function term(key,label){const g=GLOSSARY[key];const text=label||(g?g.term:key);return`<span class="term" data-term="${key}" tabindex="0" role="button">${text}</span>`;}
 function initGlossary(){let pop=document.getElementById("term-popover");if(!pop){pop=document.createElement("div");pop.id="term-popover";document.body.appendChild(pop);}let pinned=false,current=null;function show(el){const g=GLOSSARY[el.dataset.term];if(!g)return;pop.innerHTML=`<span class="tp-term">${g.term}</span>${g.def}`;pop.classList.add("show");const r=el.getBoundingClientRect();const pw=pop.offsetWidth,ph=pop.offsetHeight;let left=r.left+r.width/2-pw/2;left=Math.max(8,Math.min(left,window.innerWidth-pw-8));let top=r.bottom+8;if(top+ph>window.innerHeight-8)top=r.top-ph-8;pop.style.left=left+"px";pop.style.top=top+"px";current=el;}function hide(){pop.classList.remove("show");pinned=false;current=null;}document.addEventListener("click",e=>{const t=e.target.closest(".term");if(t){e.stopPropagation();if(pinned&&current===t){hide();}else{show(t);pinned=true;}}else if(!e.target.closest("#term-popover")){hide();}});document.addEventListener("mouseover",e=>{const t=e.target.closest(".term");if(t&&!pinned)show(t);});document.addEventListener("mouseout",e=>{const t=e.target.closest(".term");if(t&&!pinned)hide();});document.addEventListener("keydown",e=>{if(e.key==="Escape")hide();if((e.key==="Enter"||e.key===" ")&&document.activeElement&&document.activeElement.classList.contains("term")){e.preventDefault();if(pinned&&current===document.activeElement)hide();else{show(document.activeElement);pinned=true;}}});if(typeof window!=="undefined")window.addEventListener("resize",hide);}
+
+/* ═══════════════ Glaskort (concept cards) ═══════════════ */
+function t3(color,glyph,label,sub,cls){
+  return '<div class="gc-cell"><div class="t3'+(cls?' '+cls:'')+'" style="--tc:'+color+'">'+(glyph||'')+'</div>'
+    +'<span class="t3-lab">'+label+'</span>'+(sub?'<span class="t3-sub">'+sub+'</span>':'')+'</div>';
+}
+const CONCEPTS={
+  oversikt:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a7 7 0 0 0-4 12.7V18h8v-2.3A7 7 0 0 0 12 3Z"/><path d="M9 21h6"/></svg>',
+    title:'Så fungerar Q-learning',
+    def:'<div class="gc-lead">Agenten lär sig genom att prova sig fram. Den får '+term('beloning','belöningar')+' och straff, och uppdaterar ett '+term('qvarde','Q-värde')+' för varje '+term('handling','handling')+' i varje '+term('tillstand','tillstånd')+'. Målet är att hitta en '+term('policy','policy')+' som samlar alla mynt och når fram.</div>'
+      +'<div class="gc-ctrl">'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Prova</span><span>agenten '+term('utforskning','utforskar')+' slumpmässigt i början för att upptäcka miljön.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Lär</span><span>varje steg uppdaterar Q-värdet för den handling som togs.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Utnyttja</span><span>när ε sjunker börjar agenten '+term('utnyttjande','utnyttja')+' det den lärt sig.</span></div>'
+      +'</div>'
+      +'<button class="gc-btn" onclick="closeConcept()">Nu kör vi</button>'
+  },
+  bellman:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h9M5 20l7-8L5 4M10 20h9"/></svg>',
+    title:'Bellmanekvationen',
+    def:'<div class="gc-lead">Vid varje steg uppdateras Q-värdet så att det gradvis blir en bättre uppskattning av hur bra en handling är.</div>'
+      +'<div class="gc-formula"><div class="pf">Q(s,a) ← Q(s,a) + <span class="fa">α</span>[ <span class="fr">r</span> + <span class="fg">γ</span>·<span class="fm">max</span><sub>a\'</sub><span class="fm"> Q(s\',a\')</span> − Q(s,a) ]</div></div>'
+      +'<div class="formula-legend">'
+      +'<div><span class="fp-dot" style="background:#ffd866"></span> '+term('alpha','<strong style="color:#ffd866">α</strong>')+' – hur stort steg vi tar mot det nya värdet.</div>'
+      +'<div><span class="fp-dot" style="background:#4ade80"></span> '+term('beloning','<strong style="color:#4ade80">r</strong>')+' – belöningen agenten fick för steget.</div>'
+      +'<div><span class="fp-dot" style="background:#c084fc"></span> '+term('gamma','<strong style="color:#c084fc">γ</strong>')+' – hur mycket framtida belöningar väger.</div>'
+      +'<div><span class="fp-dot" style="background:#6698ff"></span> <strong style="color:#6698ff">max Q(s′,a′)</strong> – det högsta Q-värdet i '+term('tillstand','nästa tillstånd')+'.</div>'
+      +'</div>'
+      +'<div class="gc-note">I ord: agenten väger belöningen den fick mot den bästa framtida belöning den tror sig kunna få, och justerar sitt Q-värde en bit i den riktningen. Hur stor justeringen blir bestäms av <em>α</em>.</div>'
+  },
+  miljo:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>',
+    title:'Miljö och belöningar',
+    def:'<div class="gc-lead">Agenten startar längst ner till vänster och ska samla alla mynt innan den går i mål.</div>'
+      +'<div class="gc-grid">'
+      +t3('#ff9b3d','','Agent',null,'round')
+      +t3('#2fbf86','','Mål',null)
+      +t3('#ffd866','','Mynt',null,'round')
+      +t3('#12172a','','Hinder',null)
+      +'</div>'
+      +'<div class="gc-ctrl">'
+      +'<div class="gc-ctrl-row"><span class="mbtn pos">+10</span><span>varje '+term('beloning','mynt')+' som samlas in.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn pos">+10</span><span>att nå målet med alla mynt insamlade.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn neg">−0,1</span><span>per steg – uppmuntrar kortare vägar.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn neg">−20</span><span>att nå målet <em>innan</em> alla mynt tagits.</span></div>'
+      +'</div>'
+  },
+  farger:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.7-.7 1.7-1.6 0-.4-.2-.8-.5-1.1-.3-.3-.4-.6-.4-1 0-.9.7-1.6 1.6-1.6H16c3.3 0 6-2.7 6-6 0-4.9-4.5-8.1-10-8.1Z"/></svg>',
+    title:'Färger och Q-värden',
+    def:'<div class="gc-lead">Varje rutas färg visar det högsta '+term('qvarde','Q-värdet')+' agenten hittills lärt sig för den rutan.</div>'
+      +'<div style="margin:16px 0 4px;"><div style="height:22px;border-radius:8px;border:1px solid var(--border2);box-shadow:inset 0 1px 3px rgba(0,0,0,.5);background:linear-gradient(90deg,#ec423a,#566078,#78c2ff);"></div>'
+      +'<div style="display:flex;justify-content:space-between;font-size:10.5px;font-family:\'JetBrains Mono\',monospace;color:var(--dim);margin-top:6px;"><span style="color:#ff6a5e;">lågt Q</span><span style="color:#78c2ff;">högt Q</span></div></div>'
+      +'<div class="gc-ctrl">'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Rött</span><span>lågt Q-värde – agenten tror att rutan leder fel.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Blått</span><span>högt Q-värde – en bra ruta att vara i.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Q-värden</span><span>knappen skriver ut värdet för varje handling i rutan.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Hovra</span><span>håll muspekaren över en ruta för att se dess Q-värden.</span></div>'
+      +'</div>'
+  },
+  redigering:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
+    title:'Redigeringsläge',
+    def:'<div class="gc-lead">Kryssa i <strong>Redigera</strong> under rutnätet för att bygga din egen miljö.</div>'
+      +'<div class="gc-ctrl">'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Vänsterklick</span><span>lägg till eller ta bort ett <strong>hinder</strong>.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Högerklick</span><span>lägg till eller ta bort ett <strong>mynt</strong>.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Dra</span><span>flytta <strong>start</strong>- och <strong>målrutan</strong>.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">α γ ε</span><span>parametrarna kan ändras när som helst i panelen under rutnätet.</span></div>'
+      +'</div>'
+      +'<button class="gc-btn" onclick="closeConcept()">Stäng</button>'
+  },
+  klar:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+    title:'När agenten är klar',
+    def:'<div class="gc-lead">När modellen '+term('konvergens','konvergerat')+' ändras Q-värdena nästan inte längre – då har agenten en stabil strategi.</div>'
+      +'<div class="gc-ctrl">'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Policy</span><span>visar bästa '+term('handling','handling')+' i varje ruta som en pil.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Testa</span><span>låter agenten gå den inlärda vägen steg för steg, utan slump.</span></div>'
+      +'</div>'
+      +'<div class="gc-note">Båda knapparna dyker upp automatiskt så snart träningen har konvergerat.</div>'
+  }
+};
+function openConceptFrom(id,el){
+  const c=CONCEPTS[id];if(!c)return;
+  const card=document.getElementById('conceptCard');
+  document.getElementById('conceptIcon').innerHTML=c.icon;
+  document.getElementById('conceptTitle').innerHTML=c.title;
+  document.getElementById('conceptDef').innerHTML=c.def;
+  let dx=0,dy=0;
+  if(el&&el.getBoundingClientRect){
+    const r=el.getBoundingClientRect();
+    dx=(r.left+r.width/2)-window.innerWidth/2;
+    dy=(r.top+r.height/2)-window.innerHeight/2;
+  }
+  card.classList.remove('show');
+  card.style.transition='none';
+  card.style.setProperty('--dx',dx+'px');
+  card.style.setProperty('--dy',dy+'px');
+  void card.offsetHeight;
+  card.style.transition='';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
+}
+function openConcept(id,ev){ev.stopPropagation();openConceptFrom(id,ev.currentTarget);}
+function closeConcept(){
+  document.getElementById('conceptCard').classList.remove('show');
+  document.getElementById('conceptBackdrop').classList.remove('show');
+}
+window.openConcept=openConcept;window.closeConcept=closeConcept;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
+(function initCardTilt(){
+  const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const el=document.getElementById('conceptCardInner');if(!el||RM)return;
+  const MAX_TILT=5;
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+    const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
+    el.style.setProperty('--mx',(px*100)+'%');
+    el.style.setProperty('--my',(py*100)+'%');
+    el.style.transform='perspective(1000px) rotateX('+rx+'deg) rotateY('+ry+'deg)';
+    const sx=(px-0.5)*22,sy=(py-0.5)*22;
+    el.style.boxShadow=(-sx)+'px '+(20-sy)+'px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset';
+  });
+  el.addEventListener('mouseleave',()=>{
+    el.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%');
+    el.style.boxShadow='';
+  });
+})();
+
+/* ═══════════════ Simulering (oförändrad logik) ═══════════════ */
 const MAZE_PRESETS=[{name:"Standardmiljö",obstacles:[[0,8],[1,8],[2,2],[2,3],[2,4],[3,2],[3,6],[4,4],[4,5],[4,6],[4,8],[5,3],[5,4],[5,8],[6,4],[6,6],[6,8],[7,6],[7,8],[8,1],[8,6],[8,7],[8,8],[9,1]],coins:[[0,9],[3,3],[9,0],[7,7]],start:[0,0],goal:[9,9]},{name:"Ormen",obstacles:[[0,9],[1,9],[2,9],[3,9],[4,9],[5,9],[6,9],[7,9],[8,9],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7],[9,7],[0,5],[1,5],[2,5],[3,5],[4,5],[5,5],[6,5],[7,5],[8,5],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3],[7,3],[8,3],[9,3],[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1],[8,1]],coins:[[7,8],[3,4],[5,0]],start:[0,0],goal:[9,9]},{name:"Labyrinten",obstacles:[[3,9],[4,9],[5,9],[6,9],[8,9],[0,8],[1,8],[8,8],[0,7],[1,7],[3,7],[4,7],[6,7],[0,6],[1,6],[3,6],[4,6],[6,6],[7,6],[8,6],[8,5],[0,4],[1,4],[2,4],[4,4],[5,4],[6,4],[8,4],[1,3],[6,3],[8,3],[1,2],[3,2],[4,2],[8,2],[9,2],[1,1],[3,1],[4,1],[5,1],[6,1],[6,0],[7,0],[8,0]],coins:[[0,9],[9,4],[9,0]],start:[0,0],goal:[9,9]}];
 let currentPresetIndex=0;let defaultCoins=MAZE_PRESETS[0].coins.map(c=>c.slice());let customObstacles=MAZE_PRESETS[0].obstacles.map(o=>o.slice());
 const GRID_WIDTH=10;const GRID_HEIGHT=10;const CELL_SIZE=50;const COIN_REWARD=10;const EARLY_GOAL_PENALTY=-20;const VISITED_COIN_PENALTY=-2;const STEP_PENALTY=-0.1;const INITIAL_Q=5.0;const EPSILON_DECAY=0.97;const MIN_EPSILON=0.01;
