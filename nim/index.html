@@ -11,89 +11,111 @@
   gtag('js', new Date());
   gtag('config', 'G-ZDWXTZZBBR');
 </script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--accent:#4d80ff;--accent2:#6698ff;--good:#34c759;--bad:#ef5b5b;--neutral:#4d80ff;--gold:#ffd866;}
+:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--accent:#4d80ff;--accent2:#7aa2ff;--good:#34c759;--bad:#ef5b5b;--neutral:#4d80ff;--gold:#ffd866;
+  --glass:rgba(20,24,42,.55);--border-soft:rgba(255,255,255,.06);--accent-dim:rgba(77,128,255,.14);
+  --r-sm:8px;--r-md:14px;--r-lg:20px;--ease-spring:cubic-bezier(.34,1.56,.64,1);--ease-out:cubic-bezier(.16,1,.3,1);}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+html{-webkit-font-smoothing:antialiased;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;position:relative;}
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-mesh::before{content:'';position:absolute;width:140%;height:140%;top:-20%;left:-20%;
+  background:radial-gradient(ellipse 40% 34% at 18% 20%,rgba(77,128,255,.14),transparent 60%),radial-gradient(ellipse 34% 30% at 84% 76%,rgba(52,199,89,.06),transparent 60%),radial-gradient(ellipse 30% 34% at 70% 8%,rgba(255,216,102,.05),transparent 60%);
+  animation:meshDrift 34s ease-in-out infinite alternate;filter:blur(10px);}
+@keyframes meshDrift{0%{transform:translate(0,0) scale(1);}50%{transform:translate(-2%,2%) scale(1.05);}100%{transform:translate(2%,-1%) scale(1.02);}}
+.bg-noise{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
-.hd{padding:14px 20px;border-bottom:1px solid var(--border);}
+.hd{padding:14px 20px;border-bottom:1px solid var(--border-soft);position:relative;z-index:2;background:linear-gradient(180deg,rgba(77,128,255,.04),transparent);}
 .hd-inner{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:16px;}
-.back-link{display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;flex-shrink:0;}.back-link:hover{color:var(--text);border-color:var(--dim);}
-.lang-link{display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;flex-shrink:0;white-space:nowrap;}.lang-link:hover{color:var(--text);border-color:var(--dim);}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.02);transition:.2s var(--ease-out);flex-shrink:0;}.back-link:hover{color:var(--text);border-color:var(--dim);background:rgba(255,255,255,.05);}
+.lang-link{display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.02);transition:.2s var(--ease-out);flex-shrink:0;white-space:nowrap;}.lang-link:hover{color:var(--text);border-color:var(--dim);background:rgba(255,255,255,.05);}
 .lang-link .flag{font-size:1.05em;line-height:1;}
 .hd-text{flex:1;text-align:center;}
-.hd-text h1{font-size:1.8em;font-weight:800;letter-spacing:-0.02em;color:var(--text);margin-bottom:2px;}
-.hd-text p{color:var(--dim);font-size:0.82em;max-width:560px;margin:0 auto;}
-.app{display:grid;grid-template-columns:1fr 320px;max-width:1060px;margin:0 auto;min-height:calc(100vh - 80px);}
-.left{padding:22px 26px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:18px;}
-.phase-tabs{display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
-.tab{flex:1;padding:10px 8px;text-align:center;font-size:0.78em;font-weight:700;color:var(--dim);background:var(--surface);cursor:pointer;transition:0.2s;border:none;font-family:'DM Sans',sans-serif;}
-.tab:hover{background:var(--surface2);color:var(--text);}
-.tab.active{background:var(--accent);color:#fff;}
+.hd-title-row{display:flex;align-items:center;justify-content:center;gap:9px;}
+.hd-icon{width:22px;height:22px;color:var(--accent2);flex-shrink:0;}
+.hd-text h1{font-family:'Syne',sans-serif;font-size:1.55em;font-weight:800;letter-spacing:-0.02em;background:linear-gradient(135deg,#eef1fb,var(--accent2) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hd-text p{color:var(--dim);font-size:0.82em;max-width:560px;margin:3px auto 0;}
+.app{display:grid;grid-template-columns:1fr 320px;max-width:1060px;margin:0 auto;min-height:calc(100vh - 90px);gap:14px;padding:14px;position:relative;z-index:1;}
+.left{padding:22px 24px;display:flex;flex-direction:column;gap:16px;background:var(--glass);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border-soft);border-radius:var(--r-lg);box-shadow:0 20px 50px rgba(0,0,0,.25);}
+.phase-tabs{display:flex;gap:4px;border:1px solid var(--border);border-radius:999px;overflow:hidden;padding:3px;background:var(--surface2);}
+.tab{flex:1;padding:9px 8px;text-align:center;font-size:0.76em;font-weight:700;color:var(--dim);background:transparent;cursor:pointer;transition:.2s var(--ease-out);border:none;border-radius:999px;font-family:'DM Sans',sans-serif;}
+.tab:hover{color:var(--text);}
+.tab.active{background:var(--accent);color:#fff;box-shadow:0 4px 14px rgba(77,128,255,.3);}
 .tab.done{background:rgba(52,199,89,0.12);color:var(--good);}
 .tab.locked{opacity:0.3;cursor:default;pointer-events:none;}
 .sec-label{font-size:0.62em;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--dim);margin-bottom:8px;}
 .row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
 .row label{font-size:0.8em;color:var(--dim);min-width:100px;}
-.nim-sel{font-family:'DM Sans',sans-serif;font-size:0.8em;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);cursor:pointer;outline:none;}
-.btn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.82em;padding:10px 16px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:0.2s;text-align:center;}
-.btn:hover{border-color:var(--accent);color:var(--accent);}
-.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;}
-.btn.pri:hover{background:var(--accent2);}
+.nim-sel{font-family:'DM Sans',sans-serif;font-size:0.8em;padding:7px 11px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);cursor:pointer;outline:none;transition:.2s;}
+.nim-sel:hover{border-color:var(--accent2);}
+.btn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.82em;padding:10px 16px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:.2s var(--ease-spring);text-align:center;}
+.btn:hover{border-color:var(--accent);color:var(--accent2);transform:translateY(-1px);}
+.btn:active{transform:scale(.97);}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(77,128,255,.28);}
+.btn.pri:hover{background:#3d6de6;color:#fff;box-shadow:0 8px 22px rgba(77,128,255,.38);}
 .btn.grn{background:rgba(52,199,89,0.1);border-color:var(--good);color:var(--good);}
-.btn.solid-grn{background:var(--good);border-color:var(--good);color:#090b14;font-size:0.9em;padding:11px 16px;}
-.btn.solid-grn:hover{background:#4ee89e;border-color:#4ee89e;}
+.btn.solid-grn{background:linear-gradient(135deg,var(--good),#28b869);border-color:var(--good);color:#06210f;font-size:0.9em;padding:11px 16px;font-weight:700;box-shadow:0 8px 22px rgba(52,199,89,.25);}
+.btn.solid-grn:hover{filter:brightness(1.07);box-shadow:0 10px 26px rgba(52,199,89,.35);}
 .btn.warn{background:rgba(239,91,91,0.1);border-color:var(--bad);color:var(--bad);}
-.btn.warn:hover{background:rgba(239,91,91,0.2);}
+.btn.warn:hover{background:rgba(239,91,91,0.2);color:var(--bad);}
 .btn:disabled{opacity:0.3;pointer-events:none;}
 .btn-row{display:flex;gap:8px;}
 .train-btns{display:flex;gap:8px;}
 .train-btns .btn{flex:1;}
-.pbwrap{background:var(--surface2);border:1px solid var(--border);border-radius:6px;height:8px;overflow:hidden;margin-bottom:6px;}
-.pbfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--good));width:0%;transition:width 0.1s;border-radius:6px;}
-.tstat{font-family:'JetBrains Mono',monospace;font-size:0.76em;color:var(--dim);}
-.tstat span{color:var(--gold);font-weight:600;}
+.train-dash{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px 16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
+.td-head{display:flex;align-items:center;gap:6px;font-size:.66em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2);margin-bottom:10px;}
+.td-head .live-dot{width:6px;height:6px;border-radius:50%;background:var(--good);box-shadow:0 0 6px var(--good);margin-left:auto;animation:liveDot 1.6s ease-in-out infinite;}
+@keyframes liveDot{0%,100%{opacity:1}50%{opacity:.35}}
+.pbwrap{background:rgba(0,0,0,.28);border:1px solid var(--border-soft);border-radius:999px;height:8px;overflow:hidden;margin-bottom:12px;}
+.pbfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--good));width:0%;transition:width .15s ease;border-radius:999px;position:relative;overflow:hidden;}
+.pbfill::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.4) 50%,transparent 70%);transform:translateX(-100%);animation:progShine 2.2s ease-in-out infinite;}
+@keyframes progShine{0%,55%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
+.td-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.td-cell{text-align:center;}
+.td-l{font-size:.6em;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;}
+.td-v{font-family:'JetBrains Mono',monospace;font-size:1em;font-weight:700;color:var(--text);}
 .converge-msg{font-size:0.78em;padding:8px 10px;border-radius:6px;margin-top:6px;display:none;line-height:1.5;}
 .converge-msg.show{display:block;}
 .converge-msg.partial{background:rgba(255,216,102,0.08);border:1px solid rgba(255,216,102,0.2);color:var(--gold);}
 .converge-msg.full{background:rgba(52,199,89,0.08);border:1px solid rgba(52,199,89,0.2);color:var(--good);}
 .converge-msg.none{background:rgba(239,91,91,0.06);border:1px solid rgba(239,91,91,0.15);color:var(--bad);}
-.game-status{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 16px;font-size:0.88em;min-height:50px;display:flex;align-items:center;gap:10px;}
+.game-status{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:13px 16px;font-size:0.88em;min-height:50px;display:flex;align-items:center;gap:10px;}
 .si{font-size:1.3em;}
-.st{line-height:1.4;}.st strong{color:var(--accent);}
-.sticks-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:26px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;min-height:110px;}
+.st{line-height:1.4;}.st strong{color:var(--accent2);}
+.sticks-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;min-height:110px;}
 .sticks-row{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;}
 .stick{width:13px;height:56px;border-radius:6px;background:linear-gradient(180deg,#f5d87a 0%,#c8a832 60%,#8a6e1a 100%);border:1px solid rgba(200,168,50,0.4);box-shadow:0 2px 8px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.15);transition:transform 0.15s,opacity 0.3s,background 0.15s;}
 .stick.gone{opacity:0;transform:translateY(-18px) scale(0.4);}
 .stick.sel{background:linear-gradient(180deg,#ff9a6a 0%,#e05020 60%,#903010 100%);transform:translateY(-8px);box-shadow:0 6px 16px rgba(240,82,82,0.5);border-color:rgba(240,82,82,0.6);}
 .scnt{font-family:'JetBrains Mono',monospace;font-size:0.78em;color:var(--dim);margin-top:2px;}
 .take-btns{display:flex;gap:8px;justify-content:center;}
-.tbtn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.9em;padding:10px 20px;border-radius:8px;border:2px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:0.2s;min-width:54px;}
+.tbtn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.9em;padding:10px 20px;border-radius:var(--r-sm);border:2px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:.2s var(--ease-spring);min-width:54px;}
 .tbtn:hover:not(:disabled){border-color:var(--gold);color:var(--gold);background:rgba(255,216,102,0.08);transform:translateY(-2px);}
 .tbtn:disabled{opacity:0.25;cursor:default;transform:none;}
 .thinking{display:flex;align-items:center;gap:8px;font-size:0.8em;color:var(--dim);padding:6px 0;}
 .tdots span{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);margin:0 2px;animation:db 1.2s infinite;}
 .tdots span:nth-child(2){animation-delay:.2s}.tdots span:nth-child(3){animation-delay:.4s}
 @keyframes db{0%,80%,100%{transform:scale(0.6);opacity:0.4}40%{transform:scale(1);opacity:1}}
-.rbanner{display:none;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;text-align:center;flex-direction:column;gap:8px;}
-.rbanner.show{display:flex;}
+.rbanner{display:none;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px;text-align:center;flex-direction:column;gap:8px;}
+.rbanner.show{display:flex;animation:cardIn .4s var(--ease-spring);}
 .rbanner .big{font-size:2.2em;}
-.rbanner .rtitle{font-size:1.1em;font-weight:800;}
+.rbanner .rtitle{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;}
 .rbanner .rsub{font-size:0.78em;color:var(--dim);}
 .score-strip{display:flex;gap:8px;}
-.sbox{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center;}
+.sbox{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px;text-align:center;transition:.2s;}
+.sbox:hover{border-color:rgba(122,162,255,.35);}
 .sbox .sv{font-size:1.5em;font-weight:800;font-family:'JetBrains Mono',monospace;}
 .sbox .sl{font-size:0.62em;color:var(--dim);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;}
-.qt-title{font-size:0.88em;font-weight:700;color:var(--gold);margin-bottom:4px;}
+.qt-title{font-family:'Syne',sans-serif;font-size:0.95em;font-weight:800;color:var(--gold);margin-bottom:4px;}
 .qt-desc{font-size:0.71em;color:var(--dim);line-height:1.5;margin-bottom:12px;}
 .qhdr-row{display:grid;gap:4px;align-items:center;margin-bottom:4px;}
 .qhdr{font-size:0.6em;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--dim);text-align:center;}
 .qrow{display:grid;gap:4px;align-items:center;margin-bottom:4px;}
 .qrow.cur .qst{color:var(--gold);font-weight:700;}
 .qst{font-family:'JetBrains Mono',monospace;font-size:0.75em;color:var(--dim);text-align:right;padding-right:6px;}
-.qcell{border-radius:5px;padding:4px 5px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.72em;font-weight:700;position:relative;overflow:hidden;transition:background 0.35s,color 0.35s;min-height:26px;display:flex;align-items:center;justify-content:center;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.5);}
-.qbg{position:absolute;inset:0;border-radius:5px;transition:background 0.35s,opacity 0.35s;}
+.qcell{border-radius:var(--r-sm);padding:4px 5px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.72em;font-weight:700;position:relative;overflow:hidden;transition:background 0.35s,color 0.35s;min-height:26px;display:flex;align-items:center;justify-content:center;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.5);}
+.qbg{position:absolute;inset:0;border-radius:var(--r-sm);transition:background 0.35s,opacity 0.35s;}
 .qval{position:relative;z-index:1;}
 .qcell.dis{opacity:0.15;}
 .qcell.best{outline:3px solid var(--gold);outline-offset:-1px;background:transparent !important;box-shadow:0 0 12px rgba(255,216,102,0.35);}
@@ -101,73 +123,111 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .legend{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
 .li{display:flex;align-items:center;gap:4px;font-size:0.67em;color:var(--dim);}
 .ld{width:10px;height:10px;border-radius:3px;}
-.qinfo{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:0.73em;line-height:1.6;color:var(--dim);margin-top:12px;}
-.qinfo strong{color:var(--text);}
-.right{padding:20px 16px;background:var(--surface);overflow-y:auto;}
+.strategy-card{margin-top:12px;padding:16px 18px;border-radius:var(--r-lg);position:relative;
+  background:linear-gradient(165deg,rgba(26,31,52,.92),rgba(14,17,30,.94));
+  border:1.5px solid rgba(255,216,102,.4);
+  box-shadow:0 14px 34px rgba(0,0,0,.3),0 0 0 1px rgba(255,216,102,.08) inset,0 0 22px rgba(255,216,102,.14);}
+.strategy-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.strategy-icon{width:32px;height:32px;border-radius:10px;background:rgba(255,216,102,.14);display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0;}
+.strategy-icon svg{width:18px;height:18px;}
+.strategy-title{font-family:'Syne',sans-serif;font-size:.95em;font-weight:800;color:var(--gold);}
+.strategy-body{font-size:.78em;line-height:1.65;color:var(--dim);}
+.strategy-body strong{color:var(--text);}
+.right{padding:20px 18px;background:var(--glass);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border-soft);border-radius:var(--r-lg);box-shadow:0 20px 50px rgba(0,0,0,.25);overflow-y:auto;transition:opacity .3s var(--ease-out);}
 .right.hidden{opacity:0;pointer-events:none;}
 .app.no-qtable{grid-template-columns:1fr;}
-.qtoggle{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.78em;padding:7px 12px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;transition:0.2s;text-align:center;display:block;margin:0 auto;}
-.qtoggle:hover{border-color:var(--accent);color:var(--accent);}
+.qtoggle{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.78em;padding:8px 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;transition:.2s var(--ease-spring);text-align:center;display:block;margin:0 auto;}
+.qtoggle:hover{border-color:var(--accent);color:var(--accent2);transform:translateY(-1px);}
 .qtoggle.on{border-color:var(--gold);color:var(--gold);background:rgba(255,216,102,0.08);}
 @media(max-width:760px){
-  .app{grid-template-columns:1fr}
-  .left{border-right:none;border-bottom:1px solid var(--border)}
+  .app{grid-template-columns:1fr;padding:10px;gap:10px;}
+  .left{padding:18px 18px;}
   .hd-inner{flex-wrap:wrap;gap:8px;}
   .back-link{align-self:flex-start;}
   .lang-link{align-self:flex-start;}
   .hd-text{text-align:center;width:100%;}
 }
-.intro{position:fixed;inset:0;background:rgba(9,11,20,0.95);z-index:200;display:flex;align-items:center;justify-content:center;}
-.intro.hidden{display:none;}
-.intro-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;max-width:500px;width:92%;max-height:88vh;overflow-y:auto;}
-.intro-card h2{font-size:1.2em;font-weight:800;color:var(--accent);margin-bottom:6px;text-align:center;}
-.intro-card .sub{color:var(--dim);font-size:0.84em;line-height:1.55;text-align:center;margin-bottom:16px;}
-.intro-steps{display:flex;flex-direction:column;gap:11px;margin:14px 0;}
+.intro{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);z-index:200;display:flex;align-items:center;justify-content:center;transition:opacity .35s var(--ease-out);}
+.intro.hidden{opacity:0;pointer-events:none;display:flex;}
+.intro-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:32px 34px;max-width:500px;width:92%;max-height:88vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.02) inset;animation:cardIn .5s var(--ease-spring);}
+@keyframes cardIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.intro-icon{width:46px;height:46px;margin:0 auto 14px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);}
+.intro-icon svg{width:24px;height:24px;}
+.intro-card h2{font-family:'Syne',sans-serif;font-size:1.35em;font-weight:800;margin-bottom:8px;text-align:center;letter-spacing:-.01em;background:linear-gradient(135deg,#eef1fb,var(--accent2) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.intro-card .sub{color:var(--dim);font-size:0.88em;line-height:1.6;text-align:center;margin-bottom:18px;}
+.intro-steps{display:flex;flex-direction:column;gap:13px;margin:14px 0;}
 .intro-step{display:flex;gap:12px;align-items:flex-start;}
-.intro-num{width:28px;height:28px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.9em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
-.intro-step-text{font-size:0.84em;color:var(--dim);line-height:1.55;padding-top:4px;}
-.intro-step-text strong{color:var(--text);}
-.nim-rules{margin-top:14px;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
-.nim-rules-toggle{width:100%;padding:10px 14px;background:var(--surface2);border:none;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.82em;font-weight:700;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;}
-.nim-rules-toggle:hover{color:var(--text);}
-.nim-rules-toggle .arr{transition:transform 0.2s;}
-.nim-rules-toggle.open .arr{transform:rotate(180deg);}
-.nim-rules-body{display:none;padding:12px 14px;font-size:0.8em;color:var(--dim);line-height:1.65;border-top:1px solid var(--border);}
-.nim-rules-body.show{display:block;}
-.nim-rules-body strong{color:var(--text);}
-.nim-rules-body .ex{font-family:'JetBrains Mono',monospace;background:var(--bg);padding:8px 10px;border-radius:6px;margin:8px 0;font-size:0.9em;color:var(--gold);}
-.intro-start{display:block;width:100%;padding:12px;margin-top:16px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--good);color:#090b14;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}
-.intro-start:hover{background:#4ee89e;}
+.intro-num{width:26px;height:26px;border-radius:50%;background:var(--accent-dim);color:var(--accent2);font-weight:700;font-size:0.82em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(122,162,255,.25);font-family:'JetBrains Mono',monospace;}
+.intro-step-text{font-size:0.86em;color:var(--dim);line-height:1.55;padding-top:2px;}
+.intro-step-text strong{color:var(--text);font-weight:600;}
+.intro-start{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:16px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:linear-gradient(135deg,var(--good),#28b869);color:#06210f;border:none;border-radius:var(--r-sm);cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(52,199,89,.28);}
+.intro-start:hover{filter:brightness(1.06);transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(52,199,89,.38);}
+
+/* begrepp pills + concept card */
+.begrepp-row{display:flex;flex-wrap:wrap;gap:5px;padding-top:4px;}
+.g-tag{display:inline-flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:.72em;font-weight:600;padding:5px 10px 5px 8px;border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--dim);cursor:pointer;transition:.2s var(--ease-spring);}
+.g-tag:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px);}
+.g-tag:active{transform:scale(.95);}
+.g-tag .g-ico{width:12px;height:12px;flex-shrink:0;opacity:.8;}
+.concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
+.concept-backdrop.show{opacity:1;pointer-events:auto;}
+.concept-card{position:fixed;top:50%;left:50%;z-index:301;width:340px;max-width:88vw;
+  perspective:1000px;
+  transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
+  transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .26s var(--ease-out);}
+.concept-card.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
+.concept-card-inner{position:relative;text-align:center;transform-style:preserve-3d;
+  background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;
+  transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
+  transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);
+  will-change:transform;}
+.concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+  padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,216,102,.15) 45%,transparent 65%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::before{opacity:1;}
+.concept-card-inner::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.09),transparent 60%);
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::after{opacity:1;}
+.concept-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);z-index:3;transform:translateZ(30px);}
+.concept-close:hover{border-color:var(--bad);color:var(--bad);transform:translateZ(30px) rotate(90deg);}
+.concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
+.concept-icon svg{width:28px;height:28px;}
+.concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
+.concept-def{font-size:.85em;line-height:1.6;color:var(--dim);margin-bottom:16px;position:relative;z-index:3;transform:translateZ(18px);}
+.concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;}
+.concept-illus{background:rgba(0,0,0,.25);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;transform:translateZ(10px);}
+.concept-illus svg{width:100%;height:auto;max-height:90px;}
 </style>
 </head>
 <body>
+<div class="bg-mesh"></div><div class="bg-noise"></div>
 
 <div class="intro" id="intro">
   <div class="intro-card">
+    <div class="intro-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="4" width="3" height="16" rx="1.3"/><rect x="10.5" y="4" width="3" height="16" rx="1.3"/><rect x="16" y="4" width="3" height="16" rx="1.3" opacity=".4"/></svg></div>
     <h2>NIM med förstärkningsinlärning</h2>
-    <p class="sub">Se hur ett AI-system lär sig spela spelet NIM från grunden – bara genom att spela mot sig själv.</p>
+    <p class="sub">Se hur ett AI-system lär sig spela spelet NIM från grunden – bara genom att spela mot sig själv. Regeln är enkel: ta 1–3 pinnar per drag, och den som tvingas ta den <strong style="color:var(--text)">sista</strong> pinnen förlorar.</p>
     <div class="intro-steps">
       <div class="intro-step"><div class="intro-num">1</div><div class="intro-step-text"><strong>Träna AI-systemet</strong> – Välj hur många spel AI:n ska öva på. Kolla hur Q-tabellen förändras under träningen!</div></div>
       <div class="intro-step"><div class="intro-num">2</div><div class="intro-step-text"><strong>Utforska Q-tabellen</strong> – Tabellen till höger visar vad AI:n lärt sig. Grönt = bra drag, rött = dåligt. Ser du ett mönster?</div></div>
       <div class="intro-step"><div class="intro-num">3</div><div class="intro-step-text"><strong>Spela mot AI:n</strong> – Utmana en halvlärd eller fullärd AI. Kan du slå den?</div></div>
     </div>
-    <div class="nim-rules">
-      <button class="nim-rules-toggle" id="rulesToggle" onclick="toggleRules()"><span id="rulesBtnText">📖 Visa reglerna för NIM</span><span class="arr">▼</span></button>
-      <div class="nim-rules-body" id="rulesBody">
-        <strong>Mål:</strong> Undvik att ta den sista pinnen – den som gör det förlorar.<br><br>
-        <strong>Hur man spelar:</strong><br>
-        Spelare turas om. På din tur väljer du att ta <strong>1, 2 eller 3 pinnar</strong> (du måste ta minst 1).<br><br>
-        <strong>Exempel med 9 pinnar:</strong>
-        <div class="ex">Du tar 2 → 7 kvar<br>AI tar 3 → 4 kvar<br>Du tar 3 → 1 kvar<br>AI tvingas ta sista → AI förlorar!</div>
-      </div>
-    </div>
-    <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Starta simuleringen →</button>
+    <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Starta simuleringen <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 </div>
 
 <div class="hd"><div class="hd-inner">
-  <a class="back-link" href="/">← AI-aktiviteter</a>
-  <div class="hd-text"><h1>NIM</h1><p>Se hur ett AI-system lär sig spela NIM med förstärkningsinlärning – testa sedan att spela mot det!</p></div>
+  <a class="back-link" href="/"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> AI-aktiviteter</a>
+  <div class="hd-text">
+    <div class="hd-title-row">
+      <svg class="hd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="4" width="3" height="16" rx="1.3"/><rect x="10.5" y="4" width="3" height="16" rx="1.3"/><rect x="16" y="4" width="3" height="16" rx="1.3" opacity=".4"/></svg>
+      <h1>NIM</h1>
+    </div>
+    <p>Se hur ett AI-system lär sig spela NIM med förstärkningsinlärning – testa sedan att spela mot det!</p>
+  </div>
   <a class="lang-link" href="https://www.ai-aktiviteter.se/nim_ENG"><span class="flag">🇬🇧</span> English</a>
 </div></div>
 
@@ -176,6 +236,12 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="phase-tabs">
       <button class="tab active" id="tabTrain" onclick="goPhase('train')">① Träna AI-systemet</button>
       <button class="tab locked" id="tabPlay" onclick="goPhase('play')">② Spela mot AI</button>
+    </div>
+    <div class="begrepp-row">
+      <span class="g-tag" onclick="openConcept('cRules',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="3" height="15" rx="1"/><rect x="10" y="3" width="3" height="15" rx="1"/></svg>NIM-reglerna</span>
+      <span class="g-tag" onclick="openConcept('cRL',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/></svg>Förstärkningsinlärning</span>
+      <span class="g-tag" onclick="openConcept('cQval',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>Q-värde</span>
+      <span class="g-tag" onclick="openConcept('cExplore',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" opacity=".4"/></svg>Utforska vs utnyttja</span>
     </div>
 
     <div id="trainPhase">
@@ -203,29 +269,21 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
           <option value="1000">1000 spel</option>
         </select>
       </div>
-      <div class="row"><label>Hastighet</label>
-        <select class="nim-sel" id="speedSel">
-          <option value="normal" selected>🚶 Normal</option>
-          <option value="fast">⚡ Snabb</option>
-        </select>
-      </div>
       <div class="train-btns" id="trainBtns">
         <button class="btn solid-grn" id="trainBtn" onclick="startTraining()">🧠 Starta träning</button>
       </div>
-      <div id="trainProg" style="display:none">
+      <div id="trainProg" class="train-dash" style="display:none">
+        <div class="td-head"><span>Tränar</span><span class="live-dot"></span></div>
         <div class="pbwrap"><div class="pbfill" id="pbFill"></div></div>
-        <div class="tstat">Spel: <span id="stEp">0</span>/<span id="stMax">0</span></div>
-        <div class="tstat">Utforskar: <span id="stEps">100</span>% &nbsp;|&nbsp; Utnyttjar: <span id="stExpl">0</span>%</div>
+        <div class="td-stats">
+          <div class="td-cell"><div class="td-l">Spel</div><div class="td-v"><span id="stEp">0</span>/<span id="stMax">0</span></div></div>
+          <div class="td-cell"><div class="td-l">Utforskar</div><div class="td-v" style="color:var(--accent2)"><span id="stEps">100</span>%</div></div>
+          <div class="td-cell"><div class="td-l">Utnyttjar</div><div class="td-v" style="color:var(--gold)"><span id="stExpl">0</span>%</div></div>
+        </div>
       </div>
       <div class="converge-msg" id="convergeMsg"></div>
       <div id="trainDone" style="display:none">
         <button class="btn grn" onclick="goPhase('play')">Spela mot AI:n →</button>
-      </div>
-      <div class="nim-rules" style="margin-top:0">
-        <button class="nim-rules-toggle" id="infoToggle" onclick="toggleInfo()"><span id="infoBtnText">💡 Hur fungerar förstärkningsinlärning?</span><span class="arr">▼</span></button>
-        <div class="nim-rules-body" id="infoBody" style="color:var(--dim)">
-          Tänk dig att du lär dig ett spel bara genom att spela om och om igen och se vad som funkade. Det är precis så AI-systemet gör.<br><br>För varje situation i spelet lär det sig ett <strong>Q-värde</strong> – ett betyg på hur bra ett visst drag brukar vara. Om ett drag leder till vinst höjs betyget, och om det leder till förlust sänks det. I början provar AI-systemet drag nästan slumpmässigt – det <em>utforskar</em>. Ju fler träningar, desto mer börjar det <em>utnyttja</em> vad det lärt sig och väljer de drag med högst betyg. Tabellen till höger visar vilket betyg respektive drag har i varje situation.
-        </div>
       </div>
     </div>
 
@@ -274,7 +332,24 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="li"><div class="ld" style="background:rgba(239,91,91,0.7)"></div>Dåligt drag</div>
       <div class="li"><div class="ld" style="outline:2px solid var(--gold);outline-offset:-2px;border-radius:3px;"></div>Bästa draget</div>
     </div>
-    <div class="qinfo" id="qinfo">Träna AI:n för att se Q-tabellen fyllas i.</div>
+    <div class="strategy-card">
+      <div class="strategy-head">
+        <div class="strategy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l2.2 5.6L20 10l-5.8 1.4L12 17l-2.2-5.6L4 10l5.8-1.4z"/></svg></div>
+        <div class="strategy-title">AI:ns inlärda strategi</div>
+      </div>
+      <div class="strategy-body" id="qinfo">Träna AI:n för att se Q-tabellen fyllas i.</div>
+    </div>
+  </div>
+</div>
+
+<div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
+<div class="concept-card" id="conceptCard">
+  <div class="concept-card-inner" id="conceptCardInner">
+    <button class="concept-close" onclick="closeConcept()">✕</button>
+    <div class="concept-icon" id="conceptIcon"></div>
+    <div class="concept-title" id="conceptTitle"></div>
+    <div class="concept-def" id="conceptDef"></div>
+    <div class="concept-illus" id="conceptIllus"></div>
   </div>
 </div>
 
@@ -360,8 +435,7 @@ function startTraining(){
   renderQHeaders();
 
   const alpha=0.03;let done=0,convergenceCount=0;
-  const speedMap={normal:{batch:1,delay:120},fast:{batch:3,delay:60}};
-  const spd=speedMap[document.getElementById('speedSel').value]||speedMap.normal;
+  const spd={batch:3,delay:60};
 
   function run(){
     if(trainPaused)return;
@@ -410,8 +484,7 @@ function resumeTraining(){
   const episodes=+document.getElementById('epSel').value;
   const done0=parseInt(document.getElementById('stEp').textContent);
   const alpha=0.03;let done=done0,convergenceCount=0;
-  const speedMap={normal:{batch:1,delay:120},fast:{batch:3,delay:60}};
-  const spd=speedMap[document.getElementById('speedSel').value]||speedMap.normal;
+  const spd={batch:3,delay:60};
   trainPaused=false;
   function run(){
     if(trainPaused)return;
@@ -497,8 +570,7 @@ function updateQInfo(){
     if(a!==null&&getQ(s,a)>0.80)wins.push(s+' pinnar kvar → ta '+a);
   }
   document.getElementById('qinfo').innerHTML=
-    `<strong>AI:ns inlärda strategi</strong><br>
-    Hemligheten: lämna alltid ett antal pinnar som ger <strong>rest 1</strong> vid division med ${maxTake+1} – dvs. ${Array.from({length:4},(_,i)=>1+i*(maxTake+1)).filter(v=>v<=totalSticks).join(", ")}... – till motståndaren.<br><br>
+    `Hemligheten: lämna alltid ett antal pinnar som ger <strong>rest 1</strong> vid division med ${maxTake+1} – dvs. ${Array.from({length:4},(_,i)=>1+i*(maxTake+1)).filter(v=>v<=totalSticks).join(", ")}... – till motståndaren.<br><br>
     Exempel på drag AI:n lärt sig: <span style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:0.95em">${wins.slice(0,8).join(', ')}</span><br><br>
     Ser du att guldramarna följer det mönstret?`;
 }
@@ -615,21 +687,78 @@ function onSettingsChange(){
   document.getElementById('qinfo').textContent='Träna AI-systemet för att se den inlärda strategin här.';
 }
 
-function toggleInfo(){
-  const btn=document.getElementById('infoToggle');const body=document.getElementById('infoBody');
-  btn.classList.toggle('open');body.classList.toggle('show');
-  document.getElementById('infoBtnText').textContent=body.classList.contains('show')?'💡 Dölj förklaring':'💡 Hur fungerar förstärkningsinlärning?';
+const CONCEPTS={
+  cRules:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="4" width="3" height="16" rx="1.3"/><rect x="10.5" y="4" width="3" height="16" rx="1.3"/><rect x="16" y="4" width="3" height="16" rx="1.3" opacity=".4"/></svg>',
+    title:'NIM-reglerna',
+    def:'Spelare turas om att ta <strong>1–3 pinnar</strong> från högen (aldrig noll). Den som tvingas ta den <strong style="color:var(--bad)">sista</strong> pinnen förlorar. Enkla regler, men optimal strategi kräver att man alltid lämnar rätt antal pinnar kvar åt motståndaren.',
+    illus:'<svg viewBox="0 0 140 70"><g transform="translate(10,10)"><rect x="0" y="0" width="8" height="40" rx="3" fill="#f5d87a"/><rect x="13" y="0" width="8" height="40" rx="3" fill="#f5d87a"/><rect x="26" y="0" width="8" height="40" rx="3" fill="#f5d87a"/><rect x="39" y="0" width="8" height="40" rx="3" fill="#f5d87a" opacity=".35"/><rect x="52" y="0" width="8" height="40" rx="3" fill="#f5d87a" opacity=".35"/></g><path d="M75 30h20m-7-6 7 6-7 6" stroke="#ef5b5b" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="118" cy="30" r="14" fill="rgba(239,91,91,.18)" stroke="#ef5b5b" stroke-width="2"/><text x="118" y="34" text-anchor="middle" font-family="DM Sans" font-weight="700" font-size="12" fill="#ef5b5b">✕</text></svg>'
+  },
+  cRL:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg>',
+    title:'Förstärkningsinlärning',
+    def:'AI-systemet lär sig genom att <strong>spela om och om igen</strong> och se vad som funkar. Drag som leder till vinst får högre betyg (Q-värde), drag som leder till förlust får lägre. Ingen människa visar rätt svar – systemet upptäcker strategin helt själv genom erfarenhet.',
+    illus:'<svg viewBox="0 0 140 70"><circle cx="35" cy="35" r="16" fill="rgba(122,162,255,.18)" stroke="#7aa2ff" stroke-width="2"/><text x="35" y="39" text-anchor="middle" font-family="DM Sans" font-weight="700" font-size="9" fill="#7aa2ff">AI</text><path d="M53 28c20-14 40-8 48 4" stroke="rgba(255,255,255,.4)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M101 32l4 4-4 4" stroke="rgba(255,255,255,.4)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="80" y="18" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(255,255,255,.5)">drag</text><path d="M101 42c-10 14-30 18-48 10" stroke="#34c759" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M55 53l-4-4 4-4" stroke="#34c759" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="80" y="63" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#34c759">belöning</text></svg>'
+  },
+  cQval:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>',
+    title:'Q-värde',
+    def:'Ett Q-värde är AI:ns <strong>betyg</strong> på hur bra ett visst drag är i en viss situation. Högt värde (grönt) = draget brukar leda till vinst. Lågt värde (rött) = draget brukar leda till förlust. Hela Q-tabellen är AI:ns samlade erfarenhet.',
+    illus:'<svg viewBox="0 0 140 70"><g font-family="JetBrains Mono" font-size="10" font-weight="700" text-anchor="middle"><rect x="10" y="10" width="34" height="22" rx="5" fill="rgba(52,199,89,.35)"/><text x="27" y="25" fill="#fff">.82</text><rect x="53" y="10" width="34" height="22" rx="5" fill="rgba(255,255,255,.08)"/><text x="70" y="25" fill="#fff">.10</text><rect x="96" y="10" width="34" height="22" rx="5" fill="rgba(239,91,91,.35)"/><text x="113" y="25" fill="#fff">-.65</text></g><rect x="8" y="8" width="38" height="26" rx="6" fill="none" stroke="#ffd866" stroke-width="2.5"/><text x="27" y="50" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#ffd866">bästa draget</text></svg>'
+  },
+  cExplore:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" opacity=".4"/></svg>',
+    title:'Utforska vs. utnyttja',
+    def:'I början <strong>utforskar</strong> AI:n – provar drag nästan slumpmässigt för att upptäcka vad som fungerar. Ju mer den tränat, desto mer börjar den <strong style="color:var(--gold)">utnyttja</strong> det den redan vet och väljer sina bästa kända drag. Balansen mellan de två är avgörande för bra inlärning.',
+    illus:'<svg viewBox="0 0 140 70"><rect x="10" y="46" width="120" height="10" rx="5" fill="rgba(255,255,255,.08)"/><rect x="10" y="46" width="80" height="10" rx="5" fill="rgba(122,162,255,.5)"/><rect x="90" y="46" width="40" height="10" rx="5" fill="rgba(255,216,102,.55)"/><text x="50" y="30" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#7aa2ff">utforskar</text><text x="110" y="30" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#ffd866">utnyttjar</text><path d="M10 20c40 0 80 20 120 20" stroke="rgba(255,255,255,.25)" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/></svg>'
+  }
+};
+function openConcept(id,ev){
+  ev.stopPropagation();
+  const btn=ev.currentTarget;const r=btn.getBoundingClientRect();
+  const bx=r.left+r.width/2,by=r.top+r.height/2;
+  const cx=window.innerWidth/2,cy=window.innerHeight/2;
+  const c=CONCEPTS[id];if(!c)return;
+  const card=document.getElementById('conceptCard');
+  document.getElementById('conceptIcon').innerHTML=c.icon;
+  document.getElementById('conceptTitle').textContent=c.title;
+  document.getElementById('conceptDef').innerHTML=c.def;
+  document.getElementById('conceptIllus').innerHTML=c.illus||'';
+  card.classList.remove('show');
+  card.style.transition='none';
+  card.style.setProperty('--dx',(bx-cx)+'px');
+  card.style.setProperty('--dy',(by-cy)+'px');
+  void card.offsetHeight;
+  card.style.transition='';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
 }
+function closeConcept(){document.getElementById('conceptCard').classList.remove('show');document.getElementById('conceptBackdrop').classList.remove('show');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
 function toggleQTable(){
   const right=document.querySelector('.right');const app=document.querySelector('.app');const btn=document.getElementById('qtoggleBtn');
   const hidden=right.classList.toggle('hidden');app.classList.toggle('no-qtable');
   btn.classList.toggle('on',!hidden);btn.textContent=hidden?'📊 Visa Q-tabell':'📊 Dölj Q-tabell';
 }
-function toggleRules(){
-  const btn=document.getElementById('rulesToggle');const body=document.getElementById('rulesBody');
-  btn.classList.toggle('open');body.classList.toggle('show');
-  document.getElementById('rulesBtnText').textContent=body.classList.contains('show')?'📖 Dölj reglerna för NIM':'📖 Visa reglerna för NIM';
-}
+(function initCardTilt(){
+  const el=document.getElementById('conceptCardInner');if(!el)return;
+  const MAX_TILT=7;
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+    const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
+    el.style.setProperty('--mx',(px*100)+'%');
+    el.style.setProperty('--my',(py*100)+'%');
+    el.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    const sx=(px-0.5)*22,sy=(py-0.5)*22;
+    el.style.boxShadow=`${-sx}px ${20-sy}px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset`;
+  });
+  el.addEventListener('mouseleave',()=>{
+    el.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%');
+    el.style.boxShadow='';
+  });
+})();
 </script>
 </body>
 </html>
