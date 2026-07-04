@@ -11,17 +11,20 @@
   gtag('js', new Date());
   gtag('config', 'G-ZDWXTZZBBR');
 </script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <style>
    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--border2:#253050;
+    --border-soft:rgba(255,255,255,.06);
     --text:#e8ecf8;--muted:#9aa6c4;--subtle:#c2cde6;
     --spam:#ff6a5e;--ham:#34d399;--spam-bg:rgba(255,106,94,.10);--ham-bg:rgba(52,211,153,.08);
     --spam-glow:rgba(255,106,94,.30);--ham-glow:rgba(52,211,153,.28);
-    --accent:#4d80ff;--accent2:#6698ff;--gold:#ffd866;
+    --accent:#4d80ff;--accent2:#6698ff;--accent-dim:rgba(77,128,255,.14);--gold:#ffd866;
+    --r-md:14px;--r-lg:20px;
+    --ease-out:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);
   }
   body { background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;min-height:100vh; }
   body::before { content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none; }
@@ -29,23 +32,26 @@
   .back-link:hover { color:var(--text);border-color:var(--muted); }
   .lang-link { position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--muted);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2; }
   .lang-link:hover { color:var(--text);border-color:var(--muted); }
-  .lang-link .flag { font-size:1.05em;line-height:1; }
+  .lang-link .flag { display:block;border-radius:2.5px;box-shadow:0 0 0 1px rgba(255,255,255,.1); }
   header { background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);border-bottom:1px solid var(--border);padding:14px 28px 12px;padding-left:140px;text-align:center;position:relative; }
-  header h1 { font-family:'DM Sans',sans-serif;font-size:1.3em;font-weight:700;letter-spacing:-0.01em;color:var(--text); }
+  header h1 { font-family:'Syne',sans-serif;font-size:1.45em;font-weight:800;letter-spacing:-0.02em;color:var(--text); }
   header h1 span { color:var(--accent2); }
   header p { font-size:0.82em;color:var(--muted);max-width:560px;margin:2px auto 0; }
   .tabs { background:var(--surface);border-bottom:1px solid var(--border);display:flex;gap:2px;padding:0 28px; }
-  .tab-btn { font-family:'DM Sans',sans-serif;font-size:0.78em;font-weight:600;letter-spacing:0.04em;color:var(--muted);background:transparent;border:none;border-bottom:2px solid transparent;padding:11px 16px 9px;cursor:pointer;transition:color .2s,border-color .2s; }
-  .tab-btn:hover { color:var(--subtle); }
-  .tab-btn.active { color:var(--text);border-bottom-color:var(--accent); }
+  .tab-btn { font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:600;letter-spacing:0.03em;color:var(--muted);background:transparent;border:none;border-bottom:2px solid transparent;padding:12px 16px 10px;cursor:pointer;transition:color .2s,border-color .2s,transform .2s var(--ease-spring); }
+  .tab-btn:hover { color:var(--subtle);transform:translateY(-1px); }
+  .tab-btn.active { color:var(--text);border-bottom-color:var(--accent);text-shadow:0 0 18px rgba(77,128,255,.4); }
+  .tab-num { font-family:'JetBrains Mono',monospace;font-size:.85em;color:var(--accent2);opacity:.55;margin-right:6px;font-weight:600;transition:opacity .2s; }
+  .tab-btn.active .tab-num { opacity:1; }
   .tab-panel { display:none;padding:20px 28px; }
   .tab-panel.active { display:block; }
   .two-col { display:grid;grid-template-columns:1fr 1fr;gap:20px; }
   .train-top { max-width:760px;margin:0 auto 14px; }
   .train-list .ex-list { max-height:300px; }
-  .card { background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:14px;box-shadow:0 2px 12px rgba(0,0,0,.3); }
+  .card { background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;box-shadow:0 2px 12px rgba(0,0,0,.3);transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out); }
+  .card:hover { transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.35); }
   .card:last-child { margin-bottom:0; }
-  .card-label { font-size:0.78em;font-weight:700;letter-spacing:.01em;color:var(--subtle);margin-bottom:12px;display:block; }
+  .card-label { font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:block; }
   input[type="text"], textarea { width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:9px 12px;outline:none;transition:border-color .2s,box-shadow .2s;resize:vertical; }
   input[type="text"]:focus, textarea:focus { border-color:var(--accent);box-shadow:0 0 0 3px rgba(77,128,255,.15); }
   textarea { height:76px;margin-bottom:12px; }
@@ -55,8 +61,9 @@
   .chip-ham { border-color:rgba(52,211,153,.4);color:var(--ham);background:var(--ham-bg); }
   .chip-spam.sel { background:var(--spam);border-color:var(--spam);color:#fff;box-shadow:0 0 14px var(--spam-glow); }
   .chip-ham.sel { background:var(--ham);border-color:var(--ham);color:#041a0e;box-shadow:0 0 14px var(--ham-glow); }
-  .btn { font-family:'DM Sans',sans-serif;font-size:0.85em;font-weight:600;background:var(--accent);color:#fff;border:none;border-radius:6px;padding:9px 18px;cursor:pointer;transition:background .2s,box-shadow .2s;white-space:nowrap; }
-  .btn:hover { background:#3d6de6;box-shadow:0 0 14px rgba(77,128,255,.3); }
+  .btn { font-family:'DM Sans',sans-serif;font-size:0.85em;font-weight:600;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 18px;cursor:pointer;transition:background .2s,box-shadow .2s,transform .22s var(--ease-spring);white-space:nowrap; }
+  .btn:hover { background:#3d6de6;box-shadow:0 6px 18px rgba(77,128,255,.3);transform:translateY(-1px); }
+  .btn:active { transform:scale(.97); }
   .btn-full { width:100%;margin-top:10px; }
   .btn-danger { background:#c0392b; }
   .btn-danger:hover { background:#e74c3c;box-shadow:0 0 14px rgba(231,76,60,.35); }
@@ -269,8 +276,9 @@
   .verdict-class.ham { color:var(--ham);text-shadow:0 0 20px var(--ham-glow); }
   .verdict-probs { display:flex;gap:20px;margin-top:12px; }
   .verdict-probs span { font-size:13px;font-weight:600; }
-  .empty { text-align:center;padding:48px 20px;color:var(--muted);font-size:14px; }
-  .empty strong { display:block;font-size:15px;color:var(--subtle);margin-bottom:6px; }
+  .empty { text-align:center;padding:48px 20px;color:var(--muted);font-size:14px;line-height:1.7; }
+  .empty::before { content:'🧠';display:block;font-size:2.2em;opacity:.5;margin-bottom:10px; }
+  .empty strong { display:block;font-size:15.5px;color:var(--text);margin-bottom:4px; }
   .legend { display:flex;gap:16px;font-size:11px;margin-top:12px;font-weight:600; }
   .legend span::before { content:'■ '; }
   .legend .ls { color:var(--spam); }
@@ -291,18 +299,32 @@
   .collapse-body.open { display:block; }
   @keyframes fadeIn { from { opacity:0;transform:translateY(-4px); } to { opacity:1;transform:none; } }
   .tab-panel.active { animation:fadeIn .2s ease; }
-  .overlay { position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center; }
+  .overlay { position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center; }
   .overlay.show { display:flex; }
-  .overlay-card { background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:26px 30px;max-width:560px;width:92%;max-height:90vh;overflow-y:auto; }
-  .overlay-card h2 { font-size:1.2em;font-weight:700;margin-bottom:10px;text-align:center; }
+  .overlay-card { background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:560px;width:92%;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s var(--ease-spring); }
+  @keyframes overlayIn { from{opacity:0;transform:translateY(14px) scale(.97);} to{opacity:1;transform:translateY(0) scale(1);} }
+  .intro-viz { display:block;width:210px;height:78px;margin:0 auto 14px; }
+  .intro-viz .iv-mail { transform-box:fill-box;transform-origin:center;animation:ivSort 4.2s ease-in-out infinite; }
+  .intro-viz .iv-mail.m2 { animation-delay:1.4s; }
+  .intro-viz .iv-mail.m3 { animation-delay:2.8s; }
+  .intro-viz .iv-mail.m2 rect { stroke:#34d399; }
+  .intro-viz .iv-mail.m2 polyline { stroke:#34d399; }
+  @keyframes ivSort { 0%{transform:translate(0,0);opacity:0;} 10%{opacity:1;} 38%{transform:translate(0,0);opacity:1;} 62%,72%{transform:translate(var(--sx,-56px),26px) scale(.72);opacity:1;} 84%,100%{transform:translate(var(--sx,-56px),26px) scale(.72);opacity:0;} }
+  .intro-viz .iv-mail.m1 { --sx:-56px; }
+  .intro-viz .iv-mail.m2 { --sx:56px; }
+  .intro-viz .iv-mail.m3 { --sx:-56px; }
+  .overlay-card h2 { font-family:'Syne',sans-serif;font-size:1.4em;font-weight:800;letter-spacing:-.01em;margin-bottom:10px;text-align:center; }
   .overlay-card h2 span { color:var(--accent2); }
-  .overlay-card .o-lead { font-size:0.95em;color:var(--text);line-height:1.8;margin-bottom:20px; }
-  .overlay-card .o-step { display:flex;flex-direction:column;gap:4px;margin-bottom:16px; }
-  .overlay-card .o-step .o-step-h { font-size:0.92em;font-weight:700;color:var(--text);letter-spacing:.02em; }
-  .overlay-card .o-step p { font-size:0.88em;color:var(--muted);line-height:1.7;margin:0; }
+  .overlay-card .o-lead { font-size:0.92em;color:var(--subtle);line-height:1.7;margin-bottom:18px;text-align:center; }
+  .overlay-card .o-step { display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;text-align:left; }
+  .o-step-num { width:25px;height:25px;border-radius:50%;background:rgba(77,128,255,0.14);color:var(--accent2);font-weight:700;font-size:0.8em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.28);padding-top:1px;margin-top:2px; }
+  .overlay-card .o-step .o-step-body { flex:1; }
+  .overlay-card .o-step .o-step-h { font-size:0.9em;font-weight:700;color:var(--text);letter-spacing:.01em;margin-bottom:2px; }
+  .overlay-card .o-step p { font-size:0.85em;color:var(--muted);line-height:1.65;margin:0; }
   .overlay-card .o-step strong { color:var(--text); }
-  .overlay-btn { display:block;width:100%;padding:12px;margin-top:8px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s; }
-  .overlay-btn:hover { background:#3d6de6; }
+  .overlay-btn { display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;margin-top:10px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s var(--ease-spring); }
+  .overlay-btn:hover { background:#3d6de6;transform:translateY(-2px) scale(1.01); }
+  .overlay-btn svg { width:15px;height:15px;flex-shrink:0; }
   .info-btn { background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:5px 12px;font-family:'DM Sans',sans-serif;font-size:0.78em;font-weight:600;cursor:pointer;transition:.2s; }
   .info-btn:hover { border-color:var(--accent2);color:var(--text); }
   .term { border-bottom:1px dotted var(--accent2);cursor:help;color:inherit;transition:background .15s,border-color .15s;border-radius:2px; }
@@ -311,11 +333,41 @@
   #term-popover.show { display:block;animation:fadeIn .15s ease; }
   #term-popover .tp-term { display:block;font-weight:700;color:var(--text);margin-bottom:5px;font-size:12.5px;letter-spacing:.01em; }
   #term-popover .tp-term::before { content:'›';color:var(--accent2);margin-right:6px; }
-  .gloss-item { padding:13px 0;border-bottom:1px solid var(--border); }
-  .gloss-item:first-child { padding-top:0; }
-  .gloss-item:last-child { border-bottom:none;padding-bottom:0; }
-  .gloss-term { font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:4px; }
-  .gloss-def { font-size:12.5px;color:var(--subtle);line-height:1.7; }
+  .glossary-grid { display:flex;flex-wrap:wrap;gap:7px; }
+  .g-tag { display:inline-flex;align-items:center;gap:6px;font-family:'DM Sans',sans-serif;font-size:0.82em;font-weight:600;padding:7px 14px 7px 10px;border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--muted);cursor:pointer;transition:.2s var(--ease-spring); }
+  .g-tag:hover { border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px); }
+  .g-tag:active { transform:scale(.95); }
+  .g-tag .g-ico { width:14px;height:14px;flex-shrink:0;opacity:.8; }
+  .concept-backdrop { position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out); }
+  .concept-backdrop.show { opacity:1;pointer-events:auto; }
+  .concept-card { position:fixed;top:50%;left:50%;z-index:301;width:350px;max-width:88vw;perspective:1000px;
+    transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
+    transition:transform .38s var(--ease-spring),opacity .26s var(--ease-out); }
+  .concept-card.show { transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto; }
+  .concept-card-inner { position:relative;text-align:center;transform-style:preserve-3d;
+    background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
+    box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;
+    transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
+    transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);will-change:transform; }
+  .concept-card-inner::before { content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+    padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,206,84,.15) 45%,transparent 65%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+    opacity:0;transition:opacity .35s var(--ease-out); }
+  .concept-card-inner:hover::before { opacity:1; }
+  .concept-card-inner::after { content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+    background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.09),transparent 60%);
+    opacity:0;transition:opacity .35s var(--ease-out); }
+  .concept-card-inner:hover::after { opacity:1; }
+  .concept-close { position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);z-index:3;transform:translateZ(30px); }
+  .concept-close:hover { border-color:var(--spam);color:var(--spam);transform:translateZ(30px) rotate(90deg); }
+  .concept-icon { width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18); }
+  .concept-icon svg { width:28px;height:28px; }
+  .concept-title { font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text); }
+  .concept-def { font-size:.85em;line-height:1.65;color:var(--muted);margin-bottom:14px;position:relative;z-index:3;transform:translateZ(18px);text-align:left; }
+  .concept-def strong { color:var(--text); } .concept-def em { color:var(--accent2);font-style:normal; }
+  .concept-illus { background:rgba(0,0,0,.25);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;transform:translateZ(10px); }
+  .concept-illus:empty { display:none; }
+  .concept-illus svg { width:100%;height:auto;max-height:90px; }
   @media (max-width:700px) {
     .two-col { grid-template-columns:1fr; }
     .bar-row { grid-template-columns:80px 1fr 44px 68px; }
@@ -327,49 +379,64 @@
 </head>
 <body>
 
+
 <header>
  <a class="back-link" href="/">← AI-aktiviteter</a>
  <h1>Naïve <span>Bayes</span>-labbet</h1>
  <p>Ett interaktivt klassificeringslaboratorium</p>
- <a class="lang-link" href="https://www.ai-aktiviteter.se/naive-bayes-lab_ENG"><span class="flag">🇬🇧</span> English</a>
+ <a class="lang-link" href="https://www.ai-aktiviteter.se/naive-bayes-lab_ENG"><svg class="flag" width="18" height="13" viewBox="0 0 60 40" aria-hidden="true"><clipPath id="ukflag"><rect width="60" height="40" rx="4"/></clipPath><g clip-path="url(#ukflag)"><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#C8102E" stroke-width="4"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="13"/><path d="M30 0v40M0 20h60" stroke="#C8102E" stroke-width="8"/></g></svg> English</a>
 </header>
 
+
 <nav class="tabs">
-  <button class="tab-btn active" data-tab="train">① Träna</button>
-  <button class="tab-btn"        data-tab="model">② Modell</button>
-  <button class="tab-btn"        data-tab="classify">③ Klassificera</button>
+  <button class="tab-btn active" data-tab="train"><span class="tab-num">01</span>Träna</button>
+  <button class="tab-btn"        data-tab="model"><span class="tab-num">02</span>Modell</button>
+  <button class="tab-btn"        data-tab="classify"><span class="tab-num">03</span>Klassificera</button>
   <button class="tab-btn"        data-tab="glossary" style="margin-left:auto">Begrepp</button>
 </nav>
 
+
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
+    <svg class="intro-viz" viewBox="0 0 210 78" aria-hidden="true">
+      <rect x="18" y="52" width="52" height="20" rx="5" fill="rgba(255,106,94,.1)" stroke="#ff6a5e" stroke-width="1.3"/>
+      <text x="44" y="65.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7.5" fill="#ff6a5e" font-weight="700">SKRÄP</text>
+      <rect x="140" y="52" width="52" height="20" rx="5" fill="rgba(52,211,153,.08)" stroke="#34d399" stroke-width="1.3"/>
+      <text x="166" y="65.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7.5" fill="#34d399" font-weight="700">EJ SKRÄP</text>
+      <g class="iv-mail m1"><rect x="91" y="8" width="28" height="19" rx="3.5" fill="rgba(14,18,34,.9)" stroke="#ff6a5e" stroke-width="1.4"/><polyline points="93,10.5 105,19 117,10.5" fill="none" stroke="#ff6a5e" stroke-width="1.4"/></g>
+      <g class="iv-mail m2"><rect x="91" y="8" width="28" height="19" rx="3.5" fill="rgba(14,18,34,.9)" stroke="#34d399" stroke-width="1.4"/><polyline points="93,10.5 105,19 117,10.5" fill="none" stroke="#34d399" stroke-width="1.4"/></g>
+      <g class="iv-mail m3"><rect x="91" y="8" width="28" height="19" rx="3.5" fill="rgba(14,18,34,.9)" stroke="#ff6a5e" stroke-width="1.4"/><polyline points="93,10.5 105,19 117,10.5" fill="none" stroke="#ff6a5e" stroke-width="1.4"/></g>
+    </svg>
     <h2>Naïve <span>Bayes</span>-labbet</h2>
     <p class="o-lead">
-      I det här labbet tränar du en <strong>Naïve Bayes-klassificerare</strong> — samma typ av algoritm som används i spamfilter.
-      Du bestämmer vad modellen lär sig, och kan sedan se hur matematiken bakom algoritmen fungerar när den klassificerar nya mejl.
+      Här tränar du en <strong>Naïve Bayes-klassificerare</strong> — samma typ av algoritm som används i spamfilter — och ser matematiken bakom varje beslut.
     </p>
     <div class="o-step">
-      <div class="o-step-h">① Träna</div>
-      <p>Klicka på <strong>⚡ Generera</strong> så fylls modellen med exempelmejl automatiskt. Du styr hur många och hur fördelningen mellan skräppost och vanliga mejl ser ut.</p>
+      <div class="o-step-num">01</div>
+      <div class="o-step-body"><div class="o-step-h">Träna</div>
+      <p>Klicka på <strong>Generera</strong> så fylls modellen med exempelmejl. Du styr antalet och fördelningen mellan skräppost och vanliga mejl.</p></div>
     </div>
     <div class="o-step">
-      <div class="o-step-h">② Modell</div>
-      <p>Se vad modellen lärt sig — vilka ord som lutar mot skräppost och vilka som lutar mot vanliga mejl, och hur starkt.</p>
+      <div class="o-step-num">02</div>
+      <div class="o-step-body"><div class="o-step-h">Utforska modellen</div>
+      <p>Se vad modellen lärt sig — vilka ord som lutar mot skräppost och vilka som lutar mot vanliga mejl, och hur starkt.</p></div>
     </div>
     <div class="o-step">
-      <div class="o-step-h">③ Klassificera</div>
-      <p>Skriv in ett mejl och tryck Enter. Du får ett svar med modellens säkerhet, och du kan följa beräkningarna bakom klassificeringen.</p>
+      <div class="o-step-num">03</div>
+      <div class="o-step-body"><div class="o-step-h">Klassificera</div>
+      <p>Skriv ett eget mejl och tryck Enter. Du får modellens svar med säkerhet i procent — och kan följa hela beräkningen bakom.</p></div>
     </div>
-    <button class="overlay-btn" onclick="closeIntro()">Kom igång →</button>
+    <button class="overlay-btn" onclick="closeIntro()">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 </div>
+
 
 <section id="tab-train" class="tab-panel active">
   <div class="train-top">
       <div class="card">
         <span class="card-label">Skapa träningsdata</span>
         <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.7">
-          Genererar exempelmejl ur en inbyggd bank. Varje gång du klickar läggs fler exempel till i träningsmängden, så du kan bygga upp den efterhand. Variera fördelningen för att se hur ojämn träningsdata påverkar modellen.
+          Varje klick lägger till fler exempelmejl ur en inbyggd bank. Variera fördelningen för att se hur ojämn träningsdata påverkar modellen.
         </p>
         <div class="gen-row" style="margin-bottom:12px">
           <span style="font-size:12px;color:var(--muted)">Antal:</span>
@@ -395,6 +462,7 @@
         <div class="status-msg" id="gen-status"></div>
       </div>
 
+
       <div class="card">
         <span class="card-label">Statistik</span>
         <div class="stat-grid" id="stat-grid">
@@ -415,6 +483,7 @@
       </div>
   </div>
 
+
   <div class="card train-list" style="margin-bottom:0">
       <span class="card-label">
         Träningsdata
@@ -424,6 +493,7 @@
       </span>
       <div class="ex-list" id="ex-list"></div>
     </div>
+
 
   <div style="margin-top:20px">
     <button class="collapse-toggle" id="own-toggle" onclick="toggleOwn()">
@@ -463,6 +533,7 @@
   </div>
 </section>
 
+
 <section id="tab-model" class="tab-panel">
   <div id="model-empty" class="empty"><strong>Ingen modell ännu</strong>Lägg till träningsdata i fliken Träna.</div>
   <div id="model-content" style="display:none">
@@ -481,6 +552,7 @@
     </div>
   </div>
 </section>
+
 
 <section id="tab-classify" class="tab-panel">
   <div id="classify-empty" class="empty"><strong>Ingen modell ännu</strong>Lägg till träningsdata i fliken Träna.</div>
@@ -522,15 +594,27 @@
   </div>
 </section>
 
+
 <section id="tab-glossary" class="tab-panel">
   <div class="card">
     <span class="card-label">Begrepp</span>
     <p style="font-size:12px;color:var(--muted);line-height:1.7;margin:-4px 0 14px">
-      En ordlista över de viktigaste begreppen i labbet. Samma förklaringar dyker upp när du klickar på understrukna ord i texten.
+      Klicka på ett begrepp för att öppna förklaringen. Samma förklaringar dyker upp när du klickar på understrukna ord i texten.
     </p>
     <div id="glossary-list"></div>
   </div>
 </section>
+
+<div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
+<div class="concept-card" id="conceptCard">
+  <div class="concept-card-inner" id="conceptCardInner">
+    <button class="concept-close" onclick="closeConcept()">✕</button>
+    <div class="concept-icon" id="conceptIcon"></div>
+    <div class="concept-title" id="conceptTitle"></div>
+    <div class="concept-def" id="conceptDef"></div>
+    <div class="concept-illus" id="conceptIllus"></div>
+  </div>
+</div>
 
 <script>
 const STOP = new Set([
@@ -541,25 +625,50 @@ const STOP = new Set([
   'under','igen','bara','sedan','också','eller','samt','dessa','detta',
 ]);
 
+
 let examples = [];
 let newLabel = "SPAM";
 const DISPLAY = { SPAM: 'Skräppost', HAM: 'Ej skräppost' };
 let modelShown = 18;
 let modelWordsCache = null;
 
+
 const GLOSSARY = {
-  'bayes':        { term:'Bayes sats', def:'En regel för att räkna ut hur sannolik en klass är givet en text, utifrån hur sannolik texten är i varje klass och hur vanlig klassen är.' },
-  'naiv':         { term:'Naïve (naiv)', def:'Metoden kallas "naiv" för att den antar att varje ord är oberoende av de andra orden. Det stämmer sällan i verkligheten, men förenklingen fungerar förvånansvärt bra.' },
-  'prior':        { term:'Priorsannolikhet', def:'Hur vanlig en klass är i träningsdatan, innan modellen tittat på själva texten. Räknas som antal mejl i klassen delat med totalt antal mejl.' },
-  'klass':        { term:'Klass', def:'Kategorierna modellen väljer mellan. Här: skräppost eller ej skräppost.' },
-  'tokenisering': { term:'Tokenisering', def:'Att dela upp en text i enskilda ord (tokens) som modellen kan räkna på.' },
-  'stoppord':     { term:'Stoppord', def:'Mycket vanliga ord som "och", "att", "det". De filtreras bort eftersom de förekommer lika ofta i alla klasser och därför inte säger något om vilken klass texten tillhör.' },
-  'ordforrad':    { term:'Ordförråd (|V|)', def:'Antalet unika ord modellen sett i all träningsdata. Skrivs |V| och används i nämnaren vid Laplace-utjämning.' },
-  'laplace':      { term:'Laplace-utjämning', def:'Att lägga till 1 i täljaren och |V| i nämnaren för varje ordsannolikhet. Utan den skulle ett ord som aldrig förekommit i en klass få sannolikheten noll — och eftersom alla ordsannolikheter multipliceras ihop skulle ett enda okänt ord dra hela produkten till noll. Med +1 får även osedda ord en liten sannolikhet större än noll.' },
-  'sannolikhet':  { term:'Ordsannolikhet P(ord | klass)', def:'Hur sannolikt ett ord är i en viss klass, beräknat från hur ofta ordet förekommit i klassens träningsdata.' },
-  'normalisera':  { term:'Normalisera', def:'Att räkna om tal så de blir jämförbara. Här delas varje klass produkt med summan av alla klassers produkter, så svaren blir procent som tillsammans blir 100 %.' },
-  'evidens':      { term:'P(text) – evidensen', def:'Sannolikheten att se texten över huvud taget. Den är samma för alla klasser och behöver inte räknas separat: den är just summan i nämnaren när vi normaliserar.' },
+  'bayes':        { term:'Bayes sats', def:'En regel för att räkna ut hur sannolik en klass är givet en text, utifrån hur sannolik texten är i varje klass och hur vanlig klassen är.',
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 17c3-8 5-8 8 0M12 17c2-5 4-5 6 0"/><path d="M3 20h18"/></svg>',
+    illus:'<svg viewBox="0 0 140 70"><rect x="10" y="22" width="52" height="26" rx="5" fill="rgba(77,128,255,.12)" stroke="#4d80ff" stroke-width="1.3"/><text x="36" y="38.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#7aa2ff" font-weight="700">P(klass|text)</text><path d="M66 35h12" stroke="#8791b3" stroke-width="1.5"/><path d="M74 31l5 4-5 4" fill="none" stroke="#8791b3" stroke-width="1.5"/><rect x="82" y="22" width="50" height="26" rx="5" fill="rgba(255,206,84,.08)" stroke="#ffce54" stroke-width="1.3"/><text x="107" y="38.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#ffce54" font-weight="700">P(text|klass)</text></svg>' },
+  'naiv':         { term:'Naïve (naiv)', def:'Metoden kallas "naiv" för att den antar att varje ord är oberoende av de andra orden. Det stämmer sällan i verkligheten, men förenklingen fungerar förvånansvärt bra.',
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="2.4"/><circle cx="12" cy="12" r="2.4"/><circle cx="19" cy="12" r="2.4"/><path d="M7.5 12h2M14.5 12h2" stroke-dasharray="1.5 2"/></svg>',
+    illus:'<svg viewBox="0 0 140 70"><g font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700"><rect x="8" y="26" width="36" height="18" rx="4" fill="rgba(122,162,255,.12)" stroke="#7aa2ff" stroke-width="1.2"/><text x="26" y="38" text-anchor="middle" fill="#7aa2ff">vinn</text><rect x="52" y="26" width="36" height="18" rx="4" fill="rgba(122,162,255,.12)" stroke="#7aa2ff" stroke-width="1.2"/><text x="70" y="38" text-anchor="middle" fill="#7aa2ff">gratis</text><rect x="96" y="26" width="36" height="18" rx="4" fill="rgba(122,162,255,.12)" stroke="#7aa2ff" stroke-width="1.2"/><text x="114" y="38" text-anchor="middle" fill="#7aa2ff">pris</text></g><path d="M45 35h6M89 35h6" stroke="#ef5b5b" stroke-width="1.5" stroke-dasharray="2 2"/><text x="70" y="60" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#8791b3">orden antas oberoende</text></svg>' },
+  'prior':        { term:'Priorsannolikhet', def:'Hur vanlig en klass är i träningsdatan, innan modellen tittat på själva texten. Räknas som antal mejl i klassen delat med totalt antal mejl.',
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5V12l6 6"/></svg>',
+    illus:'<svg viewBox="0 0 140 70"><rect x="15" y="28" width="66" height="16" rx="4" fill="rgba(255,106,94,.3)" stroke="#ff6a5e" stroke-width="1.2"/><rect x="81" y="28" width="44" height="16" rx="4" fill="rgba(52,211,153,.25)" stroke="#34d399" stroke-width="1.2"/><text x="48" y="22" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#ff6a5e" font-weight="700">60%</text><text x="103" y="22" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#34d399" font-weight="700">40%</text><text x="70" y="60" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#8791b3">före texten lästs</text></svg>' },
+  'klass':        { term:'Klass', def:'Kategorierna modellen väljer mellan. Här: skräppost eller ej skräppost.',
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="8" height="14" rx="2"/><rect x="13" y="5" width="8" height="14" rx="2"/></svg>',
+    illus:'<svg viewBox="0 0 140 70"><rect x="16" y="20" width="48" height="30" rx="6" fill="rgba(255,106,94,.1)" stroke="#ff6a5e" stroke-width="1.4"/><text x="40" y="38.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7.5" fill="#ff6a5e" font-weight="700">SKRÄP</text><rect x="76" y="20" width="48" height="30" rx="6" fill="rgba(52,211,153,.08)" stroke="#34d399" stroke-width="1.4"/><text x="100" y="38.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7.5" fill="#34d399" font-weight="700">EJ SKRÄP</text></svg>' },
+  'tokenisering': { term:'Tokenisering', def:'Att dela upp en text i enskilda ord (tokens) som modellen kan räkna på.',
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h9"/><path d="M9 4.5v5M15 4.5v5" stroke-dasharray="1.5 2"/></svg>',
+    illus:'<svg viewBox="0 0 140 70"><text x="70" y="18" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#c2cde6">"Vinn gratis pris"</text><path d="M70 24v8" stroke="#8791b3" stroke-width="1.3"/><path d="M66 29l4 4 4-4" fill="none" stroke="#8791b3" stroke-width="1.3"/><g font-family="JetBrains Mono, monospace" font-size="8" font-weight="700"><rect x="10" y="40" width="34" height="16" rx="4" fill="rgba(122,162,255,.12)" stroke="#7aa2ff" stroke-width="1.1"/><text x="27" y="51" text-anchor="middle" fill="#7aa2ff">vinn</text><rect x="52" y="40" width="38" height="16" rx="4" fill="rgba(122,162,255,.12)" stroke="#7aa2ff" stroke-width="1.1"/><text x="71" y="51" text-anchor="middle" fill="#7aa2ff">gratis</text><rect x="98" y="40" width="32" height="16" rx="4" fill="rgba(122,162,255,.12)" stroke="#7aa2ff" stroke-width="1.1"/><text x="114" y="51" text-anchor="middle" fill="#7aa2ff">pris</text></g></svg>' },
+  'stoppord':     { term:'Stoppord', def:'Mycket vanliga ord som "och", "att", "det". De filtreras bort eftersom de förekommer lika ofta i alla klasser och därför inte säger något om vilken klass texten tillhör.',
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/></svg>',
+    illus:'<svg viewBox="0 0 140 70"><g font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700"><text x="25" y="32" text-anchor="middle" fill="#5b6785">och</text><path d="M13 29l24 0" stroke="#ef5b5b" stroke-width="1.4"/><text x="60" y="32" text-anchor="middle" fill="#5b6785">att</text><path d="M50 29l20 0" stroke="#ef5b5b" stroke-width="1.4"/><text x="100" y="32" text-anchor="middle" fill="#7aa2ff">gratis</text><text x="42" y="52" text-anchor="middle" fill="#5b6785">det</text><path d="M31 49l22 0" stroke="#ef5b5b" stroke-width="1.4"/><text x="85" y="52" text-anchor="middle" fill="#7aa2ff">vinn</text></g></svg>' },
+  'ordforrad':    { term:'Ordförråd (|V|)', def:'Antalet unika ord modellen sett i all träningsdata. Skrivs |V| och används i nämnaren vid Laplace-utjämning.',
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V5a2 2 0 012-2h13v18H6a2 2 0 01-2-2zM19 17H6a2 2 0 00-2 2"/></svg>',
+    illus:'<svg viewBox="0 0 140 70"><rect x="30" y="12" width="80" height="46" rx="8" fill="none" stroke="#7aa2ff" stroke-width="1.4" stroke-dasharray="4 3"/><g font-family="JetBrains Mono, monospace" font-size="7.5" fill="#c2cde6"><text x="48" y="28">vinn</text><text x="80" y="28">pris</text><text x="44" y="42">gratis</text><text x="84" y="42">möte</text><text x="52" y="54">konto</text></g><text x="20" y="40" font-family="JetBrains Mono, monospace" font-size="12" fill="#ffce54" font-weight="700">|V|</text></svg>' },
+  'laplace':      { term:'Laplace-utjämning', def:'Att lägga till 1 i täljaren och |V| i nämnaren för varje ordsannolikhet. Utan den skulle ett ord som aldrig förekommit i en klass få sannolikheten noll — och eftersom alla ordsannolikheter multipliceras ihop skulle ett enda okänt ord dra hela produkten till noll. Med +1 får även osedda ord en liten sannolikhet större än noll.',
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/><circle cx="12" cy="12" r="9.5" stroke-dasharray="2 3"/></svg>',
+    illus:'<svg viewBox="0 0 140 70"><line x1="14" y1="54" x2="126" y2="54" stroke="rgba(255,255,255,.12)"/><rect x="24" y="26" width="18" height="28" rx="3" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="1.2"/><rect x="52" y="36" width="18" height="18" rx="3" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="1.2"/><rect x="80" y="50" width="18" height="4" rx="2" fill="rgba(255,206,84,.4)" stroke="#ffce54" stroke-width="1.2"/><text x="89" y="44" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#ffce54" font-weight="700">+1</text><text x="89" y="65" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6.5" fill="#8791b3">aldrig sett</text></svg>' },
+  'sannolikhet':  { term:'Ordsannolikhet P(ord | klass)', def:'Hur sannolikt ett ord är i en viss klass, beräknat från hur ofta ordet förekommit i klassens träningsdata.',
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V9M10 20V4M16 20v-9M22 20H2"/></svg>',
+    illus:'<svg viewBox="0 0 140 70"><g font-family="JetBrains Mono, monospace" font-size="7.5"><text x="14" y="24" fill="#c2cde6">gratis</text><rect x="52" y="16" width="66" height="10" rx="3" fill="rgba(255,106,94,.35)" stroke="#ff6a5e" stroke-width="1"/><text x="14" y="44" fill="#c2cde6">möte</text><rect x="52" y="36" width="20" height="10" rx="3" fill="rgba(255,106,94,.35)" stroke="#ff6a5e" stroke-width="1"/><text x="14" y="63" fill="#8791b3">i klassen SKRÄP</text></g></svg>' },
+  'normalisera':  { term:'Normalisera', def:'Att räkna om tal så de blir jämförbara. Här delas varje klass produkt med summan av alla klassers produkter, så svaren blir procent som tillsammans blir 100 %.',
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16M9 4l-3 16M18 4l-3 16"/></svg>',
+    illus:'<svg viewBox="0 0 140 70"><rect x="20" y="28" width="63" height="14" rx="4" fill="rgba(255,106,94,.3)" stroke="#ff6a5e" stroke-width="1.2"/><rect x="83" y="28" width="37" height="14" rx="4" fill="rgba(52,211,153,.25)" stroke="#34d399" stroke-width="1.2"/><text x="51" y="22" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#ff6a5e" font-weight="700">63%</text><text x="101" y="22" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#34d399" font-weight="700">37%</text><text x="70" y="58" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#8791b3">summan = 100%</text></svg>' },
+  'evidens':      { term:'P(text) – evidensen', def:'Sannolikheten att se texten över huvud taget. Den är samma för alla klasser och behöver inte räknas separat: den är just summan i nämnaren när vi normaliserar.',
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M7 7h10M9 17h6"/></svg>',
+    illus:'<svg viewBox="0 0 140 70"><text x="70" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#c2cde6" font-weight="700">P(spam)·P(text|spam)</text><line x1="24" y1="35" x2="116" y2="35" stroke="#7aa2ff" stroke-width="1.5"/><text x="70" y="52" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#ffce54" font-weight="700">summan för alla klasser</text></svg>' },
 };
+
 
 function term(key, label) {
   const g = GLOSSARY[key];
@@ -567,10 +676,12 @@ function term(key, label) {
   return `<span class="term" data-term="${key}" tabindex="0" role="button">${text}</span>`;
 }
 
+
 function initGlossary() {
   let pop = document.getElementById('term-popover');
   if (!pop) { pop = document.createElement('div'); pop.id = 'term-popover'; document.body.appendChild(pop); }
   let pinned = false, current = null;
+
 
   function show(el) {
     const g = GLOSSARY[el.dataset.term];
@@ -588,6 +699,7 @@ function initGlossary() {
     current = el;
   }
   function hide() { pop.classList.remove('show'); pinned = false; current = null; }
+
 
   document.addEventListener('click', e => {
     const t = e.target.closest('.term');
@@ -618,20 +730,66 @@ function initGlossary() {
   if (typeof window !== 'undefined') window.addEventListener('resize', hide);
 }
 
+
 function renderGlossary() {
   const el = document.getElementById('glossary-list');
   if (!el) return;
-  el.innerHTML = Object.values(GLOSSARY).map(g => `
-    <div class="gloss-item">
-      <div class="gloss-term">${g.term}</div>
-      <div class="gloss-def">${g.def}</div>
-    </div>`).join('');
+  el.innerHTML = '<div class="glossary-grid">' + Object.entries(GLOSSARY).map(([key, g]) => `
+    <span class="g-tag" onclick="openConceptTerm('${key}', event)"><span class="g-ico">${g.icon || ''}</span>${g.term}</span>`).join('') + '</div>';
 }
+
+function openConceptTerm(key, ev){
+  ev.stopPropagation();
+  const g = GLOSSARY[key]; if(!g) return;
+  const btn = ev.currentTarget; const r = btn.getBoundingClientRect();
+  const bx = r.left + r.width/2, by = r.top + r.height/2;
+  const cx = window.innerWidth/2, cy = window.innerHeight/2;
+  const card = document.getElementById('conceptCard');
+  document.getElementById('conceptIcon').innerHTML = g.icon || '';
+  document.getElementById('conceptTitle').textContent = g.term;
+  document.getElementById('conceptDef').innerHTML = g.def;
+  document.getElementById('conceptIllus').innerHTML = g.illus || '';
+  card.classList.remove('show');
+  card.style.transition = 'none';
+  card.style.setProperty('--dx', (bx-cx)+'px');
+  card.style.setProperty('--dy', (by-cy)+'px');
+  void card.offsetHeight;
+  card.style.transition = '';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
+}
+function closeConcept(){
+  document.getElementById('conceptCard').classList.remove('show');
+  document.getElementById('conceptBackdrop').classList.remove('show');
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeConcept(); });
+
+(function initCardTilt(){
+  const el = document.getElementById('conceptCardInner'); if(!el) return;
+  const MAX_TILT = 7;
+  el.addEventListener('mousemove', e => {
+    const r = el.getBoundingClientRect();
+    const px = (e.clientX-r.left)/r.width, py = (e.clientY-r.top)/r.height;
+    const rx = (0.5-py)*MAX_TILT*2, ry = (px-0.5)*MAX_TILT*2;
+    el.style.setProperty('--mx',(px*100)+'%');
+    el.style.setProperty('--my',(py*100)+'%');
+    el.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    const sx = (px-0.5)*22, sy = (py-0.5)*22;
+    el.style.boxShadow = `${-sx}px ${20-sy}px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset`;
+  });
+  el.addEventListener('mouseleave', () => {
+    el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    el.style.setProperty('--mx','50%'); el.style.setProperty('--my','50%');
+    el.style.boxShadow = '';
+  });
+})();
+
 
 function tokenize(text) {
   return (text.toLowerCase().match(/[a-zåäö]+/g) || [])
     .filter(w => w.length > 2 && !STOP.has(w));
 }
+
 
 function buildModel() {
   const classes = [...new Set(examples.map(e => e.label))];
@@ -648,11 +806,13 @@ function buildModel() {
   return { cc, wc, totals, vocab: [...vocab], vs: vocab.size, total: examples.length, classes };
 }
 
+
 function getClassifySteps(text, model) {
   const { cc, wc, totals, vs, total, classes } = model;
   const tokens = tokenize(text);
   let lp = {};
   classes.forEach(c => lp[c] = Math.log(cc[c] / total));
+
 
   function toPosteriors(lp) {
     const mx = Math.max(...Object.values(lp));
@@ -661,6 +821,7 @@ function getClassifySteps(text, model) {
     classes.forEach(c => p[c] = Math.exp(lp[c] - mx) / s);
     return p;
   }
+
 
   const steps = [{ word: 'Prior', posteriors: toPosteriors({...lp}), wi: null }];
   tokens.forEach(w => {
@@ -676,9 +837,11 @@ function getClassifySteps(text, model) {
   return { steps, tokens };
 }
 
+
 function pct(x) { return (x * 100).toFixed(1) + '%'; }
 function fmt4(x) { return x.toFixed(4); }
 function colorOf(cls) { return cls === 'SPAM' ? 'var(--spam)' : 'var(--ham)'; }
+
 
 function texEsc(str) {
   return String(str).replace(/[\\{}$&#%_^~]/g, m => ({
@@ -714,6 +877,7 @@ function renderMath(root) {
   });
 }
 
+
 function renderExList() {
   const el = document.getElementById('ex-list');
   el.innerHTML = examples.map((ex, i) => `
@@ -723,6 +887,7 @@ function renderExList() {
       <button class="del-btn" onclick="deleteEx(${i})" title="Ta bort">×</button>
     </div>`).join('');
 }
+
 
 function renderStats() {
   const m = examples.length >= 2 ? buildModel() : null;
@@ -738,15 +903,18 @@ function renderStats() {
     m2 ? `Ordförråd: ${m2.vs} unika ord` : 'Ordförråd: — ord';
 }
 
+
 function renderModel() {
   const hasData = examples.length >= 2;
   document.getElementById('model-empty').style.display   = hasData ? 'none' : 'block';
   document.getElementById('model-content').style.display = hasData ? 'block' : 'none';
   if (!hasData) return;
 
+
   const m = buildModel();
   const { wc, totals, vs } = m;
   const SPAM = 'SPAM', HAM = 'HAM';
+
 
   const vocab = new Set([...Object.keys(wc[SPAM] || {}), ...Object.keys(wc[HAM] || {})]);
   const words = [];
@@ -762,9 +930,11 @@ function renderModel() {
   words.sort((a,b) => b.lean - a.lean);
   modelWordsCache = { words, totals, vs };
 
+
   modelShown = Math.min(18, words.length);
   renderTugList();
 }
+
 
 function renderTugList() {
   if (!modelWordsCache) return;
@@ -772,12 +942,15 @@ function renderTugList() {
   const SPAM = 'SPAM';
   const n = Math.min(modelShown, words.length);
 
+
   const half = Math.ceil(n / 2);
   const topSpam = words.slice(0, half);
   const topHam  = words.slice(Math.max(half, words.length - (n - topSpam.length)));
   const shownWords = [...topSpam, ...topHam].sort((a,b) => b.lean - a.lean);
 
+
   const maxLean = Math.max(1, ...words.map(x => Math.abs(x.lean)));
+
 
   document.getElementById('tug-list').innerHTML = shownWords.map(x => {
     const spam = x.lean > 0;
@@ -812,6 +985,7 @@ function renderTugList() {
     </details>`;
   }).join('');
 
+
   const moreWrap = document.getElementById('tug-more');
   const remaining = words.length - n;
   if (remaining > 0) {
@@ -824,18 +998,22 @@ function renderTugList() {
   renderMath(document.getElementById('tug-list'));
 }
 
+
 function showMoreWords() {
   modelShown = Math.min(modelShown + 10, (modelWordsCache?.words.length || modelShown));
   renderTugList();
 }
 
+
 function classify() {
   const text = document.getElementById('classify-input').value.trim();
   if (!text || examples.length < 2) return;
 
+
   const m = buildModel();
   const { steps, tokens } = getClassifySteps(text, m);
   const { cc, wc, totals, vs, total, classes } = m;
+
 
   const final = steps[steps.length - 1];
   const pred  = Object.entries(final.posteriors).sort((a,b) => b[1]-a[1])[0][0];
@@ -846,6 +1024,7 @@ function classify() {
   document.getElementById('verdict-class').className    = `verdict-class ${pred.toLowerCase()}`;
   document.getElementById('verdict-probs').innerHTML    =
     classes.map(c => `<span style="color:${colorOf(c)}">${DISPLAY[c]}: <strong>${pct(final.posteriors[c])}</strong></span>`).join('');
+
 
   const confPct = conf * 100;
   const confColor = confPct >= 85 ? colorOf(pred) : confPct >= 65 ? '#fbbf24' : '#94a3b8';
@@ -864,6 +1043,7 @@ function classify() {
     <div class="confidence-verdict" style="color:${confColor}">${confPct.toFixed(1)}% — ${confText}</div>
     <div style="font-size:12px;color:var(--subtle);margin-top:4px">${confNote}</div>`;
 
+
   const rawWords = (text.toLowerCase().match(/[a-zåäö]+/g) || []);
   document.getElementById('token-display').innerHTML = rawWords.map(w => {
     if (w.length <= 2)     return `<span class="token short" title="För kort (≤2 tecken)">${escHtml(w)}</span>`;
@@ -874,6 +1054,7 @@ function classify() {
     document.getElementById('token-display').innerHTML =
       `<span style="color:var(--muted);font-size:12px">Inga ord hittades i texten.</span>`;
   }
+
 
   let html = `
   <div class="card" style="margin-bottom:12px;padding-bottom:16px">
@@ -888,6 +1069,7 @@ function classify() {
       <div><span class="fp-dot" style="background:#9aa6c4"></span> <strong style="color:#9aa6c4">${term('evidens','P(text)')}</strong> — samma för båda klasser, så vi ${term('normalisera','normaliserar')} bort den. <em>Detta sker i steg 3.</em></div>
     </div>
   </div>`;
+
 
   const priorPost = steps[0].posteriors;
   html += `
@@ -925,9 +1107,11 @@ function classify() {
     </div>
   </details>`;
 
+
   if (tokens.length === 0) {
     html += `<div class="card"><p style="font-size:12px;color:var(--muted)">Inga meningsbärande ord hittades i texten efter filtrering av stoppord.</p></div>`;
   }
+
 
   if (tokens.length > 0) {
     let rows = '';
@@ -935,6 +1119,7 @@ function classify() {
       const pS = step.wi['SPAM'] ? step.wi['SPAM'].prob : 0;
       const pH = step.wi['HAM']  ? step.wi['HAM'].prob  : 0;
       const rowMax = Math.max(pS, pH) || 1;
+
 
       const formulaRows = classes.map(c => {
         const wi = step.wi[c], n_ord = wi.count, n_tot = totals[c];
@@ -948,6 +1133,7 @@ function classify() {
               : `Hittades ${n_ord} gång${n_ord!==1?'er':''} i ${DISPLAY[c].toLowerCase()}.`}</div>
           </div>`;
       }).join('');
+
 
       rows += `
       <details class="wordstep">
@@ -965,6 +1151,7 @@ function classify() {
         </div>
       </details>`;
     });
+
 
     html += `
     <details class="step-card">
@@ -989,6 +1176,7 @@ function classify() {
     </details>`;
   }
 
+
   html += `
   <details class="step-card">
     <summary><span class="step-badge">Steg 3</span><span class="step-title">Multiplicera ihop priorsannolikheterna med ordsannolikheterna</span><span class="step-expand">▸</span></summary>
@@ -1000,19 +1188,23 @@ function classify() {
     </div>
   </details>`;
 
+
   document.getElementById('math-breakdown').innerHTML = html;
   document.getElementById('classify-result').style.display = 'block';
   renderMath(document.getElementById('math-breakdown'));
 }
 
+
 function buildFullCalc(m, steps, tokens) {
   const { cc, wc, totals, vs, total, classes } = m;
   const final = steps[steps.length - 1];
+
 
   let html = `
     <p style="font-size:12px;color:var(--subtle);line-height:1.7;margin:0 0 14px">
       Vi räknar täljaren <strong style="color:#ffd866">prior</strong> × <strong style="color:#6698ff">ordsannolikheter</strong> för varje klass — alltså den gula och blå delen av Bayes sats överst.
     </p>`;
+
 
   classes.forEach(c => {
     const prior = cc[c] / total;
@@ -1031,6 +1223,7 @@ function buildFullCalc(m, steps, tokens) {
       ? `${priorTex} \\cdot ${termsTex} = ${sciTex(product, 4)}`
       : `${priorTex}`;
 
+
     html += `
     <div class="fp-class-block">
       <div class="fp-class-name" style="color:${colorOf(c)}">${DISPLAY[c]}</div>
@@ -1040,12 +1233,14 @@ function buildFullCalc(m, steps, tokens) {
     </div>`;
   });
 
+
   const productsPerClass = classes.map(c => {
     const prior = cc[c] / total;
     const wf    = tokens.map(w => { const n=wc[c][w]||0; return (n+1)/(totals[c]+vs); });
     return { c, product: wf.reduce((a,b)=>a*b, prior) };
   });
   const sumAll = productsPerClass.reduce((s, x) => s + x.product, 0);
+
 
   const sumTex = productsPerClass.map(x => sciTex(x.product, 3)).join(' + ');
   html += `
@@ -1064,8 +1259,10 @@ function buildFullCalc(m, steps, tokens) {
       </div>
     </div>`;
 
+
   return html;
 }
+
 
 function renderClassify() {
   const hasData = examples.length >= 2;
@@ -1073,11 +1270,13 @@ function renderClassify() {
   document.getElementById('classify-content').style.display = hasData ? 'block' : 'none';
 }
 
+
 function selectLabel(lbl) {
   newLabel = lbl;
   document.getElementById('chip-spam').className = 'chip chip-spam' + (lbl==='SPAM'?' sel':'');
   document.getElementById('chip-ham').className  = 'chip chip-ham'  + (lbl==='HAM' ?' sel':'');
 }
+
 
 function addExample() {
   const text = document.getElementById('new-text').value.trim();
@@ -1087,10 +1286,12 @@ function addExample() {
   refresh();
 }
 
+
 function deleteEx(i) {
   examples.splice(i, 1);
   refresh();
 }
+
 
 function refresh() {
   renderExList();
@@ -1100,6 +1301,7 @@ function refresh() {
   document.getElementById('classify-result').style.display = 'none';
 }
 
+
 function clearData() {
   if (examples.length === 0) return;
   if (!confirm(`Rensa alla ${examples.length} träningsexempel? Detta går inte att ångra.`)) return;
@@ -1107,10 +1309,12 @@ function clearData() {
   refresh();
 }
 
+
 function toggleOwn() {
   document.getElementById('own-toggle').classList.toggle('open');
   document.getElementById('own-body').classList.toggle('open');
 }
+
 
 function importFile(event) {
   const file = event.target.files[0];
@@ -1145,6 +1349,7 @@ function importFile(event) {
   };
   reader.readAsText(file, 'UTF-8');
 }
+
 
 const EXAMPLE_BANK = [
   {label:"SPAM", text:"Grattis! Du har valts ut som vinnare av månatliga lotteriet. Klicka här för att hämta ditt pris på 15 000 kr."},
@@ -1212,354 +1417,4 @@ const EXAMPLE_BANK = [
   {label:"SPAM", text:"Billiga receptbelagda läkemedel utan recept. Diskret leverans inom 48 timmar. Inga frågor."},
   {label:"SPAM", text:"Exklusivt: Viagra och Cialis utan recept. Diskret leverans direkt hem till dörren. Beställ idag."},
   {label:"SPAM", text:"Stoppa håravfall på 7 dagar! Kliniskt testad serum återställer hårfästet. 60 dagars nöjdhetsgaranti."},
-  {label:"SPAM", text:"Sluta röka på 3 dagar! Metoden är 94% effektiv. Pengarna tillbaka om du inte lyckas. Beställ nu."},
-  {label:"SPAM", text:"Denna naturliga ingrediens botar ledvärk permanent. Reumatologer vill inte att du ska veta om det."},
-  {label:"SPAM", text:"Bota sömnlöshet ikväll! En naturlig kapsyl ger dig 8 timmars djupsömn utan beroende. Prova gratis."},
-  {label:"SPAM", text:"Öka testosteron med 300%! En naturlig formel ger dig energi, muskler och välmående. Kliniskt bevisad."},
-  {label:"SPAM", text:"Hemlig cancerkur döljs av läkemedelsindustrin. Naturläkaren avslöjar sanningen i gratisföreläsning."},
-  {label:"SPAM", text:"Återfå ungdomlig hy! Peptidserum minskar rynkor med 47% på 4 veckor. Prova riskfritt."},
-  {label:"SPAM", text:"Klinisk studie söker deltagare mot betalning. Testa kosttillskottet och tjäna 3 000 kr. Anmäl dig nu."},
-  {label:"SPAM", text:"Läkare avslöjar: ät detta varje morgon och du bränner tre gånger mer fett under dagen. Se videon nu."},
-  {label:"SPAM", text:"Slipp glasögon för alltid! Ny teknik korrigerar synen hemma utan operation. Levereras diskret hem."},
-  {label:"SPAM", text:"Bota tinnitus på 7 dagar! Öronläkare vill inte att du ska känna till denna enkla metod."},
-  {label:"SPAM", text:"Kliniskt bevisad: denna fruktsoppa sänker blodsockret på 14 dagar. Diabetiker rapporterar fantastiska resultat."},
-  {label:"SPAM", text:"Sluta snarka från dag ett! Tandskyddet som förändrar sömnen. Tillverkat i medicinsk silikon. Prova nu."},
-  {label:"SPAM", text:"94% av testpersonerna gick ner 8 kg på 3 veckor utan träning eller diet. Häpnadsväckande resultat."},
-  {label:"SPAM", text:"Permanent hårborttagning hemma för 299 kr! Professionellt resultat utan salongbesök. Beställ nu."},
-  {label:"SPAM", text:"Återfå ungdomlig hud på 21 dagar! Ny peptidkräm med kliniskt bevisad effekt. Prova riskfritt 30 dagar."},
-  {label:"SPAM", text:"Investera i kryptovaluta och fördubbla ditt kapital på 60 dagar. Garanterad avkastning. Begränsat antal platser."},
-  {label:"SPAM", text:"Tjäna 5 000 kr om dagen hemifrån! Inget startkapital krävs. Tusentals svenskar gör det redan. Anmäl dig."},
-  {label:"SPAM", text:"Du har blivit utvald för ett exklusivt kreditkort utan kreditprövning. Gräns: 50 000 kr. Svara innan fredag."},
-  {label:"SPAM", text:"Vinn 10 000 kr varje vecka med en beprövad sportspelsstrategi. Garanterad vinst eller pengarna tillbaka."},
-  {label:"SPAM", text:"Bitcoin-miljonären avslöjar: hur jag tjänade 2 miljoner på 6 månader utan att arbeta. Gratis video här."},
-  {label:"SPAM", text:"Exklusiv investeringsmöjlighet: nytt grönt bolag söker investerare. Förväntad avkastning 300% på 18 månader."},
-  {label:"SPAM", text:"Bli agent och tjäna provision hemifrån! Vidarebefordra bara betalningar åt kunder. Enkelt och lagligt."},
-  {label:"SPAM", text:"Tjäna pengar på Instagram utan att visa ansiktet! Kursen visar exakt hur. Startpris 197 kr denna vecka."},
-  {label:"SPAM", text:"Hej! Jag är advokat och representerar dödsboet efter en klient med samma efternamn som du. Arv: 4,2 milj."},
-  {label:"SPAM", text:"Snabblån 50 000 kr på 10 minuter! Ingen kreditkoll. 0% ränta första månaden. Ansök direkt här."},
-  {label:"SPAM", text:"Passiv inkomst på autopilot: en robot handlar aktier åt dig dygnet runt. Genomsnittlig vinst: 1 800 kr/dag."},
-  {label:"SPAM", text:"Bitcoin stiger 400% inom kort! Insiders vet vad som händer nästa vecka. Köp nu innan det är för sent."},
-  {label:"SPAM", text:"Aktiemäklaren som slog marknaden 11 år i rad delar sin strategi. Exklusivt för de första 50 anmälda."},
-  {label:"SPAM", text:"Nytt AI-bolag söker tidiga investerare. Minsta insats: 5 000 kr. Förväntad avkastning 800% på 2 år."},
-  {label:"SPAM", text:"Passiva inkomster från fastigheter utan att äga en enda! Lär dig metoden. Gratis webinar ikväll."},
-  {label:"SPAM", text:"Tjäna upp till 12 000 kr i månaden med enkla klick. Metoden är laglig och fungerar i hela Sverige."},
-  {label:"SPAM", text:"Kryptovalutahandlare sökes! Inga förkunskaper krävs. Börja tjäna pengar direkt från mobilen."},
-  {label:"SPAM", text:"Hemliga handelssignaler avslöjas: dessa tre aktier exploderar inom 30 dagar. Prenumerera för 99 kr/mån."},
-  {label:"SPAM", text:"Spara till pensionen med 18% garanterad årsränta. Europeisk insättningsgaranti. Öppna konto idag."},
-  {label:"SPAM", text:"Hej! Jag är en nigeriansk prins och behöver din hjälp att överföra 2 miljoner dollar. Du får 30%."},
-  {label:"SPAM", text:"FLASH-SALE: 90% rabatt på märkesplagg bara idag. Äkta varor till otroliga priser. Slut i lager snart!"},
-  {label:"SPAM", text:"Billiga flygbiljetter! Stockholm–Bangkok tur och retur från 1 499 kr. Bokningsbar bara nästa 3 timmar."},
-  {label:"SPAM", text:"Din identitet har läckt i ett dataintrång. Skydda dig nu med en ID-skyddstjänst. Prova gratis i 30 dagar."},
-  {label:"SPAM", text:"Möt singlar nära dig! Tusentals ensamma i din stad söker just nu. Registrera dig gratis och börja chatta idag."},
-  {label:"SPAM", text:"Du har ärvt pengar av en avlägsen släkting i Kanada. Kontakta juristen snarast för att kräva ut arvet."},
-  {label:"SPAM", text:"Gratis iPhone! Fyll i enkäten på 2 minuter och välj din modell. Vi skickar hem till dig utan kostnad."},
-  {label:"SPAM", text:"Sista chansen! Bekräfta ditt intresse för en exklusiv tjänst innan klockan 23:59 ikväll."},
-  {label:"SPAM", text:"Du har ett meddelande som väntar. Klicka här för att läsa det. Meddelandet raderas automatiskt inom 12 timmar."},
-  {label:"SPAM", text:"Gratulerar, du har valts ut för ett bonusprogram! Klicka för att aktivera dina 500 bonuspoäng innan de går ut."},
-  {label:"SPAM", text:"Hemlig metod som banker inte vill att du ska känna till: så sparar du 40 000 kr per år på ditt bolån."},
-  {label:"SPAM", text:"Juridisk hjälp mot orimliga parkeringsböter! Återkräver din avgift. Betalar du bara om vi vinner."},
-  {label:"SPAM", text:"Ny lagstiftning ger dig rätt till 15 000 kr av din bank. Kräv dina pengar tillbaka via oss idag."},
-  {label:"SPAM", text:"Exklusivt: köp märkesklockor direkt från fabrik utan mellanhänder. Rolex, Omega och TAG Heuer. 80% billigare."},
-  {label:"SPAM", text:"En AI skriver ditt CV och personliga brev. Garanterat intervju eller pengarna tillbaka. Prova nu för 0 kr."},
-  {label:"SPAM", text:"BREAKING: känd svensk kändis avslöjar sin hemlighet bakom framgången. Se videon innan den censureras."},
-  {label:"SPAM", text:"Träffa mogna damer och herrar nära dig! Helt gratis att registrera sig. Tusentals aktiva profiler i Sverige."},
-  {label:"SPAM", text:"Sätt pengar på kontot så skickar vi tillbaka det dubbla inom 24 timmar. Testad metod. Läs vittnesmål."},
-  {label:"SPAM", text:"Viktigt: du måste byta lösenord på ditt konto senast imorgon av säkerhetsskäl. Gör det via länken nedan."},
-  {label:"SPAM", text:"Uppmärksamhet: IP-adressen har spårats till olaglig aktivitet online. Ring supporten direkt för att lösa det."},
-  {label:"SPAM", text:"Jag är en framgångsrik affärsman stationerad utomlands och söker en pålitlig kontakt i Sverige."},
-  {label:"SPAM", text:"Domännamnet dittnamn.se är till salu! En konkurrent har visat intresse. Säkra det idag för 299 kr."},
-  {label:"SPAM", text:"Klicka inte bort detta! Du har ett obetalt arvskrav som måste hanteras inom 30 dagar. Kontakta advokaten."},
-  {label:"SPAM", text:"Skuldsanering på 60 dagar! Advokatbyrån som hjälpt tusentals bli skuldfria. Ring för gratis rådgivning."},
-  {label:"SPAM", text:"Du har blivit taggad i ett foto! Klicka på länken för att se vem som delade bilden av dig online."},
-  {label:"SPAM", text:"Energiräkningarna minskar med 70%! Produkten som elbranschen försöker stoppa. Beställ direkt nu."},
-  {label:"SPAM", text:"Ny metod gör det möjligt att ta ut pensionen 10 år tidigare. Pensionsmyndigheten vill inte att du vet."},
-  {label:"SPAM", text:"Gratis solceller! Staten betalar 100% av installationen via nytt stödprogram. Ansök medan pengarna räcker."},
-  {label:"SPAM", text:"Hemlig databas avslöjar: så hittar du vem som googlade ditt namn. Kolla upp det nu på länken nedan."},
-  {label:"SPAM", text:"Din Windows-licens har gått ut. Datorn blockeras om 24 timmar. Förnya licensen på länken nedan."},
-  {label:"SPAM", text:"Stämningsansökan inlämnad mot dig. Öppna bifogad fil för att läsa detaljerna och undvika rättegång."},
-  {label:"SPAM", text:"Polisutredning pågår mot ditt personnummer. Kontakta ärendehandläggaren omgående för att undvika häktning."},
-  {label:"HAM", text:"Hej, kan du skicka över mötesunderlaget innan klockan två? Chefen vill ha det inför måndagens genomgång."},
-  {label:"HAM", text:"Rapporten är klar och skickad till dig igår kväll. Hör av dig om du har synpunkter innan vi skickar till kunden."},
-  {label:"HAM", text:"Påminnelse: veckomötet har flyttats från tisdag till onsdag klockan 10. Samma länk gäller."},
-  {label:"HAM", text:"Jag är sjuk och kan inte komma in idag. Jag jobbar hemifrån om det är möjligt, annars sjukanmäler jag mig."},
-  {label:"HAM", text:"Tack för en bra presentation igår! Kunden verkade nöjd. Vi hörs nästa vecka för uppföljning."},
-  {label:"HAM", text:"Har du möjlighet att ta en titt på mitt utkast till årsrapporten? Bifogat i detta mail. Återkoppla gärna i veckan."},
-  {label:"HAM", text:"Systemet är uppe igen efter gårdagens driftstörning. Kontakta support om ni fortfarande upplever problem."},
-  {label:"HAM", text:"Jag behöver din signatur på avtalet senast fredag. Kan du kika på det och återkomma?"},
-  {label:"HAM", text:"Vi söker en projektkoordinator till teamet. Känner du någon som kan vara intresserad? Hör av dig!"},
-  {label:"HAM", text:"Glömde nämna på mötet: budgetgodkännandet är försenat med en vecka. Mer info kommer på fredag."},
-  {label:"HAM", text:"Kvartalsresultaten ser bättre ut än väntat. Kallar till genomgång nästa tisdag klockan 14 i stora konferensrummet."},
-  {label:"HAM", text:"Hej, jag är på semester 12–23 juli. Vid brådskande ärenden kontakta Lena på lena@foretaget.se."},
-  {label:"HAM", text:"Kan vi flytta onsdagens kundmöte till torsdag? Jag har en konflikt i kalendern som dykt upp."},
-  {label:"HAM", text:"Faktura 2024-0342 är nu betald. Kvitto skickas separat från ekonomiavdelningen."},
-  {label:"HAM", text:"Vi välkomnar Erik som ny kollega från och med måndag! Han tillträder rollen som marknadschef."},
-  {label:"HAM", text:"Påminner om att tidrapporterna ska vara inlämnade senast sista bankdagen i månaden."},
-  {label:"HAM", text:"Har du tillgång till servermappen för Q3-projektfilerna? Jag hittar dem inte i den vanliga katalogen."},
-  {label:"HAM", text:"Produktlansering sker den 14 mars. Pressmeddelandet behöver godkännas av ledningen senast den 7:e."},
-  {label:"HAM", text:"Onboardingen för de nya praktikanterna börjar måndag kl 9 i empan. Kan du ta emot dem?"},
-  {label:"HAM", text:"Jag skickar vidare mejlet från leverantören om leveransförseningen. Vad tycker du att vi ska svara?"},
-  {label:"HAM", text:"Mötesinbjudan: strategidag 15 april, 09:00–16:00, Hotell Scandic Anglais. Bekräfta deltagande senast 1 april."},
-  {label:"HAM", text:"Uppdatering: IT-supporten är stängd fredag eftermiddag på grund av intern utbildning. Planera därefter."},
-  {label:"HAM", text:"Arbetar du med ISO-certifieringen? Behöver du hjälp med dokumentationen så hör av dig."},
-  {label:"HAM", text:"Tack för att du täckte upp på mötet igår när jag var försenad. Jag återgäldar!"},
-  {label:"HAM", text:"Kan du bekräfta att du fått min out-of-office-inställning att fungera? Testar inför semestern nästa vecka."},
-  {label:"HAM", text:"Hej! Har du hunnit titta på offerterna från leverantörerna? Behöver svar innan fredagens möte."},
-  {label:"HAM", text:"Lunchbaggen din ligger kvar i köket på jobbet. Hämta den när du är inne nästa gång."},
-  {label:"HAM", text:"Hej teamet! Påminner om att tidrapporterna för mars ska vara klara senast 31:a. Tack!"},
-  {label:"HAM", text:"Driftsättning av det nya systemet sker natten till lördag. Planera för eventuell kort nedetid på morgonen."},
-  {label:"HAM", text:"Hej! Kan du ta med laptopen till mötet imorgon? Vi ska gå igenom koden tillsammans."},
-  {label:"HAM", text:"Rekryteringen är klar. Amina börjar den 1:a. Välkommen att hälsa på henne på måndagen!"},
-  {label:"HAM", text:"Hej! Ny parkeringspolicy gäller från måndag. Läs bifogat dokument och anmäl registreringsnumren."},
-  {label:"HAM", text:"Konferensrummet på plan 3 är fullt bokat torsdagen. Använd sal 1B för era eftermiddagsmöten istället."},
-  {label:"HAM", text:"Påminnelse om personaldag den 24 maj. Mer info om programmet skickas ut nästa vecka."},
-  {label:"HAM", text:"Hej! Kan vi ses på fredag för lunch? Det har gått alldeles för lång tid sedan sist."},
-  {label:"HAM", text:"Tack för en rolig kväll igår! Hoppas vi ses snart igen. Hälsa Sara!"},
-  {label:"HAM", text:"Grattis på födelsedagen!! Hoppas du firar ordentligt. Vi syns på lördag som planerat."},
-  {label:"HAM", text:"Mamma undrar om du kommer på midsommar i år? Hör av dig innan helgen så hon kan planera maten."},
-  {label:"HAM", text:"Har du sett mina nycklar? Tror jag glömde dem hemma hos dig igår kväll."},
-  {label:"HAM", text:"Hej lillebror! Jag är i Stockholm nästa helg. Har du tid att fika på lördag förmiddag?"},
-  {label:"HAM", text:"Vi har bokat sommarstugan 26 juni till 3 juli. Ni är välkomna att hälsa på när det passar!"},
-  {label:"HAM", text:"Hej! Vet du ett bra recept på kladdkaka? Ska baka till Leos kalas på lördag."},
-  {label:"HAM", text:"Tack för att du hjälpte till med flytten! Det gick så mycket snabbare med er hjälp. Bjuder på middag."},
-  {label:"HAM", text:"Kan du hämta ungarna från träningen klockan fem på torsdag? Jag sitter fast i ett möte."},
-  {label:"HAM", text:"Vi har fått en ny kattunge! Heter Mango. Kom och hälsa på när du har möjlighet."},
-  {label:"HAM", text:"Hej! Funktionsfesten för morfar är den 18:e. Kan du hjälpa till att organisera? Ringer dig ikväll."},
-  {label:"HAM", text:"Fotona från semestern är uppladdade i det delade albumet. Kolla in dem när du har tid!"},
-  {label:"HAM", text:"Glöm inte att du lovade följa med på konserten nästa fredag. Biljetterna är redan köpta!"},
-  {label:"HAM", text:"Hej vän! Hur är det? Vi ses ju aldrig längre. Ska vi planera in något kul i höst?"},
-  {label:"HAM", text:"Kan du och Jonas komma på middag på lördag? Tänkte laga thai. Svara gärna så jag vet hur många vi är."},
-  {label:"HAM", text:"Pappas bil behöver hämtas från verkstaden på fredag. Kan du åka dit? Jag skickar adressen."},
-  {label:"HAM", text:"Vi säljer barnvagnen om du vet någon som söker. Emmaljunga, fint skick, halva priset."},
-  {label:"HAM", text:"Hej! Har du tips på en bra barnvänlig restaurang i Gamla stan? Kusinen besöker med familjen nästa vecka."},
-  {label:"HAM", text:"Julklappslistan är upplagd i det delade dokumentet. Kom ihåg att lägga till dina önskningar!"},
-  {label:"HAM", text:"Tack för att ni ställde upp som barnvakter igår. Ni räddade verkligen kvällen för oss."},
-  {label:"HAM", text:"Hallå! Spelkväll hos oss på fredag som vanligt? Jag köper chips och skapar event."},
-  {label:"HAM", text:"Sjuk och liggandes på soffan. Kan du swisha mig 89 kr för apoteket om du är i närheten?"},
-  {label:"HAM", text:"Resan till Portugal var helt underbar! Skickar bilder när jag sorterat dem. Kramar!"},
-  {label:"HAM", text:"Hej kompis! Jag har hittat en lägenhet och skriver kontrakt nästa vecka. Äntligen!"},
-  {label:"HAM", text:"Vår katt är sjuk igen och ska till veterinären på fredag. Hoppas det inte är något allvarligt."},
-  {label:"HAM", text:"Vår trädgård börjar blomma nu! Måste du komma och se syrenerna, de är fantastiska i år."},
-  {label:"HAM", text:"Hej! Tänkte fråga om ni vill följa med på utflykt till Skansen i vår? Ungarna skulle gilla det."},
-  {label:"HAM", text:"Ska vi göra något tillsammans till våren? Gärna något utomhus. Vandring kanske?"},
-  {label:"HAM", text:"Hej! Vår granne ska sälja sin cykel. Vet du om någon som söker en bra mountainbike?"},
-  {label:"HAM", text:"Vi firar midsommar hos oss i år! Kom gärna dagen innan så pyntar vi ihop."},
-  {label:"HAM", text:"Vår bil är på service hela nästa vecka. Kan du skjutsa mig till jobbet måndag och tisdag?"},
-  {label:"HAM", text:"Hej farsan! Tänkte höra om ni mår bra. Ring mig när du har tid, har en del att berätta."},
-  {label:"HAM", text:"Vi sålde lägenheten igår! Flytten är satt till sista april. Fest planeras, ni är självklart inbjudna."},
-  {label:"HAM", text:"Hej! Barnen undrar om de får sova över hos er på fredag. Hör av dig när du kan!"},
-  {label:"HAM", text:"Har du och Karin tid att komma på middag nästa vecka? Tänkte laga köttbullar och potatis."},
-  {label:"HAM", text:"Sitter och städar vinden. Hittade massa saker från när vi var barn. Ska vi träffas och titta igenom dem?"},
-  {label:"HAM", text:"Hej lillan! Planen för resan i sommar – kan vi ringa och prata igenom det i helgen?"},
-  {label:"HAM", text:"Din bokningsbekräftelse: hotell City, incheckning 14 juni kl 15:00, utcheckning 16 juni. Bokningsnr: 88421."},
-  {label:"HAM", text:"Ditt paket från Zalando är på väg. Beräknad leverans: imorgon 8–12. Spåra din leverans med kod SE4421."},
-  {label:"HAM", text:"Bokningsbekräftelse: barnhårklippning hos Frisör Nina, tisdag 18 april kl 10:30. Avbokning senast 24 h innan."},
-  {label:"HAM", text:"Din beställning är levererad och lämnad i brevlådan. Tack för att du handlar hos oss!"},
-  {label:"HAM", text:"Påminnelse: du har ett tandläkarbesök inbokat på torsdag klockan 14:15 hos Tandläkare Bergström."},
-  {label:"HAM", text:"Flyg SK425 Stockholm–Göteborg 22 mars kl 07:15 är incheck öppnad. Check in senast 40 min före avgång."},
-  {label:"HAM", text:"Din reklamation har mottagits och vi återkommer inom 3 arbetsdagar med besked. Ärendenummer: 2024-8821."},
-  {label:"HAM", text:"Ditt abonnemang på Storytel förnyas automatiskt den 1 april för 149 kr. Hantera ditt abonnemang här."},
-  {label:"HAM", text:"Välkommen till Pilatesklassen! Påminnelse: tisdag 20 april kl 18:30, Södermalm Hälsocenter, sal 2."},
-  {label:"HAM", text:"Tack för din betalning! Kvitto bifogas. Vi hoppas du är nöjd med ditt köp. Hör av dig om du har frågor."},
-  {label:"HAM", text:"Din biljett till Sverige mot Spanien 8 juni är bekräftad. Sektion C, rad 14, plats 22. Välkommen!"},
-  {label:"HAM", text:"Påminnelse om veterinärbesök för Rufus på fredag 10:00 hos Djurkliniken Söder. Ring om du behöver flytta."},
-  {label:"HAM", text:"Din begagnade bok har skickats. Säljarens kommentar: hoppas du gillar den! Betygsätt köpet när den anlänt."},
-  {label:"HAM", text:"Restaurang Operakällaren bekräftar din bordbokning för 4 personer lördag den 22 april klockan 19:00."},
-  {label:"HAM", text:"Din prenumeration på DN startar 1 maj. Välkommen som läsare! Logga in för att anpassa dina nyhetspreferenser."},
-  {label:"HAM", text:"Bekräftelse: hyrbil bokad hos Hertz Arlanda, hämtning fredag 7 juni kl 14:00. Bokningsnummer H77832."},
-  {label:"HAM", text:"Ditt gym-abonnemang förnyas den 1 april för 299 kr. Hantera abonnemanget i appen."},
-  {label:"HAM", text:"Välkommen på introduktionskurs i keramik! Startar torsdagen 18 april kl 18:00. Ta med förkläde."},
-  {label:"HAM", text:"Din beställning hos IKEA är klar för avhämtning i varuhusets kundtjänst. Ordernummer 445521."},
-  {label:"HAM", text:"Bekräftelse: klippning hos David på Cuts, lördag 13 april kl 11:00. Avbokning senast 24 timmar innan."},
-  {label:"HAM", text:"Välkommen till Nyckeln Fastighetsbyrå. Visning av lägenheten på Bergsgatan 12 är bokad till fredag kl 17."},
-  {label:"HAM", text:"Din förhandsbeställda bok har skickats! Beräknad leverans 3–5 arbetsdagar. Välkommen som läsare."},
-  {label:"HAM", text:"Hej föräldrar! Påminner om vårterminens avslutning den 14 juni kl 10:00 i gymnastiksalen. Välkomna!"},
-  {label:"HAM", text:"Frida har glömt sin gympa-påse i skolan. Den finns hos oss i reception om ni vill hämta den."},
-  {label:"HAM", text:"Klassens föräldramöte är den 28 mars kl 18:30 i klassrum 12B. Fika ingår. Hoppas vi ses!"},
-  {label:"HAM", text:"Hej! Lovdag på fredag. Skolmat serveras inte. Glöm inte att anmäla era barn till fritids vid behov."},
-  {label:"HAM", text:"Välkommen på utvecklingssamtal tisdag den 4 april kl 15:30. Bekräfta gärna om ni kan komma."},
-  {label:"HAM", text:"Påminnelse om att skolfoton tas på onsdag. Kom gärna i hela kläderna! Bildpaketen beställs online."},
-  {label:"HAM", text:"Vi har börjat med det nya matteprogrammet i 3B. Mer info om hur ni kan stötta hemma kommer nästa vecka."},
-  {label:"HAM", text:"Anton var frånvarande idag utan anmälan. Vänligen meddela frånvaro via appen eller ring skolan."},
-  {label:"HAM", text:"Läxan i vecka 14: läs kapitel 5–7 i NO-boken och förbered tre frågor till genomgången på torsdag."},
-  {label:"HAM", text:"Skolstarten efter påsklovet är måndag den 8 april kl 8:10 som vanligt. Önskar er en glad påsk!"},
-  {label:"HAM", text:"Studiebesök på Tekniska museet är inbokat till den 23 maj. Blankett om tillstånd skickas hem den 10:e."},
-  {label:"HAM", text:"Klassen säljer lotter till förmån för klassresan. Lotterna kostar 20 kr styck. Fråga era barn om ni vill köpa."},
-  {label:"HAM", text:"Hej, Nina har haft lite magont idag men klarade sig bra. Lägg gärna med ett lättare mellanmål imorgon."},
-  {label:"HAM", text:"Sista dagen att anmäla sommarkollo är 31 mars. Anmälningslänken skickades i förra veckans utskick."},
-  {label:"HAM", text:"Hej! I vår startar vi en ny läsecirkel för åk 4. Anmäl ert barn via länken senast 15 mars."},
-  {label:"HAM", text:"Klassens vårtermin avslutas med utomhusdag den 7 juni. Mer info om aktiviteterna kommer nästa vecka."},
-  {label:"HAM", text:"Påminnelse: NP i matematik äger rum torsdag den 25 april. Eleverna behöver miniräknare och linjal."},
-  {label:"HAM", text:"Elevhälsans sjuksköterska finns på plats tisdagar och torsdagar. Boka tid via skolans app."},
-  {label:"HAM", text:"Klass 5A bjuder in till musikal den 30 maj kl 14:00 och 18:00. Biljetter säljs i receptionen."},
-  {label:"HAM", text:"Hej! Felix är lite hängig idag men vi bedömer att han klarar sig. Hämta gärna lite tidigare."},
-  {label:"HAM", text:"Hej grannar! Trapphuset städas måndag kl 10. Glöm inte att flytta cyklarna från källargången."},
-  {label:"HAM", text:"Påminnelse: fordonsskatten förfaller till betalning den 30 april. Betala via appen eller bankgiro."},
-  {label:"HAM", text:"Hej! Hittade en brun halsduk vid busskuren på Storgatan. Den ligger hos mig om den tillhör dig."},
-  {label:"HAM", text:"Bostadsrättsföreningens stämma är den 22 maj kl 19:00 i gemensamhetslokalen. Dagordning bifogas."},
-  {label:"HAM", text:"Hej, just ringt men du svarade inte. Hör av dig när du har tid. Inget bråttom."},
-  {label:"HAM", text:"Bibliotekets e-tjänster är nere för underhåll tisdag 14–16. Fysiska lån och returer påverkas inte."},
-  {label:"HAM", text:"Din ansökan om parkeringstillstånd är beviljad. Tillståndet gäller från 1 maj t.o.m. 30 april nästa år."},
-  {label:"HAM", text:"Vi håller öppet hus på lördag 13–15. Välkommen att titta in! Lättare förtäring serveras."},
-  {label:"HAM", text:"Hej! Vi har ändrat mötestiden till 17:30 istället för 18:00. Fungerar det fortfarande för dig?"},
-  {label:"HAM", text:"Sopsorteringen ändras från och med maj. Nya kärl för förpackningar ställs ut under vecka 16. Mer info i brevlådan."},
-  {label:"HAM", text:"Hittade din plånbok på tunnelbanan och lämnade in den till SL:s hittegodskontor på T-Centralen."},
-  {label:"HAM", text:"Bokklubben träffas hemma hos Petra den 11 april. Ta med något gott att äta och bok nummer 4 läst!"},
-  {label:"HAM", text:"Hej! Jag är försenad ungefär 15 minuter. Börja gärna utan mig om det är möjligt."},
-  {label:"HAM", text:"Taxin är bokad till flygplatsen söndag kl 05:30. Föraren heter Hassan och bilen är en grå Volvo."},
-  {label:"HAM", text:"Hej, det är från Hemtjänsten. Vi kommer som vanligt på torsdag men lite senare, runt klockan tio."},
-  {label:"HAM", text:"Löparlaget samlas vid Stadsparken lördag kl 8:00. Ta med vätska. Rundan är ca 8 km."},
-  {label:"HAM", text:"Hej! Kan du vattna mina blommor medan jag är borta nästa vecka? Nyckeln sitter på vanligt ställe."},
-  {label:"HAM", text:"Din biljett till teaterföreställningen skickas som PDF i separat mail. Välkommen den 3 maj kl 19:00."},
-  {label:"HAM", text:"Hej, det gäller bostadsannonsen. Är lägenheten fortfarande ledig? Jag är intresserad av visning."},
-  {label:"HAM", text:"Påminnelse: kontrollbesiktningen för din bil ska göras senast i december. Boka tid i god tid."},
-  {label:"HAM", text:"Bostadsrättsföreningen planerar att måla om fasaden i vår. Rösta på förslaget på föreningens hemsida."},
-  {label:"HAM", text:"Hej! Sophämtningen ställs in på torsdag på grund av helgdag. Nästa tömning sker följande måndag."},
-  {label:"HAM", text:"Kvitto på inlämnad deklaration. Eventuell återbäring betalas ut senast 15 juni om allt stämmer."},
-  {label:"HAM", text:"Hej! Trädet utanför porten behöver beskäras. Kontaktat kommunen och de kommer nästa vecka."},
-  {label:"HAM", text:"Hej granne! Någon har parkerat framför garaget igen. Vet du vems bil det är med reg YAB 123?"},
-  {label:"HAM", text:"Biblioteket har fått in böckerna du efterfrågade. De finns för lån fram till den 20:e."},
-  {label:"HAM", text:"Tvättstugan är bokad fredag kl 9–13. Kom ihåg att städa efter dig och töm luddfiltren."},
-  {label:"HAM", text:"Hej! Hunden hittades vid parken. Den har halsband med telefonnummer men ingen svarar. Ring mig!"},
-  {label:"HAM", text:"Elbolaget byter elmätare i fastigheten den 22 april mellan 8–12. Strömmen stängs av ca 30 min."},
-  {label:"HAM", text:"Cykelverkstaden ringde: cykeln är klar att hämta. Öppet till 18 på vardagar."},
-  {label:"HAM", text:"Mötet med hyresvärden om renoveringen är framflyttat till onsdagen 17:e. Samma tid kl 18 gäller."},
-  {label:"HAM", text:"Hej! Ska du ha med till festen på lördag? Vi tänkte köra potluck, kolla så vi inte tar samma rätt."},
-  {label:"HAM", text:"Påminnelse om läkarbesök hos Dr. Lindgren måndag 15 april kl 10:30. Ring 08-xxx-xxx vid förhinder."},
-  {label:"HAM", text:"Dina provsvar är klara. Logga in på 1177.se med BankID för att läsa resultaten."},
-  {label:"HAM", text:"Hej! Apoteket meddelar att läkemedlet finns att hämta. Ta med legitimation och recept."},
-  {label:"HAM", text:"Välkommen till mammografin den 3 maj kl 09:15 på Södersjukhuset. Ta med remissen om du har en."},
-  {label:"HAM", text:"Hej! Sjukgymnastiken börjar den 8 april. Kom i bekväma kläder och ta med gymnastikskor."},
-  {label:"HAM", text:"Hej! Tennisklubben har lediga tider i vår. Är du intresserad av att börja spela igen?"},
-  {label:"HAM", text:"Körrepetitionen ställs in onsdag på grund av lokalbyte. Ny lokal meddelas inom kort. Tack för tålamodet."},
-  {label:"HAM", text:"Fototävlingens tema i vår är natur och årstidsväxlingar. Skicka in max tre bilder senast 1 maj."},
-  {label:"HAM", text:"Hallå! Ska vi se fotbollen tillsammans på lördag? Kan boka bord på puben om ni är intresserade."},
-  {label:"HAM", text:"Hej! Bridgesällskapet samlas hos Gunnar den 18:e. Ta med fikabidrag och kom gärna lite i förväg."},
-  {label:"HAM", text:"Hallå! Löpgruppen tränas nu på tisdagar istället för onsdagar. Samma tid och plats gäller."},
-  {label:"HAM", text:"Vi startar en studiecirkel om klimat och hållbarhet till hösten. Anmäl intresse till studieförbundet."},
-  {label:"HAM", text:"Hej! Stickcafét på biblioteket börjar igen i vår. Tisdagar kl 14–16. Alla välkomna, ta med handarbete."},
-  {label:"HAM", text:"Spelkvällen ställs in denna fredag men vi kör igen nästa vecka. Samma uppställning som vanligt."},
-  {label:"HAM", text:"Hej! Vi har startat en Whatsapp-grupp för grannskapet. Skicka ett meddelande så lägger vi till dig."},
-  {label:"SPAM", text:"Obetald faktura: 1 249 kr förfaller idag. Betala omgående för att undvika inkasso och extra avgifter."},
-  {label:"SPAM", text:"Sista påminnelse innan inkasso. Ditt ärende överlämnas imorgon om betalning på 2 380 kr uteblir. Betala här."},
-  {label:"SPAM", text:"Vi har försökt leverera ditt paket men en tullavgift på 29 kr återstår. Betala avgiften via länken för leverans."},
-  {label:"SPAM", text:"Ditt paket väntar på utlämning. En liten fraktavgift krävs för att slutföra leveransen. Klicka för att betala."},
-  {label:"SPAM", text:"PostNord: ditt paket kunde inte levereras. Uppdatera leveransinformationen och betala 19 kr i tullavgift."},
-  {label:"SPAM", text:"Tjäna 30 000 kr i månaden hemifrån! Inga förkunskaper krävs. Anmäl dig idag och börja redan imorgon."},
-  {label:"SPAM", text:"Jobberbjudande: arbeta 2 timmar om dagen och tjäna upp till 8 000 kr i veckan. Svara för mer information."},
-  {label:"SPAM", text:"Investera i krypto nu och tredubbla dina pengar på 30 dagar. Garanterad avkastning. Kom igång med 500 kr."},
-  {label:"SPAM", text:"Exklusiv investeringschans: våra kunder gör 400% vinst på bitcoin. Platserna är begränsade. Anmäl intresse."},
-  {label:"SPAM", text:"Hej vackra, jag hittade din profil och blev nyfiken. Jag bor utomlands men söker seriös kontakt. Skriv tillbaka."},
-  {label:"SPAM", text:"Din Netflix-betalning misslyckades. Uppdatera dina kortuppgifter inom 24 timmar för att behålla ditt konto."},
-  {label:"SPAM", text:"Ditt konto kommer att stängas. Bekräfta dina uppgifter omedelbart via länken för att undvika avstängning."},
-  {label:"SPAM", text:"Viktigt meddelande om ditt Apple-ID: ovanlig aktivitet upptäckt. Verifiera ditt konto för att låsa upp det."},
-  {label:"SPAM", text:"Du har en oläst röstbrevlåda. Logga in med ditt lösenord via länken för att lyssna på meddelandet."},
-  {label:"SPAM", text:"Gå ner 10 kg på två veckor med detta naturliga mirakelpiller! Beställ nu med 70% introduktionsrabatt."},
-  {label:"SPAM", text:"Läkarna hatar detta trick! En enkel metod som smälter bukfett över natten. Klicka för hemligheten."},
-  {label:"SPAM", text:"Din dator är infekterad med farliga virus. Ring vår support omedelbart på 0200-xxx-xxx för att åtgärda."},
-  {label:"SPAM", text:"Microsoft-support: vi har upptäckt allvarliga problem på din enhet. Tillåt fjärråtkomst för att lösa det."},
-  {label:"SPAM", text:"Skatteåterbäring väntar! Du har 1 870 kr att få tillbaka. Ange dina bankuppgifter för utbetalning idag."},
-  {label:"SPAM", text:"Försäkringskassan: du har en utbetalning som väntar. Verifiera din identitet med BankID via länken nedan."},
-  {label:"SPAM", text:"Grattis, din e-postadress valdes i Googles årliga utlottning! Du har tilldelats 950 000 kr. Svara för anspråk."},
-  {label:"SPAM", text:"Endast idag: Rolex till 90% rabatt i vårt lagerrensningssortiment. Begränsat antal, beställ innan midnatt."},
-  {label:"SPAM", text:"Din prenumeration löper ut. Förnya nu med ett klick så får du tre månader gratis. Erbjudandet gäller idag."},
-  {label:"SPAM", text:"Du har fått en hemlig beundrare! Någon i din närhet är intresserad. Lås upp meddelandet genom att registrera dig."},
-  {label:"SPAM", text:"Lån utan kreditprövning! Upp till 50 000 kr direkt på kontot oavsett betalningsanmärkningar. Ansök på 2 minuter."},
-  {label:"HAM", text:"Hej! Påminner om utvecklingssamtalen nästa vecka. Boka en tid i kalendern som passar dig."},
-  {label:"HAM", text:"Protokollet från styrelsemötet är utskickat. Läs igenom och hör av dig med eventuella ändringar innan fredag."},
-  {label:"HAM", text:"Hej! Fakturan för medlemsavgiften är bifogad. Sista betalningsdag är den 30:e. Tack för att du är medlem."},
-  {label:"HAM", text:"Vi har uppdaterat leveransvillkoren. Inga åtgärder krävs från dig, men du kan läsa mer på vår webbplats."},
-  {label:"HAM", text:"Hej! Förskolan har planeringsdag den 5:e och håller stängt. Lämna inte barnen den dagen. Tack!"},
-  {label:"HAM", text:"Klassens föräldramöte hålls torsdag kl 18 i klassrummet. Vi går igenom vårterminen och kommande utflykter."},
-  {label:"HAM", text:"Din årsredovisning från banken finns nu tillgänglig att ladda ner när du loggar in på internetbanken."},
-  {label:"HAM", text:"Hej! Vi byter leverantör av kaffe på kontoret. Säg till om du har önskemål om sorter innan beställningen."},
-  {label:"HAM", text:"Tack för din ansökan! Vi har tagit emot den och återkommer efter sista ansökningsdag den 15:e."},
-  {label:"HAM", text:"Påminnelse om att lämna in reseräkningen för konferensen senast månadsskiftet, annars dröjer utbetalningen."},
-  {label:"HAM", text:"Hej! Bilbesiktningen är inbokad till tisdag kl 9. Lämna nyckeln i receptionen om du inte kan vara där."},
-  {label:"HAM", text:"Vattnet stängs av i fastigheten onsdag kl 9–12 för underhåll. Tappa upp det du behöver i förväg."},
-  {label:"HAM", text:"Hej! Biblioteket meddelar att boken du reserverat nu finns att hämta. Den ligger kvar till och med fredag."},
-  {label:"HAM", text:"Tack för ikväll! Det var jättemysigt. Nästa gång lagar jag maten, det är bestämt."},
-  {label:"HAM", text:"Hej! Kan du kolla om vi har mjölk hemma innan du åker från jobbet? Annars handlar jag på vägen."},
-  {label:"HAM", text:"Mötet imorgon flyttas till kl 14 istället för 13. Samma länk gäller. Säg till om det krockar för dig."},
-  {label:"HAM", text:"Hej! Glömde säga att paketet till dig kom hit av misstag. Du kan hämta det när det passar."},
-  {label:"HAM", text:"Vi har fått in din felanmälan om tvättstugan. En tekniker kommer på torsdag mellan 8 och 10."},
-  {label:"HAM", text:"Hej! Tack för att du ville byta pass med mig på lördag. Jag är skyldig dig en tjänst nu."},
-  {label:"HAM", text:"Din tidsbokning hos optikern är bekräftad: onsdag 12 april kl 16:00. Ta med dina nuvarande glasögon."},
-];
-
-function updateRatioLabel() {
-  const r     = parseInt(document.getElementById('spam-ratio').value);
-  const hamR  = 100 - r;
-  document.getElementById('ratio-label').textContent     = `${r}% / ${hamR}%`;
-  document.getElementById('ratio-bar-spam').style.width  = r + '%';
-  document.getElementById('ratio-bar-ham').style.width   = hamR + '%';
-  const note = r === 50
-    ? 'Jämn fördelning — priorsannolikheten P(klass) påverkar inte klassificeringen nämnvärt.'
-    : r >= 70
-      ? `${r}% skräppost — modellen får en hög prior P(Skräppost) = ${(r/100).toFixed(2)} och börjar redan lutat åt spam innan den sett ett enda ord. Tveksamma texter klassas oftare som skräppost.`
-      : r <= 30
-        ? `Bara ${r}% skräppost — låg prior P(Skräppost) = ${(r/100).toFixed(2)} gör modellen "snäll". Den behöver starka spamsignaler för att klassificera som skräppost.`
-        : `${r}% skräppost — lätt sned fördelning. Priorn väger lite mer åt ${r > 50 ? 'skräppost' : 'ej skräppost'}.`;
-  document.getElementById('ratio-note').textContent = note;
-}
-
-function generateData(keepExisting = true) {
-  const n      = Math.max(4, Math.min(500, parseInt(document.getElementById('gen-count').value) || 50));
-  const ratio  = parseInt(document.getElementById('spam-ratio').value) / 100;
-  const nSpam  = Math.max(1, Math.round(n * ratio));
-  const nHam   = Math.max(1, n - nSpam);
-  const status = document.getElementById('gen-status');
-
-  const spamPool = EXAMPLE_BANK.filter(e => e.label === 'SPAM');
-  const hamPool  = EXAMPLE_BANK.filter(e => e.label === 'HAM');
-
-  function shuffle(arr) {
-    const a = [...arr];
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
-  function sample(pool, count) {
-    let result = [];
-    while (result.length < count) result = result.concat(shuffle(pool));
-    return result.slice(0, count);
-  }
-
-  const picked = shuffle([...sample(spamPool, nSpam), ...sample(hamPool, nHam)]);
-  if (!keepExisting) examples = [];
-  picked.forEach(({ label, text }) => examples.push({ text, label }));
-
-  refresh();
-  status.className = 'status-msg info';
-  status.textContent = `✓ Lade till ${picked.length} exempel (${nSpam} skräppost / ${nHam} ej skräppost). Träningsmängden är nu ${examples.length} exempel.`;
-}
-
-function closeIntro() {
-  document.getElementById('introOverlay').style.display = 'none';
-}
-function openIntro() {
-  document.getElementById('introOverlay').style.display = 'flex';
-}
-
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-    if (btn.dataset.tab === 'model')    renderModel();
-    if (btn.dataset.tab === 'classify') renderClassify();
-    if (btn.dataset.tab === 'glossary') renderGlossary();
-  });
-});
-
-function escHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-initGlossary();
-refresh();
-</script>
-</body>
-</html>
+  {label:"SPAM", text:"Sluta röka på 3 dagar! Metoden är 94% effektiv. Pengarna tillbaka om du inte lyckas. Bestäl
