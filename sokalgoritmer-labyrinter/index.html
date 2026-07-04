@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="sv">
 <head>
 <meta charset="utf-8">
@@ -10,8 +10,14 @@
 <style>
 :root{
   --bg:#090b14; --surface:#0e1222; --surface2:#151a2e; --border:#1e2642;
+  --border-soft:rgba(255,255,255,.06);
   --text:#e8ecf8; --dim:#7e8aaa; --subtle:#b0bedc;
   --accent:#4d80ff; --accent2:#6698ff;
+  --accent-dim:rgba(77,128,255,.14);
+  --gold:#ffce54; --green:#33d17a; --red:#ef5b6b;
+  --r-md:14px; --r-lg:20px;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
   --alg:#ec4899; /* follows selected algorithm */
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -25,7 +31,7 @@ button{font-family:inherit;}
 .back-link,.lang-link{position:absolute;top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:.2s;white-space:nowrap;z-index:2;}
 .back-link{left:16px;} .lang-link{right:16px;}
 .back-link:hover,.lang-link:hover{color:var(--text);border-color:var(--dim);}
-.lang-link .flag{font-size:1.05em;line-height:1;}
+.lang-link .lang-ico{width:14px;height:14px;flex-shrink:0;}
 .hd{width:100%;text-align:center;padding:30px 20px 26px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,.03),transparent);}
 .hd h1{font-family:'Syne',sans-serif;font-size:1.55em;font-weight:800;letter-spacing:-.02em;margin-bottom:10px;text-shadow:0 0 34px rgba(102,152,255,.22);}
 .hd h1 span{color:var(--accent2);}
@@ -59,7 +65,31 @@ button{font-family:inherit;}
   100%{box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.03),0 0 0 1px rgba(77,128,255,.06);}
 }
 #canvasContainer.alg-flash{animation:canvasAlgFlash .6s ease-out;}
-#mazeCanvas{display:block;user-select:none;border-radius:17px;width:100%;height:auto;cursor:crosshair;}
+#mazeCanvas{display:block;user-select:none;border-radius:17px;width:100%;height:auto;cursor:default;transition:box-shadow .3s var(--ease-out);}
+#canvasContainer.editing #mazeCanvas{cursor:crosshair;box-shadow:inset 0 0 0 1.5px rgba(51,209,122,.32),inset 0 0 40px rgba(51,209,122,.05);}
+
+/* ── HUD: redigeringsläge, uppe till vänster i canvasen ── */
+.canvas-hud{position:absolute;top:10px;left:10px;z-index:20;display:flex;gap:8px;align-items:center;}
+.hud-toggle{display:inline-flex;align-items:center;gap:8px;padding:7px 11px 7px 11px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.1);background:rgba(11,15,28,.68);backdrop-filter:blur(14px) saturate(1.35);-webkit-backdrop-filter:blur(14px) saturate(1.35);
+  color:var(--subtle);font-size:11.5px;font-weight:700;letter-spacing:.01em;cursor:pointer;
+  box-shadow:0 10px 24px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.07);
+  transition:border-color .25s,color .25s,box-shadow .25s,transform .1s;}
+.hud-toggle:hover{border-color:rgba(255,255,255,.22);color:var(--text);}
+.hud-toggle:active{transform:scale(.97);}
+.hud-toggle svg{width:13px;height:13px;flex-shrink:0;}
+.hud-switch{width:28px;height:16px;border-radius:999px;background:rgba(255,255,255,.14);position:relative;flex-shrink:0;transition:background .25s;box-shadow:inset 0 1px 2px rgba(0,0,0,.35);}
+.hud-switch::after{content:'';position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.45);transition:transform .3s var(--ease-spring);}
+.hud-toggle[aria-pressed="true"]{color:#fff;border-color:rgba(51,209,122,.5);box-shadow:0 10px 24px rgba(0,0,0,.4),0 0 20px rgba(51,209,122,.18),inset 0 1px 0 rgba(255,255,255,.07);}
+.hud-toggle[aria-pressed="true"] .hud-switch{background:var(--green);}
+.hud-toggle[aria-pressed="true"] .hud-switch::after{transform:translateX(12px);}
+.hud-help{display:none;width:30px;height:30px;border-radius:50%;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.1);background:rgba(11,15,28,.68);backdrop-filter:blur(14px) saturate(1.35);-webkit-backdrop-filter:blur(14px) saturate(1.35);
+  color:var(--subtle);cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.07);
+  transition:border-color .2s,color .2s,transform .2s var(--ease-spring);}
+.canvas-hud.on .hud-help{display:inline-flex;}
+.hud-help:hover{border-color:var(--accent);color:var(--accent2);transform:translateY(-1px);}
+.hud-help svg{width:14px;height:14px;}
 
 /* ── Controls ── */
 #controls{margin-top:14px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
@@ -90,17 +120,14 @@ button{font-family:inherit;}
 .btn-ghost:hover{border-color:var(--accent);color:var(--text);}
 button:disabled{opacity:.42;cursor:not-allowed;}
 
-#info{display:none;margin-top:14px;font-size:12px;font-weight:500;color:var(--text);background:var(--surface);border:1px solid var(--border);padding:10px 14px;border-radius:10px;box-shadow:0 6px 22px rgba(0,0,0,.3);}
+.tips-btn{margin-left:auto;display:inline-flex;align-items:center;gap:7px;padding:8px 15px;border:1px solid var(--border);border-radius:999px;
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));color:var(--subtle);font-size:12px;font-weight:700;cursor:pointer;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);transition:.2s var(--ease-spring);}
+.tips-btn svg{width:14px;height:14px;flex-shrink:0;opacity:.8;}
+.tips-btn:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px);}
+.tips-btn:active{transform:scale(.96);}
 
-/* ── Legend ── */
-#legend{margin-top:22px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 20px;box-shadow:0 6px 22px rgba(0,0,0,.3);}
-#legend h3{font-size:.66em;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;font-weight:600;}
-#legend ul{list-style:none;margin:0 0 12px;}
-#legend li{margin-bottom:7px;font-size:12px;font-weight:400;color:var(--dim);display:flex;align-items:center;gap:8px;}
-#legend li strong{color:var(--text);}
-.color-box{display:inline-block;width:18px;height:18px;flex-shrink:0;border:1px solid rgba(255,255,255,.15);border-radius:4px;}
-#legend p{font-size:12px;font-weight:400;color:var(--dim);line-height:1.7;margin-top:6px;}
-#legend em{color:var(--subtle);font-style:normal;font-weight:600;}
+#info{display:none;margin-top:14px;font-size:12px;font-weight:500;color:var(--text);background:var(--surface);border:1px solid var(--border);padding:10px 14px;border-radius:10px;box-shadow:0 6px 22px rgba(0,0,0,.3);}
 
 /* ── Result overlay ── */
 .result-overlay{position:absolute;inset:0;display:none;pointer-events:none;z-index:30;}
@@ -126,17 +153,78 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 .ro-btn:active{transform:translateY(1px);}
 .result-overlay.nopath .ro-btn{background:linear-gradient(180deg,#49527a,#39425c);color:#fff;box-shadow:none;}
 
-/* ── A*-tooltip (f = g + h, litet utvecklarverktyg) ── */
+/* ── A*-tooltip: f(n) = g(n) + h(n) ── */
 #mazeTooltip{position:absolute;pointer-events:none;z-index:25;background:rgba(13,17,32,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   border:1px solid rgba(77,128,255,.4);border-radius:9px;padding:8px 11px;font-family:'JetBrains Mono',monospace;font-size:12px;
   color:var(--text);white-space:nowrap;box-shadow:0 12px 30px rgba(0,0,0,.55);opacity:0;transform:translateY(-4px);transition:opacity .14s,transform .14s;}
 #mazeTooltip.show{opacity:1;transform:none;}
+.tt-eq{font-size:10px;font-weight:700;letter-spacing:.03em;color:var(--dim);margin-bottom:4px;}
 .tt-row{display:flex;align-items:baseline;gap:8px;line-height:1.65;}
-.tt-k{display:inline-block;min-width:14px;font-weight:700;}
+.tt-k{display:inline-block;min-width:34px;font-weight:700;}
 .tt-f{color:#6698ff;} .tt-g{color:#3ddc84;} .tt-h{color:#f0a94e;}
 .tt-v{color:var(--text);font-weight:600;}
 .tt-div{height:1px;background:rgba(255,255,255,.14);margin:3px 0;}
 .tt-note{font-size:9px;color:var(--dim);letter-spacing:.02em;}
+
+/* ── Glaskort (concept card) ── */
+.concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
+.concept-backdrop.show{opacity:1;pointer-events:auto;}
+.concept-card{position:fixed;top:50%;left:50%;z-index:301;width:380px;max-width:90vw;
+  perspective:1000px;
+  transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
+  transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .26s var(--ease-out);}
+.concept-card.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
+.concept-card-inner{position:relative;text-align:center;transform-style:preserve-3d;
+  background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;
+  transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
+  transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);
+  will-change:transform;max-height:86vh;overflow-y:auto;}
+.concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+  padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,206,84,.15) 45%,transparent 65%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::before{opacity:1;}
+.concept-card-inner::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.09),transparent 60%);
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::after{opacity:1;}
+.concept-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);z-index:3;transform:translateZ(30px);}
+.concept-close:hover{border-color:var(--red);color:var(--red);transform:translateZ(30px) rotate(90deg);}
+.concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
+.concept-icon svg{width:28px;height:28px;}
+.concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
+.concept-def{font-size:.88em;line-height:1.6;color:var(--dim);position:relative;z-index:3;transform:translateZ(18px);transform-style:preserve-3d;}
+.concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;font-weight:600;}
+
+/* 3D-rutor i glaskorten */
+.gc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 8px;margin:14px 0 4px;transform-style:preserve-3d;}
+.gc-grid-2{grid-template-columns:repeat(2,minmax(0,1fr));}
+.gc-cell{display:flex;flex-direction:column;align-items:center;gap:7px;transform-style:preserve-3d;}
+.t3{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;position:relative;
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5);
+  background:linear-gradient(155deg,color-mix(in srgb,var(--tc) 72%,#fff) 0%,var(--tc) 44%,color-mix(in srgb,var(--tc) 60%,#000) 100%);
+  box-shadow:0 14px 24px -8px color-mix(in srgb,var(--tc) 55%,rgba(0,0,0,.65)),0 3px 8px rgba(0,0,0,.35),
+    inset 0 1.5px 0 rgba(255,255,255,.42),inset 0 -3px 6px rgba(0,0,0,.32),
+    0 0 0 1px color-mix(in srgb,var(--tc) 40%,rgba(255,255,255,.1));
+  transform:translateZ(16px) rotateX(9deg);}
+.t3::after{content:'';position:absolute;left:3px;right:3px;top:2px;height:40%;border-radius:9px 9px 50% 50%/9px 9px 100% 100%;
+  background:linear-gradient(rgba(255,255,255,.32),rgba(255,255,255,0));pointer-events:none;}
+.t3.big{width:70px;height:70px;border-radius:17px;font-size:28px;transform:translateZ(22px) rotateX(9deg);}
+.t3-lab{font-size:11px;font-weight:700;color:var(--text);letter-spacing:.01em;line-height:1.2;}
+.t3-sub{font-size:9.5px;color:var(--dim);margin-top:-4px;}
+
+.gc-ctrl{margin-top:16px;display:flex;flex-direction:column;gap:9px;text-align:left;}
+.gc-ctrl-row{display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--dim);line-height:1.45;}
+.mbtn{flex-shrink:0;min-width:82px;text-align:center;padding:4px 9px;border:1px solid var(--border);border-radius:8px;
+  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02));color:var(--subtle);
+  font-size:10.5px;font-weight:700;box-shadow:0 2px 5px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.08);}
+.gc-note{font-size:11.5px;color:var(--dim);line-height:1.65;margin-top:14px;}
+.gc-btn{width:100%;margin-top:16px;padding:11px;border:none;border-radius:11px;font-size:12.5px;font-weight:700;cursor:pointer;
+  background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;
+  box-shadow:0 8px 22px rgba(77,128,255,.32),inset 0 1px 0 rgba(255,255,255,.25);transition:filter .16s,transform .08s;}
+.gc-btn:hover{filter:brightness(1.07);}
+.gc-btn:active{transform:translateY(1px);}
 
 /* ── Intro overlay ── */
 .overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
@@ -169,6 +257,7 @@ button:disabled{opacity:.42;cursor:not-allowed;}
   #controls{gap:8px;}
   #startSearchBtn{width:100%;}
   .player{flex:1;justify-content:center;}
+  .tips-btn{margin-left:0;}
 }
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;}
@@ -179,7 +268,9 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
-  <a class="lang-link" href="https://www.ai-aktiviteter.se/sokalgoritmer-labyrinter_ENG"><span class="flag">🇬🇧</span> English</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/sokalgoritmer-labyrinter_ENG">
+    <svg class="lang-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.7 2.6 4 5.8 4 9s-1.3 6.4-4 9c-2.7-2.6-4-5.8-4-9s1.3-6.4 4-9z"/></svg>
+    English</a>
   <h1>Sökalgoritmer i <span>labyrint</span></h1>
   <p>Bygg din egen labyrint och följ hur BFS, DFS, Girig bäst-först och A* hittar vägen till målet.</p>
 </div>
@@ -204,7 +295,17 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 </div>
 
 <div id="canvasContainer">
-  <canvas id="mazeCanvas" aria-label="Labyrint. Vänsterklicka för vägg/väg, högerklicka för mål och kostnader."></canvas>
+  <canvas id="mazeCanvas" aria-label="Labyrint. Aktivera redigeringsläget uppe till vänster för att bygga och ändra."></canvas>
+  <div class="canvas-hud" id="canvasHud">
+    <button id="editToggle" class="hud-toggle" aria-pressed="false" title="Redigeringsläge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+      Redigera
+      <span class="hud-switch" aria-hidden="true"></span>
+    </button>
+    <button id="editHelpBtn" class="hud-help" title="Så bygger du" aria-label="Visa bygginstruktioner">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+    </button>
+  </div>
   <div id="mazeTooltip"></div>
   <div id="resultOverlay" class="result-overlay"></div>
 </div>
@@ -240,27 +341,13 @@ button:disabled{opacity:.42;cursor:not-allowed;}
   <input type="file" id="loadInput" style="display:none;">
   <button id="loadBtn" class="btn-ghost">Ladda</button>
   <button id="clearMazeBtn" class="btn-ghost">Töm</button>
+  <button class="tips-btn" onclick="openConcept('tips',event)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>
+    Förklaringar &amp; tips
+  </button>
 </div>
 
 <div id="info" role="status"></div>
-
-<div id="legend">
-  <h3>Förklaringar</h3>
-  <ul>
-    <li><span class="color-box" style="background:#34c759;"></span><span><strong>Start</strong> – sökningens startposition. Klicka och dra för att flytta den.</span></li>
-    <li><span class="color-box" style="background:#ef5b5b;"></span><span><strong>Mål</strong> – skapas genom att högerklicka en gång.</span></li>
-    <li><span class="color-box" style="background:#d7def0;"></span><span><strong>Vanlig väg</strong> (kostnad 1) – skapas genom att vänsterklicka på en vägg.</span></li>
-    <li><span class="color-box" style="background:#10141f;border-color:#2a3550;"></span><span><strong>Vägg</strong> – skapas genom att vänsterklicka på en öppen ruta.</span></li>
-    <li><span class="color-box" style="background:#8b5e34;"></span><span><strong>Kostnad 3</strong> – skapas genom att högerklicka två gånger.</span></li>
-    <li><span class="color-box" style="background:#3f6fd0;"></span><span><strong>Kostnad 5</strong> – skapas genom att högerklicka tre gånger.</span></li>
-    <li><span class="color-box" style="background:#6f9fd6;"></span><span><strong>Genomsökt</strong> – rutor som algoritmen redan har undersökt.</span></li>
-    <li><span class="color-box" style="background:#f0a94e;"></span><span><strong>Kö</strong> – rutor på tur att utforskas. Pulserar mjukt.</span></li>
-    <li><span class="color-box" style="background:#3ddc84;"></span><span><strong>Hittad väg</strong> – ritas från start till mål när målet hittats.</span></li>
-  </ul>
-  <p><em>Vänsterklick</em> växlar mellan vägg och öppen ruta.<br><em>Högerklick</em> växlar mål → kostnad 3 → kostnad 5 → vägg.</p>
-  <p style="margin-top:8px;"><em>Tips:</em> Vid A*-sökning kan du hålla muspekaren över en ruta för att se kostnadsfunktionen f = g + h.</p>
-  <p style="margin-top:8px;">Tryck på mellanslag för att spela/pausa och använd piltangenterna för att stega dig fram.</p>
-</div>
 
 </div>
 
@@ -275,12 +362,23 @@ button:disabled{opacity:.42;cursor:not-allowed;}
     <h2>Sökalgoritmer i <span>labyrint</span></h2>
     <p class="sub">Undersök hur en AI-agent kan navigera genom en labyrint. Se hur fyra klassiska sökalgoritmer arbetar steg för steg.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">01</div><div><strong>Välj en labyrint</strong> – ladda en färdig eller bygg en egen.</div></div>
+      <div class="step"><div class="step-num">01</div><div><strong>Välj en labyrint</strong> – ladda en färdig, eller slå på redigeringsläget uppe till vänster i labyrinten och bygg en egen.</div></div>
       <div class="step"><div class="step-num">02</div><div><strong>Välj algoritm och sök</strong> – BFS, DFS, Girig bäst-först eller A*, och tryck Starta sökning.</div></div>
       <div class="step"><div class="step-num">03</div><div><strong>Jämför</strong> – kör samma labyrint med olika algoritmer. Vilken hittar kortast väg, och vilken utforskar minst rutor?</div></div>
     </div>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-    <p class="overlay-tip">Tips: håll muspekaren över en genomsökt ruta under A*-sökning för att se hela uträkningen <strong>f = g + h</strong>.</p>
+    <p class="overlay-tip">Tips: håll muspekaren över en genomsökt ruta under A*-sökning för att se hela uträkningen <strong>f(n) = g(n) + h(n)</strong>.</p>
+  </div>
+</div>
+
+<!-- ── Glaskort: skelett (fylls dynamiskt) ── -->
+<div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
+<div class="concept-card" id="conceptCard">
+  <div class="concept-card-inner" id="conceptCardInner">
+    <button class="concept-close" onclick="closeConcept()" aria-label="Stäng">✕</button>
+    <div class="concept-icon" id="conceptIcon"></div>
+    <div class="concept-title" id="conceptTitle"></div>
+    <div class="concept-def" id="conceptDef"></div>
   </div>
 </div>
 
@@ -328,6 +426,9 @@ let playTimer=null, isPlaying=false;
 const PLAY_INTERVAL=150;
 const D_IN=RM?1:160;
 
+/* Redigeringsläge */
+let editMode=false;
+
 /* Animationstillstånd */
 let cellAnim=new Map();      // "r,c" -> {st:'fr'|'ex', t}
 let heurLabels=new Map(), fVals=new Map();
@@ -353,6 +454,109 @@ function get_neighbors(n){const[r,c]=n,out=[];for(const[dx,dy]of[[-1,0],[1,0],[0
 
 class PriorityQ{constructor(){this._d=[];}push(i){this._d.push(i);this._d.sort((a,b)=>a[0]-b[0]);}pop(){return this._d.shift();}empty(){return this._d.length===0;}}
 const directions=[[-1,0],[0,1],[1,0],[0,-1]];
+
+/* ═══════════════ Glaskort (concept cards) ═══════════════ */
+function t3(color,glyph,label,sub){
+  return '<div class="gc-cell"><div class="t3" style="--tc:'+color+'">'+(glyph||'')+'</div>'
+    +'<span class="t3-lab">'+label+'</span>'+(sub?'<span class="t3-sub">'+sub+'</span>':'')+'</div>';
+}
+const CONCEPTS={
+  bygga:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
+    title:'Bygg din labyrint',
+    def:'Redigeringsläget är på – nu formar du labyrinten direkt i rutnätet.'
+      +'<div class="gc-grid">'
+      +t3('#34c759','','Start','dra för att flytta')
+      +t3('#ef5b5b','','Mål')
+      +t3('#c7d2ec','','Väg','kostnad 1')
+      +t3('#1b2340','','Vägg')
+      +t3('#8b5e34','3','Kostnad 3')
+      +t3('#3f6fd0','5','Kostnad 5')
+      +'</div>'
+      +'<div class="gc-ctrl">'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Vänsterklick</span><span>växlar <strong>vägg ↔ väg</strong> – håll och dra för att rita.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Högerklick</span><span>växlar <strong>mål → kostnad 3 → kostnad 5 → vägg</strong>.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Dra</span><span>ta tag i den gröna startrutan för att flytta den.</span></div>'
+      +'</div>'
+      +'<button class="gc-btn" onclick="closeConcept()">Börja bygga</button>'
+  },
+  tips:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>',
+    title:'Förklaringar &amp; tips',
+    def:'Så läser du vad som händer i labyrinten under sökningen.'
+      +'<div class="gc-grid">'
+      +t3('#6f9fd6','','Genomsökt','redan undersökt')
+      +t3('#f0a94e','','Kö','på tur – pulserar')
+      +t3('#3ddc84','','Hittad väg','start → mål')
+      +'</div>'
+      +'<div class="gc-ctrl">'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Mellanslag</span><span>spela / pausa uppspelningen.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">← →</span><span>stega bakåt / framåt, ett sök-steg i taget.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">R</span><span>nollställ sökningen.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Hovra</span><span>vid A*-sökning: håll muspekaren över en genomsökt ruta för att se hela uträkningen <em>f(n)&nbsp;=&nbsp;g(n)&nbsp;+&nbsp;h(n)</em>.</span></div>'
+      +'</div>'
+      +'<div class="gc-note">Vill du bygga eller ändra i labyrinten? Slå på <strong>Redigera</strong> uppe till vänster i rutnätet – där förklaras alla rut-typer.</div>'
+  },
+  kostnader:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg>',
+    title:'Nytt: rutor med kostnad',
+    def:'Den här labyrinten har terräng som är <strong>dyrare att korsa</strong>. En vanlig väg-ruta kostar 1 – de här kostar mer:'
+      +'<div class="gc-grid gc-grid-2" style="max-width:230px;margin-left:auto;margin-right:auto;">'
+      +t3('#8b5e34','3','Kostnad 3',null).replace('class="t3"','class="t3 big"')
+      +t3('#3f6fd0','5','Kostnad 5',null).replace('class="t3"','class="t3 big"')
+      +'</div>'
+      +'<div class="gc-note">Nu räcker det inte att hitta den <em>kortaste</em> vägen – den <em>billigaste</em> kan vara en annan. Jämför gärna Girig bäst-först med A*, som väger in kostnaden i <strong>f(n)&nbsp;=&nbsp;g(n)&nbsp;+&nbsp;h(n)</strong>.</div>'
+      +'<button class="gc-btn" onclick="closeConcept()">Förstått</button>'
+  }
+};
+function openConceptFrom(id,el){
+  const c=CONCEPTS[id];if(!c)return;
+  const card=document.getElementById('conceptCard');
+  document.getElementById('conceptIcon').innerHTML=c.icon;
+  document.getElementById('conceptTitle').innerHTML=c.title;
+  document.getElementById('conceptDef').innerHTML=c.def;
+  let dx=0,dy=0;
+  if(el&&el.getBoundingClientRect){
+    const r=el.getBoundingClientRect();
+    dx=(r.left+r.width/2)-window.innerWidth/2;
+    dy=(r.top+r.height/2)-window.innerHeight/2;
+  }
+  card.classList.remove('show');
+  card.style.transition='none';
+  card.style.setProperty('--dx',dx+'px');
+  card.style.setProperty('--dy',dy+'px');
+  void card.offsetHeight; // force reflow så start-positionen appliceras utan transition
+  card.style.transition='';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
+}
+function openConcept(id,ev){ev.stopPropagation();openConceptFrom(id,ev.currentTarget);}
+function closeConcept(){
+  document.getElementById('conceptCard').classList.remove('show');
+  document.getElementById('conceptBackdrop').classList.remove('show');
+}
+window.openConcept=openConcept;window.closeConcept=closeConcept;
+function conceptOpen(){return document.getElementById('conceptBackdrop').classList.contains('show');}
+
+(function initCardTilt(){
+  const el=document.getElementById('conceptCardInner');if(!el||RM)return;
+  const MAX_TILT=7;
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+    const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
+    el.style.setProperty('--mx',(px*100)+'%');
+    el.style.setProperty('--my',(py*100)+'%');
+    el.style.transform='perspective(1000px) rotateX('+rx+'deg) rotateY('+ry+'deg)';
+    const sx=(px-0.5)*22,sy=(py-0.5)*22;
+    el.style.boxShadow=(-sx)+'px '+(20-sy)+'px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset';
+  });
+  el.addEventListener('mouseleave',()=>{
+    el.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%');
+    el.style.boxShadow='';
+  });
+})();
 
 /* ═══════════════ Förberäkning av sökning (oförändrad logik) ═══════════════ */
 function precomputeSearch(alg){
@@ -502,7 +706,7 @@ function resetPlayback(){
 }
 function ensureComputed(){
   if(computedFor===selectedAlg&&searchSteps.length)return true;
-  if(ends.length===0){setInfo('Inga mål har satts – högerklicka på en vägg för att skapa ett mål.');return false;}
+  if(ends.length===0){setInfo('Inga mål har satts – aktivera redigeringsläget och högerklicka på en vägg för att skapa ett mål.');return false;}
   currentAlgorithm=selectedAlg;computedFor=selectedAlg;
   searchSteps=precomputeSearch(selectedAlg);
   curStep=-1;recomputeToStep(-1);
@@ -593,7 +797,7 @@ function drawWall(r,c){
   ctx.beginPath();ctx.moveTo(x+4,y+s-1);ctx.lineTo(x+s-4,y+s-1);ctx.stroke();
   rr(x,y,s,s,5);ctx.strokeStyle='#1d2743';ctx.stroke();
 }
-/* Sökvärde (f eller h), diskret centrerad etikett – syns bara under sökningen. */
+/* Sökvärde (f(n) eller h(n)), diskret centrerad etikett – syns bara under sökningen. */
 function drawLabel(r,c,txt){
   ctx.save();
   ctx.font='700 8px "JetBrains Mono",monospace';
@@ -614,7 +818,7 @@ function frame(){
   for(let c=0;c<=COLS;c++){ctx.strokeStyle=c%3===0?'rgba(102,152,255,.05)':'rgba(102,152,255,.02)';ctx.beginPath();ctx.moveTo(c*CELL+.5,0);ctx.lineTo(c*CELL+.5,H);ctx.stroke();}
   for(let r=0;r<=ROWS;r++){ctx.strokeStyle=r%3===0?'rgba(102,152,255,.05)':'rgba(102,152,255,.02)';ctx.beginPath();ctx.moveTo(0,r*CELL+.5);ctx.lineTo(W,r*CELL+.5);ctx.stroke();}
 
-  /* Grundplattor – kostnadsrutornas färg räcker, siffran förklaras i texten under */
+  /* Grundplattor – kostnadsrutornas färg räcker, siffran förklaras i glaskorten */
   for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
     const v=grid[r][c];
     if(v===1)drawWall(r,c);
@@ -696,11 +900,10 @@ function frame(){
     particles=keep;
   }
 
-  /* Hover: tunn vit ram + förhandsvisning i byggläget */
-  if(hoverCell){
+  /* Hover: tunn vit ram + förhandsvisning – bara i redigeringsläget */
+  if(hoverCell&&editMode){
     const[r,c]=hoverCell;
-    const editMode=curStep<0&&!isPlaying;
-    if(editMode&&!isStart(r,c)&&!isGoal(r,c)&&(grid[r][c]===0||grid[r][c]===1)){
+    if(!isStart(r,c)&&!isGoal(r,c)&&(grid[r][c]===0||grid[r][c]===1)){
       ctx.save();ctx.globalAlpha=.32;
       if(grid[r][c]===1)paintTile(r,c,floorColors[r][c]);   // vägg → förhandsvisa golv
       else paintTile(r,c,'#10141f');                         // golv → förhandsvisa vägg
@@ -715,7 +918,7 @@ function frame(){
 }
 requestAnimationFrame(frame);
 
-/* ═══════════════ Musinteraktion (redigering) ═══════════════ */
+/* ═══════════════ Musinteraktion (redigering – kräver redigeringsläge) ═══════════════ */
 function getCellFromMouse(e){
   const rect=canvas.getBoundingClientRect();
   const mx=(e.clientX-rect.left)*(W/rect.width),my=(e.clientY-rect.top)*(H/rect.height);
@@ -726,6 +929,7 @@ function getCellFromMouse(e){
 canvas.oncontextmenu=e=>e.preventDefault();
 canvas.addEventListener('mousedown',e=>{
   e.preventDefault();
+  if(!editMode)return;
   const cell=getCellFromMouse(e);if(!cell)return;
   drag_start_pos=cell;
   const[row,col]=cell;
@@ -742,22 +946,24 @@ canvas.addEventListener('mousemove',e=>{
       if(grid[r][c]===1)grid[r][c]=0;else if(grid[r][c]===0)grid[r][c]=1;
       mazeChanged();}
   }
-  /* A*-tooltip: f = g + h */
+  /* A*-tooltip: f(n) = g(n) + h(n) */
   if(hoverCell){
     const key=hoverCell[0]+','+hoverCell[1];
     if(currentAlgorithm==='A*'&&fVals.has(key)&&cellAnim.has(key)){
       const[f,h]=fVals.get(key),g=f-h;
       showMazeTooltip(
-        '<div class="tt-row"><span class="tt-k tt-f">f</span><span class="tt-v">'+f+'</span></div>'
+        '<div class="tt-eq"><span class="tt-f">f(n)</span> = <span class="tt-g">g(n)</span> + <span class="tt-h">h(n)</span></div>'
         +'<div class="tt-div"></div>'
-        +'<div class="tt-row"><span class="tt-k tt-g">g</span><span class="tt-v">'+g+'</span><span class="tt-note">hittills</span></div>'
-        +'<div class="tt-row"><span class="tt-k tt-h">h</span><span class="tt-v">'+h+'</span><span class="tt-note">kvar (uppskattat)</span></div>',e);
+        +'<div class="tt-row"><span class="tt-k tt-f">f(n)</span><span class="tt-v">'+f+'</span></div>'
+        +'<div class="tt-row"><span class="tt-k tt-g">g(n)</span><span class="tt-v">'+g+'</span><span class="tt-note">hittills</span></div>'
+        +'<div class="tt-row"><span class="tt-k tt-h">h(n)</span><span class="tt-v">'+h+'</span><span class="tt-note">kvar (uppskattat)</span></div>',e);
     }else hideMazeTooltip();
   }else hideMazeTooltip();
 });
 canvas.addEventListener('mouseleave',()=>{hoverCell=null;hideMazeTooltip();});
 canvas.addEventListener('mouseup',e=>{
   e.preventDefault();
+  if(!editMode&&!is_dragging_start&&!dragging_point)return;
   const cell=getCellFromMouse(e);
   if(is_dragging_start){
     is_dragging_start=false;
@@ -795,6 +1001,21 @@ function showMazeTooltip(html,e){
 }
 function hideMazeTooltip(){mazeTooltip.classList.remove('show');}
 
+/* ═══════════════ Redigeringsläge (toggle + hjälpknapp) ═══════════════ */
+const editToggle=document.getElementById('editToggle');
+const canvasHud=document.getElementById('canvasHud');
+editToggle.addEventListener('click',()=>{
+  editMode=!editMode;
+  editToggle.setAttribute('aria-pressed',editMode?'true':'false');
+  canvasContainer.classList.toggle('editing',editMode);
+  canvasHud.classList.toggle('on',editMode);
+  if(editMode)openConceptFrom('bygga',editToggle);
+  else closeConcept();
+});
+document.getElementById('editHelpBtn').addEventListener('click',e=>{
+  openConceptFrom('bygga',e.currentTarget);
+});
+
 /* ═══════════════ Knappar & tangentbord ═══════════════ */
 document.getElementById('algCards').addEventListener('click',e=>{
   const card=e.target.closest('.alg-card');if(!card)return;
@@ -824,8 +1045,10 @@ document.getElementById('prevStepBtn').addEventListener('click',()=>{pausePlayba
 document.getElementById('resetBtn').addEventListener('click',resetPlayback);
 
 document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeConcept();return;}
   if(e.target.matches('input,select,textarea'))return;
   if(document.getElementById('introOverlay').classList.contains('show'))return;
+  if(conceptOpen())return;
   if(e.code==='Space'){e.preventDefault();togglePlay();}
   else if(e.key==='ArrowRight'){e.preventDefault();pausePlayback();if(ensureComputed())stepForward(true);}
   else if(e.key==='ArrowLeft'){e.preventDefault();pausePlayback();stepBack();}
@@ -873,6 +1096,11 @@ document.getElementById('predefinedSelect').addEventListener('change',e=>{
     const m=predefinedMazes[sel];
     grid=m.grid.map(row=>row.slice());start=[...m.start];ends=m.ends.map(x=>[...x]);
     mazeChanged();setInfo('Fördefinierad labyrint "'+sel+'" har laddats.');
+    /* Apple-onboarding: Exempel 4 & 5 introducerar kostnadsrutor */
+    if(sel==='Exempel 4'||sel==='Exempel 5'){
+      const anchor=e.target;
+      setTimeout(()=>openConceptFrom('kostnader',anchor),260);
+    }
     e.target.value='';
   }
 });
