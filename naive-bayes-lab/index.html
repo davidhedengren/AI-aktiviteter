@@ -327,12 +327,8 @@
   .overlay-btn svg { width:15px;height:15px;flex-shrink:0; }
   .info-btn { background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:5px 12px;font-family:'DM Sans',sans-serif;font-size:0.78em;font-weight:600;cursor:pointer;transition:.2s; }
   .info-btn:hover { border-color:var(--accent2);color:var(--text); }
-  .term { border-bottom:1px dotted var(--accent2);cursor:help;color:inherit;transition:background .15s,border-color .15s;border-radius:2px; }
+  .term { border-bottom:1px dotted var(--accent2);cursor:pointer;color:inherit;transition:background .15s,border-color .15s;border-radius:2px; }
   .term:hover, .term:focus { border-bottom-color:var(--accent);background:rgba(77,128,255,.12);outline:none; }
-  #term-popover { position:fixed;z-index:200;max-width:300px;background:var(--surface2);border:1px solid var(--border2);border-radius:9px;padding:13px 15px;box-shadow:0 8px 30px rgba(0,0,0,.55);font-size:12.5px;line-height:1.65;color:var(--subtle);display:none; }
-  #term-popover.show { display:block;animation:fadeIn .15s ease; }
-  #term-popover .tp-term { display:block;font-weight:700;color:var(--text);margin-bottom:5px;font-size:12.5px;letter-spacing:.01em; }
-  #term-popover .tp-term::before { content:'›';color:var(--accent2);margin-right:6px; }
   .glossary-grid { display:flex;flex-wrap:wrap;gap:7px; }
   .g-tag { display:inline-flex;align-items:center;gap:6px;font-family:'DM Sans',sans-serif;font-size:0.82em;font-weight:600;padding:7px 14px 7px 10px;border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--muted);cursor:pointer;transition:.2s var(--ease-spring); }
   .g-tag:hover { border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px); }
@@ -678,56 +674,16 @@ function term(key, label) {
 
 
 function initGlossary() {
-  let pop = document.getElementById('term-popover');
-  if (!pop) { pop = document.createElement('div'); pop.id = 'term-popover'; document.body.appendChild(pop); }
-  let pinned = false, current = null;
-
-
-  function show(el) {
-    const g = GLOSSARY[el.dataset.term];
-    if (!g) return;
-    pop.innerHTML = `<span class="tp-term">${g.term}</span>${g.def}`;
-    pop.classList.add('show');
-    const r = el.getBoundingClientRect();
-    const pw = pop.offsetWidth, ph = pop.offsetHeight;
-    let left = r.left + r.width / 2 - pw / 2;
-    left = Math.max(8, Math.min(left, window.innerWidth - pw - 8));
-    let top = r.bottom + 8;
-    if (top + ph > window.innerHeight - 8) top = r.top - ph - 8;
-    pop.style.left = left + 'px';
-    pop.style.top  = top + 'px';
-    current = el;
-  }
-  function hide() { pop.classList.remove('show'); pinned = false; current = null; }
-
-
   document.addEventListener('click', e => {
     const t = e.target.closest('.term');
-    if (t) {
-      e.stopPropagation();
-      if (pinned && current === t) { hide(); }
-      else { show(t); pinned = true; }
-    } else if (!e.target.closest('#term-popover')) {
-      hide();
-    }
-  });
-  document.addEventListener('mouseover', e => {
-    const t = e.target.closest('.term');
-    if (t && !pinned) show(t);
-  });
-  document.addEventListener('mouseout', e => {
-    const t = e.target.closest('.term');
-    if (t && !pinned) hide();
+    if (t) { openConceptTerm(t.dataset.term, { currentTarget: t, stopPropagation(){} }); }
   });
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') hide();
     if ((e.key === 'Enter' || e.key === ' ') && document.activeElement?.classList.contains('term')) {
       e.preventDefault();
-      if (pinned && current === document.activeElement) hide();
-      else { show(document.activeElement); pinned = true; }
+      openConceptTerm(document.activeElement.dataset.term, { currentTarget: document.activeElement, stopPropagation(){} });
     }
   });
-  if (typeof window !== 'undefined') window.addEventListener('resize', hide);
 }
 
 
@@ -1417,4 +1373,19 @@ const EXAMPLE_BANK = [
   {label:"SPAM", text:"Billiga receptbelagda läkemedel utan recept. Diskret leverans inom 48 timmar. Inga frågor."},
   {label:"SPAM", text:"Exklusivt: Viagra och Cialis utan recept. Diskret leverans direkt hem till dörren. Beställ idag."},
   {label:"SPAM", text:"Stoppa håravfall på 7 dagar! Kliniskt testad serum återställer hårfästet. 60 dagars nöjdhetsgaranti."},
-  {label:"SPAM", text:"Sluta röka på 3 dagar! Metoden är 94% effektiv. Pengarna tillbaka om du inte lyckas. Bestäl
+  {label:"SPAM", text:"Sluta röka på 3 dagar! Metoden är 94% effektiv. Pengarna tillbaka om du inte lyckas. Beställ nu."},
+  {label:"SPAM", text:"Denna naturliga ingrediens botar ledvärk permanent. Reumatologer vill inte att du ska veta om det."},
+  {label:"SPAM", text:"Bota sömnlöshet ikväll! En naturlig kapsyl ger dig 8 timmars djupsömn utan beroende. Prova gratis."},
+  {label:"SPAM", text:"Öka testosteron med 300%! En naturlig formel ger dig energi, muskler och välmående. Kliniskt bevisad."},
+  {label:"SPAM", text:"Hemlig cancerkur döljs av läkemedelsindustrin. Naturläkaren avslöjar sanningen i gratisföreläsning."},
+  {label:"SPAM", text:"Återfå ungdomlig hy! Peptidserum minskar rynkor med 47% på 4 veckor. Prova riskfritt."},
+  {label:"SPAM", text:"Klinisk studie söker deltagare mot betalning. Testa kosttillskottet och tjäna 3 000 kr. Anmäl dig nu."},
+  {label:"SPAM", text:"Läkare avslöjar: ät detta varje morgon och du bränner tre gånger mer fett under dagen. Se videon nu."},
+  {label:"SPAM", text:"Slipp glasögon för alltid! Ny teknik korrigerar synen hemma utan operation. Levereras diskret hem."},
+  {label:"SPAM", text:"Bota tinnitus på 7 dagar! Öronläkare vill inte att du ska känna till denna enkla metod."},
+  {label:"SPAM", text:"Kliniskt bevisad: denna fruktsoppa sänker blodsockret på 14 dagar. Diabetiker rapporterar fantastiska resultat."},
+  {label:"SPAM", text:"Sluta snarka från dag ett! Tandskyddet som förändrar sömnen. Tillverkat i medicinsk silikon. Prova nu."},
+  {label:"SPAM", text:"94% av testpersonerna gick ner 8 kg på 3 veckor utan träning eller diet. Häpnadsväckande resultat."},
+  {label:"SPAM", text:"Permanent hårborttagning hemma för 299 kr! Professionellt resultat utan salongbesök. Beställ nu."},
+  {label:"SPAM", text:"Återfå ungdomlig hud på 21 dagar! Ny peptidkräm med kliniskt bevisad effekt. Prova riskfritt 30 dagar."},
+  {label:"SPAM", text:"Investera i kryptovaluta och fördubbla ditt kapital på 60 dagar. Garanterad avkastning. Begränsat anta
