@@ -171,7 +171,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .g-tag .g-ico{width:12px;height:12px;flex-shrink:0;opacity:.8;}
 .concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
 .concept-backdrop.show{opacity:1;pointer-events:auto;}
-.concept-card{position:fixed;top:50%;left:50%;z-index:301;width:340px;max-width:88vw;
+.concept-card{position:fixed;top:50%;left:50%;z-index:400;width:340px;max-width:88vw;
   perspective:1000px;
   transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
   transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .26s var(--ease-out);}
@@ -205,6 +205,16 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .concept-card.training-card{width:470px;}
 .concept-card.training-card .concept-card-inner{max-height:92vh;overflow-y:auto;}
 .concept-card.training-card #conceptIllus{display:none;}
+/* Live-träningsläge: appen ligger ovanför backdropen så Q-tabellen syns och uppdateras */
+.concept-backdrop.training-live{background:rgba(6,7,14,.32);backdrop-filter:none;-webkit-backdrop-filter:none;}
+.app.training-live{z-index:302;}
+.app.training-live .left{filter:blur(1.5px) brightness(.6);pointer-events:none;transition:filter .35s var(--ease-out);}
+.app.training-live .right{box-shadow:0 0 0 2px var(--accent),0 26px 64px rgba(0,0,0,.55);border-color:rgba(77,128,255,.6);position:relative;}
+@media(min-width:900px){
+  .concept-card.training-card.show{transform:translate(-50%,-50%) translateX(-180px) scale(1);}
+}
+.tt-hint{font-size:.76em;line-height:1.4;color:var(--subtle);text-align:center;background:var(--accent-dim);border:1px solid rgba(77,128,255,.25);border-radius:9px;padding:8px 10px;}
+.tt-hint strong{color:var(--accent2);}
 .concept-card.training-card .concept-def{margin-bottom:0;font-size:1em;}
 .tt{display:flex;flex-direction:column;gap:14px;text-align:left;}
 .tt-canvas-wrap{position:relative;width:100%;height:158px;border-radius:var(--r-md);overflow:hidden;background:radial-gradient(ellipse 75% 95% at 50% 45%,rgba(24,30,54,.7),rgba(9,11,20,.35));border:1px solid var(--border-soft);box-shadow:inset 0 1px 0 rgba(255,255,255,.04);}
@@ -215,6 +225,15 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .tt-line .tt-dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;box-shadow:0 0 8px var(--accent2);transition:background .3s,box-shadow .3s;}
 .tt-line.done .tt-dot{background:var(--good);box-shadow:0 0 8px var(--good);}
 .tt-line .tt-check{color:var(--good);font-weight:700;}
+.tt-ee{display:flex;flex-direction:column;gap:5px;}
+.tt-ee-top{display:flex;justify-content:space-between;font-size:.76em;font-weight:600;}
+.tt-ee-top .ee-x{color:var(--accent2);}
+.tt-ee-top .ee-o{color:var(--gold);}
+.tt-ee-top b{font-family:'JetBrains Mono',monospace;}
+.tt-ee-bar{height:8px;border-radius:999px;overflow:hidden;background:var(--gold);display:flex;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);}
+.tt-ee-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:100%;transition:width .18s var(--ease-out);}
+.tt-ee-cap{font-size:.72em;color:var(--dim);text-align:center;}
+.tt-ee-cap strong{color:var(--text);}
 .tt-rail{width:100%;height:5px;border-radius:999px;background:var(--surface2);overflow:hidden;}
 .tt-rail i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--good));transition:width .18s var(--ease-out);box-shadow:0 0 12px rgba(52,199,89,.4);}
 .tt-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;}
@@ -294,9 +313,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         <select class="nim-sel" id="epSel">
           <option value="25">25 spel</option>
           <option value="50">50 spel</option>
-          <option value="150" selected>150 spel</option>
-          <option value="500">500 spel</option>
+          <option value="150">150 spel</option>
+          <option value="500" selected>500 spel</option>
           <option value="1000">1000 spel</option>
+          <option value="2000">2000 spel</option>
         </select>
       </div>
       <div class="train-btns" id="trainBtns">
@@ -397,17 +417,16 @@ function bestAct(s){const a=validActs(s);if(!a.length)return null;return a.reduc
 function epsGreedy(s,eps){if(Math.random()<eps){const a=validActs(s);return a[Math.floor(Math.random()*a.length)];}return bestAct(s);}
 
 function trainEpisode(eps,alpha){
-  let state=totalSticks, hist=[[],[]], turn=0;
+  // Självspel med negamax-TD: efter varje drag backas motståndarens bästa svar upp (minimax).
+  let state=totalSticks;
   while(state>0){
     const a=epsGreedy(state,eps);
-    hist[turn].push([state,a]);
-    state-=a;
-    if(state===0){
-      for(const [s,ac] of hist[turn])    setQ(s,ac,getQ(s,ac)+alpha*(-1-getQ(s,ac)));
-      for(const [s,ac] of hist[1-turn])  setQ(s,ac,getQ(s,ac)+alpha*(1-getQ(s,ac)));
-      return 1-turn;
-    }
-    turn=1-turn;
+    const ns=state-a;
+    let target;
+    if(ns===0) target=-1;                                  // tog sista pinnen → förlust
+    else { const acts=validActs(ns); target=-Math.max(...acts.map(x=>getQ(ns,x))); } // motståndaren drar härnäst
+    setQ(state,a,getQ(state,a)+alpha*(target-getQ(state,a)));
+    state=ns;
   }
 }
 
@@ -459,17 +478,15 @@ function startTraining(){
   document.getElementById('trainProg').style.display='none';
   document.getElementById('trainDone').style.display='none';
   document.getElementById('convergeMsg').className='converge-msg';
-  renderQHeaders();
-  // Träna den riktiga modellen direkt (snabbt, osynligt) – teatern visualiserar processen
-  const gamesPlayed=runRealTraining(episodes);
-  openTrainingCard(episodes, gamesPlayed);
+  renderQHeaders();renderQTable(-1);
+  openTrainingCard(episodes);   // träningen sker LIVE inuti teatern – Q-tabellen fylls i medan man tittar
 }
 
 // Tränar hela modellen synkront och returnerar antal spelade partier (med tidig konvergens-stopp)
 function runRealTraining(episodes){
-  const alpha=0.03;let done=0,convergenceCount=0;
+  const alpha=0.4;let done=0,convergenceCount=0;
   for(;done<episodes;done++){
-    const eps=Math.max(0.05,1-done/Math.max(episodes*0.7,200));
+    const eps=Math.max(0.12,1-done/Math.max(episodes*0.6,120));
     trainEpisode(eps,alpha);
     if(done>=15&&done%15===0){
       const conv=checkConvergence();
@@ -755,6 +772,8 @@ function closeConcept(){
   trainAnimActive=false;
   if(wasTraining && !ttFinished){ ttFinished=true; finishTraining(ttGamesPlayed, ttEpisodes); }
   card.classList.remove('show','training-card');
+  document.querySelector('.app').classList.remove('training-live');
+  document.getElementById('conceptBackdrop').classList.remove('training-live');
   document.getElementById('conceptBackdrop').classList.remove('show');
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
@@ -770,7 +789,11 @@ const BRAIN_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 const TRAIN_THEATER_HTML=
   '<div class="tt">'
   + '<div class="tt-canvas-wrap"><canvas id="ttCanvas"></canvas></div>'
+  + '<div class="tt-hint">👉 Följ <strong>Q-tabellen</strong> – den fylls i live medan AI:n spelar</div>'
   + '<div class="tt-status" id="ttStatus"></div>'
+  + '<div class="tt-ee"><div class="tt-ee-top"><span class="ee-x">Utforskar <b id="ttExpl">100</b>%</span><span class="ee-o">Utnyttjar <b id="ttExploit">0</b>%</span></div>'
+  + '<div class="tt-ee-bar"><i id="ttEeFill"></i></div>'
+  + '<div class="tt-ee-cap" id="ttEeCap">Provar drag <strong>slumpmässigt</strong> för att upptäcka vad som funkar</div></div>'
   + '<div class="tt-rail"><i id="ttRail"></i></div>'
   + '<div class="tt-foot"><div class="tt-count"><span id="ttGames">0</span> <span class="tt-count-l">spel spelade</span></div>'
   + '<button class="tt-skip" id="ttSkip" onclick="skipTrainTheater()">Hoppa över ▸</button></div>'
@@ -780,10 +803,12 @@ const TRAIN_THEATER_HTML=
   + '</div>';
 const easeOut=t=>1-Math.pow(1-t,3);
 
-function openTrainingCard(episodes, gamesPlayed){
-  ttEpisodes=episodes; ttGamesPlayed=gamesPlayed; ttFinished=false;
+function openTrainingCard(episodes){
+  ttEpisodes=episodes; ttGamesPlayed=0; ttFinished=false;
   const card=document.getElementById('conceptCard');
   card.classList.add('training-card');
+  document.querySelector('.app').classList.add('training-live');
+  document.getElementById('conceptBackdrop').classList.add('training-live');
   document.getElementById('conceptIcon').innerHTML=BRAIN_ICON;
   document.getElementById('conceptTitle').textContent='AI:n tränar mot sig själv';
   document.getElementById('conceptDef').innerHTML=TRAIN_THEATER_HTML;
@@ -815,7 +840,22 @@ function runTrainTheater(){
 
   trainAnimActive=true;
   const t0=performance.now();
-  const DURATION=Math.min(5200, 2600+ttEpisodes*1.4);
+  const DURATION=Math.min(8500, 5200+ttEpisodes*0.9);
+  // Live-tränings-tillstånd (paced till tidslinjen)
+  const ALPHA=0.12, FLOOR=0.12, DECAY=0.9;
+  let trainDone=0, convCount=0, converged=false, lastRender=0;
+  const trainEps=()=>Math.max(FLOOR,1-trainDone/Math.max(ttEpisodes*DECAY,120));
+
+  // Optimalt NIM-drag: lämna antal ≡ 1 (mod maxTake+1); annars godtyckligt
+  function smartMove(left){
+    for(let a=1;a<=Math.min(maxTake,left);a++){ if((left-a)%(maxTake+1)===1) return a; }
+    return 1+Math.floor(Math.random()*Math.min(maxTake,left));
+  }
+  function chooseMove(left,eps){
+    const explore=Math.random()<eps;
+    const a=explore ? 1+Math.floor(Math.random()*Math.min(maxTake,left)) : smartMove(left);
+    return {a, explore};
+  }
 
   const STAT=[
     {t:'AI:n möter en kopia av sig själv', at:0},
@@ -850,15 +890,18 @@ function runTrainTheater(){
   }
   function roundRect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
 
-  function doMove(now){
+  function doMove(now, eps){
     if(!game||game.over)return;
-    const take=1+Math.floor(Math.random()*Math.min(maxTake,game.left));
+    const mv=chooseMove(game.left, eps);
+    const take=Math.min(mv.a, game.left);
+    game.lastExplore=mv.explore;
+    const moveCol = mv.explore ? (game.turn?B:A) : '#ffd866';   // guld = utnyttjar kunskap
     let removed=0;
     for(let i=maxDisp-1;i>=0 && removed<take;i--){
       if(game.sticks[i].alive){
         game.sticks[i].alive=false; game.sticks[i].t=1; game.sticks[i].vy=-0.6-Math.random()*0.5;
         const sx=stickX(i);
-        for(let p=0;p<5;p++)particles.push({x:sx,y:rowY,vx:(Math.random()-0.5)*1.4,vy:-0.4-Math.random()*1.2,life:1,col:game.turn?B:A,r:1.6+Math.random()*1.6});
+        for(let p=0;p<5;p++)particles.push({x:sx,y:rowY,vx:(Math.random()-0.5)*1.4,vy:-0.4-Math.random()*1.2,life:1,col:moveCol,r:1.6+Math.random()*1.6});
         removed++;
       }
     }
@@ -959,6 +1002,23 @@ function runTrainTheater(){
 
   function frame(now){
     const frac=Math.min(1,(now-t0)/DURATION);
+
+    // ── LIVE-TRÄNING: träna upp till tidslinjens mål, uppdatera Q-tabellen ──
+    if(!converged){
+      const target=Math.round(frac*ttEpisodes);
+      while(trainDone<target && trainDone<ttEpisodes){
+        trainEpisode(trainEps(), ALPHA);
+        trainDone++;
+        if(trainDone>=30 && trainDone%15===0){
+          const c=checkConvergence();
+          if(c.goldFrames>=c.total && c.total>0){ convCount++; if(convCount>=4){converged=true; break;} }
+          else convCount=0;
+        }
+      }
+      ttGamesPlayed=trainDone;
+      if(now-lastRender>90){ renderQTable(-1); updateConvergeUI(checkConvergence()); lastRender=now; }
+    }
+
     STAT.forEach((s,i)=>{
       if(frac>=s.at){
         if(!lines[i].classList.contains('show'))lines[i].classList.add('show');
@@ -968,11 +1028,24 @@ function runTrainTheater(){
         }
       }
     });
-    const railEl=document.getElementById('ttRail'); if(railEl)railEl.style.width=(frac*100)+'%';
-    const gEl=document.getElementById('ttGames'); if(gEl)gEl.textContent=Math.round(easeOut(frac)*ttGamesPlayed);
+    const railEl=document.getElementById('ttRail'); if(railEl)railEl.style.width=(Math.min(1,trainDone/ttEpisodes)*100)+'%';
+    const gEl=document.getElementById('ttGames'); if(gEl)gEl.textContent=trainDone;
+
+    // utforska/utnyttja-mätaren speglar den RIKTIGA epsilon som används i träningen
+    const eps=trainEps();
+    const explorePct=Math.round(eps*100), exploitPct=100-explorePct;
+    const exEl=document.getElementById('ttExpl'); if(exEl)exEl.textContent=explorePct;
+    const eiEl=document.getElementById('ttExploit'); if(eiEl)eiEl.textContent=exploitPct;
+    const eeFill=document.getElementById('ttEeFill'); if(eeFill)eeFill.style.width=explorePct+'%';
+    const cap=document.getElementById('ttEeCap');
+    if(cap){
+      if(exploitPct<25) cap.innerHTML='Provar drag <strong>slumpmässigt</strong> för att upptäcka vad som funkar';
+      else if(exploitPct<70) cap.innerHTML='Börjar <strong>lita på</strong> det den lärt sig – men provar fortfarande nytt';
+      else cap.innerHTML='Väljer nästan alltid sina <strong>bäst kända</strong> drag';
+    }
 
     if(!game.over && now>=nextMoveAt){
-      doMove(now);
+      doMove(now, eps);
       if(!game.over) nextMoveAt=now + Math.max(90, 300 - frac*170);
     }else if(game.over && now>=nextMoveAt){
       game=newGame();
@@ -981,11 +1054,13 @@ function runTrainTheater(){
 
     draw(now);
 
-    if(frac<1 && trainAnimActive){ trainRAF=requestAnimationFrame(frame); }
+    const elapsed=now-t0;
+    const doneNow = (converged && elapsed>2800) || (trainDone>=ttEpisodes) || frac>=1;
+    if(!doneNow && trainAnimActive){ trainRAF=requestAnimationFrame(frame); }
     else finishTheater();
   }
   trainRAF=requestAnimationFrame(frame);
-  setTimeout(()=>{ if(trainAnimActive)finishTheater(); }, DURATION+1400);
+  setTimeout(()=>{ if(trainAnimActive)finishTheater(); }, DURATION+1600);
 }
 
 function skipTrainTheater(){
@@ -1000,6 +1075,10 @@ function finishTheater(){
   document.querySelectorAll('#ttStatus .tt-line').forEach(el=>el.classList.add('show','done'));
   const rail=document.getElementById('ttRail'); if(rail)rail.style.width='100%';
   const gEl=document.getElementById('ttGames'); if(gEl)gEl.textContent=ttGamesPlayed;
+  const exEl=document.getElementById('ttExpl'); if(exEl)exEl.textContent=12;
+  const eiEl=document.getElementById('ttExploit'); if(eiEl)eiEl.textContent=88;
+  const eeFill=document.getElementById('ttEeFill'); if(eeFill)eeFill.style.width='12%';
+  const cap=document.getElementById('ttEeCap'); if(cap)cap.innerHTML='Väljer nästan alltid sina <strong>bäst kända</strong> drag';
   const skip=document.getElementById('ttSkip'); if(skip)skip.style.display='none';
 
   finishTraining(ttGamesPlayed, ttEpisodes);
@@ -1015,7 +1094,7 @@ function finishTheater(){
   const done=document.getElementById('ttDone'); if(done)done.classList.add('show');
 }
 
-function playFromCard(){ closeConcept(); goPhase('play'); }
+function playFromCard(){ closeConcept(); goPhase('play'); newGame(); }
 
 (function initCardTilt(){
   const el=document.getElementById('conceptCardInner');if(!el)return;
