@@ -391,7 +391,7 @@
   .g-tag .g-ico { width:14px;height:14px;flex-shrink:0;opacity:.8; }
   .concept-backdrop { position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out); }
   .concept-backdrop.show { opacity:1;pointer-events:auto; }
-  .concept-card { position:fixed;top:50%;left:50%;z-index:301;width:350px;max-width:88vw;perspective:1000px;
+  .concept-card { position:fixed;top:50%;left:50%;z-index:320;width:350px;max-width:88vw;perspective:1000px;
     transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
     transition:transform .38s var(--ease-spring),opacity .26s var(--ease-out); }
   .concept-card.show { transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto; }
@@ -413,6 +413,18 @@
   .concept-close:hover { border-color:var(--spam);color:var(--spam);transform:translateZ(30px) rotate(90deg); }
   .concept-icon { width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18); }
   .concept-icon svg { width:28px;height:28px; }
+
+  /* ── Token-modal: samma glaskorts-stil som begreppskorten, men bredare & vänsterjusterad ── */
+  .token-modal { position:fixed;top:50%;left:50%;z-index:311;width:560px;max-width:92vw;max-height:82vh;overflow-y:auto;
+    transform:translate(-50%,-50%) scale(.85);opacity:0;pointer-events:none;
+    transition:transform .34s var(--ease-spring),opacity .26s var(--ease-out); }
+  .token-modal.show { transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto; }
+  .token-modal-inner { position:relative;text-align:left;
+    background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
+    box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 28px 24px; }
+  .token-modal-title { font-family:'Syne',sans-serif;font-size:1.08em;font-weight:800;color:var(--text);margin-bottom:12px;padding-right:20px; }
+  .token-modal-desc { font-size:12.5px;color:var(--muted);line-height:1.7;margin-bottom:10px; }
+  .token-modal-note { font-size:11px;color:var(--muted);margin-top:12px;line-height:1.6;font-style:italic; }
   .concept-title { font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text); }
   .concept-def { font-size:.85em;line-height:1.65;color:var(--muted);margin-bottom:14px;position:relative;z-index:3;transform:translateZ(18px);text-align:left; }
   .concept-def strong { color:var(--text); } .concept-def em { color:var(--accent2);font-style:normal; }
@@ -426,6 +438,33 @@
     .back-link { position:static;transform:none;margin-bottom:6px; }
     .lang-link { position:static;transform:none;margin-bottom:6px;margin-left:8px; }
   }
+  .tab-btn.locked { opacity:.38;cursor:not-allowed; }
+  .tab-btn.locked:hover { color:var(--muted);transform:none; }
+  .tab-lock-ico { font-size:.85em;margin-left:4px;opacity:.8; }
+
+  /* ── Träna-kortet ── */
+  .train-cta-card { text-align:center;padding:24px 20px; }
+  .btn-train-big { background:linear-gradient(135deg,#0d6e3e,#12a35a);color:#eafff2;font-size:1.02em;font-weight:800;padding:15px 34px;border-radius:14px;display:inline-flex;align-items:center;gap:10px;box-shadow:0 10px 28px rgba(18,163,90,.28);transition:transform .22s var(--ease-spring),box-shadow .22s var(--ease-out); }
+  .btn-train-big:hover:not(:disabled) { transform:translateY(-2px);box-shadow:0 16px 36px rgba(18,163,90,.4); }
+  .btn-train-big:disabled { background:#12241c;color:#3f6552;cursor:not-allowed;box-shadow:none; }
+  .btn-train-big svg { width:19px;height:19px; }
+  .train-hint { font-size:12px;color:var(--muted);margin-top:10px; }
+
+  .train-stage { display:flex;flex-direction:column;align-items:center;gap:14px;padding-top:4px; }
+  .train-canvas-wrap { width:100%;max-width:400px;height:160px;position:relative;border-radius:var(--r-md);overflow:hidden;background:radial-gradient(ellipse 70% 90% at 50% 50%,rgba(20,26,48,.55),rgba(9,11,20,.25));border:1px solid rgba(255,255,255,.07); }
+  .train-canvas-wrap canvas { width:100%;height:100%;display:block; }
+  .train-status { min-height:22px;display:flex;flex-direction:column;align-items:center;gap:7px;width:100%;max-width:340px; }
+  .train-status-line { font-size:.8em;color:var(--muted);display:flex;align-items:center;gap:9px;opacity:0;transform:translateY(6px);transition:opacity .4s var(--ease-out),transform .4s var(--ease-out);font-weight:500; }
+  .train-status-line.show { opacity:1;transform:none; }
+  .train-status-line .tsl-dot { width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;box-shadow:0 0 8px var(--accent2); }
+  .train-status-line.done .tsl-dot { background:var(--ham);box-shadow:0 0 8px var(--ham); }
+  .train-status-line .tsl-check { color:var(--ham);font-weight:700; }
+
+  .train-done { display:flex;flex-direction:column;align-items:center;gap:10px; }
+  .train-done-icon { width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(52,211,153,.14);border:1.5px solid var(--ham);color:var(--ham);font-size:1.3em;font-weight:800; }
+  .train-done-text { font-size:13px;color:var(--subtle);line-height:1.6;max-width:380px; }
+  .train-done-note { font-size:11.5px;color:var(--muted);background:rgba(255,255,255,.03);border:1px solid var(--border-soft);border-radius:10px;padding:9px 13px;max-width:400px;line-height:1.6; }
+  .train-done-note strong { color:var(--subtle); }
 </style>
 </head>
 <body>
@@ -535,6 +574,25 @@
   </div>
 
 
+  <div class="card train-cta-card" id="trainCtaCard">
+    <button class="btn btn-train-big" id="trainBtn" onclick="startTraining()" disabled>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg>
+      Träna modellen
+    </button>
+    <div class="train-hint" id="trainHint">Generera minst 2 exempel för att kunna träna.</div>
+    <div class="train-stage" id="trainStage" style="display:none">
+      <div class="train-canvas-wrap"><canvas id="nbTrainCanvas"></canvas></div>
+      <div class="train-status" id="nbTrainStatus"></div>
+    </div>
+    <div class="train-done" id="trainDoneMsg" style="display:none">
+      <div class="train-done-icon">✓</div>
+      <div class="train-done-text">Modellen är tränad på <strong id="trainDoneN">0</strong> exempel.</div>
+      <div class="train-done-note">Naïve Bayes tränas genom att <strong>räkna</strong> — hur ofta varje ord dyker upp i respektive klass. Det görs i en enda genomgång av datan, till skillnad från t.ex. ett neuralt nätverk som behöver upprepad träning över många epoker.</div>
+      <button class="btn" onclick="goToModelTab()">Visa modellen →</button>
+    </div>
+  </div>
+
+
   <div class="card train-list" style="margin-bottom:0">
       <span class="card-label">
         Träningsdata
@@ -586,7 +644,7 @@
 
 
 <section id="tab-model" class="tab-panel">
-  <div id="model-empty" class="empty"><strong>Ingen modell ännu</strong>Lägg till träningsdata i fliken Träna.</div>
+  <div id="model-empty" class="empty"><strong id="model-empty-title">Ingen modell ännu</strong><span id="model-empty-text">Lägg till träningsdata i fliken Träna.</span></div>
   <div id="model-content" style="display:none">
     <div class="card">
       <span class="card-label">Vad modellen lärt sig</span>
@@ -606,7 +664,7 @@
 
 
 <section id="tab-classify" class="tab-panel">
-  <div id="classify-empty" class="empty"><strong>Ingen modell ännu</strong>Lägg till träningsdata i fliken Träna.</div>
+  <div id="classify-empty" class="empty"><strong id="classify-empty-title">Ingen modell ännu</strong><span id="classify-empty-text">Lägg till träningsdata i fliken Träna.</span></div>
   <div id="classify-content" style="display:none">
     <div class="card">
       <span class="card-label">Text att klassificera</span>
@@ -622,23 +680,11 @@
         <div class="verdict-probs" id="verdict-probs"></div>
         <div class="confidence-bar-wrap" id="confidence-wrap"></div>
       </div>
-      <div class="card" id="tokenization-card">
-        <span class="card-label">Tokenisering och filtrering</span>
-        <p style="font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:12px">
-          Innan modellen kan räkna sannolikheter måste texten omvandlas till enskilda ord — det kallas <span class="term" data-term="tokenisering" tabindex="0" role="button"><strong style="color:var(--text)">tokenisering</strong></span>.
-          Ord som är för vanliga för att säga något om klassen (<span class="term" data-term="stoppord" tabindex="0" role="button">stoppord</span>) och mycket korta ord filtreras sedan bort.
-          Bara de kvarvarande orden används i klassificeringen.
-        </p>
-        <div class="token-wrap" id="token-display"></div>
-        <div class="token-legend">
-          <span><span class="tl-dot" style="background:rgba(77,128,255,.5);border-color:rgba(77,128,255,.6)"></span> Används i klassificeringen</span>
-          <span><span class="tl-dot" style="background:var(--muted);opacity:.6"></span> Stoppord — filtreras bort (för vanligt)</span>
-          <span><span class="tl-dot" style="background:var(--gold);opacity:.7"></span> För kort — filtreras bort (≤2 tecken)</span>
-        </div>
-        <p style="font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6;font-style:italic">
-          Notera: ingen lemmatisering görs — "vinner" och "vinnare" räknas som olika ord.
-          Verkliga system reducerar ofta ord till sin grundform för att öka träffsäkerheten.
-        </p>
+      <div style="text-align:center;margin:14px 0">
+        <span class="g-tag" onclick="openTokenModal(event)">
+          <span class="g-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h9"/><path d="M9 4.5v5M15 4.5v5" stroke-dasharray="1.5 2"/></svg></span>
+          Tokenisering och filtrering
+        </span>
       </div>
       <div id="math-breakdown"></div>
     </div>
@@ -667,6 +713,29 @@
   </div>
 </div>
 
+<div class="concept-backdrop" id="tokenBackdrop" onclick="closeTokenModal()"></div>
+<div class="token-modal" id="tokenModal">
+  <div class="token-modal-inner" id="tokenModalInner">
+    <button class="concept-close" onclick="closeTokenModal()">✕</button>
+    <div class="token-modal-title">Tokenisering och filtrering</div>
+    <p class="token-modal-desc">
+      Innan modellen kan räkna sannolikheter måste texten omvandlas till enskilda ord — det kallas <span class="term" data-term="tokenisering" tabindex="0" role="button"><strong style="color:var(--text)">tokenisering</strong></span>.
+      Ord som är för vanliga för att säga något om klassen (<span class="term" data-term="stoppord" tabindex="0" role="button">stoppord</span>) och mycket korta ord filtreras sedan bort.
+      Bara de kvarvarande orden används i klassificeringen.
+    </p>
+    <div class="token-wrap" id="token-display"></div>
+    <div class="token-legend">
+      <span><span class="tl-dot" style="background:rgba(77,128,255,.5);border-color:rgba(77,128,255,.6)"></span> Används i klassificeringen</span>
+      <span><span class="tl-dot" style="background:var(--muted);opacity:.6"></span> Stoppord — filtreras bort (för vanligt)</span>
+      <span><span class="tl-dot" style="background:var(--gold);opacity:.7"></span> För kort — filtreras bort (≤2 tecken)</span>
+    </div>
+    <p class="token-modal-note">
+      Notera: ingen lemmatisering görs — "vinner" och "vinnare" räknas som olika ord.
+      Verkliga system reducerar ofta ord till sin grundform för att öka träffsäkerheten.
+    </p>
+  </div>
+</div>
+
 <script>
 const STOP = new Set([
   'och','att','det','är','en','på','de','med','som','för','inte','av',
@@ -679,6 +748,7 @@ const STOP = new Set([
 
 let examples = [];
 let newLabel = "SPAM";
+let trained = false;
 const DISPLAY = { SPAM: 'Skräppost', HAM: 'Ej skräppost' };
 let modelShown = 18;
 let modelWordsCache = null;
@@ -774,6 +844,17 @@ function closeConcept(){
   document.getElementById('conceptBackdrop').classList.remove('show');
 }
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeConcept(); });
+
+function openTokenModal(ev){
+  if (ev) ev.stopPropagation();
+  document.getElementById('tokenBackdrop').classList.add('show');
+  document.getElementById('tokenModal').classList.add('show');
+}
+function closeTokenModal(){
+  document.getElementById('tokenModal').classList.remove('show');
+  document.getElementById('tokenBackdrop').classList.remove('show');
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeTokenModal(); });
 
 (function initCardTilt(){
   const el = document.getElementById('conceptCardInner'); if(!el) return;
@@ -917,9 +998,12 @@ function renderStats() {
 
 function renderModel() {
   const hasData = examples.length >= 2;
-  document.getElementById('model-empty').style.display   = hasData ? 'none' : 'block';
-  document.getElementById('model-content').style.display = hasData ? 'block' : 'none';
-  if (!hasData) return;
+  const ready = hasData && trained;
+  document.getElementById('model-empty').style.display   = ready ? 'none' : 'block';
+  document.getElementById('model-content').style.display = ready ? 'block' : 'none';
+  document.getElementById('model-empty-title').textContent = hasData ? 'Modellen är inte tränad ännu' : 'Ingen modell ännu';
+  document.getElementById('model-empty-text').textContent  = hasData ? 'Gå till fliken Träna och klicka på "Träna modellen".' : 'Lägg till träningsdata i fliken Träna.';
+  if (!ready) return;
 
 
   const m = buildModel();
@@ -1227,579 +1311,4 @@ function buildFullCalc(m, steps, tokens) {
     });
     const factors = [prior, ...wordFactors.map(f => f.prob)];
     const product = factors.reduce((a, b) => a * b, 1);
-    const priorTex = `\\underbrace{\\textcolor{#ffd866}{${prior.toFixed(5)}}}_{P(\\text{${DISPLAY[c]}})}`;
-    const termsTex = wordFactors.map(f =>
-      `\\underbrace{\\textcolor{#6698ff}{${f.prob.toFixed(5)}}}_{\\text{${texEsc(f.w)}}}`
-    ).join(' \\cdot ');
-    const lineTex = tokens.length > 0
-      ? `${priorTex} \\cdot ${termsTex} = ${sciTex(product, 4)}`
-      : `${priorTex}`;
-    const cls = c === 'SPAM' ? 'spam' : 'ham';
-    const iconPath = c === 'SPAM'
-      ? '<path d="M4 6l8 6 8-6M4 6h16v12H4z"/>'
-      : '<path d="M20 6L9 17l-5-5"/>';
-
-
-    html += `
-    <div class="calc-card ${cls}">
-      <div class="calc-head">
-        <div class="calc-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${iconPath}</svg></div>
-        <div class="calc-name" style="color:${colorOf(c)}">${DISPLAY[c]}</div>
-      </div>
-      <div class="calc-formula-wrap">
-        ${tex(lineTex, true)}
-      </div>
-    </div>`;
-  });
-
-
-  html += `</div></div>`;
-
-  const productsPerClass = classes.map(c => {
-    const prior = cc[c] / total;
-    const wf    = tokens.map(w => { const n=wc[c][w]||0; return (n+1)/(totals[c]+vs); });
-    return { c, product: wf.reduce((a,b)=>a*b, prior) };
-  });
-  const sumTex = productsPerClass.map(x => sciTex(x.product, 3)).join(' + ');
-
-  html += `
-    <div class="calc-final">
-      <div class="calc-final-label">Sista steget · gör om till procent</div>
-      <div class="calc-final-note">
-        Produkterna ovan är pyttesmå tal som är svåra att jämföra. Vi delar därför varje klass tal med <strong>summan av båda</strong> — då blir svaren procent som tillsammans blir 100%.
-      </div>
-      <div class="calc-result-grid">
-        ${productsPerClass.map(x => {
-          const cls = x.c === 'SPAM' ? 'spam' : 'ham';
-          const col = x.c === 'SPAM' ? '#ff6b6b' : '#4ade80';
-          const p = final.posteriors[x.c] || 0;
-          return `
-          <div class="calc-result-card ${cls}">
-            <div class="calc-result-name" style="color:${colorOf(x.c)}">${DISPLAY[x.c]}</div>
-            <div class="calc-result-pct" style="color:${colorOf(x.c)}">${Math.round(p*100)}%</div>
-            <div class="calc-result-formula">${tex(
-              `\\textcolor{${col}}{\\frac{${sciTex(x.product, 3)}}{${sumTex}} = ${pctTex(p)}}`,
-              false)}</div>
-          </div>`;
-        }).join('')}
-      </div>
-    </div>`;
-
-  return html;
-}
-
-
-function renderClassify() {
-  const hasData = examples.length >= 2;
-  document.getElementById('classify-empty').style.display   = hasData ? 'none'  : 'block';
-  document.getElementById('classify-content').style.display = hasData ? 'block' : 'none';
-}
-
-
-function selectLabel(lbl) {
-  newLabel = lbl;
-  document.getElementById('chip-spam').className = 'chip chip-spam' + (lbl==='SPAM'?' sel':'');
-  document.getElementById('chip-ham').className  = 'chip chip-ham'  + (lbl==='HAM' ?' sel':'');
-}
-
-
-function addExample() {
-  const text = document.getElementById('new-text').value.trim();
-  if (!text) return;
-  examples.push({ text, label: newLabel });
-  document.getElementById('new-text').value = '';
-  refresh();
-}
-
-
-function deleteEx(i) {
-  examples.splice(i, 1);
-  refresh();
-}
-
-
-function refresh() {
-  renderExList();
-  renderStats();
-  renderModel();
-  renderClassify();
-  document.getElementById('classify-result').style.display = 'none';
-}
-
-
-function clearData() {
-  if (examples.length === 0) return;
-  if (!confirm(`Rensa alla ${examples.length} träningsexempel? Detta går inte att ångra.`)) return;
-  examples = [];
-  refresh();
-}
-
-
-function toggleOwn() {
-  document.getElementById('own-toggle').classList.toggle('open');
-  document.getElementById('own-body').classList.toggle('open');
-}
-
-
-function importFile(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const status = document.getElementById('import-status');
-  status.className = 'status-msg loading';
-  status.innerHTML = '<span class="spinner"></span>Läser fil…';
-  const reader = new FileReader();
-  reader.onload = e => {
-    const lines = e.target.result.split(/\r?\n/).filter(l => l.trim());
-    let added = 0, skipped = 0;
-    lines.forEach(line => {
-      const comma = line.indexOf(',');
-      if (comma === -1) { skipped++; return; }
-      const label = line.slice(0, comma).trim().toUpperCase();
-      const text  = line.slice(comma + 1).trim();
-      if ((label === 'SPAM' || label === 'HAM') && text.length > 0) {
-        examples.push({ text, label });
-        added++;
-      } else {
-        skipped++;
-      }
-    });
-    refresh();
-    status.className = 'status-msg info';
-    status.textContent = `✓ Importerade ${added} exempel${skipped ? ` · ${skipped} rader hoppades över` : ''}.`;
-    event.target.value = '';
-  };
-  reader.onerror = () => {
-    status.className = 'status-msg error';
-    status.textContent = 'Kunde inte läsa filen. Försök igen.';
-  };
-  reader.readAsText(file, 'UTF-8');
-}
-
-
-const EXAMPLE_BANK = [
-  {label:"SPAM", text:"Grattis! Du har valts ut som vinnare av månatliga lotteriet. Klicka här för att hämta ditt pris på 15 000 kr."},
-  {label:"SPAM", text:"Du har vunnit en iPhone 15 Pro i tävlingen! Bekräfta din leveransadress inom 24 timmar."},
-  {label:"SPAM", text:"Du har vunnit 250 000 kr på EuroMillions! Ditt biljettsnummer matchade. Kontakta oss för utbetalning."},
-  {label:"SPAM", text:"Vinn en lyxresa för två till Maldiverna! Delta i enkäten och du är med i dragningen. Tar bara 2 minuter."},
-  {label:"SPAM", text:"GRATTIS! Du är en av fem utvalda vinnare denna månad. Din belöning på 8 500 kr väntar på att hämtas."},
-  {label:"SPAM", text:"Du har vunnit ett presentkort på 2 000 kr hos Elgiganten! Klicka här och ange din kod: WIN2024."},
-  {label:"SPAM", text:"Dragningen är klar och du är vinnare! Ditt pris: en weekendresa till Paris. Svara inom 48 timmar."},
-  {label:"SPAM", text:"Exklusivt: du har kvalificerat dig för ett VIP-lotteri. Priset är 100 000 kr kontant. Bekräfta här."},
-  {label:"SPAM", text:"Ditt telefonnummer har vunnit i en nationell utlottning. Pris: 50 000 kr. Ring oss på 0770-xxx-xxx."},
-  {label:"SPAM", text:"Sista chansen att hämta din vinst! Vi har försökt nå dig tre gånger. Klicka nu för att säkra ditt pris."},
-  {label:"SPAM", text:"Du deltog i en tävling för ett år sedan och har nu vunnit storpriset. Hämta dina 75 000 kr idag."},
-  {label:"SPAM", text:"Grattis, du är utdragen som veckans vinnare! Kryssa för önskat presentkort och vi skickar det hem."},
-  {label:"SPAM", text:"Du har vunnit en ny Volvo XC60 i en bilutlottning. Kontakta oss omgående för att ta emot din vinst."},
-  {label:"SPAM", text:"Spela gratis och vinn stort! Registrera dig nu och få 500 kr i spelkrediter helt utan insättning."},
-  {label:"SPAM", text:"Sommarkampanjens vinnare är DU. Pris: 5 nätters all inclusive i Spanien. Bekräfta inom 48 timmar."},
-  {label:"SPAM", text:"Ditt mobilnummer är registrerat som vinnare i ett jubileumslotteri. Vinst: Apple Watch. Svara JA."},
-  {label:"SPAM", text:"Hemliga rabatter och vinstchanser bara för dig! Registrera dig gratis och tävla om 10 000 kr varje vecka."},
-  {label:"SPAM", text:"Du är utvald bland 1 miljon användare att vinna ett stordrag. Verifiera din identitet för att ta emot vinsten."},
-  {label:"SPAM", text:"Vinn ett års gratis bensin! Fyll i formuläret och du deltar automatiskt bland alla svar."},
-  {label:"SPAM", text:"VIKTIGT: Din oinlösta vinst på 12 000 kr löper ut om 24 timmar. Logga in och hämta den nu."},
-  {label:"SPAM", text:"GRATTIS! Telefonnummer 070-XXX XX XX har vunnit 25 000 kr i kvällens dragning. Bekräfta omgående."},
-  {label:"SPAM", text:"En lyxig spa-weekend för två väntar! Du är bland de tio lyckliga vinnarna denna månad. Svara nu."},
-  {label:"SPAM", text:"Jackpot! Ditt e-postkonto är registrerat som vinnare. Pris: 180 000 kr. Kontakta oss inom 72 timmar."},
-  {label:"SPAM", text:"Slutdragning genomförd! Ditt nummer är ett av tre som matchar stordragningen. Hämta 42 000 kr här."},
-  {label:"SPAM", text:"Chansen du väntade på: tävla om ett nytt kök värt 85 000 kr. Anmäl dig gratis på länken nedan."},
-  {label:"SPAM", text:"Betalning på 7 500 kr redo att skickas till dig. Bekräfta kontonumret för att ta emot pengarna."},
-  {label:"SPAM", text:"Tävlingsresultat: du har blivit utvald i kvällens superdragning. Pris: en Tesla Model 3. Svara inom 24 h."},
-  {label:"SPAM", text:"Särskild jubileumsdragning: 1 000 vinnare delar på 10 miljoner kr. Ditt nummer är ett av dem."},
-  {label:"SPAM", text:"Bekräfta ditt pris nu! Kontantvinst på 33 000 kr väntar på din underskrift. Löper ut fredag midnatt."},
-  {label:"SPAM", text:"Stor utlottning bland alla registrerade kunder. Ditt kundnummer drogs igår. Ring oss för att hämta ut vinsten."},
-  {label:"SPAM", text:"BRÅDSKANDE: Ditt bankkonto har spärrats. Verifiera dina uppgifter omedelbart via länken nedan."},
-  {label:"SPAM", text:"Ditt BankID behöver uppdateras för att fortsätta fungera. Klicka på länken och följ instruktionerna."},
-  {label:"SPAM", text:"Viktig säkerhetsvarning från Nordea: vi har registrerat ett inloggningsförsök från okänd enhet. Bekräfta nu."},
-  {label:"SPAM", text:"Din betalning för Netflix har misslyckats. Uppdatera dina kortuppgifter här för att behålla prenumerationen."},
-  {label:"SPAM", text:"Ditt PayPal-konto är begränsat. Logga in via länken nedan och verifiera din identitet för att häva det."},
-  {label:"SPAM", text:"Vi har upptäckt misstänkt aktivitet på ditt Swish-konto. Logga in och bekräfta din identitet nu."},
-  {label:"SPAM", text:"Din Postnord-leverans väntar. Betala 19 kr i tull för att få ditt paket frisläppt. Klicka på länken."},
-  {label:"SPAM", text:"Viktigt meddelande från Skatteverket: du har en obetald skuld på 3 200 kr. Betala inom 48 timmar."},
-  {label:"SPAM", text:"Ditt Spotify-konto stängs imorgon om du inte bekräftar din e-postadress via länken nedan."},
-  {label:"SPAM", text:"Säkerhetsvarning från SEB: någon har försökt ändra ditt lösenord. Klicka här för att skydda ditt konto."},
-  {label:"SPAM", text:"Din e-postkvota är full. Klicka här och verifiera ditt konto inom 24 timmar eller stängs det av permanent."},
-  {label:"SPAM", text:"Viktig information om ditt Klarna-konto: en obekräftad betalning väntar. Logga in och godkänn eller neka."},
-  {label:"SPAM", text:"Ditt Microsoft 365-abonnemang löper ut idag. Förnya nu för att inte förlora åtkomst till dina filer."},
-  {label:"SPAM", text:"Säkerhetsvarning: Ditt Apple ID har använts i ett nytt land. Verifiera att det är du via länken omedelbart."},
-  {label:"SPAM", text:"Din domän löper ut om 2 dagar. Förnya nu för 99 kr/år för att behålla din webbplats och e-post."},
-  {label:"SPAM", text:"Kontoverifiering krävs: logga in på din internetbank och godkänn den nya säkerhetspolicyn senast fredag."},
-  {label:"SPAM", text:"Vi har noterat ovanlig aktivitet kopplad till ditt kortnummer. Ring oss direkt på 08-xxx-xxx för verifiering."},
-  {label:"SPAM", text:"Din telefon är infekterad med 3 virus! Installera gratisappen för att rensa dem innan skadorna blir permanenta."},
-  {label:"SPAM", text:"Microsofts tekniska support: vi har detekterat allvarliga fel i din dator. Ring 020-xxx-xxx omedelbart."},
-  {label:"SPAM", text:"Ditt iCloud-lagringsutrymme är fullt. Dina foton raderas om 24 timmar om du inte uppgraderar nu."},
-  {label:"SPAM", text:"Meddelande från Tele2: fakturan är förfallen. Betala 349 kr idag för att undvika avstängning."},
-  {label:"SPAM", text:"ALERT: Inloggning detekterad från okänt land på ditt Google-konto. Byt lösenord omedelbart via länken."},
-  {label:"SPAM", text:"Skatteåterbäring på 4 200 kr väntar. Fyll i bankuppgifter på länken nedan för snabb utbetalning."},
-  {label:"SPAM", text:"Din Kivra-brevlåda är full. Viktiga dokument kan inte levereras. Utöka utrymmet via länken nedan."},
-  {label:"SPAM", text:"Säkerhetsvarning: tre misslyckade inloggningsförsök på ditt bankkonto. Lås upp kontot nu."},
-  {label:"SPAM", text:"Ditt kortköp på 3 899 kr hos en okänd handlare har godkänts. Var inte du? Spärra kortet direkt."},
-  {label:"SPAM", text:"E-post från Försäkringskassan: beslut om din ersättning finns att läsa. Logga in med BankID nu."},
-  {label:"SPAM", text:"Sista påminnelse: deklarationen innehåller fel. Korrigera senast fredag för att undvika böter."},
-  {label:"SPAM", text:"Ditt abonnemang på HBO Max löper ut imorgon. Uppdatera betalningsmetod för att behålla tillgången."},
-  {label:"SPAM", text:"Paket från PostNord kvarhålls på tullen. Betala 39 kr i expeditionsavgift för frisläppning."},
-  {label:"SPAM", text:"Gå ner 10 kg på 3 veckor med en naturlig metod. Läkargodkänt. Inga biverkningar. Klicka för mer info."},
-  {label:"SPAM", text:"Doktorn avslöjar: detta enkla trick botar din diabetes naturligt på 30 dagar. Läkemedelsindustrin hatar det."},
-  {label:"SPAM", text:"Billiga receptbelagda läkemedel utan recept. Diskret leverans inom 48 timmar. Inga frågor."},
-  {label:"SPAM", text:"Exklusivt: Viagra och Cialis utan recept. Diskret leverans direkt hem till dörren. Beställ idag."},
-  {label:"SPAM", text:"Stoppa håravfall på 7 dagar! Kliniskt testad serum återställer hårfästet. 60 dagars nöjdhetsgaranti."},
-  {label:"SPAM", text:"Sluta röka på 3 dagar! Metoden är 94% effektiv. Pengarna tillbaka om du inte lyckas. Beställ nu."},
-  {label:"SPAM", text:"Denna naturliga ingrediens botar ledvärk permanent. Reumatologer vill inte att du ska veta om det."},
-  {label:"SPAM", text:"Bota sömnlöshet ikväll! En naturlig kapsyl ger dig 8 timmars djupsömn utan beroende. Prova gratis."},
-  {label:"SPAM", text:"Öka testosteron med 300%! En naturlig formel ger dig energi, muskler och välmående. Kliniskt bevisad."},
-  {label:"SPAM", text:"Hemlig cancerkur döljs av läkemedelsindustrin. Naturläkaren avslöjar sanningen i gratisföreläsning."},
-  {label:"SPAM", text:"Återfå ungdomlig hy! Peptidserum minskar rynkor med 47% på 4 veckor. Prova riskfritt."},
-  {label:"SPAM", text:"Klinisk studie söker deltagare mot betalning. Testa kosttillskottet och tjäna 3 000 kr. Anmäl dig nu."},
-  {label:"SPAM", text:"Läkare avslöjar: ät detta varje morgon och du bränner tre gånger mer fett under dagen. Se videon nu."},
-  {label:"SPAM", text:"Slipp glasögon för alltid! Ny teknik korrigerar synen hemma utan operation. Levereras diskret hem."},
-  {label:"SPAM", text:"Bota tinnitus på 7 dagar! Öronläkare vill inte att du ska känna till denna enkla metod."},
-  {label:"SPAM", text:"Kliniskt bevisad: denna fruktsoppa sänker blodsockret på 14 dagar. Diabetiker rapporterar fantastiska resultat."},
-  {label:"SPAM", text:"Sluta snarka från dag ett! Tandskyddet som förändrar sömnen. Tillverkat i medicinsk silikon. Prova nu."},
-  {label:"SPAM", text:"94% av testpersonerna gick ner 8 kg på 3 veckor utan träning eller diet. Häpnadsväckande resultat."},
-  {label:"SPAM", text:"Permanent hårborttagning hemma för 299 kr! Professionellt resultat utan salongbesök. Beställ nu."},
-  {label:"SPAM", text:"Återfå ungdomlig hud på 21 dagar! Ny peptidkräm med kliniskt bevisad effekt. Prova riskfritt 30 dagar."},
-  {label:"SPAM", text:"Investera i kryptovaluta och fördubbla ditt kapital på 60 dagar. Garanterad avkastning. Begränsat antal platser."},
-  {label:"SPAM", text:"Tjäna 5 000 kr om dagen hemifrån! Inget startkapital krävs. Tusentals svenskar gör det redan. Anmäl dig."},
-  {label:"SPAM", text:"Du har blivit utvald för ett exklusivt kreditkort utan kreditprövning. Gräns: 50 000 kr. Svara innan fredag."},
-  {label:"SPAM", text:"Vinn 10 000 kr varje vecka med en beprövad sportspelsstrategi. Garanterad vinst eller pengarna tillbaka."},
-  {label:"SPAM", text:"Bitcoin-miljonären avslöjar: hur jag tjänade 2 miljoner på 6 månader utan att arbeta. Gratis video här."},
-  {label:"SPAM", text:"Exklusiv investeringsmöjlighet: nytt grönt bolag söker investerare. Förväntad avkastning 300% på 18 månader."},
-  {label:"SPAM", text:"Bli agent och tjäna provision hemifrån! Vidarebefordra bara betalningar åt kunder. Enkelt och lagligt."},
-  {label:"SPAM", text:"Tjäna pengar på Instagram utan att visa ansiktet! Kursen visar exakt hur. Startpris 197 kr denna vecka."},
-  {label:"SPAM", text:"Hej! Jag är advokat och representerar dödsboet efter en klient med samma efternamn som du. Arv: 4,2 milj."},
-  {label:"SPAM", text:"Snabblån 50 000 kr på 10 minuter! Ingen kreditkoll. 0% ränta första månaden. Ansök direkt här."},
-  {label:"SPAM", text:"Passiv inkomst på autopilot: en robot handlar aktier åt dig dygnet runt. Genomsnittlig vinst: 1 800 kr/dag."},
-  {label:"SPAM", text:"Bitcoin stiger 400% inom kort! Insiders vet vad som händer nästa vecka. Köp nu innan det är för sent."},
-  {label:"SPAM", text:"Aktiemäklaren som slog marknaden 11 år i rad delar sin strategi. Exklusivt för de första 50 anmälda."},
-  {label:"SPAM", text:"Nytt AI-bolag söker tidiga investerare. Minsta insats: 5 000 kr. Förväntad avkastning 800% på 2 år."},
-  {label:"SPAM", text:"Passiva inkomster från fastigheter utan att äga en enda! Lär dig metoden. Gratis webinar ikväll."},
-  {label:"SPAM", text:"Tjäna upp till 12 000 kr i månaden med enkla klick. Metoden är laglig och fungerar i hela Sverige."},
-  {label:"SPAM", text:"Kryptovalutahandlare sökes! Inga förkunskaper krävs. Börja tjäna pengar direkt från mobilen."},
-  {label:"SPAM", text:"Hemliga handelssignaler avslöjas: dessa tre aktier exploderar inom 30 dagar. Prenumerera för 99 kr/mån."},
-  {label:"SPAM", text:"Spara till pensionen med 18% garanterad årsränta. Europeisk insättningsgaranti. Öppna konto idag."},
-  {label:"SPAM", text:"Hej! Jag är en nigeriansk prins och behöver din hjälp att överföra 2 miljoner dollar. Du får 30%."},
-  {label:"SPAM", text:"FLASH-SALE: 90% rabatt på märkesplagg bara idag. Äkta varor till otroliga priser. Slut i lager snart!"},
-  {label:"SPAM", text:"Billiga flygbiljetter! Stockholm–Bangkok tur och retur från 1 499 kr. Bokningsbar bara nästa 3 timmar."},
-  {label:"SPAM", text:"Din identitet har läckt i ett dataintrång. Skydda dig nu med en ID-skyddstjänst. Prova gratis i 30 dagar."},
-  {label:"SPAM", text:"Möt singlar nära dig! Tusentals ensamma i din stad söker just nu. Registrera dig gratis och börja chatta idag."},
-  {label:"SPAM", text:"Du har ärvt pengar av en avlägsen släkting i Kanada. Kontakta juristen snarast för att kräva ut arvet."},
-  {label:"SPAM", text:"Gratis iPhone! Fyll i enkäten på 2 minuter och välj din modell. Vi skickar hem till dig utan kostnad."},
-  {label:"SPAM", text:"Sista chansen! Bekräfta ditt intresse för en exklusiv tjänst innan klockan 23:59 ikväll."},
-  {label:"SPAM", text:"Du har ett meddelande som väntar. Klicka här för att läsa det. Meddelandet raderas automatiskt inom 12 timmar."},
-  {label:"SPAM", text:"Gratulerar, du har valts ut för ett bonusprogram! Klicka för att aktivera dina 500 bonuspoäng innan de går ut."},
-  {label:"SPAM", text:"Hemlig metod som banker inte vill att du ska känna till: så sparar du 40 000 kr per år på ditt bolån."},
-  {label:"SPAM", text:"Juridisk hjälp mot orimliga parkeringsböter! Återkräver din avgift. Betalar du bara om vi vinner."},
-  {label:"SPAM", text:"Ny lagstiftning ger dig rätt till 15 000 kr av din bank. Kräv dina pengar tillbaka via oss idag."},
-  {label:"SPAM", text:"Exklusivt: köp märkesklockor direkt från fabrik utan mellanhänder. Rolex, Omega och TAG Heuer. 80% billigare."},
-  {label:"SPAM", text:"En AI skriver ditt CV och personliga brev. Garanterat intervju eller pengarna tillbaka. Prova nu för 0 kr."},
-  {label:"SPAM", text:"BREAKING: känd svensk kändis avslöjar sin hemlighet bakom framgången. Se videon innan den censureras."},
-  {label:"SPAM", text:"Träffa mogna damer och herrar nära dig! Helt gratis att registrera sig. Tusentals aktiva profiler i Sverige."},
-  {label:"SPAM", text:"Sätt pengar på kontot så skickar vi tillbaka det dubbla inom 24 timmar. Testad metod. Läs vittnesmål."},
-  {label:"SPAM", text:"Viktigt: du måste byta lösenord på ditt konto senast imorgon av säkerhetsskäl. Gör det via länken nedan."},
-  {label:"SPAM", text:"Uppmärksamhet: IP-adressen har spårats till olaglig aktivitet online. Ring supporten direkt för att lösa det."},
-  {label:"SPAM", text:"Jag är en framgångsrik affärsman stationerad utomlands och söker en pålitlig kontakt i Sverige."},
-  {label:"SPAM", text:"Domännamnet dittnamn.se är till salu! En konkurrent har visat intresse. Säkra det idag för 299 kr."},
-  {label:"SPAM", text:"Klicka inte bort detta! Du har ett obetalt arvskrav som måste hanteras inom 30 dagar. Kontakta advokaten."},
-  {label:"SPAM", text:"Skuldsanering på 60 dagar! Advokatbyrån som hjälpt tusentals bli skuldfria. Ring för gratis rådgivning."},
-  {label:"SPAM", text:"Du har blivit taggad i ett foto! Klicka på länken för att se vem som delade bilden av dig online."},
-  {label:"SPAM", text:"Energiräkningarna minskar med 70%! Produkten som elbranschen försöker stoppa. Beställ direkt nu."},
-  {label:"SPAM", text:"Ny metod gör det möjligt att ta ut pensionen 10 år tidigare. Pensionsmyndigheten vill inte att du vet."},
-  {label:"SPAM", text:"Gratis solceller! Staten betalar 100% av installationen via nytt stödprogram. Ansök medan pengarna räcker."},
-  {label:"SPAM", text:"Hemlig databas avslöjar: så hittar du vem som googlade ditt namn. Kolla upp det nu på länken nedan."},
-  {label:"SPAM", text:"Din Windows-licens har gått ut. Datorn blockeras om 24 timmar. Förnya licensen på länken nedan."},
-  {label:"SPAM", text:"Stämningsansökan inlämnad mot dig. Öppna bifogad fil för att läsa detaljerna och undvika rättegång."},
-  {label:"SPAM", text:"Polisutredning pågår mot ditt personnummer. Kontakta ärendehandläggaren omgående för att undvika häktning."},
-  {label:"HAM", text:"Hej, kan du skicka över mötesunderlaget innan klockan två? Chefen vill ha det inför måndagens genomgång."},
-  {label:"HAM", text:"Rapporten är klar och skickad till dig igår kväll. Hör av dig om du har synpunkter innan vi skickar till kunden."},
-  {label:"HAM", text:"Påminnelse: veckomötet har flyttats från tisdag till onsdag klockan 10. Samma länk gäller."},
-  {label:"HAM", text:"Jag är sjuk och kan inte komma in idag. Jag jobbar hemifrån om det är möjligt, annars sjukanmäler jag mig."},
-  {label:"HAM", text:"Tack för en bra presentation igår! Kunden verkade nöjd. Vi hörs nästa vecka för uppföljning."},
-  {label:"HAM", text:"Har du möjlighet att ta en titt på mitt utkast till årsrapporten? Bifogat i detta mail. Återkoppla gärna i veckan."},
-  {label:"HAM", text:"Systemet är uppe igen efter gårdagens driftstörning. Kontakta support om ni fortfarande upplever problem."},
-  {label:"HAM", text:"Jag behöver din signatur på avtalet senast fredag. Kan du kika på det och återkomma?"},
-  {label:"HAM", text:"Vi söker en projektkoordinator till teamet. Känner du någon som kan vara intresserad? Hör av dig!"},
-  {label:"HAM", text:"Glömde nämna på mötet: budgetgodkännandet är försenat med en vecka. Mer info kommer på fredag."},
-  {label:"HAM", text:"Kvartalsresultaten ser bättre ut än väntat. Kallar till genomgång nästa tisdag klockan 14 i stora konferensrummet."},
-  {label:"HAM", text:"Hej, jag är på semester 12–23 juli. Vid brådskande ärenden kontakta Lena på lena@foretaget.se."},
-  {label:"HAM", text:"Kan vi flytta onsdagens kundmöte till torsdag? Jag har en konflikt i kalendern som dykt upp."},
-  {label:"HAM", text:"Faktura 2024-0342 är nu betald. Kvitto skickas separat från ekonomiavdelningen."},
-  {label:"HAM", text:"Vi välkomnar Erik som ny kollega från och med måndag! Han tillträder rollen som marknadschef."},
-  {label:"HAM", text:"Påminner om att tidrapporterna ska vara inlämnade senast sista bankdagen i månaden."},
-  {label:"HAM", text:"Har du tillgång till servermappen för Q3-projektfilerna? Jag hittar dem inte i den vanliga katalogen."},
-  {label:"HAM", text:"Produktlansering sker den 14 mars. Pressmeddelandet behöver godkännas av ledningen senast den 7:e."},
-  {label:"HAM", text:"Onboardingen för de nya praktikanterna börjar måndag kl 9 i empan. Kan du ta emot dem?"},
-  {label:"HAM", text:"Jag skickar vidare mejlet från leverantören om leveransförseningen. Vad tycker du att vi ska svara?"},
-  {label:"HAM", text:"Mötesinbjudan: strategidag 15 april, 09:00–16:00, Hotell Scandic Anglais. Bekräfta deltagande senast 1 april."},
-  {label:"HAM", text:"Uppdatering: IT-supporten är stängd fredag eftermiddag på grund av intern utbildning. Planera därefter."},
-  {label:"HAM", text:"Arbetar du med ISO-certifieringen? Behöver du hjälp med dokumentationen så hör av dig."},
-  {label:"HAM", text:"Tack för att du täckte upp på mötet igår när jag var försenad. Jag återgäldar!"},
-  {label:"HAM", text:"Kan du bekräfta att du fått min out-of-office-inställning att fungera? Testar inför semestern nästa vecka."},
-  {label:"HAM", text:"Hej! Har du hunnit titta på offerterna från leverantörerna? Behöver svar innan fredagens möte."},
-  {label:"HAM", text:"Lunchbaggen din ligger kvar i köket på jobbet. Hämta den när du är inne nästa gång."},
-  {label:"HAM", text:"Hej teamet! Påminner om att tidrapporterna för mars ska vara klara senast 31:a. Tack!"},
-  {label:"HAM", text:"Driftsättning av det nya systemet sker natten till lördag. Planera för eventuell kort nedetid på morgonen."},
-  {label:"HAM", text:"Hej! Kan du ta med laptopen till mötet imorgon? Vi ska gå igenom koden tillsammans."},
-  {label:"HAM", text:"Rekryteringen är klar. Amina börjar den 1:a. Välkommen att hälsa på henne på måndagen!"},
-  {label:"HAM", text:"Hej! Ny parkeringspolicy gäller från måndag. Läs bifogat dokument och anmäl registreringsnumren."},
-  {label:"HAM", text:"Konferensrummet på plan 3 är fullt bokat torsdagen. Använd sal 1B för era eftermiddagsmöten istället."},
-  {label:"HAM", text:"Påminnelse om personaldag den 24 maj. Mer info om programmet skickas ut nästa vecka."},
-  {label:"HAM", text:"Hej! Kan vi ses på fredag för lunch? Det har gått alldeles för lång tid sedan sist."},
-  {label:"HAM", text:"Tack för en rolig kväll igår! Hoppas vi ses snart igen. Hälsa Sara!"},
-  {label:"HAM", text:"Grattis på födelsedagen!! Hoppas du firar ordentligt. Vi syns på lördag som planerat."},
-  {label:"HAM", text:"Mamma undrar om du kommer på midsommar i år? Hör av dig innan helgen så hon kan planera maten."},
-  {label:"HAM", text:"Har du sett mina nycklar? Tror jag glömde dem hemma hos dig igår kväll."},
-  {label:"HAM", text:"Hej lillebror! Jag är i Stockholm nästa helg. Har du tid att fika på lördag förmiddag?"},
-  {label:"HAM", text:"Vi har bokat sommarstugan 26 juni till 3 juli. Ni är välkomna att hälsa på när det passar!"},
-  {label:"HAM", text:"Hej! Vet du ett bra recept på kladdkaka? Ska baka till Leos kalas på lördag."},
-  {label:"HAM", text:"Tack för att du hjälpte till med flytten! Det gick så mycket snabbare med er hjälp. Bjuder på middag."},
-  {label:"HAM", text:"Kan du hämta ungarna från träningen klockan fem på torsdag? Jag sitter fast i ett möte."},
-  {label:"HAM", text:"Vi har fått en ny kattunge! Heter Mango. Kom och hälsa på när du har möjlighet."},
-  {label:"HAM", text:"Hej! Funktionsfesten för morfar är den 18:e. Kan du hjälpa till att organisera? Ringer dig ikväll."},
-  {label:"HAM", text:"Fotona från semestern är uppladdade i det delade albumet. Kolla in dem när du har tid!"},
-  {label:"HAM", text:"Glöm inte att du lovade följa med på konserten nästa fredag. Biljetterna är redan köpta!"},
-  {label:"HAM", text:"Hej vän! Hur är det? Vi ses ju aldrig längre. Ska vi planera in något kul i höst?"},
-  {label:"HAM", text:"Kan du och Jonas komma på middag på lördag? Tänkte laga thai. Svara gärna så jag vet hur många vi är."},
-  {label:"HAM", text:"Pappas bil behöver hämtas från verkstaden på fredag. Kan du åka dit? Jag skickar adressen."},
-  {label:"HAM", text:"Vi säljer barnvagnen om du vet någon som söker. Emmaljunga, fint skick, halva priset."},
-  {label:"HAM", text:"Hej! Har du tips på en bra barnvänlig restaurang i Gamla stan? Kusinen besöker med familjen nästa vecka."},
-  {label:"HAM", text:"Julklappslistan är upplagd i det delade dokumentet. Kom ihåg att lägga till dina önskningar!"},
-  {label:"HAM", text:"Tack för att ni ställde upp som barnvakter igår. Ni räddade verkligen kvällen för oss."},
-  {label:"HAM", text:"Hallå! Spelkväll hos oss på fredag som vanligt? Jag köper chips och skapar event."},
-  {label:"HAM", text:"Sjuk och liggandes på soffan. Kan du swisha mig 89 kr för apoteket om du är i närheten?"},
-  {label:"HAM", text:"Resan till Portugal var helt underbar! Skickar bilder när jag sorterat dem. Kramar!"},
-  {label:"HAM", text:"Hej kompis! Jag har hittat en lägenhet och skriver kontrakt nästa vecka. Äntligen!"},
-  {label:"HAM", text:"Vår katt är sjuk igen och ska till veterinären på fredag. Hoppas det inte är något allvarligt."},
-  {label:"HAM", text:"Vår trädgård börjar blomma nu! Måste du komma och se syrenerna, de är fantastiska i år."},
-  {label:"HAM", text:"Hej! Tänkte fråga om ni vill följa med på utflykt till Skansen i vår? Ungarna skulle gilla det."},
-  {label:"HAM", text:"Ska vi göra något tillsammans till våren? Gärna något utomhus. Vandring kanske?"},
-  {label:"HAM", text:"Hej! Vår granne ska sälja sin cykel. Vet du om någon som söker en bra mountainbike?"},
-  {label:"HAM", text:"Vi firar midsommar hos oss i år! Kom gärna dagen innan så pyntar vi ihop."},
-  {label:"HAM", text:"Vår bil är på service hela nästa vecka. Kan du skjutsa mig till jobbet måndag och tisdag?"},
-  {label:"HAM", text:"Hej farsan! Tänkte höra om ni mår bra. Ring mig när du har tid, har en del att berätta."},
-  {label:"HAM", text:"Vi sålde lägenheten igår! Flytten är satt till sista april. Fest planeras, ni är självklart inbjudna."},
-  {label:"HAM", text:"Hej! Barnen undrar om de får sova över hos er på fredag. Hör av dig när du kan!"},
-  {label:"HAM", text:"Har du och Karin tid att komma på middag nästa vecka? Tänkte laga köttbullar och potatis."},
-  {label:"HAM", text:"Sitter och städar vinden. Hittade massa saker från när vi var barn. Ska vi träffas och titta igenom dem?"},
-  {label:"HAM", text:"Hej lillan! Planen för resan i sommar – kan vi ringa och prata igenom det i helgen?"},
-  {label:"HAM", text:"Din bokningsbekräftelse: hotell City, incheckning 14 juni kl 15:00, utcheckning 16 juni. Bokningsnr: 88421."},
-  {label:"HAM", text:"Ditt paket från Zalando är på väg. Beräknad leverans: imorgon 8–12. Spåra din leverans med kod SE4421."},
-  {label:"HAM", text:"Bokningsbekräftelse: barnhårklippning hos Frisör Nina, tisdag 18 april kl 10:30. Avbokning senast 24 h innan."},
-  {label:"HAM", text:"Din beställning är levererad och lämnad i brevlådan. Tack för att du handlar hos oss!"},
-  {label:"HAM", text:"Påminnelse: du har ett tandläkarbesök inbokat på torsdag klockan 14:15 hos Tandläkare Bergström."},
-  {label:"HAM", text:"Flyg SK425 Stockholm–Göteborg 22 mars kl 07:15 är incheck öppnad. Check in senast 40 min före avgång."},
-  {label:"HAM", text:"Din reklamation har mottagits och vi återkommer inom 3 arbetsdagar med besked. Ärendenummer: 2024-8821."},
-  {label:"HAM", text:"Ditt abonnemang på Storytel förnyas automatiskt den 1 april för 149 kr. Hantera ditt abonnemang här."},
-  {label:"HAM", text:"Välkommen till Pilatesklassen! Påminnelse: tisdag 20 april kl 18:30, Södermalm Hälsocenter, sal 2."},
-  {label:"HAM", text:"Tack för din betalning! Kvitto bifogas. Vi hoppas du är nöjd med ditt köp. Hör av dig om du har frågor."},
-  {label:"HAM", text:"Din biljett till Sverige mot Spanien 8 juni är bekräftad. Sektion C, rad 14, plats 22. Välkommen!"},
-  {label:"HAM", text:"Påminnelse om veterinärbesök för Rufus på fredag 10:00 hos Djurkliniken Söder. Ring om du behöver flytta."},
-  {label:"HAM", text:"Din begagnade bok har skickats. Säljarens kommentar: hoppas du gillar den! Betygsätt köpet när den anlänt."},
-  {label:"HAM", text:"Restaurang Operakällaren bekräftar din bordbokning för 4 personer lördag den 22 april klockan 19:00."},
-  {label:"HAM", text:"Din prenumeration på DN startar 1 maj. Välkommen som läsare! Logga in för att anpassa dina nyhetspreferenser."},
-  {label:"HAM", text:"Bekräftelse: hyrbil bokad hos Hertz Arlanda, hämtning fredag 7 juni kl 14:00. Bokningsnummer H77832."},
-  {label:"HAM", text:"Ditt gym-abonnemang förnyas den 1 april för 299 kr. Hantera abonnemanget i appen."},
-  {label:"HAM", text:"Välkommen på introduktionskurs i keramik! Startar torsdagen 18 april kl 18:00. Ta med förkläde."},
-  {label:"HAM", text:"Din beställning hos IKEA är klar för avhämtning i varuhusets kundtjänst. Ordernummer 445521."},
-  {label:"HAM", text:"Bekräftelse: klippning hos David på Cuts, lördag 13 april kl 11:00. Avbokning senast 24 timmar innan."},
-  {label:"HAM", text:"Välkommen till Nyckeln Fastighetsbyrå. Visning av lägenheten på Bergsgatan 12 är bokad till fredag kl 17."},
-  {label:"HAM", text:"Din förhandsbeställda bok har skickats! Beräknad leverans 3–5 arbetsdagar. Välkommen som läsare."},
-  {label:"HAM", text:"Hej föräldrar! Påminner om vårterminens avslutning den 14 juni kl 10:00 i gymnastiksalen. Välkomna!"},
-  {label:"HAM", text:"Frida har glömt sin gympa-påse i skolan. Den finns hos oss i reception om ni vill hämta den."},
-  {label:"HAM", text:"Klassens föräldramöte är den 28 mars kl 18:30 i klassrum 12B. Fika ingår. Hoppas vi ses!"},
-  {label:"HAM", text:"Hej! Lovdag på fredag. Skolmat serveras inte. Glöm inte att anmäla era barn till fritids vid behov."},
-  {label:"HAM", text:"Välkommen på utvecklingssamtal tisdag den 4 april kl 15:30. Bekräfta gärna om ni kan komma."},
-  {label:"HAM", text:"Påminnelse om att skolfoton tas på onsdag. Kom gärna i hela kläderna! Bildpaketen beställs online."},
-  {label:"HAM", text:"Vi har börjat med det nya matteprogrammet i 3B. Mer info om hur ni kan stötta hemma kommer nästa vecka."},
-  {label:"HAM", text:"Anton var frånvarande idag utan anmälan. Vänligen meddela frånvaro via appen eller ring skolan."},
-  {label:"HAM", text:"Läxan i vecka 14: läs kapitel 5–7 i NO-boken och förbered tre frågor till genomgången på torsdag."},
-  {label:"HAM", text:"Skolstarten efter påsklovet är måndag den 8 april kl 8:10 som vanligt. Önskar er en glad påsk!"},
-  {label:"HAM", text:"Studiebesök på Tekniska museet är inbokat till den 23 maj. Blankett om tillstånd skickas hem den 10:e."},
-  {label:"HAM", text:"Klassen säljer lotter till förmån för klassresan. Lotterna kostar 20 kr styck. Fråga era barn om ni vill köpa."},
-  {label:"HAM", text:"Hej, Nina har haft lite magont idag men klarade sig bra. Lägg gärna med ett lättare mellanmål imorgon."},
-  {label:"HAM", text:"Sista dagen att anmäla sommarkollo är 31 mars. Anmälningslänken skickades i förra veckans utskick."},
-  {label:"HAM", text:"Hej! I vår startar vi en ny läsecirkel för åk 4. Anmäl ert barn via länken senast 15 mars."},
-  {label:"HAM", text:"Klassens vårtermin avslutas med utomhusdag den 7 juni. Mer info om aktiviteterna kommer nästa vecka."},
-  {label:"HAM", text:"Påminnelse: NP i matematik äger rum torsdag den 25 april. Eleverna behöver miniräknare och linjal."},
-  {label:"HAM", text:"Elevhälsans sjuksköterska finns på plats tisdagar och torsdagar. Boka tid via skolans app."},
-  {label:"HAM", text:"Klass 5A bjuder in till musikal den 30 maj kl 14:00 och 18:00. Biljetter säljs i receptionen."},
-  {label:"HAM", text:"Hej! Felix är lite hängig idag men vi bedömer att han klarar sig. Hämta gärna lite tidigare."},
-  {label:"HAM", text:"Hej grannar! Trapphuset städas måndag kl 10. Glöm inte att flytta cyklarna från källargången."},
-  {label:"HAM", text:"Påminnelse: fordonsskatten förfaller till betalning den 30 april. Betala via appen eller bankgiro."},
-  {label:"HAM", text:"Hej! Hittade en brun halsduk vid busskuren på Storgatan. Den ligger hos mig om den tillhör dig."},
-  {label:"HAM", text:"Bostadsrättsföreningens stämma är den 22 maj kl 19:00 i gemensamhetslokalen. Dagordning bifogas."},
-  {label:"HAM", text:"Hej, just ringt men du svarade inte. Hör av dig när du har tid. Inget bråttom."},
-  {label:"HAM", text:"Bibliotekets e-tjänster är nere för underhåll tisdag 14–16. Fysiska lån och returer påverkas inte."},
-  {label:"HAM", text:"Din ansökan om parkeringstillstånd är beviljad. Tillståndet gäller från 1 maj t.o.m. 30 april nästa år."},
-  {label:"HAM", text:"Vi håller öppet hus på lördag 13–15. Välkommen att titta in! Lättare förtäring serveras."},
-  {label:"HAM", text:"Hej! Vi har ändrat mötestiden till 17:30 istället för 18:00. Fungerar det fortfarande för dig?"},
-  {label:"HAM", text:"Sopsorteringen ändras från och med maj. Nya kärl för förpackningar ställs ut under vecka 16. Mer info i brevlådan."},
-  {label:"HAM", text:"Hittade din plånbok på tunnelbanan och lämnade in den till SL:s hittegodskontor på T-Centralen."},
-  {label:"HAM", text:"Bokklubben träffas hemma hos Petra den 11 april. Ta med något gott att äta och bok nummer 4 läst!"},
-  {label:"HAM", text:"Hej! Jag är försenad ungefär 15 minuter. Börja gärna utan mig om det är möjligt."},
-  {label:"HAM", text:"Taxin är bokad till flygplatsen söndag kl 05:30. Föraren heter Hassan och bilen är en grå Volvo."},
-  {label:"HAM", text:"Hej, det är från Hemtjänsten. Vi kommer som vanligt på torsdag men lite senare, runt klockan tio."},
-  {label:"HAM", text:"Löparlaget samlas vid Stadsparken lördag kl 8:00. Ta med vätska. Rundan är ca 8 km."},
-  {label:"HAM", text:"Hej! Kan du vattna mina blommor medan jag är borta nästa vecka? Nyckeln sitter på vanligt ställe."},
-  {label:"HAM", text:"Din biljett till teaterföreställningen skickas som PDF i separat mail. Välkommen den 3 maj kl 19:00."},
-  {label:"HAM", text:"Hej, det gäller bostadsannonsen. Är lägenheten fortfarande ledig? Jag är intresserad av visning."},
-  {label:"HAM", text:"Påminnelse: kontrollbesiktningen för din bil ska göras senast i december. Boka tid i god tid."},
-  {label:"HAM", text:"Bostadsrättsföreningen planerar att måla om fasaden i vår. Rösta på förslaget på föreningens hemsida."},
-  {label:"HAM", text:"Hej! Sophämtningen ställs in på torsdag på grund av helgdag. Nästa tömning sker följande måndag."},
-  {label:"HAM", text:"Kvitto på inlämnad deklaration. Eventuell återbäring betalas ut senast 15 juni om allt stämmer."},
-  {label:"HAM", text:"Hej! Trädet utanför porten behöver beskäras. Kontaktat kommunen och de kommer nästa vecka."},
-  {label:"HAM", text:"Hej granne! Någon har parkerat framför garaget igen. Vet du vems bil det är med reg YAB 123?"},
-  {label:"HAM", text:"Biblioteket har fått in böckerna du efterfrågade. De finns för lån fram till den 20:e."},
-  {label:"HAM", text:"Tvättstugan är bokad fredag kl 9–13. Kom ihåg att städa efter dig och töm luddfiltren."},
-  {label:"HAM", text:"Hej! Hunden hittades vid parken. Den har halsband med telefonnummer men ingen svarar. Ring mig!"},
-  {label:"HAM", text:"Elbolaget byter elmätare i fastigheten den 22 april mellan 8–12. Strömmen stängs av ca 30 min."},
-  {label:"HAM", text:"Cykelverkstaden ringde: cykeln är klar att hämta. Öppet till 18 på vardagar."},
-  {label:"HAM", text:"Mötet med hyresvärden om renoveringen är framflyttat till onsdagen 17:e. Samma tid kl 18 gäller."},
-  {label:"HAM", text:"Hej! Ska du ha med till festen på lördag? Vi tänkte köra potluck, kolla så vi inte tar samma rätt."},
-  {label:"HAM", text:"Påminnelse om läkarbesök hos Dr. Lindgren måndag 15 april kl 10:30. Ring 08-xxx-xxx vid förhinder."},
-  {label:"HAM", text:"Dina provsvar är klara. Logga in på 1177.se med BankID för att läsa resultaten."},
-  {label:"HAM", text:"Hej! Apoteket meddelar att läkemedlet finns att hämta. Ta med legitimation och recept."},
-  {label:"HAM", text:"Välkommen till mammografin den 3 maj kl 09:15 på Södersjukhuset. Ta med remissen om du har en."},
-  {label:"HAM", text:"Hej! Sjukgymnastiken börjar den 8 april. Kom i bekväma kläder och ta med gymnastikskor."},
-  {label:"HAM", text:"Hej! Tennisklubben har lediga tider i vår. Är du intresserad av att börja spela igen?"},
-  {label:"HAM", text:"Körrepetitionen ställs in onsdag på grund av lokalbyte. Ny lokal meddelas inom kort. Tack för tålamodet."},
-  {label:"HAM", text:"Fototävlingens tema i vår är natur och årstidsväxlingar. Skicka in max tre bilder senast 1 maj."},
-  {label:"HAM", text:"Hallå! Ska vi se fotbollen tillsammans på lördag? Kan boka bord på puben om ni är intresserade."},
-  {label:"HAM", text:"Hej! Bridgesällskapet samlas hos Gunnar den 18:e. Ta med fikabidrag och kom gärna lite i förväg."},
-  {label:"HAM", text:"Hallå! Löpgruppen tränas nu på tisdagar istället för onsdagar. Samma tid och plats gäller."},
-  {label:"HAM", text:"Vi startar en studiecirkel om klimat och hållbarhet till hösten. Anmäl intresse till studieförbundet."},
-  {label:"HAM", text:"Hej! Stickcafét på biblioteket börjar igen i vår. Tisdagar kl 14–16. Alla välkomna, ta med handarbete."},
-  {label:"HAM", text:"Spelkvällen ställs in denna fredag men vi kör igen nästa vecka. Samma uppställning som vanligt."},
-  {label:"HAM", text:"Hej! Vi har startat en Whatsapp-grupp för grannskapet. Skicka ett meddelande så lägger vi till dig."},
-  {label:"SPAM", text:"Obetald faktura: 1 249 kr förfaller idag. Betala omgående för att undvika inkasso och extra avgifter."},
-  {label:"SPAM", text:"Sista påminnelse innan inkasso. Ditt ärende överlämnas imorgon om betalning på 2 380 kr uteblir. Betala här."},
-  {label:"SPAM", text:"Vi har försökt leverera ditt paket men en tullavgift på 29 kr återstår. Betala avgiften via länken för leverans."},
-  {label:"SPAM", text:"Ditt paket väntar på utlämning. En liten fraktavgift krävs för att slutföra leveransen. Klicka för att betala."},
-  {label:"SPAM", text:"PostNord: ditt paket kunde inte levereras. Uppdatera leveransinformationen och betala 19 kr i tullavgift."},
-  {label:"SPAM", text:"Tjäna 30 000 kr i månaden hemifrån! Inga förkunskaper krävs. Anmäl dig idag och börja redan imorgon."},
-  {label:"SPAM", text:"Jobberbjudande: arbeta 2 timmar om dagen och tjäna upp till 8 000 kr i veckan. Svara för mer information."},
-  {label:"SPAM", text:"Investera i krypto nu och tredubbla dina pengar på 30 dagar. Garanterad avkastning. Kom igång med 500 kr."},
-  {label:"SPAM", text:"Exklusiv investeringschans: våra kunder gör 400% vinst på bitcoin. Platserna är begränsade. Anmäl intresse."},
-  {label:"SPAM", text:"Hej vackra, jag hittade din profil och blev nyfiken. Jag bor utomlands men söker seriös kontakt. Skriv tillbaka."},
-  {label:"SPAM", text:"Din Netflix-betalning misslyckades. Uppdatera dina kortuppgifter inom 24 timmar för att behålla ditt konto."},
-  {label:"SPAM", text:"Ditt konto kommer att stängas. Bekräfta dina uppgifter omedelbart via länken för att undvika avstängning."},
-  {label:"SPAM", text:"Viktigt meddelande om ditt Apple-ID: ovanlig aktivitet upptäckt. Verifiera ditt konto för att låsa upp det."},
-  {label:"SPAM", text:"Du har en oläst röstbrevlåda. Logga in med ditt lösenord via länken för att lyssna på meddelandet."},
-  {label:"SPAM", text:"Gå ner 10 kg på två veckor med detta naturliga mirakelpiller! Beställ nu med 70% introduktionsrabatt."},
-  {label:"SPAM", text:"Läkarna hatar detta trick! En enkel metod som smälter bukfett över natten. Klicka för hemligheten."},
-  {label:"SPAM", text:"Din dator är infekterad med farliga virus. Ring vår support omedelbart på 0200-xxx-xxx för att åtgärda."},
-  {label:"SPAM", text:"Microsoft-support: vi har upptäckt allvarliga problem på din enhet. Tillåt fjärråtkomst för att lösa det."},
-  {label:"SPAM", text:"Skatteåterbäring väntar! Du har 1 870 kr att få tillbaka. Ange dina bankuppgifter för utbetalning idag."},
-  {label:"SPAM", text:"Försäkringskassan: du har en utbetalning som väntar. Verifiera din identitet med BankID via länken nedan."},
-  {label:"SPAM", text:"Grattis, din e-postadress valdes i Googles årliga utlottning! Du har tilldelats 950 000 kr. Svara för anspråk."},
-  {label:"SPAM", text:"Endast idag: Rolex till 90% rabatt i vårt lagerrensningssortiment. Begränsat antal, beställ innan midnatt."},
-  {label:"SPAM", text:"Din prenumeration löper ut. Förnya nu med ett klick så får du tre månader gratis. Erbjudandet gäller idag."},
-  {label:"SPAM", text:"Du har fått en hemlig beundrare! Någon i din närhet är intresserad. Lås upp meddelandet genom att registrera dig."},
-  {label:"SPAM", text:"Lån utan kreditprövning! Upp till 50 000 kr direkt på kontot oavsett betalningsanmärkningar. Ansök på 2 minuter."},
-  {label:"HAM", text:"Hej! Påminner om utvecklingssamtalen nästa vecka. Boka en tid i kalendern som passar dig."},
-  {label:"HAM", text:"Protokollet från styrelsemötet är utskickat. Läs igenom och hör av dig med eventuella ändringar innan fredag."},
-  {label:"HAM", text:"Hej! Fakturan för medlemsavgiften är bifogad. Sista betalningsdag är den 30:e. Tack för att du är medlem."},
-  {label:"HAM", text:"Vi har uppdaterat leveransvillkoren. Inga åtgärder krävs från dig, men du kan läsa mer på vår webbplats."},
-  {label:"HAM", text:"Hej! Förskolan har planeringsdag den 5:e och håller stängt. Lämna inte barnen den dagen. Tack!"},
-  {label:"HAM", text:"Klassens föräldramöte hålls torsdag kl 18 i klassrummet. Vi går igenom vårterminen och kommande utflykter."},
-  {label:"HAM", text:"Din årsredovisning från banken finns nu tillgänglig att ladda ner när du loggar in på internetbanken."},
-  {label:"HAM", text:"Hej! Vi byter leverantör av kaffe på kontoret. Säg till om du har önskemål om sorter innan beställningen."},
-  {label:"HAM", text:"Tack för din ansökan! Vi har tagit emot den och återkommer efter sista ansökningsdag den 15:e."},
-  {label:"HAM", text:"Påminnelse om att lämna in reseräkningen för konferensen senast månadsskiftet, annars dröjer utbetalningen."},
-  {label:"HAM", text:"Hej! Bilbesiktningen är inbokad till tisdag kl 9. Lämna nyckeln i receptionen om du inte kan vara där."},
-  {label:"HAM", text:"Vattnet stängs av i fastigheten onsdag kl 9–12 för underhåll. Tappa upp det du behöver i förväg."},
-  {label:"HAM", text:"Hej! Biblioteket meddelar att boken du reserverat nu finns att hämta. Den ligger kvar till och med fredag."},
-  {label:"HAM", text:"Tack för ikväll! Det var jättemysigt. Nästa gång lagar jag maten, det är bestämt."},
-  {label:"HAM", text:"Hej! Kan du kolla om vi har mjölk hemma innan du åker från jobbet? Annars handlar jag på vägen."},
-  {label:"HAM", text:"Mötet imorgon flyttas till kl 14 istället för 13. Samma länk gäller. Säg till om det krockar för dig."},
-  {label:"HAM", text:"Hej! Glömde säga att paketet till dig kom hit av misstag. Du kan hämta det när det passar."},
-  {label:"HAM", text:"Vi har fått in din felanmälan om tvättstugan. En tekniker kommer på torsdag mellan 8 och 10."},
-  {label:"HAM", text:"Hej! Tack för att du ville byta pass med mig på lördag. Jag är skyldig dig en tjänst nu."},
-  {label:"HAM", text:"Din tidsbokning hos optikern är bekräftad: onsdag 12 april kl 16:00. Ta med dina nuvarande glasögon."},
-];
-
-
-function updateRatioLabel() {
-  const r     = parseInt(document.getElementById('spam-ratio').value);
-  const hamR  = 100 - r;
-  document.getElementById('ratio-label').textContent     = `${r}% / ${hamR}%`;
-  document.getElementById('ratio-bar-spam').style.width  = r + '%';
-  document.getElementById('ratio-bar-ham').style.width   = hamR + '%';
-  const note = r === 50
-    ? 'Jämn fördelning — priorsannolikheten P(klass) påverkar inte klassificeringen nämnvärt.'
-    : r >= 70
-      ? `${r}% skräppost — modellen får en hög prior P(Skräppost) = ${(r/100).toFixed(2)} och börjar redan lutat åt spam innan den sett ett enda ord. Tveksamma texter klassas oftare som skräppost.`
-      : r <= 30
-        ? `Bara ${r}% skräppost — låg prior P(Skräppost) = ${(r/100).toFixed(2)} gör modellen "snäll". Den behöver starka spamsignaler för att klassificera som skräppost.`
-        : `${r}% skräppost — lätt sned fördelning. Priorn väger lite mer åt ${r > 50 ? 'skräppost' : 'ej skräppost'}.`;
-  document.getElementById('ratio-note').textContent = note;
-}
-
-
-function generateData(keepExisting = true) {
-  const n      = Math.max(4, Math.min(500, parseInt(document.getElementById('gen-count').value) || 50));
-  const ratio  = parseInt(document.getElementById('spam-ratio').value) / 100;
-  const nSpam  = Math.max(1, Math.round(n * ratio));
-  const nHam   = Math.max(1, n - nSpam);
-  const status = document.getElementById('gen-status');
-
-
-  const spamPool = EXAMPLE_BANK.filter(e => e.label === 'SPAM');
-  const hamPool  = EXAMPLE_BANK.filter(e => e.label === 'HAM');
-
-
-  function shuffle(arr) {
-    const a = [...arr];
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
-  function sample(pool, count) {
-    let result = [];
-    while (result.length < count) result = result.concat(shuffle(pool));
-    return result.slice(0, count);
-  }
-
-
-  const picked = shuffle([...sample(spamPool, nSpam), ...sample(hamPool, nHam)]);
-  if (!keepExisting) examples = [];
-  picked.forEach(({ label, text }) => examples.push({ text, label }));
-
-
-  refresh();
-  status.className = 'status-msg info';
-  status.textContent = `✓ Lade till ${picked.length} exempel (${nSpam} skräppost / ${nHam} ej skräppost). Träningsmängden är nu ${examples.length} exempel.`;
-}
-
-
-function closeIntro() {
-  document.getElementById('introOverlay').style.display = 'none';
-}
-function openIntro() {
-  document.getElementById('introOverlay').style.display = 'flex';
-}
-
-
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-    if (btn.dataset.tab === 'model')    renderModel();
-    if (btn.dataset.tab === 'classify') renderClassify();
-    if (btn.dataset.tab === 'glossary') renderGlossary();
-  });
-});
-
-
-function escHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-
-initGlossary();
-refresh();
-</script>
-</body>
-</html>
+    const priorTex = `\\underbrace{\\te
