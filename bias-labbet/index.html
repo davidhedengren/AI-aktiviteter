@@ -70,7 +70,7 @@ body{font-family:'DM Sans',sans-serif;font-size:15px;background:var(--bg);color:
 .act-titles{flex:1;min-width:0;}
 .act-title{font-family:'Syne',sans-serif;font-size:1.12em;font-weight:800;letter-spacing:-.01em;}
 .act-sub{font-size:.78em;color:var(--dim);margin-top:1px;}
-.act-body{padding:16px 24px 22px;display:flex;flex-direction:column;gap:15px;}
+.act-body{padding:18px 24px 24px;display:flex;flex-direction:column;gap:18px;}
 
 /* data mode segmented control */
 .seg{display:flex;gap:4px;padding:4px;background:var(--surface2);border:1px solid var(--border);border-radius:999px;}
@@ -159,8 +159,8 @@ body{font-family:'DM Sans',sans-serif;font-size:15px;background:var(--bg);color:
 .train-progress-rail i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .2s var(--ease-out);}
 
 /* ── Result cards inside Act 4 ── */
-.result-cards{display:flex;flex-direction:column;gap:14px;}
-.rc{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:17px 19px;display:flex;flex-direction:column;gap:12px;transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out),filter .35s,opacity .35s;animation:actIn .5s var(--ease-out) backwards;}
+.result-cards{display:flex;flex-direction:column;gap:22px;}
+.rc{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:20px 22px;display:flex;flex-direction:column;gap:16px;transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out),filter .35s,opacity .35s;animation:actIn .5s var(--ease-out) backwards;}
 .rc:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.28);}
 .rc.stale{filter:blur(2.5px) saturate(.6);opacity:.5;pointer-events:none;}
 .rc:nth-child(2){animation-delay:.08s;}
@@ -175,7 +175,7 @@ body{font-family:'DM Sans',sans-serif;font-size:15px;background:var(--bg);color:
 .rc.hero .rc-head h2{color:var(--gold);}
 
 .sec-t{font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--dim);}
-.fair-big{display:flex;flex-direction:column;gap:9px;}
+.fair-big{display:flex;flex-direction:column;gap:13px;}
 .fbar{display:grid;grid-template-columns:64px 1fr 56px;gap:9px;align-items:center;}
 .fbar .fwho{font-size:0.8em;font-weight:700;}
 .fbar.k .fwho{color:var(--kvinna);}
@@ -657,7 +657,7 @@ function actSummary(n){
   }
   return '';
 }
-const ACT_LABELS={1:'Akt 1 · Träningsdata',2:'Akt 2 · Indata',3:'Akt 3 · Träning'};
+const ACT_LABELS={1:'Steg 1 · Träningsdata',2:'Steg 2 · Indata',3:'Steg 3 · Träning'};
 
 function renderReceipts(){
   const wrap=document.getElementById('receipts');
@@ -972,10 +972,7 @@ function renderFairness(){
       <div class="fbar k"><span class="fwho">Kvinnor</span><div class="ftrack"><div class="ffill" id="ffillK" style="width:0%"></div></div><span class="fval" id="fvalK" style="color:var(--kvinna)">0%</span></div>
       <div class="fbar m"><span class="fwho">Män</span><div class="ftrack"><div class="ffill" id="ffillM" style="width:0%"></div></div><span class="fval" id="fvalM" style="color:var(--man)">0%</span></div>
     </div>
-    <div class="gap-pill ${r.gap>5?'pulse':''}" style="color:${gapColor};border-color:${gapColor}66;background:${gapColor}14;margin-top:2px;">
-      ${vEmoji} Gap: ${r.gap.toFixed(0)} procentenheter
-    </div>
-    <span class="g-tag" onclick="openConcept('fairnessDetail', event)" style="align-self:flex-start;">
+    <span class="g-tag" onclick="openConcept('fairnessDetail', event)" style="align-self:flex-start;margin-top:4px;">
       <svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       Visa fler detaljer
     </span>`;
