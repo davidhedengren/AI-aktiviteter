@@ -7,9 +7,9 @@
 <title>Språkmodell-labbet – ai-aktiviteter.se</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--subtle:#b0bedc;--accent:#4d80ff;--accent2:#6698ff;--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--orange:#ff9f43;--purple:#a78bfa;--step-accent:#4d80ff;--step-accent-soft:rgba(77,128,255,0.12);}
+:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--border2:#253050;--border-soft:rgba(255,255,255,.06);--text:#e8ecf8;--dim:#7e8aaa;--subtle:#b0bedc;--accent:#4d80ff;--accent2:#6698ff;--accent-dim:rgba(77,128,255,0.14);--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--orange:#ff9f43;--purple:#a78bfa;--step-accent:#4d80ff;--step-accent-soft:rgba(77,128,255,0.12);--r-md:14px;--r-lg:20px;--ease-out:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
@@ -18,11 +18,11 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .back-link:hover{color:var(--text);border-color:var(--dim);}
 .lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .lang-link:hover{color:var(--text);border-color:var(--dim);}
-.lang-link .flag{display:block;border-radius:2px;}
-.hd{width:100%;text-align:center;padding:12px 16px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
-.hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}
+.lang-link .lang-ico{width:14px;height:14px;flex-shrink:0;}
+.hd{width:100%;text-align:center;padding:30px 20px 26px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
+.hd h1{font-family:'Syne',sans-serif;font-size:1.55em;font-weight:800;letter-spacing:-0.02em;margin-bottom:10px;text-shadow:0 0 34px rgba(102,152,255,.22);}
 .hd h1 span{color:var(--accent2);}
-.hd p{color:var(--dim);font-size:0.8em;max-width:620px;margin:0 auto;line-height:1.4;}
+.hd p{color:var(--dim);font-size:0.86em;max-width:560px;margin:0 auto;line-height:1.6;}
 
 .app{display:grid;grid-template-columns:290px 1fr 310px;gap:0;max-width:1280px;margin:0 auto;width:100%;flex:1;position:relative;z-index:1;}
 .lp{padding:14px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:14px;}
@@ -30,7 +30,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .rp{padding:14px;border-left:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;gap:10px;}
 
 .sec-t{font-size:0.66em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim);margin-bottom:6px;}
-.sel,textarea{font-family:'DM Sans',sans-serif;font-size:0.84em;width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);outline:none;transition:border-color 0.2s;}
+.sel,textarea{font-family:'DM Sans',sans-serif;font-size:0.84em;width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);outline:none;transition:border-color 0.2s;}
 .sel{cursor:pointer;}
 .sel:focus,textarea:focus{border-color:var(--accent);}
 .k-label{font-size:0.74em;color:var(--subtle);}
@@ -39,13 +39,14 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 /* Glow när steg 2 (kontexten) är aktivt – då är väljaren huvudkontrollen */
 .wrap.sx-context:not(.sx-choose) #kSel{border-color:var(--step-accent);box-shadow:0 0 0 3px var(--step-accent-soft);}
 textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;color:var(--subtle);}
-.btn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.84em;padding:9px 14px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:0.2s;text-align:center;}
+.btn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.84em;padding:9px 14px;border-radius:9px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:0.2s var(--ease-out);text-align:center;}
 .btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.08);}
-.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;}
-.btn.pri:hover{background:#3d6de6;}
+.btn:active{transform:translateY(1px);}
+.btn.pri{background:linear-gradient(180deg,#5b8bff,#3f6fe6);border-color:transparent;color:#fff;box-shadow:0 2px 12px rgba(77,128,255,0.38);}
+.btn.pri:hover{filter:brightness(1.07);background:linear-gradient(180deg,#5b8bff,#3f6fe6);box-shadow:0 4px 18px rgba(77,128,255,0.5);}
 .btn.grn{background:var(--green);border-color:var(--green);color:#090b14;}
 .btn.grn:hover{background:#4ee89e;border-color:#4ee89e;}
-.btn.ghost{color:var(--dim);}
+.btn.ghost{color:var(--dim);background:var(--surface2);}
 .btn.ghost:hover{color:var(--text);}
 .btn:disabled{opacity:0.35;pointer-events:none;}
 .btn-row{display:flex;gap:6px;flex-wrap:wrap;}
@@ -87,8 +88,8 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 .tip-box .gpt-hl{color:var(--accent2);font-weight:700;}
 
 /* Collapsible (samma mönster som NIM) */
-.coll{border:1px solid var(--border);border-radius:8px;overflow:hidden;}
-.coll-toggle{width:100%;padding:10px 12px;background:var(--surface2);border:none;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:700;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.coll{border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.coll-toggle{width:100%;padding:11px 13px;background:var(--surface2);border:none;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:700;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px;}
 .coll-toggle:hover{color:var(--text);}
 .coll-toggle .arr{transition:transform 0.2s;flex-shrink:0;}
 .coll-toggle.open .arr{transform:rotate(180deg);}
@@ -101,7 +102,7 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 .coll-body .hl{color:var(--accent);font-weight:600;}
 
 /* Genererad text */
-.gen-box{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--step-accent);border-radius:14px;padding:30px 32px;min-height:300px;font-size:1.18em;line-height:2;color:var(--text);box-shadow:0 10px 40px rgba(0,0,0,0.35);transition:border-top-color 0.4s ease;}
+.gen-box{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--step-accent);border-radius:var(--r-md);padding:30px 32px;min-height:300px;font-size:1.18em;line-height:2;color:var(--text);box-shadow:0 10px 40px rgba(0,0,0,0.35);transition:border-top-color 0.4s ease;}
 .gen-box .placeholder{display:flex;min-height:240px;align-items:center;justify-content:center;text-align:center;color:var(--dim);font-style:italic;font-size:0.72em;}
 .ctx-tok{background:rgba(255,159,67,0.15);border:1px solid rgba(255,159,67,0.45);border-radius:4px;padding:1px 5px;color:var(--text);font-weight:600;}
 .new-tok{animation:popIn 0.45s cubic-bezier(0.34,1.56,0.64,1);}
@@ -126,7 +127,7 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 .ctrl-group{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:11px 12px;display:flex;flex-direction:column;gap:9px;}
 .ctrl-row{display:flex;gap:7px;align-items:center;flex-wrap:wrap;}
 .ctrl-row label{font-size:0.76em;color:var(--dim);font-weight:600;white-space:nowrap;}
-.start-input{font-family:'JetBrains Mono',monospace;font-size:0.84em;flex:1;min-width:90px;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);outline:none;}
+.start-input{font-family:'JetBrains Mono',monospace;font-size:0.84em;flex:1;min-width:90px;padding:7px 9px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);outline:none;}
 .start-input:focus{border-color:var(--accent);}
 .start-err{font-size:0.72em;color:var(--red);display:none;}
 .start-err.show{display:block;}
@@ -159,7 +160,7 @@ input[type=range]:disabled{opacity:0.3;}
 @keyframes pickPulse{0%{transform:scale(1.03);}100%{transform:scale(1);}}
 
 /* Modellens minne = labbets signatur: ge panelen en egen, lugn inramning */
-.side .coll.sticky{border:1px solid rgba(77,128,255,0.32);border-radius:12px;overflow:hidden;box-shadow:0 6px 30px rgba(0,0,0,0.30);}
+.side .coll.sticky{border:1px solid rgba(77,128,255,0.32);border-radius:14px;overflow:hidden;box-shadow:0 6px 30px rgba(0,0,0,0.30);}
 .side .coll.sticky > .coll-toggle{color:var(--text);font-size:0.92em;background:rgba(77,128,255,0.10);}
 .side .coll.sticky > .coll-toggle .term{border-bottom-color:transparent;}
 .prow.greedy-top{box-shadow:inset 3px 0 0 var(--gold);}
@@ -171,23 +172,34 @@ input[type=range]:disabled{opacity:0.3;}
 .click-hint{font-size:0.7em;color:var(--dim);text-align:center;}
 
 /* Intro-overlay (samma mönster som övriga sidor) */
-.overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
+.overlay{position:fixed;inset:0;background:rgba(6,7,14,0.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
-.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;max-width:540px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;}
-.overlay-card h2{font-size:1.1em;font-weight:700;margin-bottom:6px;}
+.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:var(--r-lg);padding:32px 36px;max-width:540px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
+@keyframes overlayIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.overlay-card h2{font-family:'Syne',sans-serif;font-size:1.4em;font-weight:800;letter-spacing:-0.01em;margin-bottom:8px;}
 .overlay-card h2 span{color:var(--accent2);}
-.overlay-card .sub{font-size:0.84em;color:var(--dim);line-height:1.55;margin-bottom:14px;}
-.overlay-card .steps{display:flex;flex-direction:column;gap:10px;margin:14px 0;text-align:left;}
-.overlay-card .step{display:flex;gap:10px;align-items:flex-start;font-size:0.82em;color:var(--dim);line-height:1.5;}
+.overlay-card .sub{font-size:0.87em;color:var(--dim);line-height:1.6;margin-bottom:18px;}
+.overlay-card .steps{display:flex;flex-direction:column;gap:12px;margin:14px 0;text-align:left;}
+.overlay-card .step{display:flex;gap:12px;align-items:flex-start;font-size:0.85em;color:var(--dim);line-height:1.55;}
 .overlay-card .step strong{color:var(--text);}
-.step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
-.overlay-btn{display:block;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}
-.overlay-btn:hover{background:#3d6de6;}
+.step-num{width:25px;height:25px;border-radius:50%;background:rgba(77,128,255,0.14);color:var(--accent2);font-weight:700;font-size:0.8em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.28);padding-top:1px;}
+.overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:18px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:0.25s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 24px rgba(77,128,255,.28);}
+.overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
+.overlay-btn svg{width:15px;height:15px;flex-shrink:0;}
+.overlay-tip{margin-top:16px;font-size:0.8em;color:var(--dim);text-align:center;line-height:1.55;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;}
+.overlay-tip strong{color:var(--text);}
+.intro-viz{display:block;width:220px;height:80px;margin:0 auto 16px;}
+.intro-viz .iv-chip rect{fill:rgba(255,255,255,.05);stroke:rgba(255,255,255,.14);stroke-width:1.5;}
+.intro-viz text{fill:#b0bedc;font-family:'JetBrains Mono',monospace;font-size:11px;text-anchor:middle;font-weight:600;}
+.intro-viz .iv-arrow{stroke:var(--dim);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.intro-viz .iv-next rect{fill:rgba(77,128,255,.16);stroke:var(--accent);stroke-width:1.6;animation:ivPulse 2.1s ease-in-out infinite;}
+.intro-viz .iv-next text{fill:#e8ecf8;}
+@keyframes ivPulse{0%,100%{opacity:.5;}50%{opacity:1;}}
 
 /* ═══ Remake: stegbaserad layout ═══ */
 .wrap{max-width:1180px;margin:0 auto;width:100%;padding:22px 16px 44px;display:flex;flex-direction:column;gap:28px;flex:1;position:relative;z-index:1;}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px 22px;}
-.card-h{display:flex;align-items:center;gap:9px;font-size:0.95em;font-weight:700;margin-bottom:16px;letter-spacing:-0.01em;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:20px 22px;box-shadow:0 6px 22px rgba(0,0,0,0.32);}
+.card-h{display:flex;align-items:center;gap:9px;font-family:'Syne',sans-serif;font-size:1.02em;font-weight:800;margin-bottom:16px;letter-spacing:-0.01em;}
 .step-badge{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:0.78em;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
 .setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;}
 .mini-t{display:block;font-size:0.64em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim);margin-bottom:8px;}
@@ -197,7 +209,7 @@ input[type=range]:disabled{opacity:0.3;}
 .coll{background:var(--surface);}
 .side .coll.sticky{position:sticky;top:12px;}
 
-.prompt-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--surface);border:1px solid rgba(77,128,255,0.4);border-radius:10px;padding:10px 12px;}
+.prompt-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--surface);border:1px solid rgba(77,128,255,0.4);border-radius:12px;padding:10px 12px;}
 .prompt-bar > label{font-size:0.8em;color:var(--subtle);font-weight:700;white-space:nowrap;}
 .prompt-bar .start-input{flex:1;min-width:120px;}
 .prompt-extra{display:flex;flex-direction:column;gap:6px;}
@@ -245,18 +257,18 @@ input[type=range]:disabled{opacity:0.3;}
   .side .coll.sticky{position:static;}
   .back-link{position:static;transform:none;margin-bottom:4px;}
   .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}
-  .hd{padding:10px 16px 8px;}
+  .hd{padding:22px 16px 18px;}
 }
 @media(max-width:520px){
   .setup-grid{grid-template-columns:1fr;}
 }
 
 /* Stegnavigering – guidad trappa genom labbet */
-.stepper{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px;}
+.stepper{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:12px 14px;box-shadow:0 6px 22px rgba(0,0,0,0.32);}
 .steps-nav{display:flex;flex-wrap:wrap;gap:6px;}
-.snav{flex:1;min-width:118px;font-family:'DM Sans',sans-serif;font-size:0.76em;font-weight:700;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;transition:0.15s;text-align:center;}
+.snav{flex:1;min-width:118px;font-family:'DM Sans',sans-serif;font-size:0.76em;font-weight:700;padding:9px 10px;border-radius:9px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;transition:0.15s var(--ease-out);text-align:center;}
 .snav:hover{color:var(--text);border-color:var(--accent);}
-.snav.active{background:var(--step-accent-soft);border-color:var(--step-accent);color:var(--step-accent);}
+.snav.active{background:var(--step-accent-soft);border-color:var(--step-accent);color:var(--step-accent);box-shadow:0 0 0 1px var(--step-accent);}
 .step-intro{font-size:0.88em;color:var(--subtle);line-height:1.55;margin-top:14px;background:linear-gradient(180deg,var(--step-accent-soft),transparent);border-left:3px solid var(--step-accent);border-radius:0 8px 8px 0;padding:12px 15px;transition:border-color 0.4s,background 0.4s;}
 .step-intro strong{color:var(--text);}
 .step-foot{display:flex;justify-content:space-between;gap:8px;margin-top:11px;}
@@ -278,7 +290,7 @@ input[type=range]:disabled{opacity:0.3;}
 /* Dataset-krysslista (välj och kombinera flera texter) */
 .ds-hint{font-weight:400;color:var(--dim);font-size:0.82em;}
 .ds-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.ds-card{position:relative;display:flex;flex-direction:column;gap:3px;padding:12px 13px;border:1px solid var(--border);border-radius:11px;background:var(--surface2);cursor:pointer;transition:transform 0.15s,border-color 0.15s,background 0.15s;user-select:none;}
+.ds-card{position:relative;display:flex;flex-direction:column;gap:3px;padding:12px 13px;border:1px solid var(--border);border-radius:12px;background:var(--surface2);cursor:pointer;transition:transform 0.15s,border-color 0.15s,background 0.15s;user-select:none;}
 .ds-card:hover{border-color:var(--accent);transform:translateY(-2px);}
 .ds-card.selected{border-color:var(--accent);background:rgba(77,128,255,0.12);box-shadow:0 0 0 1px var(--accent);}
 .ds-card .ds-emoji{font-size:1.5em;line-height:1;margin-bottom:3px;}
@@ -309,13 +321,54 @@ input[type=range]:disabled{opacity:0.3;}
 .train-seq-label{font-size:1.05em;font-weight:700;color:var(--text);margin-bottom:16px;min-height:1.3em;letter-spacing:-0.01em;}
 .train-seq-bar{height:8px;border-radius:5px;background:var(--surface2);overflow:hidden;}
 .train-seq-bar i{display:block;height:100%;width:0;border-radius:5px;background:linear-gradient(90deg,var(--green),#5fe0a0);transition:width 0.4s ease;box-shadow:0 0 12px rgba(52,199,89,0.5);}
+
+/* ═══ Glaskort (concept cards) – samma komponent som övriga labb ═══ */
+.launch-grid{display:flex;flex-direction:column;gap:10px;}
+.launch-card{display:flex;align-items:center;gap:12px;text-align:left;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.008)),var(--surface);border:1px solid var(--border);border-radius:14px;padding:13px 14px;cursor:pointer;color:var(--text);box-shadow:inset 0 1px 0 rgba(255,255,255,.05);transition:border-color .18s,transform .12s,box-shadow .18s,background .18s;font-family:'DM Sans',sans-serif;}
+.launch-card:hover{border-color:rgba(77,128,255,.5);transform:translateY(-1px);box-shadow:0 10px 26px rgba(77,128,255,.12),inset 0 1px 0 rgba(255,255,255,.06);}
+.launch-card:active{transform:translateY(0);}
+.lc-ico{width:38px;height:38px;flex-shrink:0;border-radius:11px;background:var(--accent-dim);color:var(--accent2);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(77,128,255,.14);}
+.lc-ico svg{width:19px;height:19px;}
+.lc-txt{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.lc-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13.5px;letter-spacing:-.01em;line-height:1.2;}
+.lc-sub{font-size:10.5px;color:var(--dim);line-height:1.35;}
+.lc-arrow{margin-left:auto;color:var(--dim);flex-shrink:0;transition:transform .2s var(--ease-spring),color .2s;}
+.launch-card:hover .lc-arrow{transform:translateX(3px);color:var(--accent2);}
+.lc-arrow svg{width:15px;height:15px;display:block;}
+
+.concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
+.concept-backdrop.show{opacity:1;pointer-events:auto;}
+.concept-card{position:fixed;top:50%;left:50%;z-index:301;width:400px;max-width:90vw;perspective:1000px;transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .26s var(--ease-out);}
+.concept-card.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
+.concept-card-inner{position:relative;text-align:center;transform-style:preserve-3d;background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;transform:perspective(1000px) rotateX(0deg) rotateY(0deg);transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);will-change:transform;max-height:86vh;overflow-y:auto;}
+.concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,216,102,.15) 45%,transparent 65%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::before{opacity:1;}
+.concept-card-inner::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.09),transparent 60%);opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::after{opacity:1;}
+.concept-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);z-index:3;transform:translateZ(30px);padding:0;}
+.concept-close:hover{border-color:var(--red);color:var(--red);transform:translateZ(30px) rotate(90deg);}
+.concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
+.concept-icon svg{width:28px;height:28px;}
+.concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:10px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
+.concept-def{font-size:.9em;line-height:1.65;color:var(--dim);position:relative;z-index:3;transform:translateZ(18px);transform-style:preserve-3d;text-align:left;}
+.concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;font-weight:600;}
+.concept-def .cc-lead{margin-bottom:12px;}
+.concept-def .gloss-list{gap:11px;}
+.concept-def .gloss-item b{color:var(--accent2);}
+.cc-sub{font-family:'Syne',sans-serif;font-size:.92em;font-weight:700;margin:14px 0 7px;display:flex;align-items:center;gap:7px;}
+.cc-sub.green{color:var(--green);}.cc-sub.orange{color:var(--orange);}
+.cc-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.cc-list li{position:relative;padding-left:18px;line-height:1.5;}
+.cc-list li::before{content:'';position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:2px;background:var(--accent2);}
+.cc-list.green li::before{background:var(--green);}
+.cc-list.orange li::before{background:var(--orange);}
 </style>
 </head>
 <body>
 
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
-  <a class="lang-link" href="https://www.ai-aktiviteter.se/sprakmodellen_ENG"><svg class="flag" width="18" height="12" viewBox="0 0 60 36" aria-hidden="true"><rect width="60" height="36" fill="#012169"/><path d="M0,0 L60,36 M60,0 L0,36" stroke="#fff" stroke-width="7.2"/><path d="M0,0 L60,36 M60,0 L0,36" stroke="#C8102E" stroke-width="4.8"/><rect x="25" width="10" height="36" fill="#fff"/><rect y="13" width="60" height="10" fill="#fff"/><rect x="27" width="6" height="36" fill="#C8102E"/><rect y="15" width="60" height="6" fill="#C8102E"/></svg> English</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/sprakmodellen_ENG"><svg class="lang-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.7 2.6 4 5.8 4 9s-1.3 6.4-4 9c-2.7-2.6-4-5.8-4-9s1.3-6.4 4-9z"/></svg> English</a>
   <h1><span>Språkmodell</span>-labbet</h1>
   <p>Bygg en egen liten språkmodell av valfri text – och se exakt hur den väljer nästa ord, ord för ord.</p>
 </div>
@@ -461,24 +514,18 @@ input[type=range]:disabled{opacity:0.3;}
         </div>
       </div>
 
-      <div class="coll gate-data">
-        <button class="coll-toggle" onclick="toggleColl(this,'glossBody')">📖 Begreppslista<span class="arr">▼</span></button>
-        <div class="coll-body" id="glossBody"><div id="glossaryBody"></div></div>
-      </div>
-
-      <div class="coll gate-data">
-        <button class="coll-toggle" onclick="toggleColl(this,'gptBody')">🤖 Hur hänger modellen ihop med ChatGPT?<span class="arr">▼</span></button>
-        <div class="coll-body" id="gptBody">
-          Den här minimodellen och ChatGPT bygger på samma grundprincip – att förutsäga nästa ord. Skillnaden är hur sannolikheterna räknas fram.<br><br>
-          <strong style="color:var(--green)">Likheter</strong><br>
-          • Båda förutsäger nästa ord utifrån orden som kommit tidigare.<br>
-          • Båda beräknar en <span class="term" data-term="sannolikhet">sannolikhet</span> för många möjliga nästa ord och väljer sedan ett av dem.<br>
-          • <span class="term" data-term="temperatur">Temperaturen</span> påverkar valet av ord på samma sätt i båda modellerna.<br><br>
-          <strong style="color:var(--orange)">Skillnader</strong><br>
-          • Den här modellen använder en tabell med exakta ordföljder. ChatGPT använder ett <span class="term" data-term="nätverk">neuralt nätverk</span> med miljarder parametrar.<br>
-          • ChatGPT kan ta hänsyn till tusentals tidigare ord, inte bara 1–3.<br>
-          • ChatGPT har tränats på en enorm mängd text från många olika källor.<br>
-          • ChatGPT kan känna igen liknande mönster och <span class="term" data-term="generalisering">generalisera</span>. Den här modellen kan bara använda ordföljder som den har sett tidigare.
+      <div class="gate-data">
+        <div class="launch-grid">
+          <button class="launch-card" onclick="openConcept('begrepp',event)">
+            <span class="lc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+            <span class="lc-txt"><span class="lc-title">Begreppslista</span><span class="lc-sub">Alla ord förklarade – token, kontext, temperatur…</span></span>
+            <span class="lc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+          </button>
+          <button class="launch-card" onclick="openConcept('chatgpt',event)">
+            <span class="lc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3M8.5 10h.01M15.5 10h.01"/></svg></span>
+            <span class="lc-txt"><span class="lc-title">Hur hänger den ihop med ChatGPT?</span><span class="lc-sub">Likheter och skillnader mot en riktig modell.</span></span>
+            <span class="lc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+          </button>
         </div>
       </div>
 
@@ -491,7 +538,7 @@ input[type=range]:disabled{opacity:0.3;}
   </div>
 </div>
 
-<!-- ─── Intro-overlay ─── -->
+<!-- ─── Träningssekvens ─── -->
 <div class="train-seq" id="trainSeq" aria-hidden="true">
   <div class="train-seq-card">
     <div class="train-seq-icon" id="trainSeqIcon">🧠</div>
@@ -500,8 +547,25 @@ input[type=range]:disabled{opacity:0.3;}
   </div>
 </div>
 
+<!-- ─── Glaskort-skelett ─── -->
+<div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
+<div class="concept-card" id="conceptCard">
+  <div class="concept-card-inner" id="conceptCardInner">
+    <button class="concept-close" onclick="closeConcept()" aria-label="Stäng">✕</button>
+    <div class="concept-icon" id="conceptIcon"></div>
+    <div class="concept-title" id="conceptTitle"></div>
+    <div class="concept-def" id="conceptDef"></div>
+  </div>
+</div>
+
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
+    <svg class="intro-viz" viewBox="0 0 220 80" aria-hidden="true">
+      <g class="iv-chip"><rect x="8" y="29" width="40" height="22" rx="7"/><text x="28" y="44">det</text></g>
+      <g class="iv-chip"><rect x="54" y="29" width="46" height="22" rx="7"/><text x="77" y="44">blir</text></g>
+      <path class="iv-arrow" d="M106 40 h16 m-5 -4 l5 4 l-5 4"/>
+      <g class="iv-next"><rect x="130" y="27" width="62" height="26" rx="8"/><text x="161" y="44">vackert</text></g>
+    </svg>
     <h2><span>Språkmodell</span>-labbet</h2>
     <p class="sub">Upptäck hur en språkmodell fungerar genom att steg för steg bygga, analysera och utvärdera en egen modell.</p>
     <div class="steps">
@@ -511,7 +575,8 @@ input[type=range]:disabled{opacity:0.3;}
       <div class="step"><div class="step-num">4</div><div><strong>Hur formar träningsdatan modellen?</strong> Byt mellan olika texter och se hur modellens språk och beteende förändras.</div></div>
       <div class="step"><div class="step-num">5</div><div><strong>Utforska modellen själv.</strong> Ladda upp egna texter, skriv egna prompter och undersök modellens möjligheter och begränsningar.</div></div>
     </div>
-    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta →</button>
+    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <p class="overlay-tip">Tips: håll muspekaren över <strong>understrukna ord</strong> för förklaringar, och tryck på korten i sidopanelen för fördjupning.</p>
   </div>
 </div>
 
@@ -1483,6 +1548,86 @@ function renderGlossary(){
     Object.values(GLOSSARY).map(g => `<div class="gloss-item"><b>${g.t}</b> – ${g.d}</div>`).join('') +
     '</div>';
 }
+
+// ════════════════════════════════════════════════════════════
+//  Glaskort (concept cards)
+// ════════════════════════════════════════════════════════════
+const CONCEPTS = {
+  begrepp: {
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+    title:'Begreppslista',
+    def:'<div class="cc-lead">Alla begrepp i labbet, kort förklarade.</div><div class="gloss-list">' +
+        Object.values(GLOSSARY).map(g => `<div class="gloss-item"><b>${g.t}</b> – ${g.d}</div>`).join('') +
+        '</div>'
+  },
+  chatgpt: {
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3M8.5 10h.01M15.5 10h.01"/></svg>',
+    title:'Modellen &amp; ChatGPT',
+    def:'<div class="cc-lead">Den här minimodellen och ChatGPT bygger på <strong>samma grundprincip</strong> – att förutsäga nästa ord. Skillnaden är hur sannolikheterna räknas fram.</div>'
+      + '<div class="cc-sub green">Likheter</div>'
+      + '<ul class="cc-list green">'
+      + '<li>Båda förutsäger nästa ord utifrån orden som kommit tidigare.</li>'
+      + '<li>Båda beräknar en <em>sannolikhet</em> för många möjliga nästa ord och väljer sedan ett av dem.</li>'
+      + '<li><em>Temperaturen</em> påverkar ordvalet på samma sätt i båda.</li>'
+      + '</ul>'
+      + '<div class="cc-sub orange">Skillnader</div>'
+      + '<ul class="cc-list orange">'
+      + '<li>Den här modellen använder en <strong>tabell</strong> med exakta ordföljder. ChatGPT använder ett <em>neuralt nätverk</em> med miljarder parametrar.</li>'
+      + '<li>ChatGPT tar hänsyn till <strong>tusentals</strong> tidigare ord, inte bara 1–3.</li>'
+      + '<li>ChatGPT har tränats på en enorm mängd text från många källor.</li>'
+      + '<li>ChatGPT kan <em>generalisera</em> till mönster den inte sett exakt. Tabellen kan bara ordföljder den redan mött.</li>'
+      + '</ul>'
+  }
+};
+function openConcept(id, ev){
+  if(ev) ev.stopPropagation();
+  const c = CONCEPTS[id]; if(!c) return;
+  const card = document.getElementById('conceptCard');
+  document.getElementById('conceptIcon').innerHTML = c.icon;
+  document.getElementById('conceptTitle').innerHTML = c.title;
+  document.getElementById('conceptDef').innerHTML = c.def;
+  let dx = 0, dy = 0;
+  const el = ev && ev.currentTarget;
+  if(el && el.getBoundingClientRect){
+    const r = el.getBoundingClientRect();
+    dx = (r.left + r.width/2) - window.innerWidth/2;
+    dy = (r.top + r.height/2) - window.innerHeight/2;
+  }
+  card.classList.remove('show');
+  card.style.transition = 'none';
+  card.style.setProperty('--dx', dx + 'px');
+  card.style.setProperty('--dy', dy + 'px');
+  void card.offsetHeight;
+  card.style.transition = '';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(() => requestAnimationFrame(() => card.classList.add('show')));
+}
+function closeConcept(){
+  document.getElementById('conceptCard').classList.remove('show');
+  document.getElementById('conceptBackdrop').classList.remove('show');
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeConcept(); });
+(function initCardTilt(){
+  const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const el = document.getElementById('conceptCardInner');
+  if(!el || RM) return;
+  const MAX_TILT = 5;
+  el.addEventListener('mousemove', e => {
+    const r = el.getBoundingClientRect();
+    const px = (e.clientX - r.left)/r.width, py = (e.clientY - r.top)/r.height;
+    const rx = (0.5 - py)*MAX_TILT*2, ry = (px - 0.5)*MAX_TILT*2;
+    el.style.setProperty('--mx', (px*100)+'%');
+    el.style.setProperty('--my', (py*100)+'%');
+    el.style.transform = 'perspective(1000px) rotateX('+rx+'deg) rotateY('+ry+'deg)';
+    const sx = (px-0.5)*22, sy = (py-0.5)*22;
+    el.style.boxShadow = (-sx)+'px '+(20-sy)+'px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset';
+  });
+  el.addEventListener('mouseleave', () => {
+    el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    el.style.setProperty('--mx','50%'); el.style.setProperty('--my','50%');
+    el.style.boxShadow = '';
+  });
+})();
 
 // ════════════════════════════════════════════════════════════
 //  Start: bygg den längre texten direkt så allt är levande
