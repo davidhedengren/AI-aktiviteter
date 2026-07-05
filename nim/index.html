@@ -200,6 +200,36 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;}
 .concept-illus{background:rgba(0,0,0,.25);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;transform:translateZ(10px);}
 .concept-illus svg{width:100%;height:auto;max-height:90px;}
+
+/* ── Tränings-teater i glaskortet ── */
+.concept-card.training-card{width:470px;}
+.concept-card.training-card .concept-card-inner{max-height:92vh;overflow-y:auto;}
+.concept-card.training-card #conceptIllus{display:none;}
+.concept-card.training-card .concept-def{margin-bottom:0;font-size:1em;}
+.tt{display:flex;flex-direction:column;gap:14px;text-align:left;}
+.tt-canvas-wrap{position:relative;width:100%;height:158px;border-radius:var(--r-md);overflow:hidden;background:radial-gradient(ellipse 75% 95% at 50% 45%,rgba(24,30,54,.7),rgba(9,11,20,.35));border:1px solid var(--border-soft);box-shadow:inset 0 1px 0 rgba(255,255,255,.04);}
+.tt-canvas-wrap canvas{width:100%;height:100%;display:block;}
+.tt-status{display:flex;flex-direction:column;gap:7px;}
+.tt-line{display:flex;align-items:center;gap:9px;font-size:.84em;color:var(--subtle);font-weight:500;opacity:0;transform:translateY(6px);transition:opacity .4s var(--ease-out),transform .4s var(--ease-out);}
+.tt-line.show{opacity:1;transform:none;}
+.tt-line .tt-dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;box-shadow:0 0 8px var(--accent2);transition:background .3s,box-shadow .3s;}
+.tt-line.done .tt-dot{background:var(--good);box-shadow:0 0 8px var(--good);}
+.tt-line .tt-check{color:var(--good);font-weight:700;}
+.tt-rail{width:100%;height:5px;border-radius:999px;background:var(--surface2);overflow:hidden;}
+.tt-rail i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--good));transition:width .18s var(--ease-out);box-shadow:0 0 12px rgba(52,199,89,.4);}
+.tt-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.tt-count{font-family:'JetBrains Mono',monospace;font-size:.82em;color:var(--dim);}
+.tt-count #ttGames{font-size:1.5em;font-weight:700;color:var(--text);}
+.tt-count-l{margin-left:3px;}
+.tt-skip{background:none;border:1px solid var(--border);border-radius:999px;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:.76em;font-weight:600;padding:6px 13px;cursor:pointer;transition:.18s var(--ease-out);}
+.tt-skip:hover{color:var(--text);border-color:var(--dim);background:rgba(255,255,255,.04);}
+.tt-done{display:none;flex-direction:column;gap:12px;animation:ttDoneIn .45s var(--ease-spring);}
+.tt-done.show{display:flex;}
+@keyframes ttDoneIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.tt-done-msg{font-size:.92em;line-height:1.5;color:var(--subtle);text-align:center;}
+.tt-done-msg strong{color:var(--text);}
+.tt-done-btns{display:flex;gap:8px;}
+.tt-done-btns .btn{flex:1;}
 </style>
 </head>
 <body>
@@ -421,48 +451,33 @@ function updateConvergeUI(conv){
 }
 
 function startTraining(){
+  if(trainAnimActive)return;
   totalSticks=+document.getElementById('sticksSel').value;
   maxTake=+document.getElementById('maxTakeSel').value;
   const episodes=+document.getElementById('epSel').value;
   Q={};trained=false;trainPaused=false;
-  document.getElementById('trainBtns').innerHTML=
-    '<button class="btn warn" onclick="pauseTraining()">⏸ Pausa</button>'+
-    '<button class="btn" onclick="stopTraining()" style="flex:0;">✕ Avbryt</button>';
-  document.getElementById('trainProg').style.display='block';
+  document.getElementById('trainProg').style.display='none';
   document.getElementById('trainDone').style.display='none';
   document.getElementById('convergeMsg').className='converge-msg';
-  document.getElementById('stMax').textContent=episodes;
   renderQHeaders();
+  // Träna den riktiga modellen direkt (snabbt, osynligt) – teatern visualiserar processen
+  const gamesPlayed=runRealTraining(episodes);
+  openTrainingCard(episodes, gamesPlayed);
+}
 
+// Tränar hela modellen synkront och returnerar antal spelade partier (med tidig konvergens-stopp)
+function runRealTraining(episodes){
   const alpha=0.03;let done=0,convergenceCount=0;
-  const spd={batch:3,delay:60};
-
-  function run(){
-    if(trainPaused)return;
-    for(let i=0;i<spd.batch&&done<episodes;i++,done++){
-      const eps=Math.max(0.05,1-done/Math.max(episodes*0.7,200));
-      trainEpisode(eps,alpha);
-    }
-    const pct=done/episodes*100;
-    const epsVal=Math.min(100,Math.max(5,Math.round((1-done/Math.max(episodes*0.7,200))*100)));
-    const expl=100-epsVal;
-    document.getElementById('pbFill').style.width=pct+'%';
-    document.getElementById('stEp').textContent=done;
-    document.getElementById('stEps').textContent=epsVal;
-    document.getElementById('stExpl').textContent=expl;
-    renderQTable(-1);
+  for(;done<episodes;done++){
+    const eps=Math.max(0.05,1-done/Math.max(episodes*0.7,200));
+    trainEpisode(eps,alpha);
     if(done>=15&&done%15===0){
       const conv=checkConvergence();
-      updateConvergeUI(conv);
-      if(conv.goldFrames>=conv.total&&conv.total>0){
-        convergenceCount++;
-        if(convergenceCount>=3){done=episodes;}
-      }else{convergenceCount=0;}
+      if(conv.goldFrames>=conv.total&&conv.total>0){convergenceCount++;if(convergenceCount>=3){done++;break;}}
+      else convergenceCount=0;
     }
-    if(done<episodes){trainTimer=setTimeout(run,spd.delay);return;}
-    finishTraining(done, episodes);
   }
-  run();
+  return done;
 }
 
 function pauseTraining(){
@@ -733,13 +748,275 @@ function openConcept(id,ev){
   document.getElementById('conceptBackdrop').classList.add('show');
   requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
 }
-function closeConcept(){document.getElementById('conceptCard').classList.remove('show');document.getElementById('conceptBackdrop').classList.remove('show');}
+function closeConcept(){
+  const card=document.getElementById('conceptCard');
+  const wasTraining=card.classList.contains('training-card');
+  if(trainRAF){cancelAnimationFrame(trainRAF);trainRAF=null;}
+  trainAnimActive=false;
+  if(wasTraining && !ttFinished){ ttFinished=true; finishTraining(ttGamesPlayed, ttEpisodes); }
+  card.classList.remove('show','training-card');
+  document.getElementById('conceptBackdrop').classList.remove('show');
+}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
 function toggleQTable(){
   const right=document.querySelector('.right');const app=document.querySelector('.app');const btn=document.getElementById('qtoggleBtn');
   const hidden=right.classList.toggle('hidden');app.classList.toggle('no-qtable');
   btn.classList.toggle('on',!hidden);btn.textContent=hidden?'📊 Visa Q-tabell':'📊 Dölj Q-tabell';
 }
+
+/* ═══ TRÄNINGS-TEATER (självspel i glaskort) ═══ */
+let trainRAF=null, trainAnimActive=false, ttEpisodes=0, ttGamesPlayed=0, ttFinished=false;
+const BRAIN_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0"/></svg>';
+const TRAIN_THEATER_HTML=
+  '<div class="tt">'
+  + '<div class="tt-canvas-wrap"><canvas id="ttCanvas"></canvas></div>'
+  + '<div class="tt-status" id="ttStatus"></div>'
+  + '<div class="tt-rail"><i id="ttRail"></i></div>'
+  + '<div class="tt-foot"><div class="tt-count"><span id="ttGames">0</span> <span class="tt-count-l">spel spelade</span></div>'
+  + '<button class="tt-skip" id="ttSkip" onclick="skipTrainTheater()">Hoppa över ▸</button></div>'
+  + '<div class="tt-done" id="ttDone"><div class="tt-done-msg" id="ttDoneMsg"></div>'
+  + '<div class="tt-done-btns"><button class="btn grn" onclick="playFromCard()">🎮 Spela mot AI:n</button>'
+  + '<button class="btn" onclick="closeConcept()">Stäng</button></div></div>'
+  + '</div>';
+const easeOut=t=>1-Math.pow(1-t,3);
+
+function openTrainingCard(episodes, gamesPlayed){
+  ttEpisodes=episodes; ttGamesPlayed=gamesPlayed; ttFinished=false;
+  const card=document.getElementById('conceptCard');
+  card.classList.add('training-card');
+  document.getElementById('conceptIcon').innerHTML=BRAIN_ICON;
+  document.getElementById('conceptTitle').textContent='AI:n tränar mot sig själv';
+  document.getElementById('conceptDef').innerHTML=TRAIN_THEATER_HTML;
+  document.getElementById('conceptIllus').innerHTML='';
+  const btn=document.getElementById('trainBtn');
+  const r=btn?btn.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};
+  const bx=r.left+r.width/2, by=r.top+r.height/2, cx=innerWidth/2, cy=innerHeight/2;
+  card.classList.remove('show');
+  card.style.transition='none';
+  card.style.setProperty('--dx',(bx-cx)+'px');
+  card.style.setProperty('--dy',(by-cy)+'px');
+  void card.offsetHeight;
+  card.style.transition='';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    card.classList.add('show');
+    setTimeout(runTrainTheater, 160);
+  }));
+}
+
+function runTrainTheater(){
+  const canvas=document.getElementById('ttCanvas'); if(!canvas)return;
+  const wrap=canvas.parentElement;
+  const dpr=Math.min(2,window.devicePixelRatio||1);
+  let W=wrap.clientWidth, H=wrap.clientHeight;
+  if(W<10)W=418; if(H<10)H=158;
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  const ctx=canvas.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0);
+
+  trainAnimActive=true;
+  const t0=performance.now();
+  const DURATION=Math.min(5200, 2600+ttEpisodes*1.4);
+
+  const STAT=[
+    {t:'AI:n möter en kopia av sig själv', at:0},
+    {t:'Provar drag och ser vad som leder till vinst', at:.27},
+    {t:'Justerar Q-värden efter varje parti', at:.55},
+    {t:'Låser in den vinnande strategin', at:.82},
+  ];
+  const statusWrap=document.getElementById('ttStatus'); statusWrap.innerHTML='';
+  const lines=STAT.map(s=>{const el=document.createElement('div');el.className='tt-line';el.innerHTML='<span class="tt-dot"></span><span>'+s.t+'</span>';statusWrap.appendChild(el);return el;});
+
+  const MEMN=Math.min(Math.max(totalSticks,6),12);
+  const mem=new Array(MEMN).fill(0);
+
+  const A='#4d80ff', B='#c084fc', GOOD='#34c759', BAD='#ef5b5b';
+  const maxDisp=Math.min(totalSticks,12);
+  const padX=54;
+  const rowY=H*0.42;
+  let game=null, particles=[], gamesShown=0, nextMoveAt=t0+420, flash=null;
+
+  function newGame(){
+    return {left:maxDisp, turn:Math.random()<.5?0:1, over:false, sticks:Array.from({length:maxDisp},()=>({alive:true, t:1, vy:0}))};
+  }
+  game=newGame();
+
+  function stickX(i){
+    const usable=W-padX*2, gap=usable/Math.max(1,maxDisp-1);
+    return padX + i*gap;
+  }
+  function memX(i){
+    const usable=W-padX*2, gap=usable/Math.max(1,MEMN-1);
+    return padX + i*gap;
+  }
+  function roundRect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+
+  function doMove(now){
+    if(!game||game.over)return;
+    const take=1+Math.floor(Math.random()*Math.min(maxTake,game.left));
+    let removed=0;
+    for(let i=maxDisp-1;i>=0 && removed<take;i--){
+      if(game.sticks[i].alive){
+        game.sticks[i].alive=false; game.sticks[i].t=1; game.sticks[i].vy=-0.6-Math.random()*0.5;
+        const sx=stickX(i);
+        for(let p=0;p<5;p++)particles.push({x:sx,y:rowY,vx:(Math.random()-0.5)*1.4,vy:-0.4-Math.random()*1.2,life:1,col:game.turn?B:A,r:1.6+Math.random()*1.6});
+        removed++;
+      }
+    }
+    game.left-=removed;
+    if(game.left<=0){
+      game.over=true;
+      const loser=game.turn, winner=1-loser;
+      flash={loser,winner,born:now};
+      const mi=Math.floor(Math.random()*MEMN);
+      mem[mi]=Math.min(1,mem[mi]+0.55+Math.random()*0.3);
+      const mx=memX(mi), my=H-14;
+      for(let p=0;p<8;p++)particles.push({x:W*0.5,y:rowY,vx:(mx-W*0.5)/40+(Math.random()-0.5)*0.3,vy:(my-rowY)/40,life:1.4,col:GOOD,r:1.8,toMem:true});
+      gamesShown++;
+      nextMoveAt=now+520;
+    }else{
+      game.turn=1-game.turn;
+    }
+  }
+
+  function drawPod(x,y,col,active,pulse){
+    ctx.save();
+    if(active){ctx.shadowColor=col;ctx.shadowBlur=18*(0.6+0.4*pulse);}
+    ctx.fillStyle='rgba(16,20,36,0.96)';
+    ctx.strokeStyle=col; ctx.lineWidth=active?2.4:1.6; ctx.globalAlpha=active?1:0.7;
+    ctx.beginPath();ctx.arc(x,y,17,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.restore();
+    ctx.fillStyle=active?col:'rgba(176,190,220,0.75)';
+    ctx.font='700 10px "DM Sans"';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText('AI', x, y+0.5);
+  }
+
+  function draw(now){
+    ctx.clearRect(0,0,W,H);
+
+    if(!game.over){
+      const activeX = game.turn? W-padX*0.62 : padX*0.62;
+      ctx.strokeStyle=game.turn?'rgba(192,132,252,0.22)':'rgba(77,128,255,0.22)';
+      ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(activeX, H*0.5);ctx.quadraticCurveTo(W*0.5, rowY-30, W*0.5, rowY);ctx.stroke();
+    }
+
+    for(let i=0;i<maxDisp;i++){
+      const s=game.sticks[i]; const x=stickX(i); const h=48, w=7;
+      if(s.alive){
+        ctx.save();ctx.shadowColor='rgba(245,216,122,0.35)';ctx.shadowBlur=6;ctx.fillStyle='#f5d87a';
+        roundRect(ctx, x-w/2, rowY-h/2, w, h, 3); ctx.fill();ctx.restore();
+      }else if(s.t>0){
+        s.t-=0.045; s.vy+=0.02;
+        const yy=rowY - h/2 + (1-s.t)*10 + s.vy*14;
+        ctx.save();ctx.globalAlpha=Math.max(0,s.t);ctx.fillStyle='#f5d87a';
+        const sc=0.6+0.4*s.t;
+        roundRect(ctx, x-w/2, yy, w, h*sc, 3); ctx.fill();ctx.restore();
+      }
+    }
+
+    const pulse=0.5+0.5*Math.sin(now/260);
+    drawPod(padX*0.62, H*0.5, A, !game.over && game.turn===0, pulse);
+    drawPod(W-padX*0.62, H*0.5, B, !game.over && game.turn===1, pulse);
+
+    if(flash){
+      const a=Math.max(0,1-(now-flash.born)/650);
+      if(a<=0){ flash=null; }
+      else{
+        const lx = flash.loser? W-padX*0.62 : padX*0.62;
+        const wx = flash.winner? W-padX*0.62 : padX*0.62;
+        ctx.save();
+        ctx.globalAlpha=a*0.9; ctx.strokeStyle=BAD; ctx.lineWidth=2.5;
+        ctx.beginPath();ctx.arc(lx,H*0.5,22,0,Math.PI*2);ctx.stroke();
+        ctx.globalAlpha=a; ctx.strokeStyle=GOOD; ctx.lineWidth=2.5;
+        ctx.beginPath();ctx.arc(wx,H*0.5,22+(1-a)*6,0,Math.PI*2);ctx.stroke();
+        ctx.restore();
+      }
+    }
+
+    particles=particles.filter(p=>{
+      p.x+=p.vx; p.y+=p.vy; if(!p.toMem)p.vy+=0.03; p.life-=0.03;
+      if(p.life<=0)return false;
+      ctx.save();ctx.globalAlpha=Math.max(0,Math.min(1,p.life));
+      ctx.shadowColor=p.col;ctx.shadowBlur=8;ctx.fillStyle=p.col;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();ctx.restore();
+      return true;
+    });
+
+    const my=H-13;
+    ctx.font='600 8px "DM Sans"';ctx.textAlign='center';ctx.fillStyle='rgba(176,190,220,0.5)';
+    ctx.fillText('minne (Q-tabell)', W*0.5, H-2);
+    for(let i=0;i<MEMN;i++){
+      const x=memX(i), warm=mem[i];
+      const r=Math.round(30+warm*22), g=Math.round(37+warm*162), b=Math.round(66+warm*23);
+      ctx.save();
+      if(warm>0.05){ctx.shadowColor='rgba(52,199,89,'+(warm*0.6)+')';ctx.shadowBlur=8*warm;}
+      ctx.fillStyle='rgba('+r+','+g+','+b+','+(0.35+warm*0.55)+')';
+      roundRect(ctx, x-6, my-6, 12, 12, 3); ctx.fill();
+      ctx.restore();
+      mem[i]=Math.max(0,warm-0.0009);
+    }
+  }
+
+  function frame(now){
+    const frac=Math.min(1,(now-t0)/DURATION);
+    STAT.forEach((s,i)=>{
+      if(frac>=s.at){
+        if(!lines[i].classList.contains('show'))lines[i].classList.add('show');
+        if(i>0&&!lines[i-1].classList.contains('done')){
+          lines[i-1].classList.add('done');
+          lines[i-1].querySelector('span:last-child').innerHTML=STAT[i-1].t+' <span class="tt-check">✓</span>';
+        }
+      }
+    });
+    const railEl=document.getElementById('ttRail'); if(railEl)railEl.style.width=(frac*100)+'%';
+    const gEl=document.getElementById('ttGames'); if(gEl)gEl.textContent=Math.round(easeOut(frac)*ttGamesPlayed);
+
+    if(!game.over && now>=nextMoveAt){
+      doMove(now);
+      if(!game.over) nextMoveAt=now + Math.max(90, 300 - frac*170);
+    }else if(game.over && now>=nextMoveAt){
+      game=newGame();
+      nextMoveAt=now + 120;
+    }
+
+    draw(now);
+
+    if(frac<1 && trainAnimActive){ trainRAF=requestAnimationFrame(frame); }
+    else finishTheater();
+  }
+  trainRAF=requestAnimationFrame(frame);
+  setTimeout(()=>{ if(trainAnimActive)finishTheater(); }, DURATION+1400);
+}
+
+function skipTrainTheater(){
+  if(trainRAF){cancelAnimationFrame(trainRAF);trainRAF=null;}
+  finishTheater();
+}
+
+function finishTheater(){
+  if(ttFinished)return; ttFinished=true;
+  if(trainRAF){cancelAnimationFrame(trainRAF);trainRAF=null;}
+  trainAnimActive=false;
+  document.querySelectorAll('#ttStatus .tt-line').forEach(el=>el.classList.add('show','done'));
+  const rail=document.getElementById('ttRail'); if(rail)rail.style.width='100%';
+  const gEl=document.getElementById('ttGames'); if(gEl)gEl.textContent=ttGamesPlayed;
+  const skip=document.getElementById('ttSkip'); if(skip)skip.style.display='none';
+
+  finishTraining(ttGamesPlayed, ttEpisodes);
+
+  const conv=checkConvergence();
+  const total=conv.total, goldFrames=conv.goldFrames;
+  let msg;
+  if(goldFrames>=total&&total>0) msg='✅ <strong>AI:n knäckte spelet!</strong> Den hittade den optimala strategin på '+ttGamesPlayed+' spel.';
+  else if(goldFrames>=total*0.7) msg='🎯 <strong>Nästan optimal.</strong> Träna gärna fler spel för att finslipa de sista lägena.';
+  else if(goldFrames>=1) msg='📈 <strong>AI:n lär sig.</strong> Den behärskar flera lägen – fler spel ger säkrare strategi.';
+  else msg='🎲 <strong>På gång.</strong> Öka antalet träningsspel så hittar AI:n mönstret.';
+  const dm=document.getElementById('ttDoneMsg'); if(dm)dm.innerHTML=msg;
+  const done=document.getElementById('ttDone'); if(done)done.classList.add('show');
+}
+
+function playFromCard(){ closeConcept(); goPhase('play'); }
+
 (function initCardTilt(){
   const el=document.getElementById('conceptCardInner');if(!el)return;
   const MAX_TILT=7;
