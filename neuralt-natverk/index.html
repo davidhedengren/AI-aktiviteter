@@ -165,7 +165,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .narr .nf{font-family:'JetBrains Mono',monospace;color:var(--gold);font-size:.86em;margin:4px 0;}
 .narr .nr{color:var(--green);font-weight:700;}.narr .ne{color:var(--text);font-size:.87em;}
 
-.train-msg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(180deg,rgba(24,28,48,.94),rgba(15,18,32,.97));border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 30px;text-align:center;z-index:10;display:none;max-width:420px;width:90%;box-shadow:0 30px 80px rgba(0,0,0,.6);}
+.train-msg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(180deg,rgba(24,28,48,.72),rgba(15,18,32,.75));backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 30px;text-align:center;z-index:10;display:none;max-width:420px;width:90%;box-shadow:0 30px 80px rgba(0,0,0,.6);}
 .train-msg.show{display:block;animation:fadeIn .35s var(--ease-spring);}
 .train-msg .tm-icon{width:38px;height:38px;margin:0 auto 10px;color:var(--accent2);}
 .train-msg .tm-icon.ok{color:var(--green);}
@@ -182,6 +182,19 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .tdash-cell.wide{grid-column:1/-1;}
 .tdash-bar{height:5px;border-radius:3px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:6px;}
 .tdash-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;transition:width .15s linear;}
+
+/* ── living training canvas (samma animation/glaskort som i bias-labbet) ── */
+.train-stage{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:14px;}
+.train-canvas-wrap{width:100%;max-width:380px;height:150px;position:relative;border-radius:var(--r-md);overflow:hidden;background:radial-gradient(ellipse 70% 90% at 50% 50%,rgba(20,26,48,.6),rgba(9,11,20,.3));border:1px solid var(--border-soft);}
+.train-canvas-wrap canvas{width:100%;height:100%;display:block;}
+.train-progress-rail{width:100%;max-width:340px;height:5px;border-radius:999px;background:var(--surface2);overflow:hidden;}
+.train-progress-rail i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .2s var(--ease-out);}
+.train-status{min-height:26px;display:flex;flex-direction:column;align-items:center;gap:7px;width:100%;max-width:340px;}
+.train-status-line{font-size:.8em;color:var(--dim);display:flex;align-items:center;gap:9px;opacity:0;transform:translateY(6px);transition:opacity .4s var(--ease-out),transform .4s var(--ease-out);font-weight:500;}
+.train-status-line.show{opacity:1;transform:none;}
+.train-status-line .tsl-dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;box-shadow:0 0 8px var(--accent2);}
+.train-status-line.done .tsl-dot{background:var(--green);box-shadow:0 0 8px var(--green);}
+.train-status-line .tsl-check{color:var(--green);font-weight:700;}
 
 .tooltip{position:fixed;background:var(--surface-solid);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:.78em;color:var(--text);pointer-events:none;z-index:50;display:none;font-family:'JetBrains Mono',monospace;box-shadow:0 4px 16px rgba(0,0,0,.5);}.tooltip.show{display:block;}
 
@@ -378,17 +391,83 @@ function snapVals(){return JSON.parse(JSON.stringify(vals));}
 function forwardFull(){const inp=getIV();for(let i=0;i<layers[0];i++)vals[0][i]={raw:inp[i],act:inp[i],computed:true};for(let l=1;l<layers.length;l++)for(let j=0;j<layers[l];j++){let s=B[l-1][j];for(let i=0;i<layers[l-1];i++)s+=W[l-1][j][i]*vals[l-1][i].act;vals[l][j]={raw:s,act:act_(s,l),computed:true};}stepIdx=stepQueue.length;}
 function genData(n){const av=activeVars(),nI=av.length,xs=[],ys=[];if(curSc==='gym'||curSc==='exam'){let ja=0,nej=0,t=Math.floor(n/2),guard=0;while((ja<t||nej<t)&&guard<n*20){guard++;const x=[];for(let j=0;j<nI;j++)x.push(Math.round(Math.random()*100)/100);const y=targetFnNoisy(x);if(y===1&&ja<t){xs.push(x);ys.push(y);ja++;}else if(y===0&&nej<t){xs.push(x);ys.push(y);nej++;}}}else{for(let i=0;i<n;i++){const x=[];for(let j=0;j<nI;j++)x.push(Math.round(Math.random()*100)/100);xs.push(x);ys.push(targetFnNoisy(x));}}return{xs,ys};}
 function trainBatch(){const bSz=curSc==='gym'?100:30;const d=genData(bSz);const lr=curSc==='gym'?0.15:0.8;let tl=0;if(!savedTrainData)savedTrainData=genData(200);for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++)for(let i=0;i<W[l][j].length;i++)wDeltas[l][j][i]=0;for(let s=0;s<d.xs.length;s++){const a=[d.xs[s].slice()];let c=d.xs[s].slice();for(let l=0;l<W.length;l++){const nx=[];for(let j=0;j<W[l].length;j++){let sm=B[l][j];for(let i=0;i<c.length;i++)sm+=W[l][j][i]*c[i];nx.push(act_(sm,l+1));}c=nx;a.push(nx);}const o=a[a.length-1][0],t=d.ys[s],e=o-t;tl+=e*e;const dl=[];for(let l=0;l<W.length;l++)dl.push(new Array(W[l].length).fill(0));dl[W.length-1][0]=e*actDeriv(o,layers.length-1);for(let l=W.length-2;l>=0;l--)for(let j=0;j<W[l].length;j++){let sm=0;for(let k=0;k<W[l+1].length;k++)sm+=dl[l+1][k]*W[l+1][k][j];dl[l][j]=sm*actDeriv(a[l+1][j],l+1);}for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++){for(let i=0;i<W[l][j].length;i++){const delta=-lr*dl[l][j]*a[l][i];W[l][j][i]+=delta;wDeltas[l][j][i]+=delta;totalWeightUpdates++;}B[l][j]-=lr*dl[l][j];}}return tl/d.xs.length;}
+/* ── living training canvas (samma animation som i bias-labbet) ── */
+let trainAnimRAF=null,trainAnimParticles=[],trainStatusLines=[];
+const TRAIN_STATUS=[{t:'Läser datasetet…',at:0},{t:'Lär mönster…',at:0.28},{t:'Identifierar samband…',at:0.55},{t:'Optimerar modellen…',at:0.8}];
+function stopTrainAnim(){if(trainAnimRAF)cancelAnimationFrame(trainAnimRAF);trainAnimRAF=null;trainAnimParticles=[];}
+function startTrainAnim(){
+  const canvas=document.getElementById('trainAnimCanvas');if(!canvas)return;
+  const wrap=canvas.parentElement;const dpr=Math.min(2,window.devicePixelRatio||1);
+  let W=wrap.clientWidth,H=wrap.clientHeight;if(W<10||H<10){W=Math.max(W,380);H=Math.max(H,150);}
+  canvas.width=W*dpr;canvas.height=H*dpr;const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);
+  const inX=W*0.16,hidX=W*0.5,outX=W*0.84;
+  const inY=[H*0.3,H*0.5,H*0.7],hidY=[H*0.38,H*0.62],outY=[H*0.5];
+  trainAnimParticles=[];let lastSpawn=0;
+  function spawn(now){trainAnimParticles.push({born:now,targetIn:Math.floor(Math.random()*3),targetHid:Math.floor(Math.random()*2),outcome:null,speed:0.55+Math.random()*0.35});}
+  function draw(now){
+    if(!document.getElementById('trainAnimCanvas')){trainAnimRAF=null;return;}
+    ctx.clearRect(0,0,W,H);
+    ctx.lineWidth=1.4;
+    for(let i=0;i<3;i++)for(let j=0;j<2;j++){ctx.strokeStyle='rgba(122,162,255,0.10)';ctx.beginPath();ctx.moveTo(inX,inY[i]);ctx.lineTo(hidX,hidY[j]);ctx.stroke();}
+    for(let j=0;j<2;j++){ctx.strokeStyle='rgba(122,162,255,0.10)';ctx.beginPath();ctx.moveTo(hidX,hidY[j]);ctx.lineTo(outX,outY[0]);ctx.stroke();}
+    function node(x,y,rad,glow){ctx.save();ctx.shadowColor='rgba(122,162,255,'+glow+')';ctx.shadowBlur=14*glow;ctx.fillStyle='rgba(20,26,48,0.95)';ctx.strokeStyle='rgba(122,162,255,0.5)';ctx.lineWidth=1.6;ctx.beginPath();ctx.arc(x,y,rad,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.restore();}
+    const pulse=0.4+0.3*Math.sin(now/300);
+    inY.forEach(y=>node(inX,y,9,pulse));hidY.forEach(y=>node(hidX,y,11,pulse));node(outX,outY[0],13,0.6+0.4*Math.sin(now/240));
+    if(now-lastSpawn>120){spawn(now);lastSpawn=now;}
+    trainAnimParticles=trainAnimParticles.filter(p=>{
+      const age=(now-p.born)*0.001*p.speed;let px,py,col='#7aa2ff';
+      if(age<1){const t=age,sx=inX,sy=inY[p.targetIn],ex=hidX,ey=hidY[p.targetHid];px=sx+(ex-sx)*t;py=sy+(ey-sy)*t;}
+      else if(age<2){const t=age-1,sx=hidX,sy=hidY[p.targetHid],ex=outX,ey=outY[0];px=sx+(ex-sx)*t;py=sy+(ey-sy)*t;}
+      else if(age<3){const t=age-2;if(p.outcome===null)p.outcome=Math.random()<0.62;const sx=outX,sy=outY[0],ex=W-14,ey=p.outcome?H*0.3:H*0.72;px=sx+(ex-sx)*t;py=sy+(ey-sy)*t;col=p.outcome?'#33d17a':'#ef5b6b';}
+      else return false;
+      ctx.save();ctx.shadowColor=col;ctx.shadowBlur=8;ctx.fillStyle=col;ctx.beginPath();ctx.arc(px,py,age>=2?4.5:3.5,0,Math.PI*2);ctx.fill();ctx.restore();
+      return true;
+    });
+    ctx.font='600 11px "DM Sans"';ctx.textAlign='center';
+    ctx.fillStyle='rgba(51,209,122,0.5)';ctx.fillText('✓',W-14,H*0.3-10);
+    ctx.fillStyle='rgba(239,91,107,0.5)';ctx.fillText('✕',W-14,H*0.72+16);
+    trainAnimRAF=requestAnimationFrame(draw);
+  }
+  trainAnimRAF=requestAnimationFrame(draw);
+}
+function setupTrainStatus(){
+  const wrap=document.getElementById('trainAnimStatus');if(!wrap)return;
+  wrap.innerHTML='';
+  trainStatusLines=TRAIN_STATUS.map(s=>{const el=document.createElement('div');el.className='train-status-line';el.innerHTML=`<span class="tsl-dot"></span><span>${s.t}</span>`;wrap.appendChild(el);return el;});
+}
+function updateTrainStatus(frac){
+  if(!trainStatusLines.length)return;
+  TRAIN_STATUS.forEach((s,i)=>{
+    if(frac>=s.at){
+      if(!trainStatusLines[i].classList.contains('show'))trainStatusLines[i].classList.add('show');
+      if(i>0&&!trainStatusLines[i-1].classList.contains('done')){
+        trainStatusLines[i-1].classList.add('done');
+        trainStatusLines[i-1].querySelector('span:last-child').innerHTML=TRAIN_STATUS[i-1].t.replace('…','')+' <span class="tsl-check">✓</span>';
+      }
+    }
+  });
+  if(frac>=1){
+    const last=trainStatusLines[trainStatusLines.length-1];
+    last.classList.add('done');
+    last.querySelector('span:last-child').innerHTML=TRAIN_STATUS[TRAIN_STATUS.length-1].t.replace('…','')+' <span class="tsl-check">✓</span>';
+  }
+}
 function startTraining(){if(trainTimer||isCalc())return;if(trained&&!confirm('Vill du börja om träningen? Modellen och förlustkurvan försvinner.'))return;epoch=0;trained=false;savedTrainData=null;isTraining=true;lossHistory=[];totalWeightUpdates=0;document.getElementById('lossBox').style.display='none';initW();const tn=layers.reduce((a,b)=>a+b,0),maxE=curSc==='gym'?500:Math.max(40,Math.min(120,tn*12));const msg=document.getElementById('trainMsg');
-  const dashboard=()=>`<div class="tdash"><div class="tdash-cell"><div class="tl">Epok</div><div class="tv" id="tStatEpoch">0 / ${maxE}</div></div><div class="tdash-cell"><div class="tl">Förlust</div><div class="tv" id="tStatLoss" style="color:var(--green)">–</div></div><div class="tdash-cell wide"><div class="tl">Framsteg</div><div class="tdash-bar"><div class="tdash-bar-fill" id="tStatBar" style="width:0%"></div></div></div><div class="tdash-cell wide"><div class="tl">Vikter uppdaterade</div><div class="tv" id="tStatWeights" style="font-size:.95em;color:var(--accent2)">0</div></div></div>`;
-  msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg><div class="tm-title">Tränar nätverket …</div><div class="tm-text">Modellen matas med hundratals exempel och justerar vikterna steg för steg. En <strong>epok</strong> = ett varv genom all träningsdata.</div>${dashboard()}`;
+  stopTrainAnim();
+  const dashboard=()=>`<div class="tdash"><div class="tdash-cell"><div class="tl">Epok</div><div class="tv" id="tStatEpoch">0 / ${maxE}</div></div><div class="tdash-cell"><div class="tl">Förlust</div><div class="tv" id="tStatLoss" style="color:var(--green)">–</div></div><div class="tdash-cell wide"><div class="tl">Vikter uppdaterade</div><div class="tv" id="tStatWeights" style="font-size:.95em;color:var(--accent2)">0</div></div></div>`;
+  msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg><div class="tm-title">Tränar nätverket …</div><div class="tm-text">Modellen matas med hundratals exempel och justerar vikterna steg för steg.</div><div class="train-stage"><div class="train-canvas-wrap"><canvas id="trainAnimCanvas"></canvas></div><div class="train-progress-rail"><i id="trainAnimRail"></i></div><div class="train-status" id="trainAnimStatus"></div></div>${dashboard()}`;
   msg.classList.add('show');
+  setupTrainStatus();
+  requestAnimationFrame(()=>requestAnimationFrame(startTrainAnim));
   trainTimer=setInterval(()=>{const loss=trainBatch();epoch++;lossHistory.push(loss);
+    const frac=Math.min(1,epoch/maxE);
     const eEl=document.getElementById('tStatEpoch');if(eEl)eEl.textContent=`${epoch} / ${maxE}`;
     const lEl=document.getElementById('tStatLoss');if(lEl)lEl.textContent=loss.toFixed(4);
-    const bEl=document.getElementById('tStatBar');if(bEl)bEl.style.width=Math.min(100,(epoch/maxE)*100)+'%';
+    const rEl=document.getElementById('trainAnimRail');if(rEl)rEl.style.width=(frac*100)+'%';
+    updateTrainStatus(frac);
     const wEl=document.getElementById('tStatWeights');if(wEl)wEl.textContent=totalWeightUpdates.toLocaleString('sv-SE');
     document.getElementById('epochVal').textContent=epoch;initV();forwardFull();drawNet();
-    if(epoch>=maxE||loss<(curSc==='gym'?0.03:0.005)){clearInterval(trainTimer);trainTimer=null;trained=true;isTraining=false;document.getElementById('lossVal').textContent=loss.toFixed(4);document.getElementById('lossSparkEnd').textContent=`Epok ${epoch}`;document.getElementById('lossBox').style.display='block';drawLossSpark();msg.innerHTML=`<svg class="tm-icon ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><div class="tm-title">Träningen klar!</div><div class="tm-text">Nätverket gick igenom <strong>${epoch} epoker</strong> och lärde sig vikterna från ${epoch*(curSc==="gym"?60:30)} exempel.</div><div class="tdash"><div class="tdash-cell"><div class="tl">Förlust</div><div class="tv" style="color:var(--green)">${loss.toFixed(4)}</div></div><div class="tdash-cell"><div class="tl">Vikter uppdaterade</div><div class="tv" style="color:var(--accent2)">${totalWeightUpdates.toLocaleString('sv-SE')}</div></div></div><div style="margin-top:14px;display:flex;flex-direction:column;gap:7px"><button class="btn pri" onclick="goDirectToPredict()" style="flex:none;padding:11px 20px">${ICON_TARGET} Förutsäg →</button><button class="btn" onclick="finishTraining()" style="flex:none;padding:9px 16px">${ICON_SEARCH} Utforska nätverket</button><button class="btn" onclick="openDataModal()" style="flex:none;padding:9px 16px">${ICON_CHART} Visa träningsdata (${savedTrainData.xs.length} ex)</button></div>`;}},curSc==='gym'?25:80);}
+    if(epoch>=maxE||loss<(curSc==='gym'?0.03:0.005)){clearInterval(trainTimer);trainTimer=null;trained=true;isTraining=false;stopTrainAnim();document.getElementById('lossVal').textContent=loss.toFixed(4);document.getElementById('lossSparkEnd').textContent=`Epok ${epoch}`;document.getElementById('lossBox').style.display='block';drawLossSpark();msg.innerHTML=`<svg class="tm-icon ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><div class="tm-title">Träningen klar!</div><div class="tm-text">Nätverket gick igenom <strong>${epoch} epoker</strong> och lärde sig vikterna från ${epoch*(curSc==="gym"?60:30)} exempel.</div><div class="tdash"><div class="tdash-cell"><div class="tl">Förlust</div><div class="tv" style="color:var(--green)">${loss.toFixed(4)}</div></div><div class="tdash-cell"><div class="tl">Vikter uppdaterade</div><div class="tv" style="color:var(--accent2)">${totalWeightUpdates.toLocaleString('sv-SE')}</div></div></div><div style="margin-top:14px;display:flex;flex-direction:column;gap:7px"><button class="btn pri" onclick="goDirectToPredict()" style="flex:none;padding:11px 20px">${ICON_TARGET} Förutsäg →</button><button class="btn" onclick="finishTraining()" style="flex:none;padding:9px 16px">${ICON_SEARCH} Utforska nätverket</button><button class="btn" onclick="openDataModal()" style="flex:none;padding:9px 16px">${ICON_CHART} Visa träningsdata (${savedTrainData.xs.length} ex)</button></div>`;}},curSc==='gym'?25:80);}
 function goDirectToPredict(){document.getElementById('trainMsg').classList.remove('show');goPhase('predict');}
 function finishTraining(){document.getElementById('trainMsg').classList.remove('show');goPhase('explore');resetPass();if(seenGuides.has('explore'))return;seenGuides.add('explore');const msg=document.getElementById('trainMsg');msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><div class="tm-title">Utforska nätverket</div><div class="tm-text">Tryck <strong>▶ Nästa</strong> för att beräkna en neuron i taget.<br><br>De <strong style="color:var(--gold)">gula talen</strong> på linjerna visar varje kopplings bidrag.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Jag förstår →</button></div>`;msg.classList.add('show');}
 function showPredictGuide(){if(seenGuides.has('predict'))return;seenGuides.add('predict');const msg=document.getElementById('trainMsg');msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg><div class="tm-title">Gör egna förutsägelser</div><div class="tm-text">Dra i slidrarna för att ändra indatavärdena. Nätverkets svar uppdateras direkt.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Jag förstår →</button></div>`;msg.classList.add('show');}
@@ -441,7 +520,7 @@ function onInp(silent){const av=activeVars();for(let i=0;i<layers[0];i++){const 
 function chN(l,d){if(isCalc())return;if(l===layers.length-1)return;layers[l]=Math.max(1,Math.min(8,layers[l]+d));fullReset();}
 function addLayer(){if(isCalc()||layers.length>=5)return;layers.splice(layers.length-1,0,2);fullReset();}
 function removeLayer(){if(isCalc()||layers.length<=2)return;layers.splice(layers.length-2,1);fullReset();}
-function fullReset(){if(trainTimer){clearInterval(trainTimer);trainTimer=null;}trained=false;isTraining=false;epoch=0;savedTrainData=null;wDeltas=null;lossHistory=[];totalWeightUpdates=0;document.getElementById('trainMsg').classList.remove('show');document.getElementById('lossBox').style.display='none';renderScenarioCards();renderLC();renderVarList();renderIS();initW();initV();if(isCalc()){phase='explore';trained=true;setPhase('explore');}else{setPhase('train');}updateTgt();document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';document.getElementById('epochVal').textContent='0';document.getElementById('narr').innerHTML=isCalc()?'<div class="ne">Tryck <strong>▶ Nästa</strong> för att stega genom nätverket. Aktiveringsfunktion: <strong>ReLU</strong> – negativa värden blir 0.<br><span style="font-size:0.88em;opacity:0.85">💡 Tips: klicka på en <strong style="color:var(--green)">koppling</strong> för att ändra dess vikt, eller på en <strong>neuron</strong> för att ändra dess bias.</span></div>':'<div class="ne">Tryck <strong>Träna modellen</strong> för att börja.</div>';drawNet();}
+function fullReset(){if(trainTimer){clearInterval(trainTimer);trainTimer=null;}stopTrainAnim();trained=false;isTraining=false;epoch=0;savedTrainData=null;wDeltas=null;lossHistory=[];totalWeightUpdates=0;document.getElementById('trainMsg').classList.remove('show');document.getElementById('lossBox').style.display='none';renderScenarioCards();renderLC();renderVarList();renderIS();initW();initV();if(isCalc()){phase='explore';trained=true;setPhase('explore');}else{setPhase('train');}updateTgt();document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';document.getElementById('epochVal').textContent='0';document.getElementById('narr').innerHTML=isCalc()?'<div class="ne">Tryck <strong>▶ Nästa</strong> för att stega genom nätverket. Aktiveringsfunktion: <strong>ReLU</strong> – negativa värden blir 0.<br><span style="font-size:0.88em;opacity:0.85">💡 Tips: klicka på en <strong style="color:var(--green)">koppling</strong> för att ändra dess vikt, eller på en <strong>neuron</strong> för att ändra dess bias.</span></div>':'<div class="ne">Tryck <strong>Träna modellen</strong> för att börja.</div>';drawNet();}
 function setupCv(){const cv=document.getElementById('cv'),p=cv.parentElement,dpr=devicePixelRatio||1,w=p.clientWidth,h=p.clientHeight;cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+'px';cv.style.height=h+'px';const ctx=cv.getContext('2d');ctx.scale(dpr,dpr);return{ctx,w,h};}
 function nPos(w,h){const narrEl=document.getElementById('narr');const overlay=getComputedStyle(narrEl).position==='absolute';const bottomReserve=overlay?(narrEl.offsetHeight+16):10;const nL=layers.length,px=90,py=25,g=(w-2*px)/Math.max(nL-1,1),ps=[];for(let l=0;l<nL;l++){const n=layers[l],x=px+l*g;const avail=h-2*py-bottomReserve;const ng=Math.min(90,avail/(n));const sy=h/2-(n-1)*ng/2;const lp=[];for(let i=0;i<n;i++)lp.push({x,y:sy+i*ng});ps.push(lp);}return ps;}
 function triggerPulse(){pulseStart=performance.now();if(pulseAnim)cancelAnimationFrame(pulseAnim);const loop=()=>{const t=performance.now()-pulseStart;if(t>900){pulseAnim=null;drawNet();return;}drawNet();pulseAnim=requestAnimationFrame(loop);};loop();}
