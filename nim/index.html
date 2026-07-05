@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
@@ -311,10 +311,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       </div>
       <div class="row"><label>Antal träningar</label>
         <select class="nim-sel" id="epSel">
-          <option value="25">25 spel</option>
+          <option value="25" selected>25 spel</option>
           <option value="50">50 spel</option>
           <option value="150">150 spel</option>
-          <option value="500" selected>500 spel</option>
+          <option value="500">500 spel</option>
           <option value="1000">1000 spel</option>
           <option value="2000">2000 spel</option>
         </select>
@@ -333,7 +333,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       </div>
       <div class="converge-msg" id="convergeMsg"></div>
       <div id="trainDone" style="display:none">
-        <button class="btn grn" onclick="goPhase('play')">Spela mot AI:n →</button>
+        <button class="btn grn" onclick="playFromCard()">Spela mot AI:n →</button>
       </div>
     </div>
 
@@ -480,21 +480,6 @@ function startTraining(){
   document.getElementById('convergeMsg').className='converge-msg';
   renderQHeaders();renderQTable(-1);
   openTrainingCard(episodes);   // träningen sker LIVE inuti teatern – Q-tabellen fylls i medan man tittar
-}
-
-// Tränar hela modellen synkront och returnerar antal spelade partier (med tidig konvergens-stopp)
-function runRealTraining(episodes){
-  const alpha=0.4;let done=0,convergenceCount=0;
-  for(;done<episodes;done++){
-    const eps=Math.max(0.12,1-done/Math.max(episodes*0.6,120));
-    trainEpisode(eps,alpha);
-    if(done>=15&&done%15===0){
-      const conv=checkConvergence();
-      if(conv.goldFrames>=conv.total&&conv.total>0){convergenceCount++;if(convergenceCount>=3){done++;break;}}
-      else convergenceCount=0;
-    }
-  }
-  return done;
 }
 
 function pauseTraining(){
@@ -840,11 +825,11 @@ function runTrainTheater(){
 
   trainAnimActive=true;
   const t0=performance.now();
-  const DURATION=Math.min(8500, 5200+ttEpisodes*0.9);
+  const DURATION=Math.min(14000, 5000+ttEpisodes*3.2);
   // Live-tränings-tillstånd (paced till tidslinjen)
-  const ALPHA=0.12, FLOOR=0.12, DECAY=0.9;
+  const ALPHA=0.15, FLOOR=0.12, DECAY_HORIZON=400;   // fast horisont – oberoende av vald spel-budget
   let trainDone=0, convCount=0, converged=false, lastRender=0;
-  const trainEps=()=>Math.max(FLOOR,1-trainDone/Math.max(ttEpisodes*DECAY,120));
+  const trainEps=()=>Math.max(FLOOR,1-trainDone/DECAY_HORIZON);
 
   // Optimalt NIM-drag: lämna antal ≡ 1 (mod maxTake+1); annars godtyckligt
   function smartMove(left){
@@ -1028,7 +1013,7 @@ function runTrainTheater(){
         }
       }
     });
-    const railEl=document.getElementById('ttRail'); if(railEl)railEl.style.width=(Math.min(1,trainDone/ttEpisodes)*100)+'%';
+    const railEl=document.getElementById('ttRail'); if(railEl)railEl.style.width=(converged?100:Math.min(1,trainDone/ttEpisodes)*100)+'%';
     const gEl=document.getElementById('ttGames'); if(gEl)gEl.textContent=trainDone;
 
     // utforska/utnyttja-mätaren speglar den RIKTIGA epsilon som används i träningen
@@ -1054,8 +1039,7 @@ function runTrainTheater(){
 
     draw(now);
 
-    const elapsed=now-t0;
-    const doneNow = (converged && elapsed>2800) || (trainDone>=ttEpisodes) || frac>=1;
+    const doneNow = (trainDone>=ttEpisodes) || frac>=1;
     if(!doneNow && trainAnimActive){ trainRAF=requestAnimationFrame(frame); }
     else finishTheater();
   }
