@@ -9,75 +9,88 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--border-soft:rgba(255,255,255,.06);--text:#e8ecf8;--dim:#9aa6c4;--subtle:#c2cde6;--accent:#4d80ff;--accent2:#6698ff;--accent-dim:rgba(77,128,255,.14);--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--kvinna:#c084fc;--man:#4d80ff;--r-md:14px;--r-lg:20px;--ease-out:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);}
+:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--border-soft:rgba(255,255,255,.06);--text:#e8ecf8;--dim:#9aa6c4;--subtle:#c2cde6;--accent:#4d80ff;--accent2:#7aa2ff;--accent-dim:rgba(77,128,255,.14);--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--kvinna:#c084fc;--man:#4d80ff;--glass:rgba(20,24,42,.55);--r-sm:10px;--r-md:14px;--r-lg:20px;--ease-out:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;font-size:15px;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
-.back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
-.back-link:hover{color:var(--text);border-color:var(--dim);}
-.lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
-.lang-link:hover{color:var(--text);border-color:var(--dim);}
+html{-webkit-font-smoothing:antialiased;}
+body{font-family:'DM Sans',sans-serif;font-size:15px;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;position:relative;overflow-x:hidden;}
+
+/* ambient background */
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-mesh::before{content:'';position:absolute;width:140%;height:140%;top:-20%;left:-20%;
+  background:radial-gradient(ellipse 40% 34% at 18% 16%,rgba(77,128,255,.13),transparent 60%),radial-gradient(ellipse 34% 30% at 84% 82%,rgba(192,132,252,.07),transparent 60%),radial-gradient(ellipse 30% 30% at 72% 10%,rgba(255,216,102,.045),transparent 60%);
+  animation:meshDrift 36s ease-in-out infinite alternate;filter:blur(12px);}
+@keyframes meshDrift{0%{transform:translate(0,0) scale(1);}50%{transform:translate(-2%,2%) scale(1.05);}100%{transform:translate(2%,-1%) scale(1.02);}}
+.bg-noise{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+.back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.02);transition:.2s var(--ease-out);white-space:nowrap;z-index:2;}
+.back-link:hover{color:var(--text);border-color:var(--dim);background:rgba(255,255,255,.05);}
+.lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.02);transition:.2s var(--ease-out);white-space:nowrap;z-index:2;}
+.lang-link:hover{color:var(--text);border-color:var(--dim);background:rgba(255,255,255,.05);}
 .lang-link .flag{font-size:1.05em;line-height:1;}
-.hd{width:100%;text-align:center;padding:12px 160px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
-.hd h1{font-family:'Syne',sans-serif;font-size:1.3em;font-weight:800;letter-spacing:-0.02em;margin-bottom:2px;}
-.hd h1 span{color:var(--accent2);}
-.hd p{color:var(--dim);font-size:0.8em;max-width:640px;margin:0 auto;line-height:1.4;}
-.app{display:grid;grid-template-columns:285px 1fr 300px;max-width:1300px;margin:0 auto;width:100%;flex:1;position:relative;z-index:1;}
-.lp{padding:14px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:13px;}
-.cp{padding:16px 20px;display:flex;flex-direction:column;gap:18px;min-width:0;}
-.rp{padding:14px;border-left:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;gap:12px;}
-.sec-t{font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--dim);margin-bottom:6px;}
-.sec-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
-.sec-head h2{font-size:1em;font-weight:700;}
-.sec-head .sub{font-size:0.76em;color:var(--dim);}
-.sel{font-family:'DM Sans',sans-serif;font-size:0.82em;width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);cursor:pointer;outline:none;}
-.sel:focus{border-color:var(--accent);}
-.btn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.84em;padding:9px 14px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:0.2s;text-align:center;}
-.btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.08);}
-.btn.grn{background:var(--green);border-color:var(--green);color:#090b14;}
-.btn.grn:hover{background:#4ee89e;border-color:#4ee89e;}
-.btn.ghost{color:var(--dim);font-weight:600;}
-.btn.ghost:hover{color:var(--text);}
-.hint{font-size:0.78em;color:var(--dim);line-height:1.5;margin-top:5px;}
-.hint strong{color:var(--text);}
-.var-toggle{display:flex;align-items:center;gap:7px;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);cursor:pointer;transition:0.2s;font-size:0.8em;color:var(--dim);margin-bottom:5px;user-select:none;}
-.var-toggle:hover{border-color:var(--accent);}
-.var-toggle.on{border-color:var(--green);background:rgba(52,199,89,0.08);color:var(--text);}
-.var-toggle.locked{cursor:default;}
-.var-toggle.locked:hover{border-color:var(--green);}
-.var-toggle .vdot{width:9px;height:9px;border-radius:50%;border:2px solid var(--dim);flex-shrink:0;}
-.var-toggle.on .vdot{background:var(--green);border-color:var(--green);}
-.var-toggle .vname{flex:1;font-weight:600;}
-.var-toggle .vlock{font-size:0.85em;opacity:0.55;}
-.coll{border:1px solid var(--border);border-radius:8px;overflow:hidden;}
-.coll-toggle{width:100%;padding:10px 12px;background:var(--surface2);border:none;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:700;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px;}
-.coll-toggle:hover{color:var(--text);}
-.coll-toggle .arr{transition:transform 0.2s;flex-shrink:0;}
-.coll-toggle.open .arr{transform:rotate(180deg);}
-.coll-body{display:none;padding:12px;font-size:0.84em;color:var(--subtle);line-height:1.7;border-top:1px solid var(--border);}
-.coll-body.show{display:block;}
-.coll-body strong{color:var(--text);}
-.coll-body ol{margin:0 0 0 16px;}
-.coll-body li{margin-bottom:9px;}
-.coll-body li:last-child{margin-bottom:0;}
-.coll-body .hl{color:var(--accent);font-weight:600;}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;}
-.sec-head h2{font-size:0.94em;font-weight:700;letter-spacing:-0.01em;}
-.more{font-size:0.78em;}
-.more summary{cursor:pointer;color:var(--dim);font-weight:600;list-style:none;padding:2px 0;transition:color 0.2s;}
-.more summary:hover{color:var(--text);}
-.more summary::before{content:'▸ ';font-size:0.85em;}
-.more[open] summary::before{content:'▾ ';}
-.data-lead{font-size:0.88em;line-height:1.65;color:var(--subtle);}
+
+.hd{width:100%;text-align:center;padding:14px 160px 11px;border-bottom:1px solid var(--border-soft);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.04),transparent);z-index:2;}
+.hd-title-row{display:flex;align-items:center;justify-content:center;gap:9px;}
+.hd-icon{width:21px;height:21px;color:var(--accent2);flex-shrink:0;}
+.hd h1{font-family:'Syne',sans-serif;font-size:1.5em;font-weight:800;letter-spacing:-0.02em;background:linear-gradient(135deg,#eef1fb,var(--accent2) 72%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hd p{color:var(--dim);font-size:0.8em;max-width:640px;margin:4px auto 0;line-height:1.45;}
+
+/* phase wizard */
+.wizard{display:flex;align-items:center;justify-content:center;gap:0;margin:16px auto 0;max-width:640px;position:relative;z-index:1;padding:0 20px;}
+.wz-step{display:flex;align-items:center;gap:8px;}
+.wz-dot{width:30px;height:30px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:.72em;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.4s var(--ease-spring);}
+.wz-label{font-size:.74em;font-weight:600;color:var(--dim);transition:.35s var(--ease-out);white-space:nowrap;}
+.wz-line{width:34px;height:2px;background:var(--border);margin:0 10px;border-radius:2px;position:relative;overflow:hidden;flex-shrink:0;}
+.wz-line::after{content:'';position:absolute;inset:0;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s var(--ease-out);}
+.wz-step.done .wz-line::after,.wz-line.fill::after{width:100%;}
+.wz-step.active .wz-dot{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 0 5px rgba(77,128,255,.16);}
+.wz-step.active .wz-label{color:var(--text);}
+.wz-step.done .wz-dot{background:rgba(52,199,89,.16);border-color:var(--green);color:var(--green);}
+.wz-step.done .wz-label{color:var(--subtle);}
+@media(max-width:680px){.wz-label{display:none;}.wz-line{width:20px;margin:0 5px;}}
+
+.stage-wrap{max-width:900px;margin:0 auto;width:100%;flex:1;position:relative;z-index:1;padding:20px 16px 40px;display:flex;flex-direction:column;gap:14px;}
+
+/* ── Act receipts (collapsed, completed acts) ── */
+.receipt{display:flex;align-items:center;gap:12px;padding:12px 18px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--border-soft);cursor:pointer;transition:.25s var(--ease-out);animation:receiptIn .45s var(--ease-spring);}
+.receipt:hover{border-color:rgba(122,162,255,.4);transform:translateX(2px);}
+@keyframes receiptIn{from{opacity:0;transform:translateY(-6px) scale(.98);}to{opacity:1;transform:none;}}
+.receipt-check{width:22px;height:22px;border-radius:50%;background:rgba(52,199,89,.14);border:1px solid var(--green);color:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.7em;}
+.receipt-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;}
+.receipt-label{font-size:.64em;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);}
+.receipt-summary{font-size:.86em;color:var(--subtle);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.receipt-summary b{color:var(--text);font-weight:600;}
+.receipt-edit{font-size:.7em;color:var(--accent2);font-weight:600;flex-shrink:0;opacity:0;transition:.2s;}
+.receipt:hover .receipt-edit{opacity:1;}
+
+/* ── Act cards (big, active) ── */
+.act{background:var(--glass);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border-soft);border-radius:var(--r-lg);box-shadow:0 20px 50px rgba(0,0,0,.28);overflow:hidden;animation:actIn .55s var(--ease-spring);}
+@keyframes actIn{from{opacity:0;transform:translateY(24px) scale(.985);}to{opacity:1;transform:none;}}
+.act-hd{display:flex;align-items:center;gap:13px;padding:20px 24px 0;}
+.act-badge{width:34px;height:34px;border-radius:11px;background:var(--accent-dim);border:1px solid rgba(122,162,255,.3);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.82em;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.act-titles{flex:1;min-width:0;}
+.act-title{font-family:'Syne',sans-serif;font-size:1.12em;font-weight:800;letter-spacing:-.01em;}
+.act-sub{font-size:.78em;color:var(--dim);margin-top:1px;}
+.act-body{padding:16px 24px 22px;display:flex;flex-direction:column;gap:15px;}
+
+/* data mode segmented control */
+.seg{display:flex;gap:4px;padding:4px;background:var(--surface2);border:1px solid var(--border);border-radius:999px;}
+.seg-btn{flex:1;padding:9px 12px;text-align:center;font-size:.82em;font-weight:600;color:var(--dim);background:transparent;border:none;border-radius:999px;cursor:pointer;transition:.2s var(--ease-out);font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:6px;}
+.seg-btn:hover{color:var(--text);}
+.seg-btn.on{background:var(--accent);color:#fff;box-shadow:0 4px 14px rgba(77,128,255,.3);}
+.seg-btn.on.fair{background:var(--gold);color:#2a2410;box-shadow:0 4px 14px rgba(255,216,102,.28);}
+
+.data-lead{font-size:.9em;line-height:1.65;color:var(--subtle);}
 .data-lead strong{color:var(--text);}
-.gstat-neutral{font-size:0.84em;line-height:1.6;color:var(--dim);background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:11px 13px;}
-.gstat-neutral strong{color:var(--subtle);}
-.await-box{text-align:center;padding:30px 22px;display:flex;flex-direction:column;align-items:center;gap:10px;}
-.await-icon{font-size:2.4em;opacity:0.55;}
-.await-title{font-size:1em;font-weight:700;color:var(--text);}
-.await-text{font-size:0.84em;color:var(--dim);line-height:1.6;max-width:380px;}
-.await-text strong{color:var(--subtle);}
-.gstat{display:flex;flex-direction:column;gap:8px;}
+.data-note{font-size:0.8em;color:var(--dim);line-height:1.6;background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:10px 13px;}
+.data-note strong{color:var(--text);}
+
+.more{font-size:0.82em;}
+.more summary{cursor:pointer;color:var(--accent2);font-weight:600;list-style:none;padding:4px 0;transition:color 0.2s;display:inline-flex;align-items:center;gap:5px;}
+.more summary:hover{color:var(--accent);}
+.more summary::before{content:'▸';font-size:0.85em;transition:transform .2s;}
+.more[open] summary::before{transform:rotate(90deg);}
+
+.gstat{display:flex;flex-direction:column;gap:9px;margin-top:11px;}
 .gstat-row{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;}
 .gstat-label{font-size:0.76em;color:var(--dim);line-height:1.3;}
 .gbars{display:flex;flex-direction:column;gap:3px;}
@@ -86,70 +99,167 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .gbar.k .gwho{color:var(--kvinna);}
 .gbar.m .gwho{color:var(--man);}
 .gtrack{height:11px;background:var(--bg);border-radius:4px;overflow:hidden;}
-.gfill{height:100%;border-radius:4px;transition:width 0.5s;}
+.gfill{height:100%;border-radius:4px;transition:width .7s var(--ease-out);}
 .gbar.k .gfill{background:linear-gradient(90deg,#9b6ee0,var(--kvinna));}
 .gbar.m .gfill{background:linear-gradient(90deg,#3a64d0,var(--man));}
 .gval{font-family:'JetBrains Mono',monospace;font-size:0.74em;font-weight:600;text-align:right;color:var(--subtle);}
-.data-note{font-size:0.78em;color:var(--dim);line-height:1.6;background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:10px 13px;}
-.data-note strong{color:var(--text);}
+.gstat-neutral{font-size:0.84em;line-height:1.6;color:var(--dim);background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:11px 13px;margin-top:11px;}
+.gstat-neutral strong{color:var(--subtle);}
+
+.btn{font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.82em;padding:9px 14px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:.2s var(--ease-out);text-align:center;}
+.btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.08);}
+.btn.ghost{color:var(--dim);font-weight:600;background:transparent;}
+.btn.ghost:hover{color:var(--text);border-color:var(--dim);}
+
+/* variable toggles */
+.var-grid{display:flex;flex-direction:column;gap:7px;}
+.var-toggle{display:flex;align-items:center;gap:9px;padding:11px 13px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);cursor:pointer;transition:.2s var(--ease-out);font-size:0.84em;color:var(--dim);user-select:none;}
+.var-toggle:hover{border-color:var(--accent);}
+.var-toggle.on{border-color:var(--green);background:rgba(52,199,89,0.08);color:var(--text);}
+.var-toggle.locked{cursor:default;opacity:.85;}
+.var-toggle.locked:hover{border-color:var(--green);}
+.var-toggle .vdot{width:15px;height:15px;border-radius:50%;border:2px solid var(--dim);flex-shrink:0;position:relative;transition:.2s;}
+.var-toggle.on .vdot{background:var(--green);border-color:var(--green);}
+.var-toggle.on .vdot::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#04140a;font-size:.62em;font-weight:800;}
+.var-toggle .vname{flex:1;font-weight:600;}
+.var-toggle .vhint{font-size:.82em;opacity:.7;font-weight:500;}
+.var-toggle .vlock{font-size:0.85em;opacity:0.5;}
+
+/* ── Training CTA ── */
+.train-cta{position:relative;overflow:hidden;width:100%;padding:17px 20px;border-radius:14px;border:none;
+  background:linear-gradient(135deg,var(--green),#28b567);color:#04140a;font-family:'DM Sans',sans-serif;font-weight:800;font-size:1.02em;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:transform .25s var(--ease-spring),box-shadow .25s var(--ease-out),background .4s var(--ease-out);
+  box-shadow:0 8px 26px rgba(52,199,89,.25);isolation:isolate;}
+.train-cta:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(52,199,89,.35);}
+.train-cta:active{transform:scale(.98);}
+.train-cta::before{content:'';position:absolute;inset:-3px;border-radius:17px;z-index:-1;filter:blur(11px);
+  background:linear-gradient(135deg,var(--green),#8effc4,var(--green));opacity:0;transition:opacity .4s;animation:ctaPulse 2.6s ease-in-out infinite;}
+.train-cta.idle::before{opacity:.5;}
+@keyframes ctaPulse{0%,100%{opacity:.3;}50%{opacity:.65;}}
+.train-cta-icon{font-size:1.2em;display:inline-block;position:relative;z-index:1;}
+.train-cta-text{position:relative;z-index:1;}
+.train-cta.training{background:linear-gradient(135deg,#1a2340,#131c34);color:var(--text);cursor:default;box-shadow:none;}
+.train-cta.training::before{display:none;}
+.train-cta.done{background:linear-gradient(135deg,var(--green),#28b567);color:#04140a;}
+.train-cta.done .train-cta-icon{animation:checkPop .45s var(--ease-spring);}
+@keyframes checkPop{from{transform:scale(0) rotate(-30deg);}to{transform:scale(1) rotate(0);}}
+
+/* ── Act 3: living training canvas ── */
+.train-stage{display:flex;flex-direction:column;align-items:center;gap:18px;padding:6px 0 2px;}
+.train-canvas-wrap{width:100%;max-width:520px;height:180px;position:relative;border-radius:var(--r-md);overflow:hidden;background:radial-gradient(ellipse 70% 90% at 50% 50%,rgba(20,26,48,.6),rgba(9,11,20,.3));border:1px solid var(--border-soft);}
+.train-canvas-wrap canvas{width:100%;height:100%;display:block;}
+.train-status{min-height:26px;display:flex;flex-direction:column;align-items:center;gap:7px;width:100%;max-width:420px;}
+.train-status-line{font-size:.92em;color:var(--subtle);display:flex;align-items:center;gap:9px;opacity:0;transform:translateY(6px);transition:opacity .4s var(--ease-out),transform .4s var(--ease-out);font-weight:500;}
+.train-status-line.show{opacity:1;transform:none;}
+.train-status-line .tsl-dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;box-shadow:0 0 8px var(--accent2);}
+.train-status-line.done .tsl-dot{background:var(--green);box-shadow:0 0 8px var(--green);}
+.train-status-line .tsl-check{color:var(--green);font-weight:700;}
+.train-progress-rail{width:100%;max-width:420px;height:5px;border-radius:999px;background:var(--surface2);overflow:hidden;}
+.train-progress-rail i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .2s var(--ease-out);}
+
+/* ── Result cards inside Act 4 ── */
+.result-cards{display:flex;flex-direction:column;gap:14px;}
+.rc{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:17px 19px;display:flex;flex-direction:column;gap:12px;transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out),filter .35s,opacity .35s;animation:actIn .5s var(--ease-out) backwards;}
+.rc:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.28);}
+.rc.stale{filter:blur(2.5px) saturate(.6);opacity:.5;pointer-events:none;}
+.rc:nth-child(2){animation-delay:.08s;}
+.rc:nth-child(3){animation-delay:.16s;}
+.rc-head{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;}
+.rc-head h2{font-family:'Syne',sans-serif;font-size:1em;font-weight:800;letter-spacing:-.01em;}
+.rc-head .sub{font-size:0.76em;color:var(--dim);}
+
+/* fairness hero card - gold framed */
+.rc.hero{background:linear-gradient(165deg,rgba(26,31,52,.85),rgba(14,17,30,.9));border:1.5px solid rgba(255,216,102,.4);box-shadow:0 14px 34px rgba(0,0,0,.3),0 0 0 1px rgba(255,216,102,.07) inset,0 0 26px rgba(255,216,102,.13);}
+.rc.hero:hover{box-shadow:0 18px 40px rgba(0,0,0,.36),0 0 0 1px rgba(255,216,102,.1) inset,0 0 30px rgba(255,216,102,.18);}
+.rc.hero .rc-head h2{color:var(--gold);}
+
+.sec-t{font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--dim);}
+.fair-big{display:flex;flex-direction:column;gap:9px;}
+.fbar{display:grid;grid-template-columns:64px 1fr 56px;gap:9px;align-items:center;}
+.fbar .fwho{font-size:0.8em;font-weight:700;}
+.fbar.k .fwho{color:var(--kvinna);}
+.fbar.m .fwho{color:var(--man);}
+.ftrack{height:24px;background:var(--bg);border-radius:6px;overflow:hidden;position:relative;}
+.ffill{height:100%;border-radius:6px;transition:width .8s var(--ease-out);}
+.fbar.k .ffill{background:linear-gradient(90deg,#9b6ee0,var(--kvinna));}
+.fbar.m .ffill{background:linear-gradient(90deg,#3a64d0,var(--man));}
+.fval{font-family:'JetBrains Mono',monospace;font-size:1em;font-weight:800;}
+.gap-pill{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;padding:6px 13px;border-radius:999px;font-size:.82em;font-weight:700;font-family:'JetBrains Mono',monospace;border:1px solid;}
+.gap-pill.pulse{animation:gapPulse 1.6s ease-in-out infinite;}
+@keyframes gapPulse{0%,100%{box-shadow:0 0 0 0 currentColor;}50%{box-shadow:0 0 14px -2px currentColor;}}
+
 .wrow{display:grid;grid-template-columns:130px 1fr 50px;gap:8px;align-items:center;margin-bottom:6px;}
 .wname{font-size:0.78em;color:var(--subtle);font-weight:600;text-align:right;line-height:1.25;}
 .wtrack{position:relative;height:16px;background:var(--bg);border-radius:4px;overflow:hidden;}
 .wtrack::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--border);}
-.wfill{position:absolute;top:2px;bottom:2px;border-radius:3px;transition:all 0.5s;}
+.wfill{position:absolute;top:2px;bottom:2px;border-radius:3px;transition:all .7s var(--ease-out);}
 .wfill.pos{left:50%;background:linear-gradient(90deg,rgba(52,199,89,0.5),var(--green));}
 .wfill.neg{right:50%;background:linear-gradient(270deg,rgba(239,91,91,0.5),var(--red));}
 .wval{font-family:'JetBrains Mono',monospace;font-size:0.76em;font-weight:700;text-align:right;}
 .wval.pos{color:var(--green);}
 .wval.neg{color:var(--red);}
-.model-chip{display:inline-flex;align-items:center;gap:7px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:0.72em;color:var(--dim);font-family:'JetBrains Mono',monospace;}
+.model-chip{display:inline-flex;align-items:center;gap:7px;flex-wrap:wrap;background:var(--surface2);border:1px solid var(--border);border-radius:999px;padding:6px 13px;font-size:0.72em;color:var(--dim);font-family:'JetBrains Mono',monospace;}
 .model-chip strong{color:var(--subtle);font-weight:600;}
-.fair-big{display:flex;flex-direction:column;gap:7px;}
-.fbar{display:grid;grid-template-columns:64px 1fr 56px;gap:9px;align-items:center;}
-.fbar .fwho{font-size:0.78em;font-weight:700;}
-.fbar.k .fwho{color:var(--kvinna);}
-.fbar.m .fwho{color:var(--man);}
-.ftrack{height:22px;background:var(--bg);border-radius:5px;overflow:hidden;}
-.ffill{height:100%;border-radius:5px;transition:width 0.6s;display:flex;align-items:center;}
-.fbar.k .ffill{background:linear-gradient(90deg,#9b6ee0,var(--kvinna));}
-.fbar.m .ffill{background:linear-gradient(90deg,#3a64d0,var(--man));}
-.fval{font-family:'JetBrains Mono',monospace;font-size:0.92em;font-weight:700;}
-.twin-ctrl{display:flex;flex-direction:column;gap:7px;}
-.twin-row{display:grid;grid-template-columns:110px 1fr 36px;gap:9px;align-items:center;font-size:0.78em;color:var(--dim);}
+
+/* ── Twins ── */
+.twin-ctrl{display:flex;flex-direction:column;gap:8px;}
+.twin-row{display:grid;grid-template-columns:120px 1fr 36px;gap:9px;align-items:center;font-size:0.8em;color:var(--dim);}
 .twin-row .tv{font-family:'JetBrains Mono',monospace;color:var(--accent2);font-weight:600;text-align:right;}
 input[type=range]{-webkit-appearance:none;width:100%;height:4px;border-radius:2px;background:var(--surface2);outline:none;accent-color:var(--accent);}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer;}
-.twins{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.twin{border:2px solid var(--border);border-radius:10px;padding:13px 14px;background:var(--surface2);display:flex;flex-direction:column;gap:7px;transition:border-color 0.3s;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 8px rgba(77,128,255,.4);}
+.twins{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:12px;}
+.twin{position:relative;border:2px solid var(--border);border-radius:14px;padding:18px 16px 15px;background:var(--surface2);display:flex;flex-direction:column;gap:7px;overflow:hidden;transition:border-color .3s,transform .3s var(--ease-out);}
+.twin:hover{transform:translateY(-3px);}
 .twin.k{border-color:rgba(192,132,252,0.4);}
 .twin.m{border-color:rgba(77,128,255,0.4);}
-.twin .tname{font-size:0.95em;font-weight:700;display:flex;align-items:center;gap:7px;}
+.twin.flash{animation:twinFlash .5s var(--ease-out);}
+@keyframes twinFlash{0%{box-shadow:0 0 0 0 rgba(77,128,255,0);}30%{box-shadow:0 0 0 5px rgba(77,128,255,.22);}100%{box-shadow:0 0 0 0 rgba(77,128,255,0);}}
+.twin.k.flash{animation-name:twinFlashK;}
+@keyframes twinFlashK{30%{box-shadow:0 0 0 5px rgba(192,132,252,.26);}}
+.twin-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.7em;margin:0 auto 4px;background:var(--surface);border:2px solid;}
+.twin.k .twin-avatar{border-color:var(--kvinna);}
+.twin.m .twin-avatar{border-color:var(--man);}
+.twin .tname{text-align:center;justify-content:center;font-size:1em;font-weight:700;display:flex;align-items:center;gap:7px;}
 .twin.k .tname{color:var(--kvinna);}
 .twin.m .tname{color:var(--man);}
-.twin .tcv{font-size:0.74em;color:var(--dim);line-height:1.7;}
+.twin .tcv{font-size:0.74em;color:var(--dim);line-height:1.7;text-align:center;}
 .twin .tcv b{color:var(--subtle);font-weight:600;}
-.tlucka{display:flex;align-items:center;gap:6px;font-size:0.74em;color:var(--dim);}
+.tlucka{display:flex;align-items:center;justify-content:center;gap:6px;font-size:0.74em;color:var(--dim);}
 .tlucka select{font-family:'JetBrains Mono',monospace;font-size:0.92em;padding:3px 6px;border:1px solid var(--border);border-radius:5px;background:var(--bg);color:var(--text);cursor:pointer;outline:none;}
-.tres{margin-top:auto;border-top:1px solid var(--border);padding-top:8px;text-align:center;}
-.tstamp-wrap{text-align:center;margin:0 0 2px;}
-.tscore{font-family:'JetBrains Mono',monospace;font-size:0.78em;color:var(--subtle);line-height:1.3;}
-.twin-verdict{font-size:0.8em;line-height:1.55;padding:9px 12px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);}
+.tstamp-wrap{text-align:center;margin:2px 0;}
+.tstamp{position:relative;display:inline-block;font-family:'Syne',sans-serif;font-size:.8em;font-weight:800;letter-spacing:.03em;padding:6px 14px;border-radius:5px;border:2px solid;
+  transform:rotate(-6deg);text-transform:uppercase;}
+.tstamp.pop{animation:stampPop .35s var(--ease-spring);}
+@keyframes stampPop{0%{transform:rotate(-6deg) scale(.4);opacity:0;}70%{transform:rotate(-6deg) scale(1.15);}100%{transform:rotate(-6deg) scale(1);opacity:1;}}
+.tstamp.ja{color:var(--green);border-color:var(--green);background:rgba(52,199,89,0.08);}
+.tstamp.nej{color:var(--red);border-color:var(--red);background:rgba(239,91,91,0.08);}
+.twin-scan{position:absolute;left:0;right:0;top:-30%;height:40%;pointer-events:none;opacity:0;z-index:5;background:linear-gradient(180deg,transparent,rgba(122,162,255,.28),transparent);}
+.twin.scanning .twin-scan{opacity:1;animation:scanSweep 0.7s var(--ease-out);}
+@keyframes scanSweep{0%{top:-30%;opacity:0;}15%{opacity:1;}100%{top:110%;opacity:0;}}
+.tscore{font-family:'JetBrains Mono',monospace;font-size:0.76em;color:var(--subtle);line-height:1.3;}
+.twin-row.flash-row .tv{animation:tvFlash .5s var(--ease-out);}
+@keyframes tvFlash{0%{color:var(--gold);}100%{color:var(--accent2);}}
+.twin-verdict{font-size:0.84em;line-height:1.6;padding:11px 14px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface2);color:var(--dim);margin-top:12px;}
 .twin-verdict strong{color:var(--text);}
 .twin-verdict.flag{border-color:rgba(239,91,91,0.35);background:rgba(239,91,91,0.06);color:var(--subtle);}
+
+/* concept pills + card */
 .glossary{display:flex;flex-wrap:wrap;gap:6px;}
+.g-tag{display:inline-flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:0.78em;font-weight:600;padding:6px 12px 6px 9px;border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--dim);cursor:pointer;transition:.2s var(--ease-spring);}
+.g-tag:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px);}
+.g-tag:active{transform:scale(.95);}
+.g-tag .g-ico{width:13px;height:13px;flex-shrink:0;opacity:.8;}
 .concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
 .concept-backdrop.show{opacity:1;pointer-events:auto;}
-.concept-card{position:fixed;top:50%;left:50%;z-index:301;width:340px;max-width:88vw;
-  perspective:1000px;
+.concept-card{position:fixed;top:50%;left:50%;z-index:301;width:340px;max-width:88vw;perspective:1000px;
   transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
   transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .26s var(--ease-out);}
 .concept-card.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
 .concept-card-inner{position:relative;text-align:center;transform-style:preserve-3d;
   background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
   box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;
-  transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
-  transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);
-  will-change:transform;}
+  transform:perspective(1000px) rotateX(0deg) rotateY(0deg);transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);will-change:transform;}
 .concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
   padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,206,84,.15) 45%,transparent 65%);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
@@ -167,16 +277,19 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .concept-def{font-size:.85em;line-height:1.6;color:var(--dim);margin-bottom:16px;position:relative;z-index:3;transform:translateZ(18px);}
 .concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;}
 .concept-illus{background:rgba(0,0,0,.25);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;transform:translateZ(10px);}
+.concept-illus:empty{display:none;}
 .concept-illus svg{width:100%;height:auto;max-height:90px;}
-.g-tag{display:inline-flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:0.78em;font-weight:600;padding:6px 12px 6px 9px;border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--dim);cursor:pointer;transition:.2s var(--ease-spring);}
-.g-tag:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px);}
-.g-tag:active{transform:scale(.95);}
-.g-tag .g-ico{width:13px;height:13px;flex-shrink:0;opacity:.8;}
-.data-modal{position:fixed;inset:0;background:rgba(9,11,20,0.88);z-index:150;display:none;align-items:center;justify-content:center;}
+
+/* footer concept row */
+.concept-footer{display:flex;flex-wrap:wrap;gap:7px;align-items:center;padding:2px 4px;}
+.concept-footer .cf-label{font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin-right:2px;}
+
+/* data modal */
+.data-modal{position:fixed;inset:0;background:rgba(9,11,20,0.88);backdrop-filter:blur(6px);z-index:150;display:none;align-items:center;justify-content:center;}
 .data-modal.show{display:flex;}
-.data-modal-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;width:92%;max-width:680px;max-height:82vh;display:flex;flex-direction:column;gap:8px;}
+.data-modal-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:18px;width:92%;max-width:680px;max-height:82vh;display:flex;flex-direction:column;gap:8px;}
 .data-modal-hd{display:flex;justify-content:space-between;align-items:center;}
-.data-modal-hd h3{font-size:0.95em;color:var(--accent);}
+.data-modal-hd h3{font-family:'Syne',sans-serif;font-size:0.95em;color:var(--accent2);}
 .data-modal-close{background:none;border:1px solid var(--border);border-radius:5px;color:var(--dim);font-size:0.8em;padding:4px 10px;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .data-modal-close:hover{border-color:var(--red);color:var(--red);}
 .data-modal-info{font-size:0.76em;color:var(--dim);line-height:1.5;}
@@ -192,205 +305,174 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .dtable tr.missad{background:rgba(239,91,91,0.06);}
 .dtable .gk{color:var(--kvinna);}
 .dtable .gm{color:var(--man);}
-.overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
+
+/* intro overlay */
+.overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;}
 .overlay.show{display:flex;}
-.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:520px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s var(--ease-spring);}
+.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border-soft);border-radius:20px;padding:32px 36px;max-width:520px;width:100%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s var(--ease-spring);}
 @keyframes overlayIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
-.overlay-card h2{font-family:'Syne',sans-serif;font-size:1.4em;font-weight:800;letter-spacing:-.01em;margin-bottom:6px;}
-.overlay-card h2 span{color:var(--accent2);}
-.overlay-card .sub{font-size:0.87em;color:var(--subtle);line-height:1.6;margin-bottom:12px;text-align:left;}
-.overlay-card .steps{display:flex;flex-direction:column;gap:12px;margin:14px 0;text-align:left;}
+.overlay-icon{width:48px;height:48px;margin:0 auto 14px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);}
+.overlay-icon svg{width:25px;height:25px;}
+.overlay-card h2{font-family:'Syne',sans-serif;font-size:1.4em;font-weight:800;letter-spacing:-.01em;margin-bottom:8px;background:linear-gradient(135deg,#eef1fb,var(--accent2) 72%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.overlay-card .sub{font-size:0.87em;color:var(--subtle);line-height:1.6;margin-bottom:14px;text-align:left;}
+.overlay-card .steps{display:flex;flex-direction:column;gap:12px;margin:16px 0;text-align:left;}
 .overlay-card .step{display:flex;gap:12px;align-items:flex-start;font-size:0.85em;color:var(--subtle);line-height:1.55;}
 .overlay-card .step strong{color:var(--text);}
 .step-num{width:25px;height:25px;border-radius:50%;background:rgba(77,128,255,0.14);color:var(--accent2);font-weight:700;font-size:0.8em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.28);padding-top:1px;}
-.overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s var(--ease-spring);}
-.overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);}
+.overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:16px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(77,128,255,.28);}
+.overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
 .overlay-btn svg{width:15px;height:15px;flex-shrink:0;}
-@media(max-width:1020px){
-  .app{grid-template-columns:1fr;}
-  .lp{border-right:none;border-bottom:1px solid var(--border);}
-  .rp{border-left:none;border-top:1px solid var(--border);}
-  .back-link{position:static;transform:none;margin-bottom:4px;}
-  .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}
+
+.next-btn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:14px;font-family:'DM Sans',sans-serif;font-size:.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(77,128,255,.26);}
+.next-btn:hover{background:#3d6de6;transform:translateY(-2px);box-shadow:0 12px 30px rgba(77,128,255,.36);}
+.next-btn svg{width:16px;height:16px;}
+.reset-link{display:inline-flex;align-items:center;gap:6px;font-size:.8em;color:var(--dim);cursor:pointer;transition:.2s;align-self:center;padding:6px;}
+.reset-link:hover{color:var(--text);}
+
+@media(max-width:680px){
   .hd{padding:10px 16px 8px;}
+  .back-link{position:static;transform:none;margin-bottom:4px;display:inline-flex;}
+  .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;display:inline-flex;}
   .twins{grid-template-columns:1fr;}
+  .gstat-row{grid-template-columns:1fr;gap:4px;}
+  .stage-wrap{padding:14px 10px 30px;}
+  .act-body{padding:14px 16px 18px;}
+  .act-hd{padding:16px 16px 0;}
 }
-
-/* ── Typografihierarki ── */
-.sec-t{font-size:12px;letter-spacing:.07em;}
-.sec-head h2{font-size:20px;font-weight:700;letter-spacing:-.01em;}
-.data-lead,.twin-verdict,.hint,.gstat-neutral{font-size:15px;line-height:1.7;}
-.hero-num{font-family:'JetBrains Mono',monospace;font-weight:900;font-size:36px;line-height:1;letter-spacing:-.02em;}
-
-/* ── Story-flow i vänsterspalten ── */
-.explore-trigger{display:inline-flex;align-items:center;gap:7px;font-family:'DM Sans',sans-serif;font-size:.8em;font-weight:700;padding:9px 14px;border:1px solid rgba(77,128,255,.35);border-radius:10px;background:rgba(77,128,255,.08);color:var(--accent2);cursor:pointer;transition:.2s var(--ease-spring);width:100%;justify-content:center;}
-.explore-trigger:hover{background:rgba(77,128,255,.14);transform:translateY(-1px);}
-.stage{display:flex;flex-direction:column;gap:11px;position:relative;transition:opacity .4s var(--ease-out);}
-.stage-hd{display:flex;align-items:center;gap:9px;}
-.stage-num{width:23px;height:23px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:.68em;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.35s var(--ease-out);}
-.stage-title{font-size:.72em;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);transition:.35s var(--ease-out);}
-.stage.active .stage-num{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 0 4px rgba(77,128,255,.16);}
-.stage.active .stage-title{color:var(--text);}
-.stage-connector{width:1px;height:16px;background:var(--border);margin-left:11px;}
-.lp.trained .stage-1,.lp.trained .stage-2{opacity:.55;}
-.lp.trained .stage-1:hover,.lp.trained .stage-2:hover{opacity:1;}
-
-/* ── Kort: hover-lyft, mjukare övergångar ── */
-.card{transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out),filter .35s var(--ease-out),opacity .35s var(--ease-out);}
-.card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(0,0,0,.3);}
-.card.stale{filter:blur(2.5px);opacity:.5;pointer-events:none;}
-.gfill,.ffill,.wfill{transition:width .7s cubic-bezier(.16,1,.3,1);}
-
-/* ── Tränknapp: aktivitetens CTA ── */
-.train-cta{position:relative;overflow:hidden;width:100%;padding:17px 20px;border-radius:14px;border:none;
-  background:linear-gradient(135deg,var(--green),#28b567);color:#04140a;font-family:'DM Sans',sans-serif;font-weight:800;font-size:1.02em;
-  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
-  transition:transform .25s var(--ease-spring),box-shadow .25s var(--ease-out),background .4s var(--ease-out);
-  box-shadow:0 8px 26px rgba(52,199,89,.25);isolation:isolate;}
-.train-cta:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(52,199,89,.35);}
-.train-cta:active{transform:scale(.98);}
-.train-cta::before{content:'';position:absolute;inset:-3px;border-radius:17px;z-index:-1;filter:blur(11px);
-  background:linear-gradient(135deg,var(--green),#8effc4,var(--green));opacity:0;transition:opacity .4s;animation:ctaPulse 2.6s ease-in-out infinite;}
-.train-cta.idle::before{opacity:.5;}
-.train-cta.stale-glow::before{opacity:.85;animation-duration:1.3s;}
-@keyframes ctaPulse{0%,100%{opacity:.3;}50%{opacity:.65;}}
-.train-cta-icon{font-size:1.25em;display:inline-block;transition:transform .3s var(--ease-spring);position:relative;z-index:1;}
-.train-cta.idle:hover .train-cta-icon{transform:rotate(-14deg) scale(1.12);}
-.train-cta-text{position:relative;z-index:1;}
-.train-cta-fill{position:absolute;left:0;top:0;bottom:0;background:rgba(255,255,255,.16);width:0%;transition:width .25s linear;z-index:0;}
-.train-cta.training{background:linear-gradient(135deg,#1a2340,#131c34);color:var(--text);cursor:default;box-shadow:none;}
-.train-cta.training::before{display:none;}
-.train-cta.training .train-cta-icon{animation:ctaSpin 1s linear infinite;}
-@keyframes ctaSpin{to{transform:rotate(360deg);}}
-.train-cta.done .train-cta-icon{animation:checkPop .45s var(--ease-spring);}
-@keyframes checkPop{from{transform:scale(0) rotate(-30deg);}to{transform:scale(1) rotate(0);}}
-.stale-chip{display:none;align-items:center;gap:5px;font-size:.68em;font-weight:700;color:var(--gold);background:rgba(255,216,102,.1);border:1px solid rgba(255,216,102,.3);border-radius:999px;padding:3px 9px;}
-.stale-chip.show{display:inline-flex;}
-
-/* ── Tvillingtest: experiment-känsla ── */
-.twin{position:relative;padding:18px 16px 15px;border-radius:14px;overflow:hidden;transition:border-color .3s,transform .3s var(--ease-out);}
-.twin:hover{transform:translateY(-3px);}
-.twin.flash{animation:twinFlash .5s var(--ease-out);}
-@keyframes twinFlash{0%{box-shadow:0 0 0 0 rgba(77,128,255,0);}30%{box-shadow:0 0 0 5px rgba(77,128,255,.22);}100%{box-shadow:0 0 0 0 rgba(77,128,255,0);}}
-.twin.k.flash{animation-name:twinFlashK;}
-@keyframes twinFlashK{30%{box-shadow:0 0 0 5px rgba(192,132,252,.26);}}
-.twin-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.7em;margin:0 auto 8px;background:var(--surface);border:2px solid;}
-.twin.k .twin-avatar{border-color:var(--kvinna);}
-.twin.m .twin-avatar{border-color:var(--man);}
-.twin .tname{text-align:center;justify-content:center;font-size:1em;}
-.twin-scan{position:absolute;left:0;right:0;top:-30%;height:40%;pointer-events:none;opacity:0;z-index:5;
-  background:linear-gradient(180deg,transparent,rgba(122,162,255,.28),transparent);}
-.twin.scanning .twin-scan{opacity:1;animation:scanSweep 0.7s var(--ease-out);}
-@keyframes scanSweep{0%{top:-30%;opacity:0;}15%{opacity:1;}100%{top:110%;opacity:0;}}
-.tstamp{position:relative;font-family:'Syne',sans-serif;font-size:.8em;font-weight:800;letter-spacing:.03em;padding:6px 14px;border-radius:5px;border:2px solid;
-  transform:rotate(-6deg);transition:transform .3s var(--ease-spring),opacity .3s;text-transform:uppercase;}
-.tstamp.pop{animation:stampPop .35s var(--ease-spring);}
-@keyframes stampPop{0%{transform:rotate(-6deg) scale(.4);opacity:0;}70%{transform:rotate(-6deg) scale(1.15);}100%{transform:rotate(-6deg) scale(1);opacity:1;}}
-.tstamp.ja{color:var(--green);border-color:var(--green);background:rgba(52,199,89,0.08);}
-.tstamp.nej{color:var(--red);border-color:var(--red);background:rgba(239,91,91,0.08);}
-.twin-row.flash-row .tv{animation:tvFlash .5s var(--ease-out);}
-@keyframes tvFlash{0%{color:var(--gold);}100%{color:var(--accent2);}}
 </style>
 </head>
 <body>
+<div class="bg-mesh"></div><div class="bg-noise"></div>
 
 <div class="hd">
-  <a class="back-link" href="/">← AI-aktiviteter</a>
-  <h1><span>Bias</span>-labbet</h1>
+  <a class="back-link" href="/"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> AI-aktiviteter</a>
+  <div class="hd-title-row">
+    <svg class="hd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M7 21h10"/><path d="M12 6L4 8.5M12 6l8 2.5"/><circle cx="4" cy="9" r="2"/><circle cx="20" cy="9.5" r="2"/></svg>
+    <h1>Bias-labbet</h1>
+  </div>
   <p>Träna en rekryterings-AI på skev historisk data – upptäck hur diskriminering uppstår och hur svårt det är att bli av med.</p>
   <a class="lang-link" href="https://www.ai-aktiviteter.se/bias-labbet_ENG"><span class="flag">🇬🇧</span> English</a>
 </div>
 
-<div class="app">
+<div class="wizard" id="wizard">
+  <div class="wz-step active" id="wz1"><div class="wz-dot">01</div><div class="wz-label">Data</div></div>
+  <div class="wz-line" id="wzl1"></div>
+  <div class="wz-step" id="wz2"><div class="wz-dot">02</div><div class="wz-label">Träning</div></div>
+  <div class="wz-line" id="wzl2"></div>
+  <div class="wz-step" id="wz3"><div class="wz-dot">03</div><div class="wz-label">Granskning</div></div>
+  <div class="wz-line" id="wzl3"></div>
+  <div class="wz-step" id="wz4"><div class="wz-dot">04</div><div class="wz-label">Slutsats</div></div>
+</div>
 
-  <div class="lp" id="lp">
-    <div id="modelChip" style="display:none;"></div>
+<div class="stage-wrap">
+  <div id="receipts"></div>
 
-    <span class="explore-trigger" onclick="openConcept('guide', event)">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
-      Så här utforskar du labbet
-    </span>
-
-    <div class="stage stage-1 active" id="stage1">
-      <div class="stage-hd"><div class="stage-num">01</div><div class="stage-title">Välj träningsdata</div></div>
+  <!-- ACT 1: DATA -->
+  <div class="act" id="act1">
+    <div class="act-hd">
+      <div class="act-badge">01</div>
+      <div class="act-titles">
+        <div class="act-title">Välj din träningsdata</div>
+        <div class="act-sub">Vilken historik ska AI:n lära sig av?</div>
+      </div>
+    </div>
+    <div class="act-body">
+      <div class="seg" id="dataSeg">
+        <button class="seg-btn on" id="segHist" onclick="onDataModeChange('hist')">📜 Historisk data</button>
+        <button class="seg-btn fair" id="segFair" onclick="onDataModeChange('fair')">⚖️ Rättvis data</button>
+      </div>
       <div class="data-lead" id="dataLead"></div>
       <details class="more" id="dataDetails">
         <summary>Visa gruppernas siffror</summary>
-        <div class="gstat" id="gstat" style="margin-top:10px;"></div>
-        <button class="btn ghost" style="align-self:flex-start;margin-top:10px;" onclick="openDataModal()">📋 Visa hela datasetet (300 rader)</button>
+        <div class="gstat" id="gstat"></div>
+        <button class="btn ghost" style="align-self:flex-start;margin-top:12px;" onclick="openDataModal()">📋 Visa hela datasetet (300 rader)</button>
       </details>
-      <select class="sel" id="dataSel" onchange="onDataModeChange(this.value)">
-        <option value="hist" selected>📜 Historisk träningsdata</option>
-        <option value="fair">⚖️ Rättvis träningsdata</option>
-      </select>
-    </div>
-    <div class="stage-connector"></div>
-
-    <div class="stage stage-2 active" id="stage2">
-      <div class="stage-hd"><div class="stage-num">02</div><div class="stage-title">Bestäm vad AI:n får se</div></div>
-      <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Utbildningspoäng</span><span class="vlock" title="Alltid med">🔒</span></div>
-      <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Arbetslivserfarenhet</span><span class="vlock" title="Alltid med">🔒</span></div>
-      <div class="var-toggle on" id="vtKon" onclick="toggleVar('kon')"><span class="vdot"></span><span class="vname">Kön</span></div>
-      <div class="var-toggle on" id="vtLucka" onclick="toggleVar('lucka')"><span class="vdot"></span><span class="vname">Uppehåll i CV (år)</span></div>
-    </div>
-    <div class="stage-connector"></div>
-
-    <div class="stage stage-3 active" id="stage3">
-      <div class="stage-hd"><div class="stage-num">03</div><div class="stage-title">Träna modellen</div></div>
-      <button class="train-cta idle" id="trainCta" onclick="train()">
-        <span class="train-cta-fill" id="trainCtaFill"></span>
-        <span class="train-cta-icon" id="trainCtaIcon">🧠</span>
-        <span class="train-cta-text" id="trainCtaText">Träna modellen</span>
-      </button>
-      <span class="stale-chip" id="staleChip">⚠️ Ej uppdaterad – träna om</span>
+      <button class="next-btn" onclick="goToAct(2)">Fortsätt till indata <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </div>
   </div>
 
-  <div class="cp">
-    <div class="stage-hd" style="margin-bottom:2px;"><div class="stage-num" id="stage4Num">04</div><div class="stage-title">Undersök konsekvenserna</div></div>
-    <div class="card" id="awaitCard">
-      <div class="await-box">
-        <div class="await-icon">🧠</div>
-        <div class="await-title">Den tränade modellen visas här</div>
-        <div class="await-text">Välj indata och träningsdata till vänster och tryck <strong>Träna modellen</strong>. Då ser du vad modellen lärt sig, hur rättvist den behandlar nya sökande och hur den bedömer två identiska kandidater.</div>
+  <!-- ACT 2: VARIABLES -->
+  <div class="act" id="act2" style="display:none;">
+    <div class="act-hd">
+      <div class="act-badge">02</div>
+      <div class="act-titles">
+        <div class="act-title">Bestäm vad AI:n får se</div>
+        <div class="act-sub">Vilka variabler ska modellen träna på?</div>
       </div>
     </div>
-
-    <div class="card" id="cardFair" style="display:none;">
-      <div class="sec-head"><h2>Rättvisetestet</h2><span class="sub">240 nya sökande med identiska meritfördelningar</span></div>
-      <div id="fairArea"></div>
-    </div>
-
-    <div class="card" id="cardWeights" style="display:none;">
-      <div class="sec-head"><h2>Modellens inlärda vikter</h2><span class="sub">vad modellen lägger vikt vid i beslutet</span></div>
-      <div id="weightsArea"></div>
-    </div>
-
-    <div class="card" id="cardTwins" style="display:none;">
-      <div class="sec-head"><h2>Tvillingtestet</h2><span class="sub">två identiska kandidater – bedöms de lika?</span></div>
-      <div id="twinArea"></div>
+    <div class="act-body">
+      <div class="var-grid">
+        <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Utbildningspoäng</span><span class="vhint">alltid med</span><span class="vlock">🔒</span></div>
+        <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Arbetslivserfarenhet</span><span class="vhint">alltid med</span><span class="vlock">🔒</span></div>
+        <div class="var-toggle on" id="vtKon" onclick="toggleVar('kon')"><span class="vdot"></span><span class="vname">Kön</span><span class="vhint">skyddad egenskap</span></div>
+        <div class="var-toggle on" id="vtLucka" onclick="toggleVar('lucka')"><span class="vdot"></span><span class="vname">Uppehåll i CV (år)</span><span class="vhint">möjlig proxy</span></div>
+      </div>
+      <div class="data-note">💡 Prova först med allt påslaget. Senare kan du gå tillbaka hit, stänga av <strong>Kön</strong> och träna om – och se om det räcker för att göra modellen rättvis.</div>
+      <button class="next-btn" onclick="goToAct(3)">Fortsätt till träning <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </div>
   </div>
 
-  <div class="rp">
-    <div class="coll">
-      <button class="coll-toggle" onclick="toggleColl(this,'glossBody')">📖 Begrepp<span class="arr">▼</span></button>
-      <div class="coll-body" id="glossBody">
-        <div class="glossary">
-          <span class="g-tag" onclick="openConcept('bias', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M8 20h8"/><path d="M12 6L5 8.5M12 6l7 4"/><circle cx="5" cy="9.5" r="2.2"/><circle cx="19" cy="11" r="2.2"/></svg>Bias</span>
-          <span class="g-tag" onclick="openConcept('skydd', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>Skyddad egenskap</span>
-          <span class="g-tag" onclick="openConcept('proxy', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3.2" stroke-dasharray="2 2"/><circle cx="18" cy="12" r="3.2"/><path d="M9.5 12h5M13 9.5l1.5 2.5-1.5 2.5"/></svg>Proxyvariabel</span>
-          <span class="g-tag" onclick="openConcept('direkt', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="14" r="3"/><circle cx="17" cy="14" r="3"/><path d="M5 6l2 2 3-3M15 5l4 4"/></svg>Direkt diskriminering</span>
-          <span class="g-tag" onclick="openConcept('indirekt', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-6 8v6l-4 2v-8L4 4z"/></svg>Indirekt diskriminering</span>
-          <span class="g-tag" onclick="openConcept('gap', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M8 20h8"/><path d="M12 7L5 9M12 7l7 2"/><circle cx="5" cy="9" r="2.2"/><circle cx="19" cy="9" r="2.2"/></svg>Rättvisemått</span>
+  <!-- ACT 3: TRAINING -->
+  <div class="act" id="act3" style="display:none;">
+    <div class="act-hd">
+      <div class="act-badge">03</div>
+      <div class="act-titles">
+        <div class="act-title">Träna modellen</div>
+        <div class="act-sub" id="act3sub">Låt AI:n lära sig mönstren i datan</div>
+      </div>
+    </div>
+    <div class="act-body">
+      <div id="trainIdle">
+        <button class="train-cta idle" id="trainCta" onclick="startTraining()">
+          <span class="train-cta-icon" id="trainCtaIcon">🧠</span>
+          <span class="train-cta-text" id="trainCtaText">Träna modellen</span>
+        </button>
+      </div>
+      <div class="train-stage" id="trainStage" style="display:none;">
+        <div class="train-canvas-wrap"><canvas id="trainCanvas"></canvas></div>
+        <div class="train-progress-rail"><i id="trainRail"></i></div>
+        <div class="train-status" id="trainStatus"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACT 4: RESULTS -->
+  <div class="act" id="act4" style="display:none;">
+    <div class="act-hd">
+      <div class="act-badge">04</div>
+      <div class="act-titles">
+        <div class="act-title">Undersök konsekvenserna</div>
+        <div class="act-sub">Vad lärde sig modellen – och är den rättvis?</div>
+      </div>
+    </div>
+    <div class="act-body">
+      <div id="modelChip"></div>
+      <div class="result-cards">
+        <div class="rc hero" id="cardFair">
+          <div class="rc-head"><h2>Rättvisetestet</h2><span class="sub">240 nya sökande med identiska meritfördelningar</span></div>
+          <div id="fairArea"></div>
+        </div>
+        <div class="rc" id="cardWeights">
+          <div class="rc-head"><h2>Modellens inlärda vikter</h2><span class="sub">vad modellen lägger vikt vid i beslutet</span></div>
+          <div id="weightsArea"></div>
+        </div>
+        <div class="rc" id="cardTwins">
+          <div class="rc-head"><h2>Tvillingtestet</h2><span class="sub">två identiska kandidater – bedöms de lika?</span></div>
+          <div id="twinArea"></div>
         </div>
       </div>
+      <div class="concept-footer">
+        <span class="cf-label">Begrepp</span>
+        <span class="g-tag" onclick="openConcept('bias', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M8 20h8"/><path d="M12 6L5 8.5M12 6l7 4"/><circle cx="5" cy="9.5" r="2.2"/><circle cx="19" cy="11" r="2.2"/></svg>Bias</span>
+        <span class="g-tag" onclick="openConcept('skydd', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>Skyddad egenskap</span>
+        <span class="g-tag" onclick="openConcept('proxy', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3.2" stroke-dasharray="2 2"/><circle cx="18" cy="12" r="3.2"/><path d="M9.5 12h5M13 9.5l1.5 2.5-1.5 2.5"/></svg>Proxyvariabel</span>
+        <span class="g-tag" onclick="openConcept('direkt', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="14" r="3"/><circle cx="17" cy="14" r="3"/><path d="M5 6l2 2 3-3M15 5l4 4"/></svg>Direkt diskriminering</span>
+        <span class="g-tag" onclick="openConcept('indirekt', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-6 8v6l-4 2v-8L4 4z"/></svg>Indirekt diskriminering</span>
+        <span class="g-tag" onclick="openConcept('gap', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M8 20h8"/><path d="M12 7L5 9M12 7l7 2"/><circle cx="5" cy="9" r="2.2"/><circle cx="19" cy="9" r="2.2"/></svg>Rättvisemått</span>
+        <span class="g-tag" onclick="openConcept('amazon', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v14a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/><path d="M4 8h16M8 4v4"/></svg>Fallet Amazon</span>
+      </div>
+      <div class="reset-link" onclick="resetLab()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg> Börja om från början</div>
     </div>
-
-    <span class="explore-trigger" onclick="openConcept('amazon', event)">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v14a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/><path d="M4 8h16M8 4v4"/></svg>
-      Det verkliga fallet med Amazon
-    </span>
   </div>
 </div>
 
@@ -404,11 +486,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
-    <h2><span>Bias</span>-labbet</h2>
-    <p class="sub">En AI lär sig av data. Men vad händer när datan speglar gamla orättvisor? Här får du själv se hur diskriminering kan smyga sig in i ett AI-system.</p>
+    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M7 21h10"/><path d="M12 6L4 8.5M12 6l8 2.5"/><circle cx="4" cy="9" r="2"/><circle cx="20" cy="9.5" r="2"/></svg></div>
+    <h2>Bias-labbet</h2>
+    <p class="sub">En AI lär sig av data. Men vad händer när datan speglar gamla orättvisor? Här får du själv genomföra undersökningen – steg för steg – och se hur diskriminering kan smyga sig in i ett AI-system.</p>
     <div class="steps">
       <div class="step"><div class="step-num">01</div><div><strong>Träna och granska</strong> – Låt modellen lära av historiken. Se sedan vad den lärt sig, hur den bedömer nya sökande och vad den svarar på två identiska CV:n där bara könet skiljer.</div></div>
-      <div class="step"><div class="step-num">02</div><div><strong>Försök åtgärda</strong> – Dölj de sökandes kön för modellen och undersök om det räcker för att den ska bli rättvis.</div></div>
+      <div class="step"><div class="step-num">02</div><div><strong>Försök åtgärda</strong> – Gå tillbaka, dölj de sökandes kön för modellen och undersök om det räcker för att den ska bli rättvis.</div></div>
     </div>
     <p class="sub" style="margin-bottom:0;">💡 All data i labbet är påhittad, men den här typen av skevhet förekommer i verkliga AI-system.</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -468,6 +551,7 @@ let useKon = true, useLucka = true, dataMode = 'hist';
 let model = null;
 let expCount = 0;
 let twinVals = {utb: 7, erf: 5, luckaA: 0, luckaB: 0};
+let currentAct = 1, maxActReached = 1;
 
 const FEATDEFS = [
   {key: 'utb',   label: 'Utbildningspoäng',     get: p => p.utb / 10},
@@ -513,97 +597,288 @@ function trainEpoch(m, X, y, lr){
   return loss / n;
 }
 
-function train(){
-  const cta = document.getElementById('trainCta');
-  if(cta.classList.contains('training')) return;
+function buildModel(){
   const feats = activeFeats();
   const rnd = mulberry32(7);
-  const m = {
-    w: feats.map(() => (rnd() - 0.5) * 0.1),
-    b: 0,
-    feats,
-    dataMode,
-    useKon, useLucka,
-  };
+  const m = { w: feats.map(() => (rnd() - 0.5) * 0.1), b: 0, feats, dataMode, useKon, useLucka };
   const X = TRAIN.map(p => feats.map(f => f.get(p)));
   const y = TRAIN.map(p => label(p, dataMode));
-
-  const icon = document.getElementById('trainCtaIcon');
-  const text = document.getElementById('trainCtaText');
-  const fill = document.getElementById('trainCtaFill');
-  cta.classList.remove('idle','done','stale-glow');
-  cta.classList.add('training');
-  icon.textContent = '⟳';
-  document.getElementById('staleChip').classList.remove('show');
-
-  const PHASES = [
-    {upto:0.22, text:'Analyserar historiken…'},
-    {upto:0.6,  text:'Lär samband…'},
-    {upto:0.92, text:'Optimerar vikter…'},
-    {upto:1.01, text:'Nästan klar…'},
-  ];
-
-  const MAX_EPOCHS = 600, PER_TICK = 12;
-  let epoch = 0, loss = 0;
-  const timer = setInterval(() => {
-    for(let i = 0; i < PER_TICK && epoch < MAX_EPOCHS; i++, epoch++){
-      loss = trainEpoch(m, X, y, 2.2);
-    }
-    const frac = epoch / MAX_EPOCHS;
-    fill.style.width = (frac*100) + '%';
-    const phase = PHASES.find(p => frac <= p.upto) || PHASES[PHASES.length-1];
-    text.textContent = phase.text;
-    if(epoch >= MAX_EPOCHS){
-      clearInterval(timer);
-      model = m;
-      expCount++;
-      cta.classList.remove('training');
-      cta.classList.add('done');
-      icon.textContent = '✓';
-      text.textContent = 'Modellen färdigtränad';
-      fill.style.width = '100%';
-      setTimeout(() => {
-        fill.style.width = '0%';
-        icon.textContent = '🔄';
-        text.textContent = 'Träna om';
-        cta.classList.remove('done');
-        cta.classList.add('idle');
-      }, 1300);
-      renderAll();
-    }
-  }, 16);
+  const MAX_EPOCHS = 600;
+  for(let e = 0; e < MAX_EPOCHS; e++) trainEpoch(m, X, y, 2.2);
+  return m;
 }
 
 function evaluate(m){
-  const g = {
-    k: {n: 0, rec: 0, lampliga: 0, missade: 0},
-    m: {n: 0, rec: 0, lampliga: 0, missade: 0},
-  };
+  const g = { k: {n:0,rec:0,lampliga:0,missade:0}, m: {n:0,rec:0,lampliga:0,missade:0} };
   let correct = 0;
   for(const p of TEST){
     const s = p.kvinna ? g.k : g.m;
     const yes = predict(m, p) >= 0.5;
     s.n++;
     if(yes) s.rec++;
-    if(p.lamplig){
-      s.lampliga++;
-      if(!yes) s.missade++;
-    }
+    if(p.lamplig){ s.lampliga++; if(!yes) s.missade++; }
     if(yes === p.lamplig) correct++;
   }
   const pK = g.k.rec / g.k.n, pM = g.m.rec / g.m.n;
-  return {
-    pK, pM,
-    gap: Math.abs(pM - pK) * 100,
-    acc: correct / TEST.length * 100,
-    missK: g.k.missade, lampK: g.k.lampliga,
-    missM: g.m.missade, lampM: g.m.lampliga,
-  };
+  return { pK, pM, gap: Math.abs(pM - pK) * 100, acc: correct / TEST.length * 100,
+    missK: g.k.missade, lampK: g.k.lampliga, missM: g.m.missade, lampM: g.m.lampliga };
 }
 
 function pct(x){ return Math.round(x * 100) + '%'; }
 function avg(arr, fn){ return arr.reduce((a, p) => a + fn(p), 0) / arr.length; }
 
+/* ── Act navigation & wizard ── */
+const ACT_PHASE = {1:1, 2:1, 3:2, 4:3};   // which wizard phase each act maps to
+function updateWizard(){
+  const phase = model ? 4 : ACT_PHASE[currentAct];
+  for(let i=1;i<=4;i++){
+    const step=document.getElementById('wz'+i);
+    step.classList.remove('active','done');
+    if(i<phase) step.classList.add('done');
+    else if(i===phase) step.classList.add('active');
+  }
+  document.getElementById('wzl1').classList.toggle('fill', phase>1);
+  document.getElementById('wzl2').classList.toggle('fill', phase>2);
+  document.getElementById('wzl3').classList.toggle('fill', phase>3);
+}
+
+function actSummary(n){
+  if(n===1){
+    return `<b>${dataMode==='fair'?'⚖️ Rättvis data':'📜 Historisk data'}</b> · 300 ansökningar (110 kvinnor, 190 män)`;
+  }
+  if(n===2){
+    const seen=['Utbildning','Erfarenhet'];
+    if(useKon) seen.push('Kön'); if(useLucka) seen.push('CV-uppehåll');
+    const hidden=[]; if(!useKon) hidden.push('Kön'); if(!useLucka) hidden.push('CV-uppehåll');
+    return `AI:n ser: <b>${seen.join(', ')}</b>${hidden.length?` · dold: <b>${hidden.join(', ')}</b>`:''}`;
+  }
+  if(n===3){
+    return `Modellen är <b>färdigtränad</b> på ${TRAIN.length} exempel`;
+  }
+  return '';
+}
+const ACT_LABELS={1:'Akt 1 · Träningsdata',2:'Akt 2 · Indata',3:'Akt 3 · Träning'};
+
+function renderReceipts(){
+  const wrap=document.getElementById('receipts');
+  let h='';
+  for(let n=1;n<currentAct;n++){
+    if(n===3 && !model) continue;
+    h+=`<div class="receipt" onclick="goToAct(${n})">
+      <div class="receipt-check">✓</div>
+      <div class="receipt-body">
+        <div class="receipt-label">${ACT_LABELS[n]}</div>
+        <div class="receipt-summary">${actSummary(n)}</div>
+      </div>
+      <div class="receipt-edit">Ändra ›</div>
+    </div>`;
+  }
+  wrap.innerHTML=h;
+}
+
+function goToAct(n){
+  currentAct=n;
+  maxActReached=Math.max(maxActReached,n);
+  for(let i=1;i<=4;i++){
+    document.getElementById('act'+i).style.display = (i===n)?'':'none';
+  }
+  renderReceipts();
+  updateWizard();
+  // reset train act to idle view when entering fresh
+  if(n===3 && !model){
+    document.getElementById('trainIdle').style.display='';
+    document.getElementById('trainStage').style.display='none';
+  }
+  document.getElementById('act'+n).scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ── Act 3: living training canvas ── */
+let trainAnimRunning=false;
+function runTrainingCanvas(onDone){
+  const canvas=document.getElementById('trainCanvas');
+  const wrap=canvas.parentElement;
+  const dpr=Math.min(2,window.devicePixelRatio||1);
+  let W=wrap.clientWidth, H=wrap.clientHeight;
+  if(W<10||H<10){ W=Math.max(W,480); H=Math.max(H,180); }   // fallback if measured while hidden
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  const ctx=canvas.getContext('2d'); ctx.scale(dpr,dpr);
+
+  let finished=false;
+  function finish(){ if(finished) return; finished=true; trainAnimRunning=false; onDone && onDone(); }
+
+  // network node layout: input(3) -> hidden(2) -> output(1)
+  const inX=W*0.16, hidX=W*0.5, outX=W*0.84;
+  const inY=[H*0.3,H*0.5,H*0.7], hidY=[H*0.38,H*0.62], outY=[H*0.5];
+  const nodes={in:inX,hid:hidX,out:outX};
+
+  // pre-bias the outcome slightly toward the majority group when data is skewed & kön visible
+  const r=evaluate(buildModelPreview());
+  const skew = r.gap;   // procentenheter
+
+  let particles=[];
+  let tStart=performance.now();
+  const DURATION=3400;
+  let lastSpawn=0;
+  const KV='#c084fc', MN='#4d80ff';
+
+  function spawn(now){
+    const kvinna=Math.random()<0.42;
+    particles.push({
+      kvinna, x:0, y:inY[Math.floor(Math.random()*3)],
+      born:now, stage:0, targetIn:Math.floor(Math.random()*3),
+      targetHid:Math.floor(Math.random()*2), outcome:null, speed:0.55+Math.random()*0.35
+    });
+  }
+
+  function draw(now){
+    const elapsed=now-tStart;
+    ctx.clearRect(0,0,W,H);
+
+    // edges
+    ctx.lineWidth=1.4;
+    for(let i=0;i<3;i++)for(let j=0;j<2;j++){
+      ctx.strokeStyle='rgba(122,162,255,0.10)';
+      ctx.beginPath();ctx.moveTo(inX,inY[i]);ctx.lineTo(hidX,hidY[j]);ctx.stroke();
+    }
+    for(let j=0;j<2;j++){
+      ctx.strokeStyle='rgba(122,162,255,0.10)';
+      ctx.beginPath();ctx.moveTo(hidX,hidY[j]);ctx.lineTo(outX,outY[0]);ctx.stroke();
+    }
+
+    // nodes
+    function node(x,y,rad,glow){
+      ctx.save();
+      ctx.shadowColor='rgba(122,162,255,'+glow+')';ctx.shadowBlur=14*glow;
+      ctx.fillStyle='rgba(20,26,48,0.95)';ctx.strokeStyle='rgba(122,162,255,0.5)';ctx.lineWidth=1.6;
+      ctx.beginPath();ctx.arc(x,y,rad,0,Math.PI*2);ctx.fill();ctx.stroke();
+      ctx.restore();
+    }
+    const pulse=0.4+0.3*Math.sin(now/300);
+    inY.forEach(y=>node(inX,y,9,pulse));
+    hidY.forEach(y=>node(hidX,y,11,pulse));
+    node(outX,outY[0],13,0.6+0.4*Math.sin(now/240));
+
+    // spawn
+    if(elapsed<DURATION-900 && now-lastSpawn>120){ spawn(now); lastSpawn=now; }
+
+    // particles
+    particles=particles.filter(p=>{
+      const age=(now-p.born)*0.001*p.speed;
+      let px,py,alpha=1,col=p.kvinna?KV:MN;
+      if(age<1){ // input -> hidden
+        const t=age; const sx=inX,sy=inY[p.targetIn],ex=hidX,ey=hidY[p.targetHid];
+        px=sx+(ex-sx)*t; py=sy+(ey-sy)*t; p.stage=0;
+      } else if(age<2){ // hidden -> output
+        const t=age-1; const sx=hidX,sy=hidY[p.targetHid],ex=outX,ey=outY[0];
+        px=sx+(ex-sx)*t; py=sy+(ey-sy)*t; p.stage=1;
+      } else if(age<3){ // output -> verdict
+        const t=age-2;
+        if(p.outcome===null){
+          // skew acceptance by group when biased
+          let baseAcc=0.55;
+          if(skew>12) baseAcc = p.kvinna?0.32:0.72;
+          else if(skew>5) baseAcc = p.kvinna?0.45:0.62;
+          p.outcome=Math.random()<baseAcc;
+        }
+        const sx=outX,sy=outY[0],ex=W-14,ey=p.outcome?H*0.3:H*0.72;
+        px=sx+(ex-sx)*t; py=sy+(ey-sy)*t; p.stage=2;
+        col=p.outcome?'#34c759':'#ef5b5b';
+      } else {
+        return false;
+      }
+      ctx.save();
+      ctx.globalAlpha=alpha;
+      ctx.shadowColor=col;ctx.shadowBlur=8;
+      ctx.fillStyle=col;
+      ctx.beginPath();ctx.arc(px,py,p.stage===2?4.5:3.5,0,Math.PI*2);ctx.fill();
+      ctx.restore();
+      return true;
+    });
+
+    // verdict labels
+    ctx.font='600 11px "DM Sans"';ctx.textAlign='center';
+    ctx.fillStyle='rgba(52,199,89,0.5)';ctx.fillText('✓', W-14, H*0.3-10);
+    ctx.fillStyle='rgba(239,91,91,0.5)';ctx.fillText('✕', W-14, H*0.72+16);
+
+    if(elapsed<DURATION || particles.length){
+      requestAnimationFrame(draw);
+    } else {
+      finish();
+    }
+  }
+  trainAnimRunning=true;
+  requestAnimationFrame(draw);
+  // hard safety net: never let the training hang
+  setTimeout(finish, DURATION+1200);
+}
+
+// preview model for canvas skew (doesn't touch global model)
+function buildModelPreview(){ return buildModel(); }
+
+const TRAIN_STATUS=[
+  {t:'Läser datasetet…', at:0},
+  {t:'Lär mönster…', at:0.28},
+  {t:'Identifierar samband…', at:0.55},
+  {t:'Optimerar modellen…', at:0.8},
+];
+
+function startTraining(){
+  if(trainAnimRunning) return;
+  document.getElementById('trainIdle').style.display='none';
+  const stage=document.getElementById('trainStage');
+  stage.style.display='flex';
+  const statusWrap=document.getElementById('trainStatus');
+  statusWrap.innerHTML='';
+  const rail=document.getElementById('trainRail');
+  rail.style.width='0%';
+
+  const lines=TRAIN_STATUS.map(s=>{
+    const el=document.createElement('div');
+    el.className='train-status-line';
+    el.innerHTML=`<span class="tsl-dot"></span><span>${s.t}</span>`;
+    statusWrap.appendChild(el);
+    return el;
+  });
+
+  const DURATION=3400;
+  const t0=performance.now();
+  function progress(now){
+    const frac=Math.min(1,(now-t0)/DURATION);
+    rail.style.width=(frac*100)+'%';
+    TRAIN_STATUS.forEach((s,i)=>{
+      if(frac>=s.at){
+        if(!lines[i].classList.contains('show')) lines[i].classList.add('show');
+        // mark previous as done
+        if(i>0 && !lines[i-1].classList.contains('done')){
+          lines[i-1].classList.add('done');
+          lines[i-1].querySelector('span:last-child').innerHTML=TRAIN_STATUS[i-1].t.replace('…','')+' <span class="tsl-check">✓</span>';
+        }
+      }
+    });
+    if(frac<1) requestAnimationFrame(progress);
+    else{
+      const last=lines[lines.length-1];
+      last.classList.add('done');
+      last.querySelector('span:last-child').innerHTML=TRAIN_STATUS[TRAIN_STATUS.length-1].t.replace('…','')+' <span class="tsl-check">✓</span>';
+    }
+  }
+  requestAnimationFrame(progress);
+
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    runTrainingCanvas(()=>{
+      // build the real model synchronously and reveal act 4
+      model = buildModel();
+      expCount++;
+      setTimeout(()=>{
+        currentAct=4; maxActReached=4;
+        goToAct(4);
+        renderAll();
+      }, 550);
+    });
+  }));
+}
+
+/* ── Render: data stats (Act 1) ── */
 function renderDataStats(){
   const K = TRAIN.filter(p => p.kvinna), M = TRAIN.filter(p => !p.kvinna);
   const hireFn = dataMode === 'fair' ? (p => p.lamplig ? 1 : 0) : (p => p.anstalld ? 1 : 0);
@@ -614,46 +889,38 @@ function renderDataStats(){
        Den har fortfarande tillgång till <strong>utbildning, erfarenhet${useLucka ? ' och uppehåll i CV' : ''}</strong>. Träna om och se i <strong>"Modellens inlärda vikter"</strong> vad den nu lägger vikt vid.</div>`;
   }else{
     const rows = [
-      {lab: 'Snitt utbildningspoäng (0–10)', k: avg(K, p => p.utb), m: avg(M, p => p.utb), max: 10, fmt: v => v.toFixed(1)},
-      {lab: 'Snitt erfarenhet, år (0–10)',   k: avg(K, p => p.erf), m: avg(M, p => p.erf), max: 10, fmt: v => v.toFixed(1)},
-      {lab: 'Andel med uppehåll i CV',       k: avg(K, p => p.lucka > 0 ? 1 : 0), m: avg(M, p => p.lucka > 0 ? 1 : 0), max: 1, fmt: pct},
-      {lab: dataMode === 'fair' ? 'Andel anställda (rättvis data)' : 'Andel anställda (historiken)',
-       k: avg(K, hireFn), m: avg(M, hireFn), max: 1, fmt: pct, key: true},
+      {lab:'Snitt utbildningspoäng (0–10)', k:avg(K,p=>p.utb), m:avg(M,p=>p.utb), max:10, fmt:v=>v.toFixed(1)},
+      {lab:'Snitt erfarenhet, år (0–10)',   k:avg(K,p=>p.erf), m:avg(M,p=>p.erf), max:10, fmt:v=>v.toFixed(1)},
+      {lab:'Andel med uppehåll i CV',       k:avg(K,p=>p.lucka>0?1:0), m:avg(M,p=>p.lucka>0?1:0), max:1, fmt:pct},
+      {lab: dataMode==='fair'?'Andel anställda (rättvis data)':'Andel anställda (historiken)',
+       k:avg(K,hireFn), m:avg(M,hireFn), max:1, fmt:pct},
     ];
-    let h = '';
+    let h='';
     for(const r of rows){
-      h += `<div class="gstat-row">
+      h+=`<div class="gstat-row">
         <div class="gstat-label">${r.lab}</div>
         <div class="gbars">
-          <div class="gbar k"><span class="gwho">K</span><div class="gtrack"><div class="gfill" style="width:${(r.k / r.max * 100).toFixed(1)}%"></div></div><span class="gval">${r.fmt(r.k)}</span></div>
-          <div class="gbar m"><span class="gwho">M</span><div class="gtrack"><div class="gfill" style="width:${(r.m / r.max * 100).toFixed(1)}%"></div></div><span class="gval">${r.fmt(r.m)}</span></div>
+          <div class="gbar k"><span class="gwho">K</span><div class="gtrack"><div class="gfill" style="width:${(r.k/r.max*100).toFixed(1)}%"></div></div><span class="gval">${r.fmt(r.k)}</span></div>
+          <div class="gbar m"><span class="gwho">M</span><div class="gtrack"><div class="gfill" style="width:${(r.m/r.max*100).toFixed(1)}%"></div></div><span class="gval">${r.fmt(r.m)}</span></div>
         </div></div>`;
     }
-    document.getElementById('gstat').innerHTML = h;
+    document.getElementById('gstat').innerHTML=h;
   }
 
-  const hK = pct(avg(K, p => p.anstalld ? 1 : 0)), hM = pct(avg(M, p => p.anstalld ? 1 : 0));
-  const lead = document.getElementById('dataLead');
-  if(dataMode === 'hist'){
-    let txt = `Här är <strong>Teknovas tidigare anställningsbeslut</strong> – datan modellen ska tränas på. Kvinnor och män har likvärdiga meriter, men i historiken anställdes ${hK} av kvinnorna mot ${hM} av männen. Det är den skevheten modellen kommer att lära sig.<br><br>Laborationen bygger på ett verkligt fall med Amazon`;
-    if(!useKon && !useLucka){
-      txt += `<br><br>🚫 Modellen får <strong>varken se de sökandes kön eller uppehåll i CV</strong> under träningen – bara utbildning och erfarenhet.`;
-    }else if(!useKon){
-      txt += `<br><br>🚫 Du har dolt <strong>könet</strong>: modellen får inte längre se om en sökande är kvinna eller man under träningen. Räcker det för att den ska bli rättvis?`;
-    }else if(!useLucka){
-      txt += `<br><br>🚫 Du har dolt <strong>uppehållet i CV</strong>: modellen ser det inte längre under träningen.`;
-    }
-    lead.innerHTML = txt;
+  const hK=pct(avg(K,p=>p.anstalld?1:0)), hM=pct(avg(M,p=>p.anstalld?1:0));
+  const lead=document.getElementById('dataLead');
+  if(dataMode==='hist'){
+    let txt=`Här är <strong>Teknovas tidigare anställningsbeslut</strong> – datan modellen ska tränas på. Kvinnor och män har likvärdiga meriter, men i historiken anställdes ${hK} av kvinnorna mot ${hM} av männen. Det är den skevheten modellen kommer att lära sig.`;
+    if(!useKon && !useLucka) txt+=`<br><br>🚫 Modellen får <strong>varken se de sökandes kön eller uppehåll i CV</strong> under träningen – bara utbildning och erfarenhet.`;
+    else if(!useKon) txt+=`<br><br>🚫 Du har dolt <strong>könet</strong>: modellen får inte längre se om en sökande är kvinna eller man. Räcker det för att den ska bli rättvis?`;
+    else if(!useLucka) txt+=`<br><br>🚫 Du har dolt <strong>uppehållet i CV</strong>: modellen ser det inte längre under träningen.`;
+    lead.innerHTML=txt;
   }else{
-    let txt = `<strong>⚖️ Rättvis träningsdata vald:</strong> modellen tränas nu på vem som <strong>verkligen var lämplig</strong> utifrån meriterna, i stället för på de historiska besluten. (I verkligheten finns sällan ett sådant facit – det är hela problemet.)`;
-    if(!useKon && !useLucka){
-      txt += `<br><br>🚫 Dessutom får modellen varken se <strong>kön eller uppehåll i CV</strong> under träningen.`;
-    }else if(!useKon){
-      txt += `<br><br>🚫 Dessutom har du dolt <strong>könet</strong> för modellen.`;
-    }else if(!useLucka){
-      txt += `<br><br>🚫 Dessutom har du dolt <strong>uppehållet i CV</strong> för modellen.`;
-    }
-    lead.innerHTML = txt;
+    let txt=`<strong>⚖️ Rättvis träningsdata vald:</strong> modellen tränas nu på vem som <strong>verkligen var lämplig</strong> utifrån meriterna, i stället för på de historiska besluten. (I verkligheten finns sällan ett sådant facit – det är hela problemet.)`;
+    if(!useKon && !useLucka) txt+=`<br><br>🚫 Dessutom får modellen varken se <strong>kön eller uppehåll i CV</strong>.`;
+    else if(!useKon) txt+=`<br><br>🚫 Dessutom har du dolt <strong>könet</strong> för modellen.`;
+    else if(!useLucka) txt+=`<br><br>🚫 Dessutom har du dolt <strong>uppehållet i CV</strong> för modellen.`;
+    lead.innerHTML=txt;
   }
 }
 
@@ -694,19 +961,21 @@ function animateCount(el, from, to, duration, fmt){
 function renderFairness(){
   const r = evaluate(model);
   let vEmoji, vTxt;
-  if(r.gap > 15){ vEmoji = '🚨'; vTxt = `Stor skillnad: männen rekommenderas mycket oftare än kvinnorna.`; }
-  else if(r.gap > 5){ vEmoji = '⚠️'; vTxt = `Skillnaden har minskat men finns kvar. Var kommer den ifrån?`; }
-  else { vEmoji = '✅'; vTxt = `Grupperna behandlas nu i stort sett lika.`; }
+  if(r.gap > 15){ vEmoji='🚨'; vTxt=`Stor skillnad: männen rekommenderas mycket oftare än kvinnorna.`; }
+  else if(r.gap > 5){ vEmoji='⚠️'; vTxt=`Skillnaden har minskat men finns kvar. Var kommer den ifrån?`; }
+  else { vEmoji='✅'; vTxt=`Grupperna behandlas nu i stort sett lika.`; }
   const gapColor = r.gap > 15 ? '#ef5b5b' : r.gap > 5 ? '#ffce54' : '#34c759';
 
   document.getElementById('fairArea').innerHTML = `
-    <div class="sec-t" style="margin-bottom:7px;">Andel som rekommenderas för anställning</div>
+    <div class="sec-t" style="margin-bottom:2px;">Andel som rekommenderas för anställning</div>
     <div class="fair-big">
-      <div class="fbar k"><span class="fwho">Kvinnor</span><div class="ftrack"><div class="ffill" id="ffillK" style="width:0%"></div></div><span class="fval" id="fvalK" style="color:var(--kvinna);font-size:22px;font-family:'JetBrains Mono',monospace;font-weight:800;">0%</span></div>
-      <div class="fbar m"><span class="fwho">Män</span><div class="ftrack"><div class="ffill" id="ffillM" style="width:0%"></div></div><span class="fval" id="fvalM" style="color:var(--man);font-size:22px;font-family:'JetBrains Mono',monospace;font-weight:800;">0%</span></div>
+      <div class="fbar k"><span class="fwho">Kvinnor</span><div class="ftrack"><div class="ffill" id="ffillK" style="width:0%"></div></div><span class="fval" id="fvalK" style="color:var(--kvinna)">0%</span></div>
+      <div class="fbar m"><span class="fwho">Män</span><div class="ftrack"><div class="ffill" id="ffillM" style="width:0%"></div></div><span class="fval" id="fvalM" style="color:var(--man)">0%</span></div>
     </div>
-    <div style="height:9px"></div>
-    <span class="g-tag" onclick="openConcept('fairnessDetail', event)">
+    <div class="gap-pill ${r.gap>5?'pulse':''}" style="color:${gapColor};border-color:${gapColor}66;background:${gapColor}14;margin-top:2px;">
+      ${vEmoji} Gap: ${r.gap.toFixed(0)} procentenheter
+    </div>
+    <span class="g-tag" onclick="openConcept('fairnessDetail', event)" style="align-self:flex-start;">
       <svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       Visa fler detaljer
     </span>`;
@@ -727,11 +996,11 @@ function renderFairness(){
   };
 
   requestAnimationFrame(() => {
-    const fk = document.getElementById('ffillK'), fm = document.getElementById('ffillM');
-    fk.style.width = (r.pK*100).toFixed(1)+'%';
-    fm.style.width = (r.pM*100).toFixed(1)+'%';
-    animateCount(document.getElementById('fvalK'), 0, r.pK*100, 800, v => Math.round(v)+'%');
-    animateCount(document.getElementById('fvalM'), 0, r.pM*100, 800, v => Math.round(v)+'%');
+    const fk=document.getElementById('ffillK'), fm=document.getElementById('ffillM');
+    fk.style.width=(r.pK*100).toFixed(1)+'%';
+    fm.style.width=(r.pM*100).toFixed(1)+'%';
+    animateCount(document.getElementById('fvalK'),0,r.pK*100,800,v=>Math.round(v)+'%');
+    animateCount(document.getElementById('fvalM'),0,r.pM*100,800,v=>Math.round(v)+'%');
   });
   return r;
 }
@@ -751,7 +1020,7 @@ function renderTwins(){
         <div class="tstamp-wrap"><span class="tstamp" id="annaStamp"></span></div>
         <div class="tcv">Utbildning: <b id="annaUtb"></b> · Erfarenhet: <b id="annaErf"></b> år<br>Kön: <b>kvinna</b></div>
         <div class="tlucka" id="twinRowLuckaA">Uppehåll i CV: <select onchange="twinVals.luckaA=+this.value;onTwinChange(['twinAnna'],'twinRowLuckaA')">${[0,1,2,3].map(v=>`<option value="${v}" ${v===twinVals.luckaA?'selected':''}>${v} år</option>`).join('')}</select></div>
-        <div class="tres"><span class="tscore" id="annaScore"></span></div>
+        <div class="tstamp-wrap" style="margin-top:auto;padding-top:8px;border-top:1px solid var(--border);"><span class="tscore" id="annaScore"></span></div>
       </div>
       <div class="twin m" id="twinAdam">
         <div class="twin-scan"></div>
@@ -760,7 +1029,7 @@ function renderTwins(){
         <div class="tstamp-wrap"><span class="tstamp" id="adamStamp"></span></div>
         <div class="tcv">Utbildning: <b id="adamUtb"></b> · Erfarenhet: <b id="adamErf"></b> år<br>Kön: <b>man</b></div>
         <div class="tlucka" id="twinRowLuckaB">Uppehåll i CV: <select onchange="twinVals.luckaB=+this.value;onTwinChange(['twinAdam'],'twinRowLuckaB')">${[0,1,2,3].map(v=>`<option value="${v}" ${v===twinVals.luckaB?'selected':''}>${v} år</option>`).join('')}</select></div>
-        <div class="tres"><span class="tscore" id="adamScore"></span></div>
+        <div class="tstamp-wrap" style="margin-top:auto;padding-top:8px;border-top:1px solid var(--border);"><span class="tscore" id="adamScore"></span></div>
       </div>
     </div>
     <div class="twin-verdict" id="twinVerdict"></div>`;
@@ -800,7 +1069,7 @@ function updateTwins(){
 
   if(diff < 0.005){
     v.className = 'twin-verdict';
-    v.innerHTML = `Tvillingarna får <strong>samma bedömning</strong>. ${m.useKon ? '' : 'Inte konstigt – modellen ser inte kön. Men kolla rättvisetestet i steg 3: kan grupperna ändå behandlas olika via en annan variabel?'}`;
+    v.innerHTML = `Tvillingarna får <strong>samma bedömning</strong>. ${m.useKon ? '' : 'Inte konstigt – modellen ser inte kön. Men kolla rättvisetestet ovan: kan grupperna ändå behandlas olika via en annan variabel?'}`;
   }else if(sameLucka && m.useKon){
     v.className = 'twin-verdict flag';
     v.innerHTML = `⚠️ <strong>Identiska meriter – olika bedömning.</strong> Det enda som skiljer Anna och Adam är kön${flips ? ', och det räcker för att svaret ska slå om' : ''}. Detta kallas <strong>direkt diskriminering</strong>.`;
@@ -826,36 +1095,52 @@ function setTwinResult(who, p){
 function renderAll(){
   const mc = document.getElementById('modelChip');
   mc.innerHTML = modelChipHTML(model);
-  mc.style.display = 'block';
-  document.getElementById('awaitCard').style.display = 'none';
-  document.getElementById('cardFair').style.display = '';
-  document.getElementById('cardWeights').style.display = '';
-  document.getElementById('cardTwins').style.display = '';
   ['cardFair','cardWeights','cardTwins'].forEach(id => document.getElementById(id).classList.remove('stale'));
-  document.getElementById('staleChip').classList.remove('show');
-  document.getElementById('lp').classList.add('trained');
   renderFairness();
   document.getElementById('weightsArea').innerHTML = weightsHTML();
   renderTwins();
+  updateWizard();
 }
 
-function markStale(){
-  if(!model) return;
-  document.getElementById('staleChip').classList.add('show');
-  ['cardFair','cardWeights','cardTwins'].forEach(id => document.getElementById(id).classList.add('stale'));
-  document.getElementById('trainCta').classList.add('stale-glow');
-}
-
+/* ── Variable / data changes ── */
 function toggleVar(key){
   if(key === 'kon'){ useKon = !useKon; document.getElementById('vtKon').classList.toggle('on', useKon); }
   if(key === 'lucka'){ useLucka = !useLucka; document.getElementById('vtLucka').classList.toggle('on', useLucka); }
+  invalidateModel();
   renderDataStats();
-  markStale();
 }
 function onDataModeChange(v){
   dataMode = v;
+  document.getElementById('segHist').classList.toggle('on', v==='hist');
+  document.getElementById('segFair').classList.toggle('on', v==='fair');
+  invalidateModel();
   renderDataStats();
-  markStale();
+}
+function invalidateModel(){
+  // changing inputs after training means the model must be retrained
+  if(model){
+    model = null;
+    // reset the training act back to its idle button
+    document.getElementById('trainIdle').style.display='';
+    document.getElementById('trainStage').style.display='none';
+    // if we were past training, drop back so the user re-trains
+    if(currentAct===4){ goToAct(3); }
+  }
+  updateWizard();
+  renderReceipts();
+}
+
+function resetLab(){
+  model=null; useKon=true; useLucka=true; dataMode='hist';
+  twinVals={utb:7,erf:5,luckaA:0,luckaB:0};
+  document.getElementById('segHist').classList.add('on');
+  document.getElementById('segFair').classList.remove('on');
+  document.getElementById('vtKon').classList.add('on');
+  document.getElementById('vtLucka').classList.add('on');
+  document.getElementById('trainIdle').style.display='';
+  document.getElementById('trainStage').style.display='none';
+  renderDataStats();
+  goToAct(1);
 }
 
 function openDataModal(){
@@ -877,23 +1162,12 @@ function openDataModal(){
 }
 function closeDataModal(){ document.getElementById('dataModal').classList.remove('show'); }
 
-function toggleColl(btn, id){
-  btn.classList.toggle('open');
-  document.getElementById(id).classList.toggle('show');
-}
-
 const CONCEPTS={
   amazon:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v14a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/><path d="M4 8h16M8 4v4"/></svg>',
     title:'Det verkliga fallet: Amazon',
     def:'2018 avslöjades att Amazon hade skrotat ett internt AI-verktyg för rekrytering. Verktyget hade tränats på tio års historiska ansökningar – som till stor del kom från män – och lärde sig att nedvärdera CV:n som antydde att den sökande var kvinna, t.ex. genom föreningsnamn.<br><br>Amazon försökte ta bort de uppenbara signalerna, men kunde inte garantera att modellen inte hittade <strong>andra, indirekta vägar</strong> till samma slutsats – en <em>proxyvariabel</em>.<br><br><strong>Obs:</strong> I det här labbet är proxyvariabeln avsiktligt tydlig. I verkligheten kan det vara mycket svårare att upptäcka vilka variabler som fungerar som proxyer.',
     illus:'<svg viewBox="0 0 140 70"><rect x="44" y="8" width="52" height="54" rx="4" fill="rgba(255,255,255,.04)" stroke="#8791b3" stroke-width="1.3"/><line x1="52" y1="20" x2="88" y2="20" stroke="#8791b3" stroke-width="1.5"/><line x1="52" y1="28" x2="88" y2="28" stroke="#8791b3" stroke-width="1.5"/><line x1="52" y1="36" x2="72" y2="36" stroke="#8791b3" stroke-width="1.5"/><circle cx="70" cy="50" r="11" fill="#ef5b5b"/><path d="M66 46l8 8M74 46l-8 8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>'
-  },
-  guide:{
-    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>',
-    title:'Så här utforskar du labbet',
-    def:'<strong>1.</strong> Börja med alla variabler påslagna. Hur stort blir gapet mellan grupperna?<br><br><strong>2.</strong> Stäng av <em>Kön</em> och träna om. Försvinner skevheten helt? Vilken variabel "tar över" könets roll?<br><br><strong>3.</strong> Stäng av <em>CV-uppehållet</em> också. Vad händer med gapet nu?<br><br><strong>4.</strong> Slå på alla variabler igen men byt till <em>rättvis träningsdata</em>. Vad händer med vikten för Kön?<br><br><strong>5.</strong> Gå till Tvillingtestet: ge Anna 1 års CV-uppehåll och Adam 0, med en modell tränad <em>utan</em> kön. Diskriminerar den ändå?',
-    illus:''
   },
   bias:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M8 20h8"/><path d="M12 6L5 8.5M12 6l7 4"/><circle cx="5" cy="9.5" r="2.2"/><circle cx="19" cy="11" r="2.2"/></svg>',
@@ -957,7 +1231,7 @@ function closeConcept(){
   document.getElementById('conceptCard').classList.remove('show');
   document.getElementById('conceptBackdrop').classList.remove('show');
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeConcept();closeDataModal();}});
 
 (function initCardTilt(){
   const el=document.getElementById('conceptCardInner');if(!el)return;
@@ -980,6 +1254,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
 })();
 
 renderDataStats();
+updateWizard();
 </script>
 </body>
 </html>
