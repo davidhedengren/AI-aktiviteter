@@ -165,6 +165,29 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .narr .nf{font-family:'JetBrains Mono',monospace;color:var(--gold);font-size:.86em;margin:4px 0;}
 .narr .nr{color:var(--green);font-weight:700;}.narr .ne{color:var(--text);font-size:.87em;}
 
+/* ── premium beräkningskort i narr (klickbara steg → glaskort) ── */
+.calc-card{display:flex;flex-direction:column;gap:9px;}
+.calc-head{display:flex;align-items:center;gap:9px;}
+.ch-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent2);background:rgba(122,162,255,.12);border:1px solid rgba(122,162,255,.25);padding:3px 9px;border-radius:999px;white-space:nowrap;}
+.ch-title{font-family:'Syne',sans-serif;font-size:.95em;font-weight:700;color:var(--text);letter-spacing:-.01em;}
+.calc-steps{display:flex;flex-direction:column;gap:6px;}
+.calc-step{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:9px 12px;border-radius:13px;border:1px solid rgba(255,255,255,.055);background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));cursor:pointer;transition:border-color .22s var(--ease-out),background .22s var(--ease-out),transform .15s var(--ease-spring),box-shadow .22s var(--ease-out);font-family:inherit;color:inherit;}
+.calc-step:hover{border-color:rgba(122,162,255,.4);background:linear-gradient(180deg,rgba(122,162,255,.1),rgba(122,162,255,.02));transform:translateY(-1px);box-shadow:0 8px 20px rgba(77,128,255,.14);}
+.calc-step:active{transform:translateY(0) scale(.985);}
+.cs-num{width:21px;height:21px;border-radius:50%;background:rgba(122,162,255,.15);border:1px solid rgba(122,162,255,.32);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cs-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
+.cs-label{font-size:.68em;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;}
+.cs-formula{font-family:'JetBrains Mono',monospace;font-size:.87em;color:var(--text);white-space:nowrap;overflow-x:auto;scrollbar-width:none;}
+.cs-formula::-webkit-scrollbar{display:none;}
+.cs-formula .fw{color:#5fe0a3;}
+.cs-formula .fx{color:#dfe6fb;}
+.cs-formula .fb{color:#ff8f96;}
+.cs-formula .fr{color:var(--gold);font-weight:700;}
+.cs-chev{color:var(--dim2);flex-shrink:0;transition:transform .2s var(--ease-out),color .2s var(--ease-out);width:14px;height:14px;}
+.calc-step:hover .cs-chev{color:var(--accent2);transform:translateX(2px);}
+.calc-result{font-size:.85em;color:var(--dim);}
+.calc-result strong{color:var(--text);}
+
 .train-msg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(180deg,rgba(24,28,48,.72),rgba(15,18,32,.75));backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 30px;text-align:center;z-index:10;display:none;max-width:420px;width:90%;box-shadow:0 30px 80px rgba(0,0,0,.6);}
 .train-msg.show{display:block;animation:fadeIn .35s var(--ease-spring);}
 .train-msg .tm-icon{width:38px;height:38px;margin:0 auto 10px;color:var(--accent2);}
@@ -228,7 +251,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
   box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;
   transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
   transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);
-  will-change:transform;}
+  will-change:transform;max-height:86vh;overflow-y:auto;}
 .concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
   padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,206,84,.15) 45%,transparent 65%);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
@@ -357,6 +380,8 @@ const ICON_TARGET='<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none"
 const ICON_SEARCH='<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="vertical-align:-2px"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>';
 const ICON_CHECK='<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>';
 const ICON_CHART='<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="vertical-align:-2px"><path d="M3 3v18h18M7 16l4-6 3 3 5-7"/></svg>';
+const ICON_SUM='<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M18 4H6l6.5 8L6 20h12"/></svg>';
+const ICON_ACT='<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" style="vertical-align:-2px"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg>';
 const CALCVARS=[{key:'a',name:'Input A',desc:'',unit:'',min:0,max:10,def:70,weight:0,isCalc:true},{key:'b',name:'Input B',desc:'',unit:'',min:0,max:10,def:40,weight:0,isCalc:true}];
 const ALLVARS=[{key:'study',name:'Pluggtimmar',desc:'inför provet',unit:'h',min:0,max:20,def:65,weight:0.40,realStep:0.5},{key:'attend',name:'Närvaro',desc:'av lektionerna',unit:'%',min:0,max:100,def:80,weight:0.42,realStep:5},{key:'sleep',name:'Sömn',desc:'natten innan',unit:'h',min:0,max:10,def:60,weight:0.12,realStep:0.5},{key:'food',name:'Frukost',desc:'på provdagen',unit:'kcal',min:0,max:800,def:50,weight:0.06,realStep:50}];
 const GYMVARS=[{key:'sleep',name:'Sömn',desc:'senaste natten',unit:'h',min:0,max:12,def:60,weight:0,optimal:0.6,realStep:0.5},{key:'meal',name:'Sedan måltid',desc:'timmar sedan',unit:'h',min:0,max:6,def:40,weight:0,optimal:0.35,realStep:0.5},{key:'stress',name:'Stressnivå',desc:'1–10',unit:'',min:1,max:10,def:30,weight:0,optimal:0.2,realStep:1},{key:'recovery',name:'Återhämtning',desc:'timmar sedan träning',unit:'h',min:0,max:72,def:50,weight:0,optimal:0.42,realStep:1}];
@@ -469,7 +494,7 @@ function startTraining(){if(trainTimer||isCalc())return;if(trained&&!confirm('Vi
     document.getElementById('epochVal').textContent=epoch;initV();forwardFull();drawNet();
     if(epoch>=maxE||loss<(curSc==='gym'?0.03:0.005)){clearInterval(trainTimer);trainTimer=null;trained=true;isTraining=false;stopTrainAnim();document.getElementById('lossVal').textContent=loss.toFixed(4);document.getElementById('lossSparkEnd').textContent=`Epok ${epoch}`;document.getElementById('lossBox').style.display='block';drawLossSpark();msg.innerHTML=`<svg class="tm-icon ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><div class="tm-title">Träningen klar!</div><div class="tm-text">Nätverket gick igenom <strong>${epoch} epoker</strong> och lärde sig vikterna från ${epoch*(curSc==="gym"?60:30)} exempel.</div><div class="tdash"><div class="tdash-cell"><div class="tl">Förlust</div><div class="tv" style="color:var(--green)">${loss.toFixed(4)}</div></div><div class="tdash-cell"><div class="tl">Vikter uppdaterade</div><div class="tv" style="color:var(--accent2)">${totalWeightUpdates.toLocaleString('sv-SE')}</div></div></div><div style="margin-top:14px;display:flex;flex-direction:column;gap:7px"><button class="btn pri" onclick="goDirectToPredict()" style="flex:none;padding:11px 20px">${ICON_TARGET} Förutsäg →</button><button class="btn" onclick="finishTraining()" style="flex:none;padding:9px 16px">${ICON_SEARCH} Utforska nätverket</button><button class="btn" onclick="openDataModal()" style="flex:none;padding:9px 16px">${ICON_CHART} Visa träningsdata (${savedTrainData.xs.length} ex)</button></div>`;}},curSc==='gym'?25:80);}
 function goDirectToPredict(){document.getElementById('trainMsg').classList.remove('show');goPhase('predict');}
-function finishTraining(){document.getElementById('trainMsg').classList.remove('show');goPhase('explore');resetPass();if(seenGuides.has('explore'))return;seenGuides.add('explore');const msg=document.getElementById('trainMsg');msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><div class="tm-title">Utforska nätverket</div><div class="tm-text">Tryck <strong>▶ Nästa</strong> för att beräkna en neuron i taget.<br><br>De <strong style="color:var(--gold)">gula talen</strong> på linjerna visar varje kopplings bidrag.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Jag förstår →</button></div>`;msg.classList.add('show');}
+function finishTraining(){document.getElementById('trainMsg').classList.remove('show');goPhase('explore');resetPass();if(seenGuides.has('explore'))return;seenGuides.add('explore');const msg=document.getElementById('trainMsg');msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><div class="tm-title">Utforska nätverket</div><div class="tm-text">Tryck <strong>▶ Nästa</strong> för att beräkna en neuron i taget.<br><br>Tryck på ett av <strong>beräkningsstegen</strong> nedanför nätverket för en utförligare förklaring i ord.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Jag förstår →</button></div>`;msg.classList.add('show');}
 function showPredictGuide(){if(seenGuides.has('predict'))return;seenGuides.add('predict');const msg=document.getElementById('trainMsg');msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg><div class="tm-title">Gör egna förutsägelser</div><div class="tm-text">Dra i slidrarna för att ändra indatavärdena. Nätverkets svar uppdateras direkt.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Jag förstår →</button></div>`;msg.classList.add('show');}
 function openDataModal(){if(!savedTrainData)return;const av=activeVars();const hasUnits=av.some(v=>v.unit);let h='<table class="dtable-lg"><thead><tr>';if(hasUnits)for(const v of av)h+=`<th>${v.name}${v.unit?'<br><span style="font-weight:400;opacity:0.6">('+v.unit+')</span>':''}</th>`;for(const v of av)h+=`<th>${v.name}<br><span style="font-weight:400;opacity:0.6">(0–1)</span></th>`;h+=`<th>Resultat</th></tr></thead><tbody>`;for(let r=0;r<savedTrainData.xs.length;r++){h+='<tr>';if(hasUnits)for(let i=0;i<savedTrainData.xs[r].length;i++){const n=savedTrainData.xs[r][i];h+=`<td style="color:var(--text)">${fmtReal(n,av[i])}</td>`;}for(let i=0;i<savedTrainData.xs[r].length;i++)h+=`<td>${savedTrainData.xs[r][i].toFixed(2)}</td>`;h+=`<td class="${savedTrainData.ys[r]===1?'pass':'fail'}">${savedTrainData.ys[r]===1?'Ja':'Nej'}</td></tr>`;}h+='</tbody></table>';document.getElementById('dataModalContent').innerHTML=h;document.getElementById('dataModal').classList.add('show');}
 function closeDataModal(){document.getElementById('dataModal').classList.remove('show');}
@@ -495,11 +520,108 @@ function setPhase(p){phase=p;renderPhaseBar();
   document.querySelectorAll('.pred-only').forEach(el=>el.style.display=show?'block':'none');
   renderCtrl();}
 function renderCtrl(){const el=document.getElementById('controlArea');if(isCalc()){el.innerHTML=`<div class="bg"><button class="btn" onclick="stepBack()">◀</button><button class="btn pri" onclick="stepNeuron()">▶ Nästa</button><button class="btn" onclick="runAllAnim()">⏩ Alla</button><button class="btn dn" onclick="resetPass()">↺</button></div><div class="hint">Heltalsvärden och ReLU – alla beräkningar går att följa för hand.</div>`;}else if(phase==='train'){el.innerHTML=`<div class="bg"><button class="btn grn" onclick="startTraining()">${ICON_BRAIN} Träna modellen</button></div><div class="hint">Nätverket lär sig vikterna genom att träna på data.</div>`;}else if(phase==='explore'){el.innerHTML=`<div class="bg"><button class="btn" onclick="stepBack()">◀</button><button class="btn pri" onclick="stepNeuron()">▶ Nästa</button><button class="btn" onclick="runAllAnim()">⏩ Alla</button><button class="btn dn" onclick="resetPass()">↺</button></div><div class="hint">Stega genom nätverket. ◀ går bakåt.</div><div class="bg" style="margin-top:4px"><button class="btn" onclick="goPhase('predict')">Förutsäg →</button></div>`;}else{el.innerHTML=`<div class="hint" style="margin-bottom:4px">Ändra indatavärdena – nätverkets svar uppdateras direkt!</div><div class="bg"><button class="btn" onclick="goPhase('explore')">← Utforska</button><button class="btn" onclick="fullReset()">🔄 Börja om</button></div>`;}}
+/* ── klick på ett beräkningssteg i narr-panelen → glaskort med förklaring i ord ── */
+function openCalcConcept(row){
+  const title=row.dataset.title||'Beräkning';
+  const defHTML=row.dataset.explain||'';
+  const icon=row.dataset.icon==='act'?ICON_ACT:ICON_SUM;
+  const r=row.getBoundingClientRect();
+  const bx=r.left+r.width/2,by=r.top+r.height/2;
+  const cx=window.innerWidth/2,cy=window.innerHeight/2;
+  const card=document.getElementById('conceptCard');
+  document.getElementById('conceptIcon').innerHTML=icon;
+  document.getElementById('conceptTitle').textContent=title;
+  document.getElementById('conceptDef').innerHTML=defHTML;
+  document.getElementById('conceptIllus').innerHTML='';
+  card.classList.remove('show');
+  card.style.transition='none';
+  card.style.setProperty('--dx',(bx-cx)+'px');
+  card.style.setProperty('--dy',(by-cy)+'px');
+  void card.offsetHeight;
+  card.style.transition='';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
+}
+function buildSumExplain(l,contribs,sum,biasV){
+  const fmt=v=>isCalc()&&v===Math.round(v)?String(Math.round(v)):v.toFixed(isCalc()?1:3);
+  const av=(l===1)?activeVars():null;
+  const parts=contribs.map((c,idx)=>{
+    const srcName=(l===1&&av)?av[idx].name:(l===1?`indata ${idx+1}`:`neuron ${idx+1} i föregående lager`);
+    return `${srcName} har värdet ${fmt(c.input)} och multipliceras med vikten ${fmt(c.w)}, vilket ger ${fmt(c.contrib)}`;
+  }).join('. ');
+  const p2=parts.charAt(0).toUpperCase()+parts.slice(1);
+  return `Neuronen samlar in signaler från ${l===1?'indatalagret':'det föregående lagret'}. ${p2}.<br><br>Alla bidrag adderas ihop tillsammans med neuronens eget <strong>bias</strong> på ${fmt(biasV)} – ett litet startvärde som gör att neuronen kan reagera olika även om alla indata vore noll.<br><br>Summan av allt blir <strong>${fmt(sum)}</strong>, vilket sedan skickas vidare till aktiveringssteget.`;
+}
+function buildActExplain(sum,a,isOut,fn){
+  const fmt=v=>isCalc()&&v===Math.round(v)?String(Math.round(v)):v.toFixed(isCalc()?1:3);
+  let expl;
+  if(isCalc()){
+    expl=`Summan ${fmt(sum)} skickas genom aktiveringsfunktionen <strong>ReLU</strong>, som släpper igenom positiva tal oförändrade men klipper av negativa tal till 0. Här ger det max(0, ${fmt(sum)}) = <strong>${fmt(a)}</strong>.`;
+  }else{
+    const fnName=fn==='σ'?'Sigmoid':fn==='ReLU'?'ReLU':'Tanh';
+    expl=`Summan skickas genom aktiveringsfunktionen <strong>${fnName}</strong>. ${actExplain(fn,sum,a)}. Aktiveringsfunktionen avgör hur starkt neuronen ska "fyra av" på den här summan.`;
+  }
+  expl+=isOut
+    ?`<br><br>Eftersom det här är utdatalagret är <strong>${fmt(a)}</strong> nätverkets slutgiltiga svar för det här försöket${curSc!=='abstract'?' – ett värde över 0,5 tolkas som "Ja", annars "Nej"':''}.`
+    :`<br><br>Värdet <strong>${fmt(a)}</strong> skickas nu vidare som indata till nästa lager.`;
+  return expl;
+}
 function stepNeuron(){if(stepIdx>=stepQueue.length)return;stepHist.push({vals:snapVals(),idx:stepIdx,hl:hlNeuron?{...hlNeuron}:null,edges:[...hlEdges]});const{l,j}=stepQueue[stepIdx];let sum=B[l-1][j];const contribs=[];for(let i=0;i<layers[l-1];i++){const c=W[l-1][j][i]*vals[l-1][i].act;contribs.push({i,w:W[l-1][j][i],input:vals[l-1][i].act,contrib:c});sum+=c;}const a=act_(sum,l);vals[l][j]={raw:sum,act:a,computed:true};hlNeuron={l,j};hlEdges=contribs.map(c=>({l:l-1,i:c.i,j,contribution:c.contrib,w:c.w,input:c.input}));showNarr(l,j,contribs,sum,a);stepIdx++;if(!isCalc())updateOut();triggerPulse();drawNet();}
 function stepBack(){if(!stepHist.length)return;const snap=stepHist.pop();vals=snap.vals;stepIdx=snap.idx;hlNeuron=snap.hl;hlEdges=snap.edges;if(hlNeuron){const{l,j}=hlNeuron;const contribs=[];for(let i=0;i<layers[l-1];i++){const c=W[l-1][j][i]*vals[l-1][i].act;contribs.push({i,w:W[l-1][j][i],input:vals[l-1][i].act,contrib:c});}showNarr(l,j,contribs,vals[l][j].raw,vals[l][j].act);}else{document.getElementById('narr').innerHTML='<div class="ne">Tryck <strong>▶ Nästa</strong> för att stega genom nätverket.</div>';}if(!isCalc())updateOut();drawNet();}
 function runAllAnim(){if(stepIdx>=stepQueue.length)resetPass();function n(){if(stepIdx>=stepQueue.length)return;stepNeuron();setTimeout(n,350);}n();}
 function resetPass(){initV();hlNeuron=null;hlEdges=[];stepHist=[];document.getElementById('narr').innerHTML='<div class="ne">Tryck <strong>▶ Nästa</strong> för att stega genom nätverket.</div>';document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';if(!isCalc())updateTgt();drawNet();}
-function showNarr(l,j,contribs,sum,a){const isOut=l===layers.length-1;const fn=actNForLayer(l);const fmt=v=>isCalc()&&v===Math.round(v)?String(Math.round(v)):v.toFixed(isCalc()?1:3);let h=`<div class="nt">${isOut?'Utdata':`Dolt lager ${l}`}, neuron ${j+1}</div>`;const symTerms=contribs.map(c=>`<span style="color:var(--green)">${fmt(c.w)}</span>×${fmt(c.input)}`);const wrapNeg=v=>v<0?`(<span style="color:var(--gold)">${fmt(v)}</span>)`:`<span style="color:var(--gold)">${fmt(v)}</span>`;const valTerms=contribs.map(c=>wrapNeg(c.contrib));const biasV=B[l-1][j];const biasStr=biasV<0?`(<span style="color:var(--red)">${fmt(biasV)}</span>)`:`<span style="color:var(--red)">${fmt(biasV)}</span>`;h+=`<div class="nf"><strong>1. Summa:</strong> ${symTerms.join(' + ')} + b = ${valTerms.join(' + ')} + ${biasStr} = ${fmt(sum)}</div>`;if(isCalc()){h+=`<div class="nf"><strong>2. Aktivering (ReLU):</strong> max(0, ${fmt(sum)}) = <span class="nr">${fmt(a)}</span></div>`;if(sum<0)h+=`<div class="ne" style="margin-top:2px;font-style:italic;">Summan är negativ → ReLU sätter värdet till 0 (neuronen aktiveras inte)</div>`;else h+=`<div class="ne" style="margin-top:2px;font-style:italic;">Summan är positiv → värdet passerar rakt igenom</div>`;}else{h+=`<div class="nf"><strong>2. Aktivering:</strong> ${actExplain(fn,sum,a)}</div>`;if(isOut){h+=`<div class="ne" style="margin-top:3px">Resultat: nätverket lutar åt <strong>${a>0.5?'Ja':'Nej'}</strong> (${Math.round(Math.max(a,1-a)*100)}%)</div>`;}}document.getElementById('narr').innerHTML=h;}
+function showNarr(l,j,contribs,sum,a){
+  const isOut=l===layers.length-1;
+  const fn=actNForLayer(l);
+  const fmt=v=>isCalc()&&v===Math.round(v)?String(Math.round(v)):v.toFixed(isCalc()?1:3);
+  const layerLbl=isOut?'Utdata':`Dolt lager ${l}`;
+  const sumTerms=contribs.map(c=>`<span class="fw">${fmt(c.w)}</span>×<span class="fx">${fmt(c.input)}</span>`).join(' + ');
+  const biasV=B[l-1][j];
+  const biasTxt=biasV<0?`(<span class="fb">${fmt(biasV)}</span>)`:`<span class="fb">${fmt(biasV)}</span>`;
+  const sumFormula=`${sumTerms} + ${biasTxt} = <span class="fr">${fmt(sum)}</span>`;
+  let actFormula,actLabel;
+  if(isCalc()){actFormula=`max(0, ${fmt(sum)}) = <span class="fr">${fmt(a)}</span>`;actLabel='Aktivering (ReLU)';}
+  else{
+    const fnName=fn==='σ'?'Sigmoid':fn==='ReLU'?'ReLU':'Tanh';
+    actLabel=`Aktivering (${fnName})`;
+    actFormula=fn==='σ'?`σ(${fmt(sum)}) = <span class="fr">${fmt(a)}</span>`:fn==='ReLU'?`max(0, ${fmt(sum)}) = <span class="fr">${fmt(a)}</span>`:`tanh(${fmt(sum)}) = <span class="fr">${fmt(a)}</span>`;
+  }
+  let html=`<div class="calc-card">
+    <div class="calc-head"><span class="ch-badge">${layerLbl}</span><span class="ch-title">Neuron ${j+1}</span></div>
+    <div class="calc-steps">
+      <button class="calc-step" type="button">
+        <span class="cs-num">1</span>
+        <span class="cs-body"><span class="cs-label">Vägd summa</span><span class="cs-formula">${sumFormula}</span></span>
+        <svg class="cs-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      <button class="calc-step" type="button">
+        <span class="cs-num">2</span>
+        <span class="cs-body"><span class="cs-label">${actLabel}</span><span class="cs-formula">${actFormula}</span></span>
+        <svg class="cs-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>`;
+  if(isOut&&!isCalc()){
+    html+=`<div class="calc-result">Resultat: nätverket lutar åt <strong>${a>0.5?'Ja':'Nej'}</strong> (${Math.round(Math.max(a,1-a)*100)}%)</div>`;
+  }else if(isCalc()&&sum<0){
+    html+=`<div class="calc-result" style="font-style:italic;">Summan är negativ → ReLU sätter värdet till 0</div>`;
+  }
+  html+=`</div>`;
+  const narrEl=document.getElementById('narr');
+  narrEl.innerHTML=html;
+  const stepBtns=narrEl.querySelectorAll('.calc-step');
+  if(stepBtns[0]){
+    stepBtns[0].dataset.title='Vägd summa';
+    stepBtns[0].dataset.icon='sum';
+    stepBtns[0].dataset.explain=buildSumExplain(l,contribs,sum,biasV);
+    stepBtns[0].addEventListener('click',()=>openCalcConcept(stepBtns[0]));
+  }
+  if(stepBtns[1]){
+    stepBtns[1].dataset.title=actLabel;
+    stepBtns[1].dataset.icon='act';
+    stepBtns[1].dataset.explain=buildActExplain(sum,a,isOut,fn);
+    stepBtns[1].addEventListener('click',()=>openCalcConcept(stepBtns[1]));
+  }
+}
 function updateTgt(){if(isCalc())return;document.getElementById('targetVal').textContent=targetLabel(getIV());}
 function updateOut(){if(isCalc())return;const last=layers.length-1;if(!vals[last]||!vals[last][0].computed)return;const o=vals[last][0].act;const conf=Math.round(Math.max(o,1-o)*100),pred=o>0.5,tgt=targetFn(getIV()),correct=(pred?1:0)===tgt;document.getElementById('outputVal').textContent=curSc==='abstract'?`${o.toFixed(3)} → ${pred?'1':'0'}`:`${pred?'Ja':'Nej'} (${conf}%)`;document.getElementById('outputVal').style.color=pred?'var(--accent2)':'var(--red)';document.getElementById('verdictVal').innerHTML=correct?`<span class="verdict-pill ok">${ICON_CHECK} Rätt</span>`:`<span class="verdict-pill bad">✗ Fel</span> <span style="font-size:.7em;color:var(--dim2)">rätt: ${tgt===1?'Ja':'Nej'}</span>`;}
 function setScenario(k){curSc=k;hiddenRelu=false;layerActs=[];if(k==='calc'){varEnabled=[true,true];layers=[2,3,1];}else if(k==='gym'){varEnabled=[true,true,true,true];layers=[4,1,1];setTimeout(showGymIntro,100);}else{varEnabled=[true,true,false,false];layers=[2,1,1];}fullReset();}
@@ -524,18 +646,200 @@ function fullReset(){if(trainTimer){clearInterval(trainTimer);trainTimer=null;}s
 function setupCv(){const cv=document.getElementById('cv'),p=cv.parentElement,dpr=devicePixelRatio||1,w=p.clientWidth,h=p.clientHeight;cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+'px';cv.style.height=h+'px';const ctx=cv.getContext('2d');ctx.scale(dpr,dpr);return{ctx,w,h};}
 function nPos(w,h){const narrEl=document.getElementById('narr');const overlay=getComputedStyle(narrEl).position==='absolute';const bottomReserve=overlay?(narrEl.offsetHeight+16):10;const nL=layers.length,px=90,py=25,g=(w-2*px)/Math.max(nL-1,1),ps=[];for(let l=0;l<nL;l++){const n=layers[l],x=px+l*g;const avail=h-2*py-bottomReserve;const ng=Math.min(90,avail/(n));const sy=h/2-(n-1)*ng/2;const lp=[];for(let i=0;i<n;i++)lp.push({x,y:sy+i*ng});ps.push(lp);}return ps;}
 function triggerPulse(){pulseStart=performance.now();if(pulseAnim)cancelAnimationFrame(pulseAnim);const loop=()=>{const t=performance.now()-pulseStart;if(t>900){pulseAnim=null;drawNet();return;}drawNet();pulseAnim=requestAnimationFrame(loop);};loop();}
-function drawNet(){const{ctx,w,h}=setupCv();ctx.fillStyle='#080a12';ctx.fillRect(0,0,w,h);const pos=nPos(w,h);const maxN=Math.max(...layers);const R=maxN<=3?30:maxN<=4?26:maxN<=6?22:18;const op=(trained||isCalc())?1:0.55;const hlSet=new Set(hlEdges.map(e=>`${e.l}-${e.i}-${e.j}`));
-const pulseT=pulseAnim?Math.min(1,(performance.now()-pulseStart)/650):1;
-for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++)for(let i=0;i<W[l][j].length;i++){const wv=W[l][j][i],abs=Math.min(Math.abs(wv),2),key=`${l}-${i}-${j}`,isHl=hlSet.has(key);const th=1.2+3*(abs/2);if(isHl){ctx.strokeStyle='rgba(51,209,122,0.95)';ctx.lineWidth=th+2;ctx.shadowColor='rgba(51,209,122,0.45)';ctx.shadowBlur=12;}else if(isTraining&&wDeltas&&wDeltas[l]&&wDeltas[l][j]){const dw=wDeltas[l][j][i];const adw=Math.min(Math.abs(dw),0.5);if(dw>0.001){ctx.strokeStyle=`rgba(51,209,122,${0.3+0.6*(adw/0.5)})`;}else if(dw<-0.001){ctx.strokeStyle=`rgba(239,91,107,${0.3+0.6*(adw/0.5)})`;}else{ctx.strokeStyle=`rgba(180,195,220,${0.15+0.3*(abs/2)})`;}ctx.lineWidth=th;ctx.shadowBlur=0;}else if(trained||isCalc()){const edgeOp=hlNeuron?0.08+0.15*(abs/2):0.22+0.5*(abs/2);ctx.strokeStyle=`rgba(122,162,255,${edgeOp})`;ctx.lineWidth=hlNeuron?th*0.5:th;ctx.shadowBlur=0;}else{ctx.strokeStyle=`rgba(180,195,220,${0.2+0.15*op})`;ctx.lineWidth=th*0.7;ctx.shadowBlur=0;}
-ctx.beginPath();ctx.moveTo(pos[l][i].x,pos[l][i].y);ctx.lineTo(pos[l+1][j].x,pos[l+1][j].y);ctx.stroke();ctx.shadowBlur=0;
-if(isHl&&pulseAnim&&pulseT<1){const ax=pos[l][i].x,ay=pos[l][i].y,bx=pos[l+1][j].x,by=pos[l+1][j].y;const px=ax+(bx-ax)*pulseT,py=ay+(by-ay)*pulseT;ctx.save();ctx.shadowColor='rgba(255,255,255,0.9)';ctx.shadowBlur=16;ctx.beginPath();ctx.fillStyle='#ffffff';ctx.arc(px,py,3.4,0,Math.PI*2);ctx.fill();ctx.restore();}
-const showW=(isCalc()&&!isHl)||(isTraining)||(trained&&!isHl&&(phase==='predict'||(phase==='explore'&&!hlNeuron)));if(showW){const nEdges=W[l].length*W[l][j].length;const edgeIdx=j*W[l][j].length+i;const t=nEdges>1?0.25+0.5*(edgeIdx/(nEdges-1)):0.5;const mx=pos[l][i].x+t*(pos[l+1][j].x-pos[l][i].x),my=pos[l][i].y+t*(pos[l+1][j].y-pos[l][i].y);const wfs=R>26?10:9;ctx.font=`600 ${wfs}px "JetBrains Mono"`;ctx.textAlign='center';const wtxt=isCalc()&&wv===Math.round(wv)?String(Math.round(wv)):wv.toFixed(2);const wtw=ctx.measureText(wtxt).width;ctx.fillStyle='rgba(8,10,18,0.88)';ctx.fillRect(mx-wtw/2-4,my-wfs/2-3,wtw+8,wfs+6);ctx.fillStyle=isTraining&&wDeltas&&wDeltas[l]&&wDeltas[l][j]?(wDeltas[l][j][i]>0.001?'rgba(51,209,122,0.85)':wDeltas[l][j][i]<-0.001?'rgba(239,91,107,0.85)':'rgba(200,215,235,0.65)'):'rgba(200,215,235,0.65)';ctx.fillText(wtxt,mx,my+wfs/2-2);}
-if(isHl){const edge=hlEdges.find(e=>e.l===l&&e.i===i&&e.j===j);if(edge&&(!pulseAnim||pulseT>=0.55)){const mx=(pos[l][i].x+pos[l+1][j].x)/2,my=(pos[l][i].y+pos[l+1][j].y)/2;const fadeIn=pulseAnim?Math.min(1,(pulseT-0.55)/0.45):1;const fs1=R>26?11:10,fs2=R>26?13:11;const txt1=`${edge.w.toFixed(2)}×${edge.input.toFixed(2)}`,txt2=`= ${edge.contribution.toFixed(3)}`;ctx.font=`500 ${fs1}px "JetBrains Mono"`;const tw1=ctx.measureText(txt1).width;ctx.font=`700 ${fs2}px "JetBrains Mono"`;const tw2=ctx.measureText(txt2).width;const bw=Math.max(tw1,tw2)+12,bh=fs1+fs2+14;ctx.save();ctx.globalAlpha=fadeIn;ctx.fillStyle='rgba(8,10,18,0.92)';ctx.beginPath();ctx.roundRect(mx-bw/2,my-fs1-10,bw,bh,5);ctx.fill();ctx.strokeStyle='rgba(51,209,122,0.3)';ctx.lineWidth=1;ctx.stroke();ctx.font=`500 ${fs1}px "JetBrains Mono"`;ctx.textAlign='center';ctx.fillStyle='rgba(255,255,255,0.7)';ctx.fillText(txt1,mx,my-8);ctx.font=`700 ${fs2}px "JetBrains Mono"`;ctx.fillStyle='#ffce54';ctx.fillText(txt2,mx,my+fs2-2);ctx.restore();}}}
-const fontSize=R>26?14:12;for(let l=0;l<layers.length;l++){ctx.textAlign='center';ctx.font=`700 ${R>26?12:10}px "DM Sans"`;const labelY=pos[l][0].y-R-18;if(l===0){ctx.fillStyle=`rgba(122,162,255,${0.65+0.25*op})`;ctx.fillText('── INDATA ──',pos[l][0].x,labelY);}else if(l===layers.length-1){ctx.fillStyle=`rgba(255,206,84,${0.65+0.25*op})`;ctx.fillText('── UTDATA ──',pos[l][0].x,labelY);}else{ctx.fillStyle=`rgba(255,255,255,${0.35+0.15*op})`;ctx.fillText(`── DOLT ${l} ──`,pos[l][0].x,labelY);}for(let i=0;i<layers[l];i++){const{x,y}=pos[l][i];const v=vals[l][i];const isHl2=hlNeuron&&hlNeuron.l===l&&hlNeuron.j===i;const justLitPulse=isHl2&&pulseAnim&&pulseT>=0.55?Math.min(1,(pulseT-0.55)/0.45):(isHl2?1:0);
-ctx.beginPath();ctx.arc(x,y,R+2,0,Math.PI*2);ctx.fillStyle='#080a12';ctx.fill();
-if(isHl2&&justLitPulse>0){ctx.save();ctx.shadowColor='rgba(255,206,84,0.55)';ctx.shadowBlur=18*justLitPulse;ctx.beginPath();ctx.arc(x,y,R+4,0,Math.PI*2);ctx.strokeStyle=`rgba(255,206,84,${0.35*justLitPulse})`;ctx.lineWidth=6;ctx.stroke();ctx.restore();}
-ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);if(v.computed){const t=Math.tanh(v.act);ctx.fillStyle=t>=0?`rgba(122,162,255,${(0.15+0.45*t)*op})`:`rgba(239,91,107,${(0.15+0.45*Math.abs(t))*op})`;}else ctx.fillStyle=`rgba(40,48,70,${0.55+0.3*op})`;ctx.fill();if(isHl2){ctx.strokeStyle='rgba(255,206,84,1)';ctx.lineWidth=3.5;ctx.shadowColor='rgba(255,206,84,0.5)';ctx.shadowBlur=14;}else{const isIn=l===0,isOut=l===layers.length-1;ctx.strokeStyle=v.computed?(isIn?`rgba(122,162,255,${0.75*op})`:(isOut?`rgba(255,206,84,${0.75*op})`:`rgba(255,255,255,${0.5*op})`)):`rgba(255,255,255,${0.15+0.1*op})`;ctx.lineWidth=v.computed?2.5:1.8;ctx.shadowBlur=0;}ctx.stroke();ctx.shadowBlur=0;ctx.textAlign='center';ctx.textBaseline='middle';if(v.computed){ctx.font=`600 ${fontSize}px "JetBrains Mono"`;ctx.fillStyle=v.act>=0?`rgba(190,210,255,${0.7+0.3*op})`:`rgba(255,170,175,${0.7+0.3*op})`;const vTxt=isCalc()&&v.act===Math.round(v.act)?String(Math.round(v.act)):v.act.toFixed(isCalc()?1:2);ctx.fillText(vTxt,x,y);}else{ctx.font=`500 ${fontSize-1}px "DM Sans"`;ctx.fillStyle=`rgba(255,255,255,${0.22+0.1*op})`;ctx.fillText('?',x,y);}if(l>0){ctx.font=`500 ${R>26?9:8}px "JetBrains Mono"`;ctx.fillStyle=`rgba(255,255,255,${0.4*op})`;const bv=B[l-1][i];const bTxt=isCalc()&&bv===Math.round(bv)?String(Math.round(bv)):bv.toFixed(2);ctx.fillText(`+b ${bTxt}`,x,y+R+12);}if(l===0){const av=activeVars();ctx.font=`600 ${R>26?11:9}px "DM Sans"`;ctx.fillStyle=`rgba(122,162,255,${0.7+0.2*op})`;ctx.fillText(av[i].name,x,y+R+13);}if(l===layers.length-1){const outLabel=isCalc()?'Resultat':curSc==='exam'?'Klarar provet?':curSc==='gym'?'Bra träning?':'y';ctx.font=`600 ${R>26?11:9}px "DM Sans"`;ctx.fillStyle=`rgba(255,206,84,${0.7+0.2*op})`;ctx.fillText(outLabel,x,y+R+26);}}}
-document.getElementById('untrainedBadge').style.display=(!trained&&!isCalc())?'block':'none';}
+const RGB_BLUE=[124,162,255];
+const RGB_BLUE_DEEP=[36,52,120];
+const RGB_RED=[255,110,124];
+const RGB_RED_DEEP=[120,32,46];
+const RGB_GOLD=[255,206,102];
+const RGB_GREEN=[86,224,158];
+const RGB_GREY=[150,162,196];
+const RGB_GREY_DEEP=[28,33,54];
+function rgbaStr(rgb,a){return `rgba(${rgb[0]|0},${rgb[1]|0},${rgb[2]|0},${a})`;}
+function mixRgb(a,b,t){return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];}
+function drawCanvasBackdrop(ctx,w,h){
+  const g=ctx.createRadialGradient(w*0.5,h*0.36,0,w*0.5,h*0.5,Math.max(w,h)*0.75);
+  g.addColorStop(0,'#0e1326');g.addColorStop(0.55,'#0a0d1a');g.addColorStop(1,'#05060d');
+  ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+  ctx.save();ctx.globalAlpha=0.4;ctx.fillStyle='rgba(122,162,255,0.05)';
+  const step=28;
+  for(let gx=step/2;gx<w;gx+=step)for(let gy=step/2;gy<h;gy+=step){ctx.beginPath();ctx.arc(gx,gy,1,0,Math.PI*2);ctx.fill();}
+  ctx.restore();
+}
+function drawGlassEdge(ctx,x1,y1,x2,y2,rgb,alpha,width,glow){
+  ctx.save();ctx.lineCap='round';
+  if(glow){ctx.shadowColor=rgbaStr(rgb,Math.min(0.65,alpha));ctx.shadowBlur=9;}
+  const grad=ctx.createLinearGradient(x1,y1,x2,y2);
+  grad.addColorStop(0,rgbaStr(rgb,alpha*0.8));grad.addColorStop(0.5,rgbaStr(rgb,alpha));grad.addColorStop(1,rgbaStr(rgb,alpha*0.8));
+  ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=grad;ctx.lineWidth=width;ctx.stroke();
+  ctx.shadowBlur=0;ctx.restore();
+}
+function drawWeightChip(ctx,mx,my,text,rgb,fontSize){
+  ctx.save();ctx.font=`700 ${fontSize}px "JetBrains Mono"`;
+  const tw=ctx.measureText(text).width;const padX=7,h=fontSize+8,w=tw+padX*2;
+  ctx.beginPath();ctx.roundRect(mx-w/2,my-h/2,w,h,h/2);
+  const bg=ctx.createLinearGradient(mx,my-h/2,mx,my+h/2);
+  bg.addColorStop(0,'rgba(22,26,44,0.94)');bg.addColorStop(1,'rgba(10,12,20,0.94)');
+  ctx.fillStyle=bg;ctx.fill();
+  ctx.lineWidth=1;ctx.strokeStyle=rgbaStr(rgb,0.55);ctx.stroke();
+  ctx.fillStyle=rgbaStr(rgb,0.98);ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(text,mx,my+0.5);ctx.restore();
+}
+function drawLayerChip(ctx,cx,cy,text,rgb){
+  ctx.save();ctx.font=`700 10px "JetBrains Mono"`;
+  const tw=ctx.measureText(text).width;const padX=10,h=19,w=tw+padX*2;
+  ctx.beginPath();ctx.roundRect(cx-w/2,cy-h/2,w,h,h/2);
+  ctx.fillStyle=rgbaStr(rgb,0.12);ctx.fill();
+  ctx.lineWidth=1;ctx.strokeStyle=rgbaStr(rgb,0.4);ctx.stroke();
+  ctx.fillStyle=rgbaStr(rgb,0.95);ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(text,cx,cy+0.5);ctx.restore();
+}
+function drawGlassNeuron(ctx,x,y,R,opts){
+  const{computed,sign,magnitude,rimRgb,isHl,justLitPulse,op}=opts;
+  let top,bot;
+  if(!computed){top=mixRgb(RGB_GREY,[255,255,255],0.05);bot=RGB_GREY_DEEP;}
+  else if(sign<0){top=mixRgb(RGB_RED,[255,255,255],0.22*magnitude);bot=mixRgb(RGB_RED_DEEP,RGB_RED,0.12);}
+  else{top=mixRgb(RGB_BLUE,[255,255,255],0.22*magnitude);bot=mixRgb(RGB_BLUE_DEEP,RGB_BLUE,0.12);}
+  const shGrad=ctx.createRadialGradient(x,y+R*0.78,0,x,y+R*0.78,R*0.95);
+  shGrad.addColorStop(0,`rgba(0,0,0,${0.38*op})`);shGrad.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.beginPath();ctx.ellipse(x,y+R*0.78,R*0.95,R*0.3,0,0,Math.PI*2);ctx.fillStyle=shGrad;ctx.fill();
+  if(isHl&&justLitPulse>0){
+    ctx.save();ctx.beginPath();ctx.arc(x,y,R+6,0,Math.PI*2);
+    ctx.strokeStyle=rgbaStr(RGB_GOLD,0.4*justLitPulse);ctx.lineWidth=5;
+    ctx.shadowColor=rgbaStr(RGB_GOLD,0.6*justLitPulse);ctx.shadowBlur=22*justLitPulse;
+    ctx.stroke();ctx.restore();
+  }
+  const grad=ctx.createRadialGradient(x-R*0.36,y-R*0.42,R*0.1,x,y,R*1.08);
+  grad.addColorStop(0,rgbaStr(top,0.96*op));grad.addColorStop(0.5,rgbaStr(mixRgb(top,bot,0.55),0.92*op));grad.addColorStop(1,rgbaStr(bot,0.94*op));
+  ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);ctx.fillStyle=grad;ctx.fill();
+  ctx.save();ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);ctx.clip();
+  const spec=ctx.createRadialGradient(x-R*0.4,y-R*0.45,0,x-R*0.4,y-R*0.45,R*0.65);
+  spec.addColorStop(0,`rgba(255,255,255,${0.5*op})`);spec.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=spec;ctx.fillRect(x-R,y-R,R*2,R*2);ctx.restore();
+  ctx.beginPath();ctx.arc(x,y,R-0.75,0,Math.PI*2);
+  if(isHl){ctx.strokeStyle=rgbaStr(RGB_GOLD,0.95);ctx.lineWidth=2.6;ctx.shadowColor=rgbaStr(RGB_GOLD,0.55);ctx.shadowBlur=12;}
+  else{ctx.strokeStyle=rgbaStr(rimRgb,(computed?0.55:0.25)*op+0.08);ctx.lineWidth=1.4;}
+  ctx.stroke();ctx.shadowBlur=0;
+}
+function drawNet(){
+  const{ctx,w,h}=setupCv();
+  drawCanvasBackdrop(ctx,w,h);
+  const pos=nPos(w,h);
+  const maxN=Math.max(...layers);
+  const R=maxN<=3?32:maxN<=4?28:maxN<=6?23:19;
+  const op=(trained||isCalc())?1:0.55;
+  const hlSet=new Set(hlEdges.map(e=>`${e.l}-${e.i}-${e.j}`));
+  const pulseT=pulseAnim?Math.min(1,(performance.now()-pulseStart)/650):1;
+  for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++)for(let i=0;i<W[l][j].length;i++){
+    const wv=W[l][j][i],abs=Math.min(Math.abs(wv),2),key=`${l}-${i}-${j}`,isHl=hlSet.has(key);
+    const width=1.3+2.6*(abs/2);
+    const x1=pos[l][i].x,y1=pos[l][i].y,x2=pos[l+1][j].x,y2=pos[l+1][j].y;
+    let rgb,alpha,lw,glow=false;
+    if(isHl){rgb=RGB_GREEN;alpha=0.95;lw=width+2;glow=true;}
+    else if(isTraining&&wDeltas&&wDeltas[l]&&wDeltas[l][j]){
+      const dw=wDeltas[l][j][i];const adw=Math.min(Math.abs(dw),0.5);
+      if(dw>0.001){rgb=RGB_GREEN;alpha=0.35+0.55*(adw/0.5);}
+      else if(dw<-0.001){rgb=RGB_RED;alpha=0.35+0.55*(adw/0.5);}
+      else{rgb=RGB_GREY;alpha=0.2+0.25*(abs/2);}
+      lw=width;
+    }else if(trained||isCalc()){
+      const edgeOp=hlNeuron?0.1+0.16*(abs/2):0.28+0.5*(abs/2);
+      rgb=RGB_BLUE;alpha=edgeOp;lw=hlNeuron?width*0.55:width;
+    }else{rgb=RGB_GREY;alpha=0.22+0.15*op;lw=width*0.7;}
+    drawGlassEdge(ctx,x1,y1,x2,y2,rgb,alpha,lw,glow);
+    if(isHl&&pulseAnim&&pulseT<1){
+      const px=x1+(x2-x1)*pulseT,py=y1+(y2-y1)*pulseT;
+      ctx.save();ctx.shadowColor='rgba(255,255,255,0.95)';ctx.shadowBlur=16;
+      ctx.beginPath();ctx.fillStyle='#ffffff';ctx.arc(px,py,3.6,0,Math.PI*2);ctx.fill();ctx.restore();
+    }
+    const showW=(isCalc()&&!isHl)||(isTraining)||(trained&&!isHl&&(phase==='predict'||(phase==='explore'&&!hlNeuron)));
+    if(showW){
+      const nEdges=W[l].length*W[l][j].length;const edgeIdx=j*W[l][j].length+i;
+      const t=nEdges>1?0.25+0.5*(edgeIdx/(nEdges-1)):0.5;
+      const mx=x1+t*(x2-x1),my=y1+t*(y2-y1);
+      const wfs=R>26?10:9;
+      const wtxt=isCalc()&&wv===Math.round(wv)?String(Math.round(wv)):wv.toFixed(2);
+      const chipRgb=isTraining&&wDeltas&&wDeltas[l]&&wDeltas[l][j]?(wDeltas[l][j][i]>0.001?RGB_GREEN:wDeltas[l][j][i]<-0.001?RGB_RED:RGB_GREY):(wv>=0?RGB_GREEN:RGB_RED);
+      drawWeightChip(ctx,mx,my,wtxt,chipRgb,wfs);
+    }
+    if(isHl){
+      const edge=hlEdges.find(e=>e.l===l&&e.i===i&&e.j===j);
+      if(edge&&(!pulseAnim||pulseT>=0.55)){
+        const mx=(x1+x2)/2,my=(y1+y2)/2;
+        const fadeIn=pulseAnim?Math.min(1,(pulseT-0.55)/0.45):1;
+        const fs1=R>26?11:10,fs2=R>26?13:11;
+        const txt1=`${edge.w.toFixed(2)}×${edge.input.toFixed(2)}`,txt2=`= ${edge.contribution.toFixed(3)}`;
+        ctx.font=`500 ${fs1}px "JetBrains Mono"`;const tw1=ctx.measureText(txt1).width;
+        ctx.font=`700 ${fs2}px "JetBrains Mono"`;const tw2=ctx.measureText(txt2).width;
+        const bw=Math.max(tw1,tw2)+18,bh=fs1+fs2+18;
+        ctx.save();ctx.globalAlpha=fadeIn;
+        const bx0=mx-bw/2,by0=my-fs1-14;
+        ctx.beginPath();ctx.roundRect(bx0,by0,bw,bh,10);
+        const bg=ctx.createLinearGradient(mx,by0,mx,by0+bh);
+        bg.addColorStop(0,'rgba(26,32,54,0.96)');bg.addColorStop(1,'rgba(12,15,26,0.96)');
+        ctx.shadowColor='rgba(0,0,0,0.4)';ctx.shadowBlur=14;
+        ctx.fillStyle=bg;ctx.fill();ctx.shadowBlur=0;
+        ctx.strokeStyle='rgba(86,224,158,0.4)';ctx.lineWidth=1;ctx.stroke();
+        ctx.font=`500 ${fs1}px "JetBrains Mono"`;ctx.textAlign='center';
+        ctx.fillStyle='rgba(255,255,255,0.75)';ctx.fillText(txt1,mx,by0+fs1+4);
+        ctx.font=`700 ${fs2}px "JetBrains Mono"`;ctx.fillStyle='#ffce54';
+        ctx.fillText(txt2,mx,by0+fs1+fs2+8);
+        ctx.restore();
+      }
+    }
+  }
+  const fontSize=R>26?14:12;
+  for(let l=0;l<layers.length;l++){
+    const isInLayer=l===0,isOutLayer=l===layers.length-1;
+    const chipRgb=isInLayer?RGB_BLUE:isOutLayer?RGB_GOLD:RGB_GREY;
+    const chipText=isInLayer?'INDATA':isOutLayer?'UTDATA':`DOLT ${l}`;
+    drawLayerChip(ctx,pos[l][0].x,pos[l][0].y-R-22,chipText,chipRgb);
+    for(let i=0;i<layers[l];i++){
+      const{x,y}=pos[l][i];
+      const v=vals[l][i];
+      const isHl2=hlNeuron&&hlNeuron.l===l&&hlNeuron.j===i;
+      const justLitPulse=isHl2&&pulseAnim&&pulseT>=0.55?Math.min(1,(pulseT-0.55)/0.45):(isHl2?1:0);
+      const rimRgb=isInLayer?RGB_BLUE:isOutLayer?RGB_GOLD:RGB_GREY;
+      const tMag=v.computed?Math.min(1,Math.abs(Math.tanh(v.act))):0;
+      drawGlassNeuron(ctx,x,y,R,{computed:v.computed,sign:v.act>=0?1:-1,magnitude:tMag,rimRgb,isHl:isHl2,justLitPulse,op});
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      if(v.computed){
+        ctx.font=`700 ${fontSize}px "JetBrains Mono"`;
+        ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=4;
+        ctx.fillStyle=v.act>=0?`rgba(226,234,255,${0.85+0.15*op})`:`rgba(255,214,218,${0.85+0.15*op})`;
+        const vTxt=isCalc()&&v.act===Math.round(v.act)?String(Math.round(v.act)):v.act.toFixed(isCalc()?1:2);
+        ctx.fillText(vTxt,x,y);ctx.shadowBlur=0;
+      }else{
+        ctx.font=`500 ${fontSize-1}px "DM Sans"`;
+        ctx.fillStyle=`rgba(255,255,255,${0.3+0.1*op})`;
+        ctx.fillText('?',x,y);
+      }
+      if(l>0){
+        const bv=B[l-1][i];
+        const bTxt=`b ${isCalc()&&bv===Math.round(bv)?String(Math.round(bv)):bv.toFixed(2)}`;
+        ctx.font=`600 ${R>26?9:8}px "JetBrains Mono"`;
+        const btw=ctx.measureText(bTxt).width;
+        const bpx=btw+10,bph=14;
+        ctx.beginPath();ctx.roundRect(x-bpx/2,y+R+7,bpx,bph,bph/2);
+        ctx.fillStyle='rgba(14,17,30,0.75)';ctx.fill();
+        ctx.strokeStyle='rgba(255,255,255,0.08)';ctx.lineWidth=1;ctx.stroke();
+        ctx.fillStyle=`rgba(255,255,255,${0.55*op+0.1})`;
+        ctx.fillText(bTxt,x,y+R+7+bph/2+0.5);
+      }
+      if(l===0){
+        const av=activeVars();
+        ctx.font=`600 ${R>26?11:9}px "DM Sans"`;
+        ctx.fillStyle=`rgba(150,180,255,${0.8+0.2*op})`;
+        ctx.fillText(av[i].name,x,y+R+16);
+      }
+      if(l===layers.length-1){
+        const outLabel=isCalc()?'Resultat':curSc==='exam'?'Klarar provet?':curSc==='gym'?'Bra träning?':'y';
+        ctx.font=`600 ${R>26?11:9}px "DM Sans"`;
+        ctx.fillStyle=`rgba(255,214,130,${0.8+0.2*op})`;
+        ctx.fillText(outLabel,x,y+R+29);
+      }
+    }
+  }
+  document.getElementById('untrainedBadge').style.display=(!trained&&!isCalc())?'block':'none';}
 const cv=document.getElementById('cv');const tip=document.getElementById('tooltip');
 cv.addEventListener('mousemove',function(e){if(!isCalc()){this.style.cursor='default';return;}const rect=this.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top;const h2=rect.height,pos=nPos(rect.width,h2);const maxN=Math.max(...layers);const R=maxN<=3?30:maxN<=4?26:maxN<=6?22:18;
 for(let l=1;l<layers.length;l++)for(let j=0;j<layers[l];j++){const dx=mx-pos[l][j].x,dy=my-pos[l][j].y;if(dx*dx+dy*dy<R*R){this.style.cursor='pointer';return;}}
@@ -552,57 +856,4 @@ const CONCEPTS={
   gNeuron:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>',title:'Neuron',def:'<strong>Neuron</strong> – en beräkningsenhet. Den tar emot värden, multiplicerar dem med vikter, summerar och kör resultatet genom en aktiveringsfunktion.',illus:'<svg viewBox="0 0 140 70"><g stroke="rgba(122,162,255,.5)" stroke-width="1.5"><line x1="15" y1="14" x2="60" y2="35"/><line x1="15" y1="35" x2="60" y2="35"/><line x1="15" y1="56" x2="60" y2="35"/><line x1="80" y1="35" x2="120" y2="35"/></g><circle cx="15" cy="14" r="4" fill="#7aa2ff"/><circle cx="15" cy="35" r="4" fill="#7aa2ff"/><circle cx="15" cy="56" r="4" fill="#7aa2ff"/><circle cx="70" cy="35" r="11" fill="rgba(77,128,255,.25)" stroke="#7aa2ff" stroke-width="2"/><circle cx="120" cy="35" r="4" fill="#ffce54"/></svg>'},
   gWeight:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="12" r="2.5"/><path d="M7.5 12h9" stroke-width="3"/></svg>',title:'Vikt',def:'<strong>Vikt</strong> – ett tal som bestämmer hur stark kopplingen mellan två neuroner är. Vikterna är det nätverket <em>lär sig</em> under träning. Tjockare linje = starkare vikt.',illus:'<svg viewBox="0 0 140 70"><circle cx="20" cy="35" r="9" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="2"/><circle cx="120" cy="35" r="9" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="2"/><line x1="29" y1="35" x2="111" y2="35" stroke="#33d17a" stroke-width="5" stroke-linecap="round"/><text x="70" y="25" fill="#ffce54" font-size="13" font-family="JetBrains Mono" text-anchor="middle">w</text></svg>'},
   gBias:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="5"/><path d="M17 17l4 4M14 3v4M12 5h4" stroke-linecap="round"/></svg>',title:'Bias (+b)',def:'<strong>Bias</strong> – ett startvärde som adderas i varje neuron innan aktiveringen. Gör att neuronen kan aktiveras även om alla inputs är noll.',illus:'<svg viewBox="0 0 140 70"><circle cx="70" cy="28" r="14" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="2"/><line x1="70" y1="42" x2="70" y2="54" stroke="#ef5b6b" stroke-width="2"/><rect x="50" y="54" width="40" height="14" rx="7" fill="rgba(239,91,107,.15)" stroke="#ef5b6b" stroke-width="1.2"/><text x="70" y="64" fill="#ff9aa5" font-size="10" font-family="JetBrains Mono" text-anchor="middle">+b</text></svg>'},
-  gAct:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg>',title:'Aktivering',def:'När en neuron "aktiveras" skickar den vidare en signal till nästa lager. Aktiveringsfunktionen bestämmer <em>hur starkt</em> den reagerar.',illus:'<svg viewBox="0 0 140 70"><path d="M10 55 C40 55 40 15 70 15 C100 15 100 55 130 55" fill="none" stroke="#7aa2ff" stroke-width="2.5" stroke-linecap="round"/><circle cx="70" cy="15" r="3.5" fill="#ffce54"/></svg>'},
-  gActFn:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18c4 0 5-12 9-12s5 12 9 12"/></svg>',title:'Aktiveringsfunktion',def:'Den matematiska funktion varje neuron kör sitt summavärde genom. <strong style="color:var(--green)">ReLU</strong>, <strong style="color:var(--accent2)">Sigmoid</strong> och <strong style="color:var(--gold)">Tanh</strong> är tre vanliga varianter.',illus:'<svg viewBox="0 0 140 70"><path d="M8 55 L34 55 L34 15 L60 15" fill="none" stroke="#33d17a" stroke-width="2.5" stroke-linecap="round"/><path d="M64 55 C74 55 74 15 84 15" fill="none" stroke="#7aa2ff" stroke-width="2.5" stroke-linecap="round"/><path d="M92 35 C98 15 106 15 112 35 C118 55 126 55 132 35" fill="none" stroke="#ffce54" stroke-width="2.5" stroke-linecap="round"/></svg>'},
-  gHidden:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="2" width="4" height="20" rx="1"/><rect x="17" y="6" width="4" height="12" rx="1"/></svg>',title:'Dolt lager',def:'Lager mellan indata och utdata. Det är här nätverket hittar mönster i datan. Fler neuroner/lager ger mer komplexa samband.',illus:'<svg viewBox="0 0 140 70"><g stroke="rgba(255,255,255,.15)" stroke-width="1"><line x1="20" y1="15" x2="70" y2="15"/><line x1="20" y1="15" x2="70" y2="35"/><line x1="20" y1="15" x2="70" y2="55"/><line x1="20" y1="35" x2="70" y2="15"/><line x1="20" y1="35" x2="70" y2="35"/><line x1="20" y1="35" x2="70" y2="55"/><line x1="20" y1="55" x2="70" y2="15"/><line x1="20" y1="55" x2="70" y2="35"/><line x1="20" y1="55" x2="70" y2="55"/><line x1="70" y1="15" x2="120" y2="35"/><line x1="70" y1="35" x2="120" y2="35"/><line x1="70" y1="55" x2="120" y2="35"/></g><circle cx="20" cy="15" r="4" fill="#7aa2ff"/><circle cx="20" cy="35" r="4" fill="#7aa2ff"/><circle cx="20" cy="55" r="4" fill="#7aa2ff"/><circle cx="70" cy="15" r="5" fill="rgba(51,209,122,.3)" stroke="#33d17a" stroke-width="1.5"/><circle cx="70" cy="35" r="5" fill="rgba(51,209,122,.3)" stroke="#33d17a" stroke-width="1.5"/><circle cx="70" cy="55" r="5" fill="rgba(51,209,122,.3)" stroke="#33d17a" stroke-width="1.5"/><circle cx="120" cy="35" r="5" fill="#ffce54"/></svg>'},
-  gOutput:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="12" r="4"/><path d="M14 12h7m-3-3 3 3-3 3" stroke-linecap="round" stroke-linejoin="round"/></svg>',title:'Utdata',def:'Nätverkets slutgiltiga svar. Värdet representerar en <em>sannolikhet</em> mellan 0 och 1 – t.ex. 0.85 betyder 85% säkerhet på "Ja".',illus:'<svg viewBox="0 0 140 70"><g stroke="rgba(255,255,255,.15)"><line x1="20" y1="15" x2="90" y2="35"/><line x1="20" y1="35" x2="90" y2="35"/><line x1="20" y1="55" x2="90" y2="35"/></g><circle cx="20" cy="15" r="4" fill="#7aa2ff"/><circle cx="20" cy="35" r="4" fill="#7aa2ff"/><circle cx="20" cy="55" r="4" fill="#7aa2ff"/><circle cx="90" cy="35" r="13" fill="rgba(255,206,84,.25)" stroke="#ffce54" stroke-width="2.5"/><text x="90" y="39" text-anchor="middle" font-size="11" font-family="JetBrains Mono" fill="#ffce54">.85</text></svg>'},
-  gLoss:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l6 6 4-4 8 8"/><path d="M15 15h6v-6"/></svg>',title:'Förlust',def:'Ett mått på hur fel nätverket har. Under träningen jämförs svaret med det rätta – skillnaden blir förlusten. Målet: göra den så liten som möjligt.',illus:'<svg viewBox="0 0 140 70"><rect x="15" y="15" width="14" height="45" fill="rgba(239,91,107,.35)"/><rect x="40" y="28" width="14" height="32" fill="rgba(239,91,107,.3)"/><rect x="65" y="40" width="14" height="20" fill="rgba(255,206,84,.3)"/><rect x="90" y="50" width="14" height="10" fill="rgba(51,209,122,.35)"/><rect x="115" y="55" width="14" height="5" fill="rgba(51,209,122,.5)"/><path d="M22 15 L47 28 L72 40 L97 50 L122 55" stroke="#e8ecf8" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".6"/></svg>'},
-  gForward:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h6m4 0h6M8 8l-4 4 4 4m8-8 4 4-4 4"/></svg>',title:'Framåtpass',def:'Processen där data flödar genom nätverket från indata till utdata, lager för lager.',illus:'<svg viewBox="0 0 140 70"><g stroke="#7aa2ff" stroke-width="2" stroke-linecap="round" fill="none"><path d="M15 35h25m-8-6 8 6-8 6"/><path d="M55 35h25m-8-6 8 6-8 6"/><path d="M95 35h25m-8-6 8 6-8 6"/></g><circle cx="10" cy="35" r="4" fill="#7aa2ff"/><circle cx="50" cy="35" r="4" fill="#33d17a"/><circle cx="90" cy="35" r="4" fill="#ffce54"/><circle cx="130" cy="35" r="4" fill="#ffce54"/></svg>'},
-  gEpoch:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 21v-5h5"/></svg>',title:'Epok',def:'Ett varv genom all träningsdata. Under varje epok justeras vikterna lite. Fler epoker = nätverket har övat mer.',illus:'<svg viewBox="0 0 140 70"><g transform="translate(70,35)"><circle r="24" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="3"/><path d="M0 -24 A24 24 0 1 1 -17 -17" fill="none" stroke="#7aa2ff" stroke-width="3" stroke-linecap="round"/></g><text x="70" y="40" text-anchor="middle" font-family="JetBrains Mono" font-size="13" fill="#e8ecf8" font-weight="700">42</text></svg>'},
-  gPred:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>',title:'Förutsägelse',def:'Nätverkets svar för nya indatavärden. Jämför med <strong style="color:var(--gold)">rätt svar</strong> för att se om nätverket lärt sig rätt.',illus:'<svg viewBox="0 0 140 70"><circle cx="70" cy="35" r="24" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/><circle cx="70" cy="35" r="14" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/><circle cx="76" cy="29" r="5" fill="#33d17a"/><text x="70" y="62" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#33d17a">94%</text></svg>'}
-};
-function openConcept(id,ev){
-  ev.stopPropagation();
-  const btn=ev.currentTarget;const r=btn.getBoundingClientRect();
-  const bx=r.left+r.width/2,by=r.top+r.height/2;
-  const cx=window.innerWidth/2,cy=window.innerHeight/2;
-  const c=CONCEPTS[id];if(!c)return;
-  const card=document.getElementById('conceptCard');
-  document.getElementById('conceptIcon').innerHTML=c.icon;
-  document.getElementById('conceptTitle').textContent=c.title;
-  document.getElementById('conceptDef').innerHTML=c.def;
-  document.getElementById('conceptIllus').innerHTML=c.illus||'';
-  card.classList.remove('show');
-  card.style.transition='none';
-  card.style.setProperty('--dx',(bx-cx)+'px');
-  card.style.setProperty('--dy',(by-cy)+'px');
-  void card.offsetHeight;
-  card.style.transition='';
-  document.getElementById('conceptBackdrop').classList.add('show');
-  requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
-}
-function closeConcept(){document.getElementById('conceptCard').classList.remove('show');document.getElementById('conceptBackdrop').classList.remove('show');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
-(function initCardTilt(){
-  const el=document.getElementById('conceptCardInner');if(!el)return;
-  const MAX_TILT=7;
-  el.addEventListener('mousemove',e=>{
-    const r=el.getBoundingClientRect();
-    const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
-    const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
-    el.style.setProperty('--mx',(px*100)+'%');
-    el.style.setProperty('--my',(py*100)+'%');
-    el.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-    const sx=(px-0.5)*22,sy=(py-0.5)*22;
-    el.style.boxShadow=`${-sx}px ${20-sy}px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset`;
-  });
-  el.addEventListener('mouseleave',()=>{
-    el.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';
-    el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%');
-    el.style.boxShadow='';
-  });
-})();
-fullReset();
-</script>
-</body>
-</html>
+  gAct:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg>',title:'Aktivering',def:'När en neuron "aktiveras" skickar den vidare en signal till nästa lager. Aktiveringsfunktionen bestämmer <em>hur starkt</em> den 
