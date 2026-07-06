@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+<!DOCTYPE html>  
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minimax & Alpha-Beta Pruning – Interactive simulation</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Minimax & Alpha-Beta Pruning – Interactive Simulation</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg:#090b14; --surface:#0e1222; --surface2:#151a2e; --border:#1e2642;
@@ -14,9 +14,17 @@
   --accent:#4d80ff; --green:#34c759; --orange:#ff9f43; --red:#ef5b5b;
   --val:#ffd866; --leaf-col:#9ca8ba; --prune:#ef5b5b;
   --dim:#8792ad;
+  --accent2:#7aa2ff; --accent-dim:rgba(77,128,255,0.14); --border-soft:rgba(255,255,255,0.06);
+  --r-sm:8px; --r-md:14px; --r-lg:20px;
+  --ease-out:cubic-bezier(.16,1,.3,1); --ease-spring:cubic-bezier(.34,1.56,.64,1);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+html,body{height:100%;}
+body{font-family:'DM Sans',sans-serif;font-size:14px;background:
+  radial-gradient(circle at 50% 28%, rgba(77,128,255,0.07), transparent 55%),
+  radial-gradient(circle at 82% 12%, rgba(52,199,89,0.045), transparent 42%),
+  radial-gradient(circle at 12% 85%, rgba(255,159,67,0.035), transparent 40%),
+  var(--bg);color:var(--text);overflow:hidden;display:flex;flex-direction:column;}
 
 /* back link */
 .back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--text-dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;}
@@ -27,13 +35,13 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:
 .lang-link:hover{color:var(--text);border-color:var(--dim);}
 .lang-link .flag{display:block;border-radius:2px;}
 
-.hd{text-align:center;padding:20px 16px 12px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(52,199,89,0.04),transparent);position:relative;}
-.hd h1{font-size:1.4em;font-weight:700;letter-spacing:-0.02em;margin-bottom:3px;}
+.hd{text-align:center;padding:11px 16px 8px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(52,199,89,0.04),transparent);position:relative;flex:0 0 auto;}
+.hd h1{font-family:'Syne',sans-serif;font-size:1.32em;font-weight:800;letter-spacing:-0.03em;margin-bottom:2px;}
 .hd h1 .g{color:var(--max-color);} .hd h1 .o{color:var(--min-color);}
-.hd p{color:var(--text-dim);font-size:0.84em;max-width:760px;margin:0 auto;line-height:1.5;}
+.hd p{color:var(--text-dim);font-size:0.78em;max-width:760px;margin:0 auto;line-height:1.4;}
 
-.app{display:grid;grid-template-columns:1fr 330px;max-width:1440px;margin:0 auto;height:calc(100vh - 76px);overflow:hidden;}@media(max-height:700px){.app{height:auto;min-height:600px;}.cw{min-height:400px;}.sb{max-height:none;overflow-y:visible;}.lw{max-height:280px;}}
-.ta{border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
+.app{display:grid;grid-template-columns:1fr 330px;max-width:1440px;margin:0 auto;flex:1 1 auto;min-height:0;width:100%;overflow:hidden;}
+.ta{border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;min-height:0;}
 .tb{display:flex;align-items:center;gap:7px;padding:9px 12px;border-bottom:1px solid var(--border);background:var(--surface);flex-wrap:wrap;flex-shrink:0;}
 .sel{font-family:'DM Sans',sans-serif;font-size:0.82em;padding:6px 10px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;outline:none;}
 .sel:focus{border-color:var(--accent);}
@@ -47,7 +55,7 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:
 .ttr.on{background:var(--green);border-color:var(--green);}
 .tkn{width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;transition:left 0.25s;box-shadow:0 1px 3px rgba(0,0,0,0.3);}
 .ttr.on .tkn{left:20px;}
-.cw{flex:1;position:relative;min-height:560px;background:radial-gradient(ellipse 80% 70% at 50% 42%, #10162a 0%, #0a0d18 70%, #080a12 100%);}
+.cw{flex:1;position:relative;min-height:0;background:radial-gradient(ellipse 80% 70% at 50% 42%, #10162a 0%, #0a0d18 70%, #080a12 100%);box-shadow:inset 0 0 90px rgba(0,0,0,0.55),inset 0 0 18px rgba(0,0,0,0.4);}
 .cw canvas{display:block;width:100%;height:100%;position:absolute;top:0;left:0;}
 .build-bar{display:none;padding:10px 14px;background:rgba(77,128,255,0.08);border-bottom:1px solid var(--border);font-size:0.84em;color:var(--accent);text-align:center;line-height:1.5;}
 .build-bar.show{display:block;}
@@ -55,8 +63,8 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:
 .tl{display:flex;gap:12px;padding:7px 12px;border-top:1px solid var(--border);background:var(--surface);flex-wrap:wrap;flex-shrink:0;}
 .li{display:flex;align-items:center;gap:5px;font-size:0.72em;color:var(--text-dim);}
 .li svg{flex-shrink:0;}
-.sb{display:flex;flex-direction:column;background:var(--surface);overflow:hidden;height:100%;}
-.ss{padding:15px 15px;border-bottom:1px solid var(--border);flex-shrink:0;}
+.sb{display:flex;flex-direction:column;background:var(--surface);overflow:hidden;height:100%;min-height:0;}
+.ss{padding:12px 15px;border-bottom:1px solid var(--border);flex-shrink:0;}
 .st{font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-dim);margin-bottom:11px;}
 .bg{display:flex;gap:5px;flex-wrap:wrap;}
 .btn{font-family:'DM Sans',sans-serif;padding:7px 13px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);color:var(--text);font-size:0.81em;font-weight:600;cursor:pointer;transition:0.2s;display:flex;align-items:center;gap:4px;white-space:nowrap;}
@@ -74,7 +82,7 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:
 .speed-row input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 6px rgba(77,128,255,0.3);}
 .speed-val{font-family:'JetBrains Mono',monospace;font-size:0.78em;color:var(--accent);min-width:28px;text-align:right;}
 .sr{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-.bx{background:var(--surface2);border-radius:6px;padding:8px 10px;border:1px solid var(--border);}
+.bx{background:linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0) 40%),var(--surface2);border-radius:11px;padding:10px 12px;border:1px solid var(--border);}
 .bl{font-size:0.66em;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px;}
 .bv{font-family:'JetBrains Mono',monospace;font-size:0.98em;font-weight:600;}
 .lw{flex:1;overflow:hidden;display:flex;flex-direction:column;min-height:0;}
@@ -97,13 +105,44 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:
 .sum-h{font-weight:700;color:var(--green);margin-bottom:4px;}
 .sum-l{color:var(--text-dim);} .sum-l strong{color:var(--text);}
 .elg{display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-dim);font-size:0.84em;text-align:center;padding:16px;line-height:1.6;}
-.ib{width:100%;padding:8px;background:none;border:none;border-top:1px solid var(--border);color:var(--text-dim);font-family:'DM Sans',sans-serif;font-size:0.78em;cursor:pointer;transition:color 0.2s;flex-shrink:0;}
-.ib:hover{color:var(--text);}
-.ic{padding:11px 13px;border-top:1px solid var(--border);font-size:0.78em;line-height:1.6;color:var(--text-dim);max-height:0;overflow:hidden;transition:max-height 0.3s;}
-.ic.open{max-height:500px;}
-.ic h4{color:var(--accent);font-size:0.88em;margin-bottom:4px;}
-.ic p{margin-bottom:6px;}
-.fm{font-family:'JetBrains Mono',monospace;background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:6px 10px;margin:6px 0;font-size:0.88em;color:var(--val);text-align:center;}
+.begrepp-row{display:flex;flex-wrap:wrap;gap:5px;padding:11px 13px;border-top:1px solid var(--border);}
+.g-tag{display:inline-flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:.72em;font-weight:600;padding:5px 10px 5px 8px;border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--text-dim);cursor:pointer;transition:.2s var(--ease-spring);}
+.g-tag:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px);}
+.g-tag:active{transform:scale(.95);}
+.g-tag .g-ico{width:12px;height:12px;flex-shrink:0;opacity:.8;}
+
+/* concept card modal */
+.concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
+.concept-backdrop.show{opacity:1;pointer-events:auto;}
+.concept-card{position:fixed;top:50%;left:50%;z-index:301;width:340px;max-width:88vw;
+  perspective:1000px;
+  transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
+  transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .26s var(--ease-out);}
+.concept-card.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
+.concept-card-inner{position:relative;text-align:center;transform-style:preserve-3d;
+  background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;
+  transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
+  transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);
+  will-change:transform;}
+.concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+  padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,216,102,.15) 45%,transparent 65%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::before{opacity:1;}
+.concept-card-inner::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.09),transparent 60%);
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::after{opacity:1;}
+.concept-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--text-dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);z-index:3;transform:translateZ(30px);}
+.concept-close:hover{border-color:var(--red);color:var(--red);transform:translateZ(30px) rotate(90deg);}
+.concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
+.concept-icon svg{width:28px;height:28px;}
+.concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
+.concept-def{font-size:.85em;line-height:1.6;color:var(--text-dim);margin-bottom:16px;position:relative;z-index:3;transform:translateZ(18px);}
+.concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;}
+.concept-illus{background:rgba(0,0,0,.25);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;transform:translateZ(10px);}
+.concept-illus svg{width:100%;height:auto;max-height:90px;}
 .npop{position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px;z-index:150;box-shadow:0 8px 30px rgba(0,0,0,0.6);display:none;min-width:160px;}
 .npop.show{display:block;}
 .npop-t{font-size:0.78em;font-weight:600;color:var(--text-dim);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.04em;}
@@ -115,22 +154,24 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:
 .npop-inp{display:flex;gap:5px;align-items:center;}
 .npop-inp input{width:70px;font-family:'JetBrains Mono',monospace;font-size:0.92em;padding:7px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--val);outline:none;text-align:center;}
 .npop-inp input:focus{border-color:var(--accent);}
-/* "Vad händer just nu?" – pedagogisk förklaringsruta ovanför loggen */
-.why{margin:0;padding:13px 15px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(77,128,255,0.07),transparent);}
-.why-h{font-size:0.68em;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--accent);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
-.why-b{font-size:0.9em;line-height:1.55;color:var(--text);min-height:2.5em;}
+.why{margin:12px 15px 2px;padding:14px 16px;border-radius:var(--r-lg);position:relative;flex-shrink:0;
+  background:linear-gradient(165deg,rgba(26,31,52,.92),rgba(14,17,30,.94));
+  border:1.5px solid rgba(255,216,102,.4);
+  box-shadow:0 14px 34px rgba(0,0,0,.35),0 0 0 1px rgba(255,216,102,.08) inset,0 0 22px rgba(255,216,102,.14);}
+.why-h{font-size:0.68em;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--val);margin-bottom:7px;display:flex;align-items:center;gap:6px;}
+.why-h .live-dot{width:6px;height:6px;border-radius:50%;background:var(--val);box-shadow:0 0 6px var(--val);margin-left:auto;animation:liveDot 1.6s ease-in-out infinite;}
+@keyframes liveDot{0%,100%{opacity:1}50%{opacity:.35}}
+.why-b{font-size:0.92em;line-height:1.55;color:var(--text);min-height:2.5em;}
 .why-b .hl-max{color:var(--max-color);font-weight:700;}
 .why-b .hl-min{color:var(--min-color);font-weight:700;}
 .why-b .hl-val{color:var(--val);font-weight:700;font-family:'JetBrains Mono',monospace;}
 .why-b .hl-prune{color:var(--prune);font-weight:700;}
 .why-b .muted{color:var(--text-dim);}
-
-/* Dashboard-progressbar för Steg */
+.why.pulse{animation:whyPulse .7s var(--ease-out);}
+@keyframes whyPulse{0%{box-shadow:0 14px 34px rgba(0,0,0,.35),0 0 0 1px rgba(255,216,102,.08) inset,0 0 0 rgba(255,216,102,.5);}40%{box-shadow:0 14px 34px rgba(0,0,0,.35),0 0 0 1px rgba(255,216,102,.08) inset,0 0 34px rgba(255,216,102,.55);}100%{box-shadow:0 14px 34px rgba(0,0,0,.35),0 0 0 1px rgba(255,216,102,.08) inset,0 0 22px rgba(255,216,102,.14);}}
 .prog{height:6px;border-radius:4px;background:var(--surface2);overflow:hidden;margin-top:7px;}
 .prog i{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,var(--accent),#6f9bff);transition:width 0.3s ease;}
 .bx.wide{grid-column:1 / -1;}
-
-/* Byggpanel – ren, Figma-lik popup */
 .npop{padding:13px;min-width:184px;border-radius:12px;}
 .npop-sec{font-size:0.64em;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-dim);margin:10px 0 6px;}
 .npop-sec:first-child{margin-top:0;}
@@ -138,8 +179,8 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:
 .npop-type.mx{background:var(--max-fill);color:var(--max-color);}
 .npop-type.mn{background:var(--min-fill);color:var(--min-color);}
 .npop-type.lf{background:rgba(255,216,102,0.12);color:var(--val);}
-
-.btn{padding:9px 14px;font-size:0.84em;border-radius:8px;}
+.btn{padding:10px 15px;font-size:0.84em;border-radius:12px;}
+.sel{border-radius:10px;padding:8px 12px;}
 .mtab{font-size:0.82em;padding:7px 15px;}
 .bv{font-size:1.05em;}
 .step-row{display:flex;gap:7px;margin-bottom:8px;}
@@ -151,27 +192,77 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:
 .bg2 .btn{flex:1;justify-content:center;}
 .btn.ghost{background:transparent;border-color:var(--border);color:var(--text-dim);}
 .btn.ghost:hover{background:var(--surface2);color:var(--text);border-color:var(--text-dim);}
-
-/* Pedagogisk intro-overlay (som Språkmodell-labbet) */
-.overlay{position:fixed;inset:0;background:rgba(9,11,20,0.82);backdrop-filter:blur(5px);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
+.hd::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent 5%,rgba(77,128,255,0.55),rgba(52,199,89,0.5),rgba(255,216,102,0.45),rgba(255,159,67,0.5),transparent 95%);}
+.hd h1 .g{text-shadow:0 0 22px rgba(52,199,89,0.4);}
+.hd h1 .o{text-shadow:0 0 22px rgba(255,159,67,0.4);}
+.btn{transition:transform 0.14s ease,background 0.2s,border-color 0.2s,box-shadow 0.2s;}
+.btn:not(:disabled):hover{transform:translateY(-1px);}
+.btn:not(:disabled):active{transform:translateY(0);}
+.btn.pri{background:linear-gradient(160deg,#5a8bff,#3f6ef0);border-color:rgba(122,162,255,0.55);box-shadow:0 2px 12px rgba(61,111,240,0.35),inset 0 1px 0 rgba(255,255,255,0.18);}
+.btn.pri:hover{background:linear-gradient(160deg,#699aff,#4a79f6);box-shadow:0 4px 18px rgba(61,111,240,0.45),inset 0 1px 0 rgba(255,255,255,0.2);}
+.step-main{letter-spacing:0.01em;}
+.bx{transition:border-color 0.2s,transform 0.15s;box-shadow:inset 0 1px 0 rgba(255,255,255,0.03);}
+.bx:hover{border-color:rgba(77,128,255,0.35);}
+.prog i{position:relative;overflow:hidden;}
+.prog i::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,0.35) 50%,transparent 70%);transform:translateX(-100%);animation:progShine 2.6s ease-in-out infinite;}
+@keyframes progShine{0%,55%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
+.se{animation:seIn 0.28s ease;}
+@keyframes seIn{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:none;}}
+.se.act{box-shadow:0 0 0 1px rgba(77,128,255,0.18),0 2px 10px rgba(0,0,0,0.25);}
+.lg::-webkit-scrollbar{width:6px;}
+.lg::-webkit-scrollbar-thumb{background:rgba(77,128,255,0.28);border-radius:4px;}
+.lg::-webkit-scrollbar-thumb:hover{background:rgba(77,128,255,0.45);}
+@keyframes valPop{0%{transform:scale(0.4);opacity:0;}55%{transform:scale(1.22);}100%{transform:scale(1);opacity:1;}}
+#sRoot.pop{animation:valPop 0.5s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes tick{0%{transform:scale(1);}45%{transform:scale(1.12);}100%{transform:scale(1);}}
+.bv.tick{animation:tick 0.18s cubic-bezier(.22,1,.36,1);}
+.bv{display:inline-block;font-size:1.14em;}
+.se{padding:8px 11px;border-radius:9px;margin-bottom:5px;background:rgba(255,255,255,0.022);border:1px solid rgba(255,255,255,0.05);border-left:3px solid transparent;animation:seIn 0.3s cubic-bezier(.22,1,.36,1);}
+.se:hover{border-color:rgba(77,128,255,0.25);border-left-color:rgba(77,128,255,0.4);}
+.se.act{background:var(--surface2);border-color:rgba(77,128,255,0.28);border-left-color:var(--accent);}
+.se.pe{border-left-color:var(--prune);}
+.overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
 .overlay.show{display:flex;}
-.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:30px 32px;max-width:520px;width:100%;box-shadow:0 24px 70px rgba(0,0,0,0.55);}
-.overlay-card h2{font-size:1.5em;font-weight:700;letter-spacing:-0.02em;margin-bottom:8px;text-align:center;}
+.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:24px 30px;max-width:520px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
+@keyframes overlayIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.overlay-card h2{font-family:'Syne',sans-serif;font-size:1.28em;font-weight:800;letter-spacing:-0.01em;margin-bottom:6px;text-align:center;}
 .overlay-card h2 .g{color:var(--max-color);} .overlay-card h2 .o{color:var(--min-color);}
-.overlay-card .sub{color:var(--text-dim);font-size:0.95em;line-height:1.55;text-align:center;margin-bottom:22px;}
-.journey{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:24px;}
-.journey li{display:flex;gap:11px;align-items:flex-start;font-size:0.92em;line-height:1.5;color:var(--text);}
-.journey .ji{flex-shrink:0;width:24px;text-align:center;font-size:1.1em;}
-.overlay-btn{display:block;width:100%;padding:13px;border:none;border-radius:10px;background:var(--accent);color:#fff;font-family:'DM Sans',sans-serif;font-size:1em;font-weight:700;cursor:pointer;transition:0.2s;}
-.overlay-btn:hover{background:#3d6ff0;}
+.overlay-card .sub{color:var(--text-dim);font-size:0.88em;line-height:1.45;text-align:center;margin-bottom:16px;}
+.journey{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.journey li{display:flex;gap:10px;align-items:flex-start;font-size:0.85em;line-height:1.4;color:var(--text);}
+.journey .ji{flex-shrink:0;width:22px;text-align:center;font-size:1.05em;}
+.overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;border:none;border-radius:10px;background:var(--accent);color:#fff;font-family:'DM Sans',sans-serif;font-size:0.98em;font-weight:700;cursor:pointer;transition:.25s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 24px rgba(77,128,255,.28);}
+.overlay-btn:hover{background:#3d6ff0;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
+.overlay-btn svg{width:15px;height:15px;flex-shrink:0;}
+.intro-viz{display:block;width:160px;height:74px;margin:0 auto 10px;}
+.intro-viz .iv-e{fill:none;stroke:rgba(255,255,255,0.28);stroke-width:2;}
+.intro-viz .iv-max{fill:rgba(52,199,89,0.14);stroke:var(--max-color);stroke-width:2;stroke-linejoin:round;}
+.intro-viz .iv-min{fill:rgba(255,159,67,0.12);stroke:var(--min-color);stroke-width:2;stroke-linejoin:round;}
+.intro-viz .iv-dot{fill:#fff;filter:drop-shadow(0 0 6px rgba(120,170,255,0.9));}
+@media (prefers-reduced-motion: no-preference){
+  .intro-viz .iv-dot{animation:ivWalk 4.2s cubic-bezier(.45,0,.55,1) infinite;}
+}
+@keyframes ivWalk{
+  0%   {transform:translate(100px,16px);}
+  12%  {transform:translate(40px,66px);}
+  24%  {transform:translate(100px,16px);}
+  38%  {transform:translate(100px,66px);}
+  50%  {transform:translate(100px,16px);}
+  64%  {transform:translate(160px,66px);}
+  78%  {transform:translate(100px,16px);}
+  100% {transform:translate(100px,16px);}
+}
+.journey .ji{display:inline-flex;width:24px;height:20px;align-items:center;justify-content:center;}
+.journey .ji svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .tt{position:fixed;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:7px 11px;font-size:0.77em;pointer-events:none;opacity:0;transition:opacity 0.12s;z-index:100;box-shadow:0 4px 16px rgba(0,0,0,0.5);max-width:210px;line-height:1.5;}
 .tt.show{opacity:1;}
 @media(max-width:920px){
-  body{overflow-y:auto;}
-  .app{grid-template-columns:1fr;height:auto;}
-  .ta{border-right:none;border-bottom:1px solid var(--border);}
-  .cw{min-height:420px;}
-  .sb{max-height:none;overflow-y:visible;height:auto;}
+  html,body{height:auto;}
+  body{overflow-y:auto;overflow-x:hidden;min-height:100vh;}
+  .app{grid-template-columns:1fr;flex:0 0 auto;height:auto;overflow:visible;}
+  .ta{border-right:none;border-bottom:1px solid var(--border);flex:0 0 auto;overflow:visible;}
+  .cw{flex:none;min-height:60vh;}
+  .sb{max-height:none;overflow-y:visible;height:auto;min-height:0;}
   .lw{max-height:300px;}
   .hd{padding:10px 16px 8px;padding-left:16px;}
   .back-link{position:static;transform:none;margin-bottom:6px;}
@@ -183,22 +274,32 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:
 
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
+    <svg class="intro-viz" viewBox="0 0 200 92" aria-hidden="true">
+      <path class="iv-e" d="M100 16 C 100 42, 40 42, 40 66"/>
+      <path class="iv-e" d="M100 16 C 100 42, 100 42, 100 66"/>
+      <path class="iv-e" d="M100 16 C 100 42, 160 42, 160 66"/>
+      <polygon class="iv-max" points="100,7 111,24 89,24"/>
+      <polygon class="iv-min" points="40,75 51,58 29,58"/>
+      <polygon class="iv-min" points="100,75 111,58 89,58"/>
+      <polygon class="iv-min" points="160,75 171,58 149,58"/>
+      <circle class="iv-dot" r="4"/>
+    </svg>
     <h2>Minimax with <span class="g">Alpha</span>-<span class="o">Beta</span> Pruning</h2>
     <p class="sub">Discover how a game AI chooses its moves by following the Minimax algorithm step by step.</p>
     <ul class="journey">
-      <li><span class="ji">🔍</span><span><strong>Follow the algorithm's search</strong> – see how it walks through the game tree, node by node.</span></li>
-      <li><span class="ji">⚔️</span><span><strong>See how MAX and MIN think</strong> – one wants to maximise the value, the other to minimise it.</span></li>
-      <li><span class="ji">✂️</span><span><strong>Discover alpha-beta pruning</strong> – how the algorithm skips branches it doesn't need to examine.</span></li>
-      <li><span class="ji">🌳</span><span><strong>Build your own game trees</strong> – change values and structure and test your own ideas.</span></li>
-      <li><span class="ji">🚀</span><span><strong>Explore freely</strong> – compare with and without pruning and see how much work is saved.</span></li>
+      <li><span class="ji" style="color:var(--accent)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span><span><strong>Follow the algorithm's search</strong> – see how it moves through the game tree, node by node.</span></li>
+      <li><span class="ji" style="color:var(--max-color)"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 8l5-5 5 5M7 16l5 5 5-5"/></svg></span><span><strong>See how MAX and MIN think</strong> – one wants to maximize the value, the other to minimize it.</span></li>
+      <li><span class="ji" style="color:var(--prune)"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.2 8.2 20 20M8.2 15.8 20 4"/></svg></span><span><strong>Discover alpha-beta pruning</strong> – how the algorithm skips branches it doesn't need to examine.</span></li>
+      <li><span class="ji" style="color:var(--min-color)"><svg viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7v4m0 0-5.5 5.8M12 11l5.5 5.8"/></svg></span><span><strong>Build your own game trees</strong> – change values and structure and try out your own ideas.</span></li>
+      <li><span class="ji" style="color:var(--val)"><svg viewBox="0 0 24 24"><path d="M12 3l2.2 5.6L20 10l-5.8 1.4L12 17l-2.2-5.6L4 10l5.8-1.4z"/></svg></span><span><strong>Explore freely</strong> – compare with and without pruning and see how much work is saved.</span></li>
     </ul>
-    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Start →</button>
+    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 </div>
 
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
-  <a class="lang-link" href="https://www.ai-aktiviteter.se/minimax"><svg class="flag" width="18" height="12" viewBox="0 0 16 10" aria-hidden="true"><rect width="16" height="10" fill="#006aa7"/><rect x="5" width="2" height="10" fill="#fecc00"/><rect y="4" width="16" height="2" fill="#fecc00"/></svg> Svenska</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/minimax"><svg class="flag" width="18" height="12" viewBox="0 0 16 10" aria-hidden="true"><rect width="16" height="10" fill="#006AA7"/><rect x="5" width="2" height="10" fill="#FECC02"/><rect y="4" width="16" height="2" fill="#FECC02"/></svg> Svenska</a>
   <h1>Minimax with <span class="g">Alpha</span>-<span class="o">Beta</span> Pruning</h1>
   <p>Discover how a game AI chooses its moves by following the Minimax algorithm step by step.</p>
 </div>
@@ -222,13 +323,13 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:
       </div>
     </div>
     <div class="build-bar" id="buildBar">
-      Build mode: <strong>Click a node</strong> to add children or change its value. Click <strong>Run</strong> when you are done.
+      Build mode: <strong>Click a node</strong> to add children or change its value. Click <strong>Run</strong> when you're done.
     </div>
     <div class="cw"><canvas id="cv"></canvas></div>
     <div class="tl">
       <div class="li"><svg width="16" height="14"><polygon points="8,2 14,12 2,12" fill="none" stroke="var(--max-color)" stroke-width="2"/></svg> MAX</div>
       <div class="li"><svg width="16" height="14"><polygon points="8,12 14,2 2,2" fill="none" stroke="var(--min-color)" stroke-width="2"/></svg> MIN</div>
-      <div class="li"><svg width="14" height="14"><circle cx="7" cy="7" r="5.5" fill="none" stroke="var(--leaf-col)" stroke-width="1.5"/></svg> Leaf</div>
+      <div class="li"><svg width="14" height="14"><circle cx="7" cy="7" r="5.5" fill="none" stroke="var(--leaf-col)" stroke-width="1.5"/></svg> Leaf node</div>
       <div class="li"><span style="color:var(--prune);font-weight:700;font-size:1.1em">✕</span> Pruned</div>
       <div class="li"><span style="display:inline-block;width:18px;height:3px;background:var(--max-color);border-radius:2px;box-shadow:0 0 5px var(--max-glow)"></span> Chosen path</div>
     </div>
@@ -241,7 +342,7 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:
         <button class="btn back-btn" id="bBack" onclick="doBack()" title="One step back">◀</button>
         <button class="btn pri step-main" id="bStep" onclick="doStep()">▶ Next step</button>
       </div>
-      <div class="ctrl-hint">Tip: <strong>step</strong> through to follow the algorithm's thinking.</div>
+      <div class="ctrl-hint">Tip: <strong>step through</strong> to follow the algorithm's thinking.</div>
       <div class="bg2">
         <button class="btn ghost" id="bPlay" onclick="togglePlay()">⏵ Play automatically</button>
         <button class="btn dn" onclick="doReset()">↺ Reset</button>
@@ -252,9 +353,9 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:
         <span class="speed-val" id="speedVal">1×</span>
       </div>
     </div>
-    <div class="why">
-      <div class="why-h">💡 What is happening now?</div>
-      <div class="why-b" id="whyBox">Press <strong>▶ Next step</strong> to follow the algorithm one step at a time.</div>
+    <div class="why" id="whyCard">
+      <div class="why-h"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 4 10.5c-.6.55-1 1.3-1 2.5h-6c0-1.2-.4-1.95-1-2.5A6 6 0 0 1 12 3z"/></svg> What's happening right now?<span class="live-dot"></span></div>
+      <div class="why-b" id="whyBox" aria-live="polite">Press <strong>▶ Next step</strong> to follow the algorithm one step at a time.</div>
     </div>
     <div class="ss">
       <div class="st">Status</div>
@@ -262,20 +363,30 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:
         <div class="bx wide"><div class="bl">Step</div><div class="prog" style="margin:8px 0 7px"><i id="progFill"></i></div><div class="bv" id="sStep">0 / –</div></div>
         <div class="bx"><div class="bl">Visited nodes</div><div class="bv" id="sVis">0</div></div>
         <div class="bx"><div class="bl">Pruned nodes</div><div class="bv" id="sPru" style="color:var(--prune)">0</div></div>
-        <div class="bx wide"><div class="bl">Root value (the answer)</div><div class="bv" id="sRoot" style="color:var(--val);font-size:1.35em">–</div></div>
+        <div class="bx wide"><div class="bl">Root value (algorithm's answer)</div><div class="bv" id="sRoot" style="color:var(--val);font-size:1.35em">–</div></div>
       </div>
     </div>
     <div class="ss" style="padding-bottom:3px;"><div class="st">Step-by-step log</div></div>
     <div class="lw"><div class="lg" id="log"><div class="elg">Press <strong>Next step</strong> to begin.</div></div></div>
-    <button class="ib" id="iBtn" onclick="toggleInfo()">📖 How minimax & alpha-beta work ▾</button>
-    <div class="ic" id="iC">
-      <h4>The minimax algorithm</h4>
-      <p>The MAX player (▲ green) picks the move with the highest value. The MIN player (▼ orange) picks the move with the lowest value.</p>
-      <h4>Alpha-beta pruning</h4>
-      <p><strong style="color:var(--max-color)">α</strong> = the best value MAX can guarantee so far.<br><strong style="color:var(--min-color)">β</strong> = the best value MIN can guarantee so far.</p>
-      <div class="fm">If α ≥ β → prune the remaining branches</div>
-      <p>The result is always the same – but fewer nodes are examined.</p>
+    <div class="begrepp-row">
+      <span class="g-tag" onclick="openConcept('cMinimax',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Minimax</span>
+      <span class="g-tag" onclick="openConcept('cMax',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M7 8l5-5 5 5"/></svg>MAX</span>
+      <span class="g-tag" onclick="openConcept('cMin',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M7 16l5 5 5-5"/></svg>MIN</span>
+      <span class="g-tag" onclick="openConcept('cAlpha',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>Alpha (α)</span>
+      <span class="g-tag" onclick="openConcept('cBeta',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>Beta (β)</span>
+      <span class="g-tag" onclick="openConcept('cPrune',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.2 8.2 20 20M8.2 15.8 20 4"/></svg>Pruning</span>
     </div>
+  </div>
+</div>
+
+<div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
+<div class="concept-card" id="conceptCard">
+  <div class="concept-card-inner" id="conceptCardInner">
+    <button class="concept-close" onclick="closeConcept()">✕</button>
+    <div class="concept-icon" id="conceptIcon"></div>
+    <div class="concept-title" id="conceptTitle"></div>
+    <div class="concept-def" id="conceptDef"></div>
+    <div class="concept-illus" id="conceptIllus"></div>
   </div>
 </div>
 
@@ -369,8 +480,8 @@ function applyStep(i){
     case'leaf':nd.active=true;nd.computedValue=s.v;nd.complete=true;break;
     case'back':nd.active=true;triggerPulse(nm[s.cid],nd,'255,216,102');break;
     case'upd':nd.active=true;nd.computedValue=s.v;if(useAB){nd.alpha=s.a;nd.beta=s.b;}break;
-    case'prune':nd.active=true;for(const pid of s.pids)nm[pid].pruned=true;triggerPrune(nd);break;
-    case'done':nd.active=true;nd.computedValue=s.v;nd.complete=true;break;
+    case'prune':nd.active=true;{const pnow=performance.now();for(const pid of s.pids){nm[pid].pruned=true;nm[pid].prunedAt=pnow;}}triggerPrune(nd);break;
+    case'done':nd.active=true;nd.computedValue=s.v;nd.complete=true;if(nd.id===0){chosenStart=performance.now();ensureRAF();}break;
   }
 }
 
@@ -382,17 +493,48 @@ function setupCv(){
 }
 
 function triPath(ctx,x,y,r,up){
+  const pts = up
+    ? [{x:x,y:y-r},{x:x+r*.95,y:y+r*.7},{x:x-r*.95,y:y+r*.7}]
+    : [{x:x,y:y+r},{x:x+r*.95,y:y-r*.7},{x:x-r*.95,y:y-r*.7}];
+  const rad=Math.max(2,r*0.22);
   ctx.beginPath();
-  if(up){ctx.moveTo(x,y-r);ctx.lineTo(x+r*.95,y+r*.7);ctx.lineTo(x-r*.95,y+r*.7);}
-  else{ctx.moveTo(x,y+r);ctx.lineTo(x+r*.95,y-r*.7);ctx.lineTo(x-r*.95,y-r*.7);}
+  ctx.moveTo((pts[2].x+pts[0].x)/2,(pts[2].y+pts[0].y)/2);
+  for(let i=0;i<3;i++){
+    const p=pts[i],nx=pts[(i+1)%3];
+    ctx.arcTo(p.x,p.y,(p.x+nx.x)/2,(p.y+nx.y)/2,rad);
+  }
   ctx.closePath();
 }
 
-let anim=null, pruneFx=null, rafId=0;
+function edgePt(a,b,t){
+  const dy=(b.y-a.y)*0.55;
+  const p1x=a.x,p1y=a.y+dy, p2x=b.x,p2y=b.y-dy;
+  const u=1-t;
+  return {
+    x: u*u*u*a.x + 3*u*u*t*p1x + 3*u*t*t*p2x + t*t*t*b.x,
+    y: u*u*u*a.y + 3*u*u*t*p1y + 3*u*t*t*p2y + t*t*t*b.y
+  };
+}
+function edgePath(ctx,a,b,t1){
+  ctx.beginPath();ctx.moveTo(a.x,a.y);
+  if(t1===undefined||t1>=1){
+    const dy=(b.y-a.y)*0.55;
+    ctx.bezierCurveTo(a.x,a.y+dy, b.x,b.y-dy, b.x,b.y);
+  }else{
+    const N=18;
+    for(let i=1;i<=N;i++){const p=edgePt(a,b,(i/N)*t1);ctx.lineTo(p.x,p.y);}
+  }
+}
+
+let anim=null, pruneFx=null, rafId=0, chosenStart=0, arriveFx=null, hoverId=null;
+const REDUCED_MOTION=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const CHOSEN_DUR=1100;
+const easeOut=t=>1-Math.pow(1-t,3);
 function parentOf(id){for(const n of allNodes)for(const c of n.children)if(c.id===id)return n;return null;}
 function ensureRAF(){ if(!rafId) rafId=requestAnimationFrame(animLoop); }
 function triggerPulse(fromNode,toNode,color){
-  if(playing && SPEEDS[speedIdx] < 200) return;   // hoppa puls vid höga hastigheter
+  if(REDUCED_MOTION) return;
+  if(playing && SPEEDS[speedIdx] < 200) return;
   if(!fromNode||!toNode) return;
   anim={from:fromNode,to:toNode,start:performance.now(),color};
   ensureRAF();
@@ -404,11 +546,19 @@ function triggerPrune(nd){
 }
 function animLoop(now){
   rafId=0; let pulse=null, pf=null, live=false;
-  if(anim){const t=Math.min(1,(now-anim.start)/300);if(t<1){pulse={from:anim.from,to:anim.to,t,color:anim.color};live=true;}else anim=null;}
+  if(anim){
+    const t=Math.min(1,(now-anim.start)/300);
+    if(t<1){pulse={from:anim.from,to:anim.to,t:easeOut(t),color:anim.color};live=true;}
+    else{arriveFx={id:anim.to.id,start:now,color:anim.color};anim=null;live=true;}
+  }
+  if(arriveFx&&now-arriveFx.start>=240)arriveFx=null; else if(arriveFx)live=true;
   if(pruneFx){const e=(now-pruneFx.start)/640;if(e<1){pf={x:pruneFx.x,y:pruneFx.y,e};live=true;}else pruneFx=null;}
+  if(chosenStart && now-chosenStart<CHOSEN_DUR) live=true;
+  if(tree&&tree.complete&&!document.hidden&&!REDUCED_MOTION) live=true;
   draw(pulse,pf);
   if(live) ensureRAF();
 }
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)ensureRAF();});
 
 function draw(pulse,pf){
   const{ctx,w,h}=setupCv();
@@ -416,8 +566,8 @@ function draw(pulse,pf){
   const leaves=Math.max(1,allNodes.filter(n=>n.isLeaf).length);
   const depth=Math.max(1,md(tree));
   let sc=nCount>45?0.62:nCount>30?0.78:nCount>18?0.9:1;
-  sc=Math.min(sc,(w/leaves)/82);        // horisontellt utrymme per löv
-  sc=Math.min(sc,(h/(depth+1))/94);     // vertikalt utrymme per nivå
+  sc=Math.min(sc,(w/leaves)/82);
+  sc=Math.min(sc,(h/(depth+1))/94);
   sc=Math.max(0.42,sc);
   const pad=Math.max(16,Math.min(66,w*0.05));
   const d=md(tree);lay(tree,pad,w-pad,0,d,w,h);
@@ -426,37 +576,83 @@ function draw(pulse,pf){
   const fontAB=Math.round(13*sc)+'px';
   const pruneFont=Math.round(15*sc)+'px';
 
-  // Aktiv sökväg: rot → aktiv nod
+  ctx.fillStyle='rgba(255,255,255,0.032)';
+  for(let gy=14;gy<h;gy+=26){
+    const off=((gy/26)%2)?13:0;
+    for(let gx=14+off;gx<w;gx+=26)ctx.fillRect(gx,gy,1.2,1.2);
+  }
+  {
+    const done=tree.complete;
+    const sp=ctx.createRadialGradient(tree.x,tree.y,0,tree.x,tree.y,Math.min(220,h*0.4));
+    sp.addColorStop(0,done?'rgba(255,216,102,0.10)':'rgba(77,128,255,0.08)');
+    sp.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=sp;ctx.fillRect(0,0,w,h);
+  }
+  if(w>=620){
+    const lvl={};for(const n of allNodes){if(!(n.depth in lvl))lvl[n.depth]={y:n.y,internal:false};if(!n.isLeaf)lvl[n.depth].internal=true;}
+    ctx.font='700 10px "JetBrains Mono"';ctx.textAlign='left';ctx.textBaseline='middle';
+    for(const dstr of Object.keys(lvl)){
+      const dd=+dstr,L=lvl[dstr];
+      if(L.internal){
+        const isMx=(dd%2===0)===rootIsMax;
+        ctx.fillStyle=isMx?'rgba(52,199,89,0.42)':'rgba(255,159,67,0.42)';
+        ctx.fillText(isMx?'MAX ▲':'MIN ▼',12,L.y);
+      }else{
+        ctx.fillStyle='rgba(156,168,186,0.32)';
+        ctx.fillText('LEAF',12,L.y);
+      }
+    }
+  }
+
   const act=allNodes.find(n=>n.active);
   const pathIds=new Set();
   if(act){let cur=act;while(cur){pathIds.add(cur.id);cur=parentOf(cur.id);}}
 
-  // Vald väg (principal variation): visas när sökningen är klar
-  const chosen=new Set();
+  const chosen=new Set(), chosenEdges=[], chosenIdx={};
   if(tree&&tree.complete){
-    let cur=tree;
+    let cur=tree, ci=0;
     while(cur){
-      chosen.add(cur.id);
+      chosen.add(cur.id);chosenIdx[cur.id]=ci++;
       if(cur.isLeaf)break;
       let pick=null;
       for(const c of cur.children){if(!c.pruned&&c.computedValue!==null&&c.computedValue===cur.computedValue){pick=c;break;}}
-      if(!pick)break; cur=pick;
+      if(!pick)break;
+      chosenEdges.push({p:cur,c:pick});
+      cur=pick;
     }
   }
+  const reveal=chosenStart?Math.min(1,(performance.now()-chosenStart)/CHOSEN_DUR):1;
+  const breathe=(tree.complete&&!REDUCED_MOTION)?0.84+0.16*Math.sin(performance.now()/640):1;
+  const pruneA=n=>{const t0=n.prunedAt||0;const k=t0?Math.min(1,(performance.now()-t0)/300):1;return 1-0.62*k;};
 
   function dEdge(n){
     for(const c of n.children){
       const onChosen=chosen.has(c.id)&&chosen.has(n.id);
       const onPath=pathIds.has(c.id)&&!c.pruned;
       ctx.save();
-      ctx.beginPath();ctx.moveTo(n.x,n.y);ctx.lineTo(c.x,c.y);
-      if(c.pruned){ctx.strokeStyle='rgba(239,91,91,0.5)';ctx.setLineDash([5,4]);ctx.lineWidth=2.4;}
-      else if(onChosen){ctx.strokeStyle='rgba(52,199,89,1)';ctx.setLineDash([]);ctx.lineWidth=4;ctx.shadowColor='rgba(52,199,89,0.8)';ctx.shadowBlur=16;}
-      else if(onPath){ctx.strokeStyle='rgba(255,255,255,0.95)';ctx.setLineDash([]);ctx.lineWidth=3.4;ctx.shadowColor='rgba(120,170,255,0.7)';ctx.shadowBlur=12;}
-      else if(c.edgeVis){ctx.strokeStyle='rgba(255,255,255,0.42)';ctx.setLineDash([]);ctx.lineWidth=2.2;}
-      else{ctx.strokeStyle='rgba(255,255,255,0.28)';ctx.setLineDash([]);ctx.lineWidth=2;}
-      ctx.stroke();ctx.restore();ctx.setLineDash([]);
-      if(c.pruned){const mx=(n.x+c.x)/2,my=(n.y+c.y)/2;ctx.font='bold '+pruneFont+' "DM Sans"';ctx.fillStyle='rgba(239,91,91,0.85)';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('✕',mx,my);}
+      if(c.pruned){ctx.globalAlpha=pruneA(c);edgePath(ctx,n,c);ctx.strokeStyle='rgba(239,91,91,0.6)';ctx.setLineDash([5,4]);ctx.lineWidth=2.4;ctx.stroke();}
+      else if(onChosen){
+        const k=Math.max(1,chosenEdges.length);
+        const idx=chosenEdges.findIndex(e=>e.c.id===c.id);
+        const sub=Math.max(0,Math.min(1,reveal*k-idx));
+        if(sub>0){
+          edgePath(ctx,n,c,sub);
+          ctx.globalAlpha=breathe;
+          ctx.strokeStyle='rgba(52,199,89,1)';ctx.lineWidth=4;ctx.lineCap='round';
+          ctx.shadowColor='rgba(52,199,89,0.8)';ctx.shadowBlur=16*breathe;ctx.stroke();
+        }else{
+          edgePath(ctx,n,c);ctx.strokeStyle='rgba(255,255,255,0.42)';ctx.lineWidth=2.2;ctx.stroke();
+        }
+      }
+      else if(onPath){edgePath(ctx,n,c);ctx.strokeStyle='rgba(255,255,255,0.95)';ctx.lineWidth=3.4;ctx.shadowColor='rgba(120,170,255,0.7)';ctx.shadowBlur=12;ctx.stroke();}
+      else{
+        const g=ctx.createLinearGradient(n.x,n.y,c.x,c.y);
+        if(c.edgeVis){g.addColorStop(0,'rgba(255,255,255,0.30)');g.addColorStop(1,'rgba(255,255,255,0.52)');ctx.lineWidth=2.2;}
+        else{g.addColorStop(0,'rgba(255,255,255,0.14)');g.addColorStop(1,'rgba(255,255,255,0.32)');ctx.lineWidth=2;}
+        edgePath(ctx,n,c);ctx.strokeStyle=g;ctx.stroke();
+      }
+      ctx.restore();ctx.setLineDash([]);
+      if(c.pruned){const mp=edgePt(n,c,0.5);ctx.save();ctx.globalAlpha=pruneA(c);ctx.font='bold '+pruneFont+' "DM Sans"';ctx.fillStyle='rgba(239,91,91,0.9)';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('✕',mp.x,mp.y);ctx.restore();}
       dEdge(c);
     }
   }
@@ -477,13 +673,35 @@ function draw(pulse,pf){
     const x=n.x,y=n.y,R=n.isLeaf?RL:RI;
     ctx.save();
     if(chosen.has(n.id)&&!n.pruned){
-      ctx.save();ctx.shadowColor='rgba(52,199,89,0.9)';ctx.shadowBlur=Math.round(16*sc);
-      ctx.strokeStyle='rgba(52,199,89,0.95)';ctx.lineWidth=3;
-      if(n.isLeaf){ctx.beginPath();ctx.arc(x,y,R+4,0,Math.PI*2);ctx.stroke();}
-      else{triPath(ctx,x,y,R+5,n.isMax);ctx.stroke();}
+      const kN=Math.max(1,chosen.size);
+      const ra=Math.max(0,Math.min(1,reveal*kN-(chosenIdx[n.id]||0)))*breathe;
+      if(ra>0){
+        ctx.save();ctx.globalAlpha=ra;
+        ctx.shadowColor='rgba(52,199,89,0.9)';ctx.shadowBlur=Math.round(16*sc);
+        ctx.strokeStyle='rgba(52,199,89,0.95)';ctx.lineWidth=3;
+        if(n.isLeaf){ctx.beginPath();ctx.arc(x,y,R+4,0,Math.PI*2);ctx.stroke();}
+        else{triPath(ctx,x,y,R+5,n.isMax);ctx.stroke();}
+        ctx.restore();
+      }
+    }
+    if(hoverId===n.id&&!n.pruned){
+      ctx.save();ctx.strokeStyle='rgba(255,255,255,0.35)';ctx.lineWidth=1.5;
+      ctx.shadowColor='rgba(120,170,255,0.5)';ctx.shadowBlur=14;
+      if(n.isLeaf){ctx.beginPath();ctx.arc(x,y,R+6,0,Math.PI*2);ctx.stroke();}
+      else{triPath(ctx,x,y,R+7,n.isMax);ctx.stroke();}
+      ctx.restore();
+    }
+    if(arriveFx&&arriveFx.id===n.id){
+      const fa=1-Math.min(1,(performance.now()-arriveFx.start)/240);
+      ctx.save();ctx.globalAlpha=fa*0.8;
+      ctx.shadowColor='rgba('+arriveFx.color+',1)';ctx.shadowBlur=26;
+      ctx.strokeStyle='rgba('+arriveFx.color+',0.9)';ctx.lineWidth=2.5;
+      if(n.isLeaf){ctx.beginPath();ctx.arc(x,y,R+3+6*(1-fa),0,Math.PI*2);ctx.stroke();}
+      else{triPath(ctx,x,y,R+4+6*(1-fa),n.isMax);ctx.stroke();}
       ctx.restore();
     }
     if(n.pruned){
+      ctx.globalAlpha=pruneA(n);
       if(n.isLeaf){
         ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);
         ctx.fillStyle='rgba(50,52,65,0.7)';ctx.fill();
@@ -503,6 +721,9 @@ function draw(pulse,pf){
       ctx.strokeStyle=n.complete?'rgba(255,216,102,0.85)':n.visited?'rgba(156,168,186,0.55)':'rgba(156,168,186,0.3)';
       ctx.lineWidth=n.active?2.8:2.2;ctx.stroke();ctx.shadowBlur=0;
       {const hg=ctx.createLinearGradient(x,y-R,x,y+R*0.5);hg.addColorStop(0,'rgba(255,255,255,0.18)');hg.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=hg;ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);ctx.fill();}
+      {const sp2=ctx.createRadialGradient(x-R*0.35,y-R*0.42,0,x-R*0.35,y-R*0.42,R*0.6);sp2.addColorStop(0,'rgba(255,255,255,0.30)');sp2.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=sp2;ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);ctx.fill();}
+      ctx.strokeStyle='rgba(255,255,255,0.25)';ctx.lineWidth=1;
+      ctx.beginPath();ctx.arc(x,y,R-1.6,-2.45,-0.65);ctx.stroke();
       ctx.fillStyle=n.complete?'#ffd866':'rgba(190,200,215,0.7)';
       ctx.font='600 '+fontMed+' "JetBrains Mono"';ctx.textAlign='center';ctx.textBaseline='middle';
       ctx.fillText(n.leafValue!=null?String(n.leafValue):'?',x,y);
@@ -518,6 +739,7 @@ function draw(pulse,pf){
       ctx.strokeStyle=n.active?(up?'rgba(52,199,89,1)':'rgba(255,159,67,1)'):n.complete?(up?'rgba(52,199,89,0.9)':'rgba(255,159,67,0.9)'):n.visited?(up?'rgba(52,199,89,0.55)':'rgba(255,159,67,0.55)'):(up?'rgba(52,199,89,0.35)':'rgba(255,159,67,0.35)');
       ctx.lineWidth=n.active?3:2.4;ctx.stroke();ctx.shadowBlur=0;
       {const hg=ctx.createLinearGradient(x,y-R,x,y+R);hg.addColorStop(0,'rgba(255,255,255,0.15)');hg.addColorStop(0.55,'rgba(255,255,255,0)');triPath(ctx,x,y,R,up);ctx.fillStyle=hg;ctx.fill();}
+      triPath(ctx,x,y,R-3.5,up);ctx.strokeStyle='rgba(255,255,255,0.07)';ctx.lineWidth=1;ctx.stroke();
       ctx.textAlign='center';ctx.textBaseline='middle';
       const tcy=up?y+2*sc:y-2*sc;
       if(n.computedValue!==null){ctx.font='700 '+fontBig+' "JetBrains Mono"';ctx.fillStyle='#ffd866';ctx.fillText(String(n.computedValue),x,tcy);}
@@ -530,8 +752,14 @@ function draw(pulse,pf){
         const pill=(txt,cy,fg,bg,bd)=>{
           const pw=ctx.measureText(txt).width+padX*2;
           let px=bx; if(px+pw>w-2) px=x-R-8*sc-pw;
+          ctx.save();
+          ctx.shadowColor='rgba(0,0,0,0.4)';ctx.shadowBlur=7;ctx.shadowOffsetY=2;
           ctx.fillStyle=bg;ctx.beginPath();ctx.roundRect(px,cy-bh/2,pw,bh,bh/2);ctx.fill();
-          ctx.strokeStyle=bd;ctx.lineWidth=1;ctx.stroke();
+          ctx.restore();
+          ctx.strokeStyle=bd;ctx.lineWidth=0.8;ctx.beginPath();ctx.roundRect(px,cy-bh/2,pw,bh,bh/2);ctx.stroke();
+          const ph2=ctx.createLinearGradient(px,cy-bh/2,px,cy);
+          ph2.addColorStop(0,'rgba(255,255,255,0.14)');ph2.addColorStop(1,'rgba(255,255,255,0)');
+          ctx.fillStyle=ph2;ctx.beginPath();ctx.roundRect(px,cy-bh/2,pw,bh/2,[bh/2,bh/2,0,0]);ctx.fill();
           ctx.fillStyle=fg;ctx.fillText(txt,px+padX,cy+0.5);
         };
         pill(aTxt,ay,'rgba(52,199,89,1)','rgba(52,199,89,0.16)','rgba(52,199,89,0.5)');
@@ -552,15 +780,14 @@ function draw(pulse,pf){
   }
 
   if(pulse&&pulse.from&&pulse.to){
-    const px=pulse.from.x+(pulse.to.x-pulse.from.x)*pulse.t;
-    const py=pulse.from.y+(pulse.to.y-pulse.from.y)*pulse.t;
+    const pp=edgePt(pulse.from,pulse.to,pulse.t);
     ctx.save();
     ctx.strokeStyle='rgba('+pulse.color+',0.55)';ctx.lineWidth=3.5;ctx.lineCap='round';
-    ctx.beginPath();ctx.moveTo(pulse.from.x,pulse.from.y);ctx.lineTo(px,py);ctx.stroke();
+    edgePath(ctx,pulse.from,pulse.to,pulse.t);ctx.stroke();
     ctx.shadowColor='rgba('+pulse.color+',0.95)';ctx.shadowBlur=20;
     ctx.fillStyle='rgba('+pulse.color+',1)';
-    ctx.beginPath();ctx.arc(px,py,6,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(px,py,2.4,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc(pp.x,pp.y,6,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(pp.x,pp.y,2.4,0,Math.PI*2);ctx.fill();
     ctx.restore();
   }
 
@@ -578,6 +805,7 @@ function fmtAB(v){return v===-Infinity?'−∞':v===Infinity?'+∞':String(v);}
 
 function updateWhy(){
   const el=document.getElementById('whyBox'); if(!el) return;
+  const card=document.getElementById('whyCard');
   if(curStep<0){el.innerHTML='Press <strong>▶ Next step</strong> to follow the algorithm one step at a time.';return;}
   const nm={};for(const n of allNodes)nm[n.id]=n;
   const s=steps[curStep], nd=nm[s.nid];
@@ -588,26 +816,27 @@ function updateWhy(){
   switch(s.t){
     case'visit':
       if(nd.isLeaf){t='We reach a <span class="muted">leaf</span> – a finished position with a fixed value.';}
-      else{t=`${who} is up next and examines its possible moves to find the <strong>${goal}</strong> value among the children.`;
+      else{t=`${who} is up and examining its possible moves to find the <strong>${goal}</strong> value among its children.`;
         if(useAB)t+=` <span class="muted">Search window:</span> α=${V(s.a)}, β=${V(s.b)}.`;}
       break;
     case'leaf':
-      t=`The leaf has the value ${V(s.v)}. It is passed up to the parent as a possible outcome.`;break;
+      t=`The leaf has the value ${V(s.v)}. It's sent up to the parent as a possible outcome.`;break;
     case'back':
       t=`The child returned the value ${V(s.cv)}. ${who} now compares it with its best result so far.`;break;
     case'upd':
-      if(s.changed){t=`New best for ${who}: ${V(s.v)} — ${s.mx?'a higher':'a lower'} value was found (${V(s.cv)} ${s.mx?'&gt;':'&lt;'} ${V(s.prevV)}).`;}
-      else{t=`${who} keeps ${V(s.v)}. The child's value ${V(s.cv)} was not better.`;}
+      if(s.changed){t=`New best for ${who}: ${V(s.v)} — a ${s.mx?'higher':'lower'} value was found (${V(s.cv)} ${s.mx?'&gt;':'&lt;'} ${V(s.prevV)}).`;}
+      else{t=`${who} keeps ${V(s.v)}. The child's value ${V(s.cv)} wasn't better.`;}
       if(useAB)t+=` <span class="muted">Now:</span> α=${V(s.a)}, β=${V(s.b)}.`;
       break;
     case'prune':
       t=`<span class="hl-prune">Pruning!</span> Since α=${V(s.a)} ≥ β=${V(s.b)}, the remaining branches can't change the answer. The algorithm skips them and saves work.`;break;
     case'done':
-      if(nd.id===0){t=`Done! The root has its value ${V(s.v)} — that is the algorithm's answer, the best MAX can guarantee.`;}
-      else{t=`${who} is finished and sends its final value ${V(s.v)} up to the parent.`;}
+      if(nd.id===0){t=`Done! The root has been given its value ${V(s.v)} — that's the algorithm's answer, the best MAX can guarantee.`;}
+      else{t=`${who} is done and sends its final value ${V(s.v)} up to the parent.`;}
       break;
   }
   el.innerHTML=t;
+  if(card){card.classList.remove('pulse');void card.offsetWidth;card.classList.add('pulse');}
 }
 
 function renderLog(){
@@ -624,50 +853,60 @@ function renderLog(){
     let t=`<span class="sn">${i+1}.</span>`,cl='';
     switch(s.t){
       case'visit':
-        if(nd.isLeaf){t+=`Goes down to ${badge}.`;}
-        else{t+=`${badge} starts examining its options, looking for the <strong>${goal}</strong> value.${ab}`;}
+        if(nd.isLeaf){t+=`Descends to ${badge}.`;}
+        else{t+=`${badge} starts examining its alternatives, looking for the <strong>${goal}</strong> value.${ab}`;}
         break;
-      case'leaf':t+=`${badge} is worth <span class="vl">${s.v}</span> and is sent up to its parent.`;break;
-      case'back':t+=`One of ${badge}'s options gave <span class="vl">${s.cv}</span>. ${who} now compares it with its best result so far.`;break;
+      case'leaf':t+=`${badge} is worth <span class="vl">${s.v}</span> and is sent up to the parent.`;break;
+      case'back':t+=`One of ${badge}'s alternatives gave <span class="vl">${s.cv}</span>. ${who} now compares it with its best result so far.`;break;
       case'upd':{
-        const better=s.mx?'larger':'smaller';
+        const better=s.mx?'greater':'smaller';
         if(s.changed){
-          if(s.prevV===-Infinity||s.prevV===Infinity){t+=`This is ${who}'s first option, so <span class="vl">${s.v}</span> becomes the best value so far.`;}
-          else{t+=`${who} updates its best value from <span class="vl">${fmtAB(s.prevV)}</span> to <span class="vl">${s.v}</span> because ${s.v} is ${better}.`;}
+          if(s.prevV===-Infinity||s.prevV===Infinity){t+=`This is ${who}'s first alternative, so <span class="vl">${s.v}</span> becomes the best value so far.`;}
+          else{t+=`${who} updates its best value from <span class="vl">${fmtAB(s.prevV)}</span> to <span class="vl">${s.v}</span> since ${s.v} is ${better}.`;}
         }else{
           t+=`<span class="vl">${s.cv}</span> is not ${better} than <span class="vl">${s.v}</span>, so ${who} keeps <span class="vl">${s.v}</span>.`;
         }
         t+=ab;break;
       }
-      case'prune':t+=`<span class="pt">✂ Pruning!</span> ${who}'s guaranteed value (α=<span class="av">${fmtAB(s.a)}</span>) is already ≥ the opponent's (β=<span class="bvl">${fmtAB(s.b)}</span>). The remaining branches can't change the answer, so they are skipped.`;cl='pe';break;
+      case'prune':t+=`<span class="pt">✂ Pruning!</span> ${who}'s guaranteed value (α=<span class="av">${fmtAB(s.a)}</span>) is already ≥ the opponent's (β=<span class="bvl">${fmtAB(s.b)}</span>). The rest of the branches can't change the answer, so they're skipped.`;cl='pe';break;
       case'done':
         if(nd.id===0){t+=`Done! ${badge} becomes <span class="vl">${s.v}</span> — the best MAX can guarantee.`;}
-        else{t+=`${badge} is finished with the value <span class="vl">${s.v}</span>, which is sent up to its parent.`;}
+        else{t+=`${badge} is done with the value <span class="vl">${s.v}</span>, which is sent up to the parent.`;}
         break;
     }
     h+=`<div class="se ${cl} ${i===curStep?'act':''}">${t}</div>`;
   }
   if(curStep===steps.length-1){
     const vis=allNodes.filter(n=>n.visited).length,pru=allNodes.filter(n=>n.pruned).length,tot=allNodes.length;
-    h+=`<div class="sum"><div class="sum-h">✓ Done</div><div class="sum-l">Root value: <strong style="color:var(--val)">${tree.computedValue}</strong></div><div class="sum-l">Visited: <strong>${vis}</strong>/${tot}${pru?` — Pruned: <strong style="color:var(--prune)">${pru}</strong>`:''}</div>${pru?`<div class="sum-l" style="color:var(--green);margin-top:2px">Pruning saved ${pru} node${pru>1?'s':''}</div>`:''}<div class="sum-l" style="color:var(--max-color);margin-top:3px">🟢 The green path shows the move MAX chooses.</div></div>`;
+    h+=`<div class="sum"><div class="sum-h">✓ Done</div><div class="sum-l">Root value: <strong style="color:var(--val)">${tree.computedValue}</strong></div><div class="sum-l">Visited: <strong>${vis}</strong>/${tot}${pru?` — Pruned: <strong style="color:var(--prune)">${pru}</strong>`:''}</div>${pru?`<div class="sum-l" style="color:var(--green);margin-top:2px">Pruning saved ${pru} node${pru>1?'s':''}</div>`:''}<div class="sum-l" style="color:var(--max-color);margin-top:3px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--max-color);box-shadow:0 0 6px var(--max-glow);margin-right:4px;vertical-align:0"></span>The green path shows the move MAX chooses.</div></div>`;
   }
   el.innerHTML=h;el.scrollTop=el.scrollHeight;
 }
 
+function bump(el,val){
+  const s=String(val);
+  if(el.textContent!==s){el.textContent=s;el.classList.remove('tick');void el.offsetWidth;el.classList.add('tick');}
+}
 function updateStats(){
   const vis=allNodes.filter(n=>n.visited).length,pru=allNodes.filter(n=>n.pruned).length;
   document.getElementById('sStep').textContent=`${Math.max(0,curStep+1)} / ${steps.length}`;
   const pf=document.getElementById('progFill');if(pf)pf.style.width=(steps.length?((curStep+1)/steps.length*100):0)+'%';
-  document.getElementById('sVis').textContent=vis;
-  document.getElementById('sPru').textContent=pru;
-  document.getElementById('sRoot').textContent=tree.complete?tree.computedValue:'–';
+  bump(document.getElementById('sVis'),vis);
+  bump(document.getElementById('sPru'),pru);
+  const rootEl=document.getElementById('sRoot');
+  if(tree.complete){
+    rootEl.textContent=tree.computedValue;
+    if(!rootEl.dataset.shown){rootEl.dataset.shown='1';rootEl.classList.add('pop');}
+  }else{
+    rootEl.textContent='–';delete rootEl.dataset.shown;rootEl.classList.remove('pop');
+  }
   document.getElementById('bStep').disabled=curStep>=steps.length-1||mode==='build';
   document.getElementById('bBack').disabled=curStep<0||mode==='build';
 }
 
 function doStep(){if(mode!=='run'||curStep>=steps.length-1)return;hist.push(snap());curStep++;applyStep(curStep);renderLog();draw();updateStats();}
 function doBack(){if(mode!=='run'||curStep<0||!hist.length)return;rest(hist.pop());curStep--;renderLog();draw();updateStats();}
-function doReset(){if(playing)togglePlay();curStep=-1;hist=[];for(const n of allNodes){n.visited=n.active=n.complete=n.pruned=n.edgeVis=n.showAB=false;n.computedValue=n.alpha=n.beta=null;}renderLog();draw();updateStats();}
+function doReset(){if(playing)togglePlay();curStep=-1;hist=[];chosenStart=0;for(const n of allNodes){n.visited=n.active=n.complete=n.pruned=n.edgeVis=n.showAB=false;n.computedValue=n.alpha=n.beta=null;}renderLog();draw();updateStats();}
 function togglePlay(){
   if(mode==='build')return;
   playing=!playing;const b=document.getElementById('bPlay');
@@ -683,7 +922,85 @@ function updateSpeed(){
 }
 function toggleAB(){useAB=!useAB;document.getElementById('abTog').classList.toggle('on',useAB);doReset();buildSteps();renderLog();draw();updateStats();}
 function selectPreset(v){if(playing)togglePlay();mode='run';updModeTabs();initFromStr(PRESETS[parseInt(v)]);}
-function toggleInfo(){const e=document.getElementById('iC');e.classList.toggle('open');document.getElementById('iBtn').textContent=e.classList.contains('open')?'📖 How minimax & alpha-beta work ▴':'📖 How minimax & alpha-beta work ▾';}
+const CONCEPTS={
+  cMinimax:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>',
+    title:'Minimax',
+    def:'Minimax is an algorithm for games where <strong style="color:var(--max-color)">MAX</strong> wants to maximize the outcome and <strong style="color:var(--min-color)">MIN</strong> wants to minimize it. The algorithm assumes the opponent always plays their best move, and works its way back up the tree to find the move that\'s best given that.',
+    illus:'<svg viewBox="0 0 140 70"><path d="M70 12 L70 30" stroke="rgba(255,255,255,.3)" stroke-width="2"/><path d="M70 30 L30 50" stroke="rgba(255,255,255,.3)" stroke-width="2"/><path d="M70 30 L70 50" stroke="rgba(255,255,255,.3)" stroke-width="2"/><path d="M70 30 L110 50" stroke="rgba(255,255,255,.3)" stroke-width="2"/><polygon points="70,4 79,20 61,20" fill="rgba(52,199,89,.22)" stroke="#34c759" stroke-width="2"/><polygon points="30,44 39,60 21,60" fill="rgba(255,159,67,.18)" stroke="#ff9f43" stroke-width="1.6"/><polygon points="70,44 79,60 61,60" fill="rgba(255,159,67,.18)" stroke="#ff9f43" stroke-width="1.6"/><polygon points="110,44 119,60 101,60" fill="rgba(255,159,67,.18)" stroke="#ff9f43" stroke-width="1.6"/></svg>'
+  },
+  cMax:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M7 8l5-5 5 5"/></svg>',
+    title:'The MAX player',
+    def:'The MAX player (▲, green in the simulation) always picks the move with the <strong style="color:var(--max-color)">highest</strong> value among its options. The root value is usually a MAX node — it\'s the algorithm\'s answer to "what is the best move?".',
+    illus:'<svg viewBox="0 0 140 70"><polygon points="70,10 100,55 40,55" fill="rgba(52,199,89,.18)" stroke="#34c759" stroke-width="2.5" stroke-linejoin="round"/><path d="M70 22v22M62 36l8-8 8 8" stroke="#34c759" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="70" y="65" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#34c759">highest value</text></svg>'
+  },
+  cMin:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M7 16l5 5 5-5"/></svg>',
+    title:'The MIN player',
+    def:'The MIN player (▼, orange in the simulation) always picks the move with the <strong style="color:var(--min-color)">lowest</strong> value — the opponent\'s perspective. MAX assumes MIN always plays optimally against it.',
+    illus:'<svg viewBox="0 0 140 70"><polygon points="70,55 100,10 40,10" fill="rgba(255,159,67,.16)" stroke="#ff9f43" stroke-width="2.5" stroke-linejoin="round"/><path d="M70 20v22M62 34l8 8 8-8" stroke="#ff9f43" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="70" y="65" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#ff9f43">lowest value</text></svg>'
+  },
+  cAlpha:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>',
+    title:'Alpha (α)',
+    def:'Alpha is the <strong style="color:var(--max-color)">best value MAX can guarantee</strong> itself so far in the search. It starts at −∞ and can only grow. If a branch can never beat α, it\'s uninteresting for MAX.',
+    illus:'<svg viewBox="0 0 140 70"><line x1="15" y1="50" x2="125" y2="50" stroke="rgba(255,255,255,.2)" stroke-width="2"/><rect x="15" y="44" width="72" height="12" rx="6" fill="rgba(52,199,89,.3)"/><circle cx="87" cy="50" r="6" fill="#34c759"/><text x="87" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#34c759">α</text><text x="15" y="66" font-family="JetBrains Mono" font-size="9" fill="rgba(255,255,255,.4)">−∞</text><text x="118" y="66" font-family="JetBrains Mono" font-size="9" fill="rgba(255,255,255,.4)">+∞</text></svg>'
+  },
+  cBeta:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>',
+    title:'Beta (β)',
+    def:'Beta is the <strong style="color:var(--min-color)">best value MIN can guarantee</strong> itself so far. It starts at +∞ and can only decrease. Together, α and β determine which branches can be pruned.',
+    illus:'<svg viewBox="0 0 140 70"><line x1="15" y1="50" x2="125" y2="50" stroke="rgba(255,255,255,.2)" stroke-width="2"/><rect x="53" y="44" width="72" height="12" rx="6" fill="rgba(255,159,67,.3)"/><circle cx="53" cy="50" r="6" fill="#ff9f43"/><text x="53" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#ff9f43">β</text><text x="15" y="66" font-family="JetBrains Mono" font-size="9" fill="rgba(255,255,255,.4)">−∞</text><text x="118" y="66" font-family="JetBrains Mono" font-size="9" fill="rgba(255,255,255,.4)">+∞</text></svg>'
+  },
+  cPrune:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.2 8.2 20 20M8.2 15.8 20 4"/></svg>',
+    title:'Alpha-beta pruning',
+    def:'When <strong style="color:var(--prune)">α ≥ β</strong>, the algorithm knows the rest of the branches can never affect the final answer — they are pruned (skipped) entirely. The result is exactly the same as without pruning, but with far fewer nodes examined.',
+    illus:'<svg viewBox="0 0 140 70"><path d="M70 10 L70 26" stroke="rgba(255,255,255,.3)" stroke-width="2"/><path d="M70 26 L40 50" stroke="rgba(255,255,255,.3)" stroke-width="2"/><path d="M70 26 L100 50" stroke="rgba(239,91,91,.55)" stroke-width="2" stroke-dasharray="4 3"/><polygon points="70,2 78,16 62,16" fill="rgba(52,199,89,.2)" stroke="#34c759" stroke-width="2"/><circle cx="40" cy="56" r="8" fill="rgba(52,199,89,.18)" stroke="#34c759" stroke-width="1.6"/><circle cx="100" cy="56" r="8" fill="rgba(50,52,65,.6)" stroke="#ef5b5b" stroke-width="1.6" stroke-dasharray="3 3"/><text x="100" y="60" text-anchor="middle" font-family="DM Sans" font-weight="700" font-size="11" fill="#ef5b5b">✕</text></svg>'
+  }
+};
+function openConcept(id,ev){
+  ev.stopPropagation();
+  const btn=ev.currentTarget;const r=btn.getBoundingClientRect();
+  const bx=r.left+r.width/2,by=r.top+r.height/2;
+  const cx=window.innerWidth/2,cy=window.innerHeight/2;
+  const c=CONCEPTS[id];if(!c)return;
+  const card=document.getElementById('conceptCard');
+  document.getElementById('conceptIcon').innerHTML=c.icon;
+  document.getElementById('conceptTitle').textContent=c.title;
+  document.getElementById('conceptDef').innerHTML=c.def;
+  document.getElementById('conceptIllus').innerHTML=c.illus||'';
+  card.classList.remove('show');
+  card.style.transition='none';
+  card.style.setProperty('--dx',(bx-cx)+'px');
+  card.style.setProperty('--dy',(by-cy)+'px');
+  void card.offsetHeight;
+  card.style.transition='';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
+}
+function closeConcept(){document.getElementById('conceptCard').classList.remove('show');document.getElementById('conceptBackdrop').classList.remove('show');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
+(function initCardTilt(){
+  const el=document.getElementById('conceptCardInner');if(!el)return;
+  const MAX_TILT=7;
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+    const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
+    el.style.setProperty('--mx',(px*100)+'%');
+    el.style.setProperty('--my',(py*100)+'%');
+    el.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    const sx=(px-0.5)*22,sy=(py-0.5)*22;
+    el.style.boxShadow=`${-sx}px ${20-sy}px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset`;
+  });
+  el.addEventListener('mouseleave',()=>{
+    el.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%');
+    el.style.boxShadow='';
+  });
+})();
 
 function setMode(m){
   if(playing)togglePlay();closePopup();mode=m;updModeTabs();
@@ -719,9 +1036,9 @@ function showPopup(n,px,py){
   closePopup();popNode=n;
   const pop=document.getElementById('npop');let h='';
   if(n.isLeaf){
-    h+=`<div class="npop-type lf">● Leaf ${n.id}</div>`;
+    h+=`<div class="npop-type lf">● Leaf node ${n.id}</div>`;
     h+=`<div class="npop-sec">Value</div>`;
-    h+=`<div class="npop-inp"><input type="number" id="leafVal" value="${n.leafValue??''}" placeholder="num" min="-99" max="99"><button class="btn pri" style="padding:8px 11px" onclick="setLeafVal()">OK</button></div>`;
+    h+=`<div class="npop-inp"><input type="number" id="leafVal" value="${n.leafValue??''}" placeholder="number" min="-99" max="99"><button class="btn pri" style="padding:8px 11px" onclick="setLeafVal()">OK</button></div>`;
     h+=`<div class="npop-sec">Add children</div>`;
     h+=`<button class="npop-btn" onclick="addChildren(2)">＋ 2 children</button>`;
     h+=`<button class="npop-btn" onclick="addChildren(3)">＋ 3 children</button>`;
@@ -740,7 +1057,7 @@ function showPopup(n,px,py){
   const pw=pop.offsetWidth,ph2=pop.offsetHeight;
   let lx,ly;
   if(window.innerWidth<=560){
-    lx=(window.innerWidth-pw)/2;                     // centrera horisontellt på mobil
+    lx=(window.innerWidth-pw)/2;
     ly=Math.min(py+14, window.innerHeight-ph2-12);
     if(ly<12)ly=12;
   }else{
@@ -793,7 +1110,7 @@ function removeNode(){
 
 document.addEventListener('click',function(e){
   if(mode!=='build')return;
-  if(Date.now()-popOpenedAt<400)return;   // ignorera samma klick/tryck som just öppnade menyn
+  if(Date.now()-popOpenedAt<400)return;
   const pop=document.getElementById('npop'),cvEl=document.getElementById('cv');
   if(!pop.contains(e.target)&&e.target!==cvEl){closePopup();}
 });
@@ -809,14 +1126,17 @@ cv.addEventListener('mousemove',function(e){
   let found=null;
   for(const n of allNodes){const R=n.isLeaf?24:34;const dx=mx-n.x,dy=my-n.y;if(dx*dx+dy*dy<(R+5)*(R+5)){found=n;break;}}
   if(found){
-    const lb=found.isLeaf?'Leaf':(found.isMax?'MAX node':'MIN node');
+    const lb=found.isLeaf?'Leaf node':(found.isMax?'MAX node':'MIN node');
     let h=`<strong>${lb} ${found.id}</strong>`;
     if(found.isLeaf)h+=`<br>Value: ${found.leafValue}`;
     if(found.computedValue!==null&&!found.isLeaf)h+=`<br>Computed: ${found.computedValue}`;
     if(useAB&&found.showAB){h+=`<br><span style="color:var(--max-color)">α=${fmtAB(found.alpha)}</span> <span style="color:var(--min-color)">β=${fmtAB(found.beta)}</span>`;}
     if(found.pruned)h+=`<br><span style="color:var(--prune)">Pruned</span>`;
     tt.innerHTML=h;tt.style.left=(e.clientX+12)+'px';tt.style.top=(e.clientY-8)+'px';tt.classList.add('show');this.style.cursor='pointer';
-  }else{tt.classList.remove('show');this.style.cursor='default';}
+    if(hoverId!==found.id){hoverId=found.id;draw();}
+  }else{tt.classList.remove('show');this.style.cursor='default';
+    if(hoverId!==null){hoverId=null;draw();}
+  }
 });
 cv.addEventListener('mouseleave',()=>{document.getElementById('tt').classList.remove('show');});
 
