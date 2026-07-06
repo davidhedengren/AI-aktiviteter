@@ -111,6 +111,53 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.08);transform:translateY(-1px);}
 .btn:active{transform:scale(.97);}
 .btn.sm{font-size:0.76em;padding:7px 10px;}
+
+/* ── Begreppschips (klickbara) ── */
+.begrepp-wrap{display:flex;flex-direction:column;gap:6px;}
+.begrepp-row{display:flex;flex-wrap:wrap;gap:5px;}
+.g-tag{display:inline-flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:.72em;font-weight:600;padding:5px 11px 5px 8px;border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--dim);cursor:pointer;transition:.2s var(--ease-spring);}
+.g-tag:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px);}
+.g-tag:active{transform:scale(.95);}
+.g-tag .g-ico{width:12px;height:12px;flex-shrink:0;opacity:.75;}
+.g-tag.gold:hover{border-color:var(--gold);color:var(--gold);background:rgba(255,214,102,.1);}
+.g-tag.gold .g-ico{color:var(--gold);}
+
+/* ── Glaskort (concept cards) ── */
+.concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
+.concept-backdrop.show{opacity:1;pointer-events:auto;}
+.concept-card{position:fixed;top:50%;left:50%;z-index:301;width:360px;max-width:90vw;
+  perspective:1000px;
+  transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
+  transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .26s var(--ease-out);}
+.concept-card.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
+.concept-card-inner{position:relative;text-align:center;transform-style:preserve-3d;
+  background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;
+  transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
+  transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);
+  will-change:transform;max-height:86vh;overflow-y:auto;}
+.concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+  padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,206,84,.15) 45%,transparent 65%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::before{opacity:1;}
+.concept-card-inner::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.09),transparent 60%);
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::after{opacity:1;}
+.concept-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);z-index:3;transform:translateZ(30px);}
+.concept-close:hover{border-color:var(--red);color:var(--red);transform:translateZ(30px) rotate(90deg);}
+.concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
+.concept-icon svg{width:28px;height:28px;}
+.concept-icon.gold{background:rgba(255,214,102,.14);color:var(--gold);box-shadow:0 10px 24px rgba(255,214,102,.18);}
+.concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
+.concept-def{font-size:.85em;line-height:1.6;color:var(--dim);margin-bottom:16px;position:relative;z-index:3;transform:translateZ(18px);}
+.concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;font-weight:600;}
+.concept-def .ca{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--classA);vertical-align:middle;margin:0 1px;}
+.concept-def .cb{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--classB);vertical-align:middle;margin:0 1px;}
+.concept-illus{background:rgba(0,0,0,.25);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;transform:translateZ(10px);}
+.concept-illus svg{width:100%;height:auto;max-height:100px;}
+
 .overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;transition:opacity .3s var(--ease-out);}
 .overlay.show{display:flex;}
 .overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.92),rgba(16,19,34,.94));border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:30px 34px;max-width:520px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.02) inset;animation:cardIn .5s var(--ease-spring);}
@@ -196,12 +243,30 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
           </div>
         </div>
         <div>
+          <div class="sec-t">Begrepp <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--dim2)">· klicka för förklaring</span></div>
+          <div class="begrepp-wrap">
+            <div class="begrepp-row">
+              <span class="g-tag" onclick="openConcept('beslutsgrans',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 17c5-9 13-11 18-9"/><circle cx="6" cy="19" r="1.5" fill="currentColor" stroke="none"/><circle cx="18" cy="6" r="1.5" fill="currentColor" stroke="none"/></svg>Beslutsgräns</span>
+              <span class="g-tag" onclick="openConcept('klassificering',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="8" r="2.5"/><circle cx="7" cy="16" r="2.5"/><path d="M13 8h7M13 16h7" stroke-linecap="round"/></svg>Klassificering</span>
+              <span class="g-tag" onclick="openConcept('linjar',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20 20 4"/></svg>Linjär modell</span>
+            </div>
+            <div class="begrepp-row">
+              <span class="g-tag" onclick="openConcept('nn',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><circle cx="19" cy="12" r="2"/><path d="M6.7 11 10.3 7M6.7 13l3.6 4M13.7 7 17.3 11M13.7 17l3.6-4"/></svg>Neuralt nätverk</span>
+              <span class="g-tag" onclick="openConcept('dolt',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="2" width="4" height="20" rx="1"/><rect x="17" y="6" width="4" height="12" rx="1"/></svg>Dolt lager</span>
+              <span class="g-tag" onclick="openConcept('xor',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" stroke-linecap="round"/></svg>XOR</span>
+            </div>
+          </div>
+        </div>
+        <div>
           <div class="sec-t">Färdiga mönster</div>
           <div class="preset-grid">
             <button class="pbtn" onclick="loadPreset('linear')"><span class="picon">/</span>Linjärt</button>
             <button class="pbtn" onclick="loadPreset('xor')"><span class="picon">⊕</span>XOR</button>
             <button class="pbtn" onclick="loadPreset('circles')"><span class="picon">◎</span>Cirkel</button>
             <button class="pbtn" onclick="loadPreset('spiral')"><span class="picon">↺</span>Spiral</button>
+          </div>
+          <div class="begrepp-row" style="margin-top:7px">
+            <span class="g-tag" onclick="openConcept('monster',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>Om mönstren</span>
           </div>
         </div>
         <div class="stat-box">
@@ -226,6 +291,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
             <button class="act-btn" id="actRelu" onclick="setActFn('relu')">ReLU</button>
           </div>
           <div class="note" id="actNote"><strong>tanh</strong> ger värden −1 till +1. Mjuka, böjda gränser. Aktiv i hela intervallet.</div>
+          <div class="begrepp-row" style="margin-top:8px">
+            <span class="g-tag gold" onclick="openConcept('aktivering',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18c4 0 5-12 9-12s5 12 9 12"/></svg>Aktiveringsfunktion</span>
+            <span class="g-tag gold" onclick="openConcept('tanhrelu',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 10 17 10 7"/><path d="M13 17c3 0 3-10 8-10"/></svg>tanh vs ReLU</span>
+          </div>
         </div>
         <div>
           <div class="adv-t">Neuronaktivering</div>
@@ -235,6 +304,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
             <select class="nsel" id="nrnSel" onchange="onNeuronChange()"></select>
           </div>
           <div class="note">Varje neuron visar sitt eget <strong>aktiveringsvärde</strong>. Bläddra mellan de olika neuronerna och se hur varje neuron delar upp planet på sitt eget sätt. En neuron klassificerar inte själv – det är först när alla neuroners signaler <strong>kombineras</strong> i utdatalagret som beslutsgränsen uppstår.</div>
+          <div class="begrepp-row" style="margin-top:8px">
+            <span class="g-tag gold" onclick="openConcept('neuron',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>Neuron</span>
+          </div>
         </div>
         <div>
           <div class="adv-t">Arkitektur (neuroner per dolt lager)</div>
@@ -247,6 +319,17 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
+<div class="concept-card" id="conceptCard">
+  <div class="concept-card-inner" id="conceptCardInner">
+    <button class="concept-close" onclick="closeConcept()" aria-label="Stäng">✕</button>
+    <div class="concept-icon" id="conceptIcon"></div>
+    <div class="concept-title" id="conceptTitle"></div>
+    <div class="concept-def" id="conceptDef"></div>
+    <div class="concept-illus" id="conceptIllus"></div>
   </div>
 </div>
 
@@ -523,6 +606,113 @@ function applyArch(){
   for(let l=1;l<=nHidden;l++){const inp=document.getElementById('aL'+l);if(inp){const v=parseInt(inp.value);if(v>=1&&v<=64)arch[l]=v;}}
   customArch=arch;initNet();
 }
+
+/* ════════════════ Glaskort (concept cards) ════════════════ */
+const CONCEPTS={
+  beslutsgrans:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 17c5-9 13-11 18-9"/></svg>',
+    title:'Beslutsgräns',
+    def:'En <strong>beslutsgräns</strong> är den linje – eller kurva – som en modell drar för att skilja klasserna åt. På ena sidan gissar modellen <span class="ca"></span> Klass A, på andra sidan <span class="cb"></span> Klass B. Färgen på bakgrunden visar hur <em>säker</em> modellen är: ju starkare färg, desto säkrare.',
+    illus:'<svg viewBox="0 0 140 80"><defs><linearGradient id="cbg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="rgba(255,106,94,.28)"/><stop offset=".5" stop-color="rgba(255,106,94,.05)"/><stop offset=".5" stop-color="rgba(77,128,255,.05)"/><stop offset="1" stop-color="rgba(77,128,255,.28)"/></linearGradient></defs><rect x="6" y="8" width="128" height="64" rx="6" fill="url(#cbg)"/><line x1="70" y1="10" x2="70" y2="70" stroke="#e8ecf8" stroke-width="2" stroke-dasharray="4 3"/><circle cx="30" cy="30" r="4" fill="#ff6a5e"/><circle cx="45" cy="52" r="4" fill="#ff6a5e"/><circle cx="24" cy="55" r="4" fill="#ff6a5e"/><circle cx="104" cy="26" r="4" fill="#4d80ff"/><circle cx="115" cy="50" r="4" fill="#4d80ff"/><circle cx="95" cy="55" r="4" fill="#4d80ff"/></svg>'
+  },
+  klassificering:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="8" r="2.5"/><circle cx="7" cy="16" r="2.5"/><path d="M13 8h7M13 16h7" stroke-linecap="round"/></svg>',
+    title:'Klassificering',
+    def:'<strong>Klassificering</strong> handlar om att lära en modell att sortera in datapunkter i rätt <em>kategori</em>. Här har varje punkt två egenskaper (x och y) och tillhör antingen <span class="ca"></span> Klass A eller <span class="cb"></span> Klass B. Modellen tränas på exemplen och lär sig en regel för att gissa klassen på nya punkter.',
+    illus:'<svg viewBox="0 0 140 80"><circle cx="35" cy="26" r="5" fill="#ff6a5e"/><circle cx="52" cy="40" r="5" fill="#ff6a5e"/><circle cx="30" cy="50" r="5" fill="#ff6a5e"/><circle cx="95" cy="30" r="5" fill="#4d80ff"/><circle cx="110" cy="48" r="5" fill="#4d80ff"/><circle cx="90" cy="55" r="5" fill="#4d80ff"/><path d="M70 12v56" stroke="rgba(255,255,255,.25)" stroke-width="1.5" stroke-dasharray="3 3"/><text x="35" y="72" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#ff6a5e">A</text><text x="103" y="72" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#4d80ff">B</text></svg>'
+  },
+  linjar:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20 20 4"/></svg>',
+    title:'Linjär modell',
+    def:'En <strong>linjär modell</strong> kan bara dra en <em>rak</em> beslutsgräns – en enda linje rakt genom planet. Det räcker när klasserna går att skilja med en linje, men misslyckas på mönster som <strong>XOR</strong>, där ingen rak linje kan separera dem. Då behövs ett neuralt nätverk som kan böja gränsen.',
+    illus:'<svg viewBox="0 0 140 80"><rect x="6" y="8" width="128" height="64" rx="6" fill="rgba(255,255,255,.02)"/><line x1="18" y1="66" x2="122" y2="16" stroke="#7aa2ff" stroke-width="2.5" stroke-linecap="round"/><circle cx="34" cy="30" r="4" fill="#ff6a5e"/><circle cx="28" cy="48" r="4" fill="#ff6a5e"/><circle cx="50" cy="26" r="4" fill="#ff6a5e"/><circle cx="96" cy="52" r="4" fill="#4d80ff"/><circle cx="110" cy="40" r="4" fill="#4d80ff"/><circle cx="88" cy="58" r="4" fill="#4d80ff"/></svg>'
+  },
+  nn:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><circle cx="19" cy="12" r="2"/><path d="M6.7 11 10.3 7M6.7 13l3.6 4M13.7 7 17.3 11M13.7 17l3.6-4"/></svg>',
+    title:'Neuralt nätverk',
+    def:'Ett <strong>neuralt nätverk</strong> består av små beräkningsenheter – <em>neuroner</em> – ordnade i lager. Varje neuron drar sin egen enkla linje, och genom att <strong>kombinera</strong> många av dem kan nätverket forma böjda och sammansatta beslutsgränser som en linjär modell aldrig klarar.',
+    illus:'<svg viewBox="0 0 140 80"><g stroke="rgba(255,255,255,.14)" stroke-width="1"><line x1="20" y1="24" x2="70" y2="16"/><line x1="20" y1="24" x2="70" y2="40"/><line x1="20" y1="24" x2="70" y2="64"/><line x1="20" y1="56" x2="70" y2="16"/><line x1="20" y1="56" x2="70" y2="40"/><line x1="20" y1="56" x2="70" y2="64"/><line x1="70" y1="16" x2="120" y2="40"/><line x1="70" y1="40" x2="120" y2="40"/><line x1="70" y1="64" x2="120" y2="40"/></g><circle cx="20" cy="24" r="5" fill="#7aa2ff"/><circle cx="20" cy="56" r="5" fill="#7aa2ff"/><circle cx="70" cy="16" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="70" cy="40" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="70" cy="64" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="120" cy="40" r="5" fill="#ffd866"/></svg>'
+  },
+  dolt:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="2" width="4" height="20" rx="1"/><rect x="17" y="6" width="4" height="12" rx="1"/></svg>',
+    title:'Dolt lager',
+    def:'Ett <strong>dolt lager</strong> ligger mellan indata (x, y) och det slutliga svaret. Det är här mönstren hittas: varje neuron i lagret delar upp planet på sitt eget sätt. <em>Fler</em> dolda lager och neuroner ger mer flexibla gränser – men också långsammare träning och risk att modellen överanpassar.',
+    illus:'<svg viewBox="0 0 140 80"><text x="20" y="14" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#7e8aaa">in</text><text x="70" y="14" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#34c759">dolt</text><text x="120" y="14" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#ffd866">ut</text><g stroke="rgba(255,255,255,.13)" stroke-width="1"><line x1="20" y1="34" x2="70" y2="26"/><line x1="20" y1="34" x2="70" y2="46"/><line x1="20" y1="34" x2="70" y2="64"/><line x1="20" y1="58" x2="70" y2="26"/><line x1="20" y1="58" x2="70" y2="46"/><line x1="20" y1="58" x2="70" y2="64"/><line x1="70" y1="26" x2="120" y2="45"/><line x1="70" y1="46" x2="120" y2="45"/><line x1="70" y1="64" x2="120" y2="45"/></g><circle cx="20" cy="34" r="4.5" fill="#7aa2ff"/><circle cx="20" cy="58" r="4.5" fill="#7aa2ff"/><circle cx="70" cy="26" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="70" cy="46" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="70" cy="64" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="120" cy="45" r="5" fill="#ffd866"/></svg>'
+  },
+  xor:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" stroke-linecap="round"/></svg>',
+    title:'XOR-mönstret',
+    def:'<strong>XOR</strong> ("exklusivt eller") är det klassiska mönstret där klasserna ligger i <em>diagonala</em> hörn: <span class="ca"></span> nere-till-vänster och uppe-till-höger, <span class="cb"></span> i de andra två. Ingen enda rak linje kan skilja dem åt – därför misslyckas den linjära modellen, och XOR blev det historiska exemplet på varför neurala nätverk med dolda lager behövs.',
+    illus:'<svg viewBox="0 0 140 80"><rect x="6" y="8" width="128" height="64" rx="6" fill="rgba(255,255,255,.02)"/><line x1="70" y1="10" x2="70" y2="70" stroke="rgba(255,255,255,.1)" stroke-width="1"/><line x1="8" y1="40" x2="132" y2="40" stroke="rgba(255,255,255,.1)" stroke-width="1"/><circle cx="34" cy="56" r="5" fill="#ff6a5e"/><circle cx="106" cy="24" r="5" fill="#ff6a5e"/><circle cx="34" cy="24" r="5" fill="#4d80ff"/><circle cx="106" cy="56" r="5" fill="#4d80ff"/></svg>'
+  },
+  monster:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>',
+    title:'Färdiga mönster',
+    def:'De fyra knapparna laddar olika testdata som ställer olika krav på modellen: <strong>Linjärt</strong> går att skilja med en rak linje. <strong>XOR</strong> kräver en böjd gräns. <strong>Cirkel</strong> har en klass innesluten av den andra. <strong>Spiral</strong> är svårast och behöver flera dolda lager. Prova samma mönster med olika modeller och jämför!',
+    illus:'<svg viewBox="0 0 140 80"><g transform="translate(8,12)"><line x1="4" y1="44" x2="44" y2="8" stroke="#7aa2ff" stroke-width="2"/><circle cx="12" cy="20" r="3" fill="#ff6a5e"/><circle cx="36" cy="34" r="3" fill="#4d80ff"/></g><g transform="translate(50,12)"><circle cx="10" cy="34" r="3" fill="#ff6a5e"/><circle cx="38" cy="8" r="3" fill="#ff6a5e"/><circle cx="10" cy="8" r="3" fill="#4d80ff"/><circle cx="38" cy="34" r="3" fill="#4d80ff"/></g><g transform="translate(92,12)"><circle cx="24" cy="22" r="16" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1"/><circle cx="24" cy="22" r="3.5" fill="#ff6a5e"/><circle cx="24" cy="4" r="3" fill="#4d80ff"/><circle cx="40" cy="30" r="3" fill="#4d80ff"/></g></svg>'
+  },
+  aktivering:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18c4 0 5-12 9-12s5 12 9 12"/></svg>',
+    title:'Aktiveringsfunktion',
+    def:'Varje neuron kör sin summa genom en <strong>aktiveringsfunktion</strong> innan den skickar signalen vidare. Utan den skulle nätverket bara kunna räkna ut raka linjer, hur många lager man än staplar. Det är aktiveringsfunktionens <em>krök</em> som ger nätverket förmågan att böja beslutsgränsen.',
+    illus:'<svg viewBox="0 0 140 80"><path d="M10 60 L38 60 L38 20 L64 20" fill="none" stroke="#34c759" stroke-width="2.5" stroke-linecap="round"/><path d="M74 60 C86 60 86 20 98 20" fill="none" stroke="#7aa2ff" stroke-width="2.5" stroke-linecap="round"/><path d="M104 40 C110 20 118 20 124 40 C130 60 138 60 138 40" fill="none" stroke="#ffd866" stroke-width="2.5" stroke-linecap="round"/></svg>'
+  },
+  tanhrelu:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 10 17 10 7"/><path d="M13 17c3 0 3-10 8-10"/></svg>',
+    title:'tanh vs ReLU',
+    def:'<strong style="color:var(--gold)">tanh</strong> ger mjuka värden mellan −1 och +1 – neuronerna visar både röda (negativa) och blå (positiva) områden, vilket ger <em>mjukt böjda</em> gränser. <strong style="color:var(--gold)">ReLU</strong> ger 0 för negativa tal, annars talet självt – neuronen är antingen av eller på, vilket ger <em>skarpa kanter</em> i beslutsgränsen. Testa båda och se skillnaden!',
+    illus:'<svg viewBox="0 0 140 80"><g transform="translate(0,4)"><text x="35" y="12" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#ffd866">tanh</text><path d="M8 58 C28 58 28 22 48 22 C60 22 60 22 62 22" fill="none" stroke="#7aa2ff" stroke-width="2.5" stroke-linecap="round"/><line x1="8" y1="40" x2="62" y2="40" stroke="rgba(255,255,255,.12)" stroke-width="1"/></g><g transform="translate(74,4)"><text x="35" y="12" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#ffd866">ReLU</text><path d="M8 58 L34 58 L58 22" fill="none" stroke="#34c759" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="8" y1="58" x2="62" y2="58" stroke="rgba(255,255,255,.12)" stroke-width="1"/></g></svg>'
+  },
+  neuron:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>',
+    title:'Neuron',
+    def:'En <strong>neuron</strong> tar emot indata (x och y), multiplicerar med sina <em>vikter</em>, summerar och kör resultatet genom aktiveringsfunktionen. Var för sig delar varje neuron bara planet i två med en enkel gräns. En neuron klassificerar alltså inte själv – det är först när alla neuroners signaler <strong>kombineras</strong> i utdatalagret som den slutliga beslutsgränsen uppstår.',
+    illus:'<svg viewBox="0 0 140 80"><g stroke="rgba(122,162,255,.5)" stroke-width="1.5"><line x1="16" y1="24" x2="60" y2="40"/><line x1="16" y1="56" x2="60" y2="40"/><line x1="82" y1="40" x2="120" y2="40"/></g><circle cx="16" cy="24" r="4" fill="#7aa2ff"/><circle cx="16" cy="56" r="4" fill="#7aa2ff"/><text x="8" y="27" font-family="JetBrains Mono" font-size="9" fill="#7e8aaa">x</text><text x="8" y="59" font-family="JetBrains Mono" font-size="9" fill="#7e8aaa">y</text><circle cx="71" cy="40" r="12" fill="rgba(77,128,255,.25)" stroke="#7aa2ff" stroke-width="2"/><circle cx="120" cy="40" r="4" fill="#ffd866"/></svg>'
+  }
+};
+function openConcept(id,ev){
+  ev.stopPropagation();
+  const btn=ev.currentTarget;const r=btn.getBoundingClientRect();
+  const bx=r.left+r.width/2,by=r.top+r.height/2;
+  const cx=window.innerWidth/2,cy=window.innerHeight/2;
+  const c=CONCEPTS[id];if(!c)return;
+  const card=document.getElementById('conceptCard');
+  const iconEl=document.getElementById('conceptIcon');
+  iconEl.innerHTML=c.icon;
+  iconEl.classList.toggle('gold',btn.classList.contains('gold'));
+  document.getElementById('conceptTitle').textContent=c.title;
+  document.getElementById('conceptDef').innerHTML=c.def;
+  document.getElementById('conceptIllus').innerHTML=c.illus||'';
+  card.classList.remove('show');
+  card.style.transition='none';
+  card.style.setProperty('--dx',(bx-cx)+'px');
+  card.style.setProperty('--dy',(by-cy)+'px');
+  void card.offsetHeight;
+  card.style.transition='';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
+}
+function closeConcept(){document.getElementById('conceptCard').classList.remove('show');document.getElementById('conceptBackdrop').classList.remove('show');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
+(function initCardTilt(){
+  const el=document.getElementById('conceptCardInner');if(!el)return;
+  const MAX_TILT=7;
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+    const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
+    el.style.setProperty('--mx',(px*100)+'%');
+    el.style.setProperty('--my',(py*100)+'%');
+    el.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    const sx=(px-0.5)*22,sy=(py-0.5)*22;
+    el.style.boxShadow=`${-sx}px ${20-sy}px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset`;
+  });
+  el.addEventListener('mouseleave',()=>{
+    el.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%');
+    el.style.boxShadow='';
+  });
+})();
 
 setModel('linear');loadPreset('linear');loop();
 </script>
