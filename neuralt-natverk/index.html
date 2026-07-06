@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sv"> 
+<html lang="sv">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -284,8 +284,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
   .app{grid-template-columns:1fr;height:auto;padding:8px;gap:8px;}
   .lp,.rp{padding:11px;}
   .lp{border-right:none;}
-  .center{min-height:600px;}
-  .canvas-wrap{flex:1 1 340px;min-height:340px;}
+  .center{min-height:520px;}
+  .canvas-wrap{flex:1 1 300px;min-height:280px;}
   .narr{position:static;flex:0 0 auto;max-height:240px;overflow-y:auto;border-top:1px solid var(--border);border-radius:0 0 var(--r-lg) var(--r-lg);backdrop-filter:none;background:rgba(10,12,22,.97);}
   .train-msg{max-width:90%;padding:20px 20px;}
   .rp{max-height:none;}
@@ -645,7 +645,9 @@ function addLayer(){if(isCalc()||layers.length>=5)return;layers.splice(layers.le
 function removeLayer(){if(isCalc()||layers.length<=2)return;layers.splice(layers.length-2,1);fullReset();}
 function fullReset(){if(trainTimer){clearInterval(trainTimer);trainTimer=null;}stopTrainAnim();trained=false;isTraining=false;epoch=0;savedTrainData=null;wDeltas=null;lossHistory=[];totalWeightUpdates=0;document.getElementById('trainMsg').classList.remove('show');document.getElementById('lossBox').style.display='none';renderScenarioCards();renderLC();renderVarList();renderIS();initW();initV();if(isCalc()){phase='explore';trained=true;setPhase('explore');}else{setPhase('train');}updateTgt();document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';document.getElementById('epochVal').textContent='0';document.getElementById('narr').innerHTML=isCalc()?'<div class="ne">Tryck <strong>▶ Nästa</strong> för att stega genom nätverket. Aktiveringsfunktion: <strong>ReLU</strong> – negativa värden blir 0.<br><span style="font-size:0.88em;opacity:0.85">💡 Tips: klicka på en <strong style="color:var(--green)">koppling</strong> för att ändra dess vikt, eller på en <strong>neuron</strong> för att ändra dess bias.</span></div>':'<div class="ne">Tryck <strong>Träna modellen</strong> för att börja.</div>';drawNet();}
 function setupCv(){const cv=document.getElementById('cv'),p=cv.parentElement,dpr=devicePixelRatio||1,w=p.clientWidth,h=p.clientHeight;cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+'px';cv.style.height=h+'px';const ctx=cv.getContext('2d');ctx.scale(dpr,dpr);return{ctx,w,h};}
-function nPos(w,h){const nL=layers.length,px=90,py=25,g=(w-2*px)/Math.max(nL-1,1),ps=[];for(let l=0;l<nL;l++){const n=layers[l],x=px+l*g;const avail=h-2*py;const ng=Math.min(90,avail/(n));const sy=h/2-(n-1)*ng/2;const lp=[];for(let i=0;i<n;i++)lp.push({x,y:sy+i*ng});ps.push(lp);}return ps;}
+function canvasScale(w){return Math.max(0.56,Math.min(1,w/640));}
+function neuronRadius(w){const maxN=Math.max(...layers);const s=canvasScale(w);return Math.max(13,(maxN<=3?32:maxN<=4?28:maxN<=6?23:19)*s);}
+function nPos(w,h){const s=canvasScale(w);const nL=layers.length,px=Math.max(34,90*s),py=Math.max(14,25*s),g=(w-2*px)/Math.max(nL-1,1),ps=[];for(let l=0;l<nL;l++){const n=layers[l],x=px+l*g;const avail=h-2*py;const ng=Math.min(90*s,avail/(n));const sy=h/2-(n-1)*ng/2;const lp=[];for(let i=0;i<n;i++)lp.push({x,y:sy+i*ng});ps.push(lp);}return ps;}
 function triggerPulse(){pulseStart=performance.now();if(pulseAnim)cancelAnimationFrame(pulseAnim);const loop=()=>{const t=performance.now()-pulseStart;if(t>900){pulseAnim=null;drawNet();return;}drawNet();pulseAnim=requestAnimationFrame(loop);};loop();}
 const RGB_BLUE=[124,162,255];
 const RGB_BLUE_DEEP=[36,52,120];
@@ -686,8 +688,8 @@ function drawWeightChip(ctx,mx,my,text,rgb,fontSize,emphasis){
   ctx.fillStyle=rgbaStr(rgb,0.98);ctx.textAlign='center';ctx.textBaseline='middle';
   ctx.fillText(text,mx,my+0.5);ctx.restore();
 }
-function drawLayerChip(ctx,cx,cy,text,rgb){
-  ctx.save();ctx.font=`700 10px "JetBrains Mono"`;
+function drawLayerChip(ctx,cx,cy,text,rgb,s){
+  s=s||1;ctx.save();ctx.font=`700 ${Math.max(8,Math.round(10*s))}px "JetBrains Mono"`;
   const tw=ctx.measureText(text).width;const padX=10,h=19,w=tw+padX*2;
   ctx.beginPath();ctx.roundRect(cx-w/2,cy-h/2,w,h,h/2);
   ctx.fillStyle=rgbaStr(rgb,0.12);ctx.fill();
@@ -726,14 +728,14 @@ function drawNet(){
   const{ctx,w,h}=setupCv();
   drawCanvasBackdrop(ctx,w,h);
   const pos=nPos(w,h);
-  const maxN=Math.max(...layers);
-  const R=maxN<=3?32:maxN<=4?28:maxN<=6?23:19;
+  const s=canvasScale(w);
+  const R=neuronRadius(w);
   const op=(trained||isCalc())?1:0.55;
   const hlSet=new Set(hlEdges.map(e=>`${e.l}-${e.i}-${e.j}`));
   const pulseT=pulseAnim?Math.min(1,(performance.now()-pulseStart)/650):1;
   for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++)for(let i=0;i<W[l][j].length;i++){
     const wv=W[l][j][i],abs=Math.min(Math.abs(wv),2),key=`${l}-${i}-${j}`,isHl=hlSet.has(key);
-    const width=1.3+2.6*(abs/2);
+    const width=(1.3+2.6*(abs/2))*s;
     const x1=pos[l][i].x,y1=pos[l][i].y,x2=pos[l+1][j].x,y2=pos[l+1][j].y;
     let rgb,alpha,lw,glow=false;
     if(isHl){rgb=RGB_GREEN;alpha=0.95;lw=width+2;glow=true;}
@@ -758,18 +760,18 @@ function drawNet(){
       const nEdges=W[l].length*W[l][j].length;const edgeIdx=j*W[l][j].length+i;
       const t=isHl?0.5:(nEdges>1?0.25+0.5*(edgeIdx/(nEdges-1)):0.5);
       const mx=x1+t*(x2-x1),my=y1+t*(y2-y1);
-      const wfs=R>26?10:9;
+      const wfs=Math.max(7,Math.round(10*s));
       const wtxt=isCalc()&&wv===Math.round(wv)?String(Math.round(wv)):wv.toFixed(2);
       const chipRgb=isTraining&&wDeltas&&wDeltas[l]&&wDeltas[l][j]?(wDeltas[l][j][i]>0.001?RGB_GREEN:wDeltas[l][j][i]<-0.001?RGB_RED:RGB_GREY):(wv>=0?RGB_GREEN:RGB_RED);
       drawWeightChip(ctx,mx,my,wtxt,chipRgb,wfs,isHl);
     }
   }
-  const fontSize=R>26?14:12;
+  const fontSize=Math.max(10,Math.round(13*s));
   for(let l=0;l<layers.length;l++){
     const isInLayer=l===0,isOutLayer=l===layers.length-1;
     const chipRgb=isInLayer?RGB_BLUE:isOutLayer?RGB_GOLD:RGB_GREY;
     const chipText=isInLayer?'INDATA':isOutLayer?'UTDATA':`DOLT ${l}`;
-    drawLayerChip(ctx,pos[l][0].x,pos[l][0].y-R-22,chipText,chipRgb);
+    drawLayerChip(ctx,pos[l][0].x,pos[l][0].y-R-22,chipText,chipRgb,s);
     for(let i=0;i<layers[l];i++){
       const{x,y}=pos[l][i];
       const v=vals[l][i];
@@ -793,7 +795,7 @@ function drawNet(){
       if(l>0){
         const bv=B[l-1][i];
         const bTxt=`b=${isCalc()&&bv===Math.round(bv)?String(Math.round(bv)):bv.toFixed(2)}`;
-        ctx.font=`600 ${R>26?9:8}px "JetBrains Mono"`;
+        ctx.font=`600 ${Math.max(7,Math.round(9*s))}px "JetBrains Mono"`;
         const btw=ctx.measureText(bTxt).width;
         const bpx=btw+10,bph=14;
         ctx.beginPath();ctx.roundRect(x-bpx/2,y+R+7,bpx,bph,bph/2);
@@ -804,13 +806,13 @@ function drawNet(){
       }
       if(l===0){
         const av=activeVars();
-        ctx.font=`600 ${R>26?11:9}px "DM Sans"`;
+        ctx.font=`600 ${Math.max(8,Math.round(10*s))}px "DM Sans"`;
         ctx.fillStyle=`rgba(150,180,255,${0.8+0.2*op})`;
         ctx.fillText(av[i].name,x,y+R+16);
       }
       if(l===layers.length-1){
         const outLabel=isCalc()?'Resultat':curSc==='exam'?'Klarar provet?':curSc==='gym'?'Bra träning?':'y';
-        ctx.font=`600 ${R>26?11:9}px "DM Sans"`;
+        ctx.font=`600 ${Math.max(8,Math.round(10*s))}px "DM Sans"`;
         ctx.fillStyle=`rgba(255,214,130,${0.8+0.2*op})`;
         ctx.fillText(outLabel,x,y+R+29);
       }
@@ -818,12 +820,12 @@ function drawNet(){
   }
   document.getElementById('untrainedBadge').style.display=(!trained&&!isCalc())?'block':'none';}
 const cv=document.getElementById('cv');const tip=document.getElementById('tooltip');
-cv.addEventListener('mousemove',function(e){if(!isCalc()){this.style.cursor='default';return;}const rect=this.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top;const h2=rect.height,pos=nPos(rect.width,h2);const maxN=Math.max(...layers);const R=maxN<=3?30:maxN<=4?26:maxN<=6?22:18;
+cv.addEventListener('mousemove',function(e){if(!isCalc()){this.style.cursor='default';return;}const rect=this.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top;const h2=rect.height,pos=nPos(rect.width,h2);const R=neuronRadius(rect.width);
 for(let l=1;l<layers.length;l++)for(let j=0;j<layers[l];j++){const dx=mx-pos[l][j].x,dy=my-pos[l][j].y;if(dx*dx+dy*dy<R*R){this.style.cursor='pointer';return;}}
 for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++)for(let i=0;i<W[l][j].length;i++){const ax=pos[l][i].x,ay=pos[l][i].y,bx=pos[l+1][j].x,by=pos[l+1][j].y;const dxe=bx-ax,dye=by-ay,len2=dxe*dxe+dye*dye;if(len2<1)continue;let t=((mx-ax)*dxe+(my-ay)*dye)/len2;t=Math.max(0,Math.min(1,t));const px=ax+t*dxe,py=ay+t*dye;if(Math.hypot(mx-px,my-py)<8){this.style.cursor='pointer';return;}}
 this.style.cursor='default';});
 cv.addEventListener('mouseleave',()=>{cv.style.cursor='default';});
-cv.addEventListener('click',function(e){if(!isCalc())return;const rect=this.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top,h2=rect.height,pos=nPos(rect.width,h2);const maxN=Math.max(...layers);const R=maxN<=3?30:maxN<=4?26:maxN<=6?22:18;
+cv.addEventListener('click',function(e){if(!isCalc())return;const rect=this.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top,h2=rect.height,pos=nPos(rect.width,h2);const R=neuronRadius(rect.width);
 for(let l=1;l<layers.length;l++)for(let j=0;j<layers[l];j++){const dx=mx-pos[l][j].x,dy=my-pos[l][j].y;if(dx*dx+dy*dy<R*R){const lbl=l===layers.length-1?'utdata':`dolt ${l} n${j+1}`;const cur=B[l-1][j];const v=prompt(`Bias för ${lbl}\nNuvarande: ${isCalc()&&cur===Math.round(cur)?cur:cur.toFixed(2)}`,isCalc()&&cur===Math.round(cur)?String(Math.round(cur)):cur.toFixed(2));if(v!==null){const p=parseFloat(v);if(!isNaN(p)){B[l-1][j]=p;initV();if(trained||isCalc()){forwardFull();if(!isCalc())updateOut();}drawNet();}}return;}}
 let bestL=-1,bestJ=-1,bestI=-1,bestD=8;
 for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++)for(let i=0;i<W[l][j].length;i++){const ax=pos[l][i].x,ay=pos[l][i].y,bx=pos[l+1][j].x,by=pos[l+1][j].y;const dx=bx-ax,dy=by-ay,len2=dx*dx+dy*dy;if(len2<1)continue;let t=((mx-ax)*dx+(my-ay)*dy)/len2;t=Math.max(0,Math.min(1,t));const px=ax+t*dx,py=ay+t*dy;const d=Math.hypot(mx-px,my-py);if(d<bestD){bestD=d;bestL=l;bestJ=j;bestI=i;}}
