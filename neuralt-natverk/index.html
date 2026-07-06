@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
@@ -587,7 +587,7 @@ function showNarr(l,j,contribs,sum,a){
     actFormula=fn==='σ'?`σ(${fmt(sum)}) = <span class="fr">${fmt(a)}</span>`:fn==='ReLU'?`max(0, ${fmt(sum)}) = <span class="fr">${fmt(a)}</span>`:`tanh(${fmt(sum)}) = <span class="fr">${fmt(a)}</span>`;
   }
   let html=`<div class="calc-card">
-    <div class="calc-head"><span class="ch-badge">${layerLbl}</span><span class="ch-title">Neuron ${j+1}</span></div>
+    <div class="calc-head"><span class="ch-badge">${layerLbl}</span><span class="ch-title">Beräkningen i neuron ${j+1}</span></div>
     <div class="calc-steps">
       <button class="calc-step" type="button">
         <span class="cs-num">1</span>
@@ -761,31 +761,6 @@ function drawNet(){
       const chipRgb=isTraining&&wDeltas&&wDeltas[l]&&wDeltas[l][j]?(wDeltas[l][j][i]>0.001?RGB_GREEN:wDeltas[l][j][i]<-0.001?RGB_RED:RGB_GREY):(wv>=0?RGB_GREEN:RGB_RED);
       drawWeightChip(ctx,mx,my,wtxt,chipRgb,wfs);
     }
-    if(isHl){
-      const edge=hlEdges.find(e=>e.l===l&&e.i===i&&e.j===j);
-      if(edge&&(!pulseAnim||pulseT>=0.55)){
-        const mx=(x1+x2)/2,my=(y1+y2)/2;
-        const fadeIn=pulseAnim?Math.min(1,(pulseT-0.55)/0.45):1;
-        const fs1=R>26?11:10,fs2=R>26?13:11;
-        const txt1=`${edge.w.toFixed(2)}×${edge.input.toFixed(2)}`,txt2=`= ${edge.contribution.toFixed(3)}`;
-        ctx.font=`500 ${fs1}px "JetBrains Mono"`;const tw1=ctx.measureText(txt1).width;
-        ctx.font=`700 ${fs2}px "JetBrains Mono"`;const tw2=ctx.measureText(txt2).width;
-        const bw=Math.max(tw1,tw2)+18,bh=fs1+fs2+18;
-        ctx.save();ctx.globalAlpha=fadeIn;
-        const bx0=mx-bw/2,by0=my-fs1-14;
-        ctx.beginPath();ctx.roundRect(bx0,by0,bw,bh,10);
-        const bg=ctx.createLinearGradient(mx,by0,mx,by0+bh);
-        bg.addColorStop(0,'rgba(26,32,54,0.96)');bg.addColorStop(1,'rgba(12,15,26,0.96)');
-        ctx.shadowColor='rgba(0,0,0,0.4)';ctx.shadowBlur=14;
-        ctx.fillStyle=bg;ctx.fill();ctx.shadowBlur=0;
-        ctx.strokeStyle='rgba(86,224,158,0.4)';ctx.lineWidth=1;ctx.stroke();
-        ctx.font=`500 ${fs1}px "JetBrains Mono"`;ctx.textAlign='center';
-        ctx.fillStyle='rgba(255,255,255,0.75)';ctx.fillText(txt1,mx,by0+fs1+4);
-        ctx.font=`700 ${fs2}px "JetBrains Mono"`;ctx.fillStyle='#ffce54';
-        ctx.fillText(txt2,mx,by0+fs1+fs2+8);
-        ctx.restore();
-      }
-    }
   }
   const fontSize=R>26?14:12;
   for(let l=0;l<layers.length;l++){
@@ -815,7 +790,7 @@ function drawNet(){
       }
       if(l>0){
         const bv=B[l-1][i];
-        const bTxt=`b ${isCalc()&&bv===Math.round(bv)?String(Math.round(bv)):bv.toFixed(2)}`;
+        const bTxt=`b=${isCalc()&&bv===Math.round(bv)?String(Math.round(bv)):bv.toFixed(2)}`;
         ctx.font=`600 ${R>26?9:8}px "JetBrains Mono"`;
         const btw=ctx.measureText(bTxt).width;
         const bpx=btw+10,bph=14;
