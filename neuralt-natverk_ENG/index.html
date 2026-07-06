@@ -160,7 +160,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .canvas-wrap canvas{width:100%;height:100%;display:block;}
 .untrained-badge{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:.68em;font-weight:700;letter-spacing:.14em;color:rgba(255,255,255,.16);pointer-events:none;text-transform:uppercase;}
 
-.narr{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,rgba(14,17,32,.4),rgba(10,12,22,.96) 30%);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:16px 22px;font-size:.92em;line-height:1.6;color:var(--dim);z-index:5;min-height:64px;}
+.narr{flex:0 0 auto;position:relative;background:linear-gradient(180deg,rgba(14,17,32,.6),rgba(10,12,22,.98) 30%);border-top:1px solid var(--border);padding:16px 22px;font-size:.92em;line-height:1.6;color:var(--dim);z-index:5;min-height:64px;max-height:46vh;overflow-y:auto;}
 .narr .nt{font-weight:700;color:var(--accent2);margin-bottom:4px;font-size:.9em;letter-spacing:.02em;}
 .narr .nf{font-family:'JetBrains Mono',monospace;color:var(--gold);font-size:.86em;margin:4px 0;}
 .narr .nr{color:var(--green);font-weight:700;}.narr .ne{color:var(--text);font-size:.87em;}
@@ -346,6 +346,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
     <div class="info">
       <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15Z"/></svg> Concepts – click for an explanation</h3>
       <div class="glossary">
+        <span class="g-tag" onclick="openConcept('gInput',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h11m0 0-4-4m4 4-4 4"/><rect x="16" y="5" width="5" height="14" rx="1"/></svg>Input</span>
         <span class="g-tag" onclick="openConcept('gNeuron',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>Neuron</span>
         <span class="g-tag" onclick="openConcept('gWeight',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="12" r="2.5"/><path d="M7.5 12h9" stroke-width="3"/></svg>Weight</span>
         <span class="g-tag" onclick="openConcept('gBias',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="5"/><path d="M17 17l4 4M14 3v4M12 5h4" stroke-linecap="round"/></svg>Bias (+b)</span>
@@ -559,7 +560,7 @@ function buildActExplain(sum,a,isOut,fn){
     expl=`The sum ${fmt(sum)} is passed through the activation function <strong>ReLU</strong>, which lets positive numbers through unchanged but clips negative numbers to 0. Here that gives max(0, ${fmt(sum)}) = <strong>${fmt(a)}</strong>.`;
   }else{
     const fnName=fn==='σ'?'Sigmoid':fn==='ReLU'?'ReLU':'Tanh';
-    expl=`The sum is passed through the activation function <strong>${fnName}</strong>. ${actExplain(fn,sum,a)}. The activation function decides how strongly the neuron should "fire" on this sum.`;
+    expl=`The sum is passed through the activation function <strong>${fnName}</strong>. ${actExplain(fn,sum,a)}. The activation function decides how strongly the neuron should activate, in other words how strong a signal gets passed on through the network.`;
   }
   expl+=isOut
     ?`<br><br>Since this is the output layer, <strong>${fmt(a)}</strong> is the network's final answer for this attempt${curSc!=='abstract'?' – a value above 0.5 is read as "Yes", otherwise "No"':''}.`
@@ -644,7 +645,7 @@ function addLayer(){if(isCalc()||layers.length>=5)return;layers.splice(layers.le
 function removeLayer(){if(isCalc()||layers.length<=2)return;layers.splice(layers.length-2,1);fullReset();}
 function fullReset(){if(trainTimer){clearInterval(trainTimer);trainTimer=null;}stopTrainAnim();trained=false;isTraining=false;epoch=0;savedTrainData=null;wDeltas=null;lossHistory=[];totalWeightUpdates=0;document.getElementById('trainMsg').classList.remove('show');document.getElementById('lossBox').style.display='none';renderScenarioCards();renderLC();renderVarList();renderIS();initW();initV();if(isCalc()){phase='explore';trained=true;setPhase('explore');}else{setPhase('train');}updateTgt();document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';document.getElementById('epochVal').textContent='0';document.getElementById('narr').innerHTML=isCalc()?'<div class="ne">Press <strong>▶ Next</strong> to step through the network. Activation function: <strong>ReLU</strong> – negative values become 0.<br><span style="font-size:0.88em;opacity:0.85">💡 Tip: click a <strong style="color:var(--green)">connection</strong> to change its weight, or a <strong>neuron</strong> to change its bias.</span></div>':'<div class="ne">Press <strong>Train the model</strong> to begin.</div>';drawNet();}
 function setupCv(){const cv=document.getElementById('cv'),p=cv.parentElement,dpr=devicePixelRatio||1,w=p.clientWidth,h=p.clientHeight;cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+'px';cv.style.height=h+'px';const ctx=cv.getContext('2d');ctx.scale(dpr,dpr);return{ctx,w,h};}
-function nPos(w,h){const narrEl=document.getElementById('narr');const overlay=getComputedStyle(narrEl).position==='absolute';const bottomReserve=overlay?(narrEl.offsetHeight+16):10;const nL=layers.length,px=90,py=25,g=(w-2*px)/Math.max(nL-1,1),ps=[];for(let l=0;l<nL;l++){const n=layers[l],x=px+l*g;const avail=h-2*py-bottomReserve;const ng=Math.min(90,avail/(n));const sy=h/2-(n-1)*ng/2;const lp=[];for(let i=0;i<n;i++)lp.push({x,y:sy+i*ng});ps.push(lp);}return ps;}
+function nPos(w,h){const nL=layers.length,px=90,py=25,g=(w-2*px)/Math.max(nL-1,1),ps=[];for(let l=0;l<nL;l++){const n=layers[l],x=px+l*g;const avail=h-2*py;const ng=Math.min(90,avail/(n));const sy=h/2-(n-1)*ng/2;const lp=[];for(let i=0;i<n;i++)lp.push({x,y:sy+i*ng});ps.push(lp);}return ps;}
 function triggerPulse(){pulseStart=performance.now();if(pulseAnim)cancelAnimationFrame(pulseAnim);const loop=()=>{const t=performance.now()-pulseStart;if(t>900){pulseAnim=null;drawNet();return;}drawNet();pulseAnim=requestAnimationFrame(loop);};loop();}
 const RGB_BLUE=[124,162,255];
 const RGB_BLUE_DEEP=[36,52,120];
@@ -673,14 +674,15 @@ function drawGlassEdge(ctx,x1,y1,x2,y2,rgb,alpha,width,glow){
   ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=grad;ctx.lineWidth=width;ctx.stroke();
   ctx.shadowBlur=0;ctx.restore();
 }
-function drawWeightChip(ctx,mx,my,text,rgb,fontSize){
-  ctx.save();ctx.font=`700 ${fontSize}px "JetBrains Mono"`;
-  const tw=ctx.measureText(text).width;const padX=7,h=fontSize+8,w=tw+padX*2;
+function drawWeightChip(ctx,mx,my,text,rgb,fontSize,emphasis){
+  ctx.save();const fs=emphasis?fontSize+2:fontSize;ctx.font=`700 ${fs}px "JetBrains Mono"`;
+  const tw=ctx.measureText(text).width;const padX=emphasis?9:7,h=fs+(emphasis?10:8),w=tw+padX*2;
   ctx.beginPath();ctx.roundRect(mx-w/2,my-h/2,w,h,h/2);
   const bg=ctx.createLinearGradient(mx,my-h/2,mx,my+h/2);
-  bg.addColorStop(0,'rgba(22,26,44,0.94)');bg.addColorStop(1,'rgba(10,12,20,0.94)');
-  ctx.fillStyle=bg;ctx.fill();
-  ctx.lineWidth=1;ctx.strokeStyle=rgbaStr(rgb,0.55);ctx.stroke();
+  bg.addColorStop(0,emphasis?'rgba(24,32,46,0.98)':'rgba(22,26,44,0.94)');bg.addColorStop(1,emphasis?'rgba(10,14,20,0.98)':'rgba(10,12,20,0.94)');
+  if(emphasis){ctx.shadowColor=rgbaStr(RGB_GREEN,0.55);ctx.shadowBlur=11;}
+  ctx.fillStyle=bg;ctx.fill();ctx.shadowBlur=0;
+  ctx.lineWidth=emphasis?1.7:1;ctx.strokeStyle=rgbaStr(rgb,emphasis?0.95:0.55);ctx.stroke();
   ctx.fillStyle=rgbaStr(rgb,0.98);ctx.textAlign='center';ctx.textBaseline='middle';
   ctx.fillText(text,mx,my+0.5);ctx.restore();
 }
@@ -751,15 +753,15 @@ function drawNet(){
       ctx.save();ctx.shadowColor='rgba(255,255,255,0.95)';ctx.shadowBlur=16;
       ctx.beginPath();ctx.fillStyle='#ffffff';ctx.arc(px,py,3.6,0,Math.PI*2);ctx.fill();ctx.restore();
     }
-    const showW=(isCalc()&&!isHl)||(isTraining)||(trained&&!isHl&&(phase==='predict'||(phase==='explore'&&!hlNeuron)));
+    const showW=isHl?true:(hlNeuron?false:((isCalc())||(isTraining)||(trained&&(phase==='predict'||phase==='explore'))));
     if(showW){
       const nEdges=W[l].length*W[l][j].length;const edgeIdx=j*W[l][j].length+i;
-      const t=nEdges>1?0.25+0.5*(edgeIdx/(nEdges-1)):0.5;
+      const t=isHl?0.5:(nEdges>1?0.25+0.5*(edgeIdx/(nEdges-1)):0.5);
       const mx=x1+t*(x2-x1),my=y1+t*(y2-y1);
       const wfs=R>26?10:9;
       const wtxt=isCalc()&&wv===Math.round(wv)?String(Math.round(wv)):wv.toFixed(2);
       const chipRgb=isTraining&&wDeltas&&wDeltas[l]&&wDeltas[l][j]?(wDeltas[l][j][i]>0.001?RGB_GREEN:wDeltas[l][j][i]<-0.001?RGB_RED:RGB_GREY):(wv>=0?RGB_GREEN:RGB_RED);
-      drawWeightChip(ctx,mx,my,wtxt,chipRgb,wfs);
+      drawWeightChip(ctx,mx,my,wtxt,chipRgb,wfs,isHl);
     }
   }
   const fontSize=R>26?14:12;
@@ -828,6 +830,7 @@ for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++)for(let i=0;i<W[l][j].l
 if(bestL>=0){const av=activeVars();const from=bestL===0?av[bestI].name:`hidden ${bestL} n${bestI+1}`,to=bestL+1===layers.length-1?'output':`hidden ${bestL+1} n${bestJ+1}`;const cur=W[bestL][bestJ][bestI];const v=prompt(`Weight: ${from} → ${to}\nCurrent: ${isCalc()&&cur===Math.round(cur)?cur:cur.toFixed(2)}`,isCalc()&&cur===Math.round(cur)?String(Math.round(cur)):cur.toFixed(2));if(v!==null){const p=parseFloat(v);if(!isNaN(p)){W[bestL][bestJ][bestI]=p;initV();if(trained||isCalc()){forwardFull();if(!isCalc())updateOut();}drawNet();}}}});
 let rT;window.addEventListener('resize',()=>{clearTimeout(rT);rT=setTimeout(()=>{drawNet();drawLossSpark();},80);});
 const CONCEPTS={
+  gInput:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h11m0 0-4-4m4 4-4 4"/><rect x="16" y="5" width="5" height="14" rx="1"/></svg>',title:'Input',def:'<strong>Input</strong> (also called an <em>input variable</em>) – one of the values fed into the first layer of the network, for example hours of sleep or hours studied. Just like every other signal in the network, each input is multiplied by a weight before being passed on to the next layer.',illus:'<svg viewBox="0 0 140 70"><rect x="8" y="24" width="34" height="22" rx="5" fill="rgba(122,162,255,.18)" stroke="#7aa2ff" stroke-width="1.5"/><text x="25" y="39" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#e8ecf8">7</text><path d="M46 35h28" stroke="#7aa2ff" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M67 29l7 6-7 6" stroke="#7aa2ff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="108" cy="35" r="15" fill="rgba(77,128,255,.25)" stroke="#7aa2ff" stroke-width="2"/></svg>'},
   gNeuron:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>',title:'Neuron',def:'<strong>Neuron</strong> – a computational unit. It receives values, multiplies them by weights, sums them up, and runs the result through an activation function.',illus:'<svg viewBox="0 0 140 70"><g stroke="rgba(122,162,255,.5)" stroke-width="1.5"><line x1="15" y1="14" x2="60" y2="35"/><line x1="15" y1="35" x2="60" y2="35"/><line x1="15" y1="56" x2="60" y2="35"/><line x1="80" y1="35" x2="120" y2="35"/></g><circle cx="15" cy="14" r="4" fill="#7aa2ff"/><circle cx="15" cy="35" r="4" fill="#7aa2ff"/><circle cx="15" cy="56" r="4" fill="#7aa2ff"/><circle cx="70" cy="35" r="11" fill="rgba(77,128,255,.25)" stroke="#7aa2ff" stroke-width="2"/><circle cx="120" cy="35" r="4" fill="#ffce54"/></svg>'},
   gWeight:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="12" r="2.5"/><path d="M7.5 12h9" stroke-width="3"/></svg>',title:'Weight',def:'<strong>Weight</strong> – a number that determines how strong the connection between two neurons is. The weights are what the network <em>learns</em> during training. A thicker line means a stronger weight.',illus:'<svg viewBox="0 0 140 70"><circle cx="20" cy="35" r="9" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="2"/><circle cx="120" cy="35" r="9" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="2"/><line x1="29" y1="35" x2="111" y2="35" stroke="#33d17a" stroke-width="5" stroke-linecap="round"/><text x="70" y="25" fill="#ffce54" font-size="13" font-family="JetBrains Mono" text-anchor="middle">w</text></svg>'},
   gBias:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="5"/><path d="M17 17l4 4M14 3v4M12 5h4" stroke-linecap="round"/></svg>',title:'Bias (+b)',def:'<strong>Bias</strong> – a starting value added in every neuron before activation. Lets the neuron activate even if all inputs are zero.',illus:'<svg viewBox="0 0 140 70"><circle cx="70" cy="28" r="14" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="2"/><line x1="70" y1="42" x2="70" y2="54" stroke="#ef5b6b" stroke-width="2"/><rect x="50" y="54" width="40" height="14" rx="7" fill="rgba(239,91,107,.15)" stroke="#ef5b6b" stroke-width="1.2"/><text x="70" y="64" fill="#ff9aa5" font-size="10" font-family="JetBrains Mono" text-anchor="middle">+b</text></svg>'},
