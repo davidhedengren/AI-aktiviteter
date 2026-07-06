@@ -3,208 +3,334 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Search algorithms in mazes – ai-aktiviteter.se</title>
+<title>Search Algorithms in Mazes – ai-aktiviteter.se</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--subtle:#b0bedc;--accent:#4d80ff;--accent2:#6698ff;}
+:root{
+  --bg:#090b14; --surface:#0e1222; --surface2:#151a2e; --border:#1e2642;
+  --border-soft:rgba(255,255,255,.06);
+  --text:#e8ecf8; --dim:#7e8aaa; --subtle:#b0bedc;
+  --accent:#4d80ff; --accent2:#6698ff;
+  --accent-dim:rgba(77,128,255,.14);
+  --gold:#ffce54; --green:#33d17a; --red:#ef5b6b;
+  --r-md:14px; --r-lg:20px;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --alg:#ec4899; /* follows selected algorithm */
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-text-size-adjust:100%;}
 body{font-family:'DM Sans',sans-serif;font-size:13px;background:var(--bg);color:var(--text);min-height:100vh;user-select:none;display:flex;flex-direction:column;}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
+button{font-family:inherit;}
+:focus-visible{outline:2px solid var(--accent2);outline-offset:2px;border-radius:8px;}
 
-.back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
-.back-link:hover{color:var(--text);border-color:var(--dim);}
-.lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
-.lang-link:hover{color:var(--text);border-color:var(--dim);}
-.lang-link .flag{font-size:1.05em;line-height:1;}
-.hd{width:100%;text-align:center;padding:12px 16px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
-.hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}.hd h1 span{color:var(--accent2);}
-.hd p{color:var(--dim);font-size:0.8em;max-width:620px;margin:0 auto;line-height:1.4;}
+/* ── Header ── */
+.back-link,.lang-link{position:absolute;top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:.2s;white-space:nowrap;z-index:2;}
+.back-link{left:16px;} .lang-link{right:16px;}
+.back-link:hover,.lang-link:hover{color:var(--text);border-color:var(--dim);}
+.lang-link .lang-ico{width:14px;height:14px;flex-shrink:0;}
+.hd{width:100%;text-align:center;padding:30px 20px 26px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,.03),transparent);}
+.hd h1{font-family:'Syne',sans-serif;font-size:1.55em;font-weight:800;letter-spacing:-.02em;margin-bottom:10px;text-shadow:0 0 34px rgba(102,152,255,.22);}
+.hd h1 span{color:var(--accent2);}
+.hd p{color:var(--dim);font-size:.86em;font-weight:400;max-width:520px;margin:0 auto;line-height:1.6;}
 
-.page-wrap{max-width:940px;margin:0 auto;padding:16px 20px 48px;position:relative;z-index:1;}
+.page-wrap{max-width:940px;margin:0 auto;padding:18px 20px 56px;position:relative;z-index:1;width:100%;}
 
-#canvasContainer{position:relative;border:2px solid var(--border);display:inline-block;user-select:none;border-radius:8px;overflow:visible;box-shadow:0 4px 24px rgba(0,0,0,.4);}
-#mazeCanvas{display:block;user-select:none;border-radius:11px;}
+/* ── Algorithm cards ── */
+.alg-cards-label{font-size:.66em;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);font-weight:600;margin-bottom:8px;}
+.alg-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:14px;}
+.alg-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:8px 10px;cursor:pointer;color:var(--text);display:flex;align-items:center;justify-content:center;gap:7px;transition:border-color .18s,transform .12s,box-shadow .18s,background .18s;}
+.alg-card:hover{border-color:color-mix(in srgb,var(--c) 55%,transparent);transform:translateY(-1px);}
+.alg-card:active{transform:translateY(0);}
+.alg-card[aria-checked="true"]{border-color:var(--c);box-shadow:0 0 0 1px var(--c),0 10px 26px color-mix(in srgb,var(--c) 16%,transparent);background:linear-gradient(180deg,color-mix(in srgb,var(--c) 9%,var(--surface)),var(--surface));}
+.alg-dot{width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 9px var(--c);flex-shrink:0;transition:box-shadow .18s;}
+.alg-card[aria-checked="false"] .alg-dot{box-shadow:none;opacity:.55;}
+.alg-name{font-weight:600;font-size:13px;letter-spacing:-.01em;}
 
-#controls{margin-top:14px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
-.controls-row{margin-top:8px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
-
-#controls label,.controls-row label{font-size:0.78em;letter-spacing:.04em;color:var(--dim);font-weight:600;display:flex;align-items:center;gap:6px;}
-
-#controls select,.controls-row select{padding:7px 10px;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;outline:none;transition:border-color .2s;}
-#controls select:focus,.controls-row select:focus{border-color:var(--accent);}
-
-#controls button,.controls-row button{padding:7px 16px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:background .2s,box-shadow .2s;}
-#controls button:hover,.controls-row button:hover{background:var(--accent2);box-shadow:0 0 14px rgba(77,128,255,.3);}
-
-#controls input[type="checkbox"]{accent-color:var(--accent);width:14px;height:14px;}
-
-.btn-ghost{padding:7px 16px;background:var(--surface2)!important;color:var(--subtle)!important;border:1px solid var(--border)!important;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;transition:border-color .2s,color .2s;}
-.btn-ghost:hover{border-color:var(--accent)!important;color:var(--text)!important;background:var(--surface2)!important;box-shadow:none!important;}
-
-#info{display:none;margin-top:14px;font-size:12px;font-weight:600;color:var(--text);background:var(--surface);border:1px solid var(--border);padding:10px 14px;border-radius:6px;max-width:940px;}
-#hoverInfo{margin-top:8px;font-size:12px;font-weight:600;color:var(--text);background:var(--surface2);border:1px solid var(--border);padding:10px 14px;border-radius:6px;max-width:940px;}
-#costFunctionInfo{margin-top:8px;font-size:12px;font-weight:600;color:var(--subtle);background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 6px 6px 0;display:none;max-width:940px;}
-
-#legend{margin-top:20px;max-width:940px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px 20px;}
-#legend h3{font-size:0.66em;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;font-weight:700;}
-#legend ul{list-style-type:none;padding:0;margin:0 0 12px 0;}
-#legend li{margin-bottom:7px;font-size:12px;color:var(--dim);display:flex;align-items:center;gap:8px;}
-#legend li strong{color:var(--text);}
-.color-box{display:inline-block;width:18px;height:18px;flex-shrink:0;border:1px solid rgba(255,255,255,.15);border-radius:3px;}
-#legend p{font-size:12px;color:var(--dim);line-height:1.7;margin-top:6px;}
-#legend em{color:var(--subtle);font-style:normal;font-weight:600;}
-
-.heuristic-label{position:absolute;color:rgba(255,255,255,.85);font-size:10px;font-family:'JetBrains Mono',monospace;pointer-events:none;user-select:none;}
-
-.lg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px 16px;margin-bottom:14px;}
-.lg-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--subtle);}
-.lg-note{font-size:11.5px;color:var(--dim);line-height:1.7;}
-.lg-note strong{color:var(--subtle);}
-
-#controls button:disabled,.controls-row button:disabled,.btn-ghost:disabled{opacity:.42;cursor:not-allowed;box-shadow:none;}
-#controls button:disabled:hover,.controls-row button:disabled:hover{box-shadow:none;}
-#controls select:disabled,.controls-row select:disabled{opacity:.5;cursor:not-allowed;}
-
-@media(max-width:940px){
-  .page-wrap{padding:14px 12px 40px;}
-  #canvasContainer{display:block;max-width:100%;}
-  #mazeCanvas{width:100%;height:auto;display:block;}
-  .back-link{position:static;transform:none;margin-bottom:4px;}
-  .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}
-  .hd{padding:10px 16px 8px;}
-  #controls,.controls-row{gap:6px;}
-  #controls button,.controls-row button,#controls select,.controls-row select{padding:9px 14px;font-size:13px;}
-  #controls label,.controls-row label{font-size:0.82em;}
-  .lg-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));}
+/* ── Canvas: the obvious main character ── */
+#canvasContainer{
+  position:relative;z-index:0;border:1px solid #1c2540;display:block;user-select:none;border-radius:18px;overflow:visible;
+  box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.03),0 0 0 1px rgba(77,128,255,.06);max-width:720px;margin:0 auto;
 }
-.overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
-.overlay.show{display:flex;}
-.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;max-width:540px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;}
-.overlay-card h2{font-size:1.1em;font-weight:700;margin-bottom:6px;}.overlay-card h2 span{color:var(--accent2);}
-.overlay-card .sub{font-size:0.84em;color:var(--dim);line-height:1.55;margin-bottom:14px;}
-.overlay-card .steps{display:flex;flex-direction:column;gap:10px;margin:14px 0;text-align:left;}
-.overlay-card .step{display:flex;gap:10px;align-items:flex-start;font-size:0.82em;color:var(--dim);line-height:1.5;}
-.overlay-card .step strong{color:var(--text);}
-.step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
-.overlay-btn{display:block;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}.overlay-btn:hover{background:#3d6de6;}
+#canvasContainer::before{
+  content:'';position:absolute;inset:-80px;z-index:-1;pointer-events:none;
+  background:radial-gradient(circle at 30% 30%,color-mix(in srgb,var(--alg) 16%,transparent),transparent 60%);
+  filter:blur(60px);transition:background 1.2s ease;
+}
+@keyframes canvasAlgFlash{
+  0%{box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.03),0 0 0 1px rgba(77,128,255,.06),0 0 70px color-mix(in srgb,var(--alg) 55%,transparent);}
+  100%{box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.03),0 0 0 1px rgba(77,128,255,.06);}
+}
+#canvasContainer.alg-flash{animation:canvasAlgFlash .6s ease-out;}
+#mazeCanvas{display:block;user-select:none;border-radius:17px;width:100%;height:auto;cursor:default;transition:box-shadow .3s var(--ease-out);}
+#canvasContainer.editing #mazeCanvas{cursor:crosshair;box-shadow:inset 0 0 0 1.5px rgba(51,209,122,.32),inset 0 0 40px rgba(51,209,122,.05);}
 
-/* ── Visuell polish ── */
-.hd h1{text-shadow:0 0 34px rgba(102,152,255,.22);}
-#canvasContainer{border:1px solid #1c2540;border-radius:12px;box-shadow:0 12px 44px rgba(0,0,0,.55),0 0 0 1px rgba(77,128,255,.06);}
-#info,#hoverInfo,#legend,#costFunctionInfo{box-shadow:0 6px 22px rgba(0,0,0,.30);}
-#controls button,.controls-row button{transition:background .18s ease,box-shadow .18s ease,transform .08s ease;}
-#controls button:active,.controls-row button:active{transform:translateY(1px);}
-#startSearchBtn{background:linear-gradient(180deg,#5b8bff,#3f6fe6);box-shadow:0 2px 12px rgba(77,128,255,.38);}
-#startSearchBtn:hover{background:linear-gradient(180deg,#6b97ff,#4a78ec);box-shadow:0 4px 18px rgba(77,128,255,.55);}
-.heuristic-label{color:#10182b;font-weight:500;text-shadow:0 0 2px rgba(255,255,255,.4);letter-spacing:-0.02em;}
-/* ---- Result overlay (pops over the maze) ---- */
+/* ── Edit mode: toggle + help button, placed next to the player controls ── */
+.edit-controls{display:inline-flex;gap:8px;align-items:center;}
+.hud-toggle{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border-radius:999px;
+  border:1px solid var(--border);background:var(--surface2);
+  color:var(--subtle);font-size:12px;font-weight:700;letter-spacing:.01em;cursor:pointer;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+  transition:border-color .25s,color .25s,box-shadow .25s,transform .1s,background .25s;}
+.hud-toggle:hover{border-color:rgba(255,255,255,.24);color:var(--text);}
+.hud-toggle:active{transform:scale(.97);}
+.hud-toggle svg{width:14px;height:14px;flex-shrink:0;}
+.hud-switch{width:28px;height:16px;border-radius:999px;background:rgba(255,255,255,.14);position:relative;flex-shrink:0;transition:background .25s;box-shadow:inset 0 1px 2px rgba(0,0,0,.35);}
+.hud-switch::after{content:'';position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.45);transition:transform .3s var(--ease-spring);}
+.hud-toggle[aria-pressed="true"]{color:#fff;border-color:rgba(51,209,122,.5);background:linear-gradient(180deg,color-mix(in srgb,var(--green) 14%,var(--surface2)),var(--surface2));box-shadow:0 0 16px rgba(51,209,122,.16),inset 0 1px 0 rgba(255,255,255,.05);}
+.hud-toggle[aria-pressed="true"] .hud-switch{background:var(--green);}
+.hud-toggle[aria-pressed="true"] .hud-switch::after{transform:translateX(12px);}
+.hud-help{display:none;width:38px;height:38px;border-radius:10px;align-items:center;justify-content:center;
+  border:1px solid var(--border);background:var(--surface2);
+  color:var(--subtle);cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+  transition:border-color .2s,color .2s,transform .2s var(--ease-spring);}
+.edit-controls.on .hud-help{display:inline-flex;}
+.hud-help:hover{border-color:var(--accent);color:var(--accent2);transform:translateY(-1px);}
+.hud-help svg{width:15px;height:15px;}
+
+/* ── Controls ── */
+#controls{margin-top:14px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
+.controls-row{margin-top:8px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
+.controls-row label{font-size:.78em;letter-spacing:.04em;color:var(--dim);font-weight:600;display:flex;align-items:center;gap:6px;}
+.controls-row select{padding:7px 10px;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:12px;outline:none;transition:border-color .2s;}
+.controls-row select:focus{border-color:var(--accent);}
+
+#startSearchBtn{padding:12px 28px;border:none;border-radius:10px;font-size:13.5px;font-weight:700;letter-spacing:.01em;color:#fff;cursor:pointer;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--alg) 88%,#fff),color-mix(in srgb,var(--alg) 78%,#000));
+  box-shadow:0 3px 16px color-mix(in srgb,var(--alg) 45%,transparent);
+  transition:filter .18s,background .25s,box-shadow .25s,transform .08s;}
+#startSearchBtn:hover{filter:brightness(1.08);box-shadow:0 5px 22px color-mix(in srgb,var(--alg) 60%,transparent);}
+#startSearchBtn:active{transform:translateY(1px);}
+
+.player{display:inline-flex;align-items:center;gap:6px;}
+.icon-btn{width:38px;height:38px;padding:0;display:inline-flex;align-items:center;justify-content:center;background:var(--surface2);color:var(--subtle);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:border-color .18s,color .18s,transform .08s,box-shadow .18s;}
+.icon-btn svg{width:19px;height:19px;display:block;}
+.icon-btn:hover:not(:disabled){border-color:var(--accent);color:var(--text);box-shadow:0 0 12px rgba(77,128,255,.18);}
+.icon-btn:active:not(:disabled){transform:translateY(1px);}
+.icon-btn:disabled{opacity:.35;cursor:not-allowed;}
+.icon-btn-primary{background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;border-color:transparent;box-shadow:0 2px 12px rgba(77,128,255,.38);}
+.icon-btn-primary:hover:not(:disabled){filter:brightness(1.07);color:#fff;}
+#stepCounter{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--dim);min-width:74px;letter-spacing:.02em;}
+#stepCounter b{color:var(--subtle);font-weight:600;}
+
+.btn-ghost{padding:7px 16px;background:var(--surface2);color:var(--subtle);border:1px solid var(--border);border-radius:10px;font-size:12px;cursor:pointer;transition:border-color .2s,color .2s;}
+.btn-ghost:hover{border-color:var(--accent);color:var(--text);}
+button:disabled{opacity:.42;cursor:not-allowed;}
+
+.tips-btn{margin-left:auto;display:inline-flex;align-items:center;gap:7px;padding:8px 15px;border:1px solid var(--border);border-radius:999px;
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));color:var(--subtle);font-size:12px;font-weight:700;cursor:pointer;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);transition:.2s var(--ease-spring);}
+.tips-btn svg{width:14px;height:14px;flex-shrink:0;opacity:.8;}
+.tips-btn:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px);}
+.tips-btn:active{transform:scale(.96);}
+
+#info{display:none;margin-top:14px;font-size:12px;font-weight:500;color:var(--text);background:var(--surface);border:1px solid var(--border);padding:10px 14px;border-radius:10px;box-shadow:0 6px 22px rgba(0,0,0,.3);}
+
+/* ── Result overlay ── */
 .result-overlay{position:absolute;inset:0;display:none;pointer-events:none;z-index:30;}
-.result-overlay.show,.result-overlay.pinned{display:block;}
-.ro-card{position:absolute;top:12px;left:50%;transform:translateX(-50%) translateY(-10px) scale(.95);
-  background:rgba(15,20,37,.96);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
-  border:1px solid rgba(61,220,132,.42);border-radius:14px;padding:13px 14px;min-width:280px;max-width:94%;
-  box-shadow:0 20px 54px rgba(0,0,0,.6),0 0 0 1px rgba(61,220,132,.14),0 0 42px rgba(61,220,132,.14);
-  opacity:0;pointer-events:auto;transition:opacity .26s ease,transform .34s cubic-bezier(.18,.9,.32,1.28);}
+.result-overlay.show{display:block;}
+.ro-card{position:absolute;top:14px;left:50%;transform:translateX(-50%) translateY(-12px) scale(.94);
+  background:rgba(14,18,34,.82);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);
+  border:1px solid rgba(61,220,132,.42);border-radius:14px;padding:16px 18px;min-width:300px;max-width:94%;
+  box-shadow:0 24px 60px rgba(0,0,0,.6),0 0 0 1px rgba(61,220,132,.12),0 0 46px rgba(61,220,132,.12);
+  opacity:0;pointer-events:auto;transition:opacity .28s ease,transform .5s cubic-bezier(.22,1.55,.36,1);}
 .result-overlay.show .ro-card{opacity:1;transform:translateX(-50%) translateY(0) scale(1);}
-.result-overlay.nopath .ro-card{border-color:rgba(239,91,91,.46);box-shadow:0 20px 54px rgba(0,0,0,.6),0 0 0 1px rgba(239,91,91,.16),0 0 38px rgba(239,91,91,.13);}
-.ro-head{font-size:15px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:11px;}
-.ro-badge{background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px;letter-spacing:.02em;flex-shrink:0;}
+.result-overlay.nopath .ro-card{border-color:rgba(239,91,91,.46);box-shadow:0 24px 60px rgba(0,0,0,.6),0 0 0 1px rgba(239,91,91,.14),0 0 40px rgba(239,91,91,.12);}
+.ro-head{font-size:15px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:12px;}
+.ro-badge{background:var(--alg);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.02em;flex-shrink:0;transition:background .25s ease;}
 .result-overlay.nopath .ro-badge{background:linear-gradient(180deg,#ef6b6b,#d94e4e);}
-.ro-sub{font-size:12px;color:var(--dim);line-height:1.55;max-width:280px;margin-bottom:12px;}
-.ro-metrics{display:flex;flex-wrap:nowrap;gap:6px;margin-bottom:12px;}
-.ro-metric{flex:1 1 0;min-width:0;background:rgba(255,255,255,.045);border:1px solid var(--border);border-radius:9px;padding:7px 4px;display:flex;flex-direction:column;gap:2px;text-align:center;}
-.ro-num{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--accent2);line-height:1;}
+.ro-sub{font-size:12px;font-weight:400;color:var(--dim);line-height:1.55;max-width:280px;margin-bottom:12px;}
+.ro-metrics{display:flex;gap:7px;margin-bottom:13px;}
+.ro-metric{flex:1 1 0;min-width:0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:8px 4px;display:flex;flex-direction:column;gap:3px;text-align:center;}
+.ro-num{font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:var(--accent2);line-height:1;}
 .ro-lab{font-size:8.5px;color:var(--dim);letter-spacing:.02em;text-transform:uppercase;font-weight:600;line-height:1.15;}
-.ro-btn{width:100%;padding:10px;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;
+.ro-btn{width:100%;padding:11px;border:none;border-radius:10px;font-size:12.5px;font-weight:700;cursor:pointer;
   background:linear-gradient(180deg,#3ddc84,#23b86a);color:#04241a;box-shadow:0 4px 16px rgba(61,220,132,.32);transition:filter .16s,transform .08s;}
 .ro-btn:hover{filter:brightness(1.07);}
 .ro-btn:active{transform:translateY(1px);}
 .result-overlay.nopath .ro-btn{background:linear-gradient(180deg,#49527a,#39425c);color:#fff;box-shadow:none;}
-.ro-pin{position:absolute;top:12px;left:12px;display:none;align-items:center;gap:9px;pointer-events:auto;cursor:pointer;
-  background:rgba(15,20,37,.93);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
-  border:1px solid rgba(61,220,132,.4);border-radius:10px;padding:7px 10px 7px 9px;
-  box-shadow:0 8px 26px rgba(0,0,0,.48);font-family:'DM Sans',sans-serif;
-  opacity:0;transform:translateY(-6px) scale(.96);transition:opacity .24s ease,transform .24s ease,border-color .2s;}
-.result-overlay.pinned .ro-pin{display:flex;opacity:1;transform:none;}
-.result-overlay.nopath .ro-pin{border-color:rgba(239,91,91,.42);}
-.ro-pin:hover{border-color:rgba(61,220,132,.7);}
-.result-overlay.nopath .ro-pin:hover{border-color:rgba(239,91,91,.7);}
-.ro-pin-metric{font-size:11.5px;color:var(--dim);white-space:nowrap;}
-.ro-pin-metric b{font-family:'JetBrains Mono',monospace;color:var(--accent2);font-size:13px;font-weight:700;margin-right:2px;}
-.ro-pin-exp{width:13px;height:13px;color:var(--dim);flex-shrink:0;}
 
-/* ---- In-canvas A* tooltip (f = g + h) ---- */
-#mazeTooltip{position:absolute;pointer-events:none;z-index:25;background:rgba(15,20,37,.96);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  border:1px solid rgba(77,128,255,.4);border-radius:8px;padding:7px 11px;font-family:'JetBrains Mono',monospace;font-size:12px;
-  color:var(--text);white-space:nowrap;box-shadow:0 10px 28px rgba(0,0,0,.55);opacity:0;transform:translateY(-4px);transition:opacity .14s ease,transform .14s ease;}
+/* ── A*-tooltip: f(n) = g(n) + h(n) ── */
+#mazeTooltip{position:absolute;pointer-events:none;z-index:25;background:rgba(13,17,32,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(77,128,255,.4);border-radius:9px;padding:8px 11px;font-family:'JetBrains Mono',monospace;font-size:12px;
+  color:var(--text);white-space:nowrap;box-shadow:0 12px 30px rgba(0,0,0,.55);opacity:0;transform:translateY(-4px);transition:opacity .14s,transform .14s;}
 #mazeTooltip.show{opacity:1;transform:none;}
-#mazeTooltip .tt-eq{color:var(--dim);}
-#mazeTooltip .tt-f{color:var(--accent2);font-weight:700;}
-#mazeTooltip .tt-g{color:#3ddc84;font-weight:700;}
-#mazeTooltip .tt-h{color:#f0a94e;font-weight:700;}
+.tt-eq{font-size:10px;font-weight:700;letter-spacing:.03em;color:var(--dim);margin-bottom:4px;}
+.tt-row{display:flex;align-items:baseline;gap:8px;line-height:1.65;}
+.tt-k{display:inline-block;min-width:34px;font-weight:700;}
+.tt-f{color:#6698ff;} .tt-g{color:#3ddc84;} .tt-h{color:#f0a94e;}
+.tt-v{color:var(--text);font-weight:600;}
+.tt-div{height:1px;background:rgba(255,255,255,.14);margin:3px 0;}
+.tt-note{font-size:9px;color:var(--dim);letter-spacing:.02em;}
 
-/* old below-canvas hover/cost hints now live in-canvas */
-#hoverInfo,#costFunctionInfo{display:none!important;}
+/* ── Glaskort (concept card) ── */
+.concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
+.concept-backdrop.show{opacity:1;pointer-events:auto;}
+.concept-card{position:fixed;top:50%;left:50%;z-index:301;width:380px;max-width:90vw;
+  perspective:1000px;
+  transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
+  transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .26s var(--ease-out);}
+.concept-card.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
+.concept-card-inner{position:relative;text-align:center;transform-style:preserve-3d;
+  background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;
+  transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
+  transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);
+  will-change:transform;max-height:86vh;overflow-y:auto;}
+.concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+  padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,206,84,.15) 45%,transparent 65%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::before{opacity:1;}
+.concept-card-inner::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.09),transparent 60%);
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::after{opacity:1;}
+.concept-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);z-index:3;transform:translateZ(30px);}
+.concept-close:hover{border-color:var(--red);color:var(--red);transform:translateZ(30px) rotate(90deg);}
+.concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
+.concept-icon svg{width:28px;height:28px;}
+.concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
+.concept-def{font-size:.88em;line-height:1.6;color:var(--dim);position:relative;z-index:3;transform:translateZ(18px);transform-style:preserve-3d;}
+.concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;font-weight:600;}
 
-/* ---- Playback controls ---- */
-.player{display:inline-flex;align-items:center;gap:6px;margin-left:4px;}
-#controls .icon-btn{width:38px;height:38px;padding:0;display:inline-flex;align-items:center;justify-content:center;
-  background:var(--surface2);color:var(--subtle);border:1px solid var(--border);border-radius:8px;cursor:pointer;
-  transition:border-color .18s,color .18s,background .18s,transform .08s,box-shadow .18s;box-shadow:none;}
-#controls .icon-btn svg{width:19px;height:19px;display:block;}
-#controls .icon-btn:hover:not(:disabled){background:var(--surface2);border-color:var(--accent);color:var(--text);box-shadow:0 0 12px rgba(77,128,255,.18);}
-#controls .icon-btn:active:not(:disabled){transform:translateY(1px);}
-#controls .icon-btn:disabled{opacity:.35;cursor:not-allowed;box-shadow:none;}
-#controls .icon-btn-primary{background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;border-color:transparent;box-shadow:0 2px 12px rgba(77,128,255,.38);}
-#controls .icon-btn-primary:hover:not(:disabled){background:linear-gradient(180deg,#6b97ff,#4a78ec);color:#fff;box-shadow:0 4px 18px rgba(77,128,255,.5);}
+/* 3D-rutor i glaskorten */
+.gc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 8px;margin:14px 0 4px;transform-style:preserve-3d;}
+.gc-grid-2{grid-template-columns:repeat(2,minmax(0,1fr));}
+.gc-cell{display:flex;flex-direction:column;align-items:center;gap:7px;transform-style:preserve-3d;}
+.t3{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;position:relative;
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5);
+  background:linear-gradient(155deg,color-mix(in srgb,var(--tc) 72%,#fff) 0%,var(--tc) 44%,color-mix(in srgb,var(--tc) 60%,#000) 100%);
+  box-shadow:0 14px 24px -8px color-mix(in srgb,var(--tc) 55%,rgba(0,0,0,.65)),0 3px 8px rgba(0,0,0,.35),
+    inset 0 1.5px 0 rgba(255,255,255,.42),inset 0 -3px 6px rgba(0,0,0,.32),
+    0 0 0 1px color-mix(in srgb,var(--tc) 40%,rgba(255,255,255,.1));
+  transform:translateZ(16px) rotateX(9deg);}
+.t3::after{content:'';position:absolute;left:3px;right:3px;top:2px;height:40%;border-radius:9px 9px 50% 50%/9px 9px 100% 100%;
+  background:linear-gradient(rgba(255,255,255,.32),rgba(255,255,255,0));pointer-events:none;}
+.t3.big{width:70px;height:70px;border-radius:17px;font-size:28px;transform:translateZ(22px) rotateX(9deg);}
+.t3-lab{font-size:11px;font-weight:700;color:var(--text);letter-spacing:.01em;line-height:1.2;}
+.t3-sub{font-size:9.5px;color:var(--dim);margin-top:-4px;}
+
+.gc-ctrl{margin-top:16px;display:flex;flex-direction:column;gap:9px;text-align:left;}
+.gc-ctrl-row{display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--dim);line-height:1.45;}
+.mbtn{flex-shrink:0;min-width:82px;text-align:center;padding:4px 9px;border:1px solid var(--border);border-radius:8px;
+  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02));color:var(--subtle);
+  font-size:10.5px;font-weight:700;box-shadow:0 2px 5px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.08);}
+.gc-note{font-size:11.5px;color:var(--dim);line-height:1.65;margin-top:14px;}
+.gc-btn{width:100%;margin-top:16px;padding:11px;border:none;border-radius:11px;font-size:12.5px;font-weight:700;cursor:pointer;
+  background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;
+  box-shadow:0 8px 22px rgba(77,128,255,.32),inset 0 1px 0 rgba(255,255,255,.25);transition:filter .16s,transform .08s;}
+.gc-btn:hover{filter:brightness(1.07);}
+.gc-btn:active{transform:translateY(1px);}
+
+/* ── Intro overlay ── */
+.overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
+.overlay.show{display:flex;}
+.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:540px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
+@keyframes overlayIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.intro-viz{width:200px;height:92px;margin:0 auto 14px;display:block;}
+.iv-e{fill:none;stroke:rgba(255,255,255,.16);stroke-width:3;stroke-linecap:round;}
+.iv-node{stroke-width:2;}
+.iv-start{fill:rgba(52,199,89,.18);stroke:#34c759;}
+.iv-goal{fill:rgba(239,91,91,.18);stroke:#ef5b5b;}
+.iv-dot{fill:#fff;filter:drop-shadow(0 0 6px var(--alg));}
+.overlay-card h2{font-family:'Syne',sans-serif;font-size:1.4em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;}
+.overlay-card h2 span{background:linear-gradient(135deg,var(--text),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.overlay-card .sub{font-size:.87em;font-weight:400;color:var(--dim);line-height:1.6;margin-bottom:18px;}
+.overlay-card .steps{display:flex;flex-direction:column;gap:12px;margin:14px 0;text-align:left;}
+.overlay-card .step{display:flex;gap:12px;align-items:flex-start;font-size:.85em;font-weight:400;color:var(--dim);line-height:1.55;}
+.overlay-card .step strong{color:var(--text);font-weight:600;}
+.step-num{width:25px;height:25px;border-radius:50%;background:rgba(77,128,255,.14);color:var(--accent2);font-weight:700;font-size:.8em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,.28);padding-top:1px;}
+.overlay-tip{margin-top:16px;font-size:.8em;font-weight:400;color:var(--dim);text-align:center;line-height:1.55;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;}
+.overlay-tip strong{color:var(--text);}
+.overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:18px;font-size:.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 24px rgba(77,128,255,.28);}
+.overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
+.overlay-btn svg{width:15px;height:15px;flex-shrink:0;}
+
+@media(max-width:940px){
+  .page-wrap{padding:14px 12px 44px;}
+  .alg-cards{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .back-link,.lang-link{position:static;transform:none;margin:0 4px 6px;}
+  #controls{gap:8px;}
+  #startSearchBtn{width:100%;}
+  .player{flex:1;justify-content:center;}
+  .tips-btn{margin-left:0;}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;}
+}
 </style>
 </head>
 <body>
 
 <div class="hd">
-  <a class="back-link" href="/">← AI activities</a>
-  <a class="lang-link" href="https://www.ai-aktiviteter.se/sokalgoritmer-labyrinter"><span class="flag">🇸🇪</span> Svenska</a>
-  <h1>Search algorithms in a <span>maze</span></h1>
-  <p>Explore BFS, DFS, Greedy best-first and A* – see how they find the way through a maze step by step.</p>
+  <a class="back-link" href="/">← AI-aktiviteter</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/sokalgoritmer-labyrinter">
+    <svg class="lang-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.7 2.6 4 5.8 4 9s-1.3 6.4-4 9c-2.7-2.6-4-5.8-4-9s1.3-6.4 4-9z"/></svg>
+    Svenska</a>
+  <h1>Search Algorithms in a <span>Maze</span></h1>
+  <p>Build your own maze and watch how BFS, DFS, Greedy Best-First, and A* find their way to the goal.</p>
 </div>
 
 <div class="page-wrap">
 
+<!-- Algorithm choice as cards: each algorithm has its own color/personality -->
+<h2 class="alg-cards-label">Choose algorithm</h2>
+<div class="alg-cards" role="radiogroup" aria-label="Choose algorithm" id="algCards">
+  <button class="alg-card" style="--c:#ec4899" data-alg="BFS" role="radio" aria-checked="true">
+    <span class="alg-dot"></span><span class="alg-name">BFS</span>
+  </button>
+  <button class="alg-card" style="--c:#a06bff" data-alg="DFS" role="radio" aria-checked="false">
+    <span class="alg-dot"></span><span class="alg-name">DFS</span>
+  </button>
+  <button class="alg-card" style="--c:#2dd4bf" data-alg="A*" role="radio" aria-checked="false">
+    <span class="alg-dot"></span><span class="alg-name">A*</span>
+  </button>
+  <button class="alg-card" style="--c:#f59e0b" data-alg="Greedy" role="radio" aria-checked="false">
+    <span class="alg-dot"></span><span class="alg-name">Greedy Best-First</span>
+  </button>
+</div>
+
 <div id="canvasContainer">
-  <canvas id="mazeCanvas"></canvas>
+  <canvas id="mazeCanvas" aria-label="Maze. Turn on edit mode at the player controls to build and modify."></canvas>
   <div id="mazeTooltip"></div>
   <div id="resultOverlay" class="result-overlay"></div>
 </div>
 
 <div id="controls">
-  <label for="algorithmSelect">Algorithm:</label>
-  <select id="algorithmSelect">
-    <option value="BFS">BFS</option>
-    <option value="DFS">DFS</option>
-    <option value="A*">A*</option>
-    <option value="Greedy">Greedy best-first</option>
-  </select>
   <button id="startSearchBtn">Start search</button>
   <div class="player">
-    <button id="prevStepBtn" class="icon-btn" title="Previous step" aria-label="Previous step">
+    <button id="prevStepBtn" class="icon-btn" title="Previous step (←)" aria-label="Previous step">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 6h2v12H7zM20 6 11 12l9 6z"/></svg>
     </button>
-    <button id="playBtn" class="icon-btn icon-btn-primary" title="Play" aria-label="Play"></button>
-    <button id="nextStepBtn" class="icon-btn" title="Next step" aria-label="Next step">
+    <button id="playBtn" class="icon-btn icon-btn-primary" title="Play (space)" aria-label="Play"></button>
+    <button id="nextStepBtn" class="icon-btn" title="Next step (→)" aria-label="Next step">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 6h2v12h-2zM4 6l9 6-9 6z"/></svg>
     </button>
-    <button id="resetBtn" class="icon-btn" title="Reset search" aria-label="Reset search">
+    <button id="resetBtn" class="icon-btn" title="Reset search (R)" aria-label="Reset search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+    </button>
+    <span id="stepCounter" aria-live="polite"></span>
+  </div>
+  <div class="edit-controls" id="editControls">
+    <button id="editToggle" class="hud-toggle" aria-pressed="false" title="Edit mode">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+      Edit
+      <span class="hud-switch" aria-hidden="true"></span>
+    </button>
+    <button id="editHelpBtn" class="hud-help" title="How to build" aria-label="Show build instructions">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
     </button>
   </div>
 </div>
 
-<div id="controls2" class="controls-row">
+<div class="controls-row">
   <label for="predefinedSelect">Maze:</label>
   <select id="predefinedSelect">
-    <option value="">-- Select --</option>
+    <option value="">-- Choose --</option>
     <option value="Example 1">Example 1</option>
     <option value="Example 2">Example 2</option>
     <option value="Example 3">Example 3</option>
@@ -212,666 +338,785 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <option value="Example 5">Example 5 (advanced)</option>
   </select>
   <button id="saveBtn" class="btn-ghost">Save</button>
-  <input type="file" id="loadInput" style="display:none;" />
+  <input type="file" id="loadInput" style="display:none;">
   <button id="loadBtn" class="btn-ghost">Load</button>
   <button id="clearMazeBtn" class="btn-ghost">Clear</button>
+  <button class="tips-btn" onclick="openConcept('tips',event)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>
+    Explanations &amp; tips
+  </button>
 </div>
 
-<div id="info"></div>
-<div id="costFunctionInfo">Cost function: (hover over a cell to see f(n))</div>
-<div id="hoverInfo"></div>
-
-<div id="legend">
-  <h3>Legend</h3>
-  <ul>
-    <li><span class="color-box" style="background:#34c759;"></span><span><strong>Start</strong> – the search’s starting position. Click and drag to move it.</span></li>
-    <li><span class="color-box" style="background:#ef5b5b;"></span><span><strong>Goal</strong> – created by right-clicking once.</span></li>
-    <li><span class="color-box" style="background:#d7def0;"></span><span><strong>Normal path</strong> (cost 1) – created by left-clicking a wall.</span></li>
-    <li><span class="color-box" style="background:#10141f;border-color:#2a3550;"></span><span><strong>Wall</strong> – created by left-clicking an open cell.</span></li>
-    <li><span class="color-box" style="background:#d8a24e;"></span><span><strong>Cost 3</strong> – created by right-clicking twice.</span></li>
-    <li><span class="color-box" style="background:#3f6fd0;"></span><span><strong>Cost 5</strong> – created by right-clicking three times.</span></li>
-    <li><span class="color-box" style="background:#6f9fd6;"></span><span><strong>Explored</strong> – cells the algorithm has already examined.</span></li>
-    <li><span class="color-box" style="background:#f0a94e;"></span><span><strong>Queue</strong> – cells waiting to be explored.</span></li>
-    <li><span class="color-box" style="background:#3ddc84;"></span><span><strong>Found path</strong> – the final path from start to goal.</span></li>
-  </ul>
-  <p><em>Left-click</em> toggles between wall and open cell.<br/><em>Right-click</em> cycles goal → cost 3 → cost 5 → wall.</p>
-  <p style="margin-top:8px;"><em>Tip:</em> During an A* search you can hover over a cell to see the f(n) value (the cost function).</p>
-</div>
+<div id="info" role="status"></div>
 
 </div>
 
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
-    <h2>Search algorithms in a <span>maze</span></h2>
+    <svg class="intro-viz" viewBox="0 0 200 92">
+      <path class="iv-e" d="M20 20 H80 V50 H140 V72"/>
+      <circle class="iv-dot" r="4"><animateMotion dur="4s" repeatCount="indefinite" path="M20 20 H80 V50 H140 V72"/></circle>
+      <circle class="iv-node iv-start" cx="20" cy="20" r="7"/>
+      <circle class="iv-node iv-goal" cx="140" cy="72" r="7"/>
+    </svg>
+    <h2>Search Algorithms in a <span>Maze</span></h2>
     <p class="sub">Explore how an AI agent can navigate through a maze. See how four classic search algorithms work step by step.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Choose a maze</strong> – load a ready-made one or build your own.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Choose an algorithm and search</strong> – BFS, DFS, Greedy best-first or A*, then press Start search.</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Compare</strong> – run the same maze with different algorithms. Which finds the shortest path, and which explores the fewest cells?</div></div>
+      <div class="step"><div class="step-num">01</div><div><strong>Choose a maze</strong> – load a ready-made one, or turn on edit mode and build your own.</div></div>
+      <div class="step"><div class="step-num">02</div><div><strong>Pick an algorithm and search</strong> – BFS, DFS, Greedy Best-First, or A*, then press Start search.</div></div>
+      <div class="step"><div class="step-num">03</div><div><strong>Compare</strong> – run the same maze with different algorithms. Which finds the shortest path, and which explores the fewest cells?</div></div>
     </div>
-    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Start the simulation →</button>
+    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <p class="overlay-tip">Tip: hover over an explored cell during an A* search to see the full calculation <strong>f(n) = g(n) + h(n)</strong>.</p>
+  </div>
+</div>
+
+<!-- ── Glaskort: skelett (fylls dynamiskt) ── -->
+<div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
+<div class="concept-card" id="conceptCard">
+  <div class="concept-card-inner" id="conceptCardInner">
+    <button class="concept-close" onclick="closeConcept()" aria-label="Close">✕</button>
+    <div class="concept-icon" id="conceptIcon"></div>
+    <div class="concept-title" id="conceptTitle"></div>
+    <div class="concept-def" id="conceptDef"></div>
   </div>
 </div>
 
 <script>
-const GRID_WIDTH = 30;
-const GRID_HEIGHT = 15;
-const CELL_SIZE = 30;
+'use strict';
+/* ═══════════════ Grund & canvas ═══════════════ */
+const COLS=30, ROWS=15, CELL=30, W=COLS*CELL, H=ROWS*CELL;
+const canvas=document.getElementById('mazeCanvas');
+const ctx=canvas.getContext('2d');
+const canvasContainer=document.getElementById('canvasContainer');
+const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+(function(){const d=Math.min(2,window.devicePixelRatio||1);canvas.width=W*d;canvas.height=H*d;ctx.setTransform(d,0,0,d,0,0);})();
 
-const canvas = document.getElementById("mazeCanvas");
-canvas.width = GRID_WIDTH * CELL_SIZE;
-canvas.height = GRID_HEIGHT * CELL_SIZE;
-const ctx = canvas.getContext("2d");
+/* Each algorithm has its own visual language (frontier + effects) */
+const THEMES={
+  'BFS':   {accent:'#ec4899'},
+  'DFS':   {accent:'#a06bff'},
+  'A*':    {accent:'#2dd4bf'},
+  'Greedy':{accent:'#f59e0b'}
+};
+const QUEUE_COLOR='#f0a94e';   // the queue on the canvas is always orange -- the algorithm's identity is already shown by the card/button
+const ALG_LABEL={'A*':'A*','BFS':'BFS','DFS':'DFS','Greedy':'Greedy Best-First'};
 
-const canvasContainer = document.getElementById("canvasContainer");
+/* Color utilities */
+function hex2rgb(h){h=h.replace('#','');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
+function css(c,a){return 'rgba('+(c[0]|0)+','+(c[1]|0)+','+(c[2]|0)+','+(a==null?1:a)+')';}
+function easeOutBack(p){const k=1.55;return 1+(k+1)*Math.pow(p-1,3)+k*Math.pow(p-1,2);}
 
-let grid = [];
-for (let r = 0; r < GRID_HEIGHT; r++) {
-  let row = [];
-  for (let c = 0; c < GRID_WIDTH; c++) {
-    row.push(1);
+/* Subtil golvvariation (±~1 % ljushet, deterministisk) */
+const floorColors=[];
+for(let r=0;r<ROWS;r++){const row=[];
+  for(let c=0;c<COLS;c++){
+    const h=(Math.sin(r*127.1+c*311.7)*43758.5453)%1;
+    const L=88.6+((h<0?h+1:h)-.5)*2.6;
+    row.push('hsl(224 40% '+L.toFixed(2)+'%)');
+  }floorColors.push(row);}
+
+/* ═══════════════ Labyrintdata ═══════════════ */
+let grid=[]; for(let r=0;r<ROWS;r++){const row=[];for(let c=0;c<COLS;c++)row.push(1);grid.push(row);}
+let start=[11,7], ends=[[5,18]];
+
+let selectedAlg='BFS', currentAlgorithm=null;
+let searchSteps=[], curStep=-1, computedFor=null;
+let playTimer=null, isPlaying=false;
+const PLAY_INTERVAL=150;
+const D_IN=RM?1:160;
+
+/* Edit mode */
+let editMode=false;
+
+/* Animation state */
+let cellAnim=new Map();      // "r,c" -> {st:'fr'|'ex', t}
+let heurLabels=new Map(), fVals=new Map();
+let pathState=null;          // {cells,t0,dur}
+let dimState=null;           // staging: dim everything -> goal glows -> path is drawn -> card
+let particles=[];
+let popupTimer=null;
+
+/* Redigering */
+let is_dragging_start=false, old_start=null, potential_start=null, dragging_point=null, drag_start_pos=null;
+let hoverCell=null;
+
+const resultDiv=document.getElementById('info');
+
+function isStart(r,c){const s=(is_dragging_start&&potential_start)?potential_start:start;return r===s[0]&&c===s[1];}
+function isGoal(r,c){return ends.some(e=>e[0]===r&&e[1]===c);}
+function hasNonOneSquares(){for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++)if(grid[r][c]===2||grid[r][c]===3)return true;return false;}
+function cellCost(r,c){if(grid[r][c]===2)return 5;if(grid[r][c]===3)return 3;if(grid[r][c]===1)return Infinity;return 1;}
+function calcPathCost(path){let s=0;for(const[r,c]of path)s+=cellCost(r,c);return s;}
+function heuristic(a,b){return Math.abs(a[0]-b[0])+Math.abs(a[1]-b[1]);}
+function minH(r,c){return ends.map(e=>heuristic([r,c],e)).reduce((a,b)=>Math.min(a,b),Infinity);}
+function get_neighbors(n){const[r,c]=n,out=[];for(const[dx,dy]of[[-1,0],[1,0],[0,-1],[0,1]]){const nr=r+dx,nc=c+dy;if(nr>=0&&nr<ROWS&&nc>=0&&nc<COLS)out.push([nr,nc]);}return out;}
+
+class PriorityQ{constructor(){this._d=[];}push(i){this._d.push(i);this._d.sort((a,b)=>a[0]-b[0]);}pop(){return this._d.shift();}empty(){return this._d.length===0;}}
+const directions=[[-1,0],[0,1],[1,0],[0,-1]];
+
+/* ═══════════════ Glaskort (concept cards) ═══════════════ */
+function t3(color,glyph,label,sub){
+  return '<div class="gc-cell"><div class="t3" style="--tc:'+color+'">'+(glyph||'')+'</div>'
+    +'<span class="t3-lab">'+label+'</span>'+(sub?'<span class="t3-sub">'+sub+'</span>':'')+'</div>';
+}
+const CONCEPTS={
+  bygga:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
+    title:'Build your maze',
+    def:'Edit mode is on – now you shape the maze directly in the grid.'
+      +'<div class="gc-grid">'
+      +t3('#34c759','','Start','drag to move')
+      +t3('#ef5b5b','','Goal')
+      +t3('#c7d2ec','','Path','cost 1')
+      +t3('#1b2340','','Wall')
+      +t3('#8b5e34','3','Cost 3')
+      +t3('#3f6fd0','5','Cost 5')
+      +'</div>'
+      +'<div class="gc-ctrl">'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Left-click</span><span>toggles <strong>wall ↔ path</strong> – hold and drag to draw.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Right-click</span><span>cycles <strong>goal → cost 3 → cost 5 → wall</strong>.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Drag</span><span>grab the green start cell to move it.</span></div>'
+      +'</div>'
+      +'<button class="gc-btn" onclick="closeConcept()">Start building</button>'
+  },
+  tips:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>',
+    title:'Explanations &amp; tips',
+    def:'Here\'s how to read what\'s happening in the maze during the search.'
+      +'<div class="gc-grid">'
+      +t3('#6f9fd6','','Explored','already checked')
+      +t3('#f0a94e','','Queue','waiting turn – pulses')
+      +t3('#3ddc84','','Found path','start → goal')
+      +'</div>'
+      +'<div class="gc-ctrl">'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Space</span><span>play / pause the playback.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">← →</span><span>step backward / forward, one search step at a time.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">R</span><span>reset the search.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Hover</span><span>during an A* search: hover over an explored cell to see the full calculation <em>f(n)&nbsp;=&nbsp;g(n)&nbsp;+&nbsp;h(n)</em>.</span></div>'
+      +'</div>'
+  },
+  kostnader:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg>',
+    title:'New: cells with a cost',
+    def:'This maze has terrain that\'s <strong>more expensive to cross</strong>. A normal path cell costs 1 – these cost more:'
+      +'<div class="gc-grid gc-grid-2" style="max-width:230px;margin-left:auto;margin-right:auto;">'
+      +t3('#8b5e34','3','Cost 3',null).replace('class="t3"','class="t3 big"')
+      +t3('#3f6fd0','5','Cost 5',null).replace('class="t3"','class="t3 big"')
+      +'</div>'
+      +'<div class="gc-note">Now it\'s not enough to find the <em>shortest</em> path – the <em>cheapest</em> one might be different. Try comparing Greedy Best-First with A*, which factors cost into <strong>f(n)&nbsp;=&nbsp;g(n)&nbsp;+&nbsp;h(n)</strong>.</div>'
+      +'<button class="gc-btn" onclick="closeConcept()">Got it</button>'
   }
-  grid.push(row);
-}
-
-let start = [11, 7];
-let ends = [[5, 18]];
-grid[start[0]][start[1]] = 0;
-ends.forEach(e => { grid[e[0]][e[1]] = 0; });
-
-let heuristicTexts = new Map();
-let f_values = new Map();
-
-let is_dragging_start = false;
-let old_start = null;
-let potential_start = null;
-let dragging_point = null;
-let drag_start_pos = null;
-
-let resultDiv = document.getElementById("info");
-let hoverInfoDiv = document.getElementById("hoverInfo");
-let costFunctionInfoDiv = document.getElementById("costFunctionInfo");
-
-let currentAlgorithm = null;
-let search_cost = 0;
-let runHistory = {};
-
-// playback engine state
-let searchSteps = [];   // [{ops:[...], result|null}]
-let curStep = -1;       // -1 = nothing revealed yet
-let computedFor = null; // which algorithm searchSteps was built for
-let playTimer = null;
-let isPlaying = false;
-const PLAY_INTERVAL = 130;
-const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>';
-const ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
-const ALG_LABEL = {"A*":"A*","BFS":"BFS","DFS":"DFS","Greedy":"Greedy best-first"};
-
-function hideResultOverlay(){ let o=document.getElementById("resultOverlay"); if(o){ o.className="result-overlay"; o.innerHTML=""; } }
-function mazeChanged(){
-  runHistory = {};
-  hideResultOverlay();
-  f_values.clear();
-  computedFor = null; searchSteps = []; curStep = -1;
-  if (typeof pausePlayback === "function") pausePlayback();
-}
-
-function pinChevron(){return '<svg class="ro-pin-exp" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 4 10 8 6 12"/></svg>';}
-
-function buildResultMarkup(o){
-  let badge = '<span class="ro-badge">'+ALG_LABEL[currentAlgorithm]+'</span>';
-  if(!o.found){
-    return '<div class="ro-card">'
-      +'<div class="ro-head">'+badge+' no path found</div>'
-      +'<div class="ro-sub">The algorithm could not reach the goal in this maze.</div>'
-      +'<button class="ro-btn" onclick="dismissResultOverlay()">Show maze</button>'
-      +'</div>';
+};
+function openConceptFrom(id,el){
+  const c=CONCEPTS[id];if(!c)return;
+  const card=document.getElementById('conceptCard');
+  document.getElementById('conceptIcon').innerHTML=c.icon;
+  document.getElementById('conceptTitle').innerHTML=c.title;
+  document.getElementById('conceptDef').innerHTML=c.def;
+  let dx=0,dy=0;
+  if(el&&el.getBoundingClientRect){
+    const r=el.getBoundingClientRect();
+    dx=(r.left+r.width/2)-window.innerWidth/2;
+    dy=(r.top+r.height/2)-window.innerHeight/2;
   }
-  let metrics = '<div class="ro-metric"><span class="ro-num">'+o.steps+'</span><span class="ro-lab">steps to goal</span></div>'
-    + '<div class="ro-metric"><span class="ro-num">'+o.explored+'</span><span class="ro-lab">explored</span></div>';
-  if(o.hasCost){
-    metrics += '<div class="ro-metric"><span class="ro-num">'+o.pathCost+'</span><span class="ro-lab">path cost</span></div>'
-      + '<div class="ro-metric"><span class="ro-num">'+o.searchCost+'</span><span class="ro-lab">search cost</span></div>';
-  }
-  return '<div class="ro-card">'
-    +'<div class="ro-head">'+badge+' found the goal</div>'
-    +'<div class="ro-metrics">'+metrics+'</div>'
-    +'<button class="ro-btn" onclick="dismissResultOverlay()">Show path</button>'
-    +'</div>';
+  card.classList.remove('show');
+  card.style.transition='none';
+  card.style.setProperty('--dx',dx+'px');
+  card.style.setProperty('--dy',dy+'px');
+  void card.offsetHeight; // force reflow so the starting position applies without a transition
+  card.style.transition='';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
 }
-
-function renderResultOverlay(o){
-  let el = document.getElementById("resultOverlay"); if(!el) return;
-  el.innerHTML = buildResultMarkup(o);
-  el.className = "result-overlay"+(o.found?"":" nopath");
-  void el.offsetWidth;            // reflow so the pop transition plays
-  el.classList.add("show");
+function openConcept(id,ev){ev.stopPropagation();openConceptFrom(id,ev.currentTarget);}
+function closeConcept(){
+  document.getElementById('conceptCard').classList.remove('show');
+  document.getElementById('conceptBackdrop').classList.remove('show');
 }
-function dismissResultOverlay(){   // "Show path" hides the popup completely
-  let el = document.getElementById("resultOverlay"); if(!el) return;
-  el.className = "result-overlay";
-}
+window.openConcept=openConcept;window.closeConcept=closeConcept;
+function conceptOpen(){return document.getElementById('conceptBackdrop').classList.contains('show');}
 
-function hasNonOneSquares() {
-  for (let r=0; r<GRID_HEIGHT; r++)
-    for (let c=0; c<GRID_WIDTH; c++)
-      if (grid[r][c] === 2 || grid[r][c] === 3) return true;
-  return false;
-}
+(function initCardTilt(){
+  const el=document.getElementById('conceptCardInner');if(!el||RM)return;
+  const MAX_TILT=5;
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+    const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
+    el.style.setProperty('--mx',(px*100)+'%');
+    el.style.setProperty('--my',(py*100)+'%');
+    el.style.transform='perspective(1000px) rotateX('+rx+'deg) rotateY('+ry+'deg)';
+    const sx=(px-0.5)*22,sy=(py-0.5)*22;
+    el.style.boxShadow=(-sx)+'px '+(20-sy)+'px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset';
+  });
+  el.addEventListener('mouseleave',()=>{
+    el.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%');
+    el.style.boxShadow='';
+  });
+})();
 
-function cellCost(r, c) {
-  if (grid[r][c] === 2) return 5;
-  if (grid[r][c] === 3) return 3;
-  if (grid[r][c] === 1) return Infinity;
-  return 1;
-}
-
-function resetSearchCost() {
-  search_cost = 0;
-  resultDiv.style.backgroundColor = "";
-  hoverInfoDiv.textContent = "";
-  hoverInfoDiv.style.backgroundColor = "";
-  costFunctionInfoDiv.style.display = "none";
-}
-
-function setFinalResultText(txt, showCostFunction=false) {
-  resultDiv.style.display = "block";
-  resultDiv.textContent = txt;
-  resultDiv.style.backgroundColor = "rgba(29,233,155,.12)";
-  resultDiv.style.borderColor = "rgba(29,233,155,.3)";
-  costFunctionInfoDiv.style.display = showCostFunction ? "block" : "none";
-}
-
-function calcPathCost(path) {
-  let c = 0;
-  for (let [rr,cc] of path) c += cellCost(rr, cc);
-  return c;
-}
-
-function heuristic(a, b) {
-  return Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
-}
-
-function get_neighbors(node) {
-  let [r, c] = node;
-  let neighbors = [];
-  let deltas = [[-1,0],[1,0],[0,-1],[0,1]];
-  for (let [dx, dy] of deltas) {
-    let nr = r + dx, nc = c + dy;
-    if (nr >= 0 && nr < GRID_HEIGHT && nc >= 0 && nc < GRID_WIDTH)
-      neighbors.push([nr, nc]);
-  }
-  return neighbors;
-}
-
-const TILE_INSET=1, TILE_R=5;
-function rr(x,y,w,h,rad){ctx.beginPath();ctx.moveTo(x+rad,y);ctx.arcTo(x+w,y,x+w,y+h,rad);ctx.arcTo(x+w,y+h,x,y+h,rad);ctx.arcTo(x,y+h,x,y,rad);ctx.arcTo(x,y,x+w,y,rad);ctx.closePath();}
-function paintCell(r,c,fill,glow,glowBlur,stroke){
-  const x=c*CELL_SIZE+TILE_INSET,y=r*CELL_SIZE+TILE_INSET,s=CELL_SIZE-TILE_INSET*2;
-  ctx.save();
-  if(glow){ctx.shadowColor=glow;ctx.shadowBlur=glowBlur||12;}
-  rr(x,y,s,s,TILE_R);ctx.fillStyle=fill;ctx.fill();
-  ctx.restore();
-  if(stroke){rr(x,y,s,s,TILE_R);ctx.strokeStyle=stroke;ctx.lineWidth=1;ctx.stroke();}
-}
-
-function draw_grid() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#0c1018";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  heuristicTexts.clear();
-  f_values.clear();
-
-  for (let r = 0; r < GRID_HEIGHT; r++) {
-    for (let c = 0; c < GRID_WIDTH; c++) {
-      if (grid[r][c] === 1) paintCell(r, c, "#10141f", null, null, "#212b45");
-      else if (grid[r][c] === 2) paintCell(r, c, "#3f6fd0");
-      else if (grid[r][c] === 3) paintCell(r, c, "#d8a24e");
-      else paintCell(r, c, "#d7def0");
-    }
-  }
-
-  for (let [er, ec] of ends) paintCell(er, ec, "#ef5b5b", "rgba(239,91,91,.6)", 14);
-
-  let sr, sc;
-  if (is_dragging_start && potential_start != null) [sr, sc] = potential_start;
-  else [sr, sc] = start;
-  paintCell(sr, sc, "#34c759", "rgba(52,199,89,.6)", 14);
-}
-
-function clear_heuristic_texts() {
-  heuristicTexts.clear();
-  f_values.clear();
-}
-
-/* Draw a small centred label directly on the canvas (scales with canvas). */
-function drawLabelOnCanvas(r, c, txt) {
-  const x = (c + 0.5) * CELL_SIZE;
-  const y = (r + 0.5) * CELL_SIZE;
-  ctx.save();
-  ctx.font = 'bold 8px "JetBrains Mono", monospace';
-  ctx.fillStyle = 'rgba(10,14,28,0.80)';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(txt, x, y);
-  ctx.restore();
-}
-
-function clear_previous_search() {
-  draw_grid();
-  clear_heuristic_texts();
-  resultDiv.textContent = "";
-  resultDiv.style.display = "none";
-  resultDiv.style.backgroundColor = "";
-  resultDiv.style.borderColor = "";
-  hoverInfoDiv.textContent = "";
-  hoverInfoDiv.style.backgroundColor = "";
-  costFunctionInfoDiv.style.display = "none";
-}
-
-function mark_explored(r, c) {
-  if ((r === start[0] && c === start[1]) || ends.some(e => e[0]===r && e[1]===c)) return;
-  paintCell(r, c, "#6f9fd6");
-  let key = `${r},${c}`;
-  if (heuristicTexts.has(key)) drawLabelOnCanvas(r, c, heuristicTexts.get(key));
-}
-
-function color_frontier_cell(r, c) {
-  if ((r === start[0] && c === start[1]) || ends.some(e => e[0]===r && e[1]===c)) return;
-  paintCell(r, c, "#f0a94e", "rgba(240,169,78,.45)", 8);
-  let key = `${r},${c}`;
-  if (heuristicTexts.has(key)) drawLabelOnCanvas(r, c, heuristicTexts.get(key));
-}
-
-function mark_path(path) {
-  for (let [r, c] of path) {
-    if (r === start[0] && c === start[1]) continue;
-    let isEnd = ends.some(e => e[0]===r && e[1]===c);
-    paintCell(r, c, isEnd ? "#ef5b5b" : "#3ddc84", isEnd ? "rgba(239,91,91,.6)" : "rgba(61,220,132,.55)", 13);
-  }
-}
-
-class PriorityQ {
-  constructor() { this._data = []; }
-  push(item) { this._data.push(item); this._data.sort((a, b) => a[0] - b[0]); }
-  pop() { return this._data.shift(); }
-  empty() { return this._data.length === 0; }
-}
-
-let directions = [[-1,0],[0,1],[1,0],[0,-1]];
-function isGoal(r, c){ return ends.some(e => e[0]===r && e[1]===c); }
-function minH(r, c){ return ends.map(e => heuristic([r,c], e)).reduce((a,b)=>Math.min(a,b), Infinity); }
-
-/* Precompute the whole search as a list of steps (one node-expansion each).
-   ops: {t:'ex',r,c} | {t:'fr',r,c,lbl?,fv?} | {t:'path',cells}            */
+/* ═══════════════ Search precomputation (unchanged logic) ═══════════════ */
 function precomputeSearch(alg){
-  let steps = [];
-  let cur = null;
-  const begin = () => { cur = []; };
-  const commit = (result) => { steps.push({ops:cur, result:result||null}); cur = null; };
+  const steps=[];let cur=null;
+  const begin=()=>{cur=[];};
+  const commit=res=>{steps.push({ops:cur,result:res||null});cur=null;};
 
-  if (alg === "BFS"){
-    let queue = [[[start[0],start[1]], []]];
-    let explored = new Set([`${start[0]},${start[1]}`]);
-    let ec = 1, cost = 0;
-    while (queue.length){
-      let [current, path] = queue.shift(); let [row,col] = current; cost += cellCost(row,col);
-      begin();
-      if (isGoal(row,col)){ let full = path.concat([current]); cur.push({t:'path',cells:full});
-        commit({found:true, steps:full.length-1, explored:ec-1, hasCost:hasNonOneSquares(), pathCost:calcPathCost(full), searchCost:cost}); return steps; }
-      cur.push({t:'ex',r:row,c:col}); ec++;
-      for (let [nr,nc] of get_neighbors([row,col])){ let k = `${nr},${nc}`;
-        if (!explored.has(k) && grid[nr][nc] !== 1){ queue.push([[nr,nc], path.concat([current])]); explored.add(k); cur.push({t:'fr',r:nr,c:nc}); } }
+  if(alg==='BFS'){
+    let queue=[[[start[0],start[1]],[]]],explored=new Set([start[0]+','+start[1]]),ec=1,cost=0;
+    while(queue.length){
+      const[current,path]=queue.shift();const[row,col]=current;cost+=cellCost(row,col);begin();
+      if(isGoal(row,col)){const full=path.concat([current]);cur.push({t:'path',cells:full});
+        commit({found:true,steps:full.length-1,explored:ec-1,hasCost:hasNonOneSquares(),pathCost:calcPathCost(full),searchCost:cost});return steps;}
+      cur.push({t:'ex',r:row,c:col});ec++;
+      for(const[nr,nc]of get_neighbors([row,col])){const k=nr+','+nc;
+        if(!explored.has(k)&&grid[nr][nc]!==1){queue.push([[nr,nc],path.concat([current])]);explored.add(k);cur.push({t:'fr',r:nr,c:nc});}}
       commit();
     }
-    begin(); commit({found:false}); return steps;
+    begin();commit({found:false});return steps;
   }
-
-  if (alg === "DFS"){
-    let stack = [[[start[0],start[1]], [], 2]];
-    let explored = new Set([`${start[0]},${start[1]}`]);
-    let ec = 1, cost = 0;
-    while (stack.length){
-      let [current, path, direction] = stack.pop(); let [row,col] = current; cost += cellCost(row,col);
-      begin();
-      if (isGoal(row,col)){ let full = path.concat([current]); cur.push({t:'path',cells:full});
-        commit({found:true, steps:full.length-1, explored:ec-1, hasCost:hasNonOneSquares(), pathCost:calcPathCost(full), searchCost:cost}); return steps; }
-      cur.push({t:'ex',r:row,c:col}); ec++;
-      let order = [(direction+3)%4, direction, (direction+1)%4, (direction+2)%4];
-      for (let nd of order){ let [dx,dy] = directions[nd]; let nr = row+dx, nc = col+dy;
-        if (nr>=0 && nr<GRID_HEIGHT && nc>=0 && nc<GRID_WIDTH){ let k = `${nr},${nc}`;
-          if (!explored.has(k) && grid[nr][nc] !== 1){ stack.push([[nr,nc], path.concat([current]), nd]); explored.add(k); cur.push({t:'fr',r:nr,c:nc}); } } }
+  if(alg==='DFS'){
+    let stack=[[[start[0],start[1]],[],2]],explored=new Set([start[0]+','+start[1]]),ec=1,cost=0;
+    while(stack.length){
+      const[current,path,direction]=stack.pop();const[row,col]=current;cost+=cellCost(row,col);begin();
+      if(isGoal(row,col)){const full=path.concat([current]);cur.push({t:'path',cells:full});
+        commit({found:true,steps:full.length-1,explored:ec-1,hasCost:hasNonOneSquares(),pathCost:calcPathCost(full),searchCost:cost});return steps;}
+      cur.push({t:'ex',r:row,c:col});ec++;
+      const order=[(direction+3)%4,direction,(direction+1)%4,(direction+2)%4];
+      for(const nd of order){const[dx,dy]=directions[nd];const nr=row+dx,nc=col+dy;
+        if(nr>=0&&nr<ROWS&&nc>=0&&nc<COLS){const k=nr+','+nc;
+          if(!explored.has(k)&&grid[nr][nc]!==1){stack.push([[nr,nc],path.concat([current]),nd]);explored.add(k);cur.push({t:'fr',r:nr,c:nc});}}}
       commit();
     }
-    begin(); commit({found:false}); return steps;
+    begin();commit({found:false});return steps;
   }
-
-  if (alg === "A*"){
-    let open = new PriorityQ(); let came = new Map(); let g = new Map();
-    g.set(`${start[0]},${start[1]}`, 0);
-    open.push([minH(start[0],start[1]), [start[0],start[1]]]);
-    let ec = 1, cost = 0;
-    while (!open.empty()){
-      let [fc, current] = open.pop(); let [row,col] = current; cost += cellCost(row,col);
-      begin();
-      if (isGoal(row,col)){
-        let path = []; let ck = `${row},${col}`; let cu = current;
-        while (came.has(ck)){ path.push(cu); cu = came.get(ck); ck = `${cu[0]},${cu[1]}`; }
-        path.push(start); path.reverse(); cur.push({t:'path',cells:path});
-        commit({found:true, steps:path.length-1, explored:ec-1, hasCost:hasNonOneSquares(), pathCost:calcPathCost(path), searchCost:cost}); return steps;
+  if(alg==='A*'){
+    const open=new PriorityQ(),came=new Map(),g=new Map();
+    g.set(start[0]+','+start[1],0);
+    open.push([minH(start[0],start[1]),[start[0],start[1]]]);
+    let ec=1,cost=0;
+    while(!open.empty()){
+      const[,current]=open.pop();const[row,col]=current;cost+=cellCost(row,col);begin();
+      if(isGoal(row,col)){
+        const path=[];let ck=row+','+col,cu=current;
+        while(came.has(ck)){path.push(cu);cu=came.get(ck);ck=cu[0]+','+cu[1];}
+        path.push(start);path.reverse();cur.push({t:'path',cells:path});
+        commit({found:true,steps:path.length-1,explored:ec-1,hasCost:hasNonOneSquares(),pathCost:calcPathCost(path),searchCost:cost});return steps;
       }
       cur.push({t:'ex',r:row,c:col});
-      for (let [nr,nc] of get_neighbors([row,col])){ if (grid[nr][nc] === 1) continue;
-        let tg = g.get(`${row},${col}`) + cellCost(nr,nc); let nk = `${nr},${nc}`;
-        if (!g.has(nk) || tg < g.get(nk)){ came.set(nk,[row,col]); g.set(nk,tg);
-          let hh = minH(nr,nc); let ff = tg + hh;
-          open.push([ff,[nr,nc]]); cur.push({t:'fr',r:nr,c:nc,lbl:`${ff}`,fv:[ff,hh]}); } }
-      ec++;
-      commit();
+      for(const[nr,nc]of get_neighbors([row,col])){if(grid[nr][nc]===1)continue;
+        const tg=g.get(row+','+col)+cellCost(nr,nc),nk=nr+','+nc;
+        if(!g.has(nk)||tg<g.get(nk)){came.set(nk,[row,col]);g.set(nk,tg);
+          const hh=minH(nr,nc),ff=tg+hh;
+          open.push([ff,[nr,nc]]);cur.push({t:'fr',r:nr,c:nc,lbl:String(ff),fv:[ff,hh]});}}
+      ec++;commit();
     }
-    begin(); commit({found:false}); return steps;
+    begin();commit({found:false});return steps;
   }
-
-  if (alg === "Greedy"){
-    let open = new PriorityQ(); let explored = new Set();
-    open.push([minH(start[0],start[1]), [start[0],start[1]], []]);
-    let ec = 1, cost = 0;
-    while (!open.empty()){
-      let [hc, current, path] = open.pop(); let [row,col] = current; cost += cellCost(row,col);
-      begin();
-      if (isGoal(row,col)){ let full = path.concat([current]); cur.push({t:'path',cells:full});
-        commit({found:true, steps:full.length-1, explored:ec-1, hasCost:hasNonOneSquares(), pathCost:calcPathCost(full), searchCost:cost}); return steps; }
-      explored.add(`${row},${col}`); ec++; cur.push({t:'ex',r:row,c:col});
-      for (let [nr,nc] of get_neighbors(current)){ let k = `${nr},${nc}`;
-        if (explored.has(k) || grid[nr][nc] === 1) continue;
-        let hh = minH(nr,nc);
-        open.push([hh,[nr,nc], path.concat([current])]); explored.add(k);
-        cur.push({t:'fr',r:nr,c:nc,lbl:`${hh}`,fv:[hh,hh]}); }
+  if(alg==='Greedy'){
+    const open=new PriorityQ(),explored=new Set();
+    open.push([minH(start[0],start[1]),[start[0],start[1]],[]]);
+    let ec=1,cost=0;
+    while(!open.empty()){
+      const[,current,path]=open.pop();const[row,col]=current;cost+=cellCost(row,col);begin();
+      if(isGoal(row,col)){const full=path.concat([current]);cur.push({t:'path',cells:full});
+        commit({found:true,steps:full.length-1,explored:ec-1,hasCost:hasNonOneSquares(),pathCost:calcPathCost(full),searchCost:cost});return steps;}
+      explored.add(row+','+col);ec++;cur.push({t:'ex',r:row,c:col});
+      for(const[nr,nc]of get_neighbors(current)){const k=nr+','+nc;
+        if(explored.has(k)||grid[nr][nc]===1)continue;
+        const hh=minH(nr,nc);
+        open.push([hh,[nr,nc],path.concat([current])]);explored.add(k);
+        cur.push({t:'fr',r:nr,c:nc,lbl:String(hh),fv:[hh,hh]});}
       commit();
     }
-    begin(); commit({found:false}); return steps;
+    begin();commit({found:false});return steps;
   }
   return steps;
 }
 
-/* ---- Playback engine ---- */
-function renderToStep(K){
-  draw_grid();                     // clears heuristicTexts & f_values, paints base maze
-  for (let i = 0; i <= K && i < searchSteps.length; i++){
-    for (let op of searchSteps[i].ops){
-      if (op.t === 'ex'){ mark_explored(op.r, op.c); }
-      else if (op.t === 'fr'){
-        if (op.lbl != null) heuristicTexts.set(`${op.r},${op.c}`, op.lbl);
-        if (op.fv) f_values.set(`${op.r},${op.c}`, op.fv);
-        color_frontier_cell(op.r, op.c);
-      }
-      else if (op.t === 'path'){ mark_path(op.cells); }
-    }
+/* ═══════════════ Uppspelningsmotor ═══════════════ */
+function spawnParticles(r,c,accRGB){
+  if(RM)return;
+  for(let i=0;i<2;i++){
+    const a=Math.random()*Math.PI*2,v=18+Math.random()*30;
+    particles.push({x:(c+.5)*CELL,y:(r+.5)*CELL,vx:Math.cos(a)*v,vy:Math.sin(a)*v,t0:performance.now(),life:650,size:1.4+Math.random(),c:accRGB});
+  }
+  if(particles.length>60)particles.splice(0,particles.length-60);
+}
+function startPathAnim(cells,animate){
+  const n=performance.now();
+  if(!animate||RM){pathState={cells,t0:n-1e6,dur:1};dimState=null;return;}
+  const dur=Math.min(1500,Math.max(500,cells.length*45));
+  pathState={cells,t0:n+380,dur};
+  dimState={t0:n,fadeIn:280,holdEnd:n+380+dur,fadeOut:450};
+}
+function applyOps(i,animate){
+  const t=animate?performance.now():-1e6;
+  const acc=hex2rgb(THEMES[computedFor||selectedAlg].accent);
+  for(const op of searchSteps[i].ops){
+    if(op.t==='fr'){const k=op.r+','+op.c;cellAnim.set(k,{st:'fr',t});
+      if(op.lbl!=null)heurLabels.set(k,op.lbl);if(op.fv)fVals.set(k,op.fv);}
+    else if(op.t==='ex'){cellAnim.set(op.r+','+op.c,{st:'ex',t});if(animate){spawnParticles(op.r,op.c,acc);}}
+    else if(op.t==='path'){startPathAnim(op.cells,animate);}
   }
 }
-
-function updatePlayerUI(){
-  let prev = document.getElementById("prevStepBtn");
-  let next = document.getElementById("nextStepBtn");
-  let play = document.getElementById("playBtn");
-  let reset = document.getElementById("resetBtn");
-  let n = searchSteps.length;
-  if (prev) prev.disabled = curStep < 0;
-  if (next) next.disabled = (n === 0) || curStep >= n - 1;
-  if (reset) reset.disabled = (curStep < 0) && !isPlaying;
-  if (play) play.innerHTML = isPlaying ? ICON_PAUSE : ICON_PLAY;
-  if (play) play.title = isPlaying ? "Pausa" : "Spela";
+function recomputeToStep(K){
+  cellAnim.clear();heurLabels.clear();fVals.clear();
+  pathState=null;dimState=null;particles.length=0;
+  for(let i=0;i<=K&&i<searchSteps.length;i++)applyOps(i,false);
 }
-
-function afterStep(){
-  let st = (curStep >= 0 && curStep < searchSteps.length) ? searchSteps[curStep] : null;
-  let atEnd = curStep === searchSteps.length - 1;
-  if (atEnd && st && st.result){
-    renderResultOverlay(st.result);
-    costFunctionInfoDiv.style.display = (st.result.found && computedFor === "A*") ? "block" : "none";
-  } else {
-    hideResultOverlay();
-  }
+function afterStep(animated){
+  clearTimeout(popupTimer);
+  const st=(curStep>=0&&curStep<searchSteps.length)?searchSteps[curStep]:null;
+  const atEnd=curStep===searchSteps.length-1;
+  if(atEnd&&st&&st.result){
+    const res=st.result;
+    if(animated&&res.found&&!RM){
+      const delay=380+(pathState?pathState.dur:0)+180;
+      popupTimer=setTimeout(()=>renderResultOverlay(res),delay);
+    }else renderResultOverlay(res);
+  }else hideResultOverlay();
   updatePlayerUI();
 }
-
-function ensureComputed(){
-  let alg = document.getElementById("algorithmSelect").value;
-  if (computedFor === alg && searchSteps.length) return true;
-  if (ends.length === 0){ setFinalResultText("No goals set"); return false; }
-  currentAlgorithm = alg;
-  searchSteps = precomputeSearch(alg);
-  computedFor = alg; curStep = -1;
-  return searchSteps.length > 0;
+function stepForward(animated){
+  if(curStep>=searchSteps.length-1)return false;
+  curStep++;applyOps(curStep,animated&&!RM);afterStep(animated);return true;
 }
-
-function stepForward(){ if (curStep >= searchSteps.length - 1) return false; curStep++; renderToStep(curStep); afterStep(); return true; }
-function stepBack(){ if (curStep < 0) return false; curStep--; renderToStep(curStep); afterStep(); return true; }
-
-function pausePlayback(){ isPlaying = false; if (playTimer){ clearInterval(playTimer); playTimer = null; } updatePlayerUI(); }
-
+function stepBack(){
+  if(curStep<0)return false;
+  curStep--;recomputeToStep(curStep);afterStep(false);return true;
+}
+function pausePlayback(){isPlaying=false;if(playTimer){clearInterval(playTimer);playTimer=null;}updatePlayerUI();}
 function startPlayback(){
-  if (!ensureComputed()) return;
-  if (curStep >= searchSteps.length - 1) { curStep = -1; renderToStep(-1); }  // restart if at end
-  isPlaying = true;
-  if (playTimer) clearInterval(playTimer);
-  playTimer = setInterval(() => { if (!stepForward()) pausePlayback(); }, PLAY_INTERVAL);
+  if(!ensureComputed())return;
+  if(curStep>=searchSteps.length-1){curStep=-1;recomputeToStep(-1);hideResultOverlay();}
+  isPlaying=true;
+  if(playTimer)clearInterval(playTimer);
+  playTimer=setInterval(()=>{if(!stepForward(true))pausePlayback();},PLAY_INTERVAL);
   updatePlayerUI();
 }
-
-function togglePlay(){ if (isPlaying) pausePlayback(); else startPlayback(); }
-
+function togglePlay(){if(isPlaying)pausePlayback();else startPlayback();}
 function resetPlayback(){
-  pausePlayback();
-  curStep = -1; renderToStep(-1);
-  hideResultOverlay();
-  resultDiv.textContent = ""; resultDiv.style.display = "none";
-  costFunctionInfoDiv.style.display = "none";
+  pausePlayback();clearTimeout(popupTimer);
+  curStep=-1;recomputeToStep(-1);hideResultOverlay();
+  resultDiv.textContent='';resultDiv.style.display='none';
   updatePlayerUI();
 }
+function ensureComputed(){
+  if(computedFor===selectedAlg&&searchSteps.length)return true;
+  if(ends.length===0){setInfo('No goal has been set – turn on edit mode and right-click a wall to create a goal.');return false;}
+  currentAlgorithm=selectedAlg;computedFor=selectedAlg;
+  searchSteps=precomputeSearch(selectedAlg);
+  curStep=-1;recomputeToStep(-1);
+  return searchSteps.length>0;
+}
+function mazeChanged(){
+  pausePlayback();clearTimeout(popupTimer);
+  computedFor=null;searchSteps=[];curStep=-1;
+  recomputeToStep(-1);hideResultOverlay();
+  updatePlayerUI();
+}
+function setInfo(txt){resultDiv.style.display='block';resultDiv.textContent=txt;}
 
-function getCellFromMouse(e) {
-  let rect = canvas.getBoundingClientRect();
-  let scaleX = canvas.width / rect.width;
-  let scaleY = canvas.height / rect.height;
-  let mx = (e.clientX - rect.left) * scaleX;
-  let my = (e.clientY - rect.top) * scaleY;
-  let col = Math.floor(mx / CELL_SIZE);
-  let row = Math.floor(my / CELL_SIZE);
-  if (row<0||row>=GRID_HEIGHT||col<0||col>=GRID_WIDTH) return null;
-  return [row, col];
+/* ═══════════════ UI-uppdatering ═══════════════ */
+const ICON_PLAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>';
+const ICON_PAUSE='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
+function updatePlayerUI(){
+  const prev=document.getElementById('prevStepBtn'),next=document.getElementById('nextStepBtn'),
+        play=document.getElementById('playBtn'),reset=document.getElementById('resetBtn'),
+        counter=document.getElementById('stepCounter');
+  const n=searchSteps.length;
+  prev.disabled=curStep<0;
+  next.disabled=(n===0&&computedFor!==null)||(n>0&&curStep>=n-1);
+  reset.disabled=curStep<0&&!isPlaying;
+  play.innerHTML=isPlaying?ICON_PAUSE:ICON_PLAY;
+  play.title=isPlaying?'Pause (space)':'Play (space)';
+  play.setAttribute('aria-label',play.title);
+  counter.innerHTML=(computedFor&&n)?('step <b>'+(curStep+1)+'</b> / '+n):'';
 }
 
-canvas.oncontextmenu = (e) => { e.preventDefault(); };
-
-canvas.addEventListener("mousedown",(e)=>{
-  e.preventDefault();
-  let cell = getCellFromMouse(e); if (!cell) return;
-  drag_start_pos = cell;
-  let [row, col] = cell;
-  if (row===start[0] && col===start[1]) {
-    is_dragging_start = true; old_start = [start[0], start[1]];
-    potential_start = [start[0], start[1]]; dragging_point = null;
-  } else { dragging_point = "other"; }
-});
-
-canvas.addEventListener("mousemove",(e)=>{
-  e.preventDefault();
-  if (is_dragging_start) {
-    let cell = getCellFromMouse(e);
-    if (cell) { potential_start = cell; draw_grid(); }
-  } else if (dragging_point==="other" && e.buttons===1) {
-    let cell = getCellFromMouse(e);
-    if (cell) { let [row, col] = cell; if (grid[row][col]===1) grid[row][col]=0; else if (grid[row][col]===0) grid[row][col]=1; mazeChanged(); draw_grid(); }
-  }
-});
-
-canvas.addEventListener("mouseup",(e)=>{
-  e.preventDefault();
-  let cell = getCellFromMouse(e);
-  if (is_dragging_start) {
-    is_dragging_start = false;
-    if (cell && (potential_start[0]!==old_start[0] || potential_start[1]!==old_start[1])) {
-      grid[old_start[0]][old_start[1]] = 1; start = [potential_start[0], potential_start[1]]; grid[start[0]][start[1]] = 0; mazeChanged();
+/* ═══════════════ Resultatkort ═══════════════ */
+function hideResultOverlay(){const o=document.getElementById('resultOverlay');o.className='result-overlay';o.innerHTML='';}
+function renderResultOverlay(o){
+  const el=document.getElementById('resultOverlay');
+  const badge='<span class="ro-badge">'+ALG_LABEL[currentAlgorithm]+'</span>';
+  let html;
+  if(!o.found){
+    html='<div class="ro-card"><div class="ro-head">'+badge+' no path found</div>'
+      +'<div class="ro-sub">The algorithm could not reach the goal in this maze.</div>'
+      +'<button class="ro-btn" onclick="hideResultOverlay()">Show maze</button></div>';
+  }else{
+    let m='<div class="ro-metric"><span class="ro-num">'+o.steps+'</span><span class="ro-lab">steps to goal</span></div>'
+      +'<div class="ro-metric"><span class="ro-num">'+o.explored+'</span><span class="ro-lab">explored</span></div>';
+    if(o.hasCost){
+      m+='<div class="ro-metric"><span class="ro-num">'+o.pathCost+'</span><span class="ro-lab">path cost</span></div>'
+        +'<div class="ro-metric"><span class="ro-num">'+o.searchCost+'</span><span class="ro-lab">search cost</span></div>';
     }
-    draw_grid(); dragging_point = null; old_start = null; potential_start = null; drag_start_pos = null; return;
+    html='<div class="ro-card"><div class="ro-head">'+badge+' reached the goal</div>'
+      +'<div class="ro-metrics">'+m+'</div>'
+      +'<button class="ro-btn" onclick="hideResultOverlay()">Show path</button></div>';
   }
-  if (dragging_point === "other") {
-    if (e.button === 0) {
-      if (cell && cell[0]===drag_start_pos[0] && cell[1]===drag_start_pos[1]) {
-        let [r,c] = cell;
-        if (grid[r][c]===1) grid[r][c]=0; else if (grid[r][c]===0) grid[r][c]=1;
-        mazeChanged(); draw_grid();
-      }
-    } else if (e.button === 2) {
-      if (cell && cell[0]===drag_start_pos[0] && cell[1]===drag_start_pos[1]) {
-        let [r,c] = cell;
-        let inEnds = ends.some(e=> e[0]===r && e[1]===c);
-        if (inEnds) { ends = ends.filter(e => !(e[0]===r && e[1]===c)); grid[r][c] = 3; }
-        else if (grid[r][c] === 3) grid[r][c] = 2;
-        else if (grid[r][c] === 2) grid[r][c] = 1;
-        else if (grid[r][c] === 1) { ends.push([r,c]); grid[r][c] = 0; }
-        else { ends.push([r,c]); grid[r][c] = 0; }
-        mazeChanged(); draw_grid();
-      }
+  el.innerHTML=html;
+  el.className='result-overlay'+(o.found?'':' nopath');
+  void el.offsetWidth;
+  el.classList.add('show');
+}
+window.hideResultOverlay=hideResultOverlay;
+
+/* ═══════════════ Ritning ═══════════════ */
+function rr(x,y,w,h,rad){ctx.beginPath();ctx.moveTo(x+rad,y);ctx.arcTo(x+w,y,x+w,y+h,rad);ctx.arcTo(x+w,y+h,x,y+h,rad);ctx.arcTo(x,y+h,x,y,rad);ctx.arcTo(x,y,x+w,y,rad);ctx.closePath();}
+function paintTile(r,c,fill,glow,blur){
+  const x=c*CELL+1,y=r*CELL+1,s=CELL-2;
+  ctx.save();
+  if(glow&&!RM){ctx.shadowColor=glow;ctx.shadowBlur=blur||12;}
+  rr(x,y,s,s,5);ctx.fillStyle=fill;ctx.fill();
+  ctx.restore();
+}
+function paintTileScaled(r,c,scale,alpha,fill,glow,blur){
+  const s=(CELL-2)*scale,x=(c+.5)*CELL-s/2,y=(r+.5)*CELL-s/2;
+  ctx.save();ctx.globalAlpha=alpha;
+  if(glow&&!RM){ctx.shadowColor=glow;ctx.shadowBlur=blur||10;}
+  rr(x,y,s,s,5*scale);ctx.fillStyle=fill;ctx.fill();
+  ctx.restore();
+}
+/* Wall with depth: dark edge, light on top */
+const wallGrads=[];
+for(let r=0;r<ROWS;r++){
+  const g=ctx.createLinearGradient(0,r*CELL+1,0,r*CELL+CELL-1);
+  g.addColorStop(0,'#171e34');g.addColorStop(1,'#0a0e1b');
+  wallGrads.push(g);
+}
+function drawWall(r,c){
+  const x=c*CELL+1,y=r*CELL+1,s=CELL-2;
+  rr(x,y,s,s,5);ctx.fillStyle=wallGrads[r];ctx.fill();
+  ctx.strokeStyle='rgba(148,178,255,.09)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(x+4,y+1.5);ctx.lineTo(x+s-4,y+1.5);ctx.stroke();
+  ctx.strokeStyle='rgba(0,0,0,.55)';
+  ctx.beginPath();ctx.moveTo(x+4,y+s-1);ctx.lineTo(x+s-4,y+s-1);ctx.stroke();
+  rr(x,y,s,s,5);ctx.strokeStyle='#1d2743';ctx.stroke();
+}
+/* Search value (f(n) or h(n)), a discreet centered label -- only visible during the search. */
+function drawLabel(r,c,txt){
+  ctx.save();
+  ctx.font='700 8px "JetBrains Mono",monospace';
+  ctx.fillStyle='rgba(8,12,26,.78)';
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(txt,(c+.5)*CELL,(r+.5)*CELL);
+  ctx.restore();
+}
+
+function frame(){
+  const now=performance.now();
+
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#0b0f1a';ctx.fillRect(0,0,W,H);
+
+  /* Grid -- every third line a bit stronger, like in CAD */
+  ctx.lineWidth=1;
+  for(let c=0;c<=COLS;c++){ctx.strokeStyle=c%3===0?'rgba(102,152,255,.05)':'rgba(102,152,255,.02)';ctx.beginPath();ctx.moveTo(c*CELL+.5,0);ctx.lineTo(c*CELL+.5,H);ctx.stroke();}
+  for(let r=0;r<=ROWS;r++){ctx.strokeStyle=r%3===0?'rgba(102,152,255,.05)':'rgba(102,152,255,.02)';ctx.beginPath();ctx.moveTo(0,r*CELL+.5);ctx.lineTo(W,r*CELL+.5);ctx.stroke();}
+
+  /* Base tiles -- the cost cells' color is enough, the number is explained in the concept cards */
+  for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
+    const v=grid[r][c];
+    if(v===1)drawWall(r,c);
+    else if(v===2)paintTile(r,c,'#3f6fd0');
+    else if(v===3)paintTile(r,c,'#8b5e34');
+    else paintTile(r,c,floorColors[r][c]);
+  }
+
+  /* Explored + queue */
+  for(const[key,st]of cellAnim){
+    const i=key.indexOf(','),r=+key.slice(0,i),c=+key.slice(i+1);
+    if(isStart(r,c)||isGoal(r,c))continue;
+    if(st.st==='fr'){
+      const p=Math.min(1,(now-st.t)/D_IN);
+      const sc=RM?1:easeOutBack(p);                          // grows from 70% with a small ripple, lands on 100%
+      const pulse=RM?1:(.80+.20*Math.sin(now/850+((r*7+c*13)%10)));
+      paintTileScaled(r,c,.7+.3*sc,pulse,QUEUE_COLOR,'rgba(240,169,78,.5)',9);
+    }else{
+      paintTile(r,c,'#6f9fd6');                              // explored: solid color immediately, no trailing tail
+    }
+    const lbl=heurLabels.get(key);
+    if(lbl!=null&&(now-st.t)>D_IN*.6)drawLabel(r,c,lbl);
+  }
+
+  /* Staging: dim everything else while the path is drawn */
+  if(dimState){
+    let a;
+    if(now<dimState.t0+dimState.fadeIn)a=.12*(now-dimState.t0)/dimState.fadeIn;
+    else if(now<dimState.holdEnd)a=.12;
+    else a=Math.max(0,.12*(1-(now-dimState.holdEnd)/dimState.fadeOut));
+    if(a>0){ctx.fillStyle='rgba(5,8,16,'+a+')';ctx.fillRect(0,0,W,H);}
+    else if(now>dimState.holdEnd+dimState.fadeOut)dimState=null;
+  }
+
+  /* The path is drawn -- a green point of light traces the line, like map navigation */
+  if(pathState){
+    const{cells,t0,dur}=pathState;
+    const p=Math.max(0,Math.min(1,(now-t0)/dur));
+    const total=cells.length,headF=p*(total-1),headI=Math.floor(headF);
+    for(let i=0;i<=headI;i++){
+      const[r,c]=cells[i];
+      if(isStart(r,c))continue;
+      const e=isGoal(r,c);
+      paintTile(r,c,e?'#ef5b5b':'#3ddc84',e?'rgba(239,91,91,.6)':'rgba(61,220,132,.5)',12);
+    }
+    if(p>0&&p<1){
+      const[r1,c1]=cells[headI],[r2,c2]=cells[Math.min(headI+1,total-1)];
+      const f=headF-headI;
+      const x=((c1+.5)+(c2-c1)*f)*CELL,y=((r1+.5)+(r2-r1)*f)*CELL;
+      ctx.save();ctx.shadowColor='#3ddc84';ctx.shadowBlur=18;
+      ctx.fillStyle='#c9ffe3';ctx.beginPath();ctx.arc(x,y,4.5,0,7);ctx.fill();
+      ctx.restore();
     }
   }
-  dragging_point = null; old_start = null; potential_start = null; drag_start_pos = null;
-});
 
-const mazeTooltip = document.getElementById("mazeTooltip");
-function showMazeTooltip(html, e){
-  let rect = canvasContainer.getBoundingClientRect();
-  let x = e.clientX - rect.left, y = e.clientY - rect.top;
-  mazeTooltip.innerHTML = html;
-  mazeTooltip.classList.add("show");
-  let tw = mazeTooltip.offsetWidth, th = mazeTooltip.offsetHeight;
-  let left = Math.max(4, Math.min(x - tw/2, rect.width - tw - 4));
-  let top = y - th - 12;
-  if (top < 4) top = y + 18;
-  mazeTooltip.style.left = left + "px";
-  mazeTooltip.style.top = top + "px";
+  /* Goal -- glows extra bright right when it's found */
+  for(const[er,ec]of ends){
+    let blur=14;
+    if(dimState&&now-dimState.t0<800)blur=14+12*Math.sin((now-dimState.t0)/800*Math.PI);
+    paintTile(er,ec,'#ef5b5b','rgba(239,91,91,.6)',blur);
+  }
+  /* Start */
+  {
+    const[sr,sc]=(is_dragging_start&&potential_start)?potential_start:start;
+    paintTile(sr,sc,'#34c759','rgba(52,199,89,.6)',14);
+  }
+
+  /* Light particles that follow the search */
+  if(particles.length){
+    const keep=[];
+    for(const pt of particles){
+      const a=1-(now-pt.t0)/pt.life;
+      if(a<=0)continue;
+      const t=(now-pt.t0)/1000;
+      ctx.fillStyle=css(pt.c,a*.4);
+      ctx.beginPath();ctx.arc(pt.x+pt.vx*t,pt.y+pt.vy*t,pt.size*a,0,7);ctx.fill();
+      keep.push(pt);
+    }
+    particles=keep;
+  }
+
+  /* Hover: thin white outline + preview -- only in edit mode */
+  if(hoverCell&&editMode){
+    const[r,c]=hoverCell;
+    if(!isStart(r,c)&&!isGoal(r,c)&&(grid[r][c]===0||grid[r][c]===1)){
+      ctx.save();ctx.globalAlpha=.32;
+      if(grid[r][c]===1)paintTile(r,c,floorColors[r][c]);   // wall -> preview floor
+      else paintTile(r,c,'#10141f');                         // floor -> preview wall
+      ctx.restore();
+    }
+    const x=c*CELL+1,y=r*CELL+1,s=CELL-2;
+    rr(x+.75,y+.75,s-1.5,s-1.5,4.5);
+    ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=1.5;ctx.stroke();
+  }
+
+  requestAnimationFrame(frame);
 }
-function hideMazeTooltip(){ if(mazeTooltip) mazeTooltip.classList.remove("show"); }
+requestAnimationFrame(frame);
 
-canvas.addEventListener("mousemove",(e)=>{
-  let cell = getCellFromMouse(e);
-  if (!cell) { hideMazeTooltip(); return; }
-  let key = `${cell[0]},${cell[1]}`;
-  if (currentAlgorithm === "A*" && f_values.has(key)) {
-    let [fval, hval] = f_values.get(key); let gval = fval - hval;
-    showMazeTooltip(
-      '<span class="tt-eq">f =</span> <span class="tt-g">'+gval+'</span> '
-      +'<span class="tt-eq">+</span> <span class="tt-h">'+hval+'</span> '
-      +'<span class="tt-eq">=</span> <span class="tt-f">'+fval+'</span>', e);
-  } else { hideMazeTooltip(); }
-});
-canvas.addEventListener("mouseleave", hideMazeTooltip);
-
-function createHeuristicLabel(r, c, txt) {
-  heuristicTexts.set(`${r},${c}`, txt);
-  // The label is drawn by color_frontier_cell / mark_explored right after this call
+/* ═══════════════ Mouse interaction (editing -- requires edit mode) ═══════════════ */
+function getCellFromMouse(e){
+  const rect=canvas.getBoundingClientRect();
+  const mx=(e.clientX-rect.left)*(W/rect.width),my=(e.clientY-rect.top)*(H/rect.height);
+  const col=Math.floor(mx/CELL),row=Math.floor(my/CELL);
+  if(row<0||row>=ROWS||col<0||col>=COLS)return null;
+  return[row,col];
 }
-
-document.getElementById("saveBtn").addEventListener("click", ()=>{
-  let data = {"grid": grid, "start": start, "ends": ends};
-  let blob = new Blob([JSON.stringify(data, null, 2)], {type:"application/json"});
-  let url = URL.createObjectURL(blob);
-  let a = document.createElement("a"); a.href = url; a.download = "maze.json";
-  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+canvas.oncontextmenu=e=>e.preventDefault();
+canvas.addEventListener('mousedown',e=>{
+  e.preventDefault();
+  if(!editMode)return;
+  const cell=getCellFromMouse(e);if(!cell)return;
+  drag_start_pos=cell;
+  const[row,col]=cell;
+  if(row===start[0]&&col===start[1]){
+    is_dragging_start=true;old_start=[start[0],start[1]];
+    potential_start=[start[0],start[1]];dragging_point=null;
+  }else dragging_point='other';
+});
+canvas.addEventListener('mousemove',e=>{
+  hoverCell=getCellFromMouse(e);
+  if(is_dragging_start){if(hoverCell)potential_start=hoverCell;}
+  else if(dragging_point==='other'&&e.buttons===1){
+    if(hoverCell){const[r,c]=hoverCell;
+      if(grid[r][c]===1)grid[r][c]=0;else if(grid[r][c]===0)grid[r][c]=1;
+      mazeChanged();}
+  }
+  /* A*-tooltip: f(n) = g(n) + h(n) */
+  if(hoverCell){
+    const key=hoverCell[0]+','+hoverCell[1];
+    if(currentAlgorithm==='A*'&&fVals.has(key)&&cellAnim.has(key)){
+      const[f,h]=fVals.get(key),g=f-h;
+      showMazeTooltip(
+        '<div class="tt-eq"><span class="tt-f">f(n)</span> = <span class="tt-g">g(n)</span> + <span class="tt-h">h(n)</span></div>'
+        +'<div class="tt-div"></div>'
+        +'<div class="tt-row"><span class="tt-k tt-f">f(n)</span><span class="tt-v">'+f+'</span></div>'
+        +'<div class="tt-row"><span class="tt-k tt-g">g(n)</span><span class="tt-v">'+g+'</span><span class="tt-note">so far</span></div>'
+        +'<div class="tt-row"><span class="tt-k tt-h">h(n)</span><span class="tt-v">'+h+'</span><span class="tt-note">remaining (estimated)</span></div>',e);
+    }else hideMazeTooltip();
+  }else hideMazeTooltip();
+});
+canvas.addEventListener('mouseleave',()=>{hoverCell=null;hideMazeTooltip();});
+canvas.addEventListener('mouseup',e=>{
+  e.preventDefault();
+  if(!editMode&&!is_dragging_start&&!dragging_point)return;
+  const cell=getCellFromMouse(e);
+  if(is_dragging_start){
+    is_dragging_start=false;
+    if(cell&&(potential_start[0]!==old_start[0]||potential_start[1]!==old_start[1])){
+      grid[old_start[0]][old_start[1]]=1;start=[potential_start[0],potential_start[1]];grid[start[0]][start[1]]=0;mazeChanged();
+    }
+    dragging_point=null;old_start=null;potential_start=null;drag_start_pos=null;return;
+  }
+  if(dragging_point==='other'&&cell&&drag_start_pos&&cell[0]===drag_start_pos[0]&&cell[1]===drag_start_pos[1]){
+    const[r,c]=cell;
+    if(e.button===0){
+      if(grid[r][c]===1)grid[r][c]=0;else if(grid[r][c]===0)grid[r][c]=1;
+      mazeChanged();
+    }else if(e.button===2){
+      const inEnds=ends.some(x=>x[0]===r&&x[1]===c);
+      if(inEnds){ends=ends.filter(x=>!(x[0]===r&&x[1]===c));grid[r][c]=3;}
+      else if(grid[r][c]===3)grid[r][c]=2;
+      else if(grid[r][c]===2)grid[r][c]=1;
+      else{ends.push([r,c]);grid[r][c]=0;}
+      mazeChanged();
+    }
+  }
+  dragging_point=null;old_start=null;potential_start=null;drag_start_pos=null;
 });
 
-document.getElementById("loadBtn").addEventListener("click", ()=>{ document.getElementById("loadInput").click(); });
+const mazeTooltip=document.getElementById('mazeTooltip');
+function showMazeTooltip(html,e){
+  const rect=canvasContainer.getBoundingClientRect();
+  const x=e.clientX-rect.left,y=e.clientY-rect.top;
+  mazeTooltip.innerHTML=html;mazeTooltip.classList.add('show');
+  const tw=mazeTooltip.offsetWidth,th=mazeTooltip.offsetHeight;
+  let left=Math.max(4,Math.min(x-tw/2,rect.width-tw-4)),top=y-th-14;
+  if(top<4)top=y+18;
+  mazeTooltip.style.left=left+'px';mazeTooltip.style.top=top+'px';
+}
+function hideMazeTooltip(){mazeTooltip.classList.remove('show');}
 
-document.getElementById("loadInput").addEventListener("change",(e)=>{
-  let file = e.target.files[0]; if (!file) return;
-  let reader = new FileReader();
-  reader.onload = (ev)=>{
-    try {
-      let data = JSON.parse(ev.target.result);
-      if (!data.grid || !data.start || !data.ends) throw new Error("Invalid format.");
-      if (data.grid.length !== GRID_HEIGHT || data.grid[0].length !== GRID_WIDTH) throw new Error(`Grid must be ${GRID_HEIGHT}x${GRID_WIDTH}.`);
-      grid = data.grid; start = data.start; ends = data.ends.map(e => [...e]);
-      grid[start[0]][start[1]] = 0; ends.forEach(e => { grid[e[0]][e[1]] = 0; });
-      mazeChanged(); clear_previous_search(); draw_grid();
-      setFinalResultText("Maze loaded.", currentAlgorithm === "A*");
-    } catch (error) { alert("Error loading: " + error.message); }
+/* ═══════════════ Edit mode (toggle + help button) ═══════════════ */
+const editToggle=document.getElementById('editToggle');
+const editControls=document.getElementById('editControls');
+editToggle.addEventListener('click',()=>{
+  editMode=!editMode;
+  editToggle.setAttribute('aria-pressed',editMode?'true':'false');
+  canvasContainer.classList.toggle('editing',editMode);
+  editControls.classList.toggle('on',editMode);
+  if(editMode)openConceptFrom('bygga',editToggle);
+  else closeConcept();
+});
+document.getElementById('editHelpBtn').addEventListener('click',e=>{
+  openConceptFrom('bygga',e.currentTarget);
+});
+
+/* ═══════════════ Knappar & tangentbord ═══════════════ */
+document.getElementById('algCards').addEventListener('click',e=>{
+  const card=e.target.closest('.alg-card');if(!card)return;
+  selectedAlg=card.dataset.alg;
+  currentAlgorithm=selectedAlg;
+  document.querySelectorAll('.alg-card').forEach(c=>c.setAttribute('aria-checked',c===card?'true':'false'));
+  document.documentElement.style.setProperty('--alg',THEMES[selectedAlg].accent);
+  pausePlayback();clearTimeout(popupTimer);
+  computedFor=null;searchSteps=[];curStep=-1;
+  recomputeToStep(-1);hideResultOverlay();
+  resultDiv.style.display='none';
+  updatePlayerUI();
+  // Quick algorithm glow on the canvas confirming the switch
+  canvasContainer.classList.remove('alg-flash');
+  void canvasContainer.offsetWidth;
+  canvasContainer.classList.add('alg-flash');
+});
+document.getElementById('startSearchBtn').addEventListener('click',()=>{
+  pausePlayback();
+  if(!ensureComputed())return;
+  curStep=-1;recomputeToStep(-1);hideResultOverlay();
+  startPlayback();
+});
+document.getElementById('playBtn').addEventListener('click',togglePlay);
+document.getElementById('nextStepBtn').addEventListener('click',()=>{pausePlayback();if(!ensureComputed())return;stepForward(true);});
+document.getElementById('prevStepBtn').addEventListener('click',()=>{pausePlayback();stepBack();});
+document.getElementById('resetBtn').addEventListener('click',resetPlayback);
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeConcept();return;}
+  if(e.target.matches('input,select,textarea'))return;
+  if(document.getElementById('introOverlay').classList.contains('show'))return;
+  if(conceptOpen())return;
+  if(e.code==='Space'){e.preventDefault();togglePlay();}
+  else if(e.key==='ArrowRight'){e.preventDefault();pausePlayback();if(ensureComputed())stepForward(true);}
+  else if(e.key==='ArrowLeft'){e.preventDefault();pausePlayback();stepBack();}
+  else if(e.key==='r'||e.key==='R'){resetPlayback();}
+});
+
+/* ═══════════════ Save / load / predefined mazes ═══════════════ */
+document.getElementById('saveBtn').addEventListener('click',()=>{
+  const data={grid,start,ends};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='maze.json';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+});
+document.getElementById('loadBtn').addEventListener('click',()=>document.getElementById('loadInput').click());
+document.getElementById('loadInput').addEventListener('change',e=>{
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try{
+      const data=JSON.parse(ev.target.result);
+      if(!data.grid||!data.start||!data.ends)throw new Error('Invalid format.');
+      if(data.grid.length!==ROWS||data.grid[0].length!==COLS)throw new Error('Grid must be '+ROWS+'x'+COLS+'.');
+      grid=data.grid;start=data.start;ends=data.ends.map(x=>[...x]);
+      grid[start[0]][start[1]]=0;ends.forEach(x=>{grid[x[0]][x[1]]=0;});
+      mazeChanged();setInfo('The maze has been loaded.');
+    }catch(err){alert('Error while loading: '+err.message);}
   };
   reader.readAsText(file);
 });
 
-const startMaze = {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,1,0,0,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,1,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[1,8],"ends":[[1,20],[11,12],[9,16]]};
+const startMaze={"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,1,0,0,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,1,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[1,8],"ends":[[1,20],[11,12],[9,16]]};
 
-const predefinedMazes = {
-  "Example 1": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,0,1,0,0,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,1,0,1,0,0,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,0,1,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,1,0,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,7],"ends":[[5,18]]},
-  "Example 2": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,7],"ends":[[5,18]]},
-  "Example 3": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[8,13],"ends":[[2,8],[8,19]]},
-  "Example 4": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,11],"ends":[[5,11]]},
-  "Example 5": {"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,1,2,2,2,2,0,1,1],[1,0,1,0,1,1,1,0,1,0,1,1,1,3,1,3,1,1,1,2,1,0,1,2,1,2,1,0,1,1],[1,0,1,0,0,0,0,0,0,0,1,0,1,3,1,3,1,0,1,2,1,0,2,2,1,2,1,0,1,1],[1,0,1,0,1,1,1,1,1,1,1,0,1,3,1,3,1,0,1,2,1,1,1,1,1,2,1,0,1,1],[1,0,1,0,0,0,0,0,0,0,0,0,1,3,3,3,1,0,1,0,0,0,0,0,1,0,1,0,1,1],[1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,2,1,2,1,0,1,1],[1,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,1,0,1,1],[1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1],[1,0,0,0,1,3,1,0,1,3,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,1,1],[1,0,1,0,1,2,1,2,1,3,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1],[1,0,0,0,1,2,2,2,1,3,0,0,1,0,1,0,0,0,1,0,1,2,1,2,2,2,2,0,1,1],[1,0,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,2,1,1,1,1,1,0,1,1],[1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,2,2,2,2,2,2,2,0,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[1,1],"ends":[[9,7],[9,17],[1,21]]},
+const predefinedMazes={
+  "Example 1":{"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,0,1,0,0,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,1,0,1,0,0,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,0,1,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,1,0,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,7],"ends":[[5,18]]},
+  "Example 2":{"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,7],"ends":[[5,18]]},
+  "Example 3":{"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[8,13],"ends":[[2,8],[8,19]]},
+  "Example 4":{"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,3,3,3,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[11,11],"ends":[[5,11]]},
+  "Example 5":{"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,1,2,2,2,2,0,1,1],[1,0,1,0,1,1,1,0,1,0,1,1,1,3,1,3,1,1,1,2,1,0,1,2,1,2,1,0,1,1],[1,0,1,0,0,0,0,0,0,0,1,0,1,3,1,3,1,0,1,2,1,0,2,2,1,2,1,0,1,1],[1,0,1,0,1,1,1,1,1,1,1,0,1,3,1,3,1,0,1,2,1,1,1,1,1,2,1,0,1,1],[1,0,1,0,0,0,0,0,0,0,0,0,1,3,3,3,1,0,1,0,0,0,0,0,1,0,1,0,1,1],[1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,2,1,2,1,0,1,1],[1,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,1,0,1,1],[1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1],[1,0,0,0,1,3,1,0,1,3,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,1,1],[1,0,1,0,1,2,1,2,1,3,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1],[1,0,0,0,1,2,2,2,1,3,0,0,1,0,1,0,0,0,1,0,1,2,1,2,2,2,2,0,1,1],[1,0,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,2,1,1,1,1,1,0,1,1],[1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,2,2,2,2,2,2,2,0,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[1,1],"ends":[[9,7],[9,17],[1,21]]}
 };
 
-document.getElementById("predefinedSelect").addEventListener("change", (e) => {
-  const sel = e.target.value;
-  if (sel && predefinedMazes[sel]) {
-    const maze = predefinedMazes[sel];
-    grid = maze.grid.map(row => row.slice()); start = [...maze.start]; ends = maze.ends.map(e => [...e]);
-    mazeChanged(); clear_previous_search(); draw_grid();
-    setFinalResultText(`Predefined maze "${sel}" loaded.`, currentAlgorithm === "A*");
-    e.target.value = "";
+document.getElementById('predefinedSelect').addEventListener('change',e=>{
+  const sel=e.target.value;
+  if(sel&&predefinedMazes[sel]){
+    const m=predefinedMazes[sel];
+    grid=m.grid.map(row=>row.slice());start=[...m.start];ends=m.ends.map(x=>[...x]);
+    mazeChanged();setInfo('Predefined maze "'+sel+'" has been loaded.');
+    /* Onboarding: Example 4 & 5 introduce cost cells */
+    if(sel==='Example 4'||sel==='Example 5'){
+      const anchor=e.target;
+      setTimeout(()=>openConceptFrom('kostnader',anchor),260);
+    }
+    e.target.value='';
   }
 });
-
-document.getElementById("startSearchBtn").addEventListener("click", ()=>{
-  pausePlayback();
-  if (!ensureComputed()) return;
-  curStep = -1;
-  startPlayback();
-});
-
-document.getElementById("playBtn").addEventListener("click", togglePlay);
-
-document.getElementById("nextStepBtn").addEventListener("click", ()=>{
-  pausePlayback();
-  if (!ensureComputed()) return;
-  stepForward();
-});
-
-document.getElementById("prevStepBtn").addEventListener("click", ()=>{
-  pausePlayback();
-  stepBack();
-});
-
-document.getElementById("resetBtn").addEventListener("click", resetPlayback);
-
-document.getElementById("algorithmSelect").addEventListener("change", ()=>{
-  pausePlayback();
-  computedFor = null; searchSteps = []; curStep = -1;
-  currentAlgorithm = document.getElementById("algorithmSelect").value;
-  renderToStep(-1);
-  hideResultOverlay();
-  resultDiv.textContent = ""; resultDiv.style.display = "none";
-  costFunctionInfoDiv.style.display = "none";
-  updatePlayerUI();
-});
-
-document.getElementById("clearMazeBtn").addEventListener("click", ()=>{
+document.getElementById('clearMazeBtn').addEventListener('click',()=>{
+  ends=[];
+  for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++)grid[r][c]=1;
+  grid[start[0]][start[1]]=0;
   mazeChanged();
-  ends = [];
-  for (let r=0; r<GRID_HEIGHT; r++) for (let c=0; c<GRID_WIDTH; c++) grid[r][c] = 1;
-  grid[start[0]][start[1]] = 0;
-  draw_grid();
-  updatePlayerUI();
 });
 
-/* ---- Init: load a default maze so a search can be run right away ---- */
-(function initDefaultMaze(){
-  const def = startMaze;
-  grid = def.grid.map(row => row.slice());
-  start = [...def.start];
-  ends = def.ends.map(e => [...e]);
-  grid[start[0]][start[1]] = 0;
-  ends.forEach(e => { grid[e[0]][e[1]] = 0; });
-  draw_grid();
+/* ═══════════════ Init ═══════════════ */
+(function(){
+  grid=startMaze.grid.map(row=>row.slice());
+  start=[...startMaze.start];ends=startMaze.ends.map(x=>[...x]);
+  grid[start[0]][start[1]]=0;ends.forEach(x=>{grid[x[0]][x[1]]=0;});
+  currentAlgorithm=selectedAlg;
+  document.documentElement.style.setProperty('--alg',THEMES[selectedAlg].accent);
   updatePlayerUI();
 })();
 </script>
