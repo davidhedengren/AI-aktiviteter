@@ -1,13 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gomoku – Partial Observability</title>
+<title>Five in a Row – Partial Observability</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--accent:#4d80ff;--accent2:#6698ff;--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--x-color:#e5484d;--o-color:#13a594;--grid:#aeb8d6;--cellbg:#e9edf8;--cellbg-hover:#d6def2;--hiddenbg:#0e1430;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -19,7 +18,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .lang-link:hover{color:var(--text);border-color:var(--dim);}
 .lang-link .flag{font-size:1.05em;line-height:1;}
 .hd{width:100%;text-align:center;padding:8px 16px 7px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
-.hd h1{font-size:1.08em;font-weight:700;letter-spacing:-0.02em;text-shadow:0 0 30px rgba(102,152,255,.2);}.hd h1 span{color:var(--accent2);}
+.hd h1{font-family:'Syne',sans-serif;font-size:1.08em;font-weight:800;letter-spacing:-0.02em;text-shadow:0 0 30px rgba(102,152,255,.2);}.hd h1 span{color:var(--accent2);}
 .hd p{color:var(--dim);font-size:0.8em;max-width:600px;margin:0 auto;line-height:1.4;}
 .main{display:flex;gap:18px;padding:14px;width:100%;position:relative;z-index:1;flex-wrap:wrap;justify-content:center;align-items:flex-start;}
 .board-area{display:flex;flex-direction:column;gap:8px;align-items:center;position:relative;}
@@ -30,6 +29,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .cell{display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;cursor:pointer;transition:background 0.12s;position:relative;background:var(--cellbg);color:#0d1422;}
 .cell:hover:not(.placed):not(.won):not(.revealed):not(.hidden-cell){background:var(--cellbg-hover);}
 
+/* Hidden cells: dark background with a diagonal hatch pattern */
 .cell.hidden-cell{
   background-color:var(--hiddenbg);
   background-image:repeating-linear-gradient(
@@ -87,17 +87,35 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .stat-label{font-size:0.62em;color:var(--dim);text-transform:uppercase;letter-spacing:0.04em;}
 .stat-val{font-family:'JetBrains Mono',monospace;font-size:0.95em;font-weight:700;}
 
-.overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
+.overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
-.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;max-width:480px;width:92%;text-align:center;}
-.overlay-card h2{font-size:1.1em;font-weight:700;margin-bottom:6px;}.overlay-card h2 span{color:var(--accent2);}
-.overlay-card .sub{font-size:0.84em;color:var(--dim);line-height:1.55;margin-bottom:16px;}
-.overlay-card .steps{display:flex;flex-direction:column;gap:10px;margin:14px 0;text-align:left;}
-.overlay-card .step{display:flex;gap:10px;align-items:flex-start;font-size:0.82em;color:var(--dim);line-height:1.5;}
+.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:540px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
+@keyframes overlayIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.overlay-card h2{font-family:'Syne',sans-serif;font-size:1.4em;font-weight:800;letter-spacing:-0.01em;margin-bottom:6px;}.overlay-card h2 span{color:var(--accent2);}
+.overlay-card .sub{font-size:0.87em;color:var(--dim);line-height:1.6;margin-bottom:16px;}
+.overlay-card .steps{display:flex;flex-direction:column;gap:12px;margin:14px 0;text-align:left;}
+.overlay-card .step{display:flex;gap:12px;align-items:flex-start;font-size:0.85em;color:var(--dim);line-height:1.55;}
 .overlay-card .step strong{color:var(--text);}
-.step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
-.overlay-btn{display:block;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}.overlay-btn:hover{background:#3d6de6;}
+.step-num{width:25px;height:25px;border-radius:50%;background:rgba(77,128,255,0.14);color:var(--accent2);font-weight:700;font-size:0.8em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.28);padding-top:1px;}
+.overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s cubic-bezier(.34,1.56,.64,1);}
+.overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
+.overlay-btn svg{width:15px;height:15px;flex-shrink:0;}
 
+/* Animated mini-preview: a hidden cell briefly reveals a blind move, then fogs over again */
+.intro-viz{display:block;width:200px;height:92px;margin:0 auto 14px;}
+.intro-viz .iv-cell{fill:rgba(255,255,255,.05);stroke:rgba(255,255,255,.15);stroke-width:1.5;}
+.intro-viz .iv-fog{fill:#0e1430;stroke:rgba(77,128,255,.35);}
+.intro-viz .iv-x line{stroke:var(--x-color);stroke-width:3;stroke-linecap:round;}
+.intro-viz .iv-q{fill:rgba(150,175,255,.55);font:700 20px 'JetBrains Mono',monospace;text-anchor:middle;dominant-baseline:middle;}
+@media (prefers-reduced-motion: no-preference){
+  .intro-viz .iv-blind{animation:blindReveal 4s ease-in-out infinite;}
+  .intro-viz .iv-q{animation:qFade 4s ease-in-out infinite;}
+}
+.intro-viz .iv-blind{opacity:0;}
+@keyframes blindReveal{0%,55%{opacity:0;}65%,85%{opacity:1;}100%{opacity:0;}}
+@keyframes qFade{0%,55%{opacity:1;}65%,85%{opacity:0;}100%{opacity:1;}}
+
+/* Small preview of a hidden cell in the intro popup */
 .hidden-preview{
   display:inline-block;width:22px;height:22px;vertical-align:middle;
   border-radius:3px;margin:0 3px;
@@ -133,13 +151,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 </head>
 <body>
 <div class="hd">
-  <a class="back-link" href="/">← AI Activities</a>
-  <h1>Gomoku in a <span>partially observable</span> environment</h1>
+  <a class="back-link" href="/">← AI-aktiviteter</a>
+  <h1>Five in a Row in a <span>partially observable</span> environment</h1>
   <a class="lang-link" href="https://www.ai-aktiviteter.se/luffarschack"><span class="flag">🇸🇪</span> Svenska</a>
 </div>
 <div class="main">
   <div class="board-area">
-    <div class="turn-bar"><div class="turn-dot" id="turnDot"></div><span id="turnText">X goes first</span></div>
+    <div class="turn-bar"><div class="turn-dot" id="turnDot"></div><span id="turnText">X starts</span></div>
     <div class="board" id="board"></div>
     <div class="win-banner" id="winBanner"></div>
   </div>
@@ -157,29 +175,39 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
         <option value="20">Large · 20 × 20</option>
       </select>
     </div>
-    <div><div class="sec-t">Hidden cell ratio</div>
-      <div class="setting-row"><input type="range" id="hiddenSlider" min="0" max="50" value="20" step="5" oninput="updateHidden()" onchange="startGame()"><span class="setting-val" id="hiddenVal">20 %</span></div>
+    <div><div class="sec-t">Percentage of hidden cells</div>
+      <div class="setting-row"><input type="range" id="hiddenSlider" min="0" max="50" value="20" step="5" oninput="updateHidden()" onchange="startGame()"><span class="setting-val" id="hiddenVal">20%</span></div>
     </div>
     <button class="btn pri" onclick="startGame()">New game</button>
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px;font-size:0.74em;color:var(--dim);line-height:1.55;">
-      <strong style="color:var(--accent2);">Patterned cells</strong> are hidden – you can place there, but you won't see whether your opponent has already taken the cell.
-      When playing <strong style="color:var(--accent2);">vs AI</strong>, the computer sees just as little as you – it makes decisions under the same uncertainty.<br><br>
-      <strong style="color:var(--gold);">Five in a row</strong> wins. All hidden cells are revealed when the game ends.
+      <strong style="color:var(--accent2);">Cross-hatched cells</strong> are hidden — you can place there, but you won't see if the opponent has already taken the cell.
+      If you play <strong style="color:var(--accent2);">against the AI</strong>, the computer sees just as little as you do — it makes decisions under the same uncertainty.<br><br>
+      <strong style="color:var(--gold);">Five in a row</strong> wins. After the game, all hidden cells are revealed.
     </div>
   </div>
 </div>
 
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
-    <h2>Gomoku in a <span>partially observable</span> environment</h2>
-    <p class="sub">In regular Gomoku, both players can see the entire board. But what happens if parts of the board are <strong>hidden</strong>?</p>
+    <svg class="intro-viz" viewBox="0 0 200 92" aria-hidden="true">
+      <rect class="iv-cell" x="10" y="26" width="40" height="40" rx="6"/>
+      <rect class="iv-cell iv-fog" x="55" y="26" width="40" height="40" rx="6"/>
+      <rect class="iv-cell" x="100" y="26" width="40" height="40" rx="6"/>
+      <rect class="iv-cell iv-fog" x="145" y="26" width="40" height="40" rx="6"/>
+      <g class="iv-x" transform="translate(30,46)"><line x1="-8" y1="-8" x2="8" y2="8"/><line x1="8" y1="-8" x2="-8" y2="8"/></g>
+      <g class="iv-x" transform="translate(120,46)"><line x1="-8" y1="-8" x2="8" y2="8"/><line x1="8" y1="-8" x2="-8" y2="8"/></g>
+      <text class="iv-q" x="75" y="47">?</text>
+      <g class="iv-x iv-blind" transform="translate(75,46)"><line x1="-8" y1="-8" x2="8" y2="8"/><line x1="8" y1="-8" x2="-8" y2="8"/></g>
+    </svg>
+    <h2>Five in a Row in a <span>partially observable</span> environment</h2>
+    <p class="sub">In regular five-in-a-row, both players see the whole board. But what happens if parts of the board are <strong>hidden</strong>?</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Hidden cells</strong> – Cells with a striped pattern <span class="hidden-preview"></span> are hidden. You can place your marker there, but you cannot see what is underneath.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Blind moves</strong> – When you place on a hidden cell, you don't know if the move succeeded. If your opponent already occupies that cell, your move is lost – you forfeit your turn without placing anything.</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Five in a row wins</strong> – Same rules as usual. The first player to place 5 in a row wins.</div></div>
+      <div class="step"><div class="step-num">01</div><div><strong>Hidden cells</strong> – Cross-hatched cells <span class="hidden-preview"></span> are hidden. You can place your mark there, but you won't see what's underneath.</div></div>
+      <div class="step"><div class="step-num">02</div><div><strong>Blind moves</strong> – If you play on a hidden cell, you won't know whether the move succeeded. If the cell was already taken by your opponent, the move is lost — you lose your turn without having placed anything.</div></div>
+      <div class="step"><div class="step-num">03</div><div><strong>Five in a row wins</strong> – Same rules as usual. Whoever places 5 in a row first wins.</div></div>
     </div>
-    <p class="sub">This is called <strong>partial observability</strong> – the agent only sees part of the environment's state. How does it affect your ability to make good decisions?</p>
-    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show');startGame()">Start the game →</button>
+    <p class="sub">This is called <strong>partial observability</strong> — the agent only sees part of the environment's state. How does that affect your ability to make good decisions?</p>
+    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show');startGame()">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 </div>
 
@@ -206,9 +234,12 @@ function startGame(){
   for(let r=0;r<SIZE;r++){board[r]=[];for(let c=0;c<SIZE;c++)board[r][c]='';}
   const all=[];for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)all.push([r,c]);
   shuffle(all);const numH=Math.floor(SIZE*SIZE*hiddenPct/100);
+  // Constraint: max 2 hidden cells in a row (horizontally, vertically, diagonally)
+  // Try adding each candidate; skip it if it would create 3 in a row.
   const DIRS=[[0,1],[1,0],[1,1],[1,-1]];
   function wouldMake3(r,c){
     for(const[dr,dc] of DIRS){
+      // Count consecutive hidden cells in both directions along the axis
       let run=1;
       for(const sgn of [1,-1]){
         let nr=r+dr*sgn,nc=c+dc*sgn;
@@ -287,6 +318,7 @@ function maybeAI(){
     setTimeout(()=>{
       const mv=chooseAIMove();
       if(mv){
+        // Register the attempted hidden cell AFTER the move is chosen, not before
         if(hidden.has(key(mv.r,mv.c))) aiTried.add(key(mv.r,mv.c));
         applyMove(mv.r,mv.c);
       }
@@ -295,6 +327,7 @@ function maybeAI(){
   }
 }
 
+/* ---- AI agent under the same fog ---- */
 function inb(r,c){return r>=0&&r<SIZE&&c>=0&&c<SIZE;}
 function runValue(cnt,open){
   if(cnt>=5)return 100000;
@@ -352,9 +385,12 @@ function chooseAIMove(){
   let best=null,bestScore=-Infinity;
   for(const[r,c] of list){
     let off=offenseScore(r,c),def=defenseScore(r,c);
+    // Combined score: offense + defense + center attractiveness + a bit of noise
     let s=off+def*1.05+Math.max(0,6-(Math.abs(r-cc)+Math.abs(c-cc))*0.3)+Math.random()*3;
+    // Hidden cell: no penalty -- the AI should treat them the same as visible ones
+    // The only exception: if the score is low (no tactical reason), prefer a visible cell
     const isH=hidden.has(key(r,c));
-    const sv=(!isH||s>50)?s:s*0.7;
+    const sv=(!isH||s>50)?s:s*0.7; // Avoid random fog only at low values
     if(sv>bestScore){bestScore=sv;best={r,c};}
   }
   return best;
@@ -393,7 +429,7 @@ function endGame(winner){
     <div class="wb-stat"><div class="wv">${totalMoves}</div><div class="wl">Total</div></div>
   </div>`;
   h+=`<div class="wb-note">Hidden cells have been revealed!</div>`;
-  h+=`<div class="wb-btns"><button class="btn" onclick="document.getElementById('winBanner').classList.remove('show')" style="font-size:0.8em;">🔍 View board</button><button class="btn pri" onclick="startGame()" style="font-size:0.8em;">🔄 New game</button></div>`;
+  h+=`<div class="wb-btns"><button class="btn" onclick="document.getElementById('winBanner').classList.remove('show')" style="font-size:0.8em;">🔍 Show board</button><button class="btn pri" onclick="startGame()" style="font-size:0.8em;">🔄 New game</button></div>`;
   banner.innerHTML=h;
   setTimeout(()=>banner.classList.add('show'),500);
 }
@@ -404,16 +440,16 @@ function updateTurn(){
   dot.style.background=isX?'var(--x-color)':'var(--o-color)';
   dot.style.boxShadow='0 0 12px '+(isX?'rgba(229,72,77,.7)':'rgba(19,165,148,.7)');
   let txt;
-  if(gameOver){txt=currentPlayer+'\'s turn';}
-  else if(vsAI){ txt = isX ? 'Your turn' : (aiThinking?'Computer thinking…':'Computer\'s turn'); }
-  else { txt = currentPlayer+'\'s turn'; }
+  if(gameOver){txt=currentPlayer+"'s turn";}
+  else if(vsAI){ txt = isX ? 'Your turn' : (aiThinking?'Computer is thinking…':"Computer's turn"); }
+  else { txt = currentPlayer+"'s turn"; }
   document.getElementById('turnText').textContent=txt;
 }
 function setT(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
 function updateStats(){
   setT('statBlindX',blindX);setT('statBlindO',blindO);setT('statTotal',totalMoves);
 }
-function updateHidden(){hiddenPct=parseInt(document.getElementById('hiddenSlider').value);document.getElementById('hiddenVal').textContent=hiddenPct+' %';}
+function updateHidden(){hiddenPct=parseInt(document.getElementById('hiddenSlider').value);document.getElementById('hiddenVal').textContent=hiddenPct+'%';}
 function key(r,c){return r+','+c;}
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}}
 startGame();
