@@ -390,8 +390,8 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
         <div>
           <div class="adv-t">Aktiveringsfunktion</div>
           <div class="act-row">
-            <button class="act-btn active" id="actTanh" onclick="setActFn('tanh')">tanh</button>
-            <button class="act-btn" id="actRelu" onclick="setActFn('relu')">ReLU</button>
+            <button class="act-btn active" id="actTanh" onclick="setActFn('tanh',event)">tanh</button>
+            <button class="act-btn" id="actRelu" onclick="setActFn('relu',event)">ReLU</button>
           </div>
           <div class="note" id="actNote"><strong>tanh</strong> ger varje neuron ett värde mellan −1 och +1. Träna med båda funktionerna och jämför beslutsgränsen – ser du någon skillnad i formen?</div>
           <div class="begrepp-row" style="margin-top:8px">
@@ -556,6 +556,7 @@ let comboSel=new Set(),comboDirty=true,comboRefreshCounter=0;
 let curTab='std';
 let speedIdx=0;
 let advShown=false;
+let reluExplained=false;
 let lastShownPct=null,boundaryPulseAt=null;
 
 const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
@@ -825,7 +826,7 @@ const ACT_NOTE={
   tanh:'<strong>tanh</strong> ger varje neuron ett värde mellan −1 och +1. Träna och jämför beslutsgränsen med ReLU – ser du någon skillnad i formen?',
   relu:'<strong>ReLU</strong> släpper igenom positiva värden oförändrade och sätter alla negativa till 0. Träna och jämför med tanh – vad händer med gränsens form?'
 };
-function setActFn(fn){actFn=fn;document.getElementById('actTanh').classList.toggle('active',fn==='tanh');document.getElementById('actRelu').classList.toggle('active',fn==='relu');document.getElementById('actNote').innerHTML=ACT_NOTE[fn];initNet();}
+function setActFn(fn,ev){actFn=fn;document.getElementById('actTanh').classList.toggle('active',fn==='tanh');document.getElementById('actRelu').classList.toggle('active',fn==='relu');document.getElementById('actNote').innerHTML=ACT_NOTE[fn];initNet();if(fn==='relu'&&!reluExplained&&ev){reluExplained=true;openConcept('relublack',ev);document.getElementById('conceptIcon').classList.add('gold');}}
 
 /* ── Titta inuti nätverket: lägesväljare ── */
 function setVizMode(m){
@@ -1037,6 +1038,12 @@ const CONCEPTS={
     title:'Kombination',
     def:'Var för sig ritar varje neuron bara en enkel, nästan rak linje. Men i <strong>utdatalagret</strong> vägs alla neuroners signaler samman – och summan av många enkla bitar bildar en böjd, sammansatt beslutsgräns. Det är detta <strong>Neuroner</strong>-läget visar: klicka för att välja vilka som ska bidra, och se hur just den kombinationen formar gränsen.',
     illus:'<svg viewBox="0 0 140 80"><g transform="translate(6,6)"><line x1="4" y1="50" x2="34" y2="18" stroke="rgba(122,162,255,.4)" stroke-width="2"/><line x1="4" y1="30" x2="34" y2="46" stroke="rgba(122,162,255,.4)" stroke-width="2"/><text x="19" y="66" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#7e8aaa">enkla bitar</text></g><path d="M62 40h16M74 36l4 4-4 4" stroke="#ffd866" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(90,6)"><path d="M4 50 C10 20 34 54 40 16" fill="none" stroke="#4d80ff" stroke-width="2.5" stroke-linecap="round"/><text x="22" y="66" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#7e8aaa">gräns</text></g></svg>'
+  },
+  relublack:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h8l10-12"/></svg>',
+    title:'Bara blått, aldrig rött',
+    def:'Om du tittar på de enskilda neuronerna ser du bara en gradient från nästan svart (inaktiv, nära noll) till blått (starkt aktiverad) – aldrig rött. Det beror på att <strong>ReLU</strong> nollställer alla negativa värden, så en neurons aktivering kan aldrig bli negativ. Byt till <strong>tanh</strong>, som kan gå både positivt och negativt, så dyker de röda nyanserna upp igen.',
+    illus:'<svg viewBox="0 0 140 80"><defs><linearGradient id="reluGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#141e32"/><stop offset="1" stop-color="#4d80ff"/></linearGradient><linearGradient id="tanhGrad2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff6a5e"/><stop offset="0.5" stop-color="#141e32"/><stop offset="1" stop-color="#4d80ff"/></linearGradient></defs><text x="35" y="14" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#a78bfa">ReLU</text><rect x="8" y="20" width="54" height="14" rx="4" fill="url(#reluGrad)"/><text x="10" y="42" font-family="JetBrains Mono" font-size="7" fill="#7e8aaa">0</text><text x="44" y="42" font-family="JetBrains Mono" font-size="7" fill="#7e8aaa">max</text><text x="105" y="14" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#a78bfa">tanh</text><rect x="78" y="20" width="54" height="14" rx="4" fill="url(#tanhGrad2)"/><text x="80" y="42" font-family="JetBrains Mono" font-size="7" fill="#7e8aaa">−1</text><text x="118" y="42" font-family="JetBrains Mono" font-size="7" fill="#7e8aaa">+1</text><text x="70" y="64" text-anchor="middle" font-family="DM Sans" font-size="7.5" fill="#7e8aaa">Bara ReLU saknar den röda (negativa) halvan</text></svg>'
   }
 };
 function openConcept(id,ev){
