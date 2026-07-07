@@ -257,14 +257,73 @@ input[type=range]:disabled{opacity:0.3;}
   .setup-grid{grid-template-columns:1fr;}
 }
 
-/* Stegnavigering – guidad trappa genom labbet */
-.stepper{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:12px 14px;box-shadow:0 6px 22px rgba(0,0,0,0.32);}
-.steps-nav{display:flex;flex-wrap:wrap;gap:6px;}
-.snav{flex:1;min-width:118px;font-family:'DM Sans',sans-serif;font-size:0.76em;font-weight:700;padding:9px 10px;border-radius:9px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;transition:0.15s var(--ease-out);text-align:center;}
-.snav:hover{color:var(--text);border-color:var(--accent);}
-.snav.active{background:var(--step-accent-soft);border-color:var(--step-accent);color:var(--step-accent);box-shadow:0 0 0 1px var(--step-accent);}
-.step-intro{font-size:0.88em;color:var(--subtle);line-height:1.55;margin-top:14px;background:linear-gradient(180deg,var(--step-accent-soft),transparent);border-left:3px solid var(--step-accent);border-radius:0 8px 8px 0;padding:12px 15px;transition:border-color 0.4s,background 0.4s;}
-.step-intro strong{color:var(--text);}
+/* Stegnavigering – guidad trappa genom labbet (glaskänsla, egen accent per steg) */
+.sh{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.3);}
+.sh-tiles{display:flex;gap:9px;padding:16px 16px 12px;}
+.sh-tile{
+  flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:7px;
+  padding:13px 4px 11px;border-radius:14px;cursor:pointer;text-align:center;font-family:'DM Sans',sans-serif;
+  -webkit-tap-highlight-color:transparent;position:relative;overflow:hidden;isolation:isolate;
+  background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.015) 45%,rgba(0,0,0,.07));
+  border:1px solid rgba(255,255,255,.07);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),inset 0 -8px 14px -12px rgba(0,0,0,.5),0 1px 3px rgba(0,0,0,.3);
+  transition:transform .3s var(--ease-spring),box-shadow .3s var(--ease-out),border-color .3s var(--ease-out),background .3s var(--ease-out);
+}
+.sh-tile::after{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:linear-gradient(115deg,transparent 26%,rgba(255,255,255,.06) 45%,transparent 62%);
+}
+.sh-tile:hover:not(.active){transform:translateY(-2px);border-color:rgba(255,255,255,.15);box-shadow:inset 0 1px 0 rgba(255,255,255,.09),inset 0 -8px 14px -12px rgba(0,0,0,.5),0 10px 22px -10px rgba(0,0,0,.6);}
+.sh-tile:active{transform:translateY(-1px) scale(.98);}
+.sh-tile:focus-visible{outline:2px solid var(--step-accent);outline-offset:2px;}
+.sh-ico-wrap{
+  width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:2;
+  background:linear-gradient(160deg,rgba(255,255,255,.1),rgba(255,255,255,.02));
+  color:var(--dim);border:1px solid rgba(255,255,255,.1);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 2px 6px rgba(0,0,0,.4);
+  transition:.32s var(--ease-spring);
+}
+.sh-ico-wrap svg{width:16px;height:16px;}
+.sh-num{font-family:'JetBrains Mono',monospace;font-size:.62em;font-weight:700;color:var(--dim);letter-spacing:.04em;transition:color .25s;position:relative;z-index:2;}
+.sh-lbl{font-size:.72em;font-weight:600;color:var(--dim);line-height:1.25;transition:color .25s;position:relative;z-index:2;}
+.sh-tile.active{
+  flex:1.35;
+  transform:translateY(-4px) scale(1.02);
+  background:linear-gradient(160deg,rgba(255,255,255,.08),var(--step-accent-soft) 65%);
+  border-color:var(--step-accent);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -10px 18px -14px rgba(0,0,0,.4),0 16px 30px -12px var(--step-glow);
+}
+.sh-tile.active .sh-ico-wrap{
+  width:38px;height:38px;
+  background:linear-gradient(160deg,rgba(255,255,255,.2),var(--step-accent-soft));
+  border-color:var(--step-accent);color:var(--step-accent);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 6px 16px -4px var(--step-glow);
+}
+.sh-tile.active .sh-ico-wrap svg{width:18px;height:18px;}
+.sh-tile.active .sh-num{color:var(--step-accent);}
+.sh-tile.active .sh-lbl{color:var(--text);}
+.sh-hint{font-size:.72em;color:var(--dim);text-align:center;padding:0 16px 14px;}
+.sh-banner{border-top:1px solid var(--border-soft);padding:16px 18px 18px;border-left:3px solid var(--step-accent);background:var(--step-accent-soft);transition:border-color .4s var(--ease-out),background .4s var(--ease-out);}
+.sh-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66em;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--step-accent);margin-bottom:7px;transition:color .4s;}
+.sh-title{font-family:'Syne',sans-serif;font-size:1.1em;font-weight:800;letter-spacing:-.01em;margin-bottom:7px;color:var(--text);}
+.sh-desc{font-size:.88em;line-height:1.6;color:var(--subtle);}
+.sh-desc strong{color:var(--text);}
+@keyframes shFade{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:none;}}
+.sh-banner.anim .sh-eyebrow,.sh-banner.anim .sh-title,.sh-banner.anim .sh-desc{animation:shFade .38s var(--ease-out);}
+@media (prefers-reduced-motion: reduce){
+  .sh-banner.anim .sh-eyebrow,.sh-banner.anim .sh-title,.sh-banner.anim .sh-desc{animation:none;}
+  .sh-tile,.sh-ico-wrap,.sh-banner{transition:none;}
+}
+@media(max-width:680px){
+  .sh-tiles{gap:5px;padding:13px 10px 10px;}
+  .sh-tile{padding:9px 2px 8px;gap:5px;}
+  .sh-lbl{font-size:0;line-height:0;}
+  .sh-tile.active .sh-lbl{font-size:.66em;line-height:1.2;margin-top:1px;}
+  .sh-ico-wrap{width:27px;height:27px;}
+  .sh-ico-wrap svg{width:13px;height:13px;}
+  .sh-tile.active .sh-ico-wrap{width:32px;height:32px;}
+  .sh-banner{padding:14px 14px 16px;}
+}
 .step-foot{display:flex;justify-content:space-between;gap:8px;margin-top:11px;}
 .step-foot.bottom{margin-top:4px;padding-top:22px;border-top:1px solid var(--border);align-items:stretch;}
 .step-foot.bottom #prevStep{flex:0 0 auto;padding:11px 16px;}
@@ -372,15 +431,14 @@ input[type=range]:disabled{opacity:0.3;}
 <div class="wrap" id="wrapEl">
 
   <!-- ─── Stegnavigering: guidad trappa ─── -->
-  <section class="stepper">
-    <div class="steps-nav" id="stepsNav">
-      <button class="snav" data-s="1" onclick="goStep(1)">1 · Nästa ord</button>
-      <button class="snav" data-s="2" onclick="goStep(2)">2 · Kontexten</button>
-      <button class="snav" data-s="3" onclick="goStep(3)">3 · Slump &amp; temperatur</button>
-      <button class="snav" data-s="4" onclick="goStep(4)">4 · Träningsdatan</button>
-      <button class="snav" data-s="5" onclick="goStep(5)">5 · Fri utforskning</button>
+  <section class="sh" id="sh">
+    <div class="sh-tiles" id="shTiles"></div>
+    <div class="sh-hint">Ordningen är ett förslag på arbetsgång – hoppa gärna fritt mellan stegen.</div>
+    <div class="sh-banner" id="shBanner">
+      <div class="sh-eyebrow" id="shEyebrow"></div>
+      <div class="sh-title" id="shTitleEl"></div>
+      <div class="sh-desc" id="shDesc"></div>
     </div>
-    <div class="step-intro" id="stepIntro"></div>
   </section>
 
   <!-- ─── Träningsdata ─── -->
@@ -1421,18 +1479,41 @@ function renderCertainty(p1, options, mask){
 
 // ── Stegnavigering: guidad trappa genom labbet ──
 let curStep = 1;
+const STEP_ACCENTS = ['#4d80ff','#34c759','#ffd866','#a78bfa','#ff9f43'];
 const STEPS = [
-  {intro:'<strong>Datorn kan ingen svenska</strong> – ändå kan den gissa nästa ord. Tryck ✍️ <strong>Nästa ord</strong> några gånger och titta i <strong>modellens minne</strong>: vad bygger gissningen egentligen på?',
+  {label:'Nästa ord', title:'Hur väljer modellen nästa ord?',
+   icon:'<path d="M4 12h12"/><path d="M12 6l6 6-6 6"/>',
+   intro:'<strong>Datorn kan ingen svenska</strong> – ändå kan den gissa nästa ord. Tryck ✍️ <strong>Nästa ord</strong> några gånger och titta i <strong>modellens minne</strong>: vad bygger gissningen egentligen på?',
    rec:{ds:['vader'], k:1}},
-  {intro:'Nu tränar vi på en <strong>stor svensk roman</strong>. <strong>Testa olika kontextlängder</strong> (1 → 2 → 3) och jämför: skriver modellen mer som riktig svenska – och hur ändras valmöjligheterna?',
+  {label:'Kontexten', title:'Vad minns modellen?',
+   icon:'<path d="M7 4H4v16h3"/><path d="M17 4h3v16h-3"/><path d="M9 9h6M9 15h6"/>',
+   intro:'Nu tränar vi på en <strong>stor svensk roman</strong>. <strong>Testa olika kontextlängder</strong> (1 → 2 → 3) och jämför: skriver modellen mer som riktig svenska – och hur ändras valmöjligheterna?',
    rec:{ds:['hemso'], k:2}},
-  {intro:'Ska modellen <strong>alltid</strong> ta det vanligaste ordet? Testa <strong>girigt val</strong> mot <strong>viktad slump</strong>, och dra i <strong>temperaturen</strong>.',
+  {label:'Slump & temperatur', title:'Hur påverkas modellens val?',
+   icon:'<rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="9" cy="9" r="1.3"/><circle cx="15" cy="9" r="1.3"/><circle cx="9" cy="15" r="1.3"/><circle cx="15" cy="15" r="1.3"/><circle cx="12" cy="12" r="1.3"/>',
+   intro:'Ska modellen <strong>alltid</strong> ta det vanligaste ordet? Testa <strong>girigt val</strong> mot <strong>viktad slump</strong>, och dra i <strong>temperaturen</strong>.',
    rec:{ds:['hemso'], k:2}},
-  {intro:'<strong>Träningsdatan formar modellen.</strong> Kryssa i flera texter (t.ex. Sport + Väder) eller byt till Shakespeare och undersök hur språk, ordval och fortsättningar förändras.',
+  {label:'Träningsdatan', title:'Hur formar träningsdatan modellen?',
+   icon:'<path d="M6 4h9l5 5v11H6z"/><path d="M15 4v5h5"/><path d="M9 13h6M9 17h6"/>',
+   intro:'<strong>Träningsdatan formar modellen.</strong> Kryssa i flera texter (t.ex. Sport + Väder) eller byt till Shakespeare och undersök hur språk, ordval och fortsättningar förändras.',
    rec:{ds:['hemso'], k:2}},
-  {intro:'<strong>Utforska fritt.</strong> Kombinera träningsdata, kontextlängd, temperatur och prompter för att undersöka hur modellen funkar. Avsluta med att jämföra den med ChatGPT.',
+  {label:'Fri utforskning', title:'Utforska modellen själv',
+   icon:'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+   intro:'<strong>Utforska fritt.</strong> Kombinera träningsdata, kontextlängd, temperatur och prompter för att undersöka hur modellen funkar. Avsluta med att jämföra den med ChatGPT.',
    rec:null}
 ];
+
+// Bygg de fem glaskänsla-plattorna. Anropas varje stegbyte (billigt för 5 element)
+// så att aktivt-läget alltid stämmer, utan separat diff-logik.
+function renderStepTiles(n){
+  document.getElementById('shTiles').innerHTML = STEPS.map((s, i) => `
+    <button class="sh-tile ${i === n - 1 ? 'active' : ''}" onclick="goStep(${i + 1})" aria-label="Steg ${i + 1}: ${s.label}">
+      <div class="sh-ico-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${s.icon}</svg></div>
+      <div class="sh-num">0${i + 1}</div>
+      <div class="sh-lbl">${s.label}</div>
+    </button>`).join('');
+}
+
 function goStep(n){
   n = Math.max(1, Math.min(STEPS.length, n));
   curStep = n;
@@ -1444,15 +1525,22 @@ function goStep(n){
   const wrap = document.getElementById('wrapEl');
   wrap.className = cls.join(' ');
   // Subtil egen accentfärg per steg → känsla av framsteg
-  const STEP_ACCENTS = ['#4d80ff','#34c759','#ffd866','#a78bfa','#ff9f43'];
   const accent = STEP_ACCENTS[n - 1] || '#4d80ff';
   wrap.style.setProperty('--step-accent', accent);
   wrap.style.setProperty('--step-accent-soft', accent + '22');
-  document.querySelectorAll('#stepsNav .snav').forEach(b => b.classList.toggle('active', +b.dataset.s === n));
-  document.getElementById('stepIntro').innerHTML = STEPS[n - 1].intro;
+  wrap.style.setProperty('--step-glow', accent + '55');
+  renderStepTiles(n);
+  const step = STEPS[n - 1];
+  document.getElementById('shEyebrow').textContent = `STEG ${n} AV ${STEPS.length}`;
+  document.getElementById('shTitleEl').textContent = step.title;
+  document.getElementById('shDesc').innerHTML = step.intro;
+  const banner = document.getElementById('shBanner');
+  banner.classList.remove('anim');
+  void banner.offsetWidth;   // tvinga reflow så animationen kan triggas igen
+  banner.classList.add('anim');
   document.getElementById('prevStep').style.visibility = n === 1 ? 'hidden' : 'visible';
   document.getElementById('nextStep').style.visibility = n === STEPS.length ? 'hidden' : 'visible';
-  const rec = STEPS[n - 1].rec;
+  const rec = step.rec;
   if(rec){
     document.getElementById('kSel').value = String(rec.k);
     k = rec.k;
@@ -1639,38 +1727,4 @@ function closeConcept(){
   document.getElementById('conceptCard').classList.remove('show');
   document.getElementById('conceptBackdrop').classList.remove('show');
 }
-document.addEventListener('keydown', e => { if(e.key === 'Escape') closeConcept(); });
-(function initCardTilt(){
-  const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const el = document.getElementById('conceptCardInner');
-  if(!el || RM) return;
-  const MAX_TILT = 5;
-  el.addEventListener('mousemove', e => {
-    const r = el.getBoundingClientRect();
-    const px = (e.clientX - r.left)/r.width, py = (e.clientY - r.top)/r.height;
-    const rx = (0.5 - py)*MAX_TILT*2, ry = (px - 0.5)*MAX_TILT*2;
-    el.style.setProperty('--mx', (px*100)+'%');
-    el.style.setProperty('--my', (py*100)+'%');
-    el.style.transform = 'perspective(1000px) rotateX('+rx+'deg) rotateY('+ry+'deg)';
-    const sx = (px-0.5)*22, sy = (py-0.5)*22;
-    el.style.boxShadow = (-sx)+'px '+(20-sy)+'px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset';
-  });
-  el.addEventListener('mouseleave', () => {
-    el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-    el.style.setProperty('--mx','50%'); el.style.setProperty('--my','50%');
-    el.style.boxShadow = '';
-  });
-})();
-
-// ════════════════════════════════════════════════════════════
-//  Start: bygg den längre texten direkt så allt är levande
-//  bakom intro-overlayen
-// ════════════════════════════════════════════════════════════
-hydrateTerms();
-renderGlossary();
-loadDatasets().then(() => {
-  goStep(1);   // starta i steg 1 när texterna är laddade
-});
-</script>
-</body>
-</html>
+document.addEventListener('keydown', e => { 
