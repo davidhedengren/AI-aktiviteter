@@ -8,25 +8,25 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--accent:#4d80ff;--accent2:#6698ff;--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--classA:#ff6a5e;--classB:#4d80ff;
-  --glass:rgba(20,24,42,.55);--border-soft:rgba(255,255,255,.06);--dim2:#5c6689;--accent-dim:rgba(77,128,255,.14);
+:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--accent:#6366f1;--accent2:#8b8fff;--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--classA:#ff6a5e;--classB:#4d80ff;
+  --glass:rgba(20,24,42,.55);--border-soft:rgba(255,255,255,.06);--dim2:#5c6689;--accent-dim:rgba(99,102,241,.16);
   --r-sm:8px;--r-md:14px;--r-lg:20px;--ease-spring:cubic-bezier(.34,1.56,.64,1);--ease-out:cubic-bezier(.16,1,.3,1);}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{-webkit-font-smoothing:antialiased;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;position:relative;}
 .bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
 .bg-mesh::before{content:'';position:absolute;width:140%;height:140%;top:-20%;left:-20%;
-  background:radial-gradient(ellipse 40% 34% at 20% 20%,rgba(77,128,255,.14),transparent 60%),radial-gradient(ellipse 34% 30% at 82% 75%,rgba(255,106,94,.06),transparent 60%),radial-gradient(ellipse 30% 36% at 70% 10%,rgba(255,216,102,.05),transparent 60%);
+  background:radial-gradient(ellipse 40% 34% at 20% 20%,rgba(99,102,241,.14),transparent 60%),radial-gradient(ellipse 34% 30% at 82% 75%,rgba(255,106,94,.06),transparent 60%),radial-gradient(ellipse 30% 36% at 70% 10%,rgba(255,216,102,.05),transparent 60%);
   animation:meshDrift 34s ease-in-out infinite alternate;filter:blur(10px);}
 @keyframes meshDrift{0%{transform:translate(0,0) scale(1);}50%{transform:translate(-2%,2%) scale(1.05);}100%{transform:translate(2%,-1%) scale(1.02);}}
 .bg-noise{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(99,102,241,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
 .back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .back-link:hover{color:var(--text);border-color:var(--dim);}
 .lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .lang-link:hover{color:var(--text);border-color:var(--dim);}
 .lang-link .flag{font-size:1.05em;line-height:1;}
-.hd{width:100%;text-align:center;padding:14px 160px 10px;border-bottom:1px solid var(--border-soft);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.04),transparent);z-index:2;}
+.hd{width:100%;text-align:center;padding:14px 160px 10px;border-bottom:1px solid var(--border-soft);position:relative;background:linear-gradient(180deg,rgba(99,102,241,0.04),transparent);z-index:2;}
 .hd-title-row{display:flex;align-items:center;justify-content:center;gap:9px;}
 .hd-icon{width:20px;height:20px;color:var(--accent2);flex-shrink:0;}
 .hd h1{font-family:'Syne',sans-serif;font-size:1.35em;font-weight:800;letter-spacing:-0.01em;}.hd h1 span{background:linear-gradient(135deg,#eef1fb,var(--accent2) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;}
@@ -45,14 +45,14 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .canvas-hint{font-size:0.72em;color:var(--dim2);}
 .train-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;}
 .tc-btn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.82em;padding:8px 16px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:.2s var(--ease-spring);}
-.tc-btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.08);transform:translateY(-1px);}
+.tc-btn:hover{border-color:var(--accent);background:rgba(99,102,241,0.08);transform:translateY(-1px);}
 .tc-btn:active{transform:scale(.96);}
 .tc-btn.play{background:linear-gradient(135deg,var(--green),#28b869);border-color:var(--green);color:#06210f;box-shadow:0 6px 18px rgba(52,199,89,.25);}.tc-btn.play:hover{filter:brightness(1.06);}
 .tc-btn.pause{background:rgba(255,214,102,0.12);border-color:var(--gold);color:var(--gold);}.tc-btn.pause:hover{background:rgba(255,214,102,0.2);}
 .tc-btn.dn{color:var(--red);border-color:rgba(239,91,91,0.3);}.tc-btn.dn:hover{background:rgba(239,91,91,0.08);}
 .speed-wrap{display:flex;align-items:center;gap:6px;font-size:0.74em;color:var(--dim2);}
 .speed-wrap input[type=range]{-webkit-appearance:none;width:80px;height:4px;border-radius:2px;background:var(--surface2);outline:none;}
-.speed-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 0 3px rgba(77,128,255,.18);transition:.15s var(--ease-spring);}
+.speed-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 0 3px rgba(99,102,241,.18);transition:.15s var(--ease-spring);}
 .speed-wrap input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15);}
 .speed-label{font-family:'JetBrains Mono',monospace;font-size:0.9em;color:var(--accent2);min-width:20px;}
 .legend-strip{display:none;align-items:center;gap:10px;font-size:0.71em;color:var(--dim2);flex-wrap:wrap;justify-content:center;}
@@ -64,27 +64,60 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .ptab:hover{color:var(--text);}
 .ptab.active{color:#fff;background:var(--accent);}
 .ptab.adv.active{color:#06210f;background:var(--gold);}
+.ptab:disabled{opacity:0.32;cursor:not-allowed;}
+.ptab:disabled:hover{color:var(--dim2);}
 .panel-body{flex:1;overflow-y:auto;padding:14px;}
 .panel-view{display:none;flex-direction:column;gap:14px;}.panel-view.active{display:flex;}
 .sec-t{font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim2);margin-bottom:5px;}
-.model-list{display:flex;flex-direction:column;gap:5px;}
-.model-tab{font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:600;padding:9px 12px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;text-align:left;transition:.2s var(--ease-out);width:100%;}
-.model-tab:hover{border-color:var(--dim2);color:var(--text);}
-.model-tab.active{background:var(--accent-dim);border-color:var(--accent);color:var(--accent2);}
-.model-tab .msub{font-size:0.85em;font-weight:400;display:block;margin-top:1px;color:var(--dim2);}
-.model-tab.active .msub{color:rgba(122,162,255,0.6);}
+
+/* ── Story flow (numbered steps replacing boxed panel sections) ── */
+.story-step{display:flex;gap:12px;align-items:flex-start;}
+.story-num{width:22px;height:22px;border-radius:50%;background:var(--accent-dim);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.72em;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.story-body{flex:1;min-width:0;}
+.story-title{font-size:0.78em;font-weight:700;color:var(--text);margin-bottom:10px;letter-spacing:0.01em;}
+.story-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border-soft) 15%,var(--border-soft) 85%,transparent);margin:16px 0 16px 34px;}
+.story-hint{font-size:0.7em;color:var(--dim2);margin-top:8px;line-height:1.4;}
+
+/* ── Minimal radio-style model list (no boxes/borders) ── */
+.model-radio-list{display:flex;flex-direction:column;gap:12px;}
+.model-radio{display:flex;align-items:center;gap:10px;background:none;border:none;padding:2px 0;cursor:pointer;text-align:left;width:100%;}
+.mr-dot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--dim2);flex-shrink:0;transition:.2s var(--ease-spring);}
+.model-radio.active .mr-dot{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 4px rgba(99,102,241,.16);}
+.model-radio:hover .mr-dot{border-color:var(--dim);}
+.mr-icon{width:22px;height:14px;flex-shrink:0;color:var(--dim2);transition:color .2s;}
+.model-radio.active .mr-icon{color:var(--accent2);}
+.mr-icon svg{width:100%;height:100%;transition:transform .3s var(--ease-spring);}
+.model-radio.active .mr-icon svg{transform:scale(1.15);}
+.mr-flat,.mr-wavy{transition:opacity .3s ease;}
+.mr-wavy{opacity:0;}
+.model-radio.active .mr-flat{opacity:0;}
+.model-radio.active .mr-wavy{opacity:1;}
+.mr-label{display:flex;flex-direction:column;gap:1px;}
+.mr-name{font-size:0.85em;font-weight:600;color:var(--dim);transition:color .2s;}
+.model-radio.active .mr-name{color:var(--text);}
+.mr-sub{font-size:0.78em;font-weight:400;color:var(--dim2);}
 .preset-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
 .pbtn{font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.74em;padding:8px 6px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;transition:.2s var(--ease-spring);text-align:center;line-height:1.4;}
 .pbtn:hover{border-color:var(--accent);color:var(--text);transform:translateY(-1px);}
 .pbtn .picon{font-size:1.2em;display:block;margin-bottom:1px;}
-.stat-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:9px 11px;}
-.stat-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-size:0.76em;}.stat-row:last-child{margin-bottom:0;}
-.sl{color:var(--dim2);}.sv{font-family:'JetBrains Mono',monospace;color:var(--accent2);font-weight:700;}
-.sv.ok{color:var(--green);}.sv.warn{color:var(--red);}
-.train-indicator{display:flex;align-items:center;gap:7px;margin-top:6px;font-size:0.72em;color:var(--dim2);}
-.tdot{width:7px;height:7px;border-radius:50%;background:var(--dim2);flex-shrink:0;}
-.tdot.on{background:var(--green);animation:blink 1s ease-in-out infinite;}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.35}}
+.status-panel{padding:1px 0 2px;}
+.status-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;}
+.status-msg{font-size:0.8em;color:var(--dim2);font-weight:600;transition:color .2s;}
+.status-dot{width:7px;height:7px;border-radius:50%;background:var(--dim2);flex-shrink:0;transition:background .3s;}
+.status-dot.on{background:var(--accent);box-shadow:0 0 8px rgba(99,102,241,.7);animation:statusBlink 1.1s ease-in-out infinite;}
+.status-dot.done{background:var(--green);box-shadow:0 0 8px rgba(52,199,89,.7);}
+@keyframes statusBlink{0%,100%{opacity:1}50%{opacity:.4}}
+.status-track{height:5px;border-radius:3px;background:var(--surface2);overflow:hidden;margin-bottom:10px;}
+.status-fill{height:100%;width:0%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s var(--ease-out),background .4s;position:relative;overflow:hidden;}
+.status-fill.done{background:linear-gradient(90deg,var(--green),#5fdb84);}
+.status-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.4) 50%,transparent 70%);transform:translateX(-100%);animation:fillShine 2.6s ease-in-out infinite;}
+@keyframes fillShine{0%,55%{transform:translateX(-100%);}100%{transform:translateX(220%);}}
+.status-row{display:flex;align-items:baseline;gap:7px;margin-bottom:5px;}
+.status-pct{font-family:'JetBrains Mono',monospace;font-size:1.85em;font-weight:800;color:var(--text);letter-spacing:-0.02em;line-height:1;transition:color .3s;}
+.status-pct.done{color:var(--green);}
+.status-pct.warn{color:var(--gold);}
+.status-mis{font-size:0.74em;color:var(--dim2);}
+.status-detail{font-family:'JetBrains Mono',monospace;font-size:0.63em;color:var(--dim2);opacity:.6;letter-spacing:.01em;min-height:1.3em;}
 .info-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:10px 12px;font-size:0.76em;line-height:1.6;color:var(--dim);}
 .info-box strong{color:var(--text);}.info-box .hl{color:var(--accent2);font-weight:600;}
 .info-box .ca{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--classA);vertical-align:middle;margin:0 1px;}
@@ -95,20 +128,25 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .act-btn:hover:not(.active){color:var(--text);}
 .act-btn.active{color:#06210f;background:var(--gold);}
 .note{font-size:0.72em;color:var(--dim2);line-height:1.5;margin-top:4px;}.note strong{color:var(--text);}
-.nviz-toggle{display:flex;align-items:center;gap:8px;font-size:0.8em;cursor:pointer;color:var(--dim2);user-select:none;}
-.nviz-toggle input[type=checkbox]{accent-color:var(--gold);width:14px;height:14px;cursor:pointer;}
-.nviz-toggle:hover{color:var(--text);}
-.nsel-row{display:flex;gap:5px;margin-top:5px;}
-.nsel{flex:1;font-family:'DM Sans',sans-serif;font-size:0.77em;padding:6px 8px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);cursor:pointer;outline:none;transition:.2s;}
-.nsel:hover{border-color:var(--dim2);}
-.nsel:focus{border-color:var(--gold);}.nsel:disabled{opacity:0.3;pointer-events:none;}
-.arch-wrap{display:flex;flex-direction:column;gap:6px;}
-.arch-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
-.arch-input{width:44px;font-family:'JetBrains Mono',monospace;font-size:0.88em;padding:5px 6px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);text-align:center;outline:none;transition:.2s;}
-.arch-input:focus{border-color:var(--gold);}
-.arch-label{font-size:0.75em;color:var(--dim2);}
+.arch-wrap{display:flex;flex-direction:column;gap:8px;}
+.arch-stepper{display:flex;align-items:center;gap:9px;}
+.arch-btn{width:30px;height:30px;flex-shrink:0;border-radius:50%;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:1.15em;font-weight:600;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.16s var(--ease-spring);box-shadow:inset 0 1px 0 rgba(255,255,255,.04);}
+.arch-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(255,214,102,.08);transform:translateY(-1px);}
+.arch-btn:active{transform:scale(.88);}
+.arch-slide{flex:1;position:relative;height:30px;display:flex;align-items:center;}
+.arch-slide input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:4px;outline:none;cursor:pointer;background:linear-gradient(to right,var(--gold) var(--fillPct,28%),var(--surface2) var(--fillPct,28%));transition:background .05s linear;}
+.arch-slide input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:4px;background:transparent;}
+.arch-slide input[type=range]::-moz-range-track{height:6px;border-radius:4px;background:var(--surface2);}
+.arch-slide input[type=range]::-moz-range-progress{height:6px;border-radius:4px;background:var(--gold);}
+.arch-slide input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;margin-top:-6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6d9,var(--gold) 70%);border:2px solid rgba(9,11,20,.5);cursor:pointer;box-shadow:0 0 0 4px rgba(255,214,102,.16),0 2px 8px rgba(0,0,0,.4);transition:.16s var(--ease-spring);}
+.arch-slide input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.14);box-shadow:0 0 0 5px rgba(255,214,102,.22),0 2px 8px rgba(0,0,0,.4);}
+.arch-slide input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6d9,var(--gold) 70%);border:2px solid rgba(9,11,20,.5);cursor:pointer;box-shadow:0 0 0 4px rgba(255,214,102,.16);}
+.arch-badge{min-width:36px;flex-shrink:0;padding:5px 9px;border-radius:999px;background:rgba(255,214,102,.14);border:1px solid rgba(255,214,102,.32);color:var(--gold);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.82em;text-align:center;transition:transform .18s cubic-bezier(.34,1.56,.64,1);}
+.arch-badge.pop{animation:archPop .32s cubic-bezier(.34,1.56,.64,1);}
+@keyframes archPop{0%{transform:scale(.7);}55%{transform:scale(1.16);}100%{transform:scale(1);}}
+.arch-caption{font-size:0.7em;color:var(--dim2);}
 .btn{font-family:'DM Sans',sans-serif;padding:9px 14px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);font-size:0.82em;font-weight:600;cursor:pointer;transition:.2s var(--ease-spring);text-align:center;width:100%;}
-.btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.08);transform:translateY(-1px);}
+.btn:hover{border-color:var(--accent);background:rgba(99,102,241,0.08);transform:translateY(-1px);}
 .btn:active{transform:scale(.97);}
 .btn.sm{font-size:0.76em;padding:7px 10px;}
 
@@ -137,7 +175,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);
   will-change:transform;max-height:86vh;overflow-y:auto;}
 .concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
-  padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,206,84,.15) 45%,transparent 65%);
+  padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(139,143,255,.7),rgba(255,206,84,.15) 45%,transparent 65%);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
   opacity:0;transition:opacity .35s var(--ease-out);}
 .concept-card-inner:hover::before{opacity:1;}
@@ -147,7 +185,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .concept-card-inner:hover::after{opacity:1;}
 .concept-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);z-index:3;transform:translateZ(30px);}
 .concept-close:hover{border-color:var(--red);color:var(--red);transform:translateZ(30px) rotate(90deg);}
-.concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
+.concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(99,102,241,.18);}
 .concept-icon svg{width:28px;height:28px;}
 .concept-icon.gold{background:rgba(255,214,102,.14);color:var(--gold);box-shadow:0 10px 24px rgba(255,214,102,.18);}
 .concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
@@ -157,6 +195,33 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .concept-def .cb{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--classB);vertical-align:middle;margin:0 1px;}
 .concept-illus{background:rgba(0,0,0,.25);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;transform:translateZ(10px);}
 .concept-illus svg{width:100%;height:auto;max-height:100px;}
+
+/* ── Mode-tinted background (gold in Advanced) ── */
+.mode-tint{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .6s var(--ease-out),background .6s var(--ease-out);}
+body.mode-adv .mode-tint{opacity:1;background:radial-gradient(ellipse 72% 58% at 50% 30%,rgba(255,214,102,.09),transparent 72%);}
+body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(255,214,102,.16);}
+
+/* ── Look inside the network ── */
+#vizModeRow .act-btn{font-size:0.72em;padding:7px 3px;white-space:nowrap;}
+.viz-cap{font-size:0.72em;color:var(--dim2);line-height:1.5;margin-top:8px;min-height:2.1em;}
+.viz-cap strong{color:var(--text);}
+
+/* ── Neuroner: klickbara neuron-swatchar ── */
+.combo-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;}
+.combo-count{font-family:'JetBrains Mono',monospace;font-size:0.74em;color:var(--gold);}
+.combo-actions{display:flex;gap:10px;}
+.combo-link{background:none;border:none;padding:0;font-family:'DM Sans',sans-serif;font-size:0.72em;font-weight:700;color:var(--dim2);cursor:pointer;text-decoration:underline;text-underline-offset:2px;transition:.15s;}
+.combo-link:hover{color:var(--gold);}
+.combo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:6px;}
+.combo-chip{position:relative;aspect-ratio:1;border-radius:9px;border:1.5px solid var(--border);background:var(--surface2);cursor:pointer;overflow:hidden;padding:0;transition:.18s var(--ease-spring);}
+.combo-chip:hover{border-color:var(--dim2);transform:translateY(-1px) scale(1.04);}
+.combo-chip:active{transform:scale(.94);}
+.combo-chip.active{border-color:var(--gold);box-shadow:0 0 0 2px rgba(255,214,102,.3),0 4px 14px rgba(255,214,102,.22);}
+.combo-chip canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;opacity:.9;}
+.combo-chip:not(.active) canvas{opacity:.45;filter:saturate(.4);}
+.combo-chip .cn{position:absolute;bottom:2px;left:3px;font-family:'JetBrains Mono',monospace;font-size:.58em;font-weight:700;color:#fff;background:rgba(0,0,0,.5);padding:0 3px;border-radius:4px;line-height:1.35;z-index:2;}
+.combo-chip .ck{position:absolute;top:2px;right:2px;width:13px;height:13px;border-radius:50%;background:var(--gold);color:#090b14;font-size:8px;font-weight:900;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.4);transition:.2s var(--ease-spring);z-index:2;}
+.combo-chip.active .ck{opacity:1;transform:scale(1);}
 
 .overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;transition:opacity .3s var(--ease-out);}
 .overlay.show{display:flex;}
@@ -175,9 +240,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .overlay-card .steps{display:flex;flex-direction:column;gap:12px;margin:16px 0;text-align:left;}
 .overlay-card .step{display:flex;gap:12px;align-items:flex-start;font-size:0.83em;color:var(--dim);line-height:1.55;}
 .overlay-card .step strong{color:var(--text);font-weight:600;}
-.step-num{width:26px;height:26px;border-radius:50%;background:var(--accent-dim);color:var(--accent2);font-weight:700;font-size:0.82em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(122,162,255,.25);font-family:'JetBrains Mono',monospace;}
-.overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:16px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(77,128,255,.28);}
-.overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
+.step-num{width:26px;height:26px;border-radius:50%;background:var(--accent-dim);color:var(--accent2);font-weight:700;font-size:0.82em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(139,143,255,.25);font-family:'JetBrains Mono',monospace;}
+.overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:16px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(99,102,241,.28);}
+.overlay-btn:hover{background:#5457d5;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(99,102,241,.4);}
 @media(max-width:820px){
   .app{flex-direction:column;padding:8px;gap:8px;}
   .canvas-area{border-right:none;}
@@ -190,7 +255,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 </style>
 </head>
 <body>
-<div class="bg-mesh"></div><div class="bg-noise"></div>
+<div class="bg-mesh"></div><div class="bg-noise"></div><div class="mode-tint"></div>
 
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
@@ -234,52 +299,87 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     </div>
     <div class="panel-body">
       <div class="panel-view active" id="viewStd">
-        <div>
-          <div class="sec-t">Model</div>
-          <div class="model-list">
-            <button class="model-tab active" id="mLin" onclick="setModel('linear')">Linear model<span class="msub">Always a straight line</span></button>
-            <button class="model-tab" id="mNN1" onclick="setModel('nn1')">Neural network with 1 hidden layer<span class="msub">Can bend the boundary</span></button>
-            <button class="model-tab" id="mNN2" onclick="setModel('nn2')">Neural network with 2 hidden layers<span class="msub">Handles more complex shapes</span></button>
-          </div>
-        </div>
-        <div>
-          <div class="sec-t">Concepts <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--dim2)">· click for an explanation</span></div>
-          <div class="begrepp-wrap">
-            <div class="begrepp-row">
-              <span class="g-tag" onclick="openConcept('beslutsgrans',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 17c5-9 13-11 18-9"/><circle cx="6" cy="19" r="1.5" fill="currentColor" stroke="none"/><circle cx="18" cy="6" r="1.5" fill="currentColor" stroke="none"/></svg>Decision boundary</span>
-              <span class="g-tag" onclick="openConcept('klassificering',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="8" r="2.5"/><circle cx="7" cy="16" r="2.5"/><path d="M13 8h7M13 16h7" stroke-linecap="round"/></svg>Classification</span>
-              <span class="g-tag" onclick="openConcept('linjar',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20 20 4"/></svg>Linear model</span>
+        <div class="story-step">
+          <div class="story-num">1</div>
+          <div class="story-body">
+            <div class="story-title">Choose a model</div>
+            <div class="model-radio-list">
+              <button class="model-radio active" id="mLin" onclick="setModel('linear')">
+                <span class="mr-dot"></span>
+                <span class="mr-icon"><svg viewBox="0 0 20 14" fill="none"><path class="mr-flat" d="M2 12L18 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                <span class="mr-label"><span class="mr-name">Linear model</span><span class="mr-sub">Always a straight line</span></span>
+              </button>
+              <button class="model-radio" id="mNN1" onclick="setModel('nn1')">
+                <span class="mr-dot"></span>
+                <span class="mr-icon"><svg viewBox="0 0 20 14" fill="none"><path class="mr-flat" d="M2 12L18 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="mr-wavy" d="M1 7C3 2 5 2 7 7C9 12 11 12 13 7C15 2 17 2 19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                <span class="mr-label"><span class="mr-name">Neural network</span><span class="mr-sub">Hidden layer of neurons that bends the boundary</span></span>
+              </button>
             </div>
-            <div class="begrepp-row">
-              <span class="g-tag" onclick="openConcept('nn',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><circle cx="19" cy="12" r="2"/><path d="M6.7 11 10.3 7M6.7 13l3.6 4M13.7 7 17.3 11M13.7 17l3.6-4"/></svg>Neural network</span>
-              <span class="g-tag" onclick="openConcept('dolt',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="2" width="4" height="20" rx="1"/><rect x="17" y="6" width="4" height="12" rx="1"/></svg>Hidden layer</span>
-              <span class="g-tag" onclick="openConcept('xor',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" stroke-linecap="round"/></svg>XOR</span>
+            <div class="info-box" id="infoBox" style="margin-top:12px">
+              <strong>Linear model</strong> can only draw a straight decision boundary. See whether it manages to classify, for example, an XOR pattern.
             </div>
           </div>
         </div>
-        <div>
-          <div class="sec-t">Ready-made patterns</div>
-          <div class="preset-grid">
-            <button class="pbtn" onclick="loadPreset('linear')"><span class="picon">/</span>Linear</button>
-            <button class="pbtn" onclick="loadPreset('xor')"><span class="picon">⊕</span>XOR</button>
-            <button class="pbtn" onclick="loadPreset('circles')"><span class="picon">◎</span>Circle</button>
-            <button class="pbtn" onclick="loadPreset('spiral')"><span class="picon">↺</span>Spiral</button>
-          </div>
-          <div class="begrepp-row" style="margin-top:7px">
-            <span class="g-tag" onclick="openConcept('monster',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>About the patterns</span>
+
+        <div class="story-divider"></div>
+
+        <div class="story-step">
+          <div class="story-num">2</div>
+          <div class="story-body">
+            <div class="story-title">Create data</div>
+            <div class="preset-grid">
+              <button class="pbtn" onclick="loadPreset('linear')"><span class="picon">/</span>Linear</button>
+              <button class="pbtn" onclick="loadPreset('xor')"><span class="picon">⊕</span>XOR</button>
+              <button class="pbtn" onclick="loadPreset('circles')"><span class="picon">◎</span>Circle</button>
+              <button class="pbtn" onclick="loadPreset('spiral')"><span class="picon">↺</span>Spiral</button>
+            </div>
+            <div class="story-hint">Or click (Class A) and right-click (Class B) directly in the grid.</div>
           </div>
         </div>
-        <div class="stat-box">
-          <div class="sec-t" style="margin-bottom:6px">Status</div>
-          <div class="stat-row"><span class="sl">Iterations</span><span class="sv" id="sIter">0</span></div>
-          <div class="stat-row"><span class="sl">Loss</span><span class="sv" id="sLoss">–</span></div>
-          <div class="stat-row"><span class="sl">Accuracy</span><span class="sv" id="sAcc">–</span></div>
-          <div class="stat-row"><span class="sl">Misclassified</span><span class="sv" id="sMis">–</span></div>
-          <div class="stat-row"><span class="sl">Class A / B</span><span class="sv" id="sPoints">0 / 0</span></div>
-          <div class="train-indicator"><div class="tdot" id="tdot"></div><span id="tstatus">Draw points to begin</span></div>
+
+        <div class="story-divider"></div>
+
+        <div class="story-step">
+          <div class="story-num">3</div>
+          <div class="story-body">
+            <div class="story-title">Train</div>
+            <div class="status-panel">
+              <div class="status-top">
+                <span class="status-msg" id="tstatus">Draw points to begin</span>
+                <span class="status-dot" id="tdot"></span>
+              </div>
+              <div class="status-track"><div class="status-fill" id="statusFill"></div></div>
+              <div class="status-row">
+                <span class="status-pct" id="sAcc">–</span>
+                <span class="status-mis" id="sMisLine" style="display:none">· <span id="sMis">0</span> misclassified</span>
+              </div>
+              <div class="status-detail" id="statusDetail"></div>
+            </div>
+          </div>
         </div>
-        <div class="info-box" id="infoBox">
-          <strong>Linear model</strong> can only draw a straight decision boundary. See whether it manages to classify, for example, an XOR pattern.
+
+        <div class="story-divider"></div>
+
+        <div class="story-step">
+          <div class="story-num">4</div>
+          <div class="story-body">
+            <div class="story-title">Explore <span style="font-weight:400;color:var(--dim2)">· click for an explanation</span></div>
+            <div class="begrepp-wrap">
+              <div class="begrepp-row">
+                <span class="g-tag" onclick="openConcept('beslutsgrans',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 17c5-9 13-11 18-9"/><circle cx="6" cy="19" r="1.5" fill="currentColor" stroke="none"/><circle cx="18" cy="6" r="1.5" fill="currentColor" stroke="none"/></svg>Decision boundary</span>
+                <span class="g-tag" onclick="openConcept('klassificering',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="8" r="2.5"/><circle cx="7" cy="16" r="2.5"/><path d="M13 8h7M13 16h7" stroke-linecap="round"/></svg>Classification</span>
+                <span class="g-tag" onclick="openConcept('linjar',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20 20 4"/></svg>Linear model</span>
+              </div>
+              <div class="begrepp-row">
+                <span class="g-tag" onclick="openConcept('nn',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><circle cx="19" cy="12" r="2"/><path d="M6.7 11 10.3 7M6.7 13l3.6 4M13.7 7 17.3 11M13.7 17l3.6-4"/></svg>Neural network</span>
+                <span class="g-tag" onclick="openConcept('dolt',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="2" width="4" height="20" rx="1"/><rect x="17" y="6" width="4" height="12" rx="1"/></svg>Hidden layer</span>
+                <span class="g-tag" onclick="openConcept('xor',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" stroke-linecap="round"/></svg>XOR</span>
+              </div>
+              <div class="begrepp-row">
+                <span class="g-tag" onclick="openConcept('monster',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>About the patterns</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -290,32 +390,44 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
             <button class="act-btn active" id="actTanh" onclick="setActFn('tanh')">tanh</button>
             <button class="act-btn" id="actRelu" onclick="setActFn('relu')">ReLU</button>
           </div>
-          <div class="note" id="actNote"><strong>tanh</strong> gives values from −1 to +1. Smooth, curved boundaries. Active across the whole range.</div>
+          <div class="note" id="actNote"><strong>tanh</strong> gives each neuron a value between −1 and +1. Train with both functions and compare the decision boundary – do you notice any difference in shape?</div>
           <div class="begrepp-row" style="margin-top:8px">
             <span class="g-tag gold" onclick="openConcept('aktivering',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18c4 0 5-12 9-12s5 12 9 12"/></svg>Activation function</span>
             <span class="g-tag gold" onclick="openConcept('tanhrelu',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 10 17 10 7"/><path d="M13 17c3 0 3-10 8-10"/></svg>tanh vs ReLU</span>
           </div>
         </div>
         <div>
-          <div class="adv-t">Neuron activation</div>
-          <label class="nviz-toggle"><input type="checkbox" id="nvizCk" onchange="toggleNviz()"> Show one neuron's activation</label>
-          <div class="nsel-row" id="nselRow" style="opacity:0.35;pointer-events:none">
-            <select class="nsel" id="lyrSel" onchange="refreshNeuronSel();onNeuronChange()"></select>
-            <select class="nsel" id="nrnSel" onchange="onNeuronChange()"></select>
+          <div class="adv-t">Look inside the network</div>
+          <div class="act-row" id="vizModeRow">
+            <button class="act-btn active" id="vmBoundary" onclick="setVizMode('boundary')">Final boundary</button>
+            <button class="act-btn" id="vmCombo" onclick="setVizMode('combo')">Neurons</button>
           </div>
-          <div class="note">Each neuron shows its own <strong>activation value</strong>. Browse through the neurons and see how each one splits the plane in its own way. A neuron doesn't classify on its own – the decision boundary only emerges once all the neurons' signals are <strong>combined</strong> in the output layer.</div>
+          <div id="vizCombo" style="display:none">
+            <div class="combo-toolbar">
+              <span class="combo-count" id="comboCount">0 selected</span>
+              <div class="combo-actions">
+                <button type="button" class="combo-link" onclick="comboSelectAll()">All</button>
+                <button type="button" class="combo-link" onclick="comboSelectNone()">None</button>
+              </div>
+            </div>
+            <div class="combo-grid" id="comboGrid"></div>
+            <div class="viz-cap" id="comboCap"></div>
+          </div>
+          <div id="vizBoundary">
+            <div class="note">Click <strong>Neurons</strong> to look at a single neuron, or click together your own combinations – see how simple pieces build the final boundary.</div>
+          </div>
           <div class="begrepp-row" style="margin-top:8px">
             <span class="g-tag gold" onclick="openConcept('neuron',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>Neuron</span>
+            <span class="g-tag gold" onclick="openConcept('kombination',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h6M4 12h6M4 17h6"/><path d="M14 12h6M17 9l3 3-3 3"/></svg>Combination</span>
           </div>
         </div>
         <div>
-          <div class="adv-t">Architecture (neurons per hidden layer)</div>
+          <div class="adv-t">Architecture (neurons in the hidden layer)</div>
           <div class="arch-wrap" id="archWrap"></div>
-          <button class="btn sm" style="margin-top:6px" onclick="applyArch()">Apply & retrain</button>
         </div>
         <div class="info-box">
-          <strong>Tip!</strong><br><br>
-          Switch the activation function to <span class="hl">ReLU</span> and turn on neuron visualization. Can you see the difference? With <strong>tanh</strong>, the neurons show both red (negative) and blue (positive) regions. With <span class="hl">ReLU</span> you only see blue and dark – the neuron is either active or completely off. That's why ReLU creates sharp edges in the decision boundary while tanh gives smooth curves.
+          <strong>Explore!</strong><br><br>
+          Switch the <span class="hl">activation function</span> and look closely at the decision boundary and at a single neuron. What happens to the shape? Then click together your own combinations of neurons under <strong>Neurons</strong> – see how each choice changes the boundary.
         </div>
       </div>
     </div>
@@ -351,8 +463,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <p class="sub">A classification model learns to draw a boundary between different categories. Explore what that boundary looks like and discover why a neural network is often needed.</p>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div><strong>Start with the linear pattern</strong> – Choose <strong>Linear model</strong> and press ▶ Train. Watch how a straight line separates the two classes!</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Try another pattern</strong> – Switch, for example, to the <strong>XOR</strong> pattern in the right-hand menu. Train with the linear model again. Do you see that a straight line <em>can't</em> classify the points?</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Add a hidden layer</strong> – Switch the model to <strong>Neural network with 1 hidden layer</strong> and retrain. Watch the boundary bend and the points get classified correctly!</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Try another pattern</strong> – Switch, for example, to the <strong>XOR</strong> pattern in the right-hand menu and train with the same linear model again. What happens?</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Add a hidden layer</strong> – Switch the model to <strong>Neural network</strong> and retrain. Watch the boundary bend and the points get classified correctly!</div></div>
     </div>
     <p class="sub" style="margin-bottom:0;">💡 <strong style="color:var(--text)">Tip:</strong> In the <strong style="color:var(--gold)">Advanced</strong> tab you can turn on <em>neuron visualization</em> – here you can see how each individual neuron in the hidden layer splits the surface in its own way. It's the combination of all the neurons that creates the final decision boundary.</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Start the simulation <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -367,9 +479,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <h2 style="color:var(--gold);">Advanced mode</h2>
     <p class="sub">Here you can analyze the model further.</p>
     <div class="steps">
-      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">1</div><div><strong>Neuron visualization</strong> – Turn it on and browse through the neurons in the hidden layer. Each neuron splits the surface in its own way – one might respond to the "upper-left corner", another to the "diagonal". The decision boundary you see in standard mode emerges when all the neurons' contributions are combined in the output layer.</div></div>
-      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">2</div><div><strong>Activation function</strong> – Switch between <strong>tanh</strong> (smooth curves) and <strong>ReLU</strong> (sharper edges). See how the shape of the decision boundary changes.</div></div>
-      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">3</div><div><strong>Change the architecture</strong> – Adjust the number of neurons per layer. Here you can discover that more neurons give a more flexible boundary, but also slower training.</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">1</div><div><strong>Look inside the network</strong> – Click <strong>Neurons</strong>. Pick a single one to see how it splits the surface in its own way, or click together several to see how the final boundary emerges from the pieces you choose.</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">2</div><div><strong>Activation function</strong> – Switch between <strong>tanh</strong> and <strong>ReLU</strong> and retrain. Look closely at the shape of the decision boundary – what's the difference?</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">3</div><div><strong>Change the architecture</strong> – Adjust the number of neurons in the hidden layer. Here you can discover that more neurons give a more flexible boundary, but also slower training.</div></div>
     </div>
     <button class="overlay-btn" style="background:var(--gold);color:#090b14;box-shadow:0 8px 24px rgba(255,214,102,.28);" onclick="document.getElementById('advOverlay').classList.remove('show')">Got it →</button>
   </div>
@@ -401,6 +513,15 @@ class Net{
   }
   predict(x){return this.forward(x).at(-1)[0];}
   neuronAct(x,hLayer,nIdx){const acts=this.forward(x);const al=acts[hLayer+1];return al?(al[nIdx]??0):0;}
+  predictCombo(x,idxs){
+    const acts=this.forward(x);
+    const hLast=acts[acts.length-2];
+    const wl=this.W.length-1;
+    const wOut=this.W[wl][0],bOut=this.b[wl][0];
+    let z=bOut;
+    for(const j of idxs){if(hLast[j]!==undefined)z+=wOut[j]*hLast[j];}
+    return sigmoid(z);
+  }
   trainStep(data,lr){
     if(!data.length)return 0;const n=data.length;
     const gW=this.W.map(w=>w.map(r=>new Array(r.length).fill(0)));
@@ -419,7 +540,7 @@ class Net{
 }
 
 const CS=500,DR=2.6,BGRES=100;
-const BASE_ARCH={linear:[2,1],nn1:[2,18,1],nn2:[2,18,10,1]};
+const BASE_ARCH={linear:[2,1],nn1:[2,18,1]};
 const LR_MAP={tanh:0.17,relu:0.08};
 const SPEED_SPF=[1,3,8,25];
 const SPEED_LABELS=['½×','1×','2×','5×'];
@@ -427,7 +548,9 @@ const SPEED_LABELS=['½×','1×','2×','5×'];
 let points=[],curClass=0,curModel='nn1',actFn='tanh';
 let customArch=null;
 let net=null,itr=0,lastLoss=0,playing=false;
-let neuronViz=false,selLayer=0,selNeuron=0;
+let vizMode='boundary';
+let comboSel=new Set(),comboDirty=true,comboRefreshCounter=0;
+let curTab='std';
 let speedIdx=0;
 let advShown=false;
 
@@ -441,22 +564,59 @@ const getArch=()=>customArch??BASE_ARCH[curModel];
 const getLR=()=>LR_MAP[actFn]??0.12;
 const hasBoth=()=>points.some(p=>p.cls===0)&&points.some(p=>p.cls===1);
 
+function interpEdge(a,b,ax,ay,bx,by){const t=(0.5-a)/(b-a);return[ax+(bx-ax)*t,ay+(by-ay)*t];}
+
+function drawBoundaryContour(pGrid){
+  const cell=CS/BGRES;const segs=[];
+  for(let j=0;j<BGRES-1;j++){
+    for(let i=0;i<BGRES-1;i++){
+      const tl=pGrid[j*BGRES+i],tr=pGrid[j*BGRES+i+1],br=pGrid[(j+1)*BGRES+i+1],bl=pGrid[(j+1)*BGRES+i];
+      const a=tl>=0.5,b=tr>=0.5,c=br>=0.5,d=bl>=0.5;
+      if(a===b&&b===c&&c===d)continue;
+      const x0=(i+0.5)*cell,x1=(i+1.5)*cell,y0=(j+0.5)*cell,y1=(j+1.5)*cell;
+      const top=a!==b?interpEdge(tl,tr,x0,y0,x1,y0):null;
+      const right=b!==c?interpEdge(tr,br,x1,y0,x1,y1):null;
+      const bottom=c!==d?interpEdge(br,bl,x1,y1,x0,y1):null;
+      const left=d!==a?interpEdge(bl,tl,x0,y1,x0,y0):null;
+      const pts=[top,right,bottom,left].filter(Boolean);
+      if(pts.length===2)segs.push([pts[0],pts[1]]);
+      else if(pts.length===4){segs.push([top,left]);segs.push([right,bottom]);}
+    }
+  }
+  if(!segs.length)return;
+  const breathe=0.62+0.38*Math.sin(performance.now()/900);
+  ctx.save();
+  ctx.lineCap='round';ctx.lineJoin='round';
+  ctx.shadowColor='rgba(255,255,255,'+(0.5+0.3*breathe).toFixed(3)+')';
+  ctx.shadowBlur=7+7*breathe;
+  ctx.strokeStyle='rgba(255,255,255,0.92)';
+  ctx.lineWidth=2;
+  ctx.beginPath();
+  for(const[p1,p2]of segs){ctx.moveTo(p1[0],p1[1]);ctx.lineTo(p2[0],p2[1]);}
+  ctx.stroke();
+  ctx.restore();
+}
+
 function renderBg(){
   if(!net||!hasBoth()){ctx.fillStyle='#090b14';ctx.fillRect(0,0,CS,CS);return;}
   const id=tctx.createImageData(BGRES,BGRES);const d=id.data;
-  if(neuronViz&&net.arch.length>2){
-    let minA=Infinity,maxA=-Infinity;const grid=[];
-    for(let py=0;py<BGRES;py++){const row=[];for(let px=0;px<BGRES;px++){const[x,y]=p2d((px+.5)/BGRES*CS,(py+.5)/BGRES*CS);const a=net.neuronAct([x,y],selLayer,selNeuron);if(a<minA)minA=a;if(a>maxA)maxA=a;row.push(a);}grid.push(row);}
-    const range=Math.max(Math.abs(minA),Math.abs(maxA),0.01);
-    for(let py=0;py<BGRES;py++){for(let px=0;px<BGRES;px++){const t=(grid[py][px]/range+1)/2;const i=(py*BGRES+px)*4;
-      if(t>=0.5){const f=(t-0.5)*2;d[i]=Math.round(lerp(20,77,f));d[i+1]=Math.round(lerp(30,128,f));d[i+2]=Math.round(lerp(50,255,f));}
-      else{const f=(0.5-t)*2;d[i]=Math.round(lerp(20,255,f));d[i+1]=Math.round(lerp(30,80,f));d[i+2]=Math.round(lerp(50,60,f));}
-      d[i+3]=255;}}
+  const useCombo=(vizMode==='combo'&&net.arch.length>2);
+  let pGrid=null;
+  if(useCombo&&comboSel.size===0){
+    const wl=net.b.length-1,bOut=net.b[wl][0];
+    const p=sigmoid(bOut);const conf=clamp(Math.abs(p-.5)*3.2,0,1);const sq=conf*conf;
+    let rr,gg,bb;
+    if(p>.5){rr=Math.round(lerp(9,77,sq));gg=Math.round(lerp(11,128,sq));bb=Math.round(lerp(20,255,sq));}
+    else{rr=Math.round(lerp(9,255,sq));gg=Math.round(lerp(11,106,sq));bb=Math.round(lerp(20,94,sq));}
+    for(let py=0;py<BGRES;py++){for(let px=0;px<BGRES;px++){const i=(py*BGRES+px)*4;d[i]=rr;d[i+1]=gg;d[i+2]=bb;d[i+3]=255;}}
   }else{
+    pGrid=new Float32Array(BGRES*BGRES);
+    const idxs=useCombo?[...comboSel]:null;
     for(let py=0;py<BGRES;py++){for(let px=0;px<BGRES;px++){
       const[x,y]=p2d((px+.5)/BGRES*CS,(py+.5)/BGRES*CS);
-      const p=net.predict([x,y]);const conf=clamp(Math.abs(p-.5)*3.2,0,1);const sq=conf*conf;
+      const p=useCombo?net.predictCombo([x,y],idxs):net.predict([x,y]);const conf=clamp(Math.abs(p-.5)*3.2,0,1);const sq=conf*conf;
       const i=(py*BGRES+px)*4;
+      pGrid[py*BGRES+px]=p;
       if(p>.5){d[i]=Math.round(lerp(9,77,sq));d[i+1]=Math.round(lerp(11,128,sq));d[i+2]=Math.round(lerp(20,255,sq));}
       else{d[i]=Math.round(lerp(9,255,sq));d[i+1]=Math.round(lerp(11,106,sq));d[i+2]=Math.round(lerp(20,94,sq));}
       d[i+3]=255;
@@ -465,6 +625,7 @@ function renderBg(){
   tctx.putImageData(id,0,0);
   ctx.save();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
   ctx.drawImage(tmp,0,0,CS,CS);ctx.restore();
+  if(pGrid)drawBoundaryContour(pGrid);
 }
 
 function renderGrid(){
@@ -477,15 +638,51 @@ function renderGrid(){
 
 function isCorrect(pt){if(!net||!hasBoth()||itr===0)return true;const p=net.predict([pt.x,pt.y]);return pt.cls===0?p<=0.5:p>0.5;}
 
+function overshootEase(t){const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2);}
+
 function renderPoints(){
+  const now=performance.now();
   for(const pt of points){
     const[px,py]=d2p(pt.x,pt.y);const ok=isCorrect(pt);
+    if(pt.wasOk===false&&ok===true&&!pt.correctedAt)pt.correctedAt=now;
+    pt.wasOk=ok;
+
+    const bornT=pt.bornAt!=null?(now-pt.bornAt):9999;
+    const popT=clamp(bornT/220,0,1);
+    const popScale=popT<1?Math.max(0.15,overshootEase(popT)):1;
+    const rippleT=bornT/480;
+
+    let flash=0;
+    if(pt.correctedAt){const cT=now-pt.correctedAt;flash=cT<420?1-cT/420:0;if(cT>=420)pt.correctedAt=null;}
+
+    const col=pt.cls===0?'#ff6a5e':'#4d80ff';
+    const glow=pt.cls===0?'rgba(255,106,94,0.55)':'rgba(77,128,255,0.55)';
+
     ctx.save();
-    if(!ok){ctx.setLineDash([3,2]);ctx.strokeStyle='#ffd866';ctx.lineWidth=2;ctx.beginPath();ctx.arc(px,py,12,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);}
-    ctx.shadowColor=pt.cls===0?'rgba(255,106,94,0.55)':'rgba(77,128,255,0.55)';
-    ctx.shadowBlur=9;ctx.beginPath();ctx.arc(px,py,7.5,0,Math.PI*2);
-    ctx.fillStyle=pt.cls===0?'#ff6a5e':'#4d80ff';ctx.fill();
-    ctx.shadowBlur=0;ctx.strokeStyle='rgba(255,255,255,0.7)';ctx.lineWidth=1.5;ctx.stroke();
+
+    if(rippleT<1){
+      ctx.globalAlpha=(1-rippleT)*0.5;
+      ctx.strokeStyle=col;ctx.lineWidth=2;
+      ctx.beginPath();ctx.arc(px,py,7.5+rippleT*20,0,Math.PI*2);ctx.stroke();
+      ctx.globalAlpha=1;
+    }
+
+    if(!ok){
+      const breathe=0.5+0.5*Math.sin(now/240+pt.x*11);
+      ctx.setLineDash([3,2]);ctx.strokeStyle='#ffd866';ctx.lineWidth=2;
+      ctx.globalAlpha=0.5+0.4*breathe;
+      ctx.beginPath();ctx.arc(px,py,11.5+1.5*breathe,0,Math.PI*2);ctx.stroke();
+      ctx.setLineDash([]);ctx.globalAlpha=1;
+    }
+
+    const r=7.5*popScale;
+    ctx.shadowColor=glow;ctx.shadowBlur=9+flash*20;
+    ctx.beginPath();ctx.arc(px,py,r,0,Math.PI*2);
+    ctx.fillStyle=col;ctx.fill();
+    ctx.shadowBlur=0;
+    ctx.strokeStyle=flash>0?`rgba(255,255,255,${(0.7+flash*0.3).toFixed(2)})`:'rgba(255,255,255,0.7)';
+    ctx.lineWidth=1.5+flash*1.8;
+    ctx.stroke();
     ctx.restore();
   }
 }
@@ -495,20 +692,33 @@ function draw(){ctx.clearRect(0,0,CS,CS);renderBg();renderGrid();renderPoints();
 function calcAcc(){if(!net||!hasBoth()||itr===0)return null;let ok=0;for(const pt of points)if(isCorrect(pt))ok++;return{acc:ok/points.length,mis:points.length-ok};}
 
 function updateStats(){
-  document.getElementById('sIter').textContent=itr;
-  document.getElementById('sLoss').textContent=(hasBoth()&&itr>0)?lastLoss.toFixed(4):'–';
   const nA=points.filter(p=>p.cls===0).length,nB=points.filter(p=>p.cls===1).length;
-  document.getElementById('sPoints').textContent=nA+' / '+nB;
-  const acc=calcAcc();const ae=document.getElementById('sAcc'),me=document.getElementById('sMis'),lm=document.getElementById('legMis');
-  if(!acc){ae.textContent='–';ae.className='sv';me.textContent='–';me.className='sv';lm.style.display='none';}
-  else{const pct=Math.round(acc.acc*100);ae.textContent=pct+'%';ae.className='sv'+(pct>=90?' ok':pct<70?' warn':'');me.textContent=acc.mis;me.className='sv'+(acc.mis>0?' warn':'');lm.style.display=acc.mis>0?'flex':'none';}
+  const acc=calcAcc();
+  const pctEl=document.getElementById('sAcc'),fillEl=document.getElementById('statusFill');
+  const misLine=document.getElementById('sMisLine'),misEl=document.getElementById('sMis');
+  const lm=document.getElementById('legMis');
+  if(!acc){
+    pctEl.textContent='–';pctEl.className='status-pct';
+    fillEl.style.width='0%';fillEl.className='status-fill';
+    misLine.style.display='none';lm.style.display='none';
+  }else{
+    const pct=Math.round(acc.acc*100);
+    pctEl.textContent=pct+'%';pctEl.className='status-pct'+(pct>=90?' done':pct<70?' warn':'');
+    fillEl.style.width=pct+'%';fillEl.className='status-fill'+(pct>=90?' done':'');
+    if(acc.mis>0){misLine.style.display='inline';misEl.textContent=acc.mis;lm.style.display='flex';}
+    else{misLine.style.display='none';lm.style.display='none';}
+  }
+  const detail=document.getElementById('statusDetail');
+  if(itr>0)detail.textContent=nA+' A · '+nB+' B · '+itr+' iter · loss '+lastLoss.toFixed(4);
+  else if(points.length>0)detail.textContent=nA+' A · '+nB+' B';
+  else detail.textContent='';
   document.getElementById('legendStrip').style.display=hasBoth()?'flex':'none';
   const dot=document.getElementById('tdot'),st=document.getElementById('tstatus');
-  if(points.length===0){dot.className='tdot';st.textContent='Draw points to begin';}
-  else if(!hasBoth()){dot.className='tdot';st.textContent='Add points in both classes';}
-  else if(playing){dot.className='tdot on';st.textContent='Training…';}
-  else if(itr===0){dot.className='tdot';st.textContent='Press ▶ Train';}
-  else{dot.className='tdot';st.textContent=lastLoss<0.02?'✓ Converged':'Paused';}
+  if(points.length===0){dot.className='status-dot';st.textContent='Draw points to begin';}
+  else if(!hasBoth()){dot.className='status-dot';st.textContent='Add points in both classes';}
+  else if(playing){dot.className='status-dot on';st.textContent='Training…';}
+  else if(itr===0){dot.className='status-dot';st.textContent='Press ▶ Train';}
+  else{const done=lastLoss<0.02;dot.className='status-dot'+(done?' done':'');st.textContent=done?'✓ Converged':'Paused';}
 }
 
 function loop(){
@@ -519,92 +729,229 @@ function loop(){
     itr+=spf;
     if(itr>30000||lastLoss<0.002){playing=false;updPlayBtn();}
   }
+  if(vizMode==='combo'&&curTab==='adv'&&playing){
+    comboRefreshCounter=(comboRefreshCounter+1)%20;
+    if(comboRefreshCounter===0)refreshComboThumbnails();
+  }
   draw();updateStats();requestAnimationFrame(loop);
 }
 
 function updPlayBtn(){const b=document.getElementById('btnPlay');b.textContent=playing?'⏸ Pause':'▶ Train';b.className=playing?'tc-btn pause':'tc-btn play';}
 function updateSpeed(){speedIdx=parseInt(document.getElementById('speedSlider').value);document.getElementById('speedLabel').textContent=SPEED_LABELS[speedIdx];}
 
-function initNet(){net=new Net(getArch(),actFn);itr=0;lastLoss=0;playing=false;updPlayBtn();buildNeuronSelects();buildArchControls();}
+function initNet(){
+  net=new Net(getArch(),actFn);itr=0;lastLoss=0;playing=false;updPlayBtn();
+  buildArchControls();
+  comboSel=new Set();comboDirty=true;
+  ensureComboGrid();
+}
 function togglePlay(){if(!hasBoth())return;if(itr===0)net=new Net(getArch(),actFn);playing=!playing;updPlayBtn();}
 function resetNet(){playing=false;initNet();}
 function clearAll(){points=[];playing=false;initNet();}
 function setClass(c){curClass=c;document.getElementById('btnA').classList.toggle('active',c===0);document.getElementById('btnB').classList.toggle('active',c===1);}
 
 const MODEL_INFO={
-  linear:'<strong>Linear model</strong> can only draw a straight decision boundary. Try switching to, for example, XOR and see that the model fails to separate the classes! Switch to Neural network with 1 hidden layer and see the difference.',
-  nn1:'<strong>1 hidden layer (18 neurons)</strong> – each neuron responds to a combination of x and y. Together they bend the boundary. Open <strong>Advanced</strong> and turn on neuron visualization!',
-  nn2:'<strong>2 hidden layers (18+10 neurons)</strong> – more layers enable more complex boundaries. Better at handling, for example, spirals and crossed patterns.'
+  linear:'<strong>Linear model</strong> can only draw a straight decision boundary. Try the patterns above and see which ones it manages.',
+  nn1:'<strong>Hidden layer (18 neurons)</strong> – each neuron responds to a combination of x and y. Together they bend the boundary. Open <strong>Advanced</strong> and try <strong>Neurons</strong> to see how!'
 };
 
 function setModel(m){
   curModel=m;customArch=null;
   document.getElementById('mLin').classList.toggle('active',m==='linear');
   document.getElementById('mNN1').classList.toggle('active',m==='nn1');
-  document.getElementById('mNN2').classList.toggle('active',m==='nn2');
   document.getElementById('infoBox').innerHTML=MODEL_INFO[m];
+  updateAdvAvailability();
   initNet();
 }
 
+function updateAdvAvailability(){
+  const btn=document.getElementById('ptAdv');
+  const enabled=(curModel!=='linear');
+  btn.disabled=!enabled;
+  btn.title=enabled?'':'Requires selecting Neural network';
+  if(!enabled&&curTab==='adv')setPanelTab('std');
+}
+
 function setPanelTab(tab){
+  if(tab==='adv'&&curModel==='linear')return;
+  curTab=tab;
   document.getElementById('ptStd').classList.toggle('active',tab==='std');
   document.getElementById('ptAdv').classList.toggle('active',tab==='adv');
   document.getElementById('viewStd').classList.toggle('active',tab==='std');
   document.getElementById('viewAdv').classList.toggle('active',tab==='adv');
-  if(tab==='adv'&&!advShown){advShown=true;document.getElementById('advOverlay').classList.add('show');}
+  document.body.classList.toggle('mode-adv',tab==='adv');
+  if(tab==='adv'){
+    ensureComboGrid();
+    if(!advShown){advShown=true;document.getElementById('advOverlay').classList.add('show');}
+  }
 }
 
 cv.addEventListener('mousedown',e=>{
   e.preventDefault();const r=cv.getBoundingClientRect();
   const px=(e.clientX-r.left)*CS/r.width,py=(e.clientY-r.top)*CS/r.height;
   const[x,y]=p2d(px,py);const cls=e.button===2?1:curClass;
-  if(!points.some(p=>Math.hypot(p.x-x,p.y-y)<0.09)){points.push({x,y,cls});if(hasBoth()&&itr===0)net=new Net(getArch(),actFn);}
+  if(!points.some(p=>Math.hypot(p.x-x,p.y-y)<0.09)){points.push(mkPoint(x,y,cls));if(hasBoth()&&itr===0)net=new Net(getArch(),actFn);}
 });
 cv.addEventListener('contextmenu',e=>e.preventDefault());
 
+function mkPoint(x,y,cls){return{x,y,cls,bornAt:performance.now(),wasOk:null,correctedAt:null};}
 function clust(cx,cy,n,r){return Array.from({length:n},()=>({x:cx+(Math.random()-.5)*2*r,y:cy+(Math.random()-.5)*2*r}));}
 function loadPreset(name){
   points=[];
-  if(name==='xor'){clust(-.58,-.58,13,.33).forEach(p=>points.push({...p,cls:0}));clust(.58,.58,13,.33).forEach(p=>points.push({...p,cls:0}));clust(-.58,.58,13,.33).forEach(p=>points.push({...p,cls:1}));clust(.58,-.58,13,.33).forEach(p=>points.push({...p,cls:1}));}
-  else if(name==='circles'){for(let i=0;i<18;i++){const a=Math.random()*Math.PI*2,r=Math.random()*.28;points.push({x:Math.cos(a)*r,y:Math.sin(a)*r,cls:0});}for(let i=0;i<24;i++){const a=Math.random()*Math.PI*2,r=.62+Math.random()*.32;points.push({x:Math.cos(a)*r,y:Math.sin(a)*r,cls:1});}}
-  else if(name==='spiral'){for(let i=0;i<22;i++){const t=i/22*Math.PI*1.7,r=.18+t*.23,nx=(Math.random()-.5)*.1,ny=(Math.random()-.5)*.1;points.push({x:r*Math.cos(t)+nx,y:r*Math.sin(t)+ny,cls:0});points.push({x:r*Math.cos(t+Math.PI)+nx,y:r*Math.sin(t+Math.PI)+ny,cls:1});}}
-  else if(name==='linear'){clust(-.55,.2,14,.42).forEach(p=>points.push({...p,cls:0}));clust(.55,-.2,14,.42).forEach(p=>points.push({...p,cls:1}));}
+  if(name==='xor'){clust(-.58,-.58,13,.33).forEach(p=>points.push(mkPoint(p.x,p.y,0)));clust(.58,.58,13,.33).forEach(p=>points.push(mkPoint(p.x,p.y,0)));clust(-.58,.58,13,.33).forEach(p=>points.push(mkPoint(p.x,p.y,1)));clust(.58,-.58,13,.33).forEach(p=>points.push(mkPoint(p.x,p.y,1)));}
+  else if(name==='circles'){for(let i=0;i<18;i++){const a=Math.random()*Math.PI*2,r=Math.random()*.28;points.push(mkPoint(Math.cos(a)*r,Math.sin(a)*r,0));}for(let i=0;i<24;i++){const a=Math.random()*Math.PI*2,r=.62+Math.random()*.32;points.push(mkPoint(Math.cos(a)*r,Math.sin(a)*r,1));}}
+  else if(name==='spiral'){for(let i=0;i<22;i++){const t=i/22*Math.PI*1.7,r=.18+t*.23,nx=(Math.random()-.5)*.1,ny=(Math.random()-.5)*.1;points.push(mkPoint(r*Math.cos(t)+nx,r*Math.sin(t)+ny,0));points.push(mkPoint(r*Math.cos(t+Math.PI)+nx,r*Math.sin(t+Math.PI)+ny,1));}}
+  else if(name==='linear'){clust(-.55,.2,14,.42).forEach(p=>points.push(mkPoint(p.x,p.y,0)));clust(.55,-.2,14,.42).forEach(p=>points.push(mkPoint(p.x,p.y,1)));}
   initNet();
 }
 
-const ACT_NOTE={tanh:'<strong>tanh</strong> gives values from −1 to +1. Smooth, curved boundaries.',relu:'<strong>ReLU</strong> gives 0 for negatives, otherwise z. Sharp edges in the boundary.'};
+const ACT_NOTE={
+  tanh:'<strong>tanh</strong> gives each neuron a value between −1 and +1. Train and compare the decision boundary with ReLU – do you notice any difference in shape?',
+  relu:'<strong>ReLU</strong> passes positive values through unchanged and sets all negative ones to 0. Train and compare with tanh – what happens to the shape of the boundary?'
+};
 function setActFn(fn){actFn=fn;document.getElementById('actTanh').classList.toggle('active',fn==='tanh');document.getElementById('actRelu').classList.toggle('active',fn==='relu');document.getElementById('actNote').innerHTML=ACT_NOTE[fn];initNet();}
 
-function toggleNviz(){neuronViz=document.getElementById('nvizCk').checked;const row=document.getElementById('nselRow');row.style.opacity=neuronViz?'1':'0.35';row.style.pointerEvents=neuronViz?'auto':'none';}
-function buildNeuronSelects(){
-  const arch=getArch();const lSel=document.getElementById('lyrSel'),nSel=document.getElementById('nrnSel');
-  lSel.innerHTML='';const nHidden=arch.length-2;
-  for(let l=0;l<nHidden;l++){const o=document.createElement('option');o.value=l;o.textContent='Layer '+(l+1);lSel.appendChild(o);}
-  lSel.disabled=nHidden===0;nSel.disabled=nHidden===0;refreshNeuronSel();
+/* ── Look inside the network: mode selector ── */
+function setVizMode(m){
+  vizMode=m;
+  document.getElementById('vmBoundary').classList.toggle('active',m==='boundary');
+  document.getElementById('vmCombo').classList.toggle('active',m==='combo');
+  document.getElementById('vizBoundary').style.display=m==='boundary'?'block':'none';
+  document.getElementById('vizCombo').style.display=m==='combo'?'block':'none';
+  if(m==='combo')ensureComboGrid();
 }
-function refreshNeuronSel(){
-  const arch=getArch();const l=parseInt(document.getElementById('lyrSel').value)||0;selLayer=l;
-  const nSel=document.getElementById('nrnSel');nSel.innerHTML='';const count=arch[l+1]||0;
-  for(let n=0;n<count;n++){const o=document.createElement('option');o.value=n;o.textContent='Neuron '+(n+1);nSel.appendChild(o);}selNeuron=0;
+
+/* ── Neuroner: klickbara neuron-swatchar ── */
+function ensureComboGrid(){
+  if(vizMode!=='combo')return;
+  if(comboDirty){buildComboGrid();comboDirty=false;}
+  else{refreshComboActiveStates();updateComboCaption();}
 }
-function onNeuronChange(){selLayer=parseInt(document.getElementById('lyrSel').value)||0;selNeuron=parseInt(document.getElementById('nrnSel').value)||0;}
+function neuronThumbLayerIdx(){const arch=getArch();return arch.length-3;} // 0-indexed hidden layer feeding the output
+function renderNeuronThumb(canvas,layerIdx,nIdx){
+  const size=canvas.width;const c2=canvas.getContext('2d');
+  const id=c2.createImageData(size,size);const d=id.data;
+  let minA=Infinity,maxA=-Infinity;const vals=new Array(size*size);
+  let k=0;
+  for(let py=0;py<size;py++){for(let px=0;px<size;px++){
+    const[x,y]=p2d((px+.5)/size*CS,(py+.5)/size*CS);
+    const a=net.neuronAct([x,y],layerIdx,nIdx);
+    vals[k++]=a;if(a<minA)minA=a;if(a>maxA)maxA=a;
+  }}
+  const range=Math.max(Math.abs(minA),Math.abs(maxA),0.01);k=0;
+  for(let py=0;py<size;py++){for(let px=0;px<size;px++){
+    const t=(vals[k++]/range+1)/2;const i=(py*size+px)*4;
+    if(t>=0.5){const f=(t-0.5)*2;d[i]=lerp(20,77,f)|0;d[i+1]=lerp(30,128,f)|0;d[i+2]=lerp(50,255,f)|0;}
+    else{const f=(0.5-t)*2;d[i]=lerp(20,255,f)|0;d[i+1]=lerp(30,80,f)|0;d[i+2]=lerp(50,60,f)|0;}
+    d[i+3]=255;
+  }}
+  c2.putImageData(id,0,0);
+}
+function buildComboGrid(){
+  const wrap=document.getElementById('comboGrid');if(!wrap)return;
+  wrap.innerHTML='';
+  const arch=getArch();
+  if(arch.length<=2||!net){wrap.innerHTML='<div class="note">The linear model has no hidden neurons to combine.</div>';updateComboCaption();return;}
+  const M=arch[arch.length-2],layerIdx=neuronThumbLayerIdx();
+  for(let j=0;j<M;j++){
+    const chip=document.createElement('button');
+    chip.type='button';chip.className='combo-chip'+(comboSel.has(j)?' active':'');
+    chip.onclick=()=>toggleComboNeuron(j);
+    const cv2=document.createElement('canvas');cv2.width=20;cv2.height=20;
+    chip.appendChild(cv2);
+    const lbl=document.createElement('span');lbl.className='cn';lbl.textContent=j+1;
+    chip.appendChild(lbl);
+    const ck=document.createElement('span');ck.className='ck';ck.textContent='✓';
+    chip.appendChild(ck);
+    wrap.appendChild(chip);
+    renderNeuronThumb(cv2,layerIdx,j);
+  }
+  updateComboCaption();
+}
+function refreshComboThumbnails(){
+  const wrap=document.getElementById('comboGrid');if(!wrap||!net)return;
+  const arch=getArch();if(arch.length<=2)return;
+  const layerIdx=neuronThumbLayerIdx();
+  const chips=wrap.querySelectorAll('.combo-chip');
+  chips.forEach((chip,j)=>{const cv2=chip.querySelector('canvas');if(cv2)renderNeuronThumb(cv2,layerIdx,j);});
+}
+function toggleComboNeuron(j){
+  if(comboSel.has(j))comboSel.delete(j);else comboSel.add(j);
+  const wrap=document.getElementById('comboGrid');const chip=wrap&&wrap.children[j];
+  if(chip)chip.classList.toggle('active',comboSel.has(j));
+  updateComboCaption();
+}
+function comboSelectAll(){
+  const arch=getArch();if(arch.length<=2)return;
+  const M=arch[arch.length-2];comboSel=new Set(Array.from({length:M},(_,i)=>i));
+  refreshComboActiveStates();updateComboCaption();
+}
+function comboSelectNone(){comboSel=new Set();refreshComboActiveStates();updateComboCaption();}
+function refreshComboActiveStates(){
+  const wrap=document.getElementById('comboGrid');if(!wrap)return;
+  [...wrap.children].forEach((chip,j)=>chip.classList&&chip.classList.toggle('active',comboSel.has(j)));
+}
+function updateComboCaption(){
+  const cap=document.getElementById('comboCap'),cnt=document.getElementById('comboCount');
+  const arch=getArch();
+  if(arch.length<=2){if(cap)cap.innerHTML='The <strong>linear model</strong> has no hidden neurons to combine. Switch to a neural network.';if(cnt)cnt.textContent='';return;}
+  const M=arch[arch.length-2],n=comboSel.size;
+  if(cnt)cnt.textContent=n+' / '+M+' selected';
+  if(!cap)return;
+  if(n===0)cap.innerHTML='Click one or more neurons above to see how their decisions <strong>combine</strong>.';
+  else if(n===1)cap.innerHTML='A single neuron only gives a simple, almost straight split.';
+  else if(n===M)cap.innerHTML='<strong>All '+M+' neurons</strong> combined – identical to the final decision boundary.';
+  else cap.innerHTML=n+' of '+M+' neurons combined. Try different combinations and see how the shape changes.';
+}
 
 function buildArchControls(){
-  const arch=getArch();const wrap=document.getElementById('archWrap');wrap.innerHTML='';const nHidden=arch.length-2;
-  if(nHidden===0){wrap.innerHTML='<div class="note">The linear model has no hidden layers.</div>';return;}
-  const row=document.createElement('div');row.className='arch-row';
-  for(let l=1;l<=nHidden;l++){
-    const lbl=document.createElement('span');lbl.className='arch-label';lbl.textContent='L'+l+':';
-    const inp=document.createElement('input');inp.type='number';inp.min='1';inp.max='64';inp.value=arch[l];inp.className='arch-input';inp.id='aL'+l;
-    row.appendChild(lbl);row.appendChild(inp);
-    if(l<nHidden){const arr=document.createElement('span');arr.textContent='→';arr.style.color='var(--dim)';row.appendChild(arr);}
+  const arch=getArch();const wrap=document.getElementById('archWrap');const nHidden=arch.length-2;
+  if(nHidden===0){wrap.innerHTML='<div class="note">The linear model has no hidden neurons.</div>';return;}
+  const n=arch[1];
+  let range=document.getElementById('archRange');
+  if(!range){
+    wrap.innerHTML=
+      '<div class="arch-stepper">'+
+        '<button type="button" class="arch-btn" onclick="archNudge(-1)" aria-label="Fewer neurons">−</button>'+
+        '<div class="arch-slide"><input type="range" id="archRange" min="1" max="64" step="1" value="'+n+'" oninput="archSliderInput()"></div>'+
+        '<button type="button" class="arch-btn" onclick="archNudge(1)" aria-label="More neurons">+</button>'+
+        '<div class="arch-badge" id="archBadge">'+n+'</div>'+
+      '</div>'+
+      '<div class="arch-caption">neurons in the hidden layer</div>';
+    range=document.getElementById('archRange');
+  }else{
+    range.value=n;
+    const badge=document.getElementById('archBadge');if(badge)badge.textContent=n;
   }
-  wrap.appendChild(row);
+  updateArchFill();
 }
-function applyArch(){
-  const arch=getArch().slice();const nHidden=arch.length-2;
-  for(let l=1;l<=nHidden;l++){const inp=document.getElementById('aL'+l);if(inp){const v=parseInt(inp.value);if(v>=1&&v<=64)arch[l]=v;}}
-  customArch=arch;initNet();
+function updateArchFill(){
+  const r=document.getElementById('archRange');if(!r)return;
+  const pct=((r.value-r.min)/(r.max-r.min))*100;
+  r.style.setProperty('--fillPct',pct+'%');
+}
+function bumpArchBadge(){
+  const b=document.getElementById('archBadge');if(!b)return;
+  b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop');
+}
+let archDebounce=null;
+function archSliderInput(){
+  const r=document.getElementById('archRange');const v=parseInt(r.value);
+  const badge=document.getElementById('archBadge');if(badge)badge.textContent=v;
+  updateArchFill();
+  clearTimeout(archDebounce);
+  archDebounce=setTimeout(()=>applyArchValue(v),140);
+}
+function archNudge(d){
+  const r=document.getElementById('archRange');if(!r)return;
+  const v=Math.max(parseInt(r.min),Math.min(parseInt(r.max),parseInt(r.value)+d));
+  r.value=v;const badge=document.getElementById('archBadge');if(badge)badge.textContent=v;
+  updateArchFill();bumpArchBadge();
+  clearTimeout(archDebounce);
+  applyArchValue(v);
+}
+function applyArchValue(v){
+  const arch=getArch().slice();arch[1]=v;customArch=arch;initNet();
 }
 
 /* ════════════════ Glaskort (concept cards) ════════════════ */
@@ -624,7 +971,7 @@ const CONCEPTS={
   linjar:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20 20 4"/></svg>',
     title:'Linear model',
-    def:'A <strong>linear model</strong> can only draw a <em>straight</em> decision boundary – a single line straight through the plane. That\'s enough when the classes can be separated with one line, but it fails on patterns like <strong>XOR</strong>, where no straight line can separate them. That\'s when you need a neural network that can bend the boundary.',
+    def:'A <strong>linear model</strong> can only draw a <em>straight</em> decision boundary – a single line straight through the plane. That is enough when the classes can be separated with one line, but it fails on patterns like <strong>XOR</strong>, where no straight line can separate them. That is when a neural network is needed to bend the boundary.',
     illus:'<svg viewBox="0 0 140 80"><rect x="6" y="8" width="128" height="64" rx="6" fill="rgba(255,255,255,.02)"/><line x1="18" y1="66" x2="122" y2="16" stroke="#7aa2ff" stroke-width="2.5" stroke-linecap="round"/><circle cx="34" cy="30" r="4" fill="#ff6a5e"/><circle cx="28" cy="48" r="4" fill="#ff6a5e"/><circle cx="50" cy="26" r="4" fill="#ff6a5e"/><circle cx="96" cy="52" r="4" fill="#4d80ff"/><circle cx="110" cy="40" r="4" fill="#4d80ff"/><circle cx="88" cy="58" r="4" fill="#4d80ff"/></svg>'
   },
   nn:{
@@ -636,38 +983,44 @@ const CONCEPTS={
   dolt:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="2" width="4" height="20" rx="1"/><rect x="17" y="6" width="4" height="12" rx="1"/></svg>',
     title:'Hidden layer',
-    def:'A <strong>hidden layer</strong> sits between the input (x, y) and the final answer. This is where the patterns are found: each neuron in the layer splits the plane in its own way. <em>More</em> hidden layers and neurons give more flexible boundaries – but also slower training and a risk that the model overfits.',
+    def:'A <strong>hidden layer</strong> sits between the input (x, y) and the final answer. This is where the patterns are found: each neuron in the layer splits the plane in its own way. In this tool you can adjust <em>how many neurons</em> the layer has (Advanced → Architecture) – more neurons give more flexible boundaries, but also slower training and a risk that the model overfits. Larger networks often stack several such layers on top of each other for even more capacity.',
     illus:'<svg viewBox="0 0 140 80"><text x="20" y="14" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#7e8aaa">in</text><text x="70" y="14" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#34c759">hidden</text><text x="120" y="14" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#ffd866">out</text><g stroke="rgba(255,255,255,.13)" stroke-width="1"><line x1="20" y1="34" x2="70" y2="26"/><line x1="20" y1="34" x2="70" y2="46"/><line x1="20" y1="34" x2="70" y2="64"/><line x1="20" y1="58" x2="70" y2="26"/><line x1="20" y1="58" x2="70" y2="46"/><line x1="20" y1="58" x2="70" y2="64"/><line x1="70" y1="26" x2="120" y2="45"/><line x1="70" y1="46" x2="120" y2="45"/><line x1="70" y1="64" x2="120" y2="45"/></g><circle cx="20" cy="34" r="4.5" fill="#7aa2ff"/><circle cx="20" cy="58" r="4.5" fill="#7aa2ff"/><circle cx="70" cy="26" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="70" cy="46" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="70" cy="64" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="120" cy="45" r="5" fill="#ffd866"/></svg>'
   },
   xor:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" stroke-linecap="round"/></svg>',
     title:'The XOR pattern',
-    def:'<strong>XOR</strong> ("exclusive or") is the classic pattern where the classes sit in <em>diagonal</em> corners: <span class="ca"></span> bottom-left and top-right, <span class="cb"></span> in the other two. No single straight line can separate them – that\'s why the linear model fails, and XOR became the historic example of why neural networks with hidden layers are needed.',
+    def:'<strong>XOR</strong> ("exclusive or") is the classic pattern where the classes sit in <em>diagonal</em> corners: <span class="ca"></span> bottom-left and top-right, <span class="cb"></span> in the other two. No single straight line can separate them – that is why the linear model fails, and XOR became the historic example of why neural networks with hidden layers are needed.',
     illus:'<svg viewBox="0 0 140 80"><rect x="6" y="8" width="128" height="64" rx="6" fill="rgba(255,255,255,.02)"/><line x1="70" y1="10" x2="70" y2="70" stroke="rgba(255,255,255,.1)" stroke-width="1"/><line x1="8" y1="40" x2="132" y2="40" stroke="rgba(255,255,255,.1)" stroke-width="1"/><circle cx="34" cy="56" r="5" fill="#ff6a5e"/><circle cx="106" cy="24" r="5" fill="#ff6a5e"/><circle cx="34" cy="24" r="5" fill="#4d80ff"/><circle cx="106" cy="56" r="5" fill="#4d80ff"/></svg>'
   },
   monster:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>',
     title:'Ready-made patterns',
-    def:'The four buttons load different test data that place different demands on the model: <strong>Linear</strong> can be separated with a straight line. <strong>XOR</strong> requires a curved boundary. <strong>Circle</strong> has one class enclosed by the other. <strong>Spiral</strong> is the hardest and needs several hidden layers. Try the same pattern with different models and compare!',
+    def:'The four buttons load different test data that place different demands on the model: <strong>Linear</strong> can be separated with a straight line. <strong>XOR</strong> requires a curved boundary. <strong>Circle</strong> has one class enclosed by the other. <strong>Spiral</strong> is the hardest – here it helps to increase the number of neurons in the hidden layer (Advanced → Architecture) for a cleaner boundary. Try the same pattern with different models and compare!',
     illus:'<svg viewBox="0 0 140 80"><g transform="translate(8,12)"><line x1="4" y1="44" x2="44" y2="8" stroke="#7aa2ff" stroke-width="2"/><circle cx="12" cy="20" r="3" fill="#ff6a5e"/><circle cx="36" cy="34" r="3" fill="#4d80ff"/></g><g transform="translate(50,12)"><circle cx="10" cy="34" r="3" fill="#ff6a5e"/><circle cx="38" cy="8" r="3" fill="#ff6a5e"/><circle cx="10" cy="8" r="3" fill="#4d80ff"/><circle cx="38" cy="34" r="3" fill="#4d80ff"/></g><g transform="translate(92,12)"><circle cx="24" cy="22" r="16" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1"/><circle cx="24" cy="22" r="3.5" fill="#ff6a5e"/><circle cx="24" cy="4" r="3" fill="#4d80ff"/><circle cx="40" cy="30" r="3" fill="#4d80ff"/></g></svg>'
   },
   aktivering:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18c4 0 5-12 9-12s5 12 9 12"/></svg>',
     title:'Activation function',
-    def:'Each neuron runs its sum through an <strong>activation function</strong> before passing the signal on. Without it, the network could only compute straight lines, no matter how many layers you stack. It\'s the <em>curve</em> of the activation function that gives the network the ability to bend the decision boundary.',
+    def:'Each neuron runs its sum through an <strong>activation function</strong> before passing the signal on. Without it, the network could only compute straight lines, no matter how many layers you stack. It is the <em>curve</em> of the activation function that gives the network its ability to bend the decision boundary.',
     illus:'<svg viewBox="0 0 140 80"><path d="M10 60 L38 60 L38 20 L64 20" fill="none" stroke="#34c759" stroke-width="2.5" stroke-linecap="round"/><path d="M74 60 C86 60 86 20 98 20" fill="none" stroke="#7aa2ff" stroke-width="2.5" stroke-linecap="round"/><path d="M104 40 C110 20 118 20 124 40 C130 60 138 60 138 40" fill="none" stroke="#ffd866" stroke-width="2.5" stroke-linecap="round"/></svg>'
   },
   tanhrelu:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 10 17 10 7"/><path d="M13 17c3 0 3-10 8-10"/></svg>',
     title:'tanh vs ReLU',
-    def:'<strong style="color:var(--gold)">tanh</strong> gives smooth values between −1 and +1 – the neurons show both red (negative) and blue (positive) regions, which gives <em>smoothly curved</em> boundaries. <strong style="color:var(--gold)">ReLU</strong> gives 0 for negative numbers, otherwise the number itself – the neuron is either off or on, which gives <em>sharp edges</em> in the decision boundary. Try both and see the difference!',
+    def:'<strong style="color:var(--gold)">tanh</strong> gives smooth values between −1 and +1 and can be either negative or positive. <strong style="color:var(--gold)">ReLU</strong> sets all negative values to 0 and passes positive ones through unchanged – so a neuron is either "off" or "on". The shape of the function affects the decision boundary. Look at a single neuron under <strong>Neurons</strong> with each function and discover the difference yourself!',
     illus:'<svg viewBox="0 0 140 80"><g transform="translate(0,4)"><text x="35" y="12" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#ffd866">tanh</text><path d="M8 58 C28 58 28 22 48 22 C60 22 60 22 62 22" fill="none" stroke="#7aa2ff" stroke-width="2.5" stroke-linecap="round"/><line x1="8" y1="40" x2="62" y2="40" stroke="rgba(255,255,255,.12)" stroke-width="1"/></g><g transform="translate(74,4)"><text x="35" y="12" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#ffd866">ReLU</text><path d="M8 58 L34 58 L58 22" fill="none" stroke="#34c759" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="8" y1="58" x2="62" y2="58" stroke="rgba(255,255,255,.12)" stroke-width="1"/></g></svg>'
   },
   neuron:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>',
     title:'Neuron',
-    def:'A <strong>neuron</strong> takes the input (x and y), multiplies by its <em>weights</em>, sums them, and runs the result through the activation function. On its own, each neuron only splits the plane in two with a simple boundary. So a neuron doesn\'t classify by itself – the final decision boundary only emerges once all the neurons\' signals are <strong>combined</strong> in the output layer.',
+    def:'A <strong>neuron</strong> takes the input (x and y), multiplies by its <em>weights</em>, sums them, and runs the result through the activation function. On its own, each neuron only splits the plane in two with a simple boundary. So a neuron does not classify by itself – the final decision boundary only emerges once all the neurons\' signals are <strong>combined</strong> in the output layer.',
     illus:'<svg viewBox="0 0 140 80"><g stroke="rgba(122,162,255,.5)" stroke-width="1.5"><line x1="16" y1="24" x2="60" y2="40"/><line x1="16" y1="56" x2="60" y2="40"/><line x1="82" y1="40" x2="120" y2="40"/></g><circle cx="16" cy="24" r="4" fill="#7aa2ff"/><circle cx="16" cy="56" r="4" fill="#7aa2ff"/><text x="8" y="27" font-family="JetBrains Mono" font-size="9" fill="#7e8aaa">x</text><text x="8" y="59" font-family="JetBrains Mono" font-size="9" fill="#7e8aaa">y</text><circle cx="71" cy="40" r="12" fill="rgba(77,128,255,.25)" stroke="#7aa2ff" stroke-width="2"/><circle cx="120" cy="40" r="4" fill="#ffd866"/></svg>'
+  },
+  kombination:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h6M4 12h6M4 17h6"/><path d="M14 12h6M17 9l3 3-3 3"/></svg>',
+    title:'Kombination',
+    def:'On its own, each neuron only draws a simple, almost straight line. But in the <strong>output layer</strong>, all the neurons\' signals are weighed together – and the sum of many simple pieces forms a curved, composite decision boundary. That is what the <strong>Neurons</strong> mode shows: click to choose which ones contribute, and see how that exact combination shapes the boundary.',
+    illus:'<svg viewBox="0 0 140 80"><g transform="translate(6,6)"><line x1="4" y1="50" x2="34" y2="18" stroke="rgba(122,162,255,.4)" stroke-width="2"/><line x1="4" y1="30" x2="34" y2="46" stroke="rgba(122,162,255,.4)" stroke-width="2"/><text x="19" y="66" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#7e8aaa">simple pieces</text></g><path d="M62 40h16M74 36l4 4-4 4" stroke="#ffd866" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(90,6)"><path d="M4 50 C10 20 34 54 40 16" fill="none" stroke="#4d80ff" stroke-width="2.5" stroke-linecap="round"/><text x="22" y="66" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#7e8aaa">boundary</text></g></svg>'
   }
 };
 function openConcept(id,ev){
