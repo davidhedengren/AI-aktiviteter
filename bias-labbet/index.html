@@ -279,6 +279,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 .concept-illus{background:rgba(0,0,0,.25);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;transform:translateZ(10px);}
 .concept-illus:empty{display:none;}
 .concept-illus svg{width:100%;height:auto;max-height:90px;}
+.concept-icon.gold{background:rgba(255,214,102,.14);color:var(--gold);box-shadow:0 10px 24px rgba(255,214,102,.18);}
+.concept-card-inner.gold-frame{border-color:rgba(255,216,102,.35);box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,216,102,.08) inset,0 0 30px rgba(255,216,102,.15);}
+.overlay-btn.gold{background:var(--gold);color:#2a2410;box-shadow:0 8px 24px rgba(255,214,102,.28);}
+.overlay-btn.gold:hover{background:#ffdc85;color:#2a2410;box-shadow:0 12px 30px rgba(255,214,102,.38);}
 
 /* footer concept row */
 .concept-footer{display:flex;flex-wrap:wrap;gap:7px;align-items:center;padding:2px 4px;}
@@ -328,6 +332,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 .next-btn svg{width:16px;height:16px;}
 .reset-link{display:inline-flex;align-items:center;gap:6px;font-size:.8em;color:var(--dim);cursor:pointer;transition:.2s;align-self:center;padding:6px;}
 .reset-link:hover{color:var(--text);}
+.retrain-link{display:flex;align-items:center;justify-content:center;gap:6px;font-size:.8em;color:var(--dim);cursor:pointer;transition:.2s;margin:14px auto 0;padding:6px;}
+.retrain-link:hover{color:var(--text);}
+.train-done-wrap{display:flex;flex-direction:column;align-items:center;}
 
 @media(max-width:680px){
   .hd{padding:10px 16px 8px;}
@@ -402,10 +409,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
     </div>
     <div class="act-body">
       <div class="var-grid">
-        <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Utbildningspoäng</span><span class="vhint">alltid med</span><span class="vlock">🔒</span></div>
-        <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Arbetslivserfarenhet</span><span class="vhint">alltid med</span><span class="vlock">🔒</span></div>
-        <div class="var-toggle on" id="vtKon" onclick="toggleVar('kon')"><span class="vdot"></span><span class="vname">Kön</span><span class="vhint">skyddad egenskap</span></div>
-        <div class="var-toggle on" id="vtLucka" onclick="toggleVar('lucka')"><span class="vdot"></span><span class="vname">Uppehåll i CV (år)</span><span class="vhint">möjlig proxy</span></div>
+        <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Utbildningspoäng</span><span class="vlock">🔒</span></div>
+        <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Arbetslivserfarenhet</span><span class="vlock">🔒</span></div>
+        <div class="var-toggle on" id="vtKon" onclick="toggleVar('kon')"><span class="vdot"></span><span class="vname">Kön</span></div>
+        <div class="var-toggle on" id="vtLucka" onclick="toggleVar('lucka')"><span class="vdot"></span><span class="vname">Uppehåll i CV (år)</span></div>
       </div>
       <div class="data-note">💡 Prova först med allt påslaget. Senare kan du gå tillbaka hit, stänga av <strong>Kön</strong> och träna om – och se om det räcker för att göra modellen rättvis.</div>
       <button class="next-btn" onclick="goToAct(3)">Fortsätt till träning <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -506,6 +513,22 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
     <div class="concept-title" id="conceptTitle"></div>
     <div class="concept-def" id="conceptDef"></div>
     <div class="concept-illus" id="conceptIllus"></div>
+  </div>
+</div>
+
+<div class="concept-backdrop" id="revealBackdrop" onclick="closeFairnessReveal()"></div>
+<div class="concept-card" id="revealCard" style="width:380px;">
+  <div class="concept-card-inner gold-frame" id="revealCardInner">
+    <button class="concept-close" onclick="closeFairnessReveal()">✕</button>
+    <div class="concept-icon gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M7 21h10"/><path d="M12 6L4 8.5M12 6l8 2.5"/><circle cx="4" cy="9" r="2"/><circle cx="20" cy="9.5" r="2"/></svg></div>
+    <div class="concept-title" style="color:var(--gold)">Rättvisetestet</div>
+    <div class="concept-def">240 nya sökande med identiska meritfördelningar skickades genom den nytränade modellen.</div>
+    <div class="fair-big" style="margin-bottom:16px;">
+      <div class="fbar k"><span class="fwho">Kvinnor</span><div class="ftrack"><div class="ffill" id="revealFillK" style="width:0%"></div></div><span class="fval" id="revealValK" style="color:var(--kvinna)">0%</span></div>
+      <div class="fbar m"><span class="fwho">Män</span><div class="ftrack"><div class="ffill" id="revealFillM" style="width:0%"></div></div><span class="fval" id="revealValM" style="color:var(--man)">0%</span></div>
+    </div>
+    <div class="concept-def" id="revealVerdict"></div>
+    <button class="overlay-btn gold" onclick="closeFairnessReveal()">Fortsätt granska resultaten <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 </div>
 
@@ -684,10 +707,12 @@ function goToAct(n){
   }
   renderReceipts();
   updateWizard();
-  // reset train act to idle view when entering fresh
-  if(n===3 && !model){
-    document.getElementById('trainIdle').style.display='';
+  // always resolve act 3 to a clean, correct view when (re)entering it —
+  // either the idle "train" button, or a "done" state if a model already exists
+  if(n===3){
     document.getElementById('trainStage').style.display='none';
+    document.getElementById('trainIdle').style.display='';
+    renderTrainIdle();
   }
   document.getElementById('act'+n).scrollIntoView({behavior:'smooth',block:'nearest'});
 }
@@ -822,6 +847,26 @@ const TRAIN_STATUS=[
   {t:'Optimerar modellen…', at:0.8},
 ];
 
+function renderTrainIdle(){
+  const wrap = document.getElementById('trainIdle');
+  if(model){
+    wrap.innerHTML = `
+      <div class="train-done-wrap">
+        <button class="train-cta done" onclick="goToAct(4)">
+          <span class="train-cta-icon">✓</span>
+          <span class="train-cta-text">Modellen är tränad — visa resultat</span>
+        </button>
+        <div class="retrain-link" onclick="startTraining()">↺ Träna om modellen</div>
+      </div>`;
+  }else{
+    wrap.innerHTML = `
+      <button class="train-cta idle" id="trainCta" onclick="startTraining()">
+        <span class="train-cta-icon" id="trainCtaIcon">🧠</span>
+        <span class="train-cta-text" id="trainCtaText">Träna modellen</span>
+      </button>`;
+  }
+}
+
 function startTraining(){
   if(trainAnimRunning) return;
   document.getElementById('trainIdle').style.display='none';
@@ -873,6 +918,10 @@ function startTraining(){
         currentAct=4; maxActReached=4;
         goToAct(4);
         renderAll();
+        setTimeout(()=>{
+          renderFairnessReveal();
+          showFairnessReveal();
+        }, 450);
       }, 550);
     });
   }));
@@ -1002,6 +1051,52 @@ function renderFairness(){
   return r;
 }
 
+/* ── Fairness reveal: pops up as a glass card right after training, then
+   settles back down onto the hero card's spot in the results page when closed ── */
+function renderFairnessReveal(){
+  if(!model) return;
+  const r = evaluate(model);
+  let vEmoji, vTxt;
+  if(r.gap > 15){ vEmoji='🚨'; vTxt=`Stor skillnad: männen rekommenderas mycket oftare än kvinnorna.`; }
+  else if(r.gap > 5){ vEmoji='⚠️'; vTxt=`Skillnaden har minskat men finns kvar. Var kommer den ifrån?`; }
+  else { vEmoji='✅'; vTxt=`Grupperna behandlas nu i stort sett lika.`; }
+  const gapColor = r.gap > 15 ? '#ef5b5b' : r.gap > 5 ? '#ffce54' : '#34c759';
+
+  document.getElementById('revealVerdict').innerHTML =
+    `<strong>${vEmoji} ${vTxt}</strong><br><br>Gapet mellan grupperna är <strong style="color:${gapColor}">${r.gap.toFixed(0)} procentenheter</strong>.`;
+
+  const fk=document.getElementById('revealFillK'), fm=document.getElementById('revealFillM');
+  const vk=document.getElementById('revealValK'), vm=document.getElementById('revealValM');
+  fk.style.width='0%'; fm.style.width='0%'; vk.textContent='0%'; vm.textContent='0%';
+  requestAnimationFrame(()=>{
+    fk.style.width=(r.pK*100).toFixed(1)+'%';
+    fm.style.width=(r.pM*100).toFixed(1)+'%';
+    animateCount(vk,0,r.pK*100,800,v=>Math.round(v)+'%');
+    animateCount(vm,0,r.pM*100,800,v=>Math.round(v)+'%');
+  });
+}
+
+function showFairnessReveal(){
+  const target=document.getElementById('cardFair');
+  if(!target) return;
+  const r=target.getBoundingClientRect();
+  const bx=r.left+r.width/2, by=r.top+r.height/2;
+  const cx=window.innerWidth/2, cy=window.innerHeight/2;
+  const card=document.getElementById('revealCard');
+  card.classList.remove('show');
+  card.style.transition='none';
+  card.style.setProperty('--dx',(bx-cx)+'px');
+  card.style.setProperty('--dy',(by-cy)+'px');
+  void card.offsetHeight;
+  card.style.transition='';
+  document.getElementById('revealBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
+}
+function closeFairnessReveal(){
+  document.getElementById('revealCard').classList.remove('show');
+  document.getElementById('revealBackdrop').classList.remove('show');
+}
+
 function renderTwins(){
   const m = model;
   document.getElementById('twinArea').innerHTML = `
@@ -1120,6 +1215,7 @@ function invalidateModel(){
     // reset the training act back to its idle button
     document.getElementById('trainIdle').style.display='';
     document.getElementById('trainStage').style.display='none';
+    renderTrainIdle();
     // if we were past training, drop back so the user re-trains
     if(currentAct===4){ goToAct(3); }
   }
@@ -1136,6 +1232,7 @@ function resetLab(){
   document.getElementById('vtLucka').classList.add('on');
   document.getElementById('trainIdle').style.display='';
   document.getElementById('trainStage').style.display='none';
+  renderTrainIdle();
   renderDataStats();
   goToAct(1);
 }
@@ -1228,25 +1325,27 @@ function closeConcept(){
   document.getElementById('conceptCard').classList.remove('show');
   document.getElementById('conceptBackdrop').classList.remove('show');
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeConcept();closeDataModal();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeConcept();closeDataModal();closeFairnessReveal();}});
 
 (function initCardTilt(){
-  const el=document.getElementById('conceptCardInner');if(!el)return;
   const MAX_TILT=7;
-  el.addEventListener('mousemove',e=>{
-    const r=el.getBoundingClientRect();
-    const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
-    const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
-    el.style.setProperty('--mx',(px*100)+'%');
-    el.style.setProperty('--my',(py*100)+'%');
-    el.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-    const sx=(px-0.5)*22,sy=(py-0.5)*22;
-    el.style.boxShadow=`${-sx}px ${20-sy}px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset`;
-  });
-  el.addEventListener('mouseleave',()=>{
-    el.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';
-    el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%');
-    el.style.boxShadow='';
+  ['conceptCardInner','revealCardInner'].forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    el.addEventListener('mousemove',e=>{
+      const r=el.getBoundingClientRect();
+      const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+      const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
+      el.style.setProperty('--mx',(px*100)+'%');
+      el.style.setProperty('--my',(py*100)+'%');
+      el.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+      const sx=(px-0.5)*22,sy=(py-0.5)*22;
+      el.style.boxShadow=`${-sx}px ${20-sy}px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset`;
+    });
+    el.addEventListener('mouseleave',()=>{
+      el.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';
+      el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%');
+      el.style.boxShadow='';
+    });
   });
 })();
 
