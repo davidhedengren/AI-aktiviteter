@@ -914,7 +914,11 @@ function markDirty(){
   dirty = true;
   const b = document.getElementById('trainBtn');
   if(b) b.classList.add('attn');
-  document.getElementById('staleNote').classList.add('show');
+  const note = document.getElementById('staleNote');
+  note.innerHTML = built
+    ? '⚠️ Träningstexten har ändrats – tryck <strong style="color:var(--text)">Träna modellen</strong> för att uppdatera den.'
+    : '👉 Tryck <strong style="color:var(--text)">🧠 Träna modellen</strong> ovan för att bygga din första modell.';
+  note.classList.add('show');
   document.getElementById('trainStatus').innerHTML = '';
 }
 
@@ -1452,8 +1456,8 @@ function goStep(n){
   if(rec){
     document.getElementById('kSel').value = String(rec.k);
     k = rec.k;
-    setDatasets(rec.ds);    // bockar i rätt texter + bygger träningstexten
-    buildFromTextarea();     // träna direkt i guidat läge
+    setDatasets(rec.ds);      // bockar i rätt texter, markerar modellen som otränad/dirty
+    if(built) buildFromTextarea();   // träna om automatiskt bara om eleven redan tränat en gång själv
   }
   scrollToTop();             // börja varje steg högst upp (sist, efter ombyggnad)
 }
