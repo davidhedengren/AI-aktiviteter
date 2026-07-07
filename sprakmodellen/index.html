@@ -1300,6 +1300,7 @@ function stopAuto(){
   btn.classList.remove('pri');
 }
 
+
 // ════════════════════════════════════════════════════════════
 //  Inställningar
 // ════════════════════════════════════════════════════════════
@@ -1727,4 +1728,38 @@ function closeConcept(){
   document.getElementById('conceptCard').classList.remove('show');
   document.getElementById('conceptBackdrop').classList.remove('show');
 }
-document.addEventListener('keydown', e => { 
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeConcept(); });
+(function initCardTilt(){
+  const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const el = document.getElementById('conceptCardInner');
+  if(!el || RM) return;
+  const MAX_TILT = 5;
+  el.addEventListener('mousemove', e => {
+    const r = el.getBoundingClientRect();
+    const px = (e.clientX - r.left)/r.width, py = (e.clientY - r.top)/r.height;
+    const rx = (0.5 - py)*MAX_TILT*2, ry = (px - 0.5)*MAX_TILT*2;
+    el.style.setProperty('--mx', (px*100)+'%');
+    el.style.setProperty('--my', (py*100)+'%');
+    el.style.transform = 'perspective(1000px) rotateX('+rx+'deg) rotateY('+ry+'deg)';
+    const sx = (px-0.5)*22, sy = (py-0.5)*22;
+    el.style.boxShadow = (-sx)+'px '+(20-sy)+'px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset';
+  });
+  el.addEventListener('mouseleave', () => {
+    el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    el.style.setProperty('--mx','50%'); el.style.setProperty('--my','50%');
+    el.style.boxShadow = '';
+  });
+})();
+
+// ════════════════════════════════════════════════════════════
+//  Start: bygg den längre texten direkt så allt är levande
+//  bakom intro-overlayen
+// ════════════════════════════════════════════════════════════
+hydrateTerms();
+renderGlossary();
+loadDatasets().then(() => {
+  goStep(1);   // starta i steg 1 när texterna är laddade
+});
+</script>
+</body>
+</html>
