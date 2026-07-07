@@ -8,7 +8,7 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--accent:#6366f1;--accent2:#8b8fff;--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--classA:#ff6a5e;--classB:#4d80ff;
+:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--accent:#6366f1;--accent2:#8b8fff;--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--adv:#a78bfa;--classA:#ff6a5e;--classB:#4d80ff;
   --glass:rgba(20,24,42,.55);--border-soft:rgba(255,255,255,.06);--dim2:#5c6689;--accent-dim:rgba(99,102,241,.16);
   --r-sm:8px;--r-md:14px;--r-lg:20px;--ease-spring:cubic-bezier(.34,1.56,.64,1);--ease-out:cubic-bezier(.16,1,.3,1);}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -16,7 +16,7 @@ html{-webkit-font-smoothing:antialiased;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;position:relative;}
 .bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
 .bg-mesh::before{content:'';position:absolute;width:140%;height:140%;top:-20%;left:-20%;
-  background:radial-gradient(ellipse 40% 34% at 20% 20%,rgba(99,102,241,.14),transparent 60%),radial-gradient(ellipse 34% 30% at 82% 75%,rgba(255,106,94,.06),transparent 60%),radial-gradient(ellipse 30% 36% at 70% 10%,rgba(255,216,102,.05),transparent 60%);
+  background:radial-gradient(ellipse 40% 34% at 20% 20%,rgba(99,102,241,.14),transparent 60%),radial-gradient(ellipse 34% 30% at 82% 75%,rgba(255,106,94,.06),transparent 60%),radial-gradient(ellipse 30% 36% at 70% 10%,rgba(167,139,250,.05),transparent 60%);
   animation:meshDrift 34s ease-in-out infinite alternate;filter:blur(10px);}
 @keyframes meshDrift{0%{transform:translate(0,0) scale(1);}50%{transform:translate(-2%,2%) scale(1.05);}100%{transform:translate(2%,-1%) scale(1.02);}}
 .bg-noise{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
@@ -63,7 +63,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .ptab{flex:1;padding:8px 8px;text-align:center;font-size:0.74em;font-weight:700;color:var(--dim2);background:transparent;cursor:pointer;transition:.2s var(--ease-out);border:none;font-family:'DM Sans',sans-serif;border-radius:999px;}
 .ptab:hover{color:var(--text);}
 .ptab.active{color:#fff;background:var(--accent);}
-.ptab.adv.active{color:#06210f;background:var(--gold);}
+.ptab.adv.active{color:#1a1030;background:var(--adv);}
 .ptab:disabled{opacity:0.32;cursor:not-allowed;}
 .ptab:disabled:hover{color:var(--dim2);}
 .panel-body{flex:1;overflow-y:auto;padding:14px;}
@@ -99,7 +99,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .preset-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
 .pbtn{font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.74em;padding:8px 6px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;transition:.2s var(--ease-spring);text-align:center;line-height:1.4;}
 .pbtn:hover{border-color:var(--accent);color:var(--text);transform:translateY(-1px);}
-.pbtn .picon{font-size:1.2em;display:block;margin-bottom:1px;}
+.pbtn .picon{display:flex;align-items:center;justify-content:center;margin:0 auto 4px;width:26px;height:26px;}
+.pbtn .picon svg{width:100%;height:100%;}
 .status-panel{padding:1px 0 2px;}
 .status-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;}
 .status-msg{font-size:0.8em;color:var(--dim2);font-weight:600;transition:color .2s;}
@@ -113,7 +114,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .status-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.4) 50%,transparent 70%);transform:translateX(-100%);animation:fillShine 2.6s ease-in-out infinite;}
 @keyframes fillShine{0%,55%{transform:translateX(-100%);}100%{transform:translateX(220%);}}
 .status-row{display:flex;align-items:baseline;gap:7px;margin-bottom:5px;}
-.status-pct{font-family:'JetBrains Mono',monospace;font-size:1.85em;font-weight:800;color:var(--text);letter-spacing:-0.02em;line-height:1;transition:color .3s;}
+.status-pct{font-family:'JetBrains Mono',monospace;font-size:1.85em;font-weight:800;color:var(--text);letter-spacing:-0.02em;line-height:1;transition:color .3s;display:inline-block;}
+@keyframes pctTick{0%{transform:scale(1);}50%{transform:scale(1.16);}100%{transform:scale(1);}}
+.status-pct.tick{animation:pctTick .32s cubic-bezier(.34,1.56,.64,1);}
 .status-pct.done{color:var(--green);}
 .status-pct.warn{color:var(--gold);}
 .status-mis{font-size:0.74em;color:var(--dim2);}
@@ -126,22 +129,22 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .act-row{display:flex;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:999px;padding:2px;}
 .act-btn{flex:1;font-family:'DM Sans',sans-serif;font-size:0.76em;font-weight:700;padding:7px;border-radius:999px;border:none;background:transparent;color:var(--dim2);cursor:pointer;transition:.2s var(--ease-out);text-align:center;}
 .act-btn:hover:not(.active){color:var(--text);}
-.act-btn.active{color:#06210f;background:var(--gold);}
+.act-btn.active{color:#1a1030;background:var(--adv);}
 .note{font-size:0.72em;color:var(--dim2);line-height:1.5;margin-top:4px;}.note strong{color:var(--text);}
 .arch-wrap{display:flex;flex-direction:column;gap:8px;}
 .arch-stepper{display:flex;align-items:center;gap:9px;}
 .arch-btn{width:30px;height:30px;flex-shrink:0;border-radius:50%;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:1.15em;font-weight:600;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.16s var(--ease-spring);box-shadow:inset 0 1px 0 rgba(255,255,255,.04);}
-.arch-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(255,214,102,.08);transform:translateY(-1px);}
+.arch-btn:hover{border-color:var(--adv);color:var(--adv);background:rgba(167,139,250,.08);transform:translateY(-1px);}
 .arch-btn:active{transform:scale(.88);}
 .arch-slide{flex:1;position:relative;height:30px;display:flex;align-items:center;}
-.arch-slide input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:4px;outline:none;cursor:pointer;background:linear-gradient(to right,var(--gold) var(--fillPct,28%),var(--surface2) var(--fillPct,28%));transition:background .05s linear;}
+.arch-slide input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:4px;outline:none;cursor:pointer;background:linear-gradient(to right,var(--adv) var(--fillPct,28%),var(--surface2) var(--fillPct,28%));transition:background .05s linear;}
 .arch-slide input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:4px;background:transparent;}
 .arch-slide input[type=range]::-moz-range-track{height:6px;border-radius:4px;background:var(--surface2);}
-.arch-slide input[type=range]::-moz-range-progress{height:6px;border-radius:4px;background:var(--gold);}
-.arch-slide input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;margin-top:-6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6d9,var(--gold) 70%);border:2px solid rgba(9,11,20,.5);cursor:pointer;box-shadow:0 0 0 4px rgba(255,214,102,.16),0 2px 8px rgba(0,0,0,.4);transition:.16s var(--ease-spring);}
+.arch-slide input[type=range]::-moz-range-progress{height:6px;border-radius:4px;background:var(--adv);}
+.arch-slide input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;margin-top:-6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f3ebff,var(--adv) 70%);border:2px solid rgba(9,11,20,.5);cursor:pointer;box-shadow:0 0 0 4px rgba(167,139,250,.18),0 2px 8px rgba(0,0,0,.4);transition:.16s var(--ease-spring);}
 .arch-slide input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.14);box-shadow:0 0 0 5px rgba(255,214,102,.22),0 2px 8px rgba(0,0,0,.4);}
-.arch-slide input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6d9,var(--gold) 70%);border:2px solid rgba(9,11,20,.5);cursor:pointer;box-shadow:0 0 0 4px rgba(255,214,102,.16);}
-.arch-badge{min-width:36px;flex-shrink:0;padding:5px 9px;border-radius:999px;background:rgba(255,214,102,.14);border:1px solid rgba(255,214,102,.32);color:var(--gold);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.82em;text-align:center;transition:transform .18s cubic-bezier(.34,1.56,.64,1);}
+.arch-slide input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f3ebff,var(--adv) 70%);border:2px solid rgba(9,11,20,.5);cursor:pointer;box-shadow:0 0 0 4px rgba(167,139,250,.18);}
+.arch-badge{min-width:36px;flex-shrink:0;padding:5px 9px;border-radius:999px;background:rgba(167,139,250,.16);border:1px solid rgba(167,139,250,.35);color:var(--adv);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.82em;text-align:center;transition:transform .18s cubic-bezier(.34,1.56,.64,1);}
 .arch-badge.pop{animation:archPop .32s cubic-bezier(.34,1.56,.64,1);}
 @keyframes archPop{0%{transform:scale(.7);}55%{transform:scale(1.16);}100%{transform:scale(1);}}
 .arch-caption{font-size:0.7em;color:var(--dim2);}
@@ -157,8 +160,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .g-tag:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px);}
 .g-tag:active{transform:scale(.95);}
 .g-tag .g-ico{width:12px;height:12px;flex-shrink:0;opacity:.75;}
-.g-tag.gold:hover{border-color:var(--gold);color:var(--gold);background:rgba(255,214,102,.1);}
-.g-tag.gold .g-ico{color:var(--gold);}
+.g-tag.gold:hover{border-color:var(--adv);color:var(--adv);background:rgba(167,139,250,.12);}
+.g-tag.gold .g-ico{color:var(--adv);}
 
 /* ── Glaskort (concept cards) ── */
 .concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
@@ -187,7 +190,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .concept-close:hover{border-color:var(--red);color:var(--red);transform:translateZ(30px) rotate(90deg);}
 .concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(99,102,241,.18);}
 .concept-icon svg{width:28px;height:28px;}
-.concept-icon.gold{background:rgba(255,214,102,.14);color:var(--gold);box-shadow:0 10px 24px rgba(255,214,102,.18);}
+.concept-icon.gold{background:rgba(167,139,250,.16);color:var(--adv);box-shadow:0 10px 24px rgba(167,139,250,.2);}
 .concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
 .concept-def{font-size:.85em;line-height:1.6;color:var(--dim);margin-bottom:16px;position:relative;z-index:3;transform:translateZ(18px);}
 .concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;font-weight:600;}
@@ -198,8 +201,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 /* ── Läges-tonad bakgrund (guld i Avancerat) ── */
 .mode-tint{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .6s var(--ease-out),background .6s var(--ease-out);}
-body.mode-adv .mode-tint{opacity:1;background:radial-gradient(ellipse 72% 58% at 50% 30%,rgba(255,214,102,.09),transparent 72%);}
-body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(255,214,102,.16);}
+body.mode-adv .mode-tint{opacity:1;background:radial-gradient(ellipse 72% 58% at 50% 30%,rgba(167,139,250,.1),transparent 72%);}
+body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.18);}
 
 /* ── Titta inuti nätverket ── */
 #vizModeRow .act-btn{font-size:0.72em;padding:7px 3px;white-space:nowrap;}
@@ -208,19 +211,19 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(255,214,102,.1
 
 /* ── Neuroner: klickbara neuron-swatchar ── */
 .combo-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;}
-.combo-count{font-family:'JetBrains Mono',monospace;font-size:0.74em;color:var(--gold);}
+.combo-count{font-family:'JetBrains Mono',monospace;font-size:0.74em;color:var(--adv);}
 .combo-actions{display:flex;gap:10px;}
 .combo-link{background:none;border:none;padding:0;font-family:'DM Sans',sans-serif;font-size:0.72em;font-weight:700;color:var(--dim2);cursor:pointer;text-decoration:underline;text-underline-offset:2px;transition:.15s;}
-.combo-link:hover{color:var(--gold);}
+.combo-link:hover{color:var(--adv);}
 .combo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:6px;}
 .combo-chip{position:relative;aspect-ratio:1;border-radius:9px;border:1.5px solid var(--border);background:var(--surface2);cursor:pointer;overflow:hidden;padding:0;transition:.18s var(--ease-spring);}
 .combo-chip:hover{border-color:var(--dim2);transform:translateY(-1px) scale(1.04);}
 .combo-chip:active{transform:scale(.94);}
-.combo-chip.active{border-color:var(--gold);box-shadow:0 0 0 2px rgba(255,214,102,.3),0 4px 14px rgba(255,214,102,.22);}
+.combo-chip.active{border-color:var(--adv);box-shadow:0 0 0 2px rgba(167,139,250,.32),0 4px 14px rgba(167,139,250,.24);}
 .combo-chip canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;opacity:.9;}
 .combo-chip:not(.active) canvas{opacity:.45;filter:saturate(.4);}
 .combo-chip .cn{position:absolute;bottom:2px;left:3px;font-family:'JetBrains Mono',monospace;font-size:.58em;font-weight:700;color:#fff;background:rgba(0,0,0,.5);padding:0 3px;border-radius:4px;line-height:1.35;z-index:2;}
-.combo-chip .ck{position:absolute;top:2px;right:2px;width:13px;height:13px;border-radius:50%;background:var(--gold);color:#090b14;font-size:8px;font-weight:900;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.4);transition:.2s var(--ease-spring);z-index:2;}
+.combo-chip .ck{position:absolute;top:2px;right:2px;width:13px;height:13px;border-radius:50%;background:var(--adv);color:#fff;font-size:8px;font-weight:900;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.4);transition:.2s var(--ease-spring);z-index:2;}
 .combo-chip.active .ck{opacity:1;transform:scale(1);}
 
 .overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;transition:opacity .3s var(--ease-out);}
@@ -328,10 +331,10 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(255,214,102,.1
           <div class="story-body">
             <div class="story-title">Skapa data</div>
             <div class="preset-grid">
-              <button class="pbtn" onclick="loadPreset('linear')"><span class="picon">/</span>Linjärt</button>
-              <button class="pbtn" onclick="loadPreset('xor')"><span class="picon">⊕</span>XOR</button>
-              <button class="pbtn" onclick="loadPreset('circles')"><span class="picon">◎</span>Cirkel</button>
-              <button class="pbtn" onclick="loadPreset('spiral')"><span class="picon">↺</span>Spiral</button>
+              <button class="pbtn" onclick="loadPreset('linear')"><span class="picon"><svg viewBox="0 0 24 24"><circle cx="6" cy="17" r="2" fill="#ff6a5e"/><circle cx="9" cy="20" r="1.7" fill="#ff6a5e"/><circle cx="4" cy="20" r="1.7" fill="#ff6a5e"/><circle cx="18" cy="7" r="2" fill="#4d80ff"/><circle cx="15" cy="4" r="1.7" fill="#4d80ff"/><circle cx="20" cy="4" r="1.7" fill="#4d80ff"/></svg></span>Linjärt</button>
+              <button class="pbtn" onclick="loadPreset('xor')"><span class="picon"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2" fill="#ff6a5e"/><circle cx="3.5" cy="9" r="1.5" fill="#ff6a5e"/><circle cx="18" cy="18" r="2" fill="#ff6a5e"/><circle cx="20.5" cy="15" r="1.5" fill="#ff6a5e"/><circle cx="18" cy="6" r="2" fill="#4d80ff"/><circle cx="20.5" cy="9" r="1.5" fill="#4d80ff"/><circle cx="6" cy="18" r="2" fill="#4d80ff"/><circle cx="3.5" cy="15" r="1.5" fill="#4d80ff"/></svg></span>XOR</button>
+              <button class="pbtn" onclick="loadPreset('circles')"><span class="picon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.8" fill="#ff6a5e"/><circle cx="10" cy="10.5" r="1.4" fill="#ff6a5e"/><circle cx="14" cy="13" r="1.4" fill="#ff6a5e"/><circle cx="12" cy="3" r="1.6" fill="#4d80ff"/><circle cx="21" cy="12" r="1.6" fill="#4d80ff"/><circle cx="12" cy="21" r="1.6" fill="#4d80ff"/><circle cx="3" cy="12" r="1.6" fill="#4d80ff"/><circle cx="18.5" cy="5.5" r="1.4" fill="#4d80ff"/><circle cx="18.5" cy="18.5" r="1.4" fill="#4d80ff"/><circle cx="5.5" cy="18.5" r="1.4" fill="#4d80ff"/></svg></span>Cirkel</button>
+              <button class="pbtn" onclick="loadPreset('spiral')"><span class="picon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.5" fill="#ff6a5e"/><circle cx="15" cy="10.5" r="1.3" fill="#ff6a5e"/><circle cx="16.5" cy="7" r="1.2" fill="#ff6a5e"/><circle cx="15" cy="3.5" r="1.1" fill="#ff6a5e"/><circle cx="9" cy="13.5" r="1.5" fill="#4d80ff"/><circle cx="6" cy="15.5" r="1.3" fill="#4d80ff"/><circle cx="4.5" cy="19" r="1.2" fill="#4d80ff"/><circle cx="6" cy="22" r="1.1" fill="#4d80ff"/></svg></span>Spiral</button>
             </div>
             <div class="story-hint">Eller klicka (Klass A) och högerklicka (Klass B) direkt i rutnätet.</div>
           </div>
@@ -466,7 +469,7 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(255,214,102,.1
       <div class="step"><div class="step-num">2</div><div><strong>Testa ett annat mönster</strong> – Byt exempelvis till mönstret <strong>XOR</strong> i högermenyn och träna med samma linjära modell igen. Vad händer?</div></div>
       <div class="step"><div class="step-num">3</div><div><strong>Lägg till ett dolt lager</strong> – Byt modell till <strong>Neuralt nätverk</strong> och träna om. Se hur gränsen böjer sig och punkterna klassificeras rätt!</div></div>
     </div>
-    <p class="sub" style="margin-bottom:0;">💡 <strong style="color:var(--text)">Tips:</strong> I fliken <strong style="color:var(--gold)">Avancerat</strong> kan du aktivera <em>neuronvisualisering</em> – Här kan du se hur varje enskild neuron i det dolda lagret delar upp ytan på sitt eget sätt. Det är kombinationen av alla neuroner som skapar den slutliga beslutsgränsen.</p>
+    <p class="sub" style="margin-bottom:0;">💡 <strong style="color:var(--text)">Tips:</strong> I fliken <strong style="color:var(--adv)">Avancerat</strong> kan du aktivera <em>neuronvisualisering</em> – Här kan du se hur varje enskild neuron i det dolda lagret delar upp ytan på sitt eget sätt. Det är kombinationen av alla neuroner som skapar den slutliga beslutsgränsen.</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta simuleringen <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 </div>
@@ -474,16 +477,16 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(255,214,102,.1
 <div class="overlay" id="advOverlay">
   <div class="overlay-card">
     <div class="db-icon-wrap adv-icon-wrap">
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/><path d="M8 11h6M11 8v6" stroke-linecap="round"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--adv)" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/><path d="M8 11h6M11 8v6" stroke-linecap="round"/></svg>
     </div>
-    <h2 style="color:var(--gold);">Avancerat läge</h2>
+    <h2 style="color:var(--adv);">Avancerat läge</h2>
     <p class="sub">Här kan du analysera modellen ytterligare.</p>
     <div class="steps">
-      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">1</div><div><strong>Titta inuti nätverket</strong> – Klicka på <strong>Neuroner</strong>. Välj en enda för att se hur den delar upp ytan på sitt eget sätt, eller klicka ihop flera för att se hur den färdiga gränsen växer fram ur de bitar du själv väljer.</div></div>
-      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">2</div><div><strong>Aktiveringsfunktion</strong> – Byt mellan <strong>tanh</strong> och <strong>ReLU</strong> och träna om. Titta noga på beslutsgränsens form – vad är det som skiljer?</div></div>
-      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">3</div><div><strong>Ändra arkitektur</strong> – Justera antalet neuroner i det dolda lagret. Här kan du upptäcka att fler neuroner ger en mer flexibel gräns, men också långsammare träning.</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">1</div><div><strong>Titta inuti nätverket</strong> – Klicka på <strong>Neuroner</strong>. Välj en enda för att se hur den delar upp ytan på sitt eget sätt, eller klicka ihop flera för att se hur den färdiga gränsen växer fram ur de bitar du själv väljer.</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">2</div><div><strong>Aktiveringsfunktion</strong> – Byt mellan <strong>tanh</strong> och <strong>ReLU</strong> och träna om. Titta noga på beslutsgränsens form – vad är det som skiljer?</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">3</div><div><strong>Ändra arkitektur</strong> – Justera antalet neuroner i det dolda lagret. Här kan du upptäcka att fler neuroner ger en mer flexibel gräns, men också långsammare träning.</div></div>
     </div>
-    <button class="overlay-btn" style="background:var(--gold);color:#090b14;box-shadow:0 8px 24px rgba(255,214,102,.28);" onclick="document.getElementById('advOverlay').classList.remove('show')">Jag förstår →</button>
+    <button class="overlay-btn" style="background:var(--adv);color:#fff;box-shadow:0 8px 24px rgba(167,139,250,.3);" onclick="document.getElementById('advOverlay').classList.remove('show')">Jag förstår →</button>
   </div>
 </div>
 
@@ -553,6 +556,7 @@ let comboSel=new Set(),comboDirty=true,comboRefreshCounter=0;
 let curTab='std';
 let speedIdx=0;
 let advShown=false;
+let lastShownPct=null,boundaryPulseAt=null;
 
 const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
 const tmp=document.createElement('canvas');tmp.width=BGRES;tmp.height=BGRES;
@@ -585,12 +589,17 @@ function drawBoundaryContour(pGrid){
   }
   if(!segs.length)return;
   const breathe=0.62+0.38*Math.sin(performance.now()/900);
+  let pulse=0;
+  if(boundaryPulseAt){
+    const pT=performance.now()-boundaryPulseAt;
+    if(pT<450)pulse=1-pT/450;else boundaryPulseAt=null;
+  }
   ctx.save();
   ctx.lineCap='round';ctx.lineJoin='round';
-  ctx.shadowColor='rgba(255,255,255,'+(0.5+0.3*breathe).toFixed(3)+')';
-  ctx.shadowBlur=7+7*breathe;
-  ctx.strokeStyle='rgba(255,255,255,0.92)';
-  ctx.lineWidth=2;
+  ctx.shadowColor='rgba(255,255,255,'+(0.5+0.3*breathe+0.4*pulse).toFixed(3)+')';
+  ctx.shadowBlur=7+7*breathe+16*pulse;
+  ctx.strokeStyle='rgba(255,255,255,'+(0.92+0.08*pulse).toFixed(3)+')';
+  ctx.lineWidth=2+1.6*pulse;
   ctx.beginPath();
   for(const[p1,p2]of segs){ctx.moveTo(p1[0],p1[1]);ctx.lineTo(p2[0],p2[1]);}
   ctx.stroke();
@@ -697,17 +706,24 @@ function updateStats(){
   const pctEl=document.getElementById('sAcc'),fillEl=document.getElementById('statusFill');
   const misLine=document.getElementById('sMisLine'),misEl=document.getElementById('sMis');
   const lm=document.getElementById('legMis');
+  const newPct=acc?Math.round(acc.acc*100):null;
+  const pctChanged=(newPct!==lastShownPct);
   if(!acc){
     pctEl.textContent='–';pctEl.className='status-pct';
     fillEl.style.width='0%';fillEl.className='status-fill';
     misLine.style.display='none';lm.style.display='none';
   }else{
-    const pct=Math.round(acc.acc*100);
+    const pct=newPct;
     pctEl.textContent=pct+'%';pctEl.className='status-pct'+(pct>=90?' done':pct<70?' warn':'');
     fillEl.style.width=pct+'%';fillEl.className='status-fill'+(pct>=90?' done':'');
     if(acc.mis>0){misLine.style.display='inline';misEl.textContent=acc.mis;lm.style.display='flex';}
     else{misLine.style.display='none';lm.style.display='none';}
   }
+  if(pctChanged&&newPct!==null&&lastShownPct!==null){
+    pctEl.classList.remove('tick');void pctEl.offsetWidth;pctEl.classList.add('tick');
+    boundaryPulseAt=performance.now();
+  }
+  lastShownPct=newPct;
   const detail=document.getElementById('statusDetail');
   if(itr>0)detail.textContent=nA+' A · '+nB+' B · '+itr+' iter · loss '+lastLoss.toFixed(4);
   else if(points.length>0)detail.textContent=nA+' A · '+nB+' B';
@@ -1007,8 +1023,8 @@ const CONCEPTS={
   tanhrelu:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 10 17 10 7"/><path d="M13 17c3 0 3-10 8-10"/></svg>',
     title:'tanh vs ReLU',
-    def:'<strong style="color:var(--gold)">tanh</strong> ger mjuka värden mellan −1 och +1 och kan vara både negativ och positiv. <strong style="color:var(--gold)">ReLU</strong> sätter alla negativa värden till 0 och släpper igenom positiva oförändrade – en neuron är alltså antingen "av" eller "på". Funktionens form påverkar beslutsgränsen. Titta på en enskild neuron under <strong>Neuroner</strong> med respektive funktion och upptäck skillnaden själv!',
-    illus:'<svg viewBox="0 0 140 80"><g transform="translate(0,4)"><text x="35" y="12" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#ffd866">tanh</text><path d="M8 58 C28 58 28 22 48 22 C60 22 60 22 62 22" fill="none" stroke="#7aa2ff" stroke-width="2.5" stroke-linecap="round"/><line x1="8" y1="40" x2="62" y2="40" stroke="rgba(255,255,255,.12)" stroke-width="1"/></g><g transform="translate(74,4)"><text x="35" y="12" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#ffd866">ReLU</text><path d="M8 58 L34 58 L58 22" fill="none" stroke="#34c759" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="8" y1="58" x2="62" y2="58" stroke="rgba(255,255,255,.12)" stroke-width="1"/></g></svg>'
+    def:'<strong style="color:var(--adv)">tanh</strong> ger mjuka värden mellan −1 och +1 och kan vara både negativ och positiv. <strong style="color:var(--adv)">ReLU</strong> sätter alla negativa värden till 0 och släpper igenom positiva oförändrade – en neuron är alltså antingen "av" eller "på". Funktionens form påverkar beslutsgränsen. Titta på en enskild neuron under <strong>Neuroner</strong> med respektive funktion och upptäck skillnaden själv!',
+    illus:'<svg viewBox="0 0 140 80"><g transform="translate(0,4)"><text x="35" y="12" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#a78bfa">tanh</text><path d="M8 58 C28 58 28 22 48 22 C60 22 60 22 62 22" fill="none" stroke="#7aa2ff" stroke-width="2.5" stroke-linecap="round"/><line x1="8" y1="40" x2="62" y2="40" stroke="rgba(255,255,255,.12)" stroke-width="1"/></g><g transform="translate(74,4)"><text x="35" y="12" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#a78bfa">ReLU</text><path d="M8 58 L34 58 L58 22" fill="none" stroke="#34c759" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="8" y1="58" x2="62" y2="58" stroke="rgba(255,255,255,.12)" stroke-width="1"/></g></svg>'
   },
   neuron:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>',
