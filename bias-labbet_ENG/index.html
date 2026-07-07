@@ -3,83 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Train a recruitment AI on biased historical data, discover how discrimination emerges and experiment with remedies – based on real cases.">
+<meta name="description" content="Train a recruitment AI on skewed historical data, discover how discrimination arises, and experiment with fixes – based on real cases.">
 <title>The Bias Lab – ai-aktiviteter.se</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#9aa6c4;--subtle:#c2cde6;--accent:#4d80ff;--accent2:#6698ff;--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--kvinna:#c084fc;--man:#4d80ff;}
+:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--border-soft:rgba(255,255,255,.06);--text:#e8ecf8;--dim:#9aa6c4;--subtle:#c2cde6;--accent:#4d80ff;--accent2:#7aa2ff;--accent-dim:rgba(77,128,255,.14);--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--kvinna:#c084fc;--man:#4d80ff;--glass:rgba(20,24,42,.55);--r-sm:10px;--r-md:14px;--r-lg:20px;--ease-out:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;font-size:15px;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
-.back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
-.back-link:hover{color:var(--text);border-color:var(--dim);}
-.lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
-.lang-link:hover{color:var(--text);border-color:var(--dim);}
+html{-webkit-font-smoothing:antialiased;}
+body{font-family:'DM Sans',sans-serif;font-size:15px;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;position:relative;overflow-x:hidden;}
+
+/* ambient background */
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-mesh::before{content:'';position:absolute;width:140%;height:140%;top:-20%;left:-20%;
+  background:radial-gradient(ellipse 40% 34% at 18% 16%,rgba(77,128,255,.13),transparent 60%),radial-gradient(ellipse 34% 30% at 84% 82%,rgba(192,132,252,.07),transparent 60%),radial-gradient(ellipse 30% 30% at 72% 10%,rgba(255,216,102,.045),transparent 60%);
+  animation:meshDrift 36s ease-in-out infinite alternate;filter:blur(12px);}
+@keyframes meshDrift{0%{transform:translate(0,0) scale(1);}50%{transform:translate(-2%,2%) scale(1.05);}100%{transform:translate(2%,-1%) scale(1.02);}}
+.bg-noise{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+.back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.02);transition:.2s var(--ease-out);white-space:nowrap;z-index:2;}
+.back-link:hover{color:var(--text);border-color:var(--dim);background:rgba(255,255,255,.05);}
+.lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.02);transition:.2s var(--ease-out);white-space:nowrap;z-index:2;}
+.lang-link:hover{color:var(--text);border-color:var(--dim);background:rgba(255,255,255,.05);}
 .lang-link .flag{font-size:1.05em;line-height:1;}
-.hd{width:100%;text-align:center;padding:12px 160px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
-.hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}
-.hd h1 span{color:var(--accent2);}
-.hd p{color:var(--dim);font-size:0.8em;max-width:640px;margin:0 auto;line-height:1.4;}
-.app{display:grid;grid-template-columns:285px 1fr 300px;max-width:1300px;margin:0 auto;width:100%;flex:1;position:relative;z-index:1;}
-.lp{padding:14px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:13px;}
-.cp{padding:16px 20px;display:flex;flex-direction:column;gap:18px;min-width:0;}
-.rp{padding:14px;border-left:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;gap:12px;}
-.sec-t{font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--dim);margin-bottom:6px;}
-.sec-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
-.sec-head h2{font-size:1em;font-weight:700;}
-.sec-head .sub{font-size:0.76em;color:var(--dim);}
-.sel{font-family:'DM Sans',sans-serif;font-size:0.82em;width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);cursor:pointer;outline:none;}
-.sel:focus{border-color:var(--accent);}
-.btn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.84em;padding:9px 14px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:0.2s;text-align:center;}
-.btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.08);}
-.btn.grn{background:var(--green);border-color:var(--green);color:#090b14;}
-.btn.grn:hover{background:#4ee89e;border-color:#4ee89e;}
-.btn.ghost{color:var(--dim);font-weight:600;}
-.btn.ghost:hover{color:var(--text);}
-.hint{font-size:0.78em;color:var(--dim);line-height:1.5;margin-top:5px;}
-.hint strong{color:var(--text);}
-.var-toggle{display:flex;align-items:center;gap:7px;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);cursor:pointer;transition:0.2s;font-size:0.8em;color:var(--dim);margin-bottom:5px;user-select:none;}
-.var-toggle:hover{border-color:var(--accent);}
-.var-toggle.on{border-color:var(--green);background:rgba(52,199,89,0.08);color:var(--text);}
-.var-toggle.locked{cursor:default;}
-.var-toggle.locked:hover{border-color:var(--green);}
-.var-toggle .vdot{width:9px;height:9px;border-radius:50%;border:2px solid var(--dim);flex-shrink:0;}
-.var-toggle.on .vdot{background:var(--green);border-color:var(--green);}
-.var-toggle .vname{flex:1;font-weight:600;}
-.var-toggle .vlock{font-size:0.85em;opacity:0.55;}
-.stale-note{display:none;font-size:0.74em;color:var(--gold);line-height:1.4;margin-top:6px;}
-.stale-note.show{display:block;}
-.coll{border:1px solid var(--border);border-radius:8px;overflow:hidden;}
-.coll-toggle{width:100%;padding:10px 12px;background:var(--surface2);border:none;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:700;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px;}
-.coll-toggle:hover{color:var(--text);}
-.coll-toggle .arr{transition:transform 0.2s;flex-shrink:0;}
-.coll-toggle.open .arr{transform:rotate(180deg);}
-.coll-body{display:none;padding:12px;font-size:0.84em;color:var(--subtle);line-height:1.7;border-top:1px solid var(--border);}
-.coll-body.show{display:block;}
-.coll-body strong{color:var(--text);}
-.coll-body ol{margin:0 0 0 16px;}
-.coll-body li{margin-bottom:9px;}
-.coll-body li:last-child{margin-bottom:0;}
-.coll-body .hl{color:var(--accent);font-weight:600;}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;}
-.sec-head h2{font-size:0.94em;font-weight:700;letter-spacing:-0.01em;}
-.more{font-size:0.78em;}
-.more summary{cursor:pointer;color:var(--dim);font-weight:600;list-style:none;padding:2px 0;transition:color 0.2s;}
-.more summary:hover{color:var(--text);}
-.more summary::before{content:'▸ ';font-size:0.85em;}
-.more[open] summary::before{content:'▾ ';}
-.data-lead{font-size:0.88em;line-height:1.65;color:var(--subtle);}
+
+.hd{width:100%;text-align:center;padding:14px 160px 11px;border-bottom:1px solid var(--border-soft);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.04),transparent);z-index:2;}
+.hd-title-row{display:flex;align-items:center;justify-content:center;gap:9px;}
+.hd-icon{width:21px;height:21px;color:var(--accent2);flex-shrink:0;}
+.hd h1{font-family:'Syne',sans-serif;font-size:1.5em;font-weight:800;letter-spacing:-0.02em;background:linear-gradient(135deg,#eef1fb,var(--accent2) 72%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hd p{color:var(--dim);font-size:0.8em;max-width:640px;margin:4px auto 0;line-height:1.45;}
+
+/* phase wizard */
+.wizard{display:flex;align-items:center;justify-content:center;gap:0;margin:16px auto 0;max-width:640px;position:relative;z-index:1;padding:0 20px;}
+.wz-step{display:flex;align-items:center;gap:8px;}
+.wz-dot{width:30px;height:30px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:.72em;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.4s var(--ease-spring);}
+.wz-label{font-size:.74em;font-weight:600;color:var(--dim);transition:.35s var(--ease-out);white-space:nowrap;}
+.wz-line{width:34px;height:2px;background:var(--border);margin:0 10px;border-radius:2px;position:relative;overflow:hidden;flex-shrink:0;}
+.wz-line::after{content:'';position:absolute;inset:0;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s var(--ease-out);}
+.wz-step.done .wz-line::after,.wz-line.fill::after{width:100%;}
+.wz-step.active .wz-dot{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 0 5px rgba(77,128,255,.16);}
+.wz-step.active .wz-label{color:var(--text);}
+.wz-step.done .wz-dot{background:rgba(52,199,89,.16);border-color:var(--green);color:var(--green);}
+.wz-step.done .wz-label{color:var(--subtle);}
+@media(max-width:680px){.wz-label{display:none;}.wz-line{width:20px;margin:0 5px;}}
+
+.stage-wrap{max-width:900px;margin:0 auto;width:100%;flex:1;position:relative;z-index:1;padding:20px 16px 40px;display:flex;flex-direction:column;gap:14px;}
+
+/* ── Act receipts (collapsed, completed acts) ── */
+.receipt{display:flex;align-items:center;gap:12px;padding:12px 18px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--border-soft);cursor:pointer;transition:.25s var(--ease-out);animation:receiptIn .45s var(--ease-spring);}
+.receipt:hover{border-color:rgba(122,162,255,.4);transform:translateX(2px);}
+@keyframes receiptIn{from{opacity:0;transform:translateY(-6px) scale(.98);}to{opacity:1;transform:none;}}
+.receipt-check{width:22px;height:22px;border-radius:50%;background:rgba(52,199,89,.14);border:1px solid var(--green);color:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.7em;}
+.receipt-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;}
+.receipt-label{font-size:.64em;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);}
+.receipt-summary{font-size:.86em;color:var(--subtle);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.receipt-summary b{color:var(--text);font-weight:600;}
+.receipt-edit{font-size:.7em;color:var(--accent2);font-weight:600;flex-shrink:0;opacity:0;transition:.2s;}
+.receipt:hover .receipt-edit{opacity:1;}
+
+/* ── Act cards (big, active) ── */
+.act{background:var(--glass);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border-soft);border-radius:var(--r-lg);box-shadow:0 20px 50px rgba(0,0,0,.28);overflow:hidden;animation:actIn .55s var(--ease-spring);}
+@keyframes actIn{from{opacity:0;transform:translateY(24px) scale(.985);}to{opacity:1;transform:none;}}
+.act-hd{display:flex;align-items:center;gap:13px;padding:20px 24px 0;}
+.act-badge{width:34px;height:34px;border-radius:11px;background:var(--accent-dim);border:1px solid rgba(122,162,255,.3);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.82em;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.act-titles{flex:1;min-width:0;}
+.act-title{font-family:'Syne',sans-serif;font-size:1.12em;font-weight:800;letter-spacing:-.01em;}
+.act-sub{font-size:.78em;color:var(--dim);margin-top:1px;}
+.act-body{padding:18px 24px 24px;display:flex;flex-direction:column;gap:18px;}
+
+/* data mode segmented control */
+.seg{display:flex;gap:4px;padding:4px;background:var(--surface2);border:1px solid var(--border);border-radius:999px;}
+.seg-btn{flex:1;padding:9px 12px;text-align:center;font-size:.82em;font-weight:600;color:var(--dim);background:transparent;border:none;border-radius:999px;cursor:pointer;transition:.2s var(--ease-out);font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:6px;}
+.seg-btn:hover{color:var(--text);}
+.seg-btn.on{background:var(--accent);color:#fff;box-shadow:0 4px 14px rgba(77,128,255,.3);}
+.seg-btn.on.fair{background:var(--gold);color:#2a2410;box-shadow:0 4px 14px rgba(255,216,102,.28);}
+
+.data-lead{font-size:.9em;line-height:1.65;color:var(--subtle);}
 .data-lead strong{color:var(--text);}
-.gstat-neutral{font-size:0.84em;line-height:1.6;color:var(--dim);background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:11px 13px;}
-.gstat-neutral strong{color:var(--subtle);}
-.await-box{text-align:center;padding:30px 22px;display:flex;flex-direction:column;align-items:center;gap:10px;}
-.await-icon{font-size:2.4em;opacity:0.55;}
-.await-title{font-size:1em;font-weight:700;color:var(--text);}
-.await-text{font-size:0.84em;color:var(--dim);line-height:1.6;max-width:380px;}
-.await-text strong{color:var(--subtle);}
-.gstat{display:flex;flex-direction:column;gap:8px;}
+.data-note{font-size:0.8em;color:var(--dim);line-height:1.6;background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:10px 13px;}
+.data-note strong{color:var(--text);}
+
+.more{font-size:0.82em;}
+.more summary{cursor:pointer;color:var(--accent2);font-weight:600;list-style:none;padding:4px 0;transition:color 0.2s;display:inline-flex;align-items:center;gap:5px;}
+.more summary:hover{color:var(--accent);}
+.more summary::before{content:'▸';font-size:0.85em;transition:transform .2s;}
+.more[open] summary::before{transform:rotate(90deg);}
+
+.gstat{display:flex;flex-direction:column;gap:9px;margin-top:11px;}
 .gstat-row{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;}
 .gstat-label{font-size:0.76em;color:var(--dim);line-height:1.3;}
 .gbars{display:flex;flex-direction:column;gap:3px;}
@@ -88,81 +99,201 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .gbar.k .gwho{color:var(--kvinna);}
 .gbar.m .gwho{color:var(--man);}
 .gtrack{height:11px;background:var(--bg);border-radius:4px;overflow:hidden;}
-.gfill{height:100%;border-radius:4px;transition:width 0.5s;}
+.gfill{height:100%;border-radius:4px;transition:width .7s var(--ease-out);}
 .gbar.k .gfill{background:linear-gradient(90deg,#9b6ee0,var(--kvinna));}
 .gbar.m .gfill{background:linear-gradient(90deg,#3a64d0,var(--man));}
 .gval{font-family:'JetBrains Mono',monospace;font-size:0.74em;font-weight:600;text-align:right;color:var(--subtle);}
+.gstat-neutral{font-size:0.84em;line-height:1.6;color:var(--dim);background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:11px 13px;margin-top:11px;}
+.gstat-neutral strong{color:var(--subtle);}
+
+.btn{font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.82em;padding:9px 14px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:.2s var(--ease-out);text-align:center;}
+.btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.08);}
+.btn.ghost{color:var(--dim);font-weight:600;background:transparent;}
+.btn.ghost:hover{color:var(--text);border-color:var(--dim);}
+
+/* variable toggles */
+.var-grid{display:flex;flex-direction:column;gap:7px;}
+.var-toggle{display:flex;align-items:center;gap:9px;padding:11px 13px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);cursor:pointer;transition:.2s var(--ease-out);font-size:0.84em;color:var(--dim);user-select:none;}
+.var-toggle:hover{border-color:var(--accent);}
+.var-toggle.on{border-color:var(--green);background:rgba(52,199,89,0.08);color:var(--text);}
+.var-toggle.locked{cursor:default;opacity:.85;}
+.var-toggle.locked:hover{border-color:var(--green);}
+.var-toggle .vdot{width:15px;height:15px;border-radius:50%;border:2px solid var(--dim);flex-shrink:0;position:relative;transition:.2s;}
+.var-toggle.on .vdot{background:var(--green);border-color:var(--green);}
+.var-toggle.on .vdot::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#04140a;font-size:.62em;font-weight:800;}
+.var-toggle .vname{flex:1;font-weight:600;}
+.var-toggle .vhint{font-size:.82em;opacity:.7;font-weight:500;}
+.var-toggle .vlock{font-size:0.85em;opacity:0.5;}
+
+/* ── Training CTA ── */
+.train-cta{position:relative;overflow:hidden;width:100%;padding:17px 20px;border-radius:14px;border:none;
+  background:linear-gradient(135deg,var(--green),#28b567);color:#04140a;font-family:'DM Sans',sans-serif;font-weight:800;font-size:1.02em;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:transform .25s var(--ease-spring),box-shadow .25s var(--ease-out),background .4s var(--ease-out);
+  box-shadow:0 8px 26px rgba(52,199,89,.25);isolation:isolate;}
+.train-cta:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(52,199,89,.35);}
+.train-cta:active{transform:scale(.98);}
+.train-cta::before{content:'';position:absolute;inset:-3px;border-radius:17px;z-index:-1;filter:blur(11px);
+  background:linear-gradient(135deg,var(--green),#8effc4,var(--green));opacity:0;transition:opacity .4s;animation:ctaPulse 2.6s ease-in-out infinite;}
+.train-cta.idle::before{opacity:.5;}
+@keyframes ctaPulse{0%,100%{opacity:.3;}50%{opacity:.65;}}
+.train-cta-icon{font-size:1.2em;display:inline-block;position:relative;z-index:1;}
+.train-cta-text{position:relative;z-index:1;}
+.train-cta.training{background:linear-gradient(135deg,#1a2340,#131c34);color:var(--text);cursor:default;box-shadow:none;}
+.train-cta.training::before{display:none;}
+.train-cta.done{background:linear-gradient(135deg,var(--green),#28b567);color:#04140a;}
+.train-cta.done .train-cta-icon{animation:checkPop .45s var(--ease-spring);}
+@keyframes checkPop{from{transform:scale(0) rotate(-30deg);}to{transform:scale(1) rotate(0);}}
+
+/* ── Act 3: living training canvas ── */
+.train-stage{display:flex;flex-direction:column;align-items:center;gap:18px;padding:6px 0 2px;}
+.train-canvas-wrap{width:100%;max-width:520px;height:180px;position:relative;border-radius:var(--r-md);overflow:hidden;background:radial-gradient(ellipse 70% 90% at 50% 50%,rgba(20,26,48,.6),rgba(9,11,20,.3));border:1px solid var(--border-soft);}
+.train-canvas-wrap canvas{width:100%;height:100%;display:block;}
+.train-status{min-height:26px;display:flex;flex-direction:column;align-items:center;gap:7px;width:100%;max-width:420px;}
+.train-status-line{font-size:.92em;color:var(--subtle);display:flex;align-items:center;gap:9px;opacity:0;transform:translateY(6px);transition:opacity .4s var(--ease-out),transform .4s var(--ease-out);font-weight:500;}
+.train-status-line.show{opacity:1;transform:none;}
+.train-status-line .tsl-dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;box-shadow:0 0 8px var(--accent2);}
+.train-status-line.done .tsl-dot{background:var(--green);box-shadow:0 0 8px var(--green);}
+.train-status-line .tsl-check{color:var(--green);font-weight:700;}
+.train-progress-rail{width:100%;max-width:420px;height:5px;border-radius:999px;background:var(--surface2);overflow:hidden;}
+.train-progress-rail i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .2s var(--ease-out);}
+
+/* ── Result cards inside Act 4 ── */
+.result-cards{display:flex;flex-direction:column;gap:22px;}
+.rc{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:20px 22px;display:flex;flex-direction:column;gap:16px;transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out),filter .35s,opacity .35s;animation:actIn .5s var(--ease-out) backwards;}
+.rc:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.28);}
+.rc.stale{filter:blur(2.5px) saturate(.6);opacity:.5;pointer-events:none;}
+.rc:nth-child(2){animation-delay:.08s;}
+.rc:nth-child(3){animation-delay:.16s;}
+.rc-head{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;}
+.rc-head h2{font-family:'Syne',sans-serif;font-size:1em;font-weight:800;letter-spacing:-.01em;}
+.rc-head .sub{font-size:0.76em;color:var(--dim);}
+
+/* fairness hero card - gold framed */
+.rc.hero{background:linear-gradient(165deg,rgba(26,31,52,.85),rgba(14,17,30,.9));border:1.5px solid rgba(255,216,102,.4);box-shadow:0 14px 34px rgba(0,0,0,.3),0 0 0 1px rgba(255,216,102,.07) inset,0 0 26px rgba(255,216,102,.13);}
+.rc.hero:hover{box-shadow:0 18px 40px rgba(0,0,0,.36),0 0 0 1px rgba(255,216,102,.1) inset,0 0 30px rgba(255,216,102,.18);}
+.rc.hero .rc-head h2{color:var(--gold);}
+
+.sec-t{font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--dim);}
+.fair-big{display:flex;flex-direction:column;gap:13px;}
+.fbar{display:grid;grid-template-columns:64px 1fr 56px;gap:9px;align-items:center;}
+.fbar .fwho{font-size:0.8em;font-weight:700;}
+.fbar.k .fwho{color:var(--kvinna);}
+.fbar.m .fwho{color:var(--man);}
+.ftrack{height:24px;background:var(--bg);border-radius:6px;overflow:hidden;position:relative;}
+.ffill{height:100%;border-radius:6px;transition:width .8s var(--ease-out);}
+.fbar.k .ffill{background:linear-gradient(90deg,#9b6ee0,var(--kvinna));}
+.fbar.m .ffill{background:linear-gradient(90deg,#3a64d0,var(--man));}
+.fval{font-family:'JetBrains Mono',monospace;font-size:1em;font-weight:800;}
+.gap-pill{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;padding:6px 13px;border-radius:999px;font-size:.82em;font-weight:700;font-family:'JetBrains Mono',monospace;border:1px solid;}
+.gap-pill.pulse{animation:gapPulse 1.6s ease-in-out infinite;}
+@keyframes gapPulse{0%,100%{box-shadow:0 0 0 0 currentColor;}50%{box-shadow:0 0 14px -2px currentColor;}}
+
 .wrow{display:grid;grid-template-columns:130px 1fr 50px;gap:8px;align-items:center;margin-bottom:6px;}
 .wname{font-size:0.78em;color:var(--subtle);font-weight:600;text-align:right;line-height:1.25;}
 .wtrack{position:relative;height:16px;background:var(--bg);border-radius:4px;overflow:hidden;}
 .wtrack::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--border);}
-.wfill{position:absolute;top:2px;bottom:2px;border-radius:3px;transition:all 0.5s;}
+.wfill{position:absolute;top:2px;bottom:2px;border-radius:3px;transition:all .7s var(--ease-out);}
 .wfill.pos{left:50%;background:linear-gradient(90deg,rgba(52,199,89,0.5),var(--green));}
 .wfill.neg{right:50%;background:linear-gradient(270deg,rgba(239,91,91,0.5),var(--red));}
 .wval{font-family:'JetBrains Mono',monospace;font-size:0.76em;font-weight:700;text-align:right;}
 .wval.pos{color:var(--green);}
 .wval.neg{color:var(--red);}
-.model-chip{display:inline-flex;align-items:center;gap:7px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:0.72em;color:var(--dim);font-family:'JetBrains Mono',monospace;}
+.model-chip{display:inline-flex;align-items:center;gap:7px;flex-wrap:wrap;background:var(--surface2);border:1px solid var(--border);border-radius:999px;padding:6px 13px;font-size:0.72em;color:var(--dim);font-family:'JetBrains Mono',monospace;}
 .model-chip strong{color:var(--subtle);font-weight:600;}
-.fair-big{display:flex;flex-direction:column;gap:7px;}
-.fbar{display:grid;grid-template-columns:64px 1fr 56px;gap:9px;align-items:center;}
-.fbar .fwho{font-size:0.78em;font-weight:700;}
-.fbar.k .fwho{color:var(--kvinna);}
-.fbar.m .fwho{color:var(--man);}
-.ftrack{height:22px;background:var(--bg);border-radius:5px;overflow:hidden;}
-.ffill{height:100%;border-radius:5px;transition:width 0.6s;display:flex;align-items:center;}
-.fbar.k .ffill{background:linear-gradient(90deg,#9b6ee0,var(--kvinna));}
-.fbar.m .ffill{background:linear-gradient(90deg,#3a64d0,var(--man));}
-.fval{font-family:'JetBrains Mono',monospace;font-size:0.92em;font-weight:700;}
-.verdict{border-radius:8px;padding:10px 13px;font-size:0.82em;font-weight:600;line-height:1.5;border:1px solid;}
-.verdict.bad{background:rgba(239,91,91,0.08);border-color:rgba(239,91,91,0.3);color:var(--red);}
-.verdict.warn{background:rgba(255,216,102,0.07);border-color:rgba(255,216,102,0.25);color:var(--gold);}
-.verdict.ok{background:rgba(52,199,89,0.07);border-color:rgba(52,199,89,0.25);color:var(--green);}
-.fstats{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-.fbox{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:9px 11px;}
-.fbox .fl{font-size:0.7em;color:var(--dim);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px;line-height:1.3;}
-.fbox .fv{font-family:'JetBrains Mono',monospace;font-size:1em;font-weight:700;}
-.twin-ctrl{display:flex;flex-direction:column;gap:7px;}
-.twin-row{display:grid;grid-template-columns:130px 1fr 36px;gap:9px;align-items:center;font-size:0.78em;color:var(--dim);}
+
+/* ── Twins ── */
+.twin-ctrl{display:flex;flex-direction:column;gap:8px;}
+.twin-row{display:grid;grid-template-columns:120px 1fr 36px;gap:9px;align-items:center;font-size:0.8em;color:var(--dim);}
 .twin-row .tv{font-family:'JetBrains Mono',monospace;color:var(--accent2);font-weight:600;text-align:right;}
 input[type=range]{-webkit-appearance:none;width:100%;height:4px;border-radius:2px;background:var(--surface2);outline:none;accent-color:var(--accent);}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer;}
-.twins{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.twin{border:2px solid var(--border);border-radius:10px;padding:13px 14px;background:var(--surface2);display:flex;flex-direction:column;gap:7px;transition:border-color 0.3s;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 8px rgba(77,128,255,.4);}
+.twins{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:12px;}
+.twin{position:relative;border:2px solid var(--border);border-radius:14px;padding:18px 16px 15px;background:var(--surface2);display:flex;flex-direction:column;gap:7px;overflow:hidden;transition:border-color .3s,transform .3s var(--ease-out);}
+.twin:hover{transform:translateY(-3px);}
 .twin.k{border-color:rgba(192,132,252,0.4);}
 .twin.m{border-color:rgba(77,128,255,0.4);}
-.twin .tname{font-size:0.95em;font-weight:700;display:flex;align-items:center;gap:7px;}
+.twin.flash{animation:twinFlash .5s var(--ease-out);}
+@keyframes twinFlash{0%{box-shadow:0 0 0 0 rgba(77,128,255,0);}30%{box-shadow:0 0 0 5px rgba(77,128,255,.22);}100%{box-shadow:0 0 0 0 rgba(77,128,255,0);}}
+.twin.k.flash{animation-name:twinFlashK;}
+@keyframes twinFlashK{30%{box-shadow:0 0 0 5px rgba(192,132,252,.26);}}
+.twin-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.7em;margin:0 auto 4px;background:var(--surface);border:2px solid;}
+.twin.k .twin-avatar{border-color:var(--kvinna);}
+.twin.m .twin-avatar{border-color:var(--man);}
+.twin .tname{text-align:center;justify-content:center;font-size:1em;font-weight:700;display:flex;align-items:center;gap:7px;}
 .twin.k .tname{color:var(--kvinna);}
 .twin.m .tname{color:var(--man);}
-.twin .tcv{font-size:0.74em;color:var(--dim);line-height:1.7;}
+.twin .tcv{font-size:0.74em;color:var(--dim);line-height:1.7;text-align:center;}
 .twin .tcv b{color:var(--subtle);font-weight:600;}
-.tlucka{display:flex;align-items:center;gap:6px;font-size:0.74em;color:var(--dim);}
+.tlucka{display:flex;align-items:center;justify-content:center;gap:6px;font-size:0.74em;color:var(--dim);}
 .tlucka select{font-family:'JetBrains Mono',monospace;font-size:0.92em;padding:3px 6px;border:1px solid var(--border);border-radius:5px;background:var(--bg);color:var(--text);cursor:pointer;outline:none;}
-.tres{margin-top:auto;border-top:1px solid var(--border);padding-top:8px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
-.tscore{font-family:'JetBrains Mono',monospace;font-size:0.78em;color:var(--subtle);line-height:1.3;}
-.tstamp{font-size:0.84em;font-weight:800;padding:3px 11px;border-radius:6px;border:2px solid;}
-.tstamp.ja{color:var(--green);border-color:var(--green);background:rgba(52,199,89,0.1);}
-.tstamp.nej{color:var(--red);border-color:var(--red);background:rgba(239,91,91,0.1);}
-.twin-verdict{font-size:0.8em;line-height:1.55;padding:9px 12px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);}
+.tstamp-wrap{text-align:center;margin:2px 0;}
+.tstamp{position:relative;display:inline-block;font-family:'Syne',sans-serif;font-size:.8em;font-weight:800;letter-spacing:.03em;padding:6px 14px;border-radius:5px;border:2px solid;
+  transform:rotate(-6deg);text-transform:uppercase;}
+.tstamp.pop{animation:stampPop .35s var(--ease-spring);}
+@keyframes stampPop{0%{transform:rotate(-6deg) scale(.4);opacity:0;}70%{transform:rotate(-6deg) scale(1.15);}100%{transform:rotate(-6deg) scale(1);opacity:1;}}
+.tstamp.ja{color:var(--green);border-color:var(--green);background:rgba(52,199,89,0.08);}
+.tstamp.nej{color:var(--red);border-color:var(--red);background:rgba(239,91,91,0.08);}
+.twin-scan{position:absolute;left:0;right:0;top:-30%;height:40%;pointer-events:none;opacity:0;z-index:5;background:linear-gradient(180deg,transparent,rgba(122,162,255,.28),transparent);}
+.twin.scanning .twin-scan{opacity:1;animation:scanSweep 0.7s var(--ease-out);}
+@keyframes scanSweep{0%{top:-30%;opacity:0;}15%{opacity:1;}100%{top:110%;opacity:0;}}
+.tscore{font-family:'JetBrains Mono',monospace;font-size:0.76em;color:var(--subtle);line-height:1.3;}
+.twin-row.flash-row .tv{animation:tvFlash .5s var(--ease-out);}
+@keyframes tvFlash{0%{color:var(--gold);}100%{color:var(--accent2);}}
+.twin-verdict{font-size:0.84em;line-height:1.6;padding:11px 14px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface2);color:var(--dim);margin-top:12px;}
 .twin-verdict strong{color:var(--text);}
 .twin-verdict.flag{border-color:rgba(239,91,91,0.35);background:rgba(239,91,91,0.06);color:var(--subtle);}
-.glossary{display:flex;flex-wrap:wrap;gap:4px;}
-.g-tag{font-size:0.8em;font-weight:600;padding:5px 10px;border:1px solid var(--border);border-radius:4px;background:var(--surface2);color:var(--dim);cursor:pointer;transition:0.2s;}
-.g-tag:hover{border-color:var(--accent);color:var(--accent);}
-.g-tag.open{border-color:var(--accent);background:rgba(77,128,255,0.1);color:var(--accent);}
-.g-def{display:none;margin-top:6px;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:0.86em;line-height:1.65;color:var(--subtle);}
-.g-def.show{display:block;}
-.g-def strong{color:var(--text);}
-.train-msg{position:fixed;top:26%;left:50%;transform:translateX(-50%);background:rgba(14,18,34,0.96);border:1px solid var(--border);border-radius:12px;padding:18px 26px;text-align:center;z-index:60;display:none;min-width:280px;box-shadow:0 8px 40px rgba(0,0,0,0.6);}
-.train-msg.show{display:block;}
-.train-msg .ti{font-size:1.7em;margin-bottom:5px;}
-.train-msg .tt{font-size:0.92em;font-weight:700;margin-bottom:3px;}
-.train-msg .ts{font-family:'JetBrains Mono',monospace;font-size:0.8em;color:var(--gold);}
-.data-modal{position:fixed;inset:0;background:rgba(9,11,20,0.88);z-index:150;display:none;align-items:center;justify-content:center;}
+
+/* concept pills + card */
+.glossary{display:flex;flex-wrap:wrap;gap:6px;}
+.g-tag{display:inline-flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:0.78em;font-weight:600;padding:6px 12px 6px 9px;border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--dim);cursor:pointer;transition:.2s var(--ease-spring);}
+.g-tag:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px);}
+.g-tag:active{transform:scale(.95);}
+.g-tag .g-ico{width:13px;height:13px;flex-shrink:0;opacity:.8;}
+.concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
+.concept-backdrop.show{opacity:1;pointer-events:auto;}
+.concept-card{position:fixed;top:50%;left:50%;z-index:301;width:340px;max-width:88vw;perspective:1000px;
+  transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
+  transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .26s var(--ease-out);}
+.concept-card.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
+.concept-card-inner{position:relative;text-align:center;transform-style:preserve-3d;
+  background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;
+  transform:perspective(1000px) rotateX(0deg) rotateY(0deg);transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);will-change:transform;}
+.concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+  padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,206,84,.15) 45%,transparent 65%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::before{opacity:1;}
+.concept-card-inner::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.09),transparent 60%);
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::after{opacity:1;}
+.concept-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);z-index:3;transform:translateZ(30px);}
+.concept-close:hover{border-color:var(--red);color:var(--red);transform:translateZ(30px) rotate(90deg);}
+.concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
+.concept-icon svg{width:28px;height:28px;}
+.concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
+.concept-def{font-size:.85em;line-height:1.6;color:var(--dim);margin-bottom:16px;position:relative;z-index:3;transform:translateZ(18px);}
+.concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;}
+.concept-illus{background:rgba(0,0,0,.25);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;transform:translateZ(10px);}
+.concept-illus:empty{display:none;}
+.concept-illus svg{width:100%;height:auto;max-height:90px;}
+.concept-icon.gold{background:rgba(255,214,102,.14);color:var(--gold);box-shadow:0 10px 24px rgba(255,214,102,.18);}
+.concept-card-inner.gold-frame{border-color:rgba(255,216,102,.35);box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,216,102,.08) inset,0 0 30px rgba(255,216,102,.15);}
+.overlay-btn.gold{background:var(--gold);color:#2a2410;box-shadow:0 8px 24px rgba(255,214,102,.28);}
+.overlay-btn.gold:hover{background:#ffdc85;color:#2a2410;box-shadow:0 12px 30px rgba(255,214,102,.38);}
+
+/* footer concept row */
+.concept-footer{display:flex;flex-wrap:wrap;gap:7px;align-items:center;padding:2px 4px;}
+.concept-footer .cf-label{font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin-right:2px;}
+
+/* data modal */
+.data-modal{position:fixed;inset:0;background:rgba(9,11,20,0.88);backdrop-filter:blur(6px);z-index:150;display:none;align-items:center;justify-content:center;}
 .data-modal.show{display:flex;}
-.data-modal-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;width:92%;max-width:680px;max-height:82vh;display:flex;flex-direction:column;gap:8px;}
+.data-modal-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:18px;width:92%;max-width:680px;max-height:82vh;display:flex;flex-direction:column;gap:8px;}
 .data-modal-hd{display:flex;justify-content:space-between;align-items:center;}
-.data-modal-hd h3{font-size:0.95em;color:var(--accent);}
+.data-modal-hd h3{font-family:'Syne',sans-serif;font-size:0.95em;color:var(--accent2);}
 .data-modal-close{background:none;border:1px solid var(--border);border-radius:5px;color:var(--dim);font-size:0.8em;padding:4px 10px;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .data-modal-close:hover{border-color:var(--red);color:var(--red);}
 .data-modal-info{font-size:0.76em;color:var(--dim);line-height:1.5;}
@@ -178,165 +309,226 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .dtable tr.missad{background:rgba(239,91,91,0.06);}
 .dtable .gk{color:var(--kvinna);}
 .dtable .gm{color:var(--man);}
-.overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
+
+/* intro overlay */
+.overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;}
 .overlay.show{display:flex;}
-.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:26px 30px;max-width:520px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;}
-.overlay-card h2{font-size:1.1em;font-weight:700;margin-bottom:6px;}
-.overlay-card h2 span{color:var(--accent2);}
-.overlay-card .sub{font-size:0.9em;color:var(--subtle);line-height:1.65;margin-bottom:12px;text-align:left;}
-.overlay-card .steps{display:flex;flex-direction:column;gap:10px;margin:14px 0;text-align:left;}
-.overlay-card .step{display:flex;gap:10px;align-items:flex-start;font-size:0.88em;color:var(--subtle);line-height:1.55;}
+.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border-soft);border-radius:20px;padding:32px 36px;max-width:520px;width:100%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s var(--ease-spring);}
+@keyframes overlayIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.overlay-icon{width:48px;height:48px;margin:0 auto 14px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);}
+.overlay-icon svg{width:25px;height:25px;}
+.overlay-card h2{font-family:'Syne',sans-serif;font-size:1.4em;font-weight:800;letter-spacing:-.01em;margin-bottom:8px;background:linear-gradient(135deg,#eef1fb,var(--accent2) 72%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.overlay-card .sub{font-size:0.87em;color:var(--subtle);line-height:1.6;margin-bottom:14px;text-align:left;}
+.overlay-card .steps{display:flex;flex-direction:column;gap:12px;margin:16px 0;text-align:left;}
+.overlay-card .step{display:flex;gap:12px;align-items:flex-start;font-size:0.85em;color:var(--subtle);line-height:1.55;}
 .overlay-card .step strong{color:var(--text);}
-.step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
-.overlay-btn{display:block;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}
-.overlay-btn:hover{background:#3d6de6;}
-@media(max-width:1020px){
-  .app{grid-template-columns:1fr;}
-  .lp{border-right:none;border-bottom:1px solid var(--border);}
-  .rp{border-left:none;border-top:1px solid var(--border);}
-  .back-link{position:static;transform:none;margin-bottom:4px;}
-  .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}
+.step-num{width:25px;height:25px;border-radius:50%;background:rgba(77,128,255,0.14);color:var(--accent2);font-weight:700;font-size:0.8em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.28);padding-top:1px;}
+.overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:16px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(77,128,255,.28);}
+.overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
+.overlay-btn svg{width:15px;height:15px;flex-shrink:0;}
+
+.next-btn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:14px;font-family:'DM Sans',sans-serif;font-size:.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(77,128,255,.26);}
+.next-btn:hover{background:#3d6de6;transform:translateY(-2px);box-shadow:0 12px 30px rgba(77,128,255,.36);}
+.next-btn svg{width:16px;height:16px;}
+.reset-link{display:inline-flex;align-items:center;gap:6px;font-size:.8em;color:var(--dim);cursor:pointer;transition:.2s;align-self:center;padding:6px;}
+.reset-link:hover{color:var(--text);}
+.retrain-link{display:flex;align-items:center;justify-content:center;gap:6px;font-size:.8em;color:var(--dim);cursor:pointer;transition:.2s;margin:14px auto 0;padding:6px;}
+.retrain-link:hover{color:var(--text);}
+.train-done-wrap{display:flex;flex-direction:column;align-items:center;}
+
+@media(max-width:680px){
   .hd{padding:10px 16px 8px;}
+  .back-link{position:static;transform:none;margin-bottom:4px;display:inline-flex;}
+  .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;display:inline-flex;}
   .twins{grid-template-columns:1fr;}
+  .gstat-row{grid-template-columns:1fr;gap:4px;}
+  .stage-wrap{padding:14px 10px 30px;}
+  .act-body{padding:14px 16px 18px;}
+  .act-hd{padding:16px 16px 0;}
 }
 </style>
 </head>
 <body>
+<div class="bg-mesh"></div><div class="bg-noise"></div>
 
 <div class="hd">
-  <a class="back-link" href="/">← AI Activities</a>
-  <h1>The <span>Bias</span> Lab</h1>
-  <p>Train a recruitment AI on biased historical data – discover how discrimination emerges and how hard it is to eliminate.</p>
+  <a class="back-link" href="/"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> AI-aktiviteter</a>
+  <div class="hd-title-row">
+    <svg class="hd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M7 21h10"/><path d="M12 6L4 8.5M12 6l8 2.5"/><circle cx="4" cy="9" r="2"/><circle cx="20" cy="9.5" r="2"/></svg>
+    <h1>The Bias Lab</h1>
+  </div>
+  <p>Train a recruitment AI on skewed historical data – discover how discrimination emerges and how hard it is to remove.</p>
   <a class="lang-link" href="https://www.ai-aktiviteter.se/bias-labbet"><span class="flag">🇸🇪</span> Svenska</a>
 </div>
 
-<div class="app">
+<div class="wizard" id="wizard">
+  <div class="wz-step active" id="wz1"><div class="wz-dot">01</div><div class="wz-label">Data</div></div>
+  <div class="wz-line" id="wzl1"></div>
+  <div class="wz-step" id="wz2"><div class="wz-dot">02</div><div class="wz-label">Training</div></div>
+  <div class="wz-line" id="wzl2"></div>
+  <div class="wz-step" id="wz3"><div class="wz-dot">03</div><div class="wz-label">Review</div></div>
+  <div class="wz-line" id="wzl3"></div>
+  <div class="wz-step" id="wz4"><div class="wz-dot">04</div><div class="wz-label">Conclusion</div></div>
+</div>
 
-  <div class="lp">
-    <div id="modelChip" style="display:none;"></div>
+<div class="stage-wrap">
+  <div id="receipts"></div>
 
-    <div class="coll">
-      <button class="coll-toggle" onclick="toggleColl(this,'challBody')">🧭 How to explore this lab<span class="arr">▼</span></button>
-      <div class="coll-body" id="challBody">
-        <p style="margin:0 0 9px;">A suggested path through the lab. Retrain the model after each change and observe what happens to the gap and the weights.</p>
-        <ol>
-          <li>Start with <strong>all variables</strong> turned on. How large is the gap between the groups?</li>
-          <li>Turn off <span class="hl">Gender</span> and retrain. Does the bias disappear entirely? Which variable has "taken over" gender's role?</li>
-          <li>Also turn off <span class="hl">CV gap</span>. What happens to the gap? Did it vanish completely?</li>
-          <li>Turn all variables back on but switch to <span class="hl">⚖️ fair training data</span>. What happens to the weight for Gender now?</li>
-          <li>Go to the <strong>Twin test</strong>: give Anna a 1-year CV gap and Adam 0, using a model trained <em>without</em> gender. Does the model still discriminate? What is that type of discrimination called?</li>
-        </ol>
+  <!-- ACT 1: DATA -->
+  <div class="act" id="act1">
+    <div class="act-hd">
+      <div class="act-badge">01</div>
+      <div class="act-titles">
+        <div class="act-title">Choose your training data</div>
+        <div class="act-sub">Which history should the AI learn from?</div>
       </div>
     </div>
-
-    <div>
-      <div class="sec-t">Data the model trains on</div>
+    <div class="act-body">
+      <div class="seg" id="dataSeg">
+        <button class="seg-btn on" id="segHist" onclick="onDataModeChange('hist')">📜 Historical data</button>
+        <button class="seg-btn fair" id="segFair" onclick="onDataModeChange('fair')">⚖️ Fair data</button>
+      </div>
       <div class="data-lead" id="dataLead"></div>
       <details class="more" id="dataDetails">
-        <summary>Show group statistics</summary>
-        <div class="gstat" id="gstat" style="margin-top:10px;"></div>
-        <button class="btn ghost" style="align-self:flex-start;margin-top:10px;" onclick="openDataModal()">📋 View full dataset (300 rows)</button>
+        <summary>Show the group statistics</summary>
+        <div class="gstat" id="gstat"></div>
+        <button class="btn ghost" style="align-self:flex-start;margin-top:12px;" onclick="openDataModal()">📋 View the full dataset (300 rows)</button>
       </details>
+      <button class="next-btn" onclick="goToAct(2)">Continue to inputs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </div>
-
-    <div>
-      <div class="sec-t">Model inputs</div>
-      <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Education score</span><span class="vlock" title="Always included">🔒</span></div>
-      <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Work experience</span><span class="vlock" title="Always included">🔒</span></div>
-      <div class="var-toggle on" id="vtKon" onclick="toggleVar('kon')"><span class="vdot"></span><span class="vname">Gender</span></div>
-      <div class="var-toggle on" id="vtLucka" onclick="toggleVar('lucka')"><span class="vdot"></span><span class="vname">CV gap (years)</span></div>
-    </div>
-
-    <div>
-      <div class="sec-t">Training data (the labels the model learns from)</div>
-      <select class="sel" id="dataSel" onchange="onDataModeChange(this.value)">
-        <option value="hist" selected>📜 Historical training data</option>
-        <option value="fair">⚖️ Fair training data</option>
-      </select>
-    </div>
-
-    <button class="btn grn" onclick="train()">🧠 Train the model</button>
-    <div class="stale-note" id="staleNote">⚠️ Settings have changed – the results below reflect the <strong style="color:var(--text)">previous</strong> model. Please retrain!</div>
   </div>
 
-  <div class="cp">
-    <div class="card" id="awaitCard">
-      <div class="await-box">
-        <div class="await-icon">🧠</div>
-        <div class="await-title">The trained model will appear here</div>
-        <div class="await-text">Choose inputs and training data in the left panel, then click <strong>Train the model</strong>. You will then see what the model has learned, how fairly it treats new applicants, and how it evaluates two identical candidates.</div>
+  <!-- ACT 2: VARIABLES -->
+  <div class="act" id="act2" style="display:none;">
+    <div class="act-hd">
+      <div class="act-badge">02</div>
+      <div class="act-titles">
+        <div class="act-title">Decide what the AI gets to see</div>
+        <div class="act-sub">Which variables should the model train on?</div>
       </div>
     </div>
-
-    <div class="card" id="cardFair" style="display:none;">
-      <div class="sec-head"><h2>Fairness test</h2><span class="sub">240 new applicants with identical merit distributions</span></div>
-      <div id="fairArea"></div>
-    </div>
-
-    <div class="card" id="cardWeights" style="display:none;">
-      <div class="sec-head"><h2>Model's learned weights</h2><span class="sub">what the model weighs when making decisions</span></div>
-      <div id="weightsArea"></div>
-    </div>
-
-    <div class="card" id="cardTwins" style="display:none;">
-      <div class="sec-head"><h2>Twin test</h2><span class="sub">two identical candidates – are they treated equally?</span></div>
-      <div id="twinArea"></div>
+    <div class="act-body">
+      <div class="var-grid">
+        <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Education score</span><span class="vlock">🔒</span></div>
+        <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Work experience</span><span class="vlock">🔒</span></div>
+        <div class="var-toggle on" id="vtKon" onclick="toggleVar('kon')"><span class="vdot"></span><span class="vname">Gender</span></div>
+        <div class="var-toggle on" id="vtLucka" onclick="toggleVar('lucka')"><span class="vdot"></span><span class="vname">Gap in CV (years)</span></div>
+      </div>
+      <div class="data-note">💡 Try it first with everything switched on. Later you can come back here, turn off <strong>Gender</strong>, and retrain – to see whether that's enough to make the model fair.</div>
+      <button class="next-btn" onclick="goToAct(3)">Continue to training <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </div>
   </div>
 
-  <div class="rp">
-    <div class="coll">
-      <button class="coll-toggle" onclick="toggleColl(this,'glossBody')">📖 Key concepts<span class="arr">▼</span></button>
-      <div class="coll-body" id="glossBody">
-        <div class="glossary">
-          <span class="g-tag" onclick="togGloss(this,'gBias')">Bias</span>
-          <span class="g-tag" onclick="togGloss(this,'gSkydd')">Protected characteristic</span>
-          <span class="g-tag" onclick="togGloss(this,'gProxy')">Proxy variable</span>
-          <span class="g-tag" onclick="togGloss(this,'gDirekt')">Direct discrimination</span>
-          <span class="g-tag" onclick="togGloss(this,'gIndirekt')">Indirect discrimination</span>
-          <span class="g-tag" onclick="togGloss(this,'gGap')">Fairness metric</span>
+  <!-- ACT 3: TRAINING -->
+  <div class="act" id="act3" style="display:none;">
+    <div class="act-hd">
+      <div class="act-badge">03</div>
+      <div class="act-titles">
+        <div class="act-title">Train the model</div>
+        <div class="act-sub" id="act3sub">Let the AI learn the patterns in the data</div>
+      </div>
+    </div>
+    <div class="act-body">
+      <div id="trainIdle">
+        <button class="train-cta idle" id="trainCta" onclick="startTraining()">
+          <span class="train-cta-icon" id="trainCtaIcon">🧠</span>
+          <span class="train-cta-text" id="trainCtaText">Train the model</span>
+        </button>
+      </div>
+      <div class="train-stage" id="trainStage" style="display:none;">
+        <div class="train-canvas-wrap"><canvas id="trainCanvas"></canvas></div>
+        <div class="train-progress-rail"><i id="trainRail"></i></div>
+        <div class="train-status" id="trainStatus"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACT 4: RESULTS -->
+  <div class="act" id="act4" style="display:none;">
+    <div class="act-hd">
+      <div class="act-badge">04</div>
+      <div class="act-titles">
+        <div class="act-title">Examine the consequences</div>
+        <div class="act-sub">What did the model learn – and is it fair?</div>
+      </div>
+    </div>
+    <div class="act-body">
+      <div id="modelChip"></div>
+      <div class="result-cards">
+        <div class="rc hero" id="cardFair">
+          <div class="rc-head"><h2>The Fairness Test</h2><span class="sub">240 new applicants with identical merit distributions</span></div>
+          <div id="fairArea"></div>
         </div>
-        <div class="g-def" id="gBias"><strong>Bias</strong> – Systematic errors that cause a model to treat groups differently. Usually arises because the training data reflects human prejudice or skewed representation – "bias in, bias out".</div>
-        <div class="g-def" id="gSkydd"><strong>Protected characteristic</strong> – Attributes that anti-discrimination law forbids using as a basis for decisions, e.g. gender, ethnicity, age, religion and disability.</div>
-        <div class="g-def" id="gProxy"><strong>Proxy variable</strong> – A variable so closely correlated with a <em>protected characteristic</em> (e.g. gender or ethnicity) that a model can use it as a substitute – thereby disadvantaging a group without ever seeing the protected characteristic directly. A CV employment gap can become a proxy for gender; a postcode can become a proxy for ethnicity.</div>
-        <div class="g-def" id="gDirekt"><strong>Direct discrimination</strong> – The decision changes when only the protected characteristic changes. The twin test reveals this: same qualifications, different outcome.</div>
-        <div class="g-def" id="gIndirekt"><strong>Indirect discrimination</strong> – An apparently neutral criterion (e.g. "no gaps in CV") that in practice disadvantages one group far more than another.</div>
-        <div class="g-def" id="gGap"><strong>Fairness metric</strong> – A way of measuring fairness. This lab uses <em>demographic parity</em>: the share recommended should be roughly equal across groups when qualifications are equal. The gap is measured in percentage points.</div>
+        <div class="rc" id="cardWeights">
+          <div class="rc-head"><h2>The model's learned weights</h2><span class="sub">what the model weighs in its decision</span></div>
+          <div id="weightsArea"></div>
+        </div>
+        <div class="rc" id="cardTwins">
+          <div class="rc-head"><h2>The Twin Test</h2><span class="sub">two identical candidates – are they judged the same?</span></div>
+          <div id="twinArea"></div>
+        </div>
       </div>
-    </div>
-
-    <div class="coll" id="amazonColl">
-      <button class="coll-toggle" onclick="toggleColl(this,'amazonBody')">📰 The real Amazon case<span class="arr">▼</span></button>
-      <div class="coll-body" id="amazonBody">
-        In 2018 it was revealed that Amazon had scrapped an internal AI tool for recruitment. The tool had been trained on ten years of historical applications – which came predominantly from men – and learned to downgrade CVs that suggested the applicant was a woman, for example through the names of societies or associations.<br><br>
-        Amazon tried to remove the obvious signals, but could not guarantee the model would not find <strong>other, indirect routes</strong> to the same conclusion. A variable that smuggles a protected characteristic in through the back door in this way is called a <strong>proxy variable</strong>.<br><br>
-        <strong>Note:</strong> In this lab the proxy variable is intentionally fairly obvious. In reality it can be much harder to detect which variables are acting as proxies.
+      <div class="concept-footer">
+        <span class="cf-label">Concepts</span>
+        <span class="g-tag" onclick="openConcept('bias', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M8 20h8"/><path d="M12 6L5 8.5M12 6l7 4"/><circle cx="5" cy="9.5" r="2.2"/><circle cx="19" cy="11" r="2.2"/></svg>Bias</span>
+        <span class="g-tag" onclick="openConcept('skydd', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>Protected characteristic</span>
+        <span class="g-tag" onclick="openConcept('proxy', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3.2" stroke-dasharray="2 2"/><circle cx="18" cy="12" r="3.2"/><path d="M9.5 12h5M13 9.5l1.5 2.5-1.5 2.5"/></svg>Proxy variable</span>
+        <span class="g-tag" onclick="openConcept('direkt', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="14" r="3"/><circle cx="17" cy="14" r="3"/><path d="M5 6l2 2 3-3M15 5l4 4"/></svg>Direct discrimination</span>
+        <span class="g-tag" onclick="openConcept('indirekt', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-6 8v6l-4 2v-8L4 4z"/></svg>Indirect discrimination</span>
+        <span class="g-tag" onclick="openConcept('gap', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M8 20h8"/><path d="M12 7L5 9M12 7l7 2"/><circle cx="5" cy="9" r="2.2"/><circle cx="19" cy="9" r="2.2"/></svg>Fairness metric</span>
+        <span class="g-tag" onclick="openConcept('amazon', event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v14a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/><path d="M4 8h16M8 4v4"/></svg>The Amazon case</span>
       </div>
+      <div class="reset-link" onclick="resetLab()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg> Start over from the beginning</div>
     </div>
   </div>
 </div>
 
-<div class="train-msg" id="trainMsg"><div class="ti">🧠</div><div class="tt">Training the model…</div><div class="ts" id="trainStat">Epoch 0</div></div>
-
 <div class="data-modal" id="dataModal">
   <div class="data-modal-card">
-    <div class="data-modal-hd"><h3>📋 Training data – Technova Inc. history</h3><button class="data-modal-close" onclick="closeDataModal()">✕ Close</button></div>
-    <div class="data-modal-info">Red rows = people who <strong>were suitable but were not hired</strong>. Because the data is constructed for the lab we know the "true suitability" – <strong>in reality no such ground truth exists</strong>, and that is precisely what makes the problem so hard to spot.</div>
+    <div class="data-modal-hd"><h3>📋 The training data – Teknova AB's history</h3><button class="data-modal-close" onclick="closeDataModal()">✕ Close</button></div>
+    <div class="data-modal-info">Rows highlighted in red = people who <strong>were qualified but not hired</strong>. Because the data is constructed for this lab, we know the "true suitability" – <strong>in reality no such ground truth exists</strong>, which is exactly what makes the problem hard to detect.</div>
     <div class="data-modal-scroll" id="dataModalContent"></div>
   </div>
 </div>
 
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
-    <h2>The <span>Bias</span> Lab</h2>
-    <p class="sub">An AI learns from data. But what happens when that data reflects historical injustices? Here you get to see first-hand how discrimination can creep into an AI system.</p>
-    <p class="sub">In 2018 Amazon was forced to scrap an AI recruitment tool that had learned to downgrade women's CVs. In this lab you build a similar model for the fictional company <strong>Technova Inc.</strong> and investigate how it could happen. Technova trains its AI on its own past hiring decisions, but historically men were hired far more often than women despite equivalent qualifications.</p>
+    <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M7 21h10"/><path d="M12 6L4 8.5M12 6l8 2.5"/><circle cx="4" cy="9" r="2"/><circle cx="20" cy="9.5" r="2"/></svg></div>
+    <h2>The Bias Lab</h2>
+    <p class="sub">An AI learns from data. But what happens when the data reflects old injustices? Here you'll carry out the investigation yourself – step by step – and see how discrimination can creep into an AI system.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Train and inspect</strong> – Let the model learn from the historical data. Then see what it has learned, how it evaluates new applicants, and what it answers when given two identical CVs that differ only in gender.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Try to fix it</strong> – Hide the applicants' gender from the model and investigate whether that is enough to make it fair.</div></div>
+      <div class="step"><div class="step-num">01</div><div><strong>Train and review</strong> – Let the model learn from the history. Then see what it has learned, how it judges new applicants, and how it responds to two identical CVs where only gender differs.</div></div>
+      <div class="step"><div class="step-num">02</div><div><strong>Try to fix it</strong> – Go back, hide the applicants' gender from the model, and investigate whether that's enough to make it fair.</div></div>
     </div>
-    <p class="sub" style="margin-bottom:0;">💡 All data in the lab is fictional, but this type of bias occurs in real AI systems.</p>
-    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Get started →</button>
+    <p class="sub" style="margin-bottom:0;">💡 All the data in this lab is made up, but this type of bias occurs in real AI systems.</p>
+    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
+</div>
+
+<div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
+<div class="concept-card" id="conceptCard">
+  <div class="concept-card-inner" id="conceptCardInner">
+    <button class="concept-close" onclick="closeConcept()">✕</button>
+    <div class="concept-icon" id="conceptIcon"></div>
+    <div class="concept-title" id="conceptTitle"></div>
+    <div class="concept-def" id="conceptDef"></div>
+    <div class="concept-illus" id="conceptIllus"></div>
+  </div>
+</div>
+
+<div class="concept-backdrop" id="revealBackdrop" onclick="closeFairnessReveal()"></div>
+<div class="concept-card" id="revealCard" style="width:380px;">
+  <div class="concept-card-inner gold-frame" id="revealCardInner">
+    <button class="concept-close" onclick="closeFairnessReveal()">✕</button>
+    <div class="concept-icon gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M7 21h10"/><path d="M12 6L4 8.5M12 6l8 2.5"/><circle cx="4" cy="9" r="2"/><circle cx="20" cy="9.5" r="2"/></svg></div>
+    <div class="concept-title" style="color:var(--gold)">The Fairness Test</div>
+    <div class="concept-def">240 new applicants with identical merit distributions were run through the newly trained model.</div>
+    <div class="fair-big" style="margin-bottom:16px;">
+      <div class="fbar k"><span class="fwho">Women</span><div class="ftrack"><div class="ffill" id="revealFillK" style="width:0%"></div></div><span class="fval" id="revealValK" style="color:var(--kvinna)">0%</span></div>
+      <div class="fbar m"><span class="fwho">Men</span><div class="ftrack"><div class="ffill" id="revealFillM" style="width:0%"></div></div><span class="fval" id="revealValM" style="color:var(--man)">0%</span></div>
+    </div>
+    <div class="concept-def" id="revealVerdict"></div>
+    <button class="overlay-btn gold" onclick="closeFairnessReveal()">Continue reviewing the results <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 </div>
 
@@ -382,12 +574,13 @@ let useKon = true, useLucka = true, dataMode = 'hist';
 let model = null;
 let expCount = 0;
 let twinVals = {utb: 7, erf: 5, luckaA: 0, luckaB: 0};
+let currentAct = 1, maxActReached = 1;
 
 const FEATDEFS = [
-  {key: 'utb',   label: 'Education score',   get: p => p.utb / 10},
-  {key: 'erf',   label: 'Work experience',   get: p => p.erf / 10},
-  {key: 'kon',   label: 'Gender (female=1)', get: p => p.kvinna ? 1 : 0},
-  {key: 'lucka', label: 'CV gap',            get: p => p.lucka / 3},
+  {key: 'utb',   label: 'Education score',    get: p => p.utb / 10},
+  {key: 'erf',   label: 'Work experience',    get: p => p.erf / 10},
+  {key: 'kon',   label: 'Gender is "woman"',  get: p => p.kvinna ? 1 : 0},
+  {key: 'lucka', label: 'Gap in CV',          get: p => p.lucka / 3},
 ];
 
 function activeFeats(){
@@ -427,121 +620,356 @@ function trainEpoch(m, X, y, lr){
   return loss / n;
 }
 
-function train(){
+function buildModel(){
   const feats = activeFeats();
   const rnd = mulberry32(7);
-  const m = {
-    w: feats.map(() => (rnd() - 0.5) * 0.1),
-    b: 0,
-    feats,
-    dataMode,
-    useKon, useLucka,
-  };
+  const m = { w: feats.map(() => (rnd() - 0.5) * 0.1), b: 0, feats, dataMode, useKon, useLucka };
   const X = TRAIN.map(p => feats.map(f => f.get(p)));
   const y = TRAIN.map(p => label(p, dataMode));
-
-  const msg = document.getElementById('trainMsg');
-  const stat = document.getElementById('trainStat');
-  msg.classList.add('show');
-
-  const MAX_EPOCHS = 600, PER_TICK = 12;
-  let epoch = 0, loss = 0;
-  const timer = setInterval(() => {
-    for(let i = 0; i < PER_TICK && epoch < MAX_EPOCHS; i++, epoch++){
-      loss = trainEpoch(m, X, y, 2.2);
-    }
-    stat.textContent = `Epoch ${epoch} / ${MAX_EPOCHS} — loss ${loss.toFixed(3)}`;
-    if(epoch >= MAX_EPOCHS){
-      clearInterval(timer);
-      setTimeout(() => msg.classList.remove('show'), 280);
-      model = m;
-      expCount++;
-      document.getElementById('staleNote').classList.remove('show');
-      renderAll();
-    }
-  }, 16);
+  const MAX_EPOCHS = 600;
+  for(let e = 0; e < MAX_EPOCHS; e++) trainEpoch(m, X, y, 2.2);
+  return m;
 }
 
 function evaluate(m){
-  const g = {
-    k: {n: 0, rec: 0, lampliga: 0, missade: 0},
-    m: {n: 0, rec: 0, lampliga: 0, missade: 0},
-  };
+  const g = { k: {n:0,rec:0,lampliga:0,missade:0}, m: {n:0,rec:0,lampliga:0,missade:0} };
   let correct = 0;
   for(const p of TEST){
     const s = p.kvinna ? g.k : g.m;
     const yes = predict(m, p) >= 0.5;
     s.n++;
     if(yes) s.rec++;
-    if(p.lamplig){
-      s.lampliga++;
-      if(!yes) s.missade++;
-    }
+    if(p.lamplig){ s.lampliga++; if(!yes) s.missade++; }
     if(yes === p.lamplig) correct++;
   }
   const pK = g.k.rec / g.k.n, pM = g.m.rec / g.m.n;
-  return {
-    pK, pM,
-    gap: Math.abs(pM - pK) * 100,
-    acc: correct / TEST.length * 100,
-    missK: g.k.missade, lampK: g.k.lampliga,
-    missM: g.m.missade, lampM: g.m.lampliga,
-  };
+  return { pK, pM, gap: Math.abs(pM - pK) * 100, acc: correct / TEST.length * 100,
+    missK: g.k.missade, lampK: g.k.lampliga, missM: g.m.missade, lampM: g.m.lampliga };
 }
 
 function pct(x){ return Math.round(x * 100) + '%'; }
 function avg(arr, fn){ return arr.reduce((a, p) => a + fn(p), 0) / arr.length; }
 
+/* ── Act navigation & wizard ── */
+const ACT_PHASE = {1:1, 2:1, 3:2, 4:3};   // which wizard phase each act maps to
+function updateWizard(){
+  const phase = model ? 4 : ACT_PHASE[currentAct];
+  for(let i=1;i<=4;i++){
+    const step=document.getElementById('wz'+i);
+    step.classList.remove('active','done');
+    if(i<phase) step.classList.add('done');
+    else if(i===phase) step.classList.add('active');
+  }
+  document.getElementById('wzl1').classList.toggle('fill', phase>1);
+  document.getElementById('wzl2').classList.toggle('fill', phase>2);
+  document.getElementById('wzl3').classList.toggle('fill', phase>3);
+}
+
+function actSummary(n){
+  if(n===1){
+    return `<b>${dataMode==='fair'?'⚖️ Fair data':'📜 Historical data'}</b> · 300 applications (110 women, 190 men)`;
+  }
+  if(n===2){
+    const seen=['Education','Experience'];
+    if(useKon) seen.push('Gender'); if(useLucka) seen.push('CV gap');
+    const hidden=[]; if(!useKon) hidden.push('Gender'); if(!useLucka) hidden.push('CV gap');
+    return `AI sees: <b>${seen.join(', ')}</b>${hidden.length?` · hidden: <b>${hidden.join(', ')}</b>`:''}`;
+  }
+  if(n===3){
+    return `The model is <b>fully trained</b> on ${TRAIN.length} examples`;
+  }
+  return '';
+}
+const ACT_LABELS={1:'Step 1 · Training data',2:'Step 2 · Inputs',3:'Step 3 · Training'};
+
+function renderReceipts(){
+  const wrap=document.getElementById('receipts');
+  let h='';
+  for(let n=1;n<currentAct;n++){
+    if(n===3 && !model) continue;
+    h+=`<div class="receipt" onclick="goToAct(${n})">
+      <div class="receipt-check">✓</div>
+      <div class="receipt-body">
+        <div class="receipt-label">${ACT_LABELS[n]}</div>
+        <div class="receipt-summary">${actSummary(n)}</div>
+      </div>
+      <div class="receipt-edit">Edit ›</div>
+    </div>`;
+  }
+  wrap.innerHTML=h;
+}
+
+function goToAct(n){
+  currentAct=n;
+  maxActReached=Math.max(maxActReached,n);
+  for(let i=1;i<=4;i++){
+    document.getElementById('act'+i).style.display = (i===n)?'':'none';
+  }
+  renderReceipts();
+  updateWizard();
+  // always resolve act 3 to a clean, correct view when (re)entering it —
+  // either the idle "train" button, or a "done" state if a model already exists
+  if(n===3){
+    document.getElementById('trainStage').style.display='none';
+    document.getElementById('trainIdle').style.display='';
+    renderTrainIdle();
+  }
+  document.getElementById('act'+n).scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ── Act 3: living training canvas ── */
+let trainAnimRunning=false;
+function runTrainingCanvas(onDone){
+  const canvas=document.getElementById('trainCanvas');
+  const wrap=canvas.parentElement;
+  const dpr=Math.min(2,window.devicePixelRatio||1);
+  let W=wrap.clientWidth, H=wrap.clientHeight;
+  if(W<10||H<10){ W=Math.max(W,480); H=Math.max(H,180); }   // fallback if measured while hidden
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  const ctx=canvas.getContext('2d'); ctx.scale(dpr,dpr);
+
+  let finished=false;
+  function finish(){ if(finished) return; finished=true; trainAnimRunning=false; onDone && onDone(); }
+
+  // network node layout: input(3) -> hidden(2) -> output(1)
+  const inX=W*0.16, hidX=W*0.5, outX=W*0.84;
+  const inY=[H*0.3,H*0.5,H*0.7], hidY=[H*0.38,H*0.62], outY=[H*0.5];
+  const nodes={in:inX,hid:hidX,out:outX};
+
+  // pre-bias the outcome slightly toward the majority group when data is skewed & gender visible
+  const r=evaluate(buildModelPreview());
+  const skew = r.gap;   // percentage points
+
+  let particles=[];
+  let tStart=performance.now();
+  const DURATION=3400;
+  let lastSpawn=0;
+  const KV='#c084fc', MN='#4d80ff';
+
+  function spawn(now){
+    const kvinna=Math.random()<0.42;
+    particles.push({
+      kvinna, x:0, y:inY[Math.floor(Math.random()*3)],
+      born:now, stage:0, targetIn:Math.floor(Math.random()*3),
+      targetHid:Math.floor(Math.random()*2), outcome:null, speed:0.55+Math.random()*0.35
+    });
+  }
+
+  function draw(now){
+    const elapsed=now-tStart;
+    ctx.clearRect(0,0,W,H);
+
+    // edges
+    ctx.lineWidth=1.4;
+    for(let i=0;i<3;i++)for(let j=0;j<2;j++){
+      ctx.strokeStyle='rgba(122,162,255,0.10)';
+      ctx.beginPath();ctx.moveTo(inX,inY[i]);ctx.lineTo(hidX,hidY[j]);ctx.stroke();
+    }
+    for(let j=0;j<2;j++){
+      ctx.strokeStyle='rgba(122,162,255,0.10)';
+      ctx.beginPath();ctx.moveTo(hidX,hidY[j]);ctx.lineTo(outX,outY[0]);ctx.stroke();
+    }
+
+    // nodes
+    function node(x,y,rad,glow){
+      ctx.save();
+      ctx.shadowColor='rgba(122,162,255,'+glow+')';ctx.shadowBlur=14*glow;
+      ctx.fillStyle='rgba(20,26,48,0.95)';ctx.strokeStyle='rgba(122,162,255,0.5)';ctx.lineWidth=1.6;
+      ctx.beginPath();ctx.arc(x,y,rad,0,Math.PI*2);ctx.fill();ctx.stroke();
+      ctx.restore();
+    }
+    const pulse=0.4+0.3*Math.sin(now/300);
+    inY.forEach(y=>node(inX,y,9,pulse));
+    hidY.forEach(y=>node(hidX,y,11,pulse));
+    node(outX,outY[0],13,0.6+0.4*Math.sin(now/240));
+
+    // spawn
+    if(elapsed<DURATION-900 && now-lastSpawn>120){ spawn(now); lastSpawn=now; }
+
+    // particles
+    particles=particles.filter(p=>{
+      const age=(now-p.born)*0.001*p.speed;
+      let px,py,alpha=1,col=p.kvinna?KV:MN;
+      if(age<1){ // input -> hidden
+        const t=age; const sx=inX,sy=inY[p.targetIn],ex=hidX,ey=hidY[p.targetHid];
+        px=sx+(ex-sx)*t; py=sy+(ey-sy)*t; p.stage=0;
+      } else if(age<2){ // hidden -> output
+        const t=age-1; const sx=hidX,sy=hidY[p.targetHid],ex=outX,ey=outY[0];
+        px=sx+(ex-sx)*t; py=sy+(ey-sy)*t; p.stage=1;
+      } else if(age<3){ // output -> verdict
+        const t=age-2;
+        if(p.outcome===null){
+          // skew acceptance by group when biased
+          let baseAcc=0.55;
+          if(skew>12) baseAcc = p.kvinna?0.32:0.72;
+          else if(skew>5) baseAcc = p.kvinna?0.45:0.62;
+          p.outcome=Math.random()<baseAcc;
+        }
+        const sx=outX,sy=outY[0],ex=W-14,ey=p.outcome?H*0.3:H*0.72;
+        px=sx+(ex-sx)*t; py=sy+(ey-sy)*t; p.stage=2;
+        col=p.outcome?'#34c759':'#ef5b5b';
+      } else {
+        return false;
+      }
+      ctx.save();
+      ctx.globalAlpha=alpha;
+      ctx.shadowColor=col;ctx.shadowBlur=8;
+      ctx.fillStyle=col;
+      ctx.beginPath();ctx.arc(px,py,p.stage===2?4.5:3.5,0,Math.PI*2);ctx.fill();
+      ctx.restore();
+      return true;
+    });
+
+    // verdict labels
+    ctx.font='600 11px "DM Sans"';ctx.textAlign='center';
+    ctx.fillStyle='rgba(52,199,89,0.5)';ctx.fillText('✓', W-14, H*0.3-10);
+    ctx.fillStyle='rgba(239,91,91,0.5)';ctx.fillText('✕', W-14, H*0.72+16);
+
+    if(elapsed<DURATION || particles.length){
+      requestAnimationFrame(draw);
+    } else {
+      finish();
+    }
+  }
+  trainAnimRunning=true;
+  requestAnimationFrame(draw);
+  // hard safety net: never let the training hang
+  setTimeout(finish, DURATION+1200);
+}
+
+// preview model for canvas skew (doesn't touch global model)
+function buildModelPreview(){ return buildModel(); }
+
+const TRAIN_STATUS=[
+  {t:'Reading the dataset…', at:0},
+  {t:'Learning patterns…', at:0.28},
+  {t:'Identifying correlations…', at:0.55},
+  {t:'Optimizing the model…', at:0.8},
+];
+
+function renderTrainIdle(){
+  const wrap = document.getElementById('trainIdle');
+  if(model){
+    wrap.innerHTML = `
+      <div class="train-done-wrap">
+        <button class="train-cta done" onclick="goToAct(4)">
+          <span class="train-cta-icon">✓</span>
+          <span class="train-cta-text">The model is trained — view results</span>
+        </button>
+        <div class="retrain-link" onclick="startTraining()">↺ Retrain the model</div>
+      </div>`;
+  }else{
+    wrap.innerHTML = `
+      <button class="train-cta idle" id="trainCta" onclick="startTraining()">
+        <span class="train-cta-icon" id="trainCtaIcon">🧠</span>
+        <span class="train-cta-text" id="trainCtaText">Train the model</span>
+      </button>`;
+  }
+}
+
+function startTraining(){
+  if(trainAnimRunning) return;
+  document.getElementById('trainIdle').style.display='none';
+  const stage=document.getElementById('trainStage');
+  stage.style.display='flex';
+  const statusWrap=document.getElementById('trainStatus');
+  statusWrap.innerHTML='';
+  const rail=document.getElementById('trainRail');
+  rail.style.width='0%';
+
+  const lines=TRAIN_STATUS.map(s=>{
+    const el=document.createElement('div');
+    el.className='train-status-line';
+    el.innerHTML=`<span class="tsl-dot"></span><span>${s.t}</span>`;
+    statusWrap.appendChild(el);
+    return el;
+  });
+
+  const DURATION=3400;
+  const t0=performance.now();
+  function progress(now){
+    const frac=Math.min(1,(now-t0)/DURATION);
+    rail.style.width=(frac*100)+'%';
+    TRAIN_STATUS.forEach((s,i)=>{
+      if(frac>=s.at){
+        if(!lines[i].classList.contains('show')) lines[i].classList.add('show');
+        // mark previous as done
+        if(i>0 && !lines[i-1].classList.contains('done')){
+          lines[i-1].classList.add('done');
+          lines[i-1].querySelector('span:last-child').innerHTML=TRAIN_STATUS[i-1].t.replace('…','')+' <span class="tsl-check">✓</span>';
+        }
+      }
+    });
+    if(frac<1) requestAnimationFrame(progress);
+    else{
+      const last=lines[lines.length-1];
+      last.classList.add('done');
+      last.querySelector('span:last-child').innerHTML=TRAIN_STATUS[TRAIN_STATUS.length-1].t.replace('…','')+' <span class="tsl-check">✓</span>';
+    }
+  }
+  requestAnimationFrame(progress);
+
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    runTrainingCanvas(()=>{
+      // build the real model synchronously and reveal act 4
+      model = buildModel();
+      expCount++;
+      setTimeout(()=>{
+        currentAct=4; maxActReached=4;
+        goToAct(4);
+        renderAll();
+        setTimeout(()=>{
+          renderFairnessReveal();
+          showFairnessReveal();
+        }, 450);
+      }, 550);
+    });
+  }));
+}
+
+/* ── Render: data stats (Act 1) ── */
 function renderDataStats(){
   const K = TRAIN.filter(p => p.kvinna), M = TRAIN.filter(p => !p.kvinna);
   const hireFn = dataMode === 'fair' ? (p => p.lamplig ? 1 : 0) : (p => p.anstalld ? 1 : 0);
 
   if(!useKon){
     document.getElementById('gstat').innerHTML =
-      `<div class="gstat-neutral">🚫 The model no longer sees <strong>gender</strong>, so groups cannot be compared here.<br><br>
-       It still has access to <strong>education, experience${useLucka ? ' and CV gap' : ''}</strong>. Retrain and check <strong>"Model's learned weights"</strong> to see what it now focuses on.</div>`;
+      `<div class="gstat-neutral">🚫 The model no longer sees <strong>gender</strong>, so the groups can't be compared here.<br><br>
+       It still has access to <strong>education, experience${useLucka ? ' and CV gap' : ''}</strong>. Retrain and check <strong>"The model's learned weights"</strong> to see what it weighs instead.</div>`;
   }else{
     const rows = [
-      {lab: 'Avg. education score (0–10)', k: avg(K, p => p.utb), m: avg(M, p => p.utb), max: 10, fmt: v => v.toFixed(1)},
-      {lab: 'Avg. experience, yrs (0–10)', k: avg(K, p => p.erf), m: avg(M, p => p.erf), max: 10, fmt: v => v.toFixed(1)},
-      {lab: 'Share with CV gap',           k: avg(K, p => p.lucka > 0 ? 1 : 0), m: avg(M, p => p.lucka > 0 ? 1 : 0), max: 1, fmt: pct},
-      {lab: dataMode === 'fair' ? 'Share hired (fair data)' : 'Share hired (historical)',
-       k: avg(K, hireFn), m: avg(M, hireFn), max: 1, fmt: pct, key: true},
+      {lab:'Average education score (0–10)', k:avg(K,p=>p.utb), m:avg(M,p=>p.utb), max:10, fmt:v=>v.toFixed(1)},
+      {lab:'Average experience, years (0–10)',   k:avg(K,p=>p.erf), m:avg(M,p=>p.erf), max:10, fmt:v=>v.toFixed(1)},
+      {lab:'Share with a CV gap',       k:avg(K,p=>p.lucka>0?1:0), m:avg(M,p=>p.lucka>0?1:0), max:1, fmt:pct},
+      {lab: dataMode==='fair'?'Share hired (fair data)':'Share hired (history)',
+       k:avg(K,hireFn), m:avg(M,hireFn), max:1, fmt:pct},
     ];
-    let h = '';
+    let h='';
     for(const r of rows){
-      h += `<div class="gstat-row">
+      h+=`<div class="gstat-row">
         <div class="gstat-label">${r.lab}</div>
         <div class="gbars">
-          <div class="gbar k"><span class="gwho">W</span><div class="gtrack"><div class="gfill" style="width:${(r.k / r.max * 100).toFixed(1)}%"></div></div><span class="gval">${r.fmt(r.k)}</span></div>
-          <div class="gbar m"><span class="gwho">M</span><div class="gtrack"><div class="gfill" style="width:${(r.m / r.max * 100).toFixed(1)}%"></div></div><span class="gval">${r.fmt(r.m)}</span></div>
+          <div class="gbar k"><span class="gwho">W</span><div class="gtrack"><div class="gfill" style="width:${(r.k/r.max*100).toFixed(1)}%"></div></div><span class="gval">${r.fmt(r.k)}</span></div>
+          <div class="gbar m"><span class="gwho">M</span><div class="gtrack"><div class="gfill" style="width:${(r.m/r.max*100).toFixed(1)}%"></div></div><span class="gval">${r.fmt(r.m)}</span></div>
         </div></div>`;
     }
-    document.getElementById('gstat').innerHTML = h;
+    document.getElementById('gstat').innerHTML=h;
   }
 
-  const hK = pct(avg(K, p => p.anstalld ? 1 : 0)), hM = pct(avg(M, p => p.anstalld ? 1 : 0));
-  const lead = document.getElementById('dataLead');
-  if(dataMode === 'hist'){
-    let txt = `Here are <strong>Technova's past hiring decisions</strong> – the data the model will train on. Women and men have equivalent qualifications, but historically ${hK} of women were hired compared to ${hM} of men. That bias is what the model will learn.`;
-    if(!useKon && !useLucka){
-      txt += `<br><br>🚫 The model will see <strong>neither gender nor CV gap</strong> during training – only education and experience.`;
-    }else if(!useKon){
-      txt += `<br><br>🚫 You have hidden <strong>gender</strong>: the model will no longer see whether an applicant is a woman or a man during training. Is that enough to make it fair?`;
-    }else if(!useLucka){
-      txt += `<br><br>🚫 You have hidden <strong>CV gap</strong>: the model will no longer see it during training.`;
-    }
-    lead.innerHTML = txt;
+  const hK=pct(avg(K,p=>p.anstalld?1:0)), hM=pct(avg(M,p=>p.anstalld?1:0));
+  const lead=document.getElementById('dataLead');
+  if(dataMode==='hist'){
+    let txt=`Here are <strong>Teknova's past hiring decisions</strong> – the data the model will be trained on. Women and men have comparable qualifications, but historically ${hK} of the women were hired versus ${hM} of the men. That's the bias the model is about to learn.`;
+    if(!useKon && !useLucka) txt+=`<br><br>🚫 The model can't see <strong>either the applicants' gender or their CV gap</strong> during training – only education and experience.`;
+    else if(!useKon) txt+=`<br><br>🚫 You've hidden <strong>gender</strong>: the model can no longer see whether an applicant is a woman or a man. Is that enough to make it fair?`;
+    else if(!useLucka) txt+=`<br><br>🚫 You've hidden <strong>the CV gap</strong>: the model no longer sees it during training.`;
+    lead.innerHTML=txt;
   }else{
-    let txt = `<strong>⚖️ Fair training data selected:</strong> the model now trains on who was <strong>genuinely suitable</strong> based on qualifications, instead of on historical decisions. (In reality such ground truth rarely exists – that is the whole problem.)`;
-    if(!useKon && !useLucka){
-      txt += `<br><br>🚫 Furthermore, the model can see neither <strong>gender nor CV gap</strong> during training.`;
-    }else if(!useKon){
-      txt += `<br><br>🚫 Furthermore, you have hidden <strong>gender</strong> from the model.`;
-    }else if(!useLucka){
-      txt += `<br><br>🚫 Furthermore, you have hidden <strong>CV gap</strong> from the model.`;
-    }
-    lead.innerHTML = txt;
+    let txt=`<strong>⚖️ Fair training data selected:</strong> the model is now trained on who was <strong>actually qualified</strong> based on merit, instead of on the historical decisions. (In reality, such ground truth rarely exists – that's the whole problem.)`;
+    if(!useKon && !useLucka) txt+=`<br><br>🚫 In addition, the model can't see <strong>gender or CV gap</strong>.`;
+    else if(!useKon) txt+=`<br><br>🚫 You've also hidden <strong>gender</strong> from the model.`;
+    else if(!useLucka) txt+=`<br><br>🚫 You've also hidden <strong>the CV gap</strong> from the model.`;
+    lead.innerHTML=txt;
   }
 }
 
@@ -563,62 +991,150 @@ function weightsHTML(){
       <div class="wval ${w >= 0 ? 'pos' : 'neg'}">${(w >= 0 ? '+' : '') + w.toFixed(2)}</div>
     </div>`;
   }
-  if(m.useKon){
-    h += `<div class="hint" style="margin-top:8px;">Gender is encoded as <strong>female = 1, male = 0</strong>. A negative weight for gender therefore means the model reduces the chances for women.</div>`;
-  }
   return h;
+}
+
+function animateCount(el, from, to, duration, fmt){
+  fmt = fmt || (v => Math.round(v) + '%');
+  const start = performance.now();
+  function tick(now){
+    const t = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - t, 3);
+    el.textContent = fmt(from + (to - from) * eased);
+    if(t < 1) requestAnimationFrame(tick);
+    else el.textContent = fmt(to);
+  }
+  requestAnimationFrame(tick);
 }
 
 function renderFairness(){
   const r = evaluate(model);
-  let vCls, vTxt;
-  if(r.gap > 15){ vCls = 'bad';  vTxt = `🚨 Large gap: men are recommended much more often than women.`; }
-  else if(r.gap > 5){ vCls = 'warn'; vTxt = `⚠️ The gap has narrowed but persists. Where is it coming from?`; }
-  else { vCls = 'ok'; vTxt = `✅ The groups are now treated roughly equally.`; }
+  let vEmoji, vTxt;
+  if(r.gap > 15){ vEmoji='🚨'; vTxt=`Large gap: men are recommended far more often than women.`; }
+  else if(r.gap > 5){ vEmoji='⚠️'; vTxt=`The gap has shrunk but remains. Where does it come from?`; }
+  else { vEmoji='✅'; vTxt=`The groups are now treated roughly equally.`; }
+  const gapColor = r.gap > 15 ? '#ef5b5b' : r.gap > 5 ? '#ffce54' : '#34c759';
 
   document.getElementById('fairArea').innerHTML = `
-    <div class="sec-t" style="margin-bottom:7px;">Share recommended for hire</div>
+    <div class="sec-t" style="margin-bottom:2px;">Share recommended for hiring</div>
     <div class="fair-big">
-      <div class="fbar k"><span class="fwho">Women</span><div class="ftrack"><div class="ffill" style="width:${(r.pK * 100).toFixed(1)}%"></div></div><span class="fval" style="color:var(--kvinna)">${pct(r.pK)}</span></div>
-      <div class="fbar m"><span class="fwho">Men</span><div class="ftrack"><div class="ffill" style="width:${(r.pM * 100).toFixed(1)}%"></div></div><span class="fval" style="color:var(--man)">${pct(r.pM)}</span></div>
+      <div class="fbar k"><span class="fwho">Women</span><div class="ftrack"><div class="ffill" id="ffillK" style="width:0%"></div></div><span class="fval" id="fvalK" style="color:var(--kvinna)">0%</span></div>
+      <div class="fbar m"><span class="fwho">Men</span><div class="ftrack"><div class="ffill" id="ffillM" style="width:0%"></div></div><span class="fval" id="fvalM" style="color:var(--man)">0%</span></div>
     </div>
-    <div style="height:9px"></div>
-    <div class="verdict ${vCls}">${vTxt}</div>
-    <details class="more" style="margin-top:10px;"><summary>Show more details</summary>
-      <div class="fstats" style="margin-top:8px;grid-template-columns:1fr;">
-        <div class="fbox"><div class="fl">Gap between groups</div><div class="fv" style="color:${r.gap > 15 ? 'var(--red)' : r.gap > 5 ? 'var(--gold)' : 'var(--green)'}">${r.gap.toFixed(0)} percentage points</div></div>
-      </div>
-      <div class="fstats" style="margin-top:6px;">
-        <div class="fbox"><div class="fl">Missed talent – women</div><div class="fv" style="color:var(--kvinna)">${r.missK} of ${r.lampK}</div></div>
-        <div class="fbox"><div class="fl">Missed talent – men</div><div class="fv" style="color:var(--man)">${r.missM} of ${r.lampM}</div></div>
-      </div>
-      <div class="hint" style="margin-top:6px;">"Missed talent" = genuinely suitable applicants the model still rejects. The bias is not just unfair – the company loses out on capable people.</div>
-    </details>`;
+    <span class="g-tag" onclick="openConcept('fairnessDetail', event)" style="align-self:flex-start;margin-top:4px;">
+      <svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      Show more details
+    </span>`;
+
+  CONCEPTS.fairnessDetail = {
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>',
+    title:'The fairness test in detail',
+    def:`<strong>${vEmoji} ${vTxt}</strong><br><br>
+      The gap between the groups is <strong style="color:${gapColor}">${r.gap.toFixed(0)} percentage points</strong>.<br><br>
+      Missed talent – women: <strong>${r.missK} of ${r.lampK}</strong><br>
+      Missed talent – men: <strong>${r.missM} of ${r.lampM}</strong><br><br>
+      Missed talent means genuinely qualified applicants the model rejects anyway.`,
+    illus:`<svg viewBox="0 0 140 70"><line x1="10" y1="58" x2="130" y2="58" stroke="rgba(255,255,255,.12)"/>
+      <rect x="35" y="${58-Math.max(4,r.pK*44)}" width="22" height="${Math.max(4,r.pK*44)}" rx="3" fill="rgba(192,132,252,.25)" stroke="#c084fc" stroke-width="1.5"/>
+      <rect x="83" y="${58-Math.max(4,r.pM*44)}" width="22" height="${Math.max(4,r.pM*44)}" rx="3" fill="rgba(77,128,255,.25)" stroke="#4d80ff" stroke-width="1.5"/>
+      <text x="46" y="${58-Math.max(4,r.pK*44)-4}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#c084fc" font-weight="700">${Math.round(r.pK*100)}%</text>
+      <text x="94" y="${58-Math.max(4,r.pM*44)-4}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#4d80ff" font-weight="700">${Math.round(r.pM*100)}%</text></svg>`
+  };
+
+  requestAnimationFrame(() => {
+    const fk=document.getElementById('ffillK'), fm=document.getElementById('ffillM');
+    fk.style.width=(r.pK*100).toFixed(1)+'%';
+    fm.style.width=(r.pM*100).toFixed(1)+'%';
+    animateCount(document.getElementById('fvalK'),0,r.pK*100,800,v=>Math.round(v)+'%');
+    animateCount(document.getElementById('fvalM'),0,r.pM*100,800,v=>Math.round(v)+'%');
+  });
   return r;
+}
+
+/* ── Fairness reveal: pops up as a glass card right after training, then
+   settles back down onto the hero card's spot in the results page when closed ── */
+function renderFairnessReveal(){
+  if(!model) return;
+  const r = evaluate(model);
+  let vEmoji, vTxt;
+  if(r.gap > 15){ vEmoji='🚨'; vTxt=`Large gap: men are recommended far more often than women.`; }
+  else if(r.gap > 5){ vEmoji='⚠️'; vTxt=`The gap has shrunk but remains. Where does it come from?`; }
+  else { vEmoji='✅'; vTxt=`The groups are now treated roughly equally.`; }
+  const gapColor = r.gap > 15 ? '#ef5b5b' : r.gap > 5 ? '#ffce54' : '#34c759';
+
+  document.getElementById('revealVerdict').innerHTML =
+    `<strong>${vEmoji} ${vTxt}</strong><br><br>The gap between the groups is <strong style="color:${gapColor}">${r.gap.toFixed(0)} percentage points</strong>.`;
+
+  const fk=document.getElementById('revealFillK'), fm=document.getElementById('revealFillM');
+  const vk=document.getElementById('revealValK'), vm=document.getElementById('revealValM');
+  fk.style.width='0%'; fm.style.width='0%'; vk.textContent='0%'; vm.textContent='0%';
+  requestAnimationFrame(()=>{
+    fk.style.width=(r.pK*100).toFixed(1)+'%';
+    fm.style.width=(r.pM*100).toFixed(1)+'%';
+    animateCount(vk,0,r.pK*100,800,v=>Math.round(v)+'%');
+    animateCount(vm,0,r.pM*100,800,v=>Math.round(v)+'%');
+  });
+}
+
+function showFairnessReveal(){
+  const target=document.getElementById('cardFair');
+  if(!target) return;
+  const r=target.getBoundingClientRect();
+  const bx=r.left+r.width/2, by=r.top+r.height/2;
+  const cx=window.innerWidth/2, cy=window.innerHeight/2;
+  const card=document.getElementById('revealCard');
+  card.classList.remove('show');
+  card.style.transition='none';
+  card.style.setProperty('--dx',(bx-cx)+'px');
+  card.style.setProperty('--dy',(by-cy)+'px');
+  void card.offsetHeight;
+  card.style.transition='';
+  document.getElementById('revealBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
+}
+function closeFairnessReveal(){
+  document.getElementById('revealCard').classList.remove('show');
+  document.getElementById('revealBackdrop').classList.remove('show');
 }
 
 function renderTwins(){
   const m = model;
   document.getElementById('twinArea').innerHTML = `
     <div class="twin-ctrl">
-      <div class="twin-row"><span>Education score</span><input type="range" min="0" max="10" step="1" value="${twinVals.utb}" oninput="twinVals.utb=+this.value;updateTwins()"><span class="tv" id="tvUtb">${twinVals.utb}</span></div>
-      <div class="twin-row"><span>Experience (years)</span><input type="range" min="0" max="10" step="1" value="${twinVals.erf}" oninput="twinVals.erf=+this.value;updateTwins()"><span class="tv" id="tvErf">${twinVals.erf}</span></div>
+      <div class="twin-row" id="twinRowUtb"><span>Education score</span><input type="range" min="0" max="10" step="1" value="${twinVals.utb}" oninput="twinVals.utb=+this.value;onTwinChange(['twinAnna','twinAdam'],'twinRowUtb')"><span class="tv" id="tvUtb">${twinVals.utb}</span></div>
+      <div class="twin-row" id="twinRowErf"><span>Experience (years)</span><input type="range" min="0" max="10" step="1" value="${twinVals.erf}" oninput="twinVals.erf=+this.value;onTwinChange(['twinAnna','twinAdam'],'twinRowErf')"><span class="tv" id="tvErf">${twinVals.erf}</span></div>
     </div>
     <div class="twins">
-      <div class="twin k">
-        <div class="tname">👩 Anna</div>
-        <div class="tcv">Education: <b id="annaUtb"></b> · Experience: <b id="annaErf"></b> yrs<br>Gender: <b>female</b></div>
-        <div class="tlucka">CV gap: <select onchange="twinVals.luckaA=+this.value;updateTwins()">${[0,1,2,3].map(v=>`<option value="${v}" ${v===twinVals.luckaA?'selected':''}>${v} yr${v!==1?'s':''}</option>`).join('')}</select></div>
-        <div class="tres"><span class="tscore" id="annaScore"></span><span class="tstamp" id="annaStamp"></span></div>
+      <div class="twin k" id="twinAnna">
+        <div class="twin-scan"></div>
+        <div class="twin-avatar">👩</div>
+        <div class="tname">Anna</div>
+        <div class="tstamp-wrap"><span class="tstamp" id="annaStamp"></span></div>
+        <div class="tcv">Education: <b id="annaUtb"></b> · Experience: <b id="annaErf"></b> yrs<br>Gender: <b>woman</b></div>
+        <div class="tlucka" id="twinRowLuckaA">CV gap: <select onchange="twinVals.luckaA=+this.value;onTwinChange(['twinAnna'],'twinRowLuckaA')">${[0,1,2,3].map(v=>`<option value="${v}" ${v===twinVals.luckaA?'selected':''}>${v} yrs</option>`).join('')}</select></div>
+        <div class="tstamp-wrap" style="margin-top:auto;padding-top:8px;border-top:1px solid var(--border);"><span class="tscore" id="annaScore"></span></div>
       </div>
-      <div class="twin m">
-        <div class="tname">👨 Adam</div>
-        <div class="tcv">Education: <b id="adamUtb"></b> · Experience: <b id="adamErf"></b> yrs<br>Gender: <b>male</b></div>
-        <div class="tlucka">CV gap: <select onchange="twinVals.luckaB=+this.value;updateTwins()">${[0,1,2,3].map(v=>`<option value="${v}" ${v===twinVals.luckaB?'selected':''}>${v} yr${v!==1?'s':''}</option>`).join('')}</select></div>
-        <div class="tres"><span class="tscore" id="adamScore"></span><span class="tstamp" id="adamStamp"></span></div>
+      <div class="twin m" id="twinAdam">
+        <div class="twin-scan"></div>
+        <div class="twin-avatar">👨</div>
+        <div class="tname">Adam</div>
+        <div class="tstamp-wrap"><span class="tstamp" id="adamStamp"></span></div>
+        <div class="tcv">Education: <b id="adamUtb"></b> · Experience: <b id="adamErf"></b> yrs<br>Gender: <b>man</b></div>
+        <div class="tlucka" id="twinRowLuckaB">CV gap: <select onchange="twinVals.luckaB=+this.value;onTwinChange(['twinAdam'],'twinRowLuckaB')">${[0,1,2,3].map(v=>`<option value="${v}" ${v===twinVals.luckaB?'selected':''}>${v} yrs</option>`).join('')}</select></div>
+        <div class="tstamp-wrap" style="margin-top:auto;padding-top:8px;border-top:1px solid var(--border);"><span class="tscore" id="adamScore"></span></div>
       </div>
     </div>
     <div class="twin-verdict" id="twinVerdict"></div>`;
+  updateTwins();
+}
+
+function onTwinChange(cardIds, rowId){
+  cardIds.forEach(id => {
+    const card = document.getElementById(id);
+    if(card){ card.classList.add('scanning'); setTimeout(() => card.classList.remove('scanning'), 700); }
+  });
+  const row = document.getElementById(rowId);
+  if(row){ row.classList.add('flash-row'); setTimeout(() => row.classList.remove('flash-row'), 500); }
   updateTwins();
 }
 
@@ -645,62 +1161,92 @@ function updateTwins(){
 
   if(diff < 0.005){
     v.className = 'twin-verdict';
-    v.innerHTML = `The twins receive <strong>the same assessment</strong>. ${m.useKon ? '' : 'Not surprising – the model does not see gender. But check the fairness test: can the groups still be treated differently through another variable?'}`;
+    v.innerHTML = `The twins get <strong>the same assessment</strong>. ${m.useKon ? '' : "Not surprising – the model can't see gender. But check the fairness test above: could the groups still be treated differently through another variable?"}`;
   }else if(sameLucka && m.useKon){
     v.className = 'twin-verdict flag';
-    v.innerHTML = `⚠️ <strong>Identical qualifications – different assessment.</strong> The only difference between Anna and Adam is gender${flips ? ', and that is enough to flip the answer' : ''}. This is called <strong>direct discrimination</strong>.`;
+    v.innerHTML = `⚠️ <strong>Identical qualifications – different assessment.</strong> The only thing that differs between Anna and Adam is gender${flips ? ", and that's enough to flip the outcome" : ''}. This is called <strong>direct discrimination</strong>.`;
   }else if(!sameLucka && !m.useKon){
     v.className = 'twin-verdict flag';
-    v.innerHTML = `⚠️ The model does not see gender – but it penalises the <strong>CV gap</strong>${flips ? ' so heavily that the answer flips' : ''}. Because the CV gap correlates so strongly with gender, the model effectively penalises women anyway – without ever seeing their gender. A variable that works this way is called a <strong>proxy variable</strong>, and the phenomenon is called <strong>indirect discrimination</strong>.`;
+    v.innerHTML = `⚠️ The model can't see gender – but it penalizes <strong>the CV gap</strong>${flips ? ' so heavily that the outcome flips' : ''}. Because the CV gap correlates so closely with gender, the model effectively penalizes women anyway – without ever seeing gender. A variable that works this way is called a <strong>proxy variable</strong>, and the phenomenon is called <strong>indirect discrimination</strong>.`;
   }else{
     v.className = 'twin-verdict flag';
-    v.innerHTML = `⚠️ The assessments differ. Consider: how much is due to gender and how much to the CV gap? Try making the gaps equal to isolate the effect of gender.`;
+    v.innerHTML = `⚠️ The assessments differ. Think about it: how much is due to gender and how much to the CV gap? Try making the gaps equal to isolate the effect of gender.`;
   }
 }
 
 function setTwinResult(who, p){
-  document.getElementById(who + 'Score').textContent = 'Chance of recommendation: ' + (p * 100).toFixed(0) + '%';
+  document.getElementById(who + 'Score').textContent = 'Chance of being recommended: ' + (p * 100).toFixed(0) + '%';
   const stamp = document.getElementById(who + 'Stamp');
   const yes = p >= 0.5;
-  stamp.textContent = yes ? 'YES ✓' : 'NO ✗';
-  stamp.className = 'tstamp ' + (yes ? 'ja' : 'nej');
+  stamp.textContent = yes ? 'Recommended' : 'Not recommended';
+  stamp.classList.remove('pop','ja','nej');
+  void stamp.offsetWidth;
+  stamp.classList.add(yes ? 'ja' : 'nej', 'pop');
 }
 
 function renderAll(){
   const mc = document.getElementById('modelChip');
   mc.innerHTML = modelChipHTML(model);
-  mc.style.display = 'block';
-  document.getElementById('awaitCard').style.display = 'none';
-  document.getElementById('cardFair').style.display = '';
-  document.getElementById('cardWeights').style.display = '';
-  document.getElementById('cardTwins').style.display = '';
+  ['cardFair','cardWeights','cardTwins'].forEach(id => document.getElementById(id).classList.remove('stale'));
   renderFairness();
   document.getElementById('weightsArea').innerHTML = weightsHTML();
   renderTwins();
+  updateWizard();
 }
 
+/* ── Variable / data changes ── */
 function toggleVar(key){
   if(key === 'kon'){ useKon = !useKon; document.getElementById('vtKon').classList.toggle('on', useKon); }
   if(key === 'lucka'){ useLucka = !useLucka; document.getElementById('vtLucka').classList.toggle('on', useLucka); }
+  invalidateModel();
   renderDataStats();
-  if(model) document.getElementById('staleNote').classList.add('show');
 }
 function onDataModeChange(v){
   dataMode = v;
+  document.getElementById('segHist').classList.toggle('on', v==='hist');
+  document.getElementById('segFair').classList.toggle('on', v==='fair');
+  invalidateModel();
   renderDataStats();
-  if(model) document.getElementById('staleNote').classList.add('show');
+}
+function invalidateModel(){
+  // changing inputs after training means the model must be retrained
+  if(model){
+    model = null;
+    // reset the training act back to its idle button
+    document.getElementById('trainIdle').style.display='';
+    document.getElementById('trainStage').style.display='none';
+    renderTrainIdle();
+    // if we were past training, drop back so the user re-trains
+    if(currentAct===4){ goToAct(3); }
+  }
+  updateWizard();
+  renderReceipts();
+}
+
+function resetLab(){
+  model=null; useKon=true; useLucka=true; dataMode='hist';
+  twinVals={utb:7,erf:5,luckaA:0,luckaB:0};
+  document.getElementById('segHist').classList.add('on');
+  document.getElementById('segFair').classList.remove('on');
+  document.getElementById('vtKon').classList.add('on');
+  document.getElementById('vtLucka').classList.add('on');
+  document.getElementById('trainIdle').style.display='';
+  document.getElementById('trainStage').style.display='none';
+  renderTrainIdle();
+  renderDataStats();
+  goToAct(1);
 }
 
 function openDataModal(){
   let h = `<table class="dtable"><thead><tr>
     <th>#</th><th>Gender</th><th>Edu.</th><th>Exp.</th><th>CV gap</th>
-    <th>Hired (historical)</th><th>Suitable (truth)</th></tr></thead><tbody>`;
+    <th>Hired (history)</th><th>Qualified (ground truth)</th></tr></thead><tbody>`;
   TRAIN.forEach((p, i) => {
     const missad = p.lamplig && !p.anstalld;
     h += `<tr class="${missad ? 'missad' : ''}">
       <td style="color:var(--dim)">${i + 1}</td>
-      <td class="${p.kvinna ? 'gk' : 'gm'}">${p.kvinna ? 'female' : 'male'}</td>
-      <td>${p.utb}</td><td>${p.erf}</td><td>${p.lucka} yr${p.lucka!==1?'s':''}</td>
+      <td class="${p.kvinna ? 'gk' : 'gm'}">${p.kvinna ? 'woman' : 'man'}</td>
+      <td>${p.utb}</td><td>${p.erf}</td><td>${p.lucka} yrs</td>
       <td class="${p.anstalld ? 'ja' : 'nej'}">${p.anstalld ? 'yes' : 'no'}</td>
       <td class="${p.lamplig ? 'ja' : 'nej'}">${p.lamplig ? 'yes' : 'no'}</td></tr>`;
   });
@@ -710,19 +1256,101 @@ function openDataModal(){
 }
 function closeDataModal(){ document.getElementById('dataModal').classList.remove('show'); }
 
-function toggleColl(btn, id){
-  btn.classList.toggle('open');
-  document.getElementById(id).classList.toggle('show');
+const CONCEPTS={
+  amazon:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v14a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/><path d="M4 8h16M8 4v4"/></svg>',
+    title:'The real case: Amazon',
+    def:'In 2018 it was revealed that Amazon had scrapped an internal AI recruiting tool. The tool had been trained on ten years of historical applications – most of which came from men – and learned to downgrade résumés that suggested the applicant was a woman, for example through club or society names.<br><br>Amazon tried to remove the obvious signals, but couldn\'t guarantee the model wasn\'t finding <strong>other, indirect routes</strong> to the same conclusion – a <em>proxy variable</em>.<br><br><strong>Note:</strong> In this lab, the proxy variable is deliberately obvious. In reality it can be much harder to detect which variables function as proxies.',
+    illus:'<svg viewBox="0 0 140 70"><rect x="44" y="8" width="52" height="54" rx="4" fill="rgba(255,255,255,.04)" stroke="#8791b3" stroke-width="1.3"/><line x1="52" y1="20" x2="88" y2="20" stroke="#8791b3" stroke-width="1.5"/><line x1="52" y1="28" x2="88" y2="28" stroke="#8791b3" stroke-width="1.5"/><line x1="52" y1="36" x2="72" y2="36" stroke="#8791b3" stroke-width="1.5"/><circle cx="70" cy="50" r="11" fill="#ef5b5b"/><path d="M66 46l8 8M74 46l-8 8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>'
+  },
+  bias:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M8 20h8"/><path d="M12 6L5 8.5M12 6l7 4"/><circle cx="5" cy="9.5" r="2.2"/><circle cx="19" cy="11" r="2.2"/></svg>',
+    title:'Bias',
+    def:'Systematic errors that cause a model to treat groups differently. Usually arises because the training data reflects human prejudice or skewed representation – <em>"bias in, bias out"</em>.',
+    illus:'<svg viewBox="0 0 140 70"><line x1="10" y1="58" x2="130" y2="58" stroke="rgba(255,255,255,.12)"/><rect x="35" y="38" width="22" height="20" rx="3" fill="rgba(192,132,252,.25)" stroke="#c084fc" stroke-width="1.5"/><rect x="83" y="14" width="22" height="44" rx="3" fill="rgba(77,128,255,.25)" stroke="#4d80ff" stroke-width="1.5"/><text x="46" y="32" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#c084fc" font-weight="700">35%</text><text x="94" y="10" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#4d80ff" font-weight="700">78%</text></svg>'
+  },
+  skydd:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>',
+    title:'Protected characteristic',
+    def:'Characteristics that, under anti-discrimination law, must not form the basis of a decision – e.g. <strong>gender, ethnicity, age, religion</strong>, and disability.',
+    illus:'<svg viewBox="0 0 140 70"><g fill="rgba(255,206,84,.12)" stroke="#ffce54" stroke-width="1.3"><rect x="8" y="26" width="38" height="20" rx="5"/><rect x="51" y="26" width="38" height="20" rx="5"/><rect x="94" y="26" width="38" height="20" rx="5"/></g><text x="27" y="39" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7.5" fill="#ffce54" font-weight="700">GENDER</text><text x="70" y="39" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7.5" fill="#ffce54" font-weight="700">AGE</text><text x="113" y="39" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6.5" fill="#ffce54" font-weight="700">ETHNICITY</text></svg>'
+  },
+  proxy:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3.2" stroke-dasharray="2 2"/><circle cx="18" cy="12" r="3.2"/><path d="M9.5 12h5M13 9.5l1.5 2.5-1.5 2.5"/></svg>',
+    title:'Proxy variable',
+    def:'A variable so closely correlated with a <em>protected characteristic</em> that a model can use it as a substitute – disadvantaging a group without ever seeing the protected characteristic itself. <strong>A CV gap</strong> can become a proxy for gender.',
+    illus:'<svg viewBox="0 0 140 70"><text x="8" y="20" font-family="JetBrains Mono, monospace" font-size="9" fill="#8791b3">Gender</text><line x1="30" y1="10" x2="45" y2="24" stroke="#ef5b5b" stroke-width="1.5"/><line x1="45" y1="10" x2="30" y2="24" stroke="#ef5b5b" stroke-width="1.5"/><text x="8" y="58" font-family="JetBrains Mono, monospace" font-size="9" fill="#e8ecf8">CV gap</text><line x1="58" y1="52" x2="82" y2="38" stroke="#7aa2ff" stroke-width="2"/><path d="M77 36l6 -1 -1 6z" fill="#7aa2ff"/><circle cx="102" cy="36" r="16" fill="rgba(122,162,255,.15)" stroke="#7aa2ff" stroke-width="1.5"/><text x="102" y="40" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#7aa2ff" font-weight="700">AI</text></svg>'
+  },
+  direkt:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="14" r="3"/><circle cx="17" cy="14" r="3"/><path d="M5 6l2 2 3-3M15 5l4 4"/></svg>',
+    title:'Direct discrimination',
+    def:'The decision changes when only the protected characteristic changes. <strong>The Twin Test</strong> reveals this: same qualifications, different outcome.',
+    illus:'<svg viewBox="0 0 140 70"><circle cx="40" cy="38" r="17" fill="rgba(192,132,252,.15)" stroke="#c084fc" stroke-width="1.5"/><circle cx="100" cy="38" r="17" fill="rgba(77,128,255,.15)" stroke="#4d80ff" stroke-width="1.5"/><text x="40" y="44" text-anchor="middle" font-size="15">👩</text><text x="100" y="44" text-anchor="middle" font-size="15">👨</text><circle cx="55" cy="20" r="8.5" fill="#ef5b5b"/><path d="M51.5 16.5l7 7M58.5 16.5l-7 7" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><circle cx="115" cy="20" r="8.5" fill="#34c759"/><path d="M111 20.5l3 3 6-7" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="70" y="66" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#8791b3">same qualifications</text></svg>'
+  },
+  indirekt:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-6 8v6l-4 2v-8L4 4z"/></svg>',
+    title:'Indirect discrimination',
+    def:'A seemingly neutral criterion (e.g. <em>"no gaps in the CV"</em>) that in practice disadvantages one group far more than another.',
+    illus:'<svg viewBox="0 0 140 70"><path d="M20 12h100l-35 30v20l-30 12V42z" fill="rgba(255,255,255,.04)" stroke="#8791b3" stroke-width="1.3"/><text x="70" y="9" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#8791b3">"NEUTRAL" CRITERION</text><circle cx="47" cy="62" r="5" fill="#4d80ff"/><circle cx="60" cy="66" r="5" fill="#4d80ff"/><circle cx="80" cy="63" r="5" fill="#c084fc"/></svg>'
+  },
+  gap:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M8 20h8"/><path d="M12 7L5 9M12 7l7 2"/><circle cx="5" cy="9" r="2.2"/><circle cx="19" cy="9" r="2.2"/></svg>',
+    title:'Fairness metric',
+    def:'Ways of measuring fairness. This lab uses <em>demographic parity</em>: the share recommended should be roughly equal between groups when qualifications are equal. The gap is measured in percentage points.',
+    illus:'<svg viewBox="0 0 140 70"><line x1="10" y1="58" x2="130" y2="58" stroke="rgba(255,255,255,.12)"/><rect x="35" y="24" width="22" height="34" rx="3" fill="rgba(192,132,252,.25)" stroke="#c084fc" stroke-width="1.5"/><rect x="83" y="24" width="22" height="34" rx="3" fill="rgba(77,128,255,.25)" stroke="#4d80ff" stroke-width="1.5"/><text x="46" y="20" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#c084fc" font-weight="700">54%</text><text x="94" y="20" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#4d80ff" font-weight="700">55%</text></svg>'
+  }
+};
+
+function openConcept(id,ev){
+  ev.stopPropagation();
+  const btn=ev.currentTarget;const r=btn.getBoundingClientRect();
+  const bx=r.left+r.width/2,by=r.top+r.height/2;
+  const cx=window.innerWidth/2,cy=window.innerHeight/2;
+  const c=CONCEPTS[id];if(!c)return;
+  const card=document.getElementById('conceptCard');
+  document.getElementById('conceptIcon').innerHTML=c.icon;
+  document.getElementById('conceptTitle').textContent=c.title;
+  document.getElementById('conceptDef').innerHTML=c.def;
+  document.getElementById('conceptIllus').innerHTML=c.illus||'';
+  card.classList.remove('show');
+  card.style.transition='none';
+  card.style.setProperty('--dx',(bx-cx)+'px');
+  card.style.setProperty('--dy',(by-cy)+'px');
+  void card.offsetHeight;
+  card.style.transition='';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
 }
-function togGloss(tag, id){
-  const def = document.getElementById(id);
-  const wasOpen = def.classList.contains('show');
-  document.querySelectorAll('.g-def').forEach(d => d.classList.remove('show'));
-  document.querySelectorAll('.g-tag').forEach(t => t.classList.remove('open'));
-  if(!wasOpen){ def.classList.add('show'); tag.classList.add('open'); }
+function closeConcept(){
+  document.getElementById('conceptCard').classList.remove('show');
+  document.getElementById('conceptBackdrop').classList.remove('show');
 }
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeConcept();closeDataModal();closeFairnessReveal();}});
+
+(function initCardTilt(){
+  const MAX_TILT=7;
+  ['conceptCardInner','revealCardInner'].forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    el.addEventListener('mousemove',e=>{
+      const r=el.getBoundingClientRect();
+      const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+      const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
+      el.style.setProperty('--mx',(px*100)+'%');
+      el.style.setProperty('--my',(py*100)+'%');
+      el.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+      const sx=(px-0.5)*22,sy=(py-0.5)*22;
+      el.style.boxShadow=`${-sx}px ${20-sy}px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset`;
+    });
+    el.addEventListener('mouseleave',()=>{
+      el.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';
+      el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%');
+      el.style.boxShadow='';
+    });
+  });
+})();
 
 renderDataStats();
+updateWizard();
 </script>
 </body>
 </html>
