@@ -64,6 +64,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .ptab:hover{color:var(--text);}
 .ptab.active{color:#fff;background:var(--accent);}
 .ptab.adv.active{color:#06210f;background:var(--gold);}
+.ptab:disabled{opacity:0.32;cursor:not-allowed;}
+.ptab:disabled:hover{color:var(--dim2);}
 .panel-body{flex:1;overflow-y:auto;padding:14px;}
 .panel-view{display:none;flex-direction:column;gap:14px;}.panel-view.active{display:flex;}
 .sec-t{font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim2);margin-bottom:5px;}
@@ -95,18 +97,23 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .act-btn:hover:not(.active){color:var(--text);}
 .act-btn.active{color:#06210f;background:var(--gold);}
 .note{font-size:0.72em;color:var(--dim2);line-height:1.5;margin-top:4px;}.note strong{color:var(--text);}
-.nviz-toggle{display:flex;align-items:center;gap:8px;font-size:0.8em;cursor:pointer;color:var(--dim2);user-select:none;}
-.nviz-toggle input[type=checkbox]{accent-color:var(--gold);width:14px;height:14px;cursor:pointer;}
-.nviz-toggle:hover{color:var(--text);}
-.nsel-row{display:flex;gap:5px;margin-top:5px;}
-.nsel{flex:1;font-family:'DM Sans',sans-serif;font-size:0.77em;padding:6px 8px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);cursor:pointer;outline:none;transition:.2s;}
-.nsel:hover{border-color:var(--dim2);}
-.nsel:focus{border-color:var(--gold);}.nsel:disabled{opacity:0.3;pointer-events:none;}
-.arch-wrap{display:flex;flex-direction:column;gap:6px;}
-.arch-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
-.arch-input{width:44px;font-family:'JetBrains Mono',monospace;font-size:0.88em;padding:5px 6px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);text-align:center;outline:none;transition:.2s;}
-.arch-input:focus{border-color:var(--gold);}
-.arch-label{font-size:0.75em;color:var(--dim2);}
+.arch-wrap{display:flex;flex-direction:column;gap:8px;}
+.arch-stepper{display:flex;align-items:center;gap:9px;}
+.arch-btn{width:30px;height:30px;flex-shrink:0;border-radius:50%;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:1.15em;font-weight:600;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.16s var(--ease-spring);box-shadow:inset 0 1px 0 rgba(255,255,255,.04);}
+.arch-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(255,214,102,.08);transform:translateY(-1px);}
+.arch-btn:active{transform:scale(.88);}
+.arch-slide{flex:1;position:relative;height:30px;display:flex;align-items:center;}
+.arch-slide input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:4px;outline:none;cursor:pointer;background:linear-gradient(to right,var(--gold) var(--fillPct,28%),var(--surface2) var(--fillPct,28%));transition:background .05s linear;}
+.arch-slide input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:4px;background:transparent;}
+.arch-slide input[type=range]::-moz-range-track{height:6px;border-radius:4px;background:var(--surface2);}
+.arch-slide input[type=range]::-moz-range-progress{height:6px;border-radius:4px;background:var(--gold);}
+.arch-slide input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;margin-top:-6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6d9,var(--gold) 70%);border:2px solid rgba(9,11,20,.5);cursor:pointer;box-shadow:0 0 0 4px rgba(255,214,102,.16),0 2px 8px rgba(0,0,0,.4);transition:.16s var(--ease-spring);}
+.arch-slide input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.14);box-shadow:0 0 0 5px rgba(255,214,102,.22),0 2px 8px rgba(0,0,0,.4);}
+.arch-slide input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6d9,var(--gold) 70%);border:2px solid rgba(9,11,20,.5);cursor:pointer;box-shadow:0 0 0 4px rgba(255,214,102,.16);}
+.arch-badge{min-width:36px;flex-shrink:0;padding:5px 9px;border-radius:999px;background:rgba(255,214,102,.14);border:1px solid rgba(255,214,102,.32);color:var(--gold);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.82em;text-align:center;transition:transform .18s cubic-bezier(.34,1.56,.64,1);}
+.arch-badge.pop{animation:archPop .32s cubic-bezier(.34,1.56,.64,1);}
+@keyframes archPop{0%{transform:scale(.7);}55%{transform:scale(1.16);}100%{transform:scale(1);}}
+.arch-caption{font-size:0.7em;color:var(--dim2);}
 .btn{font-family:'DM Sans',sans-serif;padding:9px 14px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);font-size:0.82em;font-weight:600;cursor:pointer;transition:.2s var(--ease-spring);text-align:center;width:100%;}
 .btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.08);transform:translateY(-1px);}
 .btn:active{transform:scale(.97);}
@@ -158,6 +165,33 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .concept-illus{background:rgba(0,0,0,.25);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;transform:translateZ(10px);}
 .concept-illus svg{width:100%;height:auto;max-height:100px;}
 
+/* ── Läges-tonad bakgrund (guld i Avancerat) ── */
+.mode-tint{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .6s var(--ease-out),background .6s var(--ease-out);}
+body.mode-adv .mode-tint{opacity:1;background:radial-gradient(ellipse 72% 58% at 50% 30%,rgba(255,214,102,.09),transparent 72%);}
+body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(255,214,102,.16);}
+
+/* ── Titta inuti nätverket ── */
+#vizModeRow .act-btn{font-size:0.72em;padding:7px 3px;white-space:nowrap;}
+.viz-cap{font-size:0.72em;color:var(--dim2);line-height:1.5;margin-top:8px;min-height:2.1em;}
+.viz-cap strong{color:var(--text);}
+
+/* ── Neuroner: klickbara neuron-swatchar ── */
+.combo-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;}
+.combo-count{font-family:'JetBrains Mono',monospace;font-size:0.74em;color:var(--gold);}
+.combo-actions{display:flex;gap:10px;}
+.combo-link{background:none;border:none;padding:0;font-family:'DM Sans',sans-serif;font-size:0.72em;font-weight:700;color:var(--dim2);cursor:pointer;text-decoration:underline;text-underline-offset:2px;transition:.15s;}
+.combo-link:hover{color:var(--gold);}
+.combo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:6px;}
+.combo-chip{position:relative;aspect-ratio:1;border-radius:9px;border:1.5px solid var(--border);background:var(--surface2);cursor:pointer;overflow:hidden;padding:0;transition:.18s var(--ease-spring);}
+.combo-chip:hover{border-color:var(--dim2);transform:translateY(-1px) scale(1.04);}
+.combo-chip:active{transform:scale(.94);}
+.combo-chip.active{border-color:var(--gold);box-shadow:0 0 0 2px rgba(255,214,102,.3),0 4px 14px rgba(255,214,102,.22);}
+.combo-chip canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;opacity:.9;}
+.combo-chip:not(.active) canvas{opacity:.45;filter:saturate(.4);}
+.combo-chip .cn{position:absolute;bottom:2px;left:3px;font-family:'JetBrains Mono',monospace;font-size:.58em;font-weight:700;color:#fff;background:rgba(0,0,0,.5);padding:0 3px;border-radius:4px;line-height:1.35;z-index:2;}
+.combo-chip .ck{position:absolute;top:2px;right:2px;width:13px;height:13px;border-radius:50%;background:var(--gold);color:#090b14;font-size:8px;font-weight:900;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.4);transition:.2s var(--ease-spring);z-index:2;}
+.combo-chip.active .ck{opacity:1;transform:scale(1);}
+
 .overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;transition:opacity .3s var(--ease-out);}
 .overlay.show{display:flex;}
 .overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.92),rgba(16,19,34,.94));border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:30px 34px;max-width:520px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.02) inset;animation:cardIn .5s var(--ease-spring);}
@@ -190,7 +224,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 </style>
 </head>
 <body>
-<div class="bg-mesh"></div><div class="bg-noise"></div>
+<div class="bg-mesh"></div><div class="bg-noise"></div><div class="mode-tint"></div>
 
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
@@ -238,8 +272,16 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
           <div class="sec-t">Modell</div>
           <div class="model-list">
             <button class="model-tab active" id="mLin" onclick="setModel('linear')">Linjär modell<span class="msub">Alltid en rak linje</span></button>
-            <button class="model-tab" id="mNN1" onclick="setModel('nn1')">Neuralt nätverk med 1 dolt lager<span class="msub">Kan böja gränsen</span></button>
-            <button class="model-tab" id="mNN2" onclick="setModel('nn2')">Neuralt nätverk med 2 dolda lager<span class="msub">Klarar av mer komplexa former</span></button>
+            <button class="model-tab" id="mNN1" onclick="setModel('nn1')">Neuralt nätverk<span class="msub">Dolt lager med neuroner som böjer gränsen</span></button>
+          </div>
+        </div>
+        <div>
+          <div class="sec-t">Färdiga mönster</div>
+          <div class="preset-grid">
+            <button class="pbtn" onclick="loadPreset('linear')"><span class="picon">/</span>Linjärt</button>
+            <button class="pbtn" onclick="loadPreset('xor')"><span class="picon">⊕</span>XOR</button>
+            <button class="pbtn" onclick="loadPreset('circles')"><span class="picon">◎</span>Cirkel</button>
+            <button class="pbtn" onclick="loadPreset('spiral')"><span class="picon">↺</span>Spiral</button>
           </div>
         </div>
         <div>
@@ -255,18 +297,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
               <span class="g-tag" onclick="openConcept('dolt',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="2" width="4" height="20" rx="1"/><rect x="17" y="6" width="4" height="12" rx="1"/></svg>Dolt lager</span>
               <span class="g-tag" onclick="openConcept('xor',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" stroke-linecap="round"/></svg>XOR</span>
             </div>
-          </div>
-        </div>
-        <div>
-          <div class="sec-t">Färdiga mönster</div>
-          <div class="preset-grid">
-            <button class="pbtn" onclick="loadPreset('linear')"><span class="picon">/</span>Linjärt</button>
-            <button class="pbtn" onclick="loadPreset('xor')"><span class="picon">⊕</span>XOR</button>
-            <button class="pbtn" onclick="loadPreset('circles')"><span class="picon">◎</span>Cirkel</button>
-            <button class="pbtn" onclick="loadPreset('spiral')"><span class="picon">↺</span>Spiral</button>
-          </div>
-          <div class="begrepp-row" style="margin-top:7px">
-            <span class="g-tag" onclick="openConcept('monster',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>Om mönstren</span>
+            <div class="begrepp-row">
+              <span class="g-tag" onclick="openConcept('monster',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>Om mönstren</span>
+            </div>
           </div>
         </div>
         <div class="stat-box">
@@ -290,32 +323,44 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
             <button class="act-btn active" id="actTanh" onclick="setActFn('tanh')">tanh</button>
             <button class="act-btn" id="actRelu" onclick="setActFn('relu')">ReLU</button>
           </div>
-          <div class="note" id="actNote"><strong>tanh</strong> ger värden −1 till +1. Mjuka, böjda gränser. Aktiv i hela intervallet.</div>
+          <div class="note" id="actNote"><strong>tanh</strong> ger varje neuron ett värde mellan −1 och +1. Träna med båda funktionerna och jämför beslutsgränsen – ser du någon skillnad i formen?</div>
           <div class="begrepp-row" style="margin-top:8px">
             <span class="g-tag gold" onclick="openConcept('aktivering',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18c4 0 5-12 9-12s5 12 9 12"/></svg>Aktiveringsfunktion</span>
             <span class="g-tag gold" onclick="openConcept('tanhrelu',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 10 17 10 7"/><path d="M13 17c3 0 3-10 8-10"/></svg>tanh vs ReLU</span>
           </div>
         </div>
         <div>
-          <div class="adv-t">Neuronaktivering</div>
-          <label class="nviz-toggle"><input type="checkbox" id="nvizCk" onchange="toggleNviz()"> Visa en neurons aktivering</label>
-          <div class="nsel-row" id="nselRow" style="opacity:0.35;pointer-events:none">
-            <select class="nsel" id="lyrSel" onchange="refreshNeuronSel();onNeuronChange()"></select>
-            <select class="nsel" id="nrnSel" onchange="onNeuronChange()"></select>
+          <div class="adv-t">Titta inuti nätverket</div>
+          <div class="act-row" id="vizModeRow">
+            <button class="act-btn active" id="vmBoundary" onclick="setVizMode('boundary')">Slutlig gräns</button>
+            <button class="act-btn" id="vmCombo" onclick="setVizMode('combo')">Neuroner</button>
           </div>
-          <div class="note">Varje neuron visar sitt eget <strong>aktiveringsvärde</strong>. Bläddra mellan de olika neuronerna och se hur varje neuron delar upp planet på sitt eget sätt. En neuron klassificerar inte själv – det är först när alla neuroners signaler <strong>kombineras</strong> i utdatalagret som beslutsgränsen uppstår.</div>
+          <div id="vizCombo" style="display:none">
+            <div class="combo-toolbar">
+              <span class="combo-count" id="comboCount">0 valda</span>
+              <div class="combo-actions">
+                <button type="button" class="combo-link" onclick="comboSelectAll()">Alla</button>
+                <button type="button" class="combo-link" onclick="comboSelectNone()">Inga</button>
+              </div>
+            </div>
+            <div class="combo-grid" id="comboGrid"></div>
+            <div class="viz-cap" id="comboCap"></div>
+          </div>
+          <div id="vizBoundary">
+            <div class="note">Klicka på <strong>Neuroner</strong> för att titta på en enskild neuron eller klicka ihop egna kombinationer – se hur enkla bitar bygger den färdiga gränsen.</div>
+          </div>
           <div class="begrepp-row" style="margin-top:8px">
             <span class="g-tag gold" onclick="openConcept('neuron',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>Neuron</span>
+            <span class="g-tag gold" onclick="openConcept('kombination',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h6M4 12h6M4 17h6"/><path d="M14 12h6M17 9l3 3-3 3"/></svg>Kombination</span>
           </div>
         </div>
         <div>
-          <div class="adv-t">Arkitektur (neuroner per dolt lager)</div>
+          <div class="adv-t">Arkitektur (neuroner i det dolda lagret)</div>
           <div class="arch-wrap" id="archWrap"></div>
-          <button class="btn sm" style="margin-top:6px" onclick="applyArch()">Tillämpa & träna om</button>
         </div>
         <div class="info-box">
-          <strong>Tips!</strong><br><br>
-          Byt aktiveringsfunktion till <span class="hl">ReLU</span> och aktivera neuronvisualisering. Ser du skillnaden? Med <strong>tanh</strong> visar neuronerna både röda (negativa) och blå (positiva) områden. Med <span class="hl">ReLU</span> ser du bara blått och mörkt – neuronen är antingen aktiv eller helt avstängd. Det är därför ReLU skapar skarpa kanter i beslutsgränsen medan tanh ger mjuka kurvor.
+          <strong>Utforska!</strong><br><br>
+          Byt <span class="hl">aktiveringsfunktion</span> och titta noga på beslutsgränsen och på en enskild neuron. Vad händer med formen? Klicka sedan ihop egna kombinationer av neuroner under <strong>Neuroner</strong> – se hur varje val förändrar gränsen.
         </div>
       </div>
     </div>
@@ -351,8 +396,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <p class="sub">En klassificeringsmodell lär sig dra en gräns mellan olika kategorier. Undersök hur den gränsen ser ut och upptäck varför det ofta behövs ett neuralt nätverk.</p>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div><strong>Börja med det linjära mönstret</strong> – Välj <strong>Linjär modell</strong> och tryck ▶ Träna. Se hur en rak linje separerar de två klasserna!</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Testa ett annat mönster</strong> – Byt exempelvis till mönstret <strong>XOR</strong> i högermenyn. Träna med linjär modell igen. Ser du att en rak linje <em>inte kan</em> klassificera punkterna?</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Lägg till ett dolt lager</strong> – Byt modell till <strong>Neuralt nätverk med 1 dolt lager</strong> och träna om. Se hur gränsen böjer sig och punkterna klassificeras rätt!</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Testa ett annat mönster</strong> – Byt exempelvis till mönstret <strong>XOR</strong> i högermenyn och träna med samma linjära modell igen. Vad händer?</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Lägg till ett dolt lager</strong> – Byt modell till <strong>Neuralt nätverk</strong> och träna om. Se hur gränsen böjer sig och punkterna klassificeras rätt!</div></div>
     </div>
     <p class="sub" style="margin-bottom:0;">💡 <strong style="color:var(--text)">Tips:</strong> I fliken <strong style="color:var(--gold)">Avancerat</strong> kan du aktivera <em>neuronvisualisering</em> – Här kan du se hur varje enskild neuron i det dolda lagret delar upp ytan på sitt eget sätt. Det är kombinationen av alla neuroner som skapar den slutliga beslutsgränsen.</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta simuleringen <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -367,8 +412,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <h2 style="color:var(--gold);">Avancerat läge</h2>
     <p class="sub">Här kan du analysera modellen ytterligare.</p>
     <div class="steps">
-      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">1</div><div><strong>Neuronvisualisering</strong> – Aktivera den och bläddra igenom neuronerna i det dolda lagret. Varje neuron delar upp ytan på sitt eget sätt – den ena kanske reagerar på "övre vänstra hörnet", en annan på "diagonalen". Beslutsgränsen du ser i standardläge uppstår när alla neuroners bidrag kombineras i utdatalagret.</div></div>
-      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">2</div><div><strong>Aktiveringsfunktion</strong> – Byt mellan <strong>tanh</strong> (mjuka kurvor) och <strong>ReLU</strong> (skarpare kanter). Se hur formen på beslutsgränsen förändras.</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">1</div><div><strong>Titta inuti nätverket</strong> – Klicka på <strong>Neuroner</strong>. Välj en enda för att se hur den delar upp ytan på sitt eget sätt, eller klicka ihop flera för att se hur den färdiga gränsen växer fram ur de bitar du själv väljer.</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">2</div><div><strong>Aktiveringsfunktion</strong> – Byt mellan <strong>tanh</strong> och <strong>ReLU</strong> och träna om. Titta noga på beslutsgränsens form – vad är det som skiljer? (Vi avslöjar det inte här; du upptäcker det själv.)</div></div>
       <div class="step"><div class="step-num" style="background:rgba(255,214,102,0.12);color:var(--gold);border-color:rgba(255,214,102,0.3);">3</div><div><strong>Ändra arkitektur</strong> – Justera antalet neuroner per lager. Här kan du upptäcka att fler neuroner ger en mer flexibel gräns, men också långsammare träning.</div></div>
     </div>
     <button class="overlay-btn" style="background:var(--gold);color:#090b14;box-shadow:0 8px 24px rgba(255,214,102,.28);" onclick="document.getElementById('advOverlay').classList.remove('show')">Jag förstår →</button>
@@ -401,6 +446,15 @@ class Net{
   }
   predict(x){return this.forward(x).at(-1)[0];}
   neuronAct(x,hLayer,nIdx){const acts=this.forward(x);const al=acts[hLayer+1];return al?(al[nIdx]??0):0;}
+  predictCombo(x,idxs){
+    const acts=this.forward(x);
+    const hLast=acts[acts.length-2];
+    const wl=this.W.length-1;
+    const wOut=this.W[wl][0],bOut=this.b[wl][0];
+    let z=bOut;
+    for(const j of idxs){if(hLast[j]!==undefined)z+=wOut[j]*hLast[j];}
+    return sigmoid(z);
+  }
   trainStep(data,lr){
     if(!data.length)return 0;const n=data.length;
     const gW=this.W.map(w=>w.map(r=>new Array(r.length).fill(0)));
@@ -419,7 +473,7 @@ class Net{
 }
 
 const CS=500,DR=2.6,BGRES=100;
-const BASE_ARCH={linear:[2,1],nn1:[2,18,1],nn2:[2,18,10,1]};
+const BASE_ARCH={linear:[2,1],nn1:[2,18,1]};
 const LR_MAP={tanh:0.17,relu:0.08};
 const SPEED_SPF=[1,3,8,25];
 const SPEED_LABELS=['½×','1×','2×','5×'];
@@ -427,7 +481,9 @@ const SPEED_LABELS=['½×','1×','2×','5×'];
 let points=[],curClass=0,curModel='nn1',actFn='tanh';
 let customArch=null;
 let net=null,itr=0,lastLoss=0,playing=false;
-let neuronViz=false,selLayer=0,selNeuron=0;
+let vizMode='boundary';
+let comboSel=new Set(),comboDirty=true,comboRefreshCounter=0;
+let curTab='std';
 let speedIdx=0;
 let advShown=false;
 
@@ -444,18 +500,19 @@ const hasBoth=()=>points.some(p=>p.cls===0)&&points.some(p=>p.cls===1);
 function renderBg(){
   if(!net||!hasBoth()){ctx.fillStyle='#090b14';ctx.fillRect(0,0,CS,CS);return;}
   const id=tctx.createImageData(BGRES,BGRES);const d=id.data;
-  if(neuronViz&&net.arch.length>2){
-    let minA=Infinity,maxA=-Infinity;const grid=[];
-    for(let py=0;py<BGRES;py++){const row=[];for(let px=0;px<BGRES;px++){const[x,y]=p2d((px+.5)/BGRES*CS,(py+.5)/BGRES*CS);const a=net.neuronAct([x,y],selLayer,selNeuron);if(a<minA)minA=a;if(a>maxA)maxA=a;row.push(a);}grid.push(row);}
-    const range=Math.max(Math.abs(minA),Math.abs(maxA),0.01);
-    for(let py=0;py<BGRES;py++){for(let px=0;px<BGRES;px++){const t=(grid[py][px]/range+1)/2;const i=(py*BGRES+px)*4;
-      if(t>=0.5){const f=(t-0.5)*2;d[i]=Math.round(lerp(20,77,f));d[i+1]=Math.round(lerp(30,128,f));d[i+2]=Math.round(lerp(50,255,f));}
-      else{const f=(0.5-t)*2;d[i]=Math.round(lerp(20,255,f));d[i+1]=Math.round(lerp(30,80,f));d[i+2]=Math.round(lerp(50,60,f));}
-      d[i+3]=255;}}
+  const useCombo=(vizMode==='combo'&&net.arch.length>2);
+  if(useCombo&&comboSel.size===0){
+    const wl=net.b.length-1,bOut=net.b[wl][0];
+    const p=sigmoid(bOut);const conf=clamp(Math.abs(p-.5)*3.2,0,1);const sq=conf*conf;
+    let rr,gg,bb;
+    if(p>.5){rr=Math.round(lerp(9,77,sq));gg=Math.round(lerp(11,128,sq));bb=Math.round(lerp(20,255,sq));}
+    else{rr=Math.round(lerp(9,255,sq));gg=Math.round(lerp(11,106,sq));bb=Math.round(lerp(20,94,sq));}
+    for(let py=0;py<BGRES;py++){for(let px=0;px<BGRES;px++){const i=(py*BGRES+px)*4;d[i]=rr;d[i+1]=gg;d[i+2]=bb;d[i+3]=255;}}
   }else{
+    const idxs=useCombo?[...comboSel]:null;
     for(let py=0;py<BGRES;py++){for(let px=0;px<BGRES;px++){
       const[x,y]=p2d((px+.5)/BGRES*CS,(py+.5)/BGRES*CS);
-      const p=net.predict([x,y]);const conf=clamp(Math.abs(p-.5)*3.2,0,1);const sq=conf*conf;
+      const p=useCombo?net.predictCombo([x,y],idxs):net.predict([x,y]);const conf=clamp(Math.abs(p-.5)*3.2,0,1);const sq=conf*conf;
       const i=(py*BGRES+px)*4;
       if(p>.5){d[i]=Math.round(lerp(9,77,sq));d[i+1]=Math.round(lerp(11,128,sq));d[i+2]=Math.round(lerp(20,255,sq));}
       else{d[i]=Math.round(lerp(9,255,sq));d[i+1]=Math.round(lerp(11,106,sq));d[i+2]=Math.round(lerp(20,94,sq));}
@@ -519,39 +576,61 @@ function loop(){
     itr+=spf;
     if(itr>30000||lastLoss<0.002){playing=false;updPlayBtn();}
   }
+  if(vizMode==='combo'&&curTab==='adv'&&playing){
+    comboRefreshCounter=(comboRefreshCounter+1)%20;
+    if(comboRefreshCounter===0)refreshComboThumbnails();
+  }
   draw();updateStats();requestAnimationFrame(loop);
 }
 
 function updPlayBtn(){const b=document.getElementById('btnPlay');b.textContent=playing?'⏸ Pausa':'▶ Träna';b.className=playing?'tc-btn pause':'tc-btn play';}
 function updateSpeed(){speedIdx=parseInt(document.getElementById('speedSlider').value);document.getElementById('speedLabel').textContent=SPEED_LABELS[speedIdx];}
 
-function initNet(){net=new Net(getArch(),actFn);itr=0;lastLoss=0;playing=false;updPlayBtn();buildNeuronSelects();buildArchControls();}
+function initNet(){
+  net=new Net(getArch(),actFn);itr=0;lastLoss=0;playing=false;updPlayBtn();
+  buildArchControls();
+  comboSel=new Set();comboDirty=true;
+  ensureComboGrid();
+}
 function togglePlay(){if(!hasBoth())return;if(itr===0)net=new Net(getArch(),actFn);playing=!playing;updPlayBtn();}
 function resetNet(){playing=false;initNet();}
 function clearAll(){points=[];playing=false;initNet();}
 function setClass(c){curClass=c;document.getElementById('btnA').classList.toggle('active',c===0);document.getElementById('btnB').classList.toggle('active',c===1);}
 
 const MODEL_INFO={
-  linear:'<strong>Linjär modell</strong> kan bara rita en rak beslutsgräns. Testa att ändra till exempelvis XOR och se att modellen misslyckas med att separera klasserna! Byt till Neuralt nätverk med 1 dolt lager och se skillnaden.',
-  nn1:'<strong>1 dolt lager (18 neuroner)</strong> – varje neuron reagerar på en kombination av x och y. Tillsammans böjer de gränsen. Öppna <strong>Avancerat</strong> och aktivera neuronvisualisering!',
-  nn2:'<strong>2 dolda lager (18+10 neuroner)</strong> – fler lager möjliggör mer komplexa gränser. Kan bättre hantera exempelvis spiraler och korsade mönster.'
+  linear:'<strong>Linjär modell</strong> kan bara rita en rak beslutsgräns. Prova mönstren ovan och se vilka den klarar av.',
+  nn1:'<strong>Dolt lager (18 neuroner)</strong> – varje neuron reagerar på en kombination av x och y. Tillsammans böjer de gränsen. Öppna <strong>Avancerat</strong> och prova <strong>Neuroner</strong> för att se hur!'
 };
 
 function setModel(m){
   curModel=m;customArch=null;
   document.getElementById('mLin').classList.toggle('active',m==='linear');
   document.getElementById('mNN1').classList.toggle('active',m==='nn1');
-  document.getElementById('mNN2').classList.toggle('active',m==='nn2');
   document.getElementById('infoBox').innerHTML=MODEL_INFO[m];
+  updateAdvAvailability();
   initNet();
 }
 
+function updateAdvAvailability(){
+  const btn=document.getElementById('ptAdv');
+  const enabled=(curModel!=='linear');
+  btn.disabled=!enabled;
+  btn.title=enabled?'':'Kräver att du väljer Neuralt nätverk';
+  if(!enabled&&curTab==='adv')setPanelTab('std');
+}
+
 function setPanelTab(tab){
+  if(tab==='adv'&&curModel==='linear')return;
+  curTab=tab;
   document.getElementById('ptStd').classList.toggle('active',tab==='std');
   document.getElementById('ptAdv').classList.toggle('active',tab==='adv');
   document.getElementById('viewStd').classList.toggle('active',tab==='std');
   document.getElementById('viewAdv').classList.toggle('active',tab==='adv');
-  if(tab==='adv'&&!advShown){advShown=true;document.getElementById('advOverlay').classList.add('show');}
+  document.body.classList.toggle('mode-adv',tab==='adv');
+  if(tab==='adv'){
+    ensureComboGrid();
+    if(!advShown){advShown=true;document.getElementById('advOverlay').classList.add('show');}
+  }
 }
 
 cv.addEventListener('mousedown',e=>{
@@ -572,39 +651,153 @@ function loadPreset(name){
   initNet();
 }
 
-const ACT_NOTE={tanh:'<strong>tanh</strong> ger värden −1 till +1. Mjuka, böjda gränser.',relu:'<strong>ReLU</strong> ger 0 för negativa, annars z. Skarpa kanter i gränsen.'};
+const ACT_NOTE={
+  tanh:'<strong>tanh</strong> ger varje neuron ett värde mellan −1 och +1. Träna och jämför beslutsgränsen med ReLU – ser du någon skillnad i formen?',
+  relu:'<strong>ReLU</strong> släpper igenom positiva värden oförändrade och sätter alla negativa till 0. Träna och jämför med tanh – vad händer med gränsens form?'
+};
 function setActFn(fn){actFn=fn;document.getElementById('actTanh').classList.toggle('active',fn==='tanh');document.getElementById('actRelu').classList.toggle('active',fn==='relu');document.getElementById('actNote').innerHTML=ACT_NOTE[fn];initNet();}
 
-function toggleNviz(){neuronViz=document.getElementById('nvizCk').checked;const row=document.getElementById('nselRow');row.style.opacity=neuronViz?'1':'0.35';row.style.pointerEvents=neuronViz?'auto':'none';}
-function buildNeuronSelects(){
-  const arch=getArch();const lSel=document.getElementById('lyrSel'),nSel=document.getElementById('nrnSel');
-  lSel.innerHTML='';const nHidden=arch.length-2;
-  for(let l=0;l<nHidden;l++){const o=document.createElement('option');o.value=l;o.textContent='Lager '+(l+1);lSel.appendChild(o);}
-  lSel.disabled=nHidden===0;nSel.disabled=nHidden===0;refreshNeuronSel();
+/* ── Titta inuti nätverket: lägesväljare ── */
+function setVizMode(m){
+  vizMode=m;
+  document.getElementById('vmBoundary').classList.toggle('active',m==='boundary');
+  document.getElementById('vmCombo').classList.toggle('active',m==='combo');
+  document.getElementById('vizBoundary').style.display=m==='boundary'?'block':'none';
+  document.getElementById('vizCombo').style.display=m==='combo'?'block':'none';
+  if(m==='combo')ensureComboGrid();
 }
-function refreshNeuronSel(){
-  const arch=getArch();const l=parseInt(document.getElementById('lyrSel').value)||0;selLayer=l;
-  const nSel=document.getElementById('nrnSel');nSel.innerHTML='';const count=arch[l+1]||0;
-  for(let n=0;n<count;n++){const o=document.createElement('option');o.value=n;o.textContent='Neuron '+(n+1);nSel.appendChild(o);}selNeuron=0;
+
+/* ── Neuroner: klickbara neuron-swatchar ── */
+function ensureComboGrid(){
+  if(vizMode!=='combo')return;
+  if(comboDirty){buildComboGrid();comboDirty=false;}
+  else{refreshComboActiveStates();updateComboCaption();}
 }
-function onNeuronChange(){selLayer=parseInt(document.getElementById('lyrSel').value)||0;selNeuron=parseInt(document.getElementById('nrnSel').value)||0;}
+function neuronThumbLayerIdx(){const arch=getArch();return arch.length-3;} // 0-indexed hidden layer feeding the output
+function renderNeuronThumb(canvas,layerIdx,nIdx){
+  const size=canvas.width;const c2=canvas.getContext('2d');
+  const id=c2.createImageData(size,size);const d=id.data;
+  let minA=Infinity,maxA=-Infinity;const vals=new Array(size*size);
+  let k=0;
+  for(let py=0;py<size;py++){for(let px=0;px<size;px++){
+    const[x,y]=p2d((px+.5)/size*CS,(py+.5)/size*CS);
+    const a=net.neuronAct([x,y],layerIdx,nIdx);
+    vals[k++]=a;if(a<minA)minA=a;if(a>maxA)maxA=a;
+  }}
+  const range=Math.max(Math.abs(minA),Math.abs(maxA),0.01);k=0;
+  for(let py=0;py<size;py++){for(let px=0;px<size;px++){
+    const t=(vals[k++]/range+1)/2;const i=(py*size+px)*4;
+    if(t>=0.5){const f=(t-0.5)*2;d[i]=lerp(20,77,f)|0;d[i+1]=lerp(30,128,f)|0;d[i+2]=lerp(50,255,f)|0;}
+    else{const f=(0.5-t)*2;d[i]=lerp(20,255,f)|0;d[i+1]=lerp(30,80,f)|0;d[i+2]=lerp(50,60,f)|0;}
+    d[i+3]=255;
+  }}
+  c2.putImageData(id,0,0);
+}
+function buildComboGrid(){
+  const wrap=document.getElementById('comboGrid');if(!wrap)return;
+  wrap.innerHTML='';
+  const arch=getArch();
+  if(arch.length<=2||!net){wrap.innerHTML='<div class="note">Linjär modell har inga dolda neuroner att kombinera.</div>';updateComboCaption();return;}
+  const M=arch[arch.length-2],layerIdx=neuronThumbLayerIdx();
+  for(let j=0;j<M;j++){
+    const chip=document.createElement('button');
+    chip.type='button';chip.className='combo-chip'+(comboSel.has(j)?' active':'');
+    chip.onclick=()=>toggleComboNeuron(j);
+    const cv2=document.createElement('canvas');cv2.width=20;cv2.height=20;
+    chip.appendChild(cv2);
+    const lbl=document.createElement('span');lbl.className='cn';lbl.textContent=j+1;
+    chip.appendChild(lbl);
+    const ck=document.createElement('span');ck.className='ck';ck.textContent='✓';
+    chip.appendChild(ck);
+    wrap.appendChild(chip);
+    renderNeuronThumb(cv2,layerIdx,j);
+  }
+  updateComboCaption();
+}
+function refreshComboThumbnails(){
+  const wrap=document.getElementById('comboGrid');if(!wrap||!net)return;
+  const arch=getArch();if(arch.length<=2)return;
+  const layerIdx=neuronThumbLayerIdx();
+  const chips=wrap.querySelectorAll('.combo-chip');
+  chips.forEach((chip,j)=>{const cv2=chip.querySelector('canvas');if(cv2)renderNeuronThumb(cv2,layerIdx,j);});
+}
+function toggleComboNeuron(j){
+  if(comboSel.has(j))comboSel.delete(j);else comboSel.add(j);
+  const wrap=document.getElementById('comboGrid');const chip=wrap&&wrap.children[j];
+  if(chip)chip.classList.toggle('active',comboSel.has(j));
+  updateComboCaption();
+}
+function comboSelectAll(){
+  const arch=getArch();if(arch.length<=2)return;
+  const M=arch[arch.length-2];comboSel=new Set(Array.from({length:M},(_,i)=>i));
+  refreshComboActiveStates();updateComboCaption();
+}
+function comboSelectNone(){comboSel=new Set();refreshComboActiveStates();updateComboCaption();}
+function refreshComboActiveStates(){
+  const wrap=document.getElementById('comboGrid');if(!wrap)return;
+  [...wrap.children].forEach((chip,j)=>chip.classList&&chip.classList.toggle('active',comboSel.has(j)));
+}
+function updateComboCaption(){
+  const cap=document.getElementById('comboCap'),cnt=document.getElementById('comboCount');
+  const arch=getArch();
+  if(arch.length<=2){if(cap)cap.innerHTML='Den <strong>linjära modellen</strong> har inga dolda neuroner att kombinera. Byt till ett neuralt nätverk.';if(cnt)cnt.textContent='';return;}
+  const M=arch[arch.length-2],n=comboSel.size;
+  if(cnt)cnt.textContent=n+' / '+M+' valda';
+  if(!cap)return;
+  if(n===0)cap.innerHTML='Klicka på en eller flera neuroner ovan för att se hur deras beslut <strong>kombineras</strong>.';
+  else if(n===1)cap.innerHTML='En ensam neuron ger bara en enkel, nästan rak uppdelning.';
+  else if(n===M)cap.innerHTML='<strong>Alla '+M+' neuroner</strong> kombinerade – identisk med den färdiga beslutsgränsen.';
+  else cap.innerHTML=n+' av '+M+' neuroner kombinerade. Prova olika kombinationer och se hur formen ändras.';
+}
 
 function buildArchControls(){
-  const arch=getArch();const wrap=document.getElementById('archWrap');wrap.innerHTML='';const nHidden=arch.length-2;
-  if(nHidden===0){wrap.innerHTML='<div class="note">Linjär modell har inga dolda lager.</div>';return;}
-  const row=document.createElement('div');row.className='arch-row';
-  for(let l=1;l<=nHidden;l++){
-    const lbl=document.createElement('span');lbl.className='arch-label';lbl.textContent='L'+l+':';
-    const inp=document.createElement('input');inp.type='number';inp.min='1';inp.max='64';inp.value=arch[l];inp.className='arch-input';inp.id='aL'+l;
-    row.appendChild(lbl);row.appendChild(inp);
-    if(l<nHidden){const arr=document.createElement('span');arr.textContent='→';arr.style.color='var(--dim)';row.appendChild(arr);}
+  const arch=getArch();const wrap=document.getElementById('archWrap');const nHidden=arch.length-2;
+  if(nHidden===0){wrap.innerHTML='<div class="note">Linjär modell har inga dolda neuroner.</div>';return;}
+  const n=arch[1];
+  let range=document.getElementById('archRange');
+  if(!range){
+    wrap.innerHTML=
+      '<div class="arch-stepper">'+
+        '<button type="button" class="arch-btn" onclick="archNudge(-1)" aria-label="Färre neuroner">−</button>'+
+        '<div class="arch-slide"><input type="range" id="archRange" min="1" max="64" step="1" value="'+n+'" oninput="archSliderInput()"></div>'+
+        '<button type="button" class="arch-btn" onclick="archNudge(1)" aria-label="Fler neuroner">+</button>'+
+        '<div class="arch-badge" id="archBadge">'+n+'</div>'+
+      '</div>'+
+      '<div class="arch-caption">neuroner i det dolda lagret</div>';
+    range=document.getElementById('archRange');
+  }else{
+    range.value=n;
+    const badge=document.getElementById('archBadge');if(badge)badge.textContent=n;
   }
-  wrap.appendChild(row);
+  updateArchFill();
 }
-function applyArch(){
-  const arch=getArch().slice();const nHidden=arch.length-2;
-  for(let l=1;l<=nHidden;l++){const inp=document.getElementById('aL'+l);if(inp){const v=parseInt(inp.value);if(v>=1&&v<=64)arch[l]=v;}}
-  customArch=arch;initNet();
+function updateArchFill(){
+  const r=document.getElementById('archRange');if(!r)return;
+  const pct=((r.value-r.min)/(r.max-r.min))*100;
+  r.style.setProperty('--fillPct',pct+'%');
+}
+function bumpArchBadge(){
+  const b=document.getElementById('archBadge');if(!b)return;
+  b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop');
+}
+let archDebounce=null;
+function archSliderInput(){
+  const r=document.getElementById('archRange');const v=parseInt(r.value);
+  const badge=document.getElementById('archBadge');if(badge)badge.textContent=v;
+  updateArchFill();
+  clearTimeout(archDebounce);
+  archDebounce=setTimeout(()=>applyArchValue(v),140);
+}
+function archNudge(d){
+  const r=document.getElementById('archRange');if(!r)return;
+  const v=Math.max(parseInt(r.min),Math.min(parseInt(r.max),parseInt(r.value)+d));
+  r.value=v;const badge=document.getElementById('archBadge');if(badge)badge.textContent=v;
+  updateArchFill();bumpArchBadge();
+  clearTimeout(archDebounce);
+  applyArchValue(v);
+}
+function applyArchValue(v){
+  const arch=getArch().slice();arch[1]=v;customArch=arch;initNet();
 }
 
 /* ════════════════ Glaskort (concept cards) ════════════════ */
@@ -636,7 +829,7 @@ const CONCEPTS={
   dolt:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="2" width="4" height="20" rx="1"/><rect x="17" y="6" width="4" height="12" rx="1"/></svg>',
     title:'Dolt lager',
-    def:'Ett <strong>dolt lager</strong> ligger mellan indata (x, y) och det slutliga svaret. Det är här mönstren hittas: varje neuron i lagret delar upp planet på sitt eget sätt. <em>Fler</em> dolda lager och neuroner ger mer flexibla gränser – men också långsammare träning och risk att modellen överanpassar.',
+    def:'Ett <strong>dolt lager</strong> ligger mellan indata (x, y) och det slutliga svaret. Det är här mönstren hittas: varje neuron i lagret delar upp planet på sitt eget sätt. I det här verktyget kan du justera <em>hur många neuroner</em> lagret har (Avancerat → Arkitektur) – fler ger mer flexibla gränser, men också långsammare träning och risk att modellen överanpassar. Större nätverk staplar ofta flera sådana lager på varandra för ännu mer kapacitet.',
     illus:'<svg viewBox="0 0 140 80"><text x="20" y="14" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#7e8aaa">in</text><text x="70" y="14" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#34c759">dolt</text><text x="120" y="14" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#ffd866">ut</text><g stroke="rgba(255,255,255,.13)" stroke-width="1"><line x1="20" y1="34" x2="70" y2="26"/><line x1="20" y1="34" x2="70" y2="46"/><line x1="20" y1="34" x2="70" y2="64"/><line x1="20" y1="58" x2="70" y2="26"/><line x1="20" y1="58" x2="70" y2="46"/><line x1="20" y1="58" x2="70" y2="64"/><line x1="70" y1="26" x2="120" y2="45"/><line x1="70" y1="46" x2="120" y2="45"/><line x1="70" y1="64" x2="120" y2="45"/></g><circle cx="20" cy="34" r="4.5" fill="#7aa2ff"/><circle cx="20" cy="58" r="4.5" fill="#7aa2ff"/><circle cx="70" cy="26" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="70" cy="46" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="70" cy="64" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="120" cy="45" r="5" fill="#ffd866"/></svg>'
   },
   xor:{
@@ -648,7 +841,7 @@ const CONCEPTS={
   monster:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>',
     title:'Färdiga mönster',
-    def:'De fyra knapparna laddar olika testdata som ställer olika krav på modellen: <strong>Linjärt</strong> går att skilja med en rak linje. <strong>XOR</strong> kräver en böjd gräns. <strong>Cirkel</strong> har en klass innesluten av den andra. <strong>Spiral</strong> är svårast och behöver flera dolda lager. Prova samma mönster med olika modeller och jämför!',
+    def:'De fyra knapparna laddar olika testdata som ställer olika krav på modellen: <strong>Linjärt</strong> går att skilja med en rak linje. <strong>XOR</strong> kräver en böjd gräns. <strong>Cirkel</strong> har en klass innesluten av den andra. <strong>Spiral</strong> är svårast – här hjälper det att öka antalet neuroner i det dolda lagret (Avancerat → Arkitektur) för en renare gräns. Prova samma mönster med olika modeller och jämför!',
     illus:'<svg viewBox="0 0 140 80"><g transform="translate(8,12)"><line x1="4" y1="44" x2="44" y2="8" stroke="#7aa2ff" stroke-width="2"/><circle cx="12" cy="20" r="3" fill="#ff6a5e"/><circle cx="36" cy="34" r="3" fill="#4d80ff"/></g><g transform="translate(50,12)"><circle cx="10" cy="34" r="3" fill="#ff6a5e"/><circle cx="38" cy="8" r="3" fill="#ff6a5e"/><circle cx="10" cy="8" r="3" fill="#4d80ff"/><circle cx="38" cy="34" r="3" fill="#4d80ff"/></g><g transform="translate(92,12)"><circle cx="24" cy="22" r="16" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1"/><circle cx="24" cy="22" r="3.5" fill="#ff6a5e"/><circle cx="24" cy="4" r="3" fill="#4d80ff"/><circle cx="40" cy="30" r="3" fill="#4d80ff"/></g></svg>'
   },
   aktivering:{
@@ -660,7 +853,7 @@ const CONCEPTS={
   tanhrelu:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 10 17 10 7"/><path d="M13 17c3 0 3-10 8-10"/></svg>',
     title:'tanh vs ReLU',
-    def:'<strong style="color:var(--gold)">tanh</strong> ger mjuka värden mellan −1 och +1 – neuronerna visar både röda (negativa) och blå (positiva) områden, vilket ger <em>mjukt böjda</em> gränser. <strong style="color:var(--gold)">ReLU</strong> ger 0 för negativa tal, annars talet självt – neuronen är antingen av eller på, vilket ger <em>skarpa kanter</em> i beslutsgränsen. Testa båda och se skillnaden!',
+    def:'<strong style="color:var(--gold)">tanh</strong> ger mjuka värden mellan −1 och +1 och kan vara både negativ och positiv. <strong style="color:var(--gold)">ReLU</strong> sätter alla negativa värden till 0 och släpper igenom positiva oförändrade – en neuron är alltså antingen "av" eller "på". Funktionens form påverkar beslutsgränsen. Titta på en enskild neuron under <strong>Neuroner</strong> med respektive funktion och upptäck skillnaden själv!',
     illus:'<svg viewBox="0 0 140 80"><g transform="translate(0,4)"><text x="35" y="12" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#ffd866">tanh</text><path d="M8 58 C28 58 28 22 48 22 C60 22 60 22 62 22" fill="none" stroke="#7aa2ff" stroke-width="2.5" stroke-linecap="round"/><line x1="8" y1="40" x2="62" y2="40" stroke="rgba(255,255,255,.12)" stroke-width="1"/></g><g transform="translate(74,4)"><text x="35" y="12" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#ffd866">ReLU</text><path d="M8 58 L34 58 L58 22" fill="none" stroke="#34c759" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="8" y1="58" x2="62" y2="58" stroke="rgba(255,255,255,.12)" stroke-width="1"/></g></svg>'
   },
   neuron:{
@@ -668,6 +861,12 @@ const CONCEPTS={
     title:'Neuron',
     def:'En <strong>neuron</strong> tar emot indata (x och y), multiplicerar med sina <em>vikter</em>, summerar och kör resultatet genom aktiveringsfunktionen. Var för sig delar varje neuron bara planet i två med en enkel gräns. En neuron klassificerar alltså inte själv – det är först när alla neuroners signaler <strong>kombineras</strong> i utdatalagret som den slutliga beslutsgränsen uppstår.',
     illus:'<svg viewBox="0 0 140 80"><g stroke="rgba(122,162,255,.5)" stroke-width="1.5"><line x1="16" y1="24" x2="60" y2="40"/><line x1="16" y1="56" x2="60" y2="40"/><line x1="82" y1="40" x2="120" y2="40"/></g><circle cx="16" cy="24" r="4" fill="#7aa2ff"/><circle cx="16" cy="56" r="4" fill="#7aa2ff"/><text x="8" y="27" font-family="JetBrains Mono" font-size="9" fill="#7e8aaa">x</text><text x="8" y="59" font-family="JetBrains Mono" font-size="9" fill="#7e8aaa">y</text><circle cx="71" cy="40" r="12" fill="rgba(77,128,255,.25)" stroke="#7aa2ff" stroke-width="2"/><circle cx="120" cy="40" r="4" fill="#ffd866"/></svg>'
+  },
+  kombination:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h6M4 12h6M4 17h6"/><path d="M14 12h6M17 9l3 3-3 3"/></svg>',
+    title:'Kombination',
+    def:'Var för sig ritar varje neuron bara en enkel, nästan rak linje. Men i <strong>utdatalagret</strong> vägs alla neuroners signaler samman – och summan av många enkla bitar bildar en böjd, sammansatt beslutsgräns. Det är detta <strong>Neuroner</strong>-läget visar: klicka för att välja vilka som ska bidra, och se hur just den kombinationen formar gränsen.',
+    illus:'<svg viewBox="0 0 140 80"><g transform="translate(6,6)"><line x1="4" y1="50" x2="34" y2="18" stroke="rgba(122,162,255,.4)" stroke-width="2"/><line x1="4" y1="30" x2="34" y2="46" stroke="rgba(122,162,255,.4)" stroke-width="2"/><text x="19" y="66" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#7e8aaa">enkla bitar</text></g><path d="M62 40h16M74 36l4 4-4 4" stroke="#ffd866" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(90,6)"><path d="M4 50 C10 20 34 54 40 16" fill="none" stroke="#4d80ff" stroke-width="2.5" stroke-linecap="round"/><text x="22" y="66" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#7e8aaa">gräns</text></g></svg>'
   }
 };
 function openConcept(id,ev){
