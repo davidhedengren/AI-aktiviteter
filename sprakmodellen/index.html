@@ -11,7 +11,7 @@
 <style>
 :root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--border2:#253050;--border-soft:rgba(255,255,255,.06);--text:#e8ecf8;--dim:#7e8aaa;--subtle:#b0bedc;--accent:#4d80ff;--accent2:#6698ff;--accent-dim:rgba(77,128,255,0.14);--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--orange:#ff9f43;--purple:#a78bfa;--step-accent:#4d80ff;--step-accent-soft:rgba(77,128,255,0.12);--r-md:14px;--r-lg:20px;--ease-out:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+body{font-family:'DM Sans',sans-serif;font-size:15.5px;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
 
 .back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
@@ -19,7 +19,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .lang-link:hover{color:var(--text);border-color:var(--dim);}
 .lang-link .lang-ico{width:14px;height:14px;flex-shrink:0;}
-.hd{width:100%;text-align:center;padding:30px 20px 26px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
+.hd{width:100%;text-align:center;padding:34px 20px 30px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
 .hd h1{font-family:'Syne',sans-serif;font-size:1.55em;font-weight:800;letter-spacing:-0.02em;margin-bottom:10px;text-shadow:0 0 34px rgba(102,152,255,.22);}
 .hd h1 span{color:var(--accent2);}
 .hd p{color:var(--dim);font-size:0.86em;max-width:560px;margin:0 auto;line-height:1.6;}
@@ -38,6 +38,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 #kSel:hover{border-color:rgba(176,190,220,0.55);}
 /* Glow när steg 2 (kontexten) är aktivt – då är väljaren huvudkontrollen */
 .wrap.sx-context:not(.sx-choose) #kSel{border-color:var(--step-accent);box-shadow:0 0 0 3px var(--step-accent-soft);}
+/* Steg 3 handlar om just det här valet – ge panelen samma tyngd som "Modellens minne" har, fast i stegets egen accentfärg, och bara medan steget är aktuellt */
+.wrap.sx-choose:not(.sx-data) .gate-choose.coll{border:1px solid var(--step-accent);box-shadow:0 12px 32px -10px var(--step-glow);}
+.wrap.sx-choose:not(.sx-data) .gate-choose .coll-toggle{color:var(--text);font-size:0.92em;background:var(--step-accent-soft);}
 textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;color:var(--subtle);}
 .btn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.84em;padding:9px 14px;border-radius:9px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:0.2s var(--ease-out);text-align:center;}
 .btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.08);}
@@ -86,11 +89,11 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 
 /* Collapsible (samma mönster som NIM) */
 .coll{border:1px solid var(--border);border-radius:12px;overflow:hidden;}
-.coll-toggle{width:100%;padding:11px 13px;background:var(--surface2);border:none;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:700;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.coll-toggle{width:100%;padding:14px 16px;background:var(--surface2);border:none;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:700;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px;}
 .coll-toggle:hover{color:var(--text);}
 .coll-toggle .arr{transition:transform 0.2s;flex-shrink:0;}
 .coll-toggle.open .arr{transform:rotate(180deg);}
-.coll-body{display:none;padding:12px;font-size:0.78em;color:var(--dim);line-height:1.65;border-top:1px solid var(--border);}
+.coll-body{display:none;padding:16px;font-size:0.78em;color:var(--dim);line-height:1.65;border-top:1px solid var(--border);}
 .coll-body.show{display:block;}
 .coll-body strong{color:var(--text);}
 .coll-body ol{margin:0 0 0 16px;}
@@ -109,6 +112,7 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 .narr{font-size:0.82em;color:var(--subtle);background:var(--step-accent-soft);border-left:3px solid var(--step-accent);border-radius:0 8px 8px 0;padding:11px 14px;line-height:1.55;transition:border-color 0.4s,background 0.4s;}
 .narr.choice{border-left-color:var(--green);}
 .narr .ctx-inline{font-family:'JetBrains Mono',monospace;color:var(--orange);font-weight:600;}
+.ctx-inline{font-family:'JetBrains Mono',monospace;color:var(--orange);font-weight:600;}
 .narr .chosen-inline{font-family:'JetBrains Mono',monospace;color:var(--green);font-weight:700;}
 .narr strong{color:var(--text);}
 .narr .rare{color:var(--orange);font-weight:700;}
@@ -183,8 +187,6 @@ input[type=range]:disabled{opacity:0.3;}
 .overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:18px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:0.25s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 24px rgba(77,128,255,.28);}
 .overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
 .overlay-btn svg{width:15px;height:15px;flex-shrink:0;}
-.overlay-tip{margin-top:16px;font-size:0.8em;color:var(--dim);text-align:center;line-height:1.55;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;}
-.overlay-tip strong{color:var(--text);}
 .intro-viz{display:block;width:220px;height:80px;margin:0 auto 16px;}
 .intro-viz .iv-chip rect{fill:rgba(255,255,255,.05);stroke:rgba(255,255,255,.14);stroke-width:1.5;}
 .intro-viz text{fill:#b0bedc;font-family:'JetBrains Mono',monospace;font-size:11px;text-anchor:middle;font-weight:600;}
@@ -194,15 +196,15 @@ input[type=range]:disabled{opacity:0.3;}
 @keyframes ivPulse{0%,100%{opacity:.5;}50%{opacity:1;}}
 
 /* ═══ Remake: stegbaserad layout ═══ */
-.wrap{max-width:1180px;margin:0 auto;width:100%;padding:22px 16px 44px;display:flex;flex-direction:column;gap:28px;flex:1;position:relative;z-index:1;}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:20px 22px;box-shadow:0 6px 22px rgba(0,0,0,0.32);}
-.card-h{display:flex;align-items:center;gap:9px;font-family:'Syne',sans-serif;font-size:1.02em;font-weight:800;margin-bottom:16px;letter-spacing:-0.01em;}
+.wrap{max-width:1180px;margin:0 auto;width:100%;padding:34px 16px 52px;display:flex;flex-direction:column;gap:40px;flex:1;position:relative;z-index:1;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:26px 28px;box-shadow:0 6px 22px rgba(0,0,0,0.32);}
+.card-h{display:flex;align-items:center;gap:9px;font-family:'Syne',sans-serif;font-size:1.02em;font-weight:800;margin-bottom:20px;letter-spacing:-0.01em;}
 .step-badge{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:0.78em;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
-.setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;}
+.setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:18px;}
 .mini-t{display:block;font-size:0.64em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim);margin-bottom:8px;}
-.grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(340px,1fr);gap:24px;align-items:start;}
-.stage{display:flex;flex-direction:column;gap:22px;min-width:0;}
-.side{display:flex;flex-direction:column;gap:16px;min-width:0;}
+.grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(340px,1fr);gap:32px;align-items:start;}
+.stage{display:flex;flex-direction:column;gap:26px;min-width:0;}
+.side{display:flex;flex-direction:column;gap:20px;min-width:0;}
 .coll{background:var(--surface);}
 .side .coll.sticky{position:sticky;top:12px;}
 
@@ -223,10 +225,6 @@ input[type=range]:disabled{opacity:0.3;}
 .gloss-item b{color:var(--accent2);}
 
 /* Träna-knapp: markeras när modellen behöver tränas om */
-.train-btn{margin-bottom:2px;transition:background 0.3s,border-color 0.3s;}
-.train-btn.attn{animation:trainPulse 1.3s ease-in-out infinite;}
-@keyframes trainPulse{0%,100%{box-shadow:0 0 0 0 rgba(77,128,255,0.0);}50%{box-shadow:0 0 0 4px rgba(77,128,255,0.30);}}
-.train-btn.just-trained{background:var(--green);border-color:var(--green);color:#090b14;}
 .train-status{font-size:0.74em;color:var(--green);line-height:1.4;margin-top:6px;min-height:1em;}
 .train-status strong{color:var(--text);}
 
@@ -259,7 +257,7 @@ input[type=range]:disabled{opacity:0.3;}
 
 /* Stegnavigering – guidad trappa genom labbet (glaskänsla, egen accent per steg) */
 .sh{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.3);}
-.sh-tiles{display:flex;gap:9px;padding:16px 16px 12px;}
+.sh-tiles{display:flex;gap:10px;padding:20px 20px 14px;}
 .sh-tile{
   flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:7px;
   padding:13px 4px 11px;border-radius:14px;cursor:pointer;text-align:center;font-family:'DM Sans',sans-serif;
@@ -302,10 +300,10 @@ input[type=range]:disabled{opacity:0.3;}
 .sh-tile.active .sh-ico-wrap svg{width:18px;height:18px;}
 .sh-tile.active .sh-num{color:var(--step-accent);}
 .sh-tile.active .sh-lbl{color:var(--text);}
-.sh-hint{font-size:.72em;color:var(--dim);text-align:center;padding:0 16px 14px;}
-.sh-banner{border-top:1px solid var(--border-soft);padding:16px 18px 18px;border-left:3px solid var(--step-accent);background:var(--step-accent-soft);transition:border-color .4s var(--ease-out),background .4s var(--ease-out);}
+.sh-hint{font-size:.72em;color:var(--dim);text-align:center;padding:0 18px 18px;}
+.sh-banner{border-top:1px solid var(--border-soft);padding:20px 22px 22px;border-left:3px solid var(--step-accent);background:var(--step-accent-soft);transition:border-color .4s var(--ease-out),background .4s var(--ease-out);}
 .sh-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66em;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--step-accent);margin-bottom:7px;transition:color .4s;}
-.sh-title{font-family:'Syne',sans-serif;font-size:1.1em;font-weight:800;letter-spacing:-.01em;margin-bottom:7px;color:var(--text);}
+.sh-title{font-family:'DM Sans',sans-serif;font-size:1.22em;font-weight:700;letter-spacing:-.005em;margin-bottom:7px;color:var(--text);}
 .sh-desc{font-size:.88em;line-height:1.6;color:var(--subtle);}
 .sh-desc strong{color:var(--text);}
 @keyframes shFade{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:none;}}
@@ -325,7 +323,7 @@ input[type=range]:disabled{opacity:0.3;}
   .sh-banner{padding:14px 14px 16px;}
 }
 .step-foot{display:flex;justify-content:space-between;gap:8px;margin-top:11px;}
-.step-foot.bottom{margin-top:4px;padding-top:22px;border-top:1px solid var(--border);align-items:stretch;}
+.step-foot.bottom{margin-top:4px;padding-top:30px;border-top:1px solid var(--border);align-items:stretch;}
 .step-foot.bottom #prevStep{flex:0 0 auto;padding:11px 16px;}
 .btn.big-next{flex:1;font-size:1em;font-weight:700;padding:11px 22px;}
 
@@ -334,11 +332,10 @@ input[type=range]:disabled{opacity:0.3;}
 .wrap.sx-context .gate-context{display:block;}
 .wrap.sx-choose .gate-choose{display:block;}
 .wrap.sx-data .gate-data{display:block;}
-.wrap.sx-all .gate-prompt{display:flex;}
-.wrap.sx-all .gate-pblock{display:block;}
+.wrap.sx-data .gate-prompt{display:flex;}
+.wrap.sx-data .gate-pblock{display:block;}
 
 /* Dataset-syfte under väljaren */
-.preset-purpose{font-size:0.72em;color:var(--gold);line-height:1.45;margin-top:6px;min-height:1em;}
 
 /* Dataset-krysslista (välj och kombinera flera texter) */
 .ds-hint{font-weight:400;color:var(--dim);font-size:0.82em;}
@@ -352,6 +349,17 @@ input[type=range]:disabled{opacity:0.3;}
 .ds-card .ds-check{position:absolute;top:9px;right:10px;width:19px;height:19px;border-radius:50%;background:var(--accent);color:#fff;font-size:0.72em;font-weight:700;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0.6);transition:0.18s;}
 .ds-card.selected .ds-check{opacity:1;transform:scale(1);}
 
+/* Val-mekanism-korten (girig / viktad slump) – samma mönster som träningsdata-korten, men guldaktiga som resten av steg 3 */
+.mode-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.mode-card{position:relative;display:flex;flex-direction:column;gap:3px;padding:12px 13px;border:1px solid var(--border);border-radius:12px;background:var(--surface2);cursor:pointer;transition:transform 0.15s,border-color 0.15s,background 0.15s;user-select:none;}
+.mode-card:hover{border-color:var(--gold);transform:translateY(-2px);}
+.mode-card.selected{border-color:var(--gold);background:rgba(255,216,102,0.14);box-shadow:0 0 0 1px var(--gold);}
+.mode-card .mode-emoji{font-size:1.5em;line-height:1;margin-bottom:3px;}
+.mode-card .mode-name{font-weight:700;font-size:0.9em;color:var(--text);}
+.mode-card .mode-tag{font-size:0.72em;color:var(--dim);line-height:1.3;}
+.mode-card .mode-check{position:absolute;top:9px;right:10px;width:19px;height:19px;border-radius:50%;background:var(--gold);color:#2a2410;font-size:0.72em;font-weight:700;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0.6);transition:0.18s;}
+.mode-card.selected .mode-check{opacity:1;transform:scale(1);}
+
 
 /* Säkerhetsmätare för aktuell kontext */
 .certainty{margin:9px 0 5px;}
@@ -363,17 +371,33 @@ input[type=range]:disabled{opacity:0.3;}
 .cert-note{font-size:0.7em;color:var(--dim);line-height:1.45;margin-top:5px;}
 .cert-note strong{color:var(--text);}
 
-/* "Wow"-träningssekvens: eleven ser modellen byggas, steg för steg */
-.train-seq{position:fixed;inset:0;background:rgba(9,11,20,0.82);backdrop-filter:blur(4px);z-index:150;display:none;align-items:center;justify-content:center;padding:20px;}
-.train-seq.show{display:flex;}
-.train-seq-card{background:var(--surface);border:1px solid rgba(52,199,89,0.4);border-radius:18px;padding:34px 40px;text-align:center;min-width:300px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
-.train-seq-icon{font-size:2.6em;margin-bottom:14px;line-height:1;animation:seqPulse 1.1s ease-in-out infinite;}
-@keyframes seqPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
-.train-seq.done .train-seq-icon{animation:seqPop 0.5s ease;}
-@keyframes seqPop{0%{transform:scale(0.5);}60%{transform:scale(1.25);}100%{transform:scale(1);}}
-.train-seq-label{font-size:1.05em;font-weight:700;color:var(--text);margin-bottom:16px;min-height:1.3em;letter-spacing:-0.01em;}
-.train-seq-bar{height:8px;border-radius:5px;background:var(--surface2);overflow:hidden;}
-.train-seq-bar i{display:block;height:100%;width:0;border-radius:5px;background:linear-gradient(90deg,var(--green),#5fe0a0);transition:width 0.4s ease;box-shadow:0 0 12px rgba(52,199,89,0.5);}
+/* ── Träna-knapp: samma "levande" mönster som bias-labbet ── */
+.train-cta{position:relative;overflow:hidden;width:100%;padding:17px 20px;border-radius:14px;border:none;
+  background:linear-gradient(135deg,var(--green),#28b567);color:#04140a;font-family:'DM Sans',sans-serif;font-weight:800;font-size:1.02em;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:transform .25s var(--ease-spring),box-shadow .25s var(--ease-out),background .4s var(--ease-out);
+  box-shadow:0 8px 26px rgba(52,199,89,.25);isolation:isolate;}
+.train-cta:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(52,199,89,.35);}
+.train-cta:active{transform:scale(.98);}
+.train-cta::before{content:'';position:absolute;inset:-3px;border-radius:17px;z-index:-1;filter:blur(11px);
+  background:linear-gradient(135deg,var(--green),#8effc4,var(--green));opacity:0;transition:opacity .4s;animation:ctaPulse 2.6s ease-in-out infinite;}
+.train-cta.idle::before{opacity:.5;}
+@keyframes ctaPulse{0%,100%{opacity:.3;}50%{opacity:.65;}}
+.train-cta-icon{font-size:1.2em;display:inline-block;position:relative;z-index:1;}
+.train-cta-text{position:relative;z-index:1;}
+
+/* ── Levande byggnads-canvas: riktiga ord ur texten strömmar in i tabellen ── */
+.train-stage{display:flex;flex-direction:column;align-items:center;gap:16px;padding:4px 0 2px;}
+.train-canvas-wrap{width:100%;max-width:520px;height:170px;position:relative;border-radius:var(--r-md);overflow:hidden;background:radial-gradient(ellipse 70% 90% at 50% 50%,rgba(20,26,48,.6),rgba(9,11,20,.3));border:1px solid var(--border-soft);}
+.train-canvas-wrap canvas{width:100%;height:100%;display:block;}
+.train-status-list{min-height:24px;display:flex;flex-direction:column;align-items:center;gap:7px;width:100%;max-width:420px;}
+.train-status-line{font-size:.92em;color:var(--subtle);display:flex;align-items:center;gap:9px;opacity:0;transform:translateY(6px);transition:opacity .4s var(--ease-out),transform .4s var(--ease-out);font-weight:500;}
+.train-status-line.show{opacity:1;transform:none;}
+.train-status-line .tsl-dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;box-shadow:0 0 8px var(--accent2);}
+.train-status-line.done .tsl-dot{background:var(--green);box-shadow:0 0 8px var(--green);}
+.train-status-line .tsl-check{color:var(--green);font-weight:700;}
+.train-progress-rail{width:100%;max-width:420px;height:5px;border-radius:999px;background:var(--surface2);overflow:hidden;}
+.train-progress-rail i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .2s var(--ease-out);}
 
 /* ═══ Glaskort (concept cards) – samma komponent som övriga labb ═══ */
 .launch-grid{display:flex;flex-direction:column;gap:10px;}
@@ -383,8 +407,8 @@ input[type=range]:disabled{opacity:0.3;}
 .lc-ico{width:38px;height:38px;flex-shrink:0;border-radius:11px;background:var(--accent-dim);color:var(--accent2);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(77,128,255,.14);}
 .lc-ico svg{width:19px;height:19px;}
 .lc-txt{display:flex;flex-direction:column;gap:2px;min-width:0;}
-.lc-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13.5px;letter-spacing:-.01em;line-height:1.2;}
-.lc-sub{font-size:10.5px;color:var(--dim);line-height:1.35;}
+.lc-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14.5px;letter-spacing:-.01em;line-height:1.25;}
+.lc-sub{font-size:11.5px;color:var(--dim);line-height:1.4;}
 .lc-arrow{margin-left:auto;color:var(--dim);flex-shrink:0;transition:transform .2s var(--ease-spring),color .2s;}
 .launch-card:hover .lc-arrow{transform:translateX(3px);color:var(--accent2);}
 .lc-arrow svg{width:15px;height:15px;display:block;}
@@ -401,6 +425,7 @@ input[type=range]:disabled{opacity:0.3;}
 .concept-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);z-index:3;transform:translateZ(30px);padding:0;}
 .concept-close:hover{border-color:var(--red);color:var(--red);transform:translateZ(30px) rotate(90deg);}
 .concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
+.concept-icon.warn{background:rgba(239,91,91,.14);color:var(--red);box-shadow:0 10px 24px rgba(239,91,91,.18);}
 .concept-icon svg{width:28px;height:28px;}
 .concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:10px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
 .concept-def{font-size:.9em;line-height:1.65;color:var(--dim);position:relative;z-index:3;transform:translateZ(18px);transform-style:preserve-3d;text-align:left;}
@@ -454,8 +479,6 @@ input[type=range]:disabled{opacity:0.3;}
           <div class="ds-card" data-key="hemso" onclick="toggleCard('hemso')"><span class="ds-check">✓</span><span class="ds-emoji">📖</span><span class="ds-name">Hemsöborna</span><span class="ds-tag">Stor svensk roman</span></div>
           <div class="ds-card" data-key="shakespeare" onclick="toggleCard('shakespeare')"><span class="ds-check">✓</span><span class="ds-emoji">🎭</span><span class="ds-name">Shakespeare</span><span class="ds-tag">Stor engelsk samling</span></div>
         </div>
-        <div class="preset-purpose" id="presetPurpose"></div>
-      </div>
       <div class="gate-context">
         <label class="mini-t k-label"><span class="term" data-term="kontextlängd">Kontextlängd</span></label>
         <select class="sel" id="kSel" onchange="onKChange(this.value)">
@@ -465,9 +488,19 @@ input[type=range]:disabled{opacity:0.3;}
         </select>
       </div>
     </div>
-    <button class="btn pri train-btn" id="trainBtn" style="width:100%;" onclick="trainAnimated()">🧠 Träna modellen</button>
-    <div class="stale-note" id="staleNote">⚠️ Träningstexten har ändrats – tryck <strong style="color:var(--text)">Träna modellen</strong> för att uppdatera den.</div>
+    <div id="trainIdle">
+      <button class="train-cta idle" id="trainBtn" onclick="trainAnimated()">
+        <span class="train-cta-icon">🧠</span>
+        <span class="train-cta-text">Träna modellen</span>
+      </button>
+    </div>
+    <div class="stale-note" id="staleNote"></div>
     <div class="train-status" id="trainStatus"></div>
+    <div class="train-stage" id="trainStage" style="display:none;">
+      <div class="train-canvas-wrap"><canvas id="trainCanvas"></canvas></div>
+      <div class="train-progress-rail"><i id="trainRail"></i></div>
+      <div class="train-status-list" id="trainStatusList"></div>
+    </div>
     <div class="coll" style="margin-top:10px;">
       <button class="coll-toggle" onclick="toggleColl(this,'textBody')">✏️ Visa &amp; redigera texten – eller ladda upp en fil<span class="arr">▼</span></button>
       <div class="coll-body" id="textBody">
@@ -479,6 +512,7 @@ input[type=range]:disabled{opacity:0.3;}
         <div class="hint" id="fileStatus" style="display:none;"></div>
       </div>
     </div>
+
   </section>
 
   <div class="grid">
@@ -521,11 +555,21 @@ input[type=range]:disabled{opacity:0.3;}
       <div class="coll gate-choose">
         <button class="coll-toggle open" onclick="toggleColl(this,'chooseBody')">⚙️ Hur modellen väljer nästa ord<span class="arr">▼</span></button>
         <div class="coll-body show" id="chooseBody">
-          <div class="ctrl-row">
-            <select class="sel" id="modeSel" style="flex:1;min-width:170px;" onchange="onModeChange(this.value)">
-              <option value="weighted" selected>🎲 Viktad slump (slumpar efter sannolikhet)</option>
-              <option value="greedy">👑 Alltid vanligast (girig)</option>
-            </select>
+          <div class="mode-cards" id="modeCards">
+            <div class="mode-card selected" data-mode="weighted" onclick="onModeChange('weighted')">
+              <span class="mode-check">✓</span>
+              <span class="mode-emoji">🎲</span>
+              <span class="mode-name">Viktad slump</span>
+              <span class="mode-tag">Slumpar efter sannolikhet</span>
+            </div>
+            <div class="mode-card" data-mode="greedy" onclick="onModeChange('greedy')">
+              <span class="mode-check">✓</span>
+              <span class="mode-emoji">👑</span>
+              <span class="mode-name">Alltid vanligast</span>
+              <span class="mode-tag">Girigt val</span>
+            </div>
+          </div>
+          <div class="ctrl-row" style="margin-top:12px;">
             <label><span class="term" data-term="temperatur">Temperatur</span></label>
             <input type="range" id="tempSlider" min="0.3" max="2" step="0.1" value="1" oninput="onTempChange(this.value)">
             <span class="temp-val" id="tempVal">1.0</span>
@@ -589,15 +633,6 @@ input[type=range]:disabled{opacity:0.3;}
   </div>
 </div>
 
-<!-- ─── Träningssekvens ─── -->
-<div class="train-seq" id="trainSeq" aria-hidden="true">
-  <div class="train-seq-card">
-    <div class="train-seq-icon" id="trainSeqIcon">🧠</div>
-    <div class="train-seq-label" id="trainSeqLabel">Läser texten…</div>
-    <div class="train-seq-bar"><i id="trainSeqFill"></i></div>
-  </div>
-</div>
-
 <!-- ─── Glaskort-skelett ─── -->
 <div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
 <div class="concept-card" id="conceptCard">
@@ -623,11 +658,9 @@ input[type=range]:disabled{opacity:0.3;}
       <div class="step"><div class="step-num">1</div><div><strong>Hur väljer modellen nästa ord?</strong> Utforska hur modellen fortsätter en text och upptäck hur den väljer mellan olika möjliga ord.</div></div>
       <div class="step"><div class="step-num">2</div><div><strong>Vad minns modellen?</strong> Undersök hur många tidigare ord modellen tittar bakåt på när den väljer nästa ord – och vad det gör med texten.</div></div>
       <div class="step"><div class="step-num">3</div><div><strong>Hur påverkas modellens val?</strong> Experimentera med temperatur och olika sätt att välja nästa ord.</div></div>
-      <div class="step"><div class="step-num">4</div><div><strong>Hur formar träningsdatan modellen?</strong> Byt mellan olika texter och se hur modellens språk och beteende förändras.</div></div>
-      <div class="step"><div class="step-num">5</div><div><strong>Utforska modellen själv.</strong> Ladda upp egna texter, skriv egna prompter och undersök modellens möjligheter och begränsningar.</div></div>
+      <div class="step"><div class="step-num">4</div><div><strong>Hur formar träningsdatan modellen?</strong> Byt mellan olika texter, se hur språket förändras – kombinera sedan allt fritt och avsluta med att jämföra modellen med ChatGPT.</div></div>
     </div>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-    <p class="overlay-tip">Tips: håll muspekaren över <strong>understrukna ord</strong> för förklaringar, och tryck på korten i sidopanelen för fördjupning.</p>
   </div>
 </div>
 
@@ -806,7 +839,6 @@ async function handleFiles(fileList){
   document.getElementById('trainText').value = text;
   selectedDatasets.clear();
   syncCards();
-  showDatasetPurpose([]);
   markDirty();
   const words = text.split(/\s+/).length;
   setFileStatus(`✓ <strong>${files.map(f => esc(f.name)).join(' + ')}</strong> inläst – ca ${words.toLocaleString('sv-SE')} ord${clipped ? ' (texten kortades till de första ' + MAX_CHARS.toLocaleString('sv-SE') + ' tecknen)' : ''}. Tryck <strong>🧠 Träna modellen</strong>!`);
@@ -815,34 +847,168 @@ async function handleFiles(fileList){
 
 function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
 
-// "Wow"-sekvens: visa modellen byggas steg för steg innan det riktiga bygget
+// "Wow"-sekvens: eleven ser modellen byggas – riktiga ord ur texten strömmar
+// in i tabellen, inline i sidan (samma mönster som bias-labbets träningsakt)
 let training = false;
+let trainAnimRunning = false;
 async function trainAnimated(){
   if(training) return;
   // För kort text → kör vanliga bygget som visar felmeddelandet direkt
   if(tokenize(document.getElementById('trainText').value).length < 30){ buildFromTextarea(); return; }
   training = true;
-  const ov   = document.getElementById('trainSeq');
-  const lbl  = document.getElementById('trainSeqLabel');
-  const fill = document.getElementById('trainSeqFill');
-  const icon = document.getElementById('trainSeqIcon');
-  ov.classList.remove('done'); icon.textContent = '🧠';
-  fill.style.width = '0%';
-  ov.classList.add('show');
-  const stages = [['📖 Läser texten…', 33], ['🔤 Skapar ordlistan…', 66], ['🧩 Bygger språkmodellen…', 100]];
-  for(const [text, pct] of stages){
-    lbl.textContent = text;
-    await sleep(40);
-    fill.style.width = pct + '%';
-    await sleep(330);
+  document.getElementById('staleNote').classList.remove('show');
+  document.getElementById('trainIdle').style.display = 'none';
+  const stage = document.getElementById('trainStage');
+  stage.style.display = 'flex';
+  const DURATION = 3200;
+
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    runTrainStatusList(DURATION);
+    runTrainingCanvas(DURATION, () => {
+      buildFromTextarea();              // det riktiga bygget
+      setTimeout(() => {
+        stage.style.display = 'none';
+        document.getElementById('trainIdle').style.display = '';
+        training = false;
+      }, 500);
+    });
+  }));
+}
+
+const TRAIN_STAGES = [
+  {t:'Läser orden…', at:0},
+  {t:'Bygger ordföljdstabellen…', at:0.4},
+  {t:'Räknar sannolikheter…', at:0.75}
+];
+function runTrainStatusList(duration){
+  const wrap = document.getElementById('trainStatusList');
+  wrap.innerHTML = '';
+  const rail = document.getElementById('trainRail');
+  rail.style.width = '0%';
+  const lines = TRAIN_STAGES.map(s => {
+    const el = document.createElement('div');
+    el.className = 'train-status-line';
+    el.innerHTML = `<span class="tsl-dot"></span><span>${s.t}</span>`;
+    wrap.appendChild(el);
+    return el;
+  });
+  const t0 = performance.now();
+  function tick(now){
+    const frac = Math.min(1, (now - t0) / duration);
+    rail.style.width = (frac * 100) + '%';
+    TRAIN_STAGES.forEach((s, i) => {
+      if(frac >= s.at && !lines[i].classList.contains('show')) lines[i].classList.add('show');
+      if(i > 0 && frac >= s.at && !lines[i - 1].classList.contains('done')){
+        lines[i - 1].classList.add('done');
+        lines[i - 1].querySelector('span:last-child').innerHTML = TRAIN_STAGES[i - 1].t.replace('…', '') + ' <span class="tsl-check">✓</span>';
+      }
+    });
+    if(frac < 1) requestAnimationFrame(tick);
+    else{
+      const last = lines[lines.length - 1];
+      last.classList.add('done');
+      last.querySelector('span:last-child').innerHTML = TRAIN_STAGES[TRAIN_STAGES.length - 1].t.replace('…', '') + ' <span class="tsl-check">✓</span>';
+    }
   }
-  buildFromTextarea();              // det riktiga bygget
-  ov.classList.add('done');
-  icon.textContent = '🎉';
-  lbl.innerHTML = 'Klart – <strong>du har tränat en språkmodell!</strong>';
-  await sleep(750);
-  ov.classList.remove('show');
-  training = false;
+  requestAnimationFrame(tick);
+}
+
+// Riktiga ord ur den faktiska träningstexten strömmar in i en liten
+// tabellgrafik – inte en påhittad animation, utan samma data som byggs.
+function runTrainingCanvas(duration, onDone){
+  const canvas = document.getElementById('trainCanvas');
+  const wrap = canvas.parentElement;
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  let W = wrap.clientWidth, H = wrap.clientHeight;
+  if(W < 10 || H < 10){ W = Math.max(W, 480); H = Math.max(H, 170); }
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  const ctx = canvas.getContext('2d'); ctx.scale(dpr, dpr);
+
+  let finished = false;
+  function finish(){ if(finished) return; finished = true; trainAnimRunning = false; onDone && onDone(); }
+
+  // Sampla riktiga ord ur den text som faktiskt ska tränas på
+  const rawToks = tokenize(document.getElementById('trainText').value).filter(t => !/^[.,!?;:]$/.test(t) && t.length > 1);
+  const sample = [];
+  const n = Math.max(1, rawToks.length);
+  for(let i = 0; i < 30; i++) sample.push(rawToks[Math.floor(i / 30 * n)] || '…');
+
+  const rows = 4;
+  const tableX = W - 66, tableTop = H * 0.5 - 46, tableW = 60, tableH = 92;
+  const rowY = i => tableTop + 12 + i * (tableH - 20) / (rows - 1);
+
+  let particles = [];
+  let tStart = performance.now();
+  let lastSpawn = 0, spawnIdx = 0;
+  const rowPulse = new Array(rows).fill(0);
+
+  function spawn(now){
+    const w = sample[spawnIdx % sample.length]; spawnIdx++;
+    particles.push({
+      w, x: 12, y: 20 + Math.random() * (H - 40),
+      born: now, row: Math.floor(Math.random() * rows),
+      speed: 0.75 + Math.random() * 0.3, landed: false
+    });
+  }
+
+  function draw(now){
+    const elapsed = now - tStart;
+    ctx.clearRect(0, 0, W, H);
+
+    // tabellramen
+    ctx.strokeStyle = 'rgba(122,162,255,0.28)'; ctx.lineWidth = 1.4;
+    ctx.strokeRect(tableX - tableW / 2, tableTop, tableW, tableH);
+    for(let i = 1; i < rows; i++){
+      const ly = tableTop + i * tableH / rows;
+      ctx.beginPath(); ctx.moveTo(tableX - tableW / 2, ly); ctx.lineTo(tableX + tableW / 2, ly); ctx.stroke();
+    }
+    ctx.fillStyle = 'rgba(122,162,255,0.55)'; ctx.font = '600 9px "JetBrains Mono"'; ctx.textAlign = 'center';
+    ctx.fillText('TABELL', tableX, tableTop - 8);
+
+    // radernas pulsljus (blinkar till när ett ord landar)
+    for(let i = 0; i < rows; i++){
+      if(rowPulse[i] > 0){
+        rowPulse[i] -= 0.045;
+        const ly = tableTop + i * tableH / rows;
+        ctx.fillStyle = `rgba(52,199,89,${Math.max(0, rowPulse[i]) * 0.35})`;
+        ctx.fillRect(tableX - tableW / 2, ly, tableW, tableH / rows);
+      }
+    }
+
+    if(elapsed < duration - 400 && now - lastSpawn > 100){ spawn(now); lastSpawn = now; }
+
+    particles = particles.filter(p => {
+      const age = (now - p.born) * 0.001 * p.speed;
+      const t = Math.min(1, age);
+      const ex = tableX, ey = rowY(p.row);
+      const px = p.x + (ex - p.x) * t, py = p.y + (ey - p.y) * t;
+      const alpha = t > 0.82 ? Math.max(0, 1 - (t - 0.82) / 0.18) : 1;
+      if(t >= 0.98 && !p.landed){ p.landed = true; rowPulse[p.row] = 1; }
+
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.font = '600 11px "JetBrains Mono"';
+      const tw = ctx.measureText(p.w).width + 10;
+      ctx.beginPath();
+      ctx.rect(px - 4, py - 9, tw, 16);
+      ctx.fillStyle = 'rgba(77,128,255,0.16)';
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(122,162,255,0.45)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.fillStyle = '#e8ecf8'; ctx.textAlign = 'left';
+      ctx.fillText(p.w, px, py + 4);
+      ctx.restore();
+      return age < 1.05;
+    });
+
+    if(elapsed < duration || particles.length){
+      requestAnimationFrame(draw);
+    } else {
+      finish();
+    }
+  }
+  trainAnimRunning = true;
+  requestAnimationFrame(draw);
+  setTimeout(finish, duration + 900);   // skyddsnät – låt aldrig bygget hänga
 }
 
 function buildFromTextarea(){
@@ -865,10 +1031,6 @@ function buildFromTextarea(){
   deadEnd = false;
   dirty = false;
   document.getElementById('staleNote').classList.remove('show');
-  const tb = document.getElementById('trainBtn');
-  tb.classList.remove('attn');
-  tb.classList.add('just-trained');
-  setTimeout(() => tb.classList.remove('just-trained'), 1600);
   document.getElementById('trainStatus').innerHTML =
     `✓ Tränad på <strong>${tokens.length}</strong> tokens · <strong>${new Set(tokens).size}</strong> unika ord.`;
   exampleStarts = topContentWords(6);
@@ -914,7 +1076,6 @@ document.getElementById('startExamples').addEventListener('click', e => {
 
 // ── Träningsdata som krysslista: välj och kombinera flera texter ──
 const selectedDatasets = new Set();
-const DATASET_NAMES = { vader:'🌦️ Väder', sport:'⚽ Sport', hemso:'📖 Hemsöborna', shakespeare:'🎭 Shakespeare' };
 
 function toggleCard(key){
   if(selectedDatasets.has(key)) selectedDatasets.delete(key); else selectedDatasets.add(key);
@@ -940,18 +1101,7 @@ function setDatasets(keys){
 function rebuildTrainText(){
   const keys = [...selectedDatasets];
   document.getElementById('trainText').value = keys.map(k => PRESETS[k]).join('\n\n');
-  showDatasetPurpose(keys);
   markDirty();
-}
-
-function showDatasetPurpose(keys){
-  const el = document.getElementById('presetPurpose');
-  if(!el) return;
-  if(keys.length === 0){ el.textContent = 'Välj minst ett textkort att träna på.'; el.style.color = 'var(--dim)'; return; }
-  if(keys.length === 1){ el.textContent = PRESET_PURPOSE[keys[0]] || ''; el.style.color = 'var(--gold)'; return; }
-  const names = keys.map(k => DATASET_NAMES[k] || k).join(' + ');
-  el.textContent = `Blandad träning: ${names}. Modellen lär sig av flera källor samtidigt → mer varierat språk.`;
-  el.style.color = 'var(--gold)';
 }
 
 // Eleven redigerar textrutan själv → bli "egen text" och avmarkera datasen
@@ -960,8 +1110,6 @@ function onTextEdit(){
   if(document.getElementById('trainText').value !== combined){
     selectedDatasets.clear();
     syncCards();
-    const el = document.getElementById('presetPurpose');
-    if(el){ el.textContent = '✍️ Egen text – modellen tränas på det du skrivit.'; el.style.color = 'var(--dim)'; }
   }
   markDirty();
 }
@@ -970,13 +1118,13 @@ function onTextEdit(){
 // så eleven själv trycker "Träna" och ser modellen uppdateras.
 function markDirty(){
   dirty = true;
-  const b = document.getElementById('trainBtn');
-  if(b) b.classList.add('attn');
   const note = document.getElementById('staleNote');
-  note.innerHTML = built
-    ? '⚠️ Träningstexten har ändrats – tryck <strong style="color:var(--text)">Träna modellen</strong> för att uppdatera den.'
-    : '👉 Tryck <strong style="color:var(--text)">🧠 Träna modellen</strong> ovan för att bygga din första modell.';
-  note.classList.add('show');
+  if(built){
+    note.innerHTML = '⚠️ Träningstexten har ändrats – tryck <strong style="color:var(--text)">Träna modellen</strong> för att uppdatera den.';
+    note.classList.add('show');
+  }else{
+    note.classList.remove('show');
+  }
   document.getElementById('trainStatus').innerHTML = '';
 }
 
@@ -1262,11 +1410,18 @@ function showDeadEnd(){
     ? `Texten upprepar sig sällan, så vid kontextlängd ${k} kan modellen bara följa den ordagrant – och nu tog den slut. Prova <strong>kontextlängd 1</strong>, eller klistra in en längre text med fler upprepningar.`
     : `Det här är tabellmodellens svaghet: den kan bara exakta matchningar. ChatGPT:s neurala nätverk kan i stället <em>generalisera</em>.`;
   document.getElementById('ptable').innerHTML =
-    `<div class="ptable-msg"><span class="big">🚧</span>
-     <div><strong>Återvändsgränd!</strong><br>Ordföljden «${esc(ctx.join(' '))}» förekommer bara allra sist i träningstexten – modellen har aldrig sett något ord komma efter den.<br><br>${why}</div>
-     <button class="btn pri" onclick="deadEnd=false;startGen()">🔀 Börja om från nytt ställe</button></div>`;
+    `<div class="ptable-msg"><span class="big">🚧</span><div><strong>Återvändsgränd</strong> – inga möjliga ord härifrån.</div>
+     <button class="btn pri" onclick="closeConcept();deadEnd=false;startGen()">🔀 Börja om från nytt ställe</button></div>`;
   document.getElementById('narr').innerHTML =
-    `Kontexten <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> har <strong>0 möjliga fortsättningar</strong>. Tryck på knappen i tabellen för att starta om.`;
+    `Kontexten <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> har <strong>0 möjliga fortsättningar</strong>.`;
+  showConceptCard({
+    icon: ICON_DEADEND,
+    iconClass: 'warn',
+    title: 'Återvändsgränd!',
+    def: `<div class="cc-lead">Ordföljden <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> förekommer bara allra sist i träningstexten – modellen har aldrig sett något ord komma efter den.</div>
+      <div>${why}</div>
+      <button class="btn pri" style="width:100%;margin-top:16px;" onclick="closeConcept();deadEnd=false;startGen()">🔀 Börja om från nytt ställe</button>`
+  });
 }
 
 // ════════════════════════════════════════════════════════════
@@ -1300,7 +1455,6 @@ function stopAuto(){
   btn.classList.remove('pri');
 }
 
-
 // ════════════════════════════════════════════════════════════
 //  Inställningar
 // ════════════════════════════════════════════════════════════
@@ -1320,6 +1474,7 @@ function onKChange(val){
 
 function onModeChange(val){
   mode = val;
+  document.querySelectorAll('#modeCards .mode-card').forEach(c => c.classList.toggle('selected', c.dataset.mode === val));
   document.getElementById('tempSlider').disabled = (mode === 'greedy');
   document.getElementById('tempHint').innerHTML = (mode === 'greedy')
     ? '👑 Girigt läge: temperaturen påverkar inte valet här.'
@@ -1480,7 +1635,7 @@ function renderCertainty(p1, options, mask){
 
 // ── Stegnavigering: guidad trappa genom labbet ──
 let curStep = 1;
-const STEP_ACCENTS = ['#4d80ff','#34c759','#ffd866','#a78bfa','#ff9f43'];
+const STEP_ACCENTS = ['#4d80ff','#34c759','#ffd866','#a78bfa'];
 const STEPS = [
   {label:'Nästa ord', title:'Hur väljer modellen nästa ord?',
    icon:'<path d="M4 12h12"/><path d="M12 6l6 6-6 6"/>',
@@ -1494,14 +1649,10 @@ const STEPS = [
    icon:'<rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="9" cy="9" r="1.3"/><circle cx="15" cy="9" r="1.3"/><circle cx="9" cy="15" r="1.3"/><circle cx="15" cy="15" r="1.3"/><circle cx="12" cy="12" r="1.3"/>',
    intro:'Ska modellen <strong>alltid</strong> ta det vanligaste ordet? Testa <strong>girigt val</strong> mot <strong>viktad slump</strong>, och dra i <strong>temperaturen</strong>.',
    rec:{ds:['hemso'], k:2}},
-  {label:'Träningsdatan', title:'Hur formar träningsdatan modellen?',
+  {label:'Data & utforskning', title:'Hur formar träningsdatan modellen?',
    icon:'<path d="M6 4h9l5 5v11H6z"/><path d="M15 4v5h5"/><path d="M9 13h6M9 17h6"/>',
-   intro:'<strong>Träningsdatan formar modellen.</strong> Kryssa i flera texter (t.ex. Sport + Väder) eller byt till Shakespeare och undersök hur språk, ordval och fortsättningar förändras.',
-   rec:{ds:['hemso'], k:2}},
-  {label:'Fri utforskning', title:'Utforska modellen själv',
-   icon:'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
-   intro:'<strong>Utforska fritt.</strong> Kombinera träningsdata, kontextlängd, temperatur och prompter för att undersöka hur modellen funkar. Avsluta med att jämföra den med ChatGPT.',
-   rec:null}
+   intro:'<strong>Träningsdatan formar modellen.</strong> Kryssa i flera texter (t.ex. Sport + Väder) eller byt till Shakespeare och undersök hur språk, ordval och fortsättningar förändras. Kombinera sedan fritt med kontextlängd, temperatur och egna prompter – och avsluta med att jämföra modellen med ChatGPT.',
+   rec:{ds:['hemso'], k:2}}
 ];
 
 // Bygg de fem glaskänsla-plattorna. Anropas varje stegbyte (billigt för 5 element)
@@ -1522,7 +1673,6 @@ function goStep(n){
   if(n >= 2) cls.push('sx-context');
   if(n >= 3) cls.push('sx-choose');
   if(n >= 4) cls.push('sx-data');
-  if(n >= 5) cls.push('sx-all');
   const wrap = document.getElementById('wrapEl');
   wrap.className = cls.join(' ');
   // Subtil egen accentfärg per steg → känsla av framsteg
@@ -1562,21 +1712,6 @@ function scrollToTop(){
   jump();
   requestAnimationFrame(jump);   // igen efter att layouten ritats om
   setTimeout(jump, 60);          // och en gång till om innehållet just bytt höjd
-}
-
-// ── Dataset-syften: varför just den här texten? ──
-const PRESET_PURPOSE = {
-  hemso:       'Stor svensk roman av August Strindberg – vanliga ordföljder återkommer, så kontexten börjar fungera på riktigt.',
-  saga:        'Enkel berättelse – lätt att följa hur modellen bygger meningar, ord för ord.',
-  vader:       'Många upprepade fraser → modellen blir mycket säker och förutsägbar.',
-  sport:       'Samma struktur men fler möjliga fortsättningar → visar hur sannolikheter fördelas.',
-  byn:         'Längre berättelse → visar hur kontexten påverkar textens sammanhang.',
-  shakespeare: 'Stor samling av Shakespeares verk (på engelska) – modellen byter helt språk och stil.',
-  egen:        'Din egen text → hur måste man skriva för att modellen ska skriva som man själv?'
-};
-function showPresetPurpose(key){
-  const el = document.getElementById('presetPurpose');
-  if(el) el.textContent = PRESET_PURPOSE[key] || '';
 }
 
 // Tangentbord: mellanslag / högerpil = nästa ord (utanför inmatningsfält)
@@ -1689,7 +1824,9 @@ const CONCEPTS = {
 };
 function showConceptCard(c, ev){
   const card = document.getElementById('conceptCard');
-  document.getElementById('conceptIcon').innerHTML = c.icon;
+  const iconEl = document.getElementById('conceptIcon');
+  iconEl.innerHTML = c.icon;
+  iconEl.className = 'concept-icon' + (c.iconClass ? ' ' + c.iconClass : '');
   document.getElementById('conceptTitle').innerHTML = c.title;
   document.getElementById('conceptDef').innerHTML = c.def;
   let dx = 0, dy = 0;
@@ -1714,6 +1851,7 @@ function openConcept(id, ev){
   showConceptCard(c, ev);
 }
 const ICON_TERM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>';
+const ICON_DEADEND = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M6.5 6.5l11 11"/></svg>';
 function openTermCard(key, ev){
   if(ev) ev.stopPropagation();
   const g = GLOSSARY[key]; if(!g) return;
