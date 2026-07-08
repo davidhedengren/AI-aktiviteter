@@ -131,8 +131,9 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 .start-input:focus{border-color:var(--accent);}
 .start-err{font-size:0.72em;color:var(--red);display:none;}
 .start-err.show{display:block;}
-input[type=range]{-webkit-appearance:none;flex:1;min-width:70px;height:4px;border-radius:2px;background:var(--surface2);outline:none;accent-color:var(--accent);}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer;}
+input[type=range]{-webkit-appearance:none;flex:1;min-width:70px;height:7px;border-radius:4px;background:var(--surface2);outline:none;accent-color:var(--accent);}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 2px 8px rgba(77,128,255,.5),0 0 0 3px rgba(77,128,255,.15);border:2px solid #fff;}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 2px 8px rgba(77,128,255,.5),0 0 0 3px rgba(77,128,255,.15);border:2px solid #fff;}
 input[type=range]:disabled{opacity:0.3;}
 .temp-val{font-family:'JetBrains Mono',monospace;font-size:0.82em;color:var(--gold);min-width:28px;text-align:right;}
 
@@ -558,8 +559,8 @@ input[type=range]:disabled{opacity:0.3;}
               <div class="mode-card" data-mode="greedy" onclick="onModeChange('greedy')">
                 <span class="mode-check">✓</span>
                 <span class="mode-emoji">👑</span>
-                <span class="mode-name">Alltid vanligast</span>
-                <span class="mode-tag">Girigt val</span>
+                <span class="mode-name">Girigt val</span>
+                <span class="mode-tag">Väljer alltid det vanligaste ordet</span>
               </div>
             </div>
             <div class="ctrl-row" style="margin-top:12px;">
@@ -1633,11 +1634,11 @@ const STEP_ACCENTS = ['#4d80ff','#34c759','#ffd866','#a78bfa'];
 const STEPS = [
   {label:'Nästa ord', title:'Hur väljer modellen nästa ord?',
    icon:'<path d="M4 12h12"/><path d="M12 6l6 6-6 6"/>',
-   intro:'<strong>Datorn kan ingen svenska</strong> – ändå kan den gissa nästa ord. Tryck ✍️ <strong>Nästa ord</strong> några gånger och titta i <strong>modellens minne</strong>: vad bygger gissningen egentligen på?',
+   intro:'<strong>Träna modellen på väderrapporten.</strong> Tryck sedan på ✍️ <strong>Nästa ord</strong> några gånger och titta i <strong>modellens minne</strong>: vad bygger gissningen egentligen på?',
    rec:{ds:['vader'], k:1}},
   {label:'Kontexten', title:'Vad minns modellen?',
    icon:'<path d="M7 4H4v16h3"/><path d="M17 4h3v16h-3"/><path d="M9 9h6M9 15h6"/>',
-   intro:'Nu tränar vi på en <strong>stor svensk roman</strong>. <strong>Testa olika kontextlängder</strong> (1 → 2 → 3) och jämför: skriver modellen mer som riktig svenska – och hur ändras valmöjligheterna?',
+   intro:'<strong>Träna modellen på ”Hemsöborna”, en stor svensk roman av August Strindberg.</strong> Testa <strong>olika kontextlängder</strong> (1 → 2 → 3) och jämför: skriver modellen mer som riktig svenska – och hur ändras valmöjligheterna?',
    rec:{ds:['hemso'], k:2}},
   {label:'Slump & temperatur', title:'Hur påverkas modellens val?',
    icon:'<rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="9" cy="9" r="1.3"/><circle cx="15" cy="9" r="1.3"/><circle cx="9" cy="15" r="1.3"/><circle cx="15" cy="15" r="1.3"/><circle cx="12" cy="12" r="1.3"/>',
@@ -1645,7 +1646,7 @@ const STEPS = [
    rec:{ds:['hemso'], k:2}},
   {label:'Data & utforskning', title:'Hur formar träningsdatan modellen?',
    icon:'<path d="M6 4h9l5 5v11H6z"/><path d="M15 4v5h5"/><path d="M9 13h6M9 17h6"/>',
-   intro:'<strong>Träningsdatan formar modellen.</strong> Kryssa i flera texter (t.ex. Sport + Väder) eller byt till Shakespeare och undersök hur språk, ordval och fortsättningar förändras. Kombinera sedan fritt med kontextlängd, temperatur och egna prompter – och avsluta med att jämföra modellen med ChatGPT.',
+   intro:'<strong>Träningsdatan formar modellen.</strong> Träna modellen på flera texter (t.ex. Sport + Väder) eller byt till Shakespeare och undersök hur språk, ordval och fortsättningar förändras. Kombinera sedan fritt med kontextlängd, temperatur och egna prompter – och avsluta med att jämföra modellen med ChatGPT.',
    rec:{ds:['hemso'], k:2}}
 ];
 
@@ -1689,8 +1690,7 @@ function goStep(n){
   if(rec){
     document.getElementById('kSel').value = String(rec.k);
     k = rec.k;
-    setDatasets(rec.ds);      // bockar i rätt texter, markerar modellen som otränad/dirty
-    if(built) buildFromTextarea();   // träna om automatiskt bara om eleven redan tränat en gång själv
+    setDatasets(rec.ds);      // bockar i rätt texter, markerar modellen som otränad/dirty – eleven trycker Träna själv, varje gång
   }
   scrollToTop();             // börja varje steg högst upp (sist, efter ombyggnad)
 }
