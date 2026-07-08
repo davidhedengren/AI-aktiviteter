@@ -18,7 +18,7 @@
   --r-md:14px; --r-lg:20px;
   --ease-out:cubic-bezier(.16,1,.3,1);
   --ease-spring:cubic-bezier(.34,1.56,.64,1);
-  --alg:#ec4899; /* follows selected algorithm */
+  --alg:#7e8aaa; /* neutral grey until an algorithm is chosen; follows selected algorithm after */
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{-webkit-text-size-adjust:100%;}
@@ -68,7 +68,7 @@ button{font-family:inherit;}
 #mazeCanvas{display:block;user-select:none;border-radius:17px;width:100%;height:auto;cursor:default;transition:box-shadow .3s var(--ease-out);}
 #canvasContainer.editing #mazeCanvas{cursor:crosshair;box-shadow:inset 0 0 0 1.5px rgba(51,209,122,.32),inset 0 0 40px rgba(51,209,122,.05);}
 
-/* ── Edit mode: toggle + help button, placed next to the player controls ── */
+/* ── Edit mode: toggle + help button, placed by the player controls ── */
 .edit-controls{display:inline-flex;gap:8px;align-items:center;}
 .hud-toggle{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border-radius:999px;
   border:1px solid var(--border);background:var(--surface2);
@@ -101,9 +101,25 @@ button{font-family:inherit;}
 #startSearchBtn{padding:12px 28px;border:none;border-radius:10px;font-size:13.5px;font-weight:700;letter-spacing:.01em;color:#fff;cursor:pointer;
   background:linear-gradient(180deg,color-mix(in srgb,var(--alg) 88%,#fff),color-mix(in srgb,var(--alg) 78%,#000));
   box-shadow:0 3px 16px color-mix(in srgb,var(--alg) 45%,transparent);
-  transition:filter .18s,background .25s,box-shadow .25s,transform .08s;}
+  transition:filter .18s,background .25s,box-shadow .25s,transform .08s,opacity .25s;}
 #startSearchBtn:hover{filter:brightness(1.08);box-shadow:0 5px 22px color-mix(in srgb,var(--alg) 60%,transparent);}
 #startSearchBtn:active{transform:translateY(1px);}
+#startSearchBtn.needs-alg{opacity:.55;cursor:not-allowed;}
+#startSearchBtn.needs-alg:hover{opacity:.7;filter:none;}
+@keyframes btnShake{0%,100%{transform:translateX(0);}20%{transform:translateX(-4px);}40%{transform:translateX(4px);}60%{transform:translateX(-3px);}80%{transform:translateX(3px);}}
+#startSearchBtn.shake{animation:btnShake .38s ease;}
+
+.start-nudge{position:fixed;z-index:250;
+  background:rgba(20,24,42,.97);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.14);color:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.01em;
+  padding:10px 16px;border-radius:10px;white-space:nowrap;
+  box-shadow:0 16px 40px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.02) inset;
+  opacity:0;pointer-events:none;transform-origin:50% 100%;
+  transform:translate(-50%,calc(-100% - 12px)) scale(.92);
+  transition:opacity .2s ease,transform .3s cubic-bezier(.34,1.56,.64,1);}
+.start-nudge::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);
+  width:0;height:0;border:7px solid transparent;border-top-color:rgba(20,24,42,.97);}
+.start-nudge.show{opacity:1;transform:translate(-50%,calc(-100% - 12px)) scale(1);}
 
 .player{display:inline-flex;align-items:center;gap:6px;}
 .icon-btn{width:38px;height:38px;padding:0;display:inline-flex;align-items:center;justify-content:center;background:var(--surface2);color:var(--subtle);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:border-color .18s,color .18s,transform .08s,box-shadow .18s;}
@@ -272,15 +288,15 @@ button:disabled{opacity:.42;cursor:not-allowed;}
     <svg class="lang-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.7 2.6 4 5.8 4 9s-1.3 6.4-4 9c-2.7-2.6-4-5.8-4-9s1.3-6.4 4-9z"/></svg>
     Svenska</a>
   <h1>Search Algorithms in a <span>Maze</span></h1>
-  <p>Build your own maze and watch how BFS, DFS, Greedy Best-First, and A* find their way to the goal.</p>
+  <p>Build your own maze and follow how BFS, DFS, Greedy Best-First Search, and A* find the way to the goal.</p>
 </div>
 
 <div class="page-wrap">
 
 <!-- Algorithm choice as cards: each algorithm has its own color/personality -->
-<h2 class="alg-cards-label">Choose algorithm</h2>
+<h2 class="alg-cards-label">Choose an algorithm</h2>
 <div class="alg-cards" role="radiogroup" aria-label="Choose algorithm" id="algCards">
-  <button class="alg-card" style="--c:#ec4899" data-alg="BFS" role="radio" aria-checked="true">
+  <button class="alg-card" style="--c:#ec4899" data-alg="BFS" role="radio" aria-checked="false">
     <span class="alg-dot"></span><span class="alg-name">BFS</span>
   </button>
   <button class="alg-card" style="--c:#a06bff" data-alg="DFS" role="radio" aria-checked="false">
@@ -295,18 +311,18 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 </div>
 
 <div id="canvasContainer">
-  <canvas id="mazeCanvas" aria-label="Maze. Turn on edit mode at the player controls to build and modify."></canvas>
+  <canvas id="mazeCanvas" aria-label="Maze. Turn on edit mode in the player controls to build and change it."></canvas>
   <div id="mazeTooltip"></div>
   <div id="resultOverlay" class="result-overlay"></div>
 </div>
 
 <div id="controls">
-  <button id="startSearchBtn">Start search</button>
+  <button id="startSearchBtn" class="needs-alg">Start search</button>
   <div class="player">
     <button id="prevStepBtn" class="icon-btn" title="Previous step (←)" aria-label="Previous step">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 6h2v12H7zM20 6 11 12l9 6z"/></svg>
     </button>
-    <button id="playBtn" class="icon-btn icon-btn-primary" title="Play (space)" aria-label="Play"></button>
+    <button id="playBtn" class="icon-btn icon-btn-primary" title="Play (spacebar)" aria-label="Play"></button>
     <button id="nextStepBtn" class="icon-btn" title="Next step (→)" aria-label="Next step">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 6h2v12h-2zM4 6l9 6-9 6z"/></svg>
     </button>
@@ -321,7 +337,7 @@ button:disabled{opacity:.42;cursor:not-allowed;}
       Edit
       <span class="hud-switch" aria-hidden="true"></span>
     </button>
-    <button id="editHelpBtn" class="hud-help" title="How to build" aria-label="Show build instructions">
+    <button id="editHelpBtn" class="hud-help" title="How to build" aria-label="Show building instructions">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
     </button>
   </div>
@@ -363,15 +379,17 @@ button:disabled{opacity:.42;cursor:not-allowed;}
     <p class="sub">Explore how an AI agent can navigate through a maze. See how four classic search algorithms work step by step.</p>
     <div class="steps">
       <div class="step"><div class="step-num">01</div><div><strong>Choose a maze</strong> – load a ready-made one, or turn on edit mode and build your own.</div></div>
-      <div class="step"><div class="step-num">02</div><div><strong>Pick an algorithm and search</strong> – BFS, DFS, Greedy Best-First, or A*, then press Start search.</div></div>
+      <div class="step"><div class="step-num">02</div><div><strong>Choose an algorithm and search</strong> – BFS, DFS, Greedy Best-First Search, or A*, then press Start search.</div></div>
       <div class="step"><div class="step-num">03</div><div><strong>Compare</strong> – run the same maze with different algorithms. Which finds the shortest path, and which explores the fewest cells?</div></div>
     </div>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-    <p class="overlay-tip">Tip: hover over an explored cell during an A* search to see the full calculation <strong>f(n) = g(n) + h(n)</strong>.</p>
   </div>
 </div>
 
-<!-- ── Glaskort: skelett (fylls dynamiskt) ── -->
+<!-- ── Nudge: shown if Start search is pressed without an algorithm chosen ── -->
+<div class="start-nudge" id="startNudge">Choose an algorithm to start a search</div>
+
+<!-- ── Glass card: skeleton (filled in dynamically) ── -->
 <div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
 <div class="concept-card" id="conceptCard">
   <div class="concept-card-inner" id="conceptCardInner">
@@ -399,10 +417,10 @@ const THEMES={
   'A*':    {accent:'#2dd4bf'},
   'Greedy':{accent:'#f59e0b'}
 };
-const QUEUE_COLOR='#f0a94e';   // the queue on the canvas is always orange -- the algorithm's identity is already shown by the card/button
-const ALG_LABEL={'A*':'A*','BFS':'BFS','DFS':'DFS','Greedy':'Greedy Best-First'};
+const QUEUE_COLOR='#f0a94e';   // the queue in the canvas is always orange – the algorithm's identity is already shown by the card/button
+const ALG_LABEL={'A*':'A*','BFS':'BFS','DFS':'DFS','Greedy':'Greedy Best-First Search'};
 
-/* Color utilities */
+/* Color helpers */
 function hex2rgb(h){h=h.replace('#','');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
 function css(c,a){return 'rgba('+(c[0]|0)+','+(c[1]|0)+','+(c[2]|0)+','+(a==null?1:a)+')';}
 function easeOutBack(p){const k=1.55;return 1+(k+1)*Math.pow(p-1,3)+k*Math.pow(p-1,2);}
@@ -420,7 +438,7 @@ for(let r=0;r<ROWS;r++){const row=[];
 let grid=[]; for(let r=0;r<ROWS;r++){const row=[];for(let c=0;c<COLS;c++)row.push(1);grid.push(row);}
 let start=[11,7], ends=[[5,18]];
 
-let selectedAlg='BFS', currentAlgorithm=null;
+let selectedAlg=null, currentAlgorithm=null;
 let searchSteps=[], curStep=-1, computedFor=null;
 let playTimer=null, isPlaying=false;
 const PLAY_INTERVAL=150;
@@ -433,7 +451,7 @@ let editMode=false;
 let cellAnim=new Map();      // "r,c" -> {st:'fr'|'ex', t}
 let heurLabels=new Map(), fVals=new Map();
 let pathState=null;          // {cells,t0,dur}
-let dimState=null;           // staging: dim everything -> goal glows -> path is drawn -> card
+let dimState=null;           // sequence: dim everything → goal lights up → path draws → card
 let particles=[];
 let popupTimer=null;
 
@@ -461,6 +479,26 @@ function t3(color,glyph,label,sub){
     +'<span class="t3-lab">'+label+'</span>'+(sub?'<span class="t3-sub">'+sub+'</span>':'')+'</div>';
 }
 const CONCEPTS={
+  'BFS':{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2.5"/><circle cx="12" cy="12" r="6.5" stroke-dasharray="2 3"/><circle cx="12" cy="12" r="10" stroke-dasharray="2 3"/></svg>',
+    title:'BFS – Breadth-First Search',
+    def:'<strong>BFS</strong> explores layer by layer with a <strong>queue</strong> – all cells at distance 1 before distance 2, and so on. Guarantees the shortest path in number of steps, but not in cost.'
+  },
+  'DFS':{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="4" rx="1"/><rect x="4" y="10" width="16" height="4" rx="1"/><rect x="4" y="16" width="16" height="4" rx="1"/></svg>',
+    title:'DFS – Depth-First Search',
+    def:'<strong>DFS</strong> follows a path as far as it goes using a <strong>stack</strong>, and backtracks when it gets stuck. Often finds a path quickly – but rarely the shortest one.'
+  },
+  'A*':{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.4 5.9L21 10l-4.8 4.2L17.4 21 12 17.5 6.6 21l1.2-6.8L3 10l6.6-1.1L12 3z"/></svg>',
+    title:'A* – Informed Search',
+    def:'<strong>A*</strong> picks the cell with the lowest value of the cost function <strong>f(n)</strong>. <strong>f(n)&nbsp;=&nbsp;g(n)&nbsp;+&nbsp;h(n)</strong> – cost so far plus estimated distance remaining. Guaranteed cheapest, and often faster than a blind search.'
+  },
+  'Greedy':{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg>',
+    title:'Greedy Best-First Search',
+    def:'<strong>Greedy Best-First Search</strong> always picks the cell that <em>looks</em> closest to the goal – without caring what it has already cost. Fast, but easily fooled.'
+  },
   bygga:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
     title:'Build your maze',
@@ -483,28 +521,28 @@ const CONCEPTS={
   tips:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>',
     title:'Explanations &amp; tips',
-    def:'Here\'s how to read what\'s happening in the maze during the search.'
+    def:'Here is how to read what happens in the maze during the search.'
       +'<div class="gc-grid">'
-      +t3('#6f9fd6','','Explored','already checked')
-      +t3('#f0a94e','','Queue','waiting turn – pulses')
-      +t3('#3ddc84','','Found path','start → goal')
+      +t3('#6f9fd6','','Explored','already visited')
+      +t3('#f0a94e','','Queue','waiting – pulses')
+      +t3('#3ddc84','','Path found','start → goal')
       +'</div>'
       +'<div class="gc-ctrl">'
-      +'<div class="gc-ctrl-row"><span class="mbtn">Space</span><span>play / pause the playback.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Spacebar</span><span>play / pause the playback.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn">← →</span><span>step backward / forward, one search step at a time.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn">R</span><span>reset the search.</span></div>'
-      +'<div class="gc-ctrl-row"><span class="mbtn">Hover</span><span>during an A* search: hover over an explored cell to see the full calculation <em>f(n)&nbsp;=&nbsp;g(n)&nbsp;+&nbsp;h(n)</em>.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Hover</span><span>during A* search: hold the pointer over an explored cell to see the full calculation <em>f(n)&nbsp;=&nbsp;g(n)&nbsp;+&nbsp;h(n)</em>.</span></div>'
       +'</div>'
   },
   kostnader:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg>',
-    title:'New: cells with a cost',
-    def:'This maze has terrain that\'s <strong>more expensive to cross</strong>. A normal path cell costs 1 – these cost more:'
+    title:'New: cells with cost',
+    def:'This maze has terrain that is <strong>more expensive to cross</strong>. A normal path cell costs 1 – these cost more:'
       +'<div class="gc-grid gc-grid-2" style="max-width:230px;margin-left:auto;margin-right:auto;">'
       +t3('#8b5e34','3','Cost 3',null).replace('class="t3"','class="t3 big"')
       +t3('#3f6fd0','5','Cost 5',null).replace('class="t3"','class="t3 big"')
       +'</div>'
-      +'<div class="gc-note">Now it\'s not enough to find the <em>shortest</em> path – the <em>cheapest</em> one might be different. Try comparing Greedy Best-First with A*, which factors cost into <strong>f(n)&nbsp;=&nbsp;g(n)&nbsp;+&nbsp;h(n)</strong>.</div>'
+      +'<div class="gc-note">Now it is not enough to find the <em>shortest</em> path – the <em>cheapest</em> one might be a different one. Try comparing Greedy Best-First Search with A*, which factors cost into <strong>f(n)&nbsp;=&nbsp;g(n)&nbsp;+&nbsp;h(n)</strong>.</div>'
       +'<button class="gc-btn" onclick="closeConcept()">Got it</button>'
   }
 };
@@ -524,7 +562,7 @@ function openConceptFrom(id,el){
   card.style.transition='none';
   card.style.setProperty('--dx',dx+'px');
   card.style.setProperty('--dy',dy+'px');
-  void card.offsetHeight; // force reflow so the starting position applies without a transition
+  void card.offsetHeight; // force reflow so the start position applies without transition
   card.style.transition='';
   document.getElementById('conceptBackdrop').classList.add('show');
   requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
@@ -704,6 +742,7 @@ function resetPlayback(){
   updatePlayerUI();
 }
 function ensureComputed(){
+  if(!selectedAlg){setInfo('Choose an algorithm above to start the search.');return false;}
   if(computedFor===selectedAlg&&searchSteps.length)return true;
   if(ends.length===0){setInfo('No goal has been set – turn on edit mode and right-click a wall to create a goal.');return false;}
   currentAlgorithm=selectedAlg;computedFor=selectedAlg;
@@ -731,9 +770,9 @@ function updatePlayerUI(){
   next.disabled=(n===0&&computedFor!==null)||(n>0&&curStep>=n-1);
   reset.disabled=curStep<0&&!isPlaying;
   play.innerHTML=isPlaying?ICON_PAUSE:ICON_PLAY;
-  play.title=isPlaying?'Pause (space)':'Play (space)';
+  play.title=isPlaying?'Pausa (mellanslag)':'Spela (mellanslag)';
   play.setAttribute('aria-label',play.title);
-  counter.innerHTML=(computedFor&&n)?('step <b>'+(curStep+1)+'</b> / '+n):'';
+  counter.innerHTML=(computedFor&&n)?('steg <b>'+(curStep+1)+'</b> / '+n):'';
 }
 
 /* ═══════════════ Resultatkort ═══════════════ */
@@ -753,7 +792,7 @@ function renderResultOverlay(o){
       m+='<div class="ro-metric"><span class="ro-num">'+o.pathCost+'</span><span class="ro-lab">path cost</span></div>'
         +'<div class="ro-metric"><span class="ro-num">'+o.searchCost+'</span><span class="ro-lab">search cost</span></div>';
     }
-    html='<div class="ro-card"><div class="ro-head">'+badge+' reached the goal</div>'
+    html='<div class="ro-card"><div class="ro-head">'+badge+' found the goal</div>'
       +'<div class="ro-metrics">'+m+'</div>'
       +'<button class="ro-btn" onclick="hideResultOverlay()">Show path</button></div>';
   }
@@ -796,7 +835,7 @@ function drawWall(r,c){
   ctx.beginPath();ctx.moveTo(x+4,y+s-1);ctx.lineTo(x+s-4,y+s-1);ctx.stroke();
   rr(x,y,s,s,5);ctx.strokeStyle='#1d2743';ctx.stroke();
 }
-/* Search value (f(n) or h(n)), a discreet centered label -- only visible during the search. */
+/* Search value (f(n) or h(n)), discreet centered label – only visible during the search. */
 function drawLabel(r,c,txt){
   ctx.save();
   ctx.font='700 8px "JetBrains Mono",monospace';
@@ -812,12 +851,12 @@ function frame(){
   ctx.clearRect(0,0,W,H);
   ctx.fillStyle='#0b0f1a';ctx.fillRect(0,0,W,H);
 
-  /* Grid -- every third line a bit stronger, like in CAD */
+  /* Grid – every third line a bit stronger, like in CAD */
   ctx.lineWidth=1;
   for(let c=0;c<=COLS;c++){ctx.strokeStyle=c%3===0?'rgba(102,152,255,.05)':'rgba(102,152,255,.02)';ctx.beginPath();ctx.moveTo(c*CELL+.5,0);ctx.lineTo(c*CELL+.5,H);ctx.stroke();}
   for(let r=0;r<=ROWS;r++){ctx.strokeStyle=r%3===0?'rgba(102,152,255,.05)':'rgba(102,152,255,.02)';ctx.beginPath();ctx.moveTo(0,r*CELL+.5);ctx.lineTo(W,r*CELL+.5);ctx.stroke();}
 
-  /* Base tiles -- the cost cells' color is enough, the number is explained in the concept cards */
+  /* Base tiles - the cost cell color is enough, the number is explained in the glass cards */
   for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
     const v=grid[r][c];
     if(v===1)drawWall(r,c);
@@ -832,17 +871,17 @@ function frame(){
     if(isStart(r,c)||isGoal(r,c))continue;
     if(st.st==='fr'){
       const p=Math.min(1,(now-st.t)/D_IN);
-      const sc=RM?1:easeOutBack(p);                          // grows from 70% with a small ripple, lands on 100%
+      const sc=RM?1:easeOutBack(p);                          // grows from 70% with a small ripple, lands at 100%
       const pulse=RM?1:(.80+.20*Math.sin(now/850+((r*7+c*13)%10)));
       paintTileScaled(r,c,.7+.3*sc,pulse,QUEUE_COLOR,'rgba(240,169,78,.5)',9);
     }else{
-      paintTile(r,c,'#6f9fd6');                              // explored: solid color immediately, no trailing tail
+      paintTile(r,c,'#6f9fd6');                              // explored: solid color immediately, no tail
     }
     const lbl=heurLabels.get(key);
     if(lbl!=null&&(now-st.t)>D_IN*.6)drawLabel(r,c,lbl);
   }
 
-  /* Staging: dim everything else while the path is drawn */
+  /* Sequence: dim everything else while the path draws */
   if(dimState){
     let a;
     if(now<dimState.t0+dimState.fadeIn)a=.12*(now-dimState.t0)/dimState.fadeIn;
@@ -852,7 +891,7 @@ function frame(){
     else if(now>dimState.holdEnd+dimState.fadeOut)dimState=null;
   }
 
-  /* The path is drawn -- a green point of light traces the line, like map navigation */
+  /* The path draws - a green light dot pulls the line, like map navigation */
   if(pathState){
     const{cells,t0,dur}=pathState;
     const p=Math.max(0,Math.min(1,(now-t0)/dur));
@@ -873,7 +912,7 @@ function frame(){
     }
   }
 
-  /* Goal -- glows extra bright right when it's found */
+  /* Goal - lights up extra right when it is found */
   for(const[er,ec]of ends){
     let blur=14;
     if(dimState&&now-dimState.t0<800)blur=14+12*Math.sin((now-dimState.t0)/800*Math.PI);
@@ -899,7 +938,7 @@ function frame(){
     particles=keep;
   }
 
-  /* Hover: thin white outline + preview -- only in edit mode */
+  /* Hover: thin white frame + preview - only in edit mode */
   if(hoverCell&&editMode){
     const[r,c]=hoverCell;
     if(!isStart(r,c)&&!isGoal(r,c)&&(grid[r][c]===0||grid[r][c]===1)){
@@ -917,7 +956,7 @@ function frame(){
 }
 requestAnimationFrame(frame);
 
-/* ═══════════════ Mouse interaction (editing -- requires edit mode) ═══════════════ */
+/* ═══════════════ Mouse interaction (editing - requires edit mode) ═══════════════ */
 function getCellFromMouse(e){
   const rect=canvas.getBoundingClientRect();
   const mx=(e.clientX-rect.left)*(W/rect.width),my=(e.clientY-rect.top)*(H/rect.height);
@@ -954,8 +993,8 @@ canvas.addEventListener('mousemove',e=>{
         '<div class="tt-eq"><span class="tt-f">f(n)</span> = <span class="tt-g">g(n)</span> + <span class="tt-h">h(n)</span></div>'
         +'<div class="tt-div"></div>'
         +'<div class="tt-row"><span class="tt-k tt-f">f(n)</span><span class="tt-v">'+f+'</span></div>'
-        +'<div class="tt-row"><span class="tt-k tt-g">g(n)</span><span class="tt-v">'+g+'</span><span class="tt-note">so far</span></div>'
-        +'<div class="tt-row"><span class="tt-k tt-h">h(n)</span><span class="tt-v">'+h+'</span><span class="tt-note">remaining (estimated)</span></div>',e);
+        +'<div class="tt-row"><span class="tt-k tt-g">g(n)</span><span class="tt-v">'+g+'</span><span class="tt-note">hittills</span></div>'
+        +'<div class="tt-row"><span class="tt-k tt-h">h(n)</span><span class="tt-v">'+h+'</span><span class="tt-note">kvar (uppskattat)</span></div>',e);
     }else hideMazeTooltip();
   }else hideMazeTooltip();
 });
@@ -1022,6 +1061,7 @@ document.getElementById('algCards').addEventListener('click',e=>{
   currentAlgorithm=selectedAlg;
   document.querySelectorAll('.alg-card').forEach(c=>c.setAttribute('aria-checked',c===card?'true':'false'));
   document.documentElement.style.setProperty('--alg',THEMES[selectedAlg].accent);
+  document.getElementById('startSearchBtn').classList.remove('needs-alg');
   pausePlayback();clearTimeout(popupTimer);
   computedFor=null;searchSteps=[];curStep=-1;
   recomputeToStep(-1);hideResultOverlay();
@@ -1031,8 +1071,23 @@ document.getElementById('algCards').addEventListener('click',e=>{
   canvasContainer.classList.remove('alg-flash');
   void canvasContainer.offsetWidth;
   canvasContainer.classList.add('alg-flash');
+  // Popup glass card explaining the chosen algorithm
+  openConceptFrom(selectedAlg,card);
 });
+let nudgeTimer=null;
+function showStartNudge(){
+  const btn=document.getElementById('startSearchBtn');
+  const nudge=document.getElementById('startNudge');
+  const r=btn.getBoundingClientRect();
+  nudge.style.left=(r.left+r.width/2)+'px';
+  nudge.style.top=r.top+'px';
+  nudge.classList.add('show');
+  btn.classList.remove('shake');void btn.offsetWidth;btn.classList.add('shake');
+  clearTimeout(nudgeTimer);
+  nudgeTimer=setTimeout(()=>nudge.classList.remove('show'),2200);
+}
 document.getElementById('startSearchBtn').addEventListener('click',()=>{
+  if(!selectedAlg){showStartNudge();return;}
   pausePlayback();
   if(!ensureComputed())return;
   curStep=-1;recomputeToStep(-1);hideResultOverlay();
@@ -1054,7 +1109,7 @@ document.addEventListener('keydown',e=>{
   else if(e.key==='r'||e.key==='R'){resetPlayback();}
 });
 
-/* ═══════════════ Save / load / predefined mazes ═══════════════ */
+/* ═══════════════ Save / load / predefined ═══════════════ */
 document.getElementById('saveBtn').addEventListener('click',()=>{
   const data={grid,start,ends};
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
@@ -1069,12 +1124,12 @@ document.getElementById('loadInput').addEventListener('change',e=>{
   reader.onload=ev=>{
     try{
       const data=JSON.parse(ev.target.result);
-      if(!data.grid||!data.start||!data.ends)throw new Error('Invalid format.');
+      if(!data.grid||!data.start||!data.ends)throw new Error('Ogiltigt format.');
       if(data.grid.length!==ROWS||data.grid[0].length!==COLS)throw new Error('Grid must be '+ROWS+'x'+COLS+'.');
       grid=data.grid;start=data.start;ends=data.ends.map(x=>[...x]);
       grid[start[0]][start[1]]=0;ends.forEach(x=>{grid[x[0]][x[1]]=0;});
-      mazeChanged();setInfo('The maze has been loaded.');
-    }catch(err){alert('Error while loading: '+err.message);}
+      mazeChanged();setInfo('Labyrinten har laddats.');
+    }catch(err){alert('Error loading file: '+err.message);}
   };
   reader.readAsText(file);
 });
@@ -1095,7 +1150,7 @@ document.getElementById('predefinedSelect').addEventListener('change',e=>{
     const m=predefinedMazes[sel];
     grid=m.grid.map(row=>row.slice());start=[...m.start];ends=m.ends.map(x=>[...x]);
     mazeChanged();setInfo('Predefined maze "'+sel+'" has been loaded.');
-    /* Onboarding: Example 4 & 5 introduce cost cells */
+    /* Apple-style onboarding: Example 4 & 5 introduce cost cells */
     if(sel==='Example 4'||sel==='Example 5'){
       const anchor=e.target;
       setTimeout(()=>openConceptFrom('kostnader',anchor),260);
@@ -1116,7 +1171,7 @@ document.getElementById('clearMazeBtn').addEventListener('click',()=>{
   start=[...startMaze.start];ends=startMaze.ends.map(x=>[...x]);
   grid[start[0]][start[1]]=0;ends.forEach(x=>{grid[x[0]][x[1]]=0;});
   currentAlgorithm=selectedAlg;
-  document.documentElement.style.setProperty('--alg',THEMES[selectedAlg].accent);
+  if(selectedAlg)document.documentElement.style.setProperty('--alg',THEMES[selectedAlg].accent);
   updatePlayerUI();
 })();
 </script>
