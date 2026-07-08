@@ -3,26 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Build your own little language model from any text and see exactly how it chooses the next word – the same basic principle as ChatGPT.">
-<title>Language Model Lab – ai-aktiviteter.se</title>
+<meta name="description" content="Build your own small language model from any text and see exactly how it chooses the next word – the same core principle as ChatGPT.">
+<title>The Language Model Lab – ai-aktiviteter.se</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--subtle:#b0bedc;--accent:#4d80ff;--accent2:#6698ff;--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--orange:#ff9f43;--purple:#a78bfa;--step-accent:#4d80ff;--step-accent-soft:rgba(77,128,255,0.12);}
+:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--border2:#253050;--border-soft:rgba(255,255,255,.06);--text:#e8ecf8;--dim:#7e8aaa;--subtle:#b0bedc;--accent:#4d80ff;--accent2:#6698ff;--accent-dim:rgba(77,128,255,0.14);--green:#34c759;--red:#ef5b5b;--gold:#ffd866;--orange:#ff9f43;--purple:#a78bfa;--step-accent:#4d80ff;--step-accent-soft:rgba(77,128,255,0.12);--r-md:14px;--r-lg:20px;--ease-out:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;font-size:14px;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+body{font-family:'DM Sans',sans-serif;font-size:15.5px;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
 
 .back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .back-link:hover{color:var(--text);border-color:var(--dim);}
 .lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .lang-link:hover{color:var(--text);border-color:var(--dim);}
-.lang-link .flag{display:block;border-radius:2px;}
-.hd{width:100%;text-align:center;padding:12px 16px 8px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
-.hd h1{font-size:1.3em;font-weight:700;letter-spacing:-0.02em;margin-bottom:2px;}
+.lang-link .lang-ico{width:14px;height:14px;flex-shrink:0;}
+.hd{width:100%;text-align:center;padding:34px 20px 30px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
+.hd h1{font-family:'Syne',sans-serif;font-size:1.55em;font-weight:800;letter-spacing:-0.02em;margin-bottom:10px;text-shadow:0 0 34px rgba(102,152,255,.22);}
 .hd h1 span{color:var(--accent2);}
-.hd p{color:var(--dim);font-size:0.8em;max-width:620px;margin:0 auto;line-height:1.4;}
+.hd p{color:var(--dim);font-size:0.86em;max-width:560px;margin:0 auto;line-height:1.6;}
 
 .app{display:grid;grid-template-columns:290px 1fr 310px;gap:0;max-width:1280px;margin:0 auto;width:100%;flex:1;position:relative;z-index:1;}
 .lp{padding:14px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:14px;}
@@ -30,22 +30,25 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .rp{padding:14px;border-left:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;gap:10px;}
 
 .sec-t{font-size:0.66em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim);margin-bottom:6px;}
-.sel,textarea{font-family:'DM Sans',sans-serif;font-size:0.84em;width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);outline:none;transition:border-color 0.2s;}
+.sel,textarea{font-family:'DM Sans',sans-serif;font-size:0.84em;width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);outline:none;transition:border-color 0.2s;}
 .sel{cursor:pointer;}
 .sel:focus,textarea:focus{border-color:var(--accent);}
 .k-label{font-size:0.74em;color:var(--subtle);}
 #kSel{font-size:1.06em;font-weight:600;padding:13px 14px;border:1px solid rgba(176,190,220,0.3);border-radius:10px;background:var(--surface2);transition:border-color 0.25s,box-shadow 0.3s;}
 #kSel:hover{border-color:rgba(176,190,220,0.55);}
-/* Glow när steg 2 (kontexten) är aktivt – då är väljaren huvudkontrollen */
-.wrap.sx-context:not(.sx-choose) #kSel{border-color:var(--step-accent);box-shadow:0 0 0 3px var(--step-accent-soft);}
+/* "Hur modellen väljer nästa ord" är i fokus från steg 2 (kontextlängd) genom steg 3 (girighet) –
+   panelen får stegets egen accentfärg medan den är aktuell, sedan lugnar den ner sig. */
+.wrap.sx-context:not(.sx-data) #choicePanel{border:1px solid var(--step-accent);box-shadow:0 12px 32px -10px var(--step-glow);}
+.wrap.sx-context:not(.sx-data) #choicePanel .coll-toggle{color:var(--text);font-size:0.92em;background:var(--step-accent-soft);}
 textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;color:var(--subtle);}
-.btn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.84em;padding:9px 14px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:0.2s;text-align:center;}
+.btn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.84em;padding:9px 14px;border-radius:9px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:0.2s var(--ease-out);text-align:center;}
 .btn:hover{border-color:var(--accent);background:rgba(77,128,255,0.08);}
-.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;}
-.btn.pri:hover{background:#3d6de6;}
+.btn:active{transform:translateY(1px);}
+.btn.pri{background:linear-gradient(180deg,#5b8bff,#3f6fe6);border-color:transparent;color:#fff;box-shadow:0 2px 12px rgba(77,128,255,0.38);}
+.btn.pri:hover{filter:brightness(1.07);background:linear-gradient(180deg,#5b8bff,#3f6fe6);box-shadow:0 4px 18px rgba(77,128,255,0.5);}
 .btn.grn{background:var(--green);border-color:var(--green);color:#090b14;}
 .btn.grn:hover{background:#4ee89e;border-color:#4ee89e;}
-.btn.ghost{color:var(--dim);}
+.btn.ghost{color:var(--dim);background:var(--surface2);}
 .btn.ghost:hover{color:var(--text);}
 .btn:disabled{opacity:0.35;pointer-events:none;}
 .btn-row{display:flex;gap:6px;flex-wrap:wrap;}
@@ -78,21 +81,18 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 
 /* Info-tooltip (hover/fokus) */
 .lbl-tip{display:inline-flex;align-items:center;}
-.tip-ico{position:relative;display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;border:1px solid var(--dim);color:var(--dim);font-size:0.7em;font-style:italic;font-weight:700;cursor:help;margin-left:5px;font-family:'JetBrains Mono',monospace;}
-.tip-ico:hover,.tip-ico:focus{color:var(--text);border-color:var(--accent);outline:none;}
-.tip-box{position:absolute;bottom:150%;left:0;width:200px;max-width:calc(100vw - 32px);background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:0.94em;font-style:normal;font-weight:400;line-height:1.5;color:var(--subtle);box-shadow:0 8px 24px rgba(0,0,0,0.5);opacity:0;visibility:hidden;transition:opacity 0.15s;z-index:40;text-align:left;font-family:'DM Sans',sans-serif;pointer-events:none;overflow-wrap:break-word;word-break:break-word;white-space:normal;}
-.tip-ico:hover .tip-box,.tip-ico:focus .tip-box{opacity:1;visibility:visible;}
-.tip-box b{color:var(--text);}
-.tip-box .ctx-hl{color:var(--orange);font-weight:700;}
-.tip-box .gpt-hl{color:var(--accent2);font-weight:700;}
+.tip-ico{position:relative;display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;border:1px solid var(--dim);color:var(--dim);font-size:0.7em;font-style:italic;font-weight:700;cursor:pointer;margin-left:5px;font-family:'JetBrains Mono',monospace;transition:.15s;}
+.tip-ico:hover,.tip-ico:focus{color:#fff;border-color:var(--accent);background:var(--accent);outline:none;}
+.ctx-hl{color:var(--orange);font-weight:700;}
+.gpt-hl{color:var(--accent2);font-weight:700;}
 
 /* Collapsible (samma mönster som NIM) */
-.coll{border:1px solid var(--border);border-radius:8px;overflow:hidden;}
-.coll-toggle{width:100%;padding:10px 12px;background:var(--surface2);border:none;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:700;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.coll{border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.coll-toggle{width:100%;padding:14px 16px;background:var(--surface2);border:none;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:700;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px;}
 .coll-toggle:hover{color:var(--text);}
 .coll-toggle .arr{transition:transform 0.2s;flex-shrink:0;}
 .coll-toggle.open .arr{transform:rotate(180deg);}
-.coll-body{display:none;padding:12px;font-size:0.78em;color:var(--dim);line-height:1.65;border-top:1px solid var(--border);}
+.coll-body{display:none;padding:16px;font-size:0.78em;color:var(--dim);line-height:1.65;border-top:1px solid var(--border);}
 .coll-body.show{display:block;}
 .coll-body strong{color:var(--text);}
 .coll-body ol{margin:0 0 0 16px;}
@@ -101,7 +101,7 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 .coll-body .hl{color:var(--accent);font-weight:600;}
 
 /* Genererad text */
-.gen-box{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--step-accent);border-radius:14px;padding:30px 32px;min-height:300px;font-size:1.18em;line-height:2;color:var(--text);box-shadow:0 10px 40px rgba(0,0,0,0.35);transition:border-top-color 0.4s ease;}
+.gen-box{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--step-accent);border-radius:var(--r-md);padding:30px 32px;min-height:300px;font-size:1.18em;line-height:2;color:var(--text);box-shadow:0 10px 40px rgba(0,0,0,0.35);transition:border-top-color 0.4s ease;}
 .gen-box .placeholder{display:flex;min-height:240px;align-items:center;justify-content:center;text-align:center;color:var(--dim);font-style:italic;font-size:0.72em;}
 .ctx-tok{background:rgba(255,159,67,0.15);border:1px solid rgba(255,159,67,0.45);border-radius:4px;padding:1px 5px;color:var(--text);font-weight:600;}
 .new-tok{animation:popIn 0.45s cubic-bezier(0.34,1.56,0.64,1);}
@@ -111,6 +111,7 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 .narr{font-size:0.82em;color:var(--subtle);background:var(--step-accent-soft);border-left:3px solid var(--step-accent);border-radius:0 8px 8px 0;padding:11px 14px;line-height:1.55;transition:border-color 0.4s,background 0.4s;}
 .narr.choice{border-left-color:var(--green);}
 .narr .ctx-inline{font-family:'JetBrains Mono',monospace;color:var(--orange);font-weight:600;}
+.ctx-inline{font-family:'JetBrains Mono',monospace;color:var(--orange);font-weight:600;}
 .narr .chosen-inline{font-family:'JetBrains Mono',monospace;color:var(--green);font-weight:700;}
 .narr strong{color:var(--text);}
 .narr .rare{color:var(--orange);font-weight:700;}
@@ -126,12 +127,13 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 .ctrl-group{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:11px 12px;display:flex;flex-direction:column;gap:9px;}
 .ctrl-row{display:flex;gap:7px;align-items:center;flex-wrap:wrap;}
 .ctrl-row label{font-size:0.76em;color:var(--dim);font-weight:600;white-space:nowrap;}
-.start-input{font-family:'JetBrains Mono',monospace;font-size:0.84em;flex:1;min-width:90px;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);outline:none;}
+.start-input{font-family:'JetBrains Mono',monospace;font-size:0.84em;flex:1;min-width:90px;padding:7px 9px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);outline:none;}
 .start-input:focus{border-color:var(--accent);}
 .start-err{font-size:0.72em;color:var(--red);display:none;}
 .start-err.show{display:block;}
-input[type=range]{-webkit-appearance:none;flex:1;min-width:70px;height:4px;border-radius:2px;background:var(--surface2);outline:none;accent-color:var(--accent);}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer;}
+input[type=range]{-webkit-appearance:none;flex:1;min-width:70px;height:7px;border-radius:4px;background:var(--surface2);outline:none;accent-color:var(--accent);}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 2px 8px rgba(77,128,255,.5),0 0 0 3px rgba(77,128,255,.15);border:2px solid #fff;}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 2px 8px rgba(77,128,255,.5),0 0 0 3px rgba(77,128,255,.15);border:2px solid #fff;}
 input[type=range]:disabled{opacity:0.3;}
 .temp-val{font-family:'JetBrains Mono',monospace;font-size:0.82em;color:var(--gold);min-width:28px;text-align:right;}
 
@@ -159,7 +161,7 @@ input[type=range]:disabled{opacity:0.3;}
 @keyframes pickPulse{0%{transform:scale(1.03);}100%{transform:scale(1);}}
 
 /* Modellens minne = labbets signatur: ge panelen en egen, lugn inramning */
-.side .coll.sticky{border:1px solid rgba(77,128,255,0.32);border-radius:12px;overflow:hidden;box-shadow:0 6px 30px rgba(0,0,0,0.30);}
+.side .coll.sticky{border:1px solid rgba(77,128,255,0.32);border-radius:14px;overflow:hidden;box-shadow:0 6px 30px rgba(0,0,0,0.30);}
 .side .coll.sticky > .coll-toggle{color:var(--text);font-size:0.92em;background:rgba(77,128,255,0.10);}
 .side .coll.sticky > .coll-toggle .term{border-bottom-color:transparent;}
 .prow.greedy-top{box-shadow:inset 3px 0 0 var(--gold);}
@@ -171,33 +173,41 @@ input[type=range]:disabled{opacity:0.3;}
 .click-hint{font-size:0.7em;color:var(--dim);text-align:center;}
 
 /* Intro-overlay (samma mönster som övriga sidor) */
-.overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
+.overlay{position:fixed;inset:0;background:rgba(6,7,14,0.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
-.overlay-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;max-width:540px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;}
-.overlay-card h2{font-size:1.1em;font-weight:700;margin-bottom:6px;}
+.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:var(--r-lg);padding:32px 36px;max-width:540px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
+@keyframes overlayIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.overlay-card h2{font-family:'Syne',sans-serif;font-size:1.4em;font-weight:800;letter-spacing:-0.01em;margin-bottom:8px;}
 .overlay-card h2 span{color:var(--accent2);}
-.overlay-card .sub{font-size:0.84em;color:var(--dim);line-height:1.55;margin-bottom:14px;}
-.overlay-card .steps{display:flex;flex-direction:column;gap:10px;margin:14px 0;text-align:left;}
-.overlay-card .step{display:flex;gap:10px;align-items:flex-start;font-size:0.82em;color:var(--dim);line-height:1.5;}
+.overlay-card .sub{font-size:0.87em;color:var(--dim);line-height:1.6;margin-bottom:18px;}
+.overlay-card .steps{display:flex;flex-direction:column;gap:12px;margin:14px 0;text-align:left;}
+.overlay-card .step{display:flex;gap:12px;align-items:flex-start;font-size:0.85em;color:var(--dim);line-height:1.55;}
 .overlay-card .step strong{color:var(--text);}
-.step-num{width:24px;height:24px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.85em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
-.overlay-btn{display:block;width:100%;padding:12px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}
-.overlay-btn:hover{background:#3d6de6;}
+.step-num{width:25px;height:25px;border-radius:50%;background:rgba(77,128,255,0.14);color:var(--accent2);font-weight:700;font-size:0.8em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.28);padding-top:1px;}
+.overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:18px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:0.25s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 24px rgba(77,128,255,.28);}
+.overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
+.overlay-btn svg{width:15px;height:15px;flex-shrink:0;}
+.intro-viz{display:block;width:220px;height:80px;margin:0 auto 16px;}
+.intro-viz .iv-chip rect{fill:rgba(255,255,255,.05);stroke:rgba(255,255,255,.14);stroke-width:1.5;}
+.intro-viz text{fill:#b0bedc;font-family:'JetBrains Mono',monospace;font-size:11px;text-anchor:middle;font-weight:600;}
+.intro-viz .iv-arrow{stroke:var(--dim);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.intro-viz .iv-next rect{fill:rgba(77,128,255,.16);stroke:var(--accent);stroke-width:1.6;animation:ivPulse 2.1s ease-in-out infinite;}
+.intro-viz .iv-next text{fill:#e8ecf8;}
+@keyframes ivPulse{0%,100%{opacity:.5;}50%{opacity:1;}}
 
 /* ═══ Remake: stegbaserad layout ═══ */
-.wrap{max-width:1180px;margin:0 auto;width:100%;padding:22px 16px 44px;display:flex;flex-direction:column;gap:28px;flex:1;position:relative;z-index:1;}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px 22px;}
-.card-h{display:flex;align-items:center;gap:9px;font-size:0.95em;font-weight:700;margin-bottom:16px;letter-spacing:-0.01em;}
+.wrap{max-width:1180px;margin:0 auto;width:100%;padding:34px 16px 52px;display:flex;flex-direction:column;gap:40px;flex:1;position:relative;z-index:1;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:26px 28px;box-shadow:0 6px 22px rgba(0,0,0,0.32);}
+.card-h{display:flex;align-items:center;gap:9px;font-family:'Syne',sans-serif;font-size:1.02em;font-weight:800;margin-bottom:20px;letter-spacing:-0.01em;}
 .step-badge{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:0.78em;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
-.setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;}
 .mini-t{display:block;font-size:0.64em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim);margin-bottom:8px;}
-.grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(340px,1fr);gap:24px;align-items:start;}
-.stage{display:flex;flex-direction:column;gap:22px;min-width:0;}
-.side{display:flex;flex-direction:column;gap:16px;min-width:0;}
+.grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(340px,1fr);gap:32px;align-items:start;}
+.stage{display:flex;flex-direction:column;gap:26px;min-width:0;}
+.side{display:flex;flex-direction:column;gap:20px;min-width:0;}
 .coll{background:var(--surface);}
 .side .coll.sticky{position:sticky;top:12px;}
 
-.prompt-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--surface);border:1px solid rgba(77,128,255,0.4);border-radius:10px;padding:10px 12px;}
+.prompt-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--surface);border:1px solid rgba(77,128,255,0.4);border-radius:12px;padding:10px 12px;}
 .prompt-bar > label{font-size:0.8em;color:var(--subtle);font-weight:700;white-space:nowrap;}
 .prompt-bar .start-input{flex:1;min-width:120px;}
 .prompt-extra{display:flex;flex-direction:column;gap:6px;}
@@ -207,20 +217,13 @@ input[type=range]:disabled{opacity:0.3;}
 .speed-wrap label{font-size:0.76em;color:var(--dim);font-weight:600;}
 
 /* Begreppsord med hover-förklaring */
-.term{border-bottom:1px dashed var(--dim);cursor:help;position:relative;}
-.term:hover,.term:focus{border-bottom-color:var(--accent);color:var(--text);outline:none;}
-.term-pop{position:absolute;bottom:155%;left:0;width:210px;max-width:calc(100vw - 32px);background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;font-size:13px;font-weight:400;line-height:1.5;color:var(--subtle);box-shadow:0 8px 24px rgba(0,0,0,0.55);opacity:0;visibility:hidden;transition:opacity 0.15s;z-index:50;pointer-events:none;text-align:left;overflow-wrap:break-word;word-break:break-word;white-space:normal;}
-.term:hover .term-pop,.term:focus .term-pop{opacity:1;visibility:visible;}
-.term-pop b{color:var(--text);}
+.term{border-bottom:1px dashed var(--accent2);cursor:pointer;position:relative;transition:color .15s,border-color .15s;}
+.term:hover,.term:focus{border-bottom-style:solid;color:var(--text);outline:none;}
 .gloss-list{display:flex;flex-direction:column;gap:10px;}
 .gloss-item{font-size:0.96em;line-height:1.5;}
 .gloss-item b{color:var(--accent2);}
 
 /* Träna-knapp: markeras när modellen behöver tränas om */
-.train-btn{margin-bottom:2px;transition:background 0.3s,border-color 0.3s;}
-.train-btn.attn{animation:trainPulse 1.3s ease-in-out infinite;}
-@keyframes trainPulse{0%,100%{box-shadow:0 0 0 0 rgba(77,128,255,0.0);}50%{box-shadow:0 0 0 4px rgba(77,128,255,0.30);}}
-.train-btn.just-trained{background:var(--green);border-color:var(--green);color:#090b14;}
 .train-status{font-size:0.74em;color:var(--green);line-height:1.4;margin-top:6px;min-height:1em;}
 .train-status strong{color:var(--text);}
 
@@ -245,22 +248,78 @@ input[type=range]:disabled{opacity:0.3;}
   .side .coll.sticky{position:static;}
   .back-link{position:static;transform:none;margin-bottom:4px;}
   .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}
-  .hd{padding:10px 16px 8px;}
-}
-@media(max-width:520px){
-  .setup-grid{grid-template-columns:1fr;}
+  .hd{padding:22px 16px 18px;}
 }
 
-/* Stegnavigering – guidad trappa genom labbet */
-.stepper{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px;}
-.steps-nav{display:flex;flex-wrap:wrap;gap:6px;}
-.snav{flex:1;min-width:118px;font-family:'DM Sans',sans-serif;font-size:0.76em;font-weight:700;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;transition:0.15s;text-align:center;}
-.snav:hover{color:var(--text);border-color:var(--accent);}
-.snav.active{background:var(--step-accent-soft);border-color:var(--step-accent);color:var(--step-accent);}
-.step-intro{font-size:0.88em;color:var(--subtle);line-height:1.55;margin-top:14px;background:linear-gradient(180deg,var(--step-accent-soft),transparent);border-left:3px solid var(--step-accent);border-radius:0 8px 8px 0;padding:12px 15px;transition:border-color 0.4s,background 0.4s;}
-.step-intro strong{color:var(--text);}
+/* Stegnavigering – guidad trappa genom labbet (glaskänsla, egen accent per steg) */
+.sh{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.3);}
+.sh-tiles{display:flex;gap:10px;padding:20px 20px 14px;}
+.sh-tile{
+  flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:7px;
+  padding:13px 4px 11px;border-radius:14px;cursor:pointer;text-align:center;font-family:'DM Sans',sans-serif;
+  -webkit-tap-highlight-color:transparent;position:relative;overflow:hidden;isolation:isolate;
+  background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.015) 45%,rgba(0,0,0,.07));
+  border:1px solid rgba(255,255,255,.07);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),inset 0 -8px 14px -12px rgba(0,0,0,.5),0 1px 3px rgba(0,0,0,.3);
+  transition:transform .3s var(--ease-spring),box-shadow .3s var(--ease-out),border-color .3s var(--ease-out),background .3s var(--ease-out);
+}
+.sh-tile::after{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:linear-gradient(115deg,transparent 26%,rgba(255,255,255,.06) 45%,transparent 62%);
+}
+.sh-tile:hover:not(.active){transform:translateY(-2px);border-color:rgba(255,255,255,.15);box-shadow:inset 0 1px 0 rgba(255,255,255,.09),inset 0 -8px 14px -12px rgba(0,0,0,.5),0 10px 22px -10px rgba(0,0,0,.6);}
+.sh-tile:active{transform:translateY(-1px) scale(.98);}
+.sh-tile:focus-visible{outline:2px solid var(--step-accent);outline-offset:2px;}
+.sh-ico-wrap{
+  width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:2;
+  background:linear-gradient(160deg,rgba(255,255,255,.1),rgba(255,255,255,.02));
+  color:var(--dim);border:1px solid rgba(255,255,255,.1);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 2px 6px rgba(0,0,0,.4);
+  transition:.32s var(--ease-spring);
+}
+.sh-ico-wrap svg{width:16px;height:16px;}
+.sh-num{font-family:'JetBrains Mono',monospace;font-size:.62em;font-weight:700;color:var(--dim);letter-spacing:.04em;transition:color .25s;position:relative;z-index:2;}
+.sh-lbl{font-size:.72em;font-weight:600;color:var(--dim);line-height:1.25;transition:color .25s;position:relative;z-index:2;}
+.sh-tile.active{
+  flex:1.35;
+  transform:translateY(-4px) scale(1.02);
+  background:linear-gradient(160deg,rgba(255,255,255,.08),var(--step-accent-soft) 65%);
+  border-color:var(--step-accent);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -10px 18px -14px rgba(0,0,0,.4),0 16px 30px -12px var(--step-glow);
+}
+.sh-tile.active .sh-ico-wrap{
+  width:38px;height:38px;
+  background:linear-gradient(160deg,rgba(255,255,255,.2),var(--step-accent-soft));
+  border-color:var(--step-accent);color:var(--step-accent);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 6px 16px -4px var(--step-glow);
+}
+.sh-tile.active .sh-ico-wrap svg{width:18px;height:18px;}
+.sh-tile.active .sh-num{color:var(--step-accent);}
+.sh-tile.active .sh-lbl{color:var(--text);}
+.sh-hint{font-size:.72em;color:var(--dim);text-align:center;padding:0 18px 18px;}
+.sh-banner{border-top:1px solid var(--border-soft);padding:20px 22px 22px;border-left:3px solid var(--step-accent);background:var(--step-accent-soft);transition:border-color .4s var(--ease-out),background .4s var(--ease-out);}
+.sh-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66em;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--step-accent);margin-bottom:7px;transition:color .4s;}
+.sh-title{font-family:'DM Sans',sans-serif;font-size:1.22em;font-weight:700;letter-spacing:-.005em;margin-bottom:7px;color:var(--text);}
+.sh-desc{font-size:.88em;line-height:1.6;color:var(--subtle);}
+.sh-desc strong{color:var(--text);}
+@keyframes shFade{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:none;}}
+.sh-banner.anim .sh-eyebrow,.sh-banner.anim .sh-title,.sh-banner.anim .sh-desc{animation:shFade .38s var(--ease-out);}
+@media (prefers-reduced-motion: reduce){
+  .sh-banner.anim .sh-eyebrow,.sh-banner.anim .sh-title,.sh-banner.anim .sh-desc{animation:none;}
+  .sh-tile,.sh-ico-wrap,.sh-banner{transition:none;}
+}
+@media(max-width:680px){
+  .sh-tiles{gap:5px;padding:13px 10px 10px;}
+  .sh-tile{padding:9px 2px 8px;gap:5px;}
+  .sh-lbl{font-size:0;line-height:0;}
+  .sh-tile.active .sh-lbl{font-size:.66em;line-height:1.2;margin-top:1px;}
+  .sh-ico-wrap{width:27px;height:27px;}
+  .sh-ico-wrap svg{width:13px;height:13px;}
+  .sh-tile.active .sh-ico-wrap{width:32px;height:32px;}
+  .sh-banner{padding:14px 14px 16px;}
+}
 .step-foot{display:flex;justify-content:space-between;gap:8px;margin-top:11px;}
-.step-foot.bottom{margin-top:4px;padding-top:22px;border-top:1px solid var(--border);align-items:stretch;}
+.step-foot.bottom{margin-top:4px;padding-top:30px;border-top:1px solid var(--border);align-items:stretch;}
 .step-foot.bottom #prevStep{flex:0 0 auto;padding:11px 16px;}
 .btn.big-next{flex:1;font-size:1em;font-weight:700;padding:11px 22px;}
 
@@ -269,16 +328,15 @@ input[type=range]:disabled{opacity:0.3;}
 .wrap.sx-context .gate-context{display:block;}
 .wrap.sx-choose .gate-choose{display:block;}
 .wrap.sx-data .gate-data{display:block;}
-.wrap.sx-all .gate-prompt{display:flex;}
-.wrap.sx-all .gate-pblock{display:block;}
+.wrap.sx-data .gate-prompt{display:flex;}
+.wrap.sx-data .gate-pblock{display:block;}
 
 /* Dataset-syfte under väljaren */
-.preset-purpose{font-size:0.72em;color:var(--gold);line-height:1.45;margin-top:6px;min-height:1em;}
 
 /* Dataset-krysslista (välj och kombinera flera texter) */
 .ds-hint{font-weight:400;color:var(--dim);font-size:0.82em;}
 .ds-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.ds-card{position:relative;display:flex;flex-direction:column;gap:3px;padding:12px 13px;border:1px solid var(--border);border-radius:11px;background:var(--surface2);cursor:pointer;transition:transform 0.15s,border-color 0.15s,background 0.15s;user-select:none;}
+.ds-card{position:relative;display:flex;flex-direction:column;gap:3px;padding:12px 13px;border:1px solid var(--border);border-radius:12px;background:var(--surface2);cursor:pointer;transition:transform 0.15s,border-color 0.15s,background 0.15s;user-select:none;}
 .ds-card:hover{border-color:var(--accent);transform:translateY(-2px);}
 .ds-card.selected{border-color:var(--accent);background:rgba(77,128,255,0.12);box-shadow:0 0 0 1px var(--accent);}
 .ds-card .ds-emoji{font-size:1.5em;line-height:1;margin-bottom:3px;}
@@ -286,6 +344,17 @@ input[type=range]:disabled{opacity:0.3;}
 .ds-card .ds-tag{font-size:0.72em;color:var(--dim);line-height:1.3;}
 .ds-card .ds-check{position:absolute;top:9px;right:10px;width:19px;height:19px;border-radius:50%;background:var(--accent);color:#fff;font-size:0.72em;font-weight:700;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0.6);transition:0.18s;}
 .ds-card.selected .ds-check{opacity:1;transform:scale(1);}
+
+/* Val-mekanism-korten (girig / viktad slump) – samma mönster som träningsdata-korten, men guldaktiga som resten av steg 3 */
+.mode-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.mode-card{position:relative;display:flex;flex-direction:column;gap:3px;padding:12px 13px;border:1px solid var(--border);border-radius:12px;background:var(--surface2);cursor:pointer;transition:transform 0.15s,border-color 0.15s,background 0.15s;user-select:none;}
+.mode-card:hover{border-color:var(--gold);transform:translateY(-2px);}
+.mode-card.selected{border-color:var(--gold);background:rgba(255,216,102,0.14);box-shadow:0 0 0 1px var(--gold);}
+.mode-card .mode-emoji{font-size:1.5em;line-height:1;margin-bottom:3px;}
+.mode-card .mode-name{font-weight:700;font-size:0.9em;color:var(--text);}
+.mode-card .mode-tag{font-size:0.72em;color:var(--dim);line-height:1.3;}
+.mode-card .mode-check{position:absolute;top:9px;right:10px;width:19px;height:19px;border-radius:50%;background:var(--gold);color:#2a2410;font-size:0.72em;font-weight:700;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0.6);transition:0.18s;}
+.mode-card.selected .mode-check{opacity:1;transform:scale(1);}
 
 
 /* Säkerhetsmätare för aktuell kontext */
@@ -298,71 +367,116 @@ input[type=range]:disabled{opacity:0.3;}
 .cert-note{font-size:0.7em;color:var(--dim);line-height:1.45;margin-top:5px;}
 .cert-note strong{color:var(--text);}
 
-/* "Wow"-träningssekvens: eleven ser modellen byggas, steg för steg */
-.train-seq{position:fixed;inset:0;background:rgba(9,11,20,0.82);backdrop-filter:blur(4px);z-index:150;display:none;align-items:center;justify-content:center;padding:20px;}
-.train-seq.show{display:flex;}
-.train-seq-card{background:var(--surface);border:1px solid rgba(52,199,89,0.4);border-radius:18px;padding:34px 40px;text-align:center;min-width:300px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
-.train-seq-icon{font-size:2.6em;margin-bottom:14px;line-height:1;animation:seqPulse 1.1s ease-in-out infinite;}
-@keyframes seqPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
-.train-seq.done .train-seq-icon{animation:seqPop 0.5s ease;}
-@keyframes seqPop{0%{transform:scale(0.5);}60%{transform:scale(1.25);}100%{transform:scale(1);}}
-.train-seq-label{font-size:1.05em;font-weight:700;color:var(--text);margin-bottom:16px;min-height:1.3em;letter-spacing:-0.01em;}
-.train-seq-bar{height:8px;border-radius:5px;background:var(--surface2);overflow:hidden;}
-.train-seq-bar i{display:block;height:100%;width:0;border-radius:5px;background:linear-gradient(90deg,var(--green),#5fe0a0);transition:width 0.4s ease;box-shadow:0 0 12px rgba(52,199,89,0.5);}
+/* ── Träna-knapp: samma "levande" mönster som bias-labbet ── */
+.train-cta{position:relative;overflow:hidden;width:100%;padding:17px 20px;border-radius:14px;border:none;
+  background:linear-gradient(135deg,var(--green),#28b567);color:#04140a;font-family:'DM Sans',sans-serif;font-weight:800;font-size:1.02em;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:transform .25s var(--ease-spring),box-shadow .25s var(--ease-out),background .4s var(--ease-out);
+  box-shadow:0 8px 26px rgba(52,199,89,.25);isolation:isolate;}
+.train-cta:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(52,199,89,.35);}
+.train-cta:active{transform:scale(.98);}
+.train-cta::before{content:'';position:absolute;inset:-3px;border-radius:17px;z-index:-1;filter:blur(11px);
+  background:linear-gradient(135deg,var(--green),#8effc4,var(--green));opacity:0;transition:opacity .4s;animation:ctaPulse 2.6s ease-in-out infinite;}
+.train-cta.idle::before{opacity:.5;}
+@keyframes ctaPulse{0%,100%{opacity:.3;}50%{opacity:.65;}}
+.train-cta-icon{font-size:1.2em;display:inline-block;position:relative;z-index:1;}
+.train-cta-text{position:relative;z-index:1;}
+
+/* ── Levande byggnads-canvas: riktiga ord ur texten strömmar in i tabellen ── */
+.train-stage{display:flex;flex-direction:column;align-items:center;gap:16px;padding:4px 0 2px;}
+.train-canvas-wrap{width:100%;max-width:520px;height:170px;position:relative;border-radius:var(--r-md);overflow:hidden;background:radial-gradient(ellipse 70% 90% at 50% 50%,rgba(20,26,48,.6),rgba(9,11,20,.3));border:1px solid var(--border-soft);}
+.train-canvas-wrap canvas{width:100%;height:100%;display:block;}
+.train-status-list{min-height:24px;display:flex;flex-direction:column;align-items:center;gap:7px;width:100%;max-width:420px;}
+.train-status-line{font-size:.92em;color:var(--subtle);display:flex;align-items:center;gap:9px;opacity:0;transform:translateY(6px);transition:opacity .4s var(--ease-out),transform .4s var(--ease-out);font-weight:500;}
+.train-status-line.show{opacity:1;transform:none;}
+.train-status-line .tsl-dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;box-shadow:0 0 8px var(--accent2);}
+.train-status-line.done .tsl-dot{background:var(--green);box-shadow:0 0 8px var(--green);}
+.train-status-line .tsl-check{color:var(--green);font-weight:700;}
+.train-progress-rail{width:100%;max-width:420px;height:5px;border-radius:999px;background:var(--surface2);overflow:hidden;}
+.train-progress-rail i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .2s var(--ease-out);}
+
+/* ═══ Glaskort (concept cards) – samma komponent som övriga labb ═══ */
+.launch-grid{display:flex;flex-direction:column;gap:10px;}
+.launch-card{display:flex;align-items:center;gap:12px;text-align:left;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.008)),var(--surface);border:1px solid var(--border);border-radius:14px;padding:13px 14px;cursor:pointer;color:var(--text);box-shadow:inset 0 1px 0 rgba(255,255,255,.05);transition:border-color .18s,transform .12s,box-shadow .18s,background .18s;font-family:'DM Sans',sans-serif;}
+.launch-card:hover{border-color:rgba(77,128,255,.5);transform:translateY(-1px);box-shadow:0 10px 26px rgba(77,128,255,.12),inset 0 1px 0 rgba(255,255,255,.06);}
+.launch-card:active{transform:translateY(0);}
+.lc-ico{width:38px;height:38px;flex-shrink:0;border-radius:11px;background:var(--accent-dim);color:var(--accent2);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(77,128,255,.14);}
+.lc-ico svg{width:19px;height:19px;}
+.lc-txt{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.lc-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14.5px;letter-spacing:-.01em;line-height:1.25;}
+.lc-sub{font-size:11.5px;color:var(--dim);line-height:1.4;}
+.lc-arrow{margin-left:auto;color:var(--dim);flex-shrink:0;transition:transform .2s var(--ease-spring),color .2s;}
+.launch-card:hover .lc-arrow{transform:translateX(3px);color:var(--accent2);}
+.lc-arrow svg{width:15px;height:15px;display:block;}
+
+.concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
+.concept-backdrop.show{opacity:1;pointer-events:auto;}
+.concept-card{position:fixed;top:50%;left:50%;z-index:301;width:400px;max-width:90vw;perspective:1000px;transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .26s var(--ease-out);}
+.concept-card.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
+.concept-card-inner{position:relative;text-align:center;transform-style:preserve-3d;background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;transform:perspective(1000px) rotateX(0deg) rotateY(0deg);transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);will-change:transform;max-height:86vh;overflow-y:auto;}
+.concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,216,102,.15) 45%,transparent 65%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::before{opacity:1;}
+.concept-card-inner::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.09),transparent 60%);opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::after{opacity:1;}
+.concept-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);z-index:3;transform:translateZ(30px);padding:0;}
+.concept-close:hover{border-color:var(--red);color:var(--red);transform:translateZ(30px) rotate(90deg);}
+.concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
+.concept-icon.warn{background:rgba(239,91,91,.14);color:var(--red);box-shadow:0 10px 24px rgba(239,91,91,.18);}
+.concept-icon svg{width:28px;height:28px;}
+.concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:10px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
+.concept-def{font-size:.9em;line-height:1.65;color:var(--dim);position:relative;z-index:3;transform:translateZ(18px);transform-style:preserve-3d;text-align:left;}
+.concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;font-weight:600;}
+.concept-def .cc-lead{margin-bottom:12px;}
+.concept-def .gloss-list{gap:11px;}
+.concept-def .gloss-item b{color:var(--accent2);}
+.cc-sub{font-family:'Syne',sans-serif;font-size:.92em;font-weight:700;margin:14px 0 7px;display:flex;align-items:center;gap:7px;color:var(--accent2);}
+.cc-sub.green{color:var(--green);}.cc-sub.orange{color:var(--orange);}
+.cc-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.cc-list li{position:relative;padding-left:18px;line-height:1.5;}
+.cc-list li::before{content:'';position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:2px;background:var(--accent2);}
+.cc-list.green li::before{background:var(--green);}
+.cc-list.orange li::before{background:var(--orange);}
+.term-link-btn{margin-top:8px;background:none;border:none;padding:0;font-family:'DM Sans',sans-serif;font-size:.74em;font-weight:600;color:var(--accent2);cursor:pointer;text-decoration:underline;text-underline-offset:2px;}
+.term-link-btn:hover{color:var(--text);}
 </style>
 </head>
 <body>
 
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
-  <a class="lang-link" href="https://www.ai-aktiviteter.se/sprakmodellen"><svg class="flag" width="18" height="12" viewBox="0 0 16 10" aria-hidden="true"><rect width="16" height="10" fill="#006aa7"/><rect x="5" width="2" height="10" fill="#fecc00"/><rect y="4" width="16" height="2" fill="#fecc00"/></svg> Svenska</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/sprakmodellen"><svg class="lang-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.7 2.6 4 5.8 4 9s-1.3 6.4-4 9c-2.7-2.6-4-5.8-4-9s1.3-6.4 4-9z"/></svg> Svenska</a>
   <h1><span>Language Model</span> Lab</h1>
-  <p>Build your own little language model from any text – and see exactly how it chooses the next word, word by word.</p>
+  <p>Build your own small language model from any text – and see exactly how it chooses the next word, one word at a time.</p>
 </div>
 
 <div class="wrap" id="wrapEl">
 
   <!-- ─── Stegnavigering: guidad trappa ─── -->
-  <section class="stepper">
-    <div class="steps-nav" id="stepsNav">
-      <button class="snav" data-s="1" onclick="goStep(1)">1 · Next word</button>
-      <button class="snav" data-s="2" onclick="goStep(2)">2 · Context</button>
-      <button class="snav" data-s="3" onclick="goStep(3)">3 · Randomness &amp; temperature</button>
-      <button class="snav" data-s="4" onclick="goStep(4)">4 · Training data</button>
-      <button class="snav" data-s="5" onclick="goStep(5)">5 · Free exploration</button>
+  <section class="sh" id="sh">
+    <div class="sh-tiles" id="shTiles"></div>
+    <div class="sh-hint">The order is a suggested workflow – feel free to jump freely between steps.</div>
+    <div class="sh-banner" id="shBanner">
+      <div class="sh-eyebrow" id="shEyebrow"></div>
+      <div class="sh-title" id="shTitleEl"></div>
+      <div class="sh-desc" id="shDesc"></div>
     </div>
-    <div class="step-intro" id="stepIntro"></div>
   </section>
 
   <!-- ─── Träningsdata ─── -->
   <section class="card">
-    <div class="card-h">🗂️ Training data</div>
-    <div class="setup-grid">
-      <div>
-        <label class="mini-t">Training data <span class="ds-hint">– pick one or more</span></label>
-        <div id="dsLoadStatus" style="font-size:0.8em;color:var(--dim);margin-bottom:6px;"></div>
-        <div class="ds-list" id="dsList">
-          <div class="ds-card" data-key="vader" onclick="toggleCard('vader')"><span class="ds-check">✓</span><span class="ds-emoji">🌦️</span><span class="ds-name">Weather report</span><span class="ds-tag">Simple &amp; repetitive</span></div>
-          <div class="ds-card" data-key="sport" onclick="toggleCard('sport')"><span class="ds-check">✓</span><span class="ds-emoji">⚽</span><span class="ds-name">Sports report</span><span class="ds-tag">More variation</span></div>
-          <div class="ds-card" data-key="hemso" onclick="toggleCard('hemso')"><span class="ds-check">✓</span><span class="ds-emoji">📖</span><span class="ds-name">Pride &amp; Prejudice</span><span class="ds-tag">Classic English novel</span></div>
-          <div class="ds-card" data-key="shakespeare" onclick="toggleCard('shakespeare')"><span class="ds-check">✓</span><span class="ds-emoji">🎭</span><span class="ds-name">Shakespeare</span><span class="ds-tag">Large English collection</span></div>
-        </div>
-        <div class="preset-purpose" id="presetPurpose"></div>
-      </div>
-      <div class="gate-context">
-        <label class="mini-t k-label"><span class="term" data-term="kontextlängd">Context length</span></label>
-        <select class="sel" id="kSel" onchange="onKChange(this.value)">
-          <option value="1">1 word – looks at the last word</option>
-          <option value="2" selected>2 words – looks at the last two</option>
-          <option value="3">3 words – looks at the last three</option>
-        </select>
+    <div class="card-h">🗂️ Training Data</div>
+    <div>
+      <label class="mini-t">Training data <span class="ds-hint">– check one or more</span></label>
+      <div id="dsLoadStatus" style="font-size:0.8em;color:var(--dim);margin-bottom:6px;"></div>
+      <div class="ds-list" id="dsList">
+        <div class="ds-card" data-key="vader" onclick="toggleCard('vader')"><span class="ds-check">✓</span><span class="ds-emoji">🌦️</span><span class="ds-name">The Weather Report</span><span class="ds-tag">Simple, repetitive Swedish text</span></div>
+        <div class="ds-card" data-key="sport" onclick="toggleCard('sport')"><span class="ds-check">✓</span><span class="ds-emoji">⚽</span><span class="ds-name">The Sports Report</span><span class="ds-tag">More varied Swedish text</span></div>
+        <div class="ds-card" data-key="hemso" onclick="toggleCard('hemso')"><span class="ds-check">✓</span><span class="ds-emoji">📖</span><span class="ds-name">Hemsöborna</span><span class="ds-tag">Swedish novel (Strindberg)</span></div>
+        <div class="ds-card" data-key="shakespeare" onclick="toggleCard('shakespeare')"><span class="ds-check">✓</span><span class="ds-emoji">🎭</span><span class="ds-name">Shakespeare</span><span class="ds-tag">Large English collection</span></div>
       </div>
     </div>
-    <button class="btn pri train-btn" id="trainBtn" style="width:100%;" onclick="trainAnimated()">🧠 Train the model</button>
-    <div class="stale-note" id="staleNote">⚠️ The training text has changed – press <strong style="color:var(--text)">Train the model</strong> to update it.</div>
-    <div class="train-status" id="trainStatus"></div>
-    <div class="coll" style="margin-top:10px;">
-      <button class="coll-toggle" onclick="toggleColl(this,'textBody')">✏️ View &amp; edit the text – or upload a file<span class="arr">▼</span></button>
+    <div class="coll" style="margin-top:16px;">
+      <button class="coll-toggle" onclick="toggleColl(this,'textBody')">✏️ Show &amp; edit the text – or upload a file<span class="arr">▼</span></button>
       <div class="coll-body" id="textBody">
         <textarea id="trainText" spellcheck="false" oninput="onTextEdit()"></textarea>
         <div style="display:flex;gap:6px;margin-top:8px;">
@@ -372,16 +486,29 @@ input[type=range]:disabled{opacity:0.3;}
         <div class="hint" id="fileStatus" style="display:none;"></div>
       </div>
     </div>
+    <div id="trainIdle" style="margin-top:16px;">
+      <button class="train-cta idle" id="trainBtn" onclick="trainAnimated()">
+        <span class="train-cta-icon">🧠</span>
+        <span class="train-cta-text">Train the model</span>
+      </button>
+    </div>
+    <div class="stale-note" id="staleNote"></div>
+    <div class="train-status" id="trainStatus"></div>
+    <div class="train-stage" id="trainStage" style="display:none;">
+      <div class="train-canvas-wrap"><canvas id="trainCanvas"></canvas></div>
+      <div class="train-progress-rail"><i id="trainRail"></i></div>
+      <div class="train-status-list" id="trainStatusList"></div>
+    </div>
   </section>
 
   <div class="grid">
 
-    <!-- ─── Steg 2: generera (scen) ─── -->
+    <!-- ─── Step 2: generate (stage) ─── -->
     <section class="stage">
 
       <div class="prompt-bar gate-prompt">
-        <label class="lbl-tip">Prompt<span class="tip-ico" tabindex="0" aria-label="About the prompt and the context window">i<span class="tip-box" id="promptTip"></span></span></label>
-        <input type="text" class="start-input" id="promptInput" placeholder="type a few words from the text…" oninput="validatePrompt()" onkeydown="if(event.key==='Enter')startFromPrompt()">
+        <label class="lbl-tip">Prompt<span class="tip-ico" tabindex="0" role="button" aria-label="About the prompt and context window" onclick="openPromptInfo(event)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPromptInfo(event);}">i</span></label>
+        <input type="text" class="start-input" id="promptInput" placeholder="type a couple of words from the text…" oninput="validatePrompt()" onkeydown="if(event.key==='Enter')startFromPrompt()">
         <button class="btn pri" onclick="startFromPrompt()">▶ Run</button>
       </div>
       <div class="prompt-extra">
@@ -391,7 +518,7 @@ input[type=range]:disabled{opacity:0.3;}
 
       <div class="gen-box" id="genBox"><span class="placeholder">Train the model and it will start writing.</span></div>
       <div id="startExamplesRow" style="display:none;"><div class="start-examples" id="startExamples"></div></div>
-      <div class="narr" id="narr">The model isn't trained yet.</div>
+      <div class="narr" id="narr">The model has not been trained yet.</div>
       <div class="legend">
         <span><i class="sw-ctx"></i> <span class="term" data-term="kontext">context</span> (memory)</span>
         <span><i class="sw-chosen"></i> chosen word</span>
@@ -401,7 +528,7 @@ input[type=range]:disabled{opacity:0.3;}
       <div class="controls">
         <button class="btn pri big" id="stepBtn" onclick="step()">✍️ Next word</button>
         <button class="btn" id="autoBtn" onclick="toggleAuto()">▶ Auto</button>
-        <button class="btn ghost" onclick="restartGen()">↺ Restart</button>
+        <button class="btn ghost" onclick="restartGen()">↺ Start over</button>
         <div class="speed-wrap">
           <label>Speed</label>
           <select class="sel" id="speedSel" style="width:auto;">
@@ -411,24 +538,44 @@ input[type=range]:disabled{opacity:0.3;}
         </div>
       </div>
 
-      <div class="coll gate-choose">
+      <div class="coll gate-context" id="choicePanel">
         <button class="coll-toggle open" onclick="toggleColl(this,'chooseBody')">⚙️ How the model chooses the next word<span class="arr">▼</span></button>
         <div class="coll-body show" id="chooseBody">
-          <div class="ctrl-row">
-            <select class="sel" id="modeSel" style="flex:1;min-width:170px;" onchange="onModeChange(this.value)">
-              <option value="weighted" selected>🎲 Weighted random (samples by probability)</option>
-              <option value="greedy">👑 Always most likely (greedy)</option>
-            </select>
-            <label><span class="term" data-term="temperatur">Temperature</span></label>
-            <input type="range" id="tempSlider" min="0.3" max="2" step="0.1" value="1" oninput="onTempChange(this.value)">
-            <span class="temp-val" id="tempVal">1.0</span>
+          <label class="mini-t k-label"><span class="term" data-term="kontextlängd">Context length</span></label>
+          <select class="sel" id="kSel" onchange="onKChange(this.value)">
+            <option value="1">1 word – looks at the most recent word</option>
+            <option value="2" selected>2 words – looks at the two most recent</option>
+            <option value="3">3 words – looks at the three most recent</option>
+          </select>
+
+          <div class="gate-choose" id="greedyGate" style="margin-top:18px;">
+            <div class="mode-cards" id="modeCards">
+              <div class="mode-card selected" data-mode="weighted" onclick="onModeChange('weighted')">
+                <span class="mode-check">✓</span>
+                <span class="mode-emoji">🎲</span>
+                <span class="mode-name">Weighted random</span>
+                <span class="mode-tag">Randomizes by probability</span>
+              </div>
+              <div class="mode-card" data-mode="greedy" onclick="onModeChange('greedy')">
+                <span class="mode-check">✓</span>
+                <span class="mode-emoji">👑</span>
+                <span class="mode-name">Greedy choice</span>
+                <span class="mode-tag">Always picks the most common word</span>
+              </div>
+            </div>
+            <div class="ctrl-row" style="margin-top:12px;">
+              <label><span class="term" data-term="temperatur">Temperature</span></label>
+              <input type="range" id="tempSlider" min="0.3" max="2" step="0.1" value="1" oninput="onTempChange(this.value)">
+              <span class="temp-val" id="tempVal">1.0</span>
+            </div>
+            <div class="hint" id="tempHint">🌡️ Drag the slider and see what happens to the text.</div>
+            <button type="button" class="term-link-btn" onclick="openConcept('valmetod',event)">📖 More about greedy choice, randomness &amp; temperature</button>
           </div>
-          <div class="hint" id="tempHint">🌡️ Drag the slider and see what happens to the text.</div>
         </div>
       </div>
     </section>
 
-    <!-- ─── Sidopanel: tabell + info ─── -->
+    <!-- ─── Sidebar: table + info ─── -->
     <aside class="side">
 
       <div class="coll sticky">
@@ -446,39 +593,29 @@ input[type=range]:disabled{opacity:0.3;}
         <div class="coll-body show" id="statBody">
           <div class="stat-row"><span class="sl">Status</span><span class="sv" id="stStatus">–</span></div>
           <div class="stat-row headline"><span class="sl"><span class="term" data-term="token">Tokens</span></span><span class="sv" id="stTokens">0</span></div>
-          <div class="stat-help">Each word and punctuation mark counts as its own token.</div>
           <div class="stat-row headline"><span class="sl"><span class="term" data-term="vokabulär">Unique words</span></span><span class="sv" id="stVocab">0</span></div>
-          <div class="stat-help">The model's whole vocabulary – more words give more variation.</div>
-          <div class="stat-row headline"><span class="sl">Contexts</span><span class="sv" id="stCtx">0</span></div>
-          <div class="stat-help">All the different word sequences the model recognises.</div>
+          <div class="stat-row headline"><span class="sl"><span class="term" data-term="kontexter">Contexts</span></span><span class="sv" id="stCtx">0</span></div>
           <div class="stat-row headline"><span class="sl"><span class="term" data-term="branching">Choices / step</span></span><span class="sv" id="stBranch">–</span></div>
           <div class="branch-wrap">
             <div class="branch-bar"><div class="branch-fill" id="branchFill"></div></div>
             <div class="branch-lbl" id="branchLbl"></div>
           </div>
-          <div class="stat-help">On average, this many words can follow a context. Near 1 = the model just recites the text.</div>
           <div class="hint" id="qualityNote" style="display:none;"></div>
         </div>
       </div>
 
-      <div class="coll gate-data">
-        <button class="coll-toggle" onclick="toggleColl(this,'glossBody')">📖 Glossary<span class="arr">▼</span></button>
-        <div class="coll-body" id="glossBody"><div id="glossaryBody"></div></div>
-      </div>
-
-      <div class="coll gate-data">
-        <button class="coll-toggle" onclick="toggleColl(this,'gptBody')">🤖 How does this model relate to ChatGPT?<span class="arr">▼</span></button>
-        <div class="coll-body" id="gptBody">
-          This mini-model and ChatGPT are built on the same basic principle – predicting the next word. The difference is how the probabilities are worked out.<br><br>
-          <strong style="color:var(--green)">Similarities</strong><br>
-          • Both predict the next word from the words that came before.<br>
-          • Both compute a <span class="term" data-term="sannolikhet">probability</span> for many possible next words and then pick one of them.<br>
-          • <span class="term" data-term="temperatur">Temperature</span> affects the word choice the same way in both models.<br><br>
-          <strong style="color:var(--orange)">Differences</strong><br>
-          • This model uses a table of exact word sequences. ChatGPT uses a <span class="term" data-term="nätverk">neural network</span> with billions of parameters.<br>
-          • ChatGPT can take thousands of previous words into account, not just 1–3.<br>
-          • ChatGPT was trained on an enormous amount of text from many different sources.<br>
-          • ChatGPT can recognise similar patterns and <span class="term" data-term="generalisering">generalise</span>. This model can only use word sequences it has seen before.
+      <div class="gate-data">
+        <div class="launch-grid">
+          <button class="launch-card" onclick="openConcept('begrepp',event)">
+            <span class="lc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+            <span class="lc-txt"><span class="lc-title">Glossary</span><span class="lc-sub">Every term explained – token, context, temperature…</span></span>
+            <span class="lc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+          </button>
+          <button class="launch-card" onclick="openConcept('chatgpt',event)">
+            <span class="lc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3M8.5 10h.01M15.5 10h.01"/></svg></span>
+            <span class="lc-txt"><span class="lc-title">How does this relate to ChatGPT?</span><span class="lc-sub">Similarities and differences from a real model.</span></span>
+            <span class="lc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+          </button>
         </div>
       </div>
 
@@ -491,27 +628,34 @@ input[type=range]:disabled{opacity:0.3;}
   </div>
 </div>
 
-<!-- ─── Intro-overlay ─── -->
-<div class="train-seq" id="trainSeq" aria-hidden="true">
-  <div class="train-seq-card">
-    <div class="train-seq-icon" id="trainSeqIcon">🧠</div>
-    <div class="train-seq-label" id="trainSeqLabel">Reading the text…</div>
-    <div class="train-seq-bar"><i id="trainSeqFill"></i></div>
+<!-- ─── Glass card skeleton ─── -->
+<div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
+<div class="concept-card" id="conceptCard">
+  <div class="concept-card-inner" id="conceptCardInner">
+    <button class="concept-close" onclick="closeConcept()" aria-label="Close">✕</button>
+    <div class="concept-icon" id="conceptIcon"></div>
+    <div class="concept-title" id="conceptTitle"></div>
+    <div class="concept-def" id="conceptDef"></div>
   </div>
 </div>
 
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
+    <svg class="intro-viz" viewBox="0 0 220 80" aria-hidden="true">
+      <g class="iv-chip"><rect x="8" y="29" width="40" height="22" rx="7"/><text x="28" y="44">it</text></g>
+      <g class="iv-chip"><rect x="54" y="29" width="46" height="22" rx="7"/><text x="77" y="44">will</text></g>
+      <path class="iv-arrow" d="M106 40 h16 m-5 -4 l5 4 l-5 4"/>
+      <g class="iv-next"><rect x="130" y="27" width="62" height="26" rx="8"/><text x="161" y="44">rain</text></g>
+    </svg>
     <h2><span>Language Model</span> Lab</h2>
-    <p class="sub">Discover how a language model works by building, analysing and evaluating your own model, step by step.</p>
+    <p class="sub">Discover how a language model works by building, analyzing, and evaluating your own model step by step.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>How does the model choose the next word?</strong> Explore how the model continues a text and discover how it picks between different possible words.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>What does the model remember?</strong> Investigate how many previous words the model looks back at when choosing the next word – and what that does to the text.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>How does the model choose the next word?</strong> Explore how the model continues a text and discover how it chooses between different possible words.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>What does the model remember?</strong> Examine how many previous words the model looks back at when choosing the next word – and what that does to the text.</div></div>
       <div class="step"><div class="step-num">3</div><div><strong>How is the model's choice affected?</strong> Experiment with temperature and different ways of choosing the next word.</div></div>
-      <div class="step"><div class="step-num">4</div><div><strong>How does the training data shape the model?</strong> Switch between different texts and see how the model's language and behaviour change.</div></div>
-      <div class="step"><div class="step-num">5</div><div><strong>Explore the model yourself.</strong> Upload your own texts, write your own prompts and investigate the model's possibilities and limitations.</div></div>
+      <div class="step"><div class="step-num">4</div><div><strong>How does the training data shape the model?</strong> Switch between different texts and see how the language changes – then combine everything freely and finish by comparing the model with ChatGPT.</div></div>
     </div>
-    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Start →</button>
+    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Start <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 </div>
 
@@ -529,7 +673,7 @@ const PRESETS = {
 
 // Ladda textfilerna från data/-mappen (fungerar på GitHub Pages)
 async function loadDatasets(){
-  const files = { vader:'data/Weather.txt', sport:'data/Sports.txt', hemso:'data/Pride.txt', shakespeare:'data/Shakespeare.txt' };
+  const files = { vader:'data/Vader.txt', sport:'data/Sport.txt', hemso:'data/Hemso.txt', shakespeare:'data/Shakespeare.txt' };
   const loadEl = document.getElementById('dsLoadStatus');
   if(loadEl) loadEl.textContent = 'Loading training data…';
   try {
@@ -540,7 +684,7 @@ async function loadDatasets(){
     }));
     if(loadEl) loadEl.remove();
   } catch(e) {
-    if(loadEl) loadEl.textContent = '⚠️ The text files were not found – check that the data/ folder exists on GitHub Pages.';
+    if(loadEl) loadEl.textContent = '⚠️ The text files could not be found – check that the data/ folder exists on GitHub Pages.';
     console.warn('loadDatasets:', e);
   }
 }
@@ -659,14 +803,14 @@ async function extractPdf(file){
     const tc = await page.getTextContent();
     pages.push(tc.items.map(it => it.str).join(' '));
   }
-  // Laga avstavningar vid radbrytning: "exem- pel" → "exempel"
+  // Fix hyphenation at line breaks: "exam- ple" → "example" (keeps Swedish letters too, since uploaded text may be Swedish)
   return pages.join('\n').replace(/([a-zåäö])- ([a-zåäö])/g, '$1$2');
 }
 
 async function handleFiles(fileList){
   const files = [...fileList];
   if(!files.length) return;
-  setFileStatus('⏳ Loading…');
+  setFileStatus('⏳ Reading…');
   const parts = [];
   try{
     for(const f of files){
@@ -681,7 +825,7 @@ async function handleFiles(fileList){
   }
   let text = parts.join('\n\n').trim();
   if(text.length < 20){
-    setFileStatus('⚠️ No text was found in the file. If it is a PDF it may be a scanned image – then there is no text layer to read.');
+    setFileStatus('⚠️ No text was found in the file. If it is a PDF, it may be a scanned image – in that case there is no text layer to read.');
     document.getElementById('fileInput').value = '';
     return;
   }
@@ -690,43 +834,176 @@ async function handleFiles(fileList){
   document.getElementById('trainText').value = text;
   selectedDatasets.clear();
   syncCards();
-  showDatasetPurpose([]);
   markDirty();
   const words = text.split(/\s+/).length;
-  setFileStatus(`✓ <strong>${files.map(f => esc(f.name)).join(' + ')}</strong> loaded – about ${words.toLocaleString('en-GB')} words${clipped ? ' (the text was cut to the first ' + MAX_CHARS.toLocaleString('en-GB') + ' characters)' : ''}. Press <strong>🧠 Train the model</strong>!`);
-  document.getElementById('fileInput').value = '';   // tillåt samma fil igen
+  setFileStatus(`✓ <strong>${files.map(f => esc(f.name)).join(' + ')}</strong> loaded – about ${words.toLocaleString('en-US')} words${clipped ? ' (the text was cut to the first ' + MAX_CHARS.toLocaleString('en-US') + ' characters)' : ''}. Click <strong>🧠 Train the model</strong>!`);
+  document.getElementById('fileInput').value = '';   // allow the same file again
 }
 
 function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
 
-// "Wow"-sekvens: visa modellen byggas steg för steg innan det riktiga bygget
+// "Wow"-sekvens: eleven ser modellen byggas – riktiga ord ur texten strömmar
+// in i tabellen, inline i sidan (samma mönster som bias-labbets träningsakt)
 let training = false;
+let trainAnimRunning = false;
 async function trainAnimated(){
   if(training) return;
   // För kort text → kör vanliga bygget som visar felmeddelandet direkt
   if(tokenize(document.getElementById('trainText').value).length < 30){ buildFromTextarea(); return; }
   training = true;
-  const ov   = document.getElementById('trainSeq');
-  const lbl  = document.getElementById('trainSeqLabel');
-  const fill = document.getElementById('trainSeqFill');
-  const icon = document.getElementById('trainSeqIcon');
-  ov.classList.remove('done'); icon.textContent = '🧠';
-  fill.style.width = '0%';
-  ov.classList.add('show');
-  const stages = [['📖 Reading the text…', 33], ['🔤 Building the word list…', 66], ['🧩 Building the language model…', 100]];
-  for(const [text, pct] of stages){
-    lbl.textContent = text;
-    await sleep(40);
-    fill.style.width = pct + '%';
-    await sleep(330);
+  document.getElementById('staleNote').classList.remove('show');
+  document.getElementById('trainIdle').style.display = 'none';
+  const stage = document.getElementById('trainStage');
+  stage.style.display = 'flex';
+  const DURATION = 3200;
+
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    runTrainStatusList(DURATION);
+    runTrainingCanvas(DURATION, () => {
+      buildFromTextarea();              // det riktiga bygget
+      setTimeout(() => {
+        stage.style.display = 'none';
+        document.getElementById('trainIdle').style.display = '';
+        training = false;
+      }, 500);
+    });
+  }));
+}
+
+const TRAIN_STAGES = [
+  {t:'Reading the words…', at:0},
+  {t:'Building the word-sequence table…', at:0.4},
+  {t:'Calculating probabilities…', at:0.75}
+];
+function runTrainStatusList(duration){
+  const wrap = document.getElementById('trainStatusList');
+  wrap.innerHTML = '';
+  const rail = document.getElementById('trainRail');
+  rail.style.width = '0%';
+  const lines = TRAIN_STAGES.map(s => {
+    const el = document.createElement('div');
+    el.className = 'train-status-line';
+    el.innerHTML = `<span class="tsl-dot"></span><span>${s.t}</span>`;
+    wrap.appendChild(el);
+    return el;
+  });
+  const t0 = performance.now();
+  function tick(now){
+    const frac = Math.min(1, (now - t0) / duration);
+    rail.style.width = (frac * 100) + '%';
+    TRAIN_STAGES.forEach((s, i) => {
+      if(frac >= s.at && !lines[i].classList.contains('show')) lines[i].classList.add('show');
+      if(i > 0 && frac >= s.at && !lines[i - 1].classList.contains('done')){
+        lines[i - 1].classList.add('done');
+        lines[i - 1].querySelector('span:last-child').innerHTML = TRAIN_STAGES[i - 1].t.replace('…', '') + ' <span class="tsl-check">✓</span>';
+      }
+    });
+    if(frac < 1) requestAnimationFrame(tick);
+    else{
+      const last = lines[lines.length - 1];
+      last.classList.add('done');
+      last.querySelector('span:last-child').innerHTML = TRAIN_STAGES[TRAIN_STAGES.length - 1].t.replace('…', '') + ' <span class="tsl-check">✓</span>';
+    }
   }
-  buildFromTextarea();              // det riktiga bygget
-  ov.classList.add('done');
-  icon.textContent = '🎉';
-  lbl.innerHTML = 'Done – <strong>you trained a language model!</strong>';
-  await sleep(750);
-  ov.classList.remove('show');
-  training = false;
+  requestAnimationFrame(tick);
+}
+
+// Riktiga ord ur den faktiska träningstexten strömmar in i en liten
+// tabellgrafik – inte en påhittad animation, utan samma data som byggs.
+function runTrainingCanvas(duration, onDone){
+  const canvas = document.getElementById('trainCanvas');
+  const wrap = canvas.parentElement;
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  let W = wrap.clientWidth, H = wrap.clientHeight;
+  if(W < 10 || H < 10){ W = Math.max(W, 480); H = Math.max(H, 170); }
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  const ctx = canvas.getContext('2d'); ctx.scale(dpr, dpr);
+
+  let finished = false;
+  function finish(){ if(finished) return; finished = true; trainAnimRunning = false; onDone && onDone(); }
+
+  // Sampla riktiga ord ur den text som faktiskt ska tränas på
+  const rawToks = tokenize(document.getElementById('trainText').value).filter(t => !/^[.,!?;:]$/.test(t) && t.length > 1);
+  const sample = [];
+  const n = Math.max(1, rawToks.length);
+  for(let i = 0; i < 30; i++) sample.push(rawToks[Math.floor(i / 30 * n)] || '…');
+
+  const rows = 4;
+  const tableX = W - 66, tableTop = H * 0.5 - 46, tableW = 60, tableH = 92;
+  const rowY = i => tableTop + 12 + i * (tableH - 20) / (rows - 1);
+
+  let particles = [];
+  let tStart = performance.now();
+  let lastSpawn = 0, spawnIdx = 0;
+  const rowPulse = new Array(rows).fill(0);
+
+  function spawn(now){
+    const w = sample[spawnIdx % sample.length]; spawnIdx++;
+    particles.push({
+      w, x: 12, y: 20 + Math.random() * (H - 40),
+      born: now, row: Math.floor(Math.random() * rows),
+      speed: 0.75 + Math.random() * 0.3, landed: false
+    });
+  }
+
+  function draw(now){
+    const elapsed = now - tStart;
+    ctx.clearRect(0, 0, W, H);
+
+    // tabellramen
+    ctx.strokeStyle = 'rgba(122,162,255,0.28)'; ctx.lineWidth = 1.4;
+    ctx.strokeRect(tableX - tableW / 2, tableTop, tableW, tableH);
+    for(let i = 1; i < rows; i++){
+      const ly = tableTop + i * tableH / rows;
+      ctx.beginPath(); ctx.moveTo(tableX - tableW / 2, ly); ctx.lineTo(tableX + tableW / 2, ly); ctx.stroke();
+    }
+    ctx.fillStyle = 'rgba(122,162,255,0.55)'; ctx.font = '600 9px "JetBrains Mono"'; ctx.textAlign = 'center';
+    ctx.fillText('TABLE', tableX, tableTop - 8);
+
+    // radernas pulsljus (blinkar till när ett ord landar)
+    for(let i = 0; i < rows; i++){
+      if(rowPulse[i] > 0){
+        rowPulse[i] -= 0.045;
+        const ly = tableTop + i * tableH / rows;
+        ctx.fillStyle = `rgba(52,199,89,${Math.max(0, rowPulse[i]) * 0.35})`;
+        ctx.fillRect(tableX - tableW / 2, ly, tableW, tableH / rows);
+      }
+    }
+
+    if(elapsed < duration - 400 && now - lastSpawn > 100){ spawn(now); lastSpawn = now; }
+
+    particles = particles.filter(p => {
+      const age = (now - p.born) * 0.001 * p.speed;
+      const t = Math.min(1, age);
+      const ex = tableX, ey = rowY(p.row);
+      const px = p.x + (ex - p.x) * t, py = p.y + (ey - p.y) * t;
+      const alpha = t > 0.82 ? Math.max(0, 1 - (t - 0.82) / 0.18) : 1;
+      if(t >= 0.98 && !p.landed){ p.landed = true; rowPulse[p.row] = 1; }
+
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.font = '600 11px "JetBrains Mono"';
+      const tw = ctx.measureText(p.w).width + 10;
+      ctx.beginPath();
+      ctx.rect(px - 4, py - 9, tw, 16);
+      ctx.fillStyle = 'rgba(77,128,255,0.16)';
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(122,162,255,0.45)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.fillStyle = '#e8ecf8'; ctx.textAlign = 'left';
+      ctx.fillText(p.w, px, py + 4);
+      ctx.restore();
+      return age < 1.05;
+    });
+
+    if(elapsed < duration || particles.length){
+      requestAnimationFrame(draw);
+    } else {
+      finish();
+    }
+  }
+  trainAnimRunning = true;
+  requestAnimationFrame(draw);
+  setTimeout(finish, duration + 900);   // skyddsnät – låt aldrig bygget hänga
 }
 
 function buildFromTextarea(){
@@ -737,7 +1014,7 @@ function buildFromTextarea(){
     document.getElementById('stStatus').textContent = 'text too short';
     document.getElementById('stStatus').className = 'sv';
     document.getElementById('narr').innerHTML =
-      'The text is too short – the model needs <strong>at least ~30 words</strong> to count word sequences. Write more, or pick an example text.';
+      'The text is too short – the model needs <strong>at least about 30 words</strong> to count word sequences. Write more, or choose an example text.';
     return;
   }
   truncated = false;
@@ -749,10 +1026,6 @@ function buildFromTextarea(){
   deadEnd = false;
   dirty = false;
   document.getElementById('staleNote').classList.remove('show');
-  const tb = document.getElementById('trainBtn');
-  tb.classList.remove('attn');
-  tb.classList.add('just-trained');
-  setTimeout(() => tb.classList.remove('just-trained'), 1600);
   document.getElementById('trainStatus').innerHTML =
     `✓ Trained on <strong>${tokens.length}</strong> tokens · <strong>${new Set(tokens).size}</strong> unique words.`;
   exampleStarts = topContentWords(6);
@@ -760,12 +1033,14 @@ function buildFromTextarea(){
   updatePromptTip();
   updateStats();
   validatePrompt();
-  startGen();   // sådda direkt så tabellen får liv
+  startGen();   // seed right away so the table comes alive
 }
 
-// Plocka ut några frekventa "innehållsord" som inbjudande startord.
-// Vanliga småord (och, i, en …) filtreras bort så förslagen blir konkreta.
-const STOPWORDS = new Set(['the','a','an','of','to','in','and','that','it','is','was','for','with','as','his','her','he','she','they','on','at','by','be','this','which','had','have','not','but','or','from','were','their','are','you','i','my','so','all','would','been','no','if','when','what','who']);
+// Pick out a few frequent Swedish "content words" as inviting starting words.
+// Common function words (och, i, en …) are filtered out so the suggestions stay concrete.
+// NOTE: stays Swedish-specific because the underlying training texts are Swedish
+// regardless of UI language (only the Shakespeare dataset is English).
+const STOPWORDS = new Set(['och','i','en','ett','som','var','på','till','med','det','den','att','för','av','de','är','han','hon','den','var','sin','sitt','inte','men','om','har','hade','blir','kan','vid','när','där','här','upp','över','under','efter','så','ur','mot','redan','gång','hela','andra']);
 function topContentWords(n){
   const freq = new Map();
   for(const t of tokens){
@@ -783,7 +1058,7 @@ function renderStartExamples(){
   const el = document.getElementById('startExamples');
   if(!built || !exampleStarts.length){ row.style.display = 'none'; return; }
   row.style.display = 'flex';
-  el.innerHTML = 'Prova: ' + exampleStarts
+  el.innerHTML = 'Try: ' + exampleStarts
     .map(w => `<button type="button" class="ex-chip" data-w="${esc(w)}">${esc(w)}</button>`)
     .join('');
 }
@@ -798,7 +1073,6 @@ document.getElementById('startExamples').addEventListener('click', e => {
 
 // ── Träningsdata som krysslista: välj och kombinera flera texter ──
 const selectedDatasets = new Set();
-const DATASET_NAMES = { vader:'🌦️ Weather', sport:'⚽ Sports', hemso:'📖 Pride & Prejudice', shakespeare:'🎭 Shakespeare' };
 
 function toggleCard(key){
   if(selectedDatasets.has(key)) selectedDatasets.delete(key); else selectedDatasets.add(key);
@@ -824,18 +1098,7 @@ function setDatasets(keys){
 function rebuildTrainText(){
   const keys = [...selectedDatasets];
   document.getElementById('trainText').value = keys.map(k => PRESETS[k]).join('\n\n');
-  showDatasetPurpose(keys);
   markDirty();
-}
-
-function showDatasetPurpose(keys){
-  const el = document.getElementById('presetPurpose');
-  if(!el) return;
-  if(keys.length === 0){ el.textContent = 'Pick at least one text card to train on.'; el.style.color = 'var(--dim)'; return; }
-  if(keys.length === 1){ el.textContent = PRESET_PURPOSE[keys[0]] || ''; el.style.color = 'var(--gold)'; return; }
-  const names = keys.map(k => DATASET_NAMES[k] || k).join(' + ');
-  el.textContent = `Mixed training: ${names}. The model learns from several sources at once → more varied language.`;
-  el.style.color = 'var(--gold)';
 }
 
 // Eleven redigerar textrutan själv → bli "egen text" och avmarkera datasen
@@ -844,8 +1107,6 @@ function onTextEdit(){
   if(document.getElementById('trainText').value !== combined){
     selectedDatasets.clear();
     syncCards();
-    const el = document.getElementById('presetPurpose');
-    if(el){ el.textContent = '✍️ Your own text – the model trains on what you wrote.'; el.style.color = 'var(--dim)'; }
   }
   markDirty();
 }
@@ -854,9 +1115,13 @@ function onTextEdit(){
 // så eleven själv trycker "Träna" och ser modellen uppdateras.
 function markDirty(){
   dirty = true;
-  const b = document.getElementById('trainBtn');
-  if(b) b.classList.add('attn');
-  document.getElementById('staleNote').classList.add('show');
+  const note = document.getElementById('staleNote');
+  if(built){
+    note.innerHTML = '⚠️ The training text has changed – click <strong style="color:var(--text)">Train the model</strong> to update it.';
+    note.classList.add('show');
+  }else{
+    note.classList.remove('show');
+  }
   document.getElementById('trainStatus').innerHTML = '';
 }
 
@@ -875,13 +1140,13 @@ function validatePrompt(){
       el.innerHTML = `✓ Short prompt – the model jumps in at «${esc(last)}» in the text.`;
     }else{
       el.className = 'prompt-status warn';
-      el.innerHTML = `✗ The word «${esc(last)}» is not in the training text.`;
+      el.innerHTML = `✗ The word «${esc(last)}» does not appear in the training text.`;
     }
     return;
   }
   if(models[k].has(ctx.join(SEP))){
     el.className = 'prompt-status ok';
-    el.innerHTML = `✓ The model recognises «${esc(ctx.join(' '))}» and can continue.`;
+    el.innerHTML = `✓ The model recognizes «${esc(ctx.join(' '))}» and can continue.`;
   }else{
     el.className = 'prompt-status warn';
     el.innerHTML = `✗ The model has never seen «${esc(ctx.join(' '))}» – try a word from the text ↓`;
@@ -923,20 +1188,20 @@ function updateStats(){
   const col = bf >= 1.5 ? 'var(--green)' : bf >= 1.1 ? 'var(--gold)' : 'var(--red)';
   bEl.textContent = bf.toFixed(2);
   bEl.style.color = col;
-  // Mappa 1.0 → tomt, 2.5+ → fullt
+  // Map 1.0 → empty, 2.5+ → full
   bFill.style.width = Math.max(4, Math.min(100, (bf - 1) / 1.5 * 100)).toFixed(0) + '%';
   bFill.style.background = col;
   bLbl.style.color = col;
-  bLbl.textContent = bf >= 1.5 ? '🟢 Lots of freedom – the text can go many ways'
-                   : bf >= 1.1 ? '🟡 Lagom valfrihet'
-                   : '🔴 Almost no freedom – the model mostly recites the text';
+  bLbl.textContent = bf >= 1.5 ? '🟢 High freedom of choice – the text can go in many directions'
+                   : bf >= 1.1 ? '🟡 Moderate freedom of choice'
+                   : '🔴 Almost no freedom of choice – the model mostly just recites the text';
 
   let note = '';
   if(bf < 1.1){
-    note = `⚠️ <strong>The text rarely repeats</strong> – at context length ${k} there is almost never more than <strong>one</strong> possible next word. The model can then only retell the text verbatim until it runs out. Try <strong>context length 1</strong>, or a longer text where words and phrases recur.`;
+    note = `⚠️ <strong>This text rarely repeats itself</strong> – at context length ${k} there is almost never more than <strong>one</strong> possible next word. The model can then only recite the text verbatim until it runs out. Try <strong>context length 1</strong>, or a longer text where words and phrases recur.`;
   }
   if(truncated){
-    note += (note ? '<br><br>' : '') + `ℹ️ The text was very long and was cut to ${MAX_TOKENS.toLocaleString('en-GB')} tokens during training.`;
+    note += (note ? '<br><br>' : '') + `ℹ️ The text was very long and was shortened to ${MAX_TOKENS.toLocaleString('en-US')} tokens when building.`;
   }
   qn.innerHTML = note;
   qn.style.display = note ? 'block' : 'none';
@@ -1039,17 +1304,17 @@ function startFromPrompt(){
     narr.classList.remove('choice');
     narr.innerHTML =
       `Short prompt – the model jumped in at <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> in the text ` +
-      `(it needs ${k} words as context). Press <strong>✍️ Next word</strong>.`;
+      `(it needs ${k} words as context). Click <strong>✍️ Next word</strong>.`;
   }else{
-    // Ordet finns inte alls i träningstexten
+    // The word doesn't appear in the training text at all
     genTokens = ptoks.slice();
     document.getElementById('genBox').innerHTML =
       detokHTML(genTokens, 0, true) + '<span class="cursor"></span>';
     deadEnd = true;
     promptBlocked(
-      `The word <span class="ctx-inline">«${esc(last)}»</span> is not in the training text, so the model doesn't know it. ` +
-      `Try a word from the text – the suggestions under the field always work.`,
-      '🔀 Restart from a sentence in the text');
+      `The word <span class="ctx-inline">«${esc(last)}»</span> does not appear in the training text, so the model does not know it. ` +
+      `Try a word from the text – the suggestions below the field always work.`,
+      '🔀 Start over from a sentence in the text');
   }
 }
 
@@ -1059,28 +1324,27 @@ function renderFromPrompt(){
     detokHTML(genTokens, hlFrom, true) + '<span class="cursor"></span>';
   const ctx = genTokens.slice(-k);
 
-  // Modellen har aldrig sett den här kontexten (ingen generalisering)
+  // The model has never seen this context (no generalization)
   if(!models[k].has(ctx.join(SEP))){
     deadEnd = true;
     document.getElementById('ctxChip').innerHTML =
-      '🧠 The model\'s memory right now: ' + ctx.map(t => `<span class="ct">${esc(t)}</span>`).join(' ') +
-      `<span class="ctx-count">This context has been seen <b>0</b> times in the text.</span>`;
+      `🧠 The model's memory right now: ${ctx.map(t => `<span class="ct">${esc(t)}</span>`).join(' ')}<span class="ctx-count">This context has been seen <b>0</b> times in the text.</span>`;
     promptBlocked(
-      `The little model has <strong>never seen</strong> the sequence <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> in the training text – so it doesn't know what could come next. ` +
-      `A table model only handles exact matches. <strong>ChatGPT</strong> could still guess, because its neural network can <em>generalise</em>.`,
-      '🔀 Restart from a sentence in the text');
+      `The small model has <strong>never seen</strong> the word sequence <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> in the training text – so it doesn't know what could come after it. ` +
+      `A table model can only handle exact matches. <strong>ChatGPT</strong> could still guess, because its neural network can <em>generalize</em>.`,
+      '🔀 Start over from a sentence in the text');
     return;
   }
-  // Kontexten finns → kör vanlig rendering
+  // The context exists → run normal rendering
   render(true);
   if(genTokens.length > k){
     const forgotten = genTokens.slice(0, -k).join(' ');
     const narr = document.getElementById('narr');
     narr.classList.remove('choice');
     narr.innerHTML =
-      `You wrote the prompt <span style="color:var(--dim)">«${esc(forgotten)}</span> <span class="ctx-inline">${esc(ctx.join(' '))}»</span>. ` +
+      `You typed the prompt <span style="color:var(--dim)">«${esc(forgotten)}</span> <span class="ctx-inline">${esc(ctx.join(' '))}»</span>. ` +
       `But with context length <strong>${k}</strong> the model looks <strong>only</strong> at the last ${k} words – the rest of the prompt is already "forgotten". ` +
-      `Press <strong>✍️ Next word</strong>.`;
+      `Click <strong>✍️ Next word</strong>.`;
   }
 }
 
@@ -1093,14 +1357,13 @@ function promptBlocked(narrHtml, btnLabel){
      <button class="btn pri" onclick="deadEnd=false;startGen()">${btnLabel}</button></div>`;
 }
 
-// Uppdaterar info-tooltipen så siffrorna följer vald kontextlängd
+// Updates the glass-card content so the numbers follow the chosen context length
+let promptTipHTML = '';
 function updatePromptTip(){
-  const el = document.getElementById('promptTip');
-  if(!el) return;
-  el.innerHTML =
-    `Your prompt is the <b>starting phrase</b> the model builds on. But with context length <span class="ctx-hl">${k}</span> the model only remembers the <span class="ctx-hl">last ${k} words</span>. ` +
-    `As soon as the text passes ${k} words, the rest of the prompt is <b>forgotten</b> – only the last ${k} words decide the next word.<br><br>` +
-    `<span class="gpt-hl">ChatGPT</span> instead has a context window of thousands of words, so the whole prompt influences every step.`;
+  promptTipHTML =
+    `Your prompt is the <strong>starting phrase</strong> the model builds on. But with context length <span class="ctx-hl">${k}</span> the model only remembers the <span class="ctx-hl">${k} most recent words</span>. ` +
+    `As soon as the text passes ${k} words, the rest of the prompt is <strong>forgotten</strong> – only the last ${k} words drive the next word.<br><br>` +
+    `<span class="gpt-hl">ChatGPT</span> instead has a context window of thousands of words, so the whole prompt affects every step.`;
 }
 
 function step(manualWord){
@@ -1140,14 +1403,21 @@ function showDeadEnd(){
   const ctx = genTokens.slice(-k);
   const bf = branching(k);
   const why = bf < 1.1
-    ? `The text rarely repeats, so at context length ${k} the model can only follow it verbatim – and now it ran out. Try <strong>context length 1</strong>, or paste a longer text with more repetition.`
-    : `This is the table model's weakness: it only handles exact matches. ChatGPT's neural network can instead <em>generalise</em>.`;
+    ? `This text rarely repeats itself, so at context length ${k} the model can only follow it word for word – and now it ran out. Try <strong>context length 1</strong>, or paste in a longer text with more repetition.`
+    : `This is the table model's weakness: it can only handle exact matches. ChatGPT's neural network can instead <em>generalize</em>.`;
   document.getElementById('ptable').innerHTML =
-    `<div class="ptable-msg"><span class="big">🚧</span>
-     <div><strong>Dead end!</strong><br>The sequence «${esc(ctx.join(' '))}» only appears at the very end of the training text – the model has never seen any word come after it.<br><br>${why}</div>
-     <button class="btn pri" onclick="deadEnd=false;startGen()">🔀 Restart from a new spot</button></div>`;
+    `<div class="ptable-msg"><span class="big">🚧</span><div><strong>Dead end</strong> – no possible words from here.</div>
+     <button class="btn pri" onclick="closeConcept();deadEnd=false;startGen()">🔀 Start over from a new spot</button></div>`;
   document.getElementById('narr').innerHTML =
-    `The context <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> has <strong>0 possible continuations</strong>. Press the button in the table to restart.`;
+    `The context <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> has <strong>0 possible continuations</strong>.`;
+  showConceptCard({
+    icon: ICON_DEADEND,
+    iconClass: 'warn',
+    title: 'Dead end!',
+    def: `<div class="cc-lead">The word sequence <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> only occurs at the very end of the training text – the model has never seen any word come after it.</div>
+      <div>${why}</div>
+      <button class="btn pri" style="width:100%;margin-top:16px;" onclick="closeConcept();deadEnd=false;startGen()">🔀 Start over from a new spot</button>`
+  });
 }
 
 // ════════════════════════════════════════════════════════════
@@ -1164,7 +1434,7 @@ function toggleAuto(){
     if(genTokens.length >= MAX_GEN){
       stopAuto();
       document.getElementById('narr').innerHTML =
-        `The text reached <strong>${MAX_GEN} tokens</strong> – press ↺ Restart for a new text, or continue manually.`;
+        `The text has reached <strong>${MAX_GEN} tokens</strong> – click ↺ Start over for new text, or continue manually.`;
       return;
     }
     if(!busy && !deadEnd) step();
@@ -1200,9 +1470,10 @@ function onKChange(val){
 
 function onModeChange(val){
   mode = val;
+  document.querySelectorAll('#modeCards .mode-card').forEach(c => c.classList.toggle('selected', c.dataset.mode === val));
   document.getElementById('tempSlider').disabled = (mode === 'greedy');
   document.getElementById('tempHint').innerHTML = (mode === 'greedy')
-    ? '👑 Greedy mode: temperature has no effect on the choice here.'
+    ? '👑 Greedy mode: temperature does not affect the choice here.'
     : '🌡️ Drag the slider and see what happens to the text.';
   refreshTable();
 }
@@ -1250,36 +1521,36 @@ function detokHTML(toks, hlFrom, animateLast){
 }
 
 function render(animate){
-  // Genererad text
+  // Generated text
   const hlFrom = Math.max(0, genTokens.length - k);
   document.getElementById('genBox').innerHTML =
     detokHTML(genTokens, hlFrom, animate) + '<span class="cursor"></span>';
 
-  // Tabell + berättarrad
+  // Table + narrative line
   const dist = getDist();
   if(!dist){ showDeadEnd(); return; }
   const probs = withProbs(dist);
-  if(guessFirst) reveal = false;   // ny kontext → maskera igen
+  if(guessFirst) reveal = false;   // new context → mask again
   renderTable(probs);
   const ctx = genTokens.slice(-k);
   const narr = document.getElementById('narr');
   narr.classList.remove('choice');
   narr.innerHTML =
-    `The model looks at the last <strong>${k} ${k === 1 ? 'word' : 'words'}</strong>: ` +
-    `<span class="ctx-inline">«${esc(ctx.join(' '))}»</span> → hittar ` +
-    `<strong>${probs.length}</strong> ${probs.length === 1 ? 'possible continuation' : 'possible continuations'} in the training text. ` +
-    `Press <strong>✍️ Next word</strong>.`;
+    `The model looks at the most recent <strong>${k} ${k === 1 ? 'word' : 'words'}</strong>: ` +
+    `<span class="ctx-inline">«${esc(ctx.join(' '))}»</span> → finds ` +
+    `<strong>${probs.length}</strong> possible ${probs.length === 1 ? 'continuation' : 'continuations'} in the training text. ` +
+    `Click <strong>✍️ Next word</strong>.`;
 }
 
-// Motivering efter ett ordval: "valde X eftersom det följde på «kontext»
-// N av M gånger". Gör modellens "tänkande" synligt.
+// Explanation after a word choice: "chose X because it followed «context»
+// N of M times". Makes the model's "thinking" visible.
 function narrChoice(prevCtx, w, c, total){
   const pct = total ? Math.round(c / total * 100) : 0;
   const narr = document.getElementById('narr');
   narr.classList.add('choice');
   narr.innerHTML =
     `The model chose <span class="chosen-inline">«${esc(w)}»</span> because it followed ` +
-    `<span class="ctx-inline">«${esc(prevCtx.join(' '))}»</span> <strong>${c} av ${total}</strong> ` +
+    `<span class="ctx-inline">«${esc(prevCtx.join(' '))}»</span> <strong>${c} of ${total}</strong> ` +
     `times in the text (${pct}%).`;
 }
 
@@ -1289,10 +1560,9 @@ function renderTable(probs, picked){
   const mask = guessFirst && !reveal;
   const ctxHtml = ctx.map(t => `<span class="ct">${esc(t)}</span>`).join(' ');
   document.getElementById('ctxChip').innerHTML =
-    'The model is looking for: ' + ctxHtml +
-    `<span class="ctx-count">Found <b>${total}</b> ${total === 1 ? 'match' : 'matches'} in the text – here's how often each word followed:</span>`;
+    `The model is looking for: ${ctxHtml}<span class="ctx-count">Found <b>${total}</b> ${total === 1 ? 'match' : 'matches'} in the text – here's how often each word followed:</span>`;
 
-  // Säkerhetsmätare: hur koncentrerad är fördelningen (oberoende av temperatur)?
+  // Certainty meter: how concentrated is the distribution (independent of temperature)?
   const topC = probs.length ? Math.max(...probs.map(p => p.c)) : 0;
   renderCertainty(total ? topC / total : 0, probs.length, mask);
 
@@ -1321,12 +1591,12 @@ function renderTable(probs, picked){
     const restP = rest.reduce((a, b) => a + b.p, 0) * 100;
     html += mask
       ? `<div class="prest">… and ${rest.length} more words</div>`
-      : `<div class="prest">… and ${rest.length} more words (${restP.toFixed(0)}% together)</div>`;
+      : `<div class="prest">… and ${rest.length} more words (${restP.toFixed(0)}% combined)</div>`;
   }
   document.getElementById('ptable').innerHTML = html;
 }
 
-// Gissa först: dölj/visa sannolikheterna
+// Guess first: hide/show the probabilities
 function toggleGuess(on){
   guessFirst = on;
   reveal = false;
@@ -1338,40 +1608,59 @@ function revealProbs(){
   refreshTable();
 }
 
-// Säkerhetsmätare: hur säker är modellen på nästa ord just nu?
+// Certainty meter: how confident is the model about the next word right now?
 function renderCertainty(p1, options, mask){
   const el = document.getElementById('certainty');
   if(!el) return;
   if(mask){
     el.innerHTML =
-      `<div class="cert-top"><span class="cert-lbl">How sure is the model about the next word?</span><span class="cert-val" style="color:var(--dim)">?</span></div>
+      `<div class="cert-top"><span class="cert-lbl">How confident is the model about the next word?</span><span class="cert-val" style="color:var(--dim)">?</span></div>
        <div class="cert-bar"></div>
-       <div class="cert-note">Guess first – then press 👁 Reveal.</div>`;
+       <div class="cert-note">Guess first – then click 👁 Show.</div>`;
     return;
   }
   const pct = Math.round(p1 * 100);
   const col = p1 >= 0.7 ? 'var(--green)' : p1 >= 0.4 ? 'var(--gold)' : 'var(--red)';
   const lbl = p1 >= 0.7 ? '🟢 High confidence' : p1 >= 0.4 ? '🟡 Medium' : '🔴 Low confidence';
   el.innerHTML =
-    `<div class="cert-top"><span class="cert-lbl">How sure is the model about the next word?</span><span class="cert-val" style="color:${col}">${pct}%</span></div>
+    `<div class="cert-top"><span class="cert-lbl">How confident is the model about the next word?</span><span class="cert-val" style="color:${col}">${pct}%</span></div>
      <div class="cert-bar"><div class="cert-fill" style="width:${Math.max(4, pct)}%;background:${col}"></div></div>
-     <div class="cert-note">${lbl} · <strong>${options}</strong> possible words. More context often makes the model surer.</div>`;
+     <div class="cert-note">${lbl} · <strong>${options}</strong> possible words. More context often makes the model more confident.</div>`;
 }
 
-// ── Stegnavigering: guidad trappa genom labbet ──
+// ── Step navigation: guided staircase through the lab ──
 let curStep = 1;
+const STEP_ACCENTS = ['#4d80ff','#34c759','#ffd866','#a78bfa'];
 const STEPS = [
-  {intro:'<strong>The computer doesn\'t know any English</strong> – yet it can still guess the next word. Press ✍️ <strong>Next word</strong> a few times and look at <strong>the model\'s memory</strong>: what is the guess actually based on?',
+  {label:'Next word', title:`How does the model choose the next word?`,
+   icon:'<path d="M4 12h12"/><path d="M12 6l6 6-6 6"/>',
+   intro:`<strong>Train the model on the weather report.</strong> Then click ✍️ <strong>Next word</strong> a few times and look at the <strong>model's memory</strong>: what is the guess actually based on?`,
    rec:{ds:['vader'], k:1}},
-  {intro:'Now we train on a <strong>classic English novel</strong>. <strong>Try different context lengths</strong> (1 → 2 → 3) and compare: does the model write more like real English – and how do the choices change?',
+  {label:'Context', title:`What does the model remember?`,
+   icon:'<path d="M7 4H4v16h3"/><path d="M17 4h3v16h-3"/><path d="M9 9h6M9 15h6"/>',
+   intro:`<strong>Train the model on "Hemsöborna", a big Swedish novel by August Strindberg.</strong> Try <strong>different context lengths</strong> (1 → 2 → 3) and compare: does the model start writing more like real Swedish – and how do the choices change?`,
    rec:{ds:['hemso'], k:2}},
-  {intro:'Should the model <strong>always</strong> take the most common word? Try <strong>greedy choice</strong> vs <strong>weighted random</strong>, and drag the <strong>temperature</strong>.',
+  {label:'Randomness & temperature', title:`How is the model's choice affected?`,
+   icon:'<rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="9" cy="9" r="1.3"/><circle cx="15" cy="9" r="1.3"/><circle cx="9" cy="15" r="1.3"/><circle cx="15" cy="15" r="1.3"/><circle cx="12" cy="12" r="1.3"/>',
+   intro:`Should the model <strong>always</strong> pick the most common word? Try <strong>greedy choice</strong> versus <strong>weighted randomness</strong>, and adjust the <strong>temperature</strong>.`,
    rec:{ds:['hemso'], k:2}},
-  {intro:'<strong>The training data shapes the model.</strong> Select several texts (e.g. Sports + Weather) or switch to Shakespeare and explore how the language, word choices and continuations change.',
-   rec:{ds:['hemso'], k:2}},
-  {intro:'<strong>Explore freely.</strong> Combine training data, context length, temperature and prompts to investigate how the model works. Finish by comparing it with ChatGPT.',
-   rec:null}
+  {label:'Data & exploration', title:`How does the training data shape the model?`,
+   icon:'<path d="M6 4h9l5 5v11H6z"/><path d="M15 4v5h5"/><path d="M9 13h6M9 17h6"/>',
+   intro:`<strong>The training data shapes the model.</strong> Train the model on several texts (e.g. Sports + Weather) or switch to Shakespeare and see how the language, word choice, and continuations change. Then combine everything freely with context length, temperature, and your own prompts – and finish by comparing the model with ChatGPT.`,
+   rec:{ds:['hemso'], k:2}}
 ];
+
+// Bygg de fem glaskänsla-plattorna. Anropas varje stegbyte (billigt för 5 element)
+// så att aktivt-läget alltid stämmer, utan separat diff-logik.
+function renderStepTiles(n){
+  document.getElementById('shTiles').innerHTML = STEPS.map((s, i) => `
+    <button class="sh-tile ${i === n - 1 ? 'active' : ''}" onclick="goStep(${i + 1})" aria-label="Steg ${i + 1}: ${s.label}">
+      <div class="sh-ico-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${s.icon}</svg></div>
+      <div class="sh-num">0${i + 1}</div>
+      <div class="sh-lbl">${s.label}</div>
+    </button>`).join('');
+}
+
 function goStep(n){
   n = Math.max(1, Math.min(STEPS.length, n));
   curStep = n;
@@ -1379,26 +1668,31 @@ function goStep(n){
   if(n >= 2) cls.push('sx-context');
   if(n >= 3) cls.push('sx-choose');
   if(n >= 4) cls.push('sx-data');
-  if(n >= 5) cls.push('sx-all');
   const wrap = document.getElementById('wrapEl');
   wrap.className = cls.join(' ');
   // Subtil egen accentfärg per steg → känsla av framsteg
-  const STEP_ACCENTS = ['#4d80ff','#34c759','#ffd866','#a78bfa','#ff9f43'];
   const accent = STEP_ACCENTS[n - 1] || '#4d80ff';
   wrap.style.setProperty('--step-accent', accent);
   wrap.style.setProperty('--step-accent-soft', accent + '22');
-  document.querySelectorAll('#stepsNav .snav').forEach(b => b.classList.toggle('active', +b.dataset.s === n));
-  document.getElementById('stepIntro').innerHTML = STEPS[n - 1].intro;
+  wrap.style.setProperty('--step-glow', accent + '55');
+  renderStepTiles(n);
+  const step = STEPS[n - 1];
+  document.getElementById('shEyebrow').textContent = `STEP ${n} OF ${STEPS.length}`;
+  document.getElementById('shTitleEl').textContent = step.title;
+  document.getElementById('shDesc').innerHTML = step.intro;
+  const banner = document.getElementById('shBanner');
+  banner.classList.remove('anim');
+  void banner.offsetWidth;   // tvinga reflow så animationen kan triggas igen
+  banner.classList.add('anim');
   document.getElementById('prevStep').style.visibility = n === 1 ? 'hidden' : 'visible';
   document.getElementById('nextStep').style.visibility = n === STEPS.length ? 'hidden' : 'visible';
-  const rec = STEPS[n - 1].rec;
+  const rec = step.rec;
   if(rec){
     document.getElementById('kSel').value = String(rec.k);
     k = rec.k;
-    setDatasets(rec.ds);    // bockar i rätt texter + bygger träningstexten
-    buildFromTextarea();     // träna direkt i guidat läge
+    setDatasets(rec.ds);      // checks the right texts, marks the model as untrained/dirty – the student clicks Train themselves, every time
   }
-  scrollToTop();             // börja varje steg högst upp (sist, efter ombyggnad)
+  scrollToTop();             // start every step at the top (last, after the rebuild)
 }
 
 // Pålitlig scroll till toppen – fungerar även på mobil (smooth ignoreras ofta där)
@@ -1412,21 +1706,6 @@ function scrollToTop(){
   jump();
   requestAnimationFrame(jump);   // igen efter att layouten ritats om
   setTimeout(jump, 60);          // och en gång till om innehållet just bytt höjd
-}
-
-// ── Dataset-syften: varför just den här texten? ──
-const PRESET_PURPOSE = {
-  hemso:       'A classic English novel (Jane Austen\'s Pride and Prejudice) – common word sequences recur, so context really starts to work.',
-  saga:        'A simple story – easy to follow how the model builds sentences, word by word.',
-  vader:       'Lots of repeated phrases → the model becomes very confident and predictable.',
-  sport:       'Same structure but more possible continuations → shows how probabilities are spread out.',
-  byn:         'A longer story → shows how context affects the flow of the text.',
-  shakespeare: 'A large collection of Shakespeare\'s works – the model takes on an older, theatrical style.',
-  egen:        'Your own text → how do you have to write for the model to write like you?'
-};
-function showPresetPurpose(key){
-  const el = document.getElementById('presetPurpose');
-  if(el) el.textContent = PRESET_PURPOSE[key] || '';
 }
 
 // Tangentbord: mellanslag / högerpil = nästa ord (utanför inmatningsfält)
@@ -1446,33 +1725,36 @@ function toggleColl(btn, bodyId){
 //  samlad lista i sidopanelen.
 // ════════════════════════════════════════════════════════════
 const GLOSSARY = {
-  token:           {t:'Token',                  d:'A building block of the text – usually a word, but punctuation marks count as their own tokens too.'},
-  prompt:          {t:'Prompt',                 d:'The text you feed in for the model to build on. Here it is your starting phrase.'},
-  kontext:         {t:'Context',                d:'The words the model is looking at right now to guess the next word – the model\'s "memory".'},
-  'kontextlängd':  {t:'Context length (n-gram)',d:'How many words back the model looks (1–3 here). ChatGPT uses thousands.'},
-  'kontextfönster':{t:'Context window',         d:'How much text the model can remember at once. Tiny here, enormous in ChatGPT.'},
-  sannolikhet:     {t:'Probability',            d:'How likely a given continuation is, computed from how often it was seen in the text.'},
-  tabell:          {t:'The model\'s memory',     d:'The model\'s "brain": a lookup table of which words followed each context, and how often.'},
-  temperatur:      {t:'Temperature',            d:'How bold the model is. Low = almost always the most common word. High = dares to use rare words.'},
-  sampling:        {t:'Weighted random (sampling)',d:'Picking the next word at random but giving more common words a bigger chance. That\'s what ChatGPT does.'},
-  girig:           {t:'Greedy',                 d:'Always choosing the single most common word. Gives predictable and often repetitive text.'},
-  'vokabulär':     {t:'Vocabulary (unique words)',d:'All the unique words the model knows from the training text.'},
-  branching:       {t:'Choices (branching)',    d:'How many words on average can follow a context. Near 1 = the model can only recite the text.'},
-  generalisering:  {t:'Generalisation',         d:'Guessing sensibly even for word sequences never seen before. Tables can\'t; neural networks can.'},
-  'återvändsgränd':{t:'Dead end',               d:'When the model reaches a context it has never seen a continuation for and has to stop.'},
-  'nätverk':       {t:'Neural network',         d:'The technology ChatGPT uses instead of a table – it can generalise and handle enormous context.'}
+  token:           {t:'Token',                  d:'A building block of the text – usually a word, but punctuation marks also count as their own tokens.'},
+  prompt:          {t:'Prompt',                 d:'The text you enter for the model to continue. Here, this is your starting phrase.'},
+  kontext:         {t:'Context',                d:'The words the model is looking at right now to guess the next word – its "memory".'},
+  'kontextlängd':  {t:'Context length (n-gram)',  d:'How many words back the model looks (1–3 here). ChatGPT uses thousands.'},
+  'kontextfönster':{t:'Context window',         d:'How much text the model can remember at once. Small here, enormous in ChatGPT.'},
+  kontexter:       {t:'Contexts',              d:'All the different word sequences (contexts) the model has seen in the training text and recognizes.'},
+  sannolikhet:     {t:'Probability',            d:'How likely a particular continuation is, calculated from how often it has been seen in the text.'},
+  tabell:          {t:'Probability table',     d:'The "brain" of the model: a lookup table of which words have followed each context, and how often.'},
+  temperatur:      {t:'Temperature',            d:'How bold the model is. Low = almost always the most common word. High = dares to use unusual words.'},
+  sampling:        {t:'Weighted random (sampling)',d:'Randomly choosing the next word but letting more common words have a higher chance. This is how ChatGPT does it.'},
+  girig:           {t:'Greedy',                 d:'Always choosing the single most common word. Produces predictable, often repetitive text.'},
+  'vokabulär':     {t:'Vocabulary (unique words)',  d:'All the unique words the model knows from the training text.'},
+  branching:       {t:'Choices (branching)', d:'How many words on average can follow a context. Close to 1 = the model can only recite the text.'},
+  generalisering:  {t:'Generalization',         d:'Making a reasonable guess even for word sequences never seen before. Tables cannot; neural networks can.'},
+  'återvändsgränd':{t:'Dead end',               d:'When the model ends up in a context it has never seen a continuation for, and has to stop.'},
+  'nätverk':       {t:'Neural network',         d:'The technology ChatGPT uses instead of a table – can generalize and handle a huge context.'}
 };
 
 function hydrateTerms(){
   document.querySelectorAll('.term[data-term]').forEach(el => {
-    if(el.querySelector('.term-pop')) return;
-    const g = GLOSSARY[el.dataset.term];
+    if(el.dataset.hydrated) return;
+    const key = el.dataset.term;
+    const g = GLOSSARY[key];
     if(!g) return;
+    el.dataset.hydrated = '1';
+    el.setAttribute('role','button');
     el.tabIndex = 0;
-    const pop = document.createElement('span');
-    pop.className = 'term-pop';
-    pop.innerHTML = '<b>' + g.t + '</b> – ' + g.d;
-    el.appendChild(pop);
+    el.title = 'Click for explanation';
+    el.addEventListener('click', e => openTermCard(key, e));
+    el.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openTermCard(key, e); } });
   });
 }
 
@@ -1483,6 +1765,123 @@ function renderGlossary(){
     Object.values(GLOSSARY).map(g => `<div class="gloss-item"><b>${g.t}</b> – ${g.d}</div>`).join('') +
     '</div>';
 }
+
+// ════════════════════════════════════════════════════════════
+//  Glaskort (concept cards)
+// ════════════════════════════════════════════════════════════
+const CONCEPTS = {
+  begrepp: {
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+    title:'Glossary',
+    def:'<div class="cc-lead">All terms in the lab, briefly explained.</div><div class="gloss-list">' +
+        Object.values(GLOSSARY).map(g => `<div class="gloss-item"><b>${g.t}</b> – ${g.d}</div>`).join('') +
+        '</div>'
+  },
+  chatgpt: {
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3M8.5 10h.01M15.5 10h.01"/></svg>',
+    title:'The Model &amp; ChatGPT',
+    def:'<div class="cc-lead">This mini-model and ChatGPT are built on the <strong>same core principle</strong> – predicting the next word. The difference is how the probabilities are calculated.</div>'
+      + '<div class="cc-sub green">Similarities</div>'
+      + '<ul class="cc-list green">'
+      + '<li>Both predict the next word based on the words that came before.</li>'
+      + '<li>Both calculate a <em>probability</em> for many possible next words and then choose one of them.</li>'
+      + '<li><em>Temperature</em> affects the word choice the same way in both.</li>'
+      + '</ul>'
+      + '<div class="cc-sub orange">Differences</div>'
+      + '<ul class="cc-list orange">'
+      + '<li>This model uses a <strong>table</strong> of exact word sequences. ChatGPT uses a <em>neural network</em> with billions of parameters.</li>'
+      + '<li>ChatGPT takes into account <strong>thousands</strong> of previous words, not just 1–3.</li>'
+      + '<li>ChatGPT has been trained on an enormous amount of text from many sources.</li>'
+      + '<li>ChatGPT can <em>generalize</em> to patterns it has not seen exactly. The table can only handle word sequences it has already encountered.</li>'
+      + '</ul>'
+  },
+  valmetod: {
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-6 4 3 5-8"/></svg>',
+    title:'Random Choice &amp; Temperature',
+    def:'<div class="cc-lead">The model can choose the next word in two different ways.</div>'
+      + '<div class="cc-sub green">👑 Greedy choice</div>'
+      + '<ul class="cc-list green">'
+      + '<li>Always takes the <strong>most common</strong> word in the table.</li>'
+      + '<li>Produces predictable text that easily repeats itself.</li>'
+      + '</ul>'
+      + '<div class="cc-sub orange">🎲 Weighted random (sampling)</div>'
+      + '<ul class="cc-list orange">'
+      + '<li>Randomizes between the alternatives, but lets <strong>more common words</strong> have a higher chance.</li>'
+      + '<li>This is what ChatGPT does by default.</li>'
+      + '</ul>'
+      + '<div class="cc-sub">🌡️ Temperature</div>'
+      + '<ul class="cc-list">'
+      + '<li><strong>Low</strong> temperature → almost always the most common word.</li>'
+      + '<li><strong>High</strong> temperature → the model dares to use unusual words, the text becomes more surprising but can lose coherence.</li>'
+      + '</ul>'
+  }
+};
+function showConceptCard(c, ev){
+  const card = document.getElementById('conceptCard');
+  const iconEl = document.getElementById('conceptIcon');
+  iconEl.innerHTML = c.icon;
+  iconEl.className = 'concept-icon' + (c.iconClass ? ' ' + c.iconClass : '');
+  document.getElementById('conceptTitle').innerHTML = c.title;
+  document.getElementById('conceptDef').innerHTML = c.def;
+  let dx = 0, dy = 0;
+  const el = ev && ev.currentTarget;
+  if(el && el.getBoundingClientRect){
+    const r = el.getBoundingClientRect();
+    dx = (r.left + r.width/2) - window.innerWidth/2;
+    dy = (r.top + r.height/2) - window.innerHeight/2;
+  }
+  card.classList.remove('show');
+  card.style.transition = 'none';
+  card.style.setProperty('--dx', dx + 'px');
+  card.style.setProperty('--dy', dy + 'px');
+  void card.offsetHeight;
+  card.style.transition = '';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(() => requestAnimationFrame(() => card.classList.add('show')));
+}
+function openConcept(id, ev){
+  if(ev) ev.stopPropagation();
+  const c = CONCEPTS[id]; if(!c) return;
+  showConceptCard(c, ev);
+}
+const ICON_TERM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>';
+const ICON_DEADEND = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M6.5 6.5l11 11"/></svg>';
+function openTermCard(key, ev){
+  if(ev) ev.stopPropagation();
+  const g = GLOSSARY[key]; if(!g) return;
+  showConceptCard({icon:ICON_TERM, title:g.t, def:'<div class="cc-lead">'+g.d+'</div>'}, ev);
+}
+const ICON_PROMPT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+function openPromptInfo(ev){
+  if(ev) ev.stopPropagation();
+  showConceptCard({icon:ICON_PROMPT, title:'Prompt &amp; Context Window', def:'<div class="cc-lead">'+promptTipHTML+'</div>'}, ev);
+}
+function closeConcept(){
+  document.getElementById('conceptCard').classList.remove('show');
+  document.getElementById('conceptBackdrop').classList.remove('show');
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeConcept(); });
+(function initCardTilt(){
+  const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const el = document.getElementById('conceptCardInner');
+  if(!el || RM) return;
+  const MAX_TILT = 5;
+  el.addEventListener('mousemove', e => {
+    const r = el.getBoundingClientRect();
+    const px = (e.clientX - r.left)/r.width, py = (e.clientY - r.top)/r.height;
+    const rx = (0.5 - py)*MAX_TILT*2, ry = (px - 0.5)*MAX_TILT*2;
+    el.style.setProperty('--mx', (px*100)+'%');
+    el.style.setProperty('--my', (py*100)+'%');
+    el.style.transform = 'perspective(1000px) rotateX('+rx+'deg) rotateY('+ry+'deg)';
+    const sx = (px-0.5)*22, sy = (py-0.5)*22;
+    el.style.boxShadow = (-sx)+'px '+(20-sy)+'px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset';
+  });
+  el.addEventListener('mouseleave', () => {
+    el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    el.style.setProperty('--mx','50%'); el.style.setProperty('--my','50%');
+    el.style.boxShadow = '';
+  });
+})();
 
 // ════════════════════════════════════════════════════════════
 //  Start: bygg den längre texten direkt så allt är levande
