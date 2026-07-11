@@ -11,7 +11,7 @@
   gtag('js', new Date());
   gtag('config', 'G-ZDWXTZZBBR');
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{--bg-deep:#0a0e1a;--bg-surface:#111827;--bg-card:#161d2f;--bg-card-hover:#1c2540;--border-subtle:rgba(255,255,255,0.06);--border-hover:rgba(255,255,255,0.14);--text-primary:#e8ecf4;--text-secondary:#8b95a9;--text-muted:#5a6478;--accent-cyan:#22d3ee;--accent-cyan-bg:rgba(34,211,238,0.08);--accent-violet:#a78bfa;--accent-violet-bg:rgba(167,139,250,0.08);--accent-rose:#fb7185;--accent-rose-bg:rgba(251,113,133,0.08);--accent-amber:#fbbf24;--accent-amber-bg:rgba(251,191,36,0.08);--accent-emerald:#34d399;--accent-emerald-bg:rgba(52,211,153,0.08);--accent-blue:#60a5fa;--accent-blue-bg:rgba(96,165,250,0.08);--radius:22px;--radius-sm:12px;--ease-out:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);}
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -43,60 +43,66 @@
   .hero{position:relative;text-align:center;padding:132px 0 34px;}
   .hero-eyebrow{opacity:0;animation:fadeUp .6s var(--ease-out) .28s forwards;font-size:15px;color:var(--text-secondary);line-height:1.5;margin-bottom:18px;font-weight:500;}
   .hero-eyebrow strong{color:var(--text-primary);font-weight:600;}
-  /* ── Logga: neuralt nät + ordmärke ── */
-  .logo{position:relative;display:inline-flex;flex-direction:column;align-items:center;gap:4px;margin-bottom:20px;}
-  .logo-net{width:clamp(150px,26vw,232px);height:auto;overflow:visible;display:block;}
+  /* ── Logga: neuralt nät → ordmärke ── */
+  .logo{position:relative;display:inline-flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:20px;}
+  .logo-net{width:clamp(156px,27vw,240px);height:auto;overflow:visible;display:block;}
+
+  .ln-link{stroke:rgba(120,160,255,.5);stroke-width:1.1;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:.65;}
   .ln-node{transform-box:fill-box;transform-origin:center;opacity:0;transform:scale(.2);}
-  .ln-node.n1{fill:var(--accent-cyan);}
-  .ln-node.n2{fill:var(--accent-violet);}
-  .ln-node.n3{fill:var(--accent-cyan);}
-  .ln-node.n4{fill:var(--accent-violet);}
-  .ln-link{stroke-dasharray:1;stroke-dashoffset:1;opacity:.85;}
+  .ln-node.la{fill:var(--accent-cyan);}
+  .ln-node.lb{fill:var(--accent-blue);}
+  .ln-node.lc{fill:var(--accent-violet);}
+  .ln-pulse{fill:#eafcff;opacity:0;offset-path:path('M64 20 L120 33 L176 20');offset-distance:0%;filter:drop-shadow(0 0 6px rgba(180,240,255,.9));}
+  .ln-syn{fill:var(--accent-blue);transform-box:fill-box;transform-origin:center;opacity:0;}
 
-  .wordmark{position:relative;display:inline-block;font-family:'Syne',sans-serif;font-size:clamp(44px,8.5vw,84px);font-weight:800;line-height:.98;letter-spacing:-0.03em;}
-  .wm-text{display:inline-block;color:transparent;background:linear-gradient(100deg,var(--accent-cyan) 0%,var(--accent-violet) 45%,var(--accent-cyan) 90%);background-size:220% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradientDrift 9s ease-in-out infinite;}
+  .wordmark{position:relative;display:inline-block;white-space:nowrap;font-family:'Space Grotesk','Syne',sans-serif;font-size:clamp(32px,10.5vw,86px);font-weight:700;line-height:.98;letter-spacing:-0.03em;}
+  .wm-text{display:inline-block;color:transparent;background:linear-gradient(100deg,var(--accent-cyan) 0%,var(--accent-violet) 48%,var(--accent-cyan) 92%);background-size:220% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradientDrift 9s ease-in-out infinite;}
 
-  /* Intro-sekvens (~1,6 s): nät tänds → länkar dras → text målas fram av ljus → breathing glow */
-  .ln-node{animation:nodeIgnite .5s var(--ease-spring) forwards;}
-  .ln-node.n1{animation-delay:.05s;}
-  .ln-node.n2{animation-delay:.28s;}
-  .ln-node.n3{animation-delay:.46s;}
-  .ln-node.n4{animation-delay:.62s;}
-  .ln-link{animation:linkDraw .42s var(--ease-out) forwards;}
-  .ln-link.l1{animation-delay:.16s;}
-  .ln-link.l2{animation-delay:.34s;}
-  .ln-link.l4{animation-delay:.34s;}
-  .ln-link.l3{animation-delay:.52s;}
-  .logo-net{animation:netBloom 1.1s ease-out .6s both;}
-  .wm-text{clip-path:inset(0 100% 0 0);filter:blur(6px);animation:wmReveal .8s var(--ease-out) .82s forwards;}
-  .wordmark::after{content:'';position:absolute;top:-8%;left:0;width:16%;height:116%;pointer-events:none;
-    background:linear-gradient(90deg,transparent,rgba(200,244,255,.95),transparent);filter:blur(7px);mix-blend-mode:screen;
-    opacity:0;transform:translateX(-120%);animation:wmGlint .82s var(--ease-out) .82s forwards;}
-  .logo{animation:logoBreathe 5s ease-in-out 1.7s infinite;}
+  /* Intro: nät tänds → signal färdas → ljuset häller in i ordet → settle → breathing */
+    .ln-node{animation:nodeIgnite .52s var(--ease-spring) both;}
+    .ln-node.la{animation-delay:0s;}
+    .ln-node.lb{animation-delay:.2s;}
+    .ln-node.lc{animation-delay:.4s;}
+    .ln-link{animation:linkDraw .42s var(--ease-out) both;}
+    .ln-link.eab{animation-delay:.10s;}
+    .ln-link.ebc{animation-delay:.30s;}
+    .logo-net{animation:netBloom 1.2s ease-out .55s both;}
+    .ln-pulse{animation:pulseRun .52s ease-out .5s both;}
+    .wm-text{-webkit-mask:linear-gradient(100deg,#000 44%,transparent 66%) right/260% 100% no-repeat;
+             mask:linear-gradient(100deg,#000 44%,transparent 66%) right/260% 100% no-repeat;
+             animation:wmReveal .78s var(--ease-out) .86s both, gradientDrift 9s ease-in-out infinite;}
+    .wordmark::after{content:'';position:absolute;top:-10%;left:0;width:14%;height:120%;pointer-events:none;
+      background:linear-gradient(90deg,transparent,rgba(206,246,255,.95),transparent);
+      filter:blur(6px);mix-blend-mode:screen;opacity:0;transform:translateX(-140%) skewX(-14deg);
+      animation:wmGlint .8s var(--ease-out) .86s both;}
+    .logo{animation:logoBreathe 5.5s ease-in-out 1.8s infinite;}
+    .ln-syn{animation:synapse 7s ease-in-out 3.2s infinite;}
 
   @keyframes nodeIgnite{
     0%{opacity:0;transform:scale(.2);filter:drop-shadow(0 0 0 rgba(34,211,238,0));}
-    60%{opacity:1;transform:scale(1.35);filter:drop-shadow(0 0 10px rgba(34,211,238,.9));}
-    100%{opacity:1;transform:scale(1);filter:drop-shadow(0 0 4px rgba(34,211,238,.55));}
+    58%{opacity:1;transform:scale(1.4);filter:drop-shadow(0 0 11px rgba(34,211,238,.95));}
+    100%{opacity:1;transform:scale(1);filter:drop-shadow(0 0 4px rgba(34,211,238,.5));}
   }
-  @keyframes linkDraw{from{stroke-dashoffset:1;opacity:.2;}to{stroke-dashoffset:0;opacity:.85;}}
+  @keyframes linkDraw{from{stroke-dashoffset:1;opacity:.15;}to{stroke-dashoffset:0;opacity:.8;}}
   @keyframes netBloom{
-    0%,55%{filter:drop-shadow(0 0 0 rgba(34,211,238,0));}
-    72%{filter:drop-shadow(0 0 12px rgba(34,211,238,.55));}
-    100%{filter:drop-shadow(0 0 5px rgba(34,211,238,.28));}
+    0%,52%{filter:drop-shadow(0 0 0 rgba(34,211,238,0));}
+    70%{filter:drop-shadow(0 0 13px rgba(34,211,238,.5));}
+    100%{filter:drop-shadow(0 0 5px rgba(34,211,238,.26));}
   }
+  @keyframes pulseRun{0%{offset-distance:0%;opacity:0;}18%{opacity:1;}82%{opacity:1;}100%{offset-distance:100%;opacity:0;}}
   @keyframes wmReveal{
-    0%{clip-path:inset(0 100% 0 0);filter:blur(8px);}
-    60%{filter:blur(0);}
-    100%{clip-path:inset(0 0 0 0);filter:blur(0);}
+    0%{-webkit-mask-position:100% 0;mask-position:100% 0;filter:blur(7px);letter-spacing:-.075em;transform:scale(.99);}
+    55%{filter:blur(0);}
+    100%{-webkit-mask-position:0% 0;mask-position:0% 0;filter:blur(0);letter-spacing:-.03em;transform:scale(1);}
   }
   @keyframes wmGlint{
-    0%{opacity:0;transform:translateX(-120%);}
-    20%{opacity:1;}
-    80%{opacity:1;}
-    100%{opacity:0;transform:translateX(760%);}
+    0%{opacity:0;transform:translateX(-140%) skewX(-14deg);}
+    22%{opacity:.9;}
+    78%{opacity:.9;}
+    100%{opacity:0;transform:translateX(840%) skewX(-14deg);}
   }
-  @keyframes logoBreathe{0%,100%{filter:drop-shadow(0 0 4px rgba(34,211,238,.10));}50%{filter:drop-shadow(0 0 16px rgba(34,211,238,.30));}}
+  @keyframes logoBreathe{0%,100%{filter:drop-shadow(0 0 4px rgba(34,211,238,.10));}50%{filter:drop-shadow(0 0 15px rgba(34,211,238,.28));}}
+  @keyframes synapse{0%,86%,100%{opacity:0;transform:scale(1);}90%{opacity:.85;transform:scale(1.8);}94%{opacity:0;transform:scale(2.4);}}
   @keyframes gradientDrift{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
   @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
   .hero p{opacity:0;animation:fadeUp .6s var(--ease-out) 1.5s forwards;font-size:17px;color:var(--text-secondary);max-width:440px;margin:0 auto;line-height:1.6;}
@@ -183,8 +189,8 @@
     .card::after{display:none;}
     .logo,.logo-net,.ln-node,.ln-link,.wm-text{animation:none!important;filter:none!important;transform:none!important;opacity:1!important;}
     .ln-link{stroke-dashoffset:0!important;}
-    .wm-text{clip-path:none!important;}
-    .wordmark::after{display:none!important;}
+    .wm-text{-webkit-mask:none!important;mask:none!important;letter-spacing:-.03em;}
+    .ln-pulse,.ln-syn,.wordmark::after{display:none!important;}
   }
 
   @media(max-width:500px){.hero{padding:88px 0 20px;}}
@@ -204,18 +210,31 @@
   <header class="hero">
     <div class="logo">
       <svg class="logo-net" viewBox="0 0 240 66" fill="none" aria-hidden="true">
-        <g class="ln-links" stroke="var(--accent-cyan)" stroke-width="1.5" stroke-linecap="round">
-          <line class="ln-link l1" x1="52" y1="46" x2="98" y2="22" pathLength="1"/>
-          <line class="ln-link l2" x1="98" y1="22" x2="142" y2="46" pathLength="1"/>
-          <line class="ln-link l3" x1="142" y1="46" x2="188" y2="22" pathLength="1"/>
-          <line class="ln-link l4" x1="52" y1="46" x2="142" y2="46" pathLength="1"/>
+        <g class="ln-links">
+          <line class="ln-link eab" x1="64" y1="20" x2="120" y2="13" pathLength="1"/>
+          <line class="ln-link eab" x1="64" y1="20" x2="120" y2="33" pathLength="1"/>
+          <line class="ln-link eab" x1="64" y1="20" x2="120" y2="53" pathLength="1"/>
+          <line class="ln-link eab" x1="64" y1="46" x2="120" y2="13" pathLength="1"/>
+          <line class="ln-link eab" x1="64" y1="46" x2="120" y2="33" pathLength="1"/>
+          <line class="ln-link eab" x1="64" y1="46" x2="120" y2="53" pathLength="1"/>
+          <line class="ln-link ebc" x1="120" y1="13" x2="176" y2="20" pathLength="1"/>
+          <line class="ln-link ebc" x1="120" y1="13" x2="176" y2="46" pathLength="1"/>
+          <line class="ln-link ebc" x1="120" y1="33" x2="176" y2="20" pathLength="1"/>
+          <line class="ln-link ebc" x1="120" y1="33" x2="176" y2="46" pathLength="1"/>
+          <line class="ln-link ebc" x1="120" y1="53" x2="176" y2="20" pathLength="1"/>
+          <line class="ln-link ebc" x1="120" y1="53" x2="176" y2="46" pathLength="1"/>
         </g>
         <g class="ln-nodes">
-          <circle class="ln-node n1" cx="52"  cy="46" r="4.5"/>
-          <circle class="ln-node n2" cx="98"  cy="22" r="4.5"/>
-          <circle class="ln-node n3" cx="142" cy="46" r="4.5"/>
-          <circle class="ln-node n4" cx="188" cy="22" r="4.5"/>
+          <circle class="ln-node la" cx="64"  cy="20" r="4"/>
+          <circle class="ln-node la" cx="64"  cy="46" r="4"/>
+          <circle class="ln-node lb" cx="120" cy="13" r="4"/>
+          <circle class="ln-node lb" cx="120" cy="33" r="4"/>
+          <circle class="ln-node lb" cx="120" cy="53" r="4"/>
+          <circle class="ln-node lc" cx="176" cy="20" r="4"/>
+          <circle class="ln-node lc" cx="176" cy="46" r="4"/>
         </g>
+        <circle class="ln-syn" cx="120" cy="33" r="4"/>
+        <circle class="ln-pulse" cx="0" cy="0" r="3.2"/>
       </svg>
       <h1 class="wordmark"><span class="wm-text">AI-aktiviteter</span></h1>
     </div>
