@@ -18,7 +18,7 @@
   --r-md:14px; --r-lg:20px;
   --ease-out:cubic-bezier(.16,1,.3,1);
   --ease-spring:cubic-bezier(.34,1.56,.64,1);
-  --alg:#7e8aaa; /* neutral grey until an algorithm is chosen; follows selected algorithm after */
+  --alg:#7e8aaa; /* neutral grå tills en algoritm valts */
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{-webkit-text-size-adjust:100%;}
@@ -50,7 +50,7 @@ button{font-family:inherit;}
 .alg-card[aria-checked="false"] .alg-dot{box-shadow:none;opacity:.55;}
 .alg-name{font-weight:600;font-size:13px;letter-spacing:-.01em;}
 
-/* ── Canvas: den självklara huvudpersonen ── */
+/* ── Canvas ── */
 #canvasContainer{
   position:relative;z-index:0;border:1px solid #1c2540;display:block;user-select:none;border-radius:18px;overflow:visible;
   box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.03),0 0 0 1px rgba(77,128,255,.06);max-width:720px;margin:0 auto;
@@ -68,7 +68,7 @@ button{font-family:inherit;}
 #mazeCanvas{display:block;user-select:none;border-radius:17px;width:100%;height:auto;cursor:default;transition:box-shadow .3s var(--ease-out);}
 #canvasContainer.editing #mazeCanvas{cursor:crosshair;box-shadow:inset 0 0 0 1.5px rgba(51,209,122,.32),inset 0 0 40px rgba(51,209,122,.05);}
 
-/* ── Redigeringsläge: toggle + hjälpknapp, placerad vid spelarkontrollerna ── */
+/* ── Redigeringsläge: toggle + hjälpknapp ── */
 .edit-controls{display:inline-flex;gap:8px;align-items:center;}
 .hud-toggle{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border-radius:999px;
   border:1px solid var(--border);background:var(--surface2);
@@ -293,7 +293,7 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 
 <div class="page-wrap">
 
-<!-- Algoritmval som kort: varje algoritm har sin egen färg/personlighet -->
+<!-- Algoritmval som kort -->
 <h2 class="alg-cards-label">Val av algoritm</h2>
 <div class="alg-cards" role="radiogroup" aria-label="Välj algoritm" id="algCards">
   <button class="alg-card" style="--c:#ec4899" data-alg="BFS" role="radio" aria-checked="false">
@@ -410,14 +410,14 @@ const canvasContainer=document.getElementById('canvasContainer');
 const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 (function(){const d=Math.min(2,window.devicePixelRatio||1);canvas.width=W*d;canvas.height=H*d;ctx.setTransform(d,0,0,d,0,0);})();
 
-/* Varje algoritm har ett eget visuellt språk (frontier + effekter) */
+/* Accentfärg per algoritm */
 const THEMES={
   'BFS':   {accent:'#ec4899'},
   'DFS':   {accent:'#a06bff'},
   'A*':    {accent:'#2dd4bf'},
   'Greedy':{accent:'#f59e0b'}
 };
-const QUEUE_COLOR='#f0a94e';   // kön i canvasen är alltid orange – algoritmens identitet visas redan av kortet/knappen
+const QUEUE_COLOR='#f0a94e';   // kön ritas alltid i orange
 const ALG_LABEL={'A*':'A*','BFS':'BFS','DFS':'DFS','Greedy':'Girig bäst-först'};
 
 /* Färgverktyg */
@@ -451,7 +451,7 @@ let editMode=false;
 let cellAnim=new Map();      // "r,c" -> {st:'fr'|'ex', t}
 let heurLabels=new Map(), fVals=new Map();
 let pathState=null;          // {cells,t0,dur}
-let dimState=null;           // regi: dimma allt → mål lyser → väg ritas → kort
+let dimState=null;           // dimma allt → mål lyser → väg ritas → kort
 let particles=[];
 let popupTimer=null;
 
@@ -595,7 +595,7 @@ function conceptOpen(){return document.getElementById('conceptBackdrop').classLi
   });
 })();
 
-/* ═══════════════ Förberäkning av sökning (oförändrad logik) ═══════════════ */
+/* ═══════════════ Förberäkning av sökning ═══════════════ */
 function precomputeSearch(alg){
   const steps=[];let cur=null;
   const begin=()=>{cur=[];};
@@ -851,12 +851,12 @@ function frame(){
   ctx.clearRect(0,0,W,H);
   ctx.fillStyle='#0b0f1a';ctx.fillRect(0,0,W,H);
 
-  /* Rutnät – var tredje linje lite starkare, som i CAD */
+  /* Rutnät – var tredje linje lite starkare */
   ctx.lineWidth=1;
   for(let c=0;c<=COLS;c++){ctx.strokeStyle=c%3===0?'rgba(102,152,255,.05)':'rgba(102,152,255,.02)';ctx.beginPath();ctx.moveTo(c*CELL+.5,0);ctx.lineTo(c*CELL+.5,H);ctx.stroke();}
   for(let r=0;r<=ROWS;r++){ctx.strokeStyle=r%3===0?'rgba(102,152,255,.05)':'rgba(102,152,255,.02)';ctx.beginPath();ctx.moveTo(0,r*CELL+.5);ctx.lineTo(W,r*CELL+.5);ctx.stroke();}
 
-  /* Grundplattor – kostnadsrutornas färg räcker, siffran förklaras i glaskorten */
+  /* Grundplattor */
   for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
     const v=grid[r][c];
     if(v===1)drawWall(r,c);
@@ -871,17 +871,17 @@ function frame(){
     if(isStart(r,c)||isGoal(r,c))continue;
     if(st.st==='fr'){
       const p=Math.min(1,(now-st.t)/D_IN);
-      const sc=RM?1:easeOutBack(p);                          // växer från 70 % med liten ripple, landar på 100 %
+      const sc=RM?1:easeOutBack(p);                          // växer från 70 % till 100 %
       const pulse=RM?1:(.80+.20*Math.sin(now/850+((r*7+c*13)%10)));
       paintTileScaled(r,c,.7+.3*sc,pulse,QUEUE_COLOR,'rgba(240,169,78,.5)',9);
     }else{
-      paintTile(r,c,'#6f9fd6');                              // genomsökt: fast färg direkt, ingen svans
+      paintTile(r,c,'#6f9fd6');                              // genomsökt
     }
     const lbl=heurLabels.get(key);
     if(lbl!=null&&(now-st.t)>D_IN*.6)drawLabel(r,c,lbl);
   }
 
-  /* Regi: dimma allt annat medan vägen ritas */
+  /* Dimma allt annat medan vägen ritas */
   if(dimState){
     let a;
     if(now<dimState.t0+dimState.fadeIn)a=.12*(now-dimState.t0)/dimState.fadeIn;
@@ -891,7 +891,7 @@ function frame(){
     else if(now>dimState.holdEnd+dimState.fadeOut)dimState=null;
   }
 
-  /* Vägen ritas – en grön ljuspunkt drar linjen, som kartnavigering */
+  /* Vägen ritas – en grön ljuspunkt drar linjen */
   if(pathState){
     const{cells,t0,dur}=pathState;
     const p=Math.max(0,Math.min(1,(now-t0)/dur));
@@ -1067,11 +1067,11 @@ document.getElementById('algCards').addEventListener('click',e=>{
   recomputeToStep(-1);hideResultOverlay();
   resultDiv.style.display='none';
   updatePlayerUI();
-  // Snabb algoritm-glow på canvasen som bekräftar bytet
+  // Snabb glow som bekräftar bytet
   canvasContainer.classList.remove('alg-flash');
   void canvasContainer.offsetWidth;
   canvasContainer.classList.add('alg-flash');
-  // Popup-glaskort som förklarar den valda algoritmen
+  // Visa förklaring för vald algoritm
   openConceptFrom(selectedAlg,card);
 });
 let nudgeTimer=null;
@@ -1150,7 +1150,7 @@ document.getElementById('predefinedSelect').addEventListener('change',e=>{
     const m=predefinedMazes[sel];
     grid=m.grid.map(row=>row.slice());start=[...m.start];ends=m.ends.map(x=>[...x]);
     mazeChanged();setInfo('Fördefinierad labyrint "'+sel+'" har laddats.');
-    /* Apple-onboarding: Exempel 4 & 5 introducerar kostnadsrutor */
+    /* Exempel 4 & 5 introducerar kostnadsrutor */
     if(sel==='Exempel 4'||sel==='Exempel 5'){
       const anchor=e.target;
       setTimeout(()=>openConceptFrom('kostnader',anchor),260);
