@@ -43,69 +43,66 @@
   .hero{position:relative;text-align:center;padding:132px 0 34px;}
   .hero-eyebrow{opacity:0;animation:fadeUp .6s var(--ease-out) .28s forwards;font-size:15px;color:var(--text-secondary);line-height:1.5;margin-bottom:18px;font-weight:500;}
   .hero-eyebrow strong{color:var(--text-primary);font-weight:600;}
-  /* ── Logga: neuralt nät → ordmärke ── */
-  .logo{position:relative;display:inline-flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:20px;}
-  .logo-net{width:clamp(156px,27vw,240px);height:auto;overflow:visible;display:block;}
+  /* ══ Logga: nätverket blir ordet ══
+     1) nätet byggs centrerat där ordmärket ska stå
+     2) en puls far genom lagren och bloomar vid utgångsnoden
+     3) nätet expanderar + fadear till en spök-konstellation bakom texten
+        medan ordet kondenserar fram ur diset (energiöverföringen)
+     4) vilotillstånd: ETT objekt – ordet med sitt nät som aura, som andas ihop.
+     Utan JS/animering visas slutläget direkt (.go triggar intron). Klick = replay. */
+  .logo{position:relative;display:inline-block;margin-bottom:20px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+  .logo-svg{width:clamp(280px,84vw,505px);height:auto;overflow:visible;display:block;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
 
-  .ln-link{stroke:rgba(120,160,255,.5);stroke-width:1.1;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:.65;}
-  .ln-node{transform-box:fill-box;transform-origin:center;opacity:0;transform:scale(.2);}
-  .ln-node.la{fill:var(--accent-cyan);}
-  .ln-node.lb{fill:var(--accent-blue);}
-  .ln-node.lc{fill:var(--accent-violet);}
-  .ln-pulse{fill:#eafcff;opacity:0;offset-path:path('M64 20 L120 33 L176 20');offset-distance:0%;filter:drop-shadow(0 0 6px rgba(180,240,255,.9));}
-  .ln-syn{fill:var(--accent-blue);transform-box:fill-box;transform-origin:center;opacity:0;}
+  .wm{font-family:'Syne','Space Grotesk',sans-serif;font-weight:700;font-size:60px;letter-spacing:-0.02em;fill:url(#wmGrad);transform-box:fill-box;transform-origin:center;}
+  .net{transform-box:fill-box;transform-origin:center;opacity:.13;transform:scale(1.2);}
+  .edge{stroke-dasharray:1;stroke-dashoffset:0;opacity:.5;}
+  .node{transform-box:fill-box;transform-origin:center;}
+  .pulse,.pulse-idle{opacity:0;filter:drop-shadow(0 0 6px rgba(200,245,255,.95));
+    offset-path:path('M70 40 L210 58 L350 75 L490 75');offset-distance:0%;}
+  .bloom{opacity:0;transform-box:fill-box;transform-origin:center;filter:blur(1px);}
+  .glint{opacity:0;mix-blend-mode:screen;filter:blur(6px);}
+  .syn{opacity:0;transform-box:fill-box;transform-origin:center;filter:drop-shadow(0 0 5px rgba(190,225,255,.9));}
 
-  .wordmark{position:relative;display:inline-block;white-space:nowrap;font-family:'Space Grotesk','Syne',sans-serif;font-size:clamp(32px,10.5vw,86px);font-weight:700;line-height:.98;letter-spacing:-0.03em;}
-  .wm-text{display:inline-block;color:transparent;background:linear-gradient(100deg,var(--accent-cyan) 0%,var(--accent-violet) 48%,var(--accent-cyan) 92%);background-size:220% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradientDrift 9s ease-in-out infinite;}
+  /* Intro-sekvens (gatead på .go så klick kan spela om den) */
+  .logo.go .edge{animation:edgeDraw .38s var(--ease-out) both;}
+  .logo.go .node{animation:nodeIgnite .5s var(--ease-spring) both;}
+  .logo.go .pulse{animation:pulseRun .5s cubic-bezier(.45,0,.2,1) .78s both;}
+  .logo.go .bloom{animation:bloom .55s ease-out 1.2s both;}
+  .logo.go .net{animation:netDissolve .95s var(--ease-out) 1.28s forwards,netFloat 16s ease-in-out 4s infinite;}
+  .logo.go .wm{animation:wmCondense .92s var(--ease-out) 1.32s both;}
+  .logo.go .glint{animation:glintSweep .85s var(--ease-out) 2.24s both;}
+  .logo.go .logo-svg{animation:logoBreathe 6s ease-in-out 3.4s infinite;}
+  .logo.go .syn.s1{animation:synBlink 9s ease-in-out 5.2s infinite;}
+  .logo.go .syn.s2{animation:synBlink 9s ease-in-out 8.4s infinite;}
+  .logo.go .pulse-idle{animation:idleRun 9s linear 6.5s infinite;}
 
-  /* Intro: nät tänds → signal färdas → ljuset häller in i ordet → settle → breathing */
-    .ln-node{animation:nodeIgnite .52s var(--ease-spring) both;}
-    .ln-node.la{animation-delay:0s;}
-    .ln-node.lb{animation-delay:.2s;}
-    .ln-node.lc{animation-delay:.4s;}
-    .ln-link{animation:linkDraw .42s var(--ease-out) both;}
-    .ln-link.eab{animation-delay:.10s;}
-    .ln-link.ebc{animation-delay:.30s;}
-    .logo-net{animation:netBloom 1.2s ease-out .55s both;}
-    .ln-pulse{animation:pulseRun .52s ease-out .5s both;}
-    .wm-text{-webkit-mask:linear-gradient(100deg,#000 44%,transparent 66%) right/260% 100% no-repeat;
-             mask:linear-gradient(100deg,#000 44%,transparent 66%) right/260% 100% no-repeat;
-             animation:wmReveal .78s var(--ease-out) .86s both, gradientDrift 9s ease-in-out infinite;}
-    .wordmark::after{content:'';position:absolute;top:-10%;left:0;width:14%;height:120%;pointer-events:none;
-      background:linear-gradient(90deg,transparent,rgba(206,246,255,.95),transparent);
-      filter:blur(6px);mix-blend-mode:screen;opacity:0;transform:translateX(-140%) skewX(-14deg);
-      animation:wmGlint .8s var(--ease-out) .86s both;}
-    .logo{animation:logoBreathe 5.5s ease-in-out 1.8s infinite;}
-    .ln-syn{animation:synapse 7s ease-in-out 3.2s infinite;}
-
+  @keyframes edgeDraw{from{stroke-dashoffset:1;opacity:0;}to{stroke-dashoffset:0;opacity:.5;}}
   @keyframes nodeIgnite{
-    0%{opacity:0;transform:scale(.2);filter:drop-shadow(0 0 0 rgba(34,211,238,0));}
-    58%{opacity:1;transform:scale(1.4);filter:drop-shadow(0 0 11px rgba(34,211,238,.95));}
-    100%{opacity:1;transform:scale(1);filter:drop-shadow(0 0 4px rgba(34,211,238,.5));}
+    0%{opacity:0;transform:scale(.2);filter:drop-shadow(0 0 0 rgba(120,190,255,0));}
+    55%{opacity:1;transform:scale(1.55);filter:drop-shadow(0 0 9px rgba(120,190,255,.95));}
+    100%{opacity:1;transform:scale(1);filter:drop-shadow(0 0 3px rgba(120,190,255,.35));}
   }
-  @keyframes linkDraw{from{stroke-dashoffset:1;opacity:.15;}to{stroke-dashoffset:0;opacity:.8;}}
-  @keyframes netBloom{
-    0%,52%{filter:drop-shadow(0 0 0 rgba(34,211,238,0));}
-    70%{filter:drop-shadow(0 0 13px rgba(34,211,238,.5));}
-    100%{filter:drop-shadow(0 0 5px rgba(34,211,238,.26));}
+  @keyframes pulseRun{0%{offset-distance:0%;opacity:0;}8%{opacity:1;}88%{opacity:1;}100%{offset-distance:100%;opacity:0;}}
+  @keyframes bloom{0%{opacity:0;transform:scale(.3);}25%{opacity:.95;}100%{opacity:0;transform:scale(6.5);}}
+  @keyframes netDissolve{from{opacity:1;transform:scale(1);}to{opacity:.13;transform:scale(1.2);}}
+  @keyframes netFloat{0%,100%{transform:scale(1.2) translateY(0);}50%{transform:scale(1.2) translateY(-4px);}}
+  @keyframes wmCondense{
+    0%{opacity:0;letter-spacing:.16em;transform:scale(.965);filter:blur(16px);}
+    45%{opacity:1;}
+    100%{opacity:1;letter-spacing:-0.02em;transform:scale(1);filter:blur(0);}
   }
-  @keyframes pulseRun{0%{offset-distance:0%;opacity:0;}18%{opacity:1;}82%{opacity:1;}100%{offset-distance:100%;opacity:0;}}
-  @keyframes wmReveal{
-    0%{-webkit-mask-position:100% 0;mask-position:100% 0;filter:blur(7px);letter-spacing:-.075em;transform:scale(.99);}
-    55%{filter:blur(0);}
-    100%{-webkit-mask-position:0% 0;mask-position:0% 0;filter:blur(0);letter-spacing:-.03em;transform:scale(1);}
+  @keyframes glintSweep{
+    0%{opacity:0;transform:translateX(0) skewX(-14deg);}
+    16%{opacity:.8;}
+    84%{opacity:.8;}
+    100%{opacity:0;transform:translateX(800px) skewX(-14deg);}
   }
-  @keyframes wmGlint{
-    0%{opacity:0;transform:translateX(-140%) skewX(-14deg);}
-    22%{opacity:.9;}
-    78%{opacity:.9;}
-    100%{opacity:0;transform:translateX(840%) skewX(-14deg);}
-  }
-  @keyframes logoBreathe{0%,100%{filter:drop-shadow(0 0 4px rgba(34,211,238,.10));}50%{filter:drop-shadow(0 0 15px rgba(34,211,238,.28));}}
-  @keyframes synapse{0%,86%,100%{opacity:0;transform:scale(1);}90%{opacity:.85;transform:scale(1.8);}94%{opacity:0;transform:scale(2.4);}}
-  @keyframes gradientDrift{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+  @keyframes logoBreathe{0%,100%{filter:drop-shadow(0 0 4px rgba(96,165,250,.10));}50%{filter:drop-shadow(0 0 16px rgba(96,165,250,.26));}}
+  @keyframes synBlink{0%,90%,100%{opacity:0;transform:scale(1);}93%{opacity:.85;transform:scale(1.9);}96%{opacity:0;transform:scale(2.6);}}
+  @keyframes idleRun{0%{offset-distance:0%;opacity:0;}1.5%{opacity:.5;}9%{opacity:.5;}11%{offset-distance:100%;opacity:0;}100%{offset-distance:100%;opacity:0;}}
   @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-  .hero p{opacity:0;animation:fadeUp .6s var(--ease-out) 1.5s forwards;font-size:17px;color:var(--text-secondary);max-width:440px;margin:0 auto;line-height:1.6;}
+  .hero p{opacity:0;animation:fadeUp .6s var(--ease-out) 2.05s forwards;font-size:17px;color:var(--text-secondary);max-width:440px;margin:0 auto;line-height:1.6;}
 
   /* Sektionsrubriker */
   .section{margin-top:64px;opacity:0;animation:fadeUp .6s var(--ease-out) .78s forwards;}.section-tight{margin-top:40px;}
@@ -187,10 +184,8 @@
     .card,.nn-node,.bayes-dot-a,.bayes-dot-b,.q-agent,.boundary-line,.lm-cursor,.hero h1,.hero p,.hero-eyebrow,.section,.lang-bar,.ambient,#net{animation:none!important;opacity:1!important;filter:none!important;transform:none!important;}
     .card:hover{transform:translateY(-3px);}
     .card::after{display:none;}
-    .logo,.logo-net,.ln-node,.ln-link,.wm-text{animation:none!important;filter:none!important;transform:none!important;opacity:1!important;}
-    .ln-link{stroke-dashoffset:0!important;}
-    .wm-text{-webkit-mask:none!important;mask:none!important;letter-spacing:-.03em;}
-    .ln-pulse,.ln-syn,.wordmark::after{display:none!important;}
+    .logo,.logo-svg,.net,.edge,.node,.wm{animation:none!important;}
+    .pulse,.pulse-idle,.bloom,.glint,.syn{display:none!important;}
   }
 
   @media(max-width:500px){.hero{padding:88px 0 20px;}}
@@ -208,36 +203,82 @@
   </div>
 
   <header class="hero">
-    <div class="logo">
-      <svg class="logo-net" viewBox="0 0 240 66" fill="none" aria-hidden="true">
-        <g class="ln-links">
-          <line class="ln-link eab" x1="64" y1="20" x2="120" y2="13" pathLength="1"/>
-          <line class="ln-link eab" x1="64" y1="20" x2="120" y2="33" pathLength="1"/>
-          <line class="ln-link eab" x1="64" y1="20" x2="120" y2="53" pathLength="1"/>
-          <line class="ln-link eab" x1="64" y1="46" x2="120" y2="13" pathLength="1"/>
-          <line class="ln-link eab" x1="64" y1="46" x2="120" y2="33" pathLength="1"/>
-          <line class="ln-link eab" x1="64" y1="46" x2="120" y2="53" pathLength="1"/>
-          <line class="ln-link ebc" x1="120" y1="13" x2="176" y2="20" pathLength="1"/>
-          <line class="ln-link ebc" x1="120" y1="13" x2="176" y2="46" pathLength="1"/>
-          <line class="ln-link ebc" x1="120" y1="33" x2="176" y2="20" pathLength="1"/>
-          <line class="ln-link ebc" x1="120" y1="33" x2="176" y2="46" pathLength="1"/>
-          <line class="ln-link ebc" x1="120" y1="53" x2="176" y2="20" pathLength="1"/>
-          <line class="ln-link ebc" x1="120" y1="53" x2="176" y2="46" pathLength="1"/>
+    <div class="logo" id="logo" role="img" aria-label="AI-aktiviteter" title="Spela upp igen">
+      <svg class="logo-svg" viewBox="0 0 560 150" fill="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="wmGrad" x1="40" y1="122" x2="520" y2="28" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#22d3ee"/>
+            <stop offset=".5" stop-color="#60a5fa"/>
+            <stop offset="1" stop-color="#a78bfa"/>
+            <animateTransform attributeName="gradientTransform" type="translate" values="0 0; -60 0; 0 0" dur="9s" repeatCount="indefinite"/>
+          </linearGradient>
+          <linearGradient id="glintGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="rgba(234,252,255,0)"/>
+            <stop offset=".5" stop-color="rgba(234,252,255,.9)"/>
+            <stop offset="1" stop-color="rgba(234,252,255,0)"/>
+          </linearGradient>
+        </defs>
+
+        <g class="net">
+          <g stroke="url(#wmGrad)" stroke-width="1.2" stroke-linecap="round">
+            <line class="edge" style="animation-delay:.16s" x1="70" y1="40" x2="210" y2="18" pathLength="1"/>
+            <line class="edge" style="animation-delay:.18s" x1="70" y1="40" x2="210" y2="58" pathLength="1"/>
+            <line class="edge" style="animation-delay:.20s" x1="70" y1="40" x2="210" y2="96" pathLength="1"/>
+            <line class="edge" style="animation-delay:.22s" x1="70" y1="40" x2="210" y2="134" pathLength="1"/>
+            <line class="edge" style="animation-delay:.24s" x1="70" y1="110" x2="210" y2="18" pathLength="1"/>
+            <line class="edge" style="animation-delay:.26s" x1="70" y1="110" x2="210" y2="58" pathLength="1"/>
+            <line class="edge" style="animation-delay:.28s" x1="70" y1="110" x2="210" y2="96" pathLength="1"/>
+            <line class="edge" style="animation-delay:.30s" x1="70" y1="110" x2="210" y2="134" pathLength="1"/>
+            <line class="edge" style="animation-delay:.40s" x1="210" y1="18" x2="350" y2="35" pathLength="1"/>
+            <line class="edge" style="animation-delay:.415s" x1="210" y1="18" x2="350" y2="75" pathLength="1"/>
+            <line class="edge" style="animation-delay:.43s" x1="210" y1="18" x2="350" y2="115" pathLength="1"/>
+            <line class="edge" style="animation-delay:.445s" x1="210" y1="58" x2="350" y2="35" pathLength="1"/>
+            <line class="edge" style="animation-delay:.46s" x1="210" y1="58" x2="350" y2="75" pathLength="1"/>
+            <line class="edge" style="animation-delay:.475s" x1="210" y1="58" x2="350" y2="115" pathLength="1"/>
+            <line class="edge" style="animation-delay:.49s" x1="210" y1="96" x2="350" y2="35" pathLength="1"/>
+            <line class="edge" style="animation-delay:.505s" x1="210" y1="96" x2="350" y2="75" pathLength="1"/>
+            <line class="edge" style="animation-delay:.52s" x1="210" y1="96" x2="350" y2="115" pathLength="1"/>
+            <line class="edge" style="animation-delay:.535s" x1="210" y1="134" x2="350" y2="35" pathLength="1"/>
+            <line class="edge" style="animation-delay:.55s" x1="210" y1="134" x2="350" y2="75" pathLength="1"/>
+            <line class="edge" style="animation-delay:.565s" x1="210" y1="134" x2="350" y2="115" pathLength="1"/>
+            <line class="edge" style="animation-delay:.66s" x1="350" y1="35" x2="490" y2="75" pathLength="1"/>
+            <line class="edge" style="animation-delay:.69s" x1="350" y1="75" x2="490" y2="75" pathLength="1"/>
+            <line class="edge" style="animation-delay:.72s" x1="350" y1="115" x2="490" y2="75" pathLength="1"/>
+          </g>
+          <g fill="url(#wmGrad)">
+            <circle class="node" style="animation-delay:.06s" cx="70" cy="40" r="3"/>
+            <circle class="node" style="animation-delay:.11s" cx="70" cy="110" r="3"/>
+            <circle class="node" style="animation-delay:.28s" cx="210" cy="18" r="3.2"/>
+            <circle class="node" style="animation-delay:.33s" cx="210" cy="58" r="3.2"/>
+            <circle class="node" style="animation-delay:.38s" cx="210" cy="96" r="3.2"/>
+            <circle class="node" style="animation-delay:.43s" cx="210" cy="134" r="3.2"/>
+            <circle class="node" style="animation-delay:.56s" cx="350" cy="35" r="3.5"/>
+            <circle class="node" style="animation-delay:.61s" cx="350" cy="75" r="3.5"/>
+            <circle class="node" style="animation-delay:.66s" cx="350" cy="115" r="3.5"/>
+            <circle class="node" style="animation-delay:.78s" cx="490" cy="75" r="4"/>
+          </g>
         </g>
-        <g class="ln-nodes">
-          <circle class="ln-node la" cx="64"  cy="20" r="4"/>
-          <circle class="ln-node la" cx="64"  cy="46" r="4"/>
-          <circle class="ln-node lb" cx="120" cy="13" r="4"/>
-          <circle class="ln-node lb" cx="120" cy="33" r="4"/>
-          <circle class="ln-node lb" cx="120" cy="53" r="4"/>
-          <circle class="ln-node lc" cx="176" cy="20" r="4"/>
-          <circle class="ln-node lc" cx="176" cy="46" r="4"/>
-        </g>
-        <circle class="ln-syn" cx="120" cy="33" r="4"/>
-        <circle class="ln-pulse" cx="0" cy="0" r="3.2"/>
+
+        <text class="wm" x="280" y="97" text-anchor="middle">AI-aktiviteter</text>
+        <rect class="glint" x="-130" y="42" width="100" height="78" fill="url(#glintGrad)"/>
+
+        <circle class="syn s1" cx="210" cy="18" r="3.2" fill="#bfe3ff"/>
+        <circle class="syn s2" cx="350" cy="115" r="3.2" fill="#d7c9ff"/>
+        <circle class="pulse" r="3" fill="#eafcff"/>
+        <circle class="pulse-idle" r="2.4" fill="#eafcff"/>
+        <circle class="bloom" cx="490" cy="75" r="5" fill="#eafcff"/>
       </svg>
-      <h1 class="wordmark"><span class="wm-text">AI-aktiviteter</span></h1>
+      <h1 class="sr-only">AI-aktiviteter</h1>
     </div>
+    <script>
+      (function(){
+        var l = document.getElementById('logo');
+        requestAnimationFrame(function(){ requestAnimationFrame(function(){ l.classList.add('go'); }); });
+        l.addEventListener('click', function(){
+          l.classList.remove('go'); void l.offsetWidth; l.classList.add('go');
+        });
+      })();
+    </script>
     <p>Interaktiva simuleringar och laborationer för att lära dig om <strong>Artificiell Intelligens</strong>.</p>
   </header>
 
