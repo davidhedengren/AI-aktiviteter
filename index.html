@@ -55,11 +55,10 @@
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
 
   .wm{font-family:'Syne','Space Grotesk',sans-serif;font-weight:700;font-size:60px;letter-spacing:-0.02em;fill:url(#wmGrad);transform-box:fill-box;transform-origin:center;}
-  .net{transform-box:fill-box;transform-origin:center;opacity:.13;transform:scale(1.2);}
+  .net{transform-box:fill-box;transform-origin:center;opacity:.55;transform:scale(1.05);}
   .edge{stroke-dasharray:1;stroke-dashoffset:0;opacity:.5;}
   .node{transform-box:fill-box;transform-origin:center;}
-  .pulse,.pulse-idle{opacity:0;filter:drop-shadow(0 0 6px rgba(200,245,255,.95));
-    offset-path:path('M70 40 L210 58 L350 75 L490 75');offset-distance:0%;}
+  .fp{opacity:0;offset-distance:0%;filter:drop-shadow(0 0 5px rgba(200,245,255,.9));}
   .bloom{opacity:0;transform-box:fill-box;transform-origin:center;filter:blur(1px);}
   .glint{opacity:0;mix-blend-mode:screen;filter:blur(6px);}
   .syn{opacity:0;transform-box:fill-box;transform-origin:center;filter:drop-shadow(0 0 5px rgba(190,225,255,.9));}
@@ -67,15 +66,14 @@
   /* Intro-sekvens (gatead på .go så klick kan spela om den) */
   .logo.go .edge{animation:edgeDraw .38s var(--ease-out) both;}
   .logo.go .node{animation:nodeIgnite .5s var(--ease-spring) both;}
-  .logo.go .pulse{animation:pulseRun .5s cubic-bezier(.45,0,.2,1) .78s both;}
-  .logo.go .bloom{animation:bloom .55s ease-out 1.2s both;}
-  .logo.go .net{animation:netDissolve .95s var(--ease-out) 1.28s forwards,netFloat 16s ease-in-out 4s infinite;}
-  .logo.go .wm{animation:wmCondense .92s var(--ease-out) 1.32s both;}
-  .logo.go .glint{animation:glintSweep .85s var(--ease-out) 2.24s both;}
-  .logo.go .logo-svg{animation:logoBreathe 6s ease-in-out 3.4s infinite;}
+  .logo.go .bloom{animation:bloom .55s ease-out 1.7s both;}
+  .logo.go .net{animation:netDissolve .95s var(--ease-out) 1.78s forwards,netFloat 16s ease-in-out 4.4s infinite;}
+  .logo.go .wm{animation:wmCondense .92s var(--ease-out) 1.82s both;}
+  .logo.go .glint{animation:glintSweep .85s var(--ease-out) 2.72s both;}
+  .logo.go .logo-svg{animation:logoBreathe 6s ease-in-out 3.9s infinite;}
   .logo.go .syn.s1{animation:synBlink 9s ease-in-out 5.2s infinite;}
   .logo.go .syn.s2{animation:synBlink 9s ease-in-out 8.4s infinite;}
-  .logo.go .pulse-idle{animation:idleRun 9s linear 6.5s infinite;}
+  .logo.go .fp{animation:fpRun .3s ease-in var(--fd) both,fpIdle 10s linear var(--fi) infinite;}
 
   @keyframes edgeDraw{from{stroke-dashoffset:1;opacity:0;}to{stroke-dashoffset:0;opacity:.5;}}
   @keyframes nodeIgnite{
@@ -83,10 +81,10 @@
     55%{opacity:1;transform:scale(1.55);filter:drop-shadow(0 0 9px rgba(120,190,255,.95));}
     100%{opacity:1;transform:scale(1);filter:drop-shadow(0 0 3px rgba(120,190,255,.35));}
   }
-  @keyframes pulseRun{0%{offset-distance:0%;opacity:0;}8%{opacity:1;}88%{opacity:1;}100%{offset-distance:100%;opacity:0;}}
+  @keyframes fpRun{0%{offset-distance:0%;opacity:0;}14%{opacity:1;}86%{opacity:1;}100%{offset-distance:100%;opacity:0;}}
   @keyframes bloom{0%{opacity:0;transform:scale(.3);}25%{opacity:.95;}100%{opacity:0;transform:scale(6.5);}}
-  @keyframes netDissolve{from{opacity:1;transform:scale(1);}to{opacity:.13;transform:scale(1.2);}}
-  @keyframes netFloat{0%,100%{transform:scale(1.2) translateY(0);}50%{transform:scale(1.2) translateY(-4px);}}
+  @keyframes netDissolve{from{opacity:1;transform:scale(1);}to{opacity:.55;transform:scale(1.05);}}
+  @keyframes netFloat{0%,100%{transform:scale(1.05) translateY(0);}50%{transform:scale(1.05) translateY(-3px);}}
   @keyframes wmCondense{
     0%{opacity:0;letter-spacing:.16em;transform:scale(.965);filter:blur(16px);}
     45%{opacity:1;}
@@ -100,9 +98,9 @@
   }
   @keyframes logoBreathe{0%,100%{filter:drop-shadow(0 0 4px rgba(96,165,250,.10));}50%{filter:drop-shadow(0 0 16px rgba(96,165,250,.26));}}
   @keyframes synBlink{0%,90%,100%{opacity:0;transform:scale(1);}93%{opacity:.85;transform:scale(1.9);}96%{opacity:0;transform:scale(2.6);}}
-  @keyframes idleRun{0%{offset-distance:0%;opacity:0;}1.5%{opacity:.5;}9%{opacity:.5;}11%{offset-distance:100%;opacity:0;}100%{offset-distance:100%;opacity:0;}}
+  @keyframes fpIdle{0%{offset-distance:0%;opacity:0;}.5%{opacity:.75;}2.6%{opacity:.75;}3%{offset-distance:100%;opacity:0;}100%{offset-distance:100%;opacity:0;}}
   @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-  .hero p{opacity:0;animation:fadeUp .6s var(--ease-out) 2.05s forwards;font-size:17px;color:var(--text-secondary);max-width:440px;margin:0 auto;line-height:1.6;}
+  .hero p{opacity:0;animation:fadeUp .6s var(--ease-out) 2.9s forwards;font-size:17px;color:var(--text-secondary);max-width:440px;margin:0 auto;line-height:1.6;}
 
   /* Sektionsrubriker */
   .section{margin-top:64px;opacity:0;animation:fadeUp .6s var(--ease-out) .78s forwards;}.section-tight{margin-top:40px;}
@@ -185,7 +183,7 @@
     .card:hover{transform:translateY(-3px);}
     .card::after{display:none;}
     .logo,.logo-svg,.net,.edge,.node,.wm{animation:none!important;}
-    .pulse,.pulse-idle,.bloom,.glint,.syn{display:none!important;}
+    .fp,.bloom,.glint,.syn{display:none!important;}
   }
 
   @media(max-width:500px){.hero{padding:88px 0 20px;}}
@@ -220,7 +218,7 @@
         </defs>
 
         <g class="net">
-          <g stroke="url(#wmGrad)" stroke-width="1.2" stroke-linecap="round">
+          <g stroke="url(#wmGrad)" stroke-width="1.5" stroke-linecap="round">
             <line class="edge" style="animation-delay:.16s" x1="70" y1="40" x2="210" y2="18" pathLength="1"/>
             <line class="edge" style="animation-delay:.18s" x1="70" y1="40" x2="210" y2="58" pathLength="1"/>
             <line class="edge" style="animation-delay:.20s" x1="70" y1="40" x2="210" y2="96" pathLength="1"/>
@@ -264,8 +262,29 @@
 
         <circle class="syn s1" cx="210" cy="18" r="3.2" fill="#bfe3ff"/>
         <circle class="syn s2" cx="350" cy="115" r="3.2" fill="#d7c9ff"/>
-        <circle class="pulse" r="3" fill="#eafcff"/>
-        <circle class="pulse-idle" r="2.4" fill="#eafcff"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:0.880s;--fi:7.000s;offset-path:path('M70 40 L210 18')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:0.892s;--fi:7.012s;offset-path:path('M70 40 L210 58')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:0.904s;--fi:7.024s;offset-path:path('M70 40 L210 96')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:0.916s;--fi:7.036s;offset-path:path('M70 40 L210 134')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:0.928s;--fi:7.048s;offset-path:path('M70 110 L210 18')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:0.940s;--fi:7.060s;offset-path:path('M70 110 L210 58')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:0.952s;--fi:7.072s;offset-path:path('M70 110 L210 96')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:0.964s;--fi:7.084s;offset-path:path('M70 110 L210 134')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:1.180s;--fi:7.350s;offset-path:path('M210 18 L350 35')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:1.190s;--fi:7.360s;offset-path:path('M210 18 L350 75')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:1.200s;--fi:7.370s;offset-path:path('M210 18 L350 115')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:1.210s;--fi:7.380s;offset-path:path('M210 58 L350 35')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:1.220s;--fi:7.390s;offset-path:path('M210 58 L350 75')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:1.230s;--fi:7.400s;offset-path:path('M210 58 L350 115')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:1.240s;--fi:7.410s;offset-path:path('M210 96 L350 35')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:1.250s;--fi:7.420s;offset-path:path('M210 96 L350 75')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:1.260s;--fi:7.430s;offset-path:path('M210 96 L350 115')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:1.270s;--fi:7.440s;offset-path:path('M210 134 L350 35')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:1.280s;--fi:7.450s;offset-path:path('M210 134 L350 75')"/>
+        <circle class="fp" r="2.2" fill="#eafcff" style="--fd:1.290s;--fi:7.460s;offset-path:path('M210 134 L350 115')"/>
+        <circle class="fp" r="2.6" fill="#eafcff" style="--fd:1.460s;--fi:7.700s;offset-path:path('M350 35 L490 75')"/>
+        <circle class="fp" r="2.6" fill="#eafcff" style="--fd:1.480s;--fi:7.720s;offset-path:path('M350 75 L490 75')"/>
+        <circle class="fp" r="2.6" fill="#eafcff" style="--fd:1.500s;--fi:7.740s;offset-path:path('M350 115 L490 75')"/>
         <circle class="bloom" cx="490" cy="75" r="5" fill="#eafcff"/>
       </svg>
       <h1 class="sr-only">AI-aktiviteter</h1>
