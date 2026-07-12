@@ -275,7 +275,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 /* ---------- overlays / onboarding & end ---------- */
 .overlay{position:fixed;inset:0;background:rgba(3,4,9,.8);backdrop-filter:blur(14px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;}
 .overlay.show{display:flex;}
-.overlay-card{border-radius:var(--r-xl);padding:44px 46px;max-width:540px;width:100%;text-align:center;max-height:90vh;overflow-y:auto;animation:popIn .5s var(--ease-spring);}
+.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:32px 36px;max-width:540px;width:100%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:popIn .5s var(--ease-spring);}
 .overlay-card h2{font-family:'Syne',sans-serif;font-size:1.4em;font-weight:800;margin-bottom:10px;letter-spacing:-.02em;}
 .overlay-card .sub{font-size:.87em;font-weight:400;color:var(--dim);line-height:1.7;margin-bottom:26px;}
 .steps{display:flex;flex-direction:column;gap:18px;margin:24px 0;text-align:left;}
@@ -290,8 +290,8 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .mode-btn .mi svg{width:21px;height:21px;}
 .mode-btn .mt{flex:1;}
 .mode-btn .mt small{display:block;font-size:.79em;font-weight:400;color:var(--dim);margin-top:3px;line-height:1.5;}
-.overlay-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:15px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:.95em;font-weight:700;background:linear-gradient(135deg,var(--accent),#6b9bff);color:#fff;border:none;border-radius:999px;cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 10px 26px -8px rgba(77,128,255,.6);}
-.overlay-btn:hover{transform:translateY(-2px);}
+.overlay-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(77,128,255,.28);}
+.overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
 .overlay-btn svg{width:15px;height:15px;}
 
 .end-card{text-align:center;}
@@ -405,13 +405,13 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 <div class="turn-popup card-detail" id="cardDetailPopup" onclick="closeCardDetail(event)"><div class="cd-card glass" id="cardDetailInner"></div></div>
 
 <div class="overlay show" id="modeOverlay">
-  <div class="overlay-card glass">
+  <div class="overlay-card">
     <h2>AI-tidslinjen – <span class="grad-text">När då då?</span></h2>
     <p class="sub">Testa dina kunskaper om AI:s historia – placera händelserna på rätt plats i tidslinjen.</p>
     <div class="steps">
       <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div><div><strong>Läs kortet</strong> – Varje kort beskriver en historisk AI-händelse. Gissa vilket år det hände.</div></div>
       <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8" fill="currentColor"/></svg></div><div><strong>Samla poäng</strong> – Rätt årtal ger 3 poäng, rätt decennium 2 poäng, rätt ordning i förhållande till de andra korten ger 1 poäng.</div></div>
-      <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-.4-1.8-.8-2.5C17.5 8 19 10.4 19 13a7 7 0 1 1-14 0c0-4 3-6 4-8 1-1.6 1-2 3-3z"/></svg></div><div><strong>Streak</strong> – Tre eller fler perfekta svar i rad ger extra bonuspoäng ovanpå grundpoängen. Varje historisk epok upptäcks och tänds upp på tidslinjen i takt med att du placerar kort från den.</div></div>
+      <div class="step"><div class="step-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-.4-1.8-.8-2.5C17.5 8 19 10.4 19 13a7 7 0 1 1-14 0c0-4 3-6 4-8 1-1.6 1-2 3-3z"/></svg></div><div><strong>Streak</strong> – Tre eller fler perfekta svar i rad ger extra bonuspoäng.</div></div>
     </div>
     <div class="mode-btns">
       <button class="mode-btn" onclick="startGame(1)"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M9 4a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 4.5 10 2.5 2.5 0 0 0 6 14.3V16a3 3 0 0 0 3 3M15 4a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 19.5 10 2.5 2.5 0 0 1 18 14.3V16a3 3 0 0 1-3 3M9 4v15M15 4v15"/></svg></span><span class="mt">1 spelare<small>Träna själv på AI-historien</small></span></button>
@@ -419,7 +419,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
     </div>
   </div>
 </div>
-<div class="overlay" id="endOverlay"><div class="overlay-card glass end-card" id="endCard"></div></div>
+<div class="overlay" id="endOverlay"><div class="overlay-card end-card" id="endCard"></div></div>
 
 <script>
 const EVENTS=[
