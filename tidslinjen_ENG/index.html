@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -158,6 +158,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .card-stamp.correct{color:var(--green);}
 .card-stamp.near{color:var(--orange);}
 .card-stamp.wrong{color:var(--red);}
+.card-stamp.revealed{color:var(--dim);}
 
 .land-points{position:fixed;z-index:70;pointer-events:none;text-align:center;transform:translate(-50%,-50%);opacity:0;}
 .land-points.show{animation:pointsPop 1.2s var(--ease-out) forwards;}
@@ -244,6 +245,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .tl-card.close{--dot-c:var(--green);}
 .tl-card.order{--dot-c:var(--accent2);}
 .tl-card.wrong{--dot-c:var(--red);}
+.tl-card.revealed{--dot-c:var(--dim);opacity:.75;}
 .tl-card.landing{animation:landBounce .45s var(--ease-spring);}
 @keyframes landBounce{0%{transform:translateX(-50%) scale(.35);opacity:0;}65%{transform:translateX(-50%) scale(1.16);opacity:1;}100%{transform:translateX(-50%) scale(1);opacity:1;}}
 .tl-card.landing .tl-dot{animation:dotPulse .45s var(--ease-out);}
@@ -378,7 +380,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
           <div class="cb-label">Correct answer</div>
           <div class="cb-year" id="cardBackYear"></div>
           <div class="cb-title" id="cardBackTitle"></div>
-          <button class="btn cb-ok" id="cardBackOk" onclick="flipBack()">OK</button>
+          <button class="btn cb-ok" id="cardBackOk" onclick="confirmReveal()">OK</button>
         </div>
       </div>
     </div>
@@ -538,7 +540,6 @@ function submitGuess(){
   if(busy||flipBusy||cardFlipped)return;
   const inp=document.getElementById('yearInput'),guess=parseInt(inp.value);
   if(isNaN(guess)||guess<1900||guess>2030){document.getElementById('inputGlass').classList.add('err');setTimeout(()=>document.getElementById('inputGlass').classList.remove('err'),420);return;}
-  busy=true;
   const ev=deck[currentIdx],diff=Math.abs(guess-ev.year);
   const sameDecade=Math.floor(guess/10)===Math.floor(ev.year/10);
   let orderCorrect=true;
@@ -556,11 +557,46 @@ function submitGuess(){
     else if(sameDecade){base=2;level='close';}
     else if(orderCorrect&&placed.length>0){base=1;level='order';}
   }
-  // repeat-guess cap: a card guessed for the 2nd+ time can give at most 1 point
-  const isRepeat=!!attempted[ev.id];
-  if(isRepeat&&base>1){base=1;level='order';}
-  attempted[ev.id]=true;
 
+  // stamp reflects ACTUAL accuracy, independent of order points:
+  //   Correct = exact year, or inside the period for range-cards
+  //   Close   = within same decade, OR within +-5 years of the year/period
+  //   Wrong   = anything further off (even if an order point was still earned)
+  let stampType,stampText;
+  if(ev.yearRange){
+    const [lo,hi]=ev.yearRange;
+    const inside=guess>=lo&&guess<=hi;
+    const nearDist=inside?0:Math.min(Math.abs(guess-lo),Math.abs(guess-hi));
+    if(inside){stampType='correct';stampText='Correct';}
+    else if(nearDist<=5){stampType='near';stampText='Close';}
+    else{stampType='wrong';stampText='Wrong';}
+  }else{
+    if(diff===0){stampType='correct';stampText='Correct';}
+    else if(sameDecade||diff<=5){stampType='near';stampText='Close';}
+    else{stampType='wrong';stampText='Wrong';}
+  }
+
+  resolveCard(ev,guess,base,level,stampType,stampText);
+}
+
+// "Show answer" always resolves the card for 0 points, placed on the timeline
+// marked as revealed – it can no longer be guessed for points afterwards.
+function confirmReveal(){
+  if(flipBusy||!cardFlipped||busy)return;
+  const ev=deck[currentIdx];
+  const cc=document.getElementById('currentCard'),inner=document.getElementById('currentCardInner');
+  // instantly clear the flip state; the fly-away/landing animation takes over from here
+  document.getElementById('cardBack').style.display='none';
+  inner.classList.remove('showing-back');
+  cc.style.transition='';cc.style.transform='';
+  cardFlipped=false;flipBusy=false;
+  resolveCard(ev,ev.year,0,'revealed','revealed','Shown');
+}
+
+// Shared tail: every attempt (guessed or revealed) lands on the timeline immediately, at the
+// event's TRUE year – never at the guess – color-coded by how well it was answered.
+function resolveCard(ev,guess,base,level,stampType,stampText){
+  busy=true;
   let bonus=0;
   if(base===3){
     streaks[currentPlayer]++;
@@ -571,76 +607,44 @@ function submitGuess(){
   const total=base+bonus;
   const oldScore=scores[currentPlayer];
   scores[currentPlayer]+=total;
-  const wasWrong=base===0;
 
-  // stamp reflects ACTUAL accuracy, independent of order points:
-  //   Rätt  = exact year, or inside the period for range-cards
-  //   Nära  = within same decade, OR within +-5 years of the year/period
-  //   Fel   = anything further off (even if an order point was still earned)
-  let stampType,stampText;
-  let nearDist;
-  if(ev.yearRange){
-    const [lo,hi]=ev.yearRange;
-    const inside=guess>=lo&&guess<=hi;
-    nearDist=inside?0:Math.min(Math.abs(guess-lo),Math.abs(guess-hi));
-    if(inside){stampType='correct';stampText='Correct';}
-    else if(nearDist<=5){stampType='near';stampText='Close';}
-    else{stampType='wrong';stampText='Wrong';}
-  }else{
-    if(diff===0){stampType='correct';stampText='Correct';}
-    else if(sameDecade||diff<=5){stampType='near';stampText='Close';}
-    else{stampType='wrong';stampText='Wrong';}
-  }
-
-  // Wrong answers are never placed on the timeline. In both modes the card is re-queued for a
-  //   later attempt (2nd+ attempt is capped at 1 point via the isRepeat logic above). Only a
-  //   correctly answered card lands. In two-player the turn also passes on a weak/failed answer.
-  const dropsToTimeline=!wasWrong;
-  if(dropsToTimeline){
-    finishedIds[ev.id]=true;
-    placed.push({...ev,guessYear:guess,points:total,level});
-    placed.sort((a,b)=>a.year-b.year);
-    lastPlacedId=ev.id;
-  }else{
-    // re-queue this card for another attempt later in the deck
-    const idx=deck.findIndex(d=>d.id===ev.id);
-    if(idx>=0){const card=deck.splice(idx,1)[0];const ins=idx+1+Math.floor(Math.random()*Math.max(1,deck.length-idx));deck.splice(Math.min(ins,deck.length),0,card);}
-  }
+  finishedIds[ev.id]=true;
+  placed.push({...ev,guessYear:guess,points:total,level});
+  placed.sort((a,b)=>a.year-b.year);
+  lastPlacedId=ev.id;
   cardsPlaced=placed.length;
 
-  inp.disabled=true;document.getElementById('placeBtn').disabled=true;
+  const inp=document.getElementById('yearInput');
+  inp.disabled=true;document.getElementById('placeBtn').disabled=true;document.getElementById('revealBtn').disabled=true;
   if(watchdogId)clearTimeout(watchdogId);
   watchdogId=setTimeout(()=>{
-    if(busy){busy=false;inp.disabled=false;document.getElementById('placeBtn').disabled=false;}
+    if(busy){busy=false;inp.disabled=false;document.getElementById('placeBtn').disabled=false;document.getElementById('revealBtn').disabled=false;}
   },3500);
   const cc=document.getElementById('currentCard');
 
   // show the stamp first, then fly
   showStamp(stampType,stampText);
-  const flyClass=dropsToTimeline?'flying':'flying-away';
 
   setTimeout(()=>{
-    cc.classList.add(flyClass);
+    cc.classList.add('flying');
     setTimeout(()=>{
       try{
-        if(dropsToTimeline){
-          renderTimeline();
-          const axis=document.getElementById('tlAxis');
-          if(axis){axis.classList.add('hit');setTimeout(()=>axis.classList.remove('hit'),260);}
-          const landedCard=document.querySelector('.tl-card.landing');
-          if(landedCard){
-            const dotEl=landedCard.querySelector('.tl-dot');
-            if(dotEl){
-              const r=dotEl.getBoundingClientRect();
-              if(total>0)setTimeout(()=>showLandingPoints(r.left+r.width/2,r.top+r.height/2,base,bonus,level),140);
-            }
-            setTimeout(()=>{landedCard.classList.remove('landing');landedCard.classList.add('afterglow');},500);
+        renderTimeline();
+        const axis=document.getElementById('tlAxis');
+        if(axis){axis.classList.add('hit');setTimeout(()=>axis.classList.remove('hit'),260);}
+        const landedCard=document.querySelector('.tl-card.landing');
+        if(landedCard){
+          const dotEl=landedCard.querySelector('.tl-dot');
+          if(dotEl){
+            const r=dotEl.getBoundingClientRect();
+            if(total>0)setTimeout(()=>showLandingPoints(r.left+r.width/2,r.top+r.height/2,base,bonus,level),140);
           }
+          setTimeout(()=>{landedCard.classList.remove('landing');landedCard.classList.add('afterglow');},500);
         }
         renderScoreLine();
         animateNumber(document.getElementById(mode===2?(currentPlayer===0?'sbd1':'sbd2'):'scoreVal'),oldScore,scores[currentPlayer],420);
       }catch(err){
-        console.error('AI-tidslinjen: icke-kritiskt animationsfel, fortsätter ändå',err);
+        console.error('AI timeline: non-critical animation error, continuing anyway',err);
       }finally{
         setTimeout(()=>{
           currentIdx++;
@@ -665,10 +669,6 @@ function showStamp(type,text){
 function revealAnswer(){
   if(busy||flipBusy||cardFlipped)return;
   flipCard(true);
-}
-function flipBack(){
-  if(flipBusy||!cardFlipped)return;
-  flipCard(false);
 }
 function flipCard(toBack){
   if(flipBusy)return;
@@ -849,13 +849,16 @@ function showCardDetail(p){
   const pop=document.getElementById('cardDetailPopup'),inner=document.getElementById('cardDetailInner');
   const col=ERA_COL[p.era]||'#4d80ff';
   const yrText=p.yearRange?p.yearRange[0]+'–'+p.yearRange[1]:p.year;
+  const metaLine=p.level==='revealed'
+    ? 'You revealed the answer &middot; 0 pts'
+    : 'Your guess: <b>'+p.guessYear+'</b>'+(p.points>0?' &middot; +'+p.points+' pts':'');
   inner.style.setProperty('--card-accent',col);
   inner.innerHTML=
     '<div class="cd-era" style="color:'+col+'">'+p.era+'</div>'+
     '<div class="cd-year" style="color:'+col+'">'+yrText+'</div>'+
     '<div class="cd-title">'+p.title+'</div>'+
     '<div class="cd-desc">'+p.desc+'</div>'+
-    '<div class="cd-meta">Your guess: <b>'+p.guessYear+'</b>'+(p.points>0?' &middot; +'+p.points+' pts':'')+'</div>'+
+    '<div class="cd-meta">'+metaLine+'</div>'+
     '<button class="btn cd-ok" onclick="closeCardDetail()">Close</button>';
   pop.classList.add('show');
 }
