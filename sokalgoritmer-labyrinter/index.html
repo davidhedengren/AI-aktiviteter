@@ -278,6 +278,26 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;}
 }
+
+/* ══ Intro-overlay på mobil: samma centrerade layout som på desktop, bara kompaktare så den ryms utan scroll ══ */
+@media (max-width:560px){
+  .overlay{padding:16px;}
+  .overlay-card{width:100%;padding:20px 22px;max-height:88vh;}
+  .intro-viz{width:130px;height:60px;margin:0 auto 8px;}
+  .db-icon-wrap{width:48px;height:48px;margin:0 auto 8px;}
+  .overlay-card h2{font-size:1.08em;margin-bottom:5px;}
+  .overlay-card .sub{font-size:.8em;line-height:1.45;margin-bottom:10px;}
+  .overlay-card .steps{gap:8px;margin:10px 0;}
+  .overlay-card .step{font-size:.78em;line-height:1.4;gap:9px;}
+  .step-num{width:21px;height:21px;font-size:.72em;}
+  .overlay-tip{margin-top:10px;font-size:.74em;padding:8px 10px;}
+  .overlay-btn{padding:11px;margin-top:10px;font-size:.88em;}
+}
+/* Riktigt korta skärmar: krymp illustrationen ytterligare i stället för att dölja den */
+@media (max-width:560px) and (max-height:640px){
+  .intro-viz{width:96px;height:44px;margin:0 auto 6px;}
+  .db-icon-wrap{width:38px;height:38px;margin:0 auto 6px;}
+}
 </style>
 </head>
 <body>
