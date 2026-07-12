@@ -48,6 +48,10 @@ button{font-family:inherit;}
 .alg-card[aria-checked="true"]{border-color:var(--c);box-shadow:0 0 0 1px var(--c),0 10px 26px color-mix(in srgb,var(--c) 16%,transparent);background:linear-gradient(180deg,color-mix(in srgb,var(--c) 9%,var(--surface)),var(--surface));}
 .alg-dot{width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 9px var(--c);flex-shrink:0;transition:box-shadow .18s;}
 .alg-card[aria-checked="false"] .alg-dot{box-shadow:none;opacity:.55;}
+  .alg-info{position:absolute;top:5px;right:6px;width:15px;height:15px;border-radius:50%;border:1px solid var(--border);color:var(--dim);font-size:10px;font-weight:800;line-height:1;display:flex;align-items:center;justify-content:center;opacity:.5;transition:.16s;background:transparent;}
+  .alg-card:hover .alg-info{opacity:.85;}
+  .alg-info:hover{opacity:1;color:var(--c);border-color:color-mix(in srgb,var(--c) 60%,transparent);}
+  .alg-card[aria-checked="true"] .alg-info{opacity:.9;border-color:color-mix(in srgb,var(--c) 45%,transparent);color:var(--c);}
 .alg-name{font-weight:600;font-size:13px;letter-spacing:-.01em;}
 
 /* ── Canvas ── */
@@ -317,16 +321,16 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 <h2 class="alg-cards-label">Val av algoritm</h2>
 <div class="alg-cards" role="radiogroup" aria-label="Välj algoritm" id="algCards">
   <button class="alg-card" style="--c:#ec4899" data-alg="BFS" role="radio" aria-checked="false">
-    <span class="alg-dot"></span><span class="alg-name">BFS</span>
+    <span class="alg-dot"></span><span class="alg-name">BFS</span><span class="alg-info" role="button" tabindex="0" aria-label="Visa förklaring" title="Visa förklaring">?</span>
   </button>
   <button class="alg-card" style="--c:#a06bff" data-alg="DFS" role="radio" aria-checked="false">
-    <span class="alg-dot"></span><span class="alg-name">DFS</span>
+    <span class="alg-dot"></span><span class="alg-name">DFS</span><span class="alg-info" role="button" tabindex="0" aria-label="Visa förklaring" title="Visa förklaring">?</span>
   </button>
   <button class="alg-card" style="--c:#2dd4bf" data-alg="A*" role="radio" aria-checked="false">
-    <span class="alg-dot"></span><span class="alg-name">A*</span>
+    <span class="alg-dot"></span><span class="alg-name">A*</span><span class="alg-info" role="button" tabindex="0" aria-label="Visa förklaring" title="Visa förklaring">?</span>
   </button>
   <button class="alg-card" style="--c:#f59e0b" data-alg="Greedy" role="radio" aria-checked="false">
-    <span class="alg-dot"></span><span class="alg-name">Girig bäst-först</span>
+    <span class="alg-dot"></span><span class="alg-name">Girig bäst-först</span><span class="alg-info" role="button" tabindex="0" aria-label="Visa förklaring" title="Visa förklaring">?</span>
   </button>
 </div>
 
@@ -503,21 +507,25 @@ const CONCEPTS={
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2.5"/><circle cx="12" cy="12" r="6.5" stroke-dasharray="2 3"/><circle cx="12" cy="12" r="10" stroke-dasharray="2 3"/></svg>',
     title:'BFS – Bredden-först',
     def:'<strong>BFS</strong> utforskar lager för lager med en <strong>kö</strong> – alla rutor på avstånd 1 innan avstånd 2, och så vidare. Garanterar kortast väg i antal steg, men inte i kostnad.'
+      +'<button class="gc-btn" onclick="closeConcept()">Jag förstår</button>'
   },
   'DFS':{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="4" rx="1"/><rect x="4" y="10" width="16" height="4" rx="1"/><rect x="4" y="16" width="16" height="4" rx="1"/></svg>',
     title:'DFS – Djupet-först',
     def:'<strong>DFS</strong> följer en väg så långt det går med en <strong>stack</strong>, och backar när den kör fast. Hittar ofta en väg snabbt – men sällan den kortaste.'
+      +'<button class="gc-btn" onclick="closeConcept()">Jag förstår</button>'
   },
   'A*':{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.4 5.9L21 10l-4.8 4.2L17.4 21 12 17.5 6.6 21l1.2-6.8L3 10l6.6-1.1L12 3z"/></svg>',
     title:'A* – Informerad sökning',
     def:'<strong>A*</strong> väljer rutan med lägst värde för kostnadsfunktionen <strong>f(n)</strong>. <strong>f(n)&nbsp;=&nbsp;g(n)&nbsp;+&nbsp;h(n)</strong> – kostnad hittills plus uppskattat avstånd kvar. Garanterat billigast, och ofta snabbare än en blind sökning.'
+      +'<button class="gc-btn" onclick="closeConcept()">Jag förstår</button>'
   },
   'Greedy':{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg>',
     title:'Girig bäst-först',
     def:'<strong>Girig bäst-först</strong> väljer alltid rutan som <em>ser ut att vara</em> närmast målet – utan att bry sig om vad den redan kostat. Snabb, men lätt att lura.'
+      +'<button class="gc-btn" onclick="closeConcept()">Jag förstår</button>'
   },
   bygga:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
@@ -1075,7 +1083,16 @@ document.getElementById('editHelpBtn').addEventListener('click',e=>{
 });
 
 /* ═══════════════ Knappar & tangentbord ═══════════════ */
+const seenAlgCards=new Set();
+document.getElementById('algCards').addEventListener('keydown',e=>{
+  if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('alg-info')){
+    e.preventDefault();
+    const card=e.target.closest('.alg-card');
+    if(card){seenAlgCards.add(card.dataset.alg);openConceptFrom(card.dataset.alg,card);}
+  }
+});
 document.getElementById('algCards').addEventListener('click',e=>{
+  const infoBtn=e.target.closest('.alg-info');
   const card=e.target.closest('.alg-card');if(!card)return;
   selectedAlg=card.dataset.alg;
   currentAlgorithm=selectedAlg;
@@ -1091,8 +1108,12 @@ document.getElementById('algCards').addEventListener('click',e=>{
   canvasContainer.classList.remove('alg-flash');
   void canvasContainer.offsetWidth;
   canvasContainer.classList.add('alg-flash');
-  // Visa förklaring för vald algoritm
-  openConceptFrom(selectedAlg,card);
+  // Förklaringen visas automatiskt första gången algoritmen väljs.
+  // Klick på (?)-knappen öppnar den igen när som helst.
+  if(infoBtn || !seenAlgCards.has(selectedAlg)){
+    seenAlgCards.add(selectedAlg);
+    openConceptFrom(selectedAlg,card);
+  }
 });
 let nudgeTimer=null;
 function showStartNudge(){
