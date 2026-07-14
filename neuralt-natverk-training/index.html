@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Träningslabbet – framåtpass & backpropagation · ai-aktiviteter.se</title>
+<title>Träna ett neuralt nätverk – framåtpass och backpropagation · ai-aktiviteter.se</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
@@ -133,6 +133,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .step-counter{font-family:'JetBrains Mono',monospace;font-size:1.15em;text-transform:none;letter-spacing:0;color:var(--accent2);font-weight:600;padding:2px 8px;background:var(--accent-dim);border-radius:999px;}
 .ctrl-legend{font-size:.68em;line-height:1.5;color:var(--dim2);margin-top:9px;}
 .ctrl-legend b{color:var(--dim);font-weight:700;}
+.ctrl-block.done-block{border-color:rgba(51,209,122,.35);background:linear-gradient(160deg,var(--surface2),rgba(51,209,122,.05));}
+.predict-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;}
+.predict-btn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 6px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);cursor:pointer;transition:.18s var(--ease-out);font-family:'DM Sans',sans-serif;}
+.predict-btn:hover{border-color:var(--green);background:rgba(51,209,122,.08);}
+.predict-btn.active{border-color:var(--green);background:rgba(51,209,122,.14);box-shadow:0 0 0 1px rgba(51,209,122,.25) inset;}
+.predict-btn .pb-in{font-family:'JetBrains Mono',monospace;font-size:.82em;font-weight:700;color:var(--text);}
+.predict-btn .pb-exp{font-size:.62em;color:var(--dim2);}
+.predict-btn.active .pb-exp{color:var(--green);}
+.rbox .rv .verdict-ok{color:var(--green);}
+.rbox .rv .verdict-bad{color:var(--red);}
 
 /* center */
 .center{display:flex;flex-direction:column;gap:10px;min-height:0;}
@@ -157,6 +167,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .flow-badge.show{display:inline-flex;}
 .flow-badge.forward{background:rgba(77,128,255,.16);border:1px solid rgba(122,162,255,.4);color:var(--accent2);}
 .flow-badge.backward{background:rgba(255,159,69,.14);border:1px solid rgba(255,159,69,.4);color:var(--amber);}
+.flow-badge.done{background:rgba(51,209,122,.14);border:1px solid rgba(51,209,122,.45);color:var(--green);}
 .canvas-hint{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:.66em;color:var(--dim2);background:rgba(6,7,14,.6);padding:4px 11px;border-radius:999px;border:1px solid var(--border-soft);backdrop-filter:blur(6px);white-space:nowrap;}
 
 /* narration */
@@ -251,16 +262,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 <div class="intro" id="intro">
   <div class="intro-card">
     <svg class="intro-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg>
-    <h2><span>Träningslabbet</span></h2>
-    <p class="sub">Här är själva inlärningen huvudpersonen. Följ ett träningsexempel genom hela loopen – och se hur felet flödar <strong style="color:var(--amber)">bakåt</strong> genom nätverket och justerar varje vikt.</p>
+    <h2><span>Träna ett neuralt nätverk</span></h2>
+    <p class="sub">Här får du se hur ett neuralt nätverk faktiskt lär sig. Vi följer ett träningsexempel hela vägen runt och ser hur felet vandrar <strong style="color:var(--amber)">bakåt</strong> genom nätverket och justerar varje vikt en aning.</p>
     <div class="intro-loop">
-      <div class="intro-phase p1"><div class="ip-num">1</div><div><div class="ip-t">Framåtpass</div><div class="ip-d">Data flödar framåt och nätverket gissar ett svar ŷ.</div></div></div>
-      <div class="intro-phase p2"><div class="ip-num">2</div><div><div class="ip-t">Förlust</div><div class="ip-d">Gissningen jämförs med rätt svar. Skillnaden = felet.</div></div></div>
-      <div class="intro-phase p3"><div class="ip-num">3</div><div><div class="ip-t">Backpropagation</div><div class="ip-d">Felet skickas bakåt och delas ut på varje vikt.</div></div></div>
-      <div class="intro-phase p4"><div class="ip-num">4</div><div><div class="ip-t">Uppdatera</div><div class="ip-d">Varje vikt justeras en liten bit i rätt riktning.</div></div></div>
+      <div class="intro-phase p1"><div class="ip-num">1</div><div><div class="ip-t">Framåtpass</div><div class="ip-d">Datan flödar framåt genom nätverket, som gör en gissning.</div></div></div>
+      <div class="intro-phase p2"><div class="ip-num">2</div><div><div class="ip-t">Förlust</div><div class="ip-d">Vi jämför gissningen med det rätta svaret och mäter hur fel den blev.</div></div></div>
+      <div class="intro-phase p3"><div class="ip-num">3</div><div><div class="ip-t">Backpropagation</div><div class="ip-d">Felet skickas bakåt och fördelas på nätverkets alla vikter.</div></div></div>
+      <div class="intro-phase p4"><div class="ip-num">4</div><div><div class="ip-t">Uppdatera</div><div class="ip-d">Varje vikt justeras en aning i den riktning som minskar felet.</div></div></div>
     </div>
     <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Öppna labbet <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-    <p class="intro-tip">Tryck <strong>Nästa beräkning</strong> för att gå framåt ett steg i taget. <strong>Klicka på en koppling eller neuron</strong> i nätverket för att se just den beräkningen.</p>
+    <p class="intro-tip">Tryck på <strong>Nästa beräkning</strong> för att gå framåt ett steg i taget. Du kan också klicka på en koppling eller en neuron i nätverket för att se just den beräkningen.</p>
   </div>
 </div>
 
@@ -268,22 +279,22 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
   <a class="back-link" href="#"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> AI-aktiviteter</a>
   <div class="hd-title-row">
     <svg class="hd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg>
-    <h1><span>Träningslabbet</span></h1>
+    <h1><span>Träna ett neuralt nätverk</span></h1>
   </div>
-  <p>Framåtpass &amp; backpropagation – steg för steg genom hur ett neuralt nätverk lär sig.</p>
+  <p>Följ hur nätverket lär sig, steg för steg – från slumpmässig gissning till färdigtränad modell.</p>
 </div>
 
 <div class="app">
   <!-- LEFT -->
   <div class="lp">
     <div><div class="sec-t">Välj vad nätverket ska lära sig</div><div class="prob-cards" id="probCards"></div>
-      <div class="prob-hint"><b>Tips:</b> klicka på <span style="display:inline-flex;width:15px;height:15px;border-radius:50%;border:1px solid var(--dim2);align-items:center;justify-content:center;font-size:.8em;font-weight:700">?</span> för att förstå varje grind.</div>
+      <div class="prob-hint">Klicka på frågetecknet <span style="display:inline-flex;width:15px;height:15px;border-radius:50%;border:1px solid var(--dim2);align-items:center;justify-content:center;font-size:.8em;font-weight:700">?</span> vid en grind för att läsa vad den gör.</div>
     </div>
     <div><table class="dtable" id="dataTable"></table><div class="hint" id="dataHint"></div></div>
     <div>
       <div class="sec-t">Inlärningstakt (η)</div>
       <div class="slider-row"><span class="slider-lbl">η</span><input type="range" class="slider" id="lrSlider" min="5" max="150" step="5" value="60" oninput="onLr()"><span class="slider-val" id="lrVal">0.60</span></div>
-      <div class="hint">Hur stort steg vikterna tar vid varje uppdatering. Litet = långsamt men stabilt, stort = snabbt men hoppigt.</div>
+      <div class="hint">Inlärningstakten bestämmer hur stort steg vikterna tar varje gång de justeras. En liten takt ger långsam men stabil inlärning, medan en stor takt går fortare men kan bli hoppig.</div>
     </div>
   </div>
 
@@ -293,28 +304,19 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
     <div class="canvas-wrap">
       <canvas id="cv"></canvas>
       <div class="flow-badge" id="flowBadge"></div>
-      <div class="canvas-hint">Klicka på en koppling eller neuron för att se dess beräkning</div>
+      <div class="canvas-hint">Klicka på en koppling eller en neuron för att se dess beräkning</div>
     </div>
     <div class="narr" id="narr"></div>
-    <div class="ctrl-block">
-      <div class="ctrl-label">Steg för steg <span class="step-counter" id="stepCounter">redo</span></div>
-      <button class="btn pri big" id="btnStep" onclick="nextStep()" style="width:100%">▶ Nästa beräkning</button>
-      <button class="btn" onclick="runOneIteration()" style="width:100%;margin-top:6px">↻ Spela hela varvet</button>
-      <div class="ctrl-legend"><b>Nästa beräkning</b> = ta ett litet steg framåt. <b>Spela hela varvet</b> = kör alla fyra faser för det aktuella exemplet på en gång.</div>
-      <div class="bg" style="margin-top:9px">
-        <button class="btn grn" id="btnAuto" onclick="toggleAuto()">⏩ Träna färdigt automatiskt</button>
-        <button class="btn dn" onclick="resetTraining()" title="Nollställ vikterna">↺</button>
-      </div>
-    </div>
+    <div class="ctrl-block" id="controlPanel"></div>
   </div>
 
   <!-- RIGHT -->
   <div class="rp">
     <div class="mathbox" id="mathbox"></div>
-    <div class="result-boxes">
-      <div class="rbox"><div class="rl">Gissning ŷ</div><div class="rv" id="rPred" style="color:var(--accent2)">–</div></div>
-      <div class="rbox"><div class="rl">Rätt svar y</div><div class="rv" id="rTarget" style="color:var(--gold)">–</div></div>
-      <div class="rbox wide"><div class="rl">Förlust detta exempel</div><div class="rv" id="rLoss" style="color:var(--amber);font-size:1.05em">–</div></div>
+    <div class="result-boxes" id="resultBoxes">
+      <div class="rbox"><div class="rl">Nätverkets gissning (ŷ)</div><div class="rv" id="rPred" style="color:var(--accent2)">–</div></div>
+      <div class="rbox"><div class="rl">Rätt svar (y)</div><div class="rv" id="rTarget" style="color:var(--gold)">–</div></div>
+      <div class="rbox wide"><div class="rl" id="rLossLabel">Förlust för detta exempel</div><div class="rv" id="rLoss" style="color:var(--amber);font-size:1.05em">–</div></div>
     </div>
     <div class="loss-panel">
       <div class="lp-hd"><span class="t">Förlust över epoker</span><span class="v" id="epochLoss">–</span></div>
@@ -360,13 +362,13 @@ function texRows(container,rows){
 const GATE_INTRO='Det här är en <strong>logisk grind</strong> – en enkel regel med två insignaler, <strong>x₁</strong> och <strong>x₂</strong>. Var och en är antingen <strong>0</strong> (av) eller <strong>1</strong> (på). Nätverket ska lära sig att ge rätt svar för alla fyra kombinationerna.';
 const PROBLEMS={
   and:{icon:'∧',title:'OCH-grinden',longname:'logiskt OCH (AND)',short:'Ja bara när båda ingångarna är 1',
-    explain:`${GATE_INTRO}<br><br><strong>OCH-regeln:</strong> svaret blir Ja bara när <strong>båda</strong> ingångarna är 1. Räcker det med en etta blir svaret Nej.<br><br>Som två strömbrytare i serie – lampan lyser först när båda är på. Detta är det enklaste fallet: en rät linje kan skilja Ja från Nej, så nätverket lär sig snabbt.`,
+    explain:`${GATE_INTRO}<br><br>I en OCH-grind blir svaret Ja bara när <strong>båda</strong> ingångarna är 1. Så fort minst en av dem är 0 blir svaret Nej.<br><br>Du kan tänka dig två strömbrytare som sitter i serie. Lampan lyser först när båda är påslagna. Det här är det enklaste fallet att lära in, eftersom en enda rät linje räcker för att skilja Ja från Nej.`,
     data:[{x:[0,0],y:0},{x:[0,1],y:0},{x:[1,0],y:0},{x:[1,1],y:1}]},
   or:{icon:'∨',title:'ELLER-grinden',longname:'logiskt ELLER (OR)',short:'Ja när minst en ingång är 1',
-    explain:`${GATE_INTRO}<br><br><strong>ELLER-regeln:</strong> svaret blir Ja när <strong>minst en</strong> av de två ingångarna är 1. Bara när <strong>båda</strong> är 0 blir svaret Nej.<br><br>Som två strömbrytare parallellt – det räcker att en är på för att lampan ska lysa. Också linjärt separerbart, så en rät linje räcker.`,
+    explain:`${GATE_INTRO}<br><br>I en ELLER-grind blir svaret Ja så snart <strong>minst en</strong> av de två ingångarna är 1. Bara när <strong>båda</strong> är 0 blir svaret Nej.<br><br>Du kan tänka dig två strömbrytare som sitter parallellt. Det räcker att en av dem är påslagen för att lampan ska lysa. Även det här fallet går att lösa med en enda rät linje.`,
     data:[{x:[0,0],y:0},{x:[0,1],y:1},{x:[1,0],y:1},{x:[1,1],y:1}]},
   xor:{icon:'⊕',title:'XOR-grinden',longname:'exklusivt ELLER (XOR)',short:'Ja när exakt en ingång är 1',
-    explain:`${GATE_INTRO}<br><br><strong>XOR-regeln:</strong> svaret blir Ja när <strong>exakt en</strong> av ingångarna är 1 – men Nej om båda är 0 eller båda är 1.<br><br>Som en trappströmbrytare: två brytare styr samma lampa, och att ändra endera byter ljuset.<br><br><span style="color:#ffb98a">⚠ XOR går inte att skilja med en enda rät linje. Därför behövs det dolda lagret – och därför tar XOR fler epoker att lära in.</span>`,
+    explain:`${GATE_INTRO}<br><br>I en XOR-grind blir svaret Ja när <strong>exakt en</strong> av ingångarna är 1. Är båda 0, eller båda 1, blir svaret Nej.<br><br>Du kan tänka dig en trappströmbrytare, där två brytare styr samma lampa. Ändrar du läget på endera brytaren byter lampan tillstånd.<br><br><span style="color:#ffb98a">Det speciella med XOR är att svaren inte går att skilja åt med en enda rät linje. Det är just därför nätverket behöver ett dolt lager, och därför XOR tar fler epoker att lära sig än de andra grindarna.</span>`,
     data:[{x:[0,0],y:0},{x:[0,1],y:1},{x:[1,0],y:1},{x:[1,1],y:0}]}
 };
 
@@ -376,16 +378,17 @@ let w1,bh,w2,bo;
 let lr=0.60;
 let exampleIdx=0;
 let epoch=0, lossHistory=[];
-let running=false, runTimer=null;
+let running=false, runTimer=null, autoKicks=0;
+let trained=false, predictIdx=0;
 let C={};
 let stepIdx=-1;
 let flowAnim=null, flowStart=0, flowDir='forward', flowEdges=[];
 let updateFlash=null, updateFlashStart=0;
 
 function sig(z){return 1/(1+Math.exp(-z));}
-function rnd(){return (Math.random()*2-1)*0.8;}
+function rnd(){return (Math.random()*2-1)*1.4;}
 function initParams(){
-  w1=[[rnd(),rnd()],[rnd(),rnd()]];bh=[rnd()*0.3,rnd()*0.3];w2=[rnd(),rnd()];bo=rnd()*0.3;
+  w1=[[rnd(),rnd()],[rnd(),rnd()]];bh=[rnd()*0.4,rnd()*0.4];w2=[rnd(),rnd()];bo=rnd()*0.4;
 }
 
 function computeIteration(){
@@ -441,13 +444,16 @@ function advanceExample(){
   if(exampleIdx===0)recordEpoch();
   stepIdx=-1;C={};renderIdle();renderData();updateResults();drawNet();
 }
-function recordEpoch(){
+function computeAvgLoss(){
   let tot=0;const d=PROBLEMS[prob].data;
   for(const ex of d){const zh=[0,0],ah=[0,0];
     for(let j=0;j<2;j++){zh[j]=bh[j]+w1[j][0]*ex.x[0]+w1[j][1]*ex.x[1];ah[j]=sig(zh[j]);}
     const zo=bo+w2[0]*ah[0]+w2[1]*ah[1];const yhat=sig(zo);tot+=0.5*(yhat-ex.y)*(yhat-ex.y);}
-  epoch++;lossHistory.push(tot/d.length);
-  document.getElementById('epochLoss').textContent=(tot/d.length).toFixed(4);
+  return tot/d.length;
+}
+function recordEpoch(){
+  epoch++;const L=computeAvgLoss();lossHistory.push(L);
+  document.getElementById('epochLoss').textContent=L.toFixed(4);
   document.getElementById('epochLabel').textContent='Epok '+epoch;
   drawLossChart();
 }
@@ -459,21 +465,78 @@ function runOneIteration(){
 }
 function toggleAuto(){
   if(running){stopAuto();return;}
-  running=true;stepIdx=-1;renderControls();
+  running=true;trained=false;autoKicks=0;stepIdx=-1;renderControls();
   document.getElementById('flowBadge').classList.remove('show');
   runTimer=setInterval(()=>{
     const d=PROBLEMS[prob].data;
-    for(let e=0;e<d.length;e++){exampleIdx=e;computeIteration();applyUpdate();}
-    exampleIdx=0;recordEpoch();updateResults();drawNet();
-    const last=lossHistory[lossHistory.length-1];
-    if(epoch>=4000||last<0.0008)stopAuto();
+    for(let k=0;k<6;k++){
+      for(let e=0;e<d.length;e++){exampleIdx=e;computeIteration();applyUpdate();}
+      epoch++;
+    }
+    exampleIdx=0;
+    const L=computeAvgLoss();
+    const basicallyDone=allCorrect()&&L<0.02;
+    // If training has clearly stalled in a bad local minimum, restart from a fresh
+    // random initialisation. This makes even the tricky XOR converge reliably.
+    if(!basicallyDone && ((epoch>=2000 && L>0.12) || epoch>=5500)){
+      if(autoKicks<8){autoKicks++;initParams();epoch=0;lossHistory=[];drawLossChart();drawNet();return;}
+      stopAuto();return;
+    }
+    lossHistory.push(L);
+    document.getElementById('epochLoss').textContent=L.toFixed(4);
+    document.getElementById('epochLabel').textContent='Epok '+epoch;
+    drawLossChart();updateResults();drawNet();
+    if(allCorrect()&&L<0.005){finishTraining();}
   },16);
 }
 function stopAuto(){running=false;if(runTimer){clearInterval(runTimer);runTimer=null;}stepIdx=-1;C={};renderControls();renderIdle();renderData();updateResults();drawNet();}
+/* did the trained network classify every example correctly? */
+function allCorrect(){
+  const d=PROBLEMS[prob].data;
+  for(const ex of d){const zh=[0,0],ah=[0,0];
+    for(let j=0;j<2;j++){zh[j]=bh[j]+w1[j][0]*ex.x[0]+w1[j][1]*ex.x[1];ah[j]=sig(zh[j]);}
+    const zo=bo+w2[0]*ah[0]+w2[1]*ah[1];const yhat=sig(zo);
+    if(Math.round(yhat)!==ex.y)return false;}
+  return true;
+}
 function resetTraining(){
-  stopAuto();initParams();epoch=0;lossHistory=[];exampleIdx=0;stepIdx=-1;C={};
+  stopAuto();trained=false;initParams();epoch=0;lossHistory=[];exampleIdx=0;stepIdx=-1;C={};
   document.getElementById('epochLoss').textContent='–';document.getElementById('epochLabel').textContent='–';
   renderIdle();renderData();updateResults();drawLossChart();drawNet();
+}
+
+/* ============================ TRAINED / PREDICTION MODE ============================ */
+function finishTraining(){
+  running=false;if(runTimer){clearInterval(runTimer);runTimer=null;}
+  trained=true;stepIdx=-1;
+  const badge=document.getElementById('flowBadge');
+  badge.className='flow-badge done show';badge.innerHTML='✓ FÄRDIGTRÄNAT NÄTVERK';
+  setPhaseBar(null,true);
+  const last=lossHistory[lossHistory.length-1];
+  const mb=document.getElementById('mathbox');
+  mb.innerHTML=`<span class="mb-tag update">Klart</span>
+    <h4>Nätverket är färdigtränat!</h4>
+    <div class="mb-desc">Efter ${epoch} epoker av framåtpass och backpropagation har vikterna hittat värden som gör att nätverket svarar rätt på alla exempel. Förlusten har sjunkit ända ner till ${last.toFixed(4)}.<br><br>Från och med nu ändrar vi inte längre vikterna. Nätverket är tränat, och vi kan börja <strong>använda</strong> det. Att mata in ny data och läsa av svaret kallas att göra en <strong style="color:var(--green)">förutsägelse</strong>.<br><br>Prova själv: välj en kombination nedanför nätverket och se att den tränade modellen svarar rätt.</div>`;
+  renderControls();
+  document.getElementById('rLossLabel').textContent='Stämmer förutsägelsen?';
+  predictExample(0);
+}
+function predictExample(i){
+  predictIdx=i;exampleIdx=i;
+  computeIteration();          // forward values land in C (gradients unused here)
+  stepIdx=99;                  // reveal every neuron, no deltas, no update colouring
+  drawNet();
+  const ex=PROBLEMS[prob].data[i];
+  const correct=Math.round(C.yhat)===ex.y;
+  document.getElementById('rPred').textContent=C.yhat.toFixed(3);
+  document.getElementById('rTarget').textContent=ex.y;
+  document.getElementById('rLoss').innerHTML=correct
+    ? '<span class="verdict-ok">✓ Ja, rätt svar</span>'
+    : '<span class="verdict-bad">✗ Nej, fel</span>';
+  const rounded=Math.round(C.yhat);
+  document.getElementById('narr').innerHTML=`Nätverket får in <strong>x₁ = ${ex.x[0]}</strong> och <strong>x₂ = ${ex.x[1]}</strong> och svarar <span class="mono" style="color:var(--gold)">${C.yhat.toFixed(3)}</span>. Avrundat blir det <strong>${rounded}</strong>, alltså "${rounded?'Ja':'Nej'}" – och det ${correct?'stämmer med':'stämmer inte med'} facit.`;
+  renderControls();
+  renderData();
 }
 
 /* ============================ LEFT: PROBLEM / DATA ============================ */
@@ -490,7 +553,7 @@ function openGateInfo(key){
   document.getElementById('conceptIcon').innerHTML=`<span style="font-size:27px;font-weight:800;line-height:1">${p.icon}</span>`;
   document.getElementById('conceptTitle').textContent=`${p.title} · ${p.longname}`;
   document.getElementById('conceptDef').innerHTML=p.explain;
-  let t='<table class="mini-tt"><caption>Sanningstabell – detta ska nätverket lära sig</caption><thead><tr><th>x₁</th><th>x₂</th><th>Rätt svar</th></tr></thead><tbody>';
+  let t='<table class="mini-tt"><caption>Sanningstabellen visar det rätta svaret för varje kombination av ingångar.</caption><thead><tr><th>x₁</th><th>x₂</th><th>Rätt svar</th></tr></thead><tbody>';
   p.data.forEach(ex=>{t+=`<tr><td>${ex.x[0]}</td><td>${ex.x[1]}</td><td class="${ex.y?'ja':'nej'}">${ex.y?'Ja (1)':'Nej (0)'}</td></tr>`;});
   t+='</tbody></table>';
   document.getElementById('conceptFormula').innerHTML=t;
@@ -500,15 +563,16 @@ function openGateInfo(key){
 function setProblem(k){prob=k;renderProbCards();resetTraining();}
 function renderData(){
   const d=PROBLEMS[prob].data;
-  let h='<caption>Sanningstabell — <em style="color:var(--gold);font-style:normal">y</em> är facit nätverket ska lära sig</caption><thead><tr><th>x₁</th><th>x₂</th><th>y (facit)</th></tr></thead><tbody>';
+  let h='<caption>Sanningstabellen visar det rätta svaret för varje kombination av ingångar.</caption><thead><tr><th>x₁</th><th>x₂</th><th>Rätt svar (y)</th></tr></thead><tbody>';
   d.forEach((ex,i)=>{
     h+=`<tr class="${(i===exampleIdx&&!running)?'cur':''}"><td>${ex.x[0]}</td><td>${ex.x[1]}</td><td class="ty">${ex.y} <span class="${ex.y?'yja':'ynej'}">(${ex.y?'Ja':'Nej'})</span></td></tr>`;
   });
   h+='</tbody>';
   document.getElementById('dataTable').innerHTML=h;
-  document.getElementById('dataHint').innerHTML=running
-    ?'Tränar automatiskt på alla rader…'
-    :`Nätverket tränar just nu på rad <strong style="color:var(--accent2)">${exampleIdx+1}</strong>. En runda genom alla rader = en <strong>epok</strong>.`;
+  document.getElementById('dataHint').innerHTML=
+    trained?'Nätverket är färdigtränat. Klicka på en rad här, eller på en knapp under nätverket, för att testa en förutsägelse.'
+    :running?'Nätverket tränar automatiskt på alla rader just nu.'
+    :`Just nu tränar nätverket på rad <strong style="color:var(--accent2)">${exampleIdx+1}</strong>. När det har gått igenom alla raderna en gång kallas det för en <strong>epok</strong>.`;
 }
 function onLr(){lr=parseInt(document.getElementById('lrSlider').value)/100;document.getElementById('lrVal').textContent=lr.toFixed(2);}
 
@@ -520,17 +584,31 @@ function stepCounterText(){
   return `${arr.indexOf(stepIdx)+1} / ${arr.length}`;
 }
 function renderControls(){
-  const btnStep=document.getElementById('btnStep');
-  const btnAuto=document.getElementById('btnAuto');
-  document.getElementById('stepCounter').textContent=running?'auto':stepCounterText();
-  if(running){
-    btnStep.disabled=true;btnStep.textContent='▶ Nästa beräkning';
-    btnAuto.textContent='⏸ Pausa autoträning';btnAuto.classList.add('pri');btnAuto.classList.remove('grn');
+  const el=document.getElementById('controlPanel');
+  if(trained){
+    el.className='ctrl-block done-block';
+    const d=PROBLEMS[prob].data;
+    const btns=d.map((ex,i)=>`<button class="predict-btn ${i===predictIdx?'active':''}" onclick="predictExample(${i})"><span class="pb-in">x₁ = ${ex.x[0]}, x₂ = ${ex.x[1]}</span><span class="pb-exp">Facit: ${ex.y?'Ja':'Nej'}</span></button>`).join('');
+    el.innerHTML=`<div class="ctrl-label" style="color:var(--green)">Testa den tränade modellen</div>
+      <div class="predict-grid">${btns}</div>
+      <div class="ctrl-legend">Välj en kombination, så matar vi in den i det färdigtränade nätverket och läser av svaret. Nu ändras inga vikter – nätverket bara används.</div>
+      <button class="btn" style="width:100%;margin-top:9px" onclick="resetTraining()">↺ Träna om nätverket från början</button>`;
     return;
   }
-  btnStep.disabled=false;btnAuto.classList.remove('pri');btnAuto.classList.add('grn');btnAuto.textContent='⏩ Träna färdigt automatiskt';
+  el.className='ctrl-block';
+  const counter=running?'auto':stepCounterText();
   const atEnd=stepIdx>=STEPS.length-1;
-  btnStep.textContent=stepIdx<0?'▶ Starta framåtpasset':atEnd?'✓ Slutför & nästa exempel':'▶ Nästa beräkning';
+  const stepLabel=stepIdx<0?'▶ Starta framåtpasset':atEnd?'✓ Slutför och gå vidare':'▶ Nästa beräkning';
+  const autoLabel=running?'⏸ Pausa träningen':'⏩ Träna färdigt automatiskt';
+  el.innerHTML=`
+    <div class="ctrl-label">Steg för steg <span class="step-counter">${counter}</span></div>
+    <button class="btn pri big" onclick="nextStep()" ${running?'disabled':''} style="width:100%">${stepLabel}</button>
+    <button class="btn" onclick="runOneIteration()" ${running?'disabled':''} style="width:100%;margin-top:6px">↻ Spela upp hela varvet</button>
+    <div class="ctrl-legend"><b>Nästa beräkning</b> tar dig ett litet steg framåt. <b>Spela upp hela varvet</b> kör alla fyra faserna för det aktuella exemplet på en gång.</div>
+    <div class="bg" style="margin-top:9px">
+      <button class="btn ${running?'pri':'grn'}" onclick="toggleAuto()">${autoLabel}</button>
+      <button class="btn dn" onclick="resetTraining()" title="Nollställ vikterna och börja om">↺</button>
+    </div>`;
 }
 
 /* ============================ MATH BOX / NARRATION ============================ */
@@ -542,20 +620,21 @@ const CB='#7aa2ff', CG='#33d17a', CR='#ef5b6b', CA='#ff9f45', CGO='#ffce54', CD=
 function renderIdle(){
   stepIdx=-1;setPhaseBar(null);
   document.getElementById('flowBadge').classList.remove('show');
+  document.getElementById('rLossLabel').textContent='Förlust för detta exempel';
   const ex=PROBLEMS[prob].data[exampleIdx];
   const mb=document.getElementById('mathbox');
-  mb.innerHTML=`<span class="mb-tag idle">redo</span>
-     <h4>Klar för nästa träningsvarv</h4>
-     <div class="mb-idle">Nätverket ska lära sig av exempel <strong style="color:var(--accent2)">x₁=${ex.x[0]}, x₂=${ex.x[1]}</strong> med facit <em>y=${ex.y}</em>.<br><br>Tryck <strong>▶ Starta framåtpasset</strong> för att skicka in exemplet och låta nätverket gissa. Varje beräkning visas här med sin formel.</div>`;
-  document.getElementById('narr').innerHTML=`Ett träningsvarv = <strong>framåtpass → förlust → backpropagation → uppdatera</strong>. Varje varv gör nätverket lite mindre fel.`;
+  mb.innerHTML=`<span class="mb-tag idle">Redo</span>
+     <h4>Redo för nästa träningsvarv</h4>
+     <div class="mb-idle">Nätverket ska nu lära sig av ett exempel där ingångarna är <strong style="color:var(--accent2)">x₁ = ${ex.x[0]}</strong> och <strong style="color:var(--accent2)">x₂ = ${ex.x[1]}</strong>, och det rätta svaret är <em>${ex.y}</em>.<br><br>Tryck på <strong>Starta framåtpasset</strong> för att skicka in exemplet och låta nätverket göra en gissning. Varje beräkning på vägen visas här, med både formel och siffror.</div>`;
+  document.getElementById('narr').innerHTML=`Ett träningsvarv består av fyra faser: först ett <strong>framåtpass</strong>, sedan mäter vi <strong>förlusten</strong>, därefter <strong>backpropagation</strong> och till sist <strong>uppdaterar</strong> vi vikterna. Varje varv gör nätverket lite mindre fel.`;
   renderControls();
 }
-function setPhaseBar(activePhase){
+function setPhaseBar(activePhase, allDone){
   const phases=[{k:'forward',n:'1',l:'Framåtpass'},{k:'loss',n:'2',l:'Förlust'},{k:'backward',n:'3',l:'Backprop'},{k:'update',n:'4',l:'Uppdatera'}];
   const order={forward:0,loss:1,backward:2,update:3};
   const ai=activePhase!=null?order[activePhase]:-1;let h='';
   phases.forEach((p,i)=>{
-    const active=p.k===activePhase,done=ai>i;
+    const active=p.k===activePhase,done=allDone||ai>i;
     h+=`<div class="phase-chip p-${p.k} ${active?'active':''} ${done?'done':''}"><span class="pc-n">FAS ${p.n}</span><span class="pc-l">${p.l}</span></div>`;
     if(i<phases.length-1)h+=`<svg class="phase-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
   });
@@ -566,8 +645,8 @@ function renderStep(){
   const st=STEPS[stepIdx];
   setPhaseBar(st.phase);renderControls();
   const badge=document.getElementById('flowBadge');
-  if(st.phase==='forward'){badge.className='flow-badge forward show';badge.innerHTML='→ SIGNAL FLÖDAR FRAMÅT';}
-  else if(st.phase==='backward'){badge.className='flow-badge backward show';badge.innerHTML='← FEL FLÖDAR BAKÅT';}
+  if(st.phase==='forward'){badge.className='flow-badge forward show';badge.innerHTML='Signalen flödar framåt →';}
+  else if(st.phase==='backward'){badge.className='flow-badge backward show';badge.innerHTML='← Felet flödar bakåt';}
   else badge.classList.remove('show');
 
   const mb=document.getElementById('mathbox');
@@ -576,90 +655,90 @@ function renderStep(){
   if(st.kind==='fwd-h'){
     const j=st.j,x=C.x;
     tagCls='forward';tagTxt='Fas 1 · Framåtpass';title=`Dold neuron ${j+1} räknar`;
-    desc='Neuronen multiplicerar varje indata med sin vikt, adderar bias, och kör summan genom <strong>sigmoid</strong>.';
+    desc='Neuronen multiplicerar varje ingång med sin vikt, lägger till sin bias och kör resultatet genom aktiveringsfunktionen <strong>sigmoid</strong>, som pressar in värdet mellan 0 och 1.';
     rows=[
       {cls:'gen',tex:`z = w_{1}x_{1} + w_{2}x_{2} + b`,plain:'z = w1·x1 + w2·x2 + b'},
       {cls:'num',tex:`z = (${f(w1[j][0])})(${x[0]}) + (${f(w1[j][1])})(${x[1]}) + (${f(bh[j])}) = ${f(C.zh[j])}`,plain:`z = ${f(C.zh[j])}`},
       {cls:'res',tex:`a_{${j+1}} = \\sigma(z) = ${col(CB,fp(C.ah[j]))}`,plain:`a${j+1} = σ(z) = ${fp(C.ah[j])}`}
     ];
-    narr=`Dold neuron <strong>${j+1}</strong> aktiveras till <span class="mono">${fp(C.ah[j])}</span>. Nära 1 = "starkt på", nära 0 = "av".`;
+    narr=`Dold neuron <strong>${j+1}</strong> aktiveras till <span class="mono">${fp(C.ah[j])}</span>. Ett värde nära 1 betyder att neuronen är starkt på, och nära 0 att den är av.`;
     flowForward([[0,0,1,j],[0,1,1,j]]);
   }
   else if(st.kind==='fwd-out'){
     tagCls='forward';tagTxt='Fas 1 · Framåtpass';title='Utneuronen gissar';
-    desc='Samma steg igen, men nu med de dolda neuronernas värden som indata. Resultatet <em>ŷ</em> är nätverkets gissning.';
+    desc='Nu gör utneuronen samma sak, fast med de dolda neuronernas värden som ingångar. Resultatet <em>ŷ</em> är nätverkets slutgiltiga gissning.';
     rows=[
       {cls:'gen',tex:`\\hat{y} = \\sigma(w_{1}a_{1} + w_{2}a_{2} + b)`,plain:'ŷ = σ(w1·a1 + w2·a2 + b)'},
       {cls:'num',tex:`z = (${f(w2[0])})(${fp(C.ah[0])}) + (${f(w2[1])})(${fp(C.ah[1])}) + (${f(bo)}) = ${f(C.zo)}`,plain:`z = ${f(C.zo)}`},
       {cls:'res gold',tex:`\\hat{y} = \\sigma(${f(C.zo)}) = ${col(CGO,fp(C.yhat))}`,plain:`ŷ = ${fp(C.yhat)}`}
     ];
-    narr=`Nätverket gissar <span class="mono" style="color:var(--gold)">ŷ = ${fp(C.yhat)}</span>. Rätt svar är <strong style="color:var(--gold)">y = ${C.y}</strong>.`;
+    narr=`Nätverket gissar <span class="mono" style="color:var(--gold)">${fp(C.yhat)}</span>, medan det rätta svaret är <strong style="color:var(--gold)">${C.y}</strong>.`;
     flowForward([[1,0,2,0],[1,1,2,0]]);
   }
   else if(st.kind==='loss'){
     const diff=C.yhat-C.y;
     tagCls='loss';tagTxt='Fas 2 · Förlust';title='Hur fel var gissningen?';
-    desc='Förlusten mäter avståndet mellan gissning och facit med <strong>halva kvadratfelet</strong> – kvadraten straffar stora fel hårdare.';
+    desc='Förlusten mäter hur långt gissningen ligger från det rätta svaret. Vi använder halva kvadratfelet, eftersom kvadraten gör att stora fel straffas hårdare än små.';
     rows=[
       {cls:'gen',tex:`L = \\tfrac{1}{2}(\\hat{y}-y)^2`,plain:'L = ½(ŷ − y)²'},
       {cls:'num',tex:`L = \\tfrac{1}{2}(${fp(C.yhat)}-${C.y})^2 = \\tfrac{1}{2}(${f(diff)})^2`,plain:`L = ½(${f(diff)})²`},
       {cls:'res amber',tex:`L = ${col(CA,fp(C.loss,4))}`,plain:`L = ${fp(C.loss,4)}`}
     ];
-    narr=`Felet är <span class="mono" style="color:var(--amber)">${f(diff)}</span>. Målet med hela träningen: göra förlusten <strong>L</strong> så liten som möjligt.`;
+    narr=`Just nu är gissningen fel med <span class="mono" style="color:var(--amber)">${f(diff)}</span>. Målet med hela träningen är att göra den här förlusten så liten som möjligt.`;
     badge.classList.remove('show');
   }
   else if(st.kind==='back-out'){
     tagCls='backward';tagTxt='Fas 3 · Backpropagation';title='Felsignal vid utgången';
-    desc='Nu vänder vi. Vi räknar hur känslig förlusten är för utneuronens summa – det kallas <strong>δ</strong> (delta) och bär med sig både felet och sigmoids lutning.';
+    desc='Nu vänder vi riktning. Vi räknar ut hur känslig förlusten är för utneuronens summa. Det värdet kallas <strong>delta</strong> (δ) och bär med sig både felet och sigmoidkurvans lutning.';
     rows=[
       {cls:'gen',tex:`\\delta_{ut} = (\\hat{y}-y)\\cdot \\hat{y}(1-\\hat{y})`,plain:'δut = (ŷ−y)·ŷ(1−ŷ)'},
       {cls:'num',tex:`\\delta_{ut} = (${fp(C.yhat)}-${C.y})(${fp(C.yhat)})(1-${fp(C.yhat)})`,plain:`δut = ${f(C.dOut)}`},
       {cls:'res amber',tex:`\\delta_{ut} = ${col(CA,f(C.dOut))}`,plain:`δut = ${f(C.dOut)}`}
     ];
-    narr=`Utgångens felsignal <span class="mono" style="color:var(--amber)">δ = ${f(C.dOut)}</span>. Tecknet talar om för vikterna om de ska upp eller ner.`;
+    narr=`Utgångens felsignal blev <span class="mono" style="color:var(--amber)">${f(C.dOut)}</span>. Dess tecken avgör om vikterna ska öka eller minska.`;
     flowBackward([[1,0,2,0],[1,1,2,0]]);
   }
   else if(st.kind==='back-gw2'){
     tagCls='backward';tagTxt='Fas 3 · Backpropagation';title='Gradient för utvikterna';
-    desc='Hur mycket varje utvikt bidrog till felet = felsignalen × den inkommande aktiveringen. Det är <strong>kedjeregeln</strong> i praktiken.';
+    desc='Hur mycket varje utvikt bidrog till felet får vi genom att multiplicera felsignalen med den aktivering som kom in i vikten. Det här är <strong>kedjeregeln</strong> i praktiken.';
     rows=[
       {cls:'gen',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{ut}\\cdot a_{in}`,plain:'∂L/∂w = δut · a_in'},
       {cls:'num',tex:`\\frac{\\partial L}{\\partial w_{1}} = (${f(C.dOut)})(${fp(C.ah[0])}) = ${f(C.gW2[0])}`,plain:`∂L/∂w1 = ${f(C.gW2[0])}`},
       {cls:'num',tex:`\\frac{\\partial L}{\\partial w_{2}} = (${f(C.dOut)})(${fp(C.ah[1])}) = ${f(C.gW2[1])}`,plain:`∂L/∂w2 = ${f(C.gW2[1])}`}
     ];
-    narr=`Gradienterna säger åt varje utvikt <strong>åt vilket håll</strong> och <strong>hur mycket</strong> den ska ändras.`;
+    narr=`Nu vet varje utvikt både åt vilket håll och hur mycket den behöver ändras.`;
   }
   else if(st.kind==='back-h'){
     const j=st.j;
     tagCls='backward';tagTxt='Fas 3 · Backpropagation';title=`Felsignal till dold neuron ${j+1}`;
-    desc='Felet skickas bakåt genom utvikten. Varje dold neuron får sin egen δ – dess andel av skulden för felet.';
+    desc='Felet skickas vidare bakåt genom utvikten. På så sätt får varje dold neuron sin egen felsignal, alltså sin andel av ansvaret för det totala felet.';
     rows=[
       {cls:'gen',tex:`\\delta_{${j+1}} = \\delta_{ut}\\cdot w_{${j+1}}\\cdot a_{${j+1}}(1-a_{${j+1}})`,plain:`δ${j+1} = δut·w${j+1}·a${j+1}(1−a${j+1})`},
       {cls:'num',tex:`\\delta_{${j+1}} = (${f(C.dOut)})(${f(w2[j])})(${fp(C.ah[j])})(1-${fp(C.ah[j])})`,plain:`δ${j+1} = ${f(C.dH[j])}`},
       {cls:'res amber',tex:`\\delta_{${j+1}} = ${col(CA,f(C.dH[j]))}`,plain:`δ${j+1} = ${f(C.dH[j])}`}
     ];
-    narr=`Dold neuron <strong>${j+1}</strong> får felsignal <span class="mono" style="color:var(--amber)">δ = ${f(C.dH[j])}</span> – bakåtflödad via dess vikt till utgången.`;
+    narr=`Dold neuron <strong>${j+1}</strong> får felsignalen <span class="mono" style="color:var(--amber)">${f(C.dH[j])}</span>, bakåtflödad via sin vikt till utgången.`;
     flowBackward([[0,0,1,j],[0,1,1,j]]);
   }
   else if(st.kind==='back-gw1'){
     tagCls='backward';tagTxt='Fas 3 · Backpropagation';title='Gradient för invikterna';
-    desc='Sista gradienterna: varje invikt = den dolda neuronens δ × dess indata. Nu har varje vikt i nätverket en gradient.';
+    desc='Till sist räknar vi ut de sista gradienterna. Varje invikt får sin gradient genom att den dolda neuronens felsignal multipliceras med den ingång som vikten tar emot. Nu har alla vikter i nätverket en gradient.';
     rows=[
       {cls:'gen',tex:`\\frac{\\partial L}{\\partial w_{ji}} = \\delta_{j}\\cdot x_{i}`,plain:'∂L/∂w = δj · xi'},
       {cls:'num',tex:`\\text{neuron 1:}\\ ${f(C.gW1[0][0])},\\ ${f(C.gW1[0][1])}`,plain:`neuron 1: ${f(C.gW1[0][0])}, ${f(C.gW1[0][1])}`},
       {cls:'num',tex:`\\text{neuron 2:}\\ ${f(C.gW1[1][0])},\\ ${f(C.gW1[1][1])}`,plain:`neuron 2: ${f(C.gW1[1][0])}, ${f(C.gW1[1][1])}`},
-      {cls:'res',tex:`\\text{alla 9 parametrar har nu en gradient}\\ ${col(CG,'\\checkmark')}`,plain:'alla 9 parametrar har en gradient ✓'}
+      {cls:'res',tex:`\\text{Nu har alla nio parametrar en gradient}\\ ${col(CG,'\\checkmark')}`,plain:'Nu har alla nio parametrar en gradient ✓'}
     ];
-    narr=`Backpropagation klar – felet är utdelat på <strong>varenda vikt och bias</strong>. Nu vet vi åt vilket håll var och en ska.`;
+    narr=`Backpropagation är klar. Felet är nu fördelat på varenda vikt och bias, så vi vet åt vilket håll var och en ska justeras.`;
   }
   else if(st.kind==='update'){
     if(!C.old)applyUpdate();
     tagCls='update';tagTxt='Fas 4 · Uppdatera vikter';title='Gradientnedstigning';
-    desc=`Varje vikt tar ett litet steg <strong>motsatt</strong> gradienten – nerför förlustbacken. Steget styrs av inlärningstakten <em>η=${fp(lr,2)}</em>.`;
+    desc=`Varje vikt tar ett litet steg i motsatt riktning mot sin gradient, alltså nedför förlustbacken. Hur stort steget blir bestäms av inlärningstakten, som just nu är <em>${fp(lr,2)}</em>.`;
     rows=[{cls:'gen',tex:`w \\leftarrow w - \\eta\\,\\frac{\\partial L}{\\partial w}`,plain:'w ← w − η·∂L/∂w'}];
     const rows2=[['w_{11}',C.old.w1[0][0],w1[0][0]],['w_{12}',C.old.w1[0][1],w1[0][1]],['w_{21}',C.old.w1[1][0],w1[1][0]],['w_{22}',C.old.w1[1][1],w1[1][1]],['w_{o1}',C.old.w2[0],w2[0]],['w_{o2}',C.old.w2[1],w2[1]]];
     rows2.forEach(r=>{const up=r[2]>r[1];rows.push({cls:'num',tex:`${r[0]}:\\ ${f(r[1])} \\to ${col(up?CG:CR,f(r[2]))}\\ ${up?'\\uparrow':'\\downarrow'}`,plain:`${r[0]}: ${f(r[1])} → ${f(r[2])}`});});
-    narr=`Vikterna justerade! <strong style="color:var(--green)">Grönt ↑</strong> ökade, <strong style="color:var(--red)">rött ↓</strong> minskade. Nästa varv blir gissningen lite bättre.`;
+    narr=`Vikterna är justerade. De som blev <strong style="color:var(--green)">gröna</strong> ökade och de som blev <strong style="color:var(--red)">röda</strong> minskade. Nästa varv blir gissningen lite bättre.`;
   }
 
   mb.innerHTML=`<span class="mb-tag ${tagCls}">${tagTxt}</span><h4>${title}</h4><div class="mb-desc">${desc}</div><div class="mb-formula" id="mbFormula"></div>`;
@@ -820,17 +899,17 @@ function openEdgeCalc(li,fi,ti){
   let name,wv,srcName,srcVal,rows=[],def;
   if(li===0){
     wv=w1[ti][fi];
-    name=`Vikt: x${fi+1===1?'₁':'₂'} → dold neuron ${ti+1}`;
+    name=`Vikt från x${fi+1===1?'₁':'₂'} till dold neuron ${ti+1}`;
     srcName=`x${fi+1===1?'₁':'₂'}`;srcVal=C.x?C.x[fi]:PROBLEMS[prob].data[exampleIdx].x[fi];
-    def=`Den här kopplingens vikt bestämmer hur mycket <strong>${srcName}</strong> påverkar dold neuron ${ti+1}. I framåtpasset multipliceras indatans värde med vikten.`;
+    def=`Den här kopplingens vikt bestämmer hur mycket <strong>${srcName}</strong> påverkar dold neuron ${ti+1}. Under framåtpasset multipliceras ingångens värde med vikten.`;
     rows.push({cls:'gen',tex:`w = ${col(wv>=0?CB:CR,fp(wv,3))}`,plain:`w = ${fp(wv,3)}`});
     rows.push({cls:'num',tex:`\\text{bidrag} = w\\cdot ${srcName.replace('₁','_1').replace('₂','_2')} = (${f(wv)})(${srcVal}) = ${f(wv*srcVal)}`,plain:`bidrag = ${f(wv*srcVal)}`});
     if(has&&C.gW1)rows.push({cls:'res amber',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{${ti+1}}\\cdot ${srcName.replace('₁','_1').replace('₂','_2')} = ${col(CA,f(C.gW1[ti][fi]))}`,plain:`∂L/∂w = ${f(C.gW1[ti][fi])}`});
   }else{
     wv=w2[fi];
-    name=`Vikt: dold neuron ${fi+1} → utdata`;
+    name=`Vikt från dold neuron ${fi+1} till utdatan`;
     srcName=`a${fi+1}`;srcVal=has?C.ah[fi]:null;
-    def=`Den här kopplingen bär dold neuron ${fi+1}:s aktivering vidare till utneuronen. Under backpropagation används den för att skicka felet bakåt.`;
+    def=`Den här kopplingen för dold neuron ${fi+1} vidare till utneuronen. Under backpropagation används den för att skicka felet bakåt genom nätverket.`;
     rows.push({cls:'gen',tex:`w = ${col(wv>=0?CB:CR,fp(wv,3))}`,plain:`w = ${fp(wv,3)}`});
     if(has)rows.push({cls:'num',tex:`\\text{bidrag} = w\\cdot a_{${fi+1}} = (${f(wv)})(${fp(srcVal)}) = ${f(wv*srcVal)}`,plain:`bidrag = ${f(wv*srcVal)}`});
     if(has&&C.gW2)rows.push({cls:'res amber',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{ut}\\cdot a_{${fi+1}} = ${col(CA,f(C.gW2[fi]))}`,plain:`∂L/∂w = ${f(C.gW2[fi])}`});
@@ -842,18 +921,18 @@ function openNeuronCalc(l,i){
   const has=C.ah!==undefined;let name,def,rows=[];
   if(l===0){
     const xv=C.x?C.x[i]:PROBLEMS[prob].data[exampleIdx].x[i];
-    name=`Indata x${i+1===1?'₁':'₂'}`;
-    def=`En indata-neuron håller bara ett av exemplets värden och skickar det vidare. Ingen beräkning sker här.`;
+    name=`Ingång x${i+1===1?'₁':'₂'}`;
+    def=`En ingångsneuron håller bara ett av exemplets värden och skickar det vidare. Här sker ingen beräkning.`;
     rows.push({cls:'res',tex:`x_{${i+1}} = ${col(CB,String(xv))}`,plain:`x${i+1} = ${xv}`});
   }else if(l===1){
     name=`Dold neuron ${i+1}`;
-    def=`Neuronen väger ihop båda indata, adderar sin bias, och kör summan genom <strong>sigmoid</strong>.`;
+    def=`Neuronen väger ihop båda ingångarna, lägger till sin bias och kör summan genom aktiveringsfunktionen <strong>sigmoid</strong>.`;
     rows.push({cls:'gen',tex:`a = \\sigma(w_1x_1 + w_2x_2 + b)`,plain:'a = σ(w1·x1 + w2·x2 + b)'});
     rows.push({cls:'num',tex:`b = ${f(bh[i])}`,plain:`b = ${f(bh[i])}`});
     if(has){rows.push({cls:'num',tex:`z = ${f(C.zh[i])}`,plain:`z = ${f(C.zh[i])}`});rows.push({cls:'res',tex:`a_{${i+1}} = ${col(CB,fp(C.ah[i]))}`,plain:`a${i+1} = ${fp(C.ah[i])}`});}
   }else{
     name='Utneuron (ŷ)';
-    def=`Nätverkets svar. Den väger ihop de dolda neuronerna, adderar bias och kör genom sigmoid. Resultatet <em>ŷ</em> tolkas som en sannolikhet mellan 0 och 1.`;
+    def=`Det här är nätverkets svar. Den väger ihop de dolda neuronerna, lägger till sin bias och kör resultatet genom sigmoid. Värdet <em>ŷ</em> kan tolkas som en sannolikhet mellan 0 och 1.`;
     rows.push({cls:'gen',tex:`\\hat{y} = \\sigma(w_1a_1 + w_2a_2 + b)`,plain:'ŷ = σ(w1·a1 + w2·a2 + b)'});
     rows.push({cls:'num',tex:`b = ${f(bo)}`,plain:`b = ${f(bo)}`});
     if(has)rows.push({cls:'res gold',tex:`\\hat{y} = ${col(CGO,fp(C.yhat))}`,plain:`ŷ = ${fp(C.yhat)}`});
@@ -908,10 +987,10 @@ const CONCEPTS={
     def:'Regeln från derivering som låter oss beräkna hur en förändring långt fram i nätverket påverkar en vikt långt bak. Man multiplicerar ihop de lokala derivatorna längs vägen – som länkarna i en kedja. Backpropagation <em>är</em> kedjeregeln tillämpad lager för lager.',
     tex:'\\frac{\\partial L}{\\partial w} = \\frac{\\partial L}{\\partial a}\\cdot\\frac{\\partial a}{\\partial z}\\cdot\\frac{\\partial z}{\\partial w}',plain:'∂L/∂w = ∂L/∂a · ∂a/∂z · ∂z/∂w'},
   lr:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/></svg>',title:'Inlärningstakt (η)',
-    def:'Hur stort steg vikterna tar vid varje uppdatering. För litet <em>η</em> → nätverket lär sig långsamt. För stort → det kan hoppa förbi målet och bli instabilt. Att hitta lagom är en konst.',
+    def:'Inlärningstakten bestämmer hur stort steg vikterna tar varje gång de uppdateras. Är <em>η</em> för litet lär sig nätverket väldigt långsamt. Är det för stort kan vikterna hoppa förbi målet och träningen bli instabil. Att hitta en lagom takt är en konst.',
     tex:'w \\leftarrow w - \\eta\\,\\frac{\\partial L}{\\partial w}',plain:'w ← w − η·∂L/∂w'},
   gd:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M4 8c5 0 4 8 9 8s5-6 7-6"/></svg>',title:'Gradientnedstigning',
-    def:'Optimeringsmetoden bakom det hela. Tänk dig förlusten som ett landskap där du vill nå den lägsta dalen. Gradienten pekar uppför – så du tar ett steg åt motsatt håll. Upprepa tusentals gånger och du rullar ner till botten: minimal förlust.',
+    def:'Optimeringsmetoden bakom det hela. Tänk dig förlusten som ett kuperat landskap där du vill nå den lägsta dalen. Gradienten pekar uppför, så du tar ett steg åt motsatt håll. Upprepar du det tusentals gånger rullar du till slut ner till botten, där förlusten är som minst.',
     tex:null},
   epoch:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 21v-5h5"/></svg>',title:'Epok',
     def:'En full runda genom <em>all</em> träningsdata. Efter varje epok har vikterna justerats med varje exempel en gång. Förlustkurvan visar en punkt per epok – och när den planar ut nära noll har nätverket lärt sig.',
