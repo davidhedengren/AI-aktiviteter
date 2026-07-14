@@ -66,9 +66,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .app{display:grid;grid-template-columns:clamp(240px,19vw,280px) 1fr clamp(296px,25vw,340px);height:calc(100vh - 54px);position:relative;z-index:1;gap:12px;padding:12px;}
 .lp,.rp{background:var(--surface);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px;overflow-y:auto;min-height:0;display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 50px rgba(0,0,0,.25);}
 .lp::-webkit-scrollbar,.rp::-webkit-scrollbar{width:5px;}.lp::-webkit-scrollbar-thumb,.rp::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
-/* right column reads as calm reference, not an equal-weight surface */
-.rp{background:rgba(20,24,42,.4);border-color:var(--border-soft);box-shadow:0 10px 30px rgba(0,0,0,.16);}
-.rp .sec-t{opacity:.85;}
+/* side columns recede so the canvas holds focus; they read as calm reference */
+.lp,.rp{background:rgba(20,24,42,.4);border-color:var(--border-soft);box-shadow:0 10px 30px rgba(0,0,0,.16);}
+.lp .sec-t,.rp .sec-t{opacity:.85;}
 .sec-t{font-size:.65em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim2);margin-bottom:6px;}
 
 /* mini truth table (setup preview + gate popup) */
@@ -86,7 +86,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .dtable th{background:var(--surface2);padding:6px 4px;color:var(--dim);font-weight:600;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;}
 .dtable td{padding:5px 4px;text-align:center;border-bottom:1px solid rgba(255,255,255,.03);font-family:'JetBrains Mono',monospace;color:var(--text);}
 .dtable tr:last-child td{border-bottom:none;}
-.dtable tr.cur td{background:rgba(77,128,255,.14);}
+.dtable tbody tr{transition:opacity .25s var(--ease-out);}
+.dtable tbody:has(tr.cur) tr:not(.cur){opacity:.4;}
+.dtable tr.cur td{background:rgba(77,128,255,.16);}
 .dtable tr.cur td:first-child{box-shadow:inset 3px 0 0 var(--accent);}
 .dtable .ty{color:var(--gold);font-weight:700;}
 .dtable .yja{color:var(--green);}.dtable .ynej{color:var(--dim2);}
@@ -126,8 +128,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .predict-btn .pb-in{font-family:'JetBrains Mono',monospace;font-size:.82em;font-weight:700;color:var(--text);}
 .predict-btn .pb-exp{font-size:.62em;color:var(--dim2);}
 .predict-btn.active .pb-exp{color:var(--green);}
-.rbox .rv .verdict-ok{color:var(--green);}
-.rbox .rv .verdict-bad{color:var(--red);}
+.verdict-ok{color:var(--green);}
+.verdict-bad{color:var(--red);}
 
 /* center */
 .center{display:flex;flex-direction:column;gap:10px;min-height:0;overflow-y:auto;}
@@ -217,13 +219,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .tex-fallback{font-family:'JetBrains Mono',monospace;font-size:.82em;white-space:pre-wrap;}
 .mrow-text{font-family:'DM Sans',sans-serif;font-size:.86em;line-height:1.5;padding:5px 0;font-weight:600;}
 
-/* result boxes */
-.result-boxes{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.rbox{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:11px;}
-.rbox .rl{font-size:.6em;color:var(--dim2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;font-weight:600;}
-.rbox .rv{font-family:'JetBrains Mono',monospace;font-size:1.25em;font-weight:700;font-variant-numeric:tabular-nums;}
-.rbox.wide{grid-column:span 2;}
-
 .loss-panel{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:12px;}
 .loss-panel .lp-hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
 .loss-panel .lp-hd .t{font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--dim2);}
@@ -275,12 +270,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 @media (prefers-reduced-motion:reduce){.nn-node,.nn-ring{animation:none;}.nn-dot{display:none;}}
 
 /* setup screen (choose what to learn) */
-.setup{position:fixed;inset:0;z-index:150;display:flex;align-items:center;justify-content:center;padding:24px;
+.setup{position:fixed;inset:0;z-index:150;display:flex;align-items:flex-start;justify-content:center;padding:clamp(20px,6vh,64px) 24px;overflow-y:auto;
   background:radial-gradient(ellipse 60% 50% at 50% 30%,rgba(77,128,255,.08),transparent 70%),var(--bg);
   opacity:0;pointer-events:none;transition:opacity .4s var(--ease-out);}
 .setup.show{opacity:1;pointer-events:auto;}
 .setup.leaving{opacity:0;pointer-events:none;}
-.setup-inner{width:100%;max-width:760px;max-height:92vh;overflow-y:auto;text-align:center;animation:setupIn .5s var(--ease-spring);}
+.setup-inner{width:100%;max-width:760px;margin:auto 0;text-align:center;animation:setupIn .5s var(--ease-spring);}
 @keyframes setupIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
 .setup-step{font-family:'JetBrains Mono',monospace;font-size:.68em;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);
   display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border:1px solid rgba(122,162,255,.28);border-radius:999px;background:var(--accent-dim);margin-bottom:16px;}
@@ -320,15 +315,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .setup-go:hover{background:#3d6de6;transform:translateY(-2px);box-shadow:0 14px 36px rgba(77,128,255,.44);}
 
 /* lab: compact current-task summary (left panel) */
-.task-summary{display:flex;align-items:center;gap:11px;padding:11px 12px;border:1px solid rgba(77,128,255,.28);border-radius:var(--r-md);
-  background:linear-gradient(160deg,var(--accent-dim),var(--surface2));}
-.task-summary .ts-icon{width:36px;height:36px;flex-shrink:0;border-radius:11px;background:rgba(77,128,255,.16);color:var(--accent2);
-  display:flex;align-items:center;justify-content:center;font-size:1.25em;font-weight:800;}
+.task-summary{display:flex;align-items:center;gap:11px;padding:10px 12px;border:1px solid var(--border-soft);border-radius:var(--r-md);
+  background:var(--surface2);}
+.task-summary .ts-icon{width:32px;height:32px;flex-shrink:0;border-radius:10px;background:rgba(255,255,255,.05);color:var(--dim);
+  display:flex;align-items:center;justify-content:center;font-size:1.15em;font-weight:800;}
 .task-summary .ts-body{min-width:0;flex:1;}
 .task-summary .ts-eyebrow{font-size:.58em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim2);}
 .task-summary .ts-title{font-size:.92em;font-weight:700;color:var(--text);margin-top:1px;}
-.task-summary .ts-change{flex-shrink:0;display:inline-flex;align-items:center;gap:4px;font-size:.7em;font-weight:600;color:var(--accent2);
-  background:rgba(77,128,255,.1);border:1px solid rgba(122,162,255,.28);border-radius:999px;padding:6px 10px;cursor:pointer;transition:.2s var(--ease-out);font-family:'DM Sans',sans-serif;}
+.task-summary .ts-change{flex-shrink:0;display:inline-flex;align-items:center;gap:4px;font-size:.7em;font-weight:600;color:var(--dim2);
+  background:transparent;border:1px solid var(--border);border-radius:999px;padding:6px 10px;cursor:pointer;transition:.2s var(--ease-out);font-family:'DM Sans',sans-serif;}
 .task-summary .ts-change:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
 
 @media(max-width:1060px){
@@ -424,11 +419,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
   <!-- LEFT -->
   <div class="lp">
     <div><div class="sec-t">Uppgift</div><div class="task-summary" id="taskSummary"></div></div>
-    <div><table class="dtable" id="dataTable"></table><div class="hint" id="dataHint"></div></div>
+    <div><div class="sec-t">Träningsdata</div><table class="dtable" id="dataTable"></table><div class="hint" id="dataHint"></div></div>
     <div>
       <div class="sec-t">Inlärningstakt (η)</div>
       <div class="slider-row"><span class="slider-lbl">η</span><input type="range" class="slider" id="lrSlider" min="5" max="150" step="5" value="60" oninput="onLr()"><span class="slider-val" id="lrVal">0.60</span></div>
-      <div class="hint">Inlärningstakten bestämmer hur stort steg vikterna tar varje gång de justeras. En liten takt ger långsam men stabil inlärning, medan en stor takt går fortare men kan bli hoppig.</div>
+      <div class="hint">Hur stort steg vikterna tar vid varje uppdatering.</div>
     </div>
   </div>
 
@@ -447,18 +442,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 
   <!-- RIGHT -->
   <div class="rp">
-    <div><div class="sec-t">Resultat</div><div class="result-boxes" id="resultBoxes">
-      <div class="rbox"><div class="rl">Nätverkets gissning (ŷ)</div><div class="rv" id="rPred" style="color:var(--accent2)">–</div></div>
-      <div class="rbox"><div class="rl">Rätt svar (y)</div><div class="rv" id="rTarget" style="color:var(--gold)">–</div></div>
-      <div class="rbox wide"><div class="rl" id="rLossLabel">Förlust för detta exempel</div><div class="rv" id="rLoss" style="color:var(--amber);font-size:1.05em">–</div></div>
-    </div></div>
     <div class="loss-panel">
       <div class="lp-hd"><span class="t">Förlust över epoker</span><span class="v" id="epochLoss">–</span></div>
       <canvas id="lossChart"></canvas>
       <div class="loss-axis"><span>Epok 1</span><span id="epochLabel">–</span></div>
     </div>
     <div class="info">
-      <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15Z"/></svg> Begrepp – klicka för förklaring</h3>
+      <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15Z"/></svg> Begrepp</h3>
       <div class="glossary" id="glossary"></div>
     </div>
   </div>
@@ -496,13 +486,13 @@ function texRows(container,rows){
 /* ============================ DATA ============================ */
 const GATE_INTRO='Det här är en <strong>logisk grind</strong> – en enkel regel med två insignaler, <strong>x₁</strong> och <strong>x₂</strong>. Var och en är antingen <strong>0</strong> (av) eller <strong>1</strong> (på). Nätverket ska lära sig att ge rätt svar för alla fyra kombinationerna.';
 const PROBLEMS={
-  and:{icon:'∧',title:'OCH-grinden',longname:'logiskt OCH (AND)',short:'Ja bara när båda ingångarna är 1',
+  and:{icon:'∧',title:'OCH-grinden',longname:'logiskt OCH (AND)',short:'Nätverket svarar ja bara när båda ingångarna är 1',
     explain:`${GATE_INTRO}<br><br>I en OCH-grind blir svaret Ja bara när <strong>båda</strong> ingångarna är 1 samtidigt. Så fort minst en av dem är 0 blir svaret Nej. Man kan säga att OCH kräver att allt är uppfyllt på en gång.<br><br>Det här är det enklaste fallet att lära in, eftersom en enda rät linje räcker för att skilja Ja-fallen från Nej-fallen.`,
     data:[{x:[0,0],y:0},{x:[0,1],y:0},{x:[1,0],y:0},{x:[1,1],y:1}]},
-  or:{icon:'∨',title:'ELLER-grinden',longname:'logiskt ELLER (OR)',short:'Ja när minst en ingång är 1',
+  or:{icon:'∨',title:'ELLER-grinden',longname:'logiskt ELLER (OR)',short:'Nätverket svarar ja om minst en ingång är 1',
     explain:`${GATE_INTRO}<br><br>I en ELLER-grind blir svaret Ja så snart <strong>minst en</strong> av ingångarna är 1. Det spelar ingen roll om det är den ena, den andra eller båda – bara när <strong>båda</strong> är 0 blir svaret Nej.<br><br>Även det här fallet går att lösa med en enda rät linje mellan Ja-fallen och Nej-fallet.`,
     data:[{x:[0,0],y:0},{x:[0,1],y:1},{x:[1,0],y:1},{x:[1,1],y:1}]},
-  xor:{icon:'⊕',title:'XOR-grinden',longname:'exklusivt ELLER (XOR)',short:'Ja när exakt en ingång är 1',
+  xor:{icon:'⊕',title:'XOR-grinden',longname:'exklusivt ELLER (XOR)',short:'Nätverket svarar ja när exakt en ingång är 1',
     explain:`${GATE_INTRO}<br><br>I en XOR-grind (exklusivt eller) blir svaret Ja när ingångarna <strong>skiljer sig åt</strong>, alltså när exakt en av dem är 1. Är de lika – båda 0 eller båda 1 – blir svaret Nej.<br><br><span style="color:#ffb98a">Det speciella med XOR är att Ja-fallen och Nej-fallen inte går att dela upp med en enda rät linje. Därför räcker det inte med en enkel modell. Nätverket behöver sitt dolda lager för att klara det, och därför tar XOR fler epoker att lära sig än de andra grindarna.</span>`,
     data:[{x:[0,0],y:0},{x:[0,1],y:1},{x:[1,0],y:1},{x:[1,1],y:0}]}
 };
@@ -663,7 +653,7 @@ function finishTraining(){
     <h4>Nätverket är färdigtränat!</h4>
     <div class="mb-desc">Efter ${epoch} epoker av framåtpass och backpropagation har vikterna hittat värden som gör att nätverket svarar rätt på alla exempel. Förlusten har sjunkit ända ner till ${last.toFixed(4)}.<br><br>Från och med nu ändrar vi inte längre vikterna. Nätverket är tränat, och vi kan börja <strong>använda</strong> det. Att mata in ny data och läsa av svaret kallas att göra en <strong style="color:var(--green)">förutsägelse</strong>.<br><br>Prova själv: välj en kombination nedanför nätverket och se att den tränade modellen svarar rätt.</div>`;
   renderControls();
-  document.getElementById('rLossLabel').textContent='Stämmer förutsägelsen?';
+  setTxt('rLossLabel','Stämmer förutsägelsen?');
   predictExample(0);
 }
 function predictExample(i){
@@ -673,11 +663,11 @@ function predictExample(i){
   drawNet();
   const ex=PROBLEMS[prob].data[i];
   const correct=Math.round(C.yhat)===ex.y;
-  document.getElementById('rPred').textContent=C.yhat.toFixed(3);
-  document.getElementById('rTarget').textContent=ex.y;
-  document.getElementById('rLoss').innerHTML=correct
+  setTxt('rPred',C.yhat.toFixed(3));
+  setTxt('rTarget',ex.y);
+  setTxt('rLoss',correct
     ? '<span class="verdict-ok">✓ Ja, rätt svar</span>'
-    : '<span class="verdict-bad">✗ Nej, fel</span>';
+    : '<span class="verdict-bad">✗ Nej, fel</span>',true);
   const rounded=Math.round(C.yhat);
   const rows=[
     {cls:'num',tex:`a_{1} = \\sigma(z_{1}) = ${col(CB,fp(C.ah[0]))}`,plain:`a1 = ${fp(C.ah[0])}`},
@@ -767,16 +757,16 @@ function openGateInfo(key){
 }
 function renderData(){
   const d=PROBLEMS[prob].data;
-  let h='<caption>Sanningstabellen visar det rätta svaret för varje kombination av ingångar.</caption><thead><tr><th>x₁</th><th>x₂</th><th>Rätt svar (y)</th></tr></thead><tbody>';
+  let h='<thead><tr><th>x₁</th><th>x₂</th><th>Rätt svar (y)</th></tr></thead><tbody>';
   d.forEach((ex,i)=>{
     h+=`<tr class="${(i===exampleIdx&&!running)?'cur':''}"><td>${ex.x[0]}</td><td>${ex.x[1]}</td><td class="ty">${ex.y} <span class="${ex.y?'yja':'ynej'}">(${ex.y?'Ja':'Nej'})</span></td></tr>`;
   });
   h+='</tbody>';
   document.getElementById('dataTable').innerHTML=h;
   document.getElementById('dataHint').innerHTML=
-    trained?'Nätverket är färdigtränat. Klicka på en rad här, eller på en knapp under nätverket, för att testa en förutsägelse.'
-    :running?'Nätverket tränar automatiskt på alla rader just nu.'
-    :`Just nu tränar nätverket på rad <strong style="color:var(--accent2)">${exampleIdx+1}</strong>. När det har gått igenom alla raderna en gång kallas det för en <strong>epok</strong>.`;
+    trained?'Färdigtränat. Testa en förutsägelse med knapparna under nätverket.'
+    :running?'Tränar automatiskt på alla rader.'
+    :`Tränar på rad <strong style="color:var(--accent2)">${exampleIdx+1}</strong> av ${d.length}. Ett varv genom alla rader kallas en <strong>epok</strong>.`;
 }
 function onLr(){lr=parseInt(document.getElementById('lrSlider').value)/100;document.getElementById('lrVal').textContent=lr.toFixed(2);}
 
@@ -829,6 +819,8 @@ function renderCanvasNext(){
 }
 
 /* ============================ MATH BOX / NARRATION ============================ */
+/* null-safe write: some readouts (ŷ/y/L boxes) were retired from the right column */
+function setTxt(id,txt,asHtml){const el=document.getElementById(id);if(!el)return;if(asHtml)el.innerHTML=txt;else el.textContent=txt;}
 function f(v,d){d=d===undefined?3:d;return (v<0?'-':'')+Math.abs(v).toFixed(d);}      // signed, plain minus for latex
 function fp(v,d){return v.toFixed(d===undefined?3:d);}
 function col(hex,s){return `\\textcolor{${hex}}{${s}}`;}
@@ -839,7 +831,7 @@ const CB='#7aa2ff', CG='#33d17a', CR='#ef5b6b', CA='#ff9f45', CGO='#ffce54', CD=
 function renderIdle(){
   stepIdx=-1;setPhaseBar(null);
   document.getElementById('flowBadge').classList.remove('show');
-  document.getElementById('rLossLabel').textContent='Förlust för detta exempel';
+  setTxt('rLossLabel','Förlust för detta exempel');
   const ex=PROBLEMS[prob].data[exampleIdx];
   document.getElementById('narr').innerHTML=`<span class="mb-tag idle">Redo</span>
      <h4>Redo för nästa träningsvarv</h4>
@@ -965,11 +957,11 @@ function renderStep(){
 
 function updateResults(){
   const ex=PROBLEMS[prob].data[exampleIdx];
-  document.getElementById('rTarget').textContent=(C.y!==undefined)?C.y:ex.y;
+  setTxt('rTarget',(C.y!==undefined)?C.y:ex.y);
   if(C.yhat!==undefined&&stepIdx>=2){
-    document.getElementById('rPred').textContent=fp(C.yhat,3);
-    document.getElementById('rLoss').textContent=(stepIdx>=3)?fp(C.loss,4):'–';
-  }else{document.getElementById('rPred').textContent='–';document.getElementById('rLoss').textContent='–';}
+    setTxt('rPred',fp(C.yhat,3));
+    setTxt('rLoss',(stepIdx>=3)?fp(C.loss,4):'–');
+  }else{setTxt('rPred','–');setTxt('rLoss','–');}
 }
 
 /* ============================ FLOW ANIM ============================ */
