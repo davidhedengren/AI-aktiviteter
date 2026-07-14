@@ -63,8 +63,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .back-link:hover{color:var(--text);border-color:var(--dim2);background:rgba(255,255,255,.05);}
 
 /* layout */
-.app{display:grid;grid-template-columns:288px 1fr 336px;height:calc(100vh - 54px);position:relative;z-index:1;gap:12px;padding:12px;}
-.lp,.rp{background:var(--surface);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;box-shadow:0 20px 50px rgba(0,0,0,.25);}
+.app{display:grid;grid-template-columns:clamp(240px,19vw,280px) 1fr clamp(296px,25vw,340px);height:calc(100vh - 54px);position:relative;z-index:1;gap:12px;padding:12px;}
+.lp,.rp{background:var(--surface);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px;overflow-y:auto;min-height:0;display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 50px rgba(0,0,0,.25);}
 .lp::-webkit-scrollbar,.rp::-webkit-scrollbar{width:5px;}.lp::-webkit-scrollbar-thumb,.rp::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 .sec-t{font-size:.65em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim2);margin-bottom:6px;}
 
@@ -127,7 +127,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .rbox .rv .verdict-bad{color:var(--red);}
 
 /* center */
-.center{display:flex;flex-direction:column;gap:10px;min-height:0;}
+.center{display:flex;flex-direction:column;gap:10px;min-height:0;overflow-y:auto;}
+.center::-webkit-scrollbar{width:5px;}.center::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 .phase-bar{display:flex;gap:6px;flex-shrink:0;}
 .phase-chip{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:9px 6px;border:1px solid var(--border);border-radius:var(--r-md);background:var(--surface2);transition:.25s var(--ease-out);position:relative;overflow:hidden;}
 .phase-chip .pc-n{font-family:'JetBrains Mono',monospace;font-size:.62em;color:var(--dim2);font-weight:700;letter-spacing:.05em;}
@@ -143,7 +144,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .phase-chip.active.p-update .pc-l,.phase-chip.active.p-update .pc-n{color:var(--green);}
 .phase-arrow{align-self:center;color:var(--dim2);flex-shrink:0;}
 
-.canvas-wrap{position:relative;flex:1;min-height:0;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);}
+.canvas-wrap{position:relative;flex:1 1 320px;min-height:320px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);}
 #cv{display:block;width:100%;height:100%;}
 .flow-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:.68em;font-weight:700;letter-spacing:.08em;padding:5px 13px;border-radius:999px;display:none;align-items:center;gap:7px;backdrop-filter:blur(8px);}
 .flow-badge.show{display:inline-flex;}
@@ -967,7 +968,7 @@ function edgeColorFor(li,i,j){
 function drawNet(){
   const{ctx,w,h}=setupCv();drawBackdrop(ctx,w,h);
   const P=nodePositions(w,h);
-  const s=Math.max(0.72,Math.min(1,w/560));const R=Math.max(20,30*s);
+  const s=Math.max(0.55,Math.min(1,w/560,h/260));const R=Math.max(15,28*s);
   const t=flowAnim?Math.min(1,(performance.now()-flowStart)/800):-1;
   const flowSet=new Set(flowEdges.map(e=>e.join('-')));
   // flash pulse (0..1) while weights are updating
@@ -994,9 +995,9 @@ function drawNet(){
   for(let j=0;j<2;j++)for(let i=0;i<2;i++)drawEdge(P[0][i],P[1][j],0,i,j,w1[j][i]);
   for(let j=0;j<2;j++)drawEdge(P[1][j],P[2][0],1,j,0,w2[j]);
   ctx.textAlign='center';ctx.textBaseline='middle';
-  drawLayerChip(ctx,P[0][0].x,P[0][0].y-R-20,'INDATA',[122,162,255],s);
-  drawLayerChip(ctx,P[1][0].x,P[1][0].y-R-20,'DOLT LAGER',[150,162,196],s);
-  drawLayerChip(ctx,P[2][0].x,P[2][0].y-R-20,'UTDATA',[255,206,84],s);
+  drawLayerChip(ctx,P[0][0].x,P[0][0].y-R-16*s,'INDATA',[122,162,255],s);
+  drawLayerChip(ctx,P[1][0].x,P[1][0].y-R-16*s,'DOLT LAGER',[150,162,196],s);
+  drawLayerChip(ctx,P[2][0].x,P[2][0].y-R-16*s,'UTDATA',[255,206,84],s);
   const st=stepIdx>=0?STEPS[Math.min(stepIdx,STEPS.length-1)]:null;
   const backActive=st&&st.phase==='backward';
   drawNodeLayer(ctx,P[0],0,R,s,backActive);drawNodeLayer(ctx,P[1],1,R,s,backActive);drawNodeLayer(ctx,P[2],2,R,s,backActive);
@@ -1014,12 +1015,12 @@ function drawNodeLayer(ctx,pts,layer,R,s,backActive){
     ctx.textAlign='center';ctx.textBaseline='middle';
     if(computed&&val!==null){ctx.font=`700 ${fontSize}px "JetBrains Mono"`;ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=4;ctx.fillStyle='rgba(226,234,255,0.95)';ctx.fillText(layer===0?String(val):fp(val,2),pt.x,pt.y);ctx.shadowBlur=0;}
     else{ctx.font=`500 ${fontSize}px "DM Sans"`;ctx.fillStyle='rgba(255,255,255,0.3)';ctx.fillText('?',pt.x,pt.y);}
-    if(layer>0){const bv=layer===1?bh[idx]:bo;const bt=`b=${fp(bv,2)}`;ctx.font=`600 ${Math.max(8,Math.round(9*s))}px "JetBrains Mono"`;const bw=ctx.measureText(bt).width+10;ctx.beginPath();ctx.roundRect(pt.x-bw/2,pt.y+R+6,bw,14,7);ctx.fillStyle='rgba(14,17,30,0.8)';ctx.fill();ctx.strokeStyle='rgba(255,255,255,0.08)';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle='rgba(255,255,255,0.6)';ctx.fillText(bt,pt.x,pt.y+R+6+7);}
-    if(layer===0){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(150,180,255,0.85)';ctx.fillText(idx===0?'x₁':'x₂',pt.x,pt.y+R+16);}
-    if(layer===2){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(255,214,130,0.9)';ctx.fillText('ŷ',pt.x,pt.y+R+18);}
+    if(layer>0){const bv=layer===1?bh[idx]:bo;const bt=`b=${fp(bv,2)}`;ctx.font=`600 ${Math.max(8,Math.round(9*s))}px "JetBrains Mono"`;const bw=ctx.measureText(bt).width+10;const bOff=R+5*s;ctx.beginPath();ctx.roundRect(pt.x-bw/2,pt.y+bOff,bw,14,7);ctx.fillStyle='rgba(14,17,30,0.8)';ctx.fill();ctx.strokeStyle='rgba(255,255,255,0.08)';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle='rgba(255,255,255,0.6)';ctx.fillText(bt,pt.x,pt.y+bOff+7);}
+    if(layer===0){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(150,180,255,0.85)';ctx.fillText(idx===0?'x₁':'x₂',pt.x,pt.y+R+13*s);}
+    if(layer===2){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(255,214,130,0.9)';ctx.fillText('ŷ',pt.x,pt.y+R+15*s);}
     let dv=null;
     if(backActive){if(layer===2&&stepIdx>=4)dv=C.dOut;else if(layer===1&&C.dH){if(idx===0&&stepIdx>=6)dv=C.dH[0];if(idx===1&&stepIdx>=7)dv=C.dH[1];}}
-    if(dv!==null){const dt=`δ=${f(dv,3)}`;ctx.font=`700 ${Math.max(8,Math.round(9.5*s))}px "JetBrains Mono"`;const dw=ctx.measureText(dt).width+12;const dy=pt.y-R-6;ctx.save();ctx.shadowColor='rgba(255,159,69,0.5)';ctx.shadowBlur=8;ctx.beginPath();ctx.roundRect(pt.x-dw/2,dy-8,dw,17,8);ctx.fillStyle='rgba(40,26,14,0.95)';ctx.fill();ctx.strokeStyle='rgba(255,159,69,0.7)';ctx.lineWidth=1.2;ctx.stroke();ctx.restore();ctx.fillStyle='rgba(255,190,120,1)';ctx.fillText(dt,pt.x,dy+0.5);}
+    if(dv!==null){const dt=`δ=${f(dv,3)}`;ctx.font=`700 ${Math.max(8,Math.round(9.5*s))}px "JetBrains Mono"`;const dw=ctx.measureText(dt).width+12;const dy=pt.y-R-5*s;ctx.save();ctx.shadowColor='rgba(255,159,69,0.5)';ctx.shadowBlur=8;ctx.beginPath();ctx.roundRect(pt.x-dw/2,dy-8,dw,17,8);ctx.fillStyle='rgba(40,26,14,0.95)';ctx.fill();ctx.strokeStyle='rgba(255,159,69,0.7)';ctx.lineWidth=1.2;ctx.stroke();ctx.restore();ctx.fillStyle='rgba(255,190,120,1)';ctx.fillText(dt,pt.x,dy+0.5);}
   });
 }
 function drawGlassNeuron(ctx,x,y,R,computed,rimRgb,val){
@@ -1054,7 +1055,7 @@ function drawLayerChip(ctx,cx,cy,text,rgb,s){
 
 /* ============================ CLICK ON EDGE / NEURON ============================ */
 function canvasHit(mx,my,rect){
-  const w=rect.width,h=rect.height;const P=nodePositions(w,h);const s=Math.max(0.72,Math.min(1,w/560));const R=Math.max(20,30*s);
+  const w=rect.width,h=rect.height;const P=nodePositions(w,h);const s=Math.max(0.55,Math.min(1,w/560,h/260));const R=Math.max(15,28*s);
   // neurons first
   for(let l=0;l<P.length;l++)for(let i=0;i<P[l].length;i++){const dx=mx-P[l][i].x,dy=my-P[l][i].y;if(dx*dx+dy*dy<R*R)return{type:'neuron',l,i};}
   // edges
