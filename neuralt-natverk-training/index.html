@@ -205,6 +205,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .mrow .katex-display{margin:.15em 0;text-align:left;}
 .mrow .katex-display>.katex{text-align:left;}
 .tex-fallback{font-family:'JetBrains Mono',monospace;font-size:.82em;white-space:pre-wrap;}
+.mrow-text{font-family:'DM Sans',sans-serif;font-size:.86em;line-height:1.5;padding:5px 0;font-weight:600;}
 
 /* result boxes */
 .result-boxes{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
@@ -268,9 +269,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
     <h2><span>Träna ett neuralt nätverk</span></h2>
     <p class="sub">Här får du se hur ett neuralt nätverk faktiskt lär sig. Vi följer ett träningsexempel hela vägen runt och ser hur felet vandrar <strong style="color:var(--amber)">bakåt</strong> genom nätverket och justerar varje vikt en aning.</p>
     <div class="intro-loop">
-      <div class="intro-phase p1"><div class="ip-num">1</div><div><div class="ip-t">Framåtpass</div><div class="ip-d">Datan flödar framåt genom nätverket, som gör en gissning.</div></div></div>
-      <div class="intro-phase p2"><div class="ip-num">2</div><div><div class="ip-t">Förlust</div><div class="ip-d">Vi jämför gissningen med det rätta svaret och mäter hur fel den blev.</div></div></div>
-      <div class="intro-phase p3"><div class="ip-num">3</div><div><div class="ip-t">Backpropagation</div><div class="ip-d">Felet skickas bakåt och fördelas på nätverkets alla vikter.</div></div></div>
+      <div class="intro-phase p1"><div class="ip-num">1</div><div><div class="ip-t">Framåtpass</div><div class="ip-d">Indata skickas genom nätverket, som gör en gissning.</div></div></div>
+      <div class="intro-phase p2"><div class="ip-num">2</div><div><div class="ip-t">Förlust</div><div class="ip-d">Vi jämför nätverkets gissning med det rätta svaret och räknar ut hur stort felet är.</div></div></div>
+      <div class="intro-phase p3"><div class="ip-num">3</div><div><div class="ip-t">Backpropagation</div><div class="ip-d">Information om felet skickas bakåt genom nätverket, så att varje vikt får veta hur den bidrog.</div></div></div>
       <div class="intro-phase p4"><div class="ip-num">4</div><div><div class="ip-t">Uppdatera</div><div class="ip-d">Varje vikt justeras en aning i den riktning som minskar felet.</div></div></div>
     </div>
     <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Öppna labbet <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -356,7 +357,8 @@ function texRows(container,rows){
   container.innerHTML='';
   rows.forEach(r=>{
     const d=document.createElement('div');d.className='mrow '+(r.cls||'');
-    texInto(d,r.tex,r.plain,true);
+    if(r.text){d.classList.add('mrow-text');d.innerHTML=r.html||r.plain;}
+    else texInto(d,r.tex,r.plain,true);
     container.appendChild(d);
   });
 }
@@ -664,7 +666,7 @@ function renderStep(){
   setPhaseBar(st.phase);renderControls();
   const badge=document.getElementById('flowBadge');
   if(st.phase==='forward'){badge.className='flow-badge forward show';badge.innerHTML='Signalen flödar framåt →';}
-  else if(st.phase==='backward'){badge.className='flow-badge backward show';badge.innerHTML='← Felet flödar bakåt';}
+  else if(st.phase==='backward'){badge.className='flow-badge backward show';badge.innerHTML='← Felsignalen flödar bakåt';}
   else badge.classList.remove('show');
 
   const mb=document.getElementById('mathbox');
@@ -683,8 +685,8 @@ function renderStep(){
     flowForward([[0,0,1,j],[0,1,1,j]]);
   }
   else if(st.kind==='fwd-out'){
-    tagCls='forward';tagTxt='Fas 1 · Framåtpass';title='Utneuronen gissar';
-    desc=`Utneuronen gör exakt samma sak, men får nu de dolda neuronernas ${T('aktiveringar','aktivering')} som ingångar. Dess egen aktivering kallar vi ${S('ŷ')} (uttalas "y-hatt"), och det är nätverkets slutliga gissning på svaret.`;
+    tagCls='forward';tagTxt='Fas 1 · Framåtpass';title='Utgångsneuronen gissar';
+    desc=`Utgångsneuronen gör exakt samma sak, men får nu de dolda neuronernas ${T('aktiveringar','aktivering')} som ingångar. Dess egen aktivering kallar vi ${S('ŷ')} (uttalas "y-hatt"), och det är nätverkets slutliga gissning på svaret.`;
     rows=[
       {cls:'gen',tex:`\\hat{y} = \\sigma(w_{1}a_{1} + w_{2}a_{2} + b)`,plain:'ŷ = σ(w1·a1 + w2·a2 + b)'},
       {cls:'num',tex:`z = (${f(w2[0])})(${fp(C.ah[0])}) + (${f(w2[1])})(${fp(C.ah[1])}) + (${f(bo)}) = ${f(C.zo)}`,plain:`z = ${f(C.zo)}`},
@@ -696,7 +698,7 @@ function renderStep(){
   else if(st.kind==='loss'){
     const diff=C.yhat-C.y;
     tagCls='loss';tagTxt='Fas 2 · Förlust';title='Hur fel var gissningen?';
-    desc=`Nu mäter vi hur fel gissningen var. Vi räknar ut ${T('förlusten','loss')} ${S('L')} (av engelskans <em>loss</em>) – ett tal som är stort när gissningen ${S('ŷ')} ligger långt från det rätta svaret ${S('y')}, och noll när de är lika. Formeln kallas ${T('halva kvadratfelet','loss')}: vi tar skillnaden, upphöjer den till två och delar med två.`;
+    desc=`Nu mäter vi hur fel gissningen var. Vi räknar ut nätverkets ${T('förlust','loss')} (loss), som vi betecknar ${S('L')} – ett tal som är stort när gissningen ${S('ŷ')} ligger långt från det rätta svaret ${S('y')}, och noll när de är lika. Formeln kallas ${T('halva kvadratfelet','loss')}: vi tar skillnaden, upphöjer den till två och delar med två.`;
     rows=[
       {cls:'gen',tex:`L = \\tfrac{1}{2}(\\hat{y}-y)^2`,plain:'L = ½(ŷ − y)²'},
       {cls:'num',tex:`L = \\tfrac{1}{2}(${fp(C.yhat)}-${C.y})^2 = \\tfrac{1}{2}(${f(diff)})^2`,plain:`L = ½(${f(diff)})²`},
@@ -707,7 +709,7 @@ function renderStep(){
   }
   else if(st.kind==='back-out'){
     tagCls='backward';tagTxt='Fas 3 · Backpropagation';title='Felsignal vid utgången';
-    desc=`Nu vänder vi och går bakåt genom nätverket. För utneuronen räknar vi ut en ${T('felsignal','delta')} ${S('δ')} (delta). Den beskriver hur mycket förlusten skulle ändras om neuronens summa ändrades, och väger samman felet med lutningen på ${T('sigmoid','sigmoid')}-kurvan.`;
+    desc=`Nu vänder vi och går bakåt genom nätverket. För utgångsneuronen räknar vi ut en ${T('felsignal','delta')} ${S('δ')} (delta). Den beskriver hur mycket förlusten skulle ändras om neuronens summa ändrades, och väger samman felet med lutningen på ${T('sigmoid','sigmoid')}-kurvan.`;
     rows=[
       {cls:'gen',tex:`\\delta_{ut} = (\\hat{y}-y)\\cdot \\hat{y}(1-\\hat{y})`,plain:'δut = (ŷ−y)·ŷ(1−ŷ)'},
       {cls:'num',tex:`\\delta_{ut} = (${fp(C.yhat)}-${C.y})(${fp(C.yhat)})(1-${fp(C.yhat)})`,plain:`δut = ${f(C.dOut)}`},
@@ -729,7 +731,7 @@ function renderStep(){
   else if(st.kind==='back-h'){
     const j=st.j;
     tagCls='backward';tagTxt='Fas 3 · Backpropagation';title=`Felsignal till dold neuron ${j+1}`;
-    desc=`Felsignalen skickas vidare bakåt genom utvikterna, så att även varje dold neuron får sin egen ${T('felsignal','delta')} ${S('δ')}. På så sätt fördelas ansvaret för felet steg för steg bakåt genom nätverket.`;
+    desc=`Felsignalen skickas vidare bakåt genom utvikterna, så att även varje neuron i det dolda lagret får sin egen ${T('felsignal','delta')} ${S('δ')}. På så sätt fördelas ansvaret för felet steg för steg bakåt genom nätverket.`;
     rows=[
       {cls:'gen',tex:`\\delta_{${j+1}} = \\delta_{ut}\\cdot w_{${j+1}}\\cdot a_{${j+1}}(1-a_{${j+1}})`,plain:`δ${j+1} = δut·w${j+1}·a${j+1}(1−a${j+1})`},
       {cls:'num',tex:`\\delta_{${j+1}} = (${f(C.dOut)})(${f(w2[j])})(${fp(C.ah[j])})(1-${fp(C.ah[j])})`,plain:`δ${j+1} = ${f(C.dH[j])}`},
@@ -745,9 +747,9 @@ function renderStep(){
       {cls:'gen',tex:`\\frac{\\partial L}{\\partial w_{ji}} = \\delta_{j}\\cdot x_{i}`,plain:'∂L/∂w = δj · xi'},
       {cls:'num',tex:`\\text{neuron 1:}\\ ${f(C.gW1[0][0])},\\ ${f(C.gW1[0][1])}`,plain:`neuron 1: ${f(C.gW1[0][0])}, ${f(C.gW1[0][1])}`},
       {cls:'num',tex:`\\text{neuron 2:}\\ ${f(C.gW1[1][0])},\\ ${f(C.gW1[1][1])}`,plain:`neuron 2: ${f(C.gW1[1][0])}, ${f(C.gW1[1][1])}`},
-      {cls:'res',tex:`\\text{Nu har alla nio parametrar en gradient}\\ ${col(CG,'\\checkmark')}`,plain:'Nu har alla nio parametrar en gradient ✓'}
+      {cls:'res',text:true,html:'Nu vet nätverket hur varje vikt och bias ska ändras <span style="color:var(--green)">✓</span>'}
     ];
-    narr=`Backpropagation är klar. Felet är nu fördelat på varenda vikt och bias, så vi vet åt vilket håll var och en ska justeras.`;
+    narr=`Backpropagation är klar. Nu vet varje vikt och bias hur den bidrog till felet, och därmed åt vilket håll den behöver justeras.`;
   }
   else if(st.kind==='update'){
     if(!C.old)applyUpdate();
@@ -927,7 +929,7 @@ function openEdgeCalc(li,fi,ti){
     wv=w2[fi];
     name=`Vikt från dold neuron ${fi+1} till utdatan`;
     srcName=`a${fi+1}`;srcVal=has?C.ah[fi]:null;
-    def=`Den här kopplingen för dold neuron ${fi+1} vidare till utneuronen. Under backpropagation används den för att skicka felet bakåt genom nätverket.`;
+    def=`Den här kopplingen för dold neuron ${fi+1} vidare till utgångsneuronen. Under backpropagation används den för att skicka felsignalen bakåt genom nätverket.`;
     rows.push({cls:'gen',tex:`w = ${col(wv>=0?CB:CR,fp(wv,3))}`,plain:`w = ${fp(wv,3)}`});
     if(has)rows.push({cls:'num',tex:`\\text{bidrag} = w\\cdot a_{${fi+1}} = (${f(wv)})(${fp(srcVal)}) = ${f(wv*srcVal)}`,plain:`bidrag = ${f(wv*srcVal)}`});
     if(has&&C.gW2)rows.push({cls:'res amber',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{ut}\\cdot a_{${fi+1}} = ${col(CA,f(C.gW2[fi]))}`,plain:`∂L/∂w = ${f(C.gW2[fi])}`});
@@ -949,7 +951,7 @@ function openNeuronCalc(l,i){
     rows.push({cls:'num',tex:`b = ${f(bh[i])}`,plain:`b = ${f(bh[i])}`});
     if(has){rows.push({cls:'num',tex:`z = ${f(C.zh[i])}`,plain:`z = ${f(C.zh[i])}`});rows.push({cls:'res',tex:`a_{${i+1}} = ${col(CB,fp(C.ah[i]))}`,plain:`a${i+1} = ${fp(C.ah[i])}`});}
   }else{
-    name='Utneuron (ŷ)';
+    name='Utgångsneuron (ŷ)';
     def=`Det här är nätverkets svar. Den väger ihop de dolda neuronerna, lägger till sin bias och kör resultatet genom sigmoid. Värdet <em>ŷ</em> kan tolkas som en sannolikhet mellan 0 och 1.`;
     rows.push({cls:'gen',tex:`\\hat{y} = \\sigma(w_1a_1 + w_2a_2 + b)`,plain:'ŷ = σ(w1·a1 + w2·a2 + b)'});
     rows.push({cls:'num',tex:`b = ${f(bo)}`,plain:`b = ${f(bo)}`});
@@ -993,7 +995,7 @@ const CONCEPTS={
     def:'Aktiveringsfunktionen som tar in vilket tal som helst och pressar ihop det till ett värde mellan 0 och 1. Stora positiva tal hamnar nära 1, stora negativa nära 0, och talet 0 hamnar mitt emellan på 0,5. Den mjuka S-formade kurvan gör att nätverket kan lära sig gradvis, och eftersom den går att derivera fungerar den utmärkt tillsammans med backpropagation.',
     tex:'\\sigma(z) = \\dfrac{1}{1 + e^{-z}}',plain:'σ(z) = 1 / (1 + e^−z)'},
   aktivering:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="9" opacity=".4"/></svg>',title:'Aktivering (a)',
-    def:'Det värde en neuron skickar vidare efter att den räknat sin summa och kört den genom aktiveringsfunktionen. Ett värde nära 1 betyder att neuronen är starkt på, och nära 0 att den är av. Utneuronens aktivering är nätverkets slutliga svar, <em>ŷ</em>.',
+    def:'Det värde en neuron skickar vidare efter att den räknat sin summa och kört den genom aktiveringsfunktionen. Ett värde nära 1 betyder att neuronen är starkt på, och nära 0 att den är av. Utgångsneuronens aktivering är nätverkets slutliga svar, <em>ŷ</em>.',
     tex:'a = \\sigma(z)',plain:'a = σ(z)'},
   vikt:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="7" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8 8.5 16 15.5"/></svg>',title:'Vikt (w)',
     def:'Ett tal som bestämmer hur starkt en koppling mellan två neuroner är. En stor positiv vikt släpper igenom signalen förstärkt, en negativ vikt vänder på den, och en vikt nära noll släpper nästan inte igenom något alls. Det är just vikterna som nätverket justerar när det lär sig.',
@@ -1002,7 +1004,7 @@ const CONCEPTS={
     def:'Ett extra tal som läggs till i varje neurons summa, oberoende av ingångarna. Biasen flyttar tröskeln för när neuronen tänds, ungefär som en grundinställning. Precis som vikterna justeras biasen under träningen.',
     tex:null},
   loss:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l6 6 4-4 8 8"/><path d="M15 15h6v-6"/></svg>',title:'Förlust (L)',
-    def:'Förlusten, som vi kallar <em>L</em> (av engelskans <em>loss</em>), mäter hur fel nätverkets gissning var. Den är stor när gissningen ligger långt från det rätta svaret och noll när de är lika. Vi använder halva kvadratfelet: skillnaden mellan gissning och svar, upphöjt till två och delat med två. Kvadraten gör att stora fel väger tyngre, och hela träningen går ut på att göra L så liten som möjligt.',
+    def:'Förlusten (loss), som vi betecknar <em>L</em>, mäter hur fel nätverkets gissning var. Den är stor när gissningen ligger långt från det rätta svaret och noll när de är lika. Vi använder halva kvadratfelet: skillnaden mellan gissning och svar, upphöjt till två och delat med två. Kvadraten gör att stora fel väger tyngre, och hela träningen går ut på att göra förlusten så liten som möjligt.',
     tex:'L = \\tfrac{1}{2}(\\hat{y}-y)^2',plain:'L = ½(ŷ − y)²'},
   backprop:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H4m6 6-6-6 6-6"/></svg>',title:'Backpropagation',
     def:'Algoritmen som skickar felet <em>baklänges</em> genom nätverket. Med hjälp av kedjeregeln räknar den ut exakt hur mycket varje enskild vikt bidrog till förlusten – viktens <strong>gradient</strong>. Utan backpropagation skulle vi inte veta åt vilket håll vikterna behöver ändras.',
