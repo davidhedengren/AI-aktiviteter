@@ -38,7 +38,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .intro.hidden{opacity:0;pointer-events:none;}
 .intro-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:var(--r-lg);padding:32px 34px;max-width:560px;width:92%;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.02) inset;animation:cardIn .5s var(--ease-spring);}
 @keyframes cardIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
-.intro-icon{width:46px;height:46px;margin:0 auto 14px;color:var(--accent2);}
 .intro-card h2{font-family:'Syne',sans-serif;font-size:1.55em;font-weight:800;margin-bottom:8px;text-align:center;letter-spacing:-.01em;}
 .intro-card h2 span{background:linear-gradient(135deg,#eef1fb,var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
 .intro-card .sub{color:var(--dim);font-size:.9em;line-height:1.6;text-align:center;margin-bottom:20px;}
@@ -53,8 +52,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .intro-phase .ip-d{font-size:.72em;color:var(--dim2);line-height:1.45;}
 .intro-start{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;font-family:'DM Sans',sans-serif;font-size:.96em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(77,128,255,.28);margin-top:8px;}
 .intro-start:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
-.intro-tip{margin-top:16px;font-size:.8em;color:var(--dim);text-align:center;line-height:1.55;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid var(--border-soft);border-radius:var(--r-sm);}
-.intro-tip strong{color:var(--text);}
 
 /* header */
 .hd{text-align:center;padding:14px 16px 10px;border-bottom:1px solid var(--border-soft);position:relative;z-index:2;}
@@ -71,22 +68,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .lp::-webkit-scrollbar,.rp::-webkit-scrollbar{width:5px;}.lp::-webkit-scrollbar-thumb,.rp::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 .sec-t{font-size:.65em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim2);margin-bottom:6px;}
 
-/* problem cards */
-.prob-cards{display:flex;flex-direction:column;gap:6px;}
-.prob-card{display:flex;align-items:center;gap:10px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r-md);background:var(--surface2);cursor:pointer;transition:.2s var(--ease-out);}
-.prob-card:hover{border-color:var(--dim2);background:rgba(255,255,255,.04);}
-.prob-card.active{border-color:var(--accent);background:var(--accent-dim);box-shadow:0 0 0 1px rgba(77,128,255,.25) inset;}
-.prob-card .pc-icon{font-size:1.15em;line-height:1;flex-shrink:0;width:22px;text-align:center;color:var(--accent2);}
-.prob-card .pc-title{font-size:.84em;font-weight:700;color:var(--text);}
-.prob-card .pc-short{font-size:.7em;color:var(--dim2);margin-top:1px;}
-.prob-card.active .pc-title{color:var(--accent2);}
-
-/* problem explainer */
-.pc-help{margin-left:auto;width:23px;height:23px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim2);font-size:.82em;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s var(--ease-spring);flex-shrink:0;font-family:'DM Sans',sans-serif;}
-.pc-help:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:scale(1.14);}
-.prob-hint{font-size:.7em;color:var(--dim2);line-height:1.5;margin-top:6px;display:flex;align-items:center;gap:5px;}
-.prob-hint b{color:var(--dim);}
-/* mini truth table inside popup */
+/* mini truth table (setup preview + gate popup) */
 .mini-tt{width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:.92em;}
 .mini-tt caption{caption-side:top;font-size:.72em;color:var(--dim2);text-align:left;padding-bottom:6px;font-family:'DM Sans',sans-serif;}
 .mini-tt th{color:var(--dim2);font-weight:600;padding:5px 8px;border-bottom:1px solid var(--border);text-align:center;}
@@ -250,12 +232,87 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .concept-formula:empty{display:none;}
 .concept-formula .mrow{color:var(--text);}
 
+/* animated mini-network (intro) */
+.intro-net{width:158px;margin:2px auto 18px;}
+.intro-net svg{width:100%;height:auto;overflow:visible;display:block;}
+.nn-edge{stroke:rgba(122,162,255,.28);stroke-width:1.4;}
+.nn-node{transform-box:fill-box;transform-origin:center;animation:nnPulse 2.6s var(--ease-out) infinite;}
+.nn-node.d1{animation-delay:.4s;}.nn-node.d2{animation-delay:.8s;}.nn-node.d3{animation-delay:1.2s;}
+.nn-node.o{animation:nnPulseOut 2.6s var(--ease-out) infinite;}
+.nn-ring{fill:none;stroke:rgba(255,206,84,.55);stroke-width:1.3;opacity:0;transform-box:fill-box;transform-origin:center;animation:nnRing 2.6s var(--ease-out) infinite;}
+.nn-dot{filter:drop-shadow(0 0 3px rgba(200,220,255,.9));}
+@keyframes nnPulse{0%,100%{opacity:.8;transform:scale(1);}50%{opacity:1;transform:scale(1.08);}}
+@keyframes nnPulseOut{0%,55%{opacity:.75;transform:scale(1);}72%{opacity:1;transform:scale(1.16);}100%{opacity:.75;transform:scale(1);}}
+@keyframes nnRing{0%,58%{opacity:0;transform:scale(.7);}72%{opacity:.9;transform:scale(1);}100%{opacity:0;transform:scale(1.5);}}
+@media (prefers-reduced-motion:reduce){.nn-node,.nn-ring{animation:none;}.nn-dot{display:none;}}
+
+/* setup screen (choose what to learn) */
+.setup{position:fixed;inset:0;z-index:150;display:flex;align-items:center;justify-content:center;padding:24px;
+  background:radial-gradient(ellipse 60% 50% at 50% 30%,rgba(77,128,255,.08),transparent 70%),var(--bg);
+  opacity:0;pointer-events:none;transition:opacity .4s var(--ease-out);}
+.setup.show{opacity:1;pointer-events:auto;}
+.setup.leaving{opacity:0;pointer-events:none;}
+.setup-inner{width:100%;max-width:760px;max-height:92vh;overflow-y:auto;text-align:center;animation:setupIn .5s var(--ease-spring);}
+@keyframes setupIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.setup-step{font-family:'JetBrains Mono',monospace;font-size:.68em;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);
+  display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border:1px solid rgba(122,162,255,.28);border-radius:999px;background:var(--accent-dim);margin-bottom:16px;}
+.setup-head h2{font-family:'Syne',sans-serif;font-size:2em;font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-bottom:10px;}
+.setup-head h2 span{background:linear-gradient(135deg,#eef1fb,var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.setup-sub{color:var(--dim);font-size:.92em;line-height:1.55;max-width:480px;margin:0 auto 26px;}
+.setup-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.setup-card{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:20px 14px 16px;cursor:pointer;
+  border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface);backdrop-filter:blur(18px);
+  transition:.24s var(--ease-spring);text-align:center;overflow:hidden;}
+.setup-card::after{content:'';position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 1px transparent inset;transition:.24s;pointer-events:none;}
+.setup-card:hover{transform:translateY(-3px);border-color:var(--dim2);box-shadow:0 16px 40px rgba(0,0,0,.3);}
+.setup-card.active{border-color:var(--accent);background:linear-gradient(180deg,rgba(77,128,255,.14),var(--surface));}
+.setup-card.active::after{box-shadow:0 0 0 1.5px rgba(77,128,255,.4) inset,0 18px 46px rgba(77,128,255,.22);}
+.setup-card .sc-badge{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;color:transparent;transition:.24s var(--ease-spring);}
+.setup-card.active .sc-badge{border-color:var(--accent);background:var(--accent);color:#fff;}
+.setup-card .sc-icon{font-size:1.9em;line-height:1;color:var(--accent2);width:52px;height:52px;display:flex;align-items:center;justify-content:center;
+  border-radius:16px;background:var(--accent-dim);margin-bottom:4px;transition:.24s;}
+.setup-card.active .sc-icon{background:rgba(77,128,255,.2);transform:scale(1.04);}
+.setup-card .sc-title{font-size:.98em;font-weight:700;color:var(--text);}
+.setup-card .sc-short{font-size:.74em;color:var(--dim2);line-height:1.4;}
+.setup-card .sc-tag{margin-top:5px;font-family:'JetBrains Mono',monospace;font-size:.62em;font-weight:600;letter-spacing:.05em;padding:3px 8px;border-radius:999px;}
+.setup-card .sc-tag.easy{background:rgba(51,209,122,.12);color:var(--green);}
+.setup-card .sc-tag.hard{background:rgba(255,159,69,.12);color:var(--amber);}
+.setup-preview{display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:left;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px 20px;margin-bottom:22px;backdrop-filter:blur(18px);}
+.setup-preview .sp-tt{flex-shrink:0;}
+.setup-preview .sp-text{flex:1;min-width:200px;font-size:.82em;line-height:1.55;color:var(--dim);}
+.setup-preview .sp-text strong{color:var(--text);}
+.setup-preview .sp-text .sp-hard{color:var(--amber);}
+.setup-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.setup-back{background:none;border:none;color:var(--dim2);font-family:'DM Sans',sans-serif;font-size:.86em;font-weight:600;cursor:pointer;padding:10px 6px;transition:.2s;}
+.setup-back:hover{color:var(--text);}
+.setup-go{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;font-family:'DM Sans',sans-serif;font-size:1em;font-weight:700;
+  background:var(--accent);color:#fff;border:none;border-radius:var(--r-md);cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 10px 30px rgba(77,128,255,.32);}
+.setup-go:hover{background:#3d6de6;transform:translateY(-2px);box-shadow:0 14px 36px rgba(77,128,255,.44);}
+
+/* lab: compact current-task summary (left panel) */
+.task-summary{display:flex;align-items:center;gap:11px;padding:11px 12px;border:1px solid rgba(77,128,255,.28);border-radius:var(--r-md);
+  background:linear-gradient(160deg,var(--accent-dim),var(--surface2));}
+.task-summary .ts-icon{width:36px;height:36px;flex-shrink:0;border-radius:11px;background:rgba(77,128,255,.16);color:var(--accent2);
+  display:flex;align-items:center;justify-content:center;font-size:1.25em;font-weight:800;}
+.task-summary .ts-body{min-width:0;flex:1;}
+.task-summary .ts-eyebrow{font-size:.58em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim2);}
+.task-summary .ts-title{font-size:.92em;font-weight:700;color:var(--text);margin-top:1px;}
+.task-summary .ts-change{flex-shrink:0;display:inline-flex;align-items:center;gap:4px;font-size:.7em;font-weight:600;color:var(--accent2);
+  background:rgba(77,128,255,.1);border:1px solid rgba(122,162,255,.28);border-radius:999px;padding:6px 10px;cursor:pointer;transition:.2s var(--ease-out);font-family:'DM Sans',sans-serif;}
+.task-summary .ts-change:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+
 @media(max-width:1060px){
   body{height:auto;overflow:auto;}
   .app{grid-template-columns:1fr;height:auto;padding:8px;gap:8px;}
   .center{min-height:520px;}
   .canvas-wrap{flex:1 1 300px;min-height:340px;}
   .back-link{position:static;transform:none;display:inline-flex;margin-bottom:6px;}
+}
+@media(max-width:560px){
+  .setup-cards{grid-template-columns:1fr;}
+  .setup-head h2{font-size:1.6em;}
 }
 @media (prefers-reduced-motion:reduce){.bg-mesh::before{animation:none;}*{animation-duration:.01ms!important;}}
 </style>
@@ -265,7 +322,38 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 
 <div class="intro" id="intro">
   <div class="intro-card">
-    <svg class="intro-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg>
+    <div class="intro-net" aria-hidden="true">
+      <svg viewBox="0 0 140 72">
+        <g>
+          <line class="nn-edge" x1="20" y1="22" x2="68" y2="22"/>
+          <line class="nn-edge" x1="20" y1="22" x2="68" y2="50"/>
+          <line class="nn-edge" x1="20" y1="50" x2="68" y2="22"/>
+          <line class="nn-edge" x1="20" y1="50" x2="68" y2="50"/>
+          <line class="nn-edge" x1="68" y1="22" x2="116" y2="36"/>
+          <line class="nn-edge" x1="68" y1="50" x2="116" y2="36"/>
+        </g>
+        <g fill="#d3e2ff">
+          <circle class="nn-dot" r="1.9"><animateMotion dur="1.5s" begin="0s" repeatCount="indefinite" path="M20,22 L68,22"/></circle>
+          <circle class="nn-dot" r="1.9"><animateMotion dur="1.5s" begin="0.2s" repeatCount="indefinite" path="M20,22 L68,50"/></circle>
+          <circle class="nn-dot" r="1.9"><animateMotion dur="1.5s" begin="0.1s" repeatCount="indefinite" path="M20,50 L68,22"/></circle>
+          <circle class="nn-dot" r="1.9"><animateMotion dur="1.5s" begin="0.3s" repeatCount="indefinite" path="M20,50 L68,50"/></circle>
+          <circle class="nn-dot" r="1.9"><animateMotion dur="1.5s" begin="0.75s" repeatCount="indefinite" path="M68,22 L116,36"/></circle>
+          <circle class="nn-dot" r="1.9"><animateMotion dur="1.5s" begin="0.9s" repeatCount="indefinite" path="M68,50 L116,36"/></circle>
+        </g>
+        <g>
+          <circle class="nn-node" cx="20" cy="22" r="6.5" fill="url(#introNodeG)"/>
+          <circle class="nn-node d1" cx="20" cy="50" r="6.5" fill="url(#introNodeG)"/>
+          <circle class="nn-node d2" cx="68" cy="22" r="6.5" fill="url(#introNodeG)"/>
+          <circle class="nn-node d3" cx="68" cy="50" r="6.5" fill="url(#introNodeG)"/>
+          <circle class="nn-ring" cx="116" cy="36" r="9"/>
+          <circle class="nn-node o" cx="116" cy="36" r="7.5" fill="url(#introNodeGo)"/>
+        </g>
+        <defs>
+          <radialGradient id="introNodeG" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#b6ccff"/><stop offset="1" stop-color="#3a5bd0"/></radialGradient>
+          <radialGradient id="introNodeGo" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#ffe6a6"/><stop offset="1" stop-color="#e0952f"/></radialGradient>
+        </defs>
+      </svg>
+    </div>
     <h2><span>Träna ett neuralt nätverk</span></h2>
     <p class="sub">Här får du se hur ett neuralt nätverk faktiskt lär sig. Vi följer ett träningsexempel hela vägen runt och ser hur felet vandrar <strong style="color:var(--amber)">bakåt</strong> genom nätverket och justerar varje vikt en aning.</p>
     <div class="intro-loop">
@@ -274,8 +362,24 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
       <div class="intro-phase p3"><div class="ip-num">3</div><div><div class="ip-t">Backpropagation</div><div class="ip-d">Information om felet skickas bakåt genom nätverket, så att varje vikt får veta hur den bidrog.</div></div></div>
       <div class="intro-phase p4"><div class="ip-num">4</div><div><div class="ip-t">Uppdatera</div><div class="ip-d">Varje vikt justeras en aning i den riktning som minskar felet.</div></div></div>
     </div>
-    <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Öppna labbet <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-    <p class="intro-tip">Tryck på <strong>Nästa beräkning</strong> för att gå framåt ett steg i taget. Du kan också klicka på en koppling eller en neuron i nätverket för att se just den beräkningen.</p>
+    <button class="intro-start" onclick="openSetup()">Kom igång <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
+</div>
+
+<!-- SETUP: choose what the network should learn -->
+<div class="setup" id="setup">
+  <div class="setup-inner">
+    <div class="setup-step"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block"></span> Steg 1 av 2 · Välj uppgift</div>
+    <div class="setup-head">
+      <h2>Vad ska nätverket <span>lära sig?</span></h2>
+      <p class="setup-sub">Välj en logisk grind. Nätverket ska lära sig att ge rätt svar för alla fyra kombinationerna av ingångarna x₁ och x₂.</p>
+    </div>
+    <div class="setup-cards" id="setupCards"></div>
+    <div class="setup-preview" id="setupPreview"></div>
+    <div class="setup-actions">
+      <button class="setup-back" onclick="backToIntro()">← Tillbaka</button>
+      <button class="setup-go" id="setupGo" onclick="enterLab()">Börja träna <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
   </div>
 </div>
 
@@ -288,12 +392,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
   <p>Följ hur nätverket lär sig, steg för steg – från slumpmässig gissning till färdigtränad modell.</p>
 </div>
 
-<div class="app">
+<div class="app" id="app" style="display:none">
   <!-- LEFT -->
   <div class="lp">
-    <div><div class="sec-t">Välj vad nätverket ska lära sig</div><div class="prob-cards" id="probCards"></div>
-      <div class="prob-hint">Klicka på frågetecknet <span style="display:inline-flex;width:15px;height:15px;border-radius:50%;border:1px solid var(--dim2);align-items:center;justify-content:center;font-size:.8em;font-weight:700">?</span> vid en grind för att läsa vad den gör.</div>
-    </div>
+    <div><div class="sec-t">Uppgift</div><div class="task-summary" id="taskSummary"></div></div>
     <div><table class="dtable" id="dataTable"></table><div class="hint" id="dataHint"></div></div>
     <div>
       <div class="sec-t">Inlärningstakt (η)</div>
@@ -554,15 +656,69 @@ function predictExample(i){
   renderData();
 }
 
-/* ============================ LEFT: PROBLEM / DATA ============================ */
-function renderProbCards(){
-  document.getElementById('probCards').innerHTML=Object.entries(PROBLEMS).map(([k,p])=>
-    `<div class="prob-card ${prob===k?'active':''}" onclick="setProblem('${k}')">
-       <span class="pc-icon">${p.icon}</span>
-       <div style="min-width:0"><div class="pc-title">${p.title}</div><div class="pc-short">${p.short}</div></div>
-       <button class="pc-help" title="Vad är ${p.title}?" onclick="event.stopPropagation();openGateInfo('${k}')">?</button>
-     </div>`).join('');
+/* ============================ SETUP: CHOOSE TASK ============================ */
+function openSetup(){
+  document.getElementById('intro').classList.add('hidden');
+  const s=document.getElementById('setup');s.classList.remove('leaving');
+  requestAnimationFrame(()=>s.classList.add('show'));
+  renderSetupCards();renderSetupPreview();
 }
+function backToIntro(){
+  document.getElementById('setup').classList.remove('show');
+  document.getElementById('intro').classList.remove('hidden');
+}
+function renderSetupCards(){
+  document.getElementById('setupCards').innerHTML=Object.entries(PROBLEMS).map(([k,p])=>{
+    const hard=k==='xor';
+    return `<div class="setup-card ${prob===k?'active':''}" onclick="selectSetupProblem('${k}')">
+      <span class="sc-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span>
+      <span class="sc-icon">${p.icon}</span>
+      <span class="sc-title">${p.title}</span>
+      <span class="sc-short">${p.short}</span>
+      <span class="sc-tag ${hard?'hard':'easy'}">${hard?'Kräver dolt lager':'Lätt att lära'}</span>
+    </div>`;
+  }).join('');
+}
+function selectSetupProblem(k){prob=k;renderSetupCards();renderSetupPreview();}
+function renderSetupPreview(){
+  const p=PROBLEMS[prob],hard=prob==='xor';
+  let tt='<table class="mini-tt"><thead><tr><th>x₁</th><th>x₂</th><th>Svar</th></tr></thead><tbody>';
+  p.data.forEach(ex=>{tt+=`<tr><td>${ex.x[0]}</td><td>${ex.x[1]}</td><td class="${ex.y?'ja':'nej'}">${ex.y?'Ja':'Nej'}</td></tr>`;});
+  tt+='</tbody></table>';
+  const line=hard
+    ? `<strong>${p.title}</strong> ger Ja när <strong>exakt en</strong> ingång är 1. <span class="sp-hard">Ja- och Nej-fallen går inte att dela med en enda rät linje – därför behöver nätverket sitt dolda lager, och XOR tar fler epoker att lära sig.</span>`
+    : prob==='and'
+      ? `<strong>${p.title}</strong> ger Ja bara när <strong>båda</strong> ingångarna är 1. Ett enkelt fall som en enda rät linje klarar att skilja åt.`
+      : `<strong>${p.title}</strong> ger Ja när <strong>minst en</strong> ingång är 1. Ett enkelt fall som en enda rät linje klarar att skilja åt.`;
+  document.getElementById('setupPreview').innerHTML=
+    `<div class="sp-tt">${tt}</div><div class="sp-text">${line}<br><span style="color:var(--dim2);font-size:.92em">Vill du veta mer? <span class="term" onclick="openGateInfo('${prob}')">Öppna full förklaring</span></span></div>`;
+}
+function enterLab(){
+  const s=document.getElementById('setup');s.classList.add('leaving');
+  setTimeout(()=>{
+    s.classList.remove('show','leaving');
+    document.getElementById('app').style.display='';
+    resetTraining();           // fresh weights + renders idle/data/results/loss/net for chosen gate
+    renderTaskSummary();
+    setTimeout(()=>{drawNet();drawLossChart();},40);
+  },260);
+}
+function backToSetup(){
+  stopAuto();trained=false;stepIdx=-1;C={};
+  document.getElementById('app').style.display='none';
+  const s=document.getElementById('setup');s.classList.remove('leaving');
+  requestAnimationFrame(()=>s.classList.add('show'));
+  renderSetupCards();renderSetupPreview();
+}
+function renderTaskSummary(){
+  const p=PROBLEMS[prob];
+  document.getElementById('taskSummary').innerHTML=
+    `<div class="ts-icon">${p.icon}</div>
+     <div class="ts-body"><div class="ts-eyebrow">Tränar på</div><div class="ts-title">${p.title}</div></div>
+     <button class="ts-change" onclick="backToSetup()" title="Välj en annan uppgift">↺ Byt</button>`;
+}
+
+/* ============================ LEFT: DATA ============================ */
 function openGateInfo(key){
   const p=PROBLEMS[key];
   document.getElementById('conceptIcon').innerHTML=`<span style="font-size:27px;font-weight:800;line-height:1">${p.icon}</span>`;
@@ -575,7 +731,6 @@ function openGateInfo(key){
   document.getElementById('conceptBackdrop').classList.add('show');
   requestAnimationFrame(()=>document.getElementById('conceptCard').classList.add('show'));
 }
-function setProblem(k){prob=k;renderProbCards();resetTraining();}
 function renderData(){
   const d=PROBLEMS[prob].data;
   let h='<caption>Sanningstabellen visar det rätta svaret för varje kombination av ingångar.</caption><thead><tr><th>x₁</th><th>x₂</th><th>Rätt svar (y)</th></tr></thead><tbody>';
@@ -1049,10 +1204,11 @@ function closeConcept(){document.getElementById('conceptCard').classList.remove(
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
 
 /* ============================ INIT ============================ */
-let rT;window.addEventListener('resize',()=>{clearTimeout(rT);rT=setTimeout(()=>{drawNet();drawLossChart();},80);});
+let rT;window.addEventListener('resize',()=>{clearTimeout(rT);rT=setTimeout(()=>{
+  if(document.getElementById('app').style.display!=='none'){drawNet();drawLossChart();}
+},80);});
 function boot(){
-  initParams();renderProbCards();renderGlossary();onLr();renderIdle();renderData();updateResults();drawLossChart();
-  setTimeout(()=>{drawNet();drawLossChart();},50);
+  initParams();renderGlossary();onLr();renderSetupCards();renderSetupPreview();
 }
 boot();
 // re-typeset if KaTeX finishes loading after first render
