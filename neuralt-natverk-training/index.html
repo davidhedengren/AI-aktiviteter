@@ -153,23 +153,29 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .flow-badge.done{background:rgba(51,209,122,.14);border:1px solid rgba(51,209,122,.45);color:var(--green);}
 .canvas-hint{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:.66em;color:var(--dim2);background:rgba(6,7,14,.6);padding:4px 11px;border-radius:999px;border:1px solid var(--border-soft);backdrop-filter:blur(6px);white-space:nowrap;}
 
-/* narration */
-.narr{flex-shrink:0;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:11px 13px;font-size:.8em;line-height:1.55;color:var(--dim);min-height:52px;}
+/* narration -> center phase-explanation card */
+.narr{flex-shrink:0;background:linear-gradient(160deg,var(--surface2),rgba(77,128,255,.04));border:1px solid var(--border);border-radius:var(--r-md);padding:14px;min-height:64px;}
 .narr strong{color:var(--text);}
 .narr .mono{font-family:'JetBrains Mono',monospace;color:var(--accent2);}
+.mb-highlight{margin-top:2px;padding:9px 12px;background:rgba(77,128,255,.08);border-left:3px solid var(--accent2);border-radius:0 8px 8px 0;font-size:.8em;line-height:1.55;color:var(--text);}
+.mb-highlight strong{color:var(--accent2);}
+.mb-highlight .mono{font-family:'JetBrains Mono',monospace;color:var(--gold);}
+.mb-kicker{font-size:.62em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;margin-bottom:10px;color:var(--dim2);}
+.mb-kicker.forward{color:var(--accent2);}.mb-kicker.loss{color:var(--gold);}.mb-kicker.backward{color:var(--amber);}.mb-kicker.update{color:var(--green);}.mb-kicker.idle{color:var(--dim2);}
+.mb-empty{border:1px dashed var(--border-soft);border-radius:var(--r-sm);padding:20px 14px;text-align:center;font-size:.78em;color:var(--dim2);line-height:1.55;}
 
 /* right panel math */
 .mathbox{background:linear-gradient(160deg,var(--surface2),rgba(77,128,255,.04));border:1px solid var(--border);border-radius:var(--r-md);padding:14px;min-height:120px;}
-.mathbox .mb-tag{font-size:.62em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 9px;border-radius:999px;display:inline-flex;align-items:center;gap:5px;margin-bottom:10px;}
+.mathbox .mb-tag,.narr .mb-tag{font-size:.62em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 9px;border-radius:999px;display:inline-flex;align-items:center;gap:5px;margin-bottom:10px;}
 .mb-tag.forward{background:var(--accent-dim);color:var(--accent2);}
 .mb-tag.loss{background:rgba(255,206,84,.12);color:var(--gold);}
 .mb-tag.backward{background:rgba(255,159,69,.12);color:var(--amber);}
 .mb-tag.update{background:rgba(51,209,122,.12);color:var(--green);}
 .mb-tag.idle{background:var(--surface2);color:var(--dim);}
-.mathbox h4{font-family:'Syne',sans-serif;font-size:.98em;font-weight:700;margin-bottom:8px;color:var(--text);}
-.mathbox .mb-desc{font-size:.78em;line-height:1.6;color:var(--dim);margin-bottom:11px;}
-.mathbox .mb-desc strong{color:var(--text);}
-.mathbox .mb-desc em{color:var(--gold);font-style:normal;}
+.mathbox h4,.narr h4{font-family:'Syne',sans-serif;font-size:.98em;font-weight:700;margin-bottom:8px;color:var(--text);}
+.mathbox .mb-desc,.narr .mb-desc{font-size:.78em;line-height:1.6;color:var(--dim);margin-bottom:11px;}
+.mathbox .mb-desc strong,.narr .mb-desc strong{color:var(--text);}
+.mathbox .mb-desc em,.narr .mb-desc em{color:var(--gold);font-style:normal;}
 .term{color:var(--accent2);border-bottom:1px dashed rgba(122,162,255,.55);cursor:pointer;transition:.15s var(--ease-out);white-space:nowrap;}
 .term:hover{color:#fff;border-bottom-color:var(--accent2);background:rgba(77,128,255,.14);border-radius:3px;}
 .sym{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--text);}
@@ -419,12 +425,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 
   <!-- RIGHT -->
   <div class="rp">
-    <div class="mathbox" id="mathbox"></div>
-    <div class="result-boxes" id="resultBoxes">
+    <div><div class="sec-t">Beräkning</div><div class="mathbox" id="mathbox"></div></div>
+    <div><div class="sec-t">Resultat</div><div class="result-boxes" id="resultBoxes">
       <div class="rbox"><div class="rl">Nätverkets gissning (ŷ)</div><div class="rv" id="rPred" style="color:var(--accent2)">–</div></div>
       <div class="rbox"><div class="rl">Rätt svar (y)</div><div class="rv" id="rTarget" style="color:var(--gold)">–</div></div>
       <div class="rbox wide"><div class="rl" id="rLossLabel">Förlust för detta exempel</div><div class="rv" id="rLoss" style="color:var(--amber);font-size:1.05em">–</div></div>
-    </div>
+    </div></div>
     <div class="loss-panel">
       <div class="lp-hd"><span class="t">Förlust över epoker</span><span class="v" id="epochLoss">–</span></div>
       <canvas id="lossChart"></canvas>
@@ -586,6 +592,7 @@ function toggleAuto(){
   running=true;trained=false;autoKicks=0;stepIdx=-1;renderControls();
   document.getElementById('flowBadge').classList.remove('show');
   runTimer=setInterval(()=>{
+    if(!running)return;
     const d=PROBLEMS[prob].data;
     for(let k=0;k<6;k++){
       for(let e=0;e<d.length;e++){exampleIdx=e;computeIteration();applyUpdate();}
@@ -631,8 +638,7 @@ function finishTraining(){
   badge.className='flow-badge done show';badge.innerHTML='✓ FÄRDIGTRÄNAT NÄTVERK';
   setPhaseBar(null,true);
   const last=lossHistory[lossHistory.length-1];
-  const mb=document.getElementById('mathbox');
-  mb.innerHTML=`<span class="mb-tag update">Klart</span>
+  document.getElementById('narr').innerHTML=`<span class="mb-tag update">Klart</span>
     <h4>Nätverket är färdigtränat!</h4>
     <div class="mb-desc">Efter ${epoch} epoker av framåtpass och backpropagation har vikterna hittat värden som gör att nätverket svarar rätt på alla exempel. Förlusten har sjunkit ända ner till ${last.toFixed(4)}.<br><br>Från och med nu ändrar vi inte längre vikterna. Nätverket är tränat, och vi kan börja <strong>använda</strong> det. Att mata in ny data och läsa av svaret kallas att göra en <strong style="color:var(--green)">förutsägelse</strong>.<br><br>Prova själv: välj en kombination nedanför nätverket och se att den tränade modellen svarar rätt.</div>`;
   renderControls();
@@ -652,7 +658,14 @@ function predictExample(i){
     ? '<span class="verdict-ok">✓ Ja, rätt svar</span>'
     : '<span class="verdict-bad">✗ Nej, fel</span>';
   const rounded=Math.round(C.yhat);
-  document.getElementById('narr').innerHTML=`Nätverket får in <strong>x₁ = ${ex.x[0]}</strong> och <strong>x₂ = ${ex.x[1]}</strong> och svarar <span class="mono" style="color:var(--gold)">${C.yhat.toFixed(3)}</span>. Avrundat blir det <strong>${rounded}</strong>, alltså "${rounded?'Ja':'Nej'}" – och det ${correct?'stämmer med':'stämmer inte med'} facit.`;
+  document.getElementById('narr').innerHTML=`<span class="mb-tag update">Klart</span><h4>Testar en förutsägelse</h4><div class="mb-desc">Nätverket får in <strong>x₁ = ${ex.x[0]}</strong> och <strong>x₂ = ${ex.x[1]}</strong> och svarar <span class="mono" style="color:var(--gold)">${C.yhat.toFixed(3)}</span>. Avrundat blir det <strong>${rounded}</strong>, alltså "${rounded?'Ja':'Nej'}" – och det ${correct?'stämmer med':'stämmer inte med'} facit.</div>`;
+  const rows=[
+    {cls:'num',tex:`a_{1} = \\sigma(z_{1}) = ${col(CB,fp(C.ah[0]))}`,plain:`a1 = ${fp(C.ah[0])}`},
+    {cls:'num',tex:`a_{2} = \\sigma(z_{2}) = ${col(CB,fp(C.ah[1]))}`,plain:`a2 = ${fp(C.ah[1])}`},
+    {cls:'res gold',tex:`\\hat{y} = \\sigma(w_{1}a_{1} + w_{2}a_{2} + b) = ${col(CGO,fp(C.yhat))}`,plain:`ŷ = ${fp(C.yhat)}`}
+  ];
+  document.getElementById('mathbox').innerHTML=`<div class="mb-kicker update">Beräkning</div><div class="mb-formula" id="mbFormula"></div>`;
+  texRows(document.getElementById('mbFormula'),rows);
   renderControls();
   renderData();
 }
@@ -778,7 +791,6 @@ function renderControls(){
       <button class="btn pri big" onclick="nextStep()" ${running?'disabled':''} style="flex:1">${stepLabel}</button>
     </div>
     <button class="btn" onclick="runOneIteration()" ${running?'disabled':''} style="width:100%;margin-top:6px">↻ Spela upp hela varvet</button>
-    <div class="ctrl-legend"><b>Nästa beräkning</b> tar dig ett litet steg framåt och <b>Tillbaka</b> ett steg bakåt. <b>Spela upp hela varvet</b> kör alla fyra faserna för det aktuella exemplet på en gång.</div>
     <div class="bg" style="margin-top:9px">
       <button class="btn ${running?'pri':'grn'}" onclick="toggleAuto()">${autoLabel}</button>
       <button class="btn dn" onclick="resetTraining()" title="Nollställ vikterna och börja om">↺</button>
@@ -798,11 +810,10 @@ function renderIdle(){
   document.getElementById('flowBadge').classList.remove('show');
   document.getElementById('rLossLabel').textContent='Förlust för detta exempel';
   const ex=PROBLEMS[prob].data[exampleIdx];
-  const mb=document.getElementById('mathbox');
-  mb.innerHTML=`<span class="mb-tag idle">Redo</span>
+  document.getElementById('narr').innerHTML=`<span class="mb-tag idle">Redo</span>
      <h4>Redo för nästa träningsvarv</h4>
-     <div class="mb-idle">Nätverket ska nu lära sig av ett exempel där ingångarna är <strong style="color:var(--accent2)">x₁ = ${ex.x[0]}</strong> och <strong style="color:var(--accent2)">x₂ = ${ex.x[1]}</strong>, och det rätta svaret är <em>${ex.y}</em>.<br><br>Tryck på <strong>Starta framåtpasset</strong> för att skicka in exemplet och låta nätverket göra en gissning. Varje beräkning på vägen visas här, med både formel och siffror.</div>`;
-  document.getElementById('narr').innerHTML=`Ett träningsvarv består av fyra faser: först ett <strong>framåtpass</strong>, sedan mäter vi <strong>förlusten</strong>, därefter <strong>backpropagation</strong> och till sist <strong>uppdaterar</strong> vi vikterna. Varje varv gör nätverket lite mindre fel.`;
+     <div class="mb-desc">Nätverket ska nu lära sig av ett exempel där ingångarna är <strong style="color:var(--accent2)">x₁ = ${ex.x[0]}</strong> och <strong style="color:var(--accent2)">x₂ = ${ex.x[1]}</strong>, och det rätta svaret är <em>${ex.y}</em>.<br><br>Ett träningsvarv består av fyra faser: <strong>framåtpass</strong>, <strong>förlust</strong>, <strong>backpropagation</strong> och <strong>uppdatera</strong>. Varje varv gör nätverket lite mindre fel.</div>`;
+  document.getElementById('mathbox').innerHTML=`<div class="mb-kicker idle">Beräkning</div><div class="mb-empty">Tryck på <strong style="color:var(--text)">Starta framåtpasset</strong> nedan för att se den första uträkningen här.</div>`;
   renderControls();
 }
 function setPhaseBar(activePhase, allDone){
@@ -917,9 +928,9 @@ function renderStep(){
     narr=`Vikterna är justerade. De som blev <strong style="color:var(--green)">gröna</strong> ökade och de som blev <strong style="color:var(--red)">röda</strong> minskade. Nästa varv blir gissningen lite bättre.`;
   }
 
-  mb.innerHTML=`<span class="mb-tag ${tagCls}">${tagTxt}</span><h4>${title}</h4><div class="mb-desc">${desc}</div><div class="mb-formula" id="mbFormula"></div>`;
+  document.getElementById('narr').innerHTML=`<span class="mb-tag ${tagCls}">${tagTxt}</span><h4>${title}</h4><div class="mb-desc">${desc}</div>${narr?`<div class="mb-highlight">${narr}</div>`:''}`;
+  mb.innerHTML=`<div class="mb-kicker ${tagCls}">${tagTxt}</div><div class="mb-formula" id="mbFormula"></div>`;
   texRows(document.getElementById('mbFormula'),rows);
-  document.getElementById('narr').innerHTML=narr;
   updateResults();drawNet();renderData();
   if(st.kind==='update')flashUpdate();
 }
