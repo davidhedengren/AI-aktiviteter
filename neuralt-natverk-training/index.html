@@ -66,6 +66,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .app{display:grid;grid-template-columns:clamp(240px,19vw,280px) 1fr clamp(296px,25vw,340px);height:calc(100vh - 54px);position:relative;z-index:1;gap:12px;padding:12px;}
 .lp,.rp{background:var(--surface);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px;overflow-y:auto;min-height:0;display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 50px rgba(0,0,0,.25);}
 .lp::-webkit-scrollbar,.rp::-webkit-scrollbar{width:5px;}.lp::-webkit-scrollbar-thumb,.rp::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+/* right column reads as calm reference, not an equal-weight surface */
+.rp{background:rgba(20,24,42,.4);border-color:var(--border-soft);box-shadow:0 10px 30px rgba(0,0,0,.16);}
+.rp .sec-t{opacity:.85;}
 .sec-t{font-size:.65em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim2);margin-bottom:6px;}
 
 /* mini truth table (setup preview + gate popup) */
@@ -151,7 +154,25 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .flow-badge.forward{background:rgba(77,128,255,.16);border:1px solid rgba(122,162,255,.4);color:var(--accent2);}
 .flow-badge.backward{background:rgba(255,159,69,.14);border:1px solid rgba(255,159,69,.4);color:var(--amber);}
 .flow-badge.done{background:rgba(51,209,122,.14);border:1px solid rgba(51,209,122,.45);color:var(--green);}
-.canvas-hint{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:.66em;color:var(--dim2);background:rgba(6,7,14,.6);padding:4px 11px;border-radius:999px;border:1px solid var(--border-soft);backdrop-filter:blur(6px);white-space:nowrap;}
+.canvas-hint{position:absolute;bottom:10px;left:12px;font-size:.66em;color:var(--dim2);background:rgba(6,7,14,.6);padding:4px 11px;border-radius:999px;border:1px solid var(--border-soft);backdrop-filter:blur(6px);white-space:nowrap;max-width:calc(100% - 220px);overflow:hidden;text-overflow:ellipsis;transition:opacity .25s var(--ease-out);}
+
+/* in-canvas primary "next" button — glass pill, phase-coloured, bottom-right */
+.canvas-next{position:absolute;bottom:12px;right:12px;display:none;align-items:center;gap:9px;
+  font-family:'DM Sans',sans-serif;font-weight:700;font-size:.82em;letter-spacing:-.005em;
+  padding:11px 15px;border-radius:999px;cursor:pointer;color:#fff;border:1px solid transparent;
+  background:rgba(77,128,255,.92);box-shadow:0 8px 26px rgba(77,128,255,.4),0 0 0 1px rgba(255,255,255,.08) inset;
+  backdrop-filter:blur(10px) saturate(140%);transition:transform .2s var(--ease-spring),box-shadow .2s var(--ease-out),background .2s var(--ease-out);}
+.canvas-next.show{display:inline-flex;}
+.canvas-next:hover{transform:translateY(-2px) scale(1.02);}
+.canvas-next .cn-count{font-family:'JetBrains Mono',monospace;font-size:.82em;font-weight:600;
+  padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.16);color:rgba(255,255,255,.92);}
+.canvas-next .cn-arrow{font-size:1.05em;line-height:1;margin-left:-2px;}
+.canvas-next.p-forward{background:rgba(77,128,255,.92);box-shadow:0 8px 26px rgba(77,128,255,.42),0 0 0 1px rgba(255,255,255,.08) inset;}
+.canvas-next.p-loss{background:rgba(224,168,44,.94);box-shadow:0 8px 26px rgba(255,206,84,.4),0 0 0 1px rgba(255,255,255,.1) inset;}
+.canvas-next.p-backward{background:rgba(230,132,44,.94);box-shadow:0 8px 26px rgba(255,159,69,.42),0 0 0 1px rgba(255,255,255,.1) inset;}
+.canvas-next.p-update{background:rgba(38,180,104,.94);box-shadow:0 8px 26px rgba(51,209,122,.42),0 0 0 1px rgba(255,255,255,.1) inset;}
+.canvas-next.p-idle{background:rgba(77,128,255,.92);}
+@media (prefers-reduced-motion:reduce){.canvas-next{transition:none;}.canvas-next:hover{transform:none;}}
 
 /* narration -> center phase-explanation card */
 .narr{flex-shrink:0;background:linear-gradient(160deg,var(--surface2),rgba(77,128,255,.04));border:1px solid var(--border);border-radius:var(--r-md);padding:14px;min-height:64px;}
@@ -417,7 +438,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
     <div class="canvas-wrap">
       <canvas id="cv"></canvas>
       <div class="flow-badge" id="flowBadge"></div>
-      <div class="canvas-hint">Klicka på en koppling eller en neuron för att se dess beräkning</div>
+      <div class="canvas-hint" id="canvasHint">Klicka på en koppling eller en neuron för att se dess beräkning</div>
+      <button class="canvas-next" id="canvasNext" onclick="nextStep()"></button>
     </div>
     <div class="narr" id="narr"></div>
     <div class="ctrl-block" id="controlPanel"></div>
@@ -425,7 +447,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 
   <!-- RIGHT -->
   <div class="rp">
-    <div><div class="sec-t">Beräkning</div><div class="mathbox" id="mathbox"></div></div>
     <div><div class="sec-t">Resultat</div><div class="result-boxes" id="resultBoxes">
       <div class="rbox"><div class="rl">Nätverkets gissning (ŷ)</div><div class="rv" id="rPred" style="color:var(--accent2)">–</div></div>
       <div class="rbox"><div class="rl">Rätt svar (y)</div><div class="rv" id="rTarget" style="color:var(--gold)">–</div></div>
@@ -589,7 +610,7 @@ function runOneIteration(){
 }
 function toggleAuto(){
   if(running){stopAuto();return;}
-  running=true;trained=false;autoKicks=0;stepIdx=-1;renderControls();
+  running=true;trained=false;autoKicks=0;stepIdx=-1;renderControls();renderCanvasNext();
   document.getElementById('flowBadge').classList.remove('show');
   runTimer=setInterval(()=>{
     if(!running)return;
@@ -658,15 +679,14 @@ function predictExample(i){
     ? '<span class="verdict-ok">✓ Ja, rätt svar</span>'
     : '<span class="verdict-bad">✗ Nej, fel</span>';
   const rounded=Math.round(C.yhat);
-  document.getElementById('narr').innerHTML=`<span class="mb-tag update">Klart</span><h4>Testar en förutsägelse</h4><div class="mb-desc">Nätverket får in <strong>x₁ = ${ex.x[0]}</strong> och <strong>x₂ = ${ex.x[1]}</strong> och svarar <span class="mono" style="color:var(--gold)">${C.yhat.toFixed(3)}</span>. Avrundat blir det <strong>${rounded}</strong>, alltså "${rounded?'Ja':'Nej'}" – och det ${correct?'stämmer med':'stämmer inte med'} facit.</div>`;
   const rows=[
     {cls:'num',tex:`a_{1} = \\sigma(z_{1}) = ${col(CB,fp(C.ah[0]))}`,plain:`a1 = ${fp(C.ah[0])}`},
     {cls:'num',tex:`a_{2} = \\sigma(z_{2}) = ${col(CB,fp(C.ah[1]))}`,plain:`a2 = ${fp(C.ah[1])}`},
     {cls:'res gold',tex:`\\hat{y} = \\sigma(w_{1}a_{1} + w_{2}a_{2} + b) = ${col(CGO,fp(C.yhat))}`,plain:`ŷ = ${fp(C.yhat)}`}
   ];
-  document.getElementById('mathbox').innerHTML=`<div class="mb-kicker update">Beräkning</div><div class="mb-formula" id="mbFormula"></div>`;
+  document.getElementById('narr').innerHTML=`<span class="mb-tag update">Klart</span><h4>Testar en förutsägelse</h4><div class="mb-desc">Nätverket får in <strong>x₁ = ${ex.x[0]}</strong> och <strong>x₂ = ${ex.x[1]}</strong> och svarar <span class="mono" style="color:var(--gold)">${C.yhat.toFixed(3)}</span>. Avrundat blir det <strong>${rounded}</strong>, alltså "${rounded?'Ja':'Nej'}" – och det ${correct?'stämmer med':'stämmer inte med'} facit.</div><div class="mb-formula" id="mbFormula"></div>`;
   texRows(document.getElementById('mbFormula'),rows);
-  renderControls();
+  renderControls();renderCanvasNext();
   renderData();
 }
 
@@ -781,20 +801,31 @@ function renderControls(){
   }
   el.className='ctrl-block';
   const counter=running?'auto':stepCounterText();
-  const atEnd=stepIdx>=STEPS.length-1;
-  const stepLabel=stepIdx<0?'▶ Starta framåtpasset':atEnd?'✓ Slutför och gå vidare':'▶ Nästa beräkning';
   const autoLabel=running?'⏸ Pausa träningen':'⏩ Träna färdigt automatiskt';
+  const hint=running?'Nätverket tränar automatiskt.':stepIdx<0?'Använd <b>▶ Starta framåtpasset</b> på scenen för att börja.':'Gå vidare med knappen nere till höger på scenen.';
   el.innerHTML=`
     <div class="ctrl-label">Steg för steg <span class="step-counter">${counter}</span></div>
-    <div class="bg">
-      <button class="btn dn" onclick="prevStep()" ${(running||stepIdx<0)?'disabled':''} title="Ett steg bakåt">◀ Tillbaka</button>
-      <button class="btn pri big" onclick="nextStep()" ${running?'disabled':''} style="flex:1">${stepLabel}</button>
-    </div>
-    <button class="btn" onclick="runOneIteration()" ${running?'disabled':''} style="width:100%;margin-top:6px">↻ Spela upp hela varvet</button>
+    <button class="btn" onclick="prevStep()" ${(running||stepIdx<0)?'disabled':''} title="Ett steg bakåt" style="width:100%">◀ Ett steg bakåt</button>
+    <div class="ctrl-legend" style="margin-top:8px">${hint}</div>
+    <button class="btn" onclick="runOneIteration()" ${running?'disabled':''} style="width:100%;margin-top:9px">↻ Spela upp hela varvet</button>
     <div class="bg" style="margin-top:9px">
       <button class="btn ${running?'pri':'grn'}" onclick="toggleAuto()">${autoLabel}</button>
       <button class="btn dn" onclick="resetTraining()" title="Nollställ vikterna och börja om">↺</button>
     </div>`;
+}
+/* the loud primary "advance" control lives on the canvas itself, so it never scrolls out of view */
+function renderCanvasNext(){
+  const el=document.getElementById('canvasNext');if(!el)return;
+  const hintEl=document.getElementById('canvasHint');
+  if(trained||running){el.classList.remove('show');if(hintEl)hintEl.style.opacity='';return;}
+  const atEnd=stepIdx>=STEPS.length-1;
+  let phase,label,count;
+  if(stepIdx<0){phase='idle';label='Starta framåtpasset';count='';}
+  else if(atEnd){phase='update';label='Slutför & gå vidare';count=stepCounterText();}
+  else{phase=STEPS[stepIdx].phase;label='Nästa beräkning';count=stepCounterText();}
+  el.className=`canvas-next show p-${phase}`;
+  el.innerHTML=`<span class="cn-label">${label}</span>${count?`<span class="cn-count">${count}</span>`:''}<span class="cn-arrow">→</span>`;
+  if(hintEl)hintEl.style.opacity=stepIdx<0?'':'.55';
 }
 
 /* ============================ MATH BOX / NARRATION ============================ */
@@ -813,8 +844,7 @@ function renderIdle(){
   document.getElementById('narr').innerHTML=`<span class="mb-tag idle">Redo</span>
      <h4>Redo för nästa träningsvarv</h4>
      <div class="mb-desc">Nätverket ska nu lära sig av ett exempel där ingångarna är <strong style="color:var(--accent2)">x₁ = ${ex.x[0]}</strong> och <strong style="color:var(--accent2)">x₂ = ${ex.x[1]}</strong>, och det rätta svaret är <em>${ex.y}</em>.<br><br>Ett träningsvarv består av fyra faser: <strong>framåtpass</strong>, <strong>förlust</strong>, <strong>backpropagation</strong> och <strong>uppdatera</strong>. Varje varv gör nätverket lite mindre fel.</div>`;
-  document.getElementById('mathbox').innerHTML=`<div class="mb-kicker idle">Beräkning</div><div class="mb-empty">Tryck på <strong style="color:var(--text)">Starta framåtpasset</strong> nedan för att se den första uträkningen här.</div>`;
-  renderControls();
+  renderControls();renderCanvasNext();
 }
 function setPhaseBar(activePhase, allDone){
   const phases=[{k:'forward',n:'1',l:'Framåtpass'},{k:'loss',n:'2',l:'Förlust'},{k:'backward',n:'3',l:'Backprop'},{k:'update',n:'4',l:'Uppdatera'}];
@@ -836,7 +866,6 @@ function renderStep(){
   else if(st.phase==='backward'){badge.className='flow-badge backward show';badge.innerHTML='← Felsignalen flödar bakåt';}
   else badge.classList.remove('show');
 
-  const mb=document.getElementById('mathbox');
   let tagCls,tagTxt,title,desc,rows=[],narr='';
 
   if(st.kind==='fwd-h'){
@@ -928,10 +957,9 @@ function renderStep(){
     narr=`Vikterna är justerade. De som blev <strong style="color:var(--green)">gröna</strong> ökade och de som blev <strong style="color:var(--red)">röda</strong> minskade. Nästa varv blir gissningen lite bättre.`;
   }
 
-  document.getElementById('narr').innerHTML=`<span class="mb-tag ${tagCls}">${tagTxt}</span><h4>${title}</h4><div class="mb-desc">${desc}</div>${narr?`<div class="mb-highlight">${narr}</div>`:''}`;
-  mb.innerHTML=`<div class="mb-kicker ${tagCls}">${tagTxt}</div><div class="mb-formula" id="mbFormula"></div>`;
+  document.getElementById('narr').innerHTML=`<span class="mb-tag ${tagCls}">${tagTxt}</span><h4>${title}</h4><div class="mb-desc">${desc}</div><div class="mb-formula" id="mbFormula"></div>${narr?`<div class="mb-highlight">${narr}</div>`:''}`;
   texRows(document.getElementById('mbFormula'),rows);
-  updateResults();drawNet();renderData();
+  updateResults();drawNet();renderData();renderCanvasNext();
   if(st.kind==='update')flashUpdate();
 }
 
@@ -976,17 +1004,35 @@ function edgeColorFor(li,i,j){
   }
   return null;
 }
+/* which edges + neurons are the focus of the current step (null = light everything) */
+function stepActiveSet(){
+  if(stepIdx<0||stepIdx>=STEPS.length)return null;
+  const st=STEPS[stepIdx];const edges=new Set(),neurons=new Set();
+  const E=(li,fi,ti)=>edges.add(li+'-'+fi+'-'+ti),N=(l,i)=>neurons.add(l+'-'+i);
+  if(st.kind==='fwd-h'){N(0,0);N(0,1);N(1,st.j);E(0,0,st.j);E(0,1,st.j);}
+  else if(st.kind==='fwd-out'){N(1,0);N(1,1);N(2,0);E(1,0,0);E(1,1,0);}
+  else if(st.kind==='loss'){N(2,0);}
+  else if(st.kind==='back-out'){N(2,0);N(1,0);N(1,1);E(1,0,0);E(1,1,0);}
+  else if(st.kind==='back-gw2'){N(2,0);N(1,0);N(1,1);E(1,0,0);E(1,1,0);}
+  else if(st.kind==='back-h'){N(1,st.j);N(0,0);N(0,1);E(0,0,st.j);E(0,1,st.j);}
+  else if(st.kind==='back-gw1'){N(0,0);N(0,1);N(1,0);N(1,1);E(0,0,0);E(0,1,0);E(0,0,1);E(0,1,1);}
+  else return null; // update -> keep the whole net lit while weights flash
+  return{edges,neurons};
+}
 function drawNet(){
   const{ctx,w,h}=setupCv();drawBackdrop(ctx,w,h);
   const P=nodePositions(w,h);
   const s=Math.max(0.55,Math.min(1,w/560,h/260));const R=Math.max(15,28*s);
   const t=flowAnim?Math.min(1,(performance.now()-flowStart)/800):-1;
   const flowSet=new Set(flowEdges.map(e=>e.join('-')));
+  const AS=stepActiveSet();const DIM=0.16;
   // flash pulse (0..1) while weights are updating
   const uf=updateFlash?Math.max(0,1-(performance.now()-updateFlashStart)/1200):0;
   const flashPulse=uf>0?Math.pow(Math.abs(Math.sin((performance.now()-updateFlashStart)/95)),0.7)*uf:0;
   const drawEdge=(a,b,li,fromIdx,toIdx,wv)=>{
     const key=[li===0?0:1,fromIdx,li===0?1:2,toIdx].join('-');
+    const dim=(AS&&!AS.edges.has(li+'-'+fromIdx+'-'+toIdx))?DIM:1;
+    ctx.save();ctx.globalAlpha=dim;
     const isFlow=flowSet.has(key)&&t>=0;const uc=edgeColorFor(li,fromIdx,toIdx);
     const changed=uc&&uc.glow;                          // this weight was just changed
     const fp2=changed?flashPulse:0;                     // per-edge flash amount
@@ -1002,6 +1048,7 @@ function drawNet(){
     drawChip(ctx,mx,my,fp(wv,2),changed?rgb:(wv>=0?[122,162,255]:[239,91,107]),Math.max(8,Math.round(10*s)),fp2);
     if(isFlow){const tt=flowDir==='forward'?t:1-t;const px=a.x+(b.x-a.x)*tt,py=a.y+(b.y-a.y)*tt;
       ctx.save();ctx.shadowColor='#fff';ctx.shadowBlur=14;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(px,py,4*s,0,Math.PI*2);ctx.fill();ctx.restore();}
+    ctx.restore();
   };
   for(let j=0;j<2;j++)for(let i=0;i<2;i++)drawEdge(P[0][i],P[1][j],0,i,j,w1[j][i]);
   for(let j=0;j<2;j++)drawEdge(P[1][j],P[2][0],1,j,0,w2[j]);
@@ -1011,11 +1058,13 @@ function drawNet(){
   drawLayerChip(ctx,P[2][0].x,P[2][0].y-R-16*s,'UTDATA',[255,206,84],s);
   const st=stepIdx>=0?STEPS[Math.min(stepIdx,STEPS.length-1)]:null;
   const backActive=st&&st.phase==='backward';
-  drawNodeLayer(ctx,P[0],0,R,s,backActive);drawNodeLayer(ctx,P[1],1,R,s,backActive);drawNodeLayer(ctx,P[2],2,R,s,backActive);
+  drawNodeLayer(ctx,P[0],0,R,s,backActive,AS,DIM);drawNodeLayer(ctx,P[1],1,R,s,backActive,AS,DIM);drawNodeLayer(ctx,P[2],2,R,s,backActive,AS,DIM);
 }
-function drawNodeLayer(ctx,pts,layer,R,s,backActive){
+function drawNodeLayer(ctx,pts,layer,R,s,backActive,AS,DIM){
   const fontSize=Math.max(11,Math.round(14*s));
   pts.forEach((pt,idx)=>{
+    const ndim=(AS&&!AS.neurons.has(layer+'-'+idx))?DIM:1;
+    ctx.save();ctx.globalAlpha=ndim;
     const revealed=neuronRevealed(layer,idx);
     let val=null,rimRgb=[150,162,196];
     if(layer===0){val=C.x?C.x[idx]:PROBLEMS[prob].data[exampleIdx].x[idx];rimRgb=[122,162,255];}
@@ -1028,10 +1077,11 @@ function drawNodeLayer(ctx,pts,layer,R,s,backActive){
     else{ctx.font=`500 ${fontSize}px "DM Sans"`;ctx.fillStyle='rgba(255,255,255,0.3)';ctx.fillText('?',pt.x,pt.y);}
     if(layer>0){const bv=layer===1?bh[idx]:bo;const bt=`b=${fp(bv,2)}`;ctx.font=`600 ${Math.max(8,Math.round(9*s))}px "JetBrains Mono"`;const bw=ctx.measureText(bt).width+10;const bOff=R+5*s;ctx.beginPath();ctx.roundRect(pt.x-bw/2,pt.y+bOff,bw,14,7);ctx.fillStyle='rgba(14,17,30,0.8)';ctx.fill();ctx.strokeStyle='rgba(255,255,255,0.08)';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle='rgba(255,255,255,0.6)';ctx.fillText(bt,pt.x,pt.y+bOff+7);}
     if(layer===0){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(150,180,255,0.85)';ctx.fillText(idx===0?'x₁':'x₂',pt.x,pt.y+R+13*s);}
-    if(layer===2){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(255,214,130,0.9)';ctx.fillText('ŷ',pt.x,pt.y+R+15*s);}
+    if(layer===2){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(255,214,130,0.9)';ctx.fillText('ŷ',pt.x,pt.y+R+14+14*s);}
     let dv=null;
     if(backActive){if(layer===2&&stepIdx>=4)dv=C.dOut;else if(layer===1&&C.dH){if(idx===0&&stepIdx>=6)dv=C.dH[0];if(idx===1&&stepIdx>=7)dv=C.dH[1];}}
     if(dv!==null){const dt=`δ=${f(dv,3)}`;ctx.font=`700 ${Math.max(8,Math.round(9.5*s))}px "JetBrains Mono"`;const dw=ctx.measureText(dt).width+12;const dy=pt.y-R-5*s;ctx.save();ctx.shadowColor='rgba(255,159,69,0.5)';ctx.shadowBlur=8;ctx.beginPath();ctx.roundRect(pt.x-dw/2,dy-8,dw,17,8);ctx.fillStyle='rgba(40,26,14,0.95)';ctx.fill();ctx.strokeStyle='rgba(255,159,69,0.7)';ctx.lineWidth=1.2;ctx.stroke();ctx.restore();ctx.fillStyle='rgba(255,190,120,1)';ctx.fillText(dt,pt.x,dy+0.5);}
+    ctx.restore();
   });
 }
 function drawGlassNeuron(ctx,x,y,R,computed,rimRgb,val){
@@ -1158,7 +1208,7 @@ const CONCEPTS={
   forward:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h6m4 0h6M8 8l-4 4 4 4m8-8 4 4-4 4"/></svg>',title:'Framåtpass',
     def:'Data flödar in i nätverket och rör sig framåt, ett lager i taget. Varje neuron räknar en viktad summa av sina ingångar och kör den genom en aktiveringsfunktion. Det som kommer ut ur sista neuronen, <em>ŷ</em>, är nätverkets gissning. Ingen inlärning sker här – det är ren beräkning.',
     tex:'\\hat{y} = \\sigma\\!\\left(\\textstyle\\sum_i w_i x_i + b\\right)',plain:'ŷ = σ(Σ wᵢxᵢ + b)'},
-  sigmoid:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19c3 0 4-14 9-14M12 5c5 0 6 14 9 14"/></svg>',title:'Sigmoid',
+  sigmoid:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16" opacity=".35" stroke-width="1.5"/><path d="M4 19C9 19 15 5 20 5"/></svg>',title:'Sigmoid',
     def:'Aktiveringsfunktionen som tar in vilket tal som helst och pressar ihop det till ett värde mellan 0 och 1. Stora positiva tal hamnar nära 1, stora negativa nära 0, och talet 0 hamnar mitt emellan på 0,5. Den mjuka S-formade kurvan gör att nätverket kan lära sig gradvis, och eftersom den går att derivera fungerar den utmärkt tillsammans med backpropagation.',
     tex:'\\sigma(z) = \\dfrac{1}{1 + e^{-z}}',plain:'σ(z) = 1 / (1 + e^−z)'},
   aktivering:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="9" opacity=".4"/></svg>',title:'Aktivering (a)',
