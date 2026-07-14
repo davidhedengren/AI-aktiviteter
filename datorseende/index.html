@@ -133,8 +133,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 @media(max-width:860px){.filter-cols{grid-template-columns:1fr 1fr;}.filter-cols .fk-pick{grid-column:1 / -1;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));}}
 @media(max-width:560px){.filter-cols{grid-template-columns:1fr;}}
 /* Ny 2-spalts filterlayout: väljare + featurekarta */
-.filter-cols2{display:grid;grid-template-columns:200px 1fr;gap:16px;align-items:start;}
-@media(max-width:640px){.filter-cols2{grid-template-columns:1fr;}}
+.filter-cols3{display:grid;grid-template-columns:190px auto 1fr;gap:16px;align-items:start;}
+@media(max-width:760px){.filter-cols3{grid-template-columns:1fr 1fr;}.filter-cols3 > div:last-child{grid-column:1 / -1;}}
+@media(max-width:480px){.filter-cols3{grid-template-columns:1fr;}}
 /* Ritverktyg – döljs som default, visas bara i steg 5 */
 .draw-tools{display:none;}
 .wrap.show-5 .draw-tools{display:block;}
@@ -142,7 +143,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .calc-slot{margin-top:4px;}
 .calc-slot:empty{display:none;}
 .fk-pick{display:flex;flex-direction:column;gap:6px;}
-.kbtn{display:flex;align-items:center;gap:9px;padding:8px 10px;border:1px solid var(--border);border-radius:9px;background:var(--surface2);cursor:pointer;transition:0.15s;text-align:left;font-family:'DM Sans',sans-serif;color:var(--text);}
+.kbtn{display:flex;align-items:center;gap:9px;padding:8px 30px 8px 10px;border:1px solid var(--border);border-radius:9px;background:var(--surface2);cursor:pointer;transition:0.15s;text-align:left;font-family:'DM Sans',sans-serif;color:var(--text);position:relative;}
+.k-help{position:absolute;top:50%;right:9px;transform:translateY(-50%);width:18px;height:18px;border-radius:50%;border:1px solid var(--border);background:var(--bg);color:var(--dim);font-size:0.72em;font-weight:700;display:flex;align-items:center;justify-content:center;transition:0.15s;z-index:2;}
+.k-help:hover{border-color:var(--gold);color:var(--gold);background:rgba(255,216,102,0.1);}
 .kbtn:hover{border-color:var(--accent);}
 .kbtn.active{border-color:var(--accent);background:rgba(77,128,255,0.12);}
 .kbtn .kico{font-size:1.15em;flex:none;}
@@ -154,7 +157,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .kcell.pos{background:rgba(52,199,89,0.14);color:var(--green);border-color:rgba(52,199,89,0.4);}
 .kcell.neg{background:rgba(239,91,91,0.12);color:var(--red);border-color:rgba(239,91,91,0.38);}
 .kcell.zero{background:var(--surface2);color:var(--dim);}
-.kexpl{font-size:0.72em;color:var(--dim);line-height:1.5;margin-top:7px;}
 
 .fmap{display:grid;grid-template-columns:repeat(14,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;width:min(70vw,240px);aspect-ratio:1;}
 .fc{background:#000;cursor:pointer;}
@@ -548,11 +550,18 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="img-slot" data-slot="2"></div>
     <div class="card">
       <div class="card-h">🔍 <span class="term" data-term="filter">Filtret</span> glider över bilden <span class="sub">– <span class="term" data-term="faltning">faltning</span></span></div>
-      <div class="filter-cols2">
-        <div class="fk-pick" id="kernelPick"></div>
+      <div class="filter-cols3">
+        <div>
+          <label class="mini-t">Välj ett filter</label>
+          <div class="fk-pick" id="kernelPick"></div>
+        </div>
+        <div>
+          <label class="mini-t">Filtrets nio tal</label>
+          <div class="kgrid" id="kGrid"></div>
+        </div>
         <div>
           <label class="mini-t" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-            <span><span class="term" data-term="featurekarta">Featurekartan</span> <span class="sub" style="font-weight:400;color:var(--dim)">– filtrets resultat (14 × 14)</span></span>
+            <span><span class="term" data-term="featurekarta">Featurekartan</span></span>
             <button class="why-chip" onclick="openConcept('partial')" type="button">🤔 Varför syns inte hela formen?</button>
           </label>
           <div class="fmap" id="fmapEl"></div>
@@ -574,7 +583,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="img-slot" data-slot="3"></div>
     <div class="card">
       <div class="card-h" style="justify-content:space-between;">👁️ Fyra filter – fyra sätt att "se" <button class="why-chip" onclick="openConcept('partial')" type="button">🤔 Varför syns inte hela formen?</button></div>
-      <div class="rp-desc" style="margin-bottom:10px;">Riktiga bildmodeller kör <strong style="color:var(--text)">många filter parallellt</strong>. Kryssa i en eller flera kort för att lägga ihop dem i kartan till höger – och se hur mycket av formen som täcks in.</div>
+      <div class="rp-desc" style="margin-bottom:10px;">Riktiga bildmodeller kör <strong style="color:var(--text)">många filter parallellt</strong>. Kryssa i ett eller flera kort för att lägga ihop dem i kartan till höger, så ser du hur mycket av formen som fångas in.</div>
       <div class="combine-zone">
         <div class="maps4" id="maps4"></div>
         <div class="combine-result">
@@ -588,11 +597,11 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="coll">
         <button class="coll-toggle" onclick="toggleColl(this,'aboutBody')">📈 Så funkar modellen<span class="arr">▼</span></button>
         <div class="coll-body" id="aboutBody">
-          <strong>1.</strong> Bilden = 16×16 = <strong>256 tal</strong> (0–255).<br>
-          <strong>2.</strong> Fyra filter glider över bilden → fyra featurekartor med <strong>196 tal</strong> var.<br>
-          <strong>3.</strong> Varje karta summeras → en <strong>signatur med 4 tal</strong>.<br>
-          <strong>4.</strong> Signaturen jämförs med de fyra kända formerna → <strong>sannolikheter</strong>.<br><br>
-          Det här kallas ett <span class="term" data-term="cnn">faltningsnätverk (CNN)</span> i miniformat – samma princip som ansiktsigenkänning och självkörande bilar, fast de använder <em>miljoner</em> inlärda filter i många lager.
+          Först översätts bilden till tal. En bild på 16 gånger 16 pixlar blir <strong>256 tal</strong> mellan 0 och 255.<br><br>
+          Sedan glider fyra filter över bilden, ett i taget. Varje filter skapar en egen featurekarta med <strong>196 tal</strong>.<br><br>
+          Därefter summeras varje karta till ett enda tal. Tillsammans bildar de fyra talen bildens <strong>signatur</strong>.<br><br>
+          Till sist jämförs signaturen med de fyra former modellen känner till, och den mest lika formen vinner.<br><br>
+          Det här kallas ett <span class="term" data-term="cnn">faltningsnätverk</span> i miniformat. Det bygger på samma princip som ansiktsigenkänning och självkörande bilar, men de riktiga nätverken använder miljontals inlärda filter i många lager.
         </div>
       </div>
       <div class="coll">
@@ -612,10 +621,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
           <div class="rp-desc"><strong style="color:var(--text)">Signaturen</strong> är fyra tal – ett per filter – som visar <em>hur mycket</em> varje filter reagerade på bilden. En form med både lodräta och vågräta kanter ger höga tal på båda de filtren. Det är modellens korta sammanfattning av bilden.</div>
           <label class="mini-t">Bildens signatur – ett tal per filter</label>
           <div class="fvec" id="fvecEl"></div>
-          <div class="hint">256 pixlar → 784 kartvärden → <strong>4 tal</strong>. I stället för att jämföra tusentals pixlar jämför modellen bara dessa fyra tal – det är därför den kan känna igen former snabbt.</div>
+          <div class="hint">Bildens 256 pixlar blir först 784 kartvärden och kokas sedan ner till bara <strong>fyra tal</strong>. I stället för att jämföra tusentals pixlar jämför modellen bara dessa fyra tal, och det är därför den kan känna igen former snabbt.</div>
         </div>
         <div>
-          <div class="rp-desc">Signaturen jämförs med de fyra formerna modellen känner till. Mest lik vinner.</div>
+          <div class="rp-desc">Nu jämförs signaturen med de fyra former modellen känner till. Den form vars signatur liknar bildens mest blir modellens gissning.</div>
           <div class="phead"><span>Form</span><span>Likhet</span><span style="text-align:right">%</span></div>
           <div class="ptable" id="classTable"></div>
           <div class="verdict" id="verdictEl" style="display:none;"></div>
@@ -706,7 +715,7 @@ const KERNELS = [
    k:[[0,1,2],[-1,0,1],[-2,-1,0]],
    expl:'Talens lutning gör att rutan tänds längs kanter som lutar som ett ╱.',
    dir:'d1',
-   why:'Filtret har sina <b>positiva tal i övre högra hörnet</b> och <b>negativa i nedre vänstra</b>. På en jämn yta balanserar de varandra → summan <b>0</b>. Men en kant som lutar som ett <b>╱</b> bryter just den balansen och ger ett stort tal. Andra riktningar stör den inte lika mycket.'},
+   why:'Filtret har sina <b>positiva tal i övre högra hörnet</b> och <b>negativa i nedre vänstra</b>. På en jämn yta balanserar de varandra och summan blir <b>0</b>. Men en kant som lutar som ett <b>╱</b> bryter just den balansen och ger ett stort tal. Andra riktningar stör den inte lika mycket.'},
   {id:'diag2', ico:'╲', name:'Diagonal ╲',      tag:'reagerar på snedstreck åt vänster',
    k:[[2,1,0],[1,0,-1],[0,-1,-2]],
    expl:'Spegelvänt filter: rutan tänds längs kanter som lutar som ett ╲.',
@@ -888,6 +897,7 @@ function buildKernelUI(){
     `<button class="kbtn${i === curK ? ' active' : ''}" data-i="${i}" onclick="selectKernel(${i})">
        <span class="kico">${kk.ico}</span>
        <span class="ktxt"><span class="kname">${kk.name}</span><span class="ktag">${kk.tag}</span></span>
+       <span class="k-help" role="button" aria-label="Så fungerar filtret" title="Så fungerar filtret" onclick="event.stopPropagation();openFilterExplainer(${i})">?</span>
      </button>`).join('');
   renderKernelGrid();
 }
@@ -911,8 +921,6 @@ function renderKernelGrid(){
   const kg = document.getElementById('kGrid');
   if(kg) kg.innerHTML = K.flat().map(v =>
     `<div class="kcell ${v > 0 ? 'pos' : v < 0 ? 'neg' : 'zero'}">${v > 0 ? '+' + v : v}</div>`).join('');
-  const ke = document.getElementById('kExpl');
-  if(ke) ke.textContent = KERNELS[curK].expl;
 }
 
 // ── Featurekarta + skanning ──
@@ -997,13 +1005,11 @@ function showCalc(ox, oy){
         <div class="ch-mat-wrap"><div class="ch-mat">${pMat}</div><div class="ch-lab">Produkter</div></div>
       </div>
       <div class="ch-result">
-        Summera de 9 produkterna: <span class="sum">${sum}</span>
-        <span class="arrow">→</span><span class="relu term" data-term="relu">ReLU</span>
-        <span class="arrow">→</span><span class="final term" data-term="output">${relu}</span>
-        ${sum < 0 ? '<div class="clip">Summan var negativ → ReLU nollar den (filtret hittade inte sitt mönster här)</div>' : ''}
+        De nio produkterna summeras till <span class="sum">${sum}</span>, som sedan går genom <span class="relu term" data-term="relu">ReLU</span> och blir <span class="final term" data-term="output">${relu}</span>.
+        ${sum < 0 ? '<div class="clip">Summan blev negativ, så ReLU sätter den till noll. Filtret hittade inte sitt mönster här.</div>' : ''}
       </div>
-      <div class="ch-indep">📍 Den här rutan påverkas bara av <b>sina egna</b> 9 pixlar – de andra rutorna i kartan väntar orört på sin tur.</div>
-      ${scanPos >= 0 ? `<div class="ch-progress">${scanPos >= FN*FN-1 ? '✓ Klart – filtret har besökt alla ' + (FN*FN) + ' positioner' : 'Ruta ' + (scanPos+1) + ' av ' + (FN*FN) + ' · ' + (FN*FN-1-scanPos) + ' kvar'}</div>` : ''}
+      <div class="ch-indep">📍 Den här rutan påverkas bara av sina egna nio pixlar. De andra rutorna i kartan väntar orörda på sin tur.</div>
+      ${scanPos >= 0 ? `<div class="ch-progress">${scanPos >= FN*FN-1 ? 'Klart! Filtret har besökt alla ' + (FN*FN) + ' positioner.' : 'Ruta ' + (scanPos+1) + ' av ' + (FN*FN) + '. ' + (FN*FN-1-scanPos) + ' kvar.'}</div>` : ''}
     </div>`;
   hydrateTerms();
 }
@@ -1112,11 +1118,13 @@ function renderCombinedMap(){
   // Täckningsgrad: hur stor andel av rutorna har ett tydligt värde (>25%)
   const covered = combined.filter(v => v > 0.25).length;
   const pct = Math.round(covered / (FN * FN) * 100);
-  const names = [...combinedFilters].map(i => KERNELS[i].name.toLowerCase()).join(' + ');
+  const names = [...combinedFilters].map(i => KERNELS[i].name.toLowerCase());
+  const nameList = names.length === 1 ? names[0]
+    : names.slice(0, -1).join(', ') + ' och ' + names[names.length - 1];
   if(note) note.innerHTML =
     combinedFilters.size === 1
-      ? `Bara <b>${names}</b> vald – täcker <span class="cn-pct">${pct}%</span> av formens kontur. Kryssa i fler filter för att se mer.`
-      : `<b>${names}</b> tillsammans täcker <span class="cn-pct">${pct}%</span> av formens kontur. Ju fler filter, desto mer av formen syns.`;
+      ? `Bara filtret för <b>${nameList}</b> är valt. Det täcker <span class="cn-pct">${pct}%</span> av formens kontur. Kryssa i fler filter för att se mer av formen.`
+      : `Filtren för <b>${nameList}</b> täcker tillsammans <span class="cn-pct">${pct}%</span> av formens kontur. Ju fler filter du lägger till, desto mer av formen framträder.`;
 }
 
 // ── Klassificering ──
@@ -1179,10 +1187,10 @@ function classify(){
   let vClass, vHtml;
   if(top.p > 0.55){
     vClass = 'verdict';
-    vHtml = `Modellen är ganska säker: det här är en <b>${c.name.toLowerCase()}</b> (${Math.round(top.p*100)}%). Signaturen matchar den formen bäst.`;
+    vHtml = `Modellen är ganska säker på att det här är en <b>${c.name.toLowerCase()}</b> (${Math.round(top.p*100)} procent), eftersom signaturen matchar den formen bäst.`;
   } else {
     vClass = 'verdict unsure';
-    vHtml = `Modellen är <b>osäker</b>: ${CLASSES[top.i].name.toLowerCase()} (${Math.round(top.p*100)}%) och ${CLASSES[second.i].name.toLowerCase()} (${Math.round(second.p*100)}%) har liknande signaturer. Vad i bilden kan förvirra filtren?`;
+    vHtml = `Modellen är osäker. Både ${CLASSES[top.i].name.toLowerCase()} (${Math.round(top.p*100)} procent) och ${CLASSES[second.i].name.toLowerCase()} (${Math.round(second.p*100)} procent) har liknande signaturer. Vad i bilden skulle kunna förvirra filtren?`;
   }
   ['verdictEl','verdictEl5'].forEach(id => {
     const el = document.getElementById(id);
@@ -1351,15 +1359,15 @@ function onImageChange(msg){
 
 // ── Stegnavigering ──
 const STEPS = [
-  {intro:'<strong>Datorn ser inga former</strong> – bara 256 tal mellan 0 och 255. Välj en färdig form, slå på <strong>Visa pixelvärden</strong> och hovra över bilden. Var är talen höga? Var är de noll?'},
+  {intro:'En dator ser inga former, bara 256 tal mellan 0 och 255. Välj en färdig form, slå på <strong>Visa pixelvärden</strong> och hovra över bilden. Var är talen höga, och var är de noll?'},
   {intro: () => {
     const shape = CLASSES.find(c => c.id === currentShapeId);
     const target = shape ? shape.def : 'den valda bilden';
-    return `Ett <strong>filter</strong> är en liten 3×3-bricka med tal som glider över bilden. Tryck <strong>▶ Kör filtret</strong> och följ räkningen: multiplicera, summera, skriv in. Testa alla fyra filtren på ${target} – vad hittar de?`;
+    return `Ett <strong>filter</strong> är en liten bricka med nio tal som glider över bilden. På varje plats multiplicerar den sina tal med pixlarna under sig och summerar ihop dem till ett enda tal. Testa alla fyra filtren på ${target} och se vad de hittar.`;
   }},
-  {intro:'Riktiga modeller kör <strong>många filter samtidigt</strong>. Kryssa i flera kort för att lägga ihop dem – hur många filter krävs innan hela formens kontur syns i kartan till höger?'},
-  {intro:'Nu fattar modellen sitt <strong>beslut</strong>: varje karta summeras till ett tal → bildens signatur → jämförs med de fyra kända formerna. Längst ned kan du se <strong>exakt hur</strong> jämförelsen går till, tal för tal.'},
-  {intro:'<strong>Allt är upplåst.</strong> Rita egna bilder och försök <strong>lura modellen</strong>. En sned linje? En halv cirkel? En kladdig blob? Fundera på vad modellen ser – och vad den missar.'}
+  {intro:'Riktiga modeller kör <strong>många filter samtidigt</strong>. Kryssa i flera kort för att lägga ihop dem. Hur många filter krävs innan hela formens kontur syns i kartan till höger?'},
+  {intro:'Nu fattar modellen sitt <strong>beslut</strong>. Varje karta summeras till ett tal, talen bildar bildens signatur, och signaturen jämförs med de fyra kända formerna. Längst ned kan du se exakt hur jämförelsen går till, tal för tal.'},
+  {intro:'Nu är allt upplåst. Rita egna bilder och försök <strong>lura modellen</strong>. Prova en sned linje, en halv cirkel eller en kladdig fläck, och fundera på vad modellen ser och vad den missar.'}
 ];
 const imgCard = document.getElementById('imgCard');
 function goStep(n){
@@ -1374,15 +1382,11 @@ function goStep(n){
   imgLocked = (n !== 5);
   pxGrid.style.cursor = imgLocked ? 'default' : 'crosshair';
 
-  // Filtervärden + beräkning bredvid bilden – bara i steg 2
+  // Beräkningen visas bredvid bilden – bara i steg 2
   const calcSlot = document.getElementById('calcSlot');
   if(n === 2){
     calcSlot.innerHTML =
-      `<label class="mini-t" style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;gap:8px;">Filtrets 3×3 tal (<span class="term" data-term="vikt">vikter</span>) <button class="why-chip" onclick="openFilterExplainer(curK)" type="button">💡 Hur funkar det?</button></label>
-       <div class="kgrid" id="kGrid"></div>
-       <div class="kexpl" id="kExpl"></div>
-       <div class="calc-hero" id="calcHero"><div class="calc-empty">Tryck <b>▶ Kör filtret</b> – eller klicka på en ruta i featurekartan – så visas exakt vilken multiplikation som ger värdet.</div></div>`;
-    renderKernelGrid();
+      `<div class="calc-hero" id="calcHero"><div class="calc-empty">Tryck på <b>Kör filtret</b>, eller klicka på en ruta i featurekartan, så visas exakt hur den rutan räknas ut.</div></div>`;
     hydrateTerms();
   } else {
     calcSlot.innerHTML = '';
@@ -1395,7 +1399,7 @@ function goStep(n){
   document.getElementById('nextStep').style.visibility = n === STEPS.length ? 'hidden' : 'visible';
 
   renderImage();
-  if(n === 2){ renderFmap(0); resetScan(); }
+  if(n === 2){ renderKernelGrid(); renderFmap(0); resetScan(); }
   if(n >= 3) renderAllMaps();
   if(n >= 4) classify();
   updatePipeline();
@@ -1406,30 +1410,30 @@ function goStep(n){
 //  Begrepp: klickbara glaskort med 3D-tilt
 // ════════════════════════════════════════════════════════════
 const GLOSSARY = {
-  pixel:         {i:'🔲', t:'Pixel',          d:'En bildpunkt – den minsta byggstenen i en digital bild. Här har varje pixel ett gråvärde mellan <b>0 (svart)</b> och <b>255 (vitt)</b>. En dator ser aldrig något annat än dessa tal.'},
-  filter:        {i:'🔍', t:'Filter (kärna)', d:'En liten bricka med tal (här 3×3) som glider över bilden och letar efter ett visst mönster, t.ex. kanter. Talen kallas <b>vikter</b>.'},
-  vikt:          {i:'⚖️', t:'Vikt',           d:'Talen inuti filtret. I riktiga nätverk <b>lärs vikterna fram</b> under träningen – här är de handgjorda så att du kan se exakt vad de gör.'},
-  faltning:      {i:'🎞️', t:'Faltning (convolution)', d:'Operationen när filtret glider över bilden: <b>multiplicera</b> talen parvis, <b>summera</b>, skriv in resultatet. Det är C:et i CNN.'},
+  pixel:         {i:'🔲', t:'Pixel',          d:'En bildpunkt, den minsta byggstenen i en digital bild. Här har varje pixel ett gråvärde mellan <b>0 (svart)</b> och <b>255 (vitt)</b>. En dator ser aldrig något annat än dessa tal.'},
+  filter:        {i:'🔍', t:'Filter (kärna)', d:'En liten bricka med tal, här 3 gånger 3, som glider över bilden och letar efter ett visst mönster, till exempel kanter. Talen inuti filtret kallas <b>vikter</b>.'},
+  vikt:          {i:'⚖️', t:'Vikt',           d:'Talen inuti filtret. I riktiga nätverk <b>lärs vikterna fram</b> under träningen. Här är de handgjorda, så att du kan se exakt vad de gör.'},
+  faltning:      {i:'🎞️', t:'Faltning (convolution)', d:'Operationen som sker när filtret glider över bilden. På varje plats <b>multipliceras</b> talen parvis, produkterna <b>summeras</b>, och resultatet skrivs in i featurekartan. Faltning är det som C:et står för i CNN.'},
   featurekarta:  {i:'🗺️', t:'Featurekarta',   d:'Resultatbilden efter ett filter. Ljusa områden betyder <b>"här hittade filtret sitt mönster"</b>. Varje filter ger sin egen karta.'},
-  output:        {i:'💡', t:'Vad betyder talet?', d:'Här är det lätt att blanda ihop två sorters tal:<br><br><b>I bilden</b> betyder 255 en helt vit pixel och 0 helt svart – en ljusstyrka.<br><br><b>I featurekartan</b> betyder ett högt tal istället <em>"filtret reagerade starkt här"</em> – ju högre, desto tydligare hittade filtret sitt mönster (t.ex. en kant). Talet är ingen ljusstyrka och kan bli betydligt större än 255 innan det skalas om för att visas som färg. <b>0</b> betyder "inget mönster alls" på den platsen. Varje ruta byggs av 9 pixlar tillsammans – ingen ruta representerar bara en enskild pixel.'},
-  ruta:          {i:'🔲', t:'Vad representerar en ruta i kartan?', d:'En ljus ruta i featurekartan är <b>ett enda tal</b> – inte flera pixlar avbildade.<br><br>Talet kommer från ett helt <b>3×3-område</b> i bilden: filtrets 9 tal multiplicerade med de 9 pixlarna på den platsen, summerade till en siffra.<br><br>Rutan sitter ungefär <b>där i bilden</b> filtret stod när det räknade, men beskriver hela det området – inte en enskild pixel. Featurekartan är därför mindre (14×14) än bilden (16×16): filtret får inte plats precis på kanten, så kanterna faller bort.'},
-  firsthit:      {i:'✨', t:'En träff', d:'Det här är ett ställe där filtret gav ett värde <b>över noll</b> – det hittade sitt mönster här.<br><br>I räkningen ovanför gjorde pixlarna under filtret att summan blev <b>positiv</b>. Med andra pixlar under filtret (t.ex. alla svarta) hade summan blivit 0 eller negativ, och ReLU hade nollat den.<br><br>💡 Varje ruta i kartan räknas <b>helt för sig</b> – den påverkas bara av sina egna 9 pixlar, aldrig av rutorna bredvid.'},
+  output:        {i:'💡', t:'Vad betyder talet?', d:'Här är det lätt att blanda ihop två sorters tal.<br><br><b>I bilden</b> är talet en ljusstyrka. 255 betyder en helt vit pixel och 0 betyder helt svart.<br><br><b>I featurekartan</b> betyder ett högt tal i stället att <em>filtret reagerade starkt här</em>. Ju högre talet är, desto tydligare hittade filtret sitt mönster, till exempel en kant. Talet är alltså ingen ljusstyrka, och det kan bli betydligt större än 255 innan det skalas om för att visas som färg. Ett värde på 0 betyder att det inte fanns något mönster alls på den platsen. Varje ruta byggs av nio pixlar tillsammans, så ingen ruta representerar bara en enskild pixel.'},
+  ruta:          {i:'🔲', t:'Vad representerar en ruta i kartan?', d:'En ljus ruta i featurekartan är <b>ett enda tal</b>, inte flera pixlar avbildade.<br><br>Talet kommer från ett helt <b>3×3-område</b> i bilden. Det är filtrets nio tal multiplicerade med de nio pixlarna på den platsen, summerade till en enda siffra.<br><br>Rutan sitter ungefär <b>där i bilden</b> filtret stod när det räknade, men den beskriver hela det området och inte en enskild pixel. Featurekartan är därför mindre (14 gånger 14) än bilden (16 gånger 16), eftersom filtret inte får plats precis på kanten och kanterna faller bort.'},
+  firsthit:      {i:'✨', t:'En träff', d:'Det här är ett ställe där filtret gav ett värde <b>över noll</b>, alltså där det hittade sitt mönster.<br><br>I räkningen ovanför gjorde pixlarna under filtret att summan blev <b>positiv</b>. Med andra pixlar under filtret, till exempel bara svarta, hade summan blivit 0 eller negativ, och då hade ReLU nollat den.<br><br>💡 Varje ruta i kartan räknas <b>helt för sig</b>. Den påverkas bara av sina egna nio pixlar, aldrig av rutorna bredvid.'},
   partial:       {i:'🤔', t:'Varför syns inte hela formen?', d: () => {
     const examples = {
-      cross:  'Ett kryss har lodräta kanter bara vid stapelns sidor, och vågräta kanter bara vid tvärstreckets topp och botten. Mitten, där det bara är vitt möter vitt, ger <b>ingen kant alls</b> – där syns inget i kartan, trots att det är mitt i bilden.',
-      vline:  'Den lodräta linjen har kanter bara på sina två sidor. Inuti linjen är allt vitt möter vitt, vilket ger <b>ingen kant alls</b> – filtret för lodräta kanter tänds alltså bara som två smala streck, inte en hel stapel.',
-      hline:  'Den vågräta linjen har kanter bara längs sin topp och botten. Inuti linjen möter vitt bara vitt, vilket ger <b>ingen kant alls</b> – filtret för vågräta kanter tänds alltså bara som två smala streck.',
-      circle: 'Cirkeln har en kant bara längs själva ringen. Inuti cirkeln är allt vitt möter vitt, vilket ger <b>ingen kant alls</b> – filtret tänds alltså bara längs cirkelns rand, inte hela den fyllda ytan.'
+      cross:  'Ett kryss har lodräta kanter bara vid stapelns sidor och vågräta kanter bara vid tvärstreckets topp och botten. I mitten möter vitt bara vitt, vilket inte ger <b>någon kant alls</b>, så där syns inget i kartan trots att det är mitt i bilden.',
+      vline:  'Den lodräta linjen har kanter bara på sina två sidor. Inuti linjen möter vitt bara vitt, vilket inte ger <b>någon kant alls</b>. Filtret för lodräta kanter tänds därför bara som två smala streck, inte som en hel stapel.',
+      hline:  'Den vågräta linjen har kanter bara längs sin topp och botten. Inuti linjen möter vitt bara vitt, vilket inte ger <b>någon kant alls</b>. Filtret för vågräta kanter tänds därför bara som två smala streck.',
+      circle: 'Cirkeln har en kant bara längs själva ringen. Inuti cirkeln möter vitt bara vitt, vilket inte ger <b>någon kant alls</b>. Filtret tänds därför bara längs cirkelns rand, inte över hela den fyllda ytan.'
     };
     const ex = examples[currentShapeId] || examples.cross;
-    return `Filtret är en <b>kantdetektor</b>, inte en formkopiator – det tänds bara där precis <em>dess</em> sorts kant finns.<br><br>${ex}<br><br>Det är först när alla fyra filtrens kartor läggs ihop till <b>signaturen</b> (steg 4) som modellen kan avgöra vilken form det är.`;
+    return `Filtret är en <b>kantdetektor</b>, inte en formkopiator. Det tänds bara där just <em>dess</em> sorts kant finns.<br><br>${ex}<br><br>Det är först när alla fyra filtrens kartor läggs ihop till <b>signaturen</b> i steg 4 som modellen kan avgöra vilken form det är.`;
   }},
-  relu:          {i:'✂️', t:'ReLU',           d:'En enkel regel: <b>negativa värden blir 0</b>, positiva behålls. Låter nätverket fokusera på var mönstret finns – inte var det saknas. Används i nästan alla neurala nätverk.'},
-  featurevektor: {i:'🧬', t:'Signatur (featurevektor)', d:'En kort lista med tal som sammanfattar bildens innehåll – här summan av varje featurekarta. <b>256 pixlar kokas ner till 4 tal.</b>'},
-  klassificering:{i:'🎯', t:'Klassificering', d:'Att avgöra vilken kategori något tillhör – här: vilken av fyra former bilden liknar mest. Ansiktsigenkänning, tumördetektion och självkörande bilar är alla klassificeringsproblem.'},
-  sannolikhet:   {i:'🎲', t:'Sannolikhet',    d:'Hur säker modellen är på varje kategori, i procent. Summan blir alltid <b>100 %</b> – modellen måste fördela sin säkerhet.'},
-  cnn:           {i:'🧠', t:'CNN (faltningsnätverk)', d:'Nätverkstypen som dominerar bildigenkänning: <b>många lager av filter</b> som lärt sig hitta allt mer komplexa mönster – kanter → former → ögon, hjul, ansikten.'},
-  'träning':     {i:'🏋️', t:'Träning',        d:'Processen där nätverket <b>själv justerar sina filtervikter</b> genom att öva på tusentals märkta exempelbilder. Våra filter är handgjorda – riktiga lärs fram.'}
+  relu:          {i:'✂️', t:'ReLU',           d:'En enkel regel som säger att <b>negativa värden blir 0</b> medan positiva värden behålls som de är. Det låter nätverket fokusera på var mönstret finns i stället för var det saknas. ReLU används i nästan alla neurala nätverk.'},
+  featurevektor: {i:'🧬', t:'Signatur (featurevektor)', d:'En kort lista med tal som sammanfattar bildens innehåll. Här är det summan av varje featurekarta, så <b>256 pixlar kokas ner till fyra tal</b>.'},
+  klassificering:{i:'🎯', t:'Klassificering', d:'Att avgöra vilken kategori något tillhör. Här handlar det om vilken av de fyra formerna bilden liknar mest. Ansiktsigenkänning, tumördetektion och självkörande bilar bygger alla på klassificering.'},
+  sannolikhet:   {i:'🎲', t:'Sannolikhet',    d:'Hur säker modellen är på varje kategori, uttryckt i procent. Summan blir alltid <b>100 procent</b>, eftersom modellen måste fördela hela sin säkerhet mellan formerna.'},
+  cnn:           {i:'🧠', t:'CNN (faltningsnätverk)', d:'Den nätverkstyp som dominerar bildigenkänning. Den staplar <b>många lager av filter</b> som lärt sig hitta allt mer komplexa mönster: de första lagren hittar kanter, nästa lager sätter ihop dem till former, och senare lager känner igen ögon, hjul och ansikten.'},
+  'träning':     {i:'🏋️', t:'Träning',        d:'Processen där nätverket <b>själv justerar sina filtervikter</b> genom att öva på tusentals märkta exempelbilder. Filtren i den här simuleringen är handgjorda, medan riktiga nätverk lär sig sina filter under träningen.'}
 };
 const conceptOverlay = document.getElementById('conceptOverlay');
 const conceptCard = document.getElementById('conceptCard');
@@ -1469,8 +1473,8 @@ function buildFilterDemo(i){
         <div class="fx-kernel ${dirClass}">${kcells}</div>
       </div>
       <div class="fx-cap">
-        <div class="cap-a"><span class="balance">Över en <b>jämn yta</b>: plus och minus tar ut varandra → summa <b>0</b></span></div>
-        <div class="cap-b"><span class="broken">Över <b>kanten</b>: balansen bryts → <b>stort tal</b>, rutan tänds! ✨</span></div>
+        <div class="cap-a"><span class="balance">Över en <b>jämn yta</b> tar plus och minus ut varandra, så summan blir <b>0</b>.</span></div>
+        <div class="cap-b"><span class="broken">Över <b>kanten</b> bryts balansen, summan blir ett <b>stort tal</b> och rutan tänds. ✨</span></div>
       </div>
       <div class="fx-legend">
         <span><i class="fk-neg"></i> negativa tal</span>
