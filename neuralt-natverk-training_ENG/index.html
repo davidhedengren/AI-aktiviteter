@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Train a neural network – forward pass and backpropagation · ai-aktiviteter.se</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<style>
+:root{
+  --bg:#07080f;--surface:rgba(20,24,42,0.55);--surface-solid:#12152a;--surface2:rgba(28,33,56,0.65);
+  --border:rgba(255,255,255,0.08);--border-soft:rgba(255,255,255,0.05);
+  --text:#eef1fb;--dim:#8791b3;--dim2:#5c6689;
+  --accent:#4d80ff;--accent2:#7aa2ff;--accent-dim:rgba(77,128,255,0.14);
+  --green:#33d17a;--red:#ef5b6b;--gold:#ffce54;--amber:#ff9f45;
+  --r-sm:8px;--r-md:14px;--r-lg:20px;
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);--ease-out:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-font-smoothing:antialiased;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden;position:relative;}
+
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-mesh::before{content:'';position:absolute;width:140%;height:140%;top:-20%;left:-20%;
+  background:
+    radial-gradient(ellipse 42% 34% at 18% 22%, rgba(77,128,255,0.16), transparent 60%),
+    radial-gradient(ellipse 38% 30% at 82% 70%, rgba(255,159,69,0.08), transparent 60%),
+    radial-gradient(ellipse 34% 40% at 65% 15%, rgba(51,209,122,0.05), transparent 60%);
+  animation:meshDrift 34s ease-in-out infinite alternate;filter:blur(10px);}
+@keyframes meshDrift{0%{transform:translate(0,0) scale(1);}50%{transform:translate(-2%,2%) scale(1.05);}100%{transform:translate(2%,-1%) scale(1.02);}}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(122,162,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(122,162,255,.025) 1px,transparent 1px);
+  background-size:44px 44px;mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,#000 40%,transparent 100%);}
+
+/* intro */
+.intro{position:fixed;inset:0;background:rgba(6,7,14,0.85);backdrop-filter:blur(18px);z-index:200;display:flex;align-items:center;justify-content:center;transition:opacity .35s var(--ease-out);}
+.intro.hidden{opacity:0;pointer-events:none;}
+.intro-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:var(--r-lg);padding:32px 34px;max-width:560px;width:92%;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.02) inset;animation:cardIn .5s var(--ease-spring);}
+@keyframes cardIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.intro-card h2{font-family:'Syne',sans-serif;font-size:1.55em;font-weight:800;margin-bottom:8px;text-align:center;letter-spacing:-.01em;}
+.intro-card h2 span{background:linear-gradient(135deg,#eef1fb,var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.intro-card .sub{color:var(--dim);font-size:.9em;line-height:1.6;text-align:center;margin-bottom:20px;}
+.intro-loop{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0;}
+.intro-phase{display:flex;gap:11px;align-items:flex-start;padding:12px 13px;border:1px solid var(--border);border-radius:var(--r-md);background:var(--surface2);}
+.intro-phase .ip-num{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.78em;flex-shrink:0;}
+.intro-phase.p1 .ip-num{background:rgba(77,128,255,.16);color:var(--accent2);border:1px solid rgba(122,162,255,.3);}
+.intro-phase.p2 .ip-num{background:rgba(255,206,84,.14);color:var(--gold);border:1px solid rgba(255,206,84,.3);}
+.intro-phase.p3 .ip-num{background:rgba(255,159,69,.14);color:var(--amber);border:1px solid rgba(255,159,69,.3);}
+.intro-phase.p4 .ip-num{background:rgba(51,209,122,.14);color:var(--green);border:1px solid rgba(51,209,122,.3);}
+.intro-phase .ip-t{font-size:.82em;font-weight:700;color:var(--text);margin-bottom:2px;}
+.intro-phase .ip-d{font-size:.72em;color:var(--dim2);line-height:1.45;}
+.intro-start{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;font-family:'DM Sans',sans-serif;font-size:.96em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(77,128,255,.28);margin-top:8px;}
+.intro-start:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
+
+/* header */
+.hd{text-align:center;padding:14px 16px 10px;border-bottom:1px solid var(--border-soft);position:relative;z-index:2;}
+.hd-title-row{display:flex;align-items:center;justify-content:center;gap:9px;}
+.hd-icon{width:22px;height:22px;color:var(--accent2);flex-shrink:0;}
+.hd h1{font-family:'Syne',sans-serif;font-size:1.28em;font-weight:800;letter-spacing:-.01em;}.hd h1 span{background:linear-gradient(135deg,#eef1fb,var(--accent2) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hd p{color:var(--dim2);font-size:.77em;max-width:680px;margin:3px auto 0;line-height:1.3;}
+.back-link,.lang-link{position:absolute;top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:.75em;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.02);transition:.2s var(--ease-out);white-space:nowrap;z-index:2;}
+.back-link{left:16px;}.lang-link{right:16px;}
+.back-link:hover,.lang-link:hover{color:var(--text);border-color:var(--dim2);background:rgba(255,255,255,.05);}
+.lang-link .flag{font-size:1.05em;line-height:1;}
+
+/* layout */
+.app{display:grid;grid-template-columns:clamp(240px,19vw,280px) 1fr clamp(296px,25vw,340px);height:calc(100vh - 54px);position:relative;z-index:1;gap:12px;padding:12px;}
+.lp,.rp{background:var(--surface);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px;overflow-y:auto;min-height:0;display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 50px rgba(0,0,0,.25);}
+.lp::-webkit-scrollbar,.rp::-webkit-scrollbar{width:5px;}.lp::-webkit-scrollbar-thumb,.rp::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+.sec-t{font-size:.65em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim2);margin-bottom:6px;}
+
+/* mini truth table (setup preview + gate popup) */
+.mini-tt{width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:.92em;}
+.mini-tt caption{caption-side:top;font-size:.72em;color:var(--dim2);text-align:left;padding-bottom:6px;font-family:'DM Sans',sans-serif;}
+.mini-tt th{color:var(--dim2);font-weight:600;padding:5px 8px;border-bottom:1px solid var(--border);text-align:center;}
+.mini-tt td{padding:6px 8px;text-align:center;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text);}
+.mini-tt tr:last-child td{border-bottom:none;}
+.mini-tt td.ja{color:var(--green);font-weight:700;}
+.mini-tt td.nej{color:var(--dim);}
+
+/* truth table */
+.dtable{width:100%;border-collapse:collapse;font-size:.75em;border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;}
+.dtable caption{caption-side:top;font-size:.82em;color:var(--dim2);text-align:left;padding:0 0 5px;font-weight:600;}
+.dtable th{background:var(--surface2);padding:6px 4px;color:var(--dim);font-weight:600;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;}
+.dtable td{padding:5px 4px;text-align:center;border-bottom:1px solid rgba(255,255,255,.03);font-family:'JetBrains Mono',monospace;color:var(--text);}
+.dtable tr:last-child td{border-bottom:none;}
+.dtable tr.cur td{background:rgba(77,128,255,.14);}
+.dtable tr.cur td:first-child{box-shadow:inset 3px 0 0 var(--accent);}
+.dtable .ty{color:var(--gold);font-weight:700;}
+.dtable .yja{color:var(--green);}.dtable .ynej{color:var(--dim2);}
+
+/* sliders */
+.slider-row{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.slider-lbl{font-size:.75em;color:var(--dim);font-weight:600;min-width:20px;}
+.slider{-webkit-appearance:none;flex:1;height:4px;border-radius:2px;background:var(--surface2);outline:none;}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 0 3px rgba(77,128,255,.18);transition:.15s var(--ease-spring);}
+.slider::-webkit-slider-thumb:hover{transform:scale(1.15);}
+.slider-val{font-family:'JetBrains Mono',monospace;font-size:.78em;color:var(--accent2);min-width:42px;text-align:right;}
+.hint{font-size:.72em;color:var(--dim2);line-height:1.5;margin-top:3px;}
+
+/* buttons */
+.bg{display:flex;gap:6px;flex-wrap:wrap;}
+.btn{font-family:'DM Sans',sans-serif;padding:10px 12px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);font-size:.79em;font-weight:600;cursor:pointer;transition:.18s var(--ease-spring);flex:1;text-align:center;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:5px;}
+.btn:hover{border-color:var(--accent);background:var(--accent-dim);transform:translateY(-1px);}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none;border-color:var(--border);background:var(--surface2);}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(77,128,255,.28);}
+.btn.pri:hover{background:#3d6de6;}
+.btn.big{padding:13px;font-size:.9em;}
+.btn.grn{background:rgba(51,209,122,.14);border-color:rgba(51,209,122,.4);color:var(--green);}
+.btn.grn:hover{background:rgba(51,209,122,.22);border-color:var(--green);}
+.btn.dn{flex:0 0 auto;min-width:44px;}
+
+/* control blocks */
+.ctrl-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:11px;}
+.ctrl-label{display:flex;justify-content:space-between;align-items:center;font-size:.63em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim2);margin-bottom:9px;}
+.step-counter{font-family:'JetBrains Mono',monospace;font-size:1.15em;text-transform:none;letter-spacing:0;color:var(--accent2);font-weight:600;padding:2px 8px;background:var(--accent-dim);border-radius:999px;}
+.ctrl-legend{font-size:.68em;line-height:1.5;color:var(--dim2);margin-top:9px;}
+.ctrl-legend b{color:var(--dim);font-weight:700;}
+.ctrl-block.done-block{border-color:rgba(51,209,122,.35);background:linear-gradient(160deg,var(--surface2),rgba(51,209,122,.05));}
+.predict-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;}
+.predict-btn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 6px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);cursor:pointer;transition:.18s var(--ease-out);font-family:'DM Sans',sans-serif;}
+.predict-btn:hover{border-color:var(--green);background:rgba(51,209,122,.08);}
+.predict-btn.active{border-color:var(--green);background:rgba(51,209,122,.14);box-shadow:0 0 0 1px rgba(51,209,122,.25) inset;}
+.predict-btn .pb-in{font-family:'JetBrains Mono',monospace;font-size:.82em;font-weight:700;color:var(--text);}
+.predict-btn .pb-exp{font-size:.62em;color:var(--dim2);}
+.predict-btn.active .pb-exp{color:var(--green);}
+.rbox .rv .verdict-ok{color:var(--green);}
+.rbox .rv .verdict-bad{color:var(--red);}
+
+/* center */
+.center{display:flex;flex-direction:column;gap:10px;min-height:0;overflow-y:auto;}
+.center::-webkit-scrollbar{width:5px;}.center::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+.phase-bar{display:flex;gap:6px;flex-shrink:0;}
+.phase-chip{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:9px 6px;border:1px solid var(--border);border-radius:var(--r-md);background:var(--surface2);transition:.25s var(--ease-out);position:relative;overflow:hidden;}
+.phase-chip .pc-n{font-family:'JetBrains Mono',monospace;font-size:.62em;color:var(--dim2);font-weight:700;letter-spacing:.05em;}
+.phase-chip .pc-l{font-size:.76em;font-weight:700;color:var(--dim);text-align:center;line-height:1.15;}
+.phase-chip.done .pc-l{color:var(--dim);}
+.phase-chip.active.p-forward{border-color:var(--accent);background:var(--accent-dim);box-shadow:0 0 22px rgba(77,128,255,.22);}
+.phase-chip.active.p-forward .pc-l,.phase-chip.active.p-forward .pc-n{color:var(--accent2);}
+.phase-chip.active.p-loss{border-color:var(--gold);background:rgba(255,206,84,.1);box-shadow:0 0 22px rgba(255,206,84,.18);}
+.phase-chip.active.p-loss .pc-l,.phase-chip.active.p-loss .pc-n{color:var(--gold);}
+.phase-chip.active.p-backward{border-color:var(--amber);background:rgba(255,159,69,.1);box-shadow:0 0 22px rgba(255,159,69,.2);}
+.phase-chip.active.p-backward .pc-l,.phase-chip.active.p-backward .pc-n{color:var(--amber);}
+.phase-chip.active.p-update{border-color:var(--green);background:rgba(51,209,122,.1);box-shadow:0 0 22px rgba(51,209,122,.18);}
+.phase-chip.active.p-update .pc-l,.phase-chip.active.p-update .pc-n{color:var(--green);}
+.phase-arrow{align-self:center;color:var(--dim2);flex-shrink:0;}
+
+.canvas-wrap{position:relative;flex:1 1 320px;min-height:320px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);}
+#cv{display:block;width:100%;height:100%;}
+.flow-badge{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:.68em;font-weight:700;letter-spacing:.08em;padding:5px 13px;border-radius:999px;display:none;align-items:center;gap:7px;backdrop-filter:blur(8px);}
+.flow-badge.show{display:inline-flex;}
+.flow-badge.forward{background:rgba(77,128,255,.16);border:1px solid rgba(122,162,255,.4);color:var(--accent2);}
+.flow-badge.backward{background:rgba(255,159,69,.14);border:1px solid rgba(255,159,69,.4);color:var(--amber);}
+.flow-badge.done{background:rgba(51,209,122,.14);border:1px solid rgba(51,209,122,.45);color:var(--green);}
+.canvas-hint{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:.66em;color:var(--dim2);background:rgba(6,7,14,.6);padding:4px 11px;border-radius:999px;border:1px solid var(--border-soft);backdrop-filter:blur(6px);white-space:nowrap;}
+
+/* narration -> center phase-explanation card */
+.narr{flex-shrink:0;background:linear-gradient(160deg,var(--surface2),rgba(77,128,255,.04));border:1px solid var(--border);border-radius:var(--r-md);padding:14px;min-height:64px;}
+.narr strong{color:var(--text);}
+.narr .mono{font-family:'JetBrains Mono',monospace;color:var(--accent2);}
+.mb-highlight{margin-top:2px;padding:9px 12px;background:rgba(77,128,255,.08);border-left:3px solid var(--accent2);border-radius:0 8px 8px 0;font-size:.8em;line-height:1.55;color:var(--text);}
+.mb-highlight strong{color:var(--accent2);}
+.mb-highlight .mono{font-family:'JetBrains Mono',monospace;color:var(--gold);}
+.mb-kicker{font-size:.62em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;margin-bottom:10px;color:var(--dim2);}
+.mb-kicker.forward{color:var(--accent2);}.mb-kicker.loss{color:var(--gold);}.mb-kicker.backward{color:var(--amber);}.mb-kicker.update{color:var(--green);}.mb-kicker.idle{color:var(--dim2);}
+.mb-empty{border:1px dashed var(--border-soft);border-radius:var(--r-sm);padding:20px 14px;text-align:center;font-size:.78em;color:var(--dim2);line-height:1.55;}
+
+/* right panel math */
+.mathbox{background:linear-gradient(160deg,var(--surface2),rgba(77,128,255,.04));border:1px solid var(--border);border-radius:var(--r-md);padding:14px;min-height:120px;}
+.mathbox .mb-tag,.narr .mb-tag{font-size:.62em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 9px;border-radius:999px;display:inline-flex;align-items:center;gap:5px;margin-bottom:10px;}
+.mb-tag.forward{background:var(--accent-dim);color:var(--accent2);}
+.mb-tag.loss{background:rgba(255,206,84,.12);color:var(--gold);}
+.mb-tag.backward{background:rgba(255,159,69,.12);color:var(--amber);}
+.mb-tag.update{background:rgba(51,209,122,.12);color:var(--green);}
+.mb-tag.idle{background:var(--surface2);color:var(--dim);}
+.mathbox h4,.narr h4{font-family:'Syne',sans-serif;font-size:.98em;font-weight:700;margin-bottom:8px;color:var(--text);}
+.mathbox .mb-desc,.narr .mb-desc{font-size:.78em;line-height:1.6;color:var(--dim);margin-bottom:11px;}
+.mathbox .mb-desc strong,.narr .mb-desc strong{color:var(--text);}
+.mathbox .mb-desc em,.narr .mb-desc em{color:var(--gold);font-style:normal;}
+.term{color:var(--accent2);border-bottom:1px dashed rgba(122,162,255,.55);cursor:pointer;transition:.15s var(--ease-out);white-space:nowrap;}
+.term:hover{color:#fff;border-bottom-color:var(--accent2);background:rgba(77,128,255,.14);border-radius:3px;}
+.sym{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--text);}
+.mb-formula{background:rgba(0,0,0,.28);border:1px solid var(--border-soft);border-radius:var(--r-sm);padding:11px 13px;}
+.mb-idle{font-size:.82em;color:var(--dim);line-height:1.6;}
+.mb-idle strong{color:var(--text);}.mb-idle em{color:var(--gold);font-style:normal;}
+
+/* math rows (KaTeX or fallback) */
+.mrow{overflow-x:auto;overflow-y:hidden;padding:3px 0;color:var(--dim);}
+.mrow::-webkit-scrollbar{height:3px;}.mrow::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.mrow.gen{color:var(--dim);}
+.mrow.num{color:var(--text);}
+.mrow.res{color:var(--accent2);font-weight:600;}
+.mrow.res.up{color:var(--green);}.mrow.res.down{color:var(--red);}.mrow.res.amber{color:var(--amber);}.mrow.res.gold{color:var(--gold);}
+.mrow .katex{color:inherit;font-size:1.02em;}
+.mrow .katex-display{margin:.15em 0;text-align:left;}
+.mrow .katex-display>.katex{text-align:left;}
+.tex-fallback{font-family:'JetBrains Mono',monospace;font-size:.82em;white-space:pre-wrap;}
+.mrow-text{font-family:'DM Sans',sans-serif;font-size:.86em;line-height:1.5;padding:5px 0;font-weight:600;}
+
+/* result boxes */
+.result-boxes{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.rbox{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:11px;}
+.rbox .rl{font-size:.6em;color:var(--dim2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;font-weight:600;}
+.rbox .rv{font-family:'JetBrains Mono',monospace;font-size:1.25em;font-weight:700;font-variant-numeric:tabular-nums;}
+.rbox.wide{grid-column:span 2;}
+
+.loss-panel{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:12px;}
+.loss-panel .lp-hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+.loss-panel .lp-hd .t{font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--dim2);}
+.loss-panel .lp-hd .v{font-family:'JetBrains Mono',monospace;font-size:.92em;font-weight:700;color:var(--green);}
+#lossChart{width:100%;height:96px;display:block;}
+.loss-axis{display:flex;justify-content:space-between;font-size:.6em;color:var(--dim2);margin-top:3px;}
+
+/* concept glossary */
+.info{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:12px;font-size:.76em;line-height:1.6;color:var(--dim);}
+.info h3{color:var(--accent2);font-size:.82em;margin-bottom:8px;font-weight:700;display:flex;align-items:center;gap:6px;}
+.glossary{display:flex;flex-wrap:wrap;gap:5px;}
+.g-tag{display:inline-flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:.72em;font-weight:600;padding:5px 10px;border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--dim);cursor:pointer;transition:.2s var(--ease-spring);}
+.g-tag:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px);}
+.g-ico{width:12px;height:12px;flex-shrink:0;opacity:.75;}
+
+/* concept / calc modal */
+.concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
+.concept-backdrop.show{opacity:1;pointer-events:auto;}
+.concept-card{position:fixed;top:50%;left:50%;z-index:301;width:380px;max-width:90vw;
+  transform:translate(-50%,-50%) scale(.9);opacity:0;pointer-events:none;
+  transition:transform .38s var(--ease-spring),opacity .26s var(--ease-out);}
+.concept-card.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
+.concept-card-inner{position:relative;text-align:center;
+  background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;max-height:86vh;overflow-y:auto;}
+.concept-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);}
+.concept-close:hover{border-color:var(--red);color:var(--red);transform:rotate(90deg);}
+.concept-icon{width:52px;height:52px;margin:0 auto 12px;border-radius:15px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);box-shadow:0 10px 24px rgba(77,128,255,.18);}
+.concept-icon svg{width:27px;height:27px;}
+.concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:9px;letter-spacing:-.01em;}
+.concept-def{font-size:.85em;line-height:1.65;color:var(--dim);text-align:left;}
+.concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;}
+.concept-formula{margin-top:14px;background:rgba(0,0,0,.3);border:1px solid var(--border-soft);border-radius:var(--r-sm);padding:12px;text-align:left;}
+.concept-formula:empty{display:none;}
+.concept-formula .mrow{color:var(--text);}
+
+/* advanced explainer: trigger + modal */
+.adv-link{display:inline-flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:.66em;font-weight:700;letter-spacing:.02em;text-transform:none;
+  color:var(--accent2);background:var(--accent-dim);border:1px solid rgba(122,162,255,.28);border-radius:999px;padding:5px 10px;cursor:pointer;transition:.2s var(--ease-out);white-space:nowrap;}
+.adv-link:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:translateY(-1px);}
+.adv-link svg{width:11px;height:11px;flex-shrink:0;}
+
+.adv-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.75);backdrop-filter:blur(8px);z-index:320;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
+.adv-backdrop.show{opacity:1;pointer-events:auto;}
+.adv-modal{position:fixed;top:50%;left:50%;z-index:321;width:640px;max-width:92vw;
+  transform:translate(-50%,-50%) scale(.94);opacity:0;pointer-events:none;
+  transition:transform .38s var(--ease-spring),opacity .26s var(--ease-out);}
+.adv-modal.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
+.adv-inner{position:relative;background:linear-gradient(165deg,rgba(26,31,52,.98),rgba(14,17,30,.99));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
+  box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 28px 24px;max-height:88vh;overflow-y:auto;}
+.adv-close{position:absolute;top:14px;right:14px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);}
+.adv-close:hover{border-color:var(--red);color:var(--red);transform:rotate(90deg);}
+.adv-tag{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:.64em;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);
+  background:var(--accent-dim);border:1px solid rgba(122,162,255,.28);border-radius:999px;padding:4px 11px;margin-bottom:12px;}
+.adv-inner h3{font-family:'Syne',sans-serif;font-size:1.28em;font-weight:800;letter-spacing:-.01em;margin-bottom:12px;color:var(--text);}
+.adv-text{font-size:.85em;line-height:1.7;color:var(--dim);}
+.adv-text p{margin-bottom:10px;}
+.adv-text strong{color:var(--text);}
+.adv-text em{color:var(--gold);font-style:normal;}
+.adv-text .chain{margin:12px 0;padding:11px 13px;background:rgba(0,0,0,.28);border:1px solid var(--border-soft);border-radius:var(--r-sm);font-family:'JetBrains Mono',monospace;font-size:.86em;color:var(--dim);line-height:1.9;}
+.adv-text .chain b{color:var(--accent2);font-weight:600;}
+.adv-visual{margin-top:18px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:16px;}
+.adv-visual-hd{font-size:.68em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim2);margin-bottom:10px;}
+.adv-canvas-wrap{position:relative;width:100%;height:220px;border-radius:var(--r-sm);overflow:hidden;background:#05060d;border:1px solid var(--border-soft);}
+.adv-canvas-wrap canvas{width:100%;height:100%;display:block;cursor:ew-resize;}
+.adv-controls{display:flex;align-items:center;gap:11px;margin-top:12px;}
+.adv-controls .slider{flex:1;}
+.adv-readout{display:flex;gap:8px;margin-top:10px;}
+.adv-readout .arv{flex:1;background:rgba(0,0,0,.24);border:1px solid var(--border-soft);border-radius:var(--r-sm);padding:8px 10px;text-align:center;}
+.adv-readout .arv .al{font-size:.6em;color:var(--dim2);text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:2px;}
+.adv-readout .arv .av{font-family:'JetBrains Mono',monospace;font-size:1.02em;font-weight:700;font-variant-numeric:tabular-nums;}
+.adv-caption{font-size:.72em;color:var(--dim2);line-height:1.55;margin-top:11px;text-align:center;}
+
+/* animated mini-network (intro) */
+.intro-net{width:158px;margin:2px auto 18px;}
+.intro-net svg{width:100%;height:auto;overflow:visible;display:block;}
+.nn-edge{stroke:rgba(122,162,255,.28);stroke-width:1.4;}
+.nn-node{transform-box:fill-box;transform-origin:center;animation:nnPulse 2.6s var(--ease-out) infinite;}
+.nn-node.d1{animation-delay:.4s;}.nn-node.d2{animation-delay:.8s;}.nn-node.d3{animation-delay:1.2s;}
+.nn-node.o{animation:nnPulseOut 2.6s var(--ease-out) infinite;}
+.nn-ring{fill:none;stroke:rgba(255,206,84,.55);stroke-width:1.3;opacity:0;transform-box:fill-box;transform-origin:center;animation:nnRing 2.6s var(--ease-out) infinite;}
+.nn-dot{filter:drop-shadow(0 0 3px rgba(200,220,255,.9));}
+@keyframes nnPulse{0%,100%{opacity:.8;transform:scale(1);}50%{opacity:1;transform:scale(1.08);}}
+@keyframes nnPulseOut{0%,55%{opacity:.75;transform:scale(1);}72%{opacity:1;transform:scale(1.16);}100%{opacity:.75;transform:scale(1);}}
+@keyframes nnRing{0%,58%{opacity:0;transform:scale(.7);}72%{opacity:.9;transform:scale(1);}100%{opacity:0;transform:scale(1.5);}}
+@media (prefers-reduced-motion:reduce){.nn-node,.nn-ring{animation:none;}.nn-dot{display:none;}}
+
+/* setup screen (choose what to learn) */
+.setup{position:fixed;inset:0;z-index:150;display:flex;align-items:center;justify-content:center;padding:24px;
+  background:radial-gradient(ellipse 60% 50% at 50% 30%,rgba(77,128,255,.08),transparent 70%),var(--bg);
+  opacity:0;pointer-events:none;transition:opacity .4s var(--ease-out);}
+.setup.show{opacity:1;pointer-events:auto;}
+.setup.leaving{opacity:0;pointer-events:none;}
+.setup-inner{width:100%;max-width:760px;max-height:92vh;overflow-y:auto;text-align:center;animation:setupIn .5s var(--ease-spring);}
+@keyframes setupIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.setup-step{font-family:'JetBrains Mono',monospace;font-size:.68em;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);
+  display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border:1px solid rgba(122,162,255,.28);border-radius:999px;background:var(--accent-dim);margin-bottom:16px;}
+.setup-head h2{font-family:'Syne',sans-serif;font-size:2em;font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-bottom:10px;}
+.setup-head h2 span{background:linear-gradient(135deg,#eef1fb,var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.setup-sub{color:var(--dim);font-size:.92em;line-height:1.55;max-width:480px;margin:0 auto 26px;}
+.setup-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.setup-card{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:20px 14px 16px;cursor:pointer;
+  border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface);backdrop-filter:blur(18px);
+  transition:.24s var(--ease-spring);text-align:center;overflow:hidden;}
+.setup-card::after{content:'';position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 1px transparent inset;transition:.24s;pointer-events:none;}
+.setup-card:hover{transform:translateY(-3px);border-color:var(--dim2);box-shadow:0 16px 40px rgba(0,0,0,.3);}
+.setup-card.active{border-color:var(--accent);background:linear-gradient(180deg,rgba(77,128,255,.14),var(--surface));}
+.setup-card.active::after{box-shadow:0 0 0 1.5px rgba(77,128,255,.4) inset,0 18px 46px rgba(77,128,255,.22);}
+.setup-card .sc-badge{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;color:transparent;transition:.24s var(--ease-spring);}
+.setup-card.active .sc-badge{border-color:var(--accent);background:var(--accent);color:#fff;}
+.setup-card .sc-icon{font-size:1.9em;line-height:1;color:var(--accent2);width:52px;height:52px;display:flex;align-items:center;justify-content:center;
+  border-radius:16px;background:var(--accent-dim);margin-bottom:4px;transition:.24s;}
+.setup-card.active .sc-icon{background:rgba(77,128,255,.2);transform:scale(1.04);}
+.setup-card .sc-title{font-size:.98em;font-weight:700;color:var(--text);}
+.setup-card .sc-short{font-size:.74em;color:var(--dim2);line-height:1.4;}
+.setup-card .sc-tag{margin-top:5px;font-family:'JetBrains Mono',monospace;font-size:.62em;font-weight:600;letter-spacing:.05em;padding:3px 8px;border-radius:999px;}
+.setup-card .sc-tag.easy{background:rgba(51,209,122,.12);color:var(--green);}
+.setup-card .sc-tag.hard{background:rgba(255,159,69,.12);color:var(--amber);}
+.setup-preview{display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:left;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px 20px;margin-bottom:22px;backdrop-filter:blur(18px);}
+.setup-preview .sp-tt{flex-shrink:0;}
+.setup-preview .sp-text{flex:1;min-width:200px;font-size:.82em;line-height:1.55;color:var(--dim);}
+.setup-preview .sp-text strong{color:var(--text);}
+.setup-preview .sp-text .sp-hard{color:var(--amber);}
+.setup-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.setup-back{background:none;border:none;color:var(--dim2);font-family:'DM Sans',sans-serif;font-size:.86em;font-weight:600;cursor:pointer;padding:10px 6px;transition:.2s;}
+.setup-back:hover{color:var(--text);}
+.setup-go{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;font-family:'DM Sans',sans-serif;font-size:1em;font-weight:700;
+  background:var(--accent);color:#fff;border:none;border-radius:var(--r-md);cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 10px 30px rgba(77,128,255,.32);}
+.setup-go:hover{background:#3d6de6;transform:translateY(-2px);box-shadow:0 14px 36px rgba(77,128,255,.44);}
+
+/* lab: compact current-task summary (left panel) */
+.task-summary{display:flex;align-items:center;gap:11px;padding:11px 12px;border:1px solid rgba(77,128,255,.28);border-radius:var(--r-md);
+  background:linear-gradient(160deg,var(--accent-dim),var(--surface2));}
+.task-summary .ts-icon{width:36px;height:36px;flex-shrink:0;border-radius:11px;background:rgba(77,128,255,.16);color:var(--accent2);
+  display:flex;align-items:center;justify-content:center;font-size:1.25em;font-weight:800;}
+.task-summary .ts-body{min-width:0;flex:1;}
+.task-summary .ts-eyebrow{font-size:.58em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim2);}
+.task-summary .ts-title{font-size:.92em;font-weight:700;color:var(--text);margin-top:1px;}
+.task-summary .ts-change{flex-shrink:0;display:inline-flex;align-items:center;gap:4px;font-size:.7em;font-weight:600;color:var(--accent2);
+  background:rgba(77,128,255,.1);border:1px solid rgba(122,162,255,.28);border-radius:999px;padding:6px 10px;cursor:pointer;transition:.2s var(--ease-out);font-family:'DM Sans',sans-serif;}
+.task-summary .ts-change:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+
+@media(max-width:1060px){
+  body{height:auto;overflow:auto;}
+  .app{grid-template-columns:1fr;height:auto;padding:8px;gap:8px;}
+  .center{min-height:520px;}
+  .canvas-wrap{flex:1 1 300px;min-height:340px;}
+  .back-link{position:static;transform:none;display:inline-flex;margin-bottom:6px;}
+  .lang-link{position:static;transform:none;display:inline-flex;margin-bottom:6px;margin-left:8px;}
+  .hd-title-row{flex-wrap:wrap;}
+}
+@media(max-width:560px){
+  .setup-cards{grid-template-columns:1fr;}
+  .setup-head h2{font-size:1.6em;}
+}
+@media (prefers-reduced-motion:reduce){.bg-mesh::before{animation:none;}*{animation-duration:.01ms!important;}}
+</style>
+</head>
+<body>
+<div class="bg-mesh"></div><div class="bg-grid"></div>
+
+<div class="intro" id="intro">
+  <div class="intro-card">
+    <div class="intro-net" aria-hidden="true">
+      <svg viewBox="0 0 140 72">
+        <g>
+          <line class="nn-edge" x1="20" y1="22" x2="68" y2="22"/>
+          <line class="nn-edge" x1="20" y1="22" x2="68" y2="50"/>
+          <line class="nn-edge" x1="20" y1="50" x2="68" y2="22"/>
+          <line class="nn-edge" x1="20" y1="50" x2="68" y2="50"/>
+          <line class="nn-edge" x1="68" y1="22" x2="116" y2="36"/>
+          <line class="nn-edge" x1="68" y1="50" x2="116" y2="36"/>
+        </g>
+        <g fill="#d3e2ff">
+          <circle class="nn-dot" r="1.9"><animateMotion dur="1.5s" begin="0s" repeatCount="indefinite" path="M20,22 L68,22"/></circle>
+          <circle class="nn-dot" r="1.9"><animateMotion dur="1.5s" begin="0.2s" repeatCount="indefinite" path="M20,22 L68,50"/></circle>
+          <circle class="nn-dot" r="1.9"><animateMotion dur="1.5s" begin="0.1s" repeatCount="indefinite" path="M20,50 L68,22"/></circle>
+          <circle class="nn-dot" r="1.9"><animateMotion dur="1.5s" begin="0.3s" repeatCount="indefinite" path="M20,50 L68,50"/></circle>
+          <circle class="nn-dot" r="1.9"><animateMotion dur="1.5s" begin="0.75s" repeatCount="indefinite" path="M68,22 L116,36"/></circle>
+          <circle class="nn-dot" r="1.9"><animateMotion dur="1.5s" begin="0.9s" repeatCount="indefinite" path="M68,50 L116,36"/></circle>
+        </g>
+        <g>
+          <circle class="nn-node" cx="20" cy="22" r="6.5" fill="url(#introNodeG)"/>
+          <circle class="nn-node d1" cx="20" cy="50" r="6.5" fill="url(#introNodeG)"/>
+          <circle class="nn-node d2" cx="68" cy="22" r="6.5" fill="url(#introNodeG)"/>
+          <circle class="nn-node d3" cx="68" cy="50" r="6.5" fill="url(#introNodeG)"/>
+          <circle class="nn-ring" cx="116" cy="36" r="9"/>
+          <circle class="nn-node o" cx="116" cy="36" r="7.5" fill="url(#introNodeGo)"/>
+        </g>
+        <defs>
+          <radialGradient id="introNodeG" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#b6ccff"/><stop offset="1" stop-color="#3a5bd0"/></radialGradient>
+          <radialGradient id="introNodeGo" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#ffe6a6"/><stop offset="1" stop-color="#e0952f"/></radialGradient>
+        </defs>
+      </svg>
+    </div>
+    <h2><span>Train a neural network</span></h2>
+    <p class="sub">This is where you get to see how a neural network actually learns. We follow one training example all the way around the loop and watch the error travel <strong style="color:var(--amber)">backwards</strong> through the network, nudging every weight a little.</p>
+    <div class="intro-loop">
+      <div class="intro-phase p1"><div class="ip-num">1</div><div><div class="ip-t">Forward pass</div><div class="ip-d">The input is sent through the network, which makes a guess.</div></div></div>
+      <div class="intro-phase p2"><div class="ip-num">2</div><div><div class="ip-t">Loss</div><div class="ip-d">We compare the network's guess with the correct answer and work out how big the error is.</div></div></div>
+      <div class="intro-phase p3"><div class="ip-num">3</div><div><div class="ip-t">Backpropagation</div><div class="ip-d">Information about the error is sent backwards through the network, so every weight learns how it contributed.</div></div></div>
+      <div class="intro-phase p4"><div class="ip-num">4</div><div><div class="ip-t">Update</div><div class="ip-d">Every weight is nudged a little in the direction that reduces the error.</div></div></div>
+    </div>
+    <button class="intro-start" onclick="openSetup()">Get started <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
+</div>
+
+<!-- SETUP: choose what the network should learn -->
+<div class="setup" id="setup">
+  <div class="setup-inner">
+    <div class="setup-step"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block"></span> Step 1 of 2 · Choose a task</div>
+    <div class="setup-head">
+      <h2>What should the network <span>learn?</span></h2>
+      <p class="setup-sub">Pick a logic gate. The network has to learn to give the right answer for all four combinations of the inputs x₁ and x₂.</p>
+    </div>
+    <div class="setup-cards" id="setupCards"></div>
+    <div class="setup-preview" id="setupPreview"></div>
+    <div class="setup-actions">
+      <button class="setup-back" onclick="backToIntro()">← Back</button>
+      <button class="setup-go" id="setupGo" onclick="enterLab()">Start training <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<div class="hd">
+  <a class="back-link" href="/"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> AI-aktiviteter</a>
+  <div class="hd-title-row">
+    <svg class="hd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg>
+    <h1><span>Train a neural network</span></h1>
+  </div>
+  <p>Watch the network learn, step by step – from a random guess to a fully trained model.</p>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/trana-neuralt-natverk"><span class="flag">🇸🇪</span> Svenska</a>
+</div>
+
+<div class="app" id="app" style="display:none">
+  <!-- LEFT -->
+  <div class="lp">
+    <div><div class="sec-t">Task</div><div class="task-summary" id="taskSummary"></div></div>
+    <div><table class="dtable" id="dataTable"></table><div class="hint" id="dataHint"></div></div>
+    <div>
+      <div class="sec-t">Learning rate (η)</div>
+      <div class="slider-row"><span class="slider-lbl">η</span><input type="range" class="slider" id="lrSlider" min="5" max="150" step="5" value="60" oninput="onLr()"><span class="slider-val" id="lrVal">0.60</span></div>
+      <div class="hint">The learning rate decides how big a step the weights take each time they are adjusted. A small rate learns slowly but steadily, while a large rate is faster but can turn jumpy.</div>
+    </div>
+  </div>
+
+  <!-- CENTER -->
+  <div class="center">
+    <div class="phase-bar" id="phaseBar"></div>
+    <div class="canvas-wrap">
+      <canvas id="cv"></canvas>
+      <div class="flow-badge" id="flowBadge"></div>
+      <div class="canvas-hint">Click a connection or a neuron to see its calculation</div>
+    </div>
+    <div class="narr" id="narr"></div>
+    <div class="ctrl-block" id="controlPanel"></div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="rp">
+    <div><div class="sec-t" style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">Calculation
+      <span class="adv-link" onclick="openAdvanced()">Advanced ↗</span>
+    </div><div class="mathbox" id="mathbox"></div></div>
+    <div><div class="sec-t">Result</div><div class="result-boxes" id="resultBoxes">
+      <div class="rbox"><div class="rl">Network's guess (ŷ)</div><div class="rv" id="rPred" style="color:var(--accent2)">–</div></div>
+      <div class="rbox"><div class="rl">Correct answer (y)</div><div class="rv" id="rTarget" style="color:var(--gold)">–</div></div>
+      <div class="rbox wide"><div class="rl" id="rLossLabel">Loss for this example</div><div class="rv" id="rLoss" style="color:var(--amber);font-size:1.05em">–</div></div>
+    </div></div>
+    <div class="loss-panel">
+      <div class="lp-hd"><span class="t">Loss over epochs</span><span class="v" id="epochLoss">–</span></div>
+      <canvas id="lossChart"></canvas>
+      <div class="loss-axis"><span>Epoch 1</span><span id="epochLabel">–</span></div>
+    </div>
+    <div class="info">
+      <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15Z"/></svg> Concepts – click for an explanation</h3>
+      <div class="glossary" id="glossary"></div>
+    </div>
+  </div>
+</div>
+
+<div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
+<div class="concept-card" id="conceptCard">
+  <div class="concept-card-inner">
+    <button class="concept-close" onclick="closeConcept()">✕</button>
+    <div class="concept-icon" id="conceptIcon"></div>
+    <div class="concept-title" id="conceptTitle"></div>
+    <div class="concept-def" id="conceptDef"></div>
+    <div class="concept-formula" id="conceptFormula"></div>
+  </div>
+</div>
+
+<!-- ADVANCED: what does "deriving" actually mean here -->
+<div class="adv-backdrop" id="advBackdrop" onclick="closeAdvanced()"></div>
+<div class="adv-modal" id="advModal">
+  <div class="adv-inner">
+    <button class="adv-close" onclick="closeAdvanced()">✕</button>
+    <div class="adv-tag">Advanced</div>
+    <h3>What is it we are actually differentiating?</h3>
+    <div class="adv-text">
+      <p>At every calculation step <strong>z</strong>, <strong>a</strong>, <strong>ŷ</strong> and <strong>L</strong> are concrete numbers – results worked out for a given input and given weights. What gets differentiated, though, is not those individual numbers but the <strong>relationship</strong> between them: the formula describing how the loss L would change if a weight w were altered slightly.</p>
+      <p>Hold every other value fixed and let w vary, and a curve appears. The derivative is the <em>slope</em> of that curve at exactly the point where the weight currently sits – not the height, but how steep it is there.</p>
+      <p>The network knows the equation of that curve, because it is built only from known, differentiable steps (weighted sums and sigmoid). So the slope can be worked out exactly, by plugging the current numbers into the finished formula – instead of guessing.</p>
+      <div class="chain">L → ŷ&nbsp; &nbsp;<b>dL/dŷ&nbsp;=&nbsp;(ŷ − y)</b><br>a → z&nbsp; &nbsp;<b>da/dz&nbsp;=&nbsp;a(1−a)</b><br>z → w&nbsp; &nbsp;<b>dz/dw&nbsp;=&nbsp;a_in</b></div>
+      <p>The chain rule multiplies these slopes together, step by step backwards through the network – which is exactly what <strong>Phase 3 · Backprop</strong> does.</p>
+      <p>The steeper the curve, the more sensitive the loss is to changes in the weight. Right at the bottom of the valley the slope is <strong>zero</strong> – there is no way to reduce the loss further by moving the weight in either direction. So it is at the bottom of the curve, where the derivative is zero, that the loss is at its <strong style="color:var(--green)">smallest</strong> – and that is where gradient descent tries to take the network, one step at a time.</p>
+    </div>
+    <div class="adv-visual">
+      <div class="adv-visual-hd">Try it yourself: the slope at a point</div>
+      <div class="adv-canvas-wrap"><canvas id="advCanvas"></canvas></div>
+      <div class="adv-controls">
+        <span class="slider-lbl">w</span>
+        <input type="range" class="slider" id="advSlider" min="-3" max="3" step="0.05" value="-2" oninput="onAdvSlider(this.value)">
+      </div>
+      <div class="adv-readout">
+        <div class="arv"><div class="al">w</div><div class="av" id="advW" style="color:var(--gold)">–</div></div>
+        <div class="arv"><div class="al">L(w)</div><div class="av" id="advL" style="color:var(--accent2)">–</div></div>
+        <div class="arv"><div class="al">Slope dL/dw</div><div class="av" id="advSlope" style="color:var(--amber)">–</div></div>
+      </div>
+      <div class="adv-caption">The yellow line is the <strong style="color:var(--text)">tangent</strong> – the slope of the curve at that exact point. That number is the derivative. The green arrow shows which way gradient descent nudges w: downhill, towards the bottom of the valley.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================ MATH TYPESETTING ============================ */
+// Render a single LaTeX string into an element, with a plain-text fallback.
+function texInto(el,tex,plain,display){
+  if(window.katex){try{katex.render(tex,el,{throwOnError:false,displayMode:!!display});return;}catch(e){}}
+  el.textContent=plain!==undefined?plain:tex;el.classList.add('tex-fallback');
+}
+// Build a block of math rows into a container element.
+function texRows(container,rows){
+  container.innerHTML='';
+  rows.forEach(r=>{
+    const d=document.createElement('div');d.className='mrow '+(r.cls||'');
+    if(r.text){d.classList.add('mrow-text');d.innerHTML=r.html||r.plain;}
+    else texInto(d,r.tex,r.plain,true);
+    container.appendChild(d);
+  });
+}
+
+/* ============================ DATA ============================ */
+const GATE_INTRO='This is a <strong>logic gate</strong> – a simple rule with two inputs, <strong>x₁</strong> and <strong>x₂</strong>. Each one is either <strong>0</strong> (off) or <strong>1</strong> (on). The network has to learn to give the right answer for all four combinations.';
+const PROBLEMS={
+  and:{icon:'∧',title:'The AND gate',longname:'logical AND',short:'Yes only when both inputs are 1',
+    explain:`${GATE_INTRO}<br><br>In an AND gate the answer is Yes only when <strong>both</strong> inputs are 1 at the same time. As soon as at least one of them is 0, the answer is No. You could say that AND demands everything be satisfied at once.<br><br>This is the easiest case to learn, because a single straight line is enough to separate the Yes cases from the No cases.`,
+    data:[{x:[0,0],y:0},{x:[0,1],y:0},{x:[1,0],y:0},{x:[1,1],y:1}]},
+  or:{icon:'∨',title:'The OR gate',longname:'logical OR',short:'Yes when at least one input is 1',
+    explain:`${GATE_INTRO}<br><br>In an OR gate the answer is Yes as soon as <strong>at least one</strong> of the inputs is 1. It makes no difference whether it is the first, the second or both – only when <strong>both</strong> are 0 is the answer No.<br><br>This case can also be solved with a single straight line between the Yes cases and the No case.`,
+    data:[{x:[0,0],y:0},{x:[0,1],y:1},{x:[1,0],y:1},{x:[1,1],y:1}]},
+  xor:{icon:'⊕',title:'The XOR gate',longname:'exclusive OR (XOR)',short:'Yes when exactly one input is 1',
+    explain:`${GATE_INTRO}<br><br>In a XOR gate (exclusive or) the answer is Yes when the inputs <strong>differ</strong>, that is, when exactly one of them is 1. If they are the same – both 0 or both 1 – the answer is No.<br><br><span style="color:#ffb98a">What makes XOR special is that the Yes cases and the No cases cannot be separated by a single straight line. A simple model is therefore not enough. The network needs its hidden layer to manage it, which is why XOR takes more epochs to learn than the other gates.</span>`,
+    data:[{x:[0,0],y:0},{x:[0,1],y:1},{x:[1,0],y:1},{x:[1,1],y:0}]}
+};
+
+/* ============================ STATE ============================ */
+let prob='and';
+let w1,bh,w2,bo;
+let lr=0.60;
+let exampleIdx=0;
+let epoch=0, lossHistory=[];
+let running=false, runTimer=null, autoKicks=0;
+let trained=false, predictIdx=0;
+let C={};
+let stepIdx=-1;
+let flowAnim=null, flowStart=0, flowDir='forward', flowEdges=[];
+let updateFlash=null, updateFlashStart=0;
+
+function sig(z){return 1/(1+Math.exp(-z));}
+function rnd(){return (Math.random()*2-1)*1.4;}
+function initParams(){
+  w1=[[rnd(),rnd()],[rnd(),rnd()]];bh=[rnd()*0.4,rnd()*0.4];w2=[rnd(),rnd()];bo=rnd()*0.4;
+}
+
+function computeIteration(){
+  const ex=PROBLEMS[prob].data[exampleIdx];const x=ex.x,y=ex.y;
+  const zh=[0,0],ah=[0,0];
+  for(let j=0;j<2;j++){zh[j]=bh[j]+w1[j][0]*x[0]+w1[j][1]*x[1];ah[j]=sig(zh[j]);}
+  const zo=bo+w2[0]*ah[0]+w2[1]*ah[1];const yhat=sig(zo);
+  const loss=0.5*(yhat-y)*(yhat-y);
+  const dOut=(yhat-y)*yhat*(1-yhat);
+  const gW2=[dOut*ah[0],dOut*ah[1]];const gBo=dOut;
+  const dH=[0,0];for(let j=0;j<2;j++)dH[j]=dOut*w2[j]*ah[j]*(1-ah[j]);
+  const gW1=[[dH[0]*x[0],dH[0]*x[1]],[dH[1]*x[0],dH[1]*x[1]]];const gBh=[dH[0],dH[1]];
+  C={x,y,zh,ah,zo,yhat,loss,dOut,gW2,gBo,dH,gW1,gBh};
+}
+function applyUpdate(){
+  const old={w1:JSON.parse(JSON.stringify(w1)),bh:bh.slice(),w2:w2.slice(),bo};
+  for(let j=0;j<2;j++){w2[j]-=lr*C.gW2[j];bh[j]-=lr*C.gBh[j];for(let i=0;i<2;i++)w1[j][i]-=lr*C.gW1[j][i];}
+  bo-=lr*C.gBo;C.old=old;
+}
+
+/* ============================ STEP MACHINE ============================ */
+const STEPS=[
+  {phase:'forward',kind:'fwd-h',j:0},
+  {phase:'forward',kind:'fwd-h',j:1},
+  {phase:'forward',kind:'fwd-out'},
+  {phase:'loss',kind:'loss'},
+  {phase:'backward',kind:'back-out'},
+  {phase:'backward',kind:'back-gw2'},
+  {phase:'backward',kind:'back-h',j:0},
+  {phase:'backward',kind:'back-h',j:1},
+  {phase:'backward',kind:'back-gw1'},
+  {phase:'update',kind:'update'}
+];
+const PHASE_STEPS={forward:[0,1,2],loss:[3],backward:[4,5,6,7,8],update:[9]};
+const PHASE_NAME={forward:'Forward pass',loss:'Loss',backward:'Backpropagation',update:'Update'};
+
+function neuronRevealed(layer,idx){
+  if(stepIdx<0)return false;
+  if(layer===0)return true;
+  if(layer===1){if(idx===0)return stepIdx>=0;if(idx===1)return stepIdx>=1;}
+  if(layer===2)return stepIdx>=2;
+  return false;
+}
+function startIteration(){computeIteration();stepIdx=0;renderStep();}
+function nextStep(){
+  if(running)return;
+  if(stepIdx<0){startIteration();return;}
+  if(stepIdx>=STEPS.length-1){advanceExample();return;}
+  stepIdx++;renderStep();
+}
+function prevStep(){
+  if(running||trained||stepIdx<0)return;
+  // if we are leaving the update step backwards, undo the weight change first
+  if(STEPS[stepIdx].kind==='update'&&C.old){
+    w1=C.old.w1.map(r=>r.slice());bh=C.old.bh.slice();w2=C.old.w2.slice();bo=C.old.bo;delete C.old;
+  }
+  stepIdx--;
+  if(stepIdx<0){renderIdle();return;}
+  renderStep();
+}
+function advanceExample(){
+  exampleIdx=(exampleIdx+1)%PROBLEMS[prob].data.length;
+  if(exampleIdx===0)recordEpoch();
+  stepIdx=-1;C={};renderIdle();renderData();updateResults();drawNet();
+}
+function computeAvgLoss(){
+  let tot=0;const d=PROBLEMS[prob].data;
+  for(const ex of d){const zh=[0,0],ah=[0,0];
+    for(let j=0;j<2;j++){zh[j]=bh[j]+w1[j][0]*ex.x[0]+w1[j][1]*ex.x[1];ah[j]=sig(zh[j]);}
+    const zo=bo+w2[0]*ah[0]+w2[1]*ah[1];const yhat=sig(zo);tot+=0.5*(yhat-ex.y)*(yhat-ex.y);}
+  return tot/d.length;
+}
+function recordEpoch(){
+  epoch++;const L=computeAvgLoss();lossHistory.push(L);
+  document.getElementById('epochLoss').textContent=L.toFixed(4);
+  document.getElementById('epochLabel').textContent='Epoch '+epoch;
+  drawLossChart();
+}
+function runOneIteration(){
+  if(running)return;
+  if(stepIdx<0)computeIteration();
+  stepIdx=STEPS.length-1;renderStep();
+  setTimeout(()=>{advanceExample();},700);
+}
+function toggleAuto(){
+  if(running){stopAuto();return;}
+  running=true;trained=false;autoKicks=0;stepIdx=-1;renderControls();
+  document.getElementById('flowBadge').classList.remove('show');
+  runTimer=setInterval(()=>{
+    if(!running)return;
+    const d=PROBLEMS[prob].data;
+    for(let k=0;k<6;k++){
+      for(let e=0;e<d.length;e++){exampleIdx=e;computeIteration();applyUpdate();}
+      epoch++;
+    }
+    exampleIdx=0;
+    const L=computeAvgLoss();
+    const basicallyDone=allCorrect()&&L<0.02;
+    // If training has clearly stalled in a bad local minimum, restart from a fresh
+    // random initialisation. This makes even the tricky XOR converge reliably.
+    if(!basicallyDone && ((epoch>=2000 && L>0.12) || epoch>=5500)){
+      if(autoKicks<8){autoKicks++;initParams();epoch=0;lossHistory=[];drawLossChart();drawNet();return;}
+      stopAuto();return;
+    }
+    lossHistory.push(L);
+    document.getElementById('epochLoss').textContent=L.toFixed(4);
+    document.getElementById('epochLabel').textContent='Epoch '+epoch;
+    drawLossChart();updateResults();drawNet();
+    if(allCorrect()&&L<0.005){finishTraining();}
+  },16);
+}
+function stopAuto(){running=false;if(runTimer){clearInterval(runTimer);runTimer=null;}stepIdx=-1;C={};renderControls();renderIdle();renderData();updateResults();drawNet();}
+/* did the trained network classify every example correctly? */
+function allCorrect(){
+  const d=PROBLEMS[prob].data;
+  for(const ex of d){const zh=[0,0],ah=[0,0];
+    for(let j=0;j<2;j++){zh[j]=bh[j]+w1[j][0]*ex.x[0]+w1[j][1]*ex.x[1];ah[j]=sig(zh[j]);}
+    const zo=bo+w2[0]*ah[0]+w2[1]*ah[1];const yhat=sig(zo);
+    if(Math.round(yhat)!==ex.y)return false;}
+  return true;
+}
+function resetTraining(){
+  stopAuto();trained=false;initParams();epoch=0;lossHistory=[];exampleIdx=0;stepIdx=-1;C={};
+  document.getElementById('epochLoss').textContent='–';document.getElementById('epochLabel').textContent='–';
+  renderIdle();renderData();updateResults();drawLossChart();drawNet();
+}
+
+/* ============================ TRAINED / PREDICTION MODE ============================ */
+function finishTraining(){
+  running=false;if(runTimer){clearInterval(runTimer);runTimer=null;}
+  trained=true;stepIdx=-1;
+  const badge=document.getElementById('flowBadge');
+  badge.className='flow-badge done show';badge.innerHTML='✓ FULLY TRAINED NETWORK';
+  setPhaseBar(null,true);
+  const last=lossHistory[lossHistory.length-1];
+  document.getElementById('narr').innerHTML=`<span class="mb-tag update">Done</span>
+    <h4>The network is fully trained!</h4>
+    <div class="mb-desc">After ${epoch} epochs of forward passes and backpropagation, the weights have found values that make the network answer correctly on every example. The loss has fallen all the way down to ${last.toFixed(4)}.<br><br>From now on we no longer change the weights. The network is trained, and we can start <strong>using</strong> it. Feeding in new data and reading off the answer is called making a <strong style="color:var(--green)">prediction</strong>.<br><br>Try it yourself: pick a combination below the network and see that the trained model answers correctly.</div>`;
+  renderControls();
+  document.getElementById('rLossLabel').textContent='Is the prediction correct?';
+  predictExample(0);
+}
+function predictExample(i){
+  predictIdx=i;exampleIdx=i;
+  computeIteration();          // forward values land in C (gradients unused here)
+  stepIdx=99;                  // reveal every neuron, no deltas, no update colouring
+  drawNet();
+  const ex=PROBLEMS[prob].data[i];
+  const correct=Math.round(C.yhat)===ex.y;
+  document.getElementById('rPred').textContent=C.yhat.toFixed(3);
+  document.getElementById('rTarget').textContent=ex.y;
+  document.getElementById('rLoss').innerHTML=correct
+    ? '<span class="verdict-ok">✓ Yes, correct</span>'
+    : '<span class="verdict-bad">✗ No, wrong</span>';
+  const rounded=Math.round(C.yhat);
+  document.getElementById('narr').innerHTML=`<span class="mb-tag update">Done</span><h4>Testing a prediction</h4><div class="mb-desc">The network receives <strong>x₁ = ${ex.x[0]}</strong> and <strong>x₂ = ${ex.x[1]}</strong> and answers <span class="mono" style="color:var(--gold)">${C.yhat.toFixed(3)}</span>. Rounded, that is <strong>${rounded}</strong>, meaning "${rounded?'Yes':'No'}" – and that ${correct?'matches':'does not match'} the correct answer.</div>`;
+  const rows=[
+    {cls:'num',tex:`a_{1} = \\sigma(z_{1}) = ${col(CB,fp(C.ah[0]))}`,plain:`a1 = ${fp(C.ah[0])}`},
+    {cls:'num',tex:`a_{2} = \\sigma(z_{2}) = ${col(CB,fp(C.ah[1]))}`,plain:`a2 = ${fp(C.ah[1])}`},
+    {cls:'res gold',tex:`\\hat{y} = \\sigma(w_{1}a_{1} + w_{2}a_{2} + b) = ${col(CGO,fp(C.yhat))}`,plain:`ŷ = ${fp(C.yhat)}`}
+  ];
+  document.getElementById('mathbox').innerHTML=`<div class="mb-kicker update">Calculation</div><div class="mb-formula" id="mbFormula"></div>`;
+  texRows(document.getElementById('mbFormula'),rows);
+  renderControls();
+  renderData();
+}
+
+/* ============================ SETUP: CHOOSE TASK ============================ */
+function openSetup(){
+  document.getElementById('intro').classList.add('hidden');
+  const s=document.getElementById('setup');s.classList.remove('leaving');
+  requestAnimationFrame(()=>s.classList.add('show'));
+  renderSetupCards();renderSetupPreview();
+}
+function backToIntro(){
+  document.getElementById('setup').classList.remove('show');
+  document.getElementById('intro').classList.remove('hidden');
+}
+function renderSetupCards(){
+  document.getElementById('setupCards').innerHTML=Object.entries(PROBLEMS).map(([k,p])=>{
+    const hard=k==='xor';
+    return `<div class="setup-card ${prob===k?'active':''}" onclick="selectSetupProblem('${k}')">
+      <span class="sc-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span>
+      <span class="sc-icon">${p.icon}</span>
+      <span class="sc-title">${p.title}</span>
+      <span class="sc-short">${p.short}</span>
+      <span class="sc-tag ${hard?'hard':'easy'}">${hard?'Needs a hidden layer':'Easy to learn'}</span>
+    </div>`;
+  }).join('');
+}
+function selectSetupProblem(k){prob=k;renderSetupCards();renderSetupPreview();}
+function renderSetupPreview(){
+  const p=PROBLEMS[prob],hard=prob==='xor';
+  let tt='<table class="mini-tt"><thead><tr><th>x₁</th><th>x₂</th><th>Answer</th></tr></thead><tbody>';
+  p.data.forEach(ex=>{tt+=`<tr><td>${ex.x[0]}</td><td>${ex.x[1]}</td><td class="${ex.y?'ja':'nej'}">${ex.y?'Yes':'No'}</td></tr>`;});
+  tt+='</tbody></table>';
+  const line=hard
+    ? `<strong>${p.title}</strong> gives Yes when <strong>exactly one</strong> input is 1. <span class="sp-hard">The Yes and No cases cannot be separated by a single straight line – that is why the network needs its hidden layer, and why XOR takes more epochs to learn.</span>`
+    : prob==='and'
+      ? `<strong>${p.title}</strong> gives Yes only when <strong>both</strong> inputs are 1. A simple case that a single straight line can separate.`
+      : `<strong>${p.title}</strong> gives Yes when <strong>at least one</strong> input is 1. A simple case that a single straight line can separate.`;
+  document.getElementById('setupPreview').innerHTML=
+    `<div class="sp-tt">${tt}</div><div class="sp-text">${line}<br><span style="color:var(--dim2);font-size:.92em">Want to know more? <span class="term" onclick="openGateInfo('${prob}')">Open the full explanation</span></span></div>`;
+}
+function enterLab(){
+  const s=document.getElementById('setup');s.classList.add('leaving');
+  setTimeout(()=>{
+    s.classList.remove('show','leaving');
+    document.getElementById('app').style.display='';
+    resetTraining();           // fresh weights + renders idle/data/results/loss/net for chosen gate
+    renderTaskSummary();
+    setTimeout(()=>{drawNet();drawLossChart();},40);
+  },260);
+}
+function backToSetup(){
+  stopAuto();trained=false;stepIdx=-1;C={};
+  document.getElementById('app').style.display='none';
+  const s=document.getElementById('setup');s.classList.remove('leaving');
+  requestAnimationFrame(()=>s.classList.add('show'));
+  renderSetupCards();renderSetupPreview();
+}
+function renderTaskSummary(){
+  const p=PROBLEMS[prob];
+  document.getElementById('taskSummary').innerHTML=
+    `<div class="ts-icon">${p.icon}</div>
+     <div class="ts-body"><div class="ts-eyebrow">Training on</div><div class="ts-title">${p.title}</div></div>
+     <button class="ts-change" onclick="backToSetup()" title="Choose a different task">↺ Change</button>`;
+}
+
+/* ============================ LEFT: DATA ============================ */
+function openGateInfo(key){
+  const p=PROBLEMS[key];
+  document.getElementById('conceptIcon').innerHTML=`<span style="font-size:27px;font-weight:800;line-height:1">${p.icon}</span>`;
+  document.getElementById('conceptTitle').textContent=`${p.title} · ${p.longname}`;
+  document.getElementById('conceptDef').innerHTML=p.explain;
+  let t='<table class="mini-tt"><caption>The truth table shows the correct answer for every combination of inputs.</caption><thead><tr><th>x₁</th><th>x₂</th><th>Correct answer</th></tr></thead><tbody>';
+  p.data.forEach(ex=>{t+=`<tr><td>${ex.x[0]}</td><td>${ex.x[1]}</td><td class="${ex.y?'ja':'nej'}">${ex.y?'Yes (1)':'No (0)'}</td></tr>`;});
+  t+='</tbody></table>';
+  document.getElementById('conceptFormula').innerHTML=t;
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>document.getElementById('conceptCard').classList.add('show'));
+}
+function renderData(){
+  const d=PROBLEMS[prob].data;
+  let h='<caption>The truth table shows the correct answer for every combination of inputs.</caption><thead><tr><th>x₁</th><th>x₂</th><th>Correct answer (y)</th></tr></thead><tbody>';
+  d.forEach((ex,i)=>{
+    h+=`<tr class="${(i===exampleIdx&&!running)?'cur':''}"><td>${ex.x[0]}</td><td>${ex.x[1]}</td><td class="ty">${ex.y} <span class="${ex.y?'yja':'ynej'}">(${ex.y?'Yes':'No'})</span></td></tr>`;
+  });
+  h+='</tbody>';
+  document.getElementById('dataTable').innerHTML=h;
+  document.getElementById('dataHint').innerHTML=
+    trained?'The network is fully trained. Click a row here, or a button below the network, to test a prediction.'
+    :running?'The network is training automatically on all rows right now.'
+    :`The network is currently training on row <strong style="color:var(--accent2)">${exampleIdx+1}</strong>. Once it has been through every row once, that is called an <strong>epoch</strong>.`;
+}
+function onLr(){lr=parseInt(document.getElementById('lrSlider').value)/100;document.getElementById('lrVal').textContent=lr.toFixed(2);}
+
+/* ============================ CONTROLS ============================ */
+function stepCounterText(){
+  if(stepIdx<0)return 'ready';
+  const st=STEPS[Math.min(stepIdx,STEPS.length-1)];
+  const arr=PHASE_STEPS[st.phase];
+  return `${arr.indexOf(stepIdx)+1} / ${arr.length}`;
+}
+function renderControls(){
+  const el=document.getElementById('controlPanel');
+  if(trained){
+    el.className='ctrl-block done-block';
+    const d=PROBLEMS[prob].data;
+    const btns=d.map((ex,i)=>`<button class="predict-btn ${i===predictIdx?'active':''}" onclick="predictExample(${i})"><span class="pb-in">x₁ = ${ex.x[0]}, x₂ = ${ex.x[1]}</span><span class="pb-exp">Answer: ${ex.y?'Yes':'No'}</span></button>`).join('');
+    el.innerHTML=`<div class="ctrl-label" style="color:var(--green)">Test the trained model</div>
+      <div class="predict-grid">${btns}</div>
+      <div class="ctrl-legend">Pick a combination and we feed it into the fully trained network and read off the answer. No weights change now – the network is simply being used.</div>
+      <button class="btn" style="width:100%;margin-top:9px" onclick="resetTraining()">↺ Retrain the network from scratch</button>`;
+    return;
+  }
+  el.className='ctrl-block';
+  const counter=running?'auto':stepCounterText();
+  const atEnd=stepIdx>=STEPS.length-1;
+  const stepLabel=stepIdx<0?'▶ Start the forward pass':atEnd?'✓ Finish and move on':'▶ Next calculation';
+  const autoLabel=running?'⏸ Pause training':'⏩ Finish training automatically';
+  el.innerHTML=`
+    <div class="ctrl-label">Step by step <span class="step-counter">${counter}</span></div>
+    <div class="bg">
+      <button class="btn dn" onclick="prevStep()" ${(running||stepIdx<0)?'disabled':''} title="One step back">◀ Back</button>
+      <button class="btn pri big" onclick="nextStep()" ${running?'disabled':''} style="flex:1">${stepLabel}</button>
+    </div>
+    <button class="btn" onclick="runOneIteration()" ${running?'disabled':''} style="width:100%;margin-top:6px">↻ Play the whole loop</button>
+    <div class="bg" style="margin-top:9px">
+      <button class="btn ${running?'pri':'grn'}" onclick="toggleAuto()">${autoLabel}</button>
+      <button class="btn dn" onclick="resetTraining()" title="Reset the weights and start over">↺</button>
+    </div>`;
+}
+
+/* ============================ MATH BOX / NARRATION ============================ */
+function f(v,d){d=d===undefined?3:d;return (v<0?'-':'')+Math.abs(v).toFixed(d);}      // signed, plain minus for latex
+function fp(v,d){return v.toFixed(d===undefined?3:d);}
+function col(hex,s){return `\\textcolor{${hex}}{${s}}`;}
+function T(label,key){return `<span class="term" onclick="openConcept('${key}')">${label}</span>`;}
+function S(sym){return `<span class="sym">${sym}</span>`;}
+const CB='#7aa2ff', CG='#33d17a', CR='#ef5b6b', CA='#ff9f45', CGO='#ffce54', CD='#8791b3';
+
+function renderIdle(){
+  stepIdx=-1;setPhaseBar(null);
+  document.getElementById('flowBadge').classList.remove('show');
+  document.getElementById('rLossLabel').textContent='Loss for this example';
+  const ex=PROBLEMS[prob].data[exampleIdx];
+  document.getElementById('narr').innerHTML=`<span class="mb-tag idle">Ready</span>
+     <h4>Ready for the next training loop</h4>
+     <div class="mb-desc">The network is now going to learn from an example where the inputs are <strong style="color:var(--accent2)">x₁ = ${ex.x[0]}</strong> and <strong style="color:var(--accent2)">x₂ = ${ex.x[1]}</strong>, and the correct answer is <em>${ex.y}</em>.<br><br>One training loop consists of four phases: <strong>forward pass</strong>, <strong>loss</strong>, <strong>backpropagation</strong> and <strong>update</strong>. Each loop makes the network a little less wrong.</div>`;
+  document.getElementById('mathbox').innerHTML=`<div class="mb-kicker idle">Calculation</div><div class="mb-empty">Press <strong style="color:var(--text)">Start the forward pass</strong> below to see the first calculation here.</div>`;
+  renderControls();
+}
+function setPhaseBar(activePhase, allDone){
+  const phases=[{k:'forward',n:'1',l:'Forward pass'},{k:'loss',n:'2',l:'Loss'},{k:'backward',n:'3',l:'Backprop'},{k:'update',n:'4',l:'Update'}];
+  const order={forward:0,loss:1,backward:2,update:3};
+  const ai=activePhase!=null?order[activePhase]:-1;let h='';
+  phases.forEach((p,i)=>{
+    const active=p.k===activePhase,done=allDone||ai>i;
+    h+=`<div class="phase-chip p-${p.k} ${active?'active':''} ${done?'done':''}"><span class="pc-n">PHASE ${p.n}</span><span class="pc-l">${p.l}</span></div>`;
+    if(i<phases.length-1)h+=`<svg class="phase-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
+  });
+  document.getElementById('phaseBar').innerHTML=h;
+}
+
+function renderStep(){
+  const st=STEPS[stepIdx];
+  setPhaseBar(st.phase);renderControls();
+  const badge=document.getElementById('flowBadge');
+  if(st.phase==='forward'){badge.className='flow-badge forward show';badge.innerHTML='The signal flows forward →';}
+  else if(st.phase==='backward'){badge.className='flow-badge backward show';badge.innerHTML='← The error signal flows backward';}
+  else badge.classList.remove('show');
+
+  const mb=document.getElementById('mathbox');
+  let tagCls,tagTxt,title,desc,rows=[],narr='';
+
+  if(st.kind==='fwd-h'){
+    const j=st.j,x=C.x;
+    tagCls='forward';tagTxt='Phase 1 · Forward pass';title=`Hidden neuron ${j+1} calculates`;
+    desc=`The neuron starts by working out a <strong>weighted sum</strong> ${S('z')}: it multiplies each input by its ${T('weight','vikt')} ${S('w')}, adds its ${T('bias','bias')} ${S('b')} and sums it all up. The sum is then passed through the ${T('sigmoid','sigmoid')}, which squeezes the value in between 0 and 1. The result ${S('a')} is called the neuron's ${T('activation','aktivering')}.`;
+    rows=[
+      {cls:'gen',tex:`z = w_{1}x_{1} + w_{2}x_{2} + b`,plain:'z = w1·x1 + w2·x2 + b'},
+      {cls:'num',tex:`z = (${f(w1[j][0])})(${x[0]}) + (${f(w1[j][1])})(${x[1]}) + (${f(bh[j])}) = ${f(C.zh[j])}`,plain:`z = ${f(C.zh[j])}`},
+      {cls:'res',tex:`a_{${j+1}} = \\sigma(z) = ${col(CB,fp(C.ah[j]))}`,plain:`a${j+1} = σ(z) = ${fp(C.ah[j])}`}
+    ];
+    narr=`Hidden neuron <strong>${j+1}</strong> activates to <span class="mono">${fp(C.ah[j])}</span>. A value near 1 means the neuron is strongly on, and near 0 that it is off.`;
+    flowForward([[0,0,1,j],[0,1,1,j]]);
+  }
+  else if(st.kind==='fwd-out'){
+    tagCls='forward';tagTxt='Phase 1 · Forward pass';title='The output neuron guesses';
+    desc=`The output neuron does exactly the same thing, but now takes the hidden neurons' ${T('activations','aktivering')} as its inputs. Its own activation is what we call ${S('ŷ')} (pronounced "y-hat"), and that is the network's final guess at the answer.`;
+    rows=[
+      {cls:'gen',tex:`\\hat{y} = \\sigma(w_{1}a_{1} + w_{2}a_{2} + b)`,plain:'ŷ = σ(w1·a1 + w2·a2 + b)'},
+      {cls:'num',tex:`z = (${f(w2[0])})(${fp(C.ah[0])}) + (${f(w2[1])})(${fp(C.ah[1])}) + (${f(bo)}) = ${f(C.zo)}`,plain:`z = ${f(C.zo)}`},
+      {cls:'res gold',tex:`\\hat{y} = \\sigma(${f(C.zo)}) = ${col(CGO,fp(C.yhat))}`,plain:`ŷ = ${fp(C.yhat)}`}
+    ];
+    narr=`The network guesses <span class="mono" style="color:var(--gold)">${fp(C.yhat)}</span>, while the correct answer is <strong style="color:var(--gold)">${C.y}</strong>.`;
+    flowForward([[1,0,2,0],[1,1,2,0]]);
+  }
+  else if(st.kind==='loss'){
+    const diff=C.yhat-C.y;
+    tagCls='loss';tagTxt='Phase 2 · Loss';title='How wrong was the guess?';
+    desc=`Now we measure how wrong the guess was. We work out the network's ${T('loss','loss')}, which we denote ${S('L')} – a number that is large when the guess ${S('ŷ')} is far from the correct answer ${S('y')}, and zero when they are equal. The formula is called the ${T('half squared error','loss')}: we take the difference, square it and divide by two.`;
+    rows=[
+      {cls:'gen',tex:`L = \\tfrac{1}{2}(\\hat{y}-y)^2`,plain:'L = ½(ŷ − y)²'},
+      {cls:'num',tex:`L = \\tfrac{1}{2}(${fp(C.yhat)}-${C.y})^2 = \\tfrac{1}{2}(${f(diff)})^2`,plain:`L = ½(${f(diff)})²`},
+      {cls:'res amber',tex:`L = ${col(CA,fp(C.loss,4))}`,plain:`L = ${fp(C.loss,4)}`}
+    ];
+    narr=`Right now the guess is off by <span class="mono" style="color:var(--amber)">${f(diff)}</span>. The goal of the whole training process is to make this loss as small as possible.`;
+    badge.classList.remove('show');
+  }
+  else if(st.kind==='back-out'){
+    tagCls='backward';tagTxt='Phase 3 · Backpropagation';title='Error signal at the output';
+    desc=`Now we turn around and go backwards through the network. For the output neuron we work out an ${T('error signal','delta')} ${S('δ')} (delta). It describes how much the loss would change if the neuron's sum changed, and combines the error with the slope of the ${T('sigmoid','sigmoid')} curve.`;
+    rows=[
+      {cls:'gen',tex:`\\delta_{ut} = (\\hat{y}-y)\\cdot \\hat{y}(1-\\hat{y})`,plain:'δut = (ŷ−y)·ŷ(1−ŷ)'},
+      {cls:'num',tex:`\\delta_{ut} = (${fp(C.yhat)}-${C.y})(${fp(C.yhat)})(1-${fp(C.yhat)})`,plain:`δut = ${f(C.dOut)}`},
+      {cls:'res amber',tex:`\\delta_{ut} = ${col(CA,f(C.dOut))}`,plain:`δut = ${f(C.dOut)}`}
+    ];
+    narr=`The output's error signal came out as <span class="mono" style="color:var(--amber)">${f(C.dOut)}</span>. Its sign decides whether the weights should increase or decrease.`;
+    flowBackward([[1,0,2,0],[1,1,2,0]]);
+  }
+  else if(st.kind==='back-gw2'){
+    tagCls='backward';tagTxt='Phase 3 · Backpropagation';title='Gradient for the output weights';
+    desc=`For each output weight we now work out a ${T('gradient','gradient')} – a number showing how much that particular weight contributed to the error. We get it by multiplying the error signal ${S('δ')} by the ${T('activation','aktivering')} that came into the weight. This rests on the ${T('chain rule','chain')}.`;
+    rows=[
+      {cls:'gen',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{ut}\\cdot a_{in}`,plain:'∂L/∂w = δut · a_in'},
+      {cls:'num',tex:`\\frac{\\partial L}{\\partial w_{1}} = (${f(C.dOut)})(${fp(C.ah[0])}) = ${f(C.gW2[0])}`,plain:`∂L/∂w1 = ${f(C.gW2[0])}`},
+      {cls:'num',tex:`\\frac{\\partial L}{\\partial w_{2}} = (${f(C.dOut)})(${fp(C.ah[1])}) = ${f(C.gW2[1])}`,plain:`∂L/∂w2 = ${f(C.gW2[1])}`}
+    ];
+    narr=`Every output weight now knows both which way and how much it needs to change.`;
+  }
+  else if(st.kind==='back-h'){
+    const j=st.j;
+    tagCls='backward';tagTxt='Phase 3 · Backpropagation';title=`Error signal to hidden neuron ${j+1}`;
+    desc=`The error signal is passed further back through the output weights, so that every neuron in the hidden layer also gets its own ${T('error signal','delta')} ${S('δ')}. In this way the responsibility for the error is shared out, step by step, backwards through the network.`;
+    rows=[
+      {cls:'gen',tex:`\\delta_{${j+1}} = \\delta_{ut}\\cdot w_{${j+1}}\\cdot a_{${j+1}}(1-a_{${j+1}})`,plain:`δ${j+1} = δut·w${j+1}·a${j+1}(1−a${j+1})`},
+      {cls:'num',tex:`\\delta_{${j+1}} = (${f(C.dOut)})(${f(w2[j])})(${fp(C.ah[j])})(1-${fp(C.ah[j])})`,plain:`δ${j+1} = ${f(C.dH[j])}`},
+      {cls:'res amber',tex:`\\delta_{${j+1}} = ${col(CA,f(C.dH[j]))}`,plain:`δ${j+1} = ${f(C.dH[j])}`}
+    ];
+    narr=`Hidden neuron <strong>${j+1}</strong> receives the error signal <span class="mono" style="color:var(--amber)">${f(C.dH[j])}</span>, flowed backwards via its weight to the output.`;
+    flowBackward([[0,0,1,j],[0,1,1,j]]);
+  }
+  else if(st.kind==='back-gw1'){
+    tagCls='backward';tagTxt='Phase 3 · Backpropagation';title='Gradient for the input weights';
+    desc=`Finally we work out the ${T('gradient','gradient')} for each input weight, by multiplying the hidden neuron's error signal ${S('δ')} by the input that the weight receives. Now every one of the network's ${T('weights','vikt')} and ${T('biases','bias')} has its own gradient pointing towards lower error.`;
+    rows=[
+      {cls:'gen',tex:`\\frac{\\partial L}{\\partial w_{ji}} = \\delta_{j}\\cdot x_{i}`,plain:'∂L/∂w = δj · xi'},
+      {cls:'num',tex:`\\text{neuron 1:}\\ ${f(C.gW1[0][0])},\\ ${f(C.gW1[0][1])}`,plain:`neuron 1: ${f(C.gW1[0][0])}, ${f(C.gW1[0][1])}`},
+      {cls:'num',tex:`\\text{neuron 2:}\\ ${f(C.gW1[1][0])},\\ ${f(C.gW1[1][1])}`,plain:`neuron 2: ${f(C.gW1[1][0])}, ${f(C.gW1[1][1])}`},
+      {cls:'res',text:true,html:'The network now knows how every weight and bias should change <span style="color:var(--green)">✓</span>'}
+    ];
+    narr=`Backpropagation is done. Every weight and bias now knows how it contributed to the error, and therefore which way it needs to be adjusted.`;
+  }
+  else if(st.kind==='update'){
+    if(!C.old)applyUpdate();
+    tagCls='update';tagTxt='Phase 4 · Update weights';title='Gradient descent';
+    desc=`Now we improve the weights. Each weight takes a small step in the opposite direction to its ${T('gradient','gradient')}, that is, down the loss slope. How big the step is depends on the ${T('learning rate','lr')} ${S('η')} (eta), which right now is <em>${fp(lr,2)}</em>. This way of reducing the loss step by step is called ${T('gradient descent','gd')}.`;
+    rows=[{cls:'gen',tex:`w \\leftarrow w - \\eta\\,\\frac{\\partial L}{\\partial w}`,plain:'w ← w − η·∂L/∂w'}];
+    const rows2=[['w_{11}',C.old.w1[0][0],w1[0][0]],['w_{12}',C.old.w1[0][1],w1[0][1]],['w_{21}',C.old.w1[1][0],w1[1][0]],['w_{22}',C.old.w1[1][1],w1[1][1]],['w_{o1}',C.old.w2[0],w2[0]],['w_{o2}',C.old.w2[1],w2[1]]];
+    rows2.forEach(r=>{const up=r[2]>r[1];rows.push({cls:'num',tex:`${r[0]}:\\ ${f(r[1])} \\to ${col(up?CG:CR,f(r[2]))}\\ ${up?'\\uparrow':'\\downarrow'}`,plain:`${r[0]}: ${f(r[1])} → ${f(r[2])}`});});
+    narr=`The weights have been adjusted. The ones that turned <strong style="color:var(--green)">green</strong> increased and the ones that turned <strong style="color:var(--red)">red</strong> decreased. Next loop the guess will be a little better.`;
+  }
+
+  document.getElementById('narr').innerHTML=`<span class="mb-tag ${tagCls}">${tagTxt}</span><h4>${title}</h4><div class="mb-desc">${desc}</div>${narr?`<div class="mb-highlight">${narr}</div>`:''}`;
+  mb.innerHTML=`<div class="mb-kicker ${tagCls}">${tagTxt}</div><div class="mb-formula" id="mbFormula"></div>`;
+  texRows(document.getElementById('mbFormula'),rows);
+  updateResults();drawNet();renderData();
+  if(st.kind==='update')flashUpdate();
+}
+
+function updateResults(){
+  const ex=PROBLEMS[prob].data[exampleIdx];
+  document.getElementById('rTarget').textContent=(C.y!==undefined)?C.y:ex.y;
+  if(C.yhat!==undefined&&stepIdx>=2){
+    document.getElementById('rPred').textContent=fp(C.yhat,3);
+    document.getElementById('rLoss').textContent=(stepIdx>=3)?fp(C.loss,4):'–';
+  }else{document.getElementById('rPred').textContent='–';document.getElementById('rLoss').textContent='–';}
+}
+
+/* ============================ FLOW ANIM ============================ */
+function flowForward(edges){flowDir='forward';flowEdges=edges;flowStart=performance.now();startFlow();}
+function flowBackward(edges){flowDir='backward';flowEdges=edges;flowStart=performance.now();startFlow();}
+function startFlow(){if(flowAnim)cancelAnimationFrame(flowAnim);const loop=()=>{const t=performance.now()-flowStart;drawNet();if(t<800)flowAnim=requestAnimationFrame(loop);else{flowAnim=null;drawNet();}};loop();}
+/* blink the weights when they update */
+function flashUpdate(){updateFlashStart=performance.now();if(updateFlash)cancelAnimationFrame(updateFlash);const loop=()=>{const t=performance.now()-updateFlashStart;drawNet();if(t<1200)updateFlash=requestAnimationFrame(loop);else{updateFlash=null;drawNet();}};loop();}
+
+/* ============================ CANVAS ============================ */
+function setupCv(){const cv=document.getElementById('cv'),p=cv.parentElement,dpr=devicePixelRatio||1,w=p.clientWidth,h=p.clientHeight;cv.width=w*dpr;cv.height=h*dpr;const ctx=cv.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);return{ctx,w,h};}
+function nodePositions(w,h){
+  const inX=w*0.13,hidX=w*0.5,outX=w*0.87;
+  const iy=[h*0.36,h*0.64],hy=[h*0.36,h*0.64],oy=[h*0.5];
+  return[[{x:inX,y:iy[0]},{x:inX,y:iy[1]}],[{x:hidX,y:hy[0]},{x:hidX,y:hy[1]}],[{x:outX,y:oy[0]}]];
+}
+function drawBackdrop(ctx,w,h){
+  const g=ctx.createRadialGradient(w*0.5,h*0.4,0,w*0.5,h*0.5,Math.max(w,h)*0.75);
+  g.addColorStop(0,'#0e1326');g.addColorStop(0.55,'#0a0d1a');g.addColorStop(1,'#05060d');
+  ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+  ctx.save();ctx.globalAlpha=0.4;ctx.fillStyle='rgba(122,162,255,0.05)';
+  for(let gx=14;gx<w;gx+=28)for(let gy=14;gy<h;gy+=28){ctx.beginPath();ctx.arc(gx,gy,1,0,Math.PI*2);ctx.fill();}
+  ctx.restore();
+}
+function edgeColorFor(li,i,j){
+  const st=stepIdx>=0?STEPS[Math.min(stepIdx,STEPS.length-1)]:null;
+  if(st&&st.kind==='update'&&C.old){
+    let oldV,newV;if(li===0){oldV=C.old.w1[j][i];newV=w1[j][i];}else{oldV=C.old.w2[i];newV=w2[i];}
+    if(newV>oldV)return{rgb:[51,209,122],a:0.9,glow:true};
+    if(newV<oldV)return{rgb:[239,91,107],a:0.9,glow:true};
+    return{rgb:[150,162,196],a:0.4};
+  }
+  return null;
+}
+function drawNet(){
+  const{ctx,w,h}=setupCv();drawBackdrop(ctx,w,h);
+  const P=nodePositions(w,h);
+  const s=Math.max(0.55,Math.min(1,w/560,h/260));const R=Math.max(15,28*s);
+  const t=flowAnim?Math.min(1,(performance.now()-flowStart)/800):-1;
+  const flowSet=new Set(flowEdges.map(e=>e.join('-')));
+  // flash pulse (0..1) while weights are updating
+  const uf=updateFlash?Math.max(0,1-(performance.now()-updateFlashStart)/1200):0;
+  const flashPulse=uf>0?Math.pow(Math.abs(Math.sin((performance.now()-updateFlashStart)/95)),0.7)*uf:0;
+  const drawEdge=(a,b,li,fromIdx,toIdx,wv)=>{
+    const key=[li===0?0:1,fromIdx,li===0?1:2,toIdx].join('-');
+    const isFlow=flowSet.has(key)&&t>=0;const uc=edgeColorFor(li,fromIdx,toIdx);
+    const changed=uc&&uc.glow;                          // this weight was just changed
+    const fp2=changed?flashPulse:0;                     // per-edge flash amount
+    const abs=Math.min(Math.abs(wv),2);let rgb,alpha,lw;
+    if(uc){rgb=uc.rgb;alpha=uc.a*(changed?(0.55+0.45*flashPulse):1);lw=(1.6+2.4*(abs/2))*s*(1+0.55*fp2);}
+    else if(isFlow){rgb=flowDir==='forward'?[122,162,255]:[255,159,69];alpha=0.9;lw=(1.6+2.4*(abs/2))*s+1;}
+    else{rgb=wv>=0?[122,162,255]:[239,91,107];alpha=0.28+0.42*(abs/2);lw=(1.2+2.2*(abs/2))*s;}
+    ctx.save();ctx.lineCap='round';
+    if(isFlow||(uc&&uc.glow)){ctx.shadowColor=`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${changed?(0.45+0.55*flashPulse):0.6})`;ctx.shadowBlur=10+18*fp2;}
+    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+    ctx.strokeStyle=`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${alpha})`;ctx.lineWidth=lw;ctx.stroke();ctx.restore();
+    const mx=a.x+(b.x-a.x)*0.42,my=a.y+(b.y-a.y)*0.42;
+    drawChip(ctx,mx,my,fp(wv,2),changed?rgb:(wv>=0?[122,162,255]:[239,91,107]),Math.max(8,Math.round(10*s)),fp2);
+    if(isFlow){const tt=flowDir==='forward'?t:1-t;const px=a.x+(b.x-a.x)*tt,py=a.y+(b.y-a.y)*tt;
+      ctx.save();ctx.shadowColor='#fff';ctx.shadowBlur=14;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(px,py,4*s,0,Math.PI*2);ctx.fill();ctx.restore();}
+  };
+  for(let j=0;j<2;j++)for(let i=0;i<2;i++)drawEdge(P[0][i],P[1][j],0,i,j,w1[j][i]);
+  for(let j=0;j<2;j++)drawEdge(P[1][j],P[2][0],1,j,0,w2[j]);
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  drawLayerChip(ctx,P[0][0].x,P[0][0].y-R-16*s,'INPUT',[122,162,255],s);
+  drawLayerChip(ctx,P[1][0].x,P[1][0].y-R-16*s,'HIDDEN LAYER',[150,162,196],s);
+  drawLayerChip(ctx,P[2][0].x,P[2][0].y-R-16*s,'OUTPUT',[255,206,84],s);
+  const st=stepIdx>=0?STEPS[Math.min(stepIdx,STEPS.length-1)]:null;
+  const backActive=st&&st.phase==='backward';
+  drawNodeLayer(ctx,P[0],0,R,s,backActive);drawNodeLayer(ctx,P[1],1,R,s,backActive);drawNodeLayer(ctx,P[2],2,R,s,backActive);
+}
+function drawNodeLayer(ctx,pts,layer,R,s,backActive){
+  const fontSize=Math.max(11,Math.round(14*s));
+  pts.forEach((pt,idx)=>{
+    const revealed=neuronRevealed(layer,idx);
+    let val=null,rimRgb=[150,162,196];
+    if(layer===0){val=C.x?C.x[idx]:PROBLEMS[prob].data[exampleIdx].x[idx];rimRgb=[122,162,255];}
+    else if(layer===1){if(C.ah&&revealed)val=C.ah[idx];}
+    else{if(C.yhat!==undefined&&revealed)val=C.yhat;rimRgb=[255,206,84];}
+    const computed=(layer===0)||revealed;
+    drawGlassNeuron(ctx,pt.x,pt.y,R,computed,rimRgb,val);
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    if(computed&&val!==null){ctx.font=`700 ${fontSize}px "JetBrains Mono"`;ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=4;ctx.fillStyle='rgba(226,234,255,0.95)';ctx.fillText(layer===0?String(val):fp(val,2),pt.x,pt.y);ctx.shadowBlur=0;}
+    else{ctx.font=`500 ${fontSize}px "DM Sans"`;ctx.fillStyle='rgba(255,255,255,0.3)';ctx.fillText('?',pt.x,pt.y);}
+    if(layer>0){const bv=layer===1?bh[idx]:bo;const bt=`b=${fp(bv,2)}`;ctx.font=`600 ${Math.max(8,Math.round(9*s))}px "JetBrains Mono"`;const bw=ctx.measureText(bt).width+10;const bOff=R+5*s;ctx.beginPath();ctx.roundRect(pt.x-bw/2,pt.y+bOff,bw,14,7);ctx.fillStyle='rgba(14,17,30,0.8)';ctx.fill();ctx.strokeStyle='rgba(255,255,255,0.08)';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle='rgba(255,255,255,0.6)';ctx.fillText(bt,pt.x,pt.y+bOff+7);}
+    if(layer===0){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(150,180,255,0.85)';ctx.fillText(idx===0?'x₁':'x₂',pt.x,pt.y+R+13*s);}
+    if(layer===2){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(255,214,130,0.9)';ctx.fillText('ŷ',pt.x,pt.y+R+15*s);}
+    let dv=null;
+    if(backActive){if(layer===2&&stepIdx>=4)dv=C.dOut;else if(layer===1&&C.dH){if(idx===0&&stepIdx>=6)dv=C.dH[0];if(idx===1&&stepIdx>=7)dv=C.dH[1];}}
+    if(dv!==null){const dt=`δ=${f(dv,3)}`;ctx.font=`700 ${Math.max(8,Math.round(9.5*s))}px "JetBrains Mono"`;const dw=ctx.measureText(dt).width+12;const dy=pt.y-R-5*s;ctx.save();ctx.shadowColor='rgba(255,159,69,0.5)';ctx.shadowBlur=8;ctx.beginPath();ctx.roundRect(pt.x-dw/2,dy-8,dw,17,8);ctx.fillStyle='rgba(40,26,14,0.95)';ctx.fill();ctx.strokeStyle='rgba(255,159,69,0.7)';ctx.lineWidth=1.2;ctx.stroke();ctx.restore();ctx.fillStyle='rgba(255,190,120,1)';ctx.fillText(dt,pt.x,dy+0.5);}
+  });
+}
+function drawGlassNeuron(ctx,x,y,R,computed,rimRgb,val){
+  let top,bot;
+  if(!computed){top=[110,120,150];bot=[28,33,54];}
+  else{const mag=val!==null?Math.min(1,Math.abs(val)):0.5;top=[Math.min(255,122+80*mag),Math.min(255,162+50*mag),255];bot=[36,52,120];}
+  ctx.beginPath();ctx.ellipse(x,y+R*0.78,R*0.9,R*0.28,0,0,Math.PI*2);
+  const sh=ctx.createRadialGradient(x,y+R*0.78,0,x,y+R*0.78,R*0.9);sh.addColorStop(0,'rgba(0,0,0,0.36)');sh.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=sh;ctx.fill();
+  const grad=ctx.createRadialGradient(x-R*0.36,y-R*0.42,R*0.1,x,y,R*1.08);
+  grad.addColorStop(0,`rgba(${top[0]|0},${top[1]|0},${top[2]|0},0.96)`);
+  grad.addColorStop(0.55,`rgba(${((top[0]+bot[0])/2)|0},${((top[1]+bot[1])/2)|0},${((top[2]+bot[2])/2)|0},0.92)`);
+  grad.addColorStop(1,`rgba(${bot[0]},${bot[1]},${bot[2]},0.95)`);
+  ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);ctx.fillStyle=grad;ctx.fill();
+  ctx.save();ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);ctx.clip();
+  const spec=ctx.createRadialGradient(x-R*0.4,y-R*0.45,0,x-R*0.4,y-R*0.45,R*0.65);spec.addColorStop(0,'rgba(255,255,255,0.5)');spec.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=spec;ctx.fillRect(x-R,y-R,R*2,R*2);ctx.restore();
+  ctx.beginPath();ctx.arc(x,y,R-0.75,0,Math.PI*2);ctx.strokeStyle=`rgba(${rimRgb[0]},${rimRgb[1]},${rimRgb[2]},${computed?0.6:0.3})`;ctx.lineWidth=1.5;ctx.stroke();
+}
+function drawChip(ctx,mx,my,text,rgb,fs,boost){
+  boost=boost||0;const efs=fs+2.4*boost;
+  ctx.save();ctx.font=`700 ${efs}px "JetBrains Mono"`;const tw=ctx.measureText(text).width,padX=6+2*boost,h=efs+7,wd=tw+padX*2;
+  if(boost>0.02){ctx.shadowColor=`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${0.75*boost})`;ctx.shadowBlur=12*boost;}
+  ctx.beginPath();ctx.roundRect(mx-wd/2,my-h/2,wd,h,h/2);ctx.fillStyle=`rgba(14,16,28,${0.92})`;ctx.fill();ctx.shadowBlur=0;
+  ctx.lineWidth=1+1.2*boost;ctx.strokeStyle=`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${0.5+0.5*boost})`;ctx.stroke();
+  ctx.fillStyle=`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${0.95})`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,mx,my+0.5);ctx.restore();
+}
+function drawLayerChip(ctx,cx,cy,text,rgb,s){
+  ctx.save();ctx.font=`700 ${Math.max(8,Math.round(10*s))}px "JetBrains Mono"`;const tw=ctx.measureText(text).width,h=19,wd=tw+20;
+  ctx.beginPath();ctx.roundRect(cx-wd/2,cy-h/2,wd,h,h/2);ctx.fillStyle=`rgba(${rgb[0]},${rgb[1]},${rgb[2]},0.12)`;ctx.fill();
+  ctx.lineWidth=1;ctx.strokeStyle=`rgba(${rgb[0]},${rgb[1]},${rgb[2]},0.4)`;ctx.stroke();
+  ctx.fillStyle=`rgba(${rgb[0]},${rgb[1]},${rgb[2]},0.95)`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,cx,cy+0.5);ctx.restore();
+}
+
+/* ============================ CLICK ON EDGE / NEURON ============================ */
+function canvasHit(mx,my,rect){
+  const w=rect.width,h=rect.height;const P=nodePositions(w,h);const s=Math.max(0.55,Math.min(1,w/560,h/260));const R=Math.max(15,28*s);
+  // neurons first
+  for(let l=0;l<P.length;l++)for(let i=0;i<P[l].length;i++){const dx=mx-P[l][i].x,dy=my-P[l][i].y;if(dx*dx+dy*dy<R*R)return{type:'neuron',l,i};}
+  // edges
+  let best=null,bestD=10;
+  const test=(a,b,li,fi,ti)=>{const dx=b.x-a.x,dy=b.y-a.y,len2=dx*dx+dy*dy;if(len2<1)return;let t=((mx-a.x)*dx+(my-a.y)*dy)/len2;t=Math.max(0,Math.min(1,t));const px=a.x+t*dx,py=a.y+t*dy;const d=Math.hypot(mx-px,my-py);if(d<bestD){bestD=d;best={type:'edge',li,fi,ti};}};
+  for(let j=0;j<2;j++)for(let i=0;i<2;i++)test(P[0][i],P[1][j],0,i,j);
+  for(let j=0;j<2;j++)test(P[1][j],P[2][0],1,j,0);
+  return best;
+}
+const cv=document.getElementById('cv');
+cv.addEventListener('mousemove',function(e){const r=this.getBoundingClientRect();const hit=canvasHit(e.clientX-r.left,e.clientY-r.top,r);this.style.cursor=hit?'pointer':'default';});
+cv.addEventListener('mouseleave',function(){this.style.cursor='default';});
+cv.addEventListener('click',function(e){const r=this.getBoundingClientRect();const hit=canvasHit(e.clientX-r.left,e.clientY-r.top,r);if(!hit)return;if(hit.type==='edge')openEdgeCalc(hit.li,hit.fi,hit.ti);else openNeuronCalc(hit.l,hit.i);});
+
+function openEdgeCalc(li,fi,ti){
+  const has=C.ah!==undefined;
+  let name,wv,srcName,srcVal,rows=[],def;
+  if(li===0){
+    wv=w1[ti][fi];
+    name=`Weight from x${fi+1===1?'₁':'₂'} to hidden neuron ${ti+1}`;
+    srcName=`x${fi+1===1?'₁':'₂'}`;srcVal=C.x?C.x[fi]:PROBLEMS[prob].data[exampleIdx].x[fi];
+    def=`This connection's weight decides how much <strong>${srcName}</strong> influences hidden neuron ${ti+1}. During the forward pass the input's value is multiplied by the weight.`;
+    rows.push({cls:'gen',tex:`w = ${col(wv>=0?CB:CR,fp(wv,3))}`,plain:`w = ${fp(wv,3)}`});
+    rows.push({cls:'num',tex:`\\text{contribution} = w\\cdot ${srcName.replace('₁','_1').replace('₂','_2')} = (${f(wv)})(${srcVal}) = ${f(wv*srcVal)}`,plain:`contribution = ${f(wv*srcVal)}`});
+    if(has&&C.gW1)rows.push({cls:'res amber',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{${ti+1}}\\cdot ${srcName.replace('₁','_1').replace('₂','_2')} = ${col(CA,f(C.gW1[ti][fi]))}`,plain:`∂L/∂w = ${f(C.gW1[ti][fi])}`});
+  }else{
+    wv=w2[fi];
+    name=`Weight from hidden neuron ${fi+1} to the output`;
+    srcName=`a${fi+1}`;srcVal=has?C.ah[fi]:null;
+    def=`This connection carries hidden neuron ${fi+1} forward to the output neuron. During backpropagation it is used to send the error signal backwards through the network.`;
+    rows.push({cls:'gen',tex:`w = ${col(wv>=0?CB:CR,fp(wv,3))}`,plain:`w = ${fp(wv,3)}`});
+    if(has)rows.push({cls:'num',tex:`\\text{contribution} = w\\cdot a_{${fi+1}} = (${f(wv)})(${fp(srcVal)}) = ${f(wv*srcVal)}`,plain:`contribution = ${f(wv*srcVal)}`});
+    if(has&&C.gW2)rows.push({cls:'res amber',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{ut}\\cdot a_{${fi+1}} = ${col(CA,f(C.gW2[fi]))}`,plain:`∂L/∂w = ${f(C.gW2[fi])}`});
+  }
+  if(!has)def+=`<br><br><em style="color:var(--dim2)">Start a forward pass to see values and gradient.</em>`;
+  showCalcCard(EDGE_ICON,name,def,rows);
+}
+function openNeuronCalc(l,i){
+  const has=C.ah!==undefined;let name,def,rows=[];
+  if(l===0){
+    const xv=C.x?C.x[i]:PROBLEMS[prob].data[exampleIdx].x[i];
+    name=`Input x${i+1===1?'₁':'₂'}`;
+    def=`An input neuron simply holds one of the example's values and passes it on. No calculation happens here.`;
+    rows.push({cls:'res',tex:`x_{${i+1}} = ${col(CB,String(xv))}`,plain:`x${i+1} = ${xv}`});
+  }else if(l===1){
+    name=`Hidden neuron ${i+1}`;
+    def=`The neuron weighs both inputs together, adds its bias and runs the sum through the <strong>sigmoid</strong> activation function.`;
+    rows.push({cls:'gen',tex:`a = \\sigma(w_1x_1 + w_2x_2 + b)`,plain:'a = σ(w1·x1 + w2·x2 + b)'});
+    rows.push({cls:'num',tex:`b = ${f(bh[i])}`,plain:`b = ${f(bh[i])}`});
+    if(has){rows.push({cls:'num',tex:`z = ${f(C.zh[i])}`,plain:`z = ${f(C.zh[i])}`});rows.push({cls:'res',tex:`a_{${i+1}} = ${col(CB,fp(C.ah[i]))}`,plain:`a${i+1} = ${fp(C.ah[i])}`});}
+  }else{
+    name='Output neuron (ŷ)';
+    def=`This is the network's answer. It weighs the hidden neurons together, adds its bias and runs the result through the sigmoid. The value <em>ŷ</em> can be read as a probability between 0 and 1.`;
+    rows.push({cls:'gen',tex:`\\hat{y} = \\sigma(w_1a_1 + w_2a_2 + b)`,plain:'ŷ = σ(w1·a1 + w2·a2 + b)'});
+    rows.push({cls:'num',tex:`b = ${f(bo)}`,plain:`b = ${f(bo)}`});
+    if(has)rows.push({cls:'res gold',tex:`\\hat{y} = ${col(CGO,fp(C.yhat))}`,plain:`ŷ = ${fp(C.yhat)}`});
+  }
+  if(!has&&l>0)def+=`<br><br><em style="color:var(--dim2)">Start a forward pass to see z and a.</em>`;
+  showCalcCard(NEURON_ICON,name,def,rows);
+}
+const EDGE_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="12" r="2.5"/><path d="M7.5 12h9" stroke-width="3"/></svg>';
+const NEURON_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>';
+function showCalcCard(icon,title,def,rows){
+  document.getElementById('conceptIcon').innerHTML=icon;
+  document.getElementById('conceptTitle').textContent=title;
+  document.getElementById('conceptDef').innerHTML=def;
+  const fEl=document.getElementById('conceptFormula');
+  if(rows&&rows.length)texRows(fEl,rows);else fEl.innerHTML='';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>document.getElementById('conceptCard').classList.add('show'));
+}
+
+/* ============================ LOSS CHART ============================ */
+function drawLossChart(){
+  const cv=document.getElementById('lossChart');const dpr=devicePixelRatio||1;const w=cv.clientWidth||280,h=cv.clientHeight||96;
+  cv.width=w*dpr;cv.height=h*dpr;const ctx=cv.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+  ctx.strokeStyle='rgba(180,195,220,0.12)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,h-0.5);ctx.lineTo(w,h-0.5);ctx.stroke();
+  if(lossHistory.length<1){ctx.fillStyle='rgba(140,150,180,0.5)';ctx.font='11px "DM Sans"';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('Run an epoch to draw the loss curve',w/2,h/2);return;}
+  const max=Math.max(...lossHistory,0.001),min=0;const range=Math.max(max-min,1e-9);const n=lossHistory.length;
+  const X=i=>n>1?(i/(n-1))*w:w/2,Y=v=>h-((v-min)/range)*(h-8)-4;
+  const grad=ctx.createLinearGradient(0,0,0,h);grad.addColorStop(0,'rgba(51,209,122,0.28)');grad.addColorStop(1,'rgba(51,209,122,0.02)');
+  ctx.beginPath();ctx.fillStyle=grad;ctx.moveTo(0,h);for(let i=0;i<n;i++)ctx.lineTo(X(i),Y(lossHistory[i]));ctx.lineTo(X(n-1),h);ctx.closePath();ctx.fill();
+  ctx.beginPath();ctx.strokeStyle='rgba(51,209,122,0.95)';ctx.lineWidth=1.8;ctx.lineJoin='round';for(let i=0;i<n;i++){const x=X(i),y=Y(lossHistory[i]);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();
+  const lx=X(n-1),ly=Y(lossHistory[n-1]);ctx.beginPath();ctx.fillStyle='#33d17a';ctx.arc(lx,ly,3,0,Math.PI*2);ctx.fill();
+}
+
+/* ============================ CONCEPTS ============================ */
+const CONCEPTS={
+  forward:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h6m4 0h6M8 8l-4 4 4 4m8-8 4 4-4 4"/></svg>',title:'Forward pass',
+    def:'Data flows into the network and moves forward, one layer at a time. Each neuron computes a weighted sum of its inputs and runs it through an activation function. What comes out of the last neuron, <em>ŷ</em>, is the network\'s guess. No learning happens here – it is pure calculation.',
+    tex:'\\hat{y} = \\sigma\\!\\left(\\textstyle\\sum_i w_i x_i + b\\right)',plain:'ŷ = σ(Σ wᵢxᵢ + b)'},
+  sigmoid:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19c3 0 4-14 9-14M12 5c5 0 6 14 9 14"/></svg>',title:'Sigmoid',
+    def:'The activation function that takes any number at all and squeezes it into a value between 0 and 1. Large positive numbers end up near 1, large negative ones near 0, and the number 0 lands halfway at 0.5. The smooth S-shaped curve lets the network learn gradually, and because it can be differentiated it works beautifully with backpropagation.',
+    tex:'\\sigma(z) = \\dfrac{1}{1 + e^{-z}}',plain:'σ(z) = 1 / (1 + e^−z)'},
+  aktivering:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="9" opacity=".4"/></svg>',title:'Activation (a)',
+    def:'The value a neuron passes on after computing its sum and running it through the activation function. A value near 1 means the neuron is strongly on, and near 0 that it is off. The output neuron\'s activation is the network\'s final answer, <em>ŷ</em>.',
+    tex:'a = \\sigma(z)',plain:'a = σ(z)'},
+  vikt:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="7" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8 8.5 16 15.5"/></svg>',title:'Weight (w)',
+    def:'A number that decides how strong a connection between two neurons is. A large positive weight lets the signal through amplified, a negative weight flips it, and a weight near zero lets almost nothing through at all. The weights are precisely what the network adjusts as it learns.',
+    tex:null},
+  bias:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h16"/><path d="M9 8v8M15 8v8" opacity=".5"/><circle cx="12" cy="12" r="2.5"/></svg>',title:'Bias (b)',
+    def:'An extra number added to every neuron\'s sum, independently of the inputs. The bias shifts the threshold at which the neuron fires, rather like a default setting. Just like the weights, the bias is adjusted during training.',
+    tex:null},
+  loss:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l6 6 4-4 8 8"/><path d="M15 15h6v-6"/></svg>',title:'Loss (L)',
+    def:'The loss, which we denote <em>L</em>, measures how wrong the network\'s guess was. It is large when the guess is far from the correct answer and zero when they are equal. We use the half squared error: the difference between guess and answer, squared and divided by two. Squaring makes large errors count for more, and the whole point of training is to make the loss as small as possible.',
+    tex:'L = \\tfrac{1}{2}(\\hat{y}-y)^2',plain:'L = ½(ŷ − y)²'},
+  backprop:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H4m6 6-6-6 6-6"/></svg>',title:'Backpropagation',
+    def:'The algorithm that sends the error <em>backwards</em> through the network. Using the chain rule it works out exactly how much every single weight contributed to the loss – the weight\'s <strong>gradient</strong>. Without backpropagation we would not know which way the weights need to change.',
+    tex:'\\delta_j = \\Big(\\textstyle\\sum_k \\delta_k w_{kj}\\Big)\\,\\sigma\'(z_j)',plain:'δj = (Σ δk·wkj)·σ\'(zj)'},
+  gradient:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>',title:'Gradient',
+    def:'The gradient tells us how much the loss changes if the weight changes slightly. The sign gives the <strong>direction</strong> and the size gives <strong>how steeply</strong> it slopes. We always move against the gradient – downhill, towards lower loss.',
+    tex:'\\frac{\\partial L}{\\partial w} = \\delta \\cdot a_{in}',plain:'∂L/∂w = δ · a_in'},
+  delta:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 3 20h18L12 3z"/></svg>',title:'Error signal, delta (δ)',
+    def:'A neuron\'s error signal <em>δ</em> tells us how sensitive the loss is to that neuron\'s sum <em>z</em>. It is computed once per neuron and then reused for every weight feeding into that neuron. That clever reuse is exactly what makes backpropagation fast.',
+    tex:'\\delta = \\frac{\\partial L}{\\partial z}',plain:'δ = ∂L/∂z'},
+  chain:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 17a3 3 0 0 1 0-6h1m4 0a3 3 0 0 1 0 6h-1"/><path d="M8 12h8"/></svg>',title:'The chain rule',
+    def:'The rule from calculus that lets us work out how a change far forward in the network affects a weight far back. You multiply together the local derivatives along the way – like the links in a chain. Backpropagation <em>is</em> the chain rule applied layer by layer.',
+    tex:'\\frac{\\partial L}{\\partial w} = \\frac{\\partial L}{\\partial a}\\cdot\\frac{\\partial a}{\\partial z}\\cdot\\frac{\\partial z}{\\partial w}',plain:'∂L/∂w = ∂L/∂a · ∂a/∂z · ∂z/∂w'},
+  lr:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/></svg>',title:'Learning rate (η)',
+    def:'The learning rate decides how big a step the weights take each time they are updated. If <em>η</em> is too small the network learns very slowly. If it is too large the weights can overshoot the target and training turns unstable. Finding a rate that is just right is an art.',
+    tex:'w \\leftarrow w - \\eta\\,\\frac{\\partial L}{\\partial w}',plain:'w ← w − η·∂L/∂w'},
+  gd:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M4 8c5 0 4 8 9 8s5-6 7-6"/></svg>',title:'Gradient descent',
+    def:'The optimisation method behind it all. Picture the loss as a hilly landscape in which you want to reach the lowest valley. The gradient points uphill, so you take a step the opposite way. Repeat that thousands of times and you eventually roll down to the bottom, where the loss is smallest.',
+    tex:null},
+  epoch:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 21v-5h5"/></svg>',title:'Epoch',
+    def:'One full pass through <em>all</em> the training data. After each epoch the weights have been adjusted using every example once. The loss curve shows one point per epoch – and when it flattens out near zero, the network has learned.',
+    tex:null}
+};
+function renderGlossary(){
+  const order=['forward','sigmoid','aktivering','vikt','bias','loss','backprop','gradient','delta','chain','lr','gd','epoch'];
+  document.getElementById('glossary').innerHTML=order.map(k=>{
+    const c=CONCEPTS[k];const ico=c.icon.replace('<svg','<svg class="g-ico"');
+    return `<span class="g-tag" onclick="openConcept('${k}')">${ico}${c.title}</span>`;
+  }).join('');
+}
+function openConcept(id){
+  const c=CONCEPTS[id];if(!c)return;
+  document.getElementById('conceptIcon').innerHTML=c.icon;
+  document.getElementById('conceptTitle').textContent=c.title;
+  document.getElementById('conceptDef').innerHTML=c.def;
+  const fEl=document.getElementById('conceptFormula');
+  if(c.tex)texRows(fEl,[{cls:'res',tex:c.tex,plain:c.plain}]);else fEl.innerHTML='';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>document.getElementById('conceptCard').classList.add('show'));
+}
+function closeConcept(){document.getElementById('conceptCard').classList.remove('show');document.getElementById('conceptBackdrop').classList.remove('show');}
+
+/* ============================ ADVANCED: derivative visual ============================ */
+let advW=-2;
+function setupAdvCv(){
+  const cv=document.getElementById('advCanvas'),p=cv.parentElement,dpr=devicePixelRatio||1,w=p.clientWidth,h=p.clientHeight;
+  cv.width=w*dpr;cv.height=h*dpr;const ctx=cv.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);return{ctx,w,h};
+}
+function advF(x){return 0.28*x*x;}
+function advFp(x){return 0.56*x;}
+function drawAdvChart(){
+  if(!document.getElementById('advCanvas'))return;
+  const{ctx,w:W,h:H}=setupAdvCv();
+  ctx.clearRect(0,0,W,H);
+  const pad=24,xMin=-3,xMax=3,yMin=0,yMax=2.7;
+  const toX=x=>pad+(x-xMin)/(xMax-xMin)*(W-2*pad);
+  const toY=y=>H-pad-(y-yMin)/(yMax-yMin)*(H-2*pad);
+
+  ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(pad,H-pad);ctx.lineTo(W-pad,H-pad);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(toX(0),pad);ctx.lineTo(toX(0),H-pad);ctx.stroke();
+
+  ctx.beginPath();
+  for(let i=0;i<=100;i++){const x=xMin+(xMax-xMin)*i/100,y=advF(x),px=toX(x),py=toY(y);if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);}
+  ctx.save();ctx.strokeStyle='#7aa2ff';ctx.lineWidth=2.4;ctx.shadowColor='rgba(122,162,255,.5)';ctx.shadowBlur=8;ctx.stroke();ctx.restore();
+
+  const w0=advW,L0=advF(w0),slope=advFp(w0),px0=toX(w0),py0=toY(L0);
+
+  ctx.save();ctx.setLineDash([3,4]);ctx.strokeStyle='rgba(255,255,255,.18)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(px0,py0);ctx.lineTo(px0,H-pad);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(pad,py0);ctx.lineTo(px0,py0);ctx.stroke();
+  ctx.restore();
+
+  const dx=1.1,x1=w0-dx,x2=w0+dx,y1=L0-slope*dx,y2=L0+slope*dx;
+  ctx.save();ctx.strokeStyle='#ffce54';ctx.lineWidth=2.6;ctx.shadowColor='rgba(255,206,84,.55)';ctx.shadowBlur=9;
+  ctx.beginPath();ctx.moveTo(toX(x1),toY(y1));ctx.lineTo(toX(x2),toY(y2));ctx.stroke();ctx.restore();
+
+  const dir=slope>0.015?-1:(slope<-0.015?1:0);
+  if(dir!==0){
+    const aY=H-12,startX=toX(w0),endX=toX(w0+dir*0.8),ah=6;
+    ctx.strokeStyle='#33d17a';ctx.lineWidth=2.4;ctx.lineCap='round';
+    ctx.beginPath();ctx.moveTo(startX,aY);ctx.lineTo(endX,aY);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(endX,aY);ctx.lineTo(endX-dir*ah,aY-ah*0.65);ctx.lineTo(endX-dir*ah,aY+ah*0.65);ctx.closePath();
+    ctx.fillStyle='#33d17a';ctx.fill();
+  }
+
+  ctx.save();ctx.shadowColor='rgba(255,206,84,.7)';ctx.shadowBlur=12;
+  ctx.beginPath();ctx.arc(px0,py0,6.5,0,Math.PI*2);ctx.fillStyle='#ffce54';ctx.fill();ctx.restore();
+  ctx.beginPath();ctx.arc(px0,py0,6.5,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,.5)';ctx.lineWidth=1.4;ctx.stroke();
+
+  ctx.font='600 11px "JetBrains Mono", monospace';ctx.fillStyle='rgba(200,210,240,.55)';
+  ctx.textAlign='right';ctx.fillText('w',W-pad+16,H-pad+4);
+  ctx.textAlign='left';ctx.fillText('L(w)',pad-2,pad-9);
+
+  document.getElementById('advW').textContent=f(w0,2);
+  document.getElementById('advL').textContent=fp(L0,3);
+  document.getElementById('advSlope').textContent=(slope>=0?'+':'')+f(slope,3);
+}
+function onAdvSlider(v){advW=parseFloat(v);drawAdvChart();}
+function openAdvanced(){
+  document.getElementById('advBackdrop').classList.add('show');
+  document.getElementById('advModal').classList.add('show');
+  drawAdvChart();
+}
+function closeAdvanced(){
+  document.getElementById('advBackdrop').classList.remove('show');
+  document.getElementById('advModal').classList.remove('show');
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
+
+/* ============================ INIT ============================ */
+let rT;window.addEventListener('resize',()=>{clearTimeout(rT);rT=setTimeout(()=>{
+  if(document.getElementById('app').style.display!=='none'){drawNet();drawLossChart();}
+  if(document.getElementById('advModal').classList.contains('show'))drawAdvChart();
+},80);});
+function boot(){
+  initParams();renderGlossary();onLr();renderSetupCards();renderSetupPreview();
+}
+boot();
+// re-typeset if KaTeX finishes loading after first render
+window.addEventListener('load',()=>{setTimeout(()=>{if(stepIdx>=0)renderStep();},100);});
+</script>
+</body>
+</html>
