@@ -438,7 +438,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
     <h1><span>Train a neural network</span></h1>
   </div>
   <p>Watch the network learn, step by step – from a random guess to a fully trained model.</p>
-  <a class="lang-link" href="https://www.ai-aktiviteter.se/neuralt-natverk-training"><span class="flag">🇸🇪</span> Svenska</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/trana-neuralt-natverk"><span class="flag">🇸🇪</span> Svenska</a>
 </div>
 
 <div class="app" id="app" style="display:none">
@@ -481,7 +481,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
       <div class="loss-axis"><span>Epoch 1</span><span id="epochLabel">–</span></div>
     </div>
     <div class="info">
-      <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15Z"/></svg> Concepts – click for an explanation</h3>
+      <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15Z"/></svg> Concepts</h3>
       <div class="glossary" id="glossary"></div>
     </div>
   </div>
@@ -1234,7 +1234,7 @@ const CONCEPTS={
   forward:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h6m4 0h6M8 8l-4 4 4 4m8-8 4 4-4 4"/></svg>',title:'Forward pass',
     def:'Data flows into the network and moves forward, one layer at a time. Each neuron computes a weighted sum of its inputs and runs it through an activation function. What comes out of the last neuron, <em>ŷ</em>, is the network\'s guess. No learning happens here – it is pure calculation.',
     tex:'\\hat{y} = \\sigma\\!\\left(\\textstyle\\sum_i w_i x_i + b\\right)',plain:'ŷ = σ(Σ wᵢxᵢ + b)'},
-  sigmoid:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19c3 0 4-14 9-14M12 5c5 0 6 14 9 14"/></svg>',title:'Sigmoid',
+  sigmoid:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17Q9 17 12 12T21 7"/></svg>',title:'Sigmoid',
     def:'The activation function that takes any number at all and squeezes it into a value between 0 and 1. Large positive numbers end up near 1, large negative ones near 0, and the number 0 lands halfway at 0.5. The smooth S-shaped curve lets the network learn gradually, and because it can be differentiated it works beautifully with backpropagation.',
     tex:'\\sigma(z) = \\dfrac{1}{1 + e^{-z}}',plain:'σ(z) = 1 / (1 + e^−z)'},
   aktivering:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="9" opacity=".4"/></svg>',title:'Activation (a)',
@@ -1278,13 +1278,28 @@ function renderGlossary(){
     return `<span class="g-tag" onclick="openConcept('${k}')">${ico}${c.title}</span>`;
   }).join('');
 }
+function conceptLiveRows(id){
+  if(id!=='delta')return null;
+  if(!C||C.dOut===undefined||stepIdx<4)return null;
+  const rows=[{cls:'num',tex:`\\delta_{ut} = (${fp(C.yhat)}-${C.y})(${fp(C.yhat)})(1-${fp(C.yhat)}) = ${col(CA,f(C.dOut))}`,plain:`δut = ${f(C.dOut)}`}];
+  if(C.dH&&stepIdx>=6)rows.push({cls:'num',tex:`\\delta_{1} = (${f(C.dOut)})(${f(w2[0])})(${fp(C.ah[0])})(1-${fp(C.ah[0])}) = ${col(CA,f(C.dH[0]))}`,plain:`δ1 = ${f(C.dH[0])}`});
+  if(C.dH&&stepIdx>=7)rows.push({cls:'num',tex:`\\delta_{2} = (${f(C.dOut)})(${f(w2[1])})(${fp(C.ah[1])})(1-${fp(C.ah[1])}) = ${col(CA,f(C.dH[1]))}`,plain:`δ2 = ${f(C.dH[1])}`});
+  return rows;
+}
 function openConcept(id){
   const c=CONCEPTS[id];if(!c)return;
   document.getElementById('conceptIcon').innerHTML=c.icon;
   document.getElementById('conceptTitle').textContent=c.title;
-  document.getElementById('conceptDef').innerHTML=c.def;
+  let def=c.def;
   const fEl=document.getElementById('conceptFormula');
-  if(c.tex)texRows(fEl,[{cls:'res',tex:c.tex,plain:c.plain}]);else fEl.innerHTML='';
+  const live=conceptLiveRows(id);
+  if(live){
+    texRows(fEl,[{cls:'gen',tex:c.tex,plain:c.plain},...live]);
+  }else{
+    if(id==='delta')def+=`<br><br><em style="color:var(--dim2)">Run through to the backpropagation phase of a training loop to see the calculation here with the current numbers.</em>`;
+    if(c.tex)texRows(fEl,[{cls:'res',tex:c.tex,plain:c.plain}]);else fEl.innerHTML='';
+  }
+  document.getElementById('conceptDef').innerHTML=def;
   document.getElementById('conceptBackdrop').classList.add('show');
   requestAnimationFrame(()=>document.getElementById('conceptCard').classList.add('show'));
 }
