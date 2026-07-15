@@ -167,6 +167,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .canvas-btn.grn{background:rgba(51,209,122,.16);border-color:rgba(51,209,122,.38);color:var(--green);}
 .canvas-btn.grn:hover{background:rgba(51,209,122,.26);}
 .canvas-btn.pau{background:rgba(77,128,255,.16);border-color:rgba(77,128,255,.38);color:var(--accent2);}
+.canvas-btn.sm{font-size:.62em;padding:4px 9px;}
 .canvas-btn:disabled{opacity:.4;cursor:default;pointer-events:none;}
 
 /* narration -> center phase-explanation card */
@@ -865,8 +866,8 @@ function renderCanvasControls(){
   const stepLabel=stepIdx<0?'▶ Starta framåtpasset':atEnd?'✓ Slutför och gå vidare':'▶ Nästa beräkning';
   const autoLabel=running?'⏸ Pausa träningen':'⏩ Träna färdigt automatiskt';
   el.innerHTML=`
-    <button class="canvas-btn ${running?'pau':'grn'}" onclick="toggleAuto()">${autoLabel}</button>
-    <button class="canvas-btn pri" onclick="nextStep()" ${running?'disabled':''}>${stepLabel}</button>`;
+    <button class="canvas-btn pri" onclick="nextStep()" ${running?'disabled':''}>${stepLabel}</button>
+    <button class="canvas-btn sm ${running?'pau':'grn'}" onclick="toggleAuto()">${autoLabel}</button>`;
 }
 function renderControls(){
   const el=document.getElementById('controlPanel');
