@@ -66,9 +66,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .app{display:grid;grid-template-columns:clamp(240px,19vw,280px) 1fr clamp(296px,25vw,340px);height:calc(100vh - 54px);position:relative;z-index:1;gap:12px;padding:12px;}
 .lp,.rp{background:var(--surface);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px;overflow-y:auto;min-height:0;display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 50px rgba(0,0,0,.25);}
 .lp::-webkit-scrollbar,.rp::-webkit-scrollbar{width:5px;}.lp::-webkit-scrollbar-thumb,.rp::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
-/* side columns recede so the canvas holds focus; they read as calm reference */
-.lp,.rp{background:rgba(20,24,42,.4);border-color:var(--border-soft);box-shadow:0 10px 30px rgba(0,0,0,.16);}
-.lp .sec-t,.rp .sec-t{opacity:.85;}
 .sec-t{font-size:.65em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim2);margin-bottom:6px;}
 
 /* mini truth table (setup preview + gate popup) */
@@ -86,9 +83,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .dtable th{background:var(--surface2);padding:6px 4px;color:var(--dim);font-weight:600;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;}
 .dtable td{padding:5px 4px;text-align:center;border-bottom:1px solid rgba(255,255,255,.03);font-family:'JetBrains Mono',monospace;color:var(--text);}
 .dtable tr:last-child td{border-bottom:none;}
-.dtable tbody tr{transition:opacity .25s var(--ease-out);}
-.dtable tbody:has(tr.cur) tr:not(.cur){opacity:.4;}
-.dtable tr.cur td{background:rgba(77,128,255,.16);}
+.dtable tr.cur td{background:rgba(77,128,255,.14);}
 .dtable tr.cur td:first-child{box-shadow:inset 3px 0 0 var(--accent);}
 .dtable .ty{color:var(--gold);font-weight:700;}
 .dtable .yja{color:var(--green);}.dtable .ynej{color:var(--dim2);}
@@ -128,8 +123,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .predict-btn .pb-in{font-family:'JetBrains Mono',monospace;font-size:.82em;font-weight:700;color:var(--text);}
 .predict-btn .pb-exp{font-size:.62em;color:var(--dim2);}
 .predict-btn.active .pb-exp{color:var(--green);}
-.verdict-ok{color:var(--green);}
-.verdict-bad{color:var(--red);}
+.rbox .rv .verdict-ok{color:var(--green);}
+.rbox .rv .verdict-bad{color:var(--red);}
 
 /* center */
 .center{display:flex;flex-direction:column;gap:10px;min-height:0;overflow-y:auto;}
@@ -156,25 +151,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .flow-badge.forward{background:rgba(77,128,255,.16);border:1px solid rgba(122,162,255,.4);color:var(--accent2);}
 .flow-badge.backward{background:rgba(255,159,69,.14);border:1px solid rgba(255,159,69,.4);color:var(--amber);}
 .flow-badge.done{background:rgba(51,209,122,.14);border:1px solid rgba(51,209,122,.45);color:var(--green);}
-.canvas-hint{position:absolute;bottom:10px;left:12px;font-size:.66em;color:var(--dim2);background:rgba(6,7,14,.6);padding:4px 11px;border-radius:999px;border:1px solid var(--border-soft);backdrop-filter:blur(6px);white-space:nowrap;max-width:calc(100% - 220px);overflow:hidden;text-overflow:ellipsis;transition:opacity .25s var(--ease-out);}
-
-/* in-canvas primary "next" button — glass pill, phase-coloured, bottom-right */
-.canvas-next{position:absolute;bottom:12px;right:12px;display:none;align-items:center;gap:9px;
-  font-family:'DM Sans',sans-serif;font-weight:700;font-size:.82em;letter-spacing:-.005em;
-  padding:11px 15px;border-radius:999px;cursor:pointer;color:#fff;border:1px solid transparent;
-  background:rgba(77,128,255,.92);box-shadow:0 8px 26px rgba(77,128,255,.4),0 0 0 1px rgba(255,255,255,.08) inset;
-  backdrop-filter:blur(10px) saturate(140%);transition:transform .2s var(--ease-spring),box-shadow .2s var(--ease-out),background .2s var(--ease-out);}
-.canvas-next.show{display:inline-flex;}
-.canvas-next:hover{transform:translateY(-2px) scale(1.02);}
-.canvas-next .cn-count{font-family:'JetBrains Mono',monospace;font-size:.82em;font-weight:600;
-  padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.16);color:rgba(255,255,255,.92);}
-.canvas-next .cn-arrow{font-size:1.05em;line-height:1;margin-left:-2px;}
-.canvas-next.p-forward{background:rgba(77,128,255,.92);box-shadow:0 8px 26px rgba(77,128,255,.42),0 0 0 1px rgba(255,255,255,.08) inset;}
-.canvas-next.p-loss{background:rgba(224,168,44,.94);box-shadow:0 8px 26px rgba(255,206,84,.4),0 0 0 1px rgba(255,255,255,.1) inset;}
-.canvas-next.p-backward{background:rgba(230,132,44,.94);box-shadow:0 8px 26px rgba(255,159,69,.42),0 0 0 1px rgba(255,255,255,.1) inset;}
-.canvas-next.p-update{background:rgba(38,180,104,.94);box-shadow:0 8px 26px rgba(51,209,122,.42),0 0 0 1px rgba(255,255,255,.1) inset;}
-.canvas-next.p-idle{background:rgba(77,128,255,.92);}
-@media (prefers-reduced-motion:reduce){.canvas-next{transition:none;}.canvas-next:hover{transform:none;}}
+.canvas-hint{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:.66em;color:var(--dim2);background:rgba(6,7,14,.6);padding:4px 11px;border-radius:999px;border:1px solid var(--border-soft);backdrop-filter:blur(6px);white-space:nowrap;}
 
 /* narration -> center phase-explanation card */
 .narr{flex-shrink:0;background:linear-gradient(160deg,var(--surface2),rgba(77,128,255,.04));border:1px solid var(--border);border-radius:var(--r-md);padding:14px;min-height:64px;}
@@ -219,6 +196,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .tex-fallback{font-family:'JetBrains Mono',monospace;font-size:.82em;white-space:pre-wrap;}
 .mrow-text{font-family:'DM Sans',sans-serif;font-size:.86em;line-height:1.5;padding:5px 0;font-weight:600;}
 
+/* result boxes */
+.result-boxes{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.rbox{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:11px;}
+.rbox .rl{font-size:.6em;color:var(--dim2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;font-weight:600;}
+.rbox .rv{font-family:'JetBrains Mono',monospace;font-size:1.25em;font-weight:700;font-variant-numeric:tabular-nums;}
+.rbox.wide{grid-column:span 2;}
+
 .loss-panel{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:12px;}
 .loss-panel .lp-hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
 .loss-panel .lp-hd .t{font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--dim2);}
@@ -255,6 +239,43 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .concept-formula:empty{display:none;}
 .concept-formula .mrow{color:var(--text);}
 
+/* advanced explainer: trigger + modal */
+.adv-link{display:inline-flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:.66em;font-weight:700;letter-spacing:.02em;text-transform:none;
+  color:var(--accent2);background:var(--accent-dim);border:1px solid rgba(122,162,255,.28);border-radius:999px;padding:5px 10px;cursor:pointer;transition:.2s var(--ease-out);white-space:nowrap;}
+.adv-link:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:translateY(-1px);}
+.adv-link svg{width:11px;height:11px;flex-shrink:0;}
+
+.adv-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.75);backdrop-filter:blur(8px);z-index:320;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
+.adv-backdrop.show{opacity:1;pointer-events:auto;}
+.adv-modal{position:fixed;top:50%;left:50%;z-index:321;width:640px;max-width:92vw;
+  transform:translate(-50%,-50%) scale(.94);opacity:0;pointer-events:none;
+  transition:transform .38s var(--ease-spring),opacity .26s var(--ease-out);}
+.adv-modal.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
+.adv-inner{position:relative;background:linear-gradient(165deg,rgba(26,31,52,.98),rgba(14,17,30,.99));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
+  box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 28px 24px;max-height:88vh;overflow-y:auto;}
+.adv-close{position:absolute;top:14px;right:14px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);}
+.adv-close:hover{border-color:var(--red);color:var(--red);transform:rotate(90deg);}
+.adv-tag{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:.64em;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);
+  background:var(--accent-dim);border:1px solid rgba(122,162,255,.28);border-radius:999px;padding:4px 11px;margin-bottom:12px;}
+.adv-inner h3{font-family:'Syne',sans-serif;font-size:1.28em;font-weight:800;letter-spacing:-.01em;margin-bottom:12px;color:var(--text);}
+.adv-text{font-size:.85em;line-height:1.7;color:var(--dim);}
+.adv-text p{margin-bottom:10px;}
+.adv-text strong{color:var(--text);}
+.adv-text em{color:var(--gold);font-style:normal;}
+.adv-text .chain{margin:12px 0;padding:11px 13px;background:rgba(0,0,0,.28);border:1px solid var(--border-soft);border-radius:var(--r-sm);font-family:'JetBrains Mono',monospace;font-size:.86em;color:var(--dim);line-height:1.9;}
+.adv-text .chain b{color:var(--accent2);font-weight:600;}
+.adv-visual{margin-top:18px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:16px;}
+.adv-visual-hd{font-size:.68em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim2);margin-bottom:10px;}
+.adv-canvas-wrap{position:relative;width:100%;height:220px;border-radius:var(--r-sm);overflow:hidden;background:#05060d;border:1px solid var(--border-soft);}
+.adv-canvas-wrap canvas{width:100%;height:100%;display:block;cursor:ew-resize;}
+.adv-controls{display:flex;align-items:center;gap:11px;margin-top:12px;}
+.adv-controls .slider{flex:1;}
+.adv-readout{display:flex;gap:8px;margin-top:10px;}
+.adv-readout .arv{flex:1;background:rgba(0,0,0,.24);border:1px solid var(--border-soft);border-radius:var(--r-sm);padding:8px 10px;text-align:center;}
+.adv-readout .arv .al{font-size:.6em;color:var(--dim2);text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:2px;}
+.adv-readout .arv .av{font-family:'JetBrains Mono',monospace;font-size:1.02em;font-weight:700;font-variant-numeric:tabular-nums;}
+.adv-caption{font-size:.72em;color:var(--dim2);line-height:1.55;margin-top:11px;text-align:center;}
+
 /* animated mini-network (intro) */
 .intro-net{width:158px;margin:2px auto 18px;}
 .intro-net svg{width:100%;height:auto;overflow:visible;display:block;}
@@ -270,12 +291,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 @media (prefers-reduced-motion:reduce){.nn-node,.nn-ring{animation:none;}.nn-dot{display:none;}}
 
 /* setup screen (choose what to learn) */
-.setup{position:fixed;inset:0;z-index:150;display:flex;align-items:flex-start;justify-content:center;padding:clamp(20px,6vh,64px) 24px;overflow-y:auto;
+.setup{position:fixed;inset:0;z-index:150;display:flex;align-items:center;justify-content:center;padding:24px;
   background:radial-gradient(ellipse 60% 50% at 50% 30%,rgba(77,128,255,.08),transparent 70%),var(--bg);
   opacity:0;pointer-events:none;transition:opacity .4s var(--ease-out);}
 .setup.show{opacity:1;pointer-events:auto;}
 .setup.leaving{opacity:0;pointer-events:none;}
-.setup-inner{width:100%;max-width:760px;margin:auto 0;text-align:center;animation:setupIn .5s var(--ease-spring);}
+.setup-inner{width:100%;max-width:760px;max-height:92vh;overflow-y:auto;text-align:center;animation:setupIn .5s var(--ease-spring);}
 @keyframes setupIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
 .setup-step{font-family:'JetBrains Mono',monospace;font-size:.68em;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);
   display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border:1px solid rgba(122,162,255,.28);border-radius:999px;background:var(--accent-dim);margin-bottom:16px;}
@@ -315,15 +336,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .setup-go:hover{background:#3d6de6;transform:translateY(-2px);box-shadow:0 14px 36px rgba(77,128,255,.44);}
 
 /* lab: compact current-task summary (left panel) */
-.task-summary{display:flex;align-items:center;gap:11px;padding:10px 12px;border:1px solid var(--border-soft);border-radius:var(--r-md);
-  background:var(--surface2);}
-.task-summary .ts-icon{width:32px;height:32px;flex-shrink:0;border-radius:10px;background:rgba(255,255,255,.05);color:var(--dim);
-  display:flex;align-items:center;justify-content:center;font-size:1.15em;font-weight:800;}
+.task-summary{display:flex;align-items:center;gap:11px;padding:11px 12px;border:1px solid rgba(77,128,255,.28);border-radius:var(--r-md);
+  background:linear-gradient(160deg,var(--accent-dim),var(--surface2));}
+.task-summary .ts-icon{width:36px;height:36px;flex-shrink:0;border-radius:11px;background:rgba(77,128,255,.16);color:var(--accent2);
+  display:flex;align-items:center;justify-content:center;font-size:1.25em;font-weight:800;}
 .task-summary .ts-body{min-width:0;flex:1;}
 .task-summary .ts-eyebrow{font-size:.58em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim2);}
 .task-summary .ts-title{font-size:.92em;font-weight:700;color:var(--text);margin-top:1px;}
-.task-summary .ts-change{flex-shrink:0;display:inline-flex;align-items:center;gap:4px;font-size:.7em;font-weight:600;color:var(--dim2);
-  background:transparent;border:1px solid var(--border);border-radius:999px;padding:6px 10px;cursor:pointer;transition:.2s var(--ease-out);font-family:'DM Sans',sans-serif;}
+.task-summary .ts-change{flex-shrink:0;display:inline-flex;align-items:center;gap:4px;font-size:.7em;font-weight:600;color:var(--accent2);
+  background:rgba(77,128,255,.1);border:1px solid rgba(122,162,255,.28);border-radius:999px;padding:6px 10px;cursor:pointer;transition:.2s var(--ease-out);font-family:'DM Sans',sans-serif;}
 .task-summary .ts-change:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
 
 @media(max-width:1060px){
@@ -419,11 +440,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
   <!-- LEFT -->
   <div class="lp">
     <div><div class="sec-t">Uppgift</div><div class="task-summary" id="taskSummary"></div></div>
-    <div><div class="sec-t">Träningsdata</div><table class="dtable" id="dataTable"></table><div class="hint" id="dataHint"></div></div>
+    <div><table class="dtable" id="dataTable"></table><div class="hint" id="dataHint"></div></div>
     <div>
       <div class="sec-t">Inlärningstakt (η)</div>
       <div class="slider-row"><span class="slider-lbl">η</span><input type="range" class="slider" id="lrSlider" min="5" max="150" step="5" value="60" oninput="onLr()"><span class="slider-val" id="lrVal">0.60</span></div>
-      <div class="hint">Hur stort steg vikterna tar vid varje uppdatering.</div>
+      <div class="hint">Inlärningstakten bestämmer hur stort steg vikterna tar varje gång de justeras. En liten takt ger långsam men stabil inlärning, medan en stor takt går fortare men kan bli hoppig.</div>
     </div>
   </div>
 
@@ -433,8 +454,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
     <div class="canvas-wrap">
       <canvas id="cv"></canvas>
       <div class="flow-badge" id="flowBadge"></div>
-      <div class="canvas-hint" id="canvasHint">Klicka på en koppling eller en neuron för att se dess beräkning</div>
-      <button class="canvas-next" id="canvasNext" onclick="nextStep()"></button>
+      <div class="canvas-hint">Klicka på en koppling eller en neuron för att se dess beräkning</div>
     </div>
     <div class="narr" id="narr"></div>
     <div class="ctrl-block" id="controlPanel"></div>
@@ -442,13 +462,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 
   <!-- RIGHT -->
   <div class="rp">
+    <div><div class="sec-t" style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">Beräkning
+      <span class="adv-link" onclick="openAdvanced()">Avancerat ↗</span>
+    </div><div class="mathbox" id="mathbox"></div></div>
+    <div><div class="sec-t">Resultat</div><div class="result-boxes" id="resultBoxes">
+      <div class="rbox"><div class="rl">Nätverkets gissning (ŷ)</div><div class="rv" id="rPred" style="color:var(--accent2)">–</div></div>
+      <div class="rbox"><div class="rl">Rätt svar (y)</div><div class="rv" id="rTarget" style="color:var(--gold)">–</div></div>
+      <div class="rbox wide"><div class="rl" id="rLossLabel">Förlust för detta exempel</div><div class="rv" id="rLoss" style="color:var(--amber);font-size:1.05em">–</div></div>
+    </div></div>
     <div class="loss-panel">
       <div class="lp-hd"><span class="t">Förlust över epoker</span><span class="v" id="epochLoss">–</span></div>
       <canvas id="lossChart"></canvas>
       <div class="loss-axis"><span>Epok 1</span><span id="epochLabel">–</span></div>
     </div>
     <div class="info">
-      <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15Z"/></svg> Begrepp</h3>
+      <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15Z"/></svg> Begrepp – klicka för förklaring</h3>
       <div class="glossary" id="glossary"></div>
     </div>
   </div>
@@ -462,6 +490,38 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
     <div class="concept-title" id="conceptTitle"></div>
     <div class="concept-def" id="conceptDef"></div>
     <div class="concept-formula" id="conceptFormula"></div>
+  </div>
+</div>
+
+<!-- ADVANCED: what does "deriving" actually mean here -->
+<div class="adv-backdrop" id="advBackdrop" onclick="closeAdvanced()"></div>
+<div class="adv-modal" id="advModal">
+  <div class="adv-inner">
+    <button class="adv-close" onclick="closeAdvanced()">✕</button>
+    <div class="adv-tag">Avancerat</div>
+    <h3>Vad är det egentligen vi deriverar?</h3>
+    <div class="adv-text">
+      <p>I varje beräkningssteg är <strong>z</strong>, <strong>a</strong>, <strong>ŷ</strong> och <strong>L</strong> konkreta tal – uträknade resultat för en given ingång och givna vikter. Det som deriveras är däremot inte dessa enskilda tal, utan <strong>sambandet</strong> mellan dem: formeln som beskriver hur förlusten L skulle förändras om en vikt w ändrades något.</p>
+      <p>Håller man alla andra värden fasta och låter w variera framträder en kurva. Derivatan är <em>lutningen</em> på den kurvan i just den punkt där vikten befinner sig just nu – inte höjden, utan hur brant det är där.</p>
+      <p>Nätverket känner till kurvans ekvation, eftersom den bara byggs av kända, deriverbara steg (viktade summor och sigmoid). Därför går det att räkna ut lutningen exakt, genom att sätta in dagens siffror i den färdiga formeln – i stället för att gissa.</p>
+      <div class="chain">L → ŷ&nbsp; &nbsp;<b>dL/dŷ&nbsp;=&nbsp;(ŷ − y)</b><br>a → z&nbsp; &nbsp;<b>da/dz&nbsp;=&nbsp;a(1−a)</b><br>z → w&nbsp; &nbsp;<b>dz/dw&nbsp;=&nbsp;a_in</b></div>
+      <p>Kedjeregeln multiplicerar ihop de här lutningarna, steg för steg bakåt genom nätverket – det är precis det <strong>Fas 3 · Backprop</strong> gör.</p>
+      <p>Ju brantare kurvan är, desto känsligare är förlusten för ändringar i vikten. Längst ner i dalen är lutningen <strong>noll</strong> – där går det inte att minska förlusten mer genom att flytta vikten åt något håll. Det är alltså i botten av kurvan, där derivatan är noll, som förlusten är som <strong style="color:var(--green)">minst</strong> – och dit gradientnedstigning steg för steg försöker ta nätverket.</p>
+    </div>
+    <div class="adv-visual">
+      <div class="adv-visual-hd">Testa själv: lutningen vid en punkt</div>
+      <div class="adv-canvas-wrap"><canvas id="advCanvas"></canvas></div>
+      <div class="adv-controls">
+        <span class="slider-lbl">w</span>
+        <input type="range" class="slider" id="advSlider" min="-3" max="3" step="0.05" value="-2" oninput="onAdvSlider(this.value)">
+      </div>
+      <div class="adv-readout">
+        <div class="arv"><div class="al">w</div><div class="av" id="advW" style="color:var(--gold)">–</div></div>
+        <div class="arv"><div class="al">L(w)</div><div class="av" id="advL" style="color:var(--accent2)">–</div></div>
+        <div class="arv"><div class="al">Lutning dL/dw</div><div class="av" id="advSlope" style="color:var(--amber)">–</div></div>
+      </div>
+      <div class="adv-caption">Den gula linjen är <strong style="color:var(--text)">tangenten</strong> – kurvans lutning i just den punkten. Det är den siffran som är derivatan. Den gröna pilen visar vilken väg gradientnedstigning knuffar w: nedför backen, mot botten av dalen.</div>
+    </div>
   </div>
 </div>
 
@@ -486,13 +546,13 @@ function texRows(container,rows){
 /* ============================ DATA ============================ */
 const GATE_INTRO='Det här är en <strong>logisk grind</strong> – en enkel regel med två insignaler, <strong>x₁</strong> och <strong>x₂</strong>. Var och en är antingen <strong>0</strong> (av) eller <strong>1</strong> (på). Nätverket ska lära sig att ge rätt svar för alla fyra kombinationerna.';
 const PROBLEMS={
-  and:{icon:'∧',title:'OCH-grinden',longname:'logiskt OCH (AND)',short:'Nätverket svarar ja bara när båda ingångarna är 1',
+  and:{icon:'∧',title:'OCH-grinden',longname:'logiskt OCH (AND)',short:'Ja bara när båda ingångarna är 1',
     explain:`${GATE_INTRO}<br><br>I en OCH-grind blir svaret Ja bara när <strong>båda</strong> ingångarna är 1 samtidigt. Så fort minst en av dem är 0 blir svaret Nej. Man kan säga att OCH kräver att allt är uppfyllt på en gång.<br><br>Det här är det enklaste fallet att lära in, eftersom en enda rät linje räcker för att skilja Ja-fallen från Nej-fallen.`,
     data:[{x:[0,0],y:0},{x:[0,1],y:0},{x:[1,0],y:0},{x:[1,1],y:1}]},
-  or:{icon:'∨',title:'ELLER-grinden',longname:'logiskt ELLER (OR)',short:'Nätverket svarar ja om minst en ingång är 1',
+  or:{icon:'∨',title:'ELLER-grinden',longname:'logiskt ELLER (OR)',short:'Ja när minst en ingång är 1',
     explain:`${GATE_INTRO}<br><br>I en ELLER-grind blir svaret Ja så snart <strong>minst en</strong> av ingångarna är 1. Det spelar ingen roll om det är den ena, den andra eller båda – bara när <strong>båda</strong> är 0 blir svaret Nej.<br><br>Även det här fallet går att lösa med en enda rät linje mellan Ja-fallen och Nej-fallet.`,
     data:[{x:[0,0],y:0},{x:[0,1],y:1},{x:[1,0],y:1},{x:[1,1],y:1}]},
-  xor:{icon:'⊕',title:'XOR-grinden',longname:'exklusivt ELLER (XOR)',short:'Nätverket svarar ja när exakt en ingång är 1',
+  xor:{icon:'⊕',title:'XOR-grinden',longname:'exklusivt ELLER (XOR)',short:'Ja när exakt en ingång är 1',
     explain:`${GATE_INTRO}<br><br>I en XOR-grind (exklusivt eller) blir svaret Ja när ingångarna <strong>skiljer sig åt</strong>, alltså när exakt en av dem är 1. Är de lika – båda 0 eller båda 1 – blir svaret Nej.<br><br><span style="color:#ffb98a">Det speciella med XOR är att Ja-fallen och Nej-fallen inte går att dela upp med en enda rät linje. Därför räcker det inte med en enkel modell. Nätverket behöver sitt dolda lager för att klara det, och därför tar XOR fler epoker att lära sig än de andra grindarna.</span>`,
     data:[{x:[0,0],y:0},{x:[0,1],y:1},{x:[1,0],y:1},{x:[1,1],y:0}]}
 };
@@ -600,7 +660,7 @@ function runOneIteration(){
 }
 function toggleAuto(){
   if(running){stopAuto();return;}
-  running=true;trained=false;autoKicks=0;stepIdx=-1;renderControls();renderCanvasNext();
+  running=true;trained=false;autoKicks=0;stepIdx=-1;renderControls();
   document.getElementById('flowBadge').classList.remove('show');
   runTimer=setInterval(()=>{
     if(!running)return;
@@ -653,7 +713,7 @@ function finishTraining(){
     <h4>Nätverket är färdigtränat!</h4>
     <div class="mb-desc">Efter ${epoch} epoker av framåtpass och backpropagation har vikterna hittat värden som gör att nätverket svarar rätt på alla exempel. Förlusten har sjunkit ända ner till ${last.toFixed(4)}.<br><br>Från och med nu ändrar vi inte längre vikterna. Nätverket är tränat, och vi kan börja <strong>använda</strong> det. Att mata in ny data och läsa av svaret kallas att göra en <strong style="color:var(--green)">förutsägelse</strong>.<br><br>Prova själv: välj en kombination nedanför nätverket och se att den tränade modellen svarar rätt.</div>`;
   renderControls();
-  setTxt('rLossLabel','Stämmer förutsägelsen?');
+  document.getElementById('rLossLabel').textContent='Stämmer förutsägelsen?';
   predictExample(0);
 }
 function predictExample(i){
@@ -663,20 +723,21 @@ function predictExample(i){
   drawNet();
   const ex=PROBLEMS[prob].data[i];
   const correct=Math.round(C.yhat)===ex.y;
-  setTxt('rPred',C.yhat.toFixed(3));
-  setTxt('rTarget',ex.y);
-  setTxt('rLoss',correct
+  document.getElementById('rPred').textContent=C.yhat.toFixed(3);
+  document.getElementById('rTarget').textContent=ex.y;
+  document.getElementById('rLoss').innerHTML=correct
     ? '<span class="verdict-ok">✓ Ja, rätt svar</span>'
-    : '<span class="verdict-bad">✗ Nej, fel</span>',true);
+    : '<span class="verdict-bad">✗ Nej, fel</span>';
   const rounded=Math.round(C.yhat);
+  document.getElementById('narr').innerHTML=`<span class="mb-tag update">Klart</span><h4>Testar en förutsägelse</h4><div class="mb-desc">Nätverket får in <strong>x₁ = ${ex.x[0]}</strong> och <strong>x₂ = ${ex.x[1]}</strong> och svarar <span class="mono" style="color:var(--gold)">${C.yhat.toFixed(3)}</span>. Avrundat blir det <strong>${rounded}</strong>, alltså "${rounded?'Ja':'Nej'}" – och det ${correct?'stämmer med':'stämmer inte med'} facit.</div>`;
   const rows=[
     {cls:'num',tex:`a_{1} = \\sigma(z_{1}) = ${col(CB,fp(C.ah[0]))}`,plain:`a1 = ${fp(C.ah[0])}`},
     {cls:'num',tex:`a_{2} = \\sigma(z_{2}) = ${col(CB,fp(C.ah[1]))}`,plain:`a2 = ${fp(C.ah[1])}`},
     {cls:'res gold',tex:`\\hat{y} = \\sigma(w_{1}a_{1} + w_{2}a_{2} + b) = ${col(CGO,fp(C.yhat))}`,plain:`ŷ = ${fp(C.yhat)}`}
   ];
-  document.getElementById('narr').innerHTML=`<span class="mb-tag update">Klart</span><h4>Testar en förutsägelse</h4><div class="mb-desc">Nätverket får in <strong>x₁ = ${ex.x[0]}</strong> och <strong>x₂ = ${ex.x[1]}</strong> och svarar <span class="mono" style="color:var(--gold)">${C.yhat.toFixed(3)}</span>. Avrundat blir det <strong>${rounded}</strong>, alltså "${rounded?'Ja':'Nej'}" – och det ${correct?'stämmer med':'stämmer inte med'} facit.</div><div class="mb-formula" id="mbFormula"></div>`;
+  document.getElementById('mathbox').innerHTML=`<div class="mb-kicker update">Beräkning</div><div class="mb-formula" id="mbFormula"></div>`;
   texRows(document.getElementById('mbFormula'),rows);
-  renderControls();renderCanvasNext();
+  renderControls();
   renderData();
 }
 
@@ -757,16 +818,16 @@ function openGateInfo(key){
 }
 function renderData(){
   const d=PROBLEMS[prob].data;
-  let h='<thead><tr><th>x₁</th><th>x₂</th><th>Rätt svar (y)</th></tr></thead><tbody>';
+  let h='<caption>Sanningstabellen visar det rätta svaret för varje kombination av ingångar.</caption><thead><tr><th>x₁</th><th>x₂</th><th>Rätt svar (y)</th></tr></thead><tbody>';
   d.forEach((ex,i)=>{
     h+=`<tr class="${(i===exampleIdx&&!running)?'cur':''}"><td>${ex.x[0]}</td><td>${ex.x[1]}</td><td class="ty">${ex.y} <span class="${ex.y?'yja':'ynej'}">(${ex.y?'Ja':'Nej'})</span></td></tr>`;
   });
   h+='</tbody>';
   document.getElementById('dataTable').innerHTML=h;
   document.getElementById('dataHint').innerHTML=
-    trained?'Färdigtränat. Testa en förutsägelse med knapparna under nätverket.'
-    :running?'Tränar automatiskt på alla rader.'
-    :`Tränar på rad <strong style="color:var(--accent2)">${exampleIdx+1}</strong> av ${d.length}. Ett varv genom alla rader kallas en <strong>epok</strong>.`;
+    trained?'Nätverket är färdigtränat. Klicka på en rad här, eller på en knapp under nätverket, för att testa en förutsägelse.'
+    :running?'Nätverket tränar automatiskt på alla rader just nu.'
+    :`Just nu tränar nätverket på rad <strong style="color:var(--accent2)">${exampleIdx+1}</strong>. När det har gått igenom alla raderna en gång kallas det för en <strong>epok</strong>.`;
 }
 function onLr(){lr=parseInt(document.getElementById('lrSlider').value)/100;document.getElementById('lrVal').textContent=lr.toFixed(2);}
 
@@ -791,36 +852,23 @@ function renderControls(){
   }
   el.className='ctrl-block';
   const counter=running?'auto':stepCounterText();
+  const atEnd=stepIdx>=STEPS.length-1;
+  const stepLabel=stepIdx<0?'▶ Starta framåtpasset':atEnd?'✓ Slutför och gå vidare':'▶ Nästa beräkning';
   const autoLabel=running?'⏸ Pausa träningen':'⏩ Träna färdigt automatiskt';
-  const hint=running?'Nätverket tränar automatiskt.':stepIdx<0?'Använd <b>▶ Starta framåtpasset</b> på scenen för att börja.':'Gå vidare med knappen nere till höger på scenen.';
   el.innerHTML=`
     <div class="ctrl-label">Steg för steg <span class="step-counter">${counter}</span></div>
-    <button class="btn" onclick="prevStep()" ${(running||stepIdx<0)?'disabled':''} title="Ett steg bakåt" style="width:100%">◀ Ett steg bakåt</button>
-    <div class="ctrl-legend" style="margin-top:8px">${hint}</div>
-    <button class="btn" onclick="runOneIteration()" ${running?'disabled':''} style="width:100%;margin-top:9px">↻ Spela upp hela varvet</button>
+    <div class="bg">
+      <button class="btn dn" onclick="prevStep()" ${(running||stepIdx<0)?'disabled':''} title="Ett steg bakåt">◀ Tillbaka</button>
+      <button class="btn pri big" onclick="nextStep()" ${running?'disabled':''} style="flex:1">${stepLabel}</button>
+    </div>
+    <button class="btn" onclick="runOneIteration()" ${running?'disabled':''} style="width:100%;margin-top:6px">↻ Spela upp hela varvet</button>
     <div class="bg" style="margin-top:9px">
       <button class="btn ${running?'pri':'grn'}" onclick="toggleAuto()">${autoLabel}</button>
       <button class="btn dn" onclick="resetTraining()" title="Nollställ vikterna och börja om">↺</button>
     </div>`;
 }
-/* the loud primary "advance" control lives on the canvas itself, so it never scrolls out of view */
-function renderCanvasNext(){
-  const el=document.getElementById('canvasNext');if(!el)return;
-  const hintEl=document.getElementById('canvasHint');
-  if(trained||running){el.classList.remove('show');if(hintEl)hintEl.style.opacity='';return;}
-  const atEnd=stepIdx>=STEPS.length-1;
-  let phase,label,count;
-  if(stepIdx<0){phase='idle';label='Starta framåtpasset';count='';}
-  else if(atEnd){phase='update';label='Slutför & gå vidare';count=stepCounterText();}
-  else{phase=STEPS[stepIdx].phase;label='Nästa beräkning';count=stepCounterText();}
-  el.className=`canvas-next show p-${phase}`;
-  el.innerHTML=`<span class="cn-label">${label}</span>${count?`<span class="cn-count">${count}</span>`:''}<span class="cn-arrow">→</span>`;
-  if(hintEl)hintEl.style.opacity=stepIdx<0?'':'.55';
-}
 
 /* ============================ MATH BOX / NARRATION ============================ */
-/* null-safe write: some readouts (ŷ/y/L boxes) were retired from the right column */
-function setTxt(id,txt,asHtml){const el=document.getElementById(id);if(!el)return;if(asHtml)el.innerHTML=txt;else el.textContent=txt;}
 function f(v,d){d=d===undefined?3:d;return (v<0?'-':'')+Math.abs(v).toFixed(d);}      // signed, plain minus for latex
 function fp(v,d){return v.toFixed(d===undefined?3:d);}
 function col(hex,s){return `\\textcolor{${hex}}{${s}}`;}
@@ -831,12 +879,13 @@ const CB='#7aa2ff', CG='#33d17a', CR='#ef5b6b', CA='#ff9f45', CGO='#ffce54', CD=
 function renderIdle(){
   stepIdx=-1;setPhaseBar(null);
   document.getElementById('flowBadge').classList.remove('show');
-  setTxt('rLossLabel','Förlust för detta exempel');
+  document.getElementById('rLossLabel').textContent='Förlust för detta exempel';
   const ex=PROBLEMS[prob].data[exampleIdx];
   document.getElementById('narr').innerHTML=`<span class="mb-tag idle">Redo</span>
      <h4>Redo för nästa träningsvarv</h4>
      <div class="mb-desc">Nätverket ska nu lära sig av ett exempel där ingångarna är <strong style="color:var(--accent2)">x₁ = ${ex.x[0]}</strong> och <strong style="color:var(--accent2)">x₂ = ${ex.x[1]}</strong>, och det rätta svaret är <em>${ex.y}</em>.<br><br>Ett träningsvarv består av fyra faser: <strong>framåtpass</strong>, <strong>förlust</strong>, <strong>backpropagation</strong> och <strong>uppdatera</strong>. Varje varv gör nätverket lite mindre fel.</div>`;
-  renderControls();renderCanvasNext();
+  document.getElementById('mathbox').innerHTML=`<div class="mb-kicker idle">Beräkning</div><div class="mb-empty">Tryck på <strong style="color:var(--text)">Starta framåtpasset</strong> nedan för att se den första uträkningen här.</div>`;
+  renderControls();
 }
 function setPhaseBar(activePhase, allDone){
   const phases=[{k:'forward',n:'1',l:'Framåtpass'},{k:'loss',n:'2',l:'Förlust'},{k:'backward',n:'3',l:'Backprop'},{k:'update',n:'4',l:'Uppdatera'}];
@@ -858,6 +907,7 @@ function renderStep(){
   else if(st.phase==='backward'){badge.className='flow-badge backward show';badge.innerHTML='← Felsignalen flödar bakåt';}
   else badge.classList.remove('show');
 
+  const mb=document.getElementById('mathbox');
   let tagCls,tagTxt,title,desc,rows=[],narr='';
 
   if(st.kind==='fwd-h'){
@@ -949,19 +999,20 @@ function renderStep(){
     narr=`Vikterna är justerade. De som blev <strong style="color:var(--green)">gröna</strong> ökade och de som blev <strong style="color:var(--red)">röda</strong> minskade. Nästa varv blir gissningen lite bättre.`;
   }
 
-  document.getElementById('narr').innerHTML=`<span class="mb-tag ${tagCls}">${tagTxt}</span><h4>${title}</h4><div class="mb-desc">${desc}</div><div class="mb-formula" id="mbFormula"></div>${narr?`<div class="mb-highlight">${narr}</div>`:''}`;
+  document.getElementById('narr').innerHTML=`<span class="mb-tag ${tagCls}">${tagTxt}</span><h4>${title}</h4><div class="mb-desc">${desc}</div>${narr?`<div class="mb-highlight">${narr}</div>`:''}`;
+  mb.innerHTML=`<div class="mb-kicker ${tagCls}">${tagTxt}</div><div class="mb-formula" id="mbFormula"></div>`;
   texRows(document.getElementById('mbFormula'),rows);
-  updateResults();drawNet();renderData();renderCanvasNext();
+  updateResults();drawNet();renderData();
   if(st.kind==='update')flashUpdate();
 }
 
 function updateResults(){
   const ex=PROBLEMS[prob].data[exampleIdx];
-  setTxt('rTarget',(C.y!==undefined)?C.y:ex.y);
+  document.getElementById('rTarget').textContent=(C.y!==undefined)?C.y:ex.y;
   if(C.yhat!==undefined&&stepIdx>=2){
-    setTxt('rPred',fp(C.yhat,3));
-    setTxt('rLoss',(stepIdx>=3)?fp(C.loss,4):'–');
-  }else{setTxt('rPred','–');setTxt('rLoss','–');}
+    document.getElementById('rPred').textContent=fp(C.yhat,3);
+    document.getElementById('rLoss').textContent=(stepIdx>=3)?fp(C.loss,4):'–';
+  }else{document.getElementById('rPred').textContent='–';document.getElementById('rLoss').textContent='–';}
 }
 
 /* ============================ FLOW ANIM ============================ */
@@ -996,35 +1047,17 @@ function edgeColorFor(li,i,j){
   }
   return null;
 }
-/* which edges + neurons are the focus of the current step (null = light everything) */
-function stepActiveSet(){
-  if(stepIdx<0||stepIdx>=STEPS.length)return null;
-  const st=STEPS[stepIdx];const edges=new Set(),neurons=new Set();
-  const E=(li,fi,ti)=>edges.add(li+'-'+fi+'-'+ti),N=(l,i)=>neurons.add(l+'-'+i);
-  if(st.kind==='fwd-h'){N(0,0);N(0,1);N(1,st.j);E(0,0,st.j);E(0,1,st.j);}
-  else if(st.kind==='fwd-out'){N(1,0);N(1,1);N(2,0);E(1,0,0);E(1,1,0);}
-  else if(st.kind==='loss'){N(2,0);}
-  else if(st.kind==='back-out'){N(2,0);N(1,0);N(1,1);E(1,0,0);E(1,1,0);}
-  else if(st.kind==='back-gw2'){N(2,0);N(1,0);N(1,1);E(1,0,0);E(1,1,0);}
-  else if(st.kind==='back-h'){N(1,st.j);N(0,0);N(0,1);E(0,0,st.j);E(0,1,st.j);}
-  else if(st.kind==='back-gw1'){N(0,0);N(0,1);N(1,0);N(1,1);E(0,0,0);E(0,1,0);E(0,0,1);E(0,1,1);}
-  else return null; // update -> keep the whole net lit while weights flash
-  return{edges,neurons};
-}
 function drawNet(){
   const{ctx,w,h}=setupCv();drawBackdrop(ctx,w,h);
   const P=nodePositions(w,h);
   const s=Math.max(0.55,Math.min(1,w/560,h/260));const R=Math.max(15,28*s);
   const t=flowAnim?Math.min(1,(performance.now()-flowStart)/800):-1;
   const flowSet=new Set(flowEdges.map(e=>e.join('-')));
-  const AS=stepActiveSet();const DIM=0.16;
   // flash pulse (0..1) while weights are updating
   const uf=updateFlash?Math.max(0,1-(performance.now()-updateFlashStart)/1200):0;
   const flashPulse=uf>0?Math.pow(Math.abs(Math.sin((performance.now()-updateFlashStart)/95)),0.7)*uf:0;
   const drawEdge=(a,b,li,fromIdx,toIdx,wv)=>{
     const key=[li===0?0:1,fromIdx,li===0?1:2,toIdx].join('-');
-    const dim=(AS&&!AS.edges.has(li+'-'+fromIdx+'-'+toIdx))?DIM:1;
-    ctx.save();ctx.globalAlpha=dim;
     const isFlow=flowSet.has(key)&&t>=0;const uc=edgeColorFor(li,fromIdx,toIdx);
     const changed=uc&&uc.glow;                          // this weight was just changed
     const fp2=changed?flashPulse:0;                     // per-edge flash amount
@@ -1040,7 +1073,6 @@ function drawNet(){
     drawChip(ctx,mx,my,fp(wv,2),changed?rgb:(wv>=0?[122,162,255]:[239,91,107]),Math.max(8,Math.round(10*s)),fp2);
     if(isFlow){const tt=flowDir==='forward'?t:1-t;const px=a.x+(b.x-a.x)*tt,py=a.y+(b.y-a.y)*tt;
       ctx.save();ctx.shadowColor='#fff';ctx.shadowBlur=14;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(px,py,4*s,0,Math.PI*2);ctx.fill();ctx.restore();}
-    ctx.restore();
   };
   for(let j=0;j<2;j++)for(let i=0;i<2;i++)drawEdge(P[0][i],P[1][j],0,i,j,w1[j][i]);
   for(let j=0;j<2;j++)drawEdge(P[1][j],P[2][0],1,j,0,w2[j]);
@@ -1050,13 +1082,11 @@ function drawNet(){
   drawLayerChip(ctx,P[2][0].x,P[2][0].y-R-16*s,'UTDATA',[255,206,84],s);
   const st=stepIdx>=0?STEPS[Math.min(stepIdx,STEPS.length-1)]:null;
   const backActive=st&&st.phase==='backward';
-  drawNodeLayer(ctx,P[0],0,R,s,backActive,AS,DIM);drawNodeLayer(ctx,P[1],1,R,s,backActive,AS,DIM);drawNodeLayer(ctx,P[2],2,R,s,backActive,AS,DIM);
+  drawNodeLayer(ctx,P[0],0,R,s,backActive);drawNodeLayer(ctx,P[1],1,R,s,backActive);drawNodeLayer(ctx,P[2],2,R,s,backActive);
 }
-function drawNodeLayer(ctx,pts,layer,R,s,backActive,AS,DIM){
+function drawNodeLayer(ctx,pts,layer,R,s,backActive){
   const fontSize=Math.max(11,Math.round(14*s));
   pts.forEach((pt,idx)=>{
-    const ndim=(AS&&!AS.neurons.has(layer+'-'+idx))?DIM:1;
-    ctx.save();ctx.globalAlpha=ndim;
     const revealed=neuronRevealed(layer,idx);
     let val=null,rimRgb=[150,162,196];
     if(layer===0){val=C.x?C.x[idx]:PROBLEMS[prob].data[exampleIdx].x[idx];rimRgb=[122,162,255];}
@@ -1069,11 +1099,10 @@ function drawNodeLayer(ctx,pts,layer,R,s,backActive,AS,DIM){
     else{ctx.font=`500 ${fontSize}px "DM Sans"`;ctx.fillStyle='rgba(255,255,255,0.3)';ctx.fillText('?',pt.x,pt.y);}
     if(layer>0){const bv=layer===1?bh[idx]:bo;const bt=`b=${fp(bv,2)}`;ctx.font=`600 ${Math.max(8,Math.round(9*s))}px "JetBrains Mono"`;const bw=ctx.measureText(bt).width+10;const bOff=R+5*s;ctx.beginPath();ctx.roundRect(pt.x-bw/2,pt.y+bOff,bw,14,7);ctx.fillStyle='rgba(14,17,30,0.8)';ctx.fill();ctx.strokeStyle='rgba(255,255,255,0.08)';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle='rgba(255,255,255,0.6)';ctx.fillText(bt,pt.x,pt.y+bOff+7);}
     if(layer===0){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(150,180,255,0.85)';ctx.fillText(idx===0?'x₁':'x₂',pt.x,pt.y+R+13*s);}
-    if(layer===2){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(255,214,130,0.9)';ctx.fillText('ŷ',pt.x,pt.y+R+14+14*s);}
+    if(layer===2){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(255,214,130,0.9)';ctx.fillText('ŷ',pt.x,pt.y+R+15*s);}
     let dv=null;
     if(backActive){if(layer===2&&stepIdx>=4)dv=C.dOut;else if(layer===1&&C.dH){if(idx===0&&stepIdx>=6)dv=C.dH[0];if(idx===1&&stepIdx>=7)dv=C.dH[1];}}
     if(dv!==null){const dt=`δ=${f(dv,3)}`;ctx.font=`700 ${Math.max(8,Math.round(9.5*s))}px "JetBrains Mono"`;const dw=ctx.measureText(dt).width+12;const dy=pt.y-R-5*s;ctx.save();ctx.shadowColor='rgba(255,159,69,0.5)';ctx.shadowBlur=8;ctx.beginPath();ctx.roundRect(pt.x-dw/2,dy-8,dw,17,8);ctx.fillStyle='rgba(40,26,14,0.95)';ctx.fill();ctx.strokeStyle='rgba(255,159,69,0.7)';ctx.lineWidth=1.2;ctx.stroke();ctx.restore();ctx.fillStyle='rgba(255,190,120,1)';ctx.fillText(dt,pt.x,dy+0.5);}
-    ctx.restore();
   });
 }
 function drawGlassNeuron(ctx,x,y,R,computed,rimRgb,val){
@@ -1200,7 +1229,7 @@ const CONCEPTS={
   forward:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h6m4 0h6M8 8l-4 4 4 4m8-8 4 4-4 4"/></svg>',title:'Framåtpass',
     def:'Data flödar in i nätverket och rör sig framåt, ett lager i taget. Varje neuron räknar en viktad summa av sina ingångar och kör den genom en aktiveringsfunktion. Det som kommer ut ur sista neuronen, <em>ŷ</em>, är nätverkets gissning. Ingen inlärning sker här – det är ren beräkning.',
     tex:'\\hat{y} = \\sigma\\!\\left(\\textstyle\\sum_i w_i x_i + b\\right)',plain:'ŷ = σ(Σ wᵢxᵢ + b)'},
-  sigmoid:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16" opacity=".35" stroke-width="1.5"/><path d="M4 19C9 19 15 5 20 5"/></svg>',title:'Sigmoid',
+  sigmoid:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19c3 0 4-14 9-14M12 5c5 0 6 14 9 14"/></svg>',title:'Sigmoid',
     def:'Aktiveringsfunktionen som tar in vilket tal som helst och pressar ihop det till ett värde mellan 0 och 1. Stora positiva tal hamnar nära 1, stora negativa nära 0, och talet 0 hamnar mitt emellan på 0,5. Den mjuka S-formade kurvan gör att nätverket kan lära sig gradvis, och eftersom den går att derivera fungerar den utmärkt tillsammans med backpropagation.',
     tex:'\\sigma(z) = \\dfrac{1}{1 + e^{-z}}',plain:'σ(z) = 1 / (1 + e^−z)'},
   aktivering:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="9" opacity=".4"/></svg>',title:'Aktivering (a)',
@@ -1226,47 +1255,4 @@ const CONCEPTS={
     tex:'\\delta = \\frac{\\partial L}{\\partial z}',plain:'δ = ∂L/∂z'},
   chain:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 17a3 3 0 0 1 0-6h1m4 0a3 3 0 0 1 0 6h-1"/><path d="M8 12h8"/></svg>',title:'Kedjeregeln',
     def:'Regeln från derivering som låter oss beräkna hur en förändring långt fram i nätverket påverkar en vikt långt bak. Man multiplicerar ihop de lokala derivatorna längs vägen – som länkarna i en kedja. Backpropagation <em>är</em> kedjeregeln tillämpad lager för lager.',
-    tex:'\\frac{\\partial L}{\\partial w} = \\frac{\\partial L}{\\partial a}\\cdot\\frac{\\partial a}{\\partial z}\\cdot\\frac{\\partial z}{\\partial w}',plain:'∂L/∂w = ∂L/∂a · ∂a/∂z · ∂z/∂w'},
-  lr:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/></svg>',title:'Inlärningstakt (η)',
-    def:'Inlärningstakten bestämmer hur stort steg vikterna tar varje gång de uppdateras. Är <em>η</em> för litet lär sig nätverket väldigt långsamt. Är det för stort kan vikterna hoppa förbi målet och träningen bli instabil. Att hitta en lagom takt är en konst.',
-    tex:'w \\leftarrow w - \\eta\\,\\frac{\\partial L}{\\partial w}',plain:'w ← w − η·∂L/∂w'},
-  gd:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M4 8c5 0 4 8 9 8s5-6 7-6"/></svg>',title:'Gradientnedstigning',
-    def:'Optimeringsmetoden bakom det hela. Tänk dig förlusten som ett kuperat landskap där du vill nå den lägsta dalen. Gradienten pekar uppför, så du tar ett steg åt motsatt håll. Upprepar du det tusentals gånger rullar du till slut ner till botten, där förlusten är som minst.',
-    tex:null},
-  epoch:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 21v-5h5"/></svg>',title:'Epok',
-    def:'En full runda genom <em>all</em> träningsdata. Efter varje epok har vikterna justerats med varje exempel en gång. Förlustkurvan visar en punkt per epok – och när den planar ut nära noll har nätverket lärt sig.',
-    tex:null}
-};
-function renderGlossary(){
-  const order=['forward','sigmoid','aktivering','vikt','bias','loss','backprop','gradient','delta','chain','lr','gd','epoch'];
-  document.getElementById('glossary').innerHTML=order.map(k=>{
-    const c=CONCEPTS[k];const ico=c.icon.replace('<svg','<svg class="g-ico"');
-    return `<span class="g-tag" onclick="openConcept('${k}')">${ico}${c.title}</span>`;
-  }).join('');
-}
-function openConcept(id){
-  const c=CONCEPTS[id];if(!c)return;
-  document.getElementById('conceptIcon').innerHTML=c.icon;
-  document.getElementById('conceptTitle').textContent=c.title;
-  document.getElementById('conceptDef').innerHTML=c.def;
-  const fEl=document.getElementById('conceptFormula');
-  if(c.tex)texRows(fEl,[{cls:'res',tex:c.tex,plain:c.plain}]);else fEl.innerHTML='';
-  document.getElementById('conceptBackdrop').classList.add('show');
-  requestAnimationFrame(()=>document.getElementById('conceptCard').classList.add('show'));
-}
-function closeConcept(){document.getElementById('conceptCard').classList.remove('show');document.getElementById('conceptBackdrop').classList.remove('show');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
-
-/* ============================ INIT ============================ */
-let rT;window.addEventListener('resize',()=>{clearTimeout(rT);rT=setTimeout(()=>{
-  if(document.getElementById('app').style.display!=='none'){drawNet();drawLossChart();}
-},80);});
-function boot(){
-  initParams();renderGlossary();onLr();renderSetupCards();renderSetupPreview();
-}
-boot();
-// re-typeset if KaTeX finishes loading after first render
-window.addEventListener('load',()=>{setTimeout(()=>{if(stepIdx>=0)renderStep();},100);});
-</script>
-</body>
-</html>
+    tex:'\\frac{\\partial L}{\\parti
