@@ -50,31 +50,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .step-intro strong{color:var(--text);}
 .step-foot{display:flex;justify-content:space-between;gap:8px;margin-top:11px;}
 
-/* ═══ PIPELINE – signaturelementet ═══ */
-.pipeline{background:linear-gradient(180deg,rgba(77,128,255,0.04),transparent),var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px 10px;overflow-x:auto;}
-.pipe-track{display:flex;align-items:stretch;gap:0;min-width:600px;}
-.stn{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 6px;border-radius:10px;transition:opacity 0.3s,filter 0.3s,background 0.2s;cursor:pointer;position:relative;min-width:86px;}
-.stn:hover{background:rgba(77,128,255,0.06);}
-.stn.locked{opacity:0.32;filter:grayscale(0.7);pointer-events:none;}
-.stn.here{background:rgba(77,128,255,0.09);box-shadow:inset 0 0 0 1px rgba(77,128,255,0.35);}
-.stn-lbl{font-size:0.62em;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--dim);white-space:nowrap;}
-.stn.here .stn-lbl{color:var(--accent2);}
-.stn-viz{height:58px;display:flex;align-items:center;justify-content:center;}
-.stn-viz canvas{border-radius:6px;border:1px solid var(--border);image-rendering:pixelated;}
-.stn-lock{position:absolute;top:6px;right:8px;font-size:0.8em;}
-.pipe-arrow{display:flex;align-items:center;color:var(--border);font-size:1.1em;flex:none;padding:0 2px;transition:color 0.25s;user-select:none;}
-.pipe-arrow.lit{color:var(--accent);}
-.pipe-arrow.pulse{animation:arrowPulse 0.7s ease;}
-@keyframes arrowPulse{0%{color:var(--accent);}40%{color:var(--gold);text-shadow:0 0 12px rgba(255,216,102,0.8);}100%{color:var(--accent);}}
-.kmini{display:grid;grid-template-columns:repeat(3,15px);gap:2px;}
-.kmini i{aspect-ratio:1;border-radius:3px;display:block;}
-.mmini{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;}
-.smini{display:flex;gap:4px;align-items:flex-end;height:48px;}
-.smini i{width:9px;border-radius:3px 3px 0 0;background:linear-gradient(180deg,var(--accent2),var(--accent));display:block;min-height:3px;transition:height 0.4s var(--spring);}
-.dmini{display:flex;flex-direction:column;align-items:center;gap:2px;}
-.dmini .di{font-size:1.5em;line-height:1;}
-.dmini .dp{font-family:'JetBrains Mono',monospace;font-size:0.72em;font-weight:700;color:var(--green);}
-.pipe-note{font-size:0.68em;color:var(--dim);text-align:center;margin-top:6px;line-height:1.4;}
 
 /* ── Bild-rutnätet + sökarram ── */
 .canvas-zone{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start;}
@@ -124,9 +99,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .tool-row .btn{flex:1;}
 .numtoggle{display:inline-flex;align-items:center;gap:7px;font-size:0.78em;color:var(--subtle);font-weight:600;cursor:pointer;padding:4px 0;}
 .numtoggle input{accent-color:var(--accent);width:15px;height:15px;cursor:pointer;}
-.px-inspect{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;font-size:0.78em;color:var(--dim);line-height:1.6;min-height:52px;}
-.px-inspect b{font-family:'JetBrains Mono',monospace;color:var(--gold);}
-.px-inspect .swatch{display:inline-block;width:13px;height:13px;border-radius:3px;border:1px solid var(--border);vertical-align:-2px;margin-right:4px;}
 
 /* ── Filterkortet ── */
 .filter-cols{display:grid;grid-template-columns:200px 1fr 1fr;gap:16px;align-items:start;}
@@ -206,8 +178,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .ch-result .clip{color:var(--red);font-size:0.85em;}
 .ch-progress{margin-top:10px;padding-top:9px;border-top:1px solid var(--border);text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.74em;color:var(--dim);}
 .ch-progress:first-line{color:var(--gold);}
-.ch-indep{margin-top:9px;font-size:0.72em;color:var(--dim);line-height:1.5;text-align:center;padding:0 4px;}
-.ch-indep b{color:var(--subtle);}
 
 .img-slot{display:contents;}
 
@@ -241,7 +211,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .fv .fvv{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.82em;color:var(--gold);}
 .fv .fvl{font-size:0.58em;color:var(--dim);line-height:1.3;}
 .rp-desc{font-size:0.72em;color:var(--dim);line-height:1.5;margin-bottom:8px;}
-.phead{display:grid;grid-template-columns:minmax(94px,0.9fr) 1.5fr 48px;gap:7px;padding:0 9px;font-size:0.62em;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--dim);margin-bottom:3px;}
 .ptable{display:flex;flex-direction:column;gap:3px;}
 .prow{display:grid;grid-template-columns:minmax(94px,0.9fr) 1.5fr 48px;gap:7px;align-items:center;padding:7px 9px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);transition:border-color 0.15s,background 0.15s;}
 .prow .pw{font-family:'JetBrains Mono',monospace;font-size:0.9em;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -251,39 +220,23 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .prow.winner{border-color:var(--green);background:rgba(52,199,89,0.13);box-shadow:0 0 12px rgba(52,199,89,0.25);}
 .prow.winner .pp{color:var(--green);}
 .prow.winner .pfill{background:linear-gradient(90deg,var(--green),#4ee89e);box-shadow:0 0 8px rgba(52,199,89,0.4);}
-.verdict{font-size:0.86em;line-height:1.55;padding:9px 12px;border-radius:8px;border:1px solid rgba(52,199,89,0.35);background:rgba(52,199,89,0.08);margin-top:8px;}
+.verdict{display:flex;flex-direction:column;gap:8px;font-size:0.95em;line-height:1.45;padding:12px 14px;border-radius:10px;border:1px solid rgba(52,199,89,0.35);background:rgba(52,199,89,0.08);margin-bottom:14px;}
+.verdict .v-head{display:flex;align-items:center;gap:11px;}
+.verdict .v-ico{font-size:1.5em;line-height:1;flex:none;}
 .verdict b{color:var(--green);}
 .verdict.unsure{border-color:rgba(255,159,67,0.4);background:rgba(255,159,67,0.08);}
 .verdict.unsure b{color:var(--orange);}
+.verdict .v-why{font-size:0.82em;line-height:1.55;color:var(--dim);padding-top:8px;border-top:1px solid rgba(255,255,255,0.08);}
+.verdict .v-why b{color:var(--text);}
 
-/* ═══ Transparent jämförelse: bildens tal vs. vinnarens facit ═══ */
-.compare-block{margin-top:16px;padding-top:14px;border-top:1px solid var(--border);}
-.compare-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
-.compare-title{font-size:0.82em;font-weight:700;color:var(--text);}
-.compare-pick{display:flex;gap:5px;flex-wrap:wrap;}
-.cmp-pick-btn{font-family:'DM Sans',sans-serif;font-size:0.7em;font-weight:700;padding:4px 9px;border-radius:16px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;transition:0.15s;}
-.cmp-pick-btn:hover{border-color:var(--accent);color:var(--text);}
-.cmp-pick-btn.active{border-color:var(--accent2);background:rgba(102,152,255,0.14);color:var(--text);}
-.cmp-rows{display:flex;flex-direction:column;gap:7px;}
-.cmp-row{display:grid;grid-template-columns:88px 1fr 24px 1fr 54px;gap:8px;align-items:center;font-size:0.78em;}
-.cmp-flabel{color:var(--dim);font-weight:600;display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.cmp-bar-wrap{position:relative;height:20px;background:var(--surface2);border-radius:6px;border:1px solid var(--border);overflow:hidden;}
-.cmp-bar{position:absolute;top:0;bottom:0;left:0;border-radius:5px;transition:width 0.4s ease;}
-.cmp-bar.you{background:linear-gradient(90deg,var(--accent),var(--accent2));}
-.cmp-bar.ref{background:linear-gradient(90deg,rgba(255,216,102,0.5),rgba(255,216,102,0.75));}
-.cmp-val{font-family:'JetBrains Mono',monospace;font-size:0.92em;color:var(--text);position:relative;z-index:1;padding-left:6px;line-height:20px;}
-.cmp-vs{text-align:center;color:var(--dim);font-size:0.7em;font-weight:700;}
-.cmp-match{text-align:right;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.85em;}
-.cmp-match.close{color:var(--green);}
-.cmp-match.mid{color:var(--gold);}
-.cmp-match.far{color:var(--red);}
-.cmp-legend{display:flex;gap:14px;margin-top:9px;font-size:0.7em;color:var(--dim);}
-.cmp-legend span{display:inline-flex;align-items:center;gap:5px;}
-.cmp-legend i{width:10px;height:10px;border-radius:3px;display:inline-block;}
-.cmp-legend .lg-you{background:linear-gradient(90deg,var(--accent),var(--accent2));}
-.cmp-legend .lg-ref{background:rgba(255,216,102,0.65);}
-.cmp-summary{font-size:0.76em;color:var(--dim);line-height:1.55;margin-top:10px;padding:9px 11px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);}
-.cmp-summary b{color:var(--text);}
+/* Intro: kedjan som mental modell */
+.intro-chain{display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;margin:18px 0 4px;}
+.intro-chain .ic{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1;min-width:78px;padding:10px 6px;border:1px solid var(--border);border-radius:10px;background:var(--surface2);}
+.intro-chain .ic-n{width:20px;height:20px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:0.68em;font-weight:700;background:rgba(102,152,255,0.16);color:var(--accent2);border:1px solid rgba(102,152,255,0.3);}
+.intro-chain .ic-t{font-size:0.66em;font-weight:600;color:var(--dim);text-align:center;line-height:1.3;}
+.intro-chain .ic-a{color:var(--border);font-size:0.9em;flex:none;user-select:none;}
+@media(max-width:520px){.intro-chain .ic-a{display:none;}.intro-chain .ic{min-width:0;flex:1 1 44%;}}
+
 
 /* Berättarrad */
 .narr{font-size:0.8em;color:var(--dim);background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:9px 12px;line-height:1.5;}
@@ -379,7 +332,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   .fx-kernel.h{left:29px;top:56px;}.fx-kernel.d1,.fx-kernel.d2{left:56px;top:56px;}
 }
 .concept-desc b{color:var(--text);}
-@media(prefers-reduced-motion:reduce){.concept-card{animation:none;}.smini i{transition:none;}}
+@media(prefers-reduced-motion:reduce){.concept-card{animation:none;}}
 
 /* Intro-overlay */
 .overlay{position:fixed;inset:0;background:rgba(9,11,20,0.92);z-index:100;display:none;align-items:center;justify-content:center;}
@@ -422,26 +375,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   .back-link{position:static;transform:none;margin-bottom:4px;}
   .hd{padding:10px 16px 8px;}
 }
-/* Kompakt pipeline på mobil – ska inte konkurrera med laborationen */
-@media(max-width:640px){
-  .pipeline{padding:8px 10px;}
-  .pipe-track{min-width:0;}
-  .stn{min-width:0;padding:5px 2px;gap:3px;}
-  .stn-viz{height:30px;}
-  .stn-viz canvas{width:30px !important;height:30px !important;}
-  /* Krymp mini-visualiseringarna */
-  .kmini{grid-template-columns:repeat(3,7px);gap:1px;}
-  .mmini{gap:1px;}
-  .mmini canvas{width:13px !important;height:13px !important;}
-  .smini{height:26px;gap:2px;}
-  .smini i{width:5px;}
-  .dmini .di{font-size:1.05em;}
-  .dmini .dp{font-size:0.6em;}
-  .stn-lbl{font-size:0.5em;letter-spacing:0.03em;}
-  .stn-lock{font-size:0.62em;top:3px;right:4px;}
-  .pipe-arrow{font-size:0.8em;padding:0;}
-  .pipe-note{display:none;}
-}
 </style>
 </head>
 <body>
@@ -468,41 +401,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <button class="btn ghost" id="prevStep" onclick="goStep(curStep-1)">← Föregående</button>
       <button class="btn pri" id="nextStep" onclick="goStep(curStep+1)">Nästa steg →</button>
     </div>
-  </section>
-
-  <!-- ─── PIPELINE ─── -->
-  <section class="pipeline">
-    <div class="pipe-track" id="pipeTrack">
-      <div class="stn" id="stn1" onclick="goStep(1)">
-        <span class="stn-lbl">Bild</span>
-        <div class="stn-viz"><canvas id="pcImg" width="48" height="48" style="width:48px;height:48px;"></canvas></div>
-      </div>
-      <div class="pipe-arrow" id="ar1">▸</div>
-      <div class="stn" id="stn2" onclick="goStep(2)">
-        <span class="stn-lock" id="lk2">🔒</span>
-        <span class="stn-lbl">Filter</span>
-        <div class="stn-viz"><div class="kmini" id="pcKern"></div></div>
-      </div>
-      <div class="pipe-arrow" id="ar2">▸</div>
-      <div class="stn" id="stn3" onclick="goStep(3)">
-        <span class="stn-lock" id="lk3">🔒</span>
-        <span class="stn-lbl">Featurekartor</span>
-        <div class="stn-viz"><div class="mmini" id="pcMaps"></div></div>
-      </div>
-      <div class="pipe-arrow" id="ar3">▸</div>
-      <div class="stn" id="stn4" onclick="goStep(4)">
-        <span class="stn-lock" id="lk4">🔒</span>
-        <span class="stn-lbl">Signatur</span>
-        <div class="stn-viz"><div class="smini" id="pcSig"><i></i><i></i><i></i><i></i></div></div>
-      </div>
-      <div class="pipe-arrow" id="ar4">▸</div>
-      <div class="stn" id="stn5" onclick="goStep(4)">
-        <span class="stn-lock" id="lk5">🔒</span>
-        <span class="stn-lbl">Beslut</span>
-        <div class="stn-viz"><div class="dmini" id="pcDec"><span class="di">?</span><span class="dp"></span></div></div>
-      </div>
-    </div>
-    <div class="pipe-note" id="pipeNote">Modellens hela resa – från pixlar till beslut. Stationerna låses upp steg för steg.</div>
   </section>
 
   <!-- Delat bildkort – flyttas in i aktuell skärm av JS -->
@@ -533,7 +431,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
             <button class="btn ghost" onclick="clearImage()">🗑 Rensa</button>
           </div>
         </div>
-        <div class="px-inspect" id="pxInspect">Hovra över en pixel för att se dess värde. En dator ser aldrig "en bild" – bara det här rutnätet av tal.</div>
         <!-- Filtervärden + beräkning flyttas hit i steg 2 -->
         <div class="calc-slot" id="calcSlot"></div>
       </div>
@@ -590,6 +487,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
           <label class="mini-t">Ihopslagna kartor <span class="sub" style="font-weight:400;color:var(--dim)">– det starkaste värdet per ruta</span></label>
           <div class="fmap" id="combinedMap"></div>
           <div class="combine-note" id="combineNote"></div>
+          <button class="why-chip" style="margin-top:8px;" onclick="openConcept('coverage')" type="button">🤔 Varför blir det aldrig 100 %?</button>
         </div>
       </div>
     </div>
@@ -605,7 +503,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         </div>
       </div>
       <div class="coll">
-        <button class="coll-toggle" onclick="toggleColl(this,'glossBody')">📖 Begreppslista <span style="font-weight:400;font-size:0.9em;">– klicka på ett begrepp</span><span class="arr">▼</span></button>
+        <button class="coll-toggle" onclick="toggleColl(this,'glossBody')">📖 Begreppslista<span class="arr">▼</span></button>
         <div class="coll-body" id="glossBody"><div id="glossaryBody"></div></div>
       </div>
     </div>
@@ -615,22 +513,20 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <section class="screen sc-4">
     <div class="img-slot" data-slot="4"></div>
     <div class="card">
-      <div class="card-h">🎯 Beslutet <span class="sub">– pipelinens slutstation</span></div>
+      <div class="card-h">🎯 Beslutet</div>
+      <div class="verdict" id="verdictEl" style="display:none;"></div>
       <div class="decide-cols">
         <div>
-          <div class="rp-desc"><strong style="color:var(--text)">Signaturen</strong> är fyra tal – ett per filter – som visar <em>hur mycket</em> varje filter reagerade på bilden. En form med både lodräta och vågräta kanter ger höga tal på båda de filtren. Det är modellens korta sammanfattning av bilden.</div>
           <label class="mini-t">Bildens signatur – ett tal per filter</label>
           <div class="fvec" id="fvecEl"></div>
-          <div class="hint">Bildens 256 pixlar blir först 784 kartvärden och kokas sedan ner till bara <strong>fyra tal</strong>. I stället för att jämföra tusentals pixlar jämför modellen bara dessa fyra tal, och det är därför den kan känna igen former snabbt.</div>
+          <div class="hint">Varje filter summeras till ett tal: <strong>hur mycket</strong> filtret reagerade. Fyra tal – det är hela modellens minne av bilden.</div>
         </div>
         <div>
-          <div class="rp-desc">Nu jämförs signaturen med de fyra former modellen känner till. Den form vars signatur liknar bildens mest blir modellens gissning.</div>
-          <div class="phead"><span>Form</span><span>Likhet</span><span style="text-align:right">%</span></div>
+          <label class="mini-t">Likhet med de former modellen kan</label>
           <div class="ptable" id="classTable"></div>
-          <div class="verdict" id="verdictEl" style="display:none;"></div>
+          <div class="hint">Den form vars signatur liknar bildens mest vinner.</div>
         </div>
       </div>
-      <div class="compare-block" id="compareBlock"></div>
     </div>
     <div class="coll">
       <button class="coll-toggle" onclick="toggleColl(this,'realBody')">🤖 Hur hänger det ihop med riktig AI?<span class="arr">▼</span></button>
@@ -655,15 +551,15 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="challenge">🏆 <b>Utmaning: lura modellen!</b> Rita något som <em>du</em> tycker liknar en cirkel men som modellen klassar som något annat – eller tvärtom. Fundera: <strong style="color:var(--text)">varför</strong> går modellen bort sig? Vad "ser" den egentligen – och vad ser den inte?</div>
     <div class="card">
       <div class="card-h">🎯 Beslutet</div>
+      <div class="verdict" id="verdictEl5" style="display:none;"></div>
       <div class="decide-cols">
         <div>
           <label class="mini-t">Bildens signatur</label>
           <div class="fvec" id="fvecEl5"></div>
         </div>
         <div>
-          <div class="phead"><span>Form</span><span>Likhet</span><span style="text-align:right">%</span></div>
+          <label class="mini-t">Likhet</label>
           <div class="ptable" id="classTable5"></div>
-          <div class="verdict" id="verdictEl5" style="display:none;"></div>
         </div>
       </div>
     </div>
@@ -686,8 +582,16 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
     <h2>Hur <span>ser</span> en dator?</h2>
-    <p class="sub">En dator ser aldrig bilder som vi gör – bara tal. Här bygger du en egen liten bildmodell och följer steg för steg hur den läser en bild, hittar mönster och till slut avgör vad bilden föreställer.</p>
-    <p class="sub" style="margin-bottom:0;">Följ de fem stegen upptill. 💡 Understrukna begrepp öppnar en kort förklaring när du klickar.</p>
+    <p class="sub">En dator ser aldrig bilder som vi gör – bara tal. Här bygger du en egen liten bildmodell och följer hur den går från pixlar till gissning.</p>
+    <div class="intro-chain">
+      <div class="ic"><span class="ic-n">1</span><span class="ic-t">Bilden blir tal</span></div>
+      <div class="ic-a">▸</div>
+      <div class="ic"><span class="ic-n">2</span><span class="ic-t">Filter letar kanter</span></div>
+      <div class="ic-a">▸</div>
+      <div class="ic"><span class="ic-n">3</span><span class="ic-t">Kartor visar träffar</span></div>
+      <div class="ic-a">▸</div>
+      <div class="ic"><span class="ic-n">4</span><span class="ic-t">Modellen gissar</span></div>
+    </div>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta →</button>
   </div>
 </div>
@@ -745,19 +649,21 @@ let explainedFilters = new Set();   // vilka filter som redan visat sin förklar
 function makeShape(id){
   const a = new Array(N * N).fill(0);
   const set = (x, y, v) => { if(x >= 0 && x < N && y >= 0 && y < N) a[y * N + x] = Math.max(a[y * N + x], v); };
+  // Ett streck är exakt en pixel brett – då blir kanten filtren letar efter entydig.
+  // Alla former delar mittpunkt (7,7) och lika långa armar, så de blir symmetriska.
   if(id === 'vline'){
-    for(let y = 2; y <= 13; y++){ set(7, y, 255); set(8, y, 255); }
+    for(let y = 2; y <= 12; y++) set(7, y, 255);
   } else if(id === 'hline'){
-    for(let x = 2; x <= 13; x++){ set(x, 7, 255); set(x, 8, 255); }
+    for(let x = 2; x <= 12; x++) set(x, 7, 255);
   } else if(id === 'cross'){
-    for(let y = 2; y <= 13; y++){ set(7, y, 255); set(8, y, 255); }
-    for(let x = 2; x <= 13; x++){ set(x, 7, 255); set(x, 8, 255); }
+    for(let y = 2; y <= 12; y++) set(7, y, 255);
+    for(let x = 2; x <= 12; x++) set(x, 7, 255);
   } else if(id === 'circle'){
-    const cx = 7.5, cy = 7.5, r = 5.2;
+    const cx = 7, cy = 7, r = 5;
     for(let y = 0; y < N; y++) for(let x = 0; x < N; x++){
       const d = Math.hypot(x - cx, y - cy);
-      if(Math.abs(d - r) < 1.0) set(x, y, 255);
-      else if(Math.abs(d - r) < 1.7) set(x, y, 120);
+      if(Math.abs(d - r) < 0.55) set(x, y, 255);
+      else if(Math.abs(d - r) < 0.75) set(x, y, 120);
     }
   }
   return a;
@@ -765,14 +671,12 @@ function makeShape(id){
 function loadShape(id){
   img = makeShape(id);
   currentShapeId = id;
-  compareShapeId = null;   // följ den nya bildens vinnare igen
   renderImage();
   onImageChange(`Laddade formen «${CLASSES.find(c => c.id === id)?.name || id}».`);
 }
 function clearImage(){
   img.fill(0);
   currentShapeId = null;
-  compareShapeId = null;
   renderImage();
   onImageChange('Tom bild – rita något med pennan!');
 }
@@ -799,7 +703,6 @@ function renderImage(){
     cells[i].style.background = `rgb(${v},${v},${v})`;
     cells[i].firstChild.textContent = v;
   }
-  drawPipeImg();
 }
 let showNums = false;
 function toggleNumsSw(){
@@ -836,26 +739,9 @@ pxGrid.addEventListener('pointerdown', e => {
   pxGrid.setPointerCapture(e.pointerId);
   paintAt(e.clientX, e.clientY);
 });
-pxGrid.addEventListener('pointermove', e => {
-  if(painting){ paintAt(e.clientX, e.clientY); return; }
-  const rect = pxGrid.getBoundingClientRect();
-  const x = Math.floor((e.clientX - rect.left) / rect.width * N);
-  const y = Math.floor((e.clientY - rect.top) / rect.height * N);
-  if(x >= 0 && x < N && y >= 0 && y < N) inspectPixel(x, y);
-});
+pxGrid.addEventListener('pointermove', e => { if(painting) paintAt(e.clientX, e.clientY); });
 pxGrid.addEventListener('pointerup', () => { if(painting){ painting = false; onImageChange('Du ändrade bilden.'); } });
-pxGrid.addEventListener('pointerleave', () => { if(!painting) resetInspect(); });
 
-function inspectPixel(x, y){
-  const v = img[y * N + x];
-  document.getElementById('pxInspect').innerHTML =
-    `Pixel (rad <b>${y}</b>, kolumn <b>${x}</b>): <span class="swatch" style="background:rgb(${v},${v},${v})"></span>värde <b>${v}</b> av 255. ` +
-    (v === 0 ? 'Helt svart.' : v === 255 ? 'Helt vit.' : 'En gråton däremellan.');
-}
-function resetInspect(){
-  document.getElementById('pxInspect').innerHTML =
-    'Hovra över en pixel för att se dess värde. En dator ser aldrig "en bild" – bara det här rutnätet av tal.';
-}
 function setTool(t){
   tool = t;
   document.getElementById('penBtn').classList.toggle('act', t === 'pen');
@@ -908,8 +794,6 @@ function selectKernel(i){
   renderKernelGrid();
   resetScan();
   renderFmap();
-  drawPipeKernel();
-  pulseArrow(1);
   // Visa balans-förklaringen första gången ett filter väljs i filtersteget
   if(curStep === 2 && !explainedFilters.has(i)){
     explainedFilters.add(i);
@@ -1008,7 +892,6 @@ function showCalc(ox, oy){
         De nio produkterna summeras till <span class="sum">${sum}</span>, som sedan går genom <span class="relu term" data-term="relu">ReLU</span> och blir <span class="final term" data-term="output">${relu}</span>.
         ${sum < 0 ? '<div class="clip">Summan blev negativ, så ReLU sätter den till noll. Filtret hittade inte sitt mönster här.</div>' : ''}
       </div>
-      <div class="ch-indep">📍 Den här rutan påverkas bara av sina egna nio pixlar. De andra rutorna i kartan väntar orörda på sin tur.</div>
       ${scanPos >= 0 ? `<div class="ch-progress">${scanPos >= FN*FN-1 ? 'Klart! Filtret har besökt alla ' + (FN*FN) + ' positioner.' : 'Ruta ' + (scanPos+1) + ' av ' + (FN*FN) + '. ' + (FN*FN-1-scanPos) + ' kvar.'}</div>` : ''}
     </div>`;
   hydrateTerms();
@@ -1030,7 +913,6 @@ function startScan(){
     scanTick();
     if(scanPos >= FN * FN - 1){
       stopScan();
-      pulseArrow(2);
       // Linsen vilar på sista rutan; panelen visar redan "✓ Klart".
       showCalc(FN - 1, FN - 1);
     }
@@ -1123,8 +1005,8 @@ function renderCombinedMap(){
     : names.slice(0, -1).join(', ') + ' och ' + names[names.length - 1];
   if(note) note.innerHTML =
     combinedFilters.size === 1
-      ? `Bara filtret för <b>${nameList}</b> är valt. Det täcker <span class="cn-pct">${pct}%</span> av formens kontur. Kryssa i fler filter för att se mer av formen.`
-      : `Filtren för <b>${nameList}</b> täcker tillsammans <span class="cn-pct">${pct}%</span> av formens kontur. Ju fler filter du lägger till, desto mer av formen framträder.`;
+      ? `Bara filtret för <b>${nameList}</b> är valt. Det täcker <span class="cn-pct">${pct}%</span> av formens kontur.`
+      : `Filtren för <b>${nameList}</b> täcker tillsammans <span class="cn-pct">${pct}%</span> av formens kontur.`;
 }
 
 // ── Klassificering ──
@@ -1134,34 +1016,25 @@ function featureVector(){
   return {raw: f, norm: f.map(v => v / len)};
 }
 function cosSim(a, b){ return a.reduce((s, v, i) => s + v * b[i], 0); }
-let prototypesRaw = {};
 function buildPrototypes(){
   const backup = img;
   CLASSES.forEach(c => {
     img = makeShape(c.id);
     const fv = featureVector();
     prototypes[c.id] = fv.norm;
-    prototypesRaw[c.id] = fv.raw;
   });
   img = backup;
 }
-let lastResult = null;
-let compareShapeId = null;   // vilken form eleven jämför mot – null = vinnaren
 function classify(){
   const {raw, norm} = featureVector();
   const empty = raw.every(v => v < 500);
   const fvecHtml = KERNELS.map((kk, i) =>
     `<div class="fv"><div class="fvi">${kk.ico}</div><div class="fvv">${Math.round(raw[i]/1000)}k</div><div class="fvl">${kk.name.split(' ')[0]}</div></div>`).join('');
   setAll('fvecEl', 'fvecEl5', fvecHtml);
-  drawPipeSig(norm, empty);
 
   if(empty){
     setAll('classTable', 'classTable5', `<div style="font-size:0.78em;color:var(--dim);text-align:center;padding:12px;border:1px dashed var(--border);border-radius:8px;line-height:1.6;">Bilden är (nästan) tom – rita något, eller välj en färdig form!</div>`);
     hideAll('verdictEl', 'verdictEl5');
-    const cb = document.getElementById('compareBlock');
-    if(cb) cb.innerHTML = '';
-    lastResult = {empty: true};
-    drawPipeDecision();
     return;
   }
   const sims = CLASSES.map(c => cosSim(norm, prototypes[c.id]));
@@ -1184,67 +1057,15 @@ function classify(){
 
   const top = order[0], second = order[1];
   const c = CLASSES[top.i];
-  let vClass, vHtml;
-  if(top.p > 0.55){
-    vClass = 'verdict';
-    vHtml = `Modellen är ganska säker på att det här är en <b>${c.name.toLowerCase()}</b> (${Math.round(top.p*100)} procent), eftersom signaturen matchar den formen bäst.`;
-  } else {
-    vClass = 'verdict unsure';
-    vHtml = `Modellen är osäker. Både ${CLASSES[top.i].name.toLowerCase()} (${Math.round(top.p*100)} procent) och ${CLASSES[second.i].name.toLowerCase()} (${Math.round(second.p*100)} procent) har liknande signaturer. Vad i bilden skulle kunna förvirra filtren?`;
-  }
+  const sure = top.p > 0.55;
+  const vHtml = sure
+    ? `<div class="v-head"><span class="v-ico">${c.ico}</span><span>Modellen gissar <b>${c.name.toLowerCase()}</b> – ${Math.round(top.p*100)} %</span></div>`
+    : `<div class="v-head"><span class="v-ico">🤔</span><span>Modellen tvekar mellan <b>${c.name.toLowerCase()}</b> och <b>${CLASSES[second.i].name.toLowerCase()}</b></span></div>
+       <div class="v-why">Modellen minns bara <b>hur mycket</b> varje filter reagerade – inte <b>var</b> i bilden det hände. ${c.name} och ${CLASSES[second.i].name} kan ha ungefär lika mycket av varje kantriktning, fast utspridd på olika ställen, och då blir signaturerna nästan identiska. Riktiga nätverk löser det genom att stapla många lager och behålla den rumsliga informationen längre.</div>`;
   ['verdictEl','verdictEl5'].forEach(id => {
     const el = document.getElementById(id);
-    if(el){ el.style.display = 'block'; el.className = vClass; el.innerHTML = vHtml; }
+    if(el){ el.style.display = 'flex'; el.className = sure ? 'verdict' : 'verdict unsure'; el.innerHTML = vHtml; }
   });
-  lastResult = {icon: c.ico, pct: Math.round(top.p * 100), empty: false};
-  drawPipeDecision();
-  renderCompareBlock(raw, top.i);
-}
-// Transparent jämförelse: bildens fyra rå-tal bredvid en vald forms facit-tal
-function renderCompareBlock(myRaw, winnerIdx){
-  const host = document.getElementById('compareBlock');
-  if(!host) return;
-  const targetId = compareShapeId || CLASSES[winnerIdx].id;
-  const target = CLASSES.find(c => c.id === targetId);
-  const refRaw = prototypesRaw[targetId];
-  const maxAll = Math.max(...myRaw, ...refRaw, 1);
-
-  const pickBtns = CLASSES.map(c =>
-    `<button class="cmp-pick-btn${c.id === targetId ? ' active' : ''}" onclick="setCompareShape('${c.id}')">${c.ico} ${c.name}</button>`).join('');
-
-  const rows = KERNELS.map((kk, i) => {
-    const myV = myRaw[i], refV = refRaw[i];
-    const myPct = Math.max(2, Math.round(myV / maxAll * 100));
-    const refPct = Math.max(2, Math.round(refV / maxAll * 100));
-    const diff = Math.abs(myV - refV) / maxAll;
-    const matchCls = diff < 0.12 ? 'close' : diff < 0.3 ? 'mid' : 'far';
-    const matchLbl = diff < 0.12 ? '✓ nära' : diff < 0.3 ? '≈ liknar' : '✗ olika';
-    return `<div class="cmp-row">
-      <span class="cmp-flabel">${kk.ico} ${kk.name.split(' ')[0]}</span>
-      <div class="cmp-bar-wrap"><div class="cmp-bar you" style="width:${myPct}%"></div><span class="cmp-val">${Math.round(myV/1000)}k</span></div>
-      <span class="cmp-vs">vs</span>
-      <div class="cmp-bar-wrap"><div class="cmp-bar ref" style="width:${refPct}%"></div><span class="cmp-val">${Math.round(refV/1000)}k</span></div>
-      <span class="cmp-match ${matchCls}">${matchLbl}</span>
-    </div>`;
-  }).join('');
-
-  const closeCount = KERNELS.filter((_, i) => Math.abs(myRaw[i] - refRaw[i]) / maxAll < 0.12).length;
-
-  host.innerHTML = `
-    <div class="compare-head">
-      <span class="compare-title">🔬 Så jämförs signaturerna – din bild mot facit för en form</span>
-    </div>
-    <div class="compare-pick">${pickBtns}</div>
-    <div class="cmp-rows" style="margin-top:10px;">${rows}</div>
-    <div class="cmp-legend">
-      <span><i class="lg-you"></i> Din bild</span>
-      <span><i class="lg-ref"></i> Facit för ${target.name.toLowerCase()}</span>
-    </div>
-    <div class="cmp-summary"><b>${closeCount} av 4</b> filter ligger nära facit för ${target.name.toLowerCase()}. Ju fler som stämmer, desto högre blir likheten i tabellen ovan.</div>`;
-}
-function setCompareShape(id){
-  compareShapeId = id;
-  classify();
 }
 // Hjälpare: skriv samma HTML till flera element-id (om de finns)
 function setAll(...args){
@@ -1256,117 +1077,24 @@ function hideAll(...ids){ ids.forEach(id => { const el = document.getElementById
 // ════════════════════════════════════════════════════════════
 //  PIPELINE-miniatyrer
 // ════════════════════════════════════════════════════════════
-function drawPipeImg(){
-  const cv = document.getElementById('pcImg');
-  const ctx = cv.getContext('2d');
-  const s = cv.width / N;
-  for(let y = 0; y < N; y++) for(let x = 0; x < N; x++){
-    const v = img[y * N + x];
-    ctx.fillStyle = `rgb(${v},${v},${v})`;
-    ctx.fillRect(x * s, y * s, s, s);
-  }
-  // Pipelinens signatur- och beslutsminiatyr ska alltid spegla nuvarande bild,
-  // även innan eleven nått besluts-steget – annars ljuger förhandsvisningen.
-  computeDecisionSilently();
-  updatePipeline();
-}
-// Räkna signatur + beslut utan att röra skärmarnas paneler (bara pipeline-minis)
-function computeDecisionSilently(){
-  const {raw, norm} = featureVector();
-  const empty = raw.every(v => v < 500);
-  drawPipeSig(norm, empty);
-  if(empty){ lastResult = {empty: true}; drawPipeDecision(); return; }
-  const sims = CLASSES.map(c => cosSim(norm, prototypes[c.id]));
-  const T = 14;
-  const ex = sims.map(s => Math.exp(s * T));
-  const tot = ex.reduce((a, b) => a + b, 0);
-  const order = ex.map((v, i) => ({p: v / tot, i})).sort((a, b) => b.p - a.p);
-  lastResult = {icon: CLASSES[order[0].i].ico, pct: Math.round(order[0].p * 100), empty: false};
-  drawPipeDecision();
-}
-function drawPipeKernel(){
-  const K = KERNELS[curK].k.flat();
-  document.getElementById('pcKern').innerHTML = K.map(v =>
-    `<i style="background:${v > 0 ? 'rgba(52,199,89,0.55)' : v < 0 ? 'rgba(239,91,91,0.5)' : 'var(--surface2)'};border:1px solid var(--border);"></i>`).join('');
-}
-function drawPipeMaps(){
-  const host = document.getElementById('pcMaps');
-  if(host.children.length !== 4){
-    host.innerHTML = KERNELS.map(() => `<canvas width="28" height="28" style="width:26px;height:26px;border-radius:4px;border:1px solid var(--border);image-rendering:pixelated;"></canvas>`).join('');
-  }
-  KERNELS.forEach((_, ki) => {
-    const {map, maxV} = convolve(ki);
-    const cv = host.children[ki];
-    const ctx = cv.getContext('2d');
-    const s = cv.width / FN;
-    for(let y = 0; y < FN; y++) for(let x = 0; x < FN; x++){
-      ctx.fillStyle = mapColor(map[y * FN + x], maxV);
-      ctx.fillRect(x * s, y * s, Math.ceil(s), Math.ceil(s));
-    }
-  });
-}
-function drawPipeSig(norm, empty){
-  const bars = document.getElementById('pcSig').children;
-  for(let i = 0; i < 4; i++){
-    bars[i].style.height = empty ? '3px' : Math.max(6, Math.round(norm[i] * 46)) + 'px';
-  }
-}
-function drawPipeDecision(){
-  const el = document.getElementById('pcDec');
-  if(!lastResult || lastResult.empty){
-    el.innerHTML = '<span class="di" style="color:var(--dim)">?</span><span class="dp"></span>';
-  } else {
-    el.innerHTML = `<span class="di">${lastResult.icon}</span><span class="dp">${lastResult.pct}%</span>`;
-  }
-}
-function pulseArrow(n){
-  const a = document.getElementById('ar' + n);
-  if(!a || !a.classList.contains('lit')) return;
-  a.classList.remove('pulse');
-  void a.offsetWidth;
-  a.classList.add('pulse');
-}
-function updatePipeline(){
-  const unlockAt = [1, 2, 3, 4, 4];
-  for(let i = 1; i <= 5; i++){
-    const stn = document.getElementById('stn' + i);
-    const unlocked = curStep >= unlockAt[i - 1];
-    stn.classList.toggle('locked', !unlocked);
-    const lk = document.getElementById('lk' + i);
-    if(lk) lk.style.display = unlocked ? 'none' : '';
-  }
-  for(let i = 1; i <= 4; i++){
-    document.getElementById('ar' + i).classList.toggle('lit', curStep >= unlockAt[i]);
-  }
-  const hereMap = {1:'stn1',2:'stn2',3:'stn3',4:'stn5',5:null};
-  document.querySelectorAll('.stn').forEach(s => s.classList.remove('here'));
-  if(hereMap[curStep]) document.getElementById(hereMap[curStep]).classList.add('here');
-  if(curStep >= 2) drawPipeKernel();
-  if(curStep >= 3) drawPipeMaps();
-  document.getElementById('pipeNote').textContent = curStep >= 5
-    ? 'Hela pipelinen är igång – varje ändring i bilden flödar direkt genom alla stationer.'
-    : 'Modellens hela resa – från pixlar till beslut. Stationerna låses upp steg för steg.';
-}
-
 // ── Uppdateringskedja ──
 function onImageChange(msg){
   resetScan();
   renderFmap(0);
-  drawPipeImg();
-  if(curStep >= 3){ renderAllMaps(); drawPipeMaps(); pulseArrow(2); }
-  if(curStep >= 4){ classify(); pulseArrow(3); pulseArrow(4); }
+  if(curStep >= 3) renderAllMaps();
+  if(curStep >= 4) classify();
 }
 
 // ── Stegnavigering ──
 const STEPS = [
-  {intro:'En dator ser inga former, bara 256 tal mellan 0 och 255. Välj en färdig form, slå på <strong>Visa pixelvärden</strong> och hovra över bilden. Var är talen höga, och var är de noll?'},
+  {intro:'Välj en färdig form och slå på <strong>Visa pixelvärden</strong>. Var är talen höga, och var är de noll?'},
   {intro: () => {
     const shape = CLASSES.find(c => c.id === currentShapeId);
     const target = shape ? shape.def : 'den valda bilden';
     return `Ett <strong>filter</strong> är en liten bricka med nio tal som glider över bilden. På varje plats multiplicerar den sina tal med pixlarna under sig och summerar ihop dem till ett enda tal. Testa alla fyra filtren på ${target} och se vad de hittar.`;
   }},
-  {intro:'Riktiga modeller kör <strong>många filter samtidigt</strong>. Kryssa i flera kort för att lägga ihop dem. Hur många filter krävs innan hela formens kontur syns i kartan till höger?'},
-  {intro:'Nu fattar modellen sitt <strong>beslut</strong>. Varje karta summeras till ett tal, talen bildar bildens signatur, och signaturen jämförs med de fyra kända formerna. Längst ned kan du se exakt hur jämförelsen går till, tal för tal.'},
+  {intro:'Riktiga modeller kör <strong>många filter samtidigt</strong>. Kryssa i flera kort för att lägga ihop dem och se hur mycket mer av konturen som fångas.'},
+  {intro:'Nu fattar modellen sitt <strong>beslut</strong>. Varje karta summeras till ett tal, de fyra talen bildar bildens signatur, och signaturen jämförs med de former modellen känner till.'},
   {intro:'Nu är allt upplåst. Rita egna bilder och försök <strong>lura modellen</strong>. Prova en sned linje, en halv cirkel eller en kladdig fläck, och fundera på vad modellen ser och vad den missar.'}
 ];
 const imgCard = document.getElementById('imgCard');
@@ -1402,7 +1130,6 @@ function goStep(n){
   if(n === 2){ renderKernelGrid(); renderFmap(0); resetScan(); }
   if(n >= 3) renderAllMaps();
   if(n >= 4) classify();
-  updatePipeline();
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
@@ -1415,9 +1142,9 @@ const GLOSSARY = {
   vikt:          {i:'⚖️', t:'Vikt',           d:'Talen inuti filtret. I riktiga nätverk <b>lärs vikterna fram</b> under träningen. Här är de handgjorda, så att du kan se exakt vad de gör.'},
   faltning:      {i:'🎞️', t:'Faltning (convolution)', d:'Operationen som sker när filtret glider över bilden. På varje plats <b>multipliceras</b> talen parvis, produkterna <b>summeras</b>, och resultatet skrivs in i featurekartan. Faltning är det som C:et står för i CNN.'},
   featurekarta:  {i:'🗺️', t:'Featurekarta',   d:'Resultatbilden efter ett filter. Ljusa områden betyder <b>"här hittade filtret sitt mönster"</b>. Varje filter ger sin egen karta.'},
-  output:        {i:'💡', t:'Vad betyder talet?', d:'Här är det lätt att blanda ihop två sorters tal.<br><br><b>I bilden</b> är talet en ljusstyrka. 255 betyder en helt vit pixel och 0 betyder helt svart.<br><br><b>I featurekartan</b> betyder ett högt tal i stället att <em>filtret reagerade starkt här</em>. Ju högre talet är, desto tydligare hittade filtret sitt mönster, till exempel en kant. Talet är alltså ingen ljusstyrka, och det kan bli betydligt större än 255 innan det skalas om för att visas som färg. Ett värde på 0 betyder att det inte fanns något mönster alls på den platsen. Varje ruta byggs av nio pixlar tillsammans, så ingen ruta representerar bara en enskild pixel.'},
+  output:        {i:'💡', t:'Vad betyder talet?', d:'Här är det lätt att blanda ihop två sorters tal.<br><br><b>I bilden</b> är talet en ljusstyrka. 255 betyder en helt vit pixel och 0 betyder helt svart.<br><br><b>I featurekartan</b> betyder ett högt tal i stället att <em>filtret reagerade starkt här</em>. Ju högre talet är, desto tydligare hittade filtret sitt mönster, till exempel en kant. Talet är alltså ingen ljusstyrka, och det kan bli betydligt större än 255 innan det skalas om för att visas som färg. Ett värde på 0 betyder att det inte fanns något mönster alls på den platsen.'},
   ruta:          {i:'🔲', t:'Vad representerar en ruta i kartan?', d:'En ljus ruta i featurekartan är <b>ett enda tal</b>, inte flera pixlar avbildade.<br><br>Talet kommer från ett helt <b>3×3-område</b> i bilden. Det är filtrets nio tal multiplicerade med de nio pixlarna på den platsen, summerade till en enda siffra.<br><br>Rutan sitter ungefär <b>där i bilden</b> filtret stod när det räknade, men den beskriver hela det området och inte en enskild pixel. Featurekartan är därför mindre (14 gånger 14) än bilden (16 gånger 16), eftersom filtret inte får plats precis på kanten och kanterna faller bort.'},
-  firsthit:      {i:'✨', t:'En träff', d:'Det här är ett ställe där filtret gav ett värde <b>över noll</b>, alltså där det hittade sitt mönster.<br><br>I räkningen ovanför gjorde pixlarna under filtret att summan blev <b>positiv</b>. Med andra pixlar under filtret, till exempel bara svarta, hade summan blivit 0 eller negativ, och då hade ReLU nollat den.<br><br>💡 Varje ruta i kartan räknas <b>helt för sig</b>. Den påverkas bara av sina egna nio pixlar, aldrig av rutorna bredvid.'},
+  firsthit:      {i:'✨', t:'En träff', d:'Det här är ett ställe där filtret gav ett värde <b>över noll</b>, alltså där det hittade sitt mönster.<br><br>I räkningen ovanför gjorde pixlarna under filtret att summan blev <b>positiv</b>. Med andra pixlar under filtret, till exempel bara svarta, hade summan blivit 0 eller negativ, och då hade ReLU nollat den.'},
   partial:       {i:'🤔', t:'Varför syns inte hela formen?', d: () => {
     const examples = {
       cross:  'Ett kryss har lodräta kanter bara vid stapelns sidor och vågräta kanter bara vid tvärstreckets topp och botten. I mitten möter vitt bara vitt, vilket inte ger <b>någon kant alls</b>, så där syns inget i kartan trots att det är mitt i bilden.',
@@ -1433,7 +1160,8 @@ const GLOSSARY = {
   klassificering:{i:'🎯', t:'Klassificering', d:'Att avgöra vilken kategori något tillhör. Här handlar det om vilken av de fyra formerna bilden liknar mest. Ansiktsigenkänning, tumördetektion och självkörande bilar bygger alla på klassificering.'},
   sannolikhet:   {i:'🎲', t:'Sannolikhet',    d:'Hur säker modellen är på varje kategori, uttryckt i procent. Summan blir alltid <b>100 procent</b>, eftersom modellen måste fördela hela sin säkerhet mellan formerna.'},
   cnn:           {i:'🧠', t:'CNN (faltningsnätverk)', d:'Den nätverkstyp som dominerar bildigenkänning. Den staplar <b>många lager av filter</b> som lärt sig hitta allt mer komplexa mönster: de första lagren hittar kanter, nästa lager sätter ihop dem till former, och senare lager känner igen ögon, hjul och ansikten.'},
-  'träning':     {i:'🏋️', t:'Träning',        d:'Processen där nätverket <b>själv justerar sina filtervikter</b> genom att öva på tusentals märkta exempelbilder. Filtren i den här simuleringen är handgjorda, medan riktiga nätverk lär sig sina filter under träningen.'}
+  'träning':     {i:'🏋️', t:'Träning',        d:'Processen där nätverket <b>själv justerar sina filtervikter</b> genom att öva på tusentals märkta exempelbilder. Filtren i den här simuleringen är handgjorda, medan riktiga nätverk lär sig sina filter under träningen.'},
+  coverage:      {i:'🤔', t:'Varför blir det aldrig 100 %?', d:'Varje filter fångar bara <b>en</b> av de två riktningarna en kant kan gå i – till exempel mörkt→ljust, aldrig ljust→mörkt. Den motsatta riktningen ger en negativ summa, och <span class="term" data-term="relu">ReLU</span> nollar allt negativt.<br><br>Så en rak stapel har alltid <b>två</b> kanter, men filtret som är byggd för den riktningen ser bara en av dem. Det gäller lika mycket när du kryssar i alla fyra filter – ingen av dem har en spegelvänd tvilling som fångar den bortnollade sidan.<br><br>Riktiga nätverk löser det genom att lära sig <b>miljontals filter</b>, mörka som ljusa varianter av varandra, i många lager.'},
 };
 const conceptOverlay = document.getElementById('conceptOverlay');
 const conceptCard = document.getElementById('conceptCard');
@@ -1517,9 +1245,9 @@ function hydrateTerms(){
   });
 }
 function renderGlossary(){
-  // "partial" och "firsthit" är kontextuella hintar (nås via chip/popup), inte kärnbegrepp – utelämnas här
+  // "partial", "firsthit" och "coverage" är kontextuella hintar (nås via chip/popup), inte kärnbegrepp – utelämnas här
   document.getElementById('glossaryBody').innerHTML = '<div class="gloss-list">' +
-    Object.entries(GLOSSARY).filter(([id]) => id !== 'partial' && id !== 'firsthit').map(([id, g]) =>
+    Object.entries(GLOSSARY).filter(([id]) => id !== 'partial' && id !== 'firsthit' && id !== 'coverage').map(([id, g]) =>
       `<div class="gloss-item" onclick="openConcept('${id}')">${g.i} <b>${g.t}</b></div>`).join('') + '</div>';
 }
 
@@ -1536,7 +1264,6 @@ buildPrototypes();
 img = makeShape('cross');
 renderImage();
 renderFmap(0);
-drawPipeKernel();
 setTool('pen');
 hydrateTerms();
 renderGlossary();
