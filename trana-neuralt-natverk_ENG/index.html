@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neural Network Lab – ai-aktiviteter.se</title>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZDWXTZZBBR');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07080f;--surface:rgba(20,24,42,0.55);--surface-solid:#12152a;--surface2:rgba(28,33,56,0.65);
+  --border:rgba(255,255,255,0.08);--border-soft:rgba(255,255,255,0.05);
+  --text:#eef1fb;--dim:#8791b3;--dim2:#5c6689;
+  --accent:#4d80ff;--accent2:#7aa2ff;--accent-dim:rgba(77,128,255,0.14);
+  --green:#33d17a;--red:#ef5b6b;--gold:#ffce54;
+  --r-sm:8px;--r-md:14px;--r-lg:20px;
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);--ease-out:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-font-smoothing:antialiased;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden;position:relative;}
+
+/* ambient background: mesh gradient + noise + grid */
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-mesh::before{content:'';position:absolute;width:140%;height:140%;top:-20%;left:-20%;
+  background:
+    radial-gradient(ellipse 42% 34% at 18% 22%, rgba(77,128,255,0.16), transparent 60%),
+    radial-gradient(ellipse 38% 30% at 82% 70%, rgba(255,206,84,0.07), transparent 60%),
+    radial-gradient(ellipse 34% 40% at 65% 15%, rgba(51,209,122,0.05), transparent 60%);
+  animation:meshDrift 34s ease-in-out infinite alternate;filter:blur(10px);}
+@keyframes meshDrift{0%{transform:translate(0,0) scale(1);}50%{transform:translate(-2%,2%) scale(1.05);}100%{transform:translate(2%,-1%) scale(1.02);}}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(122,162,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(122,162,255,.025) 1px,transparent 1px);
+  background-size:44px 44px;mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,#000 40%,transparent 100%);}
+.bg-noise{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* intro */
+.intro{position:fixed;inset:0;background:rgba(6,7,14,0.85);backdrop-filter:blur(18px);z-index:200;display:flex;align-items:center;justify-content:center;transition:opacity .35s var(--ease-out);}
+.intro.hidden{opacity:0;pointer-events:none;}
+.intro-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:var(--r-lg);padding:34px 36px;max-width:540px;width:92%;max-height:88vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.02) inset;animation:cardIn .5s var(--ease-spring);}
+@keyframes cardIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.intro-icon{width:44px;height:44px;margin:0 auto 14px;color:var(--accent2);}
+.intro-card h2{font-family:'Syne',sans-serif;font-size:1.5em;font-weight:800;margin-bottom:8px;text-align:center;letter-spacing:-.01em;}
+.intro-card h2 span{background:linear-gradient(135deg,#eef1fb,var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.intro-card .sub{color:var(--dim);font-size:.9em;line-height:1.6;text-align:center;margin-bottom:20px;}
+.intro-steps{display:flex;flex-direction:column;gap:14px;margin:16px 0;}
+.intro-step{display:flex;gap:13px;align-items:flex-start;}
+.intro-num{width:26px;height:26px;border-radius:50%;background:var(--accent-dim);color:var(--accent2);font-weight:700;font-size:.82em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(122,162,255,.25);font-family:'JetBrains Mono',monospace;}
+.intro-step-text{font-size:.87em;color:var(--dim);line-height:1.6;padding-top:2px;}.intro-step-text strong{color:var(--text);font-weight:600;}
+.intro-start{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:18px;font-family:'DM Sans',sans-serif;font-size:.96em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(77,128,255,.28);}
+.intro-start:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
+.intro-tip{margin-top:16px;font-size:.82em;color:var(--dim);text-align:center;line-height:1.55;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid var(--border-soft);border-radius:var(--r-sm);}
+.intro-tip strong{color:var(--text);}
+
+/* header */
+.hd{text-align:center;padding:16px 16px 12px;border-bottom:1px solid var(--border-soft);position:relative;z-index:2;}
+.hd-title-row{display:flex;align-items:center;justify-content:center;gap:9px;}
+.hd-icon{width:22px;height:22px;color:var(--accent2);flex-shrink:0;}
+.hd h1{font-family:'Syne',sans-serif;font-size:1.3em;font-weight:800;letter-spacing:-.01em;}.hd h1 span{background:linear-gradient(135deg,#eef1fb,var(--accent2) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hd p{color:var(--dim2);font-size:.78em;max-width:680px;margin:3px auto 0;line-height:1.3;}
+.back-link,.lang-link{position:absolute;top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:.75em;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.02);transition:.2s var(--ease-out);white-space:nowrap;z-index:2;}
+.back-link{left:16px;}.lang-link{right:16px;}
+.back-link:hover,.lang-link:hover{color:var(--text);border-color:var(--dim2);background:rgba(255,255,255,.05);}
+.lang-link .flag{font-size:1.05em;line-height:1;}
+
+/* layout: glass layered panels */
+.app{display:grid;grid-template-columns:288px 1fr 254px;height:calc(100vh - 58px);position:relative;z-index:1;gap:12px;padding:12px;}
+.lp,.rp{background:var(--surface);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;box-shadow:0 20px 50px rgba(0,0,0,.25);}
+.rp{padding:12px;}
+.lp::-webkit-scrollbar,.rp::-webkit-scrollbar{width:5px;}.lp::-webkit-scrollbar-thumb,.rp::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+.sec-t{font-size:.65em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim2);margin-bottom:5px;}
+.sel{font-family:'DM Sans',sans-serif;font-size:.82em;width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);cursor:pointer;outline:none;transition:.2s;}
+.sel:hover{border-color:var(--dim2);}
+
+/* scenario cards */
+.scenario-cards{display:flex;flex-direction:column;gap:6px;}
+.scenario-card{display:flex;align-items:flex-start;gap:10px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r-md);background:var(--surface2);cursor:pointer;transition:.2s var(--ease-out);}
+.scenario-card:hover{border-color:var(--dim2);background:rgba(255,255,255,.04);}
+.scenario-card.active{border-color:var(--accent);background:var(--accent-dim);box-shadow:0 0 0 1px rgba(77,128,255,.25) inset;}
+.scenario-card .sc-icon{font-size:1.15em;line-height:1;margin-top:1px;flex-shrink:0;}
+.scenario-card .sc-title{font-size:.82em;font-weight:700;color:var(--text);}
+.scenario-card .sc-desc{font-size:.7em;color:var(--dim2);margin-top:1px;line-height:1.35;}
+.scenario-card.active .sc-title{color:var(--accent2);}
+
+/* layer arch card */
+.layer-ctrl{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:10px;display:flex;flex-direction:column;gap:2px;}
+.layer-row{display:flex;align-items:center;justify-content:space-between;padding:6px 2px;border-bottom:1px solid var(--border-soft);}
+.layer-row:last-child{border-bottom:none;}
+.layer-label{font-size:.75em;color:var(--dim);font-weight:600;}.layer-label.in{color:var(--accent2);}.layer-label.out{color:var(--gold);}
+.layer-static-val{font-family:'JetBrains Mono',monospace;font-size:.85em;color:var(--text);font-weight:600;}
+.neuron-stepper{display:flex;align-items:center;gap:12px;}
+.ns-btn{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--text);display:flex;align-items:center;justify-content:center;font-size:.95em;cursor:pointer;transition:.18s var(--ease-spring);}
+.ns-btn:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:scale(1.08);}
+.ns-btn:active{transform:scale(.9);}
+.ns-val{font-family:'JetBrains Mono',monospace;font-size:.92em;font-weight:700;min-width:16px;text-align:center;color:var(--text);}
+
+.layer-actions{display:flex;flex-direction:column;gap:6px;margin-top:8px;}
+.layer-action-btn{display:flex;align-items:center;gap:8px;padding:9px 11px;border:1px dashed var(--border);border-radius:var(--r-sm);background:transparent;color:var(--dim);font-size:.76em;font-weight:600;cursor:pointer;transition:.2s var(--ease-out);width:100%;font-family:'DM Sans',sans-serif;}
+.layer-action-btn:hover{border-color:var(--accent);border-style:solid;color:var(--accent2);background:var(--accent-dim);}
+.layer-action-btn.danger:hover{border-color:rgba(239,91,107,.5);color:var(--red);background:rgba(239,91,107,.06);}
+.layer-action-btn svg{flex-shrink:0;}
+
+/* activation pills */
+.pill-row{display:flex;align-items:center;gap:6px;margin-bottom:5px;}
+.pill-row .pr-label{font-size:.72em;color:var(--dim);min-width:44px;font-weight:600;}
+.pill-group{display:flex;flex:1;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:999px;padding:2px;}
+.pill{flex:1;padding:5px 4px;border:none;background:transparent;color:var(--dim2);font-size:.68em;font-weight:700;border-radius:999px;cursor:pointer;transition:.18s var(--ease-out);font-family:'DM Sans',sans-serif;}
+.pill:hover{color:var(--text);}
+.pill.active{background:var(--accent);color:#fff;}
+.input-grid{display:flex;flex-direction:column;gap:6px;}
+.input-row{display:flex;align-items:center;gap:6px;}
+.input-label{font-size:.75em;color:var(--accent2);font-weight:600;min-width:68px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.input-slider{-webkit-appearance:none;flex:1;height:4px;border-radius:2px;background:var(--surface2);outline:none;}
+.input-slider::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 0 3px rgba(77,128,255,.18);transition:.15s var(--ease-spring);}
+.input-slider::-webkit-slider-thumb:hover{transform:scale(1.15);}
+.input-val{font-family:'JetBrains Mono',monospace;font-size:.77em;color:var(--accent2);min-width:36px;text-align:right;}
+.var-toggle{display:flex;align-items:center;gap:7px;padding:7px 9px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);cursor:pointer;transition:.2s var(--ease-out);font-size:.79em;color:var(--dim);}
+.var-toggle:hover{border-color:var(--dim2);}
+.var-toggle.on{border-color:rgba(51,209,122,.4);background:rgba(51,209,122,.06);color:var(--text);}
+.var-toggle .vdot{width:8px;height:8px;border-radius:50%;border:2px solid var(--dim2);flex-shrink:0;transition:.2s;}.var-toggle.on .vdot{background:var(--green);border-color:var(--green);box-shadow:0 0 8px rgba(51,209,122,.5);}
+.var-toggle .vname{flex:1;font-weight:600;}.var-toggle .vdesc{font-size:.88em;color:var(--dim2);}
+
+.bg{display:flex;gap:5px;flex-wrap:wrap;}
+.btn{font-family:'DM Sans',sans-serif;padding:9px 12px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);font-size:.79em;font-weight:600;cursor:pointer;transition:.18s var(--ease-spring);flex:1;text-align:center;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:5px;}
+.btn:hover{border-color:var(--accent);background:var(--accent-dim);transform:translateY(-1px);}
+.btn:active{transform:scale(.96);}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(77,128,255,.28);}.btn.pri:hover{background:#3d6de6;box-shadow:0 8px 22px rgba(77,128,255,.38);}
+.btn.grn{background:linear-gradient(135deg,var(--green),#28b869);border-color:var(--green);color:#06210f;font-size:.86em;padding:11px 14px;font-weight:700;box-shadow:0 8px 22px rgba(51,209,122,.28);}.btn.grn:hover{filter:brightness(1.08);box-shadow:0 10px 26px rgba(51,209,122,.38);}
+.btn.dn{border-color:rgba(239,91,107,.4);color:var(--red);flex:none;padding:9px 11px;}
+.btn:disabled{opacity:.3;pointer-events:none;}
+.icon-sm{width:14px;height:14px;flex-shrink:0;}
+
+.phase-wizard{position:relative;display:flex;justify-content:space-between;padding:6px 4px 4px;margin-bottom:2px;}
+.pw-track{position:absolute;top:15px;left:22px;right:22px;height:2px;background:var(--border);border-radius:2px;z-index:0;}
+.pw-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:2px;transition:width .45s var(--ease-out);}
+.pw-step{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;flex:1;}
+.pw-step.locked{cursor:default;}
+.pw-dot{width:15px;height:15px;border-radius:50%;background:var(--surface-solid);border:2px solid var(--border);transition:.3s var(--ease-spring);display:flex;align-items:center;justify-content:center;}
+.pw-step.active .pw-dot{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 5px var(--accent-dim);transform:scale(1.15);}
+.pw-step.done .pw-dot{border-color:var(--green);background:var(--green);}
+.pw-step.locked .pw-dot{opacity:.35;}
+.pw-label{font-size:.66em;font-weight:600;color:var(--dim2);transition:.25s;white-space:nowrap;}
+.pw-step.active .pw-label{color:var(--accent2);}
+.pw-step.done .pw-label{color:var(--green);}
+.pw-step.locked .pw-label{opacity:.4;}
+.pw-calc{flex:1;text-align:center;font-size:.72em;font-weight:700;color:var(--accent2);padding:6px 0;}
+.hint{font-size:.71em;color:var(--dim2);line-height:1.4;margin-top:4px;}
+
+.center{position:relative;overflow:hidden;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(24,30,54,.5),rgba(7,8,15,.2));border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:0 20px 60px rgba(0,0,0,.3) inset;display:flex;flex-direction:column;}
+.canvas-wrap{position:relative;flex:1 1 auto;min-height:0;}
+.canvas-wrap canvas{width:100%;height:100%;display:block;}
+.untrained-badge{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:.68em;font-weight:700;letter-spacing:.14em;color:rgba(255,255,255,.16);pointer-events:none;text-transform:uppercase;}
+
+.narr{flex:0 0 auto;position:relative;background:linear-gradient(180deg,rgba(14,17,32,.6),rgba(10,12,22,.98) 30%);border-top:1px solid var(--border);padding:16px 22px;font-size:.92em;line-height:1.6;color:var(--dim);z-index:5;min-height:64px;max-height:46vh;overflow-y:auto;}
+.narr .nt{font-weight:700;color:var(--accent2);margin-bottom:4px;font-size:.9em;letter-spacing:.02em;}
+.narr .nf{font-family:'JetBrains Mono',monospace;color:var(--gold);font-size:.86em;margin:4px 0;}
+.narr .nr{color:var(--green);font-weight:700;}.narr .ne{color:var(--text);font-size:.87em;}
+
+/* ── premium calculation card in narr (clickable steps → glass card) ── */
+.calc-card{display:flex;flex-direction:column;gap:9px;}
+.calc-head{display:flex;align-items:center;gap:9px;}
+.ch-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent2);background:rgba(122,162,255,.12);border:1px solid rgba(122,162,255,.25);padding:3px 9px;border-radius:999px;white-space:nowrap;}
+.ch-title{font-family:'Syne',sans-serif;font-size:.95em;font-weight:700;color:var(--text);letter-spacing:-.01em;}
+.calc-steps{display:flex;flex-direction:column;gap:6px;}
+.calc-step{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:9px 12px;border-radius:13px;border:1px solid rgba(255,255,255,.055);background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));cursor:pointer;transition:border-color .22s var(--ease-out),background .22s var(--ease-out),transform .15s var(--ease-spring),box-shadow .22s var(--ease-out);font-family:inherit;color:inherit;}
+.calc-step:hover{border-color:rgba(122,162,255,.4);background:linear-gradient(180deg,rgba(122,162,255,.1),rgba(122,162,255,.02));transform:translateY(-1px);box-shadow:0 8px 20px rgba(77,128,255,.14);}
+.calc-step:active{transform:translateY(0) scale(.985);}
+.cs-num{width:21px;height:21px;border-radius:50%;background:rgba(122,162,255,.15);border:1px solid rgba(122,162,255,.32);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cs-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
+.cs-label{font-size:.68em;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;}
+.cs-formula{font-family:'JetBrains Mono',monospace;font-size:.87em;color:var(--text);white-space:nowrap;overflow-x:auto;scrollbar-width:none;}
+.cs-formula::-webkit-scrollbar{display:none;}
+.cs-formula .fw{color:#5fe0a3;}
+.cs-formula .fx{color:#dfe6fb;}
+.cs-formula .fb{color:#ff8f96;}
+.cs-formula .fr{color:var(--gold);font-weight:700;}
+.cs-chev{color:var(--dim2);flex-shrink:0;transition:transform .2s var(--ease-out),color .2s var(--ease-out);width:14px;height:14px;}
+.calc-step:hover .cs-chev{color:var(--accent2);transform:translateX(2px);}
+.calc-result{font-size:.85em;color:var(--dim);}
+.calc-result strong{color:var(--text);}
+
+.train-msg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(180deg,rgba(24,28,48,.72),rgba(15,18,32,.75));backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 30px;text-align:center;z-index:10;display:none;max-width:420px;width:90%;box-shadow:0 30px 80px rgba(0,0,0,.6);}
+.train-msg.show{display:block;animation:fadeIn .35s var(--ease-spring);}
+.train-msg .tm-icon{width:38px;height:38px;margin:0 auto 10px;color:var(--accent2);}
+.train-msg .tm-icon.ok{color:var(--green);}
+.train-msg .tm-title{font-family:'Syne',sans-serif;font-size:1.08em;font-weight:700;margin-bottom:6px;}
+.train-msg .tm-text{font-size:.83em;color:var(--dim);line-height:1.55;}
+.train-msg .tm-stat{font-family:'JetBrains Mono',monospace;font-size:.85em;color:var(--gold);margin-top:8px;}
+@keyframes fadeIn{from{opacity:0;transform:translate(-50%,-50%) scale(.94);}to{opacity:1;transform:translate(-50%,-50%) scale(1);}}
+
+/* training dashboard grid inside train-msg */
+.tdash{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;text-align:left;}
+.tdash-cell{background:rgba(255,255,255,.03);border:1px solid var(--border-soft);border-radius:var(--r-sm);padding:9px 11px;}
+.tdash-cell .tl{font-size:.62em;text-transform:uppercase;letter-spacing:.07em;color:var(--dim2);margin-bottom:3px;}
+.tdash-cell .tv{font-family:'JetBrains Mono',monospace;font-size:1.05em;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;}
+.tdash-cell.wide{grid-column:1/-1;}
+.tdash-bar{height:5px;border-radius:3px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:6px;}
+.tdash-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;transition:width .15s linear;}
+
+/* ── living training canvas (same animation/glass card as in the bias lab) ── */
+.train-stage{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:14px;}
+.train-canvas-wrap{width:100%;max-width:380px;height:150px;position:relative;border-radius:var(--r-md);overflow:hidden;background:radial-gradient(ellipse 70% 90% at 50% 50%,rgba(20,26,48,.6),rgba(9,11,20,.3));border:1px solid var(--border-soft);}
+.train-canvas-wrap canvas{width:100%;height:100%;display:block;}
+.train-progress-rail{width:100%;max-width:340px;height:5px;border-radius:999px;background:var(--surface2);overflow:hidden;}
+.train-progress-rail i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .2s var(--ease-out);}
+.train-status{min-height:26px;display:flex;flex-direction:column;align-items:center;gap:7px;width:100%;max-width:340px;}
+.train-status-line{font-size:.8em;color:var(--dim);display:flex;align-items:center;gap:9px;opacity:0;transform:translateY(6px);transition:opacity .4s var(--ease-out),transform .4s var(--ease-out);font-weight:500;}
+.train-status-line.show{opacity:1;transform:none;}
+.train-status-line .tsl-dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;box-shadow:0 0 8px var(--accent2);}
+.train-status-line.done .tsl-dot{background:var(--green);box-shadow:0 0 8px var(--green);}
+.train-status-line .tsl-check{color:var(--green);font-weight:700;}
+
+.tooltip{position:fixed;background:var(--surface-solid);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:.78em;color:var(--text);pointer-events:none;z-index:50;display:none;font-family:'JetBrains Mono',monospace;box-shadow:0 4px 16px rgba(0,0,0,.5);}.tooltip.show{display:block;}
+
+.result-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:12px 14px;margin-bottom:8px;transition:.25s var(--ease-out);}
+.result-label{font-size:.63em;color:var(--dim2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;font-weight:600;}
+.result-val{font-family:'JetBrains Mono',monospace;font-size:1.55em;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em;}
+#epochVal{font-size:1.55em;}
+.result-box.hero{padding:16px;background:linear-gradient(160deg,var(--surface2),rgba(77,128,255,.05));}
+.verdict-pill{display:inline-flex;align-items:center;gap:5px;font-size:.6em;padding:3px 8px;border-radius:999px;font-weight:700;letter-spacing:.02em;vertical-align:middle;margin-left:2px;}
+.verdict-pill.ok{background:rgba(51,209,122,.14);color:var(--green);}
+.verdict-pill.bad{background:rgba(239,91,107,.14);color:var(--red);}
+
+.info{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:12px;font-size:.76em;line-height:1.6;color:var(--dim);margin-bottom:6px;}
+.info h3{color:var(--accent2);font-size:.82em;margin-bottom:5px;font-weight:700;display:flex;align-items:center;gap:6px;}.info p{margin-bottom:4px;}.info strong{color:var(--text);}
+.glossary{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+.g-tag{display:inline-flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:.72em;font-weight:600;padding:5px 10px 5px 8px;border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--dim);cursor:pointer;transition:.2s var(--ease-spring);}
+.g-tag:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px);}
+.g-tag:active{transform:scale(.95);}
+.g-tag .g-ico{width:12px;height:12px;flex-shrink:0;opacity:.75;}
+
+/* concept card modal */
+.concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
+.concept-backdrop.show{opacity:1;pointer-events:auto;}
+.concept-card{position:fixed;top:50%;left:50%;z-index:301;width:340px;max-width:88vw;
+  perspective:1000px;
+  transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
+  transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .26s var(--ease-out);}
+.concept-card.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
+.concept-card-inner{position:relative;text-align:center;transform-style:preserve-3d;
+  background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;
+  transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
+  transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);
+  will-change:transform;max-height:86vh;overflow-y:auto;}
+.concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+  padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,206,84,.15) 45%,transparent 65%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::before{opacity:1;}
+.concept-card-inner::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.09),transparent 60%);
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::after{opacity:1;}
+.concept-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);z-index:3;transform:translateZ(30px);}
+.concept-close:hover{border-color:var(--red);color:var(--red);transform:translateZ(30px) rotate(90deg);}
+.concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
+.concept-icon svg{width:28px;height:28px;}
+.concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);}
+.concept-def{font-size:.85em;line-height:1.6;color:var(--dim);margin-bottom:16px;position:relative;z-index:3;transform:translateZ(18px);}
+.concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;}
+.concept-illus{background:rgba(0,0,0,.25);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;transform:translateZ(10px);}
+.concept-illus svg{width:100%;height:auto;max-height:90px;}
+
+.data-modal{position:fixed;inset:0;background:rgba(6,7,14,.8);backdrop-filter:blur(10px);z-index:150;display:none;align-items:center;justify-content:center;}.data-modal.show{display:flex;}
+.data-modal-card{background:var(--surface-solid);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px;width:92%;max-width:620px;max-height:80vh;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.6);}
+.data-modal-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}.data-modal-hd h3{font-size:.98em;color:var(--accent2);display:flex;align-items:center;gap:7px;}
+.data-modal-close{background:none;border:1px solid var(--border);border-radius:999px;color:var(--dim);font-size:.8em;padding:5px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.2s;}.data-modal-close:hover{border-color:var(--red);color:var(--red);}
+.data-modal-info{font-size:.78em;color:var(--dim);margin-bottom:9px;line-height:1.5;}
+.data-modal-scroll{flex:1;overflow-y:auto;border:1px solid var(--border);border-radius:var(--r-sm);}.data-modal-scroll::-webkit-scrollbar{width:4px;}.data-modal-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.dtable-lg{width:100%;border-collapse:collapse;font-size:.75em;}.dtable-lg th{position:sticky;top:0;background:var(--surface-solid);padding:6px 8px;text-align:left;color:var(--dim);font-weight:600;border-bottom:1px solid var(--border);white-space:nowrap;}.dtable-lg td{padding:5px 8px;border-bottom:1px solid rgba(255,255,255,.03);font-family:'JetBrains Mono',monospace;font-size:.92em;}.dtable-lg .pass{color:var(--green);font-weight:600;}.dtable-lg .fail{color:var(--red);font-weight:600;}
+
+@media(max-width:1000px){
+  body{height:auto;overflow:auto;}
+  .app{grid-template-columns:1fr;height:auto;padding:8px;gap:8px;}
+  .lp,.rp{padding:11px;}
+  .lp{border-right:none;}
+  .center{min-height:520px;}
+  .canvas-wrap{flex:1 1 300px;min-height:280px;}
+  .narr{position:static;flex:0 0 auto;max-height:240px;overflow-y:auto;border-top:1px solid var(--border);border-radius:0 0 var(--r-lg) var(--r-lg);backdrop-filter:none;background:rgba(10,12,22,.97);}
+  .train-msg{max-width:90%;padding:20px 20px;}
+  .rp{max-height:none;}
+  .back-link{position:static;transform:none;margin-bottom:4px;}
+  .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}
+  .hd-title-row{flex-wrap:wrap;}
+}
+@media (prefers-reduced-motion:reduce){.bg-mesh::before{animation:none;}*{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body>
+<div class="bg-mesh"></div><div class="bg-grid"></div><div class="bg-noise"></div>
+
+<div class="intro" id="intro">
+  <div class="intro-card">
+    <svg class="intro-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg>
+    <h2><span>Neural Network Lab</span></h2>
+    <p class="sub">A neural network learns to make predictions by training on data. Here you'll see the whole process step by step.</p>
+    <div class="intro-steps">
+      <div class="intro-step"><div class="intro-num">01</div><div class="intro-step-text"><strong>Train the network</strong> – The network starts with random weights. By training on hundreds of examples, it learns which connections matter.</div></div>
+      <div class="intro-step"><div class="intro-num">02</div><div class="intro-step-text"><strong>Explore the calculations</strong> – Step through the network neuron by neuron. See how each neuron multiplies, sums, and activates.</div></div>
+      <div class="intro-step"><div class="intro-num">03</div><div class="intro-step-text"><strong>Make your own predictions</strong> – Change the input values and see if the network answers correctly.</div></div>
+    </div>
+    <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Start the simulation <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <p class="intro-tip">You start in <strong>🧮 Calculation mode</strong>, where every neuron works with simple whole numbers. Once you understand how a neuron works, switch to one of the scenarios and let the network train itself.</p>
+  </div>
+</div>
+
+<div class="hd">
+  <a class="back-link" href="/"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> AI-aktiviteter</a>
+  <div class="hd-title-row">
+    <svg class="hd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg>
+    <h1><span>Neural Network Lab</span></h1>
+  </div>
+  <p>Follow the calculations step by step, train on data, and make predictions.</p>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/neuralt-natverk"><span class="flag">🇸🇪</span> Svenska</a>
+</div>
+<div class="app">
+  <div class="lp">
+    <div class="phase-wizard" id="phaseBar"></div>
+    <div><div class="sec-t">Scenario</div>
+      <div class="scenario-cards" id="scenarioCards"></div>
+    </div>
+    <div id="archSection"><div><div class="sec-t">Architecture</div><div class="layer-ctrl" id="layerCtrl"></div><div class="layer-actions"><button class="layer-action-btn" onclick="addLayer()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg> Add hidden layer</button><button class="layer-action-btn danger" onclick="removeLayer()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14"/></svg> Remove layer</button></div></div></div>
+    <div id="varSection"><div class="sec-t">Input variables</div><div class="var-list" id="varList"></div></div>
+    <div id="inputSection" style="display:none;"><div><div class="sec-t">Input values</div><div class="input-grid" id="inputGrid"></div></div></div>
+    <div id="actSection"><div class="sec-t">Activation</div><div id="actContent"></div></div>
+    <div id="controlArea"></div>
+  </div>
+  <div class="center"><div class="canvas-wrap" id="canvasWrap"><canvas id="cv"></canvas><div class="untrained-badge" id="untrainedBadge" style="display:none">UNTRAINED NETWORK</div><div class="train-msg" id="trainMsg"></div></div><div class="narr" id="narr"><div class="ne">Press <strong>Train the model</strong> to begin.</div></div></div>
+  <div class="rp">
+    <div id="resultBoxes">
+      <div class="result-box pred-only hero" style="display:none"><div class="result-label">Correct answer (from data)</div><div class="result-val" id="targetVal" style="color:var(--gold)">–</div></div>
+      <div class="result-box pred-only hero" style="display:none"><div class="result-label">Network's prediction</div><div class="result-val" id="outputVal" style="color:var(--accent2)">–</div><div id="verdictVal"></div></div>
+      <div class="result-box"><div class="result-label">Training epochs</div><div class="result-val" id="epochVal" style="color:var(--dim)">0</div></div>
+      <div class="result-box" id="lossBox" style="display:none"><div class="result-label">Loss during training</div><div class="result-val" id="lossVal" style="color:var(--green);font-size:1em">–</div><canvas id="lossSpark" style="width:100%;height:40px;margin-top:8px;display:block;"></canvas><div style="font-size:.62em;color:var(--dim2);margin-top:4px;display:flex;justify-content:space-between;"><span>Epoch 1</span><span id="lossSparkEnd">Latest</span></div></div>
+    </div>
+    <div class="info">
+      <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15Z"/></svg> Concepts – click for an explanation</h3>
+      <div class="glossary">
+        <span class="g-tag" onclick="openConcept('gInput',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h11m0 0-4-4m4 4-4 4"/><rect x="16" y="5" width="5" height="14" rx="1"/></svg>Input</span>
+        <span class="g-tag" onclick="openConcept('gNeuron',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>Neuron</span>
+        <span class="g-tag" onclick="openConcept('gWeight',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="12" r="2.5"/><path d="M7.5 12h9" stroke-width="3"/></svg>Weight</span>
+        <span class="g-tag" onclick="openConcept('gBias',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="5"/><path d="M17 17l4 4M14 3v4M12 5h4" stroke-linecap="round"/></svg>Bias (+b)</span>
+        <span class="g-tag" onclick="openConcept('gAct',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg>Activation</span>
+        <span class="g-tag" onclick="openConcept('gActFn',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18c4 0 5-12 9-12s5 12 9 12"/></svg>Activation function</span>
+        <span class="g-tag" onclick="openConcept('gHidden',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="2" width="4" height="20" rx="1"/><rect x="17" y="6" width="4" height="12" rx="1"/></svg>Hidden layer</span>
+        <span class="g-tag" onclick="openConcept('gOutput',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="12" r="4"/><path d="M14 12h7m-3-3 3 3-3 3" stroke-linecap="round" stroke-linejoin="round"/></svg>Output</span>
+        <span class="g-tag" onclick="openConcept('gLoss',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l6 6 4-4 8 8"/><path d="M15 15h6v-6"/></svg>Loss</span>
+        <span class="g-tag" onclick="openConcept('gForward',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h6m4 0h6M8 8l-4 4 4 4m8-8 4 4-4 4"/></svg>Forward pass</span>
+        <span class="g-tag" onclick="openConcept('gEpoch',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 21v-5h5"/></svg>Epoch</span>
+        <span class="g-tag" onclick="openConcept('gPred',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>Prediction</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tooltip" id="tooltip"></div>
+<div class="data-modal" id="dataModal"><div class="data-modal-card"><div class="data-modal-hd"><h3><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 16l4-6 3 3 5-7"/></svg> Training data</h3><button class="data-modal-close" onclick="closeDataModal()">✕ Close</button></div><div class="data-modal-info">The first columns show real-world values, followed by the normalized (0–1) values the network sees.</div><div class="data-modal-scroll" id="dataModalContent"></div></div></div>
+
+<div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
+<div class="concept-card" id="conceptCard">
+  <div class="concept-card-inner" id="conceptCardInner">
+    <button class="concept-close" onclick="closeConcept()">✕</button>
+    <div class="concept-icon" id="conceptIcon"></div>
+    <div class="concept-title" id="conceptTitle"></div>
+    <div class="concept-def" id="conceptDef"></div>
+    <div class="concept-illus" id="conceptIllus"></div>
+  </div>
+</div>
+<script>
+const ICON_BRAIN='<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="vertical-align:-2px"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg>';
+const ICON_TARGET='<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="vertical-align:-2px"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>';
+const ICON_SEARCH='<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="vertical-align:-2px"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>';
+const ICON_CHECK='<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>';
+const ICON_CHART='<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="vertical-align:-2px"><path d="M3 3v18h18M7 16l4-6 3 3 5-7"/></svg>';
+const ICON_SUM='<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M18 4H6l6.5 8L6 20h12"/></svg>';
+const ICON_ACT='<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" style="vertical-align:-2px"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg>';
+const CALCVARS=[{key:'a',name:'Input A',desc:'',unit:'',min:0,max:10,def:70,weight:0,isCalc:true},{key:'b',name:'Input B',desc:'',unit:'',min:0,max:10,def:40,weight:0,isCalc:true}];
+const ALLVARS=[{key:'study',name:'Study hours',desc:'before the exam',unit:'h',min:0,max:20,def:65,weight:0.40,realStep:0.5},{key:'attend',name:'Attendance',desc:'of classes',unit:'%',min:0,max:100,def:80,weight:0.42,realStep:5},{key:'sleep',name:'Sleep',desc:'the night before',unit:'h',min:0,max:10,def:60,weight:0.12,realStep:0.5},{key:'food',name:'Breakfast',desc:'on exam day',unit:'kcal',min:0,max:800,def:50,weight:0.06,realStep:50}];
+const GYMVARS=[{key:'sleep',name:'Sleep',desc:'last night',unit:'h',min:0,max:12,def:60,weight:0,optimal:0.6,realStep:0.5},{key:'meal',name:'Since meal',desc:'hours ago',unit:'h',min:0,max:6,def:40,weight:0,optimal:0.35,realStep:0.5},{key:'stress',name:'Stress level',desc:'1–10',unit:'',min:1,max:10,def:30,weight:0,optimal:0.2,realStep:1},{key:'recovery',name:'Recovery',desc:'hours since workout',unit:'h',min:0,max:72,def:50,weight:0,optimal:0.42,realStep:1}];
+const ABSVARS=[{key:'x1',name:'x₁',desc:'',unit:'',min:0,max:1,def:50,weight:0.5},{key:'x2',name:'x₂',desc:'',unit:'',min:0,max:1,def:30,weight:0.3},{key:'x3',name:'x₃',desc:'',unit:'',min:0,max:1,def:70,weight:0.15},{key:'x4',name:'x₄',desc:'',unit:'',min:0,max:1,def:20,weight:0.05}];
+const SCENARIOS=[{key:'calc',icon:'🧮',title:'Calculation mode',desc:'Practice the math behind neural networks'},{key:'exam',icon:'📝',title:'Will the student pass?',desc:'Train a model on fictional but realistic student data'},{key:'gym',icon:'💪',title:'Will the workout be effective?',desc:'Train and explore a model where the relationships aren\'t fully linear'},{key:'abstract',icon:'🔬',title:'Experiment mode',desc:'Build and test freely'}];
+function renderScenarioCards(){const el=document.getElementById('scenarioCards');el.innerHTML=SCENARIOS.map(s=>`<div class="scenario-card ${curSc===s.key?'active':''}" onclick="setScenario('${s.key}')"><span class="sc-icon">${s.icon}</span><div><div class="sc-title">${s.title}</div>${s.desc?`<div class="sc-desc">${s.desc}</div>`:''}</div></div>`).join('');}
+let curSc='calc',varEnabled=[true,true],layers=[2,3,1],W=[],B=[],vals=[];
+let stepQueue=[],stepIdx=0,hlNeuron=null,hlEdges=[],phase='explore',trained=false,epoch=0,trainTimer=null;
+let stepHist=[],savedTrainData=null,wDeltas=null,isTraining=false,hiddenRelu=false,layerActs=[],lossHistory=[],seenGuides=new Set();
+let totalWeightUpdates=0,pulseAnim=null,pulseStart=0;
+function isCalc(){return curSc==='calc';}
+function curVars(){if(curSc==='calc')return CALCVARS;if(curSc==='exam')return ALLVARS;if(curSc==='gym')return GYMVARS;return ABSVARS;}
+function activeVars(){if(curSc==='gym')return GYMVARS;return curVars().filter((_,i)=>varEnabled[i]);}
+function getIV(){const v=[];const av=activeVars();for(let i=0;i<layers[0];i++){const e=document.getElementById('inp'+i);if(isCalc()){v.push(e?Math.round(parseFloat(e.value)/10):0);}else{const raw=e?parseFloat(e.value)/100:0;v.push(snapNorm(raw,av[i]));}}return v;}
+function getActFnForLayer(li){if(isCalc())return'relu';const isOut=li===layers.length-1;if(curSc==='exam'||curSc==='gym'){return(hiddenRelu&&!isOut)?'relu':'sigmoid';}if(layerActs[li])return layerActs[li];return'sigmoid';}
+function act_(x,li){const f=getActFnForLayer(li||1);if(f==='relu')return Math.max(0,x);if(f==='sigmoid')return 1/(1+Math.exp(-Math.max(-500,Math.min(500,x))));if(f==='tanh')return Math.tanh(x);return x;}
+function actDeriv(y,li){const f=getActFnForLayer(li||1);if(f==='relu')return y>0?1:0.01;if(f==='sigmoid')return y*(1-y);if(f==='tanh')return 1-y*y;return 1;}
+function actNForLayer(li){return{relu:'ReLU',sigmoid:'σ',tanh:'tanh'}[getActFnForLayer(li)]||'';}
+function actExplain(fn,x,y){if(fn==='σ')return`The value ${x.toFixed(3)} is fed into sigmoid: σ(${x.toFixed(3)}) = 1/(1+e^(${(-x).toFixed(2)})) = ${y.toFixed(3)}`;if(fn==='ReLU')return`ReLU: max(0, ${x.toFixed(3)}) = ${y.toFixed(3)}`;if(fn==='tanh')return`tanh(${x.toFixed(3)}) = ${y.toFixed(3)}`;return'';}
+function denorm(v,vo){return vo.min+v*(vo.max-vo.min);}
+function fmtReal(v,vo){if(vo.isCalc){return String(Math.round(denorm(v,vo)));}if(!vo.unit)return(vo.max<=10?(denorm(v,vo)).toFixed(1):v.toFixed(2));const r=denorm(v,vo);const isFractional=vo.realStep&&vo.realStep<1;if(isFractional)return`${r.toFixed(1)} ${vo.unit}`;return`${Math.round(r)}${vo.unit==='%'?'%':' '+vo.unit}`;}
+function gymVarScore(key,norm){if(key==='sleep'){if(norm<0.21)return 0;if(norm<0.33)return 0.05;if(norm<0.42)return 0.2;if(norm<0.5)return 0.55;if(norm<=0.67)return 1.0;if(norm<=0.75)return 0.5;if(norm<=0.83)return 0.15;return 0;}if(key==='meal'){if(norm<0.08)return 0.1;if(norm<0.17)return 0.5;if(norm<=0.5)return 1.0;if(norm<=0.67)return 0.8;if(norm<=0.83)return 0.5;return 0.2;}if(key==='stress'){if(norm<=0.11)return 1.0;if(norm<=0.33)return 0.9;if(norm<=0.56)return 0.7;if(norm<=0.78)return 0.4;return 0.1;}if(key==='recovery'){if(norm<0.08)return 0;if(norm<0.2)return 0;if(norm<0.3)return 0.4;if(norm<=0.6)return 1.0;if(norm<=0.8)return 0.85;return 0.7;}return 0.5;}
+function gymScore(vs){const av=activeVars();let total=0,worst=1;for(let i=0;i<vs.length;i++){const s=gymVarScore(av[i].key,vs[i]);total+=s;if(s<worst)worst=s;}return(total/vs.length)*0.5+worst*0.5;}
+function examScore(vs){const av=activeVars();let s=0,tw=0;for(let i=0;i<vs.length;i++){s+=vs[i]*av[i].weight;tw+=av[i].weight;}let score=s/tw;if(curSc==='exam'){const sIdx=av.findIndex(v=>v.key==='sleep');if(sIdx>=0&&vs[sIdx]<0.5){score-=(0.5-vs[sIdx])*1.5;}const aIdx=av.findIndex(v=>v.key==='attend');if(aIdx>=0&&vs[aIdx]<0.75){score-=(0.75-vs[aIdx])*1.0;}}return score;}
+function targetFn(vs){if(isCalc())return 0;if(curSc==='gym')return gymScore(vs)>0.52?1:0;return examScore(vs)>0.48?1:0;}
+function targetFnNoisy(vs){if(isCalc())return 0;if(curSc==='gym')return gymScore(vs)>0.52?1:0;const noise=(Math.random()-0.5)*0.08;return(examScore(vs)+noise)>0.48?1:0;}
+function targetLabel(vs){if(isCalc())return '–';return targetFn(vs)===1?'Yes':'No';}
+function initCalcWeights(){W=[[[2,1],[1,-2],[1,-1]],[[2,-1,1]]];B=[[0,0,0],[-1]];}
+function initW(){if(isCalc()){initCalcWeights();return;}W=[];B=[];for(let l=1;l<layers.length;l++){const w=[],b=[];for(let j=0;j<layers[l];j++){const r=[];for(let i=0;i<layers[l-1];i++)r.push(Math.round((Math.random()*2-1)*100)/100);w.push(r);b.push(Math.round((Math.random()*0.4-0.2)*100)/100);}W.push(w);B.push(b);}wDeltas=[];for(let l=0;l<W.length;l++){const d=[];for(let j=0;j<W[l].length;j++){const r=[];for(let i=0;i<W[l][j].length;i++)r.push(0);d.push(r);}wDeltas.push(d);}}
+function initV(){vals=[];for(let l=0;l<layers.length;l++){const lv=[];for(let j=0;j<layers[l];j++)lv.push({raw:null,act:null,computed:false});vals.push(lv);}const inp=getIV();for(let i=0;i<layers[0];i++)vals[0][i]={raw:inp[i],act:inp[i],computed:true};stepQueue=[];for(let l=1;l<layers.length;l++)for(let j=0;j<layers[l];j++)stepQueue.push({l,j});stepIdx=0;hlNeuron=null;hlEdges=[];stepHist=[];}
+function snapVals(){return JSON.parse(JSON.stringify(vals));}
+function forwardFull(){const inp=getIV();for(let i=0;i<layers[0];i++)vals[0][i]={raw:inp[i],act:inp[i],computed:true};for(let l=1;l<layers.length;l++)for(let j=0;j<layers[l];j++){let s=B[l-1][j];for(let i=0;i<layers[l-1];i++)s+=W[l-1][j][i]*vals[l-1][i].act;vals[l][j]={raw:s,act:act_(s,l),computed:true};}stepIdx=stepQueue.length;}
+function genData(n){const av=activeVars(),nI=av.length,xs=[],ys=[];if(curSc==='gym'||curSc==='exam'){let ja=0,nej=0,t=Math.floor(n/2),guard=0;while((ja<t||nej<t)&&guard<n*20){guard++;const x=[];for(let j=0;j<nI;j++)x.push(Math.round(Math.random()*100)/100);const y=targetFnNoisy(x);if(y===1&&ja<t){xs.push(x);ys.push(y);ja++;}else if(y===0&&nej<t){xs.push(x);ys.push(y);nej++;}}}else{for(let i=0;i<n;i++){const x=[];for(let j=0;j<nI;j++)x.push(Math.round(Math.random()*100)/100);xs.push(x);ys.push(targetFnNoisy(x));}}return{xs,ys};}
+function trainBatch(){const bSz=curSc==='gym'?100:30;const d=genData(bSz);const lr=curSc==='gym'?0.15:0.8;let tl=0;if(!savedTrainData)savedTrainData=genData(200);for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++)for(let i=0;i<W[l][j].length;i++)wDeltas[l][j][i]=0;for(let s=0;s<d.xs.length;s++){const a=[d.xs[s].slice()];let c=d.xs[s].slice();for(let l=0;l<W.length;l++){const nx=[];for(let j=0;j<W[l].length;j++){let sm=B[l][j];for(let i=0;i<c.length;i++)sm+=W[l][j][i]*c[i];nx.push(act_(sm,l+1));}c=nx;a.push(nx);}const o=a[a.length-1][0],t=d.ys[s],e=o-t;tl+=e*e;const dl=[];for(let l=0;l<W.length;l++)dl.push(new Array(W[l].length).fill(0));dl[W.length-1][0]=e*actDeriv(o,layers.length-1);for(let l=W.length-2;l>=0;l--)for(let j=0;j<W[l].length;j++){let sm=0;for(let k=0;k<W[l+1].length;k++)sm+=dl[l+1][k]*W[l+1][k][j];dl[l][j]=sm*actDeriv(a[l+1][j],l+1);}for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++){for(let i=0;i<W[l][j].length;i++){const delta=-lr*dl[l][j]*a[l][i];W[l][j][i]+=delta;wDeltas[l][j][i]+=delta;totalWeightUpdates++;}B[l][j]-=lr*dl[l][j];}}return tl/d.xs.length;}
+/* ── living training canvas (same animation as in the bias lab) ── */
+let trainAnimRAF=null,trainAnimParticles=[],trainStatusLines=[];
+const TRAIN_STATUS=[{t:'Reading the dataset…',at:0},{t:'Learning patterns…',at:0.28},{t:'Identifying relationships…',at:0.55},{t:'Optimizing the model…',at:0.8}];
+function stopTrainAnim(){if(trainAnimRAF)cancelAnimationFrame(trainAnimRAF);trainAnimRAF=null;trainAnimParticles=[];}
+function startTrainAnim(){
+  const canvas=document.getElementById('trainAnimCanvas');if(!canvas)return;
+  const wrap=canvas.parentElement;const dpr=Math.min(2,window.devicePixelRatio||1);
+  let W=wrap.clientWidth,H=wrap.clientHeight;if(W<10||H<10){W=Math.max(W,380);H=Math.max(H,150);}
+  canvas.width=W*dpr;canvas.height=H*dpr;const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);
+  const inX=W*0.16,hidX=W*0.5,outX=W*0.84;
+  const inY=[H*0.3,H*0.5,H*0.7],hidY=[H*0.38,H*0.62],outY=[H*0.5];
+  trainAnimParticles=[];let lastSpawn=0;
+  function spawn(now){trainAnimParticles.push({born:now,targetIn:Math.floor(Math.random()*3),targetHid:Math.floor(Math.random()*2),outcome:null,speed:0.55+Math.random()*0.35});}
+  function draw(now){
+    if(!document.getElementById('trainAnimCanvas')){trainAnimRAF=null;return;}
+    ctx.clearRect(0,0,W,H);
+    ctx.lineWidth=1.4;
+    for(let i=0;i<3;i++)for(let j=0;j<2;j++){ctx.strokeStyle='rgba(122,162,255,0.10)';ctx.beginPath();ctx.moveTo(inX,inY[i]);ctx.lineTo(hidX,hidY[j]);ctx.stroke();}
+    for(let j=0;j<2;j++){ctx.strokeStyle='rgba(122,162,255,0.10)';ctx.beginPath();ctx.moveTo(hidX,hidY[j]);ctx.lineTo(outX,outY[0]);ctx.stroke();}
+    function node(x,y,rad,glow){ctx.save();ctx.shadowColor='rgba(122,162,255,'+glow+')';ctx.shadowBlur=14*glow;ctx.fillStyle='rgba(20,26,48,0.95)';ctx.strokeStyle='rgba(122,162,255,0.5)';ctx.lineWidth=1.6;ctx.beginPath();ctx.arc(x,y,rad,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.restore();}
+    const pulse=0.4+0.3*Math.sin(now/300);
+    inY.forEach(y=>node(inX,y,9,pulse));hidY.forEach(y=>node(hidX,y,11,pulse));node(outX,outY[0],13,0.6+0.4*Math.sin(now/240));
+    if(now-lastSpawn>120){spawn(now);lastSpawn=now;}
+    trainAnimParticles=trainAnimParticles.filter(p=>{
+      const age=(now-p.born)*0.001*p.speed;let px,py,col='#7aa2ff';
+      if(age<1){const t=age,sx=inX,sy=inY[p.targetIn],ex=hidX,ey=hidY[p.targetHid];px=sx+(ex-sx)*t;py=sy+(ey-sy)*t;}
+      else if(age<2){const t=age-1,sx=hidX,sy=hidY[p.targetHid],ex=outX,ey=outY[0];px=sx+(ex-sx)*t;py=sy+(ey-sy)*t;}
+      else if(age<3){const t=age-2;if(p.outcome===null)p.outcome=Math.random()<0.62;const sx=outX,sy=outY[0],ex=W-14,ey=p.outcome?H*0.3:H*0.72;px=sx+(ex-sx)*t;py=sy+(ey-sy)*t;col=p.outcome?'#33d17a':'#ef5b6b';}
+      else return false;
+      ctx.save();ctx.shadowColor=col;ctx.shadowBlur=8;ctx.fillStyle=col;ctx.beginPath();ctx.arc(px,py,age>=2?4.5:3.5,0,Math.PI*2);ctx.fill();ctx.restore();
+      return true;
+    });
+    ctx.font='600 11px "DM Sans"';ctx.textAlign='center';
+    ctx.fillStyle='rgba(51,209,122,0.5)';ctx.fillText('✓',W-14,H*0.3-10);
+    ctx.fillStyle='rgba(239,91,107,0.5)';ctx.fillText('✕',W-14,H*0.72+16);
+    trainAnimRAF=requestAnimationFrame(draw);
+  }
+  trainAnimRAF=requestAnimationFrame(draw);
+}
+function setupTrainStatus(){
+  const wrap=document.getElementById('trainAnimStatus');if(!wrap)return;
+  wrap.innerHTML='';
+  trainStatusLines=TRAIN_STATUS.map(s=>{const el=document.createElement('div');el.className='train-status-line';el.innerHTML=`<span class="tsl-dot"></span><span>${s.t}</span>`;wrap.appendChild(el);return el;});
+}
+function updateTrainStatus(frac){
+  if(!trainStatusLines.length)return;
+  TRAIN_STATUS.forEach((s,i)=>{
+    if(frac>=s.at){
+      if(!trainStatusLines[i].classList.contains('show'))trainStatusLines[i].classList.add('show');
+      if(i>0&&!trainStatusLines[i-1].classList.contains('done')){
+        trainStatusLines[i-1].classList.add('done');
+        trainStatusLines[i-1].querySelector('span:last-child').innerHTML=TRAIN_STATUS[i-1].t.replace('…','')+' <span class="tsl-check">✓</span>';
+      }
+    }
+  });
+  if(frac>=1){
+    const last=trainStatusLines[trainStatusLines.length-1];
+    last.classList.add('done');
+    last.querySelector('span:last-child').innerHTML=TRAIN_STATUS[TRAIN_STATUS.length-1].t.replace('…','')+' <span class="tsl-check">✓</span>';
+  }
+}
+function startTraining(){if(trainTimer||isCalc())return;if(trained&&!confirm('Do you want to restart training? The model and loss curve will be lost.'))return;epoch=0;trained=false;savedTrainData=null;isTraining=true;lossHistory=[];totalWeightUpdates=0;document.getElementById('lossBox').style.display='none';initW();const tn=layers.reduce((a,b)=>a+b,0),maxE=curSc==='gym'?500:Math.max(40,Math.min(120,tn*12));const msg=document.getElementById('trainMsg');
+  stopTrainAnim();
+  const dashboard=()=>`<div class="tdash"><div class="tdash-cell"><div class="tl">Epoch</div><div class="tv" id="tStatEpoch">0 / ${maxE}</div></div><div class="tdash-cell"><div class="tl">Loss</div><div class="tv" id="tStatLoss" style="color:var(--green)">–</div></div><div class="tdash-cell wide"><div class="tl">Weights updated</div><div class="tv" id="tStatWeights" style="font-size:.95em;color:var(--accent2)">0</div></div></div>`;
+  msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg><div class="tm-title">Training the network …</div><div class="tm-text">The model is fed hundreds of examples and adjusts the weights step by step.</div><div class="train-stage"><div class="train-canvas-wrap"><canvas id="trainAnimCanvas"></canvas></div><div class="train-progress-rail"><i id="trainAnimRail"></i></div><div class="train-status" id="trainAnimStatus"></div></div>${dashboard()}`;
+  msg.classList.add('show');
+  setupTrainStatus();
+  requestAnimationFrame(()=>requestAnimationFrame(startTrainAnim));
+  trainTimer=setInterval(()=>{const loss=trainBatch();epoch++;lossHistory.push(loss);
+    const frac=Math.min(1,epoch/maxE);
+    const eEl=document.getElementById('tStatEpoch');if(eEl)eEl.textContent=`${epoch} / ${maxE}`;
+    const lEl=document.getElementById('tStatLoss');if(lEl)lEl.textContent=loss.toFixed(4);
+    const rEl=document.getElementById('trainAnimRail');if(rEl)rEl.style.width=(frac*100)+'%';
+    updateTrainStatus(frac);
+    const wEl=document.getElementById('tStatWeights');if(wEl)wEl.textContent=totalWeightUpdates.toLocaleString('en-US');
+    document.getElementById('epochVal').textContent=epoch;initV();forwardFull();drawNet();
+    if(epoch>=maxE||loss<(curSc==='gym'?0.03:0.005)){clearInterval(trainTimer);trainTimer=null;trained=true;isTraining=false;stopTrainAnim();document.getElementById('lossVal').textContent=loss.toFixed(4);document.getElementById('lossSparkEnd').textContent=`Epoch ${epoch}`;document.getElementById('lossBox').style.display='block';drawLossSpark();msg.innerHTML=`<svg class="tm-icon ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><div class="tm-title">Training complete!</div><div class="tm-text">The network went through <strong>${epoch} epochs</strong> and learned the weights from ${epoch*(curSc==="gym"?60:30)} examples.</div><div class="tdash"><div class="tdash-cell"><div class="tl">Loss</div><div class="tv" style="color:var(--green)">${loss.toFixed(4)}</div></div><div class="tdash-cell"><div class="tl">Weights updated</div><div class="tv" style="color:var(--accent2)">${totalWeightUpdates.toLocaleString('en-US')}</div></div></div><div style="margin-top:14px;display:flex;flex-direction:column;gap:7px"><button class="btn pri" onclick="goDirectToPredict()" style="flex:none;padding:11px 20px">${ICON_TARGET} Predict →</button><button class="btn" onclick="finishTraining()" style="flex:none;padding:9px 16px">${ICON_SEARCH} Explore network</button><button class="btn" onclick="openDataModal()" style="flex:none;padding:9px 16px">${ICON_CHART} View training data (${savedTrainData.xs.length} ex)</button></div>`;}},curSc==='gym'?25:80);}
+function goDirectToPredict(){document.getElementById('trainMsg').classList.remove('show');goPhase('predict');}
+function finishTraining(){document.getElementById('trainMsg').classList.remove('show');goPhase('explore');resetPass();if(seenGuides.has('explore'))return;seenGuides.add('explore');const msg=document.getElementById('trainMsg');msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><div class="tm-title">Explore the network</div><div class="tm-text">Press <strong>▶ Next</strong> to calculate one neuron at a time.<br><br>Click one of the <strong>calculation steps</strong> below the network for a more detailed explanation in words.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Got it →</button></div>`;msg.classList.add('show');}
+function showPredictGuide(){if(seenGuides.has('predict'))return;seenGuides.add('predict');const msg=document.getElementById('trainMsg');msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg><div class="tm-title">Make your own predictions</div><div class="tm-text">Drag the sliders to change the input values. The network's answer updates instantly.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Got it →</button></div>`;msg.classList.add('show');}
+function openDataModal(){if(!savedTrainData)return;const av=activeVars();const hasUnits=av.some(v=>v.unit);let h='<table class="dtable-lg"><thead><tr>';if(hasUnits)for(const v of av)h+=`<th>${v.name}${v.unit?'<br><span style="font-weight:400;opacity:0.6">('+v.unit+')</span>':''}</th>`;for(const v of av)h+=`<th>${v.name}<br><span style="font-weight:400;opacity:0.6">(0–1)</span></th>`;h+=`<th>Result</th></tr></thead><tbody>`;for(let r=0;r<savedTrainData.xs.length;r++){h+='<tr>';if(hasUnits)for(let i=0;i<savedTrainData.xs[r].length;i++){const n=savedTrainData.xs[r][i];h+=`<td style="color:var(--text)">${fmtReal(n,av[i])}</td>`;}for(let i=0;i<savedTrainData.xs[r].length;i++)h+=`<td>${savedTrainData.xs[r][i].toFixed(2)}</td>`;h+=`<td class="${savedTrainData.ys[r]===1?'pass':'fail'}">${savedTrainData.ys[r]===1?'Yes':'No'}</td></tr>`;}h+='</tbody></table>';document.getElementById('dataModalContent').innerHTML=h;document.getElementById('dataModal').classList.add('show');}
+function closeDataModal(){document.getElementById('dataModal').classList.remove('show');}
+function drawLossSpark(){const cv=document.getElementById('lossSpark');if(!cv||!lossHistory.length)return;const dpr=devicePixelRatio||1;const w=cv.clientWidth||220,h=cv.clientHeight||40;cv.width=w*dpr;cv.height=h*dpr;const ctx=cv.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);const max=Math.max(...lossHistory),min=Math.min(...lossHistory);const range=Math.max(max-min,1e-9);const n=lossHistory.length;ctx.strokeStyle='rgba(180,195,220,0.12)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,h-0.5);ctx.lineTo(w,h-0.5);ctx.stroke();const grad=ctx.createLinearGradient(0,0,0,h);grad.addColorStop(0,'rgba(51,209,122,0.28)');grad.addColorStop(1,'rgba(51,209,122,0.02)');ctx.beginPath();ctx.fillStyle=grad;ctx.moveTo(0,h);for(let i=0;i<n;i++){const x=n>1?(i/(n-1))*w:w/2;const y=h-((lossHistory[i]-min)/range)*(h-4)-2;ctx.lineTo(x,y);}ctx.lineTo(w,h);ctx.closePath();ctx.fill();ctx.beginPath();ctx.strokeStyle='rgba(51,209,122,0.95)';ctx.lineWidth=1.8;ctx.lineJoin='round';for(let i=0;i<n;i++){const x=n>1?(i/(n-1))*w:w/2;const y=h-((lossHistory[i]-min)/range)*(h-4)-2;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.stroke();const lastX=n>1?w:w/2,lastY=h-((lossHistory[n-1]-min)/range)*(h-4)-2;ctx.beginPath();ctx.fillStyle='rgba(51,209,122,1)';ctx.arc(lastX-1,lastY,2.8,0,Math.PI*2);ctx.fill();}
+function renderPhaseBar(){const el=document.getElementById('phaseBar');if(isCalc()){el.innerHTML='<div class="pw-calc">🧮 Calculation mode</div>';return;}
+  const steps=[{k:'train',lbl:'Train'},{k:'explore',lbl:'Explore'},{k:'predict',lbl:'Predict'}];
+  const order={train:0,explore:1,predict:2};const curIdx=order[phase];
+  const fillPct=curIdx===0?0:curIdx===1?50:100;
+  let h=`<div class="pw-track"><div class="pw-fill" style="width:${fillPct}%"></div></div>`;
+  for(const s of steps){const idx=order[s.k];const isActive=phase===s.k;const isDone=(s.k==='train'&&trained)||(s.k==='explore'&&idx<curIdx);const isLocked=s.k!=='train'&&!trained;
+    h+=`<div class="pw-step ${isActive?'active':''} ${isDone&&!isActive?'done':''} ${isLocked?'locked':''}" onclick="goPhase('${s.k}')"><div class="pw-dot"></div><div class="pw-label">${s.lbl}</div></div>`;}
+  el.innerHTML=h;}
+function goPhase(p){if(isCalc())return;if(p!=='train'&&!trained)return;setPhase(p);if(p==='explore')resetPass();if(p==='predict'){resetPass();forwardFull();updateOut();drawNet();showPredictGuide();}}
+function setPhase(p){phase=p;renderPhaseBar();
+  document.getElementById('inputSection').style.display=(p==='train'&&!isCalc())?'none':'contents';
+  renderActSection();
+  document.getElementById('archSection').style.display=(p==='train'&&!isCalc())?'contents':'none';
+  document.getElementById('varSection').style.display=(p==='train'&&!isCalc())?'block':'none';
+  document.getElementById('resultBoxes').style.display=isCalc()?'none':'block';
+  document.getElementById('lossBox').style.display=(!isCalc()&&trained&&lossHistory.length>0)?'block':'none';
+  if(!isCalc()&&trained&&lossHistory.length>0)setTimeout(drawLossSpark,0);
+  const show=(!isCalc()&&p==='predict');
+  document.querySelectorAll('.pred-only').forEach(el=>el.style.display=show?'block':'none');
+  renderCtrl();}
+function renderCtrl(){const el=document.getElementById('controlArea');if(isCalc()){el.innerHTML=`<div class="bg"><button class="btn" onclick="stepBack()">◀</button><button class="btn pri" onclick="stepNeuron()">▶ Next</button><button class="btn" onclick="runAllAnim()">⏩ All</button><button class="btn dn" onclick="resetPass()">↺</button></div><div class="hint">Integer values and ReLU – every calculation can be followed by hand.</div>`;}else if(phase==='train'){el.innerHTML=`<div class="bg"><button class="btn grn" onclick="startTraining()">${ICON_BRAIN} Train the model</button></div><div class="hint">The network learns the weights by training on data.</div>`;}else if(phase==='explore'){el.innerHTML=`<div class="bg"><button class="btn" onclick="stepBack()">◀</button><button class="btn pri" onclick="stepNeuron()">▶ Next</button><button class="btn" onclick="runAllAnim()">⏩ All</button><button class="btn dn" onclick="resetPass()">↺</button></div><div class="hint">Step through the network. ◀ goes back.</div><div class="bg" style="margin-top:4px"><button class="btn" onclick="goPhase('predict')">Predict →</button></div>`;}else{el.innerHTML=`<div class="hint" style="margin-bottom:4px">Change the input values – the network's answer updates instantly!</div><div class="bg"><button class="btn" onclick="goPhase('explore')">← Explore</button><button class="btn" onclick="fullReset()">🔄 Start over</button></div>`;}}
+/* ── click on a calculation step in the narr panel → glass card with a written explanation ── */
+function openCalcConcept(row){
+  const title=row.dataset.title||'Calculation';
+  const defHTML=row.dataset.explain||'';
+  const icon=row.dataset.icon==='act'?ICON_ACT:ICON_SUM;
+  const r=row.getBoundingClientRect();
+  const bx=r.left+r.width/2,by=r.top+r.height/2;
+  const cx=window.innerWidth/2,cy=window.innerHeight/2;
+  const card=document.getElementById('conceptCard');
+  document.getElementById('conceptIcon').innerHTML=icon;
+  document.getElementById('conceptTitle').textContent=title;
+  document.getElementById('conceptDef').innerHTML=defHTML;
+  document.getElementById('conceptIllus').innerHTML='';
+  card.classList.remove('show');
+  card.style.transition='none';
+  card.style.setProperty('--dx',(bx-cx)+'px');
+  card.style.setProperty('--dy',(by-cy)+'px');
+  void card.offsetHeight;
+  card.style.transition='';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
+}
+function buildSumExplain(l,contribs,sum,biasV){
+  const fmt=v=>isCalc()&&v===Math.round(v)?String(Math.round(v)):v.toFixed(isCalc()?1:3);
+  const av=(l===1)?activeVars():null;
+  const parts=contribs.map((c,idx)=>{
+    const srcName=(l===1&&av)?av[idx].name:(l===1?`input ${idx+1}`:`neuron ${idx+1} in the previous layer`);
+    return `${srcName} has the value ${fmt(c.input)} and is multiplied by the weight ${fmt(c.w)}, giving ${fmt(c.contrib)}`;
+  }).join('. ');
+  const p2=parts.charAt(0).toUpperCase()+parts.slice(1);
+  return `The neuron collects signals from ${l===1?'the input layer':'the previous layer'}. ${p2}.<br><br>All contributions are added together along with the neuron's own <strong>bias</strong> of ${fmt(biasV)} – a small starting value that lets the neuron respond differently even if all inputs were zero.<br><br>The sum of all this is <strong>${fmt(sum)}</strong>, which is then passed on to the activation step.`;
+}
+function buildActExplain(sum,a,isOut,fn){
+  const fmt=v=>isCalc()&&v===Math.round(v)?String(Math.round(v)):v.toFixed(isCalc()?1:3);
+  let expl;
+  if(isCalc()){
+    expl=`The sum ${fmt(sum)} is passed through the activation function <strong>ReLU</strong>, which lets positive numbers through unchanged but clips negative numbers to 0. Here that gives max(0, ${fmt(sum)}) = <strong>${fmt(a)}</strong>.`;
+  }else{
+    const fnName=fn==='σ'?'Sigmoid':fn==='ReLU'?'ReLU':'Tanh';
+    expl=`The sum is passed through the activation function <strong>${fnName}</strong>. ${actExplain(fn,sum,a)}. The activation function decides how strongly the neuron should activate, in other words how strong a signal gets passed on through the network.`;
+  }
+  expl+=isOut
+    ?`<br><br>Since this is the output layer, <strong>${fmt(a)}</strong> is the network's final answer for this attempt${curSc!=='abstract'?' – a value above 0.5 is read as "Yes", otherwise "No"':''}.`
+    :`<br><br>The value <strong>${fmt(a)}</strong> is now passed on as input to the next layer.`;
+  return expl;
+}
+function stepNeuron(){if(stepIdx>=stepQueue.length)return;stepHist.push({vals:snapVals(),idx:stepIdx,hl:hlNeuron?{...hlNeuron}:null,edges:[...hlEdges]});const{l,j}=stepQueue[stepIdx];let sum=B[l-1][j];const contribs=[];for(let i=0;i<layers[l-1];i++){const c=W[l-1][j][i]*vals[l-1][i].act;contribs.push({i,w:W[l-1][j][i],input:vals[l-1][i].act,contrib:c});sum+=c;}const a=act_(sum,l);vals[l][j]={raw:sum,act:a,computed:true};hlNeuron={l,j};hlEdges=contribs.map(c=>({l:l-1,i:c.i,j,contribution:c.contrib,w:c.w,input:c.input}));showNarr(l,j,contribs,sum,a);stepIdx++;if(!isCalc())updateOut();triggerPulse();drawNet();}
+function stepBack(){if(!stepHist.length)return;const snap=stepHist.pop();vals=snap.vals;stepIdx=snap.idx;hlNeuron=snap.hl;hlEdges=snap.edges;if(hlNeuron){const{l,j}=hlNeuron;const contribs=[];for(let i=0;i<layers[l-1];i++){const c=W[l-1][j][i]*vals[l-1][i].act;contribs.push({i,w:W[l-1][j][i],input:vals[l-1][i].act,contrib:c});}showNarr(l,j,contribs,vals[l][j].raw,vals[l][j].act);}else{document.getElementById('narr').innerHTML='<div class="ne">Press <strong>▶ Next</strong> to step through the network.</div>';}if(!isCalc())updateOut();drawNet();}
+function runAllAnim(){if(stepIdx>=stepQueue.length)resetPass();function n(){if(stepIdx>=stepQueue.length)return;stepNeuron();setTimeout(n,350);}n();}
+function resetPass(){initV();hlNeuron=null;hlEdges=[];stepHist=[];document.getElementById('narr').innerHTML='<div class="ne">Press <strong>▶ Next</strong> to step through the network.</div>';document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';if(!isCalc())updateTgt();drawNet();}
+function showNarr(l,j,contribs,sum,a){
+  const isOut=l===layers.length-1;
+  const fn=actNForLayer(l);
+  const fmt=v=>isCalc()&&v===Math.round(v)?String(Math.round(v)):v.toFixed(isCalc()?1:3);
+  const layerLbl=isOut?'Output':`Hidden layer ${l}`;
+  const sumTerms=contribs.map(c=>`<span class="fw">${fmt(c.w)}</span>×<span class="fx">${fmt(c.input)}</span>`).join(' + ');
+  const biasV=B[l-1][j];
+  const biasTxt=biasV<0?`(<span class="fb">${fmt(biasV)}</span>)`:`<span class="fb">${fmt(biasV)}</span>`;
+  const sumFormula=`${sumTerms} + ${biasTxt} = <span class="fr">${fmt(sum)}</span>`;
+  let actFormula,actLabel;
+  if(isCalc()){actFormula=`max(0, ${fmt(sum)}) = <span class="fr">${fmt(a)}</span>`;actLabel='Activation (ReLU)';}
+  else{
+    const fnName=fn==='σ'?'Sigmoid':fn==='ReLU'?'ReLU':'Tanh';
+    actLabel=`Activation (${fnName})`;
+    actFormula=fn==='σ'?`σ(${fmt(sum)}) = <span class="fr">${fmt(a)}</span>`:fn==='ReLU'?`max(0, ${fmt(sum)}) = <span class="fr">${fmt(a)}</span>`:`tanh(${fmt(sum)}) = <span class="fr">${fmt(a)}</span>`;
+  }
+  let html=`<div class="calc-card">
+    <div class="calc-head"><span class="ch-badge">${layerLbl}</span><span class="ch-title">The calculation in neuron ${j+1}</span></div>
+    <div class="calc-steps">
+      <button class="calc-step" type="button">
+        <span class="cs-num">1</span>
+        <span class="cs-body"><span class="cs-label">Weighted sum</span><span class="cs-formula">${sumFormula}</span></span>
+        <svg class="cs-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      <button class="calc-step" type="button">
+        <span class="cs-num">2</span>
+        <span class="cs-body"><span class="cs-label">${actLabel}</span><span class="cs-formula">${actFormula}</span></span>
+        <svg class="cs-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>`;
+  if(isOut&&!isCalc()){
+    html+=`<div class="calc-result">Result: the network leans toward <strong>${a>0.5?'Yes':'No'}</strong> (${Math.round(Math.max(a,1-a)*100)}%)</div>`;
+  }else if(isCalc()&&sum<0){
+    html+=`<div class="calc-result" style="font-style:italic;">The sum is negative → ReLU sets the value to 0</div>`;
+  }
+  html+=`</div>`;
+  const narrEl=document.getElementById('narr');
+  narrEl.innerHTML=html;
+  const stepBtns=narrEl.querySelectorAll('.calc-step');
+  if(stepBtns[0]){
+    stepBtns[0].dataset.title='Weighted sum';
+    stepBtns[0].dataset.icon='sum';
+    stepBtns[0].dataset.explain=buildSumExplain(l,contribs,sum,biasV);
+    stepBtns[0].addEventListener('click',()=>openCalcConcept(stepBtns[0]));
+  }
+  if(stepBtns[1]){
+    stepBtns[1].dataset.title=actLabel;
+    stepBtns[1].dataset.icon='act';
+    stepBtns[1].dataset.explain=buildActExplain(sum,a,isOut,fn);
+    stepBtns[1].addEventListener('click',()=>openCalcConcept(stepBtns[1]));
+  }
+}
+function updateTgt(){if(isCalc())return;document.getElementById('targetVal').textContent=targetLabel(getIV());}
+function updateOut(){if(isCalc())return;const last=layers.length-1;if(!vals[last]||!vals[last][0].computed)return;const o=vals[last][0].act;const conf=Math.round(Math.max(o,1-o)*100),pred=o>0.5,tgt=targetFn(getIV()),correct=(pred?1:0)===tgt;document.getElementById('outputVal').textContent=curSc==='abstract'?`${o.toFixed(3)} → ${pred?'1':'0'}`:`${pred?'Yes':'No'} (${conf}%)`;document.getElementById('outputVal').style.color=pred?'var(--accent2)':'var(--red)';document.getElementById('verdictVal').innerHTML=correct?`<span class="verdict-pill ok">${ICON_CHECK} Correct</span>`:`<span class="verdict-pill bad">✗ Wrong</span> <span style="font-size:.7em;color:var(--dim2)">correct: ${tgt===1?'Yes':'No'}</span>`;}
+function setScenario(k){curSc=k;hiddenRelu=false;layerActs=[];if(k==='calc'){varEnabled=[true,true];layers=[2,3,1];}else if(k==='gym'){varEnabled=[true,true,true,true];layers=[4,1,1];setTimeout(showGymIntro,100);}else{varEnabled=[true,true,false,false];layers=[2,1,1];}fullReset();}
+function showGymIntro(){if(seenGuides.has('gym'))return;seenGuides.add('gym');const msg=document.getElementById('trainMsg');msg.innerHTML=`<div class="tm-icon" style="font-size:1.8em">💪</div><div class="tm-title">Will the workout be effective?</div><div class="tm-text" style="text-align:left;">Unlike the exam scenario, the relationships here are more complicated – <strong>more of everything isn't always better</strong>. Too little sleep is bad, but sleeping half the day doesn't help either. Eating right before is just as bad as being completely fasted.<br><br>This means the network needs <strong style="color:var(--accent2)">hidden layers</strong> to handle the task. Each neuron in the hidden layer can specialize in detecting a particular relationship – one neuron might learn to recognize a "just-right sleep pattern", while another reacts to the combination of stress and recovery. The output neuron then weighs all these signals together into a final answer.<br><br>Feel free to try it: train the network and then explore which weights the different neurons ended up with!</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Got it →</button></div>`;msg.classList.add('show');}
+function renderActSection(){const el=document.getElementById('actContent');const sec=document.getElementById('actSection');if(isCalc()){el.innerHTML='<div style="font-size:0.82em;color:var(--green);font-weight:600;padding:4px 0;">ReLU <span style="color:var(--dim);font-weight:400;">– max(0, x)</span></div>';sec.style.display='block';}else if(curSc==='exam'||curSc==='gym'){const lbl=hiddenRelu?'<span style="color:var(--green)">ReLU</span> (hidden) + <span style="color:var(--accent2)">Sigmoid</span> (output)':'<span style="color:var(--accent2)">Sigmoid</span> (all layers)';el.innerHTML=`<div style="font-size:0.82em;font-weight:600;padding:4px 0;">${lbl}</div><button class="btn" style="margin-top:4px;font-size:0.72em;padding:5px 8px;flex:none;" onclick="toggleHiddenRelu()">${hiddenRelu?'↩ Sigmoid in all layers':'⚡ Try ReLU in hidden layers'}</button>`;sec.style.display='block';}else{ensureLayerActs();let h='';for(let l=1;l<layers.length;l++){const isOut=l===layers.length-1;const lbl=isOut?'Output':`Hidden ${l}`;const cur=layerActs[l]||'sigmoid';h+=`<div class="pill-row"><span class="pr-label">${lbl}</span><div class="pill-group"><button class="pill ${cur==='relu'?'active':''}" onclick="setLayerAct(${l},'relu')">ReLU</button><button class="pill ${cur==='sigmoid'?'active':''}" onclick="setLayerAct(${l},'sigmoid')">Sigmoid</button><button class="pill ${cur==='tanh'?'active':''}" onclick="setLayerAct(${l},'tanh')">Tanh</button></div></div>`;}el.innerHTML=h;sec.style.display='block';}}
+function renderVarList(){if(isCalc()){document.getElementById('varList').innerHTML='';return;}const cv=curVars();const el=document.getElementById('varList');let h='';const allOn=curSc==='gym';for(let i=0;i<cv.length;i++){const v=cv[i],on=varEnabled[i],base=allOn||i<2;h+=`<div class="var-toggle ${on?'on':''}" onclick="${base?'':'toggleVar('+i+')'}"><span class="vdot"></span><span class="vname">${v.name}</span>${v.desc?`<span class="vdesc">${v.desc}</span>`:''}${base?'<span style="font-size:0.8em;opacity:0.55;margin-left:auto" title="Always active">🔒</span>':''}</div>`;}el.innerHTML=h;}
+function toggleVar(i){if(i<2)return;varEnabled[i]=!varEnabled[i];fullReset();}
+function toggleHiddenRelu(){hiddenRelu=!hiddenRelu;fullReset();}
+function ensureLayerActs(){while(layerActs.length<layers.length){layerActs.push('sigmoid');}}
+function setLayerAct(l,v){ensureLayerActs();layerActs[l]=v;fullReset();}
+function renderLC(){const el=document.getElementById('layerCtrl');let h='';for(let l=0;l<layers.length;l++){const isIn=l===0,isOut=l===layers.length-1,lb=isIn?'Input':isOut?'Output':`Hidden ${l}`,cl=isIn?'in':isOut?'out':'';const canEdit=!isCalc();
+  if(canEdit&&!isIn&&!isOut){h+=`<div class="layer-row"><span class="layer-label">${lb}</span><div class="neuron-stepper"><button class="ns-btn" onclick="chN(${l},-1)">−</button><span class="ns-val">${layers[l]}</span><button class="ns-btn" onclick="chN(${l},1)">+</button></div></div>`;}
+  else{h+=`<div class="layer-row"><span class="layer-label ${cl}">${lb}</span><span class="layer-static-val">${layers[l]}</span></div>`;}
+  }el.innerHTML=h;}
+function renderIS(){const av=activeVars();layers[0]=av.length;let h='';for(let i=0;i<av.length;i++){const v=av[i],d=v.def;const step=v.isCalc?10:1;const snapDef=v.isCalc?Math.round(d/10)*10:d;h+=`<div class="input-row"><span class="input-label">${v.name}</span><input type="range" class="input-slider" id="inp${i}" min="0" max="100" step="${step}" value="${snapDef}" oninput="onInp()"><span class="input-val" id="inpV${i}">${fmtReal(snapDef/100,v)}</span></div>`;}document.getElementById('inputGrid').innerHTML=h;for(let i=0;i<av.length;i++)onInp(true);}
+function snapNorm(norm,vo){if(!vo.realStep)return norm;const range=vo.max-vo.min;const real=vo.min+norm*range;const snapped=Math.round(real/vo.realStep)*vo.realStep;return Math.max(0,Math.min(1,(snapped-vo.min)/range));}
+function onInp(silent){const av=activeVars();for(let i=0;i<layers[0];i++){const raw=parseFloat(document.getElementById('inp'+i).value)/100;const snapped=isCalc()?raw:snapNorm(raw,av[i]);document.getElementById('inpV'+i).textContent=fmtReal(snapped,av[i]);}if(!silent){if(isCalc()||phase==='explore'){initV();stepHist=[];hlNeuron=null;hlEdges=[];if(!isCalc())updateTgt();document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';document.getElementById('narr').innerHTML='<div class="ne">Press <strong>▶ Next</strong> to calculate.</div>';drawNet();}else if(phase==='predict'&&trained){initV();forwardFull();hlNeuron=null;hlEdges=[];updateTgt();updateOut();drawNet();document.getElementById('narr').innerHTML='<div class="ne">The input values changed – answer updated.</div>';}else{initV();updateTgt();drawNet();}}}
+function chN(l,d){if(isCalc())return;if(l===layers.length-1)return;layers[l]=Math.max(1,Math.min(8,layers[l]+d));fullReset();}
+function addLayer(){if(isCalc()||layers.length>=5)return;layers.splice(layers.length-1,0,2);fullReset();}
+function removeLayer(){if(isCalc()||layers.length<=2)return;layers.splice(layers.length-2,1);fullReset();}
+function fullReset(){if(trainTimer){clearInterval(trainTimer);trainTimer=null;}stopTrainAnim();trained=false;isTraining=false;epoch=0;savedTrainData=null;wDeltas=null;lossHistory=[];totalWeightUpdates=0;document.getElementById('trainMsg').classList.remove('show');document.getElementById('lossBox').style.display='none';renderScenarioCards();renderLC();renderVarList();renderIS();initW();initV();if(isCalc()){phase='explore';trained=true;setPhase('explore');}else{setPhase('train');}updateTgt();document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';document.getElementById('epochVal').textContent='0';document.getElementById('narr').innerHTML=isCalc()?'<div class="ne">Press <strong>▶ Next</strong> to step through the network. Activation function: <strong>ReLU</strong> – negative values become 0.<br><span style="font-size:0.88em;opacity:0.85">💡 Tip: click a <strong style="color:var(--green)">connection</strong> to change its weight, or a <strong>neuron</strong> to change its bias.</span></div>':'<div class="ne">Press <strong>Train the model</strong> to begin.</div>';drawNet();}
+function setupCv(){const cv=document.getElementById('cv'),p=cv.parentElement,dpr=devicePixelRatio||1,w=p.clientWidth,h=p.clientHeight;cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+'px';cv.style.height=h+'px';const ctx=cv.getContext('2d');ctx.scale(dpr,dpr);return{ctx,w,h};}
+function canvasScale(w){return Math.max(0.56,Math.min(1,w/640));}
+function neuronRadius(w){const maxN=Math.max(...layers);const s=canvasScale(w);return Math.max(13,(maxN<=3?32:maxN<=4?28:maxN<=6?23:19)*s);}
+function nPos(w,h){const s=canvasScale(w);const nL=layers.length,px=Math.max(34,90*s),py=Math.max(14,25*s),g=(w-2*px)/Math.max(nL-1,1),ps=[];for(let l=0;l<nL;l++){const n=layers[l],x=px+l*g;const avail=h-2*py;const ng=Math.min(90*s,avail/(n));const sy=h/2-(n-1)*ng/2;const lp=[];for(let i=0;i<n;i++)lp.push({x,y:sy+i*ng});ps.push(lp);}return ps;}
+function triggerPulse(){pulseStart=performance.now();if(pulseAnim)cancelAnimationFrame(pulseAnim);const loop=()=>{const t=performance.now()-pulseStart;if(t>900){pulseAnim=null;drawNet();return;}drawNet();pulseAnim=requestAnimationFrame(loop);};loop();}
+const RGB_BLUE=[124,162,255];
+const RGB_BLUE_DEEP=[36,52,120];
+const RGB_RED=[255,110,124];
+const RGB_RED_DEEP=[120,32,46];
+const RGB_GOLD=[255,206,102];
+const RGB_GREEN=[86,224,158];
+const RGB_GREY=[150,162,196];
+const RGB_GREY_DEEP=[28,33,54];
+function rgbaStr(rgb,a){return `rgba(${rgb[0]|0},${rgb[1]|0},${rgb[2]|0},${a})`;}
+function mixRgb(a,b,t){return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];}
+function drawCanvasBackdrop(ctx,w,h){
+  const g=ctx.createRadialGradient(w*0.5,h*0.36,0,w*0.5,h*0.5,Math.max(w,h)*0.75);
+  g.addColorStop(0,'#0e1326');g.addColorStop(0.55,'#0a0d1a');g.addColorStop(1,'#05060d');
+  ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+  ctx.save();ctx.globalAlpha=0.4;ctx.fillStyle='rgba(122,162,255,0.05)';
+  const step=28;
+  for(let gx=step/2;gx<w;gx+=step)for(let gy=step/2;gy<h;gy+=step){ctx.beginPath();ctx.arc(gx,gy,1,0,Math.PI*2);ctx.fill();}
+  ctx.restore();
+}
+function drawGlassEdge(ctx,x1,y1,x2,y2,rgb,alpha,width,glow){
+  ctx.save();ctx.lineCap='round';
+  if(glow){ctx.shadowColor=rgbaStr(rgb,Math.min(0.65,alpha));ctx.shadowBlur=9;}
+  const grad=ctx.createLinearGradient(x1,y1,x2,y2);
+  grad.addColorStop(0,rgbaStr(rgb,alpha*0.8));grad.addColorStop(0.5,rgbaStr(rgb,alpha));grad.addColorStop(1,rgbaStr(rgb,alpha*0.8));
+  ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=grad;ctx.lineWidth=width;ctx.stroke();
+  ctx.shadowBlur=0;ctx.restore();
+}
+function drawWeightChip(ctx,mx,my,text,rgb,fontSize,emphasis){
+  ctx.save();const fs=emphasis?fontSize+2:fontSize;ctx.font=`700 ${fs}px "JetBrains Mono"`;
+  const tw=ctx.measureText(text).width;const padX=emphasis?9:7,h=fs+(emphasis?10:8),w=tw+padX*2;
+  ctx.beginPath();ctx.roundRect(mx-w/2,my-h/2,w,h,h/2);
+  const bg=ctx.createLinearGradient(mx,my-h/2,mx,my+h/2);
+  bg.addColorStop(0,emphasis?'rgba(24,32,46,0.98)':'rgba(22,26,44,0.94)');bg.addColorStop(1,emphasis?'rgba(10,14,20,0.98)':'rgba(10,12,20,0.94)');
+  if(emphasis){ctx.shadowColor=rgbaStr(RGB_GREEN,0.55);ctx.shadowBlur=11;}
+  ctx.fillStyle=bg;ctx.fill();ctx.shadowBlur=0;
+  ctx.lineWidth=emphasis?1.7:1;ctx.strokeStyle=rgbaStr(rgb,emphasis?0.95:0.55);ctx.stroke();
+  ctx.fillStyle=rgbaStr(rgb,0.98);ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(text,mx,my+0.5);ctx.restore();
+}
+function drawLayerChip(ctx,cx,cy,text,rgb,s){
+  s=s||1;ctx.save();ctx.font=`700 ${Math.max(8,Math.round(10*s))}px "JetBrains Mono"`;
+  const tw=ctx.measureText(text).width;const padX=10,h=19,w=tw+padX*2;
+  ctx.beginPath();ctx.roundRect(cx-w/2,cy-h/2,w,h,h/2);
+  ctx.fillStyle=rgbaStr(rgb,0.12);ctx.fill();
+  ctx.lineWidth=1;ctx.strokeStyle=rgbaStr(rgb,0.4);ctx.stroke();
+  ctx.fillStyle=rgbaStr(rgb,0.95);ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(text,cx,cy+0.5);ctx.restore();
+}
+function drawGlassNeuron(ctx,x,y,R,opts){
+  const{computed,sign,magnitude,rimRgb,isHl,justLitPulse,op}=opts;
+  let top,bot;
+  if(!computed){top=mixRgb(RGB_GREY,[255,255,255],0.05);bot=RGB_GREY_DEEP;}
+  else if(sign<0){top=mixRgb(RGB_RED,[255,255,255],0.22*magnitude);bot=mixRgb(RGB_RED_DEEP,RGB_RED,0.12);}
+  else{top=mixRgb(RGB_BLUE,[255,255,255],0.22*magnitude);bot=mixRgb(RGB_BLUE_DEEP,RGB_BLUE,0.12);}
+  const shGrad=ctx.createRadialGradient(x,y+R*0.78,0,x,y+R*0.78,R*0.95);
+  shGrad.addColorStop(0,`rgba(0,0,0,${0.38*op})`);shGrad.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.beginPath();ctx.ellipse(x,y+R*0.78,R*0.95,R*0.3,0,0,Math.PI*2);ctx.fillStyle=shGrad;ctx.fill();
+  if(isHl&&justLitPulse>0){
+    ctx.save();ctx.beginPath();ctx.arc(x,y,R+6,0,Math.PI*2);
+    ctx.strokeStyle=rgbaStr(RGB_GOLD,0.4*justLitPulse);ctx.lineWidth=5;
+    ctx.shadowColor=rgbaStr(RGB_GOLD,0.6*justLitPulse);ctx.shadowBlur=22*justLitPulse;
+    ctx.stroke();ctx.restore();
+  }
+  const grad=ctx.createRadialGradient(x-R*0.36,y-R*0.42,R*0.1,x,y,R*1.08);
+  grad.addColorStop(0,rgbaStr(top,0.96*op));grad.addColorStop(0.5,rgbaStr(mixRgb(top,bot,0.55),0.92*op));grad.addColorStop(1,rgbaStr(bot,0.94*op));
+  ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);ctx.fillStyle=grad;ctx.fill();
+  ctx.save();ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);ctx.clip();
+  const spec=ctx.createRadialGradient(x-R*0.4,y-R*0.45,0,x-R*0.4,y-R*0.45,R*0.65);
+  spec.addColorStop(0,`rgba(255,255,255,${0.5*op})`);spec.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=spec;ctx.fillRect(x-R,y-R,R*2,R*2);ctx.restore();
+  ctx.beginPath();ctx.arc(x,y,R-0.75,0,Math.PI*2);
+  if(isHl){ctx.strokeStyle=rgbaStr(RGB_GOLD,0.95);ctx.lineWidth=2.6;ctx.shadowColor=rgbaStr(RGB_GOLD,0.55);ctx.shadowBlur=12;}
+  else{ctx.strokeStyle=rgbaStr(rimRgb,(computed?0.55:0.25)*op+0.08);ctx.lineWidth=1.4;}
+  ctx.stroke();ctx.shadowBlur=0;
+}
+function drawNet(){
+  const{ctx,w,h}=setupCv();
+  drawCanvasBackdrop(ctx,w,h);
+  const pos=nPos(w,h);
+  const s=canvasScale(w);
+  const R=neuronRadius(w);
+  const op=(trained||isCalc())?1:0.55;
+  const hlSet=new Set(hlEdges.map(e=>`${e.l}-${e.i}-${e.j}`));
+  const pulseT=pulseAnim?Math.min(1,(performance.now()-pulseStart)/650):1;
+  for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++)for(let i=0;i<W[l][j].length;i++){
+    const wv=W[l][j][i],abs=Math.min(Math.abs(wv),2),key=`${l}-${i}-${j}`,isHl=hlSet.has(key);
+    const width=(1.3+2.6*(abs/2))*s;
+    const x1=pos[l][i].x,y1=pos[l][i].y,x2=pos[l+1][j].x,y2=pos[l+1][j].y;
+    let rgb,alpha,lw,glow=false;
+    if(isHl){rgb=RGB_GREEN;alpha=0.95;lw=width+2;glow=true;}
+    else if(isTraining&&wDeltas&&wDeltas[l]&&wDeltas[l][j]){
+      const dw=wDeltas[l][j][i];const adw=Math.min(Math.abs(dw),0.5);
+      if(dw>0.001){rgb=RGB_GREEN;alpha=0.35+0.55*(adw/0.5);}
+      else if(dw<-0.001){rgb=RGB_RED;alpha=0.35+0.55*(adw/0.5);}
+      else{rgb=RGB_GREY;alpha=0.2+0.25*(abs/2);}
+      lw=width;
+    }else if(trained||isCalc()){
+      const edgeOp=hlNeuron?0.1+0.16*(abs/2):0.28+0.5*(abs/2);
+      rgb=RGB_BLUE;alpha=edgeOp;lw=hlNeuron?width*0.55:width;
+    }else{rgb=RGB_GREY;alpha=0.22+0.15*op;lw=width*0.7;}
+    drawGlassEdge(ctx,x1,y1,x2,y2,rgb,alpha,lw,glow);
+    if(isHl&&pulseAnim&&pulseT<1){
+      const px=x1+(x2-x1)*pulseT,py=y1+(y2-y1)*pulseT;
+      ctx.save();ctx.shadowColor='rgba(255,255,255,0.95)';ctx.shadowBlur=16;
+      ctx.beginPath();ctx.fillStyle='#ffffff';ctx.arc(px,py,3.6,0,Math.PI*2);ctx.fill();ctx.restore();
+    }
+    const showW=isHl?true:(hlNeuron?false:((isCalc())||(isTraining)||(trained&&(phase==='predict'||phase==='explore'))));
+    if(showW){
+      const nEdges=W[l].length*W[l][j].length;const edgeIdx=j*W[l][j].length+i;
+      const t=isHl?0.5:(nEdges>1?0.25+0.5*(edgeIdx/(nEdges-1)):0.5);
+      const mx=x1+t*(x2-x1),my=y1+t*(y2-y1);
+      const wfs=Math.max(7,Math.round(10*s));
+      const wtxt=isCalc()&&wv===Math.round(wv)?String(Math.round(wv)):wv.toFixed(2);
+      const chipRgb=isTraining&&wDeltas&&wDeltas[l]&&wDeltas[l][j]?(wDeltas[l][j][i]>0.001?RGB_GREEN:wDeltas[l][j][i]<-0.001?RGB_RED:RGB_GREY):(wv>=0?RGB_GREEN:RGB_RED);
+      drawWeightChip(ctx,mx,my,wtxt,chipRgb,wfs,isHl);
+    }
+  }
+  const fontSize=Math.max(10,Math.round(13*s));
+  for(let l=0;l<layers.length;l++){
+    const isInLayer=l===0,isOutLayer=l===layers.length-1;
+    const chipRgb=isInLayer?RGB_BLUE:isOutLayer?RGB_GOLD:RGB_GREY;
+    const chipText=isInLayer?'INPUT':isOutLayer?'OUTPUT':`HIDDEN ${l}`;
+    drawLayerChip(ctx,pos[l][0].x,pos[l][0].y-R-22,chipText,chipRgb,s);
+    for(let i=0;i<layers[l];i++){
+      const{x,y}=pos[l][i];
+      const v=vals[l][i];
+      const isHl2=hlNeuron&&hlNeuron.l===l&&hlNeuron.j===i;
+      const justLitPulse=isHl2&&pulseAnim&&pulseT>=0.55?Math.min(1,(pulseT-0.55)/0.45):(isHl2?1:0);
+      const rimRgb=isInLayer?RGB_BLUE:isOutLayer?RGB_GOLD:RGB_GREY;
+      const tMag=v.computed?Math.min(1,Math.abs(Math.tanh(v.act))):0;
+      drawGlassNeuron(ctx,x,y,R,{computed:v.computed,sign:v.act>=0?1:-1,magnitude:tMag,rimRgb,isHl:isHl2,justLitPulse,op});
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      if(v.computed){
+        ctx.font=`700 ${fontSize}px "JetBrains Mono"`;
+        ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=4;
+        ctx.fillStyle=v.act>=0?`rgba(226,234,255,${0.85+0.15*op})`:`rgba(255,214,218,${0.85+0.15*op})`;
+        const vTxt=isCalc()&&v.act===Math.round(v.act)?String(Math.round(v.act)):v.act.toFixed(isCalc()?1:2);
+        ctx.fillText(vTxt,x,y);ctx.shadowBlur=0;
+      }else{
+        ctx.font=`500 ${fontSize-1}px "DM Sans"`;
+        ctx.fillStyle=`rgba(255,255,255,${0.3+0.1*op})`;
+        ctx.fillText('?',x,y);
+      }
+      if(l>0){
+        const bv=B[l-1][i];
+        const bTxt=`b=${isCalc()&&bv===Math.round(bv)?String(Math.round(bv)):bv.toFixed(2)}`;
+        ctx.font=`600 ${Math.max(7,Math.round(9*s))}px "JetBrains Mono"`;
+        const btw=ctx.measureText(bTxt).width;
+        const bpx=btw+10,bph=14;
+        ctx.beginPath();ctx.roundRect(x-bpx/2,y+R+7,bpx,bph,bph/2);
+        ctx.fillStyle='rgba(14,17,30,0.75)';ctx.fill();
+        ctx.strokeStyle='rgba(255,255,255,0.08)';ctx.lineWidth=1;ctx.stroke();
+        ctx.fillStyle=`rgba(255,255,255,${0.55*op+0.1})`;
+        ctx.fillText(bTxt,x,y+R+7+bph/2+0.5);
+      }
+      if(l===0){
+        const av=activeVars();
+        ctx.font=`600 ${Math.max(8,Math.round(10*s))}px "DM Sans"`;
+        ctx.fillStyle=`rgba(150,180,255,${0.8+0.2*op})`;
+        ctx.fillText(av[i].name,x,y+R+16);
+      }
+      if(l===layers.length-1){
+        const outLabel=isCalc()?'Result':curSc==='exam'?'Passes the exam?':curSc==='gym'?'Good workout?':'y';
+        ctx.font=`600 ${Math.max(8,Math.round(10*s))}px "DM Sans"`;
+        ctx.fillStyle=`rgba(255,214,130,${0.8+0.2*op})`;
+        ctx.fillText(outLabel,x,y+R+29);
+      }
+    }
+  }
+  document.getElementById('untrainedBadge').style.display=(!trained&&!isCalc())?'block':'none';}
+const cv=document.getElementById('cv');const tip=document.getElementById('tooltip');
+cv.addEventListener('mousemove',function(e){if(!isCalc()){this.style.cursor='default';return;}const rect=this.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top;const h2=rect.height,pos=nPos(rect.width,h2);const R=neuronRadius(rect.width);
+for(let l=1;l<layers.length;l++)for(let j=0;j<layers[l];j++){const dx=mx-pos[l][j].x,dy=my-pos[l][j].y;if(dx*dx+dy*dy<R*R){this.style.cursor='pointer';return;}}
+for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++)for(let i=0;i<W[l][j].length;i++){const ax=pos[l][i].x,ay=pos[l][i].y,bx=pos[l+1][j].x,by=pos[l+1][j].y;const dxe=bx-ax,dye=by-ay,len2=dxe*dxe+dye*dye;if(len2<1)continue;let t=((mx-ax)*dxe+(my-ay)*dye)/len2;t=Math.max(0,Math.min(1,t));const px=ax+t*dxe,py=ay+t*dye;if(Math.hypot(mx-px,my-py)<8){this.style.cursor='pointer';return;}}
+this.style.cursor='default';});
+cv.addEventListener('mouseleave',()=>{cv.style.cursor='default';});
+cv.addEventListener('click',function(e){if(!isCalc())return;const rect=this.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top,h2=rect.height,pos=nPos(rect.width,h2);const R=neuronRadius(rect.width);
+for(let l=1;l<layers.length;l++)for(let j=0;j<layers[l];j++){const dx=mx-pos[l][j].x,dy=my-pos[l][j].y;if(dx*dx+dy*dy<R*R){const lbl=l===layers.length-1?'output':`hidden ${l} n${j+1}`;const cur=B[l-1][j];const v=prompt(`Bias for ${lbl}\nCurrent: ${isCalc()&&cur===Math.round(cur)?cur:cur.toFixed(2)}`,isCalc()&&cur===Math.round(cur)?String(Math.round(cur)):cur.toFixed(2));if(v!==null){const p=parseFloat(v);if(!isNaN(p)){B[l-1][j]=p;initV();if(trained||isCalc()){forwardFull();if(!isCalc())updateOut();}drawNet();}}return;}}
+let bestL=-1,bestJ=-1,bestI=-1,bestD=8;
+for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++)for(let i=0;i<W[l][j].length;i++){const ax=pos[l][i].x,ay=pos[l][i].y,bx=pos[l+1][j].x,by=pos[l+1][j].y;const dx=bx-ax,dy=by-ay,len2=dx*dx+dy*dy;if(len2<1)continue;let t=((mx-ax)*dx+(my-ay)*dy)/len2;t=Math.max(0,Math.min(1,t));const px=ax+t*dx,py=ay+t*dy;const d=Math.hypot(mx-px,my-py);if(d<bestD){bestD=d;bestL=l;bestJ=j;bestI=i;}}
+if(bestL>=0){const av=activeVars();const from=bestL===0?av[bestI].name:`hidden ${bestL} n${bestI+1}`,to=bestL+1===layers.length-1?'output':`hidden ${bestL+1} n${bestJ+1}`;const cur=W[bestL][bestJ][bestI];const v=prompt(`Weight: ${from} → ${to}\nCurrent: ${isCalc()&&cur===Math.round(cur)?cur:cur.toFixed(2)}`,isCalc()&&cur===Math.round(cur)?String(Math.round(cur)):cur.toFixed(2));if(v!==null){const p=parseFloat(v);if(!isNaN(p)){W[bestL][bestJ][bestI]=p;initV();if(trained||isCalc()){forwardFull();if(!isCalc())updateOut();}drawNet();}}}});
+let rT;window.addEventListener('resize',()=>{clearTimeout(rT);rT=setTimeout(()=>{drawNet();drawLossSpark();},80);});
+const CONCEPTS={
+  gInput:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h11m0 0-4-4m4 4-4 4"/><rect x="16" y="5" width="5" height="14" rx="1"/></svg>',title:'Input',def:'<strong>Input</strong> (also called an <em>input variable</em>) – one of the values fed into the first layer of the network, for example hours of sleep or hours studied. Just like every other signal in the network, each input is multiplied by a weight before being passed on to the next layer.',illus:'<svg viewBox="0 0 140 70"><rect x="8" y="24" width="34" height="22" rx="5" fill="rgba(122,162,255,.18)" stroke="#7aa2ff" stroke-width="1.5"/><text x="25" y="39" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#e8ecf8">7</text><path d="M46 35h28" stroke="#7aa2ff" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M67 29l7 6-7 6" stroke="#7aa2ff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="108" cy="35" r="15" fill="rgba(77,128,255,.25)" stroke="#7aa2ff" stroke-width="2"/></svg>'},
+  gNeuron:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>',title:'Neuron',def:'<strong>Neuron</strong> – a computational unit. It receives values, multiplies them by weights, sums them up, and runs the result through an activation function.',illus:'<svg viewBox="0 0 140 70"><g stroke="rgba(122,162,255,.5)" stroke-width="1.5"><line x1="15" y1="14" x2="60" y2="35"/><line x1="15" y1="35" x2="60" y2="35"/><line x1="15" y1="56" x2="60" y2="35"/><line x1="80" y1="35" x2="120" y2="35"/></g><circle cx="15" cy="14" r="4" fill="#7aa2ff"/><circle cx="15" cy="35" r="4" fill="#7aa2ff"/><circle cx="15" cy="56" r="4" fill="#7aa2ff"/><circle cx="70" cy="35" r="11" fill="rgba(77,128,255,.25)" stroke="#7aa2ff" stroke-width="2"/><circle cx="120" cy="35" r="4" fill="#ffce54"/></svg>'},
+  gWeight:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="12" r="2.5"/><path d="M7.5 12h9" stroke-width="3"/></svg>',title:'Weight',def:'<strong>Weight</strong> – a number that determines how strong the connection between two neurons is. The weights are what the network <em>learns</em> during training. A thicker line means a stronger weight.',illus:'<svg viewBox="0 0 140 70"><circle cx="20" cy="35" r="9" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="2"/><circle cx="120" cy="35" r="9" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="2"/><line x1="29" y1="35" x2="111" y2="35" stroke="#33d17a" stroke-width="5" stroke-linecap="round"/><text x="70" y="25" fill="#ffce54" font-size="13" font-family="JetBrains Mono" text-anchor="middle">w</text></svg>'},
+  gBias:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="5"/><path d="M17 17l4 4M14 3v4M12 5h4" stroke-linecap="round"/></svg>',title:'Bias (+b)',def:'<strong>Bias</strong> – a starting value added in every neuron before activation. Lets the neuron activate even if all inputs are zero.',illus:'<svg viewBox="0 0 140 70"><circle cx="70" cy="28" r="14" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="2"/><line x1="70" y1="42" x2="70" y2="54" stroke="#ef5b6b" stroke-width="2"/><rect x="50" y="54" width="40" height="14" rx="7" fill="rgba(239,91,107,.15)" stroke="#ef5b6b" stroke-width="1.2"/><text x="70" y="64" fill="#ff9aa5" font-size="10" font-family="JetBrains Mono" text-anchor="middle">+b</text></svg>'},
+  gAct:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg>',title:'Activation',def:'When a neuron "activates" it sends a signal onward to the next layer. The activation function determines <em>how strongly</em> it reacts.',illus:'<svg viewBox="0 0 140 70"><path d="M10 55 C40 55 40 15 70 15 C100 15 100 55 130 55" fill="none" stroke="#7aa2ff" stroke-width="2.5" stroke-linecap="round"/><circle cx="70" cy="15" r="3.5" fill="#ffce54"/></svg>'},
+  gActFn:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18c4 0 5-12 9-12s5 12 9 12"/></svg>',title:'Activation function',def:'The mathematical function each neuron runs its sum through. <strong style="color:var(--green)">ReLU</strong>, <strong style="color:var(--accent2)">Sigmoid</strong>, and <strong style="color:var(--gold)">Tanh</strong> are three common variants.',illus:'<svg viewBox="0 0 140 70"><path d="M8 55 L34 55 L34 15 L60 15" fill="none" stroke="#33d17a" stroke-width="2.5" stroke-linecap="round"/><path d="M64 55 C74 55 74 15 84 15" fill="none" stroke="#7aa2ff" stroke-width="2.5" stroke-linecap="round"/><path d="M92 35 C98 15 106 15 112 35 C118 55 126 55 132 35" fill="none" stroke="#ffce54" stroke-width="2.5" stroke-linecap="round"/></svg>'},
+  gHidden:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="2" width="4" height="20" rx="1"/><rect x="17" y="6" width="4" height="12" rx="1"/></svg>',title:'Hidden layer',def:'Layers between input and output. This is where the network finds patterns in the data. More neurons/layers allow more complex relationships.',illus:'<svg viewBox="0 0 140 70"><g stroke="rgba(255,255,255,.15)" stroke-width="1"><line x1="20" y1="15" x2="70" y2="15"/><line x1="20" y1="15" x2="70" y2="35"/><line x1="20" y1="15" x2="70" y2="55"/><line x1="20" y1="35" x2="70" y2="15"/><line x1="20" y1="35" x2="70" y2="35"/><line x1="20" y1="35" x2="70" y2="55"/><line x1="20" y1="55" x2="70" y2="15"/><line x1="20" y1="55" x2="70" y2="35"/><line x1="20" y1="55" x2="70" y2="55"/><line x1="70" y1="15" x2="120" y2="35"/><line x1="70" y1="35" x2="120" y2="35"/><line x1="70" y1="55" x2="120" y2="35"/></g><circle cx="20" cy="15" r="4" fill="#7aa2ff"/><circle cx="20" cy="35" r="4" fill="#7aa2ff"/><circle cx="20" cy="55" r="4" fill="#7aa2ff"/><circle cx="70" cy="15" r="5" fill="rgba(51,209,122,.3)" stroke="#33d17a" stroke-width="1.5"/><circle cx="70" cy="35" r="5" fill="rgba(51,209,122,.3)" stroke="#33d17a" stroke-width="1.5"/><circle cx="70" cy="55" r="5" fill="rgba(51,209,122,.3)" stroke="#33d17a" stroke-width="1.5"/><circle cx="120" cy="35" r="5" fill="#ffce54"/></svg>'},
+  gOutput:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="12" r="4"/><path d="M14 12h7m-3-3 3 3-3 3" stroke-linecap="round" stroke-linejoin="round"/></svg>',title:'Output',def:'The network\'s final answer. The value represents a <em>probability</em> between 0 and 1 – e.g. 0.85 means 85% confidence in "Yes".',illus:'<svg viewBox="0 0 140 70"><g stroke="rgba(255,255,255,.15)"><line x1="20" y1="15" x2="90" y2="35"/><line x1="20" y1="35" x2="90" y2="35"/><line x1="20" y1="55" x2="90" y2="35"/></g><circle cx="20" cy="15" r="4" fill="#7aa2ff"/><circle cx="20" cy="35" r="4" fill="#7aa2ff"/><circle cx="20" cy="55" r="4" fill="#7aa2ff"/><circle cx="90" cy="35" r="13" fill="rgba(255,206,84,.25)" stroke="#ffce54" stroke-width="2.5"/><text x="90" y="39" text-anchor="middle" font-size="11" font-family="JetBrains Mono" fill="#ffce54">.85</text></svg>'},
+  gLoss:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l6 6 4-4 8 8"/><path d="M15 15h6v-6"/></svg>',title:'Loss',def:'A measure of how wrong the network is. During training, the answer is compared with the correct one – the difference is the loss. The goal is to make it as small as possible.',illus:'<svg viewBox="0 0 140 70"><rect x="15" y="15" width="14" height="45" fill="rgba(239,91,107,.35)"/><rect x="40" y="28" width="14" height="32" fill="rgba(239,91,107,.3)"/><rect x="65" y="40" width="14" height="20" fill="rgba(255,206,84,.3)"/><rect x="90" y="50" width="14" height="10" fill="rgba(51,209,122,.35)"/><rect x="115" y="55" width="14" height="5" fill="rgba(51,209,122,.5)"/><path d="M22 15 L47 28 L72 40 L97 50 L122 55" stroke="#e8ecf8" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".6"/></svg>'},
+  gForward:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h6m4 0h6M8 8l-4 4 4 4m8-8 4 4-4 4"/></svg>',title:'Forward pass',def:'The process where data flows through the network from input to output, layer by layer.',illus:'<svg viewBox="0 0 140 70"><g stroke="#7aa2ff" stroke-width="2" stroke-linecap="round" fill="none"><path d="M15 35h25m-8-6 8 6-8 6"/><path d="M55 35h25m-8-6 8 6-8 6"/><path d="M95 35h25m-8-6 8 6-8 6"/></g><circle cx="10" cy="35" r="4" fill="#7aa2ff"/><circle cx="50" cy="35" r="4" fill="#33d17a"/><circle cx="90" cy="35" r="4" fill="#ffce54"/><circle cx="130" cy="35" r="4" fill="#ffce54"/></svg>'},
+  gEpoch:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 21v-5h5"/></svg>',title:'Epoch',def:'One full pass through all the training data. During each epoch the weights are adjusted a little. More epochs means the network has practiced more.',illus:'<svg viewBox="0 0 140 70"><g transform="translate(70,35)"><circle r="24" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="3"/><path d="M0 -24 A24 24 0 1 1 -17 -17" fill="none" stroke="#7aa2ff" stroke-width="3" stroke-linecap="round"/></g><text x="70" y="40" text-anchor="middle" font-family="JetBrains Mono" font-size="13" fill="#e8ecf8" font-weight="700">42</text></svg>'},
+  gPred:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>',title:'Prediction',def:'The network\'s answer for new input values. Compare with the <strong style="color:var(--gold)">correct answer</strong> to see if the network learned correctly.',illus:'<svg viewBox="0 0 140 70"><circle cx="70" cy="35" r="24" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/><circle cx="70" cy="35" r="14" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/><circle cx="76" cy="29" r="5" fill="#33d17a"/><text x="70" y="62" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#33d17a">94%</text></svg>'}
+};
+function openConcept(id,ev){
+  ev.stopPropagation();
+  const btn=ev.currentTarget;const r=btn.getBoundingClientRect();
+  const bx=r.left+r.width/2,by=r.top+r.height/2;
+  const cx=window.innerWidth/2,cy=window.innerHeight/2;
+  const c=CONCEPTS[id];if(!c)return;
+  const card=document.getElementById('conceptCard');
+  document.getElementById('conceptIcon').innerHTML=c.icon;
+  document.getElementById('conceptTitle').textContent=c.title;
+  document.getElementById('conceptDef').innerHTML=c.def;
+  document.getElementById('conceptIllus').innerHTML=c.illus||'';
+  card.classList.remove('show');
+  card.style.transition='none';
+  card.style.setProperty('--dx',(bx-cx)+'px');
+  card.style.setProperty('--dy',(by-cy)+'px');
+  void card.offsetHeight;
+  card.style.transition='';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
+}
+function closeConcept(){document.getElementById('conceptCard').classList.remove('show');document.getElementById('conceptBackdrop').classList.remove('show');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
+(function initCardTilt(){
+  const el=document.getElementById('conceptCardInner');if(!el)return;
+  const MAX_TILT=7;
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+    const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
+    el.style.setProperty('--mx',(px*100)+'%');
+    el.style.setProperty('--my',(py*100)+'%');
+    el.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    const sx=(px-0.5)*22,sy=(py-0.5)*22;
+    el.style.boxShadow=`${-sx}px ${20-sy}px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset`;
+  });
+  el.addEventListener('mouseleave',()=>{
+    el.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%');
+    el.style.boxShadow='';
+  });
+})();
+fullReset();
+</script>
+</body>
+</html>
