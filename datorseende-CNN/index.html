@@ -40,15 +40,34 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .hint{font-size:0.72em;color:var(--dim);line-height:1.45;margin-top:5px;}
 .hint strong{color:var(--text);}
 
-/* Stegnavigering */
-.stepper{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px;}
-.steps-nav{display:flex;flex-wrap:wrap;gap:6px;}
-.snav{flex:1;min-width:112px;font-family:'DM Sans',sans-serif;font-size:0.76em;font-weight:700;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;transition:0.15s;text-align:center;}
-.snav:hover{color:var(--text);border-color:var(--accent);}
-.snav.active{background:var(--accent);border-color:var(--accent);color:#fff;}
-.step-intro{font-size:0.88em;color:var(--subtle);line-height:1.55;margin-top:11px;background:linear-gradient(180deg,rgba(77,128,255,0.07),transparent);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:10px 13px;}
-.step-intro strong{color:var(--text);}
-.step-foot{display:flex;justify-content:space-between;gap:8px;margin-top:11px;}
+/* ── Stegnavigering ── */
+.stepper{position:relative;background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.006)),var(--surface);border:1px solid var(--border);border-radius:16px;padding:12px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:inset 0 1px 0 rgba(255,255,255,0.05),0 20px 44px -30px rgba(0,0,0,0.85);}
+
+/* Segmenterad glaskontroll */
+.steps-nav{display:flex;gap:4px;padding:5px;border-radius:12px;background:rgba(0,0,0,0.22);border:1px solid rgba(255,255,255,0.05);}
+.snav{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border-radius:9px;border:1px solid transparent;background:transparent;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.78em;font-weight:600;letter-spacing:-0.01em;cursor:pointer;transition:background .28s var(--spring),color .2s,box-shadow .3s,transform .28s var(--spring);}
+.snav .num{flex:none;width:21px;height:21px;display:grid;place-items:center;border-radius:6px;border:1px solid var(--border);background:rgba(255,255,255,0.02);font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;color:var(--dim);transition:inherit;}
+.snav .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.snav:hover{color:var(--subtle);background:rgba(255,255,255,0.045);}
+.snav.done{color:var(--subtle);}
+.snav.done .num{color:var(--c);border-color:var(--c);border-color:color-mix(in srgb,var(--c) 42%,transparent);background:color-mix(in srgb,var(--c) 15%,transparent);}
+.snav.active{color:var(--text);background:linear-gradient(180deg,rgba(255,255,255,0.11),rgba(255,255,255,0.03));border-color:rgba(255,255,255,0.09);box-shadow:inset 0 1px 0 rgba(255,255,255,0.16),0 8px 22px -10px var(--c);transform:translateY(-1px);}
+.snav.active .num{color:#fff;border-color:transparent;background:var(--c);background:linear-gradient(180deg,var(--c),color-mix(in srgb,var(--c) 76%,#000));box-shadow:0 3px 10px -3px var(--c);}
+@media(max-width:600px){.snav .lbl{display:none;}.snav{padding:9px 6px;}.snav .num{width:25px;height:25px;font-size:0.9em;}}
+
+/* Stegtext – glaskort med mono-eyebrow */
+.step-intro{position:relative;overflow:hidden;margin-top:12px;padding:15px 18px;border-radius:14px;border:1px solid var(--border);background:linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.005));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+.step-intro::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(135% 120% at 0% 0%,color-mix(in srgb,var(--c) 15%,transparent),transparent 52%);}
+.si-eyebrow{position:relative;display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:0.62em;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--c);margin-bottom:9px;}
+.si-eyebrow::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c);}
+.si-body{position:relative;font-size:0.9em;color:var(--subtle);line-height:1.62;}
+.si-body strong{color:var(--text);font-weight:600;}
+@media(prefers-reduced-motion:no-preference){
+  .si-eyebrow{animation:siRise .5s var(--spring) both;}
+  .si-body{animation:siRise .5s var(--spring) .06s both;}
+}
+@keyframes siRise{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.step-foot{display:flex;justify-content:space-between;gap:8px;margin-top:12px;}
 
 
 /* ── Bild-rutnätet + sökarram ── */
@@ -243,12 +262,20 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .verdict .v-why b{color:var(--text);}
 
 /* Intro: kedjan som mental modell */
-.intro-chain{display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;margin:18px 0 4px;}
-.intro-chain .ic{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1;min-width:78px;padding:10px 6px;border:1px solid var(--border);border-radius:10px;background:var(--surface2);}
-.intro-chain .ic-n{width:20px;height:20px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:0.68em;font-weight:700;background:rgba(102,152,255,0.16);color:var(--accent2);border:1px solid rgba(102,152,255,0.3);}
-.intro-chain .ic-t{font-size:0.66em;font-weight:600;color:var(--dim);text-align:center;line-height:1.3;}
-.intro-chain .ic-a{color:var(--border);font-size:0.9em;flex:none;user-select:none;}
-@media(max-width:520px){.intro-chain .ic-a{display:none;}.intro-chain .ic{min-width:0;flex:1 1 44%;}}
+.intro-chain{position:relative;display:flex;gap:0;margin:24px 0 8px;padding:0 2px;}
+.intro-chain::before{content:'';position:absolute;top:16px;left:13.5%;right:13.5%;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--orange),var(--green));opacity:0.4;}
+.intro-chain .ic{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.intro-chain .ic-n{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:0.8em;font-weight:600;color:#fff;background:var(--c);background:linear-gradient(158deg,color-mix(in srgb,var(--c) 92%,#fff),color-mix(in srgb,var(--c) 72%,#000));border:1px solid var(--c);border-color:color-mix(in srgb,var(--c) 55%,transparent);box-shadow:0 7px 18px -7px var(--c),inset 0 1px 0 rgba(255,255,255,0.28);}
+.intro-chain .ic-t{font-size:0.67em;font-weight:600;color:var(--subtle);text-align:center;line-height:1.35;max-width:98px;}
+@media(max-width:520px){.intro-chain .ic-t{font-size:0.61em;max-width:72px;}}
+@media(prefers-reduced-motion:no-preference){
+  .intro-chain .ic{animation:plRise .55s var(--spring) both;}
+  .intro-chain .ic:nth-child(1){animation-delay:.05s;}
+  .intro-chain .ic:nth-child(2){animation-delay:.14s;}
+  .intro-chain .ic:nth-child(3){animation-delay:.23s;}
+  .intro-chain .ic:nth-child(4){animation-delay:.32s;}
+}
+@keyframes plRise{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
 
 
 /* Berättarrad */
@@ -393,7 +420,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
   <h1>Datorseende med CNN</h1>
-  <p>Rita en bild och följ exakt hur en dator ser den – pixel för pixel, filter för filter.</p>
+  <p>Rita en bild och följ hur en dator steg för steg går från pixlar till en gissning.</p>
 </div>
 
 <div class="wrap" id="wrapEl">
@@ -401,11 +428,11 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <!-- ─── Stegnavigering ─── -->
   <section class="stepper">
     <div class="steps-nav" id="stepsNav">
-      <button class="snav" data-s="1" onclick="goStep(1)">1 · Pixlarna</button>
-      <button class="snav" data-s="2" onclick="goStep(2)">2 · Filtret</button>
-      <button class="snav" data-s="3" onclick="goStep(3)">3 · Featurekartorna</button>
-      <button class="snav" data-s="4" onclick="goStep(4)">4 · Beslutet</button>
-      <button class="snav" data-s="5" onclick="goStep(5)">5 · Fri utforskning</button>
+      <button class="snav" data-s="1" style="--c:#4d80ff" onclick="goStep(1)"><span class="num">1</span><span class="lbl">Pixlarna</span></button>
+      <button class="snav" data-s="2" style="--c:#ffd866" onclick="goStep(2)"><span class="num">2</span><span class="lbl">Filtret</span></button>
+      <button class="snav" data-s="3" style="--c:#ff9f43" onclick="goStep(3)"><span class="num">3</span><span class="lbl">Featurekartorna</span></button>
+      <button class="snav" data-s="4" style="--c:#34c759" onclick="goStep(4)"><span class="num">4</span><span class="lbl">Beslutet</span></button>
+      <button class="snav" data-s="5" style="--c:#a78bfa" onclick="goStep(5)"><span class="num">5</span><span class="lbl">Fri utforskning</span></button>
     </div>
     <div class="step-intro" id="stepIntro"></div>
     <div class="step-foot">
@@ -418,7 +445,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <div class="card" id="imgCard">
     <div class="canvas-head">
       <div class="card-h" style="margin:0;">🖼️ Bilden <span class="sub">– <span id="gridLabel">16 × 16</span> <span class="term" data-term="pixel">pixlar</span></span></div>
-      <div class="toggle-sw" id="numSw" onclick="toggleNumsSw()"><span class="tw-track"></span><span>Visa pixelvärden</span></div>
+      <div class="toggle-sw" id="numSw" onclick="toggleNumsSw()"><span class="tw-track"></span><span>Visa pixelvärden (0–255)</span></div>
     </div>
     <div class="canvas-zone">
       <div class="viewfinder"><div class="vf-b"></div>
@@ -446,37 +473,39 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
           </div>
         </div>
         <!-- Filtervärden + beräkning flyttas hit i steg 2 -->
-        <div class="calc-slot" id="calcSlot"></div>
+        <div class="calc-slot" id="calcSlot">
+          <div class="calc-hero" id="calcHero"><div class="calc-empty">Klicka på ett filter till vänster för att börja.</div></div>
+          <div class="conv-controls" id="convControls" style="margin-top:11px;flex-direction:row;flex-wrap:wrap;align-items:center;">
+            <button class="btn pri big" id="scanBtn" onclick="toggleScan()">▶ Sök igenom bilden</button>
+            <button class="btn" id="stepBtn" onclick="stepScan()">⏭ Ett steg</button>
+            <select class="sel" id="scanSpeed" style="min-width:110px;">
+              <option value="normal" selected>🚶 Normal</option>
+              <option value="fast">⚡ Snabb</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Delat filterkort – flyttas in i steg 2 och steg 5 av JS -->
   <div class="card" id="filterCard">
-    <div class="card-h">🔍 <span class="term" data-term="faltning">Faltning</span> med <span class="term" data-term="filter">filter</span></div>
+    <div class="card-h">🔍 Leta efter mönster med ett <span class="term" data-term="filter">filter</span> <span class="sub">– det kallas <span class="term" data-term="faltning">faltning</span></span></div>
     <div class="filter-cols3">
       <div>
         <label class="mini-t">Välj ett filter</label>
         <div class="fk-pick" id="kernelPick"></div>
       </div>
       <div>
-        <label class="mini-t">Filtrets nio tal <span class="sub" style="font-weight:400;color:var(--dim)">– handgjorda här, tränas fram i riktiga nätverk</span></label>
+        <label class="mini-t">Filtrets nio tal</label>
         <div class="kgrid" id="kGrid"></div>
       </div>
       <div>
         <label class="mini-t" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-          <span><span class="term" data-term="featurekarta">Featurekartan</span></span>
+          <span><span class="term" data-term="featurekarta">Featurekartan</span> <span class="sub" style="font-weight:400;color:var(--dim)">– här visas var filtret reagerar</span></span>
           <button class="why-chip" onclick="openConcept('partial')" type="button">🤔 Varför syns inte hela formen?</button>
         </label>
         <div class="fmap" id="fmapEl"></div>
-        <div class="conv-controls" style="margin-top:11px;flex-direction:row;flex-wrap:wrap;align-items:center;">
-          <button class="btn pri big" id="scanBtn" onclick="toggleScan()">▶ Kör filtret</button>
-          <button class="btn" id="stepBtn" onclick="stepScan()">⏭ Ett steg</button>
-          <select class="sel" id="scanSpeed" style="min-width:110px;">
-            <option value="normal" selected>🚶 Normal</option>
-            <option value="fast">⚡ Snabb</option>
-          </select>
-        </div>
         <div class="cmp-wrap" id="cmpWrap" style="display:none;">
           <label class="mini-t" style="margin-top:11px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
             <span>Jämför filtren <span class="sub" style="font-weight:400;color:var(--dim)">– varje filter du väljer läggs till här</span></span>
@@ -506,12 +535,12 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <section class="screen sc-3">
     <div class="img-slot" data-slot="3"></div>
     <div class="card">
-      <div class="card-h" style="justify-content:space-between;">👁️ Fyra filter – fyra sätt att "se" <button class="why-chip" onclick="openConcept('partial')" type="button">🤔 Varför syns inte hela formen?</button></div>
-      <div class="rp-desc" style="margin-bottom:10px;">Riktiga bildmodeller kör <strong style="color:var(--text)">många filter parallellt</strong>. Kryssa i ett eller flera kort för att lägga ihop dem i kartan till höger, så ser du hur mycket av formen som fångas in.</div>
+      <div class="card-h" style="justify-content:space-between;">👁️ Varje filter hittar olika mönster <button class="why-chip" onclick="openConcept('partial')" type="button">🤔 Varför syns inte hela formen?</button></div>
+      <div class="rp-desc" style="margin-bottom:10px;">Ett filter räcker inte för att förstå en bild. Därför använder riktiga CNN:er <strong style="color:var(--text)">många olika filter samtidigt</strong>. Välj ett eller flera filter och se hur de tillsammans fångar allt mer av bilden.</div>
       <div class="combine-zone">
         <div class="maps4" id="maps4"></div>
         <div class="combine-result">
-          <label class="mini-t">Ihopslagna kartor <span class="sub" style="font-weight:400;color:var(--dim)">– det starkaste värdet per ruta</span></label>
+          <label class="mini-t">Sammanslagen karta <span class="sub" style="font-weight:400;color:var(--dim)">– de starkaste signalerna från de valda filtren</span></label>
           <div class="fmap" id="combinedMap"></div>
           <div class="combine-note" id="combineNote"></div>
           <button class="why-chip" style="margin-top:8px;" onclick="openConcept('coverage')" type="button">🤔 Varför blir det aldrig 100 %?</button>
@@ -522,9 +551,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="coll">
         <button class="coll-toggle" onclick="toggleColl(this,'aboutBody')">📈 Så funkar modellen<span class="arr">▼</span></button>
         <div class="coll-body" id="aboutBody">
-          Först översätts bilden till tal. En bild på 16 gånger 16 pixlar blir <strong>256 tal</strong> mellan 0 och 255.<br><br>
-          Sedan glider fyra filter över bilden, ett i taget. Varje filter skapar en egen featurekarta med <strong>196 tal</strong>.<br><br>
-          Därefter summeras varje karta till ett enda tal. Tillsammans bildar de fyra talen bildens <strong>signatur</strong>.<br><br>
+          Först blir bilden ett rutnät av tal. En bild på 16 gånger 16 pixlar blir <strong>256 tal</strong> mellan 0 och 255.<br><br>
+          Sedan söker fyra olika filter igenom bilden efter olika typer av mönster. Varje filter skapar en egen featurekarta med <strong>196 tal</strong>.<br><br>
+          Varje featurekarta sammanfattas sedan till ett enda tal som beskriver hur starkt just det filtret reagerade. De fyra talen bildar tillsammans en enkel beskrivning av bilden. I simuleringen kallar vi den bildens <strong>signatur</strong>.<br><br>
           Till sist jämförs signaturen med de fyra former modellen känner till, och den mest lika formen vinner.<br><br>
           Det här kallas ett <span class="term" data-term="cnn">faltningsnätverk</span> i miniformat. Det bygger på samma princip som ansiktsigenkänning och självkörande bilar, men de riktiga nätverken använder miljontals inlärda filter i många lager.
         </div>
@@ -544,14 +573,14 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="verdict" id="verdictEl" style="display:none;"></div>
       <div class="decide-cols">
         <div>
-          <label class="mini-t">Bildens signatur – ett tal per filter</label>
+          <label class="mini-t">Bildens signatur – hur starkt varje filter reagerade</label>
           <div class="fvec" id="fvecEl"></div>
           <div class="hint">Varje filter summeras till ett tal: <strong>hur mycket</strong> filtret reagerade. Fyra tal – det är hela modellens minne av bilden.</div>
         </div>
         <div>
-          <label class="mini-t">Likhet med de former modellen kan</label>
+          <label class="mini-t">Vilken form liknar bilden mest?</label>
           <div class="ptable" id="classTable"></div>
-          <div class="hint">Den form vars signatur liknar bildens mest vinner.</div>
+          <div class="hint">Modellen jämför bildens signatur med de fyra former den känner till. Den form som liknar bilden mest blir modellens gissning.</div>
         </div>
       </div>
     </div>
@@ -564,7 +593,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         • Båda använder <strong>filter</strong> som glider över bilden och letar mönster.<br>
         • Båda kokar ner bilden till en <strong>signatur</strong> som styr beslutet.<br><br>
         <strong style="color:var(--orange)">Skillnader</strong><br>
-        • Våra 4 filter är <strong>handgjorda</strong>, medan riktiga CNN:er <span class="term" data-term="träning">tränar fram</span> miljontals filter själva.<br>
+        • I simuleringen är filtren <strong>bestämda i förväg</strong>, medan riktiga CNN:er själva lär sig vilka filter som fungerar bäst under <span class="term" data-term="träning">träningen</span>.<br>
         • Riktiga nätverk staplar <strong>många lager</strong>: första lagret ser kanter, nästa ser former, nästa ser ögon, hjul, ansikten…<br>
         • Bilderna är miljontals pixlar i färg, inte 16×16 i gråskala.<br>
         • Vår modell känner till 4 former. Riktiga modeller kan skilja på tusentals objekt.
@@ -579,7 +608,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="coll">
       <button class="coll-toggle" onclick="toggleColl(this,'decideBody5')">🎯 Vad skulle modellen gissa?<span class="arr">▼</span></button>
       <div class="coll-body" id="decideBody5">
-        <div class="calc-empty" style="margin-bottom:11px;">⚠️ Modellen känner bara till fyra former – lodrät linje, vågrät linje, kryss och cirkel. Den kan aldrig svara "något annat", bara gissa vilken av de fyra som bilden liknar mest. Om bilden inte liknar någon av dem gissar den ändå, bara mer osäkert.</div>
+        <div class="calc-empty" style="margin-bottom:11px;">⚠️ Modellen kan bara välja mellan fyra former – lodrät linje, vågrät linje, kryss och cirkel. Ritar du något helt annat, till exempel ett hus eller en katt, måste den ändå välja den form som liknar bilden mest – bara mer osäkert.</div>
         <div class="verdict" id="verdictEl5" style="display:none;"></div>
         <div class="decide-cols">
           <div>
@@ -612,15 +641,13 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
     <h2>Hur <span>ser</span> en dator?</h2>
-    <p class="sub">En dator ser aldrig bilder som vi gör – bara tal. Här bygger du en egen liten bildmodell och följer hur den går från pixlar till gissning.</p>
+    <p class="sub">En dator ser inte en katt, ett ansikte eller en bil. Den ser bara ett rutnät av tal. I den här simuleringen följer du steg för steg hur en enkel bildmodell förvandlar dessa tal till en gissning.</p>
+    <p class="sub" style="margin-bottom:6px;">Du får rita en egen bild, släppa loss fyra olika filter på den och upptäcka vad datorn faktiskt reagerar på – och till slut se hur den landar i sin gissning. Vägen dit ser du steg för steg:</p>
     <div class="intro-chain">
-      <div class="ic"><span class="ic-n">1</span><span class="ic-t">Bilden blir tal</span></div>
-      <div class="ic-a">▸</div>
-      <div class="ic"><span class="ic-n">2</span><span class="ic-t">Filter letar kanter</span></div>
-      <div class="ic-a">▸</div>
-      <div class="ic"><span class="ic-n">3</span><span class="ic-t">Kartor visar träffar</span></div>
-      <div class="ic-a">▸</div>
-      <div class="ic"><span class="ic-n">4</span><span class="ic-t">Modellen gissar</span></div>
+      <div class="ic" style="--c:var(--accent)"><span class="ic-n">1</span><span class="ic-t">Bilden blir tal</span></div>
+      <div class="ic" style="--c:var(--gold)"><span class="ic-n">2</span><span class="ic-t">Filter söker mönster</span></div>
+      <div class="ic" style="--c:var(--orange)"><span class="ic-n">3</span><span class="ic-t">Kartor visar träffar</span></div>
+      <div class="ic" style="--c:var(--green)"><span class="ic-n">4</span><span class="ic-t">Modellen gissar</span></div>
     </div>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta →</button>
   </div>
@@ -1039,7 +1066,7 @@ function startScan(){
 function stopScan(){
   clearInterval(scanTimer); scanTimer = null;
   const btn = document.getElementById('scanBtn');
-  btn.textContent = scanPos >= FN * FN - 1 ? '↺ Kör igen' : '▶ Fortsätt';
+  btn.textContent = scanPos >= FN * FN - 1 ? '↺ Sök igen' : '▶ Fortsätt';
   btn.classList.remove('act');
 }
 function stepScan(){
@@ -1060,12 +1087,12 @@ function resetScan(){
   clearScanMarks();
   const sb = document.getElementById('scanBtn');
   const stb = document.getElementById('stepBtn');
-  if(sb){ sb.textContent = '▶ Kör filtret över bilden'; sb.disabled = curK < 0; }
+  if(sb){ sb.textContent = '▶ Sök igenom bilden'; sb.disabled = curK < 0; }
   if(stb) stb.disabled = curK < 0;
   const ch = document.getElementById('calcHero');
   if(ch) ch.innerHTML = curK < 0
     ? '<div class="calc-empty">Klicka på ett filter till vänster för att börja.</div>'
-    : '<div class="calc-empty">Kör filtret – eller klicka på en ruta i featurekartan – så visas exakt vilken multiplikation som ger värdet.</div>';
+    : '<div class="calc-empty">Sök igenom bilden – eller klicka på en ruta i featurekartan – så visas exakt vilken multiplikation som ger värdet.</div>';
 }
 
 // ── Alla fyra kartor ──
@@ -1203,15 +1230,15 @@ function onImageChange(msg){
 
 // ── Stegnavigering ──
 const STEPS = [
-  {intro:'Välj en färdig form och slå på <strong>Visa pixelvärden</strong>. Var är talen höga, och var är de noll?'},
-  {intro: () => {
+  {title:'Pixlarna', c:'#4d80ff', intro:'För att en dator ska kunna känna igen en bild måste bilden först översättas till tal. Välj en färdig form och slå på <strong>Visa pixelvärden (0–255)</strong>. Var är talen höga, och var är de noll?'},
+  {title:'Filtret', c:'#ffd866', intro: () => {
     const shape = CLASSES.find(c => c.id === currentShapeId);
     const target = shape ? shape.def : 'den valda bilden';
-    return `Ett <strong>filter</strong> är en liten bricka med nio tal som glider över bilden. På varje plats multiplicerar den sina tal med pixlarna under sig och summerar ihop dem till ett enda tal. Testa alla fyra filtren på ${target} och se vad de hittar.<br><br>Här är filtrens nio tal handgjorda så du kan se exakt vad de gör – i riktiga nätverk <strong>tränas talen fram</strong> automatiskt genom övning på tusentals bilder.`;
+    return `Ett <strong>filter</strong> är en liten bricka med nio tal som glider över bilden. På varje plats multiplicerar den sina tal med pixlarna under sig och summerar ihop dem till ett enda tal. Testa alla fyra filtren på ${target} och se vad de hittar.<br><br>Här är filtrets nio tal förutbestämda, men i riktiga nätverk <strong>tränas talen fram</strong> automatiskt genom övning på tusentals bilder.`;
   }},
-  {intro:'Riktiga modeller kör <strong>många filter samtidigt</strong>. Kryssa i flera kort för att lägga ihop dem och se hur mycket mer av konturen som fångas.'},
-  {intro:'Nu fattar modellen sitt <strong>beslut</strong>. Varje karta summeras till ett tal, de fyra talen bildar bildens signatur, och signaturen jämförs med de former modellen känner till.'},
-  {intro:'Nu är allt upplåst. Rita en egen bild eller välj en form, kör valfritt filter över den och se hur featurekartan, signaturen och beslutet hänger ihop. Prova en sned linje, en halv cirkel eller en kladdig fläck – vad hittar filtren, och vad missar de?'}
+  {title:'Featurekartorna', c:'#ff9f43', intro:'Riktiga modeller kör <strong>många filter samtidigt</strong>. Kryssa i flera filter för att lägga ihop dem och se hur mycket mer av konturen som fångas.'},
+  {title:'Beslutet', c:'#34c759', intro:'Nu fattar modellen sitt <strong>beslut</strong>. Varje karta summeras till ett tal, de fyra talen bildar bildens <span class="term" data-term="signatur">signatur</span>, och signaturen jämförs med de former modellen känner till.'},
+  {title:'Fri utforskning', c:'#a78bfa', intro:'Nu kan du experimentera fritt. Rita en egen bild eller välj en form, kör valfritt filter över den och se hur featurekartan, signaturen och beslutet hänger ihop.'}
 ];
 const imgCard = document.getElementById('imgCard');
 const filterCard = document.getElementById('filterCard');
@@ -1233,19 +1260,20 @@ function goStep(n){
   imgLocked = (n !== 5);
   pxGrid.style.cursor = imgLocked ? 'default' : 'crosshair';
 
-  // Beräkningen visas bredvid bilden – i steg 2 och i fri utforskning (steg 5)
-  const calcSlot = document.getElementById('calcSlot');
-  if(n === 2 || n === 5){
-    calcSlot.innerHTML =
-      `<div class="calc-hero" id="calcHero"><div class="calc-empty">Klicka på ett filter till vänster för att börja.</div></div>`;
-    hydrateTerms();
-  } else {
-    calcSlot.innerHTML = '';
-  }
+  // Beräkningen + scan-knapparna bor i bildkortet och visas bara i steg 2 och 5.
+  document.getElementById('calcSlot').style.display = (n === 2 || n === 5) ? '' : 'none';
 
-  document.querySelectorAll('#stepsNav .snav').forEach(b => b.classList.toggle('active', +b.dataset.s === n));
-  const introContent = STEPS[n - 1].intro;
-  document.getElementById('stepIntro').innerHTML = typeof introContent === 'function' ? introContent() : introContent;
+  document.querySelectorAll('#stepsNav .snav').forEach(b => {
+    const s = +b.dataset.s;
+    b.classList.toggle('active', s === n);
+    b.classList.toggle('done', s < n);
+  });
+  const stepData = STEPS[n - 1];
+  const introHtml = typeof stepData.intro === 'function' ? stepData.intro() : stepData.intro;
+  const stepIntroEl = document.getElementById('stepIntro');
+  stepIntroEl.style.setProperty('--c', stepData.c);
+  stepIntroEl.innerHTML = `<span class="si-eyebrow">Steg ${n} — ${stepData.title}</span><div class="si-body">${introHtml}</div>`;
+  hydrateTerms();
   document.getElementById('prevStep').style.visibility = n === 1 ? 'hidden' : 'visible';
   document.getElementById('nextStep').style.visibility = n === STEPS.length ? 'hidden' : 'visible';
 
@@ -1265,6 +1293,7 @@ const GLOSSARY = {
   vikt:          {i:'⚖️', t:'Vikt',           d:'Talen inuti filtret. I riktiga nätverk <b>lärs vikterna fram</b> under träningen. Här är de handgjorda, så att du kan se exakt vad de gör.'},
   faltning:      {i:'🎞️', t:'Faltning (convolution)', d:'Operationen som sker när filtret glider över bilden. På varje plats <b>multipliceras</b> talen parvis, produkterna <b>summeras</b>, och resultatet skrivs in i featurekartan. Faltning är det som C:et står för i CNN.'},
   featurekarta:  {i:'🗺️', t:'Featurekarta',   d:'Resultatbilden efter ett filter. Ljusa områden betyder <b>"här hittade filtret sitt mönster"</b>. Varje filter ger sin egen karta.'},
+  signatur:      {i:'🔑', t:'Signatur',        d:'De fyra tal som beskriver bilden – <b>ett per filter</b>. Varje tal säger hur starkt just det filtret reagerade på hela bilden.<br><br>Tillsammans bildar de en komprimerad beskrivning av bilden, och det är den modellen jämför mot de former den känner till när den ska gissa. I riktiga nätverk är signaturen mycket längre, men principen är densamma: bilden kokas ner till en rad tal.'},
   output:        {i:'💡', t:'Vad betyder talet?', d:'Här är det lätt att blanda ihop två sorters tal.<br><br><b>I bilden</b> är talet en ljusstyrka. 255 betyder en helt vit pixel och 0 betyder helt svart.<br><br><b>I featurekartan</b> betyder ett högt tal i stället att <em>filtret reagerade starkt här</em>. Ju högre talet är, desto tydligare hittade filtret sitt mönster, till exempel en kant. Talet är alltså ingen ljusstyrka, och det kan bli betydligt större än 255 innan det skalas om för att visas som färg. Ett värde på 0 betyder att det inte fanns något mönster alls på den platsen.'},
   ruta:          {i:'🔲', t:'Vad representerar en ruta i kartan?', d: () => `En ljus ruta i featurekartan är <b>ett enda tal</b>, inte flera pixlar avbildade.<br><br>Talet kommer från ett helt <b>3×3-område</b> i bilden. Det är filtrets nio tal multiplicerade med de nio pixlarna på den platsen, summerade till en enda siffra.<br><br>Rutan sitter på <b>mittpixeln</b> i det 3×3-området, men beskriver hela området och inte bara den enskilda pixeln. Featurekartan är därför mindre (${FN} gånger ${FN}) än bilden (${N} gånger ${N}), eftersom filtret inte får plats precis på kanten och kanterna faller bort.`},
   overlap:       {i:'🧩', t:'Varför lyser fler filter än väntat?', d:'Varje filter letar efter EN kantriktning, men verkligheten är sällan perfekt lodrät, vågrät eller diagonal. En sluttande kant i ett grovt pixelraster blir i praktiken en <b>trappa</b> av korta vågräta och lodräta steg, inte en helt jämn diagonal.<br><br>Titta på kattens öron: den <b>vågräta</b> kartan lyser starkast i <b>skåran mellan öronen</b> – där möter öronens sneda kanter huvudets raka topplinje, en äkta vågrät kant. Den lyser även svagt uppe vid öronspetsarna, där varje litet trappsteg innehåller en kort vågrät bit.<br><br>Det är ingen bugg. Riktiga nätverk räknar med precis detta: ett enda filter fångar sällan en riktning helt rent, så modeller kombinerar <b>många filter i flera lager</b> i stället för att lita på ett enda.'},
