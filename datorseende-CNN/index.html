@@ -39,6 +39,12 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .btn.ghost:hover{color:var(--text);}
 .btn.big{font-size:0.92em;padding:11px 18px;}
 .btn.act{background:rgba(77,128,255,0.16);border-color:var(--accent);}
+.btn.locked{opacity:0.5;}
+@keyframes btnShake{10%,90%{transform:translateX(-1px);}20%,80%{transform:translateX(2px);}30%,50%,70%{transform:translateX(-5px);}40%,60%{transform:translateX(5px);}}
+.btn.shake{animation:btnShake 0.45s cubic-bezier(.36,.07,.19,.97) both;}
+@keyframes pickAttn{0%,100%{box-shadow:0 0 0 0 rgba(77,128,255,0);}35%{box-shadow:0 0 0 5px rgba(77,128,255,0.28);}}
+.fk-pick.attn{animation:pickAttn 0.85s ease-out;border-radius:12px;}
+@media(prefers-reduced-motion:reduce){.btn.shake,.fk-pick.attn{animation:none;}}
 
 .hint{font-size:0.72em;color:var(--dim);line-height:1.45;margin-top:5px;}
 .hint strong{color:var(--text);}
@@ -142,7 +148,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .calc-slot:empty{display:none;}
 .fk-pick{display:flex;flex-direction:column;gap:6px;}
 .kbtn-wrap{position:relative;display:flex;}
-.kbtn{flex:1;display:flex;align-items:center;gap:9px;padding:8px 30px 8px 10px;border:1px solid var(--border);border-radius:9px;background:var(--surface2);cursor:pointer;transition:0.15s;text-align:left;font-family:'DM Sans',sans-serif;color:var(--text);}
+.kbtn{flex:1;display:flex;align-items:center;gap:11px;padding:9px 30px 9px 11px;border:1.5px solid var(--border);border-radius:10px;background:var(--surface2);cursor:pointer;transition:0.18s var(--spring);text-align:left;font-family:'DM Sans',sans-serif;color:var(--text);}
 .k-help{position:absolute;top:50%;right:9px;transform:translateY(-50%);width:18px;height:18px;border-radius:50%;border:1px solid var(--border);background:var(--bg);color:var(--dim);font-size:0.72em;font-weight:700;display:flex;align-items:center;justify-content:center;transition:0.15s;z-index:2;}
 .cmp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:8px;}
 .cmp-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:6px;position:relative;}
@@ -153,17 +159,20 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .cmp-x:hover{border-color:var(--red);color:var(--red);}
 .k-help:hover{border-color:var(--gold);color:var(--gold);background:rgba(255,216,102,0.1);}
 .kbtn:hover{border-color:var(--accent);}
-.kbtn.active{border-color:var(--accent);background:rgba(77,128,255,0.12);}
-.kbtn .kico{font-size:1.15em;flex:none;}
+.kbtn.active{border-color:var(--kc,var(--accent));background:color-mix(in srgb,var(--kc,var(--accent)) 12%,var(--surface2));box-shadow:0 0 0 1px color-mix(in srgb,var(--kc,var(--accent)) 40%,transparent),0 8px 20px -11px var(--kc,var(--accent));}
+.kbtn .kico{font-size:1.15em;flex:none;width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--dim);transition:0.18s var(--spring);}
+.kbtn.active .kico{background:color-mix(in srgb,var(--kc,var(--accent)) 24%,var(--bg));color:var(--kc,var(--accent));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--kc,var(--accent)) 50%,transparent);transform:scale(1.06);}
 .kbtn .ktxt{display:flex;flex-direction:column;line-height:1.25;}
-.kbtn .kname{font-weight:700;font-size:0.85em;}
+.kbtn .kname{font-weight:700;font-size:0.85em;transition:color 0.18s;}
+.kbtn.active .kname{color:var(--kc,var(--accent));}
 .kbtn .ktag{font-size:0.68em;color:var(--dim);}
-.kgrid{display:grid;grid-template-columns:repeat(3,42px);gap:3px;}
-.kcell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.05em;border-radius:7px;border:1px solid var(--border);}
+.kgrid{position:relative;display:grid;grid-template-columns:repeat(3,50px);gap:4px;width:fit-content;padding:12px;border-radius:14px;border:1px solid var(--border);background:linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.008));backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),0 10px 24px -18px rgba(0,0,0,0.7);transition:border-color 0.3s,box-shadow 0.3s;}
+.kgrid.filled{border-color:color-mix(in srgb,var(--kc,var(--accent)) 38%,var(--border));box-shadow:inset 0 1px 0 rgba(255,255,255,0.09),0 0 0 1px color-mix(in srgb,var(--kc,var(--accent)) 20%,transparent),0 16px 32px -16px color-mix(in srgb,var(--kc,var(--accent)) 42%,transparent);}
+.kcell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.22em;border-radius:8px;border:1px solid var(--border);}
 .kcell.pos{background:rgba(52,199,89,0.14);color:var(--green);border-color:rgba(52,199,89,0.4);}
 .kcell.neg{background:rgba(239,91,91,0.12);color:var(--red);border-color:rgba(239,91,91,0.38);}
 .kcell.zero{background:var(--surface2);color:var(--dim);}
-.kgrid-empty{grid-column:1/-1;}
+.kgrid-empty{grid-column:1/-1;display:flex;align-items:center;justify-content:center;text-align:center;min-height:158px;width:150px;}
 
 .fmap{display:grid;grid-template-columns:repeat(14,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;width:min(70vw,240px);aspect-ratio:1;}
 .fc{background:#000;cursor:pointer;}
@@ -205,13 +214,13 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .ch-op{font-size:1.3em;font-weight:700;color:var(--dim);font-family:'JetBrains Mono',monospace;}
 .ch-lab{font-size:0.6em;color:var(--dim);text-align:center;margin-top:5px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;}
 .ch-mat-wrap{display:flex;flex-direction:column;}
-.ch-result{margin-top:12px;padding-top:11px;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:0.92em;line-height:1.7;color:var(--subtle);text-align:center;}
-.ch-result .sum{color:var(--gold);font-weight:700;font-size:1.1em;}
+.ch-result{margin-top:12px;padding-top:11px;border-top:1px solid var(--border);font-family:'DM Sans',sans-serif;font-size:0.92em;line-height:1.7;color:var(--subtle);text-align:center;}
+.ch-result .sum{font-family:'JetBrains Mono',monospace;color:var(--gold);font-weight:700;font-size:1.1em;}
 .ch-result .arrow{color:var(--dim);margin:0 7px;}
-.ch-result .relu{color:var(--accent2);font-weight:700;cursor:pointer;border-bottom:1px dashed var(--accent2);}
-.ch-result .final{color:var(--green);font-weight:700;font-size:1.25em;cursor:pointer;border-bottom:1px dashed var(--green);}
-.ch-result .clip{color:var(--red);font-size:0.85em;}
-.ch-progress{margin-top:10px;padding-top:9px;border-top:1px solid var(--border);text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.74em;color:var(--dim);}
+.ch-result .relu{font-family:'JetBrains Mono',monospace;color:var(--accent2);font-weight:700;cursor:pointer;border-bottom:1px dashed var(--accent2);}
+.ch-result .final{font-family:'JetBrains Mono',monospace;color:var(--green);font-weight:700;font-size:1.25em;cursor:pointer;border-bottom:1px dashed var(--green);}
+.ch-result .clip{font-family:'DM Sans',sans-serif;color:var(--red);font-size:0.85em;}
+.ch-progress{margin-top:10px;padding-top:9px;border-top:1px solid var(--border);text-align:center;font-family:'DM Sans',sans-serif;font-size:0.74em;color:var(--dim);}
 .ch-progress:first-line{color:var(--gold);}
 
 .img-slot{display:contents;}
@@ -509,7 +518,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         </div>
         <!-- Filtervärden + beräkning flyttas hit i steg 2 -->
         <div class="calc-slot" id="calcSlot">
-          <div class="calc-hero" id="calcHero"><div class="calc-empty">Klicka på ett filter till vänster för att börja.</div></div>
+          <div class="calc-hero" id="calcHero"><div class="calc-empty">Klicka på ett filter nedanför för att börja.</div></div>
           <div class="conv-controls" id="convControls" style="margin-top:11px;flex-direction:row;flex-wrap:wrap;align-items:center;">
             <button class="btn pri big" id="scanBtn" onclick="toggleScan()">▶ Sök igenom bilden</button>
             <button class="btn" id="stepBtn" onclick="stepScan()">⏭ Ett steg</button>
@@ -949,7 +958,7 @@ function convAt(ki, ox, oy){
 function buildKernelUI(){
   document.getElementById('kernelPick').innerHTML = KERNELS.map((kk, i) =>
     `<div class="kbtn-wrap">
-       <button class="kbtn${i === curK ? ' active' : ''}" data-i="${i}" onclick="selectKernel(${i})">
+       <button class="kbtn${i === curK ? ' active' : ''}" data-i="${i}" style="--kc:${SIG_COLORS[i]}" onclick="selectKernel(${i})">
          <span class="kico">${kk.ico}</span>
          <span class="ktxt"><span class="kname">${kk.name}</span><span class="ktag">${kk.tag}</span></span>
        </button>
@@ -1001,7 +1010,14 @@ function selectKernel(i){
 function renderKernelGrid(){
   const kg = document.getElementById('kGrid');
   if(!kg) return;
-  if(curK < 0){ kg.innerHTML = '<div class="calc-empty kgrid-empty">Klicka på ett filter till vänster</div>'; return; }
+  if(curK < 0){
+    kg.classList.remove('filled');
+    kg.style.removeProperty('--kc');
+    kg.innerHTML = '<div class="calc-empty kgrid-empty">Klicka på ett filter nedanför</div>';
+    return;
+  }
+  kg.classList.add('filled');
+  kg.style.setProperty('--kc', SIG_COLORS[curK]);
   const K = KERNELS[curK].k;
   kg.innerHTML = K.flat().map(v =>
     `<div class="kcell ${v > 0 ? 'pos' : v < 0 ? 'neg' : 'zero'}">${v > 0 ? '+' + v : v}</div>`).join('');
@@ -1116,7 +1132,7 @@ function scanSummary(){
   return `Starkast utslag på <b>rad ${oy + 1}, kolumn ${ox + 1}</b> – där hittade filtret ${kind}.`;
 }
 function toggleScan(){
-  if(curK < 0) return;
+  if(curK < 0){ nudgeChooseFilter(); return; }
   if(scanTimer){ stopScan(); return; }
   startScan();
 }
@@ -1145,10 +1161,21 @@ function stopScan(){
   btn.classList.remove('act');
 }
 function stepScan(){
-  if(curK < 0) return;
+  if(curK < 0){ nudgeChooseFilter(); return; }
   if(scanTimer) stopScan();
   scanPos = Math.min(scanPos + 1, FN * FN - 1);
   scanTick();
+}
+// Feedback när eleven försöker söka/stega utan att ha valt ett filter än:
+// skaka knappen och pulsera filterlistan för att peka mot vad som saknas.
+function nudgeChooseFilter(){
+  const btn = document.getElementById('scanBtn');
+  if(btn){ btn.classList.remove('shake'); void btn.offsetWidth; btn.classList.add('shake'); }
+  const pick = document.getElementById('kernelPick');
+  if(pick){
+    pick.classList.remove('attn'); void pick.offsetWidth; pick.classList.add('attn');
+    pick.scrollIntoView({behavior:'smooth', block:'center'});
+  }
 }
 function scanTick(){
   const ox = scanPos % FN, oy = Math.floor(scanPos / FN);
@@ -1162,11 +1189,11 @@ function resetScan(){
   clearScanMarks();
   const sb = document.getElementById('scanBtn');
   const stb = document.getElementById('stepBtn');
-  if(sb){ sb.textContent = '▶ Sök igenom bilden'; sb.disabled = curK < 0; }
-  if(stb) stb.disabled = curK < 0;
+  if(sb){ sb.textContent = '▶ Sök igenom bilden'; sb.classList.toggle('locked', curK < 0); sb.setAttribute('aria-disabled', curK < 0); }
+  if(stb){ stb.classList.toggle('locked', curK < 0); stb.setAttribute('aria-disabled', curK < 0); }
   const ch = document.getElementById('calcHero');
   if(ch) ch.innerHTML = curK < 0
-    ? '<div class="calc-empty">Klicka på ett filter till vänster för att börja.</div>'
+    ? '<div class="calc-empty">Klicka på ett filter nedanför för att börja.</div>'
     : '<div class="calc-empty">Sök igenom bilden – eller klicka på en ruta i featurekartan – så visas exakt vilken multiplikation som ger värdet.</div>';
 }
 
