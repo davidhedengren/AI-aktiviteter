@@ -371,6 +371,22 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   .fx-kernel{left:56px;top:29px;}
   .fx-kernel.h{left:29px;top:56px;}.fx-kernel.d1,.fx-kernel.d2{left:56px;top:56px;}
 }
+
+/* Illustration: hur två kantkartor i lager 1 kan bilda ett hörn i lager 2 */
+.cd-stage{background:rgba(9,11,20,0.55);border:1px solid var(--border);border-radius:12px;padding:16px 12px;}
+.cd-row{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;}
+.cd-col{display:flex;flex-direction:column;align-items:center;gap:7px;width:82px;}
+.cd-tag{font-size:0.6em;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--dim);}
+.cd-col.result .cd-tag{color:var(--green);}
+.cd-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:7px;overflow:hidden;width:82px;aspect-ratio:1;}
+.cd-cell{background:#0d0f1a;}
+.cd-lbl{font-size:0.66em;font-weight:600;color:var(--subtle);text-align:center;line-height:1.3;}
+.cd-arrow{color:var(--dim);font-size:1.15em;flex:none;padding-bottom:22px;}
+.cd-glow{animation:cdPulse 1.8s ease-in-out infinite;}
+@keyframes cdPulse{0%,100%{box-shadow:0 0 3px 1px rgba(52,199,89,0.6);}50%{box-shadow:0 0 9px 3px rgba(52,199,89,0.95);}}
+.cd-note{font-size:0.76em;color:var(--dim);line-height:1.55;text-align:center;margin-top:12px;}
+.cd-note b{color:var(--text);}
+@media(prefers-reduced-motion:reduce){.cd-glow{animation:none;box-shadow:0 0 8px 2px rgba(52,199,89,0.85);}}
 .concept-desc b{color:var(--text);}
 @media(prefers-reduced-motion:reduce){.concept-card{animation:none;}}
 
@@ -595,7 +611,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         • Båda kokar ner bilden till en <strong>signatur</strong> som styr beslutet.<br><br>
         <strong style="color:var(--orange)">Skillnader</strong><br>
         • I simuleringen är filtren <strong>bestämda i förväg</strong>, medan riktiga CNN:er själva lär sig vilka filter som fungerar bäst under <span class="term" data-term="träning">träningen</span>.<br>
-        • Riktiga nätverk staplar <strong>många lager</strong>: första lagret ser kanter, nästa ser former, nästa ser ögon, hjul, ansikten…<br>
+        • Riktiga nätverk staplar <span class="term" data-term="lager2">många lager</span>: första lagret ser kanter, nästa ser former, nästa ser ögon, hjul, ansikten…<br>
         • Bilderna är miljontals pixlar i färg, inte 16×16 i gråskala.<br>
         • Vår modell känner till 4 former. Riktiga modeller kan skilja på tusentals objekt.
       </div>
@@ -1323,6 +1339,7 @@ const GLOSSARY = {
   klassificering:{i:'🎯', t:'Klassificering', d:'Att avgöra vilken kategori något tillhör. Här handlar det om vilken av de fyra formerna bilden liknar mest. Ansiktsigenkänning, tumördetektion och självkörande bilar bygger alla på klassificering.'},
   sannolikhet:   {i:'🎲', t:'Sannolikhet',    d:'Hur säker modellen är på varje kategori, uttryckt i procent. Summan blir alltid <b>100 procent</b>, eftersom modellen måste fördela hela sin säkerhet mellan formerna.'},
   cnn:           {i:'🧠', t:'CNN (faltningsnätverk)', d:'CNN står för <b>Convolutional Neural Network</b> (faltningsnätverk) och är den nätverkstyp som dominerar bildigenkänning. Den staplar <b>många lager av filter</b> som lärt sig hitta allt mer komplexa mönster: de första lagren hittar kanter, nästa lager sätter ihop dem till former, och senare lager känner igen ögon, hjul och ansikten.'},
+  lager2:        {i:'📐', t:'Från kanter till hörn', demo: buildCornerDemo, d:'Ett enda filter i lager 1 hittar bara en sorts kant, till exempel bara lodräta eller bara vågräta linjer.<br><br>Lager 2 får se resultatet från flera såna kantkartor samtidigt. Det kan lära sig att tända bara där en lodrät <b>och</b> en vågrät kant möts – exakt vid ett hörn.<br><br>Så växer komplexiteten lager för lager: kanter blir hörn och enkla former, som sedan blir ögon, hjul och ansikten. I den här simuleringen stannar vi vid lager 1, men principen är densamma i riktiga nätverk med tiotals lager.'},
   'träning':     {i:'🏋️', t:'Träning',        d:'Processen där nätverket <b>själv justerar sina filtervikter</b> genom att öva på tusentals märkta exempelbilder. Filtren i den här simuleringen är handgjorda, medan riktiga nätverk lär sig sina filter under träningen.'},
   coverage:      {i:'🤔', t:'Varför blir det aldrig 100 %?', d:'Varje filter fångar bara <b>en</b> av de två riktningarna en kant kan gå i – till exempel mörkt→ljust, aldrig ljust→mörkt. Den motsatta riktningen ger en negativ summa, och <span class="term" data-term="relu">ReLU</span> nollar allt negativt.<br><br>Så en rak stapel har alltid <b>två</b> kanter, men filtret som är byggd för den riktningen ser bara en av dem. Det gäller lika mycket när du kryssar i alla fyra filter – ingen av dem har en spegelvänd tvilling som fångar den bortnollade sidan.<br><br>Riktiga nätverk löser det genom att lära sig <b>miljontals filter</b>, mörka som ljusa varianter av varandra, i många lager.'},
 };
@@ -1333,10 +1350,62 @@ function openConcept(id){
   if(!g) return;
   document.getElementById('conceptIco').textContent = g.i;
   document.getElementById('conceptTitle').textContent = g.t;
-  document.getElementById('conceptDemo').innerHTML = '';
+  document.getElementById('conceptDemo').innerHTML = typeof g.demo === 'function' ? g.demo() : '';
   document.getElementById('conceptDesc').innerHTML = typeof g.d === 'function' ? g.d() : g.d;
   conceptCard.style.transform = '';
   conceptOverlay.classList.add('show');
+}
+// Illustration: två kantkartor i lager 1 kombineras till en hörndetektor i lager 2.
+// Rent illustrativ – ingen faktisk beräkning, bara idén bakom att stapla lager.
+function buildCornerDemo(){
+  const G = 8;
+  const filled = (x, y) => x >= 2 && y >= 2;              // en "kloss" i nedre högra hörnet
+  const vEdge  = (x, y) => x === 2 && y >= 2 && y <= 7;    // dess lodräta kant
+  const hEdge  = (x, y) => y === 2 && x >= 2 && x <= 7;    // dess vågräta kant
+  const corner = (x, y) => x === 2 && y === 2;             // där kanterna möts
+
+  const grid = (paint) => {
+    let html = '';
+    for(let y = 0; y < G; y++) for(let x = 0; x < G; x++) html += paint(x, y);
+    return `<div class="cd-grid">${html}</div>`;
+  };
+  const cell = (bg, glow) => `<div class="cd-cell${glow ? ' cd-glow' : ''}" style="background:${bg}"></div>`;
+  const faint = 'rgba(255,255,255,0.08)';
+  const off = '#0d0f1a';
+
+  const gridV = grid((x, y) => cell(vEdge(x, y) ? 'rgba(102,152,255,0.9)' : filled(x, y) ? faint : off));
+  const gridH = grid((x, y) => cell(hEdge(x, y) ? 'rgba(255,216,102,0.9)' : filled(x, y) ? faint : off));
+  const gridC = grid((x, y) => {
+    if(corner(x, y)) return cell('rgba(52,199,89,1)', true);
+    if(vEdge(x, y))  return cell('rgba(102,152,255,0.22)');
+    if(hEdge(x, y))  return cell('rgba(255,216,102,0.22)');
+    if(filled(x, y)) return cell(faint);
+    return cell(off);
+  });
+
+  return `
+    <div class="cd-stage">
+      <div class="cd-row">
+        <div class="cd-col">
+          <div class="cd-tag">Lager 1</div>
+          ${gridV}
+          <div class="cd-lbl">Lodrät kant</div>
+        </div>
+        <div class="cd-arrow">+</div>
+        <div class="cd-col">
+          <div class="cd-tag">Lager 1</div>
+          ${gridH}
+          <div class="cd-lbl">Vågrät kant</div>
+        </div>
+        <div class="cd-arrow">→</div>
+        <div class="cd-col result">
+          <div class="cd-tag">Lager 2</div>
+          ${gridC}
+          <div class="cd-lbl">Hörn</div>
+        </div>
+      </div>
+      <div class="cd-note">Lager 2 tänder starkast bara där <b>båda</b> kanterna finns samtidigt – exakt vid hörnet.</div>
+    </div>`;
 }
 // Filter-förklaring med animerad balans/obalans-demo
 function buildFilterDemo(i){
