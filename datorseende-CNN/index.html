@@ -16,6 +16,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 .back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .back-link:hover{color:var(--text);border-color:var(--dim);}
+.lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:7px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
+.lang-link:hover{color:var(--text);border-color:var(--dim);}
+.lang-link svg{display:block;width:20px;height:12px;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,0.09);}
 .hd{width:100%;text-align:center;padding:14px 16px 10px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
 .hd h1{font-family:'Syne',sans-serif;font-size:1.55em;font-weight:800;letter-spacing:-0.01em;margin-bottom:2px;background:linear-gradient(92deg,var(--text) 20%,var(--accent2) 60%,var(--accent) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
 .hd p{color:var(--dim);font-size:0.8em;max-width:620px;margin:0 auto;line-height:1.4;}
@@ -304,9 +307,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .gloss-item:hover{border-color:var(--accent);}
 .gloss-item b{color:var(--accent2);}
 
-/* Proaktiv "varför?"-chip – öppnar samma glaskort som begrepp */
-.why-chip{font-family:'DM Sans',sans-serif;font-size:0.72em;font-weight:700;color:var(--gold);background:rgba(255,216,102,0.08);border:1px solid rgba(255,216,102,0.3);border-radius:20px;padding:4px 11px;cursor:pointer;transition:0.15s;white-space:nowrap;}
-.why-chip:hover{background:rgba(255,216,102,0.16);border-color:var(--gold);}
 
 .concept-overlay{position:fixed;inset:0;background:rgba(7,10,18,0.6);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);z-index:300;display:none;align-items:center;justify-content:center;padding:20px;perspective:900px;}
 .concept-overlay.show{display:flex;}
@@ -315,7 +315,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .concept-card::before{content:'';position:absolute;inset:0;border-radius:18px;background:radial-gradient(420px 200px at var(--gx,50%) var(--gy,0%),rgba(102,152,255,0.14),transparent 65%);pointer-events:none;}
 .concept-x{position:absolute;top:11px;right:13px;background:none;border:none;color:var(--dim);font-size:1.05em;cursor:pointer;padding:4px;line-height:1;}
 .concept-x:hover{color:var(--text);}
-.concept-ico{font-size:1.9em;line-height:1;margin-bottom:9px;filter:drop-shadow(0 3px 10px rgba(77,128,255,0.45));}
+.concept-ico{display:none;}
 .concept-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.12em;letter-spacing:-0.01em;margin-bottom:7px;background:linear-gradient(92deg,var(--text),var(--accent2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
 .concept-desc{font-size:0.88em;line-height:1.65;color:var(--subtle);}
 
@@ -411,6 +411,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 @media(max-width:900px){
   .back-link{position:static;transform:none;margin-bottom:4px;}
+  .lang-link{position:static;transform:none;margin-bottom:4px;}
   .hd{padding:10px 16px 8px;}
 }
 </style>
@@ -419,6 +420,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
+  <a class="lang-link" href="/datorseende-CNN_ENG" aria-label="Read in English" title="Read in English"><svg viewBox="0 0 50 30" aria-hidden="true"><rect width="50" height="30" fill="#012169"/><path d="M0,0 L50,30 M50,0 L0,30" stroke="#fff" stroke-width="6"/><clipPath id="ujFlag"><path d="M25,15 L50,30 L50,15 Z M25,15 L50,0 L25,0 Z M25,15 L0,30 L25,30 Z M25,15 L0,0 L0,15 Z"/></clipPath><path d="M0,0 L50,30 M50,0 L0,30" clip-path="url(#ujFlag)" stroke="#C8102E" stroke-width="3.5"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#fff" stroke-width="10"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#C8102E" stroke-width="6"/></svg>English</a>
   <h1>Datorseende med CNN</h1>
   <p>Rita en bild och följ hur en dator steg för steg går från pixlar till en gissning.</p>
 </div>
@@ -444,7 +446,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <!-- Delat bildkort – flyttas in i aktuell skärm av JS -->
   <div class="card" id="imgCard">
     <div class="canvas-head">
-      <div class="card-h" style="margin:0;">🖼️ Bilden <span class="sub">– <span id="gridLabel">16 × 16</span> <span class="term" data-term="pixel">pixlar</span></span></div>
+      <div class="card-h" style="margin:0;">Bilden <span class="sub">– <span id="gridLabel">16 × 16</span> <span class="term" data-term="pixel">pixlar</span></span></div>
       <div class="toggle-sw" id="numSw" onclick="toggleNumsSw()"><span class="tw-track"></span><span>Visa pixelvärden (0–255)</span></div>
     </div>
     <div class="canvas-zone">
@@ -467,9 +469,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         <div class="draw-tools" id="drawTools">
           <label class="mini-t" style="margin-top:4px;">Rita själv</label>
           <div class="tool-row">
-            <button class="btn" id="penBtn" onclick="setTool('pen')">✏️ Penna</button>
-            <button class="btn" id="eraseBtn" onclick="setTool('erase')">◻️ Sudd</button>
-            <button class="btn ghost" onclick="clearImage()">🗑 Rensa</button>
+            <button class="btn" id="penBtn" onclick="setTool('pen')">Penna</button>
+            <button class="btn" id="eraseBtn" onclick="setTool('erase')">Sudd</button>
+            <button class="btn ghost" onclick="clearImage()">Rensa</button>
           </div>
         </div>
         <!-- Filtervärden + beräkning flyttas hit i steg 2 -->
@@ -479,8 +481,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
             <button class="btn pri big" id="scanBtn" onclick="toggleScan()">▶ Sök igenom bilden</button>
             <button class="btn" id="stepBtn" onclick="stepScan()">⏭ Ett steg</button>
             <select class="sel" id="scanSpeed" style="min-width:110px;">
-              <option value="normal" selected>🚶 Normal</option>
-              <option value="fast">⚡ Snabb</option>
+              <option value="normal" selected>Normal</option>
+              <option value="fast">Snabb</option>
             </select>
           </div>
         </div>
@@ -490,7 +492,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
   <!-- Delat filterkort – flyttas in i steg 2 och steg 5 av JS -->
   <div class="card" id="filterCard">
-    <div class="card-h">🔍 Leta efter mönster med ett <span class="term" data-term="filter">filter</span> <span class="sub">– det kallas <span class="term" data-term="faltning">faltning</span></span></div>
+    <div class="card-h">Leta efter mönster med ett <span class="term" data-term="filter">filter</span> (<span class="term" data-term="faltning">faltning</span>)</div>
     <div class="filter-cols3">
       <div>
         <label class="mini-t">Välj ett filter</label>
@@ -501,22 +503,22 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         <div class="kgrid" id="kGrid"></div>
       </div>
       <div>
-        <label class="mini-t" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-          <span><span class="term" data-term="featurekarta">Featurekartan</span> <span class="sub" style="font-weight:400;color:var(--dim)">– här visas var filtret reagerar</span></span>
-          <button class="why-chip" onclick="openConcept('partial')" type="button">🤔 Varför syns inte hela formen?</button>
+        <label class="mini-t">
+          <span class="term" data-term="featurekarta">Featurekartan</span> <span class="sub" style="font-weight:400;color:var(--dim)">– här visas var filtret reagerar</span>
         </label>
         <div class="fmap" id="fmapEl"></div>
         <div class="cmp-wrap" id="cmpWrap" style="display:none;">
           <label class="mini-t" style="margin-top:11px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
             <span>Jämför filtren <span class="sub" style="font-weight:400;color:var(--dim)">– varje filter du väljer läggs till här</span></span>
-            <span style="display:flex;gap:6px;align-items:center;">
-              <button class="why-chip" onclick="openConcept('overlap')" type="button">🤔 Varför lyser fler filter än väntat?</button>
-              <button class="btn ghost" style="padding:3px 8px;font-size:0.9em;" onclick="clearCompare()">Rensa</button>
-            </span>
+            <button class="btn ghost" style="padding:3px 8px;font-size:0.9em;" onclick="clearCompare()">Rensa</button>
           </label>
           <div class="cmp-grid" id="cmpGrid"></div>
         </div>
       </div>
+    </div>
+    <div class="coll" id="partialColl" style="margin-top:12px;">
+      <button class="coll-toggle" onclick="toggleWhy(this,'whyPartialF','partial')" type="button">Varför syns inte hela formen?<span class="arr">▼</span></button>
+      <div class="coll-body" id="whyPartialF"></div>
     </div>
   </div>
 
@@ -535,7 +537,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <section class="screen sc-3">
     <div class="img-slot" data-slot="3"></div>
     <div class="card">
-      <div class="card-h" style="justify-content:space-between;">👁️ Varje filter hittar olika mönster <button class="why-chip" onclick="openConcept('partial')" type="button">🤔 Varför syns inte hela formen?</button></div>
+      <div class="card-h">Varje filter hittar olika mönster</div>
       <div class="rp-desc" style="margin-bottom:10px;">Ett filter räcker inte för att förstå en bild. Därför använder riktiga CNN:er <strong style="color:var(--text)">många olika filter samtidigt</strong>. Välj ett eller flera filter och se hur de tillsammans fångar allt mer av bilden.</div>
       <div class="combine-zone">
         <div class="maps4" id="maps4"></div>
@@ -543,13 +545,16 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
           <label class="mini-t">Sammanslagen karta <span class="sub" style="font-weight:400;color:var(--dim)">– de starkaste signalerna från de valda filtren</span></label>
           <div class="fmap" id="combinedMap"></div>
           <div class="combine-note" id="combineNote"></div>
-          <button class="why-chip" style="margin-top:8px;" onclick="openConcept('coverage')" type="button">🤔 Varför blir det aldrig 100 %?</button>
         </div>
       </div>
+      <div class="coll" style="margin-top:12px;">
+        <button class="coll-toggle" onclick="toggleWhy(this,'whyCoverage3','coverage')" type="button">Varför blir det aldrig 100 %?<span class="arr">▼</span></button>
+        <div class="coll-body" id="whyCoverage3"></div>
+      </div>
     </div>
-    <div class="info-grid">
+    <div class="info-grid" style="grid-template-columns:1fr;">
       <div class="coll">
-        <button class="coll-toggle" onclick="toggleColl(this,'aboutBody')">📈 Så funkar modellen<span class="arr">▼</span></button>
+        <button class="coll-toggle" onclick="toggleColl(this,'aboutBody')">Så funkar modellen<span class="arr">▼</span></button>
         <div class="coll-body" id="aboutBody">
           Först blir bilden ett rutnät av tal. En bild på 16 gånger 16 pixlar blir <strong>256 tal</strong> mellan 0 och 255.<br><br>
           Sedan söker fyra olika filter igenom bilden efter olika typer av mönster. Varje filter skapar en egen featurekarta med <strong>196 tal</strong>.<br><br>
@@ -558,10 +563,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
           Det här kallas ett <span class="term" data-term="cnn">faltningsnätverk</span> i miniformat. Det bygger på samma princip som ansiktsigenkänning och självkörande bilar, men de riktiga nätverken använder miljontals inlärda filter i många lager.
         </div>
       </div>
-      <div class="coll">
-        <button class="coll-toggle" onclick="toggleColl(this,'glossBody')">📖 Begreppslista<span class="arr">▼</span></button>
-        <div class="coll-body" id="glossBody"><div id="glossaryBody"></div></div>
-      </div>
     </div>
   </section>
 
@@ -569,7 +570,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <section class="screen sc-4">
     <div class="img-slot" data-slot="4"></div>
     <div class="card">
-      <div class="card-h">🎯 Beslutet</div>
+      <div class="card-h">Beslutet</div>
       <div class="verdict" id="verdictEl" style="display:none;"></div>
       <div class="decide-cols">
         <div>
@@ -585,7 +586,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       </div>
     </div>
     <div class="coll">
-      <button class="coll-toggle" onclick="toggleColl(this,'realBody')">🤖 Hur hänger det ihop med riktig AI?<span class="arr">▼</span></button>
+      <button class="coll-toggle" onclick="toggleColl(this,'realBody')">Hur hänger det ihop med riktig AI?<span class="arr">▼</span></button>
       <div class="coll-body" id="realBody">
         Vår minimodell och riktiga bildmodeller bygger på samma grundprincip, men skiljer sig enormt i skala.<br><br>
         <strong style="color:var(--green)">Likheter</strong><br>
@@ -606,9 +607,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="img-slot" data-slot="5"></div>
     <div class="filter-slot" data-fslot="5"></div>
     <div class="coll">
-      <button class="coll-toggle" onclick="toggleColl(this,'decideBody5')">🎯 Vad skulle modellen gissa?<span class="arr">▼</span></button>
+      <button class="coll-toggle" onclick="toggleColl(this,'decideBody5')">Vad skulle modellen gissa?<span class="arr">▼</span></button>
       <div class="coll-body" id="decideBody5">
-        <div class="calc-empty" style="margin-bottom:11px;">⚠️ Modellen kan bara välja mellan fyra former – lodrät linje, vågrät linje, kryss och cirkel. Ritar du något helt annat, till exempel ett hus eller en katt, måste den ändå välja den form som liknar bilden mest – bara mer osäkert.</div>
+        <div class="calc-empty" style="margin-bottom:11px;">Modellen kan bara välja mellan fyra former – lodrät linje, vågrät linje, kryss och cirkel. Ritar du något helt annat, till exempel ett hus eller en katt, måste den ändå välja den form som liknar bilden mest – bara mer osäkert.</div>
         <div class="verdict" id="verdictEl5" style="display:none;"></div>
         <div class="decide-cols">
           <div>
@@ -623,6 +624,12 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       </div>
     </div>
   </section>
+
+  <!-- Beständig begreppslista – nås i alla steg -->
+  <div class="coll" style="margin-top:14px;">
+    <button class="coll-toggle" onclick="toggleColl(this,'glossBody')">Begreppslista<span class="arr">▼</span></button>
+    <div class="coll-body" id="glossBody"><div id="glossaryBody"></div></div>
+  </div>
 
 </div>
 
@@ -641,8 +648,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
     <h2>Hur <span>ser</span> en dator?</h2>
-    <p class="sub">En dator ser inte en katt, ett ansikte eller en bil. Den ser bara ett rutnät av tal. I den här simuleringen följer du steg för steg hur en enkel bildmodell förvandlar dessa tal till en gissning.</p>
-    <p class="sub" style="margin-bottom:6px;">Du får rita en egen bild, släppa loss fyra olika filter på den och upptäcka vad datorn faktiskt reagerar på – och till slut se hur den landar i sin gissning. Vägen dit ser du steg för steg:</p>
+    <p class="sub">I den här simuleringen får du följa hur en enkel bildmodell går från att tolka en bild som ett rutnät av tal till en gissning av vad bilden föreställer.</p>
+    <p class="sub" style="margin-bottom:6px;">Modellen du bygger kallas ett <b style="color:var(--accent2)">faltningsnätverk (CNN)</b> – en teknik som låter datorer tolka foton, känna igen ansikten och läsa av vägskyltar. Så här går det till:</p>
     <div class="intro-chain">
       <div class="ic" style="--c:var(--accent)"><span class="ic-n">1</span><span class="ic-t">Bilden blir tal</span></div>
       <div class="ic" style="--c:var(--gold)"><span class="ic-n">2</span><span class="ic-t">Filter söker mönster</span></div>
@@ -1024,7 +1031,7 @@ function showCalc(ox, oy){
     `<div class="ch-cell ${t.prod>0?'p-pos':t.prod<0?'p-neg':'p-zero'}">${t.prod>0?'+'+t.prod:t.prod}</div>`).join('');
   hero.innerHTML = `
     <div class="ch-inner">
-      <div class="ch-top">🧮 Räkningen bakom <span class="term" data-term="ruta">rutan</span> <span class="ch-pos">rad ${oy + 1}, kolumn ${ox + 1}</span></div>
+      <div class="ch-top">Räkningen bakom <span class="term" data-term="ruta">rutan</span> <span class="ch-pos">rad ${oy + 1}, kolumn ${ox + 1}</span></div>
       <div class="ch-stack">
         <div class="ch-mat-wrap"><div class="ch-mat">${pxMat}</div><div class="ch-lab">3×3-området i bilden</div></div>
         <div class="ch-op">×</div>
@@ -1202,7 +1209,7 @@ function classify(){
   const sure = top.p > 0.55;
   const vHtml = sure
     ? `<div class="v-head"><span class="v-ico">${c.ico}</span><span>Modellen gissar <b>${c.name.toLowerCase()}</b> – ${Math.round(top.p*100)} %</span></div>`
-    : `<div class="v-head"><span class="v-ico">🤔</span><span>Modellen tvekar mellan <b>${c.name.toLowerCase()}</b> och <b>${CLASSES[second.i].name.toLowerCase()}</b></span></div>
+    : `<div class="v-head"><span class="v-ico">?</span><span>Modellen tvekar mellan <b>${c.name.toLowerCase()}</b> och <b>${CLASSES[second.i].name.toLowerCase()}</b></span></div>
        <div class="v-why">Modellen minns bara <b>hur mycket</b> varje filter reagerade – inte <b>var</b> i bilden det hände. ${c.name} och ${CLASSES[second.i].name} kan ha ungefär lika mycket av varje kantriktning, fast utspridd på olika ställen, och då blir signaturerna nästan identiska. Riktiga nätverk löser det genom att stapla många lager och behålla den rumsliga informationen längre.</div>`;
   ['verdictEl','verdictEl5'].forEach(id => {
     const el = document.getElementById(id);
@@ -1262,6 +1269,9 @@ function goStep(n){
 
   // Beräkningen + scan-knapparna bor i bildkortet och visas bara i steg 2 och 5.
   document.getElementById('calcSlot').style.display = (n === 2 || n === 5) ? '' : 'none';
+  // "Varför syns inte hela formen?" visas bara i steg 2 (filterkortet delas med steg 5).
+  const partialColl = document.getElementById('partialColl');
+  if(partialColl) partialColl.style.display = (n === 2) ? '' : 'none';
 
   document.querySelectorAll('#stepsNav .snav').forEach(b => {
     const s = +b.dataset.s;
@@ -1293,11 +1303,11 @@ const GLOSSARY = {
   vikt:          {i:'⚖️', t:'Vikt',           d:'Talen inuti filtret. I riktiga nätverk <b>lärs vikterna fram</b> under träningen. Här är de handgjorda, så att du kan se exakt vad de gör.'},
   faltning:      {i:'🎞️', t:'Faltning (convolution)', d:'Operationen som sker när filtret glider över bilden. På varje plats <b>multipliceras</b> talen parvis, produkterna <b>summeras</b>, och resultatet skrivs in i featurekartan. Faltning är det som C:et står för i CNN.'},
   featurekarta:  {i:'🗺️', t:'Featurekarta',   d:'Resultatbilden efter ett filter. Ljusa områden betyder <b>"här hittade filtret sitt mönster"</b>. Varje filter ger sin egen karta.'},
-  signatur:      {i:'🔑', t:'Signatur',        d:'De fyra tal som beskriver bilden – <b>ett per filter</b>. Varje tal säger hur starkt just det filtret reagerade på hela bilden.<br><br>Tillsammans bildar de en komprimerad beskrivning av bilden, och det är den modellen jämför mot de former den känner till när den ska gissa. I riktiga nätverk är signaturen mycket längre, men principen är densamma: bilden kokas ner till en rad tal.'},
-  output:        {i:'💡', t:'Vad betyder talet?', d:'Här är det lätt att blanda ihop två sorters tal.<br><br><b>I bilden</b> är talet en ljusstyrka. 255 betyder en helt vit pixel och 0 betyder helt svart.<br><br><b>I featurekartan</b> betyder ett högt tal i stället att <em>filtret reagerade starkt här</em>. Ju högre talet är, desto tydligare hittade filtret sitt mönster, till exempel en kant. Talet är alltså ingen ljusstyrka, och det kan bli betydligt större än 255 innan det skalas om för att visas som färg. Ett värde på 0 betyder att det inte fanns något mönster alls på den platsen.'},
+  signatur:      {i:'🔑', t:'Signatur (featurevektor)', d:'De fyra tal som beskriver bilden – <b>ett per filter</b>. Varje tal är summan av en featurekarta och säger hur starkt just det filtret reagerade, så bildens 256 pixlar kokas ner till <b>fyra tal</b>.<br><br>Tillsammans bildar de en komprimerad beskrivning som modellen jämför mot de former den känner till när den ska gissa. I riktiga nätverk kallas den <b>featurevektor</b> och är mycket längre, men principen är densamma: bilden kokas ner till en rad tal.'},
+  output:        {i:'💡', t:'Pixelvärde eller featurevärde?', d:'Här är det lätt att blanda ihop två sorters tal.<br><br><b>I bilden</b> är talet en ljusstyrka. 255 betyder en helt vit pixel och 0 betyder helt svart.<br><br><b>I featurekartan</b> betyder ett högt tal i stället att <em>filtret reagerade starkt här</em>. Ju högre talet är, desto tydligare hittade filtret sitt mönster, till exempel en kant. Talet är alltså ingen ljusstyrka, och det kan bli betydligt större än 255 innan det skalas om för att visas som färg. Ett värde på 0 betyder att det inte fanns något mönster alls på den platsen.'},
   ruta:          {i:'🔲', t:'Vad representerar en ruta i kartan?', d: () => `En ljus ruta i featurekartan är <b>ett enda tal</b>, inte flera pixlar avbildade.<br><br>Talet kommer från ett helt <b>3×3-område</b> i bilden. Det är filtrets nio tal multiplicerade med de nio pixlarna på den platsen, summerade till en enda siffra.<br><br>Rutan sitter på <b>mittpixeln</b> i det 3×3-området, men beskriver hela området och inte bara den enskilda pixeln. Featurekartan är därför mindre (${FN} gånger ${FN}) än bilden (${N} gånger ${N}), eftersom filtret inte får plats precis på kanten och kanterna faller bort.`},
   overlap:       {i:'🧩', t:'Varför lyser fler filter än väntat?', d:'Varje filter letar efter EN kantriktning, men verkligheten är sällan perfekt lodrät, vågrät eller diagonal. En sluttande kant i ett grovt pixelraster blir i praktiken en <b>trappa</b> av korta vågräta och lodräta steg, inte en helt jämn diagonal.<br><br>Titta på kattens öron: den <b>vågräta</b> kartan lyser starkast i <b>skåran mellan öronen</b> – där möter öronens sneda kanter huvudets raka topplinje, en äkta vågrät kant. Den lyser även svagt uppe vid öronspetsarna, där varje litet trappsteg innehåller en kort vågrät bit.<br><br>Det är ingen bugg. Riktiga nätverk räknar med precis detta: ett enda filter fångar sällan en riktning helt rent, så modeller kombinerar <b>många filter i flera lager</b> i stället för att lita på ett enda.'},
-  katt:          {i:'🐱', t:'En katt? Den kan modellen inte!', d:'Katten behöver fler detaljer än de enkla formerna, så bilden har nu <b>24 × 24 pixlar</b> i stället för 16 × 16 – fler pixlar ger plats för öron, ögon och morrhår.<br><br>🔎 <b>Utmaning – gissa först, kör sedan filtren ett i taget:</b><br>• Vilka två filter tänds starkast längs öronens <b>sneda sidor</b>?<br>• Vilket hittar de mörka <b>ögonen</b> och ena sidan av huvudet?<br>• Vilket hittar <b>munnen och morrhåren</b>?<br><br>Precis så jobbar riktiga <span class="term" data-term="cnn">CNN</span>: olika filter specialiserar sig på olika delar, och senare lager sätter ihop delarna till "katt".<br><br>Titta till sist på <b>beslutet</b>. Katten är ingen av de fyra former modellen känner till – men den <em>måste</em> ändå välja en av dem. En modell kan bara svara med det den har lärt sig!'},
+  katt:          {i:'🐱', t:'En katt? Den kan modellen inte!', d:'Katten behöver fler detaljer än de enkla formerna, så bilden har nu <b>24 × 24 pixlar</b> i stället för 16 × 16 – fler pixlar ger plats för öron, ögon och morrhår.<br><br>Testa filtren ett i taget och se vilka mönster varje filter hittar: de sneda filtren reagerar på öronens kanter, det lodräta på huvudets sidor och ögonen, och det vågräta på munnen och morrhåren. Inget enskilt filter ser hela katten.<br><br>Titta sedan på <b>beslutet</b>. Katten är ingen av de fyra former modellen känner till, men den måste ändå välja den som liknar mest – en modell kan bara svara med det den har lärt sig.'},
   partial:       {i:'🤔', t:'Varför syns inte hela formen?', d: () => {
     const examples = {
       cross:  'Ett kryss består av en lodrät och en vågrät linje. Lodräta kanter finns bara vid sidorna av den lodräta linjen, och vågräta kanter bara vid topp och botten av den vågräta linjen. Där de korsar varandra möter vitt bara vitt, vilket inte ger <b>någon kant alls</b>, så mitten syns inte i kartan trots att det är mitt i bilden.',
@@ -1310,10 +1320,9 @@ const GLOSSARY = {
     return `Filtret är en <b>kantdetektor</b>. Det ger utslag bara där just <em>dess</em> sorts kant finns.<br><br>${ex}<br><br>Det är först när alla fyra filtrens kartor läggs ihop till <b>signaturen</b> i steg 4 som modellen kan avgöra vilken form det är.`;
   }},
   relu:          {i:'✂️', t:'ReLU',           d:'En enkel regel som säger att <b>negativa värden blir 0</b> medan positiva värden behålls som de är. Det låter nätverket fokusera på var mönstret finns i stället för var det saknas. ReLU används i nästan alla neurala nätverk.'},
-  featurevektor: {i:'🧬', t:'Signatur (featurevektor)', d:'En kort lista med tal som sammanfattar bildens innehåll. Här är det summan av varje featurekarta, så <b>256 pixlar kokas ner till fyra tal</b>.'},
   klassificering:{i:'🎯', t:'Klassificering', d:'Att avgöra vilken kategori något tillhör. Här handlar det om vilken av de fyra formerna bilden liknar mest. Ansiktsigenkänning, tumördetektion och självkörande bilar bygger alla på klassificering.'},
   sannolikhet:   {i:'🎲', t:'Sannolikhet',    d:'Hur säker modellen är på varje kategori, uttryckt i procent. Summan blir alltid <b>100 procent</b>, eftersom modellen måste fördela hela sin säkerhet mellan formerna.'},
-  cnn:           {i:'🧠', t:'CNN (faltningsnätverk)', d:'Den nätverkstyp som dominerar bildigenkänning. Den staplar <b>många lager av filter</b> som lärt sig hitta allt mer komplexa mönster: de första lagren hittar kanter, nästa lager sätter ihop dem till former, och senare lager känner igen ögon, hjul och ansikten.'},
+  cnn:           {i:'🧠', t:'CNN (faltningsnätverk)', d:'CNN står för <b>Convolutional Neural Network</b> (faltningsnätverk) och är den nätverkstyp som dominerar bildigenkänning. Den staplar <b>många lager av filter</b> som lärt sig hitta allt mer komplexa mönster: de första lagren hittar kanter, nästa lager sätter ihop dem till former, och senare lager känner igen ögon, hjul och ansikten.'},
   'träning':     {i:'🏋️', t:'Träning',        d:'Processen där nätverket <b>själv justerar sina filtervikter</b> genom att öva på tusentals märkta exempelbilder. Filtren i den här simuleringen är handgjorda, medan riktiga nätverk lär sig sina filter under träningen.'},
   coverage:      {i:'🤔', t:'Varför blir det aldrig 100 %?', d:'Varje filter fångar bara <b>en</b> av de två riktningarna en kant kan gå i – till exempel mörkt→ljust, aldrig ljust→mörkt. Den motsatta riktningen ger en negativ summa, och <span class="term" data-term="relu">ReLU</span> nollar allt negativt.<br><br>Så en rak stapel har alltid <b>två</b> kanter, men filtret som är byggd för den riktningen ser bara en av dem. Det gäller lika mycket när du kryssar i alla fyra filter – ingen av dem har en spegelvänd tvilling som fångar den bortnollade sidan.<br><br>Riktiga nätverk löser det genom att lära sig <b>miljontals filter</b>, mörka som ljusa varianter av varandra, i många lager.'},
 };
@@ -1356,7 +1365,7 @@ function buildFilterDemo(i){
       </div>
       <div class="fx-cap">
         <div class="cap-a"><span class="balance">Över en <b>jämn yta</b> tar plus och minus ut varandra, så summan blir <b>0</b>.</span></div>
-        <div class="cap-b"><span class="broken">Över <b>kanten</b> bryts balansen, summan blir ett <b>stort tal</b> och rutan tänds. ✨</span></div>
+        <div class="cap-b"><span class="broken">Över <b>kanten</b> bryts balansen, summan blir ett <b>stort tal</b> och rutan tänds.</span></div>
       </div>
       <div class="fx-legend">
         <span><i class="fk-neg"></i> negativa tal</span>
@@ -1402,12 +1411,23 @@ function renderGlossary(){
   // "partial" och "coverage" är kontextuella hintar (nås via chip/popup), inte kärnbegrepp – utelämnas här
   document.getElementById('glossaryBody').innerHTML = '<div class="gloss-list">' +
     Object.entries(GLOSSARY).filter(([id]) => id !== 'partial' && id !== 'coverage' && id !== 'katt' && id !== 'overlap').map(([id, g]) =>
-      `<div class="gloss-item" onclick="openConcept('${id}')">${g.i} <b>${g.t}</b></div>`).join('') + '</div>';
+      `<div class="gloss-item" onclick="openConcept('${id}')"><b>${g.t}</b></div>`).join('') + '</div>';
 }
 
 function toggleColl(btn, bodyId){
   btn.classList.toggle('open');
   document.getElementById(bodyId).classList.toggle('show');
+}
+function toggleWhy(btn, bodyId, conceptId){
+  const body = document.getElementById(bodyId);
+  const open = !body.classList.contains('show');
+  btn.classList.toggle('open', open);
+  body.classList.toggle('show', open);
+  if(open){
+    const g = GLOSSARY[conceptId];
+    body.innerHTML = typeof g.d === 'function' ? g.d() : g.d;
+    hydrateTerms();
+  }
 }
 
 // ── Start ──
