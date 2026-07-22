@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ormpasset — beslutsträd &amp; maskininlärning</title>
+<title>Beslutsträd</title>
 <script>document.documentElement.classList.add('js');</script>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
@@ -113,6 +113,11 @@
   .grouphead .gcount .cg{color:var(--rose)}.grouphead .gcount .co{color:var(--emerald)}
   .grouphead .bar{flex:1;min-width:120px;height:8px;border-radius:100px;overflow:hidden;display:flex;background:rgba(255,255,255,.05)}
   .grouphead .bar .pg{background:var(--rose)}.grouphead .bar .po{background:var(--emerald)}
+
+  /* manual drag-to-sort board */
+  .sortboard{position:relative;min-height:400px;border:1px dashed var(--border-hover);border-radius:var(--radius-sm);background:rgba(255,255,255,.02);margin-top:16px}
+  .scard.drag{position:absolute;width:86px;cursor:grab;touch-action:none;transition:left .22s var(--ease-out),top .22s var(--ease-out),box-shadow .2s,border-color .2s}
+  .scard.drag.dragging{cursor:grabbing;transition:box-shadow .2s,border-color .2s;box-shadow:0 18px 34px rgba(0,0,0,.5);border-color:var(--cyan)}
 
   /* concept reference strip on tab 1 */
   .refstrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:18px}
@@ -341,11 +346,9 @@
 <div class="container">
   <a class="backlink" href="https://ai-aktiviteter.se/">← AI-aktiviteter</a>
   <header class="hero">
-    <div class="eyebrow">Beslutsträd · Övervakad inlärning</div>
-    <h1 class="title">Ormpasset</h1>
+    <h1 class="title">Beslutsträd</h1>
     <p class="focus">Lär dig bygga ett beslutsträd.</p>
-    <p>Några ormar är <b>giftiga</b>, andra ofarliga — men ingen har sagt vad som avslöjar dem. Du gör hela vägen själv: <b>studera</b> ormarna, <b>gruppera</b> dem för att hitta mönstret, <b>bygg</b> ditt träd, <b>testa</b> det på nya ormar, <b>jämför</b> med maskinens träd och <b>reflektera</b> över varför den valde som den gjorde.</p>
-    <button class="btn sm helpbtn" id="helpOpen">? Ledtrådar</button>
+    <p>Några ormar är <b>giftiga</b>, andra ofarliga — men ingen har sagt vad som avslöjar dem. Du gör hela vägen själv: <b>studera</b> ormarna och sök efter mönstret, <b>bygg</b> ditt eget träd, <b>testa</b> det på ormar det aldrig sett, och se sedan hur en dator löser samma uppgift.</p>
   </header>
 
   <nav class="steps" id="nav" aria-label="Labbens steg"></nav>
@@ -353,29 +356,21 @@
   <!-- STEG 1 — Studera datan -->
   <section class="panel" data-tab="0">
     <div class="glass" style="padding:26px">
-      <h2 class="sec">Studera träningsdatan</h2>
-      <p class="lead">20 fångade ormar med känt facit. Din uppgift genom hela labben: ta reda på vad som skiljer de <span class="tag g"><span class="sym">▲</span>giftiga</span> från de <span class="tag o"><span class="sym">●</span>ofarliga</span> — och fånga det i ett beslutsträd. Börja med att <b>titta noga</b>. Vilka egenskaper varierar mellan ormarna? Försök hitta dem själv — jämför en giftig med en ofarlig i taget.</p>
-      <div id="specimenGrid"></div>
+      <h2 class="sec">Studera datan</h2>
+      <p class="lead">20 fångade ormar med känt facit: <span class="tag g"><span class="sym">▲</span>giftig</span> eller <span class="tag o"><span class="sym">●</span>ofarlig</span>. Din uppgift genom hela övningen är att hitta vad som skiljer de giftiga från de ofarliga och uttrycka det som ett beslutsträd. Varje orm beskrivs av fem egenskaper: <b>huvudform</b>, <b>öga</b>, <b>mönster</b>, <b>färg</b> och <b>svans</b>.</p>
+      <p class="lead">Dra och flytta ormarna nedan för att sortera dem efter en egenskap i taget, som om du hade dem som fysiska kort framför dig. Testa att sortera dem efter en viss egenskap för att se om just den egenskapen skiljer de giftiga ormarna från de ofarliga, eller om de hamnar blandade oavsett hur du sorterar.</p>
+      <div class="sortboard" id="sortBoard"></div>
+      <div class="controlbar"><button class="btn sm ghost" id="resetSort">↺ Återställ ordningen</button></div>
       <div class="helprow">
-        <button class="btn sm ghost" id="revealAttrs">🔍 Visa egenskaperna</button>
-        <span class="helpnote">Kör du fast? Knappen avslöjar vilka fem egenskaper som varierar.</span>
+        <button class="btn sm ghost" id="revealAttrs">🔍 Visa exempel på egenskaperna</button>
+        <span class="helpnote">Osäker på vad t.ex. "mönster" eller "svans" innebär? Knappen visar ett exempel på varje.</span>
       </div>
       <div class="refstrip hidden" id="refstrip"></div>
     </div>
   </section>
 
-  <!-- STEG 2 — Gruppera -->
+  <!-- STEG 2 — Bygg -->
   <section class="panel" data-tab="1">
-    <div class="glass" style="padding:26px">
-      <h2 class="sec">Gruppera efter egenskaper</h2>
-      <p class="lead">Nu prövar du din gissning. <b>Gruppera</b> ormarna efter en egenskap i taget och se om giftet <b>samlas</b> på ena sidan — eller sprids ut jämnt. En egenskap som blandar giftigt och ofarligt är värdelös; en som delar rent är guld. Leta efter de egenskaper som delar renast — det är dem ditt träd ska fråga om.</p>
-      <div class="groupbar" id="groupbar"><span class="gl">Gruppera efter</span></div>
-      <div id="trainArea" style="margin-top:6px"></div>
-    </div>
-  </section>
-
-  <!-- STEG 3 — Bygg -->
-  <section class="panel" data-tab="2">
     <div class="glass" style="padding:26px">
       <h2 class="sec">Bygg ditt beslutsträd</h2>
       <p class="lead">Dags att bygga. Klicka på en nod. Välj en egenskap att <b>dela på</b> så förgrenar sig trädet — eller <b>bestäm</b> grenen som giftig/ofarlig. Prickarna i varje nod är ormarna: <span style="color:var(--rose)">▲</span> giftig, <span style="color:var(--emerald)">●</span> ofarlig. Sikta på grenar med bara en form. En streckad gul ram betyder <b>obestämd</b> gren — den måste du ta hand om innan trädet är klart.</p>
@@ -386,11 +381,11 @@
     </div>
   </section>
 
-  <!-- STEG 4 — Testa ditt träd -->
-  <section class="panel" data-tab="3">
+  <!-- STEG 3 — Testa ditt träd -->
+  <section class="panel" data-tab="2">
     <div class="glass" style="padding:26px">
       <h2 class="sec">Testa ditt träd</h2>
-      <p class="lead">Hur vet man om ett träd är <b>bra</b>? Första idén: kör det på ormarna du byggde det med. Gör det — och upptäck varför den siffran lurar dig, innan du testar trädet på ormar det <b>aldrig sett</b>.</p>
+      <p class="lead">Ett bra träd ska fungera på ormar det aldrig sett förut — inte bara känna igen de ormar det byggdes på. Därför har åtta ormar hållits undan under hela bygget; de kallas <b>testdata</b>. Kör ditt träd på dessa åtta rymlingar nedan och se hur många det klassificerar rätt.</p>
       <div class="scene glass" id="youScene" style="margin-top:8px"></div>
       <div class="canvas-wrap" id="youCanvas"></div>
       <div class="ctrl" id="youManualCtrl"></div>
@@ -398,17 +393,17 @@
     </div>
   </section>
 
-  <!-- STEG 5 — Jämför med maskinen -->
-  <section class="panel" data-tab="4">
+  <!-- STEG 4 — Se hur en dator bygger -->
+  <section class="panel" data-tab="3">
     <div class="glass" style="padding:26px">
-      <h2 class="sec">Jämför med maskinens träd</h2>
-      <p class="lead">En maskin bygger ett beslutsträd på <b>exakt samma data</b>. I varje nod provar den <b>alla</b> egenskaper och mäter hur rent var och en delar upp ormarna — det kallas <button class="term" data-term="gain">informationsvinst</button>. Den som vinner får dela noden. Tryck <b>Spela</b> och se maskinen bygga — jämför sedan dess träd med ditt, orm för orm.</p>
+      <h2 class="sec">Se hur en dator bygger ett beslutsträd</h2>
+      <p class="lead">En dator kan bygga samma sorts träd automatiskt, på exakt samma data. I varje nod prövar den <b>alla</b> egenskaper och mäter hur rent var och en delar upp ormarna — det kallas <button class="term" data-term="gain">informationsvinst</button>. Egenskapen som delar renast får dela noden. Tryck <b>Spela</b> och se trädet växa fram, steg för steg.</p>
       <div class="controlbar">
         <button class="btn primary" id="mlPlay">▶ Spela</button>
         <button class="btn sm" id="mlNext">Nästa split →</button>
         <button class="btn sm ghost" id="mlReset">↺ Börja om</button>
       </div>
-      <div class="racehead" id="raceHead" style="margin-top:14px">Tryck "Nästa split" för att låta maskinen välja i roten.</div>
+      <div class="racehead" id="raceHead" style="margin-top:14px">Tryck "Nästa split" för att låta datorn välja i roten.</div>
       <div class="race" id="mlRace"></div>
       <div class="canvas-wrap" id="mlCanvas"></div>
       <div class="curvewrap glass">
@@ -426,31 +421,21 @@
     </div>
   </section>
 
-  <!-- STEG 6 — Reflektera -->
-  <section class="panel" data-tab="5">
-    <div class="glass" style="padding:26px">
-      <h2 class="sec">Reflektera över splittarna</h2>
-      <p class="lead">Maskinen valde <b>samma</b> två första frågor som du — och la sedan till en till. Varför? Det säger något viktigt om hur beslutsträd väljer, och om när "mer" blir sämre.</p>
-      <div id="reflectSplits"></div>
-      <div id="stressZone" style="margin-top:16px"></div>
-      <div id="ticketZone"></div>
-      <details class="teach"><summary>Diskutera i klassen</summary><div class="body">Ställde du och maskinen samma frågor, eller olika? Vad är det med informationsvinst som avgör vilken fråga hamnar först? Om trädet fick en extra fråga någonstans — hjälpte den, eller gjorde den bara trädet krångligare utan att träffsäkerheten på ny data blev bättre? När hjälper mer träningsdata, och när stjälper den?</div></details>
-    </div>
-  </section>
-
-  <footer>Ormpasset · lär dig bygga ett beslutsträd · ai-aktiviteter.se</footer>
+  <div style="text-align:center;padding:34px 0 10px">
+    <button class="btn sm ghost" id="helpOpen">? Ledtrådar</button>
+  </div>
 </div>
 
 <div class="modal" id="helpModal">
   <div class="modal-inner glass">
     <button class="btn sm modal-close" id="helpClose">Stäng ✕</button>
     <h3>Ledtrådar</h3>
-    <div class="sub">Inga svar här — bara frågor som brukar leda rätt. Fundera på dem medan du grupperar ormarna.</div>
+    <div class="sub">Inga svar här — bara frågor som brukar leda rätt. Fundera på dem medan du sorterar ormarna.</div>
     <ul class="qlist">
-      <li>Gruppera efter <b>Huvudform</b>. Var samlas de giftiga? Räcker det med bara huvudformen?</li>
-      <li>Finns en egenskap där giftigt och ofarligt är <b>jämnt blandat</b> i varje grupp? Då är den värdelös.</li>
-      <li>Räcker det med <b>en</b> egenskap, eller måste du kombinera två för att inte göra fel?</li>
-      <li>Hittar du en giftig och en ofarlig orm som ser nästan <b>likadana</b> ut? Vad är den enda skillnaden?</li>
+      <li>Sortera efter <b>Huvudform</b>. Var hamnar de giftiga? Räcker det med bara huvudformen?</li>
+      <li>Finns en egenskap där giftiga och ofarliga hamnar <b>jämnt blandade</b>, oavsett hur du sorterar? Då är den inte användbar.</li>
+      <li>Räcker det med <b>en</b> egenskap, eller behöver du kombinera två för att inte göra fel?</li>
+      <li>Hittar du en giftig och en ofarlig orm som ser nästan <b>likadana</b> ut? Vad är den enda skillnaden mellan dem?</li>
       <li>Om du bara fick använda <b>två</b> egenskaper — vilka skulle du välja, och varför just de?</li>
     </ul>
   </div>
@@ -511,20 +496,21 @@ function snakeTail(t,c,sw){
     const P1=[78,88],P2=[88,100],P3=[72,112];
     return `<path d="${ribbonPath(P0,P1,P2,P3,14,20,12,26,true,6)}" fill="${c.mid}" stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round"/>`;
   }
-  // rattle: medium body tapering into a stack of rattle segments
+  // rattle: medium body tapering into a clearer, four-segment rattle
   const P1=[78,88],P2=[90,102],P3=[80,120];
   let g=`<path d="${ribbonPath(P0,P1,P2,P3,14,19,7,26,false,0)}" fill="${c.mid}" stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round"/>`;
   const tip=bez(P0,P1,P2,P3,1),tn=bezTan(P0,P1,P2,P3,1),nx=-tn[1],ny=tn[0];
   let cx=tip[0]-tn[0]*1.5,cy=tip[1]-tn[1]*1.5;
-  [6.4,5.4,4.2].forEach(wid=>{
-    const step=8.2,nxp=cx+tn[0]*step,nyp=cy+tn[1]*step,hw0=wid/2,hw1=wid*0.36;
+  [7.6,6.6,5.6,4.4].forEach((wid,i)=>{
+    const step=9,nxp=cx+tn[0]*step,nyp=cy+tn[1]*step,hw0=wid/2,hw1=wid*0.40;
     const p1=[cx+nx*hw0,cy+ny*hw0],p2=[nxp+nx*hw1,nyp+ny*hw1],p3=[nxp-nx*hw1,nyp-ny*hw1],p4=[cx-nx*hw0,cy-ny*hw0];
-    const mid=[(p1[0]+p4[0])/2+tn[0]*1.5,(p1[1]+p4[1])/2+tn[1]*1.5];
-    g+=`<path d="M${p1[0].toFixed(1)},${p1[1].toFixed(1)} Q${mid[0].toFixed(1)},${mid[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)} L${p3[0].toFixed(1)},${p3[1].toFixed(1)} Q${mid[0].toFixed(1)},${mid[1].toFixed(1)} ${p4[0].toFixed(1)},${p4[1].toFixed(1)} Z" fill="${c.belly}" stroke="${INK}" stroke-width="1.8" stroke-linejoin="round"/>`;
+    const mid=[(p1[0]+p4[0])/2+tn[0]*2.2,(p1[1]+p4[1])/2+tn[1]*2.2];
+    const fill=i%2===0?c.belly:c.lo;
+    g+=`<path d="M${p1[0].toFixed(1)},${p1[1].toFixed(1)} Q${mid[0].toFixed(1)},${mid[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)} L${p3[0].toFixed(1)},${p3[1].toFixed(1)} Q${mid[0].toFixed(1)},${mid[1].toFixed(1)} ${p4[0].toFixed(1)},${p4[1].toFixed(1)} Z" fill="${fill}" stroke="${INK}" stroke-width="2" stroke-linejoin="round"/>`;
     cx=nxp;cy=nyp;
   });
-  const ex=cx+tn[0]*3,ey=cy+tn[1]*3;
-  g+=`<circle cx="${ex.toFixed(1)}" cy="${ey.toFixed(1)}" r="1.6" fill="${c.belly}" stroke="${INK}" stroke-width="1.4"/>`;
+  const ex=cx+tn[0]*3.5,ey=cy+tn[1]*3.5;
+  g+=`<circle cx="${ex.toFixed(1)}" cy="${ey.toFixed(1)}" r="2" fill="${c.lo}" stroke="${INK}" stroke-width="1.6"/>`;
   return g;
 }
 function snake(a){
@@ -539,14 +525,21 @@ function snake(a){
   g+=`<path d="${headPath(a.head)}" fill="${c.lo}" stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round"/>`;
   const ey=a.head==='tri'?30:33, ex=a.head==='tri'?13.5:13;
   for(const s of[-1,1]){const cx=50+s*ex;
-    g+=`<circle cx="${cx}" cy="${ey}" r="8.2" fill="#fcfdff" stroke="${INK}" stroke-width="${sw}"/>`;
-    g+=a.pupil==='slit'?`<ellipse cx="${cx}" cy="${ey}" rx="2.4" ry="6.2" fill="${INK}"/>`:`<circle cx="${cx}" cy="${ey}" r="4" fill="${INK}"/>`;
-    g+=`<circle cx="${cx-1.6}" cy="${ey-2.2}" r="1.5" fill="#fff"/>`;}
+    if(a.pupil==='slit'){ // narrow eye: the whole eye is a slim, pointed almond shape - not just a small pupil
+      const w=9.5,h=5.8;
+      g+=`<path d="M${(cx-w).toFixed(1)},${ey} Q${cx},${(ey-h).toFixed(1)} ${(cx+w).toFixed(1)},${ey} Q${cx},${(ey+h).toFixed(1)} ${(cx-w).toFixed(1)},${ey} Z" fill="#fcfdff" stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round"/>`;
+      g+=`<ellipse cx="${cx}" cy="${ey}" rx="2.6" ry="4.4" fill="${INK}"/>`;
+      g+=`<circle cx="${(cx-1.3).toFixed(1)}" cy="${(ey-1.6).toFixed(1)}" r="1.2" fill="#fff"/>`;
+    } else { // round eye
+      g+=`<circle cx="${cx}" cy="${ey}" r="8.2" fill="#fcfdff" stroke="${INK}" stroke-width="${sw}"/>`;
+      g+=`<circle cx="${cx}" cy="${ey}" r="4.4" fill="${INK}"/>`;
+      g+=`<circle cx="${(cx-1.6).toFixed(1)}" cy="${(ey-2.2).toFixed(1)}" r="1.5" fill="#fff"/>`;
+    }}
   const my=a.head==='tri'?51:53;
   g+=`<ellipse cx="46.5" cy="${my-6}" rx="1.2" ry="1.7" fill="${INK}"/><ellipse cx="53.5" cy="${my-6}" rx="1.2" ry="1.7" fill="${INK}"/>`;
   g+=`<path d="M42,${my} Q50,${my+5} 58,${my}" fill="none" stroke="${INK}" stroke-width="2.4" stroke-linecap="round"/>`;
   g+=`<path d="M50,${my+3} L50,${my+9} M50,${my+9} L46,${my+13} M50,${my+9} L54,${my+13}" fill="none" stroke="#e23b57" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>`;
-  return `<svg viewBox="-4 -4 108 152">${defs}${g}</svg>`;
+  return `<svg viewBox="-4 -4 108 164">${defs}${g}</svg>`;
 }
 
 
@@ -569,15 +562,15 @@ const TEST=[
  S('tri','round','solid','red','point','O'),S('round','slit','spots','green','rattle','O'),
  S('round','round','solid','brown','rattle','O'),S('tri','slit','solid','red','blunt','G')];
 const ATTRS=['head','pupil','pattern','color','tail'];
-const ANAME={head:'Huvudform',pupil:'Pupill',pattern:'Mönster',color:'Färg',tail:'Svans'};
+const ANAME={head:'Huvudform',pupil:'Öga',pattern:'Mönster',color:'Färg',tail:'Svans'};
 const VALS={head:['tri','round'],pupil:['slit','round'],pattern:['stripes','spots','solid'],color:['red','green','yellow','brown'],tail:['rattle','point','blunt']};
-function vname(attr,v){const M={tri:'triangulärt',round:attr==='pupil'?'rund':'runt',slit:'spricka',stripes:'ränder',spots:'fläckar',solid:'enfärgad',red:'röd',green:'grön',yellow:'gul',brown:'brun',rattle:'skallra',point:'spets',blunt:'trubbig'};return M[v]||v;}
+function vname(attr,v){const M={tri:'triangulärt',round:'runt',slit:'smalt',stripes:'ränder',spots:'fläckar',solid:'enfärgad',red:'röd',green:'grön',yellow:'gul',brown:'brun',rattle:'skallra',point:'spets',blunt:'trubbig'};return M[v]||v;}
 
 /* concept cards */
 const CONCEPTS={
   entropy:{k:'Begrepp',t:'Entropi',p:'Ett mått på hur <b>blandad</b> en grupp är. En grupp med bara giftiga ormar (eller bara ofarliga) har entropi <b>0</b> — den är helt ren. En femtio–femtio-blandning har maximal entropi. Beslutsträdets mål är att dela så att grupperna blir så rena som möjligt.',ex:'8 ormar, 4 giftiga + 4 ofarliga → hög entropi. 8 giftiga + 0 ofarliga → entropi 0.'},
   gain:{k:'Begrepp',t:'Informationsvinst',p:'Hur mycket <b>renare</b> grupperna blir när du delar på en viss egenskap. Trädet räknar entropin före delningen minus entropin efteråt. Egenskapen med störst vinst delar renast — den vinner noden.',ex:'Att dela på Huvudform samlar nästan allt gift på ena sidan → hög vinst. Att dela på Mönster blandar ändå → låg vinst.'},
-  overfit:{k:'Begrepp',t:'Överanpassning',p:'När en modell lär sig träningsdatan <b>utantill</b> — inklusive slumpen och undantagen — i stället för det egentliga mönstret. Den blir perfekt på det den sett och sämre på ny data. En enklare modell missar undantagen men <button class="term" data-term="generalize">generaliserar</button> bättre.',ex:'Det djupa trädet lär sig "grön → ofarlig" av två flukes. Sen kallar det varje grön giftorm ofarlig.'},
+  overfit:{k:'Begrepp',t:'Överanpassning',p:'När en modell lär sig träningsdatan <b>utantill</b> — inklusive slumpmässiga undantag — i stället för det egentliga mönstret. Den blir perfekt på den data den sett men sämre på ny data. En enklare modell missar undantagen men <button class="term" data-term="generalize">generaliserar</button> bättre.',ex:'Det djupa trädet lär sig regeln "grön → ofarlig" utifrån två enskilda, slumpmässiga fall i träningsdatan. Sedan klassar det varje grön giftorm som ofarlig.'},
   generalize:{k:'Begrepp',t:'Generalisering',p:'Hur väl en modell klarar <b>ny</b> data den aldrig tränats på. Det är det enda som räknas i praktiken — en modell som bara är bra på sina egna träningsexempel är värdelös i verkligheten. Därför mäter vi alltid på separat testdata.',ex:'Ditt träd får höga poäng på träningsdatan — men bara testet på osedda ormar avslöjar om det lärt sig det verkliga mönstret.'}
 };
 function openConcept(key){
@@ -670,51 +663,115 @@ function renderTree(container,root,st){
 function nodeByPid(root,pid){const parts=pid.split('>');let n=root;for(let i=1;i<parts.length;i++)n=n.children[parts[i]];return n;}
 
 /* ================= nav ================= */
-const TABS=['Studera datan','Gruppera','Bygg ditt träd','Testa ditt träd','Jämför med maskinen','Reflektera'];
+const TABS=['Studera datan','Bygg ditt träd','Testa ditt träd','Se hur en dator bygger'];
 const nav=document.getElementById('nav');
 TABS.forEach((t,i)=>{const b=document.createElement('button');b.className='pill';b.innerHTML=`<span class="n">${i+1}</span>${t}`;b.onclick=()=>go(i);nav.appendChild(b);});
 function go(i){document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',+p.dataset.tab===i));
   [...nav.children].forEach((b,k)=>b.setAttribute('aria-current',k===i?'true':'false'));
-  if(i===0)renderStudy();else if(i===1)renderGroupStep();else if(i===2)renderStudent();else if(i===3)youEnter();else if(i===4)compareEnter();else if(i===5)reflectEnter();
+  if(i===0)renderStudy();else if(i===1)renderStudent();else if(i===2)youEnter();else if(i===3)compareEnter();
   window.scrollTo({top:0,behavior:'smooth'});}
-function renderStudy(){renderRefStrip();renderSpecimens();
+function renderStudy(){renderRefStrip();renderSortBoard();
   const btn=document.getElementById('revealAttrs'),strip=document.getElementById('refstrip');
-  btn.onclick=()=>{const hidden=strip.classList.toggle('hidden');btn.textContent=hidden?'🔍 Visa egenskaperna':'🙈 Dölj egenskaperna';};}
-function renderSpecimens(){document.getElementById('specimenGrid').innerHTML=`<div class="grid specimens">${TRAIN.map((s,i)=>scard(s,i)).join('')}</div>`;}
-function renderGroupStep(){renderGroupBar();renderTrainArea();}
+  btn.onclick=()=>{const hidden=strip.classList.toggle('hidden');btn.textContent=hidden?'🔍 Visa exempel på egenskaperna':'🙈 Dölj exemplen';};
+  document.getElementById('resetSort').onclick=resetSortBoard;}
 
-/* ================= tab 0 ================= */
+/* ================= tab 0: study + manual sort ================= */
 function labTag(l){return l==='G'?'<span class="tag g"><span class="sym">▲</span>Giftig</span>':l==='O'?'<span class="tag o"><span class="sym">●</span>Ofarlig</span>':'<span class="tag q">?</span>';}
 function scard(s,i){const cls=s.label==='G'?'g':s.label==='O'?'o':'';return `<div class="scard ${cls}"><span class="id">${String(i+1).padStart(2,'0')}</span>${snake(s)}<div class="lab">${labTag(s.label)}</div></div>`;}
-let groupBy=null;
-function renderTrainArea(){
-  const area=document.getElementById('trainArea');
-  if(!groupBy){area.innerHTML=`<div class="grid specimens">${TRAIN.map((s,i)=>scard(s,i)).join('')}</div>`;return;}
-  let html='';
-  for(const v of VALS[groupBy]){
-    const rows=TRAIN.map((s,i)=>({s,i})).filter(o=>o.s[groupBy]===v);
-    if(!rows.length)continue;
-    const c=counts(rows.map(o=>o.s));const tot=c.g+c.o;
-    html+=`<div class="groupsec"><div class="grouphead">
-      <span class="gname">${vname(groupBy,v)}</span>
-      <span class="gcount"><span class="cg">▲ ${c.g} giftiga</span><span class="co">● ${c.o} ofarliga</span></span>
-      <span class="bar"><span class="pg" style="width:${c.g/tot*100}%"></span><span class="po" style="width:${c.o/tot*100}%"></span></span>
-      </div><div class="grid specimens">${rows.map(o=>scard(o.s,o.i)).join('')}</div></div>`;
+
+/* drag-to-sort board: cards move freely while held, but always snap into one of a fixed
+   set of non-overlapping slots on release (swapping with whatever card sits there) —
+   this guarantees cards can never end up stacked on top of each other, which looked broken on mobile */
+let sortSlotPos=null, slotOf=null, sortCols=5, sortCardW=108, sortCardH=150, sortGap=14;
+function initSortPos(board){
+  if(sortSlotPos)return;
+  // document.documentElement.clientWidth reflects the viewport immediately, unlike
+  // board.clientWidth which can still read as 0 on the very first paint (that caused
+  // the desktop fallback of 900px/7 columns to be used on phones)
+  const vw=document.documentElement.clientWidth||window.innerWidth||900;
+  const w=board.clientWidth||Math.min(vw-40,976);
+  const small=w<480;
+  sortCardW=small?86:108;sortGap=small?10:14;
+  sortCardH=Math.round(sortCardW*1.55); // provisional guess; corrected below against the real rendered height
+  sortCols=Math.max(2,Math.floor(w/(sortCardW+sortGap)));
+  sortSlotPos=TRAIN.map((_,s)=>{const col=s%sortCols,row=Math.floor(s/sortCols);return{x:sortGap+col*(sortCardW+sortGap),y:sortGap+row*(sortCardH+sortGap)};});
+  slotOf=TRAIN.map((_,i)=>i);
+}
+function layoutSortSlots(){
+  sortSlotPos=TRAIN.map((_,s)=>{const col=s%sortCols,row=Math.floor(s/sortCols);return{x:sortGap+col*(sortCardW+sortGap),y:sortGap+row*(sortCardH+sortGap)};});
+}
+function paintSortCards(board){
+  const rows=Math.ceil(TRAIN.length/sortCols);
+  board.style.minHeight=(rows*(sortCardH+sortGap)+sortGap)+'px';
+  board.innerHTML=TRAIN.map((s,i)=>{const p=sortSlotPos[slotOf[i]];
+    return `<div class="scard drag ${s.label==='G'?'g':'o'}" data-i="${i}" style="left:${p.x}px;top:${p.y}px;width:${sortCardW}px;z-index:${i+1}">
+      <span class="id">${String(i+1).padStart(2,'0')}</span>${snake(s)}<div class="lab">${labTag(s.label)}</div></div>`;}).join('');
+  wireSortDrag();
+}
+function renderSortBoard(){
+  const board=document.getElementById('sortBoard');if(!board)return;
+  const firstRender=!sortSlotPos;
+  initSortPos(board);
+  paintSortCards(board);
+  if(firstRender){
+    // the card's true height (snake art + label + padding) doesn't scale cleanly from
+    // width alone, so measure what actually got rendered and fix up the row spacing —
+    // this is what stops rows from overlapping regardless of card content changes later
+    const sample=board.querySelector('.scard.drag');
+    const realH=sample?Math.ceil(sample.getBoundingClientRect().height):0;
+    if(realH>0&&Math.abs(realH-sortCardH)>2){
+      sortCardH=realH;
+      layoutSortSlots();
+      paintSortCards(board);
+    }
   }
-  area.innerHTML=html;
 }
-function renderGroupBar(){
-  const bar=document.getElementById('groupbar');
-  bar.querySelectorAll('.gbtn').forEach(b=>b.remove());
-  const mk=(attr,label)=>{const b=document.createElement('button');b.className='gbtn';b.textContent=label;
-    b.setAttribute('aria-pressed',groupBy===attr?'true':'false');
-    b.onclick=()=>{groupBy=(groupBy===attr?null:attr);renderGroupBar();renderTrainArea();};bar.appendChild(b);};
-  ATTRS.forEach(a=>mk(a,ANAME[a]));mk(null,'Ingen');
+function nearestSlot(x,y){
+  let best=0,bd=Infinity;
+  sortSlotPos.forEach((p,s)=>{const dx=p.x-x,dy=p.y-y,d=dx*dx+dy*dy;if(d<bd){bd=d;best=s;}});
+  return best;
 }
+function snapCardEl(i){
+  const el=document.querySelector(`#sortBoard .scard.drag[data-i="${i}"]`);
+  if(!el)return;const p=sortSlotPos[slotOf[i]];
+  el.style.left=p.x+'px';el.style.top=p.y+'px';
+}
+function wireSortDrag(){
+  let z=100;
+  document.querySelectorAll('#sortBoard .scard.drag').forEach(el=>{
+    el.addEventListener('pointerdown',e=>{
+      e.preventDefault();
+      const i=+el.dataset.i;
+      const startSlot=slotOf[i],startPos=sortSlotPos[startSlot];
+      const startX=e.clientX,startY=e.clientY;
+      let curX=startPos.x,curY=startPos.y;
+      el.classList.add('dragging');el.style.zIndex=++z;
+      try{el.setPointerCapture(e.pointerId);}catch(err){}
+      function onMove(ev){
+        curX=startPos.x+(ev.clientX-startX);curY=startPos.y+(ev.clientY-startY);
+        el.style.left=curX+'px';el.style.top=curY+'px';
+      }
+      function onUp(){
+        el.classList.remove('dragging');
+        el.removeEventListener('pointermove',onMove);el.removeEventListener('pointerup',onUp);
+        const targetSlot=nearestSlot(curX,curY);
+        if(targetSlot!==startSlot){
+          const occupant=slotOf.indexOf(targetSlot);
+          if(occupant!==-1&&occupant!==i){slotOf[occupant]=startSlot;snapCardEl(occupant);}
+          slotOf[i]=targetSlot;
+        }
+        snapCardEl(i);
+      }
+      el.addEventListener('pointermove',onMove);el.addEventListener('pointerup',onUp);
+    });
+  });
+}
+function resetSortBoard(){sortSlotPos=null;slotOf=null;renderSortBoard();}
+
 function renderRefStrip(){
   const items=[
     ['Huvudform',[['triangulärt',{head:'tri',pupil:'round',pattern:'solid',color:'brown',tail:'blunt'}],['runt',{head:'round',pupil:'round',pattern:'solid',color:'brown',tail:'blunt'}]]],
-    ['Pupill',[['spricka',{head:'round',pupil:'slit',pattern:'solid',color:'green',tail:'blunt'}],['rund',{head:'round',pupil:'round',pattern:'solid',color:'green',tail:'blunt'}]]],
+    ['Öga',[['smalt',{head:'round',pupil:'slit',pattern:'solid',color:'green',tail:'blunt'}],['runt',{head:'round',pupil:'round',pattern:'solid',color:'green',tail:'blunt'}]]],
     ['Mönster',[['ränder',{head:'round',pupil:'round',pattern:'stripes',color:'red',tail:'blunt'}],['fläckar',{head:'round',pupil:'round',pattern:'spots',color:'red',tail:'blunt'}],['enfärgad',{head:'round',pupil:'round',pattern:'solid',color:'red',tail:'blunt'}]]],
     ['Svans',[['skallra',{head:'round',pupil:'round',pattern:'solid',color:'yellow',tail:'rattle'}],['spets',{head:'round',pupil:'round',pattern:'solid',color:'yellow',tail:'point'}],['trubbig',{head:'round',pupil:'round',pattern:'solid',color:'yellow',tail:'blunt'}]]],
     ['Färg',['red','green','yellow','brown'].map(col=>[vname('color',col),{head:'round',pupil:'round',pattern:'solid',color:col,tail:'blunt'}])]
@@ -734,12 +791,16 @@ function usedAttrs(pid){const parts=pid.split('>');let n=stuRoot,used=[];for(let
 function renderStudent(){stuSt.sel=stuSel;renderTree(document.getElementById('stuCanvas'),stuRoot,stuSt);renderStuStatus();renderStuCtrl();}
 function renderStuStatus(){
   const fr=countFrontier(stuRoot);
-  const acc=accuracy(stuRoot,TRAIN);
   const el=document.getElementById('stuStatus');
   let s='';
-  if(fr===0){s+=`<span class="pillstat done">✓ Trädet är klart</span>`;}
-  else{s+=`<span class="pillstat warn">${fr} obestämd${fr>1?'a':''} gren${fr>1?'ar':''} kvar</span>`;}
-  s+=`<span class="acc">Träffsäkerhet på träningen: <b>${pct(acc)}</b></span>`;
+  if(stuRoot.type==='frontier'){
+    s+=`<span class="pillstat">Välj en egenskap nedan för att göra den första delningen.</span>`;
+  } else {
+    const acc=accuracy(stuRoot,TRAIN);
+    if(fr===0)s+=`<span class="pillstat done">✓ Trädet är klart</span>`;
+    else s+=`<span class="pillstat warn">${fr} obestämd${fr>1?'a':''} gren${fr>1?'ar':''} kvar</span>`;
+    s+=`<span class="acc">Träffsäkerhet på träningsdatan hittills: <b>${pct(acc)}</b></span>`;
+  }
   el.innerHTML=s;
 }
 function rawCounts(rows,attr){
@@ -787,7 +848,7 @@ const mlSt={prev:null,sel:null,cur:null};
 function frontierB(rows,attrs,depth){return{type:'frontier',rows,fallback:majority(rows),avail:attrs,depth};}
 function mlEnsure(){if(!mlRoot)mlResetFn();else{renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);renderCurve();}}
 function mlResetFn(){mlPlaying=false;mlDone=false;mlRoot=frontierB(TRAIN,ATTRS,0);mlQueue=[mlRoot];mlSt.prev=null;mlSt.cur=null;
-  document.getElementById('mlRace').innerHTML='';document.getElementById('raceHead').textContent='Tryck "Nästa split" för att låta maskinen välja i roten.';
+  document.getElementById('mlRace').innerHTML='';document.getElementById('raceHead').textContent='Tryck "Nästa split" för att låta datorn välja i roten.';
   document.getElementById('mlPlay').textContent='▶ Spela';document.getElementById('mlNext').disabled=false;
   renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);updateMLStats();renderCurve();if(typeof renderCompare==='function')renderCompare();}
 function updateMLStats(){document.getElementById('mlTrainAcc').textContent=pct(accuracy(mlRoot,TRAIN));document.getElementById('mlTestAcc').textContent=pct(accuracy(mlRoot,TEST));}
@@ -799,10 +860,10 @@ function raceBars(rows,avail){
 }
 function animateBars(container){container.querySelectorAll('.fill').forEach(f=>{requestAnimationFrame(()=>{f.style.width=f.dataset.w+'%';});});}
 async function mlStep(){
-  if(!mlQueue.length){mlDone=true;document.getElementById('raceHead').innerHTML='Maskinens träd är färdigbyggt. Nu jämför vi det med ditt — orm för orm nedan.';document.getElementById('mlNext').disabled=true;mlPlaying=false;document.getElementById('mlPlay').textContent='▶ Spela';renderCompare();return false;}
+  if(!mlQueue.length){mlDone=true;document.getElementById('raceHead').innerHTML='Trädet är färdigbyggt. Se nedan hur det jämförs med ditt eget, orm för orm.';document.getElementById('mlNext').disabled=true;mlPlaying=false;document.getElementById('mlPlay').textContent='▶ Spela';renderCompare();return false;}
   const node=mlQueue.shift();mlSt.cur=node._pid;renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);
   const avail=node.avail;const pure=entropy(node.rows)===0;
-  document.getElementById('raceHead').innerHTML=`Nod med ${node.rows.length} ormar — maskinen provar alla egenskaper…`;
+  document.getElementById('raceHead').innerHTML=`Nod med ${node.rows.length} ormar — datorn prövar alla egenskaper…`;
   if(pure||!avail.length){document.getElementById('mlRace').innerHTML='';document.getElementById('raceHead').innerHTML=`Noden är redan ren → blir ett löv: ${labTag(node.fallback)}`;
     node.type='leaf';node.label=node.fallback;mlSt.cur=null;await sleep(500);renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);updateMLStats();return true;}
   const race=document.getElementById('mlRace');race.innerHTML=raceBars(node.rows,avail);await sleep(60);animateBars(race);await sleep(850);
@@ -836,11 +897,11 @@ function renderCurve(){
 
 function pathOf(root,row){let n=root,pid='r';const ids=new Set(['r']);while(n.type==='split'){const v=row[n.attr];pid+='>'+v;if(!n.children[v])break;n=n.children[v];ids.add(pid);}return ids;}
 
-/* ================= step 3: test YOUR tree — train first, then unseen ================= */
-let youPhase='train',youIdx=0,youScore=[],youRan=false,youRev=false,youForce=false,youTrainRun=false;
+/* ================= step 3: test YOUR tree on held-out data ================= */
+let youPhase='test',youIdx=0,youScore=[],youRan=false,youRev=false,youForce=false;
 let youMode='auto',youSpeed=1,youRunAll=false,youManualPid='r';
 const youSt={prev:null,sel:null};
-function youEnter(){youPhase='train';youIdx=0;youScore=[];youForce=false;youTrainRun=false;youRunAll=false;youManualPid='r';document.getElementById('youTally').innerHTML='';renderYouScene();}
+function youEnter(){youPhase='test';youIdx=0;youScore=[];youForce=false;youRunAll=false;youManualPid='r';document.getElementById('youTally').innerHTML='';renderYouScene();}
 function speedMs(base){return Math.round(base/youSpeed);}
 function renderYouControls(){
   return `<div class="groupbar" id="youControls" style="margin:0 0 14px">
@@ -870,23 +931,20 @@ function renderYouScene(){
     scene.innerHTML=`<div class="alert" style="color:var(--amber)">⚠ Ditt träd är inte klart</div>
       <div class="q">Trädet har <b>${fr||1} obestämd${(fr||1)>1?'a':''} gren${(fr||1)>1?'ar':''}</b>. Ormar som hamnar där gissas till majoriteten. Bygg klart först, eller testa ändå.</div>
       <div class="reveal-row"><button class="btn sm ghost" id="goBuild">← Bygg klart trädet</button><button class="btn sm" id="runAnyway">Testa ändå →</button></div>`;
-    document.getElementById('goBuild').onclick=()=>go(2);
+    document.getElementById('goBuild').onclick=()=>go(1);
     document.getElementById('runAnyway').onclick=()=>{youForce=true;renderYouScene();};
     document.getElementById('youManualCtrl').innerHTML='';
     youSt.path=null;renderTree(document.getElementById('youCanvas'),stuRoot,youSt);return;}
-  if(youPhase==='train'){document.getElementById('youManualCtrl').innerHTML='';renderTrainTest(scene);return;}
-  if(youPhase==='reveal'){document.getElementById('youManualCtrl').innerHTML='';renderSplitReveal(scene);return;}
-  // youPhase === 'test'
   if(youIdx>=TEST.length){
     youRunAll=false;
     const sy=youScore.filter(Boolean).length;
     document.getElementById('youManualCtrl').innerHTML='';
     scene.innerHTML=`<div class="alert" style="color:var(--emerald)">Klart — du körde alla åtta osedda</div>
       <div class="verdict" style="color:var(--text-primary)">På <b>osedd testdata</b> fångade ditt träd <b>${sy}/8</b> rätt.</div>
-      <div class="q">Det här säger något på riktigt — de här ormarna hade trädet aldrig sett. Nu ska en maskin bygga sitt eget träd på samma träningsdata, och köra samma åtta.</div>
-      <div class="reveal-row"><button class="btn sm ghost" id="youAgain">↺ Börja om</button><button class="btn primary" id="toMachine">Jämför med maskinen →</button></div>`;
+      <div class="q">Det här visar hur trädet faktiskt presterar — de här ormarna hade det aldrig sett tidigare. Se härnäst hur en dator bygger sitt eget träd på samma träningsdata, och testar det på samma åtta.</div>
+      <div class="reveal-row"><button class="btn sm ghost" id="youAgain">↺ Börja om</button><button class="btn primary" id="toMachine">Se hur en dator bygger →</button></div>`;
     document.getElementById('youAgain').onclick=youEnter;
-    document.getElementById('toMachine').onclick=()=>go(4);
+    document.getElementById('toMachine').onclick=()=>go(3);
     youSt.path=null;renderTree(document.getElementById('youCanvas'),stuRoot,youSt);return;}
   const s=TEST[youIdx];youRan=false;youRev=false;youSt.path=null;youManualPid='r';
   const controls=renderYouControls();
@@ -949,34 +1007,6 @@ function showManualVerdict(s,v){
   const rev=document.getElementById('yReveal');
   if(rev&&!youRan){youRan=true;rev.innerHTML=`<button class="btn danger" id="yRevBtn">Avslöja facit</button>`;document.getElementById('yRevBtn').onclick=()=>revealYou(s,v);}
 }
-function renderTrainTest(scene){
-  const n=TRAIN.length,acc=accuracy(stuRoot,TRAIN),right=Math.round(acc*n);
-  youSt.path=null;renderTree(document.getElementById('youCanvas'),stuRoot,youSt);
-  if(!youTrainRun){
-    scene.innerHTML=`<div class="alert">Först: ormarna du byggde med</div>
-      <div class="q">Ditt träd byggdes på <b>${n} ormar</b> (träningsdatan). Kör det på <b>exakt samma ${n}</b> — hur många klarar det?</div>
-      <div class="trainmini">${TRAIN.map(()=>`<span class="tdot"></span>`).join('')}</div>
-      <button class="btn primary" id="runTrain">▶ Kör på träningsdatan</button>`;
-    document.getElementById('runTrain').onclick=()=>{youTrainRun=true;renderTrainTest(scene);};
-    return;}
-  const cells=TRAIN.map(s=>predict(stuRoot,s)===s.label).map(ok=>`<span class="tdot ${ok?'ok':'no'}">${ok?'✓':'✕'}</span>`).join('');
-  scene.innerHTML=`<div class="alert" style="color:var(--emerald)">Klart</div>
-    <div class="bigscore">${right}/${n} rätt<span class="pctbig">${pct(acc)}</span></div>
-    <div class="trainmini">${cells}</div>
-    <div class="q">Nästan alla rätt — men det <b>beviset är värdelöst</b>. De här ormarna såg trädet när du byggde det. Varför spelar det roll?</div>
-    <button class="btn primary" id="toReveal">Fortsätt →</button>`;
-  document.getElementById('toReveal').onclick=()=>{youPhase='reveal';renderYouScene();};
-}
-function renderSplitReveal(scene){
-  document.getElementById('youCanvas').innerHTML='';
-  scene.innerHTML=`<div class="splitcard">
-    <div class="sh">📏 Träningsdata &amp; testdata</div>
-    <p>Att fråga trädet om ormar det byggdes på är som att skriva ett prov <b>med facit i handen</b> — höga poäng bevisar ingenting. Ett träd kan känna igen varenda orm det tränats på utan att ha förstått det <i>verkliga</i> mönstret.</p>
-    <p>Därför delar man alltid upp datan i två delar: <span class="pill2 train">träningsdata</span> att bygga modellen på, och <span class="pill2 test">testdata</span> — ormar den <b>aldrig sett</b> — att utvärdera på. Bara testdatan visar hur bra modellen <button class="term" data-term="generalize">generaliserar</button> till nya fall.</p>
-    <button class="btn primary" id="toTest">Nu det riktiga provet: 8 osedda ormar →</button>
-  </div>`;
-  document.getElementById('toTest').onclick=()=>{youPhase='test';youIdx=0;youScore=[];renderYouScene();renderYouTally();};
-}
 async function runYouAuto(s){
   if(youRan)return;youRan=true;const rb0=document.getElementById('runYouBtn');if(rb0)rb0.disabled=true;
   const ids=[...pathOf(stuRoot,s)];youSt.path=new Set();
@@ -1011,7 +1041,7 @@ function treeAttrs(root){const seen=[];(function walk(n){if(n&&n.type==='split')
 function domCell(v,truth){const ok=v===truth;return `<span class="vcell ${v==='G'?'g':'o'}">${v==='G'?'giftig':'ofarlig'} ${ok?'<span class="dot ok">✓</span>':'<span class="dot no">✕</span>'}</span>`;}
 function renderCompare(){
   const zone=document.getElementById('cmpZone');if(!zone)return;
-  if(!(mlRoot&&mlDone)){zone.innerHTML=`<div class="cardhint">Bygg klart maskinens träd ovan (tryck <b>Spela</b>), så jämför vi ditt träd med dess — orm för orm.</div>`;return;}
+  if(!(mlRoot&&mlDone)){zone.innerHTML=`<div class="cardhint">Bygg klart datorns träd ovan (tryck <b>Spela</b>), så visas jämförelsen med ditt träd här, orm för orm.</div>`;return;}
   const yv=TEST.map(s=>predict(stuRoot,s)),mv=TEST.map(s=>predict(mlRoot,s));
   const ys=yv.filter((v,i)=>v===TEST[i].label).length,ms=mv.filter((v,i)=>v===TEST[i].label).length;
   const chips=arr=>arr.map(a=>`<span class="qchip">${ANAME[a]}</span>`).join('');
@@ -1022,107 +1052,36 @@ function renderCompare(){
 
   let diffnote,compareLine;
   if(!you.length){
-    diffnote=`Ditt träd avgör direkt utan att fråga om något, medan maskinen frågar om ${chips(mach)}.`;
+    diffnote=`Ditt träd avgör direkt utan att fråga om något, medan datorns träd frågar om ${chips(mach)}.`;
     compareLine=`Ditt träd avgör direkt utan att fråga om något alls.`;
   } else if(commonLen===you.length&&commonLen===mach.length){
     diffnote=`Ni ställer exakt samma frågor i samma ordning.`;
-    compareLine=`Du och maskinen ställde exakt samma frågor i samma ordning: <b>${you.map(a=>ANAME[a]).join(' → ')}</b>.`;
+    compareLine=`Du och datorn ställde exakt samma frågor i samma ordning: <b>${you.map(a=>ANAME[a]).join(' → ')}</b>.`;
   } else if(commonLen===you.length&&extraMach.length){
-    diffnote=`Maskinen ställer <b>samma</b> frågor som du — plus ${extraMach.length>1?'fler':'en till'}: <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b>.`;
-    compareLine=`Maskinen ställde samma frågor som du (<b>${shared.map(a=>ANAME[a]).join(' → ')||'—'}</b>) — och la sedan till <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b> som du inte behövde.`;
+    diffnote=`Datorns träd ställer <b>samma</b> frågor som du — plus ${extraMach.length>1?'fler':'en till'}: <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b>.`;
+    compareLine=`Datorn ställde samma frågor som du (<b>${shared.map(a=>ANAME[a]).join(' → ')||'—'}</b>) — och la sedan till <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b> som du inte behövde.`;
   } else if(commonLen===mach.length&&extraYou.length){
-    diffnote=`Du ställer <b>samma</b> frågor som maskinen — plus ${extraYou.length>1?'fler':'en till'}: <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>.`;
-    compareLine=`Du ställde samma frågor som maskinen (<b>${shared.map(a=>ANAME[a]).join(' → ')||'—'}</b>) — men la själv till <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b> som maskinen inte behövde.`;
+    diffnote=`Du ställer <b>samma</b> frågor som datorn — plus ${extraYou.length>1?'fler':'en till'}: <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>.`;
+    compareLine=`Du ställde samma frågor som datorn (<b>${shared.map(a=>ANAME[a]).join(' → ')||'—'}</b>) — men la själv till <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b> som datorn inte behövde.`;
   } else if(commonLen===0){
-    diffnote=`Ni ställer helt olika frågor — du frågar om ${chips(you)}, maskinen om ${chips(mach)}.`;
-    compareLine=`Ni valde olika första fråga — du började med <b>${ANAME[you[0]]}</b>, maskinen med <b>${ANAME[mach[0]]}</b>.`;
+    diffnote=`Ni ställer helt olika frågor — du frågar om ${chips(you)}, datorn om ${chips(mach)}.`;
+    compareLine=`Ni valde olika första fråga — du började med <b>${ANAME[you[0]]}</b>, datorn med <b>${ANAME[mach[0]]}</b>.`;
   } else {
     diffnote=`Ni håller med om de första frågorna (<b>${shared.map(a=>ANAME[a]).join(' → ')}</b>) men går sedan skilda vägar.`;
-    compareLine=`Ni höll med om de första frågorna (<b>${shared.map(a=>ANAME[a]).join(' → ')}</b>) men gick sedan skilda vägar: du fortsatte med <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>, maskinen med <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b>.`;
+    compareLine=`Ni höll med om de första frågorna (<b>${shared.map(a=>ANAME[a]).join(' → ')}</b>) men gick sedan skilda vägar: du fortsatte med <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>, datorn med <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b>.`;
   }
 
   zone.innerHTML=`<div class="cmpwrap glass">
-    <div class="cap">Ditt träd mot maskinens</div>
+    <div class="cap">Ditt träd mot datorns</div>
     <div class="treecmp">
       <div class="tc"><div class="tct">Ditt träd frågar om</div><div class="tcs">${you.length?chips(you):'<span class="qchip">(bara ett beslut)</span>'}</div></div>
-      <div class="tc mach"><div class="tct">Maskinens träd frågar om</div><div class="tcs">${chips(mach)}</div></div>
+      <div class="tc mach"><div class="tct">Datorns träd frågar om</div><div class="tcs">${chips(mach)}</div></div>
     </div>
     <div class="diffnote">${diffnote}</div>
-    <table class="cmptable"><thead><tr><th>Rymling</th><th>Facit</th><th>Ditt träd</th><th>Maskinen</th></tr></thead><tbody>${rows}</tbody></table>
-    <div class="scoreline"><span>Du: <b>${ys}/8</b></span><span>Maskinen: <b>${ms}/8</b></span></div>
-    <div class="callout ${ms<ys?'emerald':(ms>ys?'amber':'')}" style="margin-bottom:0">${compareLine} <b>Resultat: du ${ys}/8, maskinen ${ms}/8.</b> Gå vidare och reflektera över varför.</div>
+    <table class="cmptable"><thead><tr><th>Rymling</th><th>Facit</th><th>Ditt träd</th><th>Datorn</th></tr></thead><tbody>${rows}</tbody></table>
+    <div class="scoreline"><span>Du: <b>${ys}/8</b></span><span>Datorn: <b>${ms}/8</b></span></div>
+    <div class="callout ${ms<ys?'emerald':(ms>ys?'amber':'')}" style="margin-bottom:0">${compareLine} Resultat: du ${ys}/8, datorn ${ms}/8.</div>
   </div>`;
-}
-
-/* ================= step 5: reflect ================= */
-function reflectEnter(){renderReflect();renderStress();renderTicket();}
-function renderReflect(){
-  const you=treeAttrs(stuRoot),mach=treeAttrs(mlRoot);
-  const commonLen=(()=>{let i=0;while(i<you.length&&i<mach.length&&you[i]===mach[i])i++;return i;})();
-  const shared=you.slice(0,commonLen),extraMach=mach.slice(commonLen),extraYou=you.slice(commonLen);
-
-  let card1;
-  if(shared.length){
-    card1=`<div class="rcard good"><div class="rh">✓ Gemensamma frågor</div><p>Både du och maskinen frågade om <b>${shared.map(a=>ANAME[a]).join('</b>, sedan <b>')}</b>${shared.length>1?' i samma ordning':''}. Det är ingen slump: de egenskaperna har högst <button class="term" data-term="gain">informationsvinst</button> — de delar ormarna renast. Den verkliga regeln är triangulärt huvud <b>och</b> sprickpupill, och ${shared.length>1?'ni hittade båda delarna av den':'ni hittade en del av den'}.</p></div>`;
-  } else {
-    card1=`<div class="rcard warn"><div class="rh">— Olika första fråga</div><p>Du frågade först om <b>${you[0]?ANAME[you[0]]:'inget — ditt träd bestämde direkt'}</b>, medan maskinen valde <b>${ANAME[mach[0]]}</b>. Den verkliga regeln är triangulärt huvud <b>och</b> sprickpupill — jämför vilken fråga som faktiskt delar ormarna renast.</p></div>`;
-  }
-
-  let card2;
-  if(extraMach.length){
-    card2=`<div class="rcard warn"><div class="rh">✕ Maskinens extra fråga</div><p>Maskinen la till en fråga om <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b> som du inte hade. Ofta beror det på en enstaka slump i träningsdatan som gav en liten (falsk) vinst just där. Maskinen lärde sig då träningsdatan <button class="term" data-term="overfit">utantill</button> i stället för den riktiga regeln.</p></div>`;
-  } else if(extraYou.length){
-    card2=`<div class="rcard warn"><div class="rh">Din extra fråga</div><p>Du la till en fråga om <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b> som maskinen inte behövde. Fundera på om den frågan verkligen delade ormarna renare, eller om den bara kändes tryggare.</p></div>`;
-  } else if(shared.length){
-    card2=`<div class="rcard good"><div class="rh">✓ Exakt samma träd</div><p>Ni ställde precis samma frågor i samma ordning — du hittade samma mönster som maskinen räknade fram med informationsvinst.</p></div>`;
-  } else {
-    card2=`<div class="rcard warn"><div class="rh">Olika vägar</div><p>Era träd ser olika ut rakt igenom. Gå tillbaka till steg 2 och jämför informationsvinsten för varje egenskap — vilken delar ormarna renast?</p></div>`;
-  }
-
-  document.getElementById('reflectSplits').innerHTML=`<div class="reflectgrid">${card1}${card2}</div>
-  <div class="callout" style="margin-top:14px">${extraMach.length?'Det är ofta därför testkurvan i förra steget toppar på ett lägre djup och faller igen när ännu en fråga läggs till':'Testkurvan i förra steget visar vad som händer med träffsäkerheten när ett träd växer sig djupare'}: fler frågor hjälper på träningsdatan men kan stjälpa på ny data. Ett lagom enkelt träd <button class="term" data-term="generalize">generaliserar</button> bättre. Släpp lös 100 nya ormar nedan och se det hända.</div>`;
-}
-/* stress test: 100 fresh snakes from the true rule */
-function trueLabel(s){return(s.head==='tri'&&s.pupil==='slit')?'G':'O';}
-function genSnake(){const pick=a=>VALS[a][Math.floor(Math.random()*VALS[a].length)];
-  const s=S(pick('head'),pick('pupil'),pick('pattern'),pick('color'),pick('tail'),null);s.label=trueLabel(s);return s;}
-function renderStress(){
-  document.getElementById('stressZone').innerHTML=`<div class="stress glass">
-    <div class="cap">Stresstest</div>
-    <p class="lead" style="margin-top:6px">Åtta ormar bevisar ingenting. Släpp lös <b>100 helt nya</b> ormar från reservatets verkliga mönster och se vems modell som håller.</p>
-    <div class="controlbar"><button class="btn violet" id="stressGo">🐍 Släpp lös 100 ormar</button><span class="count" id="stressN"></span></div>
-    <div class="sbars" id="sbars"></div>
-    <div id="stressNote"></div></div>`;
-  document.getElementById('stressGo').onclick=runStress;
-}
-function runStress(){
-  const pop=Array.from({length:100},genSnake);
-  const you=accuracy(stuRoot,pop),sim=accuracy(SIMPLE,pop),deep=accuracy(DEEP,pop);
-  const venom=pop.filter(s=>s.label==='G');
-  const deepMissVenom=venom.filter(s=>predict(DEEP,s)!==s.label).length;
-  const bars=[
-    ['simple','Enkelt träd','Huvudform → Pupill (djup 2)',sim],
-    ['you','Ditt träd',countFrontier(stuRoot)===0?'som du byggde det':'ofärdigt — grenar gissas',you],
-    ['deep','Maskinens träd','djup '+maxDepth(DEEP)+' · en fråga för mycket',deep]
-  ];
-  document.getElementById('sbars').innerHTML=bars.map(([cls,nm,sub,v])=>`
-    <div class="sbar ${cls}"><div class="nm">${nm}<small>${sub}</small></div>
-    <div class="track"><div class="fill" data-w="${Math.round(v*100)}">${pct(v)}</div></div></div>`).join('');
-  requestAnimationFrame(()=>document.querySelectorAll('#sbars .fill').forEach(f=>f.style.width=f.dataset.w+'%'));
-  document.getElementById('stressN').textContent=`${venom.length} av 100 var giftiga`;
-  document.getElementById('stressNote').innerHTML=`<div class="callout emerald" style="margin-bottom:0"><b>Enkelt slår komplext — igen.</b> Av de ${venom.length} giftiga ormarna kallade det djupa trädet <b>${deepMissVenom}</b> för ofarliga (varje grön giftorm). Kör igen: det enkla trädet vinner så gott som varje gång, trots att det djupa var perfekt på träningen. Ett lagom enkelt träd <button class="term" data-term="generalize">generaliserar</button> bättre.</div>`;
-}
-/* exit ticket */
-const TICKET=[
- ['Ditt träd och maskinens ställde samma två första frågor. Varför just Huvudform och Pupill — och varför i den ordningen?','De två egenskaperna har högst informationsvinst: de delar ormarna renast. Huvudform delar allra renast och hamnar därför först, sedan Pupill. Tillsammans fångar de den verkliga regeln (triangulärt huvud och sprickpupill = giftig).'],
- ['Maskinen la till en Färg-split längst ner i trädet. Var det klokt?','Nej. Färgen skilde bara de två gröna flukesen i just träningsdatan. Regeln "grön → ofarlig" är slump, inte mönster, och gör att varje grön giftorm i verkligheten klassas fel.'],
- ['Skulle mer träningsdata ha hjälpt maskinen?','Ofta ja. Med fler gröna giftormar i träningen skulle "grön → ofarlig" inte längre minska entropin, och den falska splitten skulle försvinna. Brist på data är en vanlig orsak till överanpassning.']
-];
-function renderTicket(){
-  document.getElementById('ticketZone').innerHTML=`<div class="ticket glass"><h3>Exit ticket</h3>
-    <p class="lead" style="margin-bottom:2px">Tre frågor. Svara i huvudet först — tryck sedan för att jämföra.</p>
-    ${TICKET.map((t,i)=>`<div class="tq" data-i="${i}"><div class="qq">${i+1}. ${t[0]}</div><button class="btn sm ghost" data-reveal="${i}">Visa ett svar</button><div class="aa">${t[1]}</div></div>`).join('')}</div>`;
-  document.querySelectorAll('[data-reveal]').forEach(b=>b.onclick=()=>{const tq=b.closest('.tq');tq.classList.add('open');b.remove();});
 }
 
 /* ================= ambient ================= */
@@ -1131,7 +1090,7 @@ function renderTicket(){
     if(!raf)raf=requestAnimationFrame(()=>{spot.style.setProperty('--sx',tx+'%');spot.style.setProperty('--sy',ty+'%');raf=null;});});
   document.addEventListener('mouseleave',()=>spot.classList.remove('on'));})();
 
-renderStudy();renderGroupStep();go(0);
+renderStudy();go(0);
 </script>
 </body>
 </html>
