@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ormpasset — beslutsträd &amp; maskininlärning</title>
+<script>document.documentElement.classList.add('js');</script>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0a0e1a;--bg-card:#161d2f;
+    --border-subtle:rgba(255,255,255,0.07);--border-hover:rgba(255,255,255,0.16);
+    --text-primary:#e8ecf4;--text-secondary:#8b95a9;--text-muted:#5a6478;
+    --cyan:#22d3ee;--violet:#a78bfa;--rose:#fb7185;--amber:#fbbf24;--emerald:#34d399;--blue:#60a5fa;
+    --cyan-bg:rgba(34,211,238,.09);--rose-bg:rgba(251,113,133,.10);--emerald-bg:rgba(52,211,153,.10);
+    --amber-bg:rgba(251,191,36,.10);--blue-bg:rgba(96,165,250,.10);--violet-bg:rgba(167,139,250,.10);
+    --radius:22px;--radius-sm:14px;
+    --ease-out:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);
+    --glass:linear-gradient(165deg,rgba(28,37,64,.72),rgba(16,21,36,.78));
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:radial-gradient(ellipse 120% 70% at 50% -10%,#151d38 0%,#0a0e1a 48%,#05070d 100%);
+    color:var(--text-primary);font-family:'DM Sans',system-ui,sans-serif;font-size:15px;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  .ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:0;animation:layerFade 1.4s var(--ease-out) .1s forwards}
+  .aurora{position:absolute;border-radius:50%;filter:blur(90px)}
+  .aurora-1{top:-30%;left:-16%;width:60vw;height:60vw;min-width:480px;min-height:480px;background:radial-gradient(circle at 40% 40%,rgba(34,211,238,.10),transparent 65%);animation:drift1 46s ease-in-out infinite}
+  .aurora-2{top:0;right:-20%;width:56vw;height:56vw;min-width:460px;min-height:460px;background:radial-gradient(circle at 55% 45%,rgba(52,211,153,.09),transparent 65%);animation:drift2 58s ease-in-out infinite}
+  .aurora-3{bottom:-32%;left:20%;width:64vw;height:52vw;min-width:520px;min-height:420px;background:radial-gradient(ellipse at 50% 50%,rgba(167,139,250,.07),transparent 65%);animation:drift3 70s ease-in-out infinite}
+  @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6vw,4vh) scale(1.08)}}
+  @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-5vw,6vh) scale(1.05)}}
+  @keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(4vw,-5vh) scale(1.1)}}
+  @keyframes layerFade{to{opacity:1}}
+  .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 120% 90% at 50% 30%,transparent 55%,rgba(3,5,10,.55) 100%)}
+  .spotlight{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .4s var(--ease-out);background:radial-gradient(460px circle at var(--sx,50%) var(--sy,20%),rgba(255,255,255,.03),transparent 70%)}
+  .spotlight.on{opacity:1}
+  .noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px}
+  .container{position:relative;z-index:2;max-width:1020px;margin:0 auto;padding:0 22px 90px}
+
+  .backlink{display:inline-flex;align-items:center;gap:6px;margin-top:26px;font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;color:var(--text-secondary);text-decoration:none;border:1px solid var(--border-subtle);background:rgba(22,29,47,.55);backdrop-filter:blur(10px);padding:7px 14px;border-radius:100px;transition:.26s var(--ease-spring);opacity:0;animation:fadeUp .6s var(--ease-out) .15s forwards}
+  .backlink:hover{color:var(--text-primary);border-color:var(--border-hover);transform:translateX(-2px)}
+
+  .hero{padding:22px 0 8px;position:relative}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);opacity:0;animation:fadeUp .6s var(--ease-out) .2s forwards}
+  h1.title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(34px,7vw,62px);letter-spacing:-.02em;line-height:1;margin:.18em 0 .22em;background:linear-gradient(105deg,var(--cyan),var(--blue) 45%,var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;animation:fadeUp .6s var(--ease-out) .3s forwards}
+  .hero p{max-width:64ch;color:var(--text-secondary);font-size:17px;line-height:1.6;opacity:0;animation:fadeUp .6s var(--ease-out) .42s forwards}
+  .hero p b{color:var(--text-primary);font-weight:600}
+  .hero p.focus{max-width:none;font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(17px,2.6vw,22px);color:var(--text-primary);letter-spacing:-.01em;margin:.1em 0 .5em;animation-delay:.38s}
+  .helpbtn{position:absolute;top:22px;right:0;opacity:0;animation:fadeUp .6s var(--ease-out) .5s forwards}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+  nav.steps{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 24px}
+  .pill{display:inline-flex;align-items:center;gap:9px;font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;color:var(--text-secondary);border:1px solid var(--border-subtle);background:rgba(22,29,47,.55);backdrop-filter:blur(10px);padding:9px 15px;border-radius:100px;cursor:pointer;transition:.28s var(--ease-spring);white-space:nowrap}
+  .pill .n{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.06);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700}
+  .pill:hover{color:var(--text-primary);border-color:var(--border-hover);transform:translateY(-1px)}
+  .pill:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+  .pill[aria-current="true"]{color:#04121a;background:linear-gradient(100deg,var(--cyan),var(--blue));border-color:transparent;box-shadow:0 8px 24px rgba(34,211,238,.22)}
+  .pill[aria-current="true"] .n{background:rgba(0,0,0,.18);color:#04121a}
+
+  .panel{display:none}.panel.on{display:block;animation:panelIn .4s var(--ease-out)}
+  @keyframes panelIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .glass{background:var(--glass);backdrop-filter:blur(22px) saturate(1.3);-webkit-backdrop-filter:blur(22px) saturate(1.3);border:1px solid var(--border-subtle);border-radius:var(--radius);box-shadow:0 14px 34px rgba(0,0,0,.3),0 1px 0 rgba(255,255,255,.06) inset}
+  h2.sec{font-family:'Syne',sans-serif;font-weight:700;font-size:26px;letter-spacing:-.01em;margin:2px 0 8px}
+  .lead{max-width:70ch;color:var(--text-secondary);line-height:1.62;font-size:15.5px}
+  .lead b{color:var(--text-primary);font-weight:600}
+
+  /* term chip (opens concept card) */
+  .term{border:none;background:var(--violet-bg);color:var(--violet);border-bottom:1px dashed rgba(167,139,250,.55);font:inherit;font-weight:600;cursor:help;padding:0 2px;border-radius:4px;transition:.2s}
+  .term:hover{background:rgba(167,139,250,.2);color:#c4b5fd}
+  .term:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+
+  .grid{display:grid;gap:14px}
+  .specimens{grid-template-columns:repeat(auto-fill,minmax(118px,1fr))}
+  .scard{background:linear-gradient(168deg,rgba(32,42,72,.78),rgba(14,19,34,.85));border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:10px 8px 8px;position:relative;box-shadow:0 10px 22px rgba(0,0,0,.30),0 1px 0 rgba(255,255,255,.05) inset;transition:transform .35s var(--ease-out),border-color .3s,box-shadow .3s;overflow:hidden}
+  .scard::before{content:'';position:absolute;inset:0;background:radial-gradient(120% 70% at 50% -10%,rgba(96,165,250,.10),transparent 60%);pointer-events:none}
+  .scard:hover{transform:translateY(-4px);border-color:var(--border-hover);box-shadow:0 16px 30px rgba(0,0,0,.4)}
+  .scard.g{border-color:rgba(251,113,133,.32)}
+  .scard.o{border-color:rgba(52,211,153,.30)}
+  .scard .id{position:absolute;top:8px;left:10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);z-index:1}
+  .scard svg{display:block;width:100%;height:auto;position:relative}
+  .scard .lab{display:flex;justify-content:center;margin-top:4px}
+
+  .tag{display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.04em;padding:3px 9px;border-radius:100px;text-transform:uppercase}
+  .tag .sym{font-size:10px}
+  .tag.g{color:var(--rose);background:var(--rose-bg);border:1px solid rgba(251,113,133,.28)}
+  .tag.o{color:var(--emerald);background:var(--emerald-bg);border:1px solid rgba(52,211,153,.28)}
+  .tag.q{color:var(--text-muted);background:rgba(255,255,255,.03);border:1px dashed var(--border-hover)}
+
+  .btn{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--text-primary);border:1px solid var(--border-subtle);background:rgba(255,255,255,.045);backdrop-filter:blur(10px);padding:9px 16px;border-radius:100px;cursor:pointer;transition:.26s var(--ease-spring);display:inline-flex;align-items:center;gap:7px}
+  .btn:hover{border-color:var(--border-hover);transform:translateY(-1px)}
+  .btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+  .btn.primary{background:linear-gradient(100deg,var(--cyan),var(--blue));color:#04121a;border-color:transparent;font-weight:700;box-shadow:0 8px 22px rgba(34,211,238,.2)}
+  .btn.violet{background:linear-gradient(100deg,var(--violet),#8b7bf0);color:#0c0720;border-color:transparent;font-weight:700}
+  .btn.danger{background:linear-gradient(100deg,var(--rose),#f43f5e);color:#1a0308;border-color:transparent;font-weight:700}
+  .btn.sm{font-size:12.5px;padding:6px 12px}
+  .btn.ghost{background:transparent}
+  .btn:disabled{opacity:.45;cursor:default;transform:none}
+
+  .groupbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:18px 0 4px}
+  .groupbar .gl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin-right:2px}
+  .gbtn{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;padding:7px 13px;border-radius:100px;border:1px solid var(--border-subtle);background:rgba(255,255,255,.04);color:var(--text-secondary);cursor:pointer;transition:.24s var(--ease-spring)}
+  .gbtn:hover{color:var(--text-primary);border-color:var(--border-hover);transform:translateY(-1px)}
+  .gbtn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+  .gbtn[aria-pressed="true"]{color:#04121a;background:linear-gradient(100deg,var(--cyan),var(--blue));border-color:transparent}
+  .gbtn:disabled{opacity:.4;cursor:default;transform:none}
+  .groupsec{margin-top:18px}
+  .grouphead{display:flex;align-items:center;gap:12px;margin:4px 2px 10px;flex-wrap:wrap}
+  .grouphead .gname{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:var(--text-primary)}
+  .grouphead .gcount{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-secondary);display:inline-flex;gap:12px}
+  .grouphead .gcount .cg{color:var(--rose)}.grouphead .gcount .co{color:var(--emerald)}
+  .grouphead .bar{flex:1;min-width:120px;height:8px;border-radius:100px;overflow:hidden;display:flex;background:rgba(255,255,255,.05)}
+  .grouphead .bar .pg{background:var(--rose)}.grouphead .bar .po{background:var(--emerald)}
+
+  /* concept reference strip on tab 1 */
+  .refstrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:18px}
+  .refcard{border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:12px 12px 8px;background:rgba(255,255,255,.02)}
+  .refcard h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:8px}
+  .refrow{display:flex;align-items:center;gap:8px;font-size:13px;margin:3px 0;color:var(--text-secondary)}
+  .refrow svg{width:38px;height:38px;flex:0 0 38px}
+  #specimenGrid{margin-top:6px}
+  .helprow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}
+  .helpnote{font-size:13px;color:var(--text-muted)}
+  .refstrip.hidden{display:none}
+
+  /* canvas tree */
+  .canvas-wrap{overflow-x:auto;overflow-y:hidden;margin-top:16px;padding:18px 8px;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);background:radial-gradient(ellipse 90% 70% at 50% -10%,rgba(96,165,250,.09),transparent 60%),linear-gradient(180deg,rgba(9,12,22,.5),rgba(9,12,22,.2))}
+  svg.tree{display:block;margin:0 auto}
+  .tnodeWrap{cursor:pointer}
+  .tnodeWrap:focus-visible{outline:none}
+  .tnodeWrap:focus-visible .tcard{stroke:var(--cyan);stroke-width:2.6}
+  .tnode-inner{transform-box:fill-box;transform-origin:center}
+  .tcard{fill:url(#cardg);stroke:rgba(255,255,255,.15);stroke-width:1.4;transition:stroke .25s,fill .25s}
+  .cardtop{fill:none;stroke:rgba(255,255,255,.09);stroke-width:1;pointer-events:none}
+  .tnodeWrap:hover .tcard{stroke:rgba(255,255,255,.30)}
+  .tcard.sel{stroke:var(--cyan);stroke-width:2.6}
+  .tcard.cur{stroke:var(--violet);stroke-width:2.6}
+  .tcard.onpath{stroke:var(--cyan);stroke-width:2.6}
+  .tcard.frontier{stroke-dasharray:6 4;stroke:var(--amber);fill:rgba(251,191,36,.06)}
+  .tcard.leaf-g{stroke:var(--rose);fill:rgba(251,113,133,.13)}
+  .tcard.leaf-o{stroke:var(--emerald);fill:rgba(52,211,153,.13)}
+  .teye{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;fill:var(--text-muted)}
+  .tsplit{font-family:'Syne',sans-serif;font-weight:800;font-size:15.5px;fill:var(--text-primary)}
+  .tverdict{font-family:'Syne',sans-serif;font-weight:800;font-size:14.5px;letter-spacing:.01em}
+  .tverdict.vg{fill:#fda4b0}.tverdict.vo{fill:#6ee7b0}
+  .tfront{font-family:'Syne',sans-serif;font-weight:800;font-size:14.5px;fill:var(--amber)}
+  .tcount{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700}
+  .tedge{fill:none;stroke:url(#edgeg);stroke-width:2.2}
+  .tedge.onpath{stroke:var(--cyan);stroke-width:2.8}
+  .eLabel rect{fill:#0e1321;stroke:rgba(255,255,255,.12)}
+  .eLabel text{font-family:'JetBrains Mono',monospace;font-size:10px;fill:var(--text-secondary)}
+  @keyframes nodeEnter{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+  @keyframes edgeDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+  .tedge.enter{stroke-dasharray:1;animation:edgeDraw .5s var(--ease-out) both}
+  .cardhint{font-size:13px;color:var(--text-muted);text-align:center;padding:12px}
+
+  /* node control panel */
+  .ctrl{margin-top:14px;padding:16px 18px;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);background:rgba(255,255,255,.02)}
+  .ctrl .who{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--text-secondary);margin-bottom:12px}
+  .ctrl .who b{color:var(--text-primary)}
+  .ctrl .lbl{font-size:12px;color:var(--text-muted);margin:10px 0 7px}
+  .attrchips{display:flex;flex-wrap:wrap;gap:8px}
+  .achip{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;padding:8px 13px;border-radius:100px;border:1px solid var(--border-subtle);background:rgba(255,255,255,.04);color:var(--text-primary);cursor:pointer;transition:.24s var(--ease-spring)}
+  .achip:hover{border-color:var(--blue);transform:translateY(-1px);background:var(--blue-bg)}
+  .achip:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+  .decide{display:flex;gap:8px;margin-top:4px;flex-wrap:wrap}
+
+  /* raw-count hint table */
+  .counts{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+  .counts .cr{display:grid;grid-template-columns:96px 1fr;gap:10px;align-items:center;font-size:12.5px}
+  .counts .cv{font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--text-secondary)}
+  .counts .bars{display:flex;height:16px;border-radius:5px;overflow:hidden;background:rgba(255,255,255,.05)}
+  .counts .bg{background:var(--rose);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:#1a0308;font-weight:700}
+  .counts .bo{background:var(--emerald);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:#04140c;font-weight:700}
+  .puretag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--emerald);margin-left:6px}
+
+  /* gain race */
+  .race{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+  .race .r{display:grid;grid-template-columns:88px 1fr 40px;align-items:center;gap:10px;font-size:12.5px;color:var(--text-secondary);transition:color .3s}
+  .race .track{height:13px;border-radius:100px;background:rgba(255,255,255,.06);overflow:hidden}
+  .race .fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--blue),var(--cyan));width:0;transition:width .7s var(--ease-out)}
+  .race .val{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);text-align:right}
+  .race .r.win{color:var(--violet);font-weight:700}
+  .race .r.win .fill{background:linear-gradient(90deg,var(--violet),#c4b5fd)}
+  .race .r.win .val{color:var(--violet)}
+  .racehead{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);min-height:16px}
+  .racehead b{color:var(--violet)}
+
+  .controlbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0 0}
+  .count{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-muted)}
+
+  .statusline{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-secondary)}
+  .statusline .pillstat{padding:4px 11px;border-radius:100px;border:1px solid var(--border-subtle);background:rgba(255,255,255,.03)}
+  .statusline .pillstat.done{color:var(--emerald);border-color:rgba(52,211,153,.35);background:var(--emerald-bg)}
+  .statusline .pillstat.warn{color:var(--amber);border-color:rgba(251,191,36,.35);background:var(--amber-bg)}
+  .statusline .acc{color:var(--text-primary)}
+
+  .curvewrap{padding:14px 16px;margin-top:16px}
+  .curvewrap .cap{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+  .legendline{font-family:'JetBrains Mono',monospace;font-size:11.5px;margin-top:8px;display:flex;gap:16px;flex-wrap:wrap}
+  .legendline i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
+  .livenums{display:flex;gap:22px;margin-left:auto}
+  .livenums .k{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
+  .livenums .v{font-family:'Syne',sans-serif;font-weight:800;font-size:22px}
+  .v.good{color:var(--emerald)}.v.bad{color:var(--amber)}.v.blue{color:var(--blue)}
+
+  /* test narrative */
+  .cmpbar{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+  .cmpcard{flex:1;min-width:150px;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:12px 14px;background:rgba(255,255,255,.02)}
+  .cmpcard .t{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
+  .cmpcard .n{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;margin-top:3px;color:var(--text-primary)}
+  .cmpcard .s{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-secondary);margin-top:4px}
+  .scene{padding:22px;text-align:center}
+  .scene .alert{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--rose);margin-bottom:6px}
+  .scene .big{width:180px;max-width:60%;margin:6px auto 4px;filter:drop-shadow(0 12px 24px rgba(0,0,0,.5))}
+  .scene .q{color:var(--text-secondary);font-size:15px;margin:6px 0 14px}
+  .verdict{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;margin:12px 0 4px;min-height:28px}
+  .verdict.g{color:var(--rose)}.verdict.o{color:var(--emerald)}
+  .reveal-row{display:flex;justify-content:center;gap:16px;align-items:center;flex-wrap:wrap;margin-top:8px}
+  .vs{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-secondary)}
+  .tally{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+  .tally .row{display:flex;align-items:center;gap:8px}
+  .tally .who{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);width:38px;text-align:right}
+  .dot{width:15px;height:15px;border-radius:50%;background:rgba(255,255,255,.08);display:inline-flex;align-items:center;justify-content:center;font-size:10px}
+  .dot.ok{background:var(--emerald-bg);color:var(--emerald);border:1px solid rgba(52,211,153,.4)}
+  .dot.no{background:var(--rose-bg);color:var(--rose);border:1px solid rgba(251,113,133,.4)}
+  .progress{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);margin-top:6px}
+
+  /* stress test */
+  .stress{padding:22px;margin-top:16px}
+  .stress .cap{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
+  .sbars{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+  .sbar{display:grid;grid-template-columns:130px 1fr;gap:12px;align-items:center}
+  .sbar .nm{font-size:13.5px;font-weight:600;color:var(--text-primary)}
+  .sbar .nm small{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);font-weight:400}
+  .sbar .track{height:26px;border-radius:8px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
+  .sbar .fill{height:100%;width:0;border-radius:8px;transition:width 1.1s var(--ease-out);display:flex;align-items:center;justify-content:flex-end;padding-right:9px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700}
+  .sbar.simple .fill{background:linear-gradient(90deg,var(--emerald),#6ee7b7);color:#04140c}
+  .sbar.deep .fill{background:linear-gradient(90deg,var(--amber),#fcd34d);color:#241a02}
+  .sbar.you .fill{background:linear-gradient(90deg,var(--blue),var(--cyan));color:#04121a}
+
+  .callout{padding:14px 18px;border-radius:var(--radius-sm);border:1px solid var(--border-subtle);border-left:3px solid var(--amber);background:linear-gradient(165deg,rgba(28,37,64,.5),rgba(16,21,36,.55));color:var(--text-secondary);line-height:1.6;margin:16px 0;font-size:14px}
+  .callout.emerald{border-left-color:var(--emerald)}
+  .callout.rose{border-left-color:var(--rose)}
+  .callout b{color:var(--text-primary)}
+
+  details.teach{margin:16px 0 0;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);overflow:hidden;background:rgba(255,255,255,.02)}
+  details.teach summary{cursor:pointer;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--cyan);list-style:none}
+  details.teach summary::-webkit-details-marker{display:none}
+  details.teach summary::before{content:'+ ';color:var(--text-muted)}
+  details.teach[open] summary::before{content:'– '}
+  details.teach .body{padding:0 16px 14px;max-width:74ch;color:var(--text-secondary);line-height:1.65;font-size:14px}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:11.5px;padding:2px 8px;border-radius:100px;background:var(--violet-bg);color:var(--violet);border:1px solid rgba(167,139,250,.2)}
+
+  /* exit ticket */
+  .ticket{padding:22px;margin-top:16px}
+  .ticket h3{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;margin-bottom:4px}
+  .tq{border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:14px 16px;margin-top:12px;background:rgba(255,255,255,.02)}
+  .tq .qq{font-weight:600;color:var(--text-primary);margin-bottom:6px}
+  .tq .aa{display:none;color:var(--text-secondary);font-size:14px;line-height:1.6;border-left:2px solid var(--emerald);padding-left:12px;margin-top:8px}
+  .tq.open .aa{display:block;animation:panelIn .3s var(--ease-out)}
+
+  .modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(4,7,13,.7);backdrop-filter:blur(8px)}
+  .modal.on{display:flex;animation:panelIn .3s var(--ease-out)}
+  .modal-inner{max-width:620px;width:100%;max-height:86vh;overflow:auto;padding:26px}
+  .modal-inner h3{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;margin-bottom:6px}
+  .modal-inner .sub{color:var(--text-secondary);font-size:14px;margin-bottom:16px;line-height:1.6}
+  .qlist{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+  .qlist li{padding:13px 16px;border:1px solid var(--border-subtle);border-left:3px solid var(--cyan);border-radius:10px;background:rgba(34,211,238,.05);color:var(--text-primary);font-size:14.5px;line-height:1.5}
+  .modal-close{position:sticky;top:0;float:right;margin:-6px -6px 0 0}
+
+  /* concept tilt card */
+  .conceptModal .modal-inner{max-width:440px;background:transparent;border:none;box-shadow:none;padding:0;overflow:visible}
+  .tiltcard{position:relative;border-radius:var(--radius);padding:24px 24px 22px;background:linear-gradient(165deg,rgba(40,52,92,.92),rgba(18,24,42,.96));border:1px solid var(--border-hover);box-shadow:0 30px 70px rgba(0,0,0,.55),0 1px 0 rgba(255,255,255,.1) inset;transform-style:preserve-3d;transition:transform .12s ease-out}
+  .tiltcard .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--violet)}
+  .tiltcard h3{font-family:'Syne',sans-serif;font-weight:800;font-size:24px;margin:6px 0 10px;background:linear-gradient(105deg,var(--violet),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .tiltcard p{color:var(--text-secondary);line-height:1.62;font-size:14.5px}
+  .tiltcard p b{color:var(--text-primary)}
+  .tiltcard .ex{margin-top:12px;padding:11px 13px;border-radius:12px;background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.16);font-size:13.5px;color:var(--text-secondary);line-height:1.55}
+  .tiltcard .close{position:absolute;top:14px;right:14px}
+
+  /* step 5 — compare */
+  .cmpwrap{padding:20px}
+  .treecmp{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 4px}
+  .treecmp .tc{flex:1;min-width:200px;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:12px 14px;background:rgba(255,255,255,.02)}
+  .treecmp .tc.mach{border-color:rgba(251,191,36,.28);background:rgba(251,191,36,.05)}
+  .treecmp .tct{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+  .qchip{display:inline-flex;align-items:center;font-family:'Space Grotesk',sans-serif;font-size:12.5px;font-weight:600;color:var(--text-primary);border:1px solid var(--border-hover);border-radius:100px;padding:4px 11px;margin:0 5px 5px 0}
+  .tc.mach .qchip:last-child{border-color:var(--amber);color:var(--amber);background:rgba(251,191,36,.08)}
+  .diffnote{font-size:14px;color:var(--text-secondary);margin:6px 0 14px}
+  .diffnote b{color:var(--text-primary)}
+  .cmptable{width:100%;border-collapse:collapse;font-size:13.5px}
+  .cmptable th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);font-weight:500;padding:6px 10px;border-bottom:1px solid var(--border-subtle)}
+  .cmptable td{padding:6px 10px;border-bottom:1px solid rgba(255,255,255,.045);color:var(--text-secondary);vertical-align:middle}
+  .cmptable .c-snake{width:56px}.cmptable .c-snake svg{width:44px;height:44px;display:block}
+  .vcell{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+  .vcell.g{color:var(--rose)}.vcell.o{color:var(--emerald)}
+  .scoreline{display:flex;gap:22px;margin:14px 0;font-family:'Syne',sans-serif;font-size:16px;color:var(--text-secondary)}
+  .scoreline b{font-weight:800;color:var(--text-primary)}
+  /* step 6 — reflect */
+  .reflectgrid{display:flex;gap:14px;flex-wrap:wrap}
+  .rcard{flex:1;min-width:240px;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:16px 18px;background:rgba(255,255,255,.02)}
+  .rcard.good{border-color:rgba(52,211,153,.28);background:var(--emerald-bg)}
+  .rcard.warn{border-color:rgba(251,191,36,.28);background:rgba(251,191,36,.05)}
+  .rcard .rh{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;margin-bottom:6px;color:var(--text-primary)}
+  .rcard.good .rh{color:var(--emerald)}.rcard.warn .rh{color:var(--amber)}
+  .rcard p{font-size:14px;line-height:1.62;color:var(--text-secondary);margin:0}
+  .rcard p b{color:var(--text-primary);font-weight:600}
+
+  /* step 4 — train-first test */
+  .trainmini{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin:14px 0}
+  .tdot{width:17px;height:17px;border-radius:5px;background:rgba(255,255,255,.07);display:inline-flex;align-items:center;justify-content:center;font-size:10px;color:transparent;transition:.3s var(--ease-spring)}
+  .tdot.ok{background:rgba(52,211,153,.22);color:var(--emerald)}
+  .tdot.no{background:rgba(251,113,133,.22);color:var(--rose)}
+  .bigscore{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(24px,5vw,34px);color:var(--text-primary);text-align:center;margin:4px 0;display:flex;align-items:baseline;gap:12px;justify-content:center}
+  .bigscore .pctbig{font-size:.7em;color:var(--emerald);font-family:'JetBrains Mono',monospace}
+  .splitcard{border:1px solid rgba(96,165,250,.28);background:linear-gradient(165deg,rgba(96,165,250,.08),rgba(167,139,250,.06));border-radius:var(--radius-sm);padding:20px 22px;text-align:left}
+  .splitcard .sh{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--text-primary);margin-bottom:10px}
+  .splitcard p{font-size:14.5px;line-height:1.64;color:var(--text-secondary);margin:0 0 12px}
+  .splitcard p b{color:var(--text-primary);font-weight:600}
+  .splitcard .btn{margin-top:4px}
+  .pill2{display:inline-flex;align-items:center;font-family:'Space Grotesk',sans-serif;font-size:12.5px;font-weight:700;border-radius:100px;padding:2px 10px;margin:0 1px}
+  .pill2.train{color:#93c5fd;background:rgba(96,165,250,.14);border:1px solid rgba(96,165,250,.3)}
+  .pill2.test{color:#fbbf24;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3)}
+
+  footer{position:relative;z-index:2;text-align:center;padding:36px 0 10px;color:var(--text-muted);font-size:12.5px;font-family:'JetBrains Mono',monospace}
+  @media(prefers-reduced-motion:reduce){*{animation-duration:.001s!important}.tiltcard{transition:none}}
+</style>
+</head>
+<body>
+<div class="ambient"><div class="aurora aurora-1"></div><div class="aurora aurora-2"></div><div class="aurora aurora-3"></div></div>
+<div class="vignette"></div><div class="spotlight" id="spotlight"></div><div class="noise"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <filter id="tsh" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000" flood-opacity=".45"/></filter>
+  <linearGradient id="cardg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2237"/><stop offset="1" stop-color="#141a2b"/></linearGradient>
+  <linearGradient id="edgeg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.28)"/><stop offset="1" stop-color="rgba(255,255,255,.10)"/></linearGradient>
+</defs></svg>
+
+<div class="container">
+  <a class="backlink" href="https://ai-aktiviteter.se/">← AI-aktiviteter</a>
+  <header class="hero">
+    <div class="eyebrow">Beslutsträd · Övervakad inlärning</div>
+    <h1 class="title">Ormpasset</h1>
+    <p class="focus">Lär dig bygga ett beslutsträd.</p>
+    <p>Några ormar är <b>giftiga</b>, andra ofarliga — men ingen har sagt vad som avslöjar dem. Du gör hela vägen själv: <b>studera</b> ormarna, <b>gruppera</b> dem för att hitta mönstret, <b>bygg</b> ditt träd, <b>testa</b> det på nya ormar, <b>jämför</b> med maskinens träd och <b>reflektera</b> över varför den valde som den gjorde.</p>
+    <button class="btn sm helpbtn" id="helpOpen">? Ledtrådar</button>
+  </header>
+
+  <nav class="steps" id="nav" aria-label="Labbens steg"></nav>
+
+  <!-- STEG 1 — Studera datan -->
+  <section class="panel" data-tab="0">
+    <div class="glass" style="padding:26px">
+      <h2 class="sec">Studera träningsdatan</h2>
+      <p class="lead">20 fångade ormar med känt facit. Din uppgift genom hela labben: ta reda på vad som skiljer de <span class="tag g"><span class="sym">▲</span>giftiga</span> från de <span class="tag o"><span class="sym">●</span>ofarliga</span> — och fånga det i ett beslutsträd. Börja med att <b>titta noga</b>. Vilka egenskaper varierar mellan ormarna? Försök hitta dem själv — jämför en giftig med en ofarlig i taget.</p>
+      <div id="specimenGrid"></div>
+      <div class="helprow">
+        <button class="btn sm ghost" id="revealAttrs">🔍 Visa egenskaperna</button>
+        <span class="helpnote">Kör du fast? Knappen avslöjar vilka fem egenskaper som varierar.</span>
+      </div>
+      <div class="refstrip hidden" id="refstrip"></div>
+    </div>
+  </section>
+
+  <!-- STEG 2 — Gruppera -->
+  <section class="panel" data-tab="1">
+    <div class="glass" style="padding:26px">
+      <h2 class="sec">Gruppera efter egenskaper</h2>
+      <p class="lead">Nu prövar du din gissning. <b>Gruppera</b> ormarna efter en egenskap i taget och se om giftet <b>samlas</b> på ena sidan — eller sprids ut jämnt. En egenskap som blandar giftigt och ofarligt är värdelös; en som delar rent är guld. Leta efter de egenskaper som delar renast — det är dem ditt träd ska fråga om.</p>
+      <div class="groupbar" id="groupbar"><span class="gl">Gruppera efter</span></div>
+      <div id="trainArea" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- STEG 3 — Bygg -->
+  <section class="panel" data-tab="2">
+    <div class="glass" style="padding:26px">
+      <h2 class="sec">Bygg ditt beslutsträd</h2>
+      <p class="lead">Dags att bygga. Klicka på en nod. Välj en egenskap att <b>dela på</b> så förgrenar sig trädet — eller <b>bestäm</b> grenen som giftig/ofarlig. Prickarna i varje nod är ormarna: <span style="color:var(--rose)">▲</span> giftig, <span style="color:var(--emerald)">●</span> ofarlig. Sikta på grenar med bara en form. En streckad gul ram betyder <b>obestämd</b> gren — den måste du ta hand om innan trädet är klart.</p>
+      <div class="canvas-wrap" id="stuCanvas"></div>
+      <div class="statusline" id="stuStatus"></div>
+      <div class="ctrl" id="stuCtrl"></div>
+      <div class="controlbar"><button class="btn sm ghost" id="resetTree">↺ Börja om</button></div>
+    </div>
+  </section>
+
+  <!-- STEG 4 — Testa ditt träd -->
+  <section class="panel" data-tab="3">
+    <div class="glass" style="padding:26px">
+      <h2 class="sec">Testa ditt träd</h2>
+      <p class="lead">Hur vet man om ett träd är <b>bra</b>? Första idén: kör det på ormarna du byggde det med. Gör det — och upptäck varför den siffran lurar dig, innan du testar trädet på ormar det <b>aldrig sett</b>.</p>
+      <div class="scene glass" id="youScene" style="margin-top:8px"></div>
+      <div class="canvas-wrap" id="youCanvas"></div>
+      <div class="ctrl" id="youManualCtrl"></div>
+      <div class="tally" id="youTally"></div>
+    </div>
+  </section>
+
+  <!-- STEG 5 — Jämför med maskinen -->
+  <section class="panel" data-tab="4">
+    <div class="glass" style="padding:26px">
+      <h2 class="sec">Jämför med maskinens träd</h2>
+      <p class="lead">En maskin bygger ett beslutsträd på <b>exakt samma data</b>. I varje nod provar den <b>alla</b> egenskaper och mäter hur rent var och en delar upp ormarna — det kallas <button class="term" data-term="gain">informationsvinst</button>. Den som vinner får dela noden. Tryck <b>Spela</b> och se maskinen bygga — jämför sedan dess träd med ditt, orm för orm.</p>
+      <div class="controlbar">
+        <button class="btn primary" id="mlPlay">▶ Spela</button>
+        <button class="btn sm" id="mlNext">Nästa split →</button>
+        <button class="btn sm ghost" id="mlReset">↺ Börja om</button>
+      </div>
+      <div class="racehead" id="raceHead" style="margin-top:14px">Tryck "Nästa split" för att låta maskinen välja i roten.</div>
+      <div class="race" id="mlRace"></div>
+      <div class="canvas-wrap" id="mlCanvas"></div>
+      <div class="curvewrap glass">
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <div class="cap" style="margin:0">Träffsäkerhet medan trädet växer</div>
+          <div class="livenums">
+            <div><div class="k">Träning</div><div class="v good" id="mlTrainAcc">—</div></div>
+            <div><div class="k">Test</div><div class="v bad" id="mlTestAcc">—</div></div>
+          </div>
+        </div>
+        <div id="curve" style="margin-top:8px"></div>
+        <div class="legendline"><span><i style="background:var(--emerald)"></i>träning</span><span><i style="background:var(--amber)"></i>test (ny data)</span><span style="color:var(--text-muted)">○ = trädets nuvarande djup</span></div>
+      </div>
+      <div id="cmpZone" style="margin-top:16px"></div>
+    </div>
+  </section>
+
+  <!-- STEG 6 — Reflektera -->
+  <section class="panel" data-tab="5">
+    <div class="glass" style="padding:26px">
+      <h2 class="sec">Reflektera över splittarna</h2>
+      <p class="lead">Maskinen valde <b>samma</b> två första frågor som du — och la sedan till en till. Varför? Det säger något viktigt om hur beslutsträd väljer, och om när "mer" blir sämre.</p>
+      <div id="reflectSplits"></div>
+      <div id="stressZone" style="margin-top:16px"></div>
+      <div id="ticketZone"></div>
+      <details class="teach"><summary>Diskutera i klassen</summary><div class="body">Ställde du och maskinen samma frågor, eller olika? Vad är det med informationsvinst som avgör vilken fråga hamnar först? Om trädet fick en extra fråga någonstans — hjälpte den, eller gjorde den bara trädet krångligare utan att träffsäkerheten på ny data blev bättre? När hjälper mer träningsdata, och när stjälper den?</div></details>
+    </div>
+  </section>
+
+  <footer>Ormpasset · lär dig bygga ett beslutsträd · ai-aktiviteter.se</footer>
+</div>
+
+<div class="modal" id="helpModal">
+  <div class="modal-inner glass">
+    <button class="btn sm modal-close" id="helpClose">Stäng ✕</button>
+    <h3>Ledtrådar</h3>
+    <div class="sub">Inga svar här — bara frågor som brukar leda rätt. Fundera på dem medan du grupperar ormarna.</div>
+    <ul class="qlist">
+      <li>Gruppera efter <b>Huvudform</b>. Var samlas de giftiga? Räcker det med bara huvudformen?</li>
+      <li>Finns en egenskap där giftigt och ofarligt är <b>jämnt blandat</b> i varje grupp? Då är den värdelös.</li>
+      <li>Räcker det med <b>en</b> egenskap, eller måste du kombinera två för att inte göra fel?</li>
+      <li>Hittar du en giftig och en ofarlig orm som ser nästan <b>likadana</b> ut? Vad är den enda skillnaden?</li>
+      <li>Om du bara fick använda <b>två</b> egenskaper — vilka skulle du välja, och varför just de?</li>
+    </ul>
+  </div>
+</div>
+
+<div class="modal conceptModal" id="conceptModal"><div class="modal-inner"><div class="tiltcard" id="tiltcard"></div></div></div>
+
+<script>
+/* ================= snake SVG — front-facing "cobra portrait", flat & bold ================= */
+const COLORS={
+  red:{lo:'#ff9a86',mid:'#e8503d',dk:'#a02617',belly:'#ffd8cc'},
+  green:{lo:'#68db9c',mid:'#1fb867',dk:'#0f7040',belly:'#c6f3d9'},
+  yellow:{lo:'#ffd35e',mid:'#f0aa10',dk:'#9c6c08',belly:'#ffeeb8'},
+  brown:{lo:'#d3a06d',mid:'#a06636',dk:'#573619',belly:'#e9ceac'}
+};
+const INK='#20202e';
+let UID=0;
+function hoodPath(){return 'M50,36 C71,36 84,47 86,64 C87,82 71,96 50,96 C29,96 13,82 14,64 C16,47 29,36 50,36 Z';}
+function headPath(head){
+  if(head==='tri') return 'M29,16 L43,12 L57,12 L71,16 Q76,20 75,29 Q73,38 62,50 Q54,59 50,61 Q46,59 38,50 Q27,38 25,29 Q24,20 29,16 Z';
+  return 'M50,13 Q79,13 79,39 Q79,61 50,63 Q21,61 21,39 Q21,13 50,13 Z';
+}
+function snakePattern(p,c){
+  if(p==='stripes'){let s='';for(let y=60;y<=92;y+=8)s+=`<path d="M14,${y} Q50,${y-6} 86,${y}" fill="none" stroke="${c.dk}" stroke-width="5" stroke-linecap="round" opacity=".9"/>`;return s;}
+  if(p==='spots')return [[36,66],[50,62],[64,66],[30,80],[50,78],[70,80],[42,90],[58,90]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="4.5" fill="${c.dk}" opacity=".88"/>`).join('');
+  return '';
+}
+/* tapered-ribbon helper: builds a smooth path that's wide near the body and
+   narrows (or stays thick) toward the tip, so tail shapes are unmistakably different */
+function bez(P0,P1,P2,P3,t){const m=1-t;
+  return[m*m*m*P0[0]+3*m*m*t*P1[0]+3*m*t*t*P2[0]+t*t*t*P3[0], m*m*m*P0[1]+3*m*m*t*P1[1]+3*m*t*t*P2[1]+t*t*t*P3[1]];}
+function bezTan(P0,P1,P2,P3,t){const m=1-t;
+  const dx=3*m*m*(P1[0]-P0[0])+6*m*t*(P2[0]-P1[0])+3*t*t*(P3[0]-P2[0]);
+  const dy=3*m*m*(P1[1]-P0[1])+6*m*t*(P2[1]-P1[1])+3*t*t*(P3[1]-P2[1]);
+  const n=Math.hypot(dx,dy)||1;return[dx/n,dy/n];}
+function ribbonWidth(t,w0,wmid,w1,midt){midt=midt||0.35;
+  if(t<=midt)return w0+(wmid-w0)*(midt>0?t/midt:1);
+  let u=Math.pow((t-midt)/(1-midt),1.4);return wmid+(w1-wmid)*u;}
+function ribbonPath(P0,P1,P2,P3,w0,wmid,w1,n,roundTip,tipR){
+  n=n||28;const left=[],right=[];
+  for(let i=0;i<=n;i++){const t=i/n,p=bez(P0,P1,P2,P3,t),tn=bezTan(P0,P1,P2,P3,t);
+    const nx=-tn[1],ny=tn[0],w=ribbonWidth(t,w0,wmid,w1)/2;
+    left.push([p[0]+nx*w,p[1]+ny*w]);right.push([p[0]-nx*w,p[1]-ny*w]);}
+  let d=`M${left[0][0].toFixed(1)},${left[0][1].toFixed(1)} `+left.slice(1).map(p=>`L${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+  if(roundTip){const tip=bez(P0,P1,P2,P3,1),tn=bezTan(P0,P1,P2,P3,1);
+    const cx=tip[0]+tn[0]*tipR,cy=tip[1]+tn[1]*tipR;
+    d+=` Q${cx.toFixed(1)},${cy.toFixed(1)} ${right[right.length-1][0].toFixed(1)},${right[right.length-1][1].toFixed(1)} `;}
+  d+=' '+right.slice().reverse().map(p=>`L${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ')+' Z';
+  return d;
+}
+function snakeTail(t,c,sw){
+  const P0=[52,68];
+  if(t==='point'){ // thin, long, tapers to a fine point
+    const P1=[80,90],P2=[98,112],P3=[76,138];
+    return `<path d="${ribbonPath(P0,P1,P2,P3,14,21,1.2,32,false,0)}" fill="${c.mid}" stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round" stroke-linecap="round"/>`;
+  }
+  if(t==='blunt'){ // short, stays thick, rounded stub end
+    const P1=[78,88],P2=[88,100],P3=[72,112];
+    return `<path d="${ribbonPath(P0,P1,P2,P3,14,20,12,26,true,6)}" fill="${c.mid}" stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round"/>`;
+  }
+  // rattle: medium body tapering into a stack of rattle segments
+  const P1=[78,88],P2=[90,102],P3=[80,120];
+  let g=`<path d="${ribbonPath(P0,P1,P2,P3,14,19,7,26,false,0)}" fill="${c.mid}" stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round"/>`;
+  const tip=bez(P0,P1,P2,P3,1),tn=bezTan(P0,P1,P2,P3,1),nx=-tn[1],ny=tn[0];
+  let cx=tip[0]-tn[0]*1.5,cy=tip[1]-tn[1]*1.5;
+  [6.4,5.4,4.2].forEach(wid=>{
+    const step=8.2,nxp=cx+tn[0]*step,nyp=cy+tn[1]*step,hw0=wid/2,hw1=wid*0.36;
+    const p1=[cx+nx*hw0,cy+ny*hw0],p2=[nxp+nx*hw1,nyp+ny*hw1],p3=[nxp-nx*hw1,nyp-ny*hw1],p4=[cx-nx*hw0,cy-ny*hw0];
+    const mid=[(p1[0]+p4[0])/2+tn[0]*1.5,(p1[1]+p4[1])/2+tn[1]*1.5];
+    g+=`<path d="M${p1[0].toFixed(1)},${p1[1].toFixed(1)} Q${mid[0].toFixed(1)},${mid[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)} L${p3[0].toFixed(1)},${p3[1].toFixed(1)} Q${mid[0].toFixed(1)},${mid[1].toFixed(1)} ${p4[0].toFixed(1)},${p4[1].toFixed(1)} Z" fill="${c.belly}" stroke="${INK}" stroke-width="1.8" stroke-linejoin="round"/>`;
+    cx=nxp;cy=nyp;
+  });
+  const ex=cx+tn[0]*3,ey=cy+tn[1]*3;
+  g+=`<circle cx="${ex.toFixed(1)}" cy="${ey.toFixed(1)}" r="1.6" fill="${c.belly}" stroke="${INK}" stroke-width="1.4"/>`;
+  return g;
+}
+function snake(a){
+  const c=COLORS[a.color],id='k'+(UID++),sw=3.4;
+  const defs=`<defs><clipPath id="${id}h"><path d="${hoodPath()}"/></clipPath></defs>`;
+  let g=snakeTail(a.tail,c,sw);
+  g+=`<path d="${hoodPath()}" fill="${c.mid}" stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round"/>`;
+  g+=`<g clip-path="url(#${id}h)"><ellipse cx="47" cy="99" rx="27" ry="15" fill="${c.belly}" opacity=".55"/>${snakePattern(a.pattern,c)}</g>`;
+  // side-lighting on the body only: a dark crescent on the far/right side (curving away from us)
+  // and a soft sheen on the near/upper-left side, so the body reads as round and turned even though the face is frontal
+  g+=`<g clip-path="url(#${id}h)"><ellipse cx="70" cy="63" rx="18" ry="29" fill="${c.dk}" opacity=".20"/><ellipse cx="31" cy="48" rx="15" ry="19" fill="#ffffff" opacity=".14"/></g>`;
+  g+=`<path d="${headPath(a.head)}" fill="${c.lo}" stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round"/>`;
+  const ey=a.head==='tri'?30:33, ex=a.head==='tri'?13.5:13;
+  for(const s of[-1,1]){const cx=50+s*ex;
+    g+=`<circle cx="${cx}" cy="${ey}" r="8.2" fill="#fcfdff" stroke="${INK}" stroke-width="${sw}"/>`;
+    g+=a.pupil==='slit'?`<ellipse cx="${cx}" cy="${ey}" rx="2.4" ry="6.2" fill="${INK}"/>`:`<circle cx="${cx}" cy="${ey}" r="4" fill="${INK}"/>`;
+    g+=`<circle cx="${cx-1.6}" cy="${ey-2.2}" r="1.5" fill="#fff"/>`;}
+  const my=a.head==='tri'?51:53;
+  g+=`<ellipse cx="46.5" cy="${my-6}" rx="1.2" ry="1.7" fill="${INK}"/><ellipse cx="53.5" cy="${my-6}" rx="1.2" ry="1.7" fill="${INK}"/>`;
+  g+=`<path d="M42,${my} Q50,${my+5} 58,${my}" fill="none" stroke="${INK}" stroke-width="2.4" stroke-linecap="round"/>`;
+  g+=`<path d="M50,${my+3} L50,${my+9} M50,${my+9} L46,${my+13} M50,${my+9} L54,${my+13}" fill="none" stroke="#e23b57" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>`;
+  return `<svg viewBox="-4 -4 108 152">${defs}${g}</svg>`;
+}
+
+
+/* ================= data ================= */
+function S(head,pupil,pattern,color,tail,label){return{head,pupil,pattern,color,tail,label};}
+const TRAIN=[
+ S('tri','slit','stripes','brown','rattle','G'),S('tri','slit','solid','yellow','rattle','G'),
+ S('tri','slit','stripes','red','point','G'),S('tri','slit','spots','yellow','rattle','G'),
+ S('tri','slit','solid','brown','blunt','G'),S('tri','slit','stripes','red','blunt','G'),
+ S('tri','slit','spots','green','point','O'),S('tri','slit','stripes','green','blunt','O'),
+ S('tri','round','stripes','brown','point','O'),S('tri','round','spots','yellow','blunt','O'),
+ S('tri','round','solid','red','rattle','O'),S('round','round','stripes','green','blunt','O'),
+ S('round','round','spots','brown','point','O'),S('round','round','solid','red','blunt','O'),
+ S('round','round','spots','yellow','point','O'),S('round','slit','solid','yellow','blunt','O'),
+ S('round','slit','stripes','brown','rattle','O'),S('round','slit','spots','red','point','O'),
+ S('round','slit','solid','green','rattle','O'),S('round','slit','stripes','yellow','blunt','O')];
+const TEST=[
+ S('tri','slit','solid','green','rattle','G'),S('tri','slit','spots','brown','point','G'),
+ S('tri','slit','stripes','yellow','blunt','G'),S('round','round','stripes','yellow','blunt','O'),
+ S('tri','round','solid','red','point','O'),S('round','slit','spots','green','rattle','O'),
+ S('round','round','solid','brown','rattle','O'),S('tri','slit','solid','red','blunt','G')];
+const ATTRS=['head','pupil','pattern','color','tail'];
+const ANAME={head:'Huvudform',pupil:'Pupill',pattern:'Mönster',color:'Färg',tail:'Svans'};
+const VALS={head:['tri','round'],pupil:['slit','round'],pattern:['stripes','spots','solid'],color:['red','green','yellow','brown'],tail:['rattle','point','blunt']};
+function vname(attr,v){const M={tri:'triangulärt',round:attr==='pupil'?'rund':'runt',slit:'spricka',stripes:'ränder',spots:'fläckar',solid:'enfärgad',red:'röd',green:'grön',yellow:'gul',brown:'brun',rattle:'skallra',point:'spets',blunt:'trubbig'};return M[v]||v;}
+
+/* concept cards */
+const CONCEPTS={
+  entropy:{k:'Begrepp',t:'Entropi',p:'Ett mått på hur <b>blandad</b> en grupp är. En grupp med bara giftiga ormar (eller bara ofarliga) har entropi <b>0</b> — den är helt ren. En femtio–femtio-blandning har maximal entropi. Beslutsträdets mål är att dela så att grupperna blir så rena som möjligt.',ex:'8 ormar, 4 giftiga + 4 ofarliga → hög entropi. 8 giftiga + 0 ofarliga → entropi 0.'},
+  gain:{k:'Begrepp',t:'Informationsvinst',p:'Hur mycket <b>renare</b> grupperna blir när du delar på en viss egenskap. Trädet räknar entropin före delningen minus entropin efteråt. Egenskapen med störst vinst delar renast — den vinner noden.',ex:'Att dela på Huvudform samlar nästan allt gift på ena sidan → hög vinst. Att dela på Mönster blandar ändå → låg vinst.'},
+  overfit:{k:'Begrepp',t:'Överanpassning',p:'När en modell lär sig träningsdatan <b>utantill</b> — inklusive slumpen och undantagen — i stället för det egentliga mönstret. Den blir perfekt på det den sett och sämre på ny data. En enklare modell missar undantagen men <button class="term" data-term="generalize">generaliserar</button> bättre.',ex:'Det djupa trädet lär sig "grön → ofarlig" av två flukes. Sen kallar det varje grön giftorm ofarlig.'},
+  generalize:{k:'Begrepp',t:'Generalisering',p:'Hur väl en modell klarar <b>ny</b> data den aldrig tränats på. Det är det enda som räknas i praktiken — en modell som bara är bra på sina egna träningsexempel är värdelös i verkligheten. Därför mäter vi alltid på separat testdata.',ex:'Ditt träd får höga poäng på träningsdatan — men bara testet på osedda ormar avslöjar om det lärt sig det verkliga mönstret.'}
+};
+function openConcept(key){
+  const c=CONCEPTS[key];if(!c)return;
+  document.getElementById('tiltcard').innerHTML=`<button class="btn sm close" data-close-concept>✕</button>
+    <div class="kicker">${c.k}</div><h3>${c.t}</h3><p>${c.p}</p><div class="ex">${c.ex}</div>`;
+  document.getElementById('conceptModal').classList.add('on');
+}
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-term]');if(t){openConcept(t.dataset.term);return;}
+  if(e.target.closest('[data-close-concept]')||e.target.id==='conceptModal')document.getElementById('conceptModal').classList.remove('on');
+});
+/* tilt effect */
+(function(){const cm=document.getElementById('conceptModal');
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  cm.addEventListener('mousemove',e=>{const card=document.getElementById('tiltcard');if(!card)return;const r=card.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+    card.style.transform=`perspective(800px) rotateY(${px*7}deg) rotateX(${-py*7}deg)`;});
+  cm.addEventListener('mouseleave',()=>{const card=document.getElementById('tiltcard');if(card)card.style.transform='';});})();
+
+/* ================= tree logic ================= */
+function counts(rows){let g=0;for(const r of rows)if(r.label==='G')g++;return{g,o:rows.length-g};}
+function majority(rows){const c=counts(rows);return c.g>c.o?'G':'O';}
+function entropy(rows){if(!rows.length)return 0;const p=counts(rows).g/rows.length;let e=0;for(const q of[p,1-p])if(q>0)e-=q*Math.log2(q);return e;}
+function gain(rows,attr){const base=entropy(rows);let rem=0;for(const v of[...new Set(rows.map(r=>r[attr]))]){const s=rows.filter(r=>r[attr]===v);rem+=s.length/rows.length*entropy(s);}return base-rem;}
+function id3(rows,attrs,depth,maxd){const node={type:'leaf',rows,fallback:majority(rows)};
+  if(!rows.length||entropy(rows)===0||depth>=maxd||!attrs.length)return node;
+  let best=null,bg=1e-9;for(const a of attrs){const gg=gain(rows,a);if(gg>bg){bg=gg;best=a;}}if(!best)return node;
+  node.type='split';node.attr=best;node.children={};
+  for(const v of[...new Set(rows.map(r=>r[best]))])node.children[v]=id3(rows.filter(r=>r[best]===v),attrs.filter(x=>x!==best),depth+1,maxd);return node;}
+function predict(node,row){if(!node)return 'O';if(node.type==='leaf'||node.type==='frontier')return node.label||node.fallback;const c=node.children[row[node.attr]];return c?predict(c,row):node.fallback;}
+function accuracy(node,rows){let ok=0;for(const r of rows)if(predict(node,r)===r.label)ok++;return ok/rows.length;}
+function pct(x){return Math.round(x*100)+'%';}
+function maxDepth(node){if(node.type!=='split')return 0;return 1+Math.max(...Object.values(node.children).map(maxDepth));}
+function countFrontier(node){if(node.type==='frontier')return 1;if(node.type!=='split')return 0;return Object.values(node.children).reduce((a,c)=>a+countFrontier(c),0);}
+function hasAnyStructure(node){return node.type!=='frontier';}
+const DEEP=id3(TRAIN,ATTRS,0,9);
+const SIMPLE=id3(TRAIN,ATTRS,0,2); /* the "lagom" depth-2 tree = head->pupil */
+
+/* ================= tree canvas renderer (premium) ================= */
+const NW=118,NH=80,HGAP=158,VGAP=132,PAD=24;let RID=0;
+function layout(root){let leaf=0;const all=[];
+  (function rec(n,depth,pid){n._depth=depth;n._pid=pid;
+    if(n.type==='split'){const keys=Object.keys(n.children).sort();const xs=keys.map(k=>rec(n.children[k],depth+1,pid+'>'+k));n._x=(xs[0]+xs[xs.length-1])/2;}
+    else{n._x=leaf*HGAP;leaf++;}
+    n._y=depth*VGAP;all.push(n);return n._x;})(root,0,'r');
+  const width=Math.max(leaf,1)*HGAP,md=Math.max(...all.map(n=>n._depth));
+  return{all,width:width+PAD*2,height:md*VGAP+NH+PAD*2};}
+function distBar(cid,rows,x,y,w){
+  const c=counts(rows),tot=Math.max(c.g+c.o,1);const gw=w*c.g/tot;
+  return `<clipPath id="${cid}"><rect x="${x}" y="${y}" width="${w}" height="8" rx="4"/></clipPath>`+
+    `<g clip-path="url(#${cid})"><rect x="${x}" y="${y}" width="${w}" height="8" fill="rgba(255,255,255,.10)"/>`+
+    (c.g?`<rect x="${x}" y="${y}" width="${gw.toFixed(1)}" height="8" fill="#fb7185"/>`:'')+
+    (c.o?`<rect x="${(x+gw).toFixed(1)}" y="${y}" width="${(w-gw+1).toFixed(1)}" height="8" fill="#34d399"/>`:'')+`</g>`;
+}
+function nodeCls(n,st){let c='tcard';if(n.type==='frontier')c+=' frontier';if(n.type==='leaf')c+=(n.label||n.fallback)==='G'?' leaf-g':' leaf-o';
+  if(st.sel===n._pid)c+=' sel';if(st.cur===n._pid)c+=' cur';if(st.path&&st.path.has(n._pid))c+=' onpath';return c;}
+function nodeInner(n,cid){
+  const c=counts(n.rows);const cx=NW/2;
+  const cntC=`<text class="tcount" x="${cx}" y="${NH-11}" text-anchor="middle"><tspan fill="#fb7185">▲${c.g}</tspan><tspan dx="9" fill="#34d399">●${c.o}</tspan></text>`;
+  const cntL=`<text class="tcount" x="14" y="${NH-11}" text-anchor="start"><tspan fill="#fb7185">▲${c.g}</tspan><tspan dx="9" fill="#34d399">●${c.o}</tspan></text>`;
+  if(n.type==='split')
+    return `<text class="teye" x="14" y="19">FRÅGA</text><text class="tsplit" x="14" y="39">${ANAME[n.attr]}</text>${distBar(cid,n.rows,14,NH-30,NW-28)}${cntL}`;
+  if(n.type==='leaf'){const g=(n.label||n.fallback)==='G';
+    return `<text class="tverdict ${g?'vg':'vo'}" x="${cx}" y="34" text-anchor="middle">${g?'▲ GIFTIG':'● OFARLIG'}</text>${distBar(cid,n.rows,14,44,NW-28)}${cntC}`;}
+  return `<text class="tfront" x="${cx}" y="34" text-anchor="middle">Obestämd</text>${distBar(cid,n.rows,14,44,NW-28)}${cntC}`;
+}
+function renderTree(container,root,st){
+  const L=layout(root);const cur=new Set();let edges='',nodes='';const rid='t'+(RID++)+'_';
+  for(const n of L.all){cur.add(n._pid);
+    if(n.type==='split'){for(const k of Object.keys(n.children).sort()){const c=n.children[k];
+      const x1=n._x+NW/2+PAD,y1=n._y+NH+PAD,x2=c._x+NW/2+PAD,y2=c._y+PAD;const mx=(x1+x2)/2,my=(y1+y2)/2;
+      const isNew=st.prev&&!st.prev.has(c._pid);const onp=st.path&&st.path.has(c._pid)&&st.path.has(n._pid);
+      edges+=`<path class="tedge${isNew?' enter':''}${onp?' onpath':''}" d="M${x1},${y1} C${x1},${my} ${x2},${my} ${x2},${y2}" pathLength="1"/>`;
+      const lab=vname(n.attr,k),wch=lab.length*6.0+18;
+      edges+=`<g class="eLabel" transform="translate(${mx},${my})"><rect x="${-wch/2}" y="-10" width="${wch}" height="20" rx="10"/><text x="0" y="4" text-anchor="middle">${lab}</text></g>`;}}}
+  for(const n of L.all){const gx=n._x+PAD,gy=n._y+PAD;const isNew=st.prev&&!st.prev.has(n._pid);
+    const lab=n.type==='split'?ANAME[n.attr]:(n.type==='leaf'?((n.label||n.fallback)==='G'?'GIFTIG':'OFARLIG'):'obestämd');
+    const clickable=!!st.onClick;const cid=rid+'c'+n._pid.replace(/[^a-z0-9]/gi,'');
+    nodes+=`<g class="tnodeWrap" data-id="${n._pid}"${clickable?' tabindex="0" role="button" aria-label="Nod: '+lab+'"':''} transform="translate(${gx},${gy})">
+      <g class="tnode-inner" style="${isNew?'animation:nodeEnter .42s var(--ease-spring) both':''}">
+      <rect class="${nodeCls(n,st)}" x="0" y="0" width="${NW}" height="${NH}" rx="16" filter="url(#tsh)"/>
+      <rect class="cardtop" x="1.5" y="1.5" width="${NW-3}" height="${NH-3}" rx="14.5"/>
+      ${nodeInner(n,cid)}</g></g>`;}
+  container.innerHTML=`<svg class="tree" width="${L.width}" height="${L.height}" viewBox="0 0 ${L.width} ${L.height}">${edges}${nodes}</svg>`;
+  st.prev=cur;
+  if(st.onClick)container.querySelectorAll('.tnodeWrap').forEach(el=>{el.onclick=()=>st.onClick(el.dataset.id);
+    el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();st.onClick(el.dataset.id);}};});
+}
+function nodeByPid(root,pid){const parts=pid.split('>');let n=root;for(let i=1;i<parts.length;i++)n=n.children[parts[i]];return n;}
+
+/* ================= nav ================= */
+const TABS=['Studera datan','Gruppera','Bygg ditt träd','Testa ditt träd','Jämför med maskinen','Reflektera'];
+const nav=document.getElementById('nav');
+TABS.forEach((t,i)=>{const b=document.createElement('button');b.className='pill';b.innerHTML=`<span class="n">${i+1}</span>${t}`;b.onclick=()=>go(i);nav.appendChild(b);});
+function go(i){document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',+p.dataset.tab===i));
+  [...nav.children].forEach((b,k)=>b.setAttribute('aria-current',k===i?'true':'false'));
+  if(i===0)renderStudy();else if(i===1)renderGroupStep();else if(i===2)renderStudent();else if(i===3)youEnter();else if(i===4)compareEnter();else if(i===5)reflectEnter();
+  window.scrollTo({top:0,behavior:'smooth'});}
+function renderStudy(){renderRefStrip();renderSpecimens();
+  const btn=document.getElementById('revealAttrs'),strip=document.getElementById('refstrip');
+  btn.onclick=()=>{const hidden=strip.classList.toggle('hidden');btn.textContent=hidden?'🔍 Visa egenskaperna':'🙈 Dölj egenskaperna';};}
+function renderSpecimens(){document.getElementById('specimenGrid').innerHTML=`<div class="grid specimens">${TRAIN.map((s,i)=>scard(s,i)).join('')}</div>`;}
+function renderGroupStep(){renderGroupBar();renderTrainArea();}
+
+/* ================= tab 0 ================= */
+function labTag(l){return l==='G'?'<span class="tag g"><span class="sym">▲</span>Giftig</span>':l==='O'?'<span class="tag o"><span class="sym">●</span>Ofarlig</span>':'<span class="tag q">?</span>';}
+function scard(s,i){const cls=s.label==='G'?'g':s.label==='O'?'o':'';return `<div class="scard ${cls}"><span class="id">${String(i+1).padStart(2,'0')}</span>${snake(s)}<div class="lab">${labTag(s.label)}</div></div>`;}
+let groupBy=null;
+function renderTrainArea(){
+  const area=document.getElementById('trainArea');
+  if(!groupBy){area.innerHTML=`<div class="grid specimens">${TRAIN.map((s,i)=>scard(s,i)).join('')}</div>`;return;}
+  let html='';
+  for(const v of VALS[groupBy]){
+    const rows=TRAIN.map((s,i)=>({s,i})).filter(o=>o.s[groupBy]===v);
+    if(!rows.length)continue;
+    const c=counts(rows.map(o=>o.s));const tot=c.g+c.o;
+    html+=`<div class="groupsec"><div class="grouphead">
+      <span class="gname">${vname(groupBy,v)}</span>
+      <span class="gcount"><span class="cg">▲ ${c.g} giftiga</span><span class="co">● ${c.o} ofarliga</span></span>
+      <span class="bar"><span class="pg" style="width:${c.g/tot*100}%"></span><span class="po" style="width:${c.o/tot*100}%"></span></span>
+      </div><div class="grid specimens">${rows.map(o=>scard(o.s,o.i)).join('')}</div></div>`;
+  }
+  area.innerHTML=html;
+}
+function renderGroupBar(){
+  const bar=document.getElementById('groupbar');
+  bar.querySelectorAll('.gbtn').forEach(b=>b.remove());
+  const mk=(attr,label)=>{const b=document.createElement('button');b.className='gbtn';b.textContent=label;
+    b.setAttribute('aria-pressed',groupBy===attr?'true':'false');
+    b.onclick=()=>{groupBy=(groupBy===attr?null:attr);renderGroupBar();renderTrainArea();};bar.appendChild(b);};
+  ATTRS.forEach(a=>mk(a,ANAME[a]));mk(null,'Ingen');
+}
+function renderRefStrip(){
+  const items=[
+    ['Huvudform',[['triangulärt',{head:'tri',pupil:'round',pattern:'solid',color:'brown',tail:'blunt'}],['runt',{head:'round',pupil:'round',pattern:'solid',color:'brown',tail:'blunt'}]]],
+    ['Pupill',[['spricka',{head:'round',pupil:'slit',pattern:'solid',color:'green',tail:'blunt'}],['rund',{head:'round',pupil:'round',pattern:'solid',color:'green',tail:'blunt'}]]],
+    ['Mönster',[['ränder',{head:'round',pupil:'round',pattern:'stripes',color:'red',tail:'blunt'}],['fläckar',{head:'round',pupil:'round',pattern:'spots',color:'red',tail:'blunt'}],['enfärgad',{head:'round',pupil:'round',pattern:'solid',color:'red',tail:'blunt'}]]],
+    ['Svans',[['skallra',{head:'round',pupil:'round',pattern:'solid',color:'yellow',tail:'rattle'}],['spets',{head:'round',pupil:'round',pattern:'solid',color:'yellow',tail:'point'}],['trubbig',{head:'round',pupil:'round',pattern:'solid',color:'yellow',tail:'blunt'}]]],
+    ['Färg',['red','green','yellow','brown'].map(col=>[vname('color',col),{head:'round',pupil:'round',pattern:'solid',color:col,tail:'blunt'}])]
+  ];
+  document.getElementById('refstrip').innerHTML=items.map(([t,rows])=>`<div class="refcard"><h4>${t}</h4>${rows.map(([lab,sp])=>`<div class="refrow">${snake(sp)}<span>${lab}</span></div>`).join('')}</div>`).join('');
+}
+document.getElementById('helpOpen').onclick=()=>document.getElementById('helpModal').classList.add('on');
+document.getElementById('helpClose').onclick=()=>document.getElementById('helpModal').classList.remove('on');
+document.getElementById('helpModal').onclick=e=>{if(e.target.id==='helpModal')e.currentTarget.classList.remove('on');};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal.on').forEach(m=>m.classList.remove('on'));});
+
+/* ================= tab 1: student build ================= */
+function fresh(rows){return{type:'frontier',rows,fallback:majority(rows)};}
+let stuRoot=fresh(TRAIN);let stuSel=null;
+const stuSt={prev:null,sel:null,onClick:pid=>{stuSel=pid;renderStudent();}};
+function usedAttrs(pid){const parts=pid.split('>');let n=stuRoot,used=[];for(let i=1;i<parts.length;i++){used.push(n.attr);n=n.children[parts[i]];}return used;}
+function renderStudent(){stuSt.sel=stuSel;renderTree(document.getElementById('stuCanvas'),stuRoot,stuSt);renderStuStatus();renderStuCtrl();}
+function renderStuStatus(){
+  const fr=countFrontier(stuRoot);
+  const acc=accuracy(stuRoot,TRAIN);
+  const el=document.getElementById('stuStatus');
+  let s='';
+  if(fr===0){s+=`<span class="pillstat done">✓ Trädet är klart</span>`;}
+  else{s+=`<span class="pillstat warn">${fr} obestämd${fr>1?'a':''} gren${fr>1?'ar':''} kvar</span>`;}
+  s+=`<span class="acc">Träffsäkerhet på träningen: <b>${pct(acc)}</b></span>`;
+  el.innerHTML=s;
+}
+function rawCounts(rows,attr){
+  return `<div class="counts">`+VALS[attr].filter(v=>rows.some(r=>r[attr]===v)).map(v=>{
+    const sub=rows.filter(r=>r[attr]===v);const c=counts(sub);const tot=c.g+c.o;const pure=c.g===0||c.o===0;
+    return `<div class="cr"><span class="cv">${vname(attr,v)}${pure?'<span class="puretag">ren ✓</span>':''}</span>
+      <span class="bars">${c.g?`<span class="bg" style="width:${c.g/tot*100}%">${c.g}▲</span>`:''}${c.o?`<span class="bo" style="width:${c.o/tot*100}%">${c.o}●</span>`:''}</span></div>`;
+  }).join('')+`</div>`;
+}
+function renderStuCtrl(){
+  const el=document.getElementById('stuCtrl');
+  if(!stuSel){el.innerHTML=`<div class="cardhint">Klicka på en nod i trädet ovan för att dela eller bestämma den.</div>`;return;}
+  const node=nodeByPid(stuRoot,stuSel);const c=counts(node.rows);
+  const where=stuSel==='r'?'roten':stuSel.split('>').slice(1).map((v,i)=>vname(usedAttrs(stuSel)[i],v)).join(' → ');
+  let h=`<div class="who">Vald gren: <b>${where}</b> · ${node.rows.length} ormar (<span style="color:var(--rose)">▲ ${c.g} giftiga</span>, <span style="color:var(--emerald)">● ${c.o} ofarliga</span>)</div>`;
+  if(node.type==='leaf'){
+    h+=`<div class="lbl">Grenen är bestämd som ${labTag(node.label)}</div><div class="decide"><button class="btn sm" data-a="reset">Ändra beslut</button></div>`;
+  } else if(node.type==='split'){
+    h+=`<div class="lbl">Delas på <b style="color:var(--text-primary)">${ANAME[node.attr]}</b>.</div><div class="decide"><button class="btn sm" data-a="reset">Ta bort delningen</button></div>`;
+  } else {
+    const avail=ATTRS.filter(a=>!usedAttrs(stuSel).includes(a));
+    h+=`<div class="lbl">Dela på en egenskap:</div><div class="attrchips">${avail.map(a=>`<button class="achip" data-a="split" data-attr="${a}">${ANAME[a]}</button>`).join('')||'<span class="count">Inga egenskaper kvar.</span>'}</div>`;
+    h+=`<div class="lbl">…eller bestäm hela grenen:</div><div class="decide">
+      <button class="btn sm" style="color:var(--rose);border-color:rgba(251,113,133,.35)" data-a="leafG">▲ Giftig</button>
+      <button class="btn sm" style="color:var(--emerald);border-color:rgba(52,211,153,.35)" data-a="leafO">● Ofarlig</button></div>`;
+    if(avail.length)h+=`<div style="margin-top:12px"><button class="btn sm ghost" data-a="hint">Hur delar egenskaperna upp de ${node.rows.length} ormarna?</button><div id="stuHint"></div></div>`;
+  }
+  el.innerHTML=h;
+  el.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{
+    const node=nodeByPid(stuRoot,stuSel);const a=b.dataset.a;
+    if(a==='split'){const attr=b.dataset.attr;node.type='split';node.attr=attr;node.children={};
+      for(const v of[...new Set(node.rows.map(r=>r[attr]))])node.children[v]=fresh(node.rows.filter(r=>r[attr]===v));stuSel=null;renderStudent();}
+    else if(a==='leafG'){node.type='leaf';node.label='G';delete node.children;delete node.attr;stuSel=null;renderStudent();}
+    else if(a==='leafO'){node.type='leaf';node.label='O';delete node.children;delete node.attr;stuSel=null;renderStudent();}
+    else if(a==='reset'){node.type='frontier';delete node.children;delete node.attr;delete node.label;renderStudent();}
+    else if(a==='hint'){const avail=ATTRS.filter(x=>!usedAttrs(stuSel).includes(x));
+      document.getElementById('stuHint').innerHTML=`<div class="lbl" style="margin-top:12px">Så här delar varje egenskap upp de här ormarna — leta efter grupper som blir <b>rena</b> (bara en form):</div>`+avail.map(a=>`<div style="margin-top:10px"><div style="font-size:12.5px;font-weight:600;color:var(--text-primary);margin-bottom:2px">${ANAME[a]}</div>${rawCounts(node.rows,a)}</div>`).join('');}
+  });
+}
+document.getElementById('resetTree').onclick=()=>{stuRoot=fresh(TRAIN);stuSel=null;stuSt.prev=null;renderStudent();};
+
+/* ================= tab 2: ML thinks ================= */
+let mlRoot=null,mlQueue=[],mlPlaying=false,mlDone=false;
+const mlSt={prev:null,sel:null,cur:null};
+function frontierB(rows,attrs,depth){return{type:'frontier',rows,fallback:majority(rows),avail:attrs,depth};}
+function mlEnsure(){if(!mlRoot)mlResetFn();else{renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);renderCurve();}}
+function mlResetFn(){mlPlaying=false;mlDone=false;mlRoot=frontierB(TRAIN,ATTRS,0);mlQueue=[mlRoot];mlSt.prev=null;mlSt.cur=null;
+  document.getElementById('mlRace').innerHTML='';document.getElementById('raceHead').textContent='Tryck "Nästa split" för att låta maskinen välja i roten.';
+  document.getElementById('mlPlay').textContent='▶ Spela';document.getElementById('mlNext').disabled=false;
+  renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);updateMLStats();renderCurve();if(typeof renderCompare==='function')renderCompare();}
+function updateMLStats(){document.getElementById('mlTrainAcc').textContent=pct(accuracy(mlRoot,TRAIN));document.getElementById('mlTestAcc').textContent=pct(accuracy(mlRoot,TEST));}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+function raceBars(rows,avail){
+  const gs=avail.map(a=>[a,gain(rows,a)]);const mx=Math.max(...gs.map(g=>g[1]),0.001);const top=Math.max(...gs.map(x=>x[1]));const best=gs.slice().sort((a,b)=>b[1]-a[1])[0][0];
+  return `<div class="race">`+gs.map(([a,g])=>`<div class="r ${g===top&&g>1e-6&&a===best?'win':''}">
+    <span>${ANAME[a]}</span><div class="track"><div class="fill" style="width:0" data-w="${Math.round(g/mx*100)}"></div></div><span class="val">${g.toFixed(2)}</span></div>`).join('')+`</div>`;
+}
+function animateBars(container){container.querySelectorAll('.fill').forEach(f=>{requestAnimationFrame(()=>{f.style.width=f.dataset.w+'%';});});}
+async function mlStep(){
+  if(!mlQueue.length){mlDone=true;document.getElementById('raceHead').innerHTML='Maskinens träd är färdigbyggt. Nu jämför vi det med ditt — orm för orm nedan.';document.getElementById('mlNext').disabled=true;mlPlaying=false;document.getElementById('mlPlay').textContent='▶ Spela';renderCompare();return false;}
+  const node=mlQueue.shift();mlSt.cur=node._pid;renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);
+  const avail=node.avail;const pure=entropy(node.rows)===0;
+  document.getElementById('raceHead').innerHTML=`Nod med ${node.rows.length} ormar — maskinen provar alla egenskaper…`;
+  if(pure||!avail.length){document.getElementById('mlRace').innerHTML='';document.getElementById('raceHead').innerHTML=`Noden är redan ren → blir ett löv: ${labTag(node.fallback)}`;
+    node.type='leaf';node.label=node.fallback;mlSt.cur=null;await sleep(500);renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);updateMLStats();return true;}
+  const race=document.getElementById('mlRace');race.innerHTML=raceBars(node.rows,avail);await sleep(60);animateBars(race);await sleep(850);
+  let best=null,bg=1e-9;for(const a of avail){const g=gain(node.rows,a);if(g>bg){bg=g;best=a;}}
+  document.getElementById('raceHead').innerHTML=`<b>${ANAME[best]}</b> vinner — delar renast. Noden förgrenas.`;await sleep(650);
+  if(!best){node.type='leaf';node.label=node.fallback;}
+  else{node.type='split';node.attr=best;node.children={};
+    for(const v of[...new Set(node.rows.map(r=>r[best]))])node.children[v]=frontierB(node.rows.filter(r=>r[best]===v),avail.filter(x=>x!==best),node.depth+1);
+    Object.keys(node.children).sort().forEach(k=>mlQueue.push(node.children[k]));}
+  mlSt.cur=null;renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);updateMLStats();renderCurve();return true;}
+document.getElementById('mlNext').onclick=async()=>{if(mlPlaying)return;const b=document.getElementById('mlNext');b.disabled=true;await mlStep();if(!mlDone)b.disabled=false;};
+document.getElementById('mlPlay').onclick=async()=>{
+  const btn=document.getElementById('mlPlay');
+  if(mlPlaying){mlPlaying=false;btn.textContent='▶ Spela';return;}
+  mlPlaying=true;btn.textContent='⏸ Pausa';document.getElementById('mlNext').disabled=true;
+  while(mlPlaying){const more=await mlStep();if(!more)break;await sleep(450);}
+  mlPlaying=false;btn.textContent='▶ Spela';if(!mlDone)document.getElementById('mlNext').disabled=false;};
+document.getElementById('mlReset').onclick=()=>mlResetFn();
+function renderCurve(){
+  const w=480,h=168,padL=42,padR=18,padT=16,padB=34;const MAXD=maxDepth(DEEP);
+  const tr=[],te=[];for(let d=1;d<=MAXD;d++){const t=id3(TRAIN,ATTRS,0,d);tr.push(accuracy(t,TRAIN));te.push(accuracy(t,TEST));}
+  const X=d=>padL+(MAXD===1?0.5:(d-1)/(MAXD-1))*(w-padL-padR),Y=a=>h-padB-a*(h-padT-padB);
+  const line=(arr,col)=>`<polyline fill="none" stroke="${col}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="${arr.map((a,i)=>X(i+1)+','+Y(a)).join(' ')}"/>`+arr.map((a,i)=>`<circle cx="${X(i+1)}" cy="${Y(a)}" r="3.2" fill="${col}"/>`).join('');
+  let grid='';for(const a of[0,.25,.5,.75,1]){grid+=`<line x1="${padL}" y1="${Y(a)}" x2="${w-padR}" y2="${Y(a)}" stroke="rgba(255,255,255,.07)"/><text x="${padL-8}" y="${Y(a)+3}" text-anchor="end" font-size="9" font-family="monospace" fill="#5a6478">${Math.round(a*100)}</text>`;}
+  let xl='';for(let d=1;d<=MAXD;d++)xl+=`<text x="${X(d)}" y="${h-padB+15}" text-anchor="middle" font-size="9" font-family="monospace" fill="#5a6478">${d}</text>`;
+  const yTitle=`<text x="12" y="${(padT+h-padB)/2}" text-anchor="middle" font-size="9" font-family="monospace" fill="#8b95a9" transform="rotate(-90 12 ${(padT+h-padB)/2})">Träffsäkerhet %</text>`;
+  const xTitle=`<text x="${(padL+w-padR)/2}" y="${h-4}" text-anchor="middle" font-size="9" font-family="monospace" fill="#8b95a9">Träddjup (antal frågor på raken)</text>`;
+  const dCur=mlRoot?Math.max(1,Math.min(MAXD,maxDepth(mlRoot))):1;
+  const marker=`<circle cx="${X(dCur)}" cy="${Y(tr[dCur-1])}" r="6" fill="none" stroke="#e8ecf4" stroke-width="1.5"/><line x1="${X(dCur)}" y1="${padT-2}" x2="${X(dCur)}" y2="${h-padB}" stroke="#e8ecf4" stroke-dasharray="3 3" stroke-width="1" opacity=".5"/>`;
+  document.getElementById('curve').innerHTML=`<svg viewBox="0 0 ${w} ${h}" style="width:100%;max-width:520px;height:auto">${grid}${marker}${line(tr,'#34d399')}${line(te,'#fbbf24')}${xl}${yTitle}${xTitle}</svg>`;}
+
+function pathOf(root,row){let n=root,pid='r';const ids=new Set(['r']);while(n.type==='split'){const v=row[n.attr];pid+='>'+v;if(!n.children[v])break;n=n.children[v];ids.add(pid);}return ids;}
+
+/* ================= step 3: test YOUR tree — train first, then unseen ================= */
+let youPhase='train',youIdx=0,youScore=[],youRan=false,youRev=false,youForce=false,youTrainRun=false;
+let youMode='auto',youSpeed=1,youRunAll=false,youManualPid='r';
+const youSt={prev:null,sel:null};
+function youEnter(){youPhase='train';youIdx=0;youScore=[];youForce=false;youTrainRun=false;youRunAll=false;youManualPid='r';document.getElementById('youTally').innerHTML='';renderYouScene();}
+function speedMs(base){return Math.round(base/youSpeed);}
+function renderYouControls(){
+  return `<div class="groupbar" id="youControls" style="margin:0 0 14px">
+    <button class="gbtn" data-mode="auto" aria-pressed="${youMode==='auto'}" ${youRunAll?'disabled':''}>▶ Se den vandra</button>
+    <button class="gbtn" data-mode="manual" aria-pressed="${youMode==='manual'}" ${youRunAll?'disabled':''}>🖱 Klicka ner själv</button>
+    <button class="gbtn" id="speedToggle" aria-pressed="${youSpeed>1}">${youSpeed>1?'⏩ Snabbt':'🐢 Normalt'}</button>
+    <button class="btn sm ${youRunAll?'danger':'primary'}" id="runAllBtn">${youRunAll?'⏸ Pausa':'⏭ Kör alla'}</button>
+  </div>`;
+}
+function renderYouControls_refresh(){const c=document.getElementById('youControls');if(!c)return;c.outerHTML=renderYouControls();wireYouControls();}
+function wireYouControls(){
+  document.querySelectorAll('#youControls [data-mode]').forEach(b=>{
+    b.onclick=()=>{if(youRunAll||youMode===b.dataset.mode)return;youMode=b.dataset.mode;youRan=false;youRev=false;youManualPid='r';renderYouScene();};
+  });
+  const sp=document.getElementById('speedToggle');
+  if(sp)sp.onclick=()=>{youSpeed=youSpeed>1?1:3;renderYouControls_refresh();};
+  const rb=document.getElementById('runAllBtn');
+  if(rb)rb.onclick=()=>{
+    youRunAll=!youRunAll;
+    if(youRunAll){youMode='auto';youRan=false;youRev=false;youManualPid='r';renderYouScene();}
+    else{renderYouControls_refresh();}
+  };
+}
+function renderYouScene(){
+  const scene=document.getElementById('youScene');const fr=countFrontier(stuRoot);
+  if(!youForce&&(stuRoot.type==='frontier'||fr>0)){
+    scene.innerHTML=`<div class="alert" style="color:var(--amber)">⚠ Ditt träd är inte klart</div>
+      <div class="q">Trädet har <b>${fr||1} obestämd${(fr||1)>1?'a':''} gren${(fr||1)>1?'ar':''}</b>. Ormar som hamnar där gissas till majoriteten. Bygg klart först, eller testa ändå.</div>
+      <div class="reveal-row"><button class="btn sm ghost" id="goBuild">← Bygg klart trädet</button><button class="btn sm" id="runAnyway">Testa ändå →</button></div>`;
+    document.getElementById('goBuild').onclick=()=>go(2);
+    document.getElementById('runAnyway').onclick=()=>{youForce=true;renderYouScene();};
+    document.getElementById('youManualCtrl').innerHTML='';
+    youSt.path=null;renderTree(document.getElementById('youCanvas'),stuRoot,youSt);return;}
+  if(youPhase==='train'){document.getElementById('youManualCtrl').innerHTML='';renderTrainTest(scene);return;}
+  if(youPhase==='reveal'){document.getElementById('youManualCtrl').innerHTML='';renderSplitReveal(scene);return;}
+  // youPhase === 'test'
+  if(youIdx>=TEST.length){
+    youRunAll=false;
+    const sy=youScore.filter(Boolean).length;
+    document.getElementById('youManualCtrl').innerHTML='';
+    scene.innerHTML=`<div class="alert" style="color:var(--emerald)">Klart — du körde alla åtta osedda</div>
+      <div class="verdict" style="color:var(--text-primary)">På <b>osedd testdata</b> fångade ditt träd <b>${sy}/8</b> rätt.</div>
+      <div class="q">Det här säger något på riktigt — de här ormarna hade trädet aldrig sett. Nu ska en maskin bygga sitt eget träd på samma träningsdata, och köra samma åtta.</div>
+      <div class="reveal-row"><button class="btn sm ghost" id="youAgain">↺ Börja om</button><button class="btn primary" id="toMachine">Jämför med maskinen →</button></div>`;
+    document.getElementById('youAgain').onclick=youEnter;
+    document.getElementById('toMachine').onclick=()=>go(4);
+    youSt.path=null;renderTree(document.getElementById('youCanvas'),stuRoot,youSt);return;}
+  const s=TEST[youIdx];youRan=false;youRev=false;youSt.path=null;youManualPid='r';
+  const controls=renderYouControls();
+  if(youMode==='manual'){
+    scene.innerHTML=`${controls}<div class="alert">🔍 Osedd orm ${youIdx+1} av ${TEST.length}</div>
+      <div class="big">${snake(s)}</div>
+      <div class="q">Titta på ormen och klicka dig neråt i trädet, gren för gren.</div>
+      <div class="verdict" id="yVerdict"></div>
+      <div class="reveal-row" id="yReveal"></div>`;
+    wireYouControls();
+    renderManualStep(s);
+  } else {
+    scene.innerHTML=`${controls}<div class="alert">🔍 Osedd orm ${youIdx+1} av ${TEST.length}</div>
+      <div class="big">${snake(s)}</div>
+      <div class="q">Den här ormen har trädet <b>aldrig sett</b>. Vad säger <b>ditt</b> träd — giftig eller ofarlig?</div>
+      ${youRunAll?'':'<button class="btn primary" id="runYouBtn">▶ Kör genom mitt träd</button>'}
+      <div class="verdict" id="yVerdict"></div>
+      <div class="reveal-row" id="yReveal"></div>`;
+    document.getElementById('youManualCtrl').innerHTML='';
+    renderTree(document.getElementById('youCanvas'),stuRoot,youSt);
+    wireYouControls();
+    const rbEl=document.getElementById('runYouBtn');if(rbEl)rbEl.onclick=()=>runYouAuto(s);
+    if(youRunAll)runYouAuto(s);
+  }
+}
+function renderManualStep(s){
+  const parts=youManualPid.split('>');let acc='r';const path=new Set([acc]);
+  for(let i=1;i<parts.length;i++){acc+='>'+parts[i];path.add(acc);}
+  youSt.path=path;youSt.sel=null;
+  renderTree(document.getElementById('youCanvas'),stuRoot,youSt);
+  const node=nodeByPid(stuRoot,youManualPid);
+  const ctrl=document.getElementById('youManualCtrl');
+  if(node.type==='split'){
+    const actualVal=s[node.attr];
+    if(!(actualVal in node.children)){
+      ctrl.innerHTML=`<div class="who">Den här ormens ${ANAME[node.attr].toLowerCase()} (${vname(node.attr,actualVal)}) finns inte bland exemplen i den här grenen — trädet får gissa majoriteten.</div>
+        <button class="btn sm" id="manualFallback">Fortsätt →</button>`;
+      document.getElementById('manualFallback').onclick=()=>{showManualVerdict(s,node.fallback);};
+      return;
+    }
+    const keys=Object.keys(node.children).sort();
+    ctrl.innerHTML=`<div class="who">Nuvarande fråga: <b>${ANAME[node.attr]}</b> — vilken gren passar den här ormen?</div>
+      <div class="attrchips">${keys.map(k=>`<button class="achip" data-k="${k}">${vname(node.attr,k)}</button>`).join('')}</div>
+      <div id="manualFeedback" style="margin-top:8px;font-size:13px;color:var(--rose);min-height:16px"></div>
+      <div style="margin-top:10px"><button class="btn sm ghost" id="manualGiveup">🤖 Visa automatiskt i stället</button></div>`;
+    ctrl.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{
+      const k=b.dataset.k;
+      if(k===actualVal){youManualPid+='>'+k;renderManualStep(s);}
+      else{document.getElementById('manualFeedback').textContent=`Nej — titta igen på ormens ${ANAME[node.attr].toLowerCase()}.`;}
+    });
+    document.getElementById('manualGiveup').onclick=()=>{youMode='auto';youManualPid='r';renderYouScene();};
+  } else {
+    showManualVerdict(s,node.label||node.fallback);
+  }
+}
+function showManualVerdict(s,v){
+  document.getElementById('youManualCtrl').innerHTML=`<div class="who">Du har nått ett löv.</div>`;
+  const el=document.getElementById('yVerdict');
+  if(el){el.className='verdict '+(v==='G'?'g':'o');el.textContent='Ditt träd säger: '+(v==='G'?'GIFTIG':'OFARLIG');}
+  const rev=document.getElementById('yReveal');
+  if(rev&&!youRan){youRan=true;rev.innerHTML=`<button class="btn danger" id="yRevBtn">Avslöja facit</button>`;document.getElementById('yRevBtn').onclick=()=>revealYou(s,v);}
+}
+function renderTrainTest(scene){
+  const n=TRAIN.length,acc=accuracy(stuRoot,TRAIN),right=Math.round(acc*n);
+  youSt.path=null;renderTree(document.getElementById('youCanvas'),stuRoot,youSt);
+  if(!youTrainRun){
+    scene.innerHTML=`<div class="alert">Först: ormarna du byggde med</div>
+      <div class="q">Ditt träd byggdes på <b>${n} ormar</b> (träningsdatan). Kör det på <b>exakt samma ${n}</b> — hur många klarar det?</div>
+      <div class="trainmini">${TRAIN.map(()=>`<span class="tdot"></span>`).join('')}</div>
+      <button class="btn primary" id="runTrain">▶ Kör på träningsdatan</button>`;
+    document.getElementById('runTrain').onclick=()=>{youTrainRun=true;renderTrainTest(scene);};
+    return;}
+  const cells=TRAIN.map(s=>predict(stuRoot,s)===s.label).map(ok=>`<span class="tdot ${ok?'ok':'no'}">${ok?'✓':'✕'}</span>`).join('');
+  scene.innerHTML=`<div class="alert" style="color:var(--emerald)">Klart</div>
+    <div class="bigscore">${right}/${n} rätt<span class="pctbig">${pct(acc)}</span></div>
+    <div class="trainmini">${cells}</div>
+    <div class="q">Nästan alla rätt — men det <b>beviset är värdelöst</b>. De här ormarna såg trädet när du byggde det. Varför spelar det roll?</div>
+    <button class="btn primary" id="toReveal">Fortsätt →</button>`;
+  document.getElementById('toReveal').onclick=()=>{youPhase='reveal';renderYouScene();};
+}
+function renderSplitReveal(scene){
+  document.getElementById('youCanvas').innerHTML='';
+  scene.innerHTML=`<div class="splitcard">
+    <div class="sh">📏 Träningsdata &amp; testdata</div>
+    <p>Att fråga trädet om ormar det byggdes på är som att skriva ett prov <b>med facit i handen</b> — höga poäng bevisar ingenting. Ett träd kan känna igen varenda orm det tränats på utan att ha förstått det <i>verkliga</i> mönstret.</p>
+    <p>Därför delar man alltid upp datan i två delar: <span class="pill2 train">träningsdata</span> att bygga modellen på, och <span class="pill2 test">testdata</span> — ormar den <b>aldrig sett</b> — att utvärdera på. Bara testdatan visar hur bra modellen <button class="term" data-term="generalize">generaliserar</button> till nya fall.</p>
+    <button class="btn primary" id="toTest">Nu det riktiga provet: 8 osedda ormar →</button>
+  </div>`;
+  document.getElementById('toTest').onclick=()=>{youPhase='test';youIdx=0;youScore=[];renderYouScene();renderYouTally();};
+}
+async function runYouAuto(s){
+  if(youRan)return;youRan=true;const rb0=document.getElementById('runYouBtn');if(rb0)rb0.disabled=true;
+  const ids=[...pathOf(stuRoot,s)];youSt.path=new Set();
+  for(const pid of ids){youSt.path.add(pid);renderTree(document.getElementById('youCanvas'),stuRoot,youSt);await sleep(speedMs(480));}
+  const v=predict(stuRoot,s);
+  const el=document.getElementById('yVerdict');
+  if(el){el.className='verdict '+(v==='G'?'g':'o');el.textContent='Ditt träd säger: '+(v==='G'?'GIFTIG':'OFARLIG');}
+  if(youRunAll){await sleep(speedMs(500));revealYou(s,v);}
+  else{
+    const rev=document.getElementById('yReveal');
+    if(rev){rev.innerHTML=`<button class="btn danger" id="yRevBtn">Avslöja facit</button>`;document.getElementById('yRevBtn').onclick=()=>revealYou(s,v);}
+  }
+}
+function revealYou(s,v){
+  if(youRev)return;youRev=true;youScore[youIdx]=v===s.label;
+  const rev=document.getElementById('yReveal');
+  if(rev)rev.innerHTML=`<span class="vs">Facit: ${labTag(s.label)}</span>
+    <span class="vs">Du: ${v===s.label?'<span class="dot ok">✓</span>':'<span class="dot no">✕</span>'}</span>
+    ${youRunAll?'':`<button class="btn sm" id="yNext">${youIdx<TEST.length-1?'Nästa osedda orm →':'Se resultat →'}</button>`}`;
+  if(!youRunAll){const nb=document.getElementById('yNext');if(nb)nb.onclick=()=>{youIdx++;renderYouScene();renderYouTally();};}
+  renderYouTally();
+  if(youRunAll){setTimeout(()=>{if(!youRunAll)return;youIdx++;renderYouScene();renderYouTally();},speedMs(700));}
+}
+function renderYouTally(){
+  const el=document.getElementById('youTally');const cell=r=>`<span class="dot ${r===undefined?'':(r?'ok':'no')}">${r===undefined?'':(r?'✓':'✕')}</span>`;
+  el.innerHTML=youPhase==='test'?`<div class="row"><span class="who">Du</span>${TEST.map((_,i)=>cell(youScore[i])).join('')}</div>`:'';
+}
+
+/* ================= step 4: compare with the machine ================= */
+function compareEnter(){mlEnsure();renderCompare();}
+function treeAttrs(root){const seen=[];(function walk(n){if(n&&n.type==='split'){if(!seen.includes(n.attr))seen.push(n.attr);Object.keys(n.children).sort().forEach(k=>walk(n.children[k]));}})(root);return seen;}
+function domCell(v,truth){const ok=v===truth;return `<span class="vcell ${v==='G'?'g':'o'}">${v==='G'?'giftig':'ofarlig'} ${ok?'<span class="dot ok">✓</span>':'<span class="dot no">✕</span>'}</span>`;}
+function renderCompare(){
+  const zone=document.getElementById('cmpZone');if(!zone)return;
+  if(!(mlRoot&&mlDone)){zone.innerHTML=`<div class="cardhint">Bygg klart maskinens träd ovan (tryck <b>Spela</b>), så jämför vi ditt träd med dess — orm för orm.</div>`;return;}
+  const yv=TEST.map(s=>predict(stuRoot,s)),mv=TEST.map(s=>predict(mlRoot,s));
+  const ys=yv.filter((v,i)=>v===TEST[i].label).length,ms=mv.filter((v,i)=>v===TEST[i].label).length;
+  const chips=arr=>arr.map(a=>`<span class="qchip">${ANAME[a]}</span>`).join('');
+  const you=treeAttrs(stuRoot),mach=treeAttrs(mlRoot);
+  const commonLen=(()=>{let i=0;while(i<you.length&&i<mach.length&&you[i]===mach[i])i++;return i;})();
+  const shared=you.slice(0,commonLen),extraMach=mach.slice(commonLen),extraYou=you.slice(commonLen);
+  const rows=TEST.map((s,i)=>`<tr><td class="c-snake">${snake(s)}</td><td>${labTag(s.label)}</td><td>${domCell(yv[i],s.label)}</td><td>${domCell(mv[i],s.label)}</td></tr>`).join('');
+
+  let diffnote,compareLine;
+  if(!you.length){
+    diffnote=`Ditt träd avgör direkt utan att fråga om något, medan maskinen frågar om ${chips(mach)}.`;
+    compareLine=`Ditt träd avgör direkt utan att fråga om något alls.`;
+  } else if(commonLen===you.length&&commonLen===mach.length){
+    diffnote=`Ni ställer exakt samma frågor i samma ordning.`;
+    compareLine=`Du och maskinen ställde exakt samma frågor i samma ordning: <b>${you.map(a=>ANAME[a]).join(' → ')}</b>.`;
+  } else if(commonLen===you.length&&extraMach.length){
+    diffnote=`Maskinen ställer <b>samma</b> frågor som du — plus ${extraMach.length>1?'fler':'en till'}: <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b>.`;
+    compareLine=`Maskinen ställde samma frågor som du (<b>${shared.map(a=>ANAME[a]).join(' → ')||'—'}</b>) — och la sedan till <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b> som du inte behövde.`;
+  } else if(commonLen===mach.length&&extraYou.length){
+    diffnote=`Du ställer <b>samma</b> frågor som maskinen — plus ${extraYou.length>1?'fler':'en till'}: <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>.`;
+    compareLine=`Du ställde samma frågor som maskinen (<b>${shared.map(a=>ANAME[a]).join(' → ')||'—'}</b>) — men la själv till <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b> som maskinen inte behövde.`;
+  } else if(commonLen===0){
+    diffnote=`Ni ställer helt olika frågor — du frågar om ${chips(you)}, maskinen om ${chips(mach)}.`;
+    compareLine=`Ni valde olika första fråga — du började med <b>${ANAME[you[0]]}</b>, maskinen med <b>${ANAME[mach[0]]}</b>.`;
+  } else {
+    diffnote=`Ni håller med om de första frågorna (<b>${shared.map(a=>ANAME[a]).join(' → ')}</b>) men går sedan skilda vägar.`;
+    compareLine=`Ni höll med om de första frågorna (<b>${shared.map(a=>ANAME[a]).join(' → ')}</b>) men gick sedan skilda vägar: du fortsatte med <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>, maskinen med <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b>.`;
+  }
+
+  zone.innerHTML=`<div class="cmpwrap glass">
+    <div class="cap">Ditt träd mot maskinens</div>
+    <div class="treecmp">
+      <div class="tc"><div class="tct">Ditt träd frågar om</div><div class="tcs">${you.length?chips(you):'<span class="qchip">(bara ett beslut)</span>'}</div></div>
+      <div class="tc mach"><div class="tct">Maskinens träd frågar om</div><div class="tcs">${chips(mach)}</div></div>
+    </div>
+    <div class="diffnote">${diffnote}</div>
+    <table class="cmptable"><thead><tr><th>Rymling</th><th>Facit</th><th>Ditt träd</th><th>Maskinen</th></tr></thead><tbody>${rows}</tbody></table>
+    <div class="scoreline"><span>Du: <b>${ys}/8</b></span><span>Maskinen: <b>${ms}/8</b></span></div>
+    <div class="callout ${ms<ys?'emerald':(ms>ys?'amber':'')}" style="margin-bottom:0">${compareLine} <b>Resultat: du ${ys}/8, maskinen ${ms}/8.</b> Gå vidare och reflektera över varför.</div>
+  </div>`;
+}
+
+/* ================= step 5: reflect ================= */
+function reflectEnter(){renderReflect();renderStress();renderTicket();}
+function renderReflect(){
+  const you=treeAttrs(stuRoot),mach=treeAttrs(mlRoot);
+  const commonLen=(()=>{let i=0;while(i<you.length&&i<mach.length&&you[i]===mach[i])i++;return i;})();
+  const shared=you.slice(0,commonLen),extraMach=mach.slice(commonLen),extraYou=you.slice(commonLen);
+
+  let card1;
+  if(shared.length){
+    card1=`<div class="rcard good"><div class="rh">✓ Gemensamma frågor</div><p>Både du och maskinen frågade om <b>${shared.map(a=>ANAME[a]).join('</b>, sedan <b>')}</b>${shared.length>1?' i samma ordning':''}. Det är ingen slump: de egenskaperna har högst <button class="term" data-term="gain">informationsvinst</button> — de delar ormarna renast. Den verkliga regeln är triangulärt huvud <b>och</b> sprickpupill, och ${shared.length>1?'ni hittade båda delarna av den':'ni hittade en del av den'}.</p></div>`;
+  } else {
+    card1=`<div class="rcard warn"><div class="rh">— Olika första fråga</div><p>Du frågade först om <b>${you[0]?ANAME[you[0]]:'inget — ditt träd bestämde direkt'}</b>, medan maskinen valde <b>${ANAME[mach[0]]}</b>. Den verkliga regeln är triangulärt huvud <b>och</b> sprickpupill — jämför vilken fråga som faktiskt delar ormarna renast.</p></div>`;
+  }
+
+  let card2;
+  if(extraMach.length){
+    card2=`<div class="rcard warn"><div class="rh">✕ Maskinens extra fråga</div><p>Maskinen la till en fråga om <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b> som du inte hade. Ofta beror det på en enstaka slump i träningsdatan som gav en liten (falsk) vinst just där. Maskinen lärde sig då träningsdatan <button class="term" data-term="overfit">utantill</button> i stället för den riktiga regeln.</p></div>`;
+  } else if(extraYou.length){
+    card2=`<div class="rcard warn"><div class="rh">Din extra fråga</div><p>Du la till en fråga om <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b> som maskinen inte behövde. Fundera på om den frågan verkligen delade ormarna renare, eller om den bara kändes tryggare.</p></div>`;
+  } else if(shared.length){
+    card2=`<div class="rcard good"><div class="rh">✓ Exakt samma träd</div><p>Ni ställde precis samma frågor i samma ordning — du hittade samma mönster som maskinen räknade fram med informationsvinst.</p></div>`;
+  } else {
+    card2=`<div class="rcard warn"><div class="rh">Olika vägar</div><p>Era träd ser olika ut rakt igenom. Gå tillbaka till steg 2 och jämför informationsvinsten för varje egenskap — vilken delar ormarna renast?</p></div>`;
+  }
+
+  document.getElementById('reflectSplits').innerHTML=`<div class="reflectgrid">${card1}${card2}</div>
+  <div class="callout" style="margin-top:14px">${extraMach.length?'Det är ofta därför testkurvan i förra steget toppar på ett lägre djup och faller igen när ännu en fråga läggs till':'Testkurvan i förra steget visar vad som händer med träffsäkerheten när ett träd växer sig djupare'}: fler frågor hjälper på träningsdatan men kan stjälpa på ny data. Ett lagom enkelt träd <button class="term" data-term="generalize">generaliserar</button> bättre. Släpp lös 100 nya ormar nedan och se det hända.</div>`;
+}
+/* stress test: 100 fresh snakes from the true rule */
+function trueLabel(s){return(s.head==='tri'&&s.pupil==='slit')?'G':'O';}
+function genSnake(){const pick=a=>VALS[a][Math.floor(Math.random()*VALS[a].length)];
+  const s=S(pick('head'),pick('pupil'),pick('pattern'),pick('color'),pick('tail'),null);s.label=trueLabel(s);return s;}
+function renderStress(){
+  document.getElementById('stressZone').innerHTML=`<div class="stress glass">
+    <div class="cap">Stresstest</div>
+    <p class="lead" style="margin-top:6px">Åtta ormar bevisar ingenting. Släpp lös <b>100 helt nya</b> ormar från reservatets verkliga mönster och se vems modell som håller.</p>
+    <div class="controlbar"><button class="btn violet" id="stressGo">🐍 Släpp lös 100 ormar</button><span class="count" id="stressN"></span></div>
+    <div class="sbars" id="sbars"></div>
+    <div id="stressNote"></div></div>`;
+  document.getElementById('stressGo').onclick=runStress;
+}
+function runStress(){
+  const pop=Array.from({length:100},genSnake);
+  const you=accuracy(stuRoot,pop),sim=accuracy(SIMPLE,pop),deep=accuracy(DEEP,pop);
+  const venom=pop.filter(s=>s.label==='G');
+  const deepMissVenom=venom.filter(s=>predict(DEEP,s)!==s.label).length;
+  const bars=[
+    ['simple','Enkelt träd','Huvudform → Pupill (djup 2)',sim],
+    ['you','Ditt träd',countFrontier(stuRoot)===0?'som du byggde det':'ofärdigt — grenar gissas',you],
+    ['deep','Maskinens träd','djup '+maxDepth(DEEP)+' · en fråga för mycket',deep]
+  ];
+  document.getElementById('sbars').innerHTML=bars.map(([cls,nm,sub,v])=>`
+    <div class="sbar ${cls}"><div class="nm">${nm}<small>${sub}</small></div>
+    <div class="track"><div class="fill" data-w="${Math.round(v*100)}">${pct(v)}</div></div></div>`).join('');
+  requestAnimationFrame(()=>document.querySelectorAll('#sbars .fill').forEach(f=>f.style.width=f.dataset.w+'%'));
+  document.getElementById('stressN').textContent=`${venom.length} av 100 var giftiga`;
+  document.getElementById('stressNote').innerHTML=`<div class="callout emerald" style="margin-bottom:0"><b>Enkelt slår komplext — igen.</b> Av de ${venom.length} giftiga ormarna kallade det djupa trädet <b>${deepMissVenom}</b> för ofarliga (varje grön giftorm). Kör igen: det enkla trädet vinner så gott som varje gång, trots att det djupa var perfekt på träningen. Ett lagom enkelt träd <button class="term" data-term="generalize">generaliserar</button> bättre.</div>`;
+}
+/* exit ticket */
+const TICKET=[
+ ['Ditt träd och maskinens ställde samma två första frågor. Varför just Huvudform och Pupill — och varför i den ordningen?','De två egenskaperna har högst informationsvinst: de delar ormarna renast. Huvudform delar allra renast och hamnar därför först, sedan Pupill. Tillsammans fångar de den verkliga regeln (triangulärt huvud och sprickpupill = giftig).'],
+ ['Maskinen la till en Färg-split längst ner i trädet. Var det klokt?','Nej. Färgen skilde bara de två gröna flukesen i just träningsdatan. Regeln "grön → ofarlig" är slump, inte mönster, och gör att varje grön giftorm i verkligheten klassas fel.'],
+ ['Skulle mer träningsdata ha hjälpt maskinen?','Ofta ja. Med fler gröna giftormar i träningen skulle "grön → ofarlig" inte längre minska entropin, och den falska splitten skulle försvinna. Brist på data är en vanlig orsak till överanpassning.']
+];
+function renderTicket(){
+  document.getElementById('ticketZone').innerHTML=`<div class="ticket glass"><h3>Exit ticket</h3>
+    <p class="lead" style="margin-bottom:2px">Tre frågor. Svara i huvudet först — tryck sedan för att jämföra.</p>
+    ${TICKET.map((t,i)=>`<div class="tq" data-i="${i}"><div class="qq">${i+1}. ${t[0]}</div><button class="btn sm ghost" data-reveal="${i}">Visa ett svar</button><div class="aa">${t[1]}</div></div>`).join('')}</div>`;
+  document.querySelectorAll('[data-reveal]').forEach(b=>b.onclick=()=>{const tq=b.closest('.tq');tq.classList.add('open');b.remove();});
+}
+
+/* ================= ambient ================= */
+(function(){const spot=document.getElementById('spotlight');if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  let raf=null,tx=50,ty=20;document.addEventListener('mousemove',e=>{spot.classList.add('on');tx=e.clientX/innerWidth*100;ty=e.clientY/innerHeight*100;
+    if(!raf)raf=requestAnimationFrame(()=>{spot.style.setProperty('--sx',tx+'%');spot.style.setProperty('--sy',ty+'%');raf=null;});});
+  document.addEventListener('mouseleave',()=>spot.classList.remove('on'));})();
+
+renderStudy();renderGroupStep();go(0);
+</script>
+</body>
+</html>
