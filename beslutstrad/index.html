@@ -52,19 +52,34 @@
   .helpbtn{position:absolute;top:22px;right:0;opacity:0;animation:fadeUp .6s var(--ease-out) .5s forwards}
   @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-  nav.steps{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 24px}
-  .pill{display:inline-flex;align-items:center;gap:9px;font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;color:var(--text-secondary);border:1px solid var(--border-subtle);background:rgba(22,29,47,.55);backdrop-filter:blur(10px);padding:9px 15px;border-radius:100px;cursor:pointer;transition:.28s var(--ease-spring);white-space:nowrap}
-  .pill .n{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.06);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700}
-  .pill:hover{color:var(--text-primary);border-color:var(--border-hover);transform:translateY(-1px)}
-  .pill:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
-  .pill[aria-current="true"]{color:#04121a;background:linear-gradient(100deg,var(--cyan),var(--blue));border-color:transparent;box-shadow:0 8px 24px rgba(34,211,238,.22)}
-  .pill[aria-current="true"] .n{background:rgba(0,0,0,.18);color:#04121a}
+  /* ── pipeline-stegvisare ── */
+  .stepper{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.006)),var(--bg-card);border:1px solid var(--border-subtle);border-radius:16px;padding:12px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 20px 44px -30px rgba(0,0,0,.85);margin:28px 0 24px}
+  .steps-nav{display:flex;gap:4px;padding:5px;border-radius:12px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.05)}
+  .snav{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:8px;padding:9px 10px;border-radius:9px;border:1px solid transparent;background:transparent;color:var(--text-muted);font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:-.01em;cursor:pointer;transition:background .28s var(--ease-spring),color .2s,box-shadow .3s,transform .28s var(--ease-spring)}
+  .snav .num{flex:none;width:21px;height:21px;display:grid;place-items:center;border-radius:6px;border:1px solid var(--border-subtle);background:rgba(255,255,255,.02);font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;color:var(--text-muted);transition:inherit}
+  .snav .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .snav:hover{color:var(--text-secondary);background:rgba(255,255,255,.045)}
+  .snav:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+  .snav.done{color:var(--text-secondary)}
+  .snav.done .num{color:var(--c);border-color:color-mix(in srgb,var(--c) 42%,transparent);background:color-mix(in srgb,var(--c) 15%,transparent)}
+  .snav.active{color:var(--text-primary);background:linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.03));border-color:rgba(255,255,255,.09);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 8px 22px -10px var(--c);transform:translateY(-1px)}
+  .snav.active .num{color:#0a0e1a;border-color:transparent;background:linear-gradient(180deg,var(--c),color-mix(in srgb,var(--c) 76%,#000));box-shadow:0 3px 10px -3px var(--c)}
+  @media(max-width:600px){.snav .lbl{display:none}.snav{padding:9px 6px}.snav .num{width:25px;height:25px;font-size:12.5px}}
+
+  .step-intro{position:relative;overflow:hidden;margin-top:12px;padding:15px 18px;border-radius:14px;border:1px solid var(--border-subtle);background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.005))}
+  .step-intro::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(135% 120% at 0% 0%,color-mix(in srgb,var(--c) 15%,transparent),transparent 52%)}
+  .si-eyebrow{position:relative;display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--c);margin-bottom:9px}
+  .si-eyebrow::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c)}
+  .si-body{position:relative;font-size:14px;color:var(--text-secondary);line-height:1.62}
+  .si-body b{color:var(--text-primary);font-weight:600}
+  @media(prefers-reduced-motion:no-preference){.si-eyebrow{animation:siRise .5s var(--ease-spring) both}.si-body{animation:siRise .5s var(--ease-spring) .06s both}}
+  @keyframes siRise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .step-foot{display:flex;justify-content:space-between;gap:8px;margin-top:12px}
+  .step-foot .btn[hidden]{visibility:hidden}
 
   .panel{display:none}.panel.on{display:block;animation:panelIn .4s var(--ease-out)}
   @keyframes panelIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
   .glass{background:var(--glass);backdrop-filter:blur(22px) saturate(1.3);-webkit-backdrop-filter:blur(22px) saturate(1.3);border:1px solid var(--border-subtle);border-radius:var(--radius);box-shadow:0 14px 34px rgba(0,0,0,.3),0 1px 0 rgba(255,255,255,.06) inset}
-  h2.sec{font-family:'Syne',sans-serif;font-weight:700;font-size:26px;letter-spacing:-.01em;margin:2px 0 8px}
-  .lead{max-width:70ch;color:var(--text-secondary);line-height:1.62;font-size:15.5px}
   .lead b{color:var(--text-primary);font-weight:600}
 
   /* term chip (opens concept card) */
@@ -113,22 +128,39 @@
   .grouphead .gcount .cg{color:var(--rose)}.grouphead .gcount .co{color:var(--emerald)}
   .grouphead .bar{flex:1;min-width:120px;height:8px;border-radius:100px;overflow:hidden;display:flex;background:rgba(255,255,255,.05)}
   .grouphead .bar .pg{background:var(--rose)}.grouphead .bar .po{background:var(--emerald)}
+  .grouphead .puretag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--emerald);border:1px solid rgba(52,211,153,.3);background:var(--emerald-bg);padding:2px 8px;border-radius:100px}
+  .grouphead .mixtag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--amber);border:1px solid rgba(251,191,36,.3);background:var(--amber-bg);padding:2px 8px;border-radius:100px}
+  .groupsec.pure{border-left:2px solid rgba(52,211,153,.4);padding-left:12px}
+  .groupsec .specimens{margin-top:2px}
 
-  /* manual drag-to-sort board */
-  .sortboard{position:relative;min-height:400px;border:1px dashed var(--border-hover);border-radius:var(--radius-sm);background:rgba(255,255,255,.02);margin-top:16px}
-  .scard.drag{position:absolute;width:86px;cursor:grab;touch-action:none;transition:left .22s var(--ease-out),top .22s var(--ease-out),box-shadow .2s,border-color .2s}
-  .scard.drag.dragging{cursor:grabbing;transition:box-shadow .2s,border-color .2s;box-shadow:0 18px 34px rgba(0,0,0,.5);border-color:var(--cyan)}
+  /* train / test intro badges */
+  .splitbadges{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+  .splitbadges .sb{flex:1;min-width:220px;display:flex;flex-direction:column;gap:5px;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:14px 16px;background:rgba(255,255,255,.02)}
+  .splitbadges .sb.train{border-color:rgba(96,165,250,.3);background:rgba(96,165,250,.05)}
+  .splitbadges .sb.test{border-color:rgba(251,191,36,.28);background:rgba(251,191,36,.045)}
+  .splitbadges .sb b{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--text-primary)}
+  .splitbadges .sbnote{font-size:12.5px;color:var(--text-secondary);line-height:1.5}
 
-  /* concept reference strip on tab 1 */
-  .refstrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:18px}
-  .refcard{border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:12px 12px 8px;background:rgba(255,255,255,.02)}
-  .refcard h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:8px}
-  .refrow{display:flex;align-items:center;gap:8px;font-size:13px;margin:3px 0;color:var(--text-secondary)}
-  .refrow svg{width:38px;height:38px;flex:0 0 38px}
-  #specimenGrid{margin-top:6px}
-  .helprow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}
-  .helpnote{font-size:13px;color:var(--text-muted)}
-  .refstrip.hidden{display:none}
+  /* data table view */
+  .datatable{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+  .datatable th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);font-weight:500;padding:7px 10px;border-bottom:1px solid var(--border-subtle);white-space:nowrap}
+  .datatable td{padding:6px 10px;border-bottom:1px solid rgba(255,255,255,.045);color:var(--text-secondary)}
+  .datatable tr.g td{background:rgba(251,113,133,.045)}
+  .datatable td.idx{font-family:'JetBrains Mono',monospace;color:var(--text-muted)}
+  .datatable .grouprow td{background:rgba(255,255,255,.03);color:var(--text-primary);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);background:rgba(255,255,255,.015)}
+
+  /* hypothesis */
+  .hypocard{margin-top:22px;border:1px solid rgba(167,139,250,.28);border-radius:var(--radius-sm);padding:18px 20px;background:linear-gradient(165deg,rgba(167,139,250,.07),rgba(96,165,250,.04))}
+  .hypocard h3{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;color:var(--text-primary);margin-bottom:4px}
+  .hypocard p{font-size:14px;color:var(--text-secondary);line-height:1.55;margin-bottom:12px;max-width:64ch}
+  .hypochips{display:flex;flex-wrap:wrap;gap:8px}
+  .hypochip{font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;padding:9px 15px;border-radius:100px;border:1px solid var(--border-subtle);background:rgba(255,255,255,.04);color:var(--text-primary);cursor:pointer;transition:.24s var(--ease-spring)}
+  .hypochip:hover{border-color:var(--violet);transform:translateY(-1px);background:var(--violet-bg)}
+  .hypochip:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+  .hypochip[aria-pressed="true"]{color:#0c0720;background:linear-gradient(100deg,var(--violet),#8b7bf0);border-color:transparent}
+  .hypodone{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:14px;color:var(--text-secondary)}
+  .hypodone .picked{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--violet)}
 
   /* canvas tree */
   .canvas-wrap{overflow-x:auto;overflow-y:hidden;margin-top:16px;padding:18px 8px;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);background:radial-gradient(ellipse 90% 70% at 50% -10%,rgba(96,165,250,.09),transparent 60%),linear-gradient(180deg,rgba(9,12,22,.5),rgba(9,12,22,.2))}
@@ -192,6 +224,12 @@
   .race .r.win .val{color:var(--violet)}
   .racehead{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);min-height:16px}
   .racehead b{color:var(--violet)}
+  .race .crown{font-size:12px}
+  .hyporeveal{margin:12px 0 2px;font-size:13.5px;color:var(--text-secondary);line-height:1.55;border:1px solid var(--border-subtle);border-left:3px solid var(--violet);border-radius:var(--radius-sm);padding:11px 14px;background:rgba(167,139,250,.05)}
+  .hyporeveal.ok{border-left-color:var(--emerald);background:var(--emerald-bg)}
+  .hyporeveal.diff{border-left-color:var(--amber);background:rgba(251,191,36,.05)}
+  .hyporeveal b{color:var(--text-primary)}
+  .hyporeveal .hk{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
 
   .controlbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0 0}
   .count{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-muted)}
@@ -201,6 +239,9 @@
   .statusline .pillstat.done{color:var(--emerald);border-color:rgba(52,211,153,.35);background:var(--emerald-bg)}
   .statusline .pillstat.warn{color:var(--amber);border-color:rgba(251,191,36,.35);background:var(--amber-bg)}
   .statusline .acc{color:var(--text-primary)}
+  .stufb{margin-top:12px;font-size:13.5px;line-height:1.5;color:var(--text-secondary);border:1px solid var(--border-subtle);border-left:3px solid var(--blue);border-radius:var(--radius-sm);padding:11px 14px;background:rgba(96,165,250,.05);animation:panelIn .3s var(--ease-out)}
+  .stufb.good{border-left-color:var(--emerald);background:var(--emerald-bg);color:#a7f3d0}
+  .stufb.warn{border-left-color:var(--amber);background:rgba(251,191,36,.06);color:#fcd9a3}
 
   .curvewrap{padding:14px 16px;margin-top:16px}
   .curvewrap .cap{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
@@ -248,15 +289,10 @@
 
   .callout{padding:14px 18px;border-radius:var(--radius-sm);border:1px solid var(--border-subtle);border-left:3px solid var(--amber);background:linear-gradient(165deg,rgba(28,37,64,.5),rgba(16,21,36,.55));color:var(--text-secondary);line-height:1.6;margin:16px 0;font-size:14px}
   .callout.emerald{border-left-color:var(--emerald)}
+  .callout.amber{border-left-color:var(--amber)}
   .callout.rose{border-left-color:var(--rose)}
   .callout b{color:var(--text-primary)}
 
-  details.teach{margin:16px 0 0;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);overflow:hidden;background:rgba(255,255,255,.02)}
-  details.teach summary{cursor:pointer;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--cyan);list-style:none}
-  details.teach summary::-webkit-details-marker{display:none}
-  details.teach summary::before{content:'+ ';color:var(--text-muted)}
-  details.teach[open] summary::before{content:'– '}
-  details.teach .body{padding:0 16px 14px;max-width:74ch;color:var(--text-secondary);line-height:1.65;font-size:14px}
   .chip{font-family:'JetBrains Mono',monospace;font-size:11.5px;padding:2px 8px;border-radius:100px;background:var(--violet-bg);color:var(--violet);border:1px solid rgba(167,139,250,.2)}
 
   /* exit ticket */
@@ -288,14 +324,6 @@
 
   /* step 5 — compare */
   .cmpwrap{padding:20px}
-  .treecmp{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 4px}
-  .treecmp .tc{flex:1;min-width:200px;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:12px 14px;background:rgba(255,255,255,.02)}
-  .treecmp .tc.mach{border-color:rgba(251,191,36,.28);background:rgba(251,191,36,.05)}
-  .treecmp .tct{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
-  .qchip{display:inline-flex;align-items:center;font-family:'Space Grotesk',sans-serif;font-size:12.5px;font-weight:600;color:var(--text-primary);border:1px solid var(--border-hover);border-radius:100px;padding:4px 11px;margin:0 5px 5px 0}
-  .tc.mach .qchip:last-child{border-color:var(--amber);color:var(--amber);background:rgba(251,191,36,.08)}
-  .diffnote{font-size:14px;color:var(--text-secondary);margin:6px 0 14px}
-  .diffnote b{color:var(--text-primary)}
   .cmptable{width:100%;border-collapse:collapse;font-size:13.5px}
   .cmptable th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);font-weight:500;padding:6px 10px;border-bottom:1px solid var(--border-subtle)}
   .cmptable td{padding:6px 10px;border-bottom:1px solid rgba(255,255,255,.045);color:var(--text-secondary);vertical-align:middle}
@@ -305,6 +333,8 @@
   .scoreline{display:flex;gap:22px;margin:14px 0;font-family:'Syne',sans-serif;font-size:16px;color:var(--text-secondary)}
   .scoreline b{font-weight:800;color:var(--text-primary)}
   /* step 6 — reflect */
+  .whyhead,.reflecthead{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:var(--text-primary);margin:20px 0 4px}
+  .reflecthead{margin-top:24px}
   .reflectgrid{display:flex;gap:14px;flex-wrap:wrap}
   .rcard{flex:1;min-width:240px;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:16px 18px;background:rgba(255,255,255,.02)}
   .rcard.good{border-color:rgba(52,211,153,.28);background:var(--emerald-bg)}
@@ -330,8 +360,80 @@
   .pill2.train{color:#93c5fd;background:rgba(96,165,250,.14);border:1px solid rgba(96,165,250,.3)}
   .pill2.test{color:#fbbf24;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3)}
 
+  /* intro-overlay */
+  .overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+  .overlay.show{display:flex}
+  .overlay-card{background:var(--glass);border:1px solid var(--border-subtle);border-radius:20px;padding:26px 30px;max-width:540px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s var(--ease-spring)}
+  @keyframes overlayIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+  .overlay-card h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;letter-spacing:-.01em;margin-bottom:6px;text-align:center;color:var(--text-primary)}
+  .overlay-card .sub{color:var(--text-secondary);font-size:14px;line-height:1.5;text-align:center;margin-bottom:18px}
+  .journey{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:20px}
+  .journey li{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;line-height:1.45;color:var(--text-secondary)}
+  .journey li strong{color:var(--text-primary);font-weight:600}
+  .journey .ji{flex-shrink:0;width:24px;height:24px;display:grid;place-items:center;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:var(--cyan-bg);color:var(--cyan);border:1px solid rgba(34,211,238,.25)}
+  .overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;border:none;border-radius:10px;background:var(--blue);color:#0a0e1a;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(96,165,250,.28)}
+  .overlay-btn:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(96,165,250,.4)}
+  .overlay-btn svg{width:15px;height:15px;flex-shrink:0}
+  .intro-viz{display:block;width:170px;height:82px;margin:0 auto 12px}
+  .intro-viz .iv-e{fill:none;stroke:rgba(255,255,255,.22);stroke-width:2}
+  .intro-viz .iv-n{fill:rgba(34,211,238,.14);stroke:var(--cyan);stroke-width:2}
+  .intro-viz .iv-g{fill:rgba(251,113,133,.16);stroke:var(--rose);stroke-width:2;stroke-linejoin:round}
+  .intro-viz .iv-o{fill:rgba(52,211,153,.16);stroke:var(--emerald);stroke-width:2}
+  @media(prefers-reduced-motion:no-preference){.intro-viz .iv-n,.intro-viz .iv-g,.intro-viz .iv-o{animation:ivPop .5s var(--ease-spring) backwards}
+    .intro-viz .iv-n{animation-delay:.1s}.intro-viz .iv-g{animation-delay:.3s}.intro-viz .iv-o{animation-delay:.42s}}
+  @keyframes ivPop{from{opacity:0;transform:scale(.6);transform-origin:center}to{opacity:1;transform:scale(1)}}
+
+  /* ingressen visas bara på startvyn och fälls ihop vid första stegvalet */
+  .heroIntro{overflow:hidden;max-height:400px;opacity:1;transition:max-height .45s var(--ease-out),opacity .3s var(--ease-out),margin .45s var(--ease-out)}
+  .hero.lean .heroIntro{max-height:0;opacity:0;margin:0}
+  .hero.lean{padding-bottom:0}
+  @media(prefers-reduced-motion:reduce){.heroIntro{transition:none}}
+
   footer{position:relative;z-index:2;text-align:center;padding:36px 0 10px;color:var(--text-muted);font-size:12.5px;font-family:'JetBrains Mono',monospace}
+
+  /* horisontell scroll-indikator på trädcanvasen */
+  .canvas-wrap.scrollable{box-shadow:inset -24px 0 20px -20px rgba(34,211,238,.45)}
+  .canvas-wrap.scrollable::after{content:'⟷ dra i sidled';position:absolute;top:8px;right:10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.04em;color:var(--cyan);background:rgba(9,12,22,.82);border:1px solid rgba(34,211,238,.28);border-radius:100px;padding:3px 9px;pointer-events:none}
+  .canvas-wrap{position:relative}
+
+  @media(max-width:640px){
+    .glass{padding:18px!important}
+    .splitbadges .sb{min-width:100%}
+    /* kontrollpanelen i bygg-steget stannar nåbar medan man scrollar trädet */
+    #stuCtrl{position:sticky;bottom:6px;z-index:6;box-shadow:0 -10px 26px rgba(5,7,13,.55)}
+    .groupbar{gap:6px}
+    .gbtn{font-size:12px;padding:6px 11px}
+    .reflectgrid .rcard{min-width:100%}
+    .scoreline{gap:14px}
+  }
   @media(prefers-reduced-motion:reduce){*{animation-duration:.001s!important}.tiltcard{transition:none}}
+
+  /* --- horizontell scroll-indikator för träden --- */
+  .scrollhint{display:none;align-items:center;gap:7px;margin:9px 2px 0;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.03em;color:var(--text-muted);opacity:.9;transition:opacity .45s var(--ease-out)}
+  .scrollhint.show{display:inline-flex}
+  .scrollhint.gone{opacity:0;pointer-events:none}
+  .scrollhint .arr{display:inline-block;animation:nudge 1.5s ease-in-out infinite;font-size:13px}
+  @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+
+  /* --- responsivt / mobil --- */
+  @media(max-width:680px){
+    .container{padding:0 14px 70px}
+    .glass{padding:18px!important}
+    .hero{padding:16px 0 6px}
+    .hero p{font-size:15px}
+    .hero p.focus{font-size:clamp(15px,4.6vw,19px)}
+    .pill{font-size:12.5px;padding:8px 12px;gap:7px}
+    .stepper{padding:9px;margin:20px 0 18px}
+    .callout{padding:12px 14px;font-size:13.5px}
+    /* håll trädet lagom högt så kontrollpanelen är nära till hands */
+    .canvas-wrap{max-height:58vh;overflow-y:auto;padding:14px 6px;overscroll-behavior:contain}
+    .controlbar{gap:8px}
+    .controlbar .btn{flex:1 1 auto;justify-content:center}
+    /* fäst kontrollpanelen så den följer med när man scrollar i ett långt träd */
+    .ctrl{position:sticky;bottom:8px;z-index:20;background:rgba(12,16,27,.94);backdrop-filter:blur(16px);box-shadow:0 -8px 26px rgba(0,0,0,.45)}
+    .reflectgrid .rcard{flex:1 1 100%}
+    .cmptable{font-size:12.5px}
+  }
 </style>
 </head>
 <body>
@@ -343,67 +445,104 @@
   <linearGradient id="edgeg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.28)"/><stop offset="1" stop-color="rgba(255,255,255,.10)"/></linearGradient>
 </defs></svg>
 
+<div class="overlay show" id="introOverlay">
+  <div class="overlay-card">
+    <svg class="intro-viz" viewBox="0 0 200 92" aria-hidden="true">
+      <path class="iv-e" d="M100 24 C 100 48, 55 48, 55 68"/>
+      <path class="iv-e" d="M100 24 C 100 48, 145 48, 145 68"/>
+      <circle class="iv-n" cx="100" cy="16" r="9"/>
+      <polygon class="iv-g" points="55,60 65,78 45,78"/>
+      <circle class="iv-o" cx="145" cy="70" r="9"/>
+    </svg>
+    <h2>Beslutsträd</h2>
+    <p class="sub">Lär dig hur ett beslutsträd byggs — först för hand, sedan automatiskt av en dator — genom att avgöra vilka ormar som är giftiga.</p>
+    <ul class="journey">
+      <li><span class="ji">1</span><span><strong>Studera datan</strong> – gruppera 20 dokumenterade ormar efter deras egenskaper och leta efter ett mönster som skiljer giftiga från ofarliga.</span></li>
+      <li><span class="ji">2</span><span><strong>Bygg ditt träd</strong> – välj själv vilka frågor trädet ska ställa och i vilken ordning.</span></li>
+      <li><span class="ji">3</span><span><strong>Testa på ny data</strong> – pröva trädet på åtta ormar som hållits undan, för att se om det fungerar på mer än de exempel det byggdes på.</span></li>
+      <li><span class="ji">4</span><span><strong>Jämför med datorn</strong> – se hur algoritmen väljer frågor med hjälp av entropi och informationsvinst, och varför fler frågor inte alltid ger en bättre modell.</span></li>
+    </ul>
+    <button class="overlay-btn" id="introStart">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
+</div>
+
 <div class="container">
   <a class="backlink" href="https://ai-aktiviteter.se/">← AI-aktiviteter</a>
   <header class="hero">
     <h1 class="title">Beslutsträd</h1>
-    <p class="focus">Lär dig bygga ett beslutsträd.</p>
-    <p>Några ormar är <b>giftiga</b>, andra ofarliga — men ingen har sagt vad som avslöjar dem. Du gör hela vägen själv: <b>studera</b> ormarna och sök efter mönstret, <b>bygg</b> ditt eget träd, <b>testa</b> det på ormar det aldrig sett, och se sedan hur en dator löser samma uppgift.</p>
+    <div class="heroIntro" id="heroIntro">
+      <p class="focus">Bygg en modell som avgör om en orm är giftig.</p>
+      <p>Ett beslutsträd klassificerar genom att ställa en fråga i taget. I den här övningen bygger du först ett träd för hand utifrån 20 dokumenterade ormar, testar det på ormar det aldrig sett, och jämför sedan med hur en dator bygger samma sorts träd.</p>
+    </div>
   </header>
 
-  <nav class="steps" id="nav" aria-label="Labbens steg"></nav>
+  <div class="stepper">
+    <div class="steps-nav" id="nav" role="tablist" aria-label="Labbens steg"></div>
+    <div class="step-intro" id="stepIntro" style="display:none"></div>
+    <div class="step-foot" id="stepFoot" style="display:none">
+      <button class="btn ghost" id="prevStepBtn">← Föregående</button>
+      <button class="btn primary" id="nextStepBtn">Nästa steg →</button>
+    </div>
+  </div>
 
   <!-- STEG 1 — Studera datan -->
-  <section class="panel" data-tab="0">
+  <section class="panel" data-tab="0" role="tabpanel" id="panel-0" aria-labelledby="tab-0" tabindex="0">
     <div class="glass" style="padding:26px">
-      <h2 class="sec">Studera datan</h2>
-      <p class="lead">20 fångade ormar med känt facit: <span class="tag g"><span class="sym">▲</span>giftig</span> eller <span class="tag o"><span class="sym">●</span>ofarlig</span>. Din uppgift genom hela övningen är att hitta vad som skiljer de giftiga från de ofarliga och uttrycka det som ett beslutsträd. Varje orm beskrivs av fem egenskaper: <b>huvudform</b>, <b>öga</b>, <b>mönster</b>, <b>färg</b> och <b>svans</b>.</p>
-      <p class="lead">Dra och flytta ormarna nedan för att sortera dem efter en egenskap i taget, som om du hade dem som fysiska kort framför dig. Testa att sortera dem efter en viss egenskap för att se om just den egenskapen skiljer de giftiga ormarna från de ofarliga, eller om de hamnar blandade oavsett hur du sorterar.</p>
-      <div class="sortboard" id="sortBoard"></div>
-      <div class="controlbar"><button class="btn sm ghost" id="resetSort">↺ Återställ ordningen</button></div>
-      <div class="helprow">
-        <button class="btn sm ghost" id="revealAttrs">🔍 Visa exempel på egenskaperna</button>
-        <span class="helpnote">Osäker på vad t.ex. "mönster" eller "svans" innebär? Knappen visar ett exempel på varje.</span>
+      <div class="splitbadges">
+        <div class="sb train"><span class="pill2 train">Träningsdata</span><b>20 ormar</b><span class="sbnote">Underlaget du bygger modellen på.</span></div>
+        <div class="sb test"><span class="pill2 test">Testdata</span><b>8 ormar</b><span class="sbnote">Läggs undan och används först när modellen är färdig.</span></div>
       </div>
-      <div class="refstrip hidden" id="refstrip"></div>
+
+      <div class="groupbar" role="group" aria-label="Visningsläge">
+        <span class="gl">Visa som</span>
+        <button class="gbtn" data-view="cards" aria-pressed="true">Kort</button>
+        <button class="gbtn" data-view="table" aria-pressed="false">Tabell</button>
+      </div>
+      <div class="groupbar" role="group" aria-label="Gruppera efter egenskap">
+        <span class="gl">Gruppera efter</span>
+        <button class="gbtn" data-group="none" aria-pressed="true">Ingen</button>
+        <button class="gbtn" data-group="head" aria-pressed="false">Huvudform</button>
+        <button class="gbtn" data-group="pupil" aria-pressed="false">Ögon</button>
+        <button class="gbtn" data-group="pattern" aria-pressed="false">Mönster</button>
+        <button class="gbtn" data-group="color" aria-pressed="false">Färg</button>
+        <button class="gbtn" data-group="tail" aria-pressed="false">Svans</button>
+      </div>
+      <div id="studyView" style="margin-top:6px"></div>
+
+      <div class="hypocard" id="hypoCard"></div>
     </div>
   </section>
 
   <!-- STEG 2 — Bygg -->
-  <section class="panel" data-tab="1">
+  <section class="panel" data-tab="1" role="tabpanel" id="panel-1" aria-labelledby="tab-1" tabindex="0">
     <div class="glass" style="padding:26px">
-      <h2 class="sec">Bygg ditt beslutsträd</h2>
-      <p class="lead">Dags att bygga. Klicka på en nod. Välj en egenskap att <b>dela på</b> så förgrenar sig trädet — eller <b>bestäm</b> grenen som giftig/ofarlig. Prickarna i varje nod är ormarna: <span style="color:var(--rose)">▲</span> giftig, <span style="color:var(--emerald)">●</span> ofarlig. Sikta på grenar med bara en form. En streckad gul ram betyder <b>obestämd</b> gren — den måste du ta hand om innan trädet är klart.</p>
       <div class="canvas-wrap" id="stuCanvas"></div>
       <div class="statusline" id="stuStatus"></div>
+      <div id="stuFeedback"></div>
       <div class="ctrl" id="stuCtrl"></div>
       <div class="controlbar"><button class="btn sm ghost" id="resetTree">↺ Börja om</button></div>
     </div>
   </section>
 
   <!-- STEG 3 — Testa ditt träd -->
-  <section class="panel" data-tab="2">
+  <section class="panel" data-tab="2" role="tabpanel" id="panel-2" aria-labelledby="tab-2" tabindex="0">
     <div class="glass" style="padding:26px">
-      <h2 class="sec">Testa ditt träd</h2>
-      <p class="lead">Ett bra träd ska fungera på ormar det aldrig sett förut — inte bara känna igen de ormar det byggdes på. Därför har åtta ormar hållits undan under hela bygget; de kallas <b>testdata</b>. Kör ditt träd på dessa åtta rymlingar nedan och se hur många det klassificerar rätt.</p>
       <div class="scene glass" id="youScene" style="margin-top:8px"></div>
       <div class="canvas-wrap" id="youCanvas"></div>
-      <div class="ctrl" id="youManualCtrl"></div>
       <div class="tally" id="youTally"></div>
     </div>
   </section>
 
   <!-- STEG 4 — Se hur en dator bygger -->
-  <section class="panel" data-tab="3">
+  <section class="panel" data-tab="3" role="tabpanel" id="panel-3" aria-labelledby="tab-3" tabindex="0">
     <div class="glass" style="padding:26px">
-      <h2 class="sec">Se hur en dator bygger ett beslutsträd</h2>
-      <p class="lead">En dator kan bygga samma sorts träd automatiskt, på exakt samma data. I varje nod prövar den <b>alla</b> egenskaper och mäter hur rent var och en delar upp ormarna — det kallas <button class="term" data-term="gain">informationsvinst</button>. Egenskapen som delar renast får dela noden. Tryck <b>Spela</b> och se trädet växa fram, steg för steg.</p>
+      <div id="hypoReveal"></div>
       <div class="controlbar">
-        <button class="btn primary" id="mlPlay">▶ Spela</button>
-        <button class="btn sm" id="mlNext">Nästa split →</button>
+        <button class="btn primary" id="mlPlay">▶ Träna</button>
+        <button class="btn sm" id="mlNext">Nästa delning →</button>
         <button class="btn sm ghost" id="mlReset">↺ Börja om</button>
       </div>
-      <div class="racehead" id="raceHead" style="margin-top:14px">Tryck "Nästa split" för att låta datorn välja i roten.</div>
+      <div class="racehead" id="raceHead" style="margin-top:14px">Tryck på "Nästa delning" för att låta algoritmen välja fråga i rotnoden.</div>
       <div class="race" id="mlRace"></div>
       <div class="canvas-wrap" id="mlCanvas"></div>
       <div class="curvewrap glass">
@@ -421,16 +560,16 @@
     </div>
   </section>
 
-  <div style="text-align:center;padding:34px 0 10px">
+  <div style="text-align:center;padding:34px 0 10px" id="helpRow">
     <button class="btn sm ghost" id="helpOpen">? Ledtrådar</button>
   </div>
 </div>
 
-<div class="modal" id="helpModal">
+<div class="modal" id="helpModal" role="dialog" aria-modal="true" aria-label="Ledtrådar">
   <div class="modal-inner glass">
     <button class="btn sm modal-close" id="helpClose">Stäng ✕</button>
     <h3>Ledtrådar</h3>
-    <div class="sub">Inga svar här — bara frågor som brukar leda rätt. Fundera på dem medan du sorterar ormarna.</div>
+    <div class="sub">Inga färdiga svar, utan frågor att pröva mot datan medan du arbetar.</div>
     <ul class="qlist">
       <li>Sortera efter <b>Huvudform</b>. Var hamnar de giftiga? Räcker det med bara huvudformen?</li>
       <li>Finns en egenskap där giftiga och ofarliga hamnar <b>jämnt blandade</b>, oavsett hur du sorterar? Då är den inte användbar.</li>
@@ -441,7 +580,7 @@
   </div>
 </div>
 
-<div class="modal conceptModal" id="conceptModal"><div class="modal-inner"><div class="tiltcard" id="tiltcard"></div></div></div>
+<div class="modal conceptModal" id="conceptModal" role="dialog" aria-modal="true" aria-label="Begrepp"><div class="modal-inner"><div class="tiltcard" id="tiltcard"></div></div></div>
 
 <script>
 /* ================= snake SVG — front-facing "cobra portrait", flat & bold ================= */
@@ -545,22 +684,28 @@ function snake(a){
 
 /* ================= data ================= */
 function S(head,pupil,pattern,color,tail,label){return{head,pupil,pattern,color,tail,label};}
+/* Det egentliga mönstret: giftig  ⟺  triangulärt huvud OCH smal pupill.
+   Exakt EN grön "härmapa" i träningsdatan (nr 7) är ofarlig fastän den är tri+slit.
+   Ett djupt träd delar då på färg och lär sig den slumpmässiga regeln "grön → ofarlig".
+   Testdatan innehåller tre gröna tri+slit-ormar som i verkligheten ÄR giftiga, så det
+   överanpassade trädet tappar tre testormar (8/8 → 5/8) medan träningen når 100 %. */
 const TRAIN=[
- S('tri','slit','stripes','brown','rattle','G'),S('tri','slit','solid','yellow','rattle','G'),
- S('tri','slit','stripes','red','point','G'),S('tri','slit','spots','yellow','rattle','G'),
- S('tri','slit','solid','brown','blunt','G'),S('tri','slit','stripes','red','blunt','G'),
- S('tri','slit','spots','green','point','O'),S('tri','slit','stripes','green','blunt','O'),
+ S('tri','slit','stripes','red','point','G'),S('tri','slit','solid','yellow','rattle','G'),
+ S('tri','slit','spots','brown','blunt','G'),S('tri','slit','stripes','brown','rattle','G'),
+ S('tri','slit','solid','red','point','G'),S('tri','slit','spots','yellow','blunt','G'),
+ S('tri','slit','solid','green','rattle','O'),                                            /* ← ensam grön härmapa */
  S('tri','round','stripes','brown','point','O'),S('tri','round','spots','yellow','blunt','O'),
  S('tri','round','solid','red','rattle','O'),S('round','round','stripes','green','blunt','O'),
  S('round','round','spots','brown','point','O'),S('round','round','solid','red','blunt','O'),
  S('round','round','spots','yellow','point','O'),S('round','slit','solid','yellow','blunt','O'),
  S('round','slit','stripes','brown','rattle','O'),S('round','slit','spots','red','point','O'),
- S('round','slit','solid','green','rattle','O'),S('round','slit','stripes','yellow','blunt','O')];
+ S('round','slit','solid','green','rattle','O'),S('round','slit','stripes','yellow','blunt','O'),
+ S('round','round','solid','brown','blunt','O')];
 const TEST=[
- S('tri','slit','solid','green','rattle','G'),S('tri','slit','spots','brown','point','G'),
- S('tri','slit','stripes','yellow','blunt','G'),S('round','round','stripes','yellow','blunt','O'),
+ S('tri','slit','stripes','green','point','G'),S('tri','slit','solid','green','blunt','G'),   /* gröna giftfällor */
+ S('tri','slit','spots','green','rattle','G'),S('tri','slit','stripes','yellow','blunt','G'),
  S('tri','round','solid','red','point','O'),S('round','slit','spots','green','rattle','O'),
- S('round','round','solid','brown','rattle','O'),S('tri','slit','solid','red','blunt','G')];
+ S('round','round','solid','brown','rattle','O'),S('round','slit','solid','red','blunt','O')];
 const ATTRS=['head','pupil','pattern','color','tail'];
 const ANAME={head:'Huvudform',pupil:'Öga',pattern:'Mönster',color:'Färg',tail:'Svans'};
 const VALS={head:['tri','round'],pupil:['slit','round'],pattern:['stripes','spots','solid'],color:['red','green','yellow','brown'],tail:['rattle','point','blunt']};
@@ -573,15 +718,24 @@ const CONCEPTS={
   overfit:{k:'Begrepp',t:'Överanpassning',p:'När en modell lär sig träningsdatan <b>utantill</b> — inklusive slumpmässiga undantag — i stället för det egentliga mönstret. Den blir perfekt på den data den sett men sämre på ny data. En enklare modell missar undantagen men <button class="term" data-term="generalize">generaliserar</button> bättre.',ex:'Det djupa trädet lär sig regeln "grön → ofarlig" utifrån två enskilda, slumpmässiga fall i träningsdatan. Sedan klassar det varje grön giftorm som ofarlig.'},
   generalize:{k:'Begrepp',t:'Generalisering',p:'Hur väl en modell klarar <b>ny</b> data den aldrig tränats på. Det är det enda som räknas i praktiken — en modell som bara är bra på sina egna träningsexempel är värdelös i verkligheten. Därför mäter vi alltid på separat testdata.',ex:'Ditt träd får höga poäng på träningsdatan — men bara testet på osedda ormar avslöjar om det lärt sig det verkliga mönstret.'}
 };
+/* ---- modal manager: focus trap + restore focus on close ---- */
+let lastFocused=null;
+function focusables(m){return [...m.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])')].filter(el=>el.offsetParent!==null);}
+function openModal(m){if(!m.classList.contains('on'))lastFocused=document.activeElement;m.classList.add('on');const f=focusables(m)[0];if(f)f.focus();}
+function closeModal(m){m.classList.remove('on');if(lastFocused&&lastFocused.focus){try{lastFocused.focus();}catch(e){}}lastFocused=null;}
+document.addEventListener('keydown',e=>{if(e.key!=='Tab')return;const m=document.querySelector('.modal.on');if(!m)return;
+  const els=focusables(m);if(!els.length)return;const first=els[0],last=els[els.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}});
 function openConcept(key){
   const c=CONCEPTS[key];if(!c)return;
-  document.getElementById('tiltcard').innerHTML=`<button class="btn sm close" data-close-concept>✕</button>
+  document.getElementById('tiltcard').innerHTML=`<button class="btn sm close" data-close-concept aria-label="Stäng">✕</button>
     <div class="kicker">${c.k}</div><h3>${c.t}</h3><p>${c.p}</p><div class="ex">${c.ex}</div>`;
-  document.getElementById('conceptModal').classList.add('on');
+  openModal(document.getElementById('conceptModal'));
 }
 document.addEventListener('click',e=>{
   const t=e.target.closest('[data-term]');if(t){openConcept(t.dataset.term);return;}
-  if(e.target.closest('[data-close-concept]')||e.target.id==='conceptModal')document.getElementById('conceptModal').classList.remove('on');
+  if(e.target.closest('[data-close-concept]')||e.target.id==='conceptModal')closeModal(document.getElementById('conceptModal'));
 });
 /* tilt effect */
 (function(){const cm=document.getElementById('conceptModal');
@@ -606,9 +760,7 @@ function accuracy(node,rows){let ok=0;for(const r of rows)if(predict(node,r)===r
 function pct(x){return Math.round(x*100)+'%';}
 function maxDepth(node){if(node.type!=='split')return 0;return 1+Math.max(...Object.values(node.children).map(maxDepth));}
 function countFrontier(node){if(node.type==='frontier')return 1;if(node.type!=='split')return 0;return Object.values(node.children).reduce((a,c)=>a+countFrontier(c),0);}
-function hasAnyStructure(node){return node.type!=='frontier';}
 const DEEP=id3(TRAIN,ATTRS,0,9);
-const SIMPLE=id3(TRAIN,ATTRS,0,2); /* the "lagom" depth-2 tree = head->pupil */
 
 /* ================= tree canvas renderer (premium) ================= */
 const NW=118,NH=80,HGAP=158,VGAP=132,PAD=24;let RID=0;
@@ -656,136 +808,131 @@ function renderTree(container,root,st){
       <rect class="cardtop" x="1.5" y="1.5" width="${NW-3}" height="${NH-3}" rx="14.5"/>
       ${nodeInner(n,cid)}</g></g>`;}
   container.innerHTML=`<svg class="tree" width="${L.width}" height="${L.height}" viewBox="0 0 ${L.width} ${L.height}">${edges}${nodes}</svg>`;
+  if(container.classList.contains('canvas-wrap'))container.classList.toggle('scrollable',container.scrollWidth>container.clientWidth+2);
   st.prev=cur;
   if(st.onClick)container.querySelectorAll('.tnodeWrap').forEach(el=>{el.onclick=()=>st.onClick(el.dataset.id);
     el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();st.onClick(el.dataset.id);}};});
 }
 function nodeByPid(root,pid){const parts=pid.split('>');let n=root;for(let i=1;i<parts.length;i++)n=n.children[parts[i]];return n;}
 
-/* ================= nav ================= */
-const TABS=['Studera datan','Bygg ditt träd','Testa ditt träd','Se hur en dator bygger'];
+/* ================= nav (pipeline-stegvisare) ================= */
+const STEPS=[
+  {title:'Studera datan',c:'#60a5fa',intro:'Materialet omfattar <b>28 dokumenterade ormar</b> med fem egenskaper vardera — <b>huvudform</b>, <b>öga</b>, <b>mönster</b>, <b>färg</b> och <b>svans</b> — och känt facit. 20 av dem används som <b>träningsdata</b> nedan; resten läggs undan som <b>testdata</b>. Gruppera ormarna efter en egenskap i taget och undersök om grupperna blir <b>rena</b> eller förblir <b>blandade</b>.'},
+  {title:'Bygg ditt träd',c:'#ffd866',intro:'Ett beslutsträd är uppbyggt av <b>noder</b>. Varje nod ställer en fråga om en egenskap, och varje svar leder vidare till en egen gren. En <b>ren</b> gren innehåller bara en klass och behöver inga fler frågor; en <b>blandad</b> gren kräver ytterligare en fråga. Klicka på en nod för att dela den eller bestämma dess klass. Modellen byggs enbart på träningsdata.'},
+  {title:'Testa ditt träd',c:'#ff9f43',intro:'En modell ska fungera på nya fall, inte bara på de exempel den byggdes utifrån. De åtta testormarna har hållits undan under hela bygget och aldrig påverkat trädet. Kör ditt träd på dem, en i taget, och räkna hur många det klassificerar korrekt.'},
+  {title:'Se hur en dator bygger',c:'#34d399',intro:'En algoritm kan bygga samma sorts träd automatiskt, utifrån exakt samma träningsdata. I varje nod prövas samtliga egenskaper och det mäts hur rena respektive blandade grupperna blir. Måttet kallas <button class="term" data-term="entropy">entropi</button>, och minskningen en delning ger kallas <button class="term" data-term="gain">informationsvinst</button>. Egenskapen med störst informationsvinst får dela noden.'}
+];
 const nav=document.getElementById('nav');
-TABS.forEach((t,i)=>{const b=document.createElement('button');b.className='pill';b.innerHTML=`<span class="n">${i+1}</span>${t}`;b.onclick=()=>go(i);nav.appendChild(b);});
-function go(i){document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',+p.dataset.tab===i));
-  [...nav.children].forEach((b,k)=>b.setAttribute('aria-current',k===i?'true':'false'));
+let curStep=-1;
+STEPS.forEach((t,i)=>{const b=document.createElement('button');b.className='snav';b.id='tab-'+i;b.style.setProperty('--c',t.c);
+  b.setAttribute('role','tab');b.setAttribute('aria-controls','panel-'+i);b.setAttribute('aria-selected','false');
+  b.innerHTML=`<span class="num">${i+1}</span><span class="lbl">${t.title}</span>`;b.onclick=()=>go(i,true);nav.appendChild(b);});
+nav.addEventListener('keydown',e=>{
+  if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
+  const cur=curStep<0?0:curStep;
+  let next=cur+(e.key==='ArrowRight'?1:-1);if(next<0)next=STEPS.length-1;if(next>=STEPS.length)next=0;
+  e.preventDefault();go(next,true);nav.children[next].focus();});
+document.getElementById('prevStepBtn').onclick=()=>go(Math.max(0,curStep-1),true);
+document.getElementById('nextStepBtn').onclick=()=>go(Math.min(STEPS.length-1,curStep+1),true);
+function go(i,fromUser){
+  curStep=i;
+  if(fromUser)document.querySelector('.hero').classList.add('lean');
+  document.getElementById('helpRow').style.display=i<2?'':'none';
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',+p.dataset.tab===i));
+  [...nav.children].forEach((b,k)=>{b.classList.toggle('active',k===i);b.classList.toggle('done',k<i);b.setAttribute('aria-selected',k===i?'true':'false');b.tabIndex=k===i?0:-1;});
+  const st=STEPS[i],introEl=document.getElementById('stepIntro');
+  introEl.style.display='';document.getElementById('stepFoot').style.display='';
+  introEl.style.setProperty('--c',st.c);
+  introEl.innerHTML=`<span class="si-eyebrow">Steg ${i+1} — ${st.title}</span><div class="si-body">${st.intro}</div>`;
+  document.getElementById('prevStepBtn').toggleAttribute('hidden',i===0);
+  document.getElementById('nextStepBtn').toggleAttribute('hidden',i===STEPS.length-1);
   if(i===0)renderStudy();else if(i===1)renderStudent();else if(i===2)youEnter();else if(i===3)compareEnter();
   window.scrollTo({top:0,behavior:'smooth'});}
-function renderStudy(){renderRefStrip();renderSortBoard();
-  const btn=document.getElementById('revealAttrs'),strip=document.getElementById('refstrip');
-  btn.onclick=()=>{const hidden=strip.classList.toggle('hidden');btn.textContent=hidden?'🔍 Visa exempel på egenskaperna':'🙈 Dölj exemplen';};
-  document.getElementById('resetSort').onclick=resetSortBoard;}
+let studyView='cards',studyGroup='none',hypo=null;
+function renderStudy(){
+  renderStudyControls();renderStudyView();renderHypo();
+}
+function renderStudyControls(){
+  document.querySelectorAll('#panel-0 [data-view]').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.view===studyView);
+    b.onclick=()=>{if(studyView===b.dataset.view)return;studyView=b.dataset.view;renderStudyControls();renderStudyView();};});
+  document.querySelectorAll('#panel-0 [data-group]').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.group===studyGroup);
+    b.onclick=()=>{if(studyGroup===b.dataset.group)return;studyGroup=b.dataset.group;renderStudyControls();renderStudyView();};});
+}
+function purityBar(rows){const c=counts(rows),tot=Math.max(rows.length,1);const gp=c.g/tot*100;
+  return `<div class="bar"><div class="pg" style="width:${gp}%"></div><div class="po" style="width:${100-gp}%"></div></div>`;}
+function groupHead(name,rows){const c=counts(rows),pure=c.g===0||c.o===0;
+  return `<div class="grouphead"><span class="gname">${name}</span>
+    <span class="gcount"><span>${rows.length} st</span><span class="cg">▲ ${c.g}</span><span class="co">● ${c.o}</span></span>
+    ${purityBar(rows)}${pure?'<span class="puretag">ren ✓</span>':'<span class="mixtag">blandad</span>'}</div>`;}
+function renderStudyView(){
+  const host=document.getElementById('studyView');if(!host)return;
+  if(studyView==='table'){host.innerHTML=studyTable();return;}
+  if(studyGroup==='none'){host.innerHTML=`<div class="grid specimens">${TRAIN.map((s,i)=>scard(s,i)).join('')}</div>`;return;}
+  const attr=studyGroup,vals=VALS[attr].filter(v=>TRAIN.some(r=>r[attr]===v));
+  host.innerHTML=vals.map(v=>{const rows=TRAIN.filter(r=>r[attr]===v);const c=counts(rows),pure=c.g===0||c.o===0;
+    return `<div class="groupsec${pure?' pure':''}">${groupHead(vname(attr,v),rows)}
+      <div class="grid specimens">${rows.map(s=>scard(s,TRAIN.indexOf(s))).join('')}</div></div>`;}).join('');
+}
+function studyTable(){
+  const cols=['head','pupil','pattern','color','tail'];
+  const thead=`<tr><th>#</th>${cols.map(a=>`<th>${ANAME[a]}</th>`).join('')}<th>Etikett</th></tr>`;
+  const rowHtml=(s,i)=>`<tr class="${s.label==='G'?'g':'o'}"><td class="idx">${String(i+1).padStart(2,'0')}</td>${cols.map(a=>`<td>${vname(a,s[a])}</td>`).join('')}<td>${labTag(s.label)}</td></tr>`;
+  let body;
+  if(studyGroup==='none'){body=TRAIN.map((s,i)=>rowHtml(s,i)).join('');}
+  else{const attr=studyGroup,vals=VALS[attr].filter(v=>TRAIN.some(r=>r[attr]===v));
+    body=vals.map(v=>{const rows=TRAIN.filter(r=>r[attr]===v);const c=counts(rows),pure=c.g===0||c.o===0;
+      return `<tr class="grouprow"><td colspan="7">${ANAME[attr]}: ${vname(attr,v)} — ${rows.length} st (▲${c.g} / ●${c.o}) · ${pure?'ren ✓':'blandad'}</td></tr>`
+        +rows.map(s=>rowHtml(s,TRAIN.indexOf(s))).join('');}).join('');}
+  return `<div class="tablewrap"><table class="datatable"><thead>${thead}</thead><tbody>${body}</tbody></table></div>`;
+}
+function renderHypo(){
+  const el=document.getElementById('hypoCard');if(!el)return;
+  if(hypo){el.innerHTML=`<h3>Vilken egenskap tror du är viktigast för att skilja dem åt?</h3>
+    <div class="hypodone">Ditt svar: <span class="picked">${ANAME[hypo]}</span>
+    <button class="btn sm ghost" id="hypoRedo">Ändra svar</button></div>`;
+    document.getElementById('hypoRedo').onclick=()=>{hypo=null;renderHypo();};return;}
+  el.innerHTML=`<h3>Vilken egenskap tror du är viktigast för att skilja dem åt?</h3>
+    <div class="hypochips" role="group" aria-label="Välj egenskap">${ATTRS.map(a=>`<button class="hypochip" data-h="${a}" aria-pressed="false">${ANAME[a]}</button>`).join('')}</div>`;
+  el.querySelectorAll('[data-h]').forEach(b=>b.onclick=()=>{hypo=b.dataset.h;renderHypo();});
+}
+function renderHypoReveal(){
+  const el=document.getElementById('hypoReveal');if(!el)return;
+  const rootAttr=(mlRoot&&mlRoot.type==='split')?mlRoot.attr:null;
+  if(!rootAttr){el.innerHTML=`<div class="hyporeveal"><span class="hk">Att observera</span> Se om algoritmen väljer samma egenskap som viktigast${hypo?` som du (<b>${ANAME[hypo]}</b>)`:''}.</div>`;return;}
+  if(!hypo){el.innerHTML=`<div class="hyporeveal"><span class="hk">Rotnoden</span> Algoritmen valde <b>${ANAME[rootAttr]}</b> som första fråga, eftersom den egenskapen ger störst informationsvinst.</div>`;return;}
+  const match=hypo===rootAttr;
+  el.innerHTML=`<div class="hyporeveal ${match?'ok':'diff'}"><span class="hk">Rotnoden</span> Algoritmen valde <b>${ANAME[rootAttr]}</b> som första fråga. Du angav <b>${ANAME[hypo]}</b> — ${match?'samma egenskap. Den ger störst informationsvinst i roten.':'en annan egenskap. Algoritmen väljer alltid den som ger störst informationsvinst i den aktuella noden.'}</div>`;
+}
 
-/* ================= tab 0: study + manual sort ================= */
+/* ================= tab 0: study ================= */
 function labTag(l){return l==='G'?'<span class="tag g"><span class="sym">▲</span>Giftig</span>':l==='O'?'<span class="tag o"><span class="sym">●</span>Ofarlig</span>':'<span class="tag q">?</span>';}
 function scard(s,i){const cls=s.label==='G'?'g':s.label==='O'?'o':'';return `<div class="scard ${cls}"><span class="id">${String(i+1).padStart(2,'0')}</span>${snake(s)}<div class="lab">${labTag(s.label)}</div></div>`;}
 
-/* drag-to-sort board: cards move freely while held, but always snap into one of a fixed
-   set of non-overlapping slots on release (swapping with whatever card sits there) —
-   this guarantees cards can never end up stacked on top of each other, which looked broken on mobile */
-let sortSlotPos=null, slotOf=null, sortCols=5, sortCardW=108, sortCardH=150, sortGap=14;
-function initSortPos(board){
-  if(sortSlotPos)return;
-  // document.documentElement.clientWidth reflects the viewport immediately, unlike
-  // board.clientWidth which can still read as 0 on the very first paint (that caused
-  // the desktop fallback of 900px/7 columns to be used on phones)
-  const vw=document.documentElement.clientWidth||window.innerWidth||900;
-  const w=board.clientWidth||Math.min(vw-40,976);
-  const small=w<480;
-  sortCardW=small?86:108;sortGap=small?10:14;
-  sortCardH=Math.round(sortCardW*1.55); // provisional guess; corrected below against the real rendered height
-  sortCols=Math.max(2,Math.floor(w/(sortCardW+sortGap)));
-  sortSlotPos=TRAIN.map((_,s)=>{const col=s%sortCols,row=Math.floor(s/sortCols);return{x:sortGap+col*(sortCardW+sortGap),y:sortGap+row*(sortCardH+sortGap)};});
-  slotOf=TRAIN.map((_,i)=>i);
-}
-function layoutSortSlots(){
-  sortSlotPos=TRAIN.map((_,s)=>{const col=s%sortCols,row=Math.floor(s/sortCols);return{x:sortGap+col*(sortCardW+sortGap),y:sortGap+row*(sortCardH+sortGap)};});
-}
-function paintSortCards(board){
-  const rows=Math.ceil(TRAIN.length/sortCols);
-  board.style.minHeight=(rows*(sortCardH+sortGap)+sortGap)+'px';
-  board.innerHTML=TRAIN.map((s,i)=>{const p=sortSlotPos[slotOf[i]];
-    return `<div class="scard drag ${s.label==='G'?'g':'o'}" data-i="${i}" style="left:${p.x}px;top:${p.y}px;width:${sortCardW}px;z-index:${i+1}">
-      <span class="id">${String(i+1).padStart(2,'0')}</span>${snake(s)}<div class="lab">${labTag(s.label)}</div></div>`;}).join('');
-  wireSortDrag();
-}
-function renderSortBoard(){
-  const board=document.getElementById('sortBoard');if(!board)return;
-  const firstRender=!sortSlotPos;
-  initSortPos(board);
-  paintSortCards(board);
-  if(firstRender){
-    // the card's true height (snake art + label + padding) doesn't scale cleanly from
-    // width alone, so measure what actually got rendered and fix up the row spacing —
-    // this is what stops rows from overlapping regardless of card content changes later
-    const sample=board.querySelector('.scard.drag');
-    const realH=sample?Math.ceil(sample.getBoundingClientRect().height):0;
-    if(realH>0&&Math.abs(realH-sortCardH)>2){
-      sortCardH=realH;
-      layoutSortSlots();
-      paintSortCards(board);
-    }
-  }
-}
-function nearestSlot(x,y){
-  let best=0,bd=Infinity;
-  sortSlotPos.forEach((p,s)=>{const dx=p.x-x,dy=p.y-y,d=dx*dx+dy*dy;if(d<bd){bd=d;best=s;}});
-  return best;
-}
-function snapCardEl(i){
-  const el=document.querySelector(`#sortBoard .scard.drag[data-i="${i}"]`);
-  if(!el)return;const p=sortSlotPos[slotOf[i]];
-  el.style.left=p.x+'px';el.style.top=p.y+'px';
-}
-function wireSortDrag(){
-  let z=100;
-  document.querySelectorAll('#sortBoard .scard.drag').forEach(el=>{
-    el.addEventListener('pointerdown',e=>{
-      e.preventDefault();
-      const i=+el.dataset.i;
-      const startSlot=slotOf[i],startPos=sortSlotPos[startSlot];
-      const startX=e.clientX,startY=e.clientY;
-      let curX=startPos.x,curY=startPos.y;
-      el.classList.add('dragging');el.style.zIndex=++z;
-      try{el.setPointerCapture(e.pointerId);}catch(err){}
-      function onMove(ev){
-        curX=startPos.x+(ev.clientX-startX);curY=startPos.y+(ev.clientY-startY);
-        el.style.left=curX+'px';el.style.top=curY+'px';
-      }
-      function onUp(){
-        el.classList.remove('dragging');
-        el.removeEventListener('pointermove',onMove);el.removeEventListener('pointerup',onUp);
-        const targetSlot=nearestSlot(curX,curY);
-        if(targetSlot!==startSlot){
-          const occupant=slotOf.indexOf(targetSlot);
-          if(occupant!==-1&&occupant!==i){slotOf[occupant]=startSlot;snapCardEl(occupant);}
-          slotOf[i]=targetSlot;
-        }
-        snapCardEl(i);
-      }
-      el.addEventListener('pointermove',onMove);el.addEventListener('pointerup',onUp);
-    });
-  });
-}
-function resetSortBoard(){sortSlotPos=null;slotOf=null;renderSortBoard();}
-
-function renderRefStrip(){
-  const items=[
-    ['Huvudform',[['triangulärt',{head:'tri',pupil:'round',pattern:'solid',color:'brown',tail:'blunt'}],['runt',{head:'round',pupil:'round',pattern:'solid',color:'brown',tail:'blunt'}]]],
-    ['Öga',[['smalt',{head:'round',pupil:'slit',pattern:'solid',color:'green',tail:'blunt'}],['runt',{head:'round',pupil:'round',pattern:'solid',color:'green',tail:'blunt'}]]],
-    ['Mönster',[['ränder',{head:'round',pupil:'round',pattern:'stripes',color:'red',tail:'blunt'}],['fläckar',{head:'round',pupil:'round',pattern:'spots',color:'red',tail:'blunt'}],['enfärgad',{head:'round',pupil:'round',pattern:'solid',color:'red',tail:'blunt'}]]],
-    ['Svans',[['skallra',{head:'round',pupil:'round',pattern:'solid',color:'yellow',tail:'rattle'}],['spets',{head:'round',pupil:'round',pattern:'solid',color:'yellow',tail:'point'}],['trubbig',{head:'round',pupil:'round',pattern:'solid',color:'yellow',tail:'blunt'}]]],
-    ['Färg',['red','green','yellow','brown'].map(col=>[vname('color',col),{head:'round',pupil:'round',pattern:'solid',color:col,tail:'blunt'}])]
-  ];
-  document.getElementById('refstrip').innerHTML=items.map(([t,rows])=>`<div class="refcard"><h4>${t}</h4>${rows.map(([lab,sp])=>`<div class="refrow">${snake(sp)}<span>${lab}</span></div>`).join('')}</div>`).join('');
-}
-document.getElementById('helpOpen').onclick=()=>document.getElementById('helpModal').classList.add('on');
-document.getElementById('helpClose').onclick=()=>document.getElementById('helpModal').classList.remove('on');
-document.getElementById('helpModal').onclick=e=>{if(e.target.id==='helpModal')e.currentTarget.classList.remove('on');};
-document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal.on').forEach(m=>m.classList.remove('on'));});
+/* intro-overlay */
+(function(){const ov=document.getElementById('introOverlay');
+  const dismiss=()=>{ov.classList.remove('show');const f=nav.children[0];if(f)f.focus();};
+  document.getElementById('introStart').onclick=dismiss;
+  ov.addEventListener('click',e=>{if(e.target===ov)dismiss();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ov.classList.contains('show'))dismiss();});
+  document.getElementById('introStart').focus();})();
+/* nästa steg */
+document.getElementById('helpOpen').onclick=()=>openModal(document.getElementById('helpModal'));
+document.getElementById('helpClose').onclick=()=>closeModal(document.getElementById('helpModal'));
+document.getElementById('helpModal').onclick=e=>{if(e.target.id==='helpModal')closeModal(e.currentTarget);};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal.on').forEach(m=>closeModal(m));});
 
 /* ================= tab 1: student build ================= */
 function fresh(rows){return{type:'frontier',rows,fallback:majority(rows)};}
-let stuRoot=fresh(TRAIN);let stuSel=null;
+let stuRoot=fresh(TRAIN);let stuSel=null;let stuFeedback=null;
+function splitFeedback(rows,attr){
+  const before=entropy(rows);const g=gain(rows,attr);const ratio=before>0?g/before:1;
+  const groups=[...new Set(rows.map(r=>r[attr]))].map(v=>rows.filter(r=>r[attr]===v));
+  const allPure=groups.every(gr=>{const c=counts(gr);return c.g===0||c.o===0;});
+  if(allPure)return{cls:'good',msg:'Perfekt delning. Varje gren blev ren och innehåller endast en klass, så inga fler frågor behövs här.'};
+  if(ratio>=0.55)return{cls:'good',msg:'Ett effektivt val. Delningen gör grupperna betydligt renare än de var före frågan.'};
+  if(ratio>=0.2)return{cls:'',msg:'Delningen ger viss förbättring, men flera grenar är fortfarande blandade och kräver ytterligare frågor.'};
+  return{cls:'warn',msg:'Delningen gjorde grupperna endast marginellt renare. Pröva en annan egenskap och jämför resultatet.'};
+}
 const stuSt={prev:null,sel:null,onClick:pid=>{stuSel=pid;renderStudent();}};
 function usedAttrs(pid){const parts=pid.split('>');let n=stuRoot,used=[];for(let i=1;i<parts.length;i++){used.push(n.attr);n=n.children[parts[i]];}return used;}
 function renderStudent(){stuSt.sel=stuSel;renderTree(document.getElementById('stuCanvas'),stuRoot,stuSt);renderStuStatus();renderStuCtrl();}
@@ -802,6 +949,8 @@ function renderStuStatus(){
     s+=`<span class="acc">Träffsäkerhet på träningsdatan hittills: <b>${pct(acc)}</b></span>`;
   }
   el.innerHTML=s;
+  const fb=document.getElementById('stuFeedback');
+  if(fb)fb.innerHTML=stuFeedback?`<div class="stufb ${stuFeedback.cls}">${stuFeedback.msg}</div>`:'';
 }
 function rawCounts(rows,attr){
   return `<div class="counts">`+VALS[attr].filter(v=>rows.some(r=>r[attr]===v)).map(v=>{
@@ -812,7 +961,7 @@ function rawCounts(rows,attr){
 }
 function renderStuCtrl(){
   const el=document.getElementById('stuCtrl');
-  if(!stuSel){el.innerHTML=`<div class="cardhint">Klicka på en nod i trädet ovan för att dela eller bestämma den.</div>`;return;}
+  if(!stuSel){el.innerHTML=`<div class="cardhint">Klicka på en nod i trädet ovan för att dela den eller bestämma dess klass.</div>`;return;}
   const node=nodeByPid(stuRoot,stuSel);const c=counts(node.rows);
   const where=stuSel==='r'?'roten':stuSel.split('>').slice(1).map((v,i)=>vname(usedAttrs(stuSel)[i],v)).join(' → ');
   let h=`<div class="who">Vald gren: <b>${where}</b> · ${node.rows.length} ormar (<span style="color:var(--rose)">▲ ${c.g} giftiga</span>, <span style="color:var(--emerald)">● ${c.o} ofarliga</span>)</div>`;
@@ -826,18 +975,18 @@ function renderStuCtrl(){
     h+=`<div class="lbl">…eller bestäm hela grenen:</div><div class="decide">
       <button class="btn sm" style="color:var(--rose);border-color:rgba(251,113,133,.35)" data-a="leafG">▲ Giftig</button>
       <button class="btn sm" style="color:var(--emerald);border-color:rgba(52,211,153,.35)" data-a="leafO">● Ofarlig</button></div>`;
-    if(avail.length)h+=`<div style="margin-top:12px"><button class="btn sm ghost" data-a="hint">Hur delar egenskaperna upp de ${node.rows.length} ormarna?</button><div id="stuHint"></div></div>`;
+    if(avail.length)h+=`<div style="margin-top:12px"><button class="btn sm ghost" data-a="hint">Visa hur varje egenskap delar de ${node.rows.length} ormarna</button><div id="stuHint"></div></div>`;
   }
   el.innerHTML=h;
   el.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{
     const node=nodeByPid(stuRoot,stuSel);const a=b.dataset.a;
-    if(a==='split'){const attr=b.dataset.attr;node.type='split';node.attr=attr;node.children={};
+    if(a==='split'){const attr=b.dataset.attr;stuFeedback=splitFeedback(node.rows,attr);node.type='split';node.attr=attr;node.children={};
       for(const v of[...new Set(node.rows.map(r=>r[attr]))])node.children[v]=fresh(node.rows.filter(r=>r[attr]===v));stuSel=null;renderStudent();}
     else if(a==='leafG'){node.type='leaf';node.label='G';delete node.children;delete node.attr;stuSel=null;renderStudent();}
     else if(a==='leafO'){node.type='leaf';node.label='O';delete node.children;delete node.attr;stuSel=null;renderStudent();}
-    else if(a==='reset'){node.type='frontier';delete node.children;delete node.attr;delete node.label;renderStudent();}
+    else if(a==='reset'){stuFeedback=null;node.type='frontier';delete node.children;delete node.attr;delete node.label;renderStudent();}
     else if(a==='hint'){const avail=ATTRS.filter(x=>!usedAttrs(stuSel).includes(x));
-      document.getElementById('stuHint').innerHTML=`<div class="lbl" style="margin-top:12px">Så här delar varje egenskap upp de här ormarna — leta efter grupper som blir <b>rena</b> (bara en form):</div>`+avail.map(a=>`<div style="margin-top:10px"><div style="font-size:12.5px;font-weight:600;color:var(--text-primary);margin-bottom:2px">${ANAME[a]}</div>${rawCounts(node.rows,a)}</div>`).join('');}
+      document.getElementById('stuHint').innerHTML=`<div class="lbl" style="margin-top:12px">Så här delar varje egenskap upp ormarna i den valda noden — leta efter grupper som blir <b>rena</b>, det vill säga innehåller endast en klass:</div>`+avail.map(a=>`<div style="margin-top:10px"><div style="font-size:12.5px;font-weight:600;color:var(--text-primary);margin-bottom:2px">${ANAME[a]}</div>${rawCounts(node.rows,a)}</div>`).join('');}
   });
 }
 document.getElementById('resetTree').onclick=()=>{stuRoot=fresh(TRAIN);stuSel=null;stuSt.prev=null;renderStudent();};
@@ -846,82 +995,80 @@ document.getElementById('resetTree').onclick=()=>{stuRoot=fresh(TRAIN);stuSel=nu
 let mlRoot=null,mlQueue=[],mlPlaying=false,mlDone=false;
 const mlSt={prev:null,sel:null,cur:null};
 function frontierB(rows,attrs,depth){return{type:'frontier',rows,fallback:majority(rows),avail:attrs,depth};}
-function mlEnsure(){if(!mlRoot)mlResetFn();else{renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);renderCurve();}}
+function mlEnsure(){if(!mlRoot)mlResetFn();else{renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);renderCurve();}renderHypoReveal();}
 function mlResetFn(){mlPlaying=false;mlDone=false;mlRoot=frontierB(TRAIN,ATTRS,0);mlQueue=[mlRoot];mlSt.prev=null;mlSt.cur=null;
-  document.getElementById('mlRace').innerHTML='';document.getElementById('raceHead').textContent='Tryck "Nästa split" för att låta datorn välja i roten.';
-  document.getElementById('mlPlay').textContent='▶ Spela';document.getElementById('mlNext').disabled=false;
-  renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);updateMLStats();renderCurve();if(typeof renderCompare==='function')renderCompare();}
+  document.getElementById('mlRace').innerHTML='';document.getElementById('raceHead').textContent='Tryck på "Nästa delning" för att låta algoritmen välja fråga i rotnoden.';
+  document.getElementById('mlPlay').textContent='▶ Träna';document.getElementById('mlNext').disabled=false;
+  renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);updateMLStats();renderCurve();renderHypoReveal();if(typeof renderCompare==='function')renderCompare();}
 function updateMLStats(){document.getElementById('mlTrainAcc').textContent=pct(accuracy(mlRoot,TRAIN));document.getElementById('mlTestAcc').textContent=pct(accuracy(mlRoot,TEST));}
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function raceBars(rows,avail){
-  const gs=avail.map(a=>[a,gain(rows,a)]);const mx=Math.max(...gs.map(g=>g[1]),0.001);const top=Math.max(...gs.map(x=>x[1]));const best=gs.slice().sort((a,b)=>b[1]-a[1])[0][0];
-  return `<div class="race">`+gs.map(([a,g])=>`<div class="r ${g===top&&g>1e-6&&a===best?'win':''}">
-    <span>${ANAME[a]}</span><div class="track"><div class="fill" style="width:0" data-w="${Math.round(g/mx*100)}"></div></div><span class="val">${g.toFixed(2)}</span></div>`).join('')+`</div>`;
+  const gs=avail.map(a=>[a,gain(rows,a)]).sort((a,b)=>b[1]-a[1]); /* störst vinst överst */
+  const mx=Math.max(...gs.map(g=>g[1]),0.001);const top=gs[0][1];
+  return `<div class="race">`+gs.map(([a,g],i)=>`<div class="r ${i===0&&g>1e-6?'win':''}">
+    <span>${ANAME[a]}${i===0&&g>1e-6?' <span class="crown">👑</span>':''}</span><div class="track"><div class="fill" style="width:0" data-w="${Math.round(g/mx*100)}"></div></div><span class="val">${g.toFixed(2)}</span></div>`).join('')+`</div>`;
 }
 function animateBars(container){container.querySelectorAll('.fill').forEach(f=>{requestAnimationFrame(()=>{f.style.width=f.dataset.w+'%';});});}
 async function mlStep(){
-  if(!mlQueue.length){mlDone=true;document.getElementById('raceHead').innerHTML='Trädet är färdigbyggt. Se nedan hur det jämförs med ditt eget, orm för orm.';document.getElementById('mlNext').disabled=true;mlPlaying=false;document.getElementById('mlPlay').textContent='▶ Spela';renderCompare();return false;}
+  if(!mlQueue.length){mlDone=true;document.getElementById('raceHead').innerHTML='Trädet är färdigbyggt. Nedan jämförs det med ditt eget träd, orm för orm.';document.getElementById('mlNext').disabled=true;mlPlaying=false;document.getElementById('mlPlay').textContent='▶ Träna';renderCompare();return false;}
   const node=mlQueue.shift();mlSt.cur=node._pid;renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);
   const avail=node.avail;const pure=entropy(node.rows)===0;
-  document.getElementById('raceHead').innerHTML=`Nod med ${node.rows.length} ormar — datorn prövar alla egenskaper…`;
-  if(pure||!avail.length){document.getElementById('mlRace').innerHTML='';document.getElementById('raceHead').innerHTML=`Noden är redan ren → blir ett löv: ${labTag(node.fallback)}`;
+  document.getElementById('raceHead').innerHTML=`Nod med ${node.rows.length} ormar — samtliga egenskaper prövas…`;
+  if(pure||!avail.length){document.getElementById('mlRace').innerHTML='';document.getElementById('raceHead').innerHTML=`Noden är redan ren och blir ett löv: ${labTag(node.fallback)}`;
     node.type='leaf';node.label=node.fallback;mlSt.cur=null;await sleep(500);renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);updateMLStats();return true;}
   const race=document.getElementById('mlRace');race.innerHTML=raceBars(node.rows,avail);await sleep(60);animateBars(race);await sleep(850);
   let best=null,bg=1e-9;for(const a of avail){const g=gain(node.rows,a);if(g>bg){bg=g;best=a;}}
-  document.getElementById('raceHead').innerHTML=`<b>${ANAME[best]}</b> vinner — delar renast. Noden förgrenas.`;await sleep(650);
+  document.getElementById('raceHead').innerHTML=`<b>${ANAME[best]}</b> ger störst informationsvinst. Noden delas på den egenskapen.`;await sleep(650);
   if(!best){node.type='leaf';node.label=node.fallback;}
   else{node.type='split';node.attr=best;node.children={};
     for(const v of[...new Set(node.rows.map(r=>r[best]))])node.children[v]=frontierB(node.rows.filter(r=>r[best]===v),avail.filter(x=>x!==best),node.depth+1);
     Object.keys(node.children).sort().forEach(k=>mlQueue.push(node.children[k]));}
-  mlSt.cur=null;renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);updateMLStats();renderCurve();return true;}
+  mlSt.cur=null;renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);updateMLStats();renderCurve();renderHypoReveal();return true;}
 document.getElementById('mlNext').onclick=async()=>{if(mlPlaying)return;const b=document.getElementById('mlNext');b.disabled=true;await mlStep();if(!mlDone)b.disabled=false;};
 document.getElementById('mlPlay').onclick=async()=>{
   const btn=document.getElementById('mlPlay');
-  if(mlPlaying){mlPlaying=false;btn.textContent='▶ Spela';return;}
+  if(mlPlaying){mlPlaying=false;btn.textContent='▶ Träna';return;}
   mlPlaying=true;btn.textContent='⏸ Pausa';document.getElementById('mlNext').disabled=true;
   while(mlPlaying){const more=await mlStep();if(!more)break;await sleep(450);}
-  mlPlaying=false;btn.textContent='▶ Spela';if(!mlDone)document.getElementById('mlNext').disabled=false;};
+  mlPlaying=false;btn.textContent='▶ Träna';if(!mlDone)document.getElementById('mlNext').disabled=false;};
 document.getElementById('mlReset').onclick=()=>mlResetFn();
 function renderCurve(){
   const w=480,h=168,padL=42,padR=18,padT=16,padB=34;const MAXD=maxDepth(DEEP);
   const tr=[],te=[];for(let d=1;d<=MAXD;d++){const t=id3(TRAIN,ATTRS,0,d);tr.push(accuracy(t,TRAIN));te.push(accuracy(t,TEST));}
   const X=d=>padL+(MAXD===1?0.5:(d-1)/(MAXD-1))*(w-padL-padR),Y=a=>h-padB-a*(h-padT-padB);
-  const line=(arr,col)=>`<polyline fill="none" stroke="${col}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="${arr.map((a,i)=>X(i+1)+','+Y(a)).join(' ')}"/>`+arr.map((a,i)=>`<circle cx="${X(i+1)}" cy="${Y(a)}" r="3.2" fill="${col}"/>`).join('');
+  /* hur djupt datorns träd hittills byggts — kurvan ritas bara upp till detta djup */
+  const dShown=mlRoot?Math.min(MAXD,maxDepth(mlRoot)):0;
+  const line=(arr,col)=>{const pts=arr.slice(0,dShown);if(!pts.length)return '';
+    return (pts.length>1?`<polyline fill="none" stroke="${col}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="${pts.map((a,i)=>X(i+1)+','+Y(a)).join(' ')}"/>`:'')
+      +pts.map((a,i)=>`<circle cx="${X(i+1)}" cy="${Y(a)}" r="3.2" fill="${col}"/>`).join('');};
   let grid='';for(const a of[0,.25,.5,.75,1]){grid+=`<line x1="${padL}" y1="${Y(a)}" x2="${w-padR}" y2="${Y(a)}" stroke="rgba(255,255,255,.07)"/><text x="${padL-8}" y="${Y(a)+3}" text-anchor="end" font-size="9" font-family="monospace" fill="#5a6478">${Math.round(a*100)}</text>`;}
-  let xl='';for(let d=1;d<=MAXD;d++)xl+=`<text x="${X(d)}" y="${h-padB+15}" text-anchor="middle" font-size="9" font-family="monospace" fill="#5a6478">${d}</text>`;
+  let xl='';for(let d=1;d<=MAXD;d++)xl+=`<text x="${X(d)}" y="${h-padB+15}" text-anchor="middle" font-size="9" font-family="monospace" fill="${d<=dShown?'#8b95a9':'#3a4256'}">${d}</text>`;
   const yTitle=`<text x="12" y="${(padT+h-padB)/2}" text-anchor="middle" font-size="9" font-family="monospace" fill="#8b95a9" transform="rotate(-90 12 ${(padT+h-padB)/2})">Träffsäkerhet %</text>`;
   const xTitle=`<text x="${(padL+w-padR)/2}" y="${h-4}" text-anchor="middle" font-size="9" font-family="monospace" fill="#8b95a9">Träddjup (antal frågor på raken)</text>`;
-  const dCur=mlRoot?Math.max(1,Math.min(MAXD,maxDepth(mlRoot))):1;
-  const marker=`<circle cx="${X(dCur)}" cy="${Y(tr[dCur-1])}" r="6" fill="none" stroke="#e8ecf4" stroke-width="1.5"/><line x1="${X(dCur)}" y1="${padT-2}" x2="${X(dCur)}" y2="${h-padB}" stroke="#e8ecf4" stroke-dasharray="3 3" stroke-width="1" opacity=".5"/>`;
-  document.getElementById('curve').innerHTML=`<svg viewBox="0 0 ${w} ${h}" style="width:100%;max-width:520px;height:auto">${grid}${marker}${line(tr,'#34d399')}${line(te,'#fbbf24')}${xl}${yTitle}${xTitle}</svg>`;}
+  let marker='';
+  if(dShown>=1){marker=`<circle cx="${X(dShown)}" cy="${Y(tr[dShown-1])}" r="6" fill="none" stroke="#e8ecf4" stroke-width="1.5"/><line x1="${X(dShown)}" y1="${padT-2}" x2="${X(dShown)}" y2="${h-padB}" stroke="#e8ecf4" stroke-dasharray="3 3" stroke-width="1" opacity=".5"/>`;}
+  const empty=dShown===0?`<text x="${(padL+w-padR)/2}" y="${(padT+h-padB)/2}" text-anchor="middle" font-size="11" font-family="monospace" fill="#5a6478">Kurvan växer fram medan trädet byggs…</text>`:'';
+  document.getElementById('curve').innerHTML=`<svg viewBox="0 0 ${w} ${h}" style="width:100%;max-width:520px;height:auto">${grid}${marker}${line(tr,'#34d399')}${line(te,'#fbbf24')}${empty}${xl}${yTitle}${xTitle}</svg>`;}
 
 function pathOf(root,row){let n=root,pid='r';const ids=new Set(['r']);while(n.type==='split'){const v=row[n.attr];pid+='>'+v;if(!n.children[v])break;n=n.children[v];ids.add(pid);}return ids;}
 
 /* ================= step 3: test YOUR tree on held-out data ================= */
-let youPhase='test',youIdx=0,youScore=[],youRan=false,youRev=false,youForce=false;
-let youMode='auto',youSpeed=1,youRunAll=false,youManualPid='r';
+let youIdx=0,youScore=[],youRan=false,youRev=false,youForce=false;
+let youRunAll=false;
 const youSt={prev:null,sel:null};
-function youEnter(){youPhase='test';youIdx=0;youScore=[];youForce=false;youRunAll=false;youManualPid='r';document.getElementById('youTally').innerHTML='';renderYouScene();}
-function speedMs(base){return Math.round(base/youSpeed);}
+function youEnter(){youIdx=0;youScore=[];youForce=false;youRunAll=false;document.getElementById('youTally').innerHTML='';renderYouScene();}
+function speedMs(base){return Math.round(base/1.6);}
 function renderYouControls(){
   return `<div class="groupbar" id="youControls" style="margin:0 0 14px">
-    <button class="gbtn" data-mode="auto" aria-pressed="${youMode==='auto'}" ${youRunAll?'disabled':''}>▶ Se den vandra</button>
-    <button class="gbtn" data-mode="manual" aria-pressed="${youMode==='manual'}" ${youRunAll?'disabled':''}>🖱 Klicka ner själv</button>
-    <button class="gbtn" id="speedToggle" aria-pressed="${youSpeed>1}">${youSpeed>1?'⏩ Snabbt':'🐢 Normalt'}</button>
     <button class="btn sm ${youRunAll?'danger':'primary'}" id="runAllBtn">${youRunAll?'⏸ Pausa':'⏭ Kör alla'}</button>
   </div>`;
 }
 function renderYouControls_refresh(){const c=document.getElementById('youControls');if(!c)return;c.outerHTML=renderYouControls();wireYouControls();}
 function wireYouControls(){
-  document.querySelectorAll('#youControls [data-mode]').forEach(b=>{
-    b.onclick=()=>{if(youRunAll||youMode===b.dataset.mode)return;youMode=b.dataset.mode;youRan=false;youRev=false;youManualPid='r';renderYouScene();};
-  });
-  const sp=document.getElementById('speedToggle');
-  if(sp)sp.onclick=()=>{youSpeed=youSpeed>1?1:3;renderYouControls_refresh();};
   const rb=document.getElementById('runAllBtn');
   if(rb)rb.onclick=()=>{
     youRunAll=!youRunAll;
-    if(youRunAll){youMode='auto';youRan=false;youRev=false;youManualPid='r';renderYouScene();}
+    if(youRunAll){youRan=false;youRev=false;renderYouScene();}
     else{renderYouControls_refresh();}
   };
 }
@@ -929,16 +1076,14 @@ function renderYouScene(){
   const scene=document.getElementById('youScene');const fr=countFrontier(stuRoot);
   if(!youForce&&(stuRoot.type==='frontier'||fr>0)){
     scene.innerHTML=`<div class="alert" style="color:var(--amber)">⚠ Ditt träd är inte klart</div>
-      <div class="q">Trädet har <b>${fr||1} obestämd${(fr||1)>1?'a':''} gren${(fr||1)>1?'ar':''}</b>. Ormar som hamnar där gissas till majoriteten. Bygg klart först, eller testa ändå.</div>
+      <div class="q">Trädet har <b>${fr||1} obestämd${(fr||1)>1?'a':''} gren${(fr||1)>1?'ar':''}</b>. Ormar som hamnar där klassificeras enligt majoriteten i grenen. Bygg klart trädet först, eller fortsätt ändå.</div>
       <div class="reveal-row"><button class="btn sm ghost" id="goBuild">← Bygg klart trädet</button><button class="btn sm" id="runAnyway">Testa ändå →</button></div>`;
     document.getElementById('goBuild').onclick=()=>go(1);
     document.getElementById('runAnyway').onclick=()=>{youForce=true;renderYouScene();};
-    document.getElementById('youManualCtrl').innerHTML='';
     youSt.path=null;renderTree(document.getElementById('youCanvas'),stuRoot,youSt);return;}
   if(youIdx>=TEST.length){
     youRunAll=false;
     const sy=youScore.filter(Boolean).length;
-    document.getElementById('youManualCtrl').innerHTML='';
     scene.innerHTML=`<div class="alert" style="color:var(--emerald)">Klart — du körde alla åtta osedda</div>
       <div class="verdict" style="color:var(--text-primary)">På <b>osedd testdata</b> fångade ditt träd <b>${sy}/8</b> rätt.</div>
       <div class="q">Det här visar hur trädet faktiskt presterar — de här ormarna hade det aldrig sett tidigare. Se härnäst hur en dator bygger sitt eget träd på samma träningsdata, och testar det på samma åtta.</div>
@@ -946,66 +1091,18 @@ function renderYouScene(){
     document.getElementById('youAgain').onclick=youEnter;
     document.getElementById('toMachine').onclick=()=>go(3);
     youSt.path=null;renderTree(document.getElementById('youCanvas'),stuRoot,youSt);return;}
-  const s=TEST[youIdx];youRan=false;youRev=false;youSt.path=null;youManualPid='r';
+  const s=TEST[youIdx];youRan=false;youRev=false;youSt.path=null;
   const controls=renderYouControls();
-  if(youMode==='manual'){
-    scene.innerHTML=`${controls}<div class="alert">🔍 Osedd orm ${youIdx+1} av ${TEST.length}</div>
-      <div class="big">${snake(s)}</div>
-      <div class="q">Titta på ormen och klicka dig neråt i trädet, gren för gren.</div>
-      <div class="verdict" id="yVerdict"></div>
-      <div class="reveal-row" id="yReveal"></div>`;
-    wireYouControls();
-    renderManualStep(s);
-  } else {
-    scene.innerHTML=`${controls}<div class="alert">🔍 Osedd orm ${youIdx+1} av ${TEST.length}</div>
+  scene.innerHTML=`${controls}<div class="alert">🔍 Osedd orm ${youIdx+1} av ${TEST.length}</div>
       <div class="big">${snake(s)}</div>
       <div class="q">Den här ormen har trädet <b>aldrig sett</b>. Vad säger <b>ditt</b> träd — giftig eller ofarlig?</div>
       ${youRunAll?'':'<button class="btn primary" id="runYouBtn">▶ Kör genom mitt träd</button>'}
       <div class="verdict" id="yVerdict"></div>
       <div class="reveal-row" id="yReveal"></div>`;
-    document.getElementById('youManualCtrl').innerHTML='';
-    renderTree(document.getElementById('youCanvas'),stuRoot,youSt);
-    wireYouControls();
-    const rbEl=document.getElementById('runYouBtn');if(rbEl)rbEl.onclick=()=>runYouAuto(s);
-    if(youRunAll)runYouAuto(s);
-  }
-}
-function renderManualStep(s){
-  const parts=youManualPid.split('>');let acc='r';const path=new Set([acc]);
-  for(let i=1;i<parts.length;i++){acc+='>'+parts[i];path.add(acc);}
-  youSt.path=path;youSt.sel=null;
   renderTree(document.getElementById('youCanvas'),stuRoot,youSt);
-  const node=nodeByPid(stuRoot,youManualPid);
-  const ctrl=document.getElementById('youManualCtrl');
-  if(node.type==='split'){
-    const actualVal=s[node.attr];
-    if(!(actualVal in node.children)){
-      ctrl.innerHTML=`<div class="who">Den här ormens ${ANAME[node.attr].toLowerCase()} (${vname(node.attr,actualVal)}) finns inte bland exemplen i den här grenen — trädet får gissa majoriteten.</div>
-        <button class="btn sm" id="manualFallback">Fortsätt →</button>`;
-      document.getElementById('manualFallback').onclick=()=>{showManualVerdict(s,node.fallback);};
-      return;
-    }
-    const keys=Object.keys(node.children).sort();
-    ctrl.innerHTML=`<div class="who">Nuvarande fråga: <b>${ANAME[node.attr]}</b> — vilken gren passar den här ormen?</div>
-      <div class="attrchips">${keys.map(k=>`<button class="achip" data-k="${k}">${vname(node.attr,k)}</button>`).join('')}</div>
-      <div id="manualFeedback" style="margin-top:8px;font-size:13px;color:var(--rose);min-height:16px"></div>
-      <div style="margin-top:10px"><button class="btn sm ghost" id="manualGiveup">🤖 Visa automatiskt i stället</button></div>`;
-    ctrl.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{
-      const k=b.dataset.k;
-      if(k===actualVal){youManualPid+='>'+k;renderManualStep(s);}
-      else{document.getElementById('manualFeedback').textContent=`Nej — titta igen på ormens ${ANAME[node.attr].toLowerCase()}.`;}
-    });
-    document.getElementById('manualGiveup').onclick=()=>{youMode='auto';youManualPid='r';renderYouScene();};
-  } else {
-    showManualVerdict(s,node.label||node.fallback);
-  }
-}
-function showManualVerdict(s,v){
-  document.getElementById('youManualCtrl').innerHTML=`<div class="who">Du har nått ett löv.</div>`;
-  const el=document.getElementById('yVerdict');
-  if(el){el.className='verdict '+(v==='G'?'g':'o');el.textContent='Ditt träd säger: '+(v==='G'?'GIFTIG':'OFARLIG');}
-  const rev=document.getElementById('yReveal');
-  if(rev&&!youRan){youRan=true;rev.innerHTML=`<button class="btn danger" id="yRevBtn">Avslöja facit</button>`;document.getElementById('yRevBtn').onclick=()=>revealYou(s,v);}
+  wireYouControls();
+  const rbEl=document.getElementById('runYouBtn');if(rbEl)rbEl.onclick=()=>runYouAuto(s);
+  if(youRunAll)runYouAuto(s);
 }
 async function runYouAuto(s){
   if(youRan)return;youRan=true;const rb0=document.getElementById('runYouBtn');if(rb0)rb0.disabled=true;
@@ -1032,7 +1129,7 @@ function revealYou(s,v){
 }
 function renderYouTally(){
   const el=document.getElementById('youTally');const cell=r=>`<span class="dot ${r===undefined?'':(r?'ok':'no')}">${r===undefined?'':(r?'✓':'✕')}</span>`;
-  el.innerHTML=youPhase==='test'?`<div class="row"><span class="who">Du</span>${TEST.map((_,i)=>cell(youScore[i])).join('')}</div>`:'';
+  el.innerHTML=`<div class="row"><span class="who">Du</span>${TEST.map((_,i)=>cell(youScore[i])).join('')}</div>`;
 }
 
 /* ================= step 4: compare with the machine ================= */
@@ -1041,46 +1138,62 @@ function treeAttrs(root){const seen=[];(function walk(n){if(n&&n.type==='split')
 function domCell(v,truth){const ok=v===truth;return `<span class="vcell ${v==='G'?'g':'o'}">${v==='G'?'giftig':'ofarlig'} ${ok?'<span class="dot ok">✓</span>':'<span class="dot no">✕</span>'}</span>`;}
 function renderCompare(){
   const zone=document.getElementById('cmpZone');if(!zone)return;
-  if(!(mlRoot&&mlDone)){zone.innerHTML=`<div class="cardhint">Bygg klart datorns träd ovan (tryck <b>Spela</b>), så visas jämförelsen med ditt träd här, orm för orm.</div>`;return;}
+  if(!(mlRoot&&mlDone)){zone.innerHTML=`<div class="cardhint">Bygg klart datorns träd ovan (tryck <b>Träna</b>), så visas jämförelsen med ditt träd här, orm för orm.</div>`;return;}
   const yv=TEST.map(s=>predict(stuRoot,s)),mv=TEST.map(s=>predict(mlRoot,s));
   const ys=yv.filter((v,i)=>v===TEST[i].label).length,ms=mv.filter((v,i)=>v===TEST[i].label).length;
-  const chips=arr=>arr.map(a=>`<span class="qchip">${ANAME[a]}</span>`).join('');
   const you=treeAttrs(stuRoot),mach=treeAttrs(mlRoot);
   const commonLen=(()=>{let i=0;while(i<you.length&&i<mach.length&&you[i]===mach[i])i++;return i;})();
   const shared=you.slice(0,commonLen),extraMach=mach.slice(commonLen),extraYou=you.slice(commonLen);
   const rows=TEST.map((s,i)=>`<tr><td class="c-snake">${snake(s)}</td><td>${labTag(s.label)}</td><td>${domCell(yv[i],s.label)}</td><td>${domCell(mv[i],s.label)}</td></tr>`).join('');
 
-  let diffnote,compareLine;
+  let compareLine;
   if(!you.length){
-    diffnote=`Ditt träd avgör direkt utan att fråga om något, medan datorns träd frågar om ${chips(mach)}.`;
-    compareLine=`Ditt träd avgör direkt utan att fråga om något alls.`;
+    compareLine=`Ditt träd avgör direkt utan att ställa någon fråga alls.`;
   } else if(commonLen===you.length&&commonLen===mach.length){
-    diffnote=`Ni ställer exakt samma frågor i samma ordning.`;
-    compareLine=`Du och datorn ställde exakt samma frågor i samma ordning: <b>${you.map(a=>ANAME[a]).join(' → ')}</b>.`;
+    compareLine=`Du och algoritmen valde exakt samma frågor i samma ordning: <b>${you.map(a=>ANAME[a]).join(' → ')}</b>.`;
   } else if(commonLen===you.length&&extraMach.length){
-    diffnote=`Datorns träd ställer <b>samma</b> frågor som du — plus ${extraMach.length>1?'fler':'en till'}: <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b>.`;
-    compareLine=`Datorn ställde samma frågor som du (<b>${shared.map(a=>ANAME[a]).join(' → ')||'—'}</b>) — och la sedan till <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b> som du inte behövde.`;
+    compareLine=`Algoritmen valde samma frågor som du (<b>${shared.map(a=>ANAME[a]).join(' → ')||'—'}</b>) och lade därefter till <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b>, som ditt träd klarade sig utan.`;
   } else if(commonLen===mach.length&&extraYou.length){
-    diffnote=`Du ställer <b>samma</b> frågor som datorn — plus ${extraYou.length>1?'fler':'en till'}: <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>.`;
-    compareLine=`Du ställde samma frågor som datorn (<b>${shared.map(a=>ANAME[a]).join(' → ')||'—'}</b>) — men la själv till <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b> som datorn inte behövde.`;
+    compareLine=`Du valde samma frågor som algoritmen (<b>${shared.map(a=>ANAME[a]).join(' → ')||'—'}</b>) men lade till <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>, som algoritmen klarade sig utan.`;
   } else if(commonLen===0){
-    diffnote=`Ni ställer helt olika frågor — du frågar om ${chips(you)}, datorn om ${chips(mach)}.`;
-    compareLine=`Ni valde olika första fråga — du började med <b>${ANAME[you[0]]}</b>, datorn med <b>${ANAME[mach[0]]}</b>.`;
+    compareLine=`Ni valde olika första fråga: du började med <b>${ANAME[you[0]]}</b>, algoritmen med <b>${ANAME[mach[0]]}</b>.`;
   } else {
-    diffnote=`Ni håller med om de första frågorna (<b>${shared.map(a=>ANAME[a]).join(' → ')}</b>) men går sedan skilda vägar.`;
-    compareLine=`Ni höll med om de första frågorna (<b>${shared.map(a=>ANAME[a]).join(' → ')}</b>) men gick sedan skilda vägar: du fortsatte med <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>, datorn med <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b>.`;
+    compareLine=`De första frågorna sammanföll (<b>${shared.map(a=>ANAME[a]).join(' → ')}</b>) men därefter skiljer sig träden åt: du fortsatte med <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>, algoritmen med <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b>.`;
   }
 
+  /* ---- varför skiljer sig resultaten? (drar slutsatsen åt eleven) ---- */
+  const mTrain=Math.round(accuracy(mlRoot,TRAIN)*100),mTest=Math.round(ms/TEST.length*100);
+  const machWrong=TEST.filter((s,i)=>mv[i]!==s.label);
+  const greenTraps=machWrong.filter(s=>s.color==='green'&&s.label==='G');
+  const overfit=mTrain>=95&&ms<TEST.length;
+  let why;
+  if(overfit&&greenTraps.length){
+    why=`Algoritmens träd klassificerade <b>${mTrain}%</b> av träningsdatan korrekt, men endast <b>${ms}/8</b> (${mTest}%) av testdatan. Förklaringen ligger i de sista delningarna: för att få samtliga träningsexempel rätt delade algoritmen även på <b>Färg</b> och etablerade regeln att gröna ormar är ofarliga. Den regeln vilar på ett enda grönt exempel i träningsdatan och är alltså en tillfällighet snarare än ett mönster. I testdatan förekommer gröna ormar som är giftiga, och trädet klassificerar ${greenTraps.length} av dem fel. Modellen har anpassats till träningsdatans detaljer i stället för till det underliggande sambandet — detta kallas <button class="term" data-term="overfit">överanpassning</button>.`;
+  } else if(overfit){
+    why=`Algoritmens träd klassificerade <b>${mTrain}%</b> av träningsdatan korrekt men endast <b>${mTest}%</b> av testdatan. De sista delningarna byggde på enstaka undantag i träningsdatan i stället för på ett generellt samband, vilket är kännetecknande för <button class="term" data-term="overfit">överanpassning</button>.`;
+  } else {
+    why=`Algoritmens träd klassificerade <b>${mTrain}%</b> av träningsdatan och <b>${mTest}%</b> av testdatan korrekt.`;
+  }
+  let verdict;
+  if(ys>ms)verdict=`Ditt träd presterade bättre på testdatan, ${ys}/8 mot ${ms}/8, eftersom det är enklare. Fler frågor ger inte automatiskt en bättre modell: ett mindre träd bortser från undantagen och fångar i stället det samband som gäller generellt.`;
+  else if(ys===ms)verdict=`Båda träden fick ${ys}/8 rätt. `+(ys===TEST.length?`Båda har alltså fångat det samband som gäller även för ny data.`:`Undersök vilka ormar båda klassificerade fel och vad dessa har gemensamt.`);
+  else verdict=`Algoritmens träd fick fler rätt (${ms}/8 mot ${ys}/8). Gå gärna tillbaka till steg 2 och undersök om ett annat träd hade generaliserat bättre.`;
+
   zone.innerHTML=`<div class="cmpwrap glass">
-    <div class="cap">Ditt träd mot datorns</div>
-    <div class="treecmp">
-      <div class="tc"><div class="tct">Ditt träd frågar om</div><div class="tcs">${you.length?chips(you):'<span class="qchip">(bara ett beslut)</span>'}</div></div>
-      <div class="tc mach"><div class="tct">Datorns träd frågar om</div><div class="tcs">${chips(mach)}</div></div>
+    <div class="cap">Ditt träd jämfört med algoritmens</div>
+    <table class="cmptable"><thead><tr><th>Orm</th><th>Facit</th><th>Ditt träd</th><th>Algoritmen</th></tr></thead><tbody>${rows}</tbody></table>
+    <div class="scoreline"><span>Ditt träd: <b>${ys}/8</b></span><span>Algoritmen: <b>${ms}/8</b></span></div>
+    <div class="callout ${ms<ys?'emerald':(ms>ys?'amber':'')}">${compareLine}</div>
+    <div class="whyhead">Varför skiljer sig resultaten åt?</div>
+    <div class="callout rose" style="margin-top:0">${why}</div>
+    <div class="callout ${ys>ms?'emerald':(ys<ms?'amber':'')}">${verdict}</div>
+
+    <div class="reflecthead">Sammanfattning</div>
+    <div class="reflectgrid">
+      <div class="rcard warn"><div class="rh">Träffsäkerhet på träningsdata säger lite</div><p>Ett perfekt resultat på <b>träningsdatan</b> innebär inte att modellen är bra. Den kan ha anpassats till exemplen i stället för till ett generellt samband.</p></div>
+      <div class="rcard"><div class="rh">Testdata mäter generalisering</div><p>Data som undanhållits under träningen används för att pröva om modellen fungerar på nya fall, det vill säga om den <button class="term" data-term="generalize">generaliserar</button>.</p></div>
+      <div class="rcard good"><div class="rh">Enklare modeller generaliserar ofta bättre</div><p>En modell med färre frågor bortser från enskilda undantag i träningsdatan och fångar därmed oftare det samband som gäller generellt.</p></div>
     </div>
-    <div class="diffnote">${diffnote}</div>
-    <table class="cmptable"><thead><tr><th>Rymling</th><th>Facit</th><th>Ditt träd</th><th>Datorn</th></tr></thead><tbody>${rows}</tbody></table>
-    <div class="scoreline"><span>Du: <b>${ys}/8</b></span><span>Datorn: <b>${ms}/8</b></span></div>
-    <div class="callout ${ms<ys?'emerald':(ms>ys?'amber':'')}" style="margin-bottom:0">${compareLine} Resultat: du ${ys}/8, datorn ${ms}/8.</div>
   </div>`;
 }
 
@@ -1089,8 +1202,27 @@ function renderCompare(){
   let raf=null,tx=50,ty=20;document.addEventListener('mousemove',e=>{spot.classList.add('on');tx=e.clientX/innerWidth*100;ty=e.clientY/innerHeight*100;
     if(!raf)raf=requestAnimationFrame(()=>{spot.style.setProperty('--sx',tx+'%');spot.style.setProperty('--sy',ty+'%');raf=null;});});
   document.addEventListener('mouseleave',()=>spot.classList.remove('on'));})();
+window.addEventListener('resize',()=>{document.querySelectorAll('.canvas-wrap').forEach(w=>{const svg=w.querySelector('svg');if(svg)w.classList.toggle('scrollable',w.scrollWidth>w.clientWidth+2);});});
 
-renderStudy();go(0);
+/* ===== horisontell scroll-indikator (mobil) ===== */
+(function(){
+  function setup(wrap){
+    if(wrap.__hint)return;wrap.__hint=1;
+    const hint=document.createElement('div');hint.className='scrollhint';
+    hint.innerHTML='<span class="arr">⟷</span> Dra i sidled för att se hela trädet';
+    wrap.insertAdjacentElement('afterend',hint);
+    let dismissed=false;
+    const check=()=>{if(dismissed)return;hint.classList.toggle('show',wrap.scrollWidth-wrap.clientWidth>8);};
+    wrap.addEventListener('scroll',()=>{if(wrap.scrollLeft>12){dismissed=true;hint.classList.add('gone');setTimeout(()=>hint.classList.remove('show'),460);}},{passive:true});
+    if(window.ResizeObserver)new ResizeObserver(check).observe(wrap);
+    if(window.MutationObserver)new MutationObserver(check).observe(wrap,{childList:true,subtree:true});
+    window.addEventListener('resize',check);check();setTimeout(check,350);
+  }
+  document.querySelectorAll('.canvas-wrap').forEach(setup);
+})();
+
+
 </script>
 </body>
 </html>
+   
