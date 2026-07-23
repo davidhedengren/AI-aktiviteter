@@ -260,7 +260,7 @@
   .cmpcard .s{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-secondary);margin-top:4px}
   .scene{padding:22px;text-align:center}
   .scene .alert{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--rose);margin-bottom:6px}
-  .scene .big{width:180px;max-width:60%;margin:6px auto 4px;filter:drop-shadow(0 12px 24px rgba(0,0,0,.5))}
+  .scene .big{width:180px;max-width:60%;margin:6px auto 4px;border-radius:20px;filter:drop-shadow(0 12px 24px rgba(0,0,0,.5))}
   .scene .q{color:var(--text-secondary);font-size:15px;margin:6px 0 14px}
   .verdict{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;margin:12px 0 4px;min-height:28px}
   .verdict.g{color:var(--rose)}.verdict.o{color:var(--emerald)}
@@ -416,6 +416,161 @@
   @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
 
   /* --- responsivt / mobil --- */
+  /* ═══════════════════════════════════════════════════════════
+     DESIGNGENOMGÅNG — tillägg
+     ═══════════════════════════════════════════════════════════ */
+
+  /* ── 1. Progressiv avtäckning: gränssnittet växer ── */
+  .stage{opacity:0;transform:translateY(12px);max-height:0;overflow:hidden;pointer-events:none;
+    transition:opacity .5s var(--ease-out),transform .55s var(--ease-out),max-height .55s var(--ease-out),margin .45s var(--ease-out)}
+  .stage.in{opacity:1;transform:none;max-height:620px;pointer-events:auto}
+  @media(prefers-reduced-motion:reduce){.stage{transition:none}}
+
+  /* ── 2. Upptäckarkänsla: stor fråga i stället för verktygsetikett ── */
+  .discover{margin:6px 0 2px;position:relative}
+  .discover .dq{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-.02em;
+    font-size:clamp(21px,3.6vw,32px);line-height:1.14;color:var(--text-primary);max-width:20ch}
+  .discover .dsub{margin-top:9px;font-size:14.5px;color:var(--text-secondary);line-height:1.6;max-width:56ch}
+  .discover .dsub b{color:var(--text-primary);font-weight:600}
+  .microlabel{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:10px}
+  .groupbar.asks{gap:9px;margin:6px 0 4px}
+
+  /* aha-ögonblick när en gruppering ger en ren grupp */
+  .aha{margin-top:16px;border-radius:var(--radius-sm);padding:14px 17px;
+    border:1px solid rgba(52,211,153,.32);border-left:3px solid var(--emerald);
+    background:linear-gradient(100deg,rgba(52,211,153,.11),rgba(52,211,153,.02));
+    animation:ahaIn .55s var(--ease-spring) both}
+  .aha.mixed{border-color:rgba(251,191,36,.28);border-left-color:var(--amber);
+    background:linear-gradient(100deg,rgba(251,191,36,.09),rgba(251,191,36,.02))}
+  .aha .ak{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:var(--text-primary);display:block;margin-bottom:3px}
+  .aha .at{font-size:14px;color:var(--text-secondary);line-height:1.58}
+  .aha .at b{color:var(--text-primary);font-weight:600}
+  @keyframes ahaIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+
+  /* ── 3. Levande ormkort: parallax, ljusreflex, pop ── */
+  .scard{--mx:50%;--my:50%;--tx:0deg;--ty:0deg;
+    transform:perspective(700px) rotateX(var(--tx)) rotateY(var(--ty));
+    transition:transform .45s var(--ease-out),border-color .3s,box-shadow .3s}
+  .scard::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:0;
+    background:radial-gradient(130px circle at var(--mx) var(--my),rgba(255,255,255,.16),transparent 62%);
+    transition:opacity .35s var(--ease-out)}
+  .scard:hover::after{opacity:1}
+  .scard:hover{transform:perspective(700px) rotateX(var(--tx)) rotateY(var(--ty)) translateY(-4px) scale(1.015)}
+  .scard svg{transition:transform .4s var(--ease-out)}
+  .scard:hover svg{transform:translate3d(calc((var(--px) - .5) * -7px),calc((var(--py) - .5) * -7px),0) scale(1.03)}
+  @keyframes cardPop{0%{opacity:0;transform:translateY(14px) scale(.9)}
+    62%{opacity:1;transform:translateY(-3px) scale(1.03)}100%{opacity:1;transform:none}}
+  .grid.specimens.regroup .scard{animation:cardPop .46s var(--ease-spring) backwards;animation-delay:var(--d,0ms)}
+  @media(prefers-reduced-motion:reduce){
+    .scard,.scard:hover,.scard svg,.scard:hover svg{transform:none}
+    .grid.specimens.regroup .scard{animation:none}}
+
+  /* ── 4. Trädet byggs framför ögonen ── */
+  @keyframes nodeGrow{0%{opacity:0;transform:scale(.42)}70%{opacity:1;transform:scale(1.05)}100%{opacity:1;transform:scale(1)}}
+  @keyframes inkIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .tedge.enter{stroke-dasharray:1;animation:edgeDraw .34s var(--ease-out) both}
+  .eLabel.enter{animation:inkIn .3s var(--ease-out) .40s both}
+  .tnode-inner.grow{animation:nodeGrow .42s var(--ease-spring) .26s both;transform-box:fill-box;transform-origin:center}
+  .tnode-inner.grow > text,.tnode-inner.grow > g{animation:inkIn .34s var(--ease-out) .52s both;transform-box:fill-box}
+  @media(prefers-reduced-motion:reduce){
+    .tedge.enter,.eLabel.enter,.tnode-inner.grow,.tnode-inner.grow > text,.tnode-inner.grow > g{animation:none!important}}
+
+  /* trädet lyser upp när modellen är klar */
+  @keyframes treeGlow{0%{filter:none}35%{filter:drop-shadow(0 0 16px rgba(52,211,153,.65)) drop-shadow(0 0 40px rgba(52,211,153,.3))}100%{filter:none}}
+  svg.tree.finished{animation:treeGlow 1.6s var(--ease-out)}
+  .modeldone{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;z-index:5}
+  .modeldone span{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(20px,4vw,30px);letter-spacing:-.02em;
+    color:#0a0e1a;background:linear-gradient(100deg,var(--emerald),#6ee7b7);padding:11px 26px;border-radius:100px;
+    box-shadow:0 18px 46px -12px rgba(52,211,153,.75);animation:doneStamp 2.1s var(--ease-spring) both}
+  @keyframes doneStamp{0%{opacity:0;transform:scale(1.5)}14%{opacity:1;transform:scale(1)}
+    72%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.96) translateY(-8px)}}
+
+  /* ── 5. Informationsvinst som burkar med kulor ── */
+  .jars{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
+  .jar{flex:1 1 118px;min-width:104px;max-width:180px}
+  .jar .jarname{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:12.5px;color:var(--text-secondary);
+    text-align:center;margin-bottom:5px;display:flex;align-items:center;justify-content:center;gap:6px}
+  .jar.pure .jarname{color:var(--emerald)}
+  .jar svg{display:block;width:100%;height:auto;overflow:visible}
+  .jar .mb{animation:mbDrop .5s var(--ease-spring) both;animation-delay:var(--d,0ms);transform-box:fill-box;transform-origin:center}
+  @keyframes mbDrop{0%{opacity:0;transform:translateY(-26px) scale(.5)}72%{opacity:1;transform:translateY(2px) scale(1.06)}100%{opacity:1;transform:none}}
+  .jar .jarglass{fill:rgba(255,255,255,.035);stroke:rgba(255,255,255,.17);stroke-width:2}
+  .jar .jarlid{fill:rgba(255,255,255,.07);stroke:rgba(255,255,255,.2);stroke-width:2}
+  .jar .jarshine{fill:rgba(255,255,255,.07)}
+  .jar.pure .jarglass{stroke:rgba(52,211,153,.55)}
+  .jar .jarcount{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-muted);text-align:center;margin-top:4px}
+  .jarlead{font-size:13.5px;color:var(--text-secondary);line-height:1.55;margin-top:4px}
+  .jarlead b{color:var(--text-primary);font-weight:600}
+  @media(prefers-reduced-motion:reduce){.jar .mb{animation:none}}
+
+  /* ── 7. Dramatiskt teststeg ── */
+  .tedge.onpath{stroke:var(--cyan);stroke-width:3.2;filter:drop-shadow(0 0 6px rgba(34,211,238,.75))}
+  .tcard.onpath{filter:drop-shadow(0 0 10px rgba(34,211,238,.5))}
+  @keyframes stampIn{0%{opacity:0;transform:scale(2.2) rotate(-7deg)}60%{opacity:1;transform:scale(.94) rotate(1deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+  .verdict.stamp{animation:stampIn .5s var(--ease-spring) both;display:inline-block}
+  .scene .big{transition:transform .5s var(--ease-out),filter .5s var(--ease-out)}
+  @keyframes snakeArrive{from{opacity:0;transform:translateX(46px) scale(.85)}to{opacity:1;transform:none}}
+  .scene .big.arrive{animation:snakeArrive .5s var(--ease-spring) both}
+  .tracelabel{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--cyan);min-height:15px;margin:8px 0 2px;transition:opacity .3s}
+
+  /* ── 8. Visuella belöningar ── */
+  .toastwrap{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:300;
+    display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
+  .toast{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:var(--text-primary);
+    background:rgba(18,24,40,.94);border:1px solid var(--border-hover);backdrop-filter:blur(14px);
+    padding:11px 20px;border-radius:100px;box-shadow:0 20px 46px -18px rgba(0,0,0,.9);
+    display:flex;align-items:center;gap:9px;animation:toastIn .4s var(--ease-spring) both}
+  .toast.good{border-color:rgba(52,211,153,.45);color:#a7f3d0;box-shadow:0 18px 44px -18px rgba(52,211,153,.6)}
+  .toast.hint{border-color:rgba(96,165,250,.45);color:#bfdbfe}
+  .toast.out{animation:toastOut .4s var(--ease-out) both}
+  @keyframes toastIn{from{opacity:0;transform:translateY(16px) scale(.94)}to{opacity:1;transform:none}}
+  @keyframes toastOut{to{opacity:0;transform:translateY(-8px) scale(.97)}}
+  .confetti{position:fixed;inset:0;pointer-events:none;z-index:290;overflow:hidden}
+  .confetti i{position:absolute;width:7px;height:11px;border-radius:2px;opacity:0;
+    animation:confFall var(--dur,1500ms) cubic-bezier(.2,.6,.4,1) var(--d,0ms) both}
+  @keyframes confFall{0%{opacity:0;transform:translate3d(0,0,0) rotate(0)}
+    12%{opacity:1}100%{opacity:0;transform:translate3d(var(--dx,0),var(--dy,320px),0) rotate(var(--rot,420deg))}}
+  @keyframes okPulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.5)}100%{box-shadow:0 0 0 22px rgba(52,211,153,0)}}
+  .pulse-ok{animation:okPulse .85s var(--ease-out)}
+  @media(prefers-reduced-motion:reduce){.confetti{display:none}.pulse-ok{animation:none}}
+
+  /* ── 9. Levande stegindikator ── */
+  .steps-nav{position:relative}
+  .navprogress{position:absolute;left:5px;right:5px;bottom:-1px;height:2px;border-radius:2px;
+    background:rgba(255,255,255,.07);overflow:hidden}
+  .navprogress i{display:block;height:100%;width:0;border-radius:2px;
+    background:linear-gradient(90deg,var(--blue),var(--cyan));
+    transition:width .7s var(--ease-out);box-shadow:0 0 10px rgba(34,211,238,.55)}
+  .snav.active .num{position:relative}
+  .snav.active .num::after{content:'';position:absolute;inset:-4px;border-radius:9px;border:1.5px solid var(--c);
+    opacity:0;animation:navPing 1.9s var(--ease-out) infinite}
+  @keyframes navPing{0%{opacity:.7;transform:scale(.86)}70%{opacity:0;transform:scale(1.35)}100%{opacity:0}}
+  .snav.done .num{font-size:12px}
+  @media(prefers-reduced-motion:reduce){.snav.active .num::after{animation:none;opacity:0}}
+
+  /* ── 10. Typografisk rytm ── */
+  .step-intro{padding:20px 22px 18px}
+  .si-act{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--text-muted);display:block;margin-bottom:11px}
+  .si-title{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-.025em;line-height:1.05;
+    font-size:clamp(24px,4.4vw,38px);color:var(--text-primary);margin:0 0 12px;position:relative}
+  .si-body{max-width:66ch;font-size:14.5px;line-height:1.68}
+  @media(prefers-reduced-motion:no-preference){
+    .si-act{animation:siRise .5s var(--ease-spring) both}
+    .si-title{animation:siRise .55s var(--ease-spring) .05s both}
+    .si-body{animation:siRise .5s var(--ease-spring) .12s both}}
+
+  /* ── 11. Kontextberoende hjälp ── */
+  .nudge{margin-top:14px;display:flex;gap:11px;align-items:flex-start;border-radius:var(--radius-sm);
+    padding:12px 15px;border:1px solid rgba(96,165,250,.28);background:rgba(96,165,250,.06);
+    font-size:13.5px;line-height:1.55;color:var(--text-secondary);animation:ahaIn .5s var(--ease-spring) both}
+  .nudge b{color:var(--text-primary);font-weight:600}
+  .nudge .ni{flex:none;width:22px;height:22px;display:grid;place-items:center;border-radius:7px;
+    background:rgba(96,165,250,.16);color:var(--blue);font-size:12px}
+  .nudge .nx{margin-left:auto;flex:none;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:14px;line-height:1}
+
   @media(max-width:680px){
     .container{padding:0 14px 70px}
     .glass{padding:18px!important}
@@ -457,7 +612,7 @@
     <h2>Beslutsträd</h2>
     <p class="sub">Lär dig hur ett beslutsträd byggs — först för hand, sedan automatiskt av en dator — genom att avgöra vilka ormar som är giftiga.</p>
     <ul class="journey">
-      <li><span class="ji">1</span><span><strong>Studera datan</strong> – gruppera 20 dokumenterade ormar efter deras egenskaper och leta efter ett mönster som skiljer giftiga från ofarliga.</span></li>
+      <li><span class="ji">1</span><span><strong>Studera datan</strong> – gruppera 20 dokumenterade ormar efter deras egenskaper och undersök vilka grupper som blir rena.</span></li>
       <li><span class="ji">2</span><span><strong>Bygg ditt träd</strong> – välj själv vilka frågor trädet ska ställa och i vilken ordning.</span></li>
       <li><span class="ji">3</span><span><strong>Testa på ny data</strong> – pröva trädet på åtta ormar som hållits undan, för att se om det fungerar på mer än de exempel det byggdes på.</span></li>
       <li><span class="ji">4</span><span><strong>Jämför med datorn</strong> – se hur algoritmen väljer frågor med hjälp av entropi och informationsvinst, och varför fler frågor inte alltid ger en bättre modell.</span></li>
@@ -488,28 +643,46 @@
   <!-- STEG 1 — Studera datan -->
   <section class="panel" data-tab="0" role="tabpanel" id="panel-0" aria-labelledby="tab-0" tabindex="0">
     <div class="glass" style="padding:26px">
-      <div class="splitbadges">
-        <div class="sb train"><span class="pill2 train">Träningsdata</span><b>20 ormar</b><span class="sbnote">Underlaget du bygger modellen på.</span></div>
-        <div class="sb test"><span class="pill2 test">Testdata</span><b>8 ormar</b><span class="sbnote">Läggs undan och används först när modellen är färdig.</span></div>
+      <!-- Steg 1, scen 1: data först, verktyg senare -->
+      <div class="discover">
+        <span class="microlabel">Träningsdata</span>
+        <div class="dq">20 dokumenterade ormar med känt facit.</div>
+        <div class="dsub">Sju av dem är <b>giftiga</b>. Undersök vilken eller vilka egenskaper som skiljer grupperna åt.</div>
       </div>
 
-      <div class="groupbar" role="group" aria-label="Visningsläge">
-        <span class="gl">Visa som</span>
-        <button class="gbtn" data-view="cards" aria-pressed="true">Kort</button>
-        <button class="gbtn" data-view="table" aria-pressed="false">Tabell</button>
+      <!-- Scen 2: glider in när eleven behöver den -->
+      <div class="stage" id="stageGroup">
+        <div class="discover" style="margin-top:22px">
+          <span class="microlabel">Gruppering</span>
+          <div class="dq" style="font-size:clamp(18px,2.8vw,25px);max-width:26ch">Dela upp ormarna efter en egenskap i taget.</div>
+        </div>
+        <div class="groupbar asks" role="group" aria-label="Dela upp efter egenskap">
+          <button class="gbtn" data-group="none" aria-pressed="true">Ingen</button>
+          <button class="gbtn" data-group="head" aria-pressed="false">Huvudform</button>
+          <button class="gbtn" data-group="pupil" aria-pressed="false">Ögon</button>
+          <button class="gbtn" data-group="pattern" aria-pressed="false">Mönster</button>
+          <button class="gbtn" data-group="color" aria-pressed="false">Färg</button>
+          <button class="gbtn" data-group="tail" aria-pressed="false">Svans</button>
+        </div>
+        <div id="ahaZone"></div>
       </div>
-      <div class="groupbar" role="group" aria-label="Gruppera efter egenskap">
-        <span class="gl">Gruppera efter</span>
-        <button class="gbtn" data-group="none" aria-pressed="true">Ingen</button>
-        <button class="gbtn" data-group="head" aria-pressed="false">Huvudform</button>
-        <button class="gbtn" data-group="pupil" aria-pressed="false">Ögon</button>
-        <button class="gbtn" data-group="pattern" aria-pressed="false">Mönster</button>
-        <button class="gbtn" data-group="color" aria-pressed="false">Färg</button>
-        <button class="gbtn" data-group="tail" aria-pressed="false">Svans</button>
-      </div>
-      <div id="studyView" style="margin-top:6px"></div>
 
-      <div class="hypocard" id="hypoCard"></div>
+      <div id="studyView" style="margin-top:20px"></div>
+
+      <!-- Scen 3: verktyg och sammanhang, först när de gör nytta -->
+      <div class="stage" id="stageTools">
+        <div class="groupbar" role="group" aria-label="Visningsläge" style="margin-top:22px">
+          <span class="gl">Visa som</span>
+          <button class="gbtn" data-view="cards" aria-pressed="true">Kort</button>
+          <button class="gbtn" data-view="table" aria-pressed="false">Tabell</button>
+        </div>
+        <div class="splitbadges">
+          <div class="sb train"><span class="pill2 train">Träningsdata</span><b>20 ormar</b><span class="sbnote">Underlaget du bygger modellen på.</span></div>
+          <div class="sb test"><span class="pill2 test">Testdata</span><b>8 ormar</b><span class="sbnote">Läggs undan och används först när modellen är färdig.</span></div>
+        </div>
+        <div class="hypocard" id="hypoCard"></div>
+      </div>
+      <div id="studyNudge"></div>
     </div>
   </section>
 
@@ -544,6 +717,7 @@
       </div>
       <div class="racehead" id="raceHead" style="margin-top:14px">Tryck på "Nästa delning" för att låta algoritmen välja fråga i rotnoden.</div>
       <div class="race" id="mlRace"></div>
+      <div id="mlJars"></div>
       <div class="canvas-wrap" id="mlCanvas"></div>
       <div class="curvewrap glass">
         <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
@@ -579,6 +753,8 @@
     </ul>
   </div>
 </div>
+
+<div class="toastwrap" id="toastwrap" aria-live="polite"></div>
 
 <div class="modal conceptModal" id="conceptModal" role="dialog" aria-modal="true" aria-label="Begrepp"><div class="modal-inner"><div class="tiltcard" id="tiltcard"></div></div></div>
 
@@ -798,12 +974,12 @@ function renderTree(container,root,st){
       const isNew=st.prev&&!st.prev.has(c._pid);const onp=st.path&&st.path.has(c._pid)&&st.path.has(n._pid);
       edges+=`<path class="tedge${isNew?' enter':''}${onp?' onpath':''}" d="M${x1},${y1} C${x1},${my} ${x2},${my} ${x2},${y2}" pathLength="1"/>`;
       const lab=vname(n.attr,k),wch=lab.length*6.0+18;
-      edges+=`<g class="eLabel" transform="translate(${mx},${my})"><rect x="${-wch/2}" y="-10" width="${wch}" height="20" rx="10"/><text x="0" y="4" text-anchor="middle">${lab}</text></g>`;}}}
+      edges+=`<g class="eLabel${isNew?' enter':''}" transform="translate(${mx},${my})"><rect x="${-wch/2}" y="-10" width="${wch}" height="20" rx="10"/><text x="0" y="4" text-anchor="middle">${lab}</text></g>`;}}}
   for(const n of L.all){const gx=n._x+PAD,gy=n._y+PAD;const isNew=st.prev&&!st.prev.has(n._pid);
     const lab=n.type==='split'?ANAME[n.attr]:(n.type==='leaf'?((n.label||n.fallback)==='G'?'GIFTIG':'OFARLIG'):'obestämd');
     const clickable=!!st.onClick;const cid=rid+'c'+n._pid.replace(/[^a-z0-9]/gi,'');
     nodes+=`<g class="tnodeWrap" data-id="${n._pid}"${clickable?' tabindex="0" role="button" aria-label="Nod: '+lab+'"':''} transform="translate(${gx},${gy})">
-      <g class="tnode-inner" style="${isNew?'animation:nodeEnter .42s var(--ease-spring) both':''}">
+      <g class="tnode-inner${isNew?' grow':''}">
       <rect class="${nodeCls(n,st)}" x="0" y="0" width="${NW}" height="${NH}" rx="16" filter="url(#tsh)"/>
       <rect class="cardtop" x="1.5" y="1.5" width="${NW-3}" height="${NH-3}" rx="14.5"/>
       ${nodeInner(n,cid)}</g></g>`;}
@@ -814,6 +990,78 @@ function renderTree(container,root,st){
     el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();st.onClick(el.dataset.id);}};});
 }
 function nodeByPid(root,pid){const parts=pid.split('>');let n=root;for(let i=1;i<parts.length;i++)n=n.children[parts[i]];return n;}
+
+/* ================= mikroåterkoppling: toast, konfetti, puls ================= */
+const REDUCED=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function toastHost(){let h=document.getElementById('toastwrap');
+  if(!h){h=document.createElement('div');h.className='toastwrap';h.id='toastwrap';document.body.appendChild(h);}return h;}
+function toast(msg,cls,ms){
+  const h=toastHost(),t=document.createElement('div');
+  t.className='toast '+(cls||'');t.setAttribute('role','status');t.innerHTML=msg;h.appendChild(t);
+  setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),420);},ms||2400);
+  return t;
+}
+const CONF=['#34d399','#22d3ee','#a78bfa','#fbbf24','#60a5fa','#fb7185'];
+function confetti(x,y,n){
+  if(REDUCED)return;
+  const box=document.createElement('div');box.className='confetti';document.body.appendChild(box);
+  n=n||26;
+  for(let i=0;i<n;i++){
+    const p=document.createElement('i');
+    const ang=(-140+Math.random()*100)*Math.PI/180,sp=90+Math.random()*190;
+    p.style.left=x+'px';p.style.top=y+'px';
+    p.style.background=CONF[i%CONF.length];
+    p.style.setProperty('--dx',(Math.cos(ang)*sp).toFixed(0)+'px');
+    p.style.setProperty('--dy',(Math.sin(ang)*sp+240+Math.random()*140).toFixed(0)+'px');
+    p.style.setProperty('--rot',(Math.random()*900-450).toFixed(0)+'deg');
+    p.style.setProperty('--d',(Math.random()*180).toFixed(0)+'ms');
+    p.style.setProperty('--dur',(1200+Math.random()*700).toFixed(0)+'ms');
+    box.appendChild(p);
+  }
+  setTimeout(()=>box.remove(),2400);
+}
+function confettiFrom(el,n){if(!el)return;const r=el.getBoundingClientRect();confetti(r.left+r.width/2,r.top+r.height*0.45,n);}
+function pulseOk(el){if(!el||REDUCED)return;el.classList.remove('pulse-ok');void el.offsetWidth;el.classList.add('pulse-ok');}
+function reward(msg,el,n){toast('✓ '+msg,'good',2200);confettiFrom(el||document.querySelector('.panel.on'),n||26);}
+
+function celebrateTree(wrapId,text){
+  const wrap=document.getElementById(wrapId);if(!wrap)return;
+  const svg=wrap.querySelector('svg.tree');
+  if(svg&&!REDUCED){svg.classList.remove('finished');void svg.getBoundingClientRect();svg.classList.add('finished');}
+  const old=wrap.querySelector('.modeldone');if(old)old.remove();
+  const d=document.createElement('div');d.className='modeldone';d.innerHTML=`<span>${text}</span>`;
+  wrap.appendChild(d);setTimeout(()=>d.remove(),2300);
+  confettiFrom(wrap,44);
+}
+
+/* ================= kontextberoende hjälp (11) ================= */
+let idleTimer=null,nudgeShown={};
+function nudgeText(step){
+  if(step===0){
+    if(typeof studyGroup!=='undefined'&&studyGroup==='none')return 'Tips: prova att dela upp ormarna efter <b>en egenskap i taget</b>. Leta efter en grupp som bara innehåller en klass.';
+    if(typeof hypo!=='undefined'&&!hypo)return 'Tips: du har sett hur egenskaperna delar. Vilken tror du är <b>viktigast</b>? Svara längst ned — du får jämföra med algoritmen senare.';
+    return 'Tips: jämför två egenskaper. Vilken av dem lämnar <b>minst blandning</b> kvar i grupperna?';
+  }
+  if(step===1){
+    if(stuRoot&&stuRoot.type==='frontier')return 'Tips: klicka på den gula, streckade noden i trädet — då får du välja vilken fråga den ska ställa.';
+    if(countFrontier(stuRoot)>0)return 'Tips: det finns <b>obestämda grenar</b> kvar. Klicka på en av dem och välj antingen en ny fråga eller ett svar.';
+    return 'Tips: trädet är klart. Gå vidare till <b>steg 3</b> och pröva det på ormar det aldrig sett.';
+  }
+  if(step===2)return 'Tips: tryck <b>Kör genom mitt träd</b> och följ den upplysta vägen genom grenarna — eller kör alla åtta på en gång.';
+  return 'Tips: tryck <b>Nästa delning</b> för att se algoritmen väga egenskaperna mot varandra, en nod i taget.';
+}
+function showNudge(){
+  const step=curStep<0?0:curStep;
+  if(nudgeShown[step])return;
+  nudgeShown[step]=true;
+  const zone=step===0?document.getElementById('studyNudge'):null;
+  const html=`<span class="ni">💡</span><span>${nudgeText(step)}</span>`;
+  if(zone){zone.innerHTML=`<div class="nudge">${html}<button class="nx" aria-label="Stäng tips">✕</button></div>`;
+    zone.querySelector('.nx').onclick=()=>zone.innerHTML='';}
+  else{const t=toast(html,'hint',9000);t.style.maxWidth='min(440px,92vw)';t.style.textAlign='left';t.style.borderRadius='16px';}
+}
+function resetIdle(){clearTimeout(idleTimer);idleTimer=setTimeout(showNudge,90000);}
+['pointerdown','keydown','wheel'].forEach(ev=>document.addEventListener(ev,()=>{clearTimeout(idleTimer);idleTimer=setTimeout(showNudge,90000);},{passive:true}));
 
 /* ================= nav (pipeline-stegvisare) ================= */
 const STEPS=[
@@ -827,6 +1075,9 @@ let curStep=-1;
 STEPS.forEach((t,i)=>{const b=document.createElement('button');b.className='snav';b.id='tab-'+i;b.style.setProperty('--c',t.c);
   b.setAttribute('role','tab');b.setAttribute('aria-controls','panel-'+i);b.setAttribute('aria-selected','false');
   b.innerHTML=`<span class="num">${i+1}</span><span class="lbl">${t.title}</span>`;b.onclick=()=>go(i,true);nav.appendChild(b);});
+(function(){const p=document.createElement('div');p.className='navprogress';p.innerHTML='<i></i>';nav.appendChild(p);})();
+function updateNavProgress(i){const f=nav.querySelector('.navprogress i');if(!f)return;
+  f.style.width=(STEPS.length<2?100:(i/(STEPS.length-1))*100)+'%';}
 nav.addEventListener('keydown',e=>{
   if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
   const cur=curStep<0?0:curStep;
@@ -839,24 +1090,111 @@ function go(i,fromUser){
   if(fromUser)document.querySelector('.hero').classList.add('lean');
   document.getElementById('helpRow').style.display=i<2?'':'none';
   document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',+p.dataset.tab===i));
-  [...nav.children].forEach((b,k)=>{b.classList.toggle('active',k===i);b.classList.toggle('done',k<i);b.setAttribute('aria-selected',k===i?'true':'false');b.tabIndex=k===i?0:-1;});
+  [...nav.children].forEach((b,k)=>{b.classList.toggle('active',k===i);b.classList.toggle('done',k<i);b.setAttribute('aria-selected',k===i?'true':'false');b.tabIndex=k===i?0:-1;
+    const num=b.querySelector('.num');if(num)num.textContent=k<i?'✓':String(k+1);});
+  updateNavProgress(i);
   const st=STEPS[i],introEl=document.getElementById('stepIntro');
   introEl.style.display='';document.getElementById('stepFoot').style.display='';
   introEl.style.setProperty('--c',st.c);
-  introEl.innerHTML=`<span class="si-eyebrow">Steg ${i+1} — ${st.title}</span><div class="si-body">${st.intro}</div>`;
+  introEl.innerHTML=`<span class="si-act">Steg ${i+1} av ${STEPS.length}</span>
+    <h2 class="si-title">${st.title}</h2><div class="si-body">${st.intro}</div>`;
+  resetIdle();
   document.getElementById('prevStepBtn').toggleAttribute('hidden',i===0);
   document.getElementById('nextStepBtn').toggleAttribute('hidden',i===STEPS.length-1);
   if(i===0)renderStudy();else if(i===1)renderStudent();else if(i===2)youEnter();else if(i===3)compareEnter();
   window.scrollTo({top:0,behavior:'smooth'});}
 let studyView='cards',studyGroup='none',hypo=null;
+let studyStage=0,studyTimer=null,ahaSeen={};
+function setStage(n){
+  if(n<=studyStage)return;studyStage=n;
+  const open=id=>{const el=document.getElementById(id);if(!el||el.classList.contains('in'))return;
+    el.classList.add('in');
+    setTimeout(()=>{el.style.maxHeight='none';el.style.overflow='visible';},650);};
+  if(n>=1)open('stageGroup');
+  if(n>=2)open('stageTools');
+}
 function renderStudy(){
-  renderStudyControls();renderStudyView();renderHypo();
+  renderStudyControls();renderStudyView();renderHypo();renderAha();
+  if(studyStage===0&&!studyTimer)studyTimer=setTimeout(()=>setStage(1),6500);
 }
 function renderStudyControls(){
   document.querySelectorAll('#panel-0 [data-view]').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.view===studyView);
     b.onclick=()=>{if(studyView===b.dataset.view)return;studyView=b.dataset.view;renderStudyControls();renderStudyView();};});
   document.querySelectorAll('#panel-0 [data-group]').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.group===studyGroup);
-    b.onclick=()=>{if(studyGroup===b.dataset.group)return;studyGroup=b.dataset.group;renderStudyControls();renderStudyView();};});
+    b.onclick=()=>{if(studyGroup===b.dataset.group)return;studyGroup=b.dataset.group;
+      if(studyGroup!=='none')setStage(2);
+      renderStudyControls();renderStudyView();renderAha();};});
+}
+/* ── aha-ögonblick: kommenterar vad delningen faktiskt gjorde ── */
+function renderAha(){
+  const z=document.getElementById('ahaZone');if(!z)return;
+  if(studyGroup==='none'){z.innerHTML='';return;}
+  const attr=studyGroup,vals=VALS[attr].filter(v=>TRAIN.some(r=>r[attr]===v));
+  const groups=vals.map(v=>TRAIN.filter(r=>r[attr]===v));
+  const pureGroups=groups.filter(g=>{const c=counts(g);return c.g===0||c.o===0;});
+  const base=entropy(TRAIN),ratio=base>0?gain(TRAIN,attr)/base:0;
+  let cls='',head,text;
+  if(pureGroups.length===groups.length){
+    cls='';head='Ren delning.';
+    text=`Varje grupp blev <b>ren</b> — alla ormar i en grupp hör till samma klass. <b>${ANAME[attr]}</b> räcker alltså på egen hand för att avgöra saken.`;
+  } else if(pureGroups.length){
+    cls='';head='Delvis ren delning.';
+    text=`${pureGroups.length} av ${groups.length} grupper blev <b>helt rena</b> — där behövs ingen fler fråga. Resten är fortfarande blandad och kräver ytterligare en ledtråd.`;
+  } else if(ratio>=0.25){
+    cls='mixed';head='Viss förbättring.';
+    text=`Gruppen blev tydligt <b>renare</b> än innan, men ingen grupp är entydig. <b>${ANAME[attr]}</b> är en bra början — pröva att kombinera den med en annan egenskap i nästa steg.`;
+  } else {
+    cls='mixed';head='Ingen tydlig skillnad.';
+    text=`Giftiga och ofarliga är fortfarande <b>jämnt blandade</b> i varje grupp. <b>${ANAME[attr]}</b> säger nästan ingenting om huruvida en orm är giftig.`;
+  }
+  z.innerHTML=`<div class="aha ${cls}"><span class="ak">${head}</span><span class="at">${text}</span></div>`;
+  if(pureGroups.length&&!ahaSeen[attr]){ahaSeen[attr]=1;
+    setTimeout(()=>{const el=z.querySelector('.aha');reward(pureGroups.length===groups.length?'Perfekt delning!':'Ren grupp hittad!',el,pureGroups.length===groups.length?34:20);},260);}
+}
+/* ── levande ormkort: parallax + ljusreflex ── */
+(function(){
+  if(REDUCED)return;
+  const near=e=>e.target&&e.target.closest?e.target.closest('.scard'):null;
+  document.addEventListener('pointermove',e=>{
+    const c=near(e);if(!c)return;const r=c.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+    c.style.setProperty('--mx',(px*100).toFixed(1)+'%');
+    c.style.setProperty('--my',(py*100).toFixed(1)+'%');
+    c.style.setProperty('--px',px.toFixed(3));
+    c.style.setProperty('--py',py.toFixed(3));
+    c.style.setProperty('--ty',((px-.5)*7).toFixed(2)+'deg');
+    c.style.setProperty('--tx',((0.5-py)*7).toFixed(2)+'deg');
+  },{passive:true});
+  document.addEventListener('pointerout',e=>{
+    const c=near(e);if(!c||(e.relatedTarget&&c.contains(e.relatedTarget)))return;
+    c.style.setProperty('--tx','0deg');c.style.setProperty('--ty','0deg');
+  },{passive:true});
+  document.addEventListener('click',e=>{if(near(e)&&curStep===0)setStage(1);},{passive:true});
+})();
+/* ── 5. informationsvinst som något fysiskt: burkar med kulor ── */
+function jarSVG(rows,idx){
+  const c=counts(rows),n=rows.length,cols=5,cw=15.2,r=6;
+  let m='';
+  for(let i=0;i<n;i++){
+    const rr=Math.floor(i/cols),cc=i%cols,inRow=Math.min(cols,n-rr*cols);
+    const xs=(100-inRow*cw)/2+cw/2,x=xs+cc*cw,y=101-rr*13.4;
+    const fill=i<c.g?'#fb7185':'#34d399';
+    m+=`<g class="mb" style="--d:${idx*90+i*28}ms"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${fill}"/>`
+      +`<circle cx="${(x-2).toFixed(1)}" cy="${(y-2.2).toFixed(1)}" r="1.8" fill="rgba(255,255,255,.45)"/></g>`;
+  }
+  return `<svg viewBox="0 0 100 120" aria-hidden="true">
+    <rect class="jarlid" x="17" y="7" width="66" height="11" rx="4.5"/>
+    <path class="jarglass" d="M20,20 h60 a6,6 0 0 1 6,6 v80 a8,8 0 0 1 -8,8 h-56 a8,8 0 0 1 -8,-8 v-80 a6,6 0 0 1 6,-6 z"/>
+    ${m}<rect class="jarshine" x="28" y="32" width="5.5" height="52" rx="2.8"/></svg>`;
+}
+function jarsHTML(rows,attr,idOffset){
+  const vals=VALS[attr].filter(v=>rows.some(r=>r[attr]===v));
+  return `<div class="jars">`+vals.map((v,i)=>{
+    const sub=rows.filter(r=>r[attr]===v),c=counts(sub),pure=c.g===0||c.o===0;
+    return `<div class="jar${pure?' pure':''}">
+      <div class="jarname">${vname(attr,v)}${pure?' ✓':''}</div>
+      ${jarSVG(sub,(idOffset||0)+i)}
+      <div class="jarcount">▲ ${c.g} &nbsp;·&nbsp; ● ${c.o}${pure?' · ren':''}</div></div>`;}).join('')+`</div>`;
 }
 function purityBar(rows){const c=counts(rows),tot=Math.max(rows.length,1);const gp=c.g/tot*100;
   return `<div class="bar"><div class="pg" style="width:${gp}%"></div><div class="po" style="width:${100-gp}%"></div></div>`;}
@@ -867,11 +1205,11 @@ function groupHead(name,rows){const c=counts(rows),pure=c.g===0||c.o===0;
 function renderStudyView(){
   const host=document.getElementById('studyView');if(!host)return;
   if(studyView==='table'){host.innerHTML=studyTable();return;}
-  if(studyGroup==='none'){host.innerHTML=`<div class="grid specimens">${TRAIN.map((s,i)=>scard(s,i)).join('')}</div>`;return;}
+  if(studyGroup==='none'){host.innerHTML=`<div class="grid specimens regroup">${TRAIN.map((s,i)=>scard(s,i,i)).join('')}</div>`;return;}
   const attr=studyGroup,vals=VALS[attr].filter(v=>TRAIN.some(r=>r[attr]===v));
   host.innerHTML=vals.map(v=>{const rows=TRAIN.filter(r=>r[attr]===v);const c=counts(rows),pure=c.g===0||c.o===0;
     return `<div class="groupsec${pure?' pure':''}">${groupHead(vname(attr,v),rows)}
-      <div class="grid specimens">${rows.map(s=>scard(s,TRAIN.indexOf(s))).join('')}</div></div>`;}).join('');
+      <div class="grid specimens regroup">${rows.map((s,j)=>scard(s,TRAIN.indexOf(s),j)).join('')}</div></div>`;}).join('');
 }
 function studyTable(){
   const cols=['head','pupil','pattern','color','tail'];
@@ -906,11 +1244,12 @@ function renderHypoReveal(){
 
 /* ================= tab 0: study ================= */
 function labTag(l){return l==='G'?'<span class="tag g"><span class="sym">▲</span>Giftig</span>':l==='O'?'<span class="tag o"><span class="sym">●</span>Ofarlig</span>':'<span class="tag q">?</span>';}
-function scard(s,i){const cls=s.label==='G'?'g':s.label==='O'?'o':'';return `<div class="scard ${cls}"><span class="id">${String(i+1).padStart(2,'0')}</span>${snake(s)}<div class="lab">${labTag(s.label)}</div></div>`;}
+function scard(s,i,k){const cls=s.label==='G'?'g':s.label==='O'?'o':'';
+  return `<div class="scard ${cls}" style="--d:${(k||0)*24}ms"><span class="id">${String(i+1).padStart(2,'0')}</span>${snake(s)}<div class="lab">${labTag(s.label)}</div></div>`;}
 
 /* intro-overlay */
 (function(){const ov=document.getElementById('introOverlay');
-  const dismiss=()=>{ov.classList.remove('show');const f=nav.children[0];if(f)f.focus();};
+  const dismiss=()=>{ov.classList.remove('show');go(0,true);const f=nav.children[0];if(f)f.focus();};
   document.getElementById('introStart').onclick=dismiss;
   ov.addEventListener('click',e=>{if(e.target===ov)dismiss();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ov.classList.contains('show'))dismiss();});
@@ -923,15 +1262,15 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelect
 
 /* ================= tab 1: student build ================= */
 function fresh(rows){return{type:'frontier',rows,fallback:majority(rows)};}
-let stuRoot=fresh(TRAIN);let stuSel=null;let stuFeedback=null;
+let stuRoot=fresh(TRAIN);let stuSel=null;let stuFeedback=null;let stuCelebrated=false;
 function splitFeedback(rows,attr){
   const before=entropy(rows);const g=gain(rows,attr);const ratio=before>0?g/before:1;
   const groups=[...new Set(rows.map(r=>r[attr]))].map(v=>rows.filter(r=>r[attr]===v));
   const allPure=groups.every(gr=>{const c=counts(gr);return c.g===0||c.o===0;});
-  if(allPure)return{cls:'good',msg:'Perfekt delning. Varje gren blev ren och innehåller endast en klass, så inga fler frågor behövs här.'};
-  if(ratio>=0.55)return{cls:'good',msg:'Ett effektivt val. Delningen gör grupperna betydligt renare än de var före frågan.'};
-  if(ratio>=0.2)return{cls:'',msg:'Delningen ger viss förbättring, men flera grenar är fortfarande blandade och kräver ytterligare frågor.'};
-  return{cls:'warn',msg:'Delningen gjorde grupperna endast marginellt renare. Pröva en annan egenskap och jämför resultatet.'};
+  if(allPure)return{cls:'good',perfect:true,title:'Perfekt!',msg:'Perfekt delning. Varje gren blev ren och innehåller endast en klass, så inga fler frågor behövs här.'};
+  if(ratio>=0.55)return{cls:'good',title:'Starkt val!',msg:'Ett effektivt val. Delningen gör grupperna betydligt renare än de var före frågan.'};
+  if(ratio>=0.2)return{cls:'',title:'',msg:'Delningen ger viss förbättring, men flera grenar är fortfarande blandade och kräver ytterligare frågor.'};
+  return{cls:'warn',title:'',msg:'Delningen gjorde grupperna endast marginellt renare. Pröva en annan egenskap och jämför resultatet.'};
 }
 const stuSt={prev:null,sel:null,onClick:pid=>{stuSel=pid;renderStudent();}};
 function usedAttrs(pid){const parts=pid.split('>');let n=stuRoot,used=[];for(let i=1;i<parts.length;i++){used.push(n.attr);n=n.children[parts[i]];}return used;}
@@ -944,8 +1283,9 @@ function renderStuStatus(){
     s+=`<span class="pillstat">Välj en egenskap nedan för att göra den första delningen.</span>`;
   } else {
     const acc=accuracy(stuRoot,TRAIN);
-    if(fr===0)s+=`<span class="pillstat done">✓ Trädet är klart</span>`;
-    else s+=`<span class="pillstat warn">${fr} obestämd${fr>1?'a':''} gren${fr>1?'ar':''} kvar</span>`;
+    if(fr===0){s+=`<span class="pillstat done">✓ Trädet är klart</span>`;
+      if(!stuCelebrated){stuCelebrated=true;setTimeout(()=>celebrateTree('stuCanvas','Modell färdig'),300);}}
+    else {stuCelebrated=false;s+=`<span class="pillstat warn">${fr} obestämd${fr>1?'a':''} gren${fr>1?'ar':''} kvar</span>`;}
     s+=`<span class="acc">Träffsäkerhet på träningsdatan hittills: <b>${pct(acc)}</b></span>`;
   }
   el.innerHTML=s;
@@ -981,15 +1321,17 @@ function renderStuCtrl(){
   el.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{
     const node=nodeByPid(stuRoot,stuSel);const a=b.dataset.a;
     if(a==='split'){const attr=b.dataset.attr;stuFeedback=splitFeedback(node.rows,attr);node.type='split';node.attr=attr;node.children={};
-      for(const v of[...new Set(node.rows.map(r=>r[attr]))])node.children[v]=fresh(node.rows.filter(r=>r[attr]===v));stuSel=null;renderStudent();}
+      for(const v of[...new Set(node.rows.map(r=>r[attr]))])node.children[v]=fresh(node.rows.filter(r=>r[attr]===v));stuSel=null;renderStudent();
+      if(stuFeedback.cls==='good'){toast('✓ '+stuFeedback.title,'good',1900);if(stuFeedback.perfect)confettiFrom(document.getElementById('stuCanvas'),22);}}
     else if(a==='leafG'){node.type='leaf';node.label='G';delete node.children;delete node.attr;stuSel=null;renderStudent();}
     else if(a==='leafO'){node.type='leaf';node.label='O';delete node.children;delete node.attr;stuSel=null;renderStudent();}
     else if(a==='reset'){stuFeedback=null;node.type='frontier';delete node.children;delete node.attr;delete node.label;renderStudent();}
     else if(a==='hint'){const avail=ATTRS.filter(x=>!usedAttrs(stuSel).includes(x));
-      document.getElementById('stuHint').innerHTML=`<div class="lbl" style="margin-top:12px">Så här delar varje egenskap upp ormarna i den valda noden — leta efter grupper som blir <b>rena</b>, det vill säga innehåller endast en klass:</div>`+avail.map(a=>`<div style="margin-top:10px"><div style="font-size:12.5px;font-weight:600;color:var(--text-primary);margin-bottom:2px">${ANAME[a]}</div>${rawCounts(node.rows,a)}</div>`).join('');}
+      document.getElementById('stuHint').innerHTML=`<div class="jarlead" style="margin-top:14px">Häll ormarna i burkar, en egenskap i taget. <b style="color:var(--rose)">Röda kulor</b> är giftiga, <b style="color:var(--emerald)">gröna</b> ofarliga. Den bästa frågan är den som ger burkar med <b>en enda färg</b>.</div>`
+        +avail.map((a,k)=>`<div style="margin-top:16px"><div style="font-size:12.5px;font-weight:600;color:var(--text-primary);margin-bottom:2px">${ANAME[a]}</div>${jarsHTML(node.rows,a,k*3)}</div>`).join('');}
   });
 }
-document.getElementById('resetTree').onclick=()=>{stuRoot=fresh(TRAIN);stuSel=null;stuSt.prev=null;renderStudent();};
+document.getElementById('resetTree').onclick=()=>{stuRoot=fresh(TRAIN);stuSel=null;stuSt.prev=null;stuFeedback=null;stuCelebrated=false;renderStudent();};
 
 /* ================= tab 2: ML thinks ================= */
 let mlRoot=null,mlQueue=[],mlPlaying=false,mlDone=false;
@@ -997,7 +1339,7 @@ const mlSt={prev:null,sel:null,cur:null};
 function frontierB(rows,attrs,depth){return{type:'frontier',rows,fallback:majority(rows),avail:attrs,depth};}
 function mlEnsure(){if(!mlRoot)mlResetFn();else{renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);renderCurve();}renderHypoReveal();}
 function mlResetFn(){mlPlaying=false;mlDone=false;mlRoot=frontierB(TRAIN,ATTRS,0);mlQueue=[mlRoot];mlSt.prev=null;mlSt.cur=null;
-  document.getElementById('mlRace').innerHTML='';document.getElementById('raceHead').textContent='Tryck på "Nästa delning" för att låta algoritmen välja fråga i rotnoden.';
+  document.getElementById('mlRace').innerHTML='';document.getElementById('mlJars').innerHTML='';document.getElementById('raceHead').textContent='Tryck på "Nästa delning" för att låta algoritmen välja fråga i rotnoden.';
   document.getElementById('mlPlay').textContent='▶ Träna';document.getElementById('mlNext').disabled=false;
   renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);updateMLStats();renderCurve();renderHypoReveal();if(typeof renderCompare==='function')renderCompare();}
 function updateMLStats(){document.getElementById('mlTrainAcc').textContent=pct(accuracy(mlRoot,TRAIN));document.getElementById('mlTestAcc').textContent=pct(accuracy(mlRoot,TEST));}
@@ -1010,15 +1352,17 @@ function raceBars(rows,avail){
 }
 function animateBars(container){container.querySelectorAll('.fill').forEach(f=>{requestAnimationFrame(()=>{f.style.width=f.dataset.w+'%';});});}
 async function mlStep(){
-  if(!mlQueue.length){mlDone=true;document.getElementById('raceHead').innerHTML='Trädet är färdigbyggt. Nedan jämförs det med ditt eget träd, orm för orm.';document.getElementById('mlNext').disabled=true;mlPlaying=false;document.getElementById('mlPlay').textContent='▶ Träna';renderCompare();return false;}
+  if(!mlQueue.length){mlDone=true;document.getElementById('mlJars').innerHTML='';celebrateTree('mlCanvas','Datorns modell färdig');document.getElementById('raceHead').innerHTML='Trädet är färdigbyggt. Nedan jämförs det med ditt eget träd, orm för orm.';document.getElementById('mlNext').disabled=true;mlPlaying=false;document.getElementById('mlPlay').textContent='▶ Träna';renderCompare();return false;}
   const node=mlQueue.shift();mlSt.cur=node._pid;renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);
   const avail=node.avail;const pure=entropy(node.rows)===0;
   document.getElementById('raceHead').innerHTML=`Nod med ${node.rows.length} ormar — samtliga egenskaper prövas…`;
-  if(pure||!avail.length){document.getElementById('mlRace').innerHTML='';document.getElementById('raceHead').innerHTML=`Noden är redan ren och blir ett löv: ${labTag(node.fallback)}`;
+  if(pure||!avail.length){document.getElementById('mlRace').innerHTML='';document.getElementById('mlJars').innerHTML='';document.getElementById('raceHead').innerHTML=`Noden är redan ren och blir ett löv: ${labTag(node.fallback)}`;
     node.type='leaf';node.label=node.fallback;mlSt.cur=null;await sleep(500);renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);updateMLStats();return true;}
   const race=document.getElementById('mlRace');race.innerHTML=raceBars(node.rows,avail);await sleep(60);animateBars(race);await sleep(850);
   let best=null,bg=1e-9;for(const a of avail){const g=gain(node.rows,a);if(g>bg){bg=g;best=a;}}
-  document.getElementById('raceHead').innerHTML=`<b>${ANAME[best]}</b> ger störst informationsvinst. Noden delas på den egenskapen.`;await sleep(650);
+  document.getElementById('raceHead').innerHTML=`<b>${ANAME[best]}</b> ger störst informationsvinst. Noden delas på den egenskapen.`;
+  document.getElementById('mlJars').innerHTML=`<div class="jarlead">De ${node.rows.length} ormarna hälls i burkar efter <b>${ANAME[best]}</b> — <span style="color:var(--rose)">röd</span> = giftig, <span style="color:var(--emerald)">grön</span> = ofarlig:</div>`+jarsHTML(node.rows,best);
+  await sleep(1150);
   if(!best){node.type='leaf';node.label=node.fallback;}
   else{node.type='split';node.attr=best;node.children={};
     for(const v of[...new Set(node.rows.map(r=>r[best]))])node.children[v]=frontierB(node.rows.filter(r=>r[best]===v),avail.filter(x=>x!==best),node.depth+1);
@@ -1084,6 +1428,7 @@ function renderYouScene(){
   if(youIdx>=TEST.length){
     youRunAll=false;
     const sy=youScore.filter(Boolean).length;
+    if(sy===TEST.length)setTimeout(()=>{reward('Alla åtta rätt!',document.getElementById('youScene'),50);},260);
     scene.innerHTML=`<div class="alert" style="color:var(--emerald)">Klart — du körde alla åtta osedda</div>
       <div class="verdict" style="color:var(--text-primary)">På <b>osedd testdata</b> fångade ditt träd <b>${sy}/8</b> rätt.</div>
       <div class="q">Det här visar hur trädet faktiskt presterar — de här ormarna hade det aldrig sett tidigare. Se härnäst hur en dator bygger sitt eget träd på samma träningsdata, och testar det på samma åtta.</div>
@@ -1094,9 +1439,10 @@ function renderYouScene(){
   const s=TEST[youIdx];youRan=false;youRev=false;youSt.path=null;
   const controls=renderYouControls();
   scene.innerHTML=`${controls}<div class="alert">🔍 Osedd orm ${youIdx+1} av ${TEST.length}</div>
-      <div class="big">${snake(s)}</div>
+      <div class="big arrive">${snake(s)}</div>
       <div class="q">Den här ormen har trädet <b>aldrig sett</b>. Vad säger <b>ditt</b> träd — giftig eller ofarlig?</div>
       ${youRunAll?'':'<button class="btn primary" id="runYouBtn">▶ Kör genom mitt träd</button>'}
+      <div class="tracelabel" id="yTrace"></div>
       <div class="verdict" id="yVerdict"></div>
       <div class="reveal-row" id="yReveal"></div>`;
   renderTree(document.getElementById('youCanvas'),stuRoot,youSt);
@@ -1106,11 +1452,22 @@ function renderYouScene(){
 }
 async function runYouAuto(s){
   if(youRan)return;youRan=true;const rb0=document.getElementById('runYouBtn');if(rb0)rb0.disabled=true;
-  const ids=[...pathOf(stuRoot,s)];youSt.path=new Set();
-  for(const pid of ids){youSt.path.add(pid);renderTree(document.getElementById('youCanvas'),stuRoot,youSt);await sleep(speedMs(480));}
+  const canvas=document.getElementById('youCanvas'),trace=document.getElementById('yTrace');
+  /* grenarna lyser upp en efter en, med frågan som ställs utskriven */
+  youSt.path=new Set(['r']);renderTree(canvas,stuRoot,youSt);await sleep(speedMs(420));
+  let n=stuRoot,pid='r';
+  while(n&&n.type==='split'){
+    const val=s[n.attr];
+    if(trace)trace.textContent=`${ANAME[n.attr]}?  →  ${vname(n.attr,val)}`;
+    await sleep(speedMs(460));
+    if(!n.children[val])break;
+    pid+='>'+val;n=n.children[val];youSt.path.add(pid);
+    renderTree(canvas,stuRoot,youSt);await sleep(speedMs(360));
+  }
   const v=predict(stuRoot,s);
+  if(trace)trace.textContent='Vägen är följd hela vägen ned.';
   const el=document.getElementById('yVerdict');
-  if(el){el.className='verdict '+(v==='G'?'g':'o');el.textContent='Ditt träd säger: '+(v==='G'?'GIFTIG':'OFARLIG');}
+  if(el){el.className='verdict stamp '+(v==='G'?'g':'o');el.textContent='Ditt träd säger: '+(v==='G'?'GIFTIG':'OFARLIG');}
   if(youRunAll){await sleep(speedMs(500));revealYou(s,v);}
   else{
     const rev=document.getElementById('yReveal');
@@ -1119,6 +1476,7 @@ async function runYouAuto(s){
 }
 function revealYou(s,v){
   if(youRev)return;youRev=true;youScore[youIdx]=v===s.label;
+  if(v===s.label){const b=document.querySelector('#youScene .big');pulseOk(b);}
   const rev=document.getElementById('yReveal');
   if(rev)rev.innerHTML=`<span class="vs">Facit: ${labTag(s.label)}</span>
     <span class="vs">Du: ${v===s.label?'<span class="dot ok">✓</span>':'<span class="dot no">✕</span>'}</span>
