@@ -178,16 +178,16 @@
   .tcard.frontier{stroke-dasharray:6 4;stroke:var(--amber);fill:rgba(251,191,36,.06)}
   .tcard.leaf-g{stroke:var(--rose);fill:rgba(251,113,133,.13)}
   .tcard.leaf-o{stroke:var(--emerald);fill:rgba(52,211,153,.13)}
-  .teye{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;fill:var(--text-muted)}
-  .tsplit{font-family:'Syne',sans-serif;font-weight:800;font-size:15.5px;fill:var(--text-primary)}
-  .tverdict{font-family:'Syne',sans-serif;font-weight:800;font-size:14.5px;letter-spacing:.01em}
+  .teye{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.2em;fill:var(--text-muted)}
+  .tsplit{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.015em;fill:var(--text-primary)}
+  .tverdict{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;letter-spacing:0}
   .tverdict.vg{fill:#fda4b0}.tverdict.vo{fill:#6ee7b0}
-  .tfront{font-family:'Syne',sans-serif;font-weight:800;font-size:14.5px;fill:var(--amber)}
+  .tfront{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;fill:var(--amber)}
   .tcount{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700}
   .tedge{fill:none;stroke:url(#edgeg);stroke-width:2.2}
   .tedge.onpath{stroke:var(--cyan);stroke-width:2.8}
-  .eLabel rect{fill:#0e1321;stroke:rgba(255,255,255,.12)}
-  .eLabel text{font-family:'JetBrains Mono',monospace;font-size:10px;fill:var(--text-secondary)}
+  .eLabel rect{fill:#161f36;stroke:rgba(255,255,255,.28)}
+  .eLabel text{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;fill:var(--text-primary)}
   @keyframes nodeEnter{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
   @keyframes edgeDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
   .tedge.enter{stroke-dasharray:1;animation:edgeDraw .5s var(--ease-out) both}
@@ -195,8 +195,6 @@
 
   /* node control panel */
   .ctrl{margin-top:14px;padding:16px 18px;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);background:rgba(255,255,255,.02)}
-  .ctrl .who{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--text-secondary);margin-bottom:12px}
-  .ctrl .who b{color:var(--text-primary)}
   .ctrl .lbl{font-size:12px;color:var(--text-muted);margin:10px 0 7px}
   .attrchips{display:flex;flex-wrap:wrap;gap:8px}
   .achip{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;padding:8px 13px;border-radius:100px;border:1px solid var(--border-subtle);background:rgba(255,255,255,.04);color:var(--text-primary);cursor:pointer;transition:.24s var(--ease-spring)}
@@ -234,6 +232,7 @@
   .controlbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0 0}
   .count{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-muted)}
 
+  .statusline:empty{display:none}
   .statusline{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-secondary)}
   .statusline .pillstat{padding:4px 11px;border-radius:100px;border:1px solid var(--border-subtle);background:rgba(255,255,255,.03)}
   .statusline .pillstat.done{color:var(--emerald);border-color:rgba(52,211,153,.35);background:var(--emerald-bg)}
@@ -267,6 +266,62 @@
   .reveal-row{display:flex;justify-content:center;gap:16px;align-items:center;flex-wrap:wrap;margin-top:8px}
   .vs{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-secondary)}
   .tally{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+  .errbox{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:14px 0 0}
+  .errbox .eb{flex:1;min-width:190px;max-width:280px;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:12px 15px;background:rgba(255,255,255,.02)}
+  .errbox .eb.miss{border-color:rgba(251,113,133,.32);background:var(--rose-bg)}
+  .errbox .eb.fa{border-color:rgba(251,191,36,.28);background:rgba(251,191,36,.05)}
+  .errbox .ebk{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);margin-bottom:5px}
+  .errbox .eb.miss .ebk{color:var(--rose)}.errbox .eb.fa .ebk{color:var(--amber)}
+  .errbox .ebv{font-family:'Syne',sans-serif;font-weight:800;font-size:24px;color:var(--text-primary);line-height:1.1}
+  .errbox .ebn{font-size:12px;color:var(--text-secondary);line-height:1.5;margin-top:4px}
+  .metricline{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:12px;font-size:13.5px;color:var(--text-secondary)}
+  .metricline b{color:var(--text-primary);font-family:'Space Grotesk',sans-serif}
+  .prunebox{margin-top:14px;padding:15px 18px;border:1px solid rgba(167,139,250,.3);border-radius:var(--radius-sm);background:linear-gradient(165deg,rgba(167,139,250,.08),rgba(96,165,250,.04));font-size:14px;line-height:1.6;color:var(--text-secondary)}
+  .prunebox b{color:var(--text-primary)}
+  .prunebox .ph{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:var(--violet);margin-bottom:5px}
+  .prunedelta{display:flex;gap:20px;flex-wrap:wrap;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:12.5px}
+  .prunedelta .pd{color:var(--text-muted)}
+  .prunedelta .pd b{font-family:'Syne',sans-serif;font-size:15px}
+  .prunedelta .up{color:var(--emerald)}.prunedelta .dn{color:var(--rose)}
+  .prunefoot{margin-top:14px;padding-top:12px;border-top:1px solid rgba(167,139,250,.18)}
+
+  /* ── steg 5: slutsatser ── */
+  .recap{border:1px solid var(--border-subtle);border-radius:var(--radius-sm);background:linear-gradient(165deg,rgba(96,165,250,.07),rgba(34,211,238,.03));padding:18px 20px;margin-top:4px}
+  .recap .rcp-h{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;color:var(--text-primary);margin-bottom:12px}
+  .recap .rr{display:flex;gap:14px;align-items:baseline;padding:9px 0;border-top:1px solid rgba(255,255,255,.05);font-size:14px;line-height:1.55}
+  .recap .rr:first-of-type{border-top:none}
+  .recap .rk{flex:none;width:150px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
+  .recap .rv{color:var(--text-secondary)}
+  .recap .rv b{color:var(--text-primary);font-weight:600}
+  @media(max-width:600px){.recap .rr{flex-direction:column;gap:2px}.recap .rk{width:auto}}
+
+  .sumq{border:1px solid var(--border-subtle);border-radius:var(--radius-sm);background:rgba(255,255,255,.02);padding:18px 20px;margin-top:14px}
+  .sumq .qn{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
+  .sumq .qt{font-size:15px;line-height:1.6;color:var(--text-primary);margin-bottom:14px;max-width:70ch}
+  .sumq .qt b{font-weight:600}
+  .sumopts{display:flex;flex-direction:column;gap:8px}
+  .sumopt{text-align:left;font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.5;color:var(--text-secondary);border:1px solid var(--border-subtle);background:rgba(255,255,255,.03);padding:11px 15px;border-radius:12px;cursor:pointer;transition:.22s var(--ease-spring);display:flex;gap:10px;align-items:flex-start}
+  .sumopt:hover:not(:disabled){border-color:var(--border-hover);color:var(--text-primary);transform:translateX(2px)}
+  .sumopt:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+  .sumopt .om{flex:none;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted)}
+  .sumopt.chosen{color:var(--text-primary);border-color:var(--border-hover);background:rgba(255,255,255,.06)}
+  .sumopt.ok{border-color:rgba(52,211,153,.45);background:var(--emerald-bg)}
+  .sumopt.ok .om{color:var(--emerald)}
+  .sumopt.no{border-color:rgba(251,113,133,.4);background:var(--rose-bg)}
+  .sumopt.no .om{color:var(--rose)}
+  .sumopt.open{border-color:rgba(167,139,250,.4);background:var(--violet-bg)}
+  .sumopt:disabled{cursor:default}
+  .facitbtn{margin-top:12px;font-family:'Space Grotesk',sans-serif;font-size:12.5px;font-weight:600;color:var(--violet);background:var(--violet-bg);border:1px solid rgba(167,139,250,.3);padding:6px 13px;border-radius:100px;cursor:pointer;transition:.22s}
+  .facitbtn:hover{background:rgba(167,139,250,.18)}
+  .facitbtn:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+  .facit{margin-top:12px;padding:14px 16px;border-radius:12px;border-left:3px solid var(--violet);background:rgba(167,139,250,.07);font-size:14px;line-height:1.62;color:var(--text-secondary)}
+  .facit b{color:var(--text-primary)}
+  .facit .fh{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--violet);margin-bottom:6px}
+  @keyframes facitIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+  .facit{animation:facitIn .3s var(--ease-out) both}
+
+  .lexhead{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-muted);margin:26px 0 10px}
+  .lexrow{display:flex;flex-wrap:wrap;gap:8px}
   .tally .row{display:flex;align-items:center;gap:8px}
   .tally .who{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);width:38px;text-align:right}
   .dot{width:15px;height:15px;border-radius:50%;background:rgba(255,255,255,.08);display:inline-flex;align-items:center;justify-content:center;font-size:10px}
@@ -614,7 +669,7 @@
     <ul class="journey">
       <li><span class="ji">1</span><span><strong>Studera datan</strong> – gruppera 20 dokumenterade ormar efter deras egenskaper och undersök vilka grupper som blir rena.</span></li>
       <li><span class="ji">2</span><span><strong>Bygg ditt träd</strong> – välj själv vilka frågor trädet ska ställa och i vilken ordning.</span></li>
-      <li><span class="ji">3</span><span><strong>Testa på ny data</strong> – pröva trädet på åtta ormar som hållits undan, för att se om det fungerar på mer än de exempel det byggdes på.</span></li>
+      <li><span class="ji">3</span><span><strong>Testa på ny data</strong> – pröva trädet på de ormar som hållits undan, för att se om det fungerar på mer än de exempel det byggdes på.</span></li>
       <li><span class="ji">4</span><span><strong>Jämför med datorn</strong> – se hur algoritmen väljer frågor med hjälp av entropi och informationsvinst, och varför fler frågor inte alltid ger en bättre modell.</span></li>
     </ul>
     <button class="overlay-btn" id="introStart">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -627,7 +682,6 @@
     <h1 class="title">Beslutsträd</h1>
     <div class="heroIntro" id="heroIntro">
       <p class="focus">Bygg en modell som avgör om en orm är giftig.</p>
-      <p>Ett beslutsträd klassificerar genom att ställa en fråga i taget. I den här övningen bygger du först ett träd för hand utifrån 20 dokumenterade ormar, testar det på ormar det aldrig sett, och jämför sedan med hur en dator bygger samma sorts träd.</p>
     </div>
   </header>
 
@@ -647,19 +701,17 @@
       <div class="discover">
         <span class="microlabel">Träningsdata</span>
         <div class="dq">20 dokumenterade ormar med känt facit.</div>
-        <div class="dsub">Sju av dem är <b>giftiga</b>. Undersök vilken eller vilka egenskaper som skiljer grupperna åt.</div>
       </div>
 
       <!-- Scen 2: glider in när eleven behöver den -->
       <div class="stage" id="stageGroup">
         <div class="discover" style="margin-top:22px">
-          <span class="microlabel">Gruppering</span>
-          <div class="dq" style="font-size:clamp(18px,2.8vw,25px);max-width:26ch">Dela upp ormarna efter en egenskap i taget.</div>
+          <span class="microlabel">Dela upp efter en egenskap</span>
         </div>
         <div class="groupbar asks" role="group" aria-label="Dela upp efter egenskap">
           <button class="gbtn" data-group="none" aria-pressed="true">Ingen</button>
           <button class="gbtn" data-group="head" aria-pressed="false">Huvudform</button>
-          <button class="gbtn" data-group="pupil" aria-pressed="false">Ögon</button>
+          <button class="gbtn" data-group="pupil" aria-pressed="false">Öga</button>
           <button class="gbtn" data-group="pattern" aria-pressed="false">Mönster</button>
           <button class="gbtn" data-group="color" aria-pressed="false">Färg</button>
           <button class="gbtn" data-group="tail" aria-pressed="false">Svans</button>
@@ -678,7 +730,7 @@
         </div>
         <div class="splitbadges">
           <div class="sb train"><span class="pill2 train">Träningsdata</span><b>20 ormar</b><span class="sbnote">Underlaget du bygger modellen på.</span></div>
-          <div class="sb test"><span class="pill2 test">Testdata</span><b>8 ormar</b><span class="sbnote">Läggs undan och används först när modellen är färdig.</span></div>
+          <div class="sb test"><span class="pill2 test">Testdata</span><b>12 ormar</b><span class="sbnote">Läggs undan och används först när modellen är färdig.</span></div>
         </div>
         <div class="hypocard" id="hypoCard"></div>
       </div>
@@ -721,7 +773,7 @@
       <div class="canvas-wrap" id="mlCanvas"></div>
       <div class="curvewrap glass">
         <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-          <div class="cap" style="margin:0">Träffsäkerhet medan trädet växer</div>
+          <div class="cap" style="margin:0">Träffsäkerhet (accuracy) medan trädet växer</div>
           <div class="livenums">
             <div><div class="k">Träning</div><div class="v good" id="mlTrainAcc">—</div></div>
             <div><div class="k">Test</div><div class="v bad" id="mlTestAcc">—</div></div>
@@ -730,7 +782,19 @@
         <div id="curve" style="margin-top:8px"></div>
         <div class="legendline"><span><i style="background:var(--emerald)"></i>träning</span><span><i style="background:var(--amber)"></i>test (ny data)</span><span style="color:var(--text-muted)">○ = trädets nuvarande djup</span></div>
       </div>
+      <div id="pruneBox"></div>
       <div id="cmpZone" style="margin-top:16px"></div>
+    </div>
+  </section>
+
+  <!-- STEG 5 — Slutsatser -->
+  <section class="panel" data-tab="4" role="tabpanel" id="panel-4" aria-labelledby="tab-4" tabindex="0">
+    <div class="glass" style="padding:26px">
+      <div id="sumRecap"></div>
+      <div id="sumQuiz"></div>
+      <div id="sumCards"></div>
+      <div class="lexhead">Begreppen i övningen</div>
+      <div class="lexrow" id="sumLex"></div>
     </div>
   </section>
 
@@ -745,7 +809,7 @@
     <h3>Ledtrådar</h3>
     <div class="sub">Inga färdiga svar, utan frågor att pröva mot datan medan du arbetar.</div>
     <ul class="qlist">
-      <li>Sortera efter <b>Huvudform</b>. Var hamnar de giftiga? Räcker det med bara huvudformen?</li>
+      <li>Sortera efter en egenskap i taget. Blir någon grupp <b>helt ren</b> — och räcker den egenskapen då på egen hand?</li>
       <li>Finns en egenskap där giftiga och ofarliga hamnar <b>jämnt blandade</b>, oavsett hur du sorterar? Då är den inte användbar.</li>
       <li>Räcker det med <b>en</b> egenskap, eller behöver du kombinera två för att inte göra fel?</li>
       <li>Hittar du en giftig och en ofarlig orm som ser nästan <b>likadana</b> ut? Vad är den enda skillnaden mellan dem?</li>
@@ -778,19 +842,17 @@ function snakePattern(p,c){
   if(p==='spots')return [[36,66],[50,62],[64,66],[30,80],[50,78],[70,80],[42,90],[58,90]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="4.5" fill="${c.dk}" opacity=".88"/>`).join('');
   return '';
 }
-/* tapered-ribbon helper: builds a smooth path that's wide near the body and
-   narrows (or stays thick) toward the tip, so tail shapes are unmistakably different */
 function bez(P0,P1,P2,P3,t){const m=1-t;
   return[m*m*m*P0[0]+3*m*m*t*P1[0]+3*m*t*t*P2[0]+t*t*t*P3[0], m*m*m*P0[1]+3*m*m*t*P1[1]+3*m*t*t*P2[1]+t*t*t*P3[1]];}
 function bezTan(P0,P1,P2,P3,t){const m=1-t;
   const dx=3*m*m*(P1[0]-P0[0])+6*m*t*(P2[0]-P1[0])+3*t*t*(P3[0]-P2[0]);
   const dy=3*m*m*(P1[1]-P0[1])+6*m*t*(P2[1]-P1[1])+3*t*t*(P3[1]-P2[1]);
   const n=Math.hypot(dx,dy)||1;return[dx/n,dy/n];}
-function ribbonWidth(t,w0,wmid,w1,midt){midt=midt||0.35;
+function ribbonWidth(t,w0,wmid,w1,midt){midt=midt||0.30;
   if(t<=midt)return w0+(wmid-w0)*(midt>0?t/midt:1);
-  let u=Math.pow((t-midt)/(1-midt),1.4);return wmid+(w1-wmid)*u;}
+  let u=Math.pow((t-midt)/(1-midt),1.5);return wmid+(w1-wmid)*u;}
 function ribbonPath(P0,P1,P2,P3,w0,wmid,w1,n,roundTip,tipR){
-  n=n||28;const left=[],right=[];
+  n=n||34;const left=[],right=[];
   for(let i=0;i<=n;i++){const t=i/n,p=bez(P0,P1,P2,P3,t),tn=bezTan(P0,P1,P2,P3,t);
     const nx=-tn[1],ny=tn[0],w=ribbonWidth(t,w0,wmid,w1)/2;
     left.push([p[0]+nx*w,p[1]+ny*w]);right.push([p[0]-nx*w,p[1]-ny*w]);}
@@ -801,51 +863,79 @@ function ribbonPath(P0,P1,P2,P3,w0,wmid,w1,n,roundTip,tipR){
   d+=' '+right.slice().reverse().map(p=>`L${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ')+' Z';
   return d;
 }
-function snakeTail(t,c,sw){
-  const P0=[52,68];
-  if(t==='point'){ // thin, long, tapers to a fine point
-    const P1=[80,90],P2=[98,112],P3=[76,138];
-    return `<path d="${ribbonPath(P0,P1,P2,P3,14,21,1.2,32,false,0)}" fill="${c.mid}" stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round" stroke-linecap="round"/>`;
+/* Kroppen fortsätter bakom huvudet, svänger ut åt höger och rullar ihop sig nedåt vänster.
+   Bred vid huvudet (≈32) så att den läses som kropp, inte som en påklistrad stjärt. */
+function tailGeom(t){
+  const P0=[50,72];
+  if(t==='point')  return {P:[P0,[99,86],[93,143],[40,146]], w:[32,26,1.6],  round:false, tipR:0};
+  if(t==='blunt')  return {P:[P0,[95,86],[88,133],[47,137]], w:[32,26,17],   round:true,  tipR:9};
+  return              {P:[P0,[97,86],[88,130],[54,138]], w:[32,26,10],   round:false, tipR:0};
+}
+/* mönstret följer med ut på kroppen så att djuret läses som ett stycke */
+function bodyPattern(G,p,c){
+  if(p==='solid')return '';
+  const [P0,P1,P2,P3]=G.P,[w0,wm,w1]=G.w;let m='';
+  if(p==='stripes'){
+    for(let i=1;i<=7;i++){const t=0.10+i*0.115;if(t>0.95)break;
+      const q=bez(P0,P1,P2,P3,t),tn=bezTan(P0,P1,P2,P3,t),nx=-tn[1],ny=tn[0];
+      const hw=ribbonWidth(t,w0,wm,w1)/2+2;
+      m+=`<line x1="${(q[0]+nx*hw).toFixed(1)}" y1="${(q[1]+ny*hw).toFixed(1)}" x2="${(q[0]-nx*hw).toFixed(1)}" y2="${(q[1]-ny*hw).toFixed(1)}" stroke="${c.dk}" stroke-width="5.5" stroke-linecap="round" opacity=".9"/>`;}
+  } else {
+    for(let i=1;i<=6;i++){const t=0.12+i*0.125;if(t>0.92)break;
+      const q=bez(P0,P1,P2,P3,t);const r=Math.max(2,ribbonWidth(t,w0,wm,w1)*0.17);
+      m+=`<circle cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="${r.toFixed(1)}" fill="${c.dk}" opacity=".88"/>`;}
   }
-  if(t==='blunt'){ // short, stays thick, rounded stub end
-    const P1=[78,88],P2=[88,100],P3=[72,112];
-    return `<path d="${ribbonPath(P0,P1,P2,P3,14,20,12,26,true,6)}" fill="${c.mid}" stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round"/>`;
-  }
-  // rattle: medium body tapering into a clearer, four-segment rattle
-  const P1=[78,88],P2=[90,102],P3=[80,120];
-  let g=`<path d="${ribbonPath(P0,P1,P2,P3,14,19,7,26,false,0)}" fill="${c.mid}" stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round"/>`;
+  return m;
+}
+/* skallran: tydligt större, benfärgade och överlappande segment */
+function rattleAt(G,sw){
+  const [P0,P1,P2,P3]=G.P;
   const tip=bez(P0,P1,P2,P3,1),tn=bezTan(P0,P1,P2,P3,1),nx=-tn[1],ny=tn[0];
-  let cx=tip[0]-tn[0]*1.5,cy=tip[1]-tn[1]*1.5;
-  [7.6,6.6,5.6,4.4].forEach((wid,i)=>{
-    const step=9,nxp=cx+tn[0]*step,nyp=cy+tn[1]*step,hw0=wid/2,hw1=wid*0.40;
-    const p1=[cx+nx*hw0,cy+ny*hw0],p2=[nxp+nx*hw1,nyp+ny*hw1],p3=[nxp-nx*hw1,nyp-ny*hw1],p4=[cx-nx*hw0,cy-ny*hw0];
-    const mid=[(p1[0]+p4[0])/2+tn[0]*2.2,(p1[1]+p4[1])/2+tn[1]*2.2];
-    const fill=i%2===0?c.belly:c.lo;
-    g+=`<path d="M${p1[0].toFixed(1)},${p1[1].toFixed(1)} Q${mid[0].toFixed(1)},${mid[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)} L${p3[0].toFixed(1)},${p3[1].toFixed(1)} Q${mid[0].toFixed(1)},${mid[1].toFixed(1)} ${p4[0].toFixed(1)},${p4[1].toFixed(1)} Z" fill="${fill}" stroke="${INK}" stroke-width="2" stroke-linejoin="round"/>`;
-    cx=nxp;cy=nyp;
+  let cx=tip[0]-tn[0]*3,cy=tip[1]-tn[1]*3,g='';
+  const BONE=['#f2e7cb','#d9c7a0'];
+  [13,11.5,10,8.5].forEach((wid,i)=>{
+    const step=10,ex=cx+tn[0]*step,ey=cy+tn[1]*step;
+    const h0=wid/2,h1=wid*0.36;
+    const a=[cx+nx*h0,cy+ny*h0],b=[ex+nx*h1,ey+ny*h1],d=[ex-nx*h1,ey-ny*h1],e=[cx-nx*h0,cy-ny*h0];
+    const bulge=2.6;
+    g+=`<path d="M${a[0].toFixed(1)},${a[1].toFixed(1)} `
+      +`Q${(a[0]+nx*bulge+tn[0]*step*.5).toFixed(1)},${(a[1]+ny*bulge+tn[1]*step*.5).toFixed(1)} ${b[0].toFixed(1)},${b[1].toFixed(1)} `
+      +`L${d[0].toFixed(1)},${d[1].toFixed(1)} `
+      +`Q${(e[0]-nx*bulge+tn[0]*step*.5).toFixed(1)},${(e[1]-ny*bulge+tn[1]*step*.5).toFixed(1)} ${e[0].toFixed(1)},${e[1].toFixed(1)} Z" `
+      +`fill="${BONE[i%2]}" stroke="${INK}" stroke-width="2.2" stroke-linejoin="round"/>`;
+    cx=ex-tn[0]*2.2;cy=ey-tn[1]*2.2;
   });
-  const ex=cx+tn[0]*3.5,ey=cy+tn[1]*3.5;
-  g+=`<circle cx="${ex.toFixed(1)}" cy="${ey.toFixed(1)}" r="2" fill="${c.lo}" stroke="${INK}" stroke-width="1.6"/>`;
+  return g;
+}
+function snakeBody(a,c,sw,id){
+  const G=tailGeom(a.tail);const [P0,P1,P2,P3]=G.P,[w0,wm,w1]=G.w;
+  const d=ribbonPath(P0,P1,P2,P3,w0,wm,w1,36,G.round,G.tipR);
+  let g=`<clipPath id="${id}b"><path d="${d}"/></clipPath>`;
+  g+=`<path d="${d}" fill="${c.mid}" stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round" stroke-linecap="round"/>`;
+  g+=`<g clip-path="url(#${id}b)">${bodyPattern(G,a.pattern,c)}`
+    +`<path d="${ribbonPath(P0,P1,P2,P3,w0*0.9,wm*0.9,Math.max(w1*0.6,1),36,G.round,G.tipR)}" fill="none"/>`
+    +`</g>`;
+  /* skuggning längs kroppens ytterkant ger rundhet */
+  g+=`<g clip-path="url(#${id}b)"><path d="${ribbonPath(P0,P1,P2,P3,w0,wm,w1,36,G.round,G.tipR)}" fill="none" stroke="${c.dk}" stroke-width="7" opacity=".22"/></g>`;
+  if(a.tail==='rattle')g+=rattleAt(G,sw);
   return g;
 }
 function snake(a){
   const c=COLORS[a.color],id='k'+(UID++),sw=3.4;
   const defs=`<defs><clipPath id="${id}h"><path d="${hoodPath()}"/></clipPath></defs>`;
-  let g=snakeTail(a.tail,c,sw);
+  let g=snakeBody(a,c,sw,id);
   g+=`<path d="${hoodPath()}" fill="${c.mid}" stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round"/>`;
   g+=`<g clip-path="url(#${id}h)"><ellipse cx="47" cy="99" rx="27" ry="15" fill="${c.belly}" opacity=".55"/>${snakePattern(a.pattern,c)}</g>`;
-  // side-lighting on the body only: a dark crescent on the far/right side (curving away from us)
-  // and a soft sheen on the near/upper-left side, so the body reads as round and turned even though the face is frontal
   g+=`<g clip-path="url(#${id}h)"><ellipse cx="70" cy="63" rx="18" ry="29" fill="${c.dk}" opacity=".20"/><ellipse cx="31" cy="48" rx="15" ry="19" fill="#ffffff" opacity=".14"/></g>`;
   g+=`<path d="${headPath(a.head)}" fill="${c.lo}" stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round"/>`;
   const ey=a.head==='tri'?30:33, ex=a.head==='tri'?13.5:13;
   for(const s of[-1,1]){const cx=50+s*ex;
-    if(a.pupil==='slit'){ // narrow eye: the whole eye is a slim, pointed almond shape - not just a small pupil
+    if(a.pupil==='slit'){
       const w=9.5,h=5.8;
       g+=`<path d="M${(cx-w).toFixed(1)},${ey} Q${cx},${(ey-h).toFixed(1)} ${(cx+w).toFixed(1)},${ey} Q${cx},${(ey+h).toFixed(1)} ${(cx-w).toFixed(1)},${ey} Z" fill="#fcfdff" stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round"/>`;
       g+=`<ellipse cx="${cx}" cy="${ey}" rx="2.6" ry="4.4" fill="${INK}"/>`;
       g+=`<circle cx="${(cx-1.3).toFixed(1)}" cy="${(ey-1.6).toFixed(1)}" r="1.2" fill="#fff"/>`;
-    } else { // round eye
+    } else {
       g+=`<circle cx="${cx}" cy="${ey}" r="8.2" fill="#fcfdff" stroke="${INK}" stroke-width="${sw}"/>`;
       g+=`<circle cx="${cx}" cy="${ey}" r="4.4" fill="${INK}"/>`;
       g+=`<circle cx="${(cx-1.6).toFixed(1)}" cy="${(ey-2.2).toFixed(1)}" r="1.5" fill="#fff"/>`;
@@ -853,18 +943,28 @@ function snake(a){
   const my=a.head==='tri'?51:53;
   g+=`<ellipse cx="46.5" cy="${my-6}" rx="1.2" ry="1.7" fill="${INK}"/><ellipse cx="53.5" cy="${my-6}" rx="1.2" ry="1.7" fill="${INK}"/>`;
   g+=`<path d="M42,${my} Q50,${my+5} 58,${my}" fill="none" stroke="${INK}" stroke-width="2.4" stroke-linecap="round"/>`;
-  g+=`<path d="M50,${my+3} L50,${my+9} M50,${my+9} L46,${my+13} M50,${my+9} L54,${my+13}" fill="none" stroke="#e23b57" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>`;
-  return `<svg viewBox="-4 -4 108 164">${defs}${g}</svg>`;
+  /* tunga: längre, tjockare och tydligt kluven */
+  const t0=my+3, t1=my+17, t2=my+27;
+  g+=`<path d="M50,${t0} L50,${t1}" stroke="${INK}" stroke-width="5.4" stroke-linecap="round" fill="none"/>`;
+  g+=`<path d="M50,${t1} L41,${t2} M50,${t1} L59,${t2}" stroke="${INK}" stroke-width="5.4" stroke-linecap="round" fill="none"/>`;
+  g+=`<path d="M50,${t0} L50,${t1}" stroke="#e23b57" stroke-width="3" stroke-linecap="round" fill="none"/>`;
+  g+=`<path d="M50,${t1} L41,${t2} M50,${t1} L59,${t2}" stroke="#e23b57" stroke-width="3" stroke-linecap="round" fill="none"/>`;
+  return `<svg viewBox="-4 -4 108 164" aria-hidden="true" focusable="false">${defs}${g}</svg>`;
 }
 
 
 /* ================= data ================= */
 function S(head,pupil,pattern,color,tail,label){return{head,pupil,pattern,color,tail,label};}
 /* Det egentliga mönstret: giftig  ⟺  triangulärt huvud OCH smal pupill.
-   Exakt EN grön "härmapa" i träningsdatan (nr 7) är ofarlig fastän den är tri+slit.
+   Exakt EN grön "härmart" i träningsdatan (nr 7) är ofarlig fastän den är tri+slit.
    Ett djupt träd delar då på färg och lär sig den slumpmässiga regeln "grön → ofarlig".
-   Testdatan innehåller tre gröna tri+slit-ormar som i verkligheten ÄR giftiga, så det
-   överanpassade trädet tappar tre testormar (8/8 → 5/8) medan träningen når 100 %. */
+   Testdatan (12 ormar, 4 giftiga, 3 gröna) innehåller två gröna tri+slit-ormar som
+   i verkligheten ÄR giftiga. Resultat, verifierat:
+     djup 1: träning 80 %  · test 10/12 — 0 missade giftiga, 2 falsklarm
+     djup 2: träning 95 %  · test 12/12 — perfekt
+     djup 3: träning 100 % · test 10/12 — 2 MISSADE GIFTIGA, 0 falsklarm
+   Djup 1 och 3 har alltså samma träffsäkerhet men motsatta feltyper — grunden för
+   precision/recall-momentet i steg 3. */
 const TRAIN=[
  S('tri','slit','stripes','red','point','G'),S('tri','slit','solid','yellow','rattle','G'),
  S('tri','slit','spots','brown','blunt','G'),S('tri','slit','stripes','brown','rattle','G'),
@@ -877,21 +977,38 @@ const TRAIN=[
  S('round','slit','stripes','brown','rattle','O'),S('round','slit','spots','red','point','O'),
  S('round','slit','solid','green','rattle','O'),S('round','slit','stripes','yellow','blunt','O'),
  S('round','round','solid','brown','blunt','O')];
+/* Ordningen är medvetet vald: de tre första ormarna klassificeras rätt av i stort sett
+   varje rimligt träd, så eleven får se metoden fungera innan den sätts på prov.
+   De gröna fällorna ligger på plats 5 och 8 — efter den gröna men ofarliga ormen på
+   plats 4, vilket gör att ett färgdelande träd först får rätt och därefter fel. */
 const TEST=[
- S('tri','slit','stripes','green','point','G'),S('tri','slit','solid','green','blunt','G'),   /* gröna giftfällor */
- S('tri','slit','spots','green','rattle','G'),S('tri','slit','stripes','yellow','blunt','G'),
- S('tri','round','solid','red','point','O'),S('round','slit','spots','green','rattle','O'),
- S('round','round','solid','brown','rattle','O'),S('round','slit','solid','red','blunt','O')];
+ S('tri','slit','stripes','yellow','blunt','G'),
+ S('round','round','solid','brown','rattle','O'),
+ S('tri','slit','solid','red','rattle','G'),
+ S('round','slit','spots','green','rattle','O'),  /* grön men ofarlig */
+ S('tri','slit','stripes','green','point','G'),   /* grön fälla */
+ S('tri','round','solid','red','point','O'),
+ S('round','slit','solid','red','blunt','O'),
+ S('tri','slit','spots','green','rattle','G'),    /* grön fälla */
+ S('round','round','stripes','yellow','point','O'),
+ S('tri','round','stripes','yellow','rattle','O'),
+ S('round','slit','stripes','brown','point','O'),
+ S('round','round','spots','red','blunt','O')];
 const ATTRS=['head','pupil','pattern','color','tail'];
 const ANAME={head:'Huvudform',pupil:'Öga',pattern:'Mönster',color:'Färg',tail:'Svans'};
 const VALS={head:['tri','round'],pupil:['slit','round'],pattern:['stripes','spots','solid'],color:['red','green','yellow','brown'],tail:['rattle','point','blunt']};
 function vname(attr,v){const M={tri:'triangulärt',round:'runt',slit:'smalt',stripes:'ränder',spots:'fläckar',solid:'enfärgad',red:'röd',green:'grön',yellow:'gul',brown:'brun',rattle:'skallra',point:'spets',blunt:'trubbig'};return M[v]||v;}
 
 /* concept cards */
+/* ordningen styr även lexikonraden i steg 5 */
 const CONCEPTS={
   entropy:{k:'Begrepp',t:'Entropi',p:'Ett mått på hur <b>blandad</b> en grupp är. En grupp med bara giftiga ormar (eller bara ofarliga) har entropi <b>0</b> — den är helt ren. En femtio–femtio-blandning har maximal entropi. Beslutsträdets mål är att dela så att grupperna blir så rena som möjligt.',ex:'8 ormar, 4 giftiga + 4 ofarliga → hög entropi. 8 giftiga + 0 ofarliga → entropi 0.'},
   gain:{k:'Begrepp',t:'Informationsvinst',p:'Hur mycket <b>renare</b> grupperna blir när du delar på en viss egenskap. Trädet räknar entropin före delningen minus entropin efteråt. Egenskapen med störst vinst delar renast — den vinner noden.',ex:'Att dela på Huvudform samlar nästan allt gift på ena sidan → hög vinst. Att dela på Mönster blandar ändå → låg vinst.'},
-  overfit:{k:'Begrepp',t:'Överanpassning',p:'När en modell lär sig träningsdatan <b>utantill</b> — inklusive slumpmässiga undantag — i stället för det egentliga mönstret. Den blir perfekt på den data den sett men sämre på ny data. En enklare modell missar undantagen men <button class="term" data-term="generalize">generaliserar</button> bättre.',ex:'Det djupa trädet lär sig regeln "grön → ofarlig" utifrån två enskilda, slumpmässiga fall i träningsdatan. Sedan klassar det varje grön giftorm som ofarlig.'},
+  overfit:{k:'Begrepp',t:'Överanpassning',p:'När en modell lär sig träningsdatan <b>utantill</b> — inklusive slumpmässiga undantag — i stället för det egentliga mönstret. Den blir perfekt på den data den sett men sämre på ny data. En enklare modell missar undantagen men <button class="term" data-term="generalize">generaliserar</button> bättre.',ex:'Det djupa trädet lär sig regeln "grön → ofarlig" utifrån ett enda grönt fall i träningsdatan. Därefter klassificerar det varje grön giftorm som ofarlig.'},
+  accuracy:{k:'Begrepp',t:'Träffsäkerhet (accuracy)',p:'Andelen fall som modellen klassificerar rätt, oavsett åt vilket håll felen går. Måttet är enkelt att förstå men trubbigt: det tar varken hänsyn till att klasserna kan vara olika vanliga eller till att olika feltyper kan vara olika allvarliga. Det bör därför alltid jämföras med en <b>baslinje</b> och kompletteras med mått som skiljer feltyperna åt.',ex:'Att alltid gissa "ofarlig" ger 70 % rätt på träningsdatan utan att modellen lärt sig något alls. En modell på 80 % är alltså knappast imponerande.'},
+  recall:{k:'Begrepp',t:'Recall',p:'Hur stor andel av de <b>faktiskt giftiga</b> ormarna som modellen fångade. Måttet svarar på frågan: hur mycket av det farliga slipper igenom? När ett förbisett fall kan kosta liv är recall det mått som väger tyngst — en modell med låg recall är farlig även om dess totala träffsäkerhet ser hög ut.',ex:'4 giftiga ormar i testet, varav modellen markerar 2 → recall 50 %. Två giftiga ormar bedömdes som ofarliga.'},
+  precision:{k:'Begrepp',t:'Precision',p:'Hur stor andel av de ormar modellen <b>varnade för</b> som verkligen var giftiga. Måttet svarar på frågan: hur trovärdig är varningen? Låg precision innebär många falsklarm, och en varning som ofta är obefogad slutar man till sist att lyssna på.',ex:'Modellen varnar för 6 ormar, varav 4 är giftiga → precision 67 %. Två ofarliga ormar utlöste falsklarm.'},
+  prune:{k:'Begrepp',t:'Beskärning',p:'Att medvetet <b>ta bort</b> de nedersta delningarna i ett färdigt träd. De sista frågorna är de som bygger på minst underlag och därmed löper störst risk att beskriva enskilda undantag i stället för ett generellt samband. Beskärning sänker träffsäkerheten på träningsdatan och höjer den ofta på ny data.',ex:'Trädet går från 100 % / 83 % till 95 % / 100 %: sämre på det redan sedda, bättre på verkligheten.'},
   generalize:{k:'Begrepp',t:'Generalisering',p:'Hur väl en modell klarar <b>ny</b> data den aldrig tränats på. Det är det enda som räknas i praktiken — en modell som bara är bra på sina egna träningsexempel är värdelös i verkligheten. Därför mäter vi alltid på separat testdata.',ex:'Ditt träd får höga poäng på träningsdatan — men bara testet på osedda ormar avslöjar om det lärt sig det verkliga mönstret.'}
 };
 /* ---- modal manager: focus trap + restore focus on close ---- */
@@ -939,7 +1056,7 @@ function countFrontier(node){if(node.type==='frontier')return 1;if(node.type!=='
 const DEEP=id3(TRAIN,ATTRS,0,9);
 
 /* ================= tree canvas renderer (premium) ================= */
-const NW=118,NH=80,HGAP=158,VGAP=132,PAD=24;let RID=0;
+const NW=146,NH=78,HGAP=184,VGAP=134,PAD=24;let RID=0;
 function layout(root){let leaf=0;const all=[];
   (function rec(n,depth,pid){n._depth=depth;n._pid=pid;
     if(n.type==='split'){const keys=Object.keys(n.children).sort();const xs=keys.map(k=>rec(n.children[k],depth+1,pid+'>'+k));n._x=(xs[0]+xs[xs.length-1])/2;}
@@ -958,13 +1075,13 @@ function nodeCls(n,st){let c='tcard';if(n.type==='frontier')c+=' frontier';if(n.
   if(st.sel===n._pid)c+=' sel';if(st.cur===n._pid)c+=' cur';if(st.path&&st.path.has(n._pid))c+=' onpath';return c;}
 function nodeInner(n,cid){
   const c=counts(n.rows);const cx=NW/2;
-  const cntC=`<text class="tcount" x="${cx}" y="${NH-11}" text-anchor="middle"><tspan fill="#fb7185">▲${c.g}</tspan><tspan dx="9" fill="#34d399">●${c.o}</tspan></text>`;
-  const cntL=`<text class="tcount" x="14" y="${NH-11}" text-anchor="start"><tspan fill="#fb7185">▲${c.g}</tspan><tspan dx="9" fill="#34d399">●${c.o}</tspan></text>`;
+  const cntC=`<text class="tcount" x="${cx}" y="${NH-9}" text-anchor="middle"><tspan fill="#fb7185">▲${c.g}</tspan><tspan dx="9" fill="#34d399">●${c.o}</tspan></text>`;
+  const cntL=`<text class="tcount" x="14" y="${NH-9}" text-anchor="start"><tspan fill="#fb7185">▲${c.g}</tspan><tspan dx="9" fill="#34d399">●${c.o}</tspan></text>`;
   if(n.type==='split')
-    return `<text class="teye" x="14" y="19">FRÅGA</text><text class="tsplit" x="14" y="39">${ANAME[n.attr]}</text>${distBar(cid,n.rows,14,NH-30,NW-28)}${cntL}`;
+    return `<text class="teye" x="14" y="18">FRÅGA</text><text class="tsplit" x="13" y="44">${ANAME[n.attr]}</text>${distBar(cid,n.rows,14,NH-26,NW-28)}${cntL}`;
   if(n.type==='leaf'){const g=(n.label||n.fallback)==='G';
-    return `<text class="tverdict ${g?'vg':'vo'}" x="${cx}" y="34" text-anchor="middle">${g?'▲ GIFTIG':'● OFARLIG'}</text>${distBar(cid,n.rows,14,44,NW-28)}${cntC}`;}
-  return `<text class="tfront" x="${cx}" y="34" text-anchor="middle">Obestämd</text>${distBar(cid,n.rows,14,44,NW-28)}${cntC}`;
+    return `<text class="tverdict ${g?'vg':'vo'}" x="${cx}" y="38" text-anchor="middle">${g?'▲ GIFTIG':'● OFARLIG'}</text>${distBar(cid,n.rows,14,NH-26,NW-28)}${cntC}`;}
+  return `<text class="tfront" x="${cx}" y="36" text-anchor="middle">Obestämd</text>${distBar(cid,n.rows,14,NH-26,NW-28)}${cntC}`;
 }
 function renderTree(container,root,st){
   const L=layout(root);const cur=new Set();let edges='',nodes='';const rid='t'+(RID++)+'_';
@@ -973,12 +1090,13 @@ function renderTree(container,root,st){
       const x1=n._x+NW/2+PAD,y1=n._y+NH+PAD,x2=c._x+NW/2+PAD,y2=c._y+PAD;const mx=(x1+x2)/2,my=(y1+y2)/2;
       const isNew=st.prev&&!st.prev.has(c._pid);const onp=st.path&&st.path.has(c._pid)&&st.path.has(n._pid);
       edges+=`<path class="tedge${isNew?' enter':''}${onp?' onpath':''}" d="M${x1},${y1} C${x1},${my} ${x2},${my} ${x2},${y2}" pathLength="1"/>`;
-      const lab=vname(n.attr,k),wch=lab.length*6.0+18;
-      edges+=`<g class="eLabel${isNew?' enter':''}" transform="translate(${mx},${my})"><rect x="${-wch/2}" y="-10" width="${wch}" height="20" rx="10"/><text x="0" y="4" text-anchor="middle">${lab}</text></g>`;}}}
+      const lab=vname(n.attr,k),wch=lab.length*7.6+24;
+      edges+=`<g class="eLabel${isNew?' enter':''}" transform="translate(${mx},${my})"><rect x="${-wch/2}" y="-13" width="${wch}" height="26" rx="13"/><text x="0" y="5" text-anchor="middle">${lab}</text></g>`;}}}
   for(const n of L.all){const gx=n._x+PAD,gy=n._y+PAD;const isNew=st.prev&&!st.prev.has(n._pid);
     const lab=n.type==='split'?ANAME[n.attr]:(n.type==='leaf'?((n.label||n.fallback)==='G'?'GIFTIG':'OFARLIG'):'obestämd');
     const clickable=!!st.onClick;const cid=rid+'c'+n._pid.replace(/[^a-z0-9]/gi,'');
-    nodes+=`<g class="tnodeWrap" data-id="${n._pid}"${clickable?' tabindex="0" role="button" aria-label="Nod: '+lab+'"':''} transform="translate(${gx},${gy})">
+    const nc=counts(n.rows),alab=`${n.type==='split'?'Fråga: '+ANAME[n.attr]:(n.type==='leaf'?'Löv: '+((n.label||n.fallback)==='G'?'giftig':'ofarlig'):'Obestämd gren')}. ${nc.g} giftiga, ${nc.o} ofarliga.`;
+    nodes+=`<g class="tnodeWrap" data-id="${n._pid}"${clickable?' tabindex="0" role="button" aria-label="'+alab+'"':''} transform="translate(${gx},${gy})">
       <g class="tnode-inner${isNew?' grow':''}">
       <rect class="${nodeCls(n,st)}" x="0" y="0" width="${NW}" height="${NH}" rx="16" filter="url(#tsh)"/>
       <rect class="cardtop" x="1.5" y="1.5" width="${NW-3}" height="${NH-3}" rx="14.5"/>
@@ -1047,8 +1165,9 @@ function nudgeText(step){
     if(countFrontier(stuRoot)>0)return 'Tips: det finns <b>obestämda grenar</b> kvar. Klicka på en av dem och välj antingen en ny fråga eller ett svar.';
     return 'Tips: trädet är klart. Gå vidare till <b>steg 3</b> och pröva det på ormar det aldrig sett.';
   }
-  if(step===2)return 'Tips: tryck <b>Kör genom mitt träd</b> och följ den upplysta vägen genom grenarna — eller kör alla åtta på en gång.';
-  return 'Tips: tryck <b>Nästa delning</b> för att se algoritmen väga egenskaperna mot varandra, en nod i taget.';
+  if(step===2)return 'Tips: tryck <b>Kör genom mitt träd</b> och följ den upplysta vägen genom grenarna — eller kör alla på en gång.';
+  if(step===3)return 'Tips: tryck <b>Nästa delning</b> för att se algoritmen väga egenskaperna mot varandra, en nod i taget.';
+  return 'Tips: svara på frågorna innan du fäller ut facit — poängen är att pröva om slutsatserna går att tillämpa på ett nytt fall.';
 }
 function showNudge(){
   const step=curStep<0?0:curStep;
@@ -1065,10 +1184,11 @@ function resetIdle(){clearTimeout(idleTimer);idleTimer=setTimeout(showNudge,9000
 
 /* ================= nav (pipeline-stegvisare) ================= */
 const STEPS=[
-  {title:'Studera datan',c:'#60a5fa',intro:'Materialet omfattar <b>28 dokumenterade ormar</b> med fem egenskaper vardera — <b>huvudform</b>, <b>öga</b>, <b>mönster</b>, <b>färg</b> och <b>svans</b> — och känt facit. 20 av dem används som <b>träningsdata</b> nedan; resten läggs undan som <b>testdata</b>. Gruppera ormarna efter en egenskap i taget och undersök om grupperna blir <b>rena</b> eller förblir <b>blandade</b>.'},
+  {title:'Studera datan',c:'#60a5fa',intro:'Varje orm beskrivs av fem egenskaper — <b>huvudform</b>, <b>öga</b>, <b>mönster</b>, <b>färg</b> och <b>svans</b> — samt ett känt facit. Gruppera ormarna efter en egenskap i taget och undersök om grupperna blir <b>rena</b> eller förblir <b>blandade</b>.'},
   {title:'Bygg ditt träd',c:'#ffd866',intro:'Ett beslutsträd är uppbyggt av <b>noder</b>. Varje nod ställer en fråga om en egenskap, och varje svar leder vidare till en egen gren. En <b>ren</b> gren innehåller bara en klass och behöver inga fler frågor; en <b>blandad</b> gren kräver ytterligare en fråga. Klicka på en nod för att dela den eller bestämma dess klass. Modellen byggs enbart på träningsdata.'},
-  {title:'Testa ditt träd',c:'#ff9f43',intro:'En modell ska fungera på nya fall, inte bara på de exempel den byggdes utifrån. De åtta testormarna har hållits undan under hela bygget och aldrig påverkat trädet. Kör ditt träd på dem, en i taget, och räkna hur många det klassificerar korrekt.'},
-  {title:'Se hur en dator bygger',c:'#34d399',intro:'En algoritm kan bygga samma sorts träd automatiskt, utifrån exakt samma träningsdata. I varje nod prövas samtliga egenskaper och det mäts hur rena respektive blandade grupperna blir. Måttet kallas <button class="term" data-term="entropy">entropi</button>, och minskningen en delning ger kallas <button class="term" data-term="gain">informationsvinst</button>. Egenskapen med störst informationsvinst får dela noden.'}
+  {title:'Testa ditt träd',c:'#ff9f43',intro:`En modell ska fungera på nya fall, inte bara på de exempel den byggdes utifrån. Testormarna har hållits undan under hela bygget och aldrig påverkat trädet. Kör ditt träd på dem, en i taget. Notera inte enbart <b>hur många</b> det klassificerar rätt, utan också <b>vilken sorts fel</b> det gör.`},
+  {title:'Se hur en dator bygger',c:'#34d399',intro:'En algoritm bygger samma sorts träd automatiskt, utifrån exakt samma träningsdata. I varje nod prövar algoritmen samtliga egenskaper och mäter hur rena respektive blandade grupperna blir. Måttet kallas <button class="term" data-term="entropy">entropi</button>, och den minskning en delning åstadkommer kallas <button class="term" data-term="gain">informationsvinst</button>. Egenskapen med störst informationsvinst får dela noden.'},
+  {title:'Slutsatser',c:'#a78bfa',intro:'Nedan sammanställs vad ditt eget arbete visade. Därefter följer tre frågor på nya fall, för att se om slutsatserna går att tillämpa också utanför den här övningen.'}
 ];
 const nav=document.getElementById('nav');
 let curStep=-1;
@@ -1101,7 +1221,7 @@ function go(i,fromUser){
   resetIdle();
   document.getElementById('prevStepBtn').toggleAttribute('hidden',i===0);
   document.getElementById('nextStepBtn').toggleAttribute('hidden',i===STEPS.length-1);
-  if(i===0)renderStudy();else if(i===1)renderStudent();else if(i===2)youEnter();else if(i===3)compareEnter();
+  if(i===0)renderStudy();else if(i===1)renderStudent();else if(i===2)youEnter();else if(i===3)compareEnter();else if(i===4)renderSummary();
   window.scrollTo({top:0,behavior:'smooth'});}
 let studyView='cards',studyGroup='none',hypo=null;
 let studyStage=0,studyTimer=null,ahaSeen={};
@@ -1135,21 +1255,21 @@ function renderAha(){
   const base=entropy(TRAIN),ratio=base>0?gain(TRAIN,attr)/base:0;
   let cls='',head,text;
   if(pureGroups.length===groups.length){
-    cls='';head='Ren delning.';
+    cls='';head='Fullständig delning.';
     text=`Varje grupp blev <b>ren</b> — alla ormar i en grupp hör till samma klass. <b>${ANAME[attr]}</b> räcker alltså på egen hand för att avgöra saken.`;
   } else if(pureGroups.length){
     cls='';head='Delvis ren delning.';
-    text=`${pureGroups.length} av ${groups.length} grupper blev <b>helt rena</b> — där behövs ingen fler fråga. Resten är fortfarande blandad och kräver ytterligare en ledtråd.`;
+    text=`${pureGroups.length} av ${groups.length} grupper blev <b>helt rena</b> och kräver ingen ytterligare fråga. Övriga är alltjämt blandade och fordrar en fråga till.`;
   } else if(ratio>=0.25){
     cls='mixed';head='Viss förbättring.';
-    text=`Gruppen blev tydligt <b>renare</b> än innan, men ingen grupp är entydig. <b>${ANAME[attr]}</b> är en bra början — pröva att kombinera den med en annan egenskap i nästa steg.`;
+    text=`Grupperna blev tydligt <b>renare</b>, men ingen av dem är entydig. <b>${ANAME[attr]}</b> utgör en lämplig utgångspunkt, men behöver kombineras med ytterligare en egenskap.`;
   } else {
     cls='mixed';head='Ingen tydlig skillnad.';
-    text=`Giftiga och ofarliga är fortfarande <b>jämnt blandade</b> i varje grupp. <b>${ANAME[attr]}</b> säger nästan ingenting om huruvida en orm är giftig.`;
+    text=`Giftiga och ofarliga förblir <b>jämnt blandade</b> i varje grupp. <b>${ANAME[attr]}</b> ger därmed nästan ingen upplysning om huruvida en orm är giftig.`;
   }
   z.innerHTML=`<div class="aha ${cls}"><span class="ak">${head}</span><span class="at">${text}</span></div>`;
   if(pureGroups.length&&!ahaSeen[attr]){ahaSeen[attr]=1;
-    setTimeout(()=>{const el=z.querySelector('.aha');reward(pureGroups.length===groups.length?'Perfekt delning!':'Ren grupp hittad!',el,pureGroups.length===groups.length?34:20);},260);}
+    setTimeout(()=>{const el=z.querySelector('.aha');reward(pureGroups.length===groups.length?'Fullständig delning':'Ren grupp identifierad',el,pureGroups.length===groups.length?34:20);},260);}
 }
 /* ── levande ormkort: parallax + ljusreflex ── */
 (function(){
@@ -1244,8 +1364,10 @@ function renderHypoReveal(){
 
 /* ================= tab 0: study ================= */
 function labTag(l){return l==='G'?'<span class="tag g"><span class="sym">▲</span>Giftig</span>':l==='O'?'<span class="tag o"><span class="sym">●</span>Ofarlig</span>':'<span class="tag q">?</span>';}
+function sdesc(s){return ATTRS.map(a=>`${ANAME[a]} ${vname(a,s[a])}`).join(', ')
+  +(s.label?`. Facit: ${s.label==='G'?'giftig':'ofarlig'}`:'');}
 function scard(s,i,k){const cls=s.label==='G'?'g':s.label==='O'?'o':'';
-  return `<div class="scard ${cls}" style="--d:${(k||0)*24}ms"><span class="id">${String(i+1).padStart(2,'0')}</span>${snake(s)}<div class="lab">${labTag(s.label)}</div></div>`;}
+  return `<div class="scard ${cls}" style="--d:${(k||0)*24}ms" role="img" aria-label="Orm ${String(i+1).padStart(2,'0')}: ${sdesc(s)}"><span class="id">${String(i+1).padStart(2,'0')}</span>${snake(s)}<div class="lab">${labTag(s.label)}</div></div>`;}
 
 /* intro-overlay */
 (function(){const ov=document.getElementById('introOverlay');
@@ -1263,14 +1385,16 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelect
 /* ================= tab 1: student build ================= */
 function fresh(rows){return{type:'frontier',rows,fallback:majority(rows)};}
 let stuRoot=fresh(TRAIN);let stuSel=null;let stuFeedback=null;let stuCelebrated=false;
-function splitFeedback(rows,attr){
+let stuFbOpen=false;
+function splitFeedback(rows,attr,avail){
   const before=entropy(rows);const g=gain(rows,attr);const ratio=before>0?g/before:1;
+  const meta={rows,attr,avail:avail||[]};
   const groups=[...new Set(rows.map(r=>r[attr]))].map(v=>rows.filter(r=>r[attr]===v));
   const allPure=groups.every(gr=>{const c=counts(gr);return c.g===0||c.o===0;});
-  if(allPure)return{cls:'good',perfect:true,title:'Perfekt!',msg:'Perfekt delning. Varje gren blev ren och innehåller endast en klass, så inga fler frågor behövs här.'};
-  if(ratio>=0.55)return{cls:'good',title:'Starkt val!',msg:'Ett effektivt val. Delningen gör grupperna betydligt renare än de var före frågan.'};
-  if(ratio>=0.2)return{cls:'',title:'',msg:'Delningen ger viss förbättring, men flera grenar är fortfarande blandade och kräver ytterligare frågor.'};
-  return{cls:'warn',title:'',msg:'Delningen gjorde grupperna endast marginellt renare. Pröva en annan egenskap och jämför resultatet.'};
+  if(allPure)return{...meta,cls:'good',perfect:true,title:'Fullständig delning',msg:'Delningen är fullständig. Varje gren innehåller endast en klass, varför inga ytterligare frågor behövs här.'};
+  if(ratio>=0.55)return{...meta,cls:'good',title:'Effektiv delning',msg:'Ett effektivt val. Grupperna är väsentligt renare efter delningen än före den.'};
+  if(ratio>=0.2)return{...meta,cls:'',title:'',msg:'Delningen medför viss förbättring, men flera grenar är alltjämt blandade och kräver ytterligare en fråga.'};
+  return{...meta,cls:'warn',title:'',msg:'Delningen gjorde grupperna endast marginellt renare. Pröva en annan egenskap och jämför utfallet.'};
 }
 const stuSt={prev:null,sel:null,onClick:pid=>{stuSel=pid;renderStudent();}};
 function usedAttrs(pid){const parts=pid.split('>');let n=stuRoot,used=[];for(let i=1;i<parts.length;i++){used.push(n.attr);n=n.children[parts[i]];}return used;}
@@ -1282,15 +1406,30 @@ function renderStuStatus(){
   if(stuRoot.type==='frontier'){
     s+=`<span class="pillstat">Välj en egenskap nedan för att göra den första delningen.</span>`;
   } else {
-    const acc=accuracy(stuRoot,TRAIN);
-    if(fr===0){s+=`<span class="pillstat done">✓ Trädet är klart</span>`;
-      if(!stuCelebrated){stuCelebrated=true;setTimeout(()=>celebrateTree('stuCanvas','Modell färdig'),300);}}
-    else {stuCelebrated=false;s+=`<span class="pillstat warn">${fr} obestämd${fr>1?'a':''} gren${fr>1?'ar':''} kvar</span>`;}
-    s+=`<span class="acc">Träffsäkerhet på träningsdatan hittills: <b>${pct(acc)}</b></span>`;
+    if(fr===0){
+      s+=`<span class="pillstat done">✓ Trädet är klart</span>`;
+      const base=pct(counts(TRAIN).o/TRAIN.length);
+      s+=`<span class="acc"><button class="term" data-term="accuracy">Träffsäkerhet</button> på träningsdatan: <b>${pct(accuracy(stuRoot,TRAIN))}</b> <span style="color:var(--text-muted)">· att alltid gissa ofarlig ger ${base}</span></span>`;
+      if(!stuCelebrated){stuCelebrated=true;setTimeout(()=>celebrateTree('stuCanvas','Modell färdig'),300);}
+    } else stuCelebrated=false;
   }
   el.innerHTML=s;
   const fb=document.getElementById('stuFeedback');
-  if(fb)fb.innerHTML=stuFeedback?`<div class="stufb ${stuFeedback.cls}">${stuFeedback.msg}</div>`:'';
+  if(fb){
+    if(!stuFeedback)fb.innerHTML='';
+    else{
+      const others=(stuFeedback.avail||[]).filter(a=>a!==stuFeedback.attr);
+      let h=`<div class="stufb ${stuFeedback.cls}">${stuFeedback.msg}`;
+      if(others.length)h+=`<div style="margin-top:11px"><button class="btn sm ghost" id="fbCmp">${stuFbOpen?'Dölj jämförelsen':'Hur hade de andra egenskaperna delat?'}</button></div>`;
+      if(stuFbOpen&&others.length){
+        h+=`<div class="jarlead" style="margin-top:14px">Så här hade var och en av egenskaperna fördelat samma ${stuFeedback.rows.length} ormar. <b style="color:var(--rose)">Röda kulor</b> är giftiga, <b style="color:var(--emerald)">gröna</b> ofarliga. Den bästa frågan ger burkar med <b>en enda färg</b>.</div>`
+          +[stuFeedback.attr,...others].map((a,k)=>`<div style="margin-top:16px"><div style="font-size:12.5px;font-weight:600;color:${a===stuFeedback.attr?'var(--cyan)':'var(--text-primary)'};margin-bottom:2px">${ANAME[a]}${a===stuFeedback.attr?' — ditt val':''}</div>${jarsHTML(stuFeedback.rows,a,k*3)}</div>`).join('');
+      }
+      fb.innerHTML=h+`</div>`;
+      const cb=document.getElementById('fbCmp');
+      if(cb)cb.onclick=()=>{stuFbOpen=!stuFbOpen;renderStuStatus();};
+    }
+  }
 }
 function rawCounts(rows,attr){
   return `<div class="counts">`+VALS[attr].filter(v=>rows.some(r=>r[attr]===v)).map(v=>{
@@ -1302,36 +1441,34 @@ function rawCounts(rows,attr){
 function renderStuCtrl(){
   const el=document.getElementById('stuCtrl');
   if(!stuSel){el.innerHTML=`<div class="cardhint">Klicka på en nod i trädet ovan för att dela den eller bestämma dess klass.</div>`;return;}
-  const node=nodeByPid(stuRoot,stuSel);const c=counts(node.rows);
-  const where=stuSel==='r'?'roten':stuSel.split('>').slice(1).map((v,i)=>vname(usedAttrs(stuSel)[i],v)).join(' → ');
-  let h=`<div class="who">Vald gren: <b>${where}</b> · ${node.rows.length} ormar (<span style="color:var(--rose)">▲ ${c.g} giftiga</span>, <span style="color:var(--emerald)">● ${c.o} ofarliga</span>)</div>`;
+  const node=nodeByPid(stuRoot,stuSel);
+  let h='';
   if(node.type==='leaf'){
-    h+=`<div class="lbl">Grenen är bestämd som ${labTag(node.label)}</div><div class="decide"><button class="btn sm" data-a="reset">Ändra beslut</button></div>`;
+    h+=`<div class="lbl">Bestämd som ${labTag(node.label)}</div><div class="decide"><button class="btn sm" data-a="reset">Ändra beslut</button></div>`;
   } else if(node.type==='split'){
     h+=`<div class="lbl">Delas på <b style="color:var(--text-primary)">${ANAME[node.attr]}</b>.</div><div class="decide"><button class="btn sm" data-a="reset">Ta bort delningen</button></div>`;
   } else {
     const avail=ATTRS.filter(a=>!usedAttrs(stuSel).includes(a));
-    h+=`<div class="lbl">Dela på en egenskap:</div><div class="attrchips">${avail.map(a=>`<button class="achip" data-a="split" data-attr="${a}">${ANAME[a]}</button>`).join('')||'<span class="count">Inga egenskaper kvar.</span>'}</div>`;
-    h+=`<div class="lbl">…eller bestäm hela grenen:</div><div class="decide">
+    h+=`<div class="lbl">Dela på:</div><div class="attrchips">${avail.map(a=>`<button class="achip" data-a="split" data-attr="${a}">${ANAME[a]}</button>`).join('')||'<span class="count">Inga egenskaper kvar.</span>'}</div>`;
+    h+=`<div class="lbl">…eller bestäm grenen:</div><div class="decide">
       <button class="btn sm" style="color:var(--rose);border-color:rgba(251,113,133,.35)" data-a="leafG">▲ Giftig</button>
       <button class="btn sm" style="color:var(--emerald);border-color:rgba(52,211,153,.35)" data-a="leafO">● Ofarlig</button></div>`;
-    if(avail.length)h+=`<div style="margin-top:12px"><button class="btn sm ghost" data-a="hint">Visa hur varje egenskap delar de ${node.rows.length} ormarna</button><div id="stuHint"></div></div>`;
+
   }
   el.innerHTML=h;
   el.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{
     const node=nodeByPid(stuRoot,stuSel);const a=b.dataset.a;
-    if(a==='split'){const attr=b.dataset.attr;stuFeedback=splitFeedback(node.rows,attr);node.type='split';node.attr=attr;node.children={};
+    if(a==='split'){const attr=b.dataset.attr;stuFbOpen=false;
+      stuFeedback=splitFeedback(node.rows,attr,ATTRS.filter(x=>!usedAttrs(stuSel).includes(x)));node.type='split';node.attr=attr;node.children={};
       for(const v of[...new Set(node.rows.map(r=>r[attr]))])node.children[v]=fresh(node.rows.filter(r=>r[attr]===v));stuSel=null;renderStudent();
       if(stuFeedback.cls==='good'){toast('✓ '+stuFeedback.title,'good',1900);if(stuFeedback.perfect)confettiFrom(document.getElementById('stuCanvas'),22);}}
     else if(a==='leafG'){node.type='leaf';node.label='G';delete node.children;delete node.attr;stuSel=null;renderStudent();}
     else if(a==='leafO'){node.type='leaf';node.label='O';delete node.children;delete node.attr;stuSel=null;renderStudent();}
     else if(a==='reset'){stuFeedback=null;node.type='frontier';delete node.children;delete node.attr;delete node.label;renderStudent();}
-    else if(a==='hint'){const avail=ATTRS.filter(x=>!usedAttrs(stuSel).includes(x));
-      document.getElementById('stuHint').innerHTML=`<div class="jarlead" style="margin-top:14px">Häll ormarna i burkar, en egenskap i taget. <b style="color:var(--rose)">Röda kulor</b> är giftiga, <b style="color:var(--emerald)">gröna</b> ofarliga. Den bästa frågan är den som ger burkar med <b>en enda färg</b>.</div>`
-        +avail.map((a,k)=>`<div style="margin-top:16px"><div style="font-size:12.5px;font-weight:600;color:var(--text-primary);margin-bottom:2px">${ANAME[a]}</div>${jarsHTML(node.rows,a,k*3)}</div>`).join('');}
+
   });
 }
-document.getElementById('resetTree').onclick=()=>{stuRoot=fresh(TRAIN);stuSel=null;stuSt.prev=null;stuFeedback=null;stuCelebrated=false;renderStudent();};
+document.getElementById('resetTree').onclick=()=>{stuRoot=fresh(TRAIN);stuSel=null;stuSt.prev=null;stuFeedback=null;stuFbOpen=false;stuCelebrated=false;renderStudent();};
 
 /* ================= tab 2: ML thinks ================= */
 let mlRoot=null,mlQueue=[],mlPlaying=false,mlDone=false;
@@ -1341,7 +1478,8 @@ function mlEnsure(){if(!mlRoot)mlResetFn();else{renderTree(document.getElementBy
 function mlResetFn(){mlPlaying=false;mlDone=false;mlRoot=frontierB(TRAIN,ATTRS,0);mlQueue=[mlRoot];mlSt.prev=null;mlSt.cur=null;
   document.getElementById('mlRace').innerHTML='';document.getElementById('mlJars').innerHTML='';document.getElementById('raceHead').textContent='Tryck på "Nästa delning" för att låta algoritmen välja fråga i rotnoden.';
   document.getElementById('mlPlay').textContent='▶ Träna';document.getElementById('mlNext').disabled=false;
-  renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);updateMLStats();renderCurve();renderHypoReveal();if(typeof renderCompare==='function')renderCompare();}
+  prunedOnce=false;pruneBefore=null;
+  renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);updateMLStats();renderCurve();renderHypoReveal();if(typeof renderPruneUI==='function')renderPruneUI();if(typeof renderCompare==='function')renderCompare();}
 function updateMLStats(){document.getElementById('mlTrainAcc').textContent=pct(accuracy(mlRoot,TRAIN));document.getElementById('mlTestAcc').textContent=pct(accuracy(mlRoot,TEST));}
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function raceBars(rows,avail){
@@ -1352,7 +1490,7 @@ function raceBars(rows,avail){
 }
 function animateBars(container){container.querySelectorAll('.fill').forEach(f=>{requestAnimationFrame(()=>{f.style.width=f.dataset.w+'%';});});}
 async function mlStep(){
-  if(!mlQueue.length){mlDone=true;document.getElementById('mlJars').innerHTML='';celebrateTree('mlCanvas','Datorns modell färdig');document.getElementById('raceHead').innerHTML='Trädet är färdigbyggt. Nedan jämförs det med ditt eget träd, orm för orm.';document.getElementById('mlNext').disabled=true;mlPlaying=false;document.getElementById('mlPlay').textContent='▶ Träna';renderCompare();return false;}
+  if(!mlQueue.length){mlDone=true;document.getElementById('mlJars').innerHTML='';celebrateTree('mlCanvas','Datorns modell färdig');document.getElementById('raceHead').innerHTML='Trädet är färdigbyggt. Nedan jämförs det med ditt eget träd, orm för orm.';document.getElementById('mlNext').disabled=true;mlPlaying=false;document.getElementById('mlPlay').textContent='▶ Träna';renderPruneUI();renderCompare();return false;}
   const node=mlQueue.shift();mlSt.cur=node._pid;renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);
   const avail=node.avail;const pure=entropy(node.rows)===0;
   document.getElementById('raceHead').innerHTML=`Nod med ${node.rows.length} ormar — samtliga egenskaper prövas…`;
@@ -1376,6 +1514,15 @@ document.getElementById('mlPlay').onclick=async()=>{
   while(mlPlaying){const more=await mlStep();if(!more)break;await sleep(450);}
   mlPlaying=false;btn.textContent='▶ Träna';if(!mlDone)document.getElementById('mlNext').disabled=false;};
 document.getElementById('mlReset').onclick=()=>mlResetFn();
+function doPrune(){
+  if(!mlRoot||!mlDone)return;
+  pruneBefore={tr:Math.round(accuracy(mlRoot,TRAIN)*100),te:Math.round(accuracy(mlRoot,TEST)*100)};
+  if(!pruneDeepest(mlRoot))return;
+  prunedOnce=true;mlSt.prev=null;
+  renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);
+  updateMLStats();renderCurve();renderPruneUI();renderCompare();
+  toast('Delningen är borttagen','good',2000);
+}
 function renderCurve(){
   const w=480,h=168,padL=42,padR=18,padT=16,padB=34;const MAXD=maxDepth(DEEP);
   const tr=[],te=[];for(let d=1;d<=MAXD;d++){const t=id3(TRAIN,ATTRS,0,d);tr.push(accuracy(t,TRAIN));te.push(accuracy(t,TEST));}
@@ -1394,13 +1541,60 @@ function renderCurve(){
   const empty=dShown===0?`<text x="${(padL+w-padR)/2}" y="${(padT+h-padB)/2}" text-anchor="middle" font-size="11" font-family="monospace" fill="#5a6478">Kurvan växer fram medan trädet byggs…</text>`:'';
   document.getElementById('curve').innerHTML=`<svg viewBox="0 0 ${w} ${h}" style="width:100%;max-width:520px;height:auto">${grid}${marker}${line(tr,'#34d399')}${line(te,'#fbbf24')}${empty}${xl}${yTitle}${xTitle}</svg>`;}
 
+/* ── beskärning: gör om trädets djupaste delningar till löv ── */
+function pruneDeepest(root){
+  const d=maxDepth(root);if(d<1)return false;
+  let changed=false;
+  (function walk(n,depth){
+    if(n.type!=='split')return;
+    if(depth===d-1){n.type='leaf';n.label=majority(n.rows);delete n.children;delete n.attr;changed=true;return;}
+    Object.values(n.children).forEach(c=>walk(c,depth+1));
+  })(root,0);
+  return changed;
+}
+let prunedOnce=false,pruneBefore=null;
+function pruneBtnHTML(){
+  const dis=!mlRoot||maxDepth(mlRoot)<1;
+  return `<div class="prunefoot"><button class="btn sm violet" id="mlPrune"${dis?' disabled':''}>${dis?'Trädet kan inte förenklas ytterligare':'✂ Ta bort sista delningen'}</button></div>`;
+}
+function wirePrune(){const b=document.getElementById('mlPrune');if(b)b.onclick=doPrune;}
+function renderPruneUI(){
+  const box=document.getElementById('pruneBox');
+  if(!box)return;
+  if(!(mlRoot&&mlDone)){box.innerHTML='';return;}
+  const tr=Math.round(accuracy(mlRoot,TRAIN)*100),te=Math.round(accuracy(mlRoot,TEST)*100);
+  const e=errStats(TEST.map(s=>predict(mlRoot,s)));
+  if(!prunedOnce){
+    box.innerHTML=`<div class="prunebox"><div class="ph">Pröva att förenkla trädet</div>
+      Trädets nedersta frågor bygger på minst underlag och riskerar därför att beskriva enskilda undantag snarare än ett generellt samband. Ta bort den understa delningen och iaktta hur de båda måtten förändras.
+      ${pruneBtnHTML()}</div>`;
+    wirePrune();return;}
+  /* texten rättar sig efter vad som faktiskt hände — beskärning kan även gå för långt */
+  let ptxt;
+  if(pruneBefore&&te>pruneBefore.te){
+    ptxt=`Trädet blev <b>sämre</b> på den data det tränats på och <b>bättre</b> på data det aldrig sett. Modellen har inte förlorat kunskap — den har förlorat de undantag som aldrig utgjorde ett mönster. Förfarandet kallas <button class="term" data-term="prune">beskärning</button>.`;
+  } else if(pruneBefore&&te<pruneBefore.te){
+    ptxt=`Nu sjönk träffsäkerheten på <b>båda</b> datamängderna. Trädet har blivit för enkelt och saknar den fråga som behövdes för att skilja klasserna åt. <button class="term" data-term="prune">Beskärning</button> förbättrar en modell endast så länge det är undantag som avlägsnas — därefter försvinner även mönstret.`;
+  } else {
+    ptxt=`Träffsäkerheten på testdatan är oförändrad, medan trädet blivit enklare. En modell som ger samma resultat med färre frågor är att föredra. Förfarandet kallas <button class="term" data-term="prune">beskärning</button>.`;
+  }
+  box.innerHTML=`<div class="prunebox"><div class="ph">Efter beskärningen</div>
+    ${ptxt}
+    <div class="prunedelta">
+      <span class="pd">Träning <b>${tr}&nbsp;%</b></span>
+      <span class="pd">Test <b>${te}&nbsp;%</b></span>
+      <span class="pd">Missade giftiga <b class="${e.fn?'dn':'up'}">${e.fn}</b></span>
+      <span class="pd">Falsklarm <b class="${e.fp?'dn':'up'}">${e.fp}</b></span>
+    </div>${pruneBtnHTML()}</div>`;
+  wirePrune();
+}
 function pathOf(root,row){let n=root,pid='r';const ids=new Set(['r']);while(n.type==='split'){const v=row[n.attr];pid+='>'+v;if(!n.children[v])break;n=n.children[v];ids.add(pid);}return ids;}
 
 /* ================= step 3: test YOUR tree on held-out data ================= */
-let youIdx=0,youScore=[],youRan=false,youRev=false,youForce=false;
+let youIdx=0,youScore=[],youPred=[],youRan=false,youRev=false,youForce=false;
 let youRunAll=false;
 const youSt={prev:null,sel:null};
-function youEnter(){youIdx=0;youScore=[];youForce=false;youRunAll=false;document.getElementById('youTally').innerHTML='';renderYouScene();}
+function youEnter(){youIdx=0;youScore=[];youPred=[];youForce=false;youRunAll=false;document.getElementById('youTally').innerHTML='';renderYouScene();}
 function speedMs(base){return Math.round(base/1.6);}
 function renderYouControls(){
   return `<div class="groupbar" id="youControls" style="margin:0 0 14px">
@@ -1428,10 +1622,18 @@ function renderYouScene(){
   if(youIdx>=TEST.length){
     youRunAll=false;
     const sy=youScore.filter(Boolean).length;
-    if(sy===TEST.length)setTimeout(()=>{reward('Alla åtta rätt!',document.getElementById('youScene'),50);},260);
-    scene.innerHTML=`<div class="alert" style="color:var(--emerald)">Klart — du körde alla åtta osedda</div>
-      <div class="verdict" style="color:var(--text-primary)">På <b>osedd testdata</b> fångade ditt träd <b>${sy}/8</b> rätt.</div>
-      <div class="q">Det här visar hur trädet faktiskt presterar — de här ormarna hade det aldrig sett tidigare. Se härnäst hur en dator bygger sitt eget träd på samma träningsdata, och testar det på samma åtta.</div>
+    if(sy===TEST.length)setTimeout(()=>{reward(`Samtliga ${TEST.length} korrekt klassificerade`,document.getElementById('youScene'),50);},260);
+    const e=errStats(youPred);
+    const rc=e.gTot?Math.round(e.tp/e.gTot*100):0, pr=e.flagged?Math.round(e.tp/e.flagged*100):null;
+    scene.innerHTML=`<div class="alert" style="color:var(--emerald)">Klart — samtliga osedda ormar är körda</div>
+      <div class="verdict" style="color:var(--text-primary)">På <b>osedd testdata</b> klassificerade ditt träd <b>${sy}/${TEST.length}</b> rätt.</div>
+      <div class="q">Träffsäkerheten säger dock inte allt. Två träd kan få lika många rätt och ändå vara olika farliga, eftersom felen kan vara av skilda slag.</div>
+      <div class="metricline">
+        <span>Av <b>${e.gTot}</b> giftiga ormar fångade trädet <b>${e.tp}</b> — <button class="term" data-term="recall">recall</button> <b>${rc}&nbsp;%</b></span>
+        <span>Av <b>${e.flagged}</b> varningar var <b>${e.tp}</b> befogade — <button class="term" data-term="precision">precision</button> <b>${pr===null?'—':pr+'&nbsp;%'}</b></span>
+      </div>
+      <div class="q" style="margin-top:14px">${e.fn?`Trädet släppte igenom <b>${e.fn} giftig${e.fn>1?'a ormar':' orm'}</b>. I ett sammanhang där felbedömningen kan kosta liv väger den feltypen tyngre än falsklarmen.`:`Trädet släppte inte igenom någon giftig orm. ${e.fp?`De ${e.fp} falsklarmen innebär att ofarliga ormar behandlas som farliga — ett mindre allvarligt fel.`:'Modellen gjorde inga fel av något slag på testdatan.'}`}</div>
+      <div class="q">Se härnäst hur en dator bygger sitt eget träd på samma träningsdata och testar det på samma ormar.</div>
       <div class="reveal-row"><button class="btn sm ghost" id="youAgain">↺ Börja om</button><button class="btn primary" id="toMachine">Se hur en dator bygger →</button></div>`;
     document.getElementById('youAgain').onclick=youEnter;
     document.getElementById('toMachine').onclick=()=>go(3);
@@ -1439,8 +1641,8 @@ function renderYouScene(){
   const s=TEST[youIdx];youRan=false;youRev=false;youSt.path=null;
   const controls=renderYouControls();
   scene.innerHTML=`${controls}<div class="alert">🔍 Osedd orm ${youIdx+1} av ${TEST.length}</div>
-      <div class="big arrive">${snake(s)}</div>
-      <div class="q">Den här ormen har trädet <b>aldrig sett</b>. Vad säger <b>ditt</b> träd — giftig eller ofarlig?</div>
+      <div class="big arrive" role="img" aria-label="Osedd orm ${youIdx+1}: ${ATTRS.map(a=>ANAME[a]+' '+vname(a,s[a])).join(', ')}">${snake(s)}</div>
+      <div class="q">Vad säger <b>ditt</b> träd — giftig eller ofarlig?</div>
       ${youRunAll?'':'<button class="btn primary" id="runYouBtn">▶ Kör genom mitt träd</button>'}
       <div class="tracelabel" id="yTrace"></div>
       <div class="verdict" id="yVerdict"></div>
@@ -1475,7 +1677,7 @@ async function runYouAuto(s){
   }
 }
 function revealYou(s,v){
-  if(youRev)return;youRev=true;youScore[youIdx]=v===s.label;
+  if(youRev)return;youRev=true;youScore[youIdx]=v===s.label;youPred[youIdx]=v;
   if(v===s.label){const b=document.querySelector('#youScene .big');pulseOk(b);}
   const rev=document.getElementById('yReveal');
   if(rev)rev.innerHTML=`<span class="vs">Facit: ${labTag(s.label)}</span>
@@ -1485,13 +1687,25 @@ function revealYou(s,v){
   renderYouTally();
   if(youRunAll){setTimeout(()=>{if(!youRunAll)return;youIdx++;renderYouScene();renderYouTally();},speedMs(700));}
 }
+function errStats(preds){
+  let fn=0,fp=0,tp=0,gTot=0;
+  TEST.forEach((s,i)=>{const v=preds[i];if(s.label==='G')gTot++;if(v===undefined)return;
+    if(v==='G'&&s.label==='G')tp++;else if(v==='O'&&s.label==='G')fn++;else if(v==='G'&&s.label==='O')fp++;});
+  return{fn,fp,tp,gTot,flagged:tp+fp};
+}
 function renderYouTally(){
   const el=document.getElementById('youTally');const cell=r=>`<span class="dot ${r===undefined?'':(r?'ok':'no')}">${r===undefined?'':(r?'✓':'✕')}</span>`;
-  el.innerHTML=`<div class="row"><span class="who">Du</span>${TEST.map((_,i)=>cell(youScore[i])).join('')}</div>`;
+  const e=errStats(youPred);const any=youPred.some(v=>v!==undefined);
+  el.innerHTML=`<div class="row"><span class="who">Du</span>${TEST.map((_,i)=>cell(youScore[i])).join('')}</div>`
+    +(any?`<div class="errbox" style="width:100%">
+      <div class="eb miss"><div class="ebk">Missade giftiga</div><div class="ebv">${e.fn}</div>
+        <div class="ebn">Giftiga ormar som trädet bedömde som ofarliga.</div></div>
+      <div class="eb fa"><div class="ebk">Falsklarm</div><div class="ebv">${e.fp}</div>
+        <div class="ebn">Ofarliga ormar som trädet varnade för.</div></div></div>`:'');
 }
 
 /* ================= step 4: compare with the machine ================= */
-function compareEnter(){mlEnsure();renderCompare();}
+function compareEnter(){mlEnsure();renderPruneUI();renderCompare();}
 function treeAttrs(root){const seen=[];(function walk(n){if(n&&n.type==='split'){if(!seen.includes(n.attr))seen.push(n.attr);Object.keys(n.children).sort().forEach(k=>walk(n.children[k]));}})(root);return seen;}
 function domCell(v,truth){const ok=v===truth;return `<span class="vcell ${v==='G'?'g':'o'}">${v==='G'?'giftig':'ofarlig'} ${ok?'<span class="dot ok">✓</span>':'<span class="dot no">✕</span>'}</span>`;}
 function renderCompare(){
@@ -1500,6 +1714,7 @@ function renderCompare(){
   const yv=TEST.map(s=>predict(stuRoot,s)),mv=TEST.map(s=>predict(mlRoot,s));
   const ys=yv.filter((v,i)=>v===TEST[i].label).length,ms=mv.filter((v,i)=>v===TEST[i].label).length;
   const you=treeAttrs(stuRoot),mach=treeAttrs(mlRoot);
+  const eY=errStats(yv),eM=errStats(mv);
   const commonLen=(()=>{let i=0;while(i<you.length&&i<mach.length&&you[i]===mach[i])i++;return i;})();
   const shared=you.slice(0,commonLen),extraMach=mach.slice(commonLen),extraYou=you.slice(commonLen);
   const rows=TEST.map((s,i)=>`<tr><td class="c-snake">${snake(s)}</td><td>${labTag(s.label)}</td><td>${domCell(yv[i],s.label)}</td><td>${domCell(mv[i],s.label)}</td></tr>`).join('');
@@ -1526,33 +1741,110 @@ function renderCompare(){
   const overfit=mTrain>=95&&ms<TEST.length;
   let why;
   if(overfit&&greenTraps.length){
-    why=`Algoritmens träd klassificerade <b>${mTrain}%</b> av träningsdatan korrekt, men endast <b>${ms}/8</b> (${mTest}%) av testdatan. Förklaringen ligger i de sista delningarna: för att få samtliga träningsexempel rätt delade algoritmen även på <b>Färg</b> och etablerade regeln att gröna ormar är ofarliga. Den regeln vilar på ett enda grönt exempel i träningsdatan och är alltså en tillfällighet snarare än ett mönster. I testdatan förekommer gröna ormar som är giftiga, och trädet klassificerar ${greenTraps.length} av dem fel. Modellen har anpassats till träningsdatans detaljer i stället för till det underliggande sambandet — detta kallas <button class="term" data-term="overfit">överanpassning</button>.`;
+    why=`Algoritmens träd klassificerade <b>${mTrain}%</b> av träningsdatan korrekt, men endast <b>${ms}/${TEST.length}</b> (${mTest}%) av testdatan. För att få samtliga träningsexempel rätt delade algoritmen även på <b>Färg</b> och etablerade regeln att gröna ormar är ofarliga — en regel som vilar på ett enda grönt exempel. I testdatan klassificeras därför ${greenTraps.length} giftig${greenTraps.length>1?'a ormar':' orm'} som ofarlig${greenTraps.length>1?'a':''}. Modellen har anpassats till träningsdatans detaljer i stället för till det underliggande sambandet, vilket kallas <button class="term" data-term="overfit">överanpassning</button>. Knappen <b>Ta bort sista delningen</b> ovan visar effekten av att avlägsna den.`;
   } else if(overfit){
     why=`Algoritmens träd klassificerade <b>${mTrain}%</b> av träningsdatan korrekt men endast <b>${mTest}%</b> av testdatan. De sista delningarna byggde på enstaka undantag i träningsdatan i stället för på ett generellt samband, vilket är kännetecknande för <button class="term" data-term="overfit">överanpassning</button>.`;
   } else {
     why=`Algoritmens träd klassificerade <b>${mTrain}%</b> av träningsdatan och <b>${mTest}%</b> av testdatan korrekt.`;
   }
   let verdict;
-  if(ys>ms)verdict=`Ditt träd presterade bättre på testdatan, ${ys}/8 mot ${ms}/8, eftersom det är enklare. Fler frågor ger inte automatiskt en bättre modell: ett mindre träd bortser från undantagen och fångar i stället det samband som gäller generellt.`;
-  else if(ys===ms)verdict=`Båda träden fick ${ys}/8 rätt. `+(ys===TEST.length?`Båda har alltså fångat det samband som gäller även för ny data.`:`Undersök vilka ormar båda klassificerade fel och vad dessa har gemensamt.`);
-  else verdict=`Algoritmens träd fick fler rätt (${ms}/8 mot ${ys}/8). Gå gärna tillbaka till steg 2 och undersök om ett annat träd hade generaliserat bättre.`;
+  if(ys>ms)verdict=`Ditt träd presterade bättre på testdatan, ${ys}/${TEST.length} mot ${ms}/${TEST.length}, eftersom det är enklare. Fler frågor ger inte automatiskt en bättre modell: ett mindre träd bortser från undantagen och fångar i stället det samband som gäller generellt.`;
+  else if(ys===ms)verdict=`Båda träden fick ${ys}/${TEST.length} rätt. `+(ys===TEST.length?`Båda har alltså fångat det samband som gäller även för ny data.`:`Undersök vilka ormar båda klassificerade fel och vad dessa har gemensamt.`);
+  else verdict=`Algoritmens träd fick fler rätt (${ms}/${TEST.length} mot ${ys}/${TEST.length}). Gå gärna tillbaka till steg 2 och undersök om ett annat träd hade generaliserat bättre.`;
 
   zone.innerHTML=`<div class="cmpwrap glass">
     <div class="cap">Ditt träd jämfört med algoritmens</div>
     <table class="cmptable"><thead><tr><th>Orm</th><th>Facit</th><th>Ditt träd</th><th>Algoritmen</th></tr></thead><tbody>${rows}</tbody></table>
-    <div class="scoreline"><span>Ditt träd: <b>${ys}/8</b></span><span>Algoritmen: <b>${ms}/8</b></span></div>
+    <div class="scoreline"><span>Ditt träd: <b>${ys}/${TEST.length}</b></span><span>Algoritmen: <b>${ms}/${TEST.length}</b></span></div>
+    <div class="metricline">
+      <span>Ditt träd — missade giftiga <b>${eY.fn}</b>, falsklarm <b>${eY.fp}</b></span>
+      <span>Algoritmen — missade giftiga <b>${eM.fn}</b>, falsklarm <b>${eM.fp}</b></span>
+    </div>
     <div class="callout ${ms<ys?'emerald':(ms>ys?'amber':'')}">${compareLine}</div>
     <div class="whyhead">Varför skiljer sig resultaten åt?</div>
     <div class="callout rose" style="margin-top:0">${why}</div>
     <div class="callout ${ys>ms?'emerald':(ys<ms?'amber':'')}">${verdict}</div>
 
-    <div class="reflecthead">Sammanfattning</div>
-    <div class="reflectgrid">
+    </div>
+  </div>`;
+}
+
+
+/* ================= steg 5: slutsatser ================= */
+const REFLECT=`<div class="reflectgrid">
       <div class="rcard warn"><div class="rh">Träffsäkerhet på träningsdata säger lite</div><p>Ett perfekt resultat på <b>träningsdatan</b> innebär inte att modellen är bra. Den kan ha anpassats till exemplen i stället för till ett generellt samband.</p></div>
       <div class="rcard"><div class="rh">Testdata mäter generalisering</div><p>Data som undanhållits under träningen används för att pröva om modellen fungerar på nya fall, det vill säga om den <button class="term" data-term="generalize">generaliserar</button>.</p></div>
       <div class="rcard good"><div class="rh">Enklare modeller generaliserar ofta bättre</div><p>En modell med färre frågor bortser från enskilda undantag i träningsdatan och fångar därmed oftare det samband som gäller generellt.</p></div>
-    </div>
-  </div>`;
+      <div class="rcard warn"><div class="rh">Alla fel väger inte lika tungt</div><p>Två modeller kan ha samma träffsäkerhet och ändå vara olika farliga. Att bedöma en giftig orm som ofarlig är ett allvarligare fel än det omvända, varför <button class="term" data-term="recall">recall</button> och <button class="term" data-term="precision">precision</button> redovisas separat.</p></div>
+      <div class="rcard"><div class="rh">Modellen är aldrig bättre än datan</div><p>Regeln som trädet fann gäller i detta material. I verkligheten är sambandet mellan huvudform och gift långtifrån entydigt — flera livsfarliga ormar har runt huvud och runda pupiller. En modell återger de mönster som finns i dess data, inte världen som helhet.</p></div>`;
+const SUMQ=[
+ {q:'En modell klassificerar <b>99 %</b> av träningsdatan rätt, men endast <b>71 %</b> av testdatan. Vad är den rimligaste förklaringen?',
+  opts:['Modellen har lärt sig träningsdatans undantag i stället för det generella sambandet',
+        'Testdatan måste vara felaktigt märkt',
+        'Modellen behöver ställa fler frågor'],
+  correct:0,
+  facit:'Skillnaden mellan de två talen är själva kännetecknet på <button class="term" data-term="overfit">överanpassning</button>. Att testdatan skulle vara felmärkt är möjligt men långsökt — mönstret uppträder alltför regelbundet för att bero på slump. Att lägga till fler frågor förvärrar tvärtom problemet: det var just de sista frågorna som orsakade det. Rätt åtgärd är att förenkla modellen, exempelvis genom <button class="term" data-term="prune">beskärning</button>.'},
+ {q:'Ett varningssystem för giftiga ormar hittar <b>samtliga 4</b> giftiga ormar i ett test, men varnar dessutom för <b>6 ofarliga</b>. Vilket mått är högt och vilket är lågt?',
+  opts:['Hög recall, låg precision','Hög precision, låg recall','Båda måtten är låga'],
+  correct:0,
+  facit:'Systemet fångar allt farligt — <button class="term" data-term="recall">recall</button> är 100 %. Men av de 10 ormar det varnade för var bara 4 giftiga, vilket ger en <button class="term" data-term="precision">precision</button> på 40 %. Ett sådant system är säkert men opålitligt: varnar det tillräckligt ofta i onödan slutar användarna att lyssna, och då sjunker skyddet i praktiken trots att recall på pappret är perfekt.'},
+ {q:'Två träd får båda <b>10 av 12</b> rätt. Det ena missar två giftiga ormar; det andra varnar för två ofarliga. Vilket väljer du?',
+  opts:['Det som missar två giftiga','Det som varnar för två ofarliga','Det beror på vad felet kostar'],
+  correct:null,
+  facit:'Frågan har inget facit i statistisk mening — träffsäkerheten är identisk, och måtten kan inte avgöra saken åt dig. Valet avgörs av vad de två feltyperna kostar. Gäller det ormbett är ett missat giftfall potentiellt dödligt medan ett falsklarm innebär onödig försiktighet, och då är det andra trädet självklart. Gäller det i stället ett spamfilter är förhållandet det omvända: ett viktigt mejl i skräpkorgen är värre än ett reklamutskick i inkorgen. Samma siffror, motsatt slutsats. Det är därför måtten alltid måste tolkas i sitt sammanhang.'}
+];
+let sumAns={},sumFacit={};
+function recapRows(){
+  const rows=[];
+  const yAttrs=treeAttrs(stuRoot), fr=countFrontier(stuRoot);
+  const mlAttrs=(mlRoot&&mlDone)?treeAttrs(mlRoot):null;
+  const rootAttr=(mlRoot&&mlRoot.type==='split')?mlRoot.attr:null;
+  if(hypo)rows.push(['Din hypotes',rootAttr
+      ? `Du utsåg <b>${ANAME[hypo]}</b> till viktigaste egenskap. Algoritmen valde <b>${ANAME[rootAttr]}</b> i rotnoden${hypo===rootAttr?' — samma bedömning.':', eftersom den gav störst informationsvinst.'}`
+      : `Du utsåg <b>${ANAME[hypo]}</b> till viktigaste egenskap.`]);
+  rows.push(['Ditt träd', yAttrs.length
+      ? `Ställde ${yAttrs.length===1?'<b>en</b> fråga':`<b>${yAttrs.length}</b> frågor`}: <b>${yAttrs.map(a=>ANAME[a]).join(' → ')}</b>.${fr?` ${fr} gren${fr>1?'ar':''} lämnades obestämd${fr>1?'a':''}.`:''}`
+      : 'Byggdes aldrig färdigt — gå tillbaka till steg 2 om du vill pröva.']);
+  const yv=TEST.map(x=>predict(stuRoot,x)), e=errStats(yv);
+  const ok=yv.filter((v,i)=>v===TEST[i].label).length;
+  rows.push(['På testdata',`<b>${ok} av ${TEST.length}</b> rätt på ormar trädet aldrig sett. `
+    +(e.fn?`<b>${e.fn}</b> giftig${e.fn>1?'a':''} släpptes igenom`:'Ingen giftig orm släpptes igenom')
+    +(e.fp?`, och <b>${e.fp}</b> ofarlig${e.fp>1?'a':''} utlöste falsklarm.`:', och inga falsklarm utlöstes.')]);
+  if(mlAttrs){
+    const mok=TEST.filter(x=>predict(mlRoot,x)===x.label).length;
+    rows.push(['Algoritmens träd',`Ställde <b>${mlAttrs.length}</b> frågor: <b>${mlAttrs.map(a=>ANAME[a]).join(' → ')}</b>. Träning <b>${pct(accuracy(mlRoot,TRAIN))}</b>, test <b>${mok} av ${TEST.length}</b>.`]);
+    if(prunedOnce){
+      const dOk=TEST.filter(x=>predict(DEEP,x)===x.label).length;
+      rows.push(['Beskärningen',`Innan du beskar det ställde algoritmens träd <b>${treeAttrs(DEEP).length}</b> frågor och klassificerade <b>${dOk} av ${TEST.length}</b> rätt vid <b>${pct(accuracy(DEEP,TRAIN))}</b> på träningsdatan. Du tog bort den understa delningen och kunde iaktta hur de båda måtten rörde sig åt <b>olika håll</b>.`]);
+    }
+  } else rows.push(['Algoritmens träd','Byggdes aldrig färdigt — gå tillbaka till steg 4 och tryck <b>Träna</b>.']);
+  return rows;
+}
+function renderSummary(){
+  const rc=document.getElementById('sumRecap');
+  if(rc)rc.innerHTML=`<div class="recap"><div class="rcp-h">Så här gick det</div>`
+    +recapRows().map(([k,v])=>`<div class="rr"><span class="rk">${k}</span><span class="rv">${v}</span></div>`).join('')+`</div>`;
+  const qz=document.getElementById('sumQuiz');
+  if(qz)qz.innerHTML=SUMQ.map((q,i)=>{
+    const a=sumAns[i],answered=a!==undefined,open=q.correct===null;
+    return `<div class="sumq"><div class="qn">Fråga ${i+1} av ${SUMQ.length}</div><div class="qt">${q.q}</div>
+      <div class="sumopts">${q.opts.map((o,k)=>{
+        let cls='sumopt';
+        if(answered&&k===a)cls+=open?' open chosen':(k===q.correct?' ok chosen':' no chosen');
+        else if(answered&&!open&&k===q.correct)cls+=' ok';
+        return `<button class="${cls}" data-q="${i}" data-o="${k}"${answered?' disabled':''}>
+          <span class="om">${String.fromCharCode(65+k)}</span><span>${o}</span></button>`;}).join('')}</div>
+      <button class="facitbtn" data-f="${i}">${sumFacit[i]?'Dölj facit':'Visa facit'}</button>
+      ${sumFacit[i]?`<div class="facit"><div class="fh">Facit</div>${q.facit}</div>`:''}</div>`;}).join('');
+  qz.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{
+    sumAns[+b.dataset.q]=+b.dataset.o;sumFacit[+b.dataset.q]=true;renderSummary();});
+  qz.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.f;sumFacit[i]=!sumFacit[i];renderSummary();});
+  const cards=document.getElementById('sumCards');
+  if(cards)cards.innerHTML=(Object.keys(sumAns).length?`<div class="reflecthead">Det här visade försöket</div>${REFLECT}`:'');
+  const lex=document.getElementById('sumLex');
+  const ORDER=['entropy','gain','accuracy','recall','precision','overfit','prune','generalize'];
+  if(lex)lex.innerHTML=ORDER.filter(k=>CONCEPTS[k]).map(k=>`<button class="term" data-term="${k}">${CONCEPTS[k].t}</button>`).join('');
 }
 
 /* ================= ambient ================= */
