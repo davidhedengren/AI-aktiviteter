@@ -89,6 +89,20 @@
 
   .grid{display:grid;gap:14px}
   .specimens{grid-template-columns:repeat(auto-fill,minmax(118px,1fr))}
+  .specimens.mini{grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:8px}
+  .specimens.mini .scard{padding:6px 4px 5px;border-radius:12px}
+  .specimens.mini .scard .id{font-size:8.5px;top:5px;left:6px}
+  .specimens.mini .scard .lab{font-size:9px;padding:2px 5px;gap:3px;margin-top:3px}
+  .branchspec{margin-top:18px;padding-top:15px;border-top:1px solid var(--border-subtle)}
+  .branchspec .bshead{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px}
+  .bsclose{margin-left:auto;flex:none;width:28px;height:28px;border-radius:9px;border:1px solid var(--border-subtle);background:rgba(255,255,255,.03);color:var(--text-muted);font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
+  .bsclose:hover{color:var(--text-primary);border-color:var(--border-hover);background:rgba(255,255,255,.07)}
+  .bsclose:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+  .bsopen{font-family:'Space Grotesk',sans-serif;font-size:12.5px;font-weight:600;color:var(--text-secondary);background:rgba(255,255,255,.03);border:1px solid var(--border-subtle);border-radius:100px;padding:7px 15px;cursor:pointer;transition:.2s}
+  .bsopen:hover{color:var(--text-primary);border-color:var(--border-hover)}
+  .bsopen:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+  .branchspec .bshead b{color:var(--text-secondary);font-weight:400;text-transform:none;letter-spacing:.02em}
+  .branchspec .bswrap{max-height:270px;overflow-y:auto;overscroll-behavior:contain;padding-right:4px}
   .scard{background:linear-gradient(168deg,rgba(32,42,72,.78),rgba(14,19,34,.85));border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:10px 8px 8px;position:relative;box-shadow:0 10px 22px rgba(0,0,0,.30),0 1px 0 rgba(255,255,255,.05) inset;transition:transform .35s var(--ease-out),border-color .3s,box-shadow .3s;overflow:hidden}
   .scard::before{content:'';position:absolute;inset:0;background:radial-gradient(120% 70% at 50% -10%,rgba(96,165,250,.10),transparent 60%);pointer-events:none}
   .scard:hover{transform:translateY(-4px);border-color:var(--border-hover);box-shadow:0 16px 30px rgba(0,0,0,.4)}
@@ -163,7 +177,13 @@
   .hypodone .picked{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--violet)}
 
   /* canvas tree */
-  .canvas-wrap{overflow-x:auto;overflow-y:hidden;margin-top:16px;padding:18px 8px;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);background:radial-gradient(ellipse 90% 70% at 50% -10%,rgba(96,165,250,.09),transparent 60%),linear-gradient(180deg,rgba(9,12,22,.5),rgba(9,12,22,.2))}
+  .canvas-wrap{position:relative;overflow:hidden;margin-top:16px;padding:0;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);background:radial-gradient(ellipse 90% 70% at 50% -10%,rgba(96,165,250,.09),transparent 60%),linear-gradient(180deg,rgba(9,12,22,.5),rgba(9,12,22,.2));height:clamp(320px,52vh,520px);touch-action:none;cursor:grab;user-select:none}
+  .canvas-wrap.dragging{cursor:grabbing}
+  .canvas-wrap svg{display:block;width:100%;height:100%}
+  .zoomctl{position:absolute;right:10px;bottom:10px;display:flex;flex-direction:column;gap:6px;z-index:3}
+  .zoomctl button{width:34px;height:34px;border-radius:11px;border:1px solid var(--border-subtle);background:rgba(9,12,22,.82);backdrop-filter:blur(8px);color:var(--text-secondary);font-size:17px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
+  .zoomctl button:hover{color:var(--text-primary);border-color:var(--border-hover);background:rgba(20,27,46,.92)}
+  .zoomctl button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
   svg.tree{display:block;margin:0 auto}
   .tnodeWrap{cursor:pointer}
   .tnodeWrap:focus-visible{outline:none}
@@ -447,9 +467,6 @@
   footer{position:relative;z-index:2;text-align:center;padding:36px 0 10px;color:var(--text-muted);font-size:12.5px;font-family:'JetBrains Mono',monospace}
 
   /* horisontell scroll-indikator på trädcanvasen */
-  .canvas-wrap.scrollable{box-shadow:inset -24px 0 20px -20px rgba(34,211,238,.45)}
-  .canvas-wrap.scrollable::after{content:'⟷ dra i sidled';position:absolute;top:8px;right:10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.04em;color:var(--cyan);background:rgba(9,12,22,.82);border:1px solid rgba(34,211,238,.28);border-radius:100px;padding:3px 9px;pointer-events:none}
-  .canvas-wrap{position:relative}
 
   @media(max-width:640px){
     .glass{padding:18px!important}
@@ -464,10 +481,6 @@
   @media(prefers-reduced-motion:reduce){*{animation-duration:.001s!important}.tiltcard{transition:none}}
 
   /* --- horizontell scroll-indikator för träden --- */
-  .scrollhint{display:none;align-items:center;gap:7px;margin:9px 2px 0;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.03em;color:var(--text-muted);opacity:.9;transition:opacity .45s var(--ease-out)}
-  .scrollhint.show{display:inline-flex}
-  .scrollhint.gone{opacity:0;pointer-events:none}
-  .scrollhint .arr{display:inline-block;animation:nudge 1.5s ease-in-out infinite;font-size:13px}
   @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
 
   /* --- responsivt / mobil --- */
@@ -605,6 +618,15 @@
   .snav.done .num{font-size:12px}
   @media(prefers-reduced-motion:reduce){.snav.active .num::after{animation:none;opacity:0}}
 
+  /* ── sidhuvudets länkar ── */
+  .toplinks{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:18px;flex-wrap:wrap}
+  .back-link,.lang-link{display:inline-flex;align-items:center;gap:7px;font-family:'Space Grotesk',sans-serif;
+    font-size:12.5px;font-weight:600;color:var(--text-muted);text-decoration:none;padding:7px 13px;
+    border:1px solid var(--border-subtle);border-radius:100px;background:rgba(255,255,255,.02);transition:.22s var(--ease-out);white-space:nowrap}
+  .back-link:hover,.lang-link:hover{color:var(--text-primary);border-color:var(--border-hover);background:rgba(255,255,255,.06)}
+  .back-link:focus-visible,.lang-link:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+  .lang-link .flag{display:block;border-radius:2px;flex:none}
+
   /* ── 10. Typografisk rytm ── */
   .step-intro{padding:20px 22px 18px}
   .si-act{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;
@@ -629,14 +651,14 @@
   @media(max-width:680px){
     .container{padding:0 14px 70px}
     .glass{padding:18px!important}
-    .hero{padding:16px 0 6px}
+    .hero{padding:10px 0 6px}
     .hero p{font-size:15px}
     .hero p.focus{font-size:clamp(15px,4.6vw,19px)}
     .pill{font-size:12.5px;padding:8px 12px;gap:7px}
     .stepper{padding:9px;margin:20px 0 18px}
     .callout{padding:12px 14px;font-size:13.5px}
     /* håll trädet lagom högt så kontrollpanelen är nära till hands */
-    .canvas-wrap{max-height:58vh;overflow-y:auto;padding:14px 6px;overscroll-behavior:contain}
+    .canvas-wrap{height:clamp(280px,46vh,420px)}
     .controlbar{gap:8px}
     .controlbar .btn{flex:1 1 auto;justify-content:center}
     /* fäst kontrollpanelen så den följer med när man scrollar i ett långt träd */
@@ -677,7 +699,11 @@
 </div>
 
 <div class="container">
-  <a class="backlink" href="https://ai-aktiviteter.se/">← AI-aktiviteter</a>
+  <div class="toplinks">
+    <a class="back-link" href="/">← AI-aktiviteter</a>
+    <a class="lang-link" href="https://www.ai-aktiviteter.se/beslutstrad_ENG"><svg class="flag" width="18" height="12" viewBox="0 0 60 36" aria-hidden="true"><rect width="60" height="36" fill="#012169"/><path d="M0,0 L60,36 M60,0 L0,36" stroke="#fff" stroke-width="7.2"/><path d="M0,0 L60,36 M60,0 L0,36" stroke="#C8102E" stroke-width="4.8"/><rect x="25" width="10" height="36" fill="#fff"/><rect y="13" width="60" height="10" fill="#fff"/><rect x="27" width="6" height="36" fill="#C8102E"/><rect y="15" width="60" height="6" fill="#C8102E"/></svg> English</a>
+  </div>
+
   <header class="hero">
     <h1 class="title">Beslutsträd</h1>
     <div class="heroIntro" id="heroIntro">
@@ -1078,10 +1104,10 @@ function nodeInner(n,cid){
   const cntC=`<text class="tcount" x="${cx}" y="${NH-9}" text-anchor="middle"><tspan fill="#fb7185">▲${c.g}</tspan><tspan dx="9" fill="#34d399">●${c.o}</tspan></text>`;
   const cntL=`<text class="tcount" x="14" y="${NH-9}" text-anchor="start"><tspan fill="#fb7185">▲${c.g}</tspan><tspan dx="9" fill="#34d399">●${c.o}</tspan></text>`;
   if(n.type==='split')
-    return `<text class="teye" x="14" y="18">FRÅGA</text><text class="tsplit" x="13" y="44">${ANAME[n.attr]}</text>${distBar(cid,n.rows,14,NH-26,NW-28)}${cntL}`;
+    return `<text class="teye" x="14" y="18">FRÅGA</text><text class="tsplit" x="13" y="44" data-fit="${NW-26}">${ANAME[n.attr]}</text>${distBar(cid,n.rows,14,NH-26,NW-28)}${cntL}`;
   if(n.type==='leaf'){const g=(n.label||n.fallback)==='G';
-    return `<text class="tverdict ${g?'vg':'vo'}" x="${cx}" y="38" text-anchor="middle">${g?'▲ GIFTIG':'● OFARLIG'}</text>${distBar(cid,n.rows,14,NH-26,NW-28)}${cntC}`;}
-  return `<text class="tfront" x="${cx}" y="36" text-anchor="middle">Obestämd</text>${distBar(cid,n.rows,14,NH-26,NW-28)}${cntC}`;
+    return `<text class="tverdict ${g?'vg':'vo'}" x="${cx}" y="38" text-anchor="middle" data-fit="${NW-24}">${g?'▲ GIFTIG':'● OFARLIG'}</text>${distBar(cid,n.rows,14,NH-26,NW-28)}${cntC}`;}
+  return `<text class="tfront" x="${cx}" y="36" text-anchor="middle" data-fit="${NW-24}">Obestämd</text>${distBar(cid,n.rows,14,NH-26,NW-28)}${cntC}`;
 }
 function renderTree(container,root,st){
   const L=layout(root);const cur=new Set();let edges='',nodes='';const rid='t'+(RID++)+'_';
@@ -1091,7 +1117,7 @@ function renderTree(container,root,st){
       const isNew=st.prev&&!st.prev.has(c._pid);const onp=st.path&&st.path.has(c._pid)&&st.path.has(n._pid);
       edges+=`<path class="tedge${isNew?' enter':''}${onp?' onpath':''}" d="M${x1},${y1} C${x1},${my} ${x2},${my} ${x2},${y2}" pathLength="1"/>`;
       const lab=vname(n.attr,k),wch=lab.length*7.6+24;
-      edges+=`<g class="eLabel${isNew?' enter':''}" transform="translate(${mx},${my})"><rect x="${-wch/2}" y="-13" width="${wch}" height="26" rx="13"/><text x="0" y="5" text-anchor="middle">${lab}</text></g>`;}}}
+      edges+=`<g transform="translate(${mx},${my})"><g class="eLabel${isNew?' enter':''}"><rect x="${-wch/2}" y="-13" width="${wch}" height="26" rx="13"/><text x="0" y="5" text-anchor="middle">${lab}</text></g></g>`;}}}
   for(const n of L.all){const gx=n._x+PAD,gy=n._y+PAD;const isNew=st.prev&&!st.prev.has(n._pid);
     const lab=n.type==='split'?ANAME[n.attr]:(n.type==='leaf'?((n.label||n.fallback)==='G'?'GIFTIG':'OFARLIG'):'obestämd');
     const clickable=!!st.onClick;const cid=rid+'c'+n._pid.replace(/[^a-z0-9]/gi,'');
@@ -1101,11 +1127,99 @@ function renderTree(container,root,st){
       <rect class="${nodeCls(n,st)}" x="0" y="0" width="${NW}" height="${NH}" rx="16" filter="url(#tsh)"/>
       <rect class="cardtop" x="1.5" y="1.5" width="${NW-3}" height="${NH-3}" rx="14.5"/>
       ${nodeInner(n,cid)}</g></g>`;}
-  container.innerHTML=`<svg class="tree" width="${L.width}" height="${L.height}" viewBox="0 0 ${L.width} ${L.height}">${edges}${nodes}</svg>`;
-  if(container.classList.contains('canvas-wrap'))container.classList.toggle('scrollable',container.scrollWidth>container.clientWidth+2);
+  container.innerHTML=`<svg class="tree" preserveAspectRatio="xMidYMid meet" viewBox="0 0 ${L.width} ${L.height}">${edges}${nodes}</svg>`
+    +`<div class="zoomctl"><button data-z="in" aria-label="Zooma in">+</button><button data-z="out" aria-label="Zooma ut">−</button><button data-z="fit" aria-label="Anpassa till trädet">⤢</button></div>`;
+  const prevC=container.__content;
+  container.__content={w:L.width,h:L.height};
+  const grew=!prevC||prevC.w!==L.width||prevC.h!==L.height;
+  attachPanZoom(container);
+  applyView(container,grew||!container.__view);
+  fitNodeText(container);
   st.prev=cur;
-  if(st.onClick)container.querySelectorAll('.tnodeWrap').forEach(el=>{el.onclick=()=>st.onClick(el.dataset.id);
+  if(st.onClick)container.querySelectorAll('.tnodeWrap').forEach(el=>{el.onclick=()=>{if((container.__moved||0)>6)return;st.onClick(el.dataset.id);};
     el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();st.onClick(el.dataset.id);}};});
+}
+/* ── fri pan/zoom i trädcanvasen ── */
+function applyView(el,refit){
+  const svg=el.querySelector('svg');if(!svg)return;
+  const c=el.__content||{w:800,h:400};
+  if(refit||!el.__view){
+    const m=26,ar=(el.clientWidth||800)/(el.clientHeight||400);
+    let w=c.w+m*2,h=c.h+m*2;
+    if(w/h<ar)w=h*ar;else h=w/ar;
+    el.__view={x:c.w/2-w/2,y:c.h/2-h/2,w,h};
+  }
+  const v=el.__view;
+  svg.setAttribute('viewBox',`${v.x.toFixed(1)} ${v.y.toFixed(1)} ${v.w.toFixed(1)} ${v.h.toFixed(1)}`);
+}
+function zoomAt(el,factor,cx,cy){
+  const v=el.__view;if(!v)return;
+  const c=el.__content||{w:800,h:400};
+  const minW=Math.min(c.w,420)*0.45, maxW=Math.max(c.w,600)*3.2;
+  let nw=Math.min(maxW,Math.max(minW,v.w*factor));
+  const k=nw/v.w;
+  v.x=cx-(cx-v.x)*k; v.y=cy-(cy-v.y)*k; v.w=nw; v.h=v.h*k;
+  applyView(el);
+}
+function toUser(el,clientX,clientY){
+  const r=el.getBoundingClientRect(),v=el.__view;
+  if(!v||!r.width)return[0,0];
+  return[v.x+((clientX-r.left)/r.width)*v.w, v.y+((clientY-r.top)/r.height)*v.h];
+}
+function wireZoomBtns(el){
+  el.querySelectorAll('.zoomctl button').forEach(b=>b.onclick=e=>{
+    e.stopPropagation();const v=el.__view;if(!v)return;
+    const cx=v.x+v.w/2,cy=v.y+v.h/2;
+    if(b.dataset.z==='in')zoomAt(el,1/1.3,cx,cy);
+    else if(b.dataset.z==='out')zoomAt(el,1.3,cx,cy);
+    else applyView(el,true);});
+}
+function attachPanZoom(el){
+  wireZoomBtns(el);
+  if(el.__pz)return;
+  el.__pz=1;
+  const pts=new Map();let last=null,pinch=null,moved=0;
+  el.addEventListener('pointerdown',e=>{
+    if(e.target.closest&&e.target.closest('.zoomctl'))return;
+    try{el.setPointerCapture(e.pointerId);}catch(_){}
+    pts.set(e.pointerId,{x:e.clientX,y:e.clientY});moved=0;el.__moved=0;
+    if(pts.size===1){last={x:e.clientX,y:e.clientY};el.classList.add('dragging');}
+    else if(pts.size===2){const v=[...pts.values()];
+      pinch={d:Math.hypot(v[0].x-v[1].x,v[0].y-v[1].y),c:toUser(el,(v[0].x+v[1].x)/2,(v[0].y+v[1].y)/2)};last=null;}
+  });
+  el.addEventListener('pointermove',e=>{
+    if(!pts.has(e.pointerId))return;
+    pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    const r=el.getBoundingClientRect(),v=el.__view;if(!v)return;
+    if(pts.size===2&&pinch){const q=[...pts.values()];
+      const d=Math.hypot(q[0].x-q[1].x,q[0].y-q[1].y);
+      if(d>0&&pinch.d>0){zoomAt(el,pinch.d/d,pinch.c[0],pinch.c[1]);pinch.d=d;}
+      moved=99;el.__moved=99;return;}
+    if(last){const dx=e.clientX-last.x,dy=e.clientY-last.y;
+      moved+=Math.abs(dx)+Math.abs(dy);el.__moved=moved;
+      v.x-=dx*(v.w/r.width); v.y-=dy*(v.h/r.height);
+      last={x:e.clientX,y:e.clientY};applyView(el);}
+  });
+  const up=e=>{pts.delete(e.pointerId);if(pts.size<2)pinch=null;
+    if(pts.size===0){last=null;el.classList.remove('dragging');}};
+  el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);
+  el.addEventListener('wheel',e=>{e.preventDefault();
+    const u=toUser(el,e.clientX,e.clientY);
+    zoomAt(el,e.deltaY>0?1.12:1/1.12,u[0],u[1]);},{passive:false});
+  el.addEventListener('dblclick',e=>{if(e.target.closest&&e.target.closest('.zoomctl'))return;applyView(el,true);});
+}
+/* texten i noden krymper hellre än sticker utanför kortet */
+function fitNodeText(container){
+  const run=()=>container.querySelectorAll('text[data-fit]').forEach(t=>{
+    const max=+t.getAttribute('data-fit');
+    t.style.fontSize='';
+    let len=0;try{len=t.getComputedTextLength();}catch(e){return;}
+    if(len>max&&len>0){
+      const base=parseFloat(getComputedStyle(t).fontSize)||20;
+      t.style.fontSize=Math.max(10,base*max/len).toFixed(2)+'px';
+    }});
+  run();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(run).catch(()=>{});
 }
 function nodeByPid(root,pid){const parts=pid.split('>');let n=root;for(let i=1;i<parts.length;i++)n=n.children[parts[i]];return n;}
 
@@ -1385,7 +1499,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelect
 /* ================= tab 1: student build ================= */
 function fresh(rows){return{type:'frontier',rows,fallback:majority(rows)};}
 let stuRoot=fresh(TRAIN);let stuSel=null;let stuFeedback=null;let stuCelebrated=false;
-let stuFbOpen=false;
+let stuFbOpen=false,stuSpecOpen=null;
 function splitFeedback(rows,attr,avail){
   const before=entropy(rows);const g=gain(rows,attr);const ratio=before>0?g/before:1;
   const meta={rows,attr,avail:avail||[]};
@@ -1455,7 +1569,16 @@ function renderStuCtrl(){
       <button class="btn sm" style="color:var(--emerald);border-color:rgba(52,211,153,.35)" data-a="leafO">● Ofarlig</button></div>`;
 
   }
+  const path=stuSel==='r'?'':stuSel.split('>').slice(1).map((v,i)=>vname(usedAttrs(stuSel)[i],v)).join(' · ');
+  const isRoot=stuSel==='r';
+  const specOpen=stuSpecOpen===null?!isRoot:stuSpecOpen;
+  const bstitle=`${isRoot?'Alla ormar':'Ormar i grenen'} <b>${path}${path?' · ':''}${node.rows.length} st</b>`;
+  h+=`<div class="branchspec">`+(specOpen
+    ? `<div class="bshead">${bstitle}<button class="bsclose" data-spec="hide" aria-label="Dölj ormarna" title="Dölj ormarna">✕</button></div>`
+      +`<div class="bswrap"><div class="grid specimens mini">${node.rows.map((sp,k)=>scard(sp,TRAIN.indexOf(sp),k)).join('')}</div></div>`
+    : `<button class="bsopen" data-spec="show">${isRoot?'Visa alla ormar':'Visa ormarna i grenen'} · ${node.rows.length} st</button>`)+`</div>`;
   el.innerHTML=h;
+  el.querySelectorAll('[data-spec]').forEach(b=>b.onclick=()=>{stuSpecOpen=b.dataset.spec==='show';renderStuCtrl();});
   el.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{
     const node=nodeByPid(stuRoot,stuSel);const a=b.dataset.a;
     if(a==='split'){const attr=b.dataset.attr;stuFbOpen=false;
@@ -1468,7 +1591,7 @@ function renderStuCtrl(){
 
   });
 }
-document.getElementById('resetTree').onclick=()=>{stuRoot=fresh(TRAIN);stuSel=null;stuSt.prev=null;stuFeedback=null;stuFbOpen=false;stuCelebrated=false;renderStudent();};
+document.getElementById('resetTree').onclick=()=>{stuRoot=fresh(TRAIN);stuSel=null;stuSt.prev=null;stuFeedback=null;stuFbOpen=false;stuSpecOpen=null;stuCelebrated=false;renderStudent();};
 
 /* ================= tab 2: ML thinks ================= */
 let mlRoot=null,mlQueue=[],mlPlaying=false,mlDone=false;
@@ -1852,24 +1975,8 @@ function renderSummary(){
   let raf=null,tx=50,ty=20;document.addEventListener('mousemove',e=>{spot.classList.add('on');tx=e.clientX/innerWidth*100;ty=e.clientY/innerHeight*100;
     if(!raf)raf=requestAnimationFrame(()=>{spot.style.setProperty('--sx',tx+'%');spot.style.setProperty('--sy',ty+'%');raf=null;});});
   document.addEventListener('mouseleave',()=>spot.classList.remove('on'));})();
-window.addEventListener('resize',()=>{document.querySelectorAll('.canvas-wrap').forEach(w=>{const svg=w.querySelector('svg');if(svg)w.classList.toggle('scrollable',w.scrollWidth>w.clientWidth+2);});});
 
-/* ===== horisontell scroll-indikator (mobil) ===== */
-(function(){
-  function setup(wrap){
-    if(wrap.__hint)return;wrap.__hint=1;
-    const hint=document.createElement('div');hint.className='scrollhint';
-    hint.innerHTML='<span class="arr">⟷</span> Dra i sidled för att se hela trädet';
-    wrap.insertAdjacentElement('afterend',hint);
-    let dismissed=false;
-    const check=()=>{if(dismissed)return;hint.classList.toggle('show',wrap.scrollWidth-wrap.clientWidth>8);};
-    wrap.addEventListener('scroll',()=>{if(wrap.scrollLeft>12){dismissed=true;hint.classList.add('gone');setTimeout(()=>hint.classList.remove('show'),460);}},{passive:true});
-    if(window.ResizeObserver)new ResizeObserver(check).observe(wrap);
-    if(window.MutationObserver)new MutationObserver(check).observe(wrap,{childList:true,subtree:true});
-    window.addEventListener('resize',check);check();setTimeout(check,350);
-  }
-  document.querySelectorAll('.canvas-wrap').forEach(setup);
-})();
+
 
 
 </script>
