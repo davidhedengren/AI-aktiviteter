@@ -687,12 +687,13 @@
       <circle class="iv-o" cx="145" cy="70" r="9"/>
     </svg>
     <h2>Beslutsträd</h2>
-    <p class="sub">Lär dig hur ett beslutsträd byggs — först för hand, sedan automatiskt av en dator — genom att avgöra vilka ormar som är giftiga.</p>
+    <p class="sub">Bygg ett eget beslutsträd som skiljer giftiga ormar från ofarliga — och jämför det sedan med ett träd som en dator bygger på samma data.</p>
     <ul class="journey">
-      <li><span class="ji">1</span><span><strong>Studera datan</strong> – gruppera 20 dokumenterade ormar efter deras egenskaper och undersök vilka grupper som blir rena.</span></li>
-      <li><span class="ji">2</span><span><strong>Bygg ditt träd</strong> – välj själv vilka frågor trädet ska ställa och i vilken ordning.</span></li>
-      <li><span class="ji">3</span><span><strong>Testa på ny data</strong> – pröva trädet på de ormar som hållits undan, för att se om det fungerar på mer än de exempel det byggdes på.</span></li>
-      <li><span class="ji">4</span><span><strong>Jämför med datorn</strong> – se hur algoritmen väljer frågor med hjälp av entropi och informationsvinst, och varför fler frågor inte alltid ger en bättre modell.</span></li>
+      <li><span class="ji">1</span><span><strong>Studera datan</strong> – vilka egenskaper skiljer giftiga ormar från ofarliga?</span></li>
+      <li><span class="ji">2</span><span><strong>Bygg ditt träd</strong> – vilka frågor ska det ställa, och i vilken ordning?</span></li>
+      <li><span class="ji">3</span><span><strong>Testa på ny data</strong> – fungerar trädet på ormar det aldrig sett?</span></li>
+      <li><span class="ji">4</span><span><strong>Jämför med datorn</strong> – hur väljer en algoritm sina frågor med hjälp av entropi och informationsvinst?</span></li>
+      <li><span class="ji">5</span><span><strong>Dra slutsatser</strong> – varför ger fler frågor inte alltid en bättre modell?</span></li>
     </ul>
     <button class="overlay-btn" id="introStart">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -732,9 +733,9 @@
       <!-- Scen 2: glider in när eleven behöver den -->
       <div class="stage" id="stageGroup">
         <div class="discover" style="margin-top:22px">
-          <span class="microlabel">Dela upp efter en egenskap</span>
+          <span class="microlabel">Sortera efter</span>
         </div>
-        <div class="groupbar asks" role="group" aria-label="Dela upp efter egenskap">
+        <div class="groupbar asks" role="group" aria-label="Sortera efter egenskap">
           <button class="gbtn" data-group="none" aria-pressed="true">Ingen</button>
           <button class="gbtn" data-group="head" aria-pressed="false">Huvudform</button>
           <button class="gbtn" data-group="pupil" aria-pressed="false">Öga</button>
@@ -833,7 +834,6 @@
   <div class="modal-inner glass">
     <button class="btn sm modal-close" id="helpClose">Stäng ✕</button>
     <h3>Ledtrådar</h3>
-    <div class="sub">Inga färdiga svar, utan frågor att pröva mot datan medan du arbetar.</div>
     <ul class="qlist">
       <li>Sortera efter en egenskap i taget. Blir någon grupp <b>helt ren</b> — och räcker den egenskapen då på egen hand?</li>
       <li>Finns en egenskap där giftiga och ofarliga hamnar <b>jämnt blandade</b>, oavsett hur du sorterar? Då är den inte användbar.</li>
@@ -1028,14 +1028,15 @@ function vname(attr,v){const M={tri:'triangulärt',round:'runt',slit:'smalt',str
 /* concept cards */
 /* ordningen styr även lexikonraden i steg 5 */
 const CONCEPTS={
-  entropy:{k:'Begrepp',t:'Entropi',p:'Ett mått på hur <b>blandad</b> en grupp är. En grupp med bara giftiga ormar (eller bara ofarliga) har entropi <b>0</b> — den är helt ren. En femtio–femtio-blandning har maximal entropi. Beslutsträdets mål är att dela så att grupperna blir så rena som möjligt.',ex:'8 ormar, 4 giftiga + 4 ofarliga → hög entropi. 8 giftiga + 0 ofarliga → entropi 0.'},
+  entropy:{k:'Begrepp',t:'Entropi',p:'Ett mått på hur <b>blandad</b> en grupp är. En grupp med bara giftiga ormar (eller bara ofarliga) har entropi <b>0</b> — den är helt ren. En femtio–femtio-blandning har maximal entropi. Beslutsträdet väljer därför den delning som gör grupperna renast.',ex:'8 ormar, 4 giftiga + 4 ofarliga → hög entropi. 8 giftiga + 0 ofarliga → entropi 0.'},
   gain:{k:'Begrepp',t:'Informationsvinst',p:'Hur mycket <b>renare</b> grupperna blir när du delar på en viss egenskap. Trädet räknar entropin före delningen minus entropin efteråt. Egenskapen med störst vinst delar renast — den vinner noden.',ex:'Att dela på Huvudform samlar nästan allt gift på ena sidan → hög vinst. Att dela på Mönster blandar ändå → låg vinst.'},
-  overfit:{k:'Begrepp',t:'Överanpassning',p:'När en modell lär sig träningsdatan <b>utantill</b> — inklusive slumpmässiga undantag — i stället för det egentliga mönstret. Den blir perfekt på den data den sett men sämre på ny data. En enklare modell missar undantagen men <button class="term" data-term="generalize">generaliserar</button> bättre.',ex:'Det djupa trädet lär sig regeln "grön → ofarlig" utifrån ett enda grönt fall i träningsdatan. Därefter klassificerar det varje grön giftorm som ofarlig.'},
-  accuracy:{k:'Begrepp',t:'Träffsäkerhet (accuracy)',p:'Andelen fall som modellen klassificerar rätt, oavsett åt vilket håll felen går. Måttet är enkelt att förstå men trubbigt: det tar varken hänsyn till att klasserna kan vara olika vanliga eller till att olika feltyper kan vara olika allvarliga. Det bör därför alltid jämföras med en <b>baslinje</b> och kompletteras med mått som skiljer feltyperna åt.',ex:'Att alltid gissa "ofarlig" ger 70 % rätt på träningsdatan utan att modellen lärt sig något alls. En modell på 80 % är alltså knappast imponerande.'},
+  overfit:{k:'Begrepp',t:'Överanpassning',p:'När en modell lär sig träningsdatan <b>utantill</b> — inklusive slumpmässiga undantag — i stället för det egentliga mönstret. Den blir perfekt på det den redan sett, men sämre på allt nytt. En enklare modell missar undantagen men <button class="term" data-term="generalize">generaliserar</button> bättre.',ex:'Det djupa trädet lär sig regeln "grön → ofarlig" utifrån ett enda grönt fall i träningsdatan. Därefter klassificerar det varje grön giftorm som ofarlig.'},
+  testdata:{k:'Begrepp',t:'Testdata',p:'Exempel som medvetet hålls undan medan modellen byggs och tas fram först när den är färdig. Eftersom modellen aldrig fått se dem är resultatet på testdatan det enda som visar om den fungerar på fall den inte känner till.',ex:'Trädet byggdes av 20 ormar. De 12 återstående visades aldrig för det, och avgör därför ensamma hur bra modellen egentligen är.'},
+  accuracy:{k:'Begrepp',t:'Träffsäkerhet (accuracy)',p:'Andelen fall som modellen klassificerar rätt, oavsett åt vilket håll felen går. Måttet är enkelt att förstå men trubbigt: det tar varken hänsyn till att klasserna kan vara olika vanliga eller till att vissa fel är allvarligare än andra. Det bör därför alltid jämföras med en <b>baslinje</b> och kompletteras med mått som skiljer feltyperna åt.',ex:'Att alltid gissa "ofarlig" ger 70 % rätt på träningsdatan utan att modellen lärt sig något alls. En modell på 80 % är alltså knappast imponerande.'},
   recall:{k:'Begrepp',t:'Recall',p:'Hur stor andel av de <b>faktiskt giftiga</b> ormarna som modellen fångade. Måttet svarar på frågan: hur mycket av det farliga slipper igenom? När ett förbisett fall kan kosta liv är recall det mått som väger tyngst — en modell med låg recall är farlig även om dess totala träffsäkerhet ser hög ut.',ex:'4 giftiga ormar i testet, varav modellen markerar 2 → recall 50 %. Två giftiga ormar bedömdes som ofarliga.'},
-  precision:{k:'Begrepp',t:'Precision',p:'Hur stor andel av de ormar modellen <b>varnade för</b> som verkligen var giftiga. Måttet svarar på frågan: hur trovärdig är varningen? Låg precision innebär många falsklarm, och en varning som ofta är obefogad slutar man till sist att lyssna på.',ex:'Modellen varnar för 6 ormar, varav 4 är giftiga → precision 67 %. Två ofarliga ormar utlöste falsklarm.'},
-  prune:{k:'Begrepp',t:'Beskärning',p:'Att medvetet <b>ta bort</b> de nedersta delningarna i ett färdigt träd. De sista frågorna är de som bygger på minst underlag och därmed löper störst risk att beskriva enskilda undantag i stället för ett generellt samband. Beskärning sänker träffsäkerheten på träningsdatan och höjer den ofta på ny data.',ex:'Trädet går från 100 % / 83 % till 95 % / 100 %: sämre på det redan sedda, bättre på verkligheten.'},
-  generalize:{k:'Begrepp',t:'Generalisering',p:'Hur väl en modell klarar <b>ny</b> data den aldrig tränats på. Det är det enda som räknas i praktiken — en modell som bara är bra på sina egna träningsexempel är värdelös i verkligheten. Därför mäter vi alltid på separat testdata.',ex:'Ditt träd får höga poäng på träningsdatan — men bara testet på osedda ormar avslöjar om det lärt sig det verkliga mönstret.'}
+  precision:{k:'Begrepp',t:'Precision',p:'Hur stor andel av de ormar modellen <b>varnade för</b> som verkligen var giftiga. Måttet svarar på frågan: hur trovärdig är varningen? Låg precision innebär många falsklarm, och ett larm som ofta är obefogat slutar man till sist att lyssna på.',ex:'Modellen varnar för 6 ormar, varav 4 är giftiga → precision 67 %. Två ofarliga ormar utlöste falsklarm.'},
+  prune:{k:'Begrepp',t:'Beskärning',p:'Att medvetet <b>ta bort</b> de nedersta delningarna i ett färdigt träd. De sista frågorna bygger på minst underlag och löper därmed störst risk att beskriva enskilda undantag i stället för ett generellt samband. Beskärning sänker träffsäkerheten på träningsdatan och höjer den ofta på ny data.',ex:'Trädet går från 100 % / 83 % till 95 % / 100 %: sämre på det redan sedda, bättre på verkligheten.'},
+  generalize:{k:'Begrepp',t:'Generalisering',p:'Hur väl en modell klarar <b>ny</b> data den aldrig tränats på. Det är det enda som räknas — en modell som bara är bra på sina egna träningsexempel är värdelös i verkligheten. Därför mäter vi alltid på separat testdata.',ex:'Ditt träd får höga poäng på träningsdatan — men bara testet på osedda ormar avslöjar om det lärt sig det verkliga mönstret.'}
 };
 /* ---- modal manager: focus trap + restore focus on close ---- */
 let lastFocused=null;
@@ -1227,14 +1228,14 @@ function nodeByPid(root,pid){const parts=pid.split('>');let n=root;for(let i=1;i
 const REDUCED=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function toastHost(){let h=document.getElementById('toastwrap');
   if(!h){h=document.createElement('div');h.className='toastwrap';h.id='toastwrap';document.body.appendChild(h);}return h;}
-function toast(msg,cls,ms){
+
+  function toast(msg,cls,ms){
   const h=toastHost(),t=document.createElement('div');
   t.className='toast '+(cls||'');t.setAttribute('role','status');t.innerHTML=msg;h.appendChild(t);
   setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),420);},ms||2400);
   return t;
 }
 const CONF=['#34d399','#22d3ee','#a78bfa','#fbbf24','#60a5fa','#fb7185'];
-
 function confetti(x,y,n){
   if(REDUCED)return;
   const box=document.createElement('div');box.className='confetti';document.body.appendChild(box);
@@ -1299,11 +1300,11 @@ function resetIdle(){clearTimeout(idleTimer);idleTimer=setTimeout(showNudge,9000
 
 /* ================= nav (pipeline-stegvisare) ================= */
 const STEPS=[
-  {title:'Studera datan',c:'#60a5fa',intro:'Varje orm beskrivs av fem egenskaper — <b>huvudform</b>, <b>öga</b>, <b>mönster</b>, <b>färg</b> och <b>svans</b> — samt ett känt facit. Gruppera ormarna efter en egenskap i taget och undersök om grupperna blir <b>rena</b> eller förblir <b>blandade</b>.'},
-  {title:'Bygg ditt träd',c:'#ffd866',intro:'Ett beslutsträd är uppbyggt av <b>noder</b>. Varje nod ställer en fråga om en egenskap, och varje svar leder vidare till en egen gren. En <b>ren</b> gren innehåller bara en klass och behöver inga fler frågor; en <b>blandad</b> gren kräver ytterligare en fråga. Klicka på en nod för att dela den eller bestämma dess klass. Modellen byggs enbart på träningsdata.'},
-  {title:'Testa ditt träd',c:'#ff9f43',intro:`En modell ska fungera på nya fall, inte bara på de exempel den byggdes utifrån. Testormarna har hållits undan under hela bygget och aldrig påverkat trädet. Kör ditt träd på dem, en i taget. Notera inte enbart <b>hur många</b> det klassificerar rätt, utan också <b>vilken sorts fel</b> det gör.`},
-  {title:'Se hur en dator bygger',c:'#34d399',intro:'En algoritm bygger samma sorts träd automatiskt, utifrån exakt samma träningsdata. I varje nod prövar algoritmen samtliga egenskaper och mäter hur rena respektive blandade grupperna blir. Måttet kallas <button class="term" data-term="entropy">entropi</button>, och den minskning en delning åstadkommer kallas <button class="term" data-term="gain">informationsvinst</button>. Egenskapen med störst informationsvinst får dela noden.'},
-  {title:'Slutsatser',c:'#a78bfa',intro:'Nedan sammanställs vad ditt eget arbete visade. Därefter följer tre frågor på nya fall, för att se om slutsatserna går att tillämpa också utanför den här övningen.'}
+  {title:'Studera datan',c:'#60a5fa',intro:'Varje orm beskrivs av fem egenskaper — <b>huvudform</b>, <b>öga</b>, <b>mönster</b>, <b>färg</b> och <b>svans</b> — samt ett känt facit. Sortera dem efter en egenskap i taget och leta efter vad som skiljer de giftiga från de ofarliga.'},
+  {title:'Bygg ditt träd',c:'#ffd866',intro:'Ett beslutsträd är uppbyggt av <b>noder</b>. Varje nod ställer en fråga om en egenskap, och varje svar leder vidare till en egen gren. En <b>ren</b> gren innehåller bara en klass och är färdig; en <b>blandad</b> gren behöver en fråga till. Klicka på en nod för att dela den eller bestämma dess klass.'},
+  {title:'Testa ditt träd',c:'#ff9f43',intro:`En modell ska fungera på nya fall, inte bara på de exempel den byggdes utifrån. De ${TEST.length} ormarna i <button class="term" data-term="testdata">testdatan</button> lades undan innan bygget började och har aldrig påverkat trädet. De är därför det enda oberoende provet på om trädet lärt sig något som gäller allmänt. Kör ditt träd på dem, en i taget, och notera inte bara <b>hur många</b> det klassificerar rätt, utan också <b>vilken sorts fel</b> det gör.`},
+  {title:'Se hur en dator bygger',c:'#34d399',intro:'En algoritm bygger samma sorts träd automatiskt, utifrån exakt samma träningsdata. I varje nod prövar algoritmen samtliga egenskaper och mäter hur rena grupperna blir. Måttet kallas <button class="term" data-term="entropy">entropi</button>, och den minskning en delning ger kallas <button class="term" data-term="gain">informationsvinst</button>. Egenskapen med störst informationsvinst får dela noden.'},
+  {title:'Slutsatser',c:'#a78bfa',intro:'Först en sammanställning av vad ditt eget arbete visade. Därefter tre frågor på nya fall, för att se om slutsatserna går att tillämpa också utanför den här övningen.'}
 ];
 const nav=document.getElementById('nav');
 let curStep=-1;
@@ -1371,16 +1372,16 @@ function renderAha(){
   let cls='',head,text;
   if(pureGroups.length===groups.length){
     cls='';head='Fullständig delning.';
-    text=`Varje grupp blev <b>ren</b> — alla ormar i en grupp hör till samma klass. <b>${ANAME[attr]}</b> räcker alltså på egen hand för att avgöra saken.`;
+    text=`Varje grupp blev <b>ren</b> — alla ormar i en grupp hör till samma klass. <b>${ANAME[attr]}</b> räcker alltså på egen hand för att avgöra om en orm är giftig.`;
   } else if(pureGroups.length){
     cls='';head='Delvis ren delning.';
-    text=`${pureGroups.length} av ${groups.length} grupper blev <b>helt rena</b> och kräver ingen ytterligare fråga. Övriga är alltjämt blandade och fordrar en fråga till.`;
+    text=`${pureGroups.length} av ${groups.length} grupper blev <b>helt rena</b> och behöver inga fler frågor. Övriga är fortfarande blandade och behöver en fråga till.`;
   } else if(ratio>=0.25){
     cls='mixed';head='Viss förbättring.';
-    text=`Grupperna blev tydligt <b>renare</b>, men ingen av dem är entydig. <b>${ANAME[attr]}</b> utgör en lämplig utgångspunkt, men behöver kombineras med ytterligare en egenskap.`;
+    text=`Grupperna blev tydligt <b>renare</b>, men ingen av dem är entydig. <b>${ANAME[attr]}</b> är en bra början, men behöver kombineras med en egenskap till.`;
   } else {
     cls='mixed';head='Ingen tydlig skillnad.';
-    text=`Giftiga och ofarliga förblir <b>jämnt blandade</b> i varje grupp. <b>${ANAME[attr]}</b> ger därmed nästan ingen upplysning om huruvida en orm är giftig.`;
+    text=`Giftiga och ofarliga förblir <b>jämnt blandade</b> i varje grupp. <b>${ANAME[attr]}</b> säger därmed nästan ingenting om en orm är giftig.`;
   }
   z.innerHTML=`<div class="aha ${cls}"><span class="ak">${head}</span><span class="at">${text}</span></div>`;
   if(pureGroups.length&&!ahaSeen[attr]){ahaSeen[attr]=1;
@@ -1471,7 +1472,7 @@ function renderHypo(){
 function renderHypoReveal(){
   const el=document.getElementById('hypoReveal');if(!el)return;
   const rootAttr=(mlRoot&&mlRoot.type==='split')?mlRoot.attr:null;
-  if(!rootAttr){el.innerHTML=`<div class="hyporeveal"><span class="hk">Att observera</span> Se om algoritmen väljer samma egenskap som viktigast${hypo?` som du (<b>${ANAME[hypo]}</b>)`:''}.</div>`;return;}
+  if(!rootAttr){el.innerHTML=`<div class="hyporeveal"><span class="hk">Att observera</span> Se om algoritmen pekar ut samma egenskap som du${hypo?` (<b>${ANAME[hypo]}</b>)`:''}.</div>`;return;}
   if(!hypo){el.innerHTML=`<div class="hyporeveal"><span class="hk">Rotnoden</span> Algoritmen valde <b>${ANAME[rootAttr]}</b> som första fråga, eftersom den egenskapen ger störst informationsvinst.</div>`;return;}
   const match=hypo===rootAttr;
   el.innerHTML=`<div class="hyporeveal ${match?'ok':'diff'}"><span class="hk">Rotnoden</span> Algoritmen valde <b>${ANAME[rootAttr]}</b> som första fråga. Du angav <b>${ANAME[hypo]}</b> — ${match?'samma egenskap. Den ger störst informationsvinst i roten.':'en annan egenskap. Algoritmen väljer alltid den som ger störst informationsvinst i den aktuella noden.'}</div>`;
@@ -1506,10 +1507,10 @@ function splitFeedback(rows,attr,avail){
   const meta={rows,attr,avail:avail||[]};
   const groups=[...new Set(rows.map(r=>r[attr]))].map(v=>rows.filter(r=>r[attr]===v));
   const allPure=groups.every(gr=>{const c=counts(gr);return c.g===0||c.o===0;});
-  if(allPure)return{...meta,cls:'good',perfect:true,title:'Fullständig delning',msg:'Delningen är fullständig. Varje gren innehåller endast en klass, varför inga ytterligare frågor behövs här.'};
-  if(ratio>=0.55)return{...meta,cls:'good',title:'Effektiv delning',msg:'Ett effektivt val. Grupperna är väsentligt renare efter delningen än före den.'};
-  if(ratio>=0.2)return{...meta,cls:'',title:'',msg:'Delningen medför viss förbättring, men flera grenar är alltjämt blandade och kräver ytterligare en fråga.'};
-  return{...meta,cls:'warn',title:'',msg:'Delningen gjorde grupperna endast marginellt renare. Pröva en annan egenskap och jämför utfallet.'};
+  if(allPure)return{...meta,cls:'good',perfect:true,title:'Fullständig delning',msg:'Delningen är fullständig. Varje gren innehåller bara en klass, så inga fler frågor behövs här.'};
+  if(ratio>=0.55)return{...meta,cls:'good',title:'Effektiv delning',msg:'Ett effektivt val. Grupperna är mycket renare efter delningen än före den.'};
+  if(ratio>=0.2)return{...meta,cls:'',title:'',msg:'Delningen ger viss förbättring, men flera grenar är fortfarande blandade och behöver en fråga till.'};
+  return{...meta,cls:'warn',title:'',msg:'Delningen gjorde grupperna bara marginellt renare. Pröva en annan egenskap och jämför resultatet.'};
 }
 const stuSt={prev:null,sel:null,onClick:pid=>{stuSel=pid;renderStudent();}};
 function usedAttrs(pid){const parts=pid.split('>');let n=stuRoot,used=[];for(let i=1;i<parts.length;i++){used.push(n.attr);n=n.children[parts[i]];}return used;}
@@ -1617,7 +1618,7 @@ async function mlStep(){
   if(!mlQueue.length){mlDone=true;document.getElementById('mlJars').innerHTML='';celebrateTree('mlCanvas','Datorns modell färdig');document.getElementById('raceHead').innerHTML='Trädet är färdigbyggt. Nedan jämförs det med ditt eget träd, orm för orm.';document.getElementById('mlNext').disabled=true;mlPlaying=false;document.getElementById('mlPlay').textContent='▶ Träna';renderPruneUI();renderCompare();return false;}
   const node=mlQueue.shift();mlSt.cur=node._pid;renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);
   const avail=node.avail;const pure=entropy(node.rows)===0;
-  document.getElementById('raceHead').innerHTML=`Nod med ${node.rows.length} ormar — samtliga egenskaper prövas…`;
+  document.getElementById('raceHead').innerHTML=`Nod med ${node.rows.length} ormar — algoritmen prövar alla egenskaper…`;
   if(pure||!avail.length){document.getElementById('mlRace').innerHTML='';document.getElementById('mlJars').innerHTML='';document.getElementById('raceHead').innerHTML=`Noden är redan ren och blir ett löv: ${labTag(node.fallback)}`;
     node.type='leaf';node.label=node.fallback;mlSt.cur=null;await sleep(500);renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);updateMLStats();return true;}
   const race=document.getElementById('mlRace');race.innerHTML=raceBars(node.rows,avail);await sleep(60);animateBars(race);await sleep(850);
@@ -1690,17 +1691,17 @@ function renderPruneUI(){
   const e=errStats(TEST.map(s=>predict(mlRoot,s)));
   if(!prunedOnce){
     box.innerHTML=`<div class="prunebox"><div class="ph">Pröva att förenkla trädet</div>
-      Trädets nedersta frågor bygger på minst underlag och riskerar därför att beskriva enskilda undantag snarare än ett generellt samband. Ta bort den understa delningen och iaktta hur de båda måtten förändras.
+      De sista frågorna vilar på minst underlag. Ta bort den understa delningen och se hur de båda måtten förändras.
       ${pruneBtnHTML()}</div>`;
     wirePrune();return;}
   /* texten rättar sig efter vad som faktiskt hände — beskärning kan även gå för långt */
   let ptxt;
   if(pruneBefore&&te>pruneBefore.te){
-    ptxt=`Trädet blev <b>sämre</b> på den data det tränats på och <b>bättre</b> på data det aldrig sett. Modellen har inte förlorat kunskap — den har förlorat de undantag som aldrig utgjorde ett mönster. Förfarandet kallas <button class="term" data-term="prune">beskärning</button>.`;
+    ptxt=`Trädet blev <b>sämre</b> på den data det tränats på och <b>bättre</b> på data det aldrig sett. Modellen har inte förlorat kunskap — den har förlorat de undantag som aldrig utgjorde ett mönster. Det kallas <button class="term" data-term="prune">beskärning</button>.`;
   } else if(pruneBefore&&te<pruneBefore.te){
-    ptxt=`Nu sjönk träffsäkerheten på <b>båda</b> datamängderna. Trädet har blivit för enkelt och saknar den fråga som behövdes för att skilja klasserna åt. <button class="term" data-term="prune">Beskärning</button> förbättrar en modell endast så länge det är undantag som avlägsnas — därefter försvinner även mönstret.`;
+    ptxt=`Nu sjönk träffsäkerheten på <b>båda</b> datamängderna. Trädet har blivit för enkelt och saknar den fråga som behövdes för att skilja klasserna åt. <button class="term" data-term="prune">Beskärning</button> förbättrar en modell bara så länge det är undantag som tas bort — därefter försvinner även mönstret.`;
   } else {
-    ptxt=`Träffsäkerheten på testdatan är oförändrad, medan trädet blivit enklare. En modell som ger samma resultat med färre frågor är att föredra. Förfarandet kallas <button class="term" data-term="prune">beskärning</button>.`;
+    ptxt=`Träffsäkerheten på testdatan är oförändrad, medan trädet blivit enklare. En modell som ger samma resultat med färre frågor är bättre. Det kallas <button class="term" data-term="prune">beskärning</button>.`;
   }
   box.innerHTML=`<div class="prunebox"><div class="ph">Efter beskärningen</div>
     ${ptxt}
@@ -1756,7 +1757,7 @@ function renderYouScene(){
         <span>Av <b>${e.gTot}</b> giftiga ormar fångade trädet <b>${e.tp}</b> — <button class="term" data-term="recall">recall</button> <b>${rc}&nbsp;%</b></span>
         <span>Av <b>${e.flagged}</b> varningar var <b>${e.tp}</b> befogade — <button class="term" data-term="precision">precision</button> <b>${pr===null?'—':pr+'&nbsp;%'}</b></span>
       </div>
-      <div class="q" style="margin-top:14px">${e.fn?`Trädet släppte igenom <b>${e.fn} giftig${e.fn>1?'a ormar':' orm'}</b>. I ett sammanhang där felbedömningen kan kosta liv väger den feltypen tyngre än falsklarmen.`:`Trädet släppte inte igenom någon giftig orm. ${e.fp?`De ${e.fp} falsklarmen innebär att ofarliga ormar behandlas som farliga — ett mindre allvarligt fel.`:'Modellen gjorde inga fel av något slag på testdatan.'}`}</div>
+      <div class="q" style="margin-top:14px">${e.fn?`Trädet släppte igenom <b>${e.fn} giftig${e.fn>1?'a ormar':' orm'}</b>. I ett sammanhang där en felbedömning kan kosta liv väger den feltypen tyngre än falsklarmen.`:`Trädet släppte inte igenom någon giftig orm. ${e.fp?`De ${e.fp} falsklarmen innebär att ofarliga ormar behandlas som farliga — ett mindre allvarligt fel.`:'Modellen gjorde inga fel av något slag på testdatan.'}`}</div>
       <div class="q">Se härnäst hur en dator bygger sitt eget träd på samma träningsdata och testar det på samma ormar.</div>
       <div class="reveal-row"><button class="btn sm ghost" id="youAgain">↺ Börja om</button><button class="btn primary" id="toMachine">Se hur en dator bygger →</button></div>`;
     document.getElementById('youAgain').onclick=youEnter;
@@ -1845,17 +1846,17 @@ function renderCompare(){
 
   let compareLine;
   if(!you.length){
-    compareLine=`Ditt träd avgör direkt utan att ställa någon fråga alls.`;
+    compareLine=`Ditt träd svarar direkt, utan att ställa en enda fråga.`;
   } else if(commonLen===you.length&&commonLen===mach.length){
     compareLine=`Du och algoritmen valde exakt samma frågor i samma ordning: <b>${you.map(a=>ANAME[a]).join(' → ')}</b>.`;
   } else if(commonLen===you.length&&extraMach.length){
     compareLine=`Algoritmen valde samma frågor som du (<b>${shared.map(a=>ANAME[a]).join(' → ')||'—'}</b>) och lade därefter till <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b>, som ditt träd klarade sig utan.`;
   } else if(commonLen===mach.length&&extraYou.length){
-    compareLine=`Du valde samma frågor som algoritmen (<b>${shared.map(a=>ANAME[a]).join(' → ')||'—'}</b>) men lade till <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>, som algoritmen klarade sig utan.`;
+    compareLine=`Du valde samma frågor som algoritmen (<b>${shared.map(a=>ANAME[a]).join(' → ')||'—'}</b>) och lade därefter till <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>, som algoritmen klarade sig utan.`;
   } else if(commonLen===0){
-    compareLine=`Ni valde olika första fråga: du började med <b>${ANAME[you[0]]}</b>, algoritmen med <b>${ANAME[mach[0]]}</b>.`;
+    compareLine=`Du och algoritmen började olika: du med <b>${ANAME[you[0]]}</b>, algoritmen med <b>${ANAME[mach[0]]}</b>.`;
   } else {
-    compareLine=`De första frågorna sammanföll (<b>${shared.map(a=>ANAME[a]).join(' → ')}</b>) men därefter skiljer sig träden åt: du fortsatte med <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>, algoritmen med <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b>.`;
+    compareLine=`De första frågorna var desamma (<b>${shared.map(a=>ANAME[a]).join(' → ')}</b>), men sedan gick träden isär: du fortsatte med <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>, algoritmen med <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b>.`;
   }
 
   /* ---- varför skiljer sig resultaten? (drar slutsatsen åt eleven) ---- */
@@ -1865,16 +1866,16 @@ function renderCompare(){
   const overfit=mTrain>=95&&ms<TEST.length;
   let why;
   if(overfit&&greenTraps.length){
-    why=`Algoritmens träd klassificerade <b>${mTrain}%</b> av träningsdatan korrekt, men endast <b>${ms}/${TEST.length}</b> (${mTest}%) av testdatan. För att få samtliga träningsexempel rätt delade algoritmen även på <b>Färg</b> och etablerade regeln att gröna ormar är ofarliga — en regel som vilar på ett enda grönt exempel. I testdatan klassificeras därför ${greenTraps.length} giftig${greenTraps.length>1?'a ormar':' orm'} som ofarlig${greenTraps.length>1?'a':''}. Modellen har anpassats till träningsdatans detaljer i stället för till det underliggande sambandet, vilket kallas <button class="term" data-term="overfit">överanpassning</button>. Knappen <b>Ta bort sista delningen</b> ovan visar effekten av att avlägsna den.`;
+    why=`Algoritmens träd klassificerade <b>${mTrain}%</b> av träningsdatan korrekt, men endast <b>${ms}/${TEST.length}</b> (${mTest}%) av testdatan. För att få samtliga träningsexempel rätt delade algoritmen även på <b>Färg</b> och etablerade regeln att gröna ormar är ofarliga — en regel som vilar på ett enda grönt exempel. I testdatan klassificeras därför ${greenTraps.length} giftig${greenTraps.length>1?'a ormar':' orm'} som ofarlig${greenTraps.length>1?'a':''}. Modellen har anpassat sig efter träningsdatans detaljer i stället för efter det underliggande sambandet, vilket kallas <button class="term" data-term="overfit">överanpassning</button>. Knappen <b>Ta bort sista delningen</b> ovan visar effekten av att avlägsna den.`;
   } else if(overfit){
-    why=`Algoritmens träd klassificerade <b>${mTrain}%</b> av träningsdatan korrekt men endast <b>${mTest}%</b> av testdatan. De sista delningarna byggde på enstaka undantag i träningsdatan i stället för på ett generellt samband, vilket är kännetecknande för <button class="term" data-term="overfit">överanpassning</button>.`;
+    why=`Algoritmens träd klassificerade <b>${mTrain}%</b> av träningsdatan korrekt, men endast <b>${mTest}%</b> av testdatan. De sista delningarna byggde på enstaka undantag i träningsdatan i stället för på ett generellt samband, vilket är precis vad <button class="term" data-term="overfit">överanpassning</button> innebär.`;
   } else {
     why=`Algoritmens träd klassificerade <b>${mTrain}%</b> av träningsdatan och <b>${mTest}%</b> av testdatan korrekt.`;
   }
   let verdict;
-  if(ys>ms)verdict=`Ditt träd presterade bättre på testdatan, ${ys}/${TEST.length} mot ${ms}/${TEST.length}, eftersom det är enklare. Fler frågor ger inte automatiskt en bättre modell: ett mindre träd bortser från undantagen och fångar i stället det samband som gäller generellt.`;
-  else if(ys===ms)verdict=`Båda träden fick ${ys}/${TEST.length} rätt. `+(ys===TEST.length?`Båda har alltså fångat det samband som gäller även för ny data.`:`Undersök vilka ormar båda klassificerade fel och vad dessa har gemensamt.`);
-  else verdict=`Algoritmens träd fick fler rätt (${ms}/${TEST.length} mot ${ys}/${TEST.length}). Gå gärna tillbaka till steg 2 och undersök om ett annat träd hade generaliserat bättre.`;
+  if(ys>ms)verdict=`Ditt träd klarade sig bättre på testdatan, ${ys}/${TEST.length} mot ${ms}/${TEST.length}, just för att det är enklare. Fler frågor ger inte automatiskt en bättre modell: ett mindre träd bortser från undantagen och fångar i stället det samband som gäller generellt.`;
+  else if(ys===ms)verdict=`Båda träden fick ${ys}/${TEST.length} rätt. `+(ys===TEST.length?`Båda har alltså fångat det samband som gäller även för ny data.`:`Undersök vilka ormar båda klassificerade fel, och vad de har gemensamt.`);
+  else verdict=`Algoritmens träd fick fler rätt (${ms}/${TEST.length} mot ${ys}/${TEST.length}). Gå gärna tillbaka till steg 2 och pröva om ett annat träd hade generaliserat bättre.`;
 
   zone.innerHTML=`<div class="cmpwrap glass">
     <div class="cap">Ditt träd jämfört med algoritmens</div>
@@ -1896,10 +1897,10 @@ function renderCompare(){
 
 /* ================= steg 5: slutsatser ================= */
 const REFLECT=`<div class="reflectgrid">
-      <div class="rcard warn"><div class="rh">Träffsäkerhet på träningsdata säger lite</div><p>Ett perfekt resultat på <b>träningsdatan</b> innebär inte att modellen är bra. Den kan ha anpassats till exemplen i stället för till ett generellt samband.</p></div>
-      <div class="rcard"><div class="rh">Testdata mäter generalisering</div><p>Data som undanhållits under träningen används för att pröva om modellen fungerar på nya fall, det vill säga om den <button class="term" data-term="generalize">generaliserar</button>.</p></div>
+      <div class="rcard warn"><div class="rh">Träffsäkerhet på träningsdata säger lite</div><p>Ett perfekt resultat på <b>träningsdatan</b> innebär inte att modellen är bra. Den kan ha anpassat sig efter exemplen i stället för efter ett generellt samband.</p></div>
+      <div class="rcard"><div class="rh">Testdata mäter generalisering</div><p>Data som hållits undan under träningen används för att pröva om modellen fungerar på nya fall, det vill säga om den <button class="term" data-term="generalize">generaliserar</button>.</p></div>
       <div class="rcard good"><div class="rh">Enklare modeller generaliserar ofta bättre</div><p>En modell med färre frågor bortser från enskilda undantag i träningsdatan och fångar därmed oftare det samband som gäller generellt.</p></div>
-      <div class="rcard warn"><div class="rh">Alla fel väger inte lika tungt</div><p>Två modeller kan ha samma träffsäkerhet och ändå vara olika farliga. Att bedöma en giftig orm som ofarlig är ett allvarligare fel än det omvända, varför <button class="term" data-term="recall">recall</button> och <button class="term" data-term="precision">precision</button> redovisas separat.</p></div>
+      <div class="rcard warn"><div class="rh">Alla fel väger inte lika tungt</div><p>Två modeller kan ha samma träffsäkerhet och ändå vara olika farliga. Att bedöma en giftig orm som ofarlig är ett allvarligare fel än det omvända. Därför redovisas <button class="term" data-term="recall">recall</button> och <button class="term" data-term="precision">precision</button> var för sig.</p></div>
       <div class="rcard"><div class="rh">Modellen är aldrig bättre än datan</div><p>Regeln som trädet fann gäller i detta material. I verkligheten är sambandet mellan huvudform och gift långtifrån entydigt — flera livsfarliga ormar har runt huvud och runda pupiller. En modell återger de mönster som finns i dess data, inte världen som helhet.</p></div>`;
 const SUMQ=[
  {q:'En modell klassificerar <b>99 %</b> av träningsdatan rätt, men endast <b>71 %</b> av testdatan. Vad är den rimligaste förklaringen?',
@@ -1907,7 +1908,7 @@ const SUMQ=[
         'Testdatan måste vara felaktigt märkt',
         'Modellen behöver ställa fler frågor'],
   correct:0,
-  facit:'Skillnaden mellan de två talen är själva kännetecknet på <button class="term" data-term="overfit">överanpassning</button>. Att testdatan skulle vara felmärkt är möjligt men långsökt — mönstret uppträder alltför regelbundet för att bero på slump. Att lägga till fler frågor förvärrar tvärtom problemet: det var just de sista frågorna som orsakade det. Rätt åtgärd är att förenkla modellen, exempelvis genom <button class="term" data-term="prune">beskärning</button>.'},
+  facit:'Skillnaden mellan de två talen är själva kännetecknet på <button class="term" data-term="overfit">överanpassning</button>. Att testdatan skulle vara felmärkt är möjligt men långsökt — mönstret uppträder alltför regelbundet för att bero på slump. Att lägga till fler frågor förvärrar tvärtom problemet: det var just de sista frågorna som orsakade det. Rätt åtgärd är att förenkla modellen, till exempel genom <button class="term" data-term="prune">beskärning</button>.'},
  {q:'Ett varningssystem för giftiga ormar hittar <b>samtliga 4</b> giftiga ormar i ett test, men varnar dessutom för <b>6 ofarliga</b>. Vilket mått är högt och vilket är lågt?',
   opts:['Hög recall, låg precision','Hög precision, låg recall','Båda måtten är låga'],
   correct:0,
@@ -1915,7 +1916,7 @@ const SUMQ=[
  {q:'Två träd får båda <b>10 av 12</b> rätt. Det ena missar två giftiga ormar; det andra varnar för två ofarliga. Vilket väljer du?',
   opts:['Det som missar två giftiga','Det som varnar för två ofarliga','Det beror på vad felet kostar'],
   correct:null,
-  facit:'Frågan har inget facit i statistisk mening — träffsäkerheten är identisk, och måtten kan inte avgöra saken åt dig. Valet avgörs av vad de två feltyperna kostar. Gäller det ormbett är ett missat giftfall potentiellt dödligt medan ett falsklarm innebär onödig försiktighet, och då är det andra trädet självklart. Gäller det i stället ett spamfilter är förhållandet det omvända: ett viktigt mejl i skräpkorgen är värre än ett reklamutskick i inkorgen. Samma siffror, motsatt slutsats. Det är därför måtten alltid måste tolkas i sitt sammanhang.'}
+  facit:'Frågan har inget facit i statistisk mening — träffsäkerheten är identisk, och måtten kan inte avgöra saken åt dig. Valet avgörs av vad de två feltyperna kostar. Gäller det ormbett kan en missad giftorm kosta liv, medan ett falsklarm bara innebär onödig försiktighet — då är det andra trädet självklart. Gäller det i stället ett spamfilter är förhållandet det omvända: ett viktigt mejl i skräpkorgen är värre än ett reklamutskick i inkorgen. Samma siffror, motsatt slutsats. Det är därför måtten alltid måste tolkas i sitt sammanhang.'}
 ];
 let sumAns={},sumFacit={};
 function recapRows(){
@@ -1924,11 +1925,11 @@ function recapRows(){
   const mlAttrs=(mlRoot&&mlDone)?treeAttrs(mlRoot):null;
   const rootAttr=(mlRoot&&mlRoot.type==='split')?mlRoot.attr:null;
   if(hypo)rows.push(['Din hypotes',rootAttr
-      ? `Du utsåg <b>${ANAME[hypo]}</b> till viktigaste egenskap. Algoritmen valde <b>${ANAME[rootAttr]}</b> i rotnoden${hypo===rootAttr?' — samma bedömning.':', eftersom den gav störst informationsvinst.'}`
-      : `Du utsåg <b>${ANAME[hypo]}</b> till viktigaste egenskap.`]);
+      ? `Du pekade ut <b>${ANAME[hypo]}</b> som viktigaste egenskap. Algoritmen valde <b>${ANAME[rootAttr]}</b> i rotnoden${hypo===rootAttr?' — samma bedömning.':', eftersom den gav störst informationsvinst.'}`
+      : `Du pekade ut <b>${ANAME[hypo]}</b> som viktigaste egenskap.`]);
   rows.push(['Ditt träd', yAttrs.length
       ? `Ställde ${yAttrs.length===1?'<b>en</b> fråga':`<b>${yAttrs.length}</b> frågor`}: <b>${yAttrs.map(a=>ANAME[a]).join(' → ')}</b>.${fr?` ${fr} gren${fr>1?'ar':''} lämnades obestämd${fr>1?'a':''}.`:''}`
-      : 'Byggdes aldrig färdigt — gå tillbaka till steg 2 om du vill pröva.']);
+      : 'Blev aldrig färdigbyggt — gå tillbaka till steg 2 och bygg klart det.']);
   const yv=TEST.map(x=>predict(stuRoot,x)), e=errStats(yv);
   const ok=yv.filter((v,i)=>v===TEST[i].label).length;
   rows.push(['På testdata',`<b>${ok} av ${TEST.length}</b> rätt på ormar trädet aldrig sett. `
@@ -1939,7 +1940,7 @@ function recapRows(){
     rows.push(['Algoritmens träd',`Ställde <b>${mlAttrs.length}</b> frågor: <b>${mlAttrs.map(a=>ANAME[a]).join(' → ')}</b>. Träning <b>${pct(accuracy(mlRoot,TRAIN))}</b>, test <b>${mok} av ${TEST.length}</b>.`]);
     if(prunedOnce){
       const dOk=TEST.filter(x=>predict(DEEP,x)===x.label).length;
-      rows.push(['Beskärningen',`Innan du beskar det ställde algoritmens träd <b>${treeAttrs(DEEP).length}</b> frågor och klassificerade <b>${dOk} av ${TEST.length}</b> rätt vid <b>${pct(accuracy(DEEP,TRAIN))}</b> på träningsdatan. Du tog bort den understa delningen och kunde iaktta hur de båda måtten rörde sig åt <b>olika håll</b>.`]);
+      rows.push(['Beskärningen',`Innan du beskar det ställde algoritmens träd <b>${treeAttrs(DEEP).length}</b> frågor och klassificerade <b>${dOk} av ${TEST.length}</b> rätt, med <b>${pct(accuracy(DEEP,TRAIN))}</b> på träningsdatan. Du tog bort den understa delningen och kunde se hur de båda måtten rörde sig åt <b>olika håll</b>.`]);
     }
   } else rows.push(['Algoritmens träd','Byggdes aldrig färdigt — gå tillbaka till steg 4 och tryck <b>Träna</b>.']);
   return rows;
@@ -1967,7 +1968,7 @@ function renderSummary(){
   const cards=document.getElementById('sumCards');
   if(cards)cards.innerHTML=(Object.keys(sumAns).length?`<div class="reflecthead">Det här visade försöket</div>${REFLECT}`:'');
   const lex=document.getElementById('sumLex');
-  const ORDER=['entropy','gain','accuracy','recall','precision','overfit','prune','generalize'];
+  const ORDER=['entropy','gain','accuracy','recall','precision','testdata','generalize','overfit','prune'];
   if(lex)lex.innerHTML=ORDER.filter(k=>CONCEPTS[k]).map(k=>`<button class="term" data-term="${k}">${CONCEPTS[k].t}</button>`).join('');
 }
 
@@ -1984,4 +1985,3 @@ function renderSummary(){
 </body>
 </html>
    
-  
