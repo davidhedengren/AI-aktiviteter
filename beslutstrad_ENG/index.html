@@ -687,12 +687,13 @@
       <circle class="iv-o" cx="145" cy="70" r="9"/>
     </svg>
     <h2>Decision Trees</h2>
-    <p class="sub">Learn how a decision tree is built — first by hand, then automatically by a computer — by working out which snakes are venomous.</p>
+    <p class="sub">Build your own decision tree that tells venomous snakes from harmless ones — then compare it with a tree a computer builds from the same data.</p>
     <ul class="journey">
-      <li><span class="ji">1</span><span><strong>Study the data</strong> – group 20 documented snakes by their features and examine which groups turn out pure.</span></li>
-      <li><span class="ji">2</span><span><strong>Build your tree</strong> – decide for yourself which questions the tree asks, and in what order.</span></li>
-      <li><span class="ji">3</span><span><strong>Test on new data</strong> – try the tree on the snakes that were held back, to see whether it works on more than the examples it was built from.</span></li>
-      <li><span class="ji">4</span><span><strong>Compare with the computer</strong> – see how the algorithm chooses questions using entropy and information gain, and why more questions do not always make a better model.</span></li>
+      <li><span class="ji">1</span><span><strong>Study the data</strong> – which features separate the venomous snakes from the harmless ones?</span></li>
+      <li><span class="ji">2</span><span><strong>Build your tree</strong> – which questions should it ask, and in what order?</span></li>
+      <li><span class="ji">3</span><span><strong>Test on new data</strong> – does the tree work on snakes it has never seen?</span></li>
+      <li><span class="ji">4</span><span><strong>Compare with the computer</strong> – how does an algorithm choose its questions using entropy and information gain?</span></li>
+      <li><span class="ji">5</span><span><strong>Draw conclusions</strong> – why do more questions not always make a better model?</span></li>
     </ul>
     <button class="overlay-btn" id="introStart">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -732,9 +733,9 @@
       <!-- Scen 2: glider in när eleven behöver den -->
       <div class="stage" id="stageGroup">
         <div class="discover" style="margin-top:22px">
-          <span class="microlabel">Group by a feature</span>
+          <span class="microlabel">Sort by</span>
         </div>
-        <div class="groupbar asks" role="group" aria-label="Group by feature">
+        <div class="groupbar asks" role="group" aria-label="Sort by feature">
           <button class="gbtn" data-group="none" aria-pressed="true">None</button>
           <button class="gbtn" data-group="head" aria-pressed="false">Head shape</button>
           <button class="gbtn" data-group="pupil" aria-pressed="false">Eye</button>
@@ -833,7 +834,6 @@
   <div class="modal-inner glass">
     <button class="btn sm modal-close" id="helpClose">Close ✕</button>
     <h3>Hints</h3>
-    <div class="sub">No ready answers, but questions to test against the data as you work.</div>
     <ul class="qlist">
       <li>Sort by one feature at a time. Does any group become <b>completely pure</b> — and does that feature then suffice on its own?</li>
       <li>Is there a feature where venomous and harmless end up <b>evenly mixed</b>, however you sort? Then it is not useful.</li>
@@ -1028,14 +1028,15 @@ function vname(attr,v){const M={tri:'triangular',round:'round',slit:'slit',strip
 /* concept cards */
 /* ordningen styr även lexikonraden i steg 5 */
 const CONCEPTS={
-  entropy:{k:'Concept',t:'Entropy',p:'A measure of how <b>mixed</b> a group is. A group containing only venomous snakes (or only harmless ones) has an entropy of <b>0</b> — it is perfectly pure. A fifty–fifty mixture has maximum entropy. The aim of a decision tree is to split the data so that the groups become as pure as possible.',ex:'8 snakes, 4 venomous + 4 harmless → high entropy. 8 venomous + 0 harmless → entropy 0.'},
+  entropy:{k:'Concept',t:'Entropy',p:'A measure of how <b>mixed</b> a group is. A group containing only venomous snakes (or only harmless ones) has an entropy of <b>0</b> — it is perfectly pure. A fifty–fifty mixture has maximum entropy. A decision tree therefore chooses the split that makes the groups purest.',ex:'8 snakes, 4 venomous + 4 harmless → high entropy. 8 venomous + 0 harmless → entropy 0.'},
   gain:{k:'Concept',t:'Information gain',p:'How much <b>purer</b> the groups become when you split on a given feature. The tree computes the entropy before the split minus the entropy after it. The feature with the greatest gain splits most cleanly — it wins the node.',ex:'Splitting on Head shape gathers almost all the venom on one side → high gain. Splitting on Pattern leaves the groups mixed → low gain.'},
-  overfit:{k:'Concept',t:'Overfitting',p:'When a model learns the training data <b>by heart</b> — including random exceptions — instead of the underlying pattern. It becomes perfect on the data it has seen but worse on new data. A simpler model misses the exceptions but <button class="term" data-term="generalize">generalises</button> better.',ex:'The deep tree learns the rule "green → harmless" from a single green case in the training data. From then on it classifies every green venomous snake as harmless.'},
+  overfit:{k:'Concept',t:'Overfitting',p:'When a model learns the training data <b>by heart</b> — including random exceptions — instead of the underlying pattern. It becomes perfect on what it has already seen, but worse on anything new. A simpler model misses the exceptions but <button class="term" data-term="generalize">generalises</button> better.',ex:'The deep tree learns the rule "green → harmless" from a single green case in the training data. From then on it classifies every green venomous snake as harmless.'},
+  testdata:{k:'Concept',t:'Test data',p:'Examples deliberately held back while the model is being built, and brought out only once it is finished. Because the model has never seen them, the result on the test data is the only thing that shows whether it works on cases it does not already know.',ex:'The tree was built from 20 snakes. The remaining 12 were never shown to it, and alone determine how good the model really is.'},
   accuracy:{k:'Concept',t:'Accuracy',p:'The proportion of cases the model classifies correctly, regardless of which way the errors go. The measure is easy to understand but blunt: it takes account neither of classes being unequally common nor of some error types being more serious than others. It should therefore always be compared against a <b>baseline</b> and supplemented with measures that separate the error types.',ex:'Always guessing "harmless" gives 70 % correct on the training data without the model having learnt anything at all. A model at 80 % is thus hardly impressive.'},
   recall:{k:'Concept',t:'Recall',p:'What proportion of the <b>actually venomous</b> snakes the model caught. The measure answers the question: how much of the danger slips through? Where an overlooked case can cost a life, recall is the measure that weighs heaviest — a model with low recall is dangerous even if its overall accuracy looks high.',ex:'4 venomous snakes in the test set, of which the model flags 2 → recall 50 %. Two venomous snakes were judged harmless.'},
-  precision:{k:'Concept',t:'Precision',p:'What proportion of the snakes the model <b>warned about</b> really were venomous. The measure answers the question: how trustworthy is the warning? Low precision means many false alarms, and a warning that is often unwarranted is one people eventually stop heeding.',ex:'The model warns about 6 snakes, of which 4 are venomous → precision 67 %. Two harmless snakes triggered false alarms.'},
-  prune:{k:'Concept',t:'Pruning',p:'Deliberately <b>removing</b> the lowest splits from a finished tree. The final questions rest on the least evidence and therefore run the greatest risk of describing individual exceptions rather than a general relationship. Pruning lowers accuracy on the training data and often raises it on new data.',ex:'The tree goes from 100 % / 83 % to 95 % / 100 %: worse on what it has already seen, better on reality.'},
-  generalize:{k:'Concept',t:'Generalisation',p:'How well a model handles <b>new</b> data it was never trained on. That is the only thing that counts in practice — a model that is good only on its own training examples is useless in the real world. This is why we always measure on separate test data.',ex:'Your tree scores highly on the training data, but only the test on unseen snakes reveals whether it learnt the real pattern.'}
+  precision:{k:'Concept',t:'Precision',p:'What proportion of the snakes the model <b>warned about</b> really were venomous. The measure answers the question: how trustworthy is the warning? Low precision means many false alarms, and an alarm that is often unwarranted is one people eventually stop heeding.',ex:'The model warns about 6 snakes, of which 4 are venomous → precision 67 %. Two harmless snakes triggered false alarms.'},
+  prune:{k:'Concept',t:'Pruning',p:'Deliberately <b>removing</b> the lowest splits from a finished tree. The final questions rest on the least evidence and so run the greatest risk of describing individual exceptions rather than a general relationship. Pruning lowers accuracy on the training data and often raises it on new data.',ex:'The tree goes from 100 % / 83 % to 95 % / 100 %: worse on what it has already seen, better on reality.'},
+  generalize:{k:'Concept',t:'Generalisation',p:'How well a model handles <b>new</b> data it was never trained on. That is the only thing that counts — a model that is good only on its own training examples is useless in the real world. This is why we always measure on separate test data.',ex:'Your tree scores highly on the training data, but only the test on unseen snakes reveals whether it learnt the real pattern.'}
 };
 /* ---- modal manager: focus trap + restore focus on close ---- */
 let lastFocused=null;
@@ -1227,15 +1228,14 @@ function nodeByPid(root,pid){const parts=pid.split('>');let n=root;for(let i=1;i
 const REDUCED=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function toastHost(){let h=document.getElementById('toastwrap');
   if(!h){h=document.createElement('div');h.className='toastwrap';h.id='toastwrap';document.body.appendChild(h);}return h;}
-function toast(msg,cls,ms){
+
+  function toast(msg,cls,ms){
   const h=toastHost(),t=document.createElement('div');
   t.className='toast '+(cls||'');t.setAttribute('role','status');t.innerHTML=msg;h.appendChild(t);
   setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),420);},ms||2400);
   return t;
 }
 const CONF=['#34d399','#22d3ee','#a78bfa','#fbbf24','#60a5fa','#fb7185'];
-
-
 function confetti(x,y,n){
   if(REDUCED)return;
   const box=document.createElement('div');box.className='confetti';document.body.appendChild(box);
@@ -1300,10 +1300,10 @@ function resetIdle(){clearTimeout(idleTimer);idleTimer=setTimeout(showNudge,9000
 
 /* ================= nav (pipeline-stegvisare) ================= */
 const STEPS=[
-  {title:'Study the data',c:'#60a5fa',intro:'Each snake is described by five features — <b>head shape</b>, <b>eye</b>, <b>pattern</b>, <b>colour</b> and <b>tail</b> — together with a known answer. Group the snakes by one feature at a time and examine whether the groups become <b>pure</b> or remain <b>mixed</b>.'},
-  {title:'Build your tree',c:'#ffd866',intro:'A decision tree is built from <b>nodes</b>. Each node asks a question about one feature, and each answer leads onward into its own branch. A <b>pure</b> branch contains only one class and needs no further questions; a <b>mixed</b> branch requires another question. Click a node to split it or to settle its class. The model is built on the training data alone.'},
-  {title:'Test your tree',c:'#ff9f43',intro:`A model must work on new cases, not merely on the examples it was built from. The test snakes have been held back throughout construction and have never influenced the tree. Run your tree on them, one at a time. Note not only <b>how many</b> it classifies correctly, but also <b>what kind of error</b> it makes.`},
-  {title:'Watch a computer build one',c:'#34d399',intro:'An algorithm builds the same kind of tree automatically, from exactly the same training data. At each node the algorithm tries every feature and measures how pure or mixed the resulting groups become. The measure is called <button class="term" data-term="entropy">entropy</button>, and the reduction a split achieves is called <button class="term" data-term="gain">information gain</button>. The feature with the greatest information gain gets to split the node.'},
+  {title:'Study the data',c:'#60a5fa',intro:'Each snake is described by five features — <b>head shape</b>, <b>eye</b>, <b>pattern</b>, <b>colour</b> and <b>tail</b> — together with a known answer. Sort them by one feature at a time and look for what separates the venomous from the harmless.'},
+  {title:'Build your tree',c:'#ffd866',intro:'A decision tree is built from <b>nodes</b>. Each node asks a question about one feature, and each answer leads onward into its own branch. A <b>pure</b> branch contains only one class and is finished; a <b>mixed</b> branch needs another question. Click a node to split it or to settle its class.'},
+  {title:'Test your tree',c:'#ff9f43',intro:`A model must work on new cases, not merely on the examples it was built from. The ${TEST.length} snakes in the <button class="term" data-term="testdata">test data</button> were set aside before construction began and have never influenced the tree. They are therefore the only independent trial of whether the tree has learnt something that holds generally. Run your tree on them, one at a time, and note not only <b>how many</b> it classifies correctly, but also <b>what kind of error</b> it makes.`},
+  {title:'Watch a computer build one',c:'#34d399',intro:'An algorithm builds the same kind of tree automatically, from exactly the same training data. At each node the algorithm tries every feature and measures how pure the resulting groups become. The measure is called <button class="term" data-term="entropy">entropy</button>, and the reduction a split produces is called <button class="term" data-term="gain">information gain</button>. The feature with the greatest information gain gets to split the node.'},
   {title:'Conclusions',c:'#a78bfa',intro:'Below is a summary of what your own work showed. Three questions on new cases then follow, to see whether the conclusions can be applied outside this exercise as well.'}
 ];
 const nav=document.getElementById('nav');
@@ -1372,13 +1372,13 @@ function renderAha(){
   let cls='',head,text;
   if(pureGroups.length===groups.length){
     cls='';head='A complete split.';
-    text=`Every group came out <b>pure</b> — all the snakes in a group belong to the same class. <b>${ANAME[attr]}</b> is therefore enough on its own to settle the matter.`;
+    text=`Every group came out <b>pure</b> — all the snakes in a group belong to the same class. <b>${ANAME[attr]}</b> is therefore enough on its own to decide whether a snake is venomous.`;
   } else if(pureGroups.length){
     cls='';head='A partly pure split.';
-    text=`${pureGroups.length} of ${groups.length} groups came out <b>completely pure</b> and require no further question. The rest remain mixed and call for another one.`;
+    text=`${pureGroups.length} of ${groups.length} groups came out <b>completely pure</b> and need no more questions. The rest are still mixed and need another one.`;
   } else if(ratio>=0.25){
     cls='mixed';head='Some improvement.';
-    text=`The groups became noticeably <b>purer</b>, but none of them is unambiguous. <b>${ANAME[attr]}</b> is a suitable starting point, but needs to be combined with a second feature.`;
+    text=`The groups became noticeably <b>purer</b>, but none of them is unambiguous. <b>${ANAME[attr]}</b> is a good start, but needs to be combined with a second feature.`;
   } else {
     cls='mixed';head='No clear difference.';
     text=`Venomous and harmless remain <b>evenly mixed</b> in every group. <b>${ANAME[attr]}</b> therefore tells us almost nothing about whether a snake is venomous.`;
@@ -1472,7 +1472,7 @@ function renderHypo(){
 function renderHypoReveal(){
   const el=document.getElementById('hypoReveal');if(!el)return;
   const rootAttr=(mlRoot&&mlRoot.type==='split')?mlRoot.attr:null;
-  if(!rootAttr){el.innerHTML=`<div class="hyporeveal"><span class="hk">Worth noting</span> See whether the algorithm picks the same feature as most important${hypo?` as you did (<b>${ANAME[hypo]}</b>)`:''}.</div>`;return;}
+  if(!rootAttr){el.innerHTML=`<div class="hyporeveal"><span class="hk">Worth noting</span> See whether the algorithm picks out the same feature as you did${hypo?` (<b>${ANAME[hypo]}</b>)`:''}.</div>`;return;}
   if(!hypo){el.innerHTML=`<div class="hyporeveal"><span class="hk">The root node</span> The algorithm chose <b>${ANAME[rootAttr]}</b> as its first question, because that feature yields the greatest information gain.</div>`;return;}
   const match=hypo===rootAttr;
   el.innerHTML=`<div class="hyporeveal ${match?'ok':'diff'}"><span class="hk">The root node</span> The algorithm chose <b>${ANAME[rootAttr]}</b> as its first question. You said <b>${ANAME[hypo]}</b> — ${match?'the same feature. It yields the greatest information gain at the root.':'a different feature. The algorithm always picks the one with the greatest information gain at the node in question.'}</div>`;
@@ -1507,10 +1507,10 @@ function splitFeedback(rows,attr,avail){
   const meta={rows,attr,avail:avail||[]};
   const groups=[...new Set(rows.map(r=>r[attr]))].map(v=>rows.filter(r=>r[attr]===v));
   const allPure=groups.every(gr=>{const c=counts(gr);return c.g===0||c.o===0;});
-  if(allPure)return{...meta,cls:'good',perfect:true,title:'A complete split',msg:'The split is complete. Every branch now contains only one class, so no further questions are needed here.'};
-  if(ratio>=0.55)return{...meta,cls:'good',title:'An effective split',msg:'An effective choice. The groups are substantially purer after the split than before it.'};
-  if(ratio>=0.2)return{...meta,cls:'',title:'',msg:'The split brings some improvement, but several branches remain mixed and require another question.'};
-  return{...meta,cls:'warn',title:'',msg:'The split made the groups only marginally purer. Try a different feature and compare the outcome.'};
+  if(allPure)return{...meta,cls:'good',perfect:true,title:'A complete split',msg:'The split is complete. Every branch now contains only one class, so no more questions are needed here.'};
+  if(ratio>=0.55)return{...meta,cls:'good',title:'An effective split',msg:'An effective choice. The groups are much purer after the split than before it.'};
+  if(ratio>=0.2)return{...meta,cls:'',title:'',msg:'The split gives some improvement, but several branches are still mixed and need another question.'};
+  return{...meta,cls:'warn',title:'',msg:'The split made the groups only marginally purer. Try a different feature and compare the result.'};
 }
 const stuSt={prev:null,sel:null,onClick:pid=>{stuSel=pid;renderStudent();}};
 function usedAttrs(pid){const parts=pid.split('>');let n=stuRoot,used=[];for(let i=1;i<parts.length;i++){used.push(n.attr);n=n.children[parts[i]];}return used;}
@@ -1618,7 +1618,7 @@ async function mlStep(){
   if(!mlQueue.length){mlDone=true;document.getElementById('mlJars').innerHTML='';celebrateTree('mlCanvas',"The computer's model is complete");document.getElementById('raceHead').innerHTML='The tree is complete. Below it is compared with your own tree, snake by snake.';document.getElementById('mlNext').disabled=true;mlPlaying=false;document.getElementById('mlPlay').textContent='▶ Train';renderPruneUI();renderCompare();return false;}
   const node=mlQueue.shift();mlSt.cur=node._pid;renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);
   const avail=node.avail;const pure=entropy(node.rows)===0;
-  document.getElementById('raceHead').innerHTML=`Node with ${node.rows.length} snakes — every feature is being tested…`;
+  document.getElementById('raceHead').innerHTML=`Node with ${node.rows.length} snakes — the algorithm is testing every feature…`;
   if(pure||!avail.length){document.getElementById('mlRace').innerHTML='';document.getElementById('mlJars').innerHTML='';document.getElementById('raceHead').innerHTML=`Noden är redan ren och blir ett löv: ${labTag(node.fallback)}`;
     node.type='leaf';node.label=node.fallback;mlSt.cur=null;await sleep(500);renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);updateMLStats();return true;}
   const race=document.getElementById('mlRace');race.innerHTML=raceBars(node.rows,avail);await sleep(60);animateBars(race);await sleep(850);
@@ -1691,17 +1691,17 @@ function renderPruneUI(){
   const e=errStats(TEST.map(s=>predict(mlRoot,s)));
   if(!prunedOnce){
     box.innerHTML=`<div class="prunebox"><div class="ph">Try simplifying the tree</div>
-      The tree's lowest questions rest on the least evidence and therefore risk describing individual exceptions rather than a general relationship. Remove the bottom split and observe how the two measures change.
+      The last questions rest on the least evidence. Remove the bottom split and see how the two measures change.
       ${pruneBtnHTML()}</div>`;
     wirePrune();return;}
   /* texten rättar sig efter vad som faktiskt hände — beskärning kan även gå för långt */
   let ptxt;
   if(pruneBefore&&te>pruneBefore.te){
-    ptxt=`The tree became <b>worse</b> on the data it was trained on and <b>better</b> on data it has never seen. The model has not lost knowledge — it has lost the exceptions that never constituted a pattern. The procedure is called <button class="term" data-term="prune">pruning</button>.`;
+    ptxt=`The tree became <b>worse</b> on the data it was trained on and <b>better</b> on data it has never seen. The model has not lost knowledge — it has lost the exceptions that never constituted a pattern. This is called <button class="term" data-term="prune">pruning</button>.`;
   } else if(pruneBefore&&te<pruneBefore.te){
-    ptxt=`Accuracy has now fallen on <b>both</b> data sets. The tree has become too simple and lacks the question needed to separate the classes. <button class="term" data-term="prune">Pruning</button> improves a model only for as long as it is exceptions that are being removed — beyond that, the pattern goes too.`;
+    ptxt=`Accuracy has now fallen on <b>both</b> data sets. The tree has become too simple and lacks the question needed to separate the classes. <button class="term" data-term="prune">Pruning</button> improves a model only as long as it is exceptions being removed — beyond that, the pattern goes too.`;
   } else {
-    ptxt=`Accuracy on the test data is unchanged, while the tree has become simpler. A model that gives the same result with fewer questions is to be preferred. The procedure is called <button class="term" data-term="prune">pruning</button>.`;
+    ptxt=`Accuracy on the test data is unchanged, while the tree has become simpler. A model that gives the same result with fewer questions is better. This is called <button class="term" data-term="prune">pruning</button>.`;
   }
   box.innerHTML=`<div class="prunebox"><div class="ph">After pruning</div>
     ${ptxt}
@@ -1846,17 +1846,17 @@ function renderCompare(){
 
   let compareLine;
   if(!you.length){
-    compareLine=`Your tree decides immediately, without asking any question at all.`;
+    compareLine=`Your tree answers immediately, without asking a single question.`;
   } else if(commonLen===you.length&&commonLen===mach.length){
     compareLine=`You and the algorithm chose exactly the same questions in the same order: <b>${you.map(a=>ANAME[a]).join(' → ')}</b>.`;
   } else if(commonLen===you.length&&extraMach.length){
     compareLine=`The algorithm chose the same questions as you (<b>${shared.map(a=>ANAME[a]).join(' → ')||'—'}</b>) and then added <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b>, which your tree managed without.`;
   } else if(commonLen===mach.length&&extraYou.length){
-    compareLine=`You chose the same questions as the algorithm (<b>${shared.map(a=>ANAME[a]).join(' → ')||'—'}</b>) but added <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>, which the algorithm managed without.`;
+    compareLine=`You chose the same questions as the algorithm (<b>${shared.map(a=>ANAME[a]).join(' → ')||'—'}</b>) and then added <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>, which the algorithm managed without.`;
   } else if(commonLen===0){
-    compareLine=`You chose different first questions: you began with <b>${ANAME[you[0]]}</b>, the algorithm with <b>${ANAME[mach[0]]}</b>.`;
+    compareLine=`You and the algorithm began differently: you with <b>${ANAME[you[0]]}</b>, the algorithm with <b>${ANAME[mach[0]]}</b>.`;
   } else {
-    compareLine=`The first questions coincided (<b>${shared.map(a=>ANAME[a]).join(' → ')}</b>) but the trees diverge after that: you continued with <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>, the algorithm with <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b>.`;
+    compareLine=`The first questions were the same (<b>${shared.map(a=>ANAME[a]).join(' → ')}</b>), but the trees then went their separate ways: you continued with <b>${extraYou.map(a=>ANAME[a]).join(', ')}</b>, the algorithm with <b>${extraMach.map(a=>ANAME[a]).join(', ')}</b>.`;
   }
 
   /* ---- why do the results differ? ---- */
@@ -1868,14 +1868,14 @@ function renderCompare(){
   if(overfit&&greenTraps.length){
     why=`The algorithm's tree classified <b>${mTrain}%</b> of the training data correctly, but only <b>${ms}/${TEST.length}</b> (${mTest}%) of the test data. In order to get every training example right, the algorithm also split on <b>Colour</b> and established the rule that green snakes are harmless — a rule resting on a single green example. In the test data, ${greenTraps.length} venomous snake${greenTraps.length>1?'s are':' is'} therefore classified as harmless. The model has fitted itself to the details of the training data instead of to the underlying relationship, which is called <button class="term" data-term="overfit">overfitting</button>. The <b>Remove the last split</b> button above shows the effect of taking it away.`;
   } else if(overfit){
-    why=`The algorithm's tree classified <b>${mTrain}%</b> of the training data correctly but only <b>${mTest}%</b> of the test data. The final splits were built on isolated exceptions in the training data rather than on a general relationship, which is the hallmark of <button class="term" data-term="overfit">overfitting</button>.`;
+    why=`The algorithm's tree classified <b>${mTrain}%</b> of the training data correctly, but only <b>${mTest}%</b> of the test data. The final splits were built on isolated exceptions in the training data rather than on a general relationship, which is exactly what <button class="term" data-term="overfit">overfitting</button> looks like.`;
   } else {
     why=`The algorithm's tree classified <b>${mTrain}%</b> of the training data and <b>${mTest}%</b> of the test data correctly.`;
   }
   let verdict;
-  if(ys>ms)verdict=`Your tree performed better on the test data, ${ys}/${TEST.length} against ${ms}/${TEST.length}, because it is simpler. More questions do not automatically make a better model: a smaller tree disregards the exceptions and captures the relationship that holds generally instead.`;
-  else if(ys===ms)verdict=`Both trees got ${ys}/${TEST.length} right. `+(ys===TEST.length?`Both have therefore captured the relationship that holds for new data as well.`:`Examine which snakes both classified wrongly, and what those have in common.`);
-  else verdict=`The algorithm's tree got more right (${ms}/${TEST.length} against ${ys}/${TEST.length}). Do go back to step 2 and investigate whether a different tree would have generalised better.`;
+  if(ys>ms)verdict=`Your tree did better on the test data, ${ys}/${TEST.length} against ${ms}/${TEST.length}, precisely because it is simpler. More questions do not automatically make a better model: a smaller tree disregards the exceptions and captures the relationship that holds generally instead.`;
+  else if(ys===ms)verdict=`Both trees got ${ys}/${TEST.length} right. `+(ys===TEST.length?`Both have therefore captured the relationship that holds for new data as well.`:`Examine which snakes both classified wrongly, and what they have in common.`);
+  else verdict=`The algorithm's tree got more right (${ms}/${TEST.length} against ${ys}/${TEST.length}). Do go back to step 2 and see whether a different tree would have generalised better.`;
 
   zone.innerHTML=`<div class="cmpwrap glass">
     <div class="cap">Your tree compared with the algorithm's</div>
@@ -1898,7 +1898,7 @@ function renderCompare(){
 /* ================= steg 5: slutsatser ================= */
 const REFLECT=`<div class="reflectgrid">
       <div class="rcard warn"><div class="rh">Training accuracy says little</div><p>A perfect result on the <b>training data</b> does not mean the model is good. It may have fitted itself to the examples rather than to a general relationship.</p></div>
-      <div class="rcard"><div class="rh">Test data measures generalisation</div><p>Data withheld during training is used to test whether the model works on new cases — that is, whether it <button class="term" data-term="generalize">generalises</button>.</p></div>
+      <div class="rcard"><div class="rh">Test data measures generalisation</div><p>Data held back during training is used to test whether the model works on new cases — that is, whether it <button class="term" data-term="generalize">generalises</button>.</p></div>
       <div class="rcard good"><div class="rh">Simpler models often generalise better</div><p>A model with fewer questions disregards individual exceptions in the training data and therefore more often captures the relationship that holds generally.</p></div>
       <div class="rcard warn"><div class="rh">Not all errors weigh the same</div><p>Two models can have the same accuracy and still differ in how dangerous they are. Judging a venomous snake to be harmless is a more serious error than the reverse, which is why <button class="term" data-term="recall">recall</button> and <button class="term" data-term="precision">precision</button> are reported separately.</p></div>
       <div class="rcard"><div class="rh">A model is never better than its data</div><p>The rule the tree found holds within this material. In reality the relationship between head shape and venom is far from clear-cut — several deadly snakes have round heads and round pupils. A model reproduces the patterns present in its data, not the world as a whole.</p></div>`;
@@ -1908,7 +1908,7 @@ const SUMQ=[
         'The test data must be incorrectly labelled',
         'The model needs to ask more questions'],
   correct:0,
-  facit:'The gap between the two figures is the very hallmark of <button class="term" data-term="overfit">overfitting</button>. Mislabelled test data is possible but far-fetched — the pattern appears far too regularly to be down to chance. Adding more questions makes the problem worse rather than better: it was precisely the last questions that caused it. The right remedy is to simplify the model, for instance by <button class="term" data-term="prune">pruning</button>.'},
+  facit:'The gap between the two figures is the very hallmark of <button class="term" data-term="overfit">overfitting</button>. Mislabelled test data is possible but far-fetched — the pattern appears far too regularly to be down to chance. Adding more questions makes the problem worse rather than better: it was precisely the last questions that caused it. The right remedy is to simplify the model, for example by <button class="term" data-term="prune">pruning</button>.'},
  {q:'A warning system for venomous snakes finds <b>all 4</b> venomous snakes in a test, but also warns about <b>6 harmless</b> ones. Which measure is high and which is low?',
   opts:['High recall, low precision','High precision, low recall','Both measures are low'],
   correct:0,
@@ -1916,7 +1916,7 @@ const SUMQ=[
  {q:'Two trees both get <b>10 out of 12</b> right. One misses two venomous snakes; the other warns about two harmless ones. Which do you choose?',
   opts:['The one that misses two venomous','The one that warns about two harmless','It depends on what the error costs'],
   correct:null,
-  facit:'The question has no answer key in a statistical sense — accuracy is identical, and the measures cannot settle it for you. The choice is determined by what the two error types cost. For snakebites, a missed venomous case is potentially fatal while a false alarm means unnecessary caution, and the second tree is then the obvious choice. For a spam filter the relationship is reversed: an important email in the junk folder is worse than an advert in the inbox. The same figures, the opposite conclusion. This is why the measures must always be interpreted in context.'}
+  facit:'The question has no answer key in a statistical sense — accuracy is identical, and the measures cannot settle it for you. The choice is determined by what the two error types cost. For snakebites, a missed venomous snake can cost a life, while a false alarm only means unnecessary caution — the second tree is then the obvious choice. For a spam filter the relationship is reversed: an important email in the junk folder is worse than an advert in the inbox. The same figures, the opposite conclusion. This is why the measures must always be interpreted in context.'}
 ];
 let sumAns={},sumFacit={};
 function recapRows(){
@@ -1929,7 +1929,7 @@ function recapRows(){
       : `You named <b>${ANAME[hypo]}</b> as the most important feature.`]);
   rows.push(['Your tree', yAttrs.length
       ? `Asked ${yAttrs.length===1?'<b>one</b> question':`<b>${yAttrs.length}</b> questions`}: <b>${yAttrs.map(a=>ANAME[a]).join(' → ')}</b>.${fr?` ${fr} branch${fr>1?'es were':' was'} left unsettled.`:''}`
-      : 'Was never finished — go back to step 2 if you would like to try.']);
+      : 'Was never finished — go back to step 2 and complete it.']);
   const yv=TEST.map(x=>predict(stuRoot,x)), e=errStats(yv);
   const ok=yv.filter((v,i)=>v===TEST[i].label).length;
   rows.push(['On test data',`<b>${ok} of ${TEST.length}</b> correct on snakes the tree had never seen. `
@@ -1940,7 +1940,7 @@ function recapRows(){
     rows.push(["The algorithm's tree",`Asked <b>${mlAttrs.length}</b> questions: <b>${mlAttrs.map(a=>ANAME[a]).join(' → ')}</b>. Training <b>${pct(accuracy(mlRoot,TRAIN))}</b>, test <b>${mok} of ${TEST.length}</b>.`]);
     if(prunedOnce){
       const dOk=TEST.filter(x=>predict(DEEP,x)===x.label).length;
-      rows.push(['The pruning',`Before you pruned it, the algorithm's tree asked <b>${treeAttrs(DEEP).length}</b> questions and classified <b>${dOk} of ${TEST.length}</b> correctly at <b>${pct(accuracy(DEEP,TRAIN))}</b> on the training data. You removed the bottom split and could observe the two measures moving in <b>opposite directions</b>.`]);
+      rows.push(['The pruning',`Before you pruned it, the algorithm's tree asked <b>${treeAttrs(DEEP).length}</b> questions and classified <b>${dOk} of ${TEST.length}</b> correctly, with <b>${pct(accuracy(DEEP,TRAIN))}</b> on the training data. You removed the bottom split and could see the two measures move in <b>opposite directions</b>.`]);
     }
   } else rows.push(["The algorithm's tree",'Was never finished — go back to step 4 and press <b>Train</b>.']);
   return rows;
@@ -1968,7 +1968,7 @@ function renderSummary(){
   const cards=document.getElementById('sumCards');
   if(cards)cards.innerHTML=(Object.keys(sumAns).length?`<div class="reflecthead">What the experiment showed</div>${REFLECT}`:'');
   const lex=document.getElementById('sumLex');
-  const ORDER=['entropy','gain','accuracy','recall','precision','overfit','prune','generalize'];
+  const ORDER=['entropy','gain','accuracy','recall','precision','testdata','generalize','overfit','prune'];
   if(lex)lex.innerHTML=ORDER.filter(k=>CONCEPTS[k]).map(k=>`<button class="term" data-term="${k}">${CONCEPTS[k].t}</button>`).join('');
 }
 
@@ -1984,4 +1984,4 @@ function renderSummary(){
 </script>
 </body>
 </html>
-     
+   
