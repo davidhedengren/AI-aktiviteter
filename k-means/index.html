@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>k-means-klustring – ai-aktiviteter.se</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07090f;--tx:#eef1f8;--dim:#79839b;--sub:#aab4cc;--line:#1a2030;--line2:#252d42;
+  --a1:#5b8cff;--a2:#8b7dff;--gold:#ffcf5c;--grn:#3ddc84;--cy:#3ee0e0;
+  --sp:cubic-bezier(.34,1.4,.55,1);--ez:cubic-bezier(.2,.9,.25,1);}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;font-size:16px;background:var(--bg);color:var(--tx);
+  min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(1200px 700px at 8% -10%,rgba(91,140,255,.13),transparent 60%),
+             radial-gradient(1000px 620px at 96% 0%,rgba(139,125,255,.10),transparent 58%)}
+.hd{padding:16px 20px 10px;position:relative;z-index:1;text-align:center}
+.hd .links{display:flex;justify-content:space-between;gap:10px;margin-bottom:16px}
+.lk{display:inline-flex;align-items:center;gap:7px;font-family:'Space Grotesk',sans-serif;font-size:13px;
+  font-weight:600;color:var(--dim);text-decoration:none;padding:8px 14px;border-radius:99px;
+  background:rgba(255,255,255,.035);transition:.25s var(--ez)}
+.lk:hover{color:var(--tx);background:rgba(255,255,255,.08)}
+.lk svg{width:17px;height:11px;border-radius:2px;display:block}
+h1{font-family:'Syne',sans-serif;font-size:clamp(27px,4.6vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.05;
+  background:linear-gradient(96deg,#fff 8%,var(--a1) 55%,var(--a2) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.tag{font-size:15px;color:var(--dim);margin-top:7px}
+.wrap{max-width:1180px;margin:0 auto;width:100%;padding:10px 20px 44px;display:flex;flex-direction:column;gap:18px;flex:1;position:relative;z-index:1}
+.snav{display:flex;gap:5px;padding:5px;border-radius:16px;background:rgba(255,255,255,.035);overflow-x:auto;scrollbar-width:none}
+.snav::-webkit-scrollbar{display:none}
+.sb{flex:1;min-width:92px;padding:11px 10px;border-radius:12px;border:none;background:transparent;color:var(--dim);
+  font-family:'Space Grotesk',sans-serif;font-size:12.5px;font-weight:600;cursor:pointer;transition:.3s var(--ez);white-space:nowrap}
+.sb:hover{color:var(--sub)}
+.sb.on{background:rgba(255,255,255,.07);color:var(--tx);box-shadow:inset 0 0 0 1px var(--c)}
+.intro{border-radius:20px;padding:22px 26px;background:linear-gradient(158deg,rgba(255,255,255,.045),rgba(255,255,255,.012));position:relative;overflow:hidden}
+.intro::after{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--c)}
+.eyebrow{display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--c);margin-bottom:9px}
+.intro h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(20px,3vw,27px);letter-spacing:-.022em;line-height:1.16;margin-bottom:11px}
+.intro p{font-size:15.5px;line-height:1.72;color:var(--sub);max-width:76ch}
+.intro p b{color:var(--tx);font-weight:600}
+.loop{display:flex;align-items:center;justify-content:center;padding:14px 10px 26px;position:relative;transition:opacity .4s}
+.lstep{display:flex;flex-direction:column;align-items:center;gap:7px;padding:12px 18px;border-radius:16px;
+  background:rgba(255,255,255,.028);border:1px solid transparent;min-width:136px;transition:.4s var(--ez);cursor:pointer}
+.lstep .li{width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--dim);background:rgba(255,255,255,.05);transition:.4s var(--ez)}
+.lstep .lt{font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;color:var(--dim);transition:.3s}
+.lstep.on{background:rgba(255,255,255,.06);box-shadow:0 0 0 1px var(--c),0 12px 36px -14px var(--c)}
+.lstep.on .li{background:var(--c);color:#07090f}
+.lstep.on .lt{color:var(--tx)}
+.lstep.fin .li{background:rgba(61,220,132,.16);color:var(--grn)}
+.larr{width:48px;height:2px;background:var(--line2);position:relative;flex:none}
+.larr::after{content:'';position:absolute;right:-1px;top:-3.5px;border-left:7px solid var(--line2);border-top:4px solid transparent;border-bottom:4px solid transparent}
+.lb{position:absolute;left:50%;transform:translateX(-50%);bottom:2px;width:min(420px,88%);pointer-events:none;text-align:center}
+.lb svg{width:100%;height:20px;overflow:visible;display:block}
+.lb path{fill:none;stroke:var(--line2);stroke-width:2;stroke-linecap:round;stroke-dasharray:7 7;transition:stroke .4s}
+.lb .cap{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--dim);letter-spacing:.14em;margin-top:1px}
+.lb.live path{stroke:var(--gold);animation:dash 1.1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-14}}
+.cols{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:18px;align-items:start}
+@media(max-width:940px){.cols{grid-template-columns:1fr}}
+.panel{border-radius:20px;padding:18px 20px;background:linear-gradient(158deg,rgba(255,255,255,.04),rgba(255,255,255,.012))}
+.ph{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;margin-bottom:14px;letter-spacing:-.01em}
+.ph .pd{width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c)}
+.ph .meta{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--dim);font-weight:400}
+.stage{border-radius:16px;overflow:hidden;background:#080a11}
+svg.plot{display:block;width:100%;height:auto}
+.grid line{stroke:rgba(255,255,255,.035)}
+.axl text{font-family:'DM Sans',sans-serif;font-size:12px;fill:var(--dim)}
+.pt{transition:fill .3s var(--ez),fill-opacity .3s}
+.pt.pop{animation:ptPop .42s var(--sp)}
+.pt.swap{animation:ptPop .42s var(--sp),oldFade .95s var(--ez) forwards}
+@keyframes oldFade{0%{stroke-opacity:.95}100%{stroke-opacity:0}}
+@keyframes ptPop{0%{r:5.4}40%{r:8.4}100%{r:5.4}}
+.ring{fill:none;stroke-width:2;opacity:0}
+.ring.show{animation:ringOut .6s var(--ez)}
+@keyframes ringOut{0%{r:5;opacity:.95;stroke-width:2.4}100%{r:17;opacity:0;stroke-width:.6}}
+.lnk{stroke-width:1.1;opacity:0;transition:opacity .35s}
+.lnk.show{opacity:.32}
+.cen{transition:transform .64s var(--sp);cursor:pointer}
+.cin{animation:drop .72s var(--sp) backwards;transform-origin:center}
+@keyframes drop{0%{transform:translateY(-58px) scale(.5);opacity:0}
+  62%{transform:translateY(3px) scale(1.06);opacity:1}100%{transform:none;opacity:1}}
+.cen .halo{transition:opacity .4s}
+.cen.glide .halo{animation:pulse .64s var(--ez)}
+@keyframes pulse{0%{r:16;opacity:.18}50%{r:27;opacity:.36}100%{r:16;opacity:.18}}
+.cen .tick{opacity:0;transition:opacity .5s .15s}
+.cen.fin .tick{opacity:1;animation:tickPop .6s var(--sp)}
+@keyframes tickPop{0%{opacity:0;transform:translate(0,-16px) scale(.3)}60%{transform:translate(0,-16px) scale(1.3)}100%{transform:translate(0,-16px) scale(1)}}
+.cen.fin .halo{opacity:.32}
+.row{display:flex;gap:9px;flex-wrap:wrap}
+.b{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;padding:11px 17px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.045);color:var(--tx);cursor:pointer;
+  transition:.24s var(--sp);display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.b:hover:not(:disabled){background:rgba(255,255,255,.09);transform:translateY(-1.5px)}
+.b:active:not(:disabled){transform:scale(.985)}
+.b:disabled{opacity:.3;cursor:not-allowed}
+.b:focus-visible{outline:2px solid var(--a1);outline-offset:2px}
+.b.hero{background:var(--c);border-color:transparent;color:#07090f;font-weight:700}
+.b.hero:hover:not(:disabled){box-shadow:0 10px 30px -8px var(--c);background:var(--c)}
+.b.sm{padding:8px 13px;font-size:12.5px}
+.b .num{font-family:'JetBrains Mono',monospace;opacity:.7}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;padding:9px 15px;border-radius:99px;
+  border:1px solid transparent;background:rgba(255,255,255,.04);color:var(--dim);cursor:pointer;transition:.24s var(--sp)}
+.chip:hover{color:var(--tx);background:rgba(255,255,255,.08)}
+.chip.on{background:rgba(91,140,255,.16);border-color:rgba(91,140,255,.5);color:var(--tx)}
+.krow .chip{flex:1;text-align:center;font-family:'JetBrains Mono',monospace}
+.lbl{display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+.mets{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:14px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.mk{font-size:11.5px;color:var(--dim);margin-bottom:5px;line-height:1.35}
+.mv{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;line-height:1;letter-spacing:-.02em;display:flex;align-items:baseline;gap:7px;animation:bump .4s var(--ez)}
+@keyframes bump{0%{transform:translateY(4px);opacity:.35}100%{transform:none;opacity:1}}
+.delta{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:500;color:var(--grn)}
+.mv.zero{color:var(--grn)}
+.tl{display:flex;align-items:center;gap:0;margin-top:15px;flex-wrap:wrap}
+.tp{width:27px;height:27px;border-radius:50%;border:1.5px solid var(--line2);background:transparent;color:var(--dim);
+  font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.24s var(--sp);flex:none}
+.tp:hover{border-color:var(--a1);color:var(--tx)}
+.tp.on{background:var(--a1);border-color:var(--a1);color:#07090f}
+.tll{width:16px;height:1.5px;background:var(--line2);flex:none}
+.note{margin-top:14px;padding:15px 17px;border-radius:14px;font-size:14px;line-height:1.68;color:var(--sub);
+  background:rgba(255,255,255,.03);border-left:2px solid var(--c);animation:bump .35s var(--ez)}
+.note b{color:var(--tx);font-weight:600}
+.note.g{--c:var(--gold)}.note.e{--c:var(--grn)}.note.v{--c:var(--a2)}
+.term{border-bottom:1px dashed var(--a1);color:var(--a1);cursor:pointer;transition:.15s}
+.term:hover{border-bottom-style:solid;background:rgba(91,140,255,.1);border-radius:3px}
+.scrim{position:fixed;inset:0;background:rgba(4,6,12,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ez)}
+.scrim.show{opacity:1;pointer-events:auto}
+.ccard{position:fixed;top:50%;left:50%;z-index:301;width:400px;max-width:90vw;perspective:1000px;
+  transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
+  transition:transform .38s var(--sp),opacity .26s var(--ez)}
+.ccard.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto}
+.ccard-in{position:relative;text-align:center;transform-style:preserve-3d;
+  background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));
+  border:1px solid rgba(255,255,255,.1);border-radius:22px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:28px 28px 24px;
+  transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
+  transition:transform .5s var(--ez),box-shadow .5s var(--ez);will-change:transform;max-height:86vh;overflow-y:auto}
+.ccard-in::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;padding:1.5px;
+  background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,206,84,.15) 45%,transparent 65%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity .35s var(--ez)}
+.ccard-in:hover::before{opacity:1}
+.ccard-in::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.09),transparent 60%);
+  opacity:0;transition:opacity .35s var(--ez)}
+.ccard-in:hover::after{opacity:1}
+.cclose{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;
+  border:1px solid var(--line2);background:rgba(255,255,255,.03);color:var(--dim);display:flex;
+  align-items:center;justify-content:center;cursor:pointer;font-size:12px;z-index:3;
+  transform:translateZ(30px);transition:.2s var(--sp)}
+.cclose:hover{border-color:var(--gold);color:var(--gold);transform:translateZ(30px) rotate(90deg)}
+.cicon{width:54px;height:54px;margin:0 auto 13px;border-radius:16px;background:rgba(91,140,255,.16);
+  display:flex;align-items:center;justify-content:center;font-size:26px;position:relative;z-index:3;
+  transform:translateZ(36px);box-shadow:0 10px 24px rgba(91,140,255,.18)}
+.ctitle{font-family:'Syne',sans-serif;font-size:19px;font-weight:800;margin-bottom:9px;letter-spacing:-.015em;
+  position:relative;z-index:3;transform:translateZ(26px);color:var(--tx)}
+.cdef{font-size:14px;line-height:1.66;color:var(--sub);position:relative;z-index:3;transform:translateZ(18px);transform-style:preserve-3d}
+.cdef b{color:var(--tx);font-weight:600}
+.cdef .calc{font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.9;color:var(--tx);
+  background:rgba(0,0,0,.32);border-radius:12px;padding:13px 15px;margin-top:14px;text-align:left}
+.elb{display:block;width:100%;height:auto}
+.elb .ln{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:640;stroke-dashoffset:640;animation:draw 1.15s var(--ez) .1s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.elb text{font-family:'JetBrains Mono',monospace;font-size:10px;fill:var(--dim)}
+.elb .kd{cursor:pointer;transition:.25s var(--sp)}
+.OLDsetup{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-end;padding:16px 20px;border-radius:18px;
+  background:linear-gradient(158deg,rgba(255,255,255,.04),rgba(255,255,255,.012))}
+.sgrp{display:flex;flex-direction:column;gap:9px}
+.slbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.OLDengine{display:flex;align-items:stretch;justify-content:center;gap:0;position:relative;padding:6px 0 30px}
+.big{flex:1;max-width:340px;display:flex;flex-direction:column;align-items:flex-start;gap:3px;
+  padding:20px 22px;border-radius:20px;border:1px solid rgba(255,255,255,.07);
+  background:linear-gradient(158deg,rgba(255,255,255,.05),rgba(255,255,255,.015));
+  color:var(--tx);cursor:pointer;text-align:left;transition:.32s var(--sp);position:relative;overflow:hidden}
+.big::before{content:'';position:absolute;inset:0;background:var(--c);opacity:0;transition:opacity .32s}
+.big>*{position:relative}
+.big:hover:not(:disabled){transform:translateY(-2px);border-color:var(--c)}
+.big:hover:not(:disabled)::before{opacity:.07}
+.big:disabled{opacity:.34;cursor:not-allowed}
+.big.armed{border-color:var(--c);box-shadow:0 0 0 1px var(--c),0 18px 50px -20px var(--c)}
+.big.armed::before{opacity:.11}
+.big.armed .bn{background:var(--c);color:#07090f}
+.bn{padding:5px 11px;border-radius:99px;display:inline-flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;background:rgba(255,255,255,.07);color:var(--dim);
+  margin-bottom:7px;transition:.32s var(--ez)}
+.bt{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.015em}
+.bs{font-size:12.5px;color:var(--dim);line-height:1.45}
+.between{display:flex;align-items:center;padding:0 14px;flex:none}
+.barrow{width:34px;height:2px;background:var(--line2);position:relative}
+.barrow::after{content:'';position:absolute;right:-1px;top:-3.5px;border-left:7px solid var(--line2);border-top:4px solid transparent;border-bottom:4px solid transparent}
+.rback{position:absolute;left:50%;transform:translateX(-50%);bottom:0;width:min(430px,90%);pointer-events:none;text-align:center}
+.rback svg{width:100%;height:22px;overflow:visible;display:block}
+.rback path{fill:none;stroke:var(--line2);stroke-width:2;stroke-linecap:round;stroke-dasharray:7 7;transition:stroke .4s}
+.rback .cap{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--dim);letter-spacing:.14em;margin-top:1px}
+.rback.live path{stroke:var(--gold);animation:dash 1.1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-14}}
+.OLDguide{border-radius:18px;padding:17px 21px;background:linear-gradient(158deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
+  font-size:15px;line-height:1.68;color:var(--sub);border-left:2px solid var(--c);animation:bump .35s var(--ez)}
+.guide b{color:var(--tx);font-weight:600}
+.guide .gt{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;
+  color:var(--tx);letter-spacing:-.015em;margin-bottom:6px}
+.kcols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px;align-items:center}
+@media(max-width:760px){.kcols{grid-template-columns:1fr}}
+#calc .exp{font-size:14px;line-height:1.7;color:var(--sub);animation:bump .35s var(--ez)}
+#calc .exp p{margin-bottom:11px}
+#calc .exp p:last-child{margin-bottom:0}
+#calc .exp b{color:var(--tx);font-weight:600}
+.fml{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--tx);text-align:center;
+  background:rgba(0,0,0,.3);border-radius:12px;padding:14px 12px;margin:13px 0}
+@media(max-width:640px){.engine{flex-direction:column;gap:10px;padding-bottom:34px}.between{display:none}.big{max-width:none}}
+@media(max-width:640px){
+  body{font-size:15px}.wrap{padding:8px 14px 36px;gap:14px}
+  .loop{flex-wrap:wrap;gap:8px;padding-bottom:30px}.larr{display:none}.lstep{min-width:0;flex:1;padding:10px 12px}
+  .intro{padding:18px}.panel{padding:15px 16px}
+}
+
+/* ── layout: pipeline vänster, canvas höger ── */
+.lay{display:grid;grid-template-columns:390px minmax(0,1fr);gap:20px;align-items:start}
+@media(max-width:1040px){.lay{grid-template-columns:1fr}
+  .canvascol{order:-1;position:sticky;top:0;z-index:5;padding-top:6px;
+    background:linear-gradient(180deg,var(--bg) 78%,transparent)}
+  .canvaspanel{padding:12px 13px}
+  .canvaspanel .mets{margin-top:11px;padding-top:11px;gap:10px}
+  .canvaspanel .mv{font-size:20px}.canvaspanel .tl{margin-top:10px}}
+.canvascol{position:sticky;top:14px}
+
+.pipe{position:relative;display:flex;flex-direction:column;padding:4px 4px 4px 0}
+.pstep{display:flex;gap:14px;padding:15px 17px;border-radius:18px;position:relative;
+  background:linear-gradient(158deg,rgba(255,255,255,.035),rgba(255,255,255,.01));
+  border:1px solid transparent;transition:.42s var(--ez)}
+.pstep .pn{flex:none;width:30px;height:30px;border-radius:11px;display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim);background:rgba(255,255,255,.06);transition:.42s var(--ez)}
+.pstep .pbody{min-width:0;flex:1}
+.pstep .pshead{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15.5px;letter-spacing:-.015em;color:var(--dim);transition:.35s}
+.pstep .pd2{font-size:13.5px;line-height:1.62;color:var(--dim);margin-top:0;max-height:0;opacity:0;overflow:hidden;
+  transition:max-height .55s var(--ez),opacity .35s,margin-top .4s}
+.pstep.on{border-color:var(--c);box-shadow:0 0 0 1px var(--c),0 18px 46px -22px var(--c);
+  background:linear-gradient(158deg,rgba(255,255,255,.06),rgba(255,255,255,.015))}
+.pstep.on .pn{background:var(--c);color:#07090f}
+.pstep.on .pshead{color:var(--tx)}
+.pstep.on .pd2{max-height:700px;opacity:1;margin-top:10px;color:var(--sub)}
+.pstep.done .pn{background:rgba(61,220,132,.15);color:var(--grn)}
+.pstep.done .pshead{color:var(--sub)}
+.pstep.on.back::after{content:'du tittar bakåt';position:absolute;top:12px;right:15px;
+  font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.pstep.avail{cursor:pointer}
+.pstep.avail:hover:not(.on){background:rgba(255,255,255,.055)}
+.pline{width:2px;height:15px;margin-left:32px;background:var(--line2);flex:none}
+.looprail{position:absolute;right:-6px;top:var(--lt,0);height:var(--lh,0);width:22px;pointer-events:none;
+  border:2px dashed var(--line2);border-left:none;border-radius:0 14px 14px 0;transition:.45s var(--ez)}
+.looprail .lcap{position:absolute;right:-7px;top:50%;transform:translate(100%,-50%);
+  writing-mode:vertical-rl;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.pipe.live .looprail{border-color:var(--gold);animation:railPulse 2s var(--ez) infinite}
+.pipe.done .looprail{border-color:var(--grn);border-style:solid;animation:railDone .7s var(--sp)}
+@keyframes railDone{0%{opacity:.4;transform:scaleX(1.12)}100%{opacity:1;transform:none}}
+.pstep.win{animation:winGlow 1.1s var(--ez)}
+@keyframes winGlow{0%{box-shadow:0 0 0 1px var(--c),0 0 0 0 rgba(61,220,132,.5)}
+  55%{box-shadow:0 0 0 1px var(--c),0 0 0 16px rgba(61,220,132,0)}
+  100%{box-shadow:0 0 0 1px var(--c),0 18px 46px -22px var(--c)}}
+@keyframes railPulse{0%,100%{opacity:.5}50%{opacity:1}}
+.pd2 .fml{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--tx);text-align:center;
+  background:rgba(0,0,0,.3);border-radius:11px;padding:12px 10px;margin:11px 0}
+.linky{background:none;border:none;color:var(--a1);font-family:inherit;font-size:inherit;cursor:pointer;
+  text-decoration:underline;text-underline-offset:3px;padding:0}
+.pd2 p{margin-bottom:9px}.pd2 p:last-child{margin-bottom:0}.pd2 b{color:var(--tx);font-weight:600}
+.pact{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.pbig{flex:1;min-width:140px;padding:12px 15px;border-radius:13px;border:none;background:var(--c);color:#07090f;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:.24s var(--sp)}
+.pbig:hover:not(:disabled){transform:translateY(-1.5px);box-shadow:0 10px 28px -10px var(--c)}
+.pbig:disabled{opacity:.32;cursor:not-allowed;transform:none;box-shadow:none}
+.psub{padding:11px 14px;border-radius:13px;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--sub);
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;cursor:pointer;transition:.24s var(--sp)}
+.psub:hover:not(:disabled){background:rgba(255,255,255,.06);color:var(--tx)}
+.psub:disabled{opacity:.32;cursor:not-allowed}
+@media(max-width:640px){.pstep{padding:13px 14px}.looprail{right:-3px;width:16px}.looprail .lcap{display:none}}
+</style>
+</head>
+<body>
+<div class="hd">
+  <div class="links">
+    <a class="lk" href="/">← AI-aktiviteter</a>
+    <a class="lk" href="/k-means_ENG"><svg viewBox="0 0 50 30"><rect width="50" height="30" fill="#012169"/><path d="M0,0 L50,30 M50,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#fff" stroke-width="10"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#C8102E" stroke-width="6"/></svg>English</a>
+  </div>
+  <h1>k-means-klustring</h1>
+  <div class="tag">Modellen får data som inte har några kända svar, och försöker själv hitta mönster i den.</div>
+</div>
+
+<div class="wrap">
+  <div class="lay">
+
+    <aside class="pipe" id="pipe">
+      <div class="pstep" data-s="1">
+        <div class="pn">1</div>
+        <div class="pbody"><div class="pshead">Välj datamängd</div>
+          <div class="pd2" id="p1body"></div></div>
+      </div>
+      <div class="pline"></div>
+      <div class="pstep" data-s="2">
+        <div class="pn">2</div>
+        <div class="pbody"><div class="pshead">Placera centroider</div>
+          <div class="pd2" id="p2body"></div></div>
+      </div>
+      <div class="pline"></div>
+      <div class="looprail"><span class="lcap">upprepas</span></div>
+      <div class="pstep loopstep" data-s="3">
+        <div class="pn">3</div>
+        <div class="pbody"><div class="pshead">Tilldela datapunkter</div>
+          <div class="pd2" id="p3body"></div></div>
+      </div>
+      <div class="pline in-loop"></div>
+      <div class="pstep loopstep" data-s="4">
+        <div class="pn">4</div>
+        <div class="pbody"><div class="pshead">Flytta centroider</div>
+          <div class="pd2" id="p4body"></div></div>
+      </div>
+      <div class="pline"></div>
+      <div class="pstep" data-s="5">
+        <div class="pn">5</div>
+        <div class="pbody"><div class="pshead">Hur många grupper?</div>
+          <div class="pd2" id="p5body"></div></div>
+      </div>
+    </aside>
+
+    <div class="canvascol">
+      <div class="panel canvaspanel">
+        <div class="ph"><span class="pd"></span><span id="ptitle"></span><span class="meta" id="pmeta"></span></div>
+        <div class="stage"><svg class="plot" id="plot" viewBox="0 0 620 450"></svg></div>
+        <div class="mets" id="mets"></div><div class="tl" id="tl"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scrim" id="scrim" onclick="closeCard()"></div>
+<div class="ccard" id="ccard" role="dialog" aria-modal="true">
+  <div class="ccard-in" id="ccardIn">
+    <button class="cclose" onclick="closeCard()" aria-label="Stäng">✕</button>
+    <div class="cicon" id="cIc"></div>
+    <div class="ctitle" id="cTi"></div>
+    <div class="cdef" id="cBo"></div>
+    <div class="cdef" id="cCa"></div>
+  </div>
+</div>
+
+<script>
+function rng(s){let a=s>>>0;return()=>{a=(a+0x6D2B79F5)>>>0;let t=Math.imul(a^(a>>>15),1|a);
+  t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296;};}
+function gs(r){let u=0,v=0;while(!u)u=r();while(!v)v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+function blob(r,cx,cy,sx,sy,n,rot){const o=[];for(let i=0;i<n;i++){let x=gs(r)*sx,y=gs(r)*sy;
+  if(rot){const c=Math.cos(rot),s=Math.sin(rot);[x,y]=[x*c-y*s,x*s+y*c];}o.push({x:cx+x,y:cy+y});}return o;}
+const DS={
+ three:{n:'Tre tydliga grupper',best:3,ax:['Egenskap A','Egenskap B'],tip:'Tre tydligt åtskilda moln. Här hittar algoritmen samma grupper som ditt öga gör.',
+   g:(sd)=>{const r=rng(7+(sd||0)*137);return[...blob(r,26,70,7,7,34),...blob(r,66,26,7,7,34),...blob(r,74,74,7,7,34)];}},
+ elong:{n:'Avlånga grupper',best:2,ax:['Egenskap A','Egenskap B'],tip:'Två långsmala band. Ögat ser två grupper direkt, men algoritmen delar upp dem på ett annat sätt.',
+   g:(sd)=>{const r=rng(19+(sd||0)*137);return[...blob(r,36,42,21,4.2,48,-.62),...blob(r,64,60,21,4.2,48,-.62)];}},
+ sizes:{n:'Olika täthet',best:3,ax:['Egenskap A','Egenskap B'],tip:'Ett stort glest moln och två små täta. Hur tätt punkterna ligger avgör var gränserna hamnar.',
+   g:(sd)=>{const r=rng(31+(sd||0)*137);return[...blob(r,32,50,15,15,60),...blob(r,74,28,4.5,4.5,24),...blob(r,76,72,4.5,4.5,24)];}},
+ none:{n:'Ingen struktur',best:null,ax:['Egenskap A','Egenskap B'],tip:'Jämnt utspridda punkter utan grupper. Vad svarar algoritmen då?',
+   g:(sd)=>{const r=rng(53+(sd||0)*137);const o=[];for(let i=0;i<100;i++)o.push({x:12+r()*76,y:12+r()*76});return o;}}
+};
+const COL=['#5b8cff','#ffcf5c','#3ddc84','#8b7dff','#ff9f5c','#3ee0e0'];
+const GOOD={three:1,elong:1,sizes:1,none:1};
+
+let lastChanged=-1,lastMoved=-1,ds=null,pts=[],K=3,cens=[],iter=0,phase='init',hist=[],changed=null,
+    busy=false,snaps=[],vSnap=null,tick=0;
+
+let dataSeed=0;
+function load(){pts=ds?DS[ds].g(dataSeed).map(p=>({...p,c:-1})):[];reset();}
+function reset(){cens=[];iter=0;lastChanged=-1;lastMoved=-1;phase='init';hist=[];changed=null;snaps=[];vSnap=null;pts.forEach(p=>p.c=-1);}
+function seed(){const r=rng(GOOD[ds]+tick*997+dataSeed*37);tick++;
+  /* k-means++: första centroiden slumpas, resten dras med sannolikhet i proportion
+     till kvadrerat avstånd från närmaste redan valda. Sprider ut dem utan att fuska. */
+  cens=[{...pts[Math.floor(r()*pts.length)]}];
+  while(cens.length<K){const d=pts.map(q=>Math.min(...cens.map(c=>(q.x-c.x)**2+(q.y-c.y)**2)));
+    const Tt=d.reduce((a,b)=>a+b,0);let t=r()*Tt,i=0;
+    while(t>d[i]&&i<d.length-1){t-=d[i];i++;}
+    cens.push({x:pts[i].x,y:pts[i].y});}
+  cens=cens.slice(0,K).map(c=>({x:c.x,y:c.y}));
+  iter=0;phase='seeded';hist=[];changed=null;snaps=[];vSnap=null;pts.forEach(p=>p.c=-1);}
+function near(p){let b=0,bd=Infinity;cens.forEach((c,i)=>{const d=(p.x-c.x)**2+(p.y-c.y)**2;if(d<bd){bd=d;b=i;}});return b;}
+function wcss(){return pts.reduce((s,p)=>{const c=cens[p.c];return c?s+(p.x-c.x)**2+(p.y-c.y)**2:s;},0);}
+function fin(){return iter>0&&changed===0;}
+function snap(){snaps.push({cens:cens.map(c=>({...c})),cs:pts.map(p=>p.c),it:iter});}
+
+
+const PW=620,PH=450,PD=24;
+const X=v=>PD+(v/100)*(PW-2*PD),Y=v=>PD+((100-v)/100)*(PH-2*PD);
+let built=false;
+function build(){
+  const svg=document.getElementById('plot');
+  let g='<g class="grid" id="gG"></g><g id="gL"></g><g id="gR"></g><g id="gP"></g><g id="gC"></g>';
+  svg.innerHTML=g;
+  let gr='';for(let i=0;i<=10;i++)gr+=`<line x1="${X(i*10)}" y1="${Y(0)}" x2="${X(i*10)}" y2="${Y(100)}"/><line x1="${X(0)}" y1="${Y(i*10)}" x2="${X(100)}" y2="${Y(i*10)}"/>`;
+  document.getElementById('gG').innerHTML=gr;
+  document.getElementById('gP').innerHTML=pts.map((p,i)=>`<circle class="pt" id="p${i}" cx="${X(p.x)}" cy="${Y(p.y)}" r="5.4" fill="#4d5771" fill-opacity=".6"/>`).join('');
+  document.getElementById('gR').innerHTML=pts.map((p,i)=>`<circle class="ring" id="r${i}" cx="${X(p.x)}" cy="${Y(p.y)}" r="5"/>`).join('');
+  document.getElementById('gL').innerHTML=pts.map((p,i)=>`<line class="lnk" id="l${i}"/>`).join('');
+  document.getElementById('gC').innerHTML='';
+  const ax=(ds&&DS[ds].ax)||['',''];
+  svg.insertAdjacentHTML('beforeend',
+    `<g class="axl"><text x="${PW-PD}" y="${PH-6}" text-anchor="end">${ax[0]} →</text>`
+   +`<text x="${PD}" y="${PD-8}" text-anchor="start">↑ ${ax[1]}</text></g>`);
+  built=true;}
+function syncC(){const h=document.getElementById('gC');
+  if(h.childElementCount!==cens.length){
+    h.innerHTML=cens.map((c,i)=>`<g class="cen" id="c${i}" onclick="showCen(${i})" transform="translate(${X(c.x)},${Y(c.y)})">
+      <g class="cin" style="animation-delay:${i*120}ms">
+      <circle class="halo" r="16" fill="${COL[i%6]}" opacity=".18"/>
+      <circle r="10" fill="${COL[i%6]}" fill-opacity=".3" stroke="${COL[i%6]}" stroke-width="2"/>
+      <circle r="10.5" fill="#080a11" fill-opacity=".55"/>
+      <circle r="10.5" fill="${COL[i%6]}" fill-opacity=".26" stroke="${COL[i%6]}" stroke-width="1.8"/>
+      <path d="M-4.4,0 H4.4 M0,-4.4 V4.4" stroke="${COL[i%6]}" stroke-width="2.1" stroke-linecap="round"/>
+      <path class="tick" d="M-3.4,.2 L-1,2.6 L3.6,-2.4" stroke="${COL[i%6]}" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="translate(0,-16)"/></g></g>`).join('');
+  } else cens.forEach((c,i)=>document.getElementById('c'+i).setAttribute('transform',`translate(${X(c.x)},${Y(c.y)})`));}
+function paint(v){
+  const V=v||{cens,cs:pts.map(p=>p.c)};
+  pts.forEach((p,i)=>{const c=V.cs[i],e=document.getElementById('p'+i);if(!e)return;
+    e.setAttribute('fill',c<0?'#4d5771':COL[c%6]);e.setAttribute('fill-opacity',c<0?'.6':'.95');
+    const L=document.getElementById('l'+i);
+    if(c>=0&&V.cens[c]){L.setAttribute('x1',X(p.x));L.setAttribute('y1',Y(p.y));
+      L.setAttribute('x2',X(V.cens[c].x));L.setAttribute('y2',Y(V.cens[c].y));L.setAttribute('stroke',COL[c%6]);
+      L.classList.toggle('show',phase==='assigned');}else L.classList.remove('show');});
+  document.getElementById('pmeta').textContent=cens.length?`${pts.length} punkter · k = ${K}`:`${pts.length} punkter`;}
+
+function doAssign(){
+  if(busy||!cens.length||phase==='assigned')return;busy=true;vSnap=null;forced=null;
+  const nc=pts.map(p=>near(p));
+  const first=pts.every(p=>p.c<0);
+  changed=first?null:pts.reduce((s,p,i)=>s+(p.c!==nc[i]?1:0),0);
+  phase='assigned';
+  pts.forEach((p,i)=>{const c=nc[i],L=document.getElementById('l'+i);
+    L.setAttribute('x1',X(p.x));L.setAttribute('y1',Y(p.y));
+    L.setAttribute('x2',X(cens[c].x));L.setAttribute('y2',Y(cens[c].y));
+    L.setAttribute('stroke',COL[c%6]);L.classList.add('show');});
+  /* punkterna färgas en i taget, i ordning ut från centroiderna */
+  lastChanged=-1;
+  const order=pts.map((p,i)=>({i,d:Math.hypot(p.x-cens[nc[i]].x,p.y-cens[nc[i]].y)}))
+                 .sort((a,b)=>a.d-b.d).map(o=>o.i);
+  const gap=Math.max(7,Math.min(26,900/pts.length));
+  order.forEach((i,rank)=>setTimeout(()=>{
+    const p=pts[i],was=p.c;p.c=nc[i];
+    if(was>=0&&was!==p.c&&lastChanged<0)lastChanged=i;
+    const e=document.getElementById('p'+i);if(!e)return;
+    e.setAttribute('fill',COL[p.c%6]);e.setAttribute('fill-opacity','.95');
+    e.classList.remove('pop');void e.getBBox;e.classList.add('pop');
+    if(was>=0&&was!==p.c){
+      const R=document.getElementById('r'+i);
+      R.setAttribute('stroke',COL[was%6]);R.classList.remove('show');void R.getBBox;R.classList.add('show');
+      e.setAttribute('stroke',COL[was%6]);e.setAttribute('stroke-width','3.2');
+      e.classList.remove('swap');void e.getBBox;e.classList.add('swap');}
+  },170+rank*gap));
+  setTimeout(()=>{hist.push(wcss());snap();paint();busy=false;refresh();},210+order.length*gap);}
+function doMove(){
+  if(busy||phase!=='assigned')return;busy=true;vSnap=null;forced=null;
+  let bs=-1;
+  cens.forEach((c,i)=>{const o=pts.filter(p=>p.c===i);if(!o.length)return;
+    const nx=o.reduce((s,p)=>s+p.x,0)/o.length,ny=o.reduce((s,p)=>s+p.y,0)/o.length;
+    const dd=Math.hypot(nx-c.x,ny-c.y);if(dd>bs){bs=dd;lastMoved=i;}c.x=nx;c.y=ny;});
+  iter++;phase='moved';
+  cens.forEach((_,i)=>{const e=document.getElementById('c'+i);if(!e)return;e.classList.add('glide');
+    setTimeout(()=>e.classList.remove('glide'),660);});
+  syncC();paint();
+  setTimeout(()=>{busy=false;refresh();},660);}
+async function auto(){
+  if(busy)return;
+  for(let i=0;i<40;i++){
+    doAssign();await new Promise(r=>setTimeout(r,620));
+    if(fin())break;
+    doMove();await new Promise(r=>setTimeout(r,800));}
+  document.querySelectorAll('.cen').forEach(e=>e.classList.add('fin'));refresh();}
+function fastRun(){for(let n=0;n<60;n++){const nc=pts.map(p=>near(p));
+  const first=pts.every(p=>p.c<0);
+  changed=first?null:pts.reduce((s,p,i)=>s+(p.c!==nc[i]?1:0),0);
+  pts.forEach((p,i)=>p.c=nc[i]);phase='assigned';hist.push(wcss());snap();
+  if(!first&&changed===0)break;
+  cens.forEach((c,i)=>{const o=pts.filter(p=>p.c===i);if(!o.length)return;
+    c.x=o.reduce((s,p)=>s+p.x,0)/o.length;c.y=o.reduce((s,p)=>s+p.y,0)/o.length;});iter++;}}
+function runFull(k,sd){const r=rng(sd),P=pts.map(p=>({...p,c:-1}));
+  let C=[{...P[Math.floor(r()*P.length)]}];
+  while(C.length<k){const d=P.map(p=>Math.min(...C.map(c=>(p.x-c.x)**2+(p.y-c.y)**2)));
+    const T=d.reduce((a,b)=>a+b,0);let t=r()*T,i=0;while(t>d[i]&&i<d.length-1){t-=d[i];i++;}
+    C.push({x:P[i].x,y:P[i].y});}
+  for(let it=0;it<60;it++){P.forEach(p=>{let b=0,bd=Infinity;C.forEach((c,i)=>{const d=(p.x-c.x)**2+(p.y-c.y)**2;if(d<bd){bd=d;b=i;}});p.c=b;});
+    let sh=0;C.forEach((c,i)=>{const o=P.filter(p=>p.c===i);if(!o.length)return;
+      const nx=o.reduce((s,p)=>s+p.x,0)/o.length,ny=o.reduce((s,p)=>s+p.y,0)/o.length;
+      sh+=Math.hypot(nx-c.x,ny-c.y);c.x=nx;c.y=ny;});if(sh<.01)break;}
+  return P.reduce((s,p)=>s+(p.x-C[p.c].x)**2+(p.y-C[p.c].y)**2,0);}
+
+function mets(){
+  const el=document.getElementById('mets');
+  if(!cens.length){el.innerHTML=pts.length?`<div><div class="mk">Datapunkter</div><div class="mv">${pts.length}</div></div>`:'';
+    document.getElementById('tl').innerHTML='';return;}
+  const w=hist.length?hist[hist.length-1]:null,pw=hist.length>1?hist[hist.length-2]:null;
+  const dp=(w!==null&&pw)?Math.round((w-pw)/pw*100):null;
+  const sz=cens.map((_,i)=>pts.filter(p=>p.c===i).length);
+  el.innerHTML=`<div><div class="mk">Varv i loopen</div><div class="mv">${iter}</div></div>
+    <div><div class="mk">Punkter som bytte grupp</div><div class="mv ${fin()?'zero':''}">${changed===null?'–':changed}</div></div>
+    <div><div class="mk">Punkter per grupp</div><div class="mv" style="font-size:19px">${sz.length?sz.join(' · '):'–'}</div></div>`;}
+function timeline(){const el=document.getElementById('tl');if(!el)return;
+  if(snaps.length<2){el.innerHTML='';return;}
+  el.innerHTML=`<span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;color:var(--dim);margin-right:11px">HISTORIK</span>`
+   +snaps.map((s,i)=>`${i?'<span class="tll"></span>':''}<button class="tp${(vSnap===null?i===snaps.length-1:vSnap===i)?' on':''}" onclick="showSnap(${i})">${s.it}</button>`).join('');}
+function showSnap(i){vSnap=i;const s=snaps[i];
+  s.cens.forEach((c,j)=>{const e=document.getElementById('c'+j);if(e)e.setAttribute('transform',`translate(${X(c.x)},${Y(c.y)})`);});
+  paint({cens:s.cens,cs:s.cs});timeline();}
+
+const T={
+ centroid:{i:'✛',t:'Centroid',p:'Mittpunkten i en grupp, räknad som medelvärdet av de punkter som hör dit. Centroiden är algoritmens gissning på var gruppen har sin mitt. Den flyttar sig varje varv, tills gissningen inte längre ändras.'},
+ oover:{i:'🔍',t:'Oövervakad inlärning',p:'Inlärning från data <b>utan facit</b>. Eftersom ingen har talat om vad punkterna föreställer kan modellen inte lära sig att härma rätt svar. Den kan bara leta efter mönster i hur punkterna ligger.'},
+ avst:{i:'📉',t:'Hur tätt grupperna sitter',p:'Mät avståndet från varje datapunkt till sin egen centroid och lägg ihop alla dessa avstånd. Blir summan <b>liten</b> sitter punkterna tätt kring sina mittpunkter, alltså har algoritmen hittat sammanhållna grupper. Blir den <b>stor</b> ligger punkterna utspridda långt från sina centroider.<br><br>Det är precis den här summan k-means arbetar för att göra så liten som möjligt.<br><br>Måttet har ett eget namn: <b>WCSS</b>, efter engelskans <i>within-cluster sum of squares</i> — summan av kvadrerade avstånd inom klustren. Avstånden kvadreras innan de läggs ihop, vilket gör att en punkt som ligger riktigt långt bort väger tyngre än flera som ligger nästan rätt. Måttet straffar alltså enstaka punkter i fel grupp extra hårt.'},
+ plus:{i:'✨',t:'Smart startläge (k-means++)',p:'Var centroiderna hamnar från början spelar roll. Om två av dem placeras i samma grupp kan algoritmen fastna i en dålig lösning som den inte tar sig ur.<br><br>Därför placeras de inte helt slumpmässigt. Den <b>första</b> centroiden lottas fram bland datapunkterna. Därefter är chansen att bli vald större för punkter som ligger <b>långt från de centroider som redan placerats</b>. På så vis hamnar de sällan nära varandra.<br><br>Metoden kallas <b>k-means++</b> och är det vanligaste sättet att välja startlägen. Den gör också att algoritmen blir färdig efter färre varv.'},
+  lokal:{i:'🕳️',t:'Lokalt minimum',p:'En lösning som inte går att förbättra med ett litet steg, men som ändå inte är den bästa möjliga. k-means hamnar där om centroiderna startar olyckligt, och kan inte ta sig därifrån på egen hand.'},
+ armb:{i:'💪',t:'Armbågsmetoden',p:'Ett sätt att välja k. Man kör algoritmen med flera olika värden på k och ritar upp resultatet. Kurvan faller brant så länge extra centroider delar upp verkliga grupper, och planar ut när de bara delar upp grupper som redan är hela. Knäckpunkten kallas armbågen.'}
+};
+let cardEv=null;
+function placeCard(){
+  const c=document.getElementById('ccard');
+  if(cardEv){const dx=cardEv.clientX-window.innerWidth/2, dy=cardEv.clientY-window.innerHeight/2;
+    c.style.setProperty('--dx',dx+'px');c.style.setProperty('--dy',dy+'px');}
+  else{c.style.setProperty('--dx','0px');c.style.setProperty('--dy','0px');}
+  requestAnimationFrame(()=>{document.getElementById('scrim').classList.add('show');c.classList.add('show');});
+}
+function openCard(id,ev){const c=T[id];if(!c)return;cardEv=ev||window.event||null;
+  cIc.textContent=c.i;cTi.textContent=c.t;cBo.innerHTML=c.p;cCa.innerHTML='';placeCard();}
+function showCen(i){const o=pts.filter(p=>p.c===i),c=cens[i],L=String.fromCharCode(65+i);
+  cardEv=window.event||null;
+  cIc.textContent='✛';cTi.textContent='Centroid '+L;
+  cBo.innerHTML='Centroiden sitter i <b>medelvärdet</b> av de punkter som valt den. Varje gång punkterna byter tillhörighet räknas medelvärdet om, och centroiden glider dit.';
+  cCa.innerHTML=o.length?`<div class="calc">punkter som valt ${L} = <b>${o.length}</b><br>
+    x = (${o.slice(0,3).map(p=>p.x.toFixed(1)).join(' + ')}${o.length>3?' + …':''}) / ${o.length} = <b>${c.x.toFixed(1)}</b><br>
+    y = (${o.slice(0,3).map(p=>p.y.toFixed(1)).join(' + ')}${o.length>3?' + …':''}) / ${o.length} = <b>${c.y.toFixed(1)}</b></div>`:'';
+  placeCard();}
+function closeCard(){document.getElementById('ccard').classList.remove('show');
+  document.getElementById('scrim').classList.remove('show');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCard();});
+(function(){const inn=document.getElementById('ccardIn');if(!inn)return;
+  inn.addEventListener('pointermove',e=>{const r=inn.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+    inn.style.setProperty('--mx',(px*100)+'%');inn.style.setProperty('--my',(py*100)+'%');
+    inn.style.transform=`perspective(1000px) rotateX(${(0.5-py)*7}deg) rotateY(${(px-0.5)*7}deg)`;});
+  inn.addEventListener('pointerleave',()=>{inn.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';});})();
+function hyd(){document.querySelectorAll('.term[data-t]').forEach(e=>e.onclick=(ev)=>openCard(e.dataset.t,ev));}
+
+
+
+/* ═════════ gränssnitt: vertikal pipeline ═════════ */
+const PC=['#5b8cff','#8b7dff','#ffcf5c','#3ddc84','#3ee0e0'];
+let dsChosen=false,celebrated=false;
+function naturalStep(){
+  if(!ds||(!dsChosen&&!cens.length))return 1;
+  if(!cens.length)return 2;
+  if(fin())return 5;
+  return phase==='assigned'?4:3;
+}
+/* forced låter eleven bläddra tillbaka utan att tappa körningen */
+function activeStep(){return forced!==null?forced:naturalStep();}
+function pipeUI(){
+  const act=activeStep();
+  document.querySelectorAll('.pstep').forEach(el=>{
+    const n=+el.dataset.s;
+    el.style.setProperty('--c',PC[n-1]);
+    const nat=naturalStep();
+    el.classList.toggle('on',n===act);
+    el.classList.toggle('back',n===act&&forced!==null&&forced!==nat);
+    el.classList.toggle('done',n<nat||(fin()&&n<5));
+    el.classList.toggle('avail',n<=Math.max(nat,act));
+    el.onclick=n<=Math.max(nat,act)?(ev)=>{ev.stopPropagation();focusStep(n);}:null;
+  });
+  const pipe0=document.getElementById('pipe');
+  pipe0.classList.toggle('live',cens.length&&!fin());
+  pipe0.classList.toggle('done',fin());
+  if(fin()&&!celebrated){celebrated=true;const s5=document.querySelector('.pstep[data-s="5"]');
+    if(s5){s5.classList.remove('win');void s5.offsetWidth;s5.classList.add('win');}}
+  if(!fin())celebrated=false;
+  /* loopbågen spänns över steg 3 och 4 */
+  const a=document.querySelector('.pstep[data-s="3"]'),b=document.querySelector('.pstep[data-s="4"]'),
+        rail=document.querySelector('.looprail'),pipe=document.getElementById('pipe');
+  if(a&&b&&rail){const pr=pipe.getBoundingClientRect();
+    rail.style.setProperty('--lt',(a.getBoundingClientRect().top-pr.top-8)+'px');
+    rail.style.setProperty('--lh',(b.getBoundingClientRect().bottom-a.getBoundingClientRect().top+16)+'px');}
+}
+function focusStep(n){if(n>=2)dsChosen=true;forced=(forced===n?null:n);render();}
+let forced=null;
+function pipeBodies(){
+  const B=id=>document.getElementById(id);
+  B('p1body').innerHTML=`<p>Varje punkt är ett objekt som beskrivs av två mätvärden. <b>Ingen har talat om vilken grupp punkterna hör till</b> — det finns inget rätt svar att härma efter, bara avstånd att tolka. Det kallas <span class="term" data-t="oover">oövervakad inlärning</span>.</p>
+    <div class="chips" style="margin-top:11px">${Object.entries(DS).map(([id,d])=>`<button class="chip${id===ds?' on':''}" onclick="event.stopPropagation();pick('${id}')">${d.n}</button>`).join('')}</div>
+    <p style="margin-top:11px">${ds?DS[ds].tip:'Välj en datamängd ovan för att börja.'}</p>
+    ${ds?`<div class="pact"><button class="psub" onclick="event.stopPropagation();newData()">↺ Nya datapunkter</button></div>`:''}`;
+  B('p2body').innerHTML=`<p>Först bestäms ett värde på <b>k</b> — hur många kluster algoritmen ska hitta. Sedan placeras k punkter ut i diagrammet. En sådan punkt representerar ett klusters mittpunkt och kallas <span class="term" data-t="centroid">centroid</span>.</p>
+    <div class="chips krow" style="margin-top:11px">${[2,3,4,5,6].map(k=>`<button class="chip${k===K?' on':''}" onclick="event.stopPropagation();setK(${k})">${k}</button>`).join('')}</div>
+    <div class="pact"><button class="pbig" style="--c:#8b7dff" onclick="event.stopPropagation();place()" ${ds?'':'disabled'}>${cens.length?'Placera om':'Placera centroider'}</button></div>
+    ${cens.length?`<p style="margin-top:11px">Placeringen är slumpmässig, men styrd så att centroiderna hamnar utspridda. Metoden kallas <span class="term" data-t="plus">k-means++</span>.</p>`:''}`;
+  B('p3body').innerHTML=`<p>För varje datapunkt beräknas avståndet till <b>alla</b> centroider, och punkten tilldelas den närmaste. Oftast används det euklidiska avståndet:</p>
+    <div class="fml">d = √( (x<sub>i</sub> − x<sub>c</sub>)² + (y<sub>i</sub> − y<sub>c</sub>)² )</div>
+    <div class="pact"><button class="pbig" style="--c:#ffcf5c" onclick="event.stopPropagation();doAssign()" ${cens.length&&phase!=='assigned'&&!busy?'':'disabled'}>Tilldela datapunkter</button></div>`;
+  B('p4body').innerHTML=`<p>En <b>ny mittpunkt</b> beräknas för varje kluster: genomsnittet av alla datapunkters koordinater i klustret. Centroiden flyttas dit.</p>
+    <p>Eftersom centroiderna rört sig kan vissa punkter nu ligga närmare en <b>annan</b> centroid. Därför börjar algoritmen om från steg 3. De två stegen växlar tills inga punkter längre byter kluster.</p>
+    <div class="pact"><button class="pbig" style="--c:#3ddc84" onclick="event.stopPropagation();doMove()" ${phase==='assigned'&&!busy?'':'disabled'}>Flytta centroider</button>
+      <button class="psub" onclick="event.stopPropagation();auto()" ${cens.length&&!busy&&!fin()?'':'disabled'}>Träna klart →</button></div>`;
+  const b=ds?DS[ds].best:null;
+  B('p5body').innerHTML=`<p>${fin()?`<b>Klart efter ${iter} varv.</b> Ingen punkt bytte kluster i sista varvet, så centroiderna kan inte flytta sig mer.</p><p>`:''}Det finns inget objektivt rätt värde på k — valet beror på situationen och syftet. Ett lågt k ger en övergripande indelning, ett högre ger en mer detaljerad bild.</p>
+    <div id="elb" style="margin:12px 0"></div>
+    <p>Kurvan visar hur det <span class="term" data-t="avst">måttet på hur tätt grupperna sitter</span> minskar för varje extra kluster. Den planar ut när extra centroider bara delar upp grupper som redan är hela.${b?` Här böjer den av vid <b>k = ${b}</b>.`:` Här finns ingen tydlig knäck.`}</p>`;
+}
+function elbow(){
+  const w=document.getElementById('elb');if(!w||!pts.length)return;
+  const ks=[1,2,3,4,5,6],v=ks.map(k=>runFull(k,99));
+  const W=470,H=222,L=20,R=18,Tp=20,B=40,mx=Math.max(...v),mn=Math.min(...v);
+  const px=i=>L+(i/(ks.length-1))*(W-L-R),py=x=>Tp+(1-(x-mn)/((mx-mn)||1))*(H-Tp-B);
+  let g=`<svg class="elb" viewBox="0 0 ${W} ${H}"><defs><linearGradient id="eg" x1="0" x2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset="1" stop-color="#8b7dff"/></linearGradient></defs>`;
+  g+=`<path class="ln" stroke="url(#eg)" d="${v.map((x,i)=>(i?'L':'M')+px(i)+','+py(x)).join(' ')}"/>`;
+  v.forEach((x,i)=>{const on=ks[i]===K;
+    if(on)g+=`<circle cx="${px(i)}" cy="${py(x)}" r="14" fill="none" stroke="#3ee0e0" stroke-opacity=".45"/>`;
+    g+=`<circle class="kd" cx="${px(i)}" cy="${py(x)}" r="${on?7.5:5}" fill="${on?'#3ee0e0':'#5b8cff'}" onclick="setK(${ks[i]})"/>`;
+    g+=`<text x="${px(i)}" y="${H-B+19}" text-anchor="middle" font-size="12" ${on?'fill="#eef1f8"':''}>${ks[i]}</text>`;});
+  g+=`<text x="${(L+W-R)/2}" y="${H-7}" text-anchor="middle" font-size="11.5">antal grupper (k)</text></svg>`;
+  w.innerHTML=g;}
+function newData(){if(!ds)return;dataSeed++;dsChosen=true;forced=null;load();built=false;build();render();}
+function pick(id){ds=id;dsChosen=true;dataSeed++;forced=null;load();built=false;build();render();}
+function setK(k){if(!ds)return;K=k;forced=null;reset();built=false;build();render();}
+function place(){if(!ds||!pts.length)return;dsChosen=true;forced=null;seed();syncC();paint();render();}
+function refresh(){mets();timeline();
+  document.querySelectorAll('.cen').forEach(e=>e.classList.toggle('fin',fin()));
+  pipeBodies();pipeUI();elbow();hyd();}
+function render(){
+  document.getElementById('ptitle').textContent=ds?DS[ds].n:'Välj en datamängd för att börja';
+  document.querySelector('.ph').style.setProperty('--c',PC[activeStep()-1]);
+  if(!built)build();
+  syncC();paint();refresh();
+  requestAnimationFrame(pipeUI);
+}
+load();build();render();
+</script>
+</body>
+</html>
