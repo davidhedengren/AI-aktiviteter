@@ -479,10 +479,10 @@ const DS={
         'Du bad om k kluster, och du fick k kluster. k-means saknar möjlighet att rapportera att strukturen inte finns — den delar upp den data den får. Färgerna på skärmen är alltså <b>inget bevis</b> för att grupperna finns i verkligheten. Titta på armbågskurvan: den faller jämnt utan brytpunkt, vilket är just det tecken som avslöjar att indelningen är godtycklig.'],
    g:sd=>{const r=rng(53+sd*137);const o=[];for(let i=0;i<100;i++)o.push({x:12+r()*76,y:12+r()*76});return o;}},
 
- skala:{n:'Olika skalor',ax:['Årslön (tkr)','Ålder (år)'],dom:[[200,900],[20,70]],unit:['tkr','år'],scaleLesson:true,
-   tip:'Tre åldersgrupper med spridda löner. Lönen mäts i hundratals, åldern i tiotal — och det får betydelse för avståndsberäkningen.',
-   ins:['Den axel som har störst spann bestämmer allt',
-        'Lönen sträcker sig över 700 enheter, åldern över 50. Räknas avståndet på rådata blir löneskillnader ungefär <b>fjorton gånger</b> tyngre än åldersskillnader, och algoritmen skär lodräta skivor genom de vågräta åldersgrupperna. Slå på normalisering så räknas båda axlarna om till samma skala. Titta på armbågskurvan före och efter: den flyttar sig från k&nbsp;=&nbsp;2 till k&nbsp;=&nbsp;3, alltså till det verkliga antalet åldersgrupper. I praktiskt maskininlärningsarbete är det här ett av de vanligaste misstagen.'],
+ skala:{n:'Olika skalor',ax:['Egenskap A','Egenskap B'],dom:[[200,900],[20,70]],scaleLesson:true,
+   tip:'Tre grupper som skiljer sig i egenskap B. Datamängden skulle exempelvis kunna beskriva personer, där A är årslön i tusental kronor och B är ålder i år.',
+   ins:['Den egenskap som har störst spann får störst inflytande',
+        'A sträcker sig över 700 enheter, B över 50. Beräknas avståndet på rådata väger skillnader i A ungefär <b>fjorton gånger</b> tyngre än skillnader i B, och algoritmen skär lodräta skivor tvärs igenom de vågräta grupperna. Slå på normalisering, så räknas båda egenskaperna om till samma skala. Jämför armbågskurvan före och efter: brytpunkten flyttar sig från k&nbsp;=&nbsp;2 till k&nbsp;=&nbsp;3, alltså till det verkliga antalet grupper.<br><br>Att egenskaper mäts i olika enheter är regel snarare än undantag — kronor och år, centimeter och kilogram, antal och andelar. Att låta bli att normalisera är därför ett av de vanligaste misstagen i praktiskt maskininlärningsarbete.'],
    g:sd=>{const r=rng(71+sd*137);return[...blob(r,50,15,10,5,36),...blob(r,50,50,10,5,36),...blob(r,50,85,10,5,36)];}}
 };
 
@@ -1057,7 +1057,7 @@ function showPoint(i,ev){
   $('cIc').innerHTML=ICO.ruler;
   $('cTi').textContent='Avstånd till varje centroid';
   $('cBo').innerHTML=`Punkten ligger i (<b>${n1(fx(p.x))}</b>, <b>${n1(fy(p.y))}</b>)${
-    (ds&&DS[ds].scaleLesson)?(nz?' på normaliserad skala':` — ${DS[ds].ax[0].toLowerCase()} och ${DS[ds].ax[1].toLowerCase()}`):''
+    (ds&&DS[ds].scaleLesson)?(nz?' på normaliserad skala':' i egenskapernas egna enheter'):''
     }. Avståndet beräknas till <b>samtliga ${cens.length}</b> centroider, varefter punkten tilldelas den närmaste.`;
   const rows=cens.map((c,j)=>{
     const d=Math.sqrt(d2(p.x,p.y,c.x,c.y)), on=j===b;
@@ -1268,7 +1268,7 @@ function pipeBodies(){
       <button class="chip${norm?' on':''}" data-nm="1"${L?' disabled':''}>Normaliserade värden</button></div>
     <div class="note${norm?' e':' g'}">${norm
       ? 'Båda egenskaperna räknas nu om till samma skala innan avstånden beräknas, och väger därmed lika tungt. Läs mer om <button class="term" data-t="norm">normalisering</button>.'
-      : `Lönen spänner över ${DS[ds].dom[0][1]-DS[ds].dom[0][0]} enheter, åldern över ${DS[ds].dom[1][1]-DS[ds].dom[1][0]}. Avståndet kommer därför att domineras av lönen. Läs om <button class="term" data-t="norm">normalisering</button>.`}</div>`:'';
+      : `Egenskap A spänner över ${DS[ds].dom[0][1]-DS[ds].dom[0][0]} enheter, egenskap B över ${DS[ds].dom[1][1]-DS[ds].dom[1][0]}. Avståndet kommer därför att domineras av A. Läs om <button class="term" data-t="norm">normalisering</button>.`}</div>`:'';
 
   $('p3body').innerHTML=`<div class="pdin">
     <p>För varje datapunkt beräknas avståndet till <b>alla</b> centroider, och punkten tilldelas den närmaste. Oftast används det euklidiska avståndet:</p>
