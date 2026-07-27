@@ -4,344 +4,426 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>k-means-klustring – ai-aktiviteter.se</title>
+<meta name="description" content="Interaktiv simulering av k-means-klustring: beslutsgränser, avstånd, WCSS och armbågsmetoden – för gymnasiets AI-kurser.">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#07090f;--tx:#eef1f8;--dim:#79839b;--sub:#aab4cc;--line:#1a2030;--line2:#252d42;
-  --a1:#5b8cff;--a2:#8b7dff;--gold:#ffcf5c;--grn:#3ddc84;--cy:#3ee0e0;
-  --sp:cubic-bezier(.34,1.4,.55,1);--ez:cubic-bezier(.2,.9,.25,1);}
+/* ══════════════════════════════════════════════════════════════
+   TOKENS
+   Färgregel: kulör betyder EN sak – klustertillhörighet.
+   Faserna i pipelinen är akromatiska och skiljs enbart av ljusstyrka.
+   Rörelseregel: tre varaktigheter, inga andra.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --bg:#07090f; --tx:#eef1f8; --sub:#aab4cc; --dim:#8b95ae;
+  --line:#1a2030; --line2:#252d42;
+  --p1:#5b8cff; --p2:#8b7dff; --p3:#ffcf5c; --p4:#3ddc84; --p5:#3ee0e0;
+  --grn:#3ddc84; --gold:#ffcf5c; --a1:#7ea2ff;
+  --t1:180ms;  /* respons   */
+  --t2:420ms;  /* tillståndsbyte */
+  --t3:700ms;  /* pedagogisk rörelse */
+  --ez:cubic-bezier(.2,.9,.25,1);
+  --sp:cubic-bezier(.34,1.4,.55,1);
+}
 *{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;font-size:16px;background:var(--bg);color:var(--tx);
   min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:radial-gradient(1200px 700px at 8% -10%,rgba(91,140,255,.13),transparent 60%),
-             radial-gradient(1000px 620px at 96% 0%,rgba(139,125,255,.10),transparent 58%)}
+  background:radial-gradient(1200px 700px at 8% -10%,rgba(91,140,255,.11),transparent 60%),
+             radial-gradient(1000px 620px at 96% 0%,rgba(139,125,255,.08),transparent 58%)}
+:focus-visible{outline:2px solid var(--a1);outline-offset:3px;border-radius:6px}
+
+/* ── huvud ── */
 .hd{padding:16px 20px 10px;position:relative;z-index:1;text-align:center}
 .hd .links{display:flex;justify-content:space-between;gap:10px;margin-bottom:16px}
-.lk{display:inline-flex;align-items:center;gap:7px;font-family:'Space Grotesk',sans-serif;font-size:13px;
+.lk{display:inline-flex;align-items:center;gap:7px;font-family:'DM Sans',sans-serif;font-size:13px;
   font-weight:600;color:var(--dim);text-decoration:none;padding:8px 14px;border-radius:99px;
-  background:rgba(255,255,255,.035);transition:.25s var(--ez)}
+  background:rgba(255,255,255,.035);transition:var(--t1) var(--ez)}
 .lk:hover{color:var(--tx);background:rgba(255,255,255,.08)}
 .lk svg{width:17px;height:11px;border-radius:2px;display:block}
-h1{font-family:'Syne',sans-serif;font-size:clamp(27px,4.6vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.05;
-  background:linear-gradient(96deg,#fff 8%,var(--a1) 55%,var(--a2) 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent}
-.tag{font-size:15px;color:var(--dim);margin-top:7px}
+h1{font-family:'Syne',sans-serif;font-size:clamp(27px,4.6vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.05;color:var(--tx)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  h1{background:linear-gradient(96deg,#fff 8%,#5b8cff 55%,#8b7dff 100%);
+     -webkit-background-clip:text;background-clip:text;color:transparent}}
+.tag{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(15px,2.2vw,18px);color:var(--sub);margin-top:9px;letter-spacing:-.01em}
+
 .wrap{max-width:1180px;margin:0 auto;width:100%;padding:10px 20px 44px;display:flex;flex-direction:column;gap:18px;flex:1;position:relative;z-index:1}
-.snav{display:flex;gap:5px;padding:5px;border-radius:16px;background:rgba(255,255,255,.035);overflow-x:auto;scrollbar-width:none}
-.snav::-webkit-scrollbar{display:none}
-.sb{flex:1;min-width:92px;padding:11px 10px;border-radius:12px;border:none;background:transparent;color:var(--dim);
-  font-family:'Space Grotesk',sans-serif;font-size:12.5px;font-weight:600;cursor:pointer;transition:.3s var(--ez);white-space:nowrap}
-.sb:hover{color:var(--sub)}
-.sb.on{background:rgba(255,255,255,.07);color:var(--tx);box-shadow:inset 0 0 0 1px var(--c)}
-.intro{border-radius:20px;padding:22px 26px;background:linear-gradient(158deg,rgba(255,255,255,.045),rgba(255,255,255,.012));position:relative;overflow:hidden}
-.intro::after{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--c)}
-.eyebrow{display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--c);margin-bottom:9px}
-.intro h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(20px,3vw,27px);letter-spacing:-.022em;line-height:1.16;margin-bottom:11px}
-.intro p{font-size:15.5px;line-height:1.72;color:var(--sub);max-width:76ch}
-.intro p b{color:var(--tx);font-weight:600}
-.loop{display:flex;align-items:center;justify-content:center;padding:14px 10px 26px;position:relative;transition:opacity .4s}
-.lstep{display:flex;flex-direction:column;align-items:center;gap:7px;padding:12px 18px;border-radius:16px;
-  background:rgba(255,255,255,.028);border:1px solid transparent;min-width:136px;transition:.4s var(--ez);cursor:pointer}
-.lstep .li{width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;
-  font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--dim);background:rgba(255,255,255,.05);transition:.4s var(--ez)}
-.lstep .lt{font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;color:var(--dim);transition:.3s}
-.lstep.on{background:rgba(255,255,255,.06);box-shadow:0 0 0 1px var(--c),0 12px 36px -14px var(--c)}
-.lstep.on .li{background:var(--c);color:#07090f}
-.lstep.on .lt{color:var(--tx)}
-.lstep.fin .li{background:rgba(61,220,132,.16);color:var(--grn)}
-.larr{width:48px;height:2px;background:var(--line2);position:relative;flex:none}
-.larr::after{content:'';position:absolute;right:-1px;top:-3.5px;border-left:7px solid var(--line2);border-top:4px solid transparent;border-bottom:4px solid transparent}
-.lb{position:absolute;left:50%;transform:translateX(-50%);bottom:2px;width:min(420px,88%);pointer-events:none;text-align:center}
-.lb svg{width:100%;height:20px;overflow:visible;display:block}
-.lb path{fill:none;stroke:var(--line2);stroke-width:2;stroke-linecap:round;stroke-dasharray:7 7;transition:stroke .4s}
-.lb .cap{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--dim);letter-spacing:.14em;margin-top:1px}
-.lb.live path{stroke:var(--gold);animation:dash 1.1s linear infinite}
-@keyframes dash{to{stroke-dashoffset:-14}}
-.cols{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:18px;align-items:start}
-@media(max-width:940px){.cols{grid-template-columns:1fr}}
+.lay{display:grid;grid-template-columns:392px minmax(0,1fr);gap:20px;align-items:start}
+/* OBS: basregeln måste stå FÖRE mediafrågan, annars vinner den på mobil
+   (samma specificitet – sist deklarerad regel gäller). */
+.canvascol{position:sticky;top:14px}
+@media(max-width:1040px){
+  .lay{grid-template-columns:1fr;gap:14px}
+  .canvascol{order:-1;position:static;top:auto;padding:0}
+  .canvaspanel{padding:12px 13px}
+  .canvaspanel .mets{margin-top:11px;padding-top:11px;gap:10px}
+  .canvaspanel .mv{font-size:20px}
+  .canvaspanel .tl{margin-top:10px}}
+
+/* ── panel + scen ── */
 .panel{border-radius:20px;padding:18px 20px;background:linear-gradient(158deg,rgba(255,255,255,.04),rgba(255,255,255,.012))}
-.ph{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;margin-bottom:14px;letter-spacing:-.01em}
-.ph .pd{width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c)}
+.ph{display:flex;align-items:center;gap:10px;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:14px;letter-spacing:-.01em}
+.ph .pd{width:7px;height:7px;border-radius:50%;background:var(--c,var(--p3));box-shadow:0 0 12px var(--c,var(--p3));transition:background var(--t2) var(--ez)}
 .ph .meta{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--dim);font-weight:400}
-.stage{border-radius:16px;overflow:hidden;background:#080a11}
-svg.plot{display:block;width:100%;height:auto}
-.grid line{stroke:rgba(255,255,255,.035)}
-.axl text{font-family:'DM Sans',sans-serif;font-size:12px;fill:var(--dim)}
-.pt{transition:fill .3s var(--ez),fill-opacity .3s}
-.pt.pop{animation:ptPop .42s var(--sp)}
-.pt.swap{animation:ptPop .42s var(--sp),oldFade .95s var(--ez) forwards}
-@keyframes oldFade{0%{stroke-opacity:.95}100%{stroke-opacity:0}}
-@keyframes ptPop{0%{r:5.4}40%{r:8.4}100%{r:5.4}}
+.stage{border-radius:16px;overflow:hidden;background:#080a11;position:relative;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+svg.plot{display:block;width:100%;height:auto;touch-action:pan-y}
+svg.plot.ready .pt{cursor:pointer}
+@media(max-width:1040px){svg.plot{max-height:52vh}}
+.cen{touch-action:none}
+.axis line{stroke:rgba(255,255,255,.13)}
+.grid line{stroke:rgba(255,255,255,.05)}
+.axl text{font-family:'JetBrains Mono',monospace;font-size:11px;fill:var(--dim)}
+.axt text{font-family:'DM Sans',sans-serif;font-size:12.5px;fill:var(--sub);font-weight:500}
+
+/* ── datapunkter ── */
+.pt{transition:fill var(--t2) var(--ez),fill-opacity var(--t2),stroke-opacity var(--t2)}
+.pt.pop{animation:ptPop var(--t2) var(--sp)}
+@keyframes ptPop{0%{r:5.2}40%{r:8.2}100%{r:5.2}}
+.pt.dim{animation:ptDim 500ms var(--ez)}
+@keyframes ptDim{0%,100%{fill-opacity:.95}50%{fill-opacity:.55}}
 .ring{fill:none;stroke-width:2;opacity:0}
-.ring.show{animation:ringOut .6s var(--ez)}
-@keyframes ringOut{0%{r:5;opacity:.95;stroke-width:2.4}100%{r:17;opacity:0;stroke-width:.6}}
-.lnk{stroke-width:1.1;opacity:0;transition:opacity .35s}
-.lnk.show{opacity:.32}
-.cen{transition:transform .64s var(--sp);cursor:pointer}
-.cin{animation:drop .72s var(--sp) backwards;transform-origin:center}
+.ring.show{animation:ringOut var(--t3) var(--ez)}
+@keyframes ringOut{0%{r:5;opacity:.95;stroke-width:2.4}100%{r:18;opacity:0;stroke-width:.6}}
+.lnk{stroke-width:1.1;opacity:0;transition:opacity var(--t2)}
+.lnk.show{opacity:.3}
+
+/* ── beslutsgränser (voronoi) ── */
+.vc{transform-box:view-box}
+.vc.vin{animation:vGrow var(--t2) var(--ez) backwards}
+@keyframes vGrow{0%{opacity:0;transform:scale(.55)}100%{opacity:1;transform:none}}
+
+/* ── centroider ── */
+.cen{cursor:grab}
+.cen.drag{cursor:grabbing}
+.cin{animation:drop var(--t3) var(--sp) backwards;transform-origin:center}
 @keyframes drop{0%{transform:translateY(-58px) scale(.5);opacity:0}
   62%{transform:translateY(3px) scale(1.06);opacity:1}100%{transform:none;opacity:1}}
-.cen .halo{transition:opacity .4s}
-.cen.glide .halo{animation:pulse .64s var(--ez)}
-@keyframes pulse{0%{r:16;opacity:.18}50%{r:27;opacity:.36}100%{r:16;opacity:.18}}
-.cen .tick{opacity:0;transition:opacity .5s .15s}
-.cen.fin .tick{opacity:1;animation:tickPop .6s var(--sp)}
-@keyframes tickPop{0%{opacity:0;transform:translate(0,-16px) scale(.3)}60%{transform:translate(0,-16px) scale(1.3)}100%{transform:translate(0,-16px) scale(1)}}
+.cen .halo{transition:opacity var(--t2)}
+.cen .tick{opacity:0;transition:opacity var(--t2) 120ms}
+.cen.fin .tick{opacity:1;animation:tickPop var(--t3) var(--sp)}
+@keyframes tickPop{0%{opacity:0;transform:translate(0,-17px) scale(.3)}60%{transform:translate(0,-17px) scale(1.3)}100%{transform:translate(0,-17px) scale(1)}}
 .cen.fin .halo{opacity:.32}
-.row{display:flex;gap:9px;flex-wrap:wrap}
-.b{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;padding:11px 17px;border-radius:12px;
-  border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.045);color:var(--tx);cursor:pointer;
-  transition:.24s var(--sp);display:inline-flex;align-items:center;justify-content:center;gap:8px}
-.b:hover:not(:disabled){background:rgba(255,255,255,.09);transform:translateY(-1.5px)}
-.b:active:not(:disabled){transform:scale(.985)}
-.b:disabled{opacity:.3;cursor:not-allowed}
-.b:focus-visible{outline:2px solid var(--a1);outline-offset:2px}
-.b.hero{background:var(--c);border-color:transparent;color:#07090f;font-weight:700}
-.b.hero:hover:not(:disabled){box-shadow:0 10px 30px -8px var(--c);background:var(--c)}
-.b.sm{padding:8px 13px;font-size:12.5px}
-.b .num{font-family:'JetBrains Mono',monospace;opacity:.7}
-.chips{display:flex;gap:7px;flex-wrap:wrap}
-.chip{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;padding:9px 15px;border-radius:99px;
-  border:1px solid transparent;background:rgba(255,255,255,.04);color:var(--dim);cursor:pointer;transition:.24s var(--sp)}
-.chip:hover{color:var(--tx);background:rgba(255,255,255,.08)}
-.chip.on{background:rgba(91,140,255,.16);border-color:rgba(91,140,255,.5);color:var(--tx)}
-.krow .chip{flex:1;text-align:center;font-family:'JetBrains Mono',monospace}
-.lbl{display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
-.mets{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:14px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.clab{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;pointer-events:none}
+.trail{stroke-dasharray:3 4;stroke-width:1.6;fill:none}
+.tnum{font-family:'JetBrains Mono',monospace;font-size:10.5px;pointer-events:none}
+.hv line{stroke-dasharray:4 4;stroke-width:1.4}
+.hv text{font-family:'JetBrains Mono',monospace;font-size:11px}
+
+/* ── överlägg på scenen ── */
+.btog{position:absolute;left:10px;top:10px;display:inline-flex;align-items:center;gap:8px;
+  padding:8px 13px 8px 11px;border-radius:99px;cursor:pointer;font-family:'DM Sans',sans-serif;
+  font-size:12.5px;font-weight:600;color:var(--dim);background:rgba(8,10,17,.82);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.09);
+  transition:color var(--t1) var(--ez),border-color var(--t1) var(--ez),background var(--t1) var(--ez)}
+.btog:hover{color:var(--tx);background:rgba(20,24,38,.9)}
+.btog .bdot{width:9px;height:9px;border-radius:50%;border:1.5px solid currentColor;
+  transition:var(--t1) var(--ez)}
+.btog.on{color:var(--tx);border-color:rgba(255,255,255,.24)}
+.btog.on .bdot{background:currentColor;box-shadow:0 0 10px currentColor}
+.stagelbl{position:absolute;left:50%;top:10px;transform:translateX(-50%) translateY(-6px);
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--sub);background:rgba(8,10,17,.82);backdrop-filter:blur(6px);padding:6px 12px;border-radius:99px;
+  border:1px solid rgba(255,255,255,.08);opacity:0;pointer-events:none;transition:var(--t2) var(--ez);white-space:nowrap}
+.stagelbl.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.vbanner{position:absolute;left:10px;right:10px;bottom:10px;display:none;align-items:center;gap:10px;
+  padding:9px 12px;border-radius:12px;background:rgba(8,10,17,.9);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.1);font-size:13px;color:var(--sub)}
+.vbanner.on{display:flex}
+.vbanner b{color:var(--tx);font-weight:600}
+.vbanner button{margin-left:auto;flex:none}
+@keyframes fade{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:none}}
+.gbox{margin-top:13px;padding:14px 16px;border-radius:13px;
+  background:linear-gradient(158deg,rgba(255,255,255,.05),rgba(255,255,255,.012));
+  border:1px solid rgba(255,255,255,.09);animation:fade var(--t2) var(--ez)}
+.gbox .gt{display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+.gbox.done{color:var(--sub)}
+.gbox .grow{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.gbox .grow .chip{font-family:'JetBrains Mono',monospace;min-width:40px;text-align:center}
+.gbox .grow .chip.wide{font-family:'DM Sans',sans-serif;min-width:0}
+.gbox .skip{margin-left:auto;background:none;border:none;padding:4px;color:var(--dim);
+  font:inherit;font-size:12.5px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.gbox .skip:hover{color:var(--sub)}
+
+/* ── nyckeltal ── */
+.mets{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:14px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
 .mk{font-size:11.5px;color:var(--dim);margin-bottom:5px;line-height:1.35}
-.mv{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;line-height:1;letter-spacing:-.02em;display:flex;align-items:baseline;gap:7px;animation:bump .4s var(--ez)}
+.mv{font-family:'Syne',sans-serif;font-weight:800;font-size:25px;line-height:1;letter-spacing:-.02em;display:flex;align-items:baseline;gap:7px;animation:bump var(--t2) var(--ez)}
 @keyframes bump{0%{transform:translateY(4px);opacity:.35}100%{transform:none;opacity:1}}
 .delta{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:500;color:var(--grn)}
 .mv.zero{color:var(--grn)}
+.mv.small{font-size:16px;font-family:'JetBrains Mono',monospace;font-weight:500;letter-spacing:0;flex-wrap:wrap;gap:5px}
+.spark{display:block;width:100%;height:22px;margin-top:6px}
+.spark path{fill:none;stroke:var(--a1);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── historik ── */
 .tl{display:flex;align-items:center;gap:0;margin-top:15px;flex-wrap:wrap}
 .tp{width:27px;height:27px;border-radius:50%;border:1.5px solid var(--line2);background:transparent;color:var(--dim);
-  font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.24s var(--sp);flex:none}
+  font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:var(--t1) var(--sp);flex:none}
 .tp:hover{border-color:var(--a1);color:var(--tx)}
 .tp.on{background:var(--a1);border-color:var(--a1);color:#07090f}
 .tll{width:16px;height:1.5px;background:var(--line2);flex:none}
-.note{margin-top:14px;padding:15px 17px;border-radius:14px;font-size:14px;line-height:1.68;color:var(--sub);
-  background:rgba(255,255,255,.03);border-left:2px solid var(--c);animation:bump .35s var(--ez)}
+.tlab{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--dim);margin-right:11px}
+
+/* ── pipeline ── */
+.pipe{position:relative;display:flex;flex-direction:column;padding:4px 4px 4px 0}
+.pstep{border-radius:18px;position:relative;
+  background:linear-gradient(158deg,rgba(255,255,255,.035),rgba(255,255,255,.01));
+  border:1px solid transparent;
+  transition:border-color var(--t2) var(--ez),box-shadow var(--t2) var(--ez),background var(--t2) var(--ez)}
+.phead{display:flex;gap:14px;align-items:center;width:100%;text-align:left;padding:15px 17px;
+  background:none;border:none;cursor:default;color:inherit;font:inherit;border-radius:18px}
+.pstep.avail .phead{cursor:pointer}
+.pstep.avail:not(.on) .phead:hover{background:rgba(255,255,255,.045)}
+.pn{flex:none;width:30px;height:30px;border-radius:11px;display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim);background:rgba(255,255,255,.06);
+  transition:background var(--t2) var(--ez),color var(--t2) var(--ez)}
+.pshead{font-family:'Syne',sans-serif;font-weight:700;font-size:15.5px;letter-spacing:-.015em;color:var(--dim);transition:color var(--t2)}
+.pback{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--dim);display:none}
+.pstep.back .pback{display:inline}
+.pd2wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--t2) var(--ez)}
+.pstep.on .pd2wrap{grid-template-rows:1fr}
+.pd2{overflow:hidden;min-height:0;visibility:hidden;transition:visibility 0s linear var(--t2)}
+.pstep.on .pd2{visibility:visible;transition-delay:0s}
+.pdin{padding:0 17px 16px;font-size:13.5px;line-height:1.62;color:var(--sub)}
+.pstep.on{border-color:var(--c);box-shadow:0 0 0 1px var(--c),0 18px 46px -24px var(--c);
+  background:linear-gradient(158deg,rgba(255,255,255,.06),rgba(255,255,255,.015))}
+.pstep.on .pn{background:var(--c);color:#07090f}
+.pstep.on .pshead{color:var(--tx)}
+.pstep.done .pn{background:rgba(61,220,132,.15);color:var(--grn)}
+.pstep.done .pshead{color:var(--sub)}
+.pline{width:2px;height:15px;margin-left:32px;background:var(--line2);flex:none}
+.looprail{position:absolute;right:-6px;top:var(--lt,0);height:var(--lh,0);width:22px;pointer-events:none;
+  border:2px dashed var(--line2);border-left:none;border-radius:0 14px 14px 0;
+  transition:top var(--t2) var(--ez),height var(--t2) var(--ez),border-color var(--t2) var(--ez)}
+.looprail .lcap{position:absolute;right:-7px;top:50%;transform:translate(100%,-50%);
+  writing-mode:vertical-rl;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.pipe.live .looprail{border-color:var(--gold)}
+.pipe.enter .looprail{animation:railIn var(--t3) var(--ez)}
+@keyframes railIn{0%{opacity:.35;transform:scaleX(1.15)}100%{opacity:1;transform:none}}
+.pipe.done .looprail{border-color:var(--grn);border-style:solid}
+.pstep.win{animation:winGlow 1.1s var(--ez)}
+@keyframes winGlow{0%{box-shadow:0 0 0 1px var(--c),0 0 0 0 rgba(61,220,132,.5)}
+  55%{box-shadow:0 0 0 1px var(--c),0 0 0 16px rgba(61,220,132,0)}
+  100%{box-shadow:0 0 0 1px var(--c),0 18px 46px -24px var(--c)}}
+
+/* ── kontroller ── */
+.pdin p{margin-bottom:9px}.pdin p:last-child{margin-bottom:0}.pdin b{color:var(--tx);font-weight:600}
+.fml{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--tx);text-align:center;
+  background:rgba(0,0,0,.3);border-radius:11px;padding:12px 10px;margin:11px 0}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;padding:9px 15px;border-radius:99px;
+  border:1px solid transparent;background:rgba(255,255,255,.04);color:var(--dim);cursor:pointer;
+  transition:background var(--t1) var(--ez),color var(--t1) var(--ez),border-color var(--t1) var(--ez)}
+.chip:hover:not(:disabled){color:var(--tx);background:rgba(255,255,255,.08)}
+.chip.on{background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.34);color:var(--tx)}
+.chip:disabled{opacity:.35;cursor:not-allowed}
+.krow{margin-top:6px}.krow .chip{flex:1;min-width:0;padding:9px 6px;text-align:center;font-family:'JetBrains Mono',monospace}
+.slbl{display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--dim);margin:13px 0 7px}
+.pact{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.pbig{flex:1;min-width:140px;padding:12px 15px;border-radius:13px;border:none;background:var(--c);color:#07090f;
+  font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;cursor:pointer;
+  transition:transform var(--t1) var(--sp),box-shadow var(--t1) var(--ez),opacity var(--t1)}
+.pbig:hover:not(:disabled){transform:translateY(-1.5px);box-shadow:0 10px 28px -12px var(--c)}
+.pbig:active:not(:disabled){transform:scale(.985)}
+.pbig:disabled{opacity:.32;cursor:not-allowed;transform:none;box-shadow:none}
+.pbig.stop{background:var(--gold)}
+.psub{padding:11px 14px;border-radius:13px;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--sub);
+  font-family:'DM Sans',sans-serif;font-weight:600;font-size:13px;cursor:pointer;
+  transition:background var(--t1) var(--ez),color var(--t1) var(--ez)}
+.psub:hover:not(:disabled){background:rgba(255,255,255,.06);color:var(--tx)}
+.psub:disabled{opacity:.32;cursor:not-allowed}
+.term{display:inline;background:none;border:none;padding:0;font:inherit;color:var(--a1);
+  border-bottom:1px dashed var(--a1);cursor:pointer;transition:background var(--t1)}
+.term:hover{border-bottom-style:solid;background:rgba(126,162,255,.12);border-radius:3px}
+.note{margin-top:12px;padding:13px 15px;border-radius:12px;font-size:13px;line-height:1.62;color:var(--sub);
+  background:rgba(255,255,255,.03);border-left:2px solid var(--c,var(--p3))}
 .note b{color:var(--tx);font-weight:600}
-.note.g{--c:var(--gold)}.note.e{--c:var(--grn)}.note.v{--c:var(--a2)}
-.term{border-bottom:1px dashed var(--a1);color:var(--a1);cursor:pointer;transition:.15s}
-.term:hover{border-bottom-style:solid;background:rgba(91,140,255,.1);border-radius:3px}
+.note.g{--c:var(--gold)}.note.e{--c:var(--grn)}
+.insight{margin-top:13px;padding:15px 17px;border-radius:14px;line-height:1.62;font-size:13.5px;color:var(--sub);
+  background:linear-gradient(158deg,rgba(255,207,92,.09),rgba(255,207,92,.02));
+  border:1px solid rgba(255,207,92,.24);animation:bump var(--t3) var(--ez)}
+.insight .it{display:block;font-family:'Syne',sans-serif;font-weight:700;font-size:14.5px;color:var(--gold);
+  letter-spacing:.01em;margin-bottom:6px}
+
+/* ── armbågskurva ── */
+.elb{display:block;width:100%;height:auto;margin:12px 0 4px}
+.elb .ln{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.elb .ln.draw{stroke-dasharray:700;stroke-dashoffset:700;animation:draw 900ms var(--ez) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.elb text{font-family:'JetBrains Mono',monospace;font-size:10.5px;fill:var(--dim)}
+.elb .kd{cursor:pointer;transition:var(--t1) var(--sp)}
+.elb .hit{cursor:pointer;fill:transparent}
+
+/* ── ångra-remsa ── */
+.undo{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(14px);z-index:200;
+  display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:14px;font-size:13.5px;color:var(--sub);
+  background:rgba(18,22,36,.94);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.11);
+  box-shadow:0 20px 50px rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:var(--t2) var(--ez)}
+.undo.on{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+
+/* ── begreppskort (3D-tilt bevarad) ── */
 .scrim{position:fixed;inset:0;background:rgba(4,6,12,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ez)}
+  z-index:300;opacity:0;pointer-events:none;transition:opacity var(--t2) var(--ez)}
 .scrim.show{opacity:1;pointer-events:auto}
-.ccard{position:fixed;top:50%;left:50%;z-index:301;width:400px;max-width:90vw;perspective:1000px;
+.ccard{position:fixed;top:50%;left:50%;z-index:301;width:430px;max-width:92vw;perspective:1000px;
   transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
-  transition:transform .38s var(--sp),opacity .26s var(--ez)}
+  transition:transform var(--t2) var(--sp),opacity var(--t1) var(--ez)}
 .ccard.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto}
 .ccard-in{position:relative;text-align:center;transform-style:preserve-3d;
   background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));
   border:1px solid rgba(255,255,255,.1);border-radius:22px;
   box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:28px 28px 24px;
   transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
-  transition:transform .5s var(--ez),box-shadow .5s var(--ez);will-change:transform;max-height:86vh;overflow-y:auto}
+  transition:transform 500ms var(--ez);will-change:transform;max-height:86vh;overflow-y:auto}
 .ccard-in::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;padding:1.5px;
   background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,206,84,.15) 45%,transparent 65%);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
-  opacity:0;transition:opacity .35s var(--ez)}
+  opacity:0;transition:opacity var(--t2) var(--ez)}
 .ccard-in:hover::before{opacity:1}
 .ccard-in::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
   background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.09),transparent 60%);
-  opacity:0;transition:opacity .35s var(--ez)}
+  opacity:0;transition:opacity var(--t2) var(--ez)}
 .ccard-in:hover::after{opacity:1}
-.cclose{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;
+.cclose{position:absolute;top:12px;right:12px;width:28px;height:28px;border-radius:50%;
   border:1px solid var(--line2);background:rgba(255,255,255,.03);color:var(--dim);display:flex;
   align-items:center;justify-content:center;cursor:pointer;font-size:12px;z-index:3;
-  transform:translateZ(30px);transition:.2s var(--sp)}
+  transform:translateZ(30px);transition:var(--t1) var(--sp)}
 .cclose:hover{border-color:var(--gold);color:var(--gold);transform:translateZ(30px) rotate(90deg)}
-.cicon{width:54px;height:54px;margin:0 auto 13px;border-radius:16px;background:rgba(91,140,255,.16);
-  display:flex;align-items:center;justify-content:center;font-size:26px;position:relative;z-index:3;
+.cicon{width:54px;height:54px;margin:0 auto 13px;border-radius:16px;background:rgba(126,162,255,.15);
+  display:flex;align-items:center;justify-content:center;position:relative;z-index:3;color:var(--a1);
   transform:translateZ(36px);box-shadow:0 10px 24px rgba(91,140,255,.18)}
+.cicon svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .ctitle{font-family:'Syne',sans-serif;font-size:19px;font-weight:800;margin-bottom:9px;letter-spacing:-.015em;
   position:relative;z-index:3;transform:translateZ(26px);color:var(--tx)}
-.cdef{font-size:14px;line-height:1.66;color:var(--sub);position:relative;z-index:3;transform:translateZ(18px);transform-style:preserve-3d}
+.cdef{font-size:14px;line-height:1.66;color:var(--sub);position:relative;z-index:3;transform:translateZ(18px);transform-style:preserve-3d;text-align:left}
 .cdef b{color:var(--tx);font-weight:600}
 .cdef .calc{font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.9;color:var(--tx);
   background:rgba(0,0,0,.32);border-radius:12px;padding:13px 15px;margin-top:14px;text-align:left}
-.elb{display:block;width:100%;height:auto}
-.elb .ln{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:640;stroke-dashoffset:640;animation:draw 1.15s var(--ez) .1s forwards}
-@keyframes draw{to{stroke-dashoffset:0}}
-.elb text{font-family:'JetBrains Mono',monospace;font-size:10px;fill:var(--dim)}
-.elb .kd{cursor:pointer;transition:.25s var(--sp)}
-.OLDsetup{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-end;padding:16px 20px;border-radius:18px;
-  background:linear-gradient(158deg,rgba(255,255,255,.04),rgba(255,255,255,.012))}
-.sgrp{display:flex;flex-direction:column;gap:9px}
-.slbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
-.OLDengine{display:flex;align-items:stretch;justify-content:center;gap:0;position:relative;padding:6px 0 30px}
-.big{flex:1;max-width:340px;display:flex;flex-direction:column;align-items:flex-start;gap:3px;
-  padding:20px 22px;border-radius:20px;border:1px solid rgba(255,255,255,.07);
-  background:linear-gradient(158deg,rgba(255,255,255,.05),rgba(255,255,255,.015));
-  color:var(--tx);cursor:pointer;text-align:left;transition:.32s var(--sp);position:relative;overflow:hidden}
-.big::before{content:'';position:absolute;inset:0;background:var(--c);opacity:0;transition:opacity .32s}
-.big>*{position:relative}
-.big:hover:not(:disabled){transform:translateY(-2px);border-color:var(--c)}
-.big:hover:not(:disabled)::before{opacity:.07}
-.big:disabled{opacity:.34;cursor:not-allowed}
-.big.armed{border-color:var(--c);box-shadow:0 0 0 1px var(--c),0 18px 50px -20px var(--c)}
-.big.armed::before{opacity:.11}
-.big.armed .bn{background:var(--c);color:#07090f}
-.bn{padding:5px 11px;border-radius:99px;display:inline-flex;align-items:center;justify-content:center;
-  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;background:rgba(255,255,255,.07);color:var(--dim);
-  margin-bottom:7px;transition:.32s var(--ez)}
-.bt{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.015em}
-.bs{font-size:12.5px;color:var(--dim);line-height:1.45}
-.between{display:flex;align-items:center;padding:0 14px;flex:none}
-.barrow{width:34px;height:2px;background:var(--line2);position:relative}
-.barrow::after{content:'';position:absolute;right:-1px;top:-3.5px;border-left:7px solid var(--line2);border-top:4px solid transparent;border-bottom:4px solid transparent}
-.rback{position:absolute;left:50%;transform:translateX(-50%);bottom:0;width:min(430px,90%);pointer-events:none;text-align:center}
-.rback svg{width:100%;height:22px;overflow:visible;display:block}
-.rback path{fill:none;stroke:var(--line2);stroke-width:2;stroke-linecap:round;stroke-dasharray:7 7;transition:stroke .4s}
-.rback .cap{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--dim);letter-spacing:.14em;margin-top:1px}
-.rback.live path{stroke:var(--gold);animation:dash 1.1s linear infinite}
-@keyframes dash{to{stroke-dashoffset:-14}}
-.OLDguide{border-radius:18px;padding:17px 21px;background:linear-gradient(158deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
-  font-size:15px;line-height:1.68;color:var(--sub);border-left:2px solid var(--c);animation:bump .35s var(--ez)}
-.guide b{color:var(--tx);font-weight:600}
-.guide .gt{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;
-  color:var(--tx);letter-spacing:-.015em;margin-bottom:6px}
-.kcols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px;align-items:center}
-@media(max-width:760px){.kcols{grid-template-columns:1fr}}
-#calc .exp{font-size:14px;line-height:1.7;color:var(--sub);animation:bump .35s var(--ez)}
-#calc .exp p{margin-bottom:11px}
-#calc .exp p:last-child{margin-bottom:0}
-#calc .exp b{color:var(--tx);font-weight:600}
-.fml{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--tx);text-align:center;
-  background:rgba(0,0,0,.3);border-radius:12px;padding:14px 12px;margin:13px 0}
-@media(max-width:640px){.engine{flex-direction:column;gap:10px;padding-bottom:34px}.between{display:none}.big{max-width:none}}
+.cmp{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
+.cmp>div{flex:1;min-width:150px}
+.cmp svg{display:block;width:100%;height:auto;border-radius:10px;background:#080a11;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.cmp .cl{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);margin-top:6px;text-align:center}
+.dcalc{display:flex;flex-direction:column;gap:5px;padding:9px 10px}
+.drow{display:flex;align-items:baseline;gap:9px;padding:6px 8px;border-radius:9px;
+  transition:background var(--t1) var(--ez)}
+.drow.win{background:rgba(255,255,255,.075);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09)}
+.drow .dl{flex:none;width:13px;font-weight:600}
+.drow .de{flex:1;min-width:0;font-size:11.5px;color:var(--sub);white-space:nowrap;
+  overflow-x:auto;scrollbar-width:none}
+.drow .de::-webkit-scrollbar{display:none}
+.drow .dv{flex:none;font-weight:600;color:var(--sub)}
+.drow.win .dv{color:var(--tx)}
+.cmp .cl b{color:var(--tx)}
+
 @media(max-width:640px){
   body{font-size:15px}.wrap{padding:8px 14px 36px;gap:14px}
-  .loop{flex-wrap:wrap;gap:8px;padding-bottom:30px}.larr{display:none}.lstep{min-width:0;flex:1;padding:10px 12px}
-  .intro{padding:18px}.panel{padding:15px 16px}
+  .panel{padding:15px 16px}.phead{padding:13px 14px}.pdin{padding:0 14px 14px}
+  .looprail{right:-3px;width:16px}.looprail .lcap{display:none}
 }
 
-/* ── layout: pipeline vänster, canvas höger ── */
-.lay{display:grid;grid-template-columns:390px minmax(0,1fr);gap:20px;align-items:start}
-@media(max-width:1040px){.lay{grid-template-columns:1fr}
-  .canvascol{order:-1;position:sticky;top:0;z-index:5;padding-top:6px;
-    background:linear-gradient(180deg,var(--bg) 78%,transparent)}
-  .canvaspanel{padding:12px 13px}
-  .canvaspanel .mets{margin-top:11px;padding-top:11px;gap:10px}
-  .canvaspanel .mv{font-size:20px}.canvaspanel .tl{margin-top:10px}}
-.canvascol{position:sticky;top:14px}
-
-.pipe{position:relative;display:flex;flex-direction:column;padding:4px 4px 4px 0}
-.pstep{display:flex;gap:14px;padding:15px 17px;border-radius:18px;position:relative;
-  background:linear-gradient(158deg,rgba(255,255,255,.035),rgba(255,255,255,.01));
-  border:1px solid transparent;transition:.42s var(--ez)}
-.pstep .pn{flex:none;width:30px;height:30px;border-radius:11px;display:flex;align-items:center;justify-content:center;
-  font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim);background:rgba(255,255,255,.06);transition:.42s var(--ez)}
-.pstep .pbody{min-width:0;flex:1}
-.pstep .pshead{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15.5px;letter-spacing:-.015em;color:var(--dim);transition:.35s}
-.pstep .pd2{font-size:13.5px;line-height:1.62;color:var(--dim);margin-top:0;max-height:0;opacity:0;overflow:hidden;
-  transition:max-height .55s var(--ez),opacity .35s,margin-top .4s}
-.pstep.on{border-color:var(--c);box-shadow:0 0 0 1px var(--c),0 18px 46px -22px var(--c);
-  background:linear-gradient(158deg,rgba(255,255,255,.06),rgba(255,255,255,.015))}
-.pstep.on .pn{background:var(--c);color:#07090f}
-.pstep.on .pshead{color:var(--tx)}
-.pstep.on .pd2{max-height:700px;opacity:1;margin-top:10px;color:var(--sub)}
-.pstep.done .pn{background:rgba(61,220,132,.15);color:var(--grn)}
-.pstep.done .pshead{color:var(--sub)}
-.pstep.on.back::after{content:'du tittar bakåt';position:absolute;top:12px;right:15px;
-  font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-.pstep.avail{cursor:pointer}
-.pstep.avail:hover:not(.on){background:rgba(255,255,255,.055)}
-.pline{width:2px;height:15px;margin-left:32px;background:var(--line2);flex:none}
-.looprail{position:absolute;right:-6px;top:var(--lt,0);height:var(--lh,0);width:22px;pointer-events:none;
-  border:2px dashed var(--line2);border-left:none;border-radius:0 14px 14px 0;transition:.45s var(--ez)}
-.looprail .lcap{position:absolute;right:-7px;top:50%;transform:translate(100%,-50%);
-  writing-mode:vertical-rl;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--dim);white-space:nowrap}
-.pipe.live .looprail{border-color:var(--gold);animation:railPulse 2s var(--ez) infinite}
-.pipe.done .looprail{border-color:var(--grn);border-style:solid;animation:railDone .7s var(--sp)}
-@keyframes railDone{0%{opacity:.4;transform:scaleX(1.12)}100%{opacity:1;transform:none}}
-.pstep.win{animation:winGlow 1.1s var(--ez)}
-@keyframes winGlow{0%{box-shadow:0 0 0 1px var(--c),0 0 0 0 rgba(61,220,132,.5)}
-  55%{box-shadow:0 0 0 1px var(--c),0 0 0 16px rgba(61,220,132,0)}
-  100%{box-shadow:0 0 0 1px var(--c),0 18px 46px -22px var(--c)}}
-@keyframes railPulse{0%,100%{opacity:.5}50%{opacity:1}}
-.pd2 .fml{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--tx);text-align:center;
-  background:rgba(0,0,0,.3);border-radius:11px;padding:12px 10px;margin:11px 0}
-.linky{background:none;border:none;color:var(--a1);font-family:inherit;font-size:inherit;cursor:pointer;
-  text-decoration:underline;text-underline-offset:3px;padding:0}
-.pd2 p{margin-bottom:9px}.pd2 p:last-child{margin-bottom:0}.pd2 b{color:var(--tx);font-weight:600}
-.pact{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.pbig{flex:1;min-width:140px;padding:12px 15px;border-radius:13px;border:none;background:var(--c);color:#07090f;
-  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:.24s var(--sp)}
-.pbig:hover:not(:disabled){transform:translateY(-1.5px);box-shadow:0 10px 28px -10px var(--c)}
-.pbig:disabled{opacity:.32;cursor:not-allowed;transform:none;box-shadow:none}
-.psub{padding:11px 14px;border-radius:13px;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--sub);
-  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;cursor:pointer;transition:.24s var(--sp)}
-.psub:hover:not(:disabled){background:rgba(255,255,255,.06);color:var(--tx)}
-.psub:disabled{opacity:.32;cursor:not-allowed}
-@media(max-width:640px){.pstep{padding:13px 14px}.looprail{right:-3px;width:16px}.looprail .lcap{display:none}}
+/* ── respekterar systeminställning för rörelse ── */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:1ms!important;animation-iteration-count:1!important;
+    transition-duration:1ms!important;scroll-behavior:auto!important}
+  .ccard-in{transform:none!important}
+}
 </style>
 </head>
 <body>
-<div class="hd">
+
+<header class="hd">
   <div class="links">
     <a class="lk" href="/">← AI-aktiviteter</a>
-    <a class="lk" href="/k-means_ENG"><svg viewBox="0 0 50 30"><rect width="50" height="30" fill="#012169"/><path d="M0,0 L50,30 M50,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#fff" stroke-width="10"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#C8102E" stroke-width="6"/></svg>English</a>
+    <a class="lk" href="/k-means_ENG"><svg viewBox="0 0 50 30" aria-hidden="true"><rect width="50" height="30" fill="#012169"/><path d="M0,0 L50,30 M50,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#fff" stroke-width="10"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#C8102E" stroke-width="6"/></svg>English</a>
   </div>
   <h1>k-means-klustring</h1>
-  <div class="tag">Modellen får data som inte har några kända svar, och försöker själv hitta mönster i den.</div>
-</div>
+  <p class="tag">Kan en dator hitta grupper i data som ingen har sorterat?</p>
+</header>
 
-<div class="wrap">
+<main class="wrap">
   <div class="lay">
 
     <aside class="pipe" id="pipe">
-      <div class="pstep" data-s="1">
-        <div class="pn">1</div>
-        <div class="pbody"><div class="pshead">Välj datamängd</div>
-          <div class="pd2" id="p1body"></div></div>
-      </div>
+      <section class="pstep" data-s="1">
+        <button class="phead" id="h1b" aria-expanded="false" aria-controls="p1body">
+          <span class="pn">1</span><span class="pshead">Välj datamängd</span><span class="pback">bakåt</span>
+        </button>
+        <div class="pd2wrap"><div class="pd2" id="p1body" role="region" aria-labelledby="h1b"></div></div>
+      </section>
       <div class="pline"></div>
-      <div class="pstep" data-s="2">
-        <div class="pn">2</div>
-        <div class="pbody"><div class="pshead">Placera centroider</div>
-          <div class="pd2" id="p2body"></div></div>
-      </div>
+
+      <section class="pstep" data-s="2">
+        <button class="phead" id="h2b" aria-expanded="false" aria-controls="p2body">
+          <span class="pn">2</span><span class="pshead">Placera centroider</span><span class="pback">bakåt</span>
+        </button>
+        <div class="pd2wrap"><div class="pd2" id="p2body" role="region" aria-labelledby="h2b"></div></div>
+      </section>
       <div class="pline"></div>
-      <div class="looprail"><span class="lcap">upprepas</span></div>
-      <div class="pstep loopstep" data-s="3">
-        <div class="pn">3</div>
-        <div class="pbody"><div class="pshead">Tilldela datapunkter</div>
-          <div class="pd2" id="p3body"></div></div>
-      </div>
-      <div class="pline in-loop"></div>
-      <div class="pstep loopstep" data-s="4">
-        <div class="pn">4</div>
-        <div class="pbody"><div class="pshead">Flytta centroider</div>
-          <div class="pd2" id="p4body"></div></div>
-      </div>
+
+      <div class="looprail" aria-hidden="true"><span class="lcap">upprepas</span></div>
+
+      <section class="pstep" data-s="3">
+        <button class="phead" id="h3b" aria-expanded="false" aria-controls="p3body">
+          <span class="pn">3</span><span class="pshead">Tilldela datapunkter</span><span class="pback">bakåt</span>
+        </button>
+        <div class="pd2wrap"><div class="pd2" id="p3body" role="region" aria-labelledby="h3b"></div></div>
+      </section>
       <div class="pline"></div>
-      <div class="pstep" data-s="5">
-        <div class="pn">5</div>
-        <div class="pbody"><div class="pshead">Hur många grupper?</div>
-          <div class="pd2" id="p5body"></div></div>
-      </div>
+
+      <section class="pstep" data-s="4">
+        <button class="phead" id="h4b" aria-expanded="false" aria-controls="p4body">
+          <span class="pn">4</span><span class="pshead">Flytta centroider</span><span class="pback">bakåt</span>
+        </button>
+        <div class="pd2wrap"><div class="pd2" id="p4body" role="region" aria-labelledby="h4b"></div></div>
+      </section>
+      <div class="pline"></div>
+
+      <section class="pstep" data-s="5">
+        <button class="phead" id="h5b" aria-expanded="false" aria-controls="p5body">
+          <span class="pn">5</span><span class="pshead">Utvärdera valet av k</span><span class="pback">bakåt</span>
+        </button>
+        <div class="pd2wrap"><div class="pd2" id="p5body" role="region" aria-labelledby="h5b"></div></div>
+      </section>
     </aside>
 
     <div class="canvascol">
       <div class="panel canvaspanel">
-        <div class="ph"><span class="pd"></span><span id="ptitle"></span><span class="meta" id="pmeta"></span></div>
-        <div class="stage"><svg class="plot" id="plot" viewBox="0 0 620 450"></svg></div>
-        <div class="mets" id="mets"></div><div class="tl" id="tl"></div>
+        <div class="ph"><span class="pd" id="phdot"></span><span id="ptitle"></span><span class="meta" id="pmeta"></span></div>
+        <div class="stage">
+          <svg class="plot" id="plot" viewBox="0 0 620 470" role="img" aria-labelledby="plotTitle">
+            <title id="plotTitle">Spridningsdiagram över datapunkter</title>
+          </svg>
+          <button class="btog" id="btog" aria-pressed="false" hidden>
+            <span class="bdot"></span>Beslutsgränser</button>
+          <div class="stagelbl" id="stagelbl"></div>
+          <div class="vbanner" id="vbanner"></div>
+        </div>
+        <div class="mets" id="mets"></div>
+        <div class="tl" id="tl"></div>
       </div>
     </div>
   </div>
-</div>
+</main>
 
-<div class="scrim" id="scrim" onclick="closeCard()"></div>
-<div class="ccard" id="ccard" role="dialog" aria-modal="true">
+<div class="undo" id="undo" role="status"></div>
+
+<div class="scrim" id="scrim"></div>
+<div class="ccard" id="ccard" role="dialog" aria-modal="true" aria-labelledby="cTi">
   <div class="ccard-in" id="ccardIn">
-    <button class="cclose" onclick="closeCard()" aria-label="Stäng">✕</button>
-    <div class="cicon" id="cIc"></div>
+    <button class="cclose" id="cClose" aria-label="Stäng">✕</button>
+    <div class="cicon" id="cIc" aria-hidden="true"></div>
     <div class="ctitle" id="cTi"></div>
     <div class="cdef" id="cBo"></div>
     <div class="cdef" id="cCa"></div>
@@ -349,294 +431,984 @@ svg.plot{display:block;width:100%;height:auto}
 </div>
 
 <script>
+"use strict";
+const $=id=>document.getElementById(id);
+const RM=window.matchMedia('(prefers-reduced-motion: reduce)');
+
+/* ═══════════ slump & data ═══════════ */
 function rng(s){let a=s>>>0;return()=>{a=(a+0x6D2B79F5)>>>0;let t=Math.imul(a^(a>>>15),1|a);
   t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296;};}
 function gs(r){let u=0,v=0;while(!u)u=r();while(!v)v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
 function blob(r,cx,cy,sx,sy,n,rot){const o=[];for(let i=0;i<n;i++){let x=gs(r)*sx,y=gs(r)*sy;
-  if(rot){const c=Math.cos(rot),s=Math.sin(rot);[x,y]=[x*c-y*s,x*s+y*c];}o.push({x:cx+x,y:cy+y});}return o;}
+  if(rot){const c=Math.cos(rot),s=Math.sin(rot);[x,y]=[x*c-y*s,x*s+y*c];}
+  o.push({x:Math.min(98,Math.max(2,cx+x)),y:Math.min(98,Math.max(2,cy+y))});}return o;}
+
+/* dom = axlarnas verkliga värdeområde. Skiljer sig områdena åt blir avståndet
+   dominerat av den axel som har störst spann – det är hela poängen med "Olika skalor". */
 const DS={
- three:{n:'Tre tydliga grupper',best:3,ax:['Egenskap A','Egenskap B'],tip:'Tre tydligt åtskilda moln. Här hittar algoritmen samma grupper som ditt öga gör.',
-   g:(sd)=>{const r=rng(7+(sd||0)*137);return[...blob(r,26,70,7,7,34),...blob(r,66,26,7,7,34),...blob(r,74,74,7,7,34)];}},
- elong:{n:'Avlånga grupper',best:2,ax:['Egenskap A','Egenskap B'],tip:'Två långsmala band. Ögat ser två grupper direkt, men algoritmen delar upp dem på ett annat sätt.',
-   g:(sd)=>{const r=rng(19+(sd||0)*137);return[...blob(r,36,42,21,4.2,48,-.62),...blob(r,64,60,21,4.2,48,-.62)];}},
- sizes:{n:'Olika täthet',best:3,ax:['Egenskap A','Egenskap B'],tip:'Ett stort glest moln och två små täta. Hur tätt punkterna ligger avgör var gränserna hamnar.',
-   g:(sd)=>{const r=rng(31+(sd||0)*137);return[...blob(r,32,50,15,15,60),...blob(r,74,28,4.5,4.5,24),...blob(r,76,72,4.5,4.5,24)];}},
- none:{n:'Ingen struktur',best:null,ax:['Egenskap A','Egenskap B'],tip:'Jämnt utspridda punkter utan grupper. Vad svarar algoritmen då?',
-   g:(sd)=>{const r=rng(53+(sd||0)*137);const o=[];for(let i=0;i<100;i++)o.push({x:12+r()*76,y:12+r()*76});return o;}}
+ three:{n:'Tydliga kluster',ax:['Egenskap A','Egenskap B'],dom:[[0,100],[0,100]],
+   tip:'Runda, tydligt åtskilda moln. Antalet varierar mellan omgångarna, så räkna själv innan du väljer k.',
+   ins:['Ögat och algoritmen är överens',
+        'När klustren är runda, ungefär lika stora och tydligt åtskilda hittar k-means precis den indelning du själv ser. Det är det enklaste fallet — och det enda där resultatet går att lita på utan närmare granskning. Lägg märke till att antalet inte gick att veta i förväg. Det är just den frågan armbågskurvan nedan är till för.'],
+   /* Antalet kluster lottas fram (2–6) så att svaret inte går att memorera. */
+   g:sd=>{const r=rng(7+sd*137);
+     const n=2+Math.floor(r()*5),out=[],off=r()*Math.PI*2,per=Math.round(102/n);
+     for(let i=0;i<n;i++){
+       const a=off+((i+(r()-.5)*.34)/n)*Math.PI*2, rad=29+(r()-.5)*9;
+       out.push(...blob(r,50+Math.cos(a)*rad,50+Math.sin(a)*rad,6,6,per));}
+     return out;}},
+
+ elong:{n:'Avlånga kluster',ax:['Egenskap A','Egenskap B'],dom:[[0,100],[0,100]],
+   tip:'Två långsmala band. Ögat ser två kluster direkt — slå på beslutsgränserna innan du kör, så framgår det varför algoritmen inte gör det.',
+   ins:['Gränserna är raka linjer',
+        'En beslutsgräns är alltid en rät linje: den utgörs av mittpunktsnormalen mellan två centroider. Raka gränser kan inte följa ett snedställt band. k-means förutsätter därför ungefär <b>runda</b> kluster — när datan inte uppfyller det skär algoritmen tvärs igenom grupperna.'],
+   g:sd=>{const r=rng(19+sd*137);return[...blob(r,36,42,21,4.2,48,-.62),...blob(r,64,60,21,4.2,48,-.62)];}},
+
+ sizes:{n:'Olika täthet',ax:['Egenskap A','Egenskap B'],dom:[[0,100],[0,100]],
+   tip:'Ett stort glest moln och två små täta. Lägg märke till hur många punkter varje kluster får.',
+   ins:['k-means dras mot lika stora kluster',
+        'Måttet som minimeras är summan av <b>kvadrerade</b> avstånd. Ett stort glest moln bidrar med en betydande del av den summan, så algoritmen vinner på att stycka upp det — trots att det egentligen utgör ett enda kluster. De små täta molnen lämnas däremot orörda. Jämför antalet punkter per kluster: fördelningen blir jämnare än datan motiverar.'],
+   g:sd=>{const r=rng(31+sd*137);return[...blob(r,32,50,15,15,60),...blob(r,74,28,4.5,4.5,24),...blob(r,76,72,4.5,4.5,24)];}},
+
+ none:{n:'Ingen struktur',ax:['Egenskap A','Egenskap B'],dom:[[0,100],[0,100]],
+   tip:'Jämnt utspridda punkter helt utan gruppstruktur. Avgör först vad du tror att algoritmen kommer att svara.',
+   ins:['Algoritmen kan inte svara "det finns inga"',
+        'Du bad om k kluster, och du fick k kluster. k-means saknar möjlighet att rapportera att strukturen inte finns — den delar upp den data den får. Färgerna på skärmen är alltså <b>inget bevis</b> för att grupperna finns i verkligheten. Titta på armbågskurvan: den faller jämnt utan brytpunkt, vilket är just det tecken som avslöjar att indelningen är godtycklig.'],
+   g:sd=>{const r=rng(53+sd*137);const o=[];for(let i=0;i<100;i++)o.push({x:12+r()*76,y:12+r()*76});return o;}},
+
+ skala:{n:'Olika skalor',ax:['Årslön (tkr)','Ålder (år)'],dom:[[200,900],[20,70]],unit:['tkr','år'],scaleLesson:true,
+   tip:'Tre åldersgrupper med spridda löner. Lönen mäts i hundratals, åldern i tiotal — och det får betydelse för avståndsberäkningen.',
+   ins:['Den axel som har störst spann bestämmer allt',
+        'Lönen sträcker sig över 700 enheter, åldern över 50. Räknas avståndet på rådata blir löneskillnader ungefär <b>fjorton gånger</b> tyngre än åldersskillnader, och algoritmen skär lodräta skivor genom de vågräta åldersgrupperna. Slå på normalisering så räknas båda axlarna om till samma skala. Titta på armbågskurvan före och efter: den flyttar sig från k&nbsp;=&nbsp;2 till k&nbsp;=&nbsp;3, alltså till det verkliga antalet åldersgrupper. I praktiskt maskininlärningsarbete är det här ett av de vanligaste misstagen.'],
+   g:sd=>{const r=rng(71+sd*137);return[...blob(r,50,15,10,5,36),...blob(r,50,50,10,5,36),...blob(r,50,85,10,5,36)];}}
 };
-const COL=['#5b8cff','#ffcf5c','#3ddc84','#8b7dff','#ff9f5c','#3ee0e0'];
-const GOOD={three:1,elong:1,sizes:1,none:1};
 
-let lastChanged=-1,lastMoved=-1,ds=null,pts=[],K=3,cens=[],iter=0,phase='init',hist=[],changed=null,
-    busy=false,snaps=[],vSnap=null,tick=0;
+/* Faserna behåller sin egen tydliga färgkodning: loopen ska synas.
+   Klusterpaletten är därför vald så att den håller sig undan loopens
+   två färger (guld = steg 3, grönt = steg 4) vid de vanligaste k-värdena.
+   Bokstäverna A–F ger dessutom en kanal som inte är färg. */
+const PC=['#5b8cff','#8b7dff','#ffcf5c','#3ddc84','#3ee0e0'];
+const COL=['#ff9f4a','#4ecfff','#ff5f9e','#c084ff','#8ef06a','#ffe066','#5ce1c4','#ff7a6b'];
+const CN=COL.length;
+const LTR=['A','B','C','D','E','F','G','H'];
 
-let dataSeed=0;
-function load(){pts=ds?DS[ds].g(dataSeed).map(p=>({...p,c:-1})):[];reset();}
-function reset(){cens=[];iter=0;lastChanged=-1;lastMoved=-1;phase='init';hist=[];changed=null;snaps=[];vSnap=null;pts.forEach(p=>p.c=-1);}
-function seed(){const r=rng(GOOD[ds]+tick*997+dataSeed*37);tick++;
-  /* k-means++: första centroiden slumpas, resten dras med sannolikhet i proportion
-     till kvadrerat avstånd från närmaste redan valda. Sprider ut dem utan att fuska. */
-  cens=[{...pts[Math.floor(r()*pts.length)]}];
-  while(cens.length<K){const d=pts.map(q=>Math.min(...cens.map(c=>(q.x-c.x)**2+(q.y-c.y)**2)));
-    const Tt=d.reduce((a,b)=>a+b,0);let t=r()*Tt,i=0;
-    while(t>d[i]&&i<d.length-1){t-=d[i];i++;}
-    cens.push({x:pts[i].x,y:pts[i].y});}
-  cens=cens.slice(0,K).map(c=>({x:c.x,y:c.y}));
-  iter=0;phase='seeded';hist=[];changed=null;snaps=[];vSnap=null;pts.forEach(p=>p.c=-1);}
-function near(p){let b=0,bd=Infinity;cens.forEach((c,i)=>{const d=(p.x-c.x)**2+(p.y-c.y)**2;if(d<bd){bd=d;b=i;}});return b;}
-function wcss(){return pts.reduce((s,p)=>{const c=cens[p.c];return c?s+(p.x-c.x)**2+(p.y-c.y)**2:s;},0);}
+/* ═══════════ tillstånd ═══════════ */
+let ds=null,pts=[],K=3,cens=[],iter=0,phase='init',hist=[],changed=null,
+    busy=false,running=false,snaps=[],tick=0,dataSeed=0,
+    forced=null,dsChosen=false,celebrated=false,built=false,
+    seedMode='pp',norm=false,guess=null,guessDone=false,
+    view=null,undoState=null,undoTimer=null,hoverIdx=-1,dragI=-1,dragMoved=false,
+    WX=1,WY=1,elbCache={key:null,v:null},elbKey='',showBounds=false;
+
+/* ═══════════ skalning & avstånd ═══════════ */
+function setW(){
+  if(!ds){WX=1;WY=1;return;}
+  const d=DS[ds].dom, sx=(d[0][1]-d[0][0])/100, sy=(d[1][1]-d[1][0])/100;
+  if(norm){WX=1;WY=1;}else{WX=sx;WY=sy;}
+}
+function d2(ax,ay,bx,by){const dx=(ax-bx)*WX,dy=(ay-by)*WY;return dx*dx+dy*dy;}
+function near(p,C){let b=0,bd=Infinity;(C||cens).forEach((c,i)=>{const d=d2(p.x,p.y,c.x,c.y);if(d<bd){bd=d;b=i;}});return b;}
+function wcss(){return pts.reduce((s,p)=>{const c=cens[p.c];return c?s+d2(p.x,p.y,c.x,c.y):s;},0);}
 function fin(){return iter>0&&changed===0;}
-function snap(){snaps.push({cens:cens.map(c=>({...c})),cs:pts.map(p=>p.c),it:iter});}
+function fmt(v){
+  if(v>=1e6)return (v/1e6).toFixed(v>=1e7?0:1)+' M';
+  if(v>=1e4)return Math.round(v/1e3)+' k';
+  if(v>=1000)return String(Math.round(v));
+  return v.toFixed(v<10?2:1);}
 
+/* ═══════════ algoritm ═══════════ */
+function load(){pts=ds?DS[ds].g(dataSeed).map(p=>({...p,c:-1,ch:false,old:-1})):[];reset();}
+function reset(){cens=[];iter=0;phase='init';hist=[];changed=null;snaps=[];view=null;
+  pts.forEach(p=>{p.c=-1;p.ch=false;p.old=-1;});elbCache.key=null;}
+function initC(P,k,r,mode){
+  if(mode==='rand'){const used=[],C=[];
+    while(C.length<k){const i=Math.floor(r()*P.length);if(used.includes(i))continue;used.push(i);C.push({x:P[i].x,y:P[i].y});}
+    return C;}
+  const C=[{...P[Math.floor(r()*P.length)]}];
+  while(C.length<k){
+    const d=P.map(q=>Math.min(...C.map(c=>d2(q.x,q.y,c.x,c.y))));
+    const T=d.reduce((a,b)=>a+b,0);let t=r()*T,i=0;
+    while(t>d[i]&&i<d.length-1){t-=d[i];i++;}
+    C.push({x:P[i].x,y:P[i].y});}
+  return C.map(c=>({x:c.x,y:c.y}));
+}
+function seed(){
+  const r=rng(1+tick*997+dataSeed*37+(seedMode==='rand'?5000:0));tick++;
+  cens=initC(pts,K,r,seedMode);
+  iter=0;phase='seeded';hist=[];changed=null;snaps=[];view=null;
+  pts.forEach(p=>{p.c=-1;p.ch=false;p.old=-1;});
+}
+function snap(){snaps.push({cens:cens.map(c=>({...c})),cs:pts.map(p=>p.c),it:iter,w:hist[hist.length-1],ch:changed});}
 
-const PW=620,PH=450,PD=24;
-const X=v=>PD+(v/100)*(PW-2*PD),Y=v=>PD+((100-v)/100)*(PH-2*PD);
-let built=false;
+/* full körning i bakgrunden – används av armbågskurvan och jämförelsen */
+function runFull(k,sd,mode,want){
+  const r=rng(sd),P=pts.map(p=>({...p,c:-1}));
+  let C=initC(P,k,r,mode||'pp');
+  for(let it=0;it<80;it++){
+    P.forEach(p=>{let b=0,bd=Infinity;C.forEach((c,i)=>{const d=d2(p.x,p.y,c.x,c.y);if(d<bd){bd=d;b=i;}});p.c=b;});
+    let sh=0;
+    C.forEach((c,i)=>{const o=P.filter(p=>p.c===i);if(!o.length)return;
+      const nx=o.reduce((s,p)=>s+p.x,0)/o.length,ny=o.reduce((s,p)=>s+p.y,0)/o.length;
+      sh+=Math.hypot(nx-c.x,ny-c.y);c.x=nx;c.y=ny;});
+    if(sh<.001)break;}
+  const w=P.reduce((s,p)=>s+d2(p.x,p.y,C[p.c].x,C[p.c].y),0);
+  return want?{w,C,cs:P.map(p=>p.c)}:w;
+}
+
+/* ═══════════ geometri: beslutsgränser ═══════════ */
+function clipHalf(poly,nx,ny,cst){
+  if(!poly.length)return poly;
+  const out=[],f=p=>nx*p[0]+ny*p[1]-cst;
+  for(let i=0;i<poly.length;i++){
+    const a=poly[i],b=poly[(i+1)%poly.length],fa=f(a),fb=f(b);
+    if(fa<=0)out.push(a);
+    if((fa<0&&fb>0)||(fa>0&&fb<0)){const t=fa/(fa-fb);out.push([a[0]+t*(b[0]-a[0]),a[1]+t*(b[1]-a[1])]);}}
+  return out;
+}
+function voronoi(C){
+  const rect=[[0,0],[100,0],[100,100],[0,100]];
+  return C.map((c,i)=>{
+    let poly=rect;
+    C.forEach((o,j)=>{
+      if(i===j)return;
+      const nx=2*WX*WX*(o.x-c.x), ny=2*WY*WY*(o.y-c.y);
+      const cst=WX*WX*(o.x*o.x-c.x*c.x)+WY*WY*(o.y*o.y-c.y*c.y);
+      poly=clipHalf(poly,nx,ny,cst);});
+    return poly;});
+}
+
+/* ═══════════ ritytan ═══════════ */
+const PW=620,PH=470,ML=48,MR=18,MT=18,MB=44;
+const X=v=>ML+(v/100)*(PW-ML-MR), Y=v=>MT+((100-v)/100)*(PH-MT-MB);
+const iX=px=>((px-ML)/(PW-ML-MR))*100, iY=py=>100-((py-MT)/(PH-MT-MB))*100;
+function realX(v){const d=DS[ds].dom[0];return d[0]+v/100*(d[1]-d[0]);}
+function realY(v){const d=DS[ds].dom[1];return d[0]+v/100*(d[1]-d[0]);}
+
 function build(){
-  const svg=document.getElementById('plot');
-  let g='<g class="grid" id="gG"></g><g id="gL"></g><g id="gR"></g><g id="gP"></g><g id="gC"></g>';
-  svg.innerHTML=g;
-  let gr='';for(let i=0;i<=10;i++)gr+=`<line x1="${X(i*10)}" y1="${Y(0)}" x2="${X(i*10)}" y2="${Y(100)}"/><line x1="${X(0)}" y1="${Y(i*10)}" x2="${X(100)}" y2="${Y(i*10)}"/>`;
-  document.getElementById('gG').innerHTML=gr;
-  document.getElementById('gP').innerHTML=pts.map((p,i)=>`<circle class="pt" id="p${i}" cx="${X(p.x)}" cy="${Y(p.y)}" r="5.4" fill="#4d5771" fill-opacity=".6"/>`).join('');
-  document.getElementById('gR').innerHTML=pts.map((p,i)=>`<circle class="ring" id="r${i}" cx="${X(p.x)}" cy="${Y(p.y)}" r="5"/>`).join('');
-  document.getElementById('gL').innerHTML=pts.map((p,i)=>`<line class="lnk" id="l${i}"/>`).join('');
-  document.getElementById('gC').innerHTML='';
-  const ax=(ds&&DS[ds].ax)||['',''];
-  svg.insertAdjacentHTML('beforeend',
-    `<g class="axl"><text x="${PW-PD}" y="${PH-6}" text-anchor="end">${ax[0]} →</text>`
-   +`<text x="${PD}" y="${PD-8}" text-anchor="start">↑ ${ax[1]}</text></g>`);
-  built=true;}
-function syncC(){const h=document.getElementById('gC');
-  if(h.childElementCount!==cens.length){
-    h.innerHTML=cens.map((c,i)=>`<g class="cen" id="c${i}" onclick="showCen(${i})" transform="translate(${X(c.x)},${Y(c.y)})">
-      <g class="cin" style="animation-delay:${i*120}ms">
-      <circle class="halo" r="16" fill="${COL[i%6]}" opacity=".18"/>
-      <circle r="10" fill="${COL[i%6]}" fill-opacity=".3" stroke="${COL[i%6]}" stroke-width="2"/>
-      <circle r="10.5" fill="#080a11" fill-opacity=".55"/>
-      <circle r="10.5" fill="${COL[i%6]}" fill-opacity=".26" stroke="${COL[i%6]}" stroke-width="1.8"/>
-      <path d="M-4.4,0 H4.4 M0,-4.4 V4.4" stroke="${COL[i%6]}" stroke-width="2.1" stroke-linecap="round"/>
-      <path class="tick" d="M-3.4,.2 L-1,2.6 L3.6,-2.4" stroke="${COL[i%6]}" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="translate(0,-16)"/></g></g>`).join('');
-  } else cens.forEach((c,i)=>document.getElementById('c'+i).setAttribute('transform',`translate(${X(c.x)},${Y(c.y)})`));}
+  const svg=$('plot');
+  svg.innerHTML='<title id="plotTitle"></title>'
+   +'<g class="grid" id="gG"></g><g id="gV"></g><g class="axis" id="gA"></g><g id="gT"></g>'
+   +'<g id="gL"></g><g id="gR"></g><g id="gP"></g><g class="hv" id="gH"></g><g id="gC"></g>'
+   +'<g class="axl" id="gX"></g><g class="axt" id="gTt"></g>';
+  let gr='';
+  for(let i=0;i<=4;i++)gr+=`<line x1="${X(i*25)}" y1="${Y(0)}" x2="${X(i*25)}" y2="${Y(100)}"/>`
+                          +`<line x1="${X(0)}" y1="${Y(i*25)}" x2="${X(100)}" y2="${Y(i*25)}"/>`;
+  $('gG').innerHTML=gr;
+  $('gA').innerHTML=`<line x1="${X(0)}" y1="${Y(0)}" x2="${X(100)}" y2="${Y(0)}"/>`
+                   +`<line x1="${X(0)}" y1="${Y(0)}" x2="${X(0)}" y2="${Y(100)}"/>`;
+  $('gP').innerHTML=pts.map((p,i)=>`<circle class="pt" id="p${i}" cx="${X(p.x)}" cy="${Y(p.y)}" r="5.2" fill="#4d5771" fill-opacity=".6" stroke-opacity="0" stroke-width="1.7"/>`).join('');
+  $('gR').innerHTML=pts.map((p,i)=>`<circle class="ring" id="r${i}" cx="${X(p.x)}" cy="${Y(p.y)}" r="5"/>`).join('');
+  $('gL').innerHTML=pts.map((p,i)=>`<line class="lnk" id="l${i}"/>`).join('');
+  $('gC').innerHTML='';$('gT').innerHTML='';$('gV').innerHTML='';$('gH').innerHTML='';
+  if(ds){
+    const ax=DS[ds].ax;
+    let t='';
+    for(let i=0;i<=4;i++){
+      const v=i*25;
+      t+=`<text x="${X(v)}" y="${Y(0)+18}" text-anchor="middle">${Math.round(realX(v))}</text>`;
+      t+=`<text x="${X(0)-9}" y="${Y(v)+4}" text-anchor="end">${Math.round(realY(v))}</text>`;}
+    $('gX').innerHTML=t;
+    $('gTt').innerHTML=`<text x="${(X(0)+X(100))/2}" y="${PH-8}" text-anchor="middle">${ax[0]}</text>`
+      +`<text transform="translate(13,${(Y(0)+Y(100))/2}) rotate(-90)" text-anchor="middle">${ax[1]}</text>`;
+    $('plotTitle').textContent=`Spridningsdiagram: ${ax[0]} mot ${ax[1]}, ${pts.length} datapunkter`;
+  } else $('plotTitle').textContent='Tomt diagram – ingen datamängd vald';
+  built=true;
+}
+
+/* ── beslutsgränser ── */
+let vPrevK=-1;
+/* Beslutsgränserna är avstängda som standard – eleven slår på dem själv. */
+function drawV(C,intro){
+  if(!showBounds||!C||!C.length){$('gV').innerHTML='';vPrevK=-1;return;}
+  drawVRaw(C,intro);
+}
+function currentC(){
+  if(view&&view.t==='preview')return view.cens;
+  if(view&&view.t==='hist')return snaps[view.i].cens;
+  return cens;
+}
+function toggleBounds(){
+  showBounds=!showBounds;
+  drawV(currentC(),true);
+  refresh();
+}
+function drawVRaw(C,intro){
+  const g=$('gV');
+  if(!C||!C.length){g.innerHTML='';vPrevK=-1;return;}
+  const polys=voronoi(C);
+  const doIntro=intro&&!RM.matches;
+  g.innerHTML=polys.map((poly,i)=>{
+    if(poly.length<3)return'';
+    const d='M'+poly.map(p=>X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join('L')+'Z';
+    return `<g class="vc${doIntro?' vin':''}" style="transform-origin:${X(C[i].x)}px ${Y(C[i].y)}px;`
+      +(doIntro?`animation-delay:${i*70}ms`:'')+`">`
+      +`<path d="${d}" fill="${COL[i%CN]}" fill-opacity="${phase==='init'||phase==='seeded'?'.055':'.085'}" `
+      +`stroke="${COL[i%CN]}" stroke-opacity=".3" stroke-width="1.2"/></g>`;}).join('');
+  vPrevK=C.length;
+}
+
+/* ── centroider ── */
+function syncC(C){
+  const V=C||cens,h=$('gC');
+  if(h.childElementCount!==V.length){
+    h.innerHTML=V.map((c,i)=>{
+      const col=COL[i%CN];
+      return `<g class="cen" id="c${i}" data-i="${i}" transform="translate(${X(c.x)},${Y(c.y)})" tabindex="0" role="button" aria-label="Centroid ${LTR[i]}">
+      <g class="cin" style="animation-delay:${i*110}ms">
+      <circle class="halo" r="16" fill="${col}" opacity=".18"/>
+      <circle class="hit" r="15" fill="transparent"/>
+      <circle r="10.5" fill="#080a11" fill-opacity=".72"/>
+      <circle class="rim" r="10.5" fill="${col}" fill-opacity=".26" stroke="${col}" stroke-width="1.9"/>
+      <path d="M-4.4,0 H4.4 M0,-4.4 V4.4" stroke="${col}" stroke-width="2.1" stroke-linecap="round"/>
+      <text class="clab" x="0" y="22" text-anchor="middle" fill="${col}">${LTR[i]}</text>
+      <path class="tick" d="M-3.4,.2 L-1,2.6 L3.6,-2.4" stroke="${col}" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="translate(0,-17)"/>
+      </g></g>`;}).join('');
+    bindCen();
+  } else V.forEach((c,i)=>{const e=$('c'+i);if(e)e.setAttribute('transform',`translate(${X(c.x)},${Y(c.y)})`);});
+}
+
+/* ── måla om ── */
 function paint(v){
   const V=v||{cens,cs:pts.map(p=>p.c)};
-  pts.forEach((p,i)=>{const c=V.cs[i],e=document.getElementById('p'+i);if(!e)return;
-    e.setAttribute('fill',c<0?'#4d5771':COL[c%6]);e.setAttribute('fill-opacity',c<0?'.6':'.95');
-    const L=document.getElementById('l'+i);
-    if(c>=0&&V.cens[c]){L.setAttribute('x1',X(p.x));L.setAttribute('y1',Y(p.y));
-      L.setAttribute('x2',X(V.cens[c].x));L.setAttribute('y2',Y(V.cens[c].y));L.setAttribute('stroke',COL[c%6]);
-      L.classList.toggle('show',phase==='assigned');}else L.classList.remove('show');});
-  document.getElementById('pmeta').textContent=cens.length?`${pts.length} punkter · k = ${K}`:`${pts.length} punkter`;}
-
-function doAssign(){
-  if(busy||!cens.length||phase==='assigned')return;busy=true;vSnap=null;forced=null;
-  const nc=pts.map(p=>near(p));
-  const first=pts.every(p=>p.c<0);
-  changed=first?null:pts.reduce((s,p,i)=>s+(p.c!==nc[i]?1:0),0);
-  phase='assigned';
-  pts.forEach((p,i)=>{const c=nc[i],L=document.getElementById('l'+i);
-    L.setAttribute('x1',X(p.x));L.setAttribute('y1',Y(p.y));
-    L.setAttribute('x2',X(cens[c].x));L.setAttribute('y2',Y(cens[c].y));
-    L.setAttribute('stroke',COL[c%6]);L.classList.add('show');});
-  /* punkterna färgas en i taget, i ordning ut från centroiderna */
-  lastChanged=-1;
-  const order=pts.map((p,i)=>({i,d:Math.hypot(p.x-cens[nc[i]].x,p.y-cens[nc[i]].y)}))
-                 .sort((a,b)=>a.d-b.d).map(o=>o.i);
-  const gap=Math.max(7,Math.min(26,900/pts.length));
-  order.forEach((i,rank)=>setTimeout(()=>{
-    const p=pts[i],was=p.c;p.c=nc[i];
-    if(was>=0&&was!==p.c&&lastChanged<0)lastChanged=i;
-    const e=document.getElementById('p'+i);if(!e)return;
-    e.setAttribute('fill',COL[p.c%6]);e.setAttribute('fill-opacity','.95');
-    e.classList.remove('pop');void e.getBBox;e.classList.add('pop');
-    if(was>=0&&was!==p.c){
-      const R=document.getElementById('r'+i);
-      R.setAttribute('stroke',COL[was%6]);R.classList.remove('show');void R.getBBox;R.classList.add('show');
-      e.setAttribute('stroke',COL[was%6]);e.setAttribute('stroke-width','3.2');
-      e.classList.remove('swap');void e.getBBox;e.classList.add('swap');}
-  },170+rank*gap));
-  setTimeout(()=>{hist.push(wcss());snap();paint();busy=false;refresh();},210+order.length*gap);}
-function doMove(){
-  if(busy||phase!=='assigned')return;busy=true;vSnap=null;forced=null;
-  let bs=-1;
-  cens.forEach((c,i)=>{const o=pts.filter(p=>p.c===i);if(!o.length)return;
-    const nx=o.reduce((s,p)=>s+p.x,0)/o.length,ny=o.reduce((s,p)=>s+p.y,0)/o.length;
-    const dd=Math.hypot(nx-c.x,ny-c.y);if(dd>bs){bs=dd;lastMoved=i;}c.x=nx;c.y=ny;});
-  iter++;phase='moved';
-  cens.forEach((_,i)=>{const e=document.getElementById('c'+i);if(!e)return;e.classList.add('glide');
-    setTimeout(()=>e.classList.remove('glide'),660);});
-  syncC();paint();
-  setTimeout(()=>{busy=false;refresh();},660);}
-async function auto(){
-  if(busy)return;
-  for(let i=0;i<40;i++){
-    doAssign();await new Promise(r=>setTimeout(r,620));
-    if(fin())break;
-    doMove();await new Promise(r=>setTimeout(r,800));}
-  document.querySelectorAll('.cen').forEach(e=>e.classList.add('fin'));refresh();}
-function fastRun(){for(let n=0;n<60;n++){const nc=pts.map(p=>near(p));
-  const first=pts.every(p=>p.c<0);
-  changed=first?null:pts.reduce((s,p,i)=>s+(p.c!==nc[i]?1:0),0);
-  pts.forEach((p,i)=>p.c=nc[i]);phase='assigned';hist.push(wcss());snap();
-  if(!first&&changed===0)break;
-  cens.forEach((c,i)=>{const o=pts.filter(p=>p.c===i);if(!o.length)return;
-    c.x=o.reduce((s,p)=>s+p.x,0)/o.length;c.y=o.reduce((s,p)=>s+p.y,0)/o.length;});iter++;}}
-function runFull(k,sd){const r=rng(sd),P=pts.map(p=>({...p,c:-1}));
-  let C=[{...P[Math.floor(r()*P.length)]}];
-  while(C.length<k){const d=P.map(p=>Math.min(...C.map(c=>(p.x-c.x)**2+(p.y-c.y)**2)));
-    const T=d.reduce((a,b)=>a+b,0);let t=r()*T,i=0;while(t>d[i]&&i<d.length-1){t-=d[i];i++;}
-    C.push({x:P[i].x,y:P[i].y});}
-  for(let it=0;it<60;it++){P.forEach(p=>{let b=0,bd=Infinity;C.forEach((c,i)=>{const d=(p.x-c.x)**2+(p.y-c.y)**2;if(d<bd){bd=d;b=i;}});p.c=b;});
-    let sh=0;C.forEach((c,i)=>{const o=P.filter(p=>p.c===i);if(!o.length)return;
-      const nx=o.reduce((s,p)=>s+p.x,0)/o.length,ny=o.reduce((s,p)=>s+p.y,0)/o.length;
-      sh+=Math.hypot(nx-c.x,ny-c.y);c.x=nx;c.y=ny;});if(sh<.01)break;}
-  return P.reduce((s,p)=>s+(p.x-C[p.c].x)**2+(p.y-C[p.c].y)**2,0);}
-
-function mets(){
-  const el=document.getElementById('mets');
-  if(!cens.length){el.innerHTML=pts.length?`<div><div class="mk">Datapunkter</div><div class="mv">${pts.length}</div></div>`:'';
-    document.getElementById('tl').innerHTML='';return;}
-  const w=hist.length?hist[hist.length-1]:null,pw=hist.length>1?hist[hist.length-2]:null;
-  const dp=(w!==null&&pw)?Math.round((w-pw)/pw*100):null;
-  const sz=cens.map((_,i)=>pts.filter(p=>p.c===i).length);
-  el.innerHTML=`<div><div class="mk">Varv i loopen</div><div class="mv">${iter}</div></div>
-    <div><div class="mk">Punkter som bytte grupp</div><div class="mv ${fin()?'zero':''}">${changed===null?'–':changed}</div></div>
-    <div><div class="mk">Punkter per grupp</div><div class="mv" style="font-size:19px">${sz.length?sz.join(' · '):'–'}</div></div>`;}
-function timeline(){const el=document.getElementById('tl');if(!el)return;
-  if(snaps.length<2){el.innerHTML='';return;}
-  el.innerHTML=`<span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;color:var(--dim);margin-right:11px">HISTORIK</span>`
-   +snaps.map((s,i)=>`${i?'<span class="tll"></span>':''}<button class="tp${(vSnap===null?i===snaps.length-1:vSnap===i)?' on':''}" onclick="showSnap(${i})">${s.it}</button>`).join('');}
-function showSnap(i){vSnap=i;const s=snaps[i];
-  s.cens.forEach((c,j)=>{const e=document.getElementById('c'+j);if(e)e.setAttribute('transform',`translate(${X(c.x)},${Y(c.y)})`);});
-  paint({cens:s.cens,cs:s.cs});timeline();}
-
-const T={
- centroid:{i:'✛',t:'Centroid',p:'Mittpunkten i en grupp, räknad som medelvärdet av de punkter som hör dit. Centroiden är algoritmens gissning på var gruppen har sin mitt. Den flyttar sig varje varv, tills gissningen inte längre ändras.'},
- oover:{i:'🔍',t:'Oövervakad inlärning',p:'Inlärning från data <b>utan facit</b>. Eftersom ingen har talat om vad punkterna föreställer kan modellen inte lära sig att härma rätt svar. Den kan bara leta efter mönster i hur punkterna ligger.'},
- avst:{i:'📉',t:'Hur tätt grupperna sitter',p:'Mät avståndet från varje datapunkt till sin egen centroid och lägg ihop alla dessa avstånd. Blir summan <b>liten</b> sitter punkterna tätt kring sina mittpunkter, alltså har algoritmen hittat sammanhållna grupper. Blir den <b>stor</b> ligger punkterna utspridda långt från sina centroider.<br><br>Det är precis den här summan k-means arbetar för att göra så liten som möjligt.<br><br>Måttet har ett eget namn: <b>WCSS</b>, efter engelskans <i>within-cluster sum of squares</i> — summan av kvadrerade avstånd inom klustren. Avstånden kvadreras innan de läggs ihop, vilket gör att en punkt som ligger riktigt långt bort väger tyngre än flera som ligger nästan rätt. Måttet straffar alltså enstaka punkter i fel grupp extra hårt.'},
- plus:{i:'✨',t:'Smart startläge (k-means++)',p:'Var centroiderna hamnar från början spelar roll. Om två av dem placeras i samma grupp kan algoritmen fastna i en dålig lösning som den inte tar sig ur.<br><br>Därför placeras de inte helt slumpmässigt. Den <b>första</b> centroiden lottas fram bland datapunkterna. Därefter är chansen att bli vald större för punkter som ligger <b>långt från de centroider som redan placerats</b>. På så vis hamnar de sällan nära varandra.<br><br>Metoden kallas <b>k-means++</b> och är det vanligaste sättet att välja startlägen. Den gör också att algoritmen blir färdig efter färre varv.'},
-  lokal:{i:'🕳️',t:'Lokalt minimum',p:'En lösning som inte går att förbättra med ett litet steg, men som ändå inte är den bästa möjliga. k-means hamnar där om centroiderna startar olyckligt, och kan inte ta sig därifrån på egen hand.'},
- armb:{i:'💪',t:'Armbågsmetoden',p:'Ett sätt att välja k. Man kör algoritmen med flera olika värden på k och ritar upp resultatet. Kurvan faller brant så länge extra centroider delar upp verkliga grupper, och planar ut när de bara delar upp grupper som redan är hela. Knäckpunkten kallas armbågen.'}
-};
-let cardEv=null;
-function placeCard(){
-  const c=document.getElementById('ccard');
-  if(cardEv){const dx=cardEv.clientX-window.innerWidth/2, dy=cardEv.clientY-window.innerHeight/2;
-    c.style.setProperty('--dx',dx+'px');c.style.setProperty('--dy',dy+'px');}
-  else{c.style.setProperty('--dx','0px');c.style.setProperty('--dy','0px');}
-  requestAnimationFrame(()=>{document.getElementById('scrim').classList.add('show');c.classList.add('show');});
+  const sz=V.cens.map((_,i)=>V.cs.filter(c=>c===i).length);
+  pts.forEach((p,i)=>{
+    const c=V.cs[i],e=$('p'+i);if(!e)return;
+    e.setAttribute('fill',c<0?'#4d5771':COL[c%CN]);
+    e.setAttribute('fill-opacity',c<0?'.6':'.95');
+    if(!v&&p.ch&&p.old>=0){e.setAttribute('stroke',COL[p.old%CN]);e.setAttribute('stroke-opacity','.85');}
+    else e.setAttribute('stroke-opacity','0');
+    const L=$('l'+i);
+    if(c>=0&&V.cens[c]){
+      L.setAttribute('x1',X(p.x));L.setAttribute('y1',Y(p.y));
+      L.setAttribute('x2',X(V.cens[c].x));L.setAttribute('y2',Y(V.cens[c].y));
+      L.setAttribute('stroke',COL[c%CN]);
+      if(v)L.classList.toggle('show',!!v.links);
+    }else L.classList.remove('show');});
+  V.cens.forEach((_,i)=>{const e=$('c'+i);if(!e)return;
+    const r=e.querySelector('.rim');if(r)r.setAttribute('stroke-dasharray',sz[i]===0?'3 3':'');
+    e.style.opacity=sz[i]===0?'.55':'1';});
+  const nm=(norm&&ds&&DS[ds].scaleLesson)?' · normaliserad':'';
+  $('pmeta').textContent=cens.length?`${pts.length} punkter · k = ${K}${nm}`:`${pts.length} punkter`;
 }
-function openCard(id,ev){const c=T[id];if(!c)return;cardEv=ev||window.event||null;
-  cIc.textContent=c.i;cTi.textContent=c.t;cBo.innerHTML=c.p;cCa.innerHTML='';placeCard();}
-function showCen(i){const o=pts.filter(p=>p.c===i),c=cens[i],L=String.fromCharCode(65+i);
-  cardEv=window.event||null;
-  cIc.textContent='✛';cTi.textContent='Centroid '+L;
-  cBo.innerHTML='Centroiden sitter i <b>medelvärdet</b> av de punkter som valt den. Varje gång punkterna byter tillhörighet räknas medelvärdet om, och centroiden glider dit.';
-  cCa.innerHTML=o.length?`<div class="calc">punkter som valt ${L} = <b>${o.length}</b><br>
-    x = (${o.slice(0,3).map(p=>p.x.toFixed(1)).join(' + ')}${o.length>3?' + …':''}) / ${o.length} = <b>${c.x.toFixed(1)}</b><br>
-    y = (${o.slice(0,3).map(p=>p.y.toFixed(1)).join(' + ')}${o.length>3?' + …':''}) / ${o.length} = <b>${c.y.toFixed(1)}</b></div>`:'';
-  placeCard();}
-function closeCard(){document.getElementById('ccard').classList.remove('show');
-  document.getElementById('scrim').classList.remove('show');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCard();});
-(function(){const inn=document.getElementById('ccardIn');if(!inn)return;
-  inn.addEventListener('pointermove',e=>{const r=inn.getBoundingClientRect();
+
+/* ═══════════ steg 3: tilldela ═══════════ */
+function doAssign(){
+  return new Promise(resolve=>{
+    if(busy||!cens.length||phase==='assigned'||view){resolve();return;}
+    busy=true;forced=null;
+    const nc=pts.map(p=>near(p));
+    const first=pts.every(p=>p.c<0);
+    changed=first?null:pts.reduce((s,p,i)=>s+(p.c!==nc[i]?1:0),0);
+    phase='assigned';
+    pts.forEach(p=>{p.ch=false;p.old=-1;});
+    refreshPanels();
+
+    /* Inget bytte kluster: iscensätt frånvaron av händelse. */
+    if(changed===0){
+      stageLabel('ingen punkt byter kluster');
+      const ord=pts.map((p,i)=>i);
+      ord.forEach((i,rank)=>setTimeout(()=>{const e=$('p'+i);if(e){e.classList.remove('dim');e.getAnimations().forEach(a=>a.cancel());e.classList.add('dim');}},rank*4));
+      setTimeout(()=>{
+        hist.push(wcss());snap();paint();busy=false;stageLabel('');
+        document.querySelectorAll('.cen').forEach(e=>e.classList.add('fin'));
+        refresh();resolve();},RM.matches?60:700);
+      return;}
+
+    stageLabel('de säkra först · gränsfallen sist');
+    const order=pts.map((p,i)=>({i,d:Math.sqrt(d2(p.x,p.y,cens[nc[i]].x,cens[nc[i]].y))}))
+                   .sort((a,b)=>a.d-b.d).map(o=>o.i);
+    const gap=RM.matches?0:Math.max(6,Math.min(24,900/pts.length));
+    order.forEach((i,rank)=>setTimeout(()=>{
+      const p=pts[i],was=p.c;p.c=nc[i];
+      const e=$('p'+i);if(!e)return;
+      e.setAttribute('fill',COL[p.c%CN]);e.setAttribute('fill-opacity','.95');
+      e.getAnimations().forEach(a=>a.cancel());e.classList.remove('pop');
+      requestAnimationFrame(()=>e.classList.add('pop'));
+      /* kopplingslinjen ritas i samma ögonblick som punkten färgas */
+      const L=$('l'+i);
+      L.setAttribute('x1',X(p.x));L.setAttribute('y1',Y(p.y));
+      L.setAttribute('x2',X(cens[p.c].x));L.setAttribute('y2',Y(cens[p.c].y));
+      L.setAttribute('stroke',COL[p.c%CN]);L.classList.add('show');
+      if(was>=0&&was!==p.c){
+        p.ch=true;p.old=was;
+        const R=$('r'+i);
+        R.setAttribute('stroke',COL[was%CN]);R.classList.remove('show');
+        R.getAnimations().forEach(a=>a.cancel());
+        requestAnimationFrame(()=>R.classList.add('show'));
+        e.setAttribute('stroke',COL[was%CN]);e.setAttribute('stroke-opacity','.85');}
+    },120+rank*gap));
+    setTimeout(()=>{
+      hist.push(wcss());snap();paint();busy=false;stageLabel('');
+      if(fin())document.querySelectorAll('.cen').forEach(e=>e.classList.add('fin'));
+      refresh();resolve();},200+order.length*gap+(RM.matches?0:220));
+  });
+}
+
+/* ═══════════ steg 4: flytta ═══════════ */
+function doMove(){
+  return new Promise(resolve=>{
+    if(busy||phase!=='assigned'||view){resolve();return;}
+    busy=true;forced=null;
+    const from=cens.map(c=>({...c})),to=cens.map(c=>({...c}));
+    cens.forEach((c,i)=>{const o=pts.filter(p=>p.c===i);if(!o.length)return;
+      to[i].x=o.reduce((s,p)=>s+p.x,0)/o.length;
+      to[i].y=o.reduce((s,p)=>s+p.y,0)/o.length;});
+    iter++;phase='moved';
+    pts.forEach(p=>{p.ch=false;p.old=-1;});
+    document.querySelectorAll('.lnk').forEach(l=>l.classList.remove('show'));
+
+    /* svans + siffra: hur långt flyttade sig varje centroid? */
+    const T=$('gT');
+    T.innerHTML=from.map((f,i)=>{
+      const d=Math.sqrt(d2(f.x,f.y,to[i].x,to[i].y));
+      if(d<.03)return'';
+      return `<line class="trail" x1="${X(f.x)}" y1="${Y(f.y)}" x2="${X(to[i].x)}" y2="${Y(to[i].y)}" stroke="${COL[i%CN]}" stroke-opacity=".65"/>`
+        +`<circle cx="${X(f.x)}" cy="${Y(f.y)}" r="3" fill="${COL[i%CN]}" fill-opacity=".45"/>`
+        +`<text class="tnum" x="${X((f.x+to[i].x)/2)}" y="${Y((f.y+to[i].y)/2)-8}" text-anchor="middle" fill="${COL[i%CN]}" fill-opacity=".9">Δ ${d.toFixed(1)}</text>`;}).join('');
+
+    const dur=RM.matches?1:700,t0=performance.now();
+    const ease=t=>1-Math.pow(1-t,3);
+    (function step(now){
+      const t=Math.min(1,(now-t0)/dur),e=ease(t);
+      const cur=from.map((f,i)=>({x:f.x+(to[i].x-f.x)*e,y:f.y+(to[i].y-f.y)*e}));
+      syncC(cur);drawV(cur,false);
+      if(t<1)requestAnimationFrame(step);
+      else{
+        cens=to;syncC();drawV(cens,false);paint();
+        T.style.transition='opacity var(--t3)';T.style.opacity='0';
+        setTimeout(()=>{T.innerHTML='';T.style.opacity='1';T.style.transition='';},RM.matches?1:700);
+        busy=false;refresh();resolve();}
+    })(t0);
+  });
+}
+
+/* ═══════════ automatkörning ═══════════ */
+async function auto(){
+  if(busy||running||view)return;
+  running=true;refresh();
+  for(let i=0;i<30&&running;i++){
+    await doAssign();
+    if(!running||fin())break;
+    await doMove();}
+  running=false;
+  document.querySelectorAll('.cen').forEach(e=>e.classList.toggle('fin',fin()));
+  refresh();
+}
+function stopAuto(){running=false;refresh();}
+
+/* ═══════════ dra centroider ═══════════ */
+function bindCen(){
+  document.querySelectorAll('.cen').forEach(el=>{
+    el.onpointerdown=ev=>{
+      if(busy||running||view)return;
+      ev.preventDefault();ev.stopPropagation();
+      dragI=+el.dataset.i;dragMoved=false;pushUndo();
+      el.classList.add('drag');el.setPointerCapture(ev.pointerId);
+      hoverIdx=-1;$('gH').innerHTML='';
+    };
+    el.onpointermove=ev=>{
+      if(dragI<0)return;
+      const r=$('plot').getBoundingClientRect();
+      const px=(ev.clientX-r.left)/r.width*PW, py=(ev.clientY-r.top)/r.height*PH;
+      cens[dragI].x=Math.min(99,Math.max(1,iX(px)));
+      cens[dragI].y=Math.min(99,Math.max(1,iY(py)));dragMoved=true;
+      syncC();drawV(cens,false);
+      /* förhandsvisning: punkterna antar färgen på området de står i */
+      paint({cens,cs:pts.map(p=>near(p))});
+    };
+    const end=ev=>{
+      if(dragI<0)return;
+      el.classList.remove('drag');
+      try{el.releasePointerCapture(ev.pointerId);}catch(e){}
+      dragI=-1;
+      if(!dragMoved){paint();return;}
+      if(phase==='assigned'){phase='moved';}
+      pts.forEach(p=>{p.ch=false;p.old=-1;});
+      document.querySelectorAll('.lnk').forEach(l=>l.classList.remove('show'));
+      paint();forced=3;refresh();
+      toast('Du flyttade en centroid för hand. Klicka på <b>Tilldela datapunkter</b> för att se vilka punkter som byter kluster.');
+    };
+    el.onpointerup=end;el.onpointercancel=end;
+    el.onclick=ev=>{ev.stopPropagation();if(dragMoved){dragMoved=false;return;}showCen(+el.dataset.i,ev);};
+    el.onkeydown=ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();showCen(+el.dataset.i,null);}};
+  });
+}
+
+/* ═══════════ avståndslinjal ═══════════ */
+function hoverRuler(idx){
+  const g=$('gH');
+  if(idx<0||!cens.length||busy||dragI>=0||view){
+    if(hoverIdx!==-1){g.innerHTML='';hoverIdx=-1;}return;}
+  if(idx===hoverIdx)return;
+  hoverIdx=idx;
+  const p=pts[idx],b=near(p);
+  g.innerHTML=cens.map((c,i)=>{
+    const d=Math.sqrt(d2(p.x,p.y,c.x,c.y)),on=i===b;
+    const mx=(X(p.x)+X(c.x))/2,my=(Y(p.y)+Y(c.y))/2;
+    return `<line x1="${X(p.x)}" y1="${Y(p.y)}" x2="${X(c.x)}" y2="${Y(c.y)}" stroke="${on?'#fff':COL[i%CN]}" stroke-opacity="${on?'.95':'.28'}" stroke-width="${on?2:1.3}"/>`
+      +`<text x="${mx}" y="${my-6}" text-anchor="middle" fill="${on?'#fff':COL[i%CN]}" fill-opacity="${on?'1':'.45'}">${d.toFixed(1)}</text>`;}).join('')
+    +`<circle cx="${X(p.x)}" cy="${Y(p.y)}" r="9" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="1.4"/>`;
+}
+(function(){
+  const svg=$('plot');
+  const track=ev=>{
+    if(dragI>=0||!cens.length||busy||view)return;
+    const r=svg.getBoundingClientRect();
+    const px=(ev.clientX-r.left)/r.width*PW, py=(ev.clientY-r.top)/r.height*PH;
+    let bi=-1,bd=18*18;
+    pts.forEach((p,i)=>{const d=(X(p.x)-px)**2+(Y(p.y)-py)**2;if(d<bd){bd=d;bi=i;}});
+    hoverRuler(bi);};
+  svg.addEventListener('pointermove',ev=>{if(ev.pointerType!=='touch')track(ev);});
+  svg.addEventListener('pointerdown',ev=>{if(ev.pointerType==='touch')track(ev);});
+  svg.addEventListener('pointerleave',()=>hoverRuler(-1));
+  svg.addEventListener('click',ev=>{
+    if(!cens.length||busy||view||dragI>=0)return;
+    const r=svg.getBoundingClientRect();
+    const px=(ev.clientX-r.left)/r.width*PW, py=(ev.clientY-r.top)/r.height*PH;
+    let bi=-1,bd=18*18;
+    pts.forEach((p,i)=>{const d=(X(p.x)-px)**2+(Y(p.y)-py)**2;if(d<bd){bd=d;bi=i;}});
+    if(bi>=0)showPoint(bi,ev);});
+})();
+
+/* ═══════════ nyckeltal ═══════════ */
+function mets(){
+  const el=$('mets');
+  if(!cens.length){
+    el.innerHTML=pts.length?`<div><div class="mk">Datapunkter</div><div class="mv">${pts.length}</div></div>`:'';
+    $('tl').innerHTML='';return;}
+
+  if(view&&view.t==='preview'){
+    el.innerHTML=`<div><div class="mk">Förhandsvisning</div><div class="mv">k = ${view.k}</div></div>
+      <div><div class="mk">Kvadrerade avstånd (WCSS)</div><div class="mv small">${fmt(view.w)}</div></div>
+      <div><div class="mk">Punkter per kluster</div><div class="mv small">${view.cens.map((_,i)=>
+        `<span style="color:${COL[i%CN]}">${LTR[i]} ${view.cs.filter(c=>c===i).length}</span>`).join(' ')}</div></div>`;
+    timeline();return;}
+
+  const S=(view&&view.t==='hist')?snaps[view.i]:null;
+  const it=S?S.it:iter, ch=S?S.ch:changed;
+  const w=S?S.w:(hist.length?hist[hist.length-1]:null);
+  const idx=S?snaps.indexOf(S):hist.length-1;
+  const pw=idx>0?hist[idx-1]:null;
+  const dp=(w!=null&&pw!=null&&pw>0)?Math.round((w-pw)/pw*100):null;
+  const cs=S?S.cs:pts.map(p=>p.c);
+  const sz=cens.map((_,i)=>cs.filter(c=>c===i).length);
+  const done=S?(S.it>0&&S.ch===0):fin();
+
+  el.innerHTML=`
+    <div><div class="mk">Varv i loopen</div><div class="mv">${it}</div></div>
+    <div><div class="mk">Punkter som bytte kluster</div><div class="mv ${done?'zero':''}">${ch==null?'–':ch}</div></div>
+    <div><div class="mk">Kvadrerade avstånd (WCSS)</div><div class="mv small">${w==null?'–':fmt(w)}
+        ${dp!=null?`<span class="delta">${dp<=0?'':'+'}${dp} %</span>`:''}</div>
+      ${sparkline()}</div>
+    <div><div class="mk">Punkter per kluster</div><div class="mv small">${sz.map((n,i)=>
+      `<span style="color:${COL[i%CN]}${n===0?';opacity:.5':''}">${LTR[i]} ${n}</span>`).join(' ')}</div></div>`;
+  timeline();
+}
+function sparkline(){
+  if(hist.length<2)return'';
+  const w=118,h=22,mx=Math.max(...hist),mn=0;
+  const px=i=>i/(hist.length-1)*(w-4)+2, py=v=>h-2-((v-mn)/((mx-mn)||1))*(h-6);
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" aria-hidden="true"><path d="${hist.map((v,i)=>(i?'L':'M')+px(i).toFixed(1)+','+py(v).toFixed(1)).join(' ')}"/></svg>`;
+}
+function timeline(){
+  const el=$('tl');
+  if(snaps.length<2){el.innerHTML='';return;}
+  const cur=(view&&view.t==='hist')?view.i:snaps.length-1;
+  el.innerHTML=`<span class="tlab">HISTORIK</span>`
+   +snaps.map((s,i)=>`${i?'<span class="tll"></span>':''}<button class="tp${i===cur?' on':''}" data-h="${i}" aria-label="Visa varv ${s.it}">${s.it}</button>`).join('');
+  el.querySelectorAll('.tp').forEach(b=>b.onclick=()=>showSnap(+b.dataset.h));
+}
+function showSnap(i){
+  if(i===snaps.length-1){clearView();return;}
+  view={t:'hist',i};
+  const s=snaps[i];
+  syncC(s.cens);drawV(s.cens,false);paint({cens:s.cens,cs:s.cs,links:true});
+  refresh();
+}
+function clearView(){
+  view=null;syncC();drawV(cens,false);paint();refresh();
+}
+function previewK(k){
+  const r=runFull(k,404,'pp',true);
+  view={t:'preview',k,w:r.w,cens:r.C,cs:r.cs};
+  syncC(r.C);drawV(r.C,true);paint({cens:r.C,cs:r.cs});
+  document.querySelectorAll('.lnk').forEach(l=>l.classList.remove('show'));
+  refresh();
+}
+function banner(){
+  const b=$('vbanner');
+  if(!view){b.classList.remove('on');b.innerHTML='';return;}
+  const txt=view.t==='hist'
+    ? `Du tittar på <b>varv ${snaps[view.i].it}</b> i historiken.`
+    : `Förhandsvisning av <b>k = ${view.k}</b>. Din egen körning är orörd.`;
+  b.innerHTML=`<span>${txt}</span><button class="psub" id="vback">Tillbaka till nu</button>`;
+  b.classList.add('on');
+  $('vback').onclick=clearView;
+}
+
+/* ═══════════ armbågskurvan ═══════════ */
+function elbowVals(){
+  const key=`${ds}|${dataSeed}|${norm}`;
+  if(elbCache.key===key)return elbCache.v;
+  const v=[1,2,3,4,5,6,7,8].map(k=>{
+    let best=Infinity;
+    for(let s=0;s<10;s++)best=Math.min(best,runFull(k,101+s*97+k*7));
+    return best;});
+  elbCache={key,v};return v;
+}
+/* Två oberoende mått, båda kalibrerade mot datamängderna:
+   A = kordavstånd på normaliserade axlar → avgör OM det finns en brytpunkt.
+   B = kollaps i förbättringstakt         → avgör VAR den sitter.
+   A ensam missar var brytpunkten ligger vid höga k; B ensam kan inte skilja
+   en verklig brytpunkt från en jämnt fallande kurva. Tillsammans klarar de båda. */
+function elbowBest(v){
+  const n=v.length, mn=v[n-1], rg=(v[0]-mn)||1;
+  const y=v.map(x=>(x-mn)/rg), x=v.map((_,i)=>i/(n-1));
+  let sA=0;
+  for(let i=1;i<n-1;i++)sA=Math.max(sA,Math.abs(x[i]+y[i]-1)/Math.SQRT2);
+  const d=[];for(let i=1;i<n;i++)d.push(v[i-1]-v[i]);
+  let bi=1,sB=Infinity;
+  for(let i=1;i<d.length;i++){const r=d[i]/(d[i-1]||1);if(r<sB){sB=r;bi=i;}}
+  return {k:bi+1, tier:(sA>=.40||sB<=.10)?2:(sA>=.34||sB<=.20)?1:0};
+}
+function elbow(){
+  const w=$('elb');if(!w||!pts.length)return;
+  const ks=[1,2,3,4,5,6,7,8],v=elbowVals();
+  const key=`${ds}|${dataSeed}|${norm}|${K}|${fin()?fmt(hist[hist.length-1]):''}`;
+  if(elbKey===key&&w.firstChild)return;
+  const fresh=elbKey.split('|').slice(0,3).join('|')!==`${ds}|${dataSeed}|${norm}`;
+  elbKey=key;
+  const W=470,H=250,L=54,R=16,Tp=16,B=52,mx=Math.max(...v)*1.06;
+  const px=i=>L+(i/(ks.length-1))*(W-L-R), py=x=>Tp+(1-x/mx)*(H-Tp-B);
+  let g=`<svg class="elb" viewBox="0 0 ${W} ${H}" role="img" aria-label="Armbågskurva: WCSS mot antal kluster">
+    <defs><linearGradient id="eg" x1="0" x2="1"><stop offset="0" stop-color="#7ea2ff"/><stop offset="1" stop-color="#b09bff"/></linearGradient></defs>`;
+  g+=`<line x1="${L}" y1="${py(0)}" x2="${W-R}" y2="${py(0)}" stroke="rgba(255,255,255,.13)"/>`;
+  g+=`<line x1="${L}" y1="${Tp}" x2="${L}" y2="${py(0)}" stroke="rgba(255,255,255,.13)"/>`;
+  [0,.5,1].forEach(f=>{const val=mx*f;
+    g+=`<line x1="${L}" y1="${py(val)}" x2="${W-R}" y2="${py(val)}" stroke="rgba(255,255,255,.05)"/>`;
+    g+=`<text x="${L-8}" y="${py(val)+4}" text-anchor="end">${fmt(val)}</text>`;});
+  g+=`<path class="ln${fresh&&!RM.matches?' draw':''}" stroke="url(#eg)" d="${v.map((x,i)=>(i?'L':'M')+px(i)+','+py(x)).join(' ')}"/>`;
+  v.forEach((x,i)=>{
+    const on=ks[i]===K;
+    if(on)g+=`<circle cx="${px(i)}" cy="${py(x)}" r="14" fill="none" stroke="#fff" stroke-opacity=".4"/>`;
+    g+=`<circle class="kd" cx="${px(i)}" cy="${py(x)}" r="${on?7.5:5}" fill="${on?'#fff':'#7ea2ff'}"/>`;
+    g+=`<circle class="hit" data-k="${ks[i]}" cx="${px(i)}" cy="${py(x)}" r="17"/>`;
+    g+=`<text x="${px(i)}" y="${H-B+20}" text-anchor="middle" ${on?'fill="#eef1f8"':''}>${ks[i]}</text>`;});
+  if(fin()&&hist.length){
+    const yv=hist[hist.length-1],xi=ks.indexOf(K);
+    if(xi>=0)g+=`<path d="M${px(xi)},${py(yv)-7} L${px(xi)+7},${py(yv)} L${px(xi)},${py(yv)+7} L${px(xi)-7},${py(yv)} Z" fill="none" stroke="${'#3ddc84'}" stroke-width="2"/>`;}
+  g+=`<text x="${(L+W-R)/2}" y="${H-8}" text-anchor="middle">antal kluster (k)</text>`;
+  g+=`<text transform="translate(13,${(Tp+py(0))/2}) rotate(-90)" text-anchor="middle">WCSS</text></svg>`;
+  w.innerHTML=g;
+  w.querySelectorAll('.hit').forEach(h=>h.onclick=()=>previewK(+h.dataset.k));
+}
+
+/* ═══════════ begreppskort ═══════════ */
+const ICO={
+ grid:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 3v18M3 12h18"/></svg>',
+ eye:'<svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>',
+ chart:'<svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>',
+ spark:'<svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>',
+ pit:'<svg viewBox="0 0 24 24"><path d="M3 6c3 0 3 9 6 9s3-6 6-6 3 5 6 5"/><path d="M3 20h18"/></svg>',
+ elbow:'<svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M6 6c5 0 3 11 12 11"/></svg>',
+ tile:'<svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M3 14l7-4 6 5 5-3"/></svg>',
+ scale:'<svg viewBox="0 0 24 24"><path d="M4 20V8M12 20V4M20 20v-9"/><path d="M2 20h20"/></svg>',
+ ruler:'<svg viewBox="0 0 24 24"><path d="M3 15 15 3l6 6L9 21z"/><path d="M7 11l2 2M10 8l2 2M13 5l2 2"/></svg>'
+};
+const T={
+ centroid:{i:'grid',t:'Centroid',p:'Mittpunkten i ett kluster, beräknad som medelvärdet av de punkter som hör dit. Centroiden utgör algoritmens gissning om var klustret har sin mitt, och förflyttas varje varv tills gissningen inte längre förändras.<br><br>Du kan <b>dra</b> en centroid i diagrammet för att se hur beslutsgränserna följer med.'},
+ oover:{i:'eye',t:'Oövervakad inlärning',p:'Inlärning från data <b>utan facit</b>. Vid övervakad inlärning finns ett känt rätt svar för varje exempel, och modellen tränas på att återge det. Här saknas det svaret helt.<br><br>Modellen kan därför inte mäta hur rätt den har. Den kan bara leta efter struktur i själva datan — här: vilka punkter som ligger nära varandra — och föreslå en indelning utifrån den. Att bedöma om indelningen är meningsfull är människans uppgift.'},
+ vor:{i:'tile',t:'Beslutsgränser',p:'Tilldelningen handlar inte om punkterna, utan om <b>platsen</b>. Varje plats i diagrammet — även de tomma ytorna — tillhör den centroid som ligger närmast. Det delar upp ytan i områden, och linjerna mellan dem kallas <b>beslutsgränser</b>: de visar var algoritmens beslut skiftar från ett kluster till ett annat.<br><br>En gräns mellan två centroider är alltid en <b>rät linje</b>: mittpunktsnormalen mellan dem. Därför får områdena raka kanter, och därför kan k-means inte följa böjda eller snedställda former. Indelningen har ett eget namn i matematiken — <b>Voronoi-diagram</b>.<br><br>När en centroid flyttar sig flyttar gränsen sig med. Punkter som hamnar på fel sida byter kluster nästa varv — det är precis därför loopen måste upprepas.<br><br>Slå på och av gränserna med knappen uppe till vänster i diagrammet.'},
+ avst:{i:'chart',t:'WCSS – summan av kvadrerade avstånd',p:'Mät avståndet från varje datapunkt till dess egen centroid, kvadrera avstånden och lägg ihop dem. Blir summan <b>liten</b> ligger punkterna tätt kring sina mittpunkter. Blir den <b>stor</b> ligger de utspridda.<br><br>Det är denna summa k-means arbetar för att göra så liten som möjligt. Den kan aldrig öka mellan två varv, och det är förklaringen till att algoritmen alltid stannar.<br><br>Måttet kallas <b>WCSS</b>, efter engelskans <i>within-cluster sum of squares</i>. Att avstånden kvadreras innebär att en punkt som ligger långt bort väger tyngre än flera som ligger nästan rätt.'},
+ plus:{i:'spark',t:'Smart startläge (k-means++)',p:'Var centroiderna hamnar från början har betydelse. Placeras två av dem i samma kluster kan algoritmen fastna i en dålig lösning som den inte tar sig ur.<br><br>Den <b>första</b> centroiden lottas fram bland datapunkterna. Därefter är chansen att bli vald större för punkter som ligger <b>långt från de centroider som redan placerats</b>.<br><br>Metoden kallas <b>k-means++</b>. Den ger färre varv och sällan riktigt dåliga resultat, men den avlägsnar inte problemet — den gör det bara mindre vanligt.'},
+ lokal:{i:'pit',t:'Lokalt minimum',p:'En lösning som inte går att förbättra med ett litet steg, men som ändå inte är den bästa möjliga. k-means hamnar där om centroiderna startar olyckligt, och kan inte ta sig därifrån på egen hand.<br><br>Det betyder att algoritmen är <b>icke-deterministisk</b>: samma data kan ge olika svar olika gånger. I praktiken kör man därför k-means många gånger och behåller den körning som gav lägst WCSS.'},
+ armb:{i:'elbow',t:'Armbågsmetoden',p:'Ett sätt att välja k. Man kör algoritmen med flera olika värden på k och ritar upp WCSS. Kurvan faller brant så länge extra centroider delar upp verkliga kluster, och planar ut när de enbart delar upp kluster som redan är sammanhållna. Brytpunkten kallas armbågen.<br><br>Metoden ger ett förslag, inte ett facit. Saknar kurvan en tydlig brytpunkt är det i sig ett besked: datan har sannolikt ingen klusterstruktur.'},
+ norm:{i:'scale',t:'Normalisering',p:'Avståndsformeln tar ingen hänsyn till enheter. Mäts den ena egenskapen i hundratals och den andra i tiotal blir den första automatiskt viktigare, utan att någon har fattat det beslutet.<br><br><b>Normalisering</b> räknar om varje egenskap till samma skala innan avstånden beräknas, till exempel så att alla värden hamnar mellan 0 och 1. Då väger egenskaperna lika.<br><br>Detta är ett av de vanligaste misstagen i praktiskt maskininlärningsarbete: modellen ser rimlig ut, men styrs i själva verket av vilken enhet någon råkade välja.'}
+};
+let cardEv=null,lastFocus=null;
+function openCard(id,ev){const c=T[id];if(!c)return;cardEv=ev||null;
+  $('cIc').innerHTML=ICO[c.i]||'';$('cTi').textContent=c.t;$('cBo').innerHTML=c.p;$('cCa').innerHTML='';showCard();}
+function showCen(i,ev){
+  const o=pts.filter(p=>p.c===i),c=cens[i],L=LTR[i];cardEv=ev||null;
+  $('cIc').innerHTML=ICO.grid;$('cTi').textContent='Centroid '+L;
+  $('cBo').innerHTML=o.length
+    ? 'Centroiden placeras i <b>medelvärdet</b> av de punkter som tilldelats den. Varje gång punkterna byter tillhörighet beräknas medelvärdet om, och centroiden förflyttas dit.'
+    : 'Den här centroiden har <b>inga punkter alls</b>. Det finns inget medelvärde att beräkna, så den kan inte flytta sig, utan står kvar där den råkade hamna.<br><br>En tom centroid är den tydligaste signalen på att <b>k är för högt</b> för den här datan.';
+  $('cCa').innerHTML=o.length?`<div class="calc">punkter som valt ${L} = <b>${o.length}</b><br>
+    summa x = <b>${o.reduce((s,p)=>s+p.x,0).toFixed(1)}</b> → ${o.reduce((s,p)=>s+p.x,0).toFixed(1)} / ${o.length} = <b>${c.x.toFixed(1)}</b><br>
+    summa y = <b>${o.reduce((s,p)=>s+p.y,0).toFixed(1)}</b> → ${o.reduce((s,p)=>s+p.y,0).toFixed(1)} / ${o.length} = <b>${c.y.toFixed(1)}</b></div>`:'';
+  showCard();
+}
+function showPoint(i,ev){
+  if(!cens.length)return;
+  const p=pts[i], b=near(p), nz=norm&&ds&&DS[ds].scaleLesson;
+  /* Visas i samma enheter som avståndet faktiskt räknas i: verkliga
+     axelvärden när datan är oskalad, 0–100 när den är normaliserad. */
+  const fx=v=>nz?v:realX(v), fy=v=>nz?v:realY(v);
+  const n1=v=>v.toFixed(1);
+  cardEv=ev||null;
+  $('cIc').innerHTML=ICO.ruler;
+  $('cTi').textContent='Avstånd till varje centroid';
+  $('cBo').innerHTML=`Punkten ligger i (<b>${n1(fx(p.x))}</b>, <b>${n1(fy(p.y))}</b>)${
+    (ds&&DS[ds].scaleLesson)?(nz?' på normaliserad skala':` — ${DS[ds].ax[0].toLowerCase()} och ${DS[ds].ax[1].toLowerCase()}`):''
+    }. Avståndet beräknas till <b>samtliga ${cens.length}</b> centroider, varefter punkten tilldelas den närmaste.`;
+  const rows=cens.map((c,j)=>{
+    const d=Math.sqrt(d2(p.x,p.y,c.x,c.y)), on=j===b;
+    return `<div class="drow${on?' win':''}">
+      <span class="dl" style="color:${COL[j%CN]}">${LTR[j]}</span>
+      <span class="de">√( (${n1(fx(p.x))} − ${n1(fx(c.x))})² + (${n1(fy(p.y))} − ${n1(fy(c.y))})² )</span>
+      <span class="dv">${n1(d)}</span></div>`;}).join('');
+  $('cCa').innerHTML=`<div class="calc dcalc">${rows}</div>
+    <p style="margin-top:13px">Kortast avstånd har <b style="color:${COL[b%CN]}">${LTR[b]}</b>, så punkten tilldelas det klustret.</p>
+    <p style="margin-top:9px;font-size:13px;color:var(--dim)">Kvadratroten behöver i själva verket inte dras. Det räcker att jämföra kvadratsummorna, eftersom rotutdragning bevarar ordningen mellan värdena — en genväg som används i de flesta program för att spara beräkningstid.</p>`;
+  showCard();
+}
+function compareCard(){
+  const a=runFull(K,7001,'rand',true),b=runFull(K,90210,'rand',true);
+  cardEv=null;
+  $('cIc').innerHTML=ICO.pit;$('cTi').textContent='Två slumpade startlägen';
+  $('cBo').innerHTML='Samma data och samma k, men centroiderna har lottats ut helt slumpmässigt två gånger. Jämför WCSS: <b>lägre värde är bättre</b>.';
+  $('cCa').innerHTML=`<div class="cmp">
+      <div>${mini(a)}<div class="cl">WCSS <b>${fmt(a.w)}</b></div></div>
+      <div>${mini(b)}<div class="cl">WCSS <b>${fmt(b.w)}</b></div></div></div>
+    <p style="margin-top:14px">${Math.abs(a.w-b.w)/Math.max(a.w,b.w)>0.02
+      ? 'Körningarna hamnade i <b>olika lösningar</b>. Den sämre av dem sitter fast i ett <b>lokalt minimum</b>: inget litet steg kan förbättra den, men den är ändå inte den bästa möjliga.'
+      : 'Här hamnade de båda körningarna på ungefär samma lösning. Öppna jämförelsen igen — utfallen skiljer sig inte varje gång, men tillräckligt ofta.'}</p>
+    <p style="margin-top:9px">Av det skälet körs k-means normalt flera gånger, varefter den körning som gav lägst WCSS behålls. Det är också bakgrunden till <b>k-means++</b>.</p>`;
+  showCard();
+}
+function mini(r){
+  const w=210,h=160,mrg=8;
+  const mx=v=>mrg+v/100*(w-2*mrg), my=v=>mrg+(100-v)/100*(h-2*mrg);
+  let s=`<svg viewBox="0 0 ${w} ${h}">`;
+  pts.forEach((p,i)=>{s+=`<circle cx="${mx(p.x).toFixed(1)}" cy="${my(p.y).toFixed(1)}" r="2.4" fill="${COL[r.cs[i]%CN]}" fill-opacity=".9"/>`;});
+  r.C.forEach((c,i)=>{s+=`<circle cx="${mx(c.x).toFixed(1)}" cy="${my(c.y).toFixed(1)}" r="5.5" fill="#080a11" stroke="${COL[i%CN]}" stroke-width="2"/>`;});
+  return s+'</svg>';
+}
+function showCard(){
+  const c=$('ccard');
+  if(cardEv&&cardEv.clientX){
+    c.style.setProperty('--dx',(cardEv.clientX-window.innerWidth/2)+'px');
+    c.style.setProperty('--dy',(cardEv.clientY-window.innerHeight/2)+'px');
+  }else{c.style.setProperty('--dx','0px');c.style.setProperty('--dy','0px');}
+  lastFocus=document.activeElement;
+  document.body.style.overflow='hidden';
+  requestAnimationFrame(()=>{$('scrim').classList.add('show');c.classList.add('show');$('cClose').focus();});
+}
+function closeCard(){
+  $('ccard').classList.remove('show');$('scrim').classList.remove('show');
+  document.body.style.overflow='';
+  if(lastFocus&&lastFocus.focus)lastFocus.focus();
+}
+$('cClose').onclick=closeCard;
+$('scrim').onclick=closeCard;
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&$('ccard').classList.contains('show'))closeCard();
+  if(e.key==='Tab'&&$('ccard').classList.contains('show')){
+    const f=$('ccard').querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])');
+    if(!f.length)return;
+    const first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
+});
+/* 3D-tilt behålls – del av designsystemet på ai-aktiviteter.se */
+(function(){const inn=$('ccardIn');
+  inn.addEventListener('pointermove',e=>{
+    if(RM.matches)return;
+    const r=inn.getBoundingClientRect();
     const px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
     inn.style.setProperty('--mx',(px*100)+'%');inn.style.setProperty('--my',(py*100)+'%');
     inn.style.transform=`perspective(1000px) rotateX(${(0.5-py)*7}deg) rotateY(${(px-0.5)*7}deg)`;});
   inn.addEventListener('pointerleave',()=>{inn.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';});})();
-function hyd(){document.querySelectorAll('.term[data-t]').forEach(e=>e.onclick=(ev)=>openCard(e.dataset.t,ev));}
 
+/* ═══════════ ångra & meddelanden ═══════════ */
+function pushUndo(){
+  undoState=JSON.stringify({ds,K,dataSeed,seedMode,norm,guess,tick,iter,phase,changed,
+    hist,snaps,cens,pts:pts.map(p=>({x:p.x,y:p.y,c:p.c,ch:p.ch,old:p.old}))});
+}
+function offerUndo(msg){
+  const u=$('undo');
+  u.innerHTML=`<span>${msg}</span><button class="psub" id="undoBtn">Ångra</button>`;
+  u.classList.add('on');
+  $('undoBtn').onclick=()=>{doUndo();hideUndo();};
+  clearTimeout(undoTimer);undoTimer=setTimeout(hideUndo,7000);
+}
+function toast(msg){
+  const u=$('undo');u.innerHTML=`<span>${msg}</span>`;u.classList.add('on');
+  clearTimeout(undoTimer);undoTimer=setTimeout(hideUndo,5000);
+}
+function hideUndo(){$('undo').classList.remove('on');}
+function doUndo(){
+  if(!undoState)return;
+  const s=JSON.parse(undoState);
+  ds=s.ds;K=s.K;dataSeed=s.dataSeed;seedMode=s.seedMode;norm=s.norm;guess=s.guess;tick=s.tick;
+  iter=s.iter;phase=s.phase;changed=s.changed;hist=s.hist;snaps=s.snaps;cens=s.cens;
+  setW();
+  pts=s.pts.map(p=>({...p}));
+  view=null;forced=null;elbCache.key=null;elbKey='';
+  built=false;build();syncC();drawV(cens,false);paint();render();
+}
 
+/* ═══════════ scenetikett ═══════════ */
+function stageLabel(t){
+  const e=$('stagelbl');
+  if(!t){e.classList.remove('on');return;}
+  e.textContent=t;e.classList.add('on');
+}
 
-/* ═════════ gränssnitt: vertikal pipeline ═════════ */
-const PC=['#5b8cff','#8b7dff','#ffcf5c','#3ddc84','#3ee0e0'];
-let dsChosen=false,celebrated=false;
+/* ═══════════ pipeline ═══════════ */
 function naturalStep(){
-  if(!ds||(!dsChosen&&!cens.length))return 1;
-  if(!cens.length)return 2;
+  if(!ds)return 1;
+  if(!cens.length)return dsChosen?2:1;
   if(fin())return 5;
   return phase==='assigned'?4:3;
 }
-/* forced låter eleven bläddra tillbaka utan att tappa körningen */
 function activeStep(){return forced!==null?forced:naturalStep();}
+function focusStep(n){
+  const nat=naturalStep();
+  forced=(n===nat)?null:n;
+  render();
+}
 function pipeUI(){
-  const act=activeStep();
+  const act=activeStep(),nat=naturalStep();
   document.querySelectorAll('.pstep').forEach(el=>{
     const n=+el.dataset.s;
     el.style.setProperty('--c',PC[n-1]);
-    const nat=naturalStep();
+    const avail=n<=Math.max(nat,act);
     el.classList.toggle('on',n===act);
     el.classList.toggle('back',n===act&&forced!==null&&forced!==nat);
     el.classList.toggle('done',n<nat||(fin()&&n<5));
-    el.classList.toggle('avail',n<=Math.max(nat,act));
-    el.onclick=n<=Math.max(nat,act)?(ev)=>{ev.stopPropagation();focusStep(n);}:null;
-  });
-  const pipe0=document.getElementById('pipe');
-  pipe0.classList.toggle('live',cens.length&&!fin());
-  pipe0.classList.toggle('done',fin());
+    el.classList.toggle('avail',avail);
+    const h=el.querySelector('.phead');
+    h.setAttribute('aria-expanded',n===act?'true':'false');
+    h.disabled=!avail;
+    h.onclick=avail?()=>focusStep(n):null;});
+  const pipe=$('pipe');
+  const wasLive=pipe.classList.contains('live');
+  const live=!!cens.length&&!fin();
+  pipe.classList.toggle('live',live);
+  pipe.classList.toggle('done',fin());
+  if(live&&!wasLive){pipe.classList.remove('enter');void pipe.offsetWidth;pipe.classList.add('enter');}
   if(fin()&&!celebrated){celebrated=true;const s5=document.querySelector('.pstep[data-s="5"]');
     if(s5){s5.classList.remove('win');void s5.offsetWidth;s5.classList.add('win');}}
   if(!fin())celebrated=false;
-  /* loopbågen spänns över steg 3 och 4 */
+  $('phdot').style.setProperty('--c',PC[act-1]);
+  railGeom();
+}
+function railGeom(){
   const a=document.querySelector('.pstep[data-s="3"]'),b=document.querySelector('.pstep[data-s="4"]'),
-        rail=document.querySelector('.looprail'),pipe=document.getElementById('pipe');
-  if(a&&b&&rail){const pr=pipe.getBoundingClientRect();
-    rail.style.setProperty('--lt',(a.getBoundingClientRect().top-pr.top-8)+'px');
-    rail.style.setProperty('--lh',(b.getBoundingClientRect().bottom-a.getBoundingClientRect().top+16)+'px');}
+        rail=document.querySelector('.looprail'),pipe=$('pipe');
+  if(!a||!b||!rail)return;
+  const pr=pipe.getBoundingClientRect();
+  rail.style.setProperty('--lt',(a.getBoundingClientRect().top-pr.top-8)+'px');
+  rail.style.setProperty('--lh',(b.getBoundingClientRect().bottom-a.getBoundingClientRect().top+16)+'px');
 }
-function focusStep(n){if(n>=2)dsChosen=true;forced=(forced===n?null:n);render();}
-let forced=null;
+/* bågen hålls fastlimmad även medan panelerna animerar */
+if(window.ResizeObserver){
+  const ro=new ResizeObserver(()=>railGeom());
+  document.querySelectorAll('.pstep').forEach(el=>ro.observe(el));
+  ro.observe($('pipe'));
+}
+window.addEventListener('resize',railGeom);
+document.fonts&&document.fonts.ready.then(railGeom);
+
+/* ═══════════ panelinnehåll ═══════════ */
+const lock=()=>busy||running||!!view;
 function pipeBodies(){
-  const B=id=>document.getElementById(id);
-  B('p1body').innerHTML=`<p>Varje punkt är ett objekt som beskrivs av två mätvärden. <b>Ingen har talat om vilken grupp punkterna hör till</b> — det finns inget rätt svar att härma efter, bara avstånd att tolka. Det kallas <span class="term" data-t="oover">oövervakad inlärning</span>.</p>
-    <div class="chips" style="margin-top:11px">${Object.entries(DS).map(([id,d])=>`<button class="chip${id===ds?' on':''}" onclick="event.stopPropagation();pick('${id}')">${d.n}</button>`).join('')}</div>
-    <p style="margin-top:11px">${ds?DS[ds].tip:'Välj en datamängd ovan för att börja.'}</p>
-    ${ds?`<div class="pact"><button class="psub" onclick="event.stopPropagation();newData()">↺ Nya datapunkter</button></div>`:''}`;
-  B('p2body').innerHTML=`<p>Först bestäms ett värde på <b>k</b> — hur många kluster algoritmen ska hitta. Sedan placeras k punkter ut i diagrammet. En sådan punkt representerar ett klusters mittpunkt och kallas <span class="term" data-t="centroid">centroid</span>.</p>
-    <div class="chips krow" style="margin-top:11px">${[2,3,4,5,6].map(k=>`<button class="chip${k===K?' on':''}" onclick="event.stopPropagation();setK(${k})">${k}</button>`).join('')}</div>
-    <div class="pact"><button class="pbig" style="--c:#8b7dff" onclick="event.stopPropagation();place()" ${ds?'':'disabled'}>${cens.length?'Placera om':'Placera centroider'}</button></div>
-    ${cens.length?`<p style="margin-top:11px">Placeringen är slumpmässig, men styrd så att centroiderna hamnar utspridda. Metoden kallas <span class="term" data-t="plus">k-means++</span>.</p>`:''}`;
-  B('p3body').innerHTML=`<p>För varje datapunkt beräknas avståndet till <b>alla</b> centroider, och punkten tilldelas den närmaste. Oftast används det euklidiska avståndet:</p>
+  const L=lock();
+  const sz=cens.map((_,i)=>pts.filter(p=>p.c===i).length);
+  const empty=cens.length&&sz.some(n=>n===0);
+
+  const guessUI = !ds ? '' : (guess===null&&!guessDone)
+    ? `<div class="gbox"><span class="gt">Innan du går vidare</span>
+        <p>Studera diagrammet och gör en egen bedömning: hur många kluster ser du? Bedömningen påverkar ingenting i simuleringen, utan sparas till steg 5.</p>
+        <div class="grow">${[2,3,4,5,6].map(k=>`<button class="chip" data-g="${k}">${k}</button>`).join('')}
+          <button class="chip wide" data-g="0">Inga tydliga</button>
+          <button class="skip" data-g="-1">Hoppa över</button></div></div>`
+    : (guess!==null)
+    ? `<div class="gbox done">Din bedömning: <b>${guess===0?'inga tydliga kluster':guess+' kluster'}</b>. Den jämförs med armbågskurvan i steg 5.</div>`
+    : '';
+
+  $('p1body').innerHTML=`<div class="pdin">
+    <p>Varje punkt är ett objekt som beskrivs av två mätvärden. I datan finns <b>inget känt facit</b>: ingenting talar om hur många grupper som finns, eller vilken grupp ett enskilt objekt tillhör.</p>
+    <p>Algoritmen har alltså inget rätt svar att härma. Den har bara punkternas inbördes avstånd att utgå från, och söker utifrån dem ett mönster att dela in datan efter. Den sortens inlärning kallas <button class="term" data-t="oover">oövervakad inlärning</button>.</p>
+    <span class="slbl">Datamängd</span>
+    <div class="chips">${Object.entries(DS).map(([id,d])=>`<button class="chip${id===ds?' on':''}" data-ds="${id}">${d.n}</button>`).join('')}</div>
+    <p style="margin-top:11px">${ds?DS[ds].tip:'Välj en datamängd för att börja.'}</p>
+    ${guessUI}
+    ${ds?`<div class="pact"><button class="pbig" style="--c:${PC[0]}" id="goStep2">Välj datamängd →</button>
+      <button class="psub" id="newData">↺ Nya datapunkter</button></div>`:''}</div>`;
+
+  $('p2body').innerHTML=`<div class="pdin">
+    <p>Först bestäms ett värde på <b>k</b> — hur många kluster datan ska delas in i. Antalet måste anges i förväg; algoritmen kan inte avgöra det själv. Därefter placeras k punkter ut i diagrammet. En sådan punkt utgör ett klusters mittpunkt och kallas <button class="term" data-t="centroid">centroid</button>.</p>
+    <span class="slbl">Antal kluster (k)</span>
+    <div class="chips krow">${[2,3,4,5,6,7,8].map(k=>`<button class="chip${k===K?' on':''}" data-k="${k}"${L?' disabled':''}>${k}</button>`).join('')}</div>
+    <span class="slbl">Startläge</span>
+    <div class="chips">
+      <button class="chip${seedMode==='pp'?' on':''}" data-sm="pp"${L?' disabled':''}>Smart (k-means++)</button>
+      <button class="chip${seedMode==='rand'?' on':''}" data-sm="rand"${L?' disabled':''}>Slumpmässigt</button></div>
+    <div class="pact"><button class="pbig" style="--c:${PC[1]}" id="placeBtn"${ds&&!L?'':' disabled'}>${cens.length?'Placera om':'Placera centroider'}</button></div>
+    ${cens.length?`<p style="margin-top:11px">${seedMode==='pp'
+      ? 'Startlägena lottas fram, men styrt: varje ny centroid dras med större sannolikhet till områden långt från de redan placerade. Metoden kallas <button class="term" data-t="plus">k-means++</button>.'
+      : 'Startlägena lottas fram helt slumpmässigt. Då är risken större att algoritmen fastnar i ett <button class="term" data-t="lokal">lokalt minimum</button>.'}</p>
+      <p>Varje centroid gör nu anspråk på alla platser som ligger närmare den än någon annan centroid. Slå på <button class="term" data-t="vor">beslutsgränserna</button> med knappen uppe till vänster i diagrammet för att se indelningen — och <b>dra</b> sedan en centroid, så följer gränserna med.</p>
+      <div class="pact"><button class="psub" id="cmpBtn"${L?' disabled':''}>Jämför två slumpade startlägen</button></div>`:''}</div>`;
+
+  const normUI=(ds&&DS[ds].scaleLesson)?`
+    <span class="slbl">Avståndet räknas på</span>
+    <div class="chips">
+      <button class="chip${!norm?' on':''}" data-nm="0"${L?' disabled':''}>Rådata</button>
+      <button class="chip${norm?' on':''}" data-nm="1"${L?' disabled':''}>Normaliserade värden</button></div>
+    <div class="note${norm?' e':' g'}">${norm
+      ? 'Båda egenskaperna räknas nu om till samma skala innan avstånden beräknas, och väger därmed lika tungt. Läs mer om <button class="term" data-t="norm">normalisering</button>.'
+      : `Lönen spänner över ${DS[ds].dom[0][1]-DS[ds].dom[0][0]} enheter, åldern över ${DS[ds].dom[1][1]-DS[ds].dom[1][0]}. Avståndet kommer därför att domineras av lönen. Läs om <button class="term" data-t="norm">normalisering</button>.`}</div>`:'';
+
+  $('p3body').innerHTML=`<div class="pdin">
+    <p>För varje datapunkt beräknas avståndet till <b>alla</b> centroider, och punkten tilldelas den närmaste. Oftast används det euklidiska avståndet:</p>
     <div class="fml">d = √( (x<sub>i</sub> − x<sub>c</sub>)² + (y<sub>i</sub> − y<sub>c</sub>)² )</div>
-    <div class="pact"><button class="pbig" style="--c:#ffcf5c" onclick="event.stopPropagation();doAssign()" ${cens.length&&phase!=='assigned'&&!busy?'':'disabled'}>Tilldela datapunkter</button></div>`;
-  B('p4body').innerHTML=`<p>En <b>ny mittpunkt</b> beräknas för varje kluster: genomsnittet av alla datapunkters koordinater i klustret. Centroiden flyttas dit.</p>
-    <p>Eftersom centroiderna rört sig kan vissa punkter nu ligga närmare en <b>annan</b> centroid. Därför börjar algoritmen om från steg 3. De två stegen växlar tills inga punkter längre byter kluster.</p>
-    <div class="pact"><button class="pbig" style="--c:#3ddc84" onclick="event.stopPropagation();doMove()" ${phase==='assigned'&&!busy?'':'disabled'}>Flytta centroider</button>
-      <button class="psub" onclick="event.stopPropagation();auto()" ${cens.length&&!busy&&!fin()?'':'disabled'}>Träna klart →</button></div>`;
-  const b=ds?DS[ds].best:null;
-  B('p5body').innerHTML=`<p>${fin()?`<b>Klart efter ${iter} varv.</b> Ingen punkt bytte kluster i sista varvet, så centroiderna kan inte flytta sig mer.</p><p>`:''}Det finns inget objektivt rätt värde på k — valet beror på situationen och syftet. Ett lågt k ger en övergripande indelning, ett högre ger en mer detaljerad bild.</p>
-    <div id="elb" style="margin:12px 0"></div>
-    <p>Kurvan visar hur det <span class="term" data-t="avst">måttet på hur tätt grupperna sitter</span> minskar för varje extra kluster. Den planar ut när extra centroider bara delar upp grupper som redan är hela.${b?` Här böjer den av vid <b>k = ${b}</b>.`:` Här finns ingen tydlig knäck.`}</p>`;
+    <p>I själva verket handlar det inte om punkterna utan om <b>platsen</b>: varje plats i diagrammet tillhör den centroid som ligger närmast. Slår du på <button class="term" data-t="vor">beslutsgränserna</button> ser du var algoritmens svar skiftar.</p>
+    ${cens.length?`<div class="note"><b>Peka</b> på en datapunkt så ritas avstånden till samtliga centroider ut i diagrammet. <b>Klicka</b> på den så visas hela uträkningen, term för term — räkna gärna efter själv.${showBounds?'':' Knappen <b>Beslutsgränser</b> visar samma information som ytor i stället för siffror.'}</div>`:''}
+    ${normUI}
+    <div class="pact"><button class="pbig" style="--c:${PC[2]}" id="assignBtn"${cens.length&&phase!=='assigned'&&!L?'':' disabled'}>Tilldela datapunkter</button></div></div>`;
+
+  $('p4body').innerHTML=`<div class="pdin">
+    <p>En <b>ny mittpunkt</b> beräknas för varje kluster: medelvärdet av koordinaterna hos de datapunkter som hör till klustret. Centroiden flyttas dit.</p>
+    <p>När centroiderna förflyttar sig följer beslutsgränserna med. Punkter som hamnar på andra sidan en gräns byter kluster, och därför återgår algoritmen till steg 3. De båda stegen växlar tills ingen punkt längre byter kluster.</p>
+    ${cens.length&&!showBounds?`<div class="note">Slå på <b>Beslutsgränser</b> i diagrammet innan du går vidare, så ser du gränserna glida med centroiderna.</div>`:''}
+    ${empty?`<div class="note g"><b>En centroid har noll punkter.</b> Det finns inget medelvärde att beräkna, och centroiden kan därför inte flytta sig. Det är den tydligaste signalen på att k är för högt för den här datan.</div>`:''}
+    <div class="pact">
+      <button class="pbig" style="--c:${PC[3]}" id="moveBtn"${phase==='assigned'&&!L?'':' disabled'}>Flytta centroider</button>
+      ${running
+        ? `<button class="psub" id="stopBtn">■ Stoppa</button>`
+        : `<button class="psub" id="autoBtn"${cens.length&&!L&&!fin()?'':' disabled'}>Kör klart →</button>`}</div></div>`;
+
+  const v=pts.length?elbowVals():null;
+  const eb=v?elbowBest(v):null;
+  const best=(eb&&eb.tier)?eb.k:null;
+  const elbTxt=!eb?'' : eb.tier===2
+    ? `Här viker kurvan <b>tydligt av vid k = ${eb.k}</b>. Brytpunkten kallas <button class="term" data-t="armb">armbågen</button>.`
+    : eb.tier===1
+    ? `Här viker kurvan av <b>svagt, närmast vid k = ${eb.k}</b>. <button class="term" data-t="armb">Armbågsmetoden</button> ger ett förslag, inte ett facit.`
+    : `Kurvan har <b>ingen tydlig brytpunkt</b>, vilket i sig är ett besked: datan har sannolikt ingen klusterstruktur. Läs om <button class="term" data-t="armb">armbågsmetoden</button>.`;
+  $('p5body').innerHTML=`<div class="pdin">
+    ${fin()?`<p><b>Klart efter ${iter} varv.</b> Ingen punkt bytte kluster under det sista varvet, och centroiderna kan därför inte flytta sig längre.</p>`:''}
+    <p>Det finns inget objektivt rätt värde på k. Valet beror på syftet med indelningen: ett lågt k ger en övergripande bild, ett högre k en mer detaljerad.</p>
+    <div id="elb"></div>
+    <p>Kurvan visar hur <button class="term" data-t="avst">WCSS</button> minskar för varje kluster som läggs till. Den planar ut när nya centroider enbart delar upp kluster som redan är sammanhållna. ${elbTxt}</p>
+    <p style="color:var(--dim);font-size:12.5px">Klicka på en punkt i kurvan för att förhandsgranska den lösningen i diagrammet. Din egen körning påverkas inte.${fin()?' Den gröna romben markerar ditt eget resultat.':''}</p>
+    ${(guess!==null&&fin())?(()=>{
+      const agree = guess===0 ? best===null : guess===best;
+      const txt = guess===0
+        ? (best?`Du bedömde att det inte fanns några tydliga kluster. Kurvan pekar ändå på <b>k = ${best}</b> — granska hur skarp brytpunkten är innan du tar ställning.`
+              :`Du bedömde att det inte fanns några tydliga kluster. Kurvan ger samma besked: den saknar brytpunkt.`)
+        : (best?(guess===best?`Du bedömde <b>${guess}</b> kluster. Kurvan pekar åt samma håll.`
+                            :`Du bedömde <b>${guess}</b> kluster. Kurvan pekar på <b>${best}</b>.`)
+              :`Du bedömde <b>${guess}</b> kluster, men kurvan har ingen tydlig brytpunkt att jämföra med.`);
+      return `<div class="note${agree?' e':''}">${txt}</div>`;})():''}
+    ${(fin()&&ds)?`<div class="insight"><span class="it">${DS[ds].ins[0]}</span>${DS[ds].ins[1]}</div>`:''}
+    </div>`;
+
+  bindPanels();
 }
-function elbow(){
-  const w=document.getElementById('elb');if(!w||!pts.length)return;
-  const ks=[1,2,3,4,5,6],v=ks.map(k=>runFull(k,99));
-  const W=470,H=222,L=20,R=18,Tp=20,B=40,mx=Math.max(...v),mn=Math.min(...v);
-  const px=i=>L+(i/(ks.length-1))*(W-L-R),py=x=>Tp+(1-(x-mn)/((mx-mn)||1))*(H-Tp-B);
-  let g=`<svg class="elb" viewBox="0 0 ${W} ${H}"><defs><linearGradient id="eg" x1="0" x2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset="1" stop-color="#8b7dff"/></linearGradient></defs>`;
-  g+=`<path class="ln" stroke="url(#eg)" d="${v.map((x,i)=>(i?'L':'M')+px(i)+','+py(x)).join(' ')}"/>`;
-  v.forEach((x,i)=>{const on=ks[i]===K;
-    if(on)g+=`<circle cx="${px(i)}" cy="${py(x)}" r="14" fill="none" stroke="#3ee0e0" stroke-opacity=".45"/>`;
-    g+=`<circle class="kd" cx="${px(i)}" cy="${py(x)}" r="${on?7.5:5}" fill="${on?'#3ee0e0':'#5b8cff'}" onclick="setK(${ks[i]})"/>`;
-    g+=`<text x="${px(i)}" y="${H-B+19}" text-anchor="middle" font-size="12" ${on?'fill="#eef1f8"':''}>${ks[i]}</text>`;});
-  g+=`<text x="${(L+W-R)/2}" y="${H-7}" text-anchor="middle" font-size="11.5">antal grupper (k)</text></svg>`;
-  w.innerHTML=g;}
-function newData(){if(!ds)return;dataSeed++;dsChosen=true;forced=null;load();built=false;build();render();}
-function pick(id){ds=id;dsChosen=true;dataSeed++;forced=null;load();built=false;build();render();}
-function setK(k){if(!ds)return;K=k;forced=null;reset();built=false;build();render();}
-function place(){if(!ds||!pts.length)return;dsChosen=true;forced=null;seed();syncC();paint();render();}
-function refresh(){mets();timeline();
-  document.querySelectorAll('.cen').forEach(e=>e.classList.toggle('fin',fin()));
-  pipeBodies();pipeUI();elbow();hyd();}
+function bindPanels(){
+  document.querySelectorAll('.term[data-t]').forEach(e=>e.onclick=ev=>{ev.stopPropagation();openCard(e.dataset.t,ev);});
+  document.querySelectorAll('[data-ds]').forEach(b=>b.onclick=()=>pick(b.dataset.ds));
+  document.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>setK(+b.dataset.k));
+  document.querySelectorAll('[data-sm]').forEach(b=>b.onclick=()=>setSeedMode(b.dataset.sm));
+  document.querySelectorAll('[data-nm]').forEach(b=>b.onclick=()=>setNorm(b.dataset.nm==='1'));
+  document.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{
+    const v=+b.dataset.g;guessDone=true;if(v>=0)guess=v;render();});
+  const map={newData,goStep2:confirmDs,placeBtn:place,assignBtn:doAssign,moveBtn:doMove,autoBtn:auto,stopBtn:stopAuto,cmpBtn:compareCard};
+  Object.entries(map).forEach(([id,fn])=>{const e=$(id);if(e)e.onclick=()=>fn();});
+}
+
+/* ═══════════ handlingar ═══════════ */
+function guardReset(msg,fn){
+  if(iter>0||cens.length){pushUndo();fn();offerUndo(msg);}else fn();
+}
+function pick(id){
+  if(id===ds)return;
+  guardReset('Ny datamängd vald. Körningen nollställdes.',()=>{
+    ds=id;guessDone=false;guess=null;norm=false;
+    dsChosen=false;   /* eleven går vidare först när hon trycker på knappen */
+    dataSeed++;       /* ny lottning varje gång en datamängd väljs */
+    setW();
+    load();built=false;build();forced=null;elbKey='';render();});
+}
+function newData(){
+  if(!ds)return;
+  guardReset('Nya datapunkter hämtade. Körningen nollställdes.',()=>{
+    dataSeed++;dsChosen=false;guessDone=false;guess=null;setW();
+    load();built=false;build();forced=null;elbKey='';render();});
+}
+function setK(k){
+  if(!ds||k===K)return;
+  guardReset(`k ändrades till ${k}. Körningen nollställdes.`,()=>{
+    K=k;reset();forced=null;elbKey='';render();});
+}
+function setSeedMode(m){
+  if(m===seedMode)return;
+  guardReset('Startläge ändrat. Körningen nollställdes.',()=>{
+    seedMode=m;reset();forced=null;render();});
+}
+function setNorm(n){
+  if(n===norm)return;
+  guardReset(n?'Normalisering påslagen. Körningen nollställdes.':'Normalisering avstängd. Körningen nollställdes.',()=>{
+    norm=n;setW();reset();forced=null;elbKey='';render();});
+}
+function confirmDs(){if(!ds)return;dsChosen=true;forced=null;render();}
+function place(){
+  if(!ds||!pts.length||lock())return;
+  const had=cens.length>0;
+  if(had)pushUndo();
+  dsChosen=true;guessDone=true;forced=null;
+  seed();syncC();drawV(cens,true);paint();render();
+  if(had)offerUndo('Centroiderna placerades om.');
+}
+
+/* ═══════════ URL-tillstånd ═══════════ */
+function syncURL(){
+  if(!ds)return;
+  const q=`?d=${ds}&k=${K}&s=${dataSeed}&m=${seedMode}${norm?'&n=1':''}`;
+  try{history.replaceState(null,'',q);}catch(e){}
+}
+function readURL(){
+  const q=new URLSearchParams(location.search);
+  const d=q.get('d');
+  if(d&&DS[d]){ds=d;dsChosen=true;guessDone=true;}
+  const k=+q.get('k');if(k>=2&&k<=8)K=k;
+  const s=+q.get('s');if(s>0&&s<9999)dataSeed=s;
+  const m=q.get('m');if(m==='rand'||m==='pp')seedMode=m;
+  if(q.get('n')==='1'&&ds&&DS[ds].scaleLesson)norm=true;
+}
+
+/* ═══════════ render ═══════════ */
+function refreshPanels(){pipeBodies();pipeUI();elbow();}
+function refresh(){
+  mets();banner();
+  $('plot').classList.toggle('ready',!!cens.length&&!view&&!busy);
+  const bt=$('btog');
+  bt.hidden=!cens.length;
+  bt.classList.toggle('on',showBounds);
+  bt.setAttribute('aria-pressed',showBounds?'true':'false');
+  bt.onclick=toggleBounds;
+  document.querySelectorAll('.cen').forEach(e=>e.classList.toggle('fin',fin()&&!view));
+  pipeBodies();pipeUI();elbow();syncURL();
+}
 function render(){
-  document.getElementById('ptitle').textContent=ds?DS[ds].n:'Välj en datamängd för att börja';
-  document.querySelector('.ph').style.setProperty('--c',PC[activeStep()-1]);
+  setW();
+  $('ptitle').textContent=ds?DS[ds].n:'Välj en datamängd för att börja';
   if(!built)build();
-  syncC();paint();refresh();
-  requestAnimationFrame(pipeUI);
+  syncC();
+  if(!view)drawV(cens,false);
+  paint();
+  refresh();
+  requestAnimationFrame(railGeom);
 }
-load();build();render();
+
+readURL();setW();load();build();
+if(ds){syncC();drawV(cens,false);}
+render();
 </script>
 </body>
 </html>
