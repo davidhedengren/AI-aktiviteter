@@ -12,10 +12,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════════════════════════════
-   TOKENS
-   Färgregel: kulör betyder EN sak – klustertillhörighet.
-   Faserna i pipelinen är akromatiska och skiljs enbart av ljusstyrka.
-   Rörelseregel: tre varaktigheter, inga andra.
+   DESIGNTOKEN
+   Färg   – två skilda paletter: PC för pipelinens fassteg, COL för
+            klustertillhörighet. Se deklarationen av COL i skriptet.
+   Rörelse – tre grundvaraktigheter (--t1/--t2/--t3). Avvikande tider
+            förekommer endast i enskilda dekorativa animationer.
    ══════════════════════════════════════════════════════════════ */
 :root{
   --bg:#07090f; --tx:#eef1f8; --sub:#aab4cc; --dim:#8b95ae;
@@ -53,8 +54,8 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(27px,4.6vw,40px);font-weight:80
 
 .wrap{max-width:1180px;margin:0 auto;width:100%;padding:10px 20px 44px;display:flex;flex-direction:column;gap:18px;flex:1;position:relative;z-index:1}
 .lay{display:grid;grid-template-columns:392px minmax(0,1fr);gap:20px;align-items:start}
-/* OBS: basregeln måste stå FÖRE mediafrågan, annars vinner den på mobil
-   (samma specificitet – sist deklarerad regel gäller). */
+/* Basregeln står före mediafrågan. Reglerna har samma specificitet, och
+   en senare deklaration skulle därför upphäva den responsiva varianten. */
 .canvascol{position:sticky;top:14px}
 @media(max-width:1040px){
   .lay{grid-template-columns:1fr;gap:14px}
@@ -271,7 +272,7 @@ svg.plot.ready .pt{cursor:pointer}
   box-shadow:0 20px 50px rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:var(--t2) var(--ez)}
 .undo.on{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
 
-/* ── begreppskort (3D-tilt bevarad) ── */
+/* ── begreppskort ── */
 .scrim{position:fixed;inset:0;background:rgba(4,6,12,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   z-index:300;opacity:0;pointer-events:none;transition:opacity var(--t2) var(--ez)}
 .scrim.show{opacity:1;pointer-events:auto}
@@ -443,14 +444,16 @@ function blob(r,cx,cy,sx,sy,n,rot){const o=[];for(let i=0;i<n;i++){let x=gs(r)*s
   if(rot){const c=Math.cos(rot),s=Math.sin(rot);[x,y]=[x*c-y*s,x*s+y*c];}
   o.push({x:Math.min(98,Math.max(2,cx+x)),y:Math.min(98,Math.max(2,cy+y))});}return o;}
 
-/* dom = axlarnas verkliga värdeområde. Skiljer sig områdena åt blir avståndet
-   dominerat av den axel som har störst spann – det är hela poängen med "Olika skalor". */
+/* dom = axlarnas verkliga värdeområde. Är områdena olika stora viktas
+   avståndsberäkningen mot den axel som har störst spann. Datamängden
+   "Olika skalor" bygger på den effekten; övriga har spannet 0–100 på
+   båda axlarna och påverkas därför inte av normalisering. */
 const DS={
  three:{n:'Tydliga kluster',ax:['Egenskap A','Egenskap B'],dom:[[0,100],[0,100]],
    tip:'Runda, tydligt åtskilda moln. Antalet varierar mellan omgångarna, så räkna själv innan du väljer k.',
    ins:['Ögat och algoritmen är överens',
         'När klustren är runda, ungefär lika stora och tydligt åtskilda hittar k-means precis den indelning du själv ser. Det är det enklaste fallet — och det enda där resultatet går att lita på utan närmare granskning. Lägg märke till att antalet inte gick att veta i förväg. Det är just den frågan armbågskurvan nedan är till för.'],
-   /* Antalet kluster lottas fram (2–6) så att svaret inte går att memorera. */
+   /* Antalet kluster lottas fram mellan 2 och 6 för varje datauppsättning. */
    g:sd=>{const r=rng(7+sd*137);
      const n=2+Math.floor(r()*5),out=[],off=r()*Math.PI*2,per=Math.round(102/n);
      for(let i=0;i<n;i++){
@@ -483,10 +486,11 @@ const DS={
    g:sd=>{const r=rng(71+sd*137);return[...blob(r,50,15,10,5,36),...blob(r,50,50,10,5,36),...blob(r,50,85,10,5,36)];}}
 };
 
-/* Faserna behåller sin egen tydliga färgkodning: loopen ska synas.
-   Klusterpaletten är därför vald så att den håller sig undan loopens
-   två färger (guld = steg 3, grönt = steg 4) vid de vanligaste k-värdena.
-   Bokstäverna A–F ger dessutom en kanal som inte är färg. */
+/* Två skilda paletter. PC används i pipelinen, COL i diagrammet.
+   COL är ordnad så att de första indexen inte sammanfaller med loopens
+   fassteg (guld = steg 3, grönt = steg 4), vilket är de kombinationer
+   som förekommer oftast. Bokstäverna A–H fungerar som kodningskanal
+   oberoende av färg. */
 const PC=['#5b8cff','#8b7dff','#ffcf5c','#3ddc84','#3ee0e0'];
 const COL=['#ff9f4a','#4ecfff','#ff5f9e','#c084ff','#8ef06a','#ffe066','#5ce1c4','#ff7a6b'];
 const CN=COL.length;
@@ -540,7 +544,8 @@ function seed(){
 }
 function snap(){snaps.push({cens:cens.map(c=>({...c})),cs:pts.map(p=>p.c),it:iter,w:hist[hist.length-1],ch:changed});}
 
-/* full körning i bakgrunden – används av armbågskurvan och jämförelsen */
+/* Fullständig körning utan animation. Används av armbågskurvan,
+   förhandsvisningen och jämförelsen av startlägen. */
 function runFull(k,sd,mode,want){
   const r=rng(sd),P=pts.map(p=>({...p,c:-1}));
   let C=initC(P,k,r,mode||'pp');
@@ -617,7 +622,7 @@ function build(){
 
 /* ── beslutsgränser ── */
 let vPrevK=-1;
-/* Beslutsgränserna är avstängda som standard – eleven slår på dem själv. */
+/* Gränserna renderas endast när showBounds är satt. Grundvärdet är av. */
 function drawV(C,intro){
   if(!showBounds||!C||!C.length){$('gV').innerHTML='';vPrevK=-1;return;}
   drawVRaw(C,intro);
@@ -703,7 +708,8 @@ function doAssign(){
     pts.forEach(p=>{p.ch=false;p.old=-1;});
     refreshPanels();
 
-    /* Inget bytte kluster: iscensätt frånvaron av händelse. */
+    /* changed === 0 innebär att loopen är klar. Eftersom ingen punkt byter
+       färg markeras varvet i stället med ett dämpningssvep. */
     if(changed===0){
       stageLabel('ingen punkt byter kluster');
       const ord=pts.map((p,i)=>i);
@@ -724,7 +730,7 @@ function doAssign(){
       e.setAttribute('fill',COL[p.c%CN]);e.setAttribute('fill-opacity','.95');
       e.getAnimations().forEach(a=>a.cancel());e.classList.remove('pop');
       requestAnimationFrame(()=>e.classList.add('pop'));
-      /* kopplingslinjen ritas i samma ögonblick som punkten färgas */
+      /* Kopplingslinjen ritas samtidigt som punkten färgas. */
       const L=$('l'+i);
       L.setAttribute('x1',X(p.x));L.setAttribute('y1',Y(p.y));
       L.setAttribute('x2',X(cens[p.c].x));L.setAttribute('y2',Y(cens[p.c].y));
@@ -757,7 +763,7 @@ function doMove(){
     pts.forEach(p=>{p.ch=false;p.old=-1;});
     document.querySelectorAll('.lnk').forEach(l=>l.classList.remove('show'));
 
-    /* svans + siffra: hur långt flyttade sig varje centroid? */
+    /* Svans och avståndssiffra som visar varje centroids förflyttning. */
     const T=$('gT');
     T.innerHTML=from.map((f,i)=>{
       const d=Math.sqrt(d2(f.x,f.y,to[i].x,to[i].y));
@@ -813,7 +819,7 @@ function bindCen(){
       cens[dragI].x=Math.min(99,Math.max(1,iX(px)));
       cens[dragI].y=Math.min(99,Math.max(1,iY(py)));dragMoved=true;
       syncC();drawV(cens,false);
-      /* förhandsvisning: punkterna antar färgen på området de står i */
+      /* Förhandsvisning under drag: punkterna färgas efter närmaste centroid. */
       paint({cens,cs:pts.map(p=>near(p))});
     };
     const end=ev=>{
@@ -956,11 +962,12 @@ function elbowVals(){
     return best;});
   elbCache={key,v};return v;
 }
-/* Två oberoende mått, båda kalibrerade mot datamängderna:
-   A = kordavstånd på normaliserade axlar → avgör OM det finns en brytpunkt.
-   B = kollaps i förbättringstakt         → avgör VAR den sitter.
-   A ensam missar var brytpunkten ligger vid höga k; B ensam kan inte skilja
-   en verklig brytpunkt från en jämnt fallande kurva. Tillsammans klarar de båda. */
+/* Två oberoende mått, empiriskt kalibrerade mot datamängderna i DS.
+   A = kordavstånd på normaliserade axlar. Avgör om en brytpunkt finns.
+   B = kollaps i förbättringstakt.        Avgör var den ligger.
+   A lokaliserar brytpunkten otillförlitligt vid höga k, medan B inte
+   skiljer en verklig brytpunkt från en jämnt fallande kurva. Måtten
+   används därför tillsammans. */
 function elbowBest(v){
   const n=v.length, mn=v[n-1], rg=(v[0]-mn)||1;
   const y=v.map(x=>(x-mn)/rg), x=v.map((_,i)=>i/(n-1));
@@ -1042,8 +1049,8 @@ function showCen(i,ev){
 function showPoint(i,ev){
   if(!cens.length)return;
   const p=pts[i], b=near(p), nz=norm&&ds&&DS[ds].scaleLesson;
-  /* Visas i samma enheter som avståndet faktiskt räknas i: verkliga
-     axelvärden när datan är oskalad, 0–100 när den är normaliserad. */
+  /* Redovisas i samma enheter som avståndet beräknas i: verkliga
+     axelvärden vid oskalad data, 0–100 vid normaliserad. */
   const fx=v=>nz?v:realX(v), fy=v=>nz?v:realY(v);
   const n1=v=>v.toFixed(1);
   cardEv=ev||null;
@@ -1111,7 +1118,7 @@ document.addEventListener('keydown',e=>{
     if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
     else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
 });
-/* 3D-tilt behålls – del av designsystemet på ai-aktiviteter.se */
+/* 3D-tilt på begreppskortet. Avaktiveras vid prefers-reduced-motion. */
 (function(){const inn=$('ccardIn');
   inn.addEventListener('pointermove',e=>{
     if(RM.matches)return;
@@ -1203,7 +1210,7 @@ function railGeom(){
   rail.style.setProperty('--lt',(a.getBoundingClientRect().top-pr.top-8)+'px');
   rail.style.setProperty('--lh',(b.getBoundingClientRect().bottom-a.getBoundingClientRect().top+16)+'px');
 }
-/* bågen hålls fastlimmad även medan panelerna animerar */
+/* Bågens geometri räknas om löpande, även medan panelerna animerar. */
 if(window.ResizeObserver){
   const ro=new ResizeObserver(()=>railGeom());
   document.querySelectorAll('.pstep').forEach(el=>ro.observe(el));
@@ -1330,8 +1337,8 @@ function pick(id){
   if(id===ds)return;
   guardReset('Ny datamängd vald. Körningen nollställdes.',()=>{
     ds=id;guessDone=false;guess=null;norm=false;
-    dsChosen=false;   /* eleven går vidare först när hon trycker på knappen */
-    dataSeed++;       /* ny lottning varje gång en datamängd väljs */
+    dsChosen=false;   /* sätts först av knappen i steg 1, inte av valet självt */
+    dataSeed++;       /* nytt frö vid varje val av datamängd */
     setW();
     load();built=false;build();forced=null;elbKey='';render();});
 }
