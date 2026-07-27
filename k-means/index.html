@@ -263,7 +263,8 @@ svg.plot.ready .pt{cursor:pointer}
 @keyframes draw{to{stroke-dashoffset:0}}
 .elb text{font-family:'JetBrains Mono',monospace;font-size:10.5px;fill:var(--dim)}
 .elb .kd{cursor:pointer;transition:var(--t1) var(--sp)}
-.elb .hit{cursor:pointer;fill:transparent}
+.elb .hit{cursor:pointer;fill:transparent;transition:fill var(--t1) var(--ez)}
+.elb .hit:hover{fill:rgba(255,255,255,.035)}
 
 /* ── ångra-remsa ── */
 .undo{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(14px);z-index:200;
@@ -444,12 +445,9 @@ function blob(r,cx,cy,sx,sy,n,rot){const o=[];for(let i=0;i<n;i++){let x=gs(r)*s
   if(rot){const c=Math.cos(rot),s=Math.sin(rot);[x,y]=[x*c-y*s,x*s+y*c];}
   o.push({x:Math.min(98,Math.max(2,cx+x)),y:Math.min(98,Math.max(2,cy+y))});}return o;}
 
-/* dom = axlarnas verkliga värdeområde. Är områdena olika stora viktas
-   avståndsberäkningen mot den axel som har störst spann. Datamängden
-   "Olika skalor" bygger på den effekten; övriga har spannet 0–100 på
-   båda axlarna och påverkas därför inte av normalisering. */
+/* Samtliga datamängder ritas i ett fast koordinatsystem, 0–100 på båda axlarna. */
 const DS={
- three:{n:'Tydliga kluster',ax:['Egenskap A','Egenskap B'],dom:[[0,100],[0,100]],
+ three:{n:'Tydliga kluster',ax:['Egenskap A','Egenskap B'],
    tip:'Runda, tydligt åtskilda moln. Antalet varierar mellan omgångarna, så räkna själv innan du väljer k.',
    ins:['Ögat och algoritmen är överens',
         'När klustren är runda, ungefär lika stora och tydligt åtskilda hittar k-means precis den indelning du själv ser. Det är det enklaste fallet — och det enda där resultatet går att lita på utan närmare granskning. Lägg märke till att antalet inte gick att veta i förväg. Det är just den frågan armbågskurvan nedan är till för.'],
@@ -461,29 +459,21 @@ const DS={
        out.push(...blob(r,50+Math.cos(a)*rad,50+Math.sin(a)*rad,6,6,per));}
      return out;}},
 
- elong:{n:'Avlånga kluster',ax:['Egenskap A','Egenskap B'],dom:[[0,100],[0,100]],
+ elong:{n:'Avlånga kluster',ax:['Egenskap A','Egenskap B'],
    tip:'Två långsmala band. Ögat ser två kluster direkt — slå på beslutsgränserna innan du kör, så framgår det varför algoritmen inte gör det.',
-   ins:['Gränserna är raka linjer',
-        'En beslutsgräns är alltid en rät linje: den utgörs av mittpunktsnormalen mellan två centroider. Raka gränser kan inte följa ett snedställt band. k-means förutsätter därför ungefär <b>runda</b> kluster — när datan inte uppfyller det skär algoritmen tvärs igenom grupperna.'],
    g:sd=>{const r=rng(19+sd*137);return[...blob(r,36,42,21,4.2,48,-.62),...blob(r,64,60,21,4.2,48,-.62)];}},
 
- sizes:{n:'Olika täthet',ax:['Egenskap A','Egenskap B'],dom:[[0,100],[0,100]],
+ sizes:{n:'Olika täthet',ax:['Egenskap A','Egenskap B'],
    tip:'Ett stort glest moln och två små täta. Lägg märke till hur många punkter varje kluster får.',
    ins:['k-means dras mot lika stora kluster',
         'Måttet som minimeras är summan av <b>kvadrerade</b> avstånd. Ett stort glest moln bidrar med en betydande del av den summan, så algoritmen vinner på att stycka upp det — trots att det egentligen utgör ett enda kluster. De små täta molnen lämnas däremot orörda. Jämför antalet punkter per kluster: fördelningen blir jämnare än datan motiverar.'],
    g:sd=>{const r=rng(31+sd*137);return[...blob(r,32,50,15,15,60),...blob(r,74,28,4.5,4.5,24),...blob(r,76,72,4.5,4.5,24)];}},
 
- none:{n:'Ingen struktur',ax:['Egenskap A','Egenskap B'],dom:[[0,100],[0,100]],
+ none:{n:'Ingen struktur',ax:['Egenskap A','Egenskap B'],
    tip:'Jämnt utspridda punkter helt utan gruppstruktur. Avgör först vad du tror att algoritmen kommer att svara.',
    ins:['Algoritmen kan inte svara "det finns inga"',
         'Du bad om k kluster, och du fick k kluster. k-means saknar möjlighet att rapportera att strukturen inte finns — den delar upp den data den får. Färgerna på skärmen är alltså <b>inget bevis</b> för att grupperna finns i verkligheten. Titta på armbågskurvan: den faller jämnt utan brytpunkt, vilket är just det tecken som avslöjar att indelningen är godtycklig.'],
-   g:sd=>{const r=rng(53+sd*137);const o=[];for(let i=0;i<100;i++)o.push({x:12+r()*76,y:12+r()*76});return o;}},
-
- skala:{n:'Olika skalor',ax:['Egenskap A','Egenskap B'],dom:[[200,900],[20,70]],scaleLesson:true,
-   tip:'Tre grupper som skiljer sig i egenskap B. Datamängden skulle exempelvis kunna beskriva personer, där A är årslön i tusental kronor och B är ålder i år.',
-   ins:['Den egenskap som har störst spann får störst inflytande',
-        'A sträcker sig över 700 enheter, B över 50. Beräknas avståndet på rådata väger skillnader i A ungefär <b>fjorton gånger</b> tyngre än skillnader i B, och algoritmen skär lodräta skivor tvärs igenom de vågräta grupperna. Slå på normalisering, så räknas båda egenskaperna om till samma skala. Jämför armbågskurvan före och efter: brytpunkten flyttar sig från k&nbsp;=&nbsp;2 till k&nbsp;=&nbsp;3, alltså till det verkliga antalet grupper.<br><br>Att egenskaper mäts i olika enheter är regel snarare än undantag — kronor och år, centimeter och kilogram, antal och andelar. Att låta bli att normalisera är därför ett av de vanligaste misstagen i praktiskt maskininlärningsarbete.'],
-   g:sd=>{const r=rng(71+sd*137);return[...blob(r,50,15,10,5,36),...blob(r,50,50,10,5,36),...blob(r,50,85,10,5,36)];}}
+   g:sd=>{const r=rng(53+sd*137);const o=[];for(let i=0;i<100;i++)o.push({x:12+r()*76,y:12+r()*76});return o;}}
 };
 
 /* Två skilda paletter. PC används i pipelinen, COL i diagrammet.
@@ -500,17 +490,12 @@ const LTR=['A','B','C','D','E','F','G','H'];
 let ds=null,pts=[],K=3,cens=[],iter=0,phase='init',hist=[],changed=null,
     busy=false,running=false,snaps=[],tick=0,dataSeed=0,
     forced=null,dsChosen=false,celebrated=false,built=false,
-    seedMode='pp',norm=false,guess=null,guessDone=false,
+    seedMode='pp',guess=null,guessDone=false,
     view=null,undoState=null,undoTimer=null,hoverIdx=-1,dragI=-1,dragMoved=false,
-    WX=1,WY=1,elbCache={key:null,v:null},elbKey='',showBounds=false;
+    elbCache={key:null,v:null},elbKey='',showBounds=false;
 
-/* ═══════════ skalning & avstånd ═══════════ */
-function setW(){
-  if(!ds){WX=1;WY=1;return;}
-  const d=DS[ds].dom, sx=(d[0][1]-d[0][0])/100, sy=(d[1][1]-d[1][0])/100;
-  if(norm){WX=1;WY=1;}else{WX=sx;WY=sy;}
-}
-function d2(ax,ay,bx,by){const dx=(ax-bx)*WX,dy=(ay-by)*WY;return dx*dx+dy*dy;}
+/* ═══════════ avstånd ═══════════ */
+function d2(ax,ay,bx,by){const dx=ax-bx,dy=ay-by;return dx*dx+dy*dy;}
 function near(p,C){let b=0,bd=Infinity;(C||cens).forEach((c,i)=>{const d=d2(p.x,p.y,c.x,c.y);if(d<bd){bd=d;b=i;}});return b;}
 function wcss(){return pts.reduce((s,p)=>{const c=cens[p.c];return c?s+d2(p.x,p.y,c.x,c.y):s;},0);}
 function fin(){return iter>0&&changed===0;}
@@ -576,8 +561,8 @@ function voronoi(C){
     let poly=rect;
     C.forEach((o,j)=>{
       if(i===j)return;
-      const nx=2*WX*WX*(o.x-c.x), ny=2*WY*WY*(o.y-c.y);
-      const cst=WX*WX*(o.x*o.x-c.x*c.x)+WY*WY*(o.y*o.y-c.y*c.y);
+      const nx=2*(o.x-c.x), ny=2*(o.y-c.y);
+      const cst=(o.x*o.x-c.x*c.x)+(o.y*o.y-c.y*c.y);
       poly=clipHalf(poly,nx,ny,cst);});
     return poly;});
 }
@@ -586,8 +571,6 @@ function voronoi(C){
 const PW=620,PH=470,ML=48,MR=18,MT=18,MB=44;
 const X=v=>ML+(v/100)*(PW-ML-MR), Y=v=>MT+((100-v)/100)*(PH-MT-MB);
 const iX=px=>((px-ML)/(PW-ML-MR))*100, iY=py=>100-((py-MT)/(PH-MT-MB))*100;
-function realX(v){const d=DS[ds].dom[0];return d[0]+v/100*(d[1]-d[0]);}
-function realY(v){const d=DS[ds].dom[1];return d[0]+v/100*(d[1]-d[0]);}
 
 function build(){
   const svg=$('plot');
@@ -610,8 +593,8 @@ function build(){
     let t='';
     for(let i=0;i<=4;i++){
       const v=i*25;
-      t+=`<text x="${X(v)}" y="${Y(0)+18}" text-anchor="middle">${Math.round(realX(v))}</text>`;
-      t+=`<text x="${X(0)-9}" y="${Y(v)+4}" text-anchor="end">${Math.round(realY(v))}</text>`;}
+      t+=`<text x="${X(v)}" y="${Y(0)+18}" text-anchor="middle">${v}</text>`;
+      t+=`<text x="${X(0)-9}" y="${Y(v)+4}" text-anchor="end">${v}</text>`;}
     $('gX').innerHTML=t;
     $('gTt').innerHTML=`<text x="${(X(0)+X(100))/2}" y="${PH-8}" text-anchor="middle">${ax[0]}</text>`
       +`<text transform="translate(13,${(Y(0)+Y(100))/2}) rotate(-90)" text-anchor="middle">${ax[1]}</text>`;
@@ -692,8 +675,7 @@ function paint(v){
   V.cens.forEach((_,i)=>{const e=$('c'+i);if(!e)return;
     const r=e.querySelector('.rim');if(r)r.setAttribute('stroke-dasharray',sz[i]===0?'3 3':'');
     e.style.opacity=sz[i]===0?'.55':'1';});
-  const nm=(norm&&ds&&DS[ds].scaleLesson)?' · normaliserad':'';
-  $('pmeta').textContent=cens.length?`${pts.length} punkter · k = ${K}${nm}`:`${pts.length} punkter`;
+  $('pmeta').textContent=cens.length?`${pts.length} punkter · k = ${K}`:`${pts.length} punkter`;
 }
 
 /* ═══════════ steg 3: tilldela ═══════════ */
@@ -954,7 +936,7 @@ function banner(){
 
 /* ═══════════ armbågskurvan ═══════════ */
 function elbowVals(){
-  const key=`${ds}|${dataSeed}|${norm}`;
+  const key=`${ds}|${dataSeed}`;
   if(elbCache.key===key)return elbCache.v;
   const v=[1,2,3,4,5,6,7,8].map(k=>{
     let best=Infinity;
@@ -981,9 +963,9 @@ function elbowBest(v){
 function elbow(){
   const w=$('elb');if(!w||!pts.length)return;
   const ks=[1,2,3,4,5,6,7,8],v=elbowVals();
-  const key=`${ds}|${dataSeed}|${norm}|${K}|${fin()?fmt(hist[hist.length-1]):''}`;
+  const key=`${ds}|${dataSeed}|${K}|${fin()?fmt(hist[hist.length-1]):''}`;
   if(elbKey===key&&w.firstChild)return;
-  const fresh=elbKey.split('|').slice(0,3).join('|')!==`${ds}|${dataSeed}|${norm}`;
+  const fresh=elbKey.split('|').slice(0,2).join('|')!==`${ds}|${dataSeed}`;
   elbKey=key;
   const W=470,H=250,L=54,R=16,Tp=16,B=52,mx=Math.max(...v)*1.06;
   const px=i=>L+(i/(ks.length-1))*(W-L-R), py=x=>Tp+(1-x/mx)*(H-Tp-B);
@@ -999,12 +981,15 @@ function elbow(){
     const on=ks[i]===K;
     if(on)g+=`<circle cx="${px(i)}" cy="${py(x)}" r="14" fill="none" stroke="#fff" stroke-opacity=".4"/>`;
     g+=`<circle class="kd" cx="${px(i)}" cy="${py(x)}" r="${on?7.5:5}" fill="${on?'#fff':'#7ea2ff'}"/>`;
-    g+=`<circle class="hit" data-k="${ks[i]}" cx="${px(i)}" cy="${py(x)}" r="17"/>`;
     g+=`<text x="${px(i)}" y="${H-B+20}" text-anchor="middle" ${on?'fill="#eef1f8"':''}>${ks[i]}</text>`;});
   if(fin()&&hist.length){
     const yv=hist[hist.length-1],xi=ks.indexOf(K);
     if(xi>=0)g+=`<path d="M${px(xi)},${py(yv)-7} L${px(xi)+7},${py(yv)} L${px(xi)},${py(yv)+7} L${px(xi)-7},${py(yv)} Z" fill="none" stroke="${'#3ddc84'}" stroke-width="2"/>`;}
   g+=`<text x="${(L+W-R)/2}" y="${H-8}" text-anchor="middle">antal kluster (k)</text>`;
+  /* Träffytorna läggs sist och täcker hela kolumnen, inklusive k-etiketten
+     under axeln. En prick på 5 px är ett för litet mål, särskilt på pekskärm. */
+  const cw=(W-L-R)/(ks.length-1);
+  ks.forEach((k,i)=>{g+=`<rect class="hit" data-k="${k}" x="${px(i)-cw/2}" y="2" width="${cw}" height="${H-8}" rx="8"/>`;});
   g+=`<text transform="translate(13,${(Tp+py(0))/2}) rotate(-90)" text-anchor="middle">WCSS</text></svg>`;
   w.innerHTML=g;
   w.querySelectorAll('.hit').forEach(h=>h.onclick=()=>previewK(+h.dataset.k));
@@ -1025,12 +1010,12 @@ const ICO={
 const T={
  centroid:{i:'grid',t:'Centroid',p:'Mittpunkten i ett kluster, beräknad som medelvärdet av de punkter som hör dit. Centroiden utgör algoritmens gissning om var klustret har sin mitt, och förflyttas varje varv tills gissningen inte längre förändras.<br><br>Du kan <b>dra</b> en centroid i diagrammet för att se hur beslutsgränserna följer med.'},
  oover:{i:'eye',t:'Oövervakad inlärning',p:'Inlärning från data <b>utan facit</b>. Vid övervakad inlärning finns ett känt rätt svar för varje exempel, och modellen tränas på att återge det. Här saknas det svaret helt.<br><br>Modellen kan därför inte mäta hur rätt den har. Den kan bara leta efter struktur i själva datan — här: vilka punkter som ligger nära varandra — och föreslå en indelning utifrån den. Att bedöma om indelningen är meningsfull är människans uppgift.'},
- vor:{i:'tile',t:'Beslutsgränser',p:'Tilldelningen handlar inte om punkterna, utan om <b>platsen</b>. Varje plats i diagrammet — även de tomma ytorna — tillhör den centroid som ligger närmast. Det delar upp ytan i områden, och linjerna mellan dem kallas <b>beslutsgränser</b>: de visar var algoritmens beslut skiftar från ett kluster till ett annat.<br><br>En gräns mellan två centroider är alltid en <b>rät linje</b>: mittpunktsnormalen mellan dem. Därför får områdena raka kanter, och därför kan k-means inte följa böjda eller snedställda former. Indelningen har ett eget namn i matematiken — <b>Voronoi-diagram</b>.<br><br>När en centroid flyttar sig flyttar gränsen sig med. Punkter som hamnar på fel sida byter kluster nästa varv — det är precis därför loopen måste upprepas.<br><br>Slå på och av gränserna med knappen uppe till vänster i diagrammet.'},
+ vor:{i:'tile',t:'Beslutsgränser',p:'Tilldelningen handlar inte om punkterna, utan om <b>platsen</b>. Varje plats i diagrammet — även de tomma ytorna — tillhör den centroid som ligger närmast. Det delar upp ytan i områden, och linjerna mellan dem kallas <b>beslutsgränser</b>: de visar var algoritmens svar skiftar från ett kluster till ett annat.<br><br>En gräns mellan två centroider är alltid en <b>rät linje</b>. Därför får områdena raka kanter, och därför kan k-means inte följa böjda eller snedställda former.<br><br>När en centroid flyttar sig följer gränsen med, och punkter som hamnar på andra sidan byter kluster nästa varv.<br><br>Slå på och av gränserna med knappen uppe till vänster i diagrammet.'},
  avst:{i:'chart',t:'WCSS – summan av kvadrerade avstånd',p:'Mät avståndet från varje datapunkt till dess egen centroid, kvadrera avstånden och lägg ihop dem. Blir summan <b>liten</b> ligger punkterna tätt kring sina mittpunkter. Blir den <b>stor</b> ligger de utspridda.<br><br>Det är denna summa k-means arbetar för att göra så liten som möjligt. Den kan aldrig öka mellan två varv, och det är förklaringen till att algoritmen alltid stannar.<br><br>Måttet kallas <b>WCSS</b>, efter engelskans <i>within-cluster sum of squares</i>. Att avstånden kvadreras innebär att en punkt som ligger långt bort väger tyngre än flera som ligger nästan rätt.'},
- plus:{i:'spark',t:'Smart startläge (k-means++)',p:'Var centroiderna hamnar från början har betydelse. Placeras två av dem i samma kluster kan algoritmen fastna i en dålig lösning som den inte tar sig ur.<br><br>Den <b>första</b> centroiden lottas fram bland datapunkterna. Därefter är chansen att bli vald större för punkter som ligger <b>långt från de centroider som redan placerats</b>.<br><br>Metoden kallas <b>k-means++</b>. Den ger färre varv och sällan riktigt dåliga resultat, men den avlägsnar inte problemet — den gör det bara mindre vanligt.'},
+ plus:{i:'spark',t:'k-means++',p:'Var centroiderna hamnar från början har betydelse. Placeras två av dem i samma kluster kan algoritmen fastna i en dålig lösning som den inte tar sig ur.<br><br>Den <b>första</b> centroiden lottas fram bland datapunkterna. Därefter är chansen att bli vald större för punkter som ligger <b>långt från de centroider som redan placerats</b>.<br><br>Metoden kallas <b>k-means++</b>. Den ger färre varv och sällan riktigt dåliga resultat, men den avlägsnar inte problemet — den gör det bara mindre vanligt.'},
  lokal:{i:'pit',t:'Lokalt minimum',p:'En lösning som inte går att förbättra med ett litet steg, men som ändå inte är den bästa möjliga. k-means hamnar där om centroiderna startar olyckligt, och kan inte ta sig därifrån på egen hand.<br><br>Det betyder att algoritmen är <b>icke-deterministisk</b>: samma data kan ge olika svar olika gånger. I praktiken kör man därför k-means många gånger och behåller den körning som gav lägst WCSS.'},
- armb:{i:'elbow',t:'Armbågsmetoden',p:'Ett sätt att välja k. Man kör algoritmen med flera olika värden på k och ritar upp WCSS. Kurvan faller brant så länge extra centroider delar upp verkliga kluster, och planar ut när de enbart delar upp kluster som redan är sammanhållna. Brytpunkten kallas armbågen.<br><br>Metoden ger ett förslag, inte ett facit. Saknar kurvan en tydlig brytpunkt är det i sig ett besked: datan har sannolikt ingen klusterstruktur.'},
- norm:{i:'scale',t:'Normalisering',p:'Avståndsformeln tar ingen hänsyn till enheter. Mäts den ena egenskapen i hundratals och den andra i tiotal blir den första automatiskt viktigare, utan att någon har fattat det beslutet.<br><br><b>Normalisering</b> räknar om varje egenskap till samma skala innan avstånden beräknas, till exempel så att alla värden hamnar mellan 0 och 1. Då väger egenskaperna lika.<br><br>Detta är ett av de vanligaste misstagen i praktiskt maskininlärningsarbete: modellen ser rimlig ut, men styrs i själva verket av vilken enhet någon råkade välja.'}
+ armb:{i:'elbow',t:'Armbågsmetoden',p:'Ett sätt att välja k. Man kör algoritmen med flera olika värden på k och ritar upp WCSS. Kurvan faller brant så länge extra centroider delar upp verkliga kluster, och planar ut när de enbart delar upp kluster som redan är sammanhållna. Brytpunkten kallas armbågen.<br><br>Metoden ger ett förslag, inte ett facit. Saknar kurvan en tydlig brytpunkt har datan sannolikt ingen klusterstruktur.'},
+ norm:{i:'scale',t:'Normalisering',p:'Avståndsformeln tar ingen hänsyn till enheter. Mäts den ena egenskapen i hundratals och den andra i tiotal får den första automatiskt störst inflytande, utan att någon har fattat det beslutet.<br><br><b>Normalisering</b> innebär att egenskaperna räknas om till samma skala innan avstånden beräknas, så att de väger lika tungt. I den här simuleringen ligger båda egenskaperna redan på skalan 0–100.'}
 };
 let cardEv=null,lastFocus=null;
 function openCard(id,ev){const c=T[id];if(!c)return;cardEv=ev||null;
@@ -1048,22 +1033,16 @@ function showCen(i,ev){
 }
 function showPoint(i,ev){
   if(!cens.length)return;
-  const p=pts[i], b=near(p), nz=norm&&ds&&DS[ds].scaleLesson;
-  /* Redovisas i samma enheter som avståndet beräknas i: verkliga
-     axelvärden vid oskalad data, 0–100 vid normaliserad. */
-  const fx=v=>nz?v:realX(v), fy=v=>nz?v:realY(v);
-  const n1=v=>v.toFixed(1);
+  const p=pts[i], b=near(p), n1=v=>v.toFixed(1);
   cardEv=ev||null;
   $('cIc').innerHTML=ICO.ruler;
   $('cTi').textContent='Avstånd till varje centroid';
-  $('cBo').innerHTML=`Punkten ligger i (<b>${n1(fx(p.x))}</b>, <b>${n1(fy(p.y))}</b>)${
-    (ds&&DS[ds].scaleLesson)?(nz?' på normaliserad skala':' i egenskapernas egna enheter'):''
-    }. Avståndet beräknas till <b>samtliga ${cens.length}</b> centroider, varefter punkten tilldelas den närmaste.`;
+  $('cBo').innerHTML=`Punkten ligger i (<b>${n1(p.x)}</b>, <b>${n1(p.y)}</b>). Avståndet beräknas till <b>samtliga ${cens.length}</b> centroider, varefter punkten tilldelas den närmaste.`;
   const rows=cens.map((c,j)=>{
     const d=Math.sqrt(d2(p.x,p.y,c.x,c.y)), on=j===b;
     return `<div class="drow${on?' win':''}">
       <span class="dl" style="color:${COL[j%CN]}">${LTR[j]}</span>
-      <span class="de">√( (${n1(fx(p.x))} − ${n1(fx(c.x))})² + (${n1(fy(p.y))} − ${n1(fy(c.y))})² )</span>
+      <span class="de">√( (${n1(p.x)} − ${n1(c.x)})² + (${n1(p.y)} − ${n1(c.y)})² )</span>
       <span class="dv">${n1(d)}</span></div>`;}).join('');
   $('cCa').innerHTML=`<div class="calc dcalc">${rows}</div>
     <p style="margin-top:13px">Kortast avstånd har <b style="color:${COL[b%CN]}">${LTR[b]}</b>, så punkten tilldelas det klustret.</p>
@@ -1130,7 +1109,7 @@ document.addEventListener('keydown',e=>{
 
 /* ═══════════ ångra & meddelanden ═══════════ */
 function pushUndo(){
-  undoState=JSON.stringify({ds,K,dataSeed,seedMode,norm,guess,tick,iter,phase,changed,
+  undoState=JSON.stringify({ds,K,dataSeed,seedMode,guess,tick,iter,phase,changed,
     hist,snaps,cens,pts:pts.map(p=>({x:p.x,y:p.y,c:p.c,ch:p.ch,old:p.old}))});
 }
 function offerUndo(msg){
@@ -1148,9 +1127,9 @@ function hideUndo(){$('undo').classList.remove('on');}
 function doUndo(){
   if(!undoState)return;
   const s=JSON.parse(undoState);
-  ds=s.ds;K=s.K;dataSeed=s.dataSeed;seedMode=s.seedMode;norm=s.norm;guess=s.guess;tick=s.tick;
+  ds=s.ds;K=s.K;dataSeed=s.dataSeed;seedMode=s.seedMode;guess=s.guess;tick=s.tick;
   iter=s.iter;phase=s.phase;changed=s.changed;hist=s.hist;snaps=s.snaps;cens=s.cens;
-  setW();
+  
   pts=s.pts.map(p=>({...p}));
   view=null;forced=null;elbCache.key=null;elbKey='';
   built=false;build();syncC();drawV(cens,false);paint();render();
@@ -1233,7 +1212,7 @@ function pipeBodies(){
           <button class="chip wide" data-g="0">Inga tydliga</button>
           <button class="skip" data-g="-1">Hoppa över</button></div></div>`
     : (guess!==null)
-    ? `<div class="gbox done">Din bedömning: <b>${guess===0?'inga tydliga kluster':guess+' kluster'}</b>. Den jämförs med armbågskurvan i steg 5.</div>`
+    ? `<div class="gbox done">Din bedömning: <b>${guess===0?'inga tydliga kluster':guess+' kluster'}</b>.</div>`
     : '';
 
   $('p1body').innerHTML=`<div class="pdin">
@@ -1252,30 +1231,21 @@ function pipeBodies(){
     <div class="chips krow">${[2,3,4,5,6,7,8].map(k=>`<button class="chip${k===K?' on':''}" data-k="${k}"${L?' disabled':''}>${k}</button>`).join('')}</div>
     <span class="slbl">Startläge</span>
     <div class="chips">
-      <button class="chip${seedMode==='pp'?' on':''}" data-sm="pp"${L?' disabled':''}>Smart (k-means++)</button>
+      <button class="chip${seedMode==='pp'?' on':''}" data-sm="pp"${L?' disabled':''}>k-means++</button>
       <button class="chip${seedMode==='rand'?' on':''}" data-sm="rand"${L?' disabled':''}>Slumpmässigt</button></div>
+    <div class="note">${seedMode==='pp'
+      ? 'Den första centroiden lottas fram bland datapunkterna. Därefter dras varje ny centroid mot områden långt från de redan placerade, så att de sprids ut över datan. Det minskar risken att algoritmen fastnar i ett <button class="term" data-t="lokal">lokalt minimum</button>. Metoden kallas <button class="term" data-t="plus">k-means++</button>.'
+      : 'Samtliga centroider lottas fram helt slumpmässigt bland datapunkterna. Två av dem kan då hamna i samma kluster, vilket ökar risken att algoritmen fastnar i ett <button class="term" data-t="lokal">lokalt minimum</button>.'}</div>
     <div class="pact"><button class="pbig" style="--c:${PC[1]}" id="placeBtn"${ds&&!L?'':' disabled'}>${cens.length?'Placera om':'Placera centroider'}</button></div>
-    ${cens.length?`<p style="margin-top:11px">${seedMode==='pp'
-      ? 'Startlägena lottas fram, men styrt: varje ny centroid dras med större sannolikhet till områden långt från de redan placerade. Metoden kallas <button class="term" data-t="plus">k-means++</button>.'
-      : 'Startlägena lottas fram helt slumpmässigt. Då är risken större att algoritmen fastnar i ett <button class="term" data-t="lokal">lokalt minimum</button>.'}</p>
-      <p>Varje centroid gör nu anspråk på alla platser som ligger närmare den än någon annan centroid. Slå på <button class="term" data-t="vor">beslutsgränserna</button> med knappen uppe till vänster i diagrammet för att se indelningen — och <b>dra</b> sedan en centroid, så följer gränserna med.</p>
+    ${cens.length?`<p style="margin-top:11px">Varje centroid gör nu anspråk på alla platser som ligger närmare den än någon annan centroid. Slå på <button class="term" data-t="vor">beslutsgränserna</button> med knappen uppe till vänster i diagrammet för att se indelningen — och <b>dra</b> sedan en centroid, så följer gränserna med.</p>
       <div class="pact"><button class="psub" id="cmpBtn"${L?' disabled':''}>Jämför två slumpade startlägen</button></div>`:''}</div>`;
-
-  const normUI=(ds&&DS[ds].scaleLesson)?`
-    <span class="slbl">Avståndet räknas på</span>
-    <div class="chips">
-      <button class="chip${!norm?' on':''}" data-nm="0"${L?' disabled':''}>Rådata</button>
-      <button class="chip${norm?' on':''}" data-nm="1"${L?' disabled':''}>Normaliserade värden</button></div>
-    <div class="note${norm?' e':' g'}">${norm
-      ? 'Båda egenskaperna räknas nu om till samma skala innan avstånden beräknas, och väger därmed lika tungt. Läs mer om <button class="term" data-t="norm">normalisering</button>.'
-      : `Egenskap A spänner över ${DS[ds].dom[0][1]-DS[ds].dom[0][0]} enheter, egenskap B över ${DS[ds].dom[1][1]-DS[ds].dom[1][0]}. Avståndet kommer därför att domineras av A. Läs om <button class="term" data-t="norm">normalisering</button>.`}</div>`:'';
 
   $('p3body').innerHTML=`<div class="pdin">
     <p>För varje datapunkt beräknas avståndet till <b>alla</b> centroider, och punkten tilldelas den närmaste. Oftast används det euklidiska avståndet:</p>
     <div class="fml">d = √( (x<sub>i</sub> − x<sub>c</sub>)² + (y<sub>i</sub> − y<sub>c</sub>)² )</div>
+    <p>Formeln förutsätter att egenskaperna är mätta i jämförbara skalor; annars måste de först <button class="term" data-t="norm">normaliseras</button>.</p>
     <p>I själva verket handlar det inte om punkterna utan om <b>platsen</b>: varje plats i diagrammet tillhör den centroid som ligger närmast. Slår du på <button class="term" data-t="vor">beslutsgränserna</button> ser du var algoritmens svar skiftar.</p>
-    ${cens.length?`<div class="note"><b>Peka</b> på en datapunkt så ritas avstånden till samtliga centroider ut i diagrammet. <b>Klicka</b> på den så visas hela uträkningen, term för term — räkna gärna efter själv.${showBounds?'':' Knappen <b>Beslutsgränser</b> visar samma information som ytor i stället för siffror.'}</div>`:''}
-    ${normUI}
+    ${cens.length?`<div class="note"><b>Peka</b> på en datapunkt så ritas avstånden till samtliga centroider ut i diagrammet. <b>Klicka</b> på den så visas hela uträkningen.${showBounds?'':' Knappen <b>Beslutsgränser</b> visar samma information som ytor i stället för siffror.'}</div>`:''}
     <div class="pact"><button class="pbig" style="--c:${PC[2]}" id="assignBtn"${cens.length&&phase!=='assigned'&&!L?'':' disabled'}>Tilldela datapunkter</button></div></div>`;
 
   $('p4body').innerHTML=`<div class="pdin">
@@ -1296,23 +1266,25 @@ function pipeBodies(){
     ? `Här viker kurvan <b>tydligt av vid k = ${eb.k}</b>. Brytpunkten kallas <button class="term" data-t="armb">armbågen</button>.`
     : eb.tier===1
     ? `Här viker kurvan av <b>svagt, närmast vid k = ${eb.k}</b>. <button class="term" data-t="armb">Armbågsmetoden</button> ger ett förslag, inte ett facit.`
-    : `Kurvan har <b>ingen tydlig brytpunkt</b>, vilket i sig är ett besked: datan har sannolikt ingen klusterstruktur. Läs om <button class="term" data-t="armb">armbågsmetoden</button>.`;
+    : `Kurvan har <b>ingen tydlig brytpunkt</b>, vilket innebär att datan sannolikt inte har någon tydlig klusterstruktur. Läs om <button class="term" data-t="armb">armbågsmetoden</button>.`;
   $('p5body').innerHTML=`<div class="pdin">
     ${fin()?`<p><b>Klart efter ${iter} varv.</b> Ingen punkt bytte kluster under det sista varvet, och centroiderna kan därför inte flytta sig längre.</p>`:''}
     <p>Det finns inget objektivt rätt värde på k. Valet beror på syftet med indelningen: ett lågt k ger en övergripande bild, ett högre k en mer detaljerad.</p>
     <div id="elb"></div>
-    <p>Kurvan visar hur <button class="term" data-t="avst">WCSS</button> minskar för varje kluster som läggs till. Den planar ut när nya centroider enbart delar upp kluster som redan är sammanhållna. ${elbTxt}</p>
+    <p>Kurvan visar hur måttet <button class="term" data-t="avst">WCSS</button> — summan av de kvadrerade avstånden mellan punkterna och deras centroider — minskar för varje kluster som läggs till. Den planar ut när nya centroider enbart delar upp kluster som redan är sammanhållna. ${elbTxt}</p>
     <p style="color:var(--dim);font-size:12.5px">Klicka på en punkt i kurvan för att förhandsgranska den lösningen i diagrammet. Din egen körning påverkas inte.${fin()?' Den gröna romben markerar ditt eget resultat.':''}</p>
     ${(guess!==null&&fin())?(()=>{
       const agree = guess===0 ? best===null : guess===best;
       const txt = guess===0
         ? (best?`Du bedömde att det inte fanns några tydliga kluster. Kurvan pekar ändå på <b>k = ${best}</b> — granska hur skarp brytpunkten är innan du tar ställning.`
-              :`Du bedömde att det inte fanns några tydliga kluster. Kurvan ger samma besked: den saknar brytpunkt.`)
+              :`Du bedömde att det inte fanns några tydliga kluster. Kurvan pekar åt samma håll: den saknar brytpunkt.`)
         : (best?(guess===best?`Du bedömde <b>${guess}</b> kluster. Kurvan pekar åt samma håll.`
                             :`Du bedömde <b>${guess}</b> kluster. Kurvan pekar på <b>${best}</b>.`)
               :`Du bedömde <b>${guess}</b> kluster, men kurvan har ingen tydlig brytpunkt att jämföra med.`);
       return `<div class="note${agree?' e':''}">${txt}</div>`;})():''}
-    ${(fin()&&ds)?`<div class="insight"><span class="it">${DS[ds].ins[0]}</span>${DS[ds].ins[1]}</div>`:''}
+    ${(fin()&&ds&&DS[ds].ins)?`<div class="insight"><span class="it">${DS[ds].ins[0]}</span>${DS[ds].ins[1]}</div>`:''}
+    ${fin()?`<div class="note" style="margin-top:14px">Olika slags mönster ställer olika krav på algoritmen. Gå tillbaka till steg 1 och pröva en annan datamängd.</div>
+      <div class="pact"><button class="psub" id="againBtn">← Pröva en annan datamängd</button></div>`:''}
     </div>`;
 
   bindPanels();
@@ -1322,10 +1294,9 @@ function bindPanels(){
   document.querySelectorAll('[data-ds]').forEach(b=>b.onclick=()=>pick(b.dataset.ds));
   document.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>setK(+b.dataset.k));
   document.querySelectorAll('[data-sm]').forEach(b=>b.onclick=()=>setSeedMode(b.dataset.sm));
-  document.querySelectorAll('[data-nm]').forEach(b=>b.onclick=()=>setNorm(b.dataset.nm==='1'));
   document.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{
     const v=+b.dataset.g;guessDone=true;if(v>=0)guess=v;render();});
-  const map={newData,goStep2:confirmDs,placeBtn:place,assignBtn:doAssign,moveBtn:doMove,autoBtn:auto,stopBtn:stopAuto,cmpBtn:compareCard};
+  const map={newData,goStep2:confirmDs,againBtn:()=>focusStep(1),placeBtn:place,assignBtn:doAssign,moveBtn:doMove,autoBtn:auto,stopBtn:stopAuto,cmpBtn:compareCard};
   Object.entries(map).forEach(([id,fn])=>{const e=$(id);if(e)e.onclick=()=>fn();});
 }
 
@@ -1336,16 +1307,16 @@ function guardReset(msg,fn){
 function pick(id){
   if(id===ds)return;
   guardReset('Ny datamängd vald. Körningen nollställdes.',()=>{
-    ds=id;guessDone=false;guess=null;norm=false;
+    ds=id;guessDone=false;guess=null;
     dsChosen=false;   /* sätts först av knappen i steg 1, inte av valet självt */
     dataSeed++;       /* nytt frö vid varje val av datamängd */
-    setW();
+    
     load();built=false;build();forced=null;elbKey='';render();});
 }
 function newData(){
   if(!ds)return;
   guardReset('Nya datapunkter hämtade. Körningen nollställdes.',()=>{
-    dataSeed++;dsChosen=false;guessDone=false;guess=null;setW();
+    dataSeed++;dsChosen=false;guessDone=false;guess=null;
     load();built=false;build();forced=null;elbKey='';render();});
 }
 function setK(k){
@@ -1357,11 +1328,6 @@ function setSeedMode(m){
   if(m===seedMode)return;
   guardReset('Startläge ändrat. Körningen nollställdes.',()=>{
     seedMode=m;reset();forced=null;render();});
-}
-function setNorm(n){
-  if(n===norm)return;
-  guardReset(n?'Normalisering påslagen. Körningen nollställdes.':'Normalisering avstängd. Körningen nollställdes.',()=>{
-    norm=n;setW();reset();forced=null;elbKey='';render();});
 }
 function confirmDs(){if(!ds)return;dsChosen=true;forced=null;render();}
 function place(){
@@ -1376,7 +1342,7 @@ function place(){
 /* ═══════════ URL-tillstånd ═══════════ */
 function syncURL(){
   if(!ds)return;
-  const q=`?d=${ds}&k=${K}&s=${dataSeed}&m=${seedMode}${norm?'&n=1':''}`;
+  const q=`?d=${ds}&k=${K}&s=${dataSeed}&m=${seedMode}`;
   try{history.replaceState(null,'',q);}catch(e){}
 }
 function readURL(){
@@ -1386,7 +1352,6 @@ function readURL(){
   const k=+q.get('k');if(k>=2&&k<=8)K=k;
   const s=+q.get('s');if(s>0&&s<9999)dataSeed=s;
   const m=q.get('m');if(m==='rand'||m==='pp')seedMode=m;
-  if(q.get('n')==='1'&&ds&&DS[ds].scaleLesson)norm=true;
 }
 
 /* ═══════════ render ═══════════ */
@@ -1403,7 +1368,7 @@ function refresh(){
   pipeBodies();pipeUI();elbow();syncURL();
 }
 function render(){
-  setW();
+  
   $('ptitle').textContent=ds?DS[ds].n:'Välj en datamängd för att börja';
   if(!built)build();
   syncC();
@@ -1413,7 +1378,7 @@ function render(){
   requestAnimationFrame(railGeom);
 }
 
-readURL();setW();load();build();
+readURL();load();build();
 if(ds){syncC();drawV(cens,false);}
 render();
 </script>
