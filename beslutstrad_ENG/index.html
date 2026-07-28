@@ -689,11 +689,11 @@
     <h2>Decision Trees</h2>
     <p class="sub">Build your own decision tree that tells venomous snakes from harmless ones — then compare it with a tree a computer builds from the same data.</p>
     <ul class="journey">
-      <li><span class="ji">1</span><span><strong>Study the data</strong> – which features separate the venomous snakes from the harmless ones?</span></li>
-      <li><span class="ji">2</span><span><strong>Build your tree</strong> – which questions should it ask, and in what order?</span></li>
-      <li><span class="ji">3</span><span><strong>Test on new data</strong> – does the tree work on snakes it has never seen?</span></li>
-      <li><span class="ji">4</span><span><strong>Compare with the computer</strong> – how does an algorithm choose its questions using entropy and information gain?</span></li>
-      <li><span class="ji">5</span><span><strong>Draw conclusions</strong> – why do more questions not always make a better model?</span></li>
+      <li><span class="ji">1</span><span><strong>Study the data</strong> – look for the features that separate venomous snakes from harmless ones.</span></li>
+      <li><span class="ji">2</span><span><strong>Build your tree</strong> – decide which questions the tree should ask, and in what order.</span></li>
+      <li><span class="ji">3</span><span><strong>Test on new data</strong> – find out whether the tree also works on snakes it has not seen before.</span></li>
+      <li><span class="ji">4</span><span><strong>Compare with the computer</strong> – find out how an algorithm chooses its questions using concepts such as entropy and information gain.</span></li>
+      <li><span class="ji">5</span><span><strong>Draw conclusions</strong> – find out why more questions don't always make a better model.</span></li>
     </ul>
     <button class="overlay-btn" id="introStart">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -1229,7 +1229,7 @@ const REDUCED=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function toastHost(){let h=document.getElementById('toastwrap');
   if(!h){h=document.createElement('div');h.className='toastwrap';h.id='toastwrap';document.body.appendChild(h);}return h;}
 
-  function toast(msg,cls,ms){
+ function toast(msg,cls,ms){
   const h=toastHost(),t=document.createElement('div');
   t.className='toast '+(cls||'');t.setAttribute('role','status');t.innerHTML=msg;h.appendChild(t);
   setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),420);},ms||2400);
@@ -1984,4 +1984,4 @@ function renderSummary(){
 </script>
 </body>
 </html>
-   
+    
