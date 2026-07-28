@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>k-means-klustring – ai-aktiviteter.se</title>
 <meta name="description" content="Interaktiv simulering av k-means-klustring: beslutsgränser, avstånd, WCSS och armbågsmetoden – för gymnasiets AI-kurser.">
+<link rel="alternate" hreflang="sv" href="https://www.ai-aktiviteter.se/k-means">
+<link rel="alternate" hreflang="en" href="https://www.ai-aktiviteter.se/k-means_ENG">
+<link rel="alternate" hreflang="x-default" href="https://www.ai-aktiviteter.se/k-means">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -343,6 +346,71 @@ svg.plot.ready .pt{cursor:pointer}
   .looprail{right:-3px;width:16px}.looprail .lcap{display:none}
 }
 
+/* ── introruta ──
+   Visas över hela sidan vid inläsning och ger en översikt av arbetsgången.
+   Stängs med knappen, med Escape eller genom klick utanför kortet. */
+.ovl{position:fixed;inset:0;z-index:400;display:none;align-items:center;justify-content:center;
+  padding:20px;background:rgba(5,7,13,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.ovl.show{display:flex}
+.ovlc{width:100%;max-width:540px;max-height:92vh;overflow-y:auto;padding:26px 28px 24px;
+  border:1px solid var(--line2);border-radius:22px;
+  background:linear-gradient(165deg,rgba(26,33,54,.94),rgba(11,15,26,.96));
+  box-shadow:0 30px 90px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.05);
+  animation:ovlIn 480ms var(--sp)}
+@keyframes ovlIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+.ovlc h2{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;letter-spacing:-.02em;text-align:center}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .ovlc h2{background:linear-gradient(96deg,#fff 8%,#5b8cff 58%,#8b7dff 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent}}
+.ovlc .osub{color:var(--sub);font-size:14.5px;line-height:1.55;text-align:center;margin:8px auto 18px;max-width:44ch}
+.jrn{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.jrn li{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;line-height:1.5;color:var(--dim)}
+.jrn li b{color:var(--tx);font-weight:600}
+.jrn .jn{flex:0 0 24px;height:24px;display:grid;place-items:center;border-radius:8px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--c);
+  /* Enkla värden först, för webbläsare utan stöd för color-mix. */
+  background:rgba(255,255,255,.07);border:1px solid var(--line2)}
+@supports (color:color-mix(in srgb,red 50%,transparent)){
+  .jrn .jn{background:color-mix(in srgb,var(--c) 16%,transparent);
+    border-color:color-mix(in srgb,var(--c) 38%,transparent)}}
+.ovlb{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:14px;
+  border:none;border-radius:12px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:15.5px;font-weight:700;
+  color:#07090f;background:linear-gradient(96deg,#5b8cff,#8b7dff);
+  box-shadow:0 10px 28px rgba(91,140,255,.3);transition:var(--t1) var(--ez)}
+.ovlb:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(91,140,255,.42)}
+.ovlb svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+
+/* Vinjett: tre punktmoln som får varsin centroid och delas av beslutsgränser. */
+.iviz{display:block;width:196px;height:90px;margin:0 auto 14px}
+.iviz .iv-b{fill:none;stroke:rgba(255,255,255,.17);stroke-width:1.5;stroke-linecap:round}
+.iviz .iv-p circle{r:2.5}
+.iviz .iv-c{fill:#0b0f1a;stroke-width:2.1}
+.iviz .iv-x{stroke-width:1.5;stroke-linecap:round}
+@media(prefers-reduced-motion:no-preference){
+  .iviz .iv-p{opacity:0;animation:ivFade 460ms var(--ez) forwards}
+  .iviz .g2{animation-delay:140ms}.iviz .g3{animation-delay:280ms}
+  .iviz .iv-b{stroke-dasharray:64;stroke-dashoffset:64;animation:ivDraw 620ms var(--ez) 620ms forwards}
+  .iviz .iv-k{opacity:0;transform-box:fill-box;transform-origin:center;
+    animation:ivPop 480ms var(--sp) 980ms forwards}
+  .iviz .k2{animation-delay:1080ms}.iviz .k3{animation-delay:1180ms}
+}
+@keyframes ivFade{to{opacity:1}}
+@keyframes ivDraw{to{stroke-dashoffset:0}}
+@keyframes ivPop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+/* Rutan ska rymmas utan rullning även på små skärmar. Villkoret gäller
+   både smala fönster och låga, eftersom liggande mobil har gott om bredd
+   men mycket lite höjd. */
+@media(max-width:640px),(max-height:760px){
+  .ovlc{padding:18px 16px 16px}
+  .ovlc h2{font-size:21px}
+  .ovlc .osub{font-size:13.5px;line-height:1.45;margin:6px auto 12px}
+  .iviz{width:152px;height:70px;margin-bottom:10px}
+  .jrn{gap:7px;margin-bottom:14px}
+  .jrn li{font-size:12.5px;line-height:1.4;gap:9px}
+  .jrn .jn{flex-basis:21px;height:21px;font-size:11px;border-radius:7px}
+  .ovlb{padding:12px;font-size:15px}
+}
+
 /* ── respekterar systeminställning för rörelse ── */
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -354,10 +422,26 @@ svg.plot.ready .pt{cursor:pointer}
 </head>
 <body>
 
+<div class="ovl show" id="intro" role="dialog" aria-modal="true" aria-labelledby="introH">
+  <div class="ovlc">
+    <svg class="iviz" viewBox="0 0 200 92" aria-hidden="true"><path class="iv-b" d="M100 24V3"/><path class="iv-b" d="M100 24 33 91"/><path class="iv-b" d="M100 24 167 91"/><g class="iv-p g1" fill="#ff9f4a"><circle cx="36" cy="21" r="2.5"/><circle cx="43" cy="24" r="2.5"/><circle cx="45" cy="34" r="2.5"/><circle cx="48" cy="18" r="2.5"/><circle cx="53" cy="11" r="2.5"/><circle cx="54" cy="32" r="2.5"/><circle cx="59" cy="22" r="2.5"/><circle cx="63" cy="30" r="2.5"/></g><g class="iv-p g2" fill="#4ecfff"><circle cx="140" cy="28" r="2.5"/><circle cx="142" cy="21" r="2.5"/><circle cx="144" cy="36" r="2.5"/><circle cx="150" cy="17" r="2.5"/><circle cx="150" cy="30" r="2.5"/><circle cx="152" cy="38" r="2.5"/><circle cx="159" cy="22" r="2.5"/><circle cx="161" cy="35" r="2.5"/></g><g class="iv-p g3" fill="#ff5f9e"><circle cx="93" cy="70" r="2.5"/><circle cx="95" cy="81" r="2.5"/><circle cx="98" cy="60" r="2.5"/><circle cx="102" cy="69" r="2.5"/><circle cx="105" cy="78" r="2.5"/><circle cx="107" cy="63" r="2.5"/><circle cx="110" cy="84" r="2.5"/><circle cx="114" cy="73" r="2.5"/></g><g class="iv-k k1"><circle class="iv-c" cx="50" cy="24" r="5.4" stroke="#ff9f4a"/><path class="iv-x" d="M47.4 24h5.2M50 21.4v5.2" stroke="#ff9f4a"/></g><g class="iv-k k2"><circle class="iv-c" cx="150" cy="24" r="5.4" stroke="#4ecfff"/><path class="iv-x" d="M147.4 24h5.2M150 21.4v5.2" stroke="#4ecfff"/></g><g class="iv-k k3"><circle class="iv-c" cx="100" cy="74" r="5.4" stroke="#ff5f9e"/><path class="iv-x" d="M97.4 74h5.2M100 71.4v5.2" stroke="#ff5f9e"/></g></svg>
+    <h2 id="introH">k-means-klustring</h2>
+    <p class="osub">Följ hur algoritmen stegvis grupperar olika typer av datamängder som inte har något facit.</p>
+    <ul class="jrn">
+      <li><span class="jn" style="--c:var(--p1)">1</span><span><b>Välj datamängd</b> – studera punkterna och gissa antalet grupper.</span></li>
+      <li><span class="jn" style="--c:var(--p2)">2</span><span><b>Placera centroider</b> – bestäm k och sätt ut mittpunkterna.</span></li>
+      <li><span class="jn" style="--c:var(--p3)">3</span><span><b>Tilldela datapunkter</b> – varje punkt går till närmaste centroid.</span></li>
+      <li><span class="jn" style="--c:var(--p4)">4</span><span><b>Flytta centroider</b> – centroiderna flyttas till mitten av sina punkter, sedan upprepas steg 3 och 4.</span></li>
+      <li><span class="jn" style="--c:var(--p5)">5</span><span><b>Utvärdera valet av k</b> – jämför hur olika värden på k påverkar resultatet.</span></li>
+    </ul>
+    <button class="ovlb" id="introGo">Sätt igång <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
+</div>
+
 <header class="hd">
   <div class="links">
     <a class="lk" href="/">← AI-aktiviteter</a>
-    <a class="lk" href="/k-means_ENG"><svg viewBox="0 0 50 30" aria-hidden="true"><rect width="50" height="30" fill="#012169"/><path d="M0,0 L50,30 M50,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#fff" stroke-width="10"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#C8102E" stroke-width="6"/></svg>English</a>
+    <a class="lk lang" id="langLink" href="/k-means_ENG" hreflang="en" lang="en"><svg viewBox="0 0 50 30" aria-hidden="true"><rect width="50" height="30" fill="#012169"/><path d="M0,0 L50,30 M50,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#fff" stroke-width="10"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#C8102E" stroke-width="6"/></svg>English</a>
   </div>
   <h1>k-means-klustring</h1>
   <p class="tag">Kan en algoritm hitta grupper i data utan att veta vad den letar efter?</p>
@@ -1251,8 +1335,8 @@ function pipeBodies(){
     : '';
 
   $('p1body').innerHTML=`<div class="pdin">
-    <p>Varje punkt är ett objekt som beskrivs av två mätvärden. I datan finns <b>inget känt facit</b>: ingenting talar om hur många grupper som finns, eller vilken grupp ett enskilt objekt tillhör.</p>
-    <p>Algoritmen har alltså inget rätt svar att härma. Den har bara punkternas inbördes avstånd att utgå från, och söker utifrån dem ett mönster att dela in datan efter. Den sortens inlärning kallas <button class="term" data-t="oover">oövervakad inlärning</button>.</p>
+    <p>Varje punkt är ett objekt (en kund, en växt, en mätning eller liknande) som beskrivs av två mätvärden. I datan finns <b>inget känt facit</b>: ingenting talar om hur många grupper som finns, eller vilken grupp ett enskilt objekt tillhör.</p>
+    <p>Algoritmen har alltså inga rätta svar att härma. Den har bara punkternas inbördes avstånd att utgå från, och söker utifrån dem ett mönster att dela in datan efter. Den sortens inlärning kallas <button class="term" data-t="oover">oövervakad inlärning</button>.</p>
     <span class="slbl">Datamängd</span>
     <div class="chips">${Object.entries(DS).map(([id,d])=>`<button class="chip${id===ds?' on':''}" data-ds="${id}">${d.n}</button>`).join('')}</div>
     <p style="margin-top:11px">${ds?DS[ds].tip:'Välj en datamängd för att börja.'}</p>
@@ -1420,6 +1504,38 @@ function render(){
 readURL();load();build();
 if(ds){syncC();drawV(cens,false);}
 render();
+/* ── språkväxlare ──
+   Simuleringens tillstånd (datamängd, k, frö, startläge) ligger i URL:ens
+   frågesträng. Den hängs på länken vid klick, så att samma läge öppnas i
+   den andra språkversionen. */
+(function(){
+  const a=$('langLink');if(!a)return;
+  const base=a.getAttribute('href');
+  a.addEventListener('click',()=>{a.setAttribute('href',base+location.search);});
+})();
+/* ── introruta ── */
+(function(){
+  const ov=$('intro');
+  if(!ov)return;
+  document.body.style.overflow='hidden';
+  const close=()=>{
+    if(!ov.classList.contains('show'))return;
+    ov.classList.remove('show');
+    document.body.style.overflow='';
+    /* Rutan ska gå att stänga även om något annat i skriptet har fallerat. */
+    try{focusStep(1);}catch(err){}
+    const h=$('h1b');if(h)h.focus();
+  };
+  $('introGo').onclick=close;
+  ov.addEventListener('click',e=>{if(e.target===ov)close();});
+  document.addEventListener('keydown',e=>{
+    if(!ov.classList.contains('show'))return;
+    if(e.key==='Escape'){e.stopPropagation();close();}
+    /* Tabbning hålls kvar inuti rutan så länge den är öppen. */
+    if(e.key==='Tab'){e.preventDefault();$('introGo').focus();}
+  },true);
+  $('introGo').focus();
+})();
 </script>
 </body>
 </html>
