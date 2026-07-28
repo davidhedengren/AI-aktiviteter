@@ -689,11 +689,11 @@
     <h2>Beslutsträd</h2>
     <p class="sub">Bygg ett eget beslutsträd som skiljer giftiga ormar från ofarliga — och jämför det sedan med ett träd som en dator bygger på samma data.</p>
     <ul class="journey">
-      <li><span class="ji">1</span><span><strong>Studera datan</strong> – vilka egenskaper skiljer giftiga ormar från ofarliga?</span></li>
-      <li><span class="ji">2</span><span><strong>Bygg ditt träd</strong> – vilka frågor ska det ställa, och i vilken ordning?</span></li>
-      <li><span class="ji">3</span><span><strong>Testa på ny data</strong> – fungerar trädet på ormar det aldrig sett?</span></li>
-      <li><span class="ji">4</span><span><strong>Jämför med datorn</strong> – hur väljer en algoritm sina frågor med hjälp av entropi och informationsvinst?</span></li>
-      <li><span class="ji">5</span><span><strong>Dra slutsatser</strong> – varför ger fler frågor inte alltid en bättre modell?</span></li>
+      <li><span class="ji">1</span><span><strong>Studera datan</strong> – leta efter de egenskaper som skiljer giftiga ormar från ofarliga.</span></li>
+      <li><span class="ji">2</span><span><strong>Bygg ditt träd</strong> – bestäm vilka frågor trädet ska ställa och i vilken ordning.</span></li>
+      <li><span class="ji">3</span><span><strong>Testa på ny data</strong> – undersök om trädet fungerar även på ormar det inte sett tidigare.</span></li>
+      <li><span class="ji">4</span><span><strong>Jämför med datorn</strong> – undersök hur en algoritm väljer sina frågor med hjälp av begrepp som entropi och informationsvinst.</span></li>
+      <li><span class="ji">5</span><span><strong>Dra slutsatser</strong> – ta reda på varför fler frågor inte alltid ger en bättre modell.</span></li>
     </ul>
     <button class="overlay-btn" id="introStart">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -1229,6 +1229,7 @@ const REDUCED=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function toastHost(){let h=document.getElementById('toastwrap');
   if(!h){h=document.createElement('div');h.className='toastwrap';h.id='toastwrap';document.body.appendChild(h);}return h;}
 
+  
   function toast(msg,cls,ms){
   const h=toastHost(),t=document.createElement('div');
   t.className='toast '+(cls||'');t.setAttribute('role','status');t.innerHTML=msg;h.appendChild(t);
