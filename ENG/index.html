@@ -145,8 +145,10 @@
 
   .grid{display:grid;gap:14px;}
   .grid-sims{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
-  /* En grupp med ett enda kort ska inte sträckas över hela bredden. */
-  .grid-single{grid-template-columns:minmax(240px,330px);}
+  /* En grupp med ett enda kort ska inte sträckas över hela bredden.
+     Gäller först när skärmen rymmer mer än en kolumn — annars skulle kortet
+     bli smalare än sina grannar i mobilens enkolumnsvy. */
+  @media(min-width:560px){.grid-single{grid-template-columns:minmax(240px,330px);}}
   /* Logotypen är en knapp: den spelar upp animationen igen. */
   button.logo{background:none;border:0;color:inherit;font:inherit;}
   button.logo:focus-visible{outline:2px solid var(--accent-cyan);outline-offset:6px;border-radius:16px;}
