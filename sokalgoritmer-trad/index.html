@@ -172,22 +172,22 @@ button{font-family:inherit;}
 }
 
 /* ── Node toolbar ── */
-.node-toolbar{position:absolute;display:none;transform:translate(-50%,-100%);background:rgba(21,26,46,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:9px;padding:5px;gap:5px;align-items:center;box-shadow:0 10px 28px rgba(0,0,0,.55);z-index:5;white-space:nowrap;}
+
 .node-toolbar.show{display:flex;}
-.nt-btn{padding:5px 9px;font-size:11px;font-weight:600;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--subtle);cursor:pointer;font-family:'DM Sans',sans-serif;transition:.15s;}
+
 .nt-btn:hover{border-color:var(--accent);color:var(--text);}
 .nt-btn.active{background:rgba(239,91,91,.18);border-color:rgba(239,91,91,.5);color:#ff9a9a;}
 .nt-del:hover{border-color:#ef5b5b!important;color:#ff9a9a!important;}
-.nt-h{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--dim);font-weight:600;}
-.nt-h input{width:44px;padding:4px 6px;font-size:11px;background:var(--surface);border:1px solid var(--border);border-radius:5px;color:var(--text);font-family:'JetBrains Mono',monospace;outline:none;}
+
+
 .nt-h input:focus{border-color:var(--accent);}
 .node-toolbar::after{content:'';position:absolute;left:50%;bottom:-5px;transform:translateX(-50%) rotate(45deg);width:8px;height:8px;background:rgba(21,26,46,.92);border-right:1px solid var(--border);border-bottom:1px solid var(--border);}
 
 /* ── Edge editor ── */
-.edge-editor{position:absolute;display:none;transform:translate(-50%,-50%);z-index:6;align-items:center;gap:5px;background:rgba(21,26,46,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--accent);border-radius:8px;padding:5px 7px;box-shadow:0 8px 24px rgba(0,0,0,.55);}
+
 .edge-editor.show{display:flex;}
 .edge-editor span{font-size:10px;color:var(--dim);font-weight:600;letter-spacing:.03em;}
-.edge-editor input{width:48px;padding:4px 6px;font-size:12px;background:var(--surface);border:1px solid var(--border);border-radius:5px;color:var(--text);font-family:'JetBrains Mono',monospace;outline:none;}
+
 .edge-editor input:focus{border-color:var(--accent);}
 
 /* ── Canvas queue toggle ── */
@@ -205,7 +205,9 @@ button{font-family:inherit;}
 .canvas-toggle[aria-pressed="false"]{color:var(--dim);}
 .canvas-toggle[aria-pressed="false"] .ct-icon-on{display:none;}
 .canvas-toggle[aria-pressed="false"] .ct-icon-off{display:block;}
-@media(max-width:640px){.canvas-toggle span{display:none;}.canvas-toggle{padding:9px;}}
+/* Etiketten står kvar även på små skärmar. Ett ensamt öga säger inte
+   vad knappen gör, och knappen får plats med texten. */
+@media(max-width:640px){.canvas-toggle{padding:7px 10px;font-size:10.5px;gap:5px;}}
 
 /* ── Canvas tooltip ── */
 #canvasTooltip{position:absolute;pointer-events:none;z-index:10;background:rgba(13,17,32,.94);border:1px solid var(--border);border-radius:8px;padding:8px 11px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--subtle);white-space:nowrap;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 12px 30px rgba(0,0,0,.55);opacity:0;transform:translateY(-4px);transition:opacity .14s,transform .14s;line-height:1.6;}
@@ -256,10 +258,169 @@ button{font-family:inherit;}
 .color-box{display:inline-block;width:14px;height:14px;border:1px solid rgba(255,255,255,.15);border-radius:50%;flex-shrink:0;}
 .color-ring{display:inline-block;width:14px;height:14px;border:2px solid #facc15;border-radius:50%;flex-shrink:0;background:transparent;}
 
+.concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
+.concept-backdrop.show{opacity:1;pointer-events:auto;}
+.concept-card{position:fixed;top:50%;left:50%;z-index:301;width:380px;max-width:90vw;
+  perspective:1000px;
+  transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
+  transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .26s var(--ease-out);}
+.concept-card.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
+.concept-card-inner{position:relative;text-align:center;transform-style:preserve-3d;
+  background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;
+  transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
+  transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);
+  will-change:transform;max-height:86vh;max-height:86dvh;overflow-y:auto;}
+.concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+  padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,206,84,.15) 45%,transparent 65%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::before{opacity:1;}
+.concept-card-inner::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.09),transparent 60%);
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::after{opacity:1;}
+.concept-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);z-index:3;transform:translateZ(30px);}
+.concept-close:hover{border-color:var(--red);color:var(--red);transform:translateZ(30px) rotate(90deg);}
+.concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
+.concept-icon svg{width:28px;height:28px;}
+.concept-title{font-family:'Syne',sans-serif;font-size:1.36em;font-weight:700;margin-bottom:9px;letter-spacing:.005em;line-height:1.25;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
+.concept-def{font-size:.88em;line-height:1.6;color:var(--dim);position:relative;z-index:3;transform:translateZ(18px);transform-style:preserve-3d;}
+.concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;font-weight:600;}
+
+/* 3D-rutor i glaskorten */
+.gc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 8px;margin:14px 0 4px;transform-style:preserve-3d;}
+.gc-grid-2{grid-template-columns:repeat(2,minmax(0,1fr));}
+.gc-cell{display:flex;flex-direction:column;align-items:center;gap:7px;transform-style:preserve-3d;}
+.t3{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5);
+  background:linear-gradient(155deg,color-mix(in srgb,var(--tc) 72%,#fff) 0%,var(--tc) 44%,color-mix(in srgb,var(--tc) 60%,#000) 100%);
+  box-shadow:0 14px 24px -8px color-mix(in srgb,var(--tc) 55%,rgba(0,0,0,.65)),0 3px 8px rgba(0,0,0,.35),
+    inset 0 1.5px 0 rgba(255,255,255,.42),inset 0 -3px 6px rgba(0,0,0,.32),
+    0 0 0 1px color-mix(in srgb,var(--tc) 40%,rgba(255,255,255,.1));
+  transform:translateZ(16px) rotateX(9deg);}
+.t3::after{content:'';position:absolute;left:6px;right:6px;top:3px;height:36%;border-radius:50%;
+  background:linear-gradient(rgba(255,255,255,.32),rgba(255,255,255,0));pointer-events:none;}
+.t3.big{width:70px;height:70px;border-radius:50%;font-size:28px;transform:translateZ(22px) rotateX(9deg);}
+.t3-lab{font-size:11px;font-weight:700;color:var(--text);letter-spacing:.01em;line-height:1.2;}
+.t3-sub{font-size:9.5px;color:var(--dim);margin-top:-4px;}
+
+.gc-ctrl{margin-top:16px;display:flex;flex-direction:column;gap:9px;text-align:left;}
+.gc-ctrl-row{display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--dim);line-height:1.45;}
+.mbtn{flex-shrink:0;min-width:82px;text-align:center;padding:4px 9px;border:1px solid var(--border);border-radius:8px;
+  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02));color:var(--subtle);
+  font-size:10.5px;font-weight:700;box-shadow:0 2px 5px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.08);}
+.gc-note{font-size:11.5px;color:var(--dim);line-height:1.65;margin-top:14px;}
+.gc-btn{width:100%;margin-top:16px;padding:11px;border:none;border-radius:11px;font-size:12.5px;font-weight:700;cursor:pointer;
+  background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;
+  box-shadow:0 8px 22px rgba(77,128,255,.32),inset 0 1px 0 rgba(255,255,255,.25);transition:filter .16s,transform .08s;}
+.gc-btn:hover{filter:brightness(1.07);}
+.gc-btn:active{transform:translateY(1px);}
+
+
+/* ── Frågetecken på algoritmkorten ── */
+.alg-info{position:absolute;top:5px;right:6px;width:15px;height:15px;border-radius:50%;
+  border:1px solid var(--border);color:var(--dim);font-size:10px;font-weight:800;line-height:1;
+  display:flex;align-items:center;justify-content:center;opacity:.5;transition:.16s;background:transparent;}
+.alg-card:hover .alg-info{opacity:.85;}
+.alg-info:hover{opacity:1;color:var(--c);border-color:color-mix(in srgb,var(--c) 60%,transparent);}
+.alg-card[aria-checked="true"] .alg-info{opacity:.9;border-color:color-mix(in srgb,var(--c) 45%,transparent);color:var(--c);}
+
+/* ── Redigeringsläge: strömbrytare + hjälpknapp ── */
+.edit-controls{display:inline-flex;align-items:center;gap:6px;}
+.hud-toggle{display:inline-flex;align-items:center;gap:7px;padding:6px 10px 6px 9px;font-size:11.5px;font-weight:700;
+  border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--dim);cursor:pointer;
+  font-family:'DM Sans',sans-serif;transition:.18s;}
+.hud-toggle svg{width:14px;height:14px;flex-shrink:0;}
+.hud-toggle:hover{color:var(--subtle);border-color:var(--dim);}
+.hud-switch{width:26px;height:15px;border-radius:9px;background:var(--surface2);border:1px solid var(--border);
+  position:relative;flex-shrink:0;transition:.2s;}
+.hud-switch::after{content:'';position:absolute;top:2px;left:2px;width:9px;height:9px;border-radius:50%;
+  background:var(--dim);transition:.2s var(--ease-spring);}
+.hud-toggle[aria-pressed="true"]{color:var(--green);border-color:color-mix(in srgb,var(--green) 45%,transparent);
+  background:color-mix(in srgb,var(--green) 10%,var(--surface));}
+.hud-toggle[aria-pressed="true"] .hud-switch{background:color-mix(in srgb,var(--green) 30%,transparent);
+  border-color:color-mix(in srgb,var(--green) 50%,transparent);}
+.hud-toggle[aria-pressed="true"] .hud-switch::after{transform:translateX(11px);background:var(--green);}
+.hud-help{width:28px;height:28px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--dim);cursor:pointer;transition:.18s;}
+.hud-help svg{width:15px;height:15px;}
+.hud-help:hover{color:var(--text);border-color:var(--accent);}
+
+/* Redigeringsläget syns på duken: grön innerram och hårkorspekare. */
+#canvasContainer.editing canvas{cursor:crosshair;box-shadow:inset 0 0 0 1.5px rgba(51,209,122,.32),inset 0 0 40px rgba(51,209,122,.06);}
+
+/* ── Nodpanel och kantpanel ──
+   Båda är små flytande editorer ovanpå duken. De har fått rubrik, större
+   träffytor och plus/minus-knappar, så att de går att använda med finger. */
+.node-toolbar,.edge-editor{position:absolute;z-index:6;display:none;flex-direction:column;gap:8px;
+  background:linear-gradient(165deg,rgba(28,34,58,.97),rgba(16,20,36,.98));
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.12);border-radius:13px;padding:11px 12px;
+  box-shadow:0 18px 44px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.07);white-space:nowrap;}
+.node-toolbar{transform:translate(-50%,-100%) translateY(-10px);}
+.edge-editor{transform:translate(-50%,-50%);}
+.node-toolbar.show,.edge-editor.show{display:flex;animation:editorIn .22s var(--ease-spring);}
+@keyframes editorIn{from{opacity:0;transform:translate(-50%,-100%) translateY(-4px) scale(.94);}}
+.ed-head{font-size:9.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);
+  display:flex;align-items:center;gap:6px;}
+.ed-head b{color:var(--subtle);font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:0;font-size:11px;}
+.ed-row{display:flex;align-items:center;gap:6px;}
+.num-field{display:inline-flex;align-items:center;gap:0;border:1px solid var(--border);border-radius:9px;
+  background:var(--surface);overflow:hidden;}
+.num-field button{width:26px;height:28px;border:0;background:transparent;color:var(--subtle);cursor:pointer;
+  font-size:15px;font-weight:700;line-height:1;font-family:'DM Sans',sans-serif;transition:.14s;}
+.num-field button:hover{background:rgba(255,255,255,.07);color:var(--text);}
+.num-field button:active{background:rgba(255,255,255,.12);}
+.num-field input{width:40px;height:28px;padding:0;text-align:center;border:0;border-left:1px solid var(--border);
+  border-right:1px solid var(--border);background:transparent;color:var(--text);
+  font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;outline:none;
+  -moz-appearance:textfield;}
+.num-field input::-webkit-outer-spin-button,.num-field input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.ed-lab{font-size:10.5px;font-weight:700;color:var(--dim);letter-spacing:.02em;}
+.nt-btn{padding:6px 11px;height:28px;font-size:11px;font-weight:700;border-radius:9px;border:1px solid var(--border);
+  background:var(--surface);color:var(--subtle);cursor:pointer;font-family:'DM Sans',sans-serif;transition:.15s;}
+.nt-btn:hover:not(:disabled){border-color:var(--dim);color:var(--text);}
+.nt-btn:disabled{opacity:.35;cursor:not-allowed;}
+.nt-btn.active{background:color-mix(in srgb,var(--red) 16%,var(--surface));
+  border-color:color-mix(in srgb,var(--red) 55%,transparent);color:var(--red);}
+.nt-del:hover:not(:disabled){border-color:var(--red);color:var(--red);}
+.ed-hint{font-size:10px;color:var(--dim);letter-spacing:.01em;}
+
+/* ── Flaggan i språkväxlaren ── */
+.lang-link .lang-ico{display:block;width:17px;height:11px;flex-shrink:0;border-radius:2px;overflow:hidden;
+  line-height:0;box-shadow:0 0 0 1px rgba(255,255,255,.14);}
+.lang-link .lang-ico svg{display:block;width:100%;height:100%;}
+
+/* ── Introrutan på låga skärmar ──
+   vh mäter viewporten utan adressfält på mobil, därför dvh som komplement. */
+@media (max-height:720px){
+  .overlay-card{padding:18px 20px;max-height:94vh;max-height:94dvh;}
+  .intro-viz{width:112px;height:52px;margin:0 auto 7px;}
+  .overlay-card .steps{gap:7px;margin:9px 0;}
+  .overlay-btn{padding:10px;margin-top:10px;}
+}
+@media (max-height:560px){
+  .intro-viz{display:none;}
+  .overlay-card h2{font-size:1.1em;}
+  .overlay-card .sub{margin-bottom:8px;}
+}
+
+
+/* Hjälpknapp i datastrukturpanelens rubrikrad. Den ligger utanför <button>
+   i uppmärkningen, eftersom en knapp inte får innehålla en annan knapp. */
+.ds-panel{position:relative;}
+.ds-help{position:absolute;top:12px;right:44px;width:22px;height:22px;z-index:2;
+  display:flex;align-items:center;justify-content:center;border-radius:50%;
+  border:1px solid var(--border);background:var(--surface2);color:var(--dim);
+  font-size:11px;font-weight:800;line-height:1;cursor:pointer;transition:.16s;
+  font-family:'DM Sans',sans-serif;}
+.ds-help:hover{color:var(--text);border-color:var(--accent);}
+
 /* ── Intro overlay ── */
 .overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
-.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:540px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
+.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:540px;width:92%;text-align:center;max-height:90vh;max-height:90dvh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
 @keyframes overlayIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
 .intro-viz{width:200px;height:92px;margin:0 auto 14px;display:block;}
 .iv-e{fill:none;stroke:rgba(255,255,255,.16);stroke-width:2;}
@@ -296,9 +457,8 @@ button{font-family:inherit;}
 /* ══ Intro-overlay på mobil: samma centrerade layout som på desktop, bara kompaktare så den ryms utan scroll ══ */
 @media (max-width:560px){
   .overlay{padding:16px;}
-  .overlay-card{width:100%;padding:20px 22px;max-height:88vh;}
+  .overlay-card{width:100%;padding:20px 22px;max-height:88vh;max-height:88dvh;}
   .intro-viz{width:130px;height:60px;margin:0 auto 8px;}
-  .db-icon-wrap{width:48px;height:48px;margin:0 auto 8px;}
   .overlay-card h2{font-size:1.08em;margin-bottom:5px;}
   .overlay-card .sub{font-size:.8em;line-height:1.45;margin-bottom:10px;}
   .overlay-card .steps{gap:8px;margin:10px 0;}
@@ -310,7 +470,6 @@ button{font-family:inherit;}
 /* Riktigt korta skärmar: krymp illustrationen ytterligare i stället för att dölja den */
 @media (max-width:560px) and (max-height:640px){
   .intro-viz{width:96px;height:44px;margin:0 auto 6px;}
-  .db-icon-wrap{width:38px;height:38px;margin:0 auto 6px;}
 }
 </style>
 </head>
@@ -318,7 +477,7 @@ button{font-family:inherit;}
 
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
-  <a class="lang-link" href="https://www.ai-aktiviteter.se/sokalgoritmer-trad_ENG"><span class="flag">🇬🇧</span> English</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/sokalgoritmer-trad_ENG"><span class="lang-ico" aria-hidden="true"><svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#00247d"/><path d="M0 0 60 36M60 0 0 36" stroke="#fff" stroke-width="7"/><path d="M0 0 60 36M60 0 0 36" stroke="#cf142b" stroke-width="4"/><path d="M30 0v36M0 18h60" stroke="#fff" stroke-width="12"/><path d="M30 0v36M0 18h60" stroke="#cf142b" stroke-width="7"/></svg></span> English</a>
   <h1>Sökalgoritmer i <span>träd</span></h1>
   <p>Bygg egna sökträd och följ exakt hur BFS, DFS, Girig bäst-först och A* utforskar varje nod.</p>
 </div>
@@ -329,32 +488,50 @@ button{font-family:inherit;}
 <h2 class="alg-cards-label">Val av algoritm</h2>
 <div class="alg-cards" role="radiogroup" aria-label="Välj algoritm" id="algCards">
   <button class="alg-card" style="--c:#ec4899" data-alg="BFS" role="radio" aria-checked="true">
-    <span class="alg-dot"></span><span class="alg-name">BFS</span>
+    <span class="alg-dot"></span><span class="alg-name">BFS</span><span class="alg-info" role="button" tabindex="0" aria-label="Visa förklaring" title="Visa förklaring">?</span>
   </button>
   <button class="alg-card" style="--c:#a06bff" data-alg="DFS" role="radio" aria-checked="false">
-    <span class="alg-dot"></span><span class="alg-name">DFS</span>
+    <span class="alg-dot"></span><span class="alg-name">DFS</span><span class="alg-info" role="button" tabindex="0" aria-label="Visa förklaring" title="Visa förklaring">?</span>
   </button>
   <button class="alg-card" style="--c:#2dd4bf" data-alg="A*" role="radio" aria-checked="false">
-    <span class="alg-dot"></span><span class="alg-name">A*</span>
+    <span class="alg-dot"></span><span class="alg-name">A*</span><span class="alg-info" role="button" tabindex="0" aria-label="Visa förklaring" title="Visa förklaring">?</span>
   </button>
   <button class="alg-card" style="--c:#f59e0b" data-alg="Greedy" role="radio" aria-checked="false">
-    <span class="alg-dot"></span><span class="alg-name">Girig bäst-först</span>
+    <span class="alg-dot"></span><span class="alg-name">Girig bäst-först</span><span class="alg-info" role="button" tabindex="0" aria-label="Visa förklaring" title="Visa förklaring">?</span>
   </button>
 </div>
 
 <div id="canvasContainer">
   <canvas id="treeCanvas" width="780" height="460"></canvas>
-  <div id="nodeToolbar" class="node-toolbar">
-    <button id="ntGoal" class="nt-btn">Mål</button>
-    <span class="nt-h">h <input id="ntH" type="number" step="1"></span>
-    <button id="ntDelete" class="nt-btn nt-del">Radera</button>
+  <div id="nodeToolbar" class="node-toolbar" role="group" aria-label="Nod">
+    <div class="ed-head">Nod <b id="ntId">–</b></div>
+    <div class="ed-row">
+      <span class="ed-lab">h(n)</span>
+      <span class="num-field">
+        <button type="button" id="ntHminus" aria-label="-1">−</button>
+        <input id="ntH" type="number" step="1" inputmode="numeric" aria-label="h(n)">
+        <button type="button" id="ntHplus" aria-label="+1">+</button>
+      </span>
+    </div>
+    <div class="ed-row">
+      <button id="ntGoal" class="nt-btn">Mål</button>
+      <button id="ntDelete" class="nt-btn nt-del">Radera</button>
+    </div>
   </div>
-  <div id="edgeEditor" class="edge-editor">
-    <span>kostnad</span><input id="eeInput" type="number" min="1" step="1">
+  <div id="edgeEditor" class="edge-editor" role="group" aria-label="Kostnad">
+    <div class="ed-head">Kostnad <b id="eeLabel">–</b></div>
+    <div class="ed-row">
+      <span class="num-field">
+        <button type="button" id="eeMinus" aria-label="-1">−</button>
+        <input id="eeInput" type="number" min="1" step="1" inputmode="numeric" aria-label="Kostnad">
+        <button type="button" id="eePlus" aria-label="+1">+</button>
+      </span>
+      <span class="ed-hint">Enter sparar</span>
+    </div>
   </div>
   <div id="canvasTooltip"></div>
   <div id="resultOverlay" class="result-overlay"></div>
-  <button id="queueToggle" class="canvas-toggle" type="button" aria-pressed="true">
+  <button id="queueToggle" class="canvas-toggle" type="button" aria-pressed="true" title="Visa eller dölj de noder som står i kö – de orange ringarna på ritytan" aria-label="Visa eller dölj de noder som står i kö – de orange ringarna på ritytan">
     <svg class="ct-icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
     <svg class="ct-icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.77 21.77 0 0 1 5.06-5.94M9.9 4.24A10.94 10.94 0 0 1 12 5c7 0 11 7 11 7a21.77 21.77 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
     <span id="queueToggleLabel">Visa kö</span>
@@ -405,11 +582,24 @@ button{font-family:inherit;}
     <button id="loadBtn" class="btn-ghost">Ladda</button>
     <input type="file" id="loadInput" style="display:none;" />
     <span class="cc-sep"></span>
+    <div class="edit-controls">
+      <button id="editToggle" class="hud-toggle" aria-pressed="false" title="Redigera">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        Redigera
+        <span class="hud-switch" aria-hidden="true"></span>
+      </button>
+      <button id="editHelpBtn" class="hud-help" title="Så bygger du" aria-label="Visa bygginstruktioner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+      </button>
+    </div>
+    <span class="cc-sep"></span>
+    <button class="btn-ghost" onclick="openConcept('tips',event)">Förklaringar &amp; tips</button>
     <button id="clearNodesBtn" class="btn-ghost">Rensa noder</button>
   </div>
 </div>
 
 <div class="ds-panel" id="dsPanel">
+  <button class="ds-help" type="button" onclick="openConcept('frontier',event)" aria-label="Vad är kön?" title="Vad är kön?">?</button>
   <button class="ds-toggle" id="dsToggleBtn" onclick="toggleFrontierPanel()">
     <span class="ds-toggle-label" id="dsToggleLabel">Visa kö</span>
     <span class="ds-badge" id="dsBadge">—</span>
@@ -425,28 +615,18 @@ button{font-family:inherit;}
   </div>
 </div>
 
-<div class="instructions">
-  <h3>Så bygger du trädet</h3>
-  <ul>
-    <li><strong>Skapa nod</strong> – klicka i en tom yta. Noden snäpper till närmaste rutnätspunkt.</li>
-    <li><strong>Koppla noder</strong> – dra från en nod till en annan. En liten ruta dyker upp där du anger kantens kostnad.</li>
-    <li><strong>Flytta nod</strong> – dra noden till en tom plats.</li>
-    <li><strong>Markera nod</strong> – klicka på den. Då visas knappar för att göra den till <strong>mål</strong>, sätta <strong>heuristik h(n)</strong> eller <strong>radera</strong> den.</li>
-    <li><strong>Ändra kostnad</strong> – klicka mitt på en kant.</li>
-  </ul>
-  <h3 style="margin-top:16px;">Färger under sökningen</h3>
-  <div class="lg-grid">
-    <span class="lg-item"><span class="color-box" style="background:#34c759;"></span>Startnod</span>
-    <span class="lg-item"><span class="color-box" style="background:#ef5b5b;"></span>Målnod</span>
-    <span class="lg-item"><span class="color-box" style="background:#4d80ff;"></span>Utforskad</span>
-    <span class="lg-item"><span class="color-box" style="background:#f0a94e;"></span>I kö / stack</span>
-    <span class="lg-item"><span class="color-ring"></span>Expanderas just nu</span>
-    <span class="lg-item"><span class="color-box" style="background:#3ddc84;"></span>Hittad väg</span>
-  </div>
-  <p><em>Tips:</em> Vid A*-sökning kan du hålla muspekaren över en nod för att se f(n) = g(n) + h(n).</p>
-</div>
 
 </div><!-- /page-wrap -->
+
+<div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
+<div class="concept-card" id="conceptCard">
+  <div class="concept-card-inner" id="conceptCardInner">
+    <button class="concept-close" onclick="closeConcept()" aria-label="Stäng">✕</button>
+    <div class="concept-icon" id="conceptIcon"></div>
+    <div class="concept-title" id="conceptTitle"></div>
+    <div class="concept-def" id="conceptDef"></div>
+  </div>
+</div>
 
 <div class="overlay show" id="introOverlay">
   <div class="overlay-card">
@@ -464,11 +644,11 @@ button{font-family:inherit;}
       </circle>
     </svg>
     <h2>Sökalgoritmer i <span>träd</span></h2>
-    <p class="sub">Se hur olika sökalgoritmer letar sig igenom ett träd – och förstå skillnaderna mellan dem.</p>
+    <p class="sub">Fyra klassiska sökalgoritmer letar sig igenom samma träd. Följ hur de arbetar, nod för nod.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">01</div><div><strong>Välj ett träd</strong> – ladda ett exempel, eller bygg ett eget (klicka för nod, dra mellan noder för kant).</div></div>
-      <div class="step"><div class="step-num">02</div><div><strong>Välj algoritm och sök</strong> – BFS, DFS, Girig bäst-först eller A*. Använd spela/stega-knapparna för att följa sökningen nod för nod, framåt och bakåt.</div></div>
-      <div class="step"><div class="step-num">03</div><div><strong>Jämför</strong> – kör samma träd med olika algoritmer. Vilken hittar billigaste vägen, och vilken utforskar färst noder?</div></div>
+      <div class="step"><div class="step-num">01</div><div><strong>Välj ett träd</strong> – ladda ett exempel eller bygg ett eget.</div></div>
+      <div class="step"><div class="step-num">02</div><div><strong>Välj algoritm</strong> – BFS, DFS, Girig bäst-först eller A*.</div></div>
+      <div class="step"><div class="step-num">03</div><div><strong>Jämför</strong> – vilken hittar billigaste vägen, och vilken utforskar färst noder?</div></div>
     </div>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -798,7 +978,7 @@ function removeNode(n){
 }
 
 canvas.addEventListener("pointerdown",e=>{
-  if(e.button!==0)return;
+  if(e.button!==0||!editMode)return;
   e.preventDefault();hideEdgeEditor();snapPreview=null;
   let pos=getPos(e);downPos=pos;
   let n=findNodeAt(pos.x,pos.y);
@@ -823,7 +1003,7 @@ canvas.addEventListener("pointermove",e=>{
     }
   } else {
     let n=findNodeAt(pos.x,pos.y);
-    if(!n&&!search_in_progress){
+    if(!n&&!search_in_progress&&editMode){
       let sp=snapPt(pos.x,pos.y);
       let occupied=nodes.some(nd=>nd.x===sp.x&&nd.y===sp.y);
       snapPreview=occupied?null:sp;
@@ -836,6 +1016,7 @@ canvas.addEventListener("pointermove",e=>{
 canvas.addEventListener("mouseleave",()=>{snapPreview=null;hideTooltip();drawAll();});
 
 canvas.addEventListener("pointerup",e=>{
+  if(!editMode)return;
   if(e.button!==0&&e.pointerType==="mouse"){return;}
   let pos=getPos(e);snapPreview=null;
   if(dragNode){
@@ -868,7 +1049,7 @@ canvas.addEventListener("pointerup",e=>{
   try{canvas.releasePointerCapture(e.pointerId);}catch(_){}
 });
 
-canvas.addEventListener("dblclick",e=>{let pos=getPos(e);let n=findNodeAt(pos.x,pos.y);if(n)toggleGoal(n);});
+canvas.addEventListener("dblclick",e=>{if(!editMode)return;let pos=getPos(e);let n=findNodeAt(pos.x,pos.y);if(n)toggleGoal(n);});
 
 /* ============================================================
    HOVER / TOOLTIP
@@ -910,6 +1091,133 @@ function updateHover(pos){
   }
 }
 
+/* ═══════════════ Glaskort (begreppskort) ═══════════════ */
+function t3(color,glyph,label,sub){
+  return '<div class="gc-cell"><div class="t3" style="--tc:'+color+'">'+(glyph||'')+'</div>'
+    +'<span class="t3-lab">'+label+'</span>'+(sub?'<span class="t3-sub">'+sub+'</span>':'')+'</div>';
+}
+const CONCEPTS={
+  'BFS':{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2.5"/><circle cx="12" cy="12" r="6.5" stroke-dasharray="2 3"/><circle cx="12" cy="12" r="10" stroke-dasharray="2 3"/></svg>',
+    title:'BFS – Bredden-först',
+    def:'<strong>BFS</strong> undersöker trädet nivå för nivå: först alla noder ett steg från start, sedan alla som ligger två steg bort, och så vidare.'
+      +'<button class="gc-btn" onclick="closeConcept()">Jag förstår</button>'
+  },
+  'DFS':{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="4" rx="1"/><rect x="4" y="10" width="16" height="4" rx="1"/><rect x="4" y="16" width="16" height="4" rx="1"/></svg>',
+    title:'DFS – Djupet-först',
+    def:'<strong>DFS</strong> följer en enda gren så långt det går, och backar först när den kör fast.'
+      +'<button class="gc-btn" onclick="closeConcept()">Jag förstår</button>'
+  },
+  'A*':{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.4 5.9L21 10l-4.8 4.2L17.4 21 12 17.5 6.6 21l1.2-6.8L3 10l6.6-1.1L12 3z"/></svg>',
+    title:'A*',
+    def:'<strong>A*</strong> väger samman två saker för varje nod: <strong>g(n)</strong>, vad det kostat att ta sig hit längs kanterna, och <strong>h(n)</strong>, den uppskattning du själv satt på noden.<br><br>Summan <strong>f(n)&nbsp;=&nbsp;g(n)&nbsp;+&nbsp;h(n)</strong> avgör vilken nod som undersöks härnäst.'
+      +'<button class="gc-btn" onclick="closeConcept()">Jag förstår</button>'
+  },
+  'Greedy':{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg>',
+    title:'Girig bäst-först',
+    def:'<strong>Girig bäst-först</strong> ser bara framåt: den väljer alltid den nod som har lägst <strong>h(n)</strong>, och bortser helt från vad vägen dit har kostat.'
+      +'<button class="gc-btn" onclick="closeConcept()">Jag förstår</button>'
+  },
+  bygga:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
+    title:'Bygg ditt träd',
+    def:'Redigeringsläget är på – nu formar du trädet direkt på ritytan.'
+      +'<div class="gc-ctrl">'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Klicka</span><span>i tom yta skapar en <strong>ny nod</strong>.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Dra</span><span>från en nod till en annan skapar en <strong>kant</strong>. Kostnadsrutan öppnas direkt.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Dra nod</span><span>till en tom plats för att <strong>flytta</strong> den.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Klicka nod</span><span>öppnar panelen där du sätter <strong>h(n)</strong>, gör noden till <strong>mål</strong> eller raderar den.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Klicka kant</span><span>mitt på kanten ändrar dess <strong>kostnad</strong>.</span></div>'
+      +'</div>'
+      +'<div class="gc-note"><strong>g(n)</strong> räknas ihop av kantkostnaderna under sökningen. <strong>h(n)</strong> sätter du själv på varje nod – det är gissningen om hur långt det är kvar till målet.</div>'
+      +'<button class="gc-btn" onclick="closeConcept()">Börja bygga</button>'
+  },
+  frontier:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="5" height="14" rx="1.4"/><rect x="9.5" y="5" width="5" height="14" rx="1.4"/><rect x="16" y="5" width="5" height="14" rx="1.4"/><path d="M5.5 2.5v1.2M12 2.5v1.2M18.5 2.5v1.2"/></svg>',
+    title:'Kön: noderna som står på tur',
+    def:'Under sökningen håller algoritmen reda på de noder den <strong>upptäckt men ännu inte undersökt</strong>. Den samlingen kallas kön, och panelen visar den medan sökningen pågår.'
+      +'<div class="gc-note">Varje varv plockar algoritmen ut <strong>en</strong> nod ur kön och undersöker den. Nodens grannar läggs till i kön. Det enda som skiljer de fyra algoritmerna åt är <strong>vilken nod som plockas ut</strong>:</div>'
+      +'<div class="gc-ctrl">'
+      +'<div class="gc-ctrl-row"><span class="mbtn">FIFO</span><span><strong>BFS</strong> tar den som stått längst i kön. Först in, först ut.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">LIFO</span><span><strong>DFS</strong> tar den som lades till sist. Då kallas samlingen en <strong>stack</strong>.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">min h(n)</span><span><strong>Girig</strong> tar den som ser ut att ligga närmast målet.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">min f(n)</span><span><strong>A*</strong> tar den med lägst kostnad hittills plus uppskattning kvar.</span></div>'
+      +'</div>'
+      +'<div class="gc-note">Märkningen till höger om rubriken visar vilken regel som gäller just nu. Knappen <strong>Visa kö</strong> uppe i diagrammet ritar samma noder direkt på ritytan.</div>'
+      +'<button class="gc-btn" onclick="closeConcept()">Jag förstår</button>'
+  },
+  tips:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>',
+    title:'Förklaringar &amp; tips',
+    def:'Så läser du vad som händer i trädet under sökningen.'
+      +'<div class="gc-grid">'
+      +t3('#34c759','','Startnod','där sökningen börjar')
+      +t3('#ef5b5b','','Målnod','det som söks')
+      +t3('#4d80ff','','Utforskad','redan undersökt')
+      +t3('#f0a94e','','I kö','på tur')
+      +t3('#3ddc84','','Hittad väg','start → mål')
+      +'</div>'
+      +'<div class="gc-ctrl">'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Mellanslag</span><span>spela / pausa uppspelningen.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">← →</span><span>stega bakåt / framåt, en nod i taget.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Hovra</span><span>vid A*-sökning: håll muspekaren över en nod för att se <em>f(n)&nbsp;=&nbsp;g(n)&nbsp;+&nbsp;h(n)</em>.</span></div>'
+      +'</div>'
+  }
+};
+
+function openConceptFrom(id,el){
+  const c=CONCEPTS[id];if(!c)return;
+  const card=document.getElementById('conceptCard');
+  document.getElementById('conceptIcon').innerHTML=c.icon;
+  document.getElementById('conceptTitle').innerHTML=c.title;
+  document.getElementById('conceptDef').innerHTML=c.def;
+  let dx=0,dy=0;
+  if(el&&el.getBoundingClientRect){
+    const r=el.getBoundingClientRect();
+    dx=(r.left+r.width/2)-window.innerWidth/2;
+    dy=(r.top+r.height/2)-window.innerHeight/2;
+  }
+  card.classList.remove('show');
+  card.style.transition='none';
+  card.style.setProperty('--dx',dx+'px');
+  card.style.setProperty('--dy',dy+'px');
+  void card.offsetHeight;
+  card.style.transition='';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
+}
+function openConcept(id,ev){ev.stopPropagation();openConceptFrom(id,ev.currentTarget);}
+function closeConcept(){
+  document.getElementById('conceptCard').classList.remove('show');
+  document.getElementById('conceptBackdrop').classList.remove('show');
+}
+window.openConcept=openConcept;window.closeConcept=closeConcept;
+function conceptOpen(){return document.getElementById('conceptBackdrop').classList.contains('show');}
+
+/* ═══════════════ Redigeringsläge ═══════════════
+   Allt byggande är avstängt tills läget slås på. Sökningen och
+   verktygstipsen fungerar oavsett, så att en färdig graf går att
+   utforska utan risk att råka ändra den. */
+let editMode=false;
+function setEditMode(on,announce){
+  editMode=on;
+  const btn=document.getElementById("editToggle");
+  btn.setAttribute("aria-pressed",on?"true":"false");
+  document.getElementById("canvasContainer").classList.toggle("editing",on);
+  if(!on){deselect();hideEdgeEditor();snapPreview=null;drawAll();}
+  if(announce)setStatus(on?'Redigeringsläge på – klicka för att skapa noder, dra mellan noder för kanter.':'Redigeringsläge av.');
+}
+document.getElementById("editToggle").addEventListener("click",()=>{
+  setEditMode(!editMode,true);
+  if(editMode)openConceptFrom("bygga",document.getElementById("editToggle"));
+});
+document.getElementById("editHelpBtn").addEventListener("click",e=>{
+  openConceptFrom("bygga",e.currentTarget);
+});
+
 /* ============================================================
    NODE TOOLBAR
    ============================================================ */
@@ -926,8 +1234,9 @@ function updateToolbar(){
   let goalBtn=document.getElementById("ntGoal"),del=document.getElementById("ntDelete"),hIn=document.getElementById("ntH");
   let isStart=selectedNode.id===startNodeId;
   hIn.value=selectedNode.h||0;
+  document.getElementById("ntId").textContent=selectedNode.id;
   goalBtn.classList.toggle("active",endNodeIds.has(selectedNode.id));
-  goalBtn.textContent=endNodeIds.has(selectedNode.id)?"✓ Mål":"Mål";
+  goalBtn.textContent=endNodeIds.has(selectedNode.id)?'✓ Mål':'Mål';
   goalBtn.disabled=isStart;del.disabled=isStart;
   goalBtn.style.opacity=isStart?.4:1;del.style.opacity=isStart?.4:1;
 }
@@ -941,6 +1250,16 @@ document.getElementById("ntGoal").addEventListener("click",()=>{if(selectedNode)
 document.getElementById("ntDelete").addEventListener("click",()=>{if(selectedNode){removeNode(selectedNode);deselect();}});
 document.getElementById("ntH").addEventListener("input",e=>{if(!selectedNode)return;let v=parseFloat(e.target.value);if(isNaN(v))v=0;selectedNode.h=v;resetSearch();drawAll();});
 document.getElementById("ntH").addEventListener("keydown",e=>{if(e.key==="Enter")e.target.blur();});
+/* Stegknappar: ett tal skrivet med finger är svårt att träffa, en knapp är det inte. */
+function nudgeH(d){
+  if(!selectedNode)return;
+  const inp=document.getElementById("ntH");
+  let v=parseFloat(inp.value);if(isNaN(v))v=0;
+  v=Math.max(0,v+d);inp.value=v;selectedNode.h=v;
+  resetSearch();drawAll();
+}
+document.getElementById("ntHplus").addEventListener("click",()=>nudgeH(1));
+document.getElementById("ntHminus").addEventListener("click",()=>nudgeH(-1));
 
 /* ============================================================
    EDGE EDITOR
@@ -955,6 +1274,7 @@ function openEdgeEditor(a,b){
   ee.style.top=(canvas.offsetTop+my*sy)+"px";
   let cur=a.edges.find(ed=>ed.targetId===b.id);
   let inp=document.getElementById("eeInput");inp.value=cur?cur.cost:1;
+  document.getElementById("eeLabel").textContent=a.id+"–"+b.id;
   ee.classList.add("show");deselect();setTimeout(()=>{inp.focus();inp.select();},10);
 }
 function hideEdgeEditor(){document.getElementById("edgeEditor").classList.remove("show");editingEdge=null;}
@@ -967,7 +1287,19 @@ function commitEdge(){
   resetSearch();hideEdgeEditor();drawAll();
 }
 document.getElementById("eeInput").addEventListener("keydown",e=>{if(e.key==="Enter")commitEdge();else if(e.key==="Escape")hideEdgeEditor();});
-document.getElementById("eeInput").addEventListener("blur",commitEdge);
+function nudgeCost(d){
+  const inp=document.getElementById("eeInput");
+  let v=parseFloat(inp.value);if(isNaN(v))v=1;
+  inp.value=Math.max(1,v+d);inp.focus();
+}
+document.getElementById("eePlus").addEventListener("click",()=>nudgeCost(1));
+document.getElementById("eeMinus").addEventListener("click",()=>nudgeCost(-1));
+document.getElementById("eeInput").addEventListener("blur",e=>{
+  /* Klick på + eller − flyttar fokus men ska inte stänga rutan. */
+  const to=e.relatedTarget;
+  if(to&&to.closest&&to.closest(".edge-editor"))return;
+  commitEdge();
+});
 
 /* ============================================================
    SAVE / LOAD / CLEAR
@@ -1181,7 +1513,7 @@ function updateDSToggleLabel(){
 function updateDSPanel(){
   let alg=selectedAlg;
   document.getElementById("dsBadge").textContent=DS_BADGE_MAP[alg]||"—";
-  updateDSToggleLabel();
+  updateDSToggleLabel();updateQueueToggleLabel();
   let _dp=document.getElementById("dsPanel");
   _dp.classList.toggle("ds-live",search_in_progress);
   _dp.classList.toggle("ds-active",search_in_progress||!!pathSet.size);
@@ -1369,15 +1701,30 @@ function stepAstar(){
 /* ============================================================
    KÖ-SYNLIGHET I CANVASEN
    ============================================================ */
+/* Etiketten säger vad knappen gör härnäst, så att man ser om kön
+   visas eller inte utan att först behöva klicka. */
+function updateQueueToggleLabel(){
+  const el=document.getElementById("queueToggleLabel");if(!el)return;
+  el.textContent=showQueueOnCanvas?'Dölj kö':'Visa kö';
+}
 document.getElementById("queueToggle").addEventListener("click",()=>{
   showQueueOnCanvas=!showQueueOnCanvas;
   document.getElementById("queueToggle").setAttribute("aria-pressed",String(showQueueOnCanvas));
+  updateQueueToggleLabel();
 });
 
 /* ============================================================
    ALGORITMKORT
    ============================================================ */
+document.getElementById('algCards').addEventListener('keydown',e=>{
+  if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('alg-info')){
+    e.preventDefault();
+    const card=e.target.closest('.alg-card');
+    if(card)openConceptFrom(card.dataset.alg,card);
+  }
+});
 document.getElementById("algCards").addEventListener("click",e=>{
+  const infoBtn=e.target.closest(".alg-info");
   let card=e.target.closest(".alg-card");if(!card)return;
   selectedAlg=card.dataset.alg;
   document.getElementById("algSelect").value=selectedAlg;
@@ -1389,16 +1736,22 @@ document.getElementById("algCards").addEventListener("click",e=>{
   cc.classList.remove("alg-flash");
   void cc.offsetWidth;
   cc.classList.add("alg-flash");
+  // Förklaringen öppnas bara via frågetecknet, inte när man väljer algoritm.
+  if(infoBtn)openConceptFrom(selectedAlg,card);
 });
 
 /* ============================================================
    INIT
    ============================================================ */
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&conceptOpen()){e.stopPropagation();closeConcept();}
+},true);
 window.addEventListener("resize",()=>{if(selectedNode)positionToolbar();});
 
 document.documentElement.style.setProperty("--alg",THEMES[selectedAlg]);
 loadPredefinedTree("Exempelträd 1");
 updatePlayerUI();
+updateQueueToggleLabel();
 
 // Starta renderingsloopen först nu – alla variabler drawScene läser är initierade
 requestAnimationFrame(function loop(){ drawScene(); requestAnimationFrame(loop); });
