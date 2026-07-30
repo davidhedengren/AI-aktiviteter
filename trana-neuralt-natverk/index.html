@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Träna ett neuralt nätverk · ai-aktiviteter.se</title>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0a0e1a">
-<meta name="description" content="Följ ett träningsvarv från början till slut – framåtpass, förlust, backpropagation och viktuppdatering.">
 <link rel="canonical" href="https://www.ai-aktiviteter.se/trana-neuralt-natverk">
 <link rel="alternate" hreflang="sv" href="https://www.ai-aktiviteter.se/trana-neuralt-natverk">
 <link rel="alternate" hreflang="en" href="https://www.ai-aktiviteter.se/trana-neuralt-natverk_ENG">
 <link rel="alternate" hreflang="x-default" href="https://www.ai-aktiviteter.se/trana-neuralt-natverk">
+<meta name="description" content="Följ ett träningsvarv från början till slut – framåtpass, förlust, backpropagation och viktuppdatering.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI-aktiviteter">
 <meta property="og:locale" content="sv_SE">
@@ -27,6 +24,7 @@
 <meta name="twitter:title" content="Träna ett neuralt nätverk – ai-aktiviteter.se">
 <meta name="twitter:description" content="Följ ett träningsvarv från början till slut – framåtpass, förlust, backpropagation och viktuppdatering.">
 <meta name="twitter:image" content="https://www.ai-aktiviteter.se/og-image.png">
+<title>Träna ett neuralt nätverk – framåtpass och backpropagation · ai-aktiviteter.se</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
@@ -375,6 +373,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .setup-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;}
 .setup-back{background:none;border:none;color:var(--dim2);font-family:'DM Sans',sans-serif;font-size:.86em;font-weight:600;cursor:pointer;padding:10px 6px;transition:.2s;}
 .setup-back:hover{color:var(--text);}
+/* Samma bakåtlänk och språkväxlare som .hd, men i normalt dokumentflöde
+   i stället för position:absolute – .setup är en fullskärmsöverlagring,
+   så top:50% skulle centrera dem mitt i hela vyn i stället för högst upp. */
+.setup-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:22px;}
+.setup .back-link,.setup .lang-link{position:static;transform:none;}
 .setup-go{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;font-family:'DM Sans',sans-serif;font-size:1em;font-weight:700;
   background:var(--accent);color:#fff;border:none;border-radius:var(--r-md);cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 10px 30px rgba(77,128,255,.32);}
 .setup-go:hover{background:#3d6de6;transform:translateY(-2px);box-shadow:0 14px 36px rgba(77,128,255,.44);}
@@ -460,7 +463,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 <!-- SETUP: choose what the network should learn -->
 <div class="setup" id="setup">
   <div class="setup-inner">
-    <div class="setup-step"><span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block"></span> Steg 1 av 2 · Välj uppgift</div>
+    <div class="setup-nav">
+      <a class="back-link" href="/"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> AI-aktiviteter</a>
+      <a class="lang-link" href="https://www.ai-aktiviteter.se/trana-neuralt-natverk_ENG"><span class="flag"><svg viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="36" fill="#00247d"/><g stroke="#fff" stroke-width="6"><path d="M0,0 L60,36 M60,0 L0,36"/></g><g stroke="#cf142b" stroke-width="3"><path d="M0,0 L60,36 M60,0 L0,36"/></g><path d="M25,0 H35 V36 H25 Z M0,15 H60 V21 H0 Z" fill="#fff"/><path d="M27,0 H33 V36 H27 Z M0,17 H60 V19 H0 Z" fill="#cf142b"/></svg></span> English</a>
+    </div>
     <div class="setup-head">
       <h2>Vad ska nätverket <span>lära sig?</span></h2>
       <p class="setup-sub">Välj en logisk grind. Nätverket ska lära sig att ge rätt svar för alla fyra kombinationerna av ingångarna x₁ och x₂.</p>
@@ -1146,7 +1152,10 @@ function drawNodeLayer(ctx,pts,layer,R,s,backActive){
     else{ctx.font=`500 ${fontSize}px "DM Sans"`;ctx.fillStyle='rgba(255,255,255,0.3)';ctx.fillText('?',pt.x,pt.y);}
     if(layer>0){const bv=layer===1?bh[idx]:bo;const bt=`b=${fp(bv,2)}`;ctx.font=`600 ${Math.max(8,Math.round(9*s))}px "JetBrains Mono"`;const bw=ctx.measureText(bt).width+10;const bOff=R+5*s;ctx.beginPath();ctx.roundRect(pt.x-bw/2,pt.y+bOff,bw,14,7);ctx.fillStyle='rgba(14,17,30,0.8)';ctx.fill();ctx.strokeStyle='rgba(255,255,255,0.08)';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle='rgba(255,255,255,0.6)';ctx.fillText(bt,pt.x,pt.y+bOff+7);}
     if(layer===0){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(150,180,255,0.85)';ctx.fillText(idx===0?'x₁':'x₂',pt.x,pt.y+R+13*s);}
-    if(layer===2){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(255,214,130,0.9)';ctx.fillText('ŷ',pt.x,pt.y+R+15*s);}
+    /* Utnoden har både en biasruta och en etikett under sig. Biasrutan startar
+       vid R+5s och är 14 px hög, så etiketten läggs nedanför dess underkant
+       i stället för mitt i den. */
+    if(layer===2){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(255,214,130,0.9)';ctx.fillText('ŷ',pt.x,pt.y+R+5*s+23);}
     let dv=null;
     if(backActive){if(layer===2&&stepIdx>=4)dv=C.dOut;else if(layer===1&&C.dH){if(idx===0&&stepIdx>=6)dv=C.dH[0];if(idx===1&&stepIdx>=7)dv=C.dH[1];}}
     if(dv!==null){const dt=`δ=${f(dv,3)}`;ctx.font=`700 ${Math.max(8,Math.round(9.5*s))}px "JetBrains Mono"`;const dw=ctx.measureText(dt).width+12;const dy=pt.y-R-5*s;ctx.save();ctx.shadowColor='rgba(255,159,69,0.5)';ctx.shadowBlur=8;ctx.beginPath();ctx.roundRect(pt.x-dw/2,dy-8,dw,17,8);ctx.fillStyle='rgba(40,26,14,0.95)';ctx.fill();ctx.strokeStyle='rgba(255,159,69,0.7)';ctx.lineWidth=1.2;ctx.stroke();ctx.restore();ctx.fillStyle='rgba(255,190,120,1)';ctx.fillText(dt,pt.x,dy+0.5);}
