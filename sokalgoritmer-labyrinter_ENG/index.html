@@ -40,7 +40,7 @@
   --r-md:14px; --r-lg:20px;
   --ease-out:cubic-bezier(.16,1,.3,1);
   --ease-spring:cubic-bezier(.34,1.56,.64,1);
-  --alg:#7e8aaa; /* neutral grå tills en algoritm valts */
+  --alg:#7e8aaa; /* neutral grey until an algorithm is chosen */
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{-webkit-text-size-adjust:100%;}
@@ -53,7 +53,8 @@ button{font-family:inherit;}
 .back-link,.lang-link{position:absolute;top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:.2s;white-space:nowrap;z-index:2;}
 .back-link{left:16px;} .lang-link{right:16px;}
 .back-link:hover,.lang-link:hover{color:var(--text);border-color:var(--dim);}
-.lang-link .lang-ico{width:14px;height:14px;flex-shrink:0;}
+.lang-link .lang-ico{display:block;width:17px;height:11px;flex-shrink:0;border-radius:2px;overflow:hidden;line-height:0;box-shadow:0 0 0 1px rgba(255,255,255,.14);}
+.lang-link .lang-ico svg{display:block;width:100%;height:100%;}
 .hd{width:100%;text-align:center;padding:30px 20px 26px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,.03),transparent);}
 .hd h1{font-family:'Syne',sans-serif;font-size:1.55em;font-weight:800;letter-spacing:-.02em;margin-bottom:10px;text-shadow:0 0 34px rgba(102,152,255,.22);}
 .hd h1 span{color:var(--accent2);}
@@ -71,6 +72,10 @@ button{font-family:inherit;}
 .alg-dot{width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 9px var(--c);flex-shrink:0;transition:box-shadow .18s;}
 .alg-card[aria-checked="false"] .alg-dot{box-shadow:none;opacity:.55;}
 .alg-name{font-weight:600;font-size:13px;letter-spacing:-.01em;}
+  .alg-info{position:absolute;top:5px;right:6px;width:15px;height:15px;border-radius:50%;border:1px solid var(--border);color:var(--dim);font-size:10px;font-weight:800;line-height:1;display:flex;align-items:center;justify-content:center;opacity:.5;transition:.16s;background:transparent;}
+  .alg-card:hover .alg-info{opacity:.85;}
+  .alg-info:hover{opacity:1;color:var(--c);border-color:color-mix(in srgb,var(--c) 60%,transparent);}
+  .alg-card[aria-checked="true"] .alg-info{opacity:.9;border-color:color-mix(in srgb,var(--c) 45%,transparent);color:var(--c);}
 
 /* ── Canvas ── */
 #canvasContainer{
@@ -90,7 +95,7 @@ button{font-family:inherit;}
 #mazeCanvas{display:block;user-select:none;border-radius:17px;width:100%;height:auto;cursor:default;transition:box-shadow .3s var(--ease-out);}
 #canvasContainer.editing #mazeCanvas{cursor:crosshair;box-shadow:inset 0 0 0 1.5px rgba(51,209,122,.32),inset 0 0 40px rgba(51,209,122,.05);}
 
-/* ── Redigeringsläge: toggle + hjälpknapp ── */
+/* ── Edit mode: toggle + help button ── */
 .edit-controls{display:inline-flex;gap:8px;align-items:center;}
 .hud-toggle{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border-radius:999px;
   border:1px solid var(--border);background:var(--surface2);
@@ -217,7 +222,7 @@ button:disabled{opacity:.42;cursor:not-allowed;}
   box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;
   transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
   transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);
-  will-change:transform;max-height:86vh;overflow-y:auto;}
+  will-change:transform;max-height:86vh;max-height:86dvh;overflow-y:auto;}
 .concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
   padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,206,84,.15) 45%,transparent 65%);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
@@ -231,7 +236,7 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 .concept-close:hover{border-color:var(--red);color:var(--red);transform:translateZ(30px) rotate(90deg);}
 .concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
 .concept-icon svg{width:28px;height:28px;}
-.concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
+.concept-title{font-family:'Syne',sans-serif;font-size:1.36em;font-weight:700;margin-bottom:9px;letter-spacing:.005em;line-height:1.25;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
 .concept-def{font-size:.88em;line-height:1.6;color:var(--dim);position:relative;z-index:3;transform:translateZ(18px);transform-style:preserve-3d;}
 .concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;font-weight:600;}
 
@@ -267,7 +272,7 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 /* ── Intro overlay ── */
 .overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
-.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:540px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
+.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:540px;width:92%;text-align:center;max-height:90vh;max-height:90dvh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
 @keyframes overlayIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
 .intro-viz{width:200px;height:92px;margin:0 auto 14px;display:block;}
 .iv-e{fill:none;stroke:rgba(255,255,255,.16);stroke-width:3;stroke-linecap:round;}
@@ -275,7 +280,7 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 .iv-start{fill:rgba(52,199,89,.18);stroke:#34c759;}
 .iv-goal{fill:rgba(239,91,91,.18);stroke:#ef5b5b;}
 .iv-dot{fill:#fff;filter:drop-shadow(0 0 6px var(--alg));}
-.overlay-card h2{font-family:'Syne',sans-serif;font-size:1.4em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;}
+.overlay-card h2{font-family:'Syne',sans-serif;font-size:1.42em;font-weight:700;margin-bottom:8px;letter-spacing:.005em;line-height:1.25;}
 .overlay-card h2 span{background:linear-gradient(135deg,var(--text),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
 .overlay-card .sub{font-size:.87em;font-weight:400;color:var(--dim);line-height:1.6;margin-bottom:18px;}
 .overlay-card .steps{display:flex;flex-direction:column;gap:12px;margin:14px 0;text-align:left;}
@@ -283,7 +288,6 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 .overlay-card .step strong{color:var(--text);font-weight:600;}
 .step-num{width:25px;height:25px;border-radius:50%;background:rgba(77,128,255,.14);color:var(--accent2);font-weight:700;font-size:.8em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,.28);padding-top:1px;}
 .overlay-tip{margin-top:16px;font-size:.8em;font-weight:400;color:var(--dim);text-align:center;line-height:1.55;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;}
-.overlay-tip strong{color:var(--text);}
 .overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:18px;font-size:.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 24px rgba(77,128,255,.28);}
 .overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
 .overlay-btn svg{width:15px;height:15px;flex-shrink:0;}
@@ -300,6 +304,33 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;}
 }
+
+/* Intro overlay on small screens: same centred layout as on desktop, only
+   more compact so that it fits without scrolling. */
+@media (max-width:560px){
+  .overlay{padding:16px;}
+  .overlay-card{width:100%;padding:20px 22px;max-height:88vh;max-height:88dvh;}
+  .intro-viz{width:130px;height:60px;margin:0 auto 8px;}
+  .overlay-card h2{font-size:1.08em;margin-bottom:5px;}
+  .overlay-card .sub{font-size:.8em;line-height:1.45;margin-bottom:10px;}
+  .overlay-card .steps{gap:8px;margin:10px 0;}
+  .overlay-card .step{font-size:.78em;line-height:1.4;gap:9px;}
+  .step-num{width:21px;height:21px;font-size:.72em;}
+  .overlay-btn{padding:11px;margin-top:10px;font-size:.88em;}
+}
+/* Short screens: phone in landscape, or small phones with enlarged text.
+   Spacing tightens in stages and the vignette is the last thing to go. */
+@media (max-height:720px){
+  .overlay-card{padding:18px 20px;max-height:94vh;max-height:94dvh;}
+  .intro-viz{width:112px;height:52px;margin:0 auto 7px;}
+  .overlay-card .steps{gap:7px;margin:9px 0;}
+  .overlay-btn{padding:10px;margin-top:10px;}
+}
+@media (max-height:560px){
+  .intro-viz{display:none;}
+  .overlay-card h2{font-size:1.1em;}
+  .overlay-card .sub{margin-bottom:8px;}
+}
 </style>
 </head>
 <body>
@@ -307,7 +338,7 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
   <a class="lang-link" href="https://www.ai-aktiviteter.se/sokalgoritmer-labyrinter">
-    <svg class="lang-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.7 2.6 4 5.8 4 9s-1.3 6.4-4 9c-2.7-2.6-4-5.8-4-9s1.3-6.4 4-9z"/></svg>
+    <span class="lang-ico" aria-hidden="true"><svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#006aa7"/><path d="M20 0v36M0 18h60" stroke="#fecc02" stroke-width="7"/></svg></span>
     Svenska</a>
   <h1>Search algorithms in a <span>maze</span></h1>
   <p>Build your own maze and watch how BFS, DFS, Greedy best-first and A* find their way to the goal.</p>
@@ -315,20 +346,20 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 
 <div class="page-wrap">
 
-<!-- Algoritmval som kort -->
+<!-- Algorithm choice as cards -->
 <h2 class="alg-cards-label">Algorithm selection</h2>
 <div class="alg-cards" role="radiogroup" aria-label="Choose algorithm" id="algCards">
   <button class="alg-card" style="--c:#ec4899" data-alg="BFS" role="radio" aria-checked="false">
-    <span class="alg-dot"></span><span class="alg-name">BFS</span>
+    <span class="alg-dot"></span><span class="alg-name">BFS</span><span class="alg-info" role="button" tabindex="0" aria-label="Show explanation" title="Show explanation">?</span>
   </button>
   <button class="alg-card" style="--c:#a06bff" data-alg="DFS" role="radio" aria-checked="false">
-    <span class="alg-dot"></span><span class="alg-name">DFS</span>
+    <span class="alg-dot"></span><span class="alg-name">DFS</span><span class="alg-info" role="button" tabindex="0" aria-label="Show explanation" title="Show explanation">?</span>
   </button>
   <button class="alg-card" style="--c:#2dd4bf" data-alg="A*" role="radio" aria-checked="false">
-    <span class="alg-dot"></span><span class="alg-name">A*</span>
+    <span class="alg-dot"></span><span class="alg-name">A*</span><span class="alg-info" role="button" tabindex="0" aria-label="Show explanation" title="Show explanation">?</span>
   </button>
   <button class="alg-card" style="--c:#f59e0b" data-alg="Greedy" role="radio" aria-checked="false">
-    <span class="alg-dot"></span><span class="alg-name">Greedy best-first</span>
+    <span class="alg-dot"></span><span class="alg-name">Greedy best-first</span><span class="alg-info" role="button" tabindex="0" aria-label="Show explanation" title="Show explanation">?</span>
   </button>
 </div>
 
@@ -398,20 +429,20 @@ button:disabled{opacity:.42;cursor:not-allowed;}
       <circle class="iv-node iv-goal" cx="140" cy="72" r="7"/>
     </svg>
     <h2>Search algorithms in a <span>maze</span></h2>
-    <p class="sub">Explore how an AI agent can navigate through a maze. See how four classic search algorithms work step by step.</p>
+    <p class="sub">Four classic search algorithms work through the same maze. Follow how they spread out, square by square.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">01</div><div><strong>Choose a maze</strong> – load a ready-made one, or turn on edit mode and build your own.</div></div>
-      <div class="step"><div class="step-num">02</div><div><strong>Choose an algorithm and search</strong> – BFS, DFS, Greedy best-first or A*, then press Start search.</div></div>
-      <div class="step"><div class="step-num">03</div><div><strong>Compare</strong> – run the same maze with different algorithms. Which finds the shortest path, and which explores the fewest cells?</div></div>
+      <div class="step"><div class="step-num">01</div><div><strong>Choose a maze</strong> – load a ready-made one or build your own.</div></div>
+      <div class="step"><div class="step-num">02</div><div><strong>Choose an algorithm</strong> – BFS, DFS, Greedy best-first or A*.</div></div>
+      <div class="step"><div class="step-num">03</div><div><strong>Compare</strong> – which finds the shortest path, and which explores least?</div></div>
     </div>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 </div>
 
-<!-- ── Nudge: visas om man trycker Starta sökning utan att ha valt algoritm ── -->
+<!-- ── Nudge: shown if Start search is pressed with no algorithm chosen ── -->
 <div class="start-nudge" id="startNudge">Choose an algorithm to start a search</div>
 
-<!-- ── Glaskort: skelett (fylls dynamiskt) ── -->
+<!-- ── Glass cards: skeleton (filled dynamically) ── -->
 <div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
 <div class="concept-card" id="conceptCard">
   <div class="concept-card-inner" id="conceptCardInner">
@@ -424,7 +455,7 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 
 <script>
 'use strict';
-/* ═══════════════ Grund & canvas ═══════════════ */
+/* ═══════════════ Basics & canvas ═══════════════ */
 const COLS=30, ROWS=15, CELL=30, W=COLS*CELL, H=ROWS*CELL;
 const canvas=document.getElementById('mazeCanvas');
 const ctx=canvas.getContext('2d');
@@ -432,22 +463,22 @@ const canvasContainer=document.getElementById('canvasContainer');
 const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 (function(){const d=Math.min(2,window.devicePixelRatio||1);canvas.width=W*d;canvas.height=H*d;ctx.setTransform(d,0,0,d,0,0);})();
 
-/* Accentfärg per algoritm */
+/* Accent colour per algorithm */
 const THEMES={
   'BFS':   {accent:'#ec4899'},
   'DFS':   {accent:'#a06bff'},
   'A*':    {accent:'#2dd4bf'},
   'Greedy':{accent:'#f59e0b'}
 };
-const QUEUE_COLOR='#f0a94e';   // kön ritas alltid i orange
+const QUEUE_COLOR='#f0a94e';   // the queue is always drawn in orange
 const ALG_LABEL={'A*':'A*','BFS':'BFS','DFS':'DFS','Greedy':'Greedy best-first'};
 
-/* Färgverktyg */
+/* Colour helpers */
 function hex2rgb(h){h=h.replace('#','');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
 function css(c,a){return 'rgba('+(c[0]|0)+','+(c[1]|0)+','+(c[2]|0)+','+(a==null?1:a)+')';}
 function easeOutBack(p){const k=1.55;return 1+(k+1)*Math.pow(p-1,3)+k*Math.pow(p-1,2);}
 
-/* Subtil golvvariation (±~1 % ljushet, deterministisk) */
+/* Subtle floor variation (±~1% lightness, deterministic) */
 const floorColors=[];
 for(let r=0;r<ROWS;r++){const row=[];
   for(let c=0;c<COLS;c++){
@@ -456,7 +487,7 @@ for(let r=0;r<ROWS;r++){const row=[];
     row.push('hsl(224 40% '+L.toFixed(2)+'%)');
   }floorColors.push(row);}
 
-/* ═══════════════ Labyrintdata ═══════════════ */
+/* ═══════════════ Maze data ═══════════════ */
 let grid=[]; for(let r=0;r<ROWS;r++){const row=[];for(let c=0;c<COLS;c++)row.push(1);grid.push(row);}
 let start=[11,7], ends=[[5,18]];
 
@@ -466,18 +497,18 @@ let playTimer=null, isPlaying=false;
 const PLAY_INTERVAL=150;
 const D_IN=RM?1:160;
 
-/* Redigeringsläge */
+/* Edit mode */
 let editMode=false;
 
-/* Animationstillstånd */
+/* Animation state */
 let cellAnim=new Map();      // "r,c" -> {st:'fr'|'ex', t}
 let heurLabels=new Map(), fVals=new Map();
 let pathState=null;          // {cells,t0,dur}
-let dimState=null;           // dimma allt → mål lyser → väg ritas → kort
+let dimState=null;           // dim everything → goal lights up → path is drawn → card
 let particles=[];
 let popupTimer=null;
 
-/* Redigering */
+/* Editing */
 let is_dragging_start=false, old_start=null, potential_start=null, dragging_point=null, drag_start_pos=null;
 let hoverCell=null;
 
@@ -495,7 +526,7 @@ function get_neighbors(n){const[r,c]=n,out=[];for(const[dx,dy]of[[-1,0],[1,0],[0
 class PriorityQ{constructor(){this._d=[];}push(i){this._d.push(i);this._d.sort((a,b)=>a[0]-b[0]);}pop(){return this._d.shift();}empty(){return this._d.length===0;}}
 const directions=[[-1,0],[0,1],[1,0],[0,-1]];
 
-/* ═══════════════ Glaskort (concept cards) ═══════════════ */
+/* ═══════════════ Glass cards (concept cards) ═══════════════ */
 function t3(color,glyph,label,sub){
   return '<div class="gc-cell"><div class="t3" style="--tc:'+color+'">'+(glyph||'')+'</div>'
     +'<span class="t3-lab">'+label+'</span>'+(sub?'<span class="t3-sub">'+sub+'</span>':'')+'</div>';
@@ -504,22 +535,22 @@ const CONCEPTS={
   'BFS':{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2.5"/><circle cx="12" cy="12" r="6.5" stroke-dasharray="2 3"/><circle cx="12" cy="12" r="10" stroke-dasharray="2 3"/></svg>',
     title:'BFS – Breadth-first',
-    def:'<strong>BFS</strong> explores layer by layer using a <strong>queue</strong> – all cells at distance 1 before distance 2, and so on. Guarantees the shortest path in number of steps, but not in cost.'
+    def:'<strong>BFS</strong> examines the maze in layers: first every cell one step away, then every cell two steps away, and so on.'
   },
   'DFS':{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="4" rx="1"/><rect x="4" y="10" width="16" height="4" rx="1"/><rect x="4" y="16" width="16" height="4" rx="1"/></svg>',
     title:'DFS – Depth-first',
-    def:'<strong>DFS</strong> follows one path as far as it can using a <strong>stack</strong>, and backtracks when it gets stuck. Often finds a path quickly – but rarely the shortest one.'
+    def:'<strong>DFS</strong> follows a single path as far as it goes, and backtracks only when it gets stuck.'
   },
   'A*':{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.4 5.9L21 10l-4.8 4.2L17.4 21 12 17.5 6.6 21l1.2-6.8L3 10l6.6-1.1L12 3z"/></svg>',
-    title:'A* – Informed search',
-    def:'<strong>A*</strong> picks the cell with the lowest value of the cost function <strong>f(n)</strong>. <strong>f(n)&nbsp;=&nbsp;g(n)&nbsp;+&nbsp;h(n)</strong> – cost so far plus estimated distance remaining. Guaranteed cheapest, and often faster than a blind search.'
+    title:'A*',
+    def:'<strong>A*</strong> weighs two things for every cell: <strong>g(n)</strong>, what it has cost to get here, and <strong>h(n)</strong>, an estimate of what remains to the goal.<br><br>Their sum <strong>f(n)&nbsp;=&nbsp;g(n)&nbsp;+&nbsp;h(n)</strong> decides which cell is examined next.'
   },
   'Greedy':{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg>',
     title:'Greedy best-first',
-    def:'<strong>Greedy best-first</strong> always picks the cell that <em>looks</em> closest to the goal – without caring what it has already cost. Fast, but easily fooled.'
+    def:'<strong>Greedy best-first</strong> only looks ahead: it always picks the cell that <em>seems</em> closest to the goal, ignoring entirely what the route there has cost.'
   },
   bygga:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
@@ -584,7 +615,7 @@ function openConceptFrom(id,el){
   card.style.transition='none';
   card.style.setProperty('--dx',dx+'px');
   card.style.setProperty('--dy',dy+'px');
-  void card.offsetHeight; // force reflow så start-positionen appliceras utan transition
+  void card.offsetHeight; // force reflow so the start position applies without a transition
   card.style.transition='';
   document.getElementById('conceptBackdrop').classList.add('show');
   requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
@@ -617,7 +648,7 @@ function conceptOpen(){return document.getElementById('conceptBackdrop').classLi
   });
 })();
 
-/* ═══════════════ Förberäkning av sökning ═══════════════ */
+/* ═══════════════ Pre-computing the search ═══════════════ */
 function precomputeSearch(alg){
   const steps=[];let cur=null;
   const begin=()=>{cur=[];};
@@ -695,7 +726,7 @@ function precomputeSearch(alg){
   return steps;
 }
 
-/* ═══════════════ Uppspelningsmotor ═══════════════ */
+/* ═══════════════ Playback engine ═══════════════ */
 function spawnParticles(r,c,accRGB){
   if(RM)return;
   for(let i=0;i<2;i++){
@@ -780,7 +811,7 @@ function mazeChanged(){
 }
 function setInfo(txt){resultDiv.style.display='block';resultDiv.textContent=txt;}
 
-/* ═══════════════ UI-uppdatering ═══════════════ */
+/* ═══════════════ UI updates ═══════════════ */
 const ICON_PLAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>';
 const ICON_PAUSE='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
 function updatePlayerUI(){
@@ -797,7 +828,7 @@ function updatePlayerUI(){
   counter.innerHTML=(computedFor&&n)?('step <b>'+(curStep+1)+'</b> / '+n):'';
 }
 
-/* ═══════════════ Resultatkort ═══════════════ */
+/* ═══════════════ Result card ═══════════════ */
 function hideResultOverlay(){const o=document.getElementById('resultOverlay');o.className='result-overlay';o.innerHTML='';}
 function renderResultOverlay(o){
   const el=document.getElementById('resultOverlay');
@@ -825,7 +856,7 @@ function renderResultOverlay(o){
 }
 window.hideResultOverlay=hideResultOverlay;
 
-/* ═══════════════ Ritning ═══════════════ */
+/* ═══════════════ Drawing ═══════════════ */
 function rr(x,y,w,h,rad){ctx.beginPath();ctx.moveTo(x+rad,y);ctx.arcTo(x+w,y,x+w,y+h,rad);ctx.arcTo(x+w,y+h,x,y+h,rad);ctx.arcTo(x,y+h,x,y,rad);ctx.arcTo(x,y,x+w,y,rad);ctx.closePath();}
 function paintTile(r,c,fill,glow,blur){
   const x=c*CELL+1,y=r*CELL+1,s=CELL-2;
@@ -841,7 +872,7 @@ function paintTileScaled(r,c,scale,alpha,fill,glow,blur){
   rr(x,y,s,s,5*scale);ctx.fillStyle=fill;ctx.fill();
   ctx.restore();
 }
-/* Vägg med djup: mörk kant, ljus upptill */
+/* Wall with depth: dark edge, light on top */
 const wallGrads=[];
 for(let r=0;r<ROWS;r++){
   const g=ctx.createLinearGradient(0,r*CELL+1,0,r*CELL+CELL-1);
@@ -857,7 +888,7 @@ function drawWall(r,c){
   ctx.beginPath();ctx.moveTo(x+4,y+s-1);ctx.lineTo(x+s-4,y+s-1);ctx.stroke();
   rr(x,y,s,s,5);ctx.strokeStyle='#1d2743';ctx.stroke();
 }
-/* Sökvärde (f(n) eller h(n)), diskret centrerad etikett – syns bara under sökningen. */
+/* Search value (f(n) or h(n)), a discreet centred label – visible only during the search. */
 function drawLabel(r,c,txt){
   ctx.save();
   ctx.font='700 8px "JetBrains Mono",monospace';
@@ -873,12 +904,12 @@ function frame(){
   ctx.clearRect(0,0,W,H);
   ctx.fillStyle='#0b0f1a';ctx.fillRect(0,0,W,H);
 
-  /* Rutnät – var tredje linje lite starkare */
+  /* Grid – every third line slightly stronger */
   ctx.lineWidth=1;
   for(let c=0;c<=COLS;c++){ctx.strokeStyle=c%3===0?'rgba(102,152,255,.05)':'rgba(102,152,255,.02)';ctx.beginPath();ctx.moveTo(c*CELL+.5,0);ctx.lineTo(c*CELL+.5,H);ctx.stroke();}
   for(let r=0;r<=ROWS;r++){ctx.strokeStyle=r%3===0?'rgba(102,152,255,.05)':'rgba(102,152,255,.02)';ctx.beginPath();ctx.moveTo(0,r*CELL+.5);ctx.lineTo(W,r*CELL+.5);ctx.stroke();}
 
-  /* Grundplattor */
+  /* Base tiles */
   for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
     const v=grid[r][c];
     if(v===1)drawWall(r,c);
@@ -887,23 +918,23 @@ function frame(){
     else paintTile(r,c,floorColors[r][c]);
   }
 
-  /* Genomsökta + kö */
+  /* Explored + queue */
   for(const[key,st]of cellAnim){
     const i=key.indexOf(','),r=+key.slice(0,i),c=+key.slice(i+1);
     if(isStart(r,c)||isGoal(r,c))continue;
     if(st.st==='fr'){
       const p=Math.min(1,(now-st.t)/D_IN);
-      const sc=RM?1:easeOutBack(p);                          // växer från 70 % till 100 %
+      const sc=RM?1:easeOutBack(p);                          // grows from 70% to 100%
       const pulse=RM?1:(.80+.20*Math.sin(now/850+((r*7+c*13)%10)));
       paintTileScaled(r,c,.7+.3*sc,pulse,QUEUE_COLOR,'rgba(240,169,78,.5)',9);
     }else{
-      paintTile(r,c,'#6f9fd6');                              // genomsökt
+      paintTile(r,c,'#6f9fd6');                              // explored
     }
     const lbl=heurLabels.get(key);
     if(lbl!=null&&(now-st.t)>D_IN*.6)drawLabel(r,c,lbl);
   }
 
-  /* Dimma allt annat medan vägen ritas */
+  /* Dim everything else while the path is drawn */
   if(dimState){
     let a;
     if(now<dimState.t0+dimState.fadeIn)a=.12*(now-dimState.t0)/dimState.fadeIn;
@@ -913,7 +944,7 @@ function frame(){
     else if(now>dimState.holdEnd+dimState.fadeOut)dimState=null;
   }
 
-  /* Vägen ritas – en grön ljuspunkt drar linjen */
+  /* The path is drawn – a green light traces the line */
   if(pathState){
     const{cells,t0,dur}=pathState;
     const p=Math.max(0,Math.min(1,(now-t0)/dur));
@@ -934,7 +965,7 @@ function frame(){
     }
   }
 
-  /* Mål – lyser upp extra precis när det hittats */
+  /* Goal – flares up the moment it is found */
   for(const[er,ec]of ends){
     let blur=14;
     if(dimState&&now-dimState.t0<800)blur=14+12*Math.sin((now-dimState.t0)/800*Math.PI);
@@ -946,7 +977,7 @@ function frame(){
     paintTile(sr,sc,'#34c759','rgba(52,199,89,.6)',14);
   }
 
-  /* Ljuspartiklar som följer sökningen */
+  /* Light particles following the search */
   if(particles.length){
     const keep=[];
     for(const pt of particles){
@@ -960,13 +991,13 @@ function frame(){
     particles=keep;
   }
 
-  /* Hover: tunn vit ram + förhandsvisning – bara i redigeringsläget */
+  /* Hover: thin white outline + preview – only in edit mode */
   if(hoverCell&&editMode){
     const[r,c]=hoverCell;
     if(!isStart(r,c)&&!isGoal(r,c)&&(grid[r][c]===0||grid[r][c]===1)){
       ctx.save();ctx.globalAlpha=.32;
-      if(grid[r][c]===1)paintTile(r,c,floorColors[r][c]);   // vägg → förhandsvisa golv
-      else paintTile(r,c,'#10141f');                         // golv → förhandsvisa vägg
+      if(grid[r][c]===1)paintTile(r,c,floorColors[r][c]);   // wall → preview floor
+      else paintTile(r,c,'#10141f');                         // floor → preview wall
       ctx.restore();
     }
     const x=c*CELL+1,y=r*CELL+1,s=CELL-2;
@@ -978,7 +1009,7 @@ function frame(){
 }
 requestAnimationFrame(frame);
 
-/* ═══════════════ Musinteraktion (redigering – kräver redigeringsläge) ═══════════════ */
+/* ═══════════════ Mouse interaction (editing – requires edit mode) ═══════════════ */
 function getCellFromMouse(e){
   const rect=canvas.getBoundingClientRect();
   const mx=(e.clientX-rect.left)*(W/rect.width),my=(e.clientY-rect.top)*(H/rect.height);
@@ -1006,7 +1037,7 @@ canvas.addEventListener('mousemove',e=>{
       if(grid[r][c]===1)grid[r][c]=0;else if(grid[r][c]===0)grid[r][c]=1;
       mazeChanged();}
   }
-  /* A*-tooltip: f(n) = g(n) + h(n) */
+  /* A* tooltip: f(n) = g(n) + h(n) */
   if(hoverCell){
     const key=hoverCell[0]+','+hoverCell[1];
     if(currentAlgorithm==='A*'&&fVals.has(key)&&cellAnim.has(key)){
@@ -1061,7 +1092,7 @@ function showMazeTooltip(html,e){
 }
 function hideMazeTooltip(){mazeTooltip.classList.remove('show');}
 
-/* ═══════════════ Redigeringsläge (toggle + hjälpknapp) ═══════════════ */
+/* ═══════════════ Edit mode (toggle + help button) ═══════════════ */
 const editToggle=document.getElementById('editToggle');
 const editControls=document.getElementById('editControls');
 editToggle.addEventListener('click',()=>{
@@ -1076,8 +1107,16 @@ document.getElementById('editHelpBtn').addEventListener('click',e=>{
   openConceptFrom('bygga',e.currentTarget);
 });
 
-/* ═══════════════ Knappar & tangentbord ═══════════════ */
+/* ═══════════════ Buttons & keyboard ═══════════════ */
+document.getElementById('algCards').addEventListener('keydown',e=>{
+  if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('alg-info')){
+    e.preventDefault();
+    const card=e.target.closest('.alg-card');
+    if(card)openConceptFrom(card.dataset.alg,card);
+  }
+});
 document.getElementById('algCards').addEventListener('click',e=>{
+  const infoBtn=e.target.closest('.alg-info');
   const card=e.target.closest('.alg-card');if(!card)return;
   selectedAlg=card.dataset.alg;
   currentAlgorithm=selectedAlg;
@@ -1089,12 +1128,12 @@ document.getElementById('algCards').addEventListener('click',e=>{
   recomputeToStep(-1);hideResultOverlay();
   resultDiv.style.display='none';
   updatePlayerUI();
-  // Snabb glow som bekräftar bytet
+  // quick glow confirming the switch
   canvasContainer.classList.remove('alg-flash');
   void canvasContainer.offsetWidth;
   canvasContainer.classList.add('alg-flash');
-  // Visa förklaring för vald algoritm
-  openConceptFrom(selectedAlg,card);
+  // The explanation opens only on a click on (?), not when an algorithm is chosen.
+  if(infoBtn)openConceptFrom(selectedAlg,card);
 });
 let nudgeTimer=null;
 function showStartNudge(){
@@ -1131,7 +1170,7 @@ document.addEventListener('keydown',e=>{
   else if(e.key==='r'||e.key==='R'){resetPlayback();}
 });
 
-/* ═══════════════ Spara / ladda / fördefinierade ═══════════════ */
+/* ═══════════════ Save / load / presets ═══════════════ */
 document.getElementById('saveBtn').addEventListener('click',()=>{
   const data={grid,start,ends};
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
@@ -1172,7 +1211,7 @@ document.getElementById('predefinedSelect').addEventListener('change',e=>{
     const m=predefinedMazes[sel];
     grid=m.grid.map(row=>row.slice());start=[...m.start];ends=m.ends.map(x=>[...x]);
     mazeChanged();setInfo('Predefined maze "'+sel+'" loaded.');
-    /* Exempel 4 & 5 introducerar kostnadsrutor */
+    /* Examples 4 & 5 introduce cost cells */
     if(sel==='Example 4'||sel==='Example 5'){
       const anchor=e.target;
       setTimeout(()=>openConceptFrom('kostnader',anchor),260);
