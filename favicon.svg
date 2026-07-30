@@ -1,17 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AI-aktiviteter">
-  <defs>
-    <linearGradient id="g" x1="10" y1="54" x2="54" y2="10" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#22d3ee"/><stop offset=".5" stop-color="#60a5fa"/><stop offset="1" stop-color="#a78bfa"/>
-    </linearGradient>
-  </defs>
-  <rect width="64" height="64" rx="14" fill="#0a0e1a"/>
-  <g stroke="url(#g)" stroke-width="5" stroke-linecap="round" opacity=".8">
-    <line x1="17" y1="46" x2="43" y2="18"/>
-    <line x1="17" y1="46" x2="46" y2="43"/>
-  </g>
-  <g fill="url(#g)">
-    <circle cx="17" cy="46" r="9.5"/>
-    <circle cx="43" cy="18" r="8"/>
-    <circle cx="46" cy="43" r="6"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="6" y1="58" x2="58" y2="6" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#22d3ee"/><stop offset=".52" stop-color="#60a5fa"/><stop offset="1" stop-color="#a78bfa"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="url(#g)"/><g stroke="#0a0e1a" stroke-width="5.4" stroke-linecap="round"><line x1="19" y1="45" x2="43" y2="19"/><line x1="19" y1="45" x2="45" y2="43"/></g><g fill="#0a0e1a"><circle cx="19" cy="45" r="9"/><circle cx="43" cy="19" r="7.5"/><circle cx="45" cy="43" r="6"/></g></svg>
