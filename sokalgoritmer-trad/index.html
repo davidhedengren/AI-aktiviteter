@@ -38,6 +38,8 @@
   --alg:#ec4899; /* följer vald algoritm */
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{overflow-x:hidden;}
+
 html{-webkit-text-size-adjust:100%;}
 body{font-family:'DM Sans',sans-serif;font-size:13px;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
@@ -420,7 +422,7 @@ button{font-family:inherit;}
 /* ── Intro overlay ── */
 .overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
-.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:540px;width:92%;text-align:center;max-height:90vh;max-height:90dvh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
+.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:min(540px,calc(100vw - 40px));width:100%;text-align:center;max-height:90vh;max-height:90dvh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
 @keyframes overlayIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
 .intro-viz{width:200px;height:92px;margin:0 auto 14px;display:block;}
 .iv-e{fill:none;stroke:rgba(255,255,255,.16);stroke-width:2;}
@@ -456,8 +458,8 @@ button{font-family:inherit;}
 
 /* ══ Intro-overlay på mobil: samma centrerade layout som på desktop, bara kompaktare så den ryms utan scroll ══ */
 @media (max-width:560px){
-  .overlay{padding:16px;}
-  .overlay-card{width:100%;padding:20px 22px;max-height:88vh;max-height:88dvh;}
+  .overlay{padding:20px 16px;}
+  .overlay-card{width:100%;padding:20px 20px;max-height:94vh;max-height:94dvh;}
   .intro-viz{width:130px;height:60px;margin:0 auto 8px;}
   .overlay-card h2{font-size:1.08em;margin-bottom:5px;}
   .overlay-card .sub{font-size:.8em;line-height:1.45;margin-bottom:10px;}
