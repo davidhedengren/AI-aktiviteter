@@ -1,31 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Five in a row in a partially observable environment · ai-aktiviteter.se</title>
+<title>Luffarschack – Partiell observerbarhet</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0a0e1a">
-<meta name="description" content="Play five in a row without seeing all the squares to experience partial observability.">
-<link rel="canonical" href="https://www.ai-aktiviteter.se/luffarschack_ENG">
+<meta name="description" content="Spela luffarschack utan att se alla rutor för att uppleva partiell observerbarhet.">
+<link rel="canonical" href="https://www.ai-aktiviteter.se/luffarschack">
 <link rel="alternate" hreflang="sv" href="https://www.ai-aktiviteter.se/luffarschack">
 <link rel="alternate" hreflang="en" href="https://www.ai-aktiviteter.se/luffarschack_ENG">
 <link rel="alternate" hreflang="x-default" href="https://www.ai-aktiviteter.se/luffarschack">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="AI Activities">
-<meta property="og:locale" content="en_GB">
-<meta property="og:url" content="https://www.ai-aktiviteter.se/luffarschack_ENG">
-<meta property="og:title" content="Five in a row in a partially observable environment – ai-aktiviteter.se">
-<meta property="og:description" content="Play five in a row without seeing all the squares to experience partial observability.">
-<meta property="og:image" content="https://www.ai-aktiviteter.se/og-image-en.png">
+<meta property="og:site_name" content="AI-aktiviteter">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:url" content="https://www.ai-aktiviteter.se/luffarschack">
+<meta property="og:title" content="Luffarschack i partiellt observerbar miljö – ai-aktiviteter.se">
+<meta property="og:description" content="Spela luffarschack utan att se alla rutor för att uppleva partiell observerbarhet.">
+<meta property="og:image" content="https://www.ai-aktiviteter.se/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Five in a row in a partially observable environment – ai-aktiviteter.se">
-<meta name="twitter:description" content="Play five in a row without seeing all the squares to experience partial observability.">
-<meta name="twitter:image" content="https://www.ai-aktiviteter.se/og-image-en.png">
+<meta name="twitter:title" content="Luffarschack i partiellt observerbar miljö – ai-aktiviteter.se">
+<meta name="twitter:description" content="Spela luffarschack utan att se alla rutor för att uppleva partiell observerbarhet.">
+<meta name="twitter:image" content="https://www.ai-aktiviteter.se/og-image.png">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -51,7 +50,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .cell{display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;cursor:pointer;transition:background 0.12s;position:relative;background:var(--cellbg);color:#0d1422;}
 .cell:hover:not(.placed):not(.won):not(.revealed):not(.hidden-cell){background:var(--cellbg-hover);}
 
-/* Hidden cells: dark background with a diagonal hatch pattern */
+/* Dolda rutor: mörk bakgrund med diagonalt streck-mönster */
 .cell.hidden-cell{
   background-color:var(--hiddenbg);
   background-image:repeating-linear-gradient(
@@ -118,12 +117,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .overlay-card .steps{display:flex;flex-direction:column;gap:12px;margin:14px 0;text-align:left;}
 .overlay-card .step{display:flex;gap:12px;align-items:flex-start;font-size:0.85em;color:var(--dim);line-height:1.55;}
 .overlay-card .step strong{color:var(--text);}
-.step-num{width:25px;height:25px;border-radius:50%;background:rgba(77,128,255,0.14);color:var(--accent2);font-weight:700;font-size:0.8em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.28);padding-top:1px;}
+.step-num{width:24px;height:24px;flex-shrink:0;display:grid;place-items:center;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:rgba(34,211,238,.12);color:#22d3ee;border:1px solid rgba(34,211,238,.25);}
 .overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s cubic-bezier(.34,1.56,.64,1);}
 .overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
 .overlay-btn svg{width:15px;height:15px;flex-shrink:0;}
 
-/* Animated mini-preview: a hidden cell briefly reveals a blind move, then fogs over again */
+/* Animerad mini-förhandsvisning: en dold ruta avslöjar kort ett blint drag, sedan dimmar den igen */
 .intro-viz{display:block;width:200px;height:92px;margin:0 auto 14px;}
 .intro-viz .iv-cell{fill:rgba(255,255,255,.05);stroke:rgba(255,255,255,.15);stroke-width:1.5;}
 .intro-viz .iv-fog{fill:#0e1430;stroke:rgba(77,128,255,.35);}
@@ -137,7 +136,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 @keyframes blindReveal{0%,55%{opacity:0;}65%,85%{opacity:1;}100%{opacity:0;}}
 @keyframes qFade{0%,55%{opacity:1;}65%,85%{opacity:0;}100%{opacity:1;}}
 
-/* Small preview of a hidden cell in the intro popup */
+/* Liten förhandsvisning av dold ruta i intropopupen */
 .hidden-preview{
   display:inline-block;width:22px;height:22px;vertical-align:middle;
   border-radius:3px;margin:0 3px;
@@ -169,42 +168,47 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
   .hd{padding:10px 16px 8px;}
   .hd h1{font-size:1.02em;}
 }
+
+/* Numreringen krymper på små skärmar, i takt med resten av introrutan. */
+@media (max-width:560px){
+  .step-num{width:22px;height:22px;border-radius:7px;font-size:11px;}
+}
 </style>
 </head>
 <body>
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
-  <h1>Five in a Row in a <span>partially observable</span> environment</h1>
-  <a class="lang-link" href="https://www.ai-aktiviteter.se/luffarschack"><span class="flag">🇸🇪</span> Svenska</a>
+  <h1>Luffarschack i <span>partiellt observerbar</span> miljö</h1>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/luffarschack_ENG"><span class="flag">🇬🇧</span> English</a>
 </div>
 <div class="main">
   <div class="board-area">
-    <div class="turn-bar"><div class="turn-dot" id="turnDot"></div><span id="turnText">X starts</span></div>
+    <div class="turn-bar"><div class="turn-dot" id="turnDot"></div><span id="turnText">X börjar</span></div>
     <div class="board" id="board"></div>
     <div class="win-banner" id="winBanner"></div>
   </div>
   <div class="panel">
-    <div><div class="sec-t">Opponent</div>
+    <div><div class="sec-t">Motståndare</div>
       <div class="seg" id="modeSeg">
-        <button class="seg-btn active" id="modeHuman" onclick="setMode(false)">Two players</button>
-        <button class="seg-btn" id="modeAI" onclick="setMode(true)">vs AI</button>
+        <button class="seg-btn active" id="modeHuman" onclick="setMode(false)">Två spelare</button>
+        <button class="seg-btn" id="modeAI" onclick="setMode(true)">Mot AI</button>
       </div>
     </div>
-    <div><div class="sec-t">Board size</div>
+    <div><div class="sec-t">Brädstorlek</div>
       <select id="sizeSelect" class="sel" onchange="startGame()">
-        <option value="10">Small · 10 × 10</option>
-        <option value="15" selected>Medium · 15 × 15</option>
-        <option value="20">Large · 20 × 20</option>
+        <option value="10">Liten · 10 × 10</option>
+        <option value="15" selected>Mellan · 15 × 15</option>
+        <option value="20">Stor · 20 × 20</option>
       </select>
     </div>
-    <div><div class="sec-t">Percentage of hidden cells</div>
-      <div class="setting-row"><input type="range" id="hiddenSlider" min="0" max="50" value="20" step="5" oninput="updateHidden()" onchange="startGame()"><span class="setting-val" id="hiddenVal">20%</span></div>
+    <div><div class="sec-t">Andel dolda rutor</div>
+      <div class="setting-row"><input type="range" id="hiddenSlider" min="0" max="50" value="20" step="5" oninput="updateHidden()" onchange="startGame()"><span class="setting-val" id="hiddenVal">20 %</span></div>
     </div>
-    <button class="btn pri" onclick="startGame()">New game</button>
+    <button class="btn pri" onclick="startGame()">Nytt spel</button>
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px;font-size:0.74em;color:var(--dim);line-height:1.55;">
-      <strong style="color:var(--accent2);">Cross-hatched cells</strong> are hidden — you can place there, but you won't see if the opponent has already taken the cell.
-      If you play <strong style="color:var(--accent2);">against the AI</strong>, the computer sees just as little as you do — it makes decisions under the same uncertainty.<br><br>
-      <strong style="color:var(--gold);">Five in a row</strong> wins. After the game, all hidden cells are revealed.
+      <strong style="color:var(--accent2);">Rutmönstrade rutor</strong> är dolda – du kan lägga där, men du ser inte om motståndaren redan tagit rutan.
+      Spelar du <strong style="color:var(--accent2);">mot AI</strong> ser datorn lika lite som du – den fattar beslut under samma osäkerhet.<br><br>
+      <strong style="color:var(--gold);">Fem i rad</strong> vinner. Efter spelet avslöjas alla dolda rutor.
     </div>
   </div>
 </div>
@@ -221,15 +225,15 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
       <text class="iv-q" x="75" y="47">?</text>
       <g class="iv-x iv-blind" transform="translate(75,46)"><line x1="-8" y1="-8" x2="8" y2="8"/><line x1="8" y1="-8" x2="-8" y2="8"/></g>
     </svg>
-    <h2>Five in a Row in a <span>partially observable</span> environment</h2>
-    <p class="sub">In regular five-in-a-row, both players see the whole board. But what happens if parts of the board are <strong>hidden</strong>?</p>
+    <h2>Luffarschack i <span>partiellt observerbar</span> miljö</h2>
+    <p class="sub">I vanligt luffarschack ser båda spelare hela brädet. Men vad händer om delar av spelplanen är <strong>dolda</strong>?</p>
     <div class="steps">
-      <div class="step"><div class="step-num">01</div><div><strong>Hidden cells</strong> – Cross-hatched cells <span class="hidden-preview"></span> are hidden. You can place your mark there, but you won't see what's underneath.</div></div>
-      <div class="step"><div class="step-num">02</div><div><strong>Blind moves</strong> – If you play on a hidden cell, you won't know whether the move succeeded. If the cell was already taken by your opponent, the move is lost — you lose your turn without having placed anything.</div></div>
-      <div class="step"><div class="step-num">03</div><div><strong>Five in a row wins</strong> – Same rules as usual. Whoever places 5 in a row first wins.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Dolda rutor</strong> – Rutor med rutmönster <span class="hidden-preview"></span> är dolda. Du kan lägga din markör där, men du ser inte vad som finns under.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Blinda drag</strong> – Lägger du på en dold ruta vet du inte om draget lyckades. Om rutan redan var tagen av motståndaren går draget förlorat.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Fem i rad vinner</strong> – Samma regler som vanligt. Den som först placerar 5 i rad vinner.</div></div>
     </div>
-    <p class="sub">This is called <strong>partial observability</strong> — the agent only sees part of the environment's state. How does that affect your ability to make good decisions?</p>
-    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show');startGame()">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <p class="sub">Detta kallas <strong>partiell observerbarhet</strong>: agenten ser bara en del av miljöns tillstånd.</p>
+    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show');startGame()">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 </div>
 
@@ -256,12 +260,12 @@ function startGame(){
   for(let r=0;r<SIZE;r++){board[r]=[];for(let c=0;c<SIZE;c++)board[r][c]='';}
   const all=[];for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)all.push([r,c]);
   shuffle(all);const numH=Math.floor(SIZE*SIZE*hiddenPct/100);
-  // Constraint: max 2 hidden cells in a row (horizontally, vertically, diagonally)
-  // Try adding each candidate; skip it if it would create 3 in a row.
+  // Spärr: max 2 dolda rutor i rad (horisontellt, vertikalt, diagonalt)
+  // Försök lägga till varje kandidat; hoppa över om det skulle skapa 3 i rad.
   const DIRS=[[0,1],[1,0],[1,1],[1,-1]];
   function wouldMake3(r,c){
     for(const[dr,dc] of DIRS){
-      // Count consecutive hidden cells in both directions along the axis
+      // Räkna sammanhängande dolda i båda riktningarna längs axeln
       let run=1;
       for(const sgn of [1,-1]){
         let nr=r+dr*sgn,nc=c+dc*sgn;
@@ -340,7 +344,7 @@ function maybeAI(){
     setTimeout(()=>{
       const mv=chooseAIMove();
       if(mv){
-        // Register the attempted hidden cell AFTER the move is chosen, not before
+        // Registrera försökt dold ruta EFTER att draget valts, inte innan
         if(hidden.has(key(mv.r,mv.c))) aiTried.add(key(mv.r,mv.c));
         applyMove(mv.r,mv.c);
       }
@@ -349,7 +353,7 @@ function maybeAI(){
   }
 }
 
-/* ---- AI agent under the same fog ---- */
+/* ---- AI-agent under samma dimma ---- */
 function inb(r,c){return r>=0&&r<SIZE&&c>=0&&c<SIZE;}
 function runValue(cnt,open){
   if(cnt>=5)return 100000;
@@ -407,12 +411,12 @@ function chooseAIMove(){
   let best=null,bestScore=-Infinity;
   for(const[r,c] of list){
     let off=offenseScore(r,c),def=defenseScore(r,c);
-    // Combined score: offense + defense + center attractiveness + a bit of noise
+    // Kombinerat poäng: attack + försvar + centrumsattraktivitet + litet brus
     let s=off+def*1.05+Math.max(0,6-(Math.abs(r-cc)+Math.abs(c-cc))*0.3)+Math.random()*3;
-    // Hidden cell: no penalty -- the AI should treat them the same as visible ones
-    // The only exception: if the score is low (no tactical reason), prefer a visible cell
+    // Dold ruta: ingen straffrabatt – AI:n ska behandla dem likvärdigt med synliga
+    // Enda undantaget: om poängen är låg (ingen taktisk anledning) föredra synlig
     const isH=hidden.has(key(r,c));
-    const sv=(!isH||s>50)?s:s*0.7; // Avoid random fog only at low values
+    const sv=(!isH||s>50)?s:s*0.7; // Undvik slumpmässig dimma bara vid lågt värde
     if(sv>bestScore){bestScore=sv;best={r,c};}
   }
   return best;
@@ -443,15 +447,15 @@ function endGame(winner){
   if(winner!=='draw')checkWin(winner);
   updateStats();
   const banner=document.getElementById('winBanner');let h='';
-  if(winner==='draw'){h=`<div class="wb-title" style="color:var(--dim)">Draw!</div>`;}
-  else{h=`<div class="wb-title" style="color:${winner==='X'?'var(--x-color)':'var(--o-color)'}">Player ${winner} wins!</div>`;}
+  if(winner==='draw'){h=`<div class="wb-title" style="color:var(--dim)">Oavgjort!</div>`;}
+  else{h=`<div class="wb-title" style="color:${winner==='X'?'var(--x-color)':'var(--o-color)'}">Spelare ${winner} vinner!</div>`;}
   h+=`<div class="wb-stats">
-    <div class="wb-stat"><div class="wv" style="color:var(--x-color)">${blindX}</div><div class="wl">Blind (X)</div></div>
-    <div class="wb-stat"><div class="wv" style="color:var(--o-color)">${blindO}</div><div class="wl">Blind (O)</div></div>
-    <div class="wb-stat"><div class="wv">${totalMoves}</div><div class="wl">Total</div></div>
+    <div class="wb-stat"><div class="wv" style="color:var(--x-color)">${blindX}</div><div class="wl">Blinda (X)</div></div>
+    <div class="wb-stat"><div class="wv" style="color:var(--o-color)">${blindO}</div><div class="wl">Blinda (O)</div></div>
+    <div class="wb-stat"><div class="wv">${totalMoves}</div><div class="wl">Totalt</div></div>
   </div>`;
-  h+=`<div class="wb-note">Hidden cells have been revealed!</div>`;
-  h+=`<div class="wb-btns"><button class="btn" onclick="document.getElementById('winBanner').classList.remove('show')" style="font-size:0.8em;">🔍 Show board</button><button class="btn pri" onclick="startGame()" style="font-size:0.8em;">🔄 New game</button></div>`;
+  h+=`<div class="wb-note">Dolda rutor har avslöjats!</div>`;
+  h+=`<div class="wb-btns"><button class="btn" onclick="document.getElementById('winBanner').classList.remove('show')" style="font-size:0.8em;">🔍 Visa brädet</button><button class="btn pri" onclick="startGame()" style="font-size:0.8em;">🔄 Nytt spel</button></div>`;
   banner.innerHTML=h;
   setTimeout(()=>banner.classList.add('show'),500);
 }
@@ -462,16 +466,16 @@ function updateTurn(){
   dot.style.background=isX?'var(--x-color)':'var(--o-color)';
   dot.style.boxShadow='0 0 12px '+(isX?'rgba(229,72,77,.7)':'rgba(19,165,148,.7)');
   let txt;
-  if(gameOver){txt=currentPlayer+"'s turn";}
-  else if(vsAI){ txt = isX ? 'Your turn' : (aiThinking?'Computer is thinking…':"Computer's turn"); }
-  else { txt = currentPlayer+"'s turn"; }
+  if(gameOver){txt=currentPlayer+':s tur';}
+  else if(vsAI){ txt = isX ? 'Din tur' : (aiThinking?'Datorn tänker…':'Datorns tur'); }
+  else { txt = currentPlayer+':s tur'; }
   document.getElementById('turnText').textContent=txt;
 }
 function setT(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
 function updateStats(){
   setT('statBlindX',blindX);setT('statBlindO',blindO);setT('statTotal',totalMoves);
 }
-function updateHidden(){hiddenPct=parseInt(document.getElementById('hiddenSlider').value);document.getElementById('hiddenVal').textContent=hiddenPct+'%';}
+function updateHidden(){hiddenPct=parseInt(document.getElementById('hiddenSlider').value);document.getElementById('hiddenVal').textContent=hiddenPct+' %';}
 function key(r,c){return r+','+c;}
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}}
 startGame();
