@@ -288,7 +288,7 @@ button:disabled{opacity:.42;cursor:not-allowed;}
 .overlay-card .steps{display:flex;flex-direction:column;gap:12px;margin:14px 0;text-align:left;}
 .overlay-card .step{display:flex;gap:12px;align-items:flex-start;font-size:.85em;font-weight:400;color:var(--dim);line-height:1.55;}
 .overlay-card .step strong{color:var(--text);font-weight:600;}
-.step-num{width:25px;height:25px;border-radius:50%;background:rgba(77,128,255,.14);color:var(--accent2);font-weight:700;font-size:.8em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,.28);padding-top:1px;}
+.step-num{width:24px;height:24px;flex-shrink:0;display:grid;place-items:center;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:rgba(34,211,238,.12);color:#22d3ee;border:1px solid rgba(34,211,238,.25);}
 .overlay-tip{margin-top:16px;font-size:.8em;font-weight:400;color:var(--dim);text-align:center;line-height:1.55;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;}
 .overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:18px;font-size:.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 24px rgba(77,128,255,.28);}
 .overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
@@ -316,7 +316,7 @@ button:disabled{opacity:.42;cursor:not-allowed;}
   .overlay-card .sub{font-size:.8em;line-height:1.45;margin-bottom:10px;}
   .overlay-card .steps{gap:8px;margin:10px 0;}
   .overlay-card .step{font-size:.78em;line-height:1.4;gap:9px;}
-  .step-num{width:21px;height:21px;font-size:.72em;}
+  .step-num{width:22px;height:22px;border-radius:7px;font-size:11px;}
   .overlay-btn{padding:11px;margin-top:10px;font-size:.88em;}
 }
 /* Låga skärmar: liggande mobil, eller små telefoner med förstorad text.
@@ -432,9 +432,9 @@ button:disabled{opacity:.42;cursor:not-allowed;}
     <h2>Sökalgoritmer i <span>labyrint</span></h2>
     <p class="sub">Fyra klassiska sökalgoritmer söker igenom samma labyrint. Följ hur de breder ut sig, ruta för ruta.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">01</div><div><strong>Välj en labyrint</strong> – ladda en färdig eller bygg en egen.</div></div>
-      <div class="step"><div class="step-num">02</div><div><strong>Välj algoritm</strong> – BFS, DFS, Girig bäst-först eller A*.</div></div>
-      <div class="step"><div class="step-num">03</div><div><strong>Jämför</strong> – vilken hittar kortast väg, och vilken undersöker minst?</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Välj en labyrint</strong> – ladda en färdig eller bygg en egen.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Välj algoritm</strong> – BFS, DFS, Girig bäst-först eller A*.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Jämför</strong> – vilken hittar kortast väg, och vilken undersöker minst?</div></div>
     </div>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
