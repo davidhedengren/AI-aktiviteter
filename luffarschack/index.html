@@ -117,7 +117,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .overlay-card .steps{display:flex;flex-direction:column;gap:12px;margin:14px 0;text-align:left;}
 .overlay-card .step{display:flex;gap:12px;align-items:flex-start;font-size:0.85em;color:var(--dim);line-height:1.55;}
 .overlay-card .step strong{color:var(--text);}
-.step-num{width:25px;height:25px;border-radius:50%;background:rgba(77,128,255,0.14);color:var(--accent2);font-weight:700;font-size:0.8em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.28);padding-top:1px;}
+.step-num{width:24px;height:24px;flex-shrink:0;display:grid;place-items:center;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:rgba(34,211,238,.12);color:#22d3ee;border:1px solid rgba(34,211,238,.25);}
 .overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s cubic-bezier(.34,1.56,.64,1);}
 .overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
 .overlay-btn svg{width:15px;height:15px;flex-shrink:0;}
@@ -167,6 +167,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
   .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}
   .hd{padding:10px 16px 8px;}
   .hd h1{font-size:1.02em;}
+}
+
+/* Numreringen krymper på små skärmar, i takt med resten av introrutan. */
+@media (max-width:560px){
+  .step-num{width:22px;height:22px;border-radius:7px;font-size:11px;}
 }
 </style>
 </head>
@@ -223,11 +228,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     <h2>Luffarschack i <span>partiellt observerbar</span> miljö</h2>
     <p class="sub">I vanligt luffarschack ser båda spelare hela brädet. Men vad händer om delar av spelplanen är <strong>dolda</strong>?</p>
     <div class="steps">
-      <div class="step"><div class="step-num">01</div><div><strong>Dolda rutor</strong> – Rutor med rutmönster <span class="hidden-preview"></span> är dolda. Du kan lägga din markör där, men du ser inte vad som finns under.</div></div>
-      <div class="step"><div class="step-num">02</div><div><strong>Blinda drag</strong> – Lägger du på en dold ruta vet du inte om draget lyckades. Om rutan redan var tagen av motståndaren går draget förlorat – du tappar din tur utan att ha placerat något.</div></div>
-      <div class="step"><div class="step-num">03</div><div><strong>Fem i rad vinner</strong> – Samma regler som vanligt. Den som först placerar 5 i rad vinner.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Dolda rutor</strong> – Rutor med rutmönster <span class="hidden-preview"></span> är dolda. Du kan lägga din markör där, men du ser inte vad som finns under.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Blinda drag</strong> – Lägger du på en dold ruta vet du inte om draget lyckades. Om rutan redan var tagen av motståndaren går draget förlorat.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Fem i rad vinner</strong> – Samma regler som vanligt. Den som först placerar 5 i rad vinner.</div></div>
     </div>
-    <p class="sub">Detta kallas <strong>partiell observerbarhet</strong> – agenten ser bara en del av miljöns tillstånd. Hur påverkar det din förmåga att fatta bra beslut?</p>
+    <p class="sub">Detta kallas <strong>partiell observerbarhet</strong>: agenten ser bara en del av miljöns tillstånd.</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show');startGame()">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 </div>
