@@ -68,13 +68,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .intro.hidden{opacity:0;pointer-events:none;}
 .intro-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:var(--r-lg);padding:34px 36px;max-width:540px;width:92%;max-height:88vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.02) inset;animation:cardIn .5s var(--ease-spring);}
 @keyframes cardIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
-.intro-icon{width:44px;height:44px;margin:0 auto 14px;color:var(--accent2);}
 .intro-card h2{font-family:'Syne',sans-serif;font-size:1.5em;font-weight:800;margin-bottom:8px;text-align:center;letter-spacing:-.01em;}
 .intro-card h2 span{background:linear-gradient(135deg,#eef1fb,var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
 .intro-card .sub{color:var(--dim);font-size:.9em;line-height:1.6;text-align:center;margin-bottom:20px;}
 .intro-steps{display:flex;flex-direction:column;gap:14px;margin:16px 0;}
 .intro-step{display:flex;gap:13px;align-items:flex-start;}
-.intro-num{width:26px;height:26px;border-radius:50%;background:var(--accent-dim);color:var(--accent2);font-weight:700;font-size:.82em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(122,162,255,.25);font-family:'JetBrains Mono',monospace;}
+.intro-num{width:24px;height:24px;flex-shrink:0;display:grid;place-items:center;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:rgba(34,211,238,.12);color:#22d3ee;border:1px solid rgba(34,211,238,.25);}
 .intro-step-text{font-size:.87em;color:var(--dim);line-height:1.6;padding-top:2px;}.intro-step-text strong{color:var(--text);font-weight:600;}
 .intro-start{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:18px;font-family:'DM Sans',sans-serif;font-size:.96em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(77,128,255,.28);}
 .intro-start:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
@@ -84,7 +83,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 /* header */
 .hd{text-align:center;padding:16px 16px 12px;border-bottom:1px solid var(--border-soft);position:relative;z-index:2;}
 .hd-title-row{display:flex;align-items:center;justify-content:center;gap:9px;}
-.hd-icon{width:22px;height:22px;color:var(--accent2);flex-shrink:0;}
 .hd h1{font-family:'Syne',sans-serif;font-size:1.3em;font-weight:800;letter-spacing:-.01em;}.hd h1 span{background:linear-gradient(135deg,#eef1fb,var(--accent2) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;}
 .hd p{color:var(--dim2);font-size:.78em;max-width:680px;margin:3px auto 0;line-height:1.3;}
 .back-link,.lang-link{position:absolute;top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:.75em;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.02);transition:.2s var(--ease-out);white-space:nowrap;z-index:2;}
@@ -315,6 +313,36 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
   .hd-title-row{flex-wrap:wrap;}
 }
 @media (prefers-reduced-motion:reduce){.bg-mesh::before{animation:none;}*{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+/* ── Vinjett i introrutan: ett 2-3-2-1-nätverk där en ljuspuls vandrar
+   framåt genom lagren, ett framåtpass. pathLength=100 normaliserar
+   kantlängderna så att pulsen håller samma tempo överallt. ── */
+.intro-viz{display:block;width:224px;height:92px;margin:0 auto 16px;max-width:100%;}
+.intro-viz .iv-edge{stroke:rgba(122,162,255,.20);stroke-width:1.3;fill:none;}
+.intro-viz .iv-pulse{stroke:#7aa2ff;stroke-width:2.1;stroke-linecap:round;fill:none;
+  stroke-dasharray:16 100;stroke-dashoffset:16;opacity:0;}
+.intro-viz .iv-nodes circle{fill:#151a2e;stroke:rgba(122,162,255,.45);stroke-width:1.8;}
+@media (prefers-reduced-motion: no-preference){
+  .intro-viz .iv-pulse{animation:ivFlow 3.4s cubic-bezier(.45,0,.55,1) infinite;}
+  .intro-viz .f2 .iv-pulse{animation-delay:.62s;}
+  .intro-viz .f3 .iv-pulse{animation-delay:1.24s;}
+  .intro-viz .iv-nodes circle{animation:ivNode 3.4s ease-in-out infinite;}
+  .intro-viz .n1 circle{animation-delay:.62s;}
+  .intro-viz .n2 circle{animation-delay:1.24s;}
+  .intro-viz .n3 circle{animation-delay:1.86s;}
+}
+@keyframes ivFlow{
+  0%{stroke-dashoffset:16;opacity:0;}
+  4%{opacity:1;}
+  22%{stroke-dashoffset:-100;opacity:1;}
+  26%,100%{stroke-dashoffset:-100;opacity:0;}
+}
+@keyframes ivNode{
+  0%,100%{fill:#151a2e;stroke:rgba(122,162,255,.45);filter:none;}
+  6%{fill:#1d2a4d;stroke:#7aa2ff;filter:drop-shadow(0 0 5px rgba(122,162,255,.75));}
+  20%{fill:#1d2a4d;stroke:#7aa2ff;filter:drop-shadow(0 0 5px rgba(122,162,255,.75));}
+  34%{fill:#151a2e;stroke:rgba(122,162,255,.45);filter:none;}
+}
 </style>
 </head>
 <body>
@@ -322,24 +350,23 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 
 <div class="intro" id="intro">
   <div class="intro-card">
-    <svg class="intro-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg>
+    <svg class="intro-viz" viewBox="0 0 224 92" aria-hidden="true"><g class="iv-base"><line class="iv-edge" x1="24" y1="30" x2="84" y2="16" pathLength="100"/><line class="iv-edge" x1="24" y1="30" x2="84" y2="46" pathLength="100"/><line class="iv-edge" x1="24" y1="30" x2="84" y2="76" pathLength="100"/><line class="iv-edge" x1="24" y1="62" x2="84" y2="16" pathLength="100"/><line class="iv-edge" x1="24" y1="62" x2="84" y2="46" pathLength="100"/><line class="iv-edge" x1="24" y1="62" x2="84" y2="76" pathLength="100"/><line class="iv-edge" x1="84" y1="16" x2="146" y2="30" pathLength="100"/><line class="iv-edge" x1="84" y1="16" x2="146" y2="62" pathLength="100"/><line class="iv-edge" x1="84" y1="46" x2="146" y2="30" pathLength="100"/><line class="iv-edge" x1="84" y1="46" x2="146" y2="62" pathLength="100"/><line class="iv-edge" x1="84" y1="76" x2="146" y2="30" pathLength="100"/><line class="iv-edge" x1="84" y1="76" x2="146" y2="62" pathLength="100"/><line class="iv-edge" x1="146" y1="30" x2="200" y2="46" pathLength="100"/><line class="iv-edge" x1="146" y1="62" x2="200" y2="46" pathLength="100"/></g><g class="iv-flow f1"><line class="iv-pulse" x1="24" y1="30" x2="84" y2="16" pathLength="100"/><line class="iv-pulse" x1="24" y1="30" x2="84" y2="46" pathLength="100"/><line class="iv-pulse" x1="24" y1="30" x2="84" y2="76" pathLength="100"/><line class="iv-pulse" x1="24" y1="62" x2="84" y2="16" pathLength="100"/><line class="iv-pulse" x1="24" y1="62" x2="84" y2="46" pathLength="100"/><line class="iv-pulse" x1="24" y1="62" x2="84" y2="76" pathLength="100"/></g><g class="iv-flow f2"><line class="iv-pulse" x1="84" y1="16" x2="146" y2="30" pathLength="100"/><line class="iv-pulse" x1="84" y1="16" x2="146" y2="62" pathLength="100"/><line class="iv-pulse" x1="84" y1="46" x2="146" y2="30" pathLength="100"/><line class="iv-pulse" x1="84" y1="46" x2="146" y2="62" pathLength="100"/><line class="iv-pulse" x1="84" y1="76" x2="146" y2="30" pathLength="100"/><line class="iv-pulse" x1="84" y1="76" x2="146" y2="62" pathLength="100"/></g><g class="iv-flow f3"><line class="iv-pulse" x1="146" y1="30" x2="200" y2="46" pathLength="100"/><line class="iv-pulse" x1="146" y1="62" x2="200" y2="46" pathLength="100"/></g><g class="iv-nodes n0"><circle cx="24" cy="30" r="7"/><circle cx="24" cy="62" r="7"/></g><g class="iv-nodes n1"><circle cx="84" cy="16" r="7"/><circle cx="84" cy="46" r="7"/><circle cx="84" cy="76" r="7"/></g><g class="iv-nodes n2"><circle cx="146" cy="30" r="7"/><circle cx="146" cy="62" r="7"/></g><g class="iv-nodes n3"><circle cx="200" cy="46" r="8.5"/></g></svg>
     <h2><span>Neurala nätverk&#8209;labbet</span></h2>
-    <p class="sub">Ett neuralt nätverk lär sig göra förutsägelser genom att träna på data. Här får du se hela processen steg för steg.</p>
+    <p class="sub">Ett neuralt nätverk lär sig göra förutsägelser genom att träna på data. Här ser du hela processen inifrån.</p>
     <div class="intro-steps">
-      <div class="intro-step"><div class="intro-num">01</div><div class="intro-step-text"><strong>Träna nätverket</strong> – Nätverket börjar med slumpmässiga vikter. Genom att träna på hundratals exempel lär det sig vilka kopplingar som är viktiga.</div></div>
-      <div class="intro-step"><div class="intro-num">02</div><div class="intro-step-text"><strong>Utforska beräkningarna</strong> – Stega genom nätverket neuron för neuron. Se hur varje neuron multiplicerar, summerar och aktiverar.</div></div>
-      <div class="intro-step"><div class="intro-num">03</div><div class="intro-step-text"><strong>Gör egna förutsägelser</strong> – Ändra indatavärdena och se om nätverket svarar rätt.</div></div>
+      <div class="intro-step"><div class="intro-num">1</div><div class="intro-step-text"><strong>Utforska beräkningarna</strong> – följ hur varje neuron multiplicerar, summerar och aktiverar.</div></div>
+      <div class="intro-step"><div class="intro-num">2</div><div class="intro-step-text"><strong>Träna nätverket</strong> – undersök de olika scenarierna genom att träna nätverket på någon av datamängderna.</div></div>
+      <div class="intro-step"><div class="intro-num">3</div><div class="intro-step-text"><strong>Bygg om nätverket</strong> – lägg till neuroner och dolda lager, och se hur det påverkar hur många svar nätverket får rätt.</div></div>
     </div>
     <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Starta simuleringen <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-    <p class="intro-tip">Du startar i <strong>🧮 Beräkningsläge</strong> där varje neuron räknar med enkla heltal. När du förstått hur en neuron fungerar – byt till ett av scenarierna och låt nätverket träna sig självt.</p>
+    <p class="intro-tip">Du börjar i <strong>Beräkningsläge</strong>, där varje neuron räknar med enkla heltal. Byt sedan till ett scenario och låt nätverket träna sig självt.</p>
   </div>
 </div>
 
 <div class="hd">
   <a class="back-link" href="/"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> AI-aktiviteter</a>
   <div class="hd-title-row">
-    <svg class="hd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg>
-    <h1><span>Neurala nätverk&#8209;labbet</span></h1>
+        <h1><span>Neurala nätverk&#8209;labbet</span></h1>
   </div>
   <p>Följ beräkningarna steg för steg, träna på data och gör förutsägelser.</p>
   <a class="lang-link" href="https://www.ai-aktiviteter.se/neuralt-natverk_ENG"><span class="flag">🇬🇧</span> English</a>
@@ -745,6 +772,7 @@ function drawGlassNeuron(ctx,x,y,R,opts){
   else{ctx.strokeStyle=rgbaStr(rimRgb,(computed?0.55:0.25)*op+0.08);ctx.lineWidth=1.4;}
   ctx.stroke();ctx.shadowBlur=0;
 }
+
 function drawNet(){
   const{ctx,w,h}=setupCv();
   drawCanvasBackdrop(ctx,w,h);
