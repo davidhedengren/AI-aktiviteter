@@ -1,32 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="utf-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>k-means clustering – ai-aktiviteter.se</title>
-   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#0a0e1a">
-<meta name="description" content="Explore how an algorithm finds patterns in data without knowing what it is looking for. Run it step by step and see how the choice of k shapes the grouping.">
-<link rel="canonical" href="https://www.ai-aktiviteter.se/k-means_ENG">
-<link rel="alternate" hreflang="sv" href="https://www.ai-aktiviteter.se/k-means">
-<link rel="alternate" hreflang="en" href="https://www.ai-aktiviteter.se/k-means_ENG">
-<link rel="alternate" hreflang="x-default" href="https://www.ai-aktiviteter.se/k-means">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="AI Activities">
-<meta property="og:locale" content="en_GB">
-<meta property="og:url" content="https://www.ai-aktiviteter.se/k-means_ENG">
-<meta property="og:title" content="k‑means clustering – ai-aktiviteter.se">
-<meta property="og:description" content="Explore how an algorithm finds patterns in data without knowing what it is looking for. Run it step by step and see how the choice of k shapes the grouping.">
-<meta property="og:image" content="https://www.ai-aktiviteter.se/og-image-en.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="k‑means clustering – ai-aktiviteter.se">
-<meta name="twitter:description" content="Explore how an algorithm finds patterns in data without knowing what it is looking for. Run it step by step and see how the choice of k shapes the grouping.">
-<meta name="twitter:image" content="https://www.ai-aktiviteter.se/og-image-en.png">
 <meta name="description" content="Interactive simulation of k-means clustering: decision boundaries, distance, WCSS and the elbow method – for upper-secondary AI courses.">
 <link rel="alternate" hreflang="sv" href="https://www.ai-aktiviteter.se/k-means">
 <link rel="alternate" hreflang="en" href="https://www.ai-aktiviteter.se/k-means_ENG">
@@ -72,11 +49,11 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   background:rgba(255,255,255,.035);transition:var(--t1) var(--ez)}
 .lk:hover{color:var(--tx);background:rgba(255,255,255,.08)}
 .lk svg{width:17px;height:11px;border-radius:2px;display:block}
-h1{font-family:'Syne',sans-serif;font-size:clamp(27px,4.6vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.05;color:var(--tx)}
+h1{font-family:'Syne',sans-serif;font-size:clamp(27px,4.6vw,40px);font-weight:700;letter-spacing:-.005em;line-height:1.08;color:var(--tx)}
 @supports ((-webkit-background-clip:text) or (background-clip:text)){
   h1{background:linear-gradient(96deg,#fff 8%,#5b8cff 55%,#8b7dff 100%);
      -webkit-background-clip:text;background-clip:text;color:transparent}}
-.tag{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(15px,2.2vw,18px);color:var(--sub);margin-top:9px;letter-spacing:-.01em}
+.tag{font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(15px,2.2vw,18px);color:var(--sub);margin-top:10px;letter-spacing:.005em;line-height:1.35}
 
 .wrap{max-width:1180px;margin:0 auto;width:100%;padding:10px 20px 44px;display:flex;flex-direction:column;gap:18px;flex:1;position:relative;z-index:1}
 .lay{display:grid;grid-template-columns:392px minmax(0,1fr);gap:20px;align-items:start}
@@ -93,7 +70,7 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(27px,4.6vw,40px);font-weight:80
 
 /* ── panel + scen ── */
 .panel{border-radius:20px;padding:18px 20px;background:linear-gradient(158deg,rgba(255,255,255,.04),rgba(255,255,255,.012))}
-.ph{display:flex;align-items:center;gap:10px;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:14px;letter-spacing:-.01em}
+.ph{display:flex;align-items:center;gap:10px;font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:14px;letter-spacing:.005em}
 .ph .pd{width:7px;height:7px;border-radius:50%;background:var(--c,var(--p3));box-shadow:0 0 12px var(--c,var(--p3));transition:background var(--t2) var(--ez)}
 .ph .meta{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--dim);font-weight:400}
 .stage{border-radius:16px;overflow:hidden;background:#080a11;position:relative;
@@ -190,7 +167,7 @@ svg.plot.ready .pt{cursor:pointer}
 /* ── nyckeltal ── */
 .mets{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:14px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
 .mk{font-size:11.5px;color:var(--dim);margin-bottom:5px;line-height:1.35}
-.mv{font-family:'Syne',sans-serif;font-weight:800;font-size:25px;line-height:1;letter-spacing:-.02em;display:flex;align-items:baseline;gap:7px;animation:bump var(--t2) var(--ez)}
+.mv{font-family:'Syne',sans-serif;font-weight:700;font-size:25px;line-height:1;letter-spacing:-.005em;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:7px;animation:bump var(--t2) var(--ez)}
 @keyframes bump{0%{transform:translateY(4px);opacity:.35}100%{transform:none;opacity:1}}
 .delta{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:500;color:var(--grn)}
 .mv.zero{color:var(--grn)}
@@ -221,7 +198,7 @@ svg.plot.ready .pt{cursor:pointer}
 .pn{flex:none;width:30px;height:30px;border-radius:11px;display:flex;align-items:center;justify-content:center;
   font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim);background:rgba(255,255,255,.06);
   transition:background var(--t2) var(--ez),color var(--t2) var(--ez)}
-.pshead{font-family:'Syne',sans-serif;font-weight:700;font-size:15.5px;letter-spacing:-.015em;color:var(--dim);transition:color var(--t2)}
+.pshead{font-family:'Syne',sans-serif;font-weight:700;font-size:15.5px;letter-spacing:.005em;color:var(--dim);transition:color var(--t2)}
 .pback{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;
   text-transform:uppercase;color:var(--dim);display:none}
 .pstep.back .pback{display:inline}
@@ -382,7 +359,7 @@ svg.plot.ready .pt{cursor:pointer}
   box-shadow:0 30px 90px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.05);
   animation:ovlIn 480ms var(--sp)}
 @keyframes ovlIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
-.ovlc h2{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;letter-spacing:-.02em;text-align:center}
+.ovlc h2{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;letter-spacing:.005em;line-height:1.2;text-align:center}
 @supports ((-webkit-background-clip:text) or (background-clip:text)){
   .ovlc h2{background:linear-gradient(96deg,#fff 8%,#5b8cff 58%,#8b7dff 100%);
     -webkit-background-clip:text;background-clip:text;color:transparent}}
@@ -442,6 +419,78 @@ svg.plot.ready .pt{cursor:pointer}
     transition-duration:1ms!important;scroll-behavior:auto!important}
   .ccard-in{transform:none!important}
 }
+
+/* ── Dataset cards ──
+   The thumbnail is drawn from the same generator the lab uses, so the shape
+   in the card is the one the pupil meets in the plot. It carries the
+   information without words; the text below is only the name. */
+.dsgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:2px;}
+.dscard{position:relative;display:flex;flex-direction:column;gap:8px;padding:9px 9px 10px;
+  border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.02);
+  cursor:pointer;text-align:left;font-family:inherit;
+  transition:border-color var(--t1) var(--ez),background var(--t1) var(--ez),transform var(--t1) var(--ez);}
+.dscard:hover{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.045);transform:translateY(-1px);}
+.dscard:active{transform:translateY(0);}
+.dscard.on{border-color:rgba(255,255,255,.42);background:rgba(255,255,255,.07);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);}
+.dscard .dsm{display:block;width:100%;aspect-ratio:1;border-radius:8px;
+  background:rgba(0,0,0,.28);opacity:.62;transition:opacity var(--t1) var(--ez);}
+.dscard:hover .dsm,.dscard.on .dsm{opacity:1;}
+.dsname{font-size:12.5px;font-weight:600;color:var(--dim);letter-spacing:.005em;
+  transition:color var(--t1) var(--ez);}
+.dscard.on .dsname{color:var(--tx);}
+.dscard:focus-visible{outline:2px solid var(--a1);outline-offset:2px;}
+.dshelp{position:absolute;top:6px;right:6px;width:19px;height:19px;border-radius:50%;
+  border:1px solid var(--line2);background:rgba(10,13,24,.75);color:var(--dim);
+  font-size:11px;font-weight:700;line-height:1;display:grid;place-items:center;
+  cursor:pointer;opacity:0;transition:var(--t1) var(--ez);z-index:2;}
+.dscard:hover .dshelp,.dscard.on .dshelp,.dshelp:focus-visible{opacity:1;}
+.dshelp:hover{color:var(--tx);border-color:var(--dim);}
+@media(hover:none){.dshelp{opacity:1;}}
+.seedrow{display:flex;gap:7px;}
+.seedopt{position:relative;flex:1;}
+.seedopt .chip{width:100%;}
+
+/* ── Control panel below the plot ──
+   On a wide screen the step panel sits beside the plot and both are visible.
+   Once the layout stacks, the buttons end up far from the plot, so they are
+   shown here instead – right under what the pupil is looking at. */
+.cpanel{display:none;gap:8px;margin-top:12px;}
+.cpanel .cpbtn{flex:1;min-width:0;display:inline-flex;align-items:center;justify-content:center;
+  gap:6px;padding:12px 10px;border-radius:11px;border:1px solid var(--line2);
+  background:rgba(255,255,255,.04);color:var(--sub);cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:.005em;
+  transition:var(--t1) var(--ez);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cpanel .cpbtn:hover:not(:disabled){border-color:var(--dim);color:var(--tx);}
+.cpanel .cpbtn:disabled{opacity:.32;cursor:not-allowed;}
+.cpanel .cpbtn.pri{background:color-mix(in srgb,var(--c,#5b8cff) 20%,transparent);
+  border-color:color-mix(in srgb,var(--c,#5b8cff) 55%,transparent);color:var(--tx);}
+.cpanel .cpbtn.pri:hover:not(:disabled){background:color-mix(in srgb,var(--c,#5b8cff) 30%,transparent);}
+.cpanel .cpbtn.stop{border-color:rgba(255,120,120,.45);color:#ff9d9d;}
+@media(max-width:1040px){.cpanel{display:flex;}}
+
+/* ── Choosing k ──
+   This is the one setting that actually configures the model, unlike the
+   guess in step 1 which is only kept for the comparison. Hence its own
+   frame and a clearly stated current value. */
+.kpick{margin-top:4px;padding:11px 12px;border-radius:13px;
+  border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.035);}
+.kpick-hd{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:9px;}
+.kpick-lb{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+.kpick-now{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:var(--tx);
+  font-variant-numeric:tabular-nums;}
+.kpick-now span{font-size:11px;color:var(--dim);font-weight:500;margin-right:3px}
+.kpick .chips{gap:6px}
+.kpick .chip{flex:1;min-width:0;padding:10px 4px;font-size:14px}
+.kpick .chip.on{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.5);
+  color:var(--tx);font-weight:700;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+
+/* The guess box should not look like a setting. A dashed border and muted
+   tone mark it as a note that is saved, not something that steers the model. */
+.gbox{border-style:dashed !important;background:rgba(255,255,255,.018) !important;}
+.gbox .gt{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+.gbox p{font-size:13px;color:var(--sub);margin-top:5px}
+.gbox .chip{font-family:'JetBrains Mono',monospace;min-width:38px}
 </style>
 </head>
 <body>
@@ -531,7 +580,8 @@ svg.plot.ready .pt{cursor:pointer}
           <div class="stagelbl" id="stagelbl"></div>
           <div class="vbanner" id="vbanner"></div>
         </div>
-        <div class="mets" id="mets"></div>
+        <div class="cpanel" id="cpanel"></div>
+<div class="mets" id="mets"></div>
         <div class="tl" id="tl"></div>
       </div>
     </div>
@@ -565,9 +615,14 @@ function blob(r,cx,cy,sx,sy,n,rot){const o=[];for(let i=0;i<n;i++){let x=gs(r)*s
   o.push({x:Math.min(98,Math.max(2,cx+x)),y:Math.min(98,Math.max(2,cy+y))});}return o;}
 
 /* All datasets are drawn in a fixed coordinate system, 0–100 on both axes. */
+const DS_MINI={
+  three:'<svg class="dsm" viewBox="0 0 100 100" aria-hidden="true" style="--dc:#4ecfff"><g fill="var(--dc)"><circle cx="18.7" cy="36.7" r="3"/><circle cx="16.5" cy="31.6" r="3"/><circle cx="24.0" cy="45.4" r="3"/><circle cx="28.0" cy="41.3" r="3"/><circle cx="27.3" cy="32.3" r="3"/><circle cx="15.0" cy="36.4" r="3"/><circle cx="20.6" cy="36.4" r="3"/><circle cx="26.1" cy="31.9" r="3"/><circle cx="13.3" cy="43.1" r="3"/><circle cx="26.9" cy="42.5" r="3"/><circle cx="16.5" cy="40.1" r="3"/><circle cx="21.8" cy="35.2" r="3"/><circle cx="10.3" cy="37.9" r="3"/><circle cx="14.7" cy="25.0" r="3"/><circle cx="19.0" cy="38.2" r="3"/><circle cx="25.6" cy="40.2" r="3"/><circle cx="23.5" cy="35.2" r="3"/><circle cx="76.0" cy="38.3" r="3"/><circle cx="70.6" cy="35.2" r="3"/><circle cx="77.4" cy="44.1" r="3"/><circle cx="84.5" cy="32.3" r="3"/><circle cx="82.3" cy="29.1" r="3"/><circle cx="77.7" cy="33.5" r="3"/><circle cx="77.3" cy="31.9" r="3"/><circle cx="79.0" cy="31.8" r="3"/><circle cx="78.1" cy="40.4" r="3"/><circle cx="73.7" cy="34.2" r="3"/><circle cx="80.1" cy="36.0" r="3"/><circle cx="77.7" cy="36.7" r="3"/><circle cx="79.1" cy="33.7" r="3"/><circle cx="82.1" cy="29.6" r="3"/><circle cx="92.2" cy="23.3" r="3"/><circle cx="80.1" cy="31.9" r="3"/><circle cx="86.3" cy="27.0" r="3"/><circle cx="22.5" cy="79.4" r="3"/><circle cx="14.0" cy="80.1" r="3"/><circle cx="10.2" cy="77.8" r="3"/><circle cx="23.5" cy="76.8" r="3"/><circle cx="24.3" cy="79.3" r="3"/><circle cx="12.3" cy="78.8" r="3"/><circle cx="17.4" cy="74.2" r="3"/><circle cx="17.2" cy="81.6" r="3"/><circle cx="15.8" cy="75.9" r="3"/><circle cx="21.6" cy="70.1" r="3"/><circle cx="14.7" cy="80.6" r="3"/><circle cx="14.6" cy="84.9" r="3"/><circle cx="10.6" cy="66.1" r="3"/><circle cx="13.9" cy="79.3" r="3"/><circle cx="15.1" cy="83.3" r="3"/><circle cx="30.3" cy="69.0" r="3"/><circle cx="19.7" cy="74.4" r="3"/></g></svg>',
+  elong:'<svg class="dsm" viewBox="0 0 100 100" aria-hidden="true" style="--dc:#ff9f4a"><g fill="var(--dc)"><circle cx="31.1" cy="47.3" r="3"/><circle cx="40.1" cy="40.9" r="3"/><circle cx="13.1" cy="54.4" r="3"/><circle cx="49.4" cy="32.0" r="3"/><circle cx="24.1" cy="53.4" r="3"/><circle cx="29.4" cy="38.7" r="3"/><circle cx="39.4" cy="37.7" r="3"/><circle cx="22.3" cy="48.9" r="3"/><circle cx="50.2" cy="26.0" r="3"/><circle cx="50.5" cy="37.0" r="3"/><circle cx="69.3" cy="19.6" r="3"/><circle cx="37.7" cy="41.1" r="3"/><circle cx="48.6" cy="34.5" r="3"/><circle cx="10.8" cy="52.7" r="3"/><circle cx="30.7" cy="37.7" r="3"/><circle cx="10.4" cy="63.1" r="3"/><circle cx="42.4" cy="35.5" r="3"/><circle cx="37.5" cy="37.6" r="3"/><circle cx="68.1" cy="19.6" r="3"/><circle cx="69.2" cy="21.9" r="3"/><circle cx="70.0" cy="17.3" r="3"/><circle cx="15.2" cy="53.3" r="3"/><circle cx="52.9" cy="33.2" r="3"/><circle cx="40.2" cy="35.0" r="3"/><circle cx="39.7" cy="73.2" r="3"/><circle cx="44.8" cy="81.5" r="3"/><circle cx="37.5" cy="76.3" r="3"/><circle cx="98.0" cy="41.1" r="3"/><circle cx="54.0" cy="60.6" r="3"/><circle cx="80.4" cy="59.8" r="3"/><circle cx="87.5" cy="38.7" r="3"/><circle cx="85.0" cy="44.0" r="3"/><circle cx="80.7" cy="48.6" r="3"/><circle cx="55.6" cy="76.3" r="3"/><circle cx="62.6" cy="68.9" r="3"/><circle cx="72.1" cy="53.7" r="3"/><circle cx="75.9" cy="56.3" r="3"/><circle cx="60.1" cy="60.0" r="3"/><circle cx="61.5" cy="59.8" r="3"/><circle cx="67.8" cy="58.6" r="3"/><circle cx="51.0" cy="71.8" r="3"/><circle cx="63.7" cy="65.2" r="3"/><circle cx="49.4" cy="75.5" r="3"/><circle cx="44.7" cy="70.7" r="3"/><circle cx="50.3" cy="77.0" r="3"/><circle cx="72.1" cy="53.9" r="3"/><circle cx="90.6" cy="35.7" r="3"/><circle cx="95.3" cy="39.1" r="3"/></g></svg>',
+  sizes:'<svg class="dsm" viewBox="0 0 100 100" aria-hidden="true" style="--dc:#ff5f9e"><g fill="var(--dc)"><circle cx="11.9" cy="37.0" r="3"/><circle cx="17.4" cy="47.7" r="3"/><circle cx="27.5" cy="98.0" r="3"/><circle cx="21.0" cy="44.0" r="3"/><circle cx="15.3" cy="40.8" r="3"/><circle cx="2.0" cy="48.7" r="3"/><circle cx="25.0" cy="87.3" r="3"/><circle cx="32.6" cy="51.0" r="3"/><circle cx="14.8" cy="61.2" r="3"/><circle cx="26.5" cy="58.7" r="3"/><circle cx="21.1" cy="40.1" r="3"/><circle cx="29.6" cy="60.5" r="3"/><circle cx="40.8" cy="32.5" r="3"/><circle cx="28.8" cy="54.3" r="3"/><circle cx="49.1" cy="79.9" r="3"/><circle cx="29.2" cy="66.7" r="3"/><circle cx="27.2" cy="14.7" r="3"/><circle cx="41.0" cy="89.9" r="3"/><circle cx="50.6" cy="62.0" r="3"/><circle cx="36.2" cy="61.6" r="3"/><circle cx="78.0" cy="28.8" r="3"/><circle cx="80.1" cy="27.3" r="3"/><circle cx="77.4" cy="25.0" r="3"/><circle cx="74.3" cy="31.7" r="3"/><circle cx="76.9" cy="24.0" r="3"/><circle cx="87.5" cy="34.6" r="3"/><circle cx="71.6" cy="33.1" r="3"/><circle cx="71.8" cy="37.4" r="3"/><circle cx="80.0" cy="70.0" r="3"/><circle cx="78.7" cy="71.3" r="3"/><circle cx="82.8" cy="64.7" r="3"/><circle cx="70.9" cy="79.5" r="3"/><circle cx="79.7" cy="70.9" r="3"/><circle cx="75.5" cy="72.3" r="3"/><circle cx="76.9" cy="75.8" r="3"/><circle cx="73.3" cy="69.5" r="3"/></g></svg>',
+  none:'<svg class="dsm" viewBox="0 0 100 100" aria-hidden="true" style="--dc:#8b95a9"><g fill="var(--dc)"><circle cx="50.1" cy="56.5" r="3"/><circle cx="25.5" cy="61.8" r="3"/><circle cx="86.9" cy="26.6" r="3"/><circle cx="82.2" cy="48.5" r="3"/><circle cx="32.7" cy="86.8" r="3"/><circle cx="25.7" cy="38.0" r="3"/><circle cx="33.3" cy="37.9" r="3"/><circle cx="37.6" cy="84.7" r="3"/><circle cx="28.8" cy="66.5" r="3"/><circle cx="56.0" cy="41.3" r="3"/><circle cx="33.2" cy="44.1" r="3"/><circle cx="65.6" cy="76.3" r="3"/><circle cx="82.3" cy="34.1" r="3"/><circle cx="20.2" cy="82.5" r="3"/><circle cx="14.1" cy="51.9" r="3"/><circle cx="29.6" cy="37.1" r="3"/><circle cx="84.6" cy="59.7" r="3"/><circle cx="27.5" cy="31.8" r="3"/><circle cx="76.0" cy="28.7" r="3"/><circle cx="26.5" cy="53.7" r="3"/><circle cx="45.5" cy="20.9" r="3"/><circle cx="85.2" cy="67.7" r="3"/><circle cx="70.8" cy="51.3" r="3"/><circle cx="41.9" cy="61.8" r="3"/><circle cx="29.8" cy="86.8" r="3"/><circle cx="22.3" cy="25.7" r="3"/><circle cx="18.0" cy="77.2" r="3"/><circle cx="60.8" cy="44.0" r="3"/><circle cx="80.0" cy="73.3" r="3"/><circle cx="40.5" cy="50.4" r="3"/><circle cx="24.7" cy="52.5" r="3"/><circle cx="25.9" cy="65.4" r="3"/><circle cx="57.6" cy="72.5" r="3"/><circle cx="57.0" cy="14.4" r="3"/><circle cx="69.4" cy="82.1" r="3"/><circle cx="38.6" cy="66.8" r="3"/><circle cx="40.0" cy="71.5" r="3"/><circle cx="77.7" cy="70.1" r="3"/><circle cx="86.4" cy="80.0" r="3"/><circle cx="12.4" cy="72.5" r="3"/><circle cx="65.0" cy="28.3" r="3"/><circle cx="34.1" cy="54.1" r="3"/><circle cx="49.1" cy="18.9" r="3"/><circle cx="16.3" cy="69.2" r="3"/><circle cx="14.0" cy="40.4" r="3"/><circle cx="59.7" cy="85.3" r="3"/><circle cx="69.7" cy="74.0" r="3"/><circle cx="61.1" cy="18.5" r="3"/><circle cx="81.4" cy="30.3" r="3"/><circle cx="27.4" cy="81.3" r="3"/></g></svg>'
+};
 const DS={
  three:{n:'Distinct clusters',ax:['Feature A','Feature B'],
-   tip:'Round, clearly separated clouds. Both the number of them and their placement vary from round to round.',
    /* The number of clusters is drawn between 2 and 6, all equally likely.
       The centres are placed freely in the plot with a minimum separation,
       rather than on a circle. That gives a new pattern every time. The
@@ -587,17 +642,14 @@ const DS={
      return out;}},
 
  elong:{n:'Elongated clusters',ax:['Feature A','Feature B'],
-   tip:'Two long, narrow bands. The eye sees two clusters straight away — switch on the decision boundaries before you run, and it becomes clear why the algorithm does not.',
    g:sd=>{const r=rng(19+sd*137);return[...blob(r,36,42,21,4.2,48,-.62),...blob(r,64,60,21,4.2,48,-.62)];}},
 
  sizes:{n:'Uneven density',ax:['Feature A','Feature B'],
-   tip:'One large sparse cloud and two small dense ones. Note how many points each cluster ends up with.',
    ins:['k-means is pulled towards clusters of equal size',
         'k-means works to make WCSS as small as possible, that is, the sum of the <b>squared</b> distances between the points and their centroids.<br><br>In the large sparse cloud, many points lie far from their centroid. Since the distances are squared, those points weigh heavily in the sum. The sum therefore drops the most if an extra centroid is placed in the sparse cloud, which is then split in two even though it really is a single cluster. The small dense clouds have short distances and affect the sum only slightly, so they are left alone.<br><br>Compare the number of points per cluster: the clusters end up roughly equal in size, even though the data does not look that way.'],
    g:sd=>{const r=rng(31+sd*137);return[...blob(r,32,50,15,15,60),...blob(r,74,28,4.5,4.5,24),...blob(r,76,72,4.5,4.5,24)];}},
 
  none:{n:'No structure',ax:['Feature A','Feature B'],
-   tip:'Evenly scattered points with no group structure at all. Decide first what you think the algorithm will answer.',
    ins:['The algorithm cannot answer "there are none"',
         'You asked for k clusters, and you got k clusters. k-means has no way of reporting that the structure is missing — it divides up whatever data it is given. The colours on the screen are therefore <b>no proof</b> that the groups exist in reality. Look at the elbow curve: it falls evenly with no break point, and that is precisely the sign that reveals the division to be arbitrary.'],
    g:sd=>{const r=rng(53+sd*137);const o=[];for(let i=0;i<100;i++)o.push({x:12+r()*76,y:12+r()*76});return o;}}
@@ -1149,6 +1201,11 @@ const ICO={
  split:'<svg viewBox="0 0 24 24"><path d="M3 4h7v16H3zM14 4h7v16h-7z"/><circle cx="6.5" cy="10" r="1.2" fill="currentColor" stroke="none"/><circle cx="17.5" cy="14" r="1.2" fill="currentColor" stroke="none"/></svg>'
 };
 const T={
+ anvand:{i:'split',t:'Where is k-means used?',p:'The method is used wherever you want to find groups in data that has no answer key:<br><br>• <b>Customer segmentation</b> – grouping customers by buying behaviour<br>• <b>Image compression</b> – grouping pixels by colour so an image needs fewer colours<br>• <b>Text analysis</b> – sorting articles or songs by content<br>• <b>Anomaly detection</b> – finding measurements unlike the rest<br><br>What these cases share is that the algorithm delivers a division, but a human has to decide whether it means anything.'},
+ dsThree:{i:'grid',t:'Distinct clusters',p:'Round clouds lying clearly apart from one another. Both <b>how many</b> clouds there are and <b>where</b> they lie are drawn afresh each time.<br><br>This is the case k-means is built for: the clusters are roughly equal in size, roughly equally dense, and separated by empty space. Count them yourself before you choose k.'},
+ dsElong:{i:'ruler',t:'Elongated clusters',p:'Two long, narrow, slanting bands. The eye sees two groups straight away.<br><br>k-means does not, because it only measures <b>distance to a centre point</b>. Two points in the same band can lie further apart than two points in different bands. Switch on the <button class="term" data-t="vor">decision boundaries</button> before you run and you will see why: the boundary is a straight line and cannot follow the slant of the bands.'},
+ dsSizes:{i:'scale',t:'Uneven density',p:'One large sparse cloud and two small dense ones.<br><br>The measure being minimised is the sum of the <b>squared</b> distances. In the sparse cloud many points lie far from their centroid, so they weigh heavily. The sum drops the most if the sparse cloud is split in two – even though it really is a single cluster.<br><br>Compare the number of points per cluster once you have run it.'},
+ dsNone:{i:'spark',t:'No structure',p:'Evenly scattered points with no groups at all.<br><br>Decide first what you <b>think</b> the algorithm will answer. It cannot answer "there are none": ask for k clusters and you get k clusters. The colours on the screen are therefore no proof that the groups exist.<br><br>Look at the elbow curve afterwards – it falls evenly with no break point, and that is the sign that gives it away.'},
  centroid:{i:'grid',t:'Centroid',p:'The centre point of a cluster, calculated as the mean of the points that belong to it. The centroid is the algorithm\'s guess at where the cluster has its middle, and it moves every round until the guess stops changing.<br><br>You can <b>drag</b> a centroid in the plot to see how the decision boundaries follow along.'},
  oover:{i:'eye',t:'Unsupervised learning',p:'Learning from data <b>with no right answers</b>. In supervised learning there is a known correct answer for every example, and the model is trained to reproduce it. Here that answer is missing altogether.<br><br>The model therefore cannot measure how right it is. All it can do is look for structure in the data itself (here: which points lie close to one another) and propose a division based on that. Judging whether the division is meaningful is the human\'s task.'},
  vor:{i:'regions',t:'Decision boundaries',p:'The assignment is decided by <b>where in the plot</b> a point lies. Every location (including the empty areas) belongs to the centroid that is nearest. This divides the plot into regions, and the lines between them are called <b>decision boundaries</b>: they show where the algorithm\'s answer switches from one cluster to another.<br><br>A boundary between two centroids is always a <b>straight line</b>. That is why the regions have straight edges, and why k-means cannot follow curved or slanted shapes.<br><br>When a centroid moves, the boundary follows along, and points that end up on the other side change cluster in the next round.<br><br>Switch the boundaries on and off with the button at the top left of the plot.'},
@@ -1344,42 +1401,44 @@ document.fonts&&document.fonts.ready.then(railGeom);
 
 /* ═══════════ panel content ═══════════ */
 const lock=()=>busy||running||!!view;
+
 function pipeBodies(){
   const L=lock();
   const sz=cens.map((_,i)=>pts.filter(p=>p.c===i).length);
   const empty=cens.length&&sz.some(n=>n===0);
 
   const guessUI = !ds ? '' : (guess===null&&!guessDone)
-    ? `<div class="gbox"><span class="gt">Before you go on</span>
-        <p>Study the plot and make a judgement of your own: how many clusters do you see? The judgement changes nothing in the simulation; it is saved for step 5.</p>
+    ? `<div class="gbox"><span class="gt">Your guess</span>
+        <p>How many clusters do you see in the plot?</p>
         <div class="grow">${[2,3,4,5,6].map(k=>`<button class="chip" data-g="${k}">${k}</button>`).join('')}
           <button class="chip wide" data-g="0">None clear</button>
           <button class="skip" data-g="-1">Skip</button></div></div>`
     : (guess!==null)
-    ? `<div class="gbox done">Your judgement: <b>${guess===0?'no clear clusters':guess+' clusters'}</b>.</div>`
+    ? `<div class="gbox done">Your guess: <b>${guess===0?'no clear clusters':guess+' clusters'}</b> · compared in step 5.</div>`
     : '';
 
   $('p1body').innerHTML=`<div class="pdin">
-    <p>Every point is an object (a customer, a plant, a measurement or something similar) described by two measured values. The data comes with <b>no known answer key</b>: nothing states how many groups there are, or which group any individual object belongs to.</p>
-    <p>The algorithm therefore has no correct answers to imitate. All it has to go on are the distances between the points, and from those it looks for a pattern to divide the data by. That kind of learning is called <button class="term" data-t="oover">unsupervised learning</button>.</p>
+    <p>Every point is an object described by two measured values. The data has <b>no answer key</b> – nothing says how many groups there are. All the algorithm has to go on are the distances between the points. That is called <button class="term" data-t="oover">unsupervised learning</button>.</p>
     <span class="slbl">Dataset</span>
-    <div class="chips">${Object.entries(DS).map(([id,d])=>`<button class="chip${id===ds?' on':''}" data-ds="${id}">${d.n}</button>`).join('')}</div>
-    <p style="margin-top:11px">${ds?DS[ds].tip:'Choose a dataset to begin.'}</p>
+    <div class="dsgrid">${Object.entries(DS).map(([id,d])=>`<button class="dscard${id===ds?' on':''}" data-ds="${id}">${DS_MINI[id]||''}<span class="dsname">${d.n}</span><span class="dshelp" data-dsinfo="${id}" role="button" tabindex="0" aria-label="About ${d.n}" title="About ${d.n}">?</span></button>`).join('')}</div>
     ${guessUI}
-    ${ds?`<div class="pact"><button class="pbig" style="--c:${PC[0]}" id="goStep2">Choose this dataset →</button></div>
-      <p style="margin-top:11px;color:var(--dim);font-size:12.5px">The <b>↺</b> icon at the top right of the plot loads a fresh set of points from the same dataset.</p>`:''}</div>`;
+    ${ds?`<div class="pact"><button class="pbig" style="--c:${PC[0]}" id="goStep2">Choose this dataset →</button></div>`:''}</div>`;
 
   $('p2body').innerHTML=`<div class="pdin">
-    <p>First a value is set for <b>k</b>, that is, how many clusters the data is to be divided into. <b>The algorithm does not work out the value of k by itself; it has to be decided in advance.</b> After that, k points are placed in the plot. Such a point serves as the centre point of a cluster and is called a <button class="term" data-t="centroid">centroid</button>.</p>
-    <span class="slbl">Number of clusters (k)</span>
-    <div class="chips krow">${[2,3,4,5,6,7,8].map(k=>`<button class="chip${k===K?' on':''}" data-k="${k}"${L?' disabled':''}>${k}</button>`).join('')}</div>
+    <p>First <b>k</b> is set, that is, how many clusters the data is to be divided into. <b>The algorithm does not work out k by itself – it has to be decided in advance.</b> Then k <button class="term" data-t="centroid">centroids</button> are placed, one centre point per cluster.</p>
+    <div class="kpick">
+      <div class="kpick-hd"><span class="kpick-lb">Number of clusters</span><span class="kpick-now"><span>k =</span>${K}</span></div>
+      <div class="chips krow">${[2,3,4,5,6,7,8].map(k=>`<button class="chip${k===K?' on':''}" data-k="${k}"${L?' disabled':''}>${k}</button>`).join('')}</div>
+    </div>
     <span class="slbl">Starting positions</span>
-    <div class="chips">
-      <button class="chip${seedMode==='pp'?' on':''}" data-sm="pp"${L?' disabled':''}>k-means++</button>
-      <button class="chip${seedMode==='rand'?' on':''}" data-sm="rand"${L?' disabled':''}>Random</button></div>
+    <div class="seedrow">
+      <span class="seedopt"><button class="chip${seedMode==='pp'?' on':''}" data-sm="pp"${L?' disabled':''}>k-means++</button>
+        <span class="dshelp" data-t="plus" role="button" tabindex="0" aria-label="About k-means++" title="About k-means++">?</span></span>
+      <span class="seedopt"><button class="chip${seedMode==='rand'?' on':''}" data-sm="rand"${L?' disabled':''}>Random</button>
+        <span class="dshelp" data-t="lokal" role="button" tabindex="0" aria-label="About random starting positions" title="About random starting positions">?</span></span></div>
     <div class="note">${seedMode==='pp'
-      ? 'The first centroid is drawn at random from among the data points. Each new centroid is then pulled towards areas far from the ones already placed, so that they spread out across the data. This reduces the risk of the algorithm getting stuck in a <button class="term" data-t="lokal">local minimum</button>. The method is called <button class="term" data-t="plus">k-means++</button>.'
-      : 'All the centroids are drawn completely at random from among the data points. Two of them may then land in the same cluster, which raises the risk of the algorithm getting stuck in a <button class="term" data-t="lokal">local minimum</button>.'}</div>
+      ? 'The centroids spread out across the data.'
+      : 'The centroids are drawn freely – two may land in the same cluster.'}</div>
     <div class="pact"><button class="pbig" style="--c:${PC[1]}" id="placeBtn"${ds&&!L?'':' disabled'}>${cens.length?'Place again':'Place centroids'}</button></div>
     ${cens.length?`<p style="margin-top:11px">Each centroid now takes over the region that lies closer to it than to any other centroid. Switch on the <button class="term" data-t="vor">decision boundaries</button> with the button at the top left of the plot to see the regions. Then <b>drag</b> a centroid, and the boundaries follow along.</p>
       <div class="pact"><button class="psub" id="cmpBtn"${L?' disabled':''}>Compare two random starting positions</button></div>`:''}</div>`;
@@ -1412,31 +1471,64 @@ function pipeBodies(){
     ? `Here the curve bends <b>only faintly, closest to k = ${eb.k}</b>. There is no sharp break point, so the choice of k is not a given.`
     : `The curve has <b>no clear break point</b>, which means the data probably has no clear cluster structure.`;
   $('p5body').innerHTML=`<div class="pdin">
-    ${fin()?`<p><b>Finished after ${iter} rounds.</b> No point changed cluster during the last round, so the centroids cannot move any further.</p>`:''}
-    <p>There is no objectively correct value for k. The choice depends on the purpose of the division: a low k gives an overview, a higher k a more detailed picture.</p>
+    ${fin()?`<p><b>Finished after ${iter} rounds.</b> No point changed cluster – the centroids are standing still.</p>`:''}
+    <p>There is no correct value for k. The curve below shows how <button class="term" data-t="avst">WCSS</button> falls for every cluster that is added. ${elbTxt}</p>
     <div id="elb"></div>
-    <p>The curve shows how the measure <button class="term" data-t="avst">WCSS</button> (the sum of the squared distances between the points and their centroids) decreases for every cluster that is added. It levels off once new centroids only split up clusters that are already coherent. ${elbTxt}</p>
-    <p>This method is called <button class="term" data-t="armb">the elbow method</button>. It gives a suggestion for a reasonable value of k, not a correct answer.</p>
-    <p style="color:var(--dim);font-size:12.5px">Click a point on the curve to preview that solution in the plot. Your own run is not affected.${fin()?' The green diamond marks your own result.':''}</p>
+    <div class="note">Click a point on the curve to see that solution in the plot.${fin()?' The green diamond is your own run.':''} <button class="term" data-t="armb">About the elbow method</button></div>
     ${(guess!==null&&fin())?(()=>{
       const agree = guess===0 ? best===null : guess===best;
       const txt = guess===0
-        ? (best?`You judged that there were no clear clusters. The curve still points to <b>k = ${best}</b> — look at how sharp the break point is before you make up your mind.`
-              :`You judged that there were no clear clusters. The curve points the same way: it has no break point.`)
-        : (best?(guess===best?`You judged <b>${guess}</b> clusters. The curve points the same way.`
-                            :`You judged <b>${guess}</b> clusters. The curve points to <b>${best}</b>.`)
-              :`You judged <b>${guess}</b> clusters, but the curve has no clear break point to compare with.`);
+        ? (best?`You guessed no clear clusters. The curve points to <b>k = ${best}</b>.`
+              :`You guessed no clear clusters. The curve points the same way.`)
+        : (best?(guess===best?`You guessed <b>${guess}</b> clusters. The curve points the same way.`
+                            :`You guessed <b>${guess}</b> clusters. The curve points to <b>${best}</b>.`)
+              :`You guessed <b>${guess}</b> clusters. The curve has no clear break point.`);
       return `<div class="note${agree?' e':''}">${txt}</div>`;})():''}
     ${(fin()&&ds&&DS[ds].ins)?`<div class="insight"><span class="it">${DS[ds].ins[0]}</span>${DS[ds].ins[1]}</div>`:''}
-    ${fin()?`<div class="note" style="margin-top:14px">Different kinds of pattern make different demands on the algorithm. k-means is used, among other things, to divide customers by buying behaviour, to group pixels by colour when an image is compressed, to sort texts or songs by content, and to find measurements that stand out from the rest. What all these cases have in common is that the data comes with no answer key, exactly as here: the algorithm delivers a division, but whether it means anything is for a human to decide.<br><br>Go back to step 1 and try the algorithm on another dataset.</div>
-      <div class="pact"><button class="psub" id="againBtn">← Try another dataset</button></div>`:''}
+    ${fin()?`<div class="pact" style="flex-direction:column;gap:8px">
+        <button class="psub term" data-t="anvand">Where is k-means used?</button>
+        <button class="psub" id="againBtn">← Try another dataset</button></div>`:''}
     </div>`;
 
   bindPanels();
+  renderCPanel();
+}
+
+/* The control panel mirrors the button for the step the pupil is on, so the
+   action is always within reach of the plot. */
+function renderCPanel(){
+  const el=$('cpanel'); if(!el)return;
+  let h='';
+  if(running){
+    h=`<button class="cpbtn stop" id="cpStop">■ Stop</button>`;
+  }else if(!cens.length){
+    h=`<button class="cpbtn pri" style="--c:${PC[1]}" id="cpPlace"${ds&&!lock()?'':' disabled'}>Place centroids</button>`;
+  }else{
+    const canAssign=phase!=='assigned'&&!lock();
+    const canMove=phase==='assigned'&&!lock();
+    h=`<button class="cpbtn${canAssign?' pri':''}" style="--c:${PC[2]}" id="cpAssign"${canAssign?'':' disabled'}>Assign points</button>`
+     +`<button class="cpbtn${canMove?' pri':''}" style="--c:${PC[3]}" id="cpMove"${canMove?'':' disabled'}>Move centroids</button>`
+     +`<button class="cpbtn" id="cpAuto"${!lock()&&!fin()?'':' disabled'}>Run to the end</button>`;
+  }
+  el.innerHTML=h;
+  const map={cpPlace:place,cpAssign:doAssign,cpMove:doMove,cpAuto:auto,cpStop:stopAuto};
+  Object.entries(map).forEach(([id,fn])=>{const e=$(id);if(e)e.onclick=()=>fn();});
 }
 function bindPanels(){
   document.querySelectorAll('.term[data-t]').forEach(e=>e.onclick=ev=>{ev.stopPropagation();openCard(e.dataset.t,ev);});
   document.querySelectorAll('[data-ds]').forEach(b=>b.onclick=()=>pick(b.dataset.ds));
+  /* The question mark opens the card without switching dataset. */
+  const DS_CARD={three:'dsThree',elong:'dsElong',sizes:'dsSizes',none:'dsNone'};
+  document.querySelectorAll('[data-dsinfo]').forEach(e=>{
+    const open=ev=>{ev.stopPropagation();ev.preventDefault();openCard(DS_CARD[e.dataset.dsinfo],ev);};
+    e.onclick=open;
+    e.onkeydown=ev=>{if(ev.key==='Enter'||ev.key===' ')open(ev);};
+  });
+  document.querySelectorAll('.dshelp[data-t]').forEach(e=>{
+    const open=ev=>{ev.stopPropagation();ev.preventDefault();openCard(e.dataset.t,ev);};
+    e.onclick=open;
+    e.onkeydown=ev=>{if(ev.key==='Enter'||ev.key===' ')open(ev);};
+  });
   document.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>setK(+b.dataset.k));
   document.querySelectorAll('[data-sm]').forEach(b=>b.onclick=()=>setSeedMode(b.dataset.sm));
   document.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{
@@ -1563,4 +1655,4 @@ render();
 })();
 </script>
 </body>
-</html>
+</html>   
