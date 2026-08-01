@@ -57,11 +57,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
     radial-gradient(ellipse 34% 40% at 65% 15%, rgba(51,209,122,0.05), transparent 60%);
   animation:meshDrift 34s ease-in-out infinite alternate;filter:blur(10px);}
 @keyframes meshDrift{0%{transform:translate(0,0) scale(1);}50%{transform:translate(-2%,2%) scale(1.05);}100%{transform:translate(2%,-1%) scale(1.02);}}
-.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:linear-gradient(rgba(122,162,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(122,162,255,.025) 1px,transparent 1px);
-  background-size:44px 44px;mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,#000 40%,transparent 100%);}
-.bg-noise{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 
 /* intro */
 .intro{position:fixed;inset:0;background:rgba(6,7,14,0.85);backdrop-filter:blur(18px);z-index:200;display:flex;align-items:center;justify-content:center;transition:opacity .35s var(--ease-out);}
@@ -423,10 +418,46 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .scenario-card:focus-visible,.btn:focus-visible{
   outline:2px solid rgba(122,162,255,.7);outline-offset:2px;
 }
+
+/* ── Progressiv avtäckning ──
+   Sektioner fälls ut när de blir användbara i stället för att ligga framme
+   hela tiden. Höjdövergången gör att panelen inte hoppar. */
+.sec-fold{display:grid;grid-template-rows:0fr;opacity:0;
+  transition:grid-template-rows .24s var(--ease-out),opacity .18s var(--ease-out);}
+.sec-fold>*{overflow:hidden;min-height:0;}
+.sec-fold.open{grid-template-rows:1fr;opacity:1;}
+
+/* ── Hierarki bland mätvärdena ──
+   Ett tal dominerar per fas; de övriga krymper i stället för att konkurrera. */
+.result-box{transition:opacity .25s var(--ease-out);}
+.result-box.rb-minor .result-label{font-size:.58em;}
+.result-box.rb-minor .result-val{font-size:.95em;opacity:.7;}
+.result-box.rb-minor{padding-top:8px;padding-bottom:8px;}
+.result-box.rb-lead .result-val{font-size:1.9em;}
+.result-box.rb-lead .result-label{color:var(--subtle);}
+
+/* Efter träningen ska ett val vara det självklara. De andra två finns kvar
+   som textlänkar i stället för att konkurrera som likvärdiga knappar. */
+.after-train{margin-top:14px;display:flex;flex-direction:column;gap:10px;align-items:stretch;}
+.after-train .btn.pri{padding:12px 20px;font-size:.94em;}
+.at-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;}
+.at-link{background:none;border:0;padding:2px 0;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-size:.79em;font-weight:600;color:var(--dim);
+  border-bottom:1px solid transparent;transition:.18s var(--ease-out);}
+.at-link:hover{color:var(--text);border-bottom-color:var(--dim2);}
+
+/* När indata ändras byts svaret. En kort puls gör förändringen synlig i
+   stället för att talet tyst byter värde. */
+@keyframes valuePulse{
+  0%{transform:scale(1);}
+  38%{transform:scale(1.085);}
+  100%{transform:scale(1);}
+}
+.result-val.pulsing{animation:valuePulse .18s var(--ease-out);}
 </style>
 </head>
 <body>
-<div class="bg-mesh"></div><div class="bg-grid"></div><div class="bg-noise"></div>
+<div class="bg-mesh"></div>
 
 <div class="intro" id="intro">
   <div class="intro-card">
@@ -680,7 +711,7 @@ function startTraining(){if(trainTimer||isCalc())return;if(trained&&!confirm('Do
     /* Gym behöver fler epoker för att djupa nät ska hinna konvergera.
        Två satser per tick håller väntetiden nere utan att ändra resultatet. */
     if(curSc==='gym')for(let q=0;q<2&&epoch<maxE;q++){const l2=trainBatch();epoch++;lossHistory.push(l2);}
-    if(epoch>=maxE||loss<(curSc==='gym'?0.03:0.005)){clearInterval(trainTimer);trainTimer=null;trained=true;isTraining=false;stopTrainAnim();const _acc=testAccuracy();const accPct=_acc==null?'–':Math.round(_acc*100)+'%';document.getElementById('lossVal').textContent=loss.toFixed(4);document.getElementById('lossSparkEnd').textContent=`Epoch ${epoch}`;document.getElementById('lossBox').style.display='block';drawLossSpark();msg.innerHTML=`<svg class="tm-icon ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><div class="tm-title">Training complete!</div><div class="tm-text">The network went through <strong>${epoch} epochs</strong> and learned the weights from ${epoch*(curSc==="gym"?60:30)} examples.</div><div class="tdash"><div class="tdash-cell"><div class="tl">Correct</div><div class="tv" style="color:var(--gold,#ffd866)">${accPct}</div></div><div class="tdash-cell"><div class="tl">Loss</div><div class="tv" style="color:var(--green)">${loss.toFixed(4)}</div></div><div class="tdash-cell"><div class="tl">Weights updated</div><div class="tv" style="color:var(--accent2)">${totalWeightUpdates.toLocaleString('en-US')}</div></div></div><div style="margin-top:14px;display:flex;flex-direction:column;gap:7px"><button class="btn pri" onclick="goDirectToPredict()" style="flex:none;padding:11px 20px">${ICON_TARGET} Predict →</button><button class="btn" onclick="finishTraining()" style="flex:none;padding:9px 16px">${ICON_SEARCH} Explore network</button><button class="btn" onclick="openDataModal()" style="flex:none;padding:9px 16px">${ICON_CHART} View training data (${savedTrainData.xs.length} ex)</button></div>`;}},curSc==='gym'?25:80);}
+    if(epoch>=maxE||loss<(curSc==='gym'?0.03:0.005)){clearInterval(trainTimer);trainTimer=null;trained=true;isTraining=false;stopTrainAnim();const _acc=testAccuracy();const accPct=_acc==null?'–':Math.round(_acc*100)+'%';document.getElementById('lossVal').textContent=loss.toFixed(4);document.getElementById('lossSparkEnd').textContent=`Epoch ${epoch}`;document.getElementById('lossBox').style.display='block';drawLossSpark();msg.innerHTML=`<svg class="tm-icon ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><div class="tm-title">Training complete!</div><div class="tm-text">The network went through <strong>${epoch} epochs</strong> and learned the weights from ${epoch*(curSc==="gym"?60:30)} examples.</div><div class="tdash"><div class="tdash-cell"><div class="tl">Correct</div><div class="tv" style="color:var(--gold,#ffd866)">${accPct}</div></div><div class="tdash-cell"><div class="tl">Loss</div><div class="tv" style="color:var(--green)">${loss.toFixed(4)}</div></div><div class="tdash-cell"><div class="tl">Weights updated</div><div class="tv" style="color:var(--accent2)">${totalWeightUpdates.toLocaleString('en-US')}</div></div></div><div class="after-train"><button class="btn pri" onclick="goDirectToPredict()">${ICON_TARGET} Predict →</button><div class="at-links"><button class="at-link" onclick="finishTraining()">Explore the network</button><button class="at-link" onclick="openDataModal()">Show training data</button></div></div>`;}},curSc==='gym'?25:80);}
 function goDirectToPredict(){document.getElementById('trainMsg').classList.remove('show');goPhase('predict');}
 function finishTraining(){document.getElementById('trainMsg').classList.remove('show');goPhase('explore');resetPass();if(seenGuides.has('explore'))return;seenGuides.add('explore');const msg=document.getElementById('trainMsg');msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><div class="tm-title">Explore the network</div><div class="tm-text">Press <strong>▶ Next</strong> to calculate one neuron at a time.<br><br>Click one of the <strong>calculation steps</strong> below the network for a more detailed explanation in words.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Got it →</button></div>`;msg.classList.add('show');}
 function showPredictGuide(){if(seenGuides.has('predict'))return;seenGuides.add('predict');const msg=document.getElementById('trainMsg');msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg><div class="tm-title">Make your own predictions</div><div class="tm-text">Drag the sliders to change the input values. The network's answer updates instantly.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Got it →</button></div>`;msg.classList.add('show');}
@@ -699,6 +730,11 @@ function goPhase(p){if(isCalc())return;if(p!=='train'&&!trained)return;setPhase(
 function setPhase(p){phase=p;renderPhaseBar();
   document.getElementById('inputSection').style.display=(p==='train'&&!isCalc())?'none':'contents';
   renderActSection();
+  /* Aktiveringsfunktionen är en fördjupning och fälls ut först när
+     eleven har en tränad modell att jämföra med. */
+  const _act=document.getElementById('actSection');
+  _act.classList.add('sec-fold');
+  _act.classList.toggle('open',isCalc()||trained);
   document.getElementById('archSection').style.display=(p==='train'&&!isCalc())?'contents':'none';
   document.getElementById('varSection').style.display=(p==='train'&&!isCalc())?'block':'none';
   document.getElementById('resultBoxes').style.display=isCalc()?'none':'block';
@@ -706,7 +742,27 @@ function setPhase(p){phase=p;renderPhaseBar();
   if(!isCalc()&&trained&&lossHistory.length>0)setTimeout(drawLossSpark,0);
   const show=(!isCalc()&&p==='predict');
   document.querySelectorAll('.pred-only').forEach(el=>el.style.display=show?'block':'none');
-  renderCtrl();}
+  renderCtrl();applyMetricFocus();}
+function applyMetricFocus(){
+  /* Vilket mätvärde som dominerar beror på var eleven är: under träningen
+     förlusten, i förutsägelseläget jämförelsen mellan facit och svar. */
+  const lossB=document.getElementById('lossBox');
+  const epochEl=document.getElementById('epochVal');
+  const epochB=epochEl?epochEl.closest('.result-box'):null;
+  const heroes=Array.prototype.slice.call(document.querySelectorAll('.result-box.pred-only'));
+  document.querySelectorAll('.result-box').forEach(function(b){b.classList.remove('rb-lead','rb-minor');});
+  const lead=[],minor=[];
+  if(phase==='predict'){
+    heroes.forEach(function(b){lead.push(b);});
+    if(lossB)minor.push(lossB);
+    if(epochB)minor.push(epochB);
+  }else{
+    if(lossB&&lossB.style.display!=='none')lead.push(lossB);
+    if(epochB)minor.push(epochB);
+  }
+  lead.forEach(function(b){b.classList.add('rb-lead');});
+  minor.forEach(function(b){b.classList.add('rb-minor');});
+}
 function renderCtrl(){const el=document.getElementById('controlArea');if(isCalc()){el.innerHTML=`<div class="bg"><button class="btn" onclick="stepBack()">◀</button><button class="btn pri" onclick="stepNeuron()">▶ Next</button><button class="btn" onclick="runAllAnim()">⏩ All</button><button class="btn dn" onclick="resetPass()">↺</button></div><div class="hint">Integer values and ReLU – every calculation can be followed by hand.</div>`;}else if(phase==='train'){el.innerHTML=`<div class="bg"><button class="btn grn" onclick="startTraining()">${ICON_BRAIN} Train the model</button></div><div class="hint">The network learns the weights by training on data.</div>`;}else if(phase==='explore'){el.innerHTML=`<div class="bg"><button class="btn" onclick="stepBack()">◀</button><button class="btn pri" onclick="stepNeuron()">▶ Next</button><button class="btn" onclick="runAllAnim()">⏩ All</button><button class="btn dn" onclick="resetPass()">↺</button></div><div class="hint">Step through the network. ◀ goes back.</div><div class="bg" style="margin-top:4px"><button class="btn" onclick="goPhase('predict')">Predict →</button></div>`;}else{el.innerHTML=`<div class="hint" style="margin-bottom:4px">Change the input values – the network's answer updates instantly!</div><div class="bg"><button class="btn" onclick="goPhase('explore')">← Explore</button><button class="btn" onclick="fullReset()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:4px"><path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 4.5V10h5.5"/></svg>Start over</button></div>`;}}
 /* ── click on a calculation step in the narr panel → glass card with a written explanation ── */
 function openCalcConcept(row){
@@ -826,7 +882,7 @@ function renderLC(){const el=document.getElementById('layerCtrl');let h='';for(l
   }el.innerHTML=h;}
 function renderIS(){const av=activeVars();layers[0]=av.length;let h='';for(let i=0;i<av.length;i++){const v=av[i],d=v.def;const step=v.isCalc?10:1;const snapDef=v.isCalc?Math.round(d/10)*10:d;h+=`<div class="input-row"><span class="input-label">${v.name}</span><input type="range" class="input-slider" id="inp${i}" min="0" max="100" step="${step}" value="${snapDef}" oninput="onInp()"><span class="input-val" id="inpV${i}">${fmtReal(snapDef/100,v)}</span></div>`;}document.getElementById('inputGrid').innerHTML=h;for(let i=0;i<av.length;i++)onInp(true);}
 function snapNorm(norm,vo){if(!vo.realStep)return norm;const range=vo.max-vo.min;const real=vo.min+norm*range;const snapped=Math.round(real/vo.realStep)*vo.realStep;return Math.max(0,Math.min(1,(snapped-vo.min)/range));}
-function onInp(silent){const av=activeVars();for(let i=0;i<layers[0];i++){const raw=parseFloat(document.getElementById('inp'+i).value)/100;const snapped=isCalc()?raw:snapNorm(raw,av[i]);document.getElementById('inpV'+i).textContent=fmtReal(snapped,av[i]);}if(!silent){if(isCalc()||phase==='explore'){initV();stepHist=[];hlNeuron=null;hlEdges=[];if(!isCalc())updateTgt();document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';document.getElementById('narr').innerHTML='<div class="ne">Press <strong>▶ Next</strong> to calculate.</div>';drawNet();}else if(phase==='predict'&&trained){initV();forwardFull();hlNeuron=null;hlEdges=[];updateTgt();updateOut();drawNet();document.getElementById('narr').innerHTML='<div class="ne">The input values changed – answer updated.</div>';}else{initV();updateTgt();drawNet();}}}
+function onInp(silent){const av=activeVars();for(let i=0;i<layers[0];i++){const raw=parseFloat(document.getElementById('inp'+i).value)/100;const snapped=isCalc()?raw:snapNorm(raw,av[i]);document.getElementById('inpV'+i).textContent=fmtReal(snapped,av[i]);}if(!silent){if(isCalc()||phase==='explore'){initV();stepHist=[];hlNeuron=null;hlEdges=[];if(!isCalc())updateTgt();document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';document.getElementById('narr').innerHTML='<div class="ne">Press <strong>▶ Next</strong> to calculate.</div>';drawNet();}else if(phase==='predict'&&trained){initV();forwardFull();hlNeuron=null;hlEdges=[];updateTgt();updateOut();drawNet();runSignalPulse();pulseValue("outputVal");pulseValue("targetVal");document.getElementById('narr').innerHTML='<div class="ne">The input values changed – answer updated.</div>';}else{initV();updateTgt();drawNet();}}}
 function chN(l,d){if(isCalc())return;if(l===layers.length-1)return;layers[l]=Math.max(1,Math.min(8,layers[l]+d));fullReset();}
 function addLayer(){if(isCalc()||layers.length>=5)return;layers.splice(layers.length-1,0,2);fullReset();}
 function removeLayer(){if(isCalc()||layers.length<=2)return;layers.splice(layers.length-2,1);fullReset();}
@@ -911,6 +967,49 @@ function drawGlassNeuron(ctx,x,y,R,opts){
   else{ctx.strokeStyle=rgbaStr(rimRgb,(computed?0.55:0.25)*op+0.08);ctx.lineWidth=1.4;}
   ctx.stroke();ctx.shadowBlur=0;
 }
+
+/* En ljuspunkt vandrar från indatalagret till utdatanoden när ett reglage
+   ändras. Poängen är att göra orsakssambandet synligt: ändrad indata ger
+   ett nytt svar, och signalen tar vägen genom nätverket. */
+let signalAnim=null;
+function runSignalPulse(){
+  if(RM_REDUCED())return;
+  if(signalAnim)cancelAnimationFrame(signalAnim.raf);
+  signalAnim={t0:performance.now(),dur:520,raf:0};
+  const tick=()=>{
+    const e=(performance.now()-signalAnim.t0)/signalAnim.dur;
+    if(e>=1){signalAnim=null;drawNet();return;}
+    drawNet();
+    signalAnim.raf=requestAnimationFrame(tick);
+  };
+  signalAnim.raf=requestAnimationFrame(tick);
+}
+function RM_REDUCED(){
+  return window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+function drawSignalPulse(ctx,pos,R){
+  if(!signalAnim)return;
+  const e=Math.min(1,(performance.now()-signalAnim.t0)/signalAnim.dur);
+  const nL=pos.length, span=1/(nL-1);
+  const seg=Math.min(nL-2,Math.floor(e/span));
+  const f=(e-seg*span)/span;
+  const ease=f<.5?2*f*f:1-Math.pow(-2*f+2,2)/2;
+  ctx.save();
+  for(let i=0;i<pos[seg].length;i++)for(let j=0;j<pos[seg+1].length;j++){
+    const a=pos[seg][i],b=pos[seg+1][j];
+    const x=a.x+(b.x-a.x)*ease, y=a.y+(b.y-a.y)*ease;
+    ctx.beginPath();ctx.arc(x,y,2.6,0,Math.PI*2);
+    ctx.fillStyle=`rgba(160,200,255,${0.85*(1-Math.abs(ease-0.5)*0.7)})`;
+    ctx.shadowColor='rgba(122,162,255,0.9)';ctx.shadowBlur=7;
+    ctx.fill();
+  }
+  ctx.restore();
+}
+function pulseValue(id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.classList.remove('pulsing');void el.offsetWidth;el.classList.add('pulsing');
+}
 function drawNet(){
   const{ctx,w,h}=setupCv();
   drawCanvasBackdrop(ctx,w,h);
@@ -983,7 +1082,9 @@ function drawNet(){
         ctx.fillStyle=`rgba(255,255,255,${0.3+0.1*op})`;
         ctx.fillText('?',x,y);
       }
-      if(l>0){
+      /* Under träningen ändras bias i varje bildruta och blir bara flimmer.
+         Brickan visas därför först när modellen står stilla. */
+      if(l>0&&!isTraining){
         const bv=B[l-1][i];
         const bTxt=`b=${isCalc()&&bv===Math.round(bv)?String(Math.round(bv)):bv.toFixed(2)}`;
         /* Brickan placeras i gapet under noden. Räcker inte gapet till
@@ -1032,6 +1133,8 @@ function drawNet(){
       }
     }
   }
+  /* Signalpulsen ritas sist, ovanpå noderna. */
+  drawSignalPulse(ctx,pos,R);
   document.getElementById('untrainedBadge').style.display=(!trained&&!isCalc())?'block':'none';}
 const cv=document.getElementById('cv');const tip=document.getElementById('tooltip');
 cv.addEventListener('mousemove',function(e){if(!isCalc()){this.style.cursor='default';return;}const rect=this.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top;const h2=rect.height,pos=nPos(rect.width,h2);const R=neuronRadius(rect.width);
