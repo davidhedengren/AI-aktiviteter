@@ -52,7 +52,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .hd-inner{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:16px;}
 .back-link{display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.02);transition:.2s var(--ease-out);flex-shrink:0;}.back-link:hover{color:var(--text);border-color:var(--dim);background:rgba(255,255,255,.05);}
 .lang-link{display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.02);transition:.2s var(--ease-out);flex-shrink:0;white-space:nowrap;}.lang-link:hover{color:var(--text);border-color:var(--dim);background:rgba(255,255,255,.05);}
-.lang-link .flag{font-size:1.05em;line-height:1;}
+.lang-link .flag{display:block;width:17px;height:11px;flex-shrink:0;border-radius:2px;overflow:hidden;line-height:0;box-shadow:0 0 0 1px rgba(255,255,255,.14);}
+.flag svg{display:block;width:100%;height:100%;}
 .hd-text{flex:1;text-align:center;}
 .hd-title-row{display:flex;align-items:center;justify-content:center;gap:9px;}
 .hd-icon{width:22px;height:22px;color:var(--accent2);flex-shrink:0;}
@@ -181,7 +182,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .intro-card .sub{color:var(--dim);font-size:0.88em;line-height:1.6;text-align:center;margin-bottom:18px;}
 .intro-steps{display:flex;flex-direction:column;gap:13px;margin:14px 0;}
 .intro-step{display:flex;gap:12px;align-items:flex-start;}
-.intro-num{width:26px;height:26px;border-radius:50%;background:var(--accent-dim);color:var(--accent2);font-weight:700;font-size:0.82em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(122,162,255,.25);font-family:'JetBrains Mono',monospace;}
+.intro-num{width:24px;height:24px;flex-shrink:0;display:grid;place-items:center;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:rgba(34,211,238,.12);color:#22d3ee;border:1px solid rgba(34,211,238,.25);}
 .intro-step-text{font-size:0.86em;color:var(--dim);line-height:1.55;padding-top:2px;}
 .intro-step-text strong{color:var(--text);font-weight:600;}
 .intro-start{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:16px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:linear-gradient(135deg,var(--good),#28b869);color:#06210f;border:none;border-radius:var(--r-sm);cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(52,199,89,.28);}
@@ -285,6 +286,28 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .tt-done-msg strong{color:var(--text);}
 .tt-done-btns{display:flex;gap:8px;}
 .tt-done-btns .btn{flex:1;}
+
+/* ── Kika på Q-tabellen (mobil) ──
+   På smal skärm ligger Q-tabellen under kortet och skyms helt av det.
+   Knappen fäller undan kortet utan att pausa träningen, så att man kan
+   se tabellen fyllas i live. */
+.tt-peek{display:none;background:none;border:1px solid var(--border);border-radius:999px;
+  color:var(--dim);font-family:'DM Sans',sans-serif;font-size:.76em;font-weight:600;
+  padding:6px 13px;cursor:pointer;transition:.18s var(--ease-out);white-space:nowrap;}
+.tt-peek:hover{color:var(--text);border-color:var(--dim);}
+@media(max-width:900px){ .tt-peek{display:inline-block;} }
+/* Kortet fälls undan, men träningen och bakgrundsdimningen står kvar. */
+.concept-card.training-card.peeking{opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(.96);}
+.concept-backdrop.peeking{background:rgba(6,7,14,.12);}
+/* Medan man kikar lyfts Q-tabellen fram och en knapp för att gå tillbaka visas. */
+.peek-back{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:340;
+  display:none;align-items:center;gap:7px;padding:11px 20px;border:none;border-radius:999px;
+  font-family:'DM Sans',sans-serif;font-size:.85em;font-weight:700;color:#fff;
+  background:var(--accent);box-shadow:0 10px 30px rgba(77,128,255,.42);cursor:pointer;}
+.peek-back.show{display:inline-flex;animation:peekIn .28s var(--ease-spring);}
+@keyframes peekIn{from{opacity:0;transform:translateX(-50%) translateY(10px);}}
+body.peeking .app.training-live .left{filter:blur(2px) brightness(.45);}
+body.peeking .app.training-live .right{box-shadow:0 0 0 2px var(--accent),0 26px 64px rgba(0,0,0,.6);}
 </style>
 </head>
 <body>
@@ -313,7 +336,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     </div>
     <p>Se hur ett AI-system lär sig spela NIM med förstärkningsinlärning – testa sedan att spela mot det!</p>
   </div>
-  <a class="lang-link" href="https://www.ai-aktiviteter.se/nim_ENG"><span class="flag">🇬🇧</span> English</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/nim_ENG"><span class="flag" aria-hidden="true"><svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#00247d"/><path d="M0 0 60 36M60 0 0 36" stroke="#fff" stroke-width="7"/><path d="M0 0 60 36M60 0 0 36" stroke="#cf142b" stroke-width="4"/><path d="M30 0v36M0 18h60" stroke="#fff" stroke-width="12"/><path d="M30 0v36M0 18h60" stroke="#cf142b" stroke-width="7"/></svg></span> English</a>
 </div></div>
 
 <div class="app">
@@ -428,7 +451,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   </div>
 </div>
 
-<div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
+<button class="peek-back" id="peekBack" onclick="unpeekQTable()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Tillbaka till träningen</button>
+<div class="concept-backdrop" id="conceptBackdrop" onclick="if(document.body.classList.contains('peeking'))unpeekQTable();else closeConcept();"></div>
 <div class="concept-card" id="conceptCard">
   <div class="concept-card-inner" id="conceptCardInner">
     <button class="concept-close" onclick="closeConcept()">✕</button>
@@ -800,12 +824,20 @@ function closeConcept(){
   if(trainRAF){cancelAnimationFrame(trainRAF);trainRAF=null;}
   trainAnimActive=false;
   if(wasTraining && !ttFinished){ ttFinished=true; finishTraining(ttGamesPlayed, ttEpisodes); }
-  card.classList.remove('show','training-card');
+  card.classList.remove('show','training-card','peeking');
   document.querySelector('.app').classList.remove('training-live');
-  document.getElementById('conceptBackdrop').classList.remove('training-live');
+  document.getElementById('conceptBackdrop').classList.remove('training-live','peeking');
   document.getElementById('conceptBackdrop').classList.remove('show');
+  /* Kik-läget ska aldrig överleva att kortet stängs. */
+  document.getElementById('peekBack').classList.remove('show');
+  document.body.classList.remove('peeking');
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape')return;
+  /* Kikar man på Q-tabellen stänger Escape bara kiket. */
+  if(document.body.classList.contains('peeking'))unpeekQTable();
+  else closeConcept();
+});
 function toggleQTable(){
   const right=document.querySelector('.right');const app=document.querySelector('.app');const btn=document.getElementById('qtoggleBtn');
   const hidden=right.classList.toggle('hidden');app.classList.toggle('no-qtable');
@@ -824,11 +856,29 @@ const TRAIN_THEATER_HTML=
   + '<div class="tt-ee-cap" id="ttEeCap">Provar drag <strong>slumpmässigt</strong> för att upptäcka vad som funkar</div></div>'
   + '<div class="tt-rail"><i id="ttRail"></i></div>'
   + '<div class="tt-foot"><div class="tt-count"><span id="ttGames">0</span> <span class="tt-count-l">spel spelade</span></div>'
+  + '<button class="tt-peek" id="ttPeek" onclick="peekQTable()">Visa Q-tabell</button>'
   + '<button class="tt-skip" id="ttSkip" onclick="skipTrainTheater()">Hoppa över ▸</button></div>'
   + '<div class="tt-done" id="ttDone"><div class="tt-done-msg" id="ttDoneMsg"></div>'
   + '<div class="tt-done-btns"><button class="btn grn" onclick="playFromCard()">Spela mot AI:n</button>'
   + '<button class="btn" onclick="closeConcept()">Stäng</button></div></div>'
   + '</div>';
+function peekQTable(){
+  document.getElementById('conceptCard').classList.add('peeking');
+  document.getElementById('conceptBackdrop').classList.add('peeking');
+  document.getElementById('peekBack').classList.add('show');
+  document.body.classList.add('peeking');
+  /* Tabellen ligger under vänsterpanelen på smal skärm, så den
+     rullas fram – annars ser man bara panelen ovanför. */
+  const right=document.querySelector('.right');
+  if(right)requestAnimationFrame(()=>right.scrollIntoView({behavior:'smooth',block:'center'}));
+}
+function unpeekQTable(){
+  document.getElementById('conceptCard').classList.remove('peeking');
+  document.getElementById('conceptBackdrop').classList.remove('peeking');
+  document.getElementById('peekBack').classList.remove('show');
+  document.body.classList.remove('peeking');
+}
+window.peekQTable=peekQTable;window.unpeekQTable=unpeekQTable;
 const easeOut=t=>1-Math.pow(1-t,3);
 
 function openTrainingCard(episodes){
@@ -868,7 +918,11 @@ function runTrainTheater(){
 
   trainAnimActive=true;
   const t0=performance.now();
-  const DURATION=Math.min(14000, 5000+ttEpisodes*3.2);
+  /* Uppspelningen är tre gånger långsammare än förut, så att man hinner
+     följa hur Q-tabellen fylls i medan träningen pågår. Faktorn styr
+     samtliga tider nedan, så att tidslinjen håller ihop. */
+  const PACE=3;
+  const DURATION=Math.min(14000, 5000+ttEpisodes*3.2)*PACE;
   // Live-tränings-tillstånd (paced till tidslinjen)
   const ALPHA=0.15, FLOOR=0.12, DECAY_HORIZON=400;   // fast horisont – oberoende av vald spel-budget
   let trainDone=0, convCount=0, converged=false, lastRender=0;
@@ -901,7 +955,7 @@ function runTrainTheater(){
   const maxDisp=Math.min(totalSticks,12);
   const padX=54;
   const rowY=H*0.42;
-  let game=null, particles=[], gamesShown=0, nextMoveAt=t0+420, flash=null;
+  let game=null, particles=[], gamesShown=0, nextMoveAt=t0+420*PACE, flash=null;
 
   function newGame(){
     return {left:maxDisp, turn:Math.random()<.5?0:1, over:false, sticks:Array.from({length:maxDisp},()=>({alive:true, t:1, vy:0}))};
@@ -943,7 +997,7 @@ function runTrainTheater(){
       const mx=memX(mi), my=H-14;
       for(let p=0;p<8;p++)particles.push({x:W*0.5,y:rowY,vx:(mx-W*0.5)/40+(Math.random()-0.5)*0.3,vy:(my-rowY)/40,life:1.4,col:GOOD,r:1.8,toMem:true});
       gamesShown++;
-      nextMoveAt=now+520;
+      nextMoveAt=now+520*PACE;
     }else{
       game.turn=1-game.turn;
     }
@@ -1044,7 +1098,7 @@ function runTrainTheater(){
         }
       }
       ttGamesPlayed=trainDone;
-      if(now-lastRender>90){ renderQTable(-1); updateConvergeUI(checkConvergence()); lastRender=now; }
+      if(now-lastRender>60){ renderQTable(-1); updateConvergeUI(checkConvergence()); lastRender=now; }
     }
 
     STAT.forEach((s,i)=>{
@@ -1074,10 +1128,10 @@ function runTrainTheater(){
 
     if(!game.over && now>=nextMoveAt){
       doMove(now, eps);
-      if(!game.over) nextMoveAt=now + Math.max(90, 300 - frac*170);
+      if(!game.over) nextMoveAt=now + Math.max(90, 300 - frac*170)*PACE;
     }else if(game.over && now>=nextMoveAt){
       game=newGame();
-      nextMoveAt=now + 120;
+      nextMoveAt=now + 120*PACE;
     }
 
     draw(now);
@@ -1087,7 +1141,7 @@ function runTrainTheater(){
     else finishTheater();
   }
   trainRAF=requestAnimationFrame(frame);
-  setTimeout(()=>{ if(trainAnimActive)finishTheater(); }, DURATION+1600);
+  setTimeout(()=>{ if(trainAnimActive)finishTheater(); }, DURATION+1600*PACE);
 }
 
 function skipTrainTheater(){
