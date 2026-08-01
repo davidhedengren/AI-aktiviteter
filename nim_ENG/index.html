@@ -4,11 +4,11 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NIM with Reinforcement Learning</title>
+<title>NIM with reinforcement learning – ai-aktiviteter.se</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0a0e1a">
-<meta name="description" content="Watch an AI system learn to play NIM from scratch. Train it over different numbers of games, follow the strategy forming in a Q-table and try playing against it.">
+<meta name="description" content="Watch an AI system learn to play NIM from scratch. Train it different numbers of times, follow the strategy emerging in a Q-table and try playing against it.">
 <link rel="canonical" href="https://www.ai-aktiviteter.se/nim_ENG">
 <link rel="alternate" hreflang="sv" href="https://www.ai-aktiviteter.se/nim">
 <link rel="alternate" hreflang="en" href="https://www.ai-aktiviteter.se/nim_ENG">
@@ -18,13 +18,13 @@
 <meta property="og:locale" content="en_GB">
 <meta property="og:url" content="https://www.ai-aktiviteter.se/nim_ENG">
 <meta property="og:title" content="NIM with reinforcement learning – ai-aktiviteter.se">
-<meta property="og:description" content="Watch an AI system learn to play NIM from scratch. Train it over different numbers of games, follow the strategy forming in a Q-table and try playing against it.">
+<meta property="og:description" content="Watch an AI system learn to play NIM from scratch. Train it different numbers of times, follow the strategy emerging in a Q-table and try playing against it.">
 <meta property="og:image" content="https://www.ai-aktiviteter.se/og-image-en.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="NIM with reinforcement learning – ai-aktiviteter.se">
-<meta name="twitter:description" content="Watch an AI system learn to play NIM from scratch. Train it over different numbers of games, follow the strategy forming in a Q-table and try playing against it.">
+<meta name="twitter:description" content="Watch an AI system learn to play NIM from scratch. Train it different numbers of times, follow the strategy emerging in a Q-table and try playing against it.">
 <meta name="twitter:image" content="https://www.ai-aktiviteter.se/og-image-en.png">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>
@@ -33,89 +33,114 @@
   gtag('js', new Date());
   gtag('config', 'G-ZDWXTZZBBR');
 </script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--accent:#4d80ff;--accent2:#6698ff;--good:#34c759;--bad:#ef5b5b;--neutral:#4d80ff;--gold:#ffd866;}
+:root{--bg:#090b14;--surface:#0e1222;--surface2:#151a2e;--border:#1e2642;--text:#e8ecf8;--dim:#7e8aaa;--accent:#4d80ff;--accent2:#7aa2ff;--good:#34c759;--bad:#ef5b5b;--neutral:#4d80ff;--gold:#ffd866;
+  --glass:rgba(20,24,42,.55);--border-soft:rgba(255,255,255,.06);--accent-dim:rgba(77,128,255,.14);
+  --r-sm:8px;--r-md:14px;--r-lg:20px;--ease-spring:cubic-bezier(.34,1.56,.64,1);--ease-out:cubic-bezier(.16,1,.3,1);}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+html{-webkit-font-smoothing:antialiased;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;position:relative;}
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-mesh::before{content:'';position:absolute;width:140%;height:140%;top:-20%;left:-20%;
+  background:radial-gradient(ellipse 40% 34% at 18% 20%,rgba(77,128,255,.14),transparent 60%),radial-gradient(ellipse 34% 30% at 84% 76%,rgba(52,199,89,.06),transparent 60%),radial-gradient(ellipse 30% 34% at 70% 8%,rgba(255,216,102,.05),transparent 60%);
+  animation:meshDrift 34s ease-in-out infinite alternate;filter:blur(10px);}
+@keyframes meshDrift{0%{transform:translate(0,0) scale(1);}50%{transform:translate(-2%,2%) scale(1.05);}100%{transform:translate(2%,-1%) scale(1.02);}}
+.bg-noise{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(77,128,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
-.hd{padding:14px 20px;border-bottom:1px solid var(--border);}
+.hd{padding:14px 20px;border-bottom:1px solid var(--border-soft);position:relative;z-index:2;background:linear-gradient(180deg,rgba(77,128,255,.04),transparent);}
 .hd-inner{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:16px;}
-.back-link{display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;flex-shrink:0;}.back-link:hover{color:var(--text);border-color:var(--dim);}
-.lang-link{display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;flex-shrink:0;white-space:nowrap;}.lang-link:hover{color:var(--text);border-color:var(--dim);}
-.lang-link .flag{font-size:1.05em;line-height:1;}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.02);transition:.2s var(--ease-out);flex-shrink:0;}.back-link:hover{color:var(--text);border-color:var(--dim);background:rgba(255,255,255,.05);}
+.lang-link{display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.02);transition:.2s var(--ease-out);flex-shrink:0;white-space:nowrap;}.lang-link:hover{color:var(--text);border-color:var(--dim);background:rgba(255,255,255,.05);}
+.lang-link .flag{display:block;width:17px;height:11px;flex-shrink:0;border-radius:2px;overflow:hidden;line-height:0;box-shadow:0 0 0 1px rgba(255,255,255,.14);}
+.flag svg{display:block;width:100%;height:100%;}
 .hd-text{flex:1;text-align:center;}
-.hd-text h1{font-size:1.8em;font-weight:800;letter-spacing:-0.02em;color:var(--text);margin-bottom:2px;}
-.hd-text p{color:var(--dim);font-size:0.82em;max-width:560px;margin:0 auto;}
-.app{display:grid;grid-template-columns:1fr 320px;max-width:1060px;margin:0 auto;min-height:calc(100vh - 80px);}
-.left{padding:22px 26px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:18px;}
-.phase-tabs{display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
-.tab{flex:1;padding:10px 8px;text-align:center;font-size:0.78em;font-weight:700;color:var(--dim);background:var(--surface);cursor:pointer;transition:0.2s;border:none;font-family:'DM Sans',sans-serif;}
-.tab:hover{background:var(--surface2);color:var(--text);}
-.tab.active{background:var(--accent);color:#fff;}
+.hd-title-row{display:flex;align-items:center;justify-content:center;gap:9px;}
+.hd-icon{width:22px;height:22px;color:var(--accent2);flex-shrink:0;}
+.hd-text h1{font-family:'Syne',sans-serif;font-size:1.55em;font-weight:700;letter-spacing:0;background:linear-gradient(135deg,#eef1fb,var(--accent2) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hd-text p{color:var(--dim);font-size:0.82em;max-width:560px;margin:3px auto 0;}
+.app{display:grid;grid-template-columns:1fr 320px;max-width:1060px;margin:0 auto;min-height:calc(100vh - 90px);gap:14px;padding:14px;position:relative;z-index:1;}
+.left{padding:22px 24px;display:flex;flex-direction:column;gap:16px;background:var(--glass);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border-soft);border-radius:var(--r-lg);box-shadow:0 20px 50px rgba(0,0,0,.25);}
+.phase-tabs{display:flex;gap:4px;border:1px solid var(--border);border-radius:999px;overflow:hidden;padding:3px;background:var(--surface2);}
+.tab{flex:1;padding:9px 8px;text-align:center;font-size:0.76em;font-weight:700;color:var(--dim);background:transparent;cursor:pointer;transition:.2s var(--ease-out);border:none;border-radius:999px;font-family:'DM Sans',sans-serif;}
+.tab:hover{color:var(--text);}
+.tab.active{background:var(--accent);color:#fff;box-shadow:0 4px 14px rgba(77,128,255,.3);}
 .tab.done{background:rgba(52,199,89,0.12);color:var(--good);}
 .tab.locked{opacity:0.3;cursor:default;pointer-events:none;}
 .sec-label{font-size:0.62em;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--dim);margin-bottom:8px;}
 .row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
-.row label{font-size:0.8em;color:var(--dim);min-width:110px;}
-.nim-sel{font-family:'DM Sans',sans-serif;font-size:0.8em;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface2);color:var(--text);cursor:pointer;outline:none;}
-.btn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.82em;padding:10px 16px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:0.2s;text-align:center;}
-.btn:hover{border-color:var(--accent);color:var(--accent);}
-.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;}
-.btn.pri:hover{background:var(--accent2);}
+.row label{font-size:0.8em;color:var(--dim);min-width:100px;}
+.nim-sel{font-family:'DM Sans',sans-serif;font-size:0.8em;padding:7px 11px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);cursor:pointer;outline:none;transition:.2s;}
+.nim-sel:hover{border-color:var(--accent2);}
+.btn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.82em;padding:10px 16px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:.2s var(--ease-spring);text-align:center;}
+.btn:hover{border-color:var(--accent);color:var(--accent2);transform:translateY(-1px);}
+.btn:active{transform:scale(.97);}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(77,128,255,.28);}
+.btn.pri:hover{background:#3d6de6;color:#fff;box-shadow:0 8px 22px rgba(77,128,255,.38);}
 .btn.grn{background:rgba(52,199,89,0.1);border-color:var(--good);color:var(--good);}
-.btn.solid-grn{background:var(--good);border-color:var(--good);color:#090b14;font-size:0.9em;padding:11px 16px;}
-.btn.solid-grn:hover{background:#4ee89e;border-color:#4ee89e;}
+.btn.solid-grn{background:linear-gradient(135deg,var(--good),#28b869);border-color:var(--good);color:#06210f;font-size:0.9em;padding:11px 16px;font-weight:700;box-shadow:0 8px 22px rgba(52,199,89,.25);}
+.btn.solid-grn:hover{filter:brightness(1.07);box-shadow:0 10px 26px rgba(52,199,89,.35);}
 .btn.warn{background:rgba(239,91,91,0.1);border-color:var(--bad);color:var(--bad);}
-.btn.warn:hover{background:rgba(239,91,91,0.2);}
+.btn.warn:hover{background:rgba(239,91,91,0.2);color:var(--bad);}
 .btn:disabled{opacity:0.3;pointer-events:none;}
 .btn-row{display:flex;gap:8px;}
 .train-btns{display:flex;gap:8px;}
 .train-btns .btn{flex:1;}
-.pbwrap{background:var(--surface2);border:1px solid var(--border);border-radius:6px;height:8px;overflow:hidden;margin-bottom:6px;}
-.pbfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--good));width:0%;transition:width 0.1s;border-radius:6px;}
-.tstat{font-family:'JetBrains Mono',monospace;font-size:0.76em;color:var(--dim);}
-.tstat span{color:var(--gold);font-weight:600;}
+.train-dash{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px 16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
+.td-head{display:flex;align-items:center;gap:6px;font-size:.66em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2);margin-bottom:10px;}
+.td-head .live-dot{width:6px;height:6px;border-radius:50%;background:var(--good);box-shadow:0 0 6px var(--good);margin-left:auto;animation:liveDot 1.6s ease-in-out infinite;}
+@keyframes liveDot{0%,100%{opacity:1}50%{opacity:.35}}
+.pbwrap{background:rgba(0,0,0,.28);border:1px solid var(--border-soft);border-radius:999px;height:8px;overflow:hidden;margin-bottom:12px;}
+.pbfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--good));width:0%;transition:width .15s ease;border-radius:999px;position:relative;overflow:hidden;}
+.pbfill::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.4) 50%,transparent 70%);transform:translateX(-100%);animation:progShine 2.2s ease-in-out infinite;}
+@keyframes progShine{0%,55%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
+.td-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.td-cell{text-align:center;}
+.td-l{font-size:.6em;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;}
+.td-v{font-family:'JetBrains Mono',monospace;font-size:1em;font-weight:700;color:var(--text);}
 .converge-msg{font-size:0.78em;padding:8px 10px;border-radius:6px;margin-top:6px;display:none;line-height:1.5;}
 .converge-msg.show{display:block;}
 .converge-msg.partial{background:rgba(255,216,102,0.08);border:1px solid rgba(255,216,102,0.2);color:var(--gold);}
 .converge-msg.full{background:rgba(52,199,89,0.08);border:1px solid rgba(52,199,89,0.2);color:var(--good);}
 .converge-msg.none{background:rgba(239,91,91,0.06);border:1px solid rgba(239,91,91,0.15);color:var(--bad);}
-.game-status{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 16px;font-size:0.88em;min-height:50px;display:flex;align-items:center;gap:10px;}
-.si{font-size:1.3em;}
-.st{line-height:1.4;}.st strong{color:var(--accent);}
-.sticks-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:26px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;min-height:110px;}
+.game-status{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:13px 16px;font-size:0.88em;min-height:50px;display:flex;align-items:center;gap:10px;}
+.si{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.si.you{background:var(--accent2);box-shadow:0 0 8px var(--accent2);}
+.si.ai{background:var(--gold);box-shadow:0 0 8px var(--gold);}
+.st{line-height:1.4;}.st strong{color:var(--accent2);}
+.sticks-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;min-height:110px;}
 .sticks-row{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;}
 .stick{width:13px;height:56px;border-radius:6px;background:linear-gradient(180deg,#f5d87a 0%,#c8a832 60%,#8a6e1a 100%);border:1px solid rgba(200,168,50,0.4);box-shadow:0 2px 8px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.15);transition:transform 0.15s,opacity 0.3s,background 0.15s;}
 .stick.gone{opacity:0;transform:translateY(-18px) scale(0.4);}
 .stick.sel{background:linear-gradient(180deg,#ff9a6a 0%,#e05020 60%,#903010 100%);transform:translateY(-8px);box-shadow:0 6px 16px rgba(240,82,82,0.5);border-color:rgba(240,82,82,0.6);}
 .scnt{font-family:'JetBrains Mono',monospace;font-size:0.78em;color:var(--dim);margin-top:2px;}
 .take-btns{display:flex;gap:8px;justify-content:center;}
-.tbtn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.9em;padding:10px 20px;border-radius:8px;border:2px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:0.2s;min-width:54px;}
+.tbtn{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.9em;padding:10px 20px;border-radius:var(--r-sm);border:2px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:.2s var(--ease-spring);min-width:54px;}
 .tbtn:hover:not(:disabled){border-color:var(--gold);color:var(--gold);background:rgba(255,216,102,0.08);transform:translateY(-2px);}
 .tbtn:disabled{opacity:0.25;cursor:default;transform:none;}
 .thinking{display:flex;align-items:center;gap:8px;font-size:0.8em;color:var(--dim);padding:6px 0;}
 .tdots span{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);margin:0 2px;animation:db 1.2s infinite;}
 .tdots span:nth-child(2){animation-delay:.2s}.tdots span:nth-child(3){animation-delay:.4s}
 @keyframes db{0%,80%,100%{transform:scale(0.6);opacity:0.4}40%{transform:scale(1);opacity:1}}
-.rbanner{display:none;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;text-align:center;flex-direction:column;gap:8px;}
-.rbanner.show{display:flex;}
+.rbanner{display:none;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px;text-align:center;flex-direction:column;gap:8px;}
+.rbanner.show{display:flex;animation:cardIn .4s var(--ease-spring);}
 .rbanner .big{font-size:2.2em;}
-.rbanner .rtitle{font-size:1.1em;font-weight:800;}
+.rbanner .rtitle{font-family:'Syne',sans-serif;font-size:1.24em;font-weight:700;letter-spacing:.005em;}
 .rbanner .rsub{font-size:0.78em;color:var(--dim);}
 .score-strip{display:flex;gap:8px;}
-.sbox{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center;}
+.sbox{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px;text-align:center;transition:.2s;}
+.sbox:hover{border-color:rgba(122,162,255,.35);}
 .sbox .sv{font-size:1.5em;font-weight:800;font-family:'JetBrains Mono',monospace;}
 .sbox .sl{font-size:0.62em;color:var(--dim);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;}
-.qt-title{font-size:0.88em;font-weight:700;color:var(--gold);margin-bottom:4px;}
+.qt-title{font-family:'Syne',sans-serif;font-size:1.04em;font-weight:700;letter-spacing:.005em;color:var(--gold);margin-bottom:4px;}
 .qt-desc{font-size:0.71em;color:var(--dim);line-height:1.5;margin-bottom:12px;}
 .qhdr-row{display:grid;gap:4px;align-items:center;margin-bottom:4px;}
 .qhdr{font-size:0.6em;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--dim);text-align:center;}
 .qrow{display:grid;gap:4px;align-items:center;margin-bottom:4px;}
 .qrow.cur .qst{color:var(--gold);font-weight:700;}
 .qst{font-family:'JetBrains Mono',monospace;font-size:0.75em;color:var(--dim);text-align:right;padding-right:6px;}
-.qcell{border-radius:5px;padding:4px 5px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.72em;font-weight:700;position:relative;overflow:hidden;transition:background 0.35s,color 0.35s;min-height:26px;display:flex;align-items:center;justify-content:center;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.5);}
-.qbg{position:absolute;inset:0;border-radius:5px;transition:background 0.35s,opacity 0.35s;}
+.qcell{border-radius:var(--r-sm);padding:4px 5px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.72em;font-weight:700;position:relative;overflow:hidden;transition:background 0.35s,color 0.35s;min-height:26px;display:flex;align-items:center;justify-content:center;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.5);}
+.qbg{position:absolute;inset:0;border-radius:var(--r-sm);transition:background 0.35s,opacity 0.35s;}
 .qval{position:relative;z-index:1;}
 .qcell.dis{opacity:0.15;}
 .qcell.best{outline:3px solid var(--gold);outline-offset:-1px;background:transparent !important;box-shadow:0 0 12px rgba(255,216,102,0.35);}
@@ -123,81 +148,208 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .legend{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
 .li{display:flex;align-items:center;gap:4px;font-size:0.67em;color:var(--dim);}
 .ld{width:10px;height:10px;border-radius:3px;}
-.qinfo{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:0.73em;line-height:1.6;color:var(--dim);margin-top:12px;}
-.qinfo strong{color:var(--text);}
-.right{padding:20px 16px;background:var(--surface);overflow-y:auto;}
+.strategy-card{margin-top:12px;padding:16px 18px;border-radius:var(--r-lg);position:relative;
+  background:linear-gradient(165deg,rgba(26,31,52,.92),rgba(14,17,30,.94));
+  border:1.5px solid rgba(255,216,102,.4);
+  box-shadow:0 14px 34px rgba(0,0,0,.3),0 0 0 1px rgba(255,216,102,.08) inset,0 0 22px rgba(255,216,102,.14);}
+.strategy-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.strategy-icon{width:32px;height:32px;border-radius:10px;background:rgba(255,216,102,.14);display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0;}
+.strategy-icon svg{width:18px;height:18px;}
+.strategy-title{font-family:'Syne',sans-serif;font-size:1.04em;font-weight:700;letter-spacing:.005em;color:var(--gold);}
+.strategy-body{font-size:.78em;line-height:1.65;color:var(--dim);}
+.strategy-body strong{color:var(--text);}
+.right{padding:20px 18px;background:var(--glass);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border-soft);border-radius:var(--r-lg);box-shadow:0 20px 50px rgba(0,0,0,.25);overflow-y:auto;transition:opacity .3s var(--ease-out);}
 .right.hidden{opacity:0;pointer-events:none;}
 .app.no-qtable{grid-template-columns:1fr;}
-.qtoggle{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.78em;padding:7px 12px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;transition:0.2s;text-align:center;display:block;margin:0 auto;}
-.qtoggle:hover{border-color:var(--accent);color:var(--accent);}
+.qtoggle{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.78em;padding:8px 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface2);color:var(--dim);cursor:pointer;transition:.2s var(--ease-spring);text-align:center;display:block;margin:0 auto;}
+.qtoggle:hover{border-color:var(--accent);color:var(--accent2);transform:translateY(-1px);}
 .qtoggle.on{border-color:var(--gold);color:var(--gold);background:rgba(255,216,102,0.08);}
 @media(max-width:760px){
-  .app{grid-template-columns:1fr}
-  .left{border-right:none;border-bottom:1px solid var(--border)}
+  .app{grid-template-columns:1fr;padding:10px;gap:10px;}
+  .left{padding:18px 18px;}
   .hd-inner{flex-wrap:wrap;gap:8px;}
   .back-link{align-self:flex-start;}
   .lang-link{align-self:flex-start;}
   .hd-text{text-align:center;width:100%;}
 }
-.intro{position:fixed;inset:0;background:rgba(9,11,20,0.95);z-index:200;display:flex;align-items:center;justify-content:center;}
-.intro.hidden{display:none;}
-.intro-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;max-width:500px;width:92%;max-height:88vh;overflow-y:auto;}
-.intro-card h2{font-size:1.2em;font-weight:800;color:var(--accent);margin-bottom:6px;text-align:center;}
-.intro-card .sub{color:var(--dim);font-size:0.84em;line-height:1.55;text-align:center;margin-bottom:16px;}
-.intro-steps{display:flex;flex-direction:column;gap:11px;margin:14px 0;}
+.intro{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);z-index:200;display:flex;align-items:center;justify-content:center;transition:opacity .35s var(--ease-out);}
+.intro.hidden{opacity:0;pointer-events:none;display:flex;}
+.intro-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:32px 34px;max-width:500px;width:92%;max-height:88vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.02) inset;animation:cardIn .5s var(--ease-spring);}
+@keyframes cardIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.intro-icon{width:46px;height:46px;margin:0 auto 14px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);}
+.intro-icon svg{width:24px;height:24px;}
+.intro-card h2{font-family:'Syne',sans-serif;font-size:1.42em;font-weight:700;margin-bottom:8px;text-align:center;letter-spacing:.005em;line-height:1.25;background:linear-gradient(135deg,#eef1fb,var(--accent2) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.intro-card .sub{color:var(--dim);font-size:0.88em;line-height:1.6;text-align:center;margin-bottom:18px;}
+.intro-steps{display:flex;flex-direction:column;gap:13px;margin:14px 0;}
 .intro-step{display:flex;gap:12px;align-items:flex-start;}
-.intro-num{width:28px;height:28px;border-radius:50%;background:rgba(77,128,255,0.15);color:var(--accent);font-weight:700;font-size:0.9em;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.3);}
-.intro-step-text{font-size:0.84em;color:var(--dim);line-height:1.55;padding-top:4px;}
-.intro-step-text strong{color:var(--text);}
-.nim-rules{margin-top:14px;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
-.nim-rules-toggle{width:100%;padding:10px 14px;background:var(--surface2);border:none;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.82em;font-weight:700;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;}
-.nim-rules-toggle:hover{color:var(--text);}
-.nim-rules-toggle .arr{transition:transform 0.2s;}
-.nim-rules-toggle.open .arr{transform:rotate(180deg);}
-.nim-rules-body{display:none;padding:12px 14px;font-size:0.8em;color:var(--dim);line-height:1.65;border-top:1px solid var(--border);}
-.nim-rules-body.show{display:block;}
-.nim-rules-body strong{color:var(--text);}
-.nim-rules-body .ex{font-family:'JetBrains Mono',monospace;background:var(--bg);padding:8px 10px;border-radius:6px;margin:8px 0;font-size:0.9em;color:var(--gold);}
-.intro-start{display:block;width:100%;padding:12px;margin-top:16px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--good);color:#090b14;border:none;border-radius:8px;cursor:pointer;transition:0.2s;}
-.intro-start:hover{background:#4ee89e;}
+.intro-num{width:24px;height:24px;flex-shrink:0;display:grid;place-items:center;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:rgba(34,211,238,.12);color:#22d3ee;border:1px solid rgba(34,211,238,.25);}
+.intro-step-text{font-size:0.86em;color:var(--dim);line-height:1.55;padding-top:2px;}
+.intro-step-text strong{color:var(--text);font-weight:600;}
+.intro-start{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:16px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:linear-gradient(135deg,var(--good),#28b869);color:#06210f;border:none;border-radius:var(--r-sm);cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(52,199,89,.28);}
+.intro-start:hover{filter:brightness(1.06);transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(52,199,89,.38);}
+
+/* begrepp pills + concept card */
+.begrepp-row{display:flex;flex-wrap:wrap;gap:5px;padding-top:4px;}
+.g-tag{display:inline-flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:.72em;font-weight:600;padding:5px 10px 5px 8px;border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--dim);cursor:pointer;transition:.2s var(--ease-spring);}
+.g-tag:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px);}
+.g-tag:active{transform:scale(.95);}
+.g-tag .g-ico{width:12px;height:12px;flex-shrink:0;opacity:.8;}
+.concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
+.concept-backdrop.show{opacity:1;pointer-events:auto;}
+.concept-card{position:fixed;top:50%;left:50%;z-index:400;width:340px;max-width:88vw;
+  perspective:1000px;
+  transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
+  transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .26s var(--ease-out);}
+.concept-card.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
+.concept-card-inner{position:relative;text-align:center;transform-style:preserve-3d;
+  background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;
+  transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
+  transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);
+  will-change:transform;}
+.concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+  padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(122,162,255,.7),rgba(255,216,102,.15) 45%,transparent 65%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::before{opacity:1;}
+.concept-card-inner::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.09),transparent 60%);
+  opacity:0;transition:opacity .35s var(--ease-out);}
+.concept-card-inner:hover::after{opacity:1;}
+.concept-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8em;transition:.2s var(--ease-spring);z-index:3;transform:translateZ(30px);}
+.concept-close:hover{border-color:var(--bad);color:var(--bad);transform:translateZ(30px) rotate(90deg);}
+.concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
+.concept-icon svg{width:28px;height:28px;}
+.concept-title{font-family:'Syne',sans-serif;font-size:1.3em;font-weight:700;margin-bottom:9px;letter-spacing:.005em;line-height:1.25;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
+.concept-def{font-size:.85em;line-height:1.6;color:var(--dim);margin-bottom:16px;position:relative;z-index:3;transform:translateZ(18px);}
+.concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;}
+.concept-illus{background:rgba(0,0,0,.25);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;transform:translateZ(10px);}
+.concept-illus svg{width:100%;height:auto;max-height:90px;}
+
+/* ── Training theatre inside the glass card ── */
+.concept-card.training-card{width:min(470px,calc(100vw - 28px));}
+.concept-card.training-card .concept-card-inner{max-height:92vh;overflow-y:auto;}
+.concept-card.training-card #conceptIllus{display:none;}
+/* The icon carries no information here – the heading already says what is going on. */
+.concept-card.training-card .concept-icon{display:none;}
+.concept-card.training-card .concept-card-inner{padding-top:18px;}
+.concept-card.training-card .concept-title{margin-bottom:12px;}
+/* Live training mode: the app sits above the backdrop so the Q-table stays visible and updates */
+.concept-backdrop.training-live{background:rgba(6,7,14,.32);backdrop-filter:none;-webkit-backdrop-filter:none;}
+.app.training-live{z-index:302;}
+.app.training-live .left{filter:blur(1.5px) brightness(.6);pointer-events:none;transition:filter .35s var(--ease-out);}
+.app.training-live .right{box-shadow:0 0 0 2px var(--accent),0 26px 64px rgba(0,0,0,.55);border-color:rgba(77,128,255,.6);position:relative;}
+/* On a wide screen the card shifts left so the Q-table on the right stays
+   visible during training. On a narrow screen the table sits below the card,
+   so there the card should stay centred rather than be pulled off the edge. */
+@media(min-width:900px){
+  .concept-card.training-card.show{transform:translate(-50%,-50%) translateX(-180px) scale(1);}
+}
+@media(max-width:760px){
+  .concept-card.training-card .concept-card-inner{max-height:88vh;max-height:88dvh;padding:16px 16px 14px;}
+  .tt-canvas-wrap{height:132px;}
+  .tt-line{font-size:.8em;}
+}
+.tt-hint{font-size:.76em;line-height:1.4;color:var(--subtle);text-align:center;background:var(--accent-dim);border:1px solid rgba(77,128,255,.25);border-radius:9px;padding:8px 10px;}
+.tt-hint strong{color:var(--accent2);}
+.concept-card.training-card .concept-def{margin-bottom:0;font-size:1em;}
+.tt{display:flex;flex-direction:column;gap:14px;text-align:left;}
+.tt-canvas-wrap{position:relative;width:100%;height:158px;border-radius:var(--r-md);overflow:hidden;background:radial-gradient(ellipse 75% 95% at 50% 45%,rgba(24,30,54,.7),rgba(9,11,20,.35));border:1px solid var(--border-soft);box-shadow:inset 0 1px 0 rgba(255,255,255,.04);}
+.tt-canvas-wrap canvas{width:100%;height:100%;display:block;}
+.tt-status{display:flex;flex-direction:column;gap:7px;}
+.tt-line{display:flex;align-items:center;gap:9px;font-size:.84em;color:var(--subtle);font-weight:500;opacity:0;transform:translateY(6px);transition:opacity .4s var(--ease-out),transform .4s var(--ease-out);}
+.tt-line.show{opacity:1;transform:none;}
+.tt-line .tt-dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;box-shadow:0 0 8px var(--accent2);transition:background .3s,box-shadow .3s;}
+.tt-line.done .tt-dot{background:var(--good);box-shadow:0 0 8px var(--good);}
+.tt-line .tt-check{color:var(--good);font-weight:700;}
+.tt-ee{display:flex;flex-direction:column;gap:5px;}
+.tt-ee-top{display:flex;justify-content:space-between;font-size:.76em;font-weight:600;}
+.tt-ee-top .ee-x{color:var(--accent2);}
+.tt-ee-top .ee-o{color:var(--gold);}
+.tt-ee-top b{font-family:'JetBrains Mono',monospace;}
+.tt-ee-bar{height:8px;border-radius:999px;overflow:hidden;background:var(--gold);display:flex;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);}
+.tt-ee-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:100%;transition:width .18s var(--ease-out);}
+.tt-ee-cap{font-size:.72em;color:var(--dim);text-align:center;}
+.tt-ee-cap strong{color:var(--text);}
+.tt-rail{width:100%;height:5px;border-radius:999px;background:var(--surface2);overflow:hidden;}
+.tt-rail i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--good));transition:width .18s var(--ease-out);box-shadow:0 0 12px rgba(52,199,89,.4);}
+.tt-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.tt-count{font-family:'JetBrains Mono',monospace;font-size:.82em;color:var(--dim);}
+.tt-count #ttGames{font-size:1.5em;font-weight:700;color:var(--text);}
+.tt-count-l{margin-left:3px;}
+.tt-skip{background:none;border:1px solid var(--border);border-radius:999px;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:.76em;font-weight:600;padding:6px 13px;cursor:pointer;transition:.18s var(--ease-out);}
+.tt-skip:hover{color:var(--text);border-color:var(--dim);background:rgba(255,255,255,.04);}
+.tt-done{display:none;flex-direction:column;gap:12px;animation:ttDoneIn .45s var(--ease-spring);}
+.tt-done.show{display:flex;}
+@keyframes ttDoneIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.tt-done-msg{font-size:.92em;line-height:1.5;color:var(--subtle);text-align:center;}
+.tt-done-msg strong{color:var(--text);}
+.tt-done-btns{display:flex;gap:8px;}
+.tt-done-btns .btn{flex:1;}
+
+/* ── Kika på Q-tabellen (mobil) ──
+   På smal skärm ligger Q-tabellen under kortet och skyms helt av det.
+   Knappen fäller undan kortet utan att pausa träningen, så att man kan
+   se tabellen fyllas i live. */
+.tt-peek{display:none;background:none;border:1px solid var(--border);border-radius:999px;
+  color:var(--dim);font-family:'DM Sans',sans-serif;font-size:.76em;font-weight:600;
+  padding:6px 13px;cursor:pointer;transition:.18s var(--ease-out);white-space:nowrap;}
+.tt-peek:hover{color:var(--text);border-color:var(--dim);}
+@media(max-width:900px){ .tt-peek{display:inline-block;} }
+/* Kortet fälls undan, men träningen och bakgrundsdimningen står kvar. */
+.concept-card.training-card.peeking{opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(.96);}
+.concept-backdrop.peeking{background:rgba(6,7,14,.12);}
+/* Medan man kikar lyfts Q-tabellen fram och en knapp för att gå tillbaka visas. */
+.peek-back{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:340;
+  display:none;align-items:center;gap:7px;padding:11px 20px;border:none;border-radius:999px;
+  font-family:'DM Sans',sans-serif;font-size:.85em;font-weight:700;color:#fff;
+  background:var(--accent);box-shadow:0 10px 30px rgba(77,128,255,.42);cursor:pointer;}
+.peek-back.show{display:inline-flex;animation:peekIn .28s var(--ease-spring);}
+@keyframes peekIn{from{opacity:0;transform:translateX(-50%) translateY(10px);}}
+body.peeking .app.training-live .left{filter:blur(2px) brightness(.45);}
+body.peeking .app.training-live .right{box-shadow:0 0 0 2px var(--accent),0 26px 64px rgba(0,0,0,.6);}
 </style>
 </head>
 <body>
+<div class="bg-mesh"></div><div class="bg-noise"></div>
 
 <div class="intro" id="intro">
   <div class="intro-card">
-    <h2>NIM with Reinforcement Learning</h2>
-    <p class="sub">See how an AI system learns to play NIM from scratch – just by playing against itself.</p>
+    <div class="intro-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="4" width="3" height="16" rx="1.3"/><rect x="10.5" y="4" width="3" height="16" rx="1.3"/><rect x="16" y="4" width="3" height="16" rx="1.3" opacity=".4"/></svg></div>
+    <h2>NIM with reinforcement learning</h2>
+    <p class="sub">An AI system learns to play NIM from scratch, without being told the rules. It plays thousands of games against itself and records which moves lead to a win.</p>
     <div class="intro-steps">
-      <div class="intro-step"><div class="intro-num">1</div><div class="intro-step-text"><strong>Train the AI</strong> – Choose how many games the AI should practise. Watch how the Q-table changes during training!</div></div>
-      <div class="intro-step"><div class="intro-num">2</div><div class="intro-step-text"><strong>Explore the Q-table</strong> – The table on the right shows what the AI has learned. Green = good move, red = bad. Can you spot a pattern?</div></div>
-      <div class="intro-step"><div class="intro-num">3</div><div class="intro-step-text"><strong>Play against the AI</strong> – Challenge a half-trained or fully trained AI. Can you beat it?</div></div>
+      <div class="intro-step"><div class="intro-num">1</div><div class="intro-step-text"><strong>Train the AI system</strong> – choose how many games it should train on.</div></div>
+      <div class="intro-step"><div class="intro-num">2</div><div class="intro-step-text"><strong>Explore the Q-table</strong> – the table shows what the AI has learned about each move. Green means good, red means bad.</div></div>
+      <div class="intro-step"><div class="intro-num">3</div><div class="intro-step-text"><strong>Play against the AI</strong> – test the strategy by playing a half-trained or fully trained opponent.</div></div>
     </div>
-    <div class="nim-rules">
-      <button class="nim-rules-toggle" id="rulesToggle" onclick="toggleRules()"><span id="rulesBtnText">📖 Show the rules of NIM</span><span class="arr">▼</span></button>
-      <div class="nim-rules-body" id="rulesBody">
-        <strong>Goal:</strong> Avoid taking the last stick – whoever does loses.<br><br>
-        <strong>How to play:</strong><br>
-        Players take turns. On your turn choose to take <strong>1, 2 or 3 sticks</strong> (you must take at least 1).<br><br>
-        <strong>Example with 9 sticks:</strong>
-        <div class="ex">You take 2 → 7 left<br>AI takes 3 → 4 left<br>You take 3 → 1 left<br>AI forced to take last → AI loses!</div>
-      </div>
-    </div>
-    <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Start the simulation →</button>
+    <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Start the simulation <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 </div>
 
 <div class="hd"><div class="hd-inner">
-  <a class="back-link" href="/">← AI Activities</a>
-  <div class="hd-text"><h1>NIM</h1><p>See how an AI system learns to play NIM using reinforcement learning – then try playing against it!</p></div>
-  <a class="lang-link" href="https://www.ai-aktiviteter.se/nim"><span class="flag">🇸🇪</span> Svenska</a>
+  <a class="back-link" href="/"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> AI Activities</a>
+  <div class="hd-text">
+    <div class="hd-title-row">
+      <svg class="hd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="4" width="3" height="16" rx="1.3"/><rect x="10.5" y="4" width="3" height="16" rx="1.3"/><rect x="16" y="4" width="3" height="16" rx="1.3" opacity=".4"/></svg>
+      <h1>NIM</h1>
+    </div>
+    <p>Watch an AI system learn to play NIM with reinforcement learning, then try playing against it.</p>
+  </div>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/nim"><span class="flag" aria-hidden="true"><svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#006aa7"/><path d="M20 0v36M0 18h60" stroke="#fecc02" stroke-width="7"/></svg></span> Svenska</a>
 </div></div>
 
 <div class="app">
   <div class="left">
     <div class="phase-tabs">
       <button class="tab active" id="tabTrain" onclick="goPhase('train')">① Train the AI</button>
-      <button class="tab locked" id="tabPlay" onclick="goPhase('play')">② Play against AI</button>
+      <button class="tab locked" id="tabPlay" onclick="goPhase('play')">② Play against the AI</button>
+    </div>
+    <div class="begrepp-row">
+      <span class="g-tag" onclick="openConcept('cRules',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="3" height="15" rx="1"/><rect x="10" y="3" width="3" height="15" rx="1"/></svg>The rules of NIM</span>
+      <span class="g-tag" onclick="openConcept('cRL',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/></svg>Reinforcement learning</span>
+      <span class="g-tag" onclick="openConcept('cQval',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>Q-value</span>
+      <span class="g-tag" onclick="openConcept('cExplore',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" opacity=".4"/></svg>Explore vs exploit</span>
     </div>
 
     <div id="trainPhase">
@@ -218,61 +370,54 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       </div>
       <div class="row"><label>Training games</label>
         <select class="nim-sel" id="epSel">
-          <option value="25">25 games</option>
+          <option value="25" selected>25 games</option>
           <option value="50">50 games</option>
-          <option value="150" selected>150 games</option>
+          <option value="150">150 games</option>
           <option value="500">500 games</option>
           <option value="1000">1000 games</option>
-        </select>
-      </div>
-      <div class="row"><label>Speed</label>
-        <select class="nim-sel" id="speedSel">
-          <option value="normal" selected>🚶 Normal</option>
-          <option value="fast">⚡ Fast</option>
+          <option value="2000">2000 games</option>
         </select>
       </div>
       <div class="train-btns" id="trainBtns">
-        <button class="btn solid-grn" id="trainBtn" onclick="startTraining()">🧠 Start training</button>
+        <button class="btn solid-grn" id="trainBtn" onclick="startTraining()">Start training</button>
       </div>
-      <div id="trainProg" style="display:none">
+      <div id="trainProg" class="train-dash" style="display:none">
+        <div class="td-head"><span>Training</span><span class="live-dot"></span></div>
         <div class="pbwrap"><div class="pbfill" id="pbFill"></div></div>
-        <div class="tstat">Games: <span id="stEp">0</span>/<span id="stMax">0</span></div>
-        <div class="tstat">Exploring: <span id="stEps">100</span>% &nbsp;|&nbsp; Exploiting: <span id="stExpl">0</span>%</div>
+        <div class="td-stats">
+          <div class="td-cell"><div class="td-l">Games</div><div class="td-v"><span id="stEp">0</span>/<span id="stMax">0</span></div></div>
+          <div class="td-cell"><div class="td-l">Exploring</div><div class="td-v" style="color:var(--accent2)"><span id="stEps">100</span>%</div></div>
+          <div class="td-cell"><div class="td-l">Exploiting</div><div class="td-v" style="color:var(--gold)"><span id="stExpl">0</span>%</div></div>
+        </div>
       </div>
       <div class="converge-msg" id="convergeMsg"></div>
       <div id="trainDone" style="display:none">
-        <button class="btn grn" onclick="goPhase('play')">Play against the AI →</button>
-      </div>
-      <div class="nim-rules" style="margin-top:0">
-        <button class="nim-rules-toggle" id="infoToggle" onclick="toggleInfo()"><span id="infoBtnText">💡 How does reinforcement learning work?</span><span class="arr">▼</span></button>
-        <div class="nim-rules-body" id="infoBody" style="color:var(--dim)">
-          Imagine learning a game just by playing it over and over and noticing what worked. That is exactly what the AI does.<br><br>For every situation in the game it learns a <strong>Q-value</strong> – a score for how good a particular move tends to be. If a move leads to a win the score goes up; if it leads to a loss the score goes down. At first the AI tries moves almost at random – it <em>explores</em>. The more it trains, the more it begins to <em>exploit</em> what it has learned, choosing the moves with the highest scores. The table on the right shows the score for each move in each situation.
-        </div>
+        <button class="btn grn" onclick="playFromCard()">Play against the AI →</button>
       </div>
     </div>
 
     <div id="playPhase" style="display:none">
       <div class="row"><label>You play</label>
         <select class="nim-sel" id="whoFirst">
-          <option value="human">First (you go first)</option>
-          <option value="ai">Second (AI goes first)</option>
+          <option value="human">First (you start)</option>
+          <option value="ai">Last (the AI starts)</option>
           <option value="random">Random</option>
         </select>
       </div>
       <div class="score-strip">
-        <div class="sbox"><div class="sv" id="scH">0</div><div class="sl">You</div></div>
+        <div class="sbox"><div class="sv" id="scH">0</div><div class="sl">Du</div></div>
         <div class="sbox"><div class="sv" id="scA">0</div><div class="sl">AI</div></div>
-        <div class="sbox"><div class="sv" id="scG">0</div><div class="sl">Games</div></div>
+        <div class="sbox"><div class="sv" id="scG">0</div><div class="sl">Spel</div></div>
       </div>
-      <div class="game-status" id="gStatus"><span class="si">🎯</span><div class="st">Press <strong>New game</strong> to begin.</div></div>
+      <div class="game-status" id="gStatus"><span class="si you"></span><div class="st">Train the AI system first.</div></div>
       <div class="sticks-wrap">
         <div class="sticks-row" id="sticksRow"></div>
         <div class="scnt" id="scnt"></div>
       </div>
       <div class="take-btns" id="takeBtns"></div>
-      <button class="qtoggle" id="qtoggleBtn" onclick="toggleQTable()">📊 Show Q-table</button>
+      <button class="qtoggle" id="qtoggleBtn" onclick="toggleQTable()">Show Q-table</button>
       <div class="thinking" id="thinking" style="display:none">
-        <span>AI thinking</span><span class="tdots"><span></span><span></span><span></span></span>
+        <span>The AI is thinking</span><span class="tdots"><span></span><span></span><span></span></span>
       </div>
       <div class="rbanner" id="rbanner">
         <div class="big" id="rEmoji"></div>
@@ -287,8 +432,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   </div>
 
   <div class="right">
-    <div class="qt-title">Q-table – the AI's brain</div>
-    <div class="qt-desc">Each row = number of sticks remaining. Each column = move. <strong style="color:var(--good)">Green</strong> = good move, <strong style="color:var(--bad)">red</strong> = bad. Gold border = best move in that state.</div>
+    <div class="qt-title">Q-table – the AI's memory</div>
+    <div class="qt-desc">Each row is a number of sticks remaining, each column a possible move. <strong style="color:var(--good)">Green</strong> means a good move, <strong style="color:var(--bad)">red</strong> a bad one. A gold frame marks the best move in that state.</div>
     <div class="qhdr-row" id="qhdrRow"></div>
     <div id="qtable"></div>
     <div class="legend">
@@ -296,7 +441,25 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="li"><div class="ld" style="background:rgba(239,91,91,0.7)"></div>Bad move</div>
       <div class="li"><div class="ld" style="outline:2px solid var(--gold);outline-offset:-2px;border-radius:3px;"></div>Best move</div>
     </div>
-    <div class="qinfo" id="qinfo">Train the AI to see the Q-table fill in.</div>
+    <div class="strategy-card">
+      <div class="strategy-head">
+        <div class="strategy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l2.2 5.6L20 10l-5.8 1.4L12 17l-2.2-5.6L4 10l5.8-1.4z"/></svg></div>
+        <div class="strategy-title">The strategy the AI has learned</div>
+      </div>
+      <div class="strategy-body" id="qinfo">Train the AI to see the Q-table fill in.</div>
+    </div>
+  </div>
+</div>
+
+<button class="peek-back" id="peekBack" onclick="unpeekQTable()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back to training</button>
+<div class="concept-backdrop" id="conceptBackdrop" onclick="if(document.body.classList.contains('peeking'))unpeekQTable();else closeConcept();"></div>
+<div class="concept-card" id="conceptCard">
+  <div class="concept-card-inner" id="conceptCardInner">
+    <button class="concept-close" onclick="closeConcept()">✕</button>
+    <div class="concept-icon" id="conceptIcon"></div>
+    <div class="concept-title" id="conceptTitle"></div>
+    <div class="concept-def" id="conceptDef"></div>
+    <div class="concept-illus" id="conceptIllus"></div>
   </div>
 </div>
 
@@ -314,17 +477,16 @@ function bestAct(s){const a=validActs(s);if(!a.length)return null;return a.reduc
 function epsGreedy(s,eps){if(Math.random()<eps){const a=validActs(s);return a[Math.floor(Math.random()*a.length)];}return bestAct(s);}
 
 function trainEpisode(eps,alpha){
-  let state=totalSticks, hist=[[],[]], turn=0;
+  // Self-play with negamax TD: after each move the opponent's best reply is backed up (minimax).
+  let state=totalSticks;
   while(state>0){
     const a=epsGreedy(state,eps);
-    hist[turn].push([state,a]);
-    state-=a;
-    if(state===0){
-      for(const [s,ac] of hist[turn])    setQ(s,ac,getQ(s,ac)+alpha*(-1-getQ(s,ac)));
-      for(const [s,ac] of hist[1-turn])  setQ(s,ac,getQ(s,ac)+alpha*(1-getQ(s,ac)));
-      return 1-turn;
-    }
-    turn=1-turn;
+    const ns=state-a;
+    let target;
+    if(ns===0) target=-1;                                  // took the last stick → loss
+    else { const acts=validActs(ns); target=-Math.max(...acts.map(x=>getQ(ns,x))); } // the opponent moves next
+    setQ(state,a,getQ(state,a)+alpha*(target-getQ(state,a)));
+    state=ns;
   }
 }
 
@@ -348,69 +510,36 @@ function updateConvergeUI(conv){
   const{goldFrames, sensing, total}=conv;
   if(goldFrames>=total&&total>0){
     el.className='converge-msg show full';
-    el.innerHTML='✅ <strong>The AI has learned the optimal strategy!</strong>';
+    el.innerHTML='<strong>The AI has learned the optimal strategy.</strong>';
   }else if(goldFrames>=total*0.7){
     el.className='converge-msg show full';
-    el.innerHTML='🎯 <strong>The AI has nearly cracked the game</strong> – just a few positions left to refine';
+    el.innerHTML='<strong>The AI has almost cracked the game</strong> – only a few positions left to refine';
   }else if(goldFrames>=3){
     el.className='converge-msg show partial';
-    el.innerHTML='📈 <strong>The AI is growing more confident in its strategy</strong> – it knows what to do in many situations';
+    el.innerHTML='<strong>The AI is growing surer of its strategy</strong> – it knows what to do in many situations';
   }else if(goldFrames>=1){
     el.className='converge-msg show partial';
-    el.innerHTML='💡 <strong>The AI is starting to learn a strategy</strong> – it has found some good moves';
+    el.innerHTML='<strong>The AI is starting to learn a strategy</strong> – it has found a few good moves';
   }else if(sensing>=2){
     el.className='converge-msg show partial';
-    el.innerHTML='🔍 <strong>The AI is beginning to sense a pattern</strong> – some moves seem better than others';
+    el.innerHTML='<strong>The AI is sensing a pattern</strong> – some moves seem better than others';
   }else{
     el.className='converge-msg show none';
-    el.innerHTML='🎲 <strong>The AI is trying random moves</strong> – it has not found any pattern yet';
+    el.innerHTML='<strong>The AI is trying random moves</strong> – it has not found a pattern yet';
   }
 }
 
 function startTraining(){
+  if(trainAnimActive)return;
   totalSticks=+document.getElementById('sticksSel').value;
   maxTake=+document.getElementById('maxTakeSel').value;
   const episodes=+document.getElementById('epSel').value;
   Q={};trained=false;trainPaused=false;
-  document.getElementById('trainBtns').innerHTML=
-    '<button class="btn warn" onclick="pauseTraining()">⏸ Pause</button>'+
-    '<button class="btn" onclick="stopTraining()" style="flex:0;">✕ Stop</button>';
-  document.getElementById('trainProg').style.display='block';
+  document.getElementById('trainProg').style.display='none';
   document.getElementById('trainDone').style.display='none';
   document.getElementById('convergeMsg').className='converge-msg';
-  document.getElementById('stMax').textContent=episodes;
-  renderQHeaders();
-
-  const alpha=0.03;let done=0,convergenceCount=0;
-  const speedMap={normal:{batch:1,delay:120},fast:{batch:3,delay:60}};
-  const spd=speedMap[document.getElementById('speedSel').value]||speedMap.normal;
-
-  function run(){
-    if(trainPaused)return;
-    for(let i=0;i<spd.batch&&done<episodes;i++,done++){
-      const eps=Math.max(0.05,1-done/Math.max(episodes*0.7,200));
-      trainEpisode(eps,alpha);
-    }
-    const pct=done/episodes*100;
-    const epsVal=Math.min(100,Math.max(5,Math.round((1-done/Math.max(episodes*0.7,200))*100)));
-    const expl=100-epsVal;
-    document.getElementById('pbFill').style.width=pct+'%';
-    document.getElementById('stEp').textContent=done;
-    document.getElementById('stEps').textContent=epsVal;
-    document.getElementById('stExpl').textContent=expl;
-    renderQTable(-1);
-    if(done>=15&&done%15===0){
-      const conv=checkConvergence();
-      updateConvergeUI(conv);
-      if(conv.goldFrames>=conv.total&&conv.total>0){
-        convergenceCount++;
-        if(convergenceCount>=3){done=episodes;}
-      }else{convergenceCount=0;}
-    }
-    if(done<episodes){trainTimer=setTimeout(run,spd.delay);return;}
-    finishTraining(done, episodes);
-  }
-  run();
+  renderQHeaders();renderQTable(-1);
+  openTrainingCard(episodes);   // training happens LIVE inside the theatre – the Q-table fills in as you watch
 }
 
 function pauseTraining(){
@@ -419,11 +548,11 @@ function pauseTraining(){
     clearTimeout(trainTimer);
     document.getElementById('trainBtns').innerHTML=
       '<button class="btn solid-grn" onclick="pauseTraining()">▶ Resume</button>'+
-      '<button class="btn" onclick="stopTraining()" style="flex:0;">✕ Stop</button>';
+      '<button class="btn" onclick="stopTraining()" style="flex:0;">Stop</button>';
   }else{
     document.getElementById('trainBtns').innerHTML=
       '<button class="btn warn" onclick="pauseTraining()">⏸ Pause</button>'+
-      '<button class="btn" onclick="stopTraining()" style="flex:0;">✕ Stop</button>';
+      '<button class="btn" onclick="stopTraining()" style="flex:0;">Stop</button>';
     resumeTraining();
   }
 }
@@ -432,8 +561,7 @@ function resumeTraining(){
   const episodes=+document.getElementById('epSel').value;
   const done0=parseInt(document.getElementById('stEp').textContent);
   const alpha=0.03;let done=done0,convergenceCount=0;
-  const speedMap={normal:{batch:1,delay:120},fast:{batch:3,delay:60}};
-  const spd=speedMap[document.getElementById('speedSel').value]||speedMap.normal;
+  const spd={batch:3,delay:60};
   trainPaused=false;
   function run(){
     if(trainPaused)return;
@@ -468,7 +596,7 @@ function stopTraining(){
 function finishTraining(done, episodes){
   trained=true;trainPaused=false;
   document.getElementById('trainBtns').innerHTML=
-    '<button class="btn solid-grn" onclick="startTraining()">🧠 Retrain from scratch</button>';
+    '<button class="btn solid-grn" onclick="startTraining()">Train again from scratch</button>';
   document.getElementById('trainDone').style.display='block';
   document.getElementById('tabPlay').classList.remove('locked');
   const conv=checkConvergence();
@@ -483,7 +611,7 @@ function renderQHeaders(){
   wrap.style.gridTemplateColumns=cols;
   wrap.innerHTML='<div></div>';
   for(let a=1;a<=maxTake;a++){
-    const d=document.createElement('div');d.className='qhdr';d.textContent='Take '+a;wrap.appendChild(d);
+    const d=document.createElement('div');d.className='qhdr';d.textContent='Ta '+a;wrap.appendChild(d);
   }
 }
 
@@ -493,7 +621,7 @@ function renderQTable(hlState){
   for(let s=totalSticks;s>=1;s--){
     const best=validActs(s).reduce((b,a)=>getQ(s,a)>getQ(s,b)?a:b,1);
     const row=document.createElement('div');row.className='qrow'+(s===hlState?' cur':'');row.id='qr'+s;row.style.gridTemplateColumns=cols;
-    const st=document.createElement('div');st.className='qst';st.textContent=s+'🪵';row.appendChild(st);
+    const st=document.createElement('div');st.className='qst';st.textContent=s;row.appendChild(st);
     for(let a=1;a<=maxTake;a++){
       const cell=document.createElement('div');const ok=a<=s;
       cell.className='qcell'+(ok&&a===best&&getQ(s,best)>0.80?' best':'')+(ok?'':' dis');
@@ -519,10 +647,9 @@ function updateQInfo(){
     if(a!==null&&getQ(s,a)>0.80)wins.push(s+' sticks left → take '+a);
   }
   document.getElementById('qinfo').innerHTML=
-    `<strong>The AI's learned strategy</strong><br>
-    The secret: always leave a number of sticks that gives <strong>remainder 1</strong> when divided by ${maxTake+1} – i.e. ${Array.from({length:4},(_,i)=>1+i*(maxTake+1)).filter(v=>v<=totalSticks).join(", ")}... – to your opponent.<br><br>
-    Example moves the AI has learned: <span style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:0.95em">${wins.slice(0,8).join(', ')}</span><br><br>
-    Can you see that the gold borders follow that pattern?`;
+    `The secret: always leave your opponent a number of sticks that gives <strong>remainder 1</strong> when divided by ${maxTake+1}, that is ${Array.from({length:4},(_,i)=>1+i*(maxTake+1)).filter(v=>v<=totalSticks).join(", ")}...<br><br>
+    Examples of moves the AI has learned: <span style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:0.95em">${wins.slice(0,8).join(', ')}</span><br><br>
+    Notice that the gold frames follow that pattern.`;
 }
 
 function newGame(){
@@ -535,8 +662,8 @@ function newGame(){
   const who=document.getElementById('whoFirst').value;
   humanTurn=who==='random'?Math.random()<0.5:who==='human';
   renderSticks();renderTakeBtns();hlQRow(gameSticks);
-  if(humanTurn)setStatus('🎯',`<strong>Your turn!</strong> ${gameSticks} sticks left. Take 1–${maxTake}. Whoever takes the <strong>last</strong> stick loses.`);
-  else{setStatus('🤖','AI goes first...');setTimeout(aiTurn,800);}
+  if(humanTurn)setStatus('you',`<strong>Your turn.</strong> ${gameSticks} sticks left. Take 1–${maxTake}. Whoever takes the <strong>last</strong> stick loses.`);
+  else{setStatus('ai','The AI starts…');setTimeout(aiTurn,800);}
 }
 
 function renderSticks(){
@@ -548,7 +675,7 @@ function renderSticks(){
 function renderTakeBtns(){
   const w=document.getElementById('takeBtns');w.innerHTML='';
   for(let i=1;i<=maxTake;i++){
-    const b=document.createElement('button');b.className='tbtn';b.textContent='Take '+i;
+    const b=document.createElement('button');b.className='tbtn';b.textContent='Ta '+i;
     b.disabled=!humanTurn||gameOver||i>gameSticks;
     const n=i;b.onclick=()=>humanTake(n);w.appendChild(b);
   }
@@ -559,8 +686,8 @@ function humanTake(n){
   animTake(n,()=>{
     gameSticks-=n;renderSticks();hlQRow(gameSticks);
     if(gameSticks===0){endGame(false);}
-    else{humanTurn=false;renderTakeBtns();setStatus('🤖',`You took ${n}. <strong>AI's turn…</strong>`);
-    setTimeout(aiTurn, 800);
+    else{humanTurn=false;renderTakeBtns();setStatus('ai',`You took ${n}. <strong>The AI's turn…</strong>`);
+    setTimeout(aiTurn, 800); 
         }
   });
 }
@@ -576,7 +703,7 @@ function aiTurn(){
     animTake(a,()=>{
       gameSticks-=a;renderSticks();hlQRow(gameSticks);
       if(gameSticks===0){endGame(true);}
-      else{humanTurn=true;renderTakeBtns();setStatus('🎯',`AI took ${a}. <strong>Your turn</strong> – ${gameSticks} sticks left.`);}
+      else{humanTurn=true;renderTakeBtns();setStatus('you',`The AI took ${a}. <strong>Your turn</strong> – ${gameSticks} sticks left.`);}
     });
   },550);
 }
@@ -589,12 +716,17 @@ function animTake(n,cb){
 
 function endGame(humanWon){
   gameOver=true;renderTakeBtns();
-  if(humanWon){scH++;document.getElementById('scH').textContent=scH;document.getElementById('rEmoji').textContent='🏆';document.getElementById('rTitle').textContent='You won!';document.getElementById('rSub').textContent='The AI took the last stick.';}
-  else{scA++;document.getElementById('scA').textContent=scA;document.getElementById('rEmoji').textContent='🤖';document.getElementById('rTitle').textContent='AI won!';document.getElementById('rSub').textContent='You took the last stick. Try again!';}
+  if(humanWon){scH++;document.getElementById('scH').textContent=scH;document.getElementById('rEmoji').textContent='Win';document.getElementById('rTitle').textContent='You won.';document.getElementById('rSub').textContent='The AI took the last stick.';}
+  else{scA++;document.getElementById('scA').textContent=scA;document.getElementById('rEmoji').textContent='Loss';document.getElementById('rTitle').textContent='The AI won.';document.getElementById('rSub').textContent='You took the last stick. Try again.';}
   document.getElementById('rbanner').classList.add('show');hlQRow(-1);
 }
 
-function setStatus(icon,html){document.getElementById('gStatus').innerHTML=`<span class="si">${icon}</span><div class="st">${html}</div>`;}
+/* The marker is a coloured dot: blue for the player, gold for the AI.
+   The same colours the sticks use, so the link is visual. */
+function setStatus(who,html){
+  const cls=who==='ai'?'si ai':'si you';
+  document.getElementById('gStatus').innerHTML=`<span class="${cls}"></span><div class="st">${html}</div>`;
+}
 function hlQRow(s){document.querySelectorAll('.qrow').forEach(r=>r.classList.remove('cur'));if(s>0){const r=document.getElementById('qr'+s);if(r)r.classList.add('cur');}}
 function flashCell(s,a){const row=document.getElementById('qr'+s);if(!row)return;const cells=row.querySelectorAll('.qcell');const c=cells[a-1];if(c){c.style.transform='scale(1.18)';c.style.transition='transform 0.18s';setTimeout(()=>{c.style.transform='';},380);}}
 
@@ -609,10 +741,13 @@ function goPhase(p){
     scH=0;scA=0;scG=0;['scH','scA','scG'].forEach(id=>document.getElementById(id).textContent='0');
     document.getElementById('rbanner').classList.remove('show');
     gameOver=true;renderTakeBtns();renderSticks();hlQRow(-1);
+    /* A game starts straight away, so there is no need to press
+       New game before you can start playing. */
+    setTimeout(newGame,0);
     document.querySelector('.right').classList.add('hidden');
     document.querySelector('.app').classList.add('no-qtable');
     document.getElementById('qtoggleBtn').classList.remove('on');
-    document.getElementById('qtoggleBtn').textContent='📊 Show Q-table';
+    document.getElementById('qtoggleBtn').textContent='Visa Q-tabell';
   }else{
     document.querySelector('.right').classList.remove('hidden');
     document.querySelector('.app').classList.remove('no-qtable');
@@ -632,26 +767,435 @@ function onSettingsChange(){
   totalSticks=+document.getElementById('sticksSel').value;
   maxTake=+document.getElementById('maxTakeSel').value;
   document.getElementById('trainBtns').innerHTML=
-    '<button class="btn solid-grn" onclick="startTraining()">🧠 Start training</button>';
+    '<button class="btn solid-grn" onclick="startTraining()">Start training</button>';
   renderQHeaders();renderQTable(-1);
-  document.getElementById('qinfo').textContent='Train the AI to see the learned strategy here.';
+  document.getElementById('qinfo').textContent='Train the AI system to see the strategy it has learned.';
 }
 
-function toggleInfo(){
-  const btn=document.getElementById('infoToggle');const body=document.getElementById('infoBody');
-  btn.classList.toggle('open');body.classList.toggle('show');
-  document.getElementById('infoBtnText').textContent=body.classList.contains('show')?'💡 Hide explanation':'💡 How does reinforcement learning work?';
+const CONCEPTS={
+  cRules:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="4" width="3" height="16" rx="1.3"/><rect x="10.5" y="4" width="3" height="16" rx="1.3"/><rect x="16" y="4" width="3" height="16" rx="1.3" opacity=".4"/></svg>',
+    title:'The rules of NIM',
+    def:'Players take turns removing <strong>1–3 sticks</strong> from the pile (never zero). Whoever is forced to take the <strong style="color:var(--bad)">last</strong> stick loses. The rules are simple, but the optimal strategy requires always leaving the right number of sticks for your opponent.',
+    illus:'<svg viewBox="0 0 140 70"><g transform="translate(10,10)"><rect x="0" y="0" width="8" height="40" rx="3" fill="#f5d87a"/><rect x="13" y="0" width="8" height="40" rx="3" fill="#f5d87a"/><rect x="26" y="0" width="8" height="40" rx="3" fill="#f5d87a"/><rect x="39" y="0" width="8" height="40" rx="3" fill="#f5d87a" opacity=".35"/><rect x="52" y="0" width="8" height="40" rx="3" fill="#f5d87a" opacity=".35"/></g><path d="M75 30h20m-7-6 7 6-7 6" stroke="#ef5b5b" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="118" cy="30" r="14" fill="rgba(239,91,91,.18)" stroke="#ef5b5b" stroke-width="2"/><text x="118" y="34" text-anchor="middle" font-family="DM Sans" font-weight="700" font-size="12" fill="#ef5b5b">✕</text></svg>'
+  },
+  cRL:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg>',
+    title:'Reinforcement learning',
+    def:'The AI system learns by <strong>playing again and again</strong> and seeing what works. Moves that lead to a win get a higher score (Q-value), moves that lead to a loss get a lower one. No human supplies the right answer; the system discovers the strategy on its own through experience.',
+    illus:'<svg viewBox="0 0 140 70"><circle cx="35" cy="35" r="16" fill="rgba(122,162,255,.18)" stroke="#7aa2ff" stroke-width="2"/><text x="35" y="39" text-anchor="middle" font-family="DM Sans" font-weight="700" font-size="9" fill="#7aa2ff">AI</text><path d="M53 28c20-14 40-8 48 4" stroke="rgba(255,255,255,.4)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M101 32l4 4-4 4" stroke="rgba(255,255,255,.4)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="80" y="18" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(255,255,255,.5)">move</text><path d="M101 42c-10 14-30 18-48 10" stroke="#34c759" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M55 53l-4-4 4-4" stroke="#34c759" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="80" y="63" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#34c759">reward</text></svg>'
+  },
+  cQval:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>',
+    title:'Q-value',
+    def:'A Q-value is the AI\'s <strong>score</strong> for how good a particular move is in a particular situation. A high value (green) means the move usually leads to a win, a low value (red) that it usually leads to a loss. The whole Q-table is the AI\'s accumulated experience.',
+    illus:'<svg viewBox="0 0 140 70"><g font-family="JetBrains Mono" font-size="10" font-weight="700" text-anchor="middle"><rect x="10" y="10" width="34" height="22" rx="5" fill="rgba(52,199,89,.35)"/><text x="27" y="25" fill="#fff">.82</text><rect x="53" y="10" width="34" height="22" rx="5" fill="rgba(255,255,255,.08)"/><text x="70" y="25" fill="#fff">.10</text><rect x="96" y="10" width="34" height="22" rx="5" fill="rgba(239,91,91,.35)"/><text x="113" y="25" fill="#fff">-.65</text></g><rect x="8" y="8" width="38" height="26" rx="6" fill="none" stroke="#ffd866" stroke-width="2.5"/><text x="27" y="50" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#ffd866">best move</text></svg>'
+  },
+  cExplore:{
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" opacity=".4"/></svg>',
+    title:'Explore vs. exploit',
+    def:'At the start the AI <strong>explores</strong>, trying moves almost at random to discover what works. The more it has trained, the more it begins to <strong style="color:var(--gold)">exploit</strong> what it already knows and pick its best known moves. The balance between the two is what makes the learning work.',
+    illus:'<svg viewBox="0 0 140 70"><rect x="10" y="46" width="120" height="10" rx="5" fill="rgba(255,255,255,.08)"/><rect x="10" y="46" width="80" height="10" rx="5" fill="rgba(122,162,255,.5)"/><rect x="90" y="46" width="40" height="10" rx="5" fill="rgba(255,216,102,.55)"/><text x="50" y="30" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#7aa2ff">utforskar</text><text x="110" y="30" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#ffd866">exploits</text><path d="M10 20c40 0 80 20 120 20" stroke="rgba(255,255,255,.25)" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/></svg>'
+  }
+};
+function openConcept(id,ev){
+  ev.stopPropagation();
+  const btn=ev.currentTarget;const r=btn.getBoundingClientRect();
+  const bx=r.left+r.width/2,by=r.top+r.height/2;
+  const cx=window.innerWidth/2,cy=window.innerHeight/2;
+  const c=CONCEPTS[id];if(!c)return;
+  const card=document.getElementById('conceptCard');
+  document.getElementById('conceptIcon').innerHTML=c.icon;
+  document.getElementById('conceptTitle').textContent=c.title;
+  document.getElementById('conceptDef').innerHTML=c.def;
+  document.getElementById('conceptIllus').innerHTML=c.illus||'';
+  card.classList.remove('show');
+  card.style.transition='none';
+  card.style.setProperty('--dx',(bx-cx)+'px');
+  card.style.setProperty('--dy',(by-cy)+'px');
+  void card.offsetHeight;
+  card.style.transition='';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
 }
+function closeConcept(){
+  const card=document.getElementById('conceptCard');
+  const wasTraining=card.classList.contains('training-card');
+  if(trainRAF){cancelAnimationFrame(trainRAF);trainRAF=null;}
+  trainAnimActive=false;
+  if(wasTraining && !ttFinished){ ttFinished=true; finishTraining(ttGamesPlayed, ttEpisodes); }
+  card.classList.remove('show','training-card','peeking');
+  document.querySelector('.app').classList.remove('training-live');
+  document.getElementById('conceptBackdrop').classList.remove('training-live','peeking');
+  document.getElementById('conceptBackdrop').classList.remove('show');
+  /* Kik-läget ska aldrig överleva att kortet stängs. */
+  document.getElementById('peekBack').classList.remove('show');
+  document.body.classList.remove('peeking');
+}
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape')return;
+  /* Kikar man på Q-tabellen stänger Escape bara kiket. */
+  if(document.body.classList.contains('peeking'))unpeekQTable();
+  else closeConcept();
+});
 function toggleQTable(){
   const right=document.querySelector('.right');const app=document.querySelector('.app');const btn=document.getElementById('qtoggleBtn');
   const hidden=right.classList.toggle('hidden');app.classList.toggle('no-qtable');
-  btn.classList.toggle('on',!hidden);btn.textContent=hidden?'📊 Show Q-table':'📊 Hide Q-table';
+  btn.classList.toggle('on',!hidden);btn.textContent=hidden?'Show Q-table':'Hide Q-table';
 }
-function toggleRules(){
-  const btn=document.getElementById('rulesToggle');const body=document.getElementById('rulesBody');
-  btn.classList.toggle('open');body.classList.toggle('show');
-  document.getElementById('rulesBtnText').textContent=body.classList.contains('show')?'📖 Hide the rules of NIM':'📖 Show the rules of NIM';
+
+/* ═══ TRAINING THEATRE (self-play in a glass card) ═══ */
+let trainRAF=null, trainAnimActive=false, ttEpisodes=0, ttGamesPlayed=0, ttFinished=false;
+const TRAIN_THEATER_HTML=
+  '<div class="tt">'
+  + '<div class="tt-canvas-wrap"><canvas id="ttCanvas"></canvas></div>'
+  + '<div class="tt-hint">Watch the <strong>Q-table</strong> – it fills in live while the AI plays</div>'
+  + '<div class="tt-status" id="ttStatus"></div>'
+  + '<div class="tt-ee"><div class="tt-ee-top"><span class="ee-x">Utforskar <b id="ttExpl">100</b>%</span><span class="ee-o">Utnyttjar <b id="ttExploit">0</b>%</span></div>'
+  + '<div class="tt-ee-bar"><i id="ttEeFill"></i></div>'
+  + '<div class="tt-ee-cap" id="ttEeCap">Trying moves <strong>at random</strong> to discover what works</div></div>'
+  + '<div class="tt-rail"><i id="ttRail"></i></div>'
+  + '<div class="tt-foot"><div class="tt-count"><span id="ttGames">0</span> <span class="tt-count-l">games played</span></div>'
+  + '<button class="tt-peek" id="ttPeek" onclick="peekQTable()">Show Q-table</button>'
+  + '<button class="tt-skip" id="ttSkip" onclick="skipTrainTheater()">Skip ▸</button></div>'
+  + '<div class="tt-done" id="ttDone"><div class="tt-done-msg" id="ttDoneMsg"></div>'
+  + '<div class="tt-done-btns"><button class="btn grn" onclick="playFromCard()">Play against the AI</button>'
+  + '<button class="btn" onclick="closeConcept()">Close</button></div></div>'
+  + '</div>';
+function peekQTable(){
+  document.getElementById('conceptCard').classList.add('peeking');
+  document.getElementById('conceptBackdrop').classList.add('peeking');
+  document.getElementById('peekBack').classList.add('show');
+  document.body.classList.add('peeking');
+  /* Tabellen ligger under vänsterpanelen på smal skärm, så den
+     rullas fram – annars ser man bara panelen ovanför. */
+  const right=document.querySelector('.right');
+  if(right)requestAnimationFrame(()=>right.scrollIntoView({behavior:'smooth',block:'center'}));
 }
+function unpeekQTable(){
+  document.getElementById('conceptCard').classList.remove('peeking');
+  document.getElementById('conceptBackdrop').classList.remove('peeking');
+  document.getElementById('peekBack').classList.remove('show');
+  document.body.classList.remove('peeking');
+}
+window.peekQTable=peekQTable;window.unpeekQTable=unpeekQTable;
+const easeOut=t=>1-Math.pow(1-t,3);
+
+function openTrainingCard(episodes){
+  ttEpisodes=episodes; ttGamesPlayed=0; ttFinished=false;
+  const card=document.getElementById('conceptCard');
+  card.classList.add('training-card');
+  document.querySelector('.app').classList.add('training-live');
+  document.getElementById('conceptBackdrop').classList.add('training-live');
+  document.getElementById('conceptIcon').innerHTML='';
+  document.getElementById('conceptTitle').textContent='The AI is training against itself';
+  document.getElementById('conceptDef').innerHTML=TRAIN_THEATER_HTML;
+  document.getElementById('conceptIllus').innerHTML='';
+  const btn=document.getElementById('trainBtn');
+  const r=btn?btn.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};
+  const bx=r.left+r.width/2, by=r.top+r.height/2, cx=innerWidth/2, cy=innerHeight/2;
+  card.classList.remove('show');
+  card.style.transition='none';
+  card.style.setProperty('--dx',(bx-cx)+'px');
+  card.style.setProperty('--dy',(by-cy)+'px');
+  void card.offsetHeight;
+  card.style.transition='';
+  document.getElementById('conceptBackdrop').classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    card.classList.add('show');
+    setTimeout(runTrainTheater, 160);
+  }));
+}
+
+function runTrainTheater(){
+  const canvas=document.getElementById('ttCanvas'); if(!canvas)return;
+  const wrap=canvas.parentElement;
+  const dpr=Math.min(2,window.devicePixelRatio||1);
+  let W=wrap.clientWidth, H=wrap.clientHeight;
+  if(W<10)W=418; if(H<10)H=158;
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  const ctx=canvas.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0);
+
+  trainAnimActive=true;
+  const t0=performance.now();
+  /* Uppspelningen är tre gånger långsammare än förut, så att man hinner
+     följa hur Q-tabellen fylls i medan träningen pågår. Faktorn styr
+     samtliga tider nedan, så att tidslinjen håller ihop. */
+  const PACE=3;
+  const DURATION=Math.min(14000, 5000+ttEpisodes*3.2)*PACE;
+  // Live training state (paced to the timeline)
+  const ALPHA=0.15, FLOOR=0.12, DECAY_HORIZON=400;   // fast horisont – oberoende av vald spel-budget
+  let trainDone=0, convCount=0, converged=false, lastRender=0;
+  const trainEps=()=>Math.max(FLOOR,1-trainDone/DECAY_HORIZON);
+
+  // Optimal NIM move: leave a count ≡ 1 (mod maxTake+1); otherwise arbitrary
+  function smartMove(left){
+    for(let a=1;a<=Math.min(maxTake,left);a++){ if((left-a)%(maxTake+1)===1) return a; }
+    return 1+Math.floor(Math.random()*Math.min(maxTake,left));
+  }
+  function chooseMove(left,eps){
+    const explore=Math.random()<eps;
+    const a=explore ? 1+Math.floor(Math.random()*Math.min(maxTake,left)) : smartMove(left);
+    return {a, explore};
+  }
+
+  const STAT=[
+    {t:'The AI faces a copy of itself', at:0},
+    {t:'Tries moves and sees which lead to a win', at:.27},
+    {t:'Adjusts Q-values after every game', at:.55},
+    {t:'Locks in the winning strategy', at:.82},
+  ];
+  const statusWrap=document.getElementById('ttStatus'); statusWrap.innerHTML='';
+  const lines=STAT.map(s=>{const el=document.createElement('div');el.className='tt-line';el.innerHTML='<span class="tt-dot"></span><span>'+s.t+'</span>';statusWrap.appendChild(el);return el;});
+
+  const MEMN=Math.min(Math.max(totalSticks,6),12);
+  const mem=new Array(MEMN).fill(0);
+
+  const A='#4d80ff', B='#c084fc', GOOD='#34c759', BAD='#ef5b5b';
+  const maxDisp=Math.min(totalSticks,12);
+  const padX=54;
+  const rowY=H*0.42;
+  let game=null, particles=[], gamesShown=0, nextMoveAt=t0+420*PACE, flash=null;
+
+  function newGame(){
+    return {left:maxDisp, turn:Math.random()<.5?0:1, over:false, sticks:Array.from({length:maxDisp},()=>({alive:true, t:1, vy:0}))};
+  }
+  game=newGame();
+
+  function stickX(i){
+    const usable=W-padX*2, gap=usable/Math.max(1,maxDisp-1);
+    return padX + i*gap;
+  }
+  function memX(i){
+    const usable=W-padX*2, gap=usable/Math.max(1,MEMN-1);
+    return padX + i*gap;
+  }
+  function roundRect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+
+  function doMove(now, eps){
+    if(!game||game.over)return;
+    const mv=chooseMove(game.left, eps);
+    const take=Math.min(mv.a, game.left);
+    game.lastExplore=mv.explore;
+    const moveCol = mv.explore ? (game.turn?B:A) : '#ffd866';   // guld = utnyttjar kunskap
+    let removed=0;
+    for(let i=maxDisp-1;i>=0 && removed<take;i--){
+      if(game.sticks[i].alive){
+        game.sticks[i].alive=false; game.sticks[i].t=1; game.sticks[i].vy=-0.6-Math.random()*0.5;
+        const sx=stickX(i);
+        for(let p=0;p<5;p++)particles.push({x:sx,y:rowY,vx:(Math.random()-0.5)*1.4,vy:-0.4-Math.random()*1.2,life:1,col:moveCol,r:1.6+Math.random()*1.6});
+        removed++;
+      }
+    }
+    game.left-=removed;
+    if(game.left<=0){
+      game.over=true;
+      const loser=game.turn, winner=1-loser;
+      flash={loser,winner,born:now};
+      const mi=Math.floor(Math.random()*MEMN);
+      mem[mi]=Math.min(1,mem[mi]+0.55+Math.random()*0.3);
+      const mx=memX(mi), my=H-14;
+      for(let p=0;p<8;p++)particles.push({x:W*0.5,y:rowY,vx:(mx-W*0.5)/40+(Math.random()-0.5)*0.3,vy:(my-rowY)/40,life:1.4,col:GOOD,r:1.8,toMem:true});
+      gamesShown++;
+      nextMoveAt=now+520*PACE;
+    }else{
+      game.turn=1-game.turn;
+    }
+  }
+
+  function drawPod(x,y,col,active,pulse){
+    ctx.save();
+    if(active){ctx.shadowColor=col;ctx.shadowBlur=18*(0.6+0.4*pulse);}
+    ctx.fillStyle='rgba(16,20,36,0.96)';
+    ctx.strokeStyle=col; ctx.lineWidth=active?2.4:1.6; ctx.globalAlpha=active?1:0.7;
+    ctx.beginPath();ctx.arc(x,y,17,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.restore();
+    ctx.fillStyle=active?col:'rgba(176,190,220,0.75)';
+    ctx.font='700 10px "DM Sans"';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText('AI', x, y+0.5);
+  }
+
+  function draw(now){
+    ctx.clearRect(0,0,W,H);
+
+    if(!game.over){
+      const activeX = game.turn? W-padX*0.62 : padX*0.62;
+      ctx.strokeStyle=game.turn?'rgba(192,132,252,0.22)':'rgba(77,128,255,0.22)';
+      ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(activeX, H*0.5);ctx.quadraticCurveTo(W*0.5, rowY-30, W*0.5, rowY);ctx.stroke();
+    }
+
+    for(let i=0;i<maxDisp;i++){
+      const s=game.sticks[i]; const x=stickX(i); const h=48, w=7;
+      if(s.alive){
+        ctx.save();ctx.shadowColor='rgba(245,216,122,0.35)';ctx.shadowBlur=6;ctx.fillStyle='#f5d87a';
+        roundRect(ctx, x-w/2, rowY-h/2, w, h, 3); ctx.fill();ctx.restore();
+      }else if(s.t>0){
+        s.t-=0.045; s.vy+=0.02;
+        const yy=rowY - h/2 + (1-s.t)*10 + s.vy*14;
+        ctx.save();ctx.globalAlpha=Math.max(0,s.t);ctx.fillStyle='#f5d87a';
+        const sc=0.6+0.4*s.t;
+        roundRect(ctx, x-w/2, yy, w, h*sc, 3); ctx.fill();ctx.restore();
+      }
+    }
+
+    const pulse=0.5+0.5*Math.sin(now/260);
+    drawPod(padX*0.62, H*0.5, A, !game.over && game.turn===0, pulse);
+    drawPod(W-padX*0.62, H*0.5, B, !game.over && game.turn===1, pulse);
+
+    if(flash){
+      const a=Math.max(0,1-(now-flash.born)/650);
+      if(a<=0){ flash=null; }
+      else{
+        const lx = flash.loser? W-padX*0.62 : padX*0.62;
+        const wx = flash.winner? W-padX*0.62 : padX*0.62;
+        ctx.save();
+        ctx.globalAlpha=a*0.9; ctx.strokeStyle=BAD; ctx.lineWidth=2.5;
+        ctx.beginPath();ctx.arc(lx,H*0.5,22,0,Math.PI*2);ctx.stroke();
+        ctx.globalAlpha=a; ctx.strokeStyle=GOOD; ctx.lineWidth=2.5;
+        ctx.beginPath();ctx.arc(wx,H*0.5,22+(1-a)*6,0,Math.PI*2);ctx.stroke();
+        ctx.restore();
+      }
+    }
+
+    particles=particles.filter(p=>{
+      p.x+=p.vx; p.y+=p.vy; if(!p.toMem)p.vy+=0.03; p.life-=0.03;
+      if(p.life<=0)return false;
+      ctx.save();ctx.globalAlpha=Math.max(0,Math.min(1,p.life));
+      ctx.shadowColor=p.col;ctx.shadowBlur=8;ctx.fillStyle=p.col;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();ctx.restore();
+      return true;
+    });
+
+    const my=H-13;
+    ctx.font='600 8px "DM Sans"';ctx.textAlign='center';ctx.fillStyle='rgba(176,190,220,0.5)';
+    ctx.fillText('minne (Q-tabell)', W*0.5, H-2);
+    for(let i=0;i<MEMN;i++){
+      const x=memX(i), warm=mem[i];
+      const r=Math.round(30+warm*22), g=Math.round(37+warm*162), b=Math.round(66+warm*23);
+      ctx.save();
+      if(warm>0.05){ctx.shadowColor='rgba(52,199,89,'+(warm*0.6)+')';ctx.shadowBlur=8*warm;}
+      ctx.fillStyle='rgba('+r+','+g+','+b+','+(0.35+warm*0.55)+')';
+      roundRect(ctx, x-6, my-6, 12, 12, 3); ctx.fill();
+      ctx.restore();
+      mem[i]=Math.max(0,warm-0.0009);
+    }
+  }
+
+  function frame(now){
+    const frac=Math.min(1,(now-t0)/DURATION);
+
+    // ── LIVE TRAINING: train up to the timeline target, update the Q-table ──
+    if(!converged){
+      const target=Math.round(frac*ttEpisodes);
+      while(trainDone<target && trainDone<ttEpisodes){
+        trainEpisode(trainEps(), ALPHA);
+        trainDone++;
+        if(trainDone>=30 && trainDone%15===0){
+          const c=checkConvergence();
+          if(c.goldFrames>=c.total && c.total>0){ convCount++; if(convCount>=4){converged=true; break;} }
+          else convCount=0;
+        }
+      }
+      ttGamesPlayed=trainDone;
+      if(now-lastRender>60){ renderQTable(-1); updateConvergeUI(checkConvergence()); lastRender=now; }
+    }
+
+    STAT.forEach((s,i)=>{
+      if(frac>=s.at){
+        if(!lines[i].classList.contains('show'))lines[i].classList.add('show');
+        if(i>0&&!lines[i-1].classList.contains('done')){
+          lines[i-1].classList.add('done');
+          lines[i-1].querySelector('span:last-child').innerHTML=STAT[i-1].t+' <span class="tt-check">✓</span>';
+        }
+      }
+    });
+    const railEl=document.getElementById('ttRail'); if(railEl)railEl.style.width=(converged?100:Math.min(1,trainDone/ttEpisodes)*100)+'%';
+    const gEl=document.getElementById('ttGames'); if(gEl)gEl.textContent=trainDone;
+
+    // the explore/exploit meter reflects the ACTUAL epsilon used in training
+    const eps=trainEps();
+    const explorePct=Math.round(eps*100), exploitPct=100-explorePct;
+    const exEl=document.getElementById('ttExpl'); if(exEl)exEl.textContent=explorePct;
+    const eiEl=document.getElementById('ttExploit'); if(eiEl)eiEl.textContent=exploitPct;
+    const eeFill=document.getElementById('ttEeFill'); if(eeFill)eeFill.style.width=explorePct+'%';
+    const cap=document.getElementById('ttEeCap');
+    if(cap){
+      if(exploitPct<25) cap.innerHTML='Trying moves <strong>at random</strong> to discover what works';
+      else if(exploitPct<70) cap.innerHTML='Starting to <strong>trust</strong> what it has learned – but still trying new things';
+      else cap.innerHTML='Almost always picks its <strong>best known</strong> moves';
+    }
+
+    if(!game.over && now>=nextMoveAt){
+      doMove(now, eps);
+      if(!game.over) nextMoveAt=now + Math.max(90, 300 - frac*170)*PACE;
+    }else if(game.over && now>=nextMoveAt){
+      game=newGame();
+      nextMoveAt=now + 120*PACE;
+    }
+
+    draw(now);
+
+    const doneNow = (trainDone>=ttEpisodes) || frac>=1;
+    if(!doneNow && trainAnimActive){ trainRAF=requestAnimationFrame(frame); }
+    else finishTheater();
+  }
+  trainRAF=requestAnimationFrame(frame);
+  setTimeout(()=>{ if(trainAnimActive)finishTheater(); }, DURATION+1600*PACE);
+}
+
+function skipTrainTheater(){
+  if(trainRAF){cancelAnimationFrame(trainRAF);trainRAF=null;}
+  finishTheater();
+}
+
+function finishTheater(){
+  if(ttFinished)return; ttFinished=true;
+  if(trainRAF){cancelAnimationFrame(trainRAF);trainRAF=null;}
+  trainAnimActive=false;
+  document.querySelectorAll('#ttStatus .tt-line').forEach(el=>el.classList.add('show','done'));
+  const rail=document.getElementById('ttRail'); if(rail)rail.style.width='100%';
+  const gEl=document.getElementById('ttGames'); if(gEl)gEl.textContent=ttGamesPlayed;
+  const exEl=document.getElementById('ttExpl'); if(exEl)exEl.textContent=12;
+  const eiEl=document.getElementById('ttExploit'); if(eiEl)eiEl.textContent=88;
+  const eeFill=document.getElementById('ttEeFill'); if(eeFill)eeFill.style.width='12%';
+  const cap=document.getElementById('ttEeCap'); if(cap)cap.innerHTML='Almost always picks its <strong>best known</strong> moves';
+  const skip=document.getElementById('ttSkip'); if(skip)skip.style.display='none';
+
+  finishTraining(ttGamesPlayed, ttEpisodes);
+
+  const conv=checkConvergence();
+  const total=conv.total, goldFrames=conv.goldFrames;
+  let msg;
+  if(goldFrames>=total&&total>0) msg='<strong>The AI cracked the game.</strong> It found the optimal strategy in '+ttGamesPlayed+' games.';
+  else if(goldFrames>=total*0.7) msg='<strong>Almost optimal.</strong> Train more games to refine the last few positions.';
+  else if(goldFrames>=1) msg='<strong>The AI is learning.</strong> It handles several positions – more games give a surer strategy.';
+  else msg='<strong>Getting there.</strong> Increase the number of training games and the AI will find the pattern.';
+  const dm=document.getElementById('ttDoneMsg'); if(dm)dm.innerHTML=msg;
+  const done=document.getElementById('ttDone'); if(done)done.classList.add('show');
+}
+
+function playFromCard(){ closeConcept(); goPhase('play'); }
+
+(function initCardTilt(){
+  const el=document.getElementById('conceptCardInner');if(!el)return;
+  const MAX_TILT=7;
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+    const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
+    el.style.setProperty('--mx',(px*100)+'%');
+    el.style.setProperty('--my',(py*100)+'%');
+    el.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    const sx=(px-0.5)*22,sy=(py-0.5)*22;
+    el.style.boxShadow=`${-sx}px ${20-sy}px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset`;
+  });
+  el.addEventListener('mouseleave',()=>{
+    el.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%');
+    el.style.boxShadow='';
+  });
+})();
 </script>
 </body>
 </html>
