@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<l
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Naïve Bayes Lab</title>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>The Naïve Bayes lab – ai-aktiviteter.se</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0a0e1a">
 <meta name="description" content="Train a Naive Bayes classifier to tell spam from ordinary email and see the mathematics behind the classification.">
@@ -395,7 +393,7 @@
   .overlay-card h2 span { color:var(--accent2); }
   .overlay-card .o-lead { font-size:0.92em;color:var(--subtle);line-height:1.7;margin-bottom:18px;text-align:center; }
   .overlay-card .o-step { display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;text-align:left; }
-  .o-step-num { width:25px;height:25px;border-radius:50%;background:rgba(77,128,255,0.14);color:var(--accent2);font-weight:700;font-size:0.8em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.28);padding-top:1px;margin-top:2px; }
+  .o-step-num { width:24px;height:24px;flex-shrink:0;display:grid;place-items:center;margin-top:2px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:rgba(34,211,238,.12);color:#22d3ee;border:1px solid rgba(34,211,238,.25); }
   .overlay-card .o-step .o-step-body { flex:1; }
   .overlay-card .o-step .o-step-h { font-size:0.9em;font-weight:700;color:var(--text);letter-spacing:.01em;margin-bottom:2px; }
   .overlay-card .o-step p { font-size:0.85em;color:var(--muted);line-height:1.65;margin:0; }
@@ -488,6 +486,11 @@
   .train-done-text { font-size:13px;color:var(--subtle);line-height:1.6;max-width:380px; }
   .train-done-note { font-size:11.5px;color:var(--muted);background:rgba(255,255,255,.03);border:1px solid var(--border-soft);border-radius:10px;padding:9px 13px;max-width:400px;line-height:1.6; }
   .train-done-note strong { color:var(--subtle); }
+
+/* Numreringen krymper på små skärmar, i takt med resten av introrutan. */
+@media (max-width:560px){
+  .o-step-num { width:22px;height:22px;border-radius:7px;font-size:11px; }
+}
 </style>
 </head>
 <body>
@@ -525,17 +528,17 @@
       Here you train a <strong>Naïve Bayes classifier</strong> — the same type of algorithm used in spam filters — and see the math behind every decision.
     </p>
     <div class="o-step">
-      <div class="o-step-num">01</div>
+      <div class="o-step-num">1</div>
       <div class="o-step-body"><div class="o-step-h">Train</div>
       <p>Click <strong>Generate</strong> to fill the model with sample emails. You control the number and the ratio between spam and regular emails.</p></div>
     </div>
     <div class="o-step">
-      <div class="o-step-num">02</div>
+      <div class="o-step-num">2</div>
       <div class="o-step-body"><div class="o-step-h">Explore the model</div>
       <p>See what the model has learned — which words lean toward spam and which lean toward regular email, and how strongly.</p></div>
     </div>
     <div class="o-step">
-      <div class="o-step-num">03</div>
+      <div class="o-step-num">3</div>
       <div class="o-step-body"><div class="o-step-h">Classify</div>
       <p>Write your own email and press Enter. You get the model's answer with a confidence percentage — and can follow the whole calculation behind it.</p></div>
     </div>
@@ -1227,8 +1230,7 @@ function classify() {
     </div>
   </details>`;
 
-
-  if (tokens.length === 0) {
+if (tokens.length === 0) {
     html += `<div class="card"><p style="font-size:12px;color:var(--muted)">No meaningful words were found in the text after filtering out stop words.</p></div>`;
   }
 
@@ -2101,3 +2103,4 @@ refresh();
 </script>
 </body>
 </html>
+  
