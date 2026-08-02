@@ -683,14 +683,6 @@
     .si-title{animation:siRise .55s var(--ease-spring) .05s both}
     .si-body{animation:siRise .5s var(--ease-spring) .12s both}}
 
-  /* ── 11. Kontextberoende hjälp ── */
-  .nudge{margin-top:14px;display:flex;gap:11px;align-items:flex-start;border-radius:var(--radius-sm);
-    padding:12px 15px;border:1px solid rgba(96,165,250,.28);background:rgba(96,165,250,.06);
-    font-size:13.5px;line-height:1.55;color:var(--text-secondary);animation:ahaIn .5s var(--ease-spring) both}
-  .nudge b{color:var(--text-primary);font-weight:600}
-  .nudge .ni{flex:none;width:22px;height:22px;display:grid;place-items:center;border-radius:7px;
-    background:rgba(96,165,250,.16);color:var(--blue);font-size:12px}
-  .nudge .nx{margin-left:auto;flex:none;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:14px;line-height:1}
 
   @media(max-width:680px){
     .container{padding:0 14px 70px}
@@ -707,6 +699,14 @@
     .controlbar .btn{flex:1 1 auto;justify-content:center}
     /* fäst kontrollpanelen så den följer med när man scrollar i ett långt träd */
     .ctrl{position:sticky;bottom:8px;z-index:20;background:rgba(12,16,27,.94);backdrop-filter:blur(16px);box-shadow:0 -8px 26px rgba(0,0,0,.45)}
+    /* tre kort per rad: överblicken är viktigare än storleken */
+    .specimens{grid-template-columns:repeat(3,1fr);gap:8px}
+    .specimens .scard{padding:7px 4px 6px;border-radius:12px}
+    .specimens .scard .id{font-size:8.5px;top:5px;left:6px}
+    .specimens .scard .lab{margin-top:2px}
+    .specimens .scard .tag{font-size:9px;padding:2px 5px;gap:3px;letter-spacing:.02em}
+    .specimens .scard .tag .sym{font-size:8px}
+    .specimens.mini{grid-template-columns:repeat(4,1fr);gap:6px}
     .reflectgrid .rcard{flex:1 1 100%}
     .cmptable{font-size:12.5px}
   }
@@ -770,9 +770,11 @@
         <div class="dq">20 dokumenterade ormar med känt facit.</div>
       </div>
 
-      <!-- Scen 2: glider in när eleven behöver den -->
-      <div class="stage" id="stageGroup">
-        <div class="discover" style="margin-top:22px">
+      <div id="studyView" style="margin-top:20px"></div>
+
+      <!-- sorteringen ligger under korten: datan möter eleven först -->
+      <div id="stageGroup">
+        <div class="discover" style="margin-top:26px">
           <span class="microlabel">Sortera efter</span>
         </div>
         <div class="groupbar asks" role="group" aria-label="Sortera efter egenskap">
@@ -785,8 +787,6 @@
         </div>
         <div id="ahaZone"></div>
       </div>
-
-      <div id="studyView" style="margin-top:20px"></div>
 
       <!-- Scen 3: verktyg och sammanhang, först när de gör nytta -->
       <div class="stage" id="stageTools">
@@ -801,7 +801,6 @@
         </div>
         <div class="hypocard" id="hypoCard"></div>
       </div>
-      <div id="studyNudge"></div>
     </div>
   </section>
 
@@ -1074,7 +1073,7 @@ function vname(attr,v){const M={tri:'triangulärt',round:'runt',slit:'smalt',str
 /* ordningen styr även lexikonraden i steg 5 */
 const CONCEPTS={
   entropy:{k:'Begrepp',t:'Entropi',p:'Ett mått på hur <b>blandad</b> en grupp är. En grupp med bara giftiga ormar (eller bara ofarliga) har entropi <b>0</b> — den är helt ren. En femtio–femtio-blandning har maximal entropi. Beslutsträdet väljer därför den delning som gör grupperna renast.',ex:'8 ormar, 4 giftiga + 4 ofarliga → hög entropi. 8 giftiga + 0 ofarliga → entropi 0.'},
-  gain:{k:'Begrepp',t:'Informationsvinst',p:'Hur mycket <b>renare</b> grupperna blir när du delar på en viss egenskap. Trädet räknar entropin före delningen minus entropin efteråt. Egenskapen med störst vinst delar renast — den vinner noden.',ex:'Att dela på Huvudform samlar nästan allt gift på ena sidan → hög vinst. Att dela på Mönster blandar ändå → låg vinst.'},
+  gain:{k:'Begrepp',t:'Informationsvinst',p:'Hur mycket <b>renare</b> grupperna blir när du delar på en viss egenskap. Trädet räknar entropin före delningen minus entropin efteråt. Egenskapen med störst vinst delar renast, och det är den frågan noden får.',ex:'Att dela på Huvudform samlar nästan allt gift på ena sidan → hög vinst. Att dela på Mönster blandar ändå → låg vinst.'},
   overfit:{k:'Begrepp',t:'Överanpassning',p:'När en modell lär sig träningsdatan <b>utantill</b> — inklusive slumpmässiga undantag — i stället för det egentliga mönstret. Den blir perfekt på det den redan sett, men sämre på allt nytt. En enklare modell missar undantagen men <button class="term" data-term="generalize">generaliserar</button> bättre.',ex:'Det djupa trädet lär sig regeln "grön → ofarlig" utifrån ett enda grönt fall i träningsdatan. Därefter klassificerar det varje grön giftorm som ofarlig.'},
   testdata:{k:'Begrepp',t:'Testdata',p:'Exempel som medvetet hålls undan medan modellen byggs och tas fram först när den är färdig. Eftersom modellen aldrig fått se dem är resultatet på testdatan det enda som visar om den fungerar på fall den inte känner till.',ex:'Trädet byggdes av 20 ormar. De 12 återstående visades aldrig för det, och avgör därför ensamma hur bra modellen egentligen är.'},
   accuracy:{k:'Begrepp',t:'Träffsäkerhet (accuracy)',p:'Andelen fall som modellen klassificerar rätt, oavsett åt vilket håll felen går. Måttet är enkelt att förstå men trubbigt: det tar varken hänsyn till att klasserna kan vara olika vanliga eller till att vissa fel är allvarligare än andra. Det bör därför alltid jämföras med en <b>baslinje</b> och kompletteras med mått som skiljer feltyperna åt.',ex:'Att alltid gissa "ofarlig" ger 70 % rätt på träningsdatan utan att modellen lärt sig något alls. En modell på 80 % är alltså knappast imponerande.'},
@@ -1324,34 +1323,6 @@ function celebrateTree(wrapId,text){
 }
 
 /* ================= kontextberoende hjälp (11) ================= */
-let idleTimer=null,nudgeShown={};
-function nudgeText(step){
-  if(step===0){
-    if(typeof studyGroup!=='undefined'&&studyGroup==='none')return 'Tips: prova att dela upp ormarna efter <b>en egenskap i taget</b>. Leta efter en grupp som bara innehåller en klass.';
-    if(typeof hypo!=='undefined'&&!hypo)return 'Tips: du har sett hur egenskaperna delar. Vilken tror du är <b>viktigast</b>? Svara längst ned — du får jämföra med algoritmen senare.';
-    return 'Tips: jämför två egenskaper. Vilken av dem lämnar <b>minst blandning</b> kvar i grupperna?';
-  }
-  if(step===1){
-    if(stuRoot&&stuRoot.type==='frontier')return 'Tips: klicka på den gula, streckade noden i trädet — då får du välja vilken fråga den ska ställa.';
-    if(countFrontier(stuRoot)>0)return 'Tips: det finns <b>obestämda grenar</b> kvar. Klicka på en av dem och välj antingen en ny fråga eller ett svar.';
-    return 'Tips: trädet är klart. Gå vidare till <b>steg 3</b> och pröva det på ormar det aldrig sett.';
-  }
-  if(step===2)return 'Tips: tryck <b>Kör genom mitt träd</b> och följ den upplysta vägen genom grenarna — eller kör alla på en gång.';
-  if(step===3)return 'Tips: tryck <b>Nästa delning</b> för att se algoritmen väga egenskaperna mot varandra, en nod i taget.';
-  return 'Tips: svara på frågorna innan du fäller ut facit — poängen är att pröva om slutsatserna går att tillämpa på ett nytt fall.';
-}
-function showNudge(){
-  const step=curStep<0?0:curStep;
-  if(nudgeShown[step])return;
-  nudgeShown[step]=true;
-  const zone=step===0?document.getElementById('studyNudge'):null;
-  const html=`<span class="ni">💡</span><span>${nudgeText(step)}</span>`;
-  if(zone){zone.innerHTML=`<div class="nudge">${html}<button class="nx" aria-label="Stäng tips">✕</button></div>`;
-    zone.querySelector('.nx').onclick=()=>zone.innerHTML='';}
-  else{const t=toast(html,'hint',9000);t.style.maxWidth='min(440px,92vw)';t.style.textAlign='left';t.style.borderRadius='16px';}
-}
-function resetIdle(){clearTimeout(idleTimer);idleTimer=setTimeout(showNudge,90000);}
-['pointerdown','keydown','wheel'].forEach(ev=>document.addEventListener(ev,()=>{clearTimeout(idleTimer);idleTimer=setTimeout(showNudge,90000);},{passive:true}));
 
 /* ================= nav (pipeline-stegvisare) ================= */
 const STEPS=[
@@ -1389,24 +1360,33 @@ function go(i,fromUser){
   introEl.style.setProperty('--c',st.c);
   introEl.innerHTML=`<span class="si-act">Steg ${i+1} av ${STEPS.length}</span>
     <h2 class="si-title">${st.title}</h2><div class="si-body">${st.intro}</div>`;
-  resetIdle();
   document.getElementById('prevStepBtn').toggleAttribute('hidden',i===0);
   document.getElementById('nextStepBtn').toggleAttribute('hidden',i===STEPS.length-1);
   if(i===0)renderStudy();else if(i===1)renderStudent();else if(i===2)youEnter();else if(i===3)compareEnter();else if(i===4)renderSummary();
   window.scrollTo({top:0,behavior:'smooth'});}
 let studyView='cards',studyGroup='none',hypo=null;
-let studyStage=0,studyTimer=null,ahaSeen={};
+let studyStage=0,ahaSeen={};
 function setStage(n){
   if(n<=studyStage)return;studyStage=n;
   const open=id=>{const el=document.getElementById(id);if(!el||el.classList.contains('in'))return;
     el.classList.add('in');
     setTimeout(()=>{el.style.maxHeight='none';el.style.overflow='visible';},650);};
-  if(n>=1)open('stageGroup');
   if(n>=2)open('stageTools');
 }
 function renderStudy(){
   renderStudyControls();renderStudyView();renderHypo();renderAha();
-  if(studyStage===0&&!studyTimer)studyTimer=setTimeout(()=>setStage(1),6500);
+}
+/* ── håll kortrutnätet i bild när sorteringen ändras ── */
+function revealStudyView(){
+  const v=document.getElementById('studyView');if(!v)return;
+  requestAnimationFrame(()=>{
+    const r=v.getBoundingClientRect(),vh=window.innerHeight;
+    const vis=Math.min(r.bottom,vh)-Math.max(r.top,0);
+    if(vis>=Math.min(r.height,vh*0.7))return;
+    const y=window.scrollY+r.top-Math.max(14,(vh-r.height)/2);
+    const soft=!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top:Math.max(0,y),behavior:soft?'smooth':'auto'});
+  });
 }
 function renderStudyControls(){
   document.querySelectorAll('#panel-0 [data-view]').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.view===studyView);
@@ -1414,7 +1394,7 @@ function renderStudyControls(){
   document.querySelectorAll('#panel-0 [data-group]').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.group===studyGroup);
     b.onclick=()=>{if(studyGroup===b.dataset.group)return;studyGroup=b.dataset.group;
       if(studyGroup!=='none')setStage(2);
-      renderStudyControls();renderStudyView();renderAha();};});
+      renderStudyControls();renderStudyView();renderAha();revealStudyView();};});
 }
 /* ── aha-ögonblick: kommenterar vad delningen faktiskt gjorde ── */
 function renderAha(){
@@ -1460,7 +1440,6 @@ function renderAha(){
     const c=near(e);if(!c||(e.relatedTarget&&c.contains(e.relatedTarget)))return;
     c.style.setProperty('--tx','0deg');c.style.setProperty('--ty','0deg');
   },{passive:true});
-  document.addEventListener('click',e=>{if(near(e)&&curStep===0)setStage(1);},{passive:true});
 })();
 /* ── 5. informationsvinst som något fysiskt: burkar med kulor ── */
 function jarSVG(rows,idx){
@@ -1527,7 +1506,7 @@ function renderHypo(){
 function renderHypoReveal(){
   const el=document.getElementById('hypoReveal');if(!el)return;
   const rootAttr=(mlRoot&&mlRoot.type==='split')?mlRoot.attr:null;
-  if(!rootAttr){el.innerHTML=`<div class="hyporeveal"><span class="hk">Att observera</span> Se om algoritmen pekar ut samma egenskap som du${hypo?` (<b>${ANAME[hypo]}</b>)`:''}.</div>`;return;}
+  if(!rootAttr){el.innerHTML='';return;}
   if(!hypo){el.innerHTML=`<div class="hyporeveal"><span class="hk">Rotnoden</span> Algoritmen valde <b>${ANAME[rootAttr]}</b> som första fråga, eftersom den egenskapen ger störst informationsvinst.</div>`;return;}
   const match=hypo===rootAttr;
   el.innerHTML=`<div class="hyporeveal ${match?'ok':'diff'}"><span class="hk">Rotnoden</span> Algoritmen valde <b>${ANAME[rootAttr]}</b> som första fråga. Du angav <b>${ANAME[hypo]}</b> — ${match?'samma egenskap. Den ger störst informationsvinst i roten.':'en annan egenskap. Algoritmen väljer alltid den som ger störst informationsvinst i den aktuella noden.'}</div>`;
