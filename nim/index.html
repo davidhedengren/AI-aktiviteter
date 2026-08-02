@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NIM med förstärkningsinlärning</title>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0a0e1a">
 <meta name="description" content="Se hur ett AI-system lär sig spela NIM från grunden. Träna det olika många gånger, följ hur strategin växer fram i en Q-tabell och testa att spela mot det.">
-<link rel="canonical" href="https://www.ai-aktiviteter.se/nim">
-<link rel="alternate" hreflang="sv" href="https://www.ai-aktiviteter.se/nim">
-<link rel="alternate" hreflang="en" href="https://www.ai-aktiviteter.se/nim_ENG">
-<link rel="alternate" hreflang="x-default" href="https://www.ai-aktiviteter.se/nim">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI-aktiviteter">
 <meta property="og:locale" content="sv_SE">
@@ -52,12 +47,11 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .hd-inner{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:16px;}
 .back-link{display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.02);transition:.2s var(--ease-out);flex-shrink:0;}.back-link:hover{color:var(--text);border-color:var(--dim);background:rgba(255,255,255,.05);}
 .lang-link{display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.02);transition:.2s var(--ease-out);flex-shrink:0;white-space:nowrap;}.lang-link:hover{color:var(--text);border-color:var(--dim);background:rgba(255,255,255,.05);}
-.lang-link .flag{display:block;width:17px;height:11px;flex-shrink:0;border-radius:2px;overflow:hidden;line-height:0;box-shadow:0 0 0 1px rgba(255,255,255,.14);}
-.flag svg{display:block;width:100%;height:100%;}
+.lang-link svg{width:17px;height:11px;border-radius:2px;display:block;flex-shrink:0;}
 .hd-text{flex:1;text-align:center;}
 .hd-title-row{display:flex;align-items:center;justify-content:center;gap:9px;}
 .hd-icon{width:22px;height:22px;color:var(--accent2);flex-shrink:0;}
-.hd-text h1{font-family:'Syne',sans-serif;font-size:1.55em;font-weight:700;letter-spacing:0;background:linear-gradient(135deg,#eef1fb,var(--accent2) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hd-text h1{font-family:'Syne',sans-serif;font-size:1.55em;font-weight:800;letter-spacing:-0.02em;background:linear-gradient(135deg,#eef1fb,var(--accent2) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;}
 .hd-text p{color:var(--dim);font-size:0.82em;max-width:560px;margin:3px auto 0;}
 .app{display:grid;grid-template-columns:1fr 320px;max-width:1060px;margin:0 auto;min-height:calc(100vh - 90px);gap:14px;padding:14px;position:relative;z-index:1;}
 .left{padding:22px 24px;display:flex;flex-direction:column;gap:16px;background:var(--glass);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border-soft);border-radius:var(--r-lg);box-shadow:0 20px 50px rgba(0,0,0,.25);}
@@ -104,9 +98,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .converge-msg.full{background:rgba(52,199,89,0.08);border:1px solid rgba(52,199,89,0.2);color:var(--good);}
 .converge-msg.none{background:rgba(239,91,91,0.06);border:1px solid rgba(239,91,91,0.15);color:var(--bad);}
 .game-status{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:13px 16px;font-size:0.88em;min-height:50px;display:flex;align-items:center;gap:10px;}
-.si{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:5px;}
-.si.you{background:var(--accent2);box-shadow:0 0 8px var(--accent2);}
-.si.ai{background:var(--gold);box-shadow:0 0 8px var(--gold);}
+.si{font-size:1.3em;}
 .st{line-height:1.4;}.st strong{color:var(--accent2);}
 .sticks-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;min-height:110px;}
 .sticks-row{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;}
@@ -125,14 +117,14 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .rbanner{display:none;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px;text-align:center;flex-direction:column;gap:8px;}
 .rbanner.show{display:flex;animation:cardIn .4s var(--ease-spring);}
 .rbanner .big{font-size:2.2em;}
-.rbanner .rtitle{font-family:'Syne',sans-serif;font-size:1.24em;font-weight:700;letter-spacing:.005em;}
+.rbanner .rtitle{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;}
 .rbanner .rsub{font-size:0.78em;color:var(--dim);}
 .score-strip{display:flex;gap:8px;}
 .sbox{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px;text-align:center;transition:.2s;}
 .sbox:hover{border-color:rgba(122,162,255,.35);}
 .sbox .sv{font-size:1.5em;font-weight:800;font-family:'JetBrains Mono',monospace;}
 .sbox .sl{font-size:0.62em;color:var(--dim);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;}
-.qt-title{font-family:'Syne',sans-serif;font-size:1.04em;font-weight:700;letter-spacing:.005em;color:var(--gold);margin-bottom:4px;}
+.qt-title{font-family:'Syne',sans-serif;font-size:0.95em;font-weight:800;color:var(--gold);margin-bottom:4px;}
 .qt-desc{font-size:0.71em;color:var(--dim);line-height:1.5;margin-bottom:12px;}
 .qhdr-row{display:grid;gap:4px;align-items:center;margin-bottom:4px;}
 .qhdr{font-size:0.6em;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--dim);text-align:center;}
@@ -155,7 +147,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .strategy-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
 .strategy-icon{width:32px;height:32px;border-radius:10px;background:rgba(255,216,102,.14);display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0;}
 .strategy-icon svg{width:18px;height:18px;}
-.strategy-title{font-family:'Syne',sans-serif;font-size:1.04em;font-weight:700;letter-spacing:.005em;color:var(--gold);}
+.strategy-title{font-family:'Syne',sans-serif;font-size:.95em;font-weight:800;color:var(--gold);}
 .strategy-body{font-size:.78em;line-height:1.65;color:var(--dim);}
 .strategy-body strong{color:var(--text);}
 .right{padding:20px 18px;background:var(--glass);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border-soft);border-radius:var(--r-lg);box-shadow:0 20px 50px rgba(0,0,0,.25);overflow-y:auto;transition:opacity .3s var(--ease-out);}
@@ -172,21 +164,22 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   .lang-link{align-self:flex-start;}
   .hd-text{text-align:center;width:100%;}
 }
-.intro{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);z-index:200;display:flex;align-items:center;justify-content:center;transition:opacity .35s var(--ease-out);}
+.intro{position:fixed;inset:0;padding:20px;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:200;display:flex;align-items:center;justify-content:center;transition:opacity .35s var(--ease-out);}
 .intro.hidden{opacity:0;pointer-events:none;display:flex;}
-.intro-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:32px 34px;max-width:500px;width:92%;max-height:88vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.02) inset;animation:cardIn .5s var(--ease-spring);}
+.intro-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:26px 28px 24px;max-width:540px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.02) inset;animation:cardIn .5s var(--ease-spring);}
 @keyframes cardIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
-.intro-icon{width:46px;height:46px;margin:0 auto 14px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);}
-.intro-icon svg{width:24px;height:24px;}
-.intro-card h2{font-family:'Syne',sans-serif;font-size:1.42em;font-weight:700;margin-bottom:8px;text-align:center;letter-spacing:.005em;line-height:1.25;background:linear-gradient(135deg,#eef1fb,var(--accent2) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.intro-card .sub{color:var(--dim);font-size:0.88em;line-height:1.6;text-align:center;margin-bottom:18px;}
-.intro-steps{display:flex;flex-direction:column;gap:13px;margin:14px 0;}
+.intro-icon{width:44px;height:44px;margin:0 auto 12px;border-radius:15px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);}
+.intro-icon svg{width:23px;height:23px;}
+.intro-card h2{font-family:'Syne',sans-serif;font-size:1.32em;font-weight:800;margin-bottom:7px;text-align:center;letter-spacing:-.01em;background:linear-gradient(135deg,#eef1fb,var(--accent2) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.intro-card .sub{color:var(--dim);font-size:0.87em;line-height:1.6;text-align:center;margin-bottom:16px;}
+.intro-steps{display:flex;flex-direction:column;gap:12px;margin:14px 0;}
 .intro-step{display:flex;gap:12px;align-items:flex-start;}
 .intro-num{width:24px;height:24px;flex-shrink:0;display:grid;place-items:center;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:rgba(34,211,238,.12);color:#22d3ee;border:1px solid rgba(34,211,238,.25);}
-.intro-step-text{font-size:0.86em;color:var(--dim);line-height:1.55;padding-top:2px;}
+.intro-step-text{font-size:0.85em;color:var(--dim);line-height:1.55;}
 .intro-step-text strong{color:var(--text);font-weight:600;}
-.intro-start{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:16px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:linear-gradient(135deg,var(--good),#28b869);color:#06210f;border:none;border-radius:var(--r-sm);cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(52,199,89,.28);}
-.intro-start:hover{filter:brightness(1.06);transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(52,199,89,.38);}
+.intro-start{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s var(--ease-spring);}
+.intro-start:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
+.intro-start svg{width:15px;height:15px;flex-shrink:0;}
 
 /* begrepp pills + concept card */
 .begrepp-row{display:flex;flex-wrap:wrap;gap:5px;padding-top:4px;}
@@ -220,35 +213,23 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .concept-close:hover{border-color:var(--bad);color:var(--bad);transform:translateZ(30px) rotate(90deg);}
 .concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
 .concept-icon svg{width:28px;height:28px;}
-.concept-title{font-family:'Syne',sans-serif;font-size:1.3em;font-weight:700;margin-bottom:9px;letter-spacing:.005em;line-height:1.25;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
+.concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
 .concept-def{font-size:.85em;line-height:1.6;color:var(--dim);margin-bottom:16px;position:relative;z-index:3;transform:translateZ(18px);}
 .concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;}
 .concept-illus{background:rgba(0,0,0,.25);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;transform:translateZ(10px);}
 .concept-illus svg{width:100%;height:auto;max-height:90px;}
 
 /* ── Tränings-teater i glaskortet ── */
-.concept-card.training-card{width:min(470px,calc(100vw - 28px));}
+.concept-card.training-card{width:470px;}
 .concept-card.training-card .concept-card-inner{max-height:92vh;overflow-y:auto;}
 .concept-card.training-card #conceptIllus{display:none;}
-/* Ikonen bär ingen information här – rubriken säger redan vad som pågår. */
-.concept-card.training-card .concept-icon{display:none;}
-.concept-card.training-card .concept-card-inner{padding-top:18px;}
-.concept-card.training-card .concept-title{margin-bottom:12px;}
 /* Live-träningsläge: appen ligger ovanför backdropen så Q-tabellen syns och uppdateras */
 .concept-backdrop.training-live{background:rgba(6,7,14,.32);backdrop-filter:none;-webkit-backdrop-filter:none;}
 .app.training-live{z-index:302;}
 .app.training-live .left{filter:blur(1.5px) brightness(.6);pointer-events:none;transition:filter .35s var(--ease-out);}
 .app.training-live .right{box-shadow:0 0 0 2px var(--accent),0 26px 64px rgba(0,0,0,.55);border-color:rgba(77,128,255,.6);position:relative;}
-/* På bred skärm skjuts kortet åt vänster så att Q-tabellen till höger syns
-   under träningen. På smal skärm ligger tabellen under kortet, och då ska
-   kortet stå centrerat i stället för att dras ut över kanten. */
 @media(min-width:900px){
   .concept-card.training-card.show{transform:translate(-50%,-50%) translateX(-180px) scale(1);}
-}
-@media(max-width:760px){
-  .concept-card.training-card .concept-card-inner{max-height:88vh;max-height:88dvh;padding:16px 16px 14px;}
-  .tt-canvas-wrap{height:132px;}
-  .tt-line{font-size:.8em;}
 }
 .tt-hint{font-size:.76em;line-height:1.4;color:var(--subtle);text-align:center;background:var(--accent-dim);border:1px solid rgba(77,128,255,.25);border-radius:9px;padding:8px 10px;}
 .tt-hint strong{color:var(--accent2);}
@@ -287,27 +268,22 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .tt-done-btns{display:flex;gap:8px;}
 .tt-done-btns .btn{flex:1;}
 
-/* ── Kika på Q-tabellen (mobil) ──
-   På smal skärm ligger Q-tabellen under kortet och skyms helt av det.
-   Knappen fäller undan kortet utan att pausa träningen, så att man kan
-   se tabellen fyllas i live. */
-.tt-peek{display:none;background:none;border:1px solid var(--border);border-radius:999px;
-  color:var(--dim);font-family:'DM Sans',sans-serif;font-size:.76em;font-weight:600;
-  padding:6px 13px;cursor:pointer;transition:.18s var(--ease-out);white-space:nowrap;}
-.tt-peek:hover{color:var(--text);border-color:var(--dim);}
-@media(max-width:900px){ .tt-peek{display:inline-block;} }
-/* Kortet fälls undan, men träningen och bakgrundsdimningen står kvar. */
-.concept-card.training-card.peeking{opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(.96);}
-.concept-backdrop.peeking{background:rgba(6,7,14,.12);}
-/* Medan man kikar lyfts Q-tabellen fram och en knapp för att gå tillbaka visas. */
-.peek-back{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:340;
-  display:none;align-items:center;gap:7px;padding:11px 20px;border:none;border-radius:999px;
-  font-family:'DM Sans',sans-serif;font-size:.85em;font-weight:700;color:#fff;
-  background:var(--accent);box-shadow:0 10px 30px rgba(77,128,255,.42);cursor:pointer;}
-.peek-back.show{display:inline-flex;animation:peekIn .28s var(--ease-spring);}
-@keyframes peekIn{from{opacity:0;transform:translateX(-50%) translateY(10px);}}
-body.peeking .app.training-live .left{filter:blur(2px) brightness(.45);}
-body.peeking .app.training-live .right{box-shadow:0 0 0 2px var(--accent),0 26px 64px rgba(0,0,0,.6);}
+/* Introrutan ska rymmas utan rullning även på små skärmar. Villkoret gäller
+   både smala fönster och låga, eftersom liggande mobil har gott om bredd
+   men mycket lite höjd. */
+@media (max-width:640px),(max-height:760px){
+  .intro{padding:14px;}
+  .intro-card{padding:18px 16px 16px;}
+  .intro-icon{width:36px;height:36px;border-radius:12px;margin-bottom:9px;}
+  .intro-icon svg{width:19px;height:19px;}
+  .intro-card h2{font-size:1.15em;margin-bottom:5px;}
+  .intro-card .sub{font-size:0.82em;line-height:1.45;margin-bottom:11px;}
+  .intro-steps{gap:8px;margin:10px 0;}
+  .intro-step{gap:10px;}
+  .intro-step-text{font-size:0.8em;line-height:1.42;}
+  .intro-num{width:22px;height:22px;border-radius:7px;font-size:11px;}
+  .intro-start{padding:11px;margin-top:11px;font-size:0.9em;}
+}
 </style>
 </head>
 <body>
@@ -317,13 +293,13 @@ body.peeking .app.training-live .right{box-shadow:0 0 0 2px var(--accent),0 26px
   <div class="intro-card">
     <div class="intro-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="4" width="3" height="16" rx="1.3"/><rect x="10.5" y="4" width="3" height="16" rx="1.3"/><rect x="16" y="4" width="3" height="16" rx="1.3" opacity=".4"/></svg></div>
     <h2>NIM med förstärkningsinlärning</h2>
-    <p class="sub">Ett AI-system lär sig spela NIM från grunden, utan att få reglerna förklarade för sig. Det spelar tusentals partier mot sig självt och noterar vilka drag som leder till vinst.</p>
+    <p class="sub">Se hur ett AI-system lär sig spela spelet NIM från grunden – bara genom att spela mot sig själv. Regeln är enkel: ta 1–3 pinnar per drag, och den som tvingas ta den <strong style="color:var(--text)">sista</strong> pinnen förlorar.</p>
     <div class="intro-steps">
-      <div class="intro-step"><div class="intro-num">1</div><div class="intro-step-text"><strong>Träna AI-systemet</strong> – välj hur många partier det ska träna på.</div></div>
-      <div class="intro-step"><div class="intro-num">2</div><div class="intro-step-text"><strong>Utforska Q-tabellen</strong> – tabellen visar vad AI:n lärt sig om varje drag. Grönt innebär bra, rött dåligt.</div></div>
-      <div class="intro-step"><div class="intro-num">3</div><div class="intro-step-text"><strong>Spela mot AI:n</strong> – testa strategin genom att spela mot en halvtränad eller färdigtränad motståndare.</div></div>
+      <div class="intro-step"><div class="intro-num">1</div><div class="intro-step-text"><strong>Träna AI-systemet</strong> – Välj hur många spel AI:n ska öva på. Kolla hur Q-tabellen förändras under träningen!</div></div>
+      <div class="intro-step"><div class="intro-num">2</div><div class="intro-step-text"><strong>Utforska Q-tabellen</strong> – Tabellen till höger visar vad AI:n lärt sig. Grönt = bra drag, rött = dåligt. Ser du ett mönster?</div></div>
+      <div class="intro-step"><div class="intro-num">3</div><div class="intro-step-text"><strong>Spela mot AI:n</strong> – Utmana en halvlärd eller fullärd AI. Kan du slå den?</div></div>
     </div>
-    <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Starta simuleringen <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 </div>
 
@@ -336,7 +312,7 @@ body.peeking .app.training-live .right{box-shadow:0 0 0 2px var(--accent),0 26px
     </div>
     <p>Se hur ett AI-system lär sig spela NIM med förstärkningsinlärning – testa sedan att spela mot det!</p>
   </div>
-  <a class="lang-link" href="https://www.ai-aktiviteter.se/nim_ENG"><span class="flag" aria-hidden="true"><svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#00247d"/><path d="M0 0 60 36M60 0 0 36" stroke="#fff" stroke-width="7"/><path d="M0 0 60 36M60 0 0 36" stroke="#cf142b" stroke-width="4"/><path d="M30 0v36M0 18h60" stroke="#fff" stroke-width="12"/><path d="M30 0v36M0 18h60" stroke="#cf142b" stroke-width="7"/></svg></span> English</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/nim_ENG" hreflang="en" lang="en"><svg viewBox="0 0 50 30" aria-hidden="true"><rect width="50" height="30" fill="#012169"/><path d="M0,0 L50,30 M50,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#fff" stroke-width="10"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#C8102E" stroke-width="6"/></svg>English</a>
 </div></div>
 
 <div class="app">
@@ -379,7 +355,7 @@ body.peeking .app.training-live .right{box-shadow:0 0 0 2px var(--accent),0 26px
         </select>
       </div>
       <div class="train-btns" id="trainBtns">
-        <button class="btn solid-grn" id="trainBtn" onclick="startTraining()">Starta träning</button>
+        <button class="btn solid-grn" id="trainBtn" onclick="startTraining()">🧠 Starta träning</button>
       </div>
       <div id="trainProg" class="train-dash" style="display:none">
         <div class="td-head"><span>Tränar</span><span class="live-dot"></span></div>
@@ -409,13 +385,13 @@ body.peeking .app.training-live .right{box-shadow:0 0 0 2px var(--accent),0 26px
         <div class="sbox"><div class="sv" id="scA">0</div><div class="sl">AI</div></div>
         <div class="sbox"><div class="sv" id="scG">0</div><div class="sl">Spel</div></div>
       </div>
-      <div class="game-status" id="gStatus"><span class="si you"></span><div class="st">Träna AI-systemet först.</div></div>
+      <div class="game-status" id="gStatus"><span class="si">🎯</span><div class="st">Tryck <strong>Nytt spel</strong> för att börja.</div></div>
       <div class="sticks-wrap">
         <div class="sticks-row" id="sticksRow"></div>
         <div class="scnt" id="scnt"></div>
       </div>
       <div class="take-btns" id="takeBtns"></div>
-      <button class="qtoggle" id="qtoggleBtn" onclick="toggleQTable()">Visa Q-tabell</button>
+      <button class="qtoggle" id="qtoggleBtn" onclick="toggleQTable()">📊 Visa Q-tabell</button>
       <div class="thinking" id="thinking" style="display:none">
         <span>AI tänker</span><span class="tdots"><span></span><span></span><span></span></span>
       </div>
@@ -433,7 +409,7 @@ body.peeking .app.training-live .right{box-shadow:0 0 0 2px var(--accent),0 26px
 
   <div class="right">
     <div class="qt-title">Q-tabell – AI:ns hjärna</div>
-    <div class="qt-desc">Varje rad är ett antal kvarvarande pinnar, varje kolumn ett möjligt drag. <strong style="color:var(--good)">Grönt</strong> innebär ett bra drag, <strong style="color:var(--bad)">rött</strong> ett dåligt. Guldram markerar det bästa draget i tillståndet.</div>
+    <div class="qt-desc">Varje rad = antal kvarvarande pinnar. Varje kolumn = drag. <strong style="color:var(--good)">Grönt</strong> = bra drag, <strong style="color:var(--bad)">rött</strong> = dåligt. Guldram = bästa draget i tillståndet.</div>
     <div class="qhdr-row" id="qhdrRow"></div>
     <div id="qtable"></div>
     <div class="legend">
@@ -451,8 +427,7 @@ body.peeking .app.training-live .right{box-shadow:0 0 0 2px var(--accent),0 26px
   </div>
 </div>
 
-<button class="peek-back" id="peekBack" onclick="unpeekQTable()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Tillbaka till träningen</button>
-<div class="concept-backdrop" id="conceptBackdrop" onclick="if(document.body.classList.contains('peeking'))unpeekQTable();else closeConcept();"></div>
+<div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
 <div class="concept-card" id="conceptCard">
   <div class="concept-card-inner" id="conceptCardInner">
     <button class="concept-close" onclick="closeConcept()">✕</button>
@@ -510,22 +485,22 @@ function updateConvergeUI(conv){
   const{goldFrames, sensing, total}=conv;
   if(goldFrames>=total&&total>0){
     el.className='converge-msg show full';
-    el.innerHTML='<strong>AI:n har lärt sig den optimala strategin!</strong>';
+    el.innerHTML='✅ <strong>AI:n har lärt sig den optimala strategin!</strong>';
   }else if(goldFrames>=total*0.7){
     el.className='converge-msg show full';
-    el.innerHTML='<strong>AI:n har nästan knäckt spelet</strong> – bara några positioner kvar att finslipa';
+    el.innerHTML='🎯 <strong>AI:n har nästan knäckt spelet</strong> – bara några positioner kvar att finslipa';
   }else if(goldFrames>=3){
     el.className='converge-msg show partial';
-    el.innerHTML='<strong>AI:n blir allt säkrare på sin strategi</strong> – den vet vad den ska göra i många situationer';
+    el.innerHTML='📈 <strong>AI:n blir allt säkrare på sin strategi</strong> – den vet vad den ska göra i många situationer';
   }else if(goldFrames>=1){
     el.className='converge-msg show partial';
-    el.innerHTML='<strong>AI:n börjar lära sig en strategi</strong> – den har hittat några bra drag';
+    el.innerHTML='💡 <strong>AI:n börjar lära sig en strategi</strong> – den har hittat några bra drag';
   }else if(sensing>=2){
     el.className='converge-msg show partial';
-    el.innerHTML='<strong>AI:n börjar ana ett mönster</strong> – vissa drag verkar bättre än andra';
+    el.innerHTML='🔍 <strong>AI:n börjar ana ett mönster</strong> – vissa drag verkar bättre än andra';
   }else{
     el.className='converge-msg show none';
-    el.innerHTML='<strong>AI:n provar slumpmässiga drag</strong> – den har inte hittat något mönster ännu';
+    el.innerHTML='🎲 <strong>AI:n provar slumpmässiga drag</strong> – den har inte hittat något mönster ännu';
   }
 }
 
@@ -548,11 +523,11 @@ function pauseTraining(){
     clearTimeout(trainTimer);
     document.getElementById('trainBtns').innerHTML=
       '<button class="btn solid-grn" onclick="pauseTraining()">▶ Fortsätt</button>'+
-      '<button class="btn" onclick="stopTraining()" style="flex:0;">Avbryt</button>';
+      '<button class="btn" onclick="stopTraining()" style="flex:0;">✕ Avbryt</button>';
   }else{
     document.getElementById('trainBtns').innerHTML=
       '<button class="btn warn" onclick="pauseTraining()">⏸ Pausa</button>'+
-      '<button class="btn" onclick="stopTraining()" style="flex:0;">Avbryt</button>';
+      '<button class="btn" onclick="stopTraining()" style="flex:0;">✕ Avbryt</button>';
     resumeTraining();
   }
 }
@@ -596,7 +571,7 @@ function stopTraining(){
 function finishTraining(done, episodes){
   trained=true;trainPaused=false;
   document.getElementById('trainBtns').innerHTML=
-    '<button class="btn solid-grn" onclick="startTraining()">Träna om från början</button>';
+    '<button class="btn solid-grn" onclick="startTraining()">🧠 Träna om från början</button>';
   document.getElementById('trainDone').style.display='block';
   document.getElementById('tabPlay').classList.remove('locked');
   const conv=checkConvergence();
@@ -621,7 +596,7 @@ function renderQTable(hlState){
   for(let s=totalSticks;s>=1;s--){
     const best=validActs(s).reduce((b,a)=>getQ(s,a)>getQ(s,b)?a:b,1);
     const row=document.createElement('div');row.className='qrow'+(s===hlState?' cur':'');row.id='qr'+s;row.style.gridTemplateColumns=cols;
-    const st=document.createElement('div');st.className='qst';st.textContent=s;row.appendChild(st);
+    const st=document.createElement('div');st.className='qst';st.textContent=s+'🪵';row.appendChild(st);
     for(let a=1;a<=maxTake;a++){
       const cell=document.createElement('div');const ok=a<=s;
       cell.className='qcell'+(ok&&a===best&&getQ(s,best)>0.80?' best':'')+(ok?'':' dis');
@@ -662,8 +637,8 @@ function newGame(){
   const who=document.getElementById('whoFirst').value;
   humanTurn=who==='random'?Math.random()<0.5:who==='human';
   renderSticks();renderTakeBtns();hlQRow(gameSticks);
-  if(humanTurn)setStatus('you',`<strong>Din tur!</strong> ${gameSticks} pinnar kvar. Ta 1–${maxTake}. Den som tar den <strong>sista</strong> pinnen förlorar.`);
-  else{setStatus('ai','AI:n börjar…');setTimeout(aiTurn,800);}
+  if(humanTurn)setStatus('🎯',`<strong>Din tur!</strong> ${gameSticks} pinnar kvar. Ta 1–${maxTake}. Den som tar den <strong>sista</strong> pinnen förlorar.`);
+  else{setStatus('🤖','AI:n börjar...');setTimeout(aiTurn,800);}
 }
 
 function renderSticks(){
@@ -686,7 +661,7 @@ function humanTake(n){
   animTake(n,()=>{
     gameSticks-=n;renderSticks();hlQRow(gameSticks);
     if(gameSticks===0){endGame(false);}
-    else{humanTurn=false;renderTakeBtns();setStatus('ai',`Du tog ${n}. <strong>AI:ns tur…</strong>`);
+    else{humanTurn=false;renderTakeBtns();setStatus('🤖',`Du tog ${n}. <strong>AI:ns tur…</strong>`);
     setTimeout(aiTurn, 800); 
         }
   });
@@ -703,7 +678,7 @@ function aiTurn(){
     animTake(a,()=>{
       gameSticks-=a;renderSticks();hlQRow(gameSticks);
       if(gameSticks===0){endGame(true);}
-      else{humanTurn=true;renderTakeBtns();setStatus('you',`AI tog ${a}. <strong>Din tur</strong> – ${gameSticks} pinnar kvar.`);}
+      else{humanTurn=true;renderTakeBtns();setStatus('🎯',`AI tog ${a}. <strong>Din tur</strong> – ${gameSticks} pinnar kvar.`);}
     });
   },550);
 }
@@ -716,17 +691,12 @@ function animTake(n,cb){
 
 function endGame(humanWon){
   gameOver=true;renderTakeBtns();
-  if(humanWon){scH++;document.getElementById('scH').textContent=scH;document.getElementById('rEmoji').textContent='Vinst';document.getElementById('rTitle').textContent='Du vann!';document.getElementById('rSub').textContent='AI:n tog den sista pinnen.';}
-  else{scA++;document.getElementById('scA').textContent=scA;document.getElementById('rEmoji').textContent='Förlust';document.getElementById('rTitle').textContent='AI:n vann!';document.getElementById('rSub').textContent='Du tog den sista pinnen. Försök igen!';}
+  if(humanWon){scH++;document.getElementById('scH').textContent=scH;document.getElementById('rEmoji').textContent='🏆';document.getElementById('rTitle').textContent='Du vann!';document.getElementById('rSub').textContent='AI:n tog den sista pinnen.';}
+  else{scA++;document.getElementById('scA').textContent=scA;document.getElementById('rEmoji').textContent='🤖';document.getElementById('rTitle').textContent='AI:n vann!';document.getElementById('rSub').textContent='Du tog den sista pinnen. Försök igen!';}
   document.getElementById('rbanner').classList.add('show');hlQRow(-1);
 }
 
-/* Symbolen är en färgad prick: blå för spelaren, guld för AI:n.
-   Samma färger som pinnarna använder, så kopplingen blir visuell. */
-function setStatus(who,html){
-  const cls=who==='ai'?'si ai':'si you';
-  document.getElementById('gStatus').innerHTML=`<span class="${cls}"></span><div class="st">${html}</div>`;
-}
+function setStatus(icon,html){document.getElementById('gStatus').innerHTML=`<span class="si">${icon}</span><div class="st">${html}</div>`;}
 function hlQRow(s){document.querySelectorAll('.qrow').forEach(r=>r.classList.remove('cur'));if(s>0){const r=document.getElementById('qr'+s);if(r)r.classList.add('cur');}}
 function flashCell(s,a){const row=document.getElementById('qr'+s);if(!row)return;const cells=row.querySelectorAll('.qcell');const c=cells[a-1];if(c){c.style.transform='scale(1.18)';c.style.transition='transform 0.18s';setTimeout(()=>{c.style.transform='';},380);}}
 
@@ -741,13 +711,10 @@ function goPhase(p){
     scH=0;scA=0;scG=0;['scH','scA','scG'].forEach(id=>document.getElementById(id).textContent='0');
     document.getElementById('rbanner').classList.remove('show');
     gameOver=true;renderTakeBtns();renderSticks();hlQRow(-1);
-    /* Ett parti startar direkt, så att man inte behöver trycka
-       Nytt spel innan man kan börja spela. */
-    setTimeout(newGame,0);
     document.querySelector('.right').classList.add('hidden');
     document.querySelector('.app').classList.add('no-qtable');
     document.getElementById('qtoggleBtn').classList.remove('on');
-    document.getElementById('qtoggleBtn').textContent='Visa Q-tabell';
+    document.getElementById('qtoggleBtn').textContent='📊 Visa Q-tabell';
   }else{
     document.querySelector('.right').classList.remove('hidden');
     document.querySelector('.app').classList.remove('no-qtable');
@@ -767,7 +734,7 @@ function onSettingsChange(){
   totalSticks=+document.getElementById('sticksSel').value;
   maxTake=+document.getElementById('maxTakeSel').value;
   document.getElementById('trainBtns').innerHTML=
-    '<button class="btn solid-grn" onclick="startTraining()">Starta träning</button>';
+    '<button class="btn solid-grn" onclick="startTraining()">🧠 Starta träning</button>';
   renderQHeaders();renderQTable(-1);
   document.getElementById('qinfo').textContent='Träna AI-systemet för att se den inlärda strategin här.';
 }
@@ -788,7 +755,7 @@ const CONCEPTS={
   cQval:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>',
     title:'Q-värde',
-    def:'Ett Q-värde är AI:ns <strong>betyg</strong> på hur bra ett visst drag är i en viss situation. Ett högt värde (grönt) innebär att draget brukar leda till vinst, ett lågt värde (rött) att det brukar leda till förlust. Hela Q-tabellen är AI:ns samlade erfarenhet.',
+    def:'Ett Q-värde är AI:ns <strong>betyg</strong> på hur bra ett visst drag är i en viss situation. Högt värde (grönt) = draget brukar leda till vinst. Lågt värde (rött) = draget brukar leda till förlust. Hela Q-tabellen är AI:ns samlade erfarenhet.',
     illus:'<svg viewBox="0 0 140 70"><g font-family="JetBrains Mono" font-size="10" font-weight="700" text-anchor="middle"><rect x="10" y="10" width="34" height="22" rx="5" fill="rgba(52,199,89,.35)"/><text x="27" y="25" fill="#fff">.82</text><rect x="53" y="10" width="34" height="22" rx="5" fill="rgba(255,255,255,.08)"/><text x="70" y="25" fill="#fff">.10</text><rect x="96" y="10" width="34" height="22" rx="5" fill="rgba(239,91,91,.35)"/><text x="113" y="25" fill="#fff">-.65</text></g><rect x="8" y="8" width="38" height="26" rx="6" fill="none" stroke="#ffd866" stroke-width="2.5"/><text x="27" y="50" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#ffd866">bästa draget</text></svg>'
   },
   cExplore:{
@@ -824,61 +791,36 @@ function closeConcept(){
   if(trainRAF){cancelAnimationFrame(trainRAF);trainRAF=null;}
   trainAnimActive=false;
   if(wasTraining && !ttFinished){ ttFinished=true; finishTraining(ttGamesPlayed, ttEpisodes); }
-  card.classList.remove('show','training-card','peeking');
+  card.classList.remove('show','training-card');
   document.querySelector('.app').classList.remove('training-live');
-  document.getElementById('conceptBackdrop').classList.remove('training-live','peeking');
+  document.getElementById('conceptBackdrop').classList.remove('training-live');
   document.getElementById('conceptBackdrop').classList.remove('show');
-  /* Kik-läget ska aldrig överleva att kortet stängs. */
-  document.getElementById('peekBack').classList.remove('show');
-  document.body.classList.remove('peeking');
 }
-document.addEventListener('keydown',e=>{
-  if(e.key!=='Escape')return;
-  /* Kikar man på Q-tabellen stänger Escape bara kiket. */
-  if(document.body.classList.contains('peeking'))unpeekQTable();
-  else closeConcept();
-});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
 function toggleQTable(){
   const right=document.querySelector('.right');const app=document.querySelector('.app');const btn=document.getElementById('qtoggleBtn');
   const hidden=right.classList.toggle('hidden');app.classList.toggle('no-qtable');
-  btn.classList.toggle('on',!hidden);btn.textContent=hidden?'Visa Q-tabell':'Dölj Q-tabell';
+  btn.classList.toggle('on',!hidden);btn.textContent=hidden?'📊 Visa Q-tabell':'📊 Dölj Q-tabell';
 }
 
 /* ═══ TRÄNINGS-TEATER (självspel i glaskort) ═══ */
 let trainRAF=null, trainAnimActive=false, ttEpisodes=0, ttGamesPlayed=0, ttFinished=false;
+const BRAIN_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0"/></svg>';
 const TRAIN_THEATER_HTML=
   '<div class="tt">'
   + '<div class="tt-canvas-wrap"><canvas id="ttCanvas"></canvas></div>'
-  + '<div class="tt-hint">Följ <strong>Q-tabellen</strong> – den fylls i live medan AI:n spelar</div>'
+  + '<div class="tt-hint">👉 Följ <strong>Q-tabellen</strong> – den fylls i live medan AI:n spelar</div>'
   + '<div class="tt-status" id="ttStatus"></div>'
   + '<div class="tt-ee"><div class="tt-ee-top"><span class="ee-x">Utforskar <b id="ttExpl">100</b>%</span><span class="ee-o">Utnyttjar <b id="ttExploit">0</b>%</span></div>'
   + '<div class="tt-ee-bar"><i id="ttEeFill"></i></div>'
   + '<div class="tt-ee-cap" id="ttEeCap">Provar drag <strong>slumpmässigt</strong> för att upptäcka vad som funkar</div></div>'
   + '<div class="tt-rail"><i id="ttRail"></i></div>'
   + '<div class="tt-foot"><div class="tt-count"><span id="ttGames">0</span> <span class="tt-count-l">spel spelade</span></div>'
-  + '<button class="tt-peek" id="ttPeek" onclick="peekQTable()">Visa Q-tabell</button>'
   + '<button class="tt-skip" id="ttSkip" onclick="skipTrainTheater()">Hoppa över ▸</button></div>'
   + '<div class="tt-done" id="ttDone"><div class="tt-done-msg" id="ttDoneMsg"></div>'
-  + '<div class="tt-done-btns"><button class="btn grn" onclick="playFromCard()">Spela mot AI:n</button>'
+  + '<div class="tt-done-btns"><button class="btn grn" onclick="playFromCard()">🎮 Spela mot AI:n</button>'
   + '<button class="btn" onclick="closeConcept()">Stäng</button></div></div>'
   + '</div>';
-function peekQTable(){
-  document.getElementById('conceptCard').classList.add('peeking');
-  document.getElementById('conceptBackdrop').classList.add('peeking');
-  document.getElementById('peekBack').classList.add('show');
-  document.body.classList.add('peeking');
-  /* Tabellen ligger under vänsterpanelen på smal skärm, så den
-     rullas fram – annars ser man bara panelen ovanför. */
-  const right=document.querySelector('.right');
-  if(right)requestAnimationFrame(()=>right.scrollIntoView({behavior:'smooth',block:'center'}));
-}
-function unpeekQTable(){
-  document.getElementById('conceptCard').classList.remove('peeking');
-  document.getElementById('conceptBackdrop').classList.remove('peeking');
-  document.getElementById('peekBack').classList.remove('show');
-  document.body.classList.remove('peeking');
-}
-window.peekQTable=peekQTable;window.unpeekQTable=unpeekQTable;
 const easeOut=t=>1-Math.pow(1-t,3);
 
 function openTrainingCard(episodes){
@@ -887,7 +829,7 @@ function openTrainingCard(episodes){
   card.classList.add('training-card');
   document.querySelector('.app').classList.add('training-live');
   document.getElementById('conceptBackdrop').classList.add('training-live');
-  document.getElementById('conceptIcon').innerHTML='';
+  document.getElementById('conceptIcon').innerHTML=BRAIN_ICON;
   document.getElementById('conceptTitle').textContent='AI:n tränar mot sig själv';
   document.getElementById('conceptDef').innerHTML=TRAIN_THEATER_HTML;
   document.getElementById('conceptIllus').innerHTML='';
@@ -918,11 +860,7 @@ function runTrainTheater(){
 
   trainAnimActive=true;
   const t0=performance.now();
-  /* Uppspelningen är tre gånger långsammare än förut, så att man hinner
-     följa hur Q-tabellen fylls i medan träningen pågår. Faktorn styr
-     samtliga tider nedan, så att tidslinjen håller ihop. */
-  const PACE=3;
-  const DURATION=Math.min(14000, 5000+ttEpisodes*3.2)*PACE;
+  const DURATION=Math.min(14000, 5000+ttEpisodes*3.2);
   // Live-tränings-tillstånd (paced till tidslinjen)
   const ALPHA=0.15, FLOOR=0.12, DECAY_HORIZON=400;   // fast horisont – oberoende av vald spel-budget
   let trainDone=0, convCount=0, converged=false, lastRender=0;
@@ -955,7 +893,7 @@ function runTrainTheater(){
   const maxDisp=Math.min(totalSticks,12);
   const padX=54;
   const rowY=H*0.42;
-  let game=null, particles=[], gamesShown=0, nextMoveAt=t0+420*PACE, flash=null;
+  let game=null, particles=[], gamesShown=0, nextMoveAt=t0+420, flash=null;
 
   function newGame(){
     return {left:maxDisp, turn:Math.random()<.5?0:1, over:false, sticks:Array.from({length:maxDisp},()=>({alive:true, t:1, vy:0}))};
@@ -997,7 +935,7 @@ function runTrainTheater(){
       const mx=memX(mi), my=H-14;
       for(let p=0;p<8;p++)particles.push({x:W*0.5,y:rowY,vx:(mx-W*0.5)/40+(Math.random()-0.5)*0.3,vy:(my-rowY)/40,life:1.4,col:GOOD,r:1.8,toMem:true});
       gamesShown++;
-      nextMoveAt=now+520*PACE;
+      nextMoveAt=now+520;
     }else{
       game.turn=1-game.turn;
     }
@@ -1098,7 +1036,7 @@ function runTrainTheater(){
         }
       }
       ttGamesPlayed=trainDone;
-      if(now-lastRender>60){ renderQTable(-1); updateConvergeUI(checkConvergence()); lastRender=now; }
+      if(now-lastRender>90){ renderQTable(-1); updateConvergeUI(checkConvergence()); lastRender=now; }
     }
 
     STAT.forEach((s,i)=>{
@@ -1128,10 +1066,10 @@ function runTrainTheater(){
 
     if(!game.over && now>=nextMoveAt){
       doMove(now, eps);
-      if(!game.over) nextMoveAt=now + Math.max(90, 300 - frac*170)*PACE;
+      if(!game.over) nextMoveAt=now + Math.max(90, 300 - frac*170);
     }else if(game.over && now>=nextMoveAt){
       game=newGame();
-      nextMoveAt=now + 120*PACE;
+      nextMoveAt=now + 120;
     }
 
     draw(now);
@@ -1141,7 +1079,7 @@ function runTrainTheater(){
     else finishTheater();
   }
   trainRAF=requestAnimationFrame(frame);
-  setTimeout(()=>{ if(trainAnimActive)finishTheater(); }, DURATION+1600*PACE);
+  setTimeout(()=>{ if(trainAnimActive)finishTheater(); }, DURATION+1600);
 }
 
 function skipTrainTheater(){
@@ -1167,15 +1105,15 @@ function finishTheater(){
   const conv=checkConvergence();
   const total=conv.total, goldFrames=conv.goldFrames;
   let msg;
-  if(goldFrames>=total&&total>0) msg='<strong>AI:n knäckte spelet!</strong> Den hittade den optimala strategin på '+ttGamesPlayed+' spel.';
-  else if(goldFrames>=total*0.7) msg='<strong>Nästan optimal.</strong> Träna gärna fler spel för att finslipa de sista lägena.';
-  else if(goldFrames>=1) msg='<strong>AI:n lär sig.</strong> Den behärskar flera lägen – fler spel ger säkrare strategi.';
-  else msg='<strong>På gång.</strong> Öka antalet träningsspel så hittar AI:n mönstret.';
+  if(goldFrames>=total&&total>0) msg='✅ <strong>AI:n knäckte spelet!</strong> Den hittade den optimala strategin på '+ttGamesPlayed+' spel.';
+  else if(goldFrames>=total*0.7) msg='🎯 <strong>Nästan optimal.</strong> Träna gärna fler spel för att finslipa de sista lägena.';
+  else if(goldFrames>=1) msg='📈 <strong>AI:n lär sig.</strong> Den behärskar flera lägen – fler spel ger säkrare strategi.';
+  else msg='🎲 <strong>På gång.</strong> Öka antalet träningsspel så hittar AI:n mönstret.';
   const dm=document.getElementById('ttDoneMsg'); if(dm)dm.innerHTML=msg;
   const done=document.getElementById('ttDone'); if(done)done.classList.add('show');
 }
 
-function playFromCard(){ closeConcept(); goPhase('play'); }
+function playFromCard(){ closeConcept(); goPhase('play'); newGame(); }
 
 (function initCardTilt(){
   const el=document.getElementById('conceptCardInner');if(!el)return;
