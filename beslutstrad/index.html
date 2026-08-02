@@ -96,8 +96,30 @@
   .si-body b{color:var(--text-primary);font-weight:600}
   @media(prefers-reduced-motion:no-preference){.si-eyebrow{animation:siRise .5s var(--ease-spring) both}.si-body{animation:siRise .5s var(--ease-spring) .06s both}}
   @keyframes siRise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-  .step-foot{display:flex;justify-content:space-between;gap:8px;margin-top:12px}
+  .step-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:22px 0 6px;flex-wrap:wrap}
   .step-foot .btn[hidden]{visibility:hidden}
+  /* svävande valpanel vid noden (dator) */
+  .nodepop{position:fixed;z-index:60;width:min(330px,92vw);padding:13px 15px 15px;border-radius:16px;
+    border:1px solid rgba(255,255,255,.13);background:rgba(13,17,29,.97);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    box-shadow:0 26px 64px -20px rgba(0,0,0,.92),inset 0 1px 0 rgba(255,255,255,.06);
+    animation:popIn .19s var(--ease-spring) both}
+  @keyframes popIn{from{opacity:0;transform:translateY(-7px) scale(.96)}to{opacity:1;transform:none}}
+  .nodepop .pnhead{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--text-muted)}
+  .nodepop .pnhead b{color:var(--text-secondary);font-weight:400;text-transform:none;letter-spacing:.02em}
+  .nodepop .pnclose{margin-left:auto;background:none;border:0;color:var(--text-muted);cursor:pointer;font-size:13px;line-height:1;padding:2px 3px}
+  .nodepop .pnclose:hover{color:var(--text-primary)}
+  .nodepop .lbl{font-size:12px;color:var(--text-muted);margin:11px 0 7px}
+  .nodepop .arrow{position:absolute;width:12px;height:12px;transform:rotate(45deg);background:rgba(13,17,29,.97);pointer-events:none}
+  .nodepop.below .arrow{top:-6.5px;border-left:1px solid rgba(255,255,255,.13);border-top:1px solid rgba(255,255,255,.13)}
+  .nodepop.above .arrow{bottom:-6.5px;border-right:1px solid rgba(255,255,255,.13);border-bottom:1px solid rgba(255,255,255,.13)}
+  /* steg 3: ormen bredvid texten så att trädet ryms i bild */
+  .trialrow{display:flex;align-items:center;gap:20px;text-align:left}
+  .scene .trialrow .big{flex:0 0 118px;width:118px;max-width:118px;margin:0}
+  .trialmain{flex:1 1 auto;min-width:0}
+  .trialmain .q{margin:4px 0 12px}
+  @media(max-width:620px){.trialrow{flex-direction:column;gap:10px;text-align:center}
+    .scene .trialrow .big{flex:0 0 auto;width:130px;max-width:44%}}
 
   .panel{display:none}.panel.on{display:block;animation:panelIn .4s var(--ease-out)}
   @keyframes panelIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -299,7 +321,7 @@
   .cmpcard .t{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
   .cmpcard .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;margin-top:3px;color:var(--text-primary)}
   .cmpcard .s{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-secondary);margin-top:4px}
-  .scene{padding:22px;text-align:center}
+  .scene{padding:18px 20px;text-align:center}
   .scene .alert{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--rose);margin-bottom:6px}
   .scene .big{width:180px;max-width:60%;margin:6px auto 4px;border-radius:20px;filter:drop-shadow(0 12px 24px rgba(0,0,0,.5))}
   .scene .q{color:var(--text-secondary);font-size:15px;margin:6px 0 14px}
@@ -737,10 +759,6 @@
   <div class="stepper">
     <div class="steps-nav" id="nav" role="tablist" aria-label="Labbens steg"></div>
     <div class="step-intro" id="stepIntro" style="display:none"></div>
-    <div class="step-foot" id="stepFoot" style="display:none">
-      <button class="btn ghost" id="prevStepBtn">← Föregående</button>
-      <button class="btn primary" id="nextStepBtn">Nästa steg →</button>
-    </div>
   </div>
 
   <!-- STEG 1 — Studera datan -->
@@ -846,6 +864,11 @@
       <div class="lexrow" id="sumLex"></div>
     </div>
   </section>
+
+  <div class="step-foot" id="stepFoot" style="display:none">
+    <button class="btn ghost" id="prevStepBtn">← Föregående</button>
+    <button class="btn primary" id="nextStepBtn">Nästa steg →</button>
+  </div>
 
   <div style="text-align:center;padding:34px 0 10px" id="helpRow">
     <button class="btn sm ghost" id="helpOpen">? Ledtrådar</button>
@@ -1159,8 +1182,8 @@ function renderTree(container,root,st){
   applyView(container,grew||!container.__view);
   fitNodeText(container);
   st.prev=cur;
-  if(st.onClick)container.querySelectorAll('.tnodeWrap').forEach(el=>{el.onclick=()=>{if((container.__moved||0)>8)return;st.onClick(el.dataset.id);};
-    el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();st.onClick(el.dataset.id);}};});
+  if(st.onClick)container.querySelectorAll('.tnodeWrap').forEach(el=>{el.onclick=()=>{if((container.__moved||0)>8)return;st.onClick(el.dataset.id,el);};
+    el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();st.onClick(el.dataset.id,el);}};});
 }
 /* ── fri pan/zoom i trädcanvasen ── */
 function applyView(el,refit){
@@ -1174,6 +1197,7 @@ function applyView(el,refit){
   }
   const v=el.__view;
   svg.setAttribute('viewBox',`${v.x.toFixed(1)} ${v.y.toFixed(1)} ${v.w.toFixed(1)} ${v.h.toFixed(1)}`);
+  positionNodePop();
 }
 function zoomAt(el,factor,cx,cy){
   const v=el.__view;if(!v)return;
@@ -1353,7 +1377,7 @@ nav.addEventListener('keydown',e=>{
 document.getElementById('prevStepBtn').onclick=()=>go(Math.max(0,curStep-1),true);
 document.getElementById('nextStepBtn').onclick=()=>go(Math.min(STEPS.length-1,curStep+1),true);
 function go(i,fromUser){
-  curStep=i;
+  curStep=i;closeNodePop();
   if(fromUser)document.querySelector('.hero').classList.add('lean');
   document.getElementById('helpRow').style.display=i<2?'':'none';
   document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',+p.dataset.tab===i));
@@ -1543,7 +1567,7 @@ function splitFeedback(rows,attr,avail){
   if(ratio>=0.2)return{...meta,cls:'',title:'',msg:'Delningen ger viss förbättring, men flera grenar är fortfarande blandade och behöver en fråga till.'};
   return{...meta,cls:'warn',title:'',msg:'Delningen gjorde grupperna bara marginellt renare. Pröva en annan egenskap och jämför resultatet.'};
 }
-const stuSt={prev:null,sel:null,onClick:pid=>{stuSel=pid;renderStudent();}};
+const stuSt={prev:null,sel:null,onClick:pid=>{stuSel=(stuSel===pid&&popEl)?null:pid;renderStudent();}};
 function usedAttrs(pid){const parts=pid.split('>');let n=stuRoot,used=[];for(let i=1;i<parts.length;i++){used.push(n.attr);n=n.children[parts[i]];}return used;}
 function renderStudent(){stuSt.sel=stuSel;renderTree(document.getElementById('stuCanvas'),stuRoot,stuSt);renderStuStatus();renderStuCtrl();}
 function renderStuStatus(){
@@ -1551,7 +1575,7 @@ function renderStuStatus(){
   const el=document.getElementById('stuStatus');
   let s='';
   if(stuRoot.type==='frontier'){
-    s+=`<span class="pillstat">Välj en egenskap nedan för att göra den första delningen.</span>`;
+    s+=`<span class="pillstat">${POPUI?'Klicka på rotnoden i trädet och välj en egenskap för den första delningen.':'Välj en egenskap nedan för att göra den första delningen.'}</span>`;
   } else {
     if(fr===0){
       s+=`<span class="pillstat done">✓ Trädet är klart</span>`;
@@ -1585,10 +1609,8 @@ function rawCounts(rows,attr){
       <span class="bars">${c.g?`<span class="bg" style="width:${c.g/tot*100}%">${c.g}▲</span>`:''}${c.o?`<span class="bo" style="width:${c.o/tot*100}%">${c.o}●</span>`:''}</span></div>`;
   }).join('')+`</div>`;
 }
-function renderStuCtrl(){
-  const el=document.getElementById('stuCtrl');
-  if(!stuSel){el.innerHTML=`<div class="cardhint">Klicka på en nod i trädet ovan för att dela den eller bestämma dess klass.</div>`;return;}
-  const node=nodeByPid(stuRoot,stuSel);
+const POPUI=!(window.matchMedia&&window.matchMedia('(pointer: coarse)').matches);
+function stuActionsHTML(node){
   let h='';
   if(node.type==='leaf'){
     h+=`<div class="lbl">Bestämd som ${labTag(node.label)}</div><div class="decide"><button class="btn sm" data-a="reset">Ändra beslut</button></div>`;
@@ -1600,19 +1622,22 @@ function renderStuCtrl(){
     h+=`<div class="lbl">…eller bestäm grenen:</div><div class="decide">
       <button class="btn sm" style="color:var(--rose);border-color:rgba(251,113,133,.35)" data-a="leafG">▲ Giftig</button>
       <button class="btn sm" style="color:var(--emerald);border-color:rgba(52,211,153,.35)" data-a="leafO">● Ofarlig</button></div>`;
-
   }
+  return h;
+}
+function stuSpecHTML(node){
   const path=stuSel==='r'?'':stuSel.split('>').slice(1).map((v,i)=>vname(usedAttrs(stuSel)[i],v)).join(' · ');
   const isRoot=stuSel==='r';
   const specOpen=stuSpecOpen===null?!isRoot:stuSpecOpen;
   const bstitle=`${isRoot?'Alla ormar':'Ormar i grenen'} <b>${path}${path?' · ':''}${node.rows.length} st</b>`;
-  h+=`<div class="branchspec">`+(specOpen
+  return `<div class="branchspec">`+(specOpen
     ? `<div class="bshead">${bstitle}<button class="bsclose" data-spec="hide" aria-label="Dölj ormarna" title="Dölj ormarna">✕</button></div>`
       +`<div class="bswrap"><div class="grid specimens mini">${node.rows.map((sp,k)=>scard(sp,TRAIN.indexOf(sp),k)).join('')}</div></div>`
     : `<button class="bsopen" data-spec="show">${isRoot?'Visa alla ormar':'Visa ormarna i grenen'} · ${node.rows.length} st</button>`)+`</div>`;
-  el.innerHTML=h;
-  el.querySelectorAll('[data-spec]').forEach(b=>b.onclick=()=>{stuSpecOpen=b.dataset.spec==='show';renderStuCtrl();});
-  el.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{
+}
+function wireStuActions(root){
+  root.querySelectorAll('[data-spec]').forEach(b=>b.onclick=()=>{stuSpecOpen=b.dataset.spec==='show';renderStuCtrl(true);});
+  root.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{
     const node=nodeByPid(stuRoot,stuSel);const a=b.dataset.a;
     if(a==='split'){const attr=b.dataset.attr;stuFbOpen=false;
       stuFeedback=splitFeedback(node.rows,attr,ATTRS.filter(x=>!usedAttrs(stuSel).includes(x)));node.type='split';node.attr=attr;node.children={};
@@ -1621,8 +1646,81 @@ function renderStuCtrl(){
     else if(a==='leafG'){node.type='leaf';node.label='G';delete node.children;delete node.attr;stuSel=null;renderStudent();}
     else if(a==='leafO'){node.type='leaf';node.label='O';delete node.children;delete node.attr;stuSel=null;renderStudent();}
     else if(a==='reset'){stuFeedback=null;node.type='frontier';delete node.children;delete node.attr;delete node.label;renderStudent();}
-
   });
+}
+function renderStuCtrl(keepPop){
+  const el=document.getElementById('stuCtrl');
+  if(!stuSel){closeNodePop();el.innerHTML=`<div class="cardhint">${POPUI?'Klicka på en nod i trädet — valen visas direkt vid noden.':'Klicka på en nod i trädet ovan för att dela den eller bestämma dess klass.'}</div>`;return;}
+  const node=nodeByPid(stuRoot,stuSel);
+  let h='';
+  if(!POPUI)h+=stuActionsHTML(node);
+  h+=stuSpecHTML(node);
+  el.innerHTML=h;
+  wireStuActions(el);
+  if(POPUI){if(keepPop&&popEl)positionNodePop();else openNodePop(node);}
+}
+/* ── svävande valpanel intill den klickade noden (dator) ── */
+var popEl=null;
+function popAnchorRect(){
+  const c=document.getElementById('stuCanvas');if(!c||!stuSel)return null;
+  const n=c.querySelector('.tnodeWrap[data-id="'+stuSel+'"]');if(!n)return null;
+  const r=n.getBoundingClientRect(),cr=c.getBoundingClientRect();
+  const cxp=r.left+r.width/2, cyp=r.top+r.height/2;
+  if(cxp<cr.left-20||cxp>cr.right+20||cyp<cr.top-20||cyp>cr.bottom+20)return null;
+  return r;
+}
+function positionNodePop(){
+  if(!popEl)return;
+  const r=popAnchorRect();
+  if(!r){popEl.style.visibility='hidden';return;}
+  popEl.style.visibility='';
+  const pw=popEl.offsetWidth,ph=popEl.offsetHeight,m=10;
+  let x=r.left+r.width/2-pw/2;
+  x=Math.max(m,Math.min(window.innerWidth-pw-m,x));
+  let y=r.bottom+12,below=true;
+  if(y+ph>window.innerHeight-m){
+    if(r.top-ph-12>m){y=r.top-ph-12;below=false;}
+    else y=Math.max(m,window.innerHeight-ph-m);
+  }
+  popEl.style.left=Math.round(x)+'px';popEl.style.top=Math.round(y)+'px';
+  popEl.classList.toggle('below',below);popEl.classList.toggle('above',!below);
+  const ar=popEl.querySelector('.arrow');
+  if(ar)ar.style.left=Math.max(14,Math.min(pw-26,r.left+r.width/2-x-6))+'px';
+}
+function popOutside(e){
+  if(!popEl)return;
+  if(popEl.contains(e.target))return;
+  const c=document.getElementById('stuCanvas');
+  if(c&&c.contains(e.target)){if(e.target.closest('.tnodeWrap'))return;if((c.__moved||0)>8)return;}
+  stuSel=null;renderStudent();
+}
+function popKey(e){if(e.key==='Escape'&&popEl){stuSel=null;renderStudent();}}
+function closeNodePop(){
+  document.removeEventListener('click',popOutside);
+  document.removeEventListener('keydown',popKey);
+  window.removeEventListener('resize',positionNodePop);
+  window.removeEventListener('scroll',positionNodePop,true);
+  if(popEl){popEl.remove();popEl=null;}
+}
+function openNodePop(node){
+  closeNodePop();
+  const isRoot=stuSel==='r';
+  const path=isRoot?'':stuSel.split('>').slice(1).map((v,i)=>vname(usedAttrs(stuSel)[i],v)).join(' · ');
+  const p=document.createElement('div');
+  p.className='nodepop below';p.id='stuPop';p.setAttribute('role','dialog');
+  p.innerHTML=`<div class="pnhead">${isRoot?'Rotnoden':'Gren'} <b>${path?path+' · ':''}${node.rows.length} ormar</b>`
+    +`<button class="pnclose" data-popclose aria-label="Stäng" title="Stäng">✕</button></div>`
+    +stuActionsHTML(node)+`<div class="arrow"></div>`;
+  document.body.appendChild(p);popEl=p;
+  wireStuActions(p);
+  p.querySelector('[data-popclose]').onclick=()=>{stuSel=null;renderStudent();};
+  positionNodePop();
+  setTimeout(()=>{
+    document.addEventListener('click',popOutside);
+    document.addEventListener('keydown',popKey);
+    window.addEventListener('resize',positionNodePop);
+    window.addEventListener('scroll',positionNodePop,true);
+  },0);
 }
 document.getElementById('resetTree').onclick=()=>{stuRoot=fresh(TRAIN);stuSel=null;stuSt.prev=null;stuFeedback=null;stuFbOpen=false;stuSpecOpen=null;stuCelebrated=false;renderStudent();};
 
@@ -1796,13 +1894,16 @@ function renderYouScene(){
     youSt.path=null;renderTree(document.getElementById('youCanvas'),stuRoot,youSt);return;}
   const s=TEST[youIdx];youRan=false;youRev=false;youSt.path=null;
   const controls=renderYouControls();
-  scene.innerHTML=`${controls}<div class="alert">🔍 Osedd orm ${youIdx+1} av ${TEST.length}</div>
+  scene.innerHTML=`${controls}<div class="trialrow">
       <div class="big arrive" role="img" aria-label="Osedd orm ${youIdx+1}: ${ATTRS.map(a=>ANAME[a]+' '+vname(a,s[a])).join(', ')}">${snake(s)}</div>
-      <div class="q">Vad säger <b>ditt</b> träd — giftig eller ofarlig?</div>
-      ${youRunAll?'':'<button class="btn primary" id="runYouBtn">▶ Kör genom mitt träd</button>'}
-      <div class="tracelabel" id="yTrace"></div>
-      <div class="verdict" id="yVerdict"></div>
-      <div class="reveal-row" id="yReveal"></div>`;
+      <div class="trialmain">
+        <div class="alert">🔍 Osedd orm ${youIdx+1} av ${TEST.length}</div>
+        <div class="q">Vad säger <b>ditt</b> träd — giftig eller ofarlig?</div>
+        ${youRunAll?'':'<button class="btn primary" id="runYouBtn">▶ Kör genom mitt träd</button>'}
+        <div class="tracelabel" id="yTrace"></div>
+        <div class="verdict" id="yVerdict"></div>
+        <div class="reveal-row" id="yReveal"></div>
+      </div></div>`;
   renderTree(document.getElementById('youCanvas'),stuRoot,youSt);
   wireYouControls();
   const rbEl=document.getElementById('runYouBtn');if(rbEl)rbEl.onclick=()=>runYouAuto(s);
