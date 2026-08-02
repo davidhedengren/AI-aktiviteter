@@ -108,9 +108,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .stat-label{font-size:0.62em;color:var(--dim);text-transform:uppercase;letter-spacing:0.04em;}
 .stat-val{font-family:'JetBrains Mono',monospace;font-size:0.95em;font-weight:700;}
 
-.overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
+.overlay{position:fixed;inset:0;padding:20px;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
-.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:540px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
+.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:26px 28px 24px;max-width:540px;width:100%;text-align:center;max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
 @keyframes overlayIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
 .overlay-card h2{font-family:'Syne',sans-serif;font-size:1.4em;font-weight:800;letter-spacing:-0.01em;margin-bottom:6px;}.overlay-card h2 span{color:var(--accent2);}
 .overlay-card .sub{font-size:0.87em;color:var(--dim);line-height:1.6;margin-bottom:16px;}
@@ -169,9 +169,20 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
   .hd h1{font-size:1.02em;}
 }
 
-/* Numreringen krymper på små skärmar, i takt med resten av introrutan. */
-@media (max-width:560px){
+/* Introrutan ska rymmas utan rullning även på små skärmar. Villkoret gäller
+   både smala fönster och låga, eftersom liggande mobil har gott om bredd
+   men mycket lite höjd. */
+@media (max-width:640px),(max-height:760px){
+  .overlay{padding:14px;}
+  .overlay-card{padding:18px 16px 16px;}
+  .overlay-card h2{font-size:1.18em;}
+  .overlay-card .sub{font-size:0.82em;line-height:1.45;margin-bottom:11px;}
+  .intro-viz{width:150px;height:69px;margin-bottom:10px;}
+  .overlay-card .steps{gap:8px;margin:10px 0;}
+  .overlay-card .step{font-size:0.8em;line-height:1.42;gap:10px;}
   .step-num{width:22px;height:22px;border-radius:7px;font-size:11px;}
+  .hidden-preview{width:18px;height:18px;}
+  .overlay-btn{padding:11px;margin-top:11px;font-size:0.9em;}
 }
 </style>
 </head>
