@@ -251,6 +251,292 @@
   }
 
   @media(max-width:500px){.hero{padding:72px 0 24px;}.logo{margin-bottom:16px;}.hero p{font-size:15px;max-width:340px;white-space:normal;}}
+
+/* ══════════════════════════════════════════════════════════════
+   Kortvinjetter
+   Varje kort visar samma motiv som simuleringens introruta, i en låg
+   remsa överst. I vila står bilden stilla och dämpad; vid hovring tänds
+   den och rörelsen startar. Att tjugo kort inte rör sig samtidigt håller
+   sidan lugn, och att rörelsen börjar bekräftar vilket kort pekaren är på.
+   ══════════════════════════════════════════════════════════════ */
+.card-viz{position:relative;width:100%;height:46px;margin:0 0 13px;border-radius:9px;
+  background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,.16));
+  border:1px solid rgba(255,255,255,.045);overflow:hidden;opacity:.46;
+  transition:opacity .4s var(--ease-out),border-color .4s var(--ease-out);}
+.card-viz .cviz{display:block;width:100%;height:100%}
+.card:hover .card-viz{opacity:1;border-color:rgba(255,255,255,.1)}
+.card:focus-visible .card-viz{opacity:1}
+/* Rörelsen ligger stilla tills pekaren är på kortet. */
+.card-viz .cviz *{animation-play-state:paused!important}
+.card:hover .card-viz .cviz *,.card:focus-visible .card-viz .cviz *{animation-play-state:running!important}
+@media(prefers-reduced-motion:reduce){.card-viz .cviz *{animation:none!important}}
+@media(max-width:560px){.card-viz{height:42px;margin-bottom:11px}}
+
+.cviz[data-v="maze"] .iv-e{fill:none;stroke:rgba(255,255,255,.16);stroke-width:3;stroke-linecap:round}
+.cviz[data-v="maze"] .iv-node{stroke-width:2}
+.cviz[data-v="maze"] .iv-start{fill:rgba(52,199,89,.18);stroke:#34c759}
+.cviz[data-v="maze"] .iv-goal{fill:rgba(239,91,91,.18);stroke:#ef5b5b}
+.cviz[data-v="maze"] .iv-dot{fill:#fff;filter:drop-shadow(0 0 6px #7aa2ff)}
+.cviz[data-v="tree"] .iv-e{fill:none;stroke:rgba(255,255,255,.16);stroke-width:2}
+.cviz[data-v="tree"] .iv-node{stroke-width:2}
+.cviz[data-v="tree"] .iv-root{fill:rgba(122,162,255,.16);stroke:#7aa2ff}
+.cviz[data-v="tree"] .iv-leaf{fill:rgba(255,255,255,.05);stroke:rgba(255,255,255,.28)}
+.cviz[data-v="tree"] .iv-dot{fill:#fff;filter:drop-shadow(0 0 6px #7aa2ff)}
+.cviz[data-v="luffar"] .iv-cell{fill:rgba(255,255,255,.05);stroke:rgba(255,255,255,.15);stroke-width:1.5}
+.cviz[data-v="luffar"] .iv-fog{fill:#0e1430;stroke:rgba(77,128,255,.35)}
+.cviz[data-v="luffar"] .iv-x line{stroke:#4d80ff;stroke-width:3;stroke-linecap:round}
+.cviz[data-v="luffar"] .iv-q{fill:rgba(150,175,255,.55);font:700 20px 'JetBrains Mono',monospace;text-anchor:middle;dominant-baseline:middle}
+.cviz[data-v="luffar"] .iv-cell{fill:rgba(255,255,255,.05);stroke:rgba(255,255,255,.15);stroke-width:1.5}
+.cviz[data-v="luffar"] .iv-fog{fill:#0e1430;stroke:rgba(77,128,255,.35)}
+.cviz[data-v="luffar"] .iv-x line{stroke:#4d80ff;stroke-width:3;stroke-linecap:round}
+.cviz[data-v="luffar"] .iv-q{fill:rgba(150,175,255,.55);font:700 20px 'JetBrains Mono',monospace;text-anchor:middle;dominant-baseline:middle}
+.card:hover .cviz[data-v="luffar"] .iv-blind{animation:luffar_blindReveal 4s ease-in-out infinite}
+.card:hover .cviz[data-v="luffar"] .iv-q{animation:luffar_qFade 4s ease-in-out infinite}
+.card:hover .cviz[data-v="luffar"] .iv-blind{animation:luffar_blindReveal 4s ease-in-out infinite}
+.card:hover .cviz[data-v="luffar"] .iv-q{animation:luffar_qFade 4s ease-in-out infinite}
+.card:focus-visible .cviz[data-v="luffar"] .iv-blind{animation:luffar_blindReveal 4s ease-in-out infinite}
+.card:focus-visible .cviz[data-v="luffar"] .iv-q{animation:luffar_qFade 4s ease-in-out infinite}
+.card:focus-visible .cviz[data-v="luffar"] .iv-blind{animation:luffar_blindReveal 4s ease-in-out infinite}
+.card:focus-visible .cviz[data-v="luffar"] .iv-q{animation:luffar_qFade 4s ease-in-out infinite}
+@keyframes luffar_qFade{0%,55%{opacity:1;}65%,85%{opacity:0;}100%{opacity:1;}}
+@keyframes luffar_blindReveal{0%,55%{opacity:0;}65%,85%{opacity:1;}100%{opacity:0;}}
+.cviz[data-v="minimax"] .iv-e{fill:none;stroke:rgba(255,255,255,0.28);stroke-width:2}
+.cviz[data-v="minimax"] .iv-max{fill:rgba(52,199,89,0.14);stroke:#34c759;stroke-width:2;stroke-linejoin:round}
+.cviz[data-v="minimax"] .iv-min{fill:rgba(255,159,67,0.12);stroke:#ff9f43;stroke-width:2;stroke-linejoin:round}
+.cviz[data-v="minimax"] .iv-dot{fill:#fff;filter:drop-shadow(0 0 6px rgba(120,170,255,0.9))}
+.cviz[data-v="minimax"] .iv-e{fill:none;stroke:rgba(255,255,255,0.28);stroke-width:2}
+.cviz[data-v="minimax"] .iv-max{fill:rgba(52,199,89,0.14);stroke:#34c759;stroke-width:2;stroke-linejoin:round}
+.cviz[data-v="minimax"] .iv-min{fill:rgba(255,159,67,0.12);stroke:#ff9f43;stroke-width:2;stroke-linejoin:round}
+.cviz[data-v="minimax"] .iv-dot{fill:#fff;filter:drop-shadow(0 0 6px rgba(120,170,255,0.9))}
+.card:hover .cviz[data-v="minimax"] .iv-dot{animation:minimax_ivWalk 4.2s cubic-bezier(.45,0,.55,1) infinite}
+.card:hover .cviz[data-v="minimax"] .iv-dot{animation:minimax_ivWalk 4.2s cubic-bezier(.45,0,.55,1) infinite}
+.card:focus-visible .cviz[data-v="minimax"] .iv-dot{animation:minimax_ivWalk 4.2s cubic-bezier(.45,0,.55,1) infinite}
+.card:focus-visible .cviz[data-v="minimax"] .iv-dot{animation:minimax_ivWalk 4.2s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes minimax_ivWalk{
+  0%   {transform:translate(100px,16px);}
+  12%  {transform:translate(40px,66px);}
+  24%  {transform:translate(100px,16px);}
+  38%  {transform:translate(100px,66px);}
+  50%  {transform:translate(100px,16px);}
+  64%  {transform:translate(160px,66px);}
+  78%  {transform:translate(100px,16px);}
+  100% {transform:translate(100px,16px);}
+}
+.cviz[data-v="bayes"] .iv-mail { transform-box:fill-box;transform-origin:center}
+.cviz[data-v="bayes"] .iv-mail.m2 rect { stroke:#34d399}
+.cviz[data-v="bayes"] .iv-mail.m2 polyline { stroke:#34d399}
+.cviz[data-v="bayes"] .iv-mail.m1 { --sx:-56px}
+.cviz[data-v="bayes"] .iv-mail.m2 { --sx:56px}
+.cviz[data-v="bayes"] .iv-mail.m3 { --sx:-56px}
+.card:hover .cviz[data-v="bayes"] .iv-mail {animation:bayes_ivSort 4.2s ease-in-out infinite}
+.card:hover .cviz[data-v="bayes"] .iv-mail.m2 { animation-delay:1.4s}
+.card:hover .cviz[data-v="bayes"] .iv-mail.m3 { animation-delay:2.8s}
+.card:focus-visible .cviz[data-v="bayes"] .iv-mail {animation:bayes_ivSort 4.2s ease-in-out infinite}
+.card:focus-visible .cviz[data-v="bayes"] .iv-mail.m2 { animation-delay:1.4s}
+.card:focus-visible .cviz[data-v="bayes"] .iv-mail.m3 { animation-delay:2.8s}
+@keyframes bayes_ivSort { 0%{transform:translate(0,0);opacity:0;} 10%{opacity:1;} 38%{transform:translate(0,0);opacity:1;} 62%,72%{transform:translate(var(--sx,-56px),26px) scale(.72);opacity:1;} 84%,100%{transform:translate(var(--sx,-56px),26px) scale(.72);opacity:0;} }
+.cviz[data-v="nn"] .iv-edge{stroke:rgba(122,162,255,.20);stroke-width:1.3;fill:none}
+.cviz[data-v="nn"] .iv-pulse{stroke:#7aa2ff;stroke-width:2.1;stroke-linecap:round;fill:none;
+  stroke-dasharray:16 100;stroke-dashoffset:16}
+.cviz[data-v="nn"] .iv-nodes circle{fill:#151a2e;stroke:rgba(122,162,255,.45);stroke-width:1.8}
+.cviz[data-v="nn"] .iv-edge{stroke:rgba(122,162,255,.20);stroke-width:1.3;fill:none}
+.cviz[data-v="nn"] .iv-pulse{stroke:#7aa2ff;stroke-width:2.1;stroke-linecap:round;fill:none;
+  stroke-dasharray:16 100;stroke-dashoffset:16}
+.cviz[data-v="nn"] .iv-nodes circle{fill:#151a2e;stroke:rgba(122,162,255,.45);stroke-width:1.8}
+.card:hover .cviz[data-v="nn"] .iv-pulse{animation:nn_ivFlow 3.4s cubic-bezier(.45,0,.55,1) infinite}
+.card:hover .cviz[data-v="nn"] .f2 .iv-pulse{animation-delay:.62s}
+.card:hover .cviz[data-v="nn"] .f3 .iv-pulse{animation-delay:1.24s}
+.card:hover .cviz[data-v="nn"] .iv-nodes circle{animation:nn_ivNode 3.4s ease-in-out infinite}
+.card:hover .cviz[data-v="nn"] .n1 circle{animation-delay:.62s}
+.card:hover .cviz[data-v="nn"] .n2 circle{animation-delay:1.24s}
+.card:hover .cviz[data-v="nn"] .n3 circle{animation-delay:1.86s}
+.card:hover .cviz[data-v="nn"] .iv-pulse{animation:nn_ivFlow 3.4s cubic-bezier(.45,0,.55,1) infinite}
+.card:hover .cviz[data-v="nn"] .iv-pulse{animation-delay:.62s}
+.card:hover .cviz[data-v="nn"] .iv-pulse{animation-delay:1.24s}
+.card:hover .cviz[data-v="nn"] .iv-nodes circle{animation:nn_ivNode 3.4s ease-in-out infinite}
+.card:focus-visible .cviz[data-v="nn"] .iv-pulse{animation:nn_ivFlow 3.4s cubic-bezier(.45,0,.55,1) infinite}
+.card:focus-visible .cviz[data-v="nn"] .f2 .iv-pulse{animation-delay:.62s}
+.card:focus-visible .cviz[data-v="nn"] .f3 .iv-pulse{animation-delay:1.24s}
+.card:focus-visible .cviz[data-v="nn"] .iv-nodes circle{animation:nn_ivNode 3.4s ease-in-out infinite}
+.card:focus-visible .cviz[data-v="nn"] .n1 circle{animation-delay:.62s}
+.card:focus-visible .cviz[data-v="nn"] .n2 circle{animation-delay:1.24s}
+.card:focus-visible .cviz[data-v="nn"] .n3 circle{animation-delay:1.86s}
+.card:focus-visible .cviz[data-v="nn"] .iv-pulse{animation:nn_ivFlow 3.4s cubic-bezier(.45,0,.55,1) infinite}
+.card:focus-visible .cviz[data-v="nn"] .iv-pulse{animation-delay:.62s}
+.card:focus-visible .cviz[data-v="nn"] .iv-pulse{animation-delay:1.24s}
+.card:focus-visible .cviz[data-v="nn"] .iv-nodes circle{animation:nn_ivNode 3.4s ease-in-out infinite}
+@keyframes nn_ivNode{
+  0%,100%{fill:#151a2e;stroke:rgba(122,162,255,.45);filter:none;}
+  6%{fill:#1d2a4d;stroke:#7aa2ff;filter:drop-shadow(0 0 5px rgba(122,162,255,.75));}
+  20%{fill:#1d2a4d;stroke:#7aa2ff;filter:drop-shadow(0 0 5px rgba(122,162,255,.75));}
+  34%{fill:#151a2e;stroke:rgba(122,162,255,.45);filter:none;}
+}
+@keyframes nn_ivFlow{
+  0%{stroke-dashoffset:16;opacity:0;}
+  4%{opacity:1;}
+  22%{stroke-dashoffset:-100;opacity:1;}
+  26%,100%{stroke-dashoffset:-100;opacity:0;}
+}
+.cviz[data-v="kmeans"] .iv-b{fill:none;stroke:rgba(255,255,255,.17);stroke-width:1.5;stroke-linecap:round}
+.cviz[data-v="kmeans"] .iv-p circle{r:2.5}
+.cviz[data-v="kmeans"] .iv-c{fill:#0b0f1a;stroke-width:2.1}
+.cviz[data-v="kmeans"] .iv-x{stroke-width:1.5;stroke-linecap:round}
+.cviz[data-v="kmeans"] .iv-b{stroke-dasharray:64;stroke-dashoffset:64}
+.cviz[data-v="kmeans"] .iv-k{transform-box:fill-box;transform-origin:center}
+.cviz[data-v="kmeans"] .iv-b{fill:none;stroke:rgba(255,255,255,.17);stroke-width:1.5;stroke-linecap:round}
+.cviz[data-v="kmeans"] .iv-p circle{r:2.5}
+.cviz[data-v="kmeans"] .iv-c{fill:#0b0f1a;stroke-width:2.1}
+.cviz[data-v="kmeans"] .iv-x{stroke-width:1.5;stroke-linecap:round}
+.cviz[data-v="kmeans"] .iv-b{stroke-dasharray:64;stroke-dashoffset:64}
+.cviz[data-v="kmeans"] .iv-k{transform-box:fill-box;transform-origin:center}
+.card:hover .cviz[data-v="kmeans"] .iv-p{animation:kmeans_ivFade 460ms var(--ez) forwards}
+.card:hover .cviz[data-v="kmeans"] .g2{animation-delay:140ms}
+.card:hover .cviz[data-v="kmeans"] .g3{animation-delay:280ms}
+.card:hover .cviz[data-v="kmeans"] .iv-b{animation:kmeans_ivDraw 620ms var(--ez) 620ms forwards}
+.card:hover .cviz[data-v="kmeans"] .iv-k{
+    animation:kmeans_ivPop 480ms var(--sp) 980ms forwards}
+.card:hover .cviz[data-v="kmeans"] .k2{animation-delay:1080ms}
+.card:hover .cviz[data-v="kmeans"] .k3{animation-delay:1180ms}
+.card:hover .cviz[data-v="kmeans"] .iv-p{animation:kmeans_ivFade 460ms var(--ez) forwards}
+.card:hover .cviz[data-v="kmeans"] .iv-b{animation:kmeans_ivDraw 620ms var(--ez) 620ms forwards}
+.card:hover .cviz[data-v="kmeans"] .iv-k{
+    animation:kmeans_ivPop 480ms var(--sp) 980ms forwards}
+.card:focus-visible .cviz[data-v="kmeans"] .iv-p{animation:kmeans_ivFade 460ms var(--ez) forwards}
+.card:focus-visible .cviz[data-v="kmeans"] .g2{animation-delay:140ms}
+.card:focus-visible .cviz[data-v="kmeans"] .g3{animation-delay:280ms}
+.card:focus-visible .cviz[data-v="kmeans"] .iv-b{animation:kmeans_ivDraw 620ms var(--ez) 620ms forwards}
+.card:focus-visible .cviz[data-v="kmeans"] .iv-k{
+    animation:kmeans_ivPop 480ms var(--sp) 980ms forwards}
+.card:focus-visible .cviz[data-v="kmeans"] .k2{animation-delay:1080ms}
+.card:focus-visible .cviz[data-v="kmeans"] .k3{animation-delay:1180ms}
+.card:focus-visible .cviz[data-v="kmeans"] .iv-p{animation:kmeans_ivFade 460ms var(--ez) forwards}
+.card:focus-visible .cviz[data-v="kmeans"] .iv-b{animation:kmeans_ivDraw 620ms var(--ez) 620ms forwards}
+.card:focus-visible .cviz[data-v="kmeans"] .iv-k{
+    animation:kmeans_ivPop 480ms var(--sp) 980ms forwards}
+@keyframes kmeans_ivPop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+@keyframes kmeans_ivDraw{to{stroke-dashoffset:0}}
+@keyframes kmeans_ivFade{to{opacity:1}}
+.cviz[data-v="qlearn"] .iv-cell{fill:rgba(255,255,255,.05);stroke:rgba(255,255,255,.15);stroke-width:1.5}
+.cviz[data-v="qlearn"] .iv-goal{fill:rgba(52,199,89,.18);stroke:#34c759}
+.cviz[data-v="qlearn"] .iv-coin{fill:#ffd866;filter:drop-shadow(0 0 4px rgba(255,216,102,.7))}
+.cviz[data-v="qlearn"] .iv-agent{fill:#ff9b3d;filter:drop-shadow(0 0 6px rgba(255,155,60,.8))}
+.cviz[data-v="qlearn"] .iv-cell{fill:rgba(255,255,255,.05);stroke:rgba(255,255,255,.15);stroke-width:1.5}
+.cviz[data-v="qlearn"] .iv-goal{fill:rgba(52,199,89,.18);stroke:#34c759}
+.cviz[data-v="qlearn"] .iv-coin{fill:#ffd866;filter:drop-shadow(0 0 4px rgba(255,216,102,.7))}
+.cviz[data-v="qlearn"] .iv-agent{fill:#ff9b3d;filter:drop-shadow(0 0 6px rgba(255,155,60,.8))}
+.cviz[data-v="dtree"] .iv-e{fill:none;stroke:rgba(255,255,255,.18);stroke-width:2}
+.cviz[data-v="dtree"] .iv-q{fill:rgba(96,165,250,.14);stroke:#60a5fa;stroke-width:2}
+.cviz[data-v="dtree"] .iv-leaf{stroke-width:2}
+.cviz[data-v="dtree"] .iv-leaf.ok{fill:rgba(52,199,89,.18);stroke:#34c759}
+.cviz[data-v="dtree"] .iv-leaf.no{fill:rgba(239,91,91,.16);stroke:#ef5b5b}
+.cviz[data-v="dtree"] .iv-dot{fill:#fff;filter:drop-shadow(0 0 5px #60a5fa)}
+.cviz[data-v="nntrain"] .iv-w{stroke:rgba(122,162,255,.25);stroke-width:1.6}
+.cviz[data-v="nntrain"] .iv-n{fill:#151a2e;stroke:rgba(122,162,255,.5);stroke-width:1.8}
+.cviz[data-v="nntrain"] .iv-out{stroke:#ffd866}
+.cviz[data-v="nntrain"] .iv-fw{fill:none;stroke:#4ade80;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:22 100;stroke-dashoffset:22}
+.cviz[data-v="nntrain"] .iv-bw{fill:none;stroke:#f97b72;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:22 100;stroke-dashoffset:22;opacity:.55}
+.card:hover .cviz[data-v="nntrain"] .iv-fw{animation:tr_fw 3.6s ease-in-out infinite}
+.card:hover .cviz[data-v="nntrain"] .iv-bw{animation:tr_bw 3.6s ease-in-out infinite}
+.card:hover .cviz[data-v="nntrain"] .iv-n{animation:tr_pulse 3.6s ease-in-out infinite}
+.card:focus-visible .cviz[data-v="nntrain"] .iv-fw{animation:tr_fw 3.6s ease-in-out infinite}
+.card:focus-visible .cviz[data-v="nntrain"] .iv-bw{animation:tr_bw 3.6s ease-in-out infinite}
+.card:focus-visible .cviz[data-v="nntrain"] .iv-n{animation:tr_pulse 3.6s ease-in-out infinite}
+@keyframes tr_fw{0%{stroke-dashoffset:22}42%{stroke-dashoffset:-100}100%{stroke-dashoffset:-100}}
+@keyframes tr_bw{0%,48%{stroke-dashoffset:22}92%,100%{stroke-dashoffset:-100}}
+@keyframes tr_pulse{0%,100%{stroke:rgba(122,162,255,.5)}25%{stroke:#7aa2ff}}
+.cviz[data-v="bounds"] .iv-line{stroke:rgba(255,255,255,.5);stroke-width:2.2;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:0}
+.cviz[data-v="bounds"] .iv-a circle{fill:#4ecfff}
+.cviz[data-v="bounds"] .iv-b circle{fill:#ff5f9e}
+.card:hover .cviz[data-v="bounds"] .iv-line{animation:bd_draw 3.4s ease-in-out infinite}
+.card:hover .cviz[data-v="bounds"] .iv-a circle{animation:bd_pop 3.4s ease-out infinite}
+.card:hover .cviz[data-v="bounds"] .iv-b circle{animation:bd_pop 3.4s ease-out infinite .5s}
+.card:focus-visible .cviz[data-v="bounds"] .iv-line{animation:bd_draw 3.4s ease-in-out infinite}
+.card:focus-visible .cviz[data-v="bounds"] .iv-a circle{animation:bd_pop 3.4s ease-out infinite}
+.card:focus-visible .cviz[data-v="bounds"] .iv-b circle{animation:bd_pop 3.4s ease-out infinite .5s}
+@keyframes bd_draw{0%{stroke-dashoffset:100}45%,100%{stroke-dashoffset:0}}
+@keyframes bd_pop{0%,60%{r:4}72%{r:5.4}100%{r:4}}
+.cviz[data-v="cnn"] .iv-px rect{fill:rgba(255,255,255,.07);stroke:rgba(255,255,255,.13);stroke-width:1}
+.cviz[data-v="cnn"] .iv-k{fill:none;stroke:#ffd866;stroke-width:2.2}
+.cviz[data-v="cnn"] .iv-arr{fill:none;stroke:rgba(255,255,255,.35);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cviz[data-v="cnn"] .iv-fm rect{fill:rgba(167,139,250,.22);stroke:rgba(167,139,250,.5);stroke-width:1}
+.card:hover .cviz[data-v="cnn"] .iv-k{animation:cn_scan 4s steps(1,end) infinite}
+.card:hover .cviz[data-v="cnn"] .iv-fm rect{animation:cn_fill 4s ease-out infinite}
+.card:focus-visible .cviz[data-v="cnn"] .iv-k{animation:cn_scan 4s steps(1,end) infinite}
+.card:focus-visible .cviz[data-v="cnn"] .iv-fm rect{animation:cn_fill 4s ease-out infinite}
+@keyframes cn_scan{0%{transform:translate(0,0)}25%{transform:translate(26px,0)}50%{transform:translate(26px,26px)}75%{transform:translate(0,26px)}100%{transform:translate(0,0)}}
+@keyframes cn_fill{0%,20%{opacity:.25}55%{opacity:1}100%{opacity:.25}}
+.cviz[data-v="nim"] .iv-s{fill:rgba(255,214,130,.85)}
+.cviz[data-v="nim"] .iv-s.s8,.iv-s.s7{fill:rgba(255,214,130,.85)}
+.card:hover .cviz[data-v="nim"] .iv-s.s8{animation:nm_take 4.2s ease-in-out infinite}
+.card:hover .cviz[data-v="nim"] .iv-s.s7{animation:nm_take 4.2s ease-in-out infinite .35s}
+.card:hover .cviz[data-v="nim"] .iv-s.s6{animation:nm_take 4.2s ease-in-out infinite .7s}
+.card:hover .cviz[data-v="nim"] .iv-s.s5{animation:nm_take 4.2s ease-in-out infinite 1.2s}
+.card:hover .cviz[data-v="nim"] .iv-s.s4{animation:nm_take 4.2s ease-in-out infinite 1.55s}
+.card:focus-visible .cviz[data-v="nim"] .iv-s.s8{animation:nm_take 4.2s ease-in-out infinite}
+.card:focus-visible .cviz[data-v="nim"] .iv-s.s7{animation:nm_take 4.2s ease-in-out infinite .35s}
+.card:focus-visible .cviz[data-v="nim"] .iv-s.s6{animation:nm_take 4.2s ease-in-out infinite .7s}
+.card:focus-visible .cviz[data-v="nim"] .iv-s.s5{animation:nm_take 4.2s ease-in-out infinite 1.2s}
+.card:focus-visible .cviz[data-v="nim"] .iv-s.s4{animation:nm_take 4.2s ease-in-out infinite 1.55s}
+@keyframes nm_take{0%,8%{opacity:1;transform:translateY(0)}20%,88%{opacity:0;transform:translateY(-12px)}100%{opacity:1;transform:translateY(0)}}
+.cviz[data-v="lm"] .iv-tok{fill:rgba(255,255,255,.07);stroke:rgba(255,255,255,.16);stroke-width:1.3}
+.cviz[data-v="lm"] .iv-next{fill:rgba(96,165,250,.14);stroke:#60a5fa;stroke-width:1.6}
+.cviz[data-v="lm"] .iv-bar rect{fill:#60a5fa;opacity:.8}
+.cviz[data-v="lm"] .iv-car{fill:#60a5fa}
+.card:hover .cviz[data-v="lm"] .iv-tok.t1{animation:lm_in 4s ease-out infinite}
+.card:hover .cviz[data-v="lm"] .iv-tok.t2{animation:lm_in 4s ease-out infinite .4s}
+.card:hover .cviz[data-v="lm"] .iv-tok.t3{animation:lm_in 4s ease-out infinite .8s}
+.card:hover .cviz[data-v="lm"] .iv-next{animation:lm_next 4s ease-out infinite}
+.card:hover .cviz[data-v="lm"] .iv-car{animation:lm_blink 1s steps(1,end) infinite}
+.card:focus-visible .cviz[data-v="lm"] .iv-tok.t1{animation:lm_in 4s ease-out infinite}
+.card:focus-visible .cviz[data-v="lm"] .iv-tok.t2{animation:lm_in 4s ease-out infinite .4s}
+.card:focus-visible .cviz[data-v="lm"] .iv-tok.t3{animation:lm_in 4s ease-out infinite .8s}
+.card:focus-visible .cviz[data-v="lm"] .iv-next{animation:lm_next 4s ease-out infinite}
+.card:focus-visible .cviz[data-v="lm"] .iv-car{animation:lm_blink 1s steps(1,end) infinite}
+@keyframes lm_in{0%{opacity:.2}12%{opacity:1}100%{opacity:1}}
+@keyframes lm_next{0%,32%{opacity:.15}48%{opacity:1}100%{opacity:1}}
+@keyframes lm_blink{0%,50%{opacity:1}51%,100%{opacity:.15}}
+.cviz[data-v="bias"] .iv-cv rect{fill:rgba(255,255,255,.05);stroke:rgba(255,255,255,.2);stroke-width:1.4}
+.cviz[data-v="bias"] .iv-cv path{stroke:rgba(255,255,255,.28);stroke-width:2;stroke-linecap:round;fill:none}
+.cviz[data-v="bias"] .iv-arr,.iv-arr2{fill:none;stroke:rgba(255,255,255,.22);stroke-width:1.6;stroke-dasharray:3 3}
+.cviz[data-v="bias"] .iv-res{stroke-width:2.4}
+.cviz[data-v="bias"] .iv-res.ok{fill:rgba(52,199,89,.2);stroke:#34c759}
+.cviz[data-v="bias"] .iv-res.no{fill:rgba(239,91,91,.18);stroke:#ef5b5b}
+.card:hover .cviz[data-v="bias"] .iv-res.ok{animation:bi_ok 4s ease-in-out infinite}
+.card:hover .cviz[data-v="bias"] .iv-res.no{animation:bi_no 4s ease-in-out infinite}
+.card:focus-visible .cviz[data-v="bias"] .iv-res.ok{animation:bi_ok 4s ease-in-out infinite}
+.card:focus-visible .cviz[data-v="bias"] .iv-res.no{animation:bi_no 4s ease-in-out infinite}
+@keyframes bi_ok{0%,30%{opacity:.3;r:9}45%{opacity:1;r:10.5}100%{opacity:1;r:9}}
+@keyframes bi_no{0%,55%{opacity:.3;r:9}70%{opacity:1;r:10.5}100%{opacity:1;r:9}}
+.cviz[data-v="timeline"] .iv-ax{stroke:rgba(255,255,255,.22);stroke-width:2;stroke-linecap:round}
+.cviz[data-v="timeline"] .iv-tick line{stroke:rgba(255,255,255,.16);stroke-width:1.6}
+.cviz[data-v="timeline"] .iv-card{fill:rgba(96,165,250,.14);stroke:#60a5fa;stroke-width:1.5}
+.cviz[data-v="timeline"] .iv-pin{fill:#ffd866}
+.card:hover .cviz[data-v="timeline"] .iv-card.c1{animation:tl_drop 4.2s ease-in-out infinite}
+.card:hover .cviz[data-v="timeline"] .iv-card.c2{animation:tl_drop 4.2s ease-in-out infinite .5s}
+.card:hover .cviz[data-v="timeline"] .iv-card.c3{animation:tl_drop 4.2s ease-in-out infinite 1s}
+.card:hover .cviz[data-v="timeline"] .iv-pin.p1{animation:tl_pin 4.2s ease-out infinite}
+.card:hover .cviz[data-v="timeline"] .iv-pin.p2{animation:tl_pin 4.2s ease-out infinite .5s}
+.card:hover .cviz[data-v="timeline"] .iv-pin.p3{animation:tl_pin 4.2s ease-out infinite 1s}
+.card:focus-visible .cviz[data-v="timeline"] .iv-card.c1{animation:tl_drop 4.2s ease-in-out infinite}
+.card:focus-visible .cviz[data-v="timeline"] .iv-card.c2{animation:tl_drop 4.2s ease-in-out infinite .5s}
+.card:focus-visible .cviz[data-v="timeline"] .iv-card.c3{animation:tl_drop 4.2s ease-in-out infinite 1s}
+.card:focus-visible .cviz[data-v="timeline"] .iv-pin.p1{animation:tl_pin 4.2s ease-out infinite}
+.card:focus-visible .cviz[data-v="timeline"] .iv-pin.p2{animation:tl_pin 4.2s ease-out infinite .5s}
+.card:focus-visible .cviz[data-v="timeline"] .iv-pin.p3{animation:tl_pin 4.2s ease-out infinite 1s}
+@keyframes tl_drop{0%{transform:translateY(-8px);opacity:.2}18%{transform:translateY(0);opacity:1}100%{transform:translateY(0);opacity:1}}
+@keyframes tl_pin{0%,14%{opacity:0;r:2}24%{opacity:1;r:5}34%,100%{opacity:1;r:4}}
+
+/* ── Lyftet ── */
+.card{transition:transform .42s var(--ease-spring),box-shadow .42s var(--ease-out),
+  border-color .3s var(--ease-out),background .3s var(--ease-out);position:relative;}
+.card:hover{transform:translateY(-8px) scale(1.012);border-color:rgba(255,255,255,.2);
+  box-shadow:0 30px 60px -12px rgba(0,0,0,.62),0 12px 24px -8px rgba(0,0,0,.45),
+             0 1px 0 rgba(255,255,255,.08) inset;z-index:3;}
+.card:active{transform:translateY(-4px) scale(1.004);transition-duration:.12s}
+@media(prefers-reduced-motion:reduce){
+  .card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(0,0,0,.4)}
+  .card:active{transform:translateY(-3px)}
+}
 </style>
 </head>
 <body>
@@ -379,19 +665,62 @@
     <div class="grid grid-sims">
 
       <a class="card" data-accent="blue" href="/sokalgoritmer-labyrinter_ENG">
-        <div class="card-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="1"/><path d="M2 8h8v4H6v4h12v-4h-4V8h8"/><path d="M10 16v4"/><path d="M14 2v4"/><circle r="1.4" fill="currentColor"><animateMotion dur="5s" repeatCount="indefinite" path="M2 8 L10 8 L10 12 L6 12 L6 16 L18 16 L18 12 L14 12 L14 8 L22 8"/></circle></svg></div>
+        <div class="card-viz"><svg class="cviz" data-v="maze" viewBox="-50.2 -3.0 247.9 85.5" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <path class="iv-e" d="M20 20 H80 V50 H140 V72"/>
+      <circle class="iv-dot" r="4"><animateMotion dur="4s" repeatCount="indefinite" path="M20 20 H80 V50 H140 V72"/></circle>
+      <circle class="iv-node iv-start" cx="20" cy="20" r="7"/>
+      <circle class="iv-node iv-goal" cx="140" cy="72" r="7"/>
+    </svg></div>
         <h3>Search algorithms in mazes</h3><span class="card-desc">Explore BFS, DFS, Greedy best-first and A* and see how they spread through the maze, square by square.</span>
         <span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 2 · Fundamental search algorithms</span><span class="tag-pages">(pp. 51–65)</span></span>
         <svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
       </a>
 
-      <a class="card" data-accent="blue" href="/sokalgoritmer-trad_ENG"><div class="card-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="4" r="2"/><circle cx="6" cy="12" r="2"/><circle cx="18" cy="12" r="2"/><circle cx="4" cy="20" r="2"/><circle cx="10" cy="20" r="2"/><circle cx="18" cy="20" r="2"/><line x1="12" y1="6" x2="6" y2="10"/><line x1="12" y1="6" x2="18" y2="10"/><line x1="6" y1="14" x2="4" y2="18"/><line x1="6" y1="14" x2="10" y2="18"/><line x1="18" y1="14" x2="18" y2="18"/></svg></div><h3>Search algorithms in trees</h3><span class="card-desc">Visualize fundamental search algorithms in a search tree and follow the search node by node.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 2 · Fundamental search algorithms</span><span class="tag-pages">(pp. 51–65)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="card" data-accent="blue" href="/sokalgoritmer-trad_ENG"><div class="card-viz"><svg class="cviz" data-v="tree" viewBox="-31.5 -3.0 230.5 79.5" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <path class="iv-e" d="M100 16 C100 42,40 42,40 66"/>
+      <path class="iv-e" d="M100 16 C100 42,100 42,100 66"/>
+      <path class="iv-e" d="M100 16 C100 42,160 42,160 66"/>
+      <circle class="iv-node iv-leaf" cx="40" cy="66" r="7"/>
+      <circle class="iv-node iv-leaf" cx="100" cy="66" r="7"/>
+      <circle class="iv-node iv-leaf" cx="160" cy="66" r="7"/>
+      <circle class="iv-node iv-root" cx="100" cy="16" r="7"/>
+      <circle class="iv-dot" r="4">
+        <animateMotion dur="4s" repeatCount="indefinite"
+          path="M100 16 C100 42,40 42,40 66 C40 42,100 42,100 16 C100 42,100 42,100 66 C100 42,100 42,100 16 C100 42,160 42,160 66 C160 42,100 42,100 16"/>
+      </circle>
+    </svg></div><h3>Search algorithms in trees</h3><span class="card-desc">Visualize fundamental search algorithms in a search tree and follow the search node by node.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 2 · Fundamental search algorithms</span><span class="tag-pages">(pp. 51–65)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
-      <a class="card" data-accent="blue" href="/luffarschack_ENG"><div class="card-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="9" y1="2" x2="9" y2="22"/><line x1="15" y1="2" x2="15" y2="22"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="2" y1="15" x2="22" y2="15"/><line x1="4" y1="4" x2="7" y2="7"/><line x1="7" y1="4" x2="4" y2="7"/><circle cx="18.5" cy="5.5" r="2" fill="none"/><line x1="11" y1="17" x2="13" y2="19"/><line x1="13" y1="17" x2="11" y2="19"/></svg></div><h3>Five in a row in a partially observable environment</h3><span class="card-desc">Play five in a row without seeing all the squares to experience partial observability.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 2 · Environments</span><span class="tag-pages">(pp. 43–45)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="card" data-accent="blue" href="/luffarschack_ENG"><div class="card-viz"><svg class="cviz" data-v="luffar" viewBox="6.5 22.5 182.0 47.0" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <rect class="iv-cell" x="10" y="26" width="40" height="40" rx="6"/>
+      <rect class="iv-cell iv-fog" x="55" y="26" width="40" height="40" rx="6"/>
+      <rect class="iv-cell" x="100" y="26" width="40" height="40" rx="6"/>
+      <rect class="iv-cell iv-fog" x="145" y="26" width="40" height="40" rx="6"/>
+      <g class="iv-x" transform="translate(30,46)"><line x1="-8" y1="-8" x2="8" y2="8"/><line x1="8" y1="-8" x2="-8" y2="8"/></g>
+      <g class="iv-x" transform="translate(120,46)"><line x1="-8" y1="-8" x2="8" y2="8"/><line x1="8" y1="-8" x2="-8" y2="8"/></g>
+      <text class="iv-q" x="75" y="47">?</text>
+      <g class="iv-x iv-blind" transform="translate(75,46)"><line x1="-8" y1="-8" x2="8" y2="8"/><line x1="8" y1="-8" x2="-8" y2="8"/></g>
+    </svg></div><h3>Five in a row in a partially observable environment</h3><span class="card-desc">Play five in a row without seeing all the squares to experience partial observability.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 2 · Environments</span><span class="tag-pages">(pp. 43–45)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
-      <a class="card" data-accent="blue" href="/minimax_ENG"><div class="card-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h3>Minimax with alpha‑beta pruning</h3><span class="card-desc">Try the Minimax algorithm on a search tree. Follow the updates to the alpha-beta values during the search and see how alpha-beta pruning makes the search more efficient.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 2 · Decision algorithms for games</span><span class="tag-pages">(pp. 66–74)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="card" data-accent="blue" href="/minimax_ENG"><div class="card-viz"><svg class="cviz" data-v="minimax" viewBox="-32.4 -3.0 236.3 81.5" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <path class="iv-e" d="M100 16 C 100 42, 40 42, 40 66"/>
+      <path class="iv-e" d="M100 16 C 100 42, 100 42, 100 66"/>
+      <path class="iv-e" d="M100 16 C 100 42, 160 42, 160 66"/>
+      <polygon class="iv-max" points="100,7 111,24 89,24"/>
+      <polygon class="iv-min" points="40,75 51,58 29,58"/>
+      <polygon class="iv-min" points="100,75 111,58 89,58"/>
+      <polygon class="iv-min" points="160,75 171,58 149,58"/>
+      <circle class="iv-dot" r="4"/>
+    </svg></div><h3>Minimax with alpha‑beta pruning</h3><span class="card-desc">Try the Minimax algorithm on a search tree. Follow the updates to the alpha-beta values during the search and see how alpha-beta pruning makes the search more efficient.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 2 · Decision algorithms for games</span><span class="tag-pages">(pp. 66–74)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
-      <a class="card" data-accent="blue" href="/beslutstrad_ENG"><div class="card-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2.2"/><line x1="10.4" y1="5.5" x2="6.4" y2="9.3"/><line x1="13.6" y1="5.5" x2="15.8" y2="9.5"/><rect x="3.2" y="9.8" width="5" height="5" rx="1.3" fill="rgba(96,165,250,0.35)"/><circle cx="17" cy="12" r="2.2"/><line x1="15.8" y1="13.7" x2="13.8" y2="17.1"/><line x1="18.2" y1="13.7" x2="19.8" y2="17.1"/><rect x="9.4" y="17.4" width="4.6" height="4.6" rx="1.2" fill="rgba(96,165,250,0.35)"/><rect x="17.6" y="17.4" width="4.6" height="4.6" rx="1.2" fill="rgba(96,165,250,0.35)"/></svg></div><h3>Decision trees</h3><span class="card-desc">Build a decision tree that tells venomous snakes from harmless ones. Test it on snakes it has never seen and compare it with the tree an algorithm builds.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 2 · Decision trees</span><span class="tag-pages">(p. 47)</span><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 3 · Decision trees</span><span class="tag-pages">(pp. 91–94)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="card" data-accent="blue" href="/beslutstrad_ENG"><div class="card-viz"><svg class="cviz" data-v="dtree" viewBox="-50.2 -3.0 250.8 86.5" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+<path class="iv-e" d="M100 16 L58 44"/><path class="iv-e" d="M100 16 L142 44"/>
+<path class="iv-e" d="M58 44 L34 72"/><path class="iv-e" d="M58 44 L82 72"/>
+<circle class="iv-q" cx="100" cy="16" r="8"/><circle class="iv-q" cx="58" cy="44" r="7"/>
+<rect class="iv-leaf ok" x="134" y="36" width="16" height="16" rx="4"/>
+<rect class="iv-leaf no" x="26" y="64" width="16" height="16" rx="4"/>
+<rect class="iv-leaf ok" x="74" y="64" width="16" height="16" rx="4"/>
+<circle class="iv-dot" r="3.5"><animateMotion dur="4.4s" repeatCount="indefinite"
+  path="M100 16 L58 44 L34 72 L58 44 L82 72 L58 44 L100 16 L142 44 L100 16"/></circle></svg></div><h3>Decision trees</h3><span class="card-desc">Build a decision tree that tells venomous snakes from harmless ones. Test it on snakes it has never seen and compare it with the tree an algorithm builds.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 2 · Decision trees</span><span class="tag-pages">(p. 47)</span><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 3 · Decision trees</span><span class="tag-pages">(pp. 91–94)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
     </div>
   </section>
@@ -402,43 +731,86 @@
     <div class="subgroup-kicker">Supervised learning</div>
     <div class="grid grid-sims grid-single">
 
-      <a class="card" data-accent="violet" href="/naive-bayes-lab_ENG"><div class="card-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22 4 12 13 2 4"/><circle class="bayes-dot bayes-dot-a" cx="12" cy="12" r="1.1" fill="currentColor" stroke="none"/><circle class="bayes-dot bayes-dot-b" cx="12" cy="12" r="1.1" fill="currentColor" stroke="none"/></svg></div><h3>The Naïve Bayes lab</h3><span class="card-desc">Train a Naive Bayes classifier to tell spam from ordinary email and see the mathematics behind the classification.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 3 · Naive Bayes classifier</span><span class="tag-pages">(pp. 107–110)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="card" data-accent="violet" href="/naive-bayes-lab_ENG"><div class="card-viz"><svg class="cviz" data-v="bayes" viewBox="2.0 4.5 205.9 71.0" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <rect x="18" y="52" width="52" height="20" rx="5" fill="rgba(255,106,94,.1)" stroke="#ff6a5e" stroke-width="1.3"/>
+      <text x="44" y="65.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7.5" fill="#ff6a5e" font-weight="700">SKRÄP</text>
+      <rect x="140" y="52" width="52" height="20" rx="5" fill="rgba(52,211,153,.08)" stroke="#34d399" stroke-width="1.3"/>
+      <text x="166" y="65.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7.5" fill="#34d399" font-weight="700">EJ SKRÄP</text>
+      <g class="iv-mail m1"><rect x="91" y="8" width="28" height="19" rx="3.5" fill="rgba(14,18,34,.9)" stroke="#ff6a5e" stroke-width="1.4"/><polyline points="93,10.5 105,19 117,10.5" fill="none" stroke="#ff6a5e" stroke-width="1.4"/></g>
+      <g class="iv-mail m2"><rect x="91" y="8" width="28" height="19" rx="3.5" fill="rgba(14,18,34,.9)" stroke="#34d399" stroke-width="1.4"/><polyline points="93,10.5 105,19 117,10.5" fill="none" stroke="#34d399" stroke-width="1.4"/></g>
+      <g class="iv-mail m3"><rect x="91" y="8" width="28" height="19" rx="3.5" fill="rgba(14,18,34,.9)" stroke="#ff6a5e" stroke-width="1.4"/><polyline points="93,10.5 105,19 117,10.5" fill="none" stroke="#ff6a5e" stroke-width="1.4"/></g>
+    </svg></div><h3>The Naïve Bayes lab</h3><span class="card-desc">Train a Naive Bayes classifier to tell spam from ordinary email and see the mathematics behind the classification.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 3 · Naive Bayes classifier</span><span class="tag-pages">(pp. 107–110)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
     </div>
 
     <div class="subgroup-kicker">Neural networks</div>
     <div class="grid grid-sims">
 
-      <a class="card" data-accent="violet" href="/neuralt-natverk_ENG"><div class="card-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle class="nn-node nn-l1" cx="4" cy="8" r="2.2"/><circle class="nn-node nn-l1" cx="4" cy="16" r="2.2"/><circle class="nn-node nn-l2" cx="12" cy="5" r="2.2"/><circle class="nn-node nn-l2" cx="12" cy="12" r="2.2"/><circle class="nn-node nn-l2" cx="12" cy="19" r="2.2"/><circle class="nn-node nn-l3" cx="20" cy="12" r="2.2"/><line x1="6.2" y1="8" x2="9.8" y2="5.5"/><line x1="6.2" y1="8" x2="9.8" y2="12"/><line x1="6.2" y1="16" x2="9.8" y2="12"/><line x1="6.2" y1="16" x2="9.8" y2="19"/><line x1="14.2" y1="5" x2="17.8" y2="11"/><line x1="14.2" y1="12" x2="17.8" y2="12"/><line x1="14.2" y1="19" x2="17.8" y2="13"/></svg></div><h3>The neural networks lab</h3><span class="card-desc">Build, train and explore a neural network. Follow the computations in each node, then let the network make predictions based on the input.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 3 · Neural networks</span><span class="tag-pages">(pp. 112–117)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="card" data-accent="violet" href="/neuralt-natverk_ENG"><div class="card-viz"><svg class="cviz" data-v="nn" viewBox="-5.7 5.0 236.3 81.5" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><g class="iv-base"><line class="iv-edge" x1="24" y1="30" x2="84" y2="16" pathLength="100"/><line class="iv-edge" x1="24" y1="30" x2="84" y2="46" pathLength="100"/><line class="iv-edge" x1="24" y1="30" x2="84" y2="76" pathLength="100"/><line class="iv-edge" x1="24" y1="62" x2="84" y2="16" pathLength="100"/><line class="iv-edge" x1="24" y1="62" x2="84" y2="46" pathLength="100"/><line class="iv-edge" x1="24" y1="62" x2="84" y2="76" pathLength="100"/><line class="iv-edge" x1="84" y1="16" x2="146" y2="30" pathLength="100"/><line class="iv-edge" x1="84" y1="16" x2="146" y2="62" pathLength="100"/><line class="iv-edge" x1="84" y1="46" x2="146" y2="30" pathLength="100"/><line class="iv-edge" x1="84" y1="46" x2="146" y2="62" pathLength="100"/><line class="iv-edge" x1="84" y1="76" x2="146" y2="30" pathLength="100"/><line class="iv-edge" x1="84" y1="76" x2="146" y2="62" pathLength="100"/><line class="iv-edge" x1="146" y1="30" x2="200" y2="46" pathLength="100"/><line class="iv-edge" x1="146" y1="62" x2="200" y2="46" pathLength="100"/></g><g class="iv-flow f1"><line class="iv-pulse" x1="24" y1="30" x2="84" y2="16" pathLength="100"/><line class="iv-pulse" x1="24" y1="30" x2="84" y2="46" pathLength="100"/><line class="iv-pulse" x1="24" y1="30" x2="84" y2="76" pathLength="100"/><line class="iv-pulse" x1="24" y1="62" x2="84" y2="16" pathLength="100"/><line class="iv-pulse" x1="24" y1="62" x2="84" y2="46" pathLength="100"/><line class="iv-pulse" x1="24" y1="62" x2="84" y2="76" pathLength="100"/></g><g class="iv-flow f2"><line class="iv-pulse" x1="84" y1="16" x2="146" y2="30" pathLength="100"/><line class="iv-pulse" x1="84" y1="16" x2="146" y2="62" pathLength="100"/><line class="iv-pulse" x1="84" y1="46" x2="146" y2="30" pathLength="100"/><line class="iv-pulse" x1="84" y1="46" x2="146" y2="62" pathLength="100"/><line class="iv-pulse" x1="84" y1="76" x2="146" y2="30" pathLength="100"/><line class="iv-pulse" x1="84" y1="76" x2="146" y2="62" pathLength="100"/></g><g class="iv-flow f3"><line class="iv-pulse" x1="146" y1="30" x2="200" y2="46" pathLength="100"/><line class="iv-pulse" x1="146" y1="62" x2="200" y2="46" pathLength="100"/></g><g class="iv-nodes n0"><circle cx="24" cy="30" r="7"/><circle cx="24" cy="62" r="7"/></g><g class="iv-nodes n1"><circle cx="84" cy="16" r="7"/><circle cx="84" cy="46" r="7"/><circle cx="84" cy="76" r="7"/></g><g class="iv-nodes n2"><circle cx="146" cy="30" r="7"/><circle cx="146" cy="62" r="7"/></g><g class="iv-nodes n3"><circle cx="200" cy="46" r="8.5"/></g></svg></div><h3>The neural networks lab</h3><span class="card-desc">Build, train and explore a neural network. Follow the computations in each node, then let the network make predictions based on the input.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 3 · Neural networks</span><span class="tag-pages">(pp. 112–117)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
-      <a class="card" data-accent="violet" href="/trana-neuralt-natverk_ENG"><div class="card-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle class="nn-node nn-l1" cx="4" cy="6.5" r="2"/><circle class="nn-node nn-l1" cx="4" cy="14.5" r="2"/><circle class="nn-node nn-l2" cx="12" cy="4" r="2"/><circle class="nn-node nn-l2" cx="12" cy="10.5" r="2"/><circle class="nn-node nn-l2" cx="12" cy="17" r="2"/><circle class="nn-node nn-l3" cx="20" cy="10.5" r="2"/><line x1="6" y1="6.5" x2="10" y2="4.4" opacity=".55"/><line x1="6" y1="6.5" x2="10" y2="10.5" opacity=".55"/><line x1="6" y1="14.5" x2="10" y2="10.5" opacity=".55"/><line x1="6" y1="14.5" x2="10" y2="17" opacity=".55"/><line x1="14" y1="4" x2="18" y2="9.7" opacity=".55"/><line x1="14" y1="10.5" x2="18" y2="10.5" opacity=".55"/><line x1="14" y1="17" x2="18" y2="11.3" opacity=".55"/><path class="bp-arrow" d="M19 20.5c-4.5 2.6-10.5 2.6-15 0" stroke-width="1.5"/><path class="bp-arrow" d="M6 19.2l-2 1.3.9 2.1" stroke-width="1.5"/></svg></div><h3>Train a neural network</h3><span class="card-desc">Follow a training round from beginning to end – forward pass, loss, backpropagation and weight updates.</span><span class="card-badges"><span class="diff-tag" title="Backpropagation isn't part of the base course, but deepens the understanding of how the network actually learns">Advanced</span></span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 3 · Neural networks</span><span class="tag-pages">(pp. 112–117)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="card" data-accent="violet" href="/trana-neuralt-natverk_ENG"><div class="card-viz"><svg class="cviz" data-v="nntrain" viewBox="3.1 19.0 194.3 67.0" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+<g class="iv-net">
+<line class="iv-w" x1="40" y1="30" x2="100" y2="30"/><line class="iv-w" x1="40" y1="30" x2="100" y2="62"/>
+<line class="iv-w" x1="40" y1="62" x2="100" y2="30"/><line class="iv-w" x1="40" y1="62" x2="100" y2="62"/>
+<line class="iv-w" x1="100" y1="30" x2="160" y2="46"/><line class="iv-w" x1="100" y1="62" x2="160" y2="46"/>
+<circle class="iv-n" cx="40" cy="30" r="7"/><circle class="iv-n" cx="40" cy="62" r="7"/>
+<circle class="iv-n" cx="100" cy="30" r="7"/><circle class="iv-n" cx="100" cy="62" r="7"/>
+<circle class="iv-n iv-out" cx="160" cy="46" r="8"/></g>
+<path class="iv-fw" d="M28 82 H172" pathLength="100"/>
+<path class="iv-bw" d="M172 82 H28" pathLength="100"/></svg></div><h3>Train a neural network</h3><span class="card-desc">Follow a training round from beginning to end – forward pass, loss, backpropagation and weight updates.</span><span class="card-badges"><span class="diff-tag" title="Backpropagation isn't part of the base course, but deepens the understanding of how the network actually learns">Advanced</span></span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 3 · Neural networks</span><span class="tag-pages">(pp. 112–117)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
-      <a class="card" data-accent="violet" href="/beslutsgranser_ENG"><div class="card-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="7" cy="8" r="2" fill="rgba(251,113,133,0.5)" stroke="none"/><circle cx="10" cy="14" r="2" fill="rgba(251,113,133,0.5)" stroke="none"/><circle cx="16" cy="10" r="2" fill="rgba(96,165,250,0.5)" stroke="none"/><circle cx="18" cy="16" r="2" fill="rgba(96,165,250,0.5)" stroke="none"/><line class="boundary-line" x1="3" y1="20" x2="21" y2="4" stroke-dasharray="3 3" opacity="0.6"/></svg></div><h3>Visualizing decision boundaries</h3><span class="card-desc">Place data points and compare how linear models and neural networks draw the boundaries between classes, and why neural networks are often needed.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 3 · Neural networks</span><span class="tag-pages">(pp. 112–117)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="card" data-accent="violet" href="/beslutsgranser_ENG"><div class="card-viz"><svg class="cviz" data-v="bounds" viewBox="-12.3 13.0 213.2 73.5" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+<line class="iv-line" x1="34" y1="78" x2="168" y2="16" pathLength="100"/>
+<g class="iv-a"><circle cx="52" cy="26" r="4"/><circle cx="74" cy="20" r="4"/><circle cx="46" cy="42" r="4"/>
+<circle cx="70" cy="38" r="4"/><circle cx="92" cy="24" r="4"/></g>
+<g class="iv-b"><circle cx="112" cy="66" r="4"/><circle cx="134" cy="60" r="4"/><circle cx="126" cy="76" r="4"/>
+<circle cx="152" cy="70" r="4"/><circle cx="104" cy="80" r="4"/></g></svg></div><h3>Visualizing decision boundaries</h3><span class="card-desc">Place data points and compare how linear models and neural networks draw the boundaries between classes, and why neural networks are often needed.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 3 · Neural networks</span><span class="tag-pages">(pp. 112–117)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
-      <a class="card" data-accent="violet" href="/datorseende-CNN_ENG"><div class="card-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect x="9" y="2" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect x="16" y="2" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect x="2" y="9" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect x="9" y="9" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect x="16" y="9" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect x="2" y="16" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect x="9" y="16" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect x="16" y="16" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect x="1.5" y="1.5" width="14" height="14" rx="2" stroke-width="2.1"/></svg></div><h3>Computer vision with CNNs</h3><span class="card-desc">Follow how an image-recognition model reads an image – from pixels through filters and feature maps to a classification. See how filters catch different patterns.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> CNN isn't covered in the textbook</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="card" data-accent="violet" href="/datorseende-CNN_ENG"><div class="card-viz"><svg class="cviz" data-v="cnn" viewBox="7.4 18.0 165.3 57.0" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+<g class="iv-px"><rect x="18" y="22" width="11" height="11" rx="2"/><rect x="31" y="22" width="11" height="11" rx="2"/><rect x="44" y="22" width="11" height="11" rx="2"/><rect x="57" y="22" width="11" height="11" rx="2"/><rect x="18" y="35" width="11" height="11" rx="2"/><rect x="31" y="35" width="11" height="11" rx="2"/><rect x="44" y="35" width="11" height="11" rx="2"/><rect x="57" y="35" width="11" height="11" rx="2"/><rect x="18" y="48" width="11" height="11" rx="2"/><rect x="31" y="48" width="11" height="11" rx="2"/><rect x="44" y="48" width="11" height="11" rx="2"/><rect x="57" y="48" width="11" height="11" rx="2"/><rect x="18" y="61" width="11" height="11" rx="2"/><rect x="31" y="61" width="11" height="11" rx="2"/><rect x="44" y="61" width="11" height="11" rx="2"/><rect x="57" y="61" width="11" height="11" rx="2"/></g>
+<rect class="iv-k" x="18" y="22" width="24" height="24" rx="3"/>
+<path class="iv-arr" d="M84 46 H108"/><path class="iv-arr" d="M102 41 L108 46 L102 51"/>
+<g class="iv-fm"><rect x="120" y="28" width="13" height="13" rx="2.5"/><rect x="135" y="28" width="13" height="13" rx="2.5"/><rect x="150" y="28" width="13" height="13" rx="2.5"/><rect x="120" y="43" width="13" height="13" rx="2.5"/><rect x="135" y="43" width="13" height="13" rx="2.5"/><rect x="150" y="43" width="13" height="13" rx="2.5"/><rect x="120" y="58" width="13" height="13" rx="2.5"/><rect x="135" y="58" width="13" height="13" rx="2.5"/><rect x="150" y="58" width="13" height="13" rx="2.5"/></g></svg></div><h3>Computer vision with CNNs</h3><span class="card-desc">Follow how an image-recognition model reads an image – from pixels through filters and feature maps to a classification. See how filters catch different patterns.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> CNN isn't covered in the textbook</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
     </div>
 
     <div class="subgroup-kicker">Unsupervised learning</div>
     <div class="grid grid-sims grid-single">
 
-      <a class="card" data-accent="violet" href="/k-means_ENG"><div class="card-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="19" x2="21" y2="5" stroke-dasharray="3 3" opacity="0.45"/><circle cx="5.5" cy="5" r="1.3" fill="currentColor" stroke="none"/><circle cx="10.2" cy="4.4" r="1.3" fill="currentColor" stroke="none"/><circle cx="4.6" cy="9.6" r="1.3" fill="currentColor" stroke="none"/><circle cx="7.6" cy="7.2" r="2.6"/><path d="M6.4 7.2h2.4M7.6 6v2.4"/><circle cx="18.5" cy="19" r="1.3" fill="currentColor" stroke="none"/><circle cx="13.8" cy="19.6" r="1.3" fill="currentColor" stroke="none"/><circle cx="19.4" cy="14.4" r="1.3" fill="currentColor" stroke="none"/><circle cx="16.4" cy="16.8" r="2.6"/><path d="M15.2 16.8h2.4M16.4 15.6v2.4"/></svg></div><h3>k‑means clustering</h3><span class="card-desc">Explore how an algorithm finds patterns in data without knowing what it is looking for. Run it step by step and see how the choice of k shapes the grouping.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 3 · The k‑means algorithm</span><span class="tag-pages">(pp. 120–122)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="card" data-accent="violet" href="/k-means_ENG"><div class="card-viz"><svg class="cviz" data-v="kmeans" viewBox="-29.0 5.5 258.1 89.0" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="iv-b" d="M100 24V3"/><path class="iv-b" d="M100 24 33 91"/><path class="iv-b" d="M100 24 167 91"/><g class="iv-p g1" fill="#ff9f4a"><circle cx="36" cy="21" r="2.5"/><circle cx="43" cy="24" r="2.5"/><circle cx="45" cy="34" r="2.5"/><circle cx="48" cy="18" r="2.5"/><circle cx="53" cy="11" r="2.5"/><circle cx="54" cy="32" r="2.5"/><circle cx="59" cy="22" r="2.5"/><circle cx="63" cy="30" r="2.5"/></g><g class="iv-p g2" fill="#4ecfff"><circle cx="140" cy="28" r="2.5"/><circle cx="142" cy="21" r="2.5"/><circle cx="144" cy="36" r="2.5"/><circle cx="150" cy="17" r="2.5"/><circle cx="150" cy="30" r="2.5"/><circle cx="152" cy="38" r="2.5"/><circle cx="159" cy="22" r="2.5"/><circle cx="161" cy="35" r="2.5"/></g><g class="iv-p g3" fill="#ff5f9e"><circle cx="93" cy="70" r="2.5"/><circle cx="95" cy="81" r="2.5"/><circle cx="98" cy="60" r="2.5"/><circle cx="102" cy="69" r="2.5"/><circle cx="105" cy="78" r="2.5"/><circle cx="107" cy="63" r="2.5"/><circle cx="110" cy="84" r="2.5"/><circle cx="114" cy="73" r="2.5"/></g><g class="iv-k k1"><circle class="iv-c" cx="50" cy="24" r="5.4" stroke="#ff9f4a"/><path class="iv-x" d="M47.4 24h5.2M50 21.4v5.2" stroke="#ff9f4a"/></g><g class="iv-k k2"><circle class="iv-c" cx="150" cy="24" r="5.4" stroke="#4ecfff"/><path class="iv-x" d="M147.4 24h5.2M150 21.4v5.2" stroke="#4ecfff"/></g><g class="iv-k k3"><circle class="iv-c" cx="100" cy="74" r="5.4" stroke="#ff5f9e"/><path class="iv-x" d="M97.4 74h5.2M100 71.4v5.2" stroke="#ff5f9e"/></g></svg></div><h3>k‑means clustering</h3><span class="card-desc">Explore how an algorithm finds patterns in data without knowing what it is looking for. Run it step by step and see how the choice of k shapes the grouping.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 3 · The k‑means algorithm</span><span class="tag-pages">(pp. 120–122)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
     </div>
 
     <div class="subgroup-kicker">Reinforcement learning</div>
     <div class="grid grid-sims">
 
-      <a class="card" data-accent="violet" href="/q-learning_ENG"><div class="card-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect x="9" y="2" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect x="16" y="2" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect x="2" y="9" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect x="9" y="9" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect x="16" y="9" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect x="2" y="16" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect x="9" y="16" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect x="16" y="16" width="6" height="6" rx="1" stroke-dasharray="2 2" opacity=".45"/><rect class="q-agent" x="3" y="3" width="4" height="4" rx="1" fill="currentColor" stroke="none"/></svg></div><h3>Q‑learning simulation</h3><span class="card-desc">Train an agent to navigate a grid using reinforcement learning. Follow how the agent learns the best path by trying different actions and updating its Q-values.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 3 · Reinforcement learning</span><span class="tag-pages">(pp. 124–130)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="card" data-accent="violet" href="/q-learning_ENG"><div class="card-viz"><svg class="cviz" data-v="qlearn" viewBox="-15.4 -3.0 210.2 72.5" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <rect class="iv-cell" x="10" y="26" width="40" height="40" rx="6"/>
+    <rect class="iv-cell" x="53" y="26" width="40" height="40" rx="6"/>
+    <rect class="iv-cell" x="96" y="26" width="40" height="40" rx="6"/>
+    <rect class="iv-cell iv-goal" x="139" y="26" width="40" height="40" rx="6"/>
+    <circle class="iv-coin" cx="73" cy="46" r="5"/>
+    <circle class="iv-agent" r="8">
+      <animateMotion dur="4s" repeatCount="indefinite" path="M30 46 L73 46 L116 46 L159 46 L159 46"/>
+    </circle>
+  </svg></div><h3>Q‑learning simulation</h3><span class="card-desc">Train an agent to navigate a grid using reinforcement learning. Follow how the agent learns the best path by trying different actions and updating its Q-values.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 3 · Reinforcement learning</span><span class="tag-pages">(pp. 124–130)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
-      <a class="card" data-accent="violet" href="/nim_ENG"><div class="card-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="6" x2="5" y2="18"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="13" y1="6" x2="13" y2="18"/><line x1="17" y1="3" x2="17" y2="21"/><line x1="21" y1="6" x2="21" y2="18"/></svg></div><h3>NIM with reinforcement learning</h3><span class="card-desc">Watch an AI system learn to play NIM from scratch. Train it over different numbers of games, follow the strategy forming in a Q-table and try playing against it.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 3 · Reinforcement learning</span><span class="tag-pages">(pp. 124–130)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="card" data-accent="violet" href="/nim_ENG"><div class="card-viz"><svg class="cviz" data-v="nim" viewBox="23.0 23.0 148.5 45.5" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+<g class="iv-st"><rect class="iv-s s0" x="26" y="26" width="7" height="40" rx="3.5"/><rect class="iv-s s1" x="43" y="26" width="7" height="40" rx="3.5"/><rect class="iv-s s2" x="60" y="26" width="7" height="40" rx="3.5"/><rect class="iv-s s3" x="77" y="26" width="7" height="40" rx="3.5"/><rect class="iv-s s4" x="94" y="26" width="7" height="40" rx="3.5"/><rect class="iv-s s5" x="111" y="26" width="7" height="40" rx="3.5"/><rect class="iv-s s6" x="128" y="26" width="7" height="40" rx="3.5"/><rect class="iv-s s7" x="145" y="26" width="7" height="40" rx="3.5"/><rect class="iv-s s8" x="162" y="26" width="7" height="40" rx="3.5"/></g></svg></div><h3>NIM with reinforcement learning</h3><span class="card-desc">Watch an AI system learn to play NIM from scratch. Train it over different numbers of games, follow the strategy forming in a Q-table and try playing against it.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 3 · Reinforcement learning</span><span class="tag-pages">(pp. 124–130)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
     </div>
 
     <div class="subgroup-kicker">Language models</div>
     <div class="grid grid-sims grid-single">
 
-      <a class="card" data-accent="violet" href="/sprakmodellen_ENG"><div class="card-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4V5z"/><path d="M8 9h5"/><path d="M8 13h3"/><rect class="lm-cursor" x="13.3" y="12" width="1.6" height="2.6" rx="0.3" fill="currentColor" stroke="none"/></svg></div><h3>The language model lab</h3><span class="card-desc">Build your own small language model from any text and see how it picks the next word – word by word.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 4 · How a language model works</span><span class="tag-pages">(pp. 141–142)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="card" data-accent="violet" href="/sprakmodellen_ENG"><div class="card-viz"><svg class="cviz" data-v="lm" viewBox="10.5 30.0 179.0 31.5" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+<rect class="iv-tok t1" x="14" y="34" width="38" height="24" rx="6"/>
+<rect class="iv-tok t2" x="58" y="34" width="34" height="24" rx="6"/>
+<rect class="iv-tok t3" x="98" y="34" width="30" height="24" rx="6"/>
+<rect class="iv-next" x="134" y="34" width="52" height="24" rx="6"/>
+<g class="iv-bar"><rect x="140" y="40" width="26" height="4" rx="2"/>
+<rect x="140" y="48" width="17" height="4" rx="2"/></g>
+<circle class="iv-car" cx="181" cy="46" r="3"/></svg></div><h3>The language model lab</h3><span class="card-desc">Build your own small language model from any text and see how it picks the next word – word by word.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 4 · How a language model works</span><span class="tag-pages">(pp. 141–142)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
     </div>
   </section>
@@ -448,9 +820,26 @@
     <div class="section-header"><div class="section-icon" style="background:var(--accent-amber-bg);color:var(--accent-amber);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M6 7l-3 6a3 3 0 006 0z"/><path d="M18 7l-3 6a3 3 0 006 0z"/><circle cx="12" cy="4" r="1.4" fill="currentColor" stroke="none"/></svg></div><h2>AI and society</h2></div>
     <div class="grid grid-sims">
 
-      <a class="card" data-accent="amber" href="/bias-labbet_ENG"><div class="card-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M6 7l-3 6a3 3 0 006 0z"/><path d="M18 7l-3 6a3 3 0 006 0z"/><circle cx="12" cy="4" r="1.4" fill="currentColor" stroke="none"/></svg></div><h3>The bias lab</h3><span class="card-desc">Train a recruitment AI on skewed historical data – discover how discrimination arises and how hard it is to get rid of.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 1 · Bias</span><span class="tag-pages">(pp. 31–32)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="card" data-accent="amber" href="/bias-labbet_ENG"><div class="card-viz"><svg class="cviz" data-v="bias" viewBox="12.2 16.5 171.1 59.0" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+<g class="iv-cv"><rect x="22" y="20" width="46" height="52" rx="6"/>
+<path d="M32 34h26M32 44h26M32 54h16"/></g>
+<g class="iv-cv"><rect x="82" y="20" width="46" height="52" rx="6"/>
+<path d="M92 34h26M92 44h26M92 54h16"/></g>
+<path class="iv-arr" d="M74 46 H78"/><path class="iv-arr" d="M134 46 H150"/>
+<circle class="iv-res ok" cx="164" cy="30" r="9"/>
+<circle class="iv-res no" cx="164" cy="62" r="9"/>
+<path class="iv-arr2" d="M70 34 L152 30"/><path class="iv-arr2" d="M130 58 L152 62"/></svg></div><h3>The bias lab</h3><span class="card-desc">Train a recruitment AI on skewed historical data – discover how discrimination arises and how hard it is to get rid of.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 1 · Bias</span><span class="tag-pages">(pp. 31–32)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
-      <a class="card" data-accent="amber" href="/tidslinjen_ENG"><div class="card-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"/><circle cx="6" cy="12" r="2" fill="rgba(251,191,36,0.4)" stroke="currentColor"/><circle cx="12" cy="12" r="2" fill="rgba(251,191,36,0.4)" stroke="currentColor"/><circle cx="18" cy="12" r="2" fill="rgba(251,191,36,0.4)" stroke="currentColor"/><line x1="6" y1="10" x2="6" y2="6"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="18" y1="10" x2="18" y2="6"/></svg></div><h3>The AI timeline – When was that?</h3><span class="card-desc">Test your knowledge of AI history. Place events on a timeline and score points. Choose to practice solo or challenge a friend in two-player mode.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 1 · The history of AI</span><span class="tag-pages">(pp. 14–19)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="card" data-accent="amber" href="/tidslinjen_ENG"><div class="card-viz"><svg class="cviz" data-v="timeline" viewBox="14.0 16.5 171.5 51.0" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+<line class="iv-ax" x1="18" y1="60" x2="182" y2="60"/>
+<g class="iv-tick"><line x1="44" y1="55" x2="44" y2="65"/><line x1="88" y1="55" x2="88" y2="65"/>
+<line x1="132" y1="55" x2="132" y2="65"/><line x1="176" y1="55" x2="176" y2="65"/></g>
+<rect class="iv-card c1" x="28" y="20" width="32" height="20" rx="5"/>
+<rect class="iv-card c2" x="72" y="20" width="32" height="20" rx="5"/>
+<rect class="iv-card c3" x="116" y="20" width="32" height="20" rx="5"/>
+<circle class="iv-pin p1" cx="44" cy="60" r="4"/>
+<circle class="iv-pin p2" cx="88" cy="60" r="4"/>
+<circle class="iv-pin p3" cx="132" cy="60" r="4"/></svg></div><h3>The AI timeline – When was that?</h3><span class="card-desc">Test your knowledge of AI history. Place events on a timeline and score points. Choose to practice solo or challenge a friend in two-player mode.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Ch. 1 · The history of AI</span><span class="tag-pages">(pp. 14–19)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
     </div>
   </section>
@@ -542,6 +931,38 @@
   });
 })();
 
+/* ── Card vignettes ──
+   CSS pauses animations written with @keyframes, but not those declared
+   as <animateMotion> inside the SVG. Those are paused on the element
+   itself and started when the pointer reaches the card. */
+(function(){
+  const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.card-viz .cviz').forEach(function(svg){
+    if(reduced){ if(svg.pauseAnimations) svg.pauseAnimations(); return; }
+    if(svg.pauseAnimations) svg.pauseAnimations();
+    const card=svg.closest('.card');
+    if(!card)return;
+    const play=function(){ if(svg.unpauseAnimations) svg.unpauseAnimations(); };
+    const stop=function(){
+      if(!svg.pauseAnimations)return;
+      svg.pauseAnimations();
+      /* Reset, so the motion starts from the beginning next time
+         rather than mid-cycle. */
+      if(svg.setCurrentTime) svg.setCurrentTime(0);
+    };
+    card.addEventListener('mouseenter',play);
+    card.addEventListener('mouseleave',stop);
+    card.addEventListener('focusin',play);
+    card.addEventListener('focusout',stop);
+    /* Touch screens have no hover; there it is enough that the motion
+       starts when the card comes into view. */
+    if(window.matchMedia&&window.matchMedia('(hover:none)').matches&&'IntersectionObserver' in window){
+      new IntersectionObserver(function(es){
+        es.forEach(function(e){ e.isIntersecting?play():stop(); });
+      },{threshold:.35}).observe(card);
+    }
+  });
+})();
 </script>
 </body>
 </html>
