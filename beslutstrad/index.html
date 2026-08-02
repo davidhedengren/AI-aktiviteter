@@ -454,14 +454,47 @@
   /* step 6 — reflect */
   .whyhead,.reflecthead{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--text-primary);margin:20px 0 4px}
   .reflecthead{margin-top:24px}
-  .reflectgrid{display:flex;gap:14px;flex-wrap:wrap}
-  .rcard{flex:1;min-width:240px;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:16px 18px;background:rgba(255,255,255,.02)}
-  .rcard.good{border-color:rgba(52,211,153,.28);background:var(--emerald-bg)}
-  .rcard.warn{border-color:rgba(251,191,36,.28);background:rgba(251,191,36,.05)}
-  .rcard .rh{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;margin-bottom:6px;color:var(--text-primary)}
+  .reflectgrid{display:flex;gap:16px;flex-wrap:wrap;perspective:1400px}
+  .rcard{flex:1 1 260px;min-width:240px;position:relative;isolation:isolate;overflow:hidden;
+    border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:20px 20px 19px;
+    background:linear-gradient(168deg,rgba(40,51,84,.60),rgba(11,16,29,.74));
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    box-shadow:0 24px 48px -24px rgba(0,0,0,.88),0 2px 6px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.10);
+    transition:transform .45s var(--ease-spring),box-shadow .45s var(--ease-out),border-color .3s}
+  .rcard::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;
+    background:radial-gradient(130% 82% at 50% -18%,rgba(96,165,250,.17),transparent 62%)}
+  .rcard::after{content:'';position:absolute;left:22px;right:22px;top:0;height:1px;pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent)}
+  .rcard:hover{transform:translateY(-6px) rotateX(2.4deg);border-color:rgba(255,255,255,.19);
+    box-shadow:0 38px 68px -24px rgba(0,0,0,.94),0 2px 6px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.15)}
+  .rcard.good{border-color:rgba(52,211,153,.32)}
+  .rcard.good::before{background:radial-gradient(130% 82% at 50% -18%,rgba(52,211,153,.21),transparent 62%)}
+  .rcard.warn{border-color:rgba(251,191,36,.32)}
+  .rcard.warn::before{background:radial-gradient(130% 82% at 50% -18%,rgba(251,191,36,.19),transparent 62%)}
+  .rcard .rh{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15.5px;margin-bottom:8px;color:var(--text-primary);letter-spacing:-.01em}
   .rcard.good .rh{color:var(--emerald)}.rcard.warn .rh{color:var(--amber)}
-  .rcard p{font-size:14px;line-height:1.62;color:var(--text-secondary);margin:0}
+  .rcard p{font-size:14px;line-height:1.64;color:var(--text-secondary);margin:0}
   .rcard p b{color:var(--text-primary);font-weight:600}
+  @media(prefers-reduced-motion:no-preference){
+    .rcard{animation:rcIn .62s var(--ease-spring) backwards}
+    .rcard:nth-child(1){animation-delay:.03s}.rcard:nth-child(2){animation-delay:.10s}
+    .rcard:nth-child(3){animation-delay:.17s}.rcard:nth-child(4){animation-delay:.24s}
+    .rcard:nth-child(5){animation-delay:.31s}}
+  @keyframes rcIn{from{opacity:0;transform:translateY(20px) rotateX(9deg) scale(.97)}to{opacity:1;transform:none}}
+  /* ── beskärning: visa vad som klipps bort innan det försvinner ── */
+  .tnodeWrap.cut .tnode-inner{animation:cutOut .55s var(--ease-out) .16s both}
+  @keyframes cutOut{0%{opacity:1;transform:none}30%{opacity:1;transform:translateY(3px) scale(.985)}
+    100%{opacity:0;transform:translateY(30px) scale(.68)}}
+  .tedge.cut{stroke:var(--violet);animation:cutEdge .52s var(--ease-out) both}
+  @keyframes cutEdge{0%{opacity:1;stroke-width:2.2}26%{opacity:1;stroke-width:3.8}100%{opacity:0;stroke-width:1}}
+  .eLabel.cut{animation:cutFade .3s var(--ease-out) .06s both}
+  @keyframes cutFade{to{opacity:0;transform:scale(.8)}}
+  .tnodeWrap.cutparent .tnode-inner{animation:cutParent 1s var(--ease-out) both}
+  @keyframes cutParent{0%,100%{filter:none}40%{filter:drop-shadow(0 0 15px rgba(167,139,250,.9))}}
+  .tnodeWrap.justpruned .tnode-inner{animation:nodeGrow .5s var(--ease-spring) both;transform-box:fill-box;transform-origin:center}
+  @media(prefers-reduced-motion:reduce){
+    .rcard{animation:none}
+    .tnodeWrap.cut .tnode-inner,.tedge.cut,.eLabel.cut,.tnodeWrap.cutparent .tnode-inner,.tnodeWrap.justpruned .tnode-inner{animation:none!important}}
 
   /* step 4 — train-first test */
   .trainmini{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin:14px 0}
@@ -1160,9 +1193,9 @@ function renderTree(container,root,st){
     if(n.type==='split'){for(const k of Object.keys(n.children).sort()){const c=n.children[k];
       const x1=n._x+NW/2+PAD,y1=n._y+NH+PAD,x2=c._x+NW/2+PAD,y2=c._y+PAD;const mx=(x1+x2)/2,my=(y1+y2)/2;
       const isNew=st.prev&&!st.prev.has(c._pid);const onp=st.path&&st.path.has(c._pid)&&st.path.has(n._pid);
-      edges+=`<path class="tedge${isNew?' enter':''}${onp?' onpath':''}" d="M${x1},${y1} C${x1},${my} ${x2},${my} ${x2},${y2}" pathLength="1"/>`;
+      edges+=`<path class="tedge${isNew?' enter':''}${onp?' onpath':''}" data-to="${c._pid}" d="M${x1},${y1} C${x1},${my} ${x2},${my} ${x2},${y2}" pathLength="1"/>`;
       const lab=vname(n.attr,k),wch=lab.length*7.6+24;
-      edges+=`<g transform="translate(${mx},${my})"><g class="eLabel${isNew?' enter':''}"><rect x="${-wch/2}" y="-13" width="${wch}" height="26" rx="13"/><text x="0" y="5" text-anchor="middle">${lab}</text></g></g>`;}}}
+      edges+=`<g transform="translate(${mx},${my})"><g class="eLabel${isNew?' enter':''}" data-to="${c._pid}"><rect x="${-wch/2}" y="-13" width="${wch}" height="26" rx="13"/><text x="0" y="5" text-anchor="middle">${lab}</text></g></g>`;}}}
   for(const n of L.all){const gx=n._x+PAD,gy=n._y+PAD;const isNew=st.prev&&!st.prev.has(n._pid);
     const lab=n.type==='split'?ANAME[n.attr]:(n.type==='leaf'?((n.label||n.fallback)==='G'?'GIFTIG':'OFARLIG'):'obestämd');
     const clickable=!!st.onClick;const cid=rid+'c'+n._pid.replace(/[^a-z0-9]/gi,'');
@@ -1747,14 +1780,51 @@ document.getElementById('mlPlay').onclick=async()=>{
   while(mlPlaying){const more=await mlStep();if(!more)break;await sleep(450);}
   mlPlaying=false;btn.textContent='▶ Träna';if(!mlDone)document.getElementById('mlNext').disabled=false;};
 document.getElementById('mlReset').onclick=()=>mlResetFn();
-function doPrune(){
-  if(!mlRoot||!mlDone)return;
+let pruneRunning=false;
+const softMotion=()=>!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* rullar upp elementet i bild; returnerar true om sidan faktiskt flyttade sig */
+function scrollElIntoView(el){
+  if(!el)return false;
+  const r=el.getBoundingClientRect(),vh=window.innerHeight;
+  if(r.top>=10&&r.bottom<=vh)return false;
+  const y=window.scrollY+r.top-Math.max(14,(vh-r.height)/2);
+  window.scrollTo({top:Math.max(0,y),behavior:softMotion()?'smooth':'auto'});
+  return true;
+}
+async function doPrune(){
+  if(!mlRoot||!mlDone||pruneRunning)return;
+  const d=maxDepth(mlRoot);if(d<1)return;
+  /* ta reda på vilka noder som försvinner innan trädet ändras */
+  const parents=[],doomed=[];
+  const collect=n=>{doomed.push(n._pid);if(n.children)Object.values(n.children).forEach(collect);};
+  (function walk(n,depth){
+    if(n.type!=='split')return;
+    if(depth===d-1){parents.push(n._pid);Object.values(n.children).forEach(collect);return;}
+    Object.values(n.children).forEach(c=>walk(c,depth+1));
+  })(mlRoot,0);
+  if(!parents.length)return;
+  pruneRunning=true;
+  const btn=document.getElementById('mlPrune');if(btn)btn.disabled=true;
+  const cv=document.getElementById('mlCanvas');
+  const q=s=>cv?[...cv.querySelectorAll(s)]:[];
+  const moved=scrollElIntoView(cv);
+  const anim=softMotion();
+  await sleep(anim?(moved?520:160):0);
+  if(anim){
+    parents.forEach(p=>q(`.tnodeWrap[data-id="${p}"]`).forEach(e=>e.classList.add('cutparent')));
+    doomed.forEach(p=>{q(`.tnodeWrap[data-id="${p}"]`).forEach(e=>e.classList.add('cut'));
+      q(`[data-to="${p}"]`).forEach(e=>e.classList.add('cut'));});
+    await sleep(760);
+  }
   pruneBefore={tr:Math.round(accuracy(mlRoot,TRAIN)*100),te:Math.round(accuracy(mlRoot,TEST)*100)};
-  if(!pruneDeepest(mlRoot))return;
-  prunedOnce=true;mlSt.prev=null;
-  renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);
-  updateMLStats();renderCurve();renderPruneUI();renderCompare();
-  toast('Delningen är borttagen','good',2000);
+  if(pruneDeepest(mlRoot)){
+    prunedOnce=true;mlSt.prev=null;
+    renderTree(cv,mlRoot,mlSt);
+    if(anim)parents.forEach(p=>q(`.tnodeWrap[data-id="${p}"]`).forEach(e=>e.classList.add('justpruned')));
+    updateMLStats();renderCurve();renderPruneUI();renderCompare();
+    toast('Delningen är borttagen','good',2000);
+  } else renderPruneUI();
+  pruneRunning=false;
 }
 function renderCurve(){
   const w=480,h=168,padL=42,padR=18,padT=16,padB=34;const MAXD=maxDepth(DEEP);
@@ -2012,7 +2082,7 @@ const REFLECT=`<div class="reflectgrid">
       <div class="rcard"><div class="rh">Testdata mäter generalisering</div><p>Data som hållits undan under träningen används för att pröva om modellen fungerar på nya fall, det vill säga om den <button class="term" data-term="generalize">generaliserar</button>.</p></div>
       <div class="rcard good"><div class="rh">Enklare modeller generaliserar ofta bättre</div><p>En modell med färre frågor bortser från enskilda undantag i träningsdatan och fångar därmed oftare det samband som gäller generellt.</p></div>
       <div class="rcard warn"><div class="rh">Alla fel väger inte lika tungt</div><p>Två modeller kan ha samma träffsäkerhet och ändå vara olika farliga. Att bedöma en giftig orm som ofarlig är ett allvarligare fel än det omvända. Därför redovisas <button class="term" data-term="recall">recall</button> och <button class="term" data-term="precision">precision</button> var för sig.</p></div>
-      <div class="rcard"><div class="rh">Modellen är aldrig bättre än datan</div><p>Regeln som trädet fann gäller i detta material. I verkligheten är sambandet mellan huvudform och gift långtifrån entydigt — flera livsfarliga ormar har runt huvud och runda pupiller. En modell återger de mönster som finns i dess data, inte världen som helhet.</p></div>`;
+      <div class="rcard"><div class="rh">Modellen är aldrig bättre än datan</div><p>Regeln som trädet fann gäller i detta material. I verkligheten är sambandet mellan huvudform och gift långtifrån entydigt — flera livsfarliga ormar har runt huvud och runda pupiller. En modell återger de mönster som finns i dess data, inte världen som helhet.</p></div></div>`;
 const SUMQ=[
  {q:'En modell klassificerar <b>99 %</b> av träningsdatan rätt, men endast <b>71 %</b> av testdatan. Vad är den rimligaste förklaringen?',
   opts:['Modellen har lärt sig träningsdatans undantag i stället för det generella sambandet',
