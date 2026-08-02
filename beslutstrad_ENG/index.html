@@ -206,7 +206,7 @@
   .zoomctl button:hover{color:var(--text-primary);border-color:var(--border-hover);background:rgba(20,27,46,.92)}
   .zoomctl button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
   svg.tree{display:block;margin:0 auto}
-  .tnodeWrap{cursor:pointer}
+  .tnodeWrap[role="button"]{cursor:pointer}
   .tnodeWrap:focus-visible{outline:none}
   .tnodeWrap:focus-visible .tcard{stroke:var(--cyan);stroke-width:2.6}
   .tnode-inner{transform-box:fill-box;transform-origin:center}
@@ -1158,7 +1158,7 @@ function renderTree(container,root,st){
   applyView(container,grew||!container.__view);
   fitNodeText(container);
   st.prev=cur;
-  if(st.onClick)container.querySelectorAll('.tnodeWrap').forEach(el=>{el.onclick=()=>{if((container.__moved||0)>6)return;st.onClick(el.dataset.id);};
+  if(st.onClick)container.querySelectorAll('.tnodeWrap').forEach(el=>{el.onclick=()=>{if((container.__moved||0)>8)return;st.onClick(el.dataset.id);};
     el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();st.onClick(el.dataset.id);}};});
 }
 /* ── fri pan/zoom i trädcanvasen ── */
@@ -1200,16 +1200,19 @@ function attachPanZoom(el){
   wireZoomBtns(el);
   if(el.__pz)return;
   el.__pz=1;
+  /* pinch and wheel zoom only on touch screens – on desktop zoom is handled by +, − and ⤢ */
+  const COARSE=!!(window.matchMedia&&window.matchMedia('(pointer: coarse)').matches);
   const pts=new Map();let last=null,pinch=null,moved=0;
   el.addEventListener('pointerdown',e=>{
     if(e.target.closest&&e.target.closest('.zoomctl'))return;
-    try{el.setPointerCapture(e.pointerId);}catch(_){}
+    /* note: no setPointerCapture – it would retarget the click event to the
+       canvas, so clicks on a node would never reach the node (mouse, not touch) */
     pts.set(e.pointerId,{x:e.clientX,y:e.clientY});moved=0;el.__moved=0;
     if(pts.size===1){last={x:e.clientX,y:e.clientY};el.classList.add('dragging');}
-    else if(pts.size===2){const v=[...pts.values()];
+    else if(pts.size===2&&COARSE){const v=[...pts.values()];
       pinch={d:Math.hypot(v[0].x-v[1].x,v[0].y-v[1].y),c:toUser(el,(v[0].x+v[1].x)/2,(v[0].y+v[1].y)/2)};last=null;}
   });
-  el.addEventListener('pointermove',e=>{
+  const move=e=>{
     if(!pts.has(e.pointerId))return;
     pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
     const r=el.getBoundingClientRect(),v=el.__view;if(!v)return;
@@ -1221,11 +1224,16 @@ function attachPanZoom(el){
       moved+=Math.abs(dx)+Math.abs(dy);el.__moved=moved;
       v.x-=dx*(v.w/r.width); v.y-=dy*(v.h/r.height);
       last={x:e.clientX,y:e.clientY};applyView(el);}
-  });
+  };
   const up=e=>{pts.delete(e.pointerId);if(pts.size<2)pinch=null;
     if(pts.size===0){last=null;el.classList.remove('dragging');}};
-  el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);
-  el.addEventListener('wheel',e=>{e.preventDefault();
+  const abort=()=>{pts.clear();last=null;pinch=null;el.classList.remove('dragging');};
+  /* window listeners so panning keeps working outside the canvas */
+  window.addEventListener('pointermove',move,{passive:true});
+  window.addEventListener('pointerup',up);
+  window.addEventListener('pointercancel',up);
+  window.addEventListener('blur',abort);
+  if(COARSE)el.addEventListener('wheel',e=>{e.preventDefault();
     const u=toUser(el,e.clientX,e.clientY);
     zoomAt(el,e.deltaY>0?1.12:1/1.12,u[0],u[1]);},{passive:false});
   el.addEventListener('dblclick',e=>{if(e.target.closest&&e.target.closest('.zoomctl'))return;applyView(el,true);});
