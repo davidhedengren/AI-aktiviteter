@@ -690,13 +690,18 @@ const DS_MINI={
 };
 const DS={
  three:{n:'Tydliga kluster',ax:['Egenskap A','Egenskap B'],
-   /* Antalet kluster lottas fram mellan 2 och 6, samtliga lika sannolika.
+   /* Antalet kluster lottas fram mellan 2 och 6, men inte jämnt: två kluster
+      ger en nästan trivial uppgift och förekommer därför sällan, medan tre
+      till fem är det vanliga. De två första utdragen kastas, eftersom
+      generatorns första tal ligger nära fröet och annars gav 2 flera gånger
+      i rad när man klickade fram ny data.
       Mittpunkterna placeras fritt i diagrammet med ett minsta inbördes
-      avstånd, i stället för på en cirkel. Det ger nya mönster varje gång.
-      Kravet på avstånd mjukas upp stegvis om det visar sig omöjligt att
-      uppfylla, så att slingan alltid tar slut. */
+      avstånd, i stället för på en cirkel. Kravet mjukas upp stegvis om det
+      visar sig omöjligt att uppfylla, så att slingan alltid tar slut. */
    g:sd=>{const r=rng(7+sd*137);
-     const n=2+Math.floor(r()*5);
+     r();r();
+     const u=r();
+     const n=u<0.08?2:u<0.33?3:u<0.60?4:u<0.83?5:6;
      const sig=n>=5?5:n>=4?5.6:6.4;
      let minD=[0,0,46,38,32,28,25][n], miss=0;
      const C=[];
