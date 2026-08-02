@@ -504,6 +504,55 @@ svg.plot.ready .pt{cursor:pointer}
 .cpanel.single{justify-content:center;}
 .cpanel.single .cpbtn{flex:0 1 auto;min-width:190px;padding:10px 22px;font-size:12.5px;}
 
+
+/* ── Stegrad ──
+   Ersätter den staplade dragspelsvyn, där alla fem ramar syntes samtidigt.
+   Nu visas ett steg i taget och raden håller reda på var man är. Klara steg
+   går att klicka tillbaka till. */
+.kwiz{display:flex;align-items:stretch;gap:4px;margin-bottom:12px}
+.kwiz-s{flex:1;min-width:0;position:relative;display:flex;flex-direction:column;gap:5px;
+  padding:8px 6px 9px;border:0;border-radius:11px;background:none;cursor:default;
+  font-family:inherit;color:inherit;transition:background var(--t1) var(--ez)}
+.kwiz-s .kb{height:3px;border-radius:2px;background:var(--line2);
+  transition:background var(--t2) var(--ez),box-shadow var(--t2) var(--ez)}
+.kwiz-s .kn{display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;
+  letter-spacing:.02em;color:var(--dim2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  transition:color var(--t2) var(--ez)}
+.kwiz-s .kd{flex:none;width:15px;height:15px;border-radius:5px;display:grid;place-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;
+  background:rgba(255,255,255,.05);color:var(--dim2);transition:var(--t2) var(--ez)}
+/* nådda steg går att gå tillbaka till */
+.kwiz-s.avail{cursor:pointer}
+.kwiz-s.avail:hover{background:rgba(255,255,255,.04)}
+.kwiz-s.avail:hover .kn{color:var(--sub)}
+.kwiz-s:focus-visible{outline:2px solid var(--c,var(--a1));outline-offset:2px}
+/* avklarat */
+.kwiz-s.done .kb{background:color-mix(in srgb,var(--c) 45%,transparent)}
+.kwiz-s.done .kd{background:color-mix(in srgb,var(--c) 18%,transparent);color:var(--c)}
+.kwiz-s.done .kn{color:var(--dim)}
+/* här är du */
+.kwiz-s.on .kb{background:var(--c);box-shadow:0 0 10px -1px color-mix(in srgb,var(--c) 70%,transparent)}
+.kwiz-s.on .kd{background:var(--c);color:#0a0d18}
+.kwiz-s.on .kn{color:var(--tx)}
+@media(max-width:640px){
+  .kwiz{gap:3px}
+  .kwiz-s{padding:7px 3px 8px}
+  .kwiz-s .kn span:last-child{display:none}
+  .kwiz-s .kd{margin:0 auto}
+}
+
+/* Bara det aktiva steget visas. Rubrikraden behövs inte längre – stegraden
+   ovanför säger var man är. */
+.pstep{display:none}
+.pstep.on{display:block;animation:stepIn .34s var(--ez)}
+@keyframes stepIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* Rubriken står kvar, men nummerbrickan och bakåt-etiketten hör hemma
+   i stegraden och tas bort här. */
+.pstep.on .phead{cursor:default;padding-bottom:2px}
+.pstep.on .phead .pn,.pstep.on .phead .pback{display:none}
+.pstep.on .pshead{font-size:17px;color:var(--tx)}
+.pline{display:none}
+.pstep.on .pd2{padding-top:12px}
 </style>
 </head>
 <body>
@@ -537,6 +586,7 @@ svg.plot.ready .pt{cursor:pointer}
   <div class="lay">
 
     <aside class="pipe" id="pipe">
+<div class="kwiz" id="kwiz" role="tablist"><button class="kwiz-s" data-w="1" type="button"><span class="kb"></span><span class="kn"><span class="kd">1</span><span>Data</span></span></button><button class="kwiz-s" data-w="2" type="button"><span class="kb"></span><span class="kn"><span class="kd">2</span><span>Centroids</span></span></button><button class="kwiz-s" data-w="3" type="button"><span class="kb"></span><span class="kn"><span class="kd">3</span><span>Assign</span></span></button><button class="kwiz-s" data-w="4" type="button"><span class="kb"></span><span class="kn"><span class="kd">4</span><span>Move</span></span></button><button class="kwiz-s" data-w="5" type="button"><span class="kb"></span><span class="kn"><span class="kd">5</span><span>Evaluate</span></span></button></div>
       <section class="pstep" data-s="1">
         <button class="phead" id="h1b" aria-expanded="false" aria-controls="p1body">
           <span class="pn">1</span><span class="pshead">Choose a dataset</span><span class="pback">back</span>
@@ -635,13 +685,18 @@ const DS_MINI={
 };
 const DS={
  three:{n:'Distinct clusters',ax:['Feature A','Feature B'],
-   /* The number of clusters is drawn between 2 and 6, all equally likely.
+   /* The number of clusters is drawn between 2 and 6, but not evenly: two
+      clusters make the task almost trivial and therefore come up rarely,
+      while three to five are the common cases. The first two draws are
+      discarded, because the generator's first value tracks the seed and
+      otherwise produced 2 several times in a row when clicking for new data.
       The centres are placed freely in the plot with a minimum separation,
-      rather than on a circle. That gives a new pattern every time. The
-      separation requirement is relaxed step by step if it turns out to be
-      impossible to meet, so the loop always terminates. */
+      rather than on a circle. The requirement is relaxed step by step if it
+      turns out to be impossible to meet, so the loop always terminates. */
    g:sd=>{const r=rng(7+sd*137);
-     const n=2+Math.floor(r()*5);
+     r();r();
+     const u=r();
+     const n=u<0.08?2:u<0.33?3:u<0.60?4:u<0.83?5:6;
      const sig=n>=5?5:n>=4?5.6:6.4;
      let minD=[0,0,46,38,32,28,25][n], miss=0;
      const C=[];
@@ -1392,6 +1447,17 @@ function pipeUI(){
     if(s5){s5.classList.remove('win');void s5.offsetWidth;s5.classList.add('win');}}
   if(!fin())celebrated=false;
   $('phdot').style.setProperty('--c',PC[act-1]);
+  /* Stegraden speglar samma tillstånd som panelerna. */
+  document.querySelectorAll('.kwiz-s').forEach(el=>{
+    const n=+el.dataset.w, avail=n<=Math.max(nat,act);
+    el.style.setProperty('--c',PC[n-1]);
+    el.classList.toggle('on',n===act);
+    el.classList.toggle('done',n<nat||(fin()&&n<5));
+    el.classList.toggle('avail',avail&&n!==act);
+    el.disabled=!avail;
+    el.setAttribute('aria-selected',n===act?'true':'false');
+    el.onclick=avail?()=>focusStep(n):null;
+  });
 }
 
 /* ═══════════ panel content ═══════════ */
@@ -1492,14 +1558,15 @@ function pipeBodies(){
    action is always within reach of the plot. */
 function renderCPanel(){
   const el=$('cpanel'); if(!el)return;
+  /* Panelen visas först när eleven gått igenom loopen en gång, alltså
+     tryckt på Tilldela och Flytta i stegpanelen. Då sitter kopplingen
+     mellan steg och handling, och genvägen blir en hjälp i stället för
+     ett sätt att hoppa över resonemanget. */
+  if(iter<1&&!running){el.innerHTML='';el.classList.remove('single');return;}
   const st=activeStep();
   let h='';
   if(running){
     h=`<button class="cpbtn stop" id="cpStop">■ Stop</button>`;
-  }else if(!cens.length){
-    /* The button appears only once the pupil has reached step 2, not as soon
-       as a dataset is chosen. */
-    if(st>=2)h=`<button class="cpbtn pri" style="--c:${PC[1]}" id="cpPlace"${ds&&!lock()?'':' disabled'}>Place centroids</button>`;
   }else{
     const canAssign=phase!=='assigned'&&!lock();
     const canMove=phase==='assigned'&&!lock();
@@ -1509,7 +1576,7 @@ function renderCPanel(){
   }
   el.innerHTML=h;
   el.classList.toggle('single',(h.match(/<button/g)||[]).length===1);
-  const map={cpPlace:place,cpAssign:doAssign,cpMove:doMove,cpAuto:auto,cpStop:stopAuto};
+  const map={cpAssign:doAssign,cpMove:doMove,cpAuto:auto,cpStop:stopAuto};
   Object.entries(map).forEach(([id,fn])=>{const e=$(id);if(e)e.onclick=()=>fn();});
 }
 function bindPanels(){
