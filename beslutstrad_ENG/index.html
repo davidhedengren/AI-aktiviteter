@@ -95,8 +95,30 @@
   .si-body b{color:var(--text-primary);font-weight:600}
   @media(prefers-reduced-motion:no-preference){.si-eyebrow{animation:siRise .5s var(--ease-spring) both}.si-body{animation:siRise .5s var(--ease-spring) .06s both}}
   @keyframes siRise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-  .step-foot{display:flex;justify-content:space-between;gap:8px;margin-top:12px}
+  .step-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:22px 0 6px;flex-wrap:wrap}
   .step-foot .btn[hidden]{visibility:hidden}
+  /* svävande valpanel vid noden (dator) */
+  .nodepop{position:fixed;z-index:60;width:min(330px,92vw);padding:13px 15px 15px;border-radius:16px;
+    border:1px solid rgba(255,255,255,.13);background:rgba(13,17,29,.97);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    box-shadow:0 26px 64px -20px rgba(0,0,0,.92),inset 0 1px 0 rgba(255,255,255,.06);
+    animation:popIn .19s var(--ease-spring) both}
+  @keyframes popIn{from{opacity:0;transform:translateY(-7px) scale(.96)}to{opacity:1;transform:none}}
+  .nodepop .pnhead{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--text-muted)}
+  .nodepop .pnhead b{color:var(--text-secondary);font-weight:400;text-transform:none;letter-spacing:.02em}
+  .nodepop .pnclose{margin-left:auto;background:none;border:0;color:var(--text-muted);cursor:pointer;font-size:13px;line-height:1;padding:2px 3px}
+  .nodepop .pnclose:hover{color:var(--text-primary)}
+  .nodepop .lbl{font-size:12px;color:var(--text-muted);margin:11px 0 7px}
+  .nodepop .arrow{position:absolute;width:12px;height:12px;transform:rotate(45deg);background:rgba(13,17,29,.97);pointer-events:none}
+  .nodepop.below .arrow{top:-6.5px;border-left:1px solid rgba(255,255,255,.13);border-top:1px solid rgba(255,255,255,.13)}
+  .nodepop.above .arrow{bottom:-6.5px;border-right:1px solid rgba(255,255,255,.13);border-bottom:1px solid rgba(255,255,255,.13)}
+  /* steg 3: ormen bredvid texten så att trädet ryms i bild */
+  .trialrow{display:flex;align-items:center;gap:20px;text-align:left}
+  .scene .trialrow .big{flex:0 0 118px;width:118px;max-width:118px;margin:0}
+  .trialmain{flex:1 1 auto;min-width:0}
+  .trialmain .q{margin:4px 0 12px}
+  @media(max-width:620px){.trialrow{flex-direction:column;gap:10px;text-align:center}
+    .scene .trialrow .big{flex:0 0 auto;width:130px;max-width:44%}}
 
   .panel{display:none}.panel.on{display:block;animation:panelIn .4s var(--ease-out)}
   @keyframes panelIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -298,7 +320,7 @@
   .cmpcard .t{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
   .cmpcard .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;margin-top:3px;color:var(--text-primary)}
   .cmpcard .s{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-secondary);margin-top:4px}
-  .scene{padding:22px;text-align:center}
+  .scene{padding:18px 20px;text-align:center}
   .scene .alert{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--rose);margin-bottom:6px}
   .scene .big{width:180px;max-width:60%;margin:6px auto 4px;border-radius:20px;filter:drop-shadow(0 12px 24px rgba(0,0,0,.5))}
   .scene .q{color:var(--text-secondary);font-size:15px;margin:6px 0 14px}
@@ -660,14 +682,6 @@
     .si-title{animation:siRise .55s var(--ease-spring) .05s both}
     .si-body{animation:siRise .5s var(--ease-spring) .12s both}}
 
-  /* ── 11. Kontextberoende hjälp ── */
-  .nudge{margin-top:14px;display:flex;gap:11px;align-items:flex-start;border-radius:var(--radius-sm);
-    padding:12px 15px;border:1px solid rgba(96,165,250,.28);background:rgba(96,165,250,.06);
-    font-size:13.5px;line-height:1.55;color:var(--text-secondary);animation:ahaIn .5s var(--ease-spring) both}
-  .nudge b{color:var(--text-primary);font-weight:600}
-  .nudge .ni{flex:none;width:22px;height:22px;display:grid;place-items:center;border-radius:7px;
-    background:rgba(96,165,250,.16);color:var(--blue);font-size:12px}
-  .nudge .nx{margin-left:auto;flex:none;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:14px;line-height:1}
 
   @media(max-width:680px){
     .container{padding:0 14px 70px}
@@ -684,6 +698,14 @@
     .controlbar .btn{flex:1 1 auto;justify-content:center}
     /* fäst kontrollpanelen så den följer med när man scrollar i ett långt träd */
     .ctrl{position:sticky;bottom:8px;z-index:20;background:rgba(12,16,27,.94);backdrop-filter:blur(16px);box-shadow:0 -8px 26px rgba(0,0,0,.45)}
+    /* tre kort per rad: överblicken är viktigare än storleken */
+    .specimens{grid-template-columns:repeat(3,1fr);gap:8px}
+    .specimens .scard{padding:7px 4px 6px;border-radius:12px}
+    .specimens .scard .id{font-size:8.5px;top:5px;left:6px}
+    .specimens .scard .lab{margin-top:2px}
+    .specimens .scard .tag{font-size:9px;padding:2px 5px;gap:3px;letter-spacing:.02em}
+    .specimens .scard .tag .sym{font-size:8px}
+    .specimens.mini{grid-template-columns:repeat(4,1fr);gap:6px}
     .reflectgrid .rcard{flex:1 1 100%}
     .cmptable{font-size:12.5px}
   }
@@ -736,10 +758,6 @@
   <div class="stepper">
     <div class="steps-nav" id="nav" role="tablist" aria-label="Steps of the lab"></div>
     <div class="step-intro" id="stepIntro" style="display:none"></div>
-    <div class="step-foot" id="stepFoot" style="display:none">
-      <button class="btn ghost" id="prevStepBtn">← Previous</button>
-      <button class="btn primary" id="nextStepBtn">Next step →</button>
-    </div>
   </div>
 
   <!-- STEP 1 — Study the data -->
@@ -751,9 +769,11 @@
         <div class="dq">20 documented snakes with known answers.</div>
       </div>
 
-      <!-- Scen 2: glider in när eleven behöver den -->
-      <div class="stage" id="stageGroup">
-        <div class="discover" style="margin-top:22px">
+      <div id="studyView" style="margin-top:20px"></div>
+
+      <!-- sorteringen ligger under korten: datan möter eleven först -->
+      <div id="stageGroup">
+        <div class="discover" style="margin-top:26px">
           <span class="microlabel">Sort by</span>
         </div>
         <div class="groupbar asks" role="group" aria-label="Sort by feature">
@@ -766,8 +786,6 @@
         </div>
         <div id="ahaZone"></div>
       </div>
-
-      <div id="studyView" style="margin-top:20px"></div>
 
       <!-- Scen 3: verktyg och sammanhang, först när de gör nytta -->
       <div class="stage" id="stageTools">
@@ -782,7 +800,6 @@
         </div>
         <div class="hypocard" id="hypoCard"></div>
       </div>
-      <div id="studyNudge"></div>
     </div>
   </section>
 
@@ -845,6 +862,11 @@
       <div class="lexrow" id="sumLex"></div>
     </div>
   </section>
+
+  <div class="step-foot" id="stepFoot" style="display:none">
+    <button class="btn ghost" id="prevStepBtn">← Previous</button>
+    <button class="btn primary" id="nextStepBtn">Next step →</button>
+  </div>
 
   <div style="text-align:center;padding:34px 0 10px" id="helpRow">
     <button class="btn sm ghost" id="helpOpen">? Hints</button>
@@ -1050,7 +1072,7 @@ function vname(attr,v){const M={tri:'triangular',round:'round',slit:'slit',strip
 /* ordningen styr även lexikonraden i steg 5 */
 const CONCEPTS={
   entropy:{k:'Concept',t:'Entropy',p:'A measure of how <b>mixed</b> a group is. A group containing only venomous snakes (or only harmless ones) has an entropy of <b>0</b> — it is perfectly pure. A fifty–fifty mixture has maximum entropy. A decision tree therefore chooses the split that makes the groups purest.',ex:'8 snakes, 4 venomous + 4 harmless → high entropy. 8 venomous + 0 harmless → entropy 0.'},
-  gain:{k:'Concept',t:'Information gain',p:'How much <b>purer</b> the groups become when you split on a given feature. The tree computes the entropy before the split minus the entropy after it. The feature with the greatest gain splits most cleanly — it wins the node.',ex:'Splitting on Head shape gathers almost all the venom on one side → high gain. Splitting on Pattern leaves the groups mixed → low gain.'},
+  gain:{k:'Concept',t:'Information gain',p:'How much <b>purer</b> the groups become when you split on a given feature. The tree computes the entropy before the split minus the entropy after it. The feature with the greatest gain splits most cleanly, and that is the question the node gets.',ex:'Splitting on Head shape gathers almost all the venom on one side → high gain. Splitting on Pattern leaves the groups mixed → low gain.'},
   overfit:{k:'Concept',t:'Overfitting',p:'When a model learns the training data <b>by heart</b> — including random exceptions — instead of the underlying pattern. It becomes perfect on what it has already seen, but worse on anything new. A simpler model misses the exceptions but <button class="term" data-term="generalize">generalises</button> better.',ex:'The deep tree learns the rule "green → harmless" from a single green case in the training data. From then on it classifies every green venomous snake as harmless.'},
   testdata:{k:'Concept',t:'Test data',p:'Examples deliberately held back while the model is being built, and brought out only once it is finished. Because the model has never seen them, the result on the test data is the only thing that shows whether it works on cases it does not already know.',ex:'The tree was built from 20 snakes. The remaining 12 were never shown to it, and alone determine how good the model really is.'},
   accuracy:{k:'Concept',t:'Accuracy',p:'The proportion of cases the model classifies correctly, regardless of which way the errors go. The measure is easy to understand but blunt: it takes account neither of classes being unequally common nor of some error types being more serious than others. It should therefore always be compared against a <b>baseline</b> and supplemented with measures that separate the error types.',ex:'Always guessing "harmless" gives 70 % correct on the training data without the model having learnt anything at all. A model at 80 % is thus hardly impressive.'},
@@ -1158,8 +1180,8 @@ function renderTree(container,root,st){
   applyView(container,grew||!container.__view);
   fitNodeText(container);
   st.prev=cur;
-  if(st.onClick)container.querySelectorAll('.tnodeWrap').forEach(el=>{el.onclick=()=>{if((container.__moved||0)>8)return;st.onClick(el.dataset.id);};
-    el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();st.onClick(el.dataset.id);}};});
+  if(st.onClick)container.querySelectorAll('.tnodeWrap').forEach(el=>{el.onclick=()=>{if((container.__moved||0)>8)return;st.onClick(el.dataset.id,el);};
+    el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();st.onClick(el.dataset.id,el);}};});
 }
 /* ── fri pan/zoom i trädcanvasen ── */
 function applyView(el,refit){
@@ -1173,6 +1195,7 @@ function applyView(el,refit){
   }
   const v=el.__view;
   svg.setAttribute('viewBox',`${v.x.toFixed(1)} ${v.y.toFixed(1)} ${v.w.toFixed(1)} ${v.h.toFixed(1)}`);
+  positionNodePop();
 }
 function zoomAt(el,factor,cx,cy){
   const v=el.__view;if(!v)return;
@@ -1298,34 +1321,6 @@ function celebrateTree(wrapId,text){
 }
 
 /* ================= kontextberoende hjälp (11) ================= */
-let idleTimer=null,nudgeShown={};
-function nudgeText(step){
-  if(step===0){
-    if(typeof studyGroup!=='undefined'&&studyGroup==='none')return 'Tip: try grouping the snakes by <b>one feature at a time</b>. Look for a group that contains only one class.';
-    if(typeof hypo!=='undefined'&&!hypo)return 'Tip: you have seen how the features split the data. Which do you think is <b>most important</b>? Answer at the bottom — you can compare with the algorithm later.';
-    return 'Tip: compare two features. Which of them leaves the <b>least mixing</b> in the groups?';
-  }
-  if(step===1){
-    if(stuRoot&&stuRoot.type==='frontier')return 'Tip: click the yellow dashed node in the tree — you then choose which question it asks.';
-    if(countFrontier(stuRoot)>0)return 'Tip: there are <b>unsettled branches</b> left. Click one of them and choose either a new question or an answer.';
-    return 'Tip: the tree is finished. Move on to <b>step 3</b> and try it on snakes it has never seen.';
-  }
-  if(step===2)return 'Tip: press <b>Run through my tree</b> and follow the highlighted path through the branches — or run them all at once.';
-  if(step===3)return 'Tip: press <b>Next split</b> to watch the algorithm weigh the features against one another, one node at a time.';
-  return 'Tip: answer the questions before revealing the solutions — the point is to test whether the conclusions transfer to a new case.';
-}
-function showNudge(){
-  const step=curStep<0?0:curStep;
-  if(nudgeShown[step])return;
-  nudgeShown[step]=true;
-  const zone=step===0?document.getElementById('studyNudge'):null;
-  const html=`<span class="ni">💡</span><span>${nudgeText(step)}</span>`;
-  if(zone){zone.innerHTML=`<div class="nudge">${html}<button class="nx" aria-label="Stäng tips">✕</button></div>`;
-    zone.querySelector('.nx').onclick=()=>zone.innerHTML='';}
-  else{const t=toast(html,'hint',9000);t.style.maxWidth='min(440px,92vw)';t.style.textAlign='left';t.style.borderRadius='16px';}
-}
-function resetIdle(){clearTimeout(idleTimer);idleTimer=setTimeout(showNudge,90000);}
-['pointerdown','keydown','wheel'].forEach(ev=>document.addEventListener(ev,()=>{clearTimeout(idleTimer);idleTimer=setTimeout(showNudge,90000);},{passive:true}));
 
 /* ================= nav (pipeline-stegvisare) ================= */
 const STEPS=[
@@ -1351,7 +1346,7 @@ nav.addEventListener('keydown',e=>{
 document.getElementById('prevStepBtn').onclick=()=>go(Math.max(0,curStep-1),true);
 document.getElementById('nextStepBtn').onclick=()=>go(Math.min(STEPS.length-1,curStep+1),true);
 function go(i,fromUser){
-  curStep=i;
+  curStep=i;closeNodePop();
   if(fromUser)document.querySelector('.hero').classList.add('lean');
   document.getElementById('helpRow').style.display=i<2?'':'none';
   document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',+p.dataset.tab===i));
@@ -1363,24 +1358,33 @@ function go(i,fromUser){
   introEl.style.setProperty('--c',st.c);
   introEl.innerHTML=`<span class="si-act">Step ${i+1} of ${STEPS.length}</span>
     <h2 class="si-title">${st.title}</h2><div class="si-body">${st.intro}</div>`;
-  resetIdle();
   document.getElementById('prevStepBtn').toggleAttribute('hidden',i===0);
   document.getElementById('nextStepBtn').toggleAttribute('hidden',i===STEPS.length-1);
   if(i===0)renderStudy();else if(i===1)renderStudent();else if(i===2)youEnter();else if(i===3)compareEnter();else if(i===4)renderSummary();
   window.scrollTo({top:0,behavior:'smooth'});}
 let studyView='cards',studyGroup='none',hypo=null;
-let studyStage=0,studyTimer=null,ahaSeen={};
+let studyStage=0,ahaSeen={};
 function setStage(n){
   if(n<=studyStage)return;studyStage=n;
   const open=id=>{const el=document.getElementById(id);if(!el||el.classList.contains('in'))return;
     el.classList.add('in');
     setTimeout(()=>{el.style.maxHeight='none';el.style.overflow='visible';},650);};
-  if(n>=1)open('stageGroup');
   if(n>=2)open('stageTools');
 }
 function renderStudy(){
   renderStudyControls();renderStudyView();renderHypo();renderAha();
-  if(studyStage===0&&!studyTimer)studyTimer=setTimeout(()=>setStage(1),6500);
+}
+/* ── håll kortrutnätet i bild när sorteringen ändras ── */
+function revealStudyView(){
+  const v=document.getElementById('studyView');if(!v)return;
+  requestAnimationFrame(()=>{
+    const r=v.getBoundingClientRect(),vh=window.innerHeight;
+    const vis=Math.min(r.bottom,vh)-Math.max(r.top,0);
+    if(vis>=Math.min(r.height,vh*0.7))return;
+    const y=window.scrollY+r.top-Math.max(14,(vh-r.height)/2);
+    const soft=!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top:Math.max(0,y),behavior:soft?'smooth':'auto'});
+  });
 }
 function renderStudyControls(){
   document.querySelectorAll('#panel-0 [data-view]').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.view===studyView);
@@ -1388,7 +1392,7 @@ function renderStudyControls(){
   document.querySelectorAll('#panel-0 [data-group]').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.group===studyGroup);
     b.onclick=()=>{if(studyGroup===b.dataset.group)return;studyGroup=b.dataset.group;
       if(studyGroup!=='none')setStage(2);
-      renderStudyControls();renderStudyView();renderAha();};});
+      renderStudyControls();renderStudyView();renderAha();revealStudyView();};});
 }
 /* ── aha-ögonblick: kommenterar vad delningen faktiskt gjorde ── */
 function renderAha(){
@@ -1434,7 +1438,6 @@ function renderAha(){
     const c=near(e);if(!c||(e.relatedTarget&&c.contains(e.relatedTarget)))return;
     c.style.setProperty('--tx','0deg');c.style.setProperty('--ty','0deg');
   },{passive:true});
-  document.addEventListener('click',e=>{if(near(e)&&curStep===0)setStage(1);},{passive:true});
 })();
 /* ── 5. informationsvinst som något fysiskt: burkar med kulor ── */
 function jarSVG(rows,idx){
@@ -1501,7 +1504,7 @@ function renderHypo(){
 function renderHypoReveal(){
   const el=document.getElementById('hypoReveal');if(!el)return;
   const rootAttr=(mlRoot&&mlRoot.type==='split')?mlRoot.attr:null;
-  if(!rootAttr){el.innerHTML=`<div class="hyporeveal"><span class="hk">Worth noting</span> See whether the algorithm picks out the same feature as you did${hypo?` (<b>${ANAME[hypo]}</b>)`:''}.</div>`;return;}
+  if(!rootAttr){el.innerHTML='';return;}
   if(!hypo){el.innerHTML=`<div class="hyporeveal"><span class="hk">The root node</span> The algorithm chose <b>${ANAME[rootAttr]}</b> as its first question, because that feature yields the greatest information gain.</div>`;return;}
   const match=hypo===rootAttr;
   el.innerHTML=`<div class="hyporeveal ${match?'ok':'diff'}"><span class="hk">The root node</span> The algorithm chose <b>${ANAME[rootAttr]}</b> as its first question. You said <b>${ANAME[hypo]}</b> — ${match?'the same feature. It yields the greatest information gain at the root.':'a different feature. The algorithm always picks the one with the greatest information gain at the node in question.'}</div>`;
@@ -1541,7 +1544,7 @@ function splitFeedback(rows,attr,avail){
   if(ratio>=0.2)return{...meta,cls:'',title:'',msg:'The split gives some improvement, but several branches are still mixed and need another question.'};
   return{...meta,cls:'warn',title:'',msg:'The split made the groups only marginally purer. Try a different feature and compare the result.'};
 }
-const stuSt={prev:null,sel:null,onClick:pid=>{stuSel=pid;renderStudent();}};
+const stuSt={prev:null,sel:null,onClick:pid=>{stuSel=(stuSel===pid&&popEl)?null:pid;renderStudent();}};
 function usedAttrs(pid){const parts=pid.split('>');let n=stuRoot,used=[];for(let i=1;i<parts.length;i++){used.push(n.attr);n=n.children[parts[i]];}return used;}
 function renderStudent(){stuSt.sel=stuSel;renderTree(document.getElementById('stuCanvas'),stuRoot,stuSt);renderStuStatus();renderStuCtrl();}
 function renderStuStatus(){
@@ -1549,7 +1552,7 @@ function renderStuStatus(){
   const el=document.getElementById('stuStatus');
   let s='';
   if(stuRoot.type==='frontier'){
-    s+=`<span class="pillstat">Choose a feature below to make the first split.</span>`;
+    s+=`<span class="pillstat">${POPUI?'Click the root node in the tree and choose a feature for the first split.':'Choose a feature below to make the first split.'}</span>`;
   } else {
     if(fr===0){
       s+=`<span class="pillstat done">✓ The tree is complete</span>`;
@@ -1583,10 +1586,8 @@ function rawCounts(rows,attr){
       <span class="bars">${c.g?`<span class="bg" style="width:${c.g/tot*100}%">${c.g}▲</span>`:''}${c.o?`<span class="bo" style="width:${c.o/tot*100}%">${c.o}●</span>`:''}</span></div>`;
   }).join('')+`</div>`;
 }
-function renderStuCtrl(){
-  const el=document.getElementById('stuCtrl');
-  if(!stuSel){el.innerHTML=`<div class="cardhint">Click a node in the tree above to split it or to settle its class.</div>`;return;}
-  const node=nodeByPid(stuRoot,stuSel);
+const POPUI=!(window.matchMedia&&window.matchMedia('(pointer: coarse)').matches);
+function stuActionsHTML(node){
   let h='';
   if(node.type==='leaf'){
     h+=`<div class="lbl">Settled as ${labTag(node.label)}</div><div class="decide"><button class="btn sm" data-a="reset">Change decision</button></div>`;
@@ -1598,19 +1599,22 @@ function renderStuCtrl(){
     h+=`<div class="lbl">…or settle the branch:</div><div class="decide">
       <button class="btn sm" style="color:var(--rose);border-color:rgba(251,113,133,.35)" data-a="leafG">▲ Venomous</button>
       <button class="btn sm" style="color:var(--emerald);border-color:rgba(52,211,153,.35)" data-a="leafO">● Harmless</button></div>`;
-
   }
+  return h;
+}
+function stuSpecHTML(node){
   const path=stuSel==='r'?'':stuSel.split('>').slice(1).map((v,i)=>vname(usedAttrs(stuSel)[i],v)).join(' · ');
   const isRoot=stuSel==='r';
   const specOpen=stuSpecOpen===null?!isRoot:stuSpecOpen;
-  const bstitle=`${isRoot?'All snakes':'Snakes in this branch'} <b>${path}${path?' · ':''}${node.rows.length}</b>`;
-  h+=`<div class="branchspec">`+(specOpen
+  const bstitle=`${isRoot?'All snakes':'Snakes in the branch'} <b>${path}${path?' · ':''}${node.rows.length}</b>`;
+  return `<div class="branchspec">`+(specOpen
     ? `<div class="bshead">${bstitle}<button class="bsclose" data-spec="hide" aria-label="Hide the snakes" title="Hide the snakes">✕</button></div>`
       +`<div class="bswrap"><div class="grid specimens mini">${node.rows.map((sp,k)=>scard(sp,TRAIN.indexOf(sp),k)).join('')}</div></div>`
-    : `<button class="bsopen" data-spec="show">${isRoot?'Show all snakes':'Show the snakes in this branch'} · ${node.rows.length}</button>`)+`</div>`;
-  el.innerHTML=h;
-  el.querySelectorAll('[data-spec]').forEach(b=>b.onclick=()=>{stuSpecOpen=b.dataset.spec==='show';renderStuCtrl();});
-  el.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{
+    : `<button class="bsopen" data-spec="show">${isRoot?'Show all snakes':'Show the snakes in the branch'} · ${node.rows.length}</button>`)+`</div>`;
+}
+function wireStuActions(root){
+  root.querySelectorAll('[data-spec]').forEach(b=>b.onclick=()=>{stuSpecOpen=b.dataset.spec==='show';renderStuCtrl(true);});
+  root.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{
     const node=nodeByPid(stuRoot,stuSel);const a=b.dataset.a;
     if(a==='split'){const attr=b.dataset.attr;stuFbOpen=false;
       stuFeedback=splitFeedback(node.rows,attr,ATTRS.filter(x=>!usedAttrs(stuSel).includes(x)));node.type='split';node.attr=attr;node.children={};
@@ -1619,8 +1623,81 @@ function renderStuCtrl(){
     else if(a==='leafG'){node.type='leaf';node.label='G';delete node.children;delete node.attr;stuSel=null;renderStudent();}
     else if(a==='leafO'){node.type='leaf';node.label='O';delete node.children;delete node.attr;stuSel=null;renderStudent();}
     else if(a==='reset'){stuFeedback=null;node.type='frontier';delete node.children;delete node.attr;delete node.label;renderStudent();}
-
   });
+}
+function renderStuCtrl(keepPop){
+  const el=document.getElementById('stuCtrl');
+  if(!stuSel){closeNodePop();el.innerHTML=`<div class="cardhint">${POPUI?'Click a node in the tree — the options appear right at the node.':'Click a node in the tree above to split it or to settle its class.'}</div>`;return;}
+  const node=nodeByPid(stuRoot,stuSel);
+  let h='';
+  if(!POPUI)h+=stuActionsHTML(node);
+  h+=stuSpecHTML(node);
+  el.innerHTML=h;
+  wireStuActions(el);
+  if(POPUI){if(keepPop&&popEl)positionNodePop();else openNodePop(node);}
+}
+/* ── svävande valpanel intill den klickade noden (dator) ── */
+var popEl=null;
+function popAnchorRect(){
+  const c=document.getElementById('stuCanvas');if(!c||!stuSel)return null;
+  const n=c.querySelector('.tnodeWrap[data-id="'+stuSel+'"]');if(!n)return null;
+  const r=n.getBoundingClientRect(),cr=c.getBoundingClientRect();
+  const cxp=r.left+r.width/2, cyp=r.top+r.height/2;
+  if(cxp<cr.left-20||cxp>cr.right+20||cyp<cr.top-20||cyp>cr.bottom+20)return null;
+  return r;
+}
+function positionNodePop(){
+  if(!popEl)return;
+  const r=popAnchorRect();
+  if(!r){popEl.style.visibility='hidden';return;}
+  popEl.style.visibility='';
+  const pw=popEl.offsetWidth,ph=popEl.offsetHeight,m=10;
+  let x=r.left+r.width/2-pw/2;
+  x=Math.max(m,Math.min(window.innerWidth-pw-m,x));
+  let y=r.bottom+12,below=true;
+  if(y+ph>window.innerHeight-m){
+    if(r.top-ph-12>m){y=r.top-ph-12;below=false;}
+    else y=Math.max(m,window.innerHeight-ph-m);
+  }
+  popEl.style.left=Math.round(x)+'px';popEl.style.top=Math.round(y)+'px';
+  popEl.classList.toggle('below',below);popEl.classList.toggle('above',!below);
+  const ar=popEl.querySelector('.arrow');
+  if(ar)ar.style.left=Math.max(14,Math.min(pw-26,r.left+r.width/2-x-6))+'px';
+}
+function popOutside(e){
+  if(!popEl)return;
+  if(popEl.contains(e.target))return;
+  const c=document.getElementById('stuCanvas');
+  if(c&&c.contains(e.target)){if(e.target.closest('.tnodeWrap'))return;if((c.__moved||0)>8)return;}
+  stuSel=null;renderStudent();
+}
+function popKey(e){if(e.key==='Escape'&&popEl){stuSel=null;renderStudent();}}
+function closeNodePop(){
+  document.removeEventListener('click',popOutside);
+  document.removeEventListener('keydown',popKey);
+  window.removeEventListener('resize',positionNodePop);
+  window.removeEventListener('scroll',positionNodePop,true);
+  if(popEl){popEl.remove();popEl=null;}
+}
+function openNodePop(node){
+  closeNodePop();
+  const isRoot=stuSel==='r';
+  const path=isRoot?'':stuSel.split('>').slice(1).map((v,i)=>vname(usedAttrs(stuSel)[i],v)).join(' · ');
+  const p=document.createElement('div');
+  p.className='nodepop below';p.id='stuPop';p.setAttribute('role','dialog');
+  p.innerHTML=`<div class="pnhead">${isRoot?'Root node':'Branch'} <b>${path?path+' · ':''}${node.rows.length} snakes</b>`
+    +`<button class="pnclose" data-popclose aria-label="Close" title="Close">✕</button></div>`
+    +stuActionsHTML(node)+`<div class="arrow"></div>`;
+  document.body.appendChild(p);popEl=p;
+  wireStuActions(p);
+  p.querySelector('[data-popclose]').onclick=()=>{stuSel=null;renderStudent();};
+  positionNodePop();
+  setTimeout(()=>{
+    document.addEventListener('click',popOutside);
+    document.addEventListener('keydown',popKey);
+    window.addEventListener('resize',positionNodePop);
+    window.addEventListener('scroll',positionNodePop,true);
+  },0);
 }
 document.getElementById('resetTree').onclick=()=>{stuRoot=fresh(TRAIN);stuSel=null;stuSt.prev=null;stuFeedback=null;stuFbOpen=false;stuSpecOpen=null;stuCelebrated=false;renderStudent();};
 
@@ -1794,13 +1871,16 @@ function renderYouScene(){
     youSt.path=null;renderTree(document.getElementById('youCanvas'),stuRoot,youSt);return;}
   const s=TEST[youIdx];youRan=false;youRev=false;youSt.path=null;
   const controls=renderYouControls();
-  scene.innerHTML=`${controls}<div class="alert">🔍 Unseen snake ${youIdx+1} of ${TEST.length}</div>
+  scene.innerHTML=`${controls}<div class="trialrow">
       <div class="big arrive" role="img" aria-label="Unseen snake ${youIdx+1}: ${ATTRS.map(a=>ANAME[a]+' '+vname(a,s[a])).join(', ')}">${snake(s)}</div>
-      <div class="q">What does <b>your</b> tree say — venomous or harmless?</div>
-      ${youRunAll?'':'<button class="btn primary" id="runYouBtn">▶ Run through my tree</button>'}
-      <div class="tracelabel" id="yTrace"></div>
-      <div class="verdict" id="yVerdict"></div>
-      <div class="reveal-row" id="yReveal"></div>`;
+      <div class="trialmain">
+        <div class="alert">🔍 Unseen snake ${youIdx+1} of ${TEST.length}</div>
+        <div class="q">What does <b>your</b> tree say — venomous or harmless?</div>
+        ${youRunAll?'':'<button class="btn primary" id="runYouBtn">▶ Run through my tree</button>'}
+        <div class="tracelabel" id="yTrace"></div>
+        <div class="verdict" id="yVerdict"></div>
+        <div class="reveal-row" id="yReveal"></div>
+      </div></div>`;
   renderTree(document.getElementById('youCanvas'),stuRoot,youSt);
   wireYouControls();
   const rbEl=document.getElementById('runYouBtn');if(rbEl)rbEl.onclick=()=>runYouAuto(s);
