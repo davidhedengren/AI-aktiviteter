@@ -48,12 +48,13 @@ body{font-family:'DM Sans',sans-serif;font-size:15px;background:var(--bg);color:
 .back-link:hover{color:var(--text);border-color:var(--dim);background:rgba(255,255,255,.05);}
 .lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.02);transition:.2s var(--ease-out);white-space:nowrap;z-index:2;}
 .lang-link:hover{color:var(--text);border-color:var(--dim);background:rgba(255,255,255,.05);}
-.lang-link .flag{font-size:1.05em;line-height:1;}
+.lang-link .flag{display:block;width:17px;height:11px;flex-shrink:0;border-radius:2px;overflow:hidden;line-height:0;box-shadow:0 0 0 1px rgba(255,255,255,.14);}
+.lang-link .flag svg{display:block;width:100%;height:100%;}
 
 .hd{width:100%;text-align:center;padding:14px 160px 11px;border-bottom:1px solid var(--border-soft);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.04),transparent);z-index:2;}
 .hd-title-row{display:flex;align-items:center;justify-content:center;gap:9px;}
 .hd-icon{width:21px;height:21px;color:var(--accent2);flex-shrink:0;}
-.hd h1{font-family:'Syne',sans-serif;font-size:1.5em;font-weight:800;letter-spacing:-0.02em;background:linear-gradient(135deg,#eef1fb,var(--accent2) 72%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hd h1{font-family:'Syne',sans-serif;font-size:1.5em;font-weight:700;letter-spacing:0;background:linear-gradient(135deg,#eef1fb,var(--accent2) 72%);-webkit-background-clip:text;background-clip:text;color:transparent;}
 .hd p{color:var(--dim);font-size:0.8em;max-width:640px;margin:4px auto 0;line-height:1.45;}
 
 /* phase wizard */
@@ -63,10 +64,14 @@ body{font-family:'DM Sans',sans-serif;font-size:15px;background:var(--bg);color:
 .wz-label{font-size:.74em;font-weight:600;color:var(--dim);transition:.35s var(--ease-out);white-space:nowrap;}
 .wz-line{width:34px;height:2px;background:var(--border);margin:0 10px;border-radius:2px;position:relative;overflow:hidden;flex-shrink:0;}
 .wz-line::after{content:'';position:absolute;inset:0;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s var(--ease-out);}
-.wz-step.done .wz-line::after,.wz-line.fill::after{width:100%;}
+.wz-line.fill::after{width:100%;}
 .wz-step.active .wz-dot{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 0 5px rgba(77,128,255,.16);}
 .wz-step.active .wz-label{color:var(--text);}
 .wz-step.done .wz-dot{background:rgba(52,199,89,.16);border-color:var(--green);color:var(--green);}
+/* Klara steg markeras med en bock i stället för sitt nummer, så att
+   status framgår även för den som inte skiljer grönt från blått. */
+.wz-step.done .wz-dot{font-size:0;}
+.wz-step.done .wz-dot::before{content:'✓';font-size:15px;font-weight:700;line-height:1;}
 .wz-step.done .wz-label{color:var(--subtle);}
 @media(max-width:680px){.wz-label{display:none;}.wz-line{width:20px;margin:0 5px;}}
 
@@ -90,8 +95,8 @@ body{font-family:'DM Sans',sans-serif;font-size:15px;background:var(--bg);color:
 .act-hd{display:flex;align-items:center;gap:13px;padding:20px 24px 0;}
 .act-badge{width:34px;height:34px;border-radius:11px;background:var(--accent-dim);border:1px solid rgba(122,162,255,.3);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.82em;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .act-titles{flex:1;min-width:0;}
-.act-title{font-family:'Syne',sans-serif;font-size:1.12em;font-weight:800;letter-spacing:-.01em;}
-.act-sub{font-size:.78em;color:var(--dim);margin-top:1px;}
+.act-title{font-family:'Syne',sans-serif;font-size:1.22em;font-weight:700;letter-spacing:.005em;line-height:1.25;}
+.act-sub{font-size:.82em;color:var(--dim);margin-top:3px;line-height:1.4;}
 .act-body{padding:18px 24px 24px;display:flex;flex-direction:column;gap:18px;}
 
 /* data mode segmented control */
@@ -188,7 +193,7 @@ body{font-family:'DM Sans',sans-serif;font-size:15px;background:var(--bg);color:
 .rc:nth-child(2){animation-delay:.08s;}
 .rc:nth-child(3){animation-delay:.16s;}
 .rc-head{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;}
-.rc-head h2{font-family:'Syne',sans-serif;font-size:1em;font-weight:800;letter-spacing:-.01em;}
+.rc-head h2{font-family:'Syne',sans-serif;font-size:1.08em;font-weight:700;letter-spacing:.005em;}
 .rc-head .sub{font-size:0.76em;color:var(--dim);}
 
 /* fairness hero card - gold framed */
@@ -295,7 +300,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 .concept-close:hover{border-color:var(--red);color:var(--red);transform:translateZ(30px) rotate(90deg);}
 .concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
 .concept-icon svg{width:28px;height:28px;}
-.concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
+.concept-title{font-family:'Syne',sans-serif;font-size:1.3em;font-weight:700;margin-bottom:9px;letter-spacing:.005em;line-height:1.25;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
 .concept-def{font-size:.85em;line-height:1.6;color:var(--dim);margin-bottom:16px;position:relative;z-index:3;transform:translateZ(18px);}
 .concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;}
 .concept-illus{background:rgba(0,0,0,.25);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;transform:translateZ(10px);}
@@ -315,7 +320,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 .data-modal.show{display:flex;}
 .data-modal-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:18px;width:92%;max-width:680px;max-height:82vh;display:flex;flex-direction:column;gap:8px;}
 .data-modal-hd{display:flex;justify-content:space-between;align-items:center;}
-.data-modal-hd h3{font-family:'Syne',sans-serif;font-size:0.95em;color:var(--accent2);}
+.data-modal-hd h3{font-family:'Syne',sans-serif;font-size:1.04em;font-weight:700;letter-spacing:.005em;color:var(--accent2);}
 .data-modal-close{background:none;border:1px solid var(--border);border-radius:5px;color:var(--dim);font-size:0.8em;padding:4px 10px;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .data-modal-close:hover{border-color:var(--red);color:var(--red);}
 .data-modal-info{font-size:0.76em;color:var(--dim);line-height:1.5;}
@@ -335,16 +340,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 /* intro overlay */
 .overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;}
 .overlay.show{display:flex;}
-.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border-soft);border-radius:20px;padding:32px 36px;max-width:520px;width:100%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s var(--ease-spring);}
+.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border-soft);border-radius:20px;padding:32px 36px;max-width:min(520px,calc(100vw - 40px));width:100%;text-align:center;max-height:90vh;max-height:90dvh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s var(--ease-spring);}
 @keyframes overlayIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
 .overlay-icon{width:48px;height:48px;margin:0 auto 14px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);}
 .overlay-icon svg{width:25px;height:25px;}
-.overlay-card h2{font-family:'Syne',sans-serif;font-size:1.4em;font-weight:800;letter-spacing:-.01em;margin-bottom:8px;background:linear-gradient(135deg,#eef1fb,var(--accent2) 72%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.overlay-card h2{font-family:'Syne',sans-serif;font-size:1.42em;font-weight:700;letter-spacing:.005em;line-height:1.25;margin-bottom:8px;}
 .overlay-card .sub{font-size:0.87em;color:var(--subtle);line-height:1.6;margin-bottom:14px;text-align:left;}
 .overlay-card .steps{display:flex;flex-direction:column;gap:12px;margin:16px 0;text-align:left;}
 .overlay-card .step{display:flex;gap:12px;align-items:flex-start;font-size:0.85em;color:var(--subtle);line-height:1.55;}
 .overlay-card .step strong{color:var(--text);}
-.step-num{width:25px;height:25px;border-radius:50%;background:rgba(77,128,255,0.14);color:var(--accent2);font-weight:700;font-size:0.8em;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(77,128,255,0.28);padding-top:1px;}
+.step-num{width:24px;height:24px;flex-shrink:0;display:grid;place-items:center;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:rgba(34,211,238,.12);color:#22d3ee;border:1px solid rgba(34,211,238,.25);}
 .overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:16px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s var(--ease-spring);box-shadow:0 8px 24px rgba(77,128,255,.28);}
 .overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
 .overlay-btn svg{width:15px;height:15px;flex-shrink:0;}
@@ -368,6 +373,39 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
   .act-body{padding:14px 16px 18px;}
   .act-hd{padding:16px 16px 0;}
 }
+
+/* ── Stegindikatorn ──
+   Linjen mellan stegen fylls i takt med hur långt man kommit, i stället
+   för att bara byta färg. Klara steg får en bock, så att det syns vilka
+   som är avklarade även utan färgseende. */
+.wizard{gap:0;}
+.wz-dot{width:32px;height:32px;font-size:.75em;position:relative;}
+.wz-dot::after{content:'';position:absolute;inset:-5px;border-radius:50%;
+  border:1px solid transparent;transition:.4s var(--ease-spring);}
+.wz-step.active .wz-dot::after{border-color:rgba(77,128,255,.35);}
+.wz-line{width:44px;height:3px;background:var(--border);border-radius:3px;}
+.wz-line::after{content:'';position:absolute;inset:0;width:0;border-radius:3px;
+  background:linear-gradient(90deg,var(--accent),var(--green));
+  transition:width .5s var(--ease-out);}
+.wz-line.fill::after{width:100%;}
+@media(max-width:640px){
+  .wizard{padding:0 10px;}
+  .wz-line{width:26px;margin:0 6px;}
+  .wz-dot{width:28px;height:28px;}
+}
+
+/* ── Aktkort ──
+   Rubrikraden får en tunn avgränsning mot innehållet, och det aktiva
+   kortet en svag accentkant, så att man ser var man befinner sig. */
+.act{border-color:rgba(122,162,255,.22);}
+.act-hd{padding:20px 24px 16px;border-bottom:1px solid var(--border-soft);margin-bottom:18px;}
+.act-badge{width:36px;height:36px;border-radius:11px;font-size:.86em;}
+@media(max-width:640px){ .act-hd{padding:16px 16px 13px;margin-bottom:14px;} }
+
+/* Ikoner i stället för emoji: samma utseende oavsett plattform. */
+.seg-btn svg,.data-note svg,.gstat-neutral svg{flex-shrink:0}
+.twin-avatar svg{display:block;margin:0 auto}
+.vlock{display:inline-flex;align-items:center;opacity:.5}
 </style>
 </head>
 <body>
@@ -380,17 +418,17 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
     <h1>The Bias Lab</h1>
   </div>
   <p>Train a recruitment AI on skewed historical data – discover how discrimination emerges and how hard it is to remove.</p>
-  <a class="lang-link" href="https://www.ai-aktiviteter.se/bias-labbet"><span class="flag">🇸🇪</span> Svenska</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/bias-labbet"><span class="flag" aria-hidden="true"><svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#006aa7"/><path d="M20 0v36M0 18h60" stroke="#fecc02" stroke-width="7"/></svg></span> Svenska</a>
 </div>
 
 <div class="wizard" id="wizard">
-  <div class="wz-step active" id="wz1"><div class="wz-dot">01</div><div class="wz-label">Data</div></div>
+  <div class="wz-step active" id="wz1"><div class="wz-dot">1</div><div class="wz-label">Data</div></div>
   <div class="wz-line" id="wzl1"></div>
-  <div class="wz-step" id="wz2"><div class="wz-dot">02</div><div class="wz-label">Training</div></div>
+  <div class="wz-step" id="wz2"><div class="wz-dot">2</div><div class="wz-label">Training</div></div>
   <div class="wz-line" id="wzl2"></div>
-  <div class="wz-step" id="wz3"><div class="wz-dot">03</div><div class="wz-label">Review</div></div>
+  <div class="wz-step" id="wz3"><div class="wz-dot">3</div><div class="wz-label">Review</div></div>
   <div class="wz-line" id="wzl3"></div>
-  <div class="wz-step" id="wz4"><div class="wz-dot">04</div><div class="wz-label">Conclusion</div></div>
+  <div class="wz-step" id="wz4"><div class="wz-dot">4</div><div class="wz-label">Conclusion</div></div>
 </div>
 
 <div class="stage-wrap">
@@ -407,14 +445,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
     </div>
     <div class="act-body">
       <div class="seg" id="dataSeg">
-        <button class="seg-btn on" id="segHist" onclick="onDataModeChange('hist')">📜 Historical data</button>
-        <button class="seg-btn fair" id="segFair" onclick="onDataModeChange('fair')">⚖️ Fair data</button>
+        <button class="seg-btn on" id="segHist" onclick="onDataModeChange('hist')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 0 2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 0-2-2z"/><path d="M9 8h6M9 12h6"/></svg> Historical data</button>
+        <button class="seg-btn fair" id="segFair" onclick="onDataModeChange('fair')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M12 4v16M7 20h10"/><path d="M12 7 5 9M12 7l7 2"/><circle cx="5" cy="9.6" r="2.2"/><circle cx="19" cy="9.6" r="2.2"/></svg> Fair data</button>
       </div>
       <div class="data-lead" id="dataLead"></div>
       <details class="more" id="dataDetails">
         <summary>Show the group statistics</summary>
         <div class="gstat" id="gstat"></div>
-        <button class="btn ghost" style="align-self:flex-start;margin-top:12px;" onclick="openDataModal()">📋 View the full dataset (300 rows)</button>
+        <button class="btn ghost" style="align-self:flex-start;margin-top:12px;" onclick="openDataModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><rect x="5" y="3" width="14" height="18" rx="2.2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> View the full dataset</button>
       </details>
       <button class="next-btn" onclick="goToAct(2)">Continue to inputs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </div>
@@ -431,12 +469,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
     </div>
     <div class="act-body">
       <div class="var-grid">
-        <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Education score</span><span class="vlock">🔒</span></div>
-        <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Work experience</span><span class="vlock">🔒</span></div>
+        <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Education score</span><span class="vlock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;display:inline-block;vertical-align:-2px;flex-shrink:0"><rect x="5.5" y="10.5" width="13" height="9.5" rx="2.4"/><path d="M8.5 10.5V7a3.5 3.5 0 0 1 7 0v3.5"/></svg></span></div>
+        <div class="var-toggle on locked"><span class="vdot"></span><span class="vname">Work experience</span><span class="vlock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;display:inline-block;vertical-align:-2px;flex-shrink:0"><rect x="5.5" y="10.5" width="13" height="9.5" rx="2.4"/><path d="M8.5 10.5V7a3.5 3.5 0 0 1 7 0v3.5"/></svg></span></div>
         <div class="var-toggle on" id="vtKon" onclick="toggleVar('kon')"><span class="vdot"></span><span class="vname">Gender</span></div>
         <div class="var-toggle on" id="vtLucka" onclick="toggleVar('lucka')"><span class="vdot"></span><span class="vname">Gap in CV (years)</span></div>
       </div>
-      <div class="data-note">💡 Try it first with everything switched on. Later you can come back here, turn off <strong>Gender</strong>, and retrain – to see whether that's enough to make the model fair.</div>
+      <div class="data-note">Try it first with everything switched on. Later you can come back here, turn off <strong>Gender</strong>, and retrain – to see whether that's enough to make the model fair.</div>
       <button class="next-btn" onclick="goToAct(3)">Continue to training <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </div>
   </div>
@@ -453,7 +491,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
     <div class="act-body">
       <div id="trainIdle">
         <button class="train-cta idle" id="trainCta" onclick="startTraining()">
-          <span class="train-cta-icon" id="trainCtaIcon">🧠</span>
+          <span class="train-cta-icon" id="trainCtaIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg></span>
           <span class="train-cta-text" id="trainCtaText">Train the model</span>
         </button>
       </div>
@@ -507,7 +545,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 
 <div class="data-modal" id="dataModal">
   <div class="data-modal-card">
-    <div class="data-modal-hd"><h3>📋 The training data – Teknova AB's history</h3><button class="data-modal-close" onclick="closeDataModal()">✕ Close</button></div>
+    <div class="data-modal-hd"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><rect x="5" y="3" width="14" height="18" rx="2.2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> The training data – Teknova AB's history</h3><button class="data-modal-close" onclick="closeDataModal()">✕ Close</button></div>
     <div class="data-modal-info">Rows highlighted in red = people who <strong>were qualified but not hired</strong>. Because the data is constructed for this lab, we know the "true suitability" – <strong>in reality no such ground truth exists</strong>, which is exactly what makes the problem hard to detect.</div>
     <div class="data-modal-scroll" id="dataModalContent"></div>
   </div>
@@ -517,12 +555,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
   <div class="overlay-card">
     <div class="overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M7 21h10"/><path d="M12 6L4 8.5M12 6l8 2.5"/><circle cx="4" cy="9" r="2"/><circle cx="20" cy="9.5" r="2"/></svg></div>
     <h2>The Bias Lab</h2>
-    <p class="sub">An AI learns from data. But what happens when the data reflects old injustices? Here you'll carry out the investigation yourself – step by step – and see how discrimination can creep into an AI system.</p>
+    <p class="sub">The company Teknova AB is about to let an AI system sort its job applications. The model will be trained on the company's earlier hiring decisions. You carry out the investigation of what it learns.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">01</div><div><strong>Train and review</strong> – Let the model learn from the history. Then see what it has learned, how it judges new applicants, and how it responds to two identical CVs where only gender differs.</div></div>
-      <div class="step"><div class="step-num">02</div><div><strong>Try to fix it</strong> – Go back, hide the applicants' gender from the model, and investigate whether that's enough to make it fair.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Train and review</strong> – let the model learn from the history, then examine how it judges two identical CVs where only gender differs.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Try to fix it</strong> – hide the applicants' gender from the model and investigate whether that is enough to make it fair.</div></div>
     </div>
-    <p class="sub" style="margin-bottom:0;">💡 All the data in this lab is made up, but this type of bias occurs in real AI systems.</p>
+    <p class="sub" style="margin-bottom:0;">All the data in this lab is made up, but this type of bias occurs in real AI systems.</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 </div>
@@ -689,7 +727,7 @@ function updateWizard(){
 
 function actSummary(n){
   if(n===1){
-    return `<b>${dataMode==='fair'?'⚖️ Fair data':'📜 Historical data'}</b> · 300 applications (110 women, 190 men)`;
+    return `<b>${dataMode==='fair'?'⚖️ Fair data':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 0 2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 0-2-2z"/><path d="M9 8h6M9 12h6"/></svg> Historical data'}</b> · 300 applications (110 women, 190 men)`;
   }
   if(n===2){
     const seen=['Education','Experience'];
@@ -883,7 +921,7 @@ function renderTrainIdle(){
   }else{
     wrap.innerHTML = `
       <button class="train-cta idle" id="trainCta" onclick="startTraining()">
-        <span class="train-cta-icon" id="trainCtaIcon">🧠</span>
+        <span class="train-cta-icon" id="trainCtaIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg></span>
         <span class="train-cta-text" id="trainCtaText">Train the model</span>
       </button>`;
   }
@@ -956,7 +994,7 @@ function renderDataStats(){
 
   if(!useKon){
     document.getElementById('gstat').innerHTML =
-      `<div class="gstat-neutral">🚫 The model no longer sees <strong>gender</strong>, so the groups can't be compared here.<br><br>
+      `<div class="gstat-neutral"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M3 3l18 18"/><path d="M10.6 10.7a2 2 0 0 0 2.8 2.8"/><path d="M9.4 5.4A9.7 9.7 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.3 3.2M6.3 6.8C4 8.3 3 10.6 3 12c0 2.5 4 7 9 7 1.2 0 2.3-.3 3.3-.7"/></svg> The model no longer sees <strong>gender</strong>, so the groups can't be compared here.<br><br>
        It still has access to <strong>education, experience${useLucka ? ' and CV gap' : ''}</strong>. Retrain and check <strong>"The model's learned weights"</strong> to see what it weighs instead.</div>`;
   }else{
     const rows = [
@@ -982,15 +1020,15 @@ function renderDataStats(){
   const lead=document.getElementById('dataLead');
   if(dataMode==='hist'){
     let txt=`Here are <strong>Teknova's past hiring decisions</strong> – the data the model will be trained on. Women and men have comparable qualifications, but historically ${hK} of the women were hired versus ${hM} of the men. That's the bias the model is about to learn.`;
-    if(!useKon && !useLucka) txt+=`<br><br>🚫 The model can't see <strong>either the applicants' gender or their CV gap</strong> during training – only education and experience.`;
-    else if(!useKon) txt+=`<br><br>🚫 You've hidden <strong>gender</strong>: the model can no longer see whether an applicant is a woman or a man. Is that enough to make it fair?`;
-    else if(!useLucka) txt+=`<br><br>🚫 You've hidden <strong>the CV gap</strong>: the model no longer sees it during training.`;
+    if(!useKon && !useLucka) txt+=`<br><br><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M3 3l18 18"/><path d="M10.6 10.7a2 2 0 0 0 2.8 2.8"/><path d="M9.4 5.4A9.7 9.7 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.3 3.2M6.3 6.8C4 8.3 3 10.6 3 12c0 2.5 4 7 9 7 1.2 0 2.3-.3 3.3-.7"/></svg> The model can't see <strong>either the applicants' gender or their CV gap</strong> during training – only education and experience.`;
+    else if(!useKon) txt+=`<br><br><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M3 3l18 18"/><path d="M10.6 10.7a2 2 0 0 0 2.8 2.8"/><path d="M9.4 5.4A9.7 9.7 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.3 3.2M6.3 6.8C4 8.3 3 10.6 3 12c0 2.5 4 7 9 7 1.2 0 2.3-.3 3.3-.7"/></svg> You've hidden <strong>gender</strong>: the model can no longer see whether an applicant is a woman or a man. Is that enough to make it fair?`;
+    else if(!useLucka) txt+=`<br><br><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M3 3l18 18"/><path d="M10.6 10.7a2 2 0 0 0 2.8 2.8"/><path d="M9.4 5.4A9.7 9.7 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.3 3.2M6.3 6.8C4 8.3 3 10.6 3 12c0 2.5 4 7 9 7 1.2 0 2.3-.3 3.3-.7"/></svg> You've hidden <strong>the CV gap</strong>: the model no longer sees it during training.`;
     lead.innerHTML=txt;
   }else{
     let txt=`<strong>⚖️ Fair training data selected:</strong> the model is now trained on who was <strong>actually qualified</strong> based on merit, instead of on the historical decisions. (In reality, such ground truth rarely exists – that's the whole problem.)`;
-    if(!useKon && !useLucka) txt+=`<br><br>🚫 In addition, the model can't see <strong>gender or CV gap</strong>.`;
-    else if(!useKon) txt+=`<br><br>🚫 You've also hidden <strong>gender</strong> from the model.`;
-    else if(!useLucka) txt+=`<br><br>🚫 You've also hidden <strong>the CV gap</strong> from the model.`;
+    if(!useKon && !useLucka) txt+=`<br><br><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M3 3l18 18"/><path d="M10.6 10.7a2 2 0 0 0 2.8 2.8"/><path d="M9.4 5.4A9.7 9.7 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.3 3.2M6.3 6.8C4 8.3 3 10.6 3 12c0 2.5 4 7 9 7 1.2 0 2.3-.3 3.3-.7"/></svg> In addition, the model can't see <strong>gender or CV gap</strong>.`;
+    else if(!useKon) txt+=`<br><br><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M3 3l18 18"/><path d="M10.6 10.7a2 2 0 0 0 2.8 2.8"/><path d="M9.4 5.4A9.7 9.7 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.3 3.2M6.3 6.8C4 8.3 3 10.6 3 12c0 2.5 4 7 9 7 1.2 0 2.3-.3 3.3-.7"/></svg> You've also hidden <strong>gender</strong> from the model.`;
+    else if(!useLucka) txt+=`<br><br><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M3 3l18 18"/><path d="M10.6 10.7a2 2 0 0 0 2.8 2.8"/><path d="M9.4 5.4A9.7 9.7 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.3 3.2M6.3 6.8C4 8.3 3 10.6 3 12c0 2.5 4 7 9 7 1.2 0 2.3-.3 3.3-.7"/></svg> You've also hidden <strong>the CV gap</strong> from the model.`;
     lead.innerHTML=txt;
   }
 }
@@ -998,7 +1036,7 @@ function renderDataStats(){
 function modelChipHTML(m){
   return `<span class="model-chip"><strong>Trained with:</strong>
     Gender ${m.useKon ? '✓' : '–'} · CV gap ${m.useLucka ? '✓' : '–'} ·
-    ${m.dataMode === 'fair' ? '⚖️ fair training data' : '📜 historical training data'}</span>`;
+    ${m.dataMode === 'fair' ? '⚖️ fair training data' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 0 2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 0-2-2z"/><path d="M9 8h6M9 12h6"/></svg> historical training data'}</span>`;
 }
 
 function weightsHTML(){
@@ -1032,9 +1070,9 @@ function animateCount(el, from, to, duration, fmt){
 function renderFairness(){
   const r = evaluate(model);
   let vEmoji, vTxt;
-  if(r.gap > 15){ vEmoji='🚨'; vTxt=`Large gap: men are recommended far more often than women.`; }
-  else if(r.gap > 5){ vEmoji='⚠️'; vTxt=`The gap has shrunk but remains. Where does it come from?`; }
-  else { vEmoji='✅'; vTxt=`The groups are now treated roughly equally.`; }
+  if(r.gap > 15){ vEmoji=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M12 4.5 2.8 20h18.4z"/><path d="M12 10v4.5M12 17.4h.01"/></svg>`; vTxt=`Large gap: men are recommended far more often than women.`; }
+  else if(r.gap > 5){ vEmoji=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5M12 16h.01"/></svg>`; vTxt=`The gap has shrunk but remains. Where does it come from?`; }
+  else { vEmoji=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><circle cx="12" cy="12" r="9"/><path d="M8 12.4l2.7 2.6L16 9.6"/></svg>`; vTxt=`The groups are now treated roughly equally.`; }
   const gapColor = r.gap > 15 ? '#ef5b5b' : r.gap > 5 ? '#ffce54' : '#34c759';
 
   document.getElementById('fairArea').innerHTML = `
@@ -1079,9 +1117,9 @@ function renderFairnessReveal(){
   if(!model) return;
   const r = evaluate(model);
   let vEmoji, vTxt;
-  if(r.gap > 15){ vEmoji='🚨'; vTxt=`Large gap: men are recommended far more often than women.`; }
-  else if(r.gap > 5){ vEmoji='⚠️'; vTxt=`The gap has shrunk but remains. Where does it come from?`; }
-  else { vEmoji='✅'; vTxt=`The groups are now treated roughly equally.`; }
+  if(r.gap > 15){ vEmoji=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M12 4.5 2.8 20h18.4z"/><path d="M12 10v4.5M12 17.4h.01"/></svg>`; vTxt=`Large gap: men are recommended far more often than women.`; }
+  else if(r.gap > 5){ vEmoji=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5M12 16h.01"/></svg>`; vTxt=`The gap has shrunk but remains. Where does it come from?`; }
+  else { vEmoji=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><circle cx="12" cy="12" r="9"/><path d="M8 12.4l2.7 2.6L16 9.6"/></svg>`; vTxt=`The groups are now treated roughly equally.`; }
   const gapColor = r.gap > 15 ? '#ef5b5b' : r.gap > 5 ? '#ffce54' : '#34c759';
 
   document.getElementById('revealVerdict').innerHTML =
@@ -1129,7 +1167,7 @@ function renderTwins(){
     <div class="twins">
       <div class="twin k" id="twinAnna">
         <div class="twin-scan"></div>
-        <div class="twin-avatar">👩</div>
+        <div class="twin-avatar"><svg viewBox="0 0 24 24" fill="currentColor" style="width:26px;height:26px"><circle cx="12" cy="7.4" r="4"/><path d="M12 12.6c-3.4 0-5.6 2.1-6.2 5.2-.2 1 .1 1.6.7 1.9l2-.1.5 3.4h6l.5-3.4 2 .1c.6-.3.9-.9.7-1.9-.6-3.1-2.8-5.2-6.2-5.2z"/></svg></div>
         <div class="tname">Anna</div>
         <div class="tstamp-wrap"><span class="tstamp" id="annaStamp"></span></div>
         <div class="tcv">Education: <b id="annaUtb"></b> · Experience: <b id="annaErf"></b> yrs<br>Gender: <b>woman</b></div>
@@ -1138,7 +1176,7 @@ function renderTwins(){
       </div>
       <div class="twin m" id="twinAdam">
         <div class="twin-scan"></div>
-        <div class="twin-avatar">👨</div>
+        <div class="twin-avatar"><svg viewBox="0 0 24 24" fill="currentColor" style="width:26px;height:26px"><circle cx="12" cy="7.4" r="4"/><path d="M12 12.6c-3.6 0-6.2 2-6.2 5.1V22h2.6v-4.6h1V22h5.2v-4.6h1V22h2.6v-4.3c0-3.1-2.6-5.1-6.2-5.1z"/></svg></div>
         <div class="tname">Adam</div>
         <div class="tstamp-wrap"><span class="tstamp" id="adamStamp"></span></div>
         <div class="tcv">Education: <b id="adamUtb"></b> · Experience: <b id="adamErf"></b> yrs<br>Gender: <b>man</b></div>
@@ -1307,7 +1345,7 @@ const CONCEPTS={
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="14" r="3"/><circle cx="17" cy="14" r="3"/><path d="M5 6l2 2 3-3M15 5l4 4"/></svg>',
     title:'Direct discrimination',
     def:'The decision changes when only the protected characteristic changes. <strong>The Twin Test</strong> reveals this: same qualifications, different outcome.',
-    illus:'<svg viewBox="0 0 140 70"><circle cx="40" cy="38" r="17" fill="rgba(192,132,252,.15)" stroke="#c084fc" stroke-width="1.5"/><circle cx="100" cy="38" r="17" fill="rgba(77,128,255,.15)" stroke="#4d80ff" stroke-width="1.5"/><text x="40" y="44" text-anchor="middle" font-size="15">👩</text><text x="100" y="44" text-anchor="middle" font-size="15">👨</text><circle cx="55" cy="20" r="8.5" fill="#ef5b5b"/><path d="M51.5 16.5l7 7M58.5 16.5l-7 7" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><circle cx="115" cy="20" r="8.5" fill="#34c759"/><path d="M111 20.5l3 3 6-7" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="70" y="66" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#8791b3">same qualifications</text></svg>'
+    illus:'<svg viewBox="0 0 140 70"><circle cx="40" cy="38" r="17" fill="rgba(192,132,252,.15)" stroke="#c084fc" stroke-width="1.5"/><circle cx="100" cy="38" r="17" fill="rgba(77,128,255,.15)" stroke="#4d80ff" stroke-width="1.5"/><text x="40" y="44" text-anchor="middle" font-size="15"><svg viewBox="0 0 24 24" fill="currentColor" style="width:26px;height:26px"><circle cx="12" cy="7.4" r="4"/><path d="M12 12.6c-3.4 0-5.6 2.1-6.2 5.2-.2 1 .1 1.6.7 1.9l2-.1.5 3.4h6l.5-3.4 2 .1c.6-.3.9-.9.7-1.9-.6-3.1-2.8-5.2-6.2-5.2z"/></svg></text><text x="100" y="44" text-anchor="middle" font-size="15"><svg viewBox="0 0 24 24" fill="currentColor" style="width:26px;height:26px"><circle cx="12" cy="7.4" r="4"/><path d="M12 12.6c-3.6 0-6.2 2-6.2 5.1V22h2.6v-4.6h1V22h5.2v-4.6h1V22h2.6v-4.3c0-3.1-2.6-5.1-6.2-5.1z"/></svg></text><circle cx="55" cy="20" r="8.5" fill="#ef5b5b"/><path d="M51.5 16.5l7 7M58.5 16.5l-7 7" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><circle cx="115" cy="20" r="8.5" fill="#34c759"/><path d="M111 20.5l3 3 6-7" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="70" y="66" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#8791b3">same qualifications</text></svg>'
   },
   indirekt:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-6 8v6l-4 2v-8L4 4z"/></svg>',
