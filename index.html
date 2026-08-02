@@ -59,7 +59,7 @@
   /* Vinjett ger djup och riktar blicken mot mitten */
   .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 120% 90% at 50% 34%,transparent 55%,rgba(3,5,10,.55) 100%);}
   @keyframes layerFade{to{opacity:1;}}
-  .spotlight{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .4s var(--ease-out);background:radial-gradient(480px circle at var(--sx,50%) var(--sy,20%),rgba(255,255,255,.035),transparent 70%);}
+  .spotlight{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .4s var(--ease-out);background:radial-gradient(300px circle at var(--sx,50%) var(--sy,20%),rgba(255,255,255,.02),transparent 72%);}
   .spotlight.on{opacity:1;}
   .noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px;}
   .container{position:relative;z-index:2;max-width:960px;margin:0 auto;padding:0 24px;}
@@ -72,7 +72,7 @@
   @keyframes slideDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
 
   /* ── Hero ── */
-  .hero{position:relative;text-align:center;padding:140px 0 40px;}
+  .hero{position:relative;text-align:center;padding:64px 0 40px;}
   .hero-eyebrow{opacity:0;animation:fadeUp .6s var(--ease-out) .28s forwards;font-size:15px;color:var(--text-secondary);line-height:1.5;margin-bottom:18px;font-weight:500;}
   .hero-eyebrow strong{color:var(--text-primary);font-weight:600;}
   /* ══ Logga: nätverket blir ordet ══
@@ -141,6 +141,9 @@
   html.js :is(.section,.book-section).in{opacity:1;transform:none;}
   html.js .section .card{opacity:0;}
   html.js .section.in .card{animation:cardIn .55s var(--ease-out) both;}
+  /* Introanimationen slutar gälla vid hovring. Annars låser dess slutbildruta
+     fast transformen, och kortet kan inte lyftas. */
+  html.js .section.in .card:hover,html.js .section.in .card:focus-visible{animation:none;opacity:1;}
   .section-header{display:flex;align-items:center;gap:12px;margin-bottom:22px;padding-left:4px;}.section-icon{width:36px;height:36px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;}.section-icon svg{width:18px;height:18px;}.section-header h2{font-size:18px;font-weight:600;letter-spacing:-0.01em;white-space:nowrap;}.section-header::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-subtle),transparent);margin-left:6px;}
 
   .grid{display:grid;gap:14px;}
@@ -161,7 +164,7 @@
   .card{background:linear-gradient(165deg,rgba(28,37,64,.7),rgba(16,21,36,.75));backdrop-filter:blur(24px) saturate(1.35);-webkit-backdrop-filter:blur(24px) saturate(1.35);border:1px solid rgba(255,255,255,0.10);border-radius:var(--radius);padding:26px;cursor:pointer;position:relative;overflow:hidden;transition:transform 0.4s var(--ease-out),box-shadow 0.4s var(--ease-out),border-color .35s ease;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:14px;box-shadow:0 14px 34px rgba(0,0,0,.32),0 1px 0 rgba(255,255,255,.08) inset,0 0 0 1px rgba(255,255,255,.02) inset;}
   .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity 0.35s ease;}
   .card::after{content:'';position:absolute;inset:0;background:radial-gradient(220px circle at var(--mx,50%) var(--my,20%),rgba(255,255,255,.09),transparent 65%);opacity:0;transition:opacity .4s ease;pointer-events:none;}
-  .card:hover{border-color:var(--border-hover);transform:translateY(-6px) rotate(-.6deg);box-shadow:0 26px 54px rgba(0,0,0,.4),0 1px 0 rgba(255,255,255,.06) inset;}
+  .card:hover{border-color:var(--border-hover);transform:translateY(-6px);box-shadow:0 26px 54px rgba(0,0,0,.4),0 1px 0 rgba(255,255,255,.06) inset;}
   .card:hover::before{opacity:1;}
   .card:hover::after{opacity:1;}
   .card:hover .card-arrow{opacity:1;transform:translate(0,0);}
@@ -247,7 +250,7 @@
     .fp,.bloom,.glint,.syn{display:none!important;}
   }
 
-  @media(max-width:500px){.hero{padding:72px 0 24px;}.logo{margin-bottom:16px;}.hero p{font-size:15px;max-width:340px;white-space:normal;}}
+  @media(max-width:500px){.hero{padding:40px 0 24px;}.logo{margin-bottom:16px;}.hero p{font-size:15px;max-width:340px;white-space:normal;}}
 
 
 /* ══════════════════════════════════════════════════════════════
@@ -375,45 +378,26 @@
   22%{stroke-dashoffset:-100;opacity:1;}
   26%,100%{stroke-dashoffset:-100;opacity:0;}
 }
-.cviz[data-v="kmeans"] .iv-b{fill:none;stroke:rgba(255,255,255,.17);stroke-width:1.5;stroke-linecap:round}
+.cviz[data-v="kmeans"] .iv-b{fill:none;stroke:rgba(255,255,255,.17);stroke-width:1.5;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:0}
 .cviz[data-v="kmeans"] .iv-p circle{r:2.5}
 .cviz[data-v="kmeans"] .iv-c{fill:#0b0f1a;stroke-width:2.1}
 .cviz[data-v="kmeans"] .iv-x{stroke-width:1.5;stroke-linecap:round}
-.cviz[data-v="kmeans"] .iv-b{stroke-dasharray:64;stroke-dashoffset:64}
 .cviz[data-v="kmeans"] .iv-k{transform-box:fill-box;transform-origin:center}
-.cviz[data-v="kmeans"] .iv-b{fill:none;stroke:rgba(255,255,255,.17);stroke-width:1.5;stroke-linecap:round}
-.cviz[data-v="kmeans"] .iv-p circle{r:2.5}
-.cviz[data-v="kmeans"] .iv-c{fill:#0b0f1a;stroke-width:2.1}
-.cviz[data-v="kmeans"] .iv-x{stroke-width:1.5;stroke-linecap:round}
-.cviz[data-v="kmeans"] .iv-b{stroke-dasharray:64;stroke-dashoffset:64}
-.cviz[data-v="kmeans"] .iv-k{transform-box:fill-box;transform-origin:center}
-.card:hover .cviz[data-v="kmeans"] .iv-p{animation:kmeans_ivFade 460ms var(--ez) forwards}
-.card:hover .cviz[data-v="kmeans"] .g2{animation-delay:140ms}
-.card:hover .cviz[data-v="kmeans"] .g3{animation-delay:280ms}
-.card:hover .cviz[data-v="kmeans"] .iv-b{animation:kmeans_ivDraw 620ms var(--ez) 620ms forwards}
-.card:hover .cviz[data-v="kmeans"] .iv-k{
-    animation:kmeans_ivPop 480ms var(--sp) 980ms forwards}
-.card:hover .cviz[data-v="kmeans"] .k2{animation-delay:1080ms}
-.card:hover .cviz[data-v="kmeans"] .k3{animation-delay:1180ms}
-.card:hover .cviz[data-v="kmeans"] .iv-p{animation:kmeans_ivFade 460ms var(--ez) forwards}
-.card:hover .cviz[data-v="kmeans"] .iv-b{animation:kmeans_ivDraw 620ms var(--ez) 620ms forwards}
-.card:hover .cviz[data-v="kmeans"] .iv-k{
-    animation:kmeans_ivPop 480ms var(--sp) 980ms forwards}
-.card:focus-visible .cviz[data-v="kmeans"] .iv-p{animation:kmeans_ivFade 460ms var(--ez) forwards}
-.card:focus-visible .cviz[data-v="kmeans"] .g2{animation-delay:140ms}
-.card:focus-visible .cviz[data-v="kmeans"] .g3{animation-delay:280ms}
-.card:focus-visible .cviz[data-v="kmeans"] .iv-b{animation:kmeans_ivDraw 620ms var(--ez) 620ms forwards}
-.card:focus-visible .cviz[data-v="kmeans"] .iv-k{
-    animation:kmeans_ivPop 480ms var(--sp) 980ms forwards}
-.card:focus-visible .cviz[data-v="kmeans"] .k2{animation-delay:1080ms}
-.card:focus-visible .cviz[data-v="kmeans"] .k3{animation-delay:1180ms}
-.card:focus-visible .cviz[data-v="kmeans"] .iv-p{animation:kmeans_ivFade 460ms var(--ez) forwards}
-.card:focus-visible .cviz[data-v="kmeans"] .iv-b{animation:kmeans_ivDraw 620ms var(--ez) 620ms forwards}
-.card:focus-visible .cviz[data-v="kmeans"] .iv-k{
-    animation:kmeans_ivPop 480ms var(--sp) 980ms forwards}
-@keyframes kmeans_ivPop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
-@keyframes kmeans_ivDraw{to{stroke-dashoffset:0}}
-@keyframes kmeans_ivFade{to{opacity:1}}
+.cviz[data-v="kmeans"] .g1{--kc:#ff9f4a}
+.cviz[data-v="kmeans"] .g2{--kc:#4ecfff}
+.cviz[data-v="kmeans"] .g3{--kc:#ff5f9e}
+/* En hel klustringscykel loopar vid hovring: punkterna tappar sin tillhörighet,
+   centroiderna sätts ut på nytt och gränserna dras om. */
+.card:hover .cviz[data-v="kmeans"] .iv-p,.card:focus-visible .cviz[data-v="kmeans"] .iv-p{animation:kmeans_ivFade 4.2s var(--ease-out) infinite}
+.card:hover .cviz[data-v="kmeans"] .g2,.card:focus-visible .cviz[data-v="kmeans"] .g2{animation-delay:.12s}
+.card:hover .cviz[data-v="kmeans"] .g3,.card:focus-visible .cviz[data-v="kmeans"] .g3{animation-delay:.24s}
+.card:hover .cviz[data-v="kmeans"] .iv-b,.card:focus-visible .cviz[data-v="kmeans"] .iv-b{animation:kmeans_ivDraw 4.2s var(--ease-out) infinite}
+.card:hover .cviz[data-v="kmeans"] .iv-k,.card:focus-visible .cviz[data-v="kmeans"] .iv-k{animation:kmeans_ivPop 4.2s var(--ease-out) infinite}
+.card:hover .cviz[data-v="kmeans"] .k2,.card:focus-visible .cviz[data-v="kmeans"] .k2{animation-delay:.1s}
+.card:hover .cviz[data-v="kmeans"] .k3,.card:focus-visible .cviz[data-v="kmeans"] .k3{animation-delay:.2s}
+@keyframes kmeans_ivPop{0%{opacity:0;transform:scale(.35)}14%{opacity:1;transform:scale(1.12)}24%,88%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.35)}}
+@keyframes kmeans_ivDraw{0%,10%{stroke-dashoffset:100}44%,88%{stroke-dashoffset:0}100%{stroke-dashoffset:100}}
+@keyframes kmeans_ivFade{0%,30%{fill:#5b657f}58%,90%{fill:var(--kc)}100%{fill:#5b657f}}
 .cviz[data-v="qlearn"] .iv-cell{fill:rgba(255,255,255,.05);stroke:rgba(255,255,255,.15);stroke-width:1.5}
 .cviz[data-v="qlearn"] .iv-goal{fill:rgba(52,199,89,.18);stroke:#34c759}
 .cviz[data-v="qlearn"] .iv-coin{fill:#ffd866;filter:drop-shadow(0 0 4px rgba(255,216,102,.7))}
@@ -775,7 +759,7 @@
     <div class="subgroup-kicker">Oövervakad inlärning</div>
     <div class="grid grid-sims grid-single">
 
-      <a class="card" data-accent="violet" href="/k-means"><div class="card-viz"><svg class="cviz" data-v="kmeans" viewBox="-29.0 5.5 258.1 89.0" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="iv-b" d="M100 24V3"/><path class="iv-b" d="M100 24 33 91"/><path class="iv-b" d="M100 24 167 91"/><g class="iv-p g1" fill="#ff9f4a"><circle cx="36" cy="21" r="2.5"/><circle cx="43" cy="24" r="2.5"/><circle cx="45" cy="34" r="2.5"/><circle cx="48" cy="18" r="2.5"/><circle cx="53" cy="11" r="2.5"/><circle cx="54" cy="32" r="2.5"/><circle cx="59" cy="22" r="2.5"/><circle cx="63" cy="30" r="2.5"/></g><g class="iv-p g2" fill="#4ecfff"><circle cx="140" cy="28" r="2.5"/><circle cx="142" cy="21" r="2.5"/><circle cx="144" cy="36" r="2.5"/><circle cx="150" cy="17" r="2.5"/><circle cx="150" cy="30" r="2.5"/><circle cx="152" cy="38" r="2.5"/><circle cx="159" cy="22" r="2.5"/><circle cx="161" cy="35" r="2.5"/></g><g class="iv-p g3" fill="#ff5f9e"><circle cx="93" cy="70" r="2.5"/><circle cx="95" cy="81" r="2.5"/><circle cx="98" cy="60" r="2.5"/><circle cx="102" cy="69" r="2.5"/><circle cx="105" cy="78" r="2.5"/><circle cx="107" cy="63" r="2.5"/><circle cx="110" cy="84" r="2.5"/><circle cx="114" cy="73" r="2.5"/></g><g class="iv-k k1"><circle class="iv-c" cx="50" cy="24" r="5.4" stroke="#ff9f4a"/><path class="iv-x" d="M47.4 24h5.2M50 21.4v5.2" stroke="#ff9f4a"/></g><g class="iv-k k2"><circle class="iv-c" cx="150" cy="24" r="5.4" stroke="#4ecfff"/><path class="iv-x" d="M147.4 24h5.2M150 21.4v5.2" stroke="#4ecfff"/></g><g class="iv-k k3"><circle class="iv-c" cx="100" cy="74" r="5.4" stroke="#ff5f9e"/><path class="iv-x" d="M97.4 74h5.2M100 71.4v5.2" stroke="#ff5f9e"/></g></svg></div><h3>k‑means‑klustring</h3><span class="card-desc">Undersök hur en algoritm hittar mönster i data utan att veta vad den letar efter. Kör den steg för steg och se hur valet av k påverkar grupperingen.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Kap. 3 · k‑means-algoritmen</span><span class="tag-pages">(s. 120–122)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="card" data-accent="violet" href="/k-means"><div class="card-viz"><svg class="cviz" data-v="kmeans" viewBox="-29.0 5.5 258.1 89.0" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="iv-b" pathLength="100" d="M100 24V3"/><path class="iv-b" pathLength="100" d="M100 24 33 91"/><path class="iv-b" pathLength="100" d="M100 24 167 91"/><g class="iv-p g1" fill="#ff9f4a"><circle cx="36" cy="21" r="2.5"/><circle cx="43" cy="24" r="2.5"/><circle cx="45" cy="34" r="2.5"/><circle cx="48" cy="18" r="2.5"/><circle cx="53" cy="11" r="2.5"/><circle cx="54" cy="32" r="2.5"/><circle cx="59" cy="22" r="2.5"/><circle cx="63" cy="30" r="2.5"/></g><g class="iv-p g2" fill="#4ecfff"><circle cx="140" cy="28" r="2.5"/><circle cx="142" cy="21" r="2.5"/><circle cx="144" cy="36" r="2.5"/><circle cx="150" cy="17" r="2.5"/><circle cx="150" cy="30" r="2.5"/><circle cx="152" cy="38" r="2.5"/><circle cx="159" cy="22" r="2.5"/><circle cx="161" cy="35" r="2.5"/></g><g class="iv-p g3" fill="#ff5f9e"><circle cx="93" cy="70" r="2.5"/><circle cx="95" cy="81" r="2.5"/><circle cx="98" cy="60" r="2.5"/><circle cx="102" cy="69" r="2.5"/><circle cx="105" cy="78" r="2.5"/><circle cx="107" cy="63" r="2.5"/><circle cx="110" cy="84" r="2.5"/><circle cx="114" cy="73" r="2.5"/></g><g class="iv-k k1"><circle class="iv-c" cx="50" cy="24" r="5.4" stroke="#ff9f4a"/><path class="iv-x" d="M47.4 24h5.2M50 21.4v5.2" stroke="#ff9f4a"/></g><g class="iv-k k2"><circle class="iv-c" cx="150" cy="24" r="5.4" stroke="#4ecfff"/><path class="iv-x" d="M147.4 24h5.2M150 21.4v5.2" stroke="#4ecfff"/></g><g class="iv-k k3"><circle class="iv-c" cx="100" cy="74" r="5.4" stroke="#ff5f9e"/><path class="iv-x" d="M97.4 74h5.2M100 71.4v5.2" stroke="#ff5f9e"/></g></svg></div><h3>k‑means‑klustring</h3><span class="card-desc">Undersök hur en algoritm hittar mönster i data utan att veta vad den letar efter. Kör den steg för steg och se hur valet av k påverkar grupperingen.</span><span class="card-tag"><span class="tag-chapter"><svg aria-hidden="true"><use href="#i-book"/></svg> Kap. 3 · k‑means-algoritmen</span><span class="tag-pages">(s. 120–122)</span></span><svg class="card-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
     </div>
 
@@ -883,7 +867,6 @@
   if (reduced) return;
   let raf = null, tx = 50, ty = 20;
   document.addEventListener('mousemove', e => {
-    spot.classList.add('on');
     const xPct = (e.clientX / window.innerWidth) * 100;
     const yPct = (e.clientY / window.innerHeight) * 100;
     tx = xPct; ty = yPct;
@@ -895,7 +878,10 @@
   });
   document.addEventListener('mouseleave', () => spot.classList.remove('on'));
 
+  // Ljuskäglan visas bara när pekaren är på ett kort.
   document.querySelectorAll('.card, .book-card').forEach(card => {
+    card.addEventListener('mouseenter', () => spot.classList.add('on'));
+    card.addEventListener('mouseleave', () => spot.classList.remove('on'));
     card.addEventListener('mousemove', e => {
       const r = card.getBoundingClientRect();
       const mx = ((e.clientX - r.left) / r.width) * 100;
