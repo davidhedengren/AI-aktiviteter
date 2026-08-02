@@ -37,7 +37,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .back-link:hover{color:var(--text);border-color:var(--dim);}
 .lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .lang-link:hover{color:var(--text);border-color:var(--dim);}
-.lang-link .flag{font-size:1.05em;line-height:1;}
+.lang-link svg{width:17px;height:11px;border-radius:2px;display:block;flex-shrink:0;}
 .hd{width:100%;text-align:center;padding:8px 16px 7px;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(180deg,rgba(77,128,255,0.03),transparent);}
 .hd h1{font-family:'Syne',sans-serif;font-size:1.08em;font-weight:800;letter-spacing:-0.02em;text-shadow:0 0 30px rgba(102,152,255,.2);}.hd h1 span{color:var(--accent2);}
 .hd p{color:var(--dim);font-size:0.8em;max-width:600px;margin:0 auto;line-height:1.4;}
@@ -190,7 +190,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 <div class="hd">
   <a class="back-link" href="/">← AI-aktiviteter</a>
   <h1>Luffarschack i <span>partiellt observerbar</span> miljö</h1>
-  <a class="lang-link" href="https://www.ai-aktiviteter.se/luffarschack_ENG"><span class="flag">🇬🇧</span> English</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/luffarschack_ENG" hreflang="en" lang="en"><svg viewBox="0 0 50 30" aria-hidden="true"><rect width="50" height="30" fill="#012169"/><path d="M0,0 L50,30 M50,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#fff" stroke-width="10"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#C8102E" stroke-width="6"/></svg>English</a>
 </div>
 <div class="main">
   <div class="board-area">
