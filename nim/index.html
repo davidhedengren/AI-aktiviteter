@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NIM med förstärkningsinlärning</title>
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0a0e1a">
 <meta name="description" content="Se hur ett AI-system lär sig spela NIM från grunden. Träna det olika många gånger, följ hur strategin växer fram i en Q-tabell och testa att spela mot det.">
@@ -21,6 +18,9 @@
 <meta name="twitter:title" content="NIM med förstärkningsinlärning – ai-aktiviteter.se">
 <meta name="twitter:description" content="Se hur ett AI-system lär sig spela NIM från grunden. Träna det olika många gånger, följ hur strategin växer fram i en Q-tabell och testa att spela mot det.">
 <meta name="twitter:image" content="https://www.ai-aktiviteter.se/og-image.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NIM med förstärkningsinlärning</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -1117,21 +1117,24 @@ function playFromCard(){ closeConcept(); goPhase('play'); newGame(); }
 
 (function initCardTilt(){
   const el=document.getElementById('conceptCardInner');if(!el)return;
-  const MAX_TILT=7;
+  const card=document.getElementById('conceptCard');
+  const MAX_TILT=2;
+  const flat=()=>{el.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';el.style.boxShadow='';};
   el.addEventListener('mousemove',e=>{
     const r=el.getBoundingClientRect();
     const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
-    const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
     el.style.setProperty('--mx',(px*100)+'%');
     el.style.setProperty('--my',(py*100)+'%');
+    // Träningskortet ligger helt stilla – innehållet animeras redan och lutning gör det svårläst.
+    if(card&&card.classList.contains('training-card')){flat();return;}
+    const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
     el.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-    const sx=(px-0.5)*22,sy=(py-0.5)*22;
+    const sx=(px-0.5)*7,sy=(py-0.5)*7;
     el.style.boxShadow=`${-sx}px ${20-sy}px 55px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04) inset`;
   });
   el.addEventListener('mouseleave',()=>{
-    el.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    flat();
     el.style.setProperty('--mx','50%');el.style.setProperty('--my','50%');
-    el.style.boxShadow='';
   });
 })();
 </script>
