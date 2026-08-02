@@ -213,16 +213,7 @@ svg.plot.ready .pt{cursor:pointer}
 .pstep.done .pn{background:rgba(61,220,132,.15);color:var(--grn)}
 .pstep.done .pshead{color:var(--sub)}
 .pline{width:2px;height:15px;margin-left:32px;background:var(--line2);flex:none}
-.looprail{position:absolute;right:-6px;top:var(--lt,0);height:var(--lh,0);width:22px;pointer-events:none;
-  border:2px dashed var(--line2);border-left:none;border-radius:0 14px 14px 0;
-  transition:top var(--t2) var(--ez),height var(--t2) var(--ez),border-color var(--t2) var(--ez)}
-.looprail .lcap{position:absolute;right:-7px;top:50%;transform:translate(100%,-50%);
-  writing-mode:vertical-rl;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--dim);white-space:nowrap}
-.pipe.live .looprail{border-color:var(--gold)}
-.pipe.enter .looprail{animation:railIn var(--t3) var(--ez)}
 @keyframes railIn{0%{opacity:.35;transform:scaleX(1.15)}100%{opacity:1;transform:none}}
-.pipe.done .looprail{border-color:var(--grn);border-style:solid}
 .pstep.win{animation:winGlow 1.1s var(--ez)}
 @keyframes winGlow{0%{box-shadow:0 0 0 1px var(--c),0 0 0 0 rgba(61,220,132,.5)}
   55%{box-shadow:0 0 0 1px var(--c),0 0 0 16px rgba(61,220,132,0)}
@@ -343,7 +334,6 @@ svg.plot.ready .pt{cursor:pointer}
 @media(max-width:640px){
   body{font-size:15px}.wrap{padding:8px 14px 36px;gap:14px}
   .panel{padding:15px 16px}.phead{padding:13px 14px}.pdin{padding:0 14px 14px}
-  .looprail{right:-3px;width:16px}.looprail .lcap{display:none}
 }
 
 /* ── introruta ──
@@ -496,6 +486,12 @@ svg.plot.ready .pt{cursor:pointer}
 .gbox .gt{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
 .gbox p{font-size:13px;color:var(--sub);margin-top:5px}
 .gbox .chip{font-family:'JetBrains Mono',monospace;min-width:38px}
+
+/* En ensam knapp ska inte spänna över hela bredden – då ser den ut som en
+   uppmaning i stället för ett val bland flera. */
+.cpanel.single{justify-content:center;}
+.cpanel.single .cpbtn{flex:0 1 auto;min-width:190px;padding:10px 22px;font-size:12.5px;}
+
 </style>
 </head>
 <body>
@@ -545,8 +541,7 @@ svg.plot.ready .pt{cursor:pointer}
       </section>
       <div class="pline"></div>
 
-      <div class="looprail" aria-hidden="true"><span class="lcap">upprepas</span></div>
-
+      
       <section class="pstep" data-s="3">
         <button class="phead" id="h3b" aria-expanded="false" aria-controls="p3body">
           <span class="pn">3</span><span class="pshead">Tilldela datapunkter</span><span class="pback">bakåt</span>
@@ -1386,27 +1381,11 @@ function pipeUI(){
     if(s5){s5.classList.remove('win');void s5.offsetWidth;s5.classList.add('win');}}
   if(!fin())celebrated=false;
   $('phdot').style.setProperty('--c',PC[act-1]);
-  railGeom();
 }
-function railGeom(){
-  const a=document.querySelector('.pstep[data-s="3"]'),b=document.querySelector('.pstep[data-s="4"]'),
-        rail=document.querySelector('.looprail'),pipe=$('pipe');
-  if(!a||!b||!rail)return;
-  const pr=pipe.getBoundingClientRect();
-  rail.style.setProperty('--lt',(a.getBoundingClientRect().top-pr.top-8)+'px');
-  rail.style.setProperty('--lh',(b.getBoundingClientRect().bottom-a.getBoundingClientRect().top+16)+'px');
-}
-/* Bågens geometri räknas om löpande, även medan panelerna animerar. */
-if(window.ResizeObserver){
-  const ro=new ResizeObserver(()=>railGeom());
-  document.querySelectorAll('.pstep').forEach(el=>ro.observe(el));
-  ro.observe($('pipe'));
-}
-window.addEventListener('resize',railGeom);
-document.fonts&&document.fonts.ready.then(railGeom);
 
 /* ═══════════ panelinnehåll ═══════════ */
 const lock=()=>busy||running||!!view;
+
 function pipeBodies(){
   const L=lock();
   const sz=cens.map((_,i)=>pts.filter(p=>p.c===i).length);
@@ -1509,7 +1488,9 @@ function renderCPanel(){
   if(running){
     h=`<button class="cpbtn stop" id="cpStop">■ Stoppa</button>`;
   }else if(!cens.length){
-    h=`<button class="cpbtn pri" style="--c:${PC[1]}" id="cpPlace"${ds&&!lock()?'':' disabled'}>Placera centroider</button>`;
+    /* Knappen dyker upp först när eleven kommit till steg 2, inte direkt
+       när datamängden valts. */
+    if(st>=2)h=`<button class="cpbtn pri" style="--c:${PC[1]}" id="cpPlace"${ds&&!lock()?'':' disabled'}>Placera centroider</button>`;
   }else{
     const canAssign=phase!=='assigned'&&!lock();
     const canMove=phase==='assigned'&&!lock();
@@ -1518,6 +1499,7 @@ function renderCPanel(){
      +`<button class="cpbtn" id="cpAuto"${!lock()&&!fin()?'':' disabled'}>Kör klart</button>`;
   }
   el.innerHTML=h;
+  el.classList.toggle('single',(h.match(/<button/g)||[]).length===1);
   const map={cpPlace:place,cpAssign:doAssign,cpMove:doMove,cpAuto:auto,cpStop:stopAuto};
   Object.entries(map).forEach(([id,fn])=>{const e=$(id);if(e)e.onclick=()=>fn();});
 }
@@ -1565,8 +1547,14 @@ function newData(){
 }
 function setK(k){
   if(!ds||k===K)return;
+  /* Fanns centroider redan har eleven passerat steg 2. Då placeras nya ut
+     direkt i samma datamängd, så att man kan jämföra olika k utan att först
+     behöva trycka på Placera centroider igen. */
+  const had=cens.length>0;
   guardReset(`k ändrades till ${k}. Körningen nollställdes.`,()=>{
-    K=k;reset();forced=null;elbKey='';render();});
+    K=k;reset();forced=null;elbKey='';
+    if(had){seed();syncC();drawV(cens,true);paint();}
+    render();});
 }
 function setSeedMode(m){
   if(m===seedMode)return;
@@ -1622,7 +1610,6 @@ function render(){
   if(!view)drawV(cens,false);
   paint();
   refresh();
-  requestAnimationFrame(railGeom);
 }
 
 readURL();load();build();
