@@ -181,6 +181,13 @@ input[type=range]:disabled{opacity:0.3;}
 .prow.greedy-top{box-shadow:inset 3px 0 0 var(--gold);}
 .prow.greedy-top .pw::after{content:' ▲';color:var(--gold);font-size:0.85em;}
 .prest{font-size:0.72em;color:var(--dim);text-align:center;padding:4px;}
+/* Spökrader före träning: visar vad rutan kommer att fyllas med */
+.ghost-rows{display:flex;flex-direction:column;gap:7px;}
+.grow{display:grid;grid-template-columns:minmax(96px,1.7fr) minmax(40px,1fr) 46px;gap:10px;align-items:center;padding:9px 10px;border-radius:9px;background:var(--surface2);opacity:.5;}
+.grow .gw,.grow .gp{height:11px;border-radius:4px;background:rgba(255,255,255,.07);}
+.grow .gb{height:18px;border-radius:6px;background:rgba(255,255,255,.04);overflow:hidden;}
+.grow .gb i{display:block;height:100%;border-radius:6px;background:rgba(255,255,255,.09);}
+.ghost-cap{margin-top:11px;text-align:center;font-size:.72em;color:var(--dim);font-style:italic;}
 .ptable-msg{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;color:var(--dim);font-size:0.8em;line-height:1.6;padding:14px;border:1px dashed var(--border);border-radius:8px;}
 .ptable-msg .big{font-size:1.8em;}
 .ptable-msg strong{color:var(--text);}
@@ -210,14 +217,18 @@ input[type=range]:disabled{opacity:0.3;}
 @keyframes ivPulse{0%,100%{opacity:.5;}50%{opacity:1;}}
 
 /* ═══ Remake: stegbaserad layout ═══ */
-.wrap{max-width:1180px;margin:0 auto;width:100%;padding:34px 16px 52px;display:flex;flex-direction:column;gap:40px;flex:1;position:relative;z-index:1;}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:26px 28px;box-shadow:0 6px 22px rgba(0,0,0,0.32);}
+.wrap{max-width:1180px;margin:0 auto;width:100%;padding:28px 16px 44px;display:flex;flex-direction:column;gap:32px;flex:1;position:relative;z-index:1;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:22px 24px;box-shadow:0 6px 22px rgba(0,0,0,0.32);}
 .card-h{display:flex;align-items:center;gap:9px;font-family:'DM Sans',sans-serif;font-size:1.02em;font-weight:700;margin-bottom:20px;letter-spacing:-0.01em;}
 .step-badge{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:0.78em;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
 .mini-t{display:block;font-size:0.64em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim);margin-bottom:8px;}
-.grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(340px,1fr);gap:32px;align-items:start;}
-.stage{display:flex;flex-direction:column;gap:26px;min-width:0;}
-.side{display:flex;flex-direction:column;gap:20px;min-width:0;}
+.grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(340px,1fr);gap:26px;align-items:start;}
+.stage{display:flex;flex-direction:column;gap:22px;min-width:0;}
+.side{display:flex;flex-direction:column;gap:18px;min-width:0;
+  position:sticky;top:12px;max-height:calc(100vh - 24px);overflow-y:auto;
+  scrollbar-width:thin;padding-right:2px;}
+.side::-webkit-scrollbar{width:6px;}
+.side::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 .coll{background:var(--surface);}
 
 .prompt-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--surface);border:1px solid rgba(77,128,255,0.4);border-radius:12px;padding:10px 12px;}
@@ -258,6 +269,20 @@ input[type=range]:disabled{opacity:0.3;}
 
 @media(max-width:900px){
   .grid{grid-template-columns:1fr;}
+  /* Staplat läge: minnet ska komma direkt efter genereringsrutan, inte sist.
+     display:contents löser upp spalterna så att barnen kan ordnas fritt. */
+  .stage,.side{display:contents;}
+  .side{position:static;max-height:none;overflow:visible;}
+  .grid > .stage > .prompt-bar{order:1;}
+  .grid > .stage > .prompt-extra{order:2;}
+  .grid > .stage > .gen-box{order:3;}
+  .grid > .stage > .origin-box{order:4;}
+  .grid > .stage > .controls{order:5;}
+  .grid > .side > .coll.sticky{order:6;}
+  .grid > .stage > #startExamplesRow{order:7;}
+  .grid > .stage > .narr{order:8;}
+  .grid > .stage > .legend{order:9;}
+  .grid > .side > *{order:10;}
   .back-link{position:static;transform:none;margin-bottom:4px;}
   .lang-link{position:static;transform:none;margin-bottom:4px;margin-left:8px;}
   .hd{padding:22px 16px 18px;}
@@ -270,19 +295,19 @@ input[type=range]:disabled{opacity:0.3;}
   flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:5px;
   padding:8px 4px 7px;border-radius:10px;cursor:pointer;text-align:center;font-family:'DM Sans',sans-serif;
   -webkit-tap-highlight-color:transparent;position:relative;overflow:hidden;isolation:isolate;
-  background:rgba(255,255,255,.028);
-  border:1px solid rgba(255,255,255,.055);
-  box-shadow:none;
+  background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.012) 55%);
+  border:1px solid rgba(255,255,255,.065);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.045);
   transition:transform .3s var(--ease-spring),box-shadow .3s var(--ease-out),border-color .3s var(--ease-out),background .3s var(--ease-out);
 }
-.sh-tile:hover:not(.active){transform:translateY(-1px);border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.05);}
+.sh-tile:hover:not(.active){transform:translateY(-1px);border-color:rgba(255,255,255,.14);background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02) 55%);}
 .sh-tile:active{transform:translateY(-1px) scale(.98);}
 .sh-tile:focus-visible{outline:2px solid var(--step-accent);outline-offset:2px;}
 .sh-ico-wrap{
   width:23px;height:23px;border-radius:7px;display:flex;align-items:center;justify-content:center;position:relative;z-index:2;
-  background:rgba(255,255,255,.055);
-  color:var(--dim);border:1px solid rgba(255,255,255,.085);
-  box-shadow:none;
+  background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+  color:var(--dim);border:1px solid rgba(255,255,255,.09);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
   transition:.32s var(--ease-spring);
 }
 .sh-ico-wrap svg{width:13px;height:13px;}
@@ -291,15 +316,15 @@ input[type=range]:disabled{opacity:0.3;}
 .sh-tile.active{
   flex:1.2;
   transform:translateY(-2px);
-  background:var(--step-accent-soft);
+  background:linear-gradient(160deg,rgba(255,255,255,.06),var(--step-accent-soft) 60%);
   border-color:var(--step-accent);
-  box-shadow:0 8px 18px -12px var(--step-glow);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 8px 18px -12px var(--step-glow);
 }
 .sh-tile.active .sh-ico-wrap{
   width:27px;height:27px;
-  background:rgba(255,255,255,.09);
+  background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.04));
   border-color:var(--step-accent);color:var(--step-accent);
-  box-shadow:none;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16);
 }
 .sh-tile.active .sh-ico-wrap svg{width:14px;height:14px;}
 .sh-tile.active .sh-num{color:var(--step-accent);}
@@ -470,8 +495,8 @@ input[type=range]:disabled{opacity:0.3;}
 /* ═══ Topprad: kompakt träningsdata + stegets fokus ═══
    Fokuskortet håller den inställning steget faktiskt handlar om, så att
    den ligger högst upp bredvid datan i stället för långt ner i scenen. */
-.setup-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px;align-items:start;}
-.wrap:not(.sx-context) .setup-row{grid-template-columns:minmax(0,1fr);}
+.setup-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:18px;align-items:start;}
+.wrap:not(.sx-context) .setup-row{grid-template-columns:minmax(0,1fr);max-width:640px;}
 .setup-row .card{padding:18px 20px;}
 .setup-row .card-h{margin-bottom:13px;font-size:.95em;gap:8px;}
 .focus-card{border-color:var(--step-accent);box-shadow:0 6px 26px -8px var(--step-glow),0 6px 22px rgba(0,0,0,.32);}
@@ -653,14 +678,6 @@ input[type=range]:disabled{opacity:0.3;}
 
       <div class="gen-box" id="genBox"><span class="placeholder">Träna modellen så börjar den skriva.</span></div>
       <div class="origin-box" id="originBox"></div>
-      <div id="startExamplesRow" style="display:none;"><div class="start-examples" id="startExamples"></div></div>
-      <div class="narr" id="narr">Modellen är inte tränad ännu.</div>
-      <div class="legend">
-        <span><i class="sw-ctx"></i> <span class="term" data-term="kontext">kontext</span> (minne)</span>
-        <span><i class="sw-chosen"></i> valt ord</span>
-        <span><i class="sw-dead"></i> <span class="term" data-term="återvändsgränd">återvändsgränd</span></span>
-      </div>
-
       <div class="controls">
         <button class="btn pri big" id="stepBtn" onclick="step()">Nästa ord</button>
         <button class="btn" id="autoBtn" onclick="toggleAuto()">▶ Auto</button>
@@ -672,6 +689,13 @@ input[type=range]:disabled{opacity:0.3;}
             <option value="fast">Snabb</option>
           </select>
         </div>
+      </div>
+      <div id="startExamplesRow" style="display:none;"><div class="start-examples" id="startExamples"></div></div>
+      <div class="narr" id="narr">Modellen är inte tränad ännu.</div>
+      <div class="legend">
+        <span><i class="sw-ctx"></i> <span class="term" data-term="kontext">kontext</span> (minne)</span>
+        <span><i class="sw-chosen"></i> valt ord</span>
+        <span><i class="sw-dead"></i> <span class="term" data-term="återvändsgränd">återvändsgränd</span></span>
       </div>
 
     </section>
@@ -685,7 +709,7 @@ input[type=range]:disabled{opacity:0.3;}
           <div class="ctx-chip" id="ctxChip">Kontext: <em style="color:var(--dim)">–</em></div>
           <div class="certainty gate-context" id="certainty"></div>
           <div class="phead"><span>Kontext + nästa ord</span><span>Hur ofta</span><span style="text-align:right">Antal</span><span style="text-align:right">%</span></div>
-          <div class="ptable" id="ptable"></div>
+          <div class="ptable" id="ptable"><div class="ghost-rows" aria-hidden="true"><div class="grow"><span class="gw" style="width:72%"></span><span class="gb"><i style="width:86%"></i></span><span class="gp"></span></div><div class="grow"><span class="gw" style="width:58%"></span><span class="gb"><i style="width:54%"></i></span><span class="gp"></span></div><div class="grow"><span class="gw" style="width:64%"></span><span class="gb"><i style="width:31%"></i></span><span class="gp"></span></div></div><div class="ghost-cap">Minnet fylls när du tränar modellen.</div></div>
         </div>
       </div>
 
