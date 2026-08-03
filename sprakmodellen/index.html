@@ -535,8 +535,10 @@ input[type=range]:disabled{opacity:0.3;}
 .cmp-col.cur{border-color:var(--step-accent);}
 .cmp-k{font-family:'JetBrains Mono',monospace;font-size:.7em;font-weight:700;color:var(--dim);margin-bottom:7px;}
 .cmp-col.cur .cmp-k{color:var(--step-accent);}
+.cmp-win{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:9px;min-height:22px;}
+.cw{font-family:'JetBrains Mono',monospace;font-size:.66em;font-weight:600;padding:3px 6px;border-radius:5px;background:rgba(255,159,67,.15);border:1px solid rgba(255,159,67,.4);color:var(--text);}
 .cmp-txt{font-size:.78em;line-height:1.75;color:var(--subtle);}
-.cmp-txt b{color:var(--text);}
+.cmp-txt .seed{color:var(--dim);}
 @media(max-width:760px){.cmp-cols{grid-template-columns:1fr;gap:10px;}}
 </style>
 </head>
@@ -1730,7 +1732,8 @@ function genWith(kk, seed, n){
     const counts = models[kk].get(ctx.join(SEP));
     if(!counts) break;
     const dist = [...counts.entries()].map(([w, c]) => ({w, c}));
-    const weights = dist.map(d => Math.pow(d.c, 1 / temp));
+    // Fast temperatur: kontextlängden ska vara den enda variabeln som skiljer kolumnerna
+    const weights = dist.map(d => d.c);
     const sum = weights.reduce((a, b) => a + b, 0);
     let r = Math.random(), picked = dist[dist.length - 1].w;
     for(let i = 0; i < dist.length; i++){
@@ -1750,10 +1753,13 @@ function runCompare(){
   const at = cand[Math.floor(Math.random() * cand.length)];
   const seed = tokens.slice(at, at + 3);
   const cols = [1, 2, 3].map(kk => {
-    const toks = genWith(kk, seed.slice(0, Math.max(kk, 3)), 45);
-    const body = toks.map((t, i) => (i < 3 ? `<b>${esc(t)}</b>` : esc(t)))
+    const toks = genWith(kk, seed.slice(), 45);
+    // Fönstret: exakt de ord modellen faktiskt läser innan den väljer nästa
+    const win = seed.slice(-kk).map(t => `<span class="cw">${esc(t)}</span>`).join('');
+    const body = toks.map((t, i) => (i < seed.length ? `<span class="seed">${esc(t)}</span>` : esc(t)))
                      .reduce((a, t, i) => a + (i === 0 || /^[.,!?;:]$/.test(toks[i]) ? '' : ' ') + t, '');
-    return `<div class="cmp-col${kk === k ? ' cur' : ''}"><div class="cmp-k">${kk} ord</div><div class="cmp-txt">${body}</div></div>`;
+    return `<div class="cmp-col${kk === k ? ' cur' : ''}"><div class="cmp-k">${kk} ord</div>`
+         + `<div class="cmp-win">${win}</div><div class="cmp-txt">${body}</div></div>`;
   }).join('');
   panel.innerHTML = `<div class="cmp-head"><span class="cmp-seed">${joinToks(seed)}…</span>`
     + `<button class="cmp-x" onclick="document.getElementById('cmpPanel').classList.remove('show')" aria-label="Stäng">✕</button></div>`
