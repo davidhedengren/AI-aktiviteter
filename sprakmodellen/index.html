@@ -205,7 +205,7 @@ input[type=range]:disabled{opacity:0.3;}
 .overlay-card .step{display:flex;gap:12px;align-items:flex-start;font-size:0.85em;color:var(--dim);line-height:1.55;}
 .overlay-card .step strong{color:var(--text);}
 .step-num{width:24px;height:24px;flex-shrink:0;display:grid;place-items:center;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:rgba(34,211,238,.12);color:#22d3ee;border:1px solid rgba(34,211,238,.25);}
-.overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:18px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:0.25s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 24px rgba(77,128,255,.28);}
+.overlay-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;margin-top:26px;font-family:'DM Sans',sans-serif;font-size:0.95em;font-weight:700;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:0.25s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 24px rgba(77,128,255,.28);}
 .overlay-btn:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
 .overlay-btn svg{width:15px;height:15px;flex-shrink:0;}
 .intro-viz{display:block;width:220px;height:80px;margin:0 auto 16px;}
@@ -489,7 +489,7 @@ input[type=range]:disabled{opacity:0.3;}
   .overlay-card .steps{gap:8px;margin:10px 0;}
   .overlay-card .step{font-size:0.8em;line-height:1.42;gap:10px;}
   .step-num{width:22px;height:22px;border-radius:7px;font-size:11px;}
-  .overlay-btn{padding:11px;margin-top:11px;font-size:0.9em;}
+  .overlay-btn{padding:11px;margin-top:18px;font-size:0.9em;}
 }
 
 /* ═══ Topprad: kompakt träningsdata + stegets fokus ═══
@@ -540,9 +540,16 @@ input[type=range]:disabled{opacity:0.3;}
 .og-line mark{background:rgba(255,159,67,.22);color:var(--text);border-radius:3px;padding:1px 3px;}
 
 /* Jämförelse sida vid sida */
-.cmp-btn{width:100%;margin-top:11px;padding:9px 12px;border:1px dashed var(--border);border-radius:9px;background:transparent;color:var(--dim);font-family:inherit;font-size:.76em;font-weight:600;cursor:pointer;transition:.18s;}
-.cmp-btn:hover{border-color:var(--step-accent);color:var(--text);border-style:solid;}
-.cmp-panel{display:none;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:16px 18px;box-shadow:0 6px 22px rgba(0,0,0,.32);}
+.cmp-row{display:flex;flex-direction:column;align-items:center;gap:14px;}
+.cmp-btn{display:inline-flex;align-items:center;gap:9px;padding:12px 22px;border:1px solid var(--border);border-radius:11px;
+  background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.015) 55%);
+  color:var(--subtle);font-family:'DM Sans',sans-serif;font-size:.84em;font-weight:600;cursor:pointer;
+  transition:.22s var(--ease-spring);box-shadow:inset 0 1px 0 rgba(255,255,255,.05);}
+.cmp-btn svg{width:15px;height:15px;color:var(--step-accent);transition:transform .22s var(--ease-spring);}
+.cmp-btn:hover{color:var(--text);border-color:var(--step-accent);transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 8px 20px -10px var(--step-glow);}
+.cmp-btn:hover svg{transform:scaleY(1.15);}
+.cmp-btn:active{transform:translateY(0);}
+.cmp-panel{display:none;width:100%;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:16px 18px;box-shadow:0 6px 22px rgba(0,0,0,.32);}
 .cmp-panel.show{display:block;animation:ogIn .3s var(--ease-out);}
 .cmp-head{display:flex;align-items:center;gap:9px;margin-bottom:11px;}
 .cmp-seed{font-family:'JetBrains Mono',monospace;font-size:.72em;color:var(--orange);font-weight:600;}
@@ -631,7 +638,6 @@ input[type=range]:disabled{opacity:0.3;}
         <button type="button" class="kseg-b" data-k="3" onclick="setK(3)"><b>3</b><span>ord</span></button>
       </div>
       <div class="kseg-desc" id="kDesc"></div>
-      <button type="button" class="cmp-btn" id="cmpBtn" onclick="runCompare()">Jämför 1, 2 och 3 ord sida vid sida</button>
     </div>
 
     <div class="focus-block gate-choose" id="choiceFocus">
@@ -747,7 +753,13 @@ input[type=range]:disabled{opacity:0.3;}
     </aside>
   </div>
 
-  <div class="cmp-panel" id="cmpPanel"></div>
+  <div class="cmp-row gate-context">
+    <button type="button" class="cmp-btn" id="cmpBtn" onclick="runCompare()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M5 19V9M12 19V5M19 19v-7"/></svg>
+      Jämför 1, 2 och 3 ords kontext sida vid sida
+    </button>
+    <div class="cmp-panel" id="cmpPanel"></div>
+  </div>
 
   <div class="step-foot bottom">
     <button class="btn ghost" id="prevStep" onclick="goStep(curStep-1)">← Föregående</button>
@@ -782,7 +794,7 @@ input[type=range]:disabled{opacity:0.3;}
       <div class="step"><div class="step-num">3</div><div><strong>Hur påverkas modellens val?</strong> Experimentera med temperatur och olika sätt att välja nästa ord.</div></div>
       <div class="step"><div class="step-num">4</div><div><strong>Hur formar träningsdatan modellen?</strong> Byt mellan olika texter, se hur språket förändras – kombinera sedan allt fritt och avsluta med att jämföra modellen med ChatGPT.</div></div>
     </div>
-    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 </div>
 
