@@ -355,13 +355,22 @@ input[type=range]:disabled{opacity:0.3;}
 .step-foot.bottom .btn{flex:0 0 auto;min-width:172px;justify-content:center;padding:12px 20px;}
 .btn.big-next{font-size:.92em;font-weight:700;}
 
-/* Visnings-grindar: visa bara det som hör till aktuellt steg */
-.gate-context,.gate-choose,.gate-data,.gate-prompt,.gate-pblock{display:none;}
+/* Visnings-grindar: visa bara det som hör till aktuellt steg.
+   Klassnamnen är dubblerade för att höja specificiteten till 0,2,0. Annars
+   kan en vanlig enklassregel längre ner i filen (t.ex. .cmp-row{display:flex})
+   vinna på källordning och läcka ut elementet i steg 1. */
+.gate-context.gate-context,
+.gate-choose.gate-choose,
+.gate-data.gate-data,
+.gate-prompt.gate-prompt,
+.gate-pblock.gate-pblock{display:none;}
 .wrap.sx-context .gate-context{display:block;}
 .wrap.sx-choose .gate-choose{display:block;}
 .wrap.sx-data .gate-data{display:block;}
 .wrap.sx-data .gate-prompt{display:flex;}
 .wrap.sx-data .gate-pblock{display:block;}
+/* Jämförelseraden är en flexkolumn, inte block, när den väl visas */
+.wrap.sx-context .cmp-row.gate-context{display:flex;}
 
 /* Dataset-syfte under väljaren */
 
@@ -377,6 +386,17 @@ input[type=range]:disabled{opacity:0.3;}
 .ds-card.locked .ds-lock{display:block;}
 .ds-card.locked .ds-check{display:none;}
 .ds-note{font-size:.72em;color:var(--dim);margin-top:8px;line-height:1.45;}
+/* Wikipedia-kortet: markerat som stort, med egen inläsningsindikator */
+.ds-size{display:inline-block;margin-left:6px;padding:1px 5px;border-radius:4px;font-size:.72em;font-weight:700;
+  letter-spacing:.03em;text-transform:uppercase;background:rgba(255,159,67,.16);color:var(--orange);vertical-align:middle;}
+.ds-prog{display:none;position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(255,255,255,.07);
+  border-radius:0 0 9px 9px;overflow:hidden;}
+.ds-card.loading .ds-prog{display:block;}
+.ds-card.loading{cursor:progress;}
+.ds-prog-bar{display:block;height:100%;width:0;background:var(--accent);transition:width .2s linear;}
+/* Okänd filstorlek → obestämd rörelse i stället för falsk procent */
+.ds-card.loading.indeterminate .ds-prog-bar{width:35%;animation:dsSlide 1.1s ease-in-out infinite;}
+@keyframes dsSlide{0%{transform:translateX(-100%);}100%{transform:translateX(320%);}}
 .ds-card.selected{border-color:var(--accent);background:rgba(77,128,255,0.12);box-shadow:0 0 0 1px var(--accent);}
 .ds-card .ds-name{font-weight:700;font-size:0.82em;color:var(--text);padding-right:14px;}
 .ds-card .ds-tag{font-size:0.68em;color:var(--dim);line-height:1.3;}
@@ -616,8 +636,10 @@ input[type=range]:disabled{opacity:0.3;}
       <button type="button" class="ds-card" data-key="sport" onclick="toggleCard('sport')"><span class="ds-check">✓</span><svg class="ds-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="ds-name">Sportreferatet</span><span class="ds-tag">Något friare språk</span></button>
       <button type="button" class="ds-card" data-key="hemso" onclick="toggleCard('hemso')"><span class="ds-check">✓</span><svg class="ds-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="ds-name">Hemsöborna</span><span class="ds-tag">Svensk roman</span></button>
       <button type="button" class="ds-card" data-key="shakespeare" onclick="toggleCard('shakespeare')"><span class="ds-check">✓</span><svg class="ds-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="ds-name">Shakespeare</span><span class="ds-tag">Engelsk dramatik</span></button>
+      <button type="button" class="ds-card" data-key="wiki" onclick="toggleCard('wiki')"><span class="ds-check">✓</span><svg class="ds-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="ds-name">Wikipedia<span class="ds-size">stor</span></span><span class="ds-tag">Urval ur svenskspråkiga Wikipedia</span><span class="ds-prog"><span class="ds-prog-bar"></span></span></button>
     </div>
     <div class="ds-note" id="dsNote"></div>
+    <div class="ds-note" style="margin-top:5px;font-size:.68em;">Wikipedia-texten är ett urval av redigerade artiklar, hämtat från svenskspråkiga Wikipedia och tillgängligt under licensen CC BY-SA 4.0.</div>
     <div class="coll gate-data" style="margin-top:11px;">
       <button class="coll-toggle" onclick="toggleColl(this,'textBody')">Visa texten, redigera den eller ladda upp en egen fil<span class="arr">▼</span></button>
       <div class="coll-body" id="textBody">
@@ -819,8 +841,72 @@ const PRESETS = {
   vader: '',
   sport: '',
   hemso: '',
-  shakespeare: ''
+  shakespeare: '',
+  wiki: ''          // laddas först när någon väljer den – se hamtaWiki()
 };
+
+// ── Wikipedia-korpusen ────────────────────────────────────────────
+// Flera megabyte ska inte hämtas vid sidladdning: de flesta lektioner
+// når aldrig steg 4. Filen hämtas när kortet väljs och sparas sedan i
+// Cache Storage, så andra lektionen börjar direkt.
+const WIKI_FIL = 'data/Wikipedia.txt';
+const WIKI_CACHE = 'sprakmodell-korpus-v1';
+let wikiLaddas = null;   // pågående hämtning, så dubbelklick inte hämtar två gånger
+
+async function hamtaWiki(onProgress){
+  if(PRESETS.wiki) return PRESETS.wiki;
+  if(wikiLaddas) return wikiLaddas;
+
+  wikiLaddas = (async () => {
+    let svar = null;
+    // Cache Storage kräver https eller localhost. Saknas den hämtar vi ändå.
+    const harCache = 'caches' in window;
+    if(harCache){
+      try {
+        const c = await caches.open(WIKI_CACHE);
+        svar = await c.match(WIKI_FIL);
+      } catch(e){ /* privat läge e.d. – strunt samma */ }
+    }
+    if(!svar){
+      const nat = await fetch(WIKI_FIL);
+      if(!nat.ok) throw new Error(`Kunde inte hämta ${WIKI_FIL}`);
+      if(harCache){
+        try {
+          const c = await caches.open(WIKI_CACHE);
+          await c.put(WIKI_FIL, nat.clone());
+        } catch(e){ /* cachen är en bonus, inte ett krav */ }
+      }
+      svar = nat;
+    }
+    PRESETS.wiki = await lasMedProgress(svar, onProgress);
+    return PRESETS.wiki;
+  })();
+
+  try { return await wikiLaddas; }
+  finally { wikiLaddas = null; }
+}
+
+// Läser en Response strömmande så att progressen blir verklig och inte
+// en påhittad animation. Servern gzippar filen, så content-length är den
+// komprimerade storleken – därav uppskattningen när headern saknas.
+async function lasMedProgress(svar, onProgress){
+  if(!svar.body || !onProgress) return await svar.text();
+  const total = Number(svar.headers.get('content-length')) || 0;
+  const lasare = svar.body.getReader();
+  const bitar = [];
+  let hittills = 0;
+  for(;;){
+    const { done, value } = await lasare.read();
+    if(done) break;
+    bitar.push(value);
+    hittills += value.length;
+    onProgress(total ? Math.min(1, hittills / total) : null, hittills);
+  }
+  const buf = new Uint8Array(hittills);
+  let pos = 0;
+  for(const b of bitar){ buf.set(b, pos); pos += b.length; }
+  return new TextDecoder('utf-8').decode(buf);
+}
 
 // Ladda textfilerna från data/-mappen (fungerar på GitHub Pages)
 async function loadDatasets(){
@@ -860,6 +946,10 @@ let autoTimer = null;
 let busy = false;              // låser interaktion under "vald-ord-blink"
 let deadEnd = false;
 let truncated = false;         // sant om inklistrad text kortades vid bygget
+// En korpus på flera megabyte gör <textarea> obrukbart trög. Då visas bara
+// ett smakprov i rutan medan hela texten ligger här och används vid träning.
+let fullTrainText = null;
+const TEXTAREA_TAK = 250000;   // tecken som får ligga i textrutan
 let exampleStarts = [];        // frekventa innehållsord att starta från
 let dirty = false;             // sant när träningstexten ändrats sedan senaste träning
 let vocab = new Set();         // alla unika tokens (för snabb prompt-validering)
@@ -879,23 +969,48 @@ function tokenize(text){
     .filter(t => t.length > 0);
 }
 
-function buildModels(){
+const MENINGSSLUT = new Set(['.', '!', '?']);
+const SKILJETECKEN = new Set(['.', ',', '!', '?', ';', ':']);
+const BYGG_CHUNK = 50000;   // tokens per arbetspass innan vi släpper tråden
+
+// Låt webbläsaren rita en bildruta mellan arbetspassen.
+const andas = () => new Promise(r => setTimeout(r, 0));
+
+// Bygger n-gram-modellerna för k = 1, 2, 3.
+// Nyckeln sätts ihop direkt i stället för med slice().join() — det sparar
+// tre miljoner temporära arrayer på en miljon tokens och är runt fyra
+// gånger snabbare. Arbetet delas i pass så att gränssnittet lever vidare
+// och progressbaren kan visa verklig framdrift på stora korpusar.
+async function buildModels(onProgress){
   models = {1: new Map(), 2: new Map(), 3: new Map()};
   starts = {1: [], 2: [], 3: []};
+  const N = tokens.length;
+  const chunka = N > BYGG_CHUNK;
+
   for(const kk of [1, 2, 3]){
     const m = models[kk];
-    for(let i = kk; i < tokens.length; i++){
-      const key = tokens.slice(i - kk, i).join(SEP);
-      if(!m.has(key)) m.set(key, new Map());
-      const counts = m.get(key);
-      counts.set(tokens[i], (counts.get(tokens[i]) || 0) + 1);
+    let i = kk;
+    while(i < N){
+      const stopp = chunka ? Math.min(N, i + BYGG_CHUNK) : N;
+      for(; i < stopp; i++){
+        const key = kk === 1 ? tokens[i - 1]
+                  : kk === 2 ? tokens[i - 2] + SEP + tokens[i - 1]
+                             : tokens[i - 3] + SEP + tokens[i - 2] + SEP + tokens[i - 1];
+        let counts = m.get(key);
+        if(counts === undefined){ counts = new Map(); m.set(key, counts); }
+        const nasta = tokens[i];
+        counts.set(nasta, (counts.get(nasta) || 0) + 1);
+      }
+      if(onProgress) onProgress(((kk - 1) + i / N) / 3);
+      if(chunka && i < N) await andas();
     }
     // Meningsstarter: position 0 samt varje position efter . ! ?
-    for(let j = 0; j + kk <= tokens.length; j++){
-      const isStart = j === 0 || /^[.!?]$/.test(tokens[j - 1]);
-      if(isStart && !/^[.,!?;:]$/.test(tokens[j])) starts[kk].push(j);
+    const st = starts[kk];
+    for(let j = 0; j + kk <= N; j++){
+      if((j === 0 || MENINGSSLUT.has(tokens[j - 1])) && !SKILJETECKEN.has(tokens[j])) st.push(j);
     }
   }
+  if(onProgress) onProgress(1);
 }
 
 // ════════════════════════════════════════════════════════════
@@ -1000,7 +1115,8 @@ let trainAnimRunning = false;
 async function trainAnimated(){
   if(training) return;
   // För kort text → kör vanliga bygget som visar felmeddelandet direkt
-  if(tokenize(document.getElementById('trainText').value).length < 30){ buildFromTextarea(); return; }
+  const rasText = fullTrainText !== null ? fullTrainText : document.getElementById('trainText').value;
+  if(fullTrainText === null && tokenize(rasText).length < 30){ buildFromTextarea(); return; }
   training = true;
   document.getElementById('staleNote').classList.remove('show');
   document.getElementById('trainIdle').style.display = 'none';
@@ -1010,8 +1126,29 @@ async function trainAnimated(){
 
   requestAnimationFrame(() => requestAnimationFrame(() => {
     runTrainStatusList(DURATION);
-    runTrainingCanvas(DURATION, () => {
-      buildFromTextarea();              // det riktiga bygget
+    runTrainingCanvas(DURATION, async () => {
+      // Stora korpusar tar längre tid än animationen. Då tar en fjärde
+      // statusrad vid och visar verklig framdrift i stället för att sidan
+      // ser ut att ha hängt sig.
+      const rail = document.getElementById('trainRail');
+      const wrap = document.getElementById('trainStatusList');
+      let extraRad = null;
+      const visaFramdrift = (andel) => {
+        if(!extraRad){
+          extraRad = document.createElement('div');
+          extraRad.className = 'train-status-line show';
+          extraRad.innerHTML = '<span class="tsl-dot"></span><span>Räknar ordföljder i den stora texten… 0 %</span>';
+          wrap.appendChild(extraRad);
+        }
+        rail.style.width = (andel * 100) + '%';
+        extraRad.querySelector('span:last-child').textContent =
+          `Räknar ordföljder i den stora texten… ${Math.round(andel * 100)} %`;
+      };
+      const langd = fullTrainText !== null
+        ? fullTrainText.length
+        : document.getElementById('trainText').value.length;
+
+      await buildFromTextarea(langd > 400000 ? visaFramdrift : null);   // det riktiga bygget
       setTimeout(() => {
         stage.style.display = 'none';
         document.getElementById('trainIdle').style.display = '';
@@ -1157,9 +1294,9 @@ function runTrainingCanvas(duration, onDone){
   setTimeout(finish, duration + 900);   // skyddsnät – låt aldrig bygget hänga
 }
 
-function buildFromTextarea(){
+async function buildFromTextarea(onProgress){
   stopAuto();
-  const text = document.getElementById('trainText').value;
+  const text = fullTrainText !== null ? fullTrainText : document.getElementById('trainText').value;
   let toks = tokenize(text);
   if(toks.length < 30){
     document.getElementById('stStatus').textContent = 'för kort text';
@@ -1172,7 +1309,7 @@ function buildFromTextarea(){
   if(toks.length > MAX_TOKENS){ toks = toks.slice(0, MAX_TOKENS); truncated = true; }
   tokens = toks;
   vocab = new Set(tokens);
-  buildModels();
+  await buildModels(onProgress);
   built = true;
   // Resten av sidan har ingen mening förrän det finns en modell, så den
   // fälls ut först nu. Den fälls aldrig ihop igen under sessionen.
@@ -1244,8 +1381,31 @@ function lockDatasets(allowed){
     : 'Flera texter kan väljas samtidigt. De slås då ihop till en gemensam träningstext.';
 }
 
-function toggleCard(key){
+async function toggleCard(key){
   if(unlockedDatasets && !unlockedDatasets.includes(key)) return;
+  const kort = document.querySelector(`#dsList .ds-card[data-key="${key}"]`);
+  if(kort && kort.classList.contains('loading')) return;
+
+  // Wikipedia hämtas först vid första ikryssningen.
+  if(key === 'wiki' && !PRESETS.wiki && !selectedDatasets.has('wiki')){
+    const bar = kort.querySelector('.ds-prog-bar');
+    kort.classList.add('loading', 'indeterminate');
+    try {
+      await hamtaWiki((andel) => {
+        if(andel === null) return;                     // storlek okänd
+        kort.classList.remove('indeterminate');
+        bar.style.width = (andel * 100) + '%';
+      });
+    } catch(e){
+      console.warn('hamtaWiki:', e);
+      setFileStatus('<svg class="inl-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17.5v.01"/></svg> Wikipedia-texten kunde inte hämtas. Kontrollera att <strong>data/Wikipedia.txt</strong> finns.');
+      return;
+    } finally {
+      kort.classList.remove('loading', 'indeterminate');
+      bar.style.width = '0';
+    }
+  }
+
   if(selectedDatasets.has(key)) selectedDatasets.delete(key); else selectedDatasets.add(key);
   syncCards();
   rebuildTrainText();
@@ -1268,14 +1428,39 @@ function setDatasets(keys){
 // Bygg träningstexten = alla ikryssade dataset hopslagna
 function rebuildTrainText(){
   const keys = [...selectedDatasets];
-  document.getElementById('trainText').value = keys.map(k => PRESETS[k]).join('\n\n');
+  const text = keys.map(k => PRESETS[k]).join('\n\n');
+  const ruta = document.getElementById('trainText');
+  if(text.length > TEXTAREA_TAK){
+    // Hela texten sparas undan; rutan får ett smakprov så att sidan
+    // förblir snabb. Eleven ser ändå vad modellen faktiskt tränar på.
+    fullTrainText = text;
+    ruta.value = text.slice(0, TEXTAREA_TAK).replace(/\S*$/, '')
+      + `\n\n… (visar de första ${Math.round(TEXTAREA_TAK/1000)} 000 tecknen av `
+      + `${(text.length/1000000).toFixed(1)} miljoner – modellen tränar på hela texten)`;
+    ruta.dataset.preview = '1';
+  } else {
+    fullTrainText = null;
+    ruta.value = text;
+    delete ruta.dataset.preview;
+  }
   markDirty();
 }
 
 // Eleven redigerar textrutan själv → bli "egen text" och avmarkera datasen
 function onTextEdit(){
+  const ruta = document.getElementById('trainText');
+  // Smakprovsläge: så fort eleven skriver själv gäller rutans innehåll,
+  // inte den undanlagda korpusen.
+  if(ruta.dataset.preview){
+    fullTrainText = null;
+    delete ruta.dataset.preview;
+    selectedDatasets.clear();
+    syncCards();
+    markDirty();
+    return;
+  }
   const combined = [...selectedDatasets].map(k => PRESETS[k]).join('\n\n');
-  if(document.getElementById('trainText').value !== combined){
+  if(ruta.value !== combined){
     selectedDatasets.clear();
     syncCards();
   }
@@ -1933,7 +2118,7 @@ const STEPS = [
    rec:{ds:['hemso'], k:2}},
   {label:'Data & utforskning', title:'Hur formar träningsdatan modellen?',
    icon:'<path d="M6 4h9l5 5v11H6z"/><path d="M15 4v5h5"/><path d="M9 13h6M9 17h6"/>',
-   intro:'All text modellen kan skriva kommer från dess <span class="term" data-term="träningsdata">träningsdata</span>. Träna på flera texter samtidigt eller byt till Shakespeare, och undersök hur ordval och meningsbyggnad förändras. Här är alla inställningar upplåsta.',
+   intro:'All text modellen kan skriva kommer från dess <span class="term" data-term="träningsdata">träningsdata</span>. Träna på flera texter samtidigt, byt till Shakespeare, eller pröva det stora Wikipedia-urvalet och se vad tjugo gånger mer text gör med språket. Här är alla inställningar upplåsta.',
    rec:{ds:['hemso'], k:2}}
 ];
 
@@ -1951,11 +2136,14 @@ function renderStepTiles(n){
 function goStep(n){
   n = Math.max(1, Math.min(STEPS.length, n));
   curStep = n;
+  const wrap = document.getElementById('wrapEl');
   const cls = ['wrap'];
+  // pre-train får inte nollställas här: den styr den stegvisa utfällningen och
+  // ska bara försvinna vid första träningen, aldrig vid stegbyte.
+  if(wrap.classList.contains('pre-train')) cls.push('pre-train');
   if(n >= 2) cls.push('sx-context');
   if(n >= 3) cls.push('sx-choose');
   if(n >= 4) cls.push('sx-data');
-  const wrap = document.getElementById('wrapEl');
   wrap.className = cls.join(' ');
   // Subtil egen accentfärg per steg → känsla av framsteg
   const accent = STEP_ACCENTS[n - 1] || '#4d80ff';
