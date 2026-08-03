@@ -163,17 +163,24 @@ input[type=range]:disabled{opacity:0.3;}
    fortsättningar. Panelen får en fast höjd och egen rullning, så att
    Modellstatistik under den inte trycks ur bild. */
 .ptable{display:flex;flex-direction:column;gap:7px;flex:1;min-height:120px;
-  max-height:min(46vh,420px);overflow-y:auto;overscroll-behavior:contain;
-  padding-right:4px;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;}
-.ptable::-webkit-scrollbar{width:7px;}
-.ptable::-webkit-scrollbar-track{background:transparent;}
-.ptable::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;}
-.ptable::-webkit-scrollbar-thumb:hover{background:var(--accent-dim);}
+  max-height:min(54vh,480px);overflow-y:auto;overscroll-behavior:contain;
+  padding-right:10px;padding-bottom:6px;
+  scrollbar-width:thin;scrollbar-color:var(--border2) rgba(255,255,255,.035);}
+/* Webkit: dölj pilknapparna, annars sticker en liten triangel upp ovanför
+   rullningslisten och ser ut som ett fel i layouten. */
+.ptable::-webkit-scrollbar{width:10px;}
+.ptable::-webkit-scrollbar-button{display:none;height:0;width:0;}
+.ptable::-webkit-scrollbar-corner{background:transparent;}
+.ptable::-webkit-scrollbar-track{background:rgba(255,255,255,.035);border-radius:5px;}
+/* Genomskinlig kant + padding-box ger tummen luft inuti spåret, så den
+   läses som en list och inte som ett löst streck bredvid raderna. */
+.ptable::-webkit-scrollbar-thumb{background:var(--border2);border-radius:5px;
+  border:2px solid transparent;background-clip:padding-box;min-height:34px;}
+.ptable::-webkit-scrollbar-thumb:hover{background:var(--accent);background-clip:padding-box;}
 /* Mjuk uttoning i underkanten som antyder att listan fortsätter */
-.ptable-wrap{position:relative;flex:1;display:flex;flex-direction:column;min-height:0;}
-.ptable-wrap.scrollable::after{content:'';position:absolute;left:0;right:7px;bottom:0;height:34px;
-  pointer-events:none;background:linear-gradient(to bottom,transparent,var(--surface));
-  border-radius:0 0 8px 8px;}
+.ptable-wrap{position:relative;display:flex;flex-direction:column;min-height:0;}
+.ptable-wrap.scrollable::after{content:'';position:absolute;left:0;right:11px;bottom:0;height:42px;z-index:2;
+  pointer-events:none;background:linear-gradient(to bottom,rgba(14,18,34,0) 0%,var(--surface) 82%);}
 .phead{display:grid;grid-template-columns:minmax(96px,1.7fr) minmax(40px,1fr) 30px 46px;gap:10px;padding:0 4px 2px;font-size:0.6em;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--dim);}
 .prow{display:grid;grid-template-columns:minmax(96px,1.7fr) minmax(40px,1fr) 30px 46px;gap:10px;align-items:center;padding:9px 10px;border-radius:9px;background:var(--surface2);transition:background 0.2s;}
 .ptable .prow:first-child{background:rgba(77,128,255,0.08);box-shadow:inset 3px 0 0 var(--accent2);}
@@ -2103,10 +2110,23 @@ function renderTable(probs, picked){
   // Ny kontext → börja om högst upp, annars ligger eleven kvar mitt i
   // föregående kontexts lista och tror att listan inte uppdaterats.
   tbl.scrollTop = 0;
-  // Uttoningen visas bara när det faktiskt finns mer att rulla till
-  const wrap = document.getElementById('ptableWrap');
-  if(wrap) wrap.classList.toggle('scrollable', tbl.scrollHeight > tbl.clientHeight + 4);
+  syncPtableFade();
 }
+
+// Uttoningen ska bara synas när det faktiskt finns mer nedanför. Ligger den
+// kvar när man rullat till slutet ser den ut som en skugga på måfå.
+function syncPtableFade(){
+  const tbl = document.getElementById('ptable');
+  const wrap = document.getElementById('ptableWrap');
+  if(!tbl || !wrap) return;
+  const merNedanfor = tbl.scrollHeight - tbl.scrollTop - tbl.clientHeight > 6;
+  wrap.classList.toggle('scrollable', merNedanfor);
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const tbl = document.getElementById('ptable');
+  if(tbl) tbl.addEventListener('scroll', syncPtableFade, {passive:true});
+  window.addEventListener('resize', syncPtableFade, {passive:true});
+});
 
 // Gissa först: dölj/visa sannolikheterna
 function toggleGuess(on){
