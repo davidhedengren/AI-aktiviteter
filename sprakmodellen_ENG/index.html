@@ -275,7 +275,7 @@ input[type=range]:disabled{opacity:0.3;}
 .train-status{font-size:0.74em;color:var(--green);line-height:1.4;margin-top:6px;min-height:1em;}
 .train-status strong{color:var(--text);}
 
-/* Promptens live-feedback medan man skriver */
+/* Live-feedback för prompten medan man skriver */
 .prompt-status{font-size:0.75em;line-height:1.45;min-height:1.05em;}
 .prompt-status.ok{color:var(--green);}
 .prompt-status.warn{color:var(--orange);}
@@ -690,9 +690,9 @@ input[type=range]:disabled{opacity:0.3;}
       <div class="fb-h">Context length</div>
       <div class="fb-sub">The number of previous words the model takes into account when choosing the next one.</div>
       <div class="kseg" id="kSeg" role="group" aria-label="Context length">
-        <button type="button" class="kseg-b" data-k="1" onclick="setK(1)"><b>1</b><span>ord</span></button>
-        <button type="button" class="kseg-b" data-k="2" onclick="setK(2)"><b>2</b><span>ord</span></button>
-        <button type="button" class="kseg-b" data-k="3" onclick="setK(3)"><b>3</b><span>ord</span></button>
+        <button type="button" class="kseg-b" data-k="1" onclick="setK(1)"><b>1</b><span>word</span></button>
+        <button type="button" class="kseg-b" data-k="2" onclick="setK(2)"><b>2</b><span>words</span></button>
+        <button type="button" class="kseg-b" data-k="3" onclick="setK(3)"><b>3</b><span>words</span></button>
       </div>
     </div>
 
@@ -752,7 +752,7 @@ input[type=range]:disabled{opacity:0.3;}
       <div class="narr" id="narr">The model has not been trained yet.</div>
       <div class="legend">
         <span><i class="sw-ctx"></i> <span class="term" data-term="kontext">context</span></span>
-        <span><i class="sw-chosen"></i> valt ord</span>
+        <span><i class="sw-chosen"></i> chosen word</span>
         <span><i class="sw-dead"></i> <span class="term" data-term="återvändsgränd">dead end</span></span>
       </div>
 
@@ -844,7 +844,7 @@ input[type=range]:disabled{opacity:0.3;}
     <p class="sub">Build, analyse and evaluate your own language model, step by step.</p>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div><strong>How does the model choose the next word?</strong> Follow how the model continues a text and how it decides which word comes next.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Vad minns modellen?</strong> Explore how many previous words the model takes into account, and what that does to the text.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>What does the model remember?</strong> Explore how many previous words the model takes into account, and what that does to the text.</div></div>
       <div class="step"><div class="step-num">3</div><div><strong>How is the model's choice affected?</strong> Try different ways of picking the next word, and see what temperature does to the result.</div></div>
       <div class="step"><div class="step-num">4</div><div><strong>How does the training data shape the model?</strong> Switch between texts and see how the language changes. Then combine freely, and finally compare the model with ChatGPT.</div></div>
     </div>
@@ -1287,7 +1287,16 @@ async function buildFromTextarea(onProgress){
 
 // Plocka ut några frekventa "innehållsord" som inbjudande startord.
 // Vanliga småord (och, i, en …) filtreras bort så förslagen blir konkreta.
-const STOPWORDS = new Set(['och','i','en','ett','som','var','på','till','med','det','den','att','för','av','de','är','han','hon','den','var','sin','sitt','inte','men','om','har','hade','blir','kan','vid','när','där','här','upp','över','under','efter','så','ur','mot','redan','gång','hela','andra']);
+// Svenska småord, plus engelska för Shakespeare-texten. Ord kortare än
+// fyra tecken filtreras redan bort, så listan behöver bara de längre.
+const STOPWORDS = new Set([
+  'och','i','en','ett','som','var','på','till','med','det','den','att','för','av','de','är',
+  'han','hon','sin','sitt','inte','men','om','har','hade','blir','kan','vid','när','där','här',
+  'upp','över','under','efter','så','ur','mot','redan','gång','hela','andra',
+  'that','with','this','they','have','will','from','what','been','were','them','than','then',
+  'when','your','which','their','there','would','could','should','shall','into','upon','more',
+  'most','some','such','very','thee','thou','thy','thine','hath','doth','unto','said','like'
+]);
 function topContentWords(n){
   const freq = new Map();
   for(const t of tokens){
@@ -1431,7 +1440,7 @@ function validatePrompt(){
     const last = ptoks[ptoks.length - 1];
     if(vocab.has(last)){
       el.className = 'prompt-status ok';
-      el.innerHTML = `✓ Kort prompt. Modellen hoppar in vid «${esc(last)}» i texten.`;
+      el.innerHTML = `✓ Short prompt. The model jumps in at “${esc(last)}” in the text.`;
     }else{
       el.className = 'prompt-status warn';
       el.innerHTML = `✗ The word “${esc(last)}” does not appear in the training text.`;
@@ -1598,7 +1607,7 @@ function startFromPrompt(){
     const narr = document.getElementById('narr');
     narr.classList.remove('choice');
     narr.innerHTML =
-      `Kort prompt. Modellen hoppade in vid <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> i texten ` +
+      `Short prompt. The model jumped in at <span class="ctx-inline">“${esc(ctx.join(' '))}”</span> in the text ` +
       `because it needs ${k} words of context. Press <strong>Next word</strong>.`;
   }else{
     // Ordet finns inte alls i träningstexten
@@ -1638,9 +1647,9 @@ function renderFromPrompt(){
     const narr = document.getElementById('narr');
     narr.classList.remove('choice');
     narr.innerHTML =
-      `Du skrev prompten <span style="color:var(--dim)">«${esc(forgotten)}</span> <span class="ctx-inline">${esc(ctx.join(' '))}»</span>. ` +
+      `You typed the prompt <span style="color:var(--dim)">“${esc(forgotten)}</span> <span class="ctx-inline">${esc(ctx.join(' '))}”</span>. ` +
       `With context length <strong>${k}</strong> the model only takes the last ${k} words into account, though. The rest of the prompt is already forgotten. ` +
-      `Tryck <strong>Next word</strong>.`;
+      `Press <strong>Next word</strong>.`;
   }
 }
 
@@ -1948,9 +1957,9 @@ function render(animate){
   narr.classList.remove('choice');
   narr.innerHTML =
     `The model is looking at the last <strong>${k} ${k === 1 ? 'word' : 'words'}</strong>: ` +
-    `<span class="ctx-inline">«${esc(ctx.join(' '))}»</span> → hittar ` +
+    `<span class="ctx-inline">“${esc(ctx.join(' '))}”</span> → finds ` +
     `<strong>${probs.length}</strong> possible ${probs.length === 1 ? 'continuation' : 'continuations'} in the training text. ` +
-    `Tryck <strong>Next word</strong>.`;
+    `Press <strong>Next word</strong>.`;
 }
 
 // Motivering efter ett ordval: "valde X eftersom det följde på «kontext»
@@ -1961,7 +1970,7 @@ function narrChoice(prevCtx, w, c, total){
   narr.classList.add('choice');
   narr.innerHTML =
     `The model chose <span class="chosen-inline">“${esc(w)}”</span> because it followed ` +
-    `<span class="ctx-inline">«${esc(prevCtx.join(' '))}»</span> <strong>${c} av ${total}</strong> ` +
+    `<span class="ctx-inline">“${esc(prevCtx.join(' '))}”</span> <strong>${c} of ${total}</strong> ` +
     `times in the text (${pct}%).`;
 }
 
@@ -2089,7 +2098,7 @@ const STEPS = [
 // så att aktivt-läget alltid stämmer, utan separat diff-logik.
 function renderStepTiles(n){
   document.getElementById('shTiles').innerHTML = STEPS.map((s, i) => `
-    <button class="sh-tile ${i === n - 1 ? 'active' : ''}" onclick="goStep(${i + 1})" aria-label="Steg ${i + 1}: ${s.label}">
+    <button class="sh-tile ${i === n - 1 ? 'active' : ''}" onclick="goStep(${i + 1})" aria-label="Step ${i + 1}: ${s.label}">
       <div class="sh-ico-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${s.icon}</svg></div>
       <div class="sh-num">${i + 1}</div>
       <div class="sh-lbl">${s.label}</div>
@@ -2229,7 +2238,7 @@ const CONCEPTS = {
   },
   chatgpt: {
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3M8.5 10h.01M15.5 10h.01"/></svg>',
-    title:'Modellen &amp; ChatGPT',
+    title:'The model &amp; ChatGPT',
     def:'<div class="cc-lead">This mini model and ChatGPT rest on <strong>the same basic principle</strong>: predicting the next word. The difference lies in how the probabilities are worked out.</div>'
       + '<div class="cc-sub green">Likheter</div>'
       + '<ul class="cc-list green">'
