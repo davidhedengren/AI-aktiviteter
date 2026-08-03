@@ -187,7 +187,6 @@ input[type=range]:disabled{opacity:0.3;}
 .grow .gw,.grow .gp{height:11px;border-radius:4px;background:rgba(255,255,255,.07);}
 .grow .gb{height:18px;border-radius:6px;background:rgba(255,255,255,.04);overflow:hidden;}
 .grow .gb i{display:block;height:100%;border-radius:6px;background:rgba(255,255,255,.09);}
-.ghost-cap{margin-top:11px;text-align:center;font-size:.72em;color:var(--dim);font-style:italic;}
 .ptable-msg{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;color:var(--dim);font-size:0.8em;line-height:1.6;padding:14px;border:1px dashed var(--border);border-radius:8px;}
 .ptable-msg .big{font-size:1.8em;}
 .ptable-msg strong{color:var(--text);}
@@ -237,8 +236,9 @@ input[type=range]:disabled{opacity:0.3;}
 .prompt-extra{display:flex;flex-direction:column;gap:6px;}
 .controls{display:flex;gap:7px;align-items:center;flex-wrap:wrap;}
 .btn.big{font-size:0.92em;padding:11px 18px;}
-.speed-wrap{display:flex;gap:6px;align-items:center;margin-left:auto;}
-.speed-wrap label{font-size:0.76em;color:var(--dim);font-weight:600;}
+.speed-wrap{display:flex;gap:8px;align-items:center;margin-left:auto;}
+.speed-wrap svg{width:15px;height:15px;color:var(--dim);flex-shrink:0;}
+.speed-wrap input[type=range]{width:78px;}
 
 /* Begreppsord med hover-förklaring */
 .term{border-bottom:1px dashed var(--accent2);cursor:pointer;position:relative;transition:color .15s,border-color .15s;}
@@ -512,7 +512,6 @@ input[type=range]:disabled{opacity:0.3;}
 .kseg-b:hover{border-color:var(--step-accent);color:var(--text);transform:translateY(-2px);}
 .kseg-b.on{border-color:var(--step-accent);background:var(--step-accent-soft);color:var(--text);box-shadow:0 0 0 1px var(--step-accent);}
 .kseg-b.on b{color:var(--step-accent);}
-.kseg-desc{font-size:.75em;color:var(--dim);margin-top:9px;line-height:1.5;}
 
 /* Färgprick i stället för färgemoji */
 .inl-ico{width:13px;height:13px;vertical-align:-2px;display:inline-block;}
@@ -565,6 +564,24 @@ input[type=range]:disabled{opacity:0.3;}
 .cmp-txt{font-size:.78em;line-height:1.75;color:var(--subtle);}
 .cmp-txt .seed{color:var(--dim);}
 @media(max-width:760px){.cmp-cols{grid-template-columns:1fr;gap:10px;}}
+
+/* ═══ Stegvis utfällning ═══
+   Före första träningen visas bara stegnavigeringen och träningsdatan.
+   Prompt, genererad text, minne och jämförelse saknar innehåll att visa
+   och skulle bara konkurrera om uppmärksamheten. */
+.wrap.pre-train .grid,
+.wrap.pre-train .cmp-row.gate-context,
+.wrap.pre-train .focus-card.gate-context{display:none;}
+
+.wrap:not(.pre-train) .focus-card{animation:growIn .5s var(--ease-out) both;}
+.wrap:not(.pre-train) .grid{animation:growIn .5s var(--ease-out) .07s both;}
+.wrap:not(.pre-train) .cmp-row{animation:growIn .5s var(--ease-out) .14s both;}
+@keyframes growIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+@media (prefers-reduced-motion: reduce){
+  .wrap:not(.pre-train) .focus-card,
+  .wrap:not(.pre-train) .grid,
+  .wrap:not(.pre-train) .cmp-row{animation:none;}
+}
 </style>
 </head>
 <body>
@@ -573,15 +590,15 @@ input[type=range]:disabled{opacity:0.3;}
   <a class="back-link" href="/">← AI-aktiviteter</a>
   <a class="lang-link" href="https://www.ai-aktiviteter.se/sprakmodellen_ENG" hreflang="en" lang="en"><svg class="lang-ico" viewBox="0 0 50 30" aria-hidden="true"><rect width="50" height="30" fill="#012169"/><path d="M0,0 L50,30 M50,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#fff" stroke-width="10"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#C8102E" stroke-width="6"/></svg>English</a>
   <h1><span>Språkmodell</span>-labbet</h1>
-  <p>Bygg en egen liten språkmodell av valfri text – och se exakt hur den väljer nästa ord, ord för ord.</p>
+  <p>Bygg en egen liten språkmodell av valfri text, och följ hur den väljer nästa ord.</p>
 </div>
 
-<div class="wrap" id="wrapEl">
+<div class="wrap pre-train" id="wrapEl">
 
   <!-- ─── Stegnavigering: guidad trappa ─── -->
   <section class="sh" id="sh">
     <div class="sh-tiles" id="shTiles"></div>
-    <div class="sh-hint">Ordningen är ett förslag på arbetsgång – hoppa gärna fritt mellan stegen.</div>
+    <div class="sh-hint">Stegen är ett förslag på arbetsgång. Det går bra att hoppa mellan dem.</div>
     <div class="sh-banner" id="shBanner">
       <div class="sh-title" id="shTitleEl"></div>
       <div class="sh-desc" id="shDesc"></div>
@@ -595,14 +612,14 @@ input[type=range]:disabled{opacity:0.3;}
     <div class="card-h">Träningsdata</div>
     <div id="dsLoadStatus" style="font-size:0.78em;color:var(--dim);margin-bottom:7px;"></div>
     <div class="ds-list" id="dsList">
-      <button type="button" class="ds-card" data-key="vader" onclick="toggleCard('vader')"><span class="ds-check">✓</span><svg class="ds-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="ds-name">Väderrapporten</span><span class="ds-tag">Enkel &amp; upprepad</span></button>
-      <button type="button" class="ds-card" data-key="sport" onclick="toggleCard('sport')"><span class="ds-check">✓</span><svg class="ds-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="ds-name">Sportreferatet</span><span class="ds-tag">Mer variation</span></button>
-      <button type="button" class="ds-card" data-key="hemso" onclick="toggleCard('hemso')"><span class="ds-check">✓</span><svg class="ds-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="ds-name">Hemsöborna</span><span class="ds-tag">Stor svensk roman</span></button>
-      <button type="button" class="ds-card" data-key="shakespeare" onclick="toggleCard('shakespeare')"><span class="ds-check">✓</span><svg class="ds-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="ds-name">Shakespeare</span><span class="ds-tag">Stor engelsk samling</span></button>
+      <button type="button" class="ds-card" data-key="vader" onclick="toggleCard('vader')"><span class="ds-check">✓</span><svg class="ds-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="ds-name">Väderrapporten</span><span class="ds-tag">Kort och upprepande</span></button>
+      <button type="button" class="ds-card" data-key="sport" onclick="toggleCard('sport')"><span class="ds-check">✓</span><svg class="ds-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="ds-name">Sportreferatet</span><span class="ds-tag">Något friare språk</span></button>
+      <button type="button" class="ds-card" data-key="hemso" onclick="toggleCard('hemso')"><span class="ds-check">✓</span><svg class="ds-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="ds-name">Hemsöborna</span><span class="ds-tag">Svensk roman</span></button>
+      <button type="button" class="ds-card" data-key="shakespeare" onclick="toggleCard('shakespeare')"><span class="ds-check">✓</span><svg class="ds-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="ds-name">Shakespeare</span><span class="ds-tag">Engelsk dramatik</span></button>
     </div>
     <div class="ds-note" id="dsNote"></div>
     <div class="coll gate-data" style="margin-top:11px;">
-      <button class="coll-toggle" onclick="toggleColl(this,'textBody')">Visa &amp; redigera texten – eller ladda upp en fil<span class="arr">▼</span></button>
+      <button class="coll-toggle" onclick="toggleColl(this,'textBody')">Visa texten, redigera den eller ladda upp en egen fil<span class="arr">▼</span></button>
       <div class="coll-body" id="textBody">
         <textarea id="trainText" spellcheck="false" oninput="onTextEdit()"></textarea>
         <div style="display:flex;gap:6px;margin-top:8px;">
@@ -631,28 +648,26 @@ input[type=range]:disabled{opacity:0.3;}
   <section class="card focus-card gate-context" id="focusCard">
     <div class="focus-block" id="ctxFocus">
       <div class="fb-h">Kontextlängd</div>
-      <div class="fb-sub">Hur många föregående ord modellen tittar på innan den väljer nästa.</div>
+      <div class="fb-sub">Antalet föregående ord modellen tar hänsyn till när den väljer nästa ord.</div>
       <div class="kseg" id="kSeg" role="group" aria-label="Kontextlängd">
         <button type="button" class="kseg-b" data-k="1" onclick="setK(1)"><b>1</b><span>ord</span></button>
         <button type="button" class="kseg-b" data-k="2" onclick="setK(2)"><b>2</b><span>ord</span></button>
         <button type="button" class="kseg-b" data-k="3" onclick="setK(3)"><b>3</b><span>ord</span></button>
       </div>
-      <div class="kseg-desc" id="kDesc"></div>
     </div>
 
     <div class="focus-block gate-choose" id="choiceFocus">
       <div class="fb-h">Hur ett ord väljs</div>
-      <div class="fb-sub">Modellen har flera möjliga ord att välja mellan. Detta avgör vilket det blir.</div>
       <div class="mode-cards" id="modeCards">
         <button type="button" class="mode-card selected" data-mode="weighted" onclick="onModeChange('weighted')">
           <span class="mode-check">✓</span>
           <span class="mode-name">Viktad slump</span>
-          <span class="mode-tag">Slumpar efter sannolikhet</span>
+          <span class="mode-tag">Slumpar, men följer sannolikheterna</span>
         </button>
         <button type="button" class="mode-card" data-mode="greedy" onclick="onModeChange('greedy')">
           <span class="mode-check">✓</span>
           <span class="mode-name">Girigt val</span>
-          <span class="mode-tag">Väljer alltid det vanligaste ordet</span>
+          <span class="mode-tag">Tar alltid det vanligaste ordet</span>
         </button>
       </div>
       <div class="ctrl-row" style="margin-top:12px;">
@@ -660,8 +675,8 @@ input[type=range]:disabled{opacity:0.3;}
         <input type="range" id="tempSlider" min="0.3" max="2" step="0.1" value="1" oninput="onTempChange(this.value)">
         <span class="temp-val" id="tempVal">1.0</span>
       </div>
-      <div class="hint" id="tempHint">Dra i reglaget och se vad som händer med texten.</div>
-      <button type="button" class="term-link-btn" onclick="openConcept('valmetod',event)">Mer om girigt val, slump &amp; temperatur</button>
+      <div class="hint" id="tempHint"></div>
+      <button type="button" class="term-link-btn" onclick="openConcept('valmetod',event)">Läs mer om de två valmetoderna</button>
     </div>
   </section>
 
@@ -674,7 +689,7 @@ input[type=range]:disabled{opacity:0.3;}
 
       <div class="prompt-bar gate-prompt">
         <label class="lbl-tip">Prompt<span class="tip-ico" tabindex="0" role="button" aria-label="Om prompten och kontextfönstret" onclick="openPromptInfo(event)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPromptInfo(event);}">i</span></label>
-        <input type="text" class="start-input" id="promptInput" placeholder="skriv ett par ord ur texten…" oninput="validatePrompt()" onkeydown="if(event.key==='Enter')startFromPrompt()">
+        <input type="text" class="start-input" id="promptInput" placeholder="skriv några ord ur texten…" oninput="validatePrompt()" onkeydown="if(event.key==='Enter')startFromPrompt()">
         <button class="btn pri" onclick="startFromPrompt()">▶ Kör</button>
       </div>
       <div class="prompt-extra">
@@ -682,24 +697,21 @@ input[type=range]:disabled{opacity:0.3;}
         <span class="start-err" id="promptErr">Skriv minst ett ord.</span>
       </div>
 
-      <div class="gen-box" id="genBox"><span class="placeholder">Träna modellen så börjar den skriva.</span></div>
+      <div class="gen-box" id="genBox"><span class="placeholder">Träna modellen, så börjar den skriva.</span></div>
       <div class="origin-box" id="originBox"></div>
       <div class="controls">
         <button class="btn pri big" id="stepBtn" onclick="step()">Nästa ord</button>
         <button class="btn" id="autoBtn" onclick="toggleAuto()">▶ Auto</button>
         <button class="btn ghost" onclick="restartGen()">↺ Börja om</button>
         <div class="speed-wrap">
-          <label>Hastighet</label>
-          <select class="sel" id="speedSel" style="width:auto;">
-            <option value="normal" selected>Normal</option>
-            <option value="fast">Snabb</option>
-          </select>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <input type="range" id="speedSel" min="0" max="3" step="1" value="1" aria-label="Hastighet">
         </div>
       </div>
       <div id="startExamplesRow" style="display:none;"><div class="start-examples" id="startExamples"></div></div>
-      <div class="narr" id="narr">Modellen är inte tränad ännu.</div>
+      <div class="narr" id="narr">Modellen är ännu inte tränad.</div>
       <div class="legend">
-        <span><i class="sw-ctx"></i> <span class="term" data-term="kontext">kontext</span> (minne)</span>
+        <span><i class="sw-ctx"></i> <span class="term" data-term="kontext">kontext</span></span>
         <span><i class="sw-chosen"></i> valt ord</span>
         <span><i class="sw-dead"></i> <span class="term" data-term="återvändsgränd">återvändsgränd</span></span>
       </div>
@@ -714,8 +726,8 @@ input[type=range]:disabled{opacity:0.3;}
         <div class="coll-body show" id="tableBody">
           <div class="ctx-chip" id="ctxChip">Kontext: <em style="color:var(--dim)">–</em></div>
           <div class="certainty gate-context" id="certainty"></div>
-          <div class="phead"><span>Kontext + nästa ord</span><span>Hur ofta</span><span style="text-align:right">Antal</span><span style="text-align:right">%</span></div>
-          <div class="ptable" id="ptable"><div class="ghost-rows" aria-hidden="true"><div class="grow"><span class="gw" style="width:72%"></span><span class="gb"><i style="width:86%"></i></span><span class="gp"></span></div><div class="grow"><span class="gw" style="width:58%"></span><span class="gb"><i style="width:54%"></i></span><span class="gp"></span></div><div class="grow"><span class="gw" style="width:64%"></span><span class="gb"><i style="width:31%"></i></span><span class="gp"></span></div></div><div class="ghost-cap">Minnet fylls när du tränar modellen.</div></div>
+          <div class="phead"><span>Kontext och nästa ord</span><span>Hur ofta</span><span style="text-align:right">Antal</span><span style="text-align:right">%</span></div>
+          <div class="ptable" id="ptable"><div class="ghost-rows" aria-hidden="true"><div class="grow"><span class="gw" style="width:72%"></span><span class="gb"><i style="width:86%"></i></span><span class="gp"></span></div><div class="grow"><span class="gw" style="width:58%"></span><span class="gb"><i style="width:54%"></i></span><span class="gp"></span></div><div class="grow"><span class="gw" style="width:64%"></span><span class="gb"><i style="width:31%"></i></span><span class="gp"></span></div></div></div>
         </div>
       </div>
 
@@ -726,7 +738,7 @@ input[type=range]:disabled{opacity:0.3;}
           <div class="stat-row headline"><span class="sl"><span class="term" data-term="token">Tokens</span></span><span class="sv" id="stTokens">0</span></div>
           <div class="stat-row headline"><span class="sl"><span class="term" data-term="vokabulär">Unika ord</span></span><span class="sv" id="stVocab">0</span></div>
           <div class="stat-row headline"><span class="sl"><span class="term" data-term="kontexter">Kontexter</span></span><span class="sv" id="stCtx">0</span></div>
-          <div class="stat-row headline"><span class="sl"><span class="term" data-term="branching">Valmöjligheter / steg</span></span><span class="sv" id="stBranch">–</span></div>
+          <div class="stat-row headline"><span class="sl"><span class="term" data-term="branching">Valmöjligheter per steg</span></span><span class="sv" id="stBranch">–</span></div>
           <div class="branch-wrap">
             <div class="branch-bar"><div class="branch-fill" id="branchFill"></div></div>
             <div class="branch-lbl" id="branchLbl"></div>
@@ -739,12 +751,12 @@ input[type=range]:disabled{opacity:0.3;}
         <div class="launch-grid">
           <button class="launch-card" onclick="openConcept('begrepp',event)">
             <span class="lc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
-            <span class="lc-txt"><span class="lc-title">Begreppslista</span><span class="lc-sub">Alla ord förklarade – token, kontext, temperatur…</span></span>
+            <span class="lc-txt"><span class="lc-title">Begreppslista</span><span class="lc-sub">Alla begrepp i labbet, kort förklarade.</span></span>
             <span class="lc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
           </button>
           <button class="launch-card" onclick="openConcept('chatgpt',event)">
             <span class="lc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3M8.5 10h.01M15.5 10h.01"/></svg></span>
-            <span class="lc-txt"><span class="lc-title">Hur hänger den ihop med ChatGPT?</span><span class="lc-sub">Likheter och skillnader mot en riktig modell.</span></span>
+            <span class="lc-txt"><span class="lc-title">Hur hänger den ihop med ChatGPT?</span><span class="lc-sub">Likheter och skillnader mot en verklig språkmodell.</span></span>
             <span class="lc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
           </button>
         </div>
@@ -787,12 +799,12 @@ input[type=range]:disabled{opacity:0.3;}
       <g class="iv-next"><rect x="130" y="27" width="62" height="26" rx="8"/><text x="161" y="44">vackert</text></g>
     </svg>
     <h2><span>Språkmodell</span>-labbet</h2>
-    <p class="sub">Upptäck hur en språkmodell fungerar genom att steg för steg bygga, analysera och utvärdera en egen modell.</p>
+    <p class="sub">Bygg, analysera och utvärdera en egen språkmodell steg för steg.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Hur väljer modellen nästa ord?</strong> Utforska hur modellen fortsätter en text och upptäck hur den väljer mellan olika möjliga ord.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Vad minns modellen?</strong> Undersök hur många tidigare ord modellen tittar bakåt på när den väljer nästa ord – och vad det gör med texten.</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Hur påverkas modellens val?</strong> Experimentera med temperatur och olika sätt att välja nästa ord.</div></div>
-      <div class="step"><div class="step-num">4</div><div><strong>Hur formar träningsdatan modellen?</strong> Byt mellan olika texter, se hur språket förändras – kombinera sedan allt fritt och avsluta med att jämföra modellen med ChatGPT.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Hur väljer modellen nästa ord?</strong> Följ hur modellen fortsätter en text och hur den avgör vilket ord som kommer härnäst.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Vad minns modellen?</strong> Undersök hur många tidigare ord modellen tar hänsyn till, och vad det gör med texten.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Hur påverkas modellens val?</strong> Pröva olika sätt att välja nästa ord, och se vad temperaturen gör med resultatet.</div></div>
+      <div class="step"><div class="step-num">4</div><div><strong>Hur formar träningsdatan modellen?</strong> Byt mellan olika texter och se hur språket förändras. Kombinera sedan fritt, och jämför till sist modellen med ChatGPT.</div></div>
     </div>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -814,7 +826,7 @@ const PRESETS = {
 async function loadDatasets(){
   const files = { vader:'data/Vader.txt', sport:'data/Sport.txt', hemso:'data/Hemso.txt', shakespeare:'data/Shakespeare.txt' };
   const loadEl = document.getElementById('dsLoadStatus');
-  if(loadEl) loadEl.textContent = 'Laddar träningsdata…';
+  if(loadEl) loadEl.textContent = 'Läser in träningstexterna…';
   try {
     await Promise.all(Object.entries(files).map(async ([k, path]) => {
       const r = await fetch(path);
@@ -823,7 +835,7 @@ async function loadDatasets(){
     }));
     if(loadEl) loadEl.remove();
   } catch(e) {
-    if(loadEl) loadEl.innerHTML = '<svg class="inl-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17.5v.01"/></svg> Textfilerna hittades inte – kontrollera att data/-mappen finns på GitHub Pages.';
+    if(loadEl) loadEl.innerHTML = '<svg class="inl-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17.5v.01"/></svg> Träningstexterna kunde inte läsas in. Kontrollera att mappen data/ finns.';
     console.warn('loadDatasets:', e);
   }
 }
@@ -925,7 +937,7 @@ function ensurePdfJs(){
         'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
       resolve();
     };
-    s.onerror = () => { pdfJsPromise = null; reject(new Error('Kunde inte ladda PDF-läsaren – kontrollera internetanslutningen.')); };
+    s.onerror = () => { pdfJsPromise = null; reject(new Error('PDF-läsaren kunde inte laddas. Kontrollera internetanslutningen.')); };
     document.head.appendChild(s);
   });
   return pdfJsPromise;
@@ -937,7 +949,7 @@ async function extractPdf(file){
   const pdf = await pdfjsLib.getDocument({data: buf}).promise;
   const pages = [];
   for(let p = 1; p <= pdf.numPages; p++){
-    setFileStatus(`Läser <strong>${esc(file.name)}</strong> – sida ${p} av ${pdf.numPages}…`);
+    setFileStatus(`Läser <strong>${esc(file.name)}</strong>, sida ${p} av ${pdf.numPages}…`);
     const page = await pdf.getPage(p);
     const tc = await page.getTextContent();
     pages.push(tc.items.map(it => it.str).join(' '));
@@ -949,7 +961,7 @@ async function extractPdf(file){
 async function handleFiles(fileList){
   const files = [...fileList];
   if(!files.length) return;
-  setFileStatus('⏳ Läser in…');
+  setFileStatus('Läser in…');
   const parts = [];
   try{
     for(const f of files){
@@ -964,7 +976,7 @@ async function handleFiles(fileList){
   }
   let text = parts.join('\n\n').trim();
   if(text.length < 20){
-    setFileStatus('<svg class="inl-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17.5v.01"/></svg> Ingen text hittades i filen. Om det är en PDF kan den vara inskannad som bild – då finns inget textlager att läsa.');
+    setFileStatus('<svg class="inl-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17.5v.01"/></svg> Ingen text hittades i filen. En PDF som är inskannad som bild saknar textlager och går därför inte att läsa.');
     document.getElementById('fileInput').value = '';
     return;
   }
@@ -975,7 +987,7 @@ async function handleFiles(fileList){
   syncCards();
   markDirty();
   const words = text.split(/\s+/).length;
-  setFileStatus(`✓ <strong>${files.map(f => esc(f.name)).join(' + ')}</strong> inläst – ca ${words.toLocaleString('sv-SE')} ord${clipped ? ' (texten kortades till de första ' + MAX_CHARS.toLocaleString('sv-SE') + ' tecknen)' : ''}. Tryck <strong>Träna modellen</strong>!`);
+  setFileStatus(`✓ <strong>${files.map(f => esc(f.name)).join(' + ')}</strong> inläst, cirka ${words.toLocaleString('sv-SE')} ord${clipped ? ' (texten kortades till de första ' + MAX_CHARS.toLocaleString('sv-SE') + ' tecknen)' : ''}. Tryck <strong>Träna modellen</strong>!`);
   document.getElementById('fileInput').value = '';   // tillåt samma fil igen
 }
 
@@ -1011,7 +1023,7 @@ async function trainAnimated(){
 
 const TRAIN_STAGES = [
   {t:'Läser orden…', at:0},
-  {t:'Bygger ordföljdstabellen…', at:0.4},
+  {t:'Bygger tabellen över ordföljder…', at:0.4},
   {t:'Räknar sannolikheter…', at:0.75}
 ];
 function runTrainStatusList(duration){
@@ -1153,7 +1165,7 @@ function buildFromTextarea(){
     document.getElementById('stStatus').textContent = 'för kort text';
     document.getElementById('stStatus').className = 'sv';
     document.getElementById('narr').innerHTML =
-      'Texten är för kort – modellen behöver <strong>minst ca 30 ord</strong> för att kunna räkna ordföljder. Skriv mer, eller välj en exempeltext.';
+      'Texten är för kort. Modellen behöver <strong>minst omkring 30 ord</strong> för att kunna räkna ordföljder. Skriv mer, eller välj en av exempeltexterna.';
     return;
   }
   truncated = false;
@@ -1162,11 +1174,14 @@ function buildFromTextarea(){
   vocab = new Set(tokens);
   buildModels();
   built = true;
+  // Resten av sidan har ingen mening förrän det finns en modell, så den
+  // fälls ut först nu. Den fälls aldrig ihop igen under sessionen.
+  document.getElementById('wrapEl').classList.remove('pre-train');
   deadEnd = false;
   dirty = false;
   document.getElementById('staleNote').classList.remove('show');
   document.getElementById('trainStatus').innerHTML =
-    `✓ Tränad på <strong>${tokens.length}</strong> tokens · <strong>${new Set(tokens).size}</strong> unika ord.`;
+    `✓ Tränad på <strong>${tokens.length}</strong> tokens och <strong>${new Set(tokens).size}</strong> unika ord.`;
   exampleStarts = topContentWords(6);
   renderStartExamples();
   updatePromptTip();
@@ -1225,8 +1240,8 @@ function lockDatasets(allowed){
   });
   const note = document.getElementById('dsNote');
   if(note) note.textContent = unlockedDatasets
-    ? 'Övriga texter låses upp i steg 4, där du får kombinera fritt.'
-    : 'Kryssa i en eller flera texter – de slås ihop till en enda träningstext.';
+    ? 'Övriga texter låses upp i steg 4.'
+    : 'Flera texter kan väljas samtidigt. De slås då ihop till en gemensam träningstext.';
 }
 
 function toggleCard(key){
@@ -1273,7 +1288,7 @@ function markDirty(){
   dirty = true;
   const note = document.getElementById('staleNote');
   if(built){
-    note.innerHTML = '<svg class="inl-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17.5v.01"/></svg> Träningstexten har ändrats – tryck <strong style="color:var(--text)">Träna modellen</strong> för att uppdatera den.';
+    note.innerHTML = '<svg class="inl-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17.5v.01"/></svg> Träningstexten har ändrats. Tryck <strong style="color:var(--text)">Träna modellen</strong> för att bygga om modellen.';
     note.classList.add('show');
   }else{
     note.classList.remove('show');
@@ -1293,19 +1308,19 @@ function validatePrompt(){
     const last = ptoks[ptoks.length - 1];
     if(vocab.has(last)){
       el.className = 'prompt-status ok';
-      el.innerHTML = `✓ Kort prompt – modellen hoppar in vid «${esc(last)}» i texten.`;
+      el.innerHTML = `✓ Kort prompt. Modellen hoppar in vid «${esc(last)}» i texten.`;
     }else{
       el.className = 'prompt-status warn';
-      el.innerHTML = `✗ Ordet «${esc(last)}» finns inte i träningstexten.`;
+      el.innerHTML = `✗ Ordet «${esc(last)}» förekommer inte i träningstexten.`;
     }
     return;
   }
   if(models[k].has(ctx.join(SEP))){
     el.className = 'prompt-status ok';
-    el.innerHTML = `✓ Modellen känner igen «${esc(ctx.join(' '))}» och kan fortsätta.`;
+    el.innerHTML = `✓ Modellen känner igen «${esc(ctx.join(' '))}» och kan fortsätta därifrån.`;
   }else{
     el.className = 'prompt-status warn';
-    el.innerHTML = `✗ Modellen har aldrig sett «${esc(ctx.join(' '))}» – prova ett ord ur texten ↓`;
+    el.innerHTML = `✗ Modellen har aldrig sett «${esc(ctx.join(' '))}». Välj ett ord ur texten ↓`;
   }
 }
 
@@ -1348,9 +1363,9 @@ function updateStats(){
   bFill.style.width = Math.max(4, Math.min(100, (bf - 1) / 1.5 * 100)).toFixed(0) + '%';
   bFill.style.background = col;
   bLbl.style.color = col;
-  bLbl.innerHTML = bf >= 1.5 ? '<i class="dot good"></i>Stor valfrihet – texten kan gå åt många håll'
-                   : bf >= 1.1 ? '<i class="dot mid"></i>Lagom valfrihet'
-                   : '<i class="dot bad"></i>Nästan ingen valfrihet – modellen rabblar mest texten';
+  bLbl.innerHTML = bf >= 1.5 ? '<i class="dot good"></i>Stor valfrihet. Texten kan gå åt många håll.'
+                   : bf >= 1.1 ? '<i class="dot mid"></i>Lagom valfrihet.'
+                   : '<i class="dot bad"></i>Nästan ingen valfrihet. Modellen återger mest texten ordagrant.';
 
   let note = '';
   if(bf < 1.1){
@@ -1460,8 +1475,8 @@ function startFromPrompt(){
     const narr = document.getElementById('narr');
     narr.classList.remove('choice');
     narr.innerHTML =
-      `Kort prompt – modellen hoppade in vid <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> i texten ` +
-      `(den behöver ${k} ord som kontext). Tryck <strong>Nästa ord</strong>.`;
+      `Kort prompt. Modellen hoppade in vid <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> i texten ` +
+      `eftersom den behöver ${k} ord som kontext. Tryck <strong>Nästa ord</strong>.`;
   }else{
     // Ordet finns inte alls i träningstexten
     genTokens = ptoks.slice();
@@ -1469,8 +1484,8 @@ function startFromPrompt(){
       detokHTML(genTokens, 0, true) + '<span class="cursor"></span>';
     deadEnd = true;
     promptBlocked(
-      `Ordet <span class="ctx-inline">«${esc(last)}»</span> finns inte i träningstexten, så modellen känner inte till det. ` +
-      `Prova ett ord ur texten – tipsen under fältet fungerar alltid.`,
+      `Ordet <span class="ctx-inline">«${esc(last)}»</span> förekommer inte i träningstexten, och modellen känner därför inte till det. ` +
+      `Välj i stället ett ord ur texten. Förslagen under fältet fungerar alltid.`,
       'Börja om från en mening i texten');
   }
 }
@@ -1488,8 +1503,8 @@ function renderFromPrompt(){
       'Modellens minne just nu: ' + ctx.map(t => `<span class="ct">${esc(t)}</span>`).join(' ') +
       `<span class="ctx-count">Den här kontexten har setts <b>0</b> gånger i texten.</span>`;
     promptBlocked(
-      `Den lilla modellen har <strong>aldrig sett</strong> ordföljden <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> i träningstexten – så den vet inte vad som kan komma efter. ` +
-      `En tabellmodell klarar bara exakta matchningar. <strong>ChatGPT</strong> skulle kunna gissa ändå, eftersom dess neurala nätverk kan <em>generalisera</em>.`,
+      `Modellen har <strong>aldrig sett</strong> ordföljden <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> i träningstexten och vet därför inte vad som kan följa. ` +
+      `En tabellmodell klarar bara exakta träffar. <strong>ChatGPT</strong> hade kunnat gissa ändå, eftersom ett neuralt nätverk kan <em>generalisera</em>.`,
       'Börja om från en mening i texten');
     return;
   }
@@ -1501,7 +1516,7 @@ function renderFromPrompt(){
     narr.classList.remove('choice');
     narr.innerHTML =
       `Du skrev prompten <span style="color:var(--dim)">«${esc(forgotten)}</span> <span class="ctx-inline">${esc(ctx.join(' '))}»</span>. ` +
-      `Men med kontextlängd <strong>${k}</strong> tittar modellen <strong>bara</strong> på de ${k} sista orden – resten av prompten är redan "bortglömd". ` +
+      `Med kontextlängd <strong>${k}</strong> tar modellen dock bara hänsyn till de ${k} sista orden. Resten av prompten är redan bortglömd. ` +
       `Tryck <strong>Nästa ord</strong>.`;
   }
 }
@@ -1519,9 +1534,9 @@ function promptBlocked(narrHtml, btnLabel){
 let promptTipHTML = '';
 function updatePromptTip(){
   promptTipHTML =
-    `Din prompt är <strong>startfrasen</strong> modellen bygger vidare på. Men med kontextlängd <span class="ctx-hl">${k}</span> minns modellen bara de <span class="ctx-hl">${k} senaste orden</span>. ` +
-    `Så fort texten passerat ${k} ord är resten av prompten <strong>bortglömd</strong> – bara de ${k} sista orden styr nästa ord.<br><br>` +
-    `<span class="gpt-hl">ChatGPT</span> har i stället ett kontextfönster på tusentals ord, så hela prompten påverkar varje steg.`;
+    `Prompten är den <strong>startfras</strong> modellen bygger vidare på. Med kontextlängd <span class="ctx-hl">${k}</span> minns modellen bara de <span class="ctx-hl">${k} senaste orden</span>. ` +
+    `Så snart texten vuxit förbi ${k} ord är resten av prompten bortglömd, och endast de sista orden styr fortsättningen.<br><br>` +
+    `<span class="gpt-hl">ChatGPT</span> har ett kontextfönster på tusentals ord. Där påverkar hela prompten varje steg.`;
 }
 
 function step(manualWord){
@@ -1545,7 +1560,7 @@ function step(manualWord){
   busy = true;
   renderTable(probs, chosen);
   const flashMs = autoTimer
-    ? (document.getElementById('speedSel').value === 'fast' ? 90 : 260)
+    ? [340, 260, 160, 80][+document.getElementById('speedSel').value]
     : 750;
   setTimeout(() => {
     genTokens.push(chosen);
@@ -1561,8 +1576,8 @@ function showDeadEnd(){
   const ctx = genTokens.slice(-k);
   const bf = branching(k);
   const why = bf < 1.1
-    ? `Texten upprepar sig sällan, så vid kontextlängd ${k} kan modellen bara följa den ordagrant – och nu tog den slut. Prova <strong>kontextlängd 1</strong>, eller klistra in en längre text med fler upprepningar.`
-    : `Det här är tabellmodellens svaghet: den kan bara exakta matchningar. ChatGPT:s neurala nätverk kan i stället <em>generalisera</em>.`;
+    ? `Texten upprepar sig sällan. Vid kontextlängd ${k} kan modellen därför bara följa den ordagrant, och nu är den slut. Pröva <strong>kontextlängd 1</strong>, eller använd en längre text med fler upprepningar.`
+    : `Det här är tabellmodellens svaghet. Den klarar bara exakta träffar, medan ChatGPT:s neurala nätverk kan <em>generalisera</em>.`;
   document.getElementById('ptable').innerHTML =
     `<div class="ptable-msg"><span class="big"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v10H4z"/><path d="M4 7l16 10M20 7L4 17"/></svg></span><div><strong>Återvändsgränd</strong> – inga möjliga ord härifrån.</div>
      <button class="btn pri" onclick="closeConcept();deadEnd=false;startGen()">Börja om från nytt ställe</button></div>`;
@@ -1572,7 +1587,7 @@ function showDeadEnd(){
     icon: ICON_DEADEND,
     iconClass: 'warn',
     title: 'Återvändsgränd!',
-    def: `<div class="cc-lead">Ordföljden <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> förekommer bara allra sist i träningstexten – modellen har aldrig sett något ord komma efter den.</div>
+    def: `<div class="cc-lead">Ordföljden <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> förekommer bara allra sist i träningstexten. Modellen har aldrig sett något ord följa efter den.</div>
       <div>${why}</div>
       <button class="btn pri" style="width:100%;margin-top:16px;" onclick="closeConcept();deadEnd=false;startGen()">Börja om från nytt ställe</button>`
   });
@@ -1592,12 +1607,12 @@ function toggleAuto(){
     if(genTokens.length >= MAX_GEN){
       stopAuto();
       document.getElementById('narr').innerHTML =
-        `Texten har nått <strong>${MAX_GEN} tokens</strong> – tryck ↺ Börja om för en ny text, eller fortsätt manuellt.`;
+        `Texten har nått <strong>${MAX_GEN} tokens</strong>. Tryck ↺ Börja om för en ny text, eller fortsätt ord för ord.`;
       return;
     }
     if(!busy && !deadEnd) step();
   };
-  const interval = document.getElementById('speedSel').value === 'fast' ? 250 : 640;
+  const interval = [900, 640, 400, 220][+document.getElementById('speedSel').value];
   autoTimer = setInterval(tick, interval);
   tick();
 }
@@ -1615,11 +1630,6 @@ function stopAuto(){
 // Måla den segmenterade kontrollen utan att röra modellen
 function paintK(v){
   document.querySelectorAll('#kSeg .kseg-b').forEach(b => b.classList.toggle('on', +b.dataset.k === v));
-  const d = {1:'Modellen ser bara det allra senaste ordet.',
-             2:'Modellen ser de två senaste orden.',
-             3:'Modellen ser de tre senaste orden.'};
-  const el = document.getElementById('kDesc');
-  if(el) el.textContent = d[v] || '';
 }
 
 function setK(v){ v = parseInt(v); paintK(v); onKChange(v); }
@@ -1642,9 +1652,9 @@ function onModeChange(val){
   mode = val;
   document.querySelectorAll('#modeCards .mode-card').forEach(c => c.classList.toggle('selected', c.dataset.mode === val));
   document.getElementById('tempSlider').disabled = (mode === 'greedy');
-  document.getElementById('tempHint').innerHTML = (mode === 'greedy')
-    ? 'Girigt läge: temperaturen påverkar inte valet här.'
-    : 'Dra i reglaget och se vad som händer med texten.';
+  document.getElementById('tempHint').textContent = (mode === 'greedy')
+    ? 'I girigt läge påverkar temperaturen inte valet.'
+    : '';
   refreshTable();
 }
 
@@ -1837,7 +1847,7 @@ function renderTable(probs, picked){
   const ctxHtml = ctx.map(t => `<span class="ct">${esc(t)}</span>`).join(' ');
   document.getElementById('ctxChip').innerHTML =
     'Modellen letar efter: ' + ctxHtml +
-    `<span class="ctx-count">Hittade <b>${total}</b> ${total === 1 ? 'matchning' : 'matchningar'} i texten – så här ofta följde varje ord:</span>`;
+    `<span class="ctx-count">Ordföljden förekommer <b>${total}</b> ${total === 1 ? 'gång' : 'gånger'} i texten. Så här ofta följde varje ord:</span>`;
 
   // Säkerhetsmätare: hur koncentrerad är fördelningen (oberoende av temperatur)?
   const topC = probs.length ? Math.max(...probs.map(p => p.c)) : 0;
@@ -1893,7 +1903,7 @@ function renderCertainty(p1, options, mask){
     el.innerHTML =
       `<div class="cert-top"><span class="cert-lbl">Hur säker är modellen på nästa ord?</span><span class="cert-val" style="color:var(--dim)">?</span></div>
        <div class="cert-bar"></div>
-       <div class="cert-note">Gissa först – tryck sedan Visa.</div>`;
+       <div class="cert-note">Gissa först. Tryck sedan Visa.</div>`;
     return;
   }
   const pct = Math.round(p1 * 100);
@@ -1902,7 +1912,7 @@ function renderCertainty(p1, options, mask){
   el.innerHTML =
     `<div class="cert-top"><span class="cert-lbl">Hur säker är modellen på nästa ord?</span><span class="cert-val" style="color:${col}">${pct}%</span></div>
      <div class="cert-bar"><div class="cert-fill" style="width:${Math.max(4, pct)}%;background:${col}"></div></div>
-     <div class="cert-note">${lbl} · <strong>${options}</strong> möjliga ord. Mer kontext gör ofta modellen säkrare.</div>`;
+     <div class="cert-note">${lbl} <strong>${options}</strong> möjliga ord.</div>`;
 }
 
 // ── Stegnavigering: guidad trappa genom labbet ──
@@ -1911,19 +1921,19 @@ const STEP_ACCENTS = ['#4d80ff','#34c759','#ffd866','#a78bfa'];
 const STEPS = [
   {label:'Nästa ord', title:'Hur väljer modellen nästa ord?',
    icon:'<path d="M4 12h12"/><path d="M12 6l6 6-6 6"/>',
-   intro:'Träna modellen på väderrapporten. Tryck sedan på Nästa ord några gånger och titta i <span class="term" data-term="tabell">modellens minne</span>: vad bygger gissningen egentligen på?',
+   intro:'Träna modellen på väderrapporten. Tryck sedan på Nästa ord några gånger och studera <span class="term" data-term="tabell">modellens minne</span>. Vad bygger valet av ord egentligen på?',
    rec:{ds:['vader'], k:1}},
   {label:'Kontexten', title:'Vad minns modellen?',
    icon:'<path d="M7 4H4v16h3"/><path d="M17 4h3v16h-3"/><path d="M9 9h6M9 15h6"/>',
-   intro:'Träna modellen på ”Hemsöborna”, en stor svensk roman av August Strindberg. Testa olika <span class="term" data-term="kontextlängd">kontextlängder</span> (1 → 2 → 3) och jämför: skriver modellen mer som riktig svenska – och hur ändras valmöjligheterna?',
+   intro:'Träna modellen på ”Hemsöborna” av August Strindberg. Pröva olika <span class="term" data-term="kontextlängd">kontextlängder</span> och jämför resultaten. Blir svenskan bättre, och vad händer med antalet möjliga fortsättningar?',
    rec:{ds:['hemso'], k:2}},
   {label:'Slump & temperatur', title:'Hur påverkas modellens val?',
    icon:'<rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="9" cy="9" r="1.3"/><circle cx="15" cy="9" r="1.3"/><circle cx="9" cy="15" r="1.3"/><circle cx="15" cy="15" r="1.3"/><circle cx="12" cy="12" r="1.3"/>',
-   intro:'Ska modellen alltid ta det vanligaste ordet? Testa girigt val mot viktad slump, och dra i <span class="term" data-term="temperatur">temperaturen</span>.',
+   intro:'Ska modellen alltid ta det vanligaste ordet? Ställ girigt val mot viktad slump, och pröva olika <span class="term" data-term="temperatur">temperaturer</span>.',
    rec:{ds:['hemso'], k:2}},
   {label:'Data & utforskning', title:'Hur formar träningsdatan modellen?',
    icon:'<path d="M6 4h9l5 5v11H6z"/><path d="M15 4v5h5"/><path d="M9 13h6M9 17h6"/>',
-   intro:'<span class="term" data-term="träningsdata">Träningsdatan</span> formar modellen. Träna modellen på flera texter (t.ex. Sport + Väder) eller byt till Shakespeare och undersök hur språk, ordval och fortsättningar förändras. Kombinera sedan fritt med kontextlängd, temperatur och egna prompter – och avsluta med att jämföra modellen med ChatGPT.',
+   intro:'All text modellen kan skriva kommer från dess <span class="term" data-term="träningsdata">träningsdata</span>. Träna på flera texter samtidigt eller byt till Shakespeare, och undersök hur ordval och meningsbyggnad förändras. Här är alla inställningar upplåsta.',
    rec:{ds:['hemso'], k:2}}
 ];
 
@@ -2007,23 +2017,23 @@ function toggleColl(btn, bodyId){
 //  samlad lista i sidopanelen.
 // ════════════════════════════════════════════════════════════
 const GLOSSARY = {
-  'träningsdata':  {t:'Träningsdata',          d:'Texten modellen räknar på. Allt modellen kan säga kommer härifrån – ingenting annat.'},
-  token:           {t:'Token',                  d:'En byggsten i texten – oftast ett ord, men även skiljetecken räknas som egna tokens.'},
+  'träningsdata':  {t:'Träningsdata',          d:'Texten modellen räknar på. Allt den kan skriva kommer härifrån och ingenting annat.'},
+  token:           {t:'Token',                  d:'En byggsten i texten. Oftast ett ord, men även skiljetecken räknas som egna tokens.'},
   prompt:          {t:'Prompt',                 d:'Texten du matar in som modellen ska bygga vidare på. Här är det din startfras.'},
-  kontext:         {t:'Kontext',                d:'De ord modellen tittar på just nu för att gissa nästa ord – modellens "minne".'},
-  'kontextlängd':  {t:'Kontextlängd (n-gram)',  d:'Hur många ord bakåt modellen tittar (1–3 här). ChatGPT använder tusentals.'},
-  'kontextfönster':{t:'Kontextfönster',         d:'Hur mycket text modellen kan minnas samtidigt. Litet här, enormt i ChatGPT.'},
+  kontext:         {t:'Kontext',                d:'De ord modellen tar hänsyn till just nu när den ska välja nästa ord. Modellens minne.'},
+  'kontextlängd':  {t:'Kontextlängd (n-gram)',  d:'Hur många ord bakåt modellen ser. Här 1 till 3. ChatGPT använder tusentals.'},
+  'kontextfönster':{t:'Kontextfönster',         d:'Hur mycket text modellen kan minnas samtidigt. Litet här, mycket stort i ChatGPT.'},
   kontexter:       {t:'Kontexter',              d:'Alla olika ordföljder (kontexter) modellen har sett i träningstexten och känner igen.'},
   sannolikhet:     {t:'Sannolikhet',            d:'Hur trolig en viss fortsättning är, beräknad ur hur ofta den setts i texten.'},
-  tabell:          {t:'Sannolikhetstabell',     d:'Modellens "hjärna": en uppslagstabell över vilka ord som följt på varje kontext, och hur ofta.'},
-  temperatur:      {t:'Temperatur',             d:'Hur djärv modellen är. Låg = nästan alltid det vanligaste ordet. Hög = vågar ovanliga ord.'},
-  sampling:        {t:'Viktad slump (sampling)',d:'Att slumpa nästa ord men låta vanligare ord ha större chans. Så gör ChatGPT.'},
+  tabell:          {t:'Sannolikhetstabell',     d:'Modellens minne. En uppslagstabell över vilka ord som följt på varje kontext, och hur ofta.'},
+  temperatur:      {t:'Temperatur',             d:'Hur djärv modellen är. Låg temperatur ger nästan alltid det vanligaste ordet, hög ger ovanligare ordval.'},
+  sampling:        {t:'Viktad slump (sampling)',d:'Att slumpa nästa ord, men låta vanligare ord ha större chans. Så arbetar ChatGPT.'},
   girig:           {t:'Girig (greedy)',         d:'Att alltid välja det allra vanligaste ordet. Ger förutsägbar och ofta upprepande text.'},
   'vokabulär':     {t:'Vokabulär (unika ord)',  d:'Alla unika ord modellen känner till från träningstexten.'},
-  branching:       {t:'Valmöjligheter (branching)', d:'Hur många ord i snitt kan följa på en kontext. Nära 1 = modellen kan bara rabbla texten.'},
-  generalisering:  {t:'Generalisering',         d:'Att gissa rimligt även för ordföljder man aldrig sett. Tabeller kan inte; neurala nätverk kan.'},
+  branching:       {t:'Valmöjligheter (branching)', d:'Hur många ord som i genomsnitt kan följa på en kontext. Nära 1 betyder att modellen bara kan återge texten.'},
+  generalisering:  {t:'Generalisering',         d:'Att kunna gissa rimligt även för ordföljder man aldrig sett. Neurala nätverk klarar det, tabeller gör det inte.'},
   'återvändsgränd':{t:'Återvändsgränd',         d:'När modellen hamnar i en kontext den aldrig sett en fortsättning på och måste sluta.'},
-  'nätverk':       {t:'Neuralt nätverk',        d:'Tekniken ChatGPT använder i stället för en tabell – kan generalisera och hantera enorm kontext.'}
+  'nätverk':       {t:'Neuralt nätverk',        d:'Tekniken ChatGPT bygger på i stället för en tabell. Den kan generalisera och hantera mycket lång kontext.'}
 };
 
 function hydrateTerms(){
@@ -2045,7 +2055,7 @@ function renderGlossary(){
   const el = document.getElementById('glossaryBody');
   if(!el) return;
   el.innerHTML = '<div class="gloss-list">' +
-    Object.values(GLOSSARY).map(g => `<div class="gloss-item"><b>${g.t}</b> – ${g.d}</div>`).join('') +
+    Object.values(GLOSSARY).map(g => `<div class="gloss-item"><b>${g.t}</b> ${g.d}</div>`).join('') +
     '</div>';
 }
 
@@ -2057,13 +2067,13 @@ const CONCEPTS = {
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
     title:'Begreppslista',
     def:'<div class="cc-lead">Alla begrepp i labbet, kort förklarade.</div><div class="gloss-list">' +
-        Object.values(GLOSSARY).map(g => `<div class="gloss-item"><b>${g.t}</b> – ${g.d}</div>`).join('') +
+        Object.values(GLOSSARY).map(g => `<div class="gloss-item"><b>${g.t}</b> ${g.d}</div>`).join('') +
         '</div>'
   },
   chatgpt: {
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3M8.5 10h.01M15.5 10h.01"/></svg>',
     title:'Modellen &amp; ChatGPT',
-    def:'<div class="cc-lead">Den här minimodellen och ChatGPT bygger på <strong>samma grundprincip</strong> – att förutsäga nästa ord. Skillnaden är hur sannolikheterna räknas fram.</div>'
+    def:'<div class="cc-lead">Den här minimodellen och ChatGPT vilar på <strong>samma grundprincip</strong>: att förutsäga nästa ord. Skillnaden ligger i hur sannolikheterna räknas fram.</div>'
       + '<div class="cc-sub green">Likheter</div>'
       + '<ul class="cc-list green">'
       + '<li>Båda förutsäger nästa ord utifrån orden som kommit tidigare.</li>'
@@ -2072,10 +2082,10 @@ const CONCEPTS = {
       + '</ul>'
       + '<div class="cc-sub orange">Skillnader</div>'
       + '<ul class="cc-list orange">'
-      + '<li>Den här modellen använder en <strong>tabell</strong> med exakta ordföljder. ChatGPT använder ett <em>neuralt nätverk</em> med miljarder parametrar.</li>'
+      + '<li>Den här modellen använder en <strong>tabell</strong> över exakta ordföljder. ChatGPT använder ett <em>neuralt nätverk</em> med miljarder parametrar.</li>'
       + '<li>ChatGPT tar hänsyn till <strong>tusentals</strong> tidigare ord, inte bara 1–3.</li>'
       + '<li>ChatGPT har tränats på en enorm mängd text från många källor.</li>'
-      + '<li>ChatGPT kan <em>generalisera</em> till mönster den inte sett exakt. Tabellen kan bara ordföljder den redan mött.</li>'
+      + '<li>ChatGPT kan <em>generalisera</em> till mönster den inte sett exakt. Tabellen känner bara igen ordföljder den redan mött.</li>'
       + '</ul>'
   },
   valmetod: {
@@ -2094,8 +2104,8 @@ const CONCEPTS = {
       + '</ul>'
       + '<div class="cc-sub">Temperaturen</div>'
       + '<ul class="cc-list">'
-      + '<li><strong>Låg</strong> temperatur → nästan alltid det vanligaste ordet.</li>'
-      + '<li><strong>Hög</strong> temperatur → modellen vågar ovanliga ord, texten blir mer överraskande men kan tappa sammanhang.</li>'
+      + '<li><strong>Låg</strong> temperatur ger nästan alltid det vanligaste ordet.</li>'
+      + '<li><strong>Hög</strong> temperatur ger ovanligare ordval. Texten blir mer överraskande, men tappar lättare sammanhanget.</li>'
       + '</ul>'
   }
 };
