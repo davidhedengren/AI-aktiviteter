@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
+   
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Bygg en egen liten språkmodell av valfri svensk text och se exakt hur den väljer nästa ord – samma grundprincip som ChatGPT.">
+<title>Språkmodell-labbet – ai-aktiviteter.se</title>
    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0a0e1a">
@@ -18,10 +23,6 @@
 <meta name="twitter:title" content="Språkmodell‑labbet – ai-aktiviteter.se">
 <meta name="twitter:description" content="Bygg en egen liten språkmodell av valfri text och se hur den väljer nästa ord - ord för ord.">
 <meta name="twitter:image" content="https://www.ai-aktiviteter.se/og-image.png">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Bygg en egen liten språkmodell av valfri svensk text och se exakt hur den väljer nästa ord – samma grundprincip som ChatGPT.">
-<title>Språkmodell-labbet – ai-aktiviteter.se</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -158,7 +159,21 @@ input[type=range]:disabled{opacity:0.3;}
 .ctx-chip .ct{font-family:'JetBrains Mono',monospace;background:rgba(255,159,67,0.14);border:1px solid rgba(255,159,67,0.4);border-radius:4px;padding:2px 6px;color:var(--text);font-weight:600;margin:0 1px;}
 .ctx-chip .ctx-count{display:block;margin-top:7px;font-size:0.96em;color:var(--subtle);}
 .ctx-chip .ctx-count b{color:var(--gold);font-family:'JetBrains Mono',monospace;}
-.ptable{display:flex;flex-direction:column;gap:7px;flex:1;min-height:120px;}
+/* Rullbar lista: med en stor korpus kan en kontext ha hundratals
+   fortsättningar. Panelen får en fast höjd och egen rullning, så att
+   Modellstatistik under den inte trycks ur bild. */
+.ptable{display:flex;flex-direction:column;gap:7px;flex:1;min-height:120px;
+  max-height:min(46vh,420px);overflow-y:auto;overscroll-behavior:contain;
+  padding-right:4px;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;}
+.ptable::-webkit-scrollbar{width:7px;}
+.ptable::-webkit-scrollbar-track{background:transparent;}
+.ptable::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;}
+.ptable::-webkit-scrollbar-thumb:hover{background:var(--accent-dim);}
+/* Mjuk uttoning i underkanten som antyder att listan fortsätter */
+.ptable-wrap{position:relative;flex:1;display:flex;flex-direction:column;min-height:0;}
+.ptable-wrap.scrollable::after{content:'';position:absolute;left:0;right:7px;bottom:0;height:34px;
+  pointer-events:none;background:linear-gradient(to bottom,transparent,var(--surface));
+  border-radius:0 0 8px 8px;}
 .phead{display:grid;grid-template-columns:minmax(96px,1.7fr) minmax(40px,1fr) 30px 46px;gap:10px;padding:0 4px 2px;font-size:0.6em;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--dim);}
 .prow{display:grid;grid-template-columns:minmax(96px,1.7fr) minmax(40px,1fr) 30px 46px;gap:10px;align-items:center;padding:9px 10px;border-radius:9px;background:var(--surface2);transition:background 0.2s;}
 .ptable .prow:first-child{background:rgba(77,128,255,0.08);box-shadow:inset 3px 0 0 var(--accent2);}
@@ -354,6 +369,13 @@ input[type=range]:disabled{opacity:0.3;}
 .step-foot.bottom{margin-top:4px;padding-top:30px;border-top:1px solid var(--border);align-items:center;}
 .step-foot.bottom .btn{flex:0 0 auto;min-width:172px;justify-content:center;padding:12px 20px;}
 .btn.big-next{font-size:.92em;font-weight:700;}
+
+/* Diskret sidfot: källa och licens, utan att ta plats i undervisningen */
+.site-foot{margin-top:26px;padding-top:14px;border-top:1px solid var(--border-soft);
+  font-size:.68em;line-height:1.6;color:var(--dim);text-align:center;opacity:.75;}
+.site-foot a{color:inherit;text-decoration:underline;text-underline-offset:2px;
+  text-decoration-color:var(--border);transition:color .18s;}
+.site-foot a:hover{color:var(--subtle);text-decoration-color:currentColor;}
 
 /* Visnings-grindar: visa bara det som hör till aktuellt steg.
    Klassnamnen är dubblerade för att höja specificiteten till 0,2,0. Annars
@@ -586,9 +608,10 @@ input[type=range]:disabled{opacity:0.3;}
 @media(max-width:760px){.cmp-cols{grid-template-columns:1fr;gap:10px;}}
 
 /* ═══ Stegvis utfällning ═══
-   Före första träningen visas bara stegnavigeringen och träningsdatan.
-   Prompt, genererad text, minne och jämförelse saknar innehåll att visa
-   och skulle bara konkurrera om uppmärksamheten. */
+   Före träning visas bara stegnavigeringen och träningsdatan. Prompt,
+   genererad text, minne och jämförelse saknar innehåll att visa och skulle
+   bara konkurrera om uppmärksamheten. Detta gäller steg 1 och steg 2 –
+   i det senare byts träningsdatan ut, så pipelinen börjar om. */
 .wrap.pre-train .grid,
 .wrap.pre-train .cmp-row.gate-context,
 .wrap.pre-train .focus-card.gate-context{display:none;}
@@ -639,7 +662,6 @@ input[type=range]:disabled{opacity:0.3;}
       <button type="button" class="ds-card" data-key="wiki" onclick="toggleCard('wiki')"><span class="ds-check">✓</span><svg class="ds-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="ds-name">Wikipedia<span class="ds-size">stor</span></span><span class="ds-tag">Urval ur svenskspråkiga Wikipedia</span><span class="ds-prog"><span class="ds-prog-bar"></span></span></button>
     </div>
     <div class="ds-note" id="dsNote"></div>
-    <div class="ds-note" style="margin-top:5px;font-size:.68em;">Wikipedia-texten är ett urval av redigerade artiklar, hämtat från svenskspråkiga Wikipedia och tillgängligt under licensen CC BY-SA 4.0.</div>
     <div class="coll gate-data" style="margin-top:11px;">
       <button class="coll-toggle" onclick="toggleColl(this,'textBody')">Visa texten, redigera den eller ladda upp en egen fil<span class="arr">▼</span></button>
       <div class="coll-body" id="textBody">
@@ -749,7 +771,7 @@ input[type=range]:disabled{opacity:0.3;}
           <div class="ctx-chip" id="ctxChip">Kontext: <em style="color:var(--dim)">–</em></div>
           <div class="certainty gate-context" id="certainty"></div>
           <div class="phead"><span>Kontext och nästa ord</span><span>Hur ofta</span><span style="text-align:right">Antal</span><span style="text-align:right">%</span></div>
-          <div class="ptable" id="ptable"><div class="ghost-rows" aria-hidden="true"><div class="grow"><span class="gw" style="width:72%"></span><span class="gb"><i style="width:86%"></i></span><span class="gp"></span></div><div class="grow"><span class="gw" style="width:58%"></span><span class="gb"><i style="width:54%"></i></span><span class="gp"></span></div><div class="grow"><span class="gw" style="width:64%"></span><span class="gb"><i style="width:31%"></i></span><span class="gp"></span></div></div></div>
+          <div class="ptable-wrap" id="ptableWrap"><div class="ptable" id="ptable"><div class="ghost-rows" aria-hidden="true"><div class="grow"><span class="gw" style="width:72%"></span><span class="gb"><i style="width:86%"></i></span><span class="gp"></span></div><div class="grow"><span class="gw" style="width:58%"></span><span class="gb"><i style="width:54%"></i></span><span class="gp"></span></div><div class="grow"><span class="gw" style="width:64%"></span><span class="gb"><i style="width:31%"></i></span><span class="gp"></span></div></div></div></div>
         </div>
       </div>
 
@@ -798,6 +820,13 @@ input[type=range]:disabled{opacity:0.3;}
   <div class="step-foot bottom">
     <button class="btn ghost" id="prevStep" onclick="goStep(curStep-1)">← Föregående</button>
     <button class="btn pri big-next" id="nextStep" onclick="goStep(curStep+1)">Nästa steg →</button>
+  </div>
+
+  <div class="site-foot">
+    Wikipedia-texten är ett urval av redigerade artiklar från
+    <a href="https://sv.wikipedia.org/" target="_blank" rel="noopener">svenskspråkiga Wikipedia</a>,
+    tillgängligt under
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.sv" target="_blank" rel="noopener">CC BY-SA 4.0</a>.
   </div>
 </div>
 
@@ -930,7 +959,7 @@ async function loadDatasets(){
 //  Tillstånd
 // ════════════════════════════════════════════════════════════
 const SEP = '\u0001';          // skiljetecken i kontextnycklar
-const MAX_ROWS = 13;           // max rader i tabellen
+const MAX_ROWS = 40;           // max rader i tabellen (listan är rullbar)
 const MAX_GEN = 250;           // stoppgräns för auto-generering
 
 let tokens = [];               // tokeniserad träningstext
@@ -1312,8 +1341,10 @@ async function buildFromTextarea(onProgress){
   await buildModels(onProgress);
   built = true;
   // Resten av sidan har ingen mening förrän det finns en modell, så den
-  // fälls ut först nu. Den fälls aldrig ihop igen under sessionen.
+  // fälls ut först nu.
   document.getElementById('wrapEl').classList.remove('pre-train');
+  harTranat = true;
+  if(curStep >= 2) steg2Utfallt = true;
   deadEnd = false;
   dirty = false;
   document.getElementById('staleNote').classList.remove('show');
@@ -1713,6 +1744,7 @@ function promptBlocked(narrHtml, btnLabel){
   document.getElementById('ptable').innerHTML =
     `<div class="ptable-msg"><span class="big"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H7l-4 3V12a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"/></svg></span><div>${narrHtml}</div>
      <button class="btn pri" onclick="deadEnd=false;startGen()">${btnLabel}</button></div>`;
+  document.getElementById('ptableWrap')?.classList.remove('scrollable');
 }
 
 // Uppdaterar glaskorts-innehållet så siffrorna följer vald kontextlängd
@@ -1766,6 +1798,7 @@ function showDeadEnd(){
   document.getElementById('ptable').innerHTML =
     `<div class="ptable-msg"><span class="big"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v10H4z"/><path d="M4 7l16 10M20 7L4 17"/></svg></span><div><strong>Återvändsgränd</strong> – inga möjliga ord härifrån.</div>
      <button class="btn pri" onclick="closeConcept();deadEnd=false;startGen()">Börja om från nytt ställe</button></div>`;
+  document.getElementById('ptableWrap')?.classList.remove('scrollable');
   document.getElementById('narr').innerHTML =
     `Kontexten <span class="ctx-inline">«${esc(ctx.join(' '))}»</span> har <strong>0 möjliga fortsättningar</strong>.`;
   showConceptCard({
@@ -2065,7 +2098,14 @@ function renderTable(probs, picked){
       ? `<div class="prest">… och ${rest.length} ord till</div>`
       : `<div class="prest">… och ${rest.length} ord till (${restP.toFixed(0)}% tillsammans)</div>`;
   }
-  document.getElementById('ptable').innerHTML = html;
+  const tbl = document.getElementById('ptable');
+  tbl.innerHTML = html;
+  // Ny kontext → börja om högst upp, annars ligger eleven kvar mitt i
+  // föregående kontexts lista och tror att listan inte uppdaterats.
+  tbl.scrollTop = 0;
+  // Uttoningen visas bara när det faktiskt finns mer att rulla till
+  const wrap = document.getElementById('ptableWrap');
+  if(wrap) wrap.classList.toggle('scrollable', tbl.scrollHeight > tbl.clientHeight + 4);
 }
 
 // Gissa först: dölj/visa sannolikheterna
@@ -2102,6 +2142,8 @@ function renderCertainty(p1, options, mask){
 
 // ── Stegnavigering: guidad trappa genom labbet ──
 let curStep = 1;
+let harTranat = false;      // har eleven tränat modellen någon gång?
+let steg2Utfallt = false;   // har steg 2 fällts ut? (sker bara en gång)
 const STEP_ACCENTS = ['#4d80ff','#34c759','#ffd866','#a78bfa'];
 const STEPS = [
   {label:'Nästa ord', title:'Hur väljer modellen nästa ord?',
@@ -2138,9 +2180,15 @@ function goStep(n){
   curStep = n;
   const wrap = document.getElementById('wrapEl');
   const cls = ['wrap'];
-  // pre-train får inte nollställas här: den styr den stegvisa utfällningen och
-  // ska bara försvinna vid första träningen, aldrig vid stegbyte.
-  if(wrap.classList.contains('pre-train')) cls.push('pre-train');
+  // Den stegvisa utfällningen sker två gånger: vid första träningen och en
+  // gång till när eleven kommer till steg 2, eftersom det är där träningsdatan
+  // byts ut och pipelinen alltså börjar om. Från steg 3 och framåt står sidan
+  // kvar utfälld – då är allt bekant, och att kollapsa vid varje stegbyte
+  // skulle bara kännas som att tappa fotfästet.
+  let fallIhop = wrap.classList.contains('pre-train');
+  if(n === 2 && !steg2Utfallt) fallIhop = true;
+  if(n >= 3 && harTranat) fallIhop = false;
+  if(fallIhop) cls.push('pre-train');
   if(n >= 2) cls.push('sx-context');
   if(n >= 3) cls.push('sx-choose');
   if(n >= 4) cls.push('sx-data');
