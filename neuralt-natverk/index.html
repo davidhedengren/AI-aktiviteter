@@ -83,7 +83,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .back-link,.lang-link{position:absolute;top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:.75em;font-weight:600;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.02);transition:.2s var(--ease-out);white-space:nowrap;z-index:2;}
 .back-link{left:16px;}.lang-link{right:16px;}
 .back-link:hover,.lang-link:hover{color:var(--text);border-color:var(--dim2);background:rgba(255,255,255,.05);}
-.lang-link .flag{font-size:1.05em;line-height:1;}
+.lang-link .flag{width:19px;height:auto;display:block;border-radius:3px;flex-shrink:0;}
 
 /* layout: glass layered panels */
 /* Vänsterpanelen är den eleven arbetar i, alltså arkitektur och indata, så
@@ -96,8 +96,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 
 /* Dukens överkant visar vilket scenario man är inne i, och i förutsägelse-
    läget facit och nätverkets svar bredvid varandra, nära bilden de gäller. */
-.cv-head{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 16px;border-bottom:1px solid var(--border);min-height:54px;}
-.cv-title{display:flex;align-items:center;gap:10px;font-family:'DM Sans',sans-serif;font-size:.95em;font-weight:700;color:var(--text);min-width:0;}
+.cv-head{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 16px;border-bottom:1px solid color-mix(in srgb,var(--sc,#5b8cff) 22%,transparent);min-height:54px;}
+.cv-title{display:flex;align-items:center;gap:10px;font-family:'DM Sans',sans-serif;font-size:.95em;font-weight:700;color:var(--sc2,var(--text));min-width:0;}
 .cv-title .cvt-ico{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:var(--sc-dim);color:var(--sc2);flex-shrink:0;}
 .cv-title .cvt-ico svg{width:15px;height:15px;}
 .cv-title .cvt-txt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -227,7 +227,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .act-toggle:hover{color:var(--text);border-color:var(--dim2);transform:translateY(-1px);}
 .act-toggle .bi{width:12px;height:12px;flex-shrink:0;}
 
-.center{position:relative;overflow:hidden;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(24,30,54,.5),rgba(7,8,15,.2));border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:0 20px 60px rgba(0,0,0,.3) inset;display:flex;flex-direction:column;}
+/* Ramen lyser i scenariots färg. Det gör det tydligt vilket scenario man
+   arbetar i även när blicken ligger kvar på nätverket. */
+.center{position:relative;overflow:hidden;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(24,30,54,.5),rgba(7,8,15,.2));border:1px solid color-mix(in srgb,var(--sc,#5b8cff) 40%,transparent);border-radius:var(--r-lg);box-shadow:0 20px 60px rgba(0,0,0,.3) inset,0 0 0 1px color-mix(in srgb,var(--sc,#5b8cff) 10%,transparent),0 0 34px -12px var(--sc,#5b8cff);display:flex;flex-direction:column;transition:border-color .3s var(--ease-out),box-shadow .3s var(--ease-out);}
+/* I förutsägelseläget är berättarrutan tom eller missvisande, och ytan
+   behövs bättre till bilden. */
+.center.no-narr .narr{display:none;}
 .canvas-wrap{position:relative;flex:1 1 auto;min-height:0;}
 .canvas-wrap canvas{width:100%;height:100%;display:block;}
 /* Viktbrickorna kan bli många. Knappen ligger ovanpå duken så att den hör
@@ -528,7 +533,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
         <h1><span>Neurala nätverk&#8209;labbet</span></h1>
   </div>
   <p>Följ beräkningarna steg för steg, träna på data och gör förutsägelser.</p>
-  <a class="lang-link" href="https://www.ai-aktiviteter.se/neuralt-natverk_ENG"><span class="flag">🇬🇧</span> English</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/neuralt-natverk_ENG"><svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><clipPath id="lfgb"><rect width="60" height="30" rx="3"/></clipPath><g clip-path="url(#lfgb)"><rect width="60" height="30" fill="#012169"/><path d="M0 0 60 30M60 0 0 30" stroke="#fff" stroke-width="6"/><path d="M0 0 60 30M60 0 0 30" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></g></svg> English</a>
 </div>
 <div class="app">
   <div class="lp">
@@ -864,7 +869,7 @@ function finishTraining(){document.getElementById('trainMsg').classList.remove('
 function showPredictGuide(){if(seenGuides.has('predict'))return;seenGuides.add('predict');const msg=document.getElementById('trainMsg');msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg><div class="tm-title">Gör egna förutsägelser</div><div class="tm-text">Dra i reglagen för att ändra indatavärdena. Nätverkets svar uppdateras direkt.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Jag förstår ${ICON_ARROW_R}</button></div>`;msg.classList.add('show');}
 function openDataModal(){if(!savedTrainData)return;const av=activeVars();const hasUnits=av.some(v=>v.unit);let h='<table class="dtable-lg"><thead><tr>';if(hasUnits)for(const v of av)h+=`<th>${v.name}${v.unit?'<br><span style="font-weight:400;opacity:0.6">('+v.unit+')</span>':''}</th>`;for(const v of av)h+=`<th>${v.name}<br><span style="font-weight:400;opacity:0.6">(0–1)</span></th>`;h+=`<th>Resultat</th></tr></thead><tbody>`;for(let r=0;r<savedTrainData.xs.length;r++){h+='<tr>';if(hasUnits)for(let i=0;i<savedTrainData.xs[r].length;i++){const n=savedTrainData.xs[r][i];h+=`<td style="color:var(--text)">${fmtReal(n,av[i])}</td>`;}for(let i=0;i<savedTrainData.xs[r].length;i++)h+=`<td>${savedTrainData.xs[r][i].toFixed(2)}</td>`;h+=`<td class="${savedTrainData.ys[r]===1?'pass':'fail'}">${savedTrainData.ys[r]===1?'Ja':'Nej'}</td></tr>`;}h+='</tbody></table>';document.getElementById('dataModalContent').innerHTML=h;document.getElementById('dataModal').classList.add('show');}
 function closeDataModal(){document.getElementById('dataModal').classList.remove('show');}
-function renderPhaseBar(){const el=document.getElementById('phaseBar');if(isCalc()){el.innerHTML='<div class="pw-calc">'+CALC_GLYPH+' Beräkningsläge</div>';return;}
+function renderPhaseBar(){const el=document.getElementById('phaseBar');el.style.display=isCalc()?'none':'';if(isCalc()){el.innerHTML='';return;}
   const steps=[{k:'train',lbl:'Träna'},{k:'explore',lbl:'Utforska'},{k:'predict',lbl:'Förutsäg'}];
   const order={train:0,explore:1,predict:2};const curIdx=order[phase];
   const fillPct=curIdx===0?0:curIdx===1?50:100;
@@ -886,6 +891,7 @@ function setPhase(p){phase=p;renderPhaseBar();
   document.getElementById('resultBoxes').style.display=isCalc()?'none':'';
   const show=(!isCalc()&&p==='predict');
   document.querySelectorAll('.pred-only').forEach(el=>el.style.display=show?'':'none');
+  const _c=document.querySelector('.center');if(_c)_c.classList.toggle('no-narr',show);
   renderCtrl();}
 function renderCtrl(){const el=document.getElementById('controlArea');if(isCalc()){el.innerHTML=`<div class="bg"><button class="btn icon" aria-label="Föregående steg" title="Föregående steg" onclick="stepBack()">${ICON_PREV}</button><button class="btn pri" onclick="stepNeuron()">${ICON_NEXT} Nästa</button><button class="btn" onclick="runAllAnim()">${ICON_ALL} Alla</button><button class="btn icon dn" aria-label="Börja om passet" title="Börja om passet" onclick="resetPass()">${ICON_RESET}</button></div><div class="hint">Alla värden är heltal och aktiveringen är ReLU, så beräkningarna går att följa för hand.</div>`;}else if(phase==='train'){el.innerHTML=`<div class="bg"><button class="btn grn" onclick="startTraining()">${ICON_BRAIN} Träna modellen</button></div><div class="hint">Nätverket lär sig vikterna genom att träna på data.</div>`;}else if(phase==='explore'){el.innerHTML=`<div class="bg"><button class="btn icon" aria-label="Föregående steg" title="Föregående steg" onclick="stepBack()">${ICON_PREV}</button><button class="btn pri" onclick="stepNeuron()">${ICON_NEXT} Nästa</button><button class="btn" onclick="runAllAnim()">${ICON_ALL} Alla</button><button class="btn icon dn" aria-label="Börja om passet" title="Börja om passet" onclick="resetPass()">${ICON_RESET}</button></div><div class="hint">Stega genom nätverket en neuron i taget. Pilen till vänster går tillbaka ett steg.</div><div class="bg" style="margin-top:4px"><button class="btn" onclick="goPhase('predict')">Förutsäg ${ICON_ARROW_R}</button></div>`;}else{el.innerHTML=`<div class="hint" style="margin-bottom:4px">Nätverkets svar uppdateras direkt när indatavärdena ändras.</div><div class="bg"><button class="btn" onclick="goPhase('explore')">${ICON_ARROW_L} Utforska</button><button class="btn" onclick="fullReset()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:4px"><path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 4.5V10h5.5"/></svg>Träna om</button></div>`;}}
 /* ── klick på ett beräkningssteg i narr-panelen → glaskort med förklaring i ord ── */
@@ -1013,8 +1019,12 @@ function removeLayer(){if(isCalc()||layers.length<=2)return;layers.splice(layers
 function fullReset(){if(trainTimer){clearInterval(trainTimer);trainTimer=null;}selEdge=null;hovEdge=null;stopTrainAnim();trained=false;isTraining=false;epoch=0;savedTrainData=null;wDeltas=null;lossHistory=[];totalWeightUpdates=0;document.getElementById('trainMsg').classList.remove('show');applyScenarioTone(curSc);renderScenarioCards();renderLC();renderVarList();renderIS();syncWeightToggle();initW();initV();if(isCalc()){phase='explore';trained=true;setPhase('explore');}else{setPhase('train');}updateTgt();document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';document.getElementById('narr').innerHTML=isCalc()?'<div class="ne">Tryck på <strong>Nästa</strong> för att stega genom nätverket. Aktiveringsfunktionen är <strong>ReLU</strong>, som sätter negativa värden till 0.<br><span style="font-size:0.88em;opacity:0.85">Klicka på en <strong style="color:var(--green)">koppling</strong> för att ändra dess vikt, eller på en <strong>neuron</strong> för att ändra dess bias.</span></div>':'<div class="ne">Tryck <strong>Träna modellen</strong> för att börja.</div>';drawNet();}
 function setupCv(){const cv=document.getElementById('cv'),p=cv.parentElement,dpr=devicePixelRatio||1,w=p.clientWidth,h=p.clientHeight;cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+'px';cv.style.height=h+'px';const ctx=cv.getContext('2d');ctx.scale(dpr,dpr);return{ctx,w,h};}
 function canvasScale(w){return Math.max(0.56,Math.min(1,w/640));}
-function neuronRadius(w){const maxN=Math.max(...layers);const s=canvasScale(w);return Math.max(13,(maxN<=3?32:maxN<=4?28:maxN<=6?23:19)*s);}
-function nPos(w,h){const s=canvasScale(w);const nL=layers.length,px=Math.max(34,90*s),py=Math.max(14,25*s),g=(w-2*px)/Math.max(nL-1,1),ps=[];for(let l=0;l<nL;l++){const n=layers[l],x=px+l*g;const avail=h-2*py;const ng=Math.min(90*s,avail/(n));const sy=h/2-(n-1)*ng/2;const lp=[];for(let i=0;i<n;i++)lp.push({x,y:sy+i*ng});ps.push(lp);}return ps;}
+/* I förutsägelseläget är nätverket inte huvudsaken, utan indata och svaret.
+   Ritningen krymper därför något, vilket också ger plats åt etiketterna
+   under indatanoderna. */
+function phaseScale(){return (!isCalc()&&phase==='predict')?0.76:1;}
+function neuronRadius(w){const maxN=Math.max(...layers);const s=canvasScale(w);return Math.max(11,(maxN<=3?32:maxN<=4?28:maxN<=6?23:19)*s*phaseScale());}
+function nPos(w,h){const s=canvasScale(w);const nL=layers.length,px=Math.max(34,90*s),py=Math.max(14,((!isCalc()&&phase==='predict')?42:25)*s),g=(w-2*px)/Math.max(nL-1,1),ps=[];for(let l=0;l<nL;l++){const n=layers[l],x=px+l*g;const avail=h-2*py;const ng=Math.min(((!isCalc()&&phase==='predict')?122:90)*s,avail/(n));const sy=h/2-(n-1)*ng/2;const lp=[];for(let i=0;i<n;i++)lp.push({x,y:sy+i*ng});ps.push(lp);}return ps;}
 function triggerPulse(){pulseStart=performance.now();if(pulseAnim)cancelAnimationFrame(pulseAnim);const loop=()=>{const t=performance.now()-pulseStart;if(t>900){pulseAnim=null;drawNet();return;}drawNet();pulseAnim=requestAnimationFrame(loop);};loop();}
 const RGB_BLUE=[124,162,255];
 const RGB_BLUE_DEEP=[36,52,120];
