@@ -1018,13 +1018,36 @@ function addLayer(){if(isCalc()||layers.length>=5)return;layers.splice(layers.le
 function removeLayer(){if(isCalc()||layers.length<=2)return;layers.splice(layers.length-2,1);fullReset();}
 function fullReset(){if(trainTimer){clearInterval(trainTimer);trainTimer=null;}selEdge=null;hovEdge=null;stopTrainAnim();trained=false;isTraining=false;epoch=0;savedTrainData=null;wDeltas=null;lossHistory=[];totalWeightUpdates=0;document.getElementById('trainMsg').classList.remove('show');applyScenarioTone(curSc);renderScenarioCards();renderLC();renderVarList();renderIS();syncWeightToggle();initW();initV();if(isCalc()){phase='explore';trained=true;setPhase('explore');}else{setPhase('train');}updateTgt();document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';document.getElementById('narr').innerHTML=isCalc()?'<div class="ne">Tryck på <strong>Nästa</strong> för att stega genom nätverket. Aktiveringsfunktionen är <strong>ReLU</strong>, som sätter negativa värden till 0.<br><span style="font-size:0.88em;opacity:0.85">Klicka på en <strong style="color:var(--green)">koppling</strong> för att ändra dess vikt, eller på en <strong>neuron</strong> för att ändra dess bias.</span></div>':'<div class="ne">Tryck <strong>Träna modellen</strong> för att börja.</div>';drawNet();}
 function setupCv(){const cv=document.getElementById('cv'),p=cv.parentElement,dpr=devicePixelRatio||1,w=p.clientWidth,h=p.clientHeight;cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+'px';cv.style.height=h+'px';const ctx=cv.getContext('2d');ctx.scale(dpr,dpr);return{ctx,w,h};}
-function canvasScale(w){return Math.max(0.56,Math.min(1,w/640));}
+/* Skalan följer både bredd och höjd. När beräkningskorten fälls ut under
+   duken krymper ytan, och då ska ritningen krympa med den i stället för att
+   noderna ska tränga ihop sig. */
+function canvasScale(w){
+  const cv=document.getElementById('cv');
+  const h=cv&&cv.clientHeight?cv.clientHeight:430;
+  return Math.min(Math.max(0.56,Math.min(1,w/640)),Math.max(0.6,Math.min(1,h/430)));
+}
 /* I förutsägelseläget är nätverket inte huvudsaken, utan indata och svaret.
    Ritningen krymper därför något, vilket också ger plats åt etiketterna
    under indatanoderna. */
 function phaseScale(){return (!isCalc()&&phase==='predict')?0.76:1;}
 function neuronRadius(w){const maxN=Math.max(...layers);const s=canvasScale(w);return Math.max(11,(maxN<=3?32:maxN<=4?28:maxN<=6?23:19)*s*phaseScale());}
-function nPos(w,h){const s=canvasScale(w);const nL=layers.length,px=Math.max(34,90*s),py=Math.max(14,((!isCalc()&&phase==='predict')?42:25)*s),g=(w-2*px)/Math.max(nL-1,1),ps=[];for(let l=0;l<nL;l++){const n=layers[l],x=px+l*g;const avail=h-2*py;const ng=Math.min(((!isCalc()&&phase==='predict')?122:90)*s,avail/(n));const sy=h/2-(n-1)*ng/2;const lp=[];for(let i=0;i<n;i++)lp.push({x,y:sy+i*ng});ps.push(lp);}return ps;}
+/* Lagerbrickan (INDATA, DOLT 1, UTDATA) ritas ovanför lagrets översta nod och
+   biasvärdet under den nedersta. Marginalerna uppe och nere måste därför rymma
+   både nodens radie och den texten, annars hamnar brickan utanför duken. */
+function nPos(w,h){
+  const s=canvasScale(w),R=neuronRadius(w);
+  const nL=layers.length,px=Math.max(34,90*s);
+  const pad=R+36,g=(w-2*px)/Math.max(nL-1,1),ps=[];
+  const avail=Math.max(40,h-2*pad),mid=pad+avail/2;
+  for(let l=0;l<nL;l++){
+    const n=layers[l],x=px+l*g;
+    const ng=Math.min(((!isCalc()&&phase==='predict')?122:90)*s,avail/n);
+    const sy=mid-(n-1)*ng/2,lp=[];
+    for(let i=0;i<n;i++)lp.push({x,y:sy+i*ng});
+    ps.push(lp);
+  }
+  return ps;
+}
 function triggerPulse(){pulseStart=performance.now();if(pulseAnim)cancelAnimationFrame(pulseAnim);const loop=()=>{const t=performance.now()-pulseStart;if(t>900){pulseAnim=null;drawNet();return;}drawNet();pulseAnim=requestAnimationFrame(loop);};loop();}
 const RGB_BLUE=[124,162,255];
 const RGB_BLUE_DEEP=[36,52,120];
