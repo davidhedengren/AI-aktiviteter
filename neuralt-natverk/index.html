@@ -128,12 +128,26 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 @media (max-height:820px){
   .intro-card{padding:24px 28px;max-height:94vh;}
   .intro-steps{gap:9px;}
-  .train-msg{padding:20px 24px;max-height:94vh;overflow-y:auto;}
+  .train-msg{padding:20px 24px;}
+}
+/* Scenariorutan ligger på duken och får bara den höjd duken har. På lägre
+   skärmar krymper texten stegvis i stället för att rutan börjar rulla. */
+@media (max-height:780px){
+  .train-msg{padding:18px 22px;font-size:.93em;}
+  .train-msg .tm-text{line-height:1.48;}
+}
+@media (max-height:700px){
+  .train-msg{padding:15px 19px;font-size:.86em;}
+  .train-msg .tm-text{line-height:1.42;}
+  .train-msg .tm-icon{width:30px;height:30px;margin-bottom:6px;}
 }
 @media (max-height:680px){
   .intro-card{padding:18px 22px;font-size:.93em;}
   .intro-viz{display:none;}
-  .train-msg{padding:16px 20px;font-size:.94em;}
+}
+@media (max-height:620px){
+  .train-msg{padding:13px 17px;font-size:.8em;}
+  .train-msg .tm-icon{display:none;}
 }
 
 .sec-t{font-size:.65em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim2);margin-bottom:5px;}
@@ -285,13 +299,32 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 /* Under själva träningen ska nätverket synas. Rutan lägger sig därför över
    vänsterpanelen i stället för över duken, så att vikterna går att följa
    medan de ändras. På smala skärmar ligger den kvar i mitten. */
-.train-msg.side{position:fixed;bottom:auto;max-width:none;transform:none;overflow-y:auto;}
-.train-msg.side.show{display:flex;flex-direction:column;justify-content:center;}
+.train-msg.side{position:fixed;bottom:auto;max-width:none;transform:none;overflow-y:auto;padding:20px 22px;}
+/* safe center: annars hamnar överkanten utanför och går inte att nå med
+   rullning om innehållet ändå skulle bli för högt. */
+.train-msg.side.show{display:flex;flex-direction:column;justify-content:safe center;}
+/* Innehållet krymper i sidoläget, så att rutan får plats i panelen även på
+   en bärbar skärm. */
+.train-msg.side .tm-icon{width:30px;height:30px;margin-bottom:5px;}
+.train-msg.side .tm-title{font-size:1.02em;}
+.train-msg.side .tm-text{font-size:.78em;}
+.train-msg.side .train-stage{gap:10px;margin-top:11px;}
+.train-msg.side .train-canvas-wrap{height:116px;}
+.train-msg.side .train-status{gap:5px;}
+.train-msg.side .train-status-line{font-size:.75em;}
+@media(max-height:720px){
+  .train-msg.side{padding:16px 18px;}
+  .train-msg.side .train-canvas-wrap{height:96px;}
+  .train-msg.side .tm-text{display:none;}
+}
 @media(max-width:900px){
   .train-msg.side{position:absolute;left:50%;top:50%;bottom:auto;width:90%;max-width:420px;transform:translate(-50%,-50%);}
   .train-msg.side.show{display:block;}
 }
-.train-msg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(180deg,rgba(24,28,48,.72),rgba(15,18,32,.75));backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 30px;text-align:center;z-index:10;display:none;max-width:420px;width:90%;box-shadow:0 30px 80px rgba(0,0,0,.6);}
+.train-msg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(180deg,rgba(24,28,48,.72),rgba(15,18,32,.75));backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 30px;text-align:center;z-index:10;display:none;max-width:420px;width:90%;box-shadow:0 30px 80px rgba(0,0,0,.6);
+/* Rutan får aldrig bli högre än duken den ligger på. Med enbart ett vh-mått
+   kunde den växa utanför och klippas i över- och underkant. */
+max-height:calc(100% - 20px);overflow-y:auto;}
 .train-msg.show{display:block;animation:fadeIn .35s var(--ease-spring);}
 .train-msg .tm-icon{width:38px;height:38px;margin:0 auto 10px;color:var(--accent2);}
 .train-msg .tm-icon.ok{color:var(--green);}
@@ -877,7 +910,7 @@ function trainMsgSide(msg,on){
     msg.style.width=`${r.width}px`;msg.style.height=`${r.height}px`;
   }
 }
-function startTraining(){if(trainTimer||isCalc())return;if(trained&&!confirm('Vill du träna om nätverket? Modellen och förlustkurvan försvinner.'))return;epoch=0;trained=false;savedTrainData=null;isTraining=true;lossHistory=[];totalWeightUpdates=0;initW();const tn=layers.reduce((a,b)=>a+b,0),maxE=curSc==='gym'?1500:120 /* fast antal, annars får stora nät mer träning än små */;const msg=document.getElementById('trainMsg');
+function startTraining(){if(trainTimer||isCalc())return;if(trained&&!confirm('Vill du träna om nätverket? Modellen och förlustkurvan försvinner.'))return;epoch=0;trained=false;savedTrainData=null;isTraining=true;lossHistory=[];totalWeightUpdates=0;initW();const tn=layers.reduce((a,b)=>a+b,0),maxE=curSc==='gym'?1500:300 /* fast antal, annars får stora nät mer träning än små. 300 i stället för 120: vid 120 var alla arkitekturer undertränade, och då såg fler neuroner ut att hjälpa i provscenariot fastän de inte gör det */;const msg=document.getElementById('trainMsg');
   stopTrainAnim();
   const dashboard=()=>`<div class="tdash"><div class="tdash-cell"><div class="tl">Epok</div><div class="tv" id="tStatEpoch">0 / ${maxE}</div></div><div class="tdash-cell"><div class="tl">Förlust</div><div class="tv" id="tStatLoss" style="color:var(--green)">–</div></div><div class="tdash-cell wide"><div class="tl">Vikter uppdaterade</div><div class="tv" id="tStatWeights" style="font-size:.95em;color:var(--accent2)">0</div></div></div>`;
   msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg><div class="tm-title">Tränar nätverket …</div><div class="tm-text">Modellen matas med hundratals exempel och justerar vikterna steg för steg.</div><div class="train-stage"><div class="train-canvas-wrap"><canvas id="trainAnimCanvas"></canvas></div><div class="train-progress-rail"><i id="trainAnimRail"></i></div><div class="train-status" id="trainAnimStatus"></div></div>${dashboard()}`;
@@ -894,11 +927,14 @@ function startTraining(){if(trainTimer||isCalc())return;if(trained&&!confirm('Vi
     initV();forwardFull();drawNet();
     /* Gym behöver fler epoker för att djupa nät ska hinna konvergera.
        Två satser per tick håller väntetiden nere utan att ändra resultatet. */
-    if(curSc==='gym')for(let q=0;q<2&&epoch<maxE;q++){const l2=trainBatch();epoch++;lossHistory.push(l2);}
-    /* Gym tranar alltid lika manga epoker, sa att olika arkitekturer gar att
-       jamfora. Ett tidigt stopp gynnade forr stora nat och sankte traffsakerheten
-       med runt atta procentenheter. */
-    if(epoch>=maxE||(curSc!=='gym'&&loss<0.005)){clearInterval(trainTimer);trainTimer=null;trained=true;isTraining=false;stopTrainAnim();trainMsgSide(msg,false);const _acc=testAccuracy();const accPct=_acc==null?'–':Math.round(_acc*100)+'%';msg.innerHTML=`<svg class="tm-icon ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><div class="tm-title">Träningen är klar</div><div class="tm-text">Nätverket gick igenom <strong>${epoch} epoker</strong> och byggde sina vikter utifrån ${(epoch*(curSc==="gym"?100:30)).toLocaleString('sv-SE')} exempel.</div><div class="tdash"><div class="tdash-cell"><div class="tl">Rätt svar</div><div class="tv" style="color:var(--gold,#ffd866)">${accPct}</div></div><div class="tdash-cell"><div class="tl">Förlust</div><div class="tv" style="color:var(--green)">${loss.toFixed(4)}</div></div><div class="tdash-cell wide"><div class="tl">Vikter uppdaterade</div><div class="tv" style="color:var(--accent2)">${totalWeightUpdates.toLocaleString('sv-SE')}</div></div></div><div class="after-train"><button class="btn pri" onclick="goDirectToPredict()">${ICON_TARGET} Förutsäg ${ICON_ARROW_R}</button><div class="at-links"><button class="at-link" onclick="finishTraining()">Utforska nätverket</button><button class="at-link" onclick="openDataModal()">Visa träningsdata</button></div></div>`;}},curSc==='gym'?25:80);}
+    /* Gym kör tre satser per tick, provet två. Provets tick är långsammare
+       så att förlusten går att följa med blicken, och totaltiden landar på
+       ungefär tolv sekunder i båda scenarierna. */
+    for(let q=0;q<(curSc==='gym'?2:1)&&epoch<maxE;q++){const l2=trainBatch();epoch++;lossHistory.push(l2);}
+    /* Alla scenarier tränar lika många epoker, så att olika arkitekturer går
+       att jämföra. Ett tidigt stopp gav undertränade nät och fick fler
+       neuroner att se ut att hjälpa i provet, fastän de inte gör det. */
+    if(epoch>=maxE){clearInterval(trainTimer);trainTimer=null;trained=true;isTraining=false;stopTrainAnim();trainMsgSide(msg,false);const _acc=testAccuracy();const accPct=_acc==null?'–':Math.round(_acc*100)+'%';msg.innerHTML=`<svg class="tm-icon ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><div class="tm-title">Träningen är klar</div><div class="tm-text">Nätverket gick igenom <strong>${epoch} epoker</strong> och byggde sina vikter utifrån ${(epoch*(curSc==="gym"?100:30)).toLocaleString('sv-SE')} exempel.</div><div class="tdash"><div class="tdash-cell"><div class="tl">Rätt svar</div><div class="tv" style="color:var(--gold,#ffd866)">${accPct}</div></div><div class="tdash-cell"><div class="tl">Förlust</div><div class="tv" style="color:var(--green)">${loss.toFixed(4)}</div></div><div class="tdash-cell wide"><div class="tl">Vikter uppdaterade</div><div class="tv" style="color:var(--accent2)">${totalWeightUpdates.toLocaleString('sv-SE')}</div></div></div><div class="after-train"><button class="btn pri" onclick="goDirectToPredict()">${ICON_TARGET} Förutsäg ${ICON_ARROW_R}</button><div class="at-links"><button class="at-link" onclick="finishTraining()">Utforska nätverket</button><button class="at-link" onclick="openDataModal()">Visa träningsdata</button></div></div>`;}},curSc==='gym'?25:80);}
 function goDirectToPredict(){document.getElementById('trainMsg').classList.remove('show');goPhase('predict');}
 function finishTraining(){document.getElementById('trainMsg').classList.remove('show');goPhase('explore');resetPass();if(seenGuides.has('explore'))return;seenGuides.add('explore');const msg=document.getElementById('trainMsg');msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><div class="tm-title">Utforska nätverket</div><div class="tm-text">Tryck på <strong>Nästa</strong> för att beräkna en neuron i taget.<br><br>Under nätverket visas <strong>beräkningsstegen</strong>. Tryck på ett av dem för en utförligare förklaring i ord.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Jag förstår ${ICON_ARROW_R}</button></div>`;trainMsgSide(msg,false);msg.classList.add('show');}
 function showPredictGuide(){if(seenGuides.has('predict'))return;seenGuides.add('predict');const msg=document.getElementById('trainMsg');msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg><div class="tm-title">Gör egna förutsägelser</div><div class="tm-text">Dra i reglagen för att ändra indatavärdena. Nätverkets svar uppdateras direkt.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Jag förstår ${ICON_ARROW_R}</button></div>`;trainMsgSide(msg,false);msg.classList.add('show');}
@@ -1066,7 +1102,7 @@ function showNarr(l,j,contribs,sum,a){
 function updateTgt(){if(isCalc())return;document.getElementById('targetVal').textContent=targetLabel(getIV());}
 function updateOut(){if(isCalc())return;const last=layers.length-1;if(!vals[last]||!vals[last][0].computed)return;const o=vals[last][0].act;const conf=Math.round(Math.max(o,1-o)*100),pred=o>0.5,tgt=targetFn(getIV()),correct=(pred?1:0)===tgt;document.getElementById('outputVal').textContent=curSc==='abstract'?`${o.toFixed(3)} → ${pred?'1':'0'}`:`${pred?'Ja':'Nej'} (${conf}%)`;document.getElementById('outputVal').style.color=pred?'var(--accent2)':'var(--red)';document.getElementById('verdictVal').innerHTML=correct?`<span class="verdict-pill ok">${ICON_CHECK} Rätt</span>`:`<span class="verdict-pill bad">✗ Fel</span> <span style="font-size:.7em;color:var(--dim2)">rätt: ${tgt===1?'Ja':'Nej'}</span>`;}
 function setScenario(k){curSc=k;scOpen=false;applyScenarioTone(k);hiddenRelu=false;layerActs=[];if(k==='calc'){varEnabled=[true,true];layers=[2,3,1];}else if(k==='gym'){varEnabled=[true,true,true,true];layers=[4,1,1];setTimeout(showGymIntro,100);}else{varEnabled=[true,true,false,false];layers=[2,1,1];}fullReset();}
-function showGymIntro(){if(seenGuides.has('gym'))return;seenGuides.add('gym');const msg=document.getElementById('trainMsg');msg.innerHTML=`<div class="tm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9v6M6 7v10M18 7v10M21 9v6"/><path d="M6 12h12"/></svg></div><div class="tm-title">Blir träningen effektiv?</div><div class="tm-text" style="text-align:left;">Till skillnad från provscenariot är sambanden här mer komplicerade. <strong>Mer av allt är inte alltid bättre.</strong> För lite sömn är dåligt, men att sova halva dagen hjälper inte heller. Ett för kort pass ger ingen effekt, medan ett alltför långt sliter ut kroppen.<br><br>Det här gör att nätverket behöver <strong style="color:var(--accent2)">dolda lager</strong> för att klara uppgiften. Varje neuron i det dolda lagret kan specialisera sig på att upptäcka ett visst samband. En neuron kanske lär sig känna igen lagom mycket sömn, medan en annan reagerar på kombinationen av stress och vila. Utdataneuronen väger sedan ihop alla dessa signaler till ett slutgiltigt svar.<br><br>Träna nätverket och utforska sedan vilka vikter de olika neuronerna har fått.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Jag förstår ${ICON_ARROW_R}</button></div>`;trainMsgSide(msg,false);msg.classList.add('show');}
+function showGymIntro(){if(seenGuides.has('gym'))return;seenGuides.add('gym');const msg=document.getElementById('trainMsg');msg.innerHTML=`<div class="tm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9v6M6 7v10M18 7v10M21 9v6"/><path d="M6 12h12"/></svg></div><div class="tm-title">Blir träningen effektiv?</div><div class="tm-text" style="text-align:left;">Till skillnad från provscenariot är sambanden här mer komplicerade. <strong>Mer av allt är inte alltid bättre.</strong> För lite sömn är dåligt, men att sova halva dagen hjälper inte heller. Ett för kort pass ger ingen effekt, medan ett alltför långt sliter ut kroppen.<br><br>Det här gör att nätverket behöver <strong style="color:var(--accent2)">dolda lager</strong> för att klara uppgiften. Varje neuron i det dolda lagret kan specialisera sig på att upptäcka ett visst samband. En neuron kanske lär sig känna igen lagom mycket sömn, medan en annan reagerar på kombinationen av stress och vila. Utdataneuronen väger sedan ihop alla dessa signaler till ett slutgiltigt svar.<br><br>Träna nätverket och se vilka förutsägelser det gör.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Jag förstår ${ICON_ARROW_R}</button></div>`;trainMsgSide(msg,false);msg.classList.add('show');}
 function renderActSection(){const el=document.getElementById('actContent');const sec=document.getElementById('actSection');if(isCalc()){el.innerHTML='<div style="font-size:0.82em;color:var(--green);font-weight:600;padding:4px 0;">ReLU <span style="color:var(--dim);font-weight:400;">ger max(0, x)</span></div>';sec.style.display='';}else if(curSc==='exam'||curSc==='gym'){const lbl=hiddenRelu?'<span style="color:var(--green)">ReLU</span> (dolda) + <span style="color:var(--accent2)">Sigmoid</span> (utdata)':'<span style="color:var(--accent2)">Sigmoid</span> (alla lager)';el.innerHTML=`<div style="font-size:0.82em;font-weight:600;padding:4px 0;">${lbl}</div><button class="act-toggle" onclick="toggleHiddenRelu()">${hiddenRelu?ICON_UNDO+' Byt tillbaka till sigmoid':ICON_BOLT+' Testa ReLU i de dolda lagren'}</button>`;sec.style.display='';}else{ensureLayerActs();let h='';for(let l=1;l<layers.length;l++){const isOut=l===layers.length-1;const lbl=isOut?'Utdata':`Dolt ${l}`;const cur=layerActs[l]||'sigmoid';h+=`<div class="pill-row"><span class="pr-label">${lbl}</span><div class="pill-group"><button class="pill ${cur==='relu'?'active':''}" onclick="setLayerAct(${l},'relu')">ReLU</button><button class="pill ${cur==='sigmoid'?'active':''}" onclick="setLayerAct(${l},'sigmoid')">Sigmoid</button><button class="pill ${cur==='tanh'?'active':''}" onclick="setLayerAct(${l},'tanh')">Tanh</button></div></div>`;}el.innerHTML=h;sec.style.display='';}}
 function renderVarList(){if(isCalc()){document.getElementById('varList').innerHTML='';return;}const cv=curVars();const el=document.getElementById('varList');let h='';const allOn=curSc==='gym';for(let i=0;i<cv.length;i++){const v=cv[i],on=varEnabled[i],base=allOn||i<2;h+=`<div class="var-toggle ${on?'on':''}" onclick="${base?'':'toggleVar('+i+')'}"><span class="vdot"></span><span class="vname">${v.name}</span>${v.desc?`<span class="vdesc">${v.desc}</span>`:''}${base?'<span style="font-size:0.8em;opacity:0.55;margin-left:auto" title="Alltid aktiv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:11px;height:11px"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V7a3.5 3.5 0 0 1 7 0v3.5"/></svg></span>':''}</div>`;}el.innerHTML=h;}
 function toggleVar(i){if(i<2)return;varEnabled[i]=!varEnabled[i];fullReset();}
