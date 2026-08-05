@@ -47,7 +47,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 button{font-family:inherit;}
 :focus-visible{outline:2px solid var(--accent2);outline-offset:2px;border-radius:8px;}
 
-/* ── Header (matchar labyrinten) ── */
+/* ── Header ── */
 .back-link,.lang-link{position:absolute;top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:.2s;white-space:nowrap;z-index:2;}
 .back-link{left:16px;} .lang-link{right:16px;}
 .back-link:hover,.lang-link:hover{color:var(--text);border-color:var(--dim);}
@@ -73,7 +73,7 @@ label{font-size:11px;color:var(--dim);display:flex;align-items:center;gap:6px;}
 input[type="number"]{background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:4px 6px;font-family:'JetBrains Mono',monospace;font-size:12px;outline:none;}
 input[type="number"]:focus{border-color:var(--accent);}
 
-/* ── Premium-kontroller ── */
+/* ── Controls ── */
 .controls{margin-top:16px;width:100%;}
 .ctrl-primary{display:flex;gap:10px;align-items:stretch;margin-bottom:12px;}
 .select-wrap{position:relative;flex:1;min-width:0;}
@@ -140,7 +140,7 @@ input[type="number"]:focus{border-color:var(--accent);}
 .log-row.ev-info{color:var(--accent2);}
 .log-row .lq{color:var(--text);font-weight:600;}
 
-/* ── Parameterpanel ── */
+/* ── Parameter panel ── */
 .param-panel{width:100%;background:linear-gradient(180deg,rgba(77,128,255,.06),rgba(77,128,255,0) 55%),var(--surface);border:1px solid #23304f;border-radius:12px;padding:14px 16px;margin-top:6px;box-shadow:0 6px 22px rgba(0,0,0,.32);}
 .param-head{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;}
 .param-row{display:grid;grid-template-columns:1fr 130px 46px;gap:10px;align-items:center;margin-bottom:12px;}
@@ -157,7 +157,7 @@ input[type="number"]:focus{border-color:var(--accent);}
 .em-nums b{font-family:'JetBrains Mono',monospace;font-size:12px;}
 .em-nums .em-l{color:var(--gold);}.em-nums .em-r{color:var(--accent2);}
 
-/* ── Begreppssystem (klickbara termer) ── */
+/* ── Glossary system (clickable terms) ── */
 .term{border-bottom:1px dotted var(--accent2);cursor:pointer;color:inherit;transition:background .15s,border-color .15s;border-radius:2px;}
 .term:hover,.term:focus{border-bottom-color:var(--accent);background:rgba(77,128,255,.12);outline:none;}
 
@@ -188,7 +188,7 @@ input[type="number"]:focus{border-color:var(--accent);}
 .launch-card:hover .lc-arrow{transform:translateX(3px);color:var(--accent2);}
 .lc-arrow svg{width:15px;height:15px;display:block;}
 
-/* ── Glaskort (identiskt med labyrinten) ── */
+/* ── Glass cards ── */
 .concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
 .concept-backdrop.show{opacity:1;pointer-events:auto;}
 .concept-card{position:fixed;top:50%;left:50%;z-index:301;width:390px;max-width:90vw;
@@ -220,7 +220,7 @@ input[type="number"]:focus{border-color:var(--accent);}
 .concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;font-weight:600;}
 .concept-def .term{color:inherit;}
 
-/* 3D-rutor i glaskorten */
+/* 3D cells inside the glass cards */
 .gc-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 8px;margin:16px 0 4px;transform-style:preserve-3d;}
 .gc-grid-3{grid-template-columns:repeat(3,minmax(0,1fr));}
 .gc-grid-2{grid-template-columns:repeat(2,minmax(0,1fr));}
@@ -255,11 +255,16 @@ input[type="number"]:focus{border-color:var(--accent);}
 .gc-btn:hover{filter:brightness(1.07);background:linear-gradient(180deg,#5b8bff,#3f6fe6);box-shadow:0 8px 22px rgba(77,128,255,.32),inset 0 1px 0 rgba(255,255,255,.25);}
 .gc-btn:active{transform:translateY(1px);}
 
-/* Formel i glaskort */
+/* Formula inside a glass card */
 .gc-formula{background:var(--bg);border:1px solid var(--border2);border-radius:12px;padding:14px 10px;margin:16px 0 4px;overflow-x:auto;}
 .pf{font-family:'JetBrains Mono',monospace;font-size:clamp(.8rem,3.3vw,1.02rem);font-weight:600;color:var(--text);white-space:nowrap;letter-spacing:.01em;text-align:center;line-height:1.5;}
 .pf2{margin-top:3px;}
-.pf sub{font-size:.72em;}
+/* The formula is set in MathML and inherits the font of the formula row. */
+.pf math{font-family:inherit;font-size:1em;}
+.pf math mi{font-style:italic;}
+.pf math mo{font-style:normal;}
+.formula-legend math{font-family:'JetBrains Mono',monospace;font-size:.95em;}
+.formula-legend math mi{font-style:italic;}
 .pf .fa{color:#ffd866;} .pf .fr{color:#4ade80;} .pf .fg{color:#c084fc;} .pf .fm{color:#6698ff;}
 .formula-legend{display:flex;flex-direction:column;gap:8px;margin-top:16px;text-align:left;font-size:11.5px;color:var(--subtle);line-height:1.5;}
 .formula-legend .fp-dot{display:inline-block;width:9px;height:9px;border-radius:2px;vertical-align:middle;margin-right:7px;}
@@ -270,7 +275,7 @@ input[type="number"]:focus{border-color:var(--accent);}
 .maze-select:focus{border-color:var(--accent);}
 .right-wrapper{width:500px;}
 
-/* ── Intro-overlay (matchar labyrinten) ── */
+/* ── Intro overlay ── */
 .overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
 .overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:540px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
@@ -316,7 +321,7 @@ input[type="number"]:focus{border-color:var(--accent);}
     <span class="lang-ico" aria-hidden="true"><svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#006aa7"/><path d="M20 0v36M0 18h60" stroke="#fecc02" stroke-width="7"/></svg></span>
     Svenska</a>
   <h1><span>Q-learning</span> simulation</h1>
-  <p>Train an agent to navigate a grid with reinforcement learning – watch the Q-values update in real time.</p>
+  <p>Train an agent to navigate a grid with reinforcement learning. Watch the Q-values update in real time.</p>
 </div>
 
 <div class="page-container"><div class="main-container pre-train" id="mainContainer">
@@ -357,7 +362,7 @@ input[type="number"]:focus{border-color:var(--accent);}
 </div>
 <input type="checkbox" id="stepModeCheckbox" style="display:none;" aria-hidden="true">
 <div class="param-panel" id="paramInfo">
-<div class="param-head">Parameters – change any time, even during training</div>
+<div class="param-head">Parameters, which can be changed any time, even during training</div>
 <div class="param-row"><div class="param-label"><span class="term" data-term="alpha"><span class="psym">α</span> learning rate</span></div><input type="range" id="alphaParam" min="0.01" max="1" step="0.01" value="0.50"><div class="param-val" id="alphaVal">0.50</div></div>
 <div class="param-row"><div class="param-label"><span class="term" data-term="gamma"><span class="psym">γ</span> discount factor</span></div><input type="range" id="gammaParam" min="0" max="0.99" step="0.01" value="0.95"><div class="param-val" id="gammaVal">0.95</div></div>
 <div class="param-row"><div class="param-label"><span class="term" data-term="epsilon"><span class="psym">ε</span> exploration rate</span></div><input type="range" id="epsilonParam" min="0.01" max="1" step="0.01" value="0.90"><div class="param-val" id="epsilonVal">0.90</div></div>
@@ -366,16 +371,16 @@ input[type="number"]:focus{border-color:var(--accent);}
 <div class="em-track"><div class="em-explore" id="emExplore" style="width:90%"></div><div class="em-exploit" id="emExploit" style="width:10%"></div></div>
 <div class="em-nums"><span class="em-l"><span class="term" data-term="utforskning">Exploration</span> <b id="emExploreNum">90%</b></span><span class="em-r"><span class="term" data-term="utnyttjande">Exploitation</span> <b id="emExploitNum">10%</b></span></div>
 </div>
-</div></div><div class="log-caption">Step log <span>– click a row for an explanation</span></div><div id="logText"></div></div>
+</div></div><div class="log-caption">Step log <span>· click a row for an explanation</span></div><div id="logText"></div></div>
 
 <div class="right-wrapper">
 <div class="chart-card">
-  <div class="chart-title">Learning curve <span class="chart-sub">– number of steps to reach the goal per episode</span></div>
+  <div class="chart-title">Learning curve <span class="chart-sub">· number of steps to reach the goal per episode</span></div>
   <canvas id="chartCanvas" width="460" height="150"></canvas>
   <div id="chartEmpty" class="chart-empty">Start training and the curve will be drawn: the number of steps per episode drops as the agent learns a shorter path.</div>
 </div>
 
-<div class="launch-label">Learn more – click for an explanation</div>
+<div class="launch-label">Learn more · click for an explanation</div>
 <div class="info-launch">
   <button class="launch-card wide" onclick="openConcept('oversikt',event)">
     <span class="lc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a7 7 0 0 0-4 12.7V18h8v-2.3A7 7 0 0 0 12 3Z"/><path d="M9 21h6"/></svg></span>
@@ -413,7 +418,7 @@ input[type="number"]:focus{border-color:var(--accent);}
 
 <div id="hoverInfo"></div>
 
-<!-- ── Intro-overlay ── -->
+<!-- ── Intro overlay ── -->
 <div class="overlay show" id="introOverlay"><div class="overlay-card">
   <svg class="intro-viz" viewBox="0 0 200 92" aria-hidden="true">
     <rect class="iv-cell" x="10" y="26" width="40" height="40" rx="6"/>
@@ -428,14 +433,14 @@ input[type="number"]:focus{border-color:var(--accent);}
   <h2><span>Q-learning</span> simulation</h2>
   <p class="sub">An agent moves through a grid and has to learn to collect all the coins and reach the goal, just by trial and error and receiving rewards and penalties.</p>
   <div class="steps">
-    <div class="step"><div class="step-num">1</div><div><strong>Train the agent</strong> – press <strong>Start training</strong>, and the agent starts trying its way through the grid.</div></div>
-    <div class="step"><div class="step-num">2</div><div><strong>Follow the Q-values</strong> – the color and numbers on each cell show what the agent has learned so far about each action.</div></div>
-    <div class="step"><div class="step-num">3</div><div><strong>Adjust the parameters</strong> – change α, γ, and ε and see how it affects how fast and stably the agent learns.</div></div>
+    <div class="step"><div class="step-num">1</div><div><strong>Train the agent.</strong> Press <strong>Start training</strong>, and the agent starts trying its way through the grid.</div></div>
+    <div class="step"><div class="step-num">2</div><div><strong>Follow the Q-values.</strong> The color and numbers on each cell show what the agent has learned so far about each action.</div></div>
+    <div class="step"><div class="step-num">3</div><div><strong>Adjust the parameters.</strong> Change α, γ and ε and see how it affects how fast and stably the agent learns.</div></div>
   </div>
   <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
 </div></div>
 
-<!-- ── Glaskort: skelett ── -->
+<!-- ── Glass card: skeleton ── -->
 <div class="concept-backdrop" id="conceptBackdrop" onclick="closeConcept()"></div>
 <div class="concept-card" id="conceptCard">
   <div class="concept-card-inner" id="conceptCardInner">
@@ -450,14 +455,14 @@ input[type="number"]:focus{border-color:var(--accent);}
 function getCoinKeyFrom(coinsArray){let coinsCopy=coinsArray.slice();coinsCopy.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);return coinsCopy.map(c=>c[0]+"_"+c[1]).join(";");}
 /* ── Reusable glossary system (clickable terms) ── */
 const GLOSSARY={
-'alpha':{term:'α – learning rate',def:'How big a step the agent takes toward the new value at each update. High α = learns fast but jumpy; low α = learns slowly but stably.'},
-'gamma':{term:'γ – discount factor',def:'How much future rewards weigh compared to immediate ones. Close to 1 = the agent thinks long-term and plans ahead; close to 0 = it only cares about the reward right now.'},
-'epsilon':{term:'ε – exploration rate',def:'The probability that the agent picks a random action instead of the best known one. High ε = explores a lot; low ε = trusts what it has learned. ε decreases automatically during training.'},
+'alpha':{term:'The learning rate α',def:'How big a step the agent takes toward the new value at each update. A high α makes the agent learn quickly, but the values swing sharply. A low α gives slower but steadier learning.'},
+'gamma':{term:'The discount factor γ',def:'How much future rewards weigh compared to immediate ones. A γ close to 1 makes the agent long-sighted, so that it plans several steps ahead. A γ close to 0 means that only the immediate reward counts.'},
+'epsilon':{term:'The exploration rate ε',def:'The probability that the agent picks a random action instead of the best known one. A high ε gives a great deal of exploration. A low ε means the agent mostly follows what it has already learned. The value decreases automatically during training.'},
 'utforskning':{term:'Exploration',def:'When the agent tries random actions to discover new paths and rewards it doesn\'t know about yet. Controlled by ε.'},
 'utnyttjande':{term:'Exploitation',def:'When the agent picks the action that has given the best Q-value so far, in other words making use of what it has already learned.'},
 'qvarde':{term:'Q-value',def:'A measure of how good a particular action is in a particular state, based on the total future reward it is expected to lead to. Q-learning is all about learning these values.'},
 'policy':{term:'Policy',def:'The agent\'s strategy: which action it picks in each state. Once training is done, the policy amounts to always choosing the action with the highest Q-value.'},
-'tillstand':{term:'State (s)',def:'The situation the agent is currently in — here, the agent\'s position plus which coins are still left.'},
+'tillstand':{term:'State (s)',def:'The situation the agent is currently in, that is, the agent\'s position plus which coins are still left.'},
 'beloning':{term:'Reward (r)',def:'The value the environment gives for an action. A coin gives +10, reaching the goal gives +10, every step costs -0.1, and reaching the goal without all the coins gives -20.'},
 'handling':{term:'Action (a)',def:'One of the moves the agent can make from a cell: up, right, down, or left. Q-learning learns how good each action is in each state.'},
 'konvergens':{term:'Convergence',def:'When the Q-values almost stop changing between updates. At that point the agent has, in practice, learned a stable strategy and is said to have "finished training".'},
@@ -466,7 +471,7 @@ function term(key,label){const g=GLOSSARY[key];const text=label||(g?g.term:key);
 function openTermCard(el){const g=GLOSSARY[el.dataset.term];if(!g)return;openConceptCustom(ICON_INFO,g.term,g.def,el);}
 function initGlossary(){document.addEventListener("click",e=>{const t=e.target.closest(".term");if(t){e.stopPropagation();openTermCard(t);}});document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&document.activeElement&&document.activeElement.classList.contains("term")){e.preventDefault();openTermCard(document.activeElement);}});}
 
-/* ═══════════════ Glaskort (concept cards) ═══════════════ */
+/* ═══════════════ Glass cards ═══════════════ */
 function t3(color,glyph,label,sub,cls){
   return '<div class="gc-cell"><div class="t3'+(cls?' '+cls:'')+'" style="--tc:'+color+'">'+(glyph||'')+'</div>'
     +'<span class="t3-lab">'+label+'</span>'+(sub?'<span class="t3-sub">'+sub+'</span>':'')+'</div>';
@@ -481,18 +486,17 @@ const CONCEPTS={
       +'<div class="gc-ctrl-row"><span class="mbtn">Learn</span><span>every step updates the Q-value for the action that was taken.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn">Exploit</span><span>as ε drops, the agent starts '+term('utnyttjande','exploiting')+' what it has learned.</span></div>'
       +'</div>'
-      +'<button class="gc-btn" onclick="closeConcept()">Let\'s go</button>'
   },
   bellman:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h9M5 20l7-8L5 4M10 20h9"/></svg>',
     title:'The Bellman equation',
     def:'<div class="gc-lead">At every step the Q-value is updated so it gradually becomes a better estimate of how good an action is.</div>'
-      +'<div class="gc-formula"><div class="pf">Q(s,a) ← Q(s,a) +</div><div class="pf pf2"><span class="fa">α</span>[ <span class="fr">r</span> + <span class="fg">γ</span>·<span class="fm">max</span><sub>a\'</sub><span class="fm"> Q(s\',a\')</span> − Q(s,a) ]</div></div>'
+      +'<div class="gc-formula"><div class="pf"><math><mrow><mi>Q</mi><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo><mo>&#x2190;</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo><mo>+</mo></mrow></math></div><div class="pf pf2"><math><mrow><mi class="fa">&#x3B1;</mi><mo stretchy="false">[</mo><mi class="fr">r</mi><mo>+</mo><mi class="fg">&#x3B3;</mi><mo>&#x22C5;</mo><mrow class="fm"><msub><mo movablelimits="false">max</mo><mrow><msup><mi>a</mi><mo>&#x2032;</mo></msup></mrow></msub><mi>Q</mi><mo stretchy="false">(</mo><msup><mi>s</mi><mo>&#x2032;</mo></msup><mo>,</mo><msup><mi>a</mi><mo>&#x2032;</mo></msup><mo stretchy="false">)</mo></mrow><mo>&#x2212;</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow></math></div></div>'
       +'<div class="formula-legend">'
-      +'<div><span class="fp-dot" style="background:#ffd866"></span> '+term('alpha','<strong style="color:#ffd866">α</strong>')+' – how big a step we take toward the new value.</div>'
-      +'<div><span class="fp-dot" style="background:#4ade80"></span> '+term('beloning','<strong style="color:#4ade80">r</strong>')+' – the reward the agent got for the step.</div>'
-      +'<div><span class="fp-dot" style="background:#c084fc"></span> '+term('gamma','<strong style="color:#c084fc">γ</strong>')+' – how much future rewards weigh.</div>'
-      +'<div><span class="fp-dot" style="background:#6698ff"></span> <strong style="color:#6698ff">max Q(s′,a′)</strong> – the highest Q-value in the '+term('tillstand','next state')+'.</div>'
+      +'<div><span class="fp-dot" style="background:#ffd866"></span> '+term('alpha','<strong style="color:#ffd866">α</strong>')+': how big a step we take toward the new value.</div>'
+      +'<div><span class="fp-dot" style="background:#4ade80"></span> '+term('beloning','<strong style="color:#4ade80">r</strong>')+': the reward the agent got for the step.</div>'
+      +'<div><span class="fp-dot" style="background:#c084fc"></span> '+term('gamma','<strong style="color:#c084fc">γ</strong>')+': how much future rewards weigh.</div>'
+      +'<div><span class="fp-dot" style="background:#6698ff"></span> <strong style="color:#6698ff"><math class="fm"><mrow><mo movablelimits="false">max</mo><mi>Q</mi><mo stretchy="false">(</mo><msup><mi>s</mi><mo>&#x2032;</mo></msup><mo>,</mo><msup><mi>a</mi><mo>&#x2032;</mo></msup><mo stretchy="false">)</mo></mrow></math></strong>: the highest Q-value in the '+term('tillstand','next state')+'.</div>'
       +'</div>'
       +'<div class="gc-note">In words: the agent weighs the reward it got against the best future reward it thinks it can get, and nudges its Q-value a bit in that direction. How big the adjustment is gets decided by <em>α</em>.</div>'
   },
@@ -509,7 +513,7 @@ const CONCEPTS={
       +'<div class="gc-ctrl">'
       +'<div class="gc-ctrl-row"><span class="mbtn pos">+10</span><span>for every '+term('beloning','coin')+' collected.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn pos">+10</span><span>for reaching the goal with all coins collected.</span></div>'
-      +'<div class="gc-ctrl-row"><span class="mbtn neg">−0.1</span><span>per step – encourages shorter paths.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn neg">−0.1</span><span>per step, which encourages shorter paths.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn neg">−20</span><span>for reaching the goal <em>before</em> all coins are taken.</span></div>'
       +'</div>'
   },
@@ -520,8 +524,8 @@ const CONCEPTS={
       +'<div style="margin:16px 0 4px;"><div style="height:22px;border-radius:8px;border:1px solid var(--border2);box-shadow:inset 0 1px 3px rgba(0,0,0,.5);background:linear-gradient(90deg,#ec423a,#566078,#78c2ff);"></div>'
       +'<div style="display:flex;justify-content:space-between;font-size:10.5px;font-family:\'JetBrains Mono\',monospace;color:var(--dim);margin-top:6px;"><span style="color:#ff6a5e;">low Q</span><span style="color:#78c2ff;">high Q</span></div></div>'
       +'<div class="gc-ctrl">'
-      +'<div class="gc-ctrl-row"><span class="mbtn">Red</span><span>low Q-value – the agent thinks the cell leads the wrong way.</span></div>'
-      +'<div class="gc-ctrl-row"><span class="mbtn">Blue</span><span>high Q-value – a good cell to be in.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Red</span><span>low Q-value. The agent thinks the cell leads the wrong way.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Blue</span><span>high Q-value. A good cell to be in.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn">Q-values</span><span>the button prints the value for every action in the cell.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn">Hover</span><span>hold the mouse over a cell to see its Q-values.</span></div>'
       +'</div>'
@@ -536,12 +540,11 @@ const CONCEPTS={
       +'<div class="gc-ctrl-row"><span class="mbtn">Drag</span><span>move the <strong>start</strong> and <strong>goal cell</strong>.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn">α γ ε</span><span>the parameters can be changed at any time in the panel below the grid.</span></div>'
       +'</div>'
-      +'<button class="gc-btn" onclick="closeConcept()">Close</button>'
   },
   klar:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
     title:'When the agent is done',
-    def:'<div class="gc-lead">Once the model has '+term('konvergens','converged')+', the Q-values almost stop changing – at that point the agent has a stable strategy.</div>'
+    def:'<div class="gc-lead">Once the model has '+term('konvergens','converged')+', the Q-values almost stop changing. At that point the agent has a stable strategy.</div>'
       +'<div class="gc-ctrl">'
       +'<div class="gc-ctrl-row"><span class="mbtn">Policy</span><span>shows the best '+term('handling','action')+' in every cell as an arrow.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn">Test</span><span>lets the agent walk the learned path step by step, with no randomness.</span></div>'
@@ -623,7 +626,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
   });
 })();
 
-/* ═══════════════ Simulation (unchanged logic) ═══════════════ */
+/* ═══════════════ Simulation ═══════════════ */
 const MAZE_PRESETS=[{name:"Default environment",obstacles:[[0,8],[1,8],[2,2],[2,3],[2,4],[3,2],[3,6],[4,4],[4,5],[4,6],[4,8],[5,3],[5,4],[5,8],[6,4],[6,6],[6,8],[7,6],[7,8],[8,1],[8,6],[8,7],[8,8],[9,1]],coins:[[0,9],[3,3],[9,0],[7,7]],start:[0,0],goal:[9,9]},{name:"The Snake",obstacles:[[0,9],[1,9],[2,9],[3,9],[4,9],[5,9],[6,9],[7,9],[8,9],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7],[9,7],[0,5],[1,5],[2,5],[3,5],[4,5],[5,5],[6,5],[7,5],[8,5],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3],[7,3],[8,3],[9,3],[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1],[8,1]],coins:[[7,8],[3,4],[5,0]],start:[0,0],goal:[9,9]},{name:"The Maze",obstacles:[[3,9],[4,9],[5,9],[6,9],[8,9],[0,8],[1,8],[8,8],[0,7],[1,7],[3,7],[4,7],[6,7],[0,6],[1,6],[3,6],[4,6],[6,6],[7,6],[8,6],[8,5],[0,4],[1,4],[2,4],[4,4],[5,4],[6,4],[8,4],[1,3],[6,3],[8,3],[1,2],[3,2],[4,2],[8,2],[9,2],[1,1],[3,1],[4,1],[5,1],[6,1],[6,0],[7,0],[8,0]],coins:[[0,9],[9,4],[9,0]],start:[0,0],goal:[9,9]}];
 let currentPresetIndex=0;let defaultCoins=MAZE_PRESETS[0].coins.map(c=>c.slice());let customObstacles=MAZE_PRESETS[0].obstacles.map(o=>o.slice());
 const GRID_WIDTH=10;const GRID_HEIGHT=10;const CELL_SIZE=50;const COIN_REWARD=10;const EARLY_GOAL_PENALTY=-20;const VISITED_COIN_PENALTY=-2;const STEP_PENALTY=-0.1;const INITIAL_Q=5.0;const EPSILON_DECAY=0.97;const MIN_EPSILON=0.01;
@@ -663,10 +666,10 @@ resetTraining(){this.agent=new QLearningAgent(this.gridWidth,this.gridHeight,[0,
 resetEpisode(){this.state=this.startPos.slice();this.stepCount=0;this.coins=JSON.parse(JSON.stringify(this.initialCoins));}
 startTraining(){this.env.goal=this.goalPos.slice();const a=parseFloat(document.getElementById("alphaParam").value)||0.9;const g=parseFloat(document.getElementById("gammaParam").value)||0.95;const ep=parseFloat(document.getElementById("epsilonParam").value)||0.9;this.agent.alpha=a;this.agent.gamma=g;this.agent.epsilon=ep;this.mode="training";this.episode=0;this.stepCount=0;this.state=this.startPos.slice();const sv=parseInt(this.speedSlider.value);this.delay=Math.max(0,120-sv/84);this.stepsPerFrame=sv>=9000?50:sv>=7000?10:sv>=5000?3:1;this.running=true;this.testMode=false;this.paused=false;this.showPolicy=false;this.policyButton.style.display="none";this.policyButton.classList.remove("active");this.pauseButton.disabled=false;this.setPauseIcon(false);this.infoLabel.classList.remove("converged");this.stepMode=false;this.stepModeCheckbox.checked=false;this.nextStepButton.disabled=false;this.history=[];this.episodeReward=0;const mc=document.getElementById("mainContainer");if(mc)mc.classList.remove("pre-train");this.drawChart();this.updateParamInfo();this.log("New training started.");}
 runStep(){if(this.testMode)this.runTestStep();else this.runTrainingStep();}
-runTrainingStep(){if(!this.running||this.paused)return;if(this.mode!=="training"&&this.mode!=="testing")return;const ACT={0:"Up",1:"Right",2:"Down",3:"Left"};const cs=this.getState();const fromX=this.state[0],fromY=this.state[1];const aa=this.env.getActions(this.state);const action=this.agent.chooseAction(cs,aa);const result=this.env.step(this.state,action);let nsp=result.nextState;let tr=result.reward;const ci=this.coins.findIndex(c=>c[0]===nsp[0]&&c[1]===nsp[1]);if(ci>=0){this.log("🪙 Coin collected ("+nsp[0]+","+nsp[1]+") +"+COIN_REWARD,"The agent moved into a cell with a coin and got <strong>+"+COIN_REWARD+"</strong> reward.","ev-coin");tr+=COIN_REWARD;this.coins.splice(ci,1);}else{const idc=defaultCoins.some(c=>c[0]===nsp[0]&&c[1]===nsp[1]);if(idc){this.log("Revisited empty coin cell ("+nsp[0]+","+nsp[1]+") "+VISITED_COIN_PENALTY,"The agent went back to a cell where the coin was already taken, and got a small penalty of <strong>"+VISITED_COIN_PENALTY+"</strong> to discourage unnecessary detours.","ev-penalty");tr+=VISITED_COIN_PENALTY;}}if(this.env.isGoal(nsp)&&this.coins.length>0){this.log("Goal reached without all coins! "+EARLY_GOAL_PENALTY,"The agent reached the goal before all the coins were collected and got the penalty <strong>"+EARLY_GOAL_PENALTY+"</strong>. It stays in the cell instead of finishing.","ev-penalty");tr+=EARLY_GOAL_PENALTY;nsp=this.state;}const kk=this.agent.key(cs,action);const oldQ=this.agent.Q[kk]||INITIAL_Q;const naa=this.env.getActions(nsp);const ck2=this.getCoinKey();const mqn=naa.length>0?Math.max(...naa.map(a=>this.agent.Q[this.agent.key([nsp[0],nsp[1],ck2],a)]||INITIAL_Q)):0;const calc=this.agent.update(cs,action,tr,[nsp[0],nsp[1],ck2],naa);const newQ=this.agent.Q[kk];let plain=calc.replace(/\$\$/g,"").replace(/\\bigl\(/g,"(").replace(/\\bigr\)/g,")").replace(/\\text\{([^}]+)\}/g,"$1").replace(/\\Bigl\(/g,"(").replace(/\\Bigr\)/g,")").replace(/\\cdot/g,"·").replace(/\\;/g," ").replace(/\\,/g,",").replace(/\s+/g," ").trim();let dir;if(newQ>oldQ+1e-9)dir="went up from <strong>"+oldQ.toFixed(2)+"</strong> to <strong>"+newQ.toFixed(2)+"</strong>, because the outcome was better than the agent expected";else if(newQ<oldQ-1e-9)dir="went down from <strong>"+oldQ.toFixed(2)+"</strong> to <strong>"+newQ.toFixed(2)+"</strong>, because the outcome was worse than the agent expected";else dir="barely changed (<strong>"+newQ.toFixed(2)+"</strong>)";const coinsLeft=cs[2]?cs[2].split(";").map(c=>"("+c.replace("_",",")+")").join(" "):"";const coinTxt=coinsLeft?"Coins left in the state: <strong>"+coinsLeft+"</strong>.<br>":"No coins left in the state.<br>";const explain="The agent chose <strong>"+ACT[action]+"</strong> from ("+fromX+","+fromY+") and ended up at ("+nsp[0]+","+nsp[1]+").<br>"+coinTxt+"Reward for the step: <strong>"+tr.toFixed(2)+"</strong>.<br>Best known value in the next cell: <strong>"+mqn.toFixed(2)+"</strong>.<br>The Q-value for "+ACT[action]+" "+dir+".";const rowTxt="<span class=\"lstep\">Step "+this.stepCount+"</span> "+plain;this.log(rowTxt,explain);this.episodeReward+=tr;this.state=nsp;this.stepCount++;if((result.done&&this.coins.length===0)||this.stepCount>=this.maxSteps){this.episode++;this.agent.epsilon=Math.max(MIN_EPSILON,this.agent.epsilon*EPSILON_DECAY);const reached=result.done&&this.coins.length===0;this.history.push({steps:this.stepCount,reward:this.episodeReward,reached:reached});this.episodeReward=0;this.drawChart();this.log("— Episode "+this.episode+" done · ε = "+this.agent.epsilon.toFixed(2)+" —","An episode is one full attempt from start until the agent reaches the goal or runs out of steps. After each episode, ε decreases slightly, so the agent explores a little less and relies more on what it has learned.","ev-info");this.resetEpisode();}if(this.agent.checkConvergence()){this.infoLabel.textContent="✓ Model has finished training (episode "+this.episode+")";this.infoLabel.classList.add("converged");this.log("✓ The model has converged after "+this.episode+" episodes","The Q-values almost stop changing between steps, so the agent has found a stable strategy. Press Policy to see the best action in every cell, or Test the model to follow the learned path.","ev-info");this.testButton.style.display="inline-block";this.policyButton.style.display="inline-block";this.running=false;return;}this.drawGrid();this.drawAgent();this.updateInfoLabel();}
+runTrainingStep(){if(!this.running||this.paused)return;if(this.mode!=="training"&&this.mode!=="testing")return;const ACT={0:"Up",1:"Right",2:"Down",3:"Left"};const cs=this.getState();const fromX=this.state[0],fromY=this.state[1];const aa=this.env.getActions(this.state);const action=this.agent.chooseAction(cs,aa);const result=this.env.step(this.state,action);let nsp=result.nextState;let tr=result.reward;const ci=this.coins.findIndex(c=>c[0]===nsp[0]&&c[1]===nsp[1]);if(ci>=0){this.log("🪙 Coin collected ("+nsp[0]+","+nsp[1]+") +"+COIN_REWARD,"The agent moved into a cell with a coin and got <strong>+"+COIN_REWARD+"</strong> reward.","ev-coin");tr+=COIN_REWARD;this.coins.splice(ci,1);}else{const idc=defaultCoins.some(c=>c[0]===nsp[0]&&c[1]===nsp[1]);if(idc){this.log("Revisited empty coin cell ("+nsp[0]+","+nsp[1]+") "+VISITED_COIN_PENALTY,"The agent went back to a cell where the coin was already taken, and got a small penalty of <strong>"+VISITED_COIN_PENALTY+"</strong> to discourage unnecessary detours.","ev-penalty");tr+=VISITED_COIN_PENALTY;}}if(this.env.isGoal(nsp)&&this.coins.length>0){this.log("Goal reached without all coins! "+EARLY_GOAL_PENALTY,"The agent reached the goal before all the coins were collected and got the penalty <strong>"+EARLY_GOAL_PENALTY+"</strong>. It stays in the cell instead of finishing.","ev-penalty");tr+=EARLY_GOAL_PENALTY;nsp=this.state;}const kk=this.agent.key(cs,action);const oldQ=this.agent.Q[kk]||INITIAL_Q;const naa=this.env.getActions(nsp);const ck2=this.getCoinKey();const mqn=naa.length>0?Math.max(...naa.map(a=>this.agent.Q[this.agent.key([nsp[0],nsp[1],ck2],a)]||INITIAL_Q)):0;const calc=this.agent.update(cs,action,tr,[nsp[0],nsp[1],ck2],naa);const newQ=this.agent.Q[kk];let plain=calc.replace(/\$\$/g,"").replace(/\\bigl\(/g,"(").replace(/\\bigr\)/g,")").replace(/\\text\{([^}]+)\}/g,"$1").replace(/\\Bigl\(/g,"(").replace(/\\Bigr\)/g,")").replace(/\\cdot/g,"·").replace(/\\;/g," ").replace(/\\,/g,",").replace(/\s+/g," ").trim();let dir;if(newQ>oldQ+1e-9)dir="went up from <strong>"+oldQ.toFixed(2)+"</strong> to <strong>"+newQ.toFixed(2)+"</strong>, because the outcome was better than the agent expected";else if(newQ<oldQ-1e-9)dir="went down from <strong>"+oldQ.toFixed(2)+"</strong> to <strong>"+newQ.toFixed(2)+"</strong>, because the outcome was worse than the agent expected";else dir="barely changed (<strong>"+newQ.toFixed(2)+"</strong>)";const coinsLeft=cs[2]?cs[2].split(";").map(c=>"("+c.replace("_",",")+")").join(" "):"";const coinTxt=coinsLeft?"Coins left in the state: <strong>"+coinsLeft+"</strong>.<br>":"No coins left in the state.<br>";const explain="The agent chose <strong>"+ACT[action]+"</strong> from ("+fromX+","+fromY+") and ended up at ("+nsp[0]+","+nsp[1]+").<br>"+coinTxt+"Reward for the step: <strong>"+tr.toFixed(2)+"</strong>.<br>Best known value in the next cell: <strong>"+mqn.toFixed(2)+"</strong>.<br>The Q-value for "+ACT[action]+" "+dir+".";const rowTxt="<span class=\"lstep\">Step "+this.stepCount+"</span> "+plain;this.log(rowTxt,explain);this.episodeReward+=tr;this.state=nsp;this.stepCount++;if((result.done&&this.coins.length===0)||this.stepCount>=this.maxSteps){this.episode++;this.agent.epsilon=Math.max(MIN_EPSILON,this.agent.epsilon*EPSILON_DECAY);const reached=result.done&&this.coins.length===0;this.history.push({steps:this.stepCount,reward:this.episodeReward,reached:reached});this.episodeReward=0;this.drawChart();this.log("Episode "+this.episode+" done · ε = "+this.agent.epsilon.toFixed(2),"An episode is one full attempt from start until the agent reaches the goal or runs out of steps. After each episode, ε decreases slightly, so the agent explores a little less and relies more on what it has learned.","ev-info");this.resetEpisode();}if(this.agent.checkConvergence()){this.infoLabel.textContent="✓ Model has finished training (episode "+this.episode+")";this.infoLabel.classList.add("converged");this.log("✓ The model has converged after "+this.episode+" episodes","The Q-values almost stop changing between steps, so the agent has found a stable strategy. Press <strong>Policy</strong> to see the best action in every cell, or <strong>Test the model</strong> to follow the learned path.","ev-info");this.testButton.style.display="inline-block";this.policyButton.style.display="inline-block";this.running=false;return;}this.drawGrid();this.drawAgent();this.updateInfoLabel();}
 runTestStep(){if(this.currentTestStep>=this.testPath.length){this.log("✓ Test run complete!","The agent walked the whole way according to its learned policy.","ev-info");this.running=false;this.paused=true;this.testMode=false;this.stepMode=false;this.stepModeCheckbox.checked=false;this.nextStepButton.disabled=true;this.pauseButton.disabled=false;this.testButton.disabled=false;return;}this.state=this.testPath[this.currentTestStep];const ci=this.coins.findIndex(c=>c[0]===this.state[0]&&c[1]===this.state[1]);if(ci>=0){this.coins.splice(ci,1);this.log("🪙 Coin collected ("+this.state[0]+","+this.state[1]+") during test","The agent picked up a coin along its learned path.","ev-coin");}this.currentTestStep++;this.drawGrid();this.drawAgent();}
 generateOptimalPath(){let path=[];let cs=this.startPos.slice();let lc=JSON.parse(JSON.stringify(this.initialCoins));let vis=new Set();for(let i=0;i<this.maxSteps;i++){const ck=getCoinKeyFrom(lc);const sk=`${cs[0]},${cs[1]},${ck}`;if(vis.has(sk))break;vis.add(sk);path.push([...cs]);const aa=this.env.getActions(cs);let ba=aa[0],bq=this.agent.Q[this.agent.key([cs[0],cs[1],ck],ba)]||INITIAL_Q;aa.forEach(a=>{const qv=this.agent.Q[this.agent.key([cs[0],cs[1],ck],a)]||INITIAL_Q;if(qv>bq){bq=qv;ba=a;}});const result=this.env.step(cs,ba);const ci=lc.findIndex(c=>c[0]===result.nextState[0]&&c[1]===result.nextState[1]);if(ci>=0)lc.splice(ci,1);cs=result.nextState;if(this.env.isGoal(cs)&&lc.length===0){path.push([...cs]);break;}}return path;}
-startTestMode(){this.testMode=true;this.paused=false;this.running=true;this.mode="testing";this.state=this.startPos.slice();this.coins=JSON.parse(JSON.stringify(this.initialCoins));this.showQValues=true;this.qToggleButton.classList.add("active");this.testPath=this.generateOptimalPath();this.currentTestStep=0;this.stepMode=true;this.stepModeCheckbox.checked=true;this.nextStepButton.disabled=false;this.pauseButton.disabled=true;this.log("— Test mode (step-by-step) —","Now the agent follows its learned policy: in every cell it picks the action with the highest Q-value, with no random exploration. Press <strong>Next step</strong> to move one step at a time.","ev-info");this.drawGrid();this.drawAgent();}
+startTestMode(){this.testMode=true;this.paused=false;this.running=true;this.mode="testing";this.state=this.startPos.slice();this.coins=JSON.parse(JSON.stringify(this.initialCoins));this.showQValues=true;this.qToggleButton.classList.add("active");this.testPath=this.generateOptimalPath();this.currentTestStep=0;this.stepMode=true;this.stepModeCheckbox.checked=true;this.nextStepButton.disabled=false;this.pauseButton.disabled=true;this.log("Test mode, step by step","Now the agent follows its learned policy: in every cell it picks the action with the highest Q-value, with no random exploration. Press <strong>Next step</strong> to move one step at a time.","ev-info");this.drawGrid();this.drawAgent();}
 simulationLoop(ts){if(!this.lastUpdateTime)this.lastUpdateTime=ts;if(!this.paused&&!this.stepMode){const d=ts-this.lastUpdateTime;if(d>=this.delay){this.lastUpdateTime=ts;const s=this.stepsPerFrame||1;for(let i=0;i<s;i++){this.runStep();if(!this.running)break;}}}else{this.lastUpdateTime=ts;}requestAnimationFrame((t)=>this.simulationLoop(t));}}
 window.onload=()=>{const sim=new QLearningSimulation();initGlossary();};
 </script>
