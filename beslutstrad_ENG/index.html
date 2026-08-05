@@ -97,7 +97,7 @@
   @keyframes siRise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
   .step-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:22px 0 6px;flex-wrap:wrap}
   .step-foot .btn[hidden]{visibility:hidden}
-  /* svävande valpanel vid noden (dator) */
+  /* floating choice panel next to the node (desktop) */
   .nodepop{position:fixed;z-index:60;width:min(330px,92vw);padding:13px 15px 15px;border-radius:16px;
     border:1px solid rgba(255,255,255,.13);background:rgba(13,17,29,.97);
     backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
@@ -112,7 +112,7 @@
   .nodepop .arrow{position:absolute;width:12px;height:12px;transform:rotate(45deg);background:rgba(13,17,29,.97);pointer-events:none}
   .nodepop.below .arrow{top:-6.5px;border-left:1px solid rgba(255,255,255,.13);border-top:1px solid rgba(255,255,255,.13)}
   .nodepop.above .arrow{bottom:-6.5px;border-right:1px solid rgba(255,255,255,.13);border-bottom:1px solid rgba(255,255,255,.13)}
-  /* steg 3: ormen bredvid texten så att trädet ryms i bild */
+  /* step 3: the snake beside the text so that the tree fits on screen */
   .trialrow{display:flex;align-items:center;gap:20px;text-align:left}
   .scene .trialrow .big{flex:0 0 118px;width:118px;max-width:118px;margin:0}
   .trialmain{flex:1 1 auto;min-width:0}
@@ -440,7 +440,7 @@
   .tiltcard .ex{margin-top:12px;padding:11px 13px;border-radius:12px;background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.16);font-size:13.5px;color:var(--text-secondary);line-height:1.55}
   .tiltcard .close{position:absolute;top:14px;right:14px}
 
-  /* step 5 — compare */
+  /* comparison between the two trees */
   .cmpwrap{padding:20px}
   .cmptable{width:100%;border-collapse:collapse;font-size:13.5px}
   .cmptable th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);font-weight:500;padding:6px 10px;border-bottom:1px solid var(--border-subtle)}
@@ -450,7 +450,7 @@
   .vcell.g{color:var(--rose)}.vcell.o{color:var(--emerald)}
   .scoreline{display:flex;gap:22px;margin:14px 0;font-family:'Space Grotesk',sans-serif;font-size:16px;color:var(--text-secondary)}
   .scoreline b{font-weight:800;color:var(--text-primary)}
-  /* step 6 — reflect */
+  /* conclusions */
   .whyhead,.reflecthead{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--text-primary);margin:20px 0 4px}
   .reflecthead{margin-top:24px}
   .reflectgrid{display:flex;gap:16px;flex-wrap:wrap;perspective:1400px}
@@ -480,7 +480,7 @@
     .rcard:nth-child(3){animation-delay:.17s}.rcard:nth-child(4){animation-delay:.24s}
     .rcard:nth-child(5){animation-delay:.31s}}
   @keyframes rcIn{from{opacity:0;transform:translateY(20px) rotateX(9deg) scale(.97)}to{opacity:1;transform:none}}
-  /* ── beskärning: visa vad som klipps bort innan det försvinner ── */
+  /* ── pruning: show what is cut away before it disappears ── */
   .tnodeWrap.cut .tnode-inner{animation:cutOut .55s var(--ease-out) .16s both}
   @keyframes cutOut{0%{opacity:1;transform:none}30%{opacity:1;transform:translateY(3px) scale(.985)}
     100%{opacity:0;transform:translateY(30px) scale(.68)}}
@@ -495,7 +495,7 @@
     .rcard{animation:none}
     .tnodeWrap.cut .tnode-inner,.tedge.cut,.eLabel.cut,.tnodeWrap.cutparent .tnode-inner,.tnodeWrap.justpruned .tnode-inner{animation:none!important}}
 
-  /* step 4 — train-first test */
+  /* the test step */
   .trainmini{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin:14px 0}
   .tdot{width:17px;height:17px;border-radius:5px;background:rgba(255,255,255,.07);display:inline-flex;align-items:center;justify-content:center;font-size:10px;color:transparent;transition:.3s var(--ease-spring)}
   .tdot.ok{background:rgba(52,211,153,.22);color:var(--emerald)}
@@ -534,7 +534,7 @@
     .intro-viz .iv-n{animation-delay:.1s}.intro-viz .iv-g{animation-delay:.3s}.intro-viz .iv-o{animation-delay:.42s}}
   @keyframes ivPop{from{opacity:0;transform:scale(.6);transform-origin:center}to{opacity:1;transform:scale(1)}}
 
-  /* ingressen visas bara på startvyn och fälls ihop vid första stegvalet */
+  /* the intro is shown only in the start view and collapses at the first step */
   .heroIntro{overflow:hidden;max-height:400px;opacity:1;transition:max-height .45s var(--ease-out),opacity .3s var(--ease-out),margin .45s var(--ease-out)}
   .hero.lean .heroIntro{max-height:0;opacity:0;margin:0}
   .hero.lean{padding-bottom:0}
@@ -542,12 +542,12 @@
 
   footer{position:relative;z-index:2;text-align:center;padding:36px 0 10px;color:var(--text-muted);font-size:12.5px;font-family:'JetBrains Mono',monospace}
 
-  /* horisontell scroll-indikator på trädcanvasen */
+  /* horizontal scroll indicator on the tree canvas */
 
   @media(max-width:640px){
     .glass{padding:18px!important}
     .splitbadges .sb{min-width:100%}
-    /* kontrollpanelen i bygg-steget stannar nåbar medan man scrollar trädet */
+    /* the control panel in the build step stays reachable while the tree is scrolled */
     #stuCtrl{position:sticky;bottom:6px;z-index:6;box-shadow:0 -10px 26px rgba(5,7,13,.55)}
     .groupbar{gap:6px}
     .gbtn{font-size:12px;padding:6px 11px}
@@ -556,21 +556,21 @@
   }
   @media(prefers-reduced-motion:reduce){*{animation-duration:.001s!important}.tiltcard{transition:none}}
 
-  /* --- horizontell scroll-indikator för träden --- */
+  /* --- horizontal scroll indicator for the trees --- */
   @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
 
   /* --- responsivt / mobil --- */
   /* ═══════════════════════════════════════════════════════════
-     DESIGNGENOMGÅNG — tillägg
+     INTERFACE REVEAL AND DETAILING
      ═══════════════════════════════════════════════════════════ */
 
-  /* ── 1. Progressiv avtäckning: gränssnittet växer ── */
+  /* ── Progressive reveal of the interface ── */
   .stage{opacity:0;transform:translateY(12px);max-height:0;overflow:hidden;pointer-events:none;
     transition:opacity .5s var(--ease-out),transform .55s var(--ease-out),max-height .55s var(--ease-out),margin .45s var(--ease-out)}
   .stage.in{opacity:1;transform:none;max-height:620px;pointer-events:auto}
   @media(prefers-reduced-motion:reduce){.stage{transition:none}}
 
-  /* ── 2. Upptäckarkänsla: stor fråga i stället för verktygsetikett ── */
+  /* ── Heading question above the tools ── */
   .discover{margin:6px 0 2px;position:relative}
   .discover .dq{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.02em;
     font-size:clamp(21px,3.6vw,32px);line-height:1.14;color:var(--text-primary);max-width:20ch}
@@ -580,7 +580,7 @@
     text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:10px}
   .groupbar.asks{gap:9px;margin:6px 0 4px}
 
-  /* aha-ögonblick när en gruppering ger en ren grupp */
+  /* highlight when a grouping produces a pure group */
   .aha{margin-top:16px;border-radius:var(--radius-sm);padding:14px 17px;
     border:1px solid rgba(52,211,153,.32);border-left:3px solid var(--emerald);
     background:linear-gradient(100deg,rgba(52,211,153,.11),rgba(52,211,153,.02));
@@ -592,7 +592,7 @@
   .aha .at b{color:var(--text-primary);font-weight:600}
   @keyframes ahaIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
 
-  /* ── 3. Levande ormkort: parallax, ljusreflex, pop ── */
+  /* ── Snake cards: parallax, light reflection and pop ── */
   .scard{--mx:50%;--my:50%;--tx:0deg;--ty:0deg;
     transform:perspective(700px) rotateX(var(--tx)) rotateY(var(--ty));
     transition:transform .45s var(--ease-out),border-color .3s,box-shadow .3s}
@@ -610,7 +610,7 @@
     .scard,.scard:hover,.scard svg,.scard:hover svg{transform:none}
     .grid.specimens.regroup .scard{animation:none}}
 
-  /* ── 4. Trädet byggs framför ögonen ── */
+  /* ── Building of the tree ── */
   @keyframes nodeGrow{0%{opacity:0;transform:scale(.42)}70%{opacity:1;transform:scale(1.05)}100%{opacity:1;transform:scale(1)}}
   @keyframes inkIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
   .tedge.enter{stroke-dasharray:1;animation:edgeDraw .34s var(--ease-out) both}
@@ -620,7 +620,7 @@
   @media(prefers-reduced-motion:reduce){
     .tedge.enter,.eLabel.enter,.tnode-inner.grow,.tnode-inner.grow > text,.tnode-inner.grow > g{animation:none!important}}
 
-  /* trädet lyser upp när modellen är klar */
+  /* the tree lights up when the model is finished */
   @keyframes treeGlow{0%{filter:none}35%{filter:drop-shadow(0 0 16px rgba(52,211,153,.65)) drop-shadow(0 0 40px rgba(52,211,153,.3))}100%{filter:none}}
   svg.tree.finished{animation:treeGlow 1.6s var(--ease-out)}
   .modeldone{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;z-index:5}
@@ -630,7 +630,7 @@
   @keyframes doneStamp{0%{opacity:0;transform:scale(1.5)}14%{opacity:1;transform:scale(1)}
     72%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.96) translateY(-8px)}}
 
-  /* ── 5. Informationsvinst som burkar med kulor ── */
+  /* ── Information gain as jars of marbles ── */
   .jars{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
   .jar{flex:1 1 118px;min-width:104px;max-width:180px}
   .jar .jarname{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:12.5px;color:var(--text-secondary);
@@ -648,7 +648,7 @@
   .jarlead b{color:var(--text-primary);font-weight:600}
   @media(prefers-reduced-motion:reduce){.jar .mb{animation:none}}
 
-  /* ── 7. Dramatiskt teststeg ── */
+  /* ── The test step ── */
   .tedge.onpath{stroke:var(--cyan);stroke-width:3.2;filter:drop-shadow(0 0 6px rgba(34,211,238,.75))}
   .tcard.onpath{filter:drop-shadow(0 0 10px rgba(34,211,238,.5))}
   @keyframes stampIn{0%{opacity:0;transform:scale(2.2) rotate(-7deg)}60%{opacity:1;transform:scale(.94) rotate(1deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
@@ -659,7 +659,7 @@
   .tracelabel{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.06em;
     text-transform:uppercase;color:var(--cyan);min-height:15px;margin:8px 0 2px;transition:opacity .3s}
 
-  /* ── 8. Visuella belöningar ── */
+  /* ── Visual feedback ── */
   .toastwrap{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:300;
     display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
   .toast{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:var(--text-primary);
@@ -680,7 +680,7 @@
   .pulse-ok{animation:okPulse .85s var(--ease-out)}
   @media(prefers-reduced-motion:reduce){.confetti{display:none}.pulse-ok{animation:none}}
 
-  /* ── 9. Levande stegindikator ── */
+  /* ── Step indicator ── */
   .steps-nav{position:relative}
   .navprogress{position:absolute;left:5px;right:5px;bottom:-1px;height:2px;border-radius:2px;
     background:rgba(255,255,255,.07);overflow:hidden}
@@ -694,7 +694,7 @@
   .snav.done .num{font-size:12px}
   @media(prefers-reduced-motion:reduce){.snav.active .num::after{animation:none;opacity:0}}
 
-  /* ── sidhuvudets länkar ── */
+  /* ── header links ── */
   .toplinks{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:18px;flex-wrap:wrap}
   .back-link,.lang-link{display:inline-flex;align-items:center;gap:7px;font-family:'Space Grotesk',sans-serif;
     font-size:12.5px;font-weight:600;color:var(--text-muted);text-decoration:none;padding:7px 13px;
@@ -703,7 +703,7 @@
   .back-link:focus-visible,.lang-link:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
   .lang-link .flag{display:block;border-radius:2px;flex:none}
 
-  /* ── 10. Typografisk rytm ── */
+  /* ── Typographic rhythm ── */
   .step-intro{padding:20px 22px 18px}
   .si-act{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;
     color:var(--text-muted);display:block;margin-bottom:11px}
@@ -725,13 +725,13 @@
     .pill{font-size:12.5px;padding:8px 12px;gap:7px}
     .stepper{padding:9px;margin:20px 0 18px}
     .callout{padding:12px 14px;font-size:13.5px}
-    /* håll trädet lagom högt så kontrollpanelen är nära till hands */
+    /* keep the tree at a moderate height so the control panel stays close */
     .canvas-wrap{height:clamp(280px,46vh,420px)}
     .controlbar{gap:8px}
     .controlbar .btn{flex:1 1 auto;justify-content:center}
-    /* fäst kontrollpanelen så den följer med när man scrollar i ett långt träd */
+    /* pin the control panel so it follows when a long tree is scrolled */
     .ctrl{position:sticky;bottom:8px;z-index:20;background:rgba(12,16,27,.94);backdrop-filter:blur(16px);box-shadow:0 -8px 26px rgba(0,0,0,.45)}
-    /* tre kort per rad: överblicken är viktigare än storleken */
+    /* three cards per row */
     .specimens{grid-template-columns:repeat(3,1fr);gap:8px}
     .specimens .scard{padding:7px 4px 6px;border-radius:12px}
     .specimens .scard .id{font-size:8.5px;top:5px;left:6px}
@@ -763,7 +763,7 @@
       <circle class="iv-o" cx="145" cy="70" r="9"/>
     </svg>
     <h2>Decision Trees</h2>
-    <p class="sub">Build your own decision tree that tells venomous snakes from harmless ones — then compare it with a tree a computer builds from the same data.</p>
+    <p class="sub">Build your own decision tree that tells venomous snakes from harmless ones. Then compare it with a tree a computer builds from the same data.</p>
     <ul class="journey">
       <li><span class="ji">1</span><span><strong>Study the data</strong> – look for the features that separate venomous snakes from harmless ones.</span></li>
       <li><span class="ji">2</span><span><strong>Build your tree</strong> – decide which questions the tree should ask, and in what order.</span></li>
@@ -911,11 +911,11 @@
     <button class="btn sm modal-close" id="helpClose">Close ✕</button>
     <h3>Hints</h3>
     <ul class="qlist">
-      <li>Sort by one feature at a time. Does any group become <b>completely pure</b> — and does that feature then suffice on its own?</li>
+      <li>Sort by one feature at a time. Does any group become <b>completely pure</b>? Does that feature then suffice on its own?</li>
       <li>Is there a feature where venomous and harmless end up <b>evenly mixed</b>, however you sort? Then it is not useful.</li>
       <li>Is <b>one</b> feature enough, or do you need to combine two in order not to make mistakes?</li>
       <li>Can you find a venomous and a harmless snake that look almost <b>identical</b>? What is the only difference between them?</li>
-      <li>If you were allowed only <b>two</b> features — which would you choose, and why those?</li>
+      <li>If you were allowed only <b>two</b> features, which would you choose, and why those?</li>
     </ul>
   </div>
 </div>
@@ -925,7 +925,7 @@
 <div class="modal conceptModal" id="conceptModal" role="dialog" aria-modal="true" aria-label="Concept"><div class="modal-inner"><div class="tiltcard" id="tiltcard"></div></div></div>
 
 <script>
-/* ================= snake SVG — front-facing "cobra portrait", flat & bold ================= */
+/* ================= snake illustration in SVG ================= */
 const COLORS={
   red:{lo:'#ff9a86',mid:'#e8503d',dk:'#a02617',belly:'#ffd8cc'},
   green:{lo:'#68db9c',mid:'#1fb867',dk:'#0f7040',belly:'#c6f3d9'},
@@ -965,15 +965,15 @@ function ribbonPath(P0,P1,P2,P3,w0,wmid,w1,n,roundTip,tipR){
   d+=' '+right.slice().reverse().map(p=>`L${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ')+' Z';
   return d;
 }
-/* Kroppen fortsätter bakom huvudet, svänger ut åt höger och rullar ihop sig nedåt vänster.
-   Bred vid huvudet (≈32) så att den läses som kropp, inte som en påklistrad stjärt. */
+/* The body continues behind the head, curves out to the right and coils down to the left.
+   Its width at the head is about 32 units. */
 function tailGeom(t){
   const P0=[50,72];
   if(t==='point')  return {P:[P0,[99,86],[93,143],[40,146]], w:[32,26,1.6],  round:false, tipR:0};
   if(t==='blunt')  return {P:[P0,[95,86],[88,133],[47,137]], w:[32,26,17],   round:true,  tipR:9};
   return              {P:[P0,[97,86],[88,130],[54,138]], w:[32,26,10],   round:false, tipR:0};
 }
-/* mönstret följer med ut på kroppen så att djuret läses som ett stycke */
+/* the pattern continues onto the body so the animal reads as one piece */
 function bodyPattern(G,p,c){
   if(p==='solid')return '';
   const [P0,P1,P2,P3]=G.P,[w0,wm,w1]=G.w;let m='';
@@ -989,7 +989,7 @@ function bodyPattern(G,p,c){
   }
   return m;
 }
-/* skallran: tydligt större, benfärgade och överlappande segment */
+/* rattle: bone-coloured, overlapping segments */
 function rattleAt(G,sw){
   const [P0,P1,P2,P3]=G.P;
   const tip=bez(P0,P1,P2,P3,1),tn=bezTan(P0,P1,P2,P3,1),nx=-tn[1],ny=tn[0];
@@ -1017,7 +1017,7 @@ function snakeBody(a,c,sw,id){
   g+=`<g clip-path="url(#${id}b)">${bodyPattern(G,a.pattern,c)}`
     +`<path d="${ribbonPath(P0,P1,P2,P3,w0*0.9,wm*0.9,Math.max(w1*0.6,1),36,G.round,G.tipR)}" fill="none"/>`
     +`</g>`;
-  /* skuggning längs kroppens ytterkant ger rundhet */
+  /* shading along the outer edge of the body gives roundness */
   g+=`<g clip-path="url(#${id}b)"><path d="${ribbonPath(P0,P1,P2,P3,w0,wm,w1,36,G.round,G.tipR)}" fill="none" stroke="${c.dk}" stroke-width="7" opacity=".22"/></g>`;
   if(a.tail==='rattle')g+=rattleAt(G,sw);
   return g;
@@ -1045,7 +1045,7 @@ function snake(a){
   const my=a.head==='tri'?51:53;
   g+=`<ellipse cx="46.5" cy="${my-6}" rx="1.2" ry="1.7" fill="${INK}"/><ellipse cx="53.5" cy="${my-6}" rx="1.2" ry="1.7" fill="${INK}"/>`;
   g+=`<path d="M42,${my} Q50,${my+5} 58,${my}" fill="none" stroke="${INK}" stroke-width="2.4" stroke-linecap="round"/>`;
-  /* tunga: längre, tjockare och tydligt kluven */
+  /* tongue: forked */
   const t0=my+3, t1=my+17, t2=my+27;
   g+=`<path d="M50,${t0} L50,${t1}" stroke="${INK}" stroke-width="5.4" stroke-linecap="round" fill="none"/>`;
   g+=`<path d="M50,${t1} L41,${t2} M50,${t1} L59,${t2}" stroke="${INK}" stroke-width="5.4" stroke-linecap="round" fill="none"/>`;
@@ -1057,21 +1057,21 @@ function snake(a){
 
 /* ================= data ================= */
 function S(head,pupil,pattern,color,tail,label){return{head,pupil,pattern,color,tail,label};}
-/* Det egentliga mönstret: giftig  ⟺  triangulärt huvud OCH smal pupill.
-   Exakt EN grön "härmart" i träningsdatan (nr 7) är ofarlig fastän den är tri+slit.
-   Ett djupt träd delar då på färg och lär sig den slumpmässiga regeln "grön → ofarlig".
-   Testdatan (12 ormar, 4 giftiga, 3 gröna) innehåller två gröna tri+slit-ormar som
-   i verkligheten ÄR giftiga. Resultat, verifierat:
-     djup 1: träning 80 %  · test 10/12 — 0 missade giftiga, 2 falsklarm
-     djup 2: träning 95 %  · test 12/12 — perfekt
-     djup 3: träning 100 % · test 10/12 — 2 MISSADE GIFTIGA, 0 falsklarm
-   Djup 1 och 3 har alltså samma träffsäkerhet men motsatta feltyper — grunden för
-   precision/recall-momentet i steg 3. */
+/* The true pattern: venomous  <=>  triangular head AND slit pupil.
+   Exactly ONE green mimic in the training data (no. 7) is harmless despite being tri+slit.
+   A deep tree therefore splits on colour and learns the accidental rule "green -> harmless".
+   The test data (12 snakes, 4 venomous, 3 green) contains two green tri+slit snakes that
+   are in fact venomous. Verified results:
+     depth 1: training 80 %  · test 10/12, 0 missed venomous, 2 false alarms
+     depth 2: training 95 %  · test 12/12, perfect
+     depth 3: training 100 % · test 10/12, 2 MISSED VENOMOUS, 0 false alarms
+   Depths 1 and 3 thus have the same accuracy but opposite error types, which is the basis
+   for the precision and recall part of step 3. */
 const TRAIN=[
  S('tri','slit','stripes','red','point','G'),S('tri','slit','solid','yellow','rattle','G'),
  S('tri','slit','spots','brown','blunt','G'),S('tri','slit','stripes','brown','rattle','G'),
  S('tri','slit','solid','red','point','G'),S('tri','slit','spots','yellow','blunt','G'),
- S('tri','slit','solid','green','rattle','O'),                                            /* ← ensam grön härmapa */
+ S('tri','slit','solid','green','rattle','O'),                                            /* <- the single green mimic */
  S('tri','round','stripes','brown','point','O'),S('tri','round','spots','yellow','blunt','O'),
  S('tri','round','solid','red','rattle','O'),S('round','round','stripes','green','blunt','O'),
  S('round','round','spots','brown','point','O'),S('round','round','solid','red','blunt','O'),
@@ -1079,19 +1079,19 @@ const TRAIN=[
  S('round','slit','stripes','brown','rattle','O'),S('round','slit','spots','red','point','O'),
  S('round','slit','solid','green','rattle','O'),S('round','slit','stripes','yellow','blunt','O'),
  S('round','round','solid','brown','blunt','O')];
-/* Ordningen är medvetet vald: de tre första ormarna klassificeras rätt av i stort sett
-   varje rimligt träd, så eleven får se metoden fungera innan den sätts på prov.
-   De gröna fällorna ligger på plats 5 och 8 — efter den gröna men ofarliga ormen på
-   plats 4, vilket gör att ett färgdelande träd först får rätt och därefter fel. */
+/* The order is deliberate: the first three snakes are classified correctly by virtually
+   every reasonable tree, so the method is seen to work before it is put to the test.
+   The green traps sit at positions 5 and 8, after the green but harmless snake at
+   position 4, so a colour-splitting tree is first right and then wrong. */
 const TEST=[
  S('tri','slit','stripes','yellow','blunt','G'),
  S('round','round','solid','brown','rattle','O'),
  S('tri','slit','solid','red','rattle','G'),
- S('round','slit','spots','green','rattle','O'),  /* grön men ofarlig */
- S('tri','slit','stripes','green','point','G'),   /* grön fälla */
+ S('round','slit','spots','green','rattle','O'),  /* green but harmless */
+ S('tri','slit','stripes','green','point','G'),   /* green trap */
  S('tri','round','solid','red','point','O'),
  S('round','slit','solid','red','blunt','O'),
- S('tri','slit','spots','green','rattle','G'),    /* grön fälla */
+ S('tri','slit','spots','green','rattle','G'),    /* green trap */
  S('round','round','stripes','yellow','point','O'),
  S('tri','round','stripes','yellow','rattle','O'),
  S('round','slit','stripes','brown','point','O'),
@@ -1102,17 +1102,17 @@ const VALS={head:['tri','round'],pupil:['slit','round'],pattern:['stripes','spot
 function vname(attr,v){const M={tri:'triangular',round:'round',slit:'slit',stripes:'stripes',spots:'spots',solid:'plain',red:'red',green:'green',yellow:'yellow',brown:'brown',rattle:'rattle',point:'pointed',blunt:'blunt'};return M[v]||v;}
 
 /* concept cards */
-/* ordningen styr även lexikonraden i steg 5 */
+/* the order also drives the glossary row in step 5 */
 const CONCEPTS={
-  entropy:{k:'Concept',t:'Entropy',p:'A measure of how <b>mixed</b> a group is. A group containing only venomous snakes (or only harmless ones) has an entropy of <b>0</b> — it is perfectly pure. A fifty–fifty mixture has maximum entropy. A decision tree therefore chooses the split that makes the groups purest.',ex:'8 snakes, 4 venomous + 4 harmless → high entropy. 8 venomous + 0 harmless → entropy 0.'},
-  gain:{k:'Concept',t:'Information gain',p:'How much <b>purer</b> the groups become when you split on a given feature. The tree computes the entropy before the split minus the entropy after it. The feature with the greatest gain splits most cleanly, and that is the question the node gets.',ex:'Splitting on Head shape gathers almost all the venom on one side → high gain. Splitting on Pattern leaves the groups mixed → low gain.'},
-  overfit:{k:'Concept',t:'Overfitting',p:'When a model learns the training data <b>by heart</b> — including random exceptions — instead of the underlying pattern. It becomes perfect on what it has already seen, but worse on anything new. A simpler model misses the exceptions but <button class="term" data-term="generalize">generalises</button> better.',ex:'The deep tree learns the rule "green → harmless" from a single green case in the training data. From then on it classifies every green venomous snake as harmless.'},
+  entropy:{k:'Concept',t:'Entropy',p:'A measure of how <b>mixed</b> a group is. A group containing only venomous snakes (or only harmless ones) has an entropy of <b>0</b> and is therefore perfectly pure. A group with half of each class has maximum entropy. A decision tree therefore chooses the split that makes the groups purest.',ex:'8 snakes, 4 venomous + 4 harmless → high entropy. 8 venomous + 0 harmless → entropy 0.'},
+  gain:{k:'Concept',t:'Information gain',p:'How much <b>purer</b> the groups become when a split is made on a given feature. The tree computes the entropy before the split minus the entropy after it. The feature with the greatest gain splits most cleanly, and that is the question the node gets.',ex:'Splitting on Head shape gathers almost all the venom on one side → high gain. Splitting on Pattern leaves the groups mixed → low gain.'},
+  overfit:{k:'Concept',t:'Overfitting',p:'When a model learns the training data <b>by heart</b>, including random exceptions, instead of the underlying pattern. It becomes perfect on what it has already seen, but worse on anything new. A simpler model misses the exceptions but <button class="term" data-term="generalize">generalises</button> better.',ex:'The deep tree learns the rule "green → harmless" from a single green case in the training data. From then on it classifies every green venomous snake as harmless.'},
   testdata:{k:'Concept',t:'Test data',p:'Examples deliberately held back while the model is being built, and brought out only once it is finished. Because the model has never seen them, the result on the test data is the only thing that shows whether it works on cases it does not already know.',ex:'The tree was built from 20 snakes. The remaining 12 were never shown to it, and alone determine how good the model really is.'},
   accuracy:{k:'Concept',t:'Accuracy',p:'The proportion of cases the model classifies correctly, regardless of which way the errors go. The measure is easy to understand but blunt: it takes account neither of classes being unequally common nor of some error types being more serious than others. It should therefore always be compared against a <b>baseline</b> and supplemented with measures that separate the error types.',ex:'Always guessing "harmless" gives 70 % correct on the training data without the model having learnt anything at all. A model at 80 % is thus hardly impressive.'},
-  recall:{k:'Concept',t:'Recall',p:'What proportion of the <b>actually venomous</b> snakes the model caught. The measure answers the question: how much of the danger slips through? Where an overlooked case can cost a life, recall is the measure that weighs heaviest — a model with low recall is dangerous even if its overall accuracy looks high.',ex:'4 venomous snakes in the test set, of which the model flags 2 → recall 50 %. Two venomous snakes were judged harmless.'},
+  recall:{k:'Concept',t:'Recall',p:'What proportion of the <b>actually venomous</b> snakes the model caught. The measure answers the question: how much of the danger slips through? Where an overlooked case can cost a life, recall is the measure that weighs heaviest. A model with low recall is dangerous even if its overall accuracy looks high.',ex:'4 venomous snakes in the test set, of which the model flags 2 → recall 50 %. Two venomous snakes were judged harmless.'},
   precision:{k:'Concept',t:'Precision',p:'What proportion of the snakes the model <b>warned about</b> really were venomous. The measure answers the question: how trustworthy is the warning? Low precision means many false alarms, and an alarm that is often unwarranted is one people eventually stop heeding.',ex:'The model warns about 6 snakes, of which 4 are venomous → precision 67 %. Two harmless snakes triggered false alarms.'},
   prune:{k:'Concept',t:'Pruning',p:'Deliberately <b>removing</b> the lowest splits from a finished tree. The final questions rest on the least evidence and so run the greatest risk of describing individual exceptions rather than a general relationship. Pruning lowers accuracy on the training data and often raises it on new data.',ex:'The tree goes from 100 % / 83 % to 95 % / 100 %: worse on what it has already seen, better on reality.'},
-  generalize:{k:'Concept',t:'Generalisation',p:'How well a model handles <b>new</b> data it was never trained on. That is the only thing that counts — a model that is good only on its own training examples is useless in the real world. This is why we always measure on separate test data.',ex:'Your tree scores highly on the training data, but only the test on unseen snakes reveals whether it learnt the real pattern.'}
+  generalize:{k:'Concept',t:'Generalisation',p:'How well a model handles <b>new</b> data it was never trained on. That is the only thing that counts. A model that is good only on its own training examples is useless in the real world. This is why we always measure on separate test data.',ex:'Your tree scores highly on the training data, but only the test on unseen snakes reveals whether it learnt the real pattern.'}
 };
 /* ---- modal manager: focus trap + restore focus on close ---- */
 let lastFocused=null;
@@ -1216,7 +1216,7 @@ function renderTree(container,root,st){
   if(st.onClick)container.querySelectorAll('.tnodeWrap').forEach(el=>{el.onclick=()=>{if((container.__moved||0)>8)return;st.onClick(el.dataset.id,el);};
     el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();st.onClick(el.dataset.id,el);}};});
 }
-/* ── fri pan/zoom i trädcanvasen ── */
+/* ── free pan and zoom in the tree canvas ── */
 function applyView(el,refit){
   const svg=el.querySelector('svg');if(!svg)return;
   const c=el.__content||{w:800,h:400};
@@ -1294,7 +1294,7 @@ function attachPanZoom(el){
     zoomAt(el,e.deltaY>0?1.12:1/1.12,u[0],u[1]);},{passive:false});
   el.addEventListener('dblclick',e=>{if(e.target.closest&&e.target.closest('.zoomctl'))return;applyView(el,true);});
 }
-/* texten i noden krymper hellre än sticker utanför kortet */
+/* the text in the node shrinks rather than overflowing the card */
 function fitNodeText(container){
   const run=()=>container.querySelectorAll('text[data-fit]').forEach(t=>{
     const max=+t.getAttribute('data-fit');
@@ -1309,7 +1309,7 @@ function fitNodeText(container){
 }
 function nodeByPid(root,pid){const parts=pid.split('>');let n=root;for(let i=1;i<parts.length;i++)n=n.children[parts[i]];return n;}
 
-/* ================= mikroåterkoppling: toast, konfetti, puls ================= */
+/* ================= micro feedback: toast, confetti, pulse ================= */
 const REDUCED=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function toastHost(){let h=document.getElementById('toastwrap');
   if(!h){h=document.createElement('div');h.className='toastwrap';h.id='toastwrap';document.body.appendChild(h);}return h;}
@@ -1353,11 +1353,11 @@ function celebrateTree(wrapId,text){
   confettiFrom(wrap,44);
 }
 
-/* ================= kontextberoende hjälp (11) ================= */
+/* ================= context-sensitive help ================= */
 
 /* ================= nav (pipeline-stegvisare) ================= */
 const STEPS=[
-  {title:'Study the data',c:'#60a5fa',intro:'Each snake is described by five features — <b>head shape</b>, <b>eye</b>, <b>pattern</b>, <b>colour</b> and <b>tail</b> — together with a known answer. Sort them by one feature at a time and look for what separates the venomous from the harmless.'},
+  {title:'Study the data',c:'#60a5fa',intro:'Each snake is described by five features: <b>head shape</b>, <b>eye</b>, <b>pattern</b>, <b>colour</b> and <b>tail</b>. Each snake also comes with a known answer. Sort them by one feature at a time and look for what separates the venomous from the harmless.'},
   {title:'Build your tree',c:'#ffd866',intro:'A decision tree is built from <b>nodes</b>. Each node asks a question about one feature, and each answer leads onward into its own branch. A <b>pure</b> branch contains only one class and is finished; a <b>mixed</b> branch needs another question. Click a node to split it or to settle its class.'},
   {title:'Test your tree',c:'#ff9f43',intro:`A model must work on new cases, not merely on the examples it was built from. The ${TEST.length} snakes in the <button class="term" data-term="testdata">test data</button> were set aside before construction began and have never influenced the tree. They are therefore the only independent trial of whether the tree has learnt something that holds generally. Run your tree on them, one at a time, and note not only <b>how many</b> it classifies correctly, but also <b>what kind of error</b> it makes.`},
   {title:'Watch a computer build one',c:'#34d399',intro:'An algorithm builds the same kind of tree automatically, from exactly the same training data. At each node the algorithm tries every feature and measures how pure the resulting groups become. The measure is called <button class="term" data-term="entropy">entropy</button>, and the reduction a split produces is called <button class="term" data-term="gain">information gain</button>. The feature with the greatest information gain gets to split the node.'},
@@ -1407,7 +1407,7 @@ function setStage(n){
 function renderStudy(){
   renderStudyControls();renderStudyView();renderHypo();renderAha();
 }
-/* ── håll kortrutnätet i bild när sorteringen ändras ── */
+/* ── keep the card grid in view when the sorting changes ── */
 function revealStudyView(){
   const v=document.getElementById('studyView');if(!v)return;
   requestAnimationFrame(()=>{
@@ -1427,7 +1427,7 @@ function renderStudyControls(){
       if(studyGroup!=='none')setStage(2);
       renderStudyControls();renderStudyView();renderAha();revealStudyView();};});
 }
-/* ── aha-ögonblick: kommenterar vad delningen faktiskt gjorde ── */
+/* ── comment on what the split actually achieved ── */
 function renderAha(){
   const z=document.getElementById('ahaZone');if(!z)return;
   if(studyGroup==='none'){z.innerHTML='';return;}
@@ -1438,7 +1438,7 @@ function renderAha(){
   let cls='',head,text;
   if(pureGroups.length===groups.length){
     cls='';head='A complete split.';
-    text=`Every group came out <b>pure</b> — all the snakes in a group belong to the same class. <b>${ANAME[attr]}</b> is therefore enough on its own to decide whether a snake is venomous.`;
+    text=`Every group came out <b>pure</b>, so all the snakes in a group belong to the same class. <b>${ANAME[attr]}</b> is therefore enough on its own to decide whether a snake is venomous.`;
   } else if(pureGroups.length){
     cls='';head='A partly pure split.';
     text=`${pureGroups.length} of ${groups.length} groups came out <b>completely pure</b> and need no more questions. The rest are still mixed and need another one.`;
@@ -1472,7 +1472,7 @@ function renderAha(){
     c.style.setProperty('--tx','0deg');c.style.setProperty('--ty','0deg');
   },{passive:true});
 })();
-/* ── 5. informationsvinst som något fysiskt: burkar med kulor ── */
+/* ── Information gain shown as jars of marbles ── */
 function jarSVG(rows,idx){
   const c=counts(rows),n=rows.length,cols=5,cw=15.2,r=6;
   let m='';
@@ -1520,7 +1520,7 @@ function studyTable(){
   if(studyGroup==='none'){body=TRAIN.map((s,i)=>rowHtml(s,i)).join('');}
   else{const attr=studyGroup,vals=VALS[attr].filter(v=>TRAIN.some(r=>r[attr]===v));
     body=vals.map(v=>{const rows=TRAIN.filter(r=>r[attr]===v);const c=counts(rows),pure=c.g===0||c.o===0;
-      return `<tr class="grouprow"><td colspan="7">${ANAME[attr]}: ${vname(attr,v)} — ${rows.length} (▲${c.g} / ●${c.o}) · ${pure?'pure ✓':'mixed'}</td></tr>`
+      return `<tr class="grouprow"><td colspan="7">${ANAME[attr]}: ${vname(attr,v)} · ${rows.length} (▲${c.g} / ●${c.o}) · ${pure?'pure ✓':'mixed'}</td></tr>`
         +rows.map(s=>rowHtml(s,TRAIN.indexOf(s))).join('');}).join('');}
   return `<div class="tablewrap"><table class="datatable"><thead>${thead}</thead><tbody>${body}</tbody></table></div>`;
 }
@@ -1540,7 +1540,7 @@ function renderHypoReveal(){
   if(!rootAttr){el.innerHTML='';return;}
   if(!hypo){el.innerHTML=`<div class="hyporeveal"><span class="hk">The root node</span> The algorithm chose <b>${ANAME[rootAttr]}</b> as its first question, because that feature yields the greatest information gain.</div>`;return;}
   const match=hypo===rootAttr;
-  el.innerHTML=`<div class="hyporeveal ${match?'ok':'diff'}"><span class="hk">The root node</span> The algorithm chose <b>${ANAME[rootAttr]}</b> as its first question. You said <b>${ANAME[hypo]}</b> — ${match?'the same feature. It yields the greatest information gain at the root.':'a different feature. The algorithm always picks the one with the greatest information gain at the node in question.'}</div>`;
+  el.innerHTML=`<div class="hyporeveal ${match?'ok':'diff'}"><span class="hk">The root node</span> The algorithm chose <b>${ANAME[rootAttr]}</b> as its first question. You said <b>${ANAME[hypo]}</b>. ${match?'That is the same feature. It yields the greatest information gain at the root.':'That is a different feature. The algorithm always picks the one with the greatest information gain at the node in question.'}</div>`;
 }
 
 /* ================= tab 0: study ================= */
@@ -1557,7 +1557,7 @@ function scard(s,i,k){const cls=s.label==='G'?'g':s.label==='O'?'o':'';
   ov.addEventListener('click',e=>{if(e.target===ov)dismiss();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ov.classList.contains('show'))dismiss();});
   document.getElementById('introStart').focus();})();
-/* nästa steg */
+/* next step */
 document.getElementById('helpOpen').onclick=()=>openModal(document.getElementById('helpModal'));
 document.getElementById('helpClose').onclick=()=>closeModal(document.getElementById('helpModal'));
 document.getElementById('helpModal').onclick=e=>{if(e.target.id==='helpModal')closeModal(e.currentTarget);};
@@ -1604,7 +1604,7 @@ function renderStuStatus(){
       if(others.length)h+=`<div style="margin-top:11px"><button class="btn sm ghost" id="fbCmp">${stuFbOpen?'Hide the comparison':'How would the other features have split?'}</button></div>`;
       if(stuFbOpen&&others.length){
         h+=`<div class="jarlead" style="margin-top:14px">This is how each feature would have distributed the same ${stuFeedback.rows.length} snakes. <b style="color:var(--rose)">Red marbles</b> are venomous, <b style="color:var(--emerald)">green</b> harmless. The best question yields jars of <b>a single colour</b>.</div>`
-          +[stuFeedback.attr,...others].map((a,k)=>`<div style="margin-top:16px"><div style="font-size:12.5px;font-weight:600;color:${a===stuFeedback.attr?'var(--cyan)':'var(--text-primary)'};margin-bottom:2px">${ANAME[a]}${a===stuFeedback.attr?' — your choice':''}</div>${jarsHTML(stuFeedback.rows,a,k*3)}</div>`).join('');
+          +[stuFeedback.attr,...others].map((a,k)=>`<div style="margin-top:16px"><div style="font-size:12.5px;font-weight:600;color:${a===stuFeedback.attr?'var(--cyan)':'var(--text-primary)'};margin-bottom:2px">${ANAME[a]}${a===stuFeedback.attr?' (your choice)':''}</div>${jarsHTML(stuFeedback.rows,a,k*3)}</div>`).join('');
       }
       fb.innerHTML=h+`</div>`;
       const cb=document.getElementById('fbCmp');
@@ -1660,7 +1660,7 @@ function wireStuActions(root){
 }
 function renderStuCtrl(keepPop){
   const el=document.getElementById('stuCtrl');
-  if(!stuSel){closeNodePop();el.innerHTML=`<div class="cardhint">${POPUI?'Click a node in the tree — the options appear right at the node.':'Click a node in the tree above to split it or to settle its class.'}</div>`;return;}
+  if(!stuSel){closeNodePop();el.innerHTML=`<div class="cardhint">${POPUI?'Click a node in the tree. The options appear right at the node.':'Click a node in the tree above to split it or to settle its class.'}</div>`;return;}
   const node=nodeByPid(stuRoot,stuSel);
   let h='';
   if(!POPUI)h+=stuActionsHTML(node);
@@ -1669,7 +1669,7 @@ function renderStuCtrl(keepPop){
   wireStuActions(el);
   if(POPUI){if(keepPop&&popEl)positionNodePop();else openNodePop(node);}
 }
-/* ── svävande valpanel intill den klickade noden (dator) ── */
+/* ── floating choice panel beside the clicked node (desktop) ── */
 var popEl=null;
 function popAnchorRect(){
   const c=document.getElementById('stuCanvas');if(!c||!stuSel)return null;
@@ -1747,7 +1747,7 @@ function mlResetFn(){mlPlaying=false;mlDone=false;mlRoot=frontierB(TRAIN,ATTRS,0
 function updateMLStats(){document.getElementById('mlTrainAcc').textContent=pct(accuracy(mlRoot,TRAIN));document.getElementById('mlTestAcc').textContent=pct(accuracy(mlRoot,TEST));}
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function raceBars(rows,avail){
-  const gs=avail.map(a=>[a,gain(rows,a)]).sort((a,b)=>b[1]-a[1]); /* störst vinst överst */
+  const gs=avail.map(a=>[a,gain(rows,a)]).sort((a,b)=>b[1]-a[1]); /* greatest gain first */
   const mx=Math.max(...gs.map(g=>g[1]),0.001);const top=gs[0][1];
   return `<div class="race">`+gs.map(([a,g],i)=>`<div class="r ${i===0&&g>1e-6?'win':''}">
     <span>${ANAME[a]}${i===0&&g>1e-6?' <span class="crown">👑</span>':''}</span><div class="track"><div class="fill" style="width:0" data-w="${Math.round(g/mx*100)}"></div></div><span class="val">${g.toFixed(2)}</span></div>`).join('')+`</div>`;
@@ -1757,13 +1757,13 @@ async function mlStep(){
   if(!mlQueue.length){mlDone=true;document.getElementById('mlJars').innerHTML='';celebrateTree('mlCanvas',"The computer's model is complete");document.getElementById('raceHead').innerHTML='The tree is complete. Below it is compared with your own tree, snake by snake.';document.getElementById('mlNext').disabled=true;mlPlaying=false;document.getElementById('mlPlay').textContent='▶ Train';renderPruneUI();renderCompare();return false;}
   const node=mlQueue.shift();mlSt.cur=node._pid;renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);
   const avail=node.avail;const pure=entropy(node.rows)===0;
-  document.getElementById('raceHead').innerHTML=`Node with ${node.rows.length} snakes — the algorithm is testing every feature…`;
+  document.getElementById('raceHead').innerHTML=`Node with ${node.rows.length} snakes. The algorithm is testing every feature…`;
   if(pure||!avail.length){document.getElementById('mlRace').innerHTML='';document.getElementById('mlJars').innerHTML='';document.getElementById('raceHead').innerHTML=`Noden är redan ren och blir ett löv: ${labTag(node.fallback)}`;
     node.type='leaf';node.label=node.fallback;mlSt.cur=null;await sleep(500);renderTree(document.getElementById('mlCanvas'),mlRoot,mlSt);updateMLStats();return true;}
   const race=document.getElementById('mlRace');race.innerHTML=raceBars(node.rows,avail);await sleep(60);animateBars(race);await sleep(850);
   let best=null,bg=1e-9;for(const a of avail){const g=gain(node.rows,a);if(g>bg){bg=g;best=a;}}
   document.getElementById('raceHead').innerHTML=`<b>${ANAME[best]}</b> yields the greatest information gain. The node is split on that feature.`;
-  document.getElementById('mlJars').innerHTML=`<div class="jarlead">The ${node.rows.length} snakes are poured into jars by <b>${ANAME[best]}</b> — <span style="color:var(--rose)">red</span> = venomous, <span style="color:var(--emerald)">green</span> = harmless:</div>`+jarsHTML(node.rows,best);
+  document.getElementById('mlJars').innerHTML=`<div class="jarlead">The ${node.rows.length} snakes are poured into jars by <b>${ANAME[best]}</b>. <span style="color:var(--rose)">Red</span> = venomous, <span style="color:var(--emerald)">green</span> = harmless:</div>`+jarsHTML(node.rows,best);
   await sleep(1150);
   if(!best){node.type='leaf';node.label=node.fallback;}
   else{node.type='split';node.attr=best;node.children={};
@@ -1792,7 +1792,7 @@ function scrollElIntoView(el){
 async function doPrune(){
   if(!mlRoot||!mlDone||pruneRunning)return;
   const d=maxDepth(mlRoot);if(d<1)return;
-  /* ta reda på vilka noder som försvinner innan trädet ändras */
+  /* determine which nodes disappear before the tree is changed */
   const parents=[],doomed=[];
   const collect=n=>{doomed.push(n._pid);if(n.children)Object.values(n.children).forEach(collect);};
   (function walk(n,depth){
@@ -1828,7 +1828,7 @@ function renderCurve(){
   const w=480,h=168,padL=42,padR=18,padT=16,padB=34;const MAXD=maxDepth(DEEP);
   const tr=[],te=[];for(let d=1;d<=MAXD;d++){const t=id3(TRAIN,ATTRS,0,d);tr.push(accuracy(t,TRAIN));te.push(accuracy(t,TEST));}
   const X=d=>padL+(MAXD===1?0.5:(d-1)/(MAXD-1))*(w-padL-padR),Y=a=>h-padB-a*(h-padT-padB);
-  /* hur djupt datorns träd hittills byggts — kurvan ritas bara upp till detta djup */
+  /* Depth of the computer tree so far. The curve is drawn only up to this depth. */
   const dShown=mlRoot?Math.min(MAXD,maxDepth(mlRoot)):0;
   const line=(arr,col)=>{const pts=arr.slice(0,dShown);if(!pts.length)return '';
     return (pts.length>1?`<polyline fill="none" stroke="${col}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="${pts.map((a,i)=>X(i+1)+','+Y(a)).join(' ')}"/>`:'')
@@ -1842,7 +1842,7 @@ function renderCurve(){
   const empty=dShown===0?`<text x="${(padL+w-padR)/2}" y="${(padT+h-padB)/2}" text-anchor="middle" font-size="11" font-family="monospace" fill="#5a6478">The curve emerges as the tree is built…</text>`:'';
   document.getElementById('curve').innerHTML=`<svg viewBox="0 0 ${w} ${h}" style="width:100%;max-width:520px;height:auto">${grid}${marker}${line(tr,'#34d399')}${line(te,'#fbbf24')}${empty}${xl}${yTitle}${xTitle}</svg>`;}
 
-/* ── beskärning: gör om trädets djupaste delningar till löv ── */
+/* ── pruning: turn the deepest splits of the tree into leaves ── */
 function pruneDeepest(root){
   const d=maxDepth(root);if(d<1)return false;
   let changed=false;
@@ -1870,12 +1870,12 @@ function renderPruneUI(){
       The last questions rest on the least evidence. Remove the bottom split and see how the two measures change.
       ${pruneBtnHTML()}</div>`;
     wirePrune();return;}
-  /* texten rättar sig efter vad som faktiskt hände — beskärning kan även gå för långt */
+  /* The text adapts to the outcome, since pruning can also go too far. */
   let ptxt;
   if(pruneBefore&&te>pruneBefore.te){
-    ptxt=`The tree became <b>worse</b> on the data it was trained on and <b>better</b> on data it has never seen. The model has not lost knowledge — it has lost the exceptions that never constituted a pattern. This is called <button class="term" data-term="prune">pruning</button>.`;
+    ptxt=`The tree became <b>worse</b> on the data it was trained on and <b>better</b> on data it has never seen. The model has not lost knowledge. It has lost the exceptions that never constituted a pattern. This is called <button class="term" data-term="prune">pruning</button>.`;
   } else if(pruneBefore&&te<pruneBefore.te){
-    ptxt=`Accuracy has now fallen on <b>both</b> data sets. The tree has become too simple and lacks the question needed to separate the classes. <button class="term" data-term="prune">Pruning</button> improves a model only as long as it is exceptions being removed — beyond that, the pattern goes too.`;
+    ptxt=`Accuracy has now fallen on <b>both</b> data sets. The tree has become too simple and lacks the question needed to separate the classes. <button class="term" data-term="prune">Pruning</button> improves a model only as long as it is exceptions being removed. Beyond that, the pattern goes too.`;
   } else {
     ptxt=`Accuracy on the test data is unchanged, while the tree has become simpler. A model that gives the same result with fewer questions is better. This is called <button class="term" data-term="prune">pruning</button>.`;
   }
@@ -1926,14 +1926,14 @@ function renderYouScene(){
     if(sy===TEST.length)setTimeout(()=>{reward(`All ${TEST.length} classified correctly`,document.getElementById('youScene'),50);},260);
     const e=errStats(youPred);
     const rc=e.gTot?Math.round(e.tp/e.gTot*100):0, pr=e.flagged?Math.round(e.tp/e.flagged*100):null;
-    scene.innerHTML=`<div class="alert" style="color:var(--emerald)">Done — every unseen snake has been run</div>
+    scene.innerHTML=`<div class="alert" style="color:var(--emerald)">Done. Every unseen snake has been run.</div>
       <div class="verdict" style="color:var(--text-primary)">On <b>unseen test data</b> your tree classified <b>${sy}/${TEST.length}</b> correctly.</div>
       <div class="q">Accuracy does not tell the whole story, however. Two trees can get the same number right and still differ in how dangerous they are, because the errors may be of different kinds.</div>
       <div class="metricline">
-        <span>Of <b>${e.gTot}</b> venomous snakes the tree caught <b>${e.tp}</b> — <button class="term" data-term="recall">recall</button> <b>${rc}&nbsp;%</b></span>
-        <span>Of <b>${e.flagged}</b> warnings, <b>${e.tp}</b> were warranted — <button class="term" data-term="precision">precision</button> <b>${pr===null?'—':pr+'&nbsp;%'}</b></span>
+        <span>Of <b>${e.gTot}</b> venomous snakes the tree caught <b>${e.tp}</b>, giving a <button class="term" data-term="recall">recall</button> of <b>${rc}&nbsp;%</b></span>
+        <span>Of <b>${e.flagged}</b> warnings, <b>${e.tp}</b> were warranted, giving a <button class="term" data-term="precision">precision</button> of <b>${pr===null?'—':pr+'&nbsp;%'}</b></span>
       </div>
-      <div class="q" style="margin-top:14px">${e.fn?`The tree let <b>${e.fn} venomous snake${e.fn>1?'s':''}</b> through. Where a misjudgement can cost a life, that type of error weighs more heavily than the false alarms.`:`The tree let no venomous snake through. ${e.fp?`The ${e.fp} false alarms mean harmless snakes are treated as dangerous — a less serious error.`:'The model made no errors of any kind on the test data.'}`}</div>
+      <div class="q" style="margin-top:14px">${e.fn?`The tree let <b>${e.fn} venomous snake${e.fn>1?'s':''}</b> through. Where a misjudgement can cost a life, that type of error weighs more heavily than the false alarms.`:`The tree let no venomous snake through. ${e.fp?`The ${e.fp} false alarms mean harmless snakes are treated as dangerous, which is a less serious error.`:'The model made no errors of any kind on the test data.'}`}</div>
       <div class="q">Next, see how a computer builds its own tree from the same training data and tests it on the same snakes.</div>
       <div class="reveal-row"><button class="btn sm ghost" id="youAgain">↺ Start over</button><button class="btn primary" id="toMachine">Watch a computer build →</button></div>`;
     document.getElementById('youAgain').onclick=youEnter;
@@ -1945,7 +1945,7 @@ function renderYouScene(){
       <div class="big arrive" role="img" aria-label="Unseen snake ${youIdx+1}: ${ATTRS.map(a=>ANAME[a]+' '+vname(a,s[a])).join(', ')}">${snake(s)}</div>
       <div class="trialmain">
         <div class="alert">🔍 Unseen snake ${youIdx+1} of ${TEST.length}</div>
-        <div class="q">What does <b>your</b> tree say — venomous or harmless?</div>
+        <div class="q">What does <b>your</b> tree say, venomous or harmless?</div>
         ${youRunAll?'':'<button class="btn primary" id="runYouBtn">▶ Run through my tree</button>'}
         <div class="tracelabel" id="yTrace"></div>
         <div class="verdict" id="yVerdict"></div>
@@ -1959,7 +1959,7 @@ function renderYouScene(){
 async function runYouAuto(s){
   if(youRan)return;youRan=true;const rb0=document.getElementById('runYouBtn');if(rb0)rb0.disabled=true;
   const canvas=document.getElementById('youCanvas'),trace=document.getElementById('yTrace');
-  /* grenarna lyser upp en efter en, med frågan som ställs utskriven */
+  /* the branches light up one by one, with the question written out */
   youSt.path=new Set(['r']);renderTree(canvas,stuRoot,youSt);await sleep(speedMs(420));
   let n=stuRoot,pid='r';
   while(n&&n.type==='split'){
@@ -2045,7 +2045,7 @@ function renderCompare(){
   const overfit=mTrain>=95&&ms<TEST.length;
   let why;
   if(overfit&&greenTraps.length){
-    why=`The algorithm's tree classified <b>${mTrain}%</b> of the training data correctly, but only <b>${ms}/${TEST.length}</b> (${mTest}%) of the test data. In order to get every training example right, the algorithm also split on <b>Colour</b> and established the rule that green snakes are harmless — a rule resting on a single green example. In the test data, ${greenTraps.length} venomous snake${greenTraps.length>1?'s are':' is'} therefore classified as harmless. The model has fitted itself to the details of the training data instead of to the underlying relationship, which is called <button class="term" data-term="overfit">overfitting</button>. The <b>Remove the last split</b> button above shows the effect of taking it away.`;
+    why=`The algorithm's tree classified <b>${mTrain}%</b> of the training data correctly, but only <b>${ms}/${TEST.length}</b> (${mTest}%) of the test data. In order to get every training example right, the algorithm also split on <b>Colour</b> and established the rule that green snakes are harmless, a rule resting on a single green example. In the test data, ${greenTraps.length} venomous snake${greenTraps.length>1?'s are':' is'} therefore classified as harmless. The model has fitted itself to the details of the training data instead of to the underlying relationship, which is called <button class="term" data-term="overfit">overfitting</button>. The <b>Remove the last split</b> button above shows the effect of taking it away.`;
   } else if(overfit){
     why=`The algorithm's tree classified <b>${mTrain}%</b> of the training data correctly, but only <b>${mTest}%</b> of the test data. The final splits were built on isolated exceptions in the training data rather than on a general relationship, which is exactly what <button class="term" data-term="overfit">overfitting</button> looks like.`;
   } else {
@@ -2061,8 +2061,8 @@ function renderCompare(){
     <table class="cmptable"><thead><tr><th>Snake</th><th>Answer</th><th>Your tree</th><th>Algorithm</th></tr></thead><tbody>${rows}</tbody></table>
     <div class="scoreline"><span>Your tree: <b>${ys}/${TEST.length}</b></span><span>Algorithm: <b>${ms}/${TEST.length}</b></span></div>
     <div class="metricline">
-      <span>Your tree — missed venomous <b>${eY.fn}</b>, false alarms <b>${eY.fp}</b></span>
-      <span>Algorithm — missed venomous <b>${eM.fn}</b>, false alarms <b>${eM.fp}</b></span>
+      <span>Your tree: missed venomous <b>${eY.fn}</b>, false alarms <b>${eY.fp}</b></span>
+      <span>Algorithm: missed venomous <b>${eM.fn}</b>, false alarms <b>${eM.fp}</b></span>
     </div>
     <div class="callout ${ms<ys?'emerald':(ms>ys?'amber':'')}">${compareLine}</div>
     <div class="whyhead">Why do the results differ?</div>
@@ -2077,25 +2077,25 @@ function renderCompare(){
 /* ================= steg 5: slutsatser ================= */
 const REFLECT=`<div class="reflectgrid">
       <div class="rcard warn"><div class="rh">Training accuracy says little</div><p>A perfect result on the <b>training data</b> does not mean the model is good. It may have fitted itself to the examples rather than to a general relationship.</p></div>
-      <div class="rcard"><div class="rh">Test data measures generalisation</div><p>Data held back during training is used to test whether the model works on new cases — that is, whether it <button class="term" data-term="generalize">generalises</button>.</p></div>
+      <div class="rcard"><div class="rh">Test data measures generalisation</div><p>Data held back during training is used to test whether the model works on new cases, that is, whether it <button class="term" data-term="generalize">generalises</button>.</p></div>
       <div class="rcard good"><div class="rh">Simpler models often generalise better</div><p>A model with fewer questions disregards individual exceptions in the training data and therefore more often captures the relationship that holds generally.</p></div>
       <div class="rcard warn"><div class="rh">Not all errors weigh the same</div><p>Two models can have the same accuracy and still differ in how dangerous they are. Judging a venomous snake to be harmless is a more serious error than the reverse, which is why <button class="term" data-term="recall">recall</button> and <button class="term" data-term="precision">precision</button> are reported separately.</p></div>
-      <div class="rcard"><div class="rh">A model is never better than its data</div><p>The rule the tree found holds within this material. In reality the relationship between head shape and venom is far from clear-cut — several deadly snakes have round heads and round pupils. A model reproduces the patterns present in its data, not the world as a whole.</p></div></div>`;
+      <div class="rcard"><div class="rh">A model is never better than its data</div><p>The rule the tree found holds within this material. In reality the relationship between head shape and venom is far from clear-cut. Several deadly snakes have round heads and round pupils. A model reproduces the patterns present in its data, not the world as a whole.</p></div></div>`;
 const SUMQ=[
  {q:'A model classifies <b>99 %</b> of the training data correctly, but only <b>71 %</b> of the test data. What is the most plausible explanation?',
   opts:['The model has learnt the exceptions in the training data instead of the general relationship',
         'The test data must be incorrectly labelled',
         'The model needs to ask more questions'],
   correct:0,
-  facit:'The gap between the two figures is the very hallmark of <button class="term" data-term="overfit">overfitting</button>. Mislabelled test data is possible but far-fetched — the pattern appears far too regularly to be down to chance. Adding more questions makes the problem worse rather than better: it was precisely the last questions that caused it. The right remedy is to simplify the model, for example by <button class="term" data-term="prune">pruning</button>.'},
+  facit:'The gap between the two figures is the very hallmark of <button class="term" data-term="overfit">overfitting</button>. Mislabelled test data is possible but far-fetched. The pattern appears far too regularly to be down to chance. Adding more questions makes the problem worse rather than better: it was precisely the last questions that caused it. The right remedy is to simplify the model, for example by <button class="term" data-term="prune">pruning</button>.'},
  {q:'A warning system for venomous snakes finds <b>all 4</b> venomous snakes in a test, but also warns about <b>6 harmless</b> ones. Which measure is high and which is low?',
   opts:['High recall, low precision','High precision, low recall','Both measures are low'],
   correct:0,
-  facit:'The system catches everything dangerous — <button class="term" data-term="recall">recall</button> is 100 %. But of the 10 snakes it warned about, only 4 were venomous, giving a <button class="term" data-term="precision">precision</button> of 40 %. Such a system is safe but unreliable: if it warns needlessly often enough, users stop listening, and protection then falls in practice even though recall is perfect on paper.'},
+  facit:'The system catches everything dangerous, so <button class="term" data-term="recall">recall</button> is 100 %. But of the 10 snakes it warned about, only 4 were venomous, giving a <button class="term" data-term="precision">precision</button> of 40 %. Such a system is safe but unreliable: if it warns needlessly often enough, users stop listening, and protection then falls in practice even though recall is perfect on paper.'},
  {q:'Two trees both get <b>10 out of 12</b> right. One misses two venomous snakes; the other warns about two harmless ones. Which do you choose?',
   opts:['The one that misses two venomous','The one that warns about two harmless','It depends on what the error costs'],
   correct:null,
-  facit:'The question has no answer key in a statistical sense — accuracy is identical, and the measures cannot settle it for you. The choice is determined by what the two error types cost. For snakebites, a missed venomous snake can cost a life, while a false alarm only means unnecessary caution — the second tree is then the obvious choice. For a spam filter the relationship is reversed: an important email in the junk folder is worse than an advert in the inbox. The same figures, the opposite conclusion. This is why the measures must always be interpreted in context.'}
+  facit:'The question has no answer key in a statistical sense. Accuracy is identical, and the measures cannot settle it for you. The choice is determined by what the two error types cost. For snakebites, a missed venomous snake can cost a life, while a false alarm only means unnecessary caution, so the second tree is then the obvious choice. For a spam filter the relationship is reversed: an important email in the junk folder is worse than an advert in the inbox. The same figures, the opposite conclusion. This is why the measures must always be interpreted in context.'}
 ];
 let sumAns={},sumFacit={};
 function recapRows(){
@@ -2104,11 +2104,11 @@ function recapRows(){
   const mlAttrs=(mlRoot&&mlDone)?treeAttrs(mlRoot):null;
   const rootAttr=(mlRoot&&mlRoot.type==='split')?mlRoot.attr:null;
   if(hypo)rows.push(['Your hypothesis',rootAttr
-      ? `You named <b>${ANAME[hypo]}</b> as the most important feature. The algorithm chose <b>${ANAME[rootAttr]}</b> at the root node${hypo===rootAttr?' — the same judgement.':', because it gave the greatest information gain.'}`
+      ? `You named <b>${ANAME[hypo]}</b> as the most important feature. The algorithm chose <b>${ANAME[rootAttr]}</b> at the root node${hypo===rootAttr?', which is the same judgement.':', because it gave the greatest information gain.'}`
       : `You named <b>${ANAME[hypo]}</b> as the most important feature.`]);
   rows.push(['Your tree', yAttrs.length
       ? `Asked ${yAttrs.length===1?'<b>one</b> question':`<b>${yAttrs.length}</b> questions`}: <b>${yAttrs.map(a=>ANAME[a]).join(' → ')}</b>.${fr?` ${fr} branch${fr>1?'es were':' was'} left unsettled.`:''}`
-      : 'Was never finished — go back to step 2 and complete it.']);
+      : 'Was never finished. Go back to step 2 and complete it.']);
   const yv=TEST.map(x=>predict(stuRoot,x)), e=errStats(yv);
   const ok=yv.filter((v,i)=>v===TEST[i].label).length;
   rows.push(['On test data',`<b>${ok} of ${TEST.length}</b> correct on snakes the tree had never seen. `
@@ -2121,7 +2121,7 @@ function recapRows(){
       const dOk=TEST.filter(x=>predict(DEEP,x)===x.label).length;
       rows.push(['The pruning',`Before you pruned it, the algorithm's tree asked <b>${treeAttrs(DEEP).length}</b> questions and classified <b>${dOk} of ${TEST.length}</b> correctly, with <b>${pct(accuracy(DEEP,TRAIN))}</b> on the training data. You removed the bottom split and could see the two measures move in <b>opposite directions</b>.`]);
     }
-  } else rows.push(["The algorithm's tree",'Was never finished — go back to step 4 and press <b>Train</b>.']);
+  } else rows.push(["The algorithm's tree",'Was never finished. Go back to step 4 and press <b>Train</b>.']);
   return rows;
 }
 function renderSummary(){
@@ -2163,4 +2163,3 @@ function renderSummary(){
 </script>
 </body>
 </html>
-    
