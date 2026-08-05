@@ -161,6 +161,10 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:
 .concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
 .concept-icon svg{width:28px;height:28px;}
 .concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
+/* Mathematical notation (MathML) */
+math{font-size:1.03em;line-height:1.1;}
+math mi{font-style:italic;}
+.prune-eq{color:var(--prune);font-weight:700;}
 .concept-def{font-size:.85em;line-height:1.6;color:var(--text-dim);margin-bottom:16px;position:relative;z-index:3;transform:translateZ(18px);}
 .concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;}
 .concept-illus{background:rgba(0,0,0,.25);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;transform:translateZ(10px);}
@@ -309,10 +313,10 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:
     <h2>Minimax with <span class="g">Alpha</span>-<span class="o">Beta</span> Pruning</h2>
     <p class="sub">Discover how a game AI chooses its moves by following the Minimax algorithm step by step.</p>
     <ul class="journey">
-      <li><span class="ji">1</span><span><strong>Follow the algorithm's search</strong> – see how it moves through the game tree, node by node.</span></li>
-      <li><span class="ji">2</span><span><strong>See how MAX and MIN think</strong> – one wants to maximize the value, the other to minimize it.</span></li>
-      <li><span class="ji">3</span><span><strong>Discover alpha-beta pruning</strong> – how the algorithm skips branches it doesn't need to examine.</span></li>
-      <li><span class="ji">4</span><span><strong>Build your own game trees</strong> – change values and structure and try out your own ideas.</span></li>
+      <li><span class="ji">1</span><span><strong>Follow the algorithm's search.</strong> See how it moves through the game tree, node by node.</span></li>
+      <li><span class="ji">2</span><span><strong>See how MAX and MIN think.</strong> One wants to maximize the value, the other to minimize it.</span></li>
+      <li><span class="ji">3</span><span><strong>Discover alpha-beta pruning.</strong> The algorithm skips branches it doesn't need to examine.</span></li>
+      <li><span class="ji">4</span><span><strong>Build your own game trees.</strong> Change values and structure and try out your own ideas.</span></li>
     </ul>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -836,7 +840,7 @@ function updateWhy(){
   let t='';
   switch(s.t){
     case'visit':
-      if(nd.isLeaf){t='We reach a <span class="muted">leaf</span> – a finished position with a fixed value.';}
+      if(nd.isLeaf){t='We reach a <span class="muted">leaf</span>, that is, a finished position with a fixed value.';}
       else{t=`${who} is up and examining its possible moves to find the <strong>${goal}</strong> value among its children.`;
         if(useAB)t+=` <span class="muted">Search window:</span> α=${V(s.a)}, β=${V(s.b)}.`;}
       break;
@@ -845,14 +849,14 @@ function updateWhy(){
     case'back':
       t=`The child returned the value ${V(s.cv)}. ${who} now compares it with its best result so far.`;break;
     case'upd':
-      if(s.changed){t=`New best for ${who}: ${V(s.v)} — a ${s.mx?'higher':'lower'} value was found (${V(s.cv)} ${s.mx?'&gt;':'&lt;'} ${V(s.prevV)}).`;}
+      if(s.changed){t=`New best for ${who}: ${V(s.v)}. A ${s.mx?'higher':'lower'} value was found (${V(s.cv)} ${s.mx?'&gt;':'&lt;'} ${V(s.prevV)}).`;}
       else{t=`${who} keeps ${V(s.v)}. The child's value ${V(s.cv)} wasn't better.`;}
       if(useAB)t+=` <span class="muted">Now:</span> α=${V(s.a)}, β=${V(s.b)}.`;
       break;
     case'prune':
       t=`<span class="hl-prune">Pruning!</span> Since α=${V(s.a)} ≥ β=${V(s.b)}, the remaining branches can't change the answer. The algorithm skips them and saves work.`;break;
     case'done':
-      if(nd.id===0){t=`Done! The root has been given its value ${V(s.v)} — that's the algorithm's answer, the best MAX can guarantee.`;}
+      if(nd.id===0){t=`Done! The root has been given its value ${V(s.v)}. That is the algorithm's answer, the best MAX can guarantee.`;}
       else{t=`${who} is done and sends its final value ${V(s.v)} up to the parent.`;}
       break;
   }
@@ -891,7 +895,7 @@ function renderLog(){
       }
       case'prune':t+=`<span class="pt">✂ Pruning!</span> ${who}'s guaranteed value (α=<span class="av">${fmtAB(s.a)}</span>) is already ≥ the opponent's (β=<span class="bvl">${fmtAB(s.b)}</span>). The rest of the branches can't change the answer, so they're skipped.`;cl='pe';break;
       case'done':
-        if(nd.id===0){t+=`Done! ${badge} becomes <span class="vl">${s.v}</span> — the best MAX can guarantee.`;}
+        if(nd.id===0){t+=`Done! ${badge} becomes <span class="vl">${s.v}</span>, which is the best MAX can guarantee.`;}
         else{t+=`${badge} is done with the value <span class="vl">${s.v}</span>, which is sent up to the parent.`;}
         break;
     }
@@ -899,7 +903,7 @@ function renderLog(){
   }
   if(curStep===steps.length-1){
     const vis=allNodes.filter(n=>n.visited).length,pru=allNodes.filter(n=>n.pruned).length,tot=allNodes.length;
-    h+=`<div class="sum"><div class="sum-h">✓ Done</div><div class="sum-l">Root value: <strong style="color:var(--val)">${tree.computedValue}</strong></div><div class="sum-l">Visited: <strong>${vis}</strong>/${tot}${pru?` — Pruned: <strong style="color:var(--prune)">${pru}</strong>`:''}</div>${pru?`<div class="sum-l" style="color:var(--green);margin-top:2px">Pruning saved ${pru} node${pru>1?'s':''}</div>`:''}<div class="sum-l" style="color:var(--max-color);margin-top:3px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--max-color);box-shadow:0 0 6px var(--max-glow);margin-right:4px;vertical-align:0"></span>The green path shows the move MAX chooses.</div></div>`;
+    h+=`<div class="sum"><div class="sum-h">✓ Done</div><div class="sum-l">Root value: <strong style="color:var(--val)">${tree.computedValue}</strong></div><div class="sum-l">Visited: <strong>${vis}</strong>/${tot}${pru?` · Pruned: <strong style="color:var(--prune)">${pru}</strong>`:''}</div>${pru?`<div class="sum-l" style="color:var(--green);margin-top:2px">Pruning saved ${pru} node${pru>1?'s':''}</div>`:''}<div class="sum-l" style="color:var(--max-color);margin-top:3px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--max-color);box-shadow:0 0 6px var(--max-glow);margin-right:4px;vertical-align:0"></span>The green path shows the move MAX chooses.</div></div>`;
   }
   el.innerHTML=h;el.scrollTop=el.scrollHeight;
 }
@@ -953,13 +957,13 @@ const CONCEPTS={
   cMax:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M7 8l5-5 5 5"/></svg>',
     title:'The MAX player',
-    def:'The MAX player (▲, green in the simulation) always picks the move with the <strong style="color:var(--max-color)">highest</strong> value among its options. The root value is usually a MAX node — it\'s the algorithm\'s answer to "what is the best move?".',
+    def:'The MAX player (▲, green in the simulation) always picks the move with the <strong style="color:var(--max-color)">highest</strong> value among its options. The root is usually a MAX node, and its value is the algorithm\'s answer to the question of which move is best.',
     illus:'<svg viewBox="0 0 140 70"><polygon points="70,10 100,55 40,55" fill="rgba(52,199,89,.18)" stroke="#34c759" stroke-width="2.5" stroke-linejoin="round"/><path d="M70 22v22M62 36l8-8 8 8" stroke="#34c759" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="70" y="65" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#34c759">highest value</text></svg>'
   },
   cMin:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M7 16l5 5 5-5"/></svg>',
     title:'The MIN player',
-    def:'The MIN player (▼, orange in the simulation) always picks the move with the <strong style="color:var(--min-color)">lowest</strong> value — the opponent\'s perspective. MAX assumes MIN always plays optimally against it.',
+    def:'The MIN player (▼, orange in the simulation) always picks the move with the <strong style="color:var(--min-color)">lowest</strong> value, that is, the opponent\'s perspective. MAX assumes MIN always plays optimally against it.',
     illus:'<svg viewBox="0 0 140 70"><polygon points="70,55 100,10 40,10" fill="rgba(255,159,67,.16)" stroke="#ff9f43" stroke-width="2.5" stroke-linejoin="round"/><path d="M70 20v22M62 34l8 8 8-8" stroke="#ff9f43" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="70" y="65" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#ff9f43">lowest value</text></svg>'
   },
   cAlpha:{
@@ -977,7 +981,7 @@ const CONCEPTS={
   cPrune:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.2 8.2 20 20M8.2 15.8 20 4"/></svg>',
     title:'Alpha-beta pruning',
-    def:'When <strong style="color:var(--prune)">α ≥ β</strong>, the algorithm knows the rest of the branches can never affect the final answer — they are pruned (skipped) entirely. The result is exactly the same as without pruning, but with far fewer nodes examined.',
+    def:'When <math class="prune-eq"><mi>α</mi><mo>≥</mo><mi>β</mi></math>, the algorithm knows the rest of the branches can never affect the final answer. The branches are pruned, that is, skipped entirely. The result is exactly the same as without pruning, but with far fewer nodes examined.',
     illus:'<svg viewBox="0 0 140 70"><path d="M70 10 L70 26" stroke="rgba(255,255,255,.3)" stroke-width="2"/><path d="M70 26 L40 50" stroke="rgba(255,255,255,.3)" stroke-width="2"/><path d="M70 26 L100 50" stroke="rgba(239,91,91,.55)" stroke-width="2" stroke-dasharray="4 3"/><polygon points="70,2 78,16 62,16" fill="rgba(52,199,89,.2)" stroke="#34c759" stroke-width="2"/><circle cx="40" cy="56" r="8" fill="rgba(52,199,89,.18)" stroke="#34c759" stroke-width="1.6"/><circle cx="100" cy="56" r="8" fill="rgba(50,52,65,.6)" stroke="#ef5b5b" stroke-width="1.6" stroke-dasharray="3 3"/><text x="100" y="60" text-anchor="middle" font-family="DM Sans" font-weight="700" font-size="11" fill="#ef5b5b">✕</text></svg>'
   }
 };
