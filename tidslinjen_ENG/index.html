@@ -1,31 +1,31 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
-
+  
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI-tidslinjen – När då då?</title>
+<title>The AI Timeline – When was that?</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0a0e1a">
-<meta name="description" content="Testa dina kunskaper om AI:s historia. Placera händelser på en tidslinje och samla poäng. Välj att träna ensam eller utmana en kompis i tvåspelarläget.">
-<link rel="canonical" href="https://www.ai-aktiviteter.se/tidslinjen">
+<meta name="description" content="Test your knowledge of AI history. Place events on a timeline and score points. Choose to practice solo or challenge a friend in two-player mode.">
+<link rel="canonical" href="https://www.ai-aktiviteter.se/tidslinjen_ENG">
 <link rel="alternate" hreflang="sv" href="https://www.ai-aktiviteter.se/tidslinjen">
 <link rel="alternate" hreflang="en" href="https://www.ai-aktiviteter.se/tidslinjen_ENG">
 <link rel="alternate" hreflang="x-default" href="https://www.ai-aktiviteter.se/tidslinjen">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="AI-aktiviteter">
-<meta property="og:locale" content="sv_SE">
-<meta property="og:url" content="https://www.ai-aktiviteter.se/tidslinjen">
-<meta property="og:title" content="AI‑tidslinjen – När då då? – ai-aktiviteter.se">
-<meta property="og:description" content="Testa dina kunskaper om AI:s historia. Placera händelser på en tidslinje och samla poäng. Välj att träna ensam eller utmana en kompis i tvåspelarläget.">
-<meta property="og:image" content="https://www.ai-aktiviteter.se/og-image.png">
+<meta property="og:site_name" content="AI Activities">
+<meta property="og:locale" content="en_GB">
+<meta property="og:url" content="https://www.ai-aktiviteter.se/tidslinjen_ENG">
+<meta property="og:title" content="The AI timeline – When was that? – ai-aktiviteter.se">
+<meta property="og:description" content="Test your knowledge of AI history. Place events on a timeline and score points. Choose to practice solo or challenge a friend in two-player mode.">
+<meta property="og:image" content="https://www.ai-aktiviteter.se/og-image-en.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AI‑tidslinjen – När då då? – ai-aktiviteter.se">
-<meta name="twitter:description" content="Testa dina kunskaper om AI:s historia. Placera händelser på en tidslinje och samla poäng. Välj att träna ensam eller utmana en kompis i tvåspelarläget.">
-<meta name="twitter:image" content="https://www.ai-aktiviteter.se/og-image.png">
+<meta name="twitter:title" content="The AI timeline – When was that? – ai-aktiviteter.se">
+<meta name="twitter:description" content="Test your knowledge of AI history. Place events on a timeline and score points. Choose to practice solo or challenge a friend in two-player mode.">
+<meta name="twitter:image" content="https://www.ai-aktiviteter.se/og-image-en.png">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -97,7 +97,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .score-line .dot{color:rgba(135,145,175,.4);margin:0 3px;}
 .score-line .flame{display:inline-flex;vertical-align:-2px;width:11px;height:11px;color:var(--orange);margin-right:1px;}
 
-/* Resultattavla för två spelare. */
+/* two-player scoreboard: big numbers, left vs right */
 .scoreboard{display:none;align-items:stretch;justify-content:center;gap:14px;}
 .scoreboard.show{display:flex;}
 .sbd-p{flex:1;max-width:230px;border-radius:var(--r-md);padding:8px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;transition:transform .35s var(--ease-spring),box-shadow .35s;position:relative;overflow:hidden;}
@@ -116,7 +116,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .sbd-p.active .sbd-turn{width:100%;}
 .sbd-vs{display:flex;align-items:center;font-family:'Syne',sans-serif;font-weight:800;font-size:.8em;color:var(--dim);}
 
-/* ---------- Kortet ---------- */
+/* ---------- the card ---------- */
 .card-area{display:flex;justify-content:center;perspective:1000px;}
 .current-card{width:100%;max-width:560px;border-radius:var(--r-xl);padding:2px;position:relative;transition:transform .55s var(--ease-spring),opacity .5s;transform-style:preserve-3d;}
 .current-card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(160deg,var(--card-accent,var(--accent)) 0%,rgba(255,255,255,.08) 30%,transparent 58%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.75;pointer-events:none;z-index:3;}
@@ -151,13 +151,13 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .btn-place:active:not(:disabled){transform:translateY(0) scale(.97);}
 .btn-place:disabled{background:rgba(255,255,255,.05);color:var(--dim);cursor:not-allowed;box-shadow:none;}
 
-/* Knappen "Visa rätt svar", enbart i enspelarläget. */
+/* "Show answer" button, single-player only. */
 .btn-reveal{background:rgba(255,255,255,.06);color:var(--dim);border:1px solid var(--glass-border);flex:0 0 auto;padding:8px 13px;font-size:.72em;font-weight:600;border-radius:999px;}
 .btn-reveal:hover:not(:disabled){background:rgba(255,255,255,.12);transform:translateY(-2px);}
 .btn-reveal:active:not(:disabled){transform:translateY(0) scale(.97);}
 .btn-reveal:disabled{opacity:.4;cursor:not-allowed;}
 
-/* ---------- Kortets baksida med facit ---------- */
+/* ---------- card back (correct answer) ---------- */
 .card-back{position:absolute;inset:0;z-index:6;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;border-radius:inherit;padding:26px;text-align:center;background:linear-gradient(160deg,color-mix(in srgb,var(--card-accent,var(--accent2)) 10%,rgba(30,33,48,.985)),color-mix(in srgb,var(--card-accent,var(--accent2)) 5%,rgba(15,17,27,.99)));box-shadow:inset 0 1px 0 rgba(255,255,255,.06);}
 .card-back .cb-era{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.62em;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:3px 11px;border:1px solid currentColor;border-radius:999px;opacity:.9;color:var(--card-accent,var(--accent2));}
 .card-back .cb-label{font-family:'Syne',sans-serif;font-size:.7em;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--dim);}
@@ -173,7 +173,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 @media(hover:none),(pointer:coarse){.card-area{perspective:1100px;}.current-card{transform-style:preserve-3d;}.current-card-inner{animation:cardIdle 8s ease-in-out infinite;}}
 @keyframes cardIdle{0%{transform:rotateX(0) rotateY(0) translateY(0);}22%{transform:rotateX(2.2deg) rotateY(-3.4deg) translateY(-3px);}48%{transform:rotateX(-1.2deg) rotateY(3.4deg) translateY(-1px);}72%{transform:rotateX(1.8deg) rotateY(1.4deg) translateY(-3px);}100%{transform:rotateX(0) rotateY(0) translateY(0);}}
 
-/* Diagonal stämpel över kortet. */
+/* diagonal stamp across the card */
 .card-stamp{position:absolute;top:50%;left:50%;z-index:10;pointer-events:none;font-family:'Syne',sans-serif;font-weight:800;font-size:2.6em;letter-spacing:.06em;padding:6px 26px;border:3px solid currentColor;border-radius:12px;opacity:0;transform:translate(-50%,-50%) rotate(-14deg) scale(1.5);text-transform:uppercase;white-space:nowrap;text-shadow:0 2px 14px rgba(0,0,0,.35);box-shadow:0 6px 28px -6px rgba(0,0,0,.4);background:rgba(10,13,24,.35);backdrop-filter:blur(2px);}
 .card-stamp.show{animation:stampIn 1.15s var(--ease-out) forwards;}
 @keyframes stampIn{0%{opacity:0;transform:translate(-50%,-50%) rotate(-14deg) scale(1.6);}18%{opacity:1;transform:translate(-50%,-50%) rotate(-14deg) scale(.94);}30%{transform:translate(-50%,-50%) rotate(-14deg) scale(1);}80%{opacity:1;transform:translate(-50%,-50%) rotate(-14deg) scale(1);}100%{opacity:0;transform:translate(-50%,-50%) rotate(-14deg) scale(1.04);}}
@@ -196,7 +196,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .reject-mark svg{width:26px;height:26px;}
 .reject-mark .rm-label{font-size:.68em;font-weight:700;letter-spacing:.04em;margin-top:2px;}
 
-/* ---------- Popup-rutor ---------- */
+/* ---------- popups ---------- */
 .turn-popup{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(4,5,10,.72);backdrop-filter:blur(10px);}
 .turn-popup.show{display:flex;}
 .tp-card{text-align:center;animation:popIn .45s var(--ease-spring);padding:40px 54px;border-radius:var(--r-xl);min-width:280px;}
@@ -212,7 +212,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .tp-btn:hover{transform:translateY(-2px);}
 @keyframes popIn{from{opacity:0;transform:scale(.72) translateY(18px);}to{opacity:1;transform:none;}}
 
-/* ---------- Tidslinjen, spelplanen ---------- */
+/* ---------- Timeline, the game board ---------- */
 .tl-section{flex:1.9;display:flex;flex-direction:column;padding-top:2px;min-height:0;width:100%;}
 .tl-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
 .tl-label{font-family:'Syne',sans-serif;font-size:.68em;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--subtle);}
@@ -282,7 +282,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .tl-band.winter-span{height:6px;opacity:.5;background:linear-gradient(90deg,rgba(239,91,107,.35),var(--red),rgba(239,91,107,.35));box-shadow:0 0 14px rgba(239,91,107,.4);animation:winterSpanIn .55s var(--ease-out);}
 @keyframes winterSpanIn{from{transform:translateY(-50%) scaleX(.2);opacity:0;}to{transform:translateY(-50%) scaleX(1);opacity:.5;}}
 
-/* ---------- Detaljruta för placerat kort ---------- */
+/* ---------- placed-card detail popup ---------- */
 .card-detail{padding:22px;}
 .cd-card{text-align:center;padding:30px 32px 26px;border-radius:var(--r-xl);max-width:440px;width:100%;position:relative;background:linear-gradient(160deg,color-mix(in srgb,var(--card-accent,var(--accent)) 12%,rgba(36,40,58,.80)),color-mix(in srgb,var(--card-accent,var(--accent)) 6%,rgba(22,25,38,.85)));box-shadow:var(--glass-shadow),0 0 54px -22px color-mix(in srgb,var(--card-accent,#4d80ff) 55%,transparent);animation:popIn .4s var(--ease-spring);}
 .cd-era{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.62em;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:3px 11px;border:1px solid currentColor;border-radius:999px;opacity:.9;margin-bottom:12px;}
@@ -294,7 +294,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .cd-ok{background:rgba(255,255,255,.08);color:var(--text);border:1px solid var(--glass-border);}
 .cd-ok:hover{background:rgba(255,255,255,.15);transform:translateY(-2px);}
 
-/* ---------- Introruta och slutruta ---------- */
+/* ---------- overlays / onboarding & end ---------- */
 .overlay{position:fixed;inset:0;background:rgba(3,4,9,.8);backdrop-filter:blur(14px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;}
 .overlay.show{display:flex;}
 .overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:32px 36px;max-width:540px;width:100%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:popIn .5s var(--ease-spring);}
@@ -303,7 +303,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .steps{display:flex;flex-direction:column;gap:13px;margin:20px 0;text-align:left;}
 .step{display:flex;gap:12px;align-items:flex-start;font-size:.84em;font-weight:400;color:var(--dim);line-height:1.65;}
 .step strong{color:var(--text);font-weight:600;}
-/* Numrerade steg. */
+/* Numbered steps. */
 .step-num{width:24px;height:24px;flex-shrink:0;display:grid;place-items:center;
   border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
   background:rgba(34,211,238,.12);color:#22d3ee;border:1px solid rgba(34,211,238,.25);}
@@ -380,18 +380,18 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 <div class="bg-vignette"></div>
 
 <div class="hd">
-  <a class="icon-link back-link" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> AI-aktiviteter</a>
-  <h1>AI-tidslinjen – <span class="grad-text">När då då?</span></h1>
-  <p>Placera historiska AI-händelser på tidslinjen. Hur väl känner du till AI:s historia?</p>
-  <a class="icon-link lang-link" href="https://www.ai-aktiviteter.se/tidslinjen_ENG"><svg class="flag" width="18" height="13" viewBox="0 0 60 40" aria-hidden="true"><clipPath id="ukflag"><rect width="60" height="40" rx="4"/></clipPath><g clip-path="url(#ukflag)"><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#C8102E" stroke-width="4"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="13"/><path d="M30 0v40M0 20h60" stroke="#C8102E" stroke-width="8"/></g></svg> English</a>
+  <a class="icon-link back-link" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> AI activities</a>
+  <h1>The AI Timeline – <span class="grad-text">When was that?</span></h1>
+  <p>Place historic AI events on the timeline. How well do you know the history of AI?</p>
+  <a class="icon-link lang-link" href="https://www.ai-aktiviteter.se/tidslinjen/"><svg class="flag" width="18" height="13" viewBox="0 0 16 10" aria-hidden="true"><rect width="16" height="10" rx="1.1" fill="#006AA7"/><rect x="5" width="2" height="10" fill="#FECC02"/><rect y="4" width="16" height="2" fill="#FECC02"/></svg> Svenska</a>
 </div>
 
 <div class="game-wrap" id="gameWrap">
   <div class="score-line" id="scoreLine"></div>
   <div class="scoreboard" id="scoreboard">
-    <div class="sbd-p p1" id="sbdP1"><div class="sbd-name">Spelare 1</div><div class="sbd-val" id="sbd1">0</div><div class="sbd-turn"></div></div>
+    <div class="sbd-p p1" id="sbdP1"><div class="sbd-name">Player 1</div><div class="sbd-val" id="sbd1">0</div><div class="sbd-turn"></div></div>
     <div class="sbd-vs">VS</div>
-    <div class="sbd-p p2" id="sbdP2"><div class="sbd-name">Spelare 2</div><div class="sbd-val" id="sbd2">0</div><div class="sbd-turn"></div></div>
+    <div class="sbd-p p2" id="sbdP2"><div class="sbd-name">Player 2</div><div class="sbd-val" id="sbd2">0</div><div class="sbd-turn"></div></div>
   </div>
 
   <div class="card-area">
@@ -403,24 +403,24 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
         <div class="card-gloss"></div>
         <div class="card-back" id="cardBack">
           <div class="cb-era" id="cardBackEra"></div>
-          <div class="cb-label">Rätt svar</div>
+          <div class="cb-label">Correct answer</div>
           <div class="cb-year" id="cardBackYear"></div>
           <div class="cb-title" id="cardBackTitle"></div>
-          <button class="btn cb-ok" id="cardBackOk" onclick="confirmReveal()">Okej</button>
+          <button class="btn cb-ok" id="cardBackOk" onclick="confirmReveal()">OK</button>
         </div>
       </div>
     </div>
   </div>
   <div class="answer-bar" id="answerBar">
     <div class="input-glass" id="inputGlass">
-      <input type="number" inputmode="numeric" pattern="[0-9]*" class="year-input" id="yearInput" min="1940" max="2025" placeholder="Årtal">
+      <input type="number" inputmode="numeric" pattern="[0-9]*" class="year-input" id="yearInput" min="1940" max="2025" placeholder="Year">
     </div>
-    <button class="btn btn-place" id="placeBtn" onclick="submitGuess()">Placera <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-    <button class="btn btn-reveal" id="revealBtn" onclick="revealAnswer()">Visa rätt svar</button>
+    <button class="btn btn-place" id="placeBtn" onclick="submitGuess()">Place <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="btn btn-reveal" id="revealBtn" onclick="revealAnswer()">Show answer</button>
   </div>
 
   <div class="tl-section">
-    <div class="tl-top"><div class="tl-label">Tidslinje</div><div class="tl-count" id="tlCount">0 av 19 placerade</div></div>
+    <div class="tl-top"><div class="tl-label">Timeline</div><div class="tl-count" id="tlCount">0 of 19 placed</div></div>
     <div class="tl-wrap" id="tlWrap">
       <div class="tl-inner" id="tlInner"><div class="tl-axis" id="tlAxis"></div></div>
     </div>
@@ -432,16 +432,16 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 
 <div class="overlay show" id="modeOverlay">
   <div class="overlay-card">
-    <h2>AI-tidslinjen – <span class="grad-text">När då då?</span></h2>
-    <p class="sub">Placera händelserna ur AI:s historia på rätt plats i tidslinjen.</p>
+    <h2>The AI Timeline – <span class="grad-text">When was that?</span></h2>
+    <p class="sub">Place the events from the history of AI in the right spot on the timeline.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Läs kortet.</strong> Varje kort beskriver en händelse. Gissa vilket år den inträffade.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Samla poäng.</strong> Rätt årtal ger 3 poäng, rätt decennium 2 poäng och rätt ordning 1 poäng.</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Flera rätt i rad.</strong> Tre eller fler perfekta svar i följd ger bonuspoäng.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Read the card.</strong> Each card describes an event. Guess the year it happened.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Score points.</strong> The exact year gives 3 points, the right decade 2 points and the right order 1 point.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Several in a row.</strong> Three or more perfect answers in a row earn bonus points.</div></div>
     </div>
     <div class="mode-btns">
-      <button class="mode-btn" onclick="startGame(1)"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M9 4a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 4.5 10 2.5 2.5 0 0 0 6 14.3V16a3 3 0 0 0 3 3M15 4a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 19.5 10 2.5 2.5 0 0 1 18 14.3V16a3 3 0 0 1-3 3M9 4v15M15 4v15"/></svg></span><span class="mt">1 spelare<small>Träna på egen hand</small></span></button>
-      <button class="mode-btn" onclick="startGame(2)"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 14.2c2.3.4 4 2.4 4 5.8"/></svg></span><span class="mt">2 spelare<small>Tävla mot en kompis om flest poäng</small></span></button>
+      <button class="mode-btn" onclick="startGame(1)"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M9 4a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 4.5 10 2.5 2.5 0 0 0 6 14.3V16a3 3 0 0 0 3 3M15 4a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 19.5 10 2.5 2.5 0 0 1 18 14.3V16a3 3 0 0 1-3 3M9 4v15M15 4v15"/></svg></span><span class="mt">1 player<small>Practise on your own</small></span></button>
+      <button class="mode-btn" onclick="startGame(2)"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 14.2c2.3.4 4 2.4 4 5.8"/></svg></span><span class="mt">2 players<small>Compete with a friend for the highest score</small></span></button>
     </div>
   </div>
 </div>
@@ -449,27 +449,27 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 
 <script>
 const EVENTS=[
-  {id:1,year:1950,title:"Turingtestet föreslås",desc:"Alan Turing publicerar artikeln \"Can Machines Think?\" och föreslår ett test för att avgöra om en maskin kan uppfattas som intelligent.",era:"Symbolisk AI"},
-  {id:2,year:1955,title:"Logic Theorist utvecklas",desc:"Ett av de första AI-programmen. Det kan bevisa matematiska satser inom logik och visar att datorer kan utföra resonemang.",era:"Symbolisk AI"},
-  {id:3,year:1956,title:"Dartmouthkonferensen",desc:"Forskare samlas på Dartmouth College och myntar begreppet \"artificiell intelligens\". AI blir ett forskningsfält.",era:"Symbolisk AI"},
-  {id:4,year:1958,title:"Perceptronen presenteras",desc:"En tidig modell inspirerad av hjärnans nervceller som kan lära sig känna igen enkla mönster. Perceptronen är föregångaren till dagens neurala nätverk.",era:"Symbolisk AI"},
-  {id:5,year:1965,title:"DENDRAL: AI inom kemi",desc:"Ett av de första expertsystemen. Det analyserar kemiska ämnens struktur med hjälp av masspektrometri-data.",era:"Symbolisk AI"},
-  {id:6,year:1966,title:"ELIZA: den första chatboten",desc:"ELIZA simulerar en terapeut genom att omformulera användarens påståenden till frågor och skapar en illusion av samtal.",era:"Symbolisk AI"},
-  {id:7,year:1973,title:"Lighthill-rapporten",desc:"En brittisk rapport kritiserar AI-forskningen hårt. Finansieringen minskar dramatiskt och AI-vintern fördjupas.",era:"AI-vinter"},
-  {id:8,year:1976,title:"MYCIN: medicinsk AI",desc:"Expertsystemet MYCIN kan ge förslag på antibiotikabehandlingar och visar potentialen för AI inom sjukvård.",era:"Expertsystem"},
-  {id:9,year:1997,title:"Deep Blue besegrar Kasparov",desc:"IBM:s schackdator besegrar världsmästaren Garry Kasparov. AI kan överträffa människor i strukturerade spelmiljöer.",era:"Genombrott"},
-  {id:10,year:2006,title:"Google Translate lanseras",desc:"Google lanserar sin översättningstjänst. Det är ett tidigt exempel på AI-driven språkbehandling i stor skala.",era:"Genombrott"},
-  {id:11,year:2011,title:"Watson vinner Jeopardy",desc:"IBM:s Watson besegrar de bästa mästarna i frågesporten Jeopardy efter att ha tränats på 200 miljoner sidor text.",era:"Genombrott"},
-  {id:12,year:2012,title:"AlexNet: djupinlärningens genombrott",desc:"AlexNet vinner bildigenkänningstävlingen ImageNet. Kombinationen av neurala nätverk, GPU:er och stora datamängder förändrar AI.",era:"Deep Learning"},
-  {id:13,year:2016,title:"AlphaGo besegrar Go-mästaren",desc:"Googles AlphaGo besegrar världsmästaren i Go, ett spel med fler möjliga positioner än atomer i universum.",era:"Deep Learning"},
-  {id:14,year:2018,title:"GPT-1 lanseras",desc:"OpenAI lanserar GPT-1, den första modellen i GPT-serien. Starten för en ny generation av stora språkmodeller.",era:"Deep Learning"},
-  {id:15,year:2022,title:"ChatGPT släpps",desc:"ChatGPT blir fritt tillgängligt och når hundratals miljoner användare på några månader. Generativ AI exploderar.",era:"Deep Learning"},
-  {id:16,year:1966,title:"Första AI-vintern börjar",desc:"Kritiken mot AI hopar sig. Löftena har varit för stora och ALPAC-rapporten dömer ut maskinöversättning. Förtroendet och forskningspengarna börjar sina.",era:"AI-vinter",winter:"1"},
-  {id:17,year:1980,title:"Första AI-vintern slutar",desc:"Efter år av nedskärningar vänder intresset långsamt. Nya expertsystem visar kommersiell potential och AI-forskningen tar fart igen.",era:"AI-vinter",winter:"1"},
-  {id:18,year:1987,title:"Andra AI-vintern börjar",desc:"Marknaden för specialiserade Lisp-maskiner kollapsar. Expertsystemen visar sig dyra och svårskötta, och en ny nedgång för AI inleds.",era:"AI-vinter",winter:"2"},
-  {id:19,year:2010,title:"Andra AI-vintern slutar",desc:"Billigare datorkraft, stora datamängder och nya metoder inom maskininlärning tinar upp AI-vintern. Strax inleds djupinlärningens era.",era:"AI-vinter",winter:"2"}
+  {id:1,year:1950,title:"The Turing Test is proposed",desc:"Alan Turing publishes the paper \"Can Machines Think?\" and proposes a test to determine whether a machine can be perceived as intelligent.",era:"Symbolic AI"},
+  {id:2,year:1955,title:"Logic Theorist is developed",desc:"One of the first AI programs. It can prove mathematical theorems in logic and shows that computers are capable of reasoning.",era:"Symbolic AI"},
+  {id:3,year:1956,title:"The Dartmouth Conference",desc:"Researchers gather at Dartmouth College and coin the term \"artificial intelligence\". AI becomes a field of research.",era:"Symbolic AI"},
+  {id:4,year:1958,title:"The Perceptron is introduced",desc:"An early model inspired by the brain\u2019s neurons that can learn to recognize simple patterns. The perceptron is the forerunner of today\u2019s neural networks.",era:"Symbolic AI"},
+  {id:5,year:1965,title:"DENDRAL: AI in chemistry",desc:"One of the first expert systems. It analyzes the structure of chemical compounds using mass spectrometry data.",era:"Symbolic AI"},
+  {id:6,year:1966,title:"ELIZA: the first chatbot",desc:"ELIZA simulates a therapist by rephrasing the user\u2019s statements as questions, creating the illusion of a conversation.",era:"Symbolic AI"},
+  {id:7,year:1973,title:"The Lighthill Report",desc:"A British report harshly criticizes AI research. Funding drops dramatically and the AI winter deepens.",era:"AI Winter"},
+  {id:8,year:1976,title:"MYCIN: medical AI",desc:"The expert system MYCIN can suggest antibiotic treatments and shows the potential of AI in healthcare.",era:"Expert Systems"},
+  {id:9,year:1997,title:"Deep Blue defeats Kasparov",desc:"IBM\u2019s chess computer defeats world champion Garry Kasparov. AI can outperform humans in structured game environments.",era:"Breakthroughs"},
+  {id:10,year:2006,title:"Google Translate launches",desc:"Google launches its translation service. It is an early example of large-scale AI-driven language processing.",era:"Breakthroughs"},
+  {id:11,year:2011,title:"Watson wins Jeopardy",desc:"IBM\u2019s Watson beats the top champions on the quiz show Jeopardy after being trained on 200 million pages of text.",era:"Breakthroughs"},
+  {id:12,year:2012,title:"AlexNet: the deep-learning breakthrough",desc:"AlexNet wins the ImageNet image-recognition competition. The combination of neural networks, GPUs and large datasets transforms AI.",era:"Deep Learning"},
+  {id:13,year:2016,title:"AlphaGo defeats the Go champion",desc:"Google\u2019s AlphaGo defeats the world champion at Go, a game with more possible positions than there are atoms in the universe.",era:"Deep Learning"},
+  {id:14,year:2018,title:"GPT-1 is released",desc:"OpenAI releases GPT-1, the first model in the GPT series. The start of a new generation of large language models.",era:"Deep Learning"},
+  {id:15,year:2022,title:"ChatGPT is released",desc:"ChatGPT becomes freely available and reaches hundreds of millions of users within months. Generative AI explodes.",era:"Deep Learning"},
+  {id:16,year:1966,title:"The first AI winter begins",desc:"Criticism of AI mounts. The promises were too big and the ALPAC report dismisses machine translation. Confidence and research funding start to dry up.",era:"AI Winter",winter:"1"},
+  {id:17,year:1980,title:"The first AI winter ends",desc:"After years of cutbacks, interest slowly returns. New expert systems show commercial potential and AI research picks up again.",era:"AI Winter",winter:"1"},
+  {id:18,year:1987,title:"The second AI winter begins",desc:"The market for specialized Lisp machines collapses. Expert systems prove expensive and hard to maintain, and a new downturn for AI sets in.",era:"AI Winter",winter:"2"},
+  {id:19,year:2010,title:"The second AI winter ends",desc:"Cheaper computing power, large datasets and new machine-learning methods thaw the AI winter. The era of deep learning is about to begin.",era:"AI Winter",winter:"2"}
 ];
-const ERA_COL={"Symbolisk AI":"#8b7bf5","AI-vinter":"#6f8fb0","Expertsystem":"#ffab3f","Genombrott":"#34d399","Deep Learning":"#22d3ee"};
+const ERA_COL={"Symbolic AI":"#8b7bf5","AI Winter":"#6f8fb0","Expert Systems":"#ffab3f","Breakthroughs":"#34d399","Deep Learning":"#22d3ee"};
 const ERA_RANGES={};
 EVENTS.forEach(ev=>{
   const y0=ev.yearRange?ev.yearRange[0]:ev.year,y1=ev.yearRange?ev.yearRange[1]:ev.year;
@@ -529,12 +529,12 @@ function renderScoreLine(){
   }
   const el=document.getElementById('scoreLine');
   const streakHtml=streaks[currentPlayer]>0?' <span class="dot">·</span> '+ICON_FLAME+' <b id="streakNum">'+streaks[currentPlayer]+'</b>':'';
-  el.innerHTML='<b id="scoreVal">'+scores[0]+'</b> poäng <span class="dot">·</span> <b id="cardNum">'+cardsPlaced+'/'+totalCards+'</b> kort'+streakHtml;
+  el.innerHTML='<b id="scoreVal">'+scores[0]+'</b> points <span class="dot">·</span> <b id="cardNum">'+cardsPlaced+'/'+totalCards+'</b> cards'+streakHtml;
 }
 
 function showCard(skipEnter){
   if(cardsPlaced>=totalCards){endGame();return;}
-  /* Nästa kort i leken som ännu inte är färdigbesvarat. */
+  // find the next card in the deck that hasn't been correctly finished yet
   let guard=0;
   while(guard<deck.length*2&&(currentIdx>=deck.length||finishedIds[deck[currentIdx].id])){
     currentIdx++;
@@ -544,7 +544,7 @@ function showCard(skipEnter){
   if(finishedIds[deck[currentIdx].id]){endGame();return;}
   const ev=deck[currentIdx],cc=document.getElementById('currentCard');
   cc.classList.remove('flying','flying-away');
-  /* Kortet vänds till framsidan inför nästa kort. */
+  // make sure the card is on its front side for the new card
   cardFlipped=false;flipBusy=false;
   cc.style.transform='';cc.style.transition='';
   document.getElementById('cardBack').style.display='none';
@@ -584,43 +584,43 @@ function submitGuess(){
     else if(orderCorrect&&placed.length>0){base=1;level='order';}
   }
 
-  /* Stämpeln visar hur nära gissningen låg, oberoende av ordningspoängen: */
-  //   Rätt  = exact year, or inside the period for range-cards
-  //   Nära  = within same decade, OR within +-5 years of the year/period
-  //   Fel   = anything further off (even if an order point was still earned)
+  /* The stamp shows how close the guess was, independently of order points: */
+  //   Correct = exact year, or inside the period for range-cards
+  //   Close   = within same decade, OR within +-5 years of the year/period
+  //   Wrong   = anything further off (even if an order point was still earned)
   let stampType,stampText;
   if(ev.yearRange){
     const [lo,hi]=ev.yearRange;
     const inside=guess>=lo&&guess<=hi;
     const nearDist=inside?0:Math.min(Math.abs(guess-lo),Math.abs(guess-hi));
-    if(inside){stampType='correct';stampText='Rätt';}
-    else if(nearDist<=5){stampType='near';stampText='Nära';}
-    else{stampType='wrong';stampText='Fel';}
+    if(inside){stampType='correct';stampText='Correct';}
+    else if(nearDist<=5){stampType='near';stampText='Close';}
+    else{stampType='wrong';stampText='Wrong';}
   }else{
-    if(diff===0){stampType='correct';stampText='Rätt';}
-    else if(sameDecade||diff<=5){stampType='near';stampText='Nära';}
-    else{stampType='wrong';stampText='Fel';}
+    if(diff===0){stampType='correct';stampText='Correct';}
+    else if(sameDecade||diff<=5){stampType='near';stampText='Close';}
+    else{stampType='wrong';stampText='Wrong';}
   }
 
   resolveCard(ev,guess,base,level,stampType,stampText);
 }
 
-/* "Visa rätt svar" avslutar alltid kortet med 0 poäng och placerar det på tidslinjen.
-   Kortet markeras som visat och kan därefter inte ge poäng. */
+// "Show answer" always resolves the card for 0 points, placed on the timeline
+/* The card is marked as revealed and can no longer earn points. */
 function confirmReveal(){
   if(flipBusy||!cardFlipped||busy)return;
   const ev=deck[currentIdx];
   const cc=document.getElementById('currentCard'),inner=document.getElementById('currentCardInner');
-  /* Vändningstillståndet nollställs. Flyg- och landningsanimationen tar över härifrån. */
+  // instantly clear the flip state; the fly-away/landing animation takes over from here
   document.getElementById('cardBack').style.display='none';
   inner.classList.remove('showing-back');
   cc.style.transition='';cc.style.transform='';
   cardFlipped=false;flipBusy=false;
-  resolveCard(ev,ev.year,0,'revealed','revealed','Visat');
+  resolveCard(ev,ev.year,0,'revealed','revealed','Shown');
 }
 
-/* Varje försök, gissat eller visat, landar direkt på tidslinjen vid händelsens
-   verkliga årtal, inte vid gissningen, färgat efter hur nära svaret låg. */
+/* Every attempt, guessed or revealed, lands on the timeline straight away at the
+   event's true year rather than at the guess, coloured by how close the answer was. */
 function resolveCard(ev,guess,base,level,stampType,stampText){
   busy=true;
   let bonus=0;
@@ -648,7 +648,7 @@ function resolveCard(ev,guess,base,level,stampType,stampText){
   },3500);
   const cc=document.getElementById('currentCard');
 
-  /* Stämpeln visas först, därefter flyger kortet. */
+  // show the stamp first, then fly
   showStamp(stampType,stampText);
 
   setTimeout(()=>{
@@ -670,7 +670,7 @@ function resolveCard(ev,guess,base,level,stampType,stampText){
         renderScoreLine();
         animateNumber(document.getElementById(mode===2?(currentPlayer===0?'sbd1':'sbd2'):'scoreVal'),oldScore,scores[currentPlayer],420);
       }catch(err){
-        console.error('AI-tidslinjen: icke-kritiskt animationsfel, fortsätter ändå',err);
+        console.error('AI timeline: non-critical animation error, continuing anyway',err);
       }finally{
         setTimeout(()=>{
           currentIdx++;
@@ -704,9 +704,9 @@ function flipCard(toBack){
   const inp=document.getElementById('yearInput');
   const placeBtn=document.getElementById('placeBtn');
   const revBtn=document.getElementById('revealBtn');
-  /* Inmatningen låses medan kortet vänds. */
+  // lock the input controls for the duration of the flip
   inp.disabled=true;placeBtn.disabled=true;revBtn.disabled=true;
-  /* Lutningen från muspekaren nollställs inför vändningen. */
+  // reset any hover-tilt on the inner face so the flip stays clean
   inner.style.transform='';
   cc.style.transition='transform .26s ease-in';
   cc.style.transform='perspective(1100px) rotateY(90deg)';
@@ -722,7 +722,7 @@ function flipCard(toBack){
       document.getElementById('cardBack').style.display='none';
       inner.classList.remove('showing-back');
     }
-    /* Kortet hoppar till motsatt kant och svänger sedan tillbaka mot betraktaren. */
+    // jump to the far edge, then swing back to face the viewer
     cc.style.transform='perspective(1100px) rotateY(-90deg)';
     void cc.offsetWidth;
     cc.style.transition='transform .26s ease-out';
@@ -732,7 +732,7 @@ function flipCard(toBack){
       cardFlipped=toBack;
       flipBusy=false;
       if(!toBack){
-        /* Spelaren kan skriva igen. */
+        // back to normal: let the player type again as usual
         inp.disabled=false;placeBtn.disabled=false;revBtn.disabled=false;
         if(!isTouch)inp.focus();
       }
@@ -753,7 +753,7 @@ function showRejectMark(x,y){
   const rm=document.createElement('div');
   rm.className='reject-mark';
   rm.style.left=x+'px';rm.style.top=y+'px';
-  rm.innerHTML=ICON_X+'<div class="rm-label">FEL SVAR</div>';
+  rm.innerHTML=ICON_X+'<div class="rm-label">WRONG</div>';
   document.body.appendChild(rm);
   requestAnimationFrame(()=>rm.classList.add('show'));
   setTimeout(()=>rm.remove(),1150);
@@ -763,7 +763,7 @@ function showTurnPopup(cb){
   const tp=document.getElementById('turnPopup'),tc=document.getElementById('tpCard');
   const pC=currentPlayer===0?'p1':'p2';
   tc.className='tp-card glass '+pC;
-  tc.innerHTML='<div class="tp-avatar">'+ICON_USER+'</div><div class="tp-title">Spelare '+(currentPlayer+1)+'</div><div class="tp-sub">Din tur!</div><button class="tp-btn '+pC+'" id="turnReadyBtn">Jag är redo →</button>';
+  tc.innerHTML='<div class="tp-avatar">'+ICON_USER+'</div><div class="tp-title">Player '+(currentPlayer+1)+'</div><div class="tp-sub">Your turn!</div><button class="tp-btn '+pC+'" id="turnReadyBtn">I’m ready →</button>';
   tp.classList.add('show');
   document.getElementById('turnReadyBtn').onclick=function(){tp.classList.remove('show');cb();};
 }
@@ -782,7 +782,7 @@ function renderTimeline(){
   else if(cardsPlaced>=5)wrap.classList.add('lvl1');
   if(cardsPlaced>=totalCards&&!completeFired){completeFired=true;wrap.classList.add('complete');setTimeout(()=>wrap.classList.remove('complete'),1500);}
 
-  document.getElementById('tlCount').textContent=cardsPlaced+' av '+totalCards+' placerade';
+  document.getElementById('tlCount').textContent=cardsPlaced+' of '+totalCards+' placed';
   const minY=1945,maxY=2027,range=maxY-minY;
 
   const erasShown=new Set(placed.map(p=>p.era));
@@ -818,8 +818,8 @@ function renderTimeline(){
   const sorted=[...placed].sort((a,b)=>a.year-b.year);
   const lastId=lastPlacedId;
 
-  /* När både start- och slutkortet för en AI-vinter är placerade ritas ett band
-     som förbinder dem över tidslinjen. */
+  /* Once both the start and end card of an AI winter are placed, a band is drawn
+     connecting them across the timeline. */
   const winterGroups={};
   placed.forEach(p=>{if(p.winter){(winterGroups[p.winter]=winterGroups[p.winter]||[]).push(p);}});
   Object.values(winterGroups).forEach(arr=>{
@@ -859,7 +859,7 @@ function renderTimeline(){
     inner.appendChild(card);
   }
 
-  /* På mobil rullar tidslinjen i sidled, så det nyaste kortet förs in i bild. */
+  /* On mobile the timeline scrolls horizontally, so the newest card is brought into view. */
   if(isTouch&&lastId!=null){
     requestAnimationFrame(()=>{
       const w=document.getElementById('tlWrap');
@@ -877,8 +877,8 @@ function showCardDetail(p){
   const col=ERA_COL[p.era]||'#4d80ff';
   const yrText=p.yearRange?p.yearRange[0]+'–'+p.yearRange[1]:p.year;
   const metaLine=p.level==='revealed'
-    ? 'Du visade facit &middot; 0 p'
-    : 'Din gissning: <b>'+p.guessYear+'</b>'+(p.points>0?' &middot; +'+p.points+' p':'');
+    ? 'You revealed the answer &middot; 0 pts'
+    : 'Your guess: <b>'+p.guessYear+'</b>'+(p.points>0?' &middot; +'+p.points+' pts':'');
   inner.style.setProperty('--card-accent',col);
   inner.innerHTML=
     '<div class="cd-era" style="color:'+col+'">'+p.era+'</div>'+
@@ -886,7 +886,7 @@ function showCardDetail(p){
     '<div class="cd-title">'+p.title+'</div>'+
     '<div class="cd-desc">'+p.desc+'</div>'+
     '<div class="cd-meta">'+metaLine+'</div>'+
-    '<button class="btn cd-ok" onclick="closeCardDetail()">Stäng</button>';
+    '<button class="btn cd-ok" onclick="closeCardDetail()">Close</button>';
   pop.classList.add('show');
 }
 function closeCardDetail(e){
@@ -898,19 +898,19 @@ function endGame(){
   document.getElementById('gameWrap').classList.remove('show');
   const eo=document.getElementById('endOverlay');eo.classList.add('show');
   const ec=document.getElementById('endCard'),maxP=totalCards*3;
-  const replayBtn='<button class="overlay-btn" onclick="location.reload()">'+ICON_REPLAY+' Spela igen</button>';
+  const replayBtn='<button class="overlay-btn" onclick="location.reload()">'+ICON_REPLAY+' Play again</button>';
   if(mode===1){
     const pct=Math.round(scores[0]/maxP*100);
-    let comment='Bra jobbat!';
-    if(pct>=90)comment='Fantastiskt! Du kan AI-historien!';
-    else if(pct>=70)comment='Imponerande!';
-    else if(pct>=50)comment='Bra grund! Läs kapitlet och testa igen.';
-    else comment='Dags att läsa på!';
-    ec.innerHTML='<h2>Spelet slut!</h2><div class="big-score">'+scores[0]+' / '+maxP+'</div><div class="end-sub">'+comment+'</div><div class="end-stats"><div class="es glass-soft"><div class="ev" style="color:var(--gold)">'+perfects[0]+'</div><div class="el">Perfekta</div></div><div class="es glass-soft"><div class="ev" style="color:var(--orange)">'+maxStreaks[0]+'</div><div class="el">Längsta rad</div></div><div class="es glass-soft"><div class="ev" style="color:var(--accent2)">'+totalCards+'</div><div class="el">Kort</div></div></div>'+replayBtn;
+    let comment='Well done!';
+    if(pct>=90)comment='Amazing! You know your AI history!';
+    else if(pct>=70)comment='Impressive!';
+    else if(pct>=50)comment='Good start! Read the chapter and try again.';
+    else comment='Time to hit the books!';
+    ec.innerHTML='<h2>Game over!</h2><div class="big-score">'+scores[0]+' / '+maxP+'</div><div class="end-sub">'+comment+'</div><div class="end-stats"><div class="es glass-soft"><div class="ev" style="color:var(--gold)">'+perfects[0]+'</div><div class="el">Perfect</div></div><div class="es glass-soft"><div class="ev" style="color:var(--orange)">'+maxStreaks[0]+'</div><div class="el">Longest run</div></div><div class="es glass-soft"><div class="ev" style="color:var(--accent2)">'+totalCards+'</div><div class="el">Cards</div></div></div>'+replayBtn;
   }else{
     const w=scores[0]>scores[1]?0:scores[1]>scores[0]?1:-1;
-    let title='Oavgjort!';if(w===0)title='Spelare 1 vinner!';if(w===1)title='Spelare 2 vinner!';
-    ec.innerHTML='<h2>'+title+'</h2><div class="p-scores"><div class="ps glass-soft '+(w===0?'w':'')+'"><div class="pn" style="color:var(--accent2)">Spelare 1</div><div class="psc" style="color:var(--accent2)">'+scores[0]+'</div></div><div class="ps glass-soft '+(w===1?'w':'')+'"><div class="pn" style="color:var(--orange)">Spelare 2</div><div class="psc" style="color:var(--orange)">'+scores[1]+'</div></div></div><div class="end-stats"><div class="es glass-soft"><div class="ev" style="color:var(--gold)">'+perfects[0]+' / '+perfects[1]+'</div><div class="el">Perfekta</div></div><div class="es glass-soft"><div class="ev" style="color:var(--orange)">'+maxStreaks[0]+' / '+maxStreaks[1]+'</div><div class="el">Längsta rad</div></div></div>'+replayBtn;
+    let title='Tie!';if(w===0)title='Player 1 wins!';if(w===1)title='Player 2 wins!';
+    ec.innerHTML='<h2>'+title+'</h2><div class="p-scores"><div class="ps glass-soft '+(w===0?'w':'')+'"><div class="pn" style="color:var(--accent2)">Player 1</div><div class="psc" style="color:var(--accent2)">'+scores[0]+'</div></div><div class="ps glass-soft '+(w===1?'w':'')+'"><div class="pn" style="color:var(--orange)">Player 2</div><div class="psc" style="color:var(--orange)">'+scores[1]+'</div></div></div><div class="end-stats"><div class="es glass-soft"><div class="ev" style="color:var(--gold)">'+perfects[0]+' / '+perfects[1]+'</div><div class="el">Perfect</div></div><div class="es glass-soft"><div class="ev" style="color:var(--orange)">'+maxStreaks[0]+' / '+maxStreaks[1]+'</div><div class="el">Longest run</div></div></div>'+replayBtn;
   }
 }
 
