@@ -49,11 +49,11 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:
   radial-gradient(circle at 12% 85%, rgba(255,159,67,0.035), transparent 40%),
   var(--bg);color:var(--text);overflow:hidden;display:flex;flex-direction:column;}
 
-/* back link */
+/* tillbakalänk */
 .back-link{position:absolute;top:50%;left:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--text-dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;}
 .back-link:hover{color:var(--text);border-color:var(--text-dim);}
 
-/* language link */
+/* språklänk */
 .lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .lang-link:hover{color:var(--text);border-color:var(--dim);}
 .lang-link .flag{display:block;border-radius:2px;}
@@ -134,7 +134,7 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:
 .g-tag:active{transform:scale(.95);}
 .g-tag .g-ico{width:12px;height:12px;flex-shrink:0;opacity:.8;}
 
-/* concept card modal */
+/* begreppskort */
 .concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
 .concept-backdrop.show{opacity:1;pointer-events:auto;}
 .concept-card{position:fixed;top:50%;left:50%;z-index:301;width:340px;max-width:88vw;
@@ -162,6 +162,10 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:
 .concept-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18);}
 .concept-icon svg{width:28px;height:28px;}
 .concept-title{font-family:'Syne',sans-serif;font-size:1.15em;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:3;transform:translateZ(26px);color:var(--text);}
+/* Matematisk notation (MathML) */
+math{font-size:1.03em;line-height:1.1;}
+math mi{font-style:italic;}
+.prune-eq{color:var(--prune);font-weight:700;}
 .concept-def{font-size:.85em;line-height:1.6;color:var(--text-dim);margin-bottom:16px;position:relative;z-index:3;transform:translateZ(18px);}
 .concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;}
 .concept-illus{background:rgba(0,0,0,.25);border:1px solid var(--border-soft);border-radius:var(--r-md);padding:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:3;transform:translateZ(10px);}
@@ -310,10 +314,10 @@ body{font-family:'DM Sans',sans-serif;font-size:14px;background:
     <h2>Minimax med <span class="g">Alfa</span>-<span class="o">Beta</span>-beskärning</h2>
     <p class="sub">Upptäck hur en spel-AI väljer sina drag genom att steg för steg följa Minimax-algoritmen.</p>
     <ul class="journey">
-      <li><span class="ji">1</span><span><strong>Följ algoritmens sökning</strong> – se hur den vandrar genom spelträdet, nod för nod.</span></li>
-      <li><span class="ji">2</span><span><strong>Se hur MAX och MIN tänker</strong> – den ena vill maximera värdet, den andra minimera det.</span></li>
-      <li><span class="ji">3</span><span><strong>Upptäck alfa-beta-beskärning</strong> – hur algoritmen hoppar över grenar den inte behöver undersöka.</span></li>
-      <li><span class="ji">4</span><span><strong>Bygg egna spelträd</strong> – ändra värden och struktur och testa dina egna idéer.</span></li>
+      <li><span class="ji">1</span><span><strong>Följ algoritmens sökning.</strong> Se hur den vandrar genom spelträdet, nod för nod.</span></li>
+      <li><span class="ji">2</span><span><strong>Se hur MAX och MIN tänker.</strong> Den ena vill maximera värdet, den andra minimera det.</span></li>
+      <li><span class="ji">3</span><span><strong>Upptäck alfa-beta-beskärning.</strong> Algoritmen hoppar över grenar den inte behöver undersöka.</span></li>
+      <li><span class="ji">4</span><span><strong>Bygg egna spelträd.</strong> Ändra värden och struktur och testa dina egna idéer.</span></li>
     </ul>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -837,7 +841,7 @@ function updateWhy(){
   let t='';
   switch(s.t){
     case'visit':
-      if(nd.isLeaf){t='Vi når ett <span class="muted">löv</span> – en färdig ställning med ett bestämt värde.';}
+      if(nd.isLeaf){t='Vi når ett <span class="muted">löv</span>, alltså en färdig ställning med ett bestämt värde.';}
       else{t=`${who} är i tur och undersöker sina möjliga drag för att hitta det <strong>${goal}</strong> värdet bland barnen.`;
         if(useAB)t+=` <span class="muted">Sökfönster:</span> α=${V(s.a)}, β=${V(s.b)}.`;}
       break;
@@ -846,14 +850,14 @@ function updateWhy(){
     case'back':
       t=`Barnet gav värdet ${V(s.cv)}. ${who} jämför det nu med sitt bästa resultat hittills.`;break;
     case'upd':
-      if(s.changed){t=`Nytt bästa för ${who}: ${V(s.v)} — ${s.mx?'ett högre':'ett lägre'} värde hittades (${V(s.cv)} ${s.mx?'&gt;':'&lt;'} ${V(s.prevV)}).`;}
+      if(s.changed){t=`Nytt bästa för ${who}: ${V(s.v)}. ${s.mx?'Ett högre':'Ett lägre'} värde hittades (${V(s.cv)} ${s.mx?'&gt;':'&lt;'} ${V(s.prevV)}).`;}
       else{t=`${who} behåller ${V(s.v)}. Barnets värde ${V(s.cv)} var inte bättre.`;}
       if(useAB)t+=` <span class="muted">Nu:</span> α=${V(s.a)}, β=${V(s.b)}.`;
       break;
     case'prune':
       t=`<span class="hl-prune">Beskärning!</span> Eftersom α=${V(s.a)} ≥ β=${V(s.b)} kan de återstående grenarna inte ändra svaret. Algoritmen hoppar över dem och sparar arbete.`;break;
     case'done':
-      if(nd.id===0){t=`Klart! Roten har fått sitt värde ${V(s.v)} — det är algoritmens svar, det bästa MAX kan garantera.`;}
+      if(nd.id===0){t=`Klart! Roten har fått sitt värde ${V(s.v)}. Det är algoritmens svar, alltså det bästa MAX kan garantera.`;}
       else{t=`${who} är färdig och skickar upp sitt slutvärde ${V(s.v)} till föräldern.`;}
       break;
   }
@@ -892,7 +896,7 @@ function renderLog(){
       }
       case'prune':t+=`<span class="pt">✂ Beskärning!</span> ${who}:s garanterade värde (α=<span class="av">${fmtAB(s.a)}</span>) är redan ≥ motståndarens (β=<span class="bvl">${fmtAB(s.b)}</span>). Resten av grenarna kan inte ändra svaret, så de hoppas över.`;cl='pe';break;
       case'done':
-        if(nd.id===0){t+=`Klart! ${badge} blir <span class="vl">${s.v}</span> — det bästa MAX kan garantera.`;}
+        if(nd.id===0){t+=`Klart! ${badge} blir <span class="vl">${s.v}</span>, vilket är det bästa MAX kan garantera.`;}
         else{t+=`${badge} är färdig med värdet <span class="vl">${s.v}</span>, som skickas upp till föräldern.`;}
         break;
     }
@@ -900,7 +904,7 @@ function renderLog(){
   }
   if(curStep===steps.length-1){
     const vis=allNodes.filter(n=>n.visited).length,pru=allNodes.filter(n=>n.pruned).length,tot=allNodes.length;
-    h+=`<div class="sum"><div class="sum-h">✓ Klar</div><div class="sum-l">Rotvärde: <strong style="color:var(--val)">${tree.computedValue}</strong></div><div class="sum-l">Besökta: <strong>${vis}</strong>/${tot}${pru?` — Beskurna: <strong style="color:var(--prune)">${pru}</strong>`:''}</div>${pru?`<div class="sum-l" style="color:var(--green);margin-top:2px">Beskärningen sparade ${pru} nod${pru>1?'er':''}</div>`:''}<div class="sum-l" style="color:var(--max-color);margin-top:3px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--max-color);box-shadow:0 0 6px var(--max-glow);margin-right:4px;vertical-align:0"></span>Den gröna vägen visar draget MAX väljer.</div></div>`;
+    h+=`<div class="sum"><div class="sum-h">✓ Klar</div><div class="sum-l">Rotvärde: <strong style="color:var(--val)">${tree.computedValue}</strong></div><div class="sum-l">Besökta: <strong>${vis}</strong>/${tot}${pru?` · Beskurna: <strong style="color:var(--prune)">${pru}</strong>`:''}</div>${pru?`<div class="sum-l" style="color:var(--green);margin-top:2px">Beskärningen sparade ${pru} nod${pru>1?'er':''}</div>`:''}<div class="sum-l" style="color:var(--max-color);margin-top:3px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--max-color);box-shadow:0 0 6px var(--max-glow);margin-right:4px;vertical-align:0"></span>Den gröna vägen visar draget MAX väljer.</div></div>`;
   }
   el.innerHTML=h;el.scrollTop=el.scrollHeight;
 }
@@ -954,13 +958,13 @@ const CONCEPTS={
   cMax:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M7 8l5-5 5 5"/></svg>',
     title:'MAX-spelaren',
-    def:'MAX-spelaren (▲, grön i simuleringen) väljer alltid draget med <strong style="color:var(--max-color)">högst</strong> värde bland sina alternativ. Rotens värde är oftast en MAX-nod – det är algoritmens svar på "vad är bästa draget?".',
+    def:'MAX-spelaren (▲, grön i simuleringen) väljer alltid draget med <strong style="color:var(--max-color)">högst</strong> värde bland sina alternativ. Roten är oftast en MAX-nod, och rotens värde är algoritmens svar på frågan om vilket drag som är bäst.',
     illus:'<svg viewBox="0 0 140 70"><polygon points="70,10 100,55 40,55" fill="rgba(52,199,89,.18)" stroke="#34c759" stroke-width="2.5" stroke-linejoin="round"/><path d="M70 22v22M62 36l8-8 8 8" stroke="#34c759" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="70" y="65" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#34c759">högsta värdet</text></svg>'
   },
   cMin:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M7 16l5 5 5-5"/></svg>',
     title:'MIN-spelaren',
-    def:'MIN-spelaren (▼, orange i simuleringen) väljer alltid draget med <strong style="color:var(--min-color)">lägst</strong> värde – motståndarens perspektiv. MAX antar att MIN alltid spelar optimalt emot sig.',
+    def:'MIN-spelaren (▼, orange i simuleringen) väljer alltid draget med <strong style="color:var(--min-color)">lägst</strong> värde, alltså motståndarens perspektiv. MAX antar att MIN alltid spelar optimalt emot sig.',
     illus:'<svg viewBox="0 0 140 70"><polygon points="70,55 100,10 40,10" fill="rgba(255,159,67,.16)" stroke="#ff9f43" stroke-width="2.5" stroke-linejoin="round"/><path d="M70 20v22M62 34l8 8 8-8" stroke="#ff9f43" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="70" y="65" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#ff9f43">lägsta värdet</text></svg>'
   },
   cAlpha:{
@@ -978,7 +982,7 @@ const CONCEPTS={
   cPrune:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.2 8.2 20 20M8.2 15.8 20 4"/></svg>',
     title:'Alfa-beta-beskärning',
-    def:'När <strong style="color:var(--prune)">α ≥ β</strong> vet algoritmen att resten av grenarna aldrig kan påverka slutsvaret – de beskärs (hoppas över) helt. Resultatet blir exakt detsamma som utan beskärning, men med betydligt färre undersökta noder.',
+    def:'När <math class="prune-eq"><mi>α</mi><mo>≥</mo><mi>β</mi></math> vet algoritmen att resten av grenarna aldrig kan påverka slutsvaret. Grenarna beskärs, alltså hoppas de över helt. Resultatet blir exakt detsamma som utan beskärning, men med betydligt färre undersökta noder.',
     illus:'<svg viewBox="0 0 140 70"><path d="M70 10 L70 26" stroke="rgba(255,255,255,.3)" stroke-width="2"/><path d="M70 26 L40 50" stroke="rgba(255,255,255,.3)" stroke-width="2"/><path d="M70 26 L100 50" stroke="rgba(239,91,91,.55)" stroke-width="2" stroke-dasharray="4 3"/><polygon points="70,2 78,16 62,16" fill="rgba(52,199,89,.2)" stroke="#34c759" stroke-width="2"/><circle cx="40" cy="56" r="8" fill="rgba(52,199,89,.18)" stroke="#34c759" stroke-width="1.6"/><circle cx="100" cy="56" r="8" fill="rgba(50,52,65,.6)" stroke="#ef5b5b" stroke-width="1.6" stroke-dasharray="3 3"/><text x="100" y="60" text-anchor="middle" font-family="DM Sans" font-weight="700" font-size="11" fill="#ef5b5b">✕</text></svg>'
   }
 };
