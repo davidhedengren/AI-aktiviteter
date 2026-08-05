@@ -297,6 +297,20 @@
   .tex { color:var(--text); }
   .katex { font-size:1.04em; }
   .katex-display { margin:0; text-align:left; }
+  /* Each formula sits in a box that can be scrolled sideways, so that wide
+     expressions are never cut off on narrow screens. */
+  .tex { display:inline-block; max-width:100%; overflow-x:auto; overflow-y:hidden;
+         -webkit-overflow-scrolling:touch; vertical-align:middle; }
+  .tex[data-display="1"] { display:block; }
+  .katex-display { overflow-x:auto; overflow-y:hidden; padding-bottom:2px; }
+  .tex::-webkit-scrollbar, .katex-display::-webkit-scrollbar { height:5px; }
+  .tex::-webkit-scrollbar-thumb, .katex-display::-webkit-scrollbar-thumb {
+         background:rgba(255,255,255,.16); border-radius:3px; }
+  @media (max-width:760px) { .katex { font-size:0.95em; } }
+  @media (max-width:520px) {
+    .katex { font-size:0.88em; }
+    .math-prior-grid { grid-template-columns:1fr; }
+  }
   .mwb-formula .katex-display, .calc-formula-wrap .katex-display { white-space:normal; }
   .mpb-frac .katex { font-size:1em; }
   .ex-list { max-height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:5px;padding-right:2px; }
@@ -435,7 +449,7 @@
   .concept-icon { width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18); }
   .concept-icon svg { width:28px;height:28px; }
 
-  /* ── Token modal: same glass-card style as the concept cards, but wider & left-aligned ── */
+  /* ── Token modal: glass-card style like the concept cards, wider and left-aligned ── */
   .token-modal { position:fixed;top:50%;left:50%;z-index:311;width:560px;max-width:92vw;max-height:82vh;overflow-y:auto;
     transform:translate(-50%,-50%) scale(.85);opacity:0;pointer-events:none;
     transition:transform .34s var(--ease-spring),opacity .26s var(--ease-out); }
@@ -487,7 +501,7 @@
   .train-done-note { font-size:11.5px;color:var(--muted);background:rgba(255,255,255,.03);border:1px solid var(--border-soft);border-radius:10px;padding:9px 13px;max-width:400px;line-height:1.6; }
   .train-done-note strong { color:var(--subtle); }
 
-/* Numreringen krymper på små skärmar, i takt med resten av introrutan. */
+/* The numbering shrinks on small screens, in step with the rest of the intro card */
 @media (max-width:560px){
   .o-step-num { width:22px;height:22px;border-radius:7px;font-size:11px; }
 }
@@ -525,7 +539,7 @@
     </svg>
     <h2>Naïve <span>Bayes</span> Lab</h2>
     <p class="o-lead">
-      Here you train a <strong>Naïve Bayes classifier</strong> — the same type of algorithm used in spam filters — and see the math behind every decision.
+      Here you train a <strong>Naïve Bayes classifier</strong>, the same type of algorithm used in spam filters, and see the mathematics behind every decision.
     </p>
     <div class="o-step">
       <div class="o-step-num">1</div>
@@ -535,12 +549,12 @@
     <div class="o-step">
       <div class="o-step-num">2</div>
       <div class="o-step-body"><div class="o-step-h">Explore the model</div>
-      <p>See what the model has learned — which words lean toward spam and which lean toward regular email, and how strongly.</p></div>
+      <p>See what the model has learned, that is, which words lean toward spam, which lean toward regular email and how strongly they do so.</p></div>
     </div>
     <div class="o-step">
       <div class="o-step-num">3</div>
       <div class="o-step-body"><div class="o-step-h">Classify</div>
-      <p>Write your own email and press Enter. You get the model's answer with a confidence percentage — and can follow the whole calculation behind it.</p></div>
+      <p>Write your own email and press Enter. You get the model's answer with a confidence percentage and can follow the whole calculation behind it.</p></div>
     </div>
     <button class="overlay-btn" onclick="closeIntro()">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -572,7 +586,7 @@
             <div id="ratio-bar-ham"  style="width:50%;background:var(--ham); transition:width .3s var(--ease-out);box-shadow:0 0 10px var(--ham-glow)"></div>
           </div>
           <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.6" id="ratio-note">
-            Even split — the prior probability P(class) barely affects the classification.
+            Even split. The prior probability P(class) barely affects the classification.
           </div>
         </div>
         <div class="status-msg" id="gen-status"></div>
@@ -613,7 +627,7 @@
     <div class="train-done" id="trainDoneMsg" style="display:none">
       <div class="train-done-icon">✓</div>
       <div class="train-done-text">The model is trained on <strong id="trainDoneN">0</strong> examples.</div>
-      <div class="train-done-note">Naïve Bayes is trained by <strong>counting</strong> — how often each word shows up in each class. That happens in a single pass through the data, unlike e.g. a neural network, which needs repeated training over many epochs.</div>
+      <div class="train-done-note">Naïve Bayes is trained by <strong>counting</strong>, that is, by seeing how often each word shows up in each class. That happens in a single pass through the data, unlike e.g. a neural network, which needs repeated training over many epochs.</div>
       <button class="btn" onclick="goToModelTab()">View the model →</button>
     </div>
   </div>
@@ -650,7 +664,7 @@
         <div class="card" style="margin-bottom:0">
           <span class="card-label">Import from file</span>
           <div class="format-box">
-            A <strong style="color:var(--text)">.csv</strong> or <strong style="color:var(--text)">.txt</strong> — one example per line:
+            A <strong style="color:var(--text)">.csv</strong> or <strong style="color:var(--text)">.txt</strong> with one example per line:
             <code>SPAM,Your text here</code>
             <code>HAM,Your text here</code>
             The label must be <code style="display:inline">SPAM</code> or <code style="display:inline">HAM</code> (uppercase).
@@ -745,18 +759,18 @@
     <button class="concept-close" onclick="closeTokenModal()">✕</button>
     <div class="token-modal-title">Tokenization and filtering</div>
     <p class="token-modal-desc">
-      Before the model can calculate probabilities, the text has to be broken into individual words — that's called <span class="term" data-term="tokenisering" tabindex="0" role="button"><strong style="color:var(--text)">tokenization</strong></span>.
+      Before the model can calculate probabilities, the text has to be broken into individual words. That is called <span class="term" data-term="tokenisering" tabindex="0" role="button"><strong style="color:var(--text)">tokenization</strong></span>.
       Words that are too common to say anything about the class (<span class="term" data-term="stoppord" tabindex="0" role="button">stop words</span>) and very short words are then filtered out.
       Only the remaining words are used in the classification.
     </p>
     <div class="token-wrap" id="token-display"></div>
     <div class="token-legend">
       <span><span class="tl-dot" style="background:rgba(77,128,255,.5);border-color:rgba(77,128,255,.6)"></span> Used in the classification</span>
-      <span><span class="tl-dot" style="background:var(--muted);opacity:.6"></span> Stop word — filtered out (too common)</span>
-      <span><span class="tl-dot" style="background:var(--gold);opacity:.7"></span> Too short — filtered out (≤2 characters)</span>
+      <span><span class="tl-dot" style="background:var(--muted);opacity:.6"></span> Stop word: filtered out (too common)</span>
+      <span><span class="tl-dot" style="background:var(--gold);opacity:.7"></span> Too short: filtered out (≤2 characters)</span>
     </div>
     <p class="token-modal-note">
-      Note: no lemmatization is performed — "winning" and "winner" are counted as different words.
+      Note that no lemmatization is performed, so "winning" and "winner" are counted as different words.
       Real systems often reduce words to their root form to improve accuracy.
     </p>
   </div>
@@ -804,7 +818,7 @@ const GLOSSARY = {
   'ordforrad':    { term:'Vocabulary (|V|)', def:'The number of unique words the model has seen across all training data. Written |V| and used in the denominator for Laplace smoothing.',
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V5a2 2 0 012-2h13v18H6a2 2 0 01-2-2zM19 17H6a2 2 0 00-2 2"/></svg>',
     illus:'<svg viewBox="0 0 140 70"><rect x="30" y="12" width="80" height="46" rx="8" fill="none" stroke="#7aa2ff" stroke-width="1.4" stroke-dasharray="4 3"/><g font-family="JetBrains Mono, monospace" font-size="7.5" fill="#c2cde6"><text x="48" y="28">win</text><text x="80" y="28">prize</text><text x="44" y="42">free</text><text x="84" y="42">meeting</text><text x="52" y="54">account</text></g><text x="20" y="40" font-family="JetBrains Mono, monospace" font-size="12" fill="#ffce54" font-weight="700">|V|</text></svg>' },
-  'laplace':      { term:'Laplace smoothing', def:'Adding 1 to the numerator and |V| to the denominator for every word probability. Without it, a word that never occurred in a class would get probability zero — and since all word probabilities are multiplied together, a single unknown word would drag the whole product to zero. With +1, even unseen words get a small probability greater than zero.',
+  'laplace':      { term:'Laplace smoothing', def:'Adding 1 to the numerator and |V| to the denominator for every word probability. Without it, a word that never occurred in a class would get probability zero. Since all word probabilities are multiplied together, a single unknown word would drag the whole product to zero. With +1, even unseen words get a small probability greater than zero.',
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/><circle cx="12" cy="12" r="9.5" stroke-dasharray="2 3"/></svg>',
     illus:'<svg viewBox="0 0 140 70"><line x1="14" y1="54" x2="126" y2="54" stroke="rgba(255,255,255,.12)"/><rect x="24" y="26" width="18" height="28" rx="3" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="1.2"/><rect x="52" y="36" width="18" height="18" rx="3" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="1.2"/><rect x="80" y="50" width="18" height="4" rx="2" fill="rgba(255,206,84,.4)" stroke="#ffce54" stroke-width="1.2"/><text x="89" y="44" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#ffce54" font-weight="700">+1</text><text x="89" y="65" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6.5" fill="#8791b3">never seen</text></svg>' },
   'sannolikhet':  { term:'Word probability P(word | class)', def:'How likely a word is in a given class, calculated from how often the word occurred in that class\'s training data.',
@@ -813,7 +827,7 @@ const GLOSSARY = {
   'normalisera':  { term:'Normalize', def:'Rescaling numbers so they become comparable. Here, each class\'s product is divided by the sum of all classes\' products, so the answers become percentages that add up to 100%.',
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16M9 4l-3 16M18 4l-3 16"/></svg>',
     illus:'<svg viewBox="0 0 140 70"><rect x="20" y="28" width="63" height="14" rx="4" fill="rgba(255,106,94,.3)" stroke="#ff6a5e" stroke-width="1.2"/><rect x="83" y="28" width="37" height="14" rx="4" fill="rgba(52,211,153,.25)" stroke="#34d399" stroke-width="1.2"/><text x="51" y="22" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#ff6a5e" font-weight="700">63%</text><text x="101" y="22" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#34d399" font-weight="700">37%</text><text x="70" y="58" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#8791b3">sum = 100%</text></svg>' },
-  'evidens':      { term:'P(text) – the evidence', def:'The probability of seeing the text at all. It is the same for every class and doesn\'t need to be calculated separately: it\'s exactly the sum in the denominator when we normalize.',
+  'evidens':      { term:'The evidence P(text)', def:'The probability of seeing the text at all. It is the same for every class and doesn\'t need to be calculated separately: it\'s exactly the sum in the denominator when we normalize.',
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M7 7h10M9 17h6"/></svg>',
     illus:'<svg viewBox="0 0 140 70"><text x="70" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#c2cde6" font-weight="700">P(spam)·P(text|spam)</text><line x1="24" y1="35" x2="116" y2="35" stroke="#7aa2ff" stroke-width="1.5"/><text x="70" y="52" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#ffce54" font-weight="700">sum over all classes</text></svg>' },
 };
@@ -1103,7 +1117,7 @@ function renderTugList() {
         </div>
         <div class="tug-verdict">The word is ${spam
           ? `<strong style="color:var(--spam)">${(x.pS/x.pH).toFixed(1)}× more common</strong> in spam`
-          : `<strong style="color:var(--ham)">${(x.pH/x.pS).toFixed(1)}× more common</strong> in not spam`} — that's why it leans ${spam ? 'right' : 'left'}.</div>
+          : `<strong style="color:var(--ham)">${(x.pH/x.pS).toFixed(1)}× more common</strong> in not spam`}, which is why it leans ${spam ? 'right' : 'left'}.</div>
       </div>
     </details>`;
   }).join('');
@@ -1118,7 +1132,6 @@ function renderTugList() {
       ? `<span style="font-size:11px;color:var(--muted)">All ${words.length} words are shown. Words closest to the middle say the least about the class.</span>`
       : '';
   }
-  renderMath(document.getElementById('tug-list'));
 }
 
 
@@ -1151,7 +1164,7 @@ function classify() {
 
   const confPct = conf * 100;
   const confColor = confPct >= 85 ? colorOf(pred) : confPct >= 65 ? '#fbbf24' : '#94a3b8';
-  const confText = confPct >= 85 ? 'Very confident' : confPct >= 65 ? 'Fairly confident — but with some uncertainty' : 'Uncertain — the text resembles both classes';
+  const confText = confPct >= 85 ? 'Very confident' : confPct >= 65 ? 'Fairly confident, but with some uncertainty' : 'Uncertain, the text resembles both classes';
   const confNote = confPct >= 85 ? 'The probability distribution is clearly one-sided.'
                  : confPct >= 65 ? 'The model leans one way, but the words give mixed signals.'
                  : 'The words in the text occur about equally often in both classes. More training data or clearer words would help.';
@@ -1163,7 +1176,7 @@ function classify() {
     <div class="confidence-zones">
       <span>0%</span><span>Uncertain &lt;65%</span><span>Fairly confident &lt;85%</span><span>Very confident ≥85%</span><span>100%</span>
     </div>
-    <div class="confidence-verdict" style="color:${confColor}">${confPct.toFixed(1)}% — ${confText}</div>
+    <div class="confidence-verdict" style="color:${confColor}">${confPct.toFixed(1)} % · ${confText}</div>
     <div style="font-size:12px;color:var(--subtle);margin-top:4px">${confNote}</div>`;
 
 
@@ -1187,9 +1200,9 @@ function classify() {
     </p>
     ${tex(`P(\\text{class} \\mid \\text{text}) = \\frac{\\textcolor{#ffd866}{P(\\text{class})}\\;\\textcolor{#6698ff}{P(\\text{text} \\mid \\text{class})}}{\\textcolor{#9aa6c4}{P(\\text{text})}}`, true)}
     <div class="fp-legend" style="margin-top:14px">
-      <div><span class="fp-dot" style="background:#ffd866"></span> <strong style="color:#ffd866">P(class)</strong> — ${term('prior','how common the class is')}. <em>We calculate this in step 1.</em></div>
-      <div><span class="fp-dot" style="background:#6698ff"></span> <strong style="color:#6698ff">P(text | class)</strong> — the probabilities of all the words. <em>We calculate this in step 2.</em></div>
-      <div><span class="fp-dot" style="background:#9aa6c4"></span> <strong style="color:#9aa6c4">${term('evidens','P(text)')}</strong> — the same for both classes, so we ${term('normalisera','normalize')} it away. <em>This happens in step 3.</em></div>
+      <div><span class="fp-dot" style="background:#ffd866"></span> <strong style="color:#ffd866">P(class)</strong>: ${term('prior','how common the class is')}. <em>We calculate this in step 1.</em></div>
+      <div><span class="fp-dot" style="background:#6698ff"></span> <strong style="color:#6698ff">P(text | class)</strong>: the probabilities of all the words. <em>We calculate this in step 2.</em></div>
+      <div><span class="fp-dot" style="background:#9aa6c4"></span> <strong style="color:#9aa6c4">${term('evidens','P(text)')}</strong>: the same for both classes, so we ${term('normalisera','normalize')} it away. <em>This happens in step 3.</em></div>
     </div>
   </div>`;
 
@@ -1199,7 +1212,7 @@ function classify() {
   <details class="step-card" open>
     <summary><span class="step-badge">Step 1</span><span class="step-title">Calculate how common the classes are</span><span class="step-expand">▸</span></summary>
     <div class="step-body">
-      <p class="step-formula-link">Here we calculate <strong style="color:#ffd866">P(class)</strong> — the yellow part of Bayes' theorem.</p>
+      <p class="step-formula-link">Here we calculate <strong style="color:#ffd866">P(class)</strong>, that is, the yellow part of Bayes' theorem.</p>
       <p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.6">
         Before the model has seen a single word, it already knows how common the classes are in the training data. That's called <span class="term" data-term="prior" tabindex="0" role="button"><strong style="color:var(--text)">prior probability</strong></span>.
       </p>
@@ -1279,7 +1292,7 @@ if (tokens.length === 0) {
     <details class="step-card">
       <summary><span class="step-badge">Step 2</span><span class="step-title">Calculate the probabilities word by word</span><span class="step-expand">▸</span></summary>
       <div class="step-body">
-        <p class="step-formula-link">Here we calculate <strong style="color:#6698ff">P(text | class)</strong> — the blue part of Bayes' theorem.</p>
+        <p class="step-formula-link">Here we calculate <strong style="color:#6698ff">P(text | class)</strong>, that is, the blue part of Bayes' theorem.</p>
         <p class="journey-lead">Every word has a probability in each class. It's calculated like this:</p>
         <div class="gen-formula">
           ${tex(`P(\\text{word} \\mid \\text{class}) = \\frac{\\text{count in class} + 1}{\\text{total words in class} + |V|}`, true)}
@@ -1313,7 +1326,6 @@ if (tokens.length === 0) {
 
   document.getElementById('math-breakdown').innerHTML = html;
   document.getElementById('classify-result').style.display = 'block';
-  renderMath(document.getElementById('math-breakdown'));
 }
 
 
@@ -1324,7 +1336,7 @@ function buildFullCalc(m, steps, tokens) {
 
   let html = `
     <p style="font-size:12px;color:var(--subtle);line-height:1.7;margin:0 0 14px">
-      We calculate the numerator <strong style="color:#ffd866">prior</strong> × <strong style="color:#6698ff">word probabilities</strong> for each class — i.e. the yellow and blue parts of Bayes' theorem above.
+      We calculate the numerator <strong style="color:#ffd866">prior</strong> × <strong style="color:#6698ff">word probabilities</strong> for each class, that is, the yellow and blue parts of Bayes' theorem above.
     </p>
     <div class="calc-flow"><div class="calc-cards">`;
 
@@ -1377,7 +1389,7 @@ function buildFullCalc(m, steps, tokens) {
     <div class="calc-final">
       <div class="calc-final-label">Final step · convert to percent</div>
       <div class="calc-final-note">
-        The products above are tiny numbers that are hard to compare. So we divide each class's number by <strong>the sum of both</strong> — then the answers become percentages that add up to 100%.
+        The products above are tiny numbers that are hard to compare. So we divide each class's number by <strong>the sum of both</strong>. The answers then become percentages that add up to 100 %.
       </div>
       <div class="calc-result-grid">
         ${productsPerClass.map(x => {
@@ -1479,7 +1491,7 @@ function goToModelTab() {
 }
 
 
-/* ── Training animation: shows how Naïve Bayes is actually trained — by COUNTING, in a single pass ── */
+/* ── Training animation: shows how Naïve Bayes is trained by counting, in a single pass ── */
 const NB_STATUS = [
   { t: 'Reading through the emails…', at: 0    },
   { t: 'Counting words per class…',  at: 0.4  },
@@ -2023,12 +2035,12 @@ function updateRatioLabel() {
   document.getElementById('ratio-bar-spam').style.width  = r + '%';
   document.getElementById('ratio-bar-ham').style.width   = hamR + '%';
   const note = r === 50
-    ? 'Even split — the prior probability P(class) barely affects the classification.'
+    ? 'Even split. The prior probability P(class) barely affects the classification.'
     : r >= 70
-      ? `${r}% spam — the model gets a high prior P(Spam) = ${(r/100).toFixed(2)} and already leans toward spam before it has seen a single word. Borderline texts get classified as spam more often.`
+      ? `${r}% spam. The model gets a high prior P(Spam) = ${(r/100).toFixed(2)} and already leans toward spam before it has seen a single word. Borderline texts get classified as spam more often.`
       : r <= 30
-        ? `Only ${r}% spam — a low prior P(Spam) = ${(r/100).toFixed(2)} makes the model "lenient". It needs strong spam signals to classify something as spam.`
-        : `${r}% spam — a slightly skewed split. The prior weighs a bit more toward ${r > 50 ? 'spam' : 'not spam'}.`;
+        ? `Only ${r}% spam. A low prior P(Spam) = ${(r/100).toFixed(2)} makes the model "lenient". It needs strong spam signals to classify something as spam.`
+        : `${r}% spam, a slightly skewed split. The prior weighs a bit more toward ${r > 50 ? 'spam' : 'not spam'}.`;
   document.getElementById('ratio-note').textContent = note;
 }
 
@@ -2103,4 +2115,3 @@ refresh();
 </script>
 </body>
 </html>
-  
