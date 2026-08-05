@@ -74,6 +74,8 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 
 .icon-link{position:absolute;top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:7px;font-size:.74em;font-weight:600;color:var(--dim);text-decoration:none;padding:8px 13px;border-radius:999px;transition:.25s var(--ease-out);white-space:nowrap;z-index:2;}
 .icon-link svg{width:14px;height:14px;flex-shrink:0;}
+.icon-link .flag{width:18px;height:13px;display:block;border-radius:2.5px;box-shadow:0 0 0 1px rgba(255,255,255,.12);}
+
 .icon-link:hover{color:var(--text);background:rgba(255,255,255,.06);}
 .back-link{left:20px;}
 .lang-link{right:20px;}
@@ -95,7 +97,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .score-line .dot{color:rgba(135,145,175,.4);margin:0 3px;}
 .score-line .flame{display:inline-flex;vertical-align:-2px;width:11px;height:11px;color:var(--orange);margin-right:1px;}
 
-/* two-player scoreboard: big numbers, left vs right */
+/* Resultattavla för två spelare. */
 .scoreboard{display:none;align-items:stretch;justify-content:center;gap:14px;}
 .scoreboard.show{display:flex;}
 .sbd-p{flex:1;max-width:230px;border-radius:var(--r-md);padding:8px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;transition:transform .35s var(--ease-spring),box-shadow .35s;position:relative;overflow:hidden;}
@@ -114,19 +116,16 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .sbd-p.active .sbd-turn{width:100%;}
 .sbd-vs{display:flex;align-items:center;font-family:'Syne',sans-serif;font-weight:800;font-size:.8em;color:var(--dim);}
 
-/* ---------- the card ---------- */
+/* ---------- Kortet ---------- */
 .card-area{display:flex;justify-content:center;perspective:1000px;}
 .current-card{width:100%;max-width:560px;border-radius:var(--r-xl);padding:2px;position:relative;transition:transform .55s var(--ease-spring),opacity .5s;transform-style:preserve-3d;}
 .current-card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(160deg,var(--card-accent,var(--accent)) 0%,rgba(255,255,255,.08) 30%,transparent 58%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.75;pointer-events:none;z-index:3;}
-.current-card-inner{position:relative;border-radius:inherit;padding:30px 34px 26px;overflow:hidden;background:linear-gradient(160deg,color-mix(in srgb,var(--card-accent,var(--accent)) 12%,rgba(36,40,58,.80)),color-mix(in srgb,var(--card-accent,var(--accent)) 6%,rgba(22,25,38,.85)));backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);box-shadow:0 2px 3px rgba(0,0,0,.35),0 14px 28px -10px rgba(0,0,0,.55),0 34px 66px -22px rgba(0,0,0,.72),inset 0 1px 0 rgba(255,255,255,.16),inset 0 -2px 7px rgba(0,0,0,.34),0 0 54px -22px color-mix(in srgb,var(--card-accent,#4d80ff) 55%,transparent);transition:transform .45s var(--ease-out),box-shadow .45s var(--ease-out);display:flex;flex-direction:column;gap:16px;}
-.current-card-inner::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent 44%);pointer-events:none;border-radius:inherit;}
+.current-card-inner{position:relative;border-radius:inherit;padding:30px 34px 26px;overflow:hidden;background:linear-gradient(90deg,var(--card-accent,var(--accent)),transparent 62%) top left/100% 3px no-repeat,linear-gradient(160deg,color-mix(in srgb,var(--card-accent,var(--accent)) 22%,rgba(34,38,56,.86)),color-mix(in srgb,var(--card-accent,var(--accent)) 9%,rgba(20,23,36,.90)));backdrop-filter:blur(14px) saturate(125%);-webkit-backdrop-filter:blur(14px) saturate(125%);box-shadow:0 2px 3px rgba(0,0,0,.35),0 14px 28px -10px rgba(0,0,0,.55),0 34px 66px -22px rgba(0,0,0,.72),inset 0 1px 0 rgba(255,255,255,.10),inset 0 -2px 7px rgba(0,0,0,.34),0 0 60px -20px color-mix(in srgb,var(--card-accent,#4d80ff) 62%,transparent);transition:transform .45s var(--ease-out),box-shadow .45s var(--ease-out);display:flex;flex-direction:column;gap:16px;}
+.current-card-inner::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.09),transparent 40%);pointer-events:none;border-radius:inherit;}
 .current-card-inner::before{content:'';position:absolute;inset:-40%;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--card-accent,var(--accent)) 32%,transparent),transparent 60%);opacity:0;transition:opacity .4s var(--ease-out);pointer-events:none;}
-.current-card-inner:hover::before{opacity:.45;}
+.current-card-inner:hover::before{opacity:.30;}
 .current-card-inner>*{position:relative;z-index:2;}
-/* glossy light sweep, like light catching a real card */
 .current-card-inner>.card-gloss{position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:inherit;overflow:hidden;}
-.card-gloss::after{content:'';position:absolute;top:-40%;left:-55%;width:42%;height:200%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.10) 42%,rgba(255,255,255,.22) 50%,rgba(255,255,255,.10) 58%,transparent);transform:rotate(19deg);animation:cardGloss 8.5s ease-in-out infinite;}
-@keyframes cardGloss{0%{left:-55%;}42%{left:130%;}100%{left:130%;}}
 .card-title{font-family:'DM Sans',sans-serif;font-size:1.4em;font-weight:700;line-height:1.3;letter-spacing:-.01em;}
 .card-desc{font-size:.9em;font-weight:400;color:var(--dim);line-height:1.65;}
 .answer-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;width:100%;max-width:560px;margin:0 auto;}
@@ -152,14 +151,15 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .btn-place:active:not(:disabled){transform:translateY(0) scale(.97);}
 .btn-place:disabled{background:rgba(255,255,255,.05);color:var(--dim);cursor:not-allowed;box-shadow:none;}
 
-/* "visa rätt svar" button (1-player only) */
+/* Knappen "Visa rätt svar", enbart i enspelarläget. */
 .btn-reveal{background:rgba(255,255,255,.06);color:var(--dim);border:1px solid var(--glass-border);flex:0 0 auto;padding:8px 13px;font-size:.72em;font-weight:600;border-radius:999px;}
 .btn-reveal:hover:not(:disabled){background:rgba(255,255,255,.12);transform:translateY(-2px);}
 .btn-reveal:active:not(:disabled){transform:translateY(0) scale(.97);}
 .btn-reveal:disabled{opacity:.4;cursor:not-allowed;}
 
-/* ---------- card back (correct answer) ---------- */
+/* ---------- Kortets baksida med facit ---------- */
 .card-back{position:absolute;inset:0;z-index:6;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;border-radius:inherit;padding:26px;text-align:center;background:linear-gradient(160deg,color-mix(in srgb,var(--card-accent,var(--accent2)) 10%,rgba(30,33,48,.985)),color-mix(in srgb,var(--card-accent,var(--accent2)) 5%,rgba(15,17,27,.99)));box-shadow:inset 0 1px 0 rgba(255,255,255,.06);}
+.card-back .cb-era{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.62em;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:3px 11px;border:1px solid currentColor;border-radius:999px;opacity:.9;color:var(--card-accent,var(--accent2));}
 .card-back .cb-label{font-family:'Syne',sans-serif;font-size:.7em;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--dim);}
 .card-back .cb-year{font-family:'JetBrains Mono',monospace;font-size:3em;font-weight:700;line-height:1;letter-spacing:.02em;color:var(--card-accent,var(--accent2));text-shadow:0 0 26px color-mix(in srgb,var(--card-accent,var(--accent2)) 45%,transparent);}
 .card-back .cb-title{font-size:.82em;font-weight:500;color:var(--subtle);max-width:80%;line-height:1.4;}
@@ -173,7 +173,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 @media(hover:none),(pointer:coarse){.card-area{perspective:1100px;}.current-card{transform-style:preserve-3d;}.current-card-inner{animation:cardIdle 8s ease-in-out infinite;}}
 @keyframes cardIdle{0%{transform:rotateX(0) rotateY(0) translateY(0);}22%{transform:rotateX(2.2deg) rotateY(-3.4deg) translateY(-3px);}48%{transform:rotateX(-1.2deg) rotateY(3.4deg) translateY(-1px);}72%{transform:rotateX(1.8deg) rotateY(1.4deg) translateY(-3px);}100%{transform:rotateX(0) rotateY(0) translateY(0);}}
 
-/* diagonal stamp across the card */
+/* Diagonal stämpel över kortet. */
 .card-stamp{position:absolute;top:50%;left:50%;z-index:10;pointer-events:none;font-family:'Syne',sans-serif;font-weight:800;font-size:2.6em;letter-spacing:.06em;padding:6px 26px;border:3px solid currentColor;border-radius:12px;opacity:0;transform:translate(-50%,-50%) rotate(-14deg) scale(1.5);text-transform:uppercase;white-space:nowrap;text-shadow:0 2px 14px rgba(0,0,0,.35);box-shadow:0 6px 28px -6px rgba(0,0,0,.4);background:rgba(10,13,24,.35);backdrop-filter:blur(2px);}
 .card-stamp.show{animation:stampIn 1.15s var(--ease-out) forwards;}
 @keyframes stampIn{0%{opacity:0;transform:translate(-50%,-50%) rotate(-14deg) scale(1.6);}18%{opacity:1;transform:translate(-50%,-50%) rotate(-14deg) scale(.94);}30%{transform:translate(-50%,-50%) rotate(-14deg) scale(1);}80%{opacity:1;transform:translate(-50%,-50%) rotate(-14deg) scale(1);}100%{opacity:0;transform:translate(-50%,-50%) rotate(-14deg) scale(1.04);}}
@@ -196,7 +196,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .reject-mark svg{width:26px;height:26px;}
 .reject-mark .rm-label{font-size:.68em;font-weight:700;letter-spacing:.04em;margin-top:2px;}
 
-/* ---------- popups ---------- */
+/* ---------- Popup-rutor ---------- */
 .turn-popup{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(4,5,10,.72);backdrop-filter:blur(10px);}
 .turn-popup.show{display:flex;}
 .tp-card{text-align:center;animation:popIn .45s var(--ease-spring);padding:40px 54px;border-radius:var(--r-xl);min-width:280px;}
@@ -212,7 +212,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .tp-btn:hover{transform:translateY(-2px);}
 @keyframes popIn{from{opacity:0;transform:scale(.72) translateY(18px);}to{opacity:1;transform:none;}}
 
-/* ---------- timeline: the co-hero / the game board ---------- */
+/* ---------- Tidslinjen, spelplanen ---------- */
 .tl-section{flex:1.9;display:flex;flex-direction:column;padding-top:2px;min-height:0;width:100%;}
 .tl-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
 .tl-label{font-family:'Syne',sans-serif;font-size:.68em;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--subtle);}
@@ -282,7 +282,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .tl-band.winter-span{height:6px;opacity:.5;background:linear-gradient(90deg,rgba(239,91,107,.35),var(--red),rgba(239,91,107,.35));box-shadow:0 0 14px rgba(239,91,107,.4);animation:winterSpanIn .55s var(--ease-out);}
 @keyframes winterSpanIn{from{transform:translateY(-50%) scaleX(.2);opacity:0;}to{transform:translateY(-50%) scaleX(1);opacity:.5;}}
 
-/* ---------- placed-card detail popup ---------- */
+/* ---------- Detaljruta för placerat kort ---------- */
 .card-detail{padding:22px;}
 .cd-card{text-align:center;padding:30px 32px 26px;border-radius:var(--r-xl);max-width:440px;width:100%;position:relative;background:linear-gradient(160deg,color-mix(in srgb,var(--card-accent,var(--accent)) 12%,rgba(36,40,58,.80)),color-mix(in srgb,var(--card-accent,var(--accent)) 6%,rgba(22,25,38,.85)));box-shadow:var(--glass-shadow),0 0 54px -22px color-mix(in srgb,var(--card-accent,#4d80ff) 55%,transparent);animation:popIn .4s var(--ease-spring);}
 .cd-era{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.62em;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:3px 11px;border:1px solid currentColor;border-radius:999px;opacity:.9;margin-bottom:12px;}
@@ -294,7 +294,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .cd-ok{background:rgba(255,255,255,.08);color:var(--text);border:1px solid var(--glass-border);}
 .cd-ok:hover{background:rgba(255,255,255,.15);transform:translateY(-2px);}
 
-/* ---------- overlays / onboarding & end ---------- */
+/* ---------- Introruta och slutruta ---------- */
 .overlay{position:fixed;inset:0;background:rgba(3,4,9,.8);backdrop-filter:blur(14px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;}
 .overlay.show{display:flex;}
 .overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:32px 36px;max-width:540px;width:100%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:popIn .5s var(--ease-spring);}
@@ -303,7 +303,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .steps{display:flex;flex-direction:column;gap:13px;margin:20px 0;text-align:left;}
 .step{display:flex;gap:12px;align-items:flex-start;font-size:.84em;font-weight:400;color:var(--dim);line-height:1.65;}
 .step strong{color:var(--text);font-weight:600;}
-/* Numrerade steg, samma bricka som i övriga labbar. */
+/* Numrerade steg. */
 .step-num{width:24px;height:24px;flex-shrink:0;display:grid;place-items:center;
   border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
   background:rgba(34,211,238,.12);color:#22d3ee;border:1px solid rgba(34,211,238,.25);}
@@ -383,7 +383,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
   <a class="icon-link back-link" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> AI-aktiviteter</a>
   <h1>AI-tidslinjen – <span class="grad-text">När då då?</span></h1>
   <p>Placera historiska AI-händelser på tidslinjen. Hur väl känner du till AI:s historia?</p>
-  <a class="icon-link lang-link" href="https://www.ai-aktiviteter.se/tidslinjen_ENG"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9z"/></svg> English</a>
+  <a class="icon-link lang-link" href="https://www.ai-aktiviteter.se/tidslinjen_ENG"><svg class="flag" width="18" height="13" viewBox="0 0 60 40" aria-hidden="true"><clipPath id="ukflag"><rect width="60" height="40" rx="4"/></clipPath><g clip-path="url(#ukflag)"><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#C8102E" stroke-width="4"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="13"/><path d="M30 0v40M0 20h60" stroke="#C8102E" stroke-width="8"/></g></svg> English</a>
 </div>
 
 <div class="game-wrap" id="gameWrap">
@@ -402,6 +402,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
         <div class="card-desc" id="cardDesc"></div>
         <div class="card-gloss"></div>
         <div class="card-back" id="cardBack">
+          <div class="cb-era" id="cardBackEra"></div>
           <div class="cb-label">Rätt svar</div>
           <div class="cb-year" id="cardBackYear"></div>
           <div class="cb-title" id="cardBackTitle"></div>
@@ -434,9 +435,9 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
     <h2>AI-tidslinjen – <span class="grad-text">När då då?</span></h2>
     <p class="sub">Placera händelserna ur AI:s historia på rätt plats i tidslinjen.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Läs kortet</strong> – varje kort beskriver en händelse. Gissa vilket år den inträffade.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Samla poäng</strong> – rätt årtal ger 3 poäng, rätt decennium 2 poäng och rätt ordning 1 poäng.</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Streak</strong> – tre eller fler perfekta svar i rad ger bonuspoäng.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Läs kortet.</strong> Varje kort beskriver en händelse. Gissa vilket år den inträffade.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Samla poäng.</strong> Rätt årtal ger 3 poäng, rätt decennium 2 poäng och rätt ordning 1 poäng.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Flera rätt i rad.</strong> Tre eller fler perfekta svar i följd ger bonuspoäng.</div></div>
     </div>
     <div class="mode-btns">
       <button class="mode-btn" onclick="startGame(1)"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M9 4a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 4.5 10 2.5 2.5 0 0 0 6 14.3V16a3 3 0 0 0 3 3M15 4a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 19.5 10 2.5 2.5 0 0 1 18 14.3V16a3 3 0 0 1-3 3M9 4v15M15 4v15"/></svg></span><span class="mt">1 spelare<small>Träna på egen hand</small></span></button>
@@ -451,24 +452,24 @@ const EVENTS=[
   {id:1,year:1950,title:"Turingtestet föreslås",desc:"Alan Turing publicerar artikeln \"Can Machines Think?\" och föreslår ett test för att avgöra om en maskin kan uppfattas som intelligent.",era:"Symbolisk AI"},
   {id:2,year:1955,title:"Logic Theorist utvecklas",desc:"Ett av de första AI-programmen. Det kan bevisa matematiska satser inom logik och visar att datorer kan utföra resonemang.",era:"Symbolisk AI"},
   {id:3,year:1956,title:"Dartmouthkonferensen",desc:"Forskare samlas på Dartmouth College och myntar begreppet \"artificiell intelligens\". AI blir ett forskningsfält.",era:"Symbolisk AI"},
-  {id:4,year:1958,title:"Perceptronen presenteras",desc:"En tidig modell inspirerad av hjärnans nervceller som kan lära sig känna igen enkla mönster – föregångaren till dagens neurala nätverk.",era:"Symbolisk AI"},
-  {id:5,year:1965,title:"DENDRAL – AI inom kemi",desc:"Ett av de första expertsystemen. Det analyserar kemiska ämnens struktur med hjälp av masspektrometri-data.",era:"Symbolisk AI"},
-  {id:6,year:1966,title:"ELIZA – första chatboten",desc:"ELIZA simulerar en terapeut genom att omformulera användarens påståenden till frågor och skapar en illusion av samtal.",era:"Symbolisk AI"},
-  {id:7,year:1973,title:"Lighthill-rapporten",desc:"En brittisk rapport kritiserar AI-forskningen hårt. Finansieringen minskar dramatiskt och den första AI-vintern inleds.",era:"AI-vinter"},
-  {id:8,year:1976,title:"MYCIN – medicinsk AI",desc:"Expertsystemet MYCIN kan ge förslag på antibiotikabehandlingar och visar potentialen för AI inom sjukvård.",era:"Expertsystem"},
+  {id:4,year:1958,title:"Perceptronen presenteras",desc:"En tidig modell inspirerad av hjärnans nervceller som kan lära sig känna igen enkla mönster. Perceptronen är föregångaren till dagens neurala nätverk.",era:"Symbolisk AI"},
+  {id:5,year:1965,title:"DENDRAL: AI inom kemi",desc:"Ett av de första expertsystemen. Det analyserar kemiska ämnens struktur med hjälp av masspektrometri-data.",era:"Symbolisk AI"},
+  {id:6,year:1966,title:"ELIZA: den första chatboten",desc:"ELIZA simulerar en terapeut genom att omformulera användarens påståenden till frågor och skapar en illusion av samtal.",era:"Symbolisk AI"},
+  {id:7,year:1973,title:"Lighthill-rapporten",desc:"En brittisk rapport kritiserar AI-forskningen hårt. Finansieringen minskar dramatiskt och AI-vintern fördjupas.",era:"AI-vinter"},
+  {id:8,year:1976,title:"MYCIN: medicinsk AI",desc:"Expertsystemet MYCIN kan ge förslag på antibiotikabehandlingar och visar potentialen för AI inom sjukvård.",era:"Expertsystem"},
   {id:9,year:1997,title:"Deep Blue besegrar Kasparov",desc:"IBM:s schackdator besegrar världsmästaren Garry Kasparov. AI kan överträffa människor i strukturerade spelmiljöer.",era:"Genombrott"},
-  {id:10,year:2006,title:"Google Translate lanseras",desc:"Google lanserar sin översättningstjänst – ett tidigt exempel på AI-driven språkbehandling i stor skala.",era:"Genombrott"},
+  {id:10,year:2006,title:"Google Translate lanseras",desc:"Google lanserar sin översättningstjänst. Det är ett tidigt exempel på AI-driven språkbehandling i stor skala.",era:"Genombrott"},
   {id:11,year:2011,title:"Watson vinner Jeopardy",desc:"IBM:s Watson besegrar de bästa mästarna i frågesporten Jeopardy efter att ha tränats på 200 miljoner sidor text.",era:"Genombrott"},
-  {id:12,year:2012,title:"AlexNet – djupinlärning",desc:"AlexNet vinner bildigenkänningstävlingen ImageNet. Kombinationen av neurala nätverk, GPU:er och stora datamängder förändrar AI.",era:"Deep Learning"},
-  {id:13,year:2016,title:"AlphaGo besegrar Go-mästaren",desc:"Googles AlphaGo besegrar världsmästaren i Go – ett spel med fler möjliga positioner än atomer i universum.",era:"Deep Learning"},
+  {id:12,year:2012,title:"AlexNet: djupinlärningens genombrott",desc:"AlexNet vinner bildigenkänningstävlingen ImageNet. Kombinationen av neurala nätverk, GPU:er och stora datamängder förändrar AI.",era:"Deep Learning"},
+  {id:13,year:2016,title:"AlphaGo besegrar Go-mästaren",desc:"Googles AlphaGo besegrar världsmästaren i Go, ett spel med fler möjliga positioner än atomer i universum.",era:"Deep Learning"},
   {id:14,year:2018,title:"GPT-1 lanseras",desc:"OpenAI lanserar GPT-1, den första modellen i GPT-serien. Starten för en ny generation av stora språkmodeller.",era:"Deep Learning"},
   {id:15,year:2022,title:"ChatGPT släpps",desc:"ChatGPT blir fritt tillgängligt och når hundratals miljoner användare på några månader. Generativ AI exploderar.",era:"Deep Learning"},
-  {id:16,year:1966,title:"Första AI-vintern börjar",desc:"Kritiken mot AI hopar sig. Löftena har varit för stora och ALPAC-rapporten dömer ut maskinöversättning – förtroendet och forskningspengarna börjar sina.",era:"AI-vinter",winter:"1"},
+  {id:16,year:1966,title:"Första AI-vintern börjar",desc:"Kritiken mot AI hopar sig. Löftena har varit för stora och ALPAC-rapporten dömer ut maskinöversättning. Förtroendet och forskningspengarna börjar sina.",era:"AI-vinter",winter:"1"},
   {id:17,year:1980,title:"Första AI-vintern slutar",desc:"Efter år av nedskärningar vänder intresset långsamt. Nya expertsystem visar kommersiell potential och AI-forskningen tar fart igen.",era:"AI-vinter",winter:"1"},
   {id:18,year:1987,title:"Andra AI-vintern börjar",desc:"Marknaden för specialiserade Lisp-maskiner kollapsar. Expertsystemen visar sig dyra och svårskötta, och en ny nedgång för AI inleds.",era:"AI-vinter",winter:"2"},
-  {id:19,year:2010,title:"Andra AI-vintern slutar",desc:"Billigare datorkraft, stora datamängder och nya metoder inom maskininlärning tinar upp AI-vintern – strax inleds djupinlärningens era.",era:"AI-vinter",winter:"2"}
+  {id:19,year:2010,title:"Andra AI-vintern slutar",desc:"Billigare datorkraft, stora datamängder och nya metoder inom maskininlärning tinar upp AI-vintern. Strax inleds djupinlärningens era.",era:"AI-vinter",winter:"2"}
 ];
-const ERA_COL={"Symbolisk AI":"#7aa2ff","AI-vinter":"#ef5b6b","Expertsystem":"#ff9f43","Genombrott":"#34d399","Deep Learning":"#22d3ee"};
+const ERA_COL={"Symbolisk AI":"#8b7bf5","AI-vinter":"#6f8fb0","Expertsystem":"#ffab3f","Genombrott":"#34d399","Deep Learning":"#22d3ee"};
 const ERA_RANGES={};
 EVENTS.forEach(ev=>{
   const y0=ev.yearRange?ev.yearRange[0]:ev.year,y1=ev.yearRange?ev.yearRange[1]:ev.year;
@@ -533,7 +534,7 @@ function renderScoreLine(){
 
 function showCard(skipEnter){
   if(cardsPlaced>=totalCards){endGame();return;}
-  // find the next card in the deck that hasn't been correctly finished yet
+  /* Nästa kort i leken som ännu inte är färdigbesvarat. */
   let guard=0;
   while(guard<deck.length*2&&(currentIdx>=deck.length||finishedIds[deck[currentIdx].id])){
     currentIdx++;
@@ -543,7 +544,7 @@ function showCard(skipEnter){
   if(finishedIds[deck[currentIdx].id]){endGame();return;}
   const ev=deck[currentIdx],cc=document.getElementById('currentCard');
   cc.classList.remove('flying','flying-away');
-  // make sure the card is on its front side for the new card
+  /* Kortet vänds till framsidan inför nästa kort. */
   cardFlipped=false;flipBusy=false;
   cc.style.transform='';cc.style.transition='';
   document.getElementById('cardBack').style.display='none';
@@ -583,7 +584,7 @@ function submitGuess(){
     else if(orderCorrect&&placed.length>0){base=1;level='order';}
   }
 
-  // stamp reflects ACTUAL accuracy, independent of order points:
+  /* Stämpeln visar hur nära gissningen låg, oberoende av ordningspoängen: */
   //   Rätt  = exact year, or inside the period for range-cards
   //   Nära  = within same decade, OR within +-5 years of the year/period
   //   Fel   = anything further off (even if an order point was still earned)
@@ -604,13 +605,13 @@ function submitGuess(){
   resolveCard(ev,guess,base,level,stampType,stampText);
 }
 
-// "Visa rätt svar" always resolves the card for 0 points, placed on the timeline
-// marked as revealed – it can no longer be guessed for points afterwards.
+/* "Visa rätt svar" avslutar alltid kortet med 0 poäng och placerar det på tidslinjen.
+   Kortet markeras som visat och kan därefter inte ge poäng. */
 function confirmReveal(){
   if(flipBusy||!cardFlipped||busy)return;
   const ev=deck[currentIdx];
   const cc=document.getElementById('currentCard'),inner=document.getElementById('currentCardInner');
-  // instantly clear the flip state; the fly-away/landing animation takes over from here
+  /* Vändningstillståndet nollställs. Flyg- och landningsanimationen tar över härifrån. */
   document.getElementById('cardBack').style.display='none';
   inner.classList.remove('showing-back');
   cc.style.transition='';cc.style.transform='';
@@ -618,8 +619,8 @@ function confirmReveal(){
   resolveCard(ev,ev.year,0,'revealed','revealed','Visat');
 }
 
-// Shared tail: every attempt (guessed or revealed) lands on the timeline immediately, at the
-// event's TRUE year – never at the guess – color-coded by how well it was answered.
+/* Varje försök, gissat eller visat, landar direkt på tidslinjen vid händelsens
+   verkliga årtal, inte vid gissningen, färgat efter hur nära svaret låg. */
 function resolveCard(ev,guess,base,level,stampType,stampText){
   busy=true;
   let bonus=0;
@@ -647,7 +648,7 @@ function resolveCard(ev,guess,base,level,stampType,stampText){
   },3500);
   const cc=document.getElementById('currentCard');
 
-  // show the stamp first, then fly
+  /* Stämpeln visas först, därefter flyger kortet. */
   showStamp(stampType,stampText);
 
   setTimeout(()=>{
@@ -703,9 +704,9 @@ function flipCard(toBack){
   const inp=document.getElementById('yearInput');
   const placeBtn=document.getElementById('placeBtn');
   const revBtn=document.getElementById('revealBtn');
-  // lock the input controls for the duration of the flip
+  /* Inmatningen låses medan kortet vänds. */
   inp.disabled=true;placeBtn.disabled=true;revBtn.disabled=true;
-  // reset any hover-tilt on the inner face so the flip stays clean
+  /* Lutningen från muspekaren nollställs inför vändningen. */
   inner.style.transform='';
   cc.style.transition='transform .26s ease-in';
   cc.style.transform='perspective(1100px) rotateY(90deg)';
@@ -713,6 +714,7 @@ function flipCard(toBack){
     if(toBack){
       const ev=deck[currentIdx];
       document.getElementById('cardBackYear').textContent=ev.yearRange?ev.yearRange[0]+'–'+ev.yearRange[1]:ev.year;
+      document.getElementById('cardBackEra').textContent=ev.era;
       document.getElementById('cardBackTitle').textContent=ev.title;
       document.getElementById('cardBack').style.display='flex';
       inner.classList.add('showing-back');
@@ -720,7 +722,7 @@ function flipCard(toBack){
       document.getElementById('cardBack').style.display='none';
       inner.classList.remove('showing-back');
     }
-    // jump to the far edge, then swing back to face the viewer
+    /* Kortet hoppar till motsatt kant och svänger sedan tillbaka mot betraktaren. */
     cc.style.transform='perspective(1100px) rotateY(-90deg)';
     void cc.offsetWidth;
     cc.style.transition='transform .26s ease-out';
@@ -730,7 +732,7 @@ function flipCard(toBack){
       cardFlipped=toBack;
       flipBusy=false;
       if(!toBack){
-        // back to normal: let the player type again as usual
+        /* Spelaren kan skriva igen. */
         inp.disabled=false;placeBtn.disabled=false;revBtn.disabled=false;
         if(!isTouch)inp.focus();
       }
@@ -816,8 +818,8 @@ function renderTimeline(){
   const sorted=[...placed].sort((a,b)=>a.year-b.year);
   const lastId=lastPlacedId;
 
-  // AI-winter spans: once BOTH the start- and end-card of a winter are placed,
-  // draw a band that connects them across the timeline.
+  /* När både start- och slutkortet för en AI-vinter är placerade ritas ett band
+     som förbinder dem över tidslinjen. */
   const winterGroups={};
   placed.forEach(p=>{if(p.winter){(winterGroups[p.winter]=winterGroups[p.winter]||[]).push(p);}});
   Object.values(winterGroups).forEach(arr=>{
@@ -857,7 +859,7 @@ function renderTimeline(){
     inner.appendChild(card);
   }
 
-  // on mobile the timeline scrolls horizontally – bring the newest card into view
+  /* På mobil rullar tidslinjen i sidled, så det nyaste kortet förs in i bild. */
   if(isTouch&&lastId!=null){
     requestAnimationFrame(()=>{
       const w=document.getElementById('tlWrap');
@@ -904,11 +906,11 @@ function endGame(){
     else if(pct>=70)comment='Imponerande!';
     else if(pct>=50)comment='Bra grund! Läs kapitlet och testa igen.';
     else comment='Dags att läsa på!';
-    ec.innerHTML='<h2>Spelet slut!</h2><div class="big-score">'+scores[0]+' / '+maxP+'</div><div class="end-sub">'+comment+'</div><div class="end-stats"><div class="es glass-soft"><div class="ev" style="color:var(--gold)">'+perfects[0]+'</div><div class="el">Perfekta</div></div><div class="es glass-soft"><div class="ev" style="color:var(--orange)">'+maxStreaks[0]+'</div><div class="el">Bästa streak</div></div><div class="es glass-soft"><div class="ev" style="color:var(--accent2)">'+totalCards+'</div><div class="el">Kort</div></div></div>'+replayBtn;
+    ec.innerHTML='<h2>Spelet slut!</h2><div class="big-score">'+scores[0]+' / '+maxP+'</div><div class="end-sub">'+comment+'</div><div class="end-stats"><div class="es glass-soft"><div class="ev" style="color:var(--gold)">'+perfects[0]+'</div><div class="el">Perfekta</div></div><div class="es glass-soft"><div class="ev" style="color:var(--orange)">'+maxStreaks[0]+'</div><div class="el">Längsta rad</div></div><div class="es glass-soft"><div class="ev" style="color:var(--accent2)">'+totalCards+'</div><div class="el">Kort</div></div></div>'+replayBtn;
   }else{
     const w=scores[0]>scores[1]?0:scores[1]>scores[0]?1:-1;
     let title='Oavgjort!';if(w===0)title='Spelare 1 vinner!';if(w===1)title='Spelare 2 vinner!';
-    ec.innerHTML='<h2>'+title+'</h2><div class="p-scores"><div class="ps glass-soft '+(w===0?'w':'')+'"><div class="pn" style="color:var(--accent2)">Spelare 1</div><div class="psc" style="color:var(--accent2)">'+scores[0]+'</div></div><div class="ps glass-soft '+(w===1?'w':'')+'"><div class="pn" style="color:var(--orange)">Spelare 2</div><div class="psc" style="color:var(--orange)">'+scores[1]+'</div></div></div><div class="end-stats"><div class="es glass-soft"><div class="ev" style="color:var(--gold)">'+perfects[0]+' / '+perfects[1]+'</div><div class="el">Perfekta</div></div><div class="es glass-soft"><div class="ev" style="color:var(--orange)">'+maxStreaks[0]+' / '+maxStreaks[1]+'</div><div class="el">Bästa streak</div></div></div>'+replayBtn;
+    ec.innerHTML='<h2>'+title+'</h2><div class="p-scores"><div class="ps glass-soft '+(w===0?'w':'')+'"><div class="pn" style="color:var(--accent2)">Spelare 1</div><div class="psc" style="color:var(--accent2)">'+scores[0]+'</div></div><div class="ps glass-soft '+(w===1?'w':'')+'"><div class="pn" style="color:var(--orange)">Spelare 2</div><div class="psc" style="color:var(--orange)">'+scores[1]+'</div></div></div><div class="end-stats"><div class="es glass-soft"><div class="ev" style="color:var(--gold)">'+perfects[0]+' / '+perfects[1]+'</div><div class="el">Perfekta</div></div><div class="es glass-soft"><div class="ev" style="color:var(--orange)">'+maxStreaks[0]+' / '+maxStreaks[1]+'</div><div class="el">Längsta rad</div></div></div>'+replayBtn;
   }
 }
 
