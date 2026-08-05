@@ -47,7 +47,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 button{font-family:inherit;}
 :focus-visible{outline:2px solid var(--accent2);outline-offset:2px;border-radius:8px;}
 
-/* ── Header (matchar labyrinten) ── */
+/* ── Sidhuvud ── */
 .back-link,.lang-link{position:absolute;top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:.2s;white-space:nowrap;z-index:2;}
 .back-link{left:16px;} .lang-link{right:16px;}
 .back-link:hover,.lang-link:hover{color:var(--text);border-color:var(--dim);}
@@ -73,7 +73,7 @@ label{font-size:11px;color:var(--dim);display:flex;align-items:center;gap:6px;}
 input[type="number"]{background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:4px 6px;font-family:'JetBrains Mono',monospace;font-size:12px;outline:none;}
 input[type="number"]:focus{border-color:var(--accent);}
 
-/* ── Premium-kontroller ── */
+/* ── Kontroller ── */
 .controls{margin-top:16px;width:100%;}
 .ctrl-primary{display:flex;gap:10px;align-items:stretch;margin-bottom:12px;}
 .select-wrap{position:relative;flex:1;min-width:0;}
@@ -188,7 +188,7 @@ input[type="number"]:focus{border-color:var(--accent);}
 .launch-card:hover .lc-arrow{transform:translateX(3px);color:var(--accent2);}
 .lc-arrow svg{width:15px;height:15px;display:block;}
 
-/* ── Glaskort (identiskt med labyrinten) ── */
+/* ── Glaskort ── */
 .concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
 .concept-backdrop.show{opacity:1;pointer-events:auto;}
 .concept-card{position:fixed;top:50%;left:50%;z-index:301;width:390px;max-width:90vw;
@@ -259,7 +259,12 @@ input[type="number"]:focus{border-color:var(--accent);}
 .gc-formula{background:var(--bg);border:1px solid var(--border2);border-radius:12px;padding:14px 10px;margin:16px 0 4px;overflow-x:auto;}
 .pf{font-family:'JetBrains Mono',monospace;font-size:clamp(.8rem,3.3vw,1.02rem);font-weight:600;color:var(--text);white-space:nowrap;letter-spacing:.01em;text-align:center;line-height:1.5;}
 .pf2{margin-top:3px;}
-.pf sub{font-size:.72em;}
+/* Formeln sätts i MathML och ärver formelradens typsnitt. */
+.pf math{font-family:inherit;font-size:1em;}
+.pf math mi{font-style:italic;}
+.pf math mo{font-style:normal;}
+.formula-legend math{font-family:'JetBrains Mono',monospace;font-size:.95em;}
+.formula-legend math mi{font-style:italic;}
 .pf .fa{color:#ffd866;} .pf .fr{color:#4ade80;} .pf .fg{color:#c084fc;} .pf .fm{color:#6698ff;}
 .formula-legend{display:flex;flex-direction:column;gap:8px;margin-top:16px;text-align:left;font-size:11.5px;color:var(--subtle);line-height:1.5;}
 .formula-legend .fp-dot{display:inline-block;width:9px;height:9px;border-radius:2px;vertical-align:middle;margin-right:7px;}
@@ -270,7 +275,7 @@ input[type="number"]:focus{border-color:var(--accent);}
 .maze-select:focus{border-color:var(--accent);}
 .right-wrapper{width:500px;}
 
-/* ── Intro-overlay (matchar labyrinten) ── */
+/* ── Introruta ── */
 .overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
 .overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:20px;padding:32px 36px;max-width:540px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
@@ -316,7 +321,7 @@ input[type="number"]:focus{border-color:var(--accent);}
     <span class="lang-ico" aria-hidden="true"><svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#00247d"/><path d="M0 0 60 36M60 0 0 36" stroke="#fff" stroke-width="7"/><path d="M0 0 60 36M60 0 0 36" stroke="#cf142b" stroke-width="4"/><path d="M30 0v36M0 18h60" stroke="#fff" stroke-width="12"/><path d="M30 0v36M0 18h60" stroke="#cf142b" stroke-width="7"/></svg></span>
     English</a>
   <h1><span>Q-learning</span> simulering</h1>
-  <p>Träna en agent att navigera ett rutnät med förstärkningsinlärning – se hur Q-värdena uppdateras i realtid.</p>
+  <p>Träna en agent att navigera ett rutnät med förstärkningsinlärning. Se hur Q-värdena uppdateras i realtid.</p>
 </div>
 
 <div class="page-container"><div class="main-container pre-train" id="mainContainer">
@@ -357,7 +362,7 @@ input[type="number"]:focus{border-color:var(--accent);}
 </div>
 <input type="checkbox" id="stepModeCheckbox" style="display:none;" aria-hidden="true">
 <div class="param-panel" id="paramInfo">
-<div class="param-head">Parametrar – ändra när som helst, även under träning</div>
+<div class="param-head">Parametrar, som kan ändras när som helst, även under träning</div>
 <div class="param-row"><div class="param-label"><span class="term" data-term="alpha"><span class="psym">α</span> inlärningshastighet</span></div><input type="range" id="alphaParam" min="0.01" max="1" step="0.01" value="0.50"><div class="param-val" id="alphaVal">0.50</div></div>
 <div class="param-row"><div class="param-label"><span class="term" data-term="gamma"><span class="psym">γ</span> diskonteringsfaktor</span></div><input type="range" id="gammaParam" min="0" max="0.99" step="0.01" value="0.95"><div class="param-val" id="gammaVal">0.95</div></div>
 <div class="param-row"><div class="param-label"><span class="term" data-term="epsilon"><span class="psym">ε</span> utforskningsgrad</span></div><input type="range" id="epsilonParam" min="0.01" max="1" step="0.01" value="0.90"><div class="param-val" id="epsilonVal">0.90</div></div>
@@ -366,16 +371,16 @@ input[type="number"]:focus{border-color:var(--accent);}
 <div class="em-track"><div class="em-explore" id="emExplore" style="width:90%"></div><div class="em-exploit" id="emExploit" style="width:10%"></div></div>
 <div class="em-nums"><span class="em-l"><span class="term" data-term="utforskning">Utforskning</span> <b id="emExploreNum">90%</b></span><span class="em-r"><span class="term" data-term="utnyttjande">Utnyttjande</span> <b id="emExploitNum">10%</b></span></div>
 </div>
-</div></div><div class="log-caption">Steglogg <span>– tryck på en rad för förklaring</span></div><div id="logText"></div></div>
+</div></div><div class="log-caption">Steglogg <span>· tryck på en rad för förklaring</span></div><div id="logText"></div></div>
 
 <div class="right-wrapper">
 <div class="chart-card">
-  <div class="chart-title">Inlärningskurva <span class="chart-sub">– antal steg tills målet nås per episod</span></div>
+  <div class="chart-title">Inlärningskurva <span class="chart-sub">· antal steg tills målet nås per episod</span></div>
   <canvas id="chartCanvas" width="460" height="150"></canvas>
   <div id="chartEmpty" class="chart-empty">Starta en träning så ritas kurvan: antalet steg per episod sjunker när agenten lär sig en kortare väg.</div>
 </div>
 
-<div class="launch-label">Lär dig mer – tryck för förklaring</div>
+<div class="launch-label">Lär dig mer · tryck för förklaring</div>
 <div class="info-launch">
   <button class="launch-card wide" onclick="openConcept('oversikt',event)">
     <span class="lc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a7 7 0 0 0-4 12.7V18h8v-2.3A7 7 0 0 0 12 3Z"/><path d="M9 21h6"/></svg></span>
@@ -428,9 +433,9 @@ input[type="number"]:focus{border-color:var(--accent);}
   <h2><span>Q-learning</span> simulering</h2>
   <p class="sub">En agent rör sig genom ett rutnät och ska lära sig att samla alla mynt och ta sig till målet, bara genom att testa sig fram och få belöningar och straff.</p>
   <div class="steps">
-    <div class="step"><div class="step-num">1</div><div><strong>Träna agenten</strong> – tryck <strong>Starta träning</strong>, så börjar agenten testa sig fram i rutnätet.</div></div>
-    <div class="step"><div class="step-num">2</div><div><strong>Följ Q-värdena</strong> – rutornas färg och siffror visar vad agenten hittills lärt sig om varje handling.</div></div>
-    <div class="step"><div class="step-num">3</div><div><strong>Justera parametrarna</strong> – ändra α, γ och ε och se hur det påverkar hur snabbt och stabilt agenten lär sig.</div></div>
+    <div class="step"><div class="step-num">1</div><div><strong>Träna agenten.</strong> Tryck på <strong>Starta träning</strong>, så börjar agenten testa sig fram i rutnätet.</div></div>
+    <div class="step"><div class="step-num">2</div><div><strong>Följ Q-värdena.</strong> Rutornas färg och siffror visar vad agenten hittills lärt sig om varje handling.</div></div>
+    <div class="step"><div class="step-num">3</div><div><strong>Justera parametrarna.</strong> Ändra α, γ och ε och se hur det påverkar hur snabbt och stabilt agenten lär sig.</div></div>
   </div>
   <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
 </div></div>
@@ -448,16 +453,16 @@ input[type="number"]:focus{border-color:var(--accent);}
 
 <script>
 function getCoinKeyFrom(coinsArray){let coinsCopy=coinsArray.slice();coinsCopy.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);return coinsCopy.map(c=>c[0]+"_"+c[1]).join(";");}
-/* ── Återanvändbart begreppssystem (klickbara/hovrbara begrepp) ── */
+/* ── Begreppssystem med klickbara termer ── */
 const GLOSSARY={
-'alpha':{term:'α – inlärningshastighet',def:'Hur stort steg agenten tar mot det nya värdet vid varje uppdatering. Högt α = lär sig snabbt men hoppigt; lågt α = lär sig långsamt men stabilt.'},
-'gamma':{term:'γ – diskonteringsfaktor',def:'Hur mycket framtida belöningar väger jämfört med omedelbara. Nära 1 = agenten är långsiktig och planerar; nära 0 = den bryr sig bara om belöningen just nu.'},
-'epsilon':{term:'ε – utforskningsgrad',def:'Sannolikheten att agenten väljer en slumpmässig handling i stället för den bästa kända. Hög ε = utforskar mycket; låg ε = litar på det den lärt sig. ε minskar automatiskt under träningen.'},
+'alpha':{term:'Inlärningshastigheten α',def:'Hur stort steg agenten tar mot det nya värdet vid varje uppdatering. Ett högt α gör att agenten lär sig snabbt, men värdena svänger kraftigt. Ett lågt α ger långsammare men jämnare inlärning.'},
+'gamma':{term:'Diskonteringsfaktorn γ',def:'Hur mycket framtida belöningar väger jämfört med omedelbara. Ett γ nära 1 gör agenten långsiktig, så att den planerar flera steg framåt. Ett γ nära 0 gör att bara den omedelbara belöningen räknas.'},
+'epsilon':{term:'Utforskningsgraden ε',def:'Sannolikheten att agenten väljer en slumpmässig handling i stället för den bästa kända. Ett högt ε ger mycket utforskning. Ett lågt ε gör att agenten oftast följer det den redan lärt sig. Värdet minskar automatiskt under träningen.'},
 'utforskning':{term:'Utforskning (exploration)',def:'När agenten provar slumpmässiga handlingar för att upptäcka nya vägar och belöningar den inte känner till än. Styrs av ε.'},
 'utnyttjande':{term:'Utnyttjande (exploitation)',def:'När agenten väljer den handling som hittills gett bäst Q-värde, alltså utnyttjar det den redan lärt sig.'},
 'qvarde':{term:'Q-värde',def:'Ett mått på hur bra en viss handling är i ett visst tillstånd, sett till den totala framtida belöning den väntas leda till. Q-learning går ut på att lära sig dessa värden.'},
 'policy':{term:'Policy',def:'Agentens strategi: vilken handling den väljer i varje tillstånd. När träningen är klar motsvarar policyn att alltid välja handlingen med högst Q-värde.'},
-'tillstand':{term:'Tillstånd (state, s)',def:'Den situation agenten befinner sig i — här agentens position plus vilka mynt som finns kvar.'},
+'tillstand':{term:'Tillstånd (state, s)',def:'Den situation agenten befinner sig i, alltså agentens position plus vilka mynt som finns kvar.'},
 'beloning':{term:'Belöning (reward, r)',def:'Det värde miljön ger för en handling. Mynt ger +10, att nå målet ger +10, varje steg kostar -0,1, och att nå målet utan alla mynt ger -20.'},
 'handling':{term:'Handling (action, a)',def:'Ett av de steg agenten kan ta i en ruta: upp, höger, ner eller vänster. Q-learning lär sig hur bra varje handling är i varje tillstånd.'},
 'konvergens':{term:'Konvergens',def:'När Q-värdena nästan slutar ändras mellan uppdateringarna. Då har agenten i praktiken lärt sig en stabil strategi och sägs ha "tränats klart".'},
@@ -466,7 +471,7 @@ function term(key,label){const g=GLOSSARY[key];const text=label||(g?g.term:key);
 function openTermCard(el){const g=GLOSSARY[el.dataset.term];if(!g)return;openConceptCustom(ICON_INFO,g.term,g.def,el);}
 function initGlossary(){document.addEventListener("click",e=>{const t=e.target.closest(".term");if(t){e.stopPropagation();openTermCard(t);}});document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&document.activeElement&&document.activeElement.classList.contains("term")){e.preventDefault();openTermCard(document.activeElement);}});}
 
-/* ═══════════════ Glaskort (concept cards) ═══════════════ */
+/* ═══════════════ Glaskort ═══════════════ */
 function t3(color,glyph,label,sub,cls){
   return '<div class="gc-cell"><div class="t3'+(cls?' '+cls:'')+'" style="--tc:'+color+'">'+(glyph||'')+'</div>'
     +'<span class="t3-lab">'+label+'</span>'+(sub?'<span class="t3-sub">'+sub+'</span>':'')+'</div>';
@@ -481,18 +486,17 @@ const CONCEPTS={
       +'<div class="gc-ctrl-row"><span class="mbtn">Lär</span><span>varje steg uppdaterar Q-värdet för den handling som togs.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn">Utnyttja</span><span>när ε sjunker börjar agenten '+term('utnyttjande','utnyttja')+' det den lärt sig.</span></div>'
       +'</div>'
-      +'<button class="gc-btn" onclick="closeConcept()">Nu kör vi</button>'
   },
   bellman:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h9M5 20l7-8L5 4M10 20h9"/></svg>',
     title:'Bellmanekvationen',
     def:'<div class="gc-lead">Vid varje steg uppdateras Q-värdet så att det gradvis blir en bättre uppskattning av hur bra en handling är.</div>'
-      +'<div class="gc-formula"><div class="pf">Q(s,a) ← Q(s,a) +</div><div class="pf pf2"><span class="fa">α</span>[ <span class="fr">r</span> + <span class="fg">γ</span>·<span class="fm">max</span><sub>a\'</sub><span class="fm"> Q(s\',a\')</span> − Q(s,a) ]</div></div>'
+      +'<div class="gc-formula"><div class="pf"><math><mrow><mi>Q</mi><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo><mo>&#x2190;</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo><mo>+</mo></mrow></math></div><div class="pf pf2"><math><mrow><mi class="fa">&#x3B1;</mi><mo stretchy="false">[</mo><mi class="fr">r</mi><mo>+</mo><mi class="fg">&#x3B3;</mi><mo>&#x22C5;</mo><mrow class="fm"><msub><mo movablelimits="false">max</mo><mrow><msup><mi>a</mi><mo>&#x2032;</mo></msup></mrow></msub><mi>Q</mi><mo stretchy="false">(</mo><msup><mi>s</mi><mo>&#x2032;</mo></msup><mo>,</mo><msup><mi>a</mi><mo>&#x2032;</mo></msup><mo stretchy="false">)</mo></mrow><mo>&#x2212;</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>s</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow></math></div></div>'
       +'<div class="formula-legend">'
-      +'<div><span class="fp-dot" style="background:#ffd866"></span> '+term('alpha','<strong style="color:#ffd866">α</strong>')+' – hur stort steg vi tar mot det nya värdet.</div>'
-      +'<div><span class="fp-dot" style="background:#4ade80"></span> '+term('beloning','<strong style="color:#4ade80">r</strong>')+' – belöningen agenten fick för steget.</div>'
-      +'<div><span class="fp-dot" style="background:#c084fc"></span> '+term('gamma','<strong style="color:#c084fc">γ</strong>')+' – hur mycket framtida belöningar väger.</div>'
-      +'<div><span class="fp-dot" style="background:#6698ff"></span> <strong style="color:#6698ff">max Q(s′,a′)</strong> – det högsta Q-värdet i '+term('tillstand','nästa tillstånd')+'.</div>'
+      +'<div><span class="fp-dot" style="background:#ffd866"></span> '+term('alpha','<strong style="color:#ffd866">α</strong>')+': hur stort steg vi tar mot det nya värdet.</div>'
+      +'<div><span class="fp-dot" style="background:#4ade80"></span> '+term('beloning','<strong style="color:#4ade80">r</strong>')+': belöningen agenten fick för steget.</div>'
+      +'<div><span class="fp-dot" style="background:#c084fc"></span> '+term('gamma','<strong style="color:#c084fc">γ</strong>')+': hur mycket framtida belöningar väger.</div>'
+      +'<div><span class="fp-dot" style="background:#6698ff"></span> <strong style="color:#6698ff"><math class="fm"><mrow><mo movablelimits="false">max</mo><mi>Q</mi><mo stretchy="false">(</mo><msup><mi>s</mi><mo>&#x2032;</mo></msup><mo>,</mo><msup><mi>a</mi><mo>&#x2032;</mo></msup><mo stretchy="false">)</mo></mrow></math></strong>: det högsta Q-värdet i '+term('tillstand','nästa tillstånd')+'.</div>'
       +'</div>'
       +'<div class="gc-note">I ord: agenten väger belöningen den fick mot den bästa framtida belöning den tror sig kunna få, och justerar sitt Q-värde en bit i den riktningen. Hur stor justeringen blir bestäms av <em>α</em>.</div>'
   },
@@ -509,7 +513,7 @@ const CONCEPTS={
       +'<div class="gc-ctrl">'
       +'<div class="gc-ctrl-row"><span class="mbtn pos">+10</span><span>varje '+term('beloning','mynt')+' som samlas in.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn pos">+10</span><span>att nå målet med alla mynt insamlade.</span></div>'
-      +'<div class="gc-ctrl-row"><span class="mbtn neg">−0,1</span><span>per steg – uppmuntrar kortare vägar.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn neg">−0,1</span><span>per steg, vilket uppmuntrar kortare vägar.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn neg">−20</span><span>att nå målet <em>innan</em> alla mynt tagits.</span></div>'
       +'</div>'
   },
@@ -520,8 +524,8 @@ const CONCEPTS={
       +'<div style="margin:16px 0 4px;"><div style="height:22px;border-radius:8px;border:1px solid var(--border2);box-shadow:inset 0 1px 3px rgba(0,0,0,.5);background:linear-gradient(90deg,#ec423a,#566078,#78c2ff);"></div>'
       +'<div style="display:flex;justify-content:space-between;font-size:10.5px;font-family:\'JetBrains Mono\',monospace;color:var(--dim);margin-top:6px;"><span style="color:#ff6a5e;">lågt Q</span><span style="color:#78c2ff;">högt Q</span></div></div>'
       +'<div class="gc-ctrl">'
-      +'<div class="gc-ctrl-row"><span class="mbtn">Rött</span><span>lågt Q-värde – agenten tror att rutan leder fel.</span></div>'
-      +'<div class="gc-ctrl-row"><span class="mbtn">Blått</span><span>högt Q-värde – en bra ruta att vara i.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Rött</span><span>lågt Q-värde. Agenten tror att rutan leder fel.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Blått</span><span>högt Q-värde. En bra ruta att vara i.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn">Q-värden</span><span>knappen skriver ut värdet för varje handling i rutan.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn">Hovra</span><span>håll muspekaren över en ruta för att se dess Q-värden.</span></div>'
       +'</div>'
@@ -536,12 +540,11 @@ const CONCEPTS={
       +'<div class="gc-ctrl-row"><span class="mbtn">Dra</span><span>flytta <strong>start</strong>- och <strong>målrutan</strong>.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn">α γ ε</span><span>parametrarna kan ändras när som helst i panelen under rutnätet.</span></div>'
       +'</div>'
-      +'<button class="gc-btn" onclick="closeConcept()">Stäng</button>'
   },
   klar:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
     title:'När agenten är klar',
-    def:'<div class="gc-lead">När modellen '+term('konvergens','konvergerat')+' ändras Q-värdena nästan inte längre – då har agenten en stabil strategi.</div>'
+    def:'<div class="gc-lead">När modellen '+term('konvergens','konvergerat')+' ändras Q-värdena nästan inte längre. Då har agenten en stabil strategi.</div>'
       +'<div class="gc-ctrl">'
       +'<div class="gc-ctrl-row"><span class="mbtn">Policy</span><span>visar bästa '+term('handling','handling')+' i varje ruta som en pil.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn">Testa</span><span>låter agenten gå den inlärda vägen steg för steg, utan slump.</span></div>'
@@ -623,7 +626,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
   });
 })();
 
-/* ═══════════════ Simulering (oförändrad logik) ═══════════════ */
+/* ═══════════════ Simulering ═══════════════ */
 const MAZE_PRESETS=[{name:"Standardmiljö",obstacles:[[0,8],[1,8],[2,2],[2,3],[2,4],[3,2],[3,6],[4,4],[4,5],[4,6],[4,8],[5,3],[5,4],[5,8],[6,4],[6,6],[6,8],[7,6],[7,8],[8,1],[8,6],[8,7],[8,8],[9,1]],coins:[[0,9],[3,3],[9,0],[7,7]],start:[0,0],goal:[9,9]},{name:"Ormen",obstacles:[[0,9],[1,9],[2,9],[3,9],[4,9],[5,9],[6,9],[7,9],[8,9],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7],[9,7],[0,5],[1,5],[2,5],[3,5],[4,5],[5,5],[6,5],[7,5],[8,5],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3],[7,3],[8,3],[9,3],[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1],[8,1]],coins:[[7,8],[3,4],[5,0]],start:[0,0],goal:[9,9]},{name:"Labyrinten",obstacles:[[3,9],[4,9],[5,9],[6,9],[8,9],[0,8],[1,8],[8,8],[0,7],[1,7],[3,7],[4,7],[6,7],[0,6],[1,6],[3,6],[4,6],[6,6],[7,6],[8,6],[8,5],[0,4],[1,4],[2,4],[4,4],[5,4],[6,4],[8,4],[1,3],[6,3],[8,3],[1,2],[3,2],[4,2],[8,2],[9,2],[1,1],[3,1],[4,1],[5,1],[6,1],[6,0],[7,0],[8,0]],coins:[[0,9],[9,4],[9,0]],start:[0,0],goal:[9,9]}];
 let currentPresetIndex=0;let defaultCoins=MAZE_PRESETS[0].coins.map(c=>c.slice());let customObstacles=MAZE_PRESETS[0].obstacles.map(o=>o.slice());
 const GRID_WIDTH=10;const GRID_HEIGHT=10;const CELL_SIZE=50;const COIN_REWARD=10;const EARLY_GOAL_PENALTY=-20;const VISITED_COIN_PENALTY=-2;const STEP_PENALTY=-0.1;const INITIAL_Q=5.0;const EPSILON_DECAY=0.97;const MIN_EPSILON=0.01;
@@ -663,10 +666,10 @@ resetTraining(){this.agent=new QLearningAgent(this.gridWidth,this.gridHeight,[0,
 resetEpisode(){this.state=this.startPos.slice();this.stepCount=0;this.coins=JSON.parse(JSON.stringify(this.initialCoins));}
 startTraining(){this.env.goal=this.goalPos.slice();const a=parseFloat(document.getElementById("alphaParam").value)||0.9;const g=parseFloat(document.getElementById("gammaParam").value)||0.95;const ep=parseFloat(document.getElementById("epsilonParam").value)||0.9;this.agent.alpha=a;this.agent.gamma=g;this.agent.epsilon=ep;this.mode="training";this.episode=0;this.stepCount=0;this.state=this.startPos.slice();const sv=parseInt(this.speedSlider.value);this.delay=Math.max(0,120-sv/84);this.stepsPerFrame=sv>=9000?50:sv>=7000?10:sv>=5000?3:1;this.running=true;this.testMode=false;this.paused=false;this.showPolicy=false;this.policyButton.style.display="none";this.policyButton.classList.remove("active");this.pauseButton.disabled=false;this.setPauseIcon(false);this.infoLabel.classList.remove("converged");this.stepMode=false;this.stepModeCheckbox.checked=false;this.nextStepButton.disabled=false;this.history=[];this.episodeReward=0;const mc=document.getElementById("mainContainer");if(mc)mc.classList.remove("pre-train");this.drawChart();this.updateParamInfo();this.log("Ny träning startad.");}
 runStep(){if(this.testMode)this.runTestStep();else this.runTrainingStep();}
-runTrainingStep(){if(!this.running||this.paused)return;if(this.mode!=="training"&&this.mode!=="testing")return;const ACT={0:"Upp",1:"Höger",2:"Ner",3:"Vänster"};const cs=this.getState();const fromX=this.state[0],fromY=this.state[1];const aa=this.env.getActions(this.state);const action=this.agent.chooseAction(cs,aa);const result=this.env.step(this.state,action);let nsp=result.nextState;let tr=result.reward;const ci=this.coins.findIndex(c=>c[0]===nsp[0]&&c[1]===nsp[1]);if(ci>=0){this.log("🪙 Mynt insamlat ("+nsp[0]+","+nsp[1]+") +"+COIN_REWARD,"Agenten gick in i en ruta med ett mynt och fick <strong>+"+COIN_REWARD+"</strong> i belöning.","ev-coin");tr+=COIN_REWARD;this.coins.splice(ci,1);}else{const idc=defaultCoins.some(c=>c[0]===nsp[0]&&c[1]===nsp[1]);if(idc){this.log("Återbesök tomt myntområde ("+nsp[0]+","+nsp[1]+") "+VISITED_COIN_PENALTY,"Agenten gick tillbaka till en ruta där myntet redan var taget, och fick ett litet straff på <strong>"+VISITED_COIN_PENALTY+"</strong> för att inte uppmuntra onödiga omvägar.","ev-penalty");tr+=VISITED_COIN_PENALTY;}}if(this.env.isGoal(nsp)&&this.coins.length>0){this.log("Mål nått utan alla mynt! "+EARLY_GOAL_PENALTY,"Agenten nådde målet innan alla mynt var insamlade och fick straffet <strong>"+EARLY_GOAL_PENALTY+"</strong>. Den stannar kvar i rutan i stället för att gå i mål.","ev-penalty");tr+=EARLY_GOAL_PENALTY;nsp=this.state;}const kk=this.agent.key(cs,action);const oldQ=this.agent.Q[kk]||INITIAL_Q;const naa=this.env.getActions(nsp);const ck2=this.getCoinKey();const mqn=naa.length>0?Math.max(...naa.map(a=>this.agent.Q[this.agent.key([nsp[0],nsp[1],ck2],a)]||INITIAL_Q)):0;const calc=this.agent.update(cs,action,tr,[nsp[0],nsp[1],ck2],naa);const newQ=this.agent.Q[kk];let plain=calc.replace(/\$\$/g,"").replace(/\\bigl\(/g,"(").replace(/\\bigr\)/g,")").replace(/\\text\{([^}]+)\}/g,"$1").replace(/\\Bigl\(/g,"(").replace(/\\Bigr\)/g,")").replace(/\\cdot/g,"·").replace(/\\;/g," ").replace(/\\,/g,",").replace(/\s+/g," ").trim();let dir;if(newQ>oldQ+1e-9)dir="höjdes från <strong>"+oldQ.toFixed(2)+"</strong> till <strong>"+newQ.toFixed(2)+"</strong>, eftersom utfallet var bättre än vad agenten trodde";else if(newQ<oldQ-1e-9)dir="sänktes från <strong>"+oldQ.toFixed(2)+"</strong> till <strong>"+newQ.toFixed(2)+"</strong>, eftersom utfallet var sämre än vad agenten trodde";else dir="ändrades knappt (<strong>"+newQ.toFixed(2)+"</strong>)";const coinsLeft=cs[2]?cs[2].split(";").map(c=>"("+c.replace("_",",")+")").join(" "):"";const coinTxt=coinsLeft?"Mynt kvar i tillståndet: <strong>"+coinsLeft+"</strong>.<br>":"Inga mynt kvar i tillståndet.<br>";const explain="Agenten valde <strong>"+ACT[action]+"</strong> från ("+fromX+","+fromY+") och hamnade i ("+nsp[0]+","+nsp[1]+").<br>"+coinTxt+"Belöning för steget: <strong>"+tr.toFixed(2)+"</strong>.<br>Bästa kända värde i nästa ruta: <strong>"+mqn.toFixed(2)+"</strong>.<br>Q-värdet för "+ACT[action]+" "+dir+".";const rowTxt="<span class=\"lstep\">Steg "+this.stepCount+"</span> "+plain;this.log(rowTxt,explain);this.episodeReward+=tr;this.state=nsp;this.stepCount++;if((result.done&&this.coins.length===0)||this.stepCount>=this.maxSteps){this.episode++;this.agent.epsilon=Math.max(MIN_EPSILON,this.agent.epsilon*EPSILON_DECAY);const reached=result.done&&this.coins.length===0;this.history.push({steps:this.stepCount,reward:this.episodeReward,reached:reached});this.episodeReward=0;this.drawChart();this.log("— Episod "+this.episode+" klar · ε = "+this.agent.epsilon.toFixed(2)+" —","En episod är ett helt försök från start tills agenten når målet eller stegen tar slut. Efter varje episod minskar ε en aning, så agenten utforskar lite mindre och litar mer på det den lärt sig.","ev-info");this.resetEpisode();}if(this.agent.checkConvergence()){this.infoLabel.textContent="✓ Modellen har tränat klart (episod "+this.episode+")";this.infoLabel.classList.add("converged");this.log("✓ Modellen har konvergerat efter "+this.episode+" episoder","Q-värdena ändras nästan inte längre mellan stegen, så agenten har hittat en stabil strategi. Tryck Visa Policy för att se bästa handling i varje ruta, eller Testa Modellen för att följa den inlärda vägen.","ev-info");this.testButton.style.display="inline-block";this.policyButton.style.display="inline-block";this.running=false;return;}this.drawGrid();this.drawAgent();this.updateInfoLabel();}
+runTrainingStep(){if(!this.running||this.paused)return;if(this.mode!=="training"&&this.mode!=="testing")return;const ACT={0:"Upp",1:"Höger",2:"Ner",3:"Vänster"};const cs=this.getState();const fromX=this.state[0],fromY=this.state[1];const aa=this.env.getActions(this.state);const action=this.agent.chooseAction(cs,aa);const result=this.env.step(this.state,action);let nsp=result.nextState;let tr=result.reward;const ci=this.coins.findIndex(c=>c[0]===nsp[0]&&c[1]===nsp[1]);if(ci>=0){this.log("🪙 Mynt insamlat ("+nsp[0]+","+nsp[1]+") +"+COIN_REWARD,"Agenten gick in i en ruta med ett mynt och fick <strong>+"+COIN_REWARD+"</strong> i belöning.","ev-coin");tr+=COIN_REWARD;this.coins.splice(ci,1);}else{const idc=defaultCoins.some(c=>c[0]===nsp[0]&&c[1]===nsp[1]);if(idc){this.log("Återbesök tomt myntområde ("+nsp[0]+","+nsp[1]+") "+VISITED_COIN_PENALTY,"Agenten gick tillbaka till en ruta där myntet redan var taget, och fick ett litet straff på <strong>"+VISITED_COIN_PENALTY+"</strong> för att inte uppmuntra onödiga omvägar.","ev-penalty");tr+=VISITED_COIN_PENALTY;}}if(this.env.isGoal(nsp)&&this.coins.length>0){this.log("Mål nått utan alla mynt! "+EARLY_GOAL_PENALTY,"Agenten nådde målet innan alla mynt var insamlade och fick straffet <strong>"+EARLY_GOAL_PENALTY+"</strong>. Den stannar kvar i rutan i stället för att gå i mål.","ev-penalty");tr+=EARLY_GOAL_PENALTY;nsp=this.state;}const kk=this.agent.key(cs,action);const oldQ=this.agent.Q[kk]||INITIAL_Q;const naa=this.env.getActions(nsp);const ck2=this.getCoinKey();const mqn=naa.length>0?Math.max(...naa.map(a=>this.agent.Q[this.agent.key([nsp[0],nsp[1],ck2],a)]||INITIAL_Q)):0;const calc=this.agent.update(cs,action,tr,[nsp[0],nsp[1],ck2],naa);const newQ=this.agent.Q[kk];let plain=calc.replace(/\$\$/g,"").replace(/\\bigl\(/g,"(").replace(/\\bigr\)/g,")").replace(/\\text\{([^}]+)\}/g,"$1").replace(/\\Bigl\(/g,"(").replace(/\\Bigr\)/g,")").replace(/\\cdot/g,"·").replace(/\\;/g," ").replace(/\\,/g,",").replace(/\s+/g," ").trim();let dir;if(newQ>oldQ+1e-9)dir="höjdes från <strong>"+oldQ.toFixed(2)+"</strong> till <strong>"+newQ.toFixed(2)+"</strong>, eftersom utfallet var bättre än vad agenten trodde";else if(newQ<oldQ-1e-9)dir="sänktes från <strong>"+oldQ.toFixed(2)+"</strong> till <strong>"+newQ.toFixed(2)+"</strong>, eftersom utfallet var sämre än vad agenten trodde";else dir="ändrades knappt (<strong>"+newQ.toFixed(2)+"</strong>)";const coinsLeft=cs[2]?cs[2].split(";").map(c=>"("+c.replace("_",",")+")").join(" "):"";const coinTxt=coinsLeft?"Mynt kvar i tillståndet: <strong>"+coinsLeft+"</strong>.<br>":"Inga mynt kvar i tillståndet.<br>";const explain="Agenten valde <strong>"+ACT[action]+"</strong> från ("+fromX+","+fromY+") och hamnade i ("+nsp[0]+","+nsp[1]+").<br>"+coinTxt+"Belöning för steget: <strong>"+tr.toFixed(2)+"</strong>.<br>Bästa kända värde i nästa ruta: <strong>"+mqn.toFixed(2)+"</strong>.<br>Q-värdet för "+ACT[action]+" "+dir+".";const rowTxt="<span class=\"lstep\">Steg "+this.stepCount+"</span> "+plain;this.log(rowTxt,explain);this.episodeReward+=tr;this.state=nsp;this.stepCount++;if((result.done&&this.coins.length===0)||this.stepCount>=this.maxSteps){this.episode++;this.agent.epsilon=Math.max(MIN_EPSILON,this.agent.epsilon*EPSILON_DECAY);const reached=result.done&&this.coins.length===0;this.history.push({steps:this.stepCount,reward:this.episodeReward,reached:reached});this.episodeReward=0;this.drawChart();this.log("Episod "+this.episode+" klar · ε = "+this.agent.epsilon.toFixed(2),"En episod är ett helt försök från start tills agenten når målet eller stegen tar slut. Efter varje episod minskar ε en aning, så agenten utforskar lite mindre och litar mer på det den lärt sig.","ev-info");this.resetEpisode();}if(this.agent.checkConvergence()){this.infoLabel.textContent="✓ Modellen har tränat klart (episod "+this.episode+")";this.infoLabel.classList.add("converged");this.log("✓ Modellen har konvergerat efter "+this.episode+" episoder","Q-värdena ändras nästan inte längre mellan stegen, så agenten har hittat en stabil strategi. Tryck på <strong>Policy</strong> för att se bästa handling i varje ruta, eller på <strong>Testa modellen</strong> för att följa den inlärda vägen.","ev-info");this.testButton.style.display="inline-block";this.policyButton.style.display="inline-block";this.running=false;return;}this.drawGrid();this.drawAgent();this.updateInfoLabel();}
 runTestStep(){if(this.currentTestStep>=this.testPath.length){this.log("✓ Testbana slutförd!","Agenten gick hela vägen enligt sin inlärda policy.","ev-info");this.running=false;this.paused=true;this.testMode=false;this.stepMode=false;this.stepModeCheckbox.checked=false;this.nextStepButton.disabled=true;this.pauseButton.disabled=false;this.testButton.disabled=false;return;}this.state=this.testPath[this.currentTestStep];const ci=this.coins.findIndex(c=>c[0]===this.state[0]&&c[1]===this.state[1]);if(ci>=0){this.coins.splice(ci,1);this.log("🪙 Mynt insamlat ("+this.state[0]+","+this.state[1]+") under test","Agenten plockade ett mynt på sin inlärda väg.","ev-coin");}this.currentTestStep++;this.drawGrid();this.drawAgent();}
 generateOptimalPath(){let path=[];let cs=this.startPos.slice();let lc=JSON.parse(JSON.stringify(this.initialCoins));let vis=new Set();for(let i=0;i<this.maxSteps;i++){const ck=getCoinKeyFrom(lc);const sk=`${cs[0]},${cs[1]},${ck}`;if(vis.has(sk))break;vis.add(sk);path.push([...cs]);const aa=this.env.getActions(cs);let ba=aa[0],bq=this.agent.Q[this.agent.key([cs[0],cs[1],ck],ba)]||INITIAL_Q;aa.forEach(a=>{const qv=this.agent.Q[this.agent.key([cs[0],cs[1],ck],a)]||INITIAL_Q;if(qv>bq){bq=qv;ba=a;}});const result=this.env.step(cs,ba);const ci=lc.findIndex(c=>c[0]===result.nextState[0]&&c[1]===result.nextState[1]);if(ci>=0)lc.splice(ci,1);cs=result.nextState;if(this.env.isGoal(cs)&&lc.length===0){path.push([...cs]);break;}}return path;}
-startTestMode(){this.testMode=true;this.paused=false;this.running=true;this.mode="testing";this.state=this.startPos.slice();this.coins=JSON.parse(JSON.stringify(this.initialCoins));this.showQValues=true;this.qToggleButton.classList.add("active");this.testPath=this.generateOptimalPath();this.currentTestStep=0;this.stepMode=true;this.stepModeCheckbox.checked=true;this.nextStepButton.disabled=false;this.pauseButton.disabled=true;this.log("— Testläge (stegvis) —","Nu följer agenten sin inlärda policy: i varje ruta väljer den handlingen med högst Q-värde, utan slumpmässig utforskning. Tryck <strong>Nästa steg</strong> för att gå ett steg i taget.","ev-info");this.drawGrid();this.drawAgent();}
+startTestMode(){this.testMode=true;this.paused=false;this.running=true;this.mode="testing";this.state=this.startPos.slice();this.coins=JSON.parse(JSON.stringify(this.initialCoins));this.showQValues=true;this.qToggleButton.classList.add("active");this.testPath=this.generateOptimalPath();this.currentTestStep=0;this.stepMode=true;this.stepModeCheckbox.checked=true;this.nextStepButton.disabled=false;this.pauseButton.disabled=true;this.log("Testläge, stegvis","Nu följer agenten sin inlärda policy: i varje ruta väljer den handlingen med högst Q-värde, utan slumpmässig utforskning. Tryck <strong>Nästa steg</strong> för att gå ett steg i taget.","ev-info");this.drawGrid();this.drawAgent();}
 simulationLoop(ts){if(!this.lastUpdateTime)this.lastUpdateTime=ts;if(!this.paused&&!this.stepMode){const d=ts-this.lastUpdateTime;if(d>=this.delay){this.lastUpdateTime=ts;const s=this.stepsPerFrame||1;for(let i=0;i<s;i++){this.runStep();if(!this.running)break;}}}else{this.lastUpdateTime=ts;}requestAnimationFrame((t)=>this.simulationLoop(t));}}
 window.onload=()=>{const sim=new QLearningSimulation();initGlossary();};
 </script>
