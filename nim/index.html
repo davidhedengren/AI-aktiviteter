@@ -182,7 +182,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .intro-start:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
 .intro-start svg{width:15px;height:15px;flex-shrink:0;}
 
-/* begrepp pills + concept card */
+/* begreppsknappar och begreppskort */
 .begrepp-row{display:flex;flex-wrap:wrap;gap:5px;padding-top:4px;}
 .g-tag{display:inline-flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:.72em;font-weight:600;padding:5px 10px 5px 8px;border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--dim);cursor:pointer;transition:.2s var(--ease-spring);}
 .g-tag:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px);}
@@ -224,7 +224,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .concept-card.training-card{width:470px;}
 .concept-card.training-card .concept-card-inner{max-height:92vh;overflow-y:auto;}
 .concept-card.training-card #conceptIllus{display:none;}
-/* Live-träningsläge: appen ligger ovanför backdropen så Q-tabellen syns och uppdateras */
+/* Träningsläge: appen ligger ovanför bakgrunden så att Q-tabellen syns och uppdateras */
 .concept-backdrop.training-live{background:rgba(6,7,14,.32);backdrop-filter:none;-webkit-backdrop-filter:none;}
 .app.training-live{z-index:302;}
 .app.training-live .left{filter:blur(1.5px) brightness(.6);pointer-events:none;transition:filter .35s var(--ease-out);}
@@ -294,11 +294,11 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <div class="intro-card">
     <div class="intro-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="4" width="3" height="16" rx="1.3"/><rect x="10.5" y="4" width="3" height="16" rx="1.3"/><rect x="16" y="4" width="3" height="16" rx="1.3" opacity=".4"/></svg></div>
     <h2>NIM med förstärkningsinlärning</h2>
-    <p class="sub">Se hur ett AI-system lär sig spela spelet NIM från grunden – bara genom att spela mot sig själv. Regeln är enkel: ta 1–3 pinnar per drag, och den som tvingas ta den <strong style="color:var(--text)">sista</strong> pinnen förlorar.</p>
+    <p class="sub">Se hur ett AI-system lär sig spela spelet NIM från grunden, bara genom att spela mot sig själv. Regeln är enkel: ta 1–3 pinnar per drag, och den som tvingas ta den <strong style="color:var(--text)">sista</strong> pinnen förlorar.</p>
     <div class="intro-steps">
-      <div class="intro-step"><div class="intro-num">1</div><div class="intro-step-text"><strong>Träna AI-systemet</strong> – Välj hur många spel AI:n ska öva på. Kolla hur Q-tabellen förändras under träningen!</div></div>
-      <div class="intro-step"><div class="intro-num">2</div><div class="intro-step-text"><strong>Utforska Q-tabellen</strong> – Tabellen till höger visar vad AI:n lärt sig. Grönt = bra drag, rött = dåligt. Ser du ett mönster?</div></div>
-      <div class="intro-step"><div class="intro-num">3</div><div class="intro-step-text"><strong>Spela mot AI:n</strong> – Utmana en halvlärd eller fullärd AI. Kan du slå den?</div></div>
+      <div class="intro-step"><div class="intro-num">1</div><div class="intro-step-text"><strong>Träna AI-systemet.</strong> Välj hur många spel AI:n ska öva på. Kolla hur Q-tabellen förändras under träningen!</div></div>
+      <div class="intro-step"><div class="intro-num">2</div><div class="intro-step-text"><strong>Utforska Q-tabellen.</strong> Tabellen till höger visar vad AI:n lärt sig. Grönt = bra drag, rött = dåligt. Ser du ett mönster?</div></div>
+      <div class="intro-step"><div class="intro-num">3</div><div class="intro-step-text"><strong>Spela mot AI:n.</strong> Utmana en halvlärd eller fullärd AI. Kan du slå den?</div></div>
     </div>
     <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -311,7 +311,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <svg class="hd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="4" width="3" height="16" rx="1.3"/><rect x="10.5" y="4" width="3" height="16" rx="1.3"/><rect x="16" y="4" width="3" height="16" rx="1.3" opacity=".4"/></svg>
       <h1>NIM</h1>
     </div>
-    <p>Se hur ett AI-system lär sig spela NIM med förstärkningsinlärning – testa sedan att spela mot det!</p>
+    <p>Se hur ett AI-system lär sig spela NIM med förstärkningsinlärning. Testa sedan att spela mot det!</p>
   </div>
   <a class="lang-link" href="https://www.ai-aktiviteter.se/nim_ENG" hreflang="en" lang="en"><svg viewBox="0 0 50 30" aria-hidden="true"><rect width="50" height="30" fill="#012169"/><path d="M0,0 L50,30 M50,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#fff" stroke-width="10"/><path d="M25,0 L25,30 M0,15 L50,15" stroke="#C8102E" stroke-width="6"/></svg>English</a>
 </div></div>
@@ -409,7 +409,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   </div>
 
   <div class="right">
-    <div class="qt-title">Q-tabell – AI:ns hjärna</div>
+    <div class="qt-title">Q-tabell: AI:ns hjärna</div>
     <div class="qt-desc">Varje rad = antal kvarvarande pinnar. Varje kolumn = drag. <strong style="color:var(--good)">Grönt</strong> = bra drag, <strong style="color:var(--bad)">rött</strong> = dåligt. Guldram = bästa draget i tillståndet.</div>
     <div class="qhdr-row" id="qhdrRow"></div>
     <div id="qtable"></div>
@@ -489,19 +489,19 @@ function updateConvergeUI(conv){
     el.innerHTML='✅ <strong>AI:n har lärt sig den optimala strategin!</strong>';
   }else if(goldFrames>=total*0.7){
     el.className='converge-msg show full';
-    el.innerHTML='🎯 <strong>AI:n har nästan knäckt spelet</strong> – bara några positioner kvar att finslipa';
+    el.innerHTML='🎯 <strong>AI:n har nästan knäckt spelet.</strong> Bara några positioner återstår att finslipa.';
   }else if(goldFrames>=3){
     el.className='converge-msg show partial';
-    el.innerHTML='📈 <strong>AI:n blir allt säkrare på sin strategi</strong> – den vet vad den ska göra i många situationer';
+    el.innerHTML='📈 <strong>AI:n blir allt säkrare på sin strategi.</strong> Den vet vad den ska göra i många situationer.';
   }else if(goldFrames>=1){
     el.className='converge-msg show partial';
-    el.innerHTML='💡 <strong>AI:n börjar lära sig en strategi</strong> – den har hittat några bra drag';
+    el.innerHTML='💡 <strong>AI:n börjar lära sig en strategi.</strong> Den har hittat några bra drag.';
   }else if(sensing>=2){
     el.className='converge-msg show partial';
-    el.innerHTML='🔍 <strong>AI:n börjar ana ett mönster</strong> – vissa drag verkar bättre än andra';
+    el.innerHTML='🔍 <strong>AI:n börjar ana ett mönster.</strong> Vissa drag verkar bättre än andra.';
   }else{
     el.className='converge-msg show none';
-    el.innerHTML='🎲 <strong>AI:n provar slumpmässiga drag</strong> – den har inte hittat något mönster ännu';
+    el.innerHTML='🎲 <strong>AI:n provar slumpmässiga drag.</strong> Den har inte hittat något mönster ännu.';
   }
 }
 
@@ -515,7 +515,7 @@ function startTraining(){
   document.getElementById('trainDone').style.display='none';
   document.getElementById('convergeMsg').className='converge-msg';
   renderQHeaders();renderQTable(-1);
-  openTrainingCard(episodes);   // träningen sker LIVE inuti teatern – Q-tabellen fylls i medan man tittar
+  openTrainingCard(episodes);   /* Träningen körs i träningsvyn och Q-tabellen fylls i löpande. */
 }
 
 function pauseTraining(){
@@ -623,7 +623,7 @@ function updateQInfo(){
     if(a!==null&&getQ(s,a)>0.80)wins.push(s+' pinnar kvar → ta '+a);
   }
   document.getElementById('qinfo').innerHTML=
-    `Hemligheten: lämna alltid ett antal pinnar som ger <strong>rest 1</strong> vid division med ${maxTake+1} – dvs. ${Array.from({length:4},(_,i)=>1+i*(maxTake+1)).filter(v=>v<=totalSticks).join(", ")}... – till motståndaren.<br><br>
+    `Hemligheten: lämna alltid ett antal pinnar till motståndaren som ger <strong>rest 1</strong> vid division med ${maxTake+1}, alltså ${Array.from({length:4},(_,i)=>1+i*(maxTake+1)).filter(v=>v<=totalSticks).join(", ")} och så vidare.<br><br>
     Exempel på drag AI:n lärt sig: <span style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:0.95em">${wins.slice(0,8).join(', ')}</span><br><br>
     Ser du att guldramarna följer det mönstret?`;
 }
@@ -679,7 +679,7 @@ function aiTurn(){
     animTake(a,()=>{
       gameSticks-=a;renderSticks();hlQRow(gameSticks);
       if(gameSticks===0){endGame(true);}
-      else{humanTurn=true;renderTakeBtns();setStatus('🎯',`AI tog ${a}. <strong>Din tur</strong> – ${gameSticks} pinnar kvar.`);}
+      else{humanTurn=true;renderTakeBtns();setStatus('🎯',`AI tog ${a}. <strong>Din tur.</strong> ${gameSticks} pinnar kvar.`);}
     });
   },550);
 }
@@ -750,7 +750,7 @@ const CONCEPTS={
   cRL:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg>',
     title:'Förstärkningsinlärning',
-    def:'AI-systemet lär sig genom att <strong>spela om och om igen</strong> och se vad som funkar. Drag som leder till vinst får högre betyg (Q-värde), drag som leder till förlust får lägre. Ingen människa visar rätt svar – systemet upptäcker strategin helt själv genom erfarenhet.',
+    def:'AI-systemet lär sig genom att <strong>spela om och om igen</strong> och se vad som fungerar. Drag som leder till vinst får högre betyg (Q-värde), drag som leder till förlust får lägre. Ingen människa visar rätt svar. Systemet upptäcker strategin helt själv genom erfarenhet.',
     illus:'<svg viewBox="0 0 140 70"><circle cx="35" cy="35" r="16" fill="rgba(122,162,255,.18)" stroke="#7aa2ff" stroke-width="2"/><text x="35" y="39" text-anchor="middle" font-family="DM Sans" font-weight="700" font-size="9" fill="#7aa2ff">AI</text><path d="M53 28c20-14 40-8 48 4" stroke="rgba(255,255,255,.4)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M101 32l4 4-4 4" stroke="rgba(255,255,255,.4)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="80" y="18" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(255,255,255,.5)">drag</text><path d="M101 42c-10 14-30 18-48 10" stroke="#34c759" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M55 53l-4-4 4-4" stroke="#34c759" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="80" y="63" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#34c759">belöning</text></svg>'
   },
   cQval:{
@@ -762,7 +762,7 @@ const CONCEPTS={
   cExplore:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" opacity=".4"/></svg>',
     title:'Utforska vs. utnyttja',
-    def:'I början <strong>utforskar</strong> AI:n – provar drag nästan slumpmässigt för att upptäcka vad som fungerar. Ju mer den tränat, desto mer börjar den <strong style="color:var(--gold)">utnyttja</strong> det den redan vet och väljer sina bästa kända drag. Balansen mellan de två är avgörande för bra inlärning.',
+    def:'I början <strong>utforskar</strong> AI:n och provar drag nästan slumpmässigt för att upptäcka vad som fungerar. Ju mer den tränat, desto mer börjar den <strong style="color:var(--gold)">utnyttja</strong> det den redan vet och väljer sina bästa kända drag. Balansen mellan de två är avgörande för bra inlärning.',
     illus:'<svg viewBox="0 0 140 70"><rect x="10" y="46" width="120" height="10" rx="5" fill="rgba(255,255,255,.08)"/><rect x="10" y="46" width="80" height="10" rx="5" fill="rgba(122,162,255,.5)"/><rect x="90" y="46" width="40" height="10" rx="5" fill="rgba(255,216,102,.55)"/><text x="50" y="30" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#7aa2ff">utforskar</text><text x="110" y="30" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#ffd866">utnyttjar</text><path d="M10 20c40 0 80 20 120 20" stroke="rgba(255,255,255,.25)" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/></svg>'
   }
 };
@@ -810,7 +810,7 @@ const BRAIN_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 const TRAIN_THEATER_HTML=
   '<div class="tt">'
   + '<div class="tt-canvas-wrap"><canvas id="ttCanvas"></canvas></div>'
-  + '<div class="tt-hint">👉 Följ <strong>Q-tabellen</strong> – den fylls i live medan AI:n spelar</div>'
+  + '<div class="tt-hint">👉 Följ <strong>Q-tabellen</strong>. Den fylls i medan AI:n spelar.</div>'
   + '<div class="tt-status" id="ttStatus"></div>'
   + '<div class="tt-ee"><div class="tt-ee-top"><span class="ee-x">Utforskar <b id="ttExpl">100</b>%</span><span class="ee-o">Utnyttjar <b id="ttExploit">0</b>%</span></div>'
   + '<div class="tt-ee-bar"><i id="ttEeFill"></i></div>'
@@ -862,8 +862,8 @@ function runTrainTheater(){
   trainAnimActive=true;
   const t0=performance.now();
   const DURATION=Math.min(14000, 5000+ttEpisodes*3.2);
-  // Live-tränings-tillstånd (paced till tidslinjen)
-  const ALPHA=0.15, FLOOR=0.12, DECAY_HORIZON=400;   // fast horisont – oberoende av vald spel-budget
+  /* Träningens tillstånd, taktat mot tidslinjen. */
+  const ALPHA=0.15, FLOOR=0.12, DECAY_HORIZON=400;   /* Fast horisont, oberoende av valt antal spel. */
   let trainDone=0, convCount=0, converged=false, lastRender=0;
   const trainEps=()=>Math.max(FLOOR,1-trainDone/DECAY_HORIZON);
 
@@ -1024,7 +1024,7 @@ function runTrainTheater(){
   function frame(now){
     const frac=Math.min(1,(now-t0)/DURATION);
 
-    // ── LIVE-TRÄNING: träna upp till tidslinjens mål, uppdatera Q-tabellen ──
+    /* ── Träning fram till tidslinjens mål, med uppdatering av Q-tabellen ── */
     if(!converged){
       const target=Math.round(frac*ttEpisodes);
       while(trainDone<target && trainDone<ttEpisodes){
@@ -1052,7 +1052,7 @@ function runTrainTheater(){
     const railEl=document.getElementById('ttRail'); if(railEl)railEl.style.width=(converged?100:Math.min(1,trainDone/ttEpisodes)*100)+'%';
     const gEl=document.getElementById('ttGames'); if(gEl)gEl.textContent=trainDone;
 
-    // utforska/utnyttja-mätaren speglar den RIKTIGA epsilon som används i träningen
+    /* Mätaren för utforska och utnyttja visar samma epsilon som träningen använder. */
     const eps=trainEps();
     const explorePct=Math.round(eps*100), exploitPct=100-explorePct;
     const exEl=document.getElementById('ttExpl'); if(exEl)exEl.textContent=explorePct;
@@ -1060,8 +1060,8 @@ function runTrainTheater(){
     const eeFill=document.getElementById('ttEeFill'); if(eeFill)eeFill.style.width=explorePct+'%';
     const cap=document.getElementById('ttEeCap');
     if(cap){
-      if(exploitPct<25) cap.innerHTML='Provar drag <strong>slumpmässigt</strong> för att upptäcka vad som funkar';
-      else if(exploitPct<70) cap.innerHTML='Börjar <strong>lita på</strong> det den lärt sig – men provar fortfarande nytt';
+      if(exploitPct<25) cap.innerHTML='Provar drag <strong>slumpmässigt</strong> för att upptäcka vad som fungerar';
+      else if(exploitPct<70) cap.innerHTML='Börjar <strong>lita på</strong> det den lärt sig, men provar fortfarande nytt';
       else cap.innerHTML='Väljer nästan alltid sina <strong>bäst kända</strong> drag';
     }
 
@@ -1108,7 +1108,7 @@ function finishTheater(){
   let msg;
   if(goldFrames>=total&&total>0) msg='✅ <strong>AI:n knäckte spelet!</strong> Den hittade den optimala strategin på '+ttGamesPlayed+' spel.';
   else if(goldFrames>=total*0.7) msg='🎯 <strong>Nästan optimal.</strong> Träna gärna fler spel för att finslipa de sista lägena.';
-  else if(goldFrames>=1) msg='📈 <strong>AI:n lär sig.</strong> Den behärskar flera lägen – fler spel ger säkrare strategi.';
+  else if(goldFrames>=1) msg='📈 <strong>AI:n lär sig.</strong> Den behärskar flera lägen. Fler spel ger en säkrare strategi.';
   else msg='🎲 <strong>På gång.</strong> Öka antalet träningsspel så hittar AI:n mönstret.';
   const dm=document.getElementById('ttDoneMsg'); if(dm)dm.innerHTML=msg;
   const done=document.getElementById('ttDone'); if(done)done.classList.add('show');
@@ -1126,7 +1126,7 @@ function playFromCard(){ closeConcept(); goPhase('play'); newGame(); }
     const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
     el.style.setProperty('--mx',(px*100)+'%');
     el.style.setProperty('--my',(py*100)+'%');
-    // Träningskortet ligger helt stilla – innehållet animeras redan och lutning gör det svårläst.
+    /* Träningskortet är stillastående, eftersom innehållet redan animeras. */
     if(card&&card.classList.contains('training-card')){flat();return;}
     const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
     el.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
