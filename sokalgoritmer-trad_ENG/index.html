@@ -70,7 +70,7 @@ button{font-family:inherit;}
 .alg-card[aria-checked="false"] .alg-dot{box-shadow:none;opacity:.55;}
 .alg-name{font-weight:600;font-size:13px;letter-spacing:-.01em;}
 
-/* ── Canvas: the obvious main character ── */
+/* ── Canvas ── */
 #canvasContainer{
   position:relative;z-index:0;display:block;border:1px solid #1c2540;border-radius:18px;overflow:visible;max-width:680px;margin:0 auto;
   box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.03),0 0 0 1px rgba(77,128,255,.06);
@@ -207,13 +207,22 @@ button{font-family:inherit;}
 .canvas-toggle[aria-pressed="false"]{color:var(--dim);}
 .canvas-toggle[aria-pressed="false"] .ct-icon-on{display:none;}
 .canvas-toggle[aria-pressed="false"] .ct-icon-off{display:block;}
-/* Etiketten står kvar även på små skärmar. Ett ensamt öga säger inte
-   vad knappen gör, och knappen får plats med texten. */
+/* The label is shown on small screens as well. */
 @media(max-width:640px){.canvas-toggle{padding:7px 10px;font-size:10.5px;gap:5px;}}
 
 /* ── Canvas tooltip ── */
 #canvasTooltip{position:absolute;pointer-events:none;z-index:10;background:rgba(13,17,32,.94);border:1px solid var(--border);border-radius:8px;padding:8px 11px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--subtle);white-space:nowrap;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 12px 30px rgba(0,0,0,.55);opacity:0;transform:translateY(-4px);transition:opacity .14s,transform .14s;line-height:1.6;}
 #canvasTooltip.show{opacity:1;transform:none;}
+/* Mathematical notation (MathML) */
+math{font-size:1.03em;line-height:1.1;}
+math mi{font-style:italic;}
+math mo[stretchy="false"]{padding:0;}
+math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10px;}
+.m-f{color:var(--accent2);}
+.m-g{color:var(--green);}
+.m-h{color:var(--orange);}
+#canvasTooltip math{font-weight:700;}
+.mbtn math{font-size:.95em;}
 #canvasTooltip .tt-accent{color:var(--accent2);font-weight:700;}
 #canvasTooltip .tt-g{color:var(--green);font-weight:700;}
 #canvasTooltip .tt-h{color:var(--orange);font-weight:700;}
@@ -290,7 +299,7 @@ button{font-family:inherit;}
 .concept-def{font-size:.88em;line-height:1.6;color:var(--dim);position:relative;z-index:3;transform:translateZ(18px);transform-style:preserve-3d;}
 .concept-def strong{color:var(--text);}.concept-def em{color:var(--accent2);font-style:normal;font-weight:600;}
 
-/* 3D-rutor i glaskorten */
+/* 3D cells inside the concept cards */
 .gc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 8px;margin:14px 0 4px;transform-style:preserve-3d;}
 .gc-grid-2{grid-template-columns:repeat(2,minmax(0,1fr));}
 .gc-cell{display:flex;flex-direction:column;align-items:center;gap:7px;transform-style:preserve-3d;}
@@ -320,7 +329,7 @@ button{font-family:inherit;}
 .gc-btn:active{transform:translateY(1px);}
 
 
-/* ── Frågetecken på algoritmkorten ── */
+/* ── Question mark on the algorithm cards ── */
 .alg-info{position:absolute;top:5px;right:6px;width:15px;height:15px;border-radius:50%;
   border:1px solid var(--border);color:var(--dim);font-size:10px;font-weight:800;line-height:1;
   display:flex;align-items:center;justify-content:center;opacity:.5;transition:.16s;background:transparent;}
@@ -328,7 +337,7 @@ button{font-family:inherit;}
 .alg-info:hover{opacity:1;color:var(--c);border-color:color-mix(in srgb,var(--c) 60%,transparent);}
 .alg-card[aria-checked="true"] .alg-info{opacity:.9;border-color:color-mix(in srgb,var(--c) 45%,transparent);color:var(--c);}
 
-/* ── Redigeringsläge: strömbrytare + hjälpknapp ── */
+/* ── Edit mode: toggle + help button ── */
 .edit-controls{display:inline-flex;align-items:center;gap:6px;}
 .hud-toggle{display:inline-flex;align-items:center;gap:7px;padding:6px 10px 6px 9px;font-size:11.5px;font-weight:700;
   border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--dim);cursor:pointer;
@@ -349,12 +358,12 @@ button{font-family:inherit;}
 .hud-help svg{width:15px;height:15px;}
 .hud-help:hover{color:var(--text);border-color:var(--accent);}
 
-/* Redigeringsläget syns på duken: grön innerram och hårkorspekare. */
+/* Edit mode is visible on the canvas: green inner frame and crosshair cursor. */
 #canvasContainer.editing canvas{cursor:crosshair;box-shadow:inset 0 0 0 1.5px rgba(51,209,122,.32),inset 0 0 40px rgba(51,209,122,.06);}
 
-/* ── Nodpanel och kantpanel ──
-   Båda är små flytande editorer ovanpå duken. De har fått rubrik, större
-   träffytor och plus/minus-knappar, så att de går att använda med finger. */
+/* ── Node panel and edge panel ──
+   Small floating editors above the canvas, with a heading, large hit areas
+   and plus and minus buttons for touch. */
 .node-toolbar,.edge-editor{position:absolute;z-index:6;display:none;flex-direction:column;gap:8px;
   background:linear-gradient(165deg,rgba(28,34,58,.97),rgba(16,20,36,.98));
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
@@ -389,16 +398,15 @@ button{font-family:inherit;}
 .nt-del:hover:not(:disabled){border-color:var(--red);color:var(--red);}
 .ed-hint{font-size:10px;color:var(--dim);letter-spacing:.01em;}
 
-/* ── Flaggan i språkväxlaren ── */
+/* ── Flag in the language switch ── */
 .lang-link .lang-ico{display:block;width:17px;height:11px;flex-shrink:0;border-radius:2px;overflow:hidden;
   line-height:0;box-shadow:0 0 0 1px rgba(255,255,255,.14);}
 .lang-link .lang-ico svg{display:block;width:100%;height:100%;}
 
-/* ── Introrutan på låga skärmar ──
-   vh mäter viewporten utan adressfält på mobil, därför dvh som komplement. */
+/* ── Intro overlay on low screens ──
+   vh measures the viewport without the mobile address bar, hence dvh as a supplement. */
 
-/* Intro overlay on small screens: same centred layout, only more compact
-   so that it fits without scrolling. */
+/* Intro overlay on small screens: compact centred layout without scrolling. */
 @media (max-width:560px){
   .overlay{padding:20px 16px;}
   .overlay-card{width:100%;padding:20px 20px;max-height:94vh;max-height:94dvh;}
@@ -423,8 +431,8 @@ button{font-family:inherit;}
 }
 
 
-/* Hjälpknapp i datastrukturpanelens rubrikrad. Den ligger utanför <button>
-   i uppmärkningen, eftersom en knapp inte får innehålla en annan knapp. */
+/* Help button in the heading row of the data structure panel. It sits outside
+   the <button> element, since a button may not contain another button. */
 .ds-panel{position:relative;}
 .ds-help{position:absolute;top:12px;right:44px;width:22px;height:22px;z-index:2;
   display:flex;align-items:center;justify-content:center;border-radius:50%;
@@ -504,7 +512,7 @@ button{font-family:inherit;}
   <div id="nodeToolbar" class="node-toolbar" role="group" aria-label="Node">
     <div class="ed-head">Node <b id="ntId">–</b></div>
     <div class="ed-row">
-      <span class="ed-lab">h(n)</span>
+      <span class="ed-lab"><math><mi class="m-h">h</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></math></span>
       <span class="num-field">
         <button type="button" id="ntHminus" aria-label="-1">−</button>
         <input id="ntH" type="number" step="1" inputmode="numeric" aria-label="h(n)">
@@ -529,7 +537,7 @@ button{font-family:inherit;}
   </div>
   <div id="canvasTooltip"></div>
   <div id="resultOverlay" class="result-overlay"></div>
-  <button id="queueToggle" class="canvas-toggle" type="button" aria-pressed="true" title="Show or hide the nodes waiting in the queue – the orange rings on the canvas" aria-label="Show or hide the nodes waiting in the queue – the orange rings on the canvas">
+  <button id="queueToggle" class="canvas-toggle" type="button" aria-pressed="true" title="Show or hide the nodes waiting in the queue, that is, the orange rings on the canvas" aria-label="Show or hide the nodes waiting in the queue, that is, the orange rings on the canvas">
     <svg class="ct-icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
     <svg class="ct-icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.77 21.77 0 0 1 5.06-5.94M9.9 4.24A10.94 10.94 0 0 1 12 5c7 0 11 7 11 7a21.77 21.77 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
     <span id="queueToggleLabel">Show queue</span>
@@ -644,9 +652,9 @@ button{font-family:inherit;}
     <h2>Search Algorithms in <span>Trees</span></h2>
     <p class="sub">Four classic search algorithms make their way through the same tree. Follow how they work, node by node.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Choose a tree</strong> – load an example or build your own.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Pick an algorithm</strong> – BFS, DFS, Greedy Best-First or A*.</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Compare</strong> – which finds the cheapest path, and which explores fewest nodes?</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Choose a tree.</strong> Load an example tree or build your own.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Pick an algorithm.</strong> The options are BFS, DFS, Greedy best-first and A*.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Compare.</strong> Note which path each algorithm finds and how many nodes it has to examine.</div></div>
     </div>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -673,15 +681,15 @@ let pathSet    = new Set();
 
 /* Each algorithm has its own accent color (frontier + effects) */
 const THEMES = {BFS:'#ec4899', DFS:'#a06bff', 'A*':'#2dd4bf', Greedy:'#f59e0b'};
-const QUEUE_COLOR = '#f0a94e';   // the queue on the canvas is always orange -- the algorithm's identity is already shown by the card/panel
+const QUEUE_COLOR = '#f0a94e';   /* The queue on the canvas is always drawn in orange. */
 let selectedAlg = 'BFS';
 let showQueueOnCanvas = true;    // controlled by the "Show queue" button on the canvas; the queue panel below is not affected
 
 /* ── Animation state ── */
 const D_IN = RM?1:220;               // frontier node grows in
-const ACTIVE_POP = RM?1:200;         // guldringens intro-puls
+const ACTIVE_POP = RM?1:200;         /* Intro pulse of the gold ring. */
 let enterTimes = new Map();          // nodeId -> t0 (when the node last became frontier/visited)
-let activeNode = null;               // {id, t0} – noden som expanderas nu
+let activeNode = null;               /* {id, t0} for the node currently expanding */
 let particles = [];
 let pathState = null;                // {ids:[...], t0, dur}
 let dimState = null;
@@ -750,7 +758,7 @@ function drawScene(){
 
   const hasMixedCosts = nodes.some(n=>n.edges.some(ed=>ed.cost!==1));
 
-  // Kanter
+  /* Edges */
   for(let n of nodes){
     n.edges=n.edges.filter(ed=>getNodeById(ed.targetId));
     for(let ed of n.edges){
@@ -780,17 +788,17 @@ function drawScene(){
     ctx.setLineDash([]);
   }
 
-  // Noder
+  /* Nodes */
   ctx.lineWidth=2;ctx.textAlign="center";ctx.textBaseline="middle";
   for(let n of nodes){
     let s=nodeStyle(n, frontierIds);
 
-    // Frontier nodes grow in with a small pulse (like the maze's queue)
+    /* Nodes in the queue grow in with a pulse. */
     let scale=1;
     if(!RM && s.kind==="frontier"){
       let t0=enterTimes.get(n.id);
       if(t0!=null){let p=Math.min(1,(now-t0)/D_IN);scale=0.82+0.18*easeOutBack(p);}
-      scale *= 0.98+0.02*Math.sin(now/700+(n.id*1.3)); // mjuk pulsering, "andas"
+      scale *= 0.98+0.02*Math.sin(now/700+(n.id*1.3)); /* soft pulsing */
     }
     let rad=NODE_RADIUS*scale;
 
@@ -799,7 +807,7 @@ function drawScene(){
       let blur=16;
       if(!RM){
         if(s.kind==="goal")  blur=13+7*Math.sin(now/1500+n.id*.6);       // goal pulses slowly
-        else if(s.kind==="start") blur=8+3*Math.sin(now/2200);           // startnoden: mycket diskret glow
+        else if(s.kind==="start") blur=8+3*Math.sin(now/2200);           /* Start node: very discreet glow. */
       }
       ctx.shadowColor=s.glow;ctx.shadowBlur=blur;
     }
@@ -830,13 +838,13 @@ function drawScene(){
     }
   }
 
-  // Snap-preview
+  /* Snap preview */
   if(dragNode===null&&snapPreview){
     ctx.beginPath();ctx.arc(snapPreview.x,snapPreview.y,NODE_RADIUS,0,2*Math.PI);
     ctx.strokeStyle="rgba(102,152,255,.35)";ctx.lineWidth=1.5;ctx.setLineDash([4,4]);ctx.stroke();ctx.setLineDash([]);
   }
 
-  // Staging: dim everything while the path is drawn
+  /* Other content is dimmed while the path is drawn. */
   if(dimState){
     let a;
     if(now<dimState.t0+dimState.fadeIn)a=.4*(now-dimState.t0)/dimState.fadeIn;
@@ -846,7 +854,7 @@ function drawScene(){
     else if(now>dimState.holdEnd+dimState.fadeOut)dimState=null;
   }
 
-  // Gold ring on the node currently expanding (no moving dot -- sits on the node)
+  /* Gold ring on the node being expanded. */
   if(activeNode&&!pathState){
     let n=getNodeById(activeNode.id);
     if(n){
@@ -860,14 +868,14 @@ function drawScene(){
     }
   }
 
-  // The path is drawn -- a green point of light traces the line (like map navigation)
+  /* The path is traced by a green point of light. */
   if(pathState){
     let ids=pathState.ids;
     let pts=ids.map(id=>getNodeById(id)).filter(Boolean);
     if(pts.length>=2){
       let p=Math.max(0,Math.min(1,(now-pathState.t0)/pathState.dur));
       let segF=p*(pts.length-1), segI=Math.floor(segF);
-      // ritade segment
+      /* drawn segments */
       ctx.strokeStyle="#3ddc84";ctx.lineWidth=3.4;ctx.lineCap="round";
       ctx.save();ctx.shadowColor="rgba(61,220,132,.55)";ctx.shadowBlur=8;
       for(let i=0;i<segI;i++){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[i+1].x,pts[i+1].y);ctx.stroke();}
@@ -889,7 +897,7 @@ function drawScene(){
         ctx.beginPath();ctx.arc(n.x,n.y,NODE_RADIUS,0,2*Math.PI);ctx.strokeStyle=isGoal?"#e04848":"#2bbf6e";ctx.lineWidth=1.5;ctx.stroke();
         ctx.fillStyle=isGoal?"#3a0808":"#05291a";ctx.font="700 12px 'JetBrains Mono',monospace";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(n.id,n.x,n.y);
       }
-      // ledande ljuspunkt
+      /* leading point of light */
       if(p<1){ctx.save();ctx.shadowColor="#3ddc84";ctx.shadowBlur=18;ctx.fillStyle="#c9ffe3";ctx.beginPath();ctx.arc(hx,hy,4.5,0,7);ctx.fill();ctx.restore();}
     }
   }
@@ -908,8 +916,8 @@ function drawScene(){
     particles=keep;
   }
 }
-// drawAll is kept as a name for the many calls in the logic; RAF drives the rendering
-function drawAll(){ /* rendering sker i RAF-loopen som startas i init */ }
+/* Rendering is driven by requestAnimationFrame. drawAll is called from the logic. */
+function drawAll(){ /* Rendering happens in the RAF loop started in init. */ }
 
 function spawnParticles(id){
   if(RM)return;
@@ -1064,26 +1072,25 @@ function updateHover(pos){
       if(g!==undefined&&g!==Infinity){
         let h=n.h||0;
         showTooltip(
-          `<span class="tt-accent">f(${n.id})</span><span class="tt-eq"> = g + h = </span>`+
-          `<span class="tt-g">${g}</span><span class="tt-eq"> + </span>`+
-          `<span class="tt-h">${h}</span><span class="tt-eq"> = </span>`+
-          `<span class="tt-accent">${g+h}</span>`,
+          `<math><mrow>`+mathFn('f','m-f',n.id)+`<mo>=</mo>`+mathFn('g','m-g',n.id)
+          +`<mo>+</mo>`+mathFn('h','m-h',n.id)+`<mo>=</mo><mn class="m-g">${g}</mn>`
+          +`<mo>+</mo><mn class="m-h">${h}</mn><mo>=</mo><mn class="m-f">${g+h}</mn></mrow></math>`,
           n.x, n.y-NODE_RADIUS-6
         );
       } else {
-        showTooltip(`<span class="tt-eq">Node ${n.id} &nbsp;·&nbsp; h = </span><span class="tt-h">${n.h||0}</span>`,n.x,n.y-NODE_RADIUS-6);
+        showTooltip(`<math><mrow>`+mathFn('h','m-h',n.id)+`<mo>=</mo><mn class="m-h">${n.h||0}</mn></mrow></math>`,n.x,n.y-NODE_RADIUS-6);
       }
     } else {
-      showTooltip(`<span class="tt-eq">h(${n.id}) = </span><span class="tt-h">${n.h||0}</span>`,n.x,n.y-NODE_RADIUS-6);
+      showTooltip(`<math><mrow>`+mathFn('h','m-h',n.id)+`<mo>=</mo><mn class="m-h">${n.h||0}</mn></mrow></math>`,n.x,n.y-NODE_RADIUS-6);
     }
     return;
   }
   if(alg==="Greedy"&&search_in_progress&&GREEDY_STATE){
-    showTooltip(`<span class="tt-eq">Node ${n.id} &nbsp;·&nbsp; h = </span><span class="tt-h">${n.h||0}</span>`,n.x,n.y-NODE_RADIUS-6);
+    showTooltip(`<math><mrow>`+mathFn('h','m-h',n.id)+`<mo>=</mo><mn class="m-h">${n.h||0}</mn></mrow></math>`,n.x,n.y-NODE_RADIUS-6);
     return;
   }
   if(n.h){
-    showTooltip(`<span class="tt-eq">h(${n.id}) = </span><span class="tt-h">${n.h}</span>`,n.x,n.y-NODE_RADIUS-6);
+    showTooltip(`<math><mrow>`+mathFn('h','m-h',n.id)+`<mo>=</mo><mn class="m-h">${n.h}</mn></mrow></math>`,n.x,n.y-NODE_RADIUS-6);
   } else {
     hideTooltip();
   }
@@ -1094,43 +1101,54 @@ function t3(color,glyph,label,sub){
   return '<div class="gc-cell"><div class="t3" style="--tc:'+color+'">'+(glyph||'')+'</div>'
     +'<span class="t3-lab">'+label+'</span>'+(sub?'<span class="t3-sub">'+sub+'</span>':'')+'</div>';
 }
+/* Mathematical notation in MathML. Shared by the concept cards, tooltips and panels. */
+function mathFn(sym,cls,arg){return '<mi class="'+cls+'">'+sym+'</mi>'
+  +'<mo stretchy="false">(</mo>'+(arg===undefined?'<mi>n</mi>':'<mn>'+arg+'</mn>')+'<mo stretchy="false">)</mo>';}
+const M_N='<math><mi>n</mi></math>';
+const M_F='<math>'+mathFn('f','m-f')+'</math>';
+const M_G='<math>'+mathFn('g','m-g')+'</math>';
+const M_H='<math>'+mathFn('h','m-h')+'</math>';
+const M_FGH_ROW=mathFn('f','m-f')+'<mo>=</mo>'+mathFn('g','m-g')+'<mo>+</mo>'+mathFn('h','m-h');
+const M_FGH='<math><mrow>'+M_FGH_ROW+'</mrow></math>';
+const M_FGH_BLOCK='<math class="eq-block"><mrow>'+M_FGH_ROW+'</mrow></math>';
+
 const CONCEPTS={
   'BFS':{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2.5"/><circle cx="12" cy="12" r="6.5" stroke-dasharray="2 3"/><circle cx="12" cy="12" r="10" stroke-dasharray="2 3"/></svg>',
-    title:'BFS – Breadth-first',
-    def:'<strong>BFS</strong> examines the tree level by level: first every node one step from the start, then every node two steps away, and so on.'
+    title:'BFS: breadth-first',
+    def:'<strong>BFS</strong>, breadth-first, examines the tree level by level. Every node one step from the start node is examined first, then every node two steps away, and so on.'
       +'<button class="gc-btn" onclick="closeConcept()">Got it</button>'
   },
   'DFS':{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="4" rx="1"/><rect x="4" y="10" width="16" height="4" rx="1"/><rect x="4" y="16" width="16" height="4" rx="1"/></svg>',
-    title:'DFS – Depth-first',
-    def:'<strong>DFS</strong> follows a single branch as far as it goes, and backtracks only when it gets stuck.'
+    title:'DFS: depth-first',
+    def:'<strong>DFS</strong>, depth-first, follows a single branch as far as it goes. When the branch ends, the algorithm backtracks to the most recent node where an unexplored branch remains.'
       +'<button class="gc-btn" onclick="closeConcept()">Got it</button>'
   },
   'A*':{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.4 5.9L21 10l-4.8 4.2L17.4 21 12 17.5 6.6 21l1.2-6.8L3 10l6.6-1.1L12 3z"/></svg>',
     title:'A*',
-    def:'<strong>A*</strong> weighs two things for every node: <strong>g(n)</strong>, what it has cost to get here along the edges, and <strong>h(n)</strong>, the estimate you set on the node yourself.<br><br>Their sum <strong>f(n)&nbsp;=&nbsp;g(n)&nbsp;+&nbsp;h(n)</strong> decides which node is examined next.'
+    def:'<strong>A*</strong> evaluates every node '+M_N+' that could be examined next. '+M_G+' is the sum of the edge costs from the start node to that node. '+M_H+' is the heuristic set on the node, that is, an estimate of the cost that remains to the goal.'+M_FGH_BLOCK+'The algorithm always examines the node with the lowest '+M_F+'.'
       +'<button class="gc-btn" onclick="closeConcept()">Got it</button>'
   },
   'Greedy':{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg>',
     title:'Greedy best-first',
-    def:'<strong>Greedy best-first</strong> only looks ahead: it always picks the node with the lowest <strong>h(n)</strong>, ignoring entirely what the route there has cost.'
+    def:'<strong>Greedy best-first</strong> only looks ahead: it always picks the node with the lowest '+M_H+', ignoring entirely what the route there has cost.'
       +'<button class="gc-btn" onclick="closeConcept()">Got it</button>'
   },
   bygga:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
     title:'Build your tree',
-    def:'Edit mode is on – now you shape the tree directly on the canvas.'
+    def:'Edit mode is on. You now shape the tree directly on the canvas.'
       +'<div class="gc-ctrl">'
       +'<div class="gc-ctrl-row"><span class="mbtn">Click</span><span>empty space to create a <strong>new node</strong>.</span></div>'
-      +'<div class="gc-ctrl-row"><span class="mbtn">Drag</span><span>from one node to another to create an <strong>edge</strong>. The cost box opens straight away.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Drag</span><span>from one node to another to create an <strong>edge</strong>.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn">Drag node</span><span>to an empty spot to <strong>move</strong> it.</span></div>'
-      +'<div class="gc-ctrl-row"><span class="mbtn">Click node</span><span>opens the panel where you set <strong>h(n)</strong>, make the node a <strong>goal</strong> or delete it.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Click node</span><span>opens the panel where you set '+M_H+', make the node a <strong>goal</strong> or delete it.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn">Click edge</span><span>at its midpoint to change the <strong>cost</strong>.</span></div>'
       +'</div>'
-      +'<div class="gc-note"><strong>g(n)</strong> is added up from the edge costs during the search. <strong>h(n)</strong> you set yourself on each node – it is the guess about how far is left to the goal.</div>'
+      +'<div class="gc-note">'+M_G+' is added up from the edge costs during the search. '+M_H+' is set by you on each node, as an estimate of the cost that remains to the goal.</div>'
       +'<button class="gc-btn" onclick="closeConcept()">Start building</button>'
   },
   frontier:{
@@ -1141,8 +1159,8 @@ const CONCEPTS={
       +'<div class="gc-ctrl">'
       +'<div class="gc-ctrl-row"><span class="mbtn">FIFO</span><span><strong>BFS</strong> takes the one that has waited longest. First in, first out.</span></div>'
       +'<div class="gc-ctrl-row"><span class="mbtn">LIFO</span><span><strong>DFS</strong> takes the one added last. The collection is then called a <strong>stack</strong>.</span></div>'
-      +'<div class="gc-ctrl-row"><span class="mbtn">min h(n)</span><span><strong>Greedy</strong> takes the one that appears closest to the goal.</span></div>'
-      +'<div class="gc-ctrl-row"><span class="mbtn">min f(n)</span><span><strong>A*</strong> takes the one with the lowest cost so far plus estimate remaining.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">min '+M_H+'</span><span><strong>Greedy best-first</strong> takes the node with the lowest '+M_H+'.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">min '+M_F+'</span><span><strong>A*</strong> takes the node with the lowest '+M_F+'.</span></div>'
       +'</div>'
       +'<div class="gc-note">The tag beside the heading shows which rule applies right now. The <strong>Show queue</strong> button above the diagram draws the same nodes directly on the canvas.</div>'
       +'<button class="gc-btn" onclick="closeConcept()">Got it</button>'
@@ -1154,15 +1172,16 @@ const CONCEPTS={
       +'<div class="gc-grid">'
       +t3('#34c759','','Start node','where the search begins')
       +t3('#ef5b5b','','Goal node','what is being searched for')
-      +t3('#4d80ff','','Explored','already examined')
-      +t3('#f0a94e','','In queue','up next')
-      +t3('#3ddc84','','Path found','start → goal')
+      +t3('#4d80ff','','Examined','the algorithm is done with it')
+      +t3('#f0a94e','','In queue','waiting its turn')
+      +t3('#3ddc84','','Path found','from start to goal')
       +'</div>'
       +'<div class="gc-ctrl">'
-      +'<div class="gc-ctrl-row"><span class="mbtn">Space</span><span>play / pause the playback.</span></div>'
-      +'<div class="gc-ctrl-row"><span class="mbtn">← →</span><span>step back / forward, one node at a time.</span></div>'
-      +'<div class="gc-ctrl-row"><span class="mbtn">Hover</span><span>during an A* search: hold the pointer over a node to see <em>f(n)&nbsp;=&nbsp;g(n)&nbsp;+&nbsp;h(n)</em>.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Space</span><span>starts and pauses the playback.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">← →</span><span>move the playback one node backwards or forwards.</span></div>'
+      +'<div class="gc-ctrl-row"><span class="mbtn">Hover</span><span>hold the pointer over a node during an A* search to see the calculation of '+M_F+'.</span></div>'
       +'</div>'
+      +'<div class="gc-note"><strong>Examined</strong> is the number of nodes the algorithm has taken out of the queue. <strong>Search cost</strong> is the sum of the edge costs leading to those nodes, and <strong>path cost</strong> is the sum of the edge costs along the path that was found.</div>'
   }
 };
 
@@ -1206,7 +1225,7 @@ function setEditMode(on,announce){
   btn.setAttribute("aria-pressed",on?"true":"false");
   document.getElementById("canvasContainer").classList.toggle("editing",on);
   if(!on){deselect();hideEdgeEditor();snapPreview=null;drawAll();}
-  if(announce)setStatus(on?'Edit mode on – click to create nodes, drag between nodes for edges.':'Edit mode off.');
+  if(announce)setStatus(on?'Edit mode is on. Click to create nodes and drag between nodes to create edges.':'Edit mode is off.');
 }
 document.getElementById("editToggle").addEventListener("click",()=>{
   setEditMode(!editMode,true);
@@ -1248,7 +1267,7 @@ document.getElementById("ntGoal").addEventListener("click",()=>{if(selectedNode)
 document.getElementById("ntDelete").addEventListener("click",()=>{if(selectedNode){removeNode(selectedNode);deselect();}});
 document.getElementById("ntH").addEventListener("input",e=>{if(!selectedNode)return;let v=parseFloat(e.target.value);if(isNaN(v))v=0;selectedNode.h=v;resetSearch();drawAll();});
 document.getElementById("ntH").addEventListener("keydown",e=>{if(e.key==="Enter")e.target.blur();});
-/* Stegknappar: ett tal skrivet med finger är svårt att träffa, en knapp är det inte. */
+/* Stepper buttons for changing the value by touch. */
 function nudgeH(d){
   if(!selectedNode)return;
   const inp=document.getElementById("ntH");
@@ -1293,7 +1312,7 @@ function nudgeCost(d){
 document.getElementById("eePlus").addEventListener("click",()=>nudgeCost(1));
 document.getElementById("eeMinus").addEventListener("click",()=>nudgeCost(-1));
 document.getElementById("eeInput").addEventListener("blur",e=>{
-  /* Klick på + eller − flyttar fokus men ska inte stänga rutan. */
+  /* Clicking + or − moves focus but must not close the panel. */
   const to=e.relatedTarget;
   if(to&&to.closest&&to.closest(".edge-editor"))return;
   commitEdge();
@@ -1400,7 +1419,7 @@ function renderFrame(i, forward){
   let isFinal=(f.result!=null);
   search_in_progress=!isFinal;
 
-  // Animationshakar
+  /* Animation hooks */
   let now=performance.now();
   // register new frontier nodes for the grow-in animation
   let fr=new Set(f.frontier);
@@ -1451,12 +1470,12 @@ function updatePlayerUI(){
 function ensureComputed(){
   let alg=selectedAlg;
   if(computedFor===alg&&frames.length)return true;
-  if(!getNodeById(startNodeId)){setStatus("The start node is missing!");return false;}
-  if(endNodeIds.size===0){setStatus("No goal node selected – select a node and press Goal.");return false;}
+  if(!getNodeById(startNodeId)){setStatus("The start node is missing.");return false;}
+  if(endNodeIds.size===0){setStatus("No goal node is selected. Select a node and press Goal.");return false;}
   deselect();hideEdgeEditor();
   enterTimes.clear();activeNode=null;particles.length=0;pathState=null;dimState=null;lastForwardIdx=-1;
   precomputeFrames(alg);computedFor=alg;frameIdx=-1;
-  // precompute ran the whole search internally -- clear the visible state so nothing is revealed early
+  /* The precomputation ran the whole search. The visible state is cleared. */
   visitedSet.clear();pathSet.clear();currentExpandingId=null;search_in_progress=false;
   return frames.length>0;
 }
@@ -1467,7 +1486,7 @@ function startPlayback(){
   if(!ensureComputed())return;
   if(frameIdx>=frames.length-1){frameIdx=-1;lastForwardIdx=-1;}
   isPlaying=true;if(playTimer)clearInterval(playTimer);
-  stepForward();   // show the first step right away instead of waiting for an interval
+  stepForward();   /* The first step is shown immediately. */
   playTimer=setInterval(()=>{if(!stepForward())pausePlayback();},PLAY_INTERVAL);
   updatePlayerUI();
 }
@@ -1549,7 +1568,7 @@ function updateDSPanel(){
 }
 function renderCurrentNode(container, nodeId, explored, detail){
   let stat=document.createElement("div");stat.className="ds-explored";
-  stat.innerHTML=`<span class="ds-explored-num">${explored}</span><span class="ds-explored-lab">explored</span>`;
+  stat.innerHTML=`<span class="ds-explored-num">${explored}</span><span class="ds-explored-lab">examined</span>`;
   container.appendChild(stat);
   if(nodeId==null) return;
   let card=document.createElement("div");card.className="ds-current";
@@ -1601,7 +1620,7 @@ function buildResultMarkup(o){
       +'<button class="ro-btn" onclick="dismissResultOverlay()">Show tree</button>'
       +'</div>';
   }
-  let metrics='<div class="ro-metric"><span class="ro-num">'+o.explored+'</span><span class="ro-lab">explored</span></div>'
+  let metrics='<div class="ro-metric"><span class="ro-num">'+o.explored+'</span><span class="ro-lab">examined</span></div>'
     +'<div class="ro-metric"><span class="ro-num">'+o.searchCost+'</span><span class="ro-lab">search cost</span></div>'
     +'<div class="ro-metric"><span class="ro-num">'+o.pathCost+'</span><span class="ro-lab">path cost</span></div>';
   return '<div class="ro-card">'
@@ -1699,8 +1718,7 @@ function stepAstar(){
 /* ============================================================
    QUEUE VISIBILITY ON THE CANVAS
    ============================================================ */
-/* Etiketten säger vad knappen gör härnäst, så att man ser om kön
-   visas eller inte utan att först behöva klicka. */
+/* The label states what the button does next. */
 function updateQueueToggleLabel(){
   const el=document.getElementById("queueToggleLabel");if(!el)return;
   el.textContent=showQueueOnCanvas?'Hide queue':'Show queue';
@@ -1729,12 +1747,12 @@ document.getElementById("algCards").addEventListener("click",e=>{
   document.querySelectorAll(".alg-card").forEach(c=>c.setAttribute("aria-checked",c===card?"true":"false"));
   document.documentElement.style.setProperty("--alg",THEMES[selectedAlg]);
   resetSearch();drawAll();
-  // Quick blue/algorithm glow on the canvas confirming the switch
+  /* Confirming light effect when the algorithm is changed. */
   const cc=document.getElementById("canvasContainer");
   cc.classList.remove("alg-flash");
   void cc.offsetWidth;
   cc.classList.add("alg-flash");
-  // Förklaringen öppnas bara via frågetecknet, inte när man väljer algoritm.
+  /* The concept card opens only through the question mark. */
   if(infoBtn)openConceptFrom(selectedAlg,card);
 });
 
@@ -1751,7 +1769,7 @@ loadPredefinedTree("Example tree 1");
 updatePlayerUI();
 updateQueueToggleLabel();
 
-// Start the render loop only now -- all variables drawScene reads have been initialized
+/* The render loop starts once every variable drawScene reads is initialised. */
 requestAnimationFrame(function loop(){ drawScene(); requestAnimationFrame(loop); });
 </script>
 </body>
