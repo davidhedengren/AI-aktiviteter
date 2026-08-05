@@ -182,7 +182,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .intro-start:hover{background:#3d6de6;transform:translateY(-2px) scale(1.01);box-shadow:0 12px 30px rgba(77,128,255,.4);}
 .intro-start svg{width:15px;height:15px;flex-shrink:0;}
 
-/* begrepp pills + concept card */
+/* concept pills and concept card */
 .begrepp-row{display:flex;flex-wrap:wrap;gap:5px;padding-top:4px;}
 .g-tag{display:inline-flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:.72em;font-weight:600;padding:5px 10px 5px 8px;border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--dim);cursor:pointer;transition:.2s var(--ease-spring);}
 .g-tag:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-dim);transform:translateY(-1px);}
@@ -224,7 +224,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .concept-card.training-card{width:470px;}
 .concept-card.training-card .concept-card-inner{max-height:92vh;overflow-y:auto;}
 .concept-card.training-card #conceptIllus{display:none;}
-/* Live training mode: the app sits above the backdrop so the Q-table stays visible and updates */
+/* Training mode: the app sits above the backdrop so the Q-table stays visible and updates */
 .concept-backdrop.training-live{background:rgba(6,7,14,.32);backdrop-filter:none;-webkit-backdrop-filter:none;}
 .app.training-live{z-index:302;}
 .app.training-live .left{filter:blur(1.5px) brightness(.6);pointer-events:none;transition:filter .35s var(--ease-out);}
@@ -294,11 +294,11 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <div class="intro-card">
     <div class="intro-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="4" width="3" height="16" rx="1.3"/><rect x="10.5" y="4" width="3" height="16" rx="1.3"/><rect x="16" y="4" width="3" height="16" rx="1.3" opacity=".4"/></svg></div>
     <h2>NIM with Reinforcement Learning</h2>
-    <p class="sub">See how an AI system learns to play the game NIM from scratch – just by playing against itself. The rule is simple: take 1–3 sticks per turn, and whoever is forced to take the <strong style="color:var(--text)">last</strong> stick loses.</p>
+    <p class="sub">See how an AI system learns to play the game NIM from scratch, just by playing against itself. The rule is simple: take 1–3 sticks per turn, and whoever is forced to take the <strong style="color:var(--text)">last</strong> stick loses.</p>
     <div class="intro-steps">
-      <div class="intro-step"><div class="intro-num">1</div><div class="intro-step-text"><strong>Train the AI system</strong> – Choose how many games the AI should practise. Watch how the Q-table changes during training!</div></div>
-      <div class="intro-step"><div class="intro-num">2</div><div class="intro-step-text"><strong>Explore the Q-table</strong> – The table on the right shows what the AI has learned. Green = good move, red = bad. Can you spot a pattern?</div></div>
-      <div class="intro-step"><div class="intro-num">3</div><div class="intro-step-text"><strong>Play against the AI</strong> – Challenge a half-trained or fully trained AI. Can you beat it?</div></div>
+      <div class="intro-step"><div class="intro-num">1</div><div class="intro-step-text"><strong>Train the AI system.</strong> Choose how many games the AI should practise. Watch how the Q-table changes during training!</div></div>
+      <div class="intro-step"><div class="intro-num">2</div><div class="intro-step-text"><strong>Explore the Q-table.</strong> The table on the right shows what the AI has learned. Green = good move, red = bad. Can you spot a pattern?</div></div>
+      <div class="intro-step"><div class="intro-num">3</div><div class="intro-step-text"><strong>Play against the AI.</strong> Challenge a half-trained or fully trained AI. Can you beat it?</div></div>
     </div>
     <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -311,7 +311,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <svg class="hd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="4" width="3" height="16" rx="1.3"/><rect x="10.5" y="4" width="3" height="16" rx="1.3"/><rect x="16" y="4" width="3" height="16" rx="1.3" opacity=".4"/></svg>
       <h1>NIM</h1>
     </div>
-    <p>See how an AI system learns to play NIM using reinforcement learning – then try playing against it!</p>
+    <p>See how an AI system learns to play NIM using reinforcement learning. Then try playing against it!</p>
   </div>
   <a class="lang-link" href="https://www.ai-aktiviteter.se/nim" hreflang="sv" lang="sv"><svg viewBox="0 0 50 30" aria-hidden="true"><rect width="50" height="30" fill="#006AA7"/><path d="M0,15 H50 M17,0 V30" stroke="#FECC02" stroke-width="6"/></svg>Svenska</a>
 </div></div>
@@ -409,7 +409,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   </div>
 
   <div class="right">
-    <div class="qt-title">Q-table – the AI's brain</div>
+    <div class="qt-title">Q-table: the AI's brain</div>
     <div class="qt-desc">Each row = sticks remaining. Each column = move. <strong style="color:var(--good)">Green</strong> = good move, <strong style="color:var(--bad)">red</strong> = bad. Gold border = best move in that state.</div>
     <div class="qhdr-row" id="qhdrRow"></div>
     <div id="qtable"></div>
@@ -489,19 +489,19 @@ function updateConvergeUI(conv){
     el.innerHTML='✅ <strong>The AI has learned the optimal strategy!</strong>';
   }else if(goldFrames>=total*0.7){
     el.className='converge-msg show full';
-    el.innerHTML='🎯 <strong>The AI has nearly cracked the game</strong> – just a few positions left to polish';
+    el.innerHTML='🎯 <strong>The AI has nearly cracked the game.</strong> Just a few positions are left to polish.';
   }else if(goldFrames>=3){
     el.className='converge-msg show partial';
-    el.innerHTML='📈 <strong>The AI is growing more confident in its strategy</strong> – it knows what to do in many situations';
+    el.innerHTML='📈 <strong>The AI is growing more confident in its strategy.</strong> It knows what to do in many situations.';
   }else if(goldFrames>=1){
     el.className='converge-msg show partial';
-    el.innerHTML='💡 <strong>The AI is starting to learn a strategy</strong> – it has found a few good moves';
+    el.innerHTML='💡 <strong>The AI is starting to learn a strategy.</strong> It has found a few good moves.';
   }else if(sensing>=2){
     el.className='converge-msg show partial';
-    el.innerHTML='🔍 <strong>The AI is starting to sense a pattern</strong> – some moves seem better than others';
+    el.innerHTML='🔍 <strong>The AI is starting to sense a pattern.</strong> Some moves seem better than others.';
   }else{
     el.className='converge-msg show none';
-    el.innerHTML='🎲 <strong>The AI is trying random moves</strong> – it has not found a pattern yet';
+    el.innerHTML='🎲 <strong>The AI is trying random moves.</strong> It has not found a pattern yet.';
   }
 }
 
@@ -515,7 +515,7 @@ function startTraining(){
   document.getElementById('trainDone').style.display='none';
   document.getElementById('convergeMsg').className='converge-msg';
   renderQHeaders();renderQTable(-1);
-  openTrainingCard(episodes);   // training runs LIVE inside the theatre -- the Q-table fills in as you watch
+  openTrainingCard(episodes);   /* Training runs inside the training view and the Q-table fills in continuously. */
 }
 
 function pauseTraining(){
@@ -623,7 +623,7 @@ function updateQInfo(){
     if(a!==null&&getQ(s,a)>0.80)wins.push(s+' pinnar kvar → ta '+a);
   }
   document.getElementById('qinfo').innerHTML=
-    `The secret: always leave the opponent a number of sticks that gives <strong>remainder 1</strong> when divided by ${maxTake+1} – that is ${Array.from({length:4},(_,i)=>1+i*(maxTake+1)).filter(v=>v<=totalSticks).join(", ")}...<br><br>
+    `The secret: always leave the opponent a number of sticks that gives <strong>remainder 1</strong> when divided by ${maxTake+1}, that is ${Array.from({length:4},(_,i)=>1+i*(maxTake+1)).filter(v=>v<=totalSticks).join(", ")} and so on.<br><br>
     Moves the AI has learned, for example: <span style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:0.95em">${wins.slice(0,8).join(', ')}</span><br><br>
     Can you see the gold borders following that pattern?`;
 }
@@ -679,7 +679,7 @@ function aiTurn(){
     animTake(a,()=>{
       gameSticks-=a;renderSticks();hlQRow(gameSticks);
       if(gameSticks===0){endGame(true);}
-      else{humanTurn=true;renderTakeBtns();setStatus('🎯',`The AI took ${a}. <strong>Your turn</strong> – ${gameSticks} sticks left.`);}
+      else{humanTurn=true;renderTakeBtns();setStatus('🎯',`The AI took ${a}. <strong>Your turn.</strong> ${gameSticks} sticks left.`);}
     });
   },550);
 }
@@ -750,7 +750,7 @@ const CONCEPTS={
   cRL:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg>',
     title:'Reinforcement learning',
-    def:'The AI system learns by <strong>playing over and over</strong> and noticing what works. Moves that lead to a win get a higher score (Q-value), moves that lead to a loss get a lower one. No human supplies the right answer – the system discovers the strategy entirely on its own, through experience.',
+    def:'The AI system learns by <strong>playing over and over</strong> and noticing what works. Moves that lead to a win get a higher score (Q-value), moves that lead to a loss get a lower one. No human supplies the right answer. The system discovers the strategy entirely on its own, through experience.',
     illus:'<svg viewBox="0 0 140 70"><circle cx="35" cy="35" r="16" fill="rgba(122,162,255,.18)" stroke="#7aa2ff" stroke-width="2"/><text x="35" y="39" text-anchor="middle" font-family="DM Sans" font-weight="700" font-size="9" fill="#7aa2ff">AI</text><path d="M53 28c20-14 40-8 48 4" stroke="rgba(255,255,255,.4)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M101 32l4 4-4 4" stroke="rgba(255,255,255,.4)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="80" y="18" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(255,255,255,.5)">move</text><path d="M101 42c-10 14-30 18-48 10" stroke="#34c759" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M55 53l-4-4 4-4" stroke="#34c759" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="80" y="63" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#34c759">reward</text></svg>'
   },
   cQval:{
@@ -762,7 +762,7 @@ const CONCEPTS={
   cExplore:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" opacity=".4"/></svg>',
     title:'Explore vs exploit',
-    def:'At first the AI <strong>explores</strong> – trying moves almost at random to discover what works. The more it has trained, the more it begins to <strong style="color:var(--gold)">exploit</strong> what it already knows, choosing its best known moves. Balancing the two is what makes the learning work.',
+    def:'At first the AI <strong>explores</strong>, trying moves almost at random to discover what works. The more it has trained, the more it begins to <strong style="color:var(--gold)">exploit</strong> what it already knows, choosing its best known moves. Balancing the two is what makes the learning work.',
     illus:'<svg viewBox="0 0 140 70"><rect x="10" y="46" width="120" height="10" rx="5" fill="rgba(255,255,255,.08)"/><rect x="10" y="46" width="80" height="10" rx="5" fill="rgba(122,162,255,.5)"/><rect x="90" y="46" width="40" height="10" rx="5" fill="rgba(255,216,102,.55)"/><text x="50" y="30" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#7aa2ff">explores</text><text x="110" y="30" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#ffd866">exploits</text><path d="M10 20c40 0 80 20 120 20" stroke="rgba(255,255,255,.25)" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/></svg>'
   }
 };
@@ -810,7 +810,7 @@ const BRAIN_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 const TRAIN_THEATER_HTML=
   '<div class="tt">'
   + '<div class="tt-canvas-wrap"><canvas id="ttCanvas"></canvas></div>'
-  + '<div class="tt-hint">👉 Watch the <strong>Q-table</strong> – it fills in live while the AI plays</div>'
+  + '<div class="tt-hint">👉 Watch the <strong>Q-table</strong>. It fills in while the AI plays.</div>'
   + '<div class="tt-status" id="ttStatus"></div>'
   + '<div class="tt-ee"><div class="tt-ee-top"><span class="ee-x">Exploring <b id="ttExpl">100</b>%</span><span class="ee-o">Exploiting <b id="ttExploit">0</b>%</span></div>'
   + '<div class="tt-ee-bar"><i id="ttEeFill"></i></div>'
@@ -862,8 +862,8 @@ function runTrainTheater(){
   trainAnimActive=true;
   const t0=performance.now();
   const DURATION=Math.min(14000, 5000+ttEpisodes*3.2);
-  // Live training state (paced to the timeline)
-  const ALPHA=0.15, FLOOR=0.12, DECAY_HORIZON=400;   // fast horisont – oberoende av vald spel-budget
+  /* Training state, paced to the timeline. */
+  const ALPHA=0.15, FLOOR=0.12, DECAY_HORIZON=400;   /* Fixed horizon, independent of the chosen number of games. */
   let trainDone=0, convCount=0, converged=false, lastRender=0;
   const trainEps=()=>Math.max(FLOOR,1-trainDone/DECAY_HORIZON);
 
@@ -916,7 +916,7 @@ function runTrainTheater(){
     const mv=chooseMove(game.left, eps);
     const take=Math.min(mv.a, game.left);
     game.lastExplore=mv.explore;
-    const moveCol = mv.explore ? (game.turn?B:A) : '#ffd866';   // guld = utnyttjar kunskap
+    const moveCol = mv.explore ? (game.turn?B:A) : '#ffd866';   /* gold = exploiting knowledge */
     let removed=0;
     for(let i=maxDisp-1;i>=0 && removed<take;i--){
       if(game.sticks[i].alive){
@@ -1024,7 +1024,7 @@ function runTrainTheater(){
   function frame(now){
     const frac=Math.min(1,(now-t0)/DURATION);
 
-    // -- LIVE TRAINING: train up to the timeline target, update the Q-table --
+    /* -- Training up to the timeline target, updating the Q-table -- */
     if(!converged){
       const target=Math.round(frac*ttEpisodes);
       while(trainDone<target && trainDone<ttEpisodes){
@@ -1052,7 +1052,7 @@ function runTrainTheater(){
     const railEl=document.getElementById('ttRail'); if(railEl)railEl.style.width=(converged?100:Math.min(1,trainDone/ttEpisodes)*100)+'%';
     const gEl=document.getElementById('ttGames'); if(gEl)gEl.textContent=trainDone;
 
-    // the explore/exploit meter mirrors the REAL epsilon used during training
+    /* The explore and exploit meter shows the same epsilon that training uses. */
     const eps=trainEps();
     const explorePct=Math.round(eps*100), exploitPct=100-explorePct;
     const exEl=document.getElementById('ttExpl'); if(exEl)exEl.textContent=explorePct;
@@ -1061,7 +1061,7 @@ function runTrainTheater(){
     const cap=document.getElementById('ttEeCap');
     if(cap){
       if(exploitPct<25) cap.innerHTML='Trying moves <strong>at random</strong> to discover what works';
-      else if(exploitPct<70) cap.innerHTML='Starting to <strong>trust</strong> what it has learned – but still trying new things';
+      else if(exploitPct<70) cap.innerHTML='Starting to <strong>trust</strong> what it has learned, but still trying new things';
       else cap.innerHTML='Almost always picks its <strong>best known</strong> moves';
     }
 
@@ -1108,7 +1108,7 @@ function finishTheater(){
   let msg;
   if(goldFrames>=total&&total>0) msg='✅ <strong>The AI cracked the game!</strong> It found the optimal strategy in '+ttGamesPlayed+' games.';
   else if(goldFrames>=total*0.7) msg='🎯 <strong>Nearly optimal.</strong> Train a few more games to polish off the last positions.';
-  else if(goldFrames>=1) msg='📈 <strong>The AI is learning.</strong> It handles several positions – more games make the strategy surer.';
+  else if(goldFrames>=1) msg='📈 <strong>The AI is learning.</strong> It handles several positions. More games make the strategy surer.';
   else msg='🎲 <strong>Getting there.</strong> Raise the number of training games and the AI will find the pattern.';
   const dm=document.getElementById('ttDoneMsg'); if(dm)dm.innerHTML=msg;
   const done=document.getElementById('ttDone'); if(done)done.classList.add('show');
@@ -1126,7 +1126,7 @@ function playFromCard(){ closeConcept(); goPhase('play'); newGame(); }
     const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
     el.style.setProperty('--mx',(px*100)+'%');
     el.style.setProperty('--my',(py*100)+'%');
-    // The training card stays perfectly still -- its content is already animated and tilting makes it hard to read.
+    /* The training card is stationary, since its content is already animated. */
     if(card&&card.classList.contains('training-card')){flat();return;}
     const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
     el.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
