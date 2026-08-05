@@ -297,6 +297,20 @@
   .tex { color:var(--text); }
   .katex { font-size:1.04em; }
   .katex-display { margin:0; text-align:left; }
+  /* Varje formel ligger i en ruta som går att rulla i sidled, så att breda
+     uttryck aldrig klipps av på smala skärmar. */
+  .tex { display:inline-block; max-width:100%; overflow-x:auto; overflow-y:hidden;
+         -webkit-overflow-scrolling:touch; vertical-align:middle; }
+  .tex[data-display="1"] { display:block; }
+  .katex-display { overflow-x:auto; overflow-y:hidden; padding-bottom:2px; }
+  .tex::-webkit-scrollbar, .katex-display::-webkit-scrollbar { height:5px; }
+  .tex::-webkit-scrollbar-thumb, .katex-display::-webkit-scrollbar-thumb {
+         background:rgba(255,255,255,.16); border-radius:3px; }
+  @media (max-width:760px) { .katex { font-size:0.95em; } }
+  @media (max-width:520px) {
+    .katex { font-size:0.88em; }
+    .math-prior-grid { grid-template-columns:1fr; }
+  }
   .mwb-formula .katex-display, .calc-formula-wrap .katex-display { white-space:normal; }
   .mpb-frac .katex { font-size:1em; }
   .ex-list { max-height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:5px;padding-right:2px; }
@@ -435,7 +449,7 @@
   .concept-icon { width:54px;height:54px;margin:0 auto 12px;border-radius:16px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent2);position:relative;z-index:3;transform:translateZ(36px);box-shadow:0 10px 24px rgba(77,128,255,.18); }
   .concept-icon svg { width:28px;height:28px; }
 
-  /* ── Token-modal: samma glaskorts-stil som begreppskorten, men bredare & vänsterjusterad ── */
+  /* ── Tokenrutan: glaskortsstil som begreppskorten, bredare och vänsterjusterad ── */
   .token-modal { position:fixed;top:50%;left:50%;z-index:311;width:560px;max-width:92vw;max-height:82vh;overflow-y:auto;
     transform:translate(-50%,-50%) scale(.85);opacity:0;pointer-events:none;
     transition:transform .34s var(--ease-spring),opacity .26s var(--ease-out); }
@@ -525,7 +539,7 @@
     </svg>
     <h2>Naïve <span>Bayes</span>-labbet</h2>
     <p class="o-lead">
-      Här tränar du en <strong>Naïve Bayes-klassificerare</strong> — samma typ av algoritm som används i spamfilter — och ser matematiken bakom varje beslut.
+      Här tränar du en <strong>Naïve Bayes-klassificerare</strong>, samma typ av algoritm som används i spamfilter, och ser matematiken bakom varje beslut.
     </p>
     <div class="o-step">
       <div class="o-step-num">1</div>
@@ -535,12 +549,12 @@
     <div class="o-step">
       <div class="o-step-num">2</div>
       <div class="o-step-body"><div class="o-step-h">Utforska modellen</div>
-      <p>Se vad modellen lärt sig — vilka ord som lutar mot skräppost och vilka som lutar mot vanliga mejl, och hur starkt.</p></div>
+      <p>Se vad modellen lärt sig, alltså vilka ord som lutar mot skräppost, vilka som lutar mot vanliga mejl och hur starkt de gör det.</p></div>
     </div>
     <div class="o-step">
       <div class="o-step-num">3</div>
       <div class="o-step-body"><div class="o-step-h">Klassificera</div>
-      <p>Skriv ett eget mejl och tryck Enter. Du får modellens svar med säkerhet i procent — och kan följa hela beräkningen bakom.</p></div>
+      <p>Skriv ett eget mejl och tryck Enter. Du får modellens svar med säkerhet i procent och kan följa hela beräkningen bakom.</p></div>
     </div>
     <button class="overlay-btn" onclick="closeIntro()">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -572,7 +586,7 @@
             <div id="ratio-bar-ham"  style="width:50%;background:var(--ham); transition:width .3s var(--ease-out);box-shadow:0 0 10px var(--ham-glow)"></div>
           </div>
           <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.6" id="ratio-note">
-            Jämn fördelning — priorsannolikheten P(klass) påverkar inte klassificeringen nämnvärt.
+            Jämn fördelning. Priorsannolikheten P(klass) påverkar inte klassificeringen nämnvärt.
           </div>
         </div>
         <div class="status-msg" id="gen-status"></div>
@@ -613,7 +627,7 @@
     <div class="train-done" id="trainDoneMsg" style="display:none">
       <div class="train-done-icon">✓</div>
       <div class="train-done-text">Modellen är tränad på <strong id="trainDoneN">0</strong> exempel.</div>
-      <div class="train-done-note">Naïve Bayes tränas genom att <strong>räkna</strong> — hur ofta varje ord dyker upp i respektive klass. Det görs i en enda genomgång av datan, till skillnad från t.ex. ett neuralt nätverk som behöver upprepad träning över många epoker.</div>
+      <div class="train-done-note">Naïve Bayes tränas genom att <strong>räkna</strong>, alltså genom att se hur ofta varje ord dyker upp i respektive klass. Det görs i en enda genomgång av datan, till skillnad från t.ex. ett neuralt nätverk som behöver upprepad träning över många epoker.</div>
       <button class="btn" onclick="goToModelTab()">Visa modellen →</button>
     </div>
   </div>
@@ -650,7 +664,7 @@
         <div class="card" style="margin-bottom:0">
           <span class="card-label">Importera från fil</span>
           <div class="format-box">
-            En <strong style="color:var(--text)">.csv</strong> eller <strong style="color:var(--text)">.txt</strong> — en rad per exempel:
+            En <strong style="color:var(--text)">.csv</strong> eller <strong style="color:var(--text)">.txt</strong> med en rad per exempel:
             <code>SPAM,Din text här</code>
             <code>HAM,Din text här</code>
             Etiketten ska vara <code style="display:inline">SPAM</code> eller <code style="display:inline">HAM</code> (versaler).
@@ -745,18 +759,18 @@
     <button class="concept-close" onclick="closeTokenModal()">✕</button>
     <div class="token-modal-title">Tokenisering och filtrering</div>
     <p class="token-modal-desc">
-      Innan modellen kan räkna sannolikheter måste texten omvandlas till enskilda ord — det kallas <span class="term" data-term="tokenisering" tabindex="0" role="button"><strong style="color:var(--text)">tokenisering</strong></span>.
+      Innan modellen kan räkna sannolikheter måste texten omvandlas till enskilda ord. Det kallas <span class="term" data-term="tokenisering" tabindex="0" role="button"><strong style="color:var(--text)">tokenisering</strong></span>.
       Ord som är för vanliga för att säga något om klassen (<span class="term" data-term="stoppord" tabindex="0" role="button">stoppord</span>) och mycket korta ord filtreras sedan bort.
       Bara de kvarvarande orden används i klassificeringen.
     </p>
     <div class="token-wrap" id="token-display"></div>
     <div class="token-legend">
       <span><span class="tl-dot" style="background:rgba(77,128,255,.5);border-color:rgba(77,128,255,.6)"></span> Används i klassificeringen</span>
-      <span><span class="tl-dot" style="background:var(--muted);opacity:.6"></span> Stoppord — filtreras bort (för vanligt)</span>
-      <span><span class="tl-dot" style="background:var(--gold);opacity:.7"></span> För kort — filtreras bort (≤2 tecken)</span>
+      <span><span class="tl-dot" style="background:var(--muted);opacity:.6"></span> Stoppord: filtreras bort (för vanligt)</span>
+      <span><span class="tl-dot" style="background:var(--gold);opacity:.7"></span> För kort: filtreras bort (≤2 tecken)</span>
     </div>
     <p class="token-modal-note">
-      Notera: ingen lemmatisering görs — "vinner" och "vinnare" räknas som olika ord.
+      Notera att ingen lemmatisering görs, så "vinner" och "vinnare" räknas som olika ord.
       Verkliga system reducerar ofta ord till sin grundform för att öka träffsäkerheten.
     </p>
   </div>
@@ -802,7 +816,7 @@ const GLOSSARY = {
   'ordforrad':    { term:'Ordförråd (|V|)', def:'Antalet unika ord modellen sett i all träningsdata. Skrivs |V| och används i nämnaren vid Laplace-utjämning.',
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V5a2 2 0 012-2h13v18H6a2 2 0 01-2-2zM19 17H6a2 2 0 00-2 2"/></svg>',
     illus:'<svg viewBox="0 0 140 70"><rect x="30" y="12" width="80" height="46" rx="8" fill="none" stroke="#7aa2ff" stroke-width="1.4" stroke-dasharray="4 3"/><g font-family="JetBrains Mono, monospace" font-size="7.5" fill="#c2cde6"><text x="48" y="28">vinn</text><text x="80" y="28">pris</text><text x="44" y="42">gratis</text><text x="84" y="42">möte</text><text x="52" y="54">konto</text></g><text x="20" y="40" font-family="JetBrains Mono, monospace" font-size="12" fill="#ffce54" font-weight="700">|V|</text></svg>' },
-  'laplace':      { term:'Laplace-utjämning', def:'Att lägga till 1 i täljaren och |V| i nämnaren för varje ordsannolikhet. Utan den skulle ett ord som aldrig förekommit i en klass få sannolikheten noll — och eftersom alla ordsannolikheter multipliceras ihop skulle ett enda okänt ord dra hela produkten till noll. Med +1 får även osedda ord en liten sannolikhet större än noll.',
+  'laplace':      { term:'Laplace-utjämning', def:'Att lägga till 1 i täljaren och |V| i nämnaren för varje ordsannolikhet. Utan den skulle ett ord som aldrig förekommit i en klass få sannolikheten noll. Eftersom alla ordsannolikheter multipliceras ihop skulle ett enda okänt ord då dra hela produkten till noll. Med +1 får även osedda ord en liten sannolikhet större än noll.',
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/><circle cx="12" cy="12" r="9.5" stroke-dasharray="2 3"/></svg>',
     illus:'<svg viewBox="0 0 140 70"><line x1="14" y1="54" x2="126" y2="54" stroke="rgba(255,255,255,.12)"/><rect x="24" y="26" width="18" height="28" rx="3" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="1.2"/><rect x="52" y="36" width="18" height="18" rx="3" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="1.2"/><rect x="80" y="50" width="18" height="4" rx="2" fill="rgba(255,206,84,.4)" stroke="#ffce54" stroke-width="1.2"/><text x="89" y="44" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#ffce54" font-weight="700">+1</text><text x="89" y="65" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6.5" fill="#8791b3">aldrig sett</text></svg>' },
   'sannolikhet':  { term:'Ordsannolikhet P(ord | klass)', def:'Hur sannolikt ett ord är i en viss klass, beräknat från hur ofta ordet förekommit i klassens träningsdata.',
@@ -811,7 +825,7 @@ const GLOSSARY = {
   'normalisera':  { term:'Normalisera', def:'Att räkna om tal så de blir jämförbara. Här delas varje klass produkt med summan av alla klassers produkter, så svaren blir procent som tillsammans blir 100 %.',
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16M9 4l-3 16M18 4l-3 16"/></svg>',
     illus:'<svg viewBox="0 0 140 70"><rect x="20" y="28" width="63" height="14" rx="4" fill="rgba(255,106,94,.3)" stroke="#ff6a5e" stroke-width="1.2"/><rect x="83" y="28" width="37" height="14" rx="4" fill="rgba(52,211,153,.25)" stroke="#34d399" stroke-width="1.2"/><text x="51" y="22" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#ff6a5e" font-weight="700">63%</text><text x="101" y="22" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#34d399" font-weight="700">37%</text><text x="70" y="58" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#8791b3">summan = 100%</text></svg>' },
-  'evidens':      { term:'P(text) – evidensen', def:'Sannolikheten att se texten över huvud taget. Den är samma för alla klasser och behöver inte räknas separat: den är just summan i nämnaren när vi normaliserar.',
+  'evidens':      { term:'Evidensen P(text)', def:'Sannolikheten att se texten över huvud taget. Den är samma för alla klasser och behöver inte räknas separat: den är just summan i nämnaren när vi normaliserar.',
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M7 7h10M9 17h6"/></svg>',
     illus:'<svg viewBox="0 0 140 70"><text x="70" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#c2cde6" font-weight="700">P(spam)·P(text|spam)</text><line x1="24" y1="35" x2="116" y2="35" stroke="#7aa2ff" stroke-width="1.5"/><text x="70" y="52" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#ffce54" font-weight="700">summan för alla klasser</text></svg>' },
 };
@@ -1101,7 +1115,7 @@ function renderTugList() {
         </div>
         <div class="tug-verdict">Ordet är ${spam
           ? `<strong style="color:var(--spam)">${(x.pS/x.pH).toFixed(1)}× vanligare</strong> i skräppost`
-          : `<strong style="color:var(--ham)">${(x.pH/x.pS).toFixed(1)}× vanligare</strong> i ej skräppost`} — därför lutar det ${spam ? 'höger' : 'vänster'}.</div>
+          : `<strong style="color:var(--ham)">${(x.pH/x.pS).toFixed(1)}× vanligare</strong> i ej skräppost`}, och därför lutar det ${spam ? 'höger' : 'vänster'}.</div>
       </div>
     </details>`;
   }).join('');
@@ -1116,7 +1130,6 @@ function renderTugList() {
       ? `<span style="font-size:11px;color:var(--muted)">Alla ${words.length} ord visas. Orden närmast mitten säger minst om klassen.</span>`
       : '';
   }
-  renderMath(document.getElementById('tug-list'));
 }
 
 
@@ -1149,7 +1162,7 @@ function classify() {
 
   const confPct = conf * 100;
   const confColor = confPct >= 85 ? colorOf(pred) : confPct >= 65 ? '#fbbf24' : '#94a3b8';
-  const confText = confPct >= 85 ? 'Mycket säker' : confPct >= 65 ? 'Ganska säker — men med viss osäkerhet' : 'Osäker — texten liknar båda klasserna';
+  const confText = confPct >= 85 ? 'Mycket säker' : confPct >= 65 ? 'Ganska säker, men med viss osäkerhet' : 'Osäker, texten liknar båda klasserna';
   const confNote = confPct >= 85 ? 'Sannolikhetsfördelningen är tydligt ensidig.'
                  : confPct >= 65 ? 'Modellen lutar åt ett håll men orden ger blandade signaler.'
                  : 'Orden i texten förekommer ungefär lika ofta i båda klasser. Mer träningsdata eller tydligare ord skulle hjälpa.';
@@ -1161,7 +1174,7 @@ function classify() {
     <div class="confidence-zones">
       <span>0%</span><span>Osäker &lt;65%</span><span>Ganska säker &lt;85%</span><span>Mycket säker ≥85%</span><span>100%</span>
     </div>
-    <div class="confidence-verdict" style="color:${confColor}">${confPct.toFixed(1)}% — ${confText}</div>
+    <div class="confidence-verdict" style="color:${confColor}">${confPct.toFixed(1)} % · ${confText}</div>
     <div style="font-size:12px;color:var(--subtle);margin-top:4px">${confNote}</div>`;
 
 
@@ -1185,9 +1198,9 @@ function classify() {
     </p>
     ${tex(`P(\\text{klass} \\mid \\text{text}) = \\frac{\\textcolor{#ffd866}{P(\\text{klass})}\\;\\textcolor{#6698ff}{P(\\text{text} \\mid \\text{klass})}}{\\textcolor{#9aa6c4}{P(\\text{text})}}`, true)}
     <div class="fp-legend" style="margin-top:14px">
-      <div><span class="fp-dot" style="background:#ffd866"></span> <strong style="color:#ffd866">P(klass)</strong> — ${term('prior','hur vanlig klassen är')}. <em>Detta räknar vi i steg 1.</em></div>
-      <div><span class="fp-dot" style="background:#6698ff"></span> <strong style="color:#6698ff">P(text | klass)</strong> — alla ordens sannolikheter. <em>Detta räknar vi i steg 2.</em></div>
-      <div><span class="fp-dot" style="background:#9aa6c4"></span> <strong style="color:#9aa6c4">${term('evidens','P(text)')}</strong> — samma för båda klasser, så vi ${term('normalisera','normaliserar')} bort den. <em>Detta sker i steg 3.</em></div>
+      <div><span class="fp-dot" style="background:#ffd866"></span> <strong style="color:#ffd866">P(klass)</strong>: ${term('prior','hur vanlig klassen är')}. <em>Detta räknar vi i steg 1.</em></div>
+      <div><span class="fp-dot" style="background:#6698ff"></span> <strong style="color:#6698ff">P(text | klass)</strong>: alla ordens sannolikheter. <em>Detta räknar vi i steg 2.</em></div>
+      <div><span class="fp-dot" style="background:#9aa6c4"></span> <strong style="color:#9aa6c4">${term('evidens','P(text)')}</strong>: samma för båda klasser, så vi ${term('normalisera','normaliserar')} bort den. <em>Detta sker i steg 3.</em></div>
     </div>
   </div>`;
 
@@ -1197,7 +1210,7 @@ function classify() {
   <details class="step-card" open>
     <summary><span class="step-badge">Steg 1</span><span class="step-title">Beräkna hur vanliga klasserna är</span><span class="step-expand">▸</span></summary>
     <div class="step-body">
-      <p class="step-formula-link">Här beräknar vi <strong style="color:#ffd866">P(klass)</strong> — den gula delen av Bayes sats.</p>
+      <p class="step-formula-link">Här beräknar vi <strong style="color:#ffd866">P(klass)</strong>, alltså den gula delen av Bayes sats.</p>
       <p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.6">
         Innan modellen sett ett enda ord vet den redan hur vanliga klasserna är i träningsdatan. Det kallas <span class="term" data-term="prior" tabindex="0" role="button"><strong style="color:var(--text)">priorsannolikhet</strong></span>.
       </p>
@@ -1277,7 +1290,7 @@ if (tokens.length === 0) {
     <details class="step-card">
       <summary><span class="step-badge">Steg 2</span><span class="step-title">Beräkna sannolikheterna ord för ord</span><span class="step-expand">▸</span></summary>
       <div class="step-body">
-        <p class="step-formula-link">Här beräknar vi <strong style="color:#6698ff">P(text | klass)</strong> — den blå delen av Bayes sats.</p>
+        <p class="step-formula-link">Här beräknar vi <strong style="color:#6698ff">P(text | klass)</strong>, alltså den blå delen av Bayes sats.</p>
         <p class="journey-lead">Varje ord har en sannolikhet i varje klass. Den räknas ut så här:</p>
         <div class="gen-formula">
           ${tex(`P(\\text{ord} \\mid \\text{klass}) = \\frac{\\text{antal i klassen} + 1}{\\text{totalt antal ord i klassen} + |V|}`, true)}
@@ -1311,7 +1324,6 @@ if (tokens.length === 0) {
 
   document.getElementById('math-breakdown').innerHTML = html;
   document.getElementById('classify-result').style.display = 'block';
-  renderMath(document.getElementById('math-breakdown'));
 }
 
 
@@ -1322,7 +1334,7 @@ function buildFullCalc(m, steps, tokens) {
 
   let html = `
     <p style="font-size:12px;color:var(--subtle);line-height:1.7;margin:0 0 14px">
-      Vi räknar täljaren <strong style="color:#ffd866">prior</strong> × <strong style="color:#6698ff">ordsannolikheter</strong> för varje klass — alltså den gula och blå delen av Bayes sats överst.
+      Vi räknar täljaren <strong style="color:#ffd866">prior</strong> × <strong style="color:#6698ff">ordsannolikheter</strong> för varje klass, alltså den gula och blå delen av Bayes sats överst.
     </p>
     <div class="calc-flow"><div class="calc-cards">`;
 
@@ -1375,7 +1387,7 @@ function buildFullCalc(m, steps, tokens) {
     <div class="calc-final">
       <div class="calc-final-label">Sista steget · gör om till procent</div>
       <div class="calc-final-note">
-        Produkterna ovan är pyttesmå tal som är svåra att jämföra. Vi delar därför varje klass tal med <strong>summan av båda</strong> — då blir svaren procent som tillsammans blir 100%.
+        Produkterna ovan är pyttesmå tal som är svåra att jämföra. Vi delar därför varje klass tal med <strong>summan av båda</strong>. Då blir svaren procent som tillsammans blir 100 %.
       </div>
       <div class="calc-result-grid">
         ${productsPerClass.map(x => {
@@ -1477,7 +1489,7 @@ function goToModelTab() {
 }
 
 
-/* ── Träna-animationen: visar hur Naïve Bayes faktiskt tränas — genom att RÄKNA, i en enda genomgång ── */
+/* ── Träningsanimationen: visar hur Naïve Bayes tränas genom räkning, i en enda genomgång ── */
 const NB_STATUS = [
   { t: 'Läser igenom mejlen…',       at: 0    },
   { t: 'Räknar ord per klass…',      at: 0.4  },
@@ -2045,12 +2057,12 @@ function updateRatioLabel() {
   document.getElementById('ratio-bar-spam').style.width  = r + '%';
   document.getElementById('ratio-bar-ham').style.width   = hamR + '%';
   const note = r === 50
-    ? 'Jämn fördelning — priorsannolikheten P(klass) påverkar inte klassificeringen nämnvärt.'
+    ? 'Jämn fördelning. Priorsannolikheten P(klass) påverkar inte klassificeringen nämnvärt.'
     : r >= 70
-      ? `${r}% skräppost — modellen får en hög prior P(Skräppost) = ${(r/100).toFixed(2)} och börjar redan lutat åt spam innan den sett ett enda ord. Tveksamma texter klassas oftare som skräppost.`
+      ? `${r}% skräppost. Modellen får en hög prior P(Skräppost) = ${(r/100).toFixed(2)} och börjar redan lutat åt spam innan den sett ett enda ord. Tveksamma texter klassas oftare som skräppost.`
       : r <= 30
-        ? `Bara ${r}% skräppost — låg prior P(Skräppost) = ${(r/100).toFixed(2)} gör modellen "snäll". Den behöver starka spamsignaler för att klassificera som skräppost.`
-        : `${r}% skräppost — lätt sned fördelning. Priorn väger lite mer åt ${r > 50 ? 'skräppost' : 'ej skräppost'}.`;
+        ? `Bara ${r}% skräppost. Låg prior P(Skräppost) = ${(r/100).toFixed(2)} gör modellen "snäll". Den behöver starka spamsignaler för att klassificera som skräppost.`
+        : `${r}% skräppost, alltså en lätt sned fördelning. Priorn väger lite mer åt ${r > 50 ? 'skräppost' : 'ej skräppost'}.`;
   document.getElementById('ratio-note').textContent = note;
 }
 
@@ -2125,4 +2137,3 @@ refresh();
 </script>
 </body>
 </html>
-  
