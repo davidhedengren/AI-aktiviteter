@@ -260,6 +260,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .cs-num{width:21px;height:21px;border-radius:50%;background:rgba(122,162,255,.15);border:1px solid rgba(122,162,255,.32);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .cs-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
 .cs-label{font-size:.68em;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;}
+/* Formlerna sätts i MathML, webbläsarnas egen standard för matematik. Det ger
+   samma typografi som LaTeX, med riktiga bråkstreck och upphöjda exponenter,
+   utan att labben behöver hämta in något externt bibliotek. */
+.fml{font-size:1.05em;}
+.fml-wrap{text-align:center;margin:11px 0 12px;}
+.fml-block{display:inline-block;font-size:1.32em;}
+.fml .fw{color:#5fe0a3;}
+.fml .fx{color:#dfe6fb;}
+.fml .fb{color:#ff8f96;}
+.fml .fr{color:var(--gold);}
+.cs-formula .fml{font-size:1.02em;}
 .cs-formula{font-family:'JetBrains Mono',monospace;font-size:.87em;color:var(--text);white-space:nowrap;overflow-x:auto;scrollbar-width:none;}
 .cs-formula::-webkit-scrollbar{display:none;}
 .cs-formula .fw{color:#5fe0a3;}
@@ -922,6 +933,35 @@ function openCalcConcept(row){
   document.getElementById('conceptBackdrop').classList.add('show');
   requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
 }
+/* ── Formler i MathML ────────────────────────────────────────────────
+   Talen behåller sin färgkodning: vikter gröna, indata ljusa, bias rosa och
+   resultatet i guld, precis som i den löpande texten. */
+function mNum(v,cls){return `<mn${cls?` class="${cls}"`:''}>${String(v).replace('-','\u2212')}</mn>`;}
+function mVar(v,cls){return `<mi${cls?` class="${cls}"`:''}>${v}</mi>`;}
+function mOp(v){return `<mo>${v}</mo>`;}
+function mFn(n){return `<mi mathvariant="normal">${n}</mi><mo>&#8289;</mo>`;}
+function mParen(x){return `<mo form="prefix" stretchy="false" lspace="0" rspace="0">(</mo>`+x+`<mo form="postfix" stretchy="false" lspace="0" rspace="0">)</mo>`;}
+function mFrac(a,b){return `<mfrac><mrow>${a}</mrow><mrow>${b}</mrow></mfrac>`;}
+function mPow(a,b){return `<msup><mrow>${a}</mrow><mrow>${b}</mrow></msup>`;}
+function mml(inner,block){const m=`<math class="fml${block?' fml-block':''}" display="${block?'block':'inline'}"><mrow>${inner}</mrow></math>`;return block?`<div class="fml-wrap">${m}</div>`:m;}
+function mmlSum(contribs,biasV,sum,fmt,block){
+  let out='';
+  contribs.forEach((c,i)=>{if(i)out+=mOp('+');out+=mNum(fmt(c.w),'fw')+mOp('&#215;')+mNum(fmt(c.input),'fx');});
+  out+=mOp('+')+(biasV<0?mParen(mNum(fmt(biasV),'fb')):mNum(fmt(biasV),'fb'));
+  return mml(out+mOp('=')+mNum(fmt(sum),'fr'),block);
+}
+function mmlActValue(fn,sum,a,fmt,block){
+  const x=mNum(fmt(sum)),y=mNum(fmt(a),'fr');
+  if(fn==='ReLU')return mml(mFn('max')+mParen(mNum(0)+mOp(',')+x)+mOp('=')+y,block);
+  if(fn==='\u03c3')return mml(mVar('\u03c3')+mParen(x)+mOp('=')+y,block);
+  return mml(mFn('tanh')+mParen(x)+mOp('=')+y,block);
+}
+function mmlActDef(fn){
+  const x=mVar('x'),ex=mPow(mVar('e'),x),emx=mPow(mVar('e'),mOp('&#8722;')+x);
+  if(fn==='ReLU')return mml(mFn('ReLU')+mParen(x)+mOp('=')+mFn('max')+mParen(mNum(0)+mOp(',')+x),true);
+  if(fn==='\u03c3')return mml(mVar('\u03c3')+mParen(x)+mOp('=')+mFrac(mNum(1),mNum(1)+mOp('+')+emx),true);
+  return mml(mFn('tanh')+mParen(x)+mOp('=')+mFrac(ex+mOp('&#8722;')+emx,ex+mOp('+')+emx),true);
+}
 function buildSumExplain(l,contribs,sum,biasV){
   const fmt=v=>isCalc()&&v===Math.round(v)?String(Math.round(v)):v.toFixed(isCalc()?1:3);
   const av=(l===1)?activeVars():null;
@@ -930,17 +970,17 @@ function buildSumExplain(l,contribs,sum,biasV){
     return `${srcName} has the value ${fmt(c.input)} and is multiplied by the weight ${fmt(c.w)}, giving ${fmt(c.contrib)}`;
   }).join('. ');
   const p2=parts.charAt(0).toUpperCase()+parts.slice(1);
-  return `The neuron collects signals from ${l===1?'the input layer':'the previous layer'}. ${p2}.<br><br>All contributions are added together with the neuron's own <strong>bias</strong> of ${fmt(biasV)}. The bias is a starting value that lets the neuron respond even when all inputs are zero.<br><br>The sum of all this is <strong>${fmt(sum)}</strong>, which is then passed on to the activation step.`;
+  return `The neuron collects signals from ${l===1?'the input layer':'the previous layer'}. ${p2}.<br><br>All contributions are added together with the neuron's own <strong>bias</strong> of ${fmt(biasV)}. The bias is a starting value that lets the neuron respond even when all inputs are zero.<br><br>The calculation looks like this:${mmlSum(contribs,biasV,sum,fmt,true)}The sum of all this is <strong>${fmt(sum)}</strong>, which is then passed on to the activation step.`;
 }
 function buildActExplain(sum,a,isOut,fn){
   const fmt=v=>isCalc()&&v===Math.round(v)?String(Math.round(v)):v.toFixed(isCalc()?1:3);
-  let expl;
-  if(isCalc()){
-    expl=`The sum ${fmt(sum)} is passed through the activation function <strong>ReLU</strong>, which lets positive numbers through unchanged and sets negative numbers to 0. Here that gives max(0, ${fmt(sum)}) = <strong>${fmt(a)}</strong>.`;
-  }else{
-    const fnName=fn==='σ'?'Sigmoid':fn==='ReLU'?'ReLU':'Tanh';
-    expl=`The sum is passed through the activation function <strong>${fnName}</strong>. ${actExplain(fn,sum,a)}. The activation function decides how strongly the neuron should activate, in other words how strong a signal gets passed on through the network.`;
-  }
+  const key=isCalc()?'ReLU':fn;
+  const fnName=key==='σ'?'Sigmoid':key==='ReLU'?'ReLU':'Tanh';
+  let expl=`The sum is passed through the activation function <strong>${fnName}</strong>, which is defined like this:`
+    +mmlActDef(key)
+    +`Putting the sum in gives:`
+    +mmlActValue(key,sum,a,fmt,true)
+    +(key==='tanh'?`Unlike sigmoid, which returns a value between 0 and 1, tanh always lands between −1 and 1. `:'')+`The activation function decides how strongly the neuron activates, that is how strong a signal is passed on through the network.`;
   expl+=isOut
     ?`<br><br>Since this is the output layer, <strong>${fmt(a)}</strong> is the network's final answer for this attempt${curSc!=='abstract'?'. A value above 0.5 is read as Yes and a value below 0.5 as No':''}.`
     :`<br><br>The value <strong>${fmt(a)}</strong> is now passed on as input to the next layer.`;
@@ -958,13 +998,13 @@ function showNarr(l,j,contribs,sum,a){
   const sumTerms=contribs.map(c=>`<span class="fw">${fmt(c.w)}</span>×<span class="fx">${fmt(c.input)}</span>`).join(' + ');
   const biasV=B[l-1][j];
   const biasTxt=biasV<0?`(<span class="fb">${fmt(biasV)}</span>)`:`<span class="fb">${fmt(biasV)}</span>`;
-  const sumFormula=`${sumTerms} + ${biasTxt} = <span class="fr">${fmt(sum)}</span>`;
+  const sumFormula=mmlSum(contribs,biasV,sum,fmt);
   let actFormula,actLabel;
-  if(isCalc()){actFormula=`max(0, ${fmt(sum)}) = <span class="fr">${fmt(a)}</span>`;actLabel='Activation (ReLU)';}
+  if(isCalc()){actFormula=mmlActValue('ReLU',sum,a,fmt);actLabel='Activation (ReLU)';}
   else{
     const fnName=fn==='σ'?'Sigmoid':fn==='ReLU'?'ReLU':'Tanh';
     actLabel=`Activation (${fnName})`;
-    actFormula=fn==='σ'?`σ(${fmt(sum)}) = <span class="fr">${fmt(a)}</span>`:fn==='ReLU'?`max(0, ${fmt(sum)}) = <span class="fr">${fmt(a)}</span>`:`tanh(${fmt(sum)}) = <span class="fr">${fmt(a)}</span>`;
+    actFormula=mmlActValue(fn,sum,a,fmt);
   }
   let html=`<div class="calc-card">
     <div class="calc-head"><span class="ch-badge">${layerLbl}</span><span class="ch-title">The calculation in neuron ${j+1}</span></div>
