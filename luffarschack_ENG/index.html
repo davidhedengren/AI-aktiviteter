@@ -4,7 +4,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Five in a row in a partially observable environment · ai-aktiviteter.se</title>
+<title>Five in a row in a partially observable environment – ai-aktiviteter.se</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0a0e1a">
@@ -218,8 +218,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     </div>
     <button class="btn pri" onclick="startGame()">New game</button>
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px;font-size:0.74em;color:var(--dim);line-height:1.55;">
-      <strong style="color:var(--accent2);">Cross-hatched cells</strong> are hidden — you can place there, but you won't see if the opponent has already taken the cell.
-      If you play <strong style="color:var(--accent2);">against the AI</strong>, the computer sees just as little as you do — it makes decisions under the same uncertainty.<br><br>
+      <strong style="color:var(--accent2);">Cross-hatched cells</strong> are hidden. You can place your mark there, but you won't see whether the opponent has already taken the cell.
+      If you play <strong style="color:var(--accent2);">against the AI</strong>, the computer sees just as little as you do and makes its decisions under the same uncertainty.<br><br>
       <strong style="color:var(--gold);">Five in a row</strong> wins. After the game, all hidden cells are revealed.
     </div>
   </div>
@@ -240,11 +240,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     <h2>Five in a Row in a <span>partially observable</span> environment</h2>
     <p class="sub">In regular five-in-a-row, both players see the whole board. But what happens if parts of the board are <strong>hidden</strong>?</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Hidden cells</strong> – Cross-hatched cells <span class="hidden-preview"></span> are hidden. You can place your mark there, but you won't see what's underneath.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Blind moves</strong> – If you play on a hidden cell, you won't know whether the move succeeded. If the cell was already taken by your opponent, the move is lost.</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Five in a row wins</strong> – Same rules as usual. Whoever places 5 in a row first wins.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Hidden cells.</strong> Cross-hatched cells <span class="hidden-preview"></span> are hidden. You can place your mark there, but you won't see what's underneath.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Blind moves.</strong> If you play on a hidden cell, you won't know whether the move succeeded. If the cell was already taken by your opponent, the move is lost.</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Five in a row wins.</strong> Same rules as usual. Whoever places 5 in a row first wins.</div></div>
     </div>
-    <p class="sub">This is called <strong>partial observability</strong>: the agent only sees part of the environment's state.</p>
+    <p class="sub">This is called <strong>partial observability</strong>. The agent, that is, the one making the decisions, sees only part of the environment's state.</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show');startGame()">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 </div>
@@ -356,7 +356,7 @@ function maybeAI(){
     setTimeout(()=>{
       const mv=chooseAIMove();
       if(mv){
-        // Register the attempted hidden cell AFTER the move is chosen, not before
+        /* The attempted hidden cell is registered after the move has been chosen. */
         if(hidden.has(key(mv.r,mv.c))) aiTried.add(key(mv.r,mv.c));
         applyMove(mv.r,mv.c);
       }
@@ -425,8 +425,8 @@ function chooseAIMove(){
     let off=offenseScore(r,c),def=defenseScore(r,c);
     // Combined score: offense + defense + center attractiveness + a bit of noise
     let s=off+def*1.05+Math.max(0,6-(Math.abs(r-cc)+Math.abs(c-cc))*0.3)+Math.random()*3;
-    // Hidden cell: no penalty -- the AI should treat them the same as visible ones
-    // The only exception: if the score is low (no tactical reason), prefer a visible cell
+    /* Hidden cells carry no penalty and are treated the same as visible ones. */
+    /* Exception: at a low score, that is, with no tactical reason, a visible cell is preferred. */
     const isH=hidden.has(key(r,c));
     const sv=(!isH||s>50)?s:s*0.7; // Avoid random fog only at low values
     if(sv>bestScore){bestScore=sv;best={r,c};}
@@ -462,8 +462,8 @@ function endGame(winner){
   if(winner==='draw'){h=`<div class="wb-title" style="color:var(--dim)">Draw!</div>`;}
   else{h=`<div class="wb-title" style="color:${winner==='X'?'var(--x-color)':'var(--o-color)'}">Player ${winner} wins!</div>`;}
   h+=`<div class="wb-stats">
-    <div class="wb-stat"><div class="wv" style="color:var(--x-color)">${blindX}</div><div class="wl">Blind (X)</div></div>
-    <div class="wb-stat"><div class="wv" style="color:var(--o-color)">${blindO}</div><div class="wl">Blind (O)</div></div>
+    <div class="wb-stat"><div class="wv" style="color:var(--x-color)">${blindX}</div><div class="wl">Blind moves (X)</div></div>
+    <div class="wb-stat"><div class="wv" style="color:var(--o-color)">${blindO}</div><div class="wl">Blind moves (O)</div></div>
     <div class="wb-stat"><div class="wv">${totalMoves}</div><div class="wl">Total</div></div>
   </div>`;
   h+=`<div class="wb-note">Hidden cells have been revealed!</div>`;
