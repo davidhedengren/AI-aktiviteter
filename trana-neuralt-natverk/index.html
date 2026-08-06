@@ -1420,9 +1420,25 @@ function drawNodeLayer(ctx,pts,layer,R,s,backActive){
     else if(layer===1){if(C.ah&&revealed)val=C.ah[idx];}
     else{if(C.yhat!==undefined&&revealed)val=C.yhat;rimRgb=[255,206,84];}
     const computed=(layer===0)||revealed;
+    /* Felsignalen δ läggs rakt på neuronen i stället för ovanför den. Den
+       täcker då neuronens värde under backpropagation, vilket är rimligt
+       eftersom det är felsignalen som är i fokus just då, och etiketten kan
+       inte längre krocka med lagerchipsen ovanför. */
+    let dv=null;
+    if(backActive){if(layer===2&&stepIdx>=4)dv=C.dOut;else if(layer===1&&C.dH){if(idx===0&&stepIdx>=6)dv=C.dH[0];if(idx===1&&stepIdx>=7)dv=C.dH[1];}}
     drawGlassNeuron(ctx,pt.x,pt.y,R,computed,rimRgb,val);
     ctx.textAlign='center';ctx.textBaseline='middle';
-    if(computed&&val!==null){ctx.font=`700 ${fontSize}px "JetBrains Mono"`;ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=4;ctx.fillStyle='rgba(226,234,255,0.95)';ctx.fillText(layer===0?String(val):fp(val,2),pt.x,pt.y);ctx.shadowBlur=0;}
+    if(dv!==null){
+      const dt=`δ=${f(dv,3)}`;
+      ctx.font=`700 ${Math.max(8,Math.round(10*s))}px "JetBrains Mono"`;
+      const dw=ctx.measureText(dt).width+13,dh=19;
+      ctx.save();ctx.shadowColor='rgba(255,159,69,0.55)';ctx.shadowBlur=11;
+      ctx.beginPath();ctx.roundRect(pt.x-dw/2,pt.y-dh/2,dw,dh,dh/2);
+      ctx.fillStyle='rgba(38,25,13,0.97)';ctx.fill();
+      ctx.strokeStyle='rgba(255,159,69,0.8)';ctx.lineWidth=1.2;ctx.stroke();ctx.restore();
+      ctx.fillStyle='rgba(255,196,128,1)';ctx.fillText(dt,pt.x,pt.y+0.5);
+    }
+    else if(computed&&val!==null){ctx.font=`700 ${fontSize}px "JetBrains Mono"`;ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=4;ctx.fillStyle='rgba(226,234,255,0.95)';ctx.fillText(layer===0?String(val):fp(val,2),pt.x,pt.y);ctx.shadowBlur=0;}
     else{ctx.font=`500 ${fontSize}px "DM Sans"`;ctx.fillStyle='rgba(255,255,255,0.3)';ctx.fillText('?',pt.x,pt.y);}
     if(layer>0){const bv=layer===1?bh[idx]:bo;const bt=`b=${fp(bv,2)}`;ctx.font=`600 ${Math.max(8,Math.round(9*s))}px "JetBrains Mono"`;const bw=ctx.measureText(bt).width+10;const bOff=R+5*s;ctx.beginPath();ctx.roundRect(pt.x-bw/2,pt.y+bOff,bw,14,7);ctx.fillStyle='rgba(14,17,30,0.8)';ctx.fill();ctx.strokeStyle='rgba(255,255,255,0.08)';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle='rgba(255,255,255,0.6)';ctx.fillText(bt,pt.x,pt.y+bOff+7);}
     if(layer===0){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(150,180,255,0.85)';ctx.fillText(idx===0?'x₁':'x₂',pt.x,pt.y+R+13*s);}
@@ -1430,9 +1446,6 @@ function drawNodeLayer(ctx,pts,layer,R,s,backActive){
        vid R+5s och är 14 px hög, så etiketten läggs nedanför dess underkant
        i stället för mitt i den. */
     if(layer===2){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(255,214,130,0.9)';ctx.fillText('ŷ',pt.x,pt.y+R+5*s+23);}
-    let dv=null;
-    if(backActive){if(layer===2&&stepIdx>=4)dv=C.dOut;else if(layer===1&&C.dH){if(idx===0&&stepIdx>=6)dv=C.dH[0];if(idx===1&&stepIdx>=7)dv=C.dH[1];}}
-    if(dv!==null){const dt=`δ=${f(dv,3)}`;ctx.font=`700 ${Math.max(8,Math.round(9.5*s))}px "JetBrains Mono"`;const dw=ctx.measureText(dt).width+12;const dy=pt.y-R-5*s;ctx.save();ctx.shadowColor='rgba(255,159,69,0.5)';ctx.shadowBlur=8;ctx.beginPath();ctx.roundRect(pt.x-dw/2,dy-8,dw,17,8);ctx.fillStyle='rgba(40,26,14,0.95)';ctx.fill();ctx.strokeStyle='rgba(255,159,69,0.7)';ctx.lineWidth=1.2;ctx.stroke();ctx.restore();ctx.fillStyle='rgba(255,190,120,1)';ctx.fillText(dt,pt.x,dy+0.5);}
   });
 }
 function drawGlassNeuron(ctx,x,y,R,computed,rimRgb,val){
