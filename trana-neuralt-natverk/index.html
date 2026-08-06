@@ -209,24 +209,26 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .canvas-hint{position:absolute;top:11px;left:11px;font-size:.66em;color:var(--dim2);background:rgba(6,7,14,.6);padding:4px 11px;border-radius:999px;border:1px solid var(--border-soft);backdrop-filter:blur(6px);white-space:nowrap;max-width:calc(100% - 22px);overflow:hidden;text-overflow:ellipsis;}
 /* Stegkontrollerna ligger som en flytande list nere i canvasen, så att man
    kan stega utan att tappa animeringen ur sikte. */
-.canvas-dock{position:absolute;left:50%;bottom:11px;transform:translateX(-50%);z-index:6;
-  display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;
-  max-width:calc(100% - 20px);padding:7px 9px;border-radius:22px;
-  background:rgba(8,10,20,.74);backdrop-filter:blur(12px);border:1px solid var(--border);
-  box-shadow:0 14px 34px rgba(0,0,0,.5);}
+.canvas-dock{position:absolute;left:50%;bottom:9px;transform:translateX(-50%);z-index:6;
+  display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:nowrap;
+  max-width:calc(100% - 16px);padding:5px 6px;border-radius:18px;
+  background:rgba(8,10,20,.78);backdrop-filter:blur(12px);border:1px solid var(--border);
+  box-shadow:0 12px 30px rgba(0,0,0,.5);}
 .canvas-dock:empty{display:none;}
-.canvas-dock .cbtn{height:32px;padding:0 13px;font-size:.72em;background:rgba(255,255,255,.05);}
-.canvas-dock .cbtn.icon{width:32px;padding:0;}
-.canvas-dock .cbtn.pri{padding:0 17px;background:var(--accent);}
-.canvas-dock .dock-count{font-family:'JetBrains Mono',monospace;font-size:.6em;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--dim2);padding:0 3px 0 7px;white-space:nowrap;}
-.canvas-dock .dock-sep{width:1px;height:19px;background:var(--border);flex-shrink:0;}
-.ctrl-block.legend-only{background:none;border:none;padding:0 3px;}
-.ctrl-block.legend-only .ctrl-legend{margin-top:0;}
-@media(max-width:640px){
-  .canvas-dock{gap:5px;padding:6px 7px;}
-  .canvas-dock .dock-sep,.canvas-dock .dock-count{display:none;}
-  .canvas-dock .cbtn{font-size:.68em;padding:0 10px;}
+.canvas-dock .cbtn{height:27px;padding:0 10px;font-size:.64em;gap:5px;background:rgba(255,255,255,.05);}
+.canvas-dock .cbtn.icon{width:27px;padding:0;}
+.canvas-dock .cbtn.pri{padding:0 13px;background:var(--accent);}
+.canvas-dock .cbtn .ci{width:11px;height:11px;}
+.canvas-dock .dock-count{font-family:'JetBrains Mono',monospace;font-size:.56em;font-weight:700;letter-spacing:.08em;
+  color:var(--dim2);padding:0 2px 0 5px;white-space:nowrap;}
+.canvas-dock .dock-sep{width:1px;height:16px;background:var(--border);flex-shrink:0;margin:0 2px;}
+.ctrl-block.legend-only{display:none;}
+@media(max-width:820px){
+  .canvas-dock .dock-count{display:none;}
+  .canvas-dock .cbtn .lbl{display:none;}
+  .canvas-dock .cbtn{padding:0 8px;}
+  .canvas-dock .cbtn.pri{padding:0 11px;}
+  .canvas-dock .cbtn.pri .lbl{display:inline;}
 }
 .canvas-controls{position:absolute;right:10px;bottom:10px;display:flex;flex-direction:column;align-items:flex-end;gap:6px;z-index:5;}
 .canvas-btn{font-family:'DM Sans',sans-serif;font-size:.7em;font-weight:700;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:rgba(10,12,22,.75);backdrop-filter:blur(8px);color:var(--text);cursor:pointer;transition:.2s var(--ease-out);white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.35);}
@@ -585,7 +587,6 @@ math[display="block"]{margin:.1em 0;}
     <div class="canvas-wrap">
       <canvas id="cv"></canvas>
       <div class="flow-badge" id="flowBadge"></div>
-      <div class="canvas-hint">Klicka på en koppling eller en neuron för att se dess beräkning</div>
       <div class="canvas-dock" id="canvasControls"></div>
     </div>
     <div class="ctrl-block" id="controlPanel"></div>
@@ -1160,14 +1161,14 @@ function renderCanvasControls(){
   if(!el)return;
   if(trained){el.innerHTML='';return;}
   const idle=stepIdx<0,atEnd=stepIdx>=STEPS.length-1;
-  const nextLabel=idle?IC_PLAY+' Starta framåtpasset':atEnd?IC_CHECK+' Slutför varvet':'Nästa steg '+IC_NEXT;
+  const nextLabel=idle?IC_PLAY+'<span class="lbl">Starta framåtpasset</span>':atEnd?IC_CHECK+'<span class="lbl">Slutför varvet</span>':'<span class="lbl">Nästa steg</span>'+IC_NEXT;
   el.innerHTML=`
     <span class="dock-count">${running?'auto':stepCounterText()}</span>
     <button class="cbtn icon" onclick="prevStep()" ${(running||stepPlaying||idle)?'disabled':''} title="Ett steg bakåt" aria-label="Ett steg bakåt">${IC_PREV}</button>
     <button class="cbtn pri" onclick="nextStep()" ${(running||stepPlaying)?'disabled':''}>${nextLabel}</button>
-    <button class="cbtn ${stepPlaying?'on':''}" onclick="togglePlay()" ${running?'disabled':''} title="Spela upp stegen automatiskt">${stepPlaying?IC_PAUSE+' Paus':IC_PLAY+' Spela upp'}</button>
+    <button class="cbtn ${stepPlaying?'on':''}" onclick="togglePlay()" ${running?'disabled':''} title="${stepPlaying?'Pausa uppspelningen':'Spela upp stegen automatiskt'}">${stepPlaying?IC_PAUSE+'<span class="lbl">Paus</span>':IC_PLAY+'<span class="lbl">Spela upp</span>'}</button>
     <span class="dock-sep"></span>
-    <button class="cbtn ${running?'run':''}" onclick="toggleAuto()" title="Kör färdigt träningen">${running?IC_PAUSE+' Pausa träningen':IC_FF+' Träna klart'}</button>
+    <button class="cbtn ${running?'run':''}" onclick="toggleAuto()" title="${running?'Pausa träningen':'Kör färdigt träningen'}">${running?IC_PAUSE+'<span class="lbl">Pausa</span>':IC_FF+'<span class="lbl">Träna klart</span>'}</button>
     <button class="cbtn icon" onclick="resetTraining()" title="Nollställ vikterna och börja om" aria-label="Nollställ vikterna och börja om">${IC_RESET}</button>`;
 }
 function renderControls(){
@@ -1184,7 +1185,7 @@ function renderControls(){
     return;
   }
   el.className='ctrl-block legend-only';
-  el.innerHTML=`<div class="ctrl-legend">Knapparna ligger nere i rutan ovanför. <strong>Spela upp</strong> går igenom stegen i lugn takt, och <strong>Träna klart</strong> hoppar över genomgången och kör hundratals varv på några sekunder.</div>`;
+  el.innerHTML='';
 }
 
 /* ============================ MATH BOX / NARRATION ============================ */
@@ -1348,8 +1349,11 @@ function flashUpdate(){updateFlashStart=performance.now();if(updateFlash)cancelA
 /* ============================ CANVAS ============================ */
 function setupCv(){const cv=document.getElementById('cv'),p=cv.parentElement,dpr=devicePixelRatio||1,w=p.clientWidth,h=p.clientHeight;cv.width=w*dpr;cv.height=h*dpr;const ctx=cv.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);return{ctx,w,h};}
 function nodePositions(w,h){
+  /* Nederkanten är reserverad åt den flytande knapplisten, så nätverket
+     ritas i utrymmet ovanför den i stället för att hamna under knapparna. */
+  const ch=Math.max(150,h-46);
   const inX=w*0.13,hidX=w*0.5,outX=w*0.87;
-  const iy=[h*0.36,h*0.64],hy=[h*0.36,h*0.64],oy=[h*0.5];
+  const iy=[ch*0.36,ch*0.64],hy=[ch*0.36,ch*0.64],oy=[ch*0.5];
   return[[{x:inX,y:iy[0]},{x:inX,y:iy[1]}],[{x:hidX,y:hy[0]},{x:hidX,y:hy[1]}],[{x:outX,y:oy[0]}]];
 }
 function drawBackdrop(ctx,w,h){
