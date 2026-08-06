@@ -214,6 +214,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .mathbox .mb-desc,.narr .mb-desc{font-size:.78em;line-height:1.6;color:var(--dim);margin-bottom:11px;}
 .mathbox .mb-desc strong,.narr .mb-desc strong{color:var(--text);}
 .mathbox .mb-desc em,.narr .mb-desc em{color:var(--gold);font-style:normal;}
+.mb-chain{margin-top:10px;padding:9px 12px;background:rgba(0,0,0,.24);border:1px solid var(--border-soft);border-left:2px solid var(--accent2);border-radius:var(--r-sm);}
+.mb-chain .mc-t{display:block;font-size:.58em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2);margin-bottom:6px;}
+.mb-chain .mc-row{font-size:.72em;line-height:1.5;color:var(--dim);}
+.mb-chain .mc-row i{color:var(--accent2);font-style:normal;font-weight:700;padding:0 5px;}
+.mb-chain .mc-row b{color:var(--text);font-weight:600;}
+.mb-chain .mc-eq{margin-top:6px;padding-top:6px;border-top:1px solid var(--border-soft);font-family:'JetBrains Mono',monospace;font-size:.74em;color:var(--text);}
+.mb-chain .mc-eq span{color:var(--amber);}
 .term{color:var(--accent2);border-bottom:1px dashed rgba(122,162,255,.55);cursor:pointer;transition:.15s var(--ease-out);white-space:nowrap;}
 .term:hover{color:#fff;border-bottom-color:var(--accent2);background:rgba(77,128,255,.14);border-radius:3px;}
 .sym{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--text);}
@@ -306,6 +313,24 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .adv-text em{color:var(--gold);font-style:normal;}
 .adv-text .chain{margin:12px 0;padding:11px 13px;background:rgba(0,0,0,.28);border:1px solid var(--border-soft);border-radius:var(--r-sm);font-family:'JetBrains Mono',monospace;font-size:.86em;color:var(--dim);line-height:1.9;}
 .adv-text .chain b{color:var(--accent2);font-weight:600;}
+.adv-text .chain .cr{display:block;padding:8px 0;border-bottom:1px dashed var(--border-soft);}
+.adv-text .chain .cr:last-child{border-bottom:none;}
+.adv-text .chain .cr i{display:block;font-style:normal;font-family:'DM Sans',sans-serif;font-size:.92em;color:var(--dim2);line-height:1.45;margin-bottom:5px;}
+.adv-text .chain .cr b.fx{display:block;padding-left:4px;white-space:nowrap;}
+.adv-text .chain .cr b.fx math{font-size:1.02em;}
+.adv-text .chain .cr b.fx .fml{color:var(--accent2);}
+.adv-text .chain-note{font-size:.78em;color:var(--dim2);margin:-4px 0 10px;line-height:1.55;text-align:center;}
+.adv-text h4{font-family:'Syne',sans-serif;font-size:.96em;font-weight:700;color:var(--text);margin:20px 0 9px;padding-top:15px;border-top:1px solid var(--border-soft);}
+.adv-text h4.first{margin-top:0;padding-top:0;border-top:none;}
+.adv-text .qa{margin:10px 0;padding-left:12px;border-left:2px solid var(--border-soft);font-size:.95em;color:var(--dim2);line-height:1.75;}
+.adv-text .qa em{color:var(--accent2);font-style:normal;}
+.chain-flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:7px;margin:13px 0;padding:12px 10px;background:rgba(0,0,0,.28);border:1px solid var(--border-soft);border-radius:var(--r-sm);}
+.chain-flow .cf-n{font-family:'JetBrains Mono',monospace;font-size:.8em;color:var(--text);background:rgba(255,255,255,.04);border:1px solid var(--border-soft);border-radius:999px;padding:4px 12px;}
+.chain-flow .cf-n.end{color:var(--amber);border-color:rgba(255,159,69,.35);}
+.chain-flow .cf-a{color:var(--accent2);font-size:.92em;}
+.chain-mult{margin:13px 0;padding:12px 13px;background:rgba(0,0,0,.28);border:1px solid var(--border-soft);border-radius:var(--r-sm);font-size:.82em;line-height:1.5;color:var(--dim);text-align:center;}
+.chain-mult i{display:block;color:var(--accent2);font-style:normal;font-weight:700;margin:4px 0;}
+.chain-mult b{display:block;margin-top:9px;padding-top:9px;border-top:1px solid var(--border-soft);color:var(--text);font-weight:600;}
 .adv-visual{margin-top:18px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:16px;}
 .adv-visual-hd{font-size:.68em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim2);margin-bottom:10px;}
 .adv-canvas-wrap{position:relative;width:100%;height:220px;border-radius:var(--r-sm);overflow:hidden;background:#05060d;border:1px solid var(--border-soft);}
@@ -554,14 +579,33 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
   <div class="adv-inner">
     <button class="adv-close" onclick="closeAdvanced()">✕</button>
     <div class="adv-tag">Advanced</div>
-    <h3>What is it we are actually differentiating?</h3>
+    <h3>What does backpropagation actually do?</h3>
     <div class="adv-text">
-      <p>At every calculation step <strong>z</strong>, <strong>a</strong>, <strong>ŷ</strong> and <strong>L</strong> are concrete numbers – results worked out for a given input and given weights. What gets differentiated, though, is not those individual numbers but the <strong>relationship</strong> between them: the formula describing how the loss L would change if a weight w were altered slightly.</p>
-      <p>Hold every other value fixed and let w vary, and a curve appears. The derivative is the <em>slope</em> of that curve at exactly the point where the weight currently sits – not the height, but how steep it is there.</p>
-      <p>The network knows the equation of that curve, because it is built only from known, differentiable steps (weighted sums and sigmoid). So the slope can be worked out exactly, by plugging the current numbers into the finished formula – instead of guessing.</p>
-      <div class="chain">L → ŷ&nbsp; &nbsp;<b>dL/dŷ&nbsp;=&nbsp;(ŷ − y)</b><br>a → z&nbsp; &nbsp;<b>da/dz&nbsp;=&nbsp;a(1−a)</b><br>z → w&nbsp; &nbsp;<b>dz/dw&nbsp;=&nbsp;a_in</b></div>
-      <p>The chain rule multiplies these slopes together, step by step backwards through the network – which is exactly what <strong>Phase 3 · Backprop</strong> does.</p>
-      <p>The steeper the curve, the more sensitive the loss is to changes in the weight. Right at the bottom of the valley the slope is <strong>zero</strong> – there is no way to reduce the loss further by moving the weight in either direction. So it is at the bottom of the curve, where the derivative is zero, that the loss is at its <strong style="color:var(--green)">smallest</strong> – and that is where gradient descent tries to take the network, one step at a time.</p>
+      <h4 class="first">The error is shared out backwards</h4>
+      <p>Backpropagation is the method that works out <strong>how each weight should change</strong> so the network guesses better next time.</p>
+      <p>Once the network has made its guess, we first measure how large the error was. Then we work backwards through the network. Starting at the output, we ask:</p>
+      <div class="qa"><em>How much did this neuron contribute to the error?</em><br>And then: <em>how much did the neuron before it contribute?</em></div>
+      <p>In the end every weight knows how much influence it had on the error. That number is called the <strong>error signal</strong>.</p>
+
+      <h4>Derivatives: how sensitive is the error?</h4>
+      <p>To decide how much a weight contributed to the error we use <strong>derivatives</strong>. A derivative answers the question:</p>
+      <div class="qa"><em>If the weight is increased a tiny bit, how much larger or smaller does the error become?</em></div>
+      <p>At every calculation step <strong>z</strong> (the neuron's weighted sum), <strong>a</strong> (the neuron's activation, the sum after sigmoid), <strong>ŷ</strong> (the network's guess) and <strong>L</strong> (the loss, how wrong the guess was) are concrete numbers, worked out for a given input and given weights. What gets differentiated is not those individual numbers but the <strong>relationship</strong> between them. Hold every other value fixed and let w vary, and a curve appears – the derivative is the <em>slope</em> of that curve at exactly the point where the weight currently sits. Not the height, but how steep it is there.</p>
+
+      <h4>The chain rule</h4>
+      <p>A weight does not affect the error directly. It first affects the next neuron, that neuron affects the next, and finally the network's output, which in turn affects the loss.</p>
+      <div class="chain-flow"><span class="cf-n">Weight</span><span class="cf-a">→</span><span class="cf-n">Neuron</span><span class="cf-a">→</span><span class="cf-n">Output</span><span class="cf-a">→</span><span class="cf-n end">Loss</span></div>
+      <p>To work out how much the weight affects the loss we have to account for <strong>every step in the chain</strong>. That is why the local slopes are multiplied together:</p>
+      <div class="chain-mult">How the weight affects the neuron<i>×</i>How the neuron affects the output<i>×</i>How the output affects the loss<b>= How the weight affects the loss</b></div>
+      <p>Each link in the chain has its own ready-made formula. The notation <strong>∂A/∂B</strong> reads: how much <strong>A</strong> changes when <strong>B</strong> is nudged slightly.</p>
+      <div class="chain"><span class="cr"><i>How the loss changes when the guess changes</i><b class="fx" data-tex="\\frac{\\partial L}{\\partial \\hat{y}} = \\hat{y} - y" data-plain="∂L/∂ŷ = ŷ − y"></b></span><span class="cr"><i>How the activation changes when the sum changes</i><b class="fx" data-tex="\\frac{\\partial a}{\\partial z} = a(1 - a)" data-plain="∂a/∂z = a(1 − a)"></b></span><span class="cr"><i>How the sum changes when the weight changes</i><b class="fx" data-tex="\\frac{\\partial z}{\\partial w} = a_{\\text{in}}" data-plain="∂z/∂w = a_in"></b></span></div>
+      <p>The chain rule multiplies these slopes together, step by step backwards through the network – which is exactly what <strong>Phase 3 · Backprop</strong> does, and why the signal travels backwards: the forward pass works out the answer, backpropagation works out the responsibility for the error.</p>
+
+      <h4>The gradient says what to do</h4>
+      <p>The result for a weight is called its <strong>gradient</strong>, and it tells us two things:</p>
+      <div class="qa"><em>Direction</em> – should the weight increase or decrease?<br><em>Size</em> – how much should it change?</div>
+      <p>The steeper the curve, the more sensitive the loss is to changes in the weight. Right at the bottom of the valley the slope is <strong>zero</strong> – there is no way to reduce the loss further by moving the weight in either direction. So the loss is at its <strong style="color:var(--green)">smallest</strong> at the bottom of the curve.</p>
+      <p>Letting every weight take one small step down its own curve, in the opposite direction to the gradient, and then repeating that round after round, is called <strong>gradient descent</strong>. That is exactly what happens in <strong>Phase 4 · Update weights</strong>, and it is how the network slowly works its way towards the bottom of the valley.</p>
     </div>
     <div class="adv-visual">
       <div class="adv-visual-hd">Try it yourself: the slope at a point</div>
@@ -961,7 +1005,7 @@ function renderStep(){
   else badge.classList.remove('show');
 
   const mb=document.getElementById('mathbox');
-  let tagCls,tagTxt,title,desc,rows=[],narr='';
+  let tagCls,tagTxt,title,desc,rows=[],narr='',chain='';
 
   if(st.kind==='fwd-h'){
     const j=st.j,x=C.x;
@@ -1002,34 +1046,37 @@ function renderStep(){
     tagCls='backward';tagTxt='Phase 3 · Backpropagation';title='Error signal at the output';
     desc=`Now we turn around and go backwards through the network. For the output neuron we work out an ${T('error signal','delta')} ${S('δ')} (delta). It describes how much the loss would change if the neuron's sum changed, and combines the error with the slope of the ${T('sigmoid','sigmoid')} curve.`;
     rows=[
-      {cls:'gen',tex:`\\delta_{ut} = (\\hat{y}-y)\\cdot \\hat{y}(1-\\hat{y})`,plain:'δut = (ŷ−y)·ŷ(1−ŷ)'},
-      {cls:'num',tex:`\\delta_{ut} = (${fp(C.yhat)}-${C.y})(${fp(C.yhat)})(1-${fp(C.yhat)})`,plain:`δut = ${f(C.dOut)}`},
-      {cls:'res amber',tex:`\\delta_{ut} = ${col(CA,f(C.dOut))}`,plain:`δut = ${f(C.dOut)}`}
+      {cls:'gen',tex:`\\delta_{\\text{ut}} = (\\hat{y}-y)\\cdot \\hat{y}(1-\\hat{y})`,plain:'δut = (ŷ−y)·ŷ(1−ŷ)'},
+      {cls:'num',tex:`\\delta_{\\text{ut}} = (${fp(C.yhat)}-${C.y})(${fp(C.yhat)})(1-${fp(C.yhat)})`,plain:`δut = ${f(C.dOut)}`},
+      {cls:'res amber',tex:`\\delta_{\\text{ut}} = ${col(CA,f(C.dOut))}`,plain:`δut = ${f(C.dOut)}`}
     ];
     narr=`The output's error signal came out as <span class="mono" style="color:var(--amber)">${f(C.dOut)}</span>. Its sign decides whether the weights should increase or decrease.`;
     flowBackward([[1,0,2,0],[1,1,2,0]]);
+    chain=`<div class="mb-chain"><span class="mc-t">Chain rule, step 1</span><div class="mc-row">how the <b>loss</b> changes when the guess changes<i>×</i>how the <b>guess</b> changes when the sum changes</div><div class="mc-eq">(ŷ − y) &nbsp;×&nbsp; ŷ(1−ŷ) &nbsp;=&nbsp; <span>δ<sub>out</sub></span></div></div>`;
   }
   else if(st.kind==='back-gw2'){
     tagCls='backward';tagTxt='Phase 3 · Backpropagation';title='Gradient for the output weights';
     desc=`For each output weight we now work out a ${T('gradient','gradient')} – a number showing how much that particular weight contributed to the error. We get it by multiplying the error signal ${S('δ')} by the ${T('activation','aktivering')} that came into the weight. This rests on the ${T('chain rule','chain')}.`;
     rows=[
-      {cls:'gen',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{ut}\\cdot a_{in}`,plain:'∂L/∂w = δut · a_in'},
+      {cls:'gen',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{\\text{ut}}\\cdot a_{\\text{in}}`,plain:'∂L/∂w = δut · a_in'},
       {cls:'num',tex:`\\frac{\\partial L}{\\partial w_{1}} = (${f(C.dOut)})(${fp(C.ah[0])}) = ${f(C.gW2[0])}`,plain:`∂L/∂w1 = ${f(C.gW2[0])}`},
       {cls:'num',tex:`\\frac{\\partial L}{\\partial w_{2}} = (${f(C.dOut)})(${fp(C.ah[1])}) = ${f(C.gW2[1])}`,plain:`∂L/∂w2 = ${f(C.gW2[1])}`}
     ];
     narr=`Every output weight now knows both which way and how much it needs to change.`;
+    chain=`<div class="mb-chain"><span class="mc-t">Chain rule, step 2</span><div class="mc-row">the <b>error signal</b> at the output<i>×</i>how much the weight <b>let through</b> (the incoming activation)</div><div class="mc-eq">δ<sub>out</sub> &nbsp;×&nbsp; a<sub>in</sub> &nbsp;=&nbsp; <span>∂L/∂w</span></div></div>`;
   }
   else if(st.kind==='back-h'){
     const j=st.j;
     tagCls='backward';tagTxt='Phase 3 · Backpropagation';title=`Error signal to hidden neuron ${j+1}`;
     desc=`The error signal is passed further back through the output weights, so that every neuron in the hidden layer also gets its own ${T('error signal','delta')} ${S('δ')}. In this way the responsibility for the error is shared out, step by step, backwards through the network.`;
     rows=[
-      {cls:'gen',tex:`\\delta_{${j+1}} = \\delta_{ut}\\cdot w_{${j+1}}\\cdot a_{${j+1}}(1-a_{${j+1}})`,plain:`δ${j+1} = δut·w${j+1}·a${j+1}(1−a${j+1})`},
+      {cls:'gen',tex:`\\delta_{${j+1}} = \\delta_{\\text{ut}}\\cdot w_{${j+1}}\\cdot a_{${j+1}}(1-a_{${j+1}})`,plain:`δ${j+1} = δut·w${j+1}·a${j+1}(1−a${j+1})`},
       {cls:'num',tex:`\\delta_{${j+1}} = (${f(C.dOut)})(${f(w2[j])})(${fp(C.ah[j])})(1-${fp(C.ah[j])})`,plain:`δ${j+1} = ${f(C.dH[j])}`},
       {cls:'res amber',tex:`\\delta_{${j+1}} = ${col(CA,f(C.dH[j]))}`,plain:`δ${j+1} = ${f(C.dH[j])}`}
     ];
     narr=`Hidden neuron <strong>${j+1}</strong> receives the error signal <span class="mono" style="color:var(--amber)">${f(C.dH[j])}</span>, flowed backwards via its weight to the output.`;
     flowBackward([[0,0,1,j],[0,1,1,j]]);
+    chain=`<div class="mb-chain"><span class="mc-t">Chain rule, step 3</span><div class="mc-row">the <b>error signal</b> from the output<i>×</i>the weight it <b>travels back</b> through<i>×</i>the neuron's own <b>sensitivity</b></div><div class="mc-eq">δ<sub>out</sub> &nbsp;×&nbsp; w &nbsp;×&nbsp; a(1−a) &nbsp;=&nbsp; <span>δ<sub>hidden</sub></span></div></div>`;
   }
   else if(st.kind==='back-gw1'){
     tagCls='backward';tagTxt='Phase 3 · Backpropagation';title='Gradient for the input weights';
@@ -1041,6 +1088,7 @@ function renderStep(){
       {cls:'res',text:true,html:'The network now knows how every weight and bias should change <span style="color:var(--green)">✓</span>'}
     ];
     narr=`Backpropagation is done. Every weight and bias now knows how it contributed to the error, and therefore which way it needs to be adjusted.`;
+    chain=`<div class="mb-chain"><span class="mc-t">The gradient</span><div class="mc-row">Every gradient says two things: the <b>sign</b> gives the direction – whether the weight should increase or decrease – and the <b>size</b> says how much it should change.</div><div class="mc-eq">δ<sub>hidden</sub> &nbsp;×&nbsp; x<sub>in</sub> &nbsp;=&nbsp; <span>∂L/∂w</span></div></div>`;
   }
   else if(st.kind==='update'){
     if(!C.old)applyUpdate();
@@ -1052,7 +1100,7 @@ function renderStep(){
     narr=`The weights have been adjusted. The ones that turned <strong style="color:var(--green)">green</strong> increased and the ones that turned <strong style="color:var(--red)">red</strong> decreased. Next loop the guess will be a little better.`;
   }
 
-  document.getElementById('narr').innerHTML=`<span class="mb-tag ${tagCls}">${tagTxt}</span><h4>${title}</h4><div class="mb-desc">${desc}</div>${narr?`<div class="mb-highlight">${narr}</div>`:''}`;
+  document.getElementById('narr').innerHTML=`<span class="mb-tag ${tagCls}">${tagTxt}</span><h4>${title}</h4><div class="mb-desc">${desc}</div>${narr?`<div class="mb-highlight">${narr}</div>`:''}${chain||''}`;
   mb.innerHTML=`<div class="mb-kicker ${tagCls}">${tagTxt}</div><div class="mb-formula" id="mbFormula"></div>`;
   texRows(document.getElementById('mbFormula'),rows);
   updateResults();drawNet();renderData();
@@ -1226,7 +1274,7 @@ function openEdgeCalc(li,fi,ti){
     def=`This connection carries hidden neuron ${fi+1} forward to the output neuron. During backpropagation it is used to send the error signal backwards through the network.`;
     rows.push({cls:'gen',tex:`w = ${col(wv>=0?CB:CR,fp(wv,3))}`,plain:`w = ${fp(wv,3)}`});
     if(has)rows.push({cls:'num',tex:`\\text{contribution} = w\\cdot a_{${fi+1}} = (${f(wv)})(${fp(srcVal)}) = ${f(wv*srcVal)}`,plain:`contribution = ${f(wv*srcVal)}`});
-    if(has&&C.gW2)rows.push({cls:'res amber',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{ut}\\cdot a_{${fi+1}} = ${col(CA,f(C.gW2[fi]))}`,plain:`∂L/∂w = ${f(C.gW2[fi])}`});
+    if(has&&C.gW2)rows.push({cls:'res amber',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{\\text{ut}}\\cdot a_{${fi+1}} = ${col(CA,f(C.gW2[fi]))}`,plain:`∂L/∂w = ${f(C.gW2[fi])}`});
   }
   if(!has)def+=`<br><br><em style="color:var(--dim2)">Start a forward pass to see values and gradient.</em>`;
   showCalcCard(EDGE_ICON,name,def,rows);
@@ -1306,7 +1354,7 @@ const CONCEPTS={
     tex:'\\delta_j = \\Big(\\textstyle\\sum_k \\delta_k w_{kj}\\Big)\\,\\sigma\'(z_j)',plain:'δj = (Σ δk·wkj)·σ\'(zj)'},
   gradient:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>',title:'Gradient',
     def:'The gradient tells us how much the loss changes if the weight changes slightly. The sign gives the <strong>direction</strong> and the size gives <strong>how steeply</strong> it slopes. We always move against the gradient – downhill, towards lower loss.',
-    tex:'\\frac{\\partial L}{\\partial w} = \\delta \\cdot a_{in}',plain:'∂L/∂w = δ · a_in'},
+    tex:'\\frac{\\partial L}{\\partial w} = \\delta \\cdot a_{\\text{in}}',plain:'∂L/∂w = δ · a_in'},
   delta:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 3 20h18L12 3z"/></svg>',title:'Error signal, delta (δ)',
     def:'A neuron\'s error signal <em>δ</em> tells us how sensitive the loss is to that neuron\'s sum <em>z</em>. It is computed once per neuron and then reused for every weight feeding into that neuron. That clever reuse is exactly what makes backpropagation fast.',
     tex:'\\delta = \\frac{\\partial L}{\\partial z}',plain:'δ = ∂L/∂z'},
@@ -1333,7 +1381,7 @@ function renderGlossary(){
 function conceptLiveRows(id){
   if(id!=='delta')return null;
   if(!C||C.dOut===undefined||stepIdx<4)return null;
-  const rows=[{cls:'num',tex:`\\delta_{ut} = (${fp(C.yhat)}-${C.y})(${fp(C.yhat)})(1-${fp(C.yhat)}) = ${col(CA,f(C.dOut))}`,plain:`δut = ${f(C.dOut)}`}];
+  const rows=[{cls:'num',tex:`\\delta_{\\text{ut}} = (${fp(C.yhat)}-${C.y})(${fp(C.yhat)})(1-${fp(C.yhat)}) = ${col(CA,f(C.dOut))}`,plain:`δut = ${f(C.dOut)}`}];
   if(C.dH&&stepIdx>=6)rows.push({cls:'num',tex:`\\delta_{1} = (${f(C.dOut)})(${f(w2[0])})(${fp(C.ah[0])})(1-${fp(C.ah[0])}) = ${col(CA,f(C.dH[0]))}`,plain:`δ1 = ${f(C.dH[0])}`});
   if(C.dH&&stepIdx>=7)rows.push({cls:'num',tex:`\\delta_{2} = (${f(C.dOut)})(${f(w2[1])})(${fp(C.ah[1])})(1-${fp(C.ah[1])}) = ${col(CA,f(C.dH[1]))}`,plain:`δ2 = ${f(C.dH[1])}`});
   return rows;
@@ -1414,9 +1462,17 @@ function drawAdvChart(){
   document.getElementById('advSlope').textContent=(slope>=0?'+':'')+f(slope,3);
 }
 function onAdvSlider(v){advW=parseFloat(v);drawAdvChart();}
+function renderAdvFormulas(){
+  document.querySelectorAll('#advModal .fx[data-tex]').forEach(el=>{
+    if(el.dataset.done)return;
+    texInto(el,el.dataset.tex,el.dataset.plain,false);
+    el.dataset.done='1';
+  });
+}
 function openAdvanced(){
   document.getElementById('advBackdrop').classList.add('show');
   document.getElementById('advModal').classList.add('show');
+  renderAdvFormulas();
   drawAdvChart();
 }
 function closeAdvanced(){
