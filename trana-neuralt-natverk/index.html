@@ -241,6 +241,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .mathbox .mb-desc,.narr .mb-desc{font-size:.78em;line-height:1.6;color:var(--dim);margin-bottom:11px;}
 .mathbox .mb-desc strong,.narr .mb-desc strong{color:var(--text);}
 .mathbox .mb-desc em,.narr .mb-desc em{color:var(--gold);font-style:normal;}
+.mb-chain{margin-top:10px;padding:9px 12px;background:rgba(0,0,0,.24);border:1px solid var(--border-soft);border-left:2px solid var(--accent2);border-radius:var(--r-sm);}
+.mb-chain .mc-t{display:block;font-size:.58em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2);margin-bottom:6px;}
+.mb-chain .mc-row{font-size:.72em;line-height:1.5;color:var(--dim);}
+.mb-chain .mc-row i{color:var(--accent2);font-style:normal;font-weight:700;padding:0 5px;}
+.mb-chain .mc-row b{color:var(--text);font-weight:600;}
+.mb-chain .mc-eq{margin-top:6px;padding-top:6px;border-top:1px solid var(--border-soft);font-family:'JetBrains Mono',monospace;font-size:.74em;color:var(--text);}
+.mb-chain .mc-eq span{color:var(--amber);}
 .term{color:var(--accent2);border-bottom:1px dashed rgba(122,162,255,.55);cursor:pointer;transition:.15s var(--ease-out);white-space:nowrap;}
 .term:hover{color:#fff;border-bottom-color:var(--accent2);background:rgba(77,128,255,.14);border-radius:3px;}
 .sym{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--text);}
@@ -337,6 +344,24 @@ math[display="block"]{margin:.1em 0;}
 .adv-text em{color:var(--gold);font-style:normal;}
 .adv-text .chain{margin:12px 0;padding:11px 13px;background:rgba(0,0,0,.28);border:1px solid var(--border-soft);border-radius:var(--r-sm);font-family:'JetBrains Mono',monospace;font-size:.86em;color:var(--dim);line-height:1.9;}
 .adv-text .chain b{color:var(--accent2);font-weight:600;}
+.adv-text .chain .cr{display:block;padding:8px 0;border-bottom:1px dashed var(--border-soft);}
+.adv-text .chain .cr:last-child{border-bottom:none;}
+.adv-text .chain .cr i{display:block;font-style:normal;font-family:'DM Sans',sans-serif;font-size:.92em;color:var(--dim2);line-height:1.45;margin-bottom:5px;}
+.adv-text .chain .cr b.fx{display:block;padding-left:4px;white-space:nowrap;}
+.adv-text .chain .cr b.fx math{font-size:1.02em;}
+.adv-text .chain .cr b.fx .fml{color:var(--accent2);}
+.adv-text .chain-note{font-size:.78em;color:var(--dim2);margin:-4px 0 10px;line-height:1.55;text-align:center;}
+.adv-text h4{font-family:'Syne',sans-serif;font-size:.96em;font-weight:700;color:var(--text);margin:20px 0 9px;padding-top:15px;border-top:1px solid var(--border-soft);}
+.adv-text h4.first{margin-top:0;padding-top:0;border-top:none;}
+.adv-text .qa{margin:10px 0;padding-left:12px;border-left:2px solid var(--border-soft);font-size:.95em;color:var(--dim2);line-height:1.75;}
+.adv-text .qa em{color:var(--accent2);font-style:normal;}
+.chain-flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:7px;margin:13px 0;padding:12px 10px;background:rgba(0,0,0,.28);border:1px solid var(--border-soft);border-radius:var(--r-sm);}
+.chain-flow .cf-n{font-family:'JetBrains Mono',monospace;font-size:.8em;color:var(--text);background:rgba(255,255,255,.04);border:1px solid var(--border-soft);border-radius:999px;padding:4px 12px;}
+.chain-flow .cf-n.end{color:var(--amber);border-color:rgba(255,159,69,.35);}
+.chain-flow .cf-a{color:var(--accent2);font-size:.92em;}
+.chain-mult{margin:13px 0;padding:12px 13px;background:rgba(0,0,0,.28);border:1px solid var(--border-soft);border-radius:var(--r-sm);font-size:.82em;line-height:1.5;color:var(--dim);text-align:center;}
+.chain-mult i{display:block;color:var(--accent2);font-style:normal;font-weight:700;margin:4px 0;}
+.chain-mult b{display:block;margin-top:9px;padding-top:9px;border-top:1px solid var(--border-soft);color:var(--text);font-weight:600;}
 .adv-visual{margin-top:18px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:16px;}
 .adv-visual-hd{font-size:.68em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim2);margin-bottom:10px;}
 .adv-canvas-wrap{position:relative;width:100%;height:220px;border-radius:var(--r-sm);overflow:hidden;background:#05060d;border:1px solid var(--border-soft);}
@@ -582,14 +607,33 @@ math[display="block"]{margin:.1em 0;}
   <div class="adv-inner">
     <button class="adv-close" onclick="closeAdvanced()">✕</button>
     <div class="adv-tag">Avancerat</div>
-    <h3>Vad är det egentligen vi deriverar?</h3>
+    <h3>Vad gör egentligen backpropagation?</h3>
     <div class="adv-text">
-      <p>I varje beräkningssteg är <strong>z</strong>, <strong>a</strong>, <strong>ŷ</strong> och <strong>L</strong> konkreta tal, alltså uträknade resultat för en given ingång och givna vikter. Det som deriveras är däremot inte dessa enskilda tal, utan <strong>sambandet</strong> mellan dem: formeln som beskriver hur förlusten L skulle förändras om en vikt w ändrades något.</p>
-      <p>Håller man alla andra värden fasta och låter w variera framträder en kurva. Derivatan är <em>lutningen</em> på den kurvan i just den punkt där vikten befinner sig. Det är inte höjden som mäts, utan hur brant det lutar där.</p>
-      <p>Nätverket känner till kurvans ekvation, eftersom den bara byggs av kända, deriverbara steg (viktade summor och sigmoid). Därför går lutningen att räkna ut exakt, genom att sätta in de aktuella talen i den färdiga formeln. Ingenting behöver gissas.</p>
-      <div class="chain">L → ŷ&nbsp; &nbsp;<b>dL/dŷ&nbsp;=&nbsp;(ŷ − y)</b><br>a → z&nbsp; &nbsp;<b>da/dz&nbsp;=&nbsp;a(1−a)</b><br>z → w&nbsp; &nbsp;<b>dz/dw&nbsp;=&nbsp;a_in</b></div>
-      <p>Kedjeregeln multiplicerar ihop de här lutningarna, steg för steg bakåt genom nätverket. Det är precis det <strong>Fas 3 · Backprop</strong> gör.</p>
-      <p>Ju brantare kurvan är, desto känsligare är förlusten för ändringar i vikten. Längst ner i dalen är lutningen <strong>noll</strong>, och där går det inte att minska förlusten mer genom att flytta vikten åt något håll. Förlusten är alltså som <strong style="color:var(--green)">minst</strong> i botten av kurvan, och dit försöker gradientnedstigning ta nätverket steg för steg.</p>
+      <h4 class="first">Felet fördelas bakåt</h4>
+      <p>Backpropagation är metoden som talar om <strong>hur varje vikt ska ändras</strong> för att nätverket ska gissa bättre nästa gång.</p>
+      <p>När nätverket har gjort sin gissning räknar vi först ut hur stort felet blev. Sedan arbetar vi bakåt genom nätverket. Vi börjar vid utgången och frågar:</p>
+      <div class="qa"><em>Hur mycket bidrog den här neuronen till felet?</em><br>Och sedan: <em>hur mycket bidrog neuronen före den?</em></div>
+      <p>Till slut vet varje vikt hur stor påverkan just den hade på felet. Det talet kallas <strong>felsignal</strong>.</p>
+
+      <h4>Derivator: hur känsligt är felet?</h4>
+      <p>För att avgöra hur mycket en vikt bidrog till felet används <strong>derivator</strong>. En derivata svarar på frågan:</p>
+      <div class="qa"><em>Om vikten ökas en liten aning, hur mycket större eller mindre blir felet?</em></div>
+      <p>I varje beräkningssteg är <strong>z</strong> (neuronens viktade summa), <strong>a</strong> (neuronens aktivering, alltså summan efter sigmoid), <strong>ŷ</strong> (nätverkets gissning) och <strong>L</strong> (förlusten, hur fel gissningen blev) konkreta tal, uträknade för en given ingång och givna vikter. Det som deriveras är inte de enskilda talen, utan <strong>sambandet</strong> mellan dem. Håller man alla andra värden fasta och låter w variera framträder en kurva, och derivatan är <em>lutningen</em> på kurvan i just den punkt där vikten befinner sig. Det är inte höjden som mäts, utan hur brant det lutar där.</p>
+
+      <h4>Kedjeregeln</h4>
+      <p>En vikt påverkar inte felet direkt. Den påverkar först nästa neuron, den neuronen påverkar nästa, och till slut nätverkets utgång, som i sin tur påverkar förlusten.</p>
+      <div class="chain-flow"><span class="cf-n">Vikt</span><span class="cf-a">→</span><span class="cf-n">Neuron</span><span class="cf-a">→</span><span class="cf-n">Utgång</span><span class="cf-a">→</span><span class="cf-n end">Förlust</span></div>
+      <p>För att räkna ut hur mycket vikten påverkar förlusten måste vi ta hänsyn till <strong>alla steg i kedjan</strong>. Därför multipliceras de lokala lutningarna med varandra:</p>
+      <div class="chain-mult">Hur vikten påverkar neuronen<i>×</i>Hur neuronen påverkar utgången<i>×</i>Hur utgången påverkar förlusten<b>= Hur vikten påverkar förlusten</b></div>
+      <p>Varje led i kedjan har sin egen färdiga formel. Skrivsättet <strong>∂A/∂B</strong> läses: hur mycket <strong>A</strong> ändras när <strong>B</strong> ändras en aning.</p>
+      <div class="chain"><span class="cr"><i>Hur förlusten ändras när gissningen ändras</i><b class="fx" data-tex="\\frac{\\partial L}{\\partial \\hat{y}} = \\hat{y} - y" data-plain="∂L/∂ŷ = ŷ − y"></b></span><span class="cr"><i>Hur aktiveringen ändras när summan ändras</i><b class="fx" data-tex="\\frac{\\partial a}{\\partial z} = a(1 - a)" data-plain="∂a/∂z = a(1 − a)"></b></span><span class="cr"><i>Hur summan ändras när vikten ändras</i><b class="fx" data-tex="\\frac{\\partial z}{\\partial w} = a_{\\text{in}}" data-plain="∂z/∂w = a_in"></b></span></div>
+      <p>Kedjeregeln multiplicerar ihop de här lutningarna, steg för steg bakåt genom nätverket. Det är precis det <strong>Fas 3 · Backprop</strong> gör, och det är därför signalen går baklänges: framåtpasset räknar ut nätverkets svar, backpropagation räknar ut ansvaret för felet.</p>
+
+      <h4>Gradienten talar om vad som ska göras</h4>
+      <p>Resultatet för en vikt kallas dess <strong>gradient</strong>, och den säger två saker:</p>
+      <div class="qa"><em>Riktning</em> – ska vikten ökas eller minskas?<br><em>Storlek</em> – hur mycket bör vikten ändras?</div>
+      <p>Ju brantare kurvan är, desto känsligare är förlusten för ändringar i vikten. Längst ner i dalen är lutningen <strong>noll</strong>, och där går det inte att minska förlusten mer genom att flytta vikten åt något håll. Förlusten är alltså som <strong style="color:var(--green)">minst</strong> i botten av kurvan.</p>
+      <p>Att låta varje vikt ta ett litet steg nedför sin egen kurva, i motsatt riktning mot gradienten, och sedan göra om det varv efter varv, kallas <strong>gradientnedstigning</strong>. Det är precis det som händer i <strong>Fas 4 · Uppdatera vikter</strong>, och det är så nätverket sakta tar sig ner mot dalens botten.</p>
     </div>
     <div class="adv-visual">
       <div class="adv-visual-hd">Testa själv: lutningen vid en punkt</div>
@@ -1159,7 +1203,7 @@ function renderStep(){
   else badge.classList.remove('show');
 
   const mb=document.getElementById('mathbox');
-  let tagCls,tagTxt,title,desc,rows=[],narr='';
+  let tagCls,tagTxt,title,desc,rows=[],narr='',chain='';
 
   if(st.kind==='fwd-h'){
     const j=st.j,x=C.x;
@@ -1178,7 +1222,7 @@ function renderStep(){
     desc=`Utgångsneuronen gör exakt samma sak, men får nu de dolda neuronernas ${T('aktiveringar','aktivering')} som ingångar. Dess egen aktivering kallar vi ${S('ŷ')} (uttalas "y-hatt"), och det är nätverkets slutliga gissning på svaret.`;
     rows=[
       {cls:'gen',tex:`\\hat{y} = \\sigma(w_{1}a_{1} + w_{2}a_{2} + b)`,plain:'ŷ = σ(w1·a1 + w2·a2 + b)'},
-      {cls:'num',tex:`z_{ut} = (${f(w2[0])})(${fp(C.ah[0])}) + (${f(w2[1])})(${fp(C.ah[1])}) + (${f(bo)}) = ${f(C.zo)}`,plain:`z = ${f(C.zo)}`},
+      {cls:'num',tex:`z_{\\text{ut}} = (${f(w2[0])})(${fp(C.ah[0])}) + (${f(w2[1])})(${fp(C.ah[1])}) + (${f(bo)}) = ${f(C.zo)}`,plain:`z = ${f(C.zo)}`},
       {cls:'res gold',tex:`\\hat{y} = \\sigma(${f(C.zo)}) = ${col(CGO,fp(C.yhat))}`,plain:`ŷ = ${fp(C.yhat)}`}
     ];
     narr=`Nätverket gissar <span class="mono" style="color:var(--gold)">${fp(C.yhat)}</span>, medan det rätta svaret är <strong style="color:var(--gold)">${C.y}</strong>.`;
@@ -1200,34 +1244,37 @@ function renderStep(){
     tagCls='backward';tagTxt='Fas 3 · Backpropagation';title='Felsignal vid utgången';
     desc=`Nu vänder vi och går bakåt genom nätverket. Först räknar vi ut hur stor del av felet som utgångsneuronen bär. Det talet kallas ${T('felsignal','delta')} ${S('δ')} (delta) och byggs av två saker. Det första är hur fel gissningen blev, alltså skillnaden mellan ${S('ŷ')} och ${S('y')}. Det andra är hur känslig neuronen är just nu, alltså hur brant ${T('aktiveringsfunktionen','sigmoid')} lutar vid neuronens värde. Sigmoid, som används här, lutar brantast i mitten och är nästan flack ute i kanterna. En neuron som redan ligger nära 0 eller 1 kan därför knappt påverka svaret och får en liten felsignal även när felet är stort.`;
     rows=[
-      {cls:'gen',tex:`\\delta_{ut} = (\\hat{y}-y)\\cdot \\hat{y}(1-\\hat{y})`,plain:'δut = (ŷ−y)·ŷ(1−ŷ)'},
-      {cls:'num',tex:`\\delta_{ut} = (${fp(C.yhat)}-${C.y})(${fp(C.yhat)})(1-${fp(C.yhat)})`,plain:`δut = ${f(C.dOut)}`},
-      {cls:'res amber',tex:`\\delta_{ut} = ${col(CA,f(C.dOut))}`,plain:`δut = ${f(C.dOut)}`}
+      {cls:'gen',tex:`\\delta_{\\text{ut}} = (\\hat{y}-y)\\cdot \\hat{y}(1-\\hat{y})`,plain:'δut = (ŷ−y)·ŷ(1−ŷ)'},
+      {cls:'num',tex:`\\delta_{\\text{ut}} = (${fp(C.yhat)}-${C.y})(${fp(C.yhat)})(1-${fp(C.yhat)})`,plain:`δut = ${f(C.dOut)}`},
+      {cls:'res amber',tex:`\\delta_{\\text{ut}} = ${col(CA,f(C.dOut))}`,plain:`δut = ${f(C.dOut)}`}
     ];
     narr=`Utgångens felsignal blev <span class="mono" style="color:var(--amber)">${f(C.dOut)}</span>. Tecknet visar åt vilket håll svaret drog fel: ett positivt tal betyder att gissningen var för hög, ett negativt att den var för låg.`;
     flowBackward([[1,0,2,0],[1,1,2,0]]);
+    chain=`<div class="mb-chain"><span class="mc-t">Kedjeregeln, steg 1</span><div class="mc-row">hur <b>förlusten</b> ändras när gissningen ändras<i>×</i>hur <b>gissningen</b> ändras när summan ändras</div><div class="mc-eq">(ŷ − y) &nbsp;×&nbsp; ŷ(1−ŷ) &nbsp;=&nbsp; <span>δ<sub>ut</sub></span></div></div>`;
   }
   else if(st.kind==='back-gw2'){
     tagCls='backward';tagTxt='Fas 3 · Backpropagation';title='Gradient för utvikterna';
     desc=`För varje utvikt räknar vi nu ut en ${T('gradient','gradient')}, alltså ett tal som visar hur mycket just den vikten bidrog till felet. Vi får det genom att multiplicera felsignalen ${S('δ')} med den ${T('aktivering','aktivering')} som kom in i vikten. Det bygger på ${T('kedjeregeln','chain')}.`;
     rows=[
-      {cls:'gen',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{ut}\\cdot a_{in}`,plain:'∂L/∂w = δut · a_in'},
+      {cls:'gen',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{\\text{ut}}\\cdot a_{\\text{in}}`,plain:'∂L/∂w = δut · a_in'},
       {cls:'num',tex:`\\frac{\\partial L}{\\partial w_{1}} = (${f(C.dOut)})(${fp(C.ah[0])}) = ${f(C.gW2[0])}`,plain:`∂L/∂w1 = ${f(C.gW2[0])}`},
       {cls:'num',tex:`\\frac{\\partial L}{\\partial w_{2}} = (${f(C.dOut)})(${fp(C.ah[1])}) = ${f(C.gW2[1])}`,plain:`∂L/∂w2 = ${f(C.gW2[1])}`}
     ];
     narr=`Nu vet varje utvikt både åt vilket håll och hur mycket den behöver ändras.`;
+    chain=`<div class="mb-chain"><span class="mc-t">Kedjeregeln, steg 2</span><div class="mc-row"><b>felsignalen</b> vid utgången<i>×</i>hur mycket vikten <b>släppte igenom</b> (aktiveringen in)</div><div class="mc-eq">δ<sub>ut</sub> &nbsp;×&nbsp; a<sub>in</sub> &nbsp;=&nbsp; <span>∂L/∂w</span></div></div>`;
   }
   else if(st.kind==='back-h'){
     const j=st.j;
     tagCls='backward';tagTxt='Fas 3 · Backpropagation';title=`Felsignal till dold neuron ${j+1}`;
     desc=`Nu skickas felsignalen vidare bakåt genom utvikterna, så att varje neuron i det dolda lagret får sin egen ${T('felsignal','delta')} ${S('δ')}. Den blir stor bara när två saker gäller samtidigt: neuronen har en stark koppling till utgången, och den är känslig för förändring just nu. Så fördelas ansvaret för felet bakåt genom nätverket, där den som påverkade mest också får störst del av skulden.`;
     rows=[
-      {cls:'gen',tex:`\\delta_{${j+1}} = \\delta_{ut}\\cdot w_{${j+1}}\\cdot a_{${j+1}}(1-a_{${j+1}})`,plain:`δ${j+1} = δut·w${j+1}·a${j+1}(1−a${j+1})`},
+      {cls:'gen',tex:`\\delta_{${j+1}} = \\delta_{\\text{ut}}\\cdot w_{${j+1}}\\cdot a_{${j+1}}(1-a_{${j+1}})`,plain:`δ${j+1} = δut·w${j+1}·a${j+1}(1−a${j+1})`},
       {cls:'num',tex:`\\delta_{${j+1}} = (${f(C.dOut)})(${f(w2[j])})(${fp(C.ah[j])})(1-${fp(C.ah[j])})`,plain:`δ${j+1} = ${f(C.dH[j])}`},
       {cls:'res amber',tex:`\\delta_{${j+1}} = ${col(CA,f(C.dH[j]))}`,plain:`δ${j+1} = ${f(C.dH[j])}`}
     ];
     narr=`Dold neuron <strong>${j+1}</strong> får felsignalen <span class="mono" style="color:var(--amber)">${f(C.dH[j])}</span>. Det är utgångens felsignal, skickad bakåt genom vikten mellan dem och skalad med neuronens egen känslighet.`;
     flowBackward([[0,0,1,j],[0,1,1,j]]);
+    chain=`<div class="mb-chain"><span class="mc-t">Kedjeregeln, steg 3</span><div class="mc-row"><b>felsignalen</b> från utgången<i>×</i>vikten den <b>reser bakåt</b> genom<i>×</i>neuronens egen <b>känslighet</b></div><div class="mc-eq">δ<sub>ut</sub> &nbsp;×&nbsp; w &nbsp;×&nbsp; a(1−a) &nbsp;=&nbsp; <span>δ<sub>dold</sub></span></div></div>`;
   }
   else if(st.kind==='back-gw1'){
     tagCls='backward';tagTxt='Fas 3 · Backpropagation';title='Gradient för invikterna';
@@ -1239,6 +1286,7 @@ function renderStep(){
       {cls:'res',text:true,html:'Nu vet nätverket hur varje vikt och bias ska ändras <span style="color:var(--green)">✓</span>'}
     ];
     narr=`Backpropagation är klar. Nu vet varje vikt och bias hur den bidrog till felet, och därmed åt vilket håll den behöver justeras.`;
+    chain=`<div class="mb-chain"><span class="mc-t">Gradienten</span><div class="mc-row">Varje gradient säger två saker: <b>tecknet</b> visar riktningen, alltså om vikten ska ökas eller minskas, och <b>storleken</b> visar hur mycket den bör ändras.</div><div class="mc-eq">δ<sub>dold</sub> &nbsp;×&nbsp; x<sub>in</sub> &nbsp;=&nbsp; <span>∂L/∂w</span></div></div>`;
   }
   else if(st.kind==='update'){
     if(!C.old)applyUpdate();
@@ -1250,7 +1298,7 @@ function renderStep(){
     narr=`Vikterna är justerade. De som blev <strong style="color:var(--green)">gröna</strong> ökade och de som blev <strong style="color:var(--red)">röda</strong> minskade. Nästa varv blir gissningen lite bättre.`;
   }
 
-  document.getElementById('narr').innerHTML=`<span class="mb-tag ${tagCls}">${tagTxt}</span><h4>${title}</h4><div class="mb-desc">${desc}</div>${narr?`<div class="mb-highlight">${narr}</div>`:''}`;
+  document.getElementById('narr').innerHTML=`<span class="mb-tag ${tagCls}">${tagTxt}</span><h4>${title}</h4><div class="mb-desc">${desc}</div>${narr?`<div class="mb-highlight">${narr}</div>`:''}${chain||''}`;
   mb.innerHTML=`<div class="mb-kicker ${tagCls}">${tagTxt}</div><div class="mb-formula" id="mbFormula"></div>`;
   texRows(document.getElementById('mbFormula'),rows);
   updateResults();drawNet();renderData();
@@ -1424,7 +1472,7 @@ function openEdgeCalc(li,fi,ti){
     def=`Den här kopplingen för dold neuron ${fi+1} vidare till utgångsneuronen. Under backpropagation används den för att skicka felsignalen bakåt genom nätverket.`;
     rows.push({cls:'gen',tex:`w = ${col(wv>=0?CB:CR,fp(wv,3))}`,plain:`w = ${fp(wv,3)}`});
     if(has)rows.push({cls:'num',tex:`\\text{bidrag} = w\\cdot a_{${fi+1}} = (${f(wv)})(${fp(srcVal)}) = ${f(wv*srcVal)}`,plain:`bidrag = ${f(wv*srcVal)}`});
-    if(has&&C.gW2)rows.push({cls:'res amber',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{ut}\\cdot a_{${fi+1}} = ${col(CA,f(C.gW2[fi]))}`,plain:`∂L/∂w = ${f(C.gW2[fi])}`});
+    if(has&&C.gW2)rows.push({cls:'res amber',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{\\text{ut}}\\cdot a_{${fi+1}} = ${col(CA,f(C.gW2[fi]))}`,plain:`∂L/∂w = ${f(C.gW2[fi])}`});
   }
   if(!has)def+=`<br><br><em style="color:var(--dim2)">Starta ett framåtpass för att se värden och gradient.</em>`;
   showCalcCard(EDGE_ICON,name,def,rows);
@@ -1503,7 +1551,7 @@ const CONCEPTS={
     tex:'\\delta_j = \\Big(\\textstyle\\sum_k \\delta_k w_{kj}\\Big)\\,\\sigma\'(z_j)',plain:'δj = (Σ δk·wkj)·σ\'(zj)'},
   gradient:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>',title:'Gradient',
     def:'Gradienten säger hur mycket förlusten ändras om vikten ändras en aning. Tecknet ger <strong>riktningen</strong> och storleken ger <strong>hur brant</strong> det lutar. Vi går alltid åt motsatt håll, alltså nerför backen mot lägre förlust.',
-    tex:'\\frac{\\partial L}{\\partial w} = \\delta \\cdot a_{in}',plain:'∂L/∂w = δ · a_in'},
+    tex:'\\frac{\\partial L}{\\partial w} = \\delta \\cdot a_{\\text{in}}',plain:'∂L/∂w = δ · a_in'},
   delta:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 3 20h18L12 3z"/></svg>',title:'Felsignal, delta (δ)',
     def:'Felsignalen <em>δ</em> är neuronens andel av felet. Den svarar på frågan: hur mycket skulle förlusten ändras om just den här neuronen ändrade sitt värde en aning? Ett positivt δ betyder att neuronen drog svaret för högt, ett negativt att den drog det för lågt, och ett δ nära noll att neuronen knappt påverkade utfallet.<br><br>Felsignalen räknas ut en gång per neuron och återanvänds för alla vikter som går in i den. Det återbruket är själva anledningen till att backpropagation går snabbt.',
     tex:'\\delta = \\frac{\\partial L}{\\partial z}',plain:'δ = ∂L/∂z'},
@@ -1530,7 +1578,7 @@ function renderGlossary(){
 function conceptLiveRows(id){
   if(id!=='delta')return null;
   if(!C||C.dOut===undefined||stepIdx<4)return null;
-  const rows=[{cls:'num',tex:`\\delta_{ut} = (${fp(C.yhat)}-${C.y})(${fp(C.yhat)})(1-${fp(C.yhat)}) = ${col(CA,f(C.dOut))}`,plain:`δut = ${f(C.dOut)}`}];
+  const rows=[{cls:'num',tex:`\\delta_{\\text{ut}} = (${fp(C.yhat)}-${C.y})(${fp(C.yhat)})(1-${fp(C.yhat)}) = ${col(CA,f(C.dOut))}`,plain:`δut = ${f(C.dOut)}`}];
   if(C.dH&&stepIdx>=6)rows.push({cls:'num',tex:`\\delta_{1} = (${f(C.dOut)})(${f(w2[0])})(${fp(C.ah[0])})(1-${fp(C.ah[0])}) = ${col(CA,f(C.dH[0]))}`,plain:`δ1 = ${f(C.dH[0])}`});
   if(C.dH&&stepIdx>=7)rows.push({cls:'num',tex:`\\delta_{2} = (${f(C.dOut)})(${f(w2[1])})(${fp(C.ah[1])})(1-${fp(C.ah[1])}) = ${col(CA,f(C.dH[1]))}`,plain:`δ2 = ${f(C.dH[1])}`});
   return rows;
@@ -1611,9 +1659,17 @@ function drawAdvChart(){
   document.getElementById('advSlope').textContent=(slope>=0?'+':'')+f(slope,3);
 }
 function onAdvSlider(v){advW=parseFloat(v);drawAdvChart();}
+function renderAdvFormulas(){
+  document.querySelectorAll('#advModal .fx[data-tex]').forEach(el=>{
+    if(el.dataset.done)return;
+    texInto(el,el.dataset.tex,el.dataset.plain,false);
+    el.dataset.done='1';
+  });
+}
 function openAdvanced(){
   document.getElementById('advBackdrop').classList.add('show');
   document.getElementById('advModal').classList.add('show');
+  renderAdvFormulas();
   drawAdvChart();
 }
 function closeAdvanced(){
