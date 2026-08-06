@@ -92,7 +92,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 /* Tre kolumner: reglagen till vänster, nätverket i mitten och beräkningen
    till höger. Duken får hela höjden, vilket är det som gör att neuronerna
    kan ritas stora i stället för att tryckas ihop. */
-.app{display:grid;grid-template-columns:340px 1fr 360px;flex:1 1 auto;min-height:0;position:relative;z-index:1;gap:12px;padding:12px;}
+.app{display:grid;grid-template-columns:330px 1fr 258px;flex:1 1 auto;min-height:0;position:relative;z-index:1;gap:12px;padding:12px;}
 .lp,.rp{background:var(--surface);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px;overflow-y:auto;display:flex;flex-direction:column;gap:13px;box-shadow:0 20px 50px rgba(0,0,0,.25);}
 .rp{padding:14px;gap:11px;}
 .lp::-webkit-scrollbar,.rp::-webkit-scrollbar{width:5px;}
@@ -105,7 +105,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .res-val{font-family:'JetBrains Mono',monospace;font-size:1.25em;font-weight:700;line-height:1.25;font-variant-numeric:tabular-nums;}
 
 /* Begreppen ligger längst ner i högerpanelen. */
-.gloss-box{margin-top:auto;padding-top:11px;border-top:1px solid var(--border);}
+.gloss-box{padding-top:11px;border-top:1px solid var(--border);}
 .gloss-lbl{display:block;font-size:.6em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim2);margin-bottom:7px;}
 .rp .glossary{margin-top:0;gap:4px;}
 .rp .g-tag{font-size:.66em;padding:4px 8px;}
@@ -600,11 +600,11 @@ max-height:calc(100% - 20px);overflow-y:auto;}
     <div id="actSection"><div class="sec-t">Aktivering</div><div id="actContent"></div></div>
     <div id="controlArea"></div>
   </div>
-  <div class="center"><div class="canvas-wrap" id="canvasWrap"><canvas id="cv"></canvas><button class="cv-toggle" id="wToggle" onclick="toggleWeights()"></button><div class="untrained-badge" id="untrainedBadge" style="display:none">OTRÄNAT NÄTVERK</div><div class="train-msg" id="trainMsg"></div></div></div>
+  <div class="center"><div class="canvas-wrap" id="canvasWrap"><canvas id="cv"></canvas><button class="cv-toggle" id="wToggle" onclick="toggleWeights()"></button><div class="untrained-badge" id="untrainedBadge" style="display:none">OTRÄNAT NÄTVERK</div><div class="train-msg" id="trainMsg"></div></div>  <div class="narr" id="narr"><div class="ne">Tryck <strong>Träna modellen</strong> för att börja.</div></div>
+  </div>
   <div class="rp">
     <div class="cv-results" id="resultBoxes"><div class="res-chip pred-only" style="display:none"><span class="res-lbl">Rätt svar (från data)</span><span class="res-val" id="targetVal" style="color:var(--gold)">–</span></div><div class="res-chip pred-only" style="display:none"><span class="res-lbl">Nätverkets förutsägelse</span><span class="res-val" id="outputVal" style="color:var(--accent2)">–</span><span id="verdictVal"></span></div></div>
-    <div class="narr" id="narr"><div class="ne">Tryck <strong>Träna modellen</strong> för att börja.</div></div>
-    <div class="gloss-box"><span class="gloss-lbl">Begrepp</span><div class="glossary">
+        <div class="gloss-box"><span class="gloss-lbl">Begrepp</span><div class="glossary">
         <span class="g-tag" onclick="openConcept('gInput',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h11m0 0-4-4m4 4-4 4"/><rect x="16" y="5" width="5" height="14" rx="1"/></svg>Input</span>
         <span class="g-tag" onclick="openConcept('gNeuron',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>Neuron</span>
         <span class="g-tag" onclick="openConcept('gWeight',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="12" r="2.5"/><path d="M7.5 12h9" stroke-width="3"/></svg>Vikt</span>
@@ -1055,7 +1055,7 @@ function buildActExplain(sum,a,isOut,fn){
     +mmlActValue(key,sum,a,fmt,true)
     +(key==='tanh'?`Till skillnad från sigmoid, som ger ett värde mellan 0 och 1, hamnar tanh alltid mellan −1 och 1. `:'')+`Aktiveringsfunktionen avgör hur starkt neuronen ska aktiveras, det vill säga hur stark signal som skickas vidare genom nätverket.`;
   expl+=isOut
-    ?`<br><br>Eftersom det här är utdatalagret är <strong>${fmt(a)}</strong> nätverkets slutgiltiga svar för det här försöket${curSc!=='abstract'?'. Ett värde över 0,5 tolkas som Ja och ett värde under 0,5 som Nej':''}.`
+    ?`<br><br>Eftersom det här är utdatalagret är <strong>${fmt(a)}</strong> nätverkets slutgiltiga svar för det här försöket${(!isCalc()&&curSc!=='abstract')?'. Ett värde över 0,5 tolkas som Ja och ett värde under 0,5 som Nej':''}.`
     :`<br><br>Värdet <strong>${fmt(a)}</strong> skickas nu vidare som indata till nästa lager.`;
   return expl;
 }
@@ -1154,7 +1154,7 @@ function renderLC(){const el=document.getElementById('layerCtrl');let h='';for(l
   }el.innerHTML=h;}
 function renderIS(){const av=activeVars();layers[0]=av.length;let h='';for(let i=0;i<av.length;i++){const v=av[i],d=v.def;const step=v.isCalc?10:1;const snapDef=v.isCalc?Math.round(d/10)*10:d;h+=`<div class="input-row"><div class="input-head"><span class="input-label">${v.name}</span><span class="input-val" id="inpV${i}">${fmtReal(snapDef/100,v)}</span></div><input type="range" class="input-slider" id="inp${i}" min="0" max="100" step="${step}" value="${snapDef}" oninput="onInp()"></div>`;}document.getElementById('inputGrid').innerHTML=h;for(let i=0;i<av.length;i++)onInp(true);}
 function snapNorm(norm,vo){if(!vo.realStep)return norm;const range=vo.max-vo.min;const real=vo.min+norm*range;const snapped=Math.round(real/vo.realStep)*vo.realStep;return Math.max(0,Math.min(1,(snapped-vo.min)/range));}
-function onInp(silent){const av=activeVars();for(let i=0;i<layers[0];i++){const raw=parseFloat(document.getElementById('inp'+i).value)/100;const snapped=isCalc()?raw:snapNorm(raw,av[i]);document.getElementById('inpV'+i).textContent=fmtReal(snapped,av[i]);}if(!silent){if(isCalc()||phase==='explore'){initV();stepHist=[];hlNeuron=null;hlEdges=[];if(!isCalc())updateTgt();document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';document.getElementById('narr').innerHTML='<div class="ne">Tryck <strong>Nästa</strong> för att beräkna.</div>';drawNet();}else if(phase==='predict'&&trained){initV();forwardFull();hlNeuron=null;hlEdges=[];updateTgt();updateOut();drawNet();runSignalPulse();pulseValue("outputVal");pulseValue("targetVal");document.getElementById('narr').innerHTML='<div class="ne">Indatavärdena ändrades och svaret har uppdaterats.</div>';}else{initV();updateTgt();drawNet();}}}
+function onInp(silent){const av=activeVars();for(let i=0;i<layers[0];i++){const raw=parseFloat(document.getElementById('inp'+i).value)/100;const snapped=isCalc()?raw:snapNorm(raw,av[i]);document.getElementById('inpV'+i).textContent=fmtReal(snapped,av[i]);}if(!silent){if(isCalc()||phase==='explore'){initV();stepHist=[];hlNeuron=null;hlEdges=[];if(!isCalc())updateTgt();document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';document.getElementById('narr').innerHTML='<div class="ne">Tryck <strong>Nästa</strong> för att beräkna.</div>';drawNet();}else if(phase==='predict'&&trained){initV();forwardFull();hlNeuron=null;hlEdges=[];updateTgt();updateOut();drawNet();runSignalPulse();pulseValue("outputVal");pulseValue("targetVal");}else{initV();updateTgt();drawNet();}}}
 function chN(l,d){if(isCalc())return;if(l===layers.length-1)return;layers[l]=Math.max(1,Math.min(8,layers[l]+d));fullReset();}
 function addLayer(){if(isCalc()||layers.length>=5)return;layers.splice(layers.length-1,0,2);fullReset();}
 function removeLayer(){if(isCalc()||layers.length<=2)return;layers.splice(layers.length-2,1);fullReset();}
