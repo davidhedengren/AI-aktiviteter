@@ -26,8 +26,6 @@
 <meta name="twitter:image" content="https://www.ai-aktiviteter.se/og-image-en.png">
 <title>Train a neural network · ai-aktiviteter.se</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <style>
 :root{
   --bg:#07080f;--surface:rgba(20,24,42,0.55);--surface-solid:#12152a;--surface2:rgba(28,33,56,0.65);
@@ -91,6 +89,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .lp,.rp{background:var(--surface);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px;overflow-y:auto;min-height:0;display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 50px rgba(0,0,0,.25);}
 .lp::-webkit-scrollbar,.rp::-webkit-scrollbar{width:5px;}.lp::-webkit-scrollbar-thumb,.rp::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 .sec-t{font-size:.65em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim2);margin-bottom:6px;}
+/* Versalisering gör grekiska gemener till versaler, och η blir då H. */
+.sec-t .lc{text-transform:none;}
 
 /* mini truth table (setup preview + gate popup) */
 .mini-tt{width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:.92em;}
@@ -103,7 +103,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 
 /* truth table */
 .dtable{width:100%;border-collapse:collapse;font-size:.75em;border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;}
-.dtable caption{caption-side:top;font-size:.82em;color:var(--dim2);text-align:left;padding:0 0 5px;font-weight:600;}
+.dtable-cap{font-size:.62em;color:var(--dim2);text-align:left;padding:0 0 6px;font-weight:600;line-height:1.5;}
 .dtable th{background:var(--surface2);padding:6px 4px;color:var(--dim);font-weight:600;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;}
 .dtable td{padding:5px 4px;text-align:center;border-bottom:1px solid rgba(255,255,255,.03);font-family:'JetBrains Mono',monospace;color:var(--text);}
 .dtable tr:last-child td{border-bottom:none;}
@@ -134,6 +134,33 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .btn.dn{flex:0 0 auto;min-width:44px;}
 
 /* control blocks */
+/* Kontrollraden följer samma formspråk som övriga knappar i labbet: samma
+   höjd, samma radie, samma typsnittsvikt. Bara en knapp är fylld, resten är
+   lugna. Ikonknapparna är kvadratiska och de två grupperna skiljs åt av
+   tomrum i stället för av färg. */
+.ctrl-row{display:flex;align-items:center;gap:8px;}
+.ctrl-row .ctrl-gap{flex:1 1 auto;}
+.cbtn{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:38px;padding:0 15px;
+  font-family:'DM Sans',sans-serif;font-size:.77em;font-weight:600;letter-spacing:-.005em;
+  border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--dim);
+  cursor:pointer;transition:.18s var(--ease-out);white-space:nowrap;flex:0 0 auto;}
+.cbtn:hover:not(:disabled){color:var(--text);border-color:var(--dim2);}
+.cbtn:active:not(:disabled){transform:translateY(1px);}
+.cbtn:disabled{opacity:.35;cursor:default;}
+.cbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.cbtn .ci{width:13px;height:13px;flex-shrink:0;display:block;}
+.cbtn.icon{width:38px;padding:0;}
+.cbtn.pri{padding:0 22px;background:var(--accent);border-color:var(--accent);color:#fff;
+  box-shadow:0 6px 18px rgba(77,128,255,.28);}
+.cbtn.pri:hover:not(:disabled){background:#3d6de6;border-color:#3d6de6;color:#fff;}
+.cbtn.on{background:var(--accent-dim);border-color:rgba(122,162,255,.45);color:var(--accent2);}
+.cbtn.run{background:rgba(255,159,69,.12);border-color:rgba(255,159,69,.45);color:var(--amber);}
+@media(max-width:900px){
+  .ctrl-row{flex-wrap:wrap;}
+  .ctrl-row .ctrl-gap{display:none;}
+  .cbtn.pri{flex:1 1 auto;}
+}
+.ctrl-legend{margin-top:10px;}
 .ctrl-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:11px;}
 .ctrl-label{display:flex;justify-content:space-between;align-items:center;font-size:.63em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim2);margin-bottom:9px;}
 .step-counter{font-family:'JetBrains Mono',monospace;font-size:1.15em;text-transform:none;letter-spacing:0;color:var(--accent2);font-weight:600;padding:2px 8px;background:var(--accent-dim);border-radius:999px;}
@@ -179,7 +206,30 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .flow-badge.forward{background:rgba(77,128,255,.16);border:1px solid rgba(122,162,255,.4);color:var(--accent2);}
 .flow-badge.backward{background:rgba(255,159,69,.14);border:1px solid rgba(255,159,69,.4);color:var(--amber);}
 .flow-badge.done{background:rgba(51,209,122,.14);border:1px solid rgba(51,209,122,.45);color:var(--green);}
-.canvas-hint{position:absolute;bottom:10px;left:10px;font-size:.66em;color:var(--dim2);background:rgba(6,7,14,.6);padding:4px 11px;border-radius:999px;border:1px solid var(--border-soft);backdrop-filter:blur(6px);white-space:nowrap;}
+.canvas-hint{position:absolute;top:11px;left:11px;font-size:.66em;color:var(--dim2);background:rgba(6,7,14,.6);padding:4px 11px;border-radius:999px;border:1px solid var(--border-soft);backdrop-filter:blur(6px);white-space:nowrap;max-width:calc(100% - 22px);overflow:hidden;text-overflow:ellipsis;}
+/* Stegkontrollerna ligger som en flytande list nere i canvasen, så att man
+   kan stega utan att tappa animeringen ur sikte. */
+.canvas-dock{position:absolute;left:50%;bottom:9px;transform:translateX(-50%);z-index:6;
+  display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:nowrap;
+  max-width:calc(100% - 16px);padding:5px 6px;border-radius:18px;
+  background:rgba(8,10,20,.78);backdrop-filter:blur(12px);border:1px solid var(--border);
+  box-shadow:0 12px 30px rgba(0,0,0,.5);}
+.canvas-dock:empty{display:none;}
+.canvas-dock .cbtn{height:27px;padding:0 10px;font-size:.64em;gap:5px;background:rgba(255,255,255,.05);}
+.canvas-dock .cbtn.icon{width:27px;padding:0;}
+.canvas-dock .cbtn.pri{padding:0 13px;background:var(--accent);}
+.canvas-dock .cbtn .ci{width:11px;height:11px;}
+.canvas-dock .dock-count{font-family:'JetBrains Mono',monospace;font-size:.56em;font-weight:700;letter-spacing:.08em;
+  color:var(--dim2);padding:0 2px 0 5px;white-space:nowrap;}
+.canvas-dock .dock-sep{width:1px;height:16px;background:var(--border);flex-shrink:0;margin:0 2px;}
+.ctrl-block.legend-only{display:none;}
+@media(max-width:820px){
+  .canvas-dock .dock-count{display:none;}
+  .canvas-dock .cbtn .lbl{display:none;}
+  .canvas-dock .cbtn{padding:0 8px;}
+  .canvas-dock .cbtn.pri{padding:0 11px;}
+  .canvas-dock .cbtn.pri .lbl{display:inline;}
+}
 .canvas-controls{position:absolute;right:10px;bottom:10px;display:flex;flex-direction:column;align-items:flex-end;gap:6px;z-index:5;}
 .canvas-btn{font-family:'DM Sans',sans-serif;font-size:.7em;font-weight:700;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:rgba(10,12,22,.75);backdrop-filter:blur(8px);color:var(--text);cursor:pointer;transition:.2s var(--ease-out);white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.35);}
 .canvas-btn:hover{border-color:var(--dim2);background:rgba(20,24,42,.88);}
@@ -229,15 +279,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .mb-idle strong{color:var(--text);}.mb-idle em{color:var(--gold);font-style:normal;}
 
 /* math rows (KaTeX or fallback) */
+/* MathML ersätter KaTeX. Formlerna ärver radens färg och står vänsterställda
+   precis som de gjorde förut. */
+.fml{font-size:1.14em;}
+math{color:inherit;}
+math[display="block"]{margin:.1em 0;}
+.mrow{text-align:left;}
 .mrow{overflow-x:auto;overflow-y:hidden;padding:3px 0;color:var(--dim);}
 .mrow::-webkit-scrollbar{height:3px;}.mrow::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 .mrow.gen{color:var(--dim);}
 .mrow.num{color:var(--text);}
 .mrow.res{color:var(--accent2);font-weight:600;}
 .mrow.res.up{color:var(--green);}.mrow.res.down{color:var(--red);}.mrow.res.amber{color:var(--amber);}.mrow.res.gold{color:var(--gold);}
-.mrow .katex{color:inherit;font-size:1.02em;}
-.mrow .katex-display{margin:.15em 0;text-align:left;}
-.mrow .katex-display>.katex{text-align:left;}
 .tex-fallback{font-family:'JetBrains Mono',monospace;font-size:.82em;white-space:pre-wrap;}
 .mrow-text{font-family:'DM Sans',sans-serif;font-size:.86em;line-height:1.5;padding:5px 0;font-weight:600;}
 
@@ -249,7 +302,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .rbox.wide{grid-column:span 2;}
 
 .loss-panel{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:12px;}
-.loss-panel .lp-hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+.loss-panel .lp-hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px;}
+.lp-hd .adv-link{margin-left:auto;}
 .loss-panel .lp-hd .t{font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--dim2);}
 .loss-panel .lp-hd .v{font-family:'JetBrains Mono',monospace;font-size:.92em;font-weight:700;color:var(--green);}
 #lossChart{width:100%;height:96px;display:block;}
@@ -474,11 +528,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
       </svg>
     </div>
     <h2><span>Train a neural network</span></h2>
-    <p class="sub">This is where you get to see how a neural network actually learns. We follow one training example all the way around the loop and watch the error travel <strong style="color:var(--amber)">backwards</strong> through the network, nudging every weight a little.</p>
+    <p class="sub">Here you get to see how a neural network actually learns. We follow a single training example all the way round: the network guesses, we measure how wrong the guess was, the error is sent <strong style="color:var(--amber)">backwards</strong> through the network, and every weight is nudged a little.</p>
     <div class="intro-loop">
       <div class="intro-phase p1"><div class="ip-num">1</div><div><div class="ip-t">Forward pass</div><div class="ip-d">The input is sent through the network, which makes a guess.</div></div></div>
-      <div class="intro-phase p2"><div class="ip-num">2</div><div><div class="ip-t">Loss</div><div class="ip-d">We compare the network's guess with the correct answer and work out how big the error is.</div></div></div>
-      <div class="intro-phase p3"><div class="ip-num">3</div><div><div class="ip-t">Backpropagation</div><div class="ip-d">Information about the error is sent backwards through the network, so every weight learns how it contributed.</div></div></div>
+      <div class="intro-phase p2"><div class="ip-num">2</div><div><div class="ip-t">Loss</div><div class="ip-d">We compare the network's guess with the correct answer and work out how large the error is.</div></div></div>
+      <div class="intro-phase p3"><div class="ip-num">3</div><div><div class="ip-t">Backpropagation</div><div class="ip-d">The error is sent backwards through the network, so every weight learns how much it contributed to it.</div></div></div>
       <div class="intro-phase p4"><div class="ip-num">4</div><div><div class="ip-t">Update</div><div class="ip-d">Every weight is nudged a little in the direction that reduces the error.</div></div></div>
     </div>
     <button class="intro-start" onclick="openSetup()">Get started <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -511,7 +565,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
     <svg class="hd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg>
     <h1><span>Train a neural network</span></h1>
   </div>
-  <p>Watch the network learn, step by step – from a random guess to a fully trained model.</p>
+  <p>Follow the network as it learns, step by step, from a random guess to a fully trained model.</p>
   <a class="lang-link" href="https://www.ai-aktiviteter.se/trana-neuralt-natverk"><span class="flag"><svg viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="36" fill="#006aa7"/><rect x="20" width="8" height="36" fill="#fecc02"/><rect y="14" width="60" height="8" fill="#fecc02"/></svg></span> Svenska</a>
 </div>
 
@@ -520,9 +574,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
   <div class="lp">
     <div><div class="sec-t">Phases</div><div class="phase-bar" id="phaseBar"></div></div>
     <div><div class="sec-t">Task</div><div class="task-summary" id="taskSummary"></div></div>
-    <div><table class="dtable" id="dataTable"></table><div class="hint" id="dataHint"></div></div>
+    <div><div class="dtable-cap" id="dataCap"></div><table class="dtable" id="dataTable"></table><div class="hint" id="dataHint"></div></div>
     <div>
-      <div class="sec-t">Learning rate (η)</div>
+      <div class="sec-t">Learning rate (<span class="lc">η</span>)</div>
       <div class="slider-row"><span class="slider-lbl">η</span><input type="range" class="slider" id="lrSlider" min="5" max="150" step="5" value="60" oninput="onLr()"><span class="slider-val" id="lrVal">0.60</span></div>
       <div class="hint">The learning rate decides how big a step the weights take each time they are adjusted. A small rate learns slowly but steadily, while a large rate is faster but can turn jumpy.</div>
     </div>
@@ -533,25 +587,22 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
     <div class="canvas-wrap">
       <canvas id="cv"></canvas>
       <div class="flow-badge" id="flowBadge"></div>
-      <div class="canvas-hint">Click a connection or a neuron to see its calculation</div>
-      <div class="canvas-controls" id="canvasControls"></div>
+      <div class="canvas-dock" id="canvasControls"></div>
     </div>
-    <div class="narr" id="narr"></div>
     <div class="ctrl-block" id="controlPanel"></div>
+    <div class="narr" id="narr"></div>
+    <div class="mathbox" id="mathbox"></div>
   </div>
 
   <!-- RIGHT -->
   <div class="rp">
-    <div><div class="sec-t" style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">Calculation
-      <span class="adv-link" onclick="openAdvanced()">Advanced ↗</span>
-    </div><div class="mathbox" id="mathbox"></div></div>
-    <div><div class="sec-t">Result</div><div class="result-boxes" id="resultBoxes">
+        <div><div class="sec-t">Result</div><div class="result-boxes" id="resultBoxes">
       <div class="rbox"><div class="rl">Network's guess (ŷ)</div><div class="rv" id="rPred" style="color:var(--accent2)">–</div></div>
       <div class="rbox"><div class="rl">Correct answer (y)</div><div class="rv" id="rTarget" style="color:var(--gold)">–</div></div>
       <div class="rbox wide"><div class="rl" id="rLossLabel">Loss for this example</div><div class="rv" id="rLoss" style="color:var(--amber);font-size:1.05em">–</div></div>
     </div></div>
     <div class="loss-panel">
-      <div class="lp-hd"><span class="t">Loss over epochs</span><span class="v" id="epochLoss">–</span></div>
+      <div class="lp-hd"><span class="t">Loss over epochs</span><span class="adv-link" onclick="openAdvanced()">Advanced ↗</span><span class="v" id="epochLoss">–</span></div>
       <canvas id="lossChart"></canvas>
       <div class="loss-axis"><span>Epoch 1</span><span id="epochLabel">–</span></div>
     </div>
@@ -583,7 +634,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
     <div class="adv-text">
       <h4 class="first">The error is shared out backwards</h4>
       <p>Backpropagation is the method that works out <strong>how each weight should change</strong> so the network guesses better next time.</p>
-      <p>Once the network has made its guess, we first measure how large the error was. Then we work backwards through the network. Starting at the output, we ask:</p>
+      <p>Once the network has made its guess, we first work out how large the error was. Then we work backwards through the network. Starting at the output, we ask:</p>
       <div class="qa"><em>How much did this neuron contribute to the error?</em><br>And then: <em>how much did the neuron before it contribute?</em></div>
       <p>In the end every weight knows how much influence it had on the error. That number is called the <strong>error signal</strong>.</p>
 
@@ -599,13 +650,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
       <div class="chain-mult">How the weight affects the neuron<i>×</i>How the neuron affects the output<i>×</i>How the output affects the loss<b>= How the weight affects the loss</b></div>
       <p>Each link in the chain has its own ready-made formula. The notation <strong>∂A/∂B</strong> reads: how much <strong>A</strong> changes when <strong>B</strong> is nudged slightly.</p>
       <div class="chain"><span class="cr"><i>How the loss changes when the guess changes</i><b class="fx" data-tex="\\frac{\\partial L}{\\partial \\hat{y}} = \\hat{y} - y" data-plain="∂L/∂ŷ = ŷ − y"></b></span><span class="cr"><i>How the activation changes when the sum changes</i><b class="fx" data-tex="\\frac{\\partial a}{\\partial z} = a(1 - a)" data-plain="∂a/∂z = a(1 − a)"></b></span><span class="cr"><i>How the sum changes when the weight changes</i><b class="fx" data-tex="\\frac{\\partial z}{\\partial w} = a_{\\text{in}}" data-plain="∂z/∂w = a_in"></b></span></div>
-      <p>The chain rule multiplies these slopes together, step by step backwards through the network – which is exactly what <strong>Phase 3 · Backprop</strong> does, and why the signal travels backwards: the forward pass works out the answer, backpropagation works out the responsibility for the error.</p>
+      <p>The chain rule multiplies these slopes together, step by step backwards through the network – which is exactly what <strong>Phase 3 · Backprop</strong> does, and why the signal travels backwards: the forward pass works out the network's answer, backpropagation works out the responsibility for the error.</p>
 
       <h4>The gradient says what to do</h4>
       <p>The result for a weight is called its <strong>gradient</strong>, and it tells us two things:</p>
       <div class="qa"><em>Direction</em> – should the weight increase or decrease?<br><em>Size</em> – how much should it change?</div>
       <p>The steeper the curve, the more sensitive the loss is to changes in the weight. Right at the bottom of the valley the slope is <strong>zero</strong> – there is no way to reduce the loss further by moving the weight in either direction. So the loss is at its <strong style="color:var(--green)">smallest</strong> at the bottom of the curve.</p>
-      <p>Letting every weight take one small step down its own curve, in the opposite direction to the gradient, and then repeating that round after round, is called <strong>gradient descent</strong>. That is exactly what happens in <strong>Phase 4 · Update weights</strong>, and it is how the network slowly works its way towards the bottom of the valley.</p>
+      <p>Letting every weight take one small step down its own curve, in the opposite direction to the gradient, and repeating that round after round, is called <strong>gradient descent</strong>. That is exactly what happens in <strong>Phase 4 · Update weights</strong>, and it is how the network slowly works its way down towards the bottom of the valley.</p>
     </div>
     <div class="adv-visual">
       <div class="adv-visual-hd">Try it yourself: the slope at a point</div>
@@ -627,9 +678,148 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 <script>
 /* ============================ MATH TYPESETTING ============================ */
 // Render a single LaTeX string into an element, with a plain-text fallback.
+/* ── Formler i MathML ────────────────────────────────────────────────
+   Labbet skrev tidigare formlerna med KaTeX, hämtat från ett CDN. Det gjorde
+   sidan beroende av nätet, och när biblioteket inte laddade föll formlerna
+   tillbaka på oformaterad text. Samma delmängd av LaTeX översätts nu till
+   MathML, som webbläsaren sätter själv. Ingen extern kod behövs, och
+   typografin blir densamma som i labbet om neurala nätverk. */
+const TEX_SYM={sigma:'\u03c3',delta:'\u03b4',eta:'\u03b7',partial:'\u2202',
+  leftarrow:'\u2190',to:'\u2192',uparrow:'\u2191',downarrow:'\u2193',cdot:'\u22c5',
+  approx:'\u2248',times:'\u00d7'};
+const TEX_OPS={leftarrow:1,to:1,uparrow:1,downarrow:1,cdot:1,approx:1,times:1};
+
+function texTokens(src){
+  const t=[];let i=0;
+  while(i<src.length){
+    const c=src[i];
+    if(c==='\\'){
+      let j=i+1,name='';
+      while(j<src.length&&/[a-zA-Z]/.test(src[j])){name+=src[j];j++;}
+      if(name){t.push({t:'cmd',v:name});i=j;continue;}
+      if(src[i+1]===','){t.push({t:'space',v:'0.17em'});i+=2;continue;}
+      if(src[i+1]===' '||src[i+1]===';'){t.push({t:'space',v:'0.3em'});i+=2;continue;}
+      i++;continue;
+    }
+    if(c==='{'||c==='}'||c==='_'||c==='^'){t.push({t:c});i++;continue;}
+    /* Vanligt blanksteg avgränsar bara kommandon och syns inte i formeln,
+       men behövs inuti \\text{...}. Det behålls därför som en egen token. */
+    if(/\s/.test(c)){t.push({t:'ws'});i++;continue;}
+    if(/[0-9]/.test(c)){
+      let n='';while(i<src.length&&/[0-9.]/.test(src[i])){n+=src[i];i++;}
+      t.push({t:'num',v:n});continue;
+    }
+    if(/[a-zA-Z]/.test(c)){
+      let n='';while(i<src.length&&/[a-zA-Z]/.test(src[i])){n+=src[i];i++;}
+      t.push({t:'id',v:n});continue;
+    }
+    t.push({t:'op',v:c==='-'?'\u2212':c});i++;
+  }
+  return t;
+}
+
+function texGroup(tk,p){
+  /* Läser en grupp {...} eller ett enda tecken efter _, ^ och kommandon. */
+  if(p.i<tk.length&&tk[p.i].t==='{'){
+    p.i++;const parts=[];
+    while(p.i<tk.length&&tk[p.i].t!=='}')parts.push(texNode(tk,p));
+    p.i++;
+    const body=parts.filter(Boolean).join('');
+    return parts.filter(Boolean).length>1?`<mrow>${body}</mrow>`:body||'<mrow></mrow>';
+  }
+  return texNode(tk,p)||'<mrow></mrow>';
+}
+
+function texRaw(tk,p){
+  /* Innehållet i \text{...} och \textcolor{...} läses som ren text. */
+  let out='';
+  if(p.i<tk.length&&tk[p.i].t==='{'){
+    p.i++;let depth=1;
+    while(p.i<tk.length){
+      const k=tk[p.i];
+      if(k.t==='{'){depth++;}
+      else if(k.t==='}'){depth--;if(!depth){p.i++;break;}}
+      out+=(k.t==='space'||k.t==='ws')?' ':(k.v||k.t);
+      p.i++;
+    }
+  }
+  return out;
+}
+
+function texNode(tk,p){
+  const k=tk[p.i];
+  if(!k)return '';
+  let pi=p.i-1;while(pi>=0&&tk[pi].t==='ws')pi--;
+  const prev=pi>=0?tk[pi]:null;
+  p.unary=!prev||prev.t==='op'&&prev.v!==')'||prev.t==='_'||prev.t==='^'||prev.t==='{';
+  if(k.t==='ws'){p.i++;return '';}
+  if(k.t==='space'){p.i++;return `<mspace width="${k.v||'0.2em'}"/>`;}
+  if(k.t==='num'){p.i++;return texScripts(tk,p,`<mn>${k.v}</mn>`);}
+  if(k.t==='id'){p.i++;return texScripts(tk,p,`<mi>${k.v}</mi>`);}
+  if(k.t==='op'){
+    p.i++;
+    /* Parenteser och komman ska sitta tätt intill innehållet, och ett minus
+       som inleder ett uttryck är ett tecken och inte en subtraktion. */
+    const v=k.v;
+    if(v==='('||v===')')return texScripts(tk,p,`<mo stretchy="false" lspace="0" rspace="0">${v}</mo>`);
+    if(v===',')return texScripts(tk,p,`<mo lspace="0" rspace="0.17em">,</mo>`);
+    if(v==='\u2212'&&p.unary)return texScripts(tk,p,`<mo form="prefix" lspace="0" rspace="0">\u2212</mo>`);
+    return texScripts(tk,p,`<mo>${v}</mo>`);
+  }
+  if(k.t==='{'){const g=texGroup(tk,p);return texScripts(tk,p,g);}
+  if(k.t==='}'){p.i++;return '';}
+  if(k.t==='_'||k.t==='^'){p.i++;return texScripts(tk,p,'<mrow></mrow>');}
+  if(k.t==='cmd'){
+    p.i++;
+    const n=k.v;
+    if(n==='frac'||n==='tfrac'||n==='dfrac'){
+      const a=texGroup(tk,p),b=texGroup(tk,p);
+      return `<mfrac>${a}${b}</mfrac>`;
+    }
+    if(n==='hat'){
+      const a=texGroup(tk,p);
+      return texScripts(tk,p,`<mover accent="true">${a}<mo>&#x5E;</mo></mover>`);
+    }
+    if(n==='text'||n==='mathrm'||n==='operatorname'){
+      const raw=texRaw(tk,p);
+      return `<mtext>${raw.replace(/ /g,'\u00a0')}</mtext>`;
+    }
+    if(n==='textcolor'){
+      const c=texRaw(tk,p),a=texGroup(tk,p);
+      return `<mstyle mathcolor="${c}">${a}</mstyle>`;
+    }
+    if(n==='left'||n==='right')return '';
+    if(TEX_SYM[n]){
+      const sym=TEX_SYM[n];
+      return texScripts(tk,p,TEX_OPS[n]?`<mo>${sym}</mo>`:`<mi>${sym}</mi>`);
+    }
+    return texScripts(tk,p,`<mi>${n}</mi>`);
+  }
+  p.i++;return '';
+}
+
+function texScripts(tk,p,base){
+  let sub=null,sup=null;
+  while(p.i<tk.length&&(tk[p.i].t==='_'||tk[p.i].t==='^')){
+    const kind=tk[p.i].t;p.i++;
+    const g=texGroup(tk,p);
+    if(kind==='_')sub=g;else sup=g;
+  }
+  if(sub&&sup)return `<msubsup>${base}${sub}${sup}</msubsup>`;
+  if(sub)return `<msub>${base}${sub}</msub>`;
+  if(sup)return `<msup>${base}${sup}</msup>`;
+  return base;
+}
+
+function texToMathML(tex,display){
+  const tk=texTokens(String(tex).replace(/\s+/g,' '));
+  const p={i:0};const out=[];
+  while(p.i<tk.length){const n=texNode(tk,p);if(n)out.push(n);}
+  return `<math class="fml" display="${display?'block':'inline'}"><mrow>${out.join('')}</mrow></math>`;
+}
 function texInto(el,tex,plain,display){
-  if(window.katex){try{katex.render(tex,el,{throwOnError:false,displayMode:!!display});return;}catch(e){}}
-  el.textContent=plain!==undefined?plain:tex;el.classList.add('tex-fallback');
+  try{el.innerHTML=texToMathML(tex,display);}
+  catch(e){el.textContent=plain!==undefined?plain:tex;el.classList.add('tex-fallback');}
 }
 // Build a block of math rows into a container element.
 function texRows(container,rows){
@@ -643,16 +833,16 @@ function texRows(container,rows){
 }
 
 /* ============================ DATA ============================ */
-const GATE_INTRO='This is a <strong>logic gate</strong> – a simple rule with two inputs, <strong>x₁</strong> and <strong>x₂</strong>. Each one is either <strong>0</strong> (off) or <strong>1</strong> (on). The network has to learn to give the right answer for all four combinations.';
+const GATE_INTRO='This is a <strong>logic gate</strong> – a simple rule with two inputs, <strong>x₁</strong> and <strong>x₂</strong>. Each of them is either <strong>0</strong> (off) or <strong>1</strong> (on). The network has to learn to give the right answer for all four combinations.';
 const PROBLEMS={
   and:{icon:'∧',title:'The AND gate',longname:'logical AND',short:'Yes only when both inputs are 1',
-    explain:`${GATE_INTRO}<br><br>In an AND gate the answer is Yes only when <strong>both</strong> inputs are 1 at the same time. As soon as at least one of them is 0, the answer is No. You could say that AND demands everything be satisfied at once.<br><br>This is the easiest case to learn, because a single straight line is enough to separate the Yes cases from the No cases.`,
+    explain:`${GATE_INTRO}<br><br>In an AND gate the answer is Yes only when <strong>both</strong> inputs are 1 at the same time. As soon as at least one of them is 0 the answer is No. You could say AND demands that everything is satisfied at once.<br><br>This is the easiest case to learn, because a single straight line is enough to separate the Yes cases from the No cases.`,
     data:[{x:[0,0],y:0},{x:[0,1],y:0},{x:[1,0],y:0},{x:[1,1],y:1}]},
   or:{icon:'∨',title:'The OR gate',longname:'logical OR',short:'Yes when at least one input is 1',
-    explain:`${GATE_INTRO}<br><br>In an OR gate the answer is Yes as soon as <strong>at least one</strong> of the inputs is 1. It makes no difference whether it is the first, the second or both – only when <strong>both</strong> are 0 is the answer No.<br><br>This case can also be solved with a single straight line between the Yes cases and the No case.`,
+    explain:`${GATE_INTRO}<br><br>In an OR gate the answer is Yes as soon as <strong>at least one</strong> of the inputs is 1. It makes no difference whether it is the first, the second or both. Only when <strong>both</strong> are 0 is the answer No.<br><br>This case too can be solved with a single straight line between the Yes cases and the No case.`,
     data:[{x:[0,0],y:0},{x:[0,1],y:1},{x:[1,0],y:1},{x:[1,1],y:1}]},
   xor:{icon:'⊕',title:'The XOR gate',longname:'exclusive OR (XOR)',short:'Yes when exactly one input is 1',
-    explain:`${GATE_INTRO}<br><br>In a XOR gate (exclusive or) the answer is Yes when the inputs <strong>differ</strong>, that is, when exactly one of them is 1. If they are the same – both 0 or both 1 – the answer is No.<br><br><span style="color:#ffb98a">What makes XOR special is that the Yes cases and the No cases cannot be separated by a single straight line. A simple model is therefore not enough. The network needs its hidden layer to manage it, which is why XOR takes more epochs to learn than the other gates.</span>`,
+    explain:`${GATE_INTRO}<br><br>In an XOR gate (exclusive or) the answer is Yes when the inputs <strong>differ</strong> – that is, when exactly one of them is 1. If they are the same, both 0 or both 1, the answer is No.<br><br><span style="color:#ffb98a">What makes XOR special is that the Yes cases and the No cases cannot be separated by a single straight line. A simple model is therefore not enough. The network needs its hidden layer to manage it, which is why XOR takes more epochs to learn than the other gates.</span>`,
     data:[{x:[0,0],y:0},{x:[0,1],y:1},{x:[1,0],y:1},{x:[1,1],y:0}]}
 };
 
@@ -752,6 +942,7 @@ function recordEpoch(){
   drawLossChart();
 }
 function toggleAuto(){
+  if(stepPlaying)pausePlay();
   if(running){stopAuto();return;}
   running=true;trained=false;autoKicks=0;stepIdx=-1;renderControls();
   document.getElementById('flowBadge').classList.remove('show');
@@ -789,6 +980,7 @@ function allCorrect(){
   return true;
 }
 function resetTraining(){
+  if(stepPlaying)pausePlay();
   stopAuto();trained=false;initParams();epoch=0;lossHistory=[];exampleIdx=0;stepIdx=-1;C={};
   document.getElementById('epochLoss').textContent='–';document.getElementById('epochLabel').textContent='–';
   renderIdle();renderData();updateResults();drawLossChart();drawNet();
@@ -822,7 +1014,7 @@ function predictExample(i){
     ? '<span class="verdict-ok">✓ Yes, correct</span>'
     : '<span class="verdict-bad">✗ No, wrong</span>';
   const rounded=Math.round(C.yhat);
-  document.getElementById('narr').innerHTML=`<span class="mb-tag update">Done</span><h4>Testing a prediction</h4><div class="mb-desc">The network receives <strong>x₁ = ${ex.x[0]}</strong> and <strong>x₂ = ${ex.x[1]}</strong> and answers <span class="mono" style="color:var(--gold)">${C.yhat.toFixed(3)}</span>. Rounded, that is <strong>${rounded}</strong>, meaning "${rounded?'Yes':'No'}" – and that ${correct?'matches':'does not match'} the correct answer.</div>`;
+  document.getElementById('narr').innerHTML=`<span class="mb-tag update">Done</span><h4>Testing a prediction</h4><div class="mb-desc">The network is given <strong>x₁ = ${ex.x[0]}</strong> and <strong>x₂ = ${ex.x[1]}</strong> and answers <span class="mono" style="color:var(--gold)">${C.yhat.toFixed(3)}</span>. Rounded, that is <strong>${rounded}</strong>, meaning ${rounded?'Yes':'No'}, and that ${correct?'matches':'does not match'} the correct answer.</div>`;
   const rows=[
     {cls:'num',tex:`a_{1} = \\sigma(z_{1}) = ${col(CB,fp(C.ah[0]))}`,plain:`a1 = ${fp(C.ah[0])}`},
     {cls:'num',tex:`a_{2} = \\sigma(z_{2}) = ${col(CB,fp(C.ah[1]))}`,plain:`a2 = ${fp(C.ah[1])}`},
@@ -864,7 +1056,7 @@ function renderSetupPreview(){
   p.data.forEach(ex=>{tt+=`<tr><td>${ex.x[0]}</td><td>${ex.x[1]}</td><td class="${ex.y?'ja':'nej'}">${ex.y?'Yes':'No'}</td></tr>`;});
   tt+='</tbody></table>';
   const line=hard
-    ? `<strong>${p.title}</strong> gives Yes when <strong>exactly one</strong> input is 1. <span class="sp-hard">The Yes and No cases cannot be separated by a single straight line – that is why the network needs its hidden layer, and why XOR takes more epochs to learn.</span>`
+    ? `<strong>${p.title}</strong> gives Yes when <strong>exactly one</strong> input is 1. <span class="sp-hard">The Yes and No cases cannot be separated by a single straight line. That is why the network needs its hidden layer, and why XOR takes more epochs to learn.</span>`
     : prob==='and'
       ? `<strong>${p.title}</strong> gives Yes only when <strong>both</strong> inputs are 1. A simple case that a single straight line can separate.`
       : `<strong>${p.title}</strong> gives Yes when <strong>at least one</strong> input is 1. A simple case that a single straight line can separate.`;
@@ -893,7 +1085,7 @@ function renderTaskSummary(){
   document.getElementById('taskSummary').innerHTML=
     `<div class="ts-top"><div class="ts-icon">${p.icon}</div>
      <div class="ts-body"><div class="ts-eyebrow">Training on</div><div class="ts-title">${p.title}</div></div></div>
-     <button class="ts-change" onclick="backToSetup()" title="Choose a different task">↺ Change</button>`;
+     <button class="ts-change" onclick="backToSetup()" title="Pick a different task">↺ Change</button>`;
 }
 
 /* ============================ LEFT: DATA ============================ */
@@ -911,7 +1103,8 @@ function openGateInfo(key){
 }
 function renderData(){
   const d=PROBLEMS[prob].data;
-  let h='<caption>The truth table shows the correct answer for every combination of inputs.</caption><thead><tr><th>x₁</th><th>x₂</th><th>Correct answer (y)</th></tr></thead><tbody>';
+  document.getElementById('dataCap').textContent='The truth table shows the correct answer for every combination of inputs.';
+  let h='<thead><tr><th>x₁</th><th>x₂</th><th>Correct answer (y)</th></tr></thead><tbody>';
   d.forEach((ex,i)=>{
     h+=`<tr class="${(i===exampleIdx&&!running)?'cur':''}"><td>${ex.x[0]}</td><td>${ex.x[1]}</td><td class="ty">${ex.y} <span class="${ex.y?'yja':'ynej'}">(${ex.y?'Yes':'No'})</span></td></tr>`;
   });
@@ -919,8 +1112,8 @@ function renderData(){
   document.getElementById('dataTable').innerHTML=h;
   document.getElementById('dataHint').innerHTML=
     trained?'The network is fully trained. Click a row here, or a button below the network, to test a prediction.'
-    :running?'The network is training automatically on all rows right now.'
-    :`The network is currently training on row <strong style="color:var(--accent2)">${exampleIdx+1}</strong>. Once it has been through every row once, that is called an <strong>epoch</strong>.`;
+    :running?'The network is training automatically on every row right now.'
+    :`Right now the network is training on row <strong style="color:var(--accent2)">${exampleIdx+1}</strong>. Once it has been through every row one time, that is called an <strong>epoch</strong>.`;
 }
 function onLr(){lr=parseInt(document.getElementById('lrSlider').value)/100;document.getElementById('lrVal').textContent=lr.toFixed(2);}
 
@@ -931,16 +1124,52 @@ function stepCounterText(){
   const arr=PHASE_STEPS[st.phase];
   return `${arr.indexOf(stepIdx)+1} / ${arr.length}`;
 }
+/* ── Kontrollpanelens ikoner ─────────────────────────────────────────
+   Enfärgade SVG i stället för teckensnittssymboler, som renderas olika på
+   olika system och ibland blir färgade emoji. */
+const IC_PREV='<svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
+const IC_NEXT='<svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>';
+const IC_PLAY='<svg class="ci" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>';
+const IC_PAUSE='<svg class="ci" viewBox="0 0 24 24" fill="currentColor"><rect x="6.5" y="5" width="4" height="14" rx="1.2"/><rect x="13.5" y="5" width="4" height="14" rx="1.2"/></svg>';
+const IC_FF='<svg class="ci" viewBox="0 0 24 24" fill="currentColor"><path d="M4 5.5v13l9-6.5z"/><path d="M13 5.5v13l9-6.5z"/></svg>';
+const IC_RESET='<svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3 4.5V10h5.5"/></svg>';
+const IC_CHECK='<svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></svg>';
+
+/* Uppspelning: samma steg som knappen Nästa, men automatiskt och i en takt
+   som går att läsa i. Skiljer sig från Träna klart, som hoppar över
+   genomgången helt. */
+let stepTimer=null,stepPlaying=false;
+const STEP_INTERVAL=1700;
+function togglePlay(){stepPlaying?pausePlay():startPlay();}
+function startPlay(){
+  if(running||trained)return;
+  stepPlaying=true;
+  nextStep();
+  stepTimer=setInterval(()=>{
+    if(trained||running){pausePlay();return;}
+    nextStep();
+  },STEP_INTERVAL);
+  renderControls();
+}
+function pausePlay(){
+  stepPlaying=false;
+  if(stepTimer){clearInterval(stepTimer);stepTimer=null;}
+  renderControls();
+}
 function renderCanvasControls(){
   const el=document.getElementById('canvasControls');
   if(!el)return;
   if(trained){el.innerHTML='';return;}
-  const atEnd=stepIdx>=STEPS.length-1;
-  const stepLabel=stepIdx<0?'▶ Start the forward pass':atEnd?'✓ Finish and move on':'▶ Next calculation';
-  const autoLabel=running?'⏸ Pause training':'⏩ Finish training automatically';
+  const idle=stepIdx<0,atEnd=stepIdx>=STEPS.length-1;
+  const nextLabel=idle?IC_PLAY+'<span class="lbl">Start the forward pass</span>':atEnd?IC_CHECK+'<span class="lbl">Finish the round</span>':'<span class="lbl">Next step</span>'+IC_NEXT;
   el.innerHTML=`
-    <button class="canvas-btn pri" onclick="nextStep()" ${running?'disabled':''}>${stepLabel}</button>
-    <button class="canvas-btn sm ${running?'pau':'grn'}" onclick="toggleAuto()">${autoLabel}</button>`;
+    <span class="dock-count">${running?'auto':stepCounterText()}</span>
+    <button class="cbtn icon" onclick="prevStep()" ${(running||stepPlaying||idle)?'disabled':''} title="One step back" aria-label="One step back">${IC_PREV}</button>
+    <button class="cbtn pri" onclick="nextStep()" ${(running||stepPlaying)?'disabled':''}>${nextLabel}</button>
+    <button class="cbtn ${stepPlaying?'on':''}" onclick="togglePlay()" ${running?'disabled':''} title="${stepPlaying?'Pause playback':'Play the steps automatically'}">${stepPlaying?IC_PAUSE+'<span class="lbl">Pause</span>':IC_PLAY+'<span class="lbl">Play</span>'}</button>
+    <span class="dock-sep"></span>
+    <button class="cbtn ${running?'run':''}" onclick="toggleAuto()" title="${running?'Pause training':'Run the rest of the training'}">${running?IC_PAUSE+'<span class="lbl">Pause</span>':IC_FF+'<span class="lbl">Finish training</span>'}</button>
+    <button class="cbtn icon" onclick="resetTraining()" title="Reset the weights and start over" aria-label="Reset the weights and start over">${IC_RESET}</button>`;
 }
 function renderControls(){
   const el=document.getElementById('controlPanel');
@@ -955,14 +1184,8 @@ function renderControls(){
       <button class="btn" style="width:100%;margin-top:9px" onclick="resetTraining()">↺ Retrain the network from scratch</button>`;
     return;
   }
-  el.className='ctrl-block';
-  const counter=running?'auto':stepCounterText();
-  el.innerHTML=`
-    <div class="ctrl-label">Step by step <span class="step-counter">${counter}</span></div>
-    <div class="bg">
-      <button class="btn dn" onclick="prevStep()" ${(running||stepIdx<0)?'disabled':''} style="flex:1" title="One step back">◀ Back</button>
-      <button class="btn dn" onclick="resetTraining()" title="Reset the weights and start over">↺</button>
-    </div>`;
+  el.className='ctrl-block legend-only';
+  el.innerHTML='';
 }
 
 /* ============================ MATH BOX / NARRATION ============================ */
@@ -979,9 +1202,9 @@ function renderIdle(){
   document.getElementById('rLossLabel').textContent='Loss for this example';
   const ex=PROBLEMS[prob].data[exampleIdx];
   document.getElementById('narr').innerHTML=`<span class="mb-tag idle">Ready</span>
-     <h4>Ready for the next training loop</h4>
-     <div class="mb-desc">The network is now going to learn from an example where the inputs are <strong style="color:var(--accent2)">x₁ = ${ex.x[0]}</strong> and <strong style="color:var(--accent2)">x₂ = ${ex.x[1]}</strong>, and the correct answer is <em>${ex.y}</em>.<br><br>One training loop consists of four phases: <strong>forward pass</strong>, <strong>loss</strong>, <strong>backpropagation</strong> and <strong>update</strong>. Each loop makes the network a little less wrong.</div>`;
-  document.getElementById('mathbox').innerHTML=`<div class="mb-kicker idle">Calculation</div><div class="mb-empty">Press <strong style="color:var(--text)">Start the forward pass</strong> below to see the first calculation here.</div>`;
+     <h4>Ready for the next training round</h4>
+     <div class="mb-desc">The network is now going to learn from an example where the inputs are <strong style="color:var(--accent2)">x₁ = ${ex.x[0]}</strong> and <strong style="color:var(--accent2)">x₂ = ${ex.x[1]}</strong>, and the correct answer is <em>${ex.y}</em>.<br><br>A training round has four phases: <strong>forward pass</strong>, <strong>loss</strong>, <strong>backpropagation</strong> and <strong>update</strong>. Every round makes the network a little less wrong.</div>`;
+  document.getElementById('mathbox').innerHTML=`<div class="mb-kicker idle">Calculation</div><div class="mb-empty">Press <strong style="color:var(--text)">Start the forward pass</strong> at the bottom of the network view to see the first calculation here.</div>`;
   renderControls();
 }
 function setPhaseBar(activePhase, allDone){
@@ -1000,8 +1223,8 @@ function renderStep(){
   const st=STEPS[stepIdx];
   setPhaseBar(st.phase);renderControls();
   const badge=document.getElementById('flowBadge');
-  if(st.phase==='forward'){badge.className='flow-badge forward show';badge.innerHTML='The signal flows forward →';}
-  else if(st.phase==='backward'){badge.className='flow-badge backward show';badge.innerHTML='← The error signal flows backward';}
+  if(st.phase==='forward'){badge.className='flow-badge forward show';badge.innerHTML='The signal flows forwards →';}
+  else if(st.phase==='backward'){badge.className='flow-badge backward show';badge.innerHTML='← The error signal flows backwards';}
   else badge.classList.remove('show');
 
   const mb=document.getElementById('mathbox');
@@ -1010,21 +1233,21 @@ function renderStep(){
   if(st.kind==='fwd-h'){
     const j=st.j,x=C.x;
     tagCls='forward';tagTxt='Phase 1 · Forward pass';title=`Hidden neuron ${j+1} calculates`;
-    desc=`The neuron starts by working out a <strong>weighted sum</strong> ${S('z')}: it multiplies each input by its ${T('weight','vikt')} ${S('w')}, adds its ${T('bias','bias')} ${S('b')} and sums it all up. The sum is then passed through the ${T('sigmoid','sigmoid')}, which squeezes the value in between 0 and 1. The result ${S('a')} is called the neuron's ${T('activation','aktivering')}.`;
+    desc=`The neuron starts by working out a <strong>weighted sum</strong> ${S('z')}: it multiplies each input by its ${T('weight','vikt')} ${S('w')}, adds its ${T('bias','bias')} ${S('b')} and totals it all up. The sum is then passed through ${T('sigmoid','sigmoid')}, which squeezes the value in between 0 and 1. The result ${S('a')} is called the neuron's ${T('activation','aktivering')}.`;
     rows=[
-      {cls:'gen',tex:`z = w_{1}x_{1} + w_{2}x_{2} + b`,plain:'z = w1·x1 + w2·x2 + b'},
-      {cls:'num',tex:`z = (${f(w1[j][0])})(${x[0]}) + (${f(w1[j][1])})(${x[1]}) + (${f(bh[j])}) = ${f(C.zh[j])}`,plain:`z = ${f(C.zh[j])}`},
-      {cls:'res',tex:`a_{${j+1}} = \\sigma(z) = ${col(CB,fp(C.ah[j]))}`,plain:`a${j+1} = σ(z) = ${fp(C.ah[j])}`}
+      {cls:'gen',tex:`z_{${j+1}} = w_{1}x_{1} + w_{2}x_{2} + b`,plain:'z = w1·x1 + w2·x2 + b'},
+      {cls:'num',tex:`z_{${j+1}} = (${f(w1[j][0])})(${x[0]}) + (${f(w1[j][1])})(${x[1]}) + (${f(bh[j])}) = ${f(C.zh[j])}`,plain:`z${j+1} = ${f(C.zh[j])}`},
+      {cls:'res',tex:`a_{${j+1}} = \\sigma(z_{${j+1}}) = ${col(CB,fp(C.ah[j]))}`,plain:`a${j+1} = σ(z${j+1}) = ${fp(C.ah[j])}`}
     ];
-    narr=`Hidden neuron <strong>${j+1}</strong> activates to <span class="mono">${fp(C.ah[j])}</span>. A value near 1 means the neuron is strongly on, and near 0 that it is off.`;
+    narr=`Hidden neuron <strong>${j+1}</strong> activates to <span class="mono">${fp(C.ah[j])}</span>. A value close to 1 means the neuron is strongly on, close to 0 that it is off.`;
     flowForward([[0,0,1,j],[0,1,1,j]]);
   }
   else if(st.kind==='fwd-out'){
     tagCls='forward';tagTxt='Phase 1 · Forward pass';title='The output neuron guesses';
-    desc=`The output neuron does exactly the same thing, but now takes the hidden neurons' ${T('activations','aktivering')} as its inputs. Its own activation is what we call ${S('ŷ')} (pronounced "y-hat"), and that is the network's final guess at the answer.`;
+    desc=`The output neuron does exactly the same thing, but now receives the hidden neurons' ${T('activations','aktivering')} as its inputs. We call its own activation ${S('ŷ')} (pronounced "y-hat"), and that is the network's final guess at the answer.`;
     rows=[
       {cls:'gen',tex:`\\hat{y} = \\sigma(w_{1}a_{1} + w_{2}a_{2} + b)`,plain:'ŷ = σ(w1·a1 + w2·a2 + b)'},
-      {cls:'num',tex:`z = (${f(w2[0])})(${fp(C.ah[0])}) + (${f(w2[1])})(${fp(C.ah[1])}) + (${f(bo)}) = ${f(C.zo)}`,plain:`z = ${f(C.zo)}`},
+      {cls:'num',tex:`z_{\\text{out}} = (${f(w2[0])})(${fp(C.ah[0])}) + (${f(w2[1])})(${fp(C.ah[1])}) + (${f(bo)}) = ${f(C.zo)}`,plain:`z = ${f(C.zo)}`},
       {cls:'res gold',tex:`\\hat{y} = \\sigma(${f(C.zo)}) = ${col(CGO,fp(C.yhat))}`,plain:`ŷ = ${fp(C.yhat)}`}
     ];
     narr=`The network guesses <span class="mono" style="color:var(--gold)">${fp(C.yhat)}</span>, while the correct answer is <strong style="color:var(--gold)">${C.y}</strong>.`;
@@ -1033,24 +1256,24 @@ function renderStep(){
   else if(st.kind==='loss'){
     const diff=C.yhat-C.y;
     tagCls='loss';tagTxt='Phase 2 · Loss';title='How wrong was the guess?';
-    desc=`Now we measure how wrong the guess was. We work out the network's ${T('loss','loss')}, which we denote ${S('L')} – a number that is large when the guess ${S('ŷ')} is far from the correct answer ${S('y')}, and zero when they are equal. The formula is called the ${T('half squared error','loss')}: we take the difference, square it and divide by two.`;
+    desc=`Now we measure how wrong the guess was. We work out the network's ${T('loss','loss')}, which we write as ${S('L')}. It is a number that is large when the guess ${S('ŷ')} is far from the correct answer ${S('y')}, and zero when they are equal. The formula is called ${T('half the squared error','loss')}: we take the difference, square it and divide by two.`;
     rows=[
       {cls:'gen',tex:`L = \\tfrac{1}{2}(\\hat{y}-y)^2`,plain:'L = ½(ŷ − y)²'},
       {cls:'num',tex:`L = \\tfrac{1}{2}(${fp(C.yhat)}-${C.y})^2 = \\tfrac{1}{2}(${f(diff)})^2`,plain:`L = ½(${f(diff)})²`},
       {cls:'res amber',tex:`L = ${col(CA,fp(C.loss,4))}`,plain:`L = ${fp(C.loss,4)}`}
     ];
-    narr=`Right now the guess is off by <span class="mono" style="color:var(--amber)">${f(diff)}</span>. The goal of the whole training process is to make this loss as small as possible.`;
+    narr=`Right now the guess is off by <span class="mono" style="color:var(--amber)">${f(diff)}</span>. The goal of the whole training is to make this loss as small as possible.`;
     badge.classList.remove('show');
   }
   else if(st.kind==='back-out'){
     tagCls='backward';tagTxt='Phase 3 · Backpropagation';title='Error signal at the output';
-    desc=`Now we turn around and go backwards through the network. For the output neuron we work out an ${T('error signal','delta')} ${S('δ')} (delta). It describes how much the loss would change if the neuron's sum changed, and combines the error with the slope of the ${T('sigmoid','sigmoid')} curve.`;
+    desc=`Now we turn around and go backwards through the network. First we work out how much of the error the output neuron carries. That number is called the ${T('error signal','delta')} ${S('δ')} (delta) and is built from two things. The first is how wrong the guess was, the difference between ${S('ŷ')} and ${S('y')}. The second is how sensitive the neuron is right now, that is how steeply the ${T('activation function','sigmoid')} slopes at the neuron's value. Sigmoid, used here, is steepest in the middle and almost flat out at the edges. A neuron already close to 0 or 1 can therefore barely affect the answer, and gets a small error signal even when the error is large.`;
     rows=[
-      {cls:'gen',tex:`\\delta_{\\text{ut}} = (\\hat{y}-y)\\cdot \\hat{y}(1-\\hat{y})`,plain:'δut = (ŷ−y)·ŷ(1−ŷ)'},
-      {cls:'num',tex:`\\delta_{\\text{ut}} = (${fp(C.yhat)}-${C.y})(${fp(C.yhat)})(1-${fp(C.yhat)})`,plain:`δut = ${f(C.dOut)}`},
-      {cls:'res amber',tex:`\\delta_{\\text{ut}} = ${col(CA,f(C.dOut))}`,plain:`δut = ${f(C.dOut)}`}
+      {cls:'gen',tex:`\\delta_{\\text{out}} = (\\hat{y}-y)\\cdot \\hat{y}(1-\\hat{y})`,plain:'δout = (ŷ−y)·ŷ(1−ŷ)'},
+      {cls:'num',tex:`\\delta_{\\text{out}} = (${fp(C.yhat)}-${C.y})(${fp(C.yhat)})(1-${fp(C.yhat)})`,plain:`δout = ${f(C.dOut)}`},
+      {cls:'res amber',tex:`\\delta_{\\text{out}} = ${col(CA,f(C.dOut))}`,plain:`δout = ${f(C.dOut)}`}
     ];
-    narr=`The output's error signal came out as <span class="mono" style="color:var(--amber)">${f(C.dOut)}</span>. Its sign decides whether the weights should increase or decrease.`;
+    narr=`The output's error signal came out as <span class="mono" style="color:var(--amber)">${f(C.dOut)}</span>. Its sign shows which way the answer went wrong: a positive number means the guess was too high, a negative one that it was too low.`;
     flowBackward([[1,0,2,0],[1,1,2,0]]);
     chain=`<div class="mb-chain"><span class="mc-t">Chain rule, step 1</span><div class="mc-row">how the <b>loss</b> changes when the guess changes<i>×</i>how the <b>guess</b> changes when the sum changes</div><div class="mc-eq">(ŷ − y) &nbsp;×&nbsp; ŷ(1−ŷ) &nbsp;=&nbsp; <span>δ<sub>out</sub></span></div></div>`;
   }
@@ -1058,7 +1281,7 @@ function renderStep(){
     tagCls='backward';tagTxt='Phase 3 · Backpropagation';title='Gradient for the output weights';
     desc=`For each output weight we now work out a ${T('gradient','gradient')} – a number showing how much that particular weight contributed to the error. We get it by multiplying the error signal ${S('δ')} by the ${T('activation','aktivering')} that came into the weight. This rests on the ${T('chain rule','chain')}.`;
     rows=[
-      {cls:'gen',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{\\text{ut}}\\cdot a_{\\text{in}}`,plain:'∂L/∂w = δut · a_in'},
+      {cls:'gen',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{\\text{out}}\\cdot a_{\\text{in}}`,plain:'∂L/∂w = δout · a_in'},
       {cls:'num',tex:`\\frac{\\partial L}{\\partial w_{1}} = (${f(C.dOut)})(${fp(C.ah[0])}) = ${f(C.gW2[0])}`,plain:`∂L/∂w1 = ${f(C.gW2[0])}`},
       {cls:'num',tex:`\\frac{\\partial L}{\\partial w_{2}} = (${f(C.dOut)})(${fp(C.ah[1])}) = ${f(C.gW2[1])}`,plain:`∂L/∂w2 = ${f(C.gW2[1])}`}
     ];
@@ -1068,19 +1291,19 @@ function renderStep(){
   else if(st.kind==='back-h'){
     const j=st.j;
     tagCls='backward';tagTxt='Phase 3 · Backpropagation';title=`Error signal to hidden neuron ${j+1}`;
-    desc=`The error signal is passed further back through the output weights, so that every neuron in the hidden layer also gets its own ${T('error signal','delta')} ${S('δ')}. In this way the responsibility for the error is shared out, step by step, backwards through the network.`;
+    desc=`The error signal is now passed further back through the output weights, so that every neuron in the hidden layer gets its own ${T('error signal','delta')} ${S('δ')}. It only becomes large when two things hold at once: the neuron has a strong connection to the output, and it is sensitive to change right now. That is how responsibility for the error is shared out backwards through the network, where whoever influenced it most also takes the largest share of the blame.`;
     rows=[
-      {cls:'gen',tex:`\\delta_{${j+1}} = \\delta_{\\text{ut}}\\cdot w_{${j+1}}\\cdot a_{${j+1}}(1-a_{${j+1}})`,plain:`δ${j+1} = δut·w${j+1}·a${j+1}(1−a${j+1})`},
+      {cls:'gen',tex:`\\delta_{${j+1}} = \\delta_{\\text{out}}\\cdot w_{${j+1}}\\cdot a_{${j+1}}(1-a_{${j+1}})`,plain:`δ${j+1} = δout·w${j+1}·a${j+1}(1−a${j+1})`},
       {cls:'num',tex:`\\delta_{${j+1}} = (${f(C.dOut)})(${f(w2[j])})(${fp(C.ah[j])})(1-${fp(C.ah[j])})`,plain:`δ${j+1} = ${f(C.dH[j])}`},
       {cls:'res amber',tex:`\\delta_{${j+1}} = ${col(CA,f(C.dH[j]))}`,plain:`δ${j+1} = ${f(C.dH[j])}`}
     ];
-    narr=`Hidden neuron <strong>${j+1}</strong> receives the error signal <span class="mono" style="color:var(--amber)">${f(C.dH[j])}</span>, flowed backwards via its weight to the output.`;
+    narr=`Hidden neuron <strong>${j+1}</strong> receives the error signal <span class="mono" style="color:var(--amber)">${f(C.dH[j])}</span>. It is the output's error signal, sent backwards through the weight between them and scaled by the neuron's own sensitivity.`;
     flowBackward([[0,0,1,j],[0,1,1,j]]);
     chain=`<div class="mb-chain"><span class="mc-t">Chain rule, step 3</span><div class="mc-row">the <b>error signal</b> from the output<i>×</i>the weight it <b>travels back</b> through<i>×</i>the neuron's own <b>sensitivity</b></div><div class="mc-eq">δ<sub>out</sub> &nbsp;×&nbsp; w &nbsp;×&nbsp; a(1−a) &nbsp;=&nbsp; <span>δ<sub>hidden</sub></span></div></div>`;
   }
   else if(st.kind==='back-gw1'){
     tagCls='backward';tagTxt='Phase 3 · Backpropagation';title='Gradient for the input weights';
-    desc=`Finally we work out the ${T('gradient','gradient')} for each input weight, by multiplying the hidden neuron's error signal ${S('δ')} by the input that the weight receives. Now every one of the network's ${T('weights','vikt')} and ${T('biases','bias')} has its own gradient pointing towards lower error.`;
+    desc=`Finally we work out the ${T('gradient','gradient')} for each input weight, by multiplying the hidden neuron's error signal ${S('δ')} by the input that the weight receives. Now every one of the network's ${T('weights','vikt')} and ${T('biases','bias')} has its own gradient pointing towards a lower error.`;
     rows=[
       {cls:'gen',tex:`\\frac{\\partial L}{\\partial w_{ji}} = \\delta_{j}\\cdot x_{i}`,plain:'∂L/∂w = δj · xi'},
       {cls:'num',tex:`\\text{neuron 1:}\\ ${f(C.gW1[0][0])},\\ ${f(C.gW1[0][1])}`,plain:`neuron 1: ${f(C.gW1[0][0])}, ${f(C.gW1[0][1])}`},
@@ -1093,11 +1316,11 @@ function renderStep(){
   else if(st.kind==='update'){
     if(!C.old)applyUpdate();
     tagCls='update';tagTxt='Phase 4 · Update weights';title='Gradient descent';
-    desc=`Now we improve the weights. Each weight takes a small step in the opposite direction to its ${T('gradient','gradient')}, that is, down the loss slope. How big the step is depends on the ${T('learning rate','lr')} ${S('η')} (eta), which right now is <em>${fp(lr,2)}</em>. This way of reducing the loss step by step is called ${T('gradient descent','gd')}.`;
+    desc=`Now we improve the weights. Each weight takes a small step in the opposite direction to its ${T('gradient','gradient')}, that is downhill on the loss slope. How big the step is depends on the ${T('learning rate','lr')} ${S('η')} (eta), which is currently <em>${fp(lr,2)}</em>. This way of reducing the loss step by step is called ${T('gradient descent','gd')}.`;
     rows=[{cls:'gen',tex:`w \\leftarrow w - \\eta\\,\\frac{\\partial L}{\\partial w}`,plain:'w ← w − η·∂L/∂w'}];
     const rows2=[['w_{11}',C.old.w1[0][0],w1[0][0]],['w_{12}',C.old.w1[0][1],w1[0][1]],['w_{21}',C.old.w1[1][0],w1[1][0]],['w_{22}',C.old.w1[1][1],w1[1][1]],['w_{o1}',C.old.w2[0],w2[0]],['w_{o2}',C.old.w2[1],w2[1]]];
     rows2.forEach(r=>{const up=r[2]>r[1];rows.push({cls:'num',tex:`${r[0]}:\\ ${f(r[1])} \\to ${col(up?CG:CR,f(r[2]))}\\ ${up?'\\uparrow':'\\downarrow'}`,plain:`${r[0]}: ${f(r[1])} → ${f(r[2])}`});});
-    narr=`The weights have been adjusted. The ones that turned <strong style="color:var(--green)">green</strong> increased and the ones that turned <strong style="color:var(--red)">red</strong> decreased. Next loop the guess will be a little better.`;
+    narr=`The weights have been adjusted. The ones that turned <strong style="color:var(--green)">green</strong> increased and the ones that turned <strong style="color:var(--red)">red</strong> decreased. Next round the guess will be a little better.`;
   }
 
   document.getElementById('narr').innerHTML=`<span class="mb-tag ${tagCls}">${tagTxt}</span><h4>${title}</h4><div class="mb-desc">${desc}</div>${narr?`<div class="mb-highlight">${narr}</div>`:''}${chain||''}`;
@@ -1126,8 +1349,11 @@ function flashUpdate(){updateFlashStart=performance.now();if(updateFlash)cancelA
 /* ============================ CANVAS ============================ */
 function setupCv(){const cv=document.getElementById('cv'),p=cv.parentElement,dpr=devicePixelRatio||1,w=p.clientWidth,h=p.clientHeight;cv.width=w*dpr;cv.height=h*dpr;const ctx=cv.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);return{ctx,w,h};}
 function nodePositions(w,h){
+  /* Nederkanten är reserverad åt den flytande knapplisten, så nätverket
+     ritas i utrymmet ovanför den i stället för att hamna under knapparna. */
+  const ch=Math.max(150,h-46);
   const inX=w*0.13,hidX=w*0.5,outX=w*0.87;
-  const iy=[h*0.36,h*0.64],hy=[h*0.36,h*0.64],oy=[h*0.5];
+  const iy=[ch*0.36,ch*0.64],hy=[ch*0.36,ch*0.64],oy=[ch*0.5];
   return[[{x:inX,y:iy[0]},{x:inX,y:iy[1]}],[{x:hidX,y:hy[0]},{x:hidX,y:hy[1]}],[{x:outX,y:oy[0]}]];
 }
 function drawBackdrop(ctx,w,h){
@@ -1194,9 +1420,25 @@ function drawNodeLayer(ctx,pts,layer,R,s,backActive){
     else if(layer===1){if(C.ah&&revealed)val=C.ah[idx];}
     else{if(C.yhat!==undefined&&revealed)val=C.yhat;rimRgb=[255,206,84];}
     const computed=(layer===0)||revealed;
+    /* Felsignalen δ läggs rakt på neuronen i stället för ovanför den. Den
+       täcker då neuronens värde under backpropagation, vilket är rimligt
+       eftersom det är felsignalen som är i fokus just då, och etiketten kan
+       inte längre krocka med lagerchipsen ovanför. */
+    let dv=null;
+    if(backActive){if(layer===2&&stepIdx>=4)dv=C.dOut;else if(layer===1&&C.dH){if(idx===0&&stepIdx>=6)dv=C.dH[0];if(idx===1&&stepIdx>=7)dv=C.dH[1];}}
     drawGlassNeuron(ctx,pt.x,pt.y,R,computed,rimRgb,val);
     ctx.textAlign='center';ctx.textBaseline='middle';
-    if(computed&&val!==null){ctx.font=`700 ${fontSize}px "JetBrains Mono"`;ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=4;ctx.fillStyle='rgba(226,234,255,0.95)';ctx.fillText(layer===0?String(val):fp(val,2),pt.x,pt.y);ctx.shadowBlur=0;}
+    if(dv!==null){
+      const dt=`δ=${f(dv,3)}`;
+      ctx.font=`700 ${Math.max(8,Math.round(10*s))}px "JetBrains Mono"`;
+      const dw=ctx.measureText(dt).width+13,dh=19;
+      ctx.save();ctx.shadowColor='rgba(255,159,69,0.55)';ctx.shadowBlur=11;
+      ctx.beginPath();ctx.roundRect(pt.x-dw/2,pt.y-dh/2,dw,dh,dh/2);
+      ctx.fillStyle='rgba(38,25,13,0.97)';ctx.fill();
+      ctx.strokeStyle='rgba(255,159,69,0.8)';ctx.lineWidth=1.2;ctx.stroke();ctx.restore();
+      ctx.fillStyle='rgba(255,196,128,1)';ctx.fillText(dt,pt.x,pt.y+0.5);
+    }
+    else if(computed&&val!==null){ctx.font=`700 ${fontSize}px "JetBrains Mono"`;ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=4;ctx.fillStyle='rgba(226,234,255,0.95)';ctx.fillText(layer===0?String(val):fp(val,2),pt.x,pt.y);ctx.shadowBlur=0;}
     else{ctx.font=`500 ${fontSize}px "DM Sans"`;ctx.fillStyle='rgba(255,255,255,0.3)';ctx.fillText('?',pt.x,pt.y);}
     if(layer>0){const bv=layer===1?bh[idx]:bo;const bt=`b=${fp(bv,2)}`;ctx.font=`600 ${Math.max(8,Math.round(9*s))}px "JetBrains Mono"`;const bw=ctx.measureText(bt).width+10;const bOff=R+5*s;ctx.beginPath();ctx.roundRect(pt.x-bw/2,pt.y+bOff,bw,14,7);ctx.fillStyle='rgba(14,17,30,0.8)';ctx.fill();ctx.strokeStyle='rgba(255,255,255,0.08)';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle='rgba(255,255,255,0.6)';ctx.fillText(bt,pt.x,pt.y+bOff+7);}
     if(layer===0){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(150,180,255,0.85)';ctx.fillText(idx===0?'x₁':'x₂',pt.x,pt.y+R+13*s);}
@@ -1204,9 +1446,6 @@ function drawNodeLayer(ctx,pts,layer,R,s,backActive){
        vid R+5s och är 14 px hög, så etiketten läggs nedanför dess underkant
        i stället för mitt i den. */
     if(layer===2){ctx.font=`600 ${Math.max(9,Math.round(11*s))}px "DM Sans"`;ctx.fillStyle='rgba(255,214,130,0.9)';ctx.fillText('ŷ',pt.x,pt.y+R+5*s+23);}
-    let dv=null;
-    if(backActive){if(layer===2&&stepIdx>=4)dv=C.dOut;else if(layer===1&&C.dH){if(idx===0&&stepIdx>=6)dv=C.dH[0];if(idx===1&&stepIdx>=7)dv=C.dH[1];}}
-    if(dv!==null){const dt=`δ=${f(dv,3)}`;ctx.font=`700 ${Math.max(8,Math.round(9.5*s))}px "JetBrains Mono"`;const dw=ctx.measureText(dt).width+12;const dy=pt.y-R-5*s;ctx.save();ctx.shadowColor='rgba(255,159,69,0.5)';ctx.shadowBlur=8;ctx.beginPath();ctx.roundRect(pt.x-dw/2,dy-8,dw,17,8);ctx.fillStyle='rgba(40,26,14,0.95)';ctx.fill();ctx.strokeStyle='rgba(255,159,69,0.7)';ctx.lineWidth=1.2;ctx.stroke();ctx.restore();ctx.fillStyle='rgba(255,190,120,1)';ctx.fillText(dt,pt.x,dy+0.5);}
   });
 }
 function drawGlassNeuron(ctx,x,y,R,computed,rimRgb,val){
@@ -1263,7 +1502,7 @@ function openEdgeCalc(li,fi,ti){
     wv=w1[ti][fi];
     name=`Weight from x${fi+1===1?'₁':'₂'} to hidden neuron ${ti+1}`;
     srcName=`x${fi+1===1?'₁':'₂'}`;srcVal=C.x?C.x[fi]:PROBLEMS[prob].data[exampleIdx].x[fi];
-    def=`This connection's weight decides how much <strong>${srcName}</strong> influences hidden neuron ${ti+1}. During the forward pass the input's value is multiplied by the weight.`;
+    def=`This connection's weight decides how much <strong>${srcName}</strong> affects hidden neuron ${ti+1}. During the forward pass the input's value is multiplied by the weight.`;
     rows.push({cls:'gen',tex:`w = ${col(wv>=0?CB:CR,fp(wv,3))}`,plain:`w = ${fp(wv,3)}`});
     rows.push({cls:'num',tex:`\\text{contribution} = w\\cdot ${srcName.replace('₁','_1').replace('₂','_2')} = (${f(wv)})(${srcVal}) = ${f(wv*srcVal)}`,plain:`contribution = ${f(wv*srcVal)}`});
     if(has&&C.gW1)rows.push({cls:'res amber',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{${ti+1}}\\cdot ${srcName.replace('₁','_1').replace('₂','_2')} = ${col(CA,f(C.gW1[ti][fi]))}`,plain:`∂L/∂w = ${f(C.gW1[ti][fi])}`});
@@ -1271,10 +1510,10 @@ function openEdgeCalc(li,fi,ti){
     wv=w2[fi];
     name=`Weight from hidden neuron ${fi+1} to the output`;
     srcName=`a${fi+1}`;srcVal=has?C.ah[fi]:null;
-    def=`This connection carries hidden neuron ${fi+1} forward to the output neuron. During backpropagation it is used to send the error signal backwards through the network.`;
+    def=`This connection carries hidden neuron ${fi+1} on to the output neuron. During backpropagation it is used to send the error signal backwards through the network.`;
     rows.push({cls:'gen',tex:`w = ${col(wv>=0?CB:CR,fp(wv,3))}`,plain:`w = ${fp(wv,3)}`});
     if(has)rows.push({cls:'num',tex:`\\text{contribution} = w\\cdot a_{${fi+1}} = (${f(wv)})(${fp(srcVal)}) = ${f(wv*srcVal)}`,plain:`contribution = ${f(wv*srcVal)}`});
-    if(has&&C.gW2)rows.push({cls:'res amber',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{\\text{ut}}\\cdot a_{${fi+1}} = ${col(CA,f(C.gW2[fi]))}`,plain:`∂L/∂w = ${f(C.gW2[fi])}`});
+    if(has&&C.gW2)rows.push({cls:'res amber',tex:`\\frac{\\partial L}{\\partial w} = \\delta_{\\text{out}}\\cdot a_{${fi+1}} = ${col(CA,f(C.gW2[fi]))}`,plain:`∂L/∂w = ${f(C.gW2[fi])}`});
   }
   if(!has)def+=`<br><br><em style="color:var(--dim2)">Start a forward pass to see values and gradient.</em>`;
   showCalcCard(EDGE_ICON,name,def,rows);
@@ -1288,13 +1527,13 @@ function openNeuronCalc(l,i){
     rows.push({cls:'res',tex:`x_{${i+1}} = ${col(CB,String(xv))}`,plain:`x${i+1} = ${xv}`});
   }else if(l===1){
     name=`Hidden neuron ${i+1}`;
-    def=`The neuron weighs both inputs together, adds its bias and runs the sum through the <strong>sigmoid</strong> activation function.`;
+    def=`The neuron weighs both inputs together, adds its bias and runs the sum through the activation function <strong>sigmoid</strong>.`;
     rows.push({cls:'gen',tex:`a = \\sigma(w_1x_1 + w_2x_2 + b)`,plain:'a = σ(w1·x1 + w2·x2 + b)'});
     rows.push({cls:'num',tex:`b = ${f(bh[i])}`,plain:`b = ${f(bh[i])}`});
-    if(has){rows.push({cls:'num',tex:`z = ${f(C.zh[i])}`,plain:`z = ${f(C.zh[i])}`});rows.push({cls:'res',tex:`a_{${i+1}} = ${col(CB,fp(C.ah[i]))}`,plain:`a${i+1} = ${fp(C.ah[i])}`});}
+    if(has){rows.push({cls:'num',tex:`z_{${i+1}} = ${f(C.zh[i])}`,plain:`z${i+1} = ${f(C.zh[i])}`});rows.push({cls:'res',tex:`a_{${i+1}} = ${col(CB,fp(C.ah[i]))}`,plain:`a${i+1} = ${fp(C.ah[i])}`});}
   }else{
     name='Output neuron (ŷ)';
-    def=`This is the network's answer. It weighs the hidden neurons together, adds its bias and runs the result through the sigmoid. The value <em>ŷ</em> can be read as a probability between 0 and 1.`;
+    def=`This is the network's answer. It weighs the hidden neurons together, adds its bias and runs the result through sigmoid. The value <em>ŷ</em> can be read as a probability between 0 and 1.`;
     rows.push({cls:'gen',tex:`\\hat{y} = \\sigma(w_1a_1 + w_2a_2 + b)`,plain:'ŷ = σ(w1·a1 + w2·a2 + b)'});
     rows.push({cls:'num',tex:`b = ${f(bo)}`,plain:`b = ${f(bo)}`});
     if(has)rows.push({cls:'res gold',tex:`\\hat{y} = ${col(CGO,fp(C.yhat))}`,plain:`ŷ = ${fp(C.yhat)}`});
@@ -1328,47 +1567,46 @@ function drawLossChart(){
   const lx=X(n-1),ly=Y(lossHistory[n-1]);ctx.beginPath();ctx.fillStyle='#33d17a';ctx.arc(lx,ly,3,0,Math.PI*2);ctx.fill();
 }
 
-
 /* ============================ CONCEPTS ============================ */
 const CONCEPTS={
   forward:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h6m4 0h6M8 8l-4 4 4 4m8-8 4 4-4 4"/></svg>',title:'Forward pass',
-    def:'Data flows into the network and moves forward, one layer at a time. Each neuron computes a weighted sum of its inputs and runs it through an activation function. What comes out of the last neuron, <em>ŷ</em>, is the network\'s guess. No learning happens here – it is pure calculation.',
+    def:'Data flows into the network and moves forwards, one layer at a time. Each neuron works out a weighted sum of its inputs and runs it through an activation function. What comes out of the last neuron, <em>ŷ</em>, is the network\'s guess. No learning happens here – it is pure calculation.',
     tex:'\\hat{y} = \\sigma\\!\\left(\\textstyle\\sum_i w_i x_i + b\\right)',plain:'ŷ = σ(Σ wᵢxᵢ + b)'},
   sigmoid:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17Q9 17 12 12T21 7"/></svg>',title:'Sigmoid',
-    def:'The activation function that takes any number at all and squeezes it into a value between 0 and 1. Large positive numbers end up near 1, large negative ones near 0, and the number 0 lands halfway at 0.5. The smooth S-shaped curve lets the network learn gradually, and because it can be differentiated it works beautifully with backpropagation.',
+    def:'The activation function that takes any number at all and squeezes it into a value between 0 and 1. Large positive numbers end up near 1, large negative ones near 0, and 0 lands halfway at 0.5. The smooth S-shaped curve lets the network learn gradually, and because it can be differentiated it works beautifully with backpropagation.',
     tex:'\\sigma(z) = \\dfrac{1}{1 + e^{-z}}',plain:'σ(z) = 1 / (1 + e^−z)'},
   aktivering:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="9" opacity=".4"/></svg>',title:'Activation (a)',
-    def:'The value a neuron passes on after computing its sum and running it through the activation function. A value near 1 means the neuron is strongly on, and near 0 that it is off. The output neuron\'s activation is the network\'s final answer, <em>ŷ</em>.',
+    def:'The value a neuron passes on after working out its sum and running it through the activation function. A value close to 1 means the neuron is strongly on, close to 0 that it is off. The output neuron\'s activation is the network\'s final answer, <em>ŷ</em>.',
     tex:'a = \\sigma(z)',plain:'a = σ(z)'},
   vikt:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="7" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8 8.5 16 15.5"/></svg>',title:'Weight (w)',
-    def:'A number that decides how strong a connection between two neurons is. A large positive weight lets the signal through amplified, a negative weight flips it, and a weight near zero lets almost nothing through at all. The weights are precisely what the network adjusts as it learns.',
+    def:'A number that decides how strong a connection between two neurons is. A large positive weight passes the signal on amplified, a negative weight flips it, and a weight close to zero lets almost nothing through. It is precisely the weights that the network adjusts as it learns.',
     tex:null},
   bias:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h16"/><path d="M9 8v8M15 8v8" opacity=".5"/><circle cx="12" cy="12" r="2.5"/></svg>',title:'Bias (b)',
-    def:'An extra number added to every neuron\'s sum, independently of the inputs. The bias shifts the threshold at which the neuron fires, rather like a default setting. Just like the weights, the bias is adjusted during training.',
+    def:'An extra number added to every neuron\'s sum, independent of the inputs. The bias shifts the threshold for when the neuron switches on, rather like a default setting. Just like the weights, the bias is adjusted during training.',
     tex:null},
   loss:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l6 6 4-4 8 8"/><path d="M15 15h6v-6"/></svg>',title:'Loss (L)',
-    def:'The loss, which we denote <em>L</em>, measures how wrong the network\'s guess was. It is large when the guess is far from the correct answer and zero when they are equal. We use the half squared error: the difference between guess and answer, squared and divided by two. Squaring makes large errors count for more, and the whole point of training is to make the loss as small as possible.',
+    def:'The loss, which we write as <em>L</em>, measures how wrong the network\'s guess was. It is large when the guess is far from the correct answer and zero when they are equal. We use half the squared error: the difference between guess and answer, squared and divided by two. Squaring makes large errors weigh more heavily, and the whole point of training is to make the loss as small as possible.',
     tex:'L = \\tfrac{1}{2}(\\hat{y}-y)^2',plain:'L = ½(ŷ − y)²'},
   backprop:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H4m6 6-6-6 6-6"/></svg>',title:'Backpropagation',
-    def:'The algorithm that sends the error <em>backwards</em> through the network. Using the chain rule it works out exactly how much every single weight contributed to the loss – the weight\'s <strong>gradient</strong>. Without backpropagation we would not know which way the weights need to change.',
+    def:'The algorithm that sends the error <em>backwards</em> through the network. Using the chain rule it works out exactly how much each individual weight contributed to the loss. That number is the weight\'s <strong>gradient</strong>. Without backpropagation we would not know which way the weights need to change.',
     tex:'\\delta_j = \\Big(\\textstyle\\sum_k \\delta_k w_{kj}\\Big)\\,\\sigma\'(z_j)',plain:'δj = (Σ δk·wkj)·σ\'(zj)'},
   gradient:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>',title:'Gradient',
-    def:'The gradient tells us how much the loss changes if the weight changes slightly. The sign gives the <strong>direction</strong> and the size gives <strong>how steeply</strong> it slopes. We always move against the gradient – downhill, towards lower loss.',
+    def:'The gradient says how much the loss changes if the weight is nudged slightly. The sign gives the <strong>direction</strong> and the size gives <strong>how steep</strong> the slope is. We always move the opposite way, downhill towards a lower loss.',
     tex:'\\frac{\\partial L}{\\partial w} = \\delta \\cdot a_{\\text{in}}',plain:'∂L/∂w = δ · a_in'},
   delta:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 3 20h18L12 3z"/></svg>',title:'Error signal, delta (δ)',
-    def:'A neuron\'s error signal <em>δ</em> tells us how sensitive the loss is to that neuron\'s sum <em>z</em>. It is computed once per neuron and then reused for every weight feeding into that neuron. That clever reuse is exactly what makes backpropagation fast.',
+    def:'The error signal <em>δ</em> is a neuron\'s share of the error. It answers the question: how much would the loss change if this particular neuron changed its value slightly? A positive δ means the neuron pulled the answer too high, a negative one that it pulled it too low, and a δ close to zero that the neuron barely affected the outcome.<br><br>The error signal is worked out once per neuron and reused for every weight feeding into it. That reuse is the very reason backpropagation is fast.',
     tex:'\\delta = \\frac{\\partial L}{\\partial z}',plain:'δ = ∂L/∂z'},
   chain:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 17a3 3 0 0 1 0-6h1m4 0a3 3 0 0 1 0 6h-1"/><path d="M8 12h8"/></svg>',title:'The chain rule',
-    def:'The rule from calculus that lets us work out how a change far forward in the network affects a weight far back. You multiply together the local derivatives along the way – like the links in a chain. Backpropagation <em>is</em> the chain rule applied layer by layer.',
+    def:'The rule from calculus that lets us work out how a change far forward in the network affects a weight far back. You multiply the local derivatives along the way, like the links of a chain. Backpropagation <em>is</em> the chain rule applied layer by layer.',
     tex:'\\frac{\\partial L}{\\partial w} = \\frac{\\partial L}{\\partial a}\\cdot\\frac{\\partial a}{\\partial z}\\cdot\\frac{\\partial z}{\\partial w}',plain:'∂L/∂w = ∂L/∂a · ∂a/∂z · ∂z/∂w'},
   lr:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/></svg>',title:'Learning rate (η)',
     def:'The learning rate decides how big a step the weights take each time they are updated. If <em>η</em> is too small the network learns very slowly. If it is too large the weights can overshoot the target and training turns unstable. Finding a rate that is just right is an art.',
     tex:'w \\leftarrow w - \\eta\\,\\frac{\\partial L}{\\partial w}',plain:'w ← w − η·∂L/∂w'},
   gd:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M4 8c5 0 4 8 9 8s5-6 7-6"/></svg>',title:'Gradient descent',
-    def:'The optimisation method behind it all. Picture the loss as a hilly landscape in which you want to reach the lowest valley. The gradient points uphill, so you take a step the opposite way. Repeat that thousands of times and you eventually roll down to the bottom, where the loss is smallest.',
+    def:'The optimisation method behind it all. Picture the loss as a hilly landscape where you want to reach the lowest valley. The gradient points uphill, so you take a step the other way. Repeat that thousands of times and you eventually roll down to the bottom, where the loss is at its smallest.',
     tex:null},
   epoch:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 21v-5h5"/></svg>',title:'Epoch',
-    def:'One full pass through <em>all</em> the training data. After each epoch the weights have been adjusted using every example once. The loss curve shows one point per epoch – and when it flattens out near zero, the network has learned.',
+    def:'One full pass through <em>all</em> the training data. After each epoch the weights have been adjusted using every example once. The loss curve shows one point per epoch, and when it flattens out near zero the network has learned.',
     tex:null}
 };
 function renderGlossary(){
@@ -1381,7 +1619,7 @@ function renderGlossary(){
 function conceptLiveRows(id){
   if(id!=='delta')return null;
   if(!C||C.dOut===undefined||stepIdx<4)return null;
-  const rows=[{cls:'num',tex:`\\delta_{\\text{ut}} = (${fp(C.yhat)}-${C.y})(${fp(C.yhat)})(1-${fp(C.yhat)}) = ${col(CA,f(C.dOut))}`,plain:`δut = ${f(C.dOut)}`}];
+  const rows=[{cls:'num',tex:`\\delta_{\\text{out}} = (${fp(C.yhat)}-${C.y})(${fp(C.yhat)})(1-${fp(C.yhat)}) = ${col(CA,f(C.dOut))}`,plain:`δout = ${f(C.dOut)}`}];
   if(C.dH&&stepIdx>=6)rows.push({cls:'num',tex:`\\delta_{1} = (${f(C.dOut)})(${f(w2[0])})(${fp(C.ah[0])})(1-${fp(C.ah[0])}) = ${col(CA,f(C.dH[0]))}`,plain:`δ1 = ${f(C.dH[0])}`});
   if(C.dH&&stepIdx>=7)rows.push({cls:'num',tex:`\\delta_{2} = (${f(C.dOut)})(${f(w2[1])})(${fp(C.ah[1])})(1-${fp(C.ah[1])}) = ${col(CA,f(C.dH[1]))}`,plain:`δ2 = ${f(C.dH[1])}`});
   return rows;
@@ -1396,7 +1634,7 @@ function openConcept(id){
   if(live){
     texRows(fEl,[{cls:'gen',tex:c.tex,plain:c.plain},...live]);
   }else{
-    if(id==='delta')def+=`<br><br><em style="color:var(--dim2)">Run through to the backpropagation phase of a training loop to see the calculation here with the current numbers.</em>`;
+    if(id==='delta')def+=`<br><br><em style="color:var(--dim2)">Step through to the backpropagation phase of a training round and the calculation will appear here with the current numbers.</em>`;
     if(c.tex)texRows(fEl,[{cls:'res',tex:c.tex,plain:c.plain}]);else fEl.innerHTML='';
   }
   document.getElementById('conceptDef').innerHTML=def;
