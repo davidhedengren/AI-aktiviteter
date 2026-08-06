@@ -273,6 +273,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .cs-formula{transform-origin:left center;font-family:'JetBrains Mono',monospace;font-size:.87em;color:var(--text);white-space:nowrap;overflow-x:auto;scrollbar-width:none;}
 /* Utan egen radhöjd blir raderna i en uppställd summa lägre än siffrorna och
    texten går omlott. */
+/* Radversionen visas som förval och byts mot pelarversionen först om den
+   inte får plats. */
+.sum-alt .sum-stack{display:none;}
+.sum-alt.stacked .sum-line{display:none;}
+.sum-alt.stacked .sum-stack{display:inline-block;}
 .cs-formula mtable{line-height:1.5;}
 .cs-formula mtd{padding:2px 0;text-align:left;}
 .cs-formula mtd:first-child{text-align:right;}
@@ -370,7 +375,7 @@ max-height:calc(100% - 20px);overflow-y:auto;}
   transform:translate(-50%,-50%) translate(var(--dx,0),var(--dy,0)) scale(.2);opacity:0;pointer-events:none;
   transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .26s var(--ease-out);}
 .concept-card.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
-.concept-card-inner{position:relative;text-align:center;transform-style:preserve-3d;
+.concept-card-inner{position:relative;text-align:center;transform-style:preserve-3d;scrollbar-width:none;
   background:linear-gradient(165deg,rgba(26,31,52,.97),rgba(14,17,30,.98));border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);
   box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;
   transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
@@ -895,7 +900,7 @@ function updateTrainStatus(frac){
 
 
 /* Rutan läggs exakt över vänsterpanelen, så att den varken täcker duken
-   eller begreppsraden längst ner. */
+   eller begreppen i högerpanelen. */
 function trainMsgSide(msg,on){
   if(!on){msg.classList.remove('side');msg.style.left=msg.style.top=msg.style.width=msg.style.height='';return;}
   msg.classList.add('side');
@@ -932,7 +937,7 @@ function startTraining(){if(trainTimer||isCalc())return;if(trained&&!confirm('Vi
        neuroner att se ut att hjälpa i provet, fastän de inte gör det. */
     if(epoch>=maxE){clearInterval(trainTimer);trainTimer=null;trained=true;isTraining=false;stopTrainAnim();trainMsgSide(msg,false);const _acc=testAccuracy();const accPct=_acc==null?'–':Math.round(_acc*100)+'%';msg.innerHTML=`<svg class="tm-icon ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><div class="tm-title">Träningen är klar</div><div class="tm-text">Nätverket gick igenom <strong>${epoch} epoker</strong> och byggde sina vikter utifrån ${(epoch*(curSc==="gym"?100:30)).toLocaleString('sv-SE')} exempel.</div><div class="tdash"><div class="tdash-cell"><div class="tl">Träffsäkerhet</div><div class="tv" style="color:var(--gold,#ffd866)">${accPct}</div></div><div class="tdash-cell"><div class="tl">Förlust</div><div class="tv" style="color:var(--green)">${loss.toFixed(4)}</div></div><div class="tdash-cell wide"><div class="tl">Vikter uppdaterade</div><div class="tv" style="color:var(--accent2)">${totalWeightUpdates.toLocaleString('sv-SE')}</div></div></div><div class="after-train"><button class="btn pri" onclick="goDirectToPredict()">${ICON_TARGET} Förutsäg ${ICON_ARROW_R}</button><div class="at-links"><button class="at-link" onclick="finishTraining()">Utforska nätverket</button><button class="at-link" onclick="openDataModal()">Visa träningsdata</button></div></div>`;}},curSc==='gym'?25:80);}
 function goDirectToPredict(){document.getElementById('trainMsg').classList.remove('show');goPhase('predict');}
-function finishTraining(){document.getElementById('trainMsg').classList.remove('show');goPhase('explore');resetPass();if(seenGuides.has('explore'))return;seenGuides.add('explore');const msg=document.getElementById('trainMsg');msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><div class="tm-title">Utforska nätverket</div><div class="tm-text">Tryck på <strong>Nästa</strong> för att beräkna en neuron i taget.<br><br>Under nätverket visas <strong>beräkningsstegen</strong>. Tryck på ett av dem för en utförligare förklaring i ord.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Jag förstår ${ICON_ARROW_R}</button></div>`;trainMsgSide(msg,false);msg.classList.add('show');}
+function finishTraining(){document.getElementById('trainMsg').classList.remove('show');goPhase('explore');resetPass();if(seenGuides.has('explore'))return;seenGuides.add('explore');const msg=document.getElementById('trainMsg');msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><div class="tm-title">Utforska nätverket</div><div class="tm-text">Tryck på <strong>Nästa</strong> för att beräkna en neuron i taget.<br><br>Till höger om nätverket visas <strong>beräkningsstegen</strong>. Tryck på ett av dem för en utförligare förklaring i ord.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Jag förstår ${ICON_ARROW_R}</button></div>`;trainMsgSide(msg,false);msg.classList.add('show');}
 function showPredictGuide(){if(seenGuides.has('predict'))return;seenGuides.add('predict');const msg=document.getElementById('trainMsg');msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg><div class="tm-title">Gör egna förutsägelser</div><div class="tm-text">Dra i reglagen för att ändra indatavärdena. Nätverkets svar uppdateras direkt.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Jag förstår ${ICON_ARROW_R}</button></div>`;trainMsgSide(msg,false);msg.classList.add('show');}
 function openDataModal(){if(!savedTrainData)return;const av=activeVars();const hasUnits=av.some(v=>v.unit);let h='<table class="dtable-lg"><thead><tr>';if(hasUnits)for(const v of av)h+=`<th>${v.name}${v.unit?'<br><span style="font-weight:400;opacity:0.6">('+v.unit+')</span>':''}</th>`;for(const v of av)h+=`<th>${v.name}<br><span style="font-weight:400;opacity:0.6">(0–1)</span></th>`;h+=`<th>Resultat</th></tr></thead><tbody>`;for(let r=0;r<savedTrainData.xs.length;r++){h+='<tr>';if(hasUnits)for(let i=0;i<savedTrainData.xs[r].length;i++){const n=savedTrainData.xs[r][i];h+=`<td style="color:var(--text)">${fmtReal(n,av[i])}</td>`;}for(let i=0;i<savedTrainData.xs[r].length;i++)h+=`<td>${savedTrainData.xs[r][i].toFixed(2)}</td>`;h+=`<td class="${savedTrainData.ys[r]===1?'pass':'fail'}">${savedTrainData.ys[r]===1?'Ja':'Nej'}</td></tr>`;}h+='</tbody></table>';document.getElementById('dataModalContent').innerHTML=h;document.getElementById('dataModal').classList.add('show');}
 function closeDataModal(){document.getElementById('dataModal').classList.remove('show');}
@@ -1003,19 +1008,20 @@ function mmlSum(contribs,biasV,sum,fmt,block){
   /* Med fler än två termer skrivs summan i pelare, en term per rad. På en rad
      blir den bredare än panelen och måste antingen klippas eller krympas till
      oläslighet. */
-  if(contribs.length>2){
-    let rows='';
-    contribs.forEach((c,i)=>{
-      rows+=`<mtr><mtd columnalign="right">${i?mOp('+'):''}</mtd><mtd columnalign="left">${term(c)}</mtd></mtr>`;
-    });
-    rows+=`<mtr><mtd columnalign="right">${mOp('+')}</mtd><mtd columnalign="left">${bias}</mtd></mtr>`;
-    rows+=`<mtr><mtd columnalign="right">${mOp('=')}</mtd><mtd columnalign="left">${mNum(fmt(sum),'fr')}</mtd></mtr>`;
-    return mml(`<mtable columnalign="right left" rowspacing="2pt">${rows}</mtable>`,block);
-  }
-  let out='';
-  contribs.forEach((c,i)=>{if(i)out+=mOp('+');out+=term(c);});
-  out+=mOp('+')+bias;
-  return mml(out+mOp('=')+mNum(fmt(sum),'fr'),block);
+  /* Summan skrivs på en rad när den får plats, annars uppställd i pelare.
+     Vilket som gäller avgörs efteråt genom att mäta, eftersom bredden beror
+     på hur många siffror talen har. */
+  let line='';
+  contribs.forEach((c,i)=>{if(i)line+=mOp('+');line+=term(c);});
+  line+=mOp('+')+bias+mOp('=')+mNum(fmt(sum),'fr');
+  let rows='';
+  contribs.forEach((c,i)=>{
+    rows+=`<mtr><mtd columnalign="right">${i?mOp('+'):''}</mtd><mtd columnalign="left">${term(c)}</mtd></mtr>`;
+  });
+  rows+=`<mtr><mtd columnalign="right">${mOp('+')}</mtd><mtd columnalign="left">${bias}</mtd></mtr>`;
+  rows+=`<mtr><mtd columnalign="right">${mOp('=')}</mtd><mtd columnalign="left">${mNum(fmt(sum),'fr')}</mtd></mtr>`;
+  return `<span class="sum-alt"><span class="sum-line">${mml(line,block)}</span>`
+    +`<span class="sum-stack">${mml(`<mtable columnalign="right left">${rows}</mtable>`,block)}</span></span>`;
 }
 function mmlActValue(fn,sum,a,fmt,block){
   const x=mNum(fmt(sum)),y=mNum(fmt(a),'fr');
@@ -1066,10 +1072,16 @@ function resetPass(){initV();hlNeuron=null;hlEdges=[];stepHist=[];
 /* Mät varje formelrad och krymp den om den är bredare än panelen. */
 function fitFormulas(){
   requestAnimationFrame(()=>{
+    document.querySelectorAll('.sum-alt').forEach(alt=>{
+      alt.classList.remove('stacked');
+      const box=alt.closest('.cs-formula');
+      const line=alt.querySelector('.sum-line');
+      if(box&&line&&line.getBoundingClientRect().width>box.clientWidth-2)alt.classList.add('stacked');
+    });
     document.querySelectorAll('.cs-formula').forEach(el=>{
       el.style.transform='';
       const w=el.scrollWidth,c=el.clientWidth;
-      if(c&&w>c+1)el.style.transform=`scale(${Math.max(0.55,c/w)})`;
+      if(c&&w>c+1)el.style.transform=`scale(${Math.max(0.6,c/w)})`;
     });
   });
 }
@@ -1518,7 +1530,8 @@ function closeConcept(){document.getElementById('conceptCard').classList.remove(
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
 (function initCardTilt(){
   const el=document.getElementById('conceptCardInner');if(!el)return;
-  const MAX_TILT=7;
+  /* Lutningen ska antydas, inte märkas. Sju grader vippade korten synligt. */
+  const MAX_TILT=2.5;
   el.addEventListener('mousemove',e=>{
     const r=el.getBoundingClientRect();
     const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
