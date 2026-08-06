@@ -206,7 +206,28 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .flow-badge.forward{background:rgba(77,128,255,.16);border:1px solid rgba(122,162,255,.4);color:var(--accent2);}
 .flow-badge.backward{background:rgba(255,159,69,.14);border:1px solid rgba(255,159,69,.4);color:var(--amber);}
 .flow-badge.done{background:rgba(51,209,122,.14);border:1px solid rgba(51,209,122,.45);color:var(--green);}
-.canvas-hint{position:absolute;bottom:10px;left:10px;font-size:.66em;color:var(--dim2);background:rgba(6,7,14,.6);padding:4px 11px;border-radius:999px;border:1px solid var(--border-soft);backdrop-filter:blur(6px);white-space:nowrap;}
+.canvas-hint{position:absolute;top:11px;left:11px;font-size:.66em;color:var(--dim2);background:rgba(6,7,14,.6);padding:4px 11px;border-radius:999px;border:1px solid var(--border-soft);backdrop-filter:blur(6px);white-space:nowrap;max-width:calc(100% - 22px);overflow:hidden;text-overflow:ellipsis;}
+/* Stegkontrollerna ligger som en flytande list nere i canvasen, så att man
+   kan stega utan att tappa animeringen ur sikte. */
+.canvas-dock{position:absolute;left:50%;bottom:11px;transform:translateX(-50%);z-index:6;
+  display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;
+  max-width:calc(100% - 20px);padding:7px 9px;border-radius:22px;
+  background:rgba(8,10,20,.74);backdrop-filter:blur(12px);border:1px solid var(--border);
+  box-shadow:0 14px 34px rgba(0,0,0,.5);}
+.canvas-dock:empty{display:none;}
+.canvas-dock .cbtn{height:32px;padding:0 13px;font-size:.72em;background:rgba(255,255,255,.05);}
+.canvas-dock .cbtn.icon{width:32px;padding:0;}
+.canvas-dock .cbtn.pri{padding:0 17px;background:var(--accent);}
+.canvas-dock .dock-count{font-family:'JetBrains Mono',monospace;font-size:.6em;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--dim2);padding:0 3px 0 7px;white-space:nowrap;}
+.canvas-dock .dock-sep{width:1px;height:19px;background:var(--border);flex-shrink:0;}
+.ctrl-block.legend-only{background:none;border:none;padding:0 3px;}
+.ctrl-block.legend-only .ctrl-legend{margin-top:0;}
+@media(max-width:640px){
+  .canvas-dock{gap:5px;padding:6px 7px;}
+  .canvas-dock .dock-sep,.canvas-dock .dock-count{display:none;}
+  .canvas-dock .cbtn{font-size:.68em;padding:0 10px;}
+}
 .canvas-controls{position:absolute;right:10px;bottom:10px;display:flex;flex-direction:column;align-items:flex-end;gap:6px;z-index:5;}
 .canvas-btn{font-family:'DM Sans',sans-serif;font-size:.7em;font-weight:700;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:rgba(10,12,22,.75);backdrop-filter:blur(8px);color:var(--text);cursor:pointer;transition:.2s var(--ease-out);white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.35);}
 .canvas-btn:hover{border-color:var(--dim2);background:rgba(20,24,42,.88);}
@@ -565,10 +586,11 @@ math[display="block"]{margin:.1em 0;}
       <canvas id="cv"></canvas>
       <div class="flow-badge" id="flowBadge"></div>
       <div class="canvas-hint">Klicka på en koppling eller en neuron för att se dess beräkning</div>
+      <div class="canvas-dock" id="canvasControls"></div>
     </div>
+    <div class="ctrl-block" id="controlPanel"></div>
     <div class="narr" id="narr"></div>
     <div class="mathbox" id="mathbox"></div>
-    <div class="ctrl-block" id="controlPanel"></div>
   </div>
 
   <!-- RIGHT -->
@@ -1133,7 +1155,21 @@ function pausePlay(){
   if(stepTimer){clearInterval(stepTimer);stepTimer=null;}
   renderControls();
 }
-function renderCanvasControls(){}
+function renderCanvasControls(){
+  const el=document.getElementById('canvasControls');
+  if(!el)return;
+  if(trained){el.innerHTML='';return;}
+  const idle=stepIdx<0,atEnd=stepIdx>=STEPS.length-1;
+  const nextLabel=idle?IC_PLAY+' Starta framåtpasset':atEnd?IC_CHECK+' Slutför varvet':'Nästa steg '+IC_NEXT;
+  el.innerHTML=`
+    <span class="dock-count">${running?'auto':stepCounterText()}</span>
+    <button class="cbtn icon" onclick="prevStep()" ${(running||stepPlaying||idle)?'disabled':''} title="Ett steg bakåt" aria-label="Ett steg bakåt">${IC_PREV}</button>
+    <button class="cbtn pri" onclick="nextStep()" ${(running||stepPlaying)?'disabled':''}>${nextLabel}</button>
+    <button class="cbtn ${stepPlaying?'on':''}" onclick="togglePlay()" ${running?'disabled':''} title="Spela upp stegen automatiskt">${stepPlaying?IC_PAUSE+' Paus':IC_PLAY+' Spela upp'}</button>
+    <span class="dock-sep"></span>
+    <button class="cbtn ${running?'run':''}" onclick="toggleAuto()" title="Kör färdigt träningen">${running?IC_PAUSE+' Pausa träningen':IC_FF+' Träna klart'}</button>
+    <button class="cbtn icon" onclick="resetTraining()" title="Nollställ vikterna och börja om" aria-label="Nollställ vikterna och börja om">${IC_RESET}</button>`;
+}
 function renderControls(){
   const el=document.getElementById('controlPanel');
   renderCanvasControls();
@@ -1147,20 +1183,8 @@ function renderControls(){
       <button class="btn" style="width:100%;margin-top:9px" onclick="resetTraining()">↺ Träna om nätverket från början</button>`;
     return;
   }
-  el.className='ctrl-block';
-  const idle=stepIdx<0,atEnd=stepIdx>=STEPS.length-1;
-  const nextLabel=idle?IC_PLAY+' Starta framåtpasset':atEnd?IC_CHECK+' Slutför varvet':'Nästa steg '+IC_NEXT;
-  el.innerHTML=`
-    <div class="ctrl-label">Steg för steg <span class="step-counter">${running?'auto':stepCounterText()}</span></div>
-    <div class="ctrl-row">
-      <button class="cbtn icon" onclick="prevStep()" ${(running||stepPlaying||idle)?'disabled':''} title="Ett steg bakåt" aria-label="Ett steg bakåt">${IC_PREV}</button>
-      <button class="cbtn pri" onclick="nextStep()" ${(running||stepPlaying)?'disabled':''}>${nextLabel}</button>
-      <button class="cbtn ${stepPlaying?'on':''}" onclick="togglePlay()" ${running?'disabled':''}>${stepPlaying?IC_PAUSE+' Paus':IC_PLAY+' Spela upp'}</button>
-      <span class="ctrl-gap"></span>
-      <button class="cbtn ${running?'run':''}" onclick="toggleAuto()">${running?IC_PAUSE+' Pausa träningen':IC_FF+' Träna klart'}</button>
-      <button class="cbtn icon" onclick="resetTraining()" title="Nollställ vikterna och börja om" aria-label="Nollställ vikterna och börja om">${IC_RESET}</button>
-    </div>
-    <div class="ctrl-legend"><strong>Spela upp</strong> går igenom stegen i lugn takt. <strong>Träna klart</strong> hoppar över genomgången och kör hundratals varv på några sekunder.</div>`;
+  el.className='ctrl-block legend-only';
+  el.innerHTML=`<div class="ctrl-legend">Knapparna ligger nere i rutan ovanför. <strong>Spela upp</strong> går igenom stegen i lugn takt, och <strong>Träna klart</strong> hoppar över genomgången och kör hundratals varv på några sekunder.</div>`;
 }
 
 /* ============================ MATH BOX / NARRATION ============================ */
@@ -1179,7 +1203,7 @@ function renderIdle(){
   document.getElementById('narr').innerHTML=`<span class="mb-tag idle">Redo</span>
      <h4>Redo för nästa träningsvarv</h4>
      <div class="mb-desc">Nätverket ska nu lära sig av ett exempel där ingångarna är <strong style="color:var(--accent2)">x₁ = ${ex.x[0]}</strong> och <strong style="color:var(--accent2)">x₂ = ${ex.x[1]}</strong>, och det rätta svaret är <em>${ex.y}</em>.<br><br>Ett träningsvarv består av fyra faser: <strong>framåtpass</strong>, <strong>förlust</strong>, <strong>backpropagation</strong> och <strong>uppdatera</strong>. Varje varv gör nätverket lite mindre fel.</div>`;
-  document.getElementById('mathbox').innerHTML=`<div class="mb-kicker idle">Beräkning</div><div class="mb-empty">Tryck på <strong style="color:var(--text)">Starta framåtpasset</strong> nedan för att se den första uträkningen här.</div>`;
+  document.getElementById('mathbox').innerHTML=`<div class="mb-kicker idle">Beräkning</div><div class="mb-empty">Tryck på <strong style="color:var(--text)">Starta framåtpasset</strong> nere i nätverksrutan för att se den första uträkningen här.</div>`;
   renderControls();
 }
 function setPhaseBar(activePhase, allDone){
