@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>k-means-klustring – ai-aktiviteter.se</title>
-<meta name="description" content="Interaktiv simulering av k-means-klustring: beslutsgränser, avstånd, WCSS och armbågsmetoden – för gymnasiets AI-kurser.">
+<meta name="description" content="Interaktiv simulering av k-means-klustring: beslutsgränser, avstånd, WCSS och armbågsmetoden, för gymnasiets AI-kurser.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0a0e1a">
@@ -17,13 +17,13 @@
 <meta property="og:locale" content="sv_SE">
 <meta property="og:url" content="https://www.ai-aktiviteter.se/k-means">
 <meta property="og:title" content="k-means-klustring – ai-aktiviteter.se">
-<meta property="og:description" content="Interaktiv simulering av k-means-klustring: beslutsgränser, avstånd, WCSS och armbågsmetoden – för gymnasiets AI-kurser.">
+<meta property="og:description" content="Interaktiv simulering av k-means-klustring: beslutsgränser, avstånd, WCSS och armbågsmetoden, för gymnasiets AI-kurser.">
 <meta property="og:image" content="https://www.ai-aktiviteter.se/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="k-means-klustring – ai-aktiviteter.se">
-<meta name="twitter:description" content="Interaktiv simulering av k-means-klustring: beslutsgränser, avstånd, WCSS och armbågsmetoden – för gymnasiets AI-kurser.">
+<meta name="twitter:description" content="Interaktiv simulering av k-means-klustring: beslutsgränser, avstånd, WCSS och armbågsmetoden, för gymnasiets AI-kurser.">
 <meta name="twitter:image" content="https://www.ai-aktiviteter.se/og-image.png">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
@@ -464,8 +464,8 @@ svg.plot.ready .pt{cursor:pointer}
 
 /* ── Kontrollpanel under diagrammet ──
    På bred skärm ligger stegpanelen bredvid diagrammet och båda syns
-   samtidigt. När layouten staplas hamnar knapparna långt från diagrammet,
-   och då visas de här i stället – direkt under det man tittar på. */
+   samtidigt. När layouten staplas hamnar knapparna långt från diagrammet.
+   Då visas de i stället här, direkt under diagrammet. */
 .cpanel{display:none;gap:8px;margin-top:12px;}
 .cpanel .cpbtn{flex:1;min-width:0;display:inline-flex;align-items:center;justify-content:center;
   gap:6px;padding:12px 10px;border-radius:11px;border:1px solid var(--line2);
@@ -504,16 +504,15 @@ svg.plot.ready .pt{cursor:pointer}
 .gbox p{font-size:13px;color:var(--sub);margin-top:5px}
 .gbox .chip{font-family:'JetBrains Mono',monospace;min-width:38px}
 
-/* En ensam knapp ska inte spänna över hela bredden – då ser den ut som en
-   uppmaning i stället för ett val bland flera. */
+/* En ensam knapp får inte full bredd, eftersom den då läses som en uppmaning
+   i stället för som ett val bland flera. */
 .cpanel.single{justify-content:center;}
 .cpanel.single .cpbtn{flex:0 1 auto;min-width:190px;padding:10px 22px;font-size:12.5px;}
 
 
 /* ── Stegrad ──
-   Ersätter den staplade dragspelsvyn, där alla fem ramar syntes samtidigt.
-   Nu visas ett steg i taget och raden håller reda på var man är. Klara steg
-   går att klicka tillbaka till. */
+   Ett steg visas i taget. Raden håller reda på var eleven befinner sig och
+   klara steg går att klicka tillbaka till. */
 .kwiz{display:flex;align-items:stretch;gap:4px;margin-bottom:12px}
 .kwiz-s{flex:1;min-width:0;position:relative;display:flex;flex-direction:column;gap:5px;
   padding:8px 6px 9px;border:0;border-radius:11px;background:none;cursor:default;
@@ -546,13 +545,13 @@ svg.plot.ready .pt{cursor:pointer}
   .kwiz-s .kd{margin:0 auto}
 }
 
-/* Bara det aktiva steget visas. Rubrikraden behövs inte längre – stegraden
-   ovanför säger var man är. */
+/* Endast det aktiva steget visas, eftersom stegraden ovanför anger
+   var eleven befinner sig. */
 .pstep{display:none}
 .pstep.on{display:block;animation:stepIn .34s var(--ez)}
 @keyframes stepIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-/* Rubriken står kvar, men nummerbrickan och bakåt-etiketten hör hemma
-   i stegraden och tas bort här. */
+/* Rubriken visas, medan nummerbrickan och bakåtetiketten hör hemma
+   i stegraden ovanför. */
 .pstep.on .phead{cursor:default;padding-bottom:2px}
 .pstep.on .phead .pn,.pstep.on .phead .pback{display:none}
 .pstep.on .pshead{font-size:17px;color:var(--tx)}
@@ -568,11 +567,11 @@ svg.plot.ready .pt{cursor:pointer}
     <h2 id="introH">k-means-klustring</h2>
     <p class="osub">Följ hur algoritmen stegvis grupperar olika typer av datamängder som inte har något facit.</p>
     <ul class="jrn">
-      <li><span class="jn" style="--c:var(--p1)">1</span><span><b>Välj datamängd</b> – studera punkterna och gissa antalet grupper.</span></li>
-      <li><span class="jn" style="--c:var(--p2)">2</span><span><b>Placera centroider</b> – bestäm k och sätt ut mittpunkterna.</span></li>
-      <li><span class="jn" style="--c:var(--p3)">3</span><span><b>Tilldela datapunkter</b> – varje punkt går till närmaste centroid.</span></li>
-      <li><span class="jn" style="--c:var(--p4)">4</span><span><b>Flytta centroider</b> – centroiderna flyttas till mitten av sina punkter, sedan upprepas steg 3 och 4.</span></li>
-      <li><span class="jn" style="--c:var(--p5)">5</span><span><b>Utvärdera valet av k</b> – jämför hur olika värden på k påverkar resultatet.</span></li>
+      <li><span class="jn" style="--c:var(--p1)">1</span><span><b>Välj datamängd.</b> Studera punkterna och gissa antalet grupper.</span></li>
+      <li><span class="jn" style="--c:var(--p2)">2</span><span><b>Placera centroider.</b> Bestäm k och sätt ut mittpunkterna.</span></li>
+      <li><span class="jn" style="--c:var(--p3)">3</span><span><b>Tilldela datapunkter.</b> Varje punkt går till närmaste centroid.</span></li>
+      <li><span class="jn" style="--c:var(--p4)">4</span><span><b>Flytta centroider.</b> Centroiderna flyttas till mitten av sina punkter, sedan upprepas steg 3 och 4.</span></li>
+      <li><span class="jn" style="--c:var(--p5)">5</span><span><b>Utvärdera valet av k.</b> Jämför hur olika värden på k påverkar resultatet.</span></li>
     </ul>
     <button class="ovlb" id="introGo">Sätt igång <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -591,7 +590,7 @@ svg.plot.ready .pt{cursor:pointer}
   <div class="lay">
 
     <aside class="pipe" id="pipe">
-<div class="kwiz" id="kwiz" role="tablist"><button class="kwiz-s" data-w="1" type="button"><span class="kb"></span><span class="kn"><span class="kd">1</span><span>Data</span></span></button><button class="kwiz-s" data-w="2" type="button"><span class="kb"></span><span class="kn"><span class="kd">2</span><span>Centroider</span></span></button><button class="kwiz-s" data-w="3" type="button"><span class="kb"></span><span class="kn"><span class="kd">3</span><span>Tilldela</span></span></button><button class="kwiz-s" data-w="4" type="button"><span class="kb"></span><span class="kn"><span class="kd">4</span><span>Flytta</span></span></button><button class="kwiz-s" data-w="5" type="button"><span class="kb"></span><span class="kn"><span class="kd">5</span><span>Utvärdera</span></span></button></div>
+<div class="kwiz" id="kwiz" role="group" aria-label="Stegnavigering"><button class="kwiz-s" data-w="1" type="button"><span class="kb"></span><span class="kn"><span class="kd">1</span><span>Data</span></span></button><button class="kwiz-s" data-w="2" type="button"><span class="kb"></span><span class="kn"><span class="kd">2</span><span>Centroider</span></span></button><button class="kwiz-s" data-w="3" type="button"><span class="kb"></span><span class="kn"><span class="kd">3</span><span>Tilldela</span></span></button><button class="kwiz-s" data-w="4" type="button"><span class="kb"></span><span class="kn"><span class="kd">4</span><span>Flytta</span></span></button><button class="kwiz-s" data-w="5" type="button"><span class="kb"></span><span class="kn"><span class="kd">5</span><span>Utvärdera</span></span></button></div>
       <section class="pstep" data-s="1">
         <button class="phead" id="h1b" aria-expanded="false" aria-controls="p1body">
           <span class="pn">1</span><span class="pshead">Välj datamängd</span><span class="pback">bakåt</span>
@@ -723,7 +722,7 @@ const DS={
 
  none:{n:'Ingen struktur',ax:['Egenskap A','Egenskap B'],
    ins:['Algoritmen kan inte svara "det finns inga"',
-        'Du bad om k kluster, och du fick k kluster. k-means saknar möjlighet att rapportera att strukturen inte finns — den delar upp den data den får. Färgerna på skärmen är alltså <b>inget bevis</b> för att grupperna finns i verkligheten. Titta på armbågskurvan: den faller jämnt utan brytpunkt, vilket är just det tecken som avslöjar att indelningen är godtycklig.'],
+        'Du bad om k kluster, och du fick k kluster. k-means saknar möjlighet att rapportera att strukturen inte finns, utan delar upp den data den får. Färgerna på skärmen är alltså <b>inget bevis</b> för att grupperna finns i verkligheten. Titta på armbågskurvan: den faller jämnt utan brytpunkt, vilket är just det tecken som avslöjar att indelningen är godtycklig.'],
    g:sd=>{const r=rng(53+sd*137);const o=[];for(let i=0;i<100;i++)o.push({x:12+r()*76,y:12+r()*76});return o;}}
 };
 
@@ -853,7 +852,7 @@ function build(){
     $('gTt').innerHTML=`<text x="${(X(0)+X(100))/2}" y="${PH-8}" text-anchor="middle">${ax[0]}</text>`
       +`<text transform="translate(13,${(Y(0)+Y(100))/2}) rotate(-90)" text-anchor="middle">${ax[1]}</text>`;
     $('plotTitle').textContent=`Spridningsdiagram: ${ax[0]} mot ${ax[1]}, ${pts.length} datapunkter`;
-  } else $('plotTitle').textContent='Tomt diagram – ingen datamängd vald';
+  } else $('plotTitle').textContent='Tomt diagram: ingen datamängd vald';
   built=true;
 }
 
@@ -1276,15 +1275,15 @@ const T={
    här, så att panelen kan hålla sig till namn och miniatyr. */
  dsThree:{i:'grid',t:'Tydliga kluster',p:'Runda moln som ligger klart åtskilda från varandra. Både <b>hur många</b> moln som finns och <b>var</b> de ligger lottas fram på nytt varje gång.<br><br>Det här är det läge k-means är byggd för: klustren är ungefär lika stora, ungefär lika täta och separerade av tom yta. Räkna själv hur många du ser innan du väljer k.'},
  dsElong:{i:'ruler',t:'Avlånga kluster',p:'Två långsmala band som lutar. Ögat ser två grupper direkt.<br><br>k-means gör inte det, eftersom den bara mäter <b>avstånd till en mittpunkt</b>. Ett punktpar i samma band kan ligga längre från varandra än två punkter i olika band. Slå på <button class="term" data-t="vor">beslutsgränserna</button> innan du kör, så ser du varför: gränsen är en rät linje och kan inte följa bandens lutning.'},
- dsSizes:{i:'scale',t:'Olika täthet',p:'Ett stort glest moln och två små täta.<br><br>Måttet som minimeras är summan av de <b>kvadrerade</b> avstånden. I det glesa molnet ligger många punkter långt från sin centroid, och de väger därför tungt. Summan minskar mest om det glesa molnet delas i två – trots att det egentligen är ett enda kluster.<br><br>Jämför antalet punkter per kluster när du kört.'},
- dsNone:{i:'spark',t:'Ingen struktur',p:'Jämnt utspridda punkter helt utan grupper.<br><br>Bestäm först vad du <b>tror</b> att algoritmen svarar. Den kan nämligen inte svara "det finns inga": ber du om k kluster får du k kluster. Färgerna på skärmen är därför inget bevis för att grupperna finns.<br><br>Titta på armbågskurvan efteråt – den faller jämnt utan brytpunkt, och det är tecknet som avslöjar saken.'},
- anvand:{i:'split',t:'Var används k-means?',p:'Metoden används överallt där man vill hitta grupper i data som saknar facit:<br><br>• <b>Kundsegmentering</b> – dela in kunder efter köpbeteende<br>• <b>Bildkomprimering</b> – gruppera bildpunkter efter färg, så att en bild klarar sig med färre färger<br>• <b>Textanalys</b> – sortera artiklar eller låtar efter innehåll<br>• <b>Avvikelsedetektion</b> – hitta mätvärden som inte liknar mängden<br><br>Gemensamt för alla fallen är att algoritmen levererar en indelning, men att en människa får avgöra om den betyder något.'},
+ dsSizes:{i:'scale',t:'Olika täthet',p:'Ett stort glest moln och två små täta.<br><br>Måttet som minimeras är summan av de <b>kvadrerade</b> avstånden. I det glesa molnet ligger många punkter långt från sin centroid, och de väger därför tungt. Summan minskar mest om det glesa molnet delas i två, trots att det egentligen är ett enda kluster.<br><br>Jämför antalet punkter per kluster när du kört.'},
+ dsNone:{i:'spark',t:'Ingen struktur',p:'Jämnt utspridda punkter helt utan grupper.<br><br>Bestäm först vad du <b>tror</b> att algoritmen svarar. Den kan nämligen inte svara "det finns inga": ber du om k kluster får du k kluster. Färgerna på skärmen är därför inget bevis för att grupperna finns.<br><br>Titta på armbågskurvan efteråt. Den faller jämnt utan brytpunkt, och det är tecknet som avslöjar saken.'},
+ anvand:{i:'split',t:'Var används k-means?',p:'Metoden används överallt där man vill hitta grupper i data som saknar facit:<br><br>• <b>Kundsegmentering:</b> dela in kunder efter köpbeteende<br>• <b>Bildkomprimering:</b> gruppera bildpunkter efter färg, så att en bild klarar sig med färre färger<br>• <b>Textanalys:</b> sortera artiklar eller låtar efter innehåll<br>• <b>Avvikelsedetektion:</b> hitta mätvärden som inte liknar mängden<br><br>Gemensamt för alla fallen är att algoritmen levererar en indelning, men att en människa får avgöra om den betyder något.'},
  centroid:{i:'grid',t:'Centroid',p:'Mittpunkten i ett kluster, beräknad som medelvärdet av de punkter som hör dit. Centroiden utgör algoritmens gissning om var klustret har sin mitt, och förflyttas varje varv tills gissningen inte längre förändras.<br><br>Du kan <b>dra</b> en centroid i diagrammet för att se hur beslutsgränserna följer med.'},
  oover:{i:'eye',t:'Oövervakad inlärning',p:'Inlärning från data <b>utan facit</b>. Vid övervakad inlärning finns ett känt rätt svar för varje exempel, och modellen tränas på att återge det. Här saknas det svaret helt.<br><br>Modellen kan därför inte mäta hur rätt den har. Den kan bara leta efter struktur i själva datan (här: vilka punkter som ligger nära varandra) och föreslå en indelning utifrån den. Att bedöma om indelningen är meningsfull är människans uppgift.'},
  vor:{i:'regions',t:'Beslutsgränser',p:'Tilldelningen avgörs av <b>var i diagrammet</b> en punkt ligger. Varje plats (även de tomma ytorna) hör till den centroid som ligger närmast. Det delar upp diagrammet i områden, och linjerna mellan dem kallas <b>beslutsgränser</b>: de visar var algoritmens svar skiftar från ett kluster till ett annat.<br><br>En gräns mellan två centroider är alltid en <b>rät linje</b>. Därför får områdena raka kanter, och därför kan k-means inte följa böjda eller snedställda former.'},
- avst:{i:'chart',t:'WCSS – summan av kvadrerade avstånd',p:'Mät avståndet från varje datapunkt till dess egen centroid, kvadrera avstånden och lägg ihop dem. Blir summan <b>liten</b> ligger punkterna tätt kring sina mittpunkter. Blir den <b>stor</b> ligger de utspridda.<br><br>Det är denna summa k-means arbetar för att göra så liten som möjligt. Den kan aldrig öka mellan två varv, och det är förklaringen till att algoritmen alltid stannar.<br><br>Måttet kallas <b>WCSS</b>, efter engelskans <i>within-cluster sum of squares</i>. Att avstånden kvadreras innebär att en punkt som ligger långt bort väger tyngre än flera som ligger nästan rätt.'},
+ avst:{i:'chart',t:'WCSS, summan av kvadrerade avstånd',p:'Mät avståndet från varje datapunkt till dess egen centroid, kvadrera avstånden och lägg ihop dem. Blir summan <b>liten</b> ligger punkterna tätt kring sina mittpunkter. Blir den <b>stor</b> ligger de utspridda.<br><br>Det är denna summa k-means arbetar för att göra så liten som möjligt. Den kan aldrig öka mellan två varv, och det är förklaringen till att algoritmen alltid stannar.<br><br>Måttet kallas <b>WCSS</b>, efter engelskans <i>within-cluster sum of squares</i>. Att avstånden kvadreras innebär att en punkt som ligger långt bort väger tyngre än flera som ligger nästan rätt.'},
  plus:{i:'spark',t:'k-means++',p:'Ett sätt att välja startläge för centroiderna. Den <b>första</b> centroiden lottas fram bland datapunkterna. Därefter är chansen att bli vald större för punkter som ligger <b>långt från de centroider som redan placerats</b>.<br><br>Centroiderna sprids på så vis ut över datan, vilket gör det mindre vanligt att algoritmen fastnar i ett <button class="term" data-t="lokal">lokalt minimum</button>.'},
- lokal:{i:'pit',t:'Lokalt minimum',p:'En lösning som inte går att förbättra med ett litet steg, men som ändå inte är den bästa möjliga. k-means hamnar där om centroiderna startar olyckligt, och kan inte ta sig därifrån på egen hand.<br><br>Det betyder att algoritmen är <b>icke-deterministisk</b>: samma data kan ge olika svar olika gånger. I praktiken kör man därför k-means många gånger och behåller den körning som gav lägst <button class="term" data-t="avst">WCSS</button>.'},
+ lokal:{i:'pit',t:'Lokalt minimum',p:'En lösning som inte går att förbättra med ett litet steg, men som ändå inte är den bästa möjliga. k-means hamnar där om centroiderna startar olyckligt, och kan inte ta sig därifrån på egen hand.<br><br>Eftersom startlägena lottas fram är resultatet inte förutsägbart. Samma data kan alltså ge olika svar olika gånger. I praktiken kör man därför k-means många gånger och behåller den körning som gav lägst <button class="term" data-t="avst">WCSS</button>.'},
  armb:{i:'elbow',t:'Armbågsmetoden',p:'Ett sätt att välja k. Man kör algoritmen med flera olika värden på k och ritar upp WCSS. Kurvan faller brant så länge extra centroider delar upp verkliga kluster, och planar ut när de enbart delar upp kluster som redan är sammanhållna. Brytpunkten kallas armbågen.<br><br>Metoden ger ett förslag, inte ett facit. Saknar kurvan en tydlig brytpunkt har datan sannolikt ingen klusterstruktur.'},
  norm:{i:'scale',t:'Normalisering',p:'Avståndsformeln tar ingen hänsyn till enheter. Mäts den ena egenskapen i hundratals och den andra i tiotal får den första automatiskt störst inflytande.<br><br><b>Normalisering</b> innebär att egenskaperna räknas om till samma skala innan avstånden beräknas, så att de väger lika tungt. I den här simuleringen ligger båda egenskaperna redan på skalan 0–100.'}
 };
@@ -1329,7 +1328,7 @@ function compareCard(){
       <div>${mini(b)}<div class="cl">WCSS <b>${fmt(b.w)}</b></div></div></div>
     <p style="margin-top:14px">${Math.abs(a.w-b.w)/Math.max(a.w,b.w)>0.02
       ? 'Körningarna hamnade i <b>olika lösningar</b>. Den sämre av dem sitter fast i ett <button class="term" data-t="lokal">lokalt minimum</button>: inget litet steg kan förbättra den, men den är ändå inte den bästa möjliga.'
-      : 'Här hamnade de båda körningarna på ungefär samma lösning. Öppna jämförelsen igen — utfallen skiljer sig inte varje gång, men tillräckligt ofta.'}</p>
+      : 'Här hamnade de båda körningarna på ungefär samma lösning. Öppna jämförelsen igen. Utfallen skiljer sig inte varje gång, men tillräckligt ofta.'}</p>
     <p style="margin-top:9px">Av det skälet körs k-means normalt flera gånger, varefter den körning som gav lägst WCSS behålls. Det är också bakgrunden till <b>k-means++</b>.</p>`;
   showCard();
 }
@@ -1460,7 +1459,7 @@ function pipeUI(){
     el.classList.toggle('done',n<nat||(fin()&&n<5));
     el.classList.toggle('avail',avail&&n!==act);
     el.disabled=!avail;
-    el.setAttribute('aria-selected',n===act?'true':'false');
+    if(n===act)el.setAttribute('aria-current','step');else el.removeAttribute('aria-current');
     el.onclick=avail?()=>focusStep(n):null;
   });
 }
@@ -1483,7 +1482,7 @@ function pipeBodies(){
     : '';
 
   $('p1body').innerHTML=`<div class="pdin">
-    <p>Varje punkt är ett objekt som beskrivs av två mätvärden. Datan har <b>inget facit</b> – ingenting säger hur många grupper som finns. Algoritmen har bara punkternas avstånd att gå på. Det kallas <button class="term" data-t="oover">oövervakad inlärning</button>.</p>
+    <p>Varje punkt är ett objekt som beskrivs av två mätvärden. Datan har <b>inget facit</b>, alltså säger ingenting hur många grupper som finns. Algoritmen har bara punkternas avstånd att gå på. Det kallas <button class="term" data-t="oover">oövervakad inlärning</button>.</p>
     <span class="slbl">Datamängd</span>
     <div class="dsgrid">${Object.entries(DS).map(([id,d])=>`<button class="dscard${id===ds?' on':''}" data-ds="${id}">${DS_MINI[id]||''}<span class="dsname">${d.n}</span><span class="dshelp" data-dsinfo="${id}" role="button" tabindex="0" aria-label="Om ${d.n}" title="Om ${d.n}">?</span></button>`).join('')}</div>
     ${guessUI}
@@ -1491,7 +1490,7 @@ function pipeBodies(){
 `:''}</div>`;
 
   $('p2body').innerHTML=`<div class="pdin">
-    <p>Först bestäms <b>k</b>, alltså hur många kluster datan ska delas in i. <b>Algoritmen avgör inte k själv – det måste bestämmas i förväg.</b> Sedan placeras k stycken <button class="term" data-t="centroid">centroider</button> ut, en mittpunkt per kluster.</p>
+    <p>Först bestäms <b>k</b>, alltså hur många kluster datan ska delas in i. <b>Algoritmen avgör inte k själv. Värdet måste bestämmas i förväg.</b> Sedan placeras k stycken <button class="term" data-t="centroid">centroider</button> ut, en mittpunkt per kluster.</p>
     <div class="kpick">
       <div class="kpick-hd"><span class="kpick-lb">Antal kluster</span><span class="kpick-now"><span>k =</span>${K}</span></div>
       <div class="chips krow">${[2,3,4,5,6,7,8].map(k=>`<button class="chip${k===K?' on':''}" data-k="${k}"${L?' disabled':''}>${k}</button>`).join('')}</div>
@@ -1504,7 +1503,7 @@ function pipeBodies(){
         <span class="dshelp" data-t="lokal" role="button" tabindex="0" aria-label="Om slumpmässigt startläge" title="Om slumpmässigt startläge">?</span></span></div>
     <div class="note">${seedMode==='pp'
       ? 'Centroiderna sprids ut över datan.'
-      : 'Centroiderna lottas fritt – två kan hamna i samma kluster.'}</div>
+      : 'Centroiderna lottas fritt, så två kan hamna i samma kluster.'}</div>
     <div class="pact"><button class="pbig" style="--c:${PC[1]}" id="placeBtn"${ds&&!L?'':' disabled'}>${cens.length?'Placera om':'Placera centroider'}</button></div>
     ${cens.length?`<p style="margin-top:11px">Varje centroid tar nu över det område som ligger närmare den än någon annan centroid. Slå på <button class="term" data-t="vor">beslutsgränserna</button> med knappen uppe till vänster i diagrammet för att se områdena. <b>Dra</b> sedan i en centroid, så följer gränserna med.</p>
       <div class="pact"><button class="psub" id="cmpBtn"${L?' disabled':''}>Jämför två slumpade startlägen</button></div>`:''}</div>`;
@@ -1537,7 +1536,7 @@ function pipeBodies(){
     ? `Här viker kurvan av <b>svagt, närmast vid k = ${eb.k}</b>. Någon skarp brytpunkt finns alltså inte, och valet av k är därför inte givet.`
     : `Kurvan har <b>ingen tydlig brytpunkt</b>, vilket innebär att datan sannolikt inte har någon tydlig klusterstruktur.`;
   $('p5body').innerHTML=`<div class="pdin">
-    ${fin()?`<p><b>Klart efter ${iter} varv.</b> Ingen punkt bytte kluster – centroiderna står stilla.</p>`:''}
+    ${fin()?`<p><b>Klart efter ${iter} varv.</b> Ingen punkt bytte kluster, och centroiderna står stilla.</p>`:''}
     <p>Det finns inget rätt värde på k. Kurvan nedan visar hur <button class="term" data-t="avst">WCSS</button> sjunker för varje kluster som läggs till. ${elbTxt}</p>
     <div id="elb"></div>
     <div class="note">Klicka på en punkt i kurvan för att se den lösningen i diagrammet.${fin()?' Den gröna romben är din egen körning.':''} <button class="term" data-t="armb">Om armbågsmetoden</button></div>
