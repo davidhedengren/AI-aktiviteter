@@ -4,12 +4,12 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Träna en rekryterings-AI på skev historisk data, upptäck hur diskriminering uppstår och experimentera med åtgärder – baserat på verkliga fall.">
+<meta name="description" content="Träna en rekryterings-AI på skev historisk data, upptäck hur diskriminering uppstår och experimentera med åtgärder, baserat på verkliga fall.">
 <title>Bias-labbet – ai-aktiviteter.se</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0a0e1a">
-<meta name="description" content="Träna en rekryterings‑AI på skev historisk data – upptäck hur diskriminering uppstår och hur svårt det är att bli av med.">
+<meta name="description" content="Träna en rekryterings‑AI på skev historisk data. Upptäck hur diskriminering uppstår och hur svårt den är att bli av med.">
 <link rel="canonical" href="https://www.ai-aktiviteter.se/bias-labbet">
 <link rel="alternate" hreflang="sv" href="https://www.ai-aktiviteter.se/bias-labbet">
 <link rel="alternate" hreflang="en" href="https://www.ai-aktiviteter.se/bias-labbet_ENG">
@@ -19,13 +19,13 @@
 <meta property="og:locale" content="sv_SE">
 <meta property="og:url" content="https://www.ai-aktiviteter.se/bias-labbet">
 <meta property="og:title" content="Bias‑labbet – ai-aktiviteter.se">
-<meta property="og:description" content="Träna en rekryterings‑AI på skev historisk data – upptäck hur diskriminering uppstår och hur svårt det är att bli av med.">
+<meta property="og:description" content="Träna en rekryterings‑AI på skev historisk data. Upptäck hur diskriminering uppstår och hur svårt den är att bli av med.">
 <meta property="og:image" content="https://www.ai-aktiviteter.se/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Bias‑labbet – ai-aktiviteter.se">
-<meta name="twitter:description" content="Träna en rekryterings‑AI på skev historisk data – upptäck hur diskriminering uppstår och hur svårt det är att bli av med.">
+<meta name="twitter:description" content="Träna en rekryterings‑AI på skev historisk data. Upptäck hur diskriminering uppstår och hur svårt den är att bli av med.">
 <meta name="twitter:image" content="https://www.ai-aktiviteter.se/og-image.png">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
@@ -68,8 +68,8 @@ body{font-family:'DM Sans',sans-serif;font-size:15px;background:var(--bg);color:
 .wz-step.active .wz-dot{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 0 5px rgba(77,128,255,.16);}
 .wz-step.active .wz-label{color:var(--text);}
 .wz-step.done .wz-dot{background:rgba(52,199,89,.16);border-color:var(--green);color:var(--green);}
-/* Klara steg markeras med en bock i stället för sitt nummer, så att
-   status framgår även för den som inte skiljer grönt från blått. */
+/* Completed steps show a check mark instead of their number, so that status
+   is readable without relying on the difference between green and blue. */
 .wz-step.done .wz-dot{font-size:0;}
 .wz-step.done .wz-dot::before{content:'✓';font-size:15px;font-weight:700;line-height:1;}
 .wz-step.done .wz-label{color:var(--subtle);}
@@ -196,7 +196,7 @@ body{font-family:'DM Sans',sans-serif;font-size:15px;background:var(--bg);color:
 .rc-head h2{font-family:'Syne',sans-serif;font-size:1.08em;font-weight:700;letter-spacing:.005em;}
 .rc-head .sub{font-size:0.76em;color:var(--dim);}
 
-/* fairness hero card - gold framed */
+/* fairness hero card, gold framed */
 .rc.hero{background:linear-gradient(165deg,rgba(26,31,52,.85),rgba(14,17,30,.9));border:1.5px solid rgba(255,216,102,.4);box-shadow:0 14px 34px rgba(0,0,0,.3),0 0 0 1px rgba(255,216,102,.07) inset,0 0 26px rgba(255,216,102,.13);}
 .rc.hero:hover{box-shadow:0 18px 40px rgba(0,0,0,.36),0 0 0 1px rgba(255,216,102,.1) inset,0 0 30px rgba(255,216,102,.18);}
 .rc.hero .rc-head h2{color:var(--gold);}
@@ -374,10 +374,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
   .act-hd{padding:16px 16px 0;}
 }
 
-/* ── Stegindikatorn ──
-   Linjen mellan stegen fylls i takt med hur långt man kommit, i stället
-   för att bara byta färg. Klara steg får en bock, så att det syns vilka
-   som är avklarade även utan färgseende. */
+/* ── Step indicator ──
+   The line between the steps fills in proportion to progress rather than only
+   changing colour, and completed steps carry a check mark, so that progress is
+   readable without colour vision. */
 .wizard{gap:0;}
 .wz-dot{width:32px;height:32px;font-size:.75em;position:relative;}
 .wz-dot::after{content:'';position:absolute;inset:-5px;border-radius:50%;
@@ -394,15 +394,15 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
   .wz-dot{width:28px;height:28px;}
 }
 
-/* ── Aktkort ──
-   Rubrikraden får en tunn avgränsning mot innehållet, och det aktiva
-   kortet en svag accentkant, så att man ser var man befinner sig. */
+/* ── Act cards ──
+   A thin rule separates the heading row from the content, and the active card
+   carries a faint accent edge, so the current position stays visible. */
 .act{border-color:rgba(122,162,255,.22);}
 .act-hd{padding:20px 24px 16px;border-bottom:1px solid var(--border-soft);margin-bottom:18px;}
 .act-badge{width:36px;height:36px;border-radius:11px;font-size:.86em;}
 @media(max-width:640px){ .act-hd{padding:16px 16px 13px;margin-bottom:14px;} }
 
-/* Ikoner i stället för emoji: samma utseende oavsett plattform. */
+/* Icons rather than emoji, for a consistent appearance across platforms. */
 .seg-btn svg,.data-note svg,.gstat-neutral svg{flex-shrink:0}
 .twin-avatar svg{display:block;margin:0 auto}
 .vlock{display:inline-flex;align-items:center;opacity:.5}
@@ -417,7 +417,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
     <svg class="hd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M7 21h10"/><path d="M12 6L4 8.5M12 6l8 2.5"/><circle cx="4" cy="9" r="2"/><circle cx="20" cy="9.5" r="2"/></svg>
     <h1>Bias-labbet</h1>
   </div>
-  <p>Träna en rekryterings-AI på skev historisk data – upptäck hur diskriminering uppstår och hur svårt det är att bli av med.</p>
+  <p>Träna en rekryterings-AI på skev historisk data. Upptäck hur diskriminering uppstår och hur svårt den är att bli av med.</p>
   <a class="lang-link" href="https://www.ai-aktiviteter.se/bias-labbet_ENG"><span class="flag" aria-hidden="true"><svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#00247d"/><path d="M0 0 60 36M60 0 0 36" stroke="#fff" stroke-width="7"/><path d="M0 0 60 36M60 0 0 36" stroke="#cf142b" stroke-width="4"/><path d="M30 0v36M0 18h60" stroke="#fff" stroke-width="12"/><path d="M30 0v36M0 18h60" stroke="#cf142b" stroke-width="7"/></svg></span> English</a>
 </div>
 
@@ -474,7 +474,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
         <div class="var-toggle on" id="vtKon" onclick="toggleVar('kon')"><span class="vdot"></span><span class="vname">Kön</span></div>
         <div class="var-toggle on" id="vtLucka" onclick="toggleVar('lucka')"><span class="vdot"></span><span class="vname">Uppehåll i CV (år)</span></div>
       </div>
-      <div class="data-note">Prova först med allt påslaget. Senare kan du gå tillbaka hit, stänga av <strong>Kön</strong> och träna om – och se om det räcker för att göra modellen rättvis.</div>
+      <div class="data-note">Prova först med allt påslaget. Senare kan du gå tillbaka hit, stänga av <strong>Kön</strong> och träna om, och se om det räcker för att göra modellen rättvis.</div>
       <button class="next-btn" onclick="goToAct(3)">Fortsätt till träning <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </div>
   </div>
@@ -509,7 +509,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
       <div class="act-badge">04</div>
       <div class="act-titles">
         <div class="act-title">Undersök konsekvenserna</div>
-        <div class="act-sub">Vad lärde sig modellen – och är den rättvis?</div>
+        <div class="act-sub">Vad lärde sig modellen, och är den rättvis?</div>
       </div>
     </div>
     <div class="act-body">
@@ -524,7 +524,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
           <div id="weightsArea"></div>
         </div>
         <div class="rc" id="cardTwins">
-          <div class="rc-head"><h2>Tvillingtestet</h2><span class="sub">två identiska kandidater – bedöms de lika?</span></div>
+          <div class="rc-head"><h2>Tvillingtestet</h2><span class="sub">två identiska kandidater, bedöms de lika?</span></div>
           <div id="twinArea"></div>
         </div>
       </div>
@@ -545,8 +545,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 
 <div class="data-modal" id="dataModal">
   <div class="data-modal-card">
-    <div class="data-modal-hd"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><rect x="5" y="3" width="14" height="18" rx="2.2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Träningsdatan – Teknova AB:s historik</h3><button class="data-modal-close" onclick="closeDataModal()">✕ Stäng</button></div>
-    <div class="data-modal-info">Rödmarkerade rader = personer som <strong>var lämpliga men inte anställdes</strong>. Eftersom datan är konstruerad för labbet vet vi den "verkliga lämpligheten" – <strong>i verkligheten finns inget sådant facit</strong>, och det är just det som gör problemet svårt att upptäcka.</div>
+    <div class="data-modal-hd"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><rect x="5" y="3" width="14" height="18" rx="2.2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg> Träningsdatan: Teknova AB:s historik</h3><button class="data-modal-close" onclick="closeDataModal()">✕ Stäng</button></div>
+    <div class="data-modal-info">Rödmarkerade rader visar personer som <strong>var lämpliga men inte anställdes</strong>. Eftersom datan är konstruerad för labbet vet vi den verkliga lämpligheten. <strong>I verkligheten finns inget sådant facit</strong>, och det är just därför problemet är svårt att upptäcka.</div>
     <div class="data-modal-scroll" id="dataModalContent"></div>
   </div>
 </div>
@@ -557,8 +557,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
     <h2>Bias-labbet</h2>
     <p class="sub">Här är företaget Teknova AB på väg att låta ett AI-system sortera sina jobbansökningar. Modellen ska tränas på företagets tidigare anställningsbeslut. Du genomför undersökningen av vad den lär sig.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Träna och granska</strong> – låt modellen lära av historiken, och undersök sedan hur den bedömer två identiska CV:n där bara könet skiljer.</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Försök åtgärda</strong> – dölj de sökandes kön för modellen och undersök om det räcker för att den ska bli rättvis.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Träna och granska.</strong> Låt modellen lära av historiken, och undersök sedan hur den bedömer två identiska CV:n där bara könet skiljer.</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Försök åtgärda.</strong> Dölj de sökandes kön för modellen och undersök om det räcker för att den ska bli rättvis.</div></div>
     </div>
     <p class="sub" style="margin-bottom:0;">All data i labbet är påhittad, men den här typen av skevhet förekommer i verkliga AI-system.</p>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Sätt igång <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -767,7 +767,7 @@ function goToAct(n){
   }
   renderReceipts();
   updateWizard();
-  // always resolve act 3 to a clean, correct view when (re)entering it —
+  /* Act 3 is reset to a correct starting state each time it is opened. */
   // either the idle "train" button, or a "done" state if a model already exists
   if(n===3){
     document.getElementById('trainStage').style.display='none';
@@ -914,7 +914,7 @@ function renderTrainIdle(){
       <div class="train-done-wrap">
         <button class="train-cta done" onclick="goToAct(4)">
           <span class="train-cta-icon">✓</span>
-          <span class="train-cta-text">Modellen är tränad — visa resultat</span>
+          <span class="train-cta-text">Modellen är tränad. Visa resultat</span>
         </button>
         <div class="retrain-link" onclick="startTraining()">↺ Träna om modellen</div>
       </div>`;
@@ -1019,13 +1019,13 @@ function renderDataStats(){
   const hK=pct(avg(K,p=>p.anstalld?1:0)), hM=pct(avg(M,p=>p.anstalld?1:0));
   const lead=document.getElementById('dataLead');
   if(dataMode==='hist'){
-    let txt=`Här är <strong>Teknovas tidigare anställningsbeslut</strong> – datan modellen ska tränas på. Kvinnor och män har likvärdiga meriter, men i historiken anställdes ${hK} av kvinnorna mot ${hM} av männen. Det är den skevheten modellen kommer att lära sig.`;
-    if(!useKon && !useLucka) txt+=`<br><br><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M3 3l18 18"/><path d="M10.6 10.7a2 2 0 0 0 2.8 2.8"/><path d="M9.4 5.4A9.7 9.7 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.3 3.2M6.3 6.8C4 8.3 3 10.6 3 12c0 2.5 4 7 9 7 1.2 0 2.3-.3 3.3-.7"/></svg> Modellen får <strong>varken se de sökandes kön eller uppehåll i CV</strong> under träningen – bara utbildning och erfarenhet.`;
+    let txt=`Här är <strong>Teknovas tidigare anställningsbeslut</strong>, alltså den data modellen ska tränas på. Kvinnor och män har likvärdiga meriter, men i historiken anställdes ${hK} av kvinnorna mot ${hM} av männen. Det är den skevheten modellen kommer att lära sig.`;
+    if(!useKon && !useLucka) txt+=`<br><br><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M3 3l18 18"/><path d="M10.6 10.7a2 2 0 0 0 2.8 2.8"/><path d="M9.4 5.4A9.7 9.7 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.3 3.2M6.3 6.8C4 8.3 3 10.6 3 12c0 2.5 4 7 9 7 1.2 0 2.3-.3 3.3-.7"/></svg> Modellen får <strong>varken se de sökandes kön eller uppehåll i CV</strong> under träningen, bara utbildning och erfarenhet.`;
     else if(!useKon) txt+=`<br><br><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M3 3l18 18"/><path d="M10.6 10.7a2 2 0 0 0 2.8 2.8"/><path d="M9.4 5.4A9.7 9.7 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.3 3.2M6.3 6.8C4 8.3 3 10.6 3 12c0 2.5 4 7 9 7 1.2 0 2.3-.3 3.3-.7"/></svg> Du har dolt <strong>könet</strong>: modellen får inte längre se om en sökande är kvinna eller man. Räcker det för att den ska bli rättvis?`;
     else if(!useLucka) txt+=`<br><br><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M3 3l18 18"/><path d="M10.6 10.7a2 2 0 0 0 2.8 2.8"/><path d="M9.4 5.4A9.7 9.7 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.3 3.2M6.3 6.8C4 8.3 3 10.6 3 12c0 2.5 4 7 9 7 1.2 0 2.3-.3 3.3-.7"/></svg> Du har dolt <strong>uppehållet i CV</strong>: modellen ser det inte längre under träningen.`;
     lead.innerHTML=txt;
   }else{
-    let txt=`<strong>⚖️ Rättvis träningsdata vald:</strong> modellen tränas nu på vem som <strong>verkligen var lämplig</strong> utifrån meriterna, i stället för på de historiska besluten. (I verkligheten finns sällan ett sådant facit – det är hela problemet.)`;
+    let txt=`<strong>⚖️ Rättvis träningsdata vald:</strong> modellen tränas nu på vem som <strong>verkligen var lämplig</strong> utifrån meriterna, i stället för på de historiska besluten. (I verkligheten finns sällan ett sådant facit. Det är hela problemet.)`;
     if(!useKon && !useLucka) txt+=`<br><br><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M3 3l18 18"/><path d="M10.6 10.7a2 2 0 0 0 2.8 2.8"/><path d="M9.4 5.4A9.7 9.7 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.3 3.2M6.3 6.8C4 8.3 3 10.6 3 12c0 2.5 4 7 9 7 1.2 0 2.3-.3 3.3-.7"/></svg> Dessutom får modellen varken se <strong>kön eller uppehåll i CV</strong>.`;
     else if(!useKon) txt+=`<br><br><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M3 3l18 18"/><path d="M10.6 10.7a2 2 0 0 0 2.8 2.8"/><path d="M9.4 5.4A9.7 9.7 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.3 3.2M6.3 6.8C4 8.3 3 10.6 3 12c0 2.5 4 7 9 7 1.2 0 2.3-.3 3.3-.7"/></svg> Dessutom har du dolt <strong>könet</strong> för modellen.`;
     else if(!useLucka) txt+=`<br><br><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M3 3l18 18"/><path d="M10.6 10.7a2 2 0 0 0 2.8 2.8"/><path d="M9.4 5.4A9.7 9.7 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.3 3.2M6.3 6.8C4 8.3 3 10.6 3 12c0 2.5 4 7 9 7 1.2 0 2.3-.3 3.3-.7"/></svg> Dessutom har du dolt <strong>uppehållet i CV</strong> för modellen.`;
@@ -1035,7 +1035,7 @@ function renderDataStats(){
 
 function modelChipHTML(m){
   return `<span class="model-chip"><strong>Tränad med:</strong>
-    Kön ${m.useKon ? '✓' : '–'} · CV-uppehåll ${m.useLucka ? '✓' : '–'} ·
+    Kön ${m.useKon ? '✓' : '✕'} · CV-uppehåll ${m.useLucka ? '✓' : '✕'} ·
     ${m.dataMode === 'fair' ? '⚖️ rättvis träningsdata' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;flex-shrink:0"><path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 0 2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 0-2-2z"/><path d="M9 8h6M9 12h6"/></svg> historisk träningsdata'}</span>`;
 }
 
@@ -1091,8 +1091,8 @@ function renderFairness(){
     title:'Rättvisetestet i detalj',
     def:`<strong>${vEmoji} ${vTxt}</strong><br><br>
       Gapet mellan grupperna är <strong style="color:${gapColor}">${r.gap.toFixed(0)} procentenheter</strong>.<br><br>
-      Missade talanger – kvinnor: <strong>${r.missK} av ${r.lampK}</strong><br>
-      Missade talanger – män: <strong>${r.missM} av ${r.lampM}</strong><br><br>
+      Missade talanger bland kvinnor: <strong>${r.missK} av ${r.lampK}</strong><br>
+      Missade talanger bland män: <strong>${r.missM} av ${r.lampM}</strong><br><br>
       Missade talanger är verkligt lämpliga sökande som modellen ändå nekar.`,
     illus:`<svg viewBox="0 0 140 70"><line x1="10" y1="58" x2="130" y2="58" stroke="rgba(255,255,255,.12)"/>
       <rect x="35" y="${58-Math.max(4,r.pK*44)}" width="22" height="${Math.max(4,r.pK*44)}" rx="3" fill="rgba(192,132,252,.25)" stroke="#c084fc" stroke-width="1.5"/>
@@ -1221,13 +1221,13 @@ function updateTwins(){
 
   if(diff < 0.005){
     v.className = 'twin-verdict';
-    v.innerHTML = `Tvillingarna får <strong>samma bedömning</strong>. ${m.useKon ? '' : 'Inte konstigt – modellen ser inte kön. Men kolla rättvisetestet ovan: kan grupperna ändå behandlas olika via en annan variabel?'}`;
+    v.innerHTML = `Tvillingarna får <strong>samma bedömning</strong>. ${m.useKon ? '' : 'Inte konstigt, eftersom modellen inte ser kön. Titta ändå på rättvisetestet ovan: kan grupperna behandlas olika via en annan variabel?'}`;
   }else if(sameLucka && m.useKon){
     v.className = 'twin-verdict flag';
-    v.innerHTML = `⚠️ <strong>Identiska meriter – olika bedömning.</strong> Det enda som skiljer Anna och Adam är kön${flips ? ', och det räcker för att svaret ska slå om' : ''}. Detta kallas <strong>direkt diskriminering</strong>.`;
+    v.innerHTML = `⚠️ <strong>Identiska meriter men olika bedömning.</strong> Det enda som skiljer Anna och Adam är kön${flips ? ', och det räcker för att svaret ska slå om' : ''}. Detta kallas <strong>direkt diskriminering</strong>.`;
   }else if(!sameLucka && !m.useKon){
     v.className = 'twin-verdict flag';
-    v.innerHTML = `⚠️ Modellen ser inte kön – men den straffar <strong>CV-uppehållet</strong>${flips ? ' så hårt att svaret slår om' : ''}. Eftersom CV-uppehållet hänger så tätt ihop med kön, straffar modellen i praktiken kvinnor ändå – utan att se könet. En variabel som fungerar så kallas en <strong>proxyvariabel</strong>, och fenomenet kallas <strong>indirekt diskriminering</strong>.`;
+    v.innerHTML = `⚠️ Modellen ser inte kön, men den straffar <strong>CV-uppehållet</strong>${flips ? ' så hårt att svaret slår om' : ''}. Eftersom CV-uppehållet hänger så tätt ihop med kön, straffar modellen i praktiken kvinnor ändå, utan att se könet. En variabel som fungerar så kallas en <strong>proxyvariabel</strong>, och fenomenet kallas <strong>indirekt diskriminering</strong>.`;
   }else{
     v.className = 'twin-verdict flag';
     v.innerHTML = `⚠️ Bedömningarna skiljer sig åt. Fundera: hur mycket beror på kön och hur mycket på CV-uppehållet? Testa att göra uppehållen lika för att isolera könets effekt.`;
@@ -1320,13 +1320,13 @@ const CONCEPTS={
   amazon:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v14a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/><path d="M4 8h16M8 4v4"/></svg>',
     title:'Det verkliga fallet: Amazon',
-    def:'2018 avslöjades att Amazon hade skrotat ett internt AI-verktyg för rekrytering. Verktyget hade tränats på tio års historiska ansökningar – som till stor del kom från män – och lärde sig att nedvärdera CV:n som antydde att den sökande var kvinna, t.ex. genom föreningsnamn.<br><br>Amazon försökte ta bort de uppenbara signalerna, men kunde inte garantera att modellen inte hittade <strong>andra, indirekta vägar</strong> till samma slutsats – en <em>proxyvariabel</em>.<br><br><strong>Obs:</strong> I det här labbet är proxyvariabeln avsiktligt tydlig. I verkligheten kan det vara mycket svårare att upptäcka vilka variabler som fungerar som proxyer.',
+    def:'2018 avslöjades att Amazon hade skrotat ett internt AI-verktyg för rekrytering. Verktyget hade tränats på tio års historiska ansökningar, som till stor del kom från män, och lärde sig att nedvärdera CV:n som antydde att den sökande var kvinna, t.ex. genom föreningsnamn.<br><br>Amazon försökte ta bort de uppenbara signalerna, men kunde inte garantera att modellen inte hittade <strong>andra, indirekta vägar</strong> till samma slutsats, alltså en <em>proxyvariabel</em>.<br><br><strong>Obs:</strong> I det här labbet är proxyvariabeln avsiktligt tydlig. I verkligheten kan det vara mycket svårare att upptäcka vilka variabler som fungerar som proxyer.',
     illus:'<svg viewBox="0 0 140 70"><rect x="44" y="8" width="52" height="54" rx="4" fill="rgba(255,255,255,.04)" stroke="#8791b3" stroke-width="1.3"/><line x1="52" y1="20" x2="88" y2="20" stroke="#8791b3" stroke-width="1.5"/><line x1="52" y1="28" x2="88" y2="28" stroke="#8791b3" stroke-width="1.5"/><line x1="52" y1="36" x2="72" y2="36" stroke="#8791b3" stroke-width="1.5"/><circle cx="70" cy="50" r="11" fill="#ef5b5b"/><path d="M66 46l8 8M74 46l-8 8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>'
   },
   bias:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M8 20h8"/><path d="M12 6L5 8.5M12 6l7 4"/><circle cx="5" cy="9.5" r="2.2"/><circle cx="19" cy="11" r="2.2"/></svg>',
     title:'Bias (skevhet)',
-    def:'Systematiska fel som gör att en modell behandlar grupper olika. Uppstår oftast för att träningsdatan speglar mänskliga fördomar eller skev representation – <em>"bias in, bias out"</em>.',
+    def:'Systematiska fel som gör att en modell behandlar grupper olika. Uppstår oftast för att träningsdatan speglar mänskliga fördomar eller skev representation, vilket brukar sammanfattas som <em>"bias in, bias out"</em>.',
     illus:'<svg viewBox="0 0 140 70"><line x1="10" y1="58" x2="130" y2="58" stroke="rgba(255,255,255,.12)"/><rect x="35" y="38" width="22" height="20" rx="3" fill="rgba(192,132,252,.25)" stroke="#c084fc" stroke-width="1.5"/><rect x="83" y="14" width="22" height="44" rx="3" fill="rgba(77,128,255,.25)" stroke="#4d80ff" stroke-width="1.5"/><text x="46" y="32" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#c084fc" font-weight="700">35%</text><text x="94" y="10" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#4d80ff" font-weight="700">78%</text></svg>'
   },
   skydd:{
@@ -1338,7 +1338,7 @@ const CONCEPTS={
   proxy:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3.2" stroke-dasharray="2 2"/><circle cx="18" cy="12" r="3.2"/><path d="M9.5 12h5M13 9.5l1.5 2.5-1.5 2.5"/></svg>',
     title:'Proxyvariabel',
-    def:'En variabel som hänger så tätt ihop med en <em>skyddad egenskap</em> att en modell kan använda den som ersättare – och därmed missgynna en grupp utan att ens se den skyddade egenskapen. <strong>CV-uppehåll</strong> kan bli en proxy för kön.',
+    def:'En variabel som hänger så tätt ihop med en <em>skyddad egenskap</em> att en modell kan använda den som ersättare, och därmed missgynna en grupp utan att ens se den skyddade egenskapen. <strong>CV-uppehåll</strong> kan bli en proxy för kön.',
     illus:'<svg viewBox="0 0 140 70"><text x="8" y="20" font-family="JetBrains Mono, monospace" font-size="9" fill="#8791b3">Kön</text><line x1="30" y1="10" x2="45" y2="24" stroke="#ef5b5b" stroke-width="1.5"/><line x1="45" y1="10" x2="30" y2="24" stroke="#ef5b5b" stroke-width="1.5"/><text x="8" y="58" font-family="JetBrains Mono, monospace" font-size="9" fill="#e8ecf8">CV-uppehåll</text><line x1="58" y1="52" x2="82" y2="38" stroke="#7aa2ff" stroke-width="2"/><path d="M77 36l6 -1 -1 6z" fill="#7aa2ff"/><circle cx="102" cy="36" r="16" fill="rgba(122,162,255,.15)" stroke="#7aa2ff" stroke-width="1.5"/><text x="102" y="40" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#7aa2ff" font-weight="700">AI</text></svg>'
   },
   direkt:{
