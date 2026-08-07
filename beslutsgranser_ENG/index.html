@@ -93,7 +93,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .panel-view{display:none;flex-direction:column;gap:14px;}.panel-view.active{display:flex;}
 .sec-t{font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim2);margin-bottom:5px;}
 
-/* ── Story flow (numbered steps replacing boxed panel sections) ── */
+/* ── Stepwise panel flow with numbered steps ── */
 .story-step{display:flex;gap:12px;align-items:flex-start;}
 .story-num{width:22px;height:22px;border-radius:50%;background:var(--accent-dim);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.72em;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
 .story-body{flex:1;min-width:0;}
@@ -101,7 +101,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .story-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border-soft) 15%,var(--border-soft) 85%,transparent);margin:16px 0 16px 34px;}
 .story-hint{font-size:0.7em;color:var(--dim2);margin-top:8px;line-height:1.4;}
 
-/* ── Minimal radio-style model list (no boxes/borders) ── */
+/* ── Model selection as radio buttons ── */
 .model-radio-list{display:flex;flex-direction:column;gap:12px;}
 .model-radio{display:flex;align-items:center;gap:10px;background:none;border:none;padding:2px 0;cursor:pointer;text-align:left;width:100%;}
 .mr-dot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--dim2);flex-shrink:0;transition:.2s var(--ease-spring);}
@@ -176,7 +176,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .btn:active{transform:scale(.97);}
 .btn.sm{font-size:0.76em;padding:7px 10px;}
 
-/* ── Begreppschips (klickbara) ── */
+/* ── Concept chips (clickable) ── */
 .begrepp-wrap{display:flex;flex-direction:column;gap:6px;}
 .begrepp-row{display:flex;flex-wrap:wrap;gap:5px;}
 .g-tag{display:inline-flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:.72em;font-weight:600;padding:5px 11px 5px 8px;border:1px solid var(--border);border-radius:999px;background:var(--surface2);color:var(--dim);cursor:pointer;transition:.2s var(--ease-spring);}
@@ -186,7 +186,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .g-tag.gold:hover{border-color:var(--adv);color:var(--adv);background:rgba(167,139,250,.12);}
 .g-tag.gold .g-ico{color:var(--adv);}
 
-/* ── Glaskort (concept cards) ── */
+/* ── Concept cards ── */
 .concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
 .concept-backdrop.show{opacity:1;pointer-events:auto;}
 .concept-card{position:fixed;top:50%;left:50%;z-index:301;width:360px;max-width:90vw;
@@ -232,7 +232,7 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
 .viz-cap{font-size:0.72em;color:var(--dim2);line-height:1.5;margin-top:8px;min-height:2.1em;}
 .viz-cap strong{color:var(--text);}
 
-/* ── Neuroner: klickbara neuron-swatchar ── */
+/* ── Neurons: clickable neuron swatches ── */
 .combo-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;}
 .combo-count{font-family:'JetBrains Mono',monospace;font-size:0.74em;color:var(--adv);}
 .combo-actions{display:flex;gap:10px;}
@@ -417,7 +417,7 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
             <button class="act-btn active" id="actTanh" onclick="setActFn('tanh',event)">tanh</button>
             <button class="act-btn" id="actRelu" onclick="setActFn('relu',event)">ReLU</button>
           </div>
-          <div class="note" id="actNote"><strong>tanh</strong> gives each neuron a value between −1 and +1. Train with both functions and compare the decision boundary – do you notice any difference in shape?</div>
+          <div class="note" id="actNote"><strong>tanh</strong> gives each neuron a value between −1 and +1. Train with both functions and compare the decision boundary. Do you notice any difference in shape?</div>
           <div class="begrepp-row" style="margin-top:8px">
             <span class="g-tag gold" onclick="openConcept('aktivering',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18c4 0 5-12 9-12s5 12 9 12"/></svg>Activation function</span>
             <span class="g-tag gold" onclick="openConcept('tanhrelu',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 10 17 10 7"/><path d="M13 17c3 0 3-10 8-10"/></svg>tanh vs ReLU</span>
@@ -441,7 +441,7 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
             <div class="viz-cap" id="comboCap"></div>
           </div>
           <div id="vizBoundary">
-            <div class="note">Click <strong>Neurons</strong> to look at a single neuron, or click together your own combinations – see how simple pieces build the final boundary.</div>
+            <div class="note">Click <strong>Neurons</strong> to look at a single neuron, or click together your own combinations. See how simple pieces build the final boundary.</div>
           </div>
           <div class="begrepp-row" style="margin-top:8px">
             <span class="g-tag gold" onclick="openConcept('neuron',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>Neuron</span>
@@ -454,7 +454,7 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
         </div>
         <div class="info-box">
           <strong>Explore!</strong><br><br>
-          Switch the <span class="hl">activation function</span> and look closely at the decision boundary and at a single neuron. What happens to the shape? Then click together your own combinations of neurons under <strong>Neurons</strong> – see how each choice changes the boundary.
+          Switch the <span class="hl">activation function</span> and look closely at the decision boundary and at a single neuron. What happens to the shape? Then click together your own combinations of neurons under <strong>Neurons</strong>. See how each choice changes the boundary.
         </div>
       </div>
     </div>
@@ -489,10 +489,10 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
     <h2>Visualizing <span>decision boundaries</span></h2>
     <p class="sub">A classification model learns to draw a boundary between different categories. Explore what that boundary looks like and discover why a neural network is often needed.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Start with the linear pattern</strong> – Choose <strong>Linear model</strong> and press ▶ Train. Watch how a straight line separates the two classes!</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Try another pattern</strong> – Switch, for example, to the <strong>XOR</strong> pattern in the right-hand menu and train with the same linear model again. What happens?</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Add a hidden layer</strong> – Switch the model to <strong>Neural network</strong> and retrain. Watch the boundary bend and the points get classified correctly!</div></div>
-      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">4</div><div><strong>Go deeper</strong> – Open the <strong style="color:var(--adv)">Advanced</strong> tab and see how each individual neuron in the hidden layer splits the surface in its own way. It's the combination of all the neurons that creates the final decision boundary.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Start with the linear pattern.</strong> Choose <strong>Linear model</strong> and press ▶ Train. Watch how a straight line separates the two classes!</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Try another pattern.</strong> Switch, for example, to the <strong>XOR</strong> pattern in the right-hand menu and train with the same linear model again. What happens?</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Add a hidden layer.</strong> Switch the model to <strong>Neural network</strong> and retrain. Watch the boundary bend and the points get classified correctly!</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">4</div><div><strong>Go deeper.</strong> Open the <strong style="color:var(--adv)">Advanced</strong> tab and see how each individual neuron in the hidden layer splits the surface in its own way. It's the combination of all the neurons that creates the final decision boundary.</div></div>
     </div>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Start the simulation <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -506,9 +506,9 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
     <h2 style="color:var(--adv);">Advanced mode</h2>
     <p class="sub">Here you can analyze the model further.</p>
     <div class="steps">
-      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">1</div><div><strong>Look inside the network</strong> – Click <strong>Neurons</strong>. Pick a single one to see how it splits the surface in its own way, or click together several to see how the final boundary emerges from the pieces you choose.</div></div>
-      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">2</div><div><strong>Activation function</strong> – Switch between <strong>tanh</strong> and <strong>ReLU</strong> and retrain. Look closely at the shape of the decision boundary – what's the difference?</div></div>
-      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">3</div><div><strong>Change the architecture</strong> – Adjust the number of neurons in the hidden layer. Here you can discover that more neurons give a more flexible boundary, but also slower training.</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">1</div><div><strong>Look inside the network.</strong> Click <strong>Neurons</strong>. Pick a single one to see how it splits the surface in its own way, or click together several to see how the final boundary emerges from the pieces you choose.</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">2</div><div><strong>Activation function.</strong> Switch between <strong>tanh</strong> and <strong>ReLU</strong> and retrain. Look closely at the shape of the decision boundary. What is the difference?</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">3</div><div><strong>Change the architecture.</strong> Adjust the number of neurons in the hidden layer. Here you can discover that more neurons give a more flexible boundary, but also slower training.</div></div>
     </div>
     <button class="overlay-btn" style="background:var(--adv);color:#fff;box-shadow:0 8px 24px rgba(167,139,250,.3);" onclick="document.getElementById('advOverlay').classList.remove('show')">Got it →</button>
   </div>
@@ -793,7 +793,7 @@ function setClass(c){curClass=c;document.getElementById('btnA').classList.toggle
 
 const MODEL_INFO={
   linear:'<strong>Linear model</strong> can only draw a straight decision boundary. Try the patterns above and see which ones it manages.',
-  nn1:'<strong>Hidden layer (18 neurons)</strong> – each neuron responds to a combination of x and y. Together they bend the boundary. Open <strong>Advanced</strong> and try <strong>Neurons</strong> to see how!'
+  nn1:'<strong>Hidden layer (18 neurons)</strong>. Each neuron responds to a combination of x and y. Together they bend the boundary. Open <strong>Advanced</strong> and try <strong>Neurons</strong> to see how!'
 };
 
 function setModel(m){
@@ -848,8 +848,8 @@ function loadPreset(name){
 }
 
 const ACT_NOTE={
-  tanh:'<strong>tanh</strong> gives each neuron a value between −1 and +1. Train and compare the decision boundary with ReLU – do you notice any difference in shape?',
-  relu:'<strong>ReLU</strong> passes positive values through unchanged and sets all negative ones to 0. Train and compare with tanh – what happens to the shape of the boundary?'
+  tanh:'<strong>tanh</strong> gives each neuron a value between −1 and +1. Train and compare the decision boundary with ReLU. Do you notice any difference in shape?',
+  relu:'<strong>ReLU</strong> passes positive values through unchanged and sets all negative ones to 0. Train and compare with tanh. What happens to the shape of the boundary?'
 };
 function setActFn(fn,ev){actFn=fn;document.getElementById('actTanh').classList.toggle('active',fn==='tanh');document.getElementById('actRelu').classList.toggle('active',fn==='relu');document.getElementById('actNote').innerHTML=ACT_NOTE[fn];initNet();if(fn==='relu'&&!reluExplained&&ev){reluExplained=true;openConcept('relublack',ev);document.getElementById('conceptIcon').classList.add('gold');}}
 
@@ -863,13 +863,13 @@ function setVizMode(m){
   if(m==='combo')ensureComboGrid();
 }
 
-/* ── Neuroner: klickbara neuron-swatchar ── */
+/* ── Neurons: clickable neuron swatches ── */
 function ensureComboGrid(){
   if(vizMode!=='combo')return;
   if(comboDirty){buildComboGrid();comboDirty=false;}
   else{refreshComboActiveStates();updateComboCaption();}
 }
-function neuronThumbLayerIdx(){const arch=getArch();return arch.length-3;} // 0-indexed hidden layer feeding the output
+function neuronThumbLayerIdx(){const arch=getArch();return arch.length-3;} /* Zero-indexed hidden layer feeding the output layer. */
 function renderNeuronThumb(canvas,layerIdx,nIdx){
   const size=canvas.width;const c2=canvas.getContext('2d');
   const id=c2.createImageData(size,size);const d=id.data;
@@ -942,7 +942,7 @@ function updateComboCaption(){
   if(!cap)return;
   if(n===0)cap.innerHTML='Click one or more neurons above to see how their decisions <strong>combine</strong>.';
   else if(n===1)cap.innerHTML='A single neuron only gives a simple, almost straight split.';
-  else if(n===M)cap.innerHTML='<strong>All '+M+' neurons</strong> combined – identical to the final decision boundary.';
+  else if(n===M)cap.innerHTML='<strong>All '+M+' neurons</strong> combined give the same boundary as the final decision boundary.';
   else cap.innerHTML=n+' of '+M+' neurons combined. Try different combinations and see how the shape changes.';
 }
 
@@ -996,12 +996,12 @@ function applyArchValue(v){
   const arch=getArch().slice();arch[1]=v;customArch=arch;initNet();
 }
 
-/* ════════════════ Glaskort (concept cards) ════════════════ */
+/* ════════════════ Concept cards ════════════════ */
 const CONCEPTS={
   beslutsgrans:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 17c5-9 13-11 18-9"/></svg>',
     title:'Decision boundary',
-    def:'A <strong>decision boundary</strong> is the line – or curve – that a model draws to separate the classes. On one side the model guesses <span class="ca"></span> Class A, on the other <span class="cb"></span> Class B. The background color shows how <em>confident</em> the model is: the stronger the color, the more confident.',
+    def:'A <strong>decision boundary</strong> is the line, or curve, that a model draws to separate the classes. On one side the model guesses <span class="ca"></span> Class A, on the other <span class="cb"></span> Class B. The background color shows how <em>confident</em> the model is: the stronger the color, the more confident.',
     illus:'<svg viewBox="0 0 140 80"><defs><linearGradient id="cbg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="rgba(255,106,94,.28)"/><stop offset=".5" stop-color="rgba(255,106,94,.05)"/><stop offset=".5" stop-color="rgba(77,128,255,.05)"/><stop offset="1" stop-color="rgba(77,128,255,.28)"/></linearGradient></defs><rect x="6" y="8" width="128" height="64" rx="6" fill="url(#cbg)"/><line x1="70" y1="10" x2="70" y2="70" stroke="#e8ecf8" stroke-width="2" stroke-dasharray="4 3"/><circle cx="30" cy="30" r="4" fill="#ff6a5e"/><circle cx="45" cy="52" r="4" fill="#ff6a5e"/><circle cx="24" cy="55" r="4" fill="#ff6a5e"/><circle cx="104" cy="26" r="4" fill="#4d80ff"/><circle cx="115" cy="50" r="4" fill="#4d80ff"/><circle cx="95" cy="55" r="4" fill="#4d80ff"/></svg>'
   },
   klassificering:{
@@ -1013,31 +1013,31 @@ const CONCEPTS={
   linjar:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20 20 4"/></svg>',
     title:'Linear model',
-    def:'A <strong>linear model</strong> can only draw a <em>straight</em> decision boundary – a single line straight through the plane. That is enough for many patterns, but not all: take <strong>XOR</strong>, the classic example where a straight line is never enough. That is when a neural network is needed to bend the boundary.',
+    def:'A <strong>linear model</strong> can only draw a <em>straight</em> decision boundary, that is, a single line straight through the plane. That is enough for many patterns, but not all: take <strong>XOR</strong>, the classic example where a straight line is never enough. That is when a neural network is needed to bend the boundary.',
     illus:'<svg viewBox="0 0 140 80"><rect x="6" y="8" width="128" height="64" rx="6" fill="rgba(255,255,255,.02)"/><line x1="18" y1="66" x2="122" y2="16" stroke="#7aa2ff" stroke-width="2.5" stroke-linecap="round"/><circle cx="34" cy="30" r="4" fill="#ff6a5e"/><circle cx="28" cy="48" r="4" fill="#ff6a5e"/><circle cx="50" cy="26" r="4" fill="#ff6a5e"/><circle cx="96" cy="52" r="4" fill="#4d80ff"/><circle cx="110" cy="40" r="4" fill="#4d80ff"/><circle cx="88" cy="58" r="4" fill="#4d80ff"/></svg>'
   },
   nn:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><circle cx="19" cy="12" r="2"/><path d="M6.7 11 10.3 7M6.7 13l3.6 4M13.7 7 17.3 11M13.7 17l3.6-4"/></svg>',
     title:'Neural network',
-    def:'A <strong>neural network</strong> consists of small computing units – <em>neurons</em> – arranged in layers. Each neuron draws its own simple line, and by <strong>combining</strong> many of them the network can shape curved and composite decision boundaries that a linear model could never manage.',
+    def:'A <strong>neural network</strong> consists of small computing units, <em>neurons</em>, arranged in layers. Each neuron draws its own simple line, and by <strong>combining</strong> many of them the network can shape curved and composite decision boundaries that a linear model could never manage.',
     illus:'<svg viewBox="0 0 140 80"><g stroke="rgba(255,255,255,.14)" stroke-width="1"><line x1="20" y1="24" x2="70" y2="16"/><line x1="20" y1="24" x2="70" y2="40"/><line x1="20" y1="24" x2="70" y2="64"/><line x1="20" y1="56" x2="70" y2="16"/><line x1="20" y1="56" x2="70" y2="40"/><line x1="20" y1="56" x2="70" y2="64"/><line x1="70" y1="16" x2="120" y2="40"/><line x1="70" y1="40" x2="120" y2="40"/><line x1="70" y1="64" x2="120" y2="40"/></g><circle cx="20" cy="24" r="5" fill="#7aa2ff"/><circle cx="20" cy="56" r="5" fill="#7aa2ff"/><circle cx="70" cy="16" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="70" cy="40" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="70" cy="64" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="120" cy="40" r="5" fill="#ffd866"/></svg>'
   },
   dolt:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="2" width="4" height="20" rx="1"/><rect x="17" y="6" width="4" height="12" rx="1"/></svg>',
     title:'Hidden layer',
-    def:'A <strong>hidden layer</strong> sits between the input (x, y) and the final answer. This is where the patterns are found: each neuron in the layer splits the plane in its own way. In this tool you can adjust <em>how many neurons</em> the layer has (Advanced → Architecture) – more neurons give more flexible boundaries, but also slower training and a risk that the model overfits. Larger networks often stack several such layers on top of each other for even more capacity.',
+    def:'A <strong>hidden layer</strong> sits between the input (x, y) and the final answer. This is where the patterns are found: each neuron in the layer splits the plane in its own way. In this tool you can adjust <em>how many neurons</em> the layer has (Advanced → Architecture). More neurons give more flexible boundaries, but also slower training and a risk that the model overfits. Larger networks often stack several such layers on top of each other for even more capacity.',
     illus:'<svg viewBox="0 0 140 80"><text x="20" y="14" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#7e8aaa">in</text><text x="70" y="14" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#34c759">hidden</text><text x="120" y="14" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#ffd866">out</text><g stroke="rgba(255,255,255,.13)" stroke-width="1"><line x1="20" y1="34" x2="70" y2="26"/><line x1="20" y1="34" x2="70" y2="46"/><line x1="20" y1="34" x2="70" y2="64"/><line x1="20" y1="58" x2="70" y2="26"/><line x1="20" y1="58" x2="70" y2="46"/><line x1="20" y1="58" x2="70" y2="64"/><line x1="70" y1="26" x2="120" y2="45"/><line x1="70" y1="46" x2="120" y2="45"/><line x1="70" y1="64" x2="120" y2="45"/></g><circle cx="20" cy="34" r="4.5" fill="#7aa2ff"/><circle cx="20" cy="58" r="4.5" fill="#7aa2ff"/><circle cx="70" cy="26" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="70" cy="46" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="70" cy="64" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="120" cy="45" r="5" fill="#ffd866"/></svg>'
   },
   xor:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" stroke-linecap="round"/></svg>',
     title:'The XOR pattern',
-    def:'<strong>XOR</strong> ("exclusive or") is the classic pattern where the classes sit in <em>diagonal</em> corners: <span class="ca"></span> bottom-left and top-right, <span class="cb"></span> in the other two. However you rotate a straight line, two points of the same class always end up on the wrong side – that is why XOR became the historic proof that you need a neural network with a hidden layer.',
+    def:'<strong>XOR</strong> ("exclusive or") is the classic pattern where the classes sit in <em>diagonal</em> corners: <span class="ca"></span> bottom-left and top-right, <span class="cb"></span> in the other two. However you rotate a straight line, two points of the same class always end up on the wrong side. That is why XOR became the historic proof that you need a neural network with a hidden layer.',
     illus:'<svg viewBox="0 0 140 80"><rect x="6" y="8" width="128" height="64" rx="6" fill="rgba(255,255,255,.02)"/><line x1="70" y1="10" x2="70" y2="70" stroke="rgba(255,255,255,.1)" stroke-width="1"/><line x1="8" y1="40" x2="132" y2="40" stroke="rgba(255,255,255,.1)" stroke-width="1"/><circle cx="34" cy="56" r="5" fill="#ff6a5e"/><circle cx="106" cy="24" r="5" fill="#ff6a5e"/><circle cx="34" cy="24" r="5" fill="#4d80ff"/><circle cx="106" cy="56" r="5" fill="#4d80ff"/></svg>'
   },
   monster:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>',
     title:'Ready-made patterns',
-    def:'The four buttons load different test data that place different demands on the model: <strong>Linear</strong> can be separated with a straight line. <strong>XOR</strong> requires a curved boundary. <strong>Circle</strong> has one class enclosed by the other. <strong>Spiral</strong> is the hardest – here it helps to increase the number of neurons in the hidden layer (Advanced → Architecture) for a cleaner boundary. Try the same pattern with different models and compare!',
+    def:'The four buttons load different test data that place different demands on the model: <strong>Linear</strong> can be separated with a straight line. <strong>XOR</strong> requires a curved boundary. <strong>Circle</strong> has one class enclosed by the other. <strong>Spiral</strong> is the hardest. Here it helps to increase the number of neurons in the hidden layer (Advanced → Architecture) for a cleaner boundary. Try the same pattern with different models and compare!',
     illus:'<svg viewBox="0 0 140 80"><g transform="translate(8,12)"><line x1="4" y1="44" x2="44" y2="8" stroke="#7aa2ff" stroke-width="2"/><circle cx="12" cy="20" r="3" fill="#ff6a5e"/><circle cx="36" cy="34" r="3" fill="#4d80ff"/></g><g transform="translate(50,12)"><circle cx="10" cy="34" r="3" fill="#ff6a5e"/><circle cx="38" cy="8" r="3" fill="#ff6a5e"/><circle cx="10" cy="8" r="3" fill="#4d80ff"/><circle cx="38" cy="34" r="3" fill="#4d80ff"/></g><g transform="translate(92,12)"><circle cx="24" cy="22" r="16" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1"/><circle cx="24" cy="22" r="3.5" fill="#ff6a5e"/><circle cx="24" cy="4" r="3" fill="#4d80ff"/><circle cx="40" cy="30" r="3" fill="#4d80ff"/></g></svg>'
   },
   aktivering:{
@@ -1049,25 +1049,25 @@ const CONCEPTS={
   tanhrelu:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 10 17 10 7"/><path d="M13 17c3 0 3-10 8-10"/></svg>',
     title:'tanh vs ReLU',
-    def:'<strong style="color:var(--adv)">tanh</strong> gives smooth values between −1 and +1 and can be either negative or positive. <strong style="color:var(--adv)">ReLU</strong> sets all negative values to 0 and passes positive ones through unchanged – so a neuron is either "off" or "on". The shape of the function affects the decision boundary. Look at a single neuron under <strong>Neurons</strong> with each function and discover the difference yourself!',
+    def:'<strong style="color:var(--adv)">tanh</strong> gives smooth values between −1 and +1 and can be either negative or positive. <strong style="color:var(--adv)">ReLU</strong> sets all negative values to 0 and passes positive ones through unchanged. A neuron is therefore either "off" or "on". The shape of the function affects the decision boundary. Look at a single neuron under <strong>Neurons</strong> with each function and discover the difference yourself!',
     illus:'<svg viewBox="0 0 140 80"><g transform="translate(0,4)"><text x="35" y="12" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#a78bfa">tanh</text><path d="M8 58 C28 58 28 22 48 22 C60 22 60 22 62 22" fill="none" stroke="#7aa2ff" stroke-width="2.5" stroke-linecap="round"/><line x1="8" y1="40" x2="62" y2="40" stroke="rgba(255,255,255,.12)" stroke-width="1"/></g><g transform="translate(74,4)"><text x="35" y="12" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#a78bfa">ReLU</text><path d="M8 58 L34 58 L58 22" fill="none" stroke="#34c759" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="8" y1="58" x2="62" y2="58" stroke="rgba(255,255,255,.12)" stroke-width="1"/></g></svg>'
   },
   neuron:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>',
     title:'Neuron',
-    def:'A <strong>neuron</strong> takes the input (x and y), multiplies by its <em>weights</em>, sums them, and runs the result through the activation function. On its own, each neuron only splits the plane in two with a simple boundary. So a neuron does not classify by itself – the final decision boundary only emerges once all the neurons\' signals are <strong>combined</strong> in the output layer.',
+    def:'A <strong>neuron</strong> takes the input (x and y), multiplies by its <em>weights</em>, sums them, and runs the result through the activation function. On its own, each neuron only splits the plane in two with a simple boundary. So a neuron does not classify by itself. The final decision boundary emerges only once all the neurons\' signals are <strong>combined</strong> in the output layer.',
     illus:'<svg viewBox="0 0 140 80"><g stroke="rgba(122,162,255,.5)" stroke-width="1.5"><line x1="16" y1="24" x2="60" y2="40"/><line x1="16" y1="56" x2="60" y2="40"/><line x1="82" y1="40" x2="120" y2="40"/></g><circle cx="16" cy="24" r="4" fill="#7aa2ff"/><circle cx="16" cy="56" r="4" fill="#7aa2ff"/><text x="8" y="27" font-family="JetBrains Mono" font-size="9" fill="#7e8aaa">x</text><text x="8" y="59" font-family="JetBrains Mono" font-size="9" fill="#7e8aaa">y</text><circle cx="71" cy="40" r="12" fill="rgba(77,128,255,.25)" stroke="#7aa2ff" stroke-width="2"/><circle cx="120" cy="40" r="4" fill="#ffd866"/></svg>'
   },
   kombination:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h6M4 12h6M4 17h6"/><path d="M14 12h6M17 9l3 3-3 3"/></svg>',
     title:'Kombination',
-    def:'On its own, each neuron only draws a simple, almost straight line. But in the <strong>output layer</strong>, all the neurons\' signals are weighed together – and the sum of many simple pieces forms a curved, composite decision boundary. That is what the <strong>Neurons</strong> mode shows: click to choose which ones contribute, and see how that exact combination shapes the boundary.',
+    def:'On its own, each neuron only draws a simple, almost straight line. But in the <strong>output layer</strong>, all the neurons\' signals are weighed together, and the sum of many simple pieces forms a curved, composite decision boundary. That is what the <strong>Neurons</strong> mode shows: click to choose which ones contribute, and see how that exact combination shapes the boundary.',
     illus:'<svg viewBox="0 0 140 80"><g transform="translate(6,6)"><line x1="4" y1="50" x2="34" y2="18" stroke="rgba(122,162,255,.4)" stroke-width="2"/><line x1="4" y1="30" x2="34" y2="46" stroke="rgba(122,162,255,.4)" stroke-width="2"/><text x="19" y="66" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#7e8aaa">simple pieces</text></g><path d="M62 40h16M74 36l4 4-4 4" stroke="#ffd866" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(90,6)"><path d="M4 50 C10 20 34 54 40 16" fill="none" stroke="#4d80ff" stroke-width="2.5" stroke-linecap="round"/><text x="22" y="66" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#7e8aaa">boundary</text></g></svg>'
   },
   relublack:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h8l10-12"/></svg>',
     title:'Blue only, never red',
-    def:'If you look at the individual neurons, you\'ll only see a gradient from nearly black (inactive, near zero) to blue (strongly activated) – never red. That is because <strong>ReLU</strong> zeroes out all negative values, so a neuron\'s activation can never go negative. Switch to <strong>tanh</strong>, which can go both positive and negative, and the red shades reappear.',
+    def:'The colour of a single neuron runs from nearly black (inactive, near zero) to blue (strongly activated), never to red. That is because <strong>ReLU</strong> zeroes out all negative values, so a neuron\'s activation can never go negative. Switch to <strong>tanh</strong>, which can go both positive and negative, and the red shades reappear.',
     illus:'<svg viewBox="0 0 140 80"><defs><linearGradient id="reluGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#141e32"/><stop offset="1" stop-color="#4d80ff"/></linearGradient><linearGradient id="tanhGrad2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff6a5e"/><stop offset="0.5" stop-color="#141e32"/><stop offset="1" stop-color="#4d80ff"/></linearGradient></defs><text x="35" y="14" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#a78bfa">ReLU</text><rect x="8" y="20" width="54" height="14" rx="4" fill="url(#reluGrad)"/><text x="10" y="42" font-family="JetBrains Mono" font-size="7" fill="#7e8aaa">0</text><text x="44" y="42" font-family="JetBrains Mono" font-size="7" fill="#7e8aaa">max</text><text x="105" y="14" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#a78bfa">tanh</text><rect x="78" y="20" width="54" height="14" rx="4" fill="url(#tanhGrad2)"/><text x="80" y="42" font-family="JetBrains Mono" font-size="7" fill="#7e8aaa">−1</text><text x="118" y="42" font-family="JetBrains Mono" font-size="7" fill="#7e8aaa">+1</text><text x="70" y="64" text-anchor="middle" font-family="DM Sans" font-size="7.5" fill="#7e8aaa">Only ReLU is missing the red (negative) half</text></svg>'
   }
 };
