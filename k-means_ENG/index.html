@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>k-means clustering – ai-aktiviteter.se</title>
-<meta name="description" content="Interactive simulation of k-means clustering: decision boundaries, distance, WCSS and the elbow method – for upper-secondary AI courses.">
+<meta name="description" content="Interactive simulation of k-means clustering: decision boundaries, distance, WCSS and the elbow method, for upper-secondary AI courses.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0a0e1a">
@@ -17,13 +17,13 @@
 <meta property="og:locale" content="en_GB">
 <meta property="og:url" content="https://www.ai-aktiviteter.se/k-means_ENG">
 <meta property="og:title" content="k-means clustering – ai-aktiviteter.se">
-<meta property="og:description" content="Interactive simulation of k-means clustering: decision boundaries, distance, WCSS and the elbow method – for upper-secondary AI courses.">
+<meta property="og:description" content="Interactive simulation of k-means clustering: decision boundaries, distance, WCSS and the elbow method, for upper-secondary AI courses.">
 <meta property="og:image" content="https://www.ai-aktiviteter.se/og-image-en.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="k-means clustering – ai-aktiviteter.se">
-<meta name="twitter:description" content="Interactive simulation of k-means clustering: decision boundaries, distance, WCSS and the elbow method – for upper-secondary AI courses.">
+<meta name="twitter:description" content="Interactive simulation of k-means clustering: decision boundaries, distance, WCSS and the elbow method, for upper-secondary AI courses.">
 <meta name="twitter:image" content="https://www.ai-aktiviteter.se/og-image-en.png">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
@@ -461,7 +461,7 @@ svg.plot.ready .pt{cursor:pointer}
 /* ── Control panel below the plot ──
    On a wide screen the step panel sits beside the plot and both are visible.
    Once the layout stacks, the buttons end up far from the plot, so they are
-   shown here instead – right under what the pupil is looking at. */
+   shown here instead, directly below it. */
 .cpanel{display:none;gap:8px;margin-top:12px;}
 .cpanel .cpbtn{flex:1;min-width:0;display:inline-flex;align-items:center;justify-content:center;
   gap:6px;padding:12px 10px;border-radius:11px;border:1px solid var(--line2);
@@ -499,16 +499,15 @@ svg.plot.ready .pt{cursor:pointer}
 .gbox p{font-size:13px;color:var(--sub);margin-top:5px}
 .gbox .chip{font-family:'JetBrains Mono',monospace;min-width:38px}
 
-/* A lone button should not span the full width – then it reads as a demand
-   rather than one choice among several. */
+/* A single button is not given full width, since it would then read as a call
+   to action rather than as one choice among several. */
 .cpanel.single{justify-content:center;}
 .cpanel.single .cpbtn{flex:0 1 auto;min-width:190px;padding:10px 22px;font-size:12.5px;}
 
 
-/* ── Stegrad ──
-   Ersätter den staplade dragspelsvyn, där alla fem ramar syntes samtidigt.
-   Nu visas ett steg i taget och raden håller reda på var man är. Klara steg
-   går att klicka tillbaka till. */
+/* ── Step row ──
+   One step is shown at a time. The row keeps track of where the student is,
+   and completed steps can be clicked to return to. */
 .kwiz{display:flex;align-items:stretch;gap:4px;margin-bottom:12px}
 .kwiz-s{flex:1;min-width:0;position:relative;display:flex;flex-direction:column;gap:5px;
   padding:8px 6px 9px;border:0;border-radius:11px;background:none;cursor:default;
@@ -521,16 +520,16 @@ svg.plot.ready .pt{cursor:pointer}
 .kwiz-s .kd{flex:none;width:15px;height:15px;border-radius:5px;display:grid;place-items:center;
   font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;
   background:rgba(255,255,255,.05);color:var(--dim2);transition:var(--t2) var(--ez)}
-/* nådda steg går att gå tillbaka till */
+/* reached steps can be returned to */
 .kwiz-s.avail{cursor:pointer}
 .kwiz-s.avail:hover{background:rgba(255,255,255,.04)}
 .kwiz-s.avail:hover .kn{color:var(--sub)}
 .kwiz-s:focus-visible{outline:2px solid var(--c,var(--a1));outline-offset:2px}
-/* avklarat */
+/* completed */
 .kwiz-s.done .kb{background:color-mix(in srgb,var(--c) 45%,transparent)}
 .kwiz-s.done .kd{background:color-mix(in srgb,var(--c) 18%,transparent);color:var(--c)}
 .kwiz-s.done .kn{color:var(--dim)}
-/* här är du */
+/* current position */
 .kwiz-s.on .kb{background:var(--c);box-shadow:0 0 10px -1px color-mix(in srgb,var(--c) 70%,transparent)}
 .kwiz-s.on .kd{background:var(--c);color:#0a0d18}
 .kwiz-s.on .kn{color:var(--tx)}
@@ -541,13 +540,13 @@ svg.plot.ready .pt{cursor:pointer}
   .kwiz-s .kd{margin:0 auto}
 }
 
-/* Bara det aktiva steget visas. Rubrikraden behövs inte längre – stegraden
-   ovanför säger var man är. */
+/* Only the active step is shown, since the step row above indicates
+   where the student is. */
 .pstep{display:none}
 .pstep.on{display:block;animation:stepIn .34s var(--ez)}
 @keyframes stepIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-/* Rubriken står kvar, men nummerbrickan och bakåt-etiketten hör hemma
-   i stegraden och tas bort här. */
+/* The heading is shown, while the number badge and the back label belong
+   in the step row above. */
 .pstep.on .phead{cursor:default;padding-bottom:2px}
 .pstep.on .phead .pn,.pstep.on .phead .pback{display:none}
 .pstep.on .pshead{font-size:17px;color:var(--tx)}
@@ -563,11 +562,11 @@ svg.plot.ready .pt{cursor:pointer}
     <h2 id="introH">k-means clustering</h2>
     <p class="osub">Follow the algorithm step by step as it groups different kinds of datasets that come with no right answer.</p>
     <ul class="jrn">
-      <li><span class="jn" style="--c:var(--p1)">1</span><span><b>Choose a dataset</b> – study the points and guess how many groups there are.</span></li>
-      <li><span class="jn" style="--c:var(--p2)">2</span><span><b>Place centroids</b> – decide on k and put out the centre points.</span></li>
-      <li><span class="jn" style="--c:var(--p3)">3</span><span><b>Assign data points</b> – every point goes to the nearest centroid.</span></li>
-      <li><span class="jn" style="--c:var(--p4)">4</span><span><b>Move centroids</b> – each centroid moves to the middle of its points, then steps 3 and 4 repeat.</span></li>
-      <li><span class="jn" style="--c:var(--p5)">5</span><span><b>Evaluate the choice of k</b> – compare how different values of k affect the result.</span></li>
+      <li><span class="jn" style="--c:var(--p1)">1</span><span><b>Choose a dataset.</b> Study the points and guess how many groups there are.</span></li>
+      <li><span class="jn" style="--c:var(--p2)">2</span><span><b>Place centroids.</b> Decide on k and put out the centre points.</span></li>
+      <li><span class="jn" style="--c:var(--p3)">3</span><span><b>Assign data points.</b> Every point goes to the nearest centroid.</span></li>
+      <li><span class="jn" style="--c:var(--p4)">4</span><span><b>Move centroids.</b> Each centroid moves to the middle of its points, then steps 3 and 4 repeat.</span></li>
+      <li><span class="jn" style="--c:var(--p5)">5</span><span><b>Evaluate the choice of k.</b> Compare how different values of k affect the result.</span></li>
     </ul>
     <button class="ovlb" id="introGo">Get started <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -586,7 +585,7 @@ svg.plot.ready .pt{cursor:pointer}
   <div class="lay">
 
     <aside class="pipe" id="pipe">
-<div class="kwiz" id="kwiz" role="tablist"><button class="kwiz-s" data-w="1" type="button"><span class="kb"></span><span class="kn"><span class="kd">1</span><span>Data</span></span></button><button class="kwiz-s" data-w="2" type="button"><span class="kb"></span><span class="kn"><span class="kd">2</span><span>Centroids</span></span></button><button class="kwiz-s" data-w="3" type="button"><span class="kb"></span><span class="kn"><span class="kd">3</span><span>Assign</span></span></button><button class="kwiz-s" data-w="4" type="button"><span class="kb"></span><span class="kn"><span class="kd">4</span><span>Move</span></span></button><button class="kwiz-s" data-w="5" type="button"><span class="kb"></span><span class="kn"><span class="kd">5</span><span>Evaluate</span></span></button></div>
+<div class="kwiz" id="kwiz" role="group" aria-label="Step navigation"><button class="kwiz-s" data-w="1" type="button"><span class="kb"></span><span class="kn"><span class="kd">1</span><span>Data</span></span></button><button class="kwiz-s" data-w="2" type="button"><span class="kb"></span><span class="kn"><span class="kd">2</span><span>Centroids</span></span></button><button class="kwiz-s" data-w="3" type="button"><span class="kb"></span><span class="kn"><span class="kd">3</span><span>Assign</span></span></button><button class="kwiz-s" data-w="4" type="button"><span class="kb"></span><span class="kn"><span class="kd">4</span><span>Move</span></span></button><button class="kwiz-s" data-w="5" type="button"><span class="kb"></span><span class="kn"><span class="kd">5</span><span>Evaluate</span></span></button></div>
       <section class="pstep" data-s="1">
         <button class="phead" id="h1b" aria-expanded="false" aria-controls="p1body">
           <span class="pn">1</span><span class="pshead">Choose a dataset</span><span class="pback">back</span>
@@ -718,7 +717,7 @@ const DS={
 
  none:{n:'No structure',ax:['Feature A','Feature B'],
    ins:['The algorithm cannot answer "there are none"',
-        'You asked for k clusters, and you got k clusters. k-means has no way of reporting that the structure is missing — it divides up whatever data it is given. The colours on the screen are therefore <b>no proof</b> that the groups exist in reality. Look at the elbow curve: it falls evenly with no break point, and that is precisely the sign that reveals the division to be arbitrary.'],
+        'You asked for k clusters, and you got k clusters. k-means has no way of reporting that the structure is missing, and divides up whatever data it is given. The colours on the screen are therefore <b>no proof</b> that the groups exist in reality. Look at the elbow curve: it falls evenly with no break point, and that is precisely the sign that reveals the division to be arbitrary.'],
    g:sd=>{const r=rng(53+sd*137);const o=[];for(let i=0;i<100;i++)o.push({x:12+r()*76,y:12+r()*76});return o;}}
 };
 
@@ -848,7 +847,7 @@ function build(){
     $('gTt').innerHTML=`<text x="${(X(0)+X(100))/2}" y="${PH-8}" text-anchor="middle">${ax[0]}</text>`
       +`<text transform="translate(13,${(Y(0)+Y(100))/2}) rotate(-90)" text-anchor="middle">${ax[1]}</text>`;
     $('plotTitle').textContent=`Scatter plot: ${ax[0]} against ${ax[1]}, ${pts.length} data points`;
-  } else $('plotTitle').textContent='Empty plot – no dataset selected';
+  } else $('plotTitle').textContent='Empty plot: no dataset selected';
   built=true;
 }
 
@@ -1268,17 +1267,17 @@ const ICO={
  split:'<svg viewBox="0 0 24 24"><path d="M3 4h7v16H3zM14 4h7v16h-7z"/><circle cx="6.5" cy="10" r="1.2" fill="currentColor" stroke="none"/><circle cx="17.5" cy="14" r="1.2" fill="currentColor" stroke="none"/></svg>'
 };
 const T={
- anvand:{i:'split',t:'Where is k-means used?',p:'The method is used wherever you want to find groups in data that has no answer key:<br><br>• <b>Customer segmentation</b> – grouping customers by buying behaviour<br>• <b>Image compression</b> – grouping pixels by colour so an image needs fewer colours<br>• <b>Text analysis</b> – sorting articles or songs by content<br>• <b>Anomaly detection</b> – finding measurements unlike the rest<br><br>What these cases share is that the algorithm delivers a division, but a human has to decide whether it means anything.'},
+ anvand:{i:'split',t:'Where is k-means used?',p:'The method is used wherever you want to find groups in data that has no answer key:<br><br>• <b>Customer segmentation:</b> grouping customers by buying behaviour<br>• <b>Image compression:</b> grouping pixels by colour so an image needs fewer colours<br>• <b>Text analysis:</b> sorting articles or songs by content<br>• <b>Anomaly detection:</b> finding measurements unlike the rest<br><br>What these cases share is that the algorithm delivers a division, but a human has to decide whether it means anything.'},
  dsThree:{i:'grid',t:'Distinct clusters',p:'Round clouds lying clearly apart from one another. Both <b>how many</b> clouds there are and <b>where</b> they lie are drawn afresh each time.<br><br>This is the case k-means is built for: the clusters are roughly equal in size, roughly equally dense, and separated by empty space. Count them yourself before you choose k.'},
  dsElong:{i:'ruler',t:'Elongated clusters',p:'Two long, narrow, slanting bands. The eye sees two groups straight away.<br><br>k-means does not, because it only measures <b>distance to a centre point</b>. Two points in the same band can lie further apart than two points in different bands. Switch on the <button class="term" data-t="vor">decision boundaries</button> before you run and you will see why: the boundary is a straight line and cannot follow the slant of the bands.'},
- dsSizes:{i:'scale',t:'Uneven density',p:'One large sparse cloud and two small dense ones.<br><br>The measure being minimised is the sum of the <b>squared</b> distances. In the sparse cloud many points lie far from their centroid, so they weigh heavily. The sum drops the most if the sparse cloud is split in two – even though it really is a single cluster.<br><br>Compare the number of points per cluster once you have run it.'},
- dsNone:{i:'spark',t:'No structure',p:'Evenly scattered points with no groups at all.<br><br>Decide first what you <b>think</b> the algorithm will answer. It cannot answer "there are none": ask for k clusters and you get k clusters. The colours on the screen are therefore no proof that the groups exist.<br><br>Look at the elbow curve afterwards – it falls evenly with no break point, and that is the sign that gives it away.'},
+ dsSizes:{i:'scale',t:'Uneven density',p:'One large sparse cloud and two small dense ones.<br><br>The measure being minimised is the sum of the <b>squared</b> distances. In the sparse cloud many points lie far from their centroid, so they weigh heavily. The sum drops the most if the sparse cloud is split in two, even though it really is a single cluster.<br><br>Compare the number of points per cluster once you have run it.'},
+ dsNone:{i:'spark',t:'No structure',p:'Evenly scattered points with no groups at all.<br><br>Decide first what you <b>think</b> the algorithm will answer. It cannot answer "there are none": ask for k clusters and you get k clusters. The colours on the screen are therefore no proof that the groups exist.<br><br>Look at the elbow curve afterwards. It falls evenly with no break point, and that is the sign that gives it away.'},
  centroid:{i:'grid',t:'Centroid',p:'The centre point of a cluster, calculated as the mean of the points that belong to it. The centroid is the algorithm\'s guess at where the cluster has its middle, and it moves every round until the guess stops changing.<br><br>You can <b>drag</b> a centroid in the plot to see how the decision boundaries follow along.'},
  oover:{i:'eye',t:'Unsupervised learning',p:'Learning from data <b>with no right answers</b>. In supervised learning there is a known correct answer for every example, and the model is trained to reproduce it. Here that answer is missing altogether.<br><br>The model therefore cannot measure how right it is. All it can do is look for structure in the data itself (here: which points lie close to one another) and propose a division based on that. Judging whether the division is meaningful is the human\'s task.'},
  vor:{i:'regions',t:'Decision boundaries',p:'The assignment is decided by <b>where in the plot</b> a point lies. Every location (including the empty areas) belongs to the centroid that is nearest. This divides the plot into regions, and the lines between them are called <b>decision boundaries</b>: they show where the algorithm\'s answer switches from one cluster to another.<br><br>A boundary between two centroids is always a <b>straight line</b>. That is why the regions have straight edges, and why k-means cannot follow curved or slanted shapes.'},
- avst:{i:'chart',t:'WCSS – the sum of squared distances',p:'Measure the distance from every data point to its own centroid, square the distances and add them up. If the sum is <b>small</b>, the points lie tightly around their centre points. If it is <b>large</b>, they are spread out.<br><br>This is the sum k-means works to make as small as possible. It can never increase from one round to the next, and that is why the algorithm always comes to a stop.<br><br>The measure is called <b>WCSS</b>, short for <i>within-cluster sum of squares</i>. Squaring the distances means that one point lying far away weighs more heavily than several that are almost in the right place.'},
+ avst:{i:'chart',t:'WCSS, the sum of squared distances',p:'Measure the distance from every data point to its own centroid, square the distances and add them up. If the sum is <b>small</b>, the points lie tightly around their centre points. If it is <b>large</b>, they are spread out.<br><br>This is the sum k-means works to make as small as possible. It can never increase from one round to the next, and that is why the algorithm always comes to a stop.<br><br>The measure is called <b>WCSS</b>, short for <i>within-cluster sum of squares</i>. Squaring the distances means that one point lying far away weighs more heavily than several that are almost in the right place.'},
  plus:{i:'spark',t:'k-means++',p:'A way of choosing the starting positions for the centroids. The <b>first</b> centroid is drawn at random from among the data points. After that, points lying <b>far from the centroids already placed</b> have a greater chance of being chosen.<br><br>The centroids are spread out across the data in this way, which makes it less common for the algorithm to get stuck in a <button class="term" data-t="lokal">local minimum</button>.'},
- lokal:{i:'pit',t:'Local minimum',p:'A solution that cannot be improved by any small step, but which is still not the best one possible. k-means ends up there if the centroids start out badly placed, and it cannot escape on its own.<br><br>This means the algorithm is <b>non-deterministic</b>: the same data can give different answers on different occasions. In practice k-means is therefore run many times, keeping the run that gave the lowest <button class="term" data-t="avst">WCSS</button>.'},
+ lokal:{i:'pit',t:'Local minimum',p:'A solution that cannot be improved by any small step, but which is still not the best one possible. k-means ends up there if the centroids start out badly placed, and it cannot escape on its own.<br><br>Because the starting positions are drawn at random, the outcome is not predictable. The same data can therefore give different answers on different occasions. In practice k-means is therefore run many times, keeping the run that gave the lowest <button class="term" data-t="avst">WCSS</button>.'},
  armb:{i:'elbow',t:'The elbow method',p:'A way of choosing k. You run the algorithm with several different values of k and plot the WCSS. The curve falls steeply for as long as extra centroids are splitting up real clusters, and it levels off once they only split up clusters that are already coherent. The break point is called the elbow.<br><br>The method gives a suggestion, not a correct answer. If the curve has no clear break point, the data probably has no cluster structure.'},
  norm:{i:'scale',t:'Normalisation',p:'The distance formula takes no account of units. If one feature is measured in hundreds and the other in tens, the first one automatically gains the greatest influence.<br><br><b>Normalisation</b> means rescaling the features to the same scale before the distances are calculated, so that they carry equal weight. In this simulation both features already lie on the scale 0–100.'}
 };
@@ -1323,7 +1322,7 @@ function compareCard(){
       <div>${mini(b)}<div class="cl">WCSS <b>${fmt(b.w)}</b></div></div></div>
     <p style="margin-top:14px">${Math.abs(a.w-b.w)/Math.max(a.w,b.w)>0.02
       ? 'The two runs ended up with <b>different solutions</b>. The worse of them is stuck in a <button class="term" data-t="lokal">local minimum</button>: no small step can improve it, yet it is still not the best one possible.'
-      : 'Here the two runs arrived at roughly the same solution. Open the comparison again — the outcomes do not differ every time, but often enough.'}</p>
+      : 'Here the two runs arrived at roughly the same solution. Open the comparison again. The outcomes do not differ every time, but often enough.'}</p>
     <p style="margin-top:9px">For that reason k-means is normally run several times, keeping the run that gave the lowest WCSS. It is also the reasoning behind <b>k-means++</b>.</p>`;
   showCard();
 }
@@ -1446,7 +1445,7 @@ function pipeUI(){
     if(s5){s5.classList.remove('win');void s5.offsetWidth;s5.classList.add('win');}}
   if(!fin())celebrated=false;
   $('phdot').style.setProperty('--c',PC[act-1]);
-  /* Stegraden speglar samma tillstånd som panelerna. */
+  /* The step row mirrors the same state as the panels. */
   document.querySelectorAll('.kwiz-s').forEach(el=>{
     const n=+el.dataset.w, avail=n<=Math.max(nat,act);
     el.style.setProperty('--c',PC[n-1]);
@@ -1454,7 +1453,7 @@ function pipeUI(){
     el.classList.toggle('done',n<nat||(fin()&&n<5));
     el.classList.toggle('avail',avail&&n!==act);
     el.disabled=!avail;
-    el.setAttribute('aria-selected',n===act?'true':'false');
+    if(n===act)el.setAttribute('aria-current','step');else el.removeAttribute('aria-current');
     el.onclick=avail?()=>focusStep(n):null;
   });
 }
@@ -1477,14 +1476,14 @@ function pipeBodies(){
     : '';
 
   $('p1body').innerHTML=`<div class="pdin">
-    <p>Every point is an object described by two measured values. The data has <b>no answer key</b> – nothing says how many groups there are. All the algorithm has to go on are the distances between the points. That is called <button class="term" data-t="oover">unsupervised learning</button>.</p>
+    <p>Every point is an object described by two measured values. The data has <b>no answer key</b>, so nothing says how many groups there are. All the algorithm has to go on are the distances between the points. That is called <button class="term" data-t="oover">unsupervised learning</button>.</p>
     <span class="slbl">Dataset</span>
     <div class="dsgrid">${Object.entries(DS).map(([id,d])=>`<button class="dscard${id===ds?' on':''}" data-ds="${id}">${DS_MINI[id]||''}<span class="dsname">${d.n}</span><span class="dshelp" data-dsinfo="${id}" role="button" tabindex="0" aria-label="About ${d.n}" title="About ${d.n}">?</span></button>`).join('')}</div>
     ${guessUI}
     ${ds?`<div class="pact"><button class="pbig" style="--c:${PC[0]}" id="goStep2">Choose this dataset →</button></div>`:''}</div>`;
 
   $('p2body').innerHTML=`<div class="pdin">
-    <p>First <b>k</b> is set, that is, how many clusters the data is to be divided into. <b>The algorithm does not work out k by itself – it has to be decided in advance.</b> Then k <button class="term" data-t="centroid">centroids</button> are placed, one centre point per cluster.</p>
+    <p>First <b>k</b> is set, that is, how many clusters the data is to be divided into. <b>The algorithm does not work out k by itself. The value has to be decided in advance.</b> Then k <button class="term" data-t="centroid">centroids</button> are placed, one centre point per cluster.</p>
     <div class="kpick">
       <div class="kpick-hd"><span class="kpick-lb">Number of clusters</span><span class="kpick-now"><span>k =</span>${K}</span></div>
       <div class="chips krow">${[2,3,4,5,6,7,8].map(k=>`<button class="chip${k===K?' on':''}" data-k="${k}"${L?' disabled':''}>${k}</button>`).join('')}</div>
@@ -1497,7 +1496,7 @@ function pipeBodies(){
         <span class="dshelp" data-t="lokal" role="button" tabindex="0" aria-label="About random starting positions" title="About random starting positions">?</span></span></div>
     <div class="note">${seedMode==='pp'
       ? 'The centroids spread out across the data.'
-      : 'The centroids are drawn freely – two may land in the same cluster.'}</div>
+      : 'The centroids are drawn freely, so two may land in the same cluster.'}</div>
     <div class="pact"><button class="pbig" style="--c:${PC[1]}" id="placeBtn"${ds&&!L?'':' disabled'}>${cens.length?'Place again':'Place centroids'}</button></div>
     ${cens.length?`<p style="margin-top:11px">Each centroid now takes over the region that lies closer to it than to any other centroid. Switch on the <button class="term" data-t="vor">decision boundaries</button> with the button at the top left of the plot to see the regions. Then <b>drag</b> a centroid, and the boundaries follow along.</p>
       <div class="pact"><button class="psub" id="cmpBtn"${L?' disabled':''}>Compare two random starting positions</button></div>`:''}</div>`;
@@ -1530,7 +1529,7 @@ function pipeBodies(){
     ? `Here the curve bends <b>only faintly, closest to k = ${eb.k}</b>. There is no sharp break point, so the choice of k is not a given.`
     : `The curve has <b>no clear break point</b>, which means the data probably has no clear cluster structure.`;
   $('p5body').innerHTML=`<div class="pdin">
-    ${fin()?`<p><b>Finished after ${iter} rounds.</b> No point changed cluster – the centroids are standing still.</p>`:''}
+    ${fin()?`<p><b>Finished after ${iter} rounds.</b> No point changed cluster, and the centroids are standing still.</p>`:''}
     <p>There is no correct value for k. The curve below shows how <button class="term" data-t="avst">WCSS</button> falls for every cluster that is added. ${elbTxt}</p>
     <div id="elb"></div>
     <div class="note">Click a point on the curve to see that solution in the plot.${fin()?' The green diamond is your own run.':''} <button class="term" data-t="armb">About the elbow method</button></div>
@@ -1557,10 +1556,10 @@ function pipeBodies(){
    action is always within reach of the plot. */
 function renderCPanel(){
   const el=$('cpanel'); if(!el)return;
-  /* Panelen visas först när eleven gått igenom loopen en gång, alltså
-     tryckt på Tilldela och Flytta i stegpanelen. Då sitter kopplingen
-     mellan steg och handling, och genvägen blir en hjälp i stället för
-     ett sätt att hoppa över resonemanget. */
+  /* The panel appears only once the student has been through the loop once,
+     that is, pressed Assign and Move in the step panel. By then the link between
+     step and action is established, and the shortcut helps rather than becomes a
+     way of skipping the reasoning. */
   if(iter<1&&!running){el.innerHTML='';el.classList.remove('single');return;}
   const st=activeStep();
   let h='';
