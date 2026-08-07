@@ -92,7 +92,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .panel-view{display:none;flex-direction:column;gap:14px;}.panel-view.active{display:flex;}
 .sec-t{font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim2);margin-bottom:5px;}
 
-/* ── Story flow (numbered steps replacing boxed panel sections) ── */
+/* ── Stegvis panelflöde med numrerade steg ── */
 .story-step{display:flex;gap:12px;align-items:flex-start;}
 .story-num{width:22px;height:22px;border-radius:50%;background:var(--accent-dim);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.72em;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
 .story-body{flex:1;min-width:0;}
@@ -100,7 +100,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .story-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border-soft) 15%,var(--border-soft) 85%,transparent);margin:16px 0 16px 34px;}
 .story-hint{font-size:0.7em;color:var(--dim2);margin-top:8px;line-height:1.4;}
 
-/* ── Minimal radio-style model list (no boxes/borders) ── */
+/* ── Modellval i radioknappsform ── */
 .model-radio-list{display:flex;flex-direction:column;gap:12px;}
 .model-radio{display:flex;align-items:center;gap:10px;background:none;border:none;padding:2px 0;cursor:pointer;text-align:left;width:100%;}
 .mr-dot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--dim2);flex-shrink:0;transition:.2s var(--ease-spring);}
@@ -278,7 +278,7 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
   .hd-title-row{flex-wrap:wrap;}
 }
 
-/* ══ Intro-overlay på mobil: samma centrerade layout som på desktop, bara kompaktare så den ryms utan scroll ══ */
+/* ══ Intro-overlay på mobil: kompakt centrerad layout utan scroll ══ */
 @media (max-width:560px){
   .overlay{padding:16px;}
   .overlay-card{width:100%;padding:20px 22px;max-height:88vh;}
@@ -292,7 +292,7 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
   .overlay-tip{margin-top:10px;font-size:.74em;padding:8px 10px;}
   .overlay-btn{padding:11px;margin-top:10px;font-size:.88em;}
 }
-/* Riktigt korta skärmar: krymp illustrationen ytterligare i stället för att dölja den */
+/* Mycket låga skärmar: illustrationen krymps ytterligare. */
 @media (max-width:560px) and (max-height:640px){
   .intro-viz{width:96px;height:44px;margin:0 auto 6px;}
   .db-icon-wrap{width:38px;height:38px;margin:0 auto 6px;}
@@ -436,7 +436,7 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
             <button class="act-btn active" id="actTanh" onclick="setActFn('tanh',event)">tanh</button>
             <button class="act-btn" id="actRelu" onclick="setActFn('relu',event)">ReLU</button>
           </div>
-          <div class="note" id="actNote"><strong>tanh</strong> ger varje neuron ett värde mellan −1 och +1. Träna med båda funktionerna och jämför beslutsgränsen – ser du någon skillnad i formen?</div>
+          <div class="note" id="actNote"><strong>tanh</strong> ger varje neuron ett värde mellan −1 och +1. Träna med båda funktionerna och jämför beslutsgränsen. Ser du någon skillnad i formen?</div>
           <div class="begrepp-row" style="margin-top:8px">
             <span class="g-tag gold" onclick="openConcept('aktivering',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18c4 0 5-12 9-12s5 12 9 12"/></svg>Aktiveringsfunktion</span>
             <span class="g-tag gold" onclick="openConcept('tanhrelu',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 10 17 10 7"/><path d="M13 17c3 0 3-10 8-10"/></svg>tanh vs ReLU</span>
@@ -460,7 +460,7 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
             <div class="viz-cap" id="comboCap"></div>
           </div>
           <div id="vizBoundary">
-            <div class="note">Klicka på <strong>Neuroner</strong> för att titta på en enskild neuron eller klicka ihop egna kombinationer – se hur enkla bitar bygger den färdiga gränsen.</div>
+            <div class="note">Klicka på <strong>Neuroner</strong> för att titta på en enskild neuron eller klicka ihop egna kombinationer. Se hur enkla bitar bygger den färdiga gränsen.</div>
           </div>
           <div class="begrepp-row" style="margin-top:8px">
             <span class="g-tag gold" onclick="openConcept('neuron',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>Neuron</span>
@@ -473,7 +473,7 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
         </div>
         <div class="info-box">
           <strong>Utforska!</strong><br><br>
-          Byt <span class="hl">aktiveringsfunktion</span> och titta noga på beslutsgränsen och på en enskild neuron. Vad händer med formen? Klicka sedan ihop egna kombinationer av neuroner under <strong>Neuroner</strong> – se hur varje val förändrar gränsen.
+          Byt <span class="hl">aktiveringsfunktion</span> och titta noga på beslutsgränsen och på en enskild neuron. Vad händer med formen? Klicka sedan ihop egna kombinationer av neuroner under <strong>Neuroner</strong>. Se hur varje val förändrar gränsen.
         </div>
       </div>
     </div>
@@ -508,10 +508,10 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
     <h2>Visualisering av <span>beslutsgränser</span></h2>
     <p class="sub">En klassificeringsmodell lär sig dra en gräns mellan olika kategorier. Undersök hur den gränsen ser ut och upptäck varför det ofta behövs ett neuralt nätverk.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Börja med det linjära mönstret</strong> – Välj <strong>Linjär modell</strong> och tryck ▶ Träna. Se hur en rak linje separerar de två klasserna!</div></div>
-      <div class="step"><div class="step-num">2</div><div><strong>Testa ett annat mönster</strong> – Byt exempelvis till mönstret <strong>XOR</strong> i högermenyn och träna med samma linjära modell igen. Vad händer?</div></div>
-      <div class="step"><div class="step-num">3</div><div><strong>Lägg till ett dolt lager</strong> – Byt modell till <strong>Neuralt nätverk</strong> och träna om. Se hur gränsen böjer sig och punkterna klassificeras rätt!</div></div>
-      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">4</div><div><strong>Fördjupa dig</strong> – Öppna fliken <strong style="color:var(--adv)">Avancerat</strong> och se hur varje enskild neuron i det dolda lagret delar upp ytan på sitt eget sätt. Det är kombinationen av alla neuroner som skapar den slutliga beslutsgränsen.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Börja med det linjära mönstret.</strong> Välj <strong>Linjär modell</strong> och tryck ▶ Träna. Se hur en rak linje separerar de två klasserna!</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Testa ett annat mönster.</strong> Byt exempelvis till mönstret <strong>XOR</strong> i högermenyn och träna med samma linjära modell igen. Vad händer?</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Lägg till ett dolt lager.</strong> Byt modell till <strong>Neuralt nätverk</strong> och träna om. Se hur gränsen böjer sig och punkterna klassificeras rätt!</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">4</div><div><strong>Fördjupa dig.</strong> Öppna fliken <strong style="color:var(--adv)">Avancerat</strong> och se hur varje enskild neuron i det dolda lagret delar upp ytan på sitt eget sätt. Det är kombinationen av alla neuroner som skapar den slutliga beslutsgränsen.</div></div>
     </div>
     <button class="overlay-btn" onclick="document.getElementById('introOverlay').classList.remove('show')">Starta simuleringen <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
@@ -525,9 +525,9 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
     <h2 style="color:var(--adv);">Avancerat läge</h2>
     <p class="sub">Här kan du analysera modellen ytterligare.</p>
     <div class="steps">
-      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">1</div><div><strong>Titta inuti nätverket</strong> – Klicka på <strong>Neuroner</strong>. Välj en enda för att se hur den delar upp ytan på sitt eget sätt, eller klicka ihop flera för att se hur den färdiga gränsen växer fram ur de bitar du själv väljer.</div></div>
-      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">2</div><div><strong>Aktiveringsfunktion</strong> – Byt mellan <strong>tanh</strong> och <strong>ReLU</strong> och träna om. Titta noga på beslutsgränsens form – vad är det som skiljer?</div></div>
-      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">3</div><div><strong>Ändra arkitektur</strong> – Justera antalet neuroner i det dolda lagret. Här kan du upptäcka att fler neuroner ger en mer flexibel gräns, men också långsammare träning.</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">1</div><div><strong>Titta inuti nätverket.</strong> Klicka på <strong>Neuroner</strong>. Välj en enda för att se hur den delar upp ytan på sitt eget sätt, eller klicka ihop flera för att se hur den färdiga gränsen växer fram ur de bitar du själv väljer.</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">2</div><div><strong>Aktiveringsfunktion.</strong> Byt mellan <strong>tanh</strong> och <strong>ReLU</strong> och träna om. Titta noga på beslutsgränsens form. Vad är det som skiljer?</div></div>
+      <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.14);color:var(--adv);border-color:rgba(167,139,250,0.32);">3</div><div><strong>Ändra arkitektur.</strong> Justera antalet neuroner i det dolda lagret. Här kan du upptäcka att fler neuroner ger en mer flexibel gräns, men också långsammare träning.</div></div>
     </div>
     <button class="overlay-btn" style="background:var(--adv);color:#fff;box-shadow:0 8px 24px rgba(167,139,250,.3);" onclick="document.getElementById('advOverlay').classList.remove('show')">Jag förstår →</button>
   </div>
@@ -812,7 +812,7 @@ function setClass(c){curClass=c;document.getElementById('btnA').classList.toggle
 
 const MODEL_INFO={
   linear:'<strong>Linjär modell</strong> kan bara rita en rak beslutsgräns. Prova mönstren ovan och se vilka den klarar av.',
-  nn1:'<strong>Dolt lager (18 neuroner)</strong> – varje neuron reagerar på en kombination av x och y. Tillsammans böjer de gränsen. Öppna <strong>Avancerat</strong> och prova <strong>Neuroner</strong> för att se hur!'
+  nn1:'<strong>Dolt lager (18 neuroner)</strong>. Varje neuron reagerar på en kombination av x och y. Tillsammans böjer de gränsen. Öppna <strong>Avancerat</strong> och prova <strong>Neuroner</strong> för att se hur!'
 };
 
 function setModel(m){
@@ -867,8 +867,8 @@ function loadPreset(name){
 }
 
 const ACT_NOTE={
-  tanh:'<strong>tanh</strong> ger varje neuron ett värde mellan −1 och +1. Träna och jämför beslutsgränsen med ReLU – ser du någon skillnad i formen?',
-  relu:'<strong>ReLU</strong> släpper igenom positiva värden oförändrade och sätter alla negativa till 0. Träna och jämför med tanh – vad händer med gränsens form?'
+  tanh:'<strong>tanh</strong> ger varje neuron ett värde mellan −1 och +1. Träna och jämför beslutsgränsen med ReLU. Ser du någon skillnad i formen?',
+  relu:'<strong>ReLU</strong> släpper igenom positiva värden oförändrade och sätter alla negativa till 0. Träna och jämför med tanh. Vad händer med gränsens form?'
 };
 function setActFn(fn,ev){actFn=fn;document.getElementById('actTanh').classList.toggle('active',fn==='tanh');document.getElementById('actRelu').classList.toggle('active',fn==='relu');document.getElementById('actNote').innerHTML=ACT_NOTE[fn];initNet();if(fn==='relu'&&!reluExplained&&ev){reluExplained=true;openConcept('relublack',ev);document.getElementById('conceptIcon').classList.add('gold');}}
 
@@ -888,7 +888,7 @@ function ensureComboGrid(){
   if(comboDirty){buildComboGrid();comboDirty=false;}
   else{refreshComboActiveStates();updateComboCaption();}
 }
-function neuronThumbLayerIdx(){const arch=getArch();return arch.length-3;} // 0-indexed hidden layer feeding the output
+function neuronThumbLayerIdx(){const arch=getArch();return arch.length-3;} /* Nollindexerat dolt lager som matar utdatalagret. */
 function renderNeuronThumb(canvas,layerIdx,nIdx){
   const size=canvas.width;const c2=canvas.getContext('2d');
   const id=c2.createImageData(size,size);const d=id.data;
@@ -961,7 +961,7 @@ function updateComboCaption(){
   if(!cap)return;
   if(n===0)cap.innerHTML='Klicka på en eller flera neuroner ovan för att se hur deras beslut <strong>kombineras</strong>.';
   else if(n===1)cap.innerHTML='En ensam neuron ger bara en enkel, nästan rak uppdelning.';
-  else if(n===M)cap.innerHTML='<strong>Alla '+M+' neuroner</strong> kombinerade – identisk med den färdiga beslutsgränsen.';
+  else if(n===M)cap.innerHTML='<strong>Alla '+M+' neuroner</strong> kombinerade ger samma gräns som den färdiga beslutsgränsen.';
   else cap.innerHTML=n+' av '+M+' neuroner kombinerade. Prova olika kombinationer och se hur formen ändras.';
 }
 
@@ -1020,7 +1020,7 @@ const CONCEPTS={
   beslutsgrans:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 17c5-9 13-11 18-9"/></svg>',
     title:'Beslutsgräns',
-    def:'En <strong>beslutsgräns</strong> är den linje – eller kurva – som en modell drar för att skilja klasserna åt. På ena sidan gissar modellen <span class="ca"></span> Klass A, på andra sidan <span class="cb"></span> Klass B. Färgen på bakgrunden visar hur <em>säker</em> modellen är: ju starkare färg, desto säkrare.',
+    def:'En <strong>beslutsgräns</strong> är den linje, eller kurva, som en modell drar för att skilja klasserna åt. På ena sidan gissar modellen <span class="ca"></span> Klass A, på andra sidan <span class="cb"></span> Klass B. Färgen på bakgrunden visar hur <em>säker</em> modellen är: ju starkare färg, desto säkrare.',
     illus:'<svg viewBox="0 0 140 80"><defs><linearGradient id="cbg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="rgba(255,106,94,.28)"/><stop offset=".5" stop-color="rgba(255,106,94,.05)"/><stop offset=".5" stop-color="rgba(77,128,255,.05)"/><stop offset="1" stop-color="rgba(77,128,255,.28)"/></linearGradient></defs><rect x="6" y="8" width="128" height="64" rx="6" fill="url(#cbg)"/><line x1="70" y1="10" x2="70" y2="70" stroke="#e8ecf8" stroke-width="2" stroke-dasharray="4 3"/><circle cx="30" cy="30" r="4" fill="#ff6a5e"/><circle cx="45" cy="52" r="4" fill="#ff6a5e"/><circle cx="24" cy="55" r="4" fill="#ff6a5e"/><circle cx="104" cy="26" r="4" fill="#4d80ff"/><circle cx="115" cy="50" r="4" fill="#4d80ff"/><circle cx="95" cy="55" r="4" fill="#4d80ff"/></svg>'
   },
   klassificering:{
@@ -1032,31 +1032,31 @@ const CONCEPTS={
   linjar:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20 20 4"/></svg>',
     title:'Linjär modell',
-    def:'En <strong>linjär modell</strong> kan bara dra en <em>rak</em> beslutsgräns – en enda linje rakt genom planet. Det räcker för många mönster, men inte alla: se till exempel <strong>XOR</strong>, det klassiska exemplet där en rak linje aldrig räcker till. Då behövs ett neuralt nätverk som kan böja gränsen.',
+    def:'En <strong>linjär modell</strong> kan bara dra en <em>rak</em> beslutsgräns, alltså en enda linje rakt genom planet. Det räcker för många mönster, men inte alla: se till exempel <strong>XOR</strong>, det klassiska exemplet där en rak linje aldrig räcker till. Då behövs ett neuralt nätverk som kan böja gränsen.',
     illus:'<svg viewBox="0 0 140 80"><rect x="6" y="8" width="128" height="64" rx="6" fill="rgba(255,255,255,.02)"/><line x1="18" y1="66" x2="122" y2="16" stroke="#7aa2ff" stroke-width="2.5" stroke-linecap="round"/><circle cx="34" cy="30" r="4" fill="#ff6a5e"/><circle cx="28" cy="48" r="4" fill="#ff6a5e"/><circle cx="50" cy="26" r="4" fill="#ff6a5e"/><circle cx="96" cy="52" r="4" fill="#4d80ff"/><circle cx="110" cy="40" r="4" fill="#4d80ff"/><circle cx="88" cy="58" r="4" fill="#4d80ff"/></svg>'
   },
   nn:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><circle cx="19" cy="12" r="2"/><path d="M6.7 11 10.3 7M6.7 13l3.6 4M13.7 7 17.3 11M13.7 17l3.6-4"/></svg>',
     title:'Neuralt nätverk',
-    def:'Ett <strong>neuralt nätverk</strong> består av små beräkningsenheter – <em>neuroner</em> – ordnade i lager. Varje neuron drar sin egen enkla linje, och genom att <strong>kombinera</strong> många av dem kan nätverket forma böjda och sammansatta beslutsgränser som en linjär modell aldrig klarar.',
+    def:'Ett <strong>neuralt nätverk</strong> består av små beräkningsenheter, <em>neuroner</em>, ordnade i lager. Varje neuron drar sin egen enkla linje, och genom att <strong>kombinera</strong> många av dem kan nätverket forma böjda och sammansatta beslutsgränser som en linjär modell aldrig klarar.',
     illus:'<svg viewBox="0 0 140 80"><g stroke="rgba(255,255,255,.14)" stroke-width="1"><line x1="20" y1="24" x2="70" y2="16"/><line x1="20" y1="24" x2="70" y2="40"/><line x1="20" y1="24" x2="70" y2="64"/><line x1="20" y1="56" x2="70" y2="16"/><line x1="20" y1="56" x2="70" y2="40"/><line x1="20" y1="56" x2="70" y2="64"/><line x1="70" y1="16" x2="120" y2="40"/><line x1="70" y1="40" x2="120" y2="40"/><line x1="70" y1="64" x2="120" y2="40"/></g><circle cx="20" cy="24" r="5" fill="#7aa2ff"/><circle cx="20" cy="56" r="5" fill="#7aa2ff"/><circle cx="70" cy="16" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="70" cy="40" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="70" cy="64" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="120" cy="40" r="5" fill="#ffd866"/></svg>'
   },
   dolt:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="2" width="4" height="20" rx="1"/><rect x="17" y="6" width="4" height="12" rx="1"/></svg>',
     title:'Dolt lager',
-    def:'Ett <strong>dolt lager</strong> ligger mellan indata (x, y) och det slutliga svaret. Det är här mönstren hittas: varje neuron i lagret delar upp planet på sitt eget sätt. I det här verktyget kan du justera <em>hur många neuroner</em> lagret har (Avancerat → Arkitektur) – fler ger mer flexibla gränser, men också långsammare träning och risk att modellen överanpassar. Större nätverk staplar ofta flera sådana lager på varandra för ännu mer kapacitet.',
+    def:'Ett <strong>dolt lager</strong> ligger mellan indata (x, y) och det slutliga svaret. Det är här mönstren hittas: varje neuron i lagret delar upp planet på sitt eget sätt. I det här verktyget kan du justera <em>hur många neuroner</em> lagret har (Avancerat → Arkitektur). Fler neuroner ger mer flexibla gränser, men också långsammare träning och risk att modellen överanpassar. Större nätverk staplar ofta flera sådana lager på varandra för ännu mer kapacitet.',
     illus:'<svg viewBox="0 0 140 80"><text x="20" y="14" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#7e8aaa">in</text><text x="70" y="14" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#34c759">dolt</text><text x="120" y="14" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#ffd866">ut</text><g stroke="rgba(255,255,255,.13)" stroke-width="1"><line x1="20" y1="34" x2="70" y2="26"/><line x1="20" y1="34" x2="70" y2="46"/><line x1="20" y1="34" x2="70" y2="64"/><line x1="20" y1="58" x2="70" y2="26"/><line x1="20" y1="58" x2="70" y2="46"/><line x1="20" y1="58" x2="70" y2="64"/><line x1="70" y1="26" x2="120" y2="45"/><line x1="70" y1="46" x2="120" y2="45"/><line x1="70" y1="64" x2="120" y2="45"/></g><circle cx="20" cy="34" r="4.5" fill="#7aa2ff"/><circle cx="20" cy="58" r="4.5" fill="#7aa2ff"/><circle cx="70" cy="26" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="70" cy="46" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="70" cy="64" r="5" fill="rgba(52,199,89,.3)" stroke="#34c759" stroke-width="1.5"/><circle cx="120" cy="45" r="5" fill="#ffd866"/></svg>'
   },
   xor:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" stroke-linecap="round"/></svg>',
     title:'XOR-mönstret',
-    def:'<strong>XOR</strong> ("exklusivt eller") är det klassiska mönstret där klasserna ligger i <em>diagonala</em> hörn: <span class="ca"></span> nere-till-vänster och uppe-till-höger, <span class="cb"></span> i de andra två. Hur du än vrider en rak linje hamnar alltid två punkter av samma klass på fel sida – det är därför XOR blev det historiska beviset på att man behöver ett neuralt nätverk med ett dolt lager.',
+    def:'<strong>XOR</strong> ("exklusivt eller") är det klassiska mönstret där klasserna ligger i <em>diagonala</em> hörn: <span class="ca"></span> nere-till-vänster och uppe-till-höger, <span class="cb"></span> i de andra två. Hur du än vrider en rak linje hamnar alltid två punkter av samma klass på fel sida. Det är därför XOR blev det historiska beviset på att man behöver ett neuralt nätverk med ett dolt lager.',
     illus:'<svg viewBox="0 0 140 80"><rect x="6" y="8" width="128" height="64" rx="6" fill="rgba(255,255,255,.02)"/><line x1="70" y1="10" x2="70" y2="70" stroke="rgba(255,255,255,.1)" stroke-width="1"/><line x1="8" y1="40" x2="132" y2="40" stroke="rgba(255,255,255,.1)" stroke-width="1"/><circle cx="34" cy="56" r="5" fill="#ff6a5e"/><circle cx="106" cy="24" r="5" fill="#ff6a5e"/><circle cx="34" cy="24" r="5" fill="#4d80ff"/><circle cx="106" cy="56" r="5" fill="#4d80ff"/></svg>'
   },
   monster:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>',
     title:'Färdiga mönster',
-    def:'De fyra knapparna laddar olika testdata som ställer olika krav på modellen: <strong>Linjärt</strong> går att skilja med en rak linje. <strong>XOR</strong> kräver en böjd gräns. <strong>Cirkel</strong> har en klass innesluten av den andra. <strong>Spiral</strong> är svårast – här hjälper det att öka antalet neuroner i det dolda lagret (Avancerat → Arkitektur) för en renare gräns. Prova samma mönster med olika modeller och jämför!',
+    def:'De fyra knapparna laddar olika testdata som ställer olika krav på modellen: <strong>Linjärt</strong> går att skilja med en rak linje. <strong>XOR</strong> kräver en böjd gräns. <strong>Cirkel</strong> har en klass innesluten av den andra. <strong>Spiral</strong> är svårast. Här hjälper det att öka antalet neuroner i det dolda lagret (Avancerat → Arkitektur) för en renare gräns. Prova samma mönster med olika modeller och jämför!',
     illus:'<svg viewBox="0 0 140 80"><g transform="translate(8,12)"><line x1="4" y1="44" x2="44" y2="8" stroke="#7aa2ff" stroke-width="2"/><circle cx="12" cy="20" r="3" fill="#ff6a5e"/><circle cx="36" cy="34" r="3" fill="#4d80ff"/></g><g transform="translate(50,12)"><circle cx="10" cy="34" r="3" fill="#ff6a5e"/><circle cx="38" cy="8" r="3" fill="#ff6a5e"/><circle cx="10" cy="8" r="3" fill="#4d80ff"/><circle cx="38" cy="34" r="3" fill="#4d80ff"/></g><g transform="translate(92,12)"><circle cx="24" cy="22" r="16" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1"/><circle cx="24" cy="22" r="3.5" fill="#ff6a5e"/><circle cx="24" cy="4" r="3" fill="#4d80ff"/><circle cx="40" cy="30" r="3" fill="#4d80ff"/></g></svg>'
   },
   aktivering:{
@@ -1068,25 +1068,25 @@ const CONCEPTS={
   tanhrelu:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 10 17 10 7"/><path d="M13 17c3 0 3-10 8-10"/></svg>',
     title:'tanh vs ReLU',
-    def:'<strong style="color:var(--adv)">tanh</strong> ger mjuka värden mellan −1 och +1 och kan vara både negativ och positiv. <strong style="color:var(--adv)">ReLU</strong> sätter alla negativa värden till 0 och släpper igenom positiva oförändrade – en neuron är alltså antingen "av" eller "på". Funktionens form påverkar beslutsgränsen. Titta på en enskild neuron under <strong>Neuroner</strong> med respektive funktion och upptäck skillnaden själv!',
+    def:'<strong style="color:var(--adv)">tanh</strong> ger mjuka värden mellan −1 och +1 och kan vara både negativ och positiv. <strong style="color:var(--adv)">ReLU</strong> sätter alla negativa värden till 0 och släpper igenom positiva oförändrade. En neuron är alltså antingen "av" eller "på". Funktionens form påverkar beslutsgränsen. Titta på en enskild neuron under <strong>Neuroner</strong> med respektive funktion och upptäck skillnaden själv!',
     illus:'<svg viewBox="0 0 140 80"><g transform="translate(0,4)"><text x="35" y="12" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#a78bfa">tanh</text><path d="M8 58 C28 58 28 22 48 22 C60 22 60 22 62 22" fill="none" stroke="#7aa2ff" stroke-width="2.5" stroke-linecap="round"/><line x1="8" y1="40" x2="62" y2="40" stroke="rgba(255,255,255,.12)" stroke-width="1"/></g><g transform="translate(74,4)"><text x="35" y="12" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#a78bfa">ReLU</text><path d="M8 58 L34 58 L58 22" fill="none" stroke="#34c759" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="8" y1="58" x2="62" y2="58" stroke="rgba(255,255,255,.12)" stroke-width="1"/></g></svg>'
   },
   neuron:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>',
     title:'Neuron',
-    def:'En <strong>neuron</strong> tar emot indata (x och y), multiplicerar med sina <em>vikter</em>, summerar och kör resultatet genom aktiveringsfunktionen. Var för sig delar varje neuron bara planet i två med en enkel gräns. En neuron klassificerar alltså inte själv – det är först när alla neuroners signaler <strong>kombineras</strong> i utdatalagret som den slutliga beslutsgränsen uppstår.',
+    def:'En <strong>neuron</strong> tar emot indata (x och y), multiplicerar med sina <em>vikter</em>, summerar och kör resultatet genom aktiveringsfunktionen. Var för sig delar varje neuron bara planet i två med en enkel gräns. En neuron klassificerar alltså inte själv. Den slutliga beslutsgränsen uppstår först när alla neuroners signaler <strong>kombineras</strong> i utdatalagret.',
     illus:'<svg viewBox="0 0 140 80"><g stroke="rgba(122,162,255,.5)" stroke-width="1.5"><line x1="16" y1="24" x2="60" y2="40"/><line x1="16" y1="56" x2="60" y2="40"/><line x1="82" y1="40" x2="120" y2="40"/></g><circle cx="16" cy="24" r="4" fill="#7aa2ff"/><circle cx="16" cy="56" r="4" fill="#7aa2ff"/><text x="8" y="27" font-family="JetBrains Mono" font-size="9" fill="#7e8aaa">x</text><text x="8" y="59" font-family="JetBrains Mono" font-size="9" fill="#7e8aaa">y</text><circle cx="71" cy="40" r="12" fill="rgba(77,128,255,.25)" stroke="#7aa2ff" stroke-width="2"/><circle cx="120" cy="40" r="4" fill="#ffd866"/></svg>'
   },
   kombination:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h6M4 12h6M4 17h6"/><path d="M14 12h6M17 9l3 3-3 3"/></svg>',
     title:'Kombination',
-    def:'Var för sig ritar varje neuron bara en enkel, nästan rak linje. Men i <strong>utdatalagret</strong> vägs alla neuroners signaler samman – och summan av många enkla bitar bildar en böjd, sammansatt beslutsgräns. Det är detta <strong>Neuroner</strong>-läget visar: klicka för att välja vilka som ska bidra, och se hur just den kombinationen formar gränsen.',
+    def:'Var för sig ritar varje neuron bara en enkel, nästan rak linje. Men i <strong>utdatalagret</strong> vägs alla neuroners signaler samman, och summan av många enkla bitar bildar en böjd, sammansatt beslutsgräns. Det är detta <strong>Neuroner</strong>-läget visar: klicka för att välja vilka som ska bidra, och se hur just den kombinationen formar gränsen.',
     illus:'<svg viewBox="0 0 140 80"><g transform="translate(6,6)"><line x1="4" y1="50" x2="34" y2="18" stroke="rgba(122,162,255,.4)" stroke-width="2"/><line x1="4" y1="30" x2="34" y2="46" stroke="rgba(122,162,255,.4)" stroke-width="2"/><text x="19" y="66" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#7e8aaa">enkla bitar</text></g><path d="M62 40h16M74 36l4 4-4 4" stroke="#ffd866" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(90,6)"><path d="M4 50 C10 20 34 54 40 16" fill="none" stroke="#4d80ff" stroke-width="2.5" stroke-linecap="round"/><text x="22" y="66" text-anchor="middle" font-family="DM Sans" font-size="8" fill="#7e8aaa">gräns</text></g></svg>'
   },
   relublack:{
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h8l10-12"/></svg>',
     title:'Bara blått, aldrig rött',
-    def:'Om du tittar på de enskilda neuronerna ser du bara en gradient från nästan svart (inaktiv, nära noll) till blått (starkt aktiverad) – aldrig rött. Det beror på att <strong>ReLU</strong> nollställer alla negativa värden, så en neurons aktivering kan aldrig bli negativ. Byt till <strong>tanh</strong>, som kan gå både positivt och negativt, så dyker de röda nyanserna upp igen.',
+    def:'En enskild neurons färg går från nästan svart (inaktiv, nära noll) till blått (starkt aktiverad), aldrig till rött. Det beror på att <strong>ReLU</strong> nollställer alla negativa värden, så en neurons aktivering kan aldrig bli negativ. Byt till <strong>tanh</strong>, som kan gå både positivt och negativt, så dyker de röda nyanserna upp igen.',
     illus:'<svg viewBox="0 0 140 80"><defs><linearGradient id="reluGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#141e32"/><stop offset="1" stop-color="#4d80ff"/></linearGradient><linearGradient id="tanhGrad2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff6a5e"/><stop offset="0.5" stop-color="#141e32"/><stop offset="1" stop-color="#4d80ff"/></linearGradient></defs><text x="35" y="14" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#a78bfa">ReLU</text><rect x="8" y="20" width="54" height="14" rx="4" fill="url(#reluGrad)"/><text x="10" y="42" font-family="JetBrains Mono" font-size="7" fill="#7e8aaa">0</text><text x="44" y="42" font-family="JetBrains Mono" font-size="7" fill="#7e8aaa">max</text><text x="105" y="14" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#a78bfa">tanh</text><rect x="78" y="20" width="54" height="14" rx="4" fill="url(#tanhGrad2)"/><text x="80" y="42" font-family="JetBrains Mono" font-size="7" fill="#7e8aaa">−1</text><text x="118" y="42" font-family="JetBrains Mono" font-size="7" fill="#7e8aaa">+1</text><text x="70" y="64" text-anchor="middle" font-family="DM Sans" font-size="7.5" fill="#7e8aaa">Bara ReLU saknar den röda (negativa) halvan</text></svg>'
   }
 };
