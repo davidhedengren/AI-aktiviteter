@@ -131,8 +131,7 @@
   @keyframes synBlink{0%,90%,100%{opacity:0;transform:scale(1);}93%{opacity:.85;transform:scale(1.9);}96%{opacity:0;transform:scale(2.6);}}
   @keyframes fpIdle{0%{offset-distance:0%;opacity:0;}.5%{opacity:.75;}2.6%{opacity:.75;}3%{offset-distance:100%;opacity:0;}100%{offset-distance:100%;opacity:0;}}
   @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    /* The tagline arrives shortly after the logo animation begins, so that the motion
-     owns the first moment without the page feeling empty. */
+    /* The tagline fades in shortly after the logo animation in the header. */
   .hero p{animation:fadeUp .5s var(--ease-out) .45s both;font-size:21px;color:var(--text-secondary);max-width:900px;margin:0 auto;line-height:1.6;text-wrap:balance;}
   .hero p strong{background:linear-gradient(100deg,var(--accent-cyan),var(--accent-violet));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:600;}
 
@@ -170,10 +169,9 @@
   .card:hover .card-icon-wrap{transform:scale(1.1) rotate(-6deg);}
   .card[data-accent="cyan"] .card-icon-wrap{background:var(--accent-cyan-bg);color:var(--accent-cyan);}.card[data-accent="violet"] .card-icon-wrap{background:var(--accent-violet-bg);color:var(--accent-violet);}.card[data-accent="rose"] .card-icon-wrap{background:var(--accent-rose-bg);color:var(--accent-rose);}.card[data-accent="amber"] .card-icon-wrap{background:var(--accent-amber-bg);color:var(--accent-amber);}.card[data-accent="emerald"] .card-icon-wrap{background:var(--accent-emerald-bg);color:var(--accent-emerald);}.card[data-accent="blue"] .card-icon-wrap{background:var(--accent-blue-bg);color:var(--accent-blue);}
   .card-icon-wrap svg{width:26px;height:26px;overflow:visible;}
-    /* The page reference carries the accent colour of the card, so it can be found at a glance. */
+    /* The page reference carries the accent colour of the card. */
   .card[data-accent="blue"] .card-tag .tag-pages{background:var(--accent-blue-bg);color:var(--accent-blue);}.card[data-accent="violet"] .card-tag .tag-pages{background:var(--accent-violet-bg);color:var(--accent-violet);}.card[data-accent="cyan"] .card-tag .tag-pages{background:var(--accent-cyan-bg);color:var(--accent-cyan);}.card[data-accent="rose"] .card-tag .tag-pages{background:var(--accent-rose-bg);color:var(--accent-rose);}.card[data-accent="amber"] .card-tag .tag-pages{background:var(--accent-amber-bg);color:var(--accent-amber);}.card[data-accent="emerald"] .card-tag .tag-pages{background:var(--accent-emerald-bg);color:var(--accent-emerald);}
-  /* The accent colour is faintly present in the border at rest. Otherwise the cards
-     differ only on hover, which never happens on a touch screen. */
+  /* The card border carries a faint tint of the accent colour at rest as well. */
   .card[data-accent="blue"]{border-color:rgba(96,165,250,.16);}.card[data-accent="violet"]{border-color:rgba(167,139,250,.16);}.card[data-accent="cyan"]{border-color:rgba(34,211,238,.16);}.card[data-accent="rose"]{border-color:rgba(251,113,133,.16);}.card[data-accent="amber"]{border-color:rgba(251,191,36,.16);}.card[data-accent="emerald"]{border-color:rgba(52,211,153,.16);}
   .card[data-accent="cyan"]:hover{border-color:rgba(34,211,238,.35);}.card[data-accent="violet"]:hover{border-color:rgba(167,139,250,.35);}.card[data-accent="rose"]:hover{border-color:rgba(251,113,133,.35);}.card[data-accent="amber"]:hover{border-color:rgba(251,191,36,.35);}.card[data-accent="emerald"]:hover{border-color:rgba(52,211,153,.35);}.card[data-accent="blue"]:hover{border-color:rgba(96,165,250,.35);}
   .card[data-accent="cyan"]:hover .card-icon-wrap{box-shadow:0 0 24px rgba(34,211,238,.28);}.card[data-accent="violet"]:hover .card-icon-wrap{box-shadow:0 0 24px rgba(167,139,250,.28);}.card[data-accent="rose"]:hover .card-icon-wrap{box-shadow:0 0 24px rgba(251,113,133,.28);}.card[data-accent="amber"]:hover .card-icon-wrap{box-shadow:0 0 24px rgba(251,191,36,.28);}.card[data-accent="emerald"]:hover .card-icon-wrap{box-shadow:0 0 24px rgba(52,211,153,.28);}.card[data-accent="blue"]:hover .card-icon-wrap{box-shadow:0 0 24px rgba(96,165,250,.28);}
