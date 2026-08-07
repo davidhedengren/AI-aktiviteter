@@ -4,23 +4,23 @@
    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0a0e1a">
-<meta name="description" content="Bygg en egen liten språkmodell av valfri text och se hur den väljer nästa ord - ord för ord.">
+<meta name="description" content="Bygg en egen liten språkmodell av valfri text och se hur den väljer nästa ord, ord för ord.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI-aktiviteter">
 <meta property="og:locale" content="sv_SE">
 <meta property="og:url" content="https://www.ai-aktiviteter.se/sprakmodellen">
 <meta property="og:title" content="Språkmodell‑labbet – ai-aktiviteter.se">
-<meta property="og:description" content="Bygg en egen liten språkmodell av valfri text och se hur den väljer nästa ord - ord för ord.">
+<meta property="og:description" content="Bygg en egen liten språkmodell av valfri text och se hur den väljer nästa ord, ord för ord.">
 <meta property="og:image" content="https://www.ai-aktiviteter.se/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Språkmodell‑labbet – ai-aktiviteter.se">
-<meta name="twitter:description" content="Bygg en egen liten språkmodell av valfri text och se hur den väljer nästa ord - ord för ord.">
+<meta name="twitter:description" content="Bygg en egen liten språkmodell av valfri text och se hur den väljer nästa ord, ord för ord.">
 <meta name="twitter:image" content="https://www.ai-aktiviteter.se/og-image.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Bygg en egen liten språkmodell av valfri svensk text och se exakt hur den väljer nästa ord – samma grundprincip som ChatGPT.">
+<meta name="description" content="Bygg en egen liten språkmodell av valfri svensk text och se exakt hur den väljer nästa ord. Det är samma grundprincip som i ChatGPT.">
 <title>Språkmodell-labbet – ai-aktiviteter.se</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
@@ -100,7 +100,7 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 .ctx-hl{color:var(--orange);font-weight:700;}
 .gpt-hl{color:var(--accent2);font-weight:700;}
 
-/* Collapsible (samma mönster som NIM) */
+/* Hopfällbar panel */
 .coll{border:1px solid var(--border);border-radius:12px;overflow:hidden;}
 .coll-toggle{width:100%;padding:14px 16px;background:var(--surface2);border:none;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:700;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px;}
 .coll-toggle:hover{color:var(--text);}
@@ -130,7 +130,7 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 .narr strong{color:var(--text);}
 .narr .rare{color:var(--orange);font-weight:700;}
 
-/* Färglegend – gör de semantiska färgerna självförklarande */
+/* Färglegend som förklarar de semantiska färgerna */
 .legend{display:flex;flex-wrap:wrap;gap:12px;font-size:0.7em;color:var(--dim);padding:2px 2px 0;}
 .legend span{display:inline-flex;align-items:center;gap:5px;}
 .legend i{width:11px;height:11px;border-radius:3px;display:inline-block;}
@@ -197,7 +197,7 @@ input[type=range]:disabled{opacity:0.3;}
 .prow.picked .pfill{background:linear-gradient(90deg,var(--green),#5fe0a0);box-shadow:0 0 12px rgba(52,199,89,0.5);}
 @keyframes pickPulse{0%{transform:scale(1.03);}100%{transform:scale(1);}}
 
-/* Modellens minne = labbets signatur: ge panelen en egen, lugn inramning */
+/* Panelen Modellens minne har en egen, lugn inramning. */
 .side .coll.sticky{border:1px solid rgba(77,128,255,0.32);border-radius:14px;overflow:hidden;box-shadow:0 6px 30px rgba(0,0,0,0.30);}
 .side .coll.sticky > .coll-toggle{color:var(--text);font-size:0.92em;background:rgba(77,128,255,0.10);}
 .side .coll.sticky > .coll-toggle .term{border-bottom-color:transparent;}
@@ -215,7 +215,7 @@ input[type=range]:disabled{opacity:0.3;}
 .ptable-msg strong{color:var(--text);}
 .click-hint{font-size:0.7em;color:var(--dim);text-align:center;}
 
-/* Intro-overlay (samma mönster som övriga sidor) */
+/* Introruta */
 .overlay{position:fixed;inset:0;padding:20px;background:rgba(6,7,14,0.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
 .overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 28px 24px;max-width:540px;width:100%;text-align:center;max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
@@ -238,7 +238,7 @@ input[type=range]:disabled{opacity:0.3;}
 .intro-viz .iv-next text{fill:#e8ecf8;}
 @keyframes ivPulse{0%,100%{opacity:.5;}50%{opacity:1;}}
 
-/* ═══ Remake: stegbaserad layout ═══ */
+/* ═══ Stegbaserad layout ═══ */
 .wrap{max-width:1180px;margin:0 auto;width:100%;padding:28px 16px 44px;display:flex;flex-direction:column;gap:32px;flex:1;position:relative;z-index:1;}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:22px 24px;box-shadow:0 6px 22px rgba(0,0,0,0.32);}
 .card-h{display:flex;align-items:center;gap:9px;font-family:'DM Sans',sans-serif;font-size:1.02em;font-weight:700;margin-bottom:20px;letter-spacing:-0.01em;}
@@ -311,7 +311,7 @@ input[type=range]:disabled{opacity:0.3;}
   .hd{padding:22px 16px 18px;}
 }
 
-/* Stegnavigering – guidad trappa genom labbet (glaskänsla, egen accent per steg) */
+/* Stegnavigering genom labbet, med egen accentfärg per steg */
 .sh{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.3);}
 .sh-tiles{display:flex;gap:7px;padding:10px 12px 7px;}
 .sh-tile{
@@ -433,7 +433,7 @@ input[type=range]:disabled{opacity:0.3;}
 .ds-card .ds-check{position:absolute;top:7px;right:8px;width:15px;height:15px;border-radius:50%;background:var(--accent);color:#fff;font-size:0.72em;font-weight:700;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0.6);transition:0.18s;}
 .ds-card.selected .ds-check{opacity:1;transform:scale(1);}
 
-/* Val-mekanism-korten (girig / viktad slump) – samma mönster som träningsdata-korten, men guldaktiga som resten av steg 3 */
+/* Korten för valmetod, girigt val och viktad slump, i steg 3:ans guldton */
 .mode-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .mode-card{position:relative;display:flex;flex-direction:column;gap:2px;text-align:left;font-family:inherit;padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:var(--surface2);cursor:pointer;transition:transform 0.15s,border-color 0.15s,background 0.15s;user-select:none;}
 .mode-card:hover{border-color:var(--gold);transform:translateY(-2px);}
@@ -454,7 +454,7 @@ input[type=range]:disabled{opacity:0.3;}
 .cert-note{font-size:0.7em;color:var(--dim);line-height:1.45;margin-top:5px;}
 .cert-note strong{color:var(--text);}
 
-/* ── Träna-knapp: samma "levande" mönster som bias-labbet ── */
+/* ── Träna-knapp med rörelse som markerar att den väntar på ett tryck ── */
 .train-cta{position:relative;overflow:hidden;width:100%;padding:17px 20px;border-radius:14px;border:none;
   background:linear-gradient(135deg,var(--green),#28b567);color:#04140a;font-family:'DM Sans',sans-serif;font-weight:800;font-size:1.02em;
   cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
@@ -483,7 +483,7 @@ input[type=range]:disabled{opacity:0.3;}
 .train-progress-rail{width:100%;max-width:420px;height:5px;border-radius:999px;background:var(--surface2);overflow:hidden;}
 .train-progress-rail i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .2s var(--ease-out);}
 
-/* ═══ Glaskort (concept cards) – samma komponent som övriga labb ═══ */
+/* ═══ Glaskort för begrepp ═══ */
 .launch-grid{display:flex;flex-direction:column;gap:10px;}
 /* Längst ner på sidan finns full bredd: lägg korten sida vid sida i stället
    för staplade, annars blir de onödigt breda och tomma i mitten. */
@@ -559,7 +559,7 @@ input[type=range]:disabled{opacity:0.3;}
 .fb-h{font-weight:700;font-size:.92em;color:var(--text);margin-bottom:3px;}
 .fb-sub{font-size:.76em;color:var(--dim);line-height:1.5;margin-bottom:11px;}
 
-/* Kontextlängd som segmenterad kontroll – ett tydligt, direkt val */
+/* Kontextlängd som segmenterad kontroll */
 .kseg{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
 .kseg-b{display:flex;flex-direction:column;align-items:center;gap:1px;padding:11px 4px 9px;border:1px solid var(--border);border-radius:10px;background:var(--surface2);color:var(--dim);cursor:pointer;font-family:inherit;transition:.18s;}
 .kseg-b b{font-family:'JetBrains Mono',monospace;font-size:1.25em;font-weight:700;line-height:1;}
@@ -908,7 +908,7 @@ async function hamtaWiki(onProgress){
       try {
         const c = await caches.open(WIKI_CACHE);
         svar = await c.match(WIKI_FIL);
-      } catch(e){ /* privat läge e.d. – strunt samma */ }
+      } catch(e){ /* Lagringen kan vara blockerad, till exempel i privat läge. */ }
     }
     if(!svar){
       const nat = await fetch(WIKI_FIL);
@@ -1062,7 +1062,7 @@ async function buildModels(onProgress){
 //  sidan förblir lätt för alla andra.
 // ════════════════════════════════════════════════════════════
 const MAX_CHARS = 4000000;     // teckentak för uppladdad/inklistrad text (~700 000 tokens)
-const MAX_TOKENS = 1000000;    // tokentak vid träning – webbläsaren klarar mycket mer än förr
+const MAX_TOKENS = 1000000;    /* tokentak vid träning */
 
 function setFileStatus(msg){
   const el = document.getElementById('fileStatus');
@@ -1151,8 +1151,8 @@ async function handleFiles(fileList){
 
 function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
 
-// "Wow"-sekvens: eleven ser modellen byggas – riktiga ord ur texten strömmar
-// in i tabellen, inline i sidan (samma mönster som bias-labbets träningsakt)
+// Byggsekvens: eleven ser modellen byggas. Riktiga ord ur texten strömmar
+// in i tabellen, inline i sidan.
 let training = false;
 let trainAnimRunning = false;
 async function trainAnimated(){
@@ -1240,7 +1240,7 @@ function runTrainStatusList(duration){
 }
 
 // Riktiga ord ur den faktiska träningstexten strömmar in i en liten
-// tabellgrafik – inte en påhittad animation, utan samma data som byggs.
+// tabellgrafik. Det är samma data som byggs, inte en påhittad animation.
 function runTrainingCanvas(duration, onDone){
   const canvas = document.getElementById('trainCanvas');
   const wrap = canvas.parentElement;
@@ -1334,7 +1334,7 @@ function runTrainingCanvas(duration, onDone){
   }
   trainAnimRunning = true;
   requestAnimationFrame(draw);
-  setTimeout(finish, duration + 900);   // skyddsnät – låt aldrig bygget hänga
+  setTimeout(finish, duration + 900);   /* Skyddsnät så att bygget aldrig blir hängande. */
 }
 
 async function buildFromTextarea(onProgress){
@@ -1412,7 +1412,7 @@ const selectedDatasets = new Set();
 let unlockedDatasets = null;
 
 // Lås allt utom de angivna nycklarna. Poängen är att hålla nere bruset:
-// i de tre första stegen ska eleven undersöka EN sak i taget, inte välja text.
+/* I de tre första stegen undersöker eleven en sak i taget och väljer inte text. */
 function lockDatasets(allowed){
   unlockedDatasets = allowed ? [...allowed] : null;
   document.querySelectorAll('#dsList .ds-card').forEach(c => {
@@ -1470,7 +1470,7 @@ function setDatasets(keys){
   rebuildTrainText();
 }
 
-// Bygg träningstexten = alla ikryssade dataset hopslagna
+/* Träningstexten består av alla ikryssade dataset hopslagna. */
 function rebuildTrainText(){
   const keys = [...selectedDatasets];
   const text = keys.map(k => PRESETS[k]).join('\n\n');
@@ -1481,7 +1481,7 @@ function rebuildTrainText(){
     fullTrainText = text;
     ruta.value = text.slice(0, TEXTAREA_TAK).replace(/\S*$/, '')
       + `\n\n… (visar de första ${Math.round(TEXTAREA_TAK/1000)} 000 tecknen av `
-      + `${(text.length/1000000).toFixed(1)} miljoner – modellen tränar på hela texten)`;
+      + `${(text.length/1000000).toFixed(1)} miljoner. Modellen tränar på hela texten)`;
     ruta.dataset.preview = '1';
   } else {
     fullTrainText = null;
@@ -1599,7 +1599,7 @@ function updateStats(){
 
   let note = '';
   if(bf < 1.1){
-    note = `<svg class="inl-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17.5v.01"/></svg> <strong>Texten upprepar sig sällan</strong> – vid kontextlängd ${k} finns nästan aldrig mer än <strong>ett</strong> möjligt nästa ord. Modellen kan då bara återberätta texten ordagrant tills den tar slut. Prova <strong>kontextlängd 1</strong>, eller en längre text där ord och fraser återkommer.`;
+    note = `<svg class="inl-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17.5v.01"/></svg> <strong>Texten upprepar sig sällan.</strong> Vid kontextlängd ${k} finns nästan aldrig mer än <strong>ett</strong> möjligt nästa ord. Modellen kan då bara återberätta texten ordagrant tills den tar slut. Prova <strong>kontextlängd 1</strong>, eller en längre text där ord och fraser återkommer.`;
   }
   if(truncated){
     note += (note ? '<br><br>' : '') + `<svg class="inl-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></svg> Texten var mycket lång och kortades till ${MAX_TOKENS.toLocaleString('sv-SE')} tokens vid bygget.`;
@@ -1810,7 +1810,7 @@ function showDeadEnd(){
     ? `Texten upprepar sig sällan. Vid kontextlängd ${k} kan modellen därför bara följa den ordagrant, och nu är den slut. Pröva <strong>kontextlängd 1</strong>, eller använd en längre text med fler upprepningar.`
     : `Det här är tabellmodellens svaghet. Den klarar bara exakta träffar, medan ChatGPT:s neurala nätverk kan <em>generalisera</em>.`;
   document.getElementById('ptable').innerHTML =
-    `<div class="ptable-msg"><span class="big"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v10H4z"/><path d="M4 7l16 10M20 7L4 17"/></svg></span><div><strong>Återvändsgränd</strong> – inga möjliga ord härifrån.</div>
+    `<div class="ptable-msg"><span class="big"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v10H4z"/><path d="M4 7l16 10M20 7L4 17"/></svg></span><div><strong>Återvändsgränd.</strong> Inga möjliga ord härifrån.</div>
      <button class="btn pri" onclick="closeConcept();deadEnd=false;startGen()">Börja om från nytt ställe</button></div>`;
   document.getElementById('ptableWrap')?.classList.remove('scrollable');
   document.getElementById('narr').innerHTML =
@@ -2210,8 +2210,8 @@ function goStep(n){
   // Den stegvisa utfällningen sker två gånger: vid första träningen och en
   // gång till när eleven kommer till steg 2, eftersom det är där träningsdatan
   // byts ut och pipelinen alltså börjar om. Från steg 3 och framåt står sidan
-  // kvar utfälld – då är allt bekant, och att kollapsa vid varje stegbyte
-  // skulle bara kännas som att tappa fotfästet.
+  // kvar utfälld, eftersom allt då är bekant och en kollaps vid varje stegbyte
+  // bara skulle göra eleven vilse.
   let fallIhop = wrap.classList.contains('pre-train');
   if(n === 2 && !steg2Utfallt) fallIhop = true;
   if(n >= 3 && harTranat) fallIhop = false;
@@ -2245,7 +2245,7 @@ function goStep(n){
   if(rec){
     k = rec.k;
     paintK(rec.k);
-    setDatasets(rec.ds);      // bockar i rätt texter, markerar modellen som otränad/dirty – eleven trycker Träna själv, varje gång
+    setDatasets(rec.ds);      // bockar i rätt texter och markerar modellen som otränad, så att eleven själv trycker Träna
   }
   scrollToTop();             // börja varje steg högst upp (sist, efter ombyggnad)
 }
@@ -2284,7 +2284,7 @@ const GLOSSARY = {
   token:           {t:'Token',                  d:'En byggsten i texten. Oftast ett ord, men även skiljetecken räknas som egna tokens.'},
   prompt:          {t:'Prompt',                 d:'Texten du matar in som modellen ska bygga vidare på. Här är det din startfras.'},
   kontext:         {t:'Kontext',                d:'De ord modellen tar hänsyn till just nu när den ska välja nästa ord. Modellens minne.'},
-  'kontextlängd':  {t:'Kontextlängd (n-gram)',  d:'Hur många ord bakåt modellen ser. Här 1 till 3. ChatGPT använder tusentals.'},
+  'kontextlängd':  {t:'Kontextlängd (n-gram)',  d:'Hur många ord bakåt modellen ser. Här 1 till 3. ChatGPT arbetar med tiotusentals ord eller fler.'},
   'kontextfönster':{t:'Kontextfönster',         d:'Hur mycket text modellen kan minnas samtidigt. Litet här, mycket stort i ChatGPT.'},
   kontexter:       {t:'Kontexter',              d:'Alla olika ordföljder (kontexter) modellen har sett i träningstexten och känner igen.'},
   sannolikhet:     {t:'Sannolikhet',            d:'Hur trolig en viss fortsättning är, beräknad ur hur ofta den setts i texten.'},
@@ -2346,7 +2346,7 @@ const CONCEPTS = {
       + '<div class="cc-sub orange">Skillnader</div>'
       + '<ul class="cc-list orange">'
       + '<li>Den här modellen använder en <strong>tabell</strong> över exakta ordföljder. ChatGPT använder ett <em>neuralt nätverk</em> med miljarder parametrar.</li>'
-      + '<li>ChatGPT tar hänsyn till <strong>tusentals</strong> tidigare ord, inte bara 1–3.</li>'
+      + '<li>ChatGPT tar hänsyn till <strong>tiotusentals</strong> tidigare ord eller fler, inte bara 1 till 3.</li>'
       + '<li>ChatGPT har tränats på en enorm mängd text från många källor.</li>'
       + '<li>ChatGPT kan <em>generalisera</em> till mönster den inte sett exakt. Tabellen känner bara igen ordföljder den redan mött.</li>'
       + '</ul>'
