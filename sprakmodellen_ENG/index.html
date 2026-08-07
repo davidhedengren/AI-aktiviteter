@@ -4,24 +4,23 @@
    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0a0e1a">
-<meta name="description" content="Build your own small language model from any text and see how it picks the next word – word by word.">
+<meta name="description" content="Build your own small language model from any text and see how it picks the next word, word by word.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI Activities">
 <meta property="og:locale" content="en_GB">
 <meta property="og:locale:alternate" content="sv_SE">
 <meta property="og:url" content="https://www.ai-aktiviteter.se/sprakmodellen/ENG">
 <meta property="og:title" content="The Language Model Lab – ai-aktiviteter.se">
-<meta property="og:description" content="Build your own small language model from any text and see how it picks the next word – word by word.">
+<meta property="og:description" content="Build your own small language model from any text and see how it picks the next word, word by word.">
 <meta property="og:image" content="https://www.ai-aktiviteter.se/og-image-en.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Language Model Lab – ai-aktiviteter.se">
-<meta name="twitter:description" content="Build your own small language model from any text and see how it picks the next word – word by word.">
+<meta name="twitter:description" content="Build your own small language model from any text and see how it picks the next word, word by word.">
 <meta name="twitter:image" content="https://www.ai-aktiviteter.se/og-image-en.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Bygg en egen liten språkmodell av valfri svensk text och se exakt hur den väljer nästa ord – samma grundprincip som ChatGPT.">
 <title>The Language Model Lab – ai-aktiviteter.se</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDWXTZZBBR"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZDWXTZZBBR');</script>
@@ -51,8 +50,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .sel,textarea{font-family:'DM Sans',sans-serif;font-size:0.84em;width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);outline:none;transition:border-color 0.2s;}
 .sel{cursor:pointer;}
 .sel:focus,textarea:focus{border-color:var(--accent);}
-/* "Hur modellen väljer nästa ord" är i fokus från steg 2 (context length) genom steg 3 (girighet) –
-   panelen får stegets egen accentfärg medan den är aktuell, sedan lugnar den ner sig. */
+/* "How the model picks the next word" is in focus from step 2 (context length) through
+   step 3 (greediness). The panel carries the accent colour of the step while it is current,
+   then settles down. */
 .wrap.sx-context:not(.sx-data) #choicePanel{border:1px solid var(--step-accent);box-shadow:0 12px 32px -10px var(--step-glow);}
 .wrap.sx-context:not(.sx-data) #choicePanel .coll-toggle{color:var(--text);font-size:0.92em;background:var(--step-accent-soft);}
 textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;color:var(--subtle);}
@@ -81,7 +81,7 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 .hint{font-size:0.72em;color:var(--dim);line-height:1.45;margin-top:5px;}
 .hint strong{color:var(--text);}
 
-/* Förklarande statistik */
+/* Explanatory statistics */
 .stat-help{font-size:0.68em;color:var(--dim);line-height:1.4;margin:-1px 0 9px;padding-left:1px;}
 .stat-row.headline{margin-bottom:2px;}
 .branch-wrap{margin-top:2px;}
@@ -101,7 +101,7 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 .ctx-hl{color:var(--orange);font-weight:700;}
 .gpt-hl{color:var(--accent2);font-weight:700;}
 
-/* Collapsible (samma mönster som NIM) */
+/* Collapsible panel */
 .coll{border:1px solid var(--border);border-radius:12px;overflow:hidden;}
 .coll-toggle{width:100%;padding:14px 16px;background:var(--surface2);border:none;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:0.8em;font-weight:700;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px;}
 .coll-toggle:hover{color:var(--text);}
@@ -131,7 +131,7 @@ textarea{resize:vertical;min-height:140px;line-height:1.55;font-size:0.82em;colo
 .narr strong{color:var(--text);}
 .narr .rare{color:var(--orange);font-weight:700;}
 
-/* Färglegend – gör de semantiska färgerna självförklarande */
+/* Colour legend explaining the semantic colours */
 .legend{display:flex;flex-wrap:wrap;gap:12px;font-size:0.7em;color:var(--dim);padding:2px 2px 0;}
 .legend span{display:inline-flex;align-items:center;gap:5px;}
 .legend i{width:11px;height:11px;border-radius:3px;display:inline-block;}
@@ -159,27 +159,27 @@ input[type=range]:disabled{opacity:0.3;}
 .ctx-chip .ct{font-family:'JetBrains Mono',monospace;background:rgba(255,159,67,0.14);border:1px solid rgba(255,159,67,0.4);border-radius:4px;padding:2px 6px;color:var(--text);font-weight:600;margin:0 1px;}
 .ctx-chip .ctx-count{display:block;margin-top:7px;font-size:0.96em;color:var(--subtle);}
 .ctx-chip .ctx-count b{color:var(--gold);font-family:'JetBrains Mono',monospace;}
-/* Rullbar lista: med en stor korpus kan en kontext ha hundratals
-   fortsättningar. Fem rader ska alltid få plats innan rullningen börjar –
-   en rad är ca 40 px hög plus 7 px mellanrum, alltså 5×40 + 4×7 = 228 px –
-   och taket hindrar att Model statistics under den trycks ur bild. */
+/* Scrollable list: with a large corpus one context can have hundreds of
+   continuations. Five rows must always fit before scrolling begins.
+   A row is about 40 px high plus 7 px of spacing, so 5×40 + 4×7 = 228 px,
+   and the cap prevents Model statistics below from being pushed out of view. */
 .ptable{display:flex;flex-direction:column;gap:7px;flex:1;
   min-height:234px;max-height:min(52vh,458px);
   overflow-y:auto;overscroll-behavior:contain;
   padding-right:10px;padding-bottom:6px;
   scrollbar-width:thin;scrollbar-color:var(--border2) rgba(255,255,255,.035);}
-/* Webkit: dölj pilknapparna, annars sticker en liten triangel upp ovanför
-   rullningslisten och ser ut som ett fel i layouten. */
+/* Webkit: the arrow buttons are hidden, otherwise a small triangle appears above
+   the scrollbar and looks like a fault in the layout. */
 .ptable::-webkit-scrollbar{width:10px;}
 .ptable::-webkit-scrollbar-button{display:none;height:0;width:0;}
 .ptable::-webkit-scrollbar-corner{background:transparent;}
 .ptable::-webkit-scrollbar-track{background:rgba(255,255,255,.035);border-radius:5px;}
-/* Genomskinlig kant + padding-box ger tummen luft inuti spåret, så den
-   läses som en list och inte som ett löst streck bredvid raderna. */
+/* A transparent border plus padding-box gives the thumb room inside the track, so it
+   reads as a scrollbar rather than a loose line beside the rows. */
 .ptable::-webkit-scrollbar-thumb{background:var(--border2);border-radius:5px;
   border:2px solid transparent;background-clip:padding-box;min-height:34px;}
 .ptable::-webkit-scrollbar-thumb:hover{background:var(--accent);background-clip:padding-box;}
-/* Mjuk uttoning i underkanten som antyder att listan fortsätter */
+/* Soft fade at the bottom edge indicating that the list continues */
 .ptable-wrap{position:relative;display:flex;flex-direction:column;min-height:0;}
 .ptable-wrap.scrollable::after{content:'';position:absolute;left:0;right:11px;bottom:0;height:42px;z-index:2;
   pointer-events:none;background:linear-gradient(to bottom,rgba(14,18,34,0) 0%,var(--surface) 82%);}
@@ -198,14 +198,14 @@ input[type=range]:disabled{opacity:0.3;}
 .prow.picked .pfill{background:linear-gradient(90deg,var(--green),#5fe0a0);box-shadow:0 0 12px rgba(52,199,89,0.5);}
 @keyframes pickPulse{0%{transform:scale(1.03);}100%{transform:scale(1);}}
 
-/* Model memory = labbets signatur: ge panelen en egen, lugn inramning */
+/* Panelen Modellens minne har en egen, lugn inramning. */
 .side .coll.sticky{border:1px solid rgba(77,128,255,0.32);border-radius:14px;overflow:hidden;box-shadow:0 6px 30px rgba(0,0,0,0.30);}
 .side .coll.sticky > .coll-toggle{color:var(--text);font-size:0.92em;background:rgba(77,128,255,0.10);}
 .side .coll.sticky > .coll-toggle .term{border-bottom-color:transparent;}
 .prow.greedy-top{box-shadow:inset 3px 0 0 var(--gold);}
 .prow.greedy-top .pw::after{content:' ▲';color:var(--gold);font-size:0.85em;}
 .prest{font-size:0.72em;color:var(--dim);text-align:center;padding:4px;}
-/* Spökrader före träning: visar vad rutan kommer att fyllas med */
+/* Ghost rows before training: they show what the box will be filled with */
 .ghost-rows{display:flex;flex-direction:column;gap:7px;}
 .grow{display:grid;grid-template-columns:minmax(96px,1.7fr) minmax(40px,1fr) 46px;gap:10px;align-items:center;padding:9px 10px;border-radius:9px;background:var(--surface2);opacity:.5;}
 .grow .gw,.grow .gp{height:11px;border-radius:4px;background:rgba(255,255,255,.07);}
@@ -216,7 +216,7 @@ input[type=range]:disabled{opacity:0.3;}
 .ptable-msg strong{color:var(--text);}
 .click-hint{font-size:0.7em;color:var(--dim);text-align:center;}
 
-/* Intro-overlay (samma mönster som övriga sidor) */
+/* Introruta */
 .overlay{position:fixed;inset:0;padding:20px;background:rgba(6,7,14,0.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
 .overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 28px 24px;max-width:540px;width:100%;text-align:center;max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;animation:overlayIn .5s cubic-bezier(.34,1.56,.64,1);}
@@ -239,7 +239,7 @@ input[type=range]:disabled{opacity:0.3;}
 .intro-viz .iv-next text{fill:#e8ecf8;}
 @keyframes ivPulse{0%,100%{opacity:.5;}50%{opacity:1;}}
 
-/* ═══ Remake: stegbaserad layout ═══ */
+/* ═══ Stegbaserad layout ═══ */
 .wrap{max-width:1180px;margin:0 auto;width:100%;padding:28px 16px 44px;display:flex;flex-direction:column;gap:32px;flex:1;position:relative;z-index:1;}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:22px 24px;box-shadow:0 6px 22px rgba(0,0,0,0.32);}
 .card-h{display:flex;align-items:center;gap:9px;font-family:'DM Sans',sans-serif;font-size:1.02em;font-weight:700;margin-bottom:20px;letter-spacing:-0.01em;}
@@ -264,25 +264,25 @@ input[type=range]:disabled{opacity:0.3;}
 .speed-wrap svg{width:15px;height:15px;color:var(--dim);flex-shrink:0;}
 .speed-wrap input[type=range]{width:78px;}
 
-/* Begreppsord med hover-förklaring */
+/* Glossary words with a hover explanation */
 .term{border-bottom:1px dashed var(--accent2);cursor:pointer;position:relative;transition:color .15s,border-color .15s;}
 .term:hover,.term:focus{border-bottom-style:solid;color:var(--text);outline:none;}
 .gloss-list{display:flex;flex-direction:column;gap:10px;}
 .gloss-item{font-size:0.96em;line-height:1.5;}
 .gloss-item b{color:var(--accent2);}
 
-/* Träna-knapp: markeras när modellen behöver tränas om */
+/* Train button: highlighted when the model needs retraining */
 .train-status{font-size:0.74em;color:var(--green);line-height:1.4;margin-top:6px;min-height:1em;}
 .train-status strong{color:var(--text);}
 
-/* Live-feedback för prompten medan man skriver */
+/* Live feedback for the prompt while it is being typed */
 .prompt-status{font-size:0.75em;line-height:1.45;min-height:1.05em;}
 .prompt-status.ok{color:var(--green);}
 .prompt-status.warn{color:var(--orange);}
 .prompt-status.info{color:var(--dim);}
 .prompt-status strong{color:var(--text);}
 
-/* "Gissa först"-läge: dölj sannolikheter tills eleven avslöjar dem */
+/* "Guess first" mode: probabilities are hidden until the student reveals them */
 .guess-bar{display:flex;align-items:center;gap:8px;margin:2px 0 4px;flex-wrap:wrap;}
 .guess-toggle{display:inline-flex;align-items:center;gap:6px;font-size:0.76em;color:var(--subtle);font-weight:600;cursor:pointer;}
 .guess-toggle input{accent-color:var(--accent);cursor:pointer;width:15px;height:15px;}
@@ -293,8 +293,8 @@ input[type=range]:disabled{opacity:0.3;}
 
 @media(max-width:900px){
   .grid{grid-template-columns:1fr;}
-  /* Staplat läge: minnet ska komma direkt efter genereringsrutan, inte sist.
-     display:contents löser upp spalterna så att barnen kan ordnas fritt. */
+  /* Stacked layout: the memory comes directly after the generation box rather than last.
+     display:contents dissolves the columns so the children can be ordered freely. */
   .stage,.side{display:contents;}
   .side{position:static;max-height:none;overflow:visible;}
   .grid > .stage > .prompt-bar{order:1;}
@@ -312,7 +312,7 @@ input[type=range]:disabled{opacity:0.3;}
   .hd{padding:22px 16px 18px;}
 }
 
-/* Stegnavigering – guidad trappa genom labbet (glaskänsla, egen accent per steg) */
+/* Step navigation through the lab, with its own accent colour per step */
 .sh{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.3);}
 .sh-tiles{display:flex;gap:7px;padding:10px 12px 7px;}
 .sh-tile{
@@ -380,10 +380,10 @@ input[type=range]:disabled{opacity:0.3;}
 .btn.big-next{font-size:.92em;font-weight:700;}
 
 
-/* Visnings-grindar: visa bara det som hör till aktuellt steg.
-   Klassnamnen är dubblerade för att höja specificiteten till 0,2,0. Annars
-   kan en vanlig enklassregel längre ner i filen (t.ex. .cmp-row{display:flex})
-   vinna på källordning och läcka ut elementet i steg 1. */
+/* Display gates: only what belongs to the current step is shown.
+   The class names are doubled to raise specificity to 0,2,0. Otherwise an ordinary
+   single-class rule further down the file (for example .cmp-row{display:flex})
+   could win on source order and leak the element into step 1. */
 .gate-context.gate-context,
 .gate-choose.gate-choose,
 .gate-data.gate-data,
@@ -394,17 +394,17 @@ input[type=range]:disabled{opacity:0.3;}
 .wrap.sx-data .gate-data{display:block;}
 .wrap.sx-data .gate-prompt{display:flex;}
 .wrap.sx-data .gate-pblock{display:block;}
-/* Jämförelseraden är en flexkolumn, inte block, när den väl visas */
+/* The comparison row is a flex column rather than a block once it is shown */
 .wrap.sx-context .cmp-row.gate-context{display:flex;}
 
-/* Dataset-syfte under väljaren */
+/* Purpose of the dataset, below the picker */
 
-/* Dataset-krysslista (välj och kombinera flera texter) */
+/* Dataset checklist for selecting and combining several texts */
 .ds-hint{font-weight:400;color:var(--dim);font-size:0.82em;}
 .ds-list{display:flex;flex-wrap:wrap;gap:7px;}
 .ds-card{position:relative;flex:1 1 132px;display:flex;flex-direction:column;gap:1px;padding:8px 10px;border:1px solid var(--border);border-radius:9px;background:var(--surface2);cursor:pointer;text-align:left;font-family:inherit;transition:transform 0.15s,border-color 0.15s,background 0.15s,opacity .15s;user-select:none;}
 .ds-card:hover{border-color:var(--accent);transform:translateY(-2px);}
-/* Låst text: syns, men går inte att välja förrän steget som låser upp den */
+/* Locked text: visible, but not selectable until the step that unlocks it */
 .ds-card.locked{opacity:.34;cursor:not-allowed;filter:saturate(.25);}
 .ds-card.locked:hover{border-color:var(--border);transform:none;}
 .ds-lock{display:none;position:absolute;top:7px;right:8px;width:12px;height:12px;color:var(--dim);}
@@ -417,7 +417,7 @@ input[type=range]:disabled{opacity:0.3;}
 .ds-card .ds-check{position:absolute;top:7px;right:8px;width:15px;height:15px;border-radius:50%;background:var(--accent);color:#fff;font-size:0.72em;font-weight:700;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0.6);transition:0.18s;}
 .ds-card.selected .ds-check{opacity:1;transform:scale(1);}
 
-/* Val-mekanism-korten (girig / viktad slump) – samma mönster som training data-korten, men guldaktiga som resten av steg 3 */
+/* Cards for the choice method, greedy and weighted random, in the gold tone of step 3 */
 .mode-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .mode-card{position:relative;display:flex;flex-direction:column;gap:2px;text-align:left;font-family:inherit;padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:var(--surface2);cursor:pointer;transition:transform 0.15s,border-color 0.15s,background 0.15s;user-select:none;}
 .mode-card:hover{border-color:var(--gold);transform:translateY(-2px);}
@@ -428,7 +428,7 @@ input[type=range]:disabled{opacity:0.3;}
 .mode-card.selected .mode-check{opacity:1;transform:scale(1);}
 
 
-/* Säkerhetsmätare för aktuell kontext */
+/* Certainty meter for the current context */
 .certainty{margin:9px 0 5px;}
 .cert-top{display:flex;justify-content:space-between;align-items:baseline;font-size:0.74em;margin-bottom:4px;gap:8px;}
 .cert-lbl{color:var(--dim);font-weight:600;}
@@ -438,7 +438,7 @@ input[type=range]:disabled{opacity:0.3;}
 .cert-note{font-size:0.7em;color:var(--dim);line-height:1.45;margin-top:5px;}
 .cert-note strong{color:var(--text);}
 
-/* ── Träna-knapp: samma "levande" mönster som bias-labbet ── */
+/* ── Train button with motion marking that it is waiting for a press ── */
 .train-cta{position:relative;overflow:hidden;width:100%;padding:17px 20px;border-radius:14px;border:none;
   background:linear-gradient(135deg,var(--green),#28b567);color:#04140a;font-family:'DM Sans',sans-serif;font-weight:800;font-size:1.02em;
   cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
@@ -454,7 +454,7 @@ input[type=range]:disabled{opacity:0.3;}
 .train-cta-icon svg{width:17px;height:17px;}
 .train-cta-text{position:relative;z-index:1;}
 
-/* ── Levande byggnads-canvas: riktiga ord ur texten strömmar in i tabellen ── */
+/* ── Building canvas: real words from the text stream into the table ── */
 .train-stage{display:flex;flex-direction:column;align-items:center;gap:16px;padding:4px 0 2px;}
 .train-canvas-wrap{width:100%;max-width:520px;height:170px;position:relative;border-radius:var(--r-md);overflow:hidden;background:radial-gradient(ellipse 70% 90% at 50% 50%,rgba(20,26,48,.6),rgba(9,11,20,.3));border:1px solid var(--border-soft);}
 .train-canvas-wrap canvas{width:100%;height:100%;display:block;}
@@ -467,10 +467,10 @@ input[type=range]:disabled{opacity:0.3;}
 .train-progress-rail{width:100%;max-width:420px;height:5px;border-radius:999px;background:var(--surface2);overflow:hidden;}
 .train-progress-rail i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .2s var(--ease-out);}
 
-/* ═══ Glaskort (concept cards) – samma komponent som övriga labb ═══ */
+/* ═══ Glass cards for concepts ═══ */
 .launch-grid{display:flex;flex-direction:column;gap:10px;}
-/* Längst ner på sidan finns full bredd: lägg korten sida vid sida i stället
-   för staplade, annars blir de onödigt breda och tomma i mitten. */
+/* The full width is available at the foot of the page, so the cards are placed side by
+   side rather than stacked, which would leave them needlessly wide and empty in the middle. */
 .launch-foot{margin-top:22px;}
 .launch-foot .launch-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 @media (max-width:760px){.launch-foot .launch-grid{grid-template-columns:1fr;}}
@@ -516,9 +516,9 @@ input[type=range]:disabled{opacity:0.3;}
 .term-link-btn{margin-top:8px;background:none;border:none;padding:0;font-family:'DM Sans',sans-serif;font-size:.74em;font-weight:600;color:var(--accent2);cursor:pointer;text-decoration:underline;text-underline-offset:2px;}
 .term-link-btn:hover{color:var(--text);}
 
-/* Introrutan ska rymmas utan rullning även på små skärmar. Villkoret gäller
-   både smala fönster och låga, eftersom liggande mobil har gott om bredd
-   men mycket lite höjd. */
+/* The intro card must fit without scrolling on small screens as well. The condition covers
+   both narrow and low windows, since a phone in landscape has plenty of width but
+   very little height. */
 @media (max-width:640px),(max-height:800px){
   .overlay{padding:14px;}
   .overlay-card{padding:18px 16px 16px;}
@@ -531,9 +531,9 @@ input[type=range]:disabled{opacity:0.3;}
   .overlay-btn{padding:11px;margin-top:18px;font-size:0.9em;}
 }
 
-/* ═══ Topprad: kompakt training data + stegets fokus ═══
-   Fokuskortet håller den inställning steget faktiskt handlar om, så att
-   den ligger högst upp bredvid datan i stället för långt ner i scenen. */
+/* ═══ Top row: compact training data and the focus of the step ═══
+   The focus card holds the setting the step is actually about, so that it sits at the top
+   beside the data rather than far down in the stage. */
 .setup-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:18px;align-items:start;}
 .wrap:not(.sx-context) .setup-row{grid-template-columns:minmax(0,1fr);max-width:640px;}
 .setup-row .card{padding:18px 20px;}
@@ -543,7 +543,7 @@ input[type=range]:disabled{opacity:0.3;}
 .fb-h{font-weight:700;font-size:.92em;color:var(--text);margin-bottom:3px;}
 .fb-sub{font-size:.76em;color:var(--dim);line-height:1.5;margin-bottom:11px;}
 
-/* Context length som segmenterad kontroll – ett tydligt, direkt val */
+/* Context length as a segmented control */
 .kseg{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
 .kseg-b{display:flex;flex-direction:column;align-items:center;gap:1px;padding:11px 4px 9px;border:1px solid var(--border);border-radius:10px;background:var(--surface2);color:var(--dim);cursor:pointer;font-family:inherit;transition:.18s;}
 .kseg-b b{font-family:'JetBrains Mono',monospace;font-size:1.25em;font-weight:700;line-height:1;}
@@ -552,7 +552,7 @@ input[type=range]:disabled{opacity:0.3;}
 .kseg-b.on{border-color:var(--step-accent);background:var(--step-accent-soft);color:var(--text);box-shadow:0 0 0 1px var(--step-accent);}
 .kseg-b.on b{color:var(--step-accent);}
 
-/* Färgprick i stället för färgemoji */
+/* Colour dot instead of a colour emoji */
 .inl-ico{width:13px;height:13px;vertical-align:-2px;display:inline-block;}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:baseline;}
 .dot.good{background:var(--good,#34c759);}
@@ -563,7 +563,7 @@ input[type=range]:disabled{opacity:0.3;}
   .setup-row{grid-template-columns:minmax(0,1fr);}
 }
 
-/* Härkomstspårning: klick på ett ord visar var ordföljden står i träningstexten */
+/* Provenance tracking: clicking a word shows where the word sequence occurs in the training text */
 .gtok{cursor:pointer;border-radius:3px;transition:background .12s;}
 .gtok:hover{background:rgba(255,255,255,.09);}
 .origin-box{display:none;margin-top:-14px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-size:.72em;line-height:1.7;color:var(--dim);}
@@ -577,7 +577,7 @@ input[type=range]:disabled{opacity:0.3;}
 .og-line{font-family:'JetBrains Mono',monospace;font-size:.94em;padding:3px 0;}
 .og-line mark{background:rgba(255,159,67,.22);color:var(--text);border-radius:3px;padding:1px 3px;}
 
-/* Jämförelse sida vid sida */
+/* Side-by-side comparison */
 .cmp-row{display:flex;flex-direction:column;align-items:center;gap:14px;}
 .cmp-btn{display:inline-flex;align-items:center;gap:9px;padding:12px 22px;border:1px solid var(--border);border-radius:11px;
   background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.015) 55%);
@@ -604,11 +604,11 @@ input[type=range]:disabled{opacity:0.3;}
 .cmp-txt .seed{color:var(--dim);}
 @media(max-width:760px){.cmp-cols{grid-template-columns:1fr;gap:10px;}}
 
-/* ═══ Stegvis utfällning ═══
-   Före träning visas bara stegnavigeringen och training datan. Prompt,
-   genererad text, minne och jämförelse saknar innehåll att visa och skulle
-   bara konkurrera om uppmärksamheten. Detta gäller steg 1 och steg 2 –
-   i det senare byts training datan ut, så pipelinen börjar om. */
+/* ═══ Stepwise reveal ═══
+   Before training, only the step navigation and the training data are shown. The prompt,
+   the generated text, the memory and the comparison have no content to display and would
+   only compete for attention. This applies to steps 1 and 2, and in the latter the
+   training data is replaced, so the pipeline starts over. */
 .wrap.pre-train .grid,
 .wrap.pre-train .cmp-row.gate-context,
 .wrap.pre-train .focus-card.gate-context{display:none;}
@@ -638,7 +638,7 @@ input[type=range]:disabled{opacity:0.3;}
   <!-- ─── Stegnavigering: guidad trappa ─── -->
   <section class="sh" id="sh">
     <div class="sh-tiles" id="shTiles"></div>
-    <div class="sh-hint">The steps are a suggested order – feel free to jump between them.</div>
+    <div class="sh-hint">The steps are a suggested order. Feel free to jump between them.</div>
     <div class="sh-banner" id="shBanner">
       <div class="sh-title" id="shTitleEl"></div>
       <div class="sh-desc" id="shDesc"></div>
@@ -854,8 +854,8 @@ input[type=range]:disabled{opacity:0.3;}
 
 <script>
 // ════════════════════════════════════════════════════════════
-//  Exempeltexter (egenskrivna, medvetet repetitiva – n-gram-
-//  modeller behöver upprepning för att kunna förgrena sig)
+//  Example texts (written for the lab and deliberately repetitive, since n-gram
+//  models need repetition in order to branch)
 // ════════════════════════════════════════════════════════════
 const PRESETS = {
   vader: '',
@@ -864,7 +864,7 @@ const PRESETS = {
   shakespeare: ''
 };
 
-// Ladda textfilerna från data/-mappen (fungerar på GitHub Pages)
+// Load the text files from the data/ folder (works on GitHub Pages)
 async function loadDatasets(){
   const files = { vader:'data/Vader.txt', sport:'data/Sport.txt', hemso:'data/Hemso.txt', shakespeare:'data/Shakespeare.txt' };
   const loadEl = document.getElementById('dsLoadStatus');
@@ -883,15 +883,15 @@ async function loadDatasets(){
 }
 
 // ════════════════════════════════════════════════════════════
-//  Tillstånd
+//  State
 // ════════════════════════════════════════════════════════════
 const SEP = '\u0001';          // skiljetecken i kontextnycklar
-const MAX_ROWS = 40;           // max rader i tabellen (listan är rullbar)
-const MAX_GEN = 250;           // stoppgräns för auto-generering
+const MAX_ROWS = 40;           // maximum rows in the table (the list is scrollable)
+const MAX_GEN = 250;           // stop limit for automatic generation
 
-let tokens = [];               // tokeniserad träningstext
-let models = {};               // {1: Map, 2: Map, 3: Map} – kontext → Map(ord → antal)
-let starts = {};               // {k: [index, …]} – meningsstarter att slumpa ifrån
+let tokens = [];               // tokenised training text
+let models = {};               // {1: Map, 2: Map, 3: Map}: context to Map(word to count)
+let starts = {};               // {k: [index, …]} sentence starts to draw from
 let built = false;
 
 let k = 2;                     // context length
@@ -899,18 +899,18 @@ let genTokens = [];            // den genererade texten
 let mode = 'weighted';         // 'weighted' | 'greedy'
 let temp = 1.0;
 let autoTimer = null;
-let busy = false;              // låser interaktion under "vald-ord-blink"
+let busy = false;              // locks interaction during the chosen-word flash
 let deadEnd = false;
 let truncated = false;         // sant om inklistrad text kortades vid bygget
-// En korpus på flera megabyte gör <textarea> obrukbart trög. Då visas bara
-// ett smakprov i rutan medan hela texten ligger här och används vid träning.
+// A corpus of several megabytes makes <textarea> unusably slow. Only a sample is then
+// shown in the box while the whole text is held here and used for training.
 let fullTrainText = null;
-const TEXTAREA_TAK = 250000;   // tecken som får ligga i textrutan
-let exampleStarts = [];        // frekventa innehållsord att starta från
-let dirty = false;             // sant när träningstexten ändrats sedan senaste träning
-let vocab = new Set();         // alla unika tokens (för snabb prompt-validering)
-let guessFirst = false;        // "gissa först": dölj sannolikheter tills eleven avslöjar
-let reveal = false;            // har sannolikheterna avslöjats för aktuell kontext?
+const TEXTAREA_TAK = 250000;   // characters allowed in the text box
+let exampleStarts = [];        // frequent content words to start from
+let dirty = false;             // true when the training text has changed since the last training
+let vocab = new Set();         // all unique tokens (for fast prompt validation)
+let guessFirst = false;        // "guess first": probabilities are hidden until the student reveals them
+let reveal = false;            // have the probabilities been revealed for the current context?
 
 // ════════════════════════════════════════════════════════════
 //  Tokenisering & modellbygge
@@ -927,16 +927,16 @@ function tokenize(text){
 
 const MENINGSSLUT = new Set(['.', '!', '?']);
 const SKILJETECKEN = new Set(['.', ',', '!', '?', ';', ':']);
-const BYGG_CHUNK = 50000;   // tokens per arbetspass innan vi släpper tråden
+const BYGG_CHUNK = 50000;   // tokens per work batch before the thread is released
 
-// Låt webbläsaren rita en bildruta mellan arbetspassen.
+// Let the browser paint a frame between the work batches.
 const andas = () => new Promise(r => setTimeout(r, 0));
 
-// Bygger n-gram-modellerna för k = 1, 2, 3.
-// Nyckeln sätts ihop direkt i stället för med slice().join() — det sparar
-// tre miljoner temporära arrayer på en miljon tokens och är runt fyra
-// gånger snabbare. Arbetet delas i pass så att gränssnittet lever vidare
-// och progressbaren kan visa verklig framdrift på stora korpusar.
+// Builds the n-gram models for k = 1, 2, 3.
+// The key is assembled directly rather than with slice().join(), which saves
+// three million temporary arrays on a million tokens and is roughly four
+// times faster. The work is split into batches so that the interface stays alive
+// and the progress bar can show real progress on large corpora.
 async function buildModels(onProgress){
   models = {1: new Map(), 2: new Map(), 3: new Map()};
   starts = {1: [], 2: [], 3: []};
@@ -971,11 +971,11 @@ async function buildModels(onProgress){
 
 // ════════════════════════════════════════════════════════════
 //  Filuppladdning (.txt / .md / .pdf)
-//  pdf.js laddas först när någon faktiskt väljer en PDF, så att
-//  sidan förblir lätt för alla andra.
+//  pdf.js is loaded only when a PDF is actually selected, so that
+//  the page stays light for everyone else.
 // ════════════════════════════════════════════════════════════
-const MAX_CHARS = 4000000;     // teckentak för uppladdad/inklistrad text (~700 000 tokens)
-const MAX_TOKENS = 1000000;    // tokentak vid träning – webbläsaren klarar mycket mer än förr
+const MAX_CHARS = 4000000;     // character cap for uploaded or pasted text (about 700 000 tokens)
+const MAX_TOKENS = 1000000;    /* token cap during training */
 
 function setFileStatus(msg){
   const el = document.getElementById('fileStatus');
@@ -983,9 +983,9 @@ function setFileStatus(msg){
   el.style.display = msg ? 'block' : 'none';
 }
 
-// Textfiler: läs som UTF-8, men fall tillbaka till Latin-1 om
-// resultatet innehåller ersättningstecken (vanligt för äldre
-// svenska .txt-filer från Windows).
+// Text files: read as UTF-8, but fall back to Latin-1 if the
+// result contains replacement characters (common in older
+// Swedish .txt files from Windows).
 async function readTxt(file){
   const text = await file.text();
   const broken = (text.match(/\uFFFD/g) || []).length;
@@ -1059,18 +1059,18 @@ async function handleFiles(fileList){
   markDirty();
   const words = text.split(/\s+/).length;
   setFileStatus(`✓ <strong>${files.map(f => esc(f.name)).join(' + ')}</strong> loaded, about ${words.toLocaleString('en-GB')} words${clipped ? ' (the text was cut to the first ' + MAX_CHARS.toLocaleString('en-GB') + ' characters)' : ''}. Press <strong>Train the model</strong>!`);
-  document.getElementById('fileInput').value = '';   // tillåt samma fil igen
+  document.getElementById('fileInput').value = '';   // allow the same file again
 }
 
 function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
 
-// "Wow"-sekvens: eleven ser modellen byggas – riktiga ord ur texten strömmar
-// in i tabellen, inline i sidan (samma mönster som bias-labbets träningsakt)
+// Build sequence: the student sees the model being built. Real words from the text
+// stream into the table, inline in the page.
 let training = false;
 let trainAnimRunning = false;
 async function trainAnimated(){
   if(training) return;
-  // För kort text → kör vanliga bygget som visar felmeddelandet direkt
+  // Text too short: run the ordinary build, which shows the error message directly
   const rasText = fullTrainText !== null ? fullTrainText : document.getElementById('trainText').value;
   if(fullTrainText === null && tokenize(rasText).length < 30){ buildFromTextarea(); return; }
   training = true;
@@ -1083,9 +1083,9 @@ async function trainAnimated(){
   requestAnimationFrame(() => requestAnimationFrame(() => {
     runTrainStatusList(DURATION);
     runTrainingCanvas(DURATION, async () => {
-      // Stora korpusar tar längre tid än animationen. Då tar en fjärde
-      // statusrad vid och visar verklig framdrift i stället för att sidan
-      // ser ut att ha hängt sig.
+      // Large corpora take longer than the animation. A fourth status line then
+      // takes over and shows real progress instead of leaving the page
+      // looking as though it has frozen.
       const rail = document.getElementById('trainRail');
       const wrap = document.getElementById('trainStatusList');
       let extraRad = null;
@@ -1152,8 +1152,8 @@ function runTrainStatusList(duration){
   requestAnimationFrame(tick);
 }
 
-// Riktiga ord ur den faktiska träningstexten strömmar in i en liten
-// tabellgrafik – inte en påhittad animation, utan samma data som byggs.
+// Real words from the actual training text stream into a small
+// table graphic. It is the same data as the one being built, not a mock animation.
 function runTrainingCanvas(duration, onDone){
   const canvas = document.getElementById('trainCanvas');
   const wrap = canvas.parentElement;
@@ -1166,7 +1166,7 @@ function runTrainingCanvas(duration, onDone){
   let finished = false;
   function finish(){ if(finished) return; finished = true; trainAnimRunning = false; onDone && onDone(); }
 
-  // Sampla riktiga ord ur den text som faktiskt ska tränas på
+  // Sample real words from the text that is actually going to be trained on
   const rawToks = tokenize(document.getElementById('trainText').value).filter(t => !/^[.,!?;:]$/.test(t) && t.length > 1);
   const sample = [];
   const n = Math.max(1, rawToks.length);
@@ -1204,7 +1204,7 @@ function runTrainingCanvas(duration, onDone){
     ctx.fillStyle = 'rgba(122,162,255,0.55)'; ctx.font = '600 9px "JetBrains Mono"'; ctx.textAlign = 'center';
     ctx.fillText('TABELL', tableX, tableTop - 8);
 
-    // radernas pulsljus (blinkar till när ett ord landar)
+    // pulse light of the rows (flashes when a word lands)
     for(let i = 0; i < rows; i++){
       if(rowPulse[i] > 0){
         rowPulse[i] -= 0.045;
@@ -1247,7 +1247,7 @@ function runTrainingCanvas(duration, onDone){
   }
   trainAnimRunning = true;
   requestAnimationFrame(draw);
-  setTimeout(finish, duration + 900);   // skyddsnät – låt aldrig bygget hänga
+  setTimeout(finish, duration + 900);   /* Safety net so that the build never hangs. */
 }
 
 async function buildFromTextarea(onProgress){
@@ -1267,8 +1267,8 @@ async function buildFromTextarea(onProgress){
   vocab = new Set(tokens);
   await buildModels(onProgress);
   built = true;
-  // Resten av sidan har ingen mening förrän det finns en modell, så den
-  // fälls ut först nu.
+  // The rest of the page is meaningless until a model exists, so it
+  // is revealed only now.
   document.getElementById('wrapEl').classList.remove('pre-train');
   harTranat = true;
   if(curStep >= 2) steg2Utfallt = true;
@@ -1282,13 +1282,13 @@ async function buildFromTextarea(onProgress){
   updatePromptTip();
   updateStats();
   validatePrompt();
-  startGen();   // sådda direkt så tabellen får liv
+  startGen();   // seeded immediately so the table comes alive
 }
 
-// Plocka ut några frekventa "innehållsord" som inbjudande startord.
-// Vanliga småord (och, i, en …) filtreras bort så förslagen blir konkreta.
-// Svenska småord, plus engelska för Shakespeare-texten. Ord kortare än
-// fyra tecken filtreras redan bort, så listan behöver bara de längre.
+// Pick out a few frequent content words as inviting starting words.
+// Common short words (och, i, en …) are filtered out so the suggestions stay concrete.
+// Swedish short words, plus English ones for the Shakespeare text. Words shorter than
+// four characters are already filtered out, so the list only needs the longer ones.
 const STOPWORDS = new Set([
   'och','i','en','ett','som','var','på','till','med','det','den','att','för','av','de','är',
   'han','hon','sin','sitt','inte','men','om','har','hade','blir','kan','vid','när','där','här',
@@ -1314,12 +1314,12 @@ function renderStartExamples(){
   const el = document.getElementById('startExamples');
   if(!built || !exampleStarts.length){ row.style.display = 'none'; return; }
   row.style.display = 'flex';
-  el.innerHTML = 'Prova: ' + exampleStarts
+  el.innerHTML = 'Try: ' + exampleStarts
     .map(w => `<button type="button" class="ex-chip" data-w="${esc(w)}">${esc(w)}</button>`)
     .join('');
 }
 
-// Klick på ett exempel-startord (delegering) – fyller promptfältet
+// Click on an example starting word (delegated), which fills the prompt field
 document.getElementById('startExamples').addEventListener('click', e => {
   const chip = e.target.closest('.ex-chip');
   if(!chip) return;
@@ -1327,14 +1327,14 @@ document.getElementById('startExamples').addEventListener('click', e => {
   startFromPrompt();
 });
 
-// ── Training data som krysslista: välj och kombinera flera texter ──
+// ── Training data as a checklist: select and combine several texts ──
 const selectedDatasets = new Set();
 
-// Texter som är valbara i aktuellt steg. null = alla upplåsta (steg 4).
+// Texts selectable in the current step. null means all are unlocked (step 4).
 let unlockedDatasets = null;
 
-// Lås allt utom de angivna nycklarna. Poängen är att hålla nere bruset:
-// i de tre första stegen ska eleven undersöka EN sak i taget, inte välja text.
+// Lock everything except the given keys, in order to keep the noise down:
+/* In the first three steps the student examines one thing at a time and does not choose a text. */
 function lockDatasets(allowed){
   unlockedDatasets = allowed ? [...allowed] : null;
   document.querySelectorAll('#dsList .ds-card').forEach(c => {
@@ -1345,7 +1345,7 @@ function lockDatasets(allowed){
   const note = document.getElementById('dsNote');
   if(note) note.textContent = unlockedDatasets
     ? 'The other texts unlock in step 4.'
-    : 'You can select several texts at once – they are merged into one training text.';
+    : 'You can select several texts at once. They are merged into one training text.';
 }
 
 async function toggleCard(key){
@@ -1358,13 +1358,13 @@ async function toggleCard(key){
   rebuildTrainText();
 }
 
-// Spegla markeringen på korten
+// Mirror the selection on the cards
 function syncCards(){
   document.querySelectorAll('#dsList .ds-card').forEach(c =>
     c.classList.toggle('selected', selectedDatasets.has(c.dataset.key)));
 }
 
-// Markera exakt den uppsättning som anges (används av stegen)
+// Select exactly the set given (used by the steps)
 function setDatasets(keys){
   selectedDatasets.clear();
   keys.forEach(k => selectedDatasets.add(k));
@@ -1372,18 +1372,18 @@ function setDatasets(keys){
   rebuildTrainText();
 }
 
-// Bygg träningstexten = alla ikryssade dataset hopslagna
+/* The training text consists of every ticked dataset merged together. */
 function rebuildTrainText(){
   const keys = [...selectedDatasets];
   const text = keys.map(k => PRESETS[k]).join('\n\n');
   const ruta = document.getElementById('trainText');
   if(text.length > TEXTAREA_TAK){
-    // Hela texten sparas undan; rutan får ett smakprov så att sidan
-    // förblir snabb. Eleven ser ändå vad modellen faktiskt tränar på.
+    // The whole text is stored aside and the box gets a sample so that the page
+    // stays fast. The student still sees what the model actually trains on.
     fullTrainText = text;
     ruta.value = text.slice(0, TEXTAREA_TAK).replace(/\S*$/, '')
       + `\n\n… (showing the first ${Math.round(TEXTAREA_TAK/1000)},000 characters of `
-      + `${(text.length/1000000).toFixed(1)} million – the model trains on the whole text)`;
+      + `${(text.length/1000000).toFixed(1)} million. The model trains on the whole text)`;
     ruta.dataset.preview = '1';
   } else {
     fullTrainText = null;
@@ -1393,10 +1393,10 @@ function rebuildTrainText(){
   markDirty();
 }
 
-// Eleven redigerar textrutan själv → bli "egen text" och avmarkera datasen
+// The student edits the text box directly, which makes it "own text" and clears the datasets
 function onTextEdit(){
   const ruta = document.getElementById('trainText');
-  // Smakprovsläge: så fort eleven skriver själv gäller rutans innehåll,
+  // Sample mode: as soon as the student types, the content of the box applies,
   // inte den undanlagda korpusen.
   if(ruta.dataset.preview){
     fullTrainText = null;
@@ -1414,8 +1414,8 @@ function onTextEdit(){
   markDirty();
 }
 
-// Markera att modellen behöver tränas om (utan att träna automatiskt) –
-// så eleven själv trycker "Träna" och ser modellen uppdateras.
+// Mark that the model needs retraining, without training automatically,
+// so that the student presses "Train" and sees the model update.
 function markDirty(){
   dirty = true;
   const note = document.getElementById('staleNote');
@@ -1428,7 +1428,7 @@ function markDirty(){
   document.getElementById('trainStatus').innerHTML = '';
 }
 
-// Live-feedback medan man skriver prompten: kan modellen fortsätta härifrån?
+// Live feedback while the prompt is typed: can the model continue from here?
 function validatePrompt(){
   const el = document.getElementById('promptStatus');
   if(!el) return;
@@ -1456,9 +1456,9 @@ function validatePrompt(){
   }
 }
 
-// Förväntat antal valmöjligheter per genereringssteg (viktat med hur
-// ofta varje kontext förekommer). Nära 1 ⇒ modellen kan bara
-// återberätta texten ordagrant.
+// Expected number of choices per generation step, weighted by how
+// often each context occurs. Close to 1 means the model can only
+// retell the text word for word.
 function branching(kk){
   if(!built || models[kk].size === 0) return 0;
   let num = 0, den = 0;
@@ -1472,7 +1472,7 @@ function branching(kk){
 }
 
 function updateStats(){
-  document.getElementById('stStatus').textContent = built ? '✓ byggd' : '–';
+  document.getElementById('stStatus').textContent = built ? '✓ built' : '–';
   document.getElementById('stStatus').className = built ? 'sv ok' : 'sv';
   document.getElementById('stTokens').textContent = tokens.length;
   document.getElementById('stVocab').textContent = built ? new Set(tokens).size : 0;
@@ -1496,12 +1496,12 @@ function updateStats(){
   bFill.style.background = col;
   bLbl.style.color = col;
   bLbl.innerHTML = bf >= 1.5 ? '<i class="dot good"></i>Plenty of freedom. The text can go in many directions.'
-                   : bf >= 1.1 ? '<i class="dot mid"></i>Lagom valfrihet.'
+                   : bf >= 1.1 ? '<i class="dot mid"></i>A reasonable amount of freedom.'
                    : '<i class="dot bad"></i>Almost no freedom. The model mostly replays the text word for word.';
 
   let note = '';
   if(bf < 1.1){
-    note = `<svg class="inl-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17.5v.01"/></svg> <strong>This text rarely repeats itself</strong> – at context length ${k} there is almost never more than <strong>one</strong> possible next word. The model can then only retell the text word for word until it runs out. Try <strong>context length 1</strong>, or a longer text where words and phrases recur.`;
+    note = `<svg class="inl-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2.5 20h19z"/><path d="M12 10v4M12 17.5v.01"/></svg> <strong>This text rarely repeats itself.</strong> At context length ${k} there is almost never more than <strong>one</strong> possible next word. The model can then only retell the text word for word until it runs out. Try <strong>context length 1</strong>, or a longer text where words and phrases recur.`;
   }
   if(truncated){
     note += (note ? '<br><br>' : '') + `<svg class="inl-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></svg> The text was very long and was cut to ${MAX_TOKENS.toLocaleString('en-GB')} tokens when building.`;
@@ -1525,7 +1525,7 @@ function getDist(){
 
 // Temperature: p_i ∝ c_i^(1/T). T=1 ger ren frekvens, T→0 ger argmax, T>1 plattar ut.
 function withProbs(dist){
-  const T = (mode === 'greedy') ? 1 : temp;   // i girigt läge visas råa frekvenser
+  const T = (mode === 'greedy') ? 1 : temp;   // in greedy mode the raw frequencies are shown
   const weights = dist.map(d => Math.pow(d.c, 1 / T));
   const sum = weights.reduce((a, b) => a + b, 0);
   return dist.map((d, i) => ({...d, p: weights[i] / sum}));
@@ -1550,7 +1550,7 @@ function startGen(word){
     let idxs = [];
     for(let i = 0; i < tokens.length; i++) if(tokens[i] === word) idxs.push(i);
     if(idxs.length === 0) return false;
-    // Föredra förekomster med full kontext bakåt
+    // Prefer occurrences with the full context behind them
     const withCtx = idxs.filter(i => i >= k - 1);
     if(withCtx.length > 0){
       const i = withCtx[Math.floor(Math.random() * withCtx.length)];
@@ -1561,7 +1561,7 @@ function startGen(word){
     }
   }else{
     const all = starts[k].length ? starts[k] : [0];
-    // Undvik att sådda från en kontext som saknar fortsättning
+    // Avoid seeding from a context that has no continuation
     const viable = all.filter(j => models[k].has(tokens.slice(j, j + k).join(SEP)));
     const list = viable.length ? viable : all;
     const j = list[Math.floor(Math.random() * list.length)];
@@ -1577,7 +1577,7 @@ function restartGen(){
   startGen();
 }
 
-// ── Prompt: hela startfrasen styr vilken kontext modellen utgår från ──
+// ── Prompt: the whole starting phrase decides which context the model starts from ──
 function startFromPrompt(){
   if(!built) return;
   const raw = document.getElementById('promptInput').value;
@@ -1592,15 +1592,15 @@ function startFromPrompt(){
   stopAuto();
   deadEnd = false;
 
-  // Prompt med minst k ord: använd den ordagrant som startkontext.
+  // Prompt with at least k words: it is used verbatim as the starting context.
   if(ptoks.length >= k){
     genTokens = ptoks.slice();   // hela prompten visas i textrutan
     renderFromPrompt();
     return;
   }
 
-  // Kortare prompt än kontextlängden: hoppa in vid sista ordet i texten,
-  // så modellen får en hel kontext att utgå från.
+  // Prompt shorter than the context length: enter at the last word in the text,
+  // so that the model gets a complete context to start from.
   const last = ptoks[ptoks.length - 1];
   if(startGen(last)){
     const ctx = genTokens.slice(-k);
@@ -1610,7 +1610,7 @@ function startFromPrompt(){
       `Short prompt. The model jumped in at <span class="ctx-inline">“${esc(ctx.join(' '))}”</span> in the text ` +
       `because it needs ${k} words of context. Press <strong>Next word</strong>.`;
   }else{
-    // Ordet finns inte alls i träningstexten
+    // The word does not occur in the training text at all
     genTokens = ptoks.slice();
     document.getElementById('genBox').innerHTML =
       detokHTML(genTokens, 0, true) + '<span class="cursor"></span>';
@@ -1628,7 +1628,7 @@ function renderFromPrompt(){
     detokHTML(genTokens, hlFrom, true) + '<span class="cursor"></span>';
   const ctx = genTokens.slice(-k);
 
-  // Modellen har aldrig sett den här kontexten (ingen generalisering)
+  // The model has never seen this context (no generalisation)
   if(!models[k].has(ctx.join(SEP))){
     deadEnd = true;
     document.getElementById('ctxChip').innerHTML =
@@ -1640,7 +1640,7 @@ function renderFromPrompt(){
       'Start over from a sentence in the text');
     return;
   }
-  // Kontexten finns → kör vanlig rendering
+  // The context exists, so ordinary rendering applies
   render(true);
   if(genTokens.length > k){
     const forgotten = genTokens.slice(0, -k).join(' ');
@@ -1663,7 +1663,7 @@ function promptBlocked(narrHtml, btnLabel){
   document.getElementById('ptableWrap')?.classList.remove('scrollable');
 }
 
-// Uppdaterar glaskorts-innehållet så siffrorna följer vald context length
+// Updates the glass card content so the figures follow the chosen context length
 let promptTipHTML = '';
 function updatePromptTip(){
   promptTipHTML =
@@ -1683,13 +1683,13 @@ function step(manualWord){
   else if(mode === 'greedy') chosen = probs[0].w;
   else chosen = sampleFrom(probs);
 
-  // Spara underlaget för motiveringen (innan kontexten flyttas fram)
+  // Store the basis for the explanation (before the context is moved forward)
   const prevCtx = genTokens.slice(-k);
   const total = dist.reduce((a, b) => a + b.c, 0);
   const chosenItem = dist.find(d => d.w === chosen);
   const chosenC = chosenItem ? chosenItem.c : 0;
 
-  // Blinka det valda ordet i tabellen innan det läggs till
+  // Flash the chosen word in the table before it is added
   busy = true;
   renderTable(probs, chosen);
   const flashMs = autoTimer
@@ -1709,10 +1709,10 @@ function showDeadEnd(){
   const ctx = genTokens.slice(-k);
   const bf = branching(k);
   const why = bf < 1.1
-    ? `This text rarely repeats itself, so at context length ${k} the model can only follow it word for word – and now it has run out. Try <strong>context length 1</strong>, or use a longer text with more repetition.`
+    ? `This text rarely repeats itself, so at context length ${k} the model can only follow it word for word, and now it has run out. Try <strong>context length 1</strong>, or use a longer text with more repetition.`
     : `This is the table model’s weakness: it only handles exact matches, whereas ChatGPT’s neural network can <em>generalise</em>.`;
   document.getElementById('ptable').innerHTML =
-    `<div class="ptable-msg"><span class="big"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v10H4z"/><path d="M4 7l16 10M20 7L4 17"/></svg></span><div><strong>Dead end</strong> – no possible words from here.</div>
+    `<div class="ptable-msg"><span class="big"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v10H4z"/><path d="M4 7l16 10M20 7L4 17"/></svg></span><div><strong>Dead end.</strong> No possible words from here.</div>
      <button class="btn pri" onclick="closeConcept();deadEnd=false;startGen()">Start over from a new spot</button></div>`;
   document.getElementById('ptableWrap')?.classList.remove('scrollable');
   document.getElementById('narr').innerHTML =
@@ -1734,7 +1734,7 @@ function toggleAuto(){
   if(autoTimer){ stopAuto(); return; }
   if(!built || deadEnd) return;
   const btn = document.getElementById('autoBtn');
-  btn.textContent = '⏸ Pausa';
+  btn.textContent = '⏸ Pause';
   btn.classList.add('pri');
   const tick = () => {
     if(!autoTimer) return;
@@ -1759,9 +1759,9 @@ function stopAuto(){
 }
 
 // ════════════════════════════════════════════════════════════
-//  Inställningar
+//  Settings
 // ════════════════════════════════════════════════════════════
-// Måla den segmenterade kontrollen utan att röra modellen
+// Repaint the segmented control without touching the model
 function paintK(v){
   document.querySelectorAll('#kSeg .kseg-b').forEach(b => b.classList.toggle('on', +b.dataset.k === v));
 }
@@ -1776,7 +1776,7 @@ function onKChange(val){
   if(!built) return;
   stopAuto();
   deadEnd = false;
-  // Behåll texten om den nya kontexten finns i modellen, annars ny sådd
+  // Keep the text if the new context exists in the model, otherwise seed anew
   const ctx = genTokens.slice(-k);
   if(ctx.length === k && models[k].has(ctx.join(SEP))) render();
   else startGen();
@@ -1812,8 +1812,8 @@ function esc(s){
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// Tokens → läsbar HTML: stor bokstav efter meningsslut, inget
-// mellanslag före skiljetecken, kontexten markerad med chips.
+// Tokens to readable HTML: a capital letter after a sentence end, no
+// space before punctuation, and the context marked with chips.
 function detokHTML(toks, hlFrom, animateLast){
   let html = '', capitalize = true;
   for(let i = 0; i < toks.length; i++){
@@ -1834,10 +1834,10 @@ function detokHTML(toks, hlFrom, animateLast){
   return html;
 }
 
-// ── Härkomstspårning ──────────────────────────────────────────
-// Klick på ett genererat ord visar var samma ordföljd står i träningstexten.
-const ORIGIN_PAD = 7;      // ord av omgivning på varje sida
-const ORIGIN_MAX = 4;      // högst så många förekomster
+// ── Provenance tracking ───────────────────────────────────────
+// Clicking a generated word shows where the same word sequence occurs in the training text.
+const ORIGIN_PAD = 7;      // words of surrounding text on each side
+const ORIGIN_MAX = 4;      // at most this many occurrences
 
 function findNgram(seq){
   const hits = [];
@@ -1893,9 +1893,9 @@ document.addEventListener('click', e => {
   if(t) showOrigin(parseInt(t.dataset.i));
 });
 
-// ── Jämförelse sida vid sida: samma start, olika context length ──
-// Genererar fristående från den pågående sessionen så att elevens egen
-// text inte påverkas.
+// ── Side-by-side comparison: same start, different context length ──
+// Generated independently of the ongoing session so that the student's own
+// text is unaffected.
 function genWith(kk, seed, n){
   const out = seed.slice();
   for(let step = 0; step < n; step++){
@@ -1904,7 +1904,7 @@ function genWith(kk, seed, n){
     const counts = models[kk].get(ctx.join(SEP));
     if(!counts) break;
     const dist = [...counts.entries()].map(([w, c]) => ({w, c}));
-    // Fast temperatur: kontextlängden ska vara den enda variabeln som skiljer kolumnerna
+    // Fixed temperature: the context length is to be the only variable separating the columns
     const weights = dist.map(d => d.c);
     const sum = weights.reduce((a, b) => a + b, 0);
     let r = Math.random(), picked = dist[dist.length - 1].w;
@@ -1920,13 +1920,13 @@ function genWith(kk, seed, n){
 function runCompare(){
   const panel = document.getElementById('cmpPanel');
   if(!built){ return; }
-  // Gemensam start: tre ord ur texten så att alla tre kontextlängder kan användas
+  // Shared start: three words from the text so that all three context lengths can be used
   const cand = starts[3].length ? starts[3] : starts[1];
   const at = cand[Math.floor(Math.random() * cand.length)];
   const seed = tokens.slice(at, at + 3);
   const cols = [1, 2, 3].map(kk => {
     const toks = genWith(kk, seed.slice(), 45);
-    // Fönstret: exakt de ord modellen faktiskt läser innan den väljer nästa
+    // The window: exactly the words the model reads before it chooses the next one
     const win = seed.slice(-kk).map(t => `<span class="cw">${esc(t)}</span>`).join('');
     const body = toks.map((t, i) => (i < seed.length ? `<span class="seed">${esc(t)}</span>` : esc(t)))
                      .reduce((a, t, i) => a + (i === 0 || /^[.,!?;:]$/.test(toks[i]) ? '' : ' ') + t, '');
@@ -1946,7 +1946,7 @@ function render(animate){
   document.getElementById('genBox').innerHTML =
     detokHTML(genTokens, hlFrom, animate) + '<span class="cursor"></span>';
 
-  // Tabell + berättarrad
+  // Table and narration row
   const dist = getDist();
   if(!dist){ showDeadEnd(); return; }
   const probs = withProbs(dist);
@@ -1962,8 +1962,8 @@ function render(animate){
     `Press <strong>Next word</strong>.`;
 }
 
-// Motivering efter ett ordval: "valde X eftersom det följde på «kontext»
-// N av M gånger". Gör modellens "tänkande" synligt.
+// Explanation after a word choice: "chose X because it followed «context»
+// N out of M times". This makes the reasoning of the model visible.
 function narrChoice(prevCtx, w, c, total){
   const pct = total ? Math.round(c / total * 100) : 0;
   const narr = document.getElementById('narr');
@@ -1983,7 +1983,7 @@ function renderTable(probs, picked){
     'The model is looking for: ' + ctxHtml +
     `<span class="ctx-count">This sequence appears <b>${total}</b> ${total === 1 ? 'time' : 'times'} in the text. Here is how often each word followed:</span>`;
 
-  // Säkerhetsmätare: hur koncentrerad är fördelningen (oberoende av temperatur)?
+  // Certainty meter: how concentrated is the distribution (independently of temperature)?
   const topC = probs.length ? Math.max(...probs.map(p => p.c)) : 0;
   renderCertainty(total ? topC / total : 0, probs.length, mask);
 
@@ -2016,14 +2016,14 @@ function renderTable(probs, picked){
   }
   const tbl = document.getElementById('ptable');
   tbl.innerHTML = html;
-  // Ny kontext → börja om högst upp, annars ligger eleven kvar mitt i
-  // föregående kontexts lista och tror att listan inte uppdaterats.
+  // New context: start again at the top, otherwise the student stays in the middle of
+  // the previous list and believes it has not been updated.
   tbl.scrollTop = 0;
   syncPtableFade();
 }
 
-// Uttoningen ska bara synas när det faktiskt finns mer nedanför. Ligger den
-// kvar när man rullat till slutet ser den ut som en skugga på måfå.
+// The fade should appear only when there really is more below. Left in place
+// once the list is scrolled to the end, it looks like a stray shadow.
 function syncPtableFade(){
   const tbl = document.getElementById('ptable');
   const wrap = document.getElementById('ptableWrap');
@@ -2037,7 +2037,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', syncPtableFade, {passive:true});
 });
 
-// Gissa först: dölj/visa sannolikheterna
+// Guess first: hide or show the probabilities
 function toggleGuess(on){
   guessFirst = on;
   reveal = false;
@@ -2050,7 +2050,7 @@ function revealProbs(){
   refreshTable();
 }
 
-// Säkerhetsmätare: hur säker är modellen på nästa ord just nu?
+// Certainty meter: how sure is the model about the next word right now?
 function renderCertainty(p1, options, mask){
   const el = document.getElementById('certainty');
   if(!el) return;
@@ -2063,7 +2063,7 @@ function renderCertainty(p1, options, mask){
   }
   const pct = Math.round(p1 * 100);
   const col = p1 >= 0.7 ? 'var(--green)' : p1 >= 0.4 ? 'var(--gold)' : 'var(--red)';
-  const lbl = p1 >= 0.7 ? '<i class="dot good"></i>High certainty' : p1 >= 0.4 ? '<i class="dot mid"></i>Medel' : '<i class="dot bad"></i>Low certainty';
+  const lbl = p1 >= 0.7 ? '<i class="dot good"></i>High certainty' : p1 >= 0.4 ? '<i class="dot mid"></i>Medium certainty' : '<i class="dot bad"></i>Low certainty';
   el.innerHTML =
     `<div class="cert-top"><span class="cert-lbl">How sure is the model about the next word?</span><span class="cert-val" style="color:${col}">${pct}%</span></div>
      <div class="cert-bar"><div class="cert-fill" style="width:${Math.max(4, pct)}%;background:${col}"></div></div>
@@ -2072,8 +2072,8 @@ function renderCertainty(p1, options, mask){
 
 // ── Stegnavigering: guidad trappa genom labbet ──
 let curStep = 1;
-let harTranat = false;      // har eleven tränat modellen någon gång?
-let steg2Utfallt = false;   // har steg 2 fällts ut? (sker bara en gång)
+let harTranat = false;      // has the student trained the model at any point?
+let steg2Utfallt = false;   // has step 2 been revealed? (happens only once)
 const STEP_ACCENTS = ['#4d80ff','#34c759','#ffd866','#a78bfa'];
 const STEPS = [
   {label:'Next word', title:'How does the model choose the next word?',
@@ -2094,8 +2094,8 @@ const STEPS = [
    rec:{ds:['hemso'], k:2}}
 ];
 
-// Bygg de fem glaskänsla-plattorna. Anropas varje stegbyte (billigt för 5 element)
-// så att aktivt-läget alltid stämmer, utan separat diff-logik.
+// Build the five tiles. Called on every step change (cheap for 5 elements)
+// so that the active state is always correct, without separate diff logic.
 function renderStepTiles(n){
   document.getElementById('shTiles').innerHTML = STEPS.map((s, i) => `
     <button class="sh-tile ${i === n - 1 ? 'active' : ''}" onclick="goStep(${i + 1})" aria-label="Step ${i + 1}: ${s.label}">
@@ -2110,11 +2110,11 @@ function goStep(n){
   curStep = n;
   const wrap = document.getElementById('wrapEl');
   const cls = ['wrap'];
-  // Den stegvisa utfällningen sker två gånger: vid första träningen och en
-  // gång till när eleven kommer till steg 2, eftersom det är där training datan
-  // byts ut och pipelinen alltså börjar om. Från steg 3 och framåt står sidan
-  // kvar utfälld – då är allt bekant, och att kollapsa vid varje stegbyte
-  // skulle bara kännas som att tappa fotfästet.
+  // The stepwise reveal happens twice: at the first training and once more
+  // when the student reaches step 2, since that is where the training data is
+  // replaced and the pipeline therefore starts over. From step 3 onwards the page
+  // stays revealed, because everything is then familiar and collapsing it at every
+  // step change would only disorient the student.
   let fallIhop = wrap.classList.contains('pre-train');
   if(n === 2 && !steg2Utfallt) fallIhop = true;
   if(n >= 3 && harTranat) fallIhop = false;
@@ -2123,7 +2123,7 @@ function goStep(n){
   if(n >= 3) cls.push('sx-choose');
   if(n >= 4) cls.push('sx-data');
   wrap.className = cls.join(' ');
-  // Subtil egen accentfärg per steg → känsla av framsteg
+  // A subtle accent colour per step conveys progress
   const accent = STEP_ACCENTS[n - 1] || '#4d80ff';
   wrap.style.setProperty('--step-accent', accent);
   wrap.style.setProperty('--step-accent-soft', accent + '22');
@@ -2132,28 +2132,28 @@ function goStep(n){
   const step = STEPS[n - 1];
   document.getElementById('shTitleEl').textContent = step.title;
   document.getElementById('shDesc').innerHTML = step.intro;
-  hydrateTerms();   // bannern byggs om vid varje steg, så begreppen måste kopplas på nytt
+  hydrateTerms();   // the banner is rebuilt at every step, so the glossary terms must be reconnected
   const banner = document.getElementById('shBanner');
   banner.classList.remove('anim');
-  void banner.offsetWidth;   // tvinga reflow så animationen kan triggas igen
+  void banner.offsetWidth;   // force a reflow so the animation can be triggered again
   banner.classList.add('anim');
   document.getElementById('prevStep').style.visibility = n === 1 ? 'hidden' : 'visible';
   document.getElementById('nextStep').style.visibility = n === STEPS.length ? 'hidden' : 'visible';
   hideOrigin();
   const cmp = document.getElementById('cmpPanel');
   if(cmp) cmp.classList.remove('show');
-  // Texterna låses upp först i steg 4
+  // The texts are unlocked only in step 4
   lockDatasets(n >= 4 ? null : (step.rec ? step.rec.ds : null));
   const rec = step.rec;
   if(rec){
     k = rec.k;
     paintK(rec.k);
-    setDatasets(rec.ds);      // bockar i rätt texter, markerar modellen som otränad/dirty – eleven trycker Träna själv, varje gång
+    setDatasets(rec.ds);      // ticks the right texts and marks the model as untrained, so the student presses Train
   }
-  scrollToTop();             // börja varje steg högst upp (sist, efter ombyggnad)
+  scrollToTop();             // start every step at the top (last, after the rebuild)
 }
 
-// Pålitlig scroll till toppen – fungerar även på mobil (smooth ignoreras ofta där)
+// Reliable scroll to the top, which also works on mobile, where smooth is often ignored
 function scrollToTop(){
   const jump = () => {
     window.scrollTo(0, 0);
@@ -2163,10 +2163,10 @@ function scrollToTop(){
   };
   jump();
   requestAnimationFrame(jump);   // igen efter att layouten ritats om
-  setTimeout(jump, 60);          // och en gång till om innehållet just bytt höjd
+  setTimeout(jump, 60);          // and once more if the content has just changed height
 }
 
-// Tangentbord: mellanslag / högerpil = nästa ord (utanför inmatningsfält)
+// Keyboard: space and right arrow give the next word (outside input fields)
 document.addEventListener('keydown', e => {
   const tag = document.activeElement.tagName;
   if(tag === 'TEXTAREA' || tag === 'INPUT' || tag === 'SELECT') return;
@@ -2179,7 +2179,7 @@ function toggleColl(btn, bodyId){
 }
 
 // ════════════════════════════════════════════════════════════
-//  Concept list: hover-förklaringar på understrukna ord + en
+//  Concept list: hover explanations on underlined words plus a
 //  samlad lista i sidopanelen.
 // ════════════════════════════════════════════════════════════
 const GLOSSARY = {
@@ -2187,7 +2187,7 @@ const GLOSSARY = {
   token:           {t:'Token',                  d:'A building block of the text. Usually a word, but punctuation counts as its own token too.'},
   prompt:          {t:'Prompt',                 d:'The text you type in for the model to continue. Here it is your opening phrase.'},
   kontext:         {t:'Context',                d:'The words the model is taking into account right now when choosing the next word. Its memory.'},
-  'context length':  {t:'Context length (n-gram)',  d:'How many words back the model looks. Here 1 to 3. ChatGPT uses thousands.'},
+  'context length':  {t:'Context length (n-gram)',  d:'How many words back the model looks. Here 1 to 3. ChatGPT works with tens of thousands of words or more.'},
   'kontextfönster':{t:'Context window',         d:'How much text the model can hold at once. Tiny here, very large in ChatGPT.'},
   kontexter:       {t:'Contexts',              d:'All the different word sequences (contexts) the model has seen in the training text and recognises.'},
   sannolikhet:     {t:'Probability',             d:'How likely a given continuation is, worked out from how often it appeared in the text.'},
@@ -2240,16 +2240,16 @@ const CONCEPTS = {
     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3M8.5 10h.01M15.5 10h.01"/></svg>',
     title:'The model &amp; ChatGPT',
     def:'<div class="cc-lead">This mini model and ChatGPT rest on <strong>the same basic principle</strong>: predicting the next word. The difference lies in how the probabilities are worked out.</div>'
-      + '<div class="cc-sub green">Likheter</div>'
+      + '<div class="cc-sub green">Similarities</div>'
       + '<ul class="cc-list green">'
       + '<li>Both predict the next word from the words that came before.</li>'
       + '<li>Both compute a <em>probability</em> for many possible next words and then pick one of them.</li>'
       + '<li><em>Temperature</em> affects the choice of word the same way in both.</li>'
       + '</ul>'
-      + '<div class="cc-sub orange">Skillnader</div>'
+      + '<div class="cc-sub orange">Differences</div>'
       + '<ul class="cc-list orange">'
       + '<li>This model uses a <strong>table</strong> of exact word sequences. ChatGPT uses a <em>neural network</em> with billions of parameters.</li>'
-      + '<li>ChatGPT takes <strong>thousands</strong> of previous words into account, not just 1–3.</li>'
+      + '<li>ChatGPT takes <strong>tens of thousands</strong> of previous words into account or more, not just 1 to 3.</li>'
       + '<li>ChatGPT has been trained on an enormous amount of text from many sources.</li>'
       + '<li>ChatGPT can <em>generalise</em> to patterns it has not seen exactly. The table only recognises sequences it has already met.</li>'
       + '</ul>'
@@ -2268,7 +2268,7 @@ const CONCEPTS = {
       + '<li>Picks at random between the options, but gives <strong>more common words</strong> a better chance.</li>'
       + '<li>This is what ChatGPT does by default.</li>'
       + '</ul>'
-      + '<div class="cc-sub">Temperaturen</div>'
+      + '<div class="cc-sub">Temperature</div>'
       + '<ul class="cc-list">'
       + '<li><strong>Low</strong> temperature almost always gives the most common word.</li>'
       + '<li><strong>High</strong> temperature gives rarer choices. The text becomes more surprising, but loses the thread more easily.</li>'
@@ -2343,13 +2343,13 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeConcept(
 })();
 
 // ════════════════════════════════════════════════════════════
-//  Start: bygg den längre texten direkt så allt är levande
+//  Start: build the longer text straight away so that everything is alive
 //  bakom intro-overlayen
 // ════════════════════════════════════════════════════════════
 hydrateTerms();
 renderGlossary();
 loadDatasets().then(() => {
-  goStep(1);   // starta i steg 1 när texterna är laddade
+  goStep(1);   // start in step 1 once the texts are loaded
 });
 </script>
 </body>
