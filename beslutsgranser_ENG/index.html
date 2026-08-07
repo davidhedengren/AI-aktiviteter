@@ -47,7 +47,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .back-link:hover{color:var(--text);border-color:var(--dim);}
 .lang-link{position:absolute;top:50%;right:16px;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;font-size:0.75em;font-weight:700;color:var(--dim);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);transition:0.2s;white-space:nowrap;z-index:2;}
 .lang-link:hover{color:var(--text);border-color:var(--dim);}
-.lang-link .flag{font-size:1.05em;line-height:1;}
+.lang-link .flag{width:18px;height:13px;display:block;border-radius:2.5px;box-shadow:0 0 0 1px rgba(255,255,255,.12);}
 .hd{width:100%;text-align:center;padding:14px 160px 10px;border-bottom:1px solid var(--border-soft);position:relative;background:linear-gradient(180deg,rgba(99,102,241,0.04),transparent);z-index:2;}
 .hd-title-row{display:flex;align-items:center;justify-content:center;gap:9px;}
 .hd-icon{width:20px;height:20px;color:var(--accent2);flex-shrink:0;}
@@ -199,7 +199,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset;padding:26px 26px 22px;
   transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
   transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);
-  will-change:transform;max-height:86vh;overflow-y:auto;}
+  will-change:transform;}
 .concept-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
   padding:1.5px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(139,143,255,.7),rgba(255,206,84,.15) 45%,transparent 65%);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
@@ -251,7 +251,7 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
 
 .overlay{position:fixed;inset:0;background:rgba(6,7,14,.85);backdrop-filter:blur(18px);z-index:100;display:none;align-items:center;justify-content:center;transition:opacity .3s var(--ease-out);}
 .overlay.show{display:flex;}
-.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.92),rgba(16,19,34,.94));border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:30px 34px;max-width:520px;width:92%;text-align:center;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.02) inset;animation:cardIn .5s var(--ease-spring);}
+.overlay-card{background:linear-gradient(180deg,rgba(24,28,48,.92),rgba(16,19,34,.94));border:1px solid var(--border-soft);border-radius:var(--r-lg);padding:30px 34px;max-width:520px;width:92%;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.02) inset;animation:cardIn .5s var(--ease-spring);}
 @keyframes cardIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
 .db-icon-wrap{width:64px;height:64px;margin:0 auto 12px;}
 .db-icon-wrap svg{width:100%;height:100%;}
@@ -278,6 +278,20 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
   .hd{padding:10px 16px 8px;}
   .hd-title-row{flex-wrap:wrap;}
 }
+
+/* The concept cards do not scroll. On low screens they shrink instead. */
+@media (max-height:760px){
+  .concept-icon{width:44px;height:44px;margin:0 auto 9px;}
+  .concept-title{font-size:1.06em;margin-bottom:6px;}
+  .concept-def{font-size:.8em;line-height:1.5;margin-bottom:12px;}
+  .concept-illus{padding:7px;}
+}
+@media (max-height:600px){
+  .concept-card{width:330px;}
+  .concept-icon{width:36px;height:36px;margin:0 auto 7px;}
+  .concept-def{font-size:.76em;line-height:1.45;margin-bottom:9px;}
+  .concept-illus{display:none;}
+}
 </style>
 </head>
 <body>
@@ -290,7 +304,7 @@ body.mode-adv .panel,body.mode-adv .canvas-area{border-color:rgba(167,139,250,.1
     <h1>Visualizing <span>decision boundaries</span></h1>
   </div>
   <p>Draw data points for two classes and see how different models draw the boundary between them.</p>
-  <a class="lang-link" href="https://www.ai-aktiviteter.se/beslutsgranser"><span class="flag">🇸🇪</span> Svenska</a>
+  <a class="lang-link" href="https://www.ai-aktiviteter.se/beslutsgranser" hreflang="sv" lang="sv"><svg class="flag" width="18" height="13" viewBox="0 0 16 10" aria-hidden="true"><rect width="16" height="10" rx="1.1" fill="#006AA7"/><rect x="5" width="2" height="10" fill="#FECC02"/><rect y="4" width="16" height="2" fill="#FECC02"/></svg> Svenska</a>
 </div>
 
 <div class="app">
