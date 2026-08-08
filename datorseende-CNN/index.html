@@ -111,7 +111,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .vf-b::after{bottom:0;right:0;border-left:none;border-top:none;border-radius:0 0 4px 0;}
 .px-grid{display:grid;grid-template-columns:repeat(16,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;width:min(76vw,330px);aspect-ratio:1;touch-action:none;user-select:none;}
 .px{background:#000;position:relative;cursor:crosshair;display:flex;align-items:center;justify-content:center;}
-.px span{font-family:'JetBrains Mono',monospace;font-size:7px;color:rgba(232,236,248,0.85);pointer-events:none;display:none;mix-blend-mode:difference;}
+.px span{font-family:'JetBrains Mono',monospace;font-size:8px;line-height:1;pointer-events:none;display:none;}
 .px-grid.shownum .px span{display:block;}
 .px-grid.hi .px span{font-size:5px;}
 .px.scan{outline:2px solid var(--orange);outline-offset:-2px;z-index:2;}
@@ -492,10 +492,12 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 /* Pixelvärde-toggle vid canvasen */
 .canvas-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
 .toggle-sw{display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none;font-size:0.74em;font-weight:600;color:var(--subtle);}
-.toggle-sw .tw-track{width:36px;height:20px;border-radius:20px;background:var(--surface2);border:1px solid var(--border);position:relative;transition:0.2s;flex:none;}
-.toggle-sw .tw-track::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--dim);transition:0.2s var(--spring);}
-.toggle-sw.on .tw-track{background:rgba(77,128,255,0.35);border-color:var(--accent);}
-.toggle-sw.on .tw-track::after{left:18px;background:var(--accent2);}
+.toggle-sw .tw-track{width:38px;height:21px;border-radius:21px;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.18);position:relative;transition:0.2s;flex:none;}
+.toggle-sw:hover .tw-track{border-color:rgba(255,255,255,.32);}
+.toggle-sw:focus-visible{outline:2px solid var(--accent2);outline-offset:3px;border-radius:6px;}
+.toggle-sw .tw-track::after{content:'';position:absolute;top:2px;left:2px;width:15px;height:15px;border-radius:50%;background:var(--subtle);box-shadow:0 1px 3px rgba(0,0,0,.55);transition:0.2s var(--spring);}
+.toggle-sw.on .tw-track{background:rgba(77,128,255,0.5);border-color:var(--accent);}
+.toggle-sw.on .tw-track::after{left:20px;background:#fff;}
 
 @media(max-width:900px){
   .back-link{position:static;transform:none;margin-bottom:4px;}
@@ -535,7 +537,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <div class="card" id="imgCard">
     <div class="canvas-head">
       <div class="card-h" style="margin:0;">Bilden <span class="sub">· <span id="gridLabel">16 × 16</span> <span class="term" data-term="pixel">pixlar</span></span></div>
-      <div class="toggle-sw" id="numSw" onclick="toggleNumsSw()"><span class="tw-track"></span><span>Visa pixelvärden (0–255)</span></div>
+      <div class="toggle-sw" id="numSw" role="switch" tabindex="0" aria-checked="false" onclick="toggleNumsSw()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNumsSw();}"><span class="tw-track"></span><span>Visa pixelvärden (0–255)</span></div>
     </div>
     <div class="canvas-zone">
       <div class="viewfinder"><div class="vf-b"></div>
@@ -956,14 +958,19 @@ function renderImage(){
   for(let i = 0; i < N * N; i++){
     const v = img[i];
     cells[i].style.background = `rgb(${v},${v},${v})`;
-    cells[i].firstChild.textContent = v;
+    const s = cells[i].firstChild;
+    s.textContent = v;
+    /* Siffran färgas efter pixelns ljushet, så att den syns på både mörk och ljus ruta. */
+    s.style.color = v > 140 ? '#0b0e18' : 'rgba(232,236,248,.92)';
   }
 }
 let showNums = false;
 function toggleNumsSw(){
   showNums = !showNums;
   pxGrid.classList.toggle('shownum', showNums);
-  document.getElementById('numSw').classList.toggle('on', showNums);
+  const sw = document.getElementById('numSw');
+  sw.classList.toggle('on', showNums);
+  sw.setAttribute('aria-checked', showNums ? 'true' : 'false');
 }
 
 let painting = false;
