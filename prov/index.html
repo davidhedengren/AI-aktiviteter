@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Davids prov- och resultatanalyserare</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2325397A'/%3E%3Cpath d='M9 8h11l4 4v12a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z' fill='%23fff'/%3E%3Cpath d='M20 8v4h4' fill='%23C9D2EA'/%3E%3Cpath d='M11 15h6M11 18h5' stroke='%2325397A' stroke-width='1.6' stroke-linecap='round' opacity='.45'/%3E%3Cpath d='M12.5 21.5l2.4 2.4 6-6.4' fill='none' stroke='%231D7A55' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
@@ -632,7 +633,8 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
       <div class="phead"><h2>Klassens historik</h2><span class="phint">Sparas bara i den här webbläsaren</span></div>
       <div class="pbody">
         <div class="hist-save">
-          <div style="flex:1;min-width:190px"><label class="field" for="clsName">Klass</label><input id="clsName" type="text" placeholder="t.ex. NA21B" autocomplete="off"></div>
+          <div style="flex:1;min-width:150px"><label class="field" for="clsName">Klass</label><input id="clsName" type="text" placeholder="t.ex. NA21B" autocomplete="off"></div>
+          <div style="flex:1;min-width:150px"><label class="field" for="courseName">Kurs</label><input id="courseName" type="text" list="coursePool" placeholder="t.ex. Fysik 1" autocomplete="off"></div>
           <button class="btn" id="histSave">Spara det här provets resultat</button>
         </div>
         <div class="hist-note">Resultaten stannar på den här datorn. Vill du flytta dem till en annan dator exporterar du dem till fil.</div>
@@ -650,7 +652,7 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
     <div class="panel" id="histPanels">
       <div class="phead"><h2>Utveckling över tid</h2><span class="phint">Klassen · områden · elever</span></div>
       <div class="pbody">
-        <div id="histEmpty" class="empty">Spara minst två prov för samma klass så visas utvecklingen här.</div>
+        <div id="histEmpty" class="empty">Spara minst två prov för samma klass och kurs så visas utvecklingen här.</div>
         <div id="histBody" class="hidden">
           <div class="sub">Sammanfattning</div>
           <div id="histText" class="summary-box"></div>
@@ -667,6 +669,7 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
   </section>
 </div>
 <datalist id="areaPool"></datalist>
+<datalist id="coursePool"></datalist>
 <div id="printArea"></div>
 <div id="modal" class="modal hidden"><div class="modal-box"><div class="modal-msg" id="modalMsg"></div><div class="modal-btns"><button class="btn-ghost" id="modalCancel">Avbryt</button><button class="btn-danger" id="modalOk">Bekräfta</button></div></div></div>
 
@@ -873,7 +876,7 @@ function renderPipeline(){
   if(el("ppBuild")) el("ppBuild").textContent = nT ? nT+" uppgifter · "+(fmt(tot)||"0")+" p" : "inga uppgifter än";
   if(el("ppRes"))   el("ppRes").textContent   = nS ? act+" elever"+(away?" · "+away+" frånvarande":"") : "inga elever än";
   if(el("ppAna"))   el("ppAna").textContent   = (nT&&nS) ? "klar att läsa" : "väntar på underlag";
-  const nH=(typeof currentClass==="function"&&currentClass())?histFor(currentClass()).length:0;
+  const nH=(typeof currentClass==="function"&&currentClass()&&currentCourse())?histFor(currentClass(),currentCourse()).length:0;
   if(el("ppHist"))  el("ppHist").textContent  = nH ? nH+(nH===1?" sparat prov":" sparade prov") : "inga sparade prov";
   const done=(nT?1:0)+(nS?1:0)+((nT&&nS)?1:0);
   if(el("railFill")) el("railFill").style.width=(done/3*100)+"%";
@@ -1032,22 +1035,39 @@ function renderDetails(){
    Allt ligger i webbläsarens eget lagringsutrymme och lämnar aldrig datorn. Den
    som vill flytta historiken till en annan dator exporterar den till fil. Därför
    finns också en knapp för att radera en klass helt. */
-const HISTKEY="pa_hist_v1", CLSKEY="pa_cls_v1";
+const HISTKEY="pa_hist_v1", CLSKEY="pa_cls_v1", COURSEKEY="pa_course_v1";
 function histLoad(){ try{ return JSON.parse(localStorage.getItem(HISTKEY))||[]; }catch(e){ return []; } }
 function histStore(l){ try{ localStorage.setItem(HISTKEY,JSON.stringify(l)); }catch(e){} }
 function currentClass(){ const el=$("#clsName"); return ((el&&el.value)||"").trim(); }
-function histFor(cls){ return histLoad().filter(h=>h.cls.toLowerCase()===cls.toLowerCase()).sort((a,b)=>a.savedAt-b.savedAt); }
+function currentCourse(){ const el=$("#courseName"); return ((el&&el.value)||"").trim(); }
+/* En klass läser flera kurser, så ett sparat resultat hör hemma i kombinationen
+   klass och kurs. Resultat sparade innan kursfältet fanns saknar kurs och räknas
+   som tomma, så de syns när kursfältet lämnas tomt. */
+function sameGroup(h,cls,course){
+  return (h.cls||"").toLowerCase()===cls.toLowerCase()
+      && (h.course||"").toLowerCase()===course.toLowerCase();
+}
+function histFor(cls,course){
+  if(course===undefined) course=currentCourse();
+  return histLoad().filter(h=>sameGroup(h,cls,course)).sort((a,b)=>a.savedAt-b.savedAt);
+}
+/* Kurser som redan förekommer föreslås i fältet. */
+function renderCoursePool(){
+  const dl=$("#coursePool"); if(!dl) return;
+  const list=[...new Set(histLoad().map(h=>(h.course||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"sv"));
+  dl.innerHTML=list.map(c=>`<option value="${esc(c)}"></option>`).join("");
+}
 /* Elever matchas på namn mellan proven. Skiftläge och extra mellanslag ignoreras. */
 function nameKey(n){ return (n||"").trim().toLowerCase().replace(/\s+/g," "); }
 
-function histSnapshot(cls){
+function histSnapshot(cls,course){
   const act=activeStudents();
   const tot=act.reduce((o,s)=>{const x=studentTotals(s);o.g+=x.pts;o.m+=x.max;return o;},{g:0,m:0});
   const areas={}; usedAreas().forEach(a=>{ const v=classAreaAvg(a); areas[a]={got:v.got,max:v.max}; });
   const lv=classLevelStats();
   return {
     id:"h"+Date.now().toString(36),
-    cls:cls, name:(state.testName||"Prov utan namn").trim(), savedAt:Date.now(),
+    cls:cls, course:course, name:(state.testName||"Prov utan namn").trim(), savedAt:Date.now(),
     max:totalMax(), n:act.length,
     avg: tot.m? tot.g/tot.m : 0,
     areas:areas,
@@ -1059,17 +1079,18 @@ function histSnapshot(cls){
 }
 
 async function histSaveCurrent(){
-  const cls=currentClass();
+  const cls=currentClass(), course=currentCourse();
   if(!cls){ alert("Skriv klassens namn först, så vet verktyget var resultatet hör hemma."); return; }
+  if(!course){ alert("Skriv kursens namn också. Samma klass kan läsa flera kurser, och resultaten ska hållas isär."); return; }
   if(!validTasks().length||!activeStudents().length){ alert("Fyll i uppgifter och elevresultat innan du sparar."); return; }
   const lib=histLoad(), name=(state.testName||"Prov utan namn").trim();
-  const ex=lib.find(h=>h.cls.toLowerCase()===cls.toLowerCase()&&h.name.toLowerCase()===name.toLowerCase());
-  if(ex && !(await askConfirm('Klassen '+esc(cls)+' har redan ett sparat resultat för "'+esc(name)+'". Skriva över det?',"Skriv över"))) return;
-  const snap=histSnapshot(cls);
+  const ex=lib.find(h=>sameGroup(h,cls,course)&&h.name.toLowerCase()===name.toLowerCase());
+  if(ex && !(await askConfirm(esc(cls)+' i '+esc(course)+' har redan ett sparat resultat för "'+esc(name)+'". Skriva över det?',"Skriv över"))) return;
+  const snap=histSnapshot(cls,course);
   if(ex){ snap.id=ex.id; lib[lib.indexOf(ex)]=snap; } else lib.push(snap);
   histStore(lib);
-  try{ localStorage.setItem(CLSKEY,cls); }catch(e){}
-  renderHistory(); renderPipeline();
+  try{ localStorage.setItem(CLSKEY,cls); localStorage.setItem(COURSEKEY,course); }catch(e){}
+  renderCoursePool(); renderHistory(); renderPipeline();
 }
 async function histRemove(id){
   const l=histLoad(), h=l.find(x=>x.id===id); if(!h) return;
@@ -1077,18 +1098,22 @@ async function histRemove(id){
   histStore(l.filter(x=>x.id!==id)); renderHistory(); renderPipeline();
 }
 async function histClearClass(){
-  const cls=currentClass(); if(!cls){ alert("Skriv klassens namn först."); return; }
-  const n=histFor(cls).length; if(!n){ alert("Det finns ingen sparad historik för "+cls+"."); return; }
-  if(!(await askConfirm("Radera alla "+n+" sparade resultat för "+esc(cls)+"? Det går inte att ångra.","Radera"))) return;
-  histStore(histLoad().filter(h=>h.cls.toLowerCase()!==cls.toLowerCase()));
-  renderHistory(); renderPipeline();
+  const cls=currentClass(), course=currentCourse();
+  if(!cls||!course){ alert("Fyll i både klass och kurs först."); return; }
+  const n=histFor(cls,course).length;
+  if(!n){ alert("Det finns ingen sparad historik för "+cls+" i "+course+"."); return; }
+  if(!(await askConfirm("Radera alla "+n+" sparade resultat för "+esc(cls)+" i "+esc(course)+"? Det går inte att ångra.","Radera"))) return;
+  histStore(histLoad().filter(h=>!sameGroup(h,cls,course)));
+  renderCoursePool(); renderHistory(); renderPipeline();
 }
 function histExportFile(){
-  const cls=currentClass(), data=cls?histFor(cls):histLoad();
+  const cls=currentClass(), course=currentCourse();
+  const data=(cls&&course)?histFor(cls,course):histLoad();
   if(!data.length){ alert("Det finns inget att exportera."); return; }
-  const blob=new Blob([JSON.stringify({type:"provanalys-historik",version:1,items:data},null,2)],{type:"application/json"});
+  const blob=new Blob([JSON.stringify({type:"provanalys-historik",version:2,items:data},null,2)],{type:"application/json"});
   const a=document.createElement("a"); a.href=URL.createObjectURL(blob);
-  a.download=(cls||"historik").replace(/[^\w\-åäöÅÄÖ ]+/g,"")+"-historik.json";
+  a.download=[cls,course].filter(Boolean).join(" ").replace(/[^\w\-åäöÅÄÖ ]+/g,"").trim().replace(/\s+/g,"-")
+    .concat("-historik.json").replace(/^-/,"historik.json");
   a.click(); URL.revokeObjectURL(a.href);
 }
 function histImportFile(ev){
@@ -1099,7 +1124,7 @@ function histImportFile(ev){
       if(!items.length) throw 0;
       const cur=histLoad(), ids=new Set(cur.map(x=>x.id));
       items.forEach(it=>{ if(!ids.has(it.id)) cur.push(it); });
-      histStore(cur); renderHistory(); renderPipeline();
+      histStore(cur); renderCoursePool(); renderHistory(); renderPipeline();
     }catch(e){ alert("Filen kunde inte läsas. Välj en fil som exporterats från det här verktyget."); }
     ev.target.value=""; };
   r.readAsText(f);
@@ -1160,7 +1185,7 @@ function histSummary(hs){
   const first=hs[0], last=hs[hs.length-1];
   const d=Math.round((last.avg-first.avg)*100);
   const pa=[];
-  pa.push("Klassen har "+hs.length+" sparade prov, från "+first.name+" ("+new Date(first.savedAt).toLocaleDateString("sv-SE")+") till "+last.name+" ("+new Date(last.savedAt).toLocaleDateString("sv-SE")+").");
+  pa.push((last.cls||"Klassen")+(last.course?" i "+last.course:"")+" har "+hs.length+" sparade prov, från "+first.name+" ("+new Date(first.savedAt).toLocaleDateString("sv-SE")+") till "+last.name+" ("+new Date(last.savedAt).toLocaleDateString("sv-SE")+").");
   pa.push("Snittet har gått från "+Math.round(first.avg*100)+" % till "+Math.round(last.avg*100)+" %, alltså "
     + (d>0? "en ökning med "+d+" procentenheter" : d<0? "en minskning med "+Math.abs(d)+" procentenheter" : "oförändrat")+".");
   /* Områden som finns i både det första och det senaste provet kan jämföras rakt av. */
@@ -1183,13 +1208,14 @@ function histSummary(hs){
 
 function renderHistory(){
   const listEl=$("#histList"); if(!listEl) return;
-  const cls=currentClass(), hs=cls?histFor(cls):[];
+  const cls=currentClass(), course=currentCourse();
+  const hs=(cls&&course)?histFor(cls,course):[];
   listEl.innerHTML = hs.length
     ? hs.slice().reverse().map(h=>`<div class="hist-row"><span class="hn">${esc(h.name)}</span>`
         +`<span class="hv">${Math.round(h.avg*100)} % · ${h.n} elever</span>`
         +`<span class="hd">${new Date(h.savedAt).toLocaleDateString("sv-SE")}</span>`
         +`<button class="btn-mini del" data-hdel="${h.id}" title="Ta bort">✕</button></div>`).join("")
-    : `<div class="empty" style="margin-top:12px">${cls?"Inga sparade resultat för "+esc(cls)+" än.":"Skriv klassens namn för att se dess historik."}</div>`;
+    : `<div class="empty" style="margin-top:12px">${(cls&&course)?"Inga sparade resultat för "+esc(cls)+" i "+esc(course)+" än.":"Fyll i klass och kurs för att se historiken."}</div>`;
   listEl.querySelectorAll("[data-hdel]").forEach(b=>b.onclick=()=>histRemove(b.dataset.hdel));
 
   const body=$("#histBody"), empty=$("#histEmpty");
@@ -1371,7 +1397,10 @@ function wire(){
   $("#histExport").addEventListener("click",histExportFile);
   $("#histImport").addEventListener("click",()=>$("#histFile").click());
   $("#histFile").addEventListener("change",histImportFile);
-  $("#clsName").addEventListener("input",()=>{ renderHistory(); renderPipeline(); try{ localStorage.setItem(CLSKEY,currentClass()); }catch(e){} });
+  ["#clsName","#courseName"].forEach(sel=>$(sel).addEventListener("input",()=>{
+    renderHistory(); renderPipeline();
+    try{ localStorage.setItem(CLSKEY,currentClass()); localStorage.setItem(COURSEKEY,currentCourse()); }catch(e){}
+  }));
   $("#libSave").addEventListener("click",libSaveCurrent); $("#libOpen").addEventListener("click",libOpen); $("#libDelete").addEventListener("click",libDelete);
   $("#copyStudents").addEventListener("click",()=>copyText(state.students.map(s=>studentSummary(s,THR)).join("\n\n"),$("#copyStudents")));
   $("#clearBuild").addEventListener("click",clearAll);
@@ -1386,9 +1415,12 @@ function init(){
   const ids=[]; state.tasks.forEach(t=>{ ids.push(t.id||0); t.parts.forEach(p=>ids.push(p.id||0)); }); nextId=Math.max(0,...ids)+1;
   if(state.students.length) nextStudentId=Math.max(0,...state.students.map(s=>s.id||0))+1;
   wire(); initTheme(); if(!stored){ addTask(); addTask(); addStudent(); } renderAll(); renderLibrary();
-  /* Klassnamnet minns vi mellan besöken, så historiken visas direkt. */
-  try{ const c=localStorage.getItem(CLSKEY); if(c) $("#clsName").value=c; }catch(e){}
-  renderHistory(); renderPipeline();
+  /* Klass och kurs minns vi mellan besöken, så historiken visas direkt. */
+  try{
+    const c=localStorage.getItem(CLSKEY); if(c) $("#clsName").value=c;
+    const k=localStorage.getItem(COURSEKEY); if(k) $("#courseName").value=k;
+  }catch(e){}
+  renderCoursePool(); renderHistory(); renderPipeline();
 }
 init();
 </script>
