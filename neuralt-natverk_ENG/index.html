@@ -46,12 +46,12 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{-webkit-font-smoothing:antialiased;}
-/* Sidhuvudets höjd varierar med rubrikens radbrytning, så layouten mäter
-   inte längre 58 pixlar på måfå utan tar den plats som blir över. */
+/* The height of the header varies with how the title wraps. The layout therefore
+   measures the actual height and takes whatever space is left. */
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden;position:relative;display:flex;flex-direction:column;}
 .hd{flex:0 0 auto;}
 
-/* ambient background: mesh gradient + noise + grid */
+/* Background: mesh gradient, noise and grid */
 .bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
 .bg-mesh::before{content:'';position:absolute;width:140%;height:140%;top:-20%;left:-20%;
   background:
@@ -61,7 +61,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
   animation:meshDrift 34s ease-in-out infinite alternate;filter:blur(10px);}
 @keyframes meshDrift{0%{transform:translate(0,0) scale(1);}50%{transform:translate(-2%,2%) scale(1.05);}100%{transform:translate(2%,-1%) scale(1.02);}}
 
-/* intro */
+/* Intro card */
 .intro{position:fixed;inset:0;background:rgba(6,7,14,0.85);backdrop-filter:blur(18px);z-index:200;display:flex;align-items:center;justify-content:center;transition:opacity .35s var(--ease-out);}
 .intro.hidden{opacity:0;pointer-events:none;}
 .intro-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:var(--r-lg);padding:34px 36px;max-width:540px;width:92%;max-height:88vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.02) inset;animation:cardIn .5s var(--ease-spring);}
@@ -78,7 +78,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .intro-tip{margin-top:16px;font-size:.82em;color:var(--dim);text-align:center;line-height:1.55;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid var(--border-soft);border-radius:var(--r-sm);}
 .intro-tip strong{color:var(--text);}
 
-/* header */
+/* Header */
 .hd{text-align:center;padding:16px 16px 12px;border-bottom:1px solid var(--border-soft);position:relative;z-index:2;}
 .hd-title-row{display:flex;align-items:center;justify-content:center;gap:9px;}
 .hd h1{font-family:'Syne',sans-serif;font-size:1.3em;font-weight:800;letter-spacing:-.01em;}.hd h1 span{background:linear-gradient(135deg,#eef1fb,var(--accent2) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;}
@@ -88,30 +88,30 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .back-link:hover,.lang-link:hover{color:var(--text);border-color:var(--dim2);background:rgba(255,255,255,.05);}
 .lang-link .flag{width:19px;height:auto;display:block;border-radius:3px;flex-shrink:0;}
 
-/* layout: glass layered panels */
-/* Tre kolumner: reglagen till vänster, nätverket i mitten och beräkningen
-   till höger. Duken får hela höjden, vilket är det som gör att neuronerna
-   kan ritas stora i stället för att tryckas ihop. */
+/* Layout: layered glass panels */
+/* Three columns: the controls on the left, the network in the middle and the
+   calculation on the right. The canvas gets the full height, which is what lets
+   the neurons be drawn large rather than squeezed together. */
 .app{display:grid;grid-template-columns:330px 1fr 258px;flex:1 1 auto;min-height:0;position:relative;z-index:1;gap:12px;padding:12px;}
 .lp,.rp{background:var(--surface);backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px;overflow-y:auto;display:flex;flex-direction:column;gap:13px;box-shadow:0 20px 50px rgba(0,0,0,.25);}
 .rp{padding:14px;gap:11px;}
 .lp::-webkit-scrollbar,.rp::-webkit-scrollbar{width:5px;}
 .lp::-webkit-scrollbar-thumb,.rp::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 
-/* Facit och nätverkets svar står under varandra i högerpanelen. */
+/* The correct answer and the network answer sit below one another in the right panel. */
 .cv-results{display:flex;flex-direction:column;gap:8px;}
 .res-chip{display:flex;flex-direction:column;gap:2px;padding:9px 13px;border:1px solid var(--border);border-radius:var(--r-md);background:var(--surface2);}
 .res-lbl{font-size:.58em;text-transform:uppercase;letter-spacing:.08em;color:var(--dim2);font-weight:700;}
 .res-val{font-family:'JetBrains Mono',monospace;font-size:1.25em;font-weight:700;line-height:1.25;font-variant-numeric:tabular-nums;}
 
-/* Begreppen ligger längst ner i högerpanelen. */
+/* The concepts sit at the bottom of the right panel. */
 .gloss-box{padding-top:11px;border-top:1px solid var(--border);}
 .gloss-lbl{display:block;font-size:.6em;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim2);margin-bottom:7px;}
 .rp .glossary{margin-top:0;gap:4px;}
 .rp .g-tag{font-size:.66em;padding:4px 8px;}
 
-/* Scenariolistan fälls ihop när man väl har valt, så att arkitektur och
-   indata hamnar högre upp i panelen. */
+/* The scenario list collapses once a choice has been made, so that architecture
+   and inputs move higher up the panel. */
 .sc-current{display:flex;align-items:center;gap:10px;width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r-md);background:var(--surface2);cursor:pointer;text-align:left;transition:.2s var(--ease-out);}
 .sc-current:hover{border-color:var(--dim2);}
 .sc-current .scc-txt{flex:1;min-width:0;font-family:'DM Sans',sans-serif;font-size:.87em;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -120,7 +120,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .scenario-cards{margin-top:7px;}
 .scenario-cards.closed{display:none;}
 
-/* Korten ska rymmas på skärmen i stället för att få en rullist i kanten. */
+/* The cards should fit on the screen rather than get a scrollbar at the edge. */
 .intro-card,.train-msg{scrollbar-width:none;}
 .intro-card::-webkit-scrollbar,.train-msg::-webkit-scrollbar{display:none;}
 @media (max-height:820px){
@@ -137,7 +137,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .sel{font-family:'DM Sans',sans-serif;font-size:.82em;width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);cursor:pointer;outline:none;transition:.2s;}
 .sel:hover{border-color:var(--dim2);}
 
-/* scenario cards */
+/* Scenario cards */
 .scenario-cards{display:flex;flex-direction:column;gap:6px;}
 .scenario-card{display:flex;align-items:flex-start;gap:10px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r-md);background:var(--surface2);cursor:pointer;transition:.2s var(--ease-out);}
 .scenario-card:hover{border-color:var(--dim2);background:rgba(255,255,255,.04);}
@@ -147,7 +147,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .scenario-card .sc-desc{font-size:.7em;color:var(--dim2);margin-top:1px;line-height:1.35;}
 .scenario-card.active .sc-title{color:var(--accent2);}
 
-/* layer arch card */
+/* Layer architecture card */
 .layer-ctrl{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:10px;display:flex;flex-direction:column;gap:2px;}
 .layer-row{display:flex;align-items:center;justify-content:space-between;padding:6px 2px;border-bottom:1px solid var(--border-soft);}
 .layer-row:last-child{border-bottom:none;}
@@ -165,15 +165,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .layer-action-btn.danger:hover{border-color:rgba(239,91,107,.5);color:var(--red);background:rgba(239,91,107,.06);}
 .layer-action-btn svg{flex-shrink:0;}
 
-/* activation pills */
+/* Activation function buttons */
 .pill-row{display:flex;align-items:center;gap:6px;margin-bottom:5px;}
 .pill-row .pr-label{font-size:.72em;color:var(--dim);min-width:44px;font-weight:600;}
 .pill-group{display:flex;flex:1;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:999px;padding:2px;}
 .pill{flex:1;padding:5px 4px;border:none;background:transparent;color:var(--dim2);font-size:.68em;font-weight:700;border-radius:999px;cursor:pointer;transition:.18s var(--ease-out);font-family:'DM Sans',sans-serif;}
 .pill:hover{color:var(--text);}
 .pill.active{background:var(--accent);color:#fff;}
-/* Namn och värde står på egen rad ovanför reglaget. Långa variabelnamn
-   fick annars inte plats och kapades mitt i ordet. */
+/* The name and the value sit on their own line above the slider. Long variable
+   names would otherwise not fit and were cut mid-word. */
 .input-grid{display:flex;flex-direction:column;gap:12px;}
 .input-row{display:flex;flex-direction:column;gap:6px;}
 .input-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;}
@@ -191,8 +191,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .bg{display:flex;gap:5px;flex-wrap:wrap;}
 .btn{font-family:'DM Sans',sans-serif;padding:9px 12px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);font-size:.79em;font-weight:600;cursor:pointer;transition:.18s var(--ease-spring);flex:1;text-align:center;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:5px;}
 .btn:hover{border-color:var(--accent);background:var(--accent-dim);transform:translateY(-1px);}
-/* Ikonknappar tar bara den plats de behöver, så att den primära knappen
-   får bredden och raden får en tydlig tyngdpunkt. */
+/* Icon buttons take only the space they need, so the primary button gets the
+   width and the row a clear centre of gravity. */
 .btn .bi{width:14px;height:14px;flex-shrink:0;display:block;}
 .btn.icon{flex:0 0 auto;padding:9px 11px;color:var(--dim);}
 .btn.icon:hover{color:var(--text);}
@@ -224,16 +224,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .act-toggle:hover{color:var(--text);border-color:var(--dim2);transform:translateY(-1px);}
 .act-toggle .bi{width:12px;height:12px;flex-shrink:0;}
 
-/* Ramen lyser i scenariots färg. Det gör det tydligt vilket scenario man
-   arbetar i även när blicken ligger kvar på nätverket. */
+/* The border glows in the colour of the scenario. That makes it clear which
+   scenario is in play even while the eye stays on the network. */
 .center{position:relative;overflow:hidden;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(24,30,54,.5),rgba(7,8,15,.2));border:1px solid color-mix(in srgb,var(--sc,#5b8cff) 40%,transparent);border-radius:var(--r-lg);box-shadow:0 20px 60px rgba(0,0,0,.3) inset,0 0 0 1px color-mix(in srgb,var(--sc,#5b8cff) 10%,transparent),0 0 34px -12px var(--sc,#5b8cff);display:flex;flex-direction:column;transition:border-color .3s var(--ease-out),box-shadow .3s var(--ease-out);}
-/* I förutsägelseläget är berättarrutan tom eller missvisande, och ytan
-   behövs bättre till bilden. */
+/* In prediction mode the narration box is empty or misleading, and the space is
+   better used for the picture. */
 .center.no-narr .narr{display:none;}
 .canvas-wrap{position:relative;flex:1 1 auto;min-height:0;}
 .canvas-wrap canvas{width:100%;height:100%;display:block;}
-/* Viktbrickorna kan bli många. Knappen ligger ovanpå duken så att den hör
-   ihop med bilden, men under träningsrutan i staplingsordningen. */
+/* The weight badges can be many. The button sits on top of the canvas so that it
+   belongs to the picture, but below the training box in stacking order. */
 .cv-toggle{position:absolute;top:12px;right:12px;z-index:3;display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(12,16,28,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--dim2);font-family:'DM Sans',sans-serif;font-size:.7em;font-weight:600;cursor:pointer;transition:.18s var(--ease-out);}
 .cv-toggle:hover{color:var(--text);border-color:var(--dim2);}
 .cv-toggle.on{color:var(--accent2);border-color:color-mix(in srgb,#7aa2ff 45%,transparent);}
@@ -245,7 +245,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .narr .nf{font-family:'JetBrains Mono',monospace;color:var(--gold);font-size:.86em;margin:4px 0;}
 .narr .nr{color:var(--green);font-weight:700;}.narr .ne{color:var(--text);font-size:.87em;}
 
-/* ── premium calculation card in narr (clickable steps → glass card) ── */
+/* ── Calculation cards in the narration panel. Every step can be clicked. ── */
 .calc-card{display:flex;flex-direction:column;gap:9px;}
 .calc-head{display:flex;align-items:center;gap:9px;}
 .ch-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent2);background:rgba(122,162,255,.12);border:1px solid rgba(122,162,255,.25);padding:3px 9px;border-radius:999px;white-space:nowrap;}
@@ -257,9 +257,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .cs-num{width:21px;height:21px;border-radius:50%;background:rgba(122,162,255,.15);border:1px solid rgba(122,162,255,.32);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .cs-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
 .cs-label{font-size:.68em;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;}
-/* Formlerna sätts i MathML, webbläsarnas egen standard för matematik. Det ger
-   samma typografi som LaTeX, med riktiga bråkstreck och upphöjda exponenter,
-   utan att labben behöver hämta in något externt bibliotek. */
+/* The formulas are set in MathML, the browsers' own standard for mathematics. It
+   gives the same typography as LaTeX, with real fraction bars and raised exponents,
+   without the lab having to pull in an external library. */
 .fml{font-size:1.05em;}
 .fml-wrap{text-align:center;margin:11px 0 12px;}
 .fml-block{display:inline-block;font-size:1.32em;}
@@ -268,13 +268,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .fml .fb{color:#ff8f96;}
 .fml .fr{color:var(--gold);}
 .cs-formula .fml{font-size:1.02em;}
-/* Långa summor får inte plats på en rad i den smala panelen. De skalas ner
-   tills de ryms, i stället för att klippas eller kräva sidledsrullning. */
+/* Long sums do not fit on one line in the narrow panel. They are scaled down until
+   they fit, rather than being clipped or requiring horizontal scrolling. */
 .cs-formula{transform-origin:left center;font-family:'JetBrains Mono',monospace;font-size:.87em;color:var(--text);white-space:nowrap;overflow-x:auto;scrollbar-width:none;}
-/* Utan egen radhöjd blir raderna i en uppställd summa lägre än siffrorna och
-   texten går omlott. */
-/* Radversionen visas som förval och byts mot pelarversionen först om den
-   inte får plats. */
+/* Without an explicit line height the rows of a stacked sum become shorter than the
+   digits and the text overlaps. */
+/* The single-line version is the default and is swapped for the stacked version only
+   if it does not fit. */
 .sum-alt .sum-stack{display:none;}
 .sum-alt.stacked .sum-line{display:none;}
 .sum-alt.stacked .sum-stack{display:inline-block;}
@@ -292,18 +292,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .calc-result{font-size:.85em;color:var(--dim);}
 .calc-result strong{color:var(--text);}
 
-/* Under själva träningen ska nätverket synas. Rutan lägger sig därför över
-   vänsterpanelen i stället för över duken, så att vikterna går att följa
-   medan de ändras. På smala skärmar ligger den kvar i mitten. */
+/* During training itself the network must stay visible. The box therefore covers the
+   left panel rather than the canvas, so that the weights can be followed while they
+   change. On narrow screens it stays in the middle. */
 .train-msg.side{position:fixed;bottom:auto;max-width:none;transform:none;overflow-y:auto;padding:20px 22px;}
-/* safe center: annars hamnar överkanten utanför och går inte att nå med
-   rullning om innehållet ändå skulle bli för högt. */
-/* Egen intoning i sidoläget. Den vanliga fadeIn förskjuter rutan en halv
-   bredd åt vänster, vilket syntes som ett hopp innan den landade. */
+/* Safe centring: otherwise the top edge ends up outside the viewport and cannot be
+   reached by scrolling if the content should turn out too tall. */
+/* A separate fade for the side position. The ordinary fadeIn offsets the box half a
+   width to the left, which was visible as a jump before it landed. */
 @keyframes fadeInSide{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
 .train-msg.side.show{display:flex;flex-direction:column;justify-content:safe center;animation:fadeInSide .3s var(--ease-out);}
-/* Innehållet krymper i sidoläget, så att rutan får plats i panelen även på
-   en bärbar skärm. */
+/* The content shrinks in the side position, so that the box fits in the panel on a
+   laptop screen as well. */
 .train-msg.side .tm-icon{width:30px;height:30px;margin-bottom:5px;}
 .train-msg.side .tm-title{font-size:1.02em;}
 .train-msg.side .tm-text{font-size:.78em;}
@@ -321,8 +321,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
   .train-msg.side.show{display:block;}
 }
 .train-msg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(180deg,rgba(24,28,48,.72),rgba(15,18,32,.75));backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 30px;text-align:center;z-index:10;display:none;max-width:420px;width:90%;box-shadow:0 30px 80px rgba(0,0,0,.6);
-/* Rutan får aldrig bli högre än duken den ligger på. Med enbart ett vh-mått
-   kunde den växa utanför och klippas i över- och underkant. */
+/* The box must never be taller than the canvas it sits on. With a vh measure alone it
+   could grow beyond it and be clipped at the top and bottom. */
 max-height:calc(100% - 20px);overflow-y:auto;}
 .train-msg.show{display:block;animation:fadeIn .35s var(--ease-spring);}
 .train-msg .tm-icon{width:38px;height:38px;margin:0 auto 10px;color:var(--accent2);}
@@ -332,7 +332,7 @@ max-height:calc(100% - 20px);overflow-y:auto;}
 .train-msg .tm-stat{font-family:'JetBrains Mono',monospace;font-size:.85em;color:var(--gold);margin-top:8px;}
 @keyframes fadeIn{from{opacity:0;transform:translate(-50%,-50%) scale(.94);}to{opacity:1;transform:translate(-50%,-50%) scale(1);}}
 
-/* training dashboard grid inside train-msg */
+/* Grid for the training dashboard inside the training box */
 .tdash{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;text-align:left;}
 .tdash-cell{background:rgba(255,255,255,.03);border:1px solid var(--border-soft);border-radius:var(--r-sm);padding:9px 11px;}
 .tdash-cell .tl{font-size:.62em;text-transform:uppercase;letter-spacing:.07em;color:var(--dim2);margin-bottom:3px;}
@@ -341,7 +341,7 @@ max-height:calc(100% - 20px);overflow-y:auto;}
 .tdash-bar{height:5px;border-radius:3px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:6px;}
 .tdash-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;transition:width .15s linear;}
 
-/* ── living training canvas (same animation/glass card as in the bias lab) ── */
+/* ── Training view: the canvas that shows the model being built ── */
 .train-stage{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:14px;}
 .train-canvas-wrap{width:100%;max-width:380px;height:150px;position:relative;border-radius:var(--r-md);overflow:hidden;background:radial-gradient(ellipse 70% 90% at 50% 50%,rgba(20,26,48,.6),rgba(9,11,20,.3));border:1px solid var(--border-soft);}
 .train-canvas-wrap canvas{width:100%;height:100%;display:block;}
@@ -367,7 +367,7 @@ max-height:calc(100% - 20px);overflow-y:auto;}
 .g-tag:active{transform:scale(.95);}
 .g-tag .g-ico{width:12px;height:12px;flex-shrink:0;opacity:.75;}
 
-/* concept card modal */
+/* Concept card */
 .concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
 .concept-backdrop.show{opacity:1;pointer-events:auto;}
 .concept-card{position:fixed;top:50%;left:50%;z-index:301;width:340px;max-width:88vw;
@@ -423,9 +423,9 @@ max-height:calc(100% - 20px);overflow-y:auto;}
 }
 @media (prefers-reduced-motion:reduce){.bg-mesh::before{animation:none;}*{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
 
-/* ── Vinjett i introrutan: ett 2-3-2-1-nätverk där en ljuspuls vandrar
-   framåt genom lagren, ett framåtpass. pathLength=100 normaliserar
-   kantlängderna så att pulsen håller samma tempo överallt. ── */
+/* ── Vignette in the intro card: a 2-3-2-1 network where a pulse of light travels
+   forward through the layers, a forward pass. pathLength=100 normalises the edge
+   lengths so that the pulse keeps the same tempo everywhere. ── */
 .intro-viz{display:block;width:224px;height:92px;margin:0 auto 16px;max-width:100%;}
 .intro-viz .iv-edge{stroke:rgba(122,162,255,.20);stroke-width:1.3;fill:none;}
 .intro-viz .iv-pulse{stroke:#7aa2ff;stroke-width:2.1;stroke-linecap:round;fill:none;
@@ -456,15 +456,15 @@ max-height:calc(100% - 20px);overflow-y:auto;}
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   Scenariofärger
-   Fyra toner i stigande ordning efter hur sammansatt problemet är:
-   teal → blå → violett → bärnsten. Tonen syns på fyra ställen och
-   ingen annanstans: scenariokorten, fasindikatorn, dukens fond och
-   ramen kring variablerna.
+   Scenario colours
+   Four tones in rising order of how involved the problem is:
+   teal, blue, violet, amber. The tone appears in four places and
+   nowhere else: the scenario cards, the phase indicator, the canvas
+   backdrop and the border around the variables.
    ═══════════════════════════════════════════════════════════════ */
 :root{--sc:#5b8cff;--sc2:#93b2ff;--sc-dim:rgba(91,140,255,.13);}
 
-/* ── Scenariokort ── */
+/* ── Scenario cards ── */
 .scenario-cards{gap:7px;}
 .scenario-card{
   position:relative;gap:11px;padding:11px 12px;border-radius:13px;
@@ -505,13 +505,13 @@ max-height:calc(100% - 20px);overflow-y:auto;}
 .scenario-card .sc-desc{font-size:.705em;margin-top:2px;line-height:1.4;color:var(--dim2);}
 .scenario-card.active .sc-title{color:var(--sc2);}
 
-/* ── Fasindikatorn följer scenariot ── */
+/* ── The phase indicator follows the scenario ── */
 .pw-step.active .pw-dot{border-color:var(--sc);background:var(--sc);
   box-shadow:0 0 0 5px var(--sc-dim);}
 .pw-step.active .pw-label{color:var(--sc2);}
 .pw-calc{color:var(--sc2);}
 
-/* ── Variabelrutan får samma ram som det valda scenariokortet ── */
+/* ── The variable box gets the same border as the selected scenario card ── */
 #varSection,#inputSection{
   padding:11px 12px;border-radius:13px;
   border:1px solid color-mix(in srgb,var(--sc) 26%,transparent);
@@ -520,29 +520,29 @@ max-height:calc(100% - 20px);overflow-y:auto;}
 }
 #varSection .sec-t,#inputSection .sec-t{color:color-mix(in srgb,var(--sc2) 75%,var(--dim2));}
 
-/* Sifferrader ska inte hoppa i sidled när värdet ändras. */
+/* Rows of digits must not jump sideways when a value changes. */
 .tv,.res-val,.mv,.tdash-cell .tv{font-variant-numeric:tabular-nums;}
 
-/* Ikonen i meddelanderutan ska inte fylla halva rutan. */
+/* The icon in the message box must not fill half of it. */
 .tm-icon{width:34px;height:34px;}
 .tm-icon svg{width:26px;height:26px;display:block;margin:0 auto;stroke-width:1.6;}
 .pw-calc svg{width:13px;height:13px;display:inline-block;vertical-align:-2px;margin-right:3px;}
 
-/* Synlig men diskret tangentbordsmarkering. */
+/* Visible but discreet keyboard focus ring. */
 .scenario-card:focus-visible,.btn:focus-visible{
   outline:2px solid rgba(122,162,255,.7);outline-offset:2px;
 }
 
-/* ── Progressiv avtäckning ──
-   Sektioner fälls ut när de blir användbara i stället för att ligga framme
-   hela tiden. Höjdövergången gör att panelen inte hoppar. */
+/* ── Progressive reveal ──
+   Sections unfold when they become useful rather than sitting there all the time.
+   The height transition keeps the panel from jumping. */
 .sec-fold{display:grid;grid-template-rows:0fr;grid-auto-rows:0fr;opacity:0;
   transition:grid-template-rows .24s var(--ease-out),opacity .18s var(--ease-out);}
 .sec-fold>*{overflow:hidden;min-height:0;}
 .sec-fold.open{grid-template-rows:1fr;grid-auto-rows:auto;opacity:1;}
 
-/* Efter träningen ska ett val vara det självklara. De andra två finns kvar
-   som textlänkar i stället för att konkurrera som likvärdiga knappar. */
+/* After training one choice should be the obvious one. The other two remain as text
+   links rather than competing as equal buttons. */
 .after-train{margin-top:14px;display:flex;flex-direction:column;gap:10px;align-items:stretch;}
 .after-train .btn.pri{padding:12px 20px;font-size:.94em;}
 .at-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;}
@@ -551,8 +551,8 @@ max-height:calc(100% - 20px);overflow-y:auto;}
   border-bottom:1px solid transparent;transition:.18s var(--ease-out);}
 .at-link:hover{color:var(--text);border-bottom-color:var(--dim2);}
 
-/* När indata ändras byts svaret. En kort puls gör förändringen synlig i
-   stället för att talet tyst byter värde. */
+/* When the input changes the answer changes. A short pulse makes the change visible
+   rather than letting the number switch silently. */
 @keyframes valuePulse{
   0%{transform:scale(1);}
   38%{transform:scale(1.085);}
@@ -574,7 +574,7 @@ max-height:calc(100% - 20px);overflow-y:auto;}
       <div class="intro-step"><div class="intro-num">2</div><div class="intro-step-text"><strong>Train the network.</strong> Choose a scenario and let the network learn from a dataset.</div></div>
       <div class="intro-step"><div class="intro-num">3</div><div class="intro-step-text"><strong>Rebuild the network.</strong> Add neurons and hidden layers and examine how the loss is affected.</div></div>
     </div>
-    <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Start the simulation <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Get started <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     <p class="intro-tip">You begin in <strong>Calculation mode</strong>, where every neuron works with simple whole numbers. Then switch to a scenario and let the network train itself.</p>
   </div>
 </div>
@@ -600,27 +600,27 @@ max-height:calc(100% - 20px);overflow-y:auto;}
     <div id="actSection"><div class="sec-t">Activation</div><div id="actContent"></div></div>
     <div id="controlArea"></div>
   </div>
-  <div class="center"><div class="canvas-wrap" id="canvasWrap"><canvas id="cv"></canvas><button class="cv-toggle" id="wToggle" onclick="toggleWeights()"></button><div class="untrained-badge" id="untrainedBadge" style="display:none">UNTRAINED NETWORK</div><div class="train-msg" id="trainMsg"></div></div>  <div class="narr" id="narr"><div class="ne">Press <strong>Train the model</strong> to begin.</div></div>
+  <div class="center"><div class="canvas-wrap" id="canvasWrap"><canvas id="cv" role="img" aria-label="Network diagram with layers, neurons and connections"></canvas><button class="cv-toggle" id="wToggle" onclick="toggleWeights()"></button><div class="untrained-badge" id="untrainedBadge" style="display:none">UNTRAINED NETWORK</div><div class="train-msg" id="trainMsg"></div></div>  <div class="narr" id="narr"><div class="ne">Press <strong>Train the model</strong> to begin.</div></div>
   </div>
   <div class="rp">
     <div class="cv-results" id="resultBoxes"><div class="res-chip pred-only" style="display:none"><span class="res-lbl">Correct answer (from data)</span><span class="res-val" id="targetVal" style="color:var(--gold)">–</span></div><div class="res-chip pred-only" style="display:none"><span class="res-lbl">Network prediction</span><span class="res-val" id="outputVal" style="color:var(--accent2)">–</span><span id="verdictVal"></span></div></div>
         <div class="gloss-box"><span class="gloss-lbl">Concepts</span><div class="glossary">
-        <span class="g-tag" onclick="openConcept('gInput',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h11m0 0-4-4m4 4-4 4"/><rect x="16" y="5" width="5" height="14" rx="1"/></svg>Input</span>
-        <span class="g-tag" onclick="openConcept('gNeuron',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>Neuron</span>
-        <span class="g-tag" onclick="openConcept('gWeight',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="12" r="2.5"/><path d="M7.5 12h9" stroke-width="3"/></svg>Weight</span>
-        <span class="g-tag" onclick="openConcept('gBias',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="5"/><path d="M17 17l4 4M14 3v4M12 5h4" stroke-linecap="round"/></svg>Bias (+b)</span>
-        <span class="g-tag" onclick="openConcept('gAct',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg>Activation</span>
-        <span class="g-tag" onclick="openConcept('gActFn',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18c4 0 5-12 9-12s5 12 9 12"/></svg>Activation function</span>
-        <span class="g-tag" onclick="openConcept('gReLU',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h8l10-13"/></svg>ReLU</span>
-        <span class="g-tag" onclick="openConcept('gSigmoid',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 19h18" opacity=".35"/><path d="M4 18C10 18 10 6 20 6"/></svg>Sigmoid</span>
-        <span class="g-tag" onclick="openConcept('gTanh',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12h20" opacity=".35"/><path d="M4 19C10 19 10 5 20 5"/></svg>Tanh</span>
-        <span class="g-tag" onclick="openConcept('gHidden',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="2" width="4" height="20" rx="1"/><rect x="17" y="6" width="4" height="12" rx="1"/></svg>Hidden layer</span>
-        <span class="g-tag" onclick="openConcept('gOutput',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="12" r="4"/><path d="M14 12h7m-3-3 3 3-3 3" stroke-linecap="round" stroke-linejoin="round"/></svg>Output</span>
-        <span class="g-tag" onclick="openConcept('gLoss',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l6 6 4-4 8 8"/><path d="M15 15h6v-6"/></svg>Loss</span>
-        <span class="g-tag" onclick="openConcept('gAcc',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>Accuracy</span>
-        <span class="g-tag" onclick="openConcept('gForward',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h6m4 0h6M8 8l-4 4 4 4m8-8 4 4-4 4"/></svg>Forward pass</span>
-        <span class="g-tag" onclick="openConcept('gEpoch',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 21v-5h5"/></svg>Epoch</span>
-        <span class="g-tag" onclick="openConcept('gPred',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>Prediction</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gInput',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h11m0 0-4-4m4 4-4 4"/><rect x="16" y="5" width="5" height="14" rx="1"/></svg>Input</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gNeuron',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>Neuron</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gWeight',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="12" r="2.5"/><path d="M7.5 12h9" stroke-width="3"/></svg>Weight</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gBias',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="5"/><path d="M17 17l4 4M14 3v4M12 5h4" stroke-linecap="round"/></svg>Bias (+b)</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gAct',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg>Activation</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gActFn',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18c4 0 5-12 9-12s5 12 9 12"/></svg>Activation function</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gReLU',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h8l10-13"/></svg>ReLU</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gSigmoid',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 19h18" opacity=".35"/><path d="M4 18C10 18 10 6 20 6"/></svg>Sigmoid</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gTanh',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12h20" opacity=".35"/><path d="M4 19C10 19 10 5 20 5"/></svg>Tanh</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gHidden',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="2" width="4" height="20" rx="1"/><rect x="17" y="6" width="4" height="12" rx="1"/></svg>Hidden layer</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gOutput',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="12" r="4"/><path d="M14 12h7m-3-3 3 3-3 3" stroke-linecap="round" stroke-linejoin="round"/></svg>Output</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gLoss',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l6 6 4-4 8 8"/><path d="M15 15h6v-6"/></svg>Loss</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gAcc',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>Accuracy</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gForward',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h6m4 0h6M8 8l-4 4 4 4m8-8 4 4-4 4"/></svg>Forward pass</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gEpoch',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 21v-5h5"/></svg>Epoch</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gPred',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>Prediction</span>
       </div></div>
   </div>
 </div>
@@ -663,15 +663,15 @@ const ABSVARS=[{key:'x1',name:'x₁',desc:'',unit:'',min:0,max:1,def:50,weight:0
 const CALC_GLYPH='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="4" y="2.5" width="16" height="19" rx="3.2"/><path d="M8 7h8"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></svg>';
 const SCENARIOS=[{key:'calc',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="4" y="2.5" width="16" height="19" rx="3.2"/><path d="M8 7h8"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></svg>',title:'Calculation mode',desc:'Practice the math behind neural networks'},{key:'exam',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5h9.5L19 8v12.5H5z"/><path d="M14 3.5V8h5"/><path d="M8.5 13.5l2 2 4.5-4.5"/></svg>',title:'Will the student pass?',desc:'Train a model on fictional but realistic student data'},{key:'gym',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9v6M6 7v10M18 7v10M21 9v6"/><path d="M6 12h12"/></svg>',title:'Will the workout be effective?',desc:'Train and explore a model where the relationships are not fully linear'},{key:'abstract',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3v6.2L4.6 18a2 2 0 0 0 1.7 3h11.4a2 2 0 0 0 1.7-3l-4.9-8.8V3"/><path d="M8 3h8"/><path d="M7.5 14.5h9"/></svg>',title:'Experiment mode',desc:'Build and test freely'}];
 
-/* Tonen per scenario. Sätts på :root så att alla accentfärger följer med. */
-/* Blått och lila låg för nära varandra. Nu ligger tonerna på var sitt håll
-   av färgcirkeln: blått, rött, turkost och gult. */
+/* The tone per scenario. Set on :root so that every accent colour follows. */
+/* The tones sit on opposite sides of the colour wheel: blue, red, teal and yellow,
+   so that two scenarios can never be confused. */
 const SC_TONE={calc:['#5b8cff','#93b2ff'],exam:['#f0665c','#ff9186'],
                gym:['#2fc4b2','#6fe0d1'],abstract:['#e0a355','#f2c98a']};
 function applyScenarioTone(k){
-  /* Tonen används bara av scenariokorten, fasindikatorn, dukens fond
-     och ramen kring variablerna. Knappar, rubriker och begreppslänkar
-     behåller den blå grundfärgen, så att gränssnittet håller ihop. */
+  /* The tone is used only by the scenario cards, the phase indicator, the canvas
+     backdrop and the border around the variables. Buttons, headings and concept
+     links keep the base blue, so that the interface holds together. */
   const t=SC_TONE[k]||SC_TONE.exam, root=document.documentElement.style;
   root.setProperty('--sc',t[0]);
   root.setProperty('--sc2',t[1]);
@@ -695,15 +695,15 @@ function renderScenarioCards(){
   const el=document.getElementById('scenarioCards');el.className='scenario-cards'+(scOpen?'':' closed');el.innerHTML=SCENARIOS.map(s=>`<div class="scenario-card ${curSc===s.key?'active':''}" tabindex="0" style="--sc-tone:${SC_TONE[s.key]?SC_TONE[s.key][0]:'#5b8cff'}" onclick="setScenario('${s.key}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();setScenario('${s.key}');}"><span class="sc-icon">${s.icon}</span><div><div class="sc-title">${s.title}</div>${s.desc?`<div class="sc-desc">${s.desc}</div>`:''}</div></div>`).join('');}
 let curSc='calc',varEnabled=[true,true],layers=[2,3,1],W=[],B=[],vals=[];
 let stepQueue=[],stepIdx=0,hlNeuron=null,hlEdges=[],phase='explore',trained=false,epoch=0,trainTimer=null;
-/* Vikten skrivs ut som en bricka mitt på varje koppling. Med fler än åtta
-   kopplingar mellan två lager hamnar brickorna över varandra, så då döljs de
-   från början. weightPref är null så länge valet sköts automatiskt och blir
-   true eller false när eleven själv har tryckt på knappen. En enskild
-   koppling går alltid att klicka fram, även när brickorna är dolda. */
+/* The weight is printed as a badge in the middle of each connection. With more than
+   eight connections between two layers the badges overlap, so they are hidden from
+   the start. weightPref is null as long as the choice is handled automatically and
+   becomes true or false once the student has pressed the button. A single connection
+   can always be clicked into view, even when the badges are hidden. */
 let weightPref=null,selEdge=null,hovEdge=null;
-/* På en dator räcker det att peka på en koppling för att läsa av dess vikt.
-   Klicket finns kvar för att nåla fast en koppling, vilket behövs på pekskärm
-   och när vikten ska stå kvar medan man tittar på något annat. */
+/* On a computer it is enough to point at a connection to read its weight. The click
+   remains in order to pin a connection, which is needed on a touch screen and when
+   the weight should stay while looking at something else. */
 const FINE_POINTER=window.matchMedia?window.matchMedia('(hover:hover) and (pointer:fine)').matches:false;
 function sameEdge(a,b){return !!a&&!!b&&a.l===b.l&&a.i===b.i&&a.j===b.j;}
 function maxEdgesBetweenLayers(){let m=0;for(let l=0;l<layers.length-1;l++)m=Math.max(m,layers[l]*layers[l+1]);return m;}
@@ -730,18 +730,17 @@ function actNForLayer(li){return{relu:'ReLU',sigmoid:'σ',tanh:'tanh'}[getActFnF
 function actExplain(fn,x,y){if(fn==='σ')return`The value ${x.toFixed(3)} is fed into sigmoid: σ(${x.toFixed(3)}) = 1/(1+e^(${(-x).toFixed(2)})) = ${y.toFixed(3)}`;if(fn==='ReLU')return`ReLU: max(0, ${x.toFixed(3)}) = ${y.toFixed(3)}`;if(fn==='tanh')return`The value ${x.toFixed(3)} is put into tanh, which is defined as tanh(x) = (e^x − e^(−x)) / (e^x + e^(−x)). Here that gives tanh(${x.toFixed(3)}) = ${y.toFixed(3)}. Unlike sigmoid, which returns a value between 0 and 1, tanh always lands between −1 and 1`;return'';}
 function denorm(v,vo){return vo.min+v*(vo.max-vo.min);}
 function fmtReal(v,vo){if(vo.isCalc){return String(Math.round(denorm(v,vo)));}if(!vo.unit)return vo.realStep>=1?String(Math.round(denorm(v,vo))):(vo.max<=10?(denorm(v,vo)).toFixed(1):v.toFixed(2));const r=denorm(v,vo);const isFractional=vo.realStep&&vo.realStep<1;if(isFractional)return`${r.toFixed(1)} ${vo.unit}`;return`${Math.round(r)}${vo.unit==='%'?'%':' '+vo.unit}`;}
-/* Fyra villkor uttryckta i verkliga enheter:
-     sömn    6 till 9 timmar
-     längd   30 till 80 minuter
-     stress  högst 7
-     vila    minst 2 dygn
-   Passet blir effektivt precis när alla fyra villkoren är uppfyllda. Varje
-   variabel får en jämn poängkurva som passerar 0,5 mitt emellan det sista
-   godkända och det första underkända stegvärdet, och den lägsta poängen
-   avgör. Etiketten blir därför sann exakt när samtliga villkor håller,
-   samtidigt som kurvorna är jämna och möjliga för nätverket att lära sig.
-   Regeln ger sex gränser att hitta, vilket är skälet till att ett dolt
-   lager med omkring sex neuroner räcker för runt 96 % rätt. */
+/* Four conditions expressed in real units:
+     sleep    6 to 9 hours
+     length   30 to 80 minutes
+     stress   at most 7
+     rest     at least 2 days
+   The session is effective precisely when all four conditions hold. Each variable gets
+   a smooth score curve that passes 0.5 midway between the last passing and the first
+   failing step value, and the lowest score decides. The label is therefore true exactly
+   when every condition holds, while the curves stay smooth and learnable for the
+   network. The rule gives six boundaries to find, which is why one hidden layer with
+   about six neurons is enough for roughly 96 per cent correct. */
 const GYMRULES={sleep:{lo:6,hi:9},length:{lo:30,hi:80},stress:{hi:7},rest:{lo:2}};
 const GYMSCORE=(function(){
   const f={},sq=Math.sqrt(Math.log(2));
@@ -762,8 +761,8 @@ const GYMSCORE=(function(){
 })();
 function gymVarScore(key,norm){const f=GYMSCORE[key];return f?f(norm):0.5;}
 function gymScore(vs){const av=activeVars();let worst=1;for(let i=0;i<vs.length;i++){const s=gymVarScore(av[i].key,vs[i]);if(s<worst)worst=s;}return worst;}
-function examScore(vs){const av=activeVars();let s=0,tw=0;for(let i=0;i<vs.length;i++){s+=vs[i]*av[i].weight;tw+=av[i].weight;}let score=s/tw;if(curSc==='exam'){const sIdx=av.findIndex(v=>v.key==='sleep');if(sIdx>=0&&vs[sIdx]<0.5){score-=(0.5-vs[sIdx])*1.5;}const aIdx=av.findIndex(v=>v.key==='attend');if(aIdx>=0){const a=vs[aIdx];/* Under 70 % närvaro hjälper ingen mängd plugg. Villkoret är skarpt och
-   kräver att nätverket kombinerar två variabler, inte bara väger dem. */
+function examScore(vs){const av=activeVars();let s=0,tw=0;for(let i=0;i<vs.length;i++){s+=vs[i]*av[i].weight;tw+=av[i].weight;}let score=s/tw;if(curSc==='exam'){const sIdx=av.findIndex(v=>v.key==='sleep');if(sIdx>=0&&vs[sIdx]<0.5){score-=(0.5-vs[sIdx])*1.5;}const aIdx=av.findIndex(v=>v.key==='attend');if(aIdx>=0){const a=vs[aIdx];/* Below 70 per cent attendance no amount of studying helps. The condition is sharp and
+   requires the network to combine two variables rather than merely weigh them. */
 if(a<0.70)score-=0.55+(0.70-a)*0.6;}}return score;}
 function targetFn(vs){if(isCalc())return 0;if(curSc==='gym')return gymScore(vs)>0.5?1:0;return examScore(vs)>0.48?1:0;}
 function targetFnNoisy(vs){if(isCalc())return 0;if(curSc==='gym')return gymScore(vs)>0.5?1:0;const noise=(Math.random()-0.5)*0.08;return(examScore(vs)+noise)>0.48?1:0;}
@@ -773,11 +772,10 @@ function initW(){if(isCalc()){initCalcWeights();return;}W=[];B=[];for(let l=1;l<
 function initV(){vals=[];for(let l=0;l<layers.length;l++){const lv=[];for(let j=0;j<layers[l];j++)lv.push({raw:null,act:null,computed:false});vals.push(lv);}const inp=getIV();for(let i=0;i<layers[0];i++)vals[0][i]={raw:inp[i],act:inp[i],computed:true};stepQueue=[];for(let l=1;l<layers.length;l++)for(let j=0;j<layers[l];j++)stepQueue.push({l,j});stepIdx=0;hlNeuron=null;hlEdges=[];stepHist=[];}
 function snapVals(){return JSON.parse(JSON.stringify(vals));}
 function forwardFull(){const inp=getIV();for(let i=0;i<layers[0];i++)vals[0][i]={raw:inp[i],act:inp[i],computed:true};for(let l=1;l<layers.length;l++)for(let j=0;j<layers[l];j++){let s=B[l-1][j];for(let i=0;i<layers[l-1];i++)s+=W[l-1][j][i]*vals[l-1][i].act;vals[l][j]={raw:s,act:act_(s,l),computed:true};}stepIdx=stepQueue.length;}
-/* Gym: hälften av exemplen är godkända pass. Av de underkända bryter de
-   flesta mot ett enda villkor och ligger bara ett eller två steg utanför
-   sin gräns. Sådana gränsfall gör att varje gräns måste läras för sig.
-   Med slumpade motexempel bröt de flesta mot flera villkor samtidigt, och
-   då räckte fyra neuroner nästan lika långt som sex. */
+/* Gym: half the examples are effective sessions. Of the ineffective ones most break a
+   single condition and lie only one or two steps outside its limit. Such borderline
+   cases mean every limit has to be learned separately. With randomised counter-examples
+   most broke several conditions at once, and then four neurons got almost as far as six. */
 const GYMVALS=(function(){
   const out=[];
   for(const vo of GYMVARS){
@@ -810,9 +808,9 @@ function genGymData(n){
   return{xs,ys};
 }
 function genData(n){if(curSc==='gym')return genGymData(n);const av=activeVars(),nI=av.length,xs=[],ys=[];if(curSc==='gym'||curSc==='exam'){let ja=0,nej=0,t=Math.floor(n/2),guard=0;while((ja<t||nej<t)&&guard<n*400){guard++;const x=[];for(let j=0;j<nI;j++)x.push(curSc==='gym'?snapNorm(Math.random(),av[j]):Math.round(Math.random()*100)/100);const y=targetFnNoisy(x);if(y===1&&ja<t){xs.push(x);ys.push(y);ja++;}else if(y===0&&nej<t){xs.push(x);ys.push(y);nej++;}}}else{for(let i=0;i<n;i++){const x=[];for(let j=0;j<nI;j++)x.push(Math.round(Math.random()*100)/100);xs.push(x);ys.push(targetFnNoisy(x));}}return{xs,ys};}
-/* Andel rätt på färsk data som modellen inte tränats på. Det är måttet som
-   går att jämföra mellan olika arkitekturer – förlusten säger lite för den
-   som inte vet vad den mäter. */
+/* The share correct on fresh data the model has not been trained on. It is the measure
+   that can be compared between architectures, since the loss says little to someone who
+   does not know what it measures. */
 function testAccuracy(){
   if(isCalc())return null;
   const d=genData(400);let ok=0;
@@ -832,10 +830,10 @@ function testAccuracy(){
   return ok/d.xs.length;
 }
 function trainBatch(){const bSz=curSc==='gym'?100:30;const d=genData(bSz);
-/* Avtagande inlarningstakt: stora steg i borjan for att hitta ratt omrade,
-   sma steg pa slutet for att lagga granserna exakt. */
+/* Decaying learning rate: large steps at the start to find the right region,
+   small steps at the end to place the boundaries precisely. */
 const lr=curSc==='gym'?0.8+(0.05-0.8)*Math.min(1,epoch/1499):0.8;let tl=0;if(!savedTrainData)savedTrainData=genData(200);for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++)for(let i=0;i<W[l][j].length;i++)wDeltas[l][j][i]=0;for(let s=0;s<d.xs.length;s++){const a=[d.xs[s].slice()];let c=d.xs[s].slice();for(let l=0;l<W.length;l++){const nx=[];for(let j=0;j<W[l].length;j++){let sm=B[l][j];for(let i=0;i<c.length;i++)sm+=W[l][j][i]*c[i];nx.push(act_(sm,l+1));}c=nx;a.push(nx);}const o=a[a.length-1][0],t=d.ys[s],e=o-t;tl+=e*e;const dl=[];for(let l=0;l<W.length;l++)dl.push(new Array(W[l].length).fill(0));dl[W.length-1][0]=e*actDeriv(o,layers.length-1);for(let l=W.length-2;l>=0;l--)for(let j=0;j<W[l].length;j++){let sm=0;for(let k=0;k<W[l+1].length;k++)sm+=dl[l+1][k]*W[l+1][k][j];dl[l][j]=sm*actDeriv(a[l+1][j],l+1);}for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++){for(let i=0;i<W[l][j].length;i++){const delta=-lr*dl[l][j]*a[l][i];W[l][j][i]+=delta;wDeltas[l][j][i]+=delta;totalWeightUpdates++;}B[l][j]-=lr*dl[l][j];}}return tl/d.xs.length;}
-/* ── living training canvas (same animation as in the bias lab) ── */
+/* ── Training view ── */
 let trainAnimRAF=null,trainAnimParticles=[],trainStatusLines=[];
 const TRAIN_STATUS=[{t:'Reading the dataset…',at:0},{t:'Learning patterns…',at:0.28},{t:'Identifying relationships…',at:0.55},{t:'Optimizing the model…',at:0.8}];
 function stopTrainAnim(){if(trainAnimRAF)cancelAnimationFrame(trainAnimRAF);trainAnimRAF=null;trainAnimParticles=[];}
@@ -899,8 +897,8 @@ function updateTrainStatus(frac){
 
 
 
-/* Rutan läggs exakt över vänsterpanelen, så att den varken täcker duken
-   eller begreppen i högerpanelen. */
+/* The box is placed exactly over the left panel, so that it covers neither the canvas
+   nor the concepts in the right panel. */
 function trainMsgSide(msg,on){
   if(!on){msg.classList.remove('side');msg.style.left=msg.style.top=msg.style.width=msg.style.height='';return;}
   msg.classList.add('side');
@@ -911,7 +909,9 @@ function trainMsgSide(msg,on){
     msg.style.width=`${r.width}px`;msg.style.height=`${r.height}px`;
   }
 }
-function startTraining(){if(trainTimer||isCalc())return;if(trained&&!confirm('Do you want to train the network again? The model and loss curve will be lost.'))return;epoch=0;trained=false;savedTrainData=null;isTraining=true;lossHistory=[];totalWeightUpdates=0;initW();const tn=layers.reduce((a,b)=>a+b,0),maxE=curSc==='gym'?1500:300 /* fast antal, annars får stora nät mer träning än små. 300 i stället för 120: vid 120 var alla arkitekturer undertränade, och då såg fler neuroner ut att hjälpa i provscenariot fastän de inte gör det */;const msg=document.getElementById('trainMsg');
+function startTraining(){if(trainTimer||isCalc())return;if(trained&&!confirm('Do you want to train the network again? The model and loss curve will be lost.'))return;epoch=0;trained=false;savedTrainData=null;isTraining=true;lossHistory=[];totalWeightUpdates=0;initW();const tn=layers.reduce((a,b)=>a+b,0),maxE=curSc==='gym'?1500:300 /* Fixed number of epochs, otherwise large networks get more training than small ones.
+     At 120 epochs every architecture is undertrained, and then more neurons look as
+     though they help in the exam scenario although they do not. */;const msg=document.getElementById('trainMsg');
   stopTrainAnim();
   const dashboard=()=>`<div class="tdash"><div class="tdash-cell"><div class="tl">Epoch</div><div class="tv" id="tStatEpoch">0 / ${maxE}</div></div><div class="tdash-cell"><div class="tl">Loss</div><div class="tv" id="tStatLoss" style="color:var(--green)">–</div></div><div class="tdash-cell wide"><div class="tl">Weights updated</div><div class="tv" id="tStatWeights" style="font-size:.95em;color:var(--accent2)">0</div></div></div>`;
   msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg><div class="tm-title">Training the network …</div><div class="tm-text">The model is fed hundreds of examples and adjusts the weights step by step.</div><div class="train-stage"><div class="train-canvas-wrap"><canvas id="trainAnimCanvas"></canvas></div><div class="train-progress-rail"><i id="trainAnimRail"></i></div><div class="train-status" id="trainAnimStatus"></div></div>${dashboard()}`;
@@ -926,18 +926,18 @@ function startTraining(){if(trainTimer||isCalc())return;if(trained&&!confirm('Do
     updateTrainStatus(frac);
     const wEl=document.getElementById('tStatWeights');if(wEl)wEl.textContent=totalWeightUpdates.toLocaleString('en-US');
     initV();forwardFull();drawNet();
-    /* Gym behöver fler epoker för att djupa nät ska hinna konvergera.
-       Två satser per tick håller väntetiden nere utan att ändra resultatet. */
-    /* Gym kör tre satser per tick, provet två. Provets tick är långsammare
-       så att förlusten går att följa med blicken, och totaltiden landar på
-       ungefär tolv sekunder i båda scenarierna. */
+    /* Gym needs more epochs for deep networks to converge. Two batches per tick
+        keep the wait down without changing the result. */
+    /* Gym runs three batches per tick, the exam two. The exam tick is slower so that the
+        loss can be followed by eye, and the total lands at about twelve seconds in both
+        scenarios. */
     for(let q=0;q<(curSc==='gym'?2:1)&&epoch<maxE;q++){const l2=trainBatch();epoch++;lossHistory.push(l2);}
-    /* Alla scenarier tränar lika många epoker, så att olika arkitekturer går
-       att jämföra. Ett tidigt stopp gav undertränade nät och fick fler
-       neuroner att se ut att hjälpa i provet, fastän de inte gör det. */
+    /* Every scenario trains for the same number of epochs, so that architectures can be
+        compared. Stopping early gave undertrained networks and made more neurons look
+        as though they help in the exam, although they do not. */
     if(epoch>=maxE){clearInterval(trainTimer);trainTimer=null;trained=true;isTraining=false;stopTrainAnim();trainMsgSide(msg,false);const _acc=testAccuracy();const accPct=_acc==null?'–':Math.round(_acc*100)+'%';msg.innerHTML=`<svg class="tm-icon ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><div class="tm-title">Training is complete</div><div class="tm-text">The network went through <strong>${epoch} epochs</strong> and built its weights from ${(epoch*(curSc==="gym"?100:30)).toLocaleString('en-GB')} examples.</div><div class="tdash"><div class="tdash-cell"><div class="tl">Accuracy</div><div class="tv" style="color:var(--gold,#ffd866)">${accPct}</div></div><div class="tdash-cell"><div class="tl">Loss</div><div class="tv" style="color:var(--green)">${loss.toFixed(4)}</div></div><div class="tdash-cell wide"><div class="tl">Weights updated</div><div class="tv" style="color:var(--accent2)">${totalWeightUpdates.toLocaleString('en-US')}</div></div></div><div class="after-train"><button class="btn pri" onclick="goDirectToPredict()">${ICON_TARGET} Predict ${ICON_ARROW_R}</button><div class="at-links"><button class="at-link" onclick="finishTraining()">Explore the network</button><button class="at-link" onclick="trainNewModel()">Train a new model</button><button class="at-link" onclick="openDataModal()">Show training data</button></div></div>`;}},curSc==='gym'?25:80);}
-/* Rutan efter träningen ska gå att lämna åt båda hållen: vidare till
-   förutsägelse eller tillbaka för att träna en ny modell. */
+/* The box after training must be possible to leave in both directions: onward to
+   prediction or back to train a new model. */
 function trainNewModel(){document.getElementById('trainMsg').classList.remove('show');fullReset();}
 function goDirectToPredict(){document.getElementById('trainMsg').classList.remove('show');goPhase('predict');}
 function finishTraining(){document.getElementById('trainMsg').classList.remove('show');goPhase('explore');resetPass();if(seenGuides.has('explore'))return;seenGuides.add('explore');const msg=document.getElementById('trainMsg');msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><div class="tm-title">Explore the network</div><div class="tm-text">Press <strong>Next</strong> to calculate one neuron at a time.<br><br>Click one of the <strong>calculation steps</strong> to the right of the network for a more detailed explanation in words.</div><div style="margin-top:12px"><button class="btn pri" onclick="document.getElementById('trainMsg').classList.remove('show')" style="flex:none;padding:11px 20px">Got it ${ICON_ARROW_R}</button></div>`;trainMsgSide(msg,false);msg.classList.add('show');}
@@ -956,13 +956,12 @@ function goPhase(p){if(isCalc())return;if(p!=='train'&&!trained)return;setPhase(
 function setPhase(p){phase=p;renderPhaseBar();
   document.getElementById('inputSection').style.display=(p==='train'&&!isCalc())?'none':'contents';
   renderActSection();
-  /* Aktiveringsfunktionen är en fördjupning och fälls ut först när
-     eleven har en tränad modell att jämföra med. */
+  /* The activation function is a deeper topic and unfolds only once the student has a
+     trained model to compare against. */
   const _act=document.getElementById('actSection');
   _act.classList.add('sec-fold');
-  /* Valet av aktiveringsfunktion ska synas hela tiden. Tidigare fälldes
-     rutan ut först efter träningen, så eleven kunde välja ReLU, gå
-     tillbaka till träningssteget och inte längre se vad som var valt. */
+  /* The choice of activation function is shown in every phase. Otherwise the student can
+     pick ReLU, go back to the training step and no longer see what applies. */
   _act.classList.add('open');
   document.getElementById('archSection').style.display=(p==='train'&&!isCalc())?'contents':'none';
   document.getElementById('varSection').style.display=(p==='train'&&!isCalc())?'block':'none';
@@ -972,7 +971,7 @@ function setPhase(p){phase=p;renderPhaseBar();
   const _c=document.querySelector('.center');if(_c)_c.classList.toggle('no-narr',show);
   renderCtrl();}
 function renderCtrl(){const el=document.getElementById('controlArea');if(isCalc()){el.innerHTML=`<div class="bg"><button class="btn icon" aria-label="Previous step" title="Previous step" onclick="stepBack()">${ICON_PREV}</button><button class="btn pri" onclick="stepNeuron()">${ICON_NEXT} Next</button><button class="btn" onclick="runAllAnim()">${ICON_ALL} All</button><button class="btn icon dn" aria-label="Start the pass over" title="Start the pass over" onclick="resetPass()">${ICON_RESET}</button></div><div class="hint">All values are integers and the activation is ReLU, so every calculation can be followed by hand.</div>`;}else if(phase==='train'){el.innerHTML=`<div class="bg"><button class="btn grn" onclick="startTraining()">${ICON_BRAIN} Train the model</button></div><div class="hint">The network learns the weights by training on data.</div>`;}else if(phase==='explore'){el.innerHTML=`<div class="bg"><button class="btn icon" aria-label="Previous step" title="Previous step" onclick="stepBack()">${ICON_PREV}</button><button class="btn pri" onclick="stepNeuron()">${ICON_NEXT} Next</button><button class="btn" onclick="runAllAnim()">${ICON_ALL} All</button><button class="btn icon dn" aria-label="Start the pass over" title="Start the pass over" onclick="resetPass()">${ICON_RESET}</button></div><div class="hint">Step through the network one neuron at a time. The left arrow goes back one step.</div><div class="bg" style="margin-top:4px"><button class="btn" onclick="fullReset()" title="Reset the model and train again"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:4px"><path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 4.5V10h5.5"/></svg>Train again</button><button class="btn" onclick="goPhase('predict')">Predict ${ICON_ARROW_R}</button></div>`;}else{el.innerHTML=`<div class="hint" style="margin-bottom:4px">The network's answer updates instantly when the input values change.</div><div class="bg"><button class="btn" onclick="goPhase('explore')">${ICON_ARROW_L} Explore</button><button class="btn" onclick="fullReset()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:4px"><path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 4.5V10h5.5"/></svg>Train again</button></div>`;}}
-/* ── click on a calculation step in the narr panel → glass card with a written explanation ── */
+/* ── Clicking a calculation step opens a card with the explanation in words ── */
 function openCalcConcept(row){
   const title=row.dataset.title||'Calculation';
   const defHTML=row.dataset.explain||'';
@@ -994,9 +993,9 @@ function openCalcConcept(row){
   document.getElementById('conceptBackdrop').classList.add('show');
   requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('show')));
 }
-/* ── Formler i MathML ────────────────────────────────────────────────
-   Talen behåller sin färgkodning: vikter gröna, indata ljusa, bias rosa och
-   resultatet i guld, precis som i den löpande texten. */
+/* ── Formulas in MathML ────────────────────────────────────────────────
+   The numbers keep their colour coding: weights green, inputs light, bias pink and the
+   result in gold, exactly as in the running text. */
 function mNum(v,cls){return `<mn${cls?` class="${cls}"`:''}>${String(v).replace('-','\u2212')}</mn>`;}
 function mVar(v,cls){return `<mi${cls?` class="${cls}"`:''}>${v}</mi>`;}
 function mOp(v){return `<mo>${v}</mo>`;}
@@ -1008,12 +1007,12 @@ function mml(inner,block){const m=`<math class="fml${block?' fml-block':''}" dis
 function mmlSum(contribs,biasV,sum,fmt,block){
   const term=c=>mNum(fmt(c.w),'fw')+mOp('&#215;')+mNum(fmt(c.input),'fx');
   const bias=biasV<0?mParen(mNum(fmt(biasV),'fb')):mNum(fmt(biasV),'fb');
-  /* Med fler än två termer skrivs summan i pelare, en term per rad. På en rad
-     blir den bredare än panelen och måste antingen klippas eller krympas till
-     oläslighet. */
-  /* Summan skrivs på en rad när den får plats, annars uppställd i pelare.
-     Vilket som gäller avgörs efteråt genom att mäta, eftersom bredden beror
-     på hur många siffror talen har. */
+  /* With more than two terms the sum is written stacked, one term per row. On a single
+      line it becomes wider than the panel and has to be either clipped or shrunk to
+      illegibility. */
+  /* The sum is written on one line when it fits, otherwise stacked. Which one applies is
+      decided afterwards by measuring, since the width depends on how many digits the
+      numbers have. */
   let line='';
   contribs.forEach((c,i)=>{if(i)line+=mOp('+');line+=term(c);});
   line+=mOp('+')+bias+mOp('=')+mNum(fmt(sum),'fr');
@@ -1070,7 +1069,7 @@ function resetPass(){initV();hlNeuron=null;hlEdges=[];stepHist=[];
   document.getElementById('narr').innerHTML=_pred
     ?'<div class="ne">Change the input values on the left and the answer updates immediately.</div>'
     :'<div class="ne">Press <strong>Next</strong> to step through the network.</div>';document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';if(!isCalc())updateTgt();drawNet();}
-/* Mät varje formelrad och krymp den om den är bredare än panelen. */
+/* Measure each formula row and shrink it if it is wider than the panel. */
 function fitFormulas(){
   requestAnimationFrame(()=>{
     document.querySelectorAll('.sum-alt').forEach(alt=>{
@@ -1161,38 +1160,38 @@ function addLayer(){if(isCalc()||layers.length>=5)return;layers.splice(layers.le
 function removeLayer(){if(isCalc()||layers.length<=2)return;layers.splice(layers.length-2,1);fullReset();}
 function fullReset(){if(trainTimer){clearInterval(trainTimer);trainTimer=null;}selEdge=null;hovEdge=null;stopTrainAnim();trained=false;isTraining=false;epoch=0;savedTrainData=null;wDeltas=null;lossHistory=[];totalWeightUpdates=0;document.getElementById('trainMsg').classList.remove('show');applyScenarioTone(curSc);renderScenarioCards();renderLC();renderVarList();renderIS();syncWeightToggle();initW();initV();if(isCalc()){phase='explore';trained=true;setPhase('explore');}else{setPhase('train');}updateTgt();document.getElementById('outputVal').textContent='–';document.getElementById('verdictVal').innerHTML='';document.getElementById('narr').innerHTML=isCalc()?'<div class="ne">Press <strong>Next</strong> to step through the network. The activation function is <strong>ReLU</strong>, which sets negative values to 0.<br><span style="font-size:0.88em;opacity:0.85">Tip: click a <strong style="color:var(--green)">connection</strong> to change its weight, or a <strong>neuron</strong> to change its bias.</span></div>':'<div class="ne">Press <strong>Train the model</strong> to begin.</div>';drawNet();}
 function setupCv(){const cv=document.getElementById('cv'),p=cv.parentElement,dpr=devicePixelRatio||1,w=p.clientWidth,h=p.clientHeight;cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+'px';cv.style.height=h+'px';const ctx=cv.getContext('2d');ctx.scale(dpr,dpr);return{ctx,w,h};}
-/* Skalan följer både bredd och höjd. När beräkningskorten fälls ut under
-   duken krymper ytan, och då ska ritningen krympa med den i stället för att
-   noderna ska tränga ihop sig. */
+/* The scale follows both width and height. When the calculation cards unfold below the
+   canvas the area shrinks, and the drawing should then shrink with it rather than have
+   the nodes crowd together. */
 function canvasScale(w){
   const cv=document.getElementById('cv');
   const h=cv&&cv.clientHeight?cv.clientHeight:430;
-  /* Skalan får växa över 1 när duken är stor, så att neuronerna blir större
-     i stället för att simma i tomrum. */
+  /* The scale may grow above 1 when the canvas is large, so that the neurons become
+      bigger rather than swimming in empty space. */
   return Math.min(Math.max(0.56,Math.min(1.34,w/640)),Math.max(0.6,Math.min(1.34,h/430)));
 }
-/* I förutsägelseläget är nätverket inte huvudsaken, utan indata och svaret.
-   Ritningen krymper därför något, vilket också ger plats åt etiketterna
-   under indatanoderna. */
+/* In prediction mode the network is not the main thing, the inputs and the answer are.
+   The drawing therefore shrinks somewhat, which also makes room for the labels under
+   the input nodes. */
 function phaseScale(){return (!isCalc()&&phase==='predict')?0.76:1;}
 function neuronRadius(w){
   const maxN=Math.max(...layers),s=canvasScale(w);
   let R=Math.max(11,(maxN<=3?32:maxN<=4?28:maxN<=6?23:19)*s*phaseScale());
-  /* Variabelnamnet står under indatanoden. Ligger noderna tätt krymper radien
-     så att texten får luft, i stället för att lägga sig intill noden under. */
+  /* The variable name sits below the input node. When the nodes sit close together the
+      radius shrinks so that the text gets air, rather than sitting next to the node below. */
   const cv=document.getElementById('cv'),h=cv&&cv.clientHeight?cv.clientHeight:430;
   const nIn=layers[0]||1;
   const gap=Math.min(((!isCalc()&&phase==='predict')?122:90)*s,(h-2*(R+36))/nIn);
   return Math.max(9,Math.min(R,Math.max(R*0.62,(gap-30)/2)));
 }
-/* Lagerbrickan (INDATA, DOLT 1, UTDATA) ritas ovanför lagrets översta nod och
-   biasvärdet under den nedersta. Marginalerna uppe och nere måste därför rymma
-   både nodens radie och den texten, annars hamnar brickan utanför duken. */
+/* The layer badge (INPUT, HIDDEN 1, OUTPUT) is drawn above the topmost node of the layer
+   and the bias value below the bottom one. The top and bottom margins must therefore hold
+   both the node radius and that text, otherwise the badge ends up outside the canvas. */
 function nPos(w,h){
   const s=canvasScale(w),R=neuronRadius(w);
   const nL=layers.length,px=Math.max(34,90*s);
-  /* Lagren glider inte isär hur långt som helst. Utan tak hamnar indata och
-     utdata i var sin kant av duken och nätverket ser utdraget ut. */
+  /* The layers do not drift apart without limit. Without a cap the input and the output end
+      up at opposite edges of the canvas and the network looks stretched. */
   const pad=R+36,gMax=340*s;
   const g=Math.min((w-2*px)/Math.max(nL-1,1),gMax);
   const x0=(w-g*(nL-1))/2,ps=[];
@@ -1283,9 +1282,9 @@ function drawGlassNeuron(ctx,x,y,R,opts){
   ctx.stroke();ctx.shadowBlur=0;
 }
 
-/* En ljuspunkt vandrar från indatalagret till utdatanoden när ett reglage
-   ändras. Poängen är att göra orsakssambandet synligt: ändrad indata ger
-   ett nytt svar, och signalen tar vägen genom nätverket. */
+/* A point of light travels from the input layer to the output node when a slider changes.
+   The purpose is to make the causal link visible: changed input gives a new answer, and the
+   signal takes its way through the network. */
 let signalAnim=null;
 function runSignalPulse(){
   if(RM_REDUCED())return;
@@ -1379,8 +1378,8 @@ function drawNet(){
   for(let l=0;l<layers.length;l++){
     const isInLayer=l===0,isOutLayer=l===layers.length-1;
     const chipRgb=isInLayer?RGB_BLUE:isOutLayer?RGB_GOLD:RGB_GREY;
-    /* Brickan bär också lagrets aktiveringsfunktion, så att ett byte syns
-       direkt i bilden och inte bara i panelen. */
+    /* The badge also carries the activation function of the layer, so that a change shows
+        directly in the picture and not only in the panel. */
     const chipText=(isInLayer?'INPUT':isOutLayer?'OUTPUT':`HIDDEN ${l}`)+(isInLayer?'':' · '+actLabelFull(l));
     drawLayerChip(ctx,pos[l][0].x,pos[l][0].y-R-22,chipText,chipRgb,s);
     for(let i=0;i<layers[l];i++){
@@ -1403,14 +1402,13 @@ function drawNet(){
         ctx.fillStyle=`rgba(255,255,255,${0.3+0.1*op})`;
         ctx.fillText('?',x,y);
       }
-      /* Under träningen ändras bias i varje bildruta och blir bara flimmer.
-         Brickan visas därför först när modellen står stilla. */
+      /* During training the bias changes on every frame and becomes mere flicker. The badge is
+          therefore shown only once the model is at rest. */
       if(l>0&&!isTraining){
         const bv=B[l-1][i];
         const bTxt=`b=${isCalc()&&bv===Math.round(bv)?String(Math.round(bv)):bv.toFixed(2)}`;
-        /* Brickan placeras i gapet under noden. Räcker inte gapet till
-           flyttas den ut åt sidan i stället för att lägga sig över
-           neuronen under. */
+        /* The badge is placed in the gap below the node. If the gap is not enough it moves out to
+            the side rather than covering the neuron below. */
         const ng=pos[l].length>1?Math.abs(pos[l][1].y-pos[l][0].y):999;
         const bph=Math.max(12,Math.round(14*Math.min(1,s+0.15)));
         ctx.font=`600 ${Math.max(7,Math.round(9*s))}px "JetBrains Mono"`;
@@ -1420,7 +1418,7 @@ function drawNet(){
         if(room>=bph+8){ by=y+R+(room-bph)/2; }
         else{
           by=y-bph/2; bx=x+R+6;
-          /* Nära högerkanten läggs brickan på nodens vänstra sida i stället. */
+          /* Near the right edge the badge is placed on the left side of the node instead. */
           if(bx+bpx>w-4)bx=x-R-6-bpx;
         }
         ctx.beginPath();ctx.roundRect(bx,by,bpx,bph,bph/2);
@@ -1431,9 +1429,9 @@ function drawNet(){
       }
       if(l===0){
         const av=activeVars();
-        /* Etiketten centreras i gapet under noden i stället för på ett fast
-           avstånd. På smal skärm ligger noderna så tätt att en fast position
-           hamnade ovanpå noden under. Långa namn förkortas. */
+        /* The label is centred in the gap below the node rather than at a fixed distance. On a
+            narrow screen the nodes sit so close that a fixed position ended up on top of the
+            node below. Long names are shortened. */
         const ng=pos[l].length>1?Math.abs(pos[l][1].y-pos[l][0].y):999;
         const room=ng-2*R;
         const fs=room<26?Math.max(7,Math.round(8.5*s)):Math.max(8,Math.round(10*s));
@@ -1454,7 +1452,7 @@ function drawNet(){
       }
     }
   }
-  /* Signalpulsen ritas sist, ovanpå noderna. */
+  /* The signal pulse is drawn last, on top of the nodes. */
   drawSignalPulse(ctx,pos,R);
   document.getElementById('untrainedBadge').style.display=(!trained&&!isCalc())?'block':'none';}
 const cv=document.getElementById('cv');const tip=document.getElementById('tooltip');
@@ -1468,9 +1466,9 @@ const hit=pickEdge(mx,my,pos);
 if(FINE_POINTER&&!isTraining&&!isCalc())setHover(hit);
 this.style.cursor=hit?'pointer':'default';});
 cv.addEventListener('mouseleave',()=>{cv.style.cursor='default';setHover(null);});
-/* Utanför beräkningsläget öppnar ett klick på en koppling ingen dialog. Det
-   lyfter i stället fram just den kopplingens vikt, så att den går att läsa av
-   även när brickorna är dolda. Ett nytt klick på samma koppling släcker den. */
+/* Outside calculation mode a click on a connection opens no dialog. It highlights that
+   connection's weight instead, so that it can be read even when the badges are hidden. A
+   further click on the same connection turns it off. */
 function pickEdge(mx,my,pos){
   let bl=-1,bj=-1,bi=-1,bd=9;
   for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++)for(let i=0;i<W[l][j].length;i++){
@@ -1489,6 +1487,13 @@ let bestL=-1,bestJ=-1,bestI=-1,bestD=8;
 for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++)for(let i=0;i<W[l][j].length;i++){const ax=pos[l][i].x,ay=pos[l][i].y,bx=pos[l+1][j].x,by=pos[l+1][j].y;const dx=bx-ax,dy=by-ay,len2=dx*dx+dy*dy;if(len2<1)continue;let t=((mx-ax)*dx+(my-ay)*dy)/len2;t=Math.max(0,Math.min(1,t));const px=ax+t*dx,py=ay+t*dy;const d=Math.hypot(mx-px,my-py);if(d<bestD){bestD=d;bestL=l;bestJ=j;bestI=i;}}
 if(bestL>=0){const av=activeVars();const from=bestL===0?av[bestI].name:`hidden ${bestL} n${bestI+1}`,to=bestL+1===layers.length-1?'output':`hidden ${bestL+1} n${bestJ+1}`;const cur=W[bestL][bestJ][bestI];const v=prompt(`Weight: ${from} → ${to}\nCurrent: ${isCalc()&&cur===Math.round(cur)?cur:cur.toFixed(2)}`,isCalc()&&cur===Math.round(cur)?String(Math.round(cur)):cur.toFixed(2));if(v!==null){const p=parseFloat(v);if(!isNaN(p)){W[bestL][bestJ][bestI]=p;initV();if(trained||isCalc()){forwardFull();if(!isCalc())updateOut();}drawNet();}}}});
 let rT;window.addEventListener('resize',()=>{clearTimeout(rT);rT=setTimeout(()=>{drawNet();},80);});
+/* The concept links are span elements and therefore need their own keyboard handling. */
+function gTagKey(e){
+  if(e.key!=='Enter'&&e.key!==' ')return;
+  e.preventDefault();
+  e.currentTarget.click();
+}
+
 const CONCEPTS={
   gInput:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h11m0 0-4-4m4 4-4 4"/><rect x="16" y="5" width="5" height="14" rx="1"/></svg>',title:'Input',def:'An <strong>input</strong>, or input variable, is one of the values fed into the first layer of the network. It could be the number of hours of sleep or the number of hours studied. Every input is multiplied by a weight before it is passed on to the next layer.',illus:'<svg viewBox="0 0 140 70"><rect x="8" y="24" width="34" height="22" rx="5" fill="rgba(122,162,255,.18)" stroke="#7aa2ff" stroke-width="1.5"/><text x="25" y="39" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#e8ecf8">7</text><path d="M46 35h28" stroke="#7aa2ff" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M67 29l7 6-7 6" stroke="#7aa2ff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="108" cy="35" r="15" fill="rgba(77,128,255,.25)" stroke="#7aa2ff" stroke-width="2"/></svg>'},
   gNeuron:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>',title:'Neuron',def:'A <strong>neuron</strong> is a computational unit. It receives values, multiplies them by its weights, sums the products and runs the result through an activation function.',illus:'<svg viewBox="0 0 140 70"><g stroke="rgba(122,162,255,.5)" stroke-width="1.5"><line x1="15" y1="14" x2="60" y2="35"/><line x1="15" y1="35" x2="60" y2="35"/><line x1="15" y1="56" x2="60" y2="35"/><line x1="80" y1="35" x2="120" y2="35"/></g><circle cx="15" cy="14" r="4" fill="#7aa2ff"/><circle cx="15" cy="35" r="4" fill="#7aa2ff"/><circle cx="15" cy="56" r="4" fill="#7aa2ff"/><circle cx="70" cy="35" r="11" fill="rgba(77,128,255,.25)" stroke="#7aa2ff" stroke-width="2"/><circle cx="120" cy="35" r="4" fill="#ffce54"/></svg>'},
@@ -1531,7 +1536,7 @@ function closeConcept(){document.getElementById('conceptCard').classList.remove(
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
 (function initCardTilt(){
   const el=document.getElementById('conceptCardInner');if(!el)return;
-  /* Lutningen ska antydas, inte märkas. Sju grader vippade korten synligt. */
+  /* The tilt should be suggested, not noticed. At seven degrees the cards visibly wobble. */
   const MAX_TILT=2.5;
   el.addEventListener('mousemove',e=>{
     const r=el.getBoundingClientRect();
