@@ -150,6 +150,27 @@ button{font-family:inherit;}
 
 /* ── DS panel ── */
 .ds-panel{display:none;margin-top:12px;background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .25s;box-shadow:0 6px 22px rgba(0,0,0,.3);}
+/* ── Två spalter på bred skärm ──
+   Datastrukturpanelen ska gå att läsa medan sökningen pågår. Under trädet
+   hamnar den utanför bild på en bärbar skärm, så på tillräckligt breda
+   skärmar flyttas den till en egen spalt bredvid duken och följer med vid
+   rullning. Spalten reserveras först när panelen är aktiv, alltså när en
+   algoritm har valts, så att trädet står centrerat dessförinnan. */
+@media (min-width:1120px){
+  .page-wrap:has(.ds-panel.ds-active){max-width:1180px;display:grid;justify-content:center;
+    grid-template-columns:minmax(0,680px) minmax(270px,320px);gap:14px 20px;align-items:start;}
+  .page-wrap:has(.ds-panel.ds-active) > .alg-cards-label,
+  .page-wrap:has(.ds-panel.ds-active) > .alg-cards{grid-column:1 / -1;}
+  .page-wrap:has(.ds-panel.ds-active) > #canvasContainer{grid-column:1;margin:0;}
+  .page-wrap:has(.ds-panel.ds-active) > #statusBar,
+  .page-wrap:has(.ds-panel.ds-active) > .control-card{grid-column:1;}
+  .page-wrap:has(.ds-panel.ds-active) > .ds-panel{grid-column:2;grid-row:3 / span 3;
+    margin-top:0;position:sticky;top:16px;max-height:calc(100vh - 32px);display:flex;
+    flex-direction:column;}
+  .page-wrap:has(.ds-panel.ds-active) > .ds-panel .ds-body{min-height:0;}
+  .page-wrap:has(.ds-panel.ds-active) > .ds-panel .ds-body-inner{overflow-y:auto;}
+}
+
 .ds-panel.ds-active{display:block;}
 .ds-panel.ds-open{border-color:color-mix(in srgb,var(--alg) 32%,var(--border));}
 .ds-toggle{width:100%;display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;background:none;border:none;color:var(--text);font-family:'DM Sans',sans-serif;user-select:none;}
