@@ -1359,7 +1359,7 @@ function celebrateTree(wrapId,text){
 
 /* ================= nav (pipeline-stegvisare) ================= */
 const STEPS=[
-  {title:'Studera datan',c:'#60a5fa',intro:'Varje orm beskrivs av fem egenskaper: <b>huvudform</b>, <b>öga</b>, <b>mönster</b>, <b>färg</b> och <b>svans</b>. Till varje orm hör dessutom ett känt facit. Sortera dem efter en egenskap i taget och leta efter vad som skiljer de giftiga från de ofarliga.'},
+  {title:'Studera datan',c:'#60a5fa',intro:'Varje orm beskrivs av fem egenskaper: <b>huvudform</b>, <b>öga</b>, <b>mönster</b>, <b>färg</b> och <b>svans</b>. Till varje orm hör dessutom ett känt facit. Fundera över vad som skiljer de giftiga från de ofarliga.'},
   {title:'Bygg ditt träd',c:'#ffd866',intro:'Ett beslutsträd är uppbyggt av <b>noder</b>. Varje nod ställer en fråga om en egenskap, och varje svar leder vidare till en egen gren. En <b>ren</b> gren innehåller bara en klass och är färdig; en <b>blandad</b> gren behöver en fråga till. Klicka på en nod för att dela den eller bestämma dess klass.'},
   {title:'Testa ditt träd',c:'#ff9f43',intro:`En modell ska fungera på nya fall, inte bara på de exempel den byggdes utifrån. De ${TEST.length} ormarna i <button class="term" data-term="testdata">testdatan</button> lades undan innan bygget började och har aldrig påverkat trädet. De är därför det enda oberoende provet på om trädet lärt sig något som gäller allmänt. Kör ditt träd på dem, en i taget, och notera inte bara <b>hur många</b> det klassificerar rätt, utan också <b>vilken sorts fel</b> det gör.`},
   {title:'Se hur en dator bygger',c:'#34d399',intro:'En algoritm bygger samma sorts träd automatiskt, utifrån exakt samma träningsdata. I varje nod prövar algoritmen samtliga egenskaper och mäter hur rena grupperna blir. Måttet kallas <button class="term" data-term="entropy">entropi</button>, och den minskning en delning ger kallas <button class="term" data-term="gain">informationsvinst</button>. Egenskapen med störst informationsvinst får dela noden.'},
@@ -1662,7 +1662,7 @@ function wireStuActions(root){
 }
 function renderStuCtrl(keepPop){
   const el=document.getElementById('stuCtrl');
-  if(!stuSel){closeNodePop();el.innerHTML=`<div class="cardhint">${POPUI?'Klicka på en nod i trädet. Valen visas direkt vid noden.':'Klicka på en nod i trädet ovan för att dela den eller bestämma dess klass.'}</div>`;return;}
+  if(!stuSel){closeNodePop();el.innerHTML=POPUI?'':`<div class="cardhint">Tryck på en nod i trädet ovan för att dela den eller bestämma dess klass.</div>`;return;}
   const node=nodeByPid(stuRoot,stuSel);
   let h='';
   if(!POPUI)h+=stuActionsHTML(node);
