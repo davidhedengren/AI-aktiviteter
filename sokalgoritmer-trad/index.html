@@ -203,8 +203,22 @@ button{font-family:inherit;}
 .ds-current-detail{font-size:11px;font-weight:500;color:var(--subtle);font-family:'JetBrains Mono',monospace;}
 .ds-list-wrap{flex:1;min-width:220px;display:flex;flex-direction:column;gap:7px;}
 .ds-list-head{font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);font-weight:700;}
-.ds-list{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px;}
+.ds-list{display:flex;flex-direction:row;flex-wrap:wrap;gap:9px;}
 .ds-item{display:flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--border);border-radius:999px;padding:5px 11px 5px 7px;font-family:'JetBrains Mono',monospace;position:relative;}
+/* Noder som lades till under den pågående expanderingen markeras, så att det
+   syns vad just det steget bidrog med. Markeringen är grön, samma färg som
+   nyss upptäckta noder har på ritytan, och skiljer sig därmed från den
+   främre platsen i kön, som bär algoritmens färg. */
+/* Ringen ligger utanför brickan och överlever därför att en nod samtidigt är
+   främst i kön, vilket är vanligt i DFS där det senast tillagda barnet ligger
+   överst i stacken. Fyllning och ram får bara de nya som inte står först, så
+   att algoritmens färg alltid betyder näst på tur. */
+.ds-item.ds-new{box-shadow:0 0 0 2px rgba(51,209,122,.55),0 0 10px rgba(51,209,122,.22);
+  animation:dsNewIn .34s var(--ease-out) both;}
+.ds-item.ds-new:not(.ds-top){border-color:rgba(51,209,122,.55);background:rgba(51,209,122,.10);}
+.ds-item.ds-new:not(.ds-top) .ds-item-nid{background:rgba(51,209,122,.20);border-color:rgba(51,209,122,.5);color:#7dedae;}
+@keyframes dsNewIn{from{transform:scale(.86);opacity:0;}to{transform:scale(1);opacity:1;}}
+@media (prefers-reduced-motion:reduce){.ds-item.ds-new{animation:none;}}
 .ds-item.ds-top{background:color-mix(in srgb,var(--alg) 12%,transparent);border-color:color-mix(in srgb,var(--alg) 46%,transparent);}
 .ds-item-nid{width:22px;height:22px;border-radius:50%;background:rgba(77,128,255,.12);border:1px solid rgba(102,152,255,.3);color:var(--accent2);font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .ds-item.ds-top .ds-item-nid{background:color-mix(in srgb,var(--alg) 22%,transparent);border-color:color-mix(in srgb,var(--alg) 55%,transparent);color:color-mix(in srgb,var(--alg) 80%,#fff);}
@@ -1488,8 +1502,12 @@ function restoreState(alg,s){
   else{let pq=new PriorityQ();pq.data=s.pq.map(cloneItem);ASTAR_STATE={pq,gScore:{...s.gScore},frontier:new Set(s.frontier),expansionsCount:s.expansionsCount,expansionsCost:s.expansionsCost};}
 }
 
+/* Noderna som lades till i kön under det pågående steget. Listan nollställs
+   vid varje expandering och sparas med bildrutan, så att markeringen följer
+   med när eleven stegar fram och tillbaka. */
+let lastAdded=[],frameAdded=new Set();
 function captureFrame(alg,result){
-  frames.push({visited:[...visitedSet],path:[...pathSet],current:currentExpandingId,frontier:[...currentFrontierIds()],state:snapshotState(alg),result:result});
+  frames.push({visited:[...visitedSet],path:[...pathSet],current:currentExpandingId,frontier:[...currentFrontierIds()],state:snapshotState(alg),result:result,added:[...lastAdded]});
 }
 function stepOnce(alg){
   if(alg==="BFS")return stepBFS();
@@ -1498,7 +1516,7 @@ function stepOnce(alg){
   return stepAstar();
 }
 function precomputeFrames(alg){
-  frames=[];visitedSet.clear();pathSet.clear();currentExpandingId=null;search_in_progress=true;
+  frames=[];visitedSet.clear();pathSet.clear();currentExpandingId=null;search_in_progress=true;lastAdded=[];
   if(alg==="BFS")setupBFS();else if(alg==="DFS")setupDFS();else if(alg==="Greedy")setupGreedy();else setupAstar();
   captureFrame(alg,null);
   let guard=0,res;
@@ -1506,7 +1524,7 @@ function precomputeFrames(alg){
 }
 function renderFrame(i, forward){
   let f=frames[i];if(!f)return;
-  visitedSet=new Set(f.visited);pathSet=new Set(f.path);currentExpandingId=f.current;
+  visitedSet=new Set(f.visited);pathSet=new Set(f.path);currentExpandingId=f.current;frameAdded=new Set(f.added||[]);
   restoreState(computedFor,f.state);
   let isFinal=(f.result!=null);
   search_in_progress=!isFinal;
@@ -1674,7 +1692,8 @@ function renderCurrentNode(container, nodeId, explored, detail){
   container.appendChild(card);
 }
 function makeItem(nodeId, valueHTML, extraClass){
-  let div=document.createElement("div");div.className="ds-item "+(extraClass||"");
+  let div=document.createElement("div");
+  div.className="ds-item "+(extraClass||"")+(frameAdded.has(nodeId)?" ds-new":"");
   let nid=document.createElement("div");nid.className="ds-item-nid";nid.textContent=nodeId;div.appendChild(nid);
   if(valueHTML){let v=document.createElement("div");v.className="ds-item-val";v.innerHTML=valueHTML;div.appendChild(v);}
   return div;
@@ -1753,26 +1772,26 @@ function setupBFS(){
   BFS_STATE={queue:q,visited:new Set([startNodeId]),expansionsCount:0,expansionsCost:0};
 }
 function stepBFS(){
-  let st=BFS_STATE;
+  let st=BFS_STATE;lastAdded=[];
   if(st.queue.empty()){currentExpandingId=null;return {done:true,result:{found:false}};}
   let current=st.queue.dequeue();st.expansionsCount++;st.expansionsCost+=current.costSoFar-current.parentCostSoFar;
   currentExpandingId=current.id;
   if(endNodeIds.has(current.id)){for(let x of current.path)pathSet.add(x);return {done:true,result:{found:true,explored:st.expansionsCount,searchCost:st.expansionsCost,pathCost:current.costSoFar,path:[...current.path]}};}
   let node=getNodeById(current.id);
-  for(let ed of node.edges){if(!st.visited.has(ed.targetId)){st.visited.add(ed.targetId);st.queue.enqueue({id:ed.targetId,path:[...current.path,ed.targetId],costSoFar:current.costSoFar+ed.cost,parentCostSoFar:current.costSoFar});}}
+  for(let ed of node.edges){if(!st.visited.has(ed.targetId)){st.visited.add(ed.targetId);lastAdded.push(ed.targetId);st.queue.enqueue({id:ed.targetId,path:[...current.path,ed.targetId],costSoFar:current.costSoFar+ed.cost,parentCostSoFar:current.costSoFar});}}
   visitedSet.add(current.id);return {done:false};
 }
 function setupDFS(){
   DFS_STATE={stack:[{id:startNodeId,path:[startNodeId],costSoFar:0,parentCostSoFar:0}],visited:new Set([startNodeId]),expansionsCount:0,expansionsCost:0};
 }
 function stepDFS(){
-  let st=DFS_STATE;
+  let st=DFS_STATE;lastAdded=[];
   if(st.stack.length===0){currentExpandingId=null;return {done:true,result:{found:false}};}
   let current=st.stack.pop();st.expansionsCount++;st.expansionsCost+=current.costSoFar-current.parentCostSoFar;
   currentExpandingId=current.id;
   if(endNodeIds.has(current.id)){for(let x of current.path)pathSet.add(x);return {done:true,result:{found:true,explored:st.expansionsCount,searchCost:st.expansionsCost,pathCost:current.costSoFar,path:[...current.path]}};}
   let node=getNodeById(current.id);let children=[...node.edges];children.sort((a,b)=>a.targetId-b.targetId);children.reverse();
-  for(let ed of children){if(!st.visited.has(ed.targetId)){st.visited.add(ed.targetId);st.stack.push({id:ed.targetId,path:[...current.path,ed.targetId],costSoFar:current.costSoFar+ed.cost,parentCostSoFar:current.costSoFar});}}
+  for(let ed of children){if(!st.visited.has(ed.targetId)){st.visited.add(ed.targetId);lastAdded.push(ed.targetId);st.stack.push({id:ed.targetId,path:[...current.path,ed.targetId],costSoFar:current.costSoFar+ed.cost,parentCostSoFar:current.costSoFar});}}
   visitedSet.add(current.id);return {done:false};
 }
 function setupGreedy(){
@@ -1781,13 +1800,13 @@ function setupGreedy(){
   GREEDY_STATE={pq,visited:new Set([startNodeId]),expansionsCount:0,expansionsCost:0,frontier:new Set([startNodeId])};
 }
 function stepGreedy(){
-  let st=GREEDY_STATE;
+  let st=GREEDY_STATE;lastAdded=[];
   if(st.pq.empty()){currentExpandingId=null;return {done:true,result:{found:false}};}
   let current=st.pq.pop();st.frontier.delete(current.id);st.expansionsCount++;st.expansionsCost+=current.costSoFar-current.parentCostSoFar;
   currentExpandingId=current.id;
   if(endNodeIds.has(current.id)){for(let x of current.path)pathSet.add(x);return {done:true,result:{found:true,explored:st.expansionsCount,searchCost:st.expansionsCost,pathCost:current.costSoFar,path:[...current.path]}};}
   let node=getNodeById(current.id);
-  for(let ed of node.edges){if(!st.visited.has(ed.targetId)){st.visited.add(ed.targetId);let hh=getNodeById(ed.targetId).h||0;st.pq.push({id:ed.targetId,path:[...current.path,ed.targetId],costSoFar:current.costSoFar+ed.cost,parentCostSoFar:current.costSoFar,priority:hh});st.frontier.add(ed.targetId);}}
+  for(let ed of node.edges){if(!st.visited.has(ed.targetId)){st.visited.add(ed.targetId);lastAdded.push(ed.targetId);let hh=getNodeById(ed.targetId).h||0;st.pq.push({id:ed.targetId,path:[...current.path,ed.targetId],costSoFar:current.costSoFar+ed.cost,parentCostSoFar:current.costSoFar,priority:hh});st.frontier.add(ed.targetId);}}
   visitedSet.add(current.id);return {done:false};
 }
 function setupAstar(){
@@ -1797,13 +1816,13 @@ function setupAstar(){
   ASTAR_STATE={pq,gScore,expansionsCount:0,expansionsCost:0,frontier:new Set([startNodeId])};
 }
 function stepAstar(){
-  let st=ASTAR_STATE;
+  let st=ASTAR_STATE;lastAdded=[];
   if(st.pq.empty()){currentExpandingId=null;return {done:true,result:{found:false}};}
   let current=st.pq.pop();st.frontier.delete(current.id);st.expansionsCount++;st.expansionsCost+=current.costSoFar-current.parentCostSoFar;
   currentExpandingId=current.id;
   if(endNodeIds.has(current.id)){for(let x of current.path)pathSet.add(x);return {done:true,result:{found:true,explored:st.expansionsCount,searchCost:st.expansionsCost,pathCost:current.costSoFar,path:[...current.path]}};}
   let node=getNodeById(current.id);let gCur=st.gScore[current.id];
-  for(let ed of node.edges){let cId=ed.targetId;let newG=gCur+ed.cost;if(newG<st.gScore[cId]){st.gScore[cId]=newG;let hh=getNodeById(cId).h||0;st.pq.push({id:cId,path:[...current.path,cId],costSoFar:newG,parentCostSoFar:current.costSoFar,priority:newG+hh});st.frontier.add(cId);}}
+  for(let ed of node.edges){let cId=ed.targetId;let newG=gCur+ed.cost;if(newG<st.gScore[cId]){st.gScore[cId]=newG;lastAdded.push(cId);let hh=getNodeById(cId).h||0;st.pq.push({id:cId,path:[...current.path,cId],costSoFar:newG,parentCostSoFar:current.costSoFar,priority:newG+hh});st.frontier.add(cId);}}
   visitedSet.add(current.id);return {done:false};
 }
 
