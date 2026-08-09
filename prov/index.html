@@ -9,9 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
 <style>
-  /* En dämpad grå duk med ljusa kort ovanpå. Den grå bakgrunden gör att korten
-   lyfter av sig själva, så de varken behöver färgad kant eller tung skugga.
-   Accentfärgen är en enda, och värmefärgerna används bara i värmekartan. */
+  /* Grundpaletten. Den slutliga uppsättningen värden står längre ned, i avsnittet
+   Bläck och papper, som skriver över de här. */
   :root{
     --bg:#E7EAF0; --bg-2:#DFE3EB;
     --ink:#161A22; --muted:#5A6272; --faint:#8B93A3;
@@ -27,8 +26,7 @@
   html{-webkit-text-size-adjust:100%}
   body{margin:0;background:linear-gradient(180deg,var(--bg),var(--bg-2));background-attachment:fixed;color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
   .wrap{max-width:1080px;margin:0 auto;padding:0 20px 100px}
-  /* Sidhuvudet sa samma sak som fliklisten strax under. Det är nu en smal rad
-   med namnet till vänster och temaknappen till höger. */
+  /* Sidhuvudet är en smal rad med namnet till vänster och temaknappen till höger. */
   header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:22px;padding:0 2px 2px}
   .brandwrap{min-width:0}
   .kicker{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
@@ -174,7 +172,7 @@
   .modal-box{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);max-width:420px;width:100%;padding:22px 24px}
   .modal-msg{font-size:15.5px;line-height:1.55;margin-bottom:18px;color:var(--ink)}
   .modal-btns{display:flex;gap:10px;justify-content:flex-end}
-  /* Mörkt tema (varm koltonad) */
+  /* Mörkt tema */
   :root[data-theme="dark"]{
     --bg:#1e1b24; --ink:#efeae3; --muted:#a79fb0; --faint:#7c7589;
     --line:#332e3c; --line-strong:#473f56; --card:#272430;
@@ -211,7 +209,7 @@
   :root[data-theme="dark"] .btn-danger{background:var(--weak);color:#fff;border-color:var(--weak)}
   :root[data-theme="dark"] .btn-danger:hover{background:#e2594e;color:#fff}
 
-  /* — Designförfining — */
+  /* Ytbehandling: kort, flikar och fokusmarkering */
   body{background:radial-gradient(1100px 540px at 50% -8%,#fbf9f5,transparent 70%),var(--bg);background-attachment:fixed}
   :root[data-theme="dark"] body{background:radial-gradient(1100px 540px at 50% -8%,#28242f,transparent 70%),var(--bg)}
   .panel{border:1px solid var(--line)}
@@ -232,7 +230,7 @@
   .tab:hover:not(.active){background:rgba(255,255,255,.55)}
   :root[data-theme="dark"] .tab:hover:not(.active){background:rgba(255,255,255,.06)}
   a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,.tab:focus-visible{outline:2px solid var(--indigo);outline-offset:2px}
-  /* Tydliga grepp */
+  /* Tydliga träffytor */
   .tabbar{display:inline-flex;gap:3px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px;box-shadow:var(--shadow-sm);max-width:100%;flex-wrap:wrap}
   .tab{border-radius:11px}
   .tab.active{background:var(--indigo-soft);color:var(--indigo);box-shadow:none}
@@ -253,7 +251,7 @@
   table.grid tbody tr:focus-within td.name-c{background:var(--indigo-soft);box-shadow:inset 3px 0 0 var(--indigo)}
   table.grid tbody tr:focus-within input.score{border-color:var(--indigo)}
 
-  /* — Premiumlager — */
+  /* Detaljer: bakgrund, staplar och betygslinje */
   html{scroll-behavior:smooth}
   :root{--blue:#3f6fd1}
   :root[data-theme="dark"]{--blue:#7c9ff0}
@@ -261,8 +259,7 @@
   :root[data-theme="dark"] header.top::before{background:linear-gradient(90deg,transparent,rgba(255,255,255,.13) 50%,transparent)}
   .panel{position:relative}
   :root[data-theme="dark"] .panel::before{background:linear-gradient(90deg,transparent,rgba(255,255,255,.12) 50%,transparent)}
-  /* Korten hade en färgad kant som varierade per flik utan att betyda något.
-   Kortens gräns är nu densamma överallt. */
+  /* Samtliga kort har samma ram, oavsett flik. */
   .task,.ov-card,.scard,.panel{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
   .gc-bar{position:relative;box-shadow:0 10px 22px -8px rgba(36,31,43,.3),inset 0 1px 0 rgba(255,255,255,.45)}
   .gc-bar::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(255,255,255,0) 55%);pointer-events:none}
@@ -357,7 +354,7 @@ header.top{padding:44px 0 26px;align-items:flex-start;}
 .tabs{background:linear-gradient(180deg,var(--bg) 62%,rgba(241,240,236,0));
   padding:8px 0 14px;margin-top:6px;}
 :root[data-theme="dark"] .tabs{background:linear-gradient(180deg,var(--bg) 62%,rgba(22,24,29,0));}
-.tabbar{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:0;width:100%;
+.tabbar{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:0;width:100%;
   background:var(--card);border:1px solid var(--line);border-radius:14px;padding:0;overflow:hidden;
   box-shadow:none;}
 :root[data-theme="dark"] .tabbar{background:var(--card);border-color:var(--line);}
@@ -382,6 +379,8 @@ header.top{padding:44px 0 26px;align-items:flex-start;}
 .tab.active .ts{color:var(--muted);}
 .rail-fill{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--indigo);
   transition:width .45s cubic-bezier(.16,1,.3,1);}
+@media(max-width:980px){.tabbar{grid-template-columns:repeat(2,1fr);}
+  .tab:nth-of-type(2){border-right:0;}}
 @media(max-width:720px){
   .tabbar{grid-template-columns:1fr;}
   .tab{border-right:0;border-bottom:1px solid var(--line);}
@@ -450,6 +449,38 @@ details.dinline:hover{border-color:var(--line-strong);}
 :root[data-theme="dark"] .empty{background:var(--card-2);}
 .theme-toggle{border-radius:11px;border:1px solid var(--line-strong);background:var(--card);box-shadow:none;}
 
+
+/* ── Historiken ──
+   Utvecklingen över tid visas i tre lager: klassens snitt som en linje, betygen
+   som en staplad rad per prov, och därefter områden och elever som tabeller där
+   varje kolumn är ett prov. Samma fyrstegsskala som i värmekartan färgar
+   cellerna, så ett tal betyder detsamma överallt i verktyget. */
+.hist-save{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;}
+.hist-note{font-size:12.5px;color:var(--faint);margin-top:10px;}
+.hist-row{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--line);
+  border-radius:11px;margin-top:9px;background:var(--card-2);}
+.hist-row .hn{font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.hist-row .hd,.hist-row .hv{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--faint);flex:none;}
+.hist-row .hv{color:var(--muted);}
+.trendcard{border:1px solid var(--line);border-radius:14px;background:var(--card-2);padding:16px 14px 8px;}
+.trendcard svg{display:block;width:100%;height:auto;}
+.gradestack{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.gs-row{display:flex;align-items:center;gap:12px;}
+.gs-name{width:150px;flex:none;font-size:13px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.gs-track{flex:1;display:flex;height:22px;border-radius:7px;overflow:hidden;border:1px solid var(--line);}
+.gs-part{display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;font-weight:600;color:#fff;}
+table.hist{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;}
+table.hist th,table.hist td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:center;white-space:nowrap;}
+table.hist th{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--faint);font-weight:500;}
+table.hist th.lbl,table.hist td.lbl{text-align:left;font-family:'Inter',sans-serif;font-size:13.5px;
+  color:var(--ink);text-transform:none;letter-spacing:0;position:sticky;left:0;background:var(--card);}
+table.hist td.v{font-family:'JetBrains Mono',monospace;font-weight:600;}
+table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
+.up{color:var(--good);} .down{color:var(--weak);} .flat{color:var(--faint);}
+@media(max-width:620px){.gs-name{width:96px;}}
+
 @media(max-width:620px){ .task-fields,.col-head-tasks{grid-template-columns:1fr} .ov-grid{grid-template-columns:1fr} .bar-row{grid-template-columns:1fr;gap:6px}.bar-meta{text-align:left} .phint{display:none}.maxinfo{margin-left:0} }
 </style>
 </head>
@@ -467,6 +498,7 @@ details.dinline:hover{border-color:var(--line-strong);}
     <button class="tab active" data-tab="build"><span class="n">1</span><span class="tx"><span class="tt">Skapa prov</span><span class="ts" id="ppBuild">inga uppgifter än</span></span></button>
     <button class="tab" data-tab="results"><span class="n">2</span><span class="tx"><span class="tt">Registrera elevresultat</span><span class="ts" id="ppRes">inga elever än</span></span></button>
     <button class="tab" data-tab="analyze"><span class="n">3</span><span class="tx"><span class="tt">Analysera resultat</span><span class="ts" id="ppAna">väntar på underlag</span></span></button>
+    <button class="tab" data-tab="history"><span class="n">4</span><span class="tx"><span class="tt">Följ utvecklingen</span><span class="ts" id="ppHist">inga sparade prov</span></span></button>
     <span class="rail-fill" id="railFill" aria-hidden="true"></span>
   </div></nav>
 
@@ -537,7 +569,7 @@ details.dinline:hover{border-color:var(--line-strong);}
 
   <section class="tabpanel hidden" id="tab-results">
     <div class="panel">
-      <div class="phead"><h2>Elevernas resultat</h2><span class="phint">Enter hoppar till nästa uppgift, sedan nästa elev</span></div>
+      <div class="phead"><h2>Elevernas resultat</h2><span class="phint">Poäng per uppgift</span></div>
       <div class="pbody">
         <div class="btn-row" style="margin-top:0">
           <button class="btn-ghost" id="addStudent">+ Lägg till elev</button>
@@ -590,6 +622,45 @@ details.dinline:hover{border-color:var(--line-strong);}
           <details class="dinline"><summary>Resultatspridning<span class="chev">▸</span></summary><div class="dbody"><div id="detSpread"></div></div></details>
           <div class="sub sub-row"><span>Per elev</span><button class="btn-ghost btn-inline" id="copyStudents">Kopiera alla elevtexter</button></div>
           <div id="cards" class="cards"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tabpanel hidden" id="tab-history">
+    <div class="panel">
+      <div class="phead"><h2>Klassens historik</h2><span class="phint">Sparas bara i den här webbläsaren</span></div>
+      <div class="pbody">
+        <div class="hist-save">
+          <div style="flex:1;min-width:190px"><label class="field" for="clsName">Klass</label><input id="clsName" type="text" placeholder="t.ex. NA21B" autocomplete="off"></div>
+          <button class="btn" id="histSave">Spara det här provets resultat</button>
+        </div>
+        <div class="hist-note">Resultaten stannar på den här datorn. Vill du flytta dem till en annan dator exporterar du dem till fil.</div>
+        <div id="histList"></div>
+        <div class="btn-row">
+          <button class="btn-ghost" id="histExport">Exportera historik</button>
+          <button class="btn-ghost" id="histImport">Läs in historik</button>
+          <input id="histFile" type="file" accept="application/json,.json" class="hidden">
+          <span class="spacer"></span>
+          <button class="btn-danger" id="histClear">Radera klassens historik</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="histPanels">
+      <div class="phead"><h2>Utveckling över tid</h2><span class="phint">Klassen · områden · elever</span></div>
+      <div class="pbody">
+        <div id="histEmpty" class="empty">Spara minst två prov för samma klass så visas utvecklingen här.</div>
+        <div id="histBody" class="hidden">
+          <div class="sub">Sammanfattning</div>
+          <div id="histText" class="summary-box"></div>
+          <button class="btn-ghost btn-copy" data-copy="#histText">Kopiera texten</button>
+          <div class="sub">Klassens snitt</div>
+          <div id="histTrend" class="trendcard"></div>
+          <div class="sub">Betygsfördelning per prov</div>
+          <div id="histGrades" class="gradestack"></div>
+          <details class="dinline" open><summary>Områden över tid<span class="chev">▸</span></summary><div class="dbody"><div id="histAreas"></div></div></details>
+          <details class="dinline"><summary>Elevernas utveckling<span class="chev">▸</span></summary><div class="dbody"><div id="histStudents"></div></div></details>
         </div>
       </div>
     </div>
@@ -793,7 +864,7 @@ function addAreaToTask(t,raw){ const name=(raw||"").trim(); if(!name) return; if
   const canon=state.areas.find(a=>a.toLowerCase()===name.toLowerCase()); if(!t.areas.includes(canon)) t.areas.push(canon); focusTaskId=t.id; commitBuild(); }
 function commitBuild(){ renderAreaPool(); renderTasks(); renderOverview(); renderGradeScale(); renderGrid(); renderAnalysis(); save(); }
 
-/* Arbetsgångens tre celler visar hur långt underlaget har kommit. Siffrorna är
+/* Arbetsgångens celler visar hur långt underlaget har kommit. Siffrorna är
    desamma som panelerna räknar fram, så raden speglar alltid det verkliga läget. */
 function renderPipeline(){
   const nT=validTasks().length, tot=totalMax();
@@ -802,6 +873,8 @@ function renderPipeline(){
   if(el("ppBuild")) el("ppBuild").textContent = nT ? nT+" uppgifter · "+(fmt(tot)||"0")+" p" : "inga uppgifter än";
   if(el("ppRes"))   el("ppRes").textContent   = nS ? act+" elever"+(away?" · "+away+" frånvarande":"") : "inga elever än";
   if(el("ppAna"))   el("ppAna").textContent   = (nT&&nS) ? "klar att läsa" : "väntar på underlag";
+  const nH=(typeof currentClass==="function"&&currentClass())?histFor(currentClass()).length:0;
+  if(el("ppHist"))  el("ppHist").textContent  = nH ? nH+(nH===1?" sparat prov":" sparade prov") : "inga sparade prov";
   const done=(nT?1:0)+(nS?1:0)+((nT&&nS)?1:0);
   if(el("railFill")) el("railFill").style.width=(done/3*100)+"%";
 }
@@ -829,7 +902,7 @@ function renderGrid(){
   const wrap=$("#gridWrap"), cols=gridColumns(); gridCols=cols.length;
   const ready=cols.length>0; $("#gridEmpty").style.display=(ready&&state.students.length)?"none":"block";
   if(!ready||!state.students.length){ wrap.innerHTML=""; return; }
-  // header (two rows)
+  /* rubrikrad i två nivåer */
   let r1=`<tr><th class="name-c" rowspan="2">Elev</th><th class="absc" rowspan="2">Frånv.</th>`;
   validTasks().forEach((t,ti)=>{ r1+=`<th class="area-h grp" colspan="${t.parts.length}">${ti+1}.<span class="mx">${esc(taskAreas(t).join(", "))}</span></th>`; });
   r1+=`<th class="rm-col" rowspan="2"></th></tr>`;
@@ -911,7 +984,7 @@ function renderDetails(){
   ua.forEach(a=>{ const v=classAreaAvg(a), b=band(v.pct); ah+=`<div class="bar-row"><span class="bar-label">${esc(a)}</span><div class="bar-track"><div class="bar-fill" style="width:${(v.pct*100).toFixed(0)}%;background:${b.fg}"></div></div><span class="bar-meta"><b style="color:${b.fg}">${fmt(v.got)} av ${fmt(v.max)} p</b> (${(v.pct*100).toFixed(0)} %)</span></div>`; });
   aEl.innerHTML=ah+'</div>';
   // Klassens resultat per uppgift (nummerordning)
-  let th='<div class="scroll"><table class="heat ld-tasks"><thead><tr><th class="name-h">Uppg.</th><th class="lcol">Område</th><th></th></tr></thead><tbody>';
+  let th='<div class="scroll"><table class="heat ld-tasks"><thead><tr><th class="name-h">Uppg.</th><th class="lcol">Område</th><th>Medelpoäng</th></tr></thead><tbody>';
   vt.forEach((t,i)=>{ let g=0,m=0; act.forEach(s=>{ g+=studentTaskPoints(s,t); m+=taskMax(t); }); const p=m?g/m:0, b=band(p), avg=g/(act.length||1); th+=`<tr><td class="namecell">${i+1}.</td><td class="lcol">${esc(taskAreas(t).join(", "))}</td><td class="cell" style="background:${b.bg};color:${b.fg}">${fmt(avg)}/${fmt(taskMax(t))} p</td></tr>`; });
   tEl.innerHTML=th+'</tbody></table></div>';
   // Per svårighetsnivå
@@ -947,6 +1020,202 @@ function renderDetails(){
     +'<div class="bp-median" style="left:'+L(q2)+'"></div>'+dots
     +'</div><div class="bp-axis">'+axis+'</div></div>';
   sEl.innerHTML=sp;
+}
+
+
+/* ═════════ HISTORIK: FLERA PROV FÖR SAMMA KLASS ═════════
+   Varje sparat prov är en ögonblicksbild av analysen: klassens snitt, resultatet
+   per område och per svårighetsnivå, betygsfördelningen och varje elevs poäng.
+   Uppgifterna sparas aldrig, bara utfallet, eftersom jämförelsen sker på nivåerna
+   klass, område och elev.
+
+   Allt ligger i webbläsarens eget lagringsutrymme och lämnar aldrig datorn. Den
+   som vill flytta historiken till en annan dator exporterar den till fil. Därför
+   finns också en knapp för att radera en klass helt. */
+const HISTKEY="pa_hist_v1", CLSKEY="pa_cls_v1";
+function histLoad(){ try{ return JSON.parse(localStorage.getItem(HISTKEY))||[]; }catch(e){ return []; } }
+function histStore(l){ try{ localStorage.setItem(HISTKEY,JSON.stringify(l)); }catch(e){} }
+function currentClass(){ const el=$("#clsName"); return ((el&&el.value)||"").trim(); }
+function histFor(cls){ return histLoad().filter(h=>h.cls.toLowerCase()===cls.toLowerCase()).sort((a,b)=>a.savedAt-b.savedAt); }
+/* Elever matchas på namn mellan proven. Skiftläge och extra mellanslag ignoreras. */
+function nameKey(n){ return (n||"").trim().toLowerCase().replace(/\s+/g," "); }
+
+function histSnapshot(cls){
+  const act=activeStudents();
+  const tot=act.reduce((o,s)=>{const x=studentTotals(s);o.g+=x.pts;o.m+=x.max;return o;},{g:0,m:0});
+  const areas={}; usedAreas().forEach(a=>{ const v=classAreaAvg(a); areas[a]={got:v.got,max:v.max}; });
+  const lv=classLevelStats();
+  return {
+    id:"h"+Date.now().toString(36),
+    cls:cls, name:(state.testName||"Prov utan namn").trim(), savedAt:Date.now(),
+    max:totalMax(), n:act.length,
+    avg: tot.m? tot.g/tot.m : 0,
+    areas:areas,
+    levels:{grund:lv.grund,medel:lv.medel,avancerat:lv.avancerat},
+    grades: gradesValid()? gradeDistribution() : null,
+    students: state.students.filter(s=>!s.absent).map(s=>{ const t=studentTotals(s);
+      return {name:(s.name||"").trim(), pts:t.pts, max:t.max, pct:t.pct, grade:t.grade||null}; })
+  };
+}
+
+async function histSaveCurrent(){
+  const cls=currentClass();
+  if(!cls){ alert("Skriv klassens namn först, så vet verktyget var resultatet hör hemma."); return; }
+  if(!validTasks().length||!activeStudents().length){ alert("Fyll i uppgifter och elevresultat innan du sparar."); return; }
+  const lib=histLoad(), name=(state.testName||"Prov utan namn").trim();
+  const ex=lib.find(h=>h.cls.toLowerCase()===cls.toLowerCase()&&h.name.toLowerCase()===name.toLowerCase());
+  if(ex && !(await askConfirm('Klassen '+esc(cls)+' har redan ett sparat resultat för "'+esc(name)+'". Skriva över det?',"Skriv över"))) return;
+  const snap=histSnapshot(cls);
+  if(ex){ snap.id=ex.id; lib[lib.indexOf(ex)]=snap; } else lib.push(snap);
+  histStore(lib);
+  try{ localStorage.setItem(CLSKEY,cls); }catch(e){}
+  renderHistory(); renderPipeline();
+}
+async function histRemove(id){
+  const l=histLoad(), h=l.find(x=>x.id===id); if(!h) return;
+  if(!(await askConfirm('Ta bort det sparade resultatet för "'+esc(h.name)+'"?',"Ta bort"))) return;
+  histStore(l.filter(x=>x.id!==id)); renderHistory(); renderPipeline();
+}
+async function histClearClass(){
+  const cls=currentClass(); if(!cls){ alert("Skriv klassens namn först."); return; }
+  const n=histFor(cls).length; if(!n){ alert("Det finns ingen sparad historik för "+cls+"."); return; }
+  if(!(await askConfirm("Radera alla "+n+" sparade resultat för "+esc(cls)+"? Det går inte att ångra.","Radera"))) return;
+  histStore(histLoad().filter(h=>h.cls.toLowerCase()!==cls.toLowerCase()));
+  renderHistory(); renderPipeline();
+}
+function histExportFile(){
+  const cls=currentClass(), data=cls?histFor(cls):histLoad();
+  if(!data.length){ alert("Det finns inget att exportera."); return; }
+  const blob=new Blob([JSON.stringify({type:"provanalys-historik",version:1,items:data},null,2)],{type:"application/json"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+  a.download=(cls||"historik").replace(/[^\w\-åäöÅÄÖ ]+/g,"")+"-historik.json";
+  a.click(); URL.revokeObjectURL(a.href);
+}
+function histImportFile(ev){
+  const f=ev.target.files&&ev.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{ try{
+      const d=JSON.parse(r.result), items=Array.isArray(d)?d:(d.items||[]);
+      if(!items.length) throw 0;
+      const cur=histLoad(), ids=new Set(cur.map(x=>x.id));
+      items.forEach(it=>{ if(!ids.has(it.id)) cur.push(it); });
+      histStore(cur); renderHistory(); renderPipeline();
+    }catch(e){ alert("Filen kunde inte läsas. Välj en fil som exporterats från det här verktyget."); }
+    ev.target.value=""; };
+  r.readAsText(f);
+}
+
+/* ── Diagram: klassens snitt över proven ── */
+function trendSVG(hs){
+  const W=620,H=190,L=44,R=16,T=16,B=42;
+  const X=i=>hs.length<2?(L+(W-L-R)/2):L+i*(W-L-R)/(hs.length-1), Y=v=>H-B-v*(H-T-B);
+  let g="";
+  for(const v of [0,.25,.5,.75,1]) g+=`<line x1="${L}" y1="${Y(v)}" x2="${W-R}" y2="${Y(v)}" stroke="var(--line)"/>`
+    +`<text x="${L-9}" y="${Y(v)+4}" text-anchor="end" font-size="10" font-family="'JetBrains Mono',monospace" fill="var(--faint)">${v*100}</text>`;
+  const pts=hs.map((h,i)=>X(i)+","+Y(h.avg)).join(" ");
+  const line=hs.length>1?`<polyline fill="none" stroke="var(--indigo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="${pts}"/>`:"";
+  const dots=hs.map((h,i)=>`<circle cx="${X(i)}" cy="${Y(h.avg)}" r="4.5" fill="var(--card)" stroke="var(--indigo)" stroke-width="2.5"/>`
+    +`<text x="${X(i)}" y="${Y(h.avg)-13}" text-anchor="middle" font-size="11" font-weight="600" font-family="'JetBrains Mono',monospace" fill="var(--ink)">${Math.round(h.avg*100)} %</text>`).join("");
+  const xl=hs.map((h,i)=>`<text x="${X(i)}" y="${H-B+18}" text-anchor="middle" font-size="10.5" font-family="'Inter',sans-serif" fill="var(--muted)">${esc(h.name.length>16?h.name.slice(0,15)+"…":h.name)}</text>`
+    +`<text x="${X(i)}" y="${H-B+31}" text-anchor="middle" font-size="9.5" font-family="'JetBrains Mono',monospace" fill="var(--faint)">${new Date(h.savedAt).toLocaleDateString("sv-SE")}</text>`).join("");
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Klassens snitt per prov">${g}${line}${dots}${xl}</svg>`;
+}
+
+/* ── Betygsfördelning, en staplad rad per prov ── */
+const GCOLORS={A:"#1D7A55",B:"#5E8F3A",C:"#3D5FBF",D:"#B5822A",E:"#C07A2E",F:"#C4463C"};
+function gradeStackHTML(hs){
+  const any=hs.some(h=>h.grades);
+  if(!any) return '<div class="empty">Fyll i betygsgränser i proven för att jämföra betygsfördelningen.</div>';
+  return hs.map(h=>{
+    if(!h.grades) return `<div class="gs-row"><span class="gs-name">${esc(h.name)}</span><span class="hd" style="color:var(--faint);font-size:12px">inga betygsgränser</span></div>`;
+    const order=["A","B","C","D","E","F"], tot=order.reduce((a,g)=>a+(h.grades[g]||0),0)||1;
+    const parts=order.filter(g=>h.grades[g]).map(g=>{
+      const w=(h.grades[g]/tot*100);
+      return `<span class="gs-part" style="width:${w}%;background:${GCOLORS[g]}" title="${g}: ${h.grades[g]} elever">${w>7?g:""}</span>`;
+    }).join("");
+    return `<div class="gs-row"><span class="gs-name">${esc(h.name)}</span><div class="gs-track">${parts}</div></div>`;
+  }).join("");
+}
+
+/* ── Tabell där varje kolumn är ett prov ── */
+function histTable(rows, hs, labelHead){
+  let h='<div class="scroll"><table class="hist"><thead><tr><th class="lbl">'+labelHead+'</th>'
+    + hs.map(x=>`<th>${esc(x.name.length>14?x.name.slice(0,13)+"…":x.name)}</th>`).join("")
+    + '<th>Förändring</th></tr></thead><tbody>';
+  rows.forEach(r=>{
+    const seen=r.v.map((v,i)=>({v,i})).filter(x=>x.v!=null);
+    const d=seen.length>1 ? (seen[seen.length-1].v-seen[0].v) : null;
+    const dCls=d==null?"flat":(d>=0.03?"up":(d<=-0.03?"down":"flat"));
+    const dTxt=d==null?"–":(d>0?"+":"")+Math.round(d*100)+" pe";
+    h+=`<tr><td class="lbl">${esc(r.label)}</td>`
+      + r.v.map(v=>{ if(v==null) return '<td class="v" style="color:var(--faint)">–</td>';
+          const b=band(v); return `<td class="v" style="background:${b.bg};color:${b.fg}">${Math.round(v*100)} %</td>`; }).join("")
+      + `<td class="d ${dCls}">${dTxt}</td></tr>`;
+  });
+  return h+'</tbody></table></div>';
+}
+
+/* ── Text som sammanfattar utvecklingen ── */
+function histSummary(hs){
+  const first=hs[0], last=hs[hs.length-1];
+  const d=Math.round((last.avg-first.avg)*100);
+  const pa=[];
+  pa.push("Klassen har "+hs.length+" sparade prov, från "+first.name+" ("+new Date(first.savedAt).toLocaleDateString("sv-SE")+") till "+last.name+" ("+new Date(last.savedAt).toLocaleDateString("sv-SE")+").");
+  pa.push("Snittet har gått från "+Math.round(first.avg*100)+" % till "+Math.round(last.avg*100)+" %, alltså "
+    + (d>0? "en ökning med "+d+" procentenheter" : d<0? "en minskning med "+Math.abs(d)+" procentenheter" : "oförändrat")+".");
+  /* Områden som finns i både det första och det senaste provet kan jämföras rakt av. */
+  const common=Object.keys(last.areas).filter(a=>first.areas[a]&&first.areas[a].max&&last.areas[a].max);
+  if(common.length){
+    const mv=common.map(a=>({a, d:(last.areas[a].got/last.areas[a].max)-(first.areas[a].got/first.areas[a].max)}))
+      .sort((x,y)=>y.d-x.d);
+    const up=mv[0], dn=mv[mv.length-1];
+    if(up && up.d>=0.05) pa.push("Störst framsteg syns i "+up.a+", som gått upp "+Math.round(up.d*100)+" procentenheter.");
+    if(dn && dn.d<=-0.05) pa.push(dn.a+" har i stället gått ned "+Math.round(Math.abs(dn.d)*100)+" procentenheter och är värt att följa upp.");
+  }
+  const fk=new Map(first.students.map(s=>[nameKey(s.name),s.pct]));
+  const moved=last.students.filter(s=>fk.has(nameKey(s.name))).map(s=>({n:s.name,d:s.pct-fk.get(nameKey(s.name))}));
+  if(moved.length){
+    const up=moved.filter(x=>x.d>=0.1).length, dn=moved.filter(x=>x.d<=-0.1).length;
+    pa.push(moved.length+" elever finns med i båda proven. "+up+" har förbättrat sig med minst tio procentenheter och "+dn+" har gått ned lika mycket.");
+  }
+  return pa.join(" ");
+}
+
+function renderHistory(){
+  const listEl=$("#histList"); if(!listEl) return;
+  const cls=currentClass(), hs=cls?histFor(cls):[];
+  listEl.innerHTML = hs.length
+    ? hs.slice().reverse().map(h=>`<div class="hist-row"><span class="hn">${esc(h.name)}</span>`
+        +`<span class="hv">${Math.round(h.avg*100)} % · ${h.n} elever</span>`
+        +`<span class="hd">${new Date(h.savedAt).toLocaleDateString("sv-SE")}</span>`
+        +`<button class="btn-mini del" data-hdel="${h.id}" title="Ta bort">✕</button></div>`).join("")
+    : `<div class="empty" style="margin-top:12px">${cls?"Inga sparade resultat för "+esc(cls)+" än.":"Skriv klassens namn för att se dess historik."}</div>`;
+  listEl.querySelectorAll("[data-hdel]").forEach(b=>b.onclick=()=>histRemove(b.dataset.hdel));
+
+  const body=$("#histBody"), empty=$("#histEmpty");
+  if(hs.length<2){ body.classList.add("hidden"); empty.classList.remove("hidden"); return; }
+  body.classList.remove("hidden"); empty.classList.add("hidden");
+
+  $("#histText").textContent=histSummary(hs);
+  $("#histTrend").innerHTML=trendSVG(hs);
+  $("#histGrades").innerHTML=gradeStackHTML(hs);
+
+  /* Områden: alla som förekommer i minst två av proven. */
+  const areaNames=[...new Set(hs.flatMap(h=>Object.keys(h.areas)))]
+    .filter(a=>hs.filter(h=>h.areas[a]&&h.areas[a].max).length>=2).sort((a,b)=>a.localeCompare(b,"sv"));
+  $("#histAreas").innerHTML = areaNames.length
+    ? histTable(areaNames.map(a=>({label:a, v:hs.map(h=>h.areas[a]&&h.areas[a].max?h.areas[a].got/h.areas[a].max:null)})), hs, "Område")
+    : '<div class="empty">Inga områden återkommer i flera prov, så det finns inget att jämföra.</div>';
+
+  /* Elever: alla som förekommer i minst två av proven, matchade på namn. */
+  const keys=new Map();
+  hs.forEach(h=>h.students.forEach(s=>{ const k=nameKey(s.name); if(k&&!keys.has(k)) keys.set(k,s.name); }));
+  const rows=[...keys.entries()].map(([k,label])=>({label, v:hs.map(h=>{ const f=h.students.find(s=>nameKey(s.name)===k); return f?f.pct:null; })}))
+    .filter(r=>r.v.filter(v=>v!=null).length>=2)
+    .sort((a,b)=>a.label.localeCompare(b.label,"sv"));
+  $("#histStudents").innerHTML = rows.length
+    ? histTable(rows, hs, "Elev")
+    : '<div class="empty">Inga elevnamn återkommer i flera prov. Kontrollera att namnen stavas likadant.</div>';
 }
 
 /* ===== 6. EXPORT ===== */
@@ -1075,7 +1344,8 @@ function applyTheme(t){ document.documentElement.setAttribute("data-theme",t); c
 function initTheme(){ let t="light"; try{ t=localStorage.getItem(THEMEKEY)||"light"; }catch(e){} applyTheme(t); }
 
 /* ===== 7. INIT + WIRE ===== */
-function switchTab(name){ document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===name)); document.querySelectorAll(".tabpanel").forEach(p=>p.classList.toggle("hidden",p.id!=="tab-"+name)); if(name==="analyze") renderAnalysis(); if(name==="results") renderGrid(); window.scrollTo({top:0,behavior:"smooth"}); }
+function switchTab(name){ document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===name)); document.querySelectorAll(".tabpanel").forEach(p=>p.classList.toggle("hidden",p.id!=="tab-"+name)); if(name==="analyze") renderAnalysis();
+  if(name==="history") renderHistory(); if(name==="results") renderGrid(); window.scrollTo({top:0,behavior:"smooth"}); }
 function addTask(){ state.tasks.push({id:nextId++,areas:[],level:null,weights:{},parts:[{id:nextId++,max:""}]}); commitBuild(); }
 function addStudent(){ state.students.push({id:nextStudentId++,name:"",scores:{},absent:false,comment:""}); renderGrid(); renderAnalysis(); save(); }
 function addStudentsBulk(text){ const names=text.split(/\r?\n/).map(line=>line.split(/\t|;/).map(c=>c.trim()).filter(Boolean).join(" ").trim()).filter(Boolean); if(!names.length){ alert("Klistra in minst ett namn."); return; }
@@ -1096,6 +1366,12 @@ function wire(){
   $("#exportBtn").addEventListener("click",exportXlsx); $("#printBtn").addEventListener("click",printStudents);
   $("#saveTest").addEventListener("click",saveTestFile); $("#loadTest").addEventListener("click",()=>$("#fileInput").click());
   $("#fileInput").addEventListener("change",e=>{ if(e.target.files[0]) loadTestFile(e.target.files[0]); e.target.value=""; });
+  $("#histSave").addEventListener("click",histSaveCurrent);
+  $("#histClear").addEventListener("click",histClearClass);
+  $("#histExport").addEventListener("click",histExportFile);
+  $("#histImport").addEventListener("click",()=>$("#histFile").click());
+  $("#histFile").addEventListener("change",histImportFile);
+  $("#clsName").addEventListener("input",()=>{ renderHistory(); renderPipeline(); try{ localStorage.setItem(CLSKEY,currentClass()); }catch(e){} });
   $("#libSave").addEventListener("click",libSaveCurrent); $("#libOpen").addEventListener("click",libOpen); $("#libDelete").addEventListener("click",libDelete);
   $("#copyStudents").addEventListener("click",()=>copyText(state.students.map(s=>studentSummary(s,THR)).join("\n\n"),$("#copyStudents")));
   $("#clearBuild").addEventListener("click",clearAll);
@@ -1110,6 +1386,9 @@ function init(){
   const ids=[]; state.tasks.forEach(t=>{ ids.push(t.id||0); t.parts.forEach(p=>ids.push(p.id||0)); }); nextId=Math.max(0,...ids)+1;
   if(state.students.length) nextStudentId=Math.max(0,...state.students.map(s=>s.id||0))+1;
   wire(); initTheme(); if(!stored){ addTask(); addTask(); addStudent(); } renderAll(); renderLibrary();
+  /* Klassnamnet minns vi mellan besöken, så historiken visas direkt. */
+  try{ const c=localStorage.getItem(CLSKEY); if(c) $("#clsName").value=c; }catch(e){}
+  renderHistory(); renderPipeline();
 }
 init();
 </script>
