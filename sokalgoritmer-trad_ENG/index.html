@@ -121,7 +121,32 @@ button{font-family:inherit;}
 .control-card .icon-btn:disabled{opacity:.35;cursor:not-allowed;box-shadow:none;}
 .control-card .icon-btn-primary{background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;border-color:transparent;box-shadow:0 2px 12px rgba(77,128,255,.38);}
 .control-card .icon-btn-primary:hover:not(:disabled){filter:brightness(1.07);color:#fff;}
-#stepCounter{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--dim);min-width:74px;letter-spacing:.02em;}
+/* A progress bar rather than "step 24 / 78". The total is the number of
+   examined nodes, which is one of the measures the student is meant to
+   compare between the algorithms. The bar shows how far the search has
+   come without giving the figure away in advance. It appears in the
+   result card afterwards. */
+
+/* ── Picker for the example trees ──
+   Three examples are few enough to show at once. Each button draws its own
+   tree in miniature from the same node and edge data that is loaded on a
+   click, so the shape is visible before the choice is made. */
+.tree-picker{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.tp-lbl{font-size:.78em;letter-spacing:.04em;color:var(--dim);font-weight:600;}
+.tp-list{display:flex;gap:7px;flex-wrap:wrap;}
+.tp-item{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:5px 5px 4px;background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  cursor:pointer;transition:border-color .2s,transform .2s var(--ease-out),background .2s;}
+.tp-item:hover{border-color:var(--accent);transform:translateY(-2px);background:var(--surface2);}
+.tp-item:focus-visible{outline:2px solid var(--accent2);outline-offset:2px;}
+.tp-item[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-dim);}
+.tp-item canvas{display:block;width:74px;height:40px;border-radius:5px;}
+.tp-cap{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.06em;color:var(--dim);}
+.tp-item[aria-pressed="true"] .tp-cap{color:var(--accent2);}
+@media (max-width:600px){.tp-item canvas{width:58px;height:31px;}}
+#stepCounter{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--dim);min-width:96px;letter-spacing:.02em;}
+#stepCounter .sc-bar{position:relative;width:52px;height:4px;border-radius:2px;background:rgba(255,255,255,.09);overflow:hidden;}
+#stepCounter .sc-fill{position:absolute;inset:0 auto 0 0;width:0;border-radius:2px;background:var(--alg);transition:width .18s linear;}
 #stepCounter b{color:var(--subtle);font-weight:600;}
 
 /* ── DS panel ── */
@@ -575,13 +600,10 @@ math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10p
 
   <div class="cc-row cc-secondary">
     <div class="cc-group">
-      <label for="predefinedSelect">Tree</label>
-      <select id="predefinedSelect">
-        <option value="">-- Choose --</option>
-        <option value="Example tree 1">Example tree 1</option>
-        <option value="Example tree 2">Example tree 2</option>
-        <option value="Example tree 3">Example tree 3</option>
-      </select>
+      <div class="tree-picker" role="group" aria-label="Choose an example tree">
+        <span class="tp-lbl">Example trees</span>
+        <div class="tp-list" id="treePicker"></div>
+      </div>
     </div>
     <span class="cc-sep"></span>
     <button id="saveBtn" class="btn-ghost">Save</button>
@@ -1363,7 +1385,53 @@ function loadPredefinedTree(treeName){
   nodeCounter=Math.max(...nodes.map(n=>n.id));deselect();hideEdgeEditor();resetSearch();
   setStatus('Example tree "'+treeName+'" has been loaded.');drawAll();
 }
-document.getElementById("predefinedSelect").addEventListener("change",e=>{const sel=e.target.value;if(sel){loadPredefinedTree(sel);e.target.value="";}});
+/* The thumbnail is drawn from the node coordinates. The edges become thin
+   lines, the start node green and the goal nodes orange, the same colours
+   as on the canvas. */
+const TREE_KEYS=['Example tree 1','Example tree 2','Example tree 3'];
+function drawTreeThumb(cv,t){
+  const W=148,H=80,PAD=7;
+  cv.width=W;cv.height=H;
+  const g=cv.getContext('2d');
+  const xs=t.nodes.map(n=>n.x),ys=t.nodes.map(n=>n.y);
+  const x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+  const sx=(W-PAD*2)/Math.max(1,x1-x0),sy=(H-PAD*2)/Math.max(1,y1-y0);
+  const px=n=>PAD+(n.x-x0)*sx,py=n=>PAD+(n.y-y0)*sy;
+  const byId={};t.nodes.forEach(n=>byId[n.id]=n);
+  g.strokeStyle='rgba(148,178,255,.30)';g.lineWidth=1;
+  t.nodes.forEach(n=>(n.edges||[]).forEach(e=>{
+    const m=byId[e.targetId];if(!m)return;
+    g.beginPath();g.moveTo(px(n),py(n));g.lineTo(px(m),py(m));g.stroke();
+  }));
+  const ends=new Set(t.endNodeIds||[]);
+  t.nodes.forEach(n=>{
+    g.beginPath();g.arc(px(n),py(n),2.6,0,Math.PI*2);
+    g.fillStyle=n.id===t.startNodeId?'#3ddc84':ends.has(n.id)?'#f0a94e':'#94b2ff';
+    g.fill();
+  });
+}
+function loadTreePreset(key,btn){
+  loadPredefinedTree(key);
+  document.querySelectorAll('.tp-item').forEach(b=>b.setAttribute('aria-pressed',b.dataset.key===key?'true':'false'));
+}
+function buildTreePicker(){
+  const host=document.getElementById('treePicker');if(!host)return;
+  host.innerHTML='';
+  TREE_KEYS.forEach((key,i)=>{
+    const t=predefinedTrees[key];if(!t)return;
+    const b=document.createElement('button');
+    b.className='tp-item';b.type='button';b.dataset.key=key;
+    b.setAttribute('aria-pressed','false');
+    b.setAttribute('aria-label',key);b.title=key;
+    const cv=document.createElement('canvas');
+    const cap=document.createElement('span');cap.className='tp-cap';cap.textContent=String(i+1);
+    b.appendChild(cv);b.appendChild(cap);
+    b.addEventListener('click',()=>loadTreePreset(key,b));
+    host.appendChild(b);
+    drawTreeThumb(cv,t);
+  });
+}
+buildTreePicker();
 
 /* ============================================================
    SEARCH CONTROLS
@@ -1465,7 +1533,7 @@ function updatePlayerUI(){
   if(next)next.disabled=(n>0)&&frameIdx>=n-1;
   if(reset)reset.disabled=(frameIdx<=0)&&!isPlaying;
   if(play){play.innerHTML=isPlaying?ICON_PAUSE:ICON_PLAY;play.title=isPlaying?"Pause (space)":"Play (space)";play.setAttribute("aria-label",play.title);}
-  if(counter)counter.innerHTML=(computedFor&&n)?('step <b>'+(frameIdx+1)+'</b> / '+n):'';
+  if(counter)counter.innerHTML=(computedFor&&n)?('step <b>'+(frameIdx+1)+'</b><span class="sc-bar"><span class="sc-fill" style="width:'+Math.round(((frameIdx+1)/n)*100)+'%"></span></span>'):'';
 }
 function ensureComputed(){
   let alg=selectedAlg;
