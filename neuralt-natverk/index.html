@@ -46,12 +46,12 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{-webkit-font-smoothing:antialiased;}
-/* Sidhuvudets höjd varierar med rubrikens radbrytning, så layouten mäter
-   inte längre 58 pixlar på måfå utan tar den plats som blir över. */
+/* Sidhuvudets höjd varierar med rubrikens radbrytning. Layouten mäter därför
+   den faktiska höjden och tar den plats som blir över. */
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden;position:relative;display:flex;flex-direction:column;}
 .hd{flex:0 0 auto;}
 
-/* ambient background: mesh gradient + noise + grid */
+/* Bakgrund: mesh-gradient, brus och rutnät */
 .bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
 .bg-mesh::before{content:'';position:absolute;width:140%;height:140%;top:-20%;left:-20%;
   background:
@@ -61,7 +61,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
   animation:meshDrift 34s ease-in-out infinite alternate;filter:blur(10px);}
 @keyframes meshDrift{0%{transform:translate(0,0) scale(1);}50%{transform:translate(-2%,2%) scale(1.05);}100%{transform:translate(2%,-1%) scale(1.02);}}
 
-/* intro */
+/* Introruta */
 .intro{position:fixed;inset:0;background:rgba(6,7,14,0.85);backdrop-filter:blur(18px);z-index:200;display:flex;align-items:center;justify-content:center;transition:opacity .35s var(--ease-out);}
 .intro.hidden{opacity:0;pointer-events:none;}
 .intro-card{background:linear-gradient(180deg,rgba(24,28,48,.9),rgba(16,19,34,.92));border:1px solid var(--border);border-radius:var(--r-lg);padding:34px 36px;max-width:540px;width:92%;max-height:88vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.02) inset;animation:cardIn .5s var(--ease-spring);}
@@ -78,7 +78,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .intro-tip{margin-top:16px;font-size:.82em;color:var(--dim);text-align:center;line-height:1.55;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid var(--border-soft);border-radius:var(--r-sm);}
 .intro-tip strong{color:var(--text);}
 
-/* header */
+/* Sidhuvud */
 .hd{text-align:center;padding:16px 16px 12px;border-bottom:1px solid var(--border-soft);position:relative;z-index:2;}
 .hd-title-row{display:flex;align-items:center;justify-content:center;gap:9px;}
 .hd h1{font-family:'Syne',sans-serif;font-size:1.3em;font-weight:800;letter-spacing:-.01em;}.hd h1 span{background:linear-gradient(135deg,#eef1fb,var(--accent2) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;}
@@ -88,7 +88,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .back-link:hover,.lang-link:hover{color:var(--text);border-color:var(--dim2);background:rgba(255,255,255,.05);}
 .lang-link .flag{width:19px;height:auto;display:block;border-radius:3px;flex-shrink:0;}
 
-/* layout: glass layered panels */
+/* Layout: skiktade glaspaneler */
 /* Tre kolumner: reglagen till vänster, nätverket i mitten och beräkningen
    till höger. Duken får hela höjden, vilket är det som gör att neuronerna
    kan ritas stora i stället för att tryckas ihop. */
@@ -137,7 +137,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .sel{font-family:'DM Sans',sans-serif;font-size:.82em;width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);color:var(--text);cursor:pointer;outline:none;transition:.2s;}
 .sel:hover{border-color:var(--dim2);}
 
-/* scenario cards */
+/* Scenariokort */
 .scenario-cards{display:flex;flex-direction:column;gap:6px;}
 .scenario-card{display:flex;align-items:flex-start;gap:10px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r-md);background:var(--surface2);cursor:pointer;transition:.2s var(--ease-out);}
 .scenario-card:hover{border-color:var(--dim2);background:rgba(255,255,255,.04);}
@@ -147,7 +147,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .scenario-card .sc-desc{font-size:.7em;color:var(--dim2);margin-top:1px;line-height:1.35;}
 .scenario-card.active .sc-title{color:var(--accent2);}
 
-/* layer arch card */
+/* Kort för lagerarkitekturen */
 .layer-ctrl{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:10px;display:flex;flex-direction:column;gap:2px;}
 .layer-row{display:flex;align-items:center;justify-content:space-between;padding:6px 2px;border-bottom:1px solid var(--border-soft);}
 .layer-row:last-child{border-bottom:none;}
@@ -165,7 +165,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .layer-action-btn.danger:hover{border-color:rgba(239,91,107,.5);color:var(--red);background:rgba(239,91,107,.06);}
 .layer-action-btn svg{flex-shrink:0;}
 
-/* activation pills */
+/* Knappar för aktiveringsfunktion */
 .pill-row{display:flex;align-items:center;gap:6px;margin-bottom:5px;}
 .pill-row .pr-label{font-size:.72em;color:var(--dim);min-width:44px;font-weight:600;}
 .pill-group{display:flex;flex:1;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:999px;padding:2px;}
@@ -245,7 +245,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .narr .nf{font-family:'JetBrains Mono',monospace;color:var(--gold);font-size:.86em;margin:4px 0;}
 .narr .nr{color:var(--green);font-weight:700;}.narr .ne{color:var(--text);font-size:.87em;}
 
-/* ── premium beräkningskort i narr (klickbara steg → glaskort) ── */
+/* ── Beräkningskort i berättarpanelen. Varje steg går att klicka på. ── */
 .calc-card{display:flex;flex-direction:column;gap:9px;}
 .calc-head{display:flex;align-items:center;gap:9px;}
 .ch-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent2);background:rgba(122,162,255,.12);border:1px solid rgba(122,162,255,.25);padding:3px 9px;border-radius:999px;white-space:nowrap;}
@@ -332,7 +332,7 @@ max-height:calc(100% - 20px);overflow-y:auto;}
 .train-msg .tm-stat{font-family:'JetBrains Mono',monospace;font-size:.85em;color:var(--gold);margin-top:8px;}
 @keyframes fadeIn{from{opacity:0;transform:translate(-50%,-50%) scale(.94);}to{opacity:1;transform:translate(-50%,-50%) scale(1);}}
 
-/* training dashboard grid inside train-msg */
+/* Rutnät för träningens instrumentpanel inuti träningsrutan */
 .tdash{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;text-align:left;}
 .tdash-cell{background:rgba(255,255,255,.03);border:1px solid var(--border-soft);border-radius:var(--r-sm);padding:9px 11px;}
 .tdash-cell .tl{font-size:.62em;text-transform:uppercase;letter-spacing:.07em;color:var(--dim2);margin-bottom:3px;}
@@ -341,7 +341,7 @@ max-height:calc(100% - 20px);overflow-y:auto;}
 .tdash-bar{height:5px;border-radius:3px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:6px;}
 .tdash-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;transition:width .15s linear;}
 
-/* ── living training canvas (samma animation/glaskort som i bias-labbet) ── */
+/* ── Träningsvyn: duken som visar modellen byggas ── */
 .train-stage{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:14px;}
 .train-canvas-wrap{width:100%;max-width:380px;height:150px;position:relative;border-radius:var(--r-md);overflow:hidden;background:radial-gradient(ellipse 70% 90% at 50% 50%,rgba(20,26,48,.6),rgba(9,11,20,.3));border:1px solid var(--border-soft);}
 .train-canvas-wrap canvas{width:100%;height:100%;display:block;}
@@ -367,7 +367,7 @@ max-height:calc(100% - 20px);overflow-y:auto;}
 .g-tag:active{transform:scale(.95);}
 .g-tag .g-ico{width:12px;height:12px;flex-shrink:0;opacity:.75;}
 
-/* concept card modal */
+/* Begreppskort */
 .concept-backdrop{position:fixed;inset:0;background:rgba(6,7,14,.72);backdrop-filter:blur(8px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s var(--ease-out);}
 .concept-backdrop.show{opacity:1;pointer-events:auto;}
 .concept-card{position:fixed;top:50%;left:50%;z-index:301;width:340px;max-width:88vw;
@@ -574,7 +574,7 @@ max-height:calc(100% - 20px);overflow-y:auto;}
       <div class="intro-step"><div class="intro-num">2</div><div class="intro-step-text"><strong>Träna nätverket.</strong> Välj ett scenario och låt nätverket lära sig av en datamängd.</div></div>
       <div class="intro-step"><div class="intro-num">3</div><div class="intro-step-text"><strong>Bygg om nätverket.</strong> Lägg till neuroner och dolda lager och undersök hur förlusten påverkas.</div></div>
     </div>
-    <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Starta simuleringen <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <button class="intro-start" onclick="document.getElementById('intro').classList.add('hidden')">Sätt igång <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     <p class="intro-tip">Du börjar i <strong>Beräkningsläge</strong>, där varje neuron räknar med enkla heltal. Byt sedan till ett scenario och låt nätverket träna sig självt.</p>
   </div>
 </div>
@@ -600,27 +600,27 @@ max-height:calc(100% - 20px);overflow-y:auto;}
     <div id="actSection"><div class="sec-t">Aktivering</div><div id="actContent"></div></div>
     <div id="controlArea"></div>
   </div>
-  <div class="center"><div class="canvas-wrap" id="canvasWrap"><canvas id="cv"></canvas><button class="cv-toggle" id="wToggle" onclick="toggleWeights()"></button><div class="untrained-badge" id="untrainedBadge" style="display:none">OTRÄNAT NÄTVERK</div><div class="train-msg" id="trainMsg"></div></div>  <div class="narr" id="narr"><div class="ne">Tryck <strong>Träna modellen</strong> för att börja.</div></div>
+  <div class="center"><div class="canvas-wrap" id="canvasWrap"><canvas id="cv" role="img" aria-label="Nätverksdiagram med lager, neuroner och kopplingar"></canvas><button class="cv-toggle" id="wToggle" onclick="toggleWeights()"></button><div class="untrained-badge" id="untrainedBadge" style="display:none">OTRÄNAT NÄTVERK</div><div class="train-msg" id="trainMsg"></div></div>  <div class="narr" id="narr"><div class="ne">Tryck <strong>Träna modellen</strong> för att börja.</div></div>
   </div>
   <div class="rp">
     <div class="cv-results" id="resultBoxes"><div class="res-chip pred-only" style="display:none"><span class="res-lbl">Rätt svar (från data)</span><span class="res-val" id="targetVal" style="color:var(--gold)">–</span></div><div class="res-chip pred-only" style="display:none"><span class="res-lbl">Nätverkets förutsägelse</span><span class="res-val" id="outputVal" style="color:var(--accent2)">–</span><span id="verdictVal"></span></div></div>
         <div class="gloss-box"><span class="gloss-lbl">Begrepp</span><div class="glossary">
-        <span class="g-tag" onclick="openConcept('gInput',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h11m0 0-4-4m4 4-4 4"/><rect x="16" y="5" width="5" height="14" rx="1"/></svg>Input</span>
-        <span class="g-tag" onclick="openConcept('gNeuron',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>Neuron</span>
-        <span class="g-tag" onclick="openConcept('gWeight',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="12" r="2.5"/><path d="M7.5 12h9" stroke-width="3"/></svg>Vikt</span>
-        <span class="g-tag" onclick="openConcept('gBias',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="5"/><path d="M17 17l4 4M14 3v4M12 5h4" stroke-linecap="round"/></svg>Bias (+b)</span>
-        <span class="g-tag" onclick="openConcept('gAct',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg>Aktivering</span>
-        <span class="g-tag" onclick="openConcept('gActFn',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18c4 0 5-12 9-12s5 12 9 12"/></svg>Aktiveringsfunktion</span>
-        <span class="g-tag" onclick="openConcept('gReLU',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h8l10-13"/></svg>ReLU</span>
-        <span class="g-tag" onclick="openConcept('gSigmoid',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 19h18" opacity=".35"/><path d="M4 18C10 18 10 6 20 6"/></svg>Sigmoid</span>
-        <span class="g-tag" onclick="openConcept('gTanh',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12h20" opacity=".35"/><path d="M4 19C10 19 10 5 20 5"/></svg>Tanh</span>
-        <span class="g-tag" onclick="openConcept('gHidden',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="2" width="4" height="20" rx="1"/><rect x="17" y="6" width="4" height="12" rx="1"/></svg>Dolt lager</span>
-        <span class="g-tag" onclick="openConcept('gOutput',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="12" r="4"/><path d="M14 12h7m-3-3 3 3-3 3" stroke-linecap="round" stroke-linejoin="round"/></svg>Utdata</span>
-        <span class="g-tag" onclick="openConcept('gLoss',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l6 6 4-4 8 8"/><path d="M15 15h6v-6"/></svg>Förlust</span>
-        <span class="g-tag" onclick="openConcept('gAcc',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>Träffsäkerhet</span>
-        <span class="g-tag" onclick="openConcept('gForward',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h6m4 0h6M8 8l-4 4 4 4m8-8 4 4-4 4"/></svg>Framåtpass</span>
-        <span class="g-tag" onclick="openConcept('gEpoch',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 21v-5h5"/></svg>Epok</span>
-        <span class="g-tag" onclick="openConcept('gPred',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>Förutsägelse</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gInput',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h11m0 0-4-4m4 4-4 4"/><rect x="16" y="5" width="5" height="14" rx="1"/></svg>Indata</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gNeuron',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>Neuron</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gWeight',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="12" r="2.5"/><path d="M7.5 12h9" stroke-width="3"/></svg>Vikt</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gBias',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="5"/><path d="M17 17l4 4M14 3v4M12 5h4" stroke-linecap="round"/></svg>Bias (+b)</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gAct',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg>Aktivering</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gActFn',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18c4 0 5-12 9-12s5 12 9 12"/></svg>Aktiveringsfunktion</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gReLU',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h8l10-13"/></svg>ReLU</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gSigmoid',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 19h18" opacity=".35"/><path d="M4 18C10 18 10 6 20 6"/></svg>Sigmoid</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gTanh',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12h20" opacity=".35"/><path d="M4 19C10 19 10 5 20 5"/></svg>Tanh</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gHidden',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="2" width="4" height="20" rx="1"/><rect x="17" y="6" width="4" height="12" rx="1"/></svg>Dolt lager</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gOutput',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="12" r="4"/><path d="M14 12h7m-3-3 3 3-3 3" stroke-linecap="round" stroke-linejoin="round"/></svg>Utdata</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gLoss',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l6 6 4-4 8 8"/><path d="M15 15h6v-6"/></svg>Förlust</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gAcc',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>Träffsäkerhet</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gForward',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h6m4 0h6M8 8l-4 4 4 4m8-8 4 4-4 4"/></svg>Framåtpass</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gEpoch',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 21v-5h5"/></svg>Epok</span>
+        <span class="g-tag" role="button" tabindex="0" onkeydown="gTagKey(event)" onclick="openConcept('gPred',event)"><svg class="g-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>Förutsägelse</span>
       </div></div>
   </div>
 </div>
@@ -664,8 +664,8 @@ const CALC_GLYPH='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 const SCENARIOS=[{key:'calc',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="4" y="2.5" width="16" height="19" rx="3.2"/><path d="M8 7h8"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></svg>',title:'Beräkningsläge',desc:'Öva på matematiken bakom neurala nätverk'},{key:'exam',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5h9.5L19 8v12.5H5z"/><path d="M14 3.5V8h5"/><path d="M8.5 13.5l2 2 4.5-4.5"/></svg>',title:'Klarar eleven provet?',desc:'Träna en modell på fiktiv men realistisk elevdata'},{key:'gym',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9v6M6 7v10M18 7v10M21 9v6"/><path d="M6 12h12"/></svg>',title:'Blir träningen effektiv?',desc:'Träna och undersök en modell där sambanden inte är helt linjära'},{key:'abstract',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3v6.2L4.6 18a2 2 0 0 0 1.7 3h11.4a2 2 0 0 0 1.7-3l-4.9-8.8V3"/><path d="M8 3h8"/><path d="M7.5 14.5h9"/></svg>',title:'Experimentläge',desc:'Bygg och testa fritt'}];
 
 /* Tonen per scenario. Sätts på :root så att alla accentfärger följer med. */
-/* Blått och lila låg för nära varandra. Nu ligger tonerna på var sitt håll
-   av färgcirkeln: blått, rött, turkost och gult. */
+/* Tonerna ligger på var sitt håll av färgcirkeln: blått, rött, turkost och gult,
+   så att två scenarier aldrig går att förväxla. */
 const SC_TONE={calc:['#5b8cff','#93b2ff'],exam:['#f0665c','#ff9186'],
                gym:['#2fc4b2','#6fe0d1'],abstract:['#e0a355','#f2c98a']};
 function applyScenarioTone(k){
@@ -832,10 +832,10 @@ function testAccuracy(){
   return ok/d.xs.length;
 }
 function trainBatch(){const bSz=curSc==='gym'?100:30;const d=genData(bSz);
-/* Avtagande inlarningstakt: stora steg i borjan for att hitta ratt omrade,
-   sma steg pa slutet for att lagga granserna exakt. */
+/* Avtagande inlärningstakt: stora steg i början för att hitta rätt område,
+   små steg på slutet för att lägga gränserna exakt. */
 const lr=curSc==='gym'?0.8+(0.05-0.8)*Math.min(1,epoch/1499):0.8;let tl=0;if(!savedTrainData)savedTrainData=genData(200);for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++)for(let i=0;i<W[l][j].length;i++)wDeltas[l][j][i]=0;for(let s=0;s<d.xs.length;s++){const a=[d.xs[s].slice()];let c=d.xs[s].slice();for(let l=0;l<W.length;l++){const nx=[];for(let j=0;j<W[l].length;j++){let sm=B[l][j];for(let i=0;i<c.length;i++)sm+=W[l][j][i]*c[i];nx.push(act_(sm,l+1));}c=nx;a.push(nx);}const o=a[a.length-1][0],t=d.ys[s],e=o-t;tl+=e*e;const dl=[];for(let l=0;l<W.length;l++)dl.push(new Array(W[l].length).fill(0));dl[W.length-1][0]=e*actDeriv(o,layers.length-1);for(let l=W.length-2;l>=0;l--)for(let j=0;j<W[l].length;j++){let sm=0;for(let k=0;k<W[l+1].length;k++)sm+=dl[l+1][k]*W[l+1][k][j];dl[l][j]=sm*actDeriv(a[l+1][j],l+1);}for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++){for(let i=0;i<W[l][j].length;i++){const delta=-lr*dl[l][j]*a[l][i];W[l][j][i]+=delta;wDeltas[l][j][i]+=delta;totalWeightUpdates++;}B[l][j]-=lr*dl[l][j];}}return tl/d.xs.length;}
-/* ── living training canvas (samma animation som i bias-labbet) ── */
+/* ── Träningsvyn ── */
 let trainAnimRAF=null,trainAnimParticles=[],trainStatusLines=[];
 const TRAIN_STATUS=[{t:'Läser datasetet…',at:0},{t:'Lär mönster…',at:0.28},{t:'Identifierar samband…',at:0.55},{t:'Optimerar modellen…',at:0.8}];
 function stopTrainAnim(){if(trainAnimRAF)cancelAnimationFrame(trainAnimRAF);trainAnimRAF=null;trainAnimParticles=[];}
@@ -911,7 +911,9 @@ function trainMsgSide(msg,on){
     msg.style.width=`${r.width}px`;msg.style.height=`${r.height}px`;
   }
 }
-function startTraining(){if(trainTimer||isCalc())return;if(trained&&!confirm('Vill du träna om nätverket? Modellen och förlustkurvan försvinner.'))return;epoch=0;trained=false;savedTrainData=null;isTraining=true;lossHistory=[];totalWeightUpdates=0;initW();const tn=layers.reduce((a,b)=>a+b,0),maxE=curSc==='gym'?1500:300 /* fast antal, annars får stora nät mer träning än små. 300 i stället för 120: vid 120 var alla arkitekturer undertränade, och då såg fler neuroner ut att hjälpa i provscenariot fastän de inte gör det */;const msg=document.getElementById('trainMsg');
+function startTraining(){if(trainTimer||isCalc())return;if(trained&&!confirm('Vill du träna om nätverket? Modellen och förlustkurvan försvinner.'))return;epoch=0;trained=false;savedTrainData=null;isTraining=true;lossHistory=[];totalWeightUpdates=0;initW();const tn=layers.reduce((a,b)=>a+b,0),maxE=curSc==='gym'?1500:300 /* Fast antal epoker, annars får stora nät mer träning än små. Vid 120 epoker
+     är samtliga arkitekturer undertränade, och då ser fler neuroner ut att hjälpa
+     i provscenariot fastän de inte gör det. */;const msg=document.getElementById('trainMsg');
   stopTrainAnim();
   const dashboard=()=>`<div class="tdash"><div class="tdash-cell"><div class="tl">Epok</div><div class="tv" id="tStatEpoch">0 / ${maxE}</div></div><div class="tdash-cell"><div class="tl">Förlust</div><div class="tv" id="tStatLoss" style="color:var(--green)">–</div></div><div class="tdash-cell wide"><div class="tl">Vikter uppdaterade</div><div class="tv" id="tStatWeights" style="font-size:.95em;color:var(--accent2)">0</div></div></div>`;
   msg.innerHTML=`<svg class="tm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3a3 3 0 0 0-3 3v.5A2.5 2.5 0 0 0 3.5 9v1A2.5 2.5 0 0 0 6 12.5v.5a3 3 0 0 0 3 3v2a1.5 1.5 0 0 0 3 0V6a3 3 0 0 0-3-3Z"/><path d="M15 3a3 3 0 0 1 3 3v.5A2.5 2.5 0 0 1 20.5 9v1A2.5 2.5 0 0 1 18 12.5v.5a3 3 0 0 1-3 3v2a1.5 1.5 0 0 1-3 0V6a3 3 0 0 1 3-3Z"/></svg><div class="tm-title">Tränar nätverket …</div><div class="tm-text">Modellen matas med hundratals exempel och justerar vikterna steg för steg.</div><div class="train-stage"><div class="train-canvas-wrap"><canvas id="trainAnimCanvas"></canvas></div><div class="train-progress-rail"><i id="trainAnimRail"></i></div><div class="train-status" id="trainAnimStatus"></div></div>${dashboard()}`;
@@ -960,9 +962,8 @@ function setPhase(p){phase=p;renderPhaseBar();
      eleven har en tränad modell att jämföra med. */
   const _act=document.getElementById('actSection');
   _act.classList.add('sec-fold');
-  /* Valet av aktiveringsfunktion ska synas hela tiden. Tidigare fälldes
-     rutan ut först efter träningen, så eleven kunde välja ReLU, gå
-     tillbaka till träningssteget och inte längre se vad som var valt. */
+  /* Valet av aktiveringsfunktion visas i alla faser. Annars kan eleven välja
+     ReLU, gå tillbaka till träningssteget och inte längre se vad som gäller. */
   _act.classList.add('open');
   document.getElementById('archSection').style.display=(p==='train'&&!isCalc())?'contents':'none';
   document.getElementById('varSection').style.display=(p==='train'&&!isCalc())?'block':'none';
@@ -972,7 +973,7 @@ function setPhase(p){phase=p;renderPhaseBar();
   const _c=document.querySelector('.center');if(_c)_c.classList.toggle('no-narr',show);
   renderCtrl();}
 function renderCtrl(){const el=document.getElementById('controlArea');if(isCalc()){el.innerHTML=`<div class="bg"><button class="btn icon" aria-label="Föregående steg" title="Föregående steg" onclick="stepBack()">${ICON_PREV}</button><button class="btn pri" onclick="stepNeuron()">${ICON_NEXT} Nästa</button><button class="btn" onclick="runAllAnim()">${ICON_ALL} Alla</button><button class="btn icon dn" aria-label="Börja om passet" title="Börja om passet" onclick="resetPass()">${ICON_RESET}</button></div><div class="hint">Alla värden är heltal och aktiveringen är ReLU, så beräkningarna går att följa för hand.</div>`;}else if(phase==='train'){el.innerHTML=`<div class="bg"><button class="btn grn" onclick="startTraining()">${ICON_BRAIN} Träna modellen</button></div><div class="hint">Nätverket lär sig vikterna genom att träna på data.</div>`;}else if(phase==='explore'){el.innerHTML=`<div class="bg"><button class="btn icon" aria-label="Föregående steg" title="Föregående steg" onclick="stepBack()">${ICON_PREV}</button><button class="btn pri" onclick="stepNeuron()">${ICON_NEXT} Nästa</button><button class="btn" onclick="runAllAnim()">${ICON_ALL} Alla</button><button class="btn icon dn" aria-label="Börja om passet" title="Börja om passet" onclick="resetPass()">${ICON_RESET}</button></div><div class="hint">Stega genom nätverket en neuron i taget. Pilen till vänster går tillbaka ett steg.</div><div class="bg" style="margin-top:4px"><button class="btn" onclick="fullReset()" title="Nollställ modellen och träna på nytt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:4px"><path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 4.5V10h5.5"/></svg>Träna om</button><button class="btn" onclick="goPhase('predict')">Förutsäg ${ICON_ARROW_R}</button></div>`;}else{el.innerHTML=`<div class="hint" style="margin-bottom:4px">Nätverkets svar uppdateras direkt när indatavärdena ändras.</div><div class="bg"><button class="btn" onclick="goPhase('explore')">${ICON_ARROW_L} Utforska</button><button class="btn" onclick="fullReset()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:4px"><path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 4.5V10h5.5"/></svg>Träna om</button></div>`;}}
-/* ── klick på ett beräkningssteg i narr-panelen → glaskort med förklaring i ord ── */
+/* ── Klick på ett beräkningssteg öppnar ett kort med förklaringen i ord ── */
 function openCalcConcept(row){
   const title=row.dataset.title||'Beräkning';
   const defHTML=row.dataset.explain||'';
@@ -1067,7 +1068,7 @@ function stepBack(){if(!stepHist.length)return;const snap=stepHist.pop();vals=sn
 function runAllAnim(){if(stepIdx>=stepQueue.length)resetPass();function n(){if(stepIdx>=stepQueue.length)return;stepNeuron();setTimeout(n,350);}n();}
 function resetPass(){initV();hlNeuron=null;hlEdges=[];stepHist=[];
   /* I förutsägelseläget finns ingen Nästa-knapp, så uppmaningen att stega
-     hörde inte hemma där. */
+     visas inte där. */
   const _pred=!isCalc()&&phase==='predict';
   document.getElementById('narr').innerHTML=_pred
     ?'<div class="ne">Ändra indatavärdena till vänster, så uppdateras svaret direkt.</div>'
@@ -1491,8 +1492,15 @@ let bestL=-1,bestJ=-1,bestI=-1,bestD=8;
 for(let l=0;l<W.length;l++)for(let j=0;j<W[l].length;j++)for(let i=0;i<W[l][j].length;i++){const ax=pos[l][i].x,ay=pos[l][i].y,bx=pos[l+1][j].x,by=pos[l+1][j].y;const dx=bx-ax,dy=by-ay,len2=dx*dx+dy*dy;if(len2<1)continue;let t=((mx-ax)*dx+(my-ay)*dy)/len2;t=Math.max(0,Math.min(1,t));const px=ax+t*dx,py=ay+t*dy;const d=Math.hypot(mx-px,my-py);if(d<bestD){bestD=d;bestL=l;bestJ=j;bestI=i;}}
 if(bestL>=0){const av=activeVars();const from=bestL===0?av[bestI].name:`dolt ${bestL} n${bestI+1}`,to=bestL+1===layers.length-1?'utdata':`dolt ${bestL+1} n${bestJ+1}`;const cur=W[bestL][bestJ][bestI];const v=prompt(`Vikt: ${from} → ${to}\nNuvarande: ${isCalc()&&cur===Math.round(cur)?cur:cur.toFixed(2)}`,isCalc()&&cur===Math.round(cur)?String(Math.round(cur)):cur.toFixed(2));if(v!==null){const p=parseFloat(v);if(!isNaN(p)){W[bestL][bestJ][bestI]=p;initV();if(trained||isCalc()){forwardFull();if(!isCalc())updateOut();}drawNet();}}}});
 let rT;window.addEventListener('resize',()=>{clearTimeout(rT);rT=setTimeout(()=>{drawNet();},80);});
+/* Begreppslänkarna är span-element och behöver därför egen tangentbordshantering. */
+function gTagKey(e){
+  if(e.key!=='Enter'&&e.key!==' ')return;
+  e.preventDefault();
+  e.currentTarget.click();
+}
+
 const CONCEPTS={
-  gInput:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h11m0 0-4-4m4 4-4 4"/><rect x="16" y="5" width="5" height="14" rx="1"/></svg>',title:'Input',def:'En <strong>input</strong>, eller ingångsvariabel, är ett av de värden som matas in i nätverkets första lager. Det kan till exempel vara antalet sömntimmar eller antalet pluggtimmar. Varje input multipliceras med en vikt innan den skickas vidare till nästa lager.',illus:'<svg viewBox="0 0 140 70"><rect x="8" y="24" width="34" height="22" rx="5" fill="rgba(122,162,255,.18)" stroke="#7aa2ff" stroke-width="1.5"/><text x="25" y="39" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#e8ecf8">7</text><path d="M46 35h28" stroke="#7aa2ff" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M67 29l7 6-7 6" stroke="#7aa2ff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="108" cy="35" r="15" fill="rgba(77,128,255,.25)" stroke="#7aa2ff" stroke-width="2"/></svg>'},
+  gInput:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h11m0 0-4-4m4 4-4 4"/><rect x="16" y="5" width="5" height="14" rx="1"/></svg>',title:'Indata',def:'<strong>Indata</strong> är de värden som matas in i nätverkets första lager. Det kan till exempel vara antalet sömntimmar eller antalet pluggtimmar. Varje värde multipliceras med en vikt innan det skickas vidare till nästa lager.',illus:'<svg viewBox="0 0 140 70"><rect x="8" y="24" width="34" height="22" rx="5" fill="rgba(122,162,255,.18)" stroke="#7aa2ff" stroke-width="1.5"/><text x="25" y="39" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#e8ecf8">7</text><path d="M46 35h28" stroke="#7aa2ff" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M67 29l7 6-7 6" stroke="#7aa2ff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="108" cy="35" r="15" fill="rgba(77,128,255,.25)" stroke="#7aa2ff" stroke-width="2"/></svg>'},
   gNeuron:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 6l4 4M20 6l-4 4M4 18l4-4M20 18l-4-4"/></svg>',title:'Neuron',def:'En <strong>neuron</strong> är en beräkningsenhet. Den tar emot värden, multiplicerar dem med sina vikter, summerar produkterna och kör resultatet genom en aktiveringsfunktion.',illus:'<svg viewBox="0 0 140 70"><g stroke="rgba(122,162,255,.5)" stroke-width="1.5"><line x1="15" y1="14" x2="60" y2="35"/><line x1="15" y1="35" x2="60" y2="35"/><line x1="15" y1="56" x2="60" y2="35"/><line x1="80" y1="35" x2="120" y2="35"/></g><circle cx="15" cy="14" r="4" fill="#7aa2ff"/><circle cx="15" cy="35" r="4" fill="#7aa2ff"/><circle cx="15" cy="56" r="4" fill="#7aa2ff"/><circle cx="70" cy="35" r="11" fill="rgba(77,128,255,.25)" stroke="#7aa2ff" stroke-width="2"/><circle cx="120" cy="35" r="4" fill="#ffce54"/></svg>'},
   gWeight:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="12" r="2.5"/><path d="M7.5 12h9" stroke-width="3"/></svg>',title:'Vikt',def:'En <strong>vikt</strong> är ett tal som bestämmer hur stark kopplingen mellan två neuroner är. Vikterna är det som nätverket lär sig under träningen. I figuren ritas en starkare vikt som en tjockare linje.',illus:'<svg viewBox="0 0 140 70"><circle cx="20" cy="35" r="9" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="2"/><circle cx="120" cy="35" r="9" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="2"/><line x1="29" y1="35" x2="111" y2="35" stroke="#33d17a" stroke-width="5" stroke-linecap="round"/><text x="70" y="25" fill="#ffce54" font-size="13" font-family="JetBrains Mono" text-anchor="middle">w</text></svg>'},
   gBias:{icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="5"/><path d="M17 17l4 4M14 3v4M12 5h4" stroke-linecap="round"/></svg>',title:'Bias (+b)',def:'<strong>Bias</strong> är ett tal som adderas i varje neuron innan aktiveringen. Det gör att neuronen kan aktiveras även när alla inputvärden är noll.',illus:'<svg viewBox="0 0 140 70"><circle cx="70" cy="28" r="14" fill="rgba(122,162,255,.25)" stroke="#7aa2ff" stroke-width="2"/><line x1="70" y1="42" x2="70" y2="54" stroke="#ef5b6b" stroke-width="2"/><rect x="50" y="54" width="40" height="14" rx="7" fill="rgba(239,91,107,.15)" stroke="#ef5b6b" stroke-width="1.2"/><text x="70" y="64" fill="#ff9aa5" font-size="10" font-family="JetBrains Mono" text-anchor="middle">+b</text></svg>'},
@@ -1533,7 +1541,7 @@ function closeConcept(){document.getElementById('conceptCard').classList.remove(
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeConcept();});
 (function initCardTilt(){
   const el=document.getElementById('conceptCardInner');if(!el)return;
-  /* Lutningen ska antydas, inte märkas. Sju grader vippade korten synligt. */
+  /* Lutningen ska antydas, inte märkas. Vid sju grader vippar korten synligt. */
   const MAX_TILT=2.5;
   el.addEventListener('mousemove',e=>{
     const r=el.getBoundingClientRect();
