@@ -1357,7 +1357,7 @@ function celebrateTree(wrapId,text){
 
 /* ================= nav (pipeline-stegvisare) ================= */
 const STEPS=[
-  {title:'Study the data',c:'#60a5fa',intro:'Each snake is described by five features: <b>head shape</b>, <b>eye</b>, <b>pattern</b>, <b>colour</b> and <b>tail</b>. Each snake also comes with a known answer. Sort them by one feature at a time and look for what separates the venomous from the harmless.'},
+  {title:'Study the data',c:'#60a5fa',intro:'Each snake is described by five features: <b>head shape</b>, <b>eye</b>, <b>pattern</b>, <b>colour</b> and <b>tail</b>. Each snake also comes with a known answer. Consider what separates the venomous from the harmless.'},
   {title:'Build your tree',c:'#ffd866',intro:'A decision tree is built from <b>nodes</b>. Each node asks a question about one feature, and each answer leads onward into its own branch. A <b>pure</b> branch contains only one class and is finished; a <b>mixed</b> branch needs another question. Click a node to split it or to settle its class.'},
   {title:'Test your tree',c:'#ff9f43',intro:`A model must work on new cases, not merely on the examples it was built from. The ${TEST.length} snakes in the <button class="term" data-term="testdata">test data</button> were set aside before construction began and have never influenced the tree. They are therefore the only independent trial of whether the tree has learnt something that holds generally. Run your tree on them, one at a time, and note not only <b>how many</b> it classifies correctly, but also <b>what kind of error</b> it makes.`},
   {title:'Watch a computer build one',c:'#34d399',intro:'An algorithm builds the same kind of tree automatically, from exactly the same training data. At each node the algorithm tries every feature and measures how pure the resulting groups become. The measure is called <button class="term" data-term="entropy">entropy</button>, and the reduction a split produces is called <button class="term" data-term="gain">information gain</button>. The feature with the greatest information gain gets to split the node.'},
@@ -1660,7 +1660,7 @@ function wireStuActions(root){
 }
 function renderStuCtrl(keepPop){
   const el=document.getElementById('stuCtrl');
-  if(!stuSel){closeNodePop();el.innerHTML=`<div class="cardhint">${POPUI?'Click a node in the tree. The options appear right at the node.':'Click a node in the tree above to split it or to settle its class.'}</div>`;return;}
+  if(!stuSel){closeNodePop();el.innerHTML=POPUI?'':`<div class="cardhint">Tap a node in the tree above to split it or to settle its class.</div>`;return;}
   const node=nodeByPid(stuRoot,stuSel);
   let h='';
   if(!POPUI)h+=stuActionsHTML(node);
