@@ -451,6 +451,15 @@ details.dinline:hover{border-color:var(--line-strong);}
 .theme-toggle{border-radius:11px;border:1px solid var(--line-strong);background:var(--card);box-shadow:none;}
 
 
+
+/* ── En elev i taget ──
+   Samma tre nivåer som klassanalysen, men för en enskild elev: totalen med
+   klassens snitt som jämförelse, sedan områden och svårighetsnivåer med ett
+   prov per kolumn. Underlaget är avsett att kunna klistras in i en
+   återkoppling, därför ligger texten först och går att kopiera. */
+.stu-pick{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;margin-bottom:4px;}
+.stu-lead{font-size:12.5px;color:var(--faint);margin:14px 0 6px;}
+
 /* ── Historiken ──
    Utvecklingen över tid visas i tre lager: klassens snitt som en linje, betygen
    som en staplad rad per prov, och därefter områden och elever som tabeller där
@@ -663,6 +672,12 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
           <div id="histGrades" class="gradestack"></div>
           <details class="dinline" open><summary>Områden över tid<span class="chev">▸</span></summary><div class="dbody"><div id="histAreas"></div></div></details>
           <details class="dinline"><summary>Elevernas utveckling<span class="chev">▸</span></summary><div class="dbody"><div id="histStudents"></div></div></details>
+          <div class="sub">En elev i taget</div>
+          <div class="stu-pick">
+            <div style="flex:1;min-width:200px"><label class="field" for="histStudent">Elev</label><select id="histStudent"></select></div>
+            <button class="btn-ghost btn-copy" data-copy="#histStuText">Kopiera texten</button>
+          </div>
+          <div id="histStuBody"></div>
         </div>
       </div>
     </div>
@@ -1073,8 +1088,13 @@ function histSnapshot(cls,course){
     areas:areas,
     levels:{grund:lv.grund,medel:lv.medel,avancerat:lv.avancerat},
     grades: gradesValid()? gradeDistribution() : null,
+    /* Varje elev sparas med sitt resultat per område och per svårighetsnivå, inte
+       bara med totalen. Det är den nivån som behövs för att kunna säga något om en
+       enskild elevs utveckling under kursen. */
     students: state.students.filter(s=>!s.absent).map(s=>{ const t=studentTotals(s);
-      return {name:(s.name||"").trim(), pts:t.pts, max:t.max, pct:t.pct, grade:t.grade||null}; })
+      const ar={}; usedAreas().forEach(a=>{ ar[a]={got:studentAreaPoints(s,a),max:areaMax(a)}; });
+      return {name:(s.name||"").trim(), pts:t.pts, max:t.max, pct:t.pct, grade:t.grade||null,
+              areas:ar, levels:studentLevelStats(s)}; })
   };
 }
 
@@ -1206,6 +1226,146 @@ function histSummary(hs){
   return pa.join(" ");
 }
 
+
+/* ── En elev i taget ──
+   Elevens egen kurva ritas mot klassens snitt, så att en nedgång som gäller hela
+   klassen inte läses som elevens ensak. Prov där eleven var frånvarande saknas i
+   underlaget och lämnas tomma. */
+function stuTrendSVG(hs, key){
+  const W=620,H=180,L=44,R=16,T=16,B=42;
+  const X=i=>hs.length<2?(L+(W-L-R)/2):L+i*(W-L-R)/(hs.length-1), Y=v=>H-B-v*(H-T-B);
+  const mine=hs.map(h=>{ const f=h.students.find(s=>nameKey(s.name)===key); return f?f.pct:null; });
+  let g="";
+  for(const v of [0,.25,.5,.75,1]) g+=`<line x1="${L}" y1="${Y(v)}" x2="${W-R}" y2="${Y(v)}" stroke="var(--line)"/>`
+    +`<text x="${L-9}" y="${Y(v)+4}" text-anchor="end" font-size="10" font-family="'JetBrains Mono',monospace" fill="var(--faint)">${v*100}</text>`;
+  const classPts=hs.map((h,i)=>X(i)+","+Y(h.avg)).join(" ");
+  const classLine=hs.length>1?`<polyline fill="none" stroke="var(--faint)" stroke-width="1.8" stroke-dasharray="4 4" points="${classPts}"/>`:"";
+  let seg="",dots="";
+  mine.forEach((v,i)=>{
+    if(v==null) return;
+    const prev=mine.slice(0,i).map((x,j)=>({x,j})).filter(o=>o.x!=null).pop();
+    if(prev) seg+=`<line x1="${X(prev.j)}" y1="${Y(prev.x)}" x2="${X(i)}" y2="${Y(v)}" stroke="var(--indigo)" stroke-width="2.5" stroke-linecap="round"/>`;
+    dots+=`<circle cx="${X(i)}" cy="${Y(v)}" r="4.5" fill="var(--card)" stroke="var(--indigo)" stroke-width="2.5"/>`
+      +`<text x="${X(i)}" y="${Y(v)-13}" text-anchor="middle" font-size="11" font-weight="600" font-family="'JetBrains Mono',monospace" fill="var(--ink)">${Math.round(v*100)} %</text>`;
+  });
+  const xl=hs.map((h,i)=>`<text x="${X(i)}" y="${H-B+18}" text-anchor="middle" font-size="10.5" font-family="'Inter',sans-serif" fill="var(--muted)">${esc(h.name.length>16?h.name.slice(0,15)+"…":h.name)}</text>`).join("");
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Elevens resultat per prov">${g}${classLine}${seg}${dots}${xl}</svg>`;
+}
+
+/* Texten är skriven för att kunna ges till eleven. Den följer tre frågor: vad som
+   sitter, hur det har utvecklats jämfört med elevens egna tidigare resultat, och
+   vad som är nästa sak att träna på.
+
+   Tre val är gjorda med flit. Poäng anges i råa tal, eftersom "7 av 12 på krafter"
+   säger något konkret medan "58 %" bara är ett omdöme. Utvecklingen mäts mot elevens
+   egna tidigare resultat och inte mot klassen, eftersom jämförelse med andra flyttar
+   uppmärksamheten från uppgiften till rangordningen. Och antalet saker att träna på
+   hålls nere till högst två, eftersom en längre lista sällan blir gjord. */
+function stuSummary(hs, key, label){
+  const mine=hs.map(h=>h.students.find(s=>nameKey(s.name)===key)||null);
+  const done=mine.map((m,i)=>({m,i})).filter(o=>o.m);
+  if(!done.length) return label+" finns inte i något av de sparade proven.";
+  const last=done[done.length-1], first=done[0];
+  const pa=[];
+
+  /* Summerade poäng per område över alla prov eleven gjort. Ett område som bara
+     funnits med i ett prov räknas också, men får ingen utveckling. */
+  const areaTot={}, areaSeq={};
+  done.forEach(o=>{ const ar=o.m.areas||{};
+    Object.keys(ar).forEach(a=>{ const x=ar[a]; if(!x||!x.max) return;
+      (areaTot[a]=areaTot[a]||{got:0,max:0}); areaTot[a].got+=x.got; areaTot[a].max+=x.max;
+      (areaSeq[a]=areaSeq[a]||[]).push({got:x.got,max:x.max,test:hs[o.i].name}); }); });
+  const areas=Object.keys(areaTot).map(a=>({a,got:areaTot[a].got,max:areaTot[a].max,p:areaTot[a].got/areaTot[a].max}));
+  const strong=areas.filter(x=>x.p>=0.75).sort((x,y)=>y.p-x.p);
+  const weak=areas.filter(x=>x.p<0.6).sort((x,y)=>(y.max-y.got)-(x.max-x.got));
+  const phrase=x=>x.a+" "+fmt(x.got)+" av "+fmt(x.max)+" p";
+
+  pa.push(label+" har gjort "+done.length+(done.length===1?" prov":" prov")+" i kursen"
+    + (done.length<hs.length?" av de "+hs.length+" som finns sparade":"")+".");
+
+  if(strong.length) pa.push("Det som sitter är "+joinSv(strong.slice(0,3).map(phrase))+".");
+  if(!strong.length&&areas.length) pa.push("Sammanlagt över proven: "+joinSv(areas.slice(0,3).map(phrase))+".");
+
+  /* Utveckling inom ett område, mot elevens egna tidigare resultat. */
+  const moved=Object.keys(areaSeq).filter(a=>areaSeq[a].length>1).map(a=>{
+    const q=areaSeq[a], f=q[0], l=q[q.length-1];
+    return {a, from:f, to:l, d:(l.got/l.max)-(f.got/f.max)};
+  }).sort((x,y)=>y.d-x.d);
+  if(moved.length){
+    const up=moved[0], dn=moved[moved.length-1];
+    if(up.d>=0.15) pa.push("Tydligast framsteg är "+up.a+": "+fmt(up.from.got)+" av "+fmt(up.from.max)
+      +" p på "+up.from.test+" och "+fmt(up.to.got)+" av "+fmt(up.to.max)+" p på "+up.to.test+".");
+    if(dn.d<=-0.15) pa.push(dn.a+" har gått åt andra hållet, från "+fmt(dn.from.got)+" av "+fmt(dn.from.max)
+      +" p till "+fmt(dn.to.got)+" av "+fmt(dn.to.max)+" p. Det är värt att gå tillbaka till.");
+  }
+
+  /* Svårighetsnivåer, summerade över proven. */
+  const LV={grund:"grundläggande uppgifter",medel:"medelsvåra uppgifter",avancerat:"avancerade uppgifter"};
+  const lv={grund:{got:0,poss:0},medel:{got:0,poss:0},avancerat:{got:0,poss:0}};
+  done.forEach(o=>["grund","medel","avancerat"].forEach(k=>{ const x=(o.m.levels||{})[k];
+    if(x&&x.poss){ lv[k].got+=x.got; lv[k].poss+=x.poss; } }));
+  const present=["grund","medel","avancerat"].filter(k=>lv[k].poss>0);
+  if(present.length){
+    pa.push("Över proven blev det "+joinSv(present.map(k=>fmt(lv[k].got)+" av "+fmt(lv[k].poss)+" p på "+LV[k]))+".");
+    const g=lv.grund.poss?lv.grund.got/lv.grund.poss:null, a=lv.avancerat.poss?lv.avancerat.got/lv.avancerat.poss:null;
+    if(g!=null&&g<0.6) pa.push("Grunderna är det som ger mest just nu, eftersom de bär allt annat.");
+    else if(g!=null&&a!=null&&g>=0.75&&a<0.5) pa.push("Grunderna sitter. Nästa steg är uppgifter där flera moment ska kombineras.");
+  }
+
+  /* Feed forward: högst två saker, med en konkret ingång. */
+  if(weak.length){
+    const pick=weak.slice(0,2);
+    pa.push("Träna vidare på "+joinSv(pick.map(phrase))+".");
+    const w=pick[0], q=areaSeq[w.a];
+    if(q&&q.length>1&&(q[q.length-1].got/q[q.length-1].max)<=(q[0].got/q[0].max))
+      pa.push("Där har resultatet stått stilla mellan proven, så det behövs troligen ett annat sätt att öva än hittills.");
+    else pa.push("Börja med uppgifter av samma slag som de i "+hs[last.i].name+", där poängen föll bort.");
+  } else if(areas.length){
+    pa.push("Ingen del sticker ut som svag. Nästa steg är att ta sig an de svårare uppgifterna inom de områden som redan sitter.");
+  }
+  return pa.join(" ");
+}
+function renderStudentDetail(hs){
+  const sel=$("#histStudent"), box=$("#histStuBody");
+  if(!sel||!box) return;
+  const keys=new Map();
+  hs.forEach(h=>h.students.forEach(s=>{ const k=nameKey(s.name); if(k&&!keys.has(k)) keys.set(k,s.name); }));
+  const list=[...keys.entries()].sort((a,b)=>a[1].localeCompare(b[1],"sv"));
+  const prev=sel.value;
+  sel.innerHTML=list.map(([k,n])=>`<option value="${esc(k)}">${esc(n)}</option>`).join("");
+  if(prev&&keys.has(prev)) sel.value=prev;
+  if(!list.length){ box.innerHTML='<div class="empty">Inga elever i historiken än.</div>'; return; }
+
+  const key=sel.value||list[0][0], label=keys.get(key);
+  const done=hs.filter(h=>h.students.some(s=>nameKey(s.name)===key));
+  if(done.length<1){ box.innerHTML='<div class="empty">Eleven finns inte i något sparat prov.</div>'; return; }
+
+  let h='<div id="histStuText" class="summary-box" style="margin-top:10px">'+esc(stuSummary(hs,key,label))+'</div>';
+  h+='<div class="stu-lead">Elevens resultat i heldragen linje. Klassens snitt är streckat och finns med som sammanhang för dig som lärare, inte som något eleven ska jämföras med.</div>';
+  h+='<div class="trendcard">'+stuTrendSVG(hs,key)+'</div>';
+
+  /* Områden, ett prov per kolumn. */
+  const areaNames=[...new Set(hs.flatMap(x=>x.students.filter(s=>nameKey(s.name)===key).flatMap(s=>Object.keys(s.areas||{}))))]
+    .sort((a,b)=>a.localeCompare(b,"sv"));
+  const areaRows=areaNames.map(a=>({label:a, v:hs.map(x=>{
+    const f=x.students.find(s=>nameKey(s.name)===key); const o=f&&f.areas&&f.areas[a];
+    return (o&&o.max)?o.got/o.max:null; })})).filter(r=>r.v.filter(v=>v!=null).length>=1);
+  h+='<div class="stu-lead" style="margin-top:20px">Per område</div>';
+  h+= areaRows.length ? histTable(areaRows,hs,"Område")
+    : '<div class="empty">De sparade proven saknar områdesresultat för enskilda elever. Spara om proven för att få med dem.</div>';
+
+  /* Svårighetsnivåer. */
+  const LVL={grund:"Grund (1–2)",medel:"Medel (3)",avancerat:"Avancerat (4–5)"};
+  const lvlRows=["grund","medel","avancerat"].map(k=>({label:LVL[k], v:hs.map(x=>{
+    const f=x.students.find(s=>nameKey(s.name)===key); const o=f&&f.levels&&f.levels[k];
+    return (o&&o.poss)?o.got/o.poss:null; })})).filter(r=>r.v.filter(v=>v!=null).length>=1);
+  if(lvlRows.length){
+    h+='<div class="stu-lead" style="margin-top:20px">Per svårighetsnivå</div>'+histTable(lvlRows,hs,"Nivå");
+  }
+  box.innerHTML=h;
+  sel.onchange=()=>renderStudentDetail(hs);
+}
+
 function renderHistory(){
   const listEl=$("#histList"); if(!listEl) return;
   const cls=currentClass(), course=currentCourse();
@@ -1242,6 +1402,8 @@ function renderHistory(){
   $("#histStudents").innerHTML = rows.length
     ? histTable(rows, hs, "Elev")
     : '<div class="empty">Inga elevnamn återkommer i flera prov. Kontrollera att namnen stavas likadant.</div>';
+
+  renderStudentDetail(hs);
 }
 
 /* ===== 6. EXPORT ===== */
