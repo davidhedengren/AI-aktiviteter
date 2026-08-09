@@ -122,6 +122,24 @@ button{font-family:inherit;}
 
 /* ── Controls ── */
 #controls{margin-top:14px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
+
+/* ── Maze picker ──
+   Five examples are few enough to show at once. Each button draws its own
+   maze in miniature, straight from the same grid data that is loaded on a
+   click, so the shape is visible before the choice is made. */
+.maze-picker{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.mp-lbl{font-size:.78em;letter-spacing:.04em;color:var(--dim);font-weight:600;}
+.mp-list{display:flex;gap:7px;flex-wrap:wrap;}
+.mp-item{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:5px 5px 4px;background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  cursor:pointer;transition:border-color .2s,transform .2s var(--ease-out),background .2s;}
+.mp-item:hover{border-color:var(--accent);transform:translateY(-2px);background:var(--surface2);}
+.mp-item:focus-visible{outline:2px solid var(--accent2);outline-offset:2px;}
+.mp-item[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-dim);}
+.mp-item canvas{display:block;width:74px;height:37px;border-radius:5px;image-rendering:pixelated;}
+.mp-cap{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.06em;color:var(--dim);}
+.mp-item[aria-pressed="true"] .mp-cap{color:var(--accent2);}
+@media (max-width:600px){.mp-item canvas{width:58px;height:29px;}}
 .controls-row{margin-top:8px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
 .controls-row label{font-size:.78em;letter-spacing:.04em;color:var(--dim);font-weight:600;display:flex;align-items:center;gap:6px;}
 .controls-row select{padding:7px 10px;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:12px;outline:none;transition:border-color .2s;}
@@ -158,7 +176,14 @@ button{font-family:inherit;}
 .icon-btn:disabled{opacity:.35;cursor:not-allowed;}
 .icon-btn-primary{background:linear-gradient(180deg,#5b8bff,#3f6fe6);color:#fff;border-color:transparent;box-shadow:0 2px 12px rgba(77,128,255,.38);}
 .icon-btn-primary:hover:not(:disabled){filter:brightness(1.07);color:#fff;}
-#stepCounter{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--dim);min-width:74px;letter-spacing:.02em;}
+/* A progress bar rather than "step 24 / 78". The total is the number of
+   examined cells, which is one of the measures the student is meant to
+   compare between the algorithms. The bar shows how far the search has
+   come without giving the figure away in advance. It appears in the
+   result card afterwards. */
+#stepCounter{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--dim);min-width:96px;letter-spacing:.02em;}
+#stepCounter .sc-bar{position:relative;width:52px;height:4px;border-radius:2px;background:rgba(255,255,255,.09);overflow:hidden;}
+#stepCounter .sc-fill{position:absolute;inset:0 auto 0 0;width:0;border-radius:2px;background:var(--alg);transition:width .18s linear;}
 #stepCounter b{color:var(--subtle);font-weight:600;}
 
 .btn-ghost{padding:7px 16px;background:var(--surface2);color:var(--subtle);border:1px solid var(--border);border-radius:10px;font-size:12px;cursor:pointer;transition:border-color .2s,color .2s;}
@@ -347,7 +372,7 @@ math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10p
     <span class="lang-ico" aria-hidden="true"><svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#006aa7"/><path d="M20 0v36M0 18h60" stroke="#fecc02" stroke-width="7"/></svg></span>
     Svenska</a>
   <h1>Search algorithms in a <span>maze</span></h1>
-  <p>Build your own maze and watch how BFS, DFS, Greedy best-first and A* find their way to the goal.</p>
+  <p>Choose a ready-made maze or build your own, and watch how BFS, DFS, Greedy best-first and A* find their way to the goal.</p>
 </div>
 
 <div class="page-wrap">
@@ -403,15 +428,10 @@ math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10p
 </div>
 
 <div class="controls-row">
-  <label for="predefinedSelect">Maze:</label>
-  <select id="predefinedSelect">
-    <option value="">-- Choose --</option>
-    <option value="Example 1">Example 1</option>
-    <option value="Example 2">Example 2</option>
-    <option value="Example 3">Example 3</option>
-    <option value="Example 4">Example 4</option>
-    <option value="Example 5">Example 5 (advanced)</option>
-  </select>
+  <div class="maze-picker" role="group" aria-label="Choose a maze">
+    <span class="mp-lbl">Example mazes</span>
+    <div class="mp-list" id="mazePicker"></div>
+  </div>
   <button id="saveBtn" class="btn-ghost">Save</button>
   <input type="file" id="loadInput" style="display:none;">
   <button id="loadBtn" class="btn-ghost">Load</button>
@@ -437,7 +457,7 @@ math.eq-block{display:block;text-align:center;font-size:1.18em;margin:12px 0 10p
     <h2>Search algorithms in a <span>maze</span></h2>
     <p class="sub">Four classic search algorithms work through the same maze. Follow how they spread out, square by square.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Choose a maze.</strong> Load a ready-made maze or build your own.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Choose a maze.</strong> Click one of the five examples, or build your own in edit mode.</div></div>
       <div class="step"><div class="step-num">2</div><div><strong>Choose an algorithm.</strong> The options are BFS, DFS, Greedy best-first and A*.</div></div>
       <div class="step"><div class="step-num">3</div><div><strong>Compare.</strong> Note how long a path each algorithm finds and how many cells it has to examine.</div></div>
     </div>
@@ -842,7 +862,7 @@ function updatePlayerUI(){
   play.innerHTML=isPlaying?ICON_PAUSE:ICON_PLAY;
   play.title=isPlaying?'Pausa (mellanslag)':'Spela (mellanslag)';
   play.setAttribute('aria-label',play.title);
-  counter.innerHTML=(computedFor&&n)?('step <b>'+(curStep+1)+'</b> / '+n):'';
+  counter.innerHTML=(computedFor&&n)?('step <b>'+(curStep+1)+'</b><span class="sc-bar"><span class="sc-fill" style="width:'+Math.round(((curStep+1)/n)*100)+'%"></span></span>'):'';
 }
 
 /* ═══════════════ Result card ═══════════════ */
@@ -1222,20 +1242,50 @@ const predefinedMazes={
   "Example 5":{"grid":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,1,2,2,2,2,0,1,1],[1,0,1,0,1,1,1,0,1,0,1,1,1,3,1,3,1,1,1,2,1,0,1,2,1,2,1,0,1,1],[1,0,1,0,0,0,0,0,0,0,1,0,1,3,1,3,1,0,1,2,1,0,2,2,1,2,1,0,1,1],[1,0,1,0,1,1,1,1,1,1,1,0,1,3,1,3,1,0,1,2,1,1,1,1,1,2,1,0,1,1],[1,0,1,0,0,0,0,0,0,0,0,0,1,3,3,3,1,0,1,0,0,0,0,0,1,0,1,0,1,1],[1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,2,1,2,1,0,1,1],[1,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,1,0,1,1],[1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1],[1,0,0,0,1,3,1,0,1,3,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,1,1],[1,0,1,0,1,2,1,2,1,3,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1],[1,0,0,0,1,2,2,2,1,3,0,0,1,0,1,0,0,0,1,0,1,2,1,2,2,2,2,0,1,1],[1,0,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,2,1,1,1,1,1,0,1,1],[1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,2,2,2,2,2,2,2,0,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"start":[1,1],"ends":[[9,7],[9,17],[1,21]]}
 };
 
-document.getElementById('predefinedSelect').addEventListener('change',e=>{
-  const sel=e.target.value;
-  if(sel&&predefinedMazes[sel]){
-    const m=predefinedMazes[sel];
-    grid=m.grid.map(row=>row.slice());start=[...m.start];ends=m.ends.map(x=>[...x]);
-    mazeChanged();setInfo('Predefined maze "'+sel+'" loaded.');
-    /* Examples 4 & 5 introduce cost cells */
-    if(sel==='Example 4'||sel==='Example 5'){
-      const anchor=e.target;
-      setTimeout(()=>openConceptFrom('kostnader',anchor),260);
-    }
-    e.target.value='';
+/* ── Maze picker ──
+   The thumbnail is drawn from the grid: 1 is wall, 0 is path, 3 and 2 are
+   cells with a cost. The image is exactly one pixel per cell and is scaled up
+   by CSS, so it costs almost nothing to draw. */
+const MAZE_KEYS=['Example 1','Example 2','Example 3','Example 4','Example 5'];
+const MAZE_HASCOST={'Example 4':true,'Example 5':true};
+function drawMazeThumb(cv,m){
+  const g=cv.getContext('2d');
+  cv.width=COLS;cv.height=ROWS;
+  for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
+    const v=m.grid[r][c];
+    g.fillStyle=v===1?'#232c49':v===2?'#7a5c22':v===3?'#5a4a26':'#0b0f1c';
+    g.fillRect(c,r,1,1);
   }
-});
+  g.fillStyle='#33d17a';g.fillRect(m.start[1],m.start[0],1,1);
+  g.fillStyle='#ffce54';m.ends.forEach(e=>g.fillRect(e[1],e[0],1,1));
+}
+function loadPresetMaze(key,anchor){
+  const m=predefinedMazes[key];if(!m)return;
+  grid=m.grid.map(row=>row.slice());start=[...m.start];ends=m.ends.map(x=>[...x]);
+  mazeChanged();setInfo('The maze "'+key+'" has been loaded.');
+  document.querySelectorAll('.mp-item').forEach(b=>b.setAttribute('aria-pressed',b.dataset.key===key?'true':'false'));
+  /* Examples 4 and 5 introduce cells with a cost. */
+  if(MAZE_HASCOST[key])setTimeout(()=>openConceptFrom('kostnader',anchor),260);
+}
+function buildMazePicker(){
+  const host=document.getElementById('mazePicker');if(!host)return;
+  host.innerHTML='';
+  MAZE_KEYS.forEach((key,i)=>{
+    const m=predefinedMazes[key];if(!m)return;
+    const b=document.createElement('button');
+    b.className='mp-item';b.type='button';b.dataset.key=key;
+    b.setAttribute('aria-pressed','false');
+    b.setAttribute('aria-label','Example '+(i+1)+(MAZE_HASCOST[key]?' (contains cells with a cost)':''));
+    b.title='Example '+(i+1)+(MAZE_HASCOST[key]?' · cells with a cost':'');
+    const cv=document.createElement('canvas');
+    const cap=document.createElement('span');cap.className='mp-cap';cap.textContent=String(i+1);
+    b.appendChild(cv);b.appendChild(cap);
+    b.addEventListener('click',()=>loadPresetMaze(key,b));
+    host.appendChild(b);
+    drawMazeThumb(cv,m);
+  });
+}
+buildMazePicker();
 document.getElementById('clearMazeBtn').addEventListener('click',()=>{
   ends=[];
   for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++)grid[r][c]=1;
