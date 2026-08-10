@@ -139,7 +139,7 @@
   .empty{color:var(--faint);font-size:14px;padding:20px 2px;text-align:center;border:1px dashed var(--line-strong);border-radius:12px;background:#faf8f4}
   .sub{font-family:'Inter',system-ui,sans-serif;font-size:15px;font-weight:650;letter-spacing:-.01em;text-transform:uppercase;color:var(--muted);margin:26px 0 12px} .sub:first-child{margin-top:6px}
   .summary-box{background:linear-gradient(180deg,#fbfaff,#f3f2fd);border:1px solid #ddd9f7;border-radius:14px;padding:18px 20px;font-size:16px;line-height:1.72;color:var(--ink);white-space:pre-line}
-  .btn-copy{margin-top:11px} .copied{color:var(--good)!important;border-color:var(--good)!important}
+  
   .sub-row{display:flex;align-items:center;justify-content:space-between;gap:12px} .btn-inline{font-size:12.5px;padding:7px 12px;font-weight:500}
   .gradechart{display:flex;align-items:flex-end;gap:18px;height:150px;margin-top:8px;padding:0 6px;max-width:560px}
   .gc-col{flex:1;max-width:80px;display:flex;flex-direction:column;justify-content:flex-end;height:100%;text-align:center}
@@ -341,7 +341,11 @@ h1{font-size:clamp(26px,3.4vw,36px);font-weight:500;line-height:1.12;letter-spac
 h1 .swash{font-style:italic;font-weight:400;color:var(--indigo);}
 .kicker{font-size:10.5px;letter-spacing:.2em;color:var(--faint);margin-bottom:10px;}
 .phead h2{font-size:21px;line-height:1.2;}
-.sub{font-size:17px;font-weight:500;color:var(--ink);}
+/* Underrubrikerna är satta i samma serif som panelrubrikerna, en nivå mindre.
+   Versaler och bokstavsmellanrum hör hemma i etiketter, inte i rubriker. */
+.sub{font-family:'Newsreader',Georgia,serif;font-size:19px;font-weight:500;letter-spacing:0;
+  text-transform:none;color:var(--ink);margin:30px 0 12px;padding-left:0;line-height:1.25;}
+.sub:first-child{margin-top:2px;}
 .sub::before{display:none;}
 
 header.top{padding:44px 0 26px;align-items:flex-start;}
@@ -392,7 +396,7 @@ header.top{padding:44px 0 26px;align-items:flex-start;}
   margin-top:20px;background:var(--card);}
 .panel::before{display:none;}
 :root[data-theme="dark"] .panel::before{display:none;}
-.phead{padding:22px 26px 14px;border-bottom:1px solid var(--line);align-items:baseline;}
+.phead{padding:22px 26px 15px;border-bottom:1px solid var(--line);align-items:baseline;}
 .phead h2::before{display:none;}
 .phint{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.11em;
   text-transform:uppercase;color:var(--faint);}
@@ -469,6 +473,18 @@ details.dinline:hover{border-color:var(--line-strong);}
 .workbar .btn-mini.del{border:1px solid var(--line-strong);border-radius:9px;padding:7px 10px;color:var(--faint);}
 .workbar .btn-mini.del:hover{border-color:var(--weak);color:var(--weak);}
 @media(max-width:620px){.wb-field{min-width:100%;}}
+
+/* ── Knappar som ger något ifrån sig ──
+   Regeln är att en knapp som skapar en fil eller en text du tar med dig bär
+   accentfärgen dämpad, medan en knapp som ändrar något inne i verktyget har
+   vit botten och ram. Därför skiljer sig Spara från Öppna i varje par, vilket
+   är precis där de annars är lätta att förväxla. */
+.btn-out{background:var(--indigo-soft);border:1px solid color-mix(in srgb,var(--indigo) 28%,transparent);
+  color:var(--indigo-d);box-shadow:none;}
+.btn-out:hover{background:color-mix(in srgb,var(--indigo) 16%,var(--indigo-soft));
+  border-color:var(--indigo);color:var(--indigo-d);}
+:root[data-theme="dark"] .btn-out{color:var(--ink);}
+.btn-row-out{margin:16px 0 26px;}
 
 /* ── Ledtexter vid sparande ──
    Verktyget sparar fyra olika saker på fyra ställen. Varje ställe säger med en
@@ -556,7 +572,7 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
 
   <section class="tabpanel" id="tab-build">
     <div class="panel">
-      <div class="phead"><h2>Skapa prov</h2><span class="phint">Namn och betygsgränser</span></div>
+      <div class="phead"><h2>Provets namn och betygsgränser</h2></div>
       <div class="pbody">
         <div style="max-width:360px;margin-bottom:18px"><label class="field" for="testName">Provets namn</label><input id="testName" type="text" placeholder="t.ex. Fysik: Krafter och rörelse"></div>
         <label class="field" style="margin-bottom:8px">Betygsgränser. Lämna tomt om du inte vill sätta betyg på provet.</label>
@@ -572,7 +588,7 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
       </div>
     </div>
     <div class="panel">
-      <div class="phead"><h2>Uppgifter</h2><span class="phint">Områden · svårighet · deluppgifter</span></div>
+      <div class="phead"><h2>Uppgifter</h2></div>
       <div class="pbody">
         <div style="font-size:12.5px;color:var(--faint);margin-bottom:12px">Klicka på ett område för att ändra hur stor del av uppgiften det utgör. Ett område som bara är en mindre del av uppgiften räknas lägre.</div>
         <div id="taskList"></div>
@@ -585,7 +601,7 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
       </div>
     </div>
     <div class="panel">
-      <div class="phead"><h2>Provöversikt</h2><span class="phint">Uppdateras automatiskt</span></div>
+      <div class="phead"><h2>Provöversikt</h2></div>
       <div class="pbody">
         <div class="ov-grid">
           <div class="ov-card"><div class="k">Antal uppgifter</div><div class="v" id="ovTasks">0</div></div>
@@ -598,7 +614,7 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
       </div>
     </div>
     <details class="panel collapsible">
-      <summary><h2>Provmallar</h2><span class="phint">Uppgifter och betygsgränser</span><span class="chev">▸</span></summary>
+      <summary><h2>Provmallar</h2><span class="chev">▸</span></summary>
       <div class="pbody">
         <div class="save-lead">En provmall innehåller uppgifterna, områdena och betygsgränserna. Spara den när du vill återanvända provet eller dela det med en kollega.</div>
         <label class="field" style="margin-top:18px">Provmallar i den här webbläsaren</label>
@@ -612,7 +628,7 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
         <div id="libEmpty" class="empty" style="margin-top:12px">Inga provmallar än. Bygg ett prov ovan, ge det ett namn och tryck på "Spara som provmall".</div>
         <label class="field" style="margin-top:20px">Provmall som fil</label>
         <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-          <button class="btn-ghost" id="saveTest">Spara provmall till fil</button>
+          <button class="btn btn-out" id="saveTest">Spara provmall till fil</button>
           <button class="btn-ghost" id="loadTest">Öppna provmall från fil</button>
           <input id="fileInput" type="file" accept="application/json,.json" class="hidden">
         </div>
@@ -622,7 +638,7 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
 
   <section class="tabpanel hidden" id="tab-results">
     <div class="panel">
-      <div class="phead"><h2>Elevernas resultat</h2><span class="phint">Poäng per uppgift</span></div>
+      <div class="phead"><h2>Elevernas poäng</h2></div>
       <div class="pbody">
         <div class="btn-row" style="margin-top:0">
           <button class="btn-ghost" id="addStudent">+ Lägg till elev</button>
@@ -639,7 +655,7 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
           <label class="field">Provresultat</label>
           <div class="save-lead">Provet och elevernas poäng i en fil. Din kopia av arbetet, att öppna igen när som helst.</div>
           <div class="btn-row" style="margin-top:12px">
-            <button class="btn-ghost" id="exportAll">Spara provresultat</button>
+            <button class="btn btn-out" id="exportAll">Spara provresultat</button>
             <button class="btn-ghost" id="importAll">Öppna provresultat</button>
             <input id="importAllInput" type="file" accept="application/json,.json" class="hidden">
           </div>
@@ -650,17 +666,13 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
 
   <section class="tabpanel hidden" id="tab-analyze">
     <div class="panel">
-      <div class="phead"><h2>Analys</h2><span class="phint">Områden, svårighet, betyg och feedback</span></div>
+      <div class="phead"><h2>Analys</h2></div>
       <div class="pbody">
-        <div class="btn-row" style="margin-top:0">
-          <button class="btn-ghost" id="exportBtn">Exportera till Excel</button>
-          <button class="btn-ghost" id="printBtn">Skriv ut eller spara som PDF</button>
-        </div>
-        <div id="analysisEmpty" class="empty" style="margin-top:16px">Fyll i uppgifter och elevresultat så visas analysen här automatiskt.</div>
+        <div id="analysisEmpty" class="empty" style="margin-top:0">Fyll i uppgifter och elevresultat så visas analysen här automatiskt.</div>
         <div id="analysis" class="hidden">
-          <div class="sub">Sammanfattning · klassen</div>
+          <div class="sub">Sammanfattning</div>
           <div id="classText" class="summary-box"></div>
-          <button class="btn-ghost btn-copy" data-copy="#classText">Kopiera texten</button>
+          
           <div class="sub" id="gradeChartHead">Betygsfördelning</div>
           <div id="gradeChart" class="gradechart"></div>
           <div id="gradeChartEmpty" class="empty hidden">Fyll i gränserna för E, C och A i fliken Skapa prov för att räkna betyg.</div>
@@ -673,12 +685,17 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
               <span><i class="swatch" style="background:var(--weak-bg);border:1px solid var(--weak)"></i>under 40 %</span>
             </div>
           </div>
+          <div class="btn-row btn-row-out">
+            <button class="btn btn-out" id="exportBtn">Exportera till Excel</button>
+            <button class="btn btn-out" id="printBtn">Skriv ut eller spara som PDF</button>
+          </div>
           <details class="dinline"><summary>Klassens resultat per område<span class="chev">▸</span></summary><div class="dbody"><div id="detArea"></div></div></details>
           <details class="dinline"><summary>Klassens resultat per uppgift<span class="chev">▸</span></summary><div class="dbody"><div id="detTask"></div></div></details>
           <details class="dinline" id="detLevelWrap"><summary>Klassens resultat per svårighetsnivå<span class="chev">▸</span></summary><div class="dbody"><div id="detLevel"></div></div></details>
           <details class="dinline"><summary>Resultatspridning<span class="chev">▸</span></summary><div class="dbody"><div id="detSpread"></div></div></details>
-          <div class="sub sub-row"><span>Per elev</span><button class="btn-ghost btn-inline" id="copyStudents">Kopiera alla elevtexter</button></div>
+          <div class="sub">Per elev</div>
           <div id="cards" class="cards"></div>
+          <div class="btn-row btn-row-out"><button class="btn btn-out" id="copyStudents">Kopiera alla elevtexter</button></div>
         </div>
       </div>
     </div>
@@ -686,12 +703,12 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
 
   <section class="tabpanel hidden" id="tab-history">
     <div class="panel">
-      <div class="phead"><h2 id="histHead">Klassens prov</h2><span class="phint">Alla prov i kursen</span></div>
+      <div class="phead"><h2 id="histHead">Klassens prov</h2></div>
       <div class="pbody">
         <div class="save-lead" style="margin-top:0">Varje prov du skapar ligger kvar här med sina uppgifter och elevresultat.</div>
         <div id="histList"></div>
         <div class="btn-row">
-          <button class="btn-ghost" id="grpExport">Spara klassen till fil</button>
+          <button class="btn btn-out" id="grpExport">Spara klassen till fil</button>
           <button class="btn-ghost" id="grpImport">Öppna klass från fil</button>
           <input id="grpFile" type="file" accept="application/json,.json" class="hidden">
           <button class="btn-ghost" id="grpRename">Byt namn på klassen</button>
@@ -702,23 +719,23 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
     </div>
 
     <div class="panel" id="histPanels">
-      <div class="phead"><h2>Utveckling över tid</h2><span class="phint">Klassen · områden · elever</span></div>
+      <div class="phead"><h2>Utveckling över tid</h2></div>
       <div class="pbody">
         <div id="histEmpty" class="empty">Skapa minst två prov i den här klassen så visas utvecklingen här.</div>
         <div id="histBody" class="hidden">
           <div class="sub">Sammanfattning</div>
           <div id="histText" class="summary-box"></div>
-          <button class="btn-ghost btn-copy" data-copy="#histText">Kopiera texten</button>
-          <div class="sub">Klassens snitt</div>
+          
+          <div class="sub">Klassens snitt per prov</div>
           <div id="histTrend" class="trendcard"></div>
           <div class="sub">Betygsfördelning per prov</div>
           <div id="histGrades" class="gradestack"></div>
           <details class="dinline" open><summary>Områden över tid<span class="chev">▸</span></summary><div class="dbody"><div id="histAreas"></div></div></details>
           <details class="dinline"><summary>Elevernas utveckling<span class="chev">▸</span></summary><div class="dbody"><div id="histStudents"></div></div></details>
-          <div class="sub">En elev i taget</div>
+          <div class="sub">Enskild elev</div>
           <div class="stu-pick">
             <div style="flex:1;min-width:200px"><label class="field" for="histStudent">Elev</label><select id="histStudent"></select></div>
-            <button class="btn-ghost btn-copy" data-copy="#histStuText">Kopiera texten</button>
+            
           </div>
           <div id="histStuBody"></div>
         </div>
@@ -1758,8 +1775,7 @@ function wire(){
   $("#exportAll").addEventListener("click",exportAllFile);
   $("#importAll").addEventListener("click",()=>$("#importAllInput").click());
   $("#importAllInput").addEventListener("change",e=>{ if(e.target.files[0]) importAllFile(e.target.files[0]); e.target.value=""; });
-  document.addEventListener("click",e=>{ const b=e.target.closest(".btn-copy"); if(!b) return; const el=document.querySelector(b.dataset.copy); if(el) copyText(el.textContent,b); });
-  $("#themeToggle").addEventListener("click",()=>applyTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark"));
+    $("#themeToggle").addEventListener("click",()=>applyTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark"));
 }
 function init(){
   const fresh=loadWork();
