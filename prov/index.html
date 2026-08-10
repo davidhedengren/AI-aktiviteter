@@ -299,10 +299,13 @@
    ordning, resultatskalan betyder bra eller dåligt.
    ══════════════════════════════════════════════════════════════════════ */
 :root{
-  --bg:#F1F0EC; --bg-2:#EAE9E4;
-  --ink:#14161B; --muted:#5C6068; --faint:#8B8F98;
-  --line:#E4E2DC; --line-strong:#CFCCC4;
-  --card:#FFFFFF; --card-2:#FAF9F6;
+  /* Fyra papperstoner i stigande ljus: duk, panel, ruta i panel och till sist
+     vitt. Rent vitt är reserverat för fält man kan skriva i, så att blicken
+     hittar dem utan att de behöver ram eller färg. */
+  --bg:#EBEAE4; --bg-2:#E3E2DB;
+  --ink:#14161B; --muted:#585C64; --faint:#888C95;
+  --line:#DEDCD4; --line-strong:#C7C4BA;
+  --card:#F9F8F4; --card-2:#F2F1EB;
   --indigo:#25397A; --indigo-d:#1A2B60; --indigo-soft:#ECEFF7;
   --coral:#B4541F;
   --good:#1D7A55; --good-bg:#E4F0E9;
@@ -416,7 +419,7 @@ details.collapsible[open]>summary{border-bottom:1px solid var(--line);}
 .btn-danger:hover{background:var(--weak-bg);border-color:var(--weak);}
 
 /* ── Fält ── */
-input,select,textarea{border-radius:10px;padding:10px 12px;background:var(--card);
+input,select,textarea{border-radius:10px;padding:10px 12px;background:#fff;
   border:1px solid var(--line-strong);transition:border-color .16s,box-shadow .16s;}
 input:focus,select:focus,textarea:focus{border-color:var(--indigo);
   box-shadow:0 0 0 3px color-mix(in srgb,var(--indigo) 16%,transparent);outline:none;}
@@ -433,7 +436,7 @@ label.field{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spaci
 :root[data-theme="dark"] .ov-card .v{color:var(--ink);}
 
 /* ── Sammanfattning, värmekarta och elevkort ── */
-.summary-box{background:var(--card-2);border:1px solid var(--line);border-left:2px solid var(--indigo);
+.summary-box{background:#fff;border:1px solid var(--line);border-left:2px solid var(--indigo);
   border-radius:12px;font-size:16px;line-height:1.75;}
 :root[data-theme="dark"] .summary-box{background:var(--card-2);border-color:var(--line);
   border-left-color:var(--indigo);}
