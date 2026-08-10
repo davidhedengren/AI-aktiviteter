@@ -1064,17 +1064,17 @@ function feedbackNote(s,thr){
   const out=[];
 
   if(weak.length>=MANY_WEAK){
-    out.push("Poängen faller brett över provet, så det handlar mindre om ett enskilt område än om grunderna.");
+    out.push("Du missar poäng på flera områden, så det handlar mindre om ett enskilt område än om grunderna.");
     out.push(basicsWeak
       ? "Börja med de enklaste uppgifterna inom varje område och bygg vidare därifrån."
       : "Gå igenom de områden som ligger lägst ett i taget, och börja med de enklaste uppgifterna i vart och ett.");
   } else if(weak.length){
     const d0=weakDescriptor(s,weak[0].a,thr);
     if(weak.length===1){
-      out.push("Det som ger mest är "+d0.long+", där du missade "+fmt(d0.poss-d0.got)+" av "+fmt(d0.poss)+" p.");
+      out.push("Det du behöver träna mest på är "+d0.long+", där du missade "+fmt(d0.poss-d0.got)+" av "+fmt(d0.poss)+" p.");
     } else {
-      out.push("Störst utrymme finns i "+joinSv(weak.map(x=>weakDescriptor(s,x.a,thr).long))+".");
-      out.push("Börja med "+d0.long+", där du missade flest poäng.");
+      out.push("Det du behöver träna mest på är "+joinSv(weak.map(x=>weakDescriptor(s,x.a,thr).long))+".");
+      out.push("Börja med det förstnämnda, där du missade flest poäng.");
     }
   } else {
     out.push("Inget område ligger under gränsen.");
@@ -1082,13 +1082,13 @@ function feedbackNote(s,thr){
 
   if(gp!=null&&ap!=null){
     if(basicsWeak){
-      if(weak.length<MANY_WEAK) out.push("De grundläggande uppgifterna behöver befästas först, eftersom de bär allt annat.");
+      if(weak.length<MANY_WEAK) out.push("Börja med de grundläggande uppgifterna, eftersom de bär allt annat.");
     } else if(gp>=0.7&&ap<0.5){
       out.push("Grunderna sitter. Nästa steg är uppgifter där flera moment ska kombineras.");
     } else if(ap>=0.7){
-      out.push(weak.length ? "De svårare uppgifterna hanteras däremot väl." : "Även de svårare uppgifterna hanteras väl.");
+      out.push(weak.length ? "De svårare uppgifterna klarar du däremot bra." : "Du klarar även de svårare uppgifterna bra.");
     } else if(mp!=null&&mp<0.5&&gp>=0.6){
-      out.push("Steget från de enklaste till de medelsvåra uppgifterna är det som skaver mest just nu.");
+      out.push("Det är steget från de enklaste till de medelsvåra uppgifterna som är svårast för dig just nu.");
     }
   }
   return out.join(" ");
