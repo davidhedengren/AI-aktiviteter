@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Davids prov- och resultatanalyserare</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2325397A'/%3E%3Cpath d='M9 8h11l4 4v12a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z' fill='%23fff'/%3E%3Cpath d='M20 8v4h4' fill='%23C9D2EA'/%3E%3Cpath d='M11 15h6M11 18h5' stroke='%2325397A' stroke-width='1.6' stroke-linecap='round' opacity='.45'/%3E%3Cpath d='M12.5 21.5l2.4 2.4 6-6.4' fill='none' stroke='%231D7A55' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%233250A6'/%3E%3Cstop offset='1' stop-color='%231C2C63'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23b)'/%3E%3Cpath d='M7 24.5h11' stroke='%23FFFFFF' stroke-width='3' stroke-linecap='round' opacity='.42'/%3E%3Cpath d='M6.5 15.5l6 6L25.5 7.5' fill='none' stroke='%23FFFFFF' stroke-width='4.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
@@ -1043,16 +1043,55 @@ function classLevelStats(){ const act=activeStudents(); return levelStatsFor(t=>
 function gradeDistribution(){ const d={A:0,B:0,C:0,D:0,E:0,F:0}; activeStudents().forEach(s=>{ const g=gradeFor(studentTotals(s).pts); if(g) d[g]++; }); return d; }
 /* Enbart slutsatsen. Poängen per nivå står redan som en egen rad i
    sammanfattningen, så att upprepa dem i löptext gör bara stycket längre. */
-function difficultyNarrative(s){
-  const ls=studentLevelStats(s), present=["grund","medel","avancerat"].filter(k=>ls[k].poss>0);
-  if(present.length<2) return "";
+/* En avslutande text för varje elev, oavsett resultat. Den byggs av två delar.
+
+   Först bredden: ett svagt område pekas ut med namn, två eller tre räknas upp,
+   men från fyra och uppåt räknas de inte upp alls. Då är det inte ett område som
+   fattas utan grunderna, och en uppräkning av halva provet hjälper ingen.
+
+   Sedan nivån: sitter grunderna eller inte, och vad är i så fall nästa steg.
+   De två delarna vägs mot varandra så att samma sak inte sägs två gånger. */
+const MANY_WEAK = 4;
+function feedbackNote(s,thr){
+  const areas=usedAreas().filter(a=>areaTaskCount(a)>=UNDERLAG);
+  const weak=areas.map(a=>({a,p:studentAreaPct(s,a)})).filter(x=>x.p<thr)
+    .sort((x,y)=>areaLost(s,y.a)-areaLost(s,x.a));
+  const ls=studentLevelStats(s);
   const gp=ls.grund.poss?ls.grund.got/ls.grund.poss:null;
   const ap=ls.avancerat.poss?ls.avancerat.got/ls.avancerat.poss:null;
-  if(gp==null||ap==null) return "";
-  if(gp<0.5) return "De grundläggande momenten behöver befästas först, eftersom de bär allt annat.";
-  if(gp>=0.7&&ap<0.5) return "Grunderna sitter. Nästa steg är uppgifter där flera moment ska kombineras.";
-  if(ap>=0.7) return "Även de svårare uppgifterna hanteras väl.";
-  return "";
+  const mp=ls.medel.poss?ls.medel.got/ls.medel.poss:null;
+  const basicsWeak = gp!=null && gp<0.6;
+  const out=[];
+
+  if(weak.length>=MANY_WEAK){
+    out.push("Poängen faller brett över provet, så det handlar mindre om ett enskilt område än om grunderna.");
+    out.push(basicsWeak
+      ? "Börja med de enklaste uppgifterna inom varje område och bygg vidare därifrån."
+      : "Gå igenom de områden som ligger lägst ett i taget, och börja med de enklaste uppgifterna i vart och ett.");
+  } else if(weak.length){
+    const d0=weakDescriptor(s,weak[0].a,thr);
+    if(weak.length===1){
+      out.push("Det som ger mest är "+d0.long+", där "+fmt(d0.poss-d0.got)+" av "+fmt(d0.poss)+" p gick förlorade.");
+    } else {
+      out.push("Störst utrymme finns i "+joinSv(weak.map(x=>weakDescriptor(s,x.a,thr).long))+".");
+      out.push("Börja med "+d0.long+", där flest poäng gick förlorade.");
+    }
+  } else {
+    out.push("Inget område ligger under gränsen.");
+  }
+
+  if(gp!=null&&ap!=null){
+    if(basicsWeak){
+      if(weak.length<MANY_WEAK) out.push("De grundläggande uppgifterna behöver befästas först, eftersom de bär allt annat.");
+    } else if(gp>=0.7&&ap<0.5){
+      out.push("Grunderna sitter. Nästa steg är uppgifter där flera moment ska kombineras.");
+    } else if(ap>=0.7){
+      out.push(weak.length ? "De svårare uppgifterna hanteras däremot väl." : "Även de svårare uppgifterna hanteras väl.");
+    } else if(mp!=null&&mp<0.5&&gp>=0.6){
+      out.push("Steget från de enklaste till de medelsvåra uppgifterna är det som skaver mest just nu.");
+    }
+  }
+  return out.join(" ");
 }
 function weakDescriptor(s,area,thr){
   const inArea=validTasks().filter(t=>taskAreas(t).includes(area));
@@ -1164,7 +1203,7 @@ function studentSummary(s,thr){
   if(bl) rows.push({k:"Nära nästa betyg", v:fmt(bl.diff)+" p från "+bl.letter});
 
   const parts=[];
-  const dn=difficultyNarrative(s); if(dn) parts.push(dn);
+  const fb=feedbackNote(s,thr); if(fb) parts.push(fb);
   if(s.comment&&s.comment.trim()) parts.push(s.comment.trim());
   return {rows:rows, note:parts.join(" ")};
 }
