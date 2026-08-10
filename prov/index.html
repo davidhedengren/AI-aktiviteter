@@ -856,6 +856,7 @@ function openGroup(gid){
   const t=groupTests(gid)[0];
   if(t) openTest(t.id);
   else { work.curTid=null; state=defaultState(); saveWork(); renderAll(); renderWorkbar(); }
+  renderHistoryIfOpen();
 }
 async function newGroup(){
   const r=await askGroup("Ny klass och kurs","",""); if(!r) return;
@@ -1059,7 +1060,13 @@ function studentSummary(s,thr){
 }
 
 /* ===== 5. RENDERING ===== */
-function renderAll(){ reflectInputs(); renderAreaPool(); renderTasks(); renderOverview(); renderGradeScale(); renderGrid(); renderAnalysis(); renderPipeline(); }
+function renderAll(){ reflectInputs(); renderAreaPool(); renderTasks(); renderOverview(); renderGradeScale(); renderGrid(); renderAnalysis(); renderPipeline(); renderHistoryIfOpen(); }
+/* Jämförelsen räknas fram ur alla klassens prov och ritas därför bara om när
+   fliken faktiskt syns. Byter man klass medan man står i den ska den följa med. */
+function renderHistoryIfOpen(){
+  const el=document.getElementById("tab-history");
+  if(el && !el.classList.contains("hidden")) renderHistory();
+}
 function reflectInputs(){ $("#testName").value=state.testName||""; $("#gE").value=state.grades.e||""; $("#gD").value=state.grades.d||""; $("#gC").value=state.grades.c||""; $("#gB").value=state.grades.b||""; $("#gA").value=state.grades.a||""; }
 function renderAreaPool(){ $("#areaPool").innerHTML=state.areas.map(a=>`<option value="${esc(a)}">`).join(""); }
 
