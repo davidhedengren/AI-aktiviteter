@@ -657,7 +657,7 @@ const ICON_CHART='<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" 
 const ICON_SUM='<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M18 4H6l6.5 8L6 20h12"/></svg>';
 const ICON_ACT='<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" style="vertical-align:-2px"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg>';
 const CALCVARS=[{key:'a',name:'Input A',desc:'',unit:'',min:0,max:10,def:70,weight:0,isCalc:true},{key:'b',name:'Input B',desc:'',unit:'',min:0,max:10,def:40,weight:0,isCalc:true}];
-const ALLVARS=[{key:'study',name:'Study hours',desc:'before the exam',unit:'h',min:0,max:20,def:65,weight:0.40,realStep:0.5},{key:'attend',name:'Attendance',desc:'of classes',unit:'%',min:0,max:100,def:80,weight:0.42,realStep:5},{key:'sleep',name:'Sleep',desc:'the night before',unit:'h',min:0,max:10,def:60,weight:0.12,realStep:0.5},{key:'food',name:'Breakfast',desc:'on exam day',unit:'kcal',min:0,max:800,def:50,weight:0.06,realStep:50}];
+const ALLVARS=[{key:'study',name:'Study hours',desc:'before the exam',unit:'h',min:0,max:20,def:65,weight:0.30,realStep:0.5},{key:'attend',name:'Attendance',desc:'of classes',unit:'%',min:0,max:100,def:80,weight:0.60,realStep:5},{key:'sleep',name:'Sleep',desc:'the night before',unit:'h',min:0,max:10,def:60,weight:0.12,realStep:0.5},{key:'food',name:'Breakfast',desc:'on exam day',unit:'kcal',min:0,max:800,def:50,weight:0.06,realStep:50}];
 const GYMVARS=[{key:'sleep',name:'Sleep',desc:'last night',unit:'h',min:0,max:12,def:58,weight:0,realStep:1},{key:'length',name:'Session length',desc:'minutes',unit:'min',min:0,max:120,def:50,weight:0,realStep:10},{key:'stress',name:'Stress level',desc:'scale 1 to 10',unit:'',min:1,max:10,def:33,weight:0,realStep:1},{key:'rest',name:'Rest since last session',desc:'days',unit:'d',min:0,max:7,def:43,weight:0,realStep:1}];
 const ABSVARS=[{key:'x1',name:'x₁',desc:'',unit:'',min:0,max:1,def:50,weight:0.5},{key:'x2',name:'x₂',desc:'',unit:'',min:0,max:1,def:30,weight:0.3},{key:'x3',name:'x₃',desc:'',unit:'',min:0,max:1,def:70,weight:0.15},{key:'x4',name:'x₄',desc:'',unit:'',min:0,max:1,def:20,weight:0.05}];
 const CALC_GLYPH='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="4" y="2.5" width="16" height="19" rx="3.2"/><path d="M8 7h8"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></svg>';
@@ -761,11 +761,18 @@ const GYMSCORE=(function(){
 })();
 function gymVarScore(key,norm){const f=GYMSCORE[key];return f?f(norm):0.5;}
 function gymScore(vs){const av=activeVars();let worst=1;for(let i=0;i<vs.length;i++){const s=gymVarScore(av[i].key,vs[i]);if(s<worst)worst=s;}return worst;}
-function examScore(vs){const av=activeVars();let s=0,tw=0;for(let i=0;i<vs.length;i++){s+=vs[i]*av[i].weight;tw+=av[i].weight;}let score=s/tw;if(curSc==='exam'){const sIdx=av.findIndex(v=>v.key==='sleep');if(sIdx>=0&&vs[sIdx]<0.5){score-=(0.5-vs[sIdx])*1.5;}const aIdx=av.findIndex(v=>v.key==='attend');if(aIdx>=0){const a=vs[aIdx];/* Below 70 per cent attendance no amount of studying helps. The condition is sharp and
-   requires the network to combine two variables rather than merely weigh them. */
-if(a<0.70)score-=0.55+(0.70-a)*0.6;}}return score;}
-function targetFn(vs){if(isCalc())return 0;if(curSc==='gym')return gymScore(vs)>0.5?1:0;return examScore(vs)>0.48?1:0;}
-function targetFnNoisy(vs){if(isCalc())return 0;if(curSc==='gym')return gymScore(vs)>0.5?1:0;const noise=(Math.random()-0.5)*0.08;return(examScore(vs)+noise)>0.48?1:0;}
+function examScore(vs){const av=activeVars();let s=0,tw=0;for(let i=0;i<vs.length;i++){s+=vs[i]*av[i].weight;tw+=av[i].weight;}let score=s/tw;if(curSc==='exam'){const sIdx=av.findIndex(v=>v.key==='sleep');if(sIdx>=0&&vs[sIdx]<0.5){score-=(0.5-vs[sIdx])*1.5;}const aIdx=av.findIndex(v=>v.key==='attend');if(aIdx>=0){const a=vs[aIdx];
+/* Attendance and studying make up for each other evenly: ten percentage
+   points less attendance calls for about four more hours of study. At full
+   attendance almost no studying is needed, at half attendance almost the
+   maximum. Below 50 per cent attendance no amount of studying helps. */
+if(a<0.50)score-=0.60+(0.50-a)*0.6;}}return score;}
+/* The pass mark belongs together with the weights. Experiment mode has its
+   own weights and keeps its old threshold. */
+const EXAM_THR=0.6556;
+function examThr(){return curSc==='exam'?EXAM_THR:0.48;}
+function targetFn(vs){if(isCalc())return 0;if(curSc==='gym')return gymScore(vs)>0.5?1:0;return examScore(vs)>examThr()?1:0;}
+function targetFnNoisy(vs){if(isCalc())return 0;if(curSc==='gym')return gymScore(vs)>0.5?1:0;const noise=(Math.random()-0.5)*0.08;return(examScore(vs)+noise)>examThr()?1:0;}
 function targetLabel(vs){if(isCalc())return '–';return targetFn(vs)===1?'Yes':'No';}
 function initCalcWeights(){W=[[[2,1],[1,-2],[1,-1]],[[2,-1,1]]];B=[[0,0,0],[-1]];}
 function initW(){if(isCalc()){initCalcWeights();return;}W=[];B=[];for(let l=1;l<layers.length;l++){const w=[],b=[];for(let j=0;j<layers[l];j++){const r=[];for(let i=0;i<layers[l-1];i++)r.push(Math.round((Math.random()*2-1)*100)/100);w.push(r);b.push(Math.round((Math.random()*0.4-0.2)*100)/100);}W.push(w);B.push(b);}wDeltas=[];for(let l=0;l<W.length;l++){const d=[];for(let j=0;j<W[l].length;j++){const r=[];for(let i=0;i<W[l][j].length;i++)r.push(0);d.push(r);}wDeltas.push(d);}}
