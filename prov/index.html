@@ -1071,10 +1071,10 @@ function feedbackNote(s,thr){
   } else if(weak.length){
     const d0=weakDescriptor(s,weak[0].a,thr);
     if(weak.length===1){
-      out.push("Det som ger mest är "+d0.long+", där "+fmt(d0.poss-d0.got)+" av "+fmt(d0.poss)+" p gick förlorade.");
+      out.push("Det som ger mest är "+d0.long+", där du missade "+fmt(d0.poss-d0.got)+" av "+fmt(d0.poss)+" p.");
     } else {
       out.push("Störst utrymme finns i "+joinSv(weak.map(x=>weakDescriptor(s,x.a,thr).long))+".");
-      out.push("Börja med "+d0.long+", där flest poäng gick förlorade.");
+      out.push("Börja med "+d0.long+", där du missade flest poäng.");
     }
   } else {
     out.push("Inget område ligger under gränsen.");
