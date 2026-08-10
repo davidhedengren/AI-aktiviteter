@@ -494,6 +494,9 @@ details.dinline:hover{border-color:var(--line-strong);}
 .hist-note{font-size:12.5px;color:var(--faint);margin-top:10px;}
 .hist-row{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--line);
   border-radius:11px;margin-top:9px;background:var(--card-2);}
+#groupModal .modal-msg{font-family:'Newsreader',Georgia,serif;font-size:20px;font-weight:500;margin-bottom:4px;}
+#groupModal input{width:100%;}
+#groupModal .modal-btns{margin-top:20px;}
 .hist-row.is-cur{border-color:var(--indigo);background:var(--indigo-soft);}
 .hist-row .hn{font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .hist-row .hd,.hist-row .hv{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--faint);flex:none;}
@@ -544,10 +547,10 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
   <div class="workbar">
     <div class="wb-field"><label class="field" for="groupSel">Klass och kurs</label>
       <div class="wb-row"><select id="groupSel" aria-label="Välj klass och kurs"></select>
-      <button class="btn-ghost btn-sm" id="newGroup" title="Lägg till en klass">+ Klass</button></div></div>
+      <button class="btn-ghost btn-sm" id="newGroup" title="Lägg till en klass och kurs">+ Klass och kurs</button></div></div>
     <div class="wb-field"><label class="field" for="testSel">Prov</label>
       <div class="wb-row"><select id="testSel" aria-label="Välj prov"></select>
-      <button class="btn-ghost btn-sm" id="newTest" title="Lägg till ett prov">+ Prov</button>
+      <button class="btn-ghost btn-sm" id="newTest" title="Lägg till ett prov i klassen">+ Prov</button>
       <button class="btn-mini del" id="removeTest" title="Ta bort provet">✕</button></div></div>
   </div>
 
@@ -727,6 +730,12 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
 <datalist id="areaPool"></datalist>
 <div id="printArea"></div>
 <div id="modal" class="modal hidden"><div class="modal-box"><div class="modal-msg" id="modalMsg"></div><div class="modal-btns"><button class="btn-ghost" id="modalCancel">Avbryt</button><button class="btn-danger" id="modalOk">Bekräfta</button></div></div></div>
+<div id="groupModal" class="modal hidden"><div class="modal-box">
+  <div class="modal-msg" id="groupModalTitle">Ny klass och kurs</div>
+  <div style="margin:14px 0 4px"><label class="field" for="gmCls">Klass</label><input id="gmCls" type="text" placeholder="t.ex. NA21B" autocomplete="off"></div>
+  <div style="margin:12px 0 4px"><label class="field" for="gmCourse">Kurs</label><input id="gmCourse" type="text" placeholder="t.ex. Fysik 1" autocomplete="off"></div>
+  <div class="modal-btns"><button class="btn-ghost" id="gmCancel">Avbryt</button><button class="btn" id="gmOk">Spara</button></div>
+</div></div>
 
 <script>
 "use strict";
@@ -782,7 +791,7 @@ function loadWork(){
   try{ cls=localStorage.getItem("pa_cls_v1")||""; course=localStorage.getItem("pa_course_v1")||""; }catch(e){}
   let hist=[]; try{ hist=JSON.parse(localStorage.getItem("pa_hist_v1"))||[]; }catch(e){}
   const gidFor=(c,k)=>{
-    c=(c||"Klass").trim(); k=(k||"").trim();
+    c=(c||"Namnlös klass").trim(); k=(k||"").trim();
     let g=work.groups.find(x=>x.cls.toLowerCase()===c.toLowerCase()&&x.course.toLowerCase()===k.toLowerCase());
     if(!g){ g={id:newId("g"),cls:c,course:k}; work.groups.push(g); }
     return g.id;
@@ -797,7 +806,7 @@ function loadWork(){
     const gid=gidFor(cls,course);
     work.tests.push({id:newId("t"),gid,savedAt:Date.now(),updatedAt:Date.now(),state:normalizeState(stored)});
   }
-  if(!work.groups.length) work.groups.push({id:newId("g"),cls:(cls||"Klass"),course:course});
+  if(!work.groups.length) work.groups.push({id:newId("g"),cls:(cls||"Namnlös klass"),course:course});
   work.curGid=work.groups[0].id;
   const first=groupTests(work.curGid)[0];
   work.curTid=first?first.id:null;
@@ -849,19 +858,16 @@ function openGroup(gid){
   else { work.curTid=null; state=defaultState(); saveWork(); renderAll(); renderWorkbar(); }
 }
 async function newGroup(){
-  const cls=prompt("Klass, till exempel NA21B"); if(cls===null) return;
-  const course=prompt("Kurs, till exempel Fysik 1"); if(course===null) return;
-  if(!cls.trim()){ alert("Klassen behöver ett namn."); return; }
-  const g={id:newId("g"),cls:cls.trim(),course:course.trim()};
+  const r=await askGroup("Ny klass och kurs","",""); if(!r) return;
+  const g={id:newId("g"),cls:r.cls,course:r.course};
   work.groups.push(g); saveWork(); openGroup(g.id);
   createTest(g.id,null,"");
   switchTab("build");
 }
 async function renameGroup(){
   const g=curGroup(); if(!g) return;
-  const cls=prompt("Klass",g.cls); if(cls===null) return;
-  const course=prompt("Kurs",g.course); if(course===null) return;
-  g.cls=cls.trim()||g.cls; g.course=course.trim();
+  const r=await askGroup("Byt namn",g.cls,g.course); if(!r) return;
+  g.cls=r.cls; g.course=r.course;
   saveWork(); renderWorkbar(); renderHistory();
 }
 async function removeGroup(){
@@ -871,7 +877,7 @@ async function removeGroup(){
   work.tests=work.tests.filter(t=>t.gid!==g.id);
   work.legacy=(work.legacy||[]).filter(h=>h.gid!==g.id);
   work.groups=work.groups.filter(x=>x.id!==g.id);
-  if(!work.groups.length) work.groups.push({id:newId("g"),cls:"Klass",course:""});
+  if(!work.groups.length) work.groups.push({id:newId("g"),cls:"Namnlös klass",course:""});
   openGroup(work.groups[0].id);
 }
 
@@ -892,7 +898,7 @@ function importGroupFile(ev){
   r.onload=async()=>{
     let d; try{ d=JSON.parse(r.result); }catch(e){ alert("Filen kunde inte läsas."); ev.target.value=""; return; }
     if(!d||!d.group||!Array.isArray(d.tests)){ alert("Filen innehåller ingen klass. Välj en fil som sparats med \"Spara klassen till fil\"."); ev.target.value=""; return; }
-    const cls=(d.group.cls||"Klass").trim(), course=(d.group.course||"").trim();
+    const cls=(d.group.cls||"Namnlös klass").trim(), course=(d.group.course||"").trim();
     let g=work.groups.find(x=>x.cls.toLowerCase()===cls.toLowerCase()&&x.course.toLowerCase()===course.toLowerCase());
     if(g && !(await askConfirm(esc(cls)+(course?" i "+esc(course):"")+" finns redan. Lägga till filens prov i den?","Lägg till"))){ ev.target.value=""; return; }
     if(!g){ g={id:newId("g"),cls,course}; work.groups.push(g); }
@@ -1524,7 +1530,7 @@ function renderHistory(){
       + legacy.slice().reverse().map(h=>`<div class="hist-row"><span class="hn">${esc(h.name)}</span>`
           +`<span class="hv">endast sammanfattning</span>`
           +`<span class="hd">${new Date(h.savedAt||Date.now()).toLocaleDateString("sv-SE")}</span></div>`).join("")
-    : `<div class="empty" style="margin-top:12px">Inga prov i ${esc(groupLabel(g)||"klassen")} än. Lägg till ett med knappen + Prov högst upp.</div>`;
+    : `<div class="empty" style="margin-top:12px">Inga prov i ${esc(groupLabel(g)||"klassen")} än. Lägg till ett med knappen "+ Prov" högst upp.</div>`;
   listEl.querySelectorAll("[data-hdel]").forEach(b=>b.onclick=()=>removeTest(b.dataset.hdel));
   listEl.querySelectorAll("[data-hopen]").forEach(b=>b.onclick=()=>{ openTest(b.dataset.hopen); switchTab("analyze"); });
 
@@ -1690,6 +1696,23 @@ function addTask(){ state.tasks.push({id:nextId++,areas:[],level:null,weights:{}
 function addStudent(){ state.students.push({id:nextStudentId++,name:"",scores:{},absent:false,comment:""}); renderGrid(); renderAnalysis(); save(); }
 function addStudentsBulk(text){ const names=text.split(/\r?\n/).map(line=>line.split(/\t|;/).map(c=>c.trim()).filter(Boolean).join(" ").trim()).filter(Boolean); if(!names.length){ alert("Klistra in minst ett namn."); return; }
   names.forEach(n=>state.students.push({id:nextStudentId++,name:n,scores:{},absent:false,comment:""})); $("#pasteArea").value=""; $("#pasteBox").classList.add("hidden"); renderGrid(); renderAnalysis(); save(); }
+/* Klass och kurs frågas i en egen ruta i stället för två webbläsarrutor efter
+   varandra. Rutan används både när en klass läggs till och när den byter namn. */
+function askGroup(title,cls,course){
+  return new Promise(res=>{
+    const m=$("#groupModal"),ok=$("#gmOk"),cancel=$("#gmCancel"),c=$("#gmCls"),k=$("#gmCourse");
+    $("#groupModalTitle").textContent=title;
+    c.value=cls||""; k.value=course||"";
+    m.classList.remove("hidden"); setTimeout(()=>c.focus(),30);
+    const done=v=>{ m.classList.add("hidden"); ok.onclick=null; cancel.onclick=null; m.onclick=null;
+      c.onkeydown=null; k.onkeydown=null; res(v); };
+    const submit=()=>{ if(!c.value.trim()){ c.focus(); return; } done({cls:c.value.trim(),course:k.value.trim()}); };
+    const key=e=>{ if(e.key==="Enter"){ e.preventDefault(); submit(); } if(e.key==="Escape") done(null); };
+    ok.onclick=submit; cancel.onclick=()=>done(null);
+    c.onkeydown=key; k.onkeydown=key;
+    m.onclick=e=>{ if(e.target===m) done(null); };
+  });
+}
 function askConfirm(msg,okLabel){ return new Promise(res=>{ const m=$("#modal"),ok=$("#modalOk"),cancel=$("#modalCancel"); $("#modalMsg").textContent=msg; ok.textContent=okLabel||"Bekräfta"; m.classList.remove("hidden");
   const done=v=>{ m.classList.add("hidden"); ok.onclick=null; cancel.onclick=null; m.onclick=null; res(v); };
   ok.onclick=()=>done(true); cancel.onclick=()=>done(false); m.onclick=e=>{ if(e.target===m) done(false); }; }); }
