@@ -1083,53 +1083,94 @@ function classLevelStats(){ const act=activeStudents(); return levelStatsFor(t=>
 function gradeDistribution(){ const d={A:0,B:0,C:0,D:0,E:0,F:0}; activeStudents().forEach(s=>{ const g=gradeFor(studentTotals(s).pts); if(g) d[g]++; }); return d; }
 /* Enbart slutsatsen. Poängen per nivå står redan som en egen rad i
    sammanfattningen, så att upprepa dem i löptext gör bara stycket längre. */
-/* En avslutande text för varje elev, oavsett resultat. Den byggs av två delar.
+/* ═════════ ÅTERKOPPLING ═════════
+   Den användbara enheten är område och nivå tillsammans, inte det ena för sig.
+   "Träna på friktion" säger inte om det är de enkla eller de svåra uppgifterna
+   som fallerar, och "träna på grunderna" säger inte i vilket område. Därför
+   beskrivs varje område med vad just det området behöver.
 
-   Först bredden: ett svagt område pekas ut med namn, två eller tre räknas upp,
-   men från fyra och uppåt räknas de inte upp alls. Då är det inte ett område som
-   fattas utan grunderna, och en uppräkning av halva provet hjälper ingen.
+   Uppgifterna delas i två grupper: enklare, nivå 1 och 2, och svårare, nivå 3
+   till 5. Två grupper i stället för tre, eftersom ett enskilt område sällan har
+   uppgifter på alla tre nivåerna och tre grupper då ger tomma fack.
 
-   Sedan nivån: sitter grunderna eller inte, och vad är i så fall nästa steg.
-   De två delarna vägs mot varandra så att samma sak inte sägs två gånger. */
-const MANY_WEAK = 4;
+   Ordningen styrs av förlorade poäng, inte av lägst andel. Ett område med två
+   poäng kan se illa ut i procent utan att vara värt någon tid. */
+const FEEDBACK_LIMIT = 0.6;   /* under detta räknas något som svagt */
+const FEEDBACK_MAX_AREAS = 3; /* fler än så blir ingen lista, utan en helhetsbild */
+
+function areaSplit(s,a){
+  const easy={got:0,poss:0}, hard={got:0,poss:0};
+  validTasks().filter(t=>taskAreas(t).includes(a)).forEach(t=>{
+    const b=(+t.level<=2)?easy:hard;
+    b.got+=studentTaskPoints(s,t); b.poss+=taskMax(t);
+  });
+  return {easy,hard};
+}
+/* Vad ett enskilt område behöver, uttryckt så att det går att göra något åt. */
+function areaNeed(s,a){
+  const sp=areaSplit(s,a);
+  const e=sp.easy.poss?sp.easy.got/sp.easy.poss:null;
+  const h=sp.hard.poss?sp.hard.got/sp.hard.poss:null;
+  const got=sp.easy.got+sp.hard.got, poss=sp.easy.poss+sp.hard.poss;
+  const pts=" ("+fmt(got)+" av "+fmt(poss)+" p)";
+  const mk=(kind,text)=>({kind:kind,text:text,area:a,lost:poss-got});
+  if(e!=null&&h!=null){
+    if(e<FEEDBACK_LIMIT&&h<FEEDBACK_LIMIT) return mk("both",a+", där både de enklare och de svårare uppgifterna behöver övas"+pts);
+    if(e<FEEDBACK_LIMIT) return mk("easy","de enklare uppgifterna i "+a+pts);
+    if(h<FEEDBACK_LIMIT) return mk("hard","de svårare uppgifterna i "+a+pts);
+  } else if(e!=null&&e<FEEDBACK_LIMIT) return mk("easy","de enklare uppgifterna i "+a+pts);
+  else if(h!=null&&h<FEEDBACK_LIMIT) return mk("hard","de svårare uppgifterna i "+a+pts);
+  return null;
+}
+
+/* Helhetsbilden: hur ligger nivåerna i förhållande till varandra? En elev som
+   klarar de svåra men tappar på de enkla behöver något helt annat än en elev som
+   ligger lågt överallt, och det är den skillnaden meningen ska fånga. */
+function levelPattern(s){
+  const ls=studentLevelStats(s);
+  const g=ls.grund.poss?ls.grund.got/ls.grund.poss:null;
+  const m=ls.medel.poss?ls.medel.got/ls.medel.poss:null;
+  const a=ls.avancerat.poss?ls.avancerat.got/ls.avancerat.poss:null;
+  const higher=[m,a].filter(x=>x!=null);
+  const top=higher.length?Math.max(...higher):null;
+  if(g==null||top==null) return "";
+  if(g<FEEDBACK_LIMIT&&top>=g+0.15)
+    return "Du klarar de svårare uppgifterna bättre än de enklare. Gå tillbaka till de enkla uppgifter där du tappade poäng, det brukar handla om småfel snarare än om något du inte kan.";
+  if(g<FEEDBACK_LIMIT)
+    return "Börja med de enklare uppgifterna och bygg vidare därifrån.";
+  if(g>=0.75&&top<0.5)
+    return "De enklare uppgifterna sitter. Nästa steg är uppgifter där flera saker ska kombineras.";
+  if(g>=0.75&&top>=0.75)
+    return "Du klarar uppgifter på alla nivåer bra. Fortsätt träna på de svårare uppgifterna som kombinerar flera moment.";
+  return "";
+}
+
 function feedbackNote(s,thr){
   const areas=usedAreas().filter(a=>areaTaskCount(a)>=UNDERLAG);
-  const weak=areas.map(a=>({a,p:studentAreaPct(s,a)})).filter(x=>x.p<thr)
-    .sort((x,y)=>areaLost(s,y.a)-areaLost(s,x.a));
-  const ls=studentLevelStats(s);
-  const gp=ls.grund.poss?ls.grund.got/ls.grund.poss:null;
-  const ap=ls.avancerat.poss?ls.avancerat.got/ls.avancerat.poss:null;
-  const mp=ls.medel.poss?ls.medel.got/ls.medel.poss:null;
-  const basicsWeak = gp!=null && gp<0.6;
+  const needs=areas.map(a=>areaNeed(s,a)).filter(Boolean).sort((x,y)=>y.lost-x.lost);
   const out=[];
+  /* Är behovet detsamma i nästan alla områden är det nivån som är problemet,
+     inte områdena, och då säger en uppräkning ingenting. */
+  const share=k=>needs.length?needs.filter(x=>x.kind===k).length/needs.length:0;
+  const allEasy=share("easy")>=0.7, allHard=share("hard")>=0.7;
 
-  if(weak.length>=MANY_WEAK){
-    out.push("Du missar poäng på flera områden, så det handlar mindre om ett enskilt område än om grunderna.");
-    out.push(basicsWeak
-      ? "Börja med de enklaste uppgifterna inom varje område och bygg vidare därifrån."
-      : "Gå igenom de områden som ligger lägst ett i taget, och börja med de enklaste uppgifterna i vart och ett.");
-  } else if(weak.length){
-    const d0=weakDescriptor(s,weak[0].a,thr);
-    if(weak.length===1){
-      out.push("Det du behöver träna mest på är "+d0.long+", där du missade "+fmt(d0.poss-d0.got)+" av "+fmt(d0.poss)+" p.");
-    } else {
-      out.push("Det du behöver träna mest på är "+joinSv(weak.map(x=>weakDescriptor(s,x.a,thr).long))+".");
-      out.push("Börja med det förstnämnda, där du missade flest poäng.");
-    }
-  } else {
+  if(!needs.length){
     out.push("Inget område ligger under gränsen.");
+  } else if(needs.length>FEEDBACK_MAX_AREAS){
+    if(allHard) out.push("Du tappar genomgående poäng på de svårare uppgifterna, oavsett område. De enklare sitter, så nästa steg är uppgifter där flera saker ska kombineras.");
+    else if(allEasy) out.push("Du tappar genomgående poäng på de enklare uppgifterna, oavsett område.");
+    else out.push("Du tappar poäng i de flesta områden, så det är bredden som behöver övas och inte ett enskilt moment.");
+  } else {
+    out.push("Träna mer på "+joinSv(needs.map(x=>x.text))+".");
   }
 
-  if(gp!=null&&ap!=null){
-    if(basicsWeak){
-      if(weak.length<MANY_WEAK) out.push("Börja med de grundläggande uppgifterna och bygg vidare därifrån.");
-    } else if(gp>=0.7&&ap<0.5){
-      out.push("Grunderna sitter. Nästa steg är uppgifter där flera moment ska kombineras.");
-    } else if(ap>=0.7){
-      out.push(weak.length ? "De svårare uppgifterna klarar du däremot bra." : "Du klarar även de svårare uppgifterna bra.");
-    } else if(mp!=null&&mp<0.5&&gp>=0.6){
-      out.push("Det är steget från de enklaste till de medelsvåra uppgifterna som är svårast för dig just nu.");
-    }
+  /* Helhetsmeningen läggs bara till när den säger något som listan inte redan
+     sagt. Beröm för alla nivåer hör inte hemma när något behöver tränas. */
+  const lp=levelPattern(s);
+  if(lp){
+    const praise=lp.indexOf("alla nivåer")>=0;
+    const nextStep=lp.indexOf("Nästa steg")>=0;
+    if(!(praise&&needs.length) && !(nextStep&&needs.length>FEEDBACK_MAX_AREAS)) out.push(lp);
   }
   return out.join(" ");
 }
@@ -1695,7 +1736,7 @@ function stuSummary(hs, key, label){
   const done=mine.map((m,i)=>({m,i})).filter(o=>o.m);
   if(!done.length) return [label+" finns inte i något av proven."];
   const out=[];
-  out.push(label+" finns med i "+done.length+" av "+hs.length+" prov.");
+  out.push(label+" har deltagit vid "+done.length+" av "+hs.length+" prov.");
 
   /* Summerade poäng per svårighetsnivå över de prov eleven gjort. */
   const LV={grund:"grundläggande nivå",medel:"medelsvår nivå",avancerat:"avancerad nivå"};
@@ -1743,7 +1784,7 @@ function renderStudentDetail(hs){
   if(done.length<1){ box.innerHTML='<div class="empty">Eleven finns inte i något sparat prov.</div>'; return; }
 
   let h='<div id="histStuText" class="summary-box" style="margin-top:10px">'+paraHTML(stuSummary(hs,key,label))+'</div>';
-  h+='<div class="stu-lead">Elevens resultat i heldragen linje. Klassens snitt är streckat och finns med som sammanhang för dig som lärare, inte som något eleven ska jämföras med.</div>';
+  h+='<div class="stu-lead">Den streckade linjen är klassens snitt.</div>';
   h+='<div class="trendcard">'+stuTrendSVG(hs,key)+'</div>';
 
   /* Områden, ett prov per kolumn. */
