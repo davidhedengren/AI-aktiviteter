@@ -511,8 +511,22 @@ details.dinline:hover{border-color:var(--line-strong);}
   text-transform:uppercase;color:var(--mid);background:var(--mid-bg);
   border:1px solid color-mix(in srgb,var(--mid) 30%,transparent);border-radius:6px;padding:2px 7px;}
 
-.topscroll{overflow-x:auto;overflow-y:hidden;height:12px;margin-bottom:2px;}
+/* Rullningslisten speglar tabellens egen. Den ligger utanför .scroll och har
+   samma negativa marginaler, så att listerna hamnar exakt över varandra. */
+/* Summakolumnen är avläsning, inte inmatning, och är därför satt i mono mot en
+   dovare botten. */
+td.tot-col,th.tot-col{background:var(--card-2);border-left:1px solid var(--line-strong);
+  font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink);text-align:center;
+  white-space:nowrap;padding:0 12px;}
+th.tot-col{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.02em;}
+th.tot-col .mx{display:block;font-size:9.5px;font-weight:500;color:var(--faint);margin-top:2px;}
+td.tot-col.none{color:var(--faint);font-weight:500;}
+td.tot-col.over{color:var(--weak);}
+tr.absent-row td.tot-col{color:var(--faint);}
+
+.topscroll{overflow-x:auto;overflow-y:hidden;height:13px;margin:0 -26px 3px;padding:0 26px;}
 .topscroll>div{height:1px;}
+@media(max-width:620px){.topscroll{margin:0 -16px 3px;padding:0 16px;}}
 
 /* ── Knappar som ger något ifrån sig ──
    Regeln är att en knapp som skapar en fil eller en text du tar med dig bär
@@ -1322,12 +1336,14 @@ function renderGradeScale(){
 function renderGrid(){
   renderPipeline();
   const wrap=$("#gridWrap"), cols=gridColumns(); gridCols=cols.length;
-  const oldBar=wrap.parentNode.querySelector(".topscroll"); if(oldBar) oldBar.remove();
+  const scroller=wrap.closest(".scroll")||wrap;
+  const oldBar=scroller.parentNode.querySelector(".topscroll"); if(oldBar) oldBar.remove();
   const ready=cols.length>0; $("#gridEmpty").style.display=(ready&&state.students.length)?"none":"block";
   if(!ready||!state.students.length){ wrap.innerHTML=""; return; }
   /* rubrikrad i två nivåer */
   let r1=`<tr><th class="name-c" rowspan="2">Elev</th><th class="absc" rowspan="2">Frånv.</th>`;
   validTasks().forEach(t=>{ r1+=`<th class="area-h grp" colspan="${t.parts.length}">${taskNo(t)}.<span class="mx">${esc(taskAreas(t).join(", "))}</span></th>`; });
+  r1+=`<th class="tot-col" rowspan="2">Totalt<span class="mx">av ${fmt(totalMax())||"0"}</span></th>`;
   r1+=`<th class="rm-col" rowspan="2"></th></tr>`;
   let r2="<tr>"; cols.forEach(c=>{ r2+=`<th class="${c.pi===0?'grp':''}">${c.pc>1?letter(c.pi)+")":""}<span class="mx">max ${fmt(c.p.max)||"?"}</span></th>`; }); r2+="</tr>";
   const table=document.createElement("table"); table.className="grid"; table.innerHTML="<thead>"+r1+r2+"</thead>"; const tbody=document.createElement("tbody");
@@ -1340,32 +1356,40 @@ function renderGrid(){
     chk.addEventListener("change",e=>{ s.absent=e.target.checked; renderGrid(); renderAnalysis(); save(); }); absTd.appendChild(chk); tr.appendChild(absTd);
     cols.forEach((c,ci)=>{ const td=document.createElement("td"); if(c.pi===0) td.className="grp"; const inp=document.createElement("input"); inp.className="score"; inp.type="number"; inp.min="0"; inp.step="0.5";
       inp.dataset.row=r; inp.dataset.col=ci; inp.value=(s.scores[c.p.id]??"")===""?"":s.scores[c.p.id]; if(s.absent) inp.disabled=true; const mx=num(c.p.max);
-      inp.addEventListener("input",e=>{ const v=e.target.value; s.scores[c.p.id]=v===""?null:parseFloat(v); inp.classList.toggle("over",mx>0&&parseFloat(v)>mx); scheduleSave();
+      inp.addEventListener("input",e=>{ const v=e.target.value; s.scores[c.p.id]=v===""?null:parseFloat(v); inp.classList.toggle("over",mx>0&&parseFloat(v)>mx); refreshTotals(); scheduleSave();
         /* En uppgift är sällan värd tio poäng eller mer, så en enda siffra räcker
            och markören går vidare direkt. Halva poäng skrivs som ",5" eller ".5",
            vilket inte börjar med en siffra och därför inte flyttar markören. */
         if(/^\d$/.test(v)) advanceCell(inp); });
       inp.addEventListener("keydown",gridNav); if(mx>0&&parseFloat(inp.value)>mx) inp.classList.add("over"); td.appendChild(inp); tr.appendChild(td); });
+    /* Summan räknas fram och går inte att skriva i. Den finns för att man snabbt
+       ska se om raden blivit ifylld och rimlig. */
+    const totTd=document.createElement("td"); totTd.className="tot-col";
+    tr.appendChild(totTd); tr.dataset.sid=s.id;
     const rmTd=document.createElement("td"); const rm=document.createElement("button"); rm.className="btn-mini del"; rm.textContent="✕"; rm.title="Ta bort elev";
     rm.addEventListener("click",()=>{ state.students=state.students.filter(x=>x.id!==s.id); renderGrid(); renderAnalysis(); save(); }); rmTd.appendChild(rm); tr.appendChild(rmTd); tbody.appendChild(tr);
   });
   table.appendChild(tbody); wrap.innerHTML=""; wrap.appendChild(table);
-  addTopScroller(wrap,table);
+  refreshTotals();
+  addTopScroller(scroller,table);
 }
 /* Tabellen är bredare än skärmen, och rullningslisten sitter längst ned. Med många
    elever betyder det att man måste ta sig till botten för att flytta sig i sidled.
    Därför speglas listen även ovanför tabellen. */
-function addTopScroller(wrap,table){
+function addTopScroller(scroller,table){
   const bar=document.createElement("div"); bar.className="topscroll";
   const inner=document.createElement("div"); bar.appendChild(inner);
-  wrap.parentNode.insertBefore(bar,wrap);
-  const sync=()=>{ inner.style.width=table.scrollWidth+"px";
-    bar.style.display = table.scrollWidth>wrap.clientWidth+2 ? "block" : "none"; };
-  sync(); requestAnimationFrame(sync);
+  scroller.parentNode.insertBefore(bar,scroller);
+  const sync=()=>{
+    inner.style.width=scroller.scrollWidth+"px";
+    bar.style.display = scroller.scrollWidth>scroller.clientWidth+2 ? "block" : "none";
+  };
+  sync(); requestAnimationFrame(sync); setTimeout(sync,120);
   let lock=false;
-  bar.addEventListener("scroll",()=>{ if(lock) return; lock=true; wrap.scrollLeft=bar.scrollLeft; lock=false; });
-  wrap.addEventListener("scroll",()=>{ if(lock) return; lock=true; bar.scrollLeft=wrap.scrollLeft; lock=false; });
+  bar.addEventListener("scroll",()=>{ if(lock) return; lock=true; scroller.scrollLeft=bar.scrollLeft; lock=false; });
+  scroller.addEventListener("scroll",()=>{ if(lock) return; lock=true; bar.scrollLeft=scroller.scrollLeft; lock=false; });
   window.addEventListener("resize",sync);
+  if(window.ResizeObserver) new ResizeObserver(sync).observe(scroller);
 }
 /* Nästa ruta som går att skriva i, radvis. Frånvarande elever hoppas över. */
 function advanceCell(from){
@@ -1377,6 +1401,21 @@ function advanceCell(from){
     const el=cellAt(nr,nc);
     if(el&&!el.disabled){ el.focus(); if(el.select) el.select(); return; }
   }
+}
+/* Radsummorna skrivs om efter varje inmatning. Uträkningen är densamma som i
+   analysen, så kolumnen kan inte hamna i otakt med den. */
+function refreshTotals(){
+  const max=totalMax();
+  document.querySelectorAll("table.grid tbody tr").forEach(tr=>{
+    const cell=tr.querySelector("td.tot-col"); if(!cell) return;
+    const s=state.students.find(x=>String(x.id)===tr.dataset.sid); if(!s) return;
+    if(s.absent){ cell.textContent="–"; cell.className="tot-col none"; return; }
+    const filled=validTasks().some(t=>t.parts.some(p=>s.scores[p.id]!=null));
+    if(!filled){ cell.textContent=""; cell.className="tot-col none"; return; }
+    const t=studentTotals(s);
+    cell.textContent=fmt(t.pts);
+    cell.className="tot-col"+(t.pts>max?" over":"");
+  });
 }
 function cellAt(r,c){ return document.querySelector('input.score[data-row="'+r+'"][data-col="'+c+'"]'); }
 function gridNav(e){
