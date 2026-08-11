@@ -524,6 +524,20 @@ td.tot-col.none{color:var(--faint);font-weight:500;}
 td.tot-col.over{color:var(--weak);}
 tr.absent-row td.tot-col{color:var(--faint);}
 
+.bar-label .bar-sub{display:block;font-size:11px;line-height:1.35;color:var(--faint);
+  font-family:'JetBrains Mono',monospace;margin-top:2px;}
+.bar-row{align-items:flex-start;}
+
+/* Växling mellan de två sätten att läsa områdeslistan. */
+.viewsw{display:inline-flex;gap:2px;background:var(--card-2);border:1px solid var(--line);
+  border-radius:10px;padding:2px;margin-bottom:14px;}
+.vw{background:transparent;border:0;border-radius:8px;padding:6px 12px;font-size:12.5px;
+  font-weight:500;color:var(--muted);cursor:pointer;}
+.vw.on{background:var(--card);color:var(--ink);box-shadow:0 1px 1px rgba(20,22,27,.05);}
+.bar-head{margin:18px 0 2px;font-family:'JetBrains Mono',monospace;font-size:10.5px;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--faint);}
+.bar-head:first-child{margin-top:0;}
+
 .topscroll{overflow-x:auto;overflow-y:hidden;height:13px;margin:0 -26px 3px;padding:0 26px;}
 .topscroll>div{height:1px;}
 @media(max-width:620px){.topscroll{margin:0 -16px 3px;padding:0 16px;}}
@@ -752,7 +766,7 @@ table.hist td.d{font-family:'JetBrains Mono',monospace;font-weight:600;}
             <button class="btn btn-out" id="exportBtn">Exportera till Excel</button>
             <button class="btn btn-out" id="printBtn">Skriv ut eller spara som PDF</button>
           </div>
-          <details class="dinline"><summary>Klassens resultat per område<span class="chev">▸</span></summary><div class="dbody"><div id="detArea"></div></div></details>
+          <details class="dinline"><summary>Klassens resultat per område<span class="chev">▸</span></summary><div class="dbody"><div class="viewsw" role="group" aria-label="Visning"><button class="vw on" data-areaview="area">Per område</button><button class="vw" data-areaview="level">Delat på svårighet</button></div><div id="detArea"></div></div></details>
           <details class="dinline"><summary>Klassens resultat per uppgift<span class="chev">▸</span></summary><div class="dbody"><div id="detTask"></div></div></details>
           <details class="dinline" id="detLevelWrap"><summary>Klassens resultat per svårighetsnivå<span class="chev">▸</span></summary><div class="dbody"><div id="detLevel"></div></div></details>
           <details class="dinline"><summary>Resultatspridning<span class="chev">▸</span></summary><div class="dbody"><div id="detSpread"></div></div></details>
@@ -1047,8 +1061,32 @@ function areaWInTask(t,a){ if(!taskAreas(t).includes(a)) return 0; const w=(t.we
 function studentAreaPct(s,a){ let g=0,m=0; validTasks().forEach(t=>{ const w=areaWInTask(t,a); if(!w) return; g+=studentTaskPoints(s,t)*w; m+=taskMax(t)*w; }); return m?g/m:0; }
 function areaLost(s,a){ return validTasks().filter(t=>taskAreas(t).includes(a)).reduce((sum,t)=>sum+(taskMax(t)-studentTaskPoints(s,t)),0); }
 function classAreaPct(a){ let g=0,m=0; activeStudents().forEach(s=>{ validTasks().forEach(t=>{ const w=areaWInTask(t,a); if(!w) return; g+=studentTaskPoints(s,t)*w; m+=taskMax(t)*w; }); }); return m?g/m:0; }
+/* Ett områdes andel säger inget om hur svåra uppgifterna var. Ett område som
+   bara prövats med de två svåraste uppgifterna ser ut att vara klassens sämsta,
+   fastän talet egentligen mäter uppgifternas svårighet. Därför räknas varje
+   område även upp per nivå, och nivåerna skrivs ut bredvid andelen. */
+function classAreaSplit(a){
+  const act=activeStudents(), n=act.length||1;
+  const easy={got:0,max:0}, hard={got:0,max:0};
+  validTasks().filter(t=>taskAreas(t).includes(a)).forEach(t=>{
+    const b=(+t.level<=2)?easy:hard;
+    act.forEach(s=>b.got+=studentTaskPoints(s,t));
+    b.max+=taskMax(t);
+  });
+  easy.got/=n; hard.got/=n;
+  return {easy,hard};
+}
+function areaLevelNote(a){
+  const sp=classAreaSplit(a);
+  const e=sp.easy.max, h=sp.hard.max;
+  if(e&&h) return "enklare "+fmt(sp.easy.got)+"/"+fmt(e)+" p · svårare "+fmt(sp.hard.got)+"/"+fmt(h)+" p";
+  if(h) return "prövas bara med svårare uppgifter";
+  if(e) return "prövas bara med enklare uppgifter";
+  return "";
+}
 function classAreaAvg(a){ const act=activeStudents(), n=act.length||1; let got=0; act.forEach(s=>got+=studentAreaPoints(s,a)); const max=areaMax(a); return {got:got/n,max,pct:max?(got/n)/max:0}; }
 const UNDERLAG=2;
+let areaView="area";   /* visning i listan över områden */
 function totalMax(){ return validTasks().reduce((s,t)=>s+taskMax(t),0); }
 function activeStudents(){ return state.students.filter(s=>!s.absent); }
 function gridColumns(){ const cols=[]; validTasks().forEach((t,ti)=>t.parts.forEach((p,pi)=>cols.push({t,ti,p,pi,pc:t.parts.length}))); return cols; }
@@ -1574,7 +1612,26 @@ function renderDetails(){
   if(!vt.length||!act.length){ [aEl,tEl,lEl,sEl].forEach(e=>{ if(e) e.innerHTML='<div class="empty">Ingen data ännu.</div>'; }); if(lWrap) lWrap.style.display=""; return; }
   // Klassens resultat per område
   const ua=usedAreas(); let ah='<div class="ld-bars">';
-  ua.forEach(a=>{ const v=classAreaAvg(a), b=band(v.pct); ah+=`<div class="bar-row"><span class="bar-label">${esc(a)}</span><div class="bar-track"><div class="bar-fill" style="width:${(v.pct*100).toFixed(0)}%;background:${b.fg}"></div></div><span class="bar-meta"><b style="color:${b.fg}">${fmt(v.got)} av ${fmt(v.max)} p</b> (${(v.pct*100).toFixed(0)} %)</span></div>`; });
+  const barRow=(label,sub,got,max)=>{ const pct=max?got/max:0, b=band(pct);
+    return `<div class="bar-row"><span class="bar-label">${esc(label)}${sub?`<span class="bar-sub">${esc(sub)}</span>`:""}</span>`
+      +`<div class="bar-track"><div class="bar-fill" style="width:${(pct*100).toFixed(0)}%;background:${b.fg}"></div></div>`
+      +`<span class="bar-meta"><b style="color:${b.fg}">${fmt(got)} av ${fmt(max)} p</b> (${(pct*100).toFixed(0)} %)</span></div>`; };
+  if(areaView==="level"){
+    /* Ett område som bara prövats med svåra uppgifter går inte att jämföra med
+       ett som prövats med lätta. Delat på svårighet står varje rad bredvid rader
+       med samma sorts uppgifter, och då säger jämförelsen något. */
+    const rows={easy:[],hard:[]};
+    ua.forEach(a=>{ const sp=classAreaSplit(a);
+      if(sp.easy.max) rows.easy.push({a,got:sp.easy.got,max:sp.easy.max,p:sp.easy.got/sp.easy.max});
+      if(sp.hard.max) rows.hard.push({a,got:sp.hard.got,max:sp.hard.max,p:sp.hard.got/sp.hard.max}); });
+    [["easy","Enklare uppgifter (nivå 1–2)"],["hard","Svårare uppgifter (nivå 3–5)"]].forEach(([k,title])=>{
+      if(!rows[k].length) return;
+      ah+=`<div class="bar-head">${title}</div>`;
+      rows[k].sort((x,y)=>y.p-x.p).forEach(r=>{ ah+=barRow(r.a,"",r.got,r.max); });
+    });
+  } else {
+    ua.forEach(a=>{ const v=classAreaAvg(a); ah+=barRow(a,areaLevelNote(a),v.got,v.max); });
+  }
   aEl.innerHTML=ah+'</div>';
   // Klassens resultat per uppgift (nummerordning)
   let th='<div class="scroll"><table class="heat ld-tasks"><thead><tr><th class="name-h">Uppg.</th><th class="lcol">Område</th><th>Medelpoäng</th></tr></thead><tbody>';
@@ -2091,6 +2148,11 @@ function wire(){
   $("#exportBtn").addEventListener("click",exportXlsx); $("#printBtn").addEventListener("click",printStudents);
   $("#saveTest").addEventListener("click",saveTestFile); $("#loadTest").addEventListener("click",()=>$("#fileInput").click());
   $("#fileInput").addEventListener("change",e=>{ if(e.target.files[0]) loadTestFile(e.target.files[0]); e.target.value=""; });
+  document.addEventListener("click",e=>{ const b=e.target.closest("[data-areaview]"); if(!b) return;
+    areaView=b.dataset.areaview;
+    document.querySelectorAll("[data-areaview]").forEach(x=>x.classList.toggle("on",x===b));
+    renderDetails();
+  });
   $("#groupSel").addEventListener("change",e=>openGroup(e.target.value));
   $("#testSel").addEventListener("change",e=>{ if(e.target.value) openTest(e.target.value); });
   $("#newGroup").addEventListener("click",newGroup);
