@@ -1116,10 +1116,10 @@ function areaNeed(s,a){
   const mk=(kind,text)=>({kind:kind,text:text,area:a,lost:poss-got});
   if(e!=null&&h!=null){
     if(e<FEEDBACK_LIMIT&&h<FEEDBACK_LIMIT) return mk("both",a+", där både de enklare och de svårare uppgifterna behöver övas"+pts);
-    if(e<FEEDBACK_LIMIT) return mk("easy","de enklare uppgifterna i "+a+pts);
-    if(h<FEEDBACK_LIMIT) return mk("hard","de svårare uppgifterna i "+a+pts);
-  } else if(e!=null&&e<FEEDBACK_LIMIT) return mk("easy","de enklare uppgifterna i "+a+pts);
-  else if(h!=null&&h<FEEDBACK_LIMIT) return mk("hard","de svårare uppgifterna i "+a+pts);
+    if(e<FEEDBACK_LIMIT) return mk("easy","de enklare uppgifterna om "+a+pts);
+    if(h<FEEDBACK_LIMIT) return mk("hard","de svårare uppgifterna om "+a+pts);
+  } else if(e!=null&&e<FEEDBACK_LIMIT) return mk("easy","de enklare uppgifterna om "+a+pts);
+  else if(h!=null&&h<FEEDBACK_LIMIT) return mk("hard","de svårare uppgifterna om "+a+pts);
   return null;
 }
 
@@ -1166,12 +1166,12 @@ function strengthNote(s){
       && groups.filter(g=>g.a===a).length>1);
     if(whole.length) return "Du klarar "+joinSv(whole.slice(0,3))+" bra.";
     const easy=good.filter(g=>g.kind==="easy").slice(0,3);
-    if(easy.length) return "Du klarar de enklare uppgifterna i "+joinSv(easy.map(g=>g.a))+".";
+    if(easy.length) return "Du klarar de enklare uppgifterna om "+joinSv(easy.map(g=>g.a))+".";
     const hard=good.filter(g=>g.kind==="hard").slice(0,3);
-    if(hard.length) return "Du klarar de svårare uppgifterna i "+joinSv(hard.map(g=>g.a))+".";
+    if(hard.length) return "Du klarar de svårare uppgifterna om "+joinSv(hard.map(g=>g.a))+".";
   }
   const best=groups.filter(g=>g.got>0).sort((x,y)=>y.p-x.p)[0];
-  if(best) return "Bäst går det på de "+(best.kind==="easy"?"enklare":"svårare")+" uppgifterna i "
+  if(best) return "Bäst går det på de "+(best.kind==="easy"?"enklare":"svårare")+" uppgifterna om "
     +best.a+" ("+fmt(best.got)+" av "+fmt(best.poss)+" p).";
   return "";
 }
@@ -1194,7 +1194,7 @@ function feedbackNote(s,thr){
      vad de har gemensamt. */
   const share=k=>needs.length?needs.filter(x=>x.kind===k).length/needs.length:0;
   const allEasy=share("easy")>=0.7, allHard=share("hard")>=0.7;
-  const namesOf=list=>list.length<=4 ? joinSv(list.map(x=>x.area)) : "de flesta områden";
+  const namesOf=list=>list.length<=4 ? joinSv(list.map(x=>x.area)) : "de flesta områdena";
 
   /* Vad som fungerar sägs först, sedan vad som ska tränas. */
   let saidEasyWorks=false;
@@ -1204,17 +1204,17 @@ function feedbackNote(s,thr){
   if(!needs.length){
     out.push("Inget område ligger under gränsen.");
   } else if(allHard&&needs.length>1){
-    out.push("Du tappar poäng på de svårare uppgifterna i "+namesOf(needs)+".");
+    out.push("Du tappar poäng på de svårare uppgifterna om "+namesOf(needs)+".");
   } else if(allEasy&&needs.length>1){
-    out.push("Du tappar poäng på de enklare uppgifterna i "+namesOf(needs)+".");
+    out.push("Du tappar poäng på de enklare uppgifterna om "+namesOf(needs)+".");
   } else if(needs.length<=FEEDBACK_MAX_AREAS){
     out.push("Träna mer på "+joinSv(needs.map(x=>x.text))+".");
   } else {
     /* Blandade behov. Då avgör var poängen faktiskt försvinner. */
     const lost=lostByLevel(s);
-    if(lost.hard>=lost.easy*2) out.push("Du tappar poäng i flera områden, och det mesta ligger på de svårare uppgifterna.");
-    else if(lost.easy>=lost.hard*2) out.push("Du tappar poäng i flera områden, och det mesta ligger på de enklare uppgifterna.");
-    else out.push("Du tappar poäng i de flesta områden, så det är bredden som behöver övas och inte ett enskilt moment.");
+    if(lost.hard>=lost.easy*2) out.push("Du tappar poäng på flera områden, och det mesta ligger på de svårare uppgifterna.");
+    else if(lost.easy>=lost.hard*2) out.push("Du tappar poäng på flera områden, och det mesta ligger på de enklare uppgifterna.");
+    else out.push("Du tappar poäng på de flesta områdena, så det är bredden som behöver övas och inte ett enskilt moment.");
   }
 
   /* Helhetsmeningen läggs bara till när den säger något som listan inte redan
