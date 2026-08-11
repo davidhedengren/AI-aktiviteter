@@ -1079,9 +1079,13 @@ function classAreaSplit(a){
 function areaLevelNote(a){
   const sp=classAreaSplit(a);
   const e=sp.easy.max, h=sp.hard.max;
-  if(e&&h) return "enklare "+fmt(sp.easy.got)+"/"+fmt(e)+" p · svårare "+fmt(sp.hard.got)+"/"+fmt(h)+" p";
-  if(h) return "prövas bara med svårare uppgifter";
-  if(e) return "prövas bara med enklare uppgifter";
+  /* Har området bara den ena nivån skrivs bara den ut, så att det syns direkt
+     att andelen ovanför enbart bygger på svåra eller enbart på lätta uppgifter. */
+  const easy="enklare "+fmt(sp.easy.got)+"/"+fmt(e)+" p";
+  const hard="svårare "+fmt(sp.hard.got)+"/"+fmt(h)+" p";
+  if(e&&h) return easy+" · "+hard;
+  if(h) return hard;
+  if(e) return easy;
   return "";
 }
 function classAreaAvg(a){ const act=activeStudents(), n=act.length||1; let got=0; act.forEach(s=>got+=studentAreaPoints(s,a)); const max=areaMax(a); return {got:got/n,max,pct:max?(got/n)/max:0}; }
