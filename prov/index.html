@@ -440,7 +440,9 @@ label.field{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spaci
 
 /* ── Sammanfattning, värmekarta och elevkort ── */
 .summary-box{background:#fff;border:1px solid var(--line);border-left:2px solid var(--indigo);
-  border-radius:12px;font-size:16px;line-height:1.75;}
+  border-radius:12px;font-size:15.5px;line-height:1.7;}
+.summary-box p{margin:0 0 11px;}
+.summary-box p:last-child{margin-bottom:0;}
 :root[data-theme="dark"] .summary-box{background:#3A3F49;border-color:var(--line-strong);
   border-left-color:var(--indigo);}
 .heatcard{background:var(--card-2);border:1px solid var(--line);border-radius:14px;}
@@ -503,6 +505,15 @@ details.dinline:hover{border-color:var(--line-strong);}
   .sumlist dt:first-child{padding-top:0;}
 }
 
+/* En uppgift utan maxpoäng räknas inte med någonstans. Märket säger det innan
+   läraren undrar varför uppgiften saknas i inmatningen. */
+.tflag{margin-left:10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--mid);background:var(--mid-bg);
+  border:1px solid color-mix(in srgb,var(--mid) 30%,transparent);border-radius:6px;padding:2px 7px;}
+
+.topscroll{overflow-x:auto;overflow-y:hidden;height:12px;margin-bottom:2px;}
+.topscroll>div{height:1px;}
+
 /* ── Knappar som ger något ifrån sig ──
    Regeln är att en knapp som skapar en fil eller en text du tar med dig bär
    accentfärgen dämpad, medan en knapp som ändrar något inne i verktyget har
@@ -556,6 +567,7 @@ details.dinline:hover{border-color:var(--line-strong);}
 .hist-row .hv{color:var(--muted);}
 .hist-row .btn-mini{font-size:12px;padding:5px 10px;border:1px solid var(--line-strong);color:var(--ink);border-radius:8px;}
 .hist-row .btn-mini:hover{background:var(--card);border-color:var(--muted);}
+.hist-row .btn-mini.ord{padding:5px 8px;font-size:13px;line-height:1;color:var(--muted);}
 .hist-row .btn-mini.del{border-color:transparent;color:var(--faint);font-size:14px;padding:4px 7px;}
 .trendcard{border:1px solid var(--line);border-radius:14px;background:var(--card-2);padding:16px 14px 8px;}
 .trendcard svg{display:block;width:100%;height:auto;}
@@ -815,8 +827,17 @@ function newId(pre){ return pre+Date.now().toString(36)+Math.random().toString(3
 function saveWork(){ try{ localStorage.setItem(WORKKEY,JSON.stringify(work)); }catch(e){} }
 function curTest(){ return work.tests.find(t=>t.id===work.curTid)||null; }
 function curGroup(){ return work.groups.find(g=>g.id===work.curGid)||null; }
-function groupTests(gid){ return work.tests.filter(t=>t.gid===(gid||work.curGid))
-  .sort((a,b)=>(a.savedAt||0)-(b.savedAt||0)); }
+/* Ordningen är den i listan, inte den kronologiska, eftersom prov ofta läggs in
+   i efterhand. Pilarna i historiken flyttar ett prov i just den ordningen. */
+function groupTests(gid){ return work.tests.filter(t=>t.gid===(gid||work.curGid)); }
+function moveTest(id,dir){
+  const t=work.tests.find(x=>x.id===id); if(!t) return;
+  const sib=groupTests(t.gid), i=sib.indexOf(t), j=i+dir;
+  if(j<0||j>=sib.length) return;
+  const a=work.tests.indexOf(sib[i]), b=work.tests.indexOf(sib[j]);
+  work.tests[a]=sib[j]; work.tests[b]=sib[i];
+  saveWork(); renderWorkbar(); renderHistory();
+}
 function groupLabel(g){ return g ? (g.cls+(g.course?" · "+g.course:"")) : ""; }
 function testLabel(t){ return ((t.state&&t.state.testName)||"").trim()||"Prov utan namn"; }
 
@@ -996,6 +1017,11 @@ function partLabel(t,pi){ return t.parts.length>1 ? letter(pi)+")" : "Maxpoäng"
 function partCode(ti,pi,pc){ return (ti+1)+(pc>1?letter(pi):""); }
 function taskMax(t){ return t.parts.reduce((a,p)=>a+num(p.max),0); }
 function validTasks(){ return state.tasks.filter(t=>taskMax(t)>0); }
+/* Uppgiftens nummer är dess plats i provet, inte dess plats bland de ifyllda.
+   En uppgift utan maxpoäng räknas inte med i analysen, och utan den här
+   numreringen skulle alla följande uppgifter byta nummer i inmatningen och i
+   analysen medan de behöll sitt nummer i steg 1. */
+function taskNo(t){ return state.tasks.indexOf(t)+1; }
 function taskAreas(t){ return (t.areas&&t.areas.length)?t.areas:["(utan område)"]; }
 function studentTaskPoints(s,t){ return t.parts.reduce((a,p)=>a+num(s.scores[p.id]),0); }
 function usedAreas(){ const o=[]; validTasks().forEach(t=>taskAreas(t).forEach(a=>{ if(!o.includes(a)) o.push(a); })); return o; }
@@ -1082,7 +1108,7 @@ function feedbackNote(s,thr){
 
   if(gp!=null&&ap!=null){
     if(basicsWeak){
-      if(weak.length<MANY_WEAK) out.push("Börja med de grundläggande uppgifterna, eftersom de bär allt annat.");
+      if(weak.length<MANY_WEAK) out.push("Börja med de grundläggande uppgifterna och bygg vidare därifrån.");
     } else if(gp>=0.7&&ap<0.5){
       out.push("Grunderna sitter. Nästa steg är uppgifter där flera moment ska kombineras.");
     } else if(ap>=0.7){
@@ -1235,7 +1261,7 @@ function renderTasks(){
     const partsHtml=t.parts.map((p,pi)=>`<div class="prow"><span class="plabel">${partLabel(t,pi)}</span>
       <input class="num pmax" data-pid="${p.id}" type="number" min="0" step="0.5" placeholder="poäng" value="${p.max}">
       ${pc>1?`<button class="btn-mini del" data-rmpart="${p.id}" title="Ta bort deluppgift">✕</button>`:'<span></span>'}</div>`).join("");
-    card.innerHTML=`<div class="task-head"><span class="tnum">Uppgift ${i+1}</span><span style="flex:1"></span>
+    card.innerHTML=`<div class="task-head"><span class="tnum">Uppgift ${i+1}</span>${taskMax(t)>0?"":'<span class="tflag">saknar maxpoäng</span>'}<span style="flex:1"></span>
       <button class="btn-mini" data-act="up" title="Flytta upp">↑</button><button class="btn-mini" data-act="down" title="Flytta ner">↓</button>
       <button class="btn-mini del" data-act="del" title="Ta bort">✕</button></div>
       <div class="task-fields"><div><div class="tags" data-act="tags">
@@ -1296,11 +1322,12 @@ function renderGradeScale(){
 function renderGrid(){
   renderPipeline();
   const wrap=$("#gridWrap"), cols=gridColumns(); gridCols=cols.length;
+  const oldBar=wrap.parentNode.querySelector(".topscroll"); if(oldBar) oldBar.remove();
   const ready=cols.length>0; $("#gridEmpty").style.display=(ready&&state.students.length)?"none":"block";
   if(!ready||!state.students.length){ wrap.innerHTML=""; return; }
   /* rubrikrad i två nivåer */
   let r1=`<tr><th class="name-c" rowspan="2">Elev</th><th class="absc" rowspan="2">Frånv.</th>`;
-  validTasks().forEach((t,ti)=>{ r1+=`<th class="area-h grp" colspan="${t.parts.length}">${ti+1}.<span class="mx">${esc(taskAreas(t).join(", "))}</span></th>`; });
+  validTasks().forEach(t=>{ r1+=`<th class="area-h grp" colspan="${t.parts.length}">${taskNo(t)}.<span class="mx">${esc(taskAreas(t).join(", "))}</span></th>`; });
   r1+=`<th class="rm-col" rowspan="2"></th></tr>`;
   let r2="<tr>"; cols.forEach(c=>{ r2+=`<th class="${c.pi===0?'grp':''}">${c.pc>1?letter(c.pi)+")":""}<span class="mx">max ${fmt(c.p.max)||"?"}</span></th>`; }); r2+="</tr>";
   const table=document.createElement("table"); table.className="grid"; table.innerHTML="<thead>"+r1+r2+"</thead>"; const tbody=document.createElement("tbody");
@@ -1313,12 +1340,43 @@ function renderGrid(){
     chk.addEventListener("change",e=>{ s.absent=e.target.checked; renderGrid(); renderAnalysis(); save(); }); absTd.appendChild(chk); tr.appendChild(absTd);
     cols.forEach((c,ci)=>{ const td=document.createElement("td"); if(c.pi===0) td.className="grp"; const inp=document.createElement("input"); inp.className="score"; inp.type="number"; inp.min="0"; inp.step="0.5";
       inp.dataset.row=r; inp.dataset.col=ci; inp.value=(s.scores[c.p.id]??"")===""?"":s.scores[c.p.id]; if(s.absent) inp.disabled=true; const mx=num(c.p.max);
-      inp.addEventListener("input",e=>{ const v=e.target.value; s.scores[c.p.id]=v===""?null:parseFloat(v); inp.classList.toggle("over",mx>0&&parseFloat(v)>mx); scheduleSave(); });
+      inp.addEventListener("input",e=>{ const v=e.target.value; s.scores[c.p.id]=v===""?null:parseFloat(v); inp.classList.toggle("over",mx>0&&parseFloat(v)>mx); scheduleSave();
+        /* En uppgift är sällan värd tio poäng eller mer, så en enda siffra räcker
+           och markören går vidare direkt. Halva poäng skrivs som ",5" eller ".5",
+           vilket inte börjar med en siffra och därför inte flyttar markören. */
+        if(/^\d$/.test(v)) advanceCell(inp); });
       inp.addEventListener("keydown",gridNav); if(mx>0&&parseFloat(inp.value)>mx) inp.classList.add("over"); td.appendChild(inp); tr.appendChild(td); });
     const rmTd=document.createElement("td"); const rm=document.createElement("button"); rm.className="btn-mini del"; rm.textContent="✕"; rm.title="Ta bort elev";
     rm.addEventListener("click",()=>{ state.students=state.students.filter(x=>x.id!==s.id); renderGrid(); renderAnalysis(); save(); }); rmTd.appendChild(rm); tr.appendChild(rmTd); tbody.appendChild(tr);
   });
   table.appendChild(tbody); wrap.innerHTML=""; wrap.appendChild(table);
+  addTopScroller(wrap,table);
+}
+/* Tabellen är bredare än skärmen, och rullningslisten sitter längst ned. Med många
+   elever betyder det att man måste ta sig till botten för att flytta sig i sidled.
+   Därför speglas listen även ovanför tabellen. */
+function addTopScroller(wrap,table){
+  const bar=document.createElement("div"); bar.className="topscroll";
+  const inner=document.createElement("div"); bar.appendChild(inner);
+  wrap.parentNode.insertBefore(bar,wrap);
+  const sync=()=>{ inner.style.width=table.scrollWidth+"px";
+    bar.style.display = table.scrollWidth>wrap.clientWidth+2 ? "block" : "none"; };
+  sync(); requestAnimationFrame(sync);
+  let lock=false;
+  bar.addEventListener("scroll",()=>{ if(lock) return; lock=true; wrap.scrollLeft=bar.scrollLeft; lock=false; });
+  wrap.addEventListener("scroll",()=>{ if(lock) return; lock=true; bar.scrollLeft=wrap.scrollLeft; lock=false; });
+  window.addEventListener("resize",sync);
+}
+/* Nästa ruta som går att skriva i, radvis. Frånvarande elever hoppas över. */
+function advanceCell(from){
+  const r=+from.dataset.row, c=+from.dataset.col, rows=state.students.length;
+  let nr=r,nc=c;
+  for(let i=0;i<gridCols*rows;i++){
+    nc++; if(nc>=gridCols){ nc=0; nr++; }
+    if(nr>=rows) return;
+    const el=cellAt(nr,nc);
+    if(el&&!el.disabled){ el.focus(); if(el.select) el.select(); return; }
+  }
 }
 function cellAt(r,c){ return document.querySelector('input.score[data-row="'+r+'"][data-col="'+c+'"]'); }
 function gridNav(e){
@@ -1385,7 +1443,7 @@ function renderDetails(){
   aEl.innerHTML=ah+'</div>';
   // Klassens resultat per uppgift (nummerordning)
   let th='<div class="scroll"><table class="heat ld-tasks"><thead><tr><th class="name-h">Uppg.</th><th class="lcol">Område</th><th>Medelpoäng</th></tr></thead><tbody>';
-  vt.forEach((t,i)=>{ let g=0,m=0; act.forEach(s=>{ g+=studentTaskPoints(s,t); m+=taskMax(t); }); const p=m?g/m:0, b=band(p), avg=g/(act.length||1); th+=`<tr><td class="namecell">${i+1}.</td><td class="lcol">${esc(taskAreas(t).join(", "))}</td><td class="cell" style="background:${b.bg};color:${b.fg}">${fmt(avg)}/${fmt(taskMax(t))} p</td></tr>`; });
+  vt.forEach((t,i)=>{ let g=0,m=0; act.forEach(s=>{ g+=studentTaskPoints(s,t); m+=taskMax(t); }); const p=m?g/m:0, b=band(p), avg=g/(act.length||1); th+=`<tr><td class="namecell">${taskNo(t)}.</td><td class="lcol">${esc(taskAreas(t).join(", "))}</td><td class="cell" style="background:${b.bg};color:${b.fg}">${fmt(avg)}/${fmt(taskMax(t))} p</td></tr>`; });
   tEl.innerHTML=th+'</tbody></table></div>';
   // Per svårighetsnivå
   const order=["grund","medel","avancerat"], lbl={grund:"Grund (1–2)",medel:"Medel (3)",avancerat:"Avancerat (4–5)"};
@@ -1464,7 +1522,7 @@ function groupSnapshots(){
   }).map(snapshotOf);
   const old=(work.legacy||[]).filter(h=>h.gid===work.curGid)
     .map(h=>Object.assign({},h,{legacy:true}));
-  return live.concat(old).sort((a,b)=>(a.savedAt||0)-(b.savedAt||0));
+  return live.concat(old);
 }
 
 /* ── Diagram: klassens snitt över proven ── */
@@ -1516,30 +1574,44 @@ function histTable(rows, hs, labelHead){
   return h+'</tbody></table></div>';
 }
 
-/* ── Text som sammanfattar utvecklingen ── */
+/* ── Text som sammanfattar utvecklingen ──
+   Texten är styckad, eftersom den läses i förbifarten. Den säger vad som rört sig
+   och åt vilket håll, inte hur många procentenheter, eftersom två prov sällan
+   mäter samma sak och en exakt differens därför skulle låtsas vara mer precis än
+   den är. Siffrorna finns i tabellerna strax nedanför. */
+function paraHTML(list){ return list.filter(Boolean).map(t=>'<p>'+esc(t)+'</p>').join(""); }
+
 function histSummary(hs){
-  const first=hs[0], last=hs[hs.length-1];
-  const d=Math.round((last.avg-first.avg)*100);
-  const g=curGroup();
-  const pa=[];
-  pa.push(groupLabel(g)+" har "+hs.length+" prov, från "+first.name+" till "+last.name+".");
-  pa.push("Snittet har gått från "+Math.round(first.avg*100)+" % till "+Math.round(last.avg*100)+" %, alltså "
-    + (d>0? "en ökning med "+d+" procentenheter" : d<0? "en minskning med "+Math.abs(d)+" procentenheter" : "oförändrat")+".");
+  const first=hs[0], last=hs[hs.length-1], g=curGroup();
+  const out=[];
+  out.push(groupLabel(g)+" har "+hs.length+" prov: "+joinSv(hs.map(h=>h.name))+".");
+
+  /* Områden som finns i både det första och det senaste provet kan jämföras. */
   const common=Object.keys(last.areas).filter(a=>first.areas[a]&&first.areas[a].max&&last.areas[a].max);
   if(common.length){
     const mv=common.map(a=>({a, d:(last.areas[a].got/last.areas[a].max)-(first.areas[a].got/first.areas[a].max)}))
       .sort((x,y)=>y.d-x.d);
-    const up=mv[0], dn=mv[mv.length-1];
-    if(up && up.d>=0.05) pa.push("Störst framsteg syns i "+up.a+", som gått upp "+Math.round(up.d*100)+" procentenheter.");
-    if(dn && dn.d<=-0.05) pa.push(dn.a+" har i stället gått ned "+Math.round(Math.abs(dn.d)*100)+" procentenheter och är värt att följa upp.");
+    const up=mv.filter(x=>x.d>=0.05).map(x=>x.a), dn=mv.filter(x=>x.d<=-0.05).map(x=>x.a);
+    if(up.length) out.push("Klassen har gått framåt på "+joinSv(up.slice(0,3))+".");
+    if(dn.length) out.push("Svagare resultat på "+joinSv(dn.slice(0,3))+", som är värt att följa upp.");
+    if(!up.length&&!dn.length) out.push("Resultaten per område ligger på ungefär samma nivå som tidigare.");
   }
+
   const fk=new Map(first.students.map(x=>[nameKey(x.name),x.pct]));
-  const moved=last.students.filter(x=>fk.has(nameKey(x.name))).map(x=>({n:x.name,d:x.pct-fk.get(nameKey(x.name))}));
-  if(moved.length){
-    const up=moved.filter(x=>x.d>=0.1).length, dn=moved.filter(x=>x.d<=-0.1).length;
-    pa.push(moved.length+" elever finns med i båda proven. "+up+" har förbättrat sig med minst tio procentenheter och "+dn+" har gått ned lika mycket.");
+  const both=last.students.filter(x=>fk.has(nameKey(x.name)));
+  if(both.length){
+    const up=both.filter(x=>x.pct-fk.get(nameKey(x.name))>=0.1).length;
+    const dn=both.filter(x=>x.pct-fk.get(nameKey(x.name))<=-0.1).length;
+    let t=both.length+" elever finns med i både det första och det senaste provet.";
+    if(up||dn){
+      const bits=[];
+      if(up) bits.push(up+" ett tydligt bättre resultat");
+      if(dn) bits.push(dn+" ett tydligt sämre");
+      t+=" Av dem har "+joinSv(bits)+" på det senaste.";
+    }
+    out.push(t);
   }
-  return pa.join(" ");
+  return out;
 }
 
 /* ── En elev i taget ──
@@ -1576,67 +1648,46 @@ function stuTrendSVG(hs, key){
    egna tidigare resultat och inte mot klassen, eftersom jämförelse med andra flyttar
    uppmärksamheten från uppgiften till rangordningen. Och antalet saker att träna på
    hålls nere till högst två, eftersom en längre lista sällan blir gjord. */
+/* Elevens utveckling, i stycken och i poäng. Texten ska kunna läsas högt vid en
+   återkoppling, så den håller sig till hur många poäng av hur många och vad som
+   är nästa steg. Andelar och differenser står i tabellerna. */
 function stuSummary(hs, key, label){
-  const mine=hs.map(h=>h.students.find(s=>nameKey(s.name)===key)||null);
+  const mine=hs.map(h=>h.students.find(x=>nameKey(x.name)===key)||null);
   const done=mine.map((m,i)=>({m,i})).filter(o=>o.m);
-  if(!done.length) return label+" finns inte i något av de sparade proven.";
-  const last=done[done.length-1], first=done[0];
-  const pa=[];
+  if(!done.length) return [label+" finns inte i något av proven."];
+  const out=[];
+  out.push(label+" finns med i "+done.length+" av "+hs.length+" prov.");
 
-  /* Summerade poäng per område över alla prov eleven gjort. Ett område som bara
-     funnits med i ett prov räknas också, men får ingen utveckling. */
-  const areaTot={}, areaSeq={};
-  done.forEach(o=>{ const ar=o.m.areas||{};
-    Object.keys(ar).forEach(a=>{ const x=ar[a]; if(!x||!x.max) return;
-      (areaTot[a]=areaTot[a]||{got:0,max:0}); areaTot[a].got+=x.got; areaTot[a].max+=x.max;
-      (areaSeq[a]=areaSeq[a]||[]).push({got:x.got,max:x.max,test:hs[o.i].name}); }); });
-  const areas=Object.keys(areaTot).map(a=>({a,got:areaTot[a].got,max:areaTot[a].max,p:areaTot[a].got/areaTot[a].max}));
-  const strong=areas.filter(x=>x.p>=0.75).sort((x,y)=>y.p-x.p);
-  const weak=areas.filter(x=>x.p<0.6).sort((x,y)=>(y.max-y.got)-(x.max-x.got));
-  const phrase=x=>x.a+" "+fmt(x.got)+" av "+fmt(x.max)+" p";
-
-  pa.push(label+" har gjort "+done.length+(done.length===1?" prov":" prov")+" i kursen"
-    + (done.length<hs.length?" av de "+hs.length+" som finns sparade":"")+".");
-
-  if(strong.length) pa.push("Det som sitter är "+joinSv(strong.slice(0,3).map(phrase))+".");
-  if(!strong.length&&areas.length) pa.push("Sammanlagt över proven: "+joinSv(areas.slice(0,3).map(phrase))+".");
-
-  /* Utveckling inom ett område, mot elevens egna tidigare resultat. */
-  const moved=Object.keys(areaSeq).filter(a=>areaSeq[a].length>1).map(a=>{
-    const q=areaSeq[a], f=q[0], l=q[q.length-1];
-    return {a, from:f, to:l, d:(l.got/l.max)-(f.got/f.max)};
-  }).sort((x,y)=>y.d-x.d);
-  if(moved.length){
-    const up=moved[0], dn=moved[moved.length-1];
-    if(up.d>=0.15) pa.push("Tydligast framsteg är "+up.a+": "+fmt(up.from.got)+" av "+fmt(up.from.max)
-      +" p på "+up.from.test+" och "+fmt(up.to.got)+" av "+fmt(up.to.max)+" p på "+up.to.test+".");
-    if(dn.d<=-0.15) pa.push(dn.a+" har gått åt andra hållet, från "+fmt(dn.from.got)+" av "+fmt(dn.from.max)
-      +" p till "+fmt(dn.to.got)+" av "+fmt(dn.to.max)+" p. Det är värt att gå tillbaka till.");
-  }
-
-  /* Svårighetsnivåer, summerade över proven. */
-  const LV={grund:"grundläggande uppgifter",medel:"medelsvåra uppgifter",avancerat:"avancerade uppgifter"};
+  /* Summerade poäng per svårighetsnivå över de prov eleven gjort. */
+  const LV={grund:"grundläggande nivå",medel:"medelsvår nivå",avancerat:"avancerad nivå"};
   const lv={grund:{got:0,poss:0},medel:{got:0,poss:0},avancerat:{got:0,poss:0}};
   done.forEach(o=>["grund","medel","avancerat"].forEach(k=>{ const x=(o.m.levels||{})[k];
     if(x&&x.poss){ lv[k].got+=x.got; lv[k].poss+=x.poss; } }));
-  const present=["grund","medel","avancerat"].filter(k=>lv[k].poss>0);
-  if(present.length){
-    pa.push("Över proven blev det "+joinSv(present.map(k=>fmt(lv[k].got)+" av "+fmt(lv[k].poss)+" p på "+LV[k]))+".");
-    const g=lv.grund.poss?lv.grund.got/lv.grund.poss:null, a=lv.avancerat.poss?lv.avancerat.got/lv.avancerat.poss:null;
-    if(g!=null&&g<0.6) pa.push("Grunderna är det som ger mest just nu, eftersom de bär allt annat.");
-    else if(g!=null&&a!=null&&g>=0.75&&a<0.5) pa.push("Grunderna sitter. Nästa steg är uppgifter där flera moment ska kombineras.");
-  }
+  const pres=["grund","medel","avancerat"].filter(k=>lv[k].poss>0);
+  if(pres.length)
+    out.push("Sammanlagt "+joinSv(pres.map(k=>fmt(lv[k].got)+" av "+fmt(lv[k].poss)+" p på "+LV[k]))+".");
 
-  /* Feed forward: högst två saker, med en konkret ingång. */
-  if(weak.length){
-    const pick=weak.slice(0,2);
-    pa.push("Träna vidare på "+joinSv(pick.map(phrase))+".");
-    pa.push("Börja med uppgifter av samma slag som de i "+hs[last.i].name+", där poängen föll bort.");
-  } else if(areas.length){
-    pa.push("Ingen del sticker ut som svag. Nästa steg är att ta sig an de svårare uppgifterna inom de områden som redan sitter.");
-  }
-  return pa.join(" ");
+  /* Summerade poäng per område. */
+  const tot={};
+  done.forEach(o=>{ const ar=o.m.areas||{};
+    Object.keys(ar).forEach(a=>{ const x=ar[a]; if(!x||!x.max) return;
+      (tot[a]=tot[a]||{got:0,max:0}); tot[a].got+=x.got; tot[a].max+=x.max; }); });
+  const areas=Object.keys(tot).map(a=>({a,got:tot[a].got,max:tot[a].max,p:tot[a].got/tot[a].max}));
+  const phrase=x=>x.a+" ("+fmt(x.got)+" av "+fmt(x.max)+" p)";
+  const best=areas.filter(x=>x.p>=0.75).sort((x,y)=>y.p-x.p);
+  const weak=areas.filter(x=>x.p<0.6).sort((x,y)=>(y.max-y.got)-(x.max-x.got));
+  if(best.length) out.push("Bäst går det på "+joinSv(best.slice(0,3).map(phrase))+".");
+
+  const g=lv.grund.poss?lv.grund.got/lv.grund.poss:null;
+  const a=lv.avancerat.poss?lv.avancerat.got/lv.avancerat.poss:null;
+  if(g!=null&&g<0.6) out.push(label+" behöver träna mest på grunderna just nu.");
+  else if(g!=null&&a!=null&&g>=0.75&&a<0.5) out.push("Grunderna sitter. Nästa steg är uppgifter där flera moment ska kombineras.");
+
+  if(weak.length) out.push("Räkna uppgifter på framför allt "+joinSv(weak.slice(0,2).map(phrase))+".");
+  else if(areas.length) out.push("Inget område sticker ut som svagt. Ta dig an de svårare uppgifterna inom de områden som redan går bra.");
+  return out;
 }
+
 function renderStudentDetail(hs){
   const sel=$("#histStudent"), box=$("#histStuBody");
   if(!sel||!box) return;
@@ -1652,7 +1703,7 @@ function renderStudentDetail(hs){
   const done=hs.filter(h=>h.students.some(s=>nameKey(s.name)===key));
   if(done.length<1){ box.innerHTML='<div class="empty">Eleven finns inte i något sparat prov.</div>'; return; }
 
-  let h='<div id="histStuText" class="summary-box" style="margin-top:10px">'+esc(stuSummary(hs,key,label))+'</div>';
+  let h='<div id="histStuText" class="summary-box" style="margin-top:10px">'+paraHTML(stuSummary(hs,key,label))+'</div>';
   h+='<div class="stu-lead">Elevens resultat i heldragen linje. Klassens snitt är streckat och finns med som sammanhang för dig som lärare, inte som något eleven ska jämföras med.</div>';
   h+='<div class="trendcard">'+stuTrendSVG(hs,key)+'</div>';
 
@@ -1685,20 +1736,24 @@ function renderHistory(){
   const tests=groupTests();
   const legacy=(work.legacy||[]).filter(h=>h.gid===work.curGid);
   listEl.innerHTML = (tests.length||legacy.length)
-    ? tests.slice().reverse().map(t=>{
+    ? tests.map(t=>{
         const info=withState(t.state,()=>({n:activeStudents().length,u:validTasks().length}));
         return `<div class="hist-row${t.id===work.curTid?" is-cur":""}"><span class="hn">${esc(testLabel(t))}</span>`
           +`<span class="hv">${info.u} uppgifter · ${info.n} elever</span>`
           +`<span class="hd">${new Date(t.savedAt||Date.now()).toLocaleDateString("sv-SE")}</span>`
+          +`<button class="btn-mini ord" data-hup="${t.id}" title="Flytta tidigare">↑</button>`
+          +`<button class="btn-mini ord" data-hdown="${t.id}" title="Flytta senare">↓</button>`
           +`<button class="btn-mini" data-hopen="${t.id}">Öppna</button>`
           +`<button class="btn-mini del" data-hdel="${t.id}" title="Ta bort provet">✕</button></div>`;
       }).join("")
-      + legacy.slice().reverse().map(h=>`<div class="hist-row"><span class="hn">${esc(h.name)}</span>`
+      + legacy.map(h=>`<div class="hist-row"><span class="hn">${esc(h.name)}</span>`
           +`<span class="hv">endast sammanfattning</span>`
           +`<span class="hd">${new Date(h.savedAt||Date.now()).toLocaleDateString("sv-SE")}</span></div>`).join("")
     : `<div class="empty" style="margin-top:12px">Inga prov i ${esc(groupLabel(g)||"klassen")} än. Lägg till ett med knappen "+ Prov" högst upp.</div>`;
   listEl.querySelectorAll("[data-hdel]").forEach(b=>b.onclick=()=>removeTest(b.dataset.hdel));
   listEl.querySelectorAll("[data-hopen]").forEach(b=>b.onclick=()=>{ openTest(b.dataset.hopen); switchTab("analyze"); });
+  listEl.querySelectorAll("[data-hup]").forEach(b=>b.onclick=()=>moveTest(b.dataset.hup,-1));
+  listEl.querySelectorAll("[data-hdown]").forEach(b=>b.onclick=()=>moveTest(b.dataset.hdown,1));
 
   const hs=groupSnapshots();
 
@@ -1706,7 +1761,7 @@ function renderHistory(){
   if(hs.length<2){ body.classList.add("hidden"); empty.classList.remove("hidden"); return; }
   body.classList.remove("hidden"); empty.classList.add("hidden");
 
-  $("#histText").textContent=histSummary(hs);
+  $("#histText").innerHTML=paraHTML(histSummary(hs));
   $("#histTrend").innerHTML=trendSVG(hs);
   $("#histGrades").innerHTML=gradeStackHTML(hs);
 
@@ -1766,7 +1821,7 @@ async function exportXlsx(){
   ws6.addRow([]);
   secTitle("Klassens resultat per uppgift");
   let hrT=ws6.addRow(["Uppgift","Område","Klassens resultat"]); styleHeader(ws6,hrT.number);
-  vt.forEach((t,i)=>{ let g=0,m=0; act.forEach(s=>{ g+=studentTaskPoints(s,t); m+=taskMax(t); }); const rr=ws6.addRow([(i+1)+".",taskAreas(t).join(", "),null]); pctCell(rr,3,m?g/m:0); });
+  vt.forEach((t,i)=>{ let g=0,m=0; act.forEach(s=>{ g+=studentTaskPoints(s,t); m+=taskMax(t); }); const rr=ws6.addRow([taskNo(t)+".",taskAreas(t).join(", "),null]); pctCell(rr,3,m?g/m:0); });
   ws6.addRow([]);
   const clv=classLevelStats(), lvOrder=["grund","medel","avancerat"], lvLbl={grund:"Grund (1–2)",medel:"Medel (3)",avancerat:"Avancerat (4–5)"}, lvPresent=lvOrder.filter(k=>clv[k].poss>0);
   if(lvPresent.length){
