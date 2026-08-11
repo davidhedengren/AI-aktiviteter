@@ -1145,6 +1145,37 @@ function levelPattern(s){
   return "";
 }
 
+/* Vad eleven klarar, sagt konkret och på rätt nivå. Den som ligger på F eller E
+   behöver den meningen mest, eftersom resten av texten annars bara handlar om
+   det som saknas. Styrkan hämtas därför från samma tvådelning som behoven: ett
+   område kan gå bra på de enklare uppgifterna även när helheten är svag. */
+const STRENGTH_LIMIT = 0.6;
+function strengthNote(s){
+  const areas=usedAreas().filter(a=>areaTaskCount(a)>=UNDERLAG);
+  const groups=[];
+  areas.forEach(a=>{ const sp=areaSplit(s,a);
+    if(sp.easy.poss) groups.push({a,kind:"easy",got:sp.easy.got,poss:sp.easy.poss,p:sp.easy.got/sp.easy.poss});
+    if(sp.hard.poss) groups.push({a,kind:"hard",got:sp.hard.got,poss:sp.hard.poss,p:sp.hard.got/sp.hard.poss});
+  });
+  if(!groups.length) return "";
+  const good=groups.filter(g=>g.p>=STRENGTH_LIMIT).sort((x,y)=>y.p-x.p);
+  if(good.length){
+    /* Går både de enklare och de svårare uppgifterna bra i ett område nämns
+       området utan nivå, annars sägs vilken nivå det gäller. */
+    const whole=areas.filter(a=>good.filter(g=>g.a===a).length===groups.filter(g=>g.a===a).length
+      && groups.filter(g=>g.a===a).length>1);
+    if(whole.length) return "Du klarar "+joinSv(whole.slice(0,3))+" bra.";
+    const easy=good.filter(g=>g.kind==="easy").slice(0,3);
+    if(easy.length) return "Du klarar de enklare uppgifterna i "+joinSv(easy.map(g=>g.a))+".";
+    const hard=good.filter(g=>g.kind==="hard").slice(0,3);
+    if(hard.length) return "Du klarar de svårare uppgifterna i "+joinSv(hard.map(g=>g.a))+".";
+  }
+  const best=groups.filter(g=>g.got>0).sort((x,y)=>y.p-x.p)[0];
+  if(best) return "Bäst går det på de "+(best.kind==="easy"?"enklare":"svårare")+" uppgifterna i "
+    +best.a+" ("+fmt(best.got)+" av "+fmt(best.poss)+" p).";
+  return "";
+}
+
 /* Var tappas poängen, sett över hela provet? Räknat i poäng och inte i antal
    områden, eftersom ett stort område väger tyngre än ett litet. */
 function lostByLevel(s){
@@ -1165,6 +1196,11 @@ function feedbackNote(s,thr){
   const allEasy=share("easy")>=0.7, allHard=share("hard")>=0.7;
   const namesOf=list=>list.length<=4 ? joinSv(list.map(x=>x.area)) : "de flesta områden";
 
+  /* Vad som fungerar sägs först, sedan vad som ska tränas. */
+  let saidEasyWorks=false;
+  if(needs.length){ const sn=strengthNote(s);
+    if(sn){ out.push(sn); saidEasyWorks = sn.indexOf("de enklare uppgifterna")>=0; } }
+
   if(!needs.length){
     out.push("Inget område ligger under gränsen.");
   } else if(allHard&&needs.length>1){
@@ -1183,10 +1219,12 @@ function feedbackNote(s,thr){
 
   /* Helhetsmeningen läggs bara till när den säger något som listan inte redan
      sagt. Beröm för alla nivåer hör inte hemma när något behöver tränas. */
-  const lp=levelPattern(s);
+  let lp=levelPattern(s);
   if(lp){
     const praise=lp.indexOf("alla nivåer")>=0;
-    const nextStep=lp.indexOf("Nästa steg")>=0;
+    /* Har styrkeraden redan sagt att de enklare uppgifterna fungerar behövs
+       bara nästa steg, inte konstaterandet en gång till. */
+    if(saidEasyWorks) lp=lp.replace("De enklare uppgifterna sitter. ","");
     if(!(praise&&needs.length)) out.push(lp);
   }
   return out.join(" ");
