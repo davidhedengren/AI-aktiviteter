@@ -1145,23 +1145,40 @@ function levelPattern(s){
   return "";
 }
 
+/* Var tappas poängen, sett över hela provet? Räknat i poäng och inte i antal
+   områden, eftersom ett stort område väger tyngre än ett litet. */
+function lostByLevel(s){
+  let easy=0, hard=0;
+  validTasks().forEach(t=>{ const d=taskMax(t)-studentTaskPoints(s,t);
+    if(+t.level<=2) easy+=d; else hard+=d; });
+  return {easy,hard};
+}
+
 function feedbackNote(s,thr){
   const areas=usedAreas().filter(a=>areaTaskCount(a)>=UNDERLAG);
   const needs=areas.map(a=>areaNeed(s,a)).filter(Boolean).sort((x,y)=>y.lost-x.lost);
   const out=[];
-  /* Är behovet detsamma i nästan alla områden är det nivån som är problemet,
-     inte områdena, och då säger en uppräkning ingenting. */
+  /* Behöver de flesta områdena samma sak är det nivån som är problemet, inte
+     områdena. Då namnges områdena fortfarande, men i en enda mening som säger
+     vad de har gemensamt. */
   const share=k=>needs.length?needs.filter(x=>x.kind===k).length/needs.length:0;
   const allEasy=share("easy")>=0.7, allHard=share("hard")>=0.7;
+  const namesOf=list=>list.length<=4 ? joinSv(list.map(x=>x.area)) : "de flesta områden";
 
   if(!needs.length){
     out.push("Inget område ligger under gränsen.");
-  } else if(needs.length>FEEDBACK_MAX_AREAS){
-    if(allHard) out.push("Du tappar genomgående poäng på de svårare uppgifterna, oavsett område. De enklare sitter, så nästa steg är uppgifter där flera saker ska kombineras.");
-    else if(allEasy) out.push("Du tappar genomgående poäng på de enklare uppgifterna, oavsett område.");
-    else out.push("Du tappar poäng i de flesta områden, så det är bredden som behöver övas och inte ett enskilt moment.");
-  } else {
+  } else if(allHard&&needs.length>1){
+    out.push("Du tappar poäng på de svårare uppgifterna i "+namesOf(needs)+".");
+  } else if(allEasy&&needs.length>1){
+    out.push("Du tappar poäng på de enklare uppgifterna i "+namesOf(needs)+".");
+  } else if(needs.length<=FEEDBACK_MAX_AREAS){
     out.push("Träna mer på "+joinSv(needs.map(x=>x.text))+".");
+  } else {
+    /* Blandade behov. Då avgör var poängen faktiskt försvinner. */
+    const lost=lostByLevel(s);
+    if(lost.hard>=lost.easy*2) out.push("Du tappar poäng i flera områden, och det mesta ligger på de svårare uppgifterna.");
+    else if(lost.easy>=lost.hard*2) out.push("Du tappar poäng i flera områden, och det mesta ligger på de enklare uppgifterna.");
+    else out.push("Du tappar poäng i de flesta områden, så det är bredden som behöver övas och inte ett enskilt moment.");
   }
 
   /* Helhetsmeningen läggs bara till när den säger något som listan inte redan
@@ -1170,7 +1187,7 @@ function feedbackNote(s,thr){
   if(lp){
     const praise=lp.indexOf("alla nivåer")>=0;
     const nextStep=lp.indexOf("Nästa steg")>=0;
-    if(!(praise&&needs.length) && !(nextStep&&needs.length>FEEDBACK_MAX_AREAS)) out.push(lp);
+    if(!(praise&&needs.length)) out.push(lp);
   }
   return out.join(" ");
 }
