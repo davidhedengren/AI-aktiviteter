@@ -903,6 +903,7 @@
 
   <div style="text-align:center;padding:34px 0 10px" id="helpRow">
     <button class="btn sm ghost" id="helpOpen">? Hints</button>
+    <button class="btn sm ghost" id="printSnakes">🖨 Print the snakes</button>
   </div>
 </div>
 
@@ -2158,7 +2159,55 @@ function renderSummary(){
   document.addEventListener('mouseleave',()=>spot.classList.remove('on'));})();
 
 
+ 
+function printSnakeSheet(){
+  const VEN='Venomous', HARM='Harmless';
+  const card=(s,i)=>{
+    const g = s.label==='G';
+    return '<div class="pc"><div class="pn">'+String(i+1).padStart(2,'0')+'</div>'
+      + snake(s) + '<div class="pl '+(g?'g':'o')+'">'+(g?VEN:HARM)+'</div></div>';
+  };
+  const css = `
+    @page{size:A4 portrait;margin:15mm;}
+    *{box-sizing:border-box;}
+    body{margin:0;font-family:'DM Sans',system-ui,sans-serif;color:#12141c;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    h1{font-size:15pt;margin:0 0 4mm;font-weight:700;}
+    h2{font-size:13pt;margin:0 0 3mm;font-weight:700;page-break-after:avoid;}
+    p.warn{font-size:9pt;line-height:1.5;margin:0 0 5mm;max-width:160mm;
+        border-left:0.8mm solid #c0392b;background:#fdf0ee;color:#8e2b20;
+        padding:2.5mm 3mm;border-radius:0 1.5mm 1.5mm 0;font-weight:600;}
+    /* Fem kolumner ger 20 ormar på fyra rader och en bild på cirka 30 x 45 mm,
+       vilket räcker för att jämföra huvudform, pupill och mönster. */
+    .pg{display:grid;grid-template-columns:repeat(5,1fr);gap:3mm;}
+    .brk{page-break-before:always;}
+    .pc{border:0.4mm solid #c9ccd6;border-radius:2.5mm;padding:2.5mm 2mm 2mm;
+        text-align:center;position:relative;page-break-inside:avoid;background:#fff;}
+    .pc svg{width:100%;height:auto;display:block;}
+    .pn{position:absolute;top:1.5mm;left:2mm;font-size:7.5pt;font-weight:700;color:#8d93a3;}
+    .pl{margin-top:1.5mm;font-size:8pt;font-weight:700;letter-spacing:.02em;}
+    .pl.g{color:#a3312a;}
+    .pl.o{color:#1f6b46;}
+    .foot{margin-top:7mm;font-size:7.5pt;color:#8d93a3;}
+    @media print{.foot{position:fixed;bottom:0;}}
+  `;
+  const html = '<!DOCTYPE html><html lang="' + (document.documentElement.lang || 'sv') + '">'
+    + '<head><meta charset="utf-8"><title>' + 'Snake cards · Decision trees' + '</title><style>' + css + '</style></head><body>'
+    + '<h1>Training data</h1>'
+    
+    + '<div class="pg">' + TRAIN.map(card).join('') + '</div>'
+    + '<h2 class="brk">Test data</h2>'
+    + '<p class="warn">Note: these must not be used while you build your decision tree. Look at them only afterwards, when you test it.</p>'
+    + '<div class="pg">' + TEST.map(card).join('') + '</div>'
+    + '<div class="foot">' + 'Decision trees · ai-aktiviteter.se' + '</div>'
+    + '</body></html>';
+  const w = window.open('', '_blank');
+  if(!w){ alert('The browser blocked the print window. Allow pop-ups for this page and try again.'); return; }
+  w.document.write(html);
+  w.document.close();
 
+  w.addEventListener('load', ()=>{ w.focus(); setTimeout(()=>w.print(), 120); });
+}
+document.getElementById('printSnakes').addEventListener('click', printSnakeSheet);
 
 </script>
 </body>
