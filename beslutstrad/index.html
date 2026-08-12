@@ -904,6 +904,7 @@
 
   <div style="text-align:center;padding:34px 0 10px" id="helpRow">
     <button class="btn sm ghost" id="helpOpen">? Ledtrådar</button>
+    <button class="btn sm ghost" id="printSnakes">🖨 Skriv ut ormarna</button>
   </div>
 </div>
 
@@ -2161,6 +2162,55 @@ function renderSummary(){
 
 
 
+
+
+/* ── Utskrivbart ark med ormarna ── */
+function printSnakeSheet(){
+  const card=(s,i,showLabel)=>{
+    const lab = showLabel
+      ? '<div class="pl">'+(s.label==='G'?'G':'O')+'</div>'
+      : '<div class="pl q">?</div>';
+    return '<div class="pc"><div class="pn">'+String(i+1).padStart(2,'0')+'</div>'
+      + snake(s) + lab + '</div>';
+  };
+  const css = `
+    @page{size:A4 portrait;margin:15mm;}
+    *{box-sizing:border-box;}
+    body{margin:0;font-family:'DM Sans',system-ui,sans-serif;color:#12141c;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    h1{font-size:15pt;margin:0 0 2mm;font-weight:700;}
+    h2{font-size:11.5pt;margin:9mm 0 2mm;font-weight:700;page-break-after:avoid;}
+    p.lead{font-size:9pt;line-height:1.5;color:#4a5060;margin:0 0 5mm;max-width:150mm;}
+    /* Fem kolumner ger 20 ormar på fyra rader och en bild på cirka 30 x 45 mm,
+       vilket räcker för att jämföra huvudform, pupill och mönster. */
+    .pg{display:grid;grid-template-columns:repeat(5,1fr);gap:3mm;}
+    .brk{page-break-before:always;}
+    .pc{border:0.4mm solid #c9ccd6;border-radius:2.5mm;padding:2.5mm 2mm 2mm;
+        text-align:center;position:relative;page-break-inside:avoid;background:#fff;}
+    .pc svg{width:100%;height:auto;display:block;}
+    .pn{position:absolute;top:1.5mm;left:2mm;font-size:7.5pt;font-weight:700;color:#8d93a3;}
+    .pl{margin-top:1.5mm;font-size:9pt;font-weight:700;letter-spacing:.04em;}
+    .pl.q{color:#8d93a3;font-weight:600;}
+    .foot{margin-top:7mm;font-size:7.5pt;color:#8d93a3;}
+    @media print{.foot{position:fixed;bottom:0;}}
+  `;
+  const html = '<!DOCTYPE html><html lang="' + (document.documentElement.lang || 'sv') + '">'
+    + '<head><meta charset="utf-8"><title>' + 'Träningsdata: 20 ormar' + '</title><style>' + css + '</style></head><body>'
+    + '<h1>' + 'Träningsdata: 20 ormar' + '</h1>'
+    + '<p class="lead">' + 'Varje orm beskrivs av fem egenskaper. Facit står under bilden: G för giftig och O för ofarlig.' + ' ' + 'Klipp ut korten och sortera dem på bordet.' + '</p>'
+    + '<div class="pg">' + TRAIN.map((s,i)=>card(s,i,true)).join('') + '</div>'
+    + '<h2 class="brk">' + 'Testdata: 12 osedda ormar' + '</h2>'
+    + '<p class="lead">' + 'De här ormarna används för att pröva trädet. Facit är dolt.' + '</p>'
+    + '<div class="pg">' + TEST.map((s,i)=>card(s,i,false)).join('') + '</div>'
+    + '<div class="foot">' + 'Beslutsträd · ai-aktiviteter.se' + '</div>'
+    + '</body></html>';
+  const w = window.open('', '_blank');
+  if(!w){ alert('Utskriften blockerades av webbläsaren. Tillåt popup-fönster för sidan och försök igen.'); return; }
+  w.document.write(html);
+  w.document.close();
+  /* Bilderna behöver en bildruta på sig innan utskriftsdialogen öppnas. */
+  w.addEventListener('load', ()=>{ w.focus(); setTimeout(()=>w.print(), 120); });
+}
+document.getElementById('printSnakes').addEventListener('click', printSnakeSheet);
 
 </script>
 </body>
