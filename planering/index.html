@@ -88,6 +88,8 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
 .badge{display:inline-block;background:#e6fffb;color:#0f766e;border:1px solid #99f6e4;border-radius:999px;padding:1px 7px;font-size:10px;font-weight:700;margin-left:6px;vertical-align:middle}
 .status{font-size:12px;color:#475467;font-weight:600;margin:10px 0 0 0;text-align:center}
 .btnrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.titlerow{display:grid;grid-template-columns:1fr auto;gap:6px}
+.titlerow .btn{white-space:nowrap}
 .lab-row td{background:#effcfa}
 .lab-row .date{color:#0f766e;font-weight:700}
 .lab-label{font-weight:700;color:#0f766e}
@@ -150,7 +152,15 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
         <button class="tab" onclick="showTab('labs',this)">Laborationer</button>
       </div>
       <div id="settings" class="tabpane active body">
-        <div class="field"><label>Rubrik</label><input id="titleInput" value="Planering av Fysik 1 - 2026/2027" oninput="state.title=this.value;render()"></div>
+        <div class="field"><label>Rubrik</label>
+          <div class="titlerow">
+            <input id="titleInput" value="Planering av Fysik 1 - 2026/2027" oninput="state.title=this.value;render()">
+            <button class="btn" onclick="newPlan()">Ny planering</button>
+          </div>
+        </div>
+        <div class="field"><label>Sparade planeringar</label>
+          <select id="planSelect" onchange="switchPlan(this.value)"></select>
+        </div>
         <div class="row">
           <div class="field"><label>Första vecka</label><input id="startWeek" type="number" value="34"></div>
           <div class="field"><label>Sista vecka</label><input id="endWeek" type="number" value="24"></div>
@@ -161,7 +171,8 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
         </div>
         <button class="btn primary" style="width:100%" onclick="rebuildSchedule()">Skapa / uppdatera schema</button>
         <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
-        <button class="btn danger" style="width:100%" onclick="clearPlan()">Rensa planeringen</button>
+        <button class="btn danger" style="width:100%;margin-bottom:8px" onclick="clearPlan()">Rensa planeringen</button>
+        <button class="btn danger" style="width:100%" onclick="deletePlan()">Ta bort denna planering</button>
         <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
         <div class="field"><label>Markera vald vecka som ledig</label>
           <input id="blockWeek" type="number" placeholder="t.ex. 44">
@@ -371,7 +382,7 @@ function rebuildSchedule(){
 function render(){
  document.getElementById("docTitle").textContent=state.title;
  document.getElementById("printTitle").textContent=state.title;
- renderLessons(); renderLabs(); renderSchedule(); updateStatus();
+ renderLessons(); renderLabs(); renderSchedule(); updateStatus(); saveLocal(); renderPlanSelect();
 }
 // Visningsordning: fasta pass överst, därefter sidnummerordning.
 // Lektioner utan sidhänvisning hamnar sist, i den ordning de lades till.
@@ -860,6 +871,62 @@ function exportWord(){
  const blob=new Blob([html],{type:"application/msword"});
  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(state.title||"planering")+".doc";a.click();
 }
+const STORE_KEY="planeringsverktyg_v2";
+let store={current:null,plans:{}};
+let planId=null;
+// Flera planeringar sparas automatiskt i webbläsaren och kan växlas mellan.
+function writeStore(){try{localStorage.setItem(STORE_KEY,JSON.stringify(store))}catch(err){}}
+function readStore(){
+ try{
+   const raw=localStorage.getItem(STORE_KEY);
+   if(raw){const d=JSON.parse(raw);if(d&&d.plans)return d}
+ }catch(err){}
+ try{
+   const old=localStorage.getItem("planeringsverktyg_v1");
+   if(old){const st=JSON.parse(old);if(st&&Array.isArray(st.slots)){const id=uid();return {current:id,plans:{[id]:st}}}}
+ }catch(err){}
+ return {current:null,plans:{}};
+}
+function saveLocal(){
+ if(!planId)return;
+ store.plans[planId]=state;store.current=planId;writeStore();
+}
+function freshState(){
+ return {title:"Ny planering",startWeek:34,endWeek:24,periods:[],slots:[],
+   lessons:seedLessons.map(x=>({...x})),blockedWeeks:[],blockedSlots:[],labs:defaultLabs()};
+}
+function activate(){
+ ensureFixedLessons();normalizePeriods();normalizeLabs();
+ syncInputs();render();
+}
+function newPlan(){
+ planId=uid();
+ state=freshState();
+ activate();
+ rebuildSchedule();
+}
+function switchPlan(id){
+ if(!store.plans[id])return;
+ planId=id;state=store.plans[id];
+ activate();
+}
+function deletePlan(){
+ if(!confirm("Ta bort planeringen \""+(state.title||"")+"\" ur webbläsaren? Sparade filer påverkas inte."))return;
+ delete store.plans[planId];planId=null;writeStore();
+ const ids=Object.keys(store.plans);
+ if(ids.length)switchPlan(ids[0]);else newPlan();
+}
+function renderPlanSelect(){
+ const el=document.getElementById("planSelect");
+ if(!el)return;
+ el.innerHTML="";
+ Object.keys(store.plans).forEach(id=>{
+   const o=document.createElement("option");
+   o.value=id;o.textContent=store.plans[id].title||"Utan namn";
+   el.appendChild(o);
+ });
+ el.value=planId;
+}
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
 
 document.getElementById("logoImg").src=LOGO;
@@ -867,13 +934,11 @@ document.addEventListener("click",closeCtx);
 document.addEventListener("scroll",closeCtx,true);
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCtx()});
 window.addEventListener("resize",closeCtx);
-state.lessons=seedLessons.map(x=>({...x}));
-if(!state.labs) state.labs=defaultLabs();
-normalizePeriods();
-renderPeriods();
 bindLabControls();
-rebuildSchedule();
-render();
+store=readStore();
+const firstId=(store.current&&store.plans[store.current])?store.current:Object.keys(store.plans)[0];
+if(firstId){switchPlan(firstId)}
+else{newPlan();state.title="Planering av Fysik 1 - 2026/2027";activate()}
 
 function showTab(id,btn){
  document.querySelectorAll(".tabpane").forEach(x=>x.classList.remove("active"));
