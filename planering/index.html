@@ -1541,21 +1541,21 @@ function exportWord(){
      const isLab=(lab.status||"lab")==="lab";
      const bg=isLab?P.lab:P.off;
      const wkBg=alt?P.wkAlt:P.wk, dyBg=isLab?(alt?P.dyAlt:P.dy):P.off;
+     const wkCell=top?`<td rowspan="${g.rows.length}" style="${b}background:${wkBg};text-align:center;vertical-align:middle;font-weight:bold;color:#1e4976;font-size:10pt">${esc(g.week)}</td>`:"";
      const col=isLab?"#0b5c56":"#343a40";
-     return `<tr>`
-       +`<td style="${b}background:${wkBg};text-align:center;font-weight:bold;color:#1e4976;font-size:10pt">${esc(g.week)}</td>`
+     return `<tr>`+wkCell
        +`<td style="${b}background:${dyBg};color:${isLab?"#4a5f79":"#343a40"};font-size:8.5pt">${esc(row.day)} ${esc(fmtDate(dateForWeekDay(g.week,row.day)))}</td>`
        +`<td style="${b}background:${bg};font-weight:bold;color:${col};font-size:9.5pt">${esc(labText(lab))}</td>`
        +`<td style="${b}background:${bg}"></td><td style="${b}background:${bg}"></td></tr>`;
    }
    const s2=row.slot, v=slotView(s2), off=s2.blocked;
    const wkBg=alt?P.wkAlt:P.wk;
+   const wkCell=top?`<td rowspan="${g.rows.length}" style="${b}background:${wkBg};text-align:center;vertical-align:middle;font-weight:bold;color:#1e4976;font-size:10pt">${esc(s2.week)}</td>`:"";
    const dyBg=off?P.off:(alt?P.dyAlt:P.dy);
    const secBg=off?P.off:(v?.exam?P.exam:P.white);
    const othBg=s2.otherExam?P.exam:(off?P.off:P.white);
    const secCol=off?"#343a40":(v?.exam?"#912018":"#17202a");
-   return `<tr>`
-     +`<td style="${b}background:${wkBg};text-align:center;font-weight:bold;color:#1e4976;font-size:10pt">${esc(s2.week)}</td>`
+   return `<tr>`+wkCell
      +`<td style="${b}background:${dyBg};color:${off?"#343a40":"#4a5f79"};font-size:8.5pt">${esc(s2.day)} ${esc(fmtDate(dateForWeekDay(s2.week,s2.day)))}</td>`
      +`<td style="${b}background:${secBg};font-weight:bold;color:${secCol};font-size:9.5pt">${off?esc(blockedText(s2)):esc(v?.title||"")}</td>`
      +`<td style="${b}background:${off?P.off:P.white};font-size:9pt;color:#3f4854">${off?"":esc(v?.pages||"")}</td>`
@@ -1574,11 +1574,8 @@ function exportWord(){
 <head><meta charset="utf-8"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>${esc(state.title)}</title><style>${style}</style></head>
 <body><div class="WordSection1">
-<table style="width:100%;margin:0 0 10pt 0"><tr>
-  <td style="width:80px;border:0;padding:0"><img src="${LOGO}" alt="Erik Dahlbergsgymnasiet" width="74"></td>
-  <td style="border:0;padding:0"><h1>${esc(state.title)}</h1></td>
-  <td style="width:80px;border:0;padding:0"></td>
-</tr></table>
+<h1>${esc(state.title)}</h1>
+<p style="border-bottom:1.5pt solid #7a8ea8;margin:6pt 0 10pt 0;font-size:1pt">&nbsp;</p>
 <table style="width:100%;table-layout:fixed">
 <col style="width:7%"><col style="width:15%"><col style="width:37%"><col style="width:9%"><col style="width:32%">
 <thead><tr>
