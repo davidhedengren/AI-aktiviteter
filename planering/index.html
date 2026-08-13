@@ -50,6 +50,11 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
 .lab-item .study{grid-column:2;display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;color:#667085}
 .lab-item .study input{width:auto}
 .lab-item.off{opacity:.55}
+.lab-rule{display:grid;grid-template-columns:1fr 52px 52px 26px;gap:5px;align-items:center;margin-bottom:6px}
+.lab-rule select,.lab-rule input{padding:6px 5px;font-size:12px}
+.lab-rule .del{border:0;background:transparent;color:#98a2b3;font-size:15px;font-weight:700;padding:0}
+.lab-rule .del:hover{color:#b42318}
+.lab-rule .lbl{font-size:10px;color:#98a2b3;font-weight:700;text-align:center}
 .print-header{display:none}
 .print-header img{width:95px;height:auto;object-fit:contain}
 .print-header h1{font-family:Georgia,serif;font-size:20px;margin:0;text-align:center;flex:1}
@@ -93,6 +98,11 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
 .modal .content{padding:16px}
 .modal .actions{display:flex;justify-content:flex-end;gap:8px;padding:12px 16px;border-top:1px solid var(--line)}
 .small{font-size:11px}
+.ctx{display:none;position:fixed;z-index:20;background:#fff;border:1px solid var(--line);border-radius:9px;box-shadow:0 12px 32px rgba(16,24,40,.18);padding:5px;min-width:190px}
+.ctx button{display:block;width:100%;text-align:left;border:0;background:transparent;padding:8px 10px;border-radius:6px;font-size:13px;font-weight:600;color:#344054}
+.ctx button:hover{background:#f0fdfa;color:#0f766e}
+.ctx button.danger:hover{background:#fef3f2;color:#b42318}
+.ctx hr{border:0;border-top:1px solid var(--line);margin:4px 2px}
 @media(max-width:1000px){.layout{grid-template-columns:1fr}.sidebar{order:2}}
 @media print{
   body{background:white}
@@ -169,8 +179,8 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
       <div id="labs" class="tabpane body">
         <label class="cbrow"><input type="checkbox" id="labEnabled"> Använd laborationer</label>
         <div class="field" style="margin-top:12px"><label>Laborationsveckor</label>
-          <label class="cbrow"><input type="checkbox" id="labEven"> Jämna veckor</label>
-          <label class="cbrow"><input type="checkbox" id="labOdd"> Udda veckor</label>
+          <div id="labRules"></div>
+          <button class="btn" style="width:100%;margin-top:6px" onclick="addLabRule()">+ Lägg till period</button>
         </div>
         <div class="field"><label>Laborationsdag</label>
           <select id="labDay"></select>
@@ -193,6 +203,8 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
     </div>
   </main>
 </div>
+
+<div class="ctx no-print" id="ctxMenu"></div>
 
 <div class="modal-backdrop" id="modal">
   <div class="modal">
@@ -220,9 +232,9 @@ let state={
  startWeek:34,endWeek:24,lessonsPerWeek:2,
  evenDays:["Måndag","Onsdag"], oddDays:["Måndag","Onsdag"],
  slots:[], lessons:[], blockedWeeks:[], blockedSlots:[],
- labs:{enabled:false, even:false, odd:false, day:"Fredag", items:{}}
+ labs:{enabled:false, rules:[], day:"Fredag", items:{}}
 };
-function defaultLabs(){return {enabled:false, even:false, odd:false, day:"Fredag", items:{}}}
+function defaultLabs(){return {enabled:false, rules:[], day:"Fredag", items:{}}}
 
 const seedLessons=[
  {id:"rep",title:"Repetition",pages:"",other:"",reusable:true},
@@ -347,6 +359,32 @@ function buildRows(){
  }
  return groups;
 }
+function closeCtx(){document.getElementById("ctxMenu").style.display="none"}
+function openCtx(e,index){
+ const s=state.slots[index];
+ if(!s)return;
+ const m=document.getElementById("ctxMenu");
+ m.innerHTML="";
+ const add=(label,fn,cls)=>{
+   const b=document.createElement("button");
+   b.textContent=label;
+   if(cls)b.className=cls;
+   b.onclick=()=>{closeCtx();fn()};
+   m.appendChild(b);
+ };
+ const l=getLesson(s.lessonId);
+ if(l&&!s.blocked){
+   add("Redigera lektion",()=>openLesson(l.id));
+   add("Ta bort pass",()=>removePlacement(index),"danger");
+   m.appendChild(document.createElement("hr"));
+ }
+ add(s.blocked?"Ta bort ledig / studiedag":"Markera som studiedag / ledig",()=>toggleBlocked(index));
+ m.style.display="block";
+ // Håll menyn innanför fönstret.
+ const r=m.getBoundingClientRect();
+ m.style.left=Math.min(e.clientX,innerWidth-r.width-8)+"px";
+ m.style.top=Math.min(e.clientY,innerHeight-r.height-8)+"px";
+}
 function renderSchedule(){
  const table=document.getElementById("scheduleTable");
  table.innerHTML=`<thead><tr><th>Vecka</th><th>Dag</th><th>Avsnitt</th><th>Sidor</th><th>Övrigt</th></tr></thead>`;
@@ -378,6 +416,8 @@ function renderSchedule(){
        handleDrop(e.dataTransfer.getData("text/plain"),state.slots.indexOf(s));
      };
      cell.ondblclick=()=>toggleBlocked(state.slots.indexOf(s));
+     cell.oncontextmenu=e=>{e.preventDefault();openCtx(e,state.slots.indexOf(s))};
+     tr.querySelector(".date").oncontextmenu=e=>{e.preventDefault();openCtx(e,state.slots.indexOf(s))};
      tr.querySelector(".date").ondblclick=()=>toggleBlocked(state.slots.indexOf(s));
      const placed=cell.querySelector(".placed");
      if(placed){
@@ -552,14 +592,70 @@ function repack(){
  let p=0;
  state.slots.forEach(s=>{if(!s.blocked&&p<ids.length)s.lessonId=ids[p++]});
 }
+function scheduleWeeks(){return [...new Set(state.slots.map(s=>s.week))]}
+function defaultRange(){
+ const ws=scheduleWeeks();
+ return ws.length?{from:ws[0],to:ws[ws.length-1]}:{from:state.startWeek,to:state.endWeek};
+}
+// Äldre filer hade bara "jämna/udda veckor" – de görs om till en period över hela läsåret.
+function normalizeLabs(){
+ if(!state.labs)state.labs=defaultLabs();
+ if(!state.labs.items)state.labs.items={};
+ if(!Array.isArray(state.labs.rules)){
+   const r=defaultRange(),rules=[];
+   if(state.labs.even)rules.push({parity:"even",from:r.from,to:r.to});
+   if(state.labs.odd)rules.push({parity:"odd",from:r.from,to:r.to});
+   state.labs.rules=rules;
+ }
+ delete state.labs.even;delete state.labs.odd;
+}
+// Perioden avgränsas i schemats egen veckoordning, så v.36–42 och v.2–17
+// fungerar lika bra trots årsskiftet mitt i.
+function ruleCovers(r,w,ws){
+ const parityOk = r.parity==="all" || (w%2===0 ? r.parity==="even" : r.parity==="odd");
+ if(!parityOk)return false;
+ const i=ws.indexOf(w);
+ let a=ws.indexOf(+r.from); if(a<0)a=0;
+ let b=ws.indexOf(+r.to); if(b<0)b=ws.length-1;
+ if(a>b){const t=a;a=b;b=t}
+ return i>=a&&i<=b;
+}
 function labWeeks(){
  if(!state.labs || !state.labs.enabled)return [];
- const weeks=[...new Set(state.slots.map(s=>s.week))];
- return weeks.filter(w=>{
-   const parityOk = (w%2===0) ? state.labs.even : state.labs.odd;
-   if(!parityOk)return false;
-   const ws=state.slots.filter(s=>s.week===w);
-   return ws.some(s=>!s.blocked);
+ const ws=scheduleWeeks();
+ const rules=state.labs.rules||[];
+ return ws.filter(w=>{
+   if(!state.slots.some(s=>s.week===w&&!s.blocked))return false;
+   return rules.some(r=>ruleCovers(r,w,ws));
+ });
+}
+function addLabRule(){
+ const r=defaultRange();
+ state.labs.rules.push({parity:"even",from:r.from,to:r.to});
+ renderLabs();renderSchedule();
+}
+function renderLabRules(){
+ const el=document.getElementById("labRules");
+ el.innerHTML="";
+ if(!state.labs.rules.length){el.innerHTML='<div class="empty" style="padding:8px">Inga perioder valda.</div>';return}
+ el.innerHTML='<div class="lab-rule"><div></div><div class="lbl">från</div><div class="lbl">till</div><div></div></div>';
+ state.labs.rules.forEach((r,k)=>{
+   const box=document.createElement("div");
+   box.className="lab-rule";
+   box.innerHTML=`<select>
+       <option value="even"${r.parity==="even"?" selected":""}>Jämna veckor</option>
+       <option value="odd"${r.parity==="odd"?" selected":""}>Udda veckor</option>
+       <option value="all"${r.parity==="all"?" selected":""}>Varje vecka</option>
+     </select>
+     <input type="number" value="${esc(r.from)}">
+     <input type="number" value="${esc(r.to)}">
+     <button class="del" type="button" title="Ta bort period">×</button>`;
+   const [sel,from,to]=box.querySelectorAll("select,input");
+   sel.onchange=()=>{r.parity=sel.value;renderLabs();renderSchedule()};
+   from.onchange=()=>{r.from=+from.value;renderLabs();renderSchedule()};
+   to.onchange=()=>{r.to=+to.value;renderLabs();renderSchedule()};
+   box.querySelector(".del").onclick=()=>{state.labs.rules.splice(k,1);renderLabs();renderSchedule()};
+   el.appendChild(box);
  });
 }
 function labItem(week){
@@ -567,10 +663,10 @@ function labItem(week){
  return state.labs.items[week];
 }
 function renderLabs(){
+ normalizeLabs();
  const list=document.getElementById("labList");
  document.getElementById("labEnabled").checked=!!state.labs.enabled;
- document.getElementById("labEven").checked=!!state.labs.even;
- document.getElementById("labOdd").checked=!!state.labs.odd;
+ renderLabRules();
  const daySel=document.getElementById("labDay");
  if(!daySel.options.length){
    DAYS.forEach(d=>{const o=document.createElement("option");o.value=d;o.textContent=d;daySel.appendChild(o)});
@@ -595,9 +691,7 @@ function renderLabs(){
  });
 }
 function bindLabControls(){
- document.getElementById("labEnabled").onchange=e=>{state.labs.enabled=e.target.checked;renderLabs();renderSchedule()};
- document.getElementById("labEven").onchange=e=>{state.labs.even=e.target.checked;renderLabs();renderSchedule()};
- document.getElementById("labOdd").onchange=e=>{state.labs.odd=e.target.checked;renderLabs();renderSchedule()};
+ document.getElementById("labEnabled").onchange=e=>{state.labs.enabled=e.target.checked;if(e.target.checked&&!state.labs.rules.length)addLabRule();renderLabs();renderSchedule()};
  document.getElementById("labDay").onchange=e=>{state.labs.day=e.target.value;renderSchedule()};
 }
 function openLesson(id){
@@ -631,7 +725,7 @@ function saveProject(){
 }
 function loadProject(){
  const inp=document.createElement("input");inp.type="file";inp.accept=".json";
- inp.onchange=()=>{const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{state=JSON.parse(r.result);if(!state.labs)state.labs=defaultLabs();if(!state.labs.items)state.labs.items={};if(!state.lessons)state.lessons=[];ensureFixedLessons();syncInputs();render()};r.readAsText(f)};inp.click();
+ inp.onchange=()=>{const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{state=JSON.parse(r.result);if(!state.lessons)state.lessons=[];ensureFixedLessons();normalizeLabs();syncInputs();render()};r.readAsText(f)};inp.click();
 }
 function syncInputs(){
  document.getElementById("titleInput").value=state.title||"";
@@ -662,6 +756,10 @@ function exportWord(){
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
 
 document.getElementById("logoImg").src=LOGO;
+document.addEventListener("click",closeCtx);
+document.addEventListener("scroll",closeCtx,true);
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCtx()});
+window.addEventListener("resize",closeCtx);
 state.lessons=seedLessons.map(x=>({...x}));
 if(!state.evenDays) state.evenDays=state.days||["Måndag","Onsdag"];
 if(!state.oddDays) state.oddDays=state.days||["Måndag","Onsdag"];
