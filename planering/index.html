@@ -288,6 +288,17 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
   .schedule tr{page-break-inside:avoid}
   .schedule thead{display:table-header-group}
 }
+
+/* Lediga rader ska vara helt gråa, även i vecko- och dagkolumnen. */
+.schedule tr.blocked td,
+.schedule tr.blocked td.week,
+.schedule tr.blocked td.date,
+.schedule tr.wk-alt.blocked td.week,
+.schedule tr.wk-alt.blocked td.date{background:var(--holiday);color:#343a40}
+.schedule tr.blocked td.week{font-weight:800}
+.schedule tr.lab-row.study td,
+.schedule tr.lab-row.study td.date,
+.schedule tr.lab-row.study td.week{background:var(--holiday)}
 </style>
 </head>
 <body>
