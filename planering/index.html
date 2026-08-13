@@ -68,16 +68,14 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
 .print-header img{width:95px;height:auto;object-fit:contain}
 .print-header h1{font-family:Georgia,serif;font-size:20px;margin:0;text-align:center;flex:1}
 .schedule-wrap{overflow:auto;max-height:calc(100vh - 120px)}
-.schedule{min-width:900px;border-collapse:collapse;width:100%;background:#fff}
+.schedule{min-width:900px;border-collapse:collapse;width:100%;background:#fff;table-layout:fixed}
 .schedule th{background:#e1e3e5;font-size:12px;text-align:left;padding:8px;border:1px solid #adb3b9;position:sticky;top:0;z-index:2;box-shadow:inset 0 1px 0 #adb3b9,inset 0 -1px 0 #adb3b9}
-.schedule td{border:1px solid #adb3b9;padding:6px;vertical-align:top;height:56px;font-size:12px}
-.schedule .week{width:60px;text-align:center;font-weight:800;background:#f3f4f6}
-.schedule .date{width:108px;color:#667085;white-space:nowrap;background:#f5f7f9}
+.schedule td{border:1px solid #adb3b9;padding:6px;vertical-align:top;height:56px;font-size:12px;overflow-wrap:break-word}
+.schedule .week{text-align:center;font-weight:800;background:#f3f4f6}
+.schedule .date{color:#667085;white-space:nowrap;background:#f5f7f9}
 .schedule .blocked .date{background:var(--holiday)}
 .schedule .lab-row .date{background:#effcfa}
 .schedule .dnum{color:#98a2b3;font-size:11px}
-.schedule .slot{width:170px}
-.schedule .other{width:230px}
 .lesson-cell{min-height:40px;padding:6px;border-radius:6px}
 .lesson-cell.drop{outline:2px dashed #0f766e;background:#f0fdfa}
 .lesson-cell.drop-before{box-shadow:inset 0 4px 0 #0f766e}
@@ -598,7 +596,7 @@ function openCtx(e,index){
 }
 function renderSchedule(){
  const table=document.getElementById("scheduleTable");
- table.innerHTML=`<thead><tr><th>Vecka</th><th>Dag</th><th>Avsnitt</th><th>Sidor</th><th>Övrigt</th></tr></thead>`;
+ table.innerHTML=`<colgroup><col style="width:7%"><col style="width:12%"><col style="width:42%"><col style="width:18%"><col style="width:21%"></colgroup><thead><tr><th>Vecka</th><th>Dag</th><th>Avsnitt</th><th>Sidor</th><th>Övrigt</th></tr></thead>`;
  const tb=document.createElement("tbody");
  buildRows().forEach(g=>{
    g.rows.forEach((row,k)=>{
