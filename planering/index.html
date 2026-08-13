@@ -224,6 +224,20 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
 
 <div class="ctx no-print" id="ctxMenu"></div>
 
+<div class="modal-backdrop" id="noteModal">
+  <div class="modal">
+    <h3>Kommentar i Övrigt</h3>
+    <div class="content">
+      <div class="field"><label>Text</label><input id="nText" placeholder="t.ex. Prov tisdag 14/5"></div>
+      <input type="hidden" id="nSlot">
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="closeNote()">Avbryt</button>
+      <button class="btn primary" onclick="saveNote()">Spara</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-backdrop" id="freeModal">
   <div class="modal">
     <h3>Ledig rad</h3>
@@ -472,9 +486,7 @@ function buildRows(){
  return groups;
 }
 function closeCtx(){document.getElementById("ctxMenu").style.display="none"}
-function openCtx(e,index){
- const s=state.slots[index];
- if(!s)return;
+function showCtx(e,build){
  const m=document.getElementById("ctxMenu");
  m.innerHTML="";
  const add=(label,fn,cls)=>{
@@ -484,6 +496,25 @@ function openCtx(e,index){
    b.onclick=()=>{closeCtx();fn()};
    m.appendChild(b);
  };
+ build(add,m);
+ m.style.display="block";
+ // Håll menyn innanför fönstret.
+ const r=m.getBoundingClientRect();
+ m.style.left=Math.min(e.clientX,innerWidth-r.width-8)+"px";
+ m.style.top=Math.min(e.clientY,innerHeight-r.height-8)+"px";
+}
+function openOtherCtx(e,index){
+ const s=state.slots[index];
+ if(!s)return;
+ showCtx(e,add=>{
+   add(s.other?"Redigera kommentar":"Skriv kommentar",()=>openNote(index));
+   if(s.other)add("Ta bort kommentar",()=>{s.other="";render()},"danger");
+ });
+}
+function openCtx(e,index){
+ const s=state.slots[index];
+ if(!s)return;
+ showCtx(e,(add,m)=>{
  const l=getLesson(s.lessonId);
  if(l&&!s.blocked){
    add("Redigera pass",()=>openSlotEditor(index));
@@ -498,11 +529,8 @@ function openCtx(e,index){
  }else{
    add("Markera som ledig / studiedag",()=>{toggleBlocked(index);openFree(index)});
  }
- m.style.display="block";
- // Håll menyn innanför fönstret.
- const r=m.getBoundingClientRect();
- m.style.left=Math.min(e.clientX,innerWidth-r.width-8)+"px";
- m.style.top=Math.min(e.clientY,innerHeight-r.height-8)+"px";
+ add(s.other?"Redigera kommentar i Övrigt":"Skriv kommentar i Övrigt",()=>openNote(index));
+ });
 }
 function renderSchedule(){
  const table=document.getElementById("scheduleTable");
@@ -526,7 +554,7 @@ function renderSchedule(){
      tr.innerHTML=`${weekCell}<td class="date">${esc(s.day)}</td>
        <td class="slot"><div class="lesson-cell" data-slot="${s.id}">${s.blocked?`<span class="block-label">${esc(blockedText(s))}</span>`:lessonHTML(s)}</div></td>
        <td>${!s.blocked?esc(slotView(s)?.pages||""):""}</td>
-       <td>${!s.blocked?esc(slotView(s)?.other||""):""}</td>`;
+       <td class="other-cell">${otherHTML(s)}</td>`;
      const cell=tr.querySelector(".lesson-cell");
      const clearDrop=()=>cell.classList.remove("drop","drop-before","drop-after");
      cell.ondragover=e=>{
@@ -544,6 +572,11 @@ function renderSchedule(){
        handleDrop(e.dataTransfer.getData("text/plain"),state.slots.indexOf(s),mode);
      };
      cell.ondblclick=()=>toggleBlocked(state.slots.indexOf(s));
+     const oc=tr.querySelector(".other-cell");
+     if(oc){
+       oc.oncontextmenu=e=>{e.preventDefault();openOtherCtx(e,state.slots.indexOf(s))};
+       oc.ondblclick=()=>openNote(state.slots.indexOf(s));
+     }
      cell.oncontextmenu=e=>{e.preventDefault();openCtx(e,state.slots.indexOf(s))};
      tr.querySelector(".date").oncontextmenu=e=>{e.preventDefault();openCtx(e,state.slots.indexOf(s))};
      tr.querySelector(".date").ondblclick=()=>toggleBlocked(state.slots.indexOf(s));
@@ -636,6 +669,14 @@ function slotView(s){
          :{title:l.title,pages:l.pages,other:l.other,note:l.note,edited:false};
 }
 const LAB_STATUS=[["lab","Laboration"],["studiedag","Studiedag"],["ingen","Ingen lektion"],["ledig","Ledig"]];
+function otherHTML(s){
+ const base=s.blocked?"":(slotView(s)?.other||"");
+ return [base,s.other||""].filter(Boolean).map(t=>`<div>${esc(t)}</div>`).join("");
+}
+function otherText(s){
+ const base=s.blocked?"":(slotView(s)?.other||"");
+ return [base,s.other||""].filter(Boolean).join("<br>");
+}
 function blockedText(s){
  const t=s.label||"Ledig";
  return s.note?t+" – "+s.note:t;
@@ -779,7 +820,6 @@ function labWeeks(){
  if(!state.labs || !state.labs.enabled)return [];
  const ws=scheduleWeeks();
  return ws.filter(w=>{
-   if(!state.slots.some(s=>s.week===w&&!s.blocked))return false;
    const p=periodFor(w,ws);
    return !!p&&!!p.lab;
  });
@@ -887,6 +927,21 @@ function bulkEntries(){
 function previewBulk(){
  const n=bulkEntries().length;
  document.getElementById("bulkInfo").textContent=n?n+" lektioner hittades.":"Inget att lägga in ännu.";
+}
+function openNote(index){
+ const s=state.slots[index];
+ if(!s)return;
+ document.getElementById("nText").value=s.other||"";
+ document.getElementById("nSlot").value=index;
+ document.getElementById("noteModal").style.display="flex";
+}
+function closeNote(){document.getElementById("noteModal").style.display="none"}
+function saveNote(){
+ const i=document.getElementById("nSlot").value;
+ if(i===""){closeNote();return}
+ const s=state.slots[+i];
+ if(s)s.other=document.getElementById("nText").value.trim();
+ closeNote();render();
 }
 function openFree(index){
  const s=state.slots[index];
@@ -1000,7 +1055,7 @@ function exportWord(){
    const s=row.slot;
    const v=slotView(s);
    const cls=s.blocked?' class="blocked"':'';
-   return `<tr${cls}><td>${esc(s.week)}</td><td>${esc(s.day)}</td><td>${s.blocked?'<b>'+esc(blockedText(s))+'</b>':esc(v?.title||"")}</td><td>${s.blocked?'':esc(v?.pages||"")}</td><td>${s.blocked?'':esc(v?.other||"")}</td></tr>`;
+   return `<tr${cls}><td>${esc(s.week)}</td><td>${esc(s.day)}</td><td>${s.blocked?'<b>'+esc(blockedText(s))+'</b>':esc(v?.title||"")}</td><td>${s.blocked?'':esc(v?.pages||"")}</td><td>${otherText(s)}</td></tr>`;
  })).join("");
  const html=`<!doctype html><html><head><meta charset="utf-8"><title>${esc(state.title)}</title>
  <style>body{font-family:Arial,sans-serif;font-size:10pt}.dochead{display:flex;align-items:center;margin:0 0 12px 0}.dochead img{width:95px;height:auto}.dochead h1{text-align:center;font-family:Georgia,serif;font-size:18pt;flex:1;margin:0}table{border-collapse:collapse;width:100%}th{background:#ddd}th,td{border:1px solid #555;padding:5px;vertical-align:top}.blocked td{background:#e8eaed}td:first-child{width:7%}td:nth-child(2){width:12%}td:nth-child(3){width:42%}td:nth-child(4){width:18%}td:nth-child(5){width:21%}</style></head><body>
