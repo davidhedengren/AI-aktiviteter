@@ -240,6 +240,11 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
 .card.used{background:linear-gradient(180deg,#fbfefd,#f6fbfa)}
 .badge.used-badge{background:#0f766e;border-color:#0f766e;color:#fff}
 .card.exam-card.used{background:linear-gradient(180deg,#fffbfb,#fdf4f3)}
+
+.card.fixed-card{border:1.5px solid #94a3b8;box-shadow:0 2px 6px rgba(16,24,40,.07)}
+.card.fixed-card:hover{border-color:#64748b}
+.card.exam-card.fixed-card{border-color:#e5a49e}
+.card.exam-card.fixed-card:hover{border-color:#d1837c}
 </style>
 </head>
 <body>
@@ -678,7 +683,8 @@ function renderLessons(){
    // Fasta pass markeras inte, eftersom de förekommer på många rader.
    const mark=!l.reusable&&used[l.id];
    if(mark)d.classList.add("used");
-   d.innerHTML=`<div class="title">${esc(l.title)}${l.reusable?'<span class="badge">fast</span>':''}${mark?`<span class="badge used-badge">${used[l.id]>1?used[l.id]+"×":"✓"}</span>`:''}</div><div class="meta">${esc(l.pages||"")} ${l.other?" · "+esc(l.other):""}</div>
+   if(l.reusable)d.classList.add("fixed-card");
+   d.innerHTML=`<div class="title">${esc(l.title)}${mark?`<span class="badge used-badge">${used[l.id]>1?used[l.id]+"×":"✓"}</span>`:''}</div><div class="meta">${esc(l.pages||"")} ${l.other?" · "+esc(l.other):""}</div>
    <div class="actions"><button class="btn" onclick="openLesson('${l.id}')">Redigera</button><button class="btn danger" onclick="deleteLesson('${l.id}')">Ta bort</button></div>`;
    el.appendChild(d);
  });
