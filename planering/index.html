@@ -289,16 +289,16 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
   .schedule thead{display:table-header-group}
 }
 
-/* Lediga rader ska vara helt gråa, även i vecko- och dagkolumnen. */
+/* Lediga rader är gråa i alla kolumner utom veckonumret, som gäller hela veckan. */
 .schedule tr.blocked td,
-.schedule tr.blocked td.week,
 .schedule tr.blocked td.date,
-.schedule tr.wk-alt.blocked td.week,
 .schedule tr.wk-alt.blocked td.date{background:var(--holiday);color:#343a40}
-.schedule tr.blocked td.week{font-weight:800}
 .schedule tr.lab-row.study td,
-.schedule tr.lab-row.study td.date,
-.schedule tr.lab-row.study td.week{background:var(--holiday)}
+.schedule tr.lab-row.study td.date{background:var(--holiday)}
+.schedule tr.blocked td.week,
+.schedule tr.lab-row.study td.week{background:#dbe9fa;color:#1e4976;font-weight:800}
+.schedule tr.wk-alt.blocked td.week,
+.schedule tr.wk-alt.lab-row.study td.week{background:#c7dcf5}
 </style>
 </head>
 <body>
@@ -1528,59 +1528,63 @@ function syncInputs(){
  renderPeriods();
 }
 function exportWord(){
- const rows=buildRows().flatMap((g,gi)=>g.rows.map(row=>{
-   const alt=(gi%2===1?" alt":"")+(row===g.rows[0]?" wkstart":"");
+ // Word tillämpar inte sammansatta CSS-väljare tillförlitligt, därför skrivs
+ // färger och kantlinjer direkt på varje cell.
+ const P={wk:"#dbe9fa",wkAlt:"#c7dcf5",dy:"#eef5fd",dyAlt:"#e0edfb",
+          off:"#e8eaed",exam:"#fbd6d3",lab:"#eefaf8",white:"#ffffff"};
+ const BORDER=".75pt solid #8b939c";
+ const base=top=>`border:${BORDER};${top?"border-top:1.5pt solid #7a8ea8;":""}padding:5pt 6pt;vertical-align:top;`;
+ const rows=buildRows().flatMap((g,gi)=>g.rows.map((row,k)=>{
+   const alt=gi%2===1, top=k===0, b=base(top);
    if(row.kind==="lab"){
      const lab=labItem(g.week);
      const isLab=(lab.status||"lab")==="lab";
-     const txt=esc(labText(lab));
-     return `<tr class="${isLab?"lab":"blocked"}${alt}"><td class="wk">${esc(g.week)}</td><td class="dy">${esc(row.day)} ${esc(fmtDate(dateForWeekDay(g.week,row.day)))}</td><td class="sec">${txt}</td><td class="pg"></td><td class="oth"></td></tr>`;
+     const bg=isLab?P.lab:P.off;
+     const wkBg=alt?P.wkAlt:P.wk, dyBg=isLab?(alt?P.dyAlt:P.dy):P.off;
+     const col=isLab?"#0b5c56":"#343a40";
+     return `<tr>`
+       +`<td style="${b}background:${wkBg};text-align:center;font-weight:bold;color:#1e4976;font-size:10pt">${esc(g.week)}</td>`
+       +`<td style="${b}background:${dyBg};color:${isLab?"#4a5f79":"#343a40"};font-size:8.5pt">${esc(row.day)} ${esc(fmtDate(dateForWeekDay(g.week,row.day)))}</td>`
+       +`<td style="${b}background:${bg};font-weight:bold;color:${col};font-size:9.5pt">${esc(labText(lab))}</td>`
+       +`<td style="${b}background:${bg}"></td><td style="${b}background:${bg}"></td></tr>`;
    }
-   const s=row.slot;
-   const v=slotView(s);
-   const cls=(s.blocked?"blocked":"")+alt;
-   const exCell=!s.blocked&&v?.exam?" examcell":"";
-   const exOther=s.otherExam?" examcell":"";
-   return `<tr${cls.trim()?' class="'+cls.trim()+'"':''}><td class="wk">${esc(s.week)}</td><td class="dy">${esc(s.day)} ${esc(fmtDate(dateForWeekDay(s.week,s.day)))}</td><td class="sec${exCell}">${s.blocked?(s.exam?'<span class="exam">'+esc(blockedText(s))+'</span>':esc(blockedText(s))):esc(v?.title||"")}</td><td class="pg">${s.blocked?'':esc(v?.pages||"")}</td><td class="oth${exOther}">${otherText(s)}</td></tr>`;
+   const s2=row.slot, v=slotView(s2), off=s2.blocked;
+   const wkBg=alt?P.wkAlt:P.wk;
+   const dyBg=off?P.off:(alt?P.dyAlt:P.dy);
+   const secBg=off?P.off:(v?.exam?P.exam:P.white);
+   const othBg=s2.otherExam?P.exam:(off?P.off:P.white);
+   const secCol=off?"#343a40":(v?.exam?"#912018":"#17202a");
+   return `<tr>`
+     +`<td style="${b}background:${wkBg};text-align:center;font-weight:bold;color:#1e4976;font-size:10pt">${esc(s2.week)}</td>`
+     +`<td style="${b}background:${dyBg};color:${off?"#343a40":"#4a5f79"};font-size:8.5pt">${esc(s2.day)} ${esc(fmtDate(dateForWeekDay(s2.week,s2.day)))}</td>`
+     +`<td style="${b}background:${secBg};font-weight:bold;color:${secCol};font-size:9.5pt">${off?esc(blockedText(s2)):esc(v?.title||"")}</td>`
+     +`<td style="${b}background:${off?P.off:P.white};font-size:9pt;color:#3f4854">${off?"":esc(v?.pages||"")}</td>`
+     +`<td style="${b}background:${othBg};font-size:8.5pt;color:${s2.otherExam?"#912018":"#3f4854"}">${otherText(s2)}</td></tr>`;
  })).join("");
- // Word tolkar varken flexbox eller moderna sidregler, därför byggs dokumentet
- // med tabellayout och Words egna sidinställningar.
+ const th=`border:${BORDER};border-bottom:1.5pt solid #4b535c;background:#dde1e6;font-size:8pt;`
+   +`font-weight:bold;text-align:left;padding:5pt 6pt;text-transform:uppercase`;
  const style=`
- @page WordSection1{size:21cm 29.7cm;margin:1.4cm 1.2cm;mso-header-margin:1cm;mso-footer-margin:1cm}
+ @page WordSection1{size:21cm 29.7cm;margin:1.4cm 1.2cm}
  div.WordSection1{page:WordSection1}
  body{font-family:Calibri,Arial,sans-serif;font-size:10pt;color:#17202a;margin:0}
- table.head{width:100%;border-collapse:collapse;margin:0 0 10pt 0}
- table.head td{border:0;padding:0;vertical-align:middle}
- table.head img{width:74px;height:auto}
- h1{font-family:Georgia,'Times New Roman',serif;font-size:17pt;font-weight:normal;text-align:center;margin:0;color:#17202a}
- table.plan{width:100%;border-collapse:collapse;table-layout:fixed;mso-table-lspace:0;mso-table-rspace:0}
- table.plan th{background:#dde1e6;font-size:8pt;font-weight:bold;text-align:left;text-transform:uppercase;
-   letter-spacing:.03em;padding:5pt 6pt;border:.75pt solid #8b939c;border-bottom:1.5pt solid #4b535c}
- table.plan td{font-size:9.5pt;padding:5pt 6pt;border:.75pt solid #8b939c;vertical-align:top}
- td.wk{background:#dbe9fa;color:#1e4976;text-align:center;font-weight:bold;font-size:10pt}
- td.dy{background:#eef5fd;color:#4a5f79;font-size:8.5pt;white-space:nowrap}
- td.sec{font-weight:bold}
- td.pg{font-size:9pt;color:#3f4854}
- td.oth{font-size:8.5pt;color:#3f4854}
- tr.alt td.wk{background:#c7dcf5}
- tr.alt td.dy{background:#e0edfb}
- tr.wkstart td{border-top:1.5pt solid #7a8ea8}
- tr.blocked td.sec,tr.blocked td.pg,tr.blocked td.oth{background:#e8eaed;color:#343a40}
- tr.lab td.sec{background:#eefaf8;color:#0b5c56}
- td.examcell{background:#fbd6d3;color:#912018;font-weight:bold}
- .exam{color:#912018;font-weight:bold}`;
+ table{border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0}
+ h1{font-family:Georgia,'Times New Roman',serif;font-size:17pt;font-weight:normal;text-align:center;margin:0}
+ a{color:#1155cc}`;
  const html="\ufeff"+`<!doctype html><html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word">
 <head><meta charset="utf-8"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>${esc(state.title)}</title><style>${style}</style></head>
 <body><div class="WordSection1">
-<table class="head"><tr>
-  <td style="width:80px"><img src="${LOGO}" alt="Erik Dahlbergsgymnasiet"></td>
-  <td><h1>${esc(state.title)}</h1></td>
-  <td style="width:80px"></td>
+<table style="width:100%;margin:0 0 10pt 0"><tr>
+  <td style="width:80px;border:0;padding:0"><img src="${LOGO}" alt="Erik Dahlbergsgymnasiet" width="74"></td>
+  <td style="border:0;padding:0"><h1>${esc(state.title)}</h1></td>
+  <td style="width:80px;border:0;padding:0"></td>
 </tr></table>
-<table class="plan">
-<col style="width:7%"><col style="width:15%"><col style="width:36%"><col style="width:14%"><col style="width:28%">
-<thead><tr><th>Vecka</th><th>Dag</th><th>Avsnitt</th><th>Sidor</th><th>Övrigt</th></tr></thead>
+<table style="width:100%;table-layout:fixed">
+<col style="width:7%"><col style="width:15%"><col style="width:37%"><col style="width:9%"><col style="width:32%">
+<thead><tr>
+  <th style="${th}">Vecka</th><th style="${th}">Dag</th><th style="${th}">Avsnitt</th>
+  <th style="${th}">Sidor</th><th style="${th}">Övrigt</th>
+</tr></thead>
 <tbody>${rows}</tbody></table>
 </div></body></html>`;
  const blob=new Blob([html],{type:"application/msword"});
