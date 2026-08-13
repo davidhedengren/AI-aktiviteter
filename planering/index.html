@@ -264,6 +264,30 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
 .lnk{color:#1155cc;text-decoration:underline;word-break:break-word}
 .lnk:hover{color:#0b4bc7}
 .schedule .other-cell div+div{margin-top:3px}
+
+/* Utskrift: A4 stående med anpassade kolumnbredder och textstorlekar. */
+@media print{
+  @page{size:A4 portrait;margin:12mm 10mm}
+  .print-header{gap:14px;margin:0 0 8px 0}
+  .print-header img{width:62px}
+  .print-header h1{font-size:15pt}
+  .schedule{table-layout:fixed;width:100%;font-size:8.5pt;min-width:0}
+  .schedule th{font-size:7pt;padding:3px 4px;letter-spacing:.02em}
+  .schedule td{padding:3px 4px;height:auto;vertical-align:top}
+  .schedule .week{width:7%}
+  .schedule .date{width:15%;font-size:7.5pt}
+  .schedule .slot{width:36%}
+  .schedule td:nth-child(4){width:14%}
+  .schedule td:nth-child(5){width:28%;font-size:7.5pt}
+  .schedule td.slot{padding:3px 4px}
+  .lesson-cell{min-height:0;display:block;padding:0;margin:0}
+  .schedule td.slot .lab-label{min-height:0;display:block;padding:0}
+  .lesson-title,.block-label,.lab-label{font-size:8.5pt;line-height:1.25}
+  .placed .rm{display:none}
+  .lnk{word-break:break-all;font-size:7.5pt}
+  .schedule tr{page-break-inside:avoid}
+  .schedule thead{display:table-header-group}
+}
 </style>
 </head>
 <body>
