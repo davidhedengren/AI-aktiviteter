@@ -277,8 +277,8 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
   .schedule .week{width:7%}
   .schedule .date{width:15%;font-size:7.5pt}
   .schedule .slot{width:36%}
-  .schedule td:nth-child(4){width:14%}
-  .schedule td:nth-child(5){width:28%;font-size:7.5pt}
+  .schedule td:nth-child(4){width:9%}
+  .schedule td:nth-child(5){width:33%;font-size:7.5pt}
   .schedule td.slot{padding:3px 4px}
   .lesson-cell{min-height:0;display:block;padding:0;margin:0}
   .schedule td.slot .lab-label{min-height:0;display:block;padding:0}
@@ -1523,39 +1523,55 @@ function exportWord(){
      const lab=labItem(g.week);
      const isLab=(lab.status||"lab")==="lab";
      const txt=esc(labText(lab));
-     // Avvikande textfärg används endast för aktiva laborationer.
-     const style=isLab?' style="color:#0f766e"':'';
-     return `<tr class="${isLab?"lab":"blocked"}${alt}"><td>${esc(g.week)}</td><td>${esc(row.day)} ${esc(fmtDate(dateForWeekDay(g.week,row.day)))}</td><td><b${style}>${txt}</b></td><td></td><td></td></tr>`;
+     return `<tr class="${isLab?"lab":"blocked"}${alt}"><td class="wk">${esc(g.week)}</td><td class="dy">${esc(row.day)} ${esc(fmtDate(dateForWeekDay(g.week,row.day)))}</td><td class="sec">${txt}</td><td class="pg"></td><td class="oth"></td></tr>`;
    }
    const s=row.slot;
    const v=slotView(s);
    const cls=(s.blocked?"blocked":"")+alt;
-   const exCell=!s.blocked&&v?.exam?' class="examcell"':'';
-   const exOther=s.otherExam?' class="examcell"':'';
-   return `<tr${cls.trim()?' class="'+cls.trim()+'"':''}><td>${esc(s.week)}</td><td>${esc(s.day)} ${esc(fmtDate(dateForWeekDay(s.week,s.day)))}</td><td${exCell}>${s.blocked?(s.exam?'<span class="exam">'+esc(blockedText(s))+'</span>':'<b>'+esc(blockedText(s))+'</b>'):esc(v?.title||"")}</td><td>${s.blocked?'':esc(v?.pages||"")}</td><td${exOther}>${otherText(s)}</td></tr>`;
+   const exCell=!s.blocked&&v?.exam?" examcell":"";
+   const exOther=s.otherExam?" examcell":"";
+   return `<tr${cls.trim()?' class="'+cls.trim()+'"':''}><td class="wk">${esc(s.week)}</td><td class="dy">${esc(s.day)} ${esc(fmtDate(dateForWeekDay(s.week,s.day)))}</td><td class="sec${exCell}">${s.blocked?(s.exam?'<span class="exam">'+esc(blockedText(s))+'</span>':esc(blockedText(s))):esc(v?.title||"")}</td><td class="pg">${s.blocked?'':esc(v?.pages||"")}</td><td class="oth${exOther}">${otherText(s)}</td></tr>`;
  })).join("");
- // Exportens färger motsvarar schemats nyanser.
- const html=`<!doctype html><html><head><meta charset="utf-8"><title>${esc(state.title)}</title>
- <style>body{font-family:Arial,sans-serif;font-size:10pt}.dochead{display:flex;align-items:center;margin:0 0 12px 0}.dochead img{width:95px;height:auto}.dochead h1{text-align:center;font-family:Georgia,serif;font-size:18pt;flex:1;margin:0}table{border-collapse:collapse;width:100%}thead{display:table-header-group}
-th{background:#e1e3e5;font-weight:bold;text-align:left;border-bottom:2px solid #444}
-th,td{border:1px solid #adb3b9;padding:5px 6px;vertical-align:top}
-td:first-child{text-align:center;font-weight:bold;width:7%}
-td:nth-child(2){white-space:nowrap;width:12%}
-td:nth-child(3){width:42%}td:nth-child(4){width:18%}td:nth-child(5){width:21%}
-td:first-child{background:#dbe9fa;color:#1e4976}
-td:nth-child(2){background:#eef5fd;color:#546a85}
-.alt td:first-child{background:#c7dcf5}
-.alt td:nth-child(2){background:#e0edfb}
-.wkstart td{border-top:2px solid #7a8ea8}
-.blocked td{background:#e8eaed;color:#343a40}
-.lab td{background:#effcfa}
-.exam{background:#fde3e1;color:#912018;font-weight:bold;padding:1px 5px;border-radius:4px}
-.exam-lesson{color:#912018;font-weight:bold}
-td.examcell{background:#fde3e1;color:#912018;font-weight:bold}
-td.examcell .exam{background:transparent;padding:0}
-.blocked .exam{background:#fbc9c4}</style></head><body>
- <div class="dochead"><img src="${LOGO}" alt="Erik Dahlbergsgymnasiet"><h1>${esc(state.title)}</h1></div>
- <table><thead><tr><th>Vecka</th><th>Dag</th><th>Avsnitt</th><th>Sidor</th><th>Övrigt</th></tr></thead><tbody>${rows}</tbody></table></body></html>`;
+ // Word tolkar varken flexbox eller moderna sidregler, därför byggs dokumentet
+ // med tabellayout och Words egna sidinställningar.
+ const style=`
+ @page WordSection1{size:21cm 29.7cm;margin:1.4cm 1.2cm;mso-header-margin:1cm;mso-footer-margin:1cm}
+ div.WordSection1{page:WordSection1}
+ body{font-family:Calibri,Arial,sans-serif;font-size:10pt;color:#17202a;margin:0}
+ table.head{width:100%;border-collapse:collapse;margin:0 0 10pt 0}
+ table.head td{border:0;padding:0;vertical-align:middle}
+ table.head img{width:74px;height:auto}
+ h1{font-family:Georgia,'Times New Roman',serif;font-size:17pt;font-weight:normal;text-align:center;margin:0;color:#17202a}
+ table.plan{width:100%;border-collapse:collapse;table-layout:fixed;mso-table-lspace:0;mso-table-rspace:0}
+ table.plan th{background:#dde1e6;font-size:8pt;font-weight:bold;text-align:left;text-transform:uppercase;
+   letter-spacing:.03em;padding:5pt 6pt;border:.75pt solid #8b939c;border-bottom:1.5pt solid #4b535c}
+ table.plan td{font-size:9.5pt;padding:5pt 6pt;border:.75pt solid #8b939c;vertical-align:top}
+ td.wk{background:#dbe9fa;color:#1e4976;text-align:center;font-weight:bold;font-size:10pt}
+ td.dy{background:#eef5fd;color:#4a5f79;font-size:8.5pt;white-space:nowrap}
+ td.sec{font-weight:bold}
+ td.pg{font-size:9pt;color:#3f4854}
+ td.oth{font-size:8.5pt;color:#3f4854}
+ tr.alt td.wk{background:#c7dcf5}
+ tr.alt td.dy{background:#e0edfb}
+ tr.wkstart td{border-top:1.5pt solid #7a8ea8}
+ tr.blocked td.sec,tr.blocked td.pg,tr.blocked td.oth{background:#e8eaed;color:#343a40}
+ tr.lab td.sec{background:#eefaf8;color:#0b5c56}
+ td.examcell{background:#fbd6d3;color:#912018;font-weight:bold}
+ .exam{color:#912018;font-weight:bold}`;
+ const html="\ufeff"+`<!doctype html><html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word">
+<head><meta charset="utf-8"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>${esc(state.title)}</title><style>${style}</style></head>
+<body><div class="WordSection1">
+<table class="head"><tr>
+  <td style="width:80px"><img src="${LOGO}" alt="Erik Dahlbergsgymnasiet"></td>
+  <td><h1>${esc(state.title)}</h1></td>
+  <td style="width:80px"></td>
+</tr></table>
+<table class="plan">
+<col style="width:7%"><col style="width:15%"><col style="width:36%"><col style="width:14%"><col style="width:28%">
+<thead><tr><th>Vecka</th><th>Dag</th><th>Avsnitt</th><th>Sidor</th><th>Övrigt</th></tr></thead>
+<tbody>${rows}</tbody></table>
+</div></body></html>`;
  const blob=new Blob([html],{type:"application/msword"});
  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(state.title||"planering")+".doc";a.click();
 }
