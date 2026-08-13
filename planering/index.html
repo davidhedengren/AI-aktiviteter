@@ -214,10 +214,12 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
       <div class="field"><label>Sidor</label><input id="mPages" placeholder="t.ex. 307–310"></div>
       <div class="field"><label>Övrigt</label><input id="mOther" placeholder="t.ex. Laboration:"></div>
       <div class="field"><label>Extra anteckning</label><input id="mNote" placeholder="Valfritt"></div>
-      <label class="cbrow"><input type="checkbox" id="mReusable"> Kan placeras ut flera gånger</label>
+      <div id="mReusableRow"><label class="cbrow"><input type="checkbox" id="mReusable"> Fast pass – visas överst i listan</label></div>
       <input type="hidden" id="mId">
+      <input type="hidden" id="mSlot">
     </div>
     <div class="actions">
+      <button class="btn danger" id="mReset" onclick="resetSlot()">Återställ</button>
       <button class="btn" onclick="closeModal()">Avbryt</button>
       <button class="btn primary" onclick="saveLesson()">Spara</button>
     </div>
@@ -392,7 +394,7 @@ function renderLessons(){
    const d=document.createElement("div"); d.className="card"; d.draggable=true;
    d.ondragstart=e=>{e.dataTransfer.setData("text/plain","lesson:"+l.id);e.dataTransfer.effectAllowed="copyMove";d.classList.add("dragging")};
    d.ondragend=()=>d.classList.remove("dragging");
-   d.innerHTML=`<div class="title">${esc(l.title)}${l.reusable?'<span class="badge">flera</span>':''}</div><div class="meta">${esc(l.pages||"")} ${l.other?" · "+esc(l.other):""}</div>
+   d.innerHTML=`<div class="title">${esc(l.title)}${l.reusable?'<span class="badge">fast</span>':''}</div><div class="meta">${esc(l.pages||"")} ${l.other?" · "+esc(l.other):""}</div>
    <div class="actions"><button class="btn" onclick="openLesson('${l.id}')">Redigera</button><button class="btn danger" onclick="deleteLesson('${l.id}')">Ta bort</button></div>`;
    el.appendChild(d);
  });
@@ -428,7 +430,9 @@ function openCtx(e,index){
  };
  const l=getLesson(s.lessonId);
  if(l&&!s.blocked){
-   add("Redigera lektion",()=>openLesson(l.id));
+   add("Redigera pass",()=>openSlotEditor(index));
+   if(s.override)add("Återställ till grundlektionen",()=>{s.override=null;render()});
+   add("Redigera grundlektion",()=>openLesson(l.id));
    add("Ta bort pass",()=>removePlacement(index),"danger");
    m.appendChild(document.createElement("hr"));
  }
@@ -459,9 +463,9 @@ function renderSchedule(){
      const s=row.slot;
      if(s.blocked)tr.className="blocked";
      tr.innerHTML=`${weekCell}<td class="date">${esc(s.day)}</td>
-       <td class="slot"><div class="lesson-cell" data-slot="${s.id}">${s.blocked?`<span class="block-label">${esc(s.label||"Ledig")}</span>`:lessonHTML(s.lessonId)}</div></td>
-       <td>${s.lessonId&&!s.blocked?esc(getLesson(s.lessonId)?.pages||""):""}</td>
-       <td>${s.lessonId&&!s.blocked?esc(getLesson(s.lessonId)?.other||""):""}</td>`;
+       <td class="slot"><div class="lesson-cell" data-slot="${s.id}">${s.blocked?`<span class="block-label">${esc(s.label||"Ledig")}</span>`:lessonHTML(s)}</div></td>
+       <td>${!s.blocked?esc(slotView(s)?.pages||""):""}</td>
+       <td>${!s.blocked?esc(slotView(s)?.other||""):""}</td>`;
      const cell=tr.querySelector(".lesson-cell");
      cell.ondragover=e=>{if(!s.blocked){e.preventDefault();cell.classList.add("drop")}};
      cell.ondragleave=()=>cell.classList.remove("drop");
@@ -509,19 +513,29 @@ function moveSlotLesson(from,to){
  const fromPos=open.findIndex(x=>x.i===from);
  const toPos=open.findIndex(x=>x.i===to);
  if(fromPos<0||toPos<0)return;
- const seq=open.map(x=>x.s.lessonId);
+ const seq=open.map(x=>getPair(x.s));
  const [moved]=seq.splice(fromPos,1);
  // Lektionen ska ta målets plats – inte hamna efter det.
  const target=fromPos<toPos?toPos-1:toPos;
  seq.splice(target,0,moved);
- open.forEach((x,k)=>{x.s.lessonId=seq[k]});
+ open.forEach((x,k)=>{setPair(x.s,seq[k].id?seq[k]:null)});
  render();
 }
-function lessonHTML(id){
- const l=getLesson(id); if(!l)return '<span class="muted">Dra en lektion hit</span>';
- return `<div class="placed"><div class="lesson-title">${esc(l.title)}</div><button class="rm no-print" type="button" title="Ta bort pass">×</button></div>`;
+function lessonHTML(s){
+ const v=slotView(s); if(!v)return '<span class="muted">Dra en lektion hit</span>';
+ return `<div class="placed"><div class="lesson-title">${esc(v.title)}</div><button class="rm no-print" type="button" title="Ta bort pass">×</button></div>`;
 }
 function getLesson(id){return state.lessons.find(l=>l.id===id)}
+// Ett pass i schemat kan ha egen text som inte påverkar grundlektionen.
+function slotView(s){
+ const l=getLesson(s.lessonId);
+ if(!l)return null;
+ const o=s.override;
+ return o?{title:o.title,pages:o.pages,other:o.other,note:o.note,edited:true}
+         :{title:l.title,pages:l.pages,other:l.other,note:l.note,edited:false};
+}
+function getPair(s){return {id:s.lessonId,ov:s.override||null}}
+function setPair(s,p){s.lessonId=p?p.id:null;s.override=p?p.ov:null}
 function firstPage(l){
  const m=String(l.pages||"").match(/\d+/);
  return m?+m[0]:null;
@@ -548,24 +562,24 @@ function autoPlace(){
  const list=lessonsInPageOrder();
  if(!list.length){alert("Det finns inga lektioner att placera ut.");return}
  if(open.some(s=>s.lessonId)&&!confirm("Detta ersätter nuvarande utplacerade lektioner. Fortsätt?"))return;
- open.forEach(s=>{s.lessonId=null});
- list.forEach((l,i)=>{if(i<open.length)open[i].lessonId=l.id});
+ open.forEach(s=>setPair(s,null));
+ list.forEach((l,i)=>{if(i<open.length)setPair(open[i],{id:l.id,ov:null})});
  if(list.length>open.length)alert("Det saknas "+(list.length-open.length)+" lektionstillfällen. De sista lektionerna placerades inte ut.");
  render();
 }
 function clearPlan(){
  if(!state.slots.some(s=>s.lessonId))return;
  if(!confirm("Ta bort alla utplacerade lektioner? Lov och studiedagar behålls."))return;
- state.slots.forEach(s=>{s.lessonId=null});
+ state.slots.forEach(s=>setPair(s,null));
  render();
 }
 function removePlacement(index){
  const open=state.slots.map((s,i)=>({s,i})).filter(x=>!x.s.blocked);
  const pos=open.findIndex(x=>x.i===index);
  if(pos<0)return;
- const seq=open.map(x=>x.s.lessonId);
+ const seq=open.map(x=>getPair(x.s));
  seq.splice(pos,1);seq.push(null);
- open.forEach((x,k)=>{x.s.lessonId=seq[k]});
+ open.forEach((x,k)=>{setPair(x.s,seq[k]&&seq[k].id?seq[k]:null)});
  render();
 }
 function updateStatus(){
@@ -602,14 +616,12 @@ function loadCourse(){
 }
 function placeLesson(lessonId,index){
  if(!lessonId)return;
- // Återanvändbara lektioner får ligga på flera platser samtidigt.
- if(!getLesson(lessonId)?.reusable)state.slots.forEach(s=>{if(s.lessonId===lessonId)s.lessonId=null});
- // Insert by shifting occupied slots forward, skipping blocked slots.
- let carry=lessonId;
+ // Alla lektioner får läggas ut flera gånger – inget tas bort någon annanstans.
+ let carry={id:lessonId,ov:null};
  for(let i=index;i<state.slots.length;i++){
    const s=state.slots[i];
    if(s.blocked)continue;
-   const old=s.lessonId;s.lessonId=carry;carry=old;
+   const old=getPair(s);setPair(s,carry);carry=old.id?old:null;
    if(!carry)break;
  }
  if(carry) alert("Det finns inte tillräckligt många lediga lektionstillfällen för att flytta hela planeringen.");
@@ -621,11 +633,11 @@ function toggleBlocked(index){
  if(!s.blocked){
    // Move the lesson out first, preserving the sequence.
    if(s.lessonId){
-     const old=s.lessonId;s.lessonId=null;
-     let carry=old;
+     let carry=getPair(s);setPair(s,null);
      for(let i=index+1;i<state.slots.length;i++){
        if(state.slots[i].blocked)continue;
-       const x=state.slots[i].lessonId;state.slots[i].lessonId=carry;carry=x;if(!carry)break;
+       const x=getPair(state.slots[i]);setPair(state.slots[i],carry);carry=x.id?x:null;
+       if(!carry)break;
      }
    }
    s.blocked=true;s.label="Studiedag / ledig";
@@ -641,10 +653,10 @@ function blockWeek(){
  render();
 }
 function repack(){
- const ids=[];
- state.slots.forEach(s=>{if(s.lessonId)ids.push(s.lessonId);s.lessonId=null});
+ const items=[];
+ state.slots.forEach(s=>{if(s.lessonId)items.push(getPair(s));setPair(s,null)});
  let p=0;
- state.slots.forEach(s=>{if(!s.blocked&&p<ids.length)s.lessonId=ids[p++]});
+ state.slots.forEach(s=>{if(!s.blocked&&p<items.length)setPair(s,items[p++])});
 }
 function scheduleWeeks(){return [...new Set(state.slots.map(s=>s.week))]}
 function normalizeLabs(){
@@ -713,19 +725,53 @@ function bindLabControls(){
  document.getElementById("labEnabled").onchange=e=>{state.labs.enabled=e.target.checked;renderLabs();renderSchedule()};
  document.getElementById("labDay").onchange=e=>{state.labs.day=e.target.value;renderSchedule()};
 }
+function fillModal(o){
+ document.getElementById("mTitle").value=o.title||"";
+ document.getElementById("mPages").value=o.pages||"";
+ document.getElementById("mOther").value=o.other||"";
+ document.getElementById("mNote").value=o.note||"";
+}
 function openLesson(id){
  document.getElementById("mId").value=id||"";
+ document.getElementById("mSlot").value="";
  const l=id?getLesson(id):null;
  document.getElementById("modalTitle").textContent=id?"Redigera lektion":"Ny lektion";
- document.getElementById("mTitle").value=l?.title||"";
- document.getElementById("mPages").value=l?.pages||"";
- document.getElementById("mOther").value=l?.other||"";
- document.getElementById("mNote").value=l?.note||"";
+ fillModal(l||{});
  document.getElementById("mReusable").checked=!!l?.reusable;
+ document.getElementById("mReusableRow").style.display="";
+ document.getElementById("mReset").style.display="none";
  document.getElementById("modal").style.display="flex";
+}
+// Redigerar bara det enskilda passet – grundlektionen lämnas orörd.
+function openSlotEditor(index){
+ const s=state.slots[index];
+ const v=s&&slotView(s);
+ if(!v)return;
+ document.getElementById("mId").value="";
+ document.getElementById("mSlot").value=index;
+ document.getElementById("modalTitle").textContent="Redigera pass i schemat";
+ fillModal(v);
+ document.getElementById("mReusableRow").style.display="none";
+ document.getElementById("mReset").style.display=v.edited?"":"none";
+ document.getElementById("modal").style.display="flex";
+}
+function resetSlot(){
+ const i=document.getElementById("mSlot").value;
+ if(i==="")return;
+ const s=state.slots[+i];
+ if(s)s.override=null;
+ closeModal();render();
 }
 function closeModal(){document.getElementById("modal").style.display="none"}
 function saveLesson(){
+ const slotIdx=document.getElementById("mSlot").value;
+ if(slotIdx!==""){
+   const s=state.slots[+slotIdx];
+   const title=document.getElementById("mTitle").value.trim();
+   if(!s||!s.lessonId||!title)return;
+   s.override={title,pages:document.getElementById("mPages").value.trim(),other:document.getElementById("mOther").value.trim(),note:document.getElementById("mNote").value.trim()};
+   closeModal();render();return;
+ }
  const id=document.getElementById("mId").value||uid();
  const l={id,title:document.getElementById("mTitle").value.trim(),pages:document.getElementById("mPages").value.trim(),other:document.getElementById("mOther").value.trim(),note:document.getElementById("mNote").value.trim(),reusable:document.getElementById("mReusable").checked};
  if(!l.title)return;
@@ -735,7 +781,7 @@ function saveLesson(){
 }
 function deleteLesson(id){
  state.lessons=state.lessons.filter(x=>x.id!==id);
- state.slots.forEach(s=>{if(s.lessonId===id)s.lessonId=null});
+ state.slots.forEach(s=>{if(s.lessonId===id)setPair(s,null)});
  render();
 }
 function saveProject(){
@@ -761,9 +807,9 @@ function exportWord(){
      return `<tr${lab.studiedag?' class="blocked"':''}><td>${esc(g.week)}</td><td>${esc(row.day)}</td><td><b>${txt}</b></td><td></td><td></td></tr>`;
    }
    const s=row.slot;
-   const l=getLesson(s.lessonId);
+   const v=slotView(s);
    const cls=s.blocked?' class="blocked"':'';
-   return `<tr${cls}><td>${esc(s.week)}</td><td>${esc(s.day)}</td><td>${s.blocked?'<b>'+esc(s.label)+'</b>':esc(l?.title||"")}</td><td>${s.blocked?'':esc(l?.pages||"")}</td><td>${s.blocked?'':esc(l?.other||"")}</td></tr>`;
+   return `<tr${cls}><td>${esc(s.week)}</td><td>${esc(s.day)}</td><td>${s.blocked?'<b>'+esc(s.label)+'</b>':esc(v?.title||"")}</td><td>${s.blocked?'':esc(v?.pages||"")}</td><td>${s.blocked?'':esc(v?.other||"")}</td></tr>`;
  })).join("");
  const html=`<!doctype html><html><head><meta charset="utf-8"><title>${esc(state.title)}</title>
  <style>body{font-family:Arial,sans-serif;font-size:10pt}.dochead{display:flex;align-items:center;margin:0 0 12px 0}.dochead img{width:95px;height:auto}.dochead h1{text-align:center;font-family:Georgia,serif;font-size:18pt;flex:1;margin:0}table{border-collapse:collapse;width:100%}th{background:#ddd}th,td{border:1px solid #555;padding:5px;vertical-align:top}.blocked td{background:#e8eaed}td:first-child{width:7%}td:nth-child(2){width:12%}td:nth-child(3){width:42%}td:nth-child(4){width:18%}td:nth-child(5){width:21%}</style></head><body>
