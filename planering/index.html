@@ -280,7 +280,6 @@ select.st-off{background:#f1f2f4;border-color:#d5d9df;color:#475467}
         <button class="btn" style="width:100%;margin-bottom:8px" onclick="openExams()">Lägg till prov</button>
         <button class="btn" style="width:100%" onclick="restoreDays()">Återställ borttagna dagar</button>
         <div class="dangerbox">
-          <div class="hb-title">Rensa</div>
           <div class="btnrow tight" style="margin-bottom:0">
             <button class="btn sm danger" onclick="clearPlan()">Rensa planeringen</button>
             <button class="btn sm danger" onclick="deletePlan()">Ta bort planeringen</button>
@@ -448,10 +447,32 @@ const seedLessons=[
 ];
 
 function uid(){return "l"+Math.random().toString(36).slice(2,9)}
+// ISO-veckonummer. Vissa år har 53 veckor (t.ex. 2026), därför räknas
+// veckorna fram ur kalendern när ett startdatum är angivet.
+function isoWeek(d){
+ const t=new Date(d.getFullYear(),d.getMonth(),d.getDate());
+ t.setDate(t.getDate()+3-((t.getDay()+6)%7));
+ const week1=new Date(t.getFullYear(),0,4);
+ return 1+Math.round(((t-week1)/86400000-3+((week1.getDay()+6)%7))/7);
+}
+function weeksInYear(y){return isoWeek(new Date(y,11,28))}
 function weekSequence(a,b){
+ if(a===b)return [a];
+ const base=state.startDate?mondayOf(state.startDate):null;
+ if(base){
+   const out=[isoWeek(base)];
+   const d=new Date(base);
+   for(let i=0;i<70&&out[out.length-1]!==b;i++){
+     d.setDate(d.getDate()+7);
+     out.push(isoWeek(d));
+   }
+   if(out[out.length-1]===b)return out;
+ }
+ // Utan startdatum antas läsåret sluta på 52 eller 53 veckor.
+ const last=weeksInYear(new Date().getFullYear());
  let out=[];
  if(a<=b){for(let w=a;w<=b;w++)out.push(w)}
- else {for(let w=a;w<=52;w++)out.push(w);for(let w=1;w<=b;w++)out.push(w)}
+ else {for(let w=a;w<=last;w++)out.push(w);for(let w=1;w<=b;w++)out.push(w)}
  return out;
 }
 // En period styr vilka veckodagar som har lektion. Första perioden som matchar
@@ -1017,7 +1038,15 @@ function dateForWeekDay(week,day){
 }
 function fmtDate(d){return d?d.getDate()+"/"+(d.getMonth()+1):""}
 function dayCell(day,date){return esc(day)+(date?' <span class="dnum">'+fmtDate(date)+"</span>":"")}
-function setStartDate(v){state.startDate=v;render()}
+function setStartDate(v){
+ state.startDate=v;
+ const m=v?mondayOf(v):null;
+ if(m){
+   state.startWeek=isoWeek(m);
+   document.getElementById("startWeek").value=state.startWeek;
+ }
+ rebuildSchedule();
+}
 function parseDateLines(text){
  const out=[];
  String(text||"").replace(/\r/g,"").split("\n").forEach(line=>{
