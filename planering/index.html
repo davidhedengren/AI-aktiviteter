@@ -143,16 +143,14 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
   @page{size:A4 landscape;margin:10mm}
 }
 
-/* ——— Varannan vecka ——— */
-.schedule tr.wk-alt td{background:#eef1f6}
-.schedule tr.wk-alt .week{background:#e3e8ef}
-.schedule tr.wk-alt .date{background:#e8ecf2}
+/* ——— Veckorna: färg i vänsterskenan, linje vid veckoskifte ——— */
+.schedule .week{background:#dbe9fa;color:#1e4976}
+.schedule .date{background:#eef5fd;color:#546a85}
+.schedule tr.wk-alt .week{background:#c7dcf5}
+.schedule tr.wk-alt .date{background:#e0edfb}
+.schedule tr.wk-start td{border-top:2px solid #94a8c2}
 .schedule tr.blocked td{background:var(--holiday)}
-.schedule tr.blocked .date{background:#dfe2e6}
 .schedule tr.lab-row td{background:#effcfa}
-.schedule tr.lab-row .date{background:#e3f8f5}
-.schedule tr.lab-row.wk-alt td{background:#e7f7f4}
-.schedule tr.lab-row.wk-alt .date{background:#dbf2ee}
 .schedule tr.lab-row.study td{background:var(--holiday)}
 .schedule tbody tr:hover td{box-shadow:inset 0 0 0 9999px rgba(15,118,110,.045)}
 
@@ -206,7 +204,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);
 .schedule-wrap::-webkit-scrollbar-thumb:hover,.tabpane.body::-webkit-scrollbar-thumb:hover{background:#aab4c2;background-clip:content-box}
 @media print{
   .schedule tbody tr:hover td{box-shadow:none}
-  .schedule tr.wk-alt td{background:#eef1f6!important}
+  .schedule tr.wk-start td{border-top:2px solid #7a8ea8}
 }
 </style>
 </head>
@@ -671,7 +669,7 @@ function renderSchedule(){
    g.rows.forEach((row,k)=>{
      const tr=document.createElement("tr");
      // Varannan vecka får en mörkare nyans så veckorna går att skilja åt.
-     const alt=gi%2===1?" wk-alt":"";
+     const alt=(gi%2===1?" wk-alt":"")+(k===0?" wk-start":"");
      const weekCell=k===0?`<td class="week" rowspan="${g.rows.length}">${esc(g.week)}</td>`:"";
      if(row.kind==="lab"){
        const lab=labItem(g.week);
@@ -1340,7 +1338,7 @@ function syncInputs(){
 }
 function exportWord(){
  const rows=buildRows().flatMap((g,gi)=>g.rows.map(row=>{
-   const alt=gi%2===1?" alt":"";
+   const alt=(gi%2===1?" alt":"")+(row===g.rows[0]?" wkstart":"");
    if(row.kind==="lab"){
      const lab=labItem(g.week);
      const isLab=(lab.status||"lab")==="lab";
@@ -1359,15 +1357,16 @@ function exportWord(){
  <style>body{font-family:Arial,sans-serif;font-size:10pt}.dochead{display:flex;align-items:center;margin:0 0 12px 0}.dochead img{width:95px;height:auto}.dochead h1{text-align:center;font-family:Georgia,serif;font-size:18pt;flex:1;margin:0}table{border-collapse:collapse;width:100%}thead{display:table-header-group}
 th{background:#e1e3e5;font-weight:bold;text-align:left;border-bottom:2px solid #444}
 th,td{border:1px solid #adb3b9;padding:5px 6px;vertical-align:top}
-td:first-child{background:#f3f4f6;text-align:center;font-weight:bold;width:7%}
-td:nth-child(2){background:#f5f7f9;white-space:nowrap;color:#667085;width:12%}
+td:first-child{text-align:center;font-weight:bold;width:7%}
+td:nth-child(2){white-space:nowrap;width:12%}
 td:nth-child(3){width:42%}td:nth-child(4){width:18%}td:nth-child(5){width:21%}
-.alt td{background:#eef1f6}
-.alt td:first-child{background:#e3e8ef}
-.alt td:nth-child(2){background:#e8ecf2}
+td:first-child{background:#dbe9fa;color:#1e4976}
+td:nth-child(2){background:#eef5fd;color:#546a85}
+.alt td:first-child{background:#c7dcf5}
+.alt td:nth-child(2){background:#e0edfb}
+.wkstart td{border-top:2px solid #7a8ea8}
 .blocked td{background:#e8eaed;color:#343a40}
 .lab td{background:#effcfa}
-.lab.alt td{background:#e7f7f4}
 .exam{background:#fde3e1;color:#912018;font-weight:bold;padding:1px 5px;border-radius:4px}
 .blocked .exam{background:#fbc9c4}</style></head><body>
  <div class="dochead"><img src="${LOGO}" alt="Erik Dahlbergsgymnasiet"><h1>${esc(state.title)}</h1></div>
