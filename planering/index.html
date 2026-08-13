@@ -196,7 +196,10 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
           <button class="btn" onclick="saveCourse()">Spara kurs</button>
           <button class="btn" onclick="loadCourse()">Öppna kurs</button>
         </div>
-        <button class="btn primary" style="width:100%" onclick="autoPlace()">Placera ut automatiskt</button>
+        <div class="btnrow">
+          <button class="btn primary" onclick="autoPlace()">Placera ut automatiskt</button>
+          <button class="btn danger" onclick="clearPlan()">Rensa planeringen</button>
+        </div>
         <div class="status" id="planStatus"></div>
         <hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
         <div id="lessonList"></div>
@@ -234,15 +237,7 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
   <div class="modal">
     <h3>Studiedagar och lediga datum</h3>
     <div class="content">
-      <textarea id="dText" rows="10" placeholder="Ett datum per rad, valfri text efter:&#10;15/9 Studiedag&#10;2/10 Studieresa&#10;2027-05-01"></textarea>
-      <div class="field" style="margin-top:12px"><label>Markeras som</label>
-        <select id="dType">
-          <option>Studiedag</option>
-          <option>Ingen lektion</option>
-          <option>Ledig</option>
-          <option>Lov</option>
-        </select>
-      </div>
+      <textarea id="dText" rows="10" oninput="state.dateText=this.value;saveLocal()" placeholder="Ett datum per rad, valfri text efter:&#10;15/9 Studiedag&#10;2/10 Studieresa&#10;2027-05-01"></textarea>
       <div class="help" id="dInfo"></div>
     </div>
     <div class="actions">
@@ -270,15 +265,13 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
   <div class="modal">
     <h3>Ledig rad</h3>
     <div class="content">
-      <div class="field"><label>Typ</label>
-        <select id="fType">
-          <option>Studiedag</option>
-          <option>Ingen lektion</option>
-          <option>Ledig</option>
-          <option>Lov</option>
-        </select>
+      <div class="field"><label>Text i schemat</label>
+        <input id="fType" list="freeSuggest" placeholder="Studiedag">
+        <datalist id="freeSuggest">
+          <option>Studiedag</option><option>Ingen lektion</option><option>Ledig</option>
+          <option>Höstlov</option><option>Jullov</option><option>Sportlov</option><option>Påsklov</option>
+        </datalist>
       </div>
-      <div class="field"><label>Kommentar</label><input id="fNote" placeholder="t.ex. Första maj eller Matteprov"></div>
       <input type="hidden" id="fSlot">
     </div>
     <div class="actions">
@@ -470,7 +463,7 @@ function rebuildSchedule(){
 function render(){
  document.getElementById("docTitle").textContent=state.title;
  document.getElementById("printTitle").textContent=state.title;
- renderLessons(); renderLabs(); renderSchedule(); updateStatus(); saveLocal(); renderPlanSelect();
+ trackHistory(); renderLessons(); renderLabs(); renderSchedule(); updateStatus(); saveLocal(); renderPlanSelect();
 }
 // Visningsordning: fasta pass överst, därefter sidnummerordning.
 // Lektioner utan sidhänvisning hamnar sist, i den ordning de lades till.
@@ -711,14 +704,15 @@ function otherText(s){
  return [base,s.other||""].filter(Boolean).join("<br>");
 }
 function blockedText(s){
- const t=s.label||"Ledig";
+ const t=s.label||"Studiedag";
  return s.note?t+" – "+s.note:t;
 }
 function labText(item){
  const st=item.status||"lab";
  if(st==="lab")return "Laboration:"+(item.title?" "+item.title:"");
- const name=(LAB_STATUS.find(x=>x[0]===st)||["","Ledig"])[1];
- return item.title?name+" – "+item.title:name;
+ // Skriven text ersätter standardetiketten.
+ if(item.title)return item.title;
+ return (LAB_STATUS.find(x=>x[0]===st)||["","Ledig"])[1];
 }
 function getPair(s){return {id:s.lessonId,ov:s.override||null}}
 function setPair(s,p){s.lessonId=p?p.id:null;s.override=p?p.ov:null}
@@ -845,7 +839,7 @@ function toggleBlocked(index){
        if(!carry)break;
      }
    }
-   s.blocked=true;s.label="Studiedag";
+   s.blocked=true;s.label="Ingen lektion";
  }else{s.blocked=false;s.label="";s.note=""}
  render();
 }
@@ -906,31 +900,34 @@ function sameDate(d,e){
  return d&&d.getDate()===e.d&&d.getMonth()+1===e.mo&&(e.y===null||d.getFullYear()===e.y);
 }
 function openDates(){
- document.getElementById("dText").value="";
+ document.getElementById("dText").value=state.dateText||"";
  document.getElementById("dInfo").textContent=state.startDate?"":"Ange först måndagen i första veckan.";
  document.getElementById("dateModal").style.display="flex";
 }
-function closeDates(){document.getElementById("dateModal").style.display="none"}
+function closeDates(){
+ state.dateText=document.getElementById("dText").value;
+ document.getElementById("dateModal").style.display="none";
+ saveLocal();
+}
 function importDates(){
  if(!state.startDate){alert("Ange först måndagen i första veckan.");return}
- const list=parseDateLines(document.getElementById("dText").value);
- const type=document.getElementById("dType").value;
- const labStatus=type==="Studiedag"?"studiedag":type==="Ingen lektion"?"ingen":"ledig";
+ state.dateText=document.getElementById("dText").value;
+ const list=parseDateLines(state.dateText);
  let hits=0,missed=0;
  list.forEach(e=>{
    let found=false;
    state.slots.forEach((s,i)=>{
      if(!sameDate(dateForWeekDay(s.week,s.day),e))return;
      if(!s.blocked)toggleBlocked(i);
-     s.label=type;s.note=e.text;
+     s.label=e.text||"Studiedag";s.note="";
      found=true;hits++;
    });
    if(state.labs&&state.labs.enabled){
      labWeeks().forEach(w=>{
        if(!sameDate(dateForWeekDay(w,state.labs.day),e))return;
        const it=labItem(w);
-       it.status=labStatus;
-       if(e.text)it.title=e.text;
+       it.status="studiedag";
+       it.title=e.text||"";
        found=true;hits++;
      });
    }
@@ -1074,10 +1071,7 @@ function saveNote(){
 function openFree(index){
  const s=state.slots[index];
  if(!s)return;
- const sel=document.getElementById("fType");
- const opts=[...sel.options].map(o=>o.value||o.textContent);
- sel.value=opts.includes(s.label)?s.label:"Studiedag";
- document.getElementById("fNote").value=s.note||"";
+ document.getElementById("fType").value=s.label||"";
  document.getElementById("fSlot").value=index;
  document.getElementById("freeModal").style.display="flex";
 }
@@ -1088,8 +1082,8 @@ function saveFree(){
  const s=state.slots[+i];
  if(s){
    if(!s.blocked){setPair(s,null);s.blocked=true}
-   s.label=document.getElementById("fType").value;
-   s.note=document.getElementById("fNote").value.trim();
+   s.label=document.getElementById("fType").value.trim()||"Studiedag";
+   s.note="";
  }
  closeFree();render();
 }
@@ -1209,6 +1203,34 @@ function readStore(){
  }catch(err){}
  return {current:null,plans:{}};
 }
+let history=[],future=[],lastSnap=null,skipHistory=false;
+// Varje omritning jämförs med föregående läge; skiljer de sig sparas det gamla.
+function trackHistory(){
+ const cur=JSON.stringify(state);
+ if(!skipHistory&&lastSnap&&lastSnap!==cur){
+   history.push(lastSnap);
+   if(history.length>60)history.shift();
+   future=[];
+ }
+ lastSnap=cur;
+}
+function applySnap(snap){
+ state=JSON.parse(snap);
+ lastSnap=snap;
+ skipHistory=true;
+ syncInputs();render();
+ skipHistory=false;
+}
+function undo(){
+ if(!history.length)return;
+ future.push(JSON.stringify(state));
+ applySnap(history.pop());
+}
+function redo(){
+ if(!future.length)return;
+ history.push(JSON.stringify(state));
+ applySnap(future.pop());
+}
 function saveLocal(){
  if(!planId)return;
  store.plans[planId]=state;store.current=planId;writeStore();
@@ -1230,6 +1252,7 @@ function newPlan(){
 function switchPlan(id){
  if(!store.plans[id])return;
  planId=id;state=store.plans[id];
+ history=[];future=[];lastSnap=null;
  activate();
 }
 function deletePlan(){
@@ -1254,7 +1277,15 @@ function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&l
 document.getElementById("logoImg").src=LOGO;
 document.addEventListener("click",closeCtx);
 document.addEventListener("scroll",closeCtx,true);
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCtx()});
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape")closeCtx();
+ if(!(e.ctrlKey||e.metaKey))return;
+ const t=e.target.tagName;
+ if(t==="INPUT"||t==="TEXTAREA"||t==="SELECT")return;
+ const k=e.key.toLowerCase();
+ if(k==="z"&&!e.shiftKey){e.preventDefault();undo()}
+ else if(k==="y"||(k==="z"&&e.shiftKey)){e.preventDefault();redo()}
+});
 window.addEventListener("resize",closeCtx);
 bindLabControls();
 store=readStore();
