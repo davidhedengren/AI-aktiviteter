@@ -228,8 +228,11 @@ select.st-off{background:#f1f2f4;border-color:#d5d9df;color:#475467}
 .card.exam-card{border-color:#f0c4c0;background:linear-gradient(180deg,#fffbfb,#fdf4f3)}
 .card.exam-card .title{color:#912018}
 .card.exam-card:hover{border-color:#e5a49e}
-.lesson-title.exam-lesson{color:#912018;background:#fde3e1;padding:1px 6px;border-radius:5px;display:inline-block}
-.blocked .lesson-title.exam-lesson{background:#fbc9c4}
+.schedule tr td.exam-cell{background:#fde3e1}
+.schedule tr.wk-alt td.exam-cell{background:#fbd6d3}
+.lesson-title.exam-lesson{color:#912018}
+td.exam-cell .exam{background:transparent;padding:0}
+td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
 </style>
 </head>
 <body>
@@ -297,9 +300,9 @@ select.st-off{background:#f1f2f4;border-color:#d5d9df;color:#475467}
           <button class="btn primary" onclick="openLesson()">+ Ny lektion</button>
           <button class="btn primary" onclick="openBulk()">Lägg in flera</button>
         </div>
-        <div class="btnrow tight">
-          <button class="btn sm" onclick="saveCourse()">Spara kurs</button>
-          <button class="btn sm" onclick="loadCourse()">Öppna kurs</button>
+        <div class="btnrow tight" style="grid-template-columns:1fr">
+          <button class="btn sm" onclick="saveCourse()">Spara lektioner för kurs</button>
+          <button class="btn sm" onclick="loadCourse()">Ladda lektioner för kurs</button>
         </div>
         <div class="btnrow tight">
           <button class="btn sm" onclick="autoPlace()">Placera ut automatiskt</button>
@@ -737,9 +740,9 @@ function renderSchedule(){
      const s=row.slot;
      tr.className=(s.blocked?"blocked":"")+alt;
      tr.innerHTML=`${weekCell}<td class="date">${dayCell(s.day,dateForWeekDay(s.week,s.day))}</td>
-       <td class="slot"><div class="lesson-cell" data-slot="${s.id}">${s.blocked?`<span class="block-label${s.exam?" exam":""}">${esc(blockedText(s))}</span>`:lessonHTML(s)}</div></td>
+       <td class="slot${!s.blocked&&isExamTitle(slotView(s)?.title)?" exam-cell":""}"><div class="lesson-cell" data-slot="${s.id}">${s.blocked?`<span class="block-label${s.exam?" exam":""}">${esc(blockedText(s))}</span>`:lessonHTML(s)}</div></td>
        <td>${!s.blocked?esc(slotView(s)?.pages||""):""}</td>
-       <td class="other-cell">${otherHTML(s)}</td>`;
+       <td class="other-cell${s.otherExam?" exam-cell":""}">${otherHTML(s)}</td>`;
      const cell=tr.querySelector(".lesson-cell");
      const clearDrop=()=>cell.classList.remove("drop","drop-before","drop-after");
      cell.ondragover=e=>{
@@ -1419,7 +1422,9 @@ function exportWord(){
    const s=row.slot;
    const v=slotView(s);
    const cls=(s.blocked?"blocked":"")+alt;
-   return `<tr${cls.trim()?' class="'+cls.trim()+'"':''}><td>${esc(s.week)}</td><td>${esc(s.day)} ${esc(fmtDate(dateForWeekDay(s.week,s.day)))}</td><td>${s.blocked?(s.exam?'<span class="exam">'+esc(blockedText(s))+'</span>':'<b>'+esc(blockedText(s))+'</b>'):(isExamTitle(v?.title)?'<span class="exam-lesson">'+esc(v?.title||"")+'</span>':esc(v?.title||""))}</td><td>${s.blocked?'':esc(v?.pages||"")}</td><td>${otherText(s)}</td></tr>`;
+   const exCell=!s.blocked&&isExamTitle(v?.title)?' class="examcell"':'';
+   const exOther=s.otherExam?' class="examcell"':'';
+   return `<tr${cls.trim()?' class="'+cls.trim()+'"':''}><td>${esc(s.week)}</td><td>${esc(s.day)} ${esc(fmtDate(dateForWeekDay(s.week,s.day)))}</td><td${exCell}>${s.blocked?(s.exam?'<span class="exam">'+esc(blockedText(s))+'</span>':'<b>'+esc(blockedText(s))+'</b>'):esc(v?.title||"")}</td><td>${s.blocked?'':esc(v?.pages||"")}</td><td${exOther}>${otherText(s)}</td></tr>`;
  })).join("");
  // Färgerna nedan är samma nyanser som schemat i verktyget, så exporten ser likadan ut.
  const html=`<!doctype html><html><head><meta charset="utf-8"><title>${esc(state.title)}</title>
@@ -1438,6 +1443,8 @@ td:nth-child(2){background:#eef5fd;color:#546a85}
 .lab td{background:#effcfa}
 .exam{background:#fde3e1;color:#912018;font-weight:bold;padding:1px 5px;border-radius:4px}
 .exam-lesson{color:#912018;font-weight:bold}
+td.examcell{background:#fde3e1;color:#912018;font-weight:bold}
+td.examcell .exam{background:transparent;padding:0}
 .blocked .exam{background:#fbc9c4}</style></head><body>
  <div class="dochead"><img src="${LOGO}" alt="Erik Dahlbergsgymnasiet"><h1>${esc(state.title)}</h1></div>
  <table><thead><tr><th>Vecka</th><th>Dag</th><th>Avsnitt</th><th>Sidor</th><th>Övrigt</th></tr></thead><tbody>${rows}</tbody></table></body></html>`;
