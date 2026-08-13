@@ -76,6 +76,8 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
 .schedule .other{width:230px}
 .lesson-cell{min-height:40px;padding:6px;border-radius:6px}
 .lesson-cell.drop{outline:2px dashed #0f766e;background:#f0fdfa}
+.lesson-cell.drop-before{box-shadow:inset 0 4px 0 #0f766e}
+.lesson-cell.drop-after{box-shadow:inset 0 -4px 0 #0f766e}
 .lesson-title{font-weight:700}
 .placed{cursor:grab}
 .placed:active{cursor:grabbing}
@@ -467,11 +469,20 @@ function renderSchedule(){
        <td>${!s.blocked?esc(slotView(s)?.pages||""):""}</td>
        <td>${!s.blocked?esc(slotView(s)?.other||""):""}</td>`;
      const cell=tr.querySelector(".lesson-cell");
-     cell.ondragover=e=>{if(!s.blocked){e.preventDefault();cell.classList.add("drop")}};
-     cell.ondragleave=()=>cell.classList.remove("drop");
+     const clearDrop=()=>cell.classList.remove("drop","drop-before","drop-after");
+     cell.ondragover=e=>{
+       if(s.blocked)return;
+       e.preventDefault();
+       const mode=dropMode(e,cell,s);
+       clearDrop();
+       cell.classList.add(mode==="on"?"drop":mode==="before"?"drop-before":"drop-after");
+     };
+     cell.ondragleave=clearDrop;
      cell.ondrop=e=>{
-       e.preventDefault();cell.classList.remove("drop");
-       handleDrop(e.dataTransfer.getData("text/plain"),state.slots.indexOf(s));
+       e.preventDefault();
+       const mode=dropMode(e,cell,s);
+       clearDrop();
+       handleDrop(e.dataTransfer.getData("text/plain"),state.slots.indexOf(s),mode);
      };
      cell.ondblclick=()=>toggleBlocked(state.slots.indexOf(s));
      cell.oncontextmenu=e=>{e.preventDefault();openCtx(e,state.slots.indexOf(s))};
@@ -498,13 +509,44 @@ function renderSchedule(){
  });
  table.appendChild(tb);
 }
-function handleDrop(data,index){
+// Överkant och underkant lägger in mellan raderna, mitten träffar raden själv.
+function dropMode(e,cell,slot){
+ if(!slot.lessonId)return "on";
+ const r=cell.getBoundingClientRect();
+ const y=(e.clientY-r.top)/r.height;
+ if(y<0.3)return "before";
+ if(y>0.7)return "after";
+ return "on";
+}
+function nextOpenIndex(index){
+ for(let i=index+1;i<state.slots.length;i++)if(!state.slots[i].blocked)return i;
+ return -1;
+}
+function swapSlots(a,b){
+ if(a<0||b<0||a===b)return;
+ const pa=getPair(state.slots[a]),pb=getPair(state.slots[b]);
+ setPair(state.slots[a],pb.id?pb:null);
+ setPair(state.slots[b],pa.id?pa:null);
+ render();
+}
+function replaceSlot(index,lessonId){
+ const s=state.slots[index];
+ if(!s||s.blocked)return;
+ setPair(s,{id:lessonId,ov:null});
+ render();
+}
+function handleDrop(data,index,mode){
  if(!data||index<0)return;
+ let to=index;
+ if(mode==="after"){const n=nextOpenIndex(index);to=n<0?index:n}
  if(data.startsWith("slot:")){
    const from=state.slots.findIndex(x=>x.id===data.slice(5));
-   moveSlotLesson(from,index);
+   if(mode==="on")swapSlots(from,index);
+   else moveSlotLesson(from,to);
  }else{
-   placeLesson(data.replace(/^lesson:/,""),index);
+   const id=data.replace(/^lesson:/,"");
+   if(mode==="on")replaceSlot(index,id);
+   else placeLesson(id,to);
  }
 }
 function moveSlotLesson(from,to){
