@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
@@ -245,6 +245,14 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
 .card.fixed-card:hover{border-color:#64748b}
 .card.exam-card.fixed-card{border-color:#e5a49e}
 .card.exam-card.fixed-card:hover{border-color:#d1837c}
+
+.schedule td.slot{padding:0;vertical-align:top}
+.lesson-cell{min-height:52px;display:flex;align-items:center;padding:8px 9px;border-radius:0;margin:0}
+.lesson-cell.grabbable{cursor:grab}
+.lesson-cell.grabbable:active{cursor:grabbing}
+.lesson-cell.dragging{opacity:.45}
+.placed{flex:1;min-width:0;align-items:center}
+.placed .lesson-title{min-width:0;overflow-wrap:break-word}
 </style>
 </head>
 <body>
@@ -804,13 +812,15 @@ function renderSchedule(){
      tr.querySelector(".date").ondblclick=()=>toggleBlocked(state.slots.indexOf(s));
      const placed=cell.querySelector(".placed");
      if(placed){
-       placed.draggable=true;
-       placed.ondragstart=e=>{
+       // Hela cellen är dragbar, inte bara texten.
+       cell.draggable=true;
+       cell.classList.add("grabbable");
+       cell.ondragstart=e=>{
          e.dataTransfer.setData("text/plain","slot:"+s.id);
          e.dataTransfer.effectAllowed="move";
-         placed.classList.add("dragging");
+         cell.classList.add("dragging");
        };
-       placed.ondragend=()=>placed.classList.remove("dragging");
+       cell.ondragend=()=>cell.classList.remove("dragging");
        const rm=placed.querySelector(".rm");
        if(rm){
          rm.draggable=false;
