@@ -129,6 +129,23 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .card-title{font-family:'DM Sans',sans-serif;font-size:1.4em;font-weight:700;line-height:1.3;letter-spacing:-.01em;}
 .card-desc{font-size:.9em;font-weight:400;color:var(--dim);line-height:1.65;}
 .answer-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;width:100%;max-width:560px;margin:0 auto;}
+/* ---------- Kortet under dragning och släppytans indikatorer ---------- */
+.only-desktop{display:none;}
+.drag-hint{display:none;font-size:.7em;font-weight:400;color:var(--dim);text-align:center;line-height:1.5;}
+.drag-hint kbd{font-family:'JetBrains Mono',monospace;font-size:.92em;padding:1px 5px;border-radius:5px;background:rgba(255,255,255,.06);border:1px solid var(--glass-border);color:var(--subtle);}
+@media(hover:hover) and (pointer:fine){
+  .only-desktop{display:inline;}
+  .drag-hint{display:block;}
+  .current-card{cursor:grab;}
+}
+.card-area.holding{position:relative;}
+.card-area.holding::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:560px;height:100%;border-radius:var(--r-xl);border:1.5px dashed rgba(255,255,255,.08);background:rgba(255,255,255,.014);}
+.current-card.dragging{position:fixed;z-index:90;cursor:grabbing;transform-origin:50% 50%;will-change:transform;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6));}
+.current-card.compact .card-desc{display:none;}
+.current-card.compact .current-card-inner{padding:15px 22px;gap:0;transform:none!important;}
+.current-card.compact .card-title{font-size:2.1em;}
+body.is-dragging{user-select:none;-webkit-user-select:none;}
+body.is-dragging *{cursor:grabbing!important;}
 
 .current-card.entering{animation:cardIn .5s var(--ease-spring);}
 @keyframes cardIn{from{opacity:0;transform:translateX(40px) scale(.96);}to{opacity:1;transform:none;}}
@@ -178,7 +195,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .card-stamp.show{animation:stampIn 1.15s var(--ease-out) forwards;}
 @keyframes stampIn{0%{opacity:0;transform:translate(-50%,-50%) rotate(-14deg) scale(1.6);}18%{opacity:1;transform:translate(-50%,-50%) rotate(-14deg) scale(.94);}30%{transform:translate(-50%,-50%) rotate(-14deg) scale(1);}80%{opacity:1;transform:translate(-50%,-50%) rotate(-14deg) scale(1);}100%{opacity:0;transform:translate(-50%,-50%) rotate(-14deg) scale(1.04);}}
 .card-stamp.correct{color:var(--green);}
-.card-stamp.near{color:var(--orange);}
+.card-stamp.near{color:var(--gold);}
 .card-stamp.wrong{color:var(--red);}
 .card-stamp.revealed{color:var(--dim);}
 
@@ -186,8 +203,8 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .land-points.show{animation:pointsPop 1.2s var(--ease-out) forwards;}
 @keyframes pointsPop{0%{opacity:0;transform:translate(-50%,-40%) scale(.7);}18%{opacity:1;transform:translate(-50%,-72%) scale(1.1);}70%{opacity:1;transform:translate(-50%,-86%) scale(1);}100%{opacity:0;transform:translate(-50%,-102%) scale(.96);}}
 .land-points .lp-main{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.55em;}
-.land-points.perfect .lp-main{color:var(--gold);}
-.land-points.close .lp-main{color:var(--green);}
+.land-points.perfect .lp-main{color:var(--green);}
+.land-points.close .lp-main{color:var(--gold);}
 .land-points.order .lp-main{color:var(--accent2);}
 .land-points .lp-bonus{font-family:'JetBrains Mono',monospace;font-size:.66em;font-weight:700;color:var(--orange);margin-top:2px;letter-spacing:.03em;}
 .reject-mark{position:fixed;z-index:70;pointer-events:none;color:var(--red);transform:translate(-50%,-50%);opacity:0;text-align:center;}
@@ -246,38 +263,65 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 .tl-tick.minor::before{content:'';position:absolute;top:100%;left:50%;width:1px;height:6px;background:rgba(150,163,205,.22);transform:translateX(-50%);margin-top:2px;}
 .tl-tick.decade::before{content:'';position:absolute;top:100%;left:50%;width:1.5px;height:10px;background:rgba(165,180,220,.4);transform:translateX(-50%);margin-top:3px;}
 
-.tl-card{position:absolute;display:flex;flex-direction:column;align-items:center;width:112px;animation:tlDrop .5s var(--ease-spring);z-index:2;pointer-events:none;}
-.tl-card .tl-name,.tl-card .tl-dot,.tl-card .tl-yr{pointer-events:auto;cursor:pointer;}
+/* Placerade kort visas som miniatyrer längs tidslinjen. */
+.tl-card{position:absolute;display:flex;flex-direction:column;align-items:center;width:104px;transform:translateX(calc(-50% + var(--push,0px)));transition:transform .2s var(--ease-out);animation:tlDrop .5s var(--ease-spring);z-index:var(--z,2);pointer-events:none;}
+.tl-card .tl-mini,.tl-card .tl-dot{pointer-events:auto;cursor:pointer;}
 @keyframes tlDrop{from{opacity:0;transform:translateX(-50%) translateY(8px) scale(.82);}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1);}}
-.tl-card.above{bottom:calc(50% + 20px);flex-direction:column-reverse;}
-.tl-card.below{top:calc(50% + 20px);}
-.tl-card .tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;background:var(--dot-c,var(--accent));transition:transform .2s;position:relative;}
-.tl-card.above .tl-dot{margin-top:6px;}
-.tl-card.below .tl-dot{margin-bottom:6px;}
-.tl-card .tl-name{position:relative;overflow:hidden;border-radius:10px;padding:7px 9px;font-size:.64em;font-weight:600;color:var(--subtle);line-height:1.38;text-align:center;max-width:112px;word-wrap:break-word;background:rgba(255,255,255,.035);border-left:2px solid var(--dot-c,var(--accent));transition:transform .35s var(--ease-spring),box-shadow .35s var(--ease-spring),background .3s;}
-.tl-card.hidden-title .tl-name{display:none;}
-.tl-card .tl-name::before{content:'';position:absolute;inset:0;padding:1px;border-radius:inherit;background:linear-gradient(120deg,transparent,rgba(255,255,255,.4),transparent);opacity:0;transition:opacity .3s;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;}
-.tl-card:hover{z-index:20;}
-.tl-card:hover .tl-name{transform:translateY(-5px) scale(1.07);background:rgba(255,255,255,.06);box-shadow:0 14px 30px -10px var(--dot-c,var(--accent));}
-.tl-card:hover .tl-name::before{opacity:1;}
-.tl-card:hover .tl-dot{transform:scale(1.3);}
-.tl-card .tl-yr{font-family:'JetBrains Mono',monospace;font-size:.76em;font-weight:700;margin-top:3px;color:var(--dot-c,var(--accent));}
-.tl-card.above .tl-yr{margin-top:0;margin-bottom:3px;order:-1;}
-.tl-card.perfect{--dot-c:var(--gold);}
-.tl-card.close{--dot-c:var(--green);}
+.tl-card.above{bottom:calc(50% + 15px);}
+.tl-card.below{top:calc(50% + 30px);}
+.tl-card .tl-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;background:var(--dot-c,var(--accent));box-shadow:0 0 0 3px rgba(11,15,23,.9),0 0 12px -2px var(--dot-c,var(--accent));transition:transform .2s;position:relative;}
+.tl-card .tl-stem{width:1.5px;height:10px;flex-shrink:0;background:linear-gradient(180deg,var(--dot-c,var(--accent)),transparent);opacity:.5;}
+.tl-card.above .tl-stem{background:linear-gradient(0deg,var(--dot-c,var(--accent)),transparent);}
+.tl-mini{position:relative;width:100%;border-radius:10px;padding:6px 8px 7px;text-align:center;overflow:hidden;opacity:.92;
+  background:linear-gradient(165deg,color-mix(in srgb,var(--dot-c,var(--accent)) 17%,rgba(24,28,44,.93)),color-mix(in srgb,var(--dot-c,var(--accent)) 6%,rgba(14,17,28,.95)));
+  border:1px solid color-mix(in srgb,var(--dot-c,var(--accent)) 24%,transparent);
+  box-shadow:0 8px 20px -10px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06);
+  transition:transform .32s var(--ease-spring),box-shadow .32s,opacity .3s,border-color .3s;}
+.tl-mini .tl-yr{font-family:'JetBrains Mono',monospace;font-size:.66em;font-weight:700;line-height:1;letter-spacing:.02em;color:var(--dot-c,var(--accent));}
+.tl-mini .tl-name{font-size:.55em;font-weight:600;line-height:1.32;color:var(--subtle);margin-top:3px;overflow-wrap:anywhere;hyphens:auto;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.tl-card:hover{z-index:995;}
+.tl-card:hover .tl-mini{opacity:1;transform:translateY(-4px) scale(1.07);box-shadow:0 18px 34px -12px var(--dot-c,var(--accent)),inset 0 1px 0 rgba(255,255,255,.09);}
+.tl-card:hover .tl-dot{transform:scale(1.35);}
+/* Under dragningen lyfts miniatyrerna fram och glider isär kring insättningspunkten. */
+.tl-wrap.dragging .tl-card{transition:transform .14s var(--ease-out);}
+.tl-wrap.dragging .tl-mini{opacity:1;}
+.tl-card.flank .tl-mini{opacity:1;border-color:color-mix(in srgb,var(--dot-c,var(--accent)) 62%,transparent);box-shadow:0 14px 30px -12px var(--dot-c,var(--accent)),inset 0 1px 0 rgba(255,255,255,.1);}
+.tl-card.perfect{--dot-c:var(--green);}
+.tl-card.close{--dot-c:var(--gold);}
 .tl-card.order{--dot-c:var(--accent2);}
 .tl-card.wrong{--dot-c:var(--red);}
-.tl-card.revealed{--dot-c:var(--dim);opacity:.75;}
+.tl-card.revealed{--dot-c:var(--dim);}
+.tl-card.revealed .tl-mini{opacity:.7;}
 .tl-card.landing{animation:landBounce .45s var(--ease-spring);}
 @keyframes landBounce{0%{transform:translateX(-50%) scale(.35);opacity:0;}65%{transform:translateX(-50%) scale(1.16);opacity:1;}100%{transform:translateX(-50%) scale(1);opacity:1;}}
 .tl-card.landing .tl-dot{animation:dotPulse .45s var(--ease-out);}
 @keyframes dotPulse{0%{transform:scale(.4);}50%{transform:scale(2.1);}100%{transform:scale(1);}}
 .tl-card.landing .tl-dot::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1.5px solid var(--dot-c,var(--accent));animation:ringPulse .55s var(--ease-out) forwards;}
 @keyframes ringPulse{0%{transform:scale(.6);opacity:.9;}100%{transform:scale(3.2);opacity:0;}}
-.tl-card.landing .tl-name{animation:lockSnap .2s var(--ease-out) .3s both;}
+.tl-card.landing .tl-mini{animation:lockSnap .2s var(--ease-out) .3s both;}
 @keyframes lockSnap{0%{transform:scale(1.08);}55%{transform:scale(.95);}100%{transform:scale(1);}}
-.tl-card.afterglow .tl-name{animation:afterglowPulse 1.2s ease-in-out 2;}
-@keyframes afterglowPulse{0%,100%{box-shadow:0 0 0 rgba(255,255,255,0);}50%{box-shadow:0 0 22px var(--dot-c,var(--accent));}}
+.tl-card.afterglow .tl-mini{animation:afterglowPulse 1.2s ease-in-out 2;}
+@keyframes afterglowPulse{0%,100%{box-shadow:0 8px 20px -10px rgba(0,0,0,.85);}50%{box-shadow:0 0 24px var(--dot-c,var(--accent));}}
+
+/* Släppindikator som visas medan kortet dras. */
+.tl-needle{position:absolute;top:0;bottom:0;left:0;width:2px;transform:translateX(-1px);z-index:900;display:none;pointer-events:none;opacity:.6;background:linear-gradient(180deg,transparent,var(--drop-c,var(--accent2)) 14%,var(--drop-c,var(--accent2)) 86%,transparent);box-shadow:0 0 18px var(--drop-c,var(--accent2));transition:left .08s linear;}
+.tl-wrap.dragging .tl-needle,.tl-wrap.dropped .tl-needle{display:block;}
+.tl-wrap.dropped .tl-needle{opacity:.3;}
+.tl-chip{position:absolute;top:2px;left:0;z-index:940;display:none;transform:translateX(-50%);padding:5px 12px 6px;border-radius:999px;pointer-events:none;color:var(--drop-c,var(--accent2));background:rgba(10,13,23,.92);border:1px solid color-mix(in srgb,var(--drop-c,var(--accent2)) 45%,transparent);box-shadow:0 10px 26px -10px rgba(0,0,0,.9),0 0 26px -10px var(--drop-c,var(--accent2));transition:left .08s linear;}
+.tl-wrap.dragging .tl-chip{display:block;}
+.tl-odo{display:flex;font-family:'JetBrains Mono',monospace;font-size:1.35em;font-weight:700;line-height:1;}
+.odo-col{display:block;width:.64em;height:1em;overflow:hidden;}
+.odo-reel{display:block;transform:translateY(calc(var(--d,0) * -10%));transition:transform .3s var(--ease-spring);}
+.odo-reel span{display:block;height:1em;line-height:1em;text-align:center;}
+
+/* Gissningen markeras kvar på tidslinjen och binds ihop med det rätta årtalet. */
+.tl-ghost{position:absolute;top:20%;bottom:16%;width:0;border-left:1.5px dashed rgba(200,214,255,.6);z-index:3;pointer-events:none;animation:ghostFade 2.8s ease-out forwards;}
+.tl-ghost span{position:absolute;top:-16px;left:0;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:.6em;font-weight:600;letter-spacing:.03em;color:rgba(205,218,255,.85);white-space:nowrap;}
+.tl-delta{position:absolute;top:calc(50% - 11px);height:2px;z-index:2;pointer-events:none;border-radius:2px;background:repeating-linear-gradient(90deg,rgba(200,214,255,.8) 0 6px,transparent 6px 11px);animation:ghostFade 2.8s ease-out forwards;}
+.tl-delta::before,.tl-delta::after{content:'';position:absolute;top:-4px;width:2px;height:10px;border-radius:2px;background:rgba(200,214,255,.75);}
+.tl-delta::before{left:0;}
+.tl-delta::after{right:0;}
+@keyframes ghostFade{0%{opacity:0;}10%{opacity:1;}62%{opacity:1;}100%{opacity:0;}}
 .tl-band{position:absolute;top:50%;transform:translateY(-50%);height:7px;border-radius:6px;opacity:.3;pointer-events:none;background:var(--dot-c,var(--red));z-index:1;}
 .tl-band.winter-span{height:6px;opacity:.5;background:linear-gradient(90deg,rgba(239,91,107,.35),var(--red),rgba(239,91,107,.35));box-shadow:0 0 14px rgba(239,91,107,.4);animation:winterSpanIn .55s var(--ease-out);}
 @keyframes winterSpanIn{from{transform:translateY(-50%) scaleX(.2);opacity:0;}to{transform:translateY(-50%) scaleX(1);opacity:.5;}}
@@ -354,11 +398,12 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
   .tl-wrap::-webkit-scrollbar{display:none;}
   .tl-inner{position:relative;inset:auto;width:760px;height:100%;transform:none!important;transition:none;}
   .tl-wrap.complete .tl-inner{animation:none;}
-  .tl-card{width:74px;}
-  .tl-card .tl-name{font-size:.54em;max-width:72px;padding:5px 6px;}
-  .tl-card .tl-yr{font-size:.68em;}
-  .tl-card.above{bottom:calc(50% + 14px);}
-  .tl-card.below{top:calc(50% + 14px);}
+  .tl-card{width:76px;}
+  .tl-mini{padding:5px 6px 6px;border-radius:9px;}
+  .tl-mini .tl-name{font-size:.5em;}
+  .tl-mini .tl-yr{font-size:.6em;}
+  .tl-card.above{bottom:calc(50% + 13px);}
+  .tl-card.below{top:calc(50% + 13px);}
   .scoreboard{gap:8px;}
   .sbd-p{padding:6px 12px;}
   .sbd-p .sbd-val{font-size:1.7em;}
@@ -419,10 +464,14 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
     <button class="btn btn-reveal" id="revealBtn" onclick="revealAnswer()">Visa rätt svar</button>
   </div>
 
+  <div class="drag-hint">Dra kortet till tidslinjen, eller skriv årtalet. <kbd>&larr;</kbd> <kbd>&rarr;</kbd> justerar året medan du håller kortet.</div>
+
   <div class="tl-section">
     <div class="tl-top"><div class="tl-label">Tidslinje</div><div class="tl-count" id="tlCount">0 av 19 placerade</div></div>
     <div class="tl-wrap" id="tlWrap">
       <div class="tl-inner" id="tlInner"><div class="tl-axis" id="tlAxis"></div></div>
+      <div class="tl-needle" id="tlNeedle"></div>
+      <div class="tl-chip" id="tlChip"><div class="tl-odo" id="tlOdo"></div></div>
     </div>
   </div>
 </div>
@@ -435,7 +484,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
     <h2>AI-tidslinjen – <span class="grad-text">När då då?</span></h2>
     <p class="sub">Placera händelserna ur AI:s historia på rätt plats i tidslinjen.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><strong>Läs kortet.</strong> Varje kort beskriver en händelse. Gissa vilket år den inträffade.</div></div>
+      <div class="step"><div class="step-num">1</div><div><strong>Läs kortet.</strong> Varje kort beskriver en händelse. Gissa vilket år den inträffade.<span class="only-desktop"> Dra kortet till tidslinjen eller skriv årtalet.</span></div></div>
       <div class="step"><div class="step-num">2</div><div><strong>Samla poäng.</strong> Rätt årtal ger 3 poäng, rätt decennium 2 poäng och rätt ordning 1 poäng.</div></div>
       <div class="step"><div class="step-num">3</div><div><strong>Flera rätt i rad.</strong> Tre eller fler perfekta svar i följd ger bonuspoäng.</div></div>
     </div>
@@ -470,6 +519,7 @@ const EVENTS=[
   {id:19,year:2010,title:"Andra AI-vintern slutar",desc:"Billigare datorkraft, stora datamängder och nya metoder inom maskininlärning tinar upp AI-vintern. Strax inleds djupinlärningens era.",era:"AI-vinter",winter:"2"}
 ];
 const ERA_COL={"Symbolisk AI":"#8b7bf5","AI-vinter":"#6f8fb0","Expertsystem":"#ffab3f","Genombrott":"#34d399","Deep Learning":"#22d3ee"};
+const TL_MIN=1945,TL_MAX=2027;
 const ERA_RANGES={};
 EVENTS.forEach(ev=>{
   const y0=ev.yearRange?ev.yearRange[0]:ev.year,y1=ev.yearRange?ev.yearRange[1]:ev.year;
@@ -486,7 +536,10 @@ let mode=1,deck=[],placed=[],currentIdx=0;
 let scores=[0,0],streaks=[0,0],maxStreaks=[0,0],perfects=[0,0],currentPlayer=0;
 let totalCards=0,cardsPlaced=0,busy=false,completeFired=false,watchdogId=null;
 let attempted={},finishedIds={},lastPlacedId=null;
+/* Ett klickat kort läggs överst i stapelordningen och ligger kvar där. */
+let tlStackOrder={},tlStackTop=19;
 let cardFlipped=false,flipBusy=false;
+let guessGhost=null,ghostTimer=null;
 const isTouch=window.matchMedia('(hover: none), (pointer: coarse)').matches;
 
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
@@ -505,7 +558,7 @@ function animateNumber(el,from,to,dur){
 }
 
 function startGame(m){
-  mode=m;deck=shuffle([...EVENTS]);placed=[];currentIdx=0;cardsPlaced=0;busy=false;completeFired=false;attempted={};finishedIds={};lastPlacedId=null;
+  mode=m;deck=shuffle([...EVENTS]);placed=[];currentIdx=0;cardsPlaced=0;busy=false;completeFired=false;attempted={};finishedIds={};lastPlacedId=null;tlStackOrder={};tlStackTop=19;
   scores=[0,0];streaks=[0,0];maxStreaks=[0,0];perfects=[0,0];currentPlayer=0;
   totalCards=EVENTS.length;
   document.getElementById('modeOverlay').classList.remove('show');
@@ -562,10 +615,16 @@ function showCard(skipEnter){
   if(watchdogId){clearTimeout(watchdogId);watchdogId=null;}
 }
 
-function submitGuess(){
-  if(busy||flipBusy||cardFlipped)return;
-  const inp=document.getElementById('yearInput'),guess=parseInt(inp.value);
-  if(isNaN(guess)||guess<1900||guess>2030){document.getElementById('inputGlass').classList.add('err');setTimeout(()=>document.getElementById('inputGlass').classList.remove('err'),420);return;}
+function submitGuess(dropYear){
+  if(busy||flipBusy||cardFlipped||drag)return;
+  let guess;
+  if(typeof dropYear==='number'){
+    guess=dropYear;
+  }else{
+    const inp=document.getElementById('yearInput');
+    guess=parseInt(inp.value);
+    if(isNaN(guess)||guess<1900||guess>2030){document.getElementById('inputGlass').classList.add('err');setTimeout(()=>document.getElementById('inputGlass').classList.remove('err'),420);return;}
+  }
   const ev=deck[currentIdx],diff=Math.abs(guess-ev.year);
   const sameDecade=Math.floor(guess/10)===Math.floor(ev.year/10);
   let orderCorrect=true;
@@ -585,9 +644,9 @@ function submitGuess(){
   }
 
   /* Stämpeln visar hur nära gissningen låg, oberoende av ordningspoängen: */
-  //   Rätt  = exact year, or inside the period for range-cards
-  //   Nära  = within same decade, OR within +-5 years of the year/period
-  //   Fel   = anything further off (even if an order point was still earned)
+  //   Rätt  = exakt årtal, eller inom perioden för kort med tidsspann
+  //   Nära  = samma decennium, eller inom +-5 år från årtalet eller perioden
+  //   Fel   = längre ifrån än så, även om ordningspoängen ändå gavs
   let stampType,stampText;
   if(ev.yearRange){
     const [lo,hi]=ev.yearRange;
@@ -634,6 +693,9 @@ function resolveCard(ev,guess,base,level,stampType,stampText){
   const oldScore=scores[currentPlayer];
   scores[currentPlayer]+=total;
 
+  guessGhost=(level!=='revealed'&&guess!==ev.year)?{guess:guess,year:ev.year}:null;
+  if(ghostTimer)clearTimeout(ghostTimer);
+  if(guessGhost)ghostTimer=setTimeout(()=>{guessGhost=null;},3000);
   finishedIds[ev.id]=true;
   placed.push({...ev,guessYear:guess,points:total,level});
   placed.sort((a,b)=>a.year-b.year);
@@ -783,7 +845,8 @@ function renderTimeline(){
   if(cardsPlaced>=totalCards&&!completeFired){completeFired=true;wrap.classList.add('complete');setTimeout(()=>wrap.classList.remove('complete'),1500);}
 
   document.getElementById('tlCount').textContent=cardsPlaced+' av '+totalCards+' placerade';
-  const minY=1945,maxY=2027,range=maxY-minY;
+  const minY=TL_MIN,maxY=TL_MAX,range=maxY-minY;
+  wrap.classList.remove('dragging','dropped');
 
   const erasShown=new Set(placed.map(p=>p.era));
   erasShown.forEach(era=>{
@@ -813,6 +876,20 @@ function renderTimeline(){
     else{t.className='tl-tick minor';}
     t.style.left=pct+'%';
     inner.appendChild(t);
+  }
+
+  /* Gissningen lämnar ett spår kvar som binds ihop med det rätta årtalet. */
+  if(guessGhost){
+    const gx=(Math.max(minY,Math.min(maxY,guessGhost.guess))-minY)/range*100;
+    const tx=(guessGhost.year-minY)/range*100;
+    const gh=document.createElement('div');
+    gh.className='tl-ghost';gh.style.left=gx+'%';
+    gh.innerHTML='<span>' + GHOST_LABEL + guessGhost.guess+'</span>';
+    inner.appendChild(gh);
+    const dl=document.createElement('div');
+    dl.className='tl-delta';
+    dl.style.left=Math.min(gx,tx)+'%';dl.style.width=Math.abs(tx-gx)+'%';
+    inner.appendChild(dl);
   }
 
   const sorted=[...placed].sort((a,b)=>a.year-b.year);
@@ -849,13 +926,22 @@ function renderTimeline(){
     const card=document.createElement('div');
     card.className='tl-card '+p.level+' '+(above?'above':'below')+(p.id===lastId?' landing':'');
     card.style.left=pct+'%';
-    const name=document.createElement('div');name.className='tl-name';name.textContent=p.title;
-    const dot=document.createElement('div');dot.className='tl-dot';
+    card.style.setProperty('--z',tlStackOrder[p.id]||(p.id===lastId?500:2+i));
+    card.dataset.year=p.year;
+    const mini=document.createElement('div');mini.className='tl-mini';
     const yr=document.createElement('div');yr.className='tl-yr';
     yr.textContent=p.yearRange?p.yearRange[0]+'–'+p.yearRange[1]:p.year;
-    if(above){card.appendChild(yr);card.appendChild(name);card.appendChild(dot);}
-    else{card.appendChild(dot);card.appendChild(name);card.appendChild(yr);}
-    card.addEventListener('click',()=>showCardDetail(p));
+    const name=document.createElement('div');name.className='tl-name';name.textContent=p.title;
+    mini.appendChild(yr);mini.appendChild(name);
+    const stem=document.createElement('div');stem.className='tl-stem';
+    const dot=document.createElement('div');dot.className='tl-dot';
+    if(above){card.appendChild(mini);card.appendChild(stem);card.appendChild(dot);}
+    else{card.appendChild(dot);card.appendChild(stem);card.appendChild(mini);}
+    card.addEventListener('click',()=>{
+      tlStackOrder[p.id]=++tlStackTop;
+      card.style.setProperty('--z',tlStackOrder[p.id]);
+      showCardDetail(p);
+    });
     inner.appendChild(card);
   }
 
@@ -906,11 +992,11 @@ function endGame(){
     else if(pct>=70)comment='Imponerande!';
     else if(pct>=50)comment='Bra grund! Läs kapitlet och testa igen.';
     else comment='Dags att läsa på!';
-    ec.innerHTML='<h2>Spelet slut!</h2><div class="big-score">'+scores[0]+' / '+maxP+'</div><div class="end-sub">'+comment+'</div><div class="end-stats"><div class="es glass-soft"><div class="ev" style="color:var(--gold)">'+perfects[0]+'</div><div class="el">Perfekta</div></div><div class="es glass-soft"><div class="ev" style="color:var(--orange)">'+maxStreaks[0]+'</div><div class="el">Längsta rad</div></div><div class="es glass-soft"><div class="ev" style="color:var(--accent2)">'+totalCards+'</div><div class="el">Kort</div></div></div>'+replayBtn;
+    ec.innerHTML='<h2>Spelet slut!</h2><div class="big-score">'+scores[0]+' / '+maxP+'</div><div class="end-sub">'+comment+'</div><div class="end-stats"><div class="es glass-soft"><div class="ev" style="color:var(--green)">'+perfects[0]+'</div><div class="el">Perfekta</div></div><div class="es glass-soft"><div class="ev" style="color:var(--orange)">'+maxStreaks[0]+'</div><div class="el">Längsta rad</div></div><div class="es glass-soft"><div class="ev" style="color:var(--accent2)">'+totalCards+'</div><div class="el">Kort</div></div></div>'+replayBtn;
   }else{
     const w=scores[0]>scores[1]?0:scores[1]>scores[0]?1:-1;
     let title='Oavgjort!';if(w===0)title='Spelare 1 vinner!';if(w===1)title='Spelare 2 vinner!';
-    ec.innerHTML='<h2>'+title+'</h2><div class="p-scores"><div class="ps glass-soft '+(w===0?'w':'')+'"><div class="pn" style="color:var(--accent2)">Spelare 1</div><div class="psc" style="color:var(--accent2)">'+scores[0]+'</div></div><div class="ps glass-soft '+(w===1?'w':'')+'"><div class="pn" style="color:var(--orange)">Spelare 2</div><div class="psc" style="color:var(--orange)">'+scores[1]+'</div></div></div><div class="end-stats"><div class="es glass-soft"><div class="ev" style="color:var(--gold)">'+perfects[0]+' / '+perfects[1]+'</div><div class="el">Perfekta</div></div><div class="es glass-soft"><div class="ev" style="color:var(--orange)">'+maxStreaks[0]+' / '+maxStreaks[1]+'</div><div class="el">Längsta rad</div></div></div>'+replayBtn;
+    ec.innerHTML='<h2>'+title+'</h2><div class="p-scores"><div class="ps glass-soft '+(w===0?'w':'')+'"><div class="pn" style="color:var(--accent2)">Spelare 1</div><div class="psc" style="color:var(--accent2)">'+scores[0]+'</div></div><div class="ps glass-soft '+(w===1?'w':'')+'"><div class="pn" style="color:var(--orange)">Spelare 2</div><div class="psc" style="color:var(--orange)">'+scores[1]+'</div></div></div><div class="end-stats"><div class="es glass-soft"><div class="ev" style="color:var(--green)">'+perfects[0]+' / '+perfects[1]+'</div><div class="el">Perfekta</div></div><div class="es glass-soft"><div class="ev" style="color:var(--orange)">'+maxStreaks[0]+' / '+maxStreaks[1]+'</div><div class="el">Längsta rad</div></div></div>'+replayBtn;
   }
 }
 
@@ -920,7 +1006,7 @@ function endGame(){
   const MAX_TILT=11;
   outer.addEventListener('mousemove',e=>{
     if(outer.classList.contains('flying')||outer.classList.contains('flying-away'))return;
-    if(cardFlipped||flipBusy)return;
+    if(cardFlipped||flipBusy||drag)return;
     const r=el.getBoundingClientRect();
     const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
     const rx=(0.5-py)*MAX_TILT*2,ry=(px-0.5)*MAX_TILT*2;
@@ -939,6 +1025,7 @@ function endGame(){
   const wrap=document.getElementById('tlWrap');
   let raf=null,tx=0,ty=0;
   document.addEventListener('mousemove',e=>{
+    if(drag)return;
     const r=wrap.getBoundingClientRect();
     const cx=r.left+r.width/2,cy=r.top+r.height/2;
     tx=Math.max(-1,Math.min(1,(e.clientX-cx)/r.width))*5;
@@ -949,6 +1036,166 @@ function endGame(){
       raf=null;
     });
   });
+})();
+
+/* ---------- Dra kortet till tidslinjen, enbart mus och pekdon ---------- */
+const GHOST_LABEL='Du gissade ';
+const DRAG_SCALE=.5;
+let drag=null;
+(function initDragPlacement(){
+  if(isTouch)return;
+  const cc=document.getElementById('currentCard');
+  const inner=document.getElementById('currentCardInner');
+  const area=document.querySelector('.card-area');
+  const wrap=document.getElementById('tlWrap');
+  const tlInner=document.getElementById('tlInner');
+  const needle=document.getElementById('tlNeedle');
+  const chip=document.getElementById('tlChip');
+  const odo=document.getElementById('tlOdo');
+
+  /* Årtalet visas som fyra sifferhjul som rullar när gissningen ändras. */
+  const reels=[];
+  for(let i=0;i<4;i++){
+    const col=document.createElement('span');col.className='odo-col';
+    const reel=document.createElement('span');reel.className='odo-reel';
+    for(let d=0;d<10;d++){const s=document.createElement('span');s.textContent=String(d);reel.appendChild(s);}
+    col.appendChild(reel);odo.appendChild(col);reels.push(reel);
+  }
+  function setReadout(y){
+    const s=String(y).padStart(4,'0');
+    for(let i=0;i<4;i++)reels[i].style.setProperty('--d',s.charAt(i));
+  }
+
+  function begin(e){
+    if(e.button!==0||drag)return;
+    if(busy||flipBusy||cardFlipped)return;
+    if(document.getElementById('placeBtn').disabled)return;
+    e.preventDefault();
+    document.getElementById('yearInput').blur();
+    /* Kortarean låses vid sin höjd så att tidslinjen inte hoppar när kortet lyfts. */
+    const home=cc.getBoundingClientRect();
+    area.style.height=area.offsetHeight+'px';
+    area.classList.add('holding');
+    inner.style.transform='';
+    cc.classList.add('dragging','compact');
+    cc.style.left=home.left+'px';cc.style.top=home.top+'px';cc.style.width=home.width+'px';
+    const r=cc.getBoundingClientRect();
+    const ir=tlInner.getBoundingClientRect(),wr=wrap.getBoundingClientRect();
+    drag={id:e.pointerId,px:e.clientX,py:e.clientY,lastPx:e.clientX,rot:0,
+      cx:r.left+r.width/2,cy:r.top+r.height/2,h:r.height,
+      ir:ir,wr:wr,minis:[],nudge:0,nudgeX:e.clientX,year:null,armed:false,raf:null};
+    drag.minis=Array.prototype.map.call(tlInner.querySelectorAll('.tl-card'),el=>({
+      el:el,x:ir.left+parseFloat(el.style.left)/100*ir.width,year:parseInt(el.dataset.year,10)
+    }));
+    const ev=deck[currentIdx];
+    wrap.style.setProperty('--drop-c',ERA_COL[ev.era]||'#7aa2ff');
+    try{cc.setPointerCapture(e.pointerId);}catch(err){}
+    document.body.classList.add('is-dragging');
+    /* Kortet glider fram till markören och följer den sedan direkt. */
+    cc.style.transition='transform .18s var(--ease-out)';
+    setTimeout(()=>{if(drag)cc.style.transition='none';},190);
+    schedule();
+  }
+
+  function schedule(){if(drag&&!drag.raf)drag.raf=requestAnimationFrame(frame);}
+
+  function frame(){
+    if(!drag)return;
+    const d=drag;
+    d.raf=null;
+    const pct=(d.px-d.ir.left)/d.ir.width*100;
+    let year=Math.round(TL_MIN+pct/100*(TL_MAX-TL_MIN))+d.nudge;
+    year=Math.max(TL_MIN,Math.min(TL_MAX,year));
+    /* Kortet lutar en aning åt det håll det förs. */
+    const vx=d.px-d.lastPx;d.lastPx=d.px;
+    d.rot+=(Math.max(-9,Math.min(9,vx*.7))-d.rot)*.3;
+    const tx=d.px-d.cx,ty=d.py-22-d.h*DRAG_SCALE/2-d.cy;
+    cc.style.transform='translate('+tx.toFixed(1)+'px,'+ty.toFixed(1)+'px) scale('+DRAG_SCALE+') rotate('+(d.rot-1.5).toFixed(2)+'deg)';
+    const armed=d.py>d.wr.top-56&&d.py<d.wr.bottom+56;
+    if(armed!==d.armed){d.armed=armed;wrap.classList.toggle('dragging',armed);if(!armed)clearSpread();}
+    if(armed){
+      const sx=d.ir.left+(year-TL_MIN)/(TL_MAX-TL_MIN)*d.ir.width;
+      needle.style.left=(sx-d.wr.left)+'px';
+      chip.style.left=(sx-d.wr.left)+'px';
+      if(year!==d.year)setReadout(year);
+      spread(sx,year,year!==d.year);
+    }
+    d.year=year;
+  }
+
+  /* Miniatyrerna glider undan från insättningspunkten så att luckan syns. */
+  function spread(sx,year,yearChanged){
+    const SIGMA=72,MAX=36;
+    let left=null,right=null;
+    for(const m of drag.minis){
+      const u=(m.x-sx)/SIGMA;
+      m.el.style.setProperty('--push',(MAX*u*Math.exp(.5-u*u/2)).toFixed(1)+'px');
+      if(m.year<=year&&(!left||m.year>left.year))left=m;
+      if(m.year>=year&&(!right||m.year<right.year))right=m;
+    }
+    if(yearChanged){
+      for(const m of drag.minis)m.el.classList.remove('flank');
+      if(left)left.el.classList.add('flank');
+      if(right)right.el.classList.add('flank');
+    }
+  }
+  function clearSpread(){
+    if(!drag)return;
+    for(const m of drag.minis){m.el.style.setProperty('--push','0px');m.el.classList.remove('flank');}
+  }
+
+  function goHome(after){
+    cc.classList.remove('compact');
+    cc.style.transition='transform .26s var(--ease-out)';
+    cc.style.transform='translate(0px,0px) scale(1) rotate(0deg)';
+    setTimeout(()=>{
+      cc.classList.remove('dragging');
+      cc.style.left='';cc.style.top='';cc.style.width='';cc.style.transform='';cc.style.transition='';
+      area.style.height='';area.classList.remove('holding');
+      if(after)after();
+    },280);
+  }
+
+  function finish(commit){
+    if(!drag)return;
+    const year=drag.year,armed=drag.armed;
+    if(drag.raf)cancelAnimationFrame(drag.raf);
+    try{cc.releasePointerCapture(drag.id);}catch(err){}
+    clearSpread();
+    document.body.classList.remove('is-dragging');
+    drag=null;
+    if(commit&&armed&&year!=null){
+      /* Släppmarkören står kvar tills kortet har landat på sitt rätta årtal. */
+      wrap.classList.remove('dragging');
+      wrap.classList.add('dropped');
+      goHome(()=>submitGuess(year));
+    }else{
+      wrap.classList.remove('dragging','dropped');
+      goHome(null);
+    }
+  }
+
+  cc.addEventListener('pointerdown',begin);
+  cc.addEventListener('pointermove',e=>{
+    if(!drag||e.pointerId!==drag.id)return;
+    drag.px=e.clientX;drag.py=e.clientY;
+    if(Math.abs(e.clientX-drag.nudgeX)>14){drag.nudge=0;drag.nudgeX=e.clientX;}
+    schedule();
+  });
+  cc.addEventListener('pointerup',()=>finish(true));
+  cc.addEventListener('pointercancel',()=>finish(false));
+  cc.addEventListener('dragstart',e=>e.preventDefault());
+  /* Piltangenterna finjusterar årtalet medan kortet hålls. */
+  window.addEventListener('keydown',e=>{
+    if(!drag)return;
+    if(e.key==='ArrowLeft'||e.key==='ArrowRight'){
+      e.preventDefault();
+      drag.nudge+=(e.key==='ArrowLeft'?-1:1);
+      drag.nudgeX=drag.px;
+      schedule();
+    }else if(e.key==='Escape'){finish(false);}
+  },true);
+  window.addEventListener('resize',()=>{if(drag)finish(false);});
 })();
 
 document.getElementById('yearInput').addEventListener('keydown',e=>{if(e.key==='Enter')submitGuess();});
