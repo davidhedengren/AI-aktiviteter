@@ -184,7 +184,8 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
           <input id="blockWeek" type="number" placeholder="t.ex. 44">
         </div>
         <button class="btn" style="width:100%;margin-bottom:8px" onclick="blockWeek()">Lägg till lov/ledig vecka</button>
-        <button class="btn" style="width:100%" onclick="openDates()">Studiedagar och lediga datum</button>
+        <button class="btn" style="width:100%;margin-bottom:8px" onclick="openDates()">Studiedagar och lediga datum</button>
+        <button class="btn" style="width:100%" onclick="restoreDays()">Återställ borttagna dagar</button>
       </div>
       <div id="lessons" class="tabpane body">
         <div class="btnrow">
@@ -438,10 +439,10 @@ function rebuildSchedule(){
 
  weeks.forEach(w=>{
    const p=periodFor(w,weeks);
-   const days=DAYS.filter(d=>(p?.days||[]).includes(d));
-   days.forEach((d,i)=>{
+   const days=DAYS.filter(d=>(p?.days||[]).includes(d)&&!isRemoved(w,d));
+   days.forEach(d=>{
      state.slots.push({
-       id:`${w}-${i}`,
+       id:`${w}-${d}`,
        week:w,
        day:d,
        lessonId:null,
@@ -453,11 +454,14 @@ function rebuildSchedule(){
 
  // Preserve assignments by slot id where possible.
  state.slots.forEach(sl=>{
-   const old=oldSlots.find(x=>x.id===sl.id);
+   const old=oldSlots.find(x=>x.week===sl.week&&x.day===sl.day);
    if(old){
      sl.lessonId=old.lessonId;
+     sl.override=old.override||null;
      sl.blocked=old.blocked;
      sl.label=old.label;
+     sl.note=old.note||"";
+     sl.other=old.other||"";
    }
  });
  renderPeriods();
@@ -557,6 +561,8 @@ function openCtx(e,index){
    add("Markera som ledig / studiedag",()=>{toggleBlocked(index);openFree(index)});
  }
  add(s.other?"Redigera kommentar i Övrigt":"Skriv kommentar i Övrigt",()=>openNote(index));
+ m.appendChild(document.createElement("hr"));
+ add("Ta bort dagen",()=>removeSlot(index),"danger");
  });
 }
 function renderSchedule(){
@@ -730,6 +736,25 @@ function lessonsInPageOrder(){
    .map(r=>r.l);
 }
 function openSlots(){return state.slots.filter(s=>!s.blocked)}
+// En borttagen dag försvinner helt ur schemat tills den återställs.
+function isRemoved(week,day){
+ return (state.removed||[]).some(r=>r.week===week&&r.day===day);
+}
+function removeSlot(index){
+ const s=state.slots[index];
+ if(!s)return;
+ if(s.lessonId)removePlacement(index);
+ state.removed=state.removed||[];
+ state.removed.push({week:s.week,day:s.day});
+ const i=state.slots.indexOf(s);
+ if(i>=0)state.slots.splice(i,1);
+ render();
+}
+function restoreDays(){
+ if(!(state.removed||[]).length)return;
+ state.removed=[];
+ rebuildSchedule();
+}
 // Repetition och Prov ska alltid ligga överst, även i inlästa kursfiler.
 function ensureFixedLessons(){
  seedLessons.forEach((f,k)=>{
