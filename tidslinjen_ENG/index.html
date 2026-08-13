@@ -32,6 +32,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
+  /* Upper limit for how far the card text may be scaled up. */
+  --fit-max:1.28;
   --bg:#0b0f17;
   --text:#eef1fb;
   --dim:#8791ad;
@@ -121,13 +123,13 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 /* The card uses the proportions of a standard playing card, landscape 7:5. */
 .current-card{height:clamp(206px,31vh,318px);aspect-ratio:7/5;width:auto;max-width:92vw;display:flex;border-radius:var(--r-xl);padding:2px;position:relative;transition:transform .55s var(--ease-spring),opacity .5s;transform-style:preserve-3d;}
 .current-card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(160deg,var(--card-accent,var(--accent)) 0%,rgba(255,255,255,.08) 30%,transparent 58%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.75;pointer-events:none;z-index:3;}
-.current-card-inner{position:relative;border-radius:inherit;flex:1;min-height:0;padding:26px 30px 24px;overflow:hidden;background:linear-gradient(90deg,var(--card-accent,var(--accent)),transparent 62%) top left/100% 3px no-repeat,linear-gradient(160deg,color-mix(in srgb,var(--card-accent,var(--accent)) 22%,rgba(34,38,56,.86)),color-mix(in srgb,var(--card-accent,var(--accent)) 9%,rgba(20,23,36,.90)));backdrop-filter:blur(14px) saturate(125%);-webkit-backdrop-filter:blur(14px) saturate(125%);box-shadow:0 2px 3px rgba(0,0,0,.35),0 14px 28px -10px rgba(0,0,0,.55),0 34px 66px -22px rgba(0,0,0,.72),inset 0 1px 0 rgba(255,255,255,.10),inset 0 -2px 7px rgba(0,0,0,.34),0 0 60px -20px color-mix(in srgb,var(--card-accent,#4d80ff) 62%,transparent);transition:transform .45s var(--ease-out),box-shadow .45s var(--ease-out);display:flex;flex-direction:column;justify-content:center;gap:calc(14px * var(--fit,1));}
+.current-card-inner{position:relative;border-radius:inherit;flex:1;min-height:0;padding:30px 34px 28px;overflow:hidden;background:linear-gradient(90deg,var(--card-accent,var(--accent)),transparent 62%) top left/100% 3px no-repeat,linear-gradient(160deg,color-mix(in srgb,var(--card-accent,var(--accent)) 22%,rgba(34,38,56,.86)),color-mix(in srgb,var(--card-accent,var(--accent)) 9%,rgba(20,23,36,.90)));backdrop-filter:blur(14px) saturate(125%);-webkit-backdrop-filter:blur(14px) saturate(125%);box-shadow:0 2px 3px rgba(0,0,0,.35),0 14px 28px -10px rgba(0,0,0,.55),0 34px 66px -22px rgba(0,0,0,.72),inset 0 1px 0 rgba(255,255,255,.10),inset 0 -2px 7px rgba(0,0,0,.34),0 0 60px -20px color-mix(in srgb,var(--card-accent,#4d80ff) 62%,transparent);transition:transform .45s var(--ease-out),box-shadow .45s var(--ease-out);display:flex;flex-direction:column;justify-content:center;gap:calc(14px * var(--fit,1));}
 .current-card-inner::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.09),transparent 40%);pointer-events:none;border-radius:inherit;}
 .current-card-inner::before{content:'';position:absolute;inset:-40%;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--card-accent,var(--accent)) 32%,transparent),transparent 60%);opacity:0;transition:opacity .4s var(--ease-out);pointer-events:none;}
 .current-card-inner:hover::before{opacity:.30;}
 .current-card-inner>*{position:relative;z-index:2;}
 .current-card-inner>.card-gloss{position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:inherit;overflow:hidden;}
-.card-title{font-family:'DM Sans',sans-serif;font-size:calc(1.38em * var(--fit,1));font-weight:700;line-height:1.3;letter-spacing:-.01em;hyphens:auto;}
+.card-title{font-family:'DM Sans',sans-serif;font-size:calc(1.38em * var(--fit,1));font-weight:700;line-height:1.3;letter-spacing:-.01em;}
 .card-desc{font-size:calc(.89em * var(--fit,1));font-weight:400;color:var(--dim);line-height:1.62;}
 .answer-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;width:100%;max-width:560px;margin:0 auto;}
 /* ---------- The card while dragged and the drop zone indicators ---------- */
@@ -378,6 +380,7 @@ body.is-dragging *{cursor:grabbing!important;}
 
 @media(min-width:1500px){body{font-size:16px;}.current-card{max-width:600px;}}
 @media(max-width:700px){
+  :root{--fit-max:1.85;}
   body{font-size:14px;}
   .icon-link{font-size:.7em;padding:5px 9px;}
   .back-link{left:8px;}.lang-link{right:8px;}
@@ -586,7 +589,7 @@ function renderScoreLine(){
 }
 
 /* The text is scaled so the card is filled regardless of the description length. */
-const FIT_MIN=.72,FIT_MAX=1.7;
+const FIT_MIN=.7;
 function fitCardText(){
   const inner=document.getElementById('currentCardInner');
   const title=document.getElementById('cardTitle');
@@ -600,8 +603,9 @@ function fitCardText(){
     if(title.offsetHeight+desc.offsetHeight+gap>room)return false;
     return title.scrollWidth<=title.clientWidth+1&&desc.scrollWidth<=desc.clientWidth+1;
   };
-  if(fits(FIT_MAX))return;
-  let lo=FIT_MIN,hi=FIT_MAX;
+  const max=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--fit-max'))||1.28;
+  if(fits(max))return;
+  let lo=FIT_MIN,hi=max;
   for(let i=0;i<12;i++){
     const mid=(lo+hi)/2;
     if(fits(mid))lo=mid;else hi=mid;
