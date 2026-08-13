@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planeringsverktyg</title>
+<style>
+:root{
+  --bg:#f4f6f8; --card:#fff; --text:#17202a; --muted:#667085;
+  --line:#d9dee5; --accent:#0f766e; --accent2:#e6fffb;
+  --holiday:#e8eaed; --danger:#b42318; --shadow:0 8px 28px rgba(16,24,40,.08);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+header{background:#111827;color:white;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+header h1{font-size:20px;margin:0}
+header .sub{font-size:13px;color:#cbd5e1;margin-top:3px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid #d0d5dd;background:white;border-radius:8px;padding:8px 12px;font-weight:600}
+.btn.primary{background:#0f766e;border-color:#0f766e;color:#fff}
+.btn.dark{background:#1f2937;border-color:#475569;color:#fff}
+.btn.danger{color:#b42318}
+.layout{display:grid;grid-template-columns:330px 1fr;gap:18px;max-width:1500px;margin:18px auto;padding:0 18px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}
+.panel h2{font-size:15px;margin:0;padding:15px 16px;border-bottom:1px solid var(--line)}
+.panel .body{padding:14px 16px}
+.field{margin-bottom:12px}
+label{display:block;font-size:12px;font-weight:700;color:#475467;margin-bottom:5px}
+input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padding:8px 9px;background:#fff}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.help{font-size:12px;color:var(--muted);line-height:1.45}
+.tabs{display:flex;border-bottom:1px solid var(--line);background:#fafafa}
+.tab{padding:11px 14px;border:0;background:transparent;font-weight:700;color:#667085}
+.tab.active{color:#0f766e;border-bottom:2px solid #0f766e}
+.tabpane{display:none}.tabpane.active{display:block}
+.card{border:1px solid #d7dce2;border-radius:9px;padding:10px 11px;margin-bottom:8px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.04);cursor:grab}
+.card:active{cursor:grabbing}
+.card .title{font-weight:700;font-size:13px}
+.card .meta{font-size:11px;color:#667085;margin-top:4px}
+.card .actions{display:flex;gap:5px;margin-top:8px}
+.card .actions button{font-size:11px;padding:4px 7px}
+.schedule-wrap{overflow:auto}
+.schedule{min-width:900px;border-collapse:collapse;width:100%;background:#fff}
+.schedule th{background:#e1e3e5;font-size:12px;text-align:left;padding:8px;border:1px solid #adb3b9}
+.schedule td{border:1px solid #adb3b9;padding:6px;vertical-align:top;height:56px;font-size:12px}
+.schedule .week{width:60px;text-align:center;font-weight:800;background:#f3f4f6}
+.schedule .date{width:92px;color:#667085;white-space:nowrap}
+.schedule .slot{width:170px}
+.schedule .other{width:230px}
+.lesson-cell{min-height:40px;padding:6px;border-radius:6px}
+.lesson-cell.drop{outline:2px dashed #0f766e;background:#f0fdfa}
+.lesson-title{font-weight:700}
+.lesson-pages{color:#667085;font-size:11px;margin-top:2px}
+.lesson-note{font-weight:600}
+.blocked{background:var(--holiday)!important;color:#343a40}
+.blocked td{background:var(--holiday)}
+.blocked .lesson-cell{opacity:.75}
+.block-label{font-weight:800}
+.muted{color:#98a2b3}
+.selected{box-shadow:0 0 0 2px #0f766e inset}
+.footer-note{padding:10px 14px;font-size:11px;color:#667085;border-top:1px solid var(--line)}
+.empty{color:#98a2b3;text-align:center;padding:16px 8px}
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(15,23,42,.45);align-items:center;justify-content:center;z-index:10}
+.modal{width:min(560px,calc(100vw - 30px));background:#fff;border-radius:12px;box-shadow:0 25px 60px rgba(0,0,0,.25)}
+.modal h3{margin:0;padding:16px;border-bottom:1px solid var(--line)}
+.modal .content{padding:16px}
+.modal .actions{display:flex;justify-content:flex-end;gap:8px;padding:12px 16px;border-top:1px solid var(--line)}
+.small{font-size:11px}
+@media(max-width:1000px){.layout{grid-template-columns:1fr}.sidebar{order:2}}
+@media print{
+  body{background:white}
+  header,.sidebar,.no-print{display:none!important}
+  .layout{display:block;margin:0;padding:0}
+  .panel{box-shadow:none;border:0}
+  .schedule-wrap{overflow:visible}
+  .schedule{min-width:0;font-size:10px}
+  .schedule td{height:auto;padding:4px}
+  @page{size:A4 landscape;margin:10mm}
+}
+</style>
+</head>
+<body>
+<header>
+  <div><h1 id="docTitle">Planering</h1><div class="sub">Drag lektioner till schemat. Upptagna lektioner flyttas automatiskt framåt.</div></div>
+  <div class="toolbar no-print">
+    <button class="btn" onclick="saveProject()">Spara</button>
+    <button class="btn" onclick="loadProject()">Öppna</button>
+    <button class="btn primary" onclick="exportWord()">Exportera Word</button>
+    <button class="btn primary" onclick="window.print()">Exportera PDF / skriv ut</button>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="panel">
+      <div class="tabs">
+        <button class="tab active" onclick="showTab('settings',this)">Inställningar</button>
+        <button class="tab" onclick="showTab('lessons',this)">Lektioner</button>
+      </div>
+      <div id="settings" class="tabpane active body">
+        <div class="field"><label>Rubrik</label><input id="titleInput" value="Planering av Fysik 1 - 2026/2027" oninput="state.title=this.value;render()"></div>
+        <div class="row">
+          <div class="field"><label>Första vecka</label><input id="startWeek" type="number" value="34"></div>
+          <div class="field"><label>Sista vecka</label><input id="endWeek" type="number" value="24"></div>
+        </div>
+        <div class="field"><label>Antal lektioner per vecka</label>
+          <select id="lessonsPerWeek">
+            <option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select>
+        </div>
+        <div class="field"><label>Vilka veckodagar har du lektion?</label>
+          <div id="dayChecks" style="display:grid;grid-template-columns:1fr 1fr;gap:7px"></div>
+        </div>
+        <button class="btn primary" style="width:100%" onclick="rebuildSchedule()">Skapa / uppdatera schema</button>
+        <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+        <div class="field"><label>Markera vald vecka som ledig</label>
+          <input id="blockWeek" type="number" placeholder="t.ex. 44">
+        </div>
+        <button class="btn" style="width:100%" onclick="blockWeek()">Lägg till lov/ledig vecka</button>
+        <div class="help" style="margin-top:10px">Du kan även klicka på en rad i schemat för att markera den som studiedag, lov eller inställd lektion.</div>
+      </div>
+      <div id="lessons" class="tabpane body">
+        <button class="btn primary" style="width:100%;margin-bottom:10px" onclick="openLesson()">+ Ny lektion</button>
+        <div id="lessonList"></div>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:18px">
+      <h2>Så fungerar förskjutningen</h2>
+      <div class="body help">
+        En lektion är en återanvändbar "byggkloss". När du drar den till en upptagen lektion flyttas den befintliga lektionen och allt efterföljande ett steg framåt. Blockerade dagar hoppas över automatiskt.
+        <br><br>
+        Markera t.ex. en lektion som <b>Inställd</b> så förskjuts resten utan att du behöver flytta något manuellt.
+      </div>
+    </div>
+  </aside>
+
+  <main class="panel">
+    <div class="schedule-wrap">
+      <table class="schedule" id="scheduleTable"></table>
+    </div>
+    <div class="footer-note">Förhandsvisning av den slutliga planeringen. Vid utskrift används A4 liggande.</div>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="modal">
+  <div class="modal">
+    <h3 id="modalTitle">Ny lektion</h3>
+    <div class="content">
+      <div class="field"><label>Avsnitt / lektion</label><input id="mTitle"></div>
+      <div class="field"><label>Sidor</label><input id="mPages" placeholder="t.ex. 307–310"></div>
+      <div class="field"><label>Övrigt</label><input id="mOther" placeholder="t.ex. Laboration:"></div>
+      <div class="field"><label>Extra anteckning</label><input id="mNote" placeholder="Valfritt"></div>
+      <input type="hidden" id="mId">
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="closeModal()">Avbryt</button>
+      <button class="btn primary" onclick="saveLesson()">Spara</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const DAYS=["Måndag","Tisdag","Onsdag","Torsdag","Fredag"];
+let state={
+ title:"Planering av Fysik 1 - 2026/2027",
+ startWeek:34,endWeek:24,lessonsPerWeek:2,days:["Måndag","Onsdag"],
+ slots:[], lessons:[], blockedWeeks:[], blockedSlots:[]
+};
+
+const seedLessons=[
+ {id:"l1",title:"Repetition – arbete, energi och rörelsemängd",pages:"140 – 171",other:""},
+ {id:"l2",title:"Repetition – arbete, energi och rörelsemängd",pages:"178 – 181",other:""},
+ {id:"l3",title:"Vätsketryck och lufttryck",pages:"182 – 189",other:"Laboration:"},
+ {id:"l4",title:"Fortsättning",pages:"",other:""},
+ {id:"l5",title:"Arkimedes princip",pages:"190 – 194",other:""},
+ {id:"l6",title:"Ideala gaslagen",pages:"195 – 198",other:""},
+ {id:"l7",title:"Kapitel 7 Värme och temperatur",pages:"206 – 212",other:"Laboration:"},
+ {id:"l8",title:"Smälta och stelna",pages:"213 – 214",other:""},
+ {id:"l9",title:"Förånga och kondensera",pages:"215 – 222",other:"Laboration:"},
+ {id:"l10",title:"Repetition",pages:"",other:""},
+ {id:"l11",title:"Repetition",pages:"",other:""},
+ {id:"l12",title:"Prov",pages:"",other:"Laboration:"},
+ {id:"l13",title:"Kapitel 9 Elektricitet – Laddning",pages:"286 – 291",other:""},
+ {id:"l14",title:"Coulombs lag och ledare",pages:"292 – 298",other:"Laboration: Laddning"},
+ {id:"l15",title:"Kretsar och ström",pages:"299 – 303",other:""},
+ {id:"l16",title:"Spänning och resistans",pages:"303 – 306",other:"Laboration:"},
+ {id:"l17",title:"Seriekoppling",pages:"307 – 310",other:""},
+ {id:"l18",title:"Parallellkoppling",pages:"311 – 317",other:""},
+ {id:"l19",title:"Komplexa kopplingar och effektutveckling",pages:"318 – 326",other:""},
+ {id:"l20",title:"Elektriska fält och fältstyrka",pages:"327 – 332",other:""},
+ {id:"l21",title:"Potential",pages:"333 – 338",other:""},
+ {id:"l22",title:"Standardmodellen",pages:"367 – 374",other:"Laboration: Räkna"},
+ {id:"l23",title:"De fyra krafterna",pages:"375 – 380",other:""},
+ {id:"l24",title:"Isotoper och nuklider",pages:"388 – 392",other:""},
+ {id:"l25",title:"Kärnreaktioner och alfasönderfall",pages:"393 – 397",other:""},
+ {id:"l26",title:"Sönderfall",pages:"398 – 404",other:"Laboration: Sönderfall"},
+ {id:"l27",title:"Aktivitet och halveringstid",pages:"405 – 411",other:""},
+ {id:"l28",title:"Strålning möter materia",pages:"412 – 418",other:"Laboration: Reserv"},
+ {id:"l29",title:"Fusion",pages:"435 – 437",other:""},
+ {id:"l30",title:"Medicinska metoder",pages:"438 – 445",other:"Laboration: Medicinska metoder"},
+ {id:"l31",title:"Stråldoser",pages:"419 – 426",other:"Laboration: Medicinska metoder"},
+ {id:"l32",title:"Fission",pages:"427 – 434",other:""},
+ {id:"l33",title:"Termodynamik",pages:"250 – 256",other:"Laboration: Film"},
+ {id:"l34",title:"Repetition inför kursprov",pages:"",other:""},
+ {id:"l35",title:"Repetition inför provbanksprov",pages:"",other:""},
+ {id:"l36",title:"Kursprov",pages:"",other:""}
+];
+
+function uid(){return "l"+Math.random().toString(36).slice(2,9)}
+function weekSequence(a,b){
+ let out=[];
+ if(a<=b){for(let w=a;w<=b;w++)out.push(w)}
+ else {for(let w=a;w<=52;w++)out.push(w);for(let w=1;w<=b;w++)out.push(w)}
+ return out;
+}
+function selectedDays(){
+ return [...document.querySelectorAll('#dayChecks input:checked')].map(x=>x.value);
+}
+function renderDayChecks(){
+ const el=document.getElementById("dayChecks");
+ el.innerHTML="";
+ DAYS.forEach(d=>{
+   const label=document.createElement("label");
+   label.style.cssText="display:flex;align-items:center;gap:7px;font-weight:600;color:#344054;margin:0";
+   const cb=document.createElement("input");cb.type="checkbox";cb.value=d;cb.checked=state.days.includes(d);
+   label.append(cb,document.createTextNode(d));el.appendChild(label);
+ });
+}
+function rebuildSchedule(){
+ state.startWeek=+document.getElementById("startWeek").value;
+ state.endWeek=+document.getElementById("endWeek").value;
+ state.lessonsPerWeek=+document.getElementById("lessonsPerWeek").value;
+ state.days=selectedDays();
+ if(!state.days.length){alert("Välj minst en veckodag.");return}
+ if(state.days.length < state.lessonsPerWeek){
+   state.lessonsPerWeek=state.days.length;
+   document.getElementById("lessonsPerWeek").value=state.lessonsPerWeek;
+ }
+ const weeks=weekSequence(state.startWeek,state.endWeek);
+ const oldSlots=state.slots;
+ state.slots=[];
+ weeks.forEach(w=>{
+   for(let i=0;i<state.lessonsPerWeek;i++){
+     state.slots.push({id:`${w}-${i}`,week:w,day:state.days[i%state.days.length],lessonId:null,blocked:false,label:""});
+   }
+ });
+ // Preserve assignments by slot id where possible.
+ state.slots.forEach(s=>{
+   const old=oldSlots.find(x=>x.id===s.id);
+   if(old){s.lessonId=old.lessonId;s.blocked=old.blocked;s.label=old.label}
+ });
+ render();
+}
+function render(){
+ document.getElementById("docTitle").textContent=state.title;
+ renderLessons(); renderSchedule();
+}
+function renderLessons(){
+ const el=document.getElementById("lessonList"); el.innerHTML="";
+ if(!state.lessons.length){el.innerHTML='<div class="empty">Inga lektioner ännu.</div>';return}
+ state.lessons.forEach(l=>{
+   const d=document.createElement("div"); d.className="card"; d.draggable=true;
+   d.ondragstart=e=>e.dataTransfer.setData("text/plain",l.id);
+   d.innerHTML=`<div class="title">${esc(l.title)}</div><div class="meta">${esc(l.pages||"")} ${l.other?" · "+esc(l.other):""}</div>
+   <div class="actions"><button class="btn" onclick="openLesson('${l.id}')">Redigera</button><button class="btn danger" onclick="deleteLesson('${l.id}')">Ta bort</button></div>`;
+   el.appendChild(d);
+ });
+}
+function renderSchedule(){
+ const table=document.getElementById("scheduleTable");
+ table.innerHTML=`<thead><tr><th>Vecka</th><th>Dag</th><th>Avsnitt</th><th>Sidor</th><th>Övrigt</th></tr></thead>`;
+ const tb=document.createElement("tbody");
+ let i=0;
+ while(i<state.slots.length){
+   const week=state.slots[i].week;
+   let j=i;
+   while(j<state.slots.length && state.slots[j].week===week)j++;
+   const weekSlots=state.slots.slice(i,j);
+   weekSlots.forEach((s,k)=>{
+     const tr=document.createElement("tr");
+     if(s.blocked)tr.className="blocked";
+     const weekCell=k===0?`<td class="week" rowspan="${weekSlots.length}">${esc(week)}</td>`:"";
+     tr.innerHTML=`${weekCell}<td class="date">${esc(s.day)}</td>
+       <td class="slot"><div class="lesson-cell" data-slot="${s.id}">${s.blocked?`<span class="block-label">${esc(s.label||"Ledig")}</span>`:lessonHTML(s.lessonId)}</div></td>
+       <td>${s.lessonId&&!s.blocked?esc(getLesson(s.lessonId)?.pages||""):""}</td>
+       <td>${s.lessonId&&!s.blocked?esc(getLesson(s.lessonId)?.other||""):""}</td>`;
+     const cell=tr.querySelector(".lesson-cell");
+     cell.ondragover=e=>{if(!s.blocked){e.preventDefault();cell.classList.add("drop")}};
+     cell.ondragleave=()=>cell.classList.remove("drop");
+     cell.ondrop=e=>{e.preventDefault();cell.classList.remove("drop");placeLesson(e.dataTransfer.getData("text/plain"),state.slots.indexOf(s))};
+     cell.ondblclick=()=>toggleBlocked(state.slots.indexOf(s));
+     tr.querySelector(".date").ondblclick=()=>toggleBlocked(state.slots.indexOf(s));
+     tb.appendChild(tr);
+   });
+   i=j;
+ }
+ table.appendChild(tb);
+}
+function lessonHTML(id){
+ const l=getLesson(id); if(!l)return '<span class="muted">Dra en lektion hit</span>';
+ return `<div class="lesson-title">${esc(l.title)}</div>`;
+}
+function getLesson(id){return state.lessons.find(l=>l.id===id)}
+function placeLesson(lessonId,index){
+ if(!lessonId)return;
+ // Remove previous placement of the same lesson.
+ state.slots.forEach(s=>{if(s.lessonId===lessonId)s.lessonId=null});
+ // Insert by shifting occupied slots forward, skipping blocked slots.
+ let carry=lessonId;
+ for(let i=index;i<state.slots.length;i++){
+   const s=state.slots[i];
+   if(s.blocked)continue;
+   const old=s.lessonId;s.lessonId=carry;carry=old;
+   if(!carry)break;
+ }
+ if(carry) alert("Det finns inte tillräckligt många lediga lektionstillfällen för att flytta hela planeringen.");
+ render();
+}
+function toggleBlocked(index){
+ const s=state.slots[index];
+ if(!s)return;
+ if(!s.blocked){
+   // Move the lesson out first, preserving the sequence.
+   if(s.lessonId){
+     const old=s.lessonId;s.lessonId=null;
+     let carry=old;
+     for(let i=index+1;i<state.slots.length;i++){
+       if(state.slots[i].blocked)continue;
+       const x=state.slots[i].lessonId;state.slots[i].lessonId=carry;carry=x;if(!carry)break;
+     }
+   }
+   s.blocked=true;s.label="Studiedag / ledig";
+ }else{s.blocked=false;s.label=""}
+ render();
+}
+function blockWeek(){
+ const w=+document.getElementById("blockWeek").value;
+ if(!w)return;
+ state.slots.forEach(s=>{if(s.week===w){s.blocked=true;s.label="LOV / LEDIG";s.lessonId=null}});
+ // Repack lessons after the blocked week(s), skipping blocked slots.
+ repack();
+ render();
+}
+function repack(){
+ const ids=[];
+ state.slots.forEach(s=>{if(s.lessonId)ids.push(s.lessonId);s.lessonId=null});
+ let p=0;
+ state.slots.forEach(s=>{if(!s.blocked&&p<ids.length)s.lessonId=ids[p++]});
+}
+function openLesson(id){
+ document.getElementById("mId").value=id||"";
+ const l=id?getLesson(id):null;
+ document.getElementById("modalTitle").textContent=id?"Redigera lektion":"Ny lektion";
+ document.getElementById("mTitle").value=l?.title||"";
+ document.getElementById("mPages").value=l?.pages||"";
+ document.getElementById("mOther").value=l?.other||"";
+ document.getElementById("mNote").value=l?.note||"";
+ document.getElementById("modal").style.display="flex";
+}
+function closeModal(){document.getElementById("modal").style.display="none"}
+function saveLesson(){
+ const id=document.getElementById("mId").value||uid();
+ const l={id,title:document.getElementById("mTitle").value.trim(),pages:document.getElementById("mPages").value.trim(),other:document.getElementById("mOther").value.trim(),note:document.getElementById("mNote").value.trim()};
+ if(!l.title)return;
+ const i=state.lessons.findIndex(x=>x.id===id);
+ if(i>=0)state.lessons[i]=l;else state.lessons.push(l);
+ closeModal();render();
+}
+function deleteLesson(id){
+ state.lessons=state.lessons.filter(x=>x.id!==id);
+ state.slots.forEach(s=>{if(s.lessonId===id)s.lessonId=null});
+ render();
+}
+function saveProject(){
+ const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
+ const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(state.title||"planering")+".json";a.click();
+}
+function loadProject(){
+ const inp=document.createElement("input");inp.type="file";inp.accept=".json";
+ inp.onchange=()=>{const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{state=JSON.parse(r.result);syncInputs();render()};r.readAsText(f)};inp.click();
+}
+function syncInputs(){
+ document.getElementById("titleInput").value=state.title||"";
+ document.getElementById("startWeek").value=state.startWeek;
+ document.getElementById("endWeek").value=state.endWeek;
+ document.getElementById("lessonsPerWeek").value=state.lessonsPerWeek;
+ renderDayChecks();
+}
+function exportWord(){
+ const rows=state.slots.map(s=>{
+   const l=getLesson(s.lessonId);
+   const cls=s.blocked?' class="blocked"':'';
+   return `<tr${cls}><td>${esc(s.week)}</td><td>${esc(s.day)}</td><td>${s.blocked?'<b>'+esc(s.label)+'</b>':esc(l?.title||"")}</td><td>${s.blocked?'':esc(l?.pages||"")}</td><td>${s.blocked?'':esc(l?.other||"")}</td></tr>`;
+ }).join("");
+ const html=`<!doctype html><html><head><meta charset="utf-8"><title>${esc(state.title)}</title>
+ <style>body{font-family:Arial,sans-serif;font-size:10pt}h1{text-align:center;font-size:18pt;margin:20px 0}table{border-collapse:collapse;width:100%}th{background:#ddd}th,td{border:1px solid #555;padding:5px;vertical-align:top}.blocked td{background:#e8eaed}td:first-child{width:7%}td:nth-child(2){width:12%}td:nth-child(3){width:42%}td:nth-child(4){width:18%}td:nth-child(5){width:21%}</style></head><body>
+ <h1>${esc(state.title)}</h1><table><thead><tr><th>Vecka</th><th>Dag</th><th>Avsnitt</th><th>Sidor</th><th>Övrigt</th></tr></thead><tbody>${rows}</tbody></table></body></html>`;
+ const blob=new Blob([html],{type:"application/msword"});
+ const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(state.title||"planering")+".doc";a.click();
+}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+
+state.lessons=seedLessons.map(x=>({...x}));
+renderDayChecks();
+rebuildSchedule();
+// Put a small sample at the beginning so the behavior is immediately visible.
+state.slots[0].lessonId="l1"; state.slots[1].lessonId="l2"; state.slots[2].lessonId="l3";
+render();
+
+function showTab(id,btn){
+ document.querySelectorAll(".tabpane").forEach(x=>x.classList.remove("active"));
+ document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+ document.getElementById(id).classList.add("active");btn.classList.add("active");
+}
+</script>
+</body>
+</html>
