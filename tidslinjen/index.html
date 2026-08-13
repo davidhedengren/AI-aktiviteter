@@ -121,30 +121,29 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;background:
 /* Kortet har proportionerna hos ett vanligt spelkort, liggande 7:5. */
 .current-card{height:clamp(206px,31vh,318px);aspect-ratio:7/5;width:auto;max-width:92vw;display:flex;border-radius:var(--r-xl);padding:2px;position:relative;transition:transform .55s var(--ease-spring),opacity .5s;transform-style:preserve-3d;}
 .current-card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(160deg,var(--card-accent,var(--accent)) 0%,rgba(255,255,255,.08) 30%,transparent 58%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.75;pointer-events:none;z-index:3;}
-.current-card-inner{position:relative;border-radius:inherit;flex:1;min-height:0;padding:26px 30px 24px;overflow:hidden;background:linear-gradient(90deg,var(--card-accent,var(--accent)),transparent 62%) top left/100% 3px no-repeat,linear-gradient(160deg,color-mix(in srgb,var(--card-accent,var(--accent)) 22%,rgba(34,38,56,.86)),color-mix(in srgb,var(--card-accent,var(--accent)) 9%,rgba(20,23,36,.90)));backdrop-filter:blur(14px) saturate(125%);-webkit-backdrop-filter:blur(14px) saturate(125%);box-shadow:0 2px 3px rgba(0,0,0,.35),0 14px 28px -10px rgba(0,0,0,.55),0 34px 66px -22px rgba(0,0,0,.72),inset 0 1px 0 rgba(255,255,255,.10),inset 0 -2px 7px rgba(0,0,0,.34),0 0 60px -20px color-mix(in srgb,var(--card-accent,#4d80ff) 62%,transparent);transition:transform .45s var(--ease-out),box-shadow .45s var(--ease-out);display:flex;flex-direction:column;justify-content:center;gap:14px;}
+.current-card-inner{position:relative;border-radius:inherit;flex:1;min-height:0;padding:26px 30px 24px;overflow:hidden;background:linear-gradient(90deg,var(--card-accent,var(--accent)),transparent 62%) top left/100% 3px no-repeat,linear-gradient(160deg,color-mix(in srgb,var(--card-accent,var(--accent)) 22%,rgba(34,38,56,.86)),color-mix(in srgb,var(--card-accent,var(--accent)) 9%,rgba(20,23,36,.90)));backdrop-filter:blur(14px) saturate(125%);-webkit-backdrop-filter:blur(14px) saturate(125%);box-shadow:0 2px 3px rgba(0,0,0,.35),0 14px 28px -10px rgba(0,0,0,.55),0 34px 66px -22px rgba(0,0,0,.72),inset 0 1px 0 rgba(255,255,255,.10),inset 0 -2px 7px rgba(0,0,0,.34),0 0 60px -20px color-mix(in srgb,var(--card-accent,#4d80ff) 62%,transparent);transition:transform .45s var(--ease-out),box-shadow .45s var(--ease-out);display:flex;flex-direction:column;justify-content:center;gap:calc(14px * var(--fit,1));}
 .current-card-inner::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.09),transparent 40%);pointer-events:none;border-radius:inherit;}
 .current-card-inner::before{content:'';position:absolute;inset:-40%;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--card-accent,var(--accent)) 32%,transparent),transparent 60%);opacity:0;transition:opacity .4s var(--ease-out);pointer-events:none;}
 .current-card-inner:hover::before{opacity:.30;}
 .current-card-inner>*{position:relative;z-index:2;}
 .current-card-inner>.card-gloss{position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:inherit;overflow:hidden;}
-.card-title{font-family:'DM Sans',sans-serif;font-size:1.38em;font-weight:700;line-height:1.3;letter-spacing:-.01em;overflow-wrap:anywhere;hyphens:auto;}
-.card-desc{font-size:.89em;font-weight:400;color:var(--dim);line-height:1.62;}
+.card-title{font-family:'DM Sans',sans-serif;font-size:calc(1.38em * var(--fit,1));font-weight:700;line-height:1.3;letter-spacing:-.01em;hyphens:auto;}
+.card-desc{font-size:calc(.89em * var(--fit,1));font-weight:400;color:var(--dim);line-height:1.62;}
 .answer-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;width:100%;max-width:560px;margin:0 auto;}
 /* ---------- Kortet under dragning och släppytans indikatorer ---------- */
 .only-desktop{display:none;}
 .drag-hint{display:none;font-size:.7em;font-weight:400;color:var(--dim);text-align:center;line-height:1.5;}
-.drag-hint kbd{font-family:'JetBrains Mono',monospace;font-size:.92em;padding:1px 5px;border-radius:5px;background:rgba(255,255,255,.06);border:1px solid var(--glass-border);color:var(--subtle);}
 @media(hover:hover) and (pointer:fine){
   .only-desktop{display:inline;}
   .drag-hint{display:block;}
   .current-card{cursor:grab;}
 }
-.card-area.holding{position:relative;}
+.card-area.holding{position:relative;z-index:80;}
 .card-area.holding::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);height:100%;aspect-ratio:7/5;border-radius:var(--r-xl);border:1.5px dashed rgba(255,255,255,.08);background:rgba(255,255,255,.014);}
 .current-card.dragging{position:fixed;z-index:90;cursor:grabbing;transform-origin:50% 50%;will-change:transform;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6));}
 .current-card.compact .card-desc{display:none;}
 .current-card.compact .current-card-inner{padding:22px;gap:0;transform:none!important;}
-.current-card.compact .card-title{font-size:2.1em;line-height:1.2;text-align:center;}
+.current-card.compact .card-title{font-size:calc(2.1em * var(--fit,1));line-height:1.2;text-align:center;}
 body.is-dragging{user-select:none;-webkit-user-select:none;}
 body.is-dragging *{cursor:grabbing!important;}
 
@@ -389,8 +388,8 @@ body.is-dragging *{cursor:grabbing!important;}
   .card-area{flex:1.2 1 auto;align-items:stretch;min-height:0;}
   .current-card{height:auto;aspect-ratio:auto;width:100%;}
   .current-card-inner{flex:1;min-height:0;padding:26px 22px;gap:12px;justify-content:center;}
-  .card-title{font-size:1.34em;}
-  .card-desc{font-size:.96em;line-height:1.58;}
+  .card-title{font-size:calc(1.34em * var(--fit,1));}
+  .card-desc{font-size:calc(.96em * var(--fit,1));line-height:1.58;}
   .answer-bar{gap:8px;}
   .btn-reveal{padding:6px 11px;font-size:.68em;}
   .tl-section{flex:1.05 1 auto;}
@@ -413,8 +412,8 @@ body.is-dragging *{cursor:grabbing!important;}
 }
 @media(max-width:700px) and (max-height:680px){
   .hd p{display:none;}
-  .card-title{font-size:1.22em;}
-  .card-desc{font-size:.88em;line-height:1.5;}
+  .card-title{font-size:calc(1.22em * var(--fit,1));}
+  .card-desc{font-size:calc(.88em * var(--fit,1));line-height:1.5;}
   .current-card-inner{padding:16px 18px 14px;gap:9px;min-height:0;}
 }
 </style>
@@ -465,7 +464,7 @@ body.is-dragging *{cursor:grabbing!important;}
     <button class="btn btn-reveal" id="revealBtn" onclick="revealAnswer()">Visa rätt svar</button>
   </div>
 
-  <div class="drag-hint">Dra kortet till tidslinjen, eller skriv årtalet. <kbd>&larr;</kbd> <kbd>&rarr;</kbd> justerar året medan du håller kortet.</div>
+  <div class="drag-hint">Dra kortet till tidslinjen, eller skriv årtalet.</div>
 
   <div class="tl-section">
     <div class="tl-top"><div class="tl-label">Tidslinje</div><div class="tl-count" id="tlCount">0 av 19 placerade</div></div>
@@ -586,6 +585,30 @@ function renderScoreLine(){
   el.innerHTML='<b id="scoreVal">'+scores[0]+'</b> poäng <span class="dot">·</span> <b id="cardNum">'+cardsPlaced+'/'+totalCards+'</b> kort'+streakHtml;
 }
 
+/* Texten skalas så att kortet fylls oavsett hur lång händelsebeskrivningen är. */
+const FIT_MIN=.72,FIT_MAX=1.7;
+function fitCardText(){
+  const inner=document.getElementById('currentCardInner');
+  const title=document.getElementById('cardTitle');
+  const desc=document.getElementById('cardDesc');
+  if(!inner||!inner.clientHeight)return;
+  const cs=getComputedStyle(inner);
+  const room=inner.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
+  const fits=f=>{
+    inner.style.setProperty('--fit',f);
+    const gap=desc.offsetHeight?parseFloat(getComputedStyle(inner).rowGap)||0:0;
+    if(title.offsetHeight+desc.offsetHeight+gap>room)return false;
+    return title.scrollWidth<=title.clientWidth+1&&desc.scrollWidth<=desc.clientWidth+1;
+  };
+  if(fits(FIT_MAX))return;
+  let lo=FIT_MIN,hi=FIT_MAX;
+  for(let i=0;i<12;i++){
+    const mid=(lo+hi)/2;
+    if(fits(mid))lo=mid;else hi=mid;
+  }
+  fits(lo);
+}
+
 function showCard(skipEnter){
   if(cardsPlaced>=totalCards){endGame();return;}
   /* Nästa kort i leken som ännu inte är färdigbesvarat. */
@@ -607,6 +630,7 @@ function showCard(skipEnter){
   cc.style.setProperty('--card-accent',ERA_COL[ev.era]||'#4d80ff');
   document.getElementById('cardTitle').textContent=ev.title;
   document.getElementById('cardDesc').textContent=ev.desc;
+  fitCardText();
   const inp=document.getElementById('yearInput');inp.value='';inp.disabled=false;
   document.getElementById('placeBtn').disabled=false;
   document.getElementById('inputGlass').classList.remove('err');
@@ -1080,6 +1104,7 @@ let drag=null;
     inner.style.transform='';
     cc.classList.add('dragging','compact');
     cc.style.left=home.left+'px';cc.style.top=home.top+'px';cc.style.width=home.width+'px';
+    fitCardText();
     const r=cc.getBoundingClientRect();
     const ir=tlInner.getBoundingClientRect(),wr=wrap.getBoundingClientRect();
     drag={id:e.pointerId,px:e.clientX,py:e.clientY,lastPx:e.clientX,rot:0,
@@ -1149,6 +1174,7 @@ let drag=null;
 
   function goHome(after){
     cc.classList.remove('compact');
+    fitCardText();
     cc.style.transition='transform .26s var(--ease-out)';
     cc.style.transform='translate(0px,0px) scale(1) rotate(0deg)';
     setTimeout(()=>{
@@ -1203,7 +1229,8 @@ let drag=null;
 
 document.getElementById('yearInput').addEventListener('keydown',e=>{if(e.key==='Enter')submitGuess();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCardDetail();});
-window.addEventListener('resize',()=>{if(placed.length>0)renderTimeline();});
+window.addEventListener('resize',()=>{fitCardText();if(placed.length>0)renderTimeline();});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitCardText);
 </script>
 </body>
 </html>
