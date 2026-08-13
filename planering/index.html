@@ -260,6 +260,10 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
 .schedule td.slot{font-size:13.5px}
 
 .badge.count-badge{background:#eef2f6;border-color:#d5dbe3;color:#475467}
+
+.lnk{color:#1155cc;text-decoration:underline;word-break:break-word}
+.lnk:hover{color:#0b4bc7}
+.schedule .other-cell div+div{margin-top:3px}
 </style>
 </head>
 <body>
@@ -921,15 +925,33 @@ function slotView(s){
  return v;
 }
 const LAB_STATUS=[["lab","Laboration"],["studiedag","Studiedag"],["ingen","Ingen lektion"],["ledig","Ledig"]];
-function otherHTML(s){
+// Webbadresser bryts ut ur texten och visas som egna rader med länk.
+const URL_RE=/((?:https?:\/\/|www\.)[^\s<>"']+)/g;
+function linkHref(u){return /^https?:\/\//i.test(u)?u:"https://"+u}
+function splitLinks(t){
+ const urls=[];
+ const rest=String(t||"").replace(URL_RE,m=>{urls.push(m.replace(/[.,;:]+$/,""));return " "})
+   .replace(/\s{2,}/g," ").replace(/\s*[-–—:]\s*$/,"").trim();
+ return {rest,urls};
+}
+function otherRows(s,link){
  const base=s.blocked?"":(slotView(s)?.other||"");
- const rows=[base,s.other||""].filter(Boolean).map(t=>`<div>${esc(t)}</div>`);
+ const rows=[];
+ [base,s.other||""].filter(Boolean).forEach(t=>{
+   const {rest,urls}=splitLinks(t);
+   if(rest)rows.push(esc(rest));
+   urls.forEach(u=>rows.push(link(u)));
+ });
+ return rows;
+}
+function otherHTML(s){
+ const rows=otherRows(s,u=>`<a class="lnk" href="${esc(linkHref(u))}" target="_blank" rel="noopener">${esc(u)}</a>`)
+   .map(r=>`<div>${r}</div>`);
  if(s.otherExam)rows.push(`<div class="exam">${esc(s.otherExam)}</div>`);
  return rows.join("");
 }
 function otherText(s){
- const base=s.blocked?"":(slotView(s)?.other||"");
- const rows=[base,s.other||""].filter(Boolean).map(esc);
+ const rows=otherRows(s,u=>`<a href="${esc(linkHref(u))}" style="color:#1155cc;text-decoration:underline">${esc(u)}</a>`);
  if(s.otherExam)rows.push(`<span class="exam">${esc(s.otherExam)}</span>`);
  return rows.join("<br>");
 }
