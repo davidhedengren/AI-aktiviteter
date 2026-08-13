@@ -143,7 +143,7 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
   @page{size:A4 landscape;margin:10mm}
 }
 
-/* ——— Veckorna: färg i vänsterskenan, linje vid veckoskifte ——— */
+/* Veckomarkering: nyanser i vecko- och dagkolumnen samt linje vid veckoskifte. */
 .schedule .week{background:#dbe9fa;color:#1e4976}
 .schedule .date{background:#eef5fd;color:#546a85}
 .schedule tr.wk-alt .week{background:#c7dcf5}
@@ -154,7 +154,7 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
 .schedule tr.lab-row.study td{background:var(--holiday)}
 .schedule tbody tr:hover td{box-shadow:inset 0 0 0 9999px rgba(15,118,110,.045)}
 
-/* ——— Premium ——— */
+/* Interaktionsstilar: hover, fokus och aktiva lägen. */
 :root{--ring:rgba(15,118,110,.22);--ink:#0f172a}
 body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 header{background:linear-gradient(135deg,#0f172a 0%,#1e293b 60%,#134e4a 100%);box-shadow:0 2px 14px rgba(2,6,23,.28);position:relative;z-index:5}
@@ -233,6 +233,13 @@ select.st-off{background:#f1f2f4;border-color:#d5d9df;color:#475467}
 .lesson-title.exam-lesson{color:#912018}
 td.exam-cell .exam{background:transparent;padding:0}
 td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
+
+.searchrow{position:relative;margin-bottom:10px}
+.searchrow input{padding:8px 62px 8px 10px;font-size:12.5px}
+.searchcount{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;font-weight:700;color:#98a2b3;pointer-events:none}
+.card.used{background:linear-gradient(180deg,#fbfefd,#f6fbfa)}
+.badge.used-badge{background:#0f766e;border-color:#0f766e;color:#fff}
+.card.exam-card.used{background:linear-gradient(180deg,#fffbfb,#fdf4f3)}
 </style>
 </head>
 <body>
@@ -262,7 +269,10 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
           </div>
         </div>
         <div class="field"><label>Sparade planeringar</label>
-          <select id="planSelect" onchange="switchPlan(this.value)"></select>
+          <div class="titlerow">
+            <select id="planSelect" onchange="switchPlan(this.value)"></select>
+            <button class="btn sm" onclick="duplicatePlan()">Kopiera</button>
+          </div>
         </div>
         <div class="row">
           <div class="field"><label>Första vecka</label><input id="startWeek" type="number" value="34"></div>
@@ -310,6 +320,10 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
         </div>
         <div class="status" id="planStatus"></div>
         <hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
+        <div class="searchrow">
+          <input id="lessonSearch" placeholder="Sök lektion eller sida" oninput="renderLessons()">
+          <span class="searchcount" id="lessonCount"></span>
+        </div>
         <div id="lessonList"></div>
       </div>
       <div id="labs" class="tabpane body">
@@ -500,7 +514,7 @@ function defaultRange(){
  const ws=scheduleWeeks();
  return ws.length?{from:ws[0],to:ws[ws.length-1]}:{from:state.startWeek,to:state.endWeek};
 }
-// Migrerar äldre filer: gamla jämn/udda-dagar och labbregler blir perioder.
+// Bakåtkompatibilitet: separata jämna/udda dagar och labbregler konverteras till perioder.
 function normalizePeriods(){
  if(Array.isArray(state.periods)&&state.periods.length)return;
  const ws=weekSequence(state.startWeek,state.endWeek);
@@ -515,8 +529,8 @@ function normalizePeriods(){
  delete state.evenDays;delete state.oddDays;delete state.lessonsPerWeek;
  if(state.labs)delete state.labs.rules;
 }
-// Tidigare låg labbarna som en kryssruta på lektionsperioderna. De perioderna
-// flyttas nu över till egna labbperioder med den gamla labbdagen.
+// Bakåtkompatibilitet: labbflaggan på en lektionsperiod konverteras till en
+// egen labbperiod med samma veckospann och veckodag.
 function normalizeLabPeriods(){
  if(Array.isArray(state.labPeriods))return;
  const day=(state.labs&&state.labs.day)||"Fredag";
@@ -606,7 +620,7 @@ function rebuildSchedule(){
    });
  });
 
- // Preserve assignments by slot id where possible.
+ // Utplaceringar och markeringar bevaras per vecka och veckodag.
  state.slots.forEach(sl=>{
    const old=oldSlots.find(x=>x.week===sl.week&&x.day===sl.day);
    if(old){
@@ -644,18 +658,33 @@ function lessonsForList(){
 }
 function renderLessons(){
  const el=document.getElementById("lessonList"); el.innerHTML="";
- if(!state.lessons.length){el.innerHTML='<div class="empty">Inga lektioner ännu.</div>';return}
- lessonsForList().forEach(l=>{
+ const countEl=document.getElementById("lessonCount");
+ if(!state.lessons.length){
+   el.innerHTML='<div class="empty">Inga lektioner ännu.</div>';
+   if(countEl)countEl.textContent="";
+   return;
+ }
+ // Antal placeringar per lektion visas på korten.
+ const used={};
+ state.slots.forEach(s=>{if(s.lessonId)used[s.lessonId]=(used[s.lessonId]||0)+1});
+ const q=(document.getElementById("lessonSearch")?.value||"").trim().toLowerCase();
+ const list=lessonsForList().filter(l=>!q||((l.title||"")+" "+(l.pages||"")+" "+(l.other||"")).toLowerCase().includes(q));
+ if(countEl)countEl.textContent=q?list.length+" av "+state.lessons.length:state.lessons.length+" st";
+ if(!list.length){el.innerHTML='<div class="empty">Ingen lektion matchar sökningen.</div>';return}
+ list.forEach(l=>{
    const d=document.createElement("div"); d.className="card"+(isExamTitle(l.title)?" exam-card":""); d.draggable=true;
    d.ondragstart=e=>{e.dataTransfer.setData("text/plain","lesson:"+l.id);e.dataTransfer.effectAllowed="copyMove";d.classList.add("dragging")};
    d.ondragend=()=>d.classList.remove("dragging");
-   d.innerHTML=`<div class="title">${esc(l.title)}${l.reusable?'<span class="badge">fast</span>':''}</div><div class="meta">${esc(l.pages||"")} ${l.other?" · "+esc(l.other):""}</div>
+   // Fasta pass markeras inte, eftersom de förekommer på många rader.
+   const mark=!l.reusable&&used[l.id];
+   if(mark)d.classList.add("used");
+   d.innerHTML=`<div class="title">${esc(l.title)}${l.reusable?'<span class="badge">fast</span>':''}${mark?`<span class="badge used-badge">${used[l.id]>1?used[l.id]+"×":"✓"}</span>`:''}</div><div class="meta">${esc(l.pages||"")} ${l.other?" · "+esc(l.other):""}</div>
    <div class="actions"><button class="btn" onclick="openLesson('${l.id}')">Redigera</button><button class="btn danger" onclick="deleteLesson('${l.id}')">Ta bort</button></div>`;
    el.appendChild(d);
  });
 }
-// Lektionsraderna och labbraden byggs var för sig och läggs ihop per vecka.
-// Ligger de på samma dag hamnar lektionen först och labben direkt under.
+// Lektionsrader och labbrader byggs separat och sorteras ihop per vecka.
+// Vid samma veckodag placeras lektionen före laborationen.
 function buildRows(){
  const groups=[];
  scheduleWeeks().forEach(w=>{
@@ -681,7 +710,7 @@ function showCtx(e,build){
  };
  build(add,m);
  m.style.display="block";
- // Håll menyn innanför fönstret.
+ // Begränsa positionen till fönstrets synliga yta.
  const r=m.getBoundingClientRect();
  m.style.left=Math.min(e.clientX,innerWidth-r.width-8)+"px";
  m.style.top=Math.min(e.clientY,innerHeight-r.height-8)+"px";
@@ -724,7 +753,7 @@ function renderSchedule(){
  buildRows().forEach((g,gi)=>{
    g.rows.forEach((row,k)=>{
      const tr=document.createElement("tr");
-     // Varannan vecka får en mörkare nyans så veckorna går att skilja åt.
+     // Varannan vecka får en mörkare nyans för att skilja veckorna åt.
      const alt=(gi%2===1?" wk-alt":"")+(k===0?" wk-start":"");
      const weekCell=k===0?`<td class="week" rowspan="${g.rows.length}">${esc(g.week)}</td>`:"";
      if(row.kind==="lab"){
@@ -786,9 +815,12 @@ function renderSchedule(){
      tb.appendChild(tr);
    });
  });
+ if(!tb.children.length){
+   tb.innerHTML='<tr><td colspan="5" class="empty" style="height:auto;padding:26px">Inget schema ännu. Ange veckor och perioder under Inställningar.</td></tr>';
+ }
  table.appendChild(tb);
 }
-// Överkant och underkant lägger in mellan raderna, mitten träffar raden själv.
+// Zonindelning: överkant och underkant infogar mellan rader, mitten träffar raden.
 function dropMode(e,cell,slot){
  if(!slot.lessonId)return "on";
  const r=cell.getBoundingClientRect();
@@ -836,13 +868,13 @@ function moveSlotLesson(from,to){
  if(fromPos<0||toPos<0)return;
  const seq=open.map(x=>getPair(x.s));
  const [moved]=seq.splice(fromPos,1);
- // Lektionen ska ta målets plats – inte hamna efter det.
+ // Målpositionen justeras så att lektionen hamnar på målets plats.
  const target=fromPos<toPos?toPos-1:toPos;
  seq.splice(target,0,moved);
  open.forEach((x,k)=>{setPair(x.s,seq[k].id?seq[k]:null)});
  render();
 }
-// Lektioner som är prov markeras rött så de sticker ut i planeringen.
+// Lektioner vars titel innehåller "prov" markeras med avvikande färg.
 function isExamTitle(t){return /\bprov/i.test(String(t||""))}
 function lessonHTML(s){
  const v=slotView(s); if(!v)return '<span class="muted">Dra en lektion hit</span>';
@@ -850,7 +882,7 @@ function lessonHTML(s){
  return `<div class="placed"><div class="${cls}">${esc(v.title)}</div><button class="rm no-print" type="button" title="Ta bort pass">×</button></div>`;
 }
 function getLesson(id){return state.lessons.find(l=>l.id===id)}
-// Ett pass i schemat kan ha egen text som inte påverkar grundlektionen.
+// Ett pass kan ha egen text som inte påverkar grundlektionen.
 function slotView(s){
  const l=getLesson(s.lessonId);
  if(!l)return null;
@@ -878,7 +910,7 @@ function blockedText(s){
 function labText(item){
  const st=item.status||"lab";
  if(st==="lab")return "Laboration:"+(item.title?" "+item.title:"");
- // Skriven text ersätter standardetiketten.
+ // Angiven text ersätter standardetiketten.
  if(item.title)return item.title;
  return (LAB_STATUS.find(x=>x[0]===st)||["","Ledig"])[1];
 }
@@ -888,8 +920,8 @@ function firstPage(l){
  const m=String(l.pages||"").match(/\d+/);
  return m?+m[0]:null;
 }
-// Endast lektioner med sidhänvisning placeras ut automatiskt.
-// Repetition, prov och andra pass utan sidor lämnas åt användaren.
+// Automatisk utplacering omfattar endast lektioner med sidhänvisning.
+// Pass utan sidor placeras manuellt.
 function lessonsInPageOrder(){
  return state.lessons
    .map((l,i)=>({l,i,page:firstPage(l)}))
@@ -898,7 +930,7 @@ function lessonsInPageOrder(){
    .map(r=>r.l);
 }
 function openSlots(){return state.slots.filter(s=>!s.blocked)}
-// En borttagen dag försvinner helt ur schemat tills den återställs.
+// Borttagna dagar utelämnas ur schemat tills de återställs.
 function isRemoved(week,day){
  return (state.removed||[]).some(r=>r.week===week&&r.day===day);
 }
@@ -917,7 +949,7 @@ function restoreDays(){
  state.removed=[];
  rebuildSchedule();
 }
-// Repetition och Prov ska alltid ligga överst, även i inlästa kursfiler.
+// Säkerställer att de fasta passen finns i lektionslistan.
 function ensureFixedLessons(){
  seedLessons.forEach((f,k)=>{
    if(!state.lessons.some(l=>l.id===f.id))state.lessons.splice(k,0,{...f});
@@ -983,7 +1015,7 @@ function loadCourse(){
 }
 function placeLesson(lessonId,index){
  if(!lessonId)return;
- // Alla lektioner får läggas ut flera gånger – inget tas bort någon annanstans.
+ // Samma lektion kan förekomma på flera platser i schemat.
  let carry={id:lessonId,ov:null};
  for(let i=index;i<state.slots.length;i++){
    const s=state.slots[i];
@@ -998,7 +1030,7 @@ function toggleBlocked(index){
  const s=state.slots[index];
  if(!s)return;
  if(!s.blocked){
-   // Move the lesson out first, preserving the sequence.
+   // Lektionen flyttas ut först så att ordningsföljden bevaras.
    if(s.lessonId){
      let carry=getPair(s);setPair(s,null);
      for(let i=index+1;i<state.slots.length;i++){
@@ -1017,7 +1049,7 @@ function blockWeek(){
  const txt=(document.getElementById("blockLabel").value||"").trim()||"Lov";
  if(!state.slots.some(s=>s.week===w)){alert("Vecka "+w+" finns inte i planeringen.");return}
  state.slots.forEach(s=>{if(s.week===w){s.blocked=true;s.label=txt;s.note="";setPair(s,null)}});
- // Repack lessons after the blocked week(s), skipping blocked slots.
+ // Utplaceringarna packas om och hoppar över blockerade pass.
  repack();
  render();
 }
@@ -1103,10 +1135,10 @@ function importExams(){
  let onDay=0,inOther=0,missed=0;
  list.forEach(e=>{
    const text=e.text||"Prov";
-   // Provet ersätter aldrig lektionen – det läggs alltid i Övrigt.
+   // Provet läggs i Övrigt-kolumnen och påverkar inte utplacerade lektioner.
    const hit=state.slots.find(s=>sameDate(dateForWeekDay(s.week,s.day),e));
    if(hit){hit.otherExam=text;onDay++;return}
-   // Ligger provet utanför lektionsdagarna hamnar det på veckans sista pass före provdagen.
+   // Prov utanför lektionsdagarna placeras på veckans sista pass före provdagen.
    const y=e.y||(dateForWeekDay(scheduleWeeks()[0],"Måndag")||new Date()).getFullYear();
    let d=new Date(y,e.mo-1,e.d);
    let w=weekOfDate(d);
@@ -1165,7 +1197,7 @@ function normalizeLabs(){
  if(!state.labs)state.labs=defaultLabs();
  if(!state.labs.items)state.labs.items={};
 }
-// Labbperioderna läses helt oberoende av lektionsperioderna.
+// Labbperioder utvärderas oberoende av lektionsperioderna.
 function labPeriodFor(week){
  const ws=scheduleWeeks();
  return (state.labPeriods||[]).find(p=>coversWeek(p,week,ws));
@@ -1250,8 +1282,8 @@ function fillModal(o){
  document.getElementById("mNote").value=o.note||"";
 }
 function looksLikePages(t){return /^\d[\d\s.,;:–—-]*$/.test(t.trim())}
-// Tabben skiljer avsnittskolumnen från sidkolumnen. Raderna före tabben är
-// rubriker, raderna efter är sidor – de paras ihop i tur och ordning.
+// Tabbtecknet skiljer avsnittskolumnen från sidkolumnen. Rader före tabben
+// tolkas som rubriker, rader efter som sidor, och paras ihop i ordning.
 function parseBulk(text){
  const lines=String(text||"").replace(/\r/g,"").split("\n");
  const rows=[];
@@ -1348,7 +1380,7 @@ function openLesson(id){
  document.getElementById("mReset").style.display="none";
  document.getElementById("modal").style.display="flex";
 }
-// Redigerar bara det enskilda passet – grundlektionen lämnas orörd.
+// Redigerar det enskilda passet utan att ändra grundlektionen.
 function openSlotEditor(index){
  const s=state.slots[index];
  const v=s&&slotView(s);
@@ -1414,7 +1446,7 @@ function exportWord(){
      const lab=labItem(g.week);
      const isLab=(lab.status||"lab")==="lab";
      const txt=esc(labText(lab));
-     // Teal text bara för aktiva laborationer, precis som i verktyget.
+     // Avvikande textfärg används endast för aktiva laborationer.
      const style=isLab?' style="color:#0f766e"':'';
      return `<tr class="${isLab?"lab":"blocked"}${alt}"><td>${esc(g.week)}</td><td>${esc(row.day)} ${esc(fmtDate(dateForWeekDay(g.week,row.day)))}</td><td><b${style}>${txt}</b></td><td></td><td></td></tr>`;
    }
@@ -1425,7 +1457,7 @@ function exportWord(){
    const exOther=s.otherExam?' class="examcell"':'';
    return `<tr${cls.trim()?' class="'+cls.trim()+'"':''}><td>${esc(s.week)}</td><td>${esc(s.day)} ${esc(fmtDate(dateForWeekDay(s.week,s.day)))}</td><td${exCell}>${s.blocked?(s.exam?'<span class="exam">'+esc(blockedText(s))+'</span>':'<b>'+esc(blockedText(s))+'</b>'):esc(v?.title||"")}</td><td>${s.blocked?'':esc(v?.pages||"")}</td><td${exOther}>${otherText(s)}</td></tr>`;
  })).join("");
- // Färgerna nedan är samma nyanser som schemat i verktyget, så exporten ser likadan ut.
+ // Exportens färger motsvarar schemats nyanser.
  const html=`<!doctype html><html><head><meta charset="utf-8"><title>${esc(state.title)}</title>
  <style>body{font-family:Arial,sans-serif;font-size:10pt}.dochead{display:flex;align-items:center;margin:0 0 12px 0}.dochead img{width:95px;height:auto}.dochead h1{text-align:center;font-family:Georgia,serif;font-size:18pt;flex:1;margin:0}table{border-collapse:collapse;width:100%}thead{display:table-header-group}
 th{background:#e1e3e5;font-weight:bold;text-align:left;border-bottom:2px solid #444}
@@ -1453,7 +1485,7 @@ td.examcell .exam{background:transparent;padding:0}
 const STORE_KEY="planeringsverktyg_v2";
 let store={current:null,plans:{}};
 let planId=null;
-// Flera planeringar sparas automatiskt i webbläsaren och kan växlas mellan.
+// Planeringar lagras i localStorage och kan växlas mellan.
 function writeStore(){try{localStorage.setItem(STORE_KEY,JSON.stringify(store))}catch(err){}}
 function readStore(){
  try{
@@ -1467,7 +1499,7 @@ function readStore(){
  return {current:null,plans:{}};
 }
 let history=[],future=[],lastSnap=null,skipHistory=false;
-// Varje omritning jämförs med föregående läge; skiljer de sig sparas det gamla.
+// Ångrahistorik: varje omritning jämförs med föregående läge och lagras vid skillnad.
 function trackHistory(){
  const cur=JSON.stringify(state);
  if(!skipHistory&&lastSnap&&lastSnap!==cur){
@@ -1518,6 +1550,14 @@ function switchPlan(id){
  history=[];future=[];lastSnap=null;
  activate();
 }
+function duplicatePlan(){
+ const copy=JSON.parse(JSON.stringify(state));
+ copy.title=(state.title||"Planering")+" (kopia)";
+ planId=uid();
+ state=copy;
+ history=[];future=[];lastSnap=null;
+ activate();
+}
 function deletePlan(){
  if(!confirm("Ta bort planeringen \""+(state.title||"")+"\" ur webbläsaren? Sparade filer påverkas inte."))return;
  delete store.plans[planId];planId=null;writeStore();
@@ -1538,7 +1578,7 @@ function renderPlanSelect(){
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
 
 document.getElementById("logoImg").src=LOGO;
-// Samma logga används som ikon i webbläsarfliken.
+// Logotypen används även som favicon.
 document.getElementById("favicon").href=LOGO;
 document.getElementById("favicon2").href=LOGO;
 document.addEventListener("click",closeCtx);
