@@ -50,11 +50,19 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
 .lab-item .study{grid-column:2;display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;color:#667085}
 .lab-item .study input{width:auto}
 .lab-item.off{opacity:.55}
-.lab-rule{display:grid;grid-template-columns:1fr 52px 52px 26px;gap:5px;align-items:center;margin-bottom:6px}
-.lab-rule select,.lab-rule input{padding:6px 5px;font-size:12px}
-.lab-rule .del{border:0;background:transparent;color:#98a2b3;font-size:15px;font-weight:700;padding:0}
-.lab-rule .del:hover{color:#b42318}
-.lab-rule .lbl{font-size:10px;color:#98a2b3;font-weight:700;text-align:center}
+.period{border:1px solid #d7dce2;border-radius:9px;padding:9px;margin-bottom:8px;background:#fff}
+.period .head{display:grid;grid-template-columns:1fr 50px 50px 24px;gap:5px;align-items:center}
+.period .head select,.period .head input{padding:6px 5px;font-size:12px}
+.period .del{border:0;background:transparent;color:#98a2b3;font-size:15px;font-weight:700;padding:0}
+.period .del:hover{color:#b42318}
+.period .lbl{font-size:10px;color:#98a2b3;font-weight:700;text-align:center}
+.period .days{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:8px}
+.period .days label{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#344054;margin:0}
+.period .days input{width:auto}
+.period .name{font-weight:700;font-size:13px;color:#0f766e}
+.period-row{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #d7dce2;border-radius:8px;padding:8px 9px;margin-bottom:7px;background:#fff}
+.period-row label{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#344054;margin:0}
+.period-row input{width:auto}
 .print-header{display:none}
 .print-header img{width:95px;height:auto;object-fit:contain}
 .print-header h1{font-family:Georgia,serif;font-size:20px;margin:0;text-align:center;flex:1}
@@ -145,16 +153,9 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
           <div class="field"><label>Första vecka</label><input id="startWeek" type="number" value="34"></div>
           <div class="field"><label>Sista vecka</label><input id="endWeek" type="number" value="24"></div>
         </div>
-        <div class="field"><label>Antal lektioner per vecka</label>
-          <select id="lessonsPerWeek">
-            <option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
-          </select>
-        </div>
-        <div class="field"><label>Jämna veckor</label>
-          <div id="evenDayChecks" style="display:grid;grid-template-columns:1fr 1fr;gap:7px"></div>
-        </div>
-        <div class="field"><label>Udda veckor</label>
-          <div id="oddDayChecks" style="display:grid;grid-template-columns:1fr 1fr;gap:7px"></div>
+        <div class="field"><label>Perioder och lektionsdagar</label>
+          <div id="periodList"></div>
+          <button class="btn" style="width:100%;margin-top:6px" onclick="addPeriod()">+ Lägg till period</button>
         </div>
         <button class="btn primary" style="width:100%" onclick="rebuildSchedule()">Skapa / uppdatera schema</button>
         <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
@@ -178,9 +179,8 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
       </div>
       <div id="labs" class="tabpane body">
         <label class="cbrow"><input type="checkbox" id="labEnabled"> Använd laborationer</label>
-        <div class="field" style="margin-top:12px"><label>Laborationsveckor</label>
-          <div id="labRules"></div>
-          <button class="btn" style="width:100%;margin-top:6px" onclick="addLabRule()">+ Lägg till period</button>
+        <div class="field" style="margin-top:12px"><label>Laboration i dessa perioder</label>
+          <div id="labPeriods"></div>
         </div>
         <div class="field"><label>Laborationsdag</label>
           <select id="labDay"></select>
@@ -229,12 +229,12 @@ const LOGO="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMQAAACcCAYAAAAgewTxAA
 const DAYS=["Måndag","Tisdag","Onsdag","Torsdag","Fredag"];
 let state={
  title:"Planering av Fysik 1 - 2026/2027",
- startWeek:34,endWeek:24,lessonsPerWeek:2,
- evenDays:["Måndag","Onsdag"], oddDays:["Måndag","Onsdag"],
+ startWeek:34,endWeek:24,
+ periods:[],
  slots:[], lessons:[], blockedWeeks:[], blockedSlots:[],
- labs:{enabled:false, rules:[], day:"Fredag", items:{}}
+ labs:{enabled:false, day:"Fredag", items:{}}
 };
-function defaultLabs(){return {enabled:false, rules:[], day:"Fredag", items:{}}}
+function defaultLabs(){return {enabled:false, day:"Fredag", items:{}}}
 
 const seedLessons=[
  {id:"rep",title:"Repetition",pages:"",other:"",reusable:true},
@@ -248,55 +248,108 @@ function weekSequence(a,b){
  else {for(let w=a;w<=52;w++)out.push(w);for(let w=1;w<=b;w++)out.push(w)}
  return out;
 }
-function selectedDaysFor(parity){
- return [...document.querySelectorAll(`#${parity}DayChecks input:checked`)].map(x=>x.value);
+// En period styr både lektionsdagar och om det är laboration den veckan.
+// Första perioden som matchar veckan gäller, så specifika spann kan ligga
+// före ett generellt spann som täcker resten av läsåret.
+function coversWeek(p,w,ws){
+ const parityOk = p.parity==="all" || (w%2===0 ? p.parity==="even" : p.parity==="odd");
+ if(!parityOk)return false;
+ const i=ws.indexOf(w);
+ let a=ws.indexOf(+p.from); if(a<0)a=0;
+ let b=ws.indexOf(+p.to); if(b<0)b=ws.length-1;
+ if(a>b){const t=a;a=b;b=t}
+ return i>=a&&i<=b;
 }
-function renderDayChecks(){
- ["even","odd"].forEach(parity=>{
-   const el=document.getElementById(parity+"DayChecks");
-   el.innerHTML="";
-   const selected=state[parity+"Days"] || [];
+function periodFor(week,ws){return (state.periods||[]).find(p=>coversWeek(p,week,ws))}
+function periodLabel(p){
+ const t=p.parity==="even"?"Jämna veckor":p.parity==="odd"?"Udda veckor":"Varje vecka";
+ return `${t} v.${p.from}–${p.to}`;
+}
+function defaultRange(){
+ const ws=scheduleWeeks();
+ return ws.length?{from:ws[0],to:ws[ws.length-1]}:{from:state.startWeek,to:state.endWeek};
+}
+// Migrerar äldre filer: gamla jämn/udda-dagar och labbregler blir perioder.
+function normalizePeriods(){
+ if(Array.isArray(state.periods)&&state.periods.length)return;
+ const ws=weekSequence(state.startWeek,state.endWeek);
+ const evenDays=state.evenDays||["Måndag","Onsdag"];
+ const oddDays=state.oddDays||["Måndag","Onsdag"];
+ const out=[];
+ const old=(state.labs&&Array.isArray(state.labs.rules))?state.labs.rules:[];
+ old.forEach(r=>out.push({parity:r.parity,from:r.from,to:r.to,days:(r.parity==="odd"?oddDays:evenDays).slice(),lab:true}));
+ out.push({parity:"even",from:ws[0],to:ws[ws.length-1],days:evenDays.slice(),lab:false});
+ out.push({parity:"odd",from:ws[0],to:ws[ws.length-1],days:oddDays.slice(),lab:false});
+ state.periods=out;
+ delete state.evenDays;delete state.oddDays;delete state.lessonsPerWeek;
+ if(state.labs)delete state.labs.rules;
+}
+function addPeriod(){
+ const r=defaultRange();
+ state.periods.push({parity:"all",from:r.from,to:r.to,days:["Måndag","Onsdag"],lab:false});
+ rebuildSchedule();
+}
+function renderPeriods(){
+ const el=document.getElementById("periodList");
+ el.innerHTML="";
+ if(!state.periods.length){el.innerHTML='<div class="empty" style="padding:8px">Inga perioder ännu.</div>';return}
+ el.insertAdjacentHTML("beforeend",'<div class="head" style="display:grid;grid-template-columns:1fr 50px 50px 24px;gap:5px;margin-bottom:3px"><div></div><div class="lbl">från</div><div class="lbl">till</div><div></div></div>');
+ state.periods.forEach((p,k)=>{
+   const box=document.createElement("div");
+   box.className="period";
+   box.innerHTML=`<div class="head">
+       <select>
+         <option value="even"${p.parity==="even"?" selected":""}>Jämna veckor</option>
+         <option value="odd"${p.parity==="odd"?" selected":""}>Udda veckor</option>
+         <option value="all"${p.parity==="all"?" selected":""}>Varje vecka</option>
+       </select>
+       <input type="number" value="${esc(p.from)}">
+       <input type="number" value="${esc(p.to)}">
+       <button class="del" type="button" title="Ta bort period">×</button>
+     </div><div class="days"></div>`;
+   const sel=box.querySelector("select");
+   const [from,to]=box.querySelectorAll('input[type=number]');
+   sel.onchange=()=>{p.parity=sel.value;rebuildSchedule()};
+   from.onchange=()=>{p.from=+from.value;rebuildSchedule()};
+   to.onchange=()=>{p.to=+to.value;rebuildSchedule()};
+   box.querySelector(".del").onclick=()=>{state.periods.splice(k,1);rebuildSchedule()};
+   const days=box.querySelector(".days");
    DAYS.forEach(d=>{
-     const label=document.createElement("label");
-     label.style.cssText="display:flex;align-items:center;gap:7px;font-weight:600;color:#344054;margin:0";
+     const lab=document.createElement("label");
      const cb=document.createElement("input");
-     cb.type="checkbox"; cb.value=d; cb.checked=selected.includes(d);
-     label.append(cb,document.createTextNode(d));
-     el.appendChild(label);
+     cb.type="checkbox";cb.checked=(p.days||[]).includes(d);
+     cb.onchange=()=>{
+       p.days=DAYS.filter(x=>x===d?cb.checked:(p.days||[]).includes(x));
+       rebuildSchedule();
+     };
+     lab.append(cb,document.createTextNode(d));
+     days.appendChild(lab);
    });
+   el.appendChild(box);
  });
-}
-function daysForWeek(week){
- return (week % 2 === 0 ? state.evenDays : state.oddDays) || [];
 }
 function rebuildSchedule(){
  state.startWeek=+document.getElementById("startWeek").value;
  state.endWeek=+document.getElementById("endWeek").value;
- state.lessonsPerWeek=+document.getElementById("lessonsPerWeek").value;
- state.evenDays=selectedDaysFor("even");
- state.oddDays=selectedDaysFor("odd");
-
- if(!state.evenDays.length || !state.oddDays.length){
-   alert("Välj minst en veckodag för både jämna och udda veckor.");
-   return;
- }
+ normalizePeriods();
 
  const weeks=weekSequence(state.startWeek,state.endWeek);
  const oldSlots=state.slots;
  state.slots=[];
 
  weeks.forEach(w=>{
-   const days=daysForWeek(w);
-   for(let i=0;i<Math.min(state.lessonsPerWeek,days.length);i++){
+   const p=periodFor(w,weeks);
+   const days=DAYS.filter(d=>(p?.days||[]).includes(d));
+   days.forEach((d,i)=>{
      state.slots.push({
        id:`${w}-${i}`,
        week:w,
-       day:days[i],
+       day:d,
        lessonId:null,
        blocked:false,
        label:""
      });
-   }
+   });
  });
 
  // Preserve assignments by slot id where possible.
@@ -308,6 +361,7 @@ function rebuildSchedule(){
      sl.label=old.label;
    }
  });
+ renderPeriods();
  render();
 }
 function render(){
@@ -593,68 +647,33 @@ function repack(){
  state.slots.forEach(s=>{if(!s.blocked&&p<ids.length)s.lessonId=ids[p++]});
 }
 function scheduleWeeks(){return [...new Set(state.slots.map(s=>s.week))]}
-function defaultRange(){
- const ws=scheduleWeeks();
- return ws.length?{from:ws[0],to:ws[ws.length-1]}:{from:state.startWeek,to:state.endWeek};
-}
-// Äldre filer hade bara "jämna/udda veckor" – de görs om till en period över hela läsåret.
 function normalizeLabs(){
  if(!state.labs)state.labs=defaultLabs();
  if(!state.labs.items)state.labs.items={};
- if(!Array.isArray(state.labs.rules)){
-   const r=defaultRange(),rules=[];
-   if(state.labs.even)rules.push({parity:"even",from:r.from,to:r.to});
-   if(state.labs.odd)rules.push({parity:"odd",from:r.from,to:r.to});
-   state.labs.rules=rules;
- }
- delete state.labs.even;delete state.labs.odd;
-}
-// Perioden avgränsas i schemats egen veckoordning, så v.36–42 och v.2–17
-// fungerar lika bra trots årsskiftet mitt i.
-function ruleCovers(r,w,ws){
- const parityOk = r.parity==="all" || (w%2===0 ? r.parity==="even" : r.parity==="odd");
- if(!parityOk)return false;
- const i=ws.indexOf(w);
- let a=ws.indexOf(+r.from); if(a<0)a=0;
- let b=ws.indexOf(+r.to); if(b<0)b=ws.length-1;
- if(a>b){const t=a;a=b;b=t}
- return i>=a&&i<=b;
 }
 function labWeeks(){
  if(!state.labs || !state.labs.enabled)return [];
  const ws=scheduleWeeks();
- const rules=state.labs.rules||[];
  return ws.filter(w=>{
    if(!state.slots.some(s=>s.week===w&&!s.blocked))return false;
-   return rules.some(r=>ruleCovers(r,w,ws));
+   const p=periodFor(w,ws);
+   return !!p&&!!p.lab;
  });
 }
-function addLabRule(){
- const r=defaultRange();
- state.labs.rules.push({parity:"even",from:r.from,to:r.to});
- renderLabs();renderSchedule();
-}
-function renderLabRules(){
- const el=document.getElementById("labRules");
+function renderLabPeriods(){
+ const el=document.getElementById("labPeriods");
  el.innerHTML="";
- if(!state.labs.rules.length){el.innerHTML='<div class="empty" style="padding:8px">Inga perioder valda.</div>';return}
- el.innerHTML='<div class="lab-rule"><div></div><div class="lbl">från</div><div class="lbl">till</div><div></div></div>';
- state.labs.rules.forEach((r,k)=>{
+ if(!state.periods.length){el.innerHTML='<div class="empty" style="padding:8px">Skapa perioder under Inställningar.</div>';return}
+ state.periods.forEach(p=>{
    const box=document.createElement("div");
-   box.className="lab-rule";
-   box.innerHTML=`<select>
-       <option value="even"${r.parity==="even"?" selected":""}>Jämna veckor</option>
-       <option value="odd"${r.parity==="odd"?" selected":""}>Udda veckor</option>
-       <option value="all"${r.parity==="all"?" selected":""}>Varje vecka</option>
-     </select>
-     <input type="number" value="${esc(r.from)}">
-     <input type="number" value="${esc(r.to)}">
-     <button class="del" type="button" title="Ta bort period">×</button>`;
-   const [sel,from,to]=box.querySelectorAll("select,input");
-   sel.onchange=()=>{r.parity=sel.value;renderLabs();renderSchedule()};
-   from.onchange=()=>{r.from=+from.value;renderLabs();renderSchedule()};
-   to.onchange=()=>{r.to=+to.value;renderLabs();renderSchedule()};
-   box.querySelector(".del").onclick=()=>{state.labs.rules.splice(k,1);renderLabs();renderSchedule()};
+   box.className="period-row";
+   box.innerHTML=`<span>${esc(periodLabel(p))}</span>`;
+   const lab=document.createElement("label");
+   const cb=document.createElement("input");
+   cb.type="checkbox";cb.checked=!!p.lab;
+   cb.onchange=()=>{p.lab=cb.checked;renderLabs();renderSchedule()};
+   lab.append(cb,document.createTextNode("Laboration"));
+   box.appendChild(lab);
    el.appendChild(box);
  });
 }
@@ -666,7 +685,7 @@ function renderLabs(){
  normalizeLabs();
  const list=document.getElementById("labList");
  document.getElementById("labEnabled").checked=!!state.labs.enabled;
- renderLabRules();
+ renderLabPeriods();
  const daySel=document.getElementById("labDay");
  if(!daySel.options.length){
    DAYS.forEach(d=>{const o=document.createElement("option");o.value=d;o.textContent=d;daySel.appendChild(o)});
@@ -691,7 +710,7 @@ function renderLabs(){
  });
 }
 function bindLabControls(){
- document.getElementById("labEnabled").onchange=e=>{state.labs.enabled=e.target.checked;if(e.target.checked&&!state.labs.rules.length)addLabRule();renderLabs();renderSchedule()};
+ document.getElementById("labEnabled").onchange=e=>{state.labs.enabled=e.target.checked;renderLabs();renderSchedule()};
  document.getElementById("labDay").onchange=e=>{state.labs.day=e.target.value;renderSchedule()};
 }
 function openLesson(id){
@@ -725,14 +744,14 @@ function saveProject(){
 }
 function loadProject(){
  const inp=document.createElement("input");inp.type="file";inp.accept=".json";
- inp.onchange=()=>{const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{state=JSON.parse(r.result);if(!state.lessons)state.lessons=[];ensureFixedLessons();normalizeLabs();syncInputs();render()};r.readAsText(f)};inp.click();
+ inp.onchange=()=>{const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{state=JSON.parse(r.result);if(!state.lessons)state.lessons=[];ensureFixedLessons();normalizePeriods();normalizeLabs();syncInputs();render()};r.readAsText(f)};inp.click();
 }
 function syncInputs(){
  document.getElementById("titleInput").value=state.title||"";
  document.getElementById("startWeek").value=state.startWeek;
  document.getElementById("endWeek").value=state.endWeek;
- document.getElementById("lessonsPerWeek").value=state.lessonsPerWeek;
- renderDayChecks();
+ normalizePeriods();
+ renderPeriods();
 }
 function exportWord(){
  const rows=buildRows().flatMap(g=>g.rows.map(row=>{
@@ -761,10 +780,9 @@ document.addEventListener("scroll",closeCtx,true);
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCtx()});
 window.addEventListener("resize",closeCtx);
 state.lessons=seedLessons.map(x=>({...x}));
-if(!state.evenDays) state.evenDays=state.days||["Måndag","Onsdag"];
-if(!state.oddDays) state.oddDays=state.days||["Måndag","Onsdag"];
 if(!state.labs) state.labs=defaultLabs();
-renderDayChecks();
+normalizePeriods();
+renderPeriods();
 bindLabControls();
 rebuildSchedule();
 render();
