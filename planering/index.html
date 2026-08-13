@@ -24,7 +24,7 @@ header h1{font-size:20px;margin:0}
 .btn.primary{background:#0f766e;border-color:#0f766e;color:#fff}
 .btn.dark{background:#1f2937;border-color:#475569;color:#fff}
 .btn.danger{color:#b42318}
-.layout{display:grid;grid-template-columns:358px 1fr;gap:18px;max-width:1500px;margin:18px auto;padding:0 18px}
+.layout{display:grid;grid-template-columns:372px 1fr;gap:18px;max-width:1500px;margin:18px auto;padding:0 18px}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}
 .panel h2{font-size:15px;margin:0;padding:15px 16px;border-bottom:1px solid var(--line)}
 .panel .body{padding:14px 16px}
@@ -207,7 +207,23 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);
   .schedule tr.wk-start td{border-top:2px solid #7a8ea8}
 }
 .tabs{display:flex}
-.tab{flex:1;padding:11px 8px;text-align:center;white-space:nowrap}
+.tab{flex:1;padding:12px 4px;text-align:center;white-space:nowrap;font-size:12.5px;letter-spacing:-.01em}
+
+.btn.sm{padding:6px 8px;font-size:12px;font-weight:600}
+.btnrow.tight{gap:6px;margin-bottom:8px}
+.holidaybox{border:1px solid #d7dce2;border-radius:11px;padding:11px;background:linear-gradient(180deg,#fbfcfe,#f5f8fb);margin-bottom:10px}
+.hb-title{font-size:12px;font-weight:800;color:#475467;letter-spacing:.02em;margin-bottom:9px}
+.hb-row{display:grid;grid-template-columns:74px 1fr;gap:8px}
+.hb-lbl{display:block;font-size:10px;font-weight:700;color:#98a2b3;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+.hb-row input{padding:7px 8px;font-size:12px}
+select.par-even{background:#eaf2fd;border-color:#bcd4f0;color:#1e4976}
+select.par-odd{background:#fdf4e7;border-color:#f0dcbb;color:#7a5320}
+select.par-all{background:#e9f8f6;border-color:#b7e5de;color:#0b5c56}
+select.st-lab{background:#e9f8f6;border-color:#b7e5de;color:#0b5c56}
+select.st-off{background:#f1f2f4;border-color:#d5d9df;color:#475467}
+
+.dangerbox{border:1px solid #f0d4d1;border-radius:11px;padding:11px;background:linear-gradient(180deg,#fffbfb,#fdf4f3);margin-top:16px}
+.dangerbox .hb-title{color:#b42318;margin-bottom:8px}
 </style>
 </head>
 <body>
@@ -252,29 +268,37 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);
         </div>
         <button class="btn primary" style="width:100%" onclick="rebuildSchedule()">Skapa / uppdatera schema</button>
         <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
-        <button class="btn danger" style="width:100%;margin-bottom:8px" onclick="clearPlan()">Rensa planeringen</button>
-        <button class="btn danger" style="width:100%" onclick="deletePlan()">Ta bort denna planering</button>
-        <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
-        <div class="field"><label>Markera vald vecka som ledig</label>
-          <input id="blockWeek" type="number" placeholder="t.ex. 44">
+        <div class="holidaybox">
+          <div class="hb-title">Lov och lediga veckor</div>
+          <div class="hb-row">
+            <div><span class="hb-lbl">Vecka</span><input id="blockWeek" type="number" placeholder="44"></div>
+            <div><span class="hb-lbl">Text i schemat</span><input id="blockLabel" list="freeSuggest" placeholder="Lov"></div>
+          </div>
+          <button class="btn primary" style="width:100%;margin-top:9px" onclick="blockWeek()">Markera veckan som ledig</button>
         </div>
-        <button class="btn" style="width:100%;margin-bottom:8px" onclick="blockWeek()">Lägg till lov/ledig vecka</button>
         <button class="btn" style="width:100%;margin-bottom:8px" onclick="openDates()">Studiedagar och lediga datum</button>
         <button class="btn" style="width:100%;margin-bottom:8px" onclick="openExams()">Lägg till prov</button>
         <button class="btn" style="width:100%" onclick="restoreDays()">Återställ borttagna dagar</button>
+        <div class="dangerbox">
+          <div class="hb-title">Rensa</div>
+          <div class="btnrow tight" style="margin-bottom:0">
+            <button class="btn sm danger" onclick="clearPlan()">Rensa planeringen</button>
+            <button class="btn sm danger" onclick="deletePlan()">Ta bort planeringen</button>
+          </div>
+        </div>
       </div>
       <div id="lessons" class="tabpane body">
         <div class="btnrow">
           <button class="btn primary" onclick="openLesson()">+ Ny lektion</button>
           <button class="btn primary" onclick="openBulk()">Lägg in flera</button>
         </div>
-        <div class="btnrow">
-          <button class="btn" onclick="saveCourse()">Spara kurs</button>
-          <button class="btn" onclick="loadCourse()">Öppna kurs</button>
+        <div class="btnrow tight">
+          <button class="btn sm" onclick="saveCourse()">Spara kurs</button>
+          <button class="btn sm" onclick="loadCourse()">Öppna kurs</button>
         </div>
-        <div class="btnrow">
-          <button class="btn primary" onclick="autoPlace()">Placera ut automatiskt</button>
-          <button class="btn danger" onclick="clearPlan()">Rensa planeringen</button>
+        <div class="btnrow tight">
+          <button class="btn sm" onclick="autoPlace()">Placera ut automatiskt</button>
+          <button class="btn sm danger" onclick="clearPlan()">Rensa planeringen</button>
         </div>
         <div class="status" id="planStatus"></div>
         <hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
@@ -508,6 +532,7 @@ function renderPeriods(){
      </div><div class="days"></div>`;
    const sel=box.querySelector("select");
    const [from,to]=box.querySelectorAll('input[type=number]');
+   sel.className="par-"+p.parity;
    sel.onchange=()=>{p.parity=sel.value;rebuildSchedule()};
    from.onchange=()=>{p.from=+from.value;rebuildSchedule()};
    to.onchange=()=>{p.to=+to.value;rebuildSchedule()};
@@ -957,7 +982,9 @@ function toggleBlocked(index){
 function blockWeek(){
  const w=+document.getElementById("blockWeek").value;
  if(!w)return;
- state.slots.forEach(s=>{if(s.week===w){s.blocked=true;s.label="Lov";setPair(s,null)}});
+ const txt=(document.getElementById("blockLabel").value||"").trim()||"Lov";
+ if(!state.slots.some(s=>s.week===w)){alert("Vecka "+w+" finns inte i planeringen.");return}
+ state.slots.forEach(s=>{if(s.week===w){s.blocked=true;s.label=txt;s.note="";setPair(s,null)}});
  // Repack lessons after the blocked week(s), skipping blocked slots.
  repack();
  render();
@@ -1132,6 +1159,7 @@ function renderLabPeriods(){
    const sel=box.querySelector(".head select");
    const [from,to]=box.querySelectorAll('input[type=number]');
    const daySel=box.querySelector(".labday select");
+   sel.className="par-"+p.parity;
    sel.onchange=()=>{p.parity=sel.value;render()};
    from.onchange=()=>{p.from=+from.value;render()};
    to.onchange=()=>{p.to=+to.value;render()};
@@ -1167,7 +1195,8 @@ function renderLabs(){
    const txt=box.querySelector("input[type=text]");
    txt.oninput=()=>{item.title=txt.value;renderSchedule()};
    const sel=box.querySelector("select");
-   sel.onchange=()=>{item.status=sel.value;box.classList.toggle("off",sel.value!=="lab");renderSchedule()};
+   sel.className=item.status==="lab"?"st-lab":"st-off";
+   sel.onchange=()=>{item.status=sel.value;sel.className=sel.value==="lab"?"st-lab":"st-off";box.classList.toggle("off",sel.value!=="lab");renderSchedule()};
    list.appendChild(box);
  });
 }
