@@ -80,7 +80,7 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
 .block-label{font-weight:800}
 .muted{color:#98a2b3}
 .selected{box-shadow:0 0 0 2px #0f766e inset}
-.footer-note{padding:10px 14px;font-size:11px;color:#667085;border-top:1px solid var(--line)}
+.footer-note{display:none}
 .empty{color:#98a2b3;text-align:center;padding:16px 8px}
 .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(15,23,42,.45);align-items:center;justify-content:center;z-index:10}
 .modal{width:min(560px,calc(100vw - 30px));background:#fff;border-radius:12px;box-shadow:0 25px 60px rgba(0,0,0,.25)}
@@ -105,10 +105,12 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
 </head>
 <body>
 <header>
-  <div><h1 id="docTitle">Planering</h1><div class="sub">Dra lektioner till schemat, och dra dem vidare i schemat för att flytta om.</div></div>
+  <div><h1 id="docTitle">Planering</h1></div>
   <div class="toolbar no-print">
-    <button class="btn" onclick="saveProject()">Spara</button>
-    <button class="btn" onclick="loadProject()">Öppna</button>
+    <button class="btn" onclick="saveProject()">Spara planering</button>
+    <button class="btn" onclick="loadProject()">Öppna planering</button>
+    <button class="btn" onclick="saveCourse()">Spara kurs</button>
+    <button class="btn" onclick="loadCourse()">Öppna kurs</button>
     <button class="btn primary" onclick="exportWord()">Exportera Word</button>
     <button class="btn primary" onclick="window.print()">Exportera PDF / skriv ut</button>
   </div>
@@ -139,17 +141,20 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
         <div class="field"><label>Udda veckor</label>
           <div id="oddDayChecks" style="display:grid;grid-template-columns:1fr 1fr;gap:7px"></div>
         </div>
-        <div class="help">Det går alltså exempelvis att ha måndag + tisdag på jämna veckor och tisdag + onsdag på udda veckor.</div>
         <button class="btn primary" style="width:100%" onclick="rebuildSchedule()">Skapa / uppdatera schema</button>
         <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
         <div class="field"><label>Markera vald vecka som ledig</label>
           <input id="blockWeek" type="number" placeholder="t.ex. 44">
         </div>
         <button class="btn" style="width:100%" onclick="blockWeek()">Lägg till lov/ledig vecka</button>
-        <div class="help" style="margin-top:10px">Du kan även klicka på en rad i schemat för att markera den som studiedag, lov eller inställd lektion.</div>
       </div>
       <div id="lessons" class="tabpane body">
-        <button class="btn primary" style="width:100%;margin-bottom:10px" onclick="openLesson()">+ Ny lektion</button>
+        <button class="btn primary" style="width:100%;margin-bottom:8px" onclick="openLesson()">+ Ny lektion</button>
+        <button class="btn" style="width:100%;margin-bottom:8px" onclick="autoPlaceLessons()">Placera ut automatiskt</button>
+        <div class="row" style="margin-bottom:10px">
+          <button class="btn" style="width:100%" onclick="clearPlacements()">Rensa utplaceringar</button>
+          <button class="btn" style="width:100%" onclick="resetSchedule()">Återställ schema</button>
+        </div>
         <div id="lessonList"></div>
       </div>
       <div id="labs" class="tabpane body">
@@ -161,20 +166,10 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
         <div class="field"><label>Laborationsdag</label>
           <select id="labDay"></select>
         </div>
-        <div class="help">Laborationen läggs som en egen rad på vald veckodag, skild från de vanliga lektionerna. Kryssa i <b>Studiedag</b> för en enskild vecka när laborationen ersätts av en studiedag.</div>
         <hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
         <div id="labList"></div>
       </div>
     </div>
-    <div class="panel" style="margin-top:18px">
-      <h2>Så fungerar förskjutningen</h2>
-      <div class="body help">
-        En lektion är en återanvändbar "byggkloss". När du drar den från listan till en upptagen lektion flyttas den befintliga lektionen och allt efterföljande ett steg framåt. Blockerade dagar hoppas över automatiskt. Schemat kan ha olika lektionsdagar på jämna och udda veckor.
-        <br><br>
-        Du kan också dra en redan utplacerad lektion till en annan plats i schemat. Då flyttas den dit och övriga lektioner sluter luckan efter den.
-        <br><br>
-        Dubbelklicka på en rad i schemat för att markera den som studiedag eller inställd lektion. Resten av planeringen förskjuts automatiskt.
-      </div>
     </div>
   </aside>
 
@@ -188,7 +183,7 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
     <div class="schedule-wrap">
       <table class="schedule" id="scheduleTable"></table>
     </div>
-    <div class="footer-note">Förhandsvisning av den slutliga planeringen. Vid utskrift används A4 liggande.</div>
+    <div class="footer-note"></div>
   </main>
 </div>
 
@@ -333,15 +328,31 @@ function render(){
  document.getElementById("printTitle").textContent=state.title;
  renderLessons(); renderLabs(); renderSchedule();
 }
+
+function isFixedLesson(l){ return !!l?.fixed; }
+function pageNumber(l){
+ const m=String(l?.pages||"").match(/\d+(?:[.,]\d+)?/);
+ return m ? parseFloat(m[0].replace(",", ".")) : Number.POSITIVE_INFINITY;
+}
+function normalLessons(){
+ return state.lessons.filter(l=>!isFixedLesson(l));
+}
+function ensureFixedLessons(){
+ if(!state.lessons.some(l=>l.id==="repeat-fixed")){
+   state.lessons.unshift({id:"repeat-fixed",title:"Repetition / räknepass",pages:"",other:"",fixed:true});
+ }
+}
 function renderLessons(){
  const el=document.getElementById("lessonList"); el.innerHTML="";
+ ensureFixedLessons();
  if(!state.lessons.length){el.innerHTML='<div class="empty">Inga lektioner ännu.</div>';return}
  state.lessons.forEach(l=>{
    const d=document.createElement("div"); d.className="card"; d.draggable=true;
    d.ondragstart=e=>{e.dataTransfer.setData("text/plain","lesson:"+l.id);e.dataTransfer.effectAllowed="copyMove";d.classList.add("dragging")};
    d.ondragend=()=>d.classList.remove("dragging");
-   d.innerHTML=`<div class="title">${esc(l.title)}</div><div class="meta">${esc(l.pages||"")} ${l.other?" · "+esc(l.other):""}</div>
-   <div class="actions"><button class="btn" onclick="openLesson('${l.id}')">Redigera</button><button class="btn danger" onclick="deleteLesson('${l.id}')">Ta bort</button></div>`;
+   d.innerHTML=`<div class="title">${esc(l.title)}</div><div class="meta">${esc(l.pages||"")}${l.other?" · "+esc(l.other):""}${l.fixed?' · Kan placeras flera gånger':''}</div>
+   ${l.fixed?'<div class="small" style="margin-top:6px;color:#667085">Fast lektionsmall</div>':
+   `<div class="actions"><button class="btn" onclick="openLesson('${l.id}')">Redigera</button><button class="btn danger" onclick="deleteLesson('${l.id}')">Ta bort</button></div>`}`;
    el.appendChild(d);
  });
 }
@@ -419,14 +430,17 @@ function handleDrop(data,index){
 }
 function moveSlotLesson(from,to){
  if(from<0||to<0||from===to)return;
+
  const open=state.slots.map((s,i)=>({s,i})).filter(x=>!x.s.blocked);
  const fromPos=open.findIndex(x=>x.i===from);
  const toPos=open.findIndex(x=>x.i===to);
  if(fromPos<0||toPos<0)return;
+
  const seq=open.map(x=>x.s.lessonId);
  const [moved]=seq.splice(fromPos,1);
  seq.splice(toPos,0,moved);
- open.forEach((x,k)=>{x.s.lessonId=seq[k]});
+
+ open.forEach((x,k)=>{x.s.lessonId=seq[k]||null});
  render();
 }
 function lessonHTML(id){
@@ -435,18 +449,28 @@ function lessonHTML(id){
 }
 function getLesson(id){return state.lessons.find(l=>l.id===id)}
 function placeLesson(lessonId,index){
- if(!lessonId)return;
- // Remove previous placement of the same lesson.
- state.slots.forEach(s=>{if(s.lessonId===lessonId)s.lessonId=null});
- // Insert by shifting occupied slots forward, skipping blocked slots.
+ if(!lessonId || index<0)return;
+ const lesson=getLesson(lessonId);
+ if(!lesson || state.slots[index]?.blocked)return;
+
+ // Vanliga lektioner kan bara finnas en gång i planeringen.
+ // Repetition / räknepass är fast och kan däremot placeras flera gånger.
+ if(!isFixedLesson(lesson)){
+   state.slots.forEach(slot=>{if(slot.lessonId===lessonId)slot.lessonId=null});
+ }
+
  let carry=lessonId;
  for(let i=index;i<state.slots.length;i++){
-   const s=state.slots[i];
-   if(s.blocked)continue;
-   const old=s.lessonId;s.lessonId=carry;carry=old;
+   const slot=state.slots[i];
+   if(slot.blocked)continue;
+
+   const old=slot.lessonId;
+   slot.lessonId=carry;
+   carry=old;
+
    if(!carry)break;
  }
- if(carry) alert("Det finns inte tillräckligt många lediga lektionstillfällen för att flytta hela planeringen.");
+ if(carry) alert("Det finns inte tillräckligt många lediga lektionstillfällen.");
  render();
 }
 function toggleBlocked(index){
@@ -548,10 +572,106 @@ function saveLesson(){
  closeModal();render();
 }
 function deleteLesson(id){
+ const lesson=getLesson(id);
+ if(isFixedLesson(lesson))return;
  state.lessons=state.lessons.filter(x=>x.id!==id);
  state.slots.forEach(s=>{if(s.lessonId===id)s.lessonId=null});
  render();
 }
+
+function autoPlaceLessons(){
+ ensureFixedLessons();
+
+ // Keep manually placed fixed repetition passes as anchors.
+ const fixedSlots=state.slots
+   .map((slot,index)=>({slot,index}))
+   .filter(x=>!x.slot.blocked && isFixedLesson(getLesson(x.slot.lessonId)));
+
+ // Clear all ordinary lesson placements, but preserve fixed repetition passes.
+ state.slots.forEach(slot=>{
+   if(slot.lessonId && !isFixedLesson(getLesson(slot.lessonId))) slot.lessonId=null;
+ });
+
+ const lessons=normalLessons()
+   .filter(l=>l.title.trim())
+   .slice()
+   .sort((a,b)=>{
+     const pa=pageNumber(a), pb=pageNumber(b);
+     if(pa!==pb)return pa-pb;
+     return a.title.localeCompare(b.title,"sv");
+   });
+
+ const available=state.slots
+   .map((slot,index)=>({slot,index}))
+   .filter(x=>!x.slot.blocked && !x.slot.lessonId);
+
+ if(lessons.length>available.length){
+   alert(`Det finns ${available.length} lediga lektionstillfällen men ${lessons.length} vanliga lektioner. De sista ${lessons.length-available.length} läggs inte ut ännu.`);
+ }
+
+ lessons.slice(0,available.length).forEach((lesson,i)=>{
+   available[i].slot.lessonId=lesson.id;
+ });
+
+ render();
+}
+
+function clearPlacements(){
+ state.slots.forEach(slot=>{
+   if(slot.lessonId)slot.lessonId=null;
+ });
+ render();
+}
+
+function resetSchedule(){
+ state.slots.forEach(slot=>{
+   slot.lessonId=null;
+   slot.blocked=false;
+   slot.label="";
+ });
+ render();
+}
+
+function saveCourse(){
+ ensureFixedLessons();
+ const course={
+   format:"ai-aktiviteter-course-v1",
+   title:state.title,
+   lessons:state.lessons.map(l=>({...l}))
+ };
+ const blob=new Blob([JSON.stringify(course,null,2)],{type:"application/json"});
+ const a=document.createElement("a");
+ a.href=URL.createObjectURL(blob);
+ a.download=(state.title||"kurs")+"_kurs.json";
+ a.click();
+ URL.revokeObjectURL(a.href);
+}
+
+function loadCourse(){
+ const inp=document.createElement("input");
+ inp.type="file";
+ inp.accept=".json";
+ inp.onchange=()=>{
+   const f=inp.files[0]; if(!f)return;
+   const r=new FileReader();
+   r.onload=()=>{
+     try{
+       const data=JSON.parse(r.result);
+       const lessons=Array.isArray(data)?data:data.lessons;
+       if(!Array.isArray(lessons))throw new Error("Ogiltig kursfil");
+       state.lessons=lessons.map(x=>({...x}));
+       ensureFixedLessons();
+       // En kursfil ändrar inte aktuell planering.
+       renderLessons();
+     }catch(e){
+       alert("Kunde inte öppna kursfilen.");
+     }
+   };
+   r.readAsText(f);
+ };
+ inp.click();
+}
+
 function saveProject(){
  const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(state.title||"planering")+".json";a.click();
@@ -589,6 +709,7 @@ function exportWord(){
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
 
 state.lessons=seedLessons.map(x=>({...x}));
+ensureFixedLessons();
 if(!state.evenDays) state.evenDays=state.days||["Måndag","Onsdag"];
 if(!state.oddDays) state.oddDays=state.days||["Måndag","Onsdag"];
 if(!state.labs) state.labs=defaultLabs();
