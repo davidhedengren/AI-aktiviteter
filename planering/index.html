@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Planeringsverktyg</title>
+<meta name="theme-color" content="#0f172a">
+<link id="favicon" rel="icon" type="image/png" href="">
+<link id="favicon2" rel="apple-touch-icon" href="">
 <style>
 :root{
   --bg:#f4f6f8; --card:#fff; --text:#17202a; --muted:#667085;
@@ -138,6 +141,72 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
   .schedule{min-width:0;font-size:10px}
   .schedule td{height:auto;padding:4px}
   @page{size:A4 landscape;margin:10mm}
+}
+
+/* ——— Varannan vecka ——— */
+.schedule tr.wk-alt td{background:#eef1f6}
+.schedule tr.wk-alt .week{background:#e3e8ef}
+.schedule tr.wk-alt .date{background:#e8ecf2}
+.schedule tr.blocked td{background:var(--holiday)}
+.schedule tr.blocked .date{background:#dfe2e6}
+.schedule tr.lab-row td{background:#effcfa}
+.schedule tr.lab-row .date{background:#e3f8f5}
+.schedule tr.lab-row.wk-alt td{background:#e7f7f4}
+.schedule tr.lab-row.wk-alt .date{background:#dbf2ee}
+.schedule tr.lab-row.study td{background:var(--holiday)}
+.schedule tbody tr:hover td{box-shadow:inset 0 0 0 9999px rgba(15,118,110,.045)}
+
+/* ——— Premium ——— */
+:root{--ring:rgba(15,118,110,.22);--ink:#0f172a}
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+header{background:linear-gradient(135deg,#0f172a 0%,#1e293b 60%,#134e4a 100%);box-shadow:0 2px 14px rgba(2,6,23,.28);position:relative;z-index:5}
+header h1{letter-spacing:-.015em;font-weight:700}
+header .btn{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);color:#e8edf2;backdrop-filter:blur(6px)}
+header .btn:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3)}
+header .btn.primary{background:linear-gradient(180deg,#15b8a6,#0f766e);border-color:transparent;color:#fff}
+header .btn.primary:hover{background:linear-gradient(180deg,#1ac8b5,#12857c)}
+.btn{color:#344054;transition:background .15s ease,border-color .15s ease,box-shadow .15s ease,transform .07s ease;box-shadow:0 1px 2px rgba(16,24,40,.05)}
+.btn:hover{background:#f8fafb;border-color:#b8c0cb}
+.btn:active{transform:translateY(1px);box-shadow:inset 0 1px 3px rgba(16,24,40,.12)}
+.btn:focus-visible{outline:none;box-shadow:0 0 0 3px var(--ring)}
+.btn.primary{background:linear-gradient(180deg,#12857c,#0f766e);border-color:#0b5c56;color:#fff;box-shadow:0 1px 2px rgba(16,24,40,.16)}
+.btn.primary:hover{background:linear-gradient(180deg,#149a8f,#106d66);border-color:#0b5c56}
+.btn.danger{background:#fff;border-color:#f1c9c5;color:#b42318}
+.btn.danger:hover{background:#fef4f3;border-color:#e5a49e}
+.panel{border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,.04),0 14px 34px rgba(16,24,40,.07)}
+.panel h2{letter-spacing:-.01em}
+.tabs{border-radius:14px 14px 0 0;overflow:hidden;background:linear-gradient(180deg,#fbfcfd,#f4f6f8)}
+.tab{transition:color .15s ease,background .15s ease}
+.tab:hover{color:#0f766e;background:rgba(15,118,110,.06)}
+.tab.active{background:#fff}
+label{letter-spacing:.02em}
+input,select,textarea{transition:border-color .15s ease,box-shadow .15s ease,background .15s ease}
+input:hover,select:hover,textarea:hover{border-color:#b8c0cb}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--ring)}
+.card{transition:box-shadow .16s ease,border-color .16s ease,transform .08s ease}
+.card:hover{box-shadow:0 6px 16px rgba(16,24,40,.10);border-color:#c4ccd7}
+.card:active{transform:scale(.994)}
+.card .actions button{border-radius:6px}
+.period,.lab-item,.period-row{transition:border-color .15s ease,box-shadow .15s ease}
+.period:hover,.lab-item:hover,.period-row:hover{border-color:#c4ccd7;box-shadow:0 3px 10px rgba(16,24,40,.06)}
+.modal{border-radius:16px;box-shadow:0 30px 70px rgba(2,6,23,.32);animation:pop .16s cubic-bezier(.2,.8,.3,1)}
+.modal-backdrop{backdrop-filter:blur(3px)}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:none}}
+.ctx{animation:pop .12s cubic-bezier(.2,.8,.3,1);border-radius:11px}
+.ctx button{transition:background .12s ease,color .12s ease}
+.lesson-cell{border-radius:7px;transition:background .12s ease,box-shadow .12s ease}
+.lesson-cell:hover{background:rgba(15,118,110,.05)}
+.placed .rm{transition:color .12s ease,background .12s ease;border-radius:5px}
+.placed .rm:hover{background:#fef3f2}
+.badge{letter-spacing:.03em;text-transform:uppercase}
+.schedule th{letter-spacing:.04em;text-transform:uppercase;font-size:11px}
+.schedule-wrap,.tabpane.body{scrollbar-width:thin;scrollbar-color:#c3cbd6 transparent}
+.schedule-wrap::-webkit-scrollbar,.tabpane.body::-webkit-scrollbar{width:11px;height:11px}
+.schedule-wrap::-webkit-scrollbar-thumb,.tabpane.body::-webkit-scrollbar-thumb{background:#c8d0da;border-radius:99px;border:3px solid transparent;background-clip:content-box}
+.schedule-wrap::-webkit-scrollbar-thumb:hover,.tabpane.body::-webkit-scrollbar-thumb:hover{background:#aab4c2;background-clip:content-box}
+@media print{
+  .schedule tbody tr:hover td{box-shadow:none}
+  .schedule tr.wk-alt td{background:#eef1f6!important}
 }
 </style>
 </head>
@@ -598,13 +667,15 @@ function renderSchedule(){
  const table=document.getElementById("scheduleTable");
  table.innerHTML=`<colgroup><col style="width:7%"><col style="width:12%"><col style="width:42%"><col style="width:18%"><col style="width:21%"></colgroup><thead><tr><th>Vecka</th><th>Dag</th><th>Avsnitt</th><th>Sidor</th><th>Övrigt</th></tr></thead>`;
  const tb=document.createElement("tbody");
- buildRows().forEach(g=>{
+ buildRows().forEach((g,gi)=>{
    g.rows.forEach((row,k)=>{
      const tr=document.createElement("tr");
+     // Varannan vecka får en mörkare nyans så veckorna går att skilja åt.
+     const alt=gi%2===1?" wk-alt":"";
      const weekCell=k===0?`<td class="week" rowspan="${g.rows.length}">${esc(g.week)}</td>`:"";
      if(row.kind==="lab"){
        const lab=labItem(g.week);
-       tr.className="lab-row"+((lab.status||"lab")!=="lab"?" study":"");
+       tr.className="lab-row"+((lab.status||"lab")!=="lab"?" study":"")+alt;
        tr.innerHTML=`${weekCell}<td class="date">${dayCell(row.day,dateForWeekDay(g.week,row.day))}</td>
          <td class="slot"><span class="lab-label">${esc(labText(lab))}</span></td>
          <td></td><td></td>`;
@@ -612,7 +683,7 @@ function renderSchedule(){
        return;
      }
      const s=row.slot;
-     if(s.blocked)tr.className="blocked";
+     tr.className=(s.blocked?"blocked":"")+alt;
      tr.innerHTML=`${weekCell}<td class="date">${dayCell(s.day,dateForWeekDay(s.week,s.day))}</td>
        <td class="slot"><div class="lesson-cell" data-slot="${s.id}">${s.blocked?`<span class="block-label${s.exam?" exam":""}">${esc(blockedText(s))}</span>`:lessonHTML(s)}</div></td>
        <td>${!s.blocked?esc(slotView(s)?.pages||""):""}</td>
@@ -1268,19 +1339,20 @@ function syncInputs(){
  renderPeriods();
 }
 function exportWord(){
- const rows=buildRows().flatMap(g=>g.rows.map(row=>{
+ const rows=buildRows().flatMap((g,gi)=>g.rows.map(row=>{
+   const alt=gi%2===1?" alt":"";
    if(row.kind==="lab"){
      const lab=labItem(g.week);
      const isLab=(lab.status||"lab")==="lab";
      const txt=esc(labText(lab));
      // Teal text bara för aktiva laborationer, precis som i verktyget.
      const style=isLab?' style="color:#0f766e"':'';
-     return `<tr class="${isLab?"lab":"blocked"}"><td>${esc(g.week)}</td><td>${esc(row.day)} ${esc(fmtDate(dateForWeekDay(g.week,row.day)))}</td><td><b${style}>${txt}</b></td><td></td><td></td></tr>`;
+     return `<tr class="${isLab?"lab":"blocked"}${alt}"><td>${esc(g.week)}</td><td>${esc(row.day)} ${esc(fmtDate(dateForWeekDay(g.week,row.day)))}</td><td><b${style}>${txt}</b></td><td></td><td></td></tr>`;
    }
    const s=row.slot;
    const v=slotView(s);
-   const cls=s.blocked?' class="blocked"':'';
-   return `<tr${cls}><td>${esc(s.week)}</td><td>${esc(s.day)} ${esc(fmtDate(dateForWeekDay(s.week,s.day)))}</td><td>${s.blocked?(s.exam?'<span class="exam">'+esc(blockedText(s))+'</span>':'<b>'+esc(blockedText(s))+'</b>'):esc(v?.title||"")}</td><td>${s.blocked?'':esc(v?.pages||"")}</td><td>${otherText(s)}</td></tr>`;
+   const cls=(s.blocked?"blocked":"")+alt;
+   return `<tr${cls.trim()?' class="'+cls.trim()+'"':''}><td>${esc(s.week)}</td><td>${esc(s.day)} ${esc(fmtDate(dateForWeekDay(s.week,s.day)))}</td><td>${s.blocked?(s.exam?'<span class="exam">'+esc(blockedText(s))+'</span>':'<b>'+esc(blockedText(s))+'</b>'):esc(v?.title||"")}</td><td>${s.blocked?'':esc(v?.pages||"")}</td><td>${otherText(s)}</td></tr>`;
  })).join("");
  // Färgerna nedan är samma nyanser som schemat i verktyget, så exporten ser likadan ut.
  const html=`<!doctype html><html><head><meta charset="utf-8"><title>${esc(state.title)}</title>
@@ -1290,8 +1362,12 @@ th,td{border:1px solid #adb3b9;padding:5px 6px;vertical-align:top}
 td:first-child{background:#f3f4f6;text-align:center;font-weight:bold;width:7%}
 td:nth-child(2){background:#f5f7f9;white-space:nowrap;color:#667085;width:12%}
 td:nth-child(3){width:42%}td:nth-child(4){width:18%}td:nth-child(5){width:21%}
+.alt td{background:#eef1f6}
+.alt td:first-child{background:#e3e8ef}
+.alt td:nth-child(2){background:#e8ecf2}
 .blocked td{background:#e8eaed;color:#343a40}
 .lab td{background:#effcfa}
+.lab.alt td{background:#e7f7f4}
 .exam{background:#fde3e1;color:#912018;font-weight:bold;padding:1px 5px;border-radius:4px}
 .blocked .exam{background:#fbc9c4}</style></head><body>
  <div class="dochead"><img src="${LOGO}" alt="Erik Dahlbergsgymnasiet"><h1>${esc(state.title)}</h1></div>
@@ -1387,6 +1463,9 @@ function renderPlanSelect(){
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
 
 document.getElementById("logoImg").src=LOGO;
+// Samma logga används som ikon i webbläsarfliken.
+document.getElementById("favicon").href=LOGO;
+document.getElementById("favicon2").href=LOGO;
 document.addEventListener("click",closeCtx);
 document.addEventListener("scroll",closeCtx,true);
 document.addEventListener("keydown",e=>{
