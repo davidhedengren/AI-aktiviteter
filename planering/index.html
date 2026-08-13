@@ -224,6 +224,12 @@ select.st-off{background:#f1f2f4;border-color:#d5d9df;color:#475467}
 
 .dangerbox{border:1px solid #f0d4d1;border-radius:11px;padding:11px;background:linear-gradient(180deg,#fffbfb,#fdf4f3);margin-top:16px}
 .dangerbox .hb-title{color:#b42318;margin-bottom:8px}
+
+.card.exam-card{border-color:#f0c4c0;background:linear-gradient(180deg,#fffbfb,#fdf4f3)}
+.card.exam-card .title{color:#912018}
+.card.exam-card:hover{border-color:#e5a49e}
+.lesson-title.exam-lesson{color:#912018;background:#fde3e1;padding:1px 6px;border-radius:5px;display:inline-block}
+.blocked .lesson-title.exam-lesson{background:#fbc9c4}
 </style>
 </head>
 <body>
@@ -638,7 +644,7 @@ function renderLessons(){
  const el=document.getElementById("lessonList"); el.innerHTML="";
  if(!state.lessons.length){el.innerHTML='<div class="empty">Inga lektioner ännu.</div>';return}
  lessonsForList().forEach(l=>{
-   const d=document.createElement("div"); d.className="card"; d.draggable=true;
+   const d=document.createElement("div"); d.className="card"+(isExamTitle(l.title)?" exam-card":""); d.draggable=true;
    d.ondragstart=e=>{e.dataTransfer.setData("text/plain","lesson:"+l.id);e.dataTransfer.effectAllowed="copyMove";d.classList.add("dragging")};
    d.ondragend=()=>d.classList.remove("dragging");
    d.innerHTML=`<div class="title">${esc(l.title)}${l.reusable?'<span class="badge">fast</span>':''}</div><div class="meta">${esc(l.pages||"")} ${l.other?" · "+esc(l.other):""}</div>
@@ -834,9 +840,12 @@ function moveSlotLesson(from,to){
  open.forEach((x,k)=>{setPair(x.s,seq[k].id?seq[k]:null)});
  render();
 }
+// Lektioner som är prov markeras rött så de sticker ut i planeringen.
+function isExamTitle(t){return /\bprov/i.test(String(t||""))}
 function lessonHTML(s){
  const v=slotView(s); if(!v)return '<span class="muted">Dra en lektion hit</span>';
- return `<div class="placed"><div class="lesson-title">${esc(v.title)}</div><button class="rm no-print" type="button" title="Ta bort pass">×</button></div>`;
+ const cls="lesson-title"+(isExamTitle(v.title)?" exam-lesson":"");
+ return `<div class="placed"><div class="${cls}">${esc(v.title)}</div><button class="rm no-print" type="button" title="Ta bort pass">×</button></div>`;
 }
 function getLesson(id){return state.lessons.find(l=>l.id===id)}
 // Ett pass i schemat kan ha egen text som inte påverkar grundlektionen.
@@ -1410,7 +1419,7 @@ function exportWord(){
    const s=row.slot;
    const v=slotView(s);
    const cls=(s.blocked?"blocked":"")+alt;
-   return `<tr${cls.trim()?' class="'+cls.trim()+'"':''}><td>${esc(s.week)}</td><td>${esc(s.day)} ${esc(fmtDate(dateForWeekDay(s.week,s.day)))}</td><td>${s.blocked?(s.exam?'<span class="exam">'+esc(blockedText(s))+'</span>':'<b>'+esc(blockedText(s))+'</b>'):esc(v?.title||"")}</td><td>${s.blocked?'':esc(v?.pages||"")}</td><td>${otherText(s)}</td></tr>`;
+   return `<tr${cls.trim()?' class="'+cls.trim()+'"':''}><td>${esc(s.week)}</td><td>${esc(s.day)} ${esc(fmtDate(dateForWeekDay(s.week,s.day)))}</td><td>${s.blocked?(s.exam?'<span class="exam">'+esc(blockedText(s))+'</span>':'<b>'+esc(blockedText(s))+'</b>'):(isExamTitle(v?.title)?'<span class="exam-lesson">'+esc(v?.title||"")+'</span>':esc(v?.title||""))}</td><td>${s.blocked?'':esc(v?.pages||"")}</td><td>${otherText(s)}</td></tr>`;
  })).join("");
  // Färgerna nedan är samma nyanser som schemat i verktyget, så exporten ser likadan ut.
  const html=`<!doctype html><html><head><meta charset="utf-8"><title>${esc(state.title)}</title>
@@ -1428,6 +1437,7 @@ td:nth-child(2){background:#eef5fd;color:#546a85}
 .blocked td{background:#e8eaed;color:#343a40}
 .lab td{background:#effcfa}
 .exam{background:#fde3e1;color:#912018;font-weight:bold;padding:1px 5px;border-radius:4px}
+.exam-lesson{color:#912018;font-weight:bold}
 .blocked .exam{background:#fbc9c4}</style></head><body>
  <div class="dochead"><img src="${LOGO}" alt="Erik Dahlbergsgymnasiet"><h1>${esc(state.title)}</h1></div>
  <table><thead><tr><th>Vecka</th><th>Dag</th><th>Avsnitt</th><th>Sidor</th><th>Övrigt</th></tr></thead><tbody>${rows}</tbody></table></body></html>`;
