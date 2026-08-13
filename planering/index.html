@@ -125,6 +125,9 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
 .ctx hr{border:0;border-top:1px solid var(--line);margin:4px 2px}
 @media(max-width:1000px){.layout{grid-template-columns:1fr}.sidebar{order:2}}
 @media print{
+  /* Webbläsare struntar annars i bakgrundsfärger vid utskrift/PDF-export.
+     Detta tvingar fram samma nyanser som syns i verktyget. */
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
   body{background:white}
   header,.sidebar,.no-print{display:none!important}
   .layout{display:block;margin:0;padding:0}
@@ -1270,22 +1273,29 @@ function exportWord(){
  const rows=buildRows().flatMap(g=>g.rows.map(row=>{
    if(row.kind==="lab"){
      const lab=labItem(g.week);
+     const isLab=(lab.status||"lab")==="lab";
      const txt=esc(labText(lab));
-     return `<tr class="${(lab.status||"lab")!=="lab"?"blocked":"lab"}"><td>${esc(g.week)}</td><td>${esc(row.day)} ${esc(fmtDate(dateForWeekDay(g.week,row.day)))}</td><td><b>${txt}</b></td><td></td><td></td></tr>`;
+     // Teal text bara för aktiva laborationer, precis som i verktyget.
+     const style=isLab?' style="color:#0f766e"':'';
+     return `<tr class="${isLab?"lab":"blocked"}"><td>${esc(g.week)}</td><td>${esc(row.day)} ${esc(fmtDate(dateForWeekDay(g.week,row.day)))}</td><td><b${style}>${txt}</b></td><td></td><td></td></tr>`;
    }
    const s=row.slot;
    const v=slotView(s);
    const cls=s.blocked?' class="blocked"':'';
    return `<tr${cls}><td>${esc(s.week)}</td><td>${esc(s.day)} ${esc(fmtDate(dateForWeekDay(s.week,s.day)))}</td><td>${s.blocked?(s.exam?'<span class="exam">'+esc(blockedText(s))+'</span>':'<b>'+esc(blockedText(s))+'</b>'):esc(v?.title||"")}</td><td>${s.blocked?'':esc(v?.pages||"")}</td><td>${otherText(s)}</td></tr>`;
  })).join("");
+ // Färgerna nedan är samma nyanser som schemat i verktyget, så exporten ser likadan ut.
  const html=`<!doctype html><html><head><meta charset="utf-8"><title>${esc(state.title)}</title>
  <style>body{font-family:Arial,sans-serif;font-size:10pt}.dochead{display:flex;align-items:center;margin:0 0 12px 0}.dochead img{width:95px;height:auto}.dochead h1{text-align:center;font-family:Georgia,serif;font-size:18pt;flex:1;margin:0}table{border-collapse:collapse;width:100%}thead{display:table-header-group}
-th{background:#d5d9de;font-weight:bold;text-align:left;border-bottom:2px solid #444}
-th,td{border:1px solid #7a8087;padding:5px 6px;vertical-align:top}
-td:first-child{background:#eef0f3;text-align:center;font-weight:bold}
-td:nth-child(2){background:#f5f7f9;white-space:nowrap}
-.blocked td{background:#e2e5e9}.lab td{background:#eaf7f5}
-.exam{background:#fbc9c4;color:#912018;font-weight:bold;padding:1px 4px}td:first-child{width:7%}td:nth-child(2){width:12%}td:nth-child(3){width:42%}td:nth-child(4){width:18%}td:nth-child(5){width:21%}</style></head><body>
+th{background:#e1e3e5;font-weight:bold;text-align:left;border-bottom:2px solid #444}
+th,td{border:1px solid #adb3b9;padding:5px 6px;vertical-align:top}
+td:first-child{background:#f3f4f6;text-align:center;font-weight:bold;width:7%}
+td:nth-child(2){background:#f5f7f9;white-space:nowrap;color:#667085;width:12%}
+td:nth-child(3){width:42%}td:nth-child(4){width:18%}td:nth-child(5){width:21%}
+.blocked td{background:#e8eaed;color:#343a40}
+.lab td{background:#effcfa}
+.exam{background:#fde3e1;color:#912018;font-weight:bold;padding:1px 5px;border-radius:4px}
+.blocked .exam{background:#fbc9c4}</style></head><body>
  <div class="dochead"><img src="${LOGO}" alt="Erik Dahlbergsgymnasiet"><h1>${esc(state.title)}</h1></div>
  <table><thead><tr><th>Vecka</th><th>Dag</th><th>Avsnitt</th><th>Sidor</th><th>Övrigt</th></tr></thead><tbody>${rows}</tbody></table></body></html>`;
  const blob=new Blob([html],{type:"application/msword"});
