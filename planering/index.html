@@ -543,7 +543,6 @@ function openCtx(e,index){
  if(l&&!s.blocked){
    add("Redigera pass",()=>openSlotEditor(index));
    if(s.override)add("Återställ till grundlektionen",()=>{s.override=null;render()});
-   add("Redigera grundlektion",()=>openLesson(l.id));
    add("Ta bort pass",()=>removePlacement(index),"danger");
    m.appendChild(document.createElement("hr"));
  }
