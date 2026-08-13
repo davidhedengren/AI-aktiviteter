@@ -48,7 +48,7 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
 .lab-item .wk{font-weight:800;font-size:12px;color:#0f766e;text-align:center}
 .lab-item input[type=text]{padding:6px 8px;font-size:12px}
 .lab-item .study{grid-column:2;display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;color:#667085}
-.lab-item .study input{width:auto}
+.lab-item .study select{padding:5px 6px;font-size:12px}
 .lab-item.off{opacity:.55}
 .period{border:1px solid #d7dce2;border-radius:9px;padding:9px;margin-bottom:8px;background:#fff}
 .period .head{display:grid;grid-template-columns:1fr 50px 50px 24px;gap:5px;align-items:center}
@@ -90,6 +90,8 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
 .btnrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
 .titlerow{display:grid;grid-template-columns:1fr auto;gap:6px}
 .titlerow .btn{white-space:nowrap}
+#bulkText{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.5;resize:vertical}
+#bulkInfo{margin-top:10px;font-weight:600;color:#0f766e}
 .lab-row td{background:#effcfa}
 .lab-row .date{color:#0f766e;font-weight:700}
 .lab-label{font-weight:700;color:#0f766e}
@@ -180,7 +182,10 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
         <button class="btn" style="width:100%" onclick="blockWeek()">Lägg till lov/ledig vecka</button>
       </div>
       <div id="lessons" class="tabpane body">
-        <button class="btn primary" style="width:100%;margin-bottom:10px" onclick="openLesson()">+ Ny lektion</button>
+        <div class="btnrow">
+          <button class="btn primary" onclick="openLesson()">+ Ny lektion</button>
+          <button class="btn primary" onclick="openBulk()">Lägg in flera</button>
+        </div>
         <div class="btnrow">
           <button class="btn" onclick="saveCourse()">Spara kurs</button>
           <button class="btn" onclick="loadCourse()">Öppna kurs</button>
@@ -218,6 +223,44 @@ input,select,textarea{width:100%;border:1px solid #cfd5dd;border-radius:7px;padd
 </div>
 
 <div class="ctx no-print" id="ctxMenu"></div>
+
+<div class="modal-backdrop" id="freeModal">
+  <div class="modal">
+    <h3>Ledig rad</h3>
+    <div class="content">
+      <div class="field"><label>Typ</label>
+        <select id="fType">
+          <option>Studiedag</option>
+          <option>Ingen lektion</option>
+          <option>Ledig</option>
+          <option>Lov</option>
+        </select>
+      </div>
+      <div class="field"><label>Kommentar</label><input id="fNote" placeholder="t.ex. Första maj eller Matteprov"></div>
+      <input type="hidden" id="fSlot">
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="closeFree()">Avbryt</button>
+      <button class="btn primary" onclick="saveFree()">Spara</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="bulkModal">
+  <div class="modal">
+    <h3>Lägg in flera lektioner</h3>
+    <div class="content">
+      <textarea id="bulkText" rows="12" placeholder="Klistra in avsnitt och sidor från en gammal planering" oninput="previewBulk()"></textarea>
+      <label class="cbrow" style="margin-top:10px"><input type="checkbox" id="bulkSkipLov" checked onchange="previewBulk()"> Hoppa över lov och lediga rader</label>
+      <label class="cbrow"><input type="checkbox" id="bulkSkipEmpty" onchange="previewBulk()"> Hoppa över rader utan sidhänvisning</label>
+      <div class="help" id="bulkInfo"></div>
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="closeBulk()">Avbryt</button>
+      <button class="btn primary" onclick="importBulk()">Lägg in</button>
+    </div>
+  </div>
+</div>
 
 <div class="modal-backdrop" id="modal">
   <div class="modal">
@@ -449,7 +492,12 @@ function openCtx(e,index){
    add("Ta bort pass",()=>removePlacement(index),"danger");
    m.appendChild(document.createElement("hr"));
  }
- add(s.blocked?"Ta bort ledig / studiedag":"Markera som studiedag / ledig",()=>toggleBlocked(index));
+ if(s.blocked){
+   add("Redigera ledig rad",()=>openFree(index));
+   add("Ta bort markeringen",()=>toggleBlocked(index));
+ }else{
+   add("Markera som ledig / studiedag",()=>{toggleBlocked(index);openFree(index)});
+ }
  m.style.display="block";
  // Håll menyn innanför fönstret.
  const r=m.getBoundingClientRect();
@@ -466,9 +514,9 @@ function renderSchedule(){
      const weekCell=k===0?`<td class="week" rowspan="${g.rows.length}">${esc(g.week)}</td>`:"";
      if(row.kind==="lab"){
        const lab=labItem(g.week);
-       tr.className="lab-row"+(lab.studiedag?" study":"");
+       tr.className="lab-row"+((lab.status||"lab")!=="lab"?" study":"");
        tr.innerHTML=`${weekCell}<td class="date">${esc(row.day)}</td>
-         <td class="slot"><span class="lab-label">${lab.studiedag?"Studiedag":"Laboration:"+(lab.title?" "+esc(lab.title):"")}</span></td>
+         <td class="slot"><span class="lab-label">${esc(labText(lab))}</span></td>
          <td></td><td></td>`;
        tb.appendChild(tr);
        return;
@@ -476,7 +524,7 @@ function renderSchedule(){
      const s=row.slot;
      if(s.blocked)tr.className="blocked";
      tr.innerHTML=`${weekCell}<td class="date">${esc(s.day)}</td>
-       <td class="slot"><div class="lesson-cell" data-slot="${s.id}">${s.blocked?`<span class="block-label">${esc(s.label||"Ledig")}</span>`:lessonHTML(s)}</div></td>
+       <td class="slot"><div class="lesson-cell" data-slot="${s.id}">${s.blocked?`<span class="block-label">${esc(blockedText(s))}</span>`:lessonHTML(s)}</div></td>
        <td>${!s.blocked?esc(slotView(s)?.pages||""):""}</td>
        <td>${!s.blocked?esc(slotView(s)?.other||""):""}</td>`;
      const cell=tr.querySelector(".lesson-cell");
@@ -587,6 +635,17 @@ function slotView(s){
  return o?{title:o.title,pages:o.pages,other:o.other,note:o.note,edited:true}
          :{title:l.title,pages:l.pages,other:l.other,note:l.note,edited:false};
 }
+const LAB_STATUS=[["lab","Laboration"],["studiedag","Studiedag"],["ingen","Ingen lektion"],["ledig","Ledig"]];
+function blockedText(s){
+ const t=s.label||"Ledig";
+ return s.note?t+" – "+s.note:t;
+}
+function labText(item){
+ const st=item.status||"lab";
+ if(st==="lab")return "Laboration:"+(item.title?" "+item.title:"");
+ const name=(LAB_STATUS.find(x=>x[0]===st)||["","Ledig"])[1];
+ return item.title?name+" – "+item.title:name;
+}
 function getPair(s){return {id:s.lessonId,ov:s.override||null}}
 function setPair(s,p){s.lessonId=p?p.id:null;s.override=p?p.ov:null}
 function firstPage(l){
@@ -693,14 +752,14 @@ function toggleBlocked(index){
        if(!carry)break;
      }
    }
-   s.blocked=true;s.label="Studiedag / ledig";
- }else{s.blocked=false;s.label=""}
+   s.blocked=true;s.label="Studiedag";
+ }else{s.blocked=false;s.label="";s.note=""}
  render();
 }
 function blockWeek(){
  const w=+document.getElementById("blockWeek").value;
  if(!w)return;
- state.slots.forEach(s=>{if(s.week===w){s.blocked=true;s.label="LOV / LEDIG";s.lessonId=null}});
+ state.slots.forEach(s=>{if(s.week===w){s.blocked=true;s.label="Lov";setPair(s,null)}});
  // Repack lessons after the blocked week(s), skipping blocked slots.
  repack();
  render();
@@ -743,8 +802,11 @@ function renderLabPeriods(){
  });
 }
 function labItem(week){
- if(!state.labs.items[week])state.labs.items[week]={title:"",studiedag:false};
- return state.labs.items[week];
+ if(!state.labs.items[week])state.labs.items[week]={title:"",status:"lab"};
+ const it=state.labs.items[week];
+ if(!it.status)it.status=it.studiedag?"studiedag":"lab";
+ delete it.studiedag;
+ return it;
 }
 function renderLabs(){
  normalizeLabs();
@@ -763,14 +825,14 @@ function renderLabs(){
  weeks.forEach(w=>{
    const item=labItem(w);
    const box=document.createElement("div");
-   box.className="lab-item"+(item.studiedag?" off":"");
+   box.className="lab-item"+(item.status!=="lab"?" off":"");
    box.innerHTML=`<div class="wk">v.${esc(w)}</div>
-     <input type="text" placeholder="Laboration" value="${esc(item.title)}">
-     <label class="study"><input type="checkbox"${item.studiedag?" checked":""}> Studiedag</label>`;
+     <input type="text" placeholder="Laboration eller kommentar" value="${esc(item.title)}">
+     <div class="study"><select>${LAB_STATUS.map(x=>`<option value="${x[0]}"${item.status===x[0]?" selected":""}>${x[1]}</option>`).join("")}</select></div>`;
    const txt=box.querySelector("input[type=text]");
    txt.oninput=()=>{item.title=txt.value;renderSchedule()};
-   const cb=box.querySelector("input[type=checkbox]");
-   cb.onchange=()=>{item.studiedag=cb.checked;box.classList.toggle("off",cb.checked);renderSchedule()};
+   const sel=box.querySelector("select");
+   sel.onchange=()=>{item.status=sel.value;box.classList.toggle("off",sel.value!=="lab");renderSchedule()};
    list.appendChild(box);
  });
 }
@@ -783,6 +845,82 @@ function fillModal(o){
  document.getElementById("mPages").value=o.pages||"";
  document.getElementById("mOther").value=o.other||"";
  document.getElementById("mNote").value=o.note||"";
+}
+function looksLikePages(t){return /^\d[\d\s.,;:–—-]*$/.test(t.trim())}
+// Tabben skiljer avsnittskolumnen från sidkolumnen. Raderna före tabben är
+// rubriker, raderna efter är sidor – de paras ihop i tur och ordning.
+function parseBulk(text){
+ const lines=String(text||"").replace(/\r/g,"").split("\n");
+ const rows=[];
+ let titles=[],pages=[],inPages=false;
+ const close=()=>{
+   if(titles.length||pages.length)rows.push({titles,pages});
+   titles=[];pages=[];inPages=false;
+ };
+ lines.forEach(line=>{
+   if(line.includes("\t")){
+     if(inPages)close();
+     const i=line.indexOf("\t");
+     titles.push(line.slice(0,i).trim());
+     pages.push(line.slice(i+1).replace(/\t/g," ").trim());
+     inPages=true;
+   }else{
+     const t=line.trim();
+     if(!t)return;
+     if(inPages&&looksLikePages(t))pages.push(t);
+     else{if(inPages)close();titles.push(t)}
+   }
+ });
+ close();
+ const out=[];
+ rows.forEach(r=>r.titles.forEach((t,i)=>{
+   if(t)out.push({title:t,pages:(r.pages[i]||"").trim()});
+ }));
+ return out;
+}
+function bulkEntries(){
+ let list=parseBulk(document.getElementById("bulkText").value);
+ if(document.getElementById("bulkSkipLov").checked)list=list.filter(e=>!/lov\b|ledig/i.test(e.title));
+ if(document.getElementById("bulkSkipEmpty").checked)list=list.filter(e=>e.pages);
+ return list;
+}
+function previewBulk(){
+ const n=bulkEntries().length;
+ document.getElementById("bulkInfo").textContent=n?n+" lektioner hittades.":"Inget att lägga in ännu.";
+}
+function openFree(index){
+ const s=state.slots[index];
+ if(!s)return;
+ const sel=document.getElementById("fType");
+ const opts=[...sel.options].map(o=>o.value||o.textContent);
+ sel.value=opts.includes(s.label)?s.label:"Studiedag";
+ document.getElementById("fNote").value=s.note||"";
+ document.getElementById("fSlot").value=index;
+ document.getElementById("freeModal").style.display="flex";
+}
+function closeFree(){document.getElementById("freeModal").style.display="none"}
+function saveFree(){
+ const i=document.getElementById("fSlot").value;
+ if(i===""){closeFree();return}
+ const s=state.slots[+i];
+ if(s){
+   if(!s.blocked){setPair(s,null);s.blocked=true}
+   s.label=document.getElementById("fType").value;
+   s.note=document.getElementById("fNote").value.trim();
+ }
+ closeFree();render();
+}
+function openBulk(){
+ document.getElementById("bulkText").value="";
+ document.getElementById("bulkInfo").textContent="";
+ document.getElementById("bulkModal").style.display="flex";
+}
+function closeBulk(){document.getElementById("bulkModal").style.display="none"}
+function importBulk(){
+ const list=bulkEntries();
+ if(!list.length){closeBulk();return}
+ list.forEach(e=>state.lessons.push({id:uid(),title:e.title,pages:e.pages,other:"",note:""}));
+ closeBulk();render();
 }
 function openLesson(id){
  document.getElementById("mId").value=id||"";
@@ -856,13 +994,13 @@ function exportWord(){
  const rows=buildRows().flatMap(g=>g.rows.map(row=>{
    if(row.kind==="lab"){
      const lab=labItem(g.week);
-     const txt=lab.studiedag?"Studiedag":"Laboration:"+(lab.title?" "+esc(lab.title):"");
-     return `<tr${lab.studiedag?' class="blocked"':''}><td>${esc(g.week)}</td><td>${esc(row.day)}</td><td><b>${txt}</b></td><td></td><td></td></tr>`;
+     const txt=esc(labText(lab));
+     return `<tr${(lab.status||"lab")!=="lab"?' class="blocked"':''}><td>${esc(g.week)}</td><td>${esc(row.day)}</td><td><b>${txt}</b></td><td></td><td></td></tr>`;
    }
    const s=row.slot;
    const v=slotView(s);
    const cls=s.blocked?' class="blocked"':'';
-   return `<tr${cls}><td>${esc(s.week)}</td><td>${esc(s.day)}</td><td>${s.blocked?'<b>'+esc(s.label)+'</b>':esc(v?.title||"")}</td><td>${s.blocked?'':esc(v?.pages||"")}</td><td>${s.blocked?'':esc(v?.other||"")}</td></tr>`;
+   return `<tr${cls}><td>${esc(s.week)}</td><td>${esc(s.day)}</td><td>${s.blocked?'<b>'+esc(blockedText(s))+'</b>':esc(v?.title||"")}</td><td>${s.blocked?'':esc(v?.pages||"")}</td><td>${s.blocked?'':esc(v?.other||"")}</td></tr>`;
  })).join("");
  const html=`<!doctype html><html><head><meta charset="utf-8"><title>${esc(state.title)}</title>
  <style>body{font-family:Arial,sans-serif;font-size:10pt}.dochead{display:flex;align-items:center;margin:0 0 12px 0}.dochead img{width:95px;height:auto}.dochead h1{text-align:center;font-family:Georgia,serif;font-size:18pt;flex:1;margin:0}table{border-collapse:collapse;width:100%}th{background:#ddd}th,td{border:1px solid #555;padding:5px;vertical-align:top}.blocked td{background:#e8eaed}td:first-child{width:7%}td:nth-child(2){width:12%}td:nth-child(3){width:42%}td:nth-child(4){width:18%}td:nth-child(5){width:21%}</style></head><body>
