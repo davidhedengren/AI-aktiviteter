@@ -459,7 +459,10 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
       <div class="field"><label>Sidor</label><input id="mPages" placeholder="t.ex. 307–310"></div>
       <div class="field"><label>Övrigt</label><input id="mOther" placeholder="t.ex. Laboration:"></div>
       <div class="field"><label>Extra anteckning</label><input id="mNote" placeholder="Valfritt"></div>
-      <div id="mReusableRow"><label class="cbrow"><input type="checkbox" id="mReusable"> Fast pass – visas överst i listan</label></div>
+      <div id="mReusableRow">
+        <label class="cbrow"><input type="checkbox" id="mReusable"> Fast pass – visas överst i listan</label>
+        <label class="cbrow"><input type="checkbox" id="mExam"> Examination – markeras röd i schemat</label>
+      </div>
       <input type="hidden" id="mId">
       <input type="hidden" id="mSlot">
     </div>
@@ -693,7 +696,7 @@ function renderLessons(){
  if(countEl)countEl.textContent=q?list.length+" av "+state.lessons.length:state.lessons.length+" st";
  if(!list.length){el.innerHTML='<div class="empty">Ingen lektion matchar sökningen.</div>';return}
  list.forEach(l=>{
-   const d=document.createElement("div"); d.className="card"+(isExamTitle(l.title)?" exam-card":""); d.draggable=true;
+   const d=document.createElement("div"); d.className="card"+(isExam(l.title,l)?" exam-card":""); d.draggable=true;
    d.ondragstart=e=>{e.dataTransfer.setData("text/plain","lesson:"+l.id);e.dataTransfer.effectAllowed="copyMove";d.classList.add("dragging")};
    d.ondragend=()=>d.classList.remove("dragging");
    // Fasta pass visar antalet placeringar, övriga en bock vid en enda placering.
@@ -791,7 +794,7 @@ function renderSchedule(){
      const s=row.slot;
      tr.className=(s.blocked?"blocked":"")+alt;
      tr.innerHTML=`${weekCell}<td class="date">${dayCell(s.day,dateForWeekDay(s.week,s.day))}</td>
-       <td class="slot${!s.blocked&&isExamTitle(slotView(s)?.title)?" exam-cell":""}"><div class="lesson-cell" data-slot="${s.id}">${s.blocked?`<span class="block-label${s.exam?" exam":""}">${esc(blockedText(s))}</span>`:lessonHTML(s)}</div></td>
+       <td class="slot${!s.blocked&&slotView(s)?.exam?" exam-cell":""}"><div class="lesson-cell" data-slot="${s.id}">${s.blocked?`<span class="block-label${s.exam?" exam":""}">${esc(blockedText(s))}</span>`:lessonHTML(s)}</div></td>
        <td>${!s.blocked?esc(slotView(s)?.pages||""):""}</td>
        <td class="other-cell${s.otherExam?" exam-cell":""}">${otherHTML(s)}</td>`;
      const cell=tr.querySelector(".lesson-cell");
@@ -900,10 +903,10 @@ function moveSlotLesson(from,to){
  render();
 }
 // Lektioner vars titel innehåller "prov" markeras med avvikande färg.
-function isExamTitle(t){return /\bprov/i.test(String(t||""))}
+function isExam(title,lesson){return !!(lesson&&lesson.exam)||/\bprov/i.test(String(title||""))}
 function lessonHTML(s){
  const v=slotView(s); if(!v)return '<span class="muted">Dra en lektion hit</span>';
- const cls="lesson-title"+(isExamTitle(v.title)?" exam-lesson":"");
+ const cls="lesson-title"+(v.exam?" exam-lesson":"");
  return `<div class="placed"><div class="${cls}">${esc(v.title)}</div><button class="rm no-print" type="button" title="Ta bort pass">×</button></div>`;
 }
 function getLesson(id){return state.lessons.find(l=>l.id===id)}
@@ -912,8 +915,10 @@ function slotView(s){
  const l=getLesson(s.lessonId);
  if(!l)return null;
  const o=s.override;
- return o?{title:o.title,pages:o.pages,other:o.other,note:o.note,edited:true}
-         :{title:l.title,pages:l.pages,other:l.other,note:l.note,edited:false};
+ const v=o?{title:o.title,pages:o.pages,other:o.other,note:o.note,edited:true}
+          :{title:l.title,pages:l.pages,other:l.other,note:l.note,edited:false};
+ v.exam=isExam(v.title,l);
+ return v;
 }
 const LAB_STATUS=[["lab","Laboration"],["studiedag","Studiedag"],["ingen","Ingen lektion"],["ledig","Ledig"]];
 function otherHTML(s){
@@ -1401,6 +1406,7 @@ function openLesson(id){
  document.getElementById("modalTitle").textContent=id?"Redigera lektion":"Ny lektion";
  fillModal(l||{});
  document.getElementById("mReusable").checked=!!l?.reusable;
+ document.getElementById("mExam").checked=!!l?.exam;
  document.getElementById("mReusableRow").style.display="";
  document.getElementById("mReset").style.display="none";
  document.getElementById("modal").style.display="flex";
@@ -1436,7 +1442,7 @@ function saveLesson(){
    closeModal();render();return;
  }
  const id=document.getElementById("mId").value||uid();
- const l={id,title:document.getElementById("mTitle").value.trim(),pages:document.getElementById("mPages").value.trim(),other:document.getElementById("mOther").value.trim(),note:document.getElementById("mNote").value.trim(),reusable:document.getElementById("mReusable").checked};
+ const l={id,title:document.getElementById("mTitle").value.trim(),pages:document.getElementById("mPages").value.trim(),other:document.getElementById("mOther").value.trim(),note:document.getElementById("mNote").value.trim(),reusable:document.getElementById("mReusable").checked,exam:document.getElementById("mExam").checked};
  if(!l.title)return;
  const i=state.lessons.findIndex(x=>x.id===id);
  if(i>=0)state.lessons[i]=l;else state.lessons.push(l);
@@ -1478,7 +1484,7 @@ function exportWord(){
    const s=row.slot;
    const v=slotView(s);
    const cls=(s.blocked?"blocked":"")+alt;
-   const exCell=!s.blocked&&isExamTitle(v?.title)?' class="examcell"':'';
+   const exCell=!s.blocked&&v?.exam?' class="examcell"':'';
    const exOther=s.otherExam?' class="examcell"':'';
    return `<tr${cls.trim()?' class="'+cls.trim()+'"':''}><td>${esc(s.week)}</td><td>${esc(s.day)} ${esc(fmtDate(dateForWeekDay(s.week,s.day)))}</td><td${exCell}>${s.blocked?(s.exam?'<span class="exam">'+esc(blockedText(s))+'</span>':'<b>'+esc(blockedText(s))+'</b>'):esc(v?.title||"")}</td><td>${s.blocked?'':esc(v?.pages||"")}</td><td${exOther}>${otherText(s)}</td></tr>`;
  })).join("");
