@@ -258,6 +258,8 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
 
 .lesson-title,.block-label,.lab-label{font-size:13.5px;line-height:1.35}
 .schedule td.slot{font-size:13.5px}
+
+.badge.count-badge{background:#eef2f6;border-color:#d5dbe3;color:#475467}
 </style>
 </head>
 <body>
@@ -483,7 +485,8 @@ function defaultLabs(){return {enabled:false, day:"Fredag", items:{}}}
 
 const seedLessons=[
  {id:"rep",title:"Repetition",pages:"",other:"",reusable:true},
- {id:"prov",title:"Prov",pages:"",other:"",reusable:true}
+ {id:"prov",title:"Prov",pages:"",other:"",reusable:true},
+ {id:"reserv",title:"Reserv",pages:"",other:"",reusable:true}
 ];
 
 function uid(){return "l"+Math.random().toString(36).slice(2,9)}
@@ -693,11 +696,12 @@ function renderLessons(){
    const d=document.createElement("div"); d.className="card"+(isExamTitle(l.title)?" exam-card":""); d.draggable=true;
    d.ondragstart=e=>{e.dataTransfer.setData("text/plain","lesson:"+l.id);e.dataTransfer.effectAllowed="copyMove";d.classList.add("dragging")};
    d.ondragend=()=>d.classList.remove("dragging");
-   // Fasta pass markeras inte, eftersom de förekommer på många rader.
-   const mark=!l.reusable&&used[l.id];
-   if(mark)d.classList.add("used");
+   // Fasta pass visar antalet placeringar, övriga en bock vid en enda placering.
+   const n=used[l.id]||0;
+   if(n&&!l.reusable)d.classList.add("used");
    if(l.reusable)d.classList.add("fixed-card");
-   d.innerHTML=`<div class="title">${esc(l.title)}${mark?`<span class="badge used-badge">${used[l.id]>1?used[l.id]+"×":"✓"}</span>`:''}</div><div class="meta">${esc(l.pages||"")} ${l.other?" · "+esc(l.other):""}</div>
+   const badge=n?`<span class="badge used-badge${l.reusable?" count-badge":""}">${n>1||l.reusable?n+"×":"✓"}</span>`:"";
+   d.innerHTML=`<div class="title">${esc(l.title)}${badge}</div><div class="meta">${esc(l.pages||"")} ${l.other?" · "+esc(l.other):""}</div>
    <div class="actions"><button class="btn" onclick="openLesson('${l.id}')">Redigera</button><button class="btn danger" onclick="deleteLesson('${l.id}')">Ta bort</button></div>`;
    el.appendChild(d);
  });
