@@ -766,6 +766,8 @@ function rebuildSchedule(){
      sl.label=old.label;
      sl.note=old.note||"";
      sl.other=old.other||"";
+     sl.exam=!!old.exam;
+     sl.otherExam=old.otherExam||"";
    }
  });
  renderPeriods();
