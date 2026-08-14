@@ -461,6 +461,21 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
   </div>
 </div>
 
+<div class="modal-backdrop" id="labModal">
+  <div class="modal">
+    <h3>Laborationspass</h3>
+    <div class="content">
+      <div class="field"><label>Typ</label><select id="lStatus"></select></div>
+      <div class="field"><label>Text i schemat</label><input id="lText" placeholder="t.ex. Densitet"></div>
+      <input type="hidden" id="lWeek">
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="closeLab()">Avbryt</button>
+      <button class="btn primary" onclick="saveLab()">Spara</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-backdrop" id="freeModal">
   <div class="modal">
     <h3>Ingen lektion</h3>
@@ -861,6 +876,10 @@ function renderSchedule(){
        tr.innerHTML=`${weekCell}<td class="date">${dayCell(row.day,dateForWeekDay(g.week,row.day))}</td>
          <td class="slot"><span class="lab-label">${esc(labText(lab))}</span></td>
          <td></td><td></td>`;
+       tr.querySelectorAll(".date,.slot").forEach(td=>{
+         td.oncontextmenu=e=>{e.preventDefault();openLabCtx(e,g.week)};
+         td.ondblclick=()=>openLabEditor(g.week);
+       });
        tb.appendChild(tr);
        return;
      }
@@ -1502,6 +1521,33 @@ function saveNote(){
  const s=state.slots[+i];
  if(s)s.other=document.getElementById("nText").value.trim();
  closeNote();render();
+}
+function openLabEditor(week){
+ const it=labItem(week);
+ const sel=document.getElementById("lStatus");
+ sel.innerHTML=LAB_STATUS.map(x=>`<option value="${x[0]}">${x[1]}</option>`).join("");
+ sel.value=it.status||"lab";
+ document.getElementById("lText").value=it.title||"";
+ document.getElementById("lWeek").value=week;
+ document.getElementById("labModal").style.display="flex";
+}
+function closeLab(){document.getElementById("labModal").style.display="none"}
+function saveLab(){
+ const w=document.getElementById("lWeek").value;
+ if(w===""){closeLab();return}
+ const it=labItem(+w);
+ it.status=document.getElementById("lStatus").value;
+ it.title=document.getElementById("lText").value.trim();
+ closeLab();render();
+}
+function openLabCtx(e,week){
+ const it=labItem(week);
+ showCtx(e,add=>{
+   add("Redigera laborationen…",()=>openLabEditor(week));
+   LAB_STATUS.filter(x=>x[0]!==(it.status||"lab")).forEach(x=>
+     add("Ändra till "+x[1].toLowerCase(),()=>{it.status=x[0];render()}));
+   if(it.title)add("Ta bort texten",()=>{it.title="";render()},"danger");
+ });
 }
 function openFree(index){
  const s=state.slots[index];
