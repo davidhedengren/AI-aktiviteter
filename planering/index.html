@@ -670,7 +670,7 @@ function rebuildSchedule(){
 
  weeks.forEach(w=>{
    const p=periodFor(w,weeks);
-   const days=DAYS.filter(d=>(p?.days||[]).includes(d)&&!isRemoved(w,d));
+   const days=DAYS.filter(d=>((p?.days||[]).includes(d)||isExtra(w,d))&&!isRemoved(w,d));
    days.forEach(d=>{
      state.slots.push({
        id:`${w}-${d}`,
@@ -780,6 +780,10 @@ function showCtx(e,build){
  m.style.left=Math.min(e.clientX,innerWidth-r.width-8)+"px";
  m.style.top=Math.min(e.clientY,innerHeight-r.height-8)+"px";
 }
+function openAddDay(e,week){
+ const free=DAYS.filter(d=>!state.slots.some(x=>x.week===week&&x.day===d));
+ showCtx(e,add=>free.forEach(d=>add(d,()=>addDay(week,d))));
+}
 function openOtherCtx(e,index){
  const s=state.slots[index];
  if(!s)return;
@@ -808,6 +812,8 @@ function openCtx(e,index){
  }
  add(s.other?"Redigera kommentar i Övrigt":"Skriv kommentar i Övrigt",()=>openNote(index));
  m.appendChild(document.createElement("hr"));
+ const free=DAYS.filter(d=>!state.slots.some(x=>x.week===s.week&&x.day===d));
+ if(free.length)add("Lägg till dag i vecka "+s.week+"…",()=>openAddDay(e,s.week));
  add("Ta bort dagen",()=>removeSlot(index),"danger");
  });
 }
@@ -1021,12 +1027,28 @@ function openSlots(){return state.slots.filter(s=>!s.blocked)}
 function isRemoved(week,day){
  return (state.removed||[]).some(r=>r.week===week&&r.day===day);
 }
+// Enstaka dagar kan läggas till i en vecka utöver periodens veckodagar.
+function isExtra(week,day){
+ return (state.extra||[]).some(r=>r.week===week&&r.day===day);
+}
+function addDay(week,day){
+ state.removed=(state.removed||[]).filter(r=>!(r.week===week&&r.day===day));
+ if(!isExtra(week,day)){
+   state.extra=state.extra||[];
+   state.extra.push({week,day});
+ }
+ rebuildSchedule();
+}
 function removeSlot(index){
  const s=state.slots[index];
  if(!s)return;
  if(s.lessonId)removePlacement(index);
- state.removed=state.removed||[];
- state.removed.push({week:s.week,day:s.day});
+ if(isExtra(s.week,s.day)){
+   state.extra=state.extra.filter(r=>!(r.week===s.week&&r.day===s.day));
+ }else{
+   state.removed=state.removed||[];
+   state.removed.push({week:s.week,day:s.day});
+ }
  const i=state.slots.indexOf(s);
  if(i>=0)state.slots.splice(i,1);
  render();
@@ -1135,8 +1157,8 @@ function blockWeek(){
  if(!w)return;
  const txt=(document.getElementById("blockLabel").value||"").trim()||"Lov";
  if(!state.slots.some(s=>s.week===w)){alert("Vecka "+w+" finns inte i planeringen.");return}
- state.slots.forEach(s=>{if(s.week===w){s.blocked=true;s.label=txt;s.note="";setPair(s,null)}});
- // Utplaceringarna packas om och hoppar över blockerade pass.
+ // Lektionerna behålls här och flyttas framåt av ompackningen nedan.
+ state.slots.forEach(s=>{if(s.week===w){s.blocked=true;s.label=txt;s.note=""}});
  repack();
  render();
 }
