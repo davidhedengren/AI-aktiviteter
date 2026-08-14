@@ -1143,10 +1143,21 @@ function loadCourse(){
        const data=JSON.parse(r.result);
        const lessons=data.lessons||(Array.isArray(data)?data:null);
        if(!lessons){alert("Filen innehåller inga lektioner.");return}
-       state.lessons=lessons.map(x=>({...x}));
+       // Lektionerna läggs till i listan. Id:n som redan används får nya,
+       // så utplaceringar och tidigare inlästa kurser påverkas inte.
+       const taken=new Set(state.lessons.map(l=>l.id));
+       let added=0;
+       lessons.forEach(x=>{
+         if(x.reusable&&taken.has(x.id))return;
+         const l={...x};
+         if(!l.id||taken.has(l.id))l.id=uid();
+         taken.add(l.id);
+         state.lessons.push(l);
+         added++;
+       });
        ensureFixedLessons();
-       state.slots.forEach(s=>{s.lessonId=null});
        render();
+       alert(added+" lektioner lades till i listan.");
      }catch(err){alert("Kunde inte läsa filen.")}
    };
    r.readAsText(f);
