@@ -463,9 +463,9 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
 
 <div class="modal-backdrop" id="freeModal">
   <div class="modal">
-    <h3>Ledig rad</h3>
+    <h3>Ingen lektion</h3>
     <div class="content">
-      <div class="field"><label>Text i schemat</label>
+      <div class="field"><label>Vad står i schemat i stället</label>
         <input id="fType" list="freeSuggest" placeholder="Studiedag">
         <datalist id="freeSuggest">
           <option>Studiedag</option><option>Ingen lektion</option><option>Ledig</option>
@@ -834,10 +834,10 @@ function openCtx(e,index){
    m.appendChild(document.createElement("hr"));
  }
  if(s.blocked){
-   add("Redigera ledig rad",()=>openFree(index));
-   add("Ta bort markeringen",()=>toggleBlocked(index));
+   add("Ändra texten",()=>openFree(index));
+   add("Återställ till lektionsdag",()=>toggleBlocked(index));
  }else{
-   add("Markera som ledig / studiedag",()=>{toggleBlocked(index);openFree(index)});
+   add("Ingen lektion – ange text…",()=>{toggleBlocked(index);openFree(index)});
  }
  add(s.other?"Redigera kommentar i Övrigt":"Skriv kommentar i Övrigt",()=>openNote(index));
  m.appendChild(document.createElement("hr"));
