@@ -306,6 +306,9 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
 .dblbtn.on{background:#0f766e;border-color:#0f766e;color:#fff}
 .dblbtn:hover{border-color:#0f766e;color:#0f766e}
 .dblbtn.on:hover{color:#fff;background:#0b5c56}
+
+.badge.lock-badge{background:#eef2f6;border-color:#cbd5e1;color:#475467}
+.locked-title::after{content:"·  låst";font-size:10px;font-weight:700;color:#98a2b3;margin-left:6px;letter-spacing:.02em}
 </style>
 </head>
 <body>
@@ -523,6 +526,7 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
       <div id="mReusableRow">
         <label class="cbrow"><input type="checkbox" id="mReusable"> Fast pass – visas överst i listan</label>
         <label class="cbrow"><input type="checkbox" id="mExam"> Examination – markeras röd i schemat</label>
+        <label class="cbrow"><input type="checkbox" id="mLock"> Lås i schemat – förskjuts inte av andra lektioner</label>
       </div>
       <input type="hidden" id="mId">
       <input type="hidden" id="mSlot">
@@ -784,7 +788,8 @@ function renderLessons(){
    const n=used[l.id]||0;
    if(n&&!l.reusable)d.classList.add("used");
    if(l.reusable)d.classList.add("fixed-card");
-   const badge=n?`<span class="badge used-badge${l.reusable?" count-badge":""}">${n>1||l.reusable?n+"×":"✓"}</span>`:"";
+   const badge=(l.locked?'<span class="badge lock-badge" title="Låst i schemat">Låst</span>':"")
+     +(n?`<span class="badge used-badge${l.reusable?" count-badge":""}">${n>1||l.reusable?n+"×":"✓"}</span>`:"");
    d.innerHTML=`<div class="title">${esc(l.title)}${badge}</div><div class="meta">${esc(l.pages||"")} ${l.other?" · "+esc(l.other):""}</div>
    <div class="actions"><button class="btn" onclick="openLesson('${l.id}')">Redigera</button><button class="btn danger" onclick="deleteLesson('${l.id}')">Ta bort</button></div>`;
    el.appendChild(d);
@@ -998,7 +1003,7 @@ function moveSlotLesson(from,to){
 function isExam(title,lesson){return !!(lesson&&lesson.exam)||/\bprov/i.test(String(title||""))}
 function lessonHTML(s){
  const v=slotView(s); if(!v)return '<span class="muted">Dra en lektion hit</span>';
- const cls="lesson-title"+(v.exam?" exam-lesson":"");
+ const cls="lesson-title"+(v.exam?" exam-lesson":"")+(isLocked(s)&&!v.exam?" locked-title":"");
  return `<div class="placed"><div class="${cls}">${esc(v.title)}</div><button class="rm no-print" type="button" title="Ta bort pass">×</button></div>`;
 }
 function getLesson(id){return state.lessons.find(l=>l.id===id)}
@@ -1071,7 +1076,11 @@ function lessonsInPageOrder(){
 }
 function openSlots(){return state.slots.filter(s=>!s.blocked)}
 // Examinationer är låsta vid sitt datum och förskjuts inte av andra lektioner.
-function isLocked(s){return !!s.lessonId&&!!(slotView(s)||{}).exam}
+function isLocked(s){
+ if(!s.lessonId)return false;
+ if((slotView(s)||{}).exam)return true;
+ return !!(getLesson(s.lessonId)||{}).locked;
+}
 function shiftableSlots(){return state.slots.filter(s=>!s.blocked&&!isLocked(s))}
 // Borttagna dagar utelämnas ur schemat tills de återställs.
 // Antalet lektioner en viss dag = periodens grundantal plus tillagda minus borttagna.
@@ -1599,6 +1608,7 @@ function openLesson(id){
  fillModal(l||{});
  document.getElementById("mReusable").checked=!!l?.reusable;
  document.getElementById("mExam").checked=!!l?.exam;
+ document.getElementById("mLock").checked=!!l?.locked;
  document.getElementById("mReusableRow").style.display="";
  document.getElementById("mReset").style.display="none";
  document.getElementById("modal").style.display="flex";
@@ -1634,7 +1644,7 @@ function saveLesson(){
    closeModal();render();return;
  }
  const id=document.getElementById("mId").value||uid();
- const l={id,title:document.getElementById("mTitle").value.trim(),pages:document.getElementById("mPages").value.trim(),other:document.getElementById("mOther").value.trim(),note:document.getElementById("mNote").value.trim(),reusable:document.getElementById("mReusable").checked,exam:document.getElementById("mExam").checked};
+ const l={id,title:document.getElementById("mTitle").value.trim(),pages:document.getElementById("mPages").value.trim(),other:document.getElementById("mOther").value.trim(),note:document.getElementById("mNote").value.trim(),reusable:document.getElementById("mReusable").checked,exam:document.getElementById("mExam").checked,locked:document.getElementById("mLock").checked};
  if(!l.title)return;
  const i=state.lessons.findIndex(x=>x.id===id);
  if(i>=0)state.lessons[i]=l;else state.lessons.push(l);
