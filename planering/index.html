@@ -929,6 +929,7 @@ function openCtx(e,index){
  }
  add(s.other?"Redigera kommentar i Övrigt":"Skriv kommentar i Övrigt",()=>openNote(index));
  m.appendChild(document.createElement("hr"));
+ add("Dela dagen – två pass",()=>addDay(s.week,s.day));
  add("Lägg till lektion i vecka "+s.week+"…",()=>openAddDay(e,s.week));
  add("Ta bort dagen",()=>removeSlot(index),"danger");
  });
