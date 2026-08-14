@@ -335,6 +335,11 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
 .card .place{border-color:transparent;background:transparent;color:#98a2b3;opacity:.6;font-size:12px}
 .card:hover .place{opacity:1;color:#0f766e;border-color:#b7e5de;background:#e9f8f6}
 .card .place:hover{opacity:1;color:#0b5c56;background:#d7f2ee;border-color:#8fd8ce}
+
+.schedule tr.half .lesson-cell{min-height:26px;padding:5px 9px}
+.schedule tr.half td{padding-top:0;padding-bottom:0}
+.schedule tr.half .other-cell,.schedule tr.half td:nth-last-child(2){padding:5px 6px}
+.schedule tr.half td.date{padding:6px}
 </style>
 </head>
 <body>
@@ -939,6 +944,9 @@ function renderSchedule(){
  table.innerHTML=`<colgroup><col style="width:7%"><col style="width:12%"><col style="width:42%"><col style="width:18%"><col style="width:21%"></colgroup><thead><tr><th>Vecka</th><th>Dag</th><th>Avsnitt</th><th>Sidor</th><th>Övrigt</th></tr></thead>`;
  const tb=document.createElement("tbody");
  buildRows().forEach((g,gi)=>{
+   // Flera lektionspass samma dag delar en datumcell och visas som halva rader.
+   const perDay={},seen={};
+   g.rows.forEach(r=>{if(r.kind!=="lab")perDay[r.day]=(perDay[r.day]||0)+1});
    g.rows.forEach((row,k)=>{
      const tr=document.createElement("tr");
      // Varannan vecka får en mörkare nyans för att skilja veckorna åt.
@@ -958,8 +966,13 @@ function renderSchedule(){
        return;
      }
      const s=row.slot;
-     tr.className=(s.blocked?"blocked":"")+alt;
-     tr.innerHTML=`${weekCell}<td class="date">${dayCell(s.day,dateForWeekDay(s.week,s.day))}</td>
+     const n=perDay[s.day]||1;
+     const idx=(seen[s.day]=(seen[s.day]||0)+1);
+     tr.className=(s.blocked?"blocked":"")+alt+(n>1?" half":"");
+     const dateCell=idx===1
+       ?`<td class="date" rowspan="${n}">${dayCell(s.day,dateForWeekDay(s.week,s.day))}</td>`
+       :"";
+     tr.innerHTML=`${weekCell}${dateCell}
        <td class="slot${(s.blocked?s.exam:slotView(s)?.exam)?" exam-cell":""}"><div class="lesson-cell" data-slot="${s.id}">${s.blocked?`<span class="block-label${s.exam?" exam":""}">${esc(blockedText(s))}</span>`:lessonHTML(s)}</div></td>
        <td>${!s.blocked?esc(slotView(s)?.pages||""):""}</td>
        <td class="other-cell${s.otherExam?" exam-cell":""}">${otherHTML(s)}</td>`;
