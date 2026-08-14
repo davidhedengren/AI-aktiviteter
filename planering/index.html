@@ -982,7 +982,7 @@ function handleDrop(data,index,mode){
 }
 function moveSlotLesson(from,to){
  if(from<0||to<0||from===to)return;
- const open=state.slots.map((s,i)=>({s,i})).filter(x=>!x.s.blocked);
+ const open=state.slots.map((s,i)=>({s,i})).filter(x=>!x.s.blocked&&(!isLocked(x.s)||x.i===from));
  const fromPos=open.findIndex(x=>x.i===from);
  const toPos=open.findIndex(x=>x.i===to);
  if(fromPos<0||toPos<0)return;
@@ -1070,6 +1070,9 @@ function lessonsInPageOrder(){
    .map(r=>r.l);
 }
 function openSlots(){return state.slots.filter(s=>!s.blocked)}
+// Examinationer är låsta vid sitt datum och förskjuts inte av andra lektioner.
+function isLocked(s){return !!s.lessonId&&!!(slotView(s)||{}).exam}
+function shiftableSlots(){return state.slots.filter(s=>!s.blocked&&!isLocked(s))}
 // Borttagna dagar utelämnas ur schemat tills de återställs.
 // Antalet lektioner en viss dag = periodens grundantal plus tillagda minus borttagna.
 function countRemoved(week,day){
@@ -1115,7 +1118,7 @@ function ensureFixedLessons(){
  });
 }
 function autoPlace(){
- const open=openSlots();
+ const open=shiftableSlots();
  if(!open.length){alert("Skapa ett schema först.");return}
  const list=lessonsInPageOrder();
  if(!list.length){alert("Det finns inga lektioner att placera ut.");return}
@@ -1132,7 +1135,10 @@ function clearPlan(){
  render();
 }
 function removePlacement(index){
- const open=state.slots.map((s,i)=>({s,i})).filter(x=>!x.s.blocked);
+ const self=state.slots[index];
+ // Ett låst pass tas bort utan att övriga flyttas.
+ if(self&&isLocked(self)){setPair(self,null);render();return}
+ const open=state.slots.map((s,i)=>({s,i})).filter(x=>!x.s.blocked&&!isLocked(x.s));
  const pos=open.findIndex(x=>x.i===index);
  if(pos<0)return;
  const seq=open.map(x=>getPair(x.s));
@@ -1189,7 +1195,7 @@ function placeLesson(lessonId,index){
  let carry={id:lessonId,ov:null};
  for(let i=index;i<state.slots.length;i++){
    const s=state.slots[i];
-   if(s.blocked)continue;
+   if(s.blocked||isLocked(s))continue;
    const old=getPair(s);setPair(s,carry);carry=old.id?old:null;
    if(!carry)break;
  }
@@ -1204,7 +1210,7 @@ function toggleBlocked(index){
    if(s.lessonId){
      let carry=getPair(s);setPair(s,null);
      for(let i=index+1;i<state.slots.length;i++){
-       if(state.slots[i].blocked)continue;
+       if(state.slots[i].blocked||isLocked(state.slots[i]))continue;
        const x=getPair(state.slots[i]);setPair(state.slots[i],carry);carry=x.id?x:null;
        if(!carry)break;
      }
@@ -1224,10 +1230,15 @@ function blockWeek(){
  render();
 }
 function repack(){
+ const locked=new Set(state.slots.filter(isLocked));
  const items=[];
- state.slots.forEach(s=>{if(s.lessonId)items.push(getPair(s));setPair(s,null)});
+ state.slots.forEach(s=>{
+   if(s.blocked||locked.has(s))return;
+   if(s.lessonId)items.push(getPair(s));
+   setPair(s,null);
+ });
  let p=0;
- state.slots.forEach(s=>{if(!s.blocked&&p<items.length)setPair(s,items[p++])});
+ state.slots.forEach(s=>{if(!s.blocked&&!locked.has(s)&&p<items.length)setPair(s,items[p++])});
 }
 // Datum räknas ut från måndagen i första veckan; veckorna i schemat är
 // sammanhängande, så vecka nr i ligger i*7 dagar senare.
