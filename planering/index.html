@@ -309,6 +309,9 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
 
 .badge.lock-badge{background:#eef2f6;border-color:#cbd5e1;color:#475467}
 .locked-title::after{content:"·  låst";font-size:10px;font-weight:700;color:#98a2b3;margin-left:6px;letter-spacing:.02em}
+
+.card .actions .place{background:#e9f8f6;border-color:#b7e5de;color:#0b5c56;font-weight:700}
+.card .actions .place:hover{background:#d7f2ee;border-color:#8fd8ce}
 </style>
 </head>
 <body>
@@ -791,7 +794,11 @@ function renderLessons(){
    const badge=(l.locked?'<span class="badge lock-badge" title="Låst i schemat">Låst</span>':"")
      +(n?`<span class="badge used-badge${l.reusable?" count-badge":""}">${n>1||l.reusable?n+"×":"✓"}</span>`:"");
    d.innerHTML=`<div class="title">${esc(l.title)}${badge}</div><div class="meta">${esc(l.pages||"")} ${l.other?" · "+esc(l.other):""}</div>
-   <div class="actions"><button class="btn" onclick="openLesson('${l.id}')">Redigera</button><button class="btn danger" onclick="deleteLesson('${l.id}')">Ta bort</button></div>`;
+   <div class="actions">
+     <button class="btn place" onclick="placeFirstFree('${l.id}')" title="Lägg på första lediga pass">Placera ⭢</button>
+     <button class="btn" onclick="openLesson('${l.id}')">Redigera</button>
+     <button class="btn danger" onclick="deleteLesson('${l.id}')">Ta bort</button>
+   </div>`;
    el.appendChild(d);
  });
 }
@@ -1143,18 +1150,20 @@ function clearPlan(){
  state.slots.forEach(s=>setPair(s,null));
  render();
 }
-function removePlacement(index){
+// Tar bort ett pass och drar efterföljande lektioner ett steg uppåt.
+function pullUp(index){
  const self=state.slots[index];
+ if(!self)return;
  // Ett låst pass tas bort utan att övriga flyttas.
- if(self&&isLocked(self)){setPair(self,null);render();return}
+ if(isLocked(self)){setPair(self,null);return}
  const open=state.slots.map((s,i)=>({s,i})).filter(x=>!x.s.blocked&&!isLocked(x.s));
  const pos=open.findIndex(x=>x.i===index);
- if(pos<0)return;
+ if(pos<0){setPair(self,null);return}
  const seq=open.map(x=>getPair(x.s));
  seq.splice(pos,1);seq.push(null);
  open.forEach((x,k)=>{setPair(x.s,seq[k]&&seq[k].id?seq[k]:null)});
- render();
 }
+function removePlacement(index){pullUp(index);render()}
 function updateStatus(){
  const el=document.getElementById("planStatus");
  if(!el)return;
@@ -1197,6 +1206,13 @@ function loadCourse(){
    r.readAsText(f);
  };
  inp.click();
+}
+// Lägger lektionen på det första passet som är ledigt, olåst och inte blockerat.
+function placeFirstFree(id){
+ const slot=state.slots.find(s=>!s.blocked&&!s.lessonId&&!isLocked(s));
+ if(!slot){alert("Det finns inga lediga pass kvar i planeringen.");return}
+ setPair(slot,{id,ov:null});
+ render();
 }
 function placeLesson(lessonId,index){
  if(!lessonId)return;
@@ -1652,7 +1668,10 @@ function saveLesson(){
 }
 function deleteLesson(id){
  state.lessons=state.lessons.filter(x=>x.id!==id);
- state.slots.forEach(s=>{if(s.lessonId===id)setPair(s,null)});
+ // Varje utplacering tas bort bakifrån så att efterföljande lektioner flyttas upp.
+ for(let i=state.slots.length-1;i>=0;i--){
+   if(state.slots[i].lessonId===id)pullUp(i);
+ }
  render();
 }
 function saveProject(){
