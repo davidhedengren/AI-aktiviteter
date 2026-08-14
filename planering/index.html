@@ -318,6 +318,14 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
 .schedule tr.wk-alt.blocked td.exam-cell{background:#fbd6d3}
 .schedule tr.blocked td.exam-cell .block-label{color:#912018}
 .schedule tr.blocked td.exam-cell .exam{background:transparent}
+
+.card{position:relative}
+.card .place{position:absolute;top:7px;right:7px;border:1px solid #b7e5de;background:#e9f8f6;color:#0b5c56;
+  border-radius:7px;width:24px;height:22px;line-height:1;font-size:13px;font-weight:700;padding:0}
+.card .place:hover{background:#d7f2ee;border-color:#8fd8ce}
+.card .title{padding-right:30px}
+.card.drop-top{box-shadow:inset 0 3px 0 #0f766e}
+.card.drop-bot{box-shadow:inset 0 -3px 0 #0f766e}
 </style>
 </head>
 <body>
@@ -403,6 +411,7 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
           <span class="searchcount" id="lessonCount"></span>
         </div>
         <div id="lessonList"></div>
+        <button class="btn sm" style="width:100%;margin-top:4px" onclick="sortLessonsByPage()">Sortera efter sidnummer</button>
       </div>
       <div id="labs" class="tabpane body">
         <label class="cbrow"><input type="checkbox" id="labEnabled"> Använd laborationer</label>
@@ -758,10 +767,11 @@ function render(){
  document.getElementById("printTitle").textContent=state.title;
  trackHistory(); renderLessons(); renderLabs(); renderSchedule(); updateStatus(); saveLocal(); renderPlanSelect();
 }
-// Visningsordning: fasta pass överst, därefter sidnummerordning.
-// Lektioner utan sidhänvisning hamnar sist, i den ordning de lades till.
-function lessonsForList(){
- return state.lessons
+// Listan visas i den ordning lektionerna ligger. Ordningen ändras genom att
+// dra korten eller med knappen för sortering på sidnummer.
+function lessonsForList(){return state.lessons}
+function sortLessonsByPage(){
+ state.lessons=state.lessons
    .map((l,i)=>({l,i,p:firstPage(l)}))
    .sort((a,b)=>{
      const ra=a.l.reusable?0:1, rb=b.l.reusable?0:1;
@@ -773,7 +783,18 @@ function lessonsForList(){
      return a.p-b.p||a.i-b.i;
    })
    .map(x=>x.l);
+ render();
 }
+function moveLesson(fromId,toId,after){
+ const from=state.lessons.findIndex(x=>x.id===fromId);
+ if(from<0||fromId===toId)return;
+ const [item]=state.lessons.splice(from,1);
+ const to=state.lessons.findIndex(x=>x.id===toId);
+ if(to<0)state.lessons.push(item);
+ else state.lessons.splice(after?to+1:to,0,item);
+ render();
+}
+let dragLessonId=null;
 function renderLessons(){
  const el=document.getElementById("lessonList"); el.innerHTML="";
  const countEl=document.getElementById("lessonCount");
@@ -791,8 +812,31 @@ function renderLessons(){
  if(!list.length){el.innerHTML='<div class="empty">Ingen lektion matchar sökningen.</div>';return}
  list.forEach(l=>{
    const d=document.createElement("div"); d.className="card"+(isExam(l.title,l)?" exam-card":""); d.draggable=true;
-   d.ondragstart=e=>{e.dataTransfer.setData("text/plain","lesson:"+l.id);e.dataTransfer.effectAllowed="copyMove";d.classList.add("dragging")};
-   d.ondragend=()=>d.classList.remove("dragging");
+   d.ondragstart=e=>{
+     e.dataTransfer.setData("text/plain","lesson:"+l.id);
+     e.dataTransfer.effectAllowed="copyMove";
+     dragLessonId=l.id;
+     d.classList.add("dragging");
+   };
+   d.ondragend=()=>{dragLessonId=null;d.classList.remove("dragging")};
+   const clearMark=()=>d.classList.remove("drop-top","drop-bot");
+   d.ondragover=e=>{
+     if(!dragLessonId||dragLessonId===l.id)return;
+     e.preventDefault();
+     const r=d.getBoundingClientRect();
+     clearMark();
+     d.classList.add((e.clientY-r.top)/r.height>0.5?"drop-bot":"drop-top");
+   };
+   d.ondragleave=clearMark;
+   d.ondrop=e=>{
+     if(!dragLessonId||dragLessonId===l.id)return;
+     e.preventDefault();e.stopPropagation();
+     const r=d.getBoundingClientRect();
+     const after=(e.clientY-r.top)/r.height>0.5;
+     const from=dragLessonId;
+     clearMark();dragLessonId=null;
+     moveLesson(from,l.id,after);
+   };
    // Fasta pass visar antalet placeringar, övriga en bock vid en enda placering.
    const n=used[l.id]||0;
    if(n&&!l.reusable)d.classList.add("used");
@@ -800,8 +844,8 @@ function renderLessons(){
    const badge=(l.locked?'<span class="badge lock-badge" title="Låst i schemat">Låst</span>':"")
      +(n?`<span class="badge used-badge${l.reusable?" count-badge":""}">${n>1||l.reusable?n+"×":"✓"}</span>`:"");
    d.innerHTML=`<div class="title">${esc(l.title)}${badge}</div><div class="meta">${esc(l.pages||"")} ${l.other?" · "+esc(l.other):""}</div>
+   <button class="place" onclick="placeFirstFree('${l.id}')" title="Lägg på första lediga pass">⭢</button>
    <div class="actions">
-     <button class="btn place" onclick="placeFirstFree('${l.id}')" title="Lägg på första lediga pass">Placera ⭢</button>
      <button class="btn" onclick="openLesson('${l.id}')">Redigera</button>
      <button class="btn danger" onclick="deleteLesson('${l.id}')">Ta bort</button>
    </div>`;
