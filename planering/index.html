@@ -839,7 +839,7 @@ function renderSchedule(){
      const s=row.slot;
      tr.className=(s.blocked?"blocked":"")+alt;
      tr.innerHTML=`${weekCell}<td class="date">${dayCell(s.day,dateForWeekDay(s.week,s.day))}</td>
-       <td class="slot${!s.blocked&&slotView(s)?.exam?" exam-cell":""}"><div class="lesson-cell" data-slot="${s.id}">${s.blocked?`<span class="block-label${s.exam?" exam":""}">${esc(blockedText(s))}</span>`:lessonHTML(s)}</div></td>
+       <td class="slot${(s.blocked?s.exam:slotView(s)?.exam)?" exam-cell":""}"><div class="lesson-cell" data-slot="${s.id}">${s.blocked?`<span class="block-label${s.exam?" exam":""}">${esc(blockedText(s))}</span>`:lessonHTML(s)}</div></td>
        <td>${!s.blocked?esc(slotView(s)?.pages||""):""}</td>
        <td class="other-cell${s.otherExam?" exam-cell":""}">${otherHTML(s)}</td>`;
      const cell=tr.querySelector(".lesson-cell");
@@ -1241,7 +1241,7 @@ function importExams(){
  if(!state.startDate){alert("Ange först måndagen i första veckan.");return}
  state.examText=document.getElementById("eText").value;
  const list=parseDateLines(state.examText);
- let onDay=0,inOther=0,missed=0;
+ let onDay=0,added=0,inOther=0,missed=0;
  list.forEach(e=>{
    const text=e.text||"Prov";
    // Provet läggs i Övrigt-kolumnen och påverkar inte utplacerade lektioner.
@@ -1253,6 +1253,17 @@ function importExams(){
    let w=weekOfDate(d);
    if(w===null&&!e.y){d=new Date(y+1,e.mo-1,e.d);w=weekOfDate(d)}
    if(w===null){missed++;return}
+   // Infaller provet på en vardag utan lektion läggs den dagen till i veckan.
+   const wd=DAYS[(d.getDay()+6)%7];
+   if(wd){
+     addDay(w,wd);
+     const slot=state.slots.find(x=>x.week===w&&x.day===wd);
+     if(slot){
+       setPair(slot,null);
+       slot.blocked=true;slot.label=text;slot.note="";slot.exam=true;
+       added++;return;
+     }
+   }
    const rows=state.slots.filter(s=>s.week===w);
    if(!rows.length){missed++;return}
    const before=rows.filter(s=>dateForWeekDay(s.week,s.day)<=d);
@@ -1261,7 +1272,10 @@ function importExams(){
    inOther++;
  });
  closeExams();render();
- alert((onDay+inOther)+" prov lades in i Övrigt."+(missed?" "+missed+" datum låg utanför planeringen.":""));
+ alert((onDay+added+inOther)+" prov lades in."
+   +(added?" "+added+" nya dagar skapades.":"")
+   +(inOther?" "+inOther+" hamnade på närmaste pass.":"")
+   +(missed?" "+missed+" datum låg utanför planeringen.":""));
 }
 function openDates(){
  document.getElementById("dText").value=state.dateText||"";
@@ -1574,9 +1588,9 @@ function exportWord(){
    const wkBg=alt?P.wkAlt:P.wk;
    const wkCell=top?`<td rowspan="${g.rows.length}" style="${b}background:${wkBg};text-align:center;vertical-align:middle;font-weight:bold;color:#1e4976;font-size:10pt">${esc(s2.week)}</td>`:"";
    const dyBg=off?P.off:(alt?P.dyAlt:P.dy);
-   const secBg=off?P.off:(v?.exam?P.exam:P.white);
+   const secBg=off?(s2.exam?P.exam:P.off):(v?.exam?P.exam:P.white);
    const othBg=s2.otherExam?P.exam:(off?P.off:P.white);
-   const secCol=off?"#343a40":(v?.exam?"#912018":"#17202a");
+   const secCol=off?(s2.exam?"#912018":"#343a40"):(v?.exam?"#912018":"#17202a");
    return `<tr>`+wkCell
      +`<td style="${b}background:${dyBg};color:${off?"#343a40":"#4a5f79"};font-size:8.5pt">${esc(s2.day)} ${esc(fmtDate(dateForWeekDay(s2.week,s2.day)))}</td>`
      +`<td style="${b}background:${secBg};font-weight:bold;color:${secCol};font-size:9.5pt">${off?esc(blockedText(s2)):esc(v?.title||"")}</td>`
