@@ -1310,6 +1310,9 @@ function blockWeek(){
  if(!state.slots.some(s=>s.week===w)){alert("Vecka "+w+" finns inte i planeringen.");return}
  // Lektionerna behålls här och flyttas framåt av ompackningen nedan.
  state.slots.forEach(s=>{if(s.week===w){s.blocked=true;s.label=txt;s.note=""}});
+ // Även veckans laboration ersätts av lovmarkeringen.
+ const lab=labItem(w);
+ lab.status="ledig";lab.title=txt;
  repack();
  render();
 }
