@@ -999,8 +999,11 @@ function renderSchedule(){
        oc.ondblclick=()=>openNote(state.slots.indexOf(s));
      }
      cell.oncontextmenu=e=>{e.preventDefault();openCtx(e,state.slots.indexOf(s))};
-     tr.querySelector(".date").oncontextmenu=e=>{e.preventDefault();openCtx(e,state.slots.indexOf(s))};
-     tr.querySelector(".date").ondblclick=()=>toggleBlocked(state.slots.indexOf(s));
+     const dateTd=tr.querySelector(".date");
+     if(dateTd){
+       dateTd.oncontextmenu=e=>{e.preventDefault();openCtx(e,state.slots.indexOf(s))};
+       dateTd.ondblclick=()=>toggleBlocked(state.slots.indexOf(s));
+     }
      const placed=cell.querySelector(".placed");
      if(placed){
        // Hela cellen är dragbar, inte bara texten.
