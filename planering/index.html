@@ -1407,7 +1407,15 @@ function importExams(){
    const text=e.text||"Prov";
    // Provet läggs i Övrigt-kolumnen och påverkar inte utplacerade lektioner.
    const hit=state.slots.find(s=>sameDate(dateForWeekDay(s.week,s.day),e));
-   if(hit){hit.otherExam=text;onDay++;return}
+   if(hit){
+     // Har raden en lektion läggs provet i Övrigt, annars blir provet självt passet.
+     if(hit.lessonId){hit.otherExam=text;onDay++}
+     else{
+       hit.blocked=true;hit.label=text;hit.note="";hit.exam=true;hit.otherExam="";
+       onDay++;
+     }
+     return;
+   }
    // Prov utanför lektionsdagarna placeras på veckans sista pass före provdagen.
    const y=e.y||(dateForWeekDay(scheduleWeeks()[0],"Måndag")||new Date()).getFullYear();
    let d=new Date(y,e.mo-1,e.d);
