@@ -312,6 +312,12 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
 
 .card .actions .place{background:#e9f8f6;border-color:#b7e5de;color:#0b5c56;font-weight:700}
 .card .actions .place:hover{background:#d7f2ee;border-color:#8fd8ce}
+
+/* Prov som ligger som eget pass behåller sin röda cell trots att raden är blockerad. */
+.schedule tr.blocked td.exam-cell{background:#fde3e1}
+.schedule tr.wk-alt.blocked td.exam-cell{background:#fbd6d3}
+.schedule tr.blocked td.exam-cell .block-label{color:#912018}
+.schedule tr.blocked td.exam-cell .exam{background:transparent}
 </style>
 </head>
 <body>
