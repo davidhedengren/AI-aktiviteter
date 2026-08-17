@@ -340,6 +340,26 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
 .schedule tr.half td{padding-top:0;padding-bottom:0}
 .schedule tr.half .other-cell,.schedule tr.half td:nth-last-child(2){padding:5px 6px}
 .schedule tr.half td.date{padding:6px}
+
+.sharestatus{font-size:11px;font-weight:600;color:#98a2b3;background:#f7f8fa;border:1px solid var(--line);
+  border-radius:8px;padding:7px 9px;margin-bottom:7px;word-break:break-word}
+.sharestatus.on{color:#0b5c56;background:#e9f8f6;border-color:#b7e5de}
+
+.foldout{border:1px solid var(--line);border-radius:10px;background:#fbfcfd;margin-bottom:12px}
+.foldout summary{cursor:pointer;list-style:none;padding:9px 11px;font-size:12px;font-weight:800;
+  color:#475467;letter-spacing:.02em;display:flex;align-items:center;gap:7px}
+.foldout summary::-webkit-details-marker{display:none}
+.foldout summary::before{content:"⌄";font-size:13px;color:#98a2b3;transition:transform .15s ease}
+.foldout[open] summary::before{transform:rotate(180deg)}
+.foldout summary:hover{color:#0f766e}
+.foldbody{padding:0 11px 11px 11px}
+.hint{position:relative;display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;
+  border-radius:50%;border:1px solid #cbd5e1;color:#98a2b3;font-size:10px;font-weight:800;cursor:help;margin-left:auto}
+.hint:hover,.hint:focus{border-color:#0f766e;color:#0f766e;outline:none}
+.hinttip{display:none;position:absolute;right:0;top:20px;width:250px;background:#1f2937;color:#e5e7eb;
+  font-size:11px;font-weight:500;line-height:1.5;letter-spacing:0;padding:10px 12px;border-radius:9px;
+  box-shadow:0 12px 30px rgba(2,6,23,.3);z-index:15;text-transform:none}
+.hint:hover .hinttip,.hint:focus .hinttip{display:block}
 </style>
 </head>
 <body>
@@ -374,6 +394,22 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
             <button class="btn sm" onclick="duplicatePlan()">Kopiera</button>
           </div>
         </div>
+        <details class="foldout" id="shareBox" style="display:none">
+          <summary>Delning till fil
+            <span class="hint" tabindex="0">?
+              <span class="hinttip">Kopplar planeringen till en Word-fil på datorn, till exempel i en OneDrive-mapp.
+              Filen skrivs om automatiskt vid varje ändring, så en delad länk alltid visar den senaste versionen.
+              Filen får inte vara öppen i Word medan du planerar.</span>
+            </span>
+          </summary>
+          <div class="foldbody">
+            <div id="shareStatus" class="sharestatus">Ingen fil kopplad.</div>
+            <div class="btnrow tight" style="margin-bottom:0">
+              <button class="btn sm" id="shareBtn" onclick="linkShareFile()">Koppla fil</button>
+              <button class="btn sm danger" onclick="unlinkShareFile()">Koppla loss</button>
+            </div>
+          </div>
+        </details>
         <div class="row">
           <div class="field"><label>Första vecka</label><input id="startWeek" type="number" value="34"></div>
           <div class="field"><label>Sista vecka</label><input id="endWeek" type="number" value="24"></div>
@@ -781,7 +817,7 @@ function rebuildSchedule(){
 function render(){
  document.getElementById("docTitle").textContent=state.title;
  document.getElementById("printTitle").textContent=state.title;
- trackHistory(); renderLessons(); renderLabs(); renderSchedule(); updateStatus(); saveLocal(); renderPlanSelect();
+ trackHistory(); writeShareFile(); renderLessons(); renderLabs(); renderSchedule(); updateStatus(); saveLocal(); renderPlanSelect();
 }
 // Listan visas i den ordning lektionerna ligger. Ordningen ändras genom att
 // dra korten eller med knappen för sortering på sidnummer.
@@ -1780,7 +1816,7 @@ function syncInputs(){
  normalizeLabPeriods();
  renderPeriods();
 }
-function exportWord(){
+function buildWordHtml(){
  // Word tillämpar inte sammansatta CSS-väljare tillförlitligt, därför skrivs
  // färger och kantlinjer direkt på varje cell.
  const P={wk:"#dbe9fa",wkAlt:"#c7dcf5",dy:"#eef5fd",dyAlt:"#e0edfb",
@@ -1837,8 +1873,89 @@ function exportWord(){
 </tr></thead>
 <tbody>${rows}</tbody></table>
 </div></body></html>`;
- const blob=new Blob([html],{type:"application/msword"});
+ return html;
+}
+function exportWord(){
+ const blob=new Blob([buildWordHtml()],{type:"application/msword"});
  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(state.title||"planering")+".doc";a.click();
+}
+// Delningsfil: varje planering kan kopplas till en Word-fil på disken, till
+// exempel i en synkad OneDrive-mapp. Filen skrivs om när planeringen ändras.
+const FS_OK=typeof window!=="undefined"&&!!window.showSaveFilePicker;
+let shareHandle=null,shareTimer=null,shareName="";
+function idb(){
+ return new Promise((res,rej)=>{
+   const r=indexedDB.open("planeringsverktyg",1);
+   r.onupgradeneeded=()=>r.result.createObjectStore("handles");
+   r.onsuccess=()=>res(r.result);
+   r.onerror=()=>rej(r.error);
+ });
+}
+async function idbSet(key,val){
+ const db=await idb();
+ return new Promise(res=>{
+   const t=db.transaction("handles","readwrite");
+   t.objectStore("handles").put(val,key);
+   t.oncomplete=()=>res();
+ });
+}
+async function idbGet(key){
+ const db=await idb();
+ return new Promise(res=>{
+   const t=db.transaction("handles","readonly");
+   const q=t.objectStore("handles").get(key);
+   q.onsuccess=()=>res(q.result||null);
+   q.onerror=()=>res(null);
+ });
+}
+function shareInfo(text,linked){
+ const el=document.getElementById("shareStatus");
+ if(el){el.textContent=text;el.classList.toggle("on",!!linked)}
+ const b=document.getElementById("shareBtn");
+ if(b)b.textContent=linked?"Byt fil":"Koppla fil";
+}
+async function linkShareFile(){
+ if(!FS_OK){alert("Webbläsaren stöder inte automatisk filskrivning. Använd Chrome eller Edge.");return}
+ try{
+   const h=await window.showSaveFilePicker({
+     suggestedName:(state.title||"planering")+".doc",
+     types:[{description:"Word-dokument",accept:{"application/msword":[".doc"]}}]
+   });
+   shareHandle=h;shareName=h.name;
+   await idbSet("share:"+planId,h);
+   await writeShareFile(true);
+ }catch(err){}
+}
+async function unlinkShareFile(){
+ shareHandle=null;shareName="";
+ await idbSet("share:"+planId,null);
+ shareInfo("Ingen fil kopplad.",false);
+}
+async function restoreShareFile(){
+ shareHandle=null;shareName="";
+ if(!FS_OK)return;
+ document.getElementById("shareBox").style.display="block";
+ const h=await idbGet("share:"+planId);
+ if(!h){shareInfo("Ingen fil kopplad.",false);return}
+ shareName=h.name;
+ const perm=await h.queryPermission({mode:"readwrite"});
+ if(perm==="granted"){shareHandle=h;shareInfo("Uppdaterar "+h.name,true)}
+ else shareInfo("Klicka Koppla fil för att fortsätta uppdatera "+h.name,false);
+}
+async function writeShareFile(now){
+ if(!shareHandle)return;
+ // Skyddsspärr: en tom planering får aldrig skriva över en befintlig fil.
+ if(!state.slots.length)return;
+ clearTimeout(shareTimer);
+ const doWrite=async()=>{
+   try{
+     const w=await shareHandle.createWritable();
+     await w.write(new Blob([buildWordHtml()],{type:"application/msword"}));
+     await w.close();
+     shareInfo("Uppdaterad "+new Date().toLocaleTimeString("sv-SE",{hour:"2-digit",minute:"2-digit"})+" · "+shareName,true);
+   }catch(err){shareInfo("Kunde inte skriva till "+shareName,false)}
+ };
+ if(now)await doWrite();else shareTimer=setTimeout(doWrite,1500);
 }
 const STORE_KEY="planeringsverktyg_v2";
 let store={current:null,plans:{}};
@@ -1895,6 +2012,7 @@ function freshState(){
 function activate(){
  ensureFixedLessons();normalizePeriods();normalizeLabPeriods();normalizeLabs();
  syncInputs();render();
+ restoreShareFile();
 }
 function newPlan(){
  planId=uid();
