@@ -1908,14 +1908,25 @@ async function idbGet(key){
    q.onerror=()=>res(null);
  });
 }
-function shareInfo(text,linked){
+let sharePending=null;
+function shareInfo(text,linked,pending){
  const el=document.getElementById("shareStatus");
  if(el){el.textContent=text;el.classList.toggle("on",!!linked)}
  const b=document.getElementById("shareBtn");
- if(b)b.textContent=linked?"Byt fil":"Koppla fil";
+ if(b)b.textContent=pending?"Återuppta":(linked?"Byt fil":"Koppla fil");
+}
+// Efter omladdning finns filen kvar men behöver godkännas på nytt med ett klick.
+async function resumeShareFile(){
+ if(!sharePending)return false;
+ const perm=await sharePending.requestPermission({mode:"readwrite"});
+ if(perm!=="granted")return false;
+ shareHandle=sharePending;shareName=sharePending.name;sharePending=null;
+ await writeShareFile(true);
+ return true;
 }
 async function linkShareFile(){
  if(!FS_OK){alert("Webbläsaren stöder inte automatisk filskrivning. Använd Chrome eller Edge.");return}
+ if(await resumeShareFile())return;
  try{
    const h=await window.showSaveFilePicker({
      suggestedName:(state.title||"planering")+".doc",
@@ -1927,12 +1938,12 @@ async function linkShareFile(){
  }catch(err){}
 }
 async function unlinkShareFile(){
- shareHandle=null;shareName="";
+ shareHandle=null;shareName="";sharePending=null;
  await idbSet("share:"+planId,null);
  shareInfo("Ingen fil kopplad.",false);
 }
 async function restoreShareFile(){
- shareHandle=null;shareName="";
+ shareHandle=null;shareName="";sharePending=null;
  if(!FS_OK)return;
  document.getElementById("shareBox").style.display="block";
  const h=await idbGet("share:"+planId);
@@ -1940,7 +1951,7 @@ async function restoreShareFile(){
  shareName=h.name;
  const perm=await h.queryPermission({mode:"readwrite"});
  if(perm==="granted"){shareHandle=h;shareInfo("Uppdaterar "+h.name,true)}
- else shareInfo("Klicka Koppla fil för att fortsätta uppdatera "+h.name,false);
+ else{sharePending=h;shareInfo(h.name+" är kopplad. Klicka Återuppta för att fortsätta uppdatera filen.",false,true)}
 }
 async function writeShareFile(now){
  if(!shareHandle)return;
