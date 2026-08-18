@@ -2653,12 +2653,19 @@ function KRAFT(kr,o={}){
     else if(pt==='t'){y0=cy-bh/2; x0=cx+(c?Math.sign(c)*bw*0.34:-20);}
     else if(pt==='v'){x0=cx-bw/2;}
     else if(pt==='h'){x0=cx+bw/2;}
-    const d=52*(k.l||1);
+    let d=52*(k.l||1);
+    if(o.tak&&pt==='t'&&si>0){                       /* snöret upp mot taket */
+      const takY=cy-bh/2-35, full=(y0-takY)/si;
+      s+=L(x0,y0,x0+full*c,takY,'#2B2527',1.4);
+      d=Math.min(d,full-11);
+    }
     s+=PIL(x0,y0,x0+d*c,y0-d*si);
-    s+=T(x0+(d+20)*c,y0-(d+20)*si+4,k.t,{w:600,c:'#B43123'});
+    s+= (o.tak&&pt==='t')
+      ? T(x0+d*0.5*c+22*Math.sign(c||1),y0-d*0.5*si+4,k.t,{w:600,c:'#B43123'})
+      : T(x0+(d+20)*c,y0-(d+20)*si+4,k.t,{w:600,c:'#B43123'});
   });
   if(kr.some(k=>(k.p||(k.v===270?'c':''))==='c')) s+=`<circle cx="${cx}" cy="${cy}" r="3" fill="#2B2527"/>`;
-  if(o.m) s+= o.tak ? T(cx,cy+bh/2+18,o.m,{s:11.5,w:600,c:'#2B2527'})
+  if(o.m) s+= o.tak ? T(cx+bw/2+8,cy+4,o.m,{a:'start',s:11.5,w:600,c:'#2B2527'})
                     : T(cx+bw/2+6,cy-bh/2-7,o.m,{a:'start',s:11.5,w:600,c:'#2B2527'});
   return SV(W,H,s);
 }
@@ -2732,17 +2739,17 @@ function LADD(list,avst){
 }
 /* hävstång/balk med två laster */
 function HAV(la,lb,ta,tb,o={}){
-  const W=470,cx=235,y=104;
-  const sk=Math.min(140,168/Math.max(la,lb));          // båda armarna ska rymmas
+  const W=470,cx=235,y=44;
+  const sk=Math.min(140,168/Math.max(la,lb));
   const xa=cx-la*sk, xb=cx+lb*sk;
   let s=L(xa-26,y,xb+26,y,'#2B2527',3);
   s+=`<polygon points="${cx},${y+5} ${cx-17},${y+42} ${cx+17},${y+42}" fill="#EDEEF1" stroke="#2B2527" stroke-width="2"/>`;
-  s+=PIL(xa,y,xa,y-54)+PIL(xb,y,xb,y-54);
-  s+=T(xa,y-62,ta,{w:600,c:'#B43123'})+T(xb,y-62,tb,{w:600,c:'#B43123'});
-  const mått=(x1,x2,txt)=>L(x1,y+56,x2,y+56,'#9A959C',1.2)+L(x1,y+51,x1,y+61,'#9A959C',1.2)+
-    L(x2,y+51,x2,y+61,'#9A959C',1.2)+T((x1+x2)/2,y+74,txt,{s:10.5});
+  s+=PIL(xa,y,xa,y+52)+PIL(xb,y,xb,y+52);       /* lasterna drar nedåt */
+  s+=T(xa,y+70,ta,{w:600,c:'#B43123'})+T(xb,y+70,tb,{w:600,c:'#B43123'});
+  const mått=(x1,x2,txt)=>L(x1,y+92,x2,y+92,'#9A959C',1.2)+L(x1,y+87,x1,y+97,'#9A959C',1.2)+
+    L(x2,y+87,x2,y+97,'#9A959C',1.2)+T((x1+x2)/2,y+110,txt,{s:10.5});
   s+=mått(xa,cx,o.a||nn(la)+' m')+mått(cx,xb,o.b||nn(lb)+' m');
-  return SV(W,190,s);
+  return SV(W,y+124,s);
 }
 /* två vagnar före/efter */
 function VAGN(rader){
