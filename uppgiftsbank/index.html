@@ -142,6 +142,12 @@ table.data th{background:var(--sunken);font-weight:600}
 .facit{display:none;margin-top:9px;padding:11px 14px;background:var(--sunken);border-radius:var(--r-s)}
 .facit.öppen{display:block}
 .facit p{margin:3px 0;font-family:var(--mono);font-size:12.5px;line-height:1.75}
+.facit .steg{position:relative;padding-left:27px;margin:7px 0}
+.facit .stegnr{position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:5px;
+  background:var(--ed);color:#fff;font-size:10.5px;font-weight:700;display:grid;place-items:center;
+  font-family:var(--ui);line-height:1}
+.facit .stegprick{background:none;color:var(--ed);font-size:15px}
+.facit .komm{padding-left:27px;font-family:var(--las);font-size:13px;color:var(--ink-2);line-height:1.55}
 .facit strong{color:var(--ed-dark)}
 .tomt{text-align:center;padding:70px 20px;color:var(--muted)}
 .tomt h3{font-size:15px;font-weight:600;color:var(--ink-2);margin:0 0 5px}
@@ -216,7 +222,10 @@ table.data th{background:var(--sunken);font-weight:600}
   #utskrift li{padding-left:20pt;position:relative;margin-bottom:3pt}
   #utskrift li::before{counter-increment:d;content:counter(d,lower-alpha) ")";position:absolute;left:0;font-family:var(--mono)}
   #utskrift .fk{page-break-before:always;border-top:2px solid #000;padding-top:14pt}
-  #utskrift .fu{margin-bottom:11pt;break-inside:avoid;font-family:var(--mono);font-size:9.5pt;line-height:1.7}
+  #utskrift .fu{margin-bottom:12pt;break-inside:avoid;font-family:var(--mono);font-size:9.5pt;line-height:1.7}
+  #utskrift .fu .steg{padding-left:22pt;position:relative;margin:3pt 0}
+  #utskrift .fu .stegnr{position:absolute;left:2pt;font-weight:700;color:#B43123}
+  #utskrift .fu .komm{padding-left:22pt;font-family:var(--las);font-size:9.5pt;color:#333}
   #utskrift table.data th{background:#eee}
 }
 @media (max-width:1180px){
@@ -337,7 +346,7 @@ const OMR={
  6:{tryck:'Tryck och kraft',vatsketryck:'Vätsketryck och lufttryck',arkimedes:'Arkimedes princip',gaslagen:'Allmänna gaslagen'},
  7:{varme:'Värmeöverföring och temperatur',fasandring:'Fasändringar'},
  8:{laddning:'Laddning och Coulombs lag',kretsar:'Ström, spänning och Ohms lag',
-    kopplingar:'Elektriska kopplingar',ems:'Polspänning och effekt',falt:'Elektriska fält och potential'},
+    kopplingar:'Elektriska kopplingar',ems:'Ems, polspänning och effekt',falt:'Elektriska fält och potential'},
  9:{nuklider:'Isotoper och nuklider',karnreaktioner:'Kärnreaktioner',
     aktivitet:'Aktivitet och halveringstid',stralning:'Strålning och stråldoser'}};
 const KAPNAMN={2:'Fysikens grunder',3:'Rörelse',4:'Kraft',5:'Energi och rörelsemängd',
@@ -838,14 +847,14 @@ u('7.5',7,'fasandring','A','(0/2/1)',
 
 u('7.6',7,'fasandring','A','(0/1/2)',
 `<p>Fruktodlare sprutar ibland vatten på sina träd inför en frostnatt, trots att det verkar bakvänt.</p>
-<ol><li>Förklara varför det skyddar knopparna. Använd att det frigörs energi när vatten fryser.</li>
+<ol><li>Förklara varför det skyddar knopparna. Använd att smältentalpin frigörs när vatten fryser.</li>
 <li>Ett träd täcks av 1,0 kg vatten. Hur mycket energi avges när allt fryser?</li>
 <li>Om omgivningen kyler bort 40 W från trädet, hur länge håller skyddet?</li></ol>`,
 `<p>a) När vatten fryser avges 334 kJ/kg och temperaturen står stilla vid 0 °C. Isen håller knoppen vid exakt 0 °C istället för att låta den sjunka till luftens −5 °C.</p>
 <p>b) E = <strong>334 kJ</strong></p><p>c) t = 334 000/40 = 8350 s = <strong>2,3 timmar</strong></p>`),
 
 u('7.7',7,'fasandring','E','(2/0/0)',
-`<p>Ett kilo vatten som håller 20 °C ska frysas in till −18 °C i en frys. Det krävs 334 kJ för att smälta ett kilo is, isens specifika värmekapacitet 2100 J/(kg·K).</p>
+`<p>Ett kilo vatten som håller 20 °C ska frysas in till −18 °C i en frys. Smältentalpin för is är 334 kJ/kg, alltså den energi som krävs för att smälta ett kilo, isens specifika värmekapacitet 2100 J/(kg·K).</p>
 <p>Hur mycket energi måste frysen transportera bort?</p>`,
 `<p>Kylning till 0 °C: 4180·1,0·20 = 84 kJ</p><p>Frysning: 334 kJ</p><p>Kylning av isen: 2100·1,0·18 = 38 kJ</p>
 <p>Totalt <strong>455 kJ</strong>, varav frysningen ensam står för nästan tre fjärdedelar.</p>`),
@@ -924,7 +933,7 @@ u('8.4',8,'kopplingar','C','(1/2/0)',
 <p>c) 230 V delas nu på 19 lampor: <strong>12,1 V</strong> vardera. Resistansen sjunker, strömmen ökar och effekten stiger till 15,8 W. Lamporna lyser starkare — och brinner av snabbare, en i taget.</p>`),
 
 u('8.5',8,'ems','A','(0/2/1)',
-`<p>Ett bilbatteri har emk 12,6 V. Den inre resistansen är 0,012 Ω vid 20 °C men stiger till 0,030 Ω vid −20 °C. Startmotorn har resistansen 0,020 Ω.</p>
+`<p>Ett bilbatteri har ems 12,6 V. Den inre resistansen är 0,012 Ω vid 20 °C men stiger till 0,030 Ω vid −20 °C. Startmotorn har resistansen 0,020 Ω.</p>
 <ol><li>Hur stor blir startströmmen vid de två temperaturerna?</li>
 <li>Vilken polspänning ligger över startmotorn i de två fallen?</li>
 <li>Förklara varför bilen inte startar en kall morgon.</li></ol>`,
@@ -1557,11 +1566,11 @@ u('6.25',6,'tryck','C','(0/2/0)',
 
 u('6.26',6,'vatsketryck','E','(2/0/0)',
 `<p>Hur stort är vätsketrycket 5,0 m under ytan i en sjö? Vattnets densitet är 998 kg/m³.</p>`,
-`<p>p = ρgh = 998·9,82·5,0 = <strong>49 kPa</strong></p>`),
+`<p>Vätsketrycket beror bara på djupet: p = ρ·g·h</p><p>p = 998·9,82·5,0 = <strong>49 kPa</strong></p>`),
 
 /* ── KAPITEL 7 ── */
 u('7.14',7,'fasandring','C','(1/2/0)',
-`<p>Jämför två olyckor: 100 g kokande vatten (100 °C) och 100 g vattenånga (100 °C) hamnar på huden och kyls till 37 °C. Det krävs 2260 kJ för att förånga ett kilo vatten.</p>
+`<p>Jämför två olyckor: 100 g kokande vatten (100 °C) och 100 g vattenånga (100 °C) hamnar på huden och kyls till 37 °C. Ångbildningsentalpin är 2260 kJ/kg, alltså den energi som krävs för att förånga ett kilo.</p>
 <ol><li>Hur mycket energi avger vattnet?</li><li>Hur mycket avger ångan?</li>
 <li>Varför är brännskador av ånga så mycket allvarligare?</li></ol>`,
 `<p>a) E = 4180·0,100·63 = <strong>26 kJ</strong></p>
@@ -1574,7 +1583,7 @@ u('7.15',7,'fasandring','E','(2/0/0)',
 <p>Totalt <strong>104 kJ</strong>, varav smältningen står för fyra femtedelar.</p>`),
 
 u('7.16',7,'fasandring','C','(0/2/0)',
-`<p>På ett kallt glas bildas 5,0 g kondens från luftens vattenånga. Det krävs 2260 kJ för att förånga ett kilo vatten.</p>
+`<p>På ett kallt glas bildas 5,0 g kondens från luftens vattenånga. Ångbildningsentalpin är 2260 kJ/kg, alltså den energi som krävs för att förånga ett kilo.</p>
 <ol><li>Hur mycket energi avges till glaset när ångan kondenserar?</li>
 <li>Hur mycket skulle det värma 200 g dryck i glaset?</li>
 <li>Varför känns luften svalare efter ett åskregn?</li></ol>`,
@@ -1680,7 +1689,7 @@ u('8.28',8,'kretsar','C','(0/2/0)',
 u('8.29',8,'falt','E','(2/0/0)',
 `<p>Två parallella plattor ligger 4,0 mm från varandra och har spänningen 230 V mellan sig.</p>
 <p>Bestäm den elektriska fältstyrkan mellan plattorna.</p>`,
-`<p>E = U/d = 230/0,0040 = <strong>58 kV/m</strong></p>`),
+`<p>Mellan plattor är fältet homogent: E = U/d</p><p>E = 230/0,0040 = <strong>58 kV/m</strong></p>`),
 
 u('8.30',8,'falt','C','(1/2/0)',
 `<p>En liten kula har laddningen 25 nC.</p>
@@ -2226,7 +2235,7 @@ u('6.37',6,'arkimedes','A','(0/1/2)',
 u('6.38',6,'gaslagen','E','(2/0/0)',
 `<p>En gasflaska rymmer 12 liter och innehåller gas med trycket 180 bar. Temperaturen ändras inte.</p>
 <p>Vilken volym skulle gasen ha vid det normala lufttrycket 1,0 bar?</p>`,
-`<p>pV konstant: V = 12·180/1,0 = <strong>2160 liter</strong></p>`),
+`<p>Temperaturen är konstant, alltså är p·V konstant: p₁V₁ = p₂V₂</p><p>V₂ = 12·180/1,0 = <strong>2160 liter</strong></p>`),
 
 u('6.39',6,'gaslagen','C','(1/2/0)',
 `<p>Luft har densiteten 1,29 kg/m³ vid 0 °C. En varmluftsballong värmer luften till 80 °C vid samma tryck.</p>
@@ -2267,7 +2276,7 @@ u('6.42',6,'tryck','C','(0/2/0)',
 u('7.17',7,'varme','E','(2/0/0)',
 `<p>2,5 kg järn ska värmas 60 °C. Järnets specifika värmekapacitet är 460 J/(kg·K).</p>
 <p>Hur mycket energi krävs?</p>`,
-`<p>E = cmΔT = 460·2,5·60 = <strong>69 kJ</strong></p>`),
+`<p>E = c·m·ΔT</p><p>E = 460·2,5·60 = 69 000 J = <strong>69 kJ</strong></p>`),
 
 u('7.18',7,'varme','C','(1/2/0)',
 `<p>I en värmeväxlare passerar 0,80 kg vatten per sekund och värms 12 °C.</p>
@@ -2294,11 +2303,11 @@ u('7.20',7,'varme','A','(0/2/1)',
 <p>c) Vi avger också fukt och koldioxid. Värmebalansen kan stämma samtidigt som luftkvaliteten blir dålig — därför behövs ventilation oavsett temperatur.</p>`),
 
 u('7.21',7,'fasandring','E','(2/0/0)',
-`<p>Hur mycket energi krävs för att förånga 0,40 kg vatten som redan håller 100 °C? Det krävs 2260 kJ för att förånga ett kilo vatten.</p>`,
-`<p>E = m·l = 0,40·2260 = <strong>904 kJ</strong></p>`),
+`<p>Hur mycket energi krävs för att förånga 0,40 kg vatten som redan håller 100 °C? Ångbildningsentalpin är 2260 kJ/kg, alltså den energi som krävs för att förånga ett kilo.</p>`,
+`<p>Ångbildningsentalpin ger energin per kilo: E = m·l_v</p><p>E = 0,40·2260 = <strong>904 kJ</strong></p>`),
 
 u('7.22',7,'fasandring','C','(1/2/0)',
-`<p>2,0 kg aluminium ska smältas i en gjuteriugn. Metallen håller 20 °C och smältpunkten är 660 °C. Aluminiumets specifika värmekapacitet är 900 J/(kg·K) och det krävs 397 kJ för att smälta ett kilo.</p>
+`<p>2,0 kg aluminium ska smältas i en gjuteriugn. Metallen håller 20 °C och smältpunkten är 660 °C. Aluminiumets specifika värmekapacitet är 900 J/(kg·K) och smältentalpin 397 kJ/kg.</p>
 <ol><li>Hur mycket energi går åt för att värma metallen till smältpunkten?</li>
 <li>Hur mycket krävs för själva smältningen?</li><li>Hur mycket blir det totalt?</li></ol>`,
 `<p>a) E = 900·2,0·640 = <strong>1,15 MJ</strong></p>
@@ -2328,7 +2337,7 @@ BANK.push(
 u('8.32',8,'laddning','E','(2/0/0)',
 `<p>Ett föremål har fått 3,0·10¹³ extra elektroner. En elektron har laddningen −1,602·10⁻¹⁹ C.</p>
 <p>Vilken laddning har föremålet?</p>`,
-`<p>Q = n·e = 3,0·10¹³·1,602·10⁻¹⁹ = <strong>−4,8 µC</strong></p>`),
+`<p>Varje elektron bär laddningen e: Q = n·e</p><p>Q = 3,0·10¹³·1,602·10⁻¹⁹ = <strong>−4,8 µC</strong></p><p>Laddningen är negativ eftersom det är ett överskott av elektroner.</p>`),
 
 u('8.33',8,'laddning','C','(1/2/0)',
 `<p>Två laddningar, 6,0 nC och 9,0 nC, sitter 3,0 cm från varandra.</p>
@@ -2428,7 +2437,7 @@ u('8.45',8,'ems','C','(1/2/0)',
 
 u('8.46',8,'ems','A','(0/2/1)',
 `<p>Ett batteri mäts vid två olika belastningar. Vid strömmen 0,30 A är polspänningen 1,45 V. Vid 0,90 A är den 1,30 V.</p>
-<ol><li>Bestäm batteriets inre resistans.</li><li>Bestäm batteriets emk.</li>
+<ol><li>Bestäm batteriets inre resistans.</li><li>Bestäm batteriets ems.</li>
 <li>Vilken polspänning väntas vid 1,5 A?</li></ol>`,
 `<p>a) U = ε − rI. Skillnaden: 0,15 V på 0,60 A → r = <strong>0,25 Ω</strong></p>
 <p>b) ε = 1,45 + 0,25·0,30 = <strong>1,53 V</strong></p>
@@ -2437,7 +2446,7 @@ u('8.46',8,'ems','A','(0/2/1)',
 u('8.47',8,'falt','E','(2/0/0)',
 `<p>Två parallella plattor har spänningen 60 V mellan sig. Avståndet är 2,5 cm.</p>
 <p>Hur stark är fältstyrkan mellan plattorna?</p>`,
-`<p>E = U/d = 60/0,025 = <strong>2400 V/m</strong></p>`),
+`<p>E = U/d</p><p>E = 60/0,025 = <strong>2400 V/m</strong></p>`),
 
 /* ── K9 ── */
 u('9.19',9,'nuklider','E','(2/0/0)',
@@ -2576,7 +2585,7 @@ u('9.36',9,'nuklider','C','(0/2/0)',
 u('8.48',8,'falt','E','(2/0/0)',
 `<p>En kula med laddningen 3,0 nC placeras i ett elektriskt fält med fältstyrkan 5000 V/m.</p>
 <p>Hur stor kraft verkar på kulan?</p>`,
-`<p>F = qE = 3,0·10⁻⁹·5000 = <strong>1,5·10⁻⁵ N</strong></p>`),
+`<p>Kraften på en laddning i ett fält: F = q·E</p><p>F = 3,0·10⁻⁹·5000 = <strong>1,5·10⁻⁵ N</strong></p>`),
 
 u('8.49',8,'falt','C','(1/2/0)',
 `<p>Ett batteri på 12 V driver ström genom tre lika stora resistorer i serie. Batteriets minuspol är jordad.</p>
@@ -2597,11 +2606,599 @@ u('8.50',8,'falt','A','(0/1/2)',
 );
 
 
+
+/* ═══════════ ritbibliotek ═══════════ */
+const nn=x=>String(parseFloat(x.toFixed(4))).replace('.',',');
+const SV=(w,h,c)=>`<svg viewBox="0 0 ${w} ${h}" style="max-width:${w}px;margin:12px 0">${c}</svg>`;
+const L=(a,b,c,d,s='#2B2527',w=2)=>`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="${s}" stroke-width="${w}" stroke-linecap="square"/>`;
+const T=(x,y,t,o={})=>`<text x="${x}" y="${y}" text-anchor="${o.a||'middle'}" font-family="IBM Plex Mono" font-size="${o.s||11.5}" font-weight="${o.w||400}" fill="${o.c||'#5C575E'}">${t}</text>`;
+const PIL=(a,b,c,d)=>{const v=Math.atan2(d-b,c-a),h=10,br=4.6;
+ const x=c-h*Math.cos(v), y=d-h*Math.sin(v), px=-Math.sin(v)*br, py=Math.cos(v)*br;
+ return `<line x1="${a}" y1="${b}" x2="${x}" y2="${y}" stroke="#B43123" stroke-width="2.3"/>`+
+  `<polygon points="${c},${d} ${x+px},${y+py} ${x-px},${y-py}" fill="#B43123"/>`;};
+
+/* diagram. o = {xl,yl,xmax,ymax,ymin,xs,ys}; serier = [{p:[[x,y]..],n:namn,pk:punkter,f:färg}] */
+function DIA(serier,o){
+  const W=500,H=286,ml=54,mr=14,mt=26,mb=40, ymin=o.ymin||0;
+  const X=v=>ml+v/o.xmax*(W-ml-mr), Y=v=>H-mb-(v-ymin)/(o.ymax-ymin)*(H-mb-mt);
+  let s=`<rect x="${ml}" y="${mt}" width="${W-ml-mr}" height="${H-mt-mb}" fill="#fff"/>`;
+  for(let i=ymin;i<=o.ymax+1e-9;i+=o.ys) s+=L(ml,Y(i),W-mr,Y(i),'#E4E3E6',1)+T(ml-8,Y(i)+4,nn(i),{a:'end',s:10.5});
+  for(let i=0;i<=o.xmax+1e-9;i+=o.xs) s+=L(X(i),mt,X(i),H-mb,'#E4E3E6',1)+T(X(i),H-mb+16,nn(i),{s:10.5});
+  const y0=Y(Math.max(ymin,0));
+  s+=L(ml,mt,ml,H-mb)+L(ml,y0,W-mr,y0);
+  s+=T(ml-38,14,o.yl,{a:'start',w:600,c:'#2B2527'})+T(W-mr,H-4,o.xl,{a:'end',w:600,c:'#2B2527'});
+  serier.forEach(se=>{
+    const f=se.f||'#B43123';
+    s+=`<polyline points="${se.p.map(q=>X(q[0])+','+Y(q[1])).join(' ')}" fill="none" stroke="${f}" stroke-width="2.4" stroke-linejoin="round"/>`;
+    if(se.pk) se.p.forEach(q=>s+=`<circle cx="${X(q[0])}" cy="${Y(q[1])}" r="3.3" fill="${f}"/>`);
+    if(se.n){const q=se.p[se.p.length-1];s+=T(X(q[0])-5,Y(q[1])-9,se.n,{a:'end',w:600,c:f});}
+  });
+  return SV(W,H,s);
+}
+/* kraftfigur. kr = [{v:vinkel°,t:etikett,l:längdfaktor}] */
+function KRAFT(kr,o={}){
+  const bw=76,bh=48,W=400,cx=195;
+  const upp=kr.some(k=>k.v>10&&k.v<170), ner=kr.some(k=>k.v>190&&k.v<350);
+  const övre=upp?92:(o.tak?58:32), undre=ner?92:32, cy=övre+bh/2, H=övre+bh+undre;
+  let s='';
+  if(o.golv) s+=`<rect x="15" y="${cy+bh/2}" width="370" height="9" fill="#EDEEF1"/>`+L(15,cy+bh/2,385,cy+bh/2);
+  if(o.tak) s+=`<rect x="15" y="${cy-bh/2-44}" width="370" height="9" fill="#EDEEF1"/>`+L(15,cy-bh/2-35,385,cy-bh/2-35);
+  s+=`<rect x="${cx-bw/2}" y="${cy-bh/2}" width="${bw}" height="${bh}" rx="3" fill="#fff" stroke="#2B2527" stroke-width="2"/>`;
+  /* p = angreppspunkt: c mitt (tyngdpunkt), b underkant, t överkant, v/h sida */
+  kr.forEach(k=>{
+    const r=k.v*Math.PI/180, c=Math.cos(r), si=Math.sin(r);
+    const pt=k.p||(k.v===270?'c':k.v===90?'b':c>0?'h':'v');
+    let x0=cx, y0=cy;
+    if(pt==='b'){y0=cy+bh/2; x0=cx+(c?Math.sign(c)*bw*0.34:-20);}
+    else if(pt==='t'){y0=cy-bh/2; x0=cx+(c?Math.sign(c)*bw*0.34:-20);}
+    else if(pt==='v'){x0=cx-bw/2;}
+    else if(pt==='h'){x0=cx+bw/2;}
+    const d=52*(k.l||1);
+    s+=PIL(x0,y0,x0+d*c,y0-d*si);
+    s+=T(x0+(d+20)*c,y0-(d+20)*si+4,k.t,{w:600,c:'#B43123'});
+  });
+  if(kr.some(k=>(k.p||(k.v===270?'c':''))==='c')) s+=`<circle cx="${cx}" cy="${cy}" r="3" fill="#2B2527"/>`;
+  if(o.m) s+= o.tak ? T(cx,cy+bh/2+18,o.m,{s:11.5,w:600,c:'#2B2527'})
+                    : T(cx+bw/2+6,cy-bh/2-7,o.m,{a:'start',s:11.5,w:600,c:'#2B2527'});
+  return SV(W,H,s);
+}
+/* lutande plan */
+function PLAN(th,txt,o={}){
+  const W=440,H=210,x0=25,y0=170,Ln=390,r=th*Math.PI/180;
+  const xt=x0+Ln, yt=y0-Ln*Math.tan(r);
+  let s=`<polygon points="${x0},${y0} ${xt},${y0} ${xt},${yt}" fill="#EDEEF1" stroke="#2B2527" stroke-width="2"/>`;
+  const px=x0+Ln*0.52, py=y0-Ln*0.52*Math.tan(r);
+  s+=`<g transform="translate(${px},${py}) rotate(${-th})"><rect x="-26" y="-30" width="52" height="30" rx="3" fill="#fff" stroke="#2B2527" stroke-width="2"/>`+
+     `<text x="0" y="-11" text-anchor="middle" font-family="IBM Plex Mono" font-size="11.5" font-weight="600" fill="#2B2527">${txt}</text></g>`;
+  s+=`<path d="M ${xt-70} ${y0} A 70 70 0 0 0 ${xt-70*Math.cos(r)} ${y0-70*Math.sin(r)}" fill="none" stroke="#B43123" stroke-width="2"/>`;
+  s+=T(xt-95,y0-12,th+'°',{s:13,w:600,c:'#B43123'});
+  if(o.drag) s+=PIL(px+22,py-40,px+70,py-40-70*Math.tan(r))+T(px+96,py-46-70*Math.tan(r),o.drag,{w:600,c:'#B43123'});
+  return SV(W,H,s);
+}
+/* kopplingsschema. typ: serie|parallell|kombo|ampere */
+function KRETS(typ,lbl,U){
+  const Lx=120,Rx=430,Ty=48,By=210,M=300;
+  const R=(x,y,d,t,si)=>{const l=56,b=20;
+    return d==='h'?`<rect x="${x-l/2}" y="${y-b/2}" width="${l}" height="${b}" fill="#fff" stroke="#2B2527" stroke-width="2"/>`+T(x,y-b/2-8,t,{w:600,c:'#2B2527'})
+    :`<rect x="${x-b/2}" y="${y-l/2}" width="${b}" height="${l}" fill="#fff" stroke="#2B2527" stroke-width="2"/>`+T(si==='v'?x-b/2-7:x+b/2+7,y+4,t,{a:si==='v'?'end':'start',w:600,c:'#2B2527'});};
+  const B=(x,y,t)=>L(x-15,y-8,x+15,y-8,'#2B2527',2.6)+L(x-6,y+8,x+6,y+8,'#2B2527',4.5)+T(x-22,y+5,t,{a:'end',w:600,c:'#B43123'});
+  const nod=(x,y)=>`<circle cx="${x}" cy="${y}" r="3.6" fill="#2B2527"/>`;
+  let s=L(Lx,Ty,Lx,113)+L(Lx,147,Lx,By)+B(Lx,130,U);
+  if(typ==='serie') s+=L(Lx,Ty,Rx,Ty)+L(Rx,Ty,Rx,By)+L(Rx,By,Lx,By)+R(225,Ty,'h',lbl[0])+R(355,Ty,'h',lbl[1]);
+  else if(typ==='parallell') s+=L(Lx,Ty,Rx,Ty)+L(Rx,By,Lx,By)+L(M,Ty,M,By)+L(Rx,Ty,Rx,By)+R(M,129,'v',lbl[0],'v')+R(Rx,129,'v',lbl[1],'h')+nod(M,Ty)+nod(M,By);
+  else if(typ==='ampere') s+=L(Lx,Ty,Rx,Ty)+L(Rx,Ty,Rx,By)+L(Rx,By,Lx,By)+R(340,Ty,'h',lbl[0])+
+    `<circle cx="225" cy="${Ty}" r="17" fill="#fff" stroke="#2B2527" stroke-width="2"/>`+T(225,Ty+5,lbl[1]||'A',{s:13,w:600,c:'#2B2527'});
+  else s+=L(Lx,Ty,Rx,Ty)+L(Rx,By,Lx,By)+L(M,Ty,M,By)+L(Rx,Ty,Rx,By)+R(215,Ty,'h',lbl[0])+R(M,132,'v',lbl[1],'v')+R(Rx,132,'v',lbl[2],'h')+nod(M,Ty)+nod(M,By);
+  return SV(500,250,s);
+}
+/* kloss på bord med snöre över trissa */
+function TRISSA(m1,m2){
+  let s=`<rect x="30" y="120" width="270" height="10" fill="#EDEEF1"/>`+L(30,120,300,120);
+  s+=`<rect x="90" y="88" width="66" height="32" rx="3" fill="#fff" stroke="#2B2527" stroke-width="2"/>`+T(123,109,m1,{w:600,c:'#2B2527'});
+  s+=L(156,96,300,96)+`<circle cx="300" cy="112" r="16" fill="#fff" stroke="#2B2527" stroke-width="2"/>`;
+  s+=L(316,112,316,180)+`<rect x="292" y="180" width="48" height="30" rx="3" fill="#fff" stroke="#2B2527" stroke-width="2"/>`+T(316,200,m2,{w:600,c:'#2B2527'});
+  return SV(400,235,s);
+}
+/* u-rör */
+function UROR(h1,h2,n1,n2){
+  const xa=70,xb=210,br=34,yb=215,sk=3.6,ytop=30;
+  const yA=yb-h1*sk, yB=yb-h2*sk;
+  let s='';
+  /* vätska */
+  s+=`<rect x="${xa}" y="${yA}" width="${br}" height="${yb-yA}" fill="#DCE6F2"/>`;
+  s+=`<rect x="${xb}" y="${yB}" width="${br}" height="${yb-yB}" fill="#DCE6F2"/>`;
+  s+=`<rect x="${xa}" y="${yb-br}" width="${xb+br-xa}" height="${br}" fill="#DCE6F2"/>`;
+  /* väggar */
+  const v=(x1,y1,x2,y2)=>L(x1,y1,x2,y2,'#2B2527',2.5);
+  s+=v(xa,ytop,xa,yb)+v(xa+br,ytop,xa+br,yb-br)+v(xb,ytop,xb,yb-br)+v(xb+br,ytop,xb+br,yb);
+  s+=v(xa,yb,xb+br,yb)+v(xa+br,yb-br,xb,yb-br);
+  /* ytor och mått */
+  s+=L(xa,yA,xa+br,yA,'#B43123',2.4)+L(xb,yB,xb+br,yB,'#B43123',2.4);
+  s+=L(xa-16,yA,xa-16,yb,'#5C575E',1.3)+T(xa-22,(yA+yb)/2,n1,{a:'end',w:600,c:'#B43123'});
+  s+=L(xb+br+16,yB,xb+br+16,yb,'#5C575E',1.3)+T(xb+br+22,(yB+yb)/2,n2,{a:'start',w:600,c:'#B43123'});
+  return SV(330,240,s);
+}
+/* punktladdningar på en linje. list=[{q:'+5 nC',neg:bool}], avst=['4,0 cm',..] */
+function LADD(list,avst){
+  const W=460,y=95, steg=W/(list.length+1);
+  let s='';
+  list.forEach((k,i)=>{const x=steg*(i+1);
+    s+=`<circle cx="${x}" cy="${y}" r="20" fill="${k.neg?'#EAF0F8':'#FBF0EE'}" stroke="${k.neg?'#2A5D9E':'#B43123'}" stroke-width="2"/>`;
+    s+=T(x,y+5,k.neg?'–':'+',{s:17,w:600,c:k.neg?'#2A5D9E':'#B43123'})+T(x,y-30,k.q,{w:600,c:'#2B2527'});
+    if(i<list.length-1){const x2=steg*(i+2);
+      s+=L(x+22,y+42,x2-22,y+42,'#5C575E',1.4)+T((x+x2)/2,y+38,avst[i]||'',{s:10.5});}
+  });
+  return SV(W,160,s);
+}
+/* hävstång/balk med två laster */
+function HAV(la,lb,ta,tb,o={}){
+  const W=470,cx=235,y=104;
+  const sk=Math.min(140,168/Math.max(la,lb));          // båda armarna ska rymmas
+  const xa=cx-la*sk, xb=cx+lb*sk;
+  let s=L(xa-26,y,xb+26,y,'#2B2527',3);
+  s+=`<polygon points="${cx},${y+5} ${cx-17},${y+42} ${cx+17},${y+42}" fill="#EDEEF1" stroke="#2B2527" stroke-width="2"/>`;
+  s+=PIL(xa,y,xa,y-54)+PIL(xb,y,xb,y-54);
+  s+=T(xa,y-62,ta,{w:600,c:'#B43123'})+T(xb,y-62,tb,{w:600,c:'#B43123'});
+  const mått=(x1,x2,txt)=>L(x1,y+56,x2,y+56,'#9A959C',1.2)+L(x1,y+51,x1,y+61,'#9A959C',1.2)+
+    L(x2,y+51,x2,y+61,'#9A959C',1.2)+T((x1+x2)/2,y+74,txt,{s:10.5});
+  s+=mått(xa,cx,o.a||nn(la)+' m')+mått(cx,xb,o.b||nn(lb)+' m');
+  return SV(W,190,s);
+}
+/* två vagnar före/efter */
+function VAGN(rader){
+  let s='',y=40;
+  rader.forEach(r=>{
+    s+=T(14,y+22,r.n,{a:'start',w:600,c:'#5C575E'});
+    r.v.forEach(v=>{
+      s+=`<rect x="${v.x}" y="${y}" width="76" height="34" rx="4" fill="#fff" stroke="#2B2527" stroke-width="2"/>`+T(v.x+38,y+22,v.m,{w:600,c:'#2B2527'});
+      s+=`<circle cx="${v.x+18}" cy="${y+40}" r="6" fill="#2B2527"/><circle cx="${v.x+58}" cy="${y+40}" r="6" fill="#2B2527"/>`;
+      if(v.p) s+=PIL(v.x+38,y-12,v.x+38+(v.h?42:-42),y-12)+T(v.x+38+(v.h?50:-50),y-8,v.p,{a:v.h?'start':'end',w:600,c:'#B43123'});
+      else if(v.s) s+=T(v.x+38,y-8,v.s,{w:600,c:'#5C575E'});
+    });
+    y+=100;
+  });
+  return SV(430,y-30,`<line x1="10" y1="${y-52}" x2="420" y2="${y-52}" stroke="#EDEEF1" stroke-width="0"/>`+s);
+}
+/* höjdprofil för bana */
+function BANA(pkt,etiketter){
+  const W=470,H=210,ml=40,y0=175,sk=(y0-30)/Math.max(...pkt.map(p=>p[1]));
+  const X=v=>ml+v/Math.max(...pkt.map(p=>p[0]))*(W-ml-30), Y=v=>y0-v*sk;
+  let s=`<path d="M${X(pkt[0][0])} ${y0} `+pkt.map(p=>`L${X(p[0])} ${Y(p[1])}`).join(' ')+` L${X(pkt[pkt.length-1][0])} ${y0} Z" fill="#EDEEF1" stroke="#2B2527" stroke-width="2"/>`;
+  s+=L(ml-15,y0,W-15,y0,'#2B2527',2);
+  (etiketter||[]).forEach(e=>{
+    s+=`<circle cx="${X(e.x)}" cy="${Y(e.y)}" r="5.5" fill="#B43123"/>`+T(X(e.x),Y(e.y)-12,e.t,{w:600,c:'#B43123'});
+    if(e.h) s+=L(X(e.x),Y(e.y),X(e.x),y0,'#5C575E',1.2)+T(X(e.x)+22,(Y(e.y)+y0)/2,e.h,{s:10.5,a:'start'});
+  });
+  return SV(W,H,s);
+}
+/* parallella plattor med fältlinjer */
+function PLATTOR(U,d,o={}){
+  const W=420,x1=70,x2=350,yt=45,yb=185;
+  let s=`<rect x="${x1}" y="${yt-9}" width="${x2-x1}" height="9" fill="#2B2527"/><rect x="${x1}" y="${yb}" width="${x2-x1}" height="9" fill="#2B2527"/>`;
+  for(let i=0;i<8;i++){const x=x1+22+i*((x2-x1-44)/7); s+=PIL(x,yt+4,x,yb-4);}
+  s+=T(x1-12,yt+5,'+',{a:'end',s:17,w:600,c:'#B43123'})+T(x1-12,yb+8,'–',{a:'end',s:17,w:600,c:'#2A5D9E'});
+  s+=T((x1+x2)/2,yt-18,U,{w:600,c:'#2B2527'})+T(x2+16,(yt+yb)/2+4,d,{a:'start',w:600,c:'#5C575E'});
+  if(o.p) s+=`<circle cx="${(x1+x2)/2}" cy="${(yt+yb)/2}" r="11" fill="#fff" stroke="#2B2527" stroke-width="2"/>`+T((x1+x2)/2,(yt+yb)/2+4,o.p,{s:11,w:600,c:'#2B2527'});
+  return SV(W,220,s);
+}
+/* behållare med vätska och flytande kropp */
+function KARL(o){
+  const W=380,x1=60,x2=320,yt=40,yb=200, yv=yt+(yb-yt)*(1-(o.niva||0.75));
+  let s=`<path d="M${x1} ${yt} L${x1} ${yb} L${x2} ${yb} L${x2} ${yt}" fill="none" stroke="#2B2527" stroke-width="2.5"/>`;
+  s+=`<rect x="${x1+2}" y="${yv}" width="${x2-x1-4}" height="${yb-yv-2}" fill="#DCE6F2"/>`;
+  s+=L(x1+2,yv,x2-2,yv,'#2A5D9E',2);
+  if(o.kropp){const b=o.kropp, kh=54, ner=kh*b.andel;
+    s+=`<rect x="${(x1+x2)/2-40}" y="${yv-kh+ner}" width="80" height="${kh}" rx="3" fill="#fff" stroke="#2B2527" stroke-width="2"/>`;
+    s+=T((x1+x2)/2,yv-kh+ner+kh/2+4,b.t,{w:600,c:'#2B2527'});}
+  if(o.djup) s+=L(x2+14,yv,x2+14,yb,'#5C575E',1.3)+T(x2+22,(yv+yb)/2,o.djup,{a:'start',s:10.5});
+  return SV(W,225,s);
+}
+
+BANK.push(
+/* ══ K3 rörelsediagram ══ */
+u('3.31',3,'diagram','E','(2/1/0)',
+`<p>Diagrammet visar farten hos en cykel.</p>${DIA([{p:[[0,0],[6,12]],pk:1}],{xl:'t (s)',yl:'v (m/s)',xmax:6,ymax:12,xs:1,ys:2})}
+<ol><li>Vilken fart har cykeln efter 4,0 s?</li><li>Bestäm accelerationen.</li><li>Hur långt har cykeln kommit på 6,0 s?</li></ol>`,
+`<p>a) <strong>8,0 m/s</strong></p><p>b) a = 12/6,0 = <strong>2,0 m/s²</strong></p><p>c) Arean = 12·6,0/2 = <strong>36 m</strong></p>`),
+
+u('3.32',3,'diagram','E','(2/1/0)',
+`<p>Diagrammet visar en persons läge längs en rak gång.</p>${DIA([{p:[[0,0],[4,8],[7,8],[12,0]]}],{xl:'t (s)',yl:'s (m)',xmax:12,ymax:8,xs:2,ys:2})}
+<ol><li>Hur långt från start är personen efter 4,0 s?</li><li>Vad gör personen mellan 4 och 7 s?</li>
+<li>Vilken fart har personen under sista delen?</li></ol>`,
+`<p>a) <strong>8,0 m</strong></p><p>b) Står stilla — kurvan är vågrät</p>
+<p>c) v = −8,0/5,0 = <strong>1,6 m/s tillbaka mot start</strong></p>`),
+
+u('3.33',3,'diagram','C','(1/2/0)',
+`<p>Diagrammet visar farten hos ett tåg.</p>${DIA([{p:[[0,0],[20,15],[60,15],[80,0]]}],{xl:'t (s)',yl:'v (m/s)',xmax:80,ymax:15,xs:10,ys:5})}
+<ol><li>Beskriv rörelsen i tre faser.</li><li>Bestäm accelerationen i första fasen.</li>
+<li>Bestäm den totala sträckan ur arean.</li></ol>`,
+`<p>a) Accelererar 0–20 s, konstant fart 20–60 s, bromsar 60–80 s</p>
+<p>b) a = 15/20 = <strong>0,75 m/s²</strong></p>
+<p>c) 150 + 600 + 150 = <strong>900 m</strong></p>`),
+
+u('3.34',3,'diagram','C','(1/2/0)',
+`<p>Diagrammet visar farten hos en joggare. Negativa värden betyder rörelse tillbaka.</p>${DIA([{p:[[0,4],[8,-2],[14,-2]]}],{xl:'t (s)',yl:'v (m/s)',xmax:14,ymax:4,ymin:-4,xs:2,ys:2})}
+<ol><li>När vänder joggaren?</li><li>Bestäm accelerationen under de första 8 sekunderna.</li>
+<li>Hur långt från startpunkten är joggaren efter 14 s?</li></ol>`,
+`<p>a) Där kurvan skär tidsaxeln: <strong>t = 5,3 s</strong></p>
+<p>b) a = (−2 − 4)/8 = <strong>−0,75 m/s²</strong></p>
+<p>c) Framåt 4·5,33/2 = 10,7 m, tillbaka 2·2,67/2 + 2·6 = 14,7 m → <strong>4,0 m bakom start</strong></p>`),
+
+u('3.35',3,'diagram','C','(0/2/0)',
+`<p>Diagrammet visar två cyklister som startar samtidigt från samma plats.</p>${DIA([{p:[[0,0],[20,100]],n:'A'},{p:[[0,0],[8,20],[20,110]],n:'B',f:'#2A5D9E'}],{xl:'t (s)',yl:'s (m)',xmax:20,ymax:120,xs:4,ys:20})}
+<ol><li>Vilken cyklist leder efter 10 s?</li><li>När är de jämsides?</li>
+<li>Vilken cyklist har högst fart i slutet? Motivera med kurvornas lutning.</li></ol>`,
+`<p>a) <strong>A</strong> — dess kurva ligger högre</p>
+<p>b) Där kurvorna korsar varandra, ungefär <strong>t = 17 s</strong></p>
+<p>c) <strong>B</strong>, eftersom dess kurva är brantare på slutet. B kör om A just i korsningspunkten.</p>`),
+
+u('3.36',3,'diagram','C','(1/2/0)',
+`<p>Diagrammet visar accelerationen hos en vagn som står stilla vid t = 0.</p>${DIA([{p:[[0,3],[4,3],[4,0],[7,0],[7,-2],[13,-2]]}],{xl:'t (s)',yl:'a (m/s²)',xmax:14,ymax:4,ymin:-3,xs:2,ys:1})}
+<ol><li>Vilken fart har vagnen efter 4,0 s?</li><li>Vad händer mellan 4 och 7 s?</li>
+<li>När står vagnen stilla igen?</li></ol>`,
+`<p>a) Arean: 3,0·4,0 = <strong>12 m/s</strong></p>
+<p>b) a = 0, alltså konstant fart 12 m/s</p>
+<p>c) Retardationen 2 m/s² tar 6,0 s att bromsa bort 12 m/s → <strong>t = 13 s</strong></p>`),
+
+u('3.37',3,'diagram','A','(0/2/2)',
+`<p>Diagrammet visar två bilar på samma väg.</p>${DIA([{p:[[0,20],[10,20]],n:'A'},{p:[[0,0],[10,40]],n:'B',f:'#2A5D9E'}],{xl:'t (s)',yl:'v (m/s)',xmax:10,ymax:40,xs:2,ys:10})}
+<ol><li>När har bilarna samma fart?</li><li>Vilken bil har kört längst efter 5,0 s?</li>
+<li>När har de kört lika långt? Lös med areorna.</li></ol>`,
+`<p>a) 4t = 20 → <strong>t = 5,0 s</strong></p>
+<p>b) A: 100 m. B: 50 m → <strong>A leder</strong></p>
+<p>c) 20t = 4t²/2 → t = <strong>10 s</strong>, då har båda kört 200 m</p>`),
+
+u('3.38',3,'diagram','A','(0/1/2)',
+`<p>Diagrammet visar farten hos ett föremål som kastas rakt upp.</p>${DIA([{p:[[0,20],[4.07,-20]]}],{xl:'t (s)',yl:'v (m/s)',xmax:4,ymax:20,ymin:-20,xs:1,ys:10})}
+<ol><li>Vad betyder punkten där kurvan skär tidsaxeln?</li><li>Bestäm accelerationen ur lutningen.</li>
+<li>Hur högt når föremålet? Använd arean.</li></ol>`,
+`<p>a) Föremålet är i sin högsta punkt — farten är noll och riktningen vänder</p>
+<p>b) a = −40/4,07 = <strong>−9,8 m/s²</strong>, alltså tyngdaccelerationen</p>
+<p>c) Arean ovanför axeln: 20·2,04/2 = <strong>20 m</strong></p>`),
+
+u('3.39',3,'konstacc','C','(1/2/0)',
+`<p>Diagrammet visar en bils fart under en inbromsning.</p>${DIA([{p:[[0,25],[5,0]],pk:1}],{xl:'t (s)',yl:'v (m/s)',xmax:5,ymax:25,xs:1,ys:5})}
+<ol><li>Bestäm retardationen.</li><li>Bestäm bromssträckan ur arean.</li>
+<li>Hur lång blir bromssträckan om farten är dubbelt så hög?</li></ol>`,
+`<p>a) a = −25/5,0 = <strong>−5,0 m/s²</strong></p><p>b) 25·5,0/2 = <strong>63 m</strong></p>
+<p>c) Sträckan går som v², alltså <strong>fyra gånger</strong>: 250 m</p>`),
+
+u('3.40',3,'diagram','E','(2/0/0)',
+`<p>Diagrammet visar farten hos en hiss.</p>${DIA([{p:[[0,0],[3,2],[9,2],[12,0]]}],{xl:'t (s)',yl:'v (m/s)',xmax:12,ymax:2,xs:2,ys:0.5})}
+<ol><li>Hur länge håller hissen konstant fart?</li><li>Hur långt åker hissen totalt?</li></ol>`,
+`<p>a) Från 3 s till 9 s, alltså <strong>6,0 s</strong></p>
+<p>b) 3 + 12 + 3 = <strong>18 m</strong> (två trianglar och en rektangel)</p>`),
+
+/* ══ K4 kraftfigurer ══ */
+u('4.52',4,'newton','E','(2/0/0)',
+`<p>Figuren visar krafterna på en låda med massan 6,0 kg.</p>${KRAFT([{v:0,t:'42 N',p:'h'},{v:180,t:'15 N',l:.6,p:'v'}],{m:'6,0 kg',golv:1})}
+<ol><li>Hur stor är den resulterande kraften?</li><li>Vilken acceleration får lådan?</li></ol>`,
+`<p>a) 42 − 15 = <strong>27 N åt höger</strong></p><p>b) a = 27/6,0 = <strong>4,5 m/s²</strong></p>`),
+
+u('4.53',4,'newton','C','(1/2/0)',
+`<p>Figuren visar tre krafter på en låda med massan 4,0 kg som ligger på ett friktionsfritt golv.</p>${KRAFT([{v:0,t:'30 N',p:'h'},{v:90,t:'N = 50 N',l:.9,p:'b'},{v:270,t:'mg = 50 N',l:.9,p:'c'}],{m:'4,0 kg',golv:1})}
+<ol><li>Vilka krafter tar ut varandra?</li><li>Hur stor är den resulterande kraften?</li>
+<li>Vilken acceleration får lådan, och åt vilket håll?</li></ol>`,
+`<p>a) De lodräta: tyngdkraften nedåt och normalkraften uppåt, båda 50 N</p>
+<p>b) Kvar blir <strong>30 N åt höger</strong></p><p>c) a = 30/4,0 = <strong>7,5 m/s² åt höger</strong></p>`),
+
+u('4.54',4,'newton','C','(0/2/0)',
+`<p>Figuren visar en låda som hänger stilla i två snören.</p>${KRAFT([{v:120,t:'S₁',p:'t'},{v:60,t:'S₂',p:'t'},{v:270,t:'mg',p:'c'}],{m:'m',tak:1})}
+<ol><li>Vad måste gälla för summan av alla krafter?</li><li>Vad gäller för snörenas vågräta komposanter?</li>
+<li>Om lådan väger 8,0 kg och båda snörena bildar 30° mot lodlinjen — hur stor är spännkraften i vardera?</li></ol>`,
+`<p>a) Den är noll, eftersom lådan är i vila</p>
+<p>b) De är lika stora och motriktade, annars skulle lådan dras i sidled</p>
+<p>c) 2S·cos 30° = 8,0·9,82 → S = <strong>45 N</strong></p>`),
+
+u('4.55',4,'newton','A','(0/2/1)',
+`<p>Figuren visar krafterna på en fallskärmshoppare i ett visst ögonblick.</p>${KRAFT([{v:270,t:'mg = 785 N',p:'c'},{v:90,t:'F_luft = 600 N',l:.76,p:'t'}],{m:'80 kg'})}
+<ol><li>Hur stor är den resulterande kraften?</li><li>Vilken acceleration har hopparen?</li>
+<li>Vad händer med luftmotståndet när farten ökar, och vad blir slutresultatet?</li></ol>`,
+`<p>a) 785 − 600 = <strong>185 N nedåt</strong></p><p>b) a = 185/80 = <strong>2,3 m/s²</strong></p>
+<p>c) Luftmotståndet växer med farten tills det är 785 N. Då blir resultanten noll och hopparen faller med konstant fart.</p>`),
+
+u('4.56',4,'newton','C','(1/2/0)',
+`<p>En kloss på ett friktionsfritt bord är kopplad till en hängande vikt via ett snöre över en trissa.</p>${TRISSA('3,0 kg','1,0 kg')}
+<ol><li>Vilken kraft driver systemet?</li><li>Vilken acceleration får klossen?</li>
+<li>Hur stor är spännkraften i snöret?</li></ol>`,
+`<p>a) Vikten tyngd: 1,0·9,82 = <strong>9,8 N</strong></p>
+<p>b) a = 9,82/4,0 = <strong>2,5 m/s²</strong></p>
+<p>c) S = m₁a = 3,0·2,46 = <strong>7,4 N</strong></p>`),
+
+u('4.57',4,'friktion','E','(2/1/0)',
+`<p>Figuren visar en låda på ett lutande plan.</p>${PLAN(20,'15 kg')}
+<ol><li>Hur stor är tyngdkraftens komposant längs planet?</li><li>Hur stor är normalkraften?</li></ol>`,
+`<p>a) mg·sin 20° = 147,3·0,342 = <strong>50 N</strong></p>
+<p>b) N = mg·cos 20° = <strong>138 N</strong></p>`),
+
+u('4.58',4,'friktion','C','(1/2/0)',
+`<p>Lådan i figuren glider nedför planet med konstant fart.</p>${PLAN(26,'22 kg')}
+<ol><li>Hur stor är friktionskraften?</li><li>Bestäm friktionstalet.</li>
+<li>Vad skulle hända om planet lutade 30° i stället?</li></ol>`,
+`<p>a) Konstant fart → f = mg·sin 26° = <strong>95 N</strong></p>
+<p>b) μ = tan 26° = <strong>0,49</strong></p>
+<p>c) Då blir drivkraften större än den maximala friktionen och lådan accelererar nedför.</p>`),
+
+u('4.59',4,'friktion','C','(0/2/1)',
+`<p>Lådan dras uppför planet med en kraft parallell med ytan.</p>${PLAN(18,'40 kg',{drag:'F'})}
+<ol><li>Vilka krafter verkar längs planet?</li><li>Friktionstalet är 0,30. Hur stor måste F vara för konstant fart uppför?</li>
+<li>Hur stor kraft krävs för att hålla lådan stilla?</li></ol>`,
+`<p>a) F uppför, tyngdkomposanten mg·sin 18° nedför och friktionen nedför</p>
+<p>b) F = mg(sin 18° + 0,30·cos 18°) = 121 + 112 = <strong>233 N</strong></p>
+<p>c) Nu verkar friktionen uppför: F = 121 − 112 = <strong>9 N</strong></p>`),
+
+u('4.60',4,'moment','E','(2/0/0)',
+`<p>Figuren visar en hävstång i jämvikt.</p>${HAV(0.4,1.2,'F₁','F₂')}
+<ol><li>Vad säger momentjämvikten?</li><li>Om F₁ = 300 N, hur stor är F₂?</li></ol>`,
+`<p>a) F₁·0,40 = F₂·1,2</p><p>b) F₂ = 300·0,40/1,2 = <strong>100 N</strong></p>`),
+
+u('4.61',4,'moment','C','(1/2/0)',
+`<p>Två barn sitter på en gungbräda som är upplagd på mitten.</p>${HAV(1.5,1.0,'35 kg','?')}
+<ol><li>Hur tungt måste det högra barnet vara för jämvikt?</li>
+<li>Barnet till höger väger i verkligheten 48 kg. Åt vilket håll tippar brädan?</li></ol>`,
+`<p>a) m = 35·1,5/1,0 = <strong>53 kg</strong></p>
+<p>b) 48 kg ger momentet 471 Nm mot vänsterns 515 Nm → brädan tippar <strong>åt vänster</strong></p>`),
+
+u('4.62',4,'moment','C','(0/2/0)',
+`<p>En balk vilar på ett stöd. Två laster hänger enligt figuren.</p>${HAV(0.8,2.0,'600 N','240 N')}
+<ol><li>Beräkna momentet från vardera lasten.</li><li>Är balken i jämvikt?</li>
+<li>Var måste den högra lasten sitta för jämvikt?</li></ol>`,
+`<p>a) Vänster: 600·0,80 = 480 Nm. Höger: 240·2,0 = 480 Nm</p>
+<p>b) <strong>Ja</strong>, momenten är lika stora och motriktade</p>
+<p>c) Precis där den sitter, 2,0 m från stödet</p>`)
+);
+
+
+BANK.push(
+/* ══ K4 fjädrar ══ */
+u('4.63',4,'fjadrar','C','(1/2/0)',
+`<p>Diagrammet visar kraften som funktion av förlängningen för en fjäder.</p>${DIA([{p:[[0,0],[0.25,20]],pk:1}],{xl:'Δl (m)',yl:'F (N)',xmax:0.25,ymax:20,xs:0.05,ys:5})}
+<ol><li>Bestäm fjäderkonstanten ur lutningen.</li><li>Vilken kraft krävs för förlängningen 0,15 m?</li>
+<li>Vad betyder arean under linjen?</li></ol>`,
+`<p>a) k = 20/0,25 = <strong>80 N/m</strong></p><p>b) F = 80·0,15 = <strong>12 N</strong></p>
+<p>c) Den lagrade energin i fjädern. Vid 0,25 m: 20·0,25/2 = 2,5 J</p>`),
+
+u('4.64',4,'fjadrar','C','(0/2/0)',
+`<p>Diagrammet visar två fjädrar.</p>${DIA([{p:[[0,0],[0.2,24]],n:'A'},{p:[[0,0],[0.2,10]],n:'B',f:'#2A5D9E'}],{xl:'Δl (m)',yl:'F (N)',xmax:0.2,ymax:24,xs:0.05,ys:4})}
+<ol><li>Vilken fjäder är styvast? Motivera.</li><li>Bestäm båda fjäderkonstanterna.</li>
+<li>Samma vikt hängs i båda. Vilken dras ut mest?</li></ol>`,
+`<p>a) <strong>A</strong> — brantare linje betyder att det krävs mer kraft per meter</p>
+<p>b) k_A = <strong>120 N/m</strong>, k_B = <strong>50 N/m</strong></p><p>c) <strong>B</strong>, den mjuka fjädern</p>`),
+
+u('4.65',4,'fjadrar','A','(0/1/2)',
+`<p>Diagrammet visar en fjäder som inte följer Hookes lag hela vägen.</p>${DIA([{p:[[0,0],[0.15,30],[0.25,38],[0.3,40]]}],{xl:'Δl (m)',yl:'F (N)',xmax:0.3,ymax:40,xs:0.05,ys:10})}
+<ol><li>Inom vilket område gäller Hookes lag?</li><li>Bestäm fjäderkonstanten i det området.</li>
+<li>Vad händer med fjädern efter 0,15 m?</li></ol>`,
+`<p>a) Där kurvan är rät, alltså <strong>0 till 0,15 m</strong></p>
+<p>b) k = 30/0,15 = <strong>200 N/m</strong></p>
+<p>c) Den blir mjukare per meter och börjar deformeras bestående — den återgår inte helt när kraften släpps.</p>`),
+
+/* ══ K5 ══ */
+u('5.35',5,'arbete','E','(2/1/0)',
+`<p>En vagn rullar friktionsfritt längs banan i figuren och startar från vila i punkt A.</p>${BANA([[0,0],[1,4],[3,4],[5,1.2],[8,1.2],[10,2.6],[12,2.6]],[{x:1,y:4,t:'A',h:'4,0 m'},{x:6.5,y:1.2,t:'B',h:'1,2 m'},{x:11,y:2.6,t:'C',h:'2,6 m'}])}
+<ol><li>I vilken punkt är farten störst?</li><li>Vilken fart har vagnen i B?</li></ol>`,
+`<p>a) I <strong>B</strong> — där är höjden lägst, alltså är rörelseenergin störst</p>
+<p>b) v = √(2g·2,8) = <strong>7,4 m/s</strong></p>`),
+
+u('5.36',5,'arbete','C','(1/2/0)',
+`<p>En berg-och-dalbanevagn startar från vila i A.</p>${BANA([[0,0],[1,30],[4,6],[7,22],[10,10],[12,10]],[{x:1,y:30,t:'A',h:'30 m'},{x:4,y:6,t:'B',h:'6 m'},{x:7,y:22,t:'C',h:'22 m'}])}
+<ol><li>Vilken fart har vagnen i B?</li><li>Vilken fart har den i C?</li>
+<li>Skulle vagnen klara en kulle på 32 m? Motivera.</li></ol>`,
+`<p>a) v = √(2g·24) = <strong>22 m/s</strong></p><p>b) v = √(2g·8) = <strong>12,5 m/s</strong></p>
+<p>c) Nej. Utan energitillskott kan den aldrig nå högre än starthöjden 30 m.</p>`),
+
+u('5.37',5,'arbete','C','(0/2/1)',
+`<p>Diagrammet visar den kraft som verkar på en vagn längs sträckan.</p>${DIA([{p:[[0,20],[4,20],[4,10],[10,10]]}],{xl:'s (m)',yl:'F (N)',xmax:10,ymax:20,xs:2,ys:5})}
+<ol><li>Hur stort arbete uträttas på de första 4,0 m?</li><li>Hur stort arbete uträttas totalt?</li>
+<li>Vagnen väger 5,0 kg och startar från vila. Vilken fart har den efter 10 m?</li></ol>`,
+`<p>a) W = 20·4,0 = <strong>80 J</strong></p><p>b) 80 + 10·6,0 = <strong>140 J</strong></p>
+<p>c) v = √(2·140/5,0) = <strong>7,5 m/s</strong></p>`),
+
+u('5.38',5,'arbete','A','(0/1/2)',
+`<p>Diagrammet visar dragkraften i en pilbåge som funktion av hur långt strängen dras.</p>${DIA([{p:[[0,0],[0.2,180],[0.4,280],[0.6,320]]}],{xl:'x (m)',yl:'F (N)',xmax:0.6,ymax:320,xs:0.1,ys:40})}
+<ol><li>Varför kan man inte använda formeln ½kx² här?</li>
+<li>Uppskatta den lagrade energin ur arean.</li><li>Pilen väger 24 g. Vilken fart får den om 80 % överförs?</li></ol>`,
+`<p>a) Kurvan är inte rät — bågen följer inte Hookes lag</p>
+<p>b) Räkna arean som trapetser: ≈ 18 + 46 + 60 = <strong>124 J</strong></p>
+<p>c) v = √(2·99/0,024) = <strong>91 m/s</strong></p>`),
+
+u('5.39',5,'rorelsemangd','E','(2/1/0)',
+`<p>Figuren visar två vagnar före och efter en kollision. De hakar i varandra.</p>${VAGN([{n:'Före',v:[{x:70,m:'2,0 kg',p:'3,0 m/s',h:1},{x:250,m:'4,0 kg',s:'stilla'}]},{n:'Efter',v:[{x:150,m:'6,0 kg',p:'v = ?',h:1}]}])}
+<ol><li>Hur stor är rörelsemängden före kollisionen?</li><li>Vilken fart får vagnarna efteråt?</li></ol>`,
+`<p>a) p = 2,0·3,0 = <strong>6,0 kg·m/s</strong></p><p>b) v = 6,0/6,0 = <strong>1,0 m/s</strong></p>`),
+
+u('5.40',5,'rorelsemangd','C','(1/2/0)',
+`<p>Figuren visar två vagnar som kör mot varandra och studsar isär.</p>${VAGN([{n:'Före',v:[{x:60,m:'1,5 kg',p:'4,0 m/s',h:1},{x:250,m:'2,5 kg',p:'2,0 m/s'}]},{n:'Efter',v:[{x:60,m:'1,5 kg',p:'1,0 m/s'},{x:250,m:'2,5 kg',p:'v = ?',h:1}]}])}
+<ol><li>Bestäm den totala rörelsemängden före, med höger som positiv riktning.</li>
+<li>Vilken hastighet har den tyngre vagnen efteråt?</li></ol>`,
+`<p>a) p = 1,5·4,0 − 2,5·2,0 = <strong>1,0 kg·m/s</strong></p>
+<p>b) 1,0 = 1,5·(−1,0) + 2,5·v → v = <strong>1,0 m/s åt höger</strong></p>`),
+
+u('5.41',5,'rorelsemangd','C','(0/2/0)',
+`<p>En vagn kör in i en stillastående vagn och blir själv stående efter kollisionen.</p>${VAGN([{n:'Före',v:[{x:60,m:'3,0 kg',p:'2,4 m/s',h:1},{x:250,m:'m = ?',s:'stilla'}]},{n:'Efter',v:[{x:60,m:'3,0 kg',s:'stilla'},{x:250,m:'m = ?',p:'2,4 m/s',h:1}]}])}
+<ol><li>Vad måste gälla för den andra vagnens massa? Motivera med rörelsemängden.</li>
+<li>Är kollisionen elastisk? Kontrollera med rörelseenergin.</li></ol>`,
+`<p>a) 3,0·2,4 = m·2,4 → <strong>m = 3,0 kg</strong>, alltså lika stora massor</p>
+<p>b) Före: 3,0·2,4²/2 = 8,6 J. Efter: samma. <strong>Ja, stöten är elastisk.</strong></p>`),
+
+/* ══ K6 ══ */
+u('6.43',6,'vatsketryck','E','(2/0/0)',
+`<p>Figuren visar en behållare med vatten.</p>${KARL({niva:0.8,djup:'2,5 m'})}
+<ol><li>Hur stort är vätsketrycket vid botten?</li><li>Hur stort är det totala trycket där?</li></ol>`,
+`<p>a) p = 998·9,82·2,5 = <strong>24,5 kPa</strong></p><p>b) 24,5 + 101,3 = <strong>126 kPa</strong></p>`),
+
+u('6.44',6,'vatsketryck','C','(1/2/0)',
+`<p>Ett u-rör innehåller vatten i den ena skänkeln och en okänd vätska i den andra. Vätskorna möts i botten.</p>${UROR(34,28,'34 cm','28 cm')}
+<ol><li>Vilken vätska har högst densitet? Motivera.</li>
+<li>Vattnet står 28 cm och den okända vätskan 34 cm. Bestäm den okända densiteten.</li></ol>`,
+`<p>a) <strong>Vattnet</strong> — den tyngre vätskan behöver en lägre pelare för samma tryck</p>
+<p>b) Trycket vid gränsytan är lika stort från båda hållen: ρ₁·h₁ = ρ₂·h₂</p>
+<p>ρ = 998·28/34 = <strong>822 kg/m³</strong></p>`),
+
+u('6.45',6,'arkimedes','E','(2/1/0)',
+`<p>Figuren visar en kloss som flyter i vatten.</p>${KARL({niva:0.72,kropp:{andel:0.65,t:'kloss'}})}
+<ol><li>Hur stor andel av klossen ligger under ytan?</li><li>Vilken densitet har klossen?</li></ol>`,
+`<p>a) Ungefär <strong>65 %</strong> enligt figuren</p>
+<p>b) ρ = 0,65·998 = <strong>650 kg/m³</strong></p>`),
+
+u('6.46',6,'arkimedes','C','(0/2/0)',
+`<p>Samma kloss läggs i tre olika vätskor: bensin (740 kg/m³), vatten (998 kg/m³) och kvicksilver (13 600 kg/m³). Klossens densitet är 650 kg/m³.</p>${KARL({niva:0.72,kropp:{andel:0.65,t:'650'}})}
+<ol><li>I vilka vätskor flyter klossen?</li><li>Hur stor andel ligger under ytan i bensin?</li>
+<li>Hur stor andel i kvicksilver?</li></ol>`,
+`<p>a) I <strong>alla tre</strong> — klossens densitet är lägst av alla</p>
+<p>b) 650/740 = <strong>88 %</strong></p><p>c) 650/13 600 = <strong>4,8 %</strong>, den ligger nästan ovanpå</p>`),
+
+u('6.47',6,'tryck','C','(1/2/0)',
+`<p>Figuren visar krafterna på en låda som står stilla på ett golv.</p>${KRAFT([{v:90,t:'N',p:'b'},{v:270,t:'mg',p:'c'}],{m:'25 kg',golv:1})}
+<ol><li>Hur stor är normalkraften?</li><li>Lådans bottenyta är 0,25 m². Hur stort tryck ger den mot golvet?</li>
+<li>Lådan ställs på högkant så att ytan halveras. Vad händer med trycket?</li></ol>`,
+`<p>a) N = mg = <strong>246 N</strong></p><p>b) p = 245,5/0,25 = <strong>982 Pa</strong></p>
+<p>c) Trycket <strong>fördubblas</strong> till 1964 Pa — kraften är densamma men ytan halverad</p>`)
+);
+
+
+BANK.push(
+/* ══ K7 ══ */
+u('7.25',7,'fasandring','C','(1/2/0)',
+`<p>Diagrammet visar temperaturen hos 200 g av ett ämne som värms med konstant effekt.</p>${DIA([{p:[[0,20],[15,80],[55,80],[90,210],[130,210],[150,260]]}],{xl:'Q (kJ)',yl:'T (°C)',xmax:150,ymax:280,xs:30,ys:40})}
+<ol><li>Vilken smältpunkt och kokpunkt har ämnet?</li><li>Bestäm smältentalpin.</li>
+<li>Bestäm ångbildningsentalpin.</li></ol>`,
+`<p>a) Platåerna ger smältpunkt <strong>80 °C</strong> och kokpunkt <strong>210 °C</strong></p>
+<p>b) 40 kJ till 0,200 kg → l_s = <strong>200 kJ/kg</strong></p>
+<p>c) 40 kJ på andra platån → l_v = <strong>200 kJ/kg</strong></p>`),
+
+u('7.26',7,'fasandring','C','(0/2/0)',
+`<p>Diagrammet visar 500 g is som värms från −20 °C.</p>${DIA([{p:[[0,-20],[21,0],[188,0],[293,50]]}],{xl:'Q (kJ)',yl:'T (°C)',xmax:300,ymax:60,ymin:-20,xs:50,ys:20})}
+<ol><li>Hur mycket energi går åt innan isen börjar smälta?</li><li>Hur lång är smältfasen i energi räknat?</li>
+<li>Stämmer det med smältentalpin 334 kJ/kg?</li></ol>`,
+`<p>a) <strong>21 kJ</strong> (2100·0,50·20 = 21 kJ)</p><p>b) 188 − 21 = <strong>167 kJ</strong></p>
+<p>c) 167/0,50 = <strong>334 kJ/kg</strong> — det stämmer</p>`),
+
+u('7.27',7,'varme','C','(1/2/0)',
+`<p>Diagrammet visar hur en kopp kaffe svalnar i ett rum som håller 20 °C.</p>${DIA([{p:[[0,85],[10,64],[20,50],[30,41],[40,34],[50,29],[60,26]],pk:1}],{xl:'t (min)',yl:'T (°C)',xmax:60,ymax:90,xs:10,ys:10})}
+<ol><li>Hur mycket har kaffet svalnat de första 10 minuterna?</li>
+<li>Hur mycket svalnar det mellan 50 och 60 minuter?</li><li>Varför avtar avsvalningen?</li></ol>`,
+`<p>a) 85 − 64 = <strong>21 °C</strong></p><p>b) 29 − 26 = <strong>3 °C</strong></p>
+<p>c) Värmeflödet beror på temperaturskillnaden mot rummet. När skillnaden krymper avtar flödet, och kurvan planar ut mot 20 °C.</p>`),
+
+/* ══ K8 kopplingar ══ */
+u('8.51',8,'kopplingar','E','(2/1/0)',
+`<p>Figuren visar en krets.</p>${KRETS('serie',['R₁ = 120 Ω','R₂ = 180 Ω'],'9,0 V')}
+<ol><li>Vad kallas kopplingen?</li><li>Bestäm ersättningsresistansen.</li><li>Hur stor ström går i kretsen?</li></ol>`,
+`<p>a) <strong>Seriekoppling</strong></p><p>b) R = <strong>300 Ω</strong></p><p>c) I = 9,0/300 = <strong>30 mA</strong></p>`),
+
+u('8.52',8,'kopplingar','E','(2/1/0)',
+`<p>Figuren visar en krets.</p>${KRETS('parallell',['R₁ = 200 Ω','R₂ = 300 Ω'],'6,0 V')}
+<ol><li>Vilken spänning ligger över varje resistor?</li><li>Hur stor ström går genom varje resistor?</li>
+<li>Bestäm ersättningsresistansen.</li></ol>`,
+`<p>a) <strong>6,0 V</strong> över båda</p><p>b) 30 mA och 20 mA</p>
+<p>c) R = 200·300/500 = <strong>120 Ω</strong></p>`),
+
+u('8.53',8,'kopplingar','C','(1/2/0)',
+`<p>Figuren visar en blandad koppling.</p>${KRETS('kombo',['R₁ = 50 Ω','R₂ = 100 Ω','R₃ = 100 Ω'],'12 V')}
+<ol><li>Bestäm parallelldelens ersättningsresistans.</li><li>Bestäm kretsens totala resistans.</li>
+<li>Vilken spänning ligger över R₁?</li></ol>`,
+`<p>a) 100·100/200 = <strong>50 Ω</strong></p><p>b) 50 + 50 = <strong>100 Ω</strong></p>
+<p>c) I = 12/100 = 0,12 A → U₁ = 0,12·50 = <strong>6,0 V</strong>, alltså halva batterispänningen</p>`),
+
+u('8.54',8,'kopplingar','C','(0/2/0)',
+`<p>Amperemetern i figuren visar 40 mA.</p>${KRETS('ampere',['R = ?','A'],'12 V')}
+<ol><li>Var i kretsen måste en amperemeter kopplas in, och varför?</li>
+<li>Bestäm resistansen hos R.</li><li>Vilken effekt utvecklas i R?</li></ol>`,
+`<p>a) I serie, så att hela strömmen går genom den</p>
+<p>b) R = 12/0,040 = <strong>300 Ω</strong></p><p>c) P = UI = <strong>0,48 W</strong></p>`),
+
+u('8.55',8,'kopplingar','A','(0/2/1)',
+`<p>Figuren visar en krets där R₂ och R₃ är lika stora.</p>${KRETS('kombo',['R₁ = 80 Ω','R₂','R₃'],'24 V')}
+<ol><li>Strömmen genom batteriet är 0,20 A. Bestäm kretsens totala resistans.</li>
+<li>Bestäm spänningen över R₁ och över parallelldelen.</li><li>Bestäm R₂.</li></ol>`,
+`<p>a) R = 24/0,20 = <strong>120 Ω</strong></p>
+<p>b) U₁ = 0,20·80 = <strong>16 V</strong> → parallelldelen får <strong>8,0 V</strong></p>
+<p>c) Parallelldelen är 40 Ω. Två lika parallellt ger halva → R₂ = <strong>80 Ω</strong></p>`),
+
+/* ══ K8 laddning och fält ══ */
+u('8.56',8,'laddning','E','(2/0/0)',
+`<p>Figuren visar två laddade kulor.</p>${LADD([{q:'4,0 nC'},{q:'6,0 nC'}],['5,0 cm'])}
+<ol><li>Är kraften attraherande eller repellerande?</li><li>Hur stor är kraften?</li></ol>`,
+`<p>a) Båda är positiva → <strong>repellerande</strong></p>
+<p>b) F = kq₁q₂/r² = 8,99·10⁹·2,4·10⁻¹⁷/0,0025 = <strong>86 µN</strong></p>`),
+
+u('8.57',8,'laddning','C','(1/2/0)',
+`<p>Figuren visar tre laddningar på en rak linje.</p>${LADD([{q:'5,0 nC'},{q:'3,0 nC',neg:1},{q:'5,0 nC'}],['4,0 cm','4,0 cm'])}
+<ol><li>Åt vilket håll dras den mittersta kulan av vardera grannen?</li>
+<li>Hur stor blir den resulterande kraften på den mittersta kulan?</li></ol>`,
+`<p>a) Den negativa dras mot båda de positiva, alltså åt var sitt håll</p>
+<p>b) Krafterna är lika stora (samma laddningar och avstånd) och motriktade → <strong>0 N</strong></p>`),
+
+u('8.58',8,'laddning','A','(0/2/1)',
+`<p>Figuren visar två laddningar.</p>${LADD([{q:'8,0 nC'},{q:'2,0 nC'}],['12 cm'])}
+<ol><li>Var mellan kulorna är det elektriska fältet noll?</li>
+<li>Varför ligger punkten inte mitt emellan?</li></ol>`,
+`<p>a) 8,0/x² = 2,0/(12−x)² → 2(12−x) = x → x = <strong>8,0 cm från den vänstra</strong></p>
+<p>b) Punkten hamnar närmare den svagare laddningen, eftersom fältet avtar med avståndet i kvadrat.</p>`),
+
+u('8.59',8,'falt','E','(2/1/0)',
+`<p>Figuren visar två parallella plattor med fältlinjer mellan sig.</p>${PLATTOR('U = 120 V','d = 4,0 cm')}
+<ol><li>Åt vilket håll pekar fältlinjerna?</li><li>Bestäm fältstyrkan.</li></ol>`,
+`<p>a) Från den positiva plattan till den negativa, alltså nedåt i figuren</p>
+<p>b) E = U/d = 120/0,040 = <strong>3,0 kV/m</strong></p>`),
+
+u('8.60',8,'falt','C','(0/2/1)',
+`<p>En liten kula med laddningen −5,0 nC placeras mellan plattorna.</p>${PLATTOR('U = 200 V','d = 5,0 cm',{p:'–'})}
+<ol><li>Bestäm fältstyrkan.</li><li>Hur stor kraft verkar på kulan?</li>
+<li>Åt vilket håll rör sig kulan, och varför?</li></ol>`,
+`<p>a) E = 200/0,050 = <strong>4,0 kV/m</strong></p><p>b) F = qE = <strong>20 µN</strong></p>
+<p>c) Uppåt, mot den positiva plattan. En negativ laddning påverkas motsatt fältlinjernas riktning.</p>`),
+
+/* ══ K9 ══ */
+u('9.37',9,'aktivitet','C','(1/2/0)',
+`<p>Diagrammet visar aktiviteten hos ett radioaktivt preparat.</p>${DIA([{p:[[0,800],[10,566],[20,400],[30,283],[40,200],[50,141],[60,100]],pk:1}],{xl:'t (min)',yl:'A (Bq)',xmax:60,ymax:800,xs:10,ys:200})}
+<ol><li>Bestäm halveringstiden ur diagrammet.</li><li>Vilken aktivitet väntas efter 80 minuter?</li>
+<li>Varför når kurvan aldrig noll?</li></ol>`,
+`<p>a) 800 → 400 tar 20 min → T½ = <strong>20 minuter</strong></p>
+<p>b) 80 min = 4 halveringstider → 800/16 = <strong>50 Bq</strong></p>
+<p>c) Varje halveringstid tar bort hälften av det som finns kvar. Andelen närmar sig noll men blir aldrig exakt noll.</p>`),
+
+u('9.38',9,'aktivitet','A','(0/2/1)',
+`<p>Diagrammet visar två preparat som mäts samtidigt.</p>${DIA([{p:[[0,600],[20,300],[40,150],[60,75],[80,38]],n:'X'},{p:[[0,400],[20,336],[40,283],[60,238],[80,200]],n:'Y',f:'#2A5D9E'}],{xl:'t (dygn)',yl:'A (Bq)',xmax:80,ymax:600,xs:20,ys:100})}
+<ol><li>Bestäm halveringstiden för X.</li><li>Bestäm halveringstiden för Y.</li>
+<li>När är aktiviteterna lika stora? Läs av i diagrammet.</li></ol>`,
+`<p>a) 600 → 300 på 20 dygn → <strong>20 dygn</strong></p>
+<p>b) 400 → 200 på 80 dygn → <strong>80 dygn</strong></p>
+<p>c) Där kurvorna korsar varandra, ungefär <strong>t = 26 dygn</strong> vid cirka 250 Bq</p>`),
+
+u('9.39',9,'karnreaktioner','C','(0/2/0)',
+`<p>Diagrammet visar bindningsenergin per nukleon för olika masstal.</p>${DIA([{p:[[2,1.1],[4,7.1],[12,7.7],[26,8.5],[56,8.8],[100,8.5],[150,8.2],[238,7.6]],pk:1}],{xl:'masstal A',yl:'E (MeV)',xmax:240,ymax:10,xs:40,ys:2})}
+<ol><li>Vid vilket masstal är kurvan högst?</li><li>Vad betyder ett högt värde?</li>
+<li>Förklara med kurvan varför både fusion och fission frigör energi.</li></ol>`,
+`<p>a) Kring <strong>A = 56</strong>, alltså järn</p>
+<p>b) Att kärnan är hårt bunden och stabil</p>
+<p>c) Båda processerna flyttar kärnorna mot toppen: lätta kärnor slås ihop och tunga klyvs. Skillnaden i bindningsenergi frigörs.</p>`)
+);
+
 /* ═══════════════ app ═══════════════ */
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const svgBock='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg>';
 const LOGO='data:image/png;base64,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';
 
+/* Strukturerar ett facit.
+   Har uppgiften deluppgifter (a, b, c) används de bokstäverna som markörer.
+   Annars numreras räknestegen 1, 2, 3. Rader utan beräkning blir förklaringar. */
+function LOS(html){
+  const bitar=[...html.matchAll(/<p>([\s\S]*?)<\/p>/g)].map(m=>m[1]);
+  if(!bitar.length) return html;
+  const bokstav=b=>/^\s*<?[a-z]?>?\s*([a-e])\)/.exec(b.replace(/<[^>]+>/g,'').trim());
+  const harDelar=bitar.some(bokstav);
+  let n=0;
+  return bitar.map(b=>{
+    const bo=bokstav(b);
+    if(bo) return `<p class="steg"><span class="stegnr">${bo[1]}</span>${b.replace(/^(\s*)([a-e])\)\s*/,'$1')}</p>`;
+    const räkne=/[=→]/.test(b)||/<strong>/.test(b);
+    if(räkne&&!harDelar){n++;return `<p class="steg"><span class="stegnr">${n}</span>${b}</p>`;}
+    if(räkne) return `<p class="steg"><span class="stegnr stegprick">·</span>${b}</p>`;
+    return `<p class="komm">${b}</p>`;
+  }).join('');
+}
 const state={omr:new Set(),nivåer:new Set(['E','C','A']),sök:'',blad:[]};
 const nyckel=x=>x.kap+':'+x.omr;
 
@@ -2678,7 +3275,7 @@ function rita(){
         </div>
         <div class="kroppen">${x.t}</div>
         <button class="facitknapp" data-facit="${x.id}">Visa facit</button>
-        <div class="facit" data-fbox="${x.id}">${x.s}</div>
+        <div class="facit" data-fbox="${x.id}">${LOS(x.s)}</div>
       </div>
     </article>`).join('');
 
@@ -2778,7 +3375,7 @@ function bladHTML({facit}){
   });
   if(facit){
     h+=`<div class="fk"><h1 style="font-size:14pt;margin-bottom:12pt">Facit</h1>`;
-    state.blad.forEach((x,i)=>{ h+=`<div class="fu"><b>${i+1}.</b> ${x.s}</div>`; });
+    state.blad.forEach((x,i)=>{ h+=`<div class="fu"><b>${i+1}.</b> ${LOS(x.s)}</div>`; });
     h+=`</div>`;
   }
   return h;
@@ -2808,7 +3405,10 @@ $('#expWord').addEventListener('click',()=>{
       table.data th,table.data td{border:1px solid #999;padding:3pt 9pt;text-align:right}
       table.data th{background:#eee}
       .fk{page-break-before:always;border-top:2px solid #000;padding-top:12pt}
-      .fu{margin-bottom:9pt;font-size:10pt}
+      .fu{margin-bottom:11pt;font-size:10pt}
+      .steg{margin:3pt 0 3pt 24pt}
+      .stegnr{font-weight:bold;color:#B43123;margin-right:8pt}
+      .komm{margin-left:24pt;color:#333}
     </style></head><body>${kropp}</body></html>`;
   const namn=($('#bTitel').value||'Övningsblad').replace(/[^\wåäöÅÄÖ -]/g,'').trim()||'Övningsblad';
   const a=document.createElement('a');
