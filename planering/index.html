@@ -413,8 +413,8 @@ td.exam-cell .lesson-cell:hover{background:rgba(145,32,24,.06)}
           </div>
         </details>
         <div class="row">
-          <div class="field"><label>Första vecka</label><input id="startWeek" type="number" value="34"></div>
-          <div class="field"><label>Sista vecka</label><input id="endWeek" type="number" value="24"></div>
+          <div class="field"><label>Första vecka</label><input id="startWeek" type="number" value="34" onchange="rebuildSchedule()"></div>
+          <div class="field"><label>Sista vecka</label><input id="endWeek" type="number" value="24" onchange="rebuildSchedule()"></div>
         </div>
         <div class="field"><label>Måndag i första veckan</label>
           <input id="startDate" type="date" onchange="setStartDate(this.value)">
@@ -770,11 +770,46 @@ function renderPeriods(){
    el.appendChild(box);
  });
 }
+// Startdatumet styr vilka datum som skrivs i schemat. Ändras första veckan i
+// inställningarna flyttas datumet till måndagen i den veckan.
+function isoDate(d){
+ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+function syncStartDate(){
+ if(!state.startDate)return;
+ const base=mondayOf(state.startDate);
+ if(!base||isoWeek(base)===state.startWeek)return;
+ for(let i=1;i<=60;i++){
+   for(const dir of [-1,1]){
+     const d=new Date(base);
+     d.setDate(d.getDate()+dir*i*7);
+     if(isoWeek(d)===state.startWeek){
+       state.startDate=isoDate(d);
+       const el=document.getElementById("startDate");
+       if(el)el.value=state.startDate;
+       return;
+     }
+   }
+ }
+}
+// En period som når läsårets första eller sista vecka följer med när schemat
+// förlängs eller kortas. Utan detta hamnar en tillagd vecka utanför alla
+// perioder och får därför inga lektionsdagar.
+function stretchPeriods(prevStart,prevEnd){
+ if(prevStart===state.startWeek&&prevEnd===state.endWeek)return;
+ [...(state.periods||[]),...(state.labPeriods||[])].forEach(p=>{
+   if(+p.from===prevStart)p.from=state.startWeek;
+   if(+p.to===prevEnd)p.to=state.endWeek;
+ });
+}
 function rebuildSchedule(){
+ const prevStart=state.startWeek,prevEnd=state.endWeek;
  state.startWeek=+document.getElementById("startWeek").value;
  state.endWeek=+document.getElementById("endWeek").value;
+ syncStartDate();
  normalizePeriods();
  normalizeLabPeriods();
+ stretchPeriods(prevStart,prevEnd);
 
  const weeks=weekSequence(state.startWeek,state.endWeek);
  const oldSlots=state.slots;
@@ -1409,10 +1444,7 @@ function dayCell(day,date){return esc(day)+(date?' <span class="dnum">'+fmtDate(
 function setStartDate(v){
  state.startDate=v;
  const m=v?mondayOf(v):null;
- if(m){
-   state.startWeek=isoWeek(m);
-   document.getElementById("startWeek").value=state.startWeek;
- }
+ if(m)document.getElementById("startWeek").value=isoWeek(m);
  rebuildSchedule();
 }
 function parseDateLines(text){
