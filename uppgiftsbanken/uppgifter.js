@@ -3833,5 +3833,1994 @@ window.BANK = [
   "poang": "(0/2/2)",
   "t": "<p>En boll med massan 120 g släpps från vila 1,80 m över golvet och studsar upp till 1,25 m.</p><svg viewBox=\"0 0 320 218\" style=\"max-width:320px;margin:12px 0\"><rect x=\"30\" y=\"200\" width=\"270\" height=\"9\" fill=\"#EDEEF1\"/><line x1=\"30\" y1=\"200\" x2=\"300\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><circle cx=\"80\" cy=\"50\" r=\"11\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"200\" cy=\"96\" r=\"11\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.6\" stroke-dasharray=\"6 5\"/><line x1=\"80\" y1=\"61\" x2=\"133\" y2=\"190\" stroke=\"#9A959C\" stroke-width=\"1.6\" stroke-linecap=\"square\" stroke-dasharray=\"6 5\"/><line x1=\"143\" y1=\"190\" x2=\"197\" y2=\"107\" stroke=\"#9A959C\" stroke-width=\"1.6\" stroke-linecap=\"square\" stroke-dasharray=\"6 5\"/><line x1=\"91\" y1=\"50\" x2=\"250\" y2=\"50\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\" stroke-dasharray=\"6 5\"/><text x=\"256\" y=\"54\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">1,80 m</text><line x1=\"211\" y1=\"96\" x2=\"250\" y2=\"96\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\" stroke-dasharray=\"6 5\"/><text x=\"256\" y=\"100\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">1,25 m</text></svg>\n<ol><li>Hur stor lägesenergi har bollen före fallet?</li>\n<li>Hur stor lägesenergi har den i studsens högsta läge?</li>\n<li>Hur stor andel av energin försvann i studsen?</li>\n<li>Hur högt studsar bollen efter nästa studs, om samma andel försvinner varje gång?</li></ol>",
   "s": "<p>a) E_p = 0,120·9,82·1,80 = <strong>2,12 J</strong></p><p>b) E_p = 0,120·9,82·1,25 = <strong>1,47 J</strong></p><p>c) (2,12 − 1,47)/2,12 = <strong>31 %</strong>. Eftersom m och g är samma i båda uttrycken är detta helt enkelt 1 − 1,25/1,80 — höjderna räcker.</p><p>d) Varje studs behåller 1,25/1,80 = 69 % av höjden: h = 1,25·0,694 = <strong>0,87 m</strong></p><p>Höjderna bildar alltså en geometrisk följd. Energin försvinner som värme och ljud när bollen deformeras mot golvet.</p>"
+ },
+ {
+  "id": "2.32",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Omvandla följande längder till enheten meter.</p>\n<ol><li>45 dm</li><li>0,75 km</li><li>8,4 mm</li><li>3,2 mil</li></ol>",
+  "s": "<p>a) <strong>4,5 m</strong></p><p>b) <strong>750 m</strong></p><p>c) <strong>0,0084 m</strong></p><p>d) En mil är 10 km → <strong>32 000 m</strong></p>"
+ },
+ {
+  "id": "2.33",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Skriv följande längder i enheten meter, med svaret i grundpotensform.</p>\n<ol><li>6,2 nm</li><li>24 Gm</li><li>3,4·10³ km</li><li>155 pm</li></ol>",
+  "s": "<p>a) <strong>6,2·10⁻⁹ m</strong></p><p>b) <strong>2,4·10¹⁰ m</strong></p><p>c) <strong>3,4·10⁶ m</strong></p><p>d) <strong>1,55·10⁻¹⁰ m</strong> — ungefär en atomdiameter</p>"
+ },
+ {
+  "id": "2.34",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Omvandla till den angivna enheten.</p>\n<ol><li>7,0 dm² till m²</li><li>25 cm² till m²</li><li>640 mm² till m²</li><li>62 cm³ till dm³</li><li>25 liter till m³</li></ol>",
+  "s": "<p>a) <strong>0,070 m²</strong></p><p>b) <strong>2,5·10⁻³ m²</strong></p><p>c) <strong>6,4·10⁻⁴ m²</strong></p><p>d) <strong>0,062 dm³</strong></p><p>e) <strong>0,025 m³</strong></p><p>Tänk på att omräkningsfaktorn kvadreras för areor och kubas för volymer: 1 dm = 0,1 m ger 1 dm³ = 0,001 m³.</p>"
+ },
+ {
+  "id": "2.35",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En kvadrat har sidan x centimeter.</p>\n<ol><li>Ange kvadratens area i m², uttryckt i x.</li>\n<li>Ange volymen i m³ för en kub med sidan x centimeter.</li>\n<li>Kontrollera ditt uttryck i b-uppgiften för en kub med sidan 4,0 cm.</li></ol>",
+  "s": "<p>a) Sidan är 0,01x meter, så arean blir (0,01x)² = <strong>1,0·10⁻⁴x² m²</strong></p>\n<p>b) V = (0,01x)³ = <strong>1,0·10⁻⁶x³ m³</strong></p>\n<p>c) 1,0·10⁻⁶·4,0³ = 6,4·10⁻⁵ m³, vilket är <strong>64 cm³</strong> — samma sak som 4,0·4,0·4,0 cm³</p>"
+ },
+ {
+  "id": "2.36",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Ordna följande areor i storleksordning, från störst till minst.</p>\n<ol><li>34 dm²</li><li>0,45 m²</li><li>3200 mm²</li><li>4150 cm²</li></ol>",
+  "s": "<p>Omvandla först allt till m²: 0,34 m²; 0,45 m²; 0,0032 m²; 0,415 m²</p>\n<p><strong>0,45 m² > 4150 cm² > 34 dm² > 3200 mm²</strong></p>"
+ },
+ {
+  "id": "2.37",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Koppar har densiteten 8,96 g/cm³.</p>\n<ol><li>Bestäm volymen för en kopparbit med massan 450 g.</li>\n<li>Bestäm massan för en kopparkub med sidan 3,0 cm.</li></ol>",
+  "s": "<p>a) V = m/ρ = 450/8,96 = <strong>50 cm³</strong></p>\n<p>b) V = 3,0³ = 27 cm³ → m = ρV = 27·8,96 = <strong>242 g</strong></p>"
+ },
+ {
+  "id": "2.38",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Mässing har densiteten 8,4 g/cm³.</p>\n<ol><li>Hur många kg/m³ motsvarar det?</li>\n<li>Vatten har densiteten 998 kg/m³. Ange den i g/cm³.</li>\n<li>Varför är omräkningsfaktorn 1000 och inte 100?</li></ol>",
+  "s": "<p>a) <strong>8400 kg/m³</strong></p><p>b) <strong>0,998 g/cm³</strong></p>\n<p>c) Ett gram är 10⁻³ kg medan en kubikcentimeter är 10⁻⁶ m³. Kvoten mellan faktorerna blir 10³.</p>"
+ },
+ {
+  "id": "2.39",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Ett föremål flyter i en vätska om föremålets densitet är lägre än vätskans.</p>\n<ol><li>Bestäm den minsta volym ett föremål med massan 3,5 kg kan ha om det ska flyta i vatten (998 kg/m³).</li>\n<li>Hur stor måste volymen minst vara om föremålet istället ska flyta i etanol (789 kg/m³)?</li></ol>",
+  "s": "<p>a) V = m/ρ = 3,5/998 = 3,5·10⁻³ m³ = <strong>3,5 dm³</strong></p>\n<p>b) 3,5/789 = <strong>4,4 dm³</strong></p>\n<p>Ju lättare vätskan är, desto större volym krävs för samma massa.</p>"
+ },
+ {
+  "id": "2.40",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>I ett experiment mäts massan och volymen för en metallbit. Massan är 810 g och volymen 72 cm³.</p>\n<ol><li>Bestäm metallens densitet.</li>\n<li>Vilket ämne skulle metallbiten kunna bestå av?</li>\n<li>Vad skulle ett hålrum inuti biten göra med resultatet?</li></ol>",
+  "s": "<p>a) ρ = 810/72 = <strong>11,3 g/cm³</strong></p>\n<p>b) <strong>Bly</strong>, som har densiteten 11,3 g/cm³</p>\n<p>c) Ett hålrum ökar volymen utan att öka massan, så den beräknade densiteten blir lägre än materialets. Man skulle gissa på fel ämne.</p>"
+ },
+ {
+  "id": "2.41",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Clara ska blanda vatten (1,00 g/cm³) och etanol (0,79 g/cm³). Blandningen ska ha massan 68 g och volymen 80 cm³.</p>\n<ol><li>Hur stor volym ska hon ta av respektive vätska?</li>\n<li>Vilket antagande gör du när du löser uppgiften?</li></ol>",
+  "s": "<p>a) Med V_v + V_e = 80 och 1,00V_v + 0,79V_e = 68 fås 0,21V_v = 68 − 0,79·80 = 4,8</p>\n<p><strong>23 cm³ vatten och 57 cm³ etanol</strong></p>\n<p>b) Att volymerna kan adderas. I verkligheten blir blandningen av vatten och etanol något mindre än summan, eftersom molekylerna packas tätare.</p>"
+ },
+ {
+  "id": "2.42",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>Två klot har samma massa. Det ena består av järn (7,87 g/cm³), det andra av aluminium (2,70 g/cm³).</p>\n<ol><li>Bestäm förhållandet mellan klotens radier.</li>\n<li>Hur många procent större är det ena klotets radie?</li></ol>",
+  "s": "<p>a) m = ρ·(4/3)πr³ är lika för båda, alltså ρ_j·r_j³ = ρ_a·r_a³</p>\n<p>r_a/r_j = ∛(7,87/2,70) = ∛2,91 = <strong>1,43</strong></p>\n<p>b) Aluminiumklotet har <strong>43 % större radie</strong>. Densiteten skiljer nästan tre gånger, men kubikroten dämpar skillnaden kraftigt.</p>"
+ },
+ {
+  "id": "2.43",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>Ett klot av bly (11,3 g/cm³) ska ha massan 15 kg.</p>\n<ol><li>Bestäm klotets volym.</li><li>Bestäm klotets radie.</li>\n<li>Hur stor blir radien om massan istället är dubbelt så stor?</li></ol>",
+  "s": "<p>a) V = m/ρ = 15 000/11,3 = <strong>1,33·10³ cm³</strong></p>\n<p>b) r = ∛(3V/4π) = ∛317 = <strong>6,8 cm</strong></p>\n<p>c) Dubbel volym ger radien ∛2 = 1,26 gånger så stor → <strong>8,6 cm</strong></p>"
+ },
+ {
+  "id": "2.44",
+  "kap": 2,
+  "omr": "matnogg",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Hur många värdesiffror har följande mätvärden?</p>\n<ol><li>25 kg</li><li>25,0 kg</li><li>0,04 m</li><li>0,040 m</li><li>3000 cm</li><li>3,000 m</li></ol>",
+  "s": "<p>a) 2</p><p>b) 3</p><p>c) 1</p><p>d) 2</p>\n<p>e) <strong>1, 2, 3 eller 4</strong> — nollorna kan vara utfyllnad eller mätta siffror, det går inte att avgöra</p>\n<p>f) 4</p>"
+ },
+ {
+  "id": "2.45",
+  "kap": 2,
+  "omr": "matnogg",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>På en vägskylt står det att det är 24 km till Nässjö.</p>\n<ol><li>Hur långt kan det som mest vara?</li><li>Hur långt som minst?</li>\n<li>Skylten byts mot en som visar 24,0 km. Hur ändras intervallet?</li></ol>",
+  "s": "<p>a) Precis under <strong>24,5 km</strong></p><p>b) <strong>23,5 km</strong></p>\n<p>c) Nu gäller <strong>23,95 km – 24,05 km</strong>. En värdesiffra till gör intervallet tio gånger smalare.</p>"
+ },
+ {
+  "id": "2.46",
+  "kap": 2,
+  "omr": "matnogg",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Massan för en skärbräda anges till 285 ± 10 g och volymen till 175 ± 15 cm³.</p>\n<ol><li>Vilken kombination av massa och volym ger den högsta densiteten?</li>\n<li>Bestäm skärbrädans maximala och minimala densitet.</li></ol>",
+  "s": "<p>a) Störst massa tillsammans med minst volym, alltså 295 g och 160 cm³</p>\n<p>b) Max: 295/160 = <strong>1,84 g/cm³</strong>. Min: 275/190 = <strong>1,45 g/cm³</strong></p>\n<p>Osäkerheten i volymen dominerar, eftersom den är nästan 9 % medan massans bara är 3,5 %.</p>"
+ },
+ {
+  "id": "2.47",
+  "kap": 2,
+  "omr": "matnogg",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Damien mäter upp volymen av en vätska till 480 ± 20 ml och väger den till 0,58 ± 0,01 kg.</p>\n<ol><li>Bestäm vätskans densitet.</li>\n<li>Ange ett intervall som visar vilken densitet vätskan kan ha.</li></ol>",
+  "s": "<p>a) ρ = 580/480 = <strong>1,2 g/cm³</strong></p>\n<p>b) Max: 590/460 = 1,28 g/cm³. Min: 570/500 = 1,14 g/cm³</p>\n<p><strong>1,1 g/cm³ ≤ ρ ≤ 1,3 g/cm³</strong></p>"
+ },
+ {
+  "id": "2.48",
+  "kap": 2,
+  "omr": "matnogg",
+  "niva": "A",
+  "poang": "(0/2/1)",
+  "t": "<p>I ett experiment mäts massan för olika volymer av en okänd vätska.</p>\n<table class=\"data\"><tr><th>Volym (cl)</th><th>Massa (g)</th></tr>\n<tr><td>10</td><td>90</td></tr><tr><td>20</td><td>174</td></tr><tr><td>35</td><td>300</td></tr>\n<tr><td>50</td><td>426</td></tr><tr><td>65</td><td>550</td></tr></table>\n<ol><li>Anpassa en rät linje till mätvärdena och bestäm dess lutning.</li>\n<li>Bestäm vätskans densitet i g/cm³.</li>\n<li>Linjen skär inte origo. Vad kan det bero på?</li></ol>",
+  "s": "<p>a) Omvandla först volymerna till cm³ (10 cl = 100 cm³). Lutningen blir ungefär (550 − 90)/(650 − 100) = <strong>0,84 g/cm³</strong></p>\n<p>b) Lutningen har enheten g/cm³ och är just densiteten: <strong>0,84 g/cm³</strong>, till exempel en olja</p>\n<p>c) Ett systematiskt fel, till exempel att bägarens massa inte dragits bort helt eller att vågen inte nollställts.</p>"
+ },
+ {
+  "id": "2.49",
+  "kap": 2,
+  "omr": "matnogg",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>En cyklist håller hastigheten v ± Δv under tiden t ± Δt.</p>\n<ol><li>Teckna ett uttryck för den längsta sträcka cyklisten kan ha färdats.</li>\n<li>Visa att skillnaden mellan den längsta och den kortaste sträckan blir 2vΔt + 2tΔv.</li>\n<li>Hur stor blir skillnaden om v = 6,0 ± 0,2 m/s och t = 300 ± 10 s?</li></ol>",
+  "s": "<p>a) s_max = (v + Δv)(t + Δt)</p>\n<p>b) (v + Δv)(t + Δt) − (v − Δv)(t − Δt) = (vt + vΔt + tΔv + ΔvΔt) − (vt − vΔt − tΔv + ΔvΔt) = <strong>2vΔt + 2tΔv</strong></p>\n<p>c) 2·6,0·10 + 2·300·0,2 = 120 + 120 = <strong>240 m</strong> — de två osäkerheterna bidrar lika mycket här</p>"
+ },
+ {
+  "id": "3.49",
+  "kap": 3,
+  "omr": "hastighet",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>En bil kör med hastigheten 80 km/h.</p>\n<ol><li>Hur lång tid tar det för bilen att köra 150 meter?</li>\n<li>Hur långt hinner bilen på 2,5 sekunder?</li></ol>",
+  "s": "<p>80 km/h = 80/3,6 = 22,2 m/s</p>\n<p>a) t = s/v = 150/22,2 = <strong>6,8 s</strong></p>\n<p>b) s = vt = 22,2·2,5 = <strong>56 m</strong></p>"
+ },
+ {
+  "id": "3.50",
+  "kap": 3,
+  "omr": "hastighet",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>En sprinter springer 200 meter på 19,8 sekunder.</p>\n<ol><li>Vilken medelhastighet hade hon under loppet?</li>\n<li>Hur många km/h motsvarar det?</li>\n<li>Hennes högsta hastighet under loppet var 11,5 m/s. Varför är medelhastigheten lägre?</li></ol>",
+  "s": "<p>a) v = 200/19,8 = <strong>10,1 m/s</strong></p><p>b) 10,1·3,6 = <strong>36 km/h</strong></p>\n<p>c) Hon startar från stillastående och behöver några sekunder på sig att komma upp i topphastighet, och tappar dessutom fart mot slutet.</p>"
+ },
+ {
+  "id": "3.51",
+  "kap": 3,
+  "omr": "hastighet",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En satellit går i cirkelbana 700 km över jordytan med hastigheten 7,5 km/s. Jordens radie är 6371 km.</p>\n<ol><li>Hur lång är satellitens bana?</li><li>Hur lång tid tar ett varv?</li></ol>",
+  "s": "<p>a) r = 6371 + 700 = 7071 km. Omkretsen blir 2πr = <strong>4,44·10⁴ km</strong></p>\n<p>b) t = 44 400/7,5 = 5920 s = <strong>99 minuter</strong></p>"
+ },
+ {
+  "id": "3.52",
+  "kap": 3,
+  "omr": "hastighet",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Du joggar med hastigheten 2,8 m/s. En cyklist kommer ikapp dig bakifrån med hastigheten 6,0 m/s i förhållande till marken.</p>\n<ol><li>Vilken hastighet har cyklisten i förhållande till dig?</li>\n<li>Vilken hastighet skulle cyklisten ha i förhållande till dig om han körde mot dig istället?</li></ol>",
+  "s": "<p>a) 6,0 − 2,8 = <strong>3,2 m/s</strong> i din färdriktning</p>\n<p>b) 6,0 + 2,8 = <strong>8,8 m/s</strong> riktat mot dig</p>"
+ },
+ {
+  "id": "3.53",
+  "kap": 3,
+  "omr": "hastighet",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Du sitter i ett tåg som kör 90 km/h. Du rullar en boll framåt i mittgången med hastigheten 1,5 m/s i förhållande till golvet.</p>\n<ol><li>Vilken hastighet har bollen i förhållande till marken utanför?</li>\n<li>Vilken hastighet har bollen i förhållande till marken om du rullar den bakåt istället?</li>\n<li>En passagerare på perrongen påstår att bollen rör sig mycket snabbt, medan du påstår att den rullar långsamt. Vem har rätt?</li></ol>",
+  "s": "<p>90 km/h = 25 m/s</p><p>a) 25 + 1,5 = <strong>26,5 m/s</strong></p><p>b) 25 − 1,5 = <strong>23,5 m/s</strong></p>\n<p>c) Båda har rätt. Hastighet är alltid angiven i förhållande till någonting, och de två anger den i olika referenssystem.</p>"
+ },
+ {
+  "id": "3.54",
+  "kap": 3,
+  "omr": "hastighet",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Två bilar ska köra samma sträcka. Den första bilen håller 100 km/h hela vägen. Den andra bilen kör halva sträckan i 80 km/h och den andra halvan i 120 km/h.</p>\n<ol><li>Vilken bil kommer fram först?</li><li>Förklara varför medelhastigheten inte blir 100 km/h för den andra bilen.</li></ol>",
+  "s": "<p>a) <strong>Den första bilen</strong>. Med sträckan 200 km tar den 2,00 h, medan den andra tar 100/80 + 100/120 = 1,25 + 0,83 = 2,08 h</p>\n<p>b) Bilen tillbringar längre tid i den låga hastigheten än i den höga, eftersom det tar mer tid att köra en given sträcka långsamt. Medelhastigheten viktas därför mot 80 km/h. Här blir den 200/2,08 = 96 km/h.</p>"
+ },
+ {
+  "id": "3.55",
+  "kap": 3,
+  "omr": "hastighet",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>Två bilar ska köra sträckan s. Den ena kör hela sträckan med hastigheten v. Den andra kör halva sträckan 20 % långsammare och den andra halvan 20 % snabbare.</p>\n<ol><li>Teckna ett uttryck för respektive bils restid.</li>\n<li>Visa att den andra bilen alltid kommer fram sist, oavsett värdet på v.</li></ol>",
+  "s": "<p>a) Bil 1: t₁ = s/v. Bil 2: t₂ = (s/2)/(0,8v) + (s/2)/(1,2v) = s/v·(0,625 + 0,4167) = 1,042·s/v</p>\n<p>b) t₂/t₁ = 1,042 oavsett v, så bil 2 tar cirka <strong>4 % längre tid</strong>. Tidsvinsten på den snabba halvan är mindre än tidsförlusten på den långsamma, eftersom tiden är omvänt proportionell mot hastigheten.</p>"
+ },
+ {
+  "id": "3.56",
+  "kap": 3,
+  "omr": "diagram",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Arne är ute och går. Han startar 120 m från sitt hus. Under den första minuten går han mot huset med hastigheten 1,0 m/s. Sedan vilar han i 30 sekunder. Slutligen joggar han tillbaka till huset med hastigheten 2,0 m/s.</p>\n<ol><li>Rita ett sträcka-tid-diagram som visar hur Arnes avstånd från huset beror på tiden.</li>\n<li>Hur lång tid tar hela promenaden?</li></ol>",
+  "s": "<p>a) Diagrammet består av tre delar: en rät linje från 120 m till 60 m mellan t = 0 och t = 60 s, en vågrät linje vid 60 m fram till t = 90 s, och därefter en brantare linje ner till 0 m.</p>\n<p>b) Sista sträckan tar 60/2,0 = 30 s, så totalt <strong>120 sekunder</strong></p>"
+ },
+ {
+  "id": "3.57",
+  "kap": 3,
+  "omr": "diagram",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Peter ska ta sig till affären som ligger 1,2 km bort. Den första halvan av vägen cyklar han med hastigheten 6,0 m/s och den andra halvan med hastigheten 4,0 m/s. Han är inne i affären i 2,0 minuter och cyklar sedan hem med konstant hastighet. Hemresan tar lika lång tid som det tog att ta sig till affären.</p>\n<ol><li>Hur lång tid tar resan till affären?</li>\n<li>Vilken hastighet håller Peter på hemvägen?</li>\n<li>Rita ett s-t-diagram som visar Peters rörelse.</li></ol>",
+  "s": "<p>a) 600/6,0 + 600/4,0 = 100 + 150 = <strong>250 s</strong></p>\n<p>b) v = 1200/250 = <strong>4,8 m/s</strong></p>\n<p>c) Två räta linjer med olika lutning upp till 1200 m, en vågrät del under 120 s, och därefter en rak linje tillbaka till 0 m som tar 250 s.</p>"
+ },
+ {
+  "id": "3.58",
+  "kap": 3,
+  "omr": "diagram",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En elev ritar ett sträcka-tid-diagram där linjen under en kort stund är helt lodrät.</p>\n<ol><li>Vad skulle en lodrät linje innebära?</li>\n<li>Varför kan diagrammet inte vara helt korrekt?</li>\n<li>Hur bör kurvan se ut istället för ett föremål som accelererar mycket snabbt?</li></ol>",
+  "s": "<p>a) Att föremålet flyttar sig en sträcka på ingen tid alls, alltså med oändlig hastighet</p>\n<p>b) Ingenting kan röra sig oändligt snabbt, så lodräta linjer får inte förekomma i ett s-t-diagram</p>\n<p>c) En mycket brant men lutande linje. Vid hög acceleration blir kurvan dessutom böjd, eftersom lutningen ökar med tiden.</p>"
+ },
+ {
+  "id": "3.59",
+  "kap": 3,
+  "omr": "diagram",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Diagram kan ha olika enheter på axlarna.</p>\n<ol><li>Vilken enhet får lutningen i ett hastighet-tid-diagram där hastigheten mäts i km/h och tiden i sekunder?</li>\n<li>Vilken enhet får arean under kurvan i samma diagram?</li>\n<li>Vilken enhet får arean under kurvan i ett acceleration-tid-diagram med enheterna m/s² och s?</li></ol>",
+  "s": "<p>a) <strong>km/(h·s)</strong> — en udda men fullt användbar enhet för acceleration</p>\n<p>b) km/h · s = <strong>km·s/h</strong>, vilket motsvarar en sträcka. Dela med 3600 för att få kilometer.</p>\n<p>c) m/s² · s = <strong>m/s</strong>, alltså en hastighetsändring</p>"
+ },
+ {
+  "id": "3.60",
+  "kap": 3,
+  "omr": "diagram",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Daniel springer på en löparbana. Först springer han framåt med hastigheten 4,0 m/s i 12 sekunder. Sedan står han stilla i 4,0 sekunder innan han springer tillbaka med hastigheten 6,0 m/s i 6,0 sekunder. Anta att accelerationerna sker momentant.</p>\n<ol><li>Rita ett v-t-diagram som visar Daniels rörelse.</li>\n<li>Hur långt från utgångsläget befinner sig Daniel efter 22 sekunder?</li>\n<li>Vilken medelhastighet hade han under hela rörelsen?</li></ol>",
+  "s": "<p>a) 4,0 m/s under 12 s, därefter 0 m/s i 4,0 s, därefter −6,0 m/s i 6,0 s</p>\n<p>b) 4,0·12 − 6,0·6,0 = 48 − 36 = <strong>12 m</strong> från utgångsläget</p>\n<p>c) Medelhastigheten räknas på förflyttningen: 12/22 = <strong>0,55 m/s</strong>. Medelfarten är däremot 84/22 = 3,8 m/s.</p>"
+ },
+ {
+  "id": "3.61",
+  "kap": 3,
+  "omr": "diagram",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>I ett s-t-diagram är kurvan böjd, så att lutningen ökar hela tiden.</p>\n<ol><li>Hur bestämmer man föremålets hastighet vid en viss tidpunkt?</li>\n<li>Vad säger den ökande lutningen om rörelsen?</li>\n<li>Hur skulle motsvarande v-t-diagram se ut?</li></ol>",
+  "s": "<p>a) Genom att rita en tangent till kurvan i den punkten och bestämma tangentens lutning. Det ger <strong>momentanhastigheten</strong>.</p>\n<p>b) Hastigheten ökar hela tiden, alltså accelererar föremålet</p>\n<p>c) En stigande kurva. Om accelerationen är konstant blir v-t-kurvan en rät linje med positiv lutning.</p>"
+ },
+ {
+  "id": "3.62",
+  "kap": 3,
+  "omr": "konstacc",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>En joggare håller hastigheten 2,2 m/s och accelererar sedan med 0,25 m/s² under 6,0 sekunder.</p>\n<ol><li>Vilken hastighet har hon efter accelerationen?</li>\n<li>Hur lång sträcka hinner hon under de 6,0 sekunderna?</li></ol>",
+  "s": "<p>a) v = v₀ + at = 2,2 + 0,25·6,0 = <strong>3,7 m/s</strong></p>\n<p>b) s = v₀t + at²/2 = 2,2·6,0 + 0,25·36/2 = 13,2 + 4,5 = <strong>18 m</strong></p>"
+ },
+ {
+  "id": "3.63",
+  "kap": 3,
+  "omr": "konstacc",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>En sten släpps från taket på ett hus som är 45 meter högt. Luftmotståndet försummas.</p>\n<ol><li>Vilken acceleration har stenen?</li><li>Hur lång tid tar det innan den träffar marken?</li>\n<li>Vilken hastighet har den då?</li></ol>",
+  "s": "<p>a) <strong>9,82 m/s²</strong> nedåt</p>\n<p>b) h = gt²/2 → t = √(2·45/9,82) = <strong>3,0 s</strong></p>\n<p>c) v = gt = 9,82·3,03 = <strong>30 m/s</strong>, alltså drygt 107 km/h</p>"
+ },
+ {
+  "id": "3.64",
+  "kap": 3,
+  "omr": "konstacc",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En bil kör med hastigheten 90 km/h när föraren bromsar in till stillastående. Inbromsningen sker med konstant retardation och tar 4,5 sekunder.</p>\n<ol><li>Bestäm retardationens storlek.</li><li>Hur lång sträcka färdas bilen under inbromsningen?</li>\n<li>Hur lång blir bromssträckan om starthastigheten istället är 45 km/h med samma retardation?</li></ol>",
+  "s": "<p>90 km/h = 25 m/s</p><p>a) a = Δv/Δt = 25/4,5 = <strong>5,6 m/s²</strong></p>\n<p>b) s = medelhastigheten · tiden = 12,5·4,5 = <strong>56 m</strong></p>\n<p>c) s = v²/2a = 12,5²/(2·5,6) = <strong>14 m</strong> — halva hastigheten ger en fjärdedel av bromssträckan</p>"
+ },
+ {
+  "id": "3.65",
+  "kap": 3,
+  "omr": "konstacc",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En motorcykel kör med hastigheten 12 m/s och accelererar därefter med 1,2 m/s². Under accelerationen färdas den 40 meter.</p>\n<ol><li>Hur lång tid varade accelerationen?</li><li>Vilken hastighet har motorcykeln efter accelerationen?</li></ol>",
+  "s": "<p>a) 40 = 12t + 0,6t² ger andragradsekvationen t² + 20t − 66,7 = 0 med den positiva roten t = <strong>2,9 s</strong></p>\n<p>b) v = 12 + 1,2·2,91 = <strong>15,5 m/s</strong></p>"
+ },
+ {
+  "id": "3.66",
+  "kap": 3,
+  "omr": "konstacc",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Anna kastar en boll rakt upp i luften från höjden 1,5 m med hastigheten 9,0 m/s.</p>\n<ol><li>Hur lång tid tar det innan bollen når sin högsta punkt?</li>\n<li>Hur högt över marken når bollen?</li>\n<li>Hur lång tid tar det innan bollen landar på marken?</li></ol>",
+  "s": "<p>a) t = v₀/g = 9,0/9,82 = <strong>0,92 s</strong></p>\n<p>b) Stighöjden är v₀²/2g = 81/19,64 = 4,12 m, alltså <strong>5,6 m över marken</strong></p>\n<p>c) Med marken som nollnivå: −1,5 = 9,0t − 4,91t² ger t = <strong>2,0 s</strong></p>"
+ },
+ {
+  "id": "3.67",
+  "kap": 3,
+  "omr": "konstacc",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Under uppskjutningen av en rymdraket accelererar den en stund med 30 m/s².</p>\n<ol><li>Skriv raketens acceleration på formen x·g.</li>\n<li>Hur lång tid tar det för raketen att öka sin hastighet med 150 km/h?</li>\n<li>Hur lång sträcka färdas raketen under den tiden, om den startar från vila?</li></ol>",
+  "s": "<p>a) 30/9,82 = <strong>3,1·g</strong></p>\n<p>b) 150 km/h = 41,7 m/s → t = 41,7/30 = <strong>1,4 s</strong></p>\n<p>c) s = at²/2 = 30·1,39²/2 = <strong>29 m</strong></p>"
+ },
+ {
+  "id": "3.68",
+  "kap": 3,
+  "omr": "konstacc",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>En bil accelererar med konstant acceleration från stillastående till 60 km/h. Under accelerationen kör bilen 50 meter.</p>\n<ol><li>Bestäm bilens acceleration.</li><li>Hur lång tid tog accelerationen?</li></ol>",
+  "s": "<p>60 km/h = 16,7 m/s</p>\n<p>a) v² = 2as ger a = 16,7²/(2·50) = <strong>2,8 m/s²</strong></p>\n<p>b) t = v/a = 16,7/2,78 = <strong>6,0 s</strong></p>"
+ },
+ {
+  "id": "3.69",
+  "kap": 3,
+  "omr": "konstacc",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>En boll släpps från höjden h och faller fritt.</p>\n<ol><li>Härled ett uttryck för bollens hastighet v när den träffar marken.</li>\n<li>Hur mycket högre måste bollen släppas för att sluthastigheten ska bli dubbelt så stor?</li></ol>",
+  "s": "<p>a) h = gt²/2 ger t = √(2h/g). Insatt i v = gt fås v = g·√(2h/g) = <strong>√(2gh)</strong></p>\n<p>b) Eftersom v är proportionell mot √h krävs <strong>fyra gånger så stor fallhöjd</strong> för dubbel sluthastighet.</p>"
+ },
+ {
+  "id": "4.88",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>En låda på ett friktionsfritt underlag dras med kraften 45 N åt höger samtidigt som den dras med kraften 18 N åt vänster.</p>\n<ol><li>Hur stor är den resulterande kraften på lådan?</li>\n<li>Hur stor blir lådans acceleration om den har massan 6,0 kg?</li></ol>",
+  "s": "<p>a) 45 − 18 = <strong>27 N åt höger</strong></p>\n<p>b) a = F/m = 27/6,0 = <strong>4,5 m/s²</strong></p>"
+ },
+ {
+  "id": "4.89",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>En lastbil har massan 3500 kg och ska accelerera med 1,4 m/s².</p>\n<ol><li>Hur stor måste den resulterande kraften vara?</li>\n<li>Hur stor blir accelerationen om samma kraft verkar på en personbil med massan 1400 kg?</li></ol>",
+  "s": "<p>a) F = ma = 3500·1,4 = <strong>4,9 kN</strong></p>\n<p>b) a = 4900/1400 = <strong>3,5 m/s²</strong></p>"
+ },
+ {
+  "id": "4.90",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>En sten med massan 2,0 kg påverkas av två krafter som är vinkelräta mot varandra. Den ena är 24 N och den andra 10 N.</p>\n<ol><li>Bestäm kraftresultantens storlek.</li><li>Bestäm stenens acceleration.</li></ol>",
+  "s": "<p>a) F = √(24² + 10²) = √676 = <strong>26 N</strong></p>\n<p>b) a = 26/2,0 = <strong>13 m/s²</strong></p>"
+ },
+ {
+  "id": "4.91",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>När Anna drar i en vagn med okänd massa börjar den accelerera. Med dragkraften 75 N accelererar vagnen med 4,2 m/s².</p>\n<ol><li>Bestäm vagnens massa.</li>\n<li>Hur stor kraft krävs för att accelerationen ska bli 6,0 m/s²?</li></ol>",
+  "s": "<p>a) m = F/a = 75/4,2 = <strong>18 kg</strong></p>\n<p>b) F = 17,9·6,0 = <strong>107 N</strong></p>"
+ },
+ {
+  "id": "4.92",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Johan trycker på en stor låda med kraften 350 N åt höger, men lådan står helt stilla.</p>\n<ol><li>Hur stor är kraftresultanten på lådan?</li>\n<li>Bestäm storlek och riktning för den övriga kraft som verkar på lådan.</li>\n<li>Vad är det för slags kraft?</li></ol>",
+  "s": "<p>a) <strong>0 N</strong>, eftersom lådan varken accelererar eller rör sig</p>\n<p>b) <strong>350 N åt vänster</strong></p>\n<p>c) Friktionskraften mellan lådan och golvet.</p>"
+ },
+ {
+  "id": "4.93",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Newtons lagar beskriver sambandet mellan kraft och rörelse.</p>\n<ol><li>Vad säger Newtons första lag?</li><li>Vad säger Newtons andra lag?</li>\n<li>Ge ett exempel på en vardaglig situation där kraftresultanten är noll trots att föremålet rör sig.</li></ol>",
+  "s": "<p>a) Om kraftresultanten på ett föremål är noll så befinner sig föremålet i vila eller rör sig med konstant hastighet.</p>\n<p>b) Ett föremål med massan m som påverkas av kraftresultanten F accelererar enligt F = m·a.</p>\n<p>c) Till exempel en bil som håller konstant hastighet på en rak väg. Motorns drivkraft är då exakt lika stor som luftmotstånd och rullmotstånd tillsammans.</p>"
+ },
+ {
+  "id": "4.94",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Clara drar en låda över ett golv med den konstanta hastigheten 1,2 m/s. Hon drar i repet med kraften 75 N.</p>\n<ol><li>Hur stor är friktionskraften som verkar på lådan?</li>\n<li>Clara ökar farten och håller sedan en ny konstant hastighet, där hon drar med 82 N på grund av ökat luftmotstånd. Hur stor är kraftresultanten då?</li></ol>",
+  "s": "<p>a) <strong>75 N</strong>. Kraftresultanten måste vara noll när hastigheten är konstant.</p>\n<p>b) <strong>0 N</strong>, av samma anledning. Den större dragkraften balanseras av det större motståndet.</p>"
+ },
+ {
+  "id": "4.95",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En bil med massan 1300 kg kör med hastigheten 60 km/h. Föraren bromsar med konstant retardation tills bilen står stilla, vilket tar 3,5 sekunder.</p>\n<ol><li>Bestäm retardationens storlek.</li>\n<li>Bestäm den resulterande kraft som verkade på bilen under inbromsningen.</li></ol>",
+  "s": "<p>60 km/h = 16,7 m/s</p>\n<p>a) a = 16,7/3,5 = <strong>4,8 m/s²</strong></p>\n<p>b) F = ma = 1300·4,76 = <strong>6,2 kN</strong>, riktad bakåt</p>"
+ },
+ {
+  "id": "4.96",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En vagn dras med kraften 180 N. Kraften bildar vinkeln 35° mot marken.</p>\n<ol><li>Hur stor är den kraftkomposant som är parallell med marken?</li>\n<li>Hur stor är den kraftkomposant som är vinkelrät mot marken?</li>\n<li>Vad händer med de båda komposanterna om vinkeln ökar?</li></ol>",
+  "s": "<p>a) F∥ = 180·cos35° = <strong>147 N</strong></p><p>b) F⊥ = 180·sin35° = <strong>103 N</strong></p>\n<p>c) Den parallella komposanten minskar och den vinkelräta ökar. Vid stora vinklar lyfter man mest i vagnen istället för att dra den framåt.</p>"
+ },
+ {
+  "id": "4.97",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En boll påverkas av tre krafter: 50 N åt vänster, 25 N åt höger och 60 N rakt nedåt.</p>\n<ol><li>Bestäm kraftresultantens storlek.</li><li>Bestäm resultantens riktning.</li></ol>",
+  "s": "<p>a) Vågrätt: 50 − 25 = 25 N åt vänster. Lodrätt: 60 N nedåt.</p>\n<p>F = √(25² + 60²) = <strong>65 N</strong></p>\n<p>b) tan v = 25/60 ger v = <strong>23° från lodlinjen</strong>, snett nedåt vänster</p>"
+ },
+ {
+  "id": "4.98",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>En boll med massan 0,60 kg påverkas av två krafter som är vinkelräta mot varandra. Den ena kraften har storleken 4,0 N och bollen accelererar med 9,0 m/s².</p>\n<ol><li>Hur stor är kraftresultanten?</li><li>Bestäm den andra kraftens storlek.</li></ol>",
+  "s": "<p>a) F = ma = 0,60·9,0 = <strong>5,4 N</strong></p>\n<p>b) F₂ = √(5,4² − 4,0²) = √13,2 = <strong>3,6 N</strong></p>"
+ },
+ {
+  "id": "4.99",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Peter pressar sin ena hand mot en vägg med kraften 60 N.</p>\n<ol><li>Beskriv motkraften enligt Newtons tredje lag.</li>\n<li>I en boxningsmatch träffar en boxares hand motståndarens ansikte. Vad påverkas av störst kraft, handen eller ansiktet?</li></ol>",
+  "s": "<p>a) Väggen trycker tillbaka på Peters hand med kraften <strong>60 N</strong>, riktad åt motsatt håll.</p>\n<p>b) <strong>Lika stora krafter.</strong> Att slaget känns värre i ansiktet beror på hur tåliga kroppsdelarna är, inte på krafternas storlek.</p>"
+ },
+ {
+  "id": "4.100",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Jonna puttar på en låda som står på ett golv. Både Jonna och lådan accelererar med 0,60 m/s² när Jonna trycker med kraften 80 N på lådan. Lådan har massan 18 kg och Jonna väger 55 kg.</p>\n<ol><li>Bestäm resultanten för de övriga krafter som verkar på lådan.</li>\n<li>Hur stor kraft trycker Jonna med sina fötter mot golvet i vågrät led?</li></ol>",
+  "s": "<p>a) Kraftresultanten på lådan är 18·0,60 = 10,8 N. Övriga krafter ger alltså 80 − 10,8 = <strong>69 N</strong> riktat mot accelerationen.</p>\n<p>b) Jonna accelererar också: 55·0,60 = 33 N. Lådan trycker tillbaka på henne med 80 N, så golvet måste ge henne 80 + 33 = <strong>113 N</strong> framåt. Lika stor kraft trycker hon bakåt mot golvet.</p>"
+ },
+ {
+  "id": "4.101",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Johan ska dra i en vagn så att den accelererar. Mikael säger att vagnen enligt Newtons tredje lag drar tillbaka i Johan med en lika stor kraft, och att kraftresultanten därför blir 0 N. Vagnen kan alltså aldrig accelerera.</p>\n<p>På vilket sätt har Mikael fel i sitt resonemang?</p>",
+  "s": "<p>Krafterna i ett kraftparet verkar på <strong>olika föremål</strong>. Johans dragkraft verkar på vagnen, medan motkraften verkar på Johan.</p>\n<p>Kraftresultanten på vagnen består av dragkraften och de krafter som bromsar vagnen, inte av motkraften till dragkraften. Två krafter kan bara ta ut varandra om de verkar på samma föremål.</p>"
+ },
+ {
+  "id": "4.102",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Bestäm tyngdkraften som verkar på ...</p>\n<ol><li>... en person som väger 68 kg.</li><li>... en penna med massan 18 gram.</li>\n<li>... en bil med massan 1250 kg.</li><li>... 150 cm³ järn (7,87 g/cm³).</li></ol>",
+  "s": "<p>a) 68·9,82 = <strong>668 N</strong></p><p>b) 0,018·9,82 = <strong>0,18 N</strong></p>\n<p>c) <strong>12,3 kN</strong></p>\n<p>d) m = 150·7,87 = 1181 g → F = 1,18·9,82 = <strong>11,6 N</strong></p>"
+ },
+ {
+  "id": "4.103",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>En person med massan 82 kg står helt vanligt på ett golv.</p>\n<ol><li>Hur stor är tyngdkraften på personen?</li>\n<li>Hur stor är den totala normalkraften från golvet?</li>\n<li>Hur stor är normalkraften på ett av fötterna om personen står jämnt på båda?</li></ol>",
+  "s": "<p>a) F = 82·9,82 = <strong>805 N</strong></p>\n<p>b) <strong>805 N</strong>, eftersom personen står stilla</p>\n<p>c) <strong>403 N</strong> på varje fot</p>"
+ },
+ {
+  "id": "4.104",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Hanna försöker lyfta en tung låda som står på golvet. Lådan väger 65 kg, men Hanna orkar som mest dra lådan uppåt med kraften 450 N.</p>\n<ol><li>Hur stor är tyngdkraften på lådan?</li>\n<li>Hur stor är normalkraften när Hanna drar som mest?</li>\n<li>Hur stor dragkraft skulle krävas för att lådan ska lämna golvet?</li></ol>",
+  "s": "<p>a) 65·9,82 = <strong>638 N</strong></p>\n<p>b) N = 638 − 450 = <strong>188 N</strong></p>\n<p>c) Normalkraften blir noll först när dragkraften är <strong>638 N</strong></p>"
+ },
+ {
+  "id": "4.105",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Karolina har hoppat rakt uppåt och är på väg att landa. I ett visst ögonblick under landningen, när hennes fötter rör marken, retarderar hon med 6,0 m/s². Hon har massan 62 kg.</p>\n<ol><li>Hur stor är normalkraften som verkar på henne i detta ögonblick?</li>\n<li>Hur många gånger större är den än när hon står stilla?</li>\n<li>Varför bör man böja på knäna när man landar?</li></ol>",
+  "s": "<p>a) N − mg = ma → N = 62·(9,82 + 6,0) = <strong>981 N</strong></p>\n<p>b) 981/609 = <strong>1,6 gånger</strong></p>\n<p>c) Böjda knän förlänger tiden för inbromsningen. Retardationen blir mindre och därmed också kraften på leder och skelett.</p>"
+ },
+ {
+  "id": "4.106",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Felicia har två bollar med identisk form, men den ena bollen har större massa än den andra. Hon släpper dem samtidigt från samma höjd.</p>\n<ol><li>Vilken boll når marken först om luftmotståndet försummas?</li>\n<li>Vilken boll når marken först om man tar hänsyn till luftmotståndet? Motivera.</li></ol>",
+  "s": "<p>a) <strong>Samtidigt.</strong> Tyngdaccelerationen är oberoende av massan.</p>\n<p>b) <strong>Den tyngre bollen.</strong> Bollarna har samma form och får därför samma luftmotståndskraft vid samma hastighet. Den kraften bromsar fallet, men eftersom accelerationen den ger är F/m blir bromsningen mindre för den tyngre bollen.</p>"
+ },
+ {
+  "id": "4.107",
+  "kap": 4,
+  "omr": "gravitation",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Använd Newtons gravitationslag och din formelsamling.</p>\n<ol><li>Bestäm tyngdkraften som påverkar en person med massan 68 kg på Mars yta.</li>\n<li>Hur många procent av tyngdkraften på jorden är det?</li></ol>",
+  "s": "<p>a) g = GM/r² = 6,674·10⁻¹¹·6,42·10²³/(3,39·10⁶)² = 3,7 m/s²</p>\n<p>F = 68·3,73 = <strong>254 N</strong></p>\n<p>b) På jorden: 668 N → <strong>38 %</strong></p>"
+ },
+ {
+  "id": "4.108",
+  "kap": 4,
+  "omr": "gravitation",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Två personer som väger 70 kg vardera står 0,80 meter ifrån varandra.</p>\n<ol><li>Hur stor är gravitationskraften mellan dem?</li>\n<li>Vilken acceleration skulle den ge om ingenting annat påverkade dem?</li>\n<li>Varför märker vi inte av kraften?</li></ol>",
+  "s": "<p>a) F = Gm₁m₂/r² = 6,674·10⁻¹¹·4900/0,64 = <strong>0,51 µN</strong></p>\n<p>b) a = F/m = 5,1·10⁻⁷/70 = <strong>7,3 nm/s²</strong></p>\n<p>c) Friktionen mot golvet är många storleksordningar större. Gravitationen märks bara när minst ett av föremålen har enorm massa, som en planet.</p>"
+ },
+ {
+  "id": "4.109",
+  "kap": 4,
+  "omr": "gravitation",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>En person med massan 80 kg befinner sig långt ovanför jordytan.</p>\n<ol><li>På vilket avstånd från jordens centrum påverkas personen av tyngdkraften 500 N?</li>\n<li>Hur högt över jordytan är det?</li></ol>",
+  "s": "<p>a) F = GMm/r² → r = √(GMm/F) = √(6,674·10⁻¹¹·5,972·10²⁴·80/500) = <strong>7,99·10⁶ m</strong></p>\n<p>b) 7990 − 6371 = <strong>1620 km</strong> över ytan</p>"
+ },
+ {
+  "id": "4.110",
+  "kap": 4,
+  "omr": "gravitation",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Rymdstationen ISS befinner sig på höjden 400 km över marken. En astronaut ombord har massan 78 kg.</p>\n<ol><li>Hur stor tyngdkraft påverkas astronauten av på ISS?</li>\n<li>Hur stor tyngdkraft påverkas samma astronaut av på jordytan?</li>\n<li>Astronauten svävar i rymdstationen. Beror det på att tyngdkraften är försumbar där?</li></ol>",
+  "s": "<p>a) r = 6371 + 400 = 6771 km. g = GM/r² = 8,70 m/s² → F = <strong>678 N</strong></p>\n<p>b) 78·9,82 = <strong>766 N</strong></p>\n<p>c) Nej. Tyngdkraften är fortfarande 89 % av den på markytan. Astronauten svävar för att både hon och stationen faller fritt runt jorden hela tiden.</p>"
+ },
+ {
+  "id": "4.111",
+  "kap": 4,
+  "omr": "gravitation",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>Någonstans mellan jorden och månen finns en punkt där man varken accelererar mot jorden eller mot månen. Avståndet mellan himlakropparnas centrum är 3,84·10⁸ m.</p>\n<ol><li>Bestäm avståndet från jordens centrum till denna punkt.</li>\n<li>På vilken höjd ovanför månytan ligger punkten? Månens radie är 1740 km.</li></ol>",
+  "s": "<p>a) Krafterna är lika stora: GM_j/x² = GM_m/(d − x)² ger x/(d − x) = √(M_j/M_m) = √(5,972·10²⁴/7,35·10²²) = 9,01</p>\n<p>x = 3,84·10⁸·9,01/10,01 = <strong>3,46·10⁸ m</strong></p>\n<p>b) 3,84·10⁸ − 3,46·10⁸ = 3,84·10⁷ m från månens centrum → <strong>ungefär 37 000 km över månytan</strong></p>"
+ },
+ {
+  "id": "4.112",
+  "kap": 4,
+  "omr": "gravitation",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Venus har massan 4,87·10²⁴ kg och radien 6,05·10⁶ m.</p>\n<ol><li>Bestäm tyngdaccelerationen på Venus yta.</li>\n<li>En sten släpps från 2,0 meters höjd på Venus. Hur lång tid tar fallet?</li>\n<li>Hur lång tid skulle samma fall ta på jorden?</li></ol>",
+  "s": "<p>a) g = GM/r² = 6,674·10⁻¹¹·4,87·10²⁴/(6,05·10⁶)² = <strong>8,9 m/s²</strong></p>\n<p>b) t = √(2h/g) = √(4,0/8,87) = <strong>0,67 s</strong></p>\n<p>c) t = √(4,0/9,82) = <strong>0,64 s</strong> — skillnaden är knappt märkbar</p>"
+ },
+ {
+  "id": "4.113",
+  "kap": 4,
+  "omr": "fjadrar",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>En fjäder med fjäderkonstanten 30 N/m hänger i en ställning.</p>\n<ol><li>Hur långt dras fjädern ut om man drar i den med kraften 7,5 N?</li>\n<li>Hur stor kraft krävs för att dra ut fjädern 40 cm?</li></ol>",
+  "s": "<p>a) x = F/k = 7,5/30 = 0,25 m = <strong>25 cm</strong></p>\n<p>b) F = kx = 30·0,40 = <strong>12 N</strong></p>"
+ },
+ {
+  "id": "4.114",
+  "kap": 4,
+  "omr": "fjadrar",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Daniel hänger en vikt med massan 400 gram i en fjäder, som då dras ut 6,0 cm.</p>\n<ol><li>Hur stor kraft drar i fjädern?</li><li>Vilken fjäderkonstant har fjädern?</li>\n<li>Hur långt dras fjädern ut om han hänger i en vikt på 250 gram istället?</li></ol>",
+  "s": "<p>a) F = mg = 0,400·9,82 = <strong>3,9 N</strong></p>\n<p>b) k = F/x = 3,93/0,060 = <strong>65 N/m</strong></p>\n<p>c) x = 2,455/65 = 0,0377 m = <strong>3,8 cm</strong></p>"
+ },
+ {
+  "id": "4.115",
+  "kap": 4,
+  "omr": "fjadrar",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Anna hänger en fjäder med fjäderkonstanten 40 N/m i en ställning. I den fjädern hänger hon en andra fjäder med fjäderkonstanten 25 N/m. En vikt med massan 150 gram hängs i den nedre fjädern. Fjädrarnas egna massor försummas.</p>\n<ol><li>Hur stor kraft drar i den nedre fjädern?</li><li>Hur stor kraft drar i den övre fjädern?</li>\n<li>Hur stor blir den totala längdökningen?</li></ol>",
+  "s": "<p>a) F = 0,150·9,82 = <strong>1,47 N</strong></p>\n<p>b) <strong>1,47 N</strong> — hela vikten hänger i båda fjädrarna</p>\n<p>c) 1,47/40 + 1,47/25 = 0,037 + 0,059 = 0,096 m = <strong>9,6 cm</strong></p>"
+ },
+ {
+  "id": "4.116",
+  "kap": 4,
+  "omr": "fjadrar",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En vikt med massan 500 gram hängs samtidigt i två likadana fjädrar, som sitter bredvid varandra och båda har fjäderkonstanten 30 N/m.</p>\n<ol><li>Hur stor kraft drar i varje fjäder?</li><li>Hur långt dras fjädrarna ut?</li>\n<li>Vilken fjäderkonstant har de två fjädrarna tillsammans?</li></ol>",
+  "s": "<p>a) Tyngden 4,91 N fördelas lika: <strong>2,46 N</strong> i varje</p>\n<p>b) x = 2,46/30 = <strong>8,2 cm</strong></p>\n<p>c) k = 4,91/0,082 = <strong>60 N/m</strong>, alltså summan av de båda fjäderkonstanterna</p>"
+ },
+ {
+  "id": "4.117",
+  "kap": 4,
+  "omr": "fjadrar",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Clara hänger olika vikter i en fjäder, räknar ut vikternas tyngd och ritar in tyngden som funktion av förlängningen i ett diagram. Punkterna ligger på en rät linje genom origo.</p>\n<ol><li>Vilken enhet får linjens lutning?</li><li>Vad betyder lutningen fysikaliskt?</li>\n<li>Sara tycker att fjäderkonstanter borde anges i kg/m istället för N/m. Finns det någon anledning att använda N/m?</li></ol>",
+  "s": "<p>a) N/m, eftersom y-axelns enhet delas med x-axelns</p>\n<p>b) Lutningen är <strong>fjäderkonstanten</strong></p>\n<p>c) Ja. Det är kraften, inte massan, som drar ut fjädern. En vikt på månen har samma massa men mindre tyngd, och skulle då inte dra ut fjädern lika mycket.</p>"
+ },
+ {
+  "id": "4.118",
+  "kap": 4,
+  "omr": "friktion",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Ellen drar en låda med konstant hastighet på ett plant golv. Lådan har massan 8,0 kg och friktionstalet mellan golvet och lådan är 0,30.</p>\n<ol><li>Hur stor är normalkraften som verkar på lådan?</li>\n<li>Hur stor är friktionskraften?</li><li>Hur stor kraft drar Ellen med?</li></ol>",
+  "s": "<p>a) N = mg = 8,0·9,82 = <strong>79 N</strong></p>\n<p>b) f = µN = 0,30·78,6 = <strong>24 N</strong></p>\n<p>c) <strong>24 N</strong>, eftersom hastigheten är konstant</p>"
+ },
+ {
+  "id": "4.119",
+  "kap": 4,
+  "omr": "friktion",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Dejan har hakat fast en dynamometer i en låda med massan 9,5 kg. När han drar lådan vågrätt med konstant hastighet visar dynamometern 42 N.</p>\n<ol><li>Hur stor är friktionskraften som verkar på lådan?</li>\n<li>Bestäm friktionstalet mellan lådan och underlaget.</li></ol>",
+  "s": "<p>a) <strong>42 N</strong></p>\n<p>b) µ = f/N = 42/(9,5·9,82) = 42/93,3 = <strong>0,45</strong></p>"
+ },
+ {
+  "id": "4.120",
+  "kap": 4,
+  "omr": "friktion",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Jakob puttar på en låda med konstant hastighet. Han trycker vågrätt med kraften 52 N och friktionstalet mellan lådan och marken är 0,35.</p>\n<ol><li>Bestäm lådans massa.</li>\n<li>Vilken kraft skulle krävas om lådan istället stod på ett underlag med friktionstalet 0,20?</li></ol>",
+  "s": "<p>a) f = µmg ger m = 52/(0,35·9,82) = <strong>15 kg</strong></p>\n<p>b) F = 0,20·15,1·9,82 = <strong>30 N</strong></p>"
+ },
+ {
+  "id": "4.121",
+  "kap": 4,
+  "omr": "friktion",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>En låda står på ett golv. En vågrät kraft med storleken 9,0 N börjar verka på lådan, som då accelererar med 2,8 m/s². Friktionstalet mellan lådan och golvet är 0,35.</p>\n<p>Bestäm lådans massa.</p>",
+  "s": "<p>Kraftresultanten är F − µmg = ma</p>\n<p>9,0 = m(2,8 + 0,35·9,82) = m·6,24</p>\n<p>m = <strong>1,4 kg</strong></p>"
+ },
+ {
+  "id": "4.122",
+  "kap": 4,
+  "omr": "friktion",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En låda med massan 5,0 kg ligger stilla på ett lutande plan. Planets lutning är 15°.</p>\n<ol><li>Hur stor är tyngdkraften som verkar på lådan?</li>\n<li>Hur stor är normalkraften?</li><li>Hur stor är friktionskraften?</li></ol>",
+  "s": "<p>a) F = 5,0·9,82 = <strong>49 N</strong></p>\n<p>b) N = mg·cos15° = 49,1·0,966 = <strong>47 N</strong></p>\n<p>c) Lådan ligger stilla, så friktionskraften balanserar komposanten längs planet: f = mg·sin15° = <strong>13 N</strong></p>"
+ },
+ {
+  "id": "4.123",
+  "kap": 4,
+  "omr": "friktion",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En låda med massan 12 kg glider nerför en backe med lutningen 20° och färdas med konstant hastighet.</p>\n<ol><li>Bestäm friktionskraften som verkar på lådan.</li>\n<li>Bestäm friktionstalet mellan lådan och backen.</li></ol>",
+  "s": "<p>a) Konstant hastighet ger f = mg·sin20° = 117,8·0,342 = <strong>40 N</strong></p>\n<p>b) µ = f/N = mg·sin20°/(mg·cos20°) = tan20° = <strong>0,36</strong> — massan spelar ingen roll</p>"
+ },
+ {
+  "id": "4.124",
+  "kap": 4,
+  "omr": "friktion",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Karl har en planka som är 2,0 meter lång. Han ställer en låda på plankan och lyfter sedan långsamt den ena änden. När änden är 70 cm över marken börjar lådan glida.</p>\n<ol><li>Bestäm det lutande planets lutning i grader.</li>\n<li>Bestäm friktionstalet mellan plankan och lådan.</li></ol>",
+  "s": "<p>a) sin v = 0,70/2,0 = 0,35 → v = <strong>20,5°</strong></p>\n<p>b) Lådan börjar precis glida, alltså µ = tan v = <strong>0,37</strong></p>"
+ },
+ {
+  "id": "4.125",
+  "kap": 4,
+  "omr": "friktion",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>Friktionstalet mellan en låda och ett lutande plan är 0,28.</p>\n<ol><li>Hur stor kan planets lutning vara som störst innan lådan börjar glida?</li>\n<li>Visa att svaret inte beror på lådans massa.</li></ol>",
+  "s": "<p>a) Lådan börjar glida när mg·sin v = µ·mg·cos v, alltså när tan v = µ</p>\n<p>v = arctan 0,28 = <strong>15,6°</strong></p>\n<p>b) Massan finns med i båda leden och förkortas bort. En tung låda pressas hårdare mot planet, men dras också hårdare nedåt längs det, och de två effekterna tar ut varandra.</p>"
+ },
+ {
+  "id": "4.126",
+  "kap": 4,
+  "omr": "friktion",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>En låda står på ett lutande plan med lutningen 14°.</p>\n<ol><li>Bestäm lådans acceleration om planet är friktionsfritt.</li>\n<li>Bestäm accelerationen om friktionstalet är 0,15.</li>\n<li>Teckna ett allmänt uttryck för accelerationen vid lutningen v och friktionstalet µ.</li></ol>",
+  "s": "<p>a) a = g·sin14° = 9,82·0,242 = <strong>2,4 m/s²</strong></p>\n<p>b) a = g(sin14° − 0,15·cos14°) = 9,82(0,242 − 0,146) = <strong>0,95 m/s²</strong></p>\n<p>c) <strong>a = g(sin v − µ·cos v)</strong>, som blir noll när tan v = µ</p>"
+ },
+ {
+  "id": "5.57",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Ellen drar en vagn 80 meter längs en rak bana. Hon drar med den konstanta kraften 45 N, parallellt med marken.</p>\n<ol><li>Hur stort arbete har Ellen uträttat?</li>\n<li>Hur långt måste hon dra vagnen för att arbetet ska bli 5,4 kJ?</li></ol>",
+  "s": "<p>a) W = Fs = 45·80 = <strong>3,6 kNm</strong></p>\n<p>b) s = W/F = 5400/45 = <strong>120 m</strong></p>"
+ },
+ {
+  "id": "5.58",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Ett arbete har utförts för att flytta ett föremål 180 km. Arbetets storlek är 360 MNm.</p>\n<ol><li>Hur stor var kraften som utförde arbetet?</li>\n<li>Damien håller en vikt med massan 12 kg helt stilla i 45 sekunder. Hur stort arbete uträttar han?</li></ol>",
+  "s": "<p>a) F = W/s = 360·10⁶/180·10³ = <strong>2,0 kN</strong></p>\n<p>b) <strong>0 Nm</strong>, eftersom sträckan är noll. Att det känns ansträngande beror på musklerna, inte på fysikens definition av arbete.</p>"
+ },
+ {
+  "id": "5.59",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En låda har massan 18 kg och friktionstalet mellan lådan och marken är 0,38.</p>\n<ol><li>Hur stor kraft krävs för att dra lådan med konstant hastighet?</li>\n<li>Lådan dras sträckan 30 meter med konstant hastighet. Hur stort arbete uträttas då?</li>\n<li>Vad händer med energin?</li></ol>",
+  "s": "<p>a) F = µmg = 0,38·18·9,82 = <strong>67 N</strong></p>\n<p>b) W = 67,2·30 = <strong>2,0 kNm</strong></p>\n<p>c) Lådans hastighet är konstant, så all energi omvandlas till värme i underlaget och lådans undersida.</p>"
+ },
+ {
+  "id": "5.60",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Johannes drar i en låda med kraften 180 N, men kraften är inte parallell med marken utan bildar vinkeln 35° med den. Han förflyttar lådan 6,0 m.</p>\n<ol><li>Hur stort arbete uträttar Johannes?</li>\n<li>Hur stort hade arbetet blivit om han hade dragit parallellt med marken?</li></ol>",
+  "s": "<p>a) Endast komposanten längs rörelsen uträttar arbete: W = 180·cos35°·6,0 = <strong>885 Nm</strong></p>\n<p>b) W = 180·6,0 = <strong>1080 Nm</strong> — vinkeln kostar alltså nästan 20 % av arbetet</p>"
+ },
+ {
+  "id": "5.61",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>En väska med massan 4,0 kg står på marken, som anges som nollnivå för lägesenergin.</p>\n<ol><li>Hur mycket lägesenergi har väskan när den står på marken?</li>\n<li>Väskan ställs på ett bord som är 0,75 meter högt. Hur mycket lägesenergi har den nu?</li>\n<li>Hur stort arbete krävdes för att lyfta upp väskan på bordet?</li>\n<li>Väskan lyfts ytterligare 40 cm över bordsskivan. Hur stor blir lägesenergin då?</li></ol>",
+  "s": "<p>a) <strong>0 J</strong></p><p>b) E_p = mgh = 4,0·9,82·0,75 = <strong>29 J</strong></p>\n<p>c) <strong>29 Nm</strong> — lika mycket som lägesenergin ökade</p>\n<p>d) 4,0·9,82·1,15 = <strong>45 J</strong></p>"
+ },
+ {
+  "id": "5.62",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>En vikt med massan 3,0 kg står på ett golv. Olle lyfter vikten rakt upp och uträttar då arbetet 42 Nm.</p>\n<ol><li>Hur mycket förändras viktens lägesenergi?</li><li>Hur högt lyfte Olle vikten?</li>\n<li>En dator har lägesenergin 32 J och massan 2,4 kg. På vilken höjd över nollnivån befinner sig datorn?</li></ol>",
+  "s": "<p>a) <strong>42 J</strong></p>\n<p>b) h = W/mg = 42/(3,0·9,82) = <strong>1,4 m</strong></p>\n<p>c) h = 32/(2,4·9,82) = <strong>1,4 m</strong></p>"
+ },
+ {
+  "id": "5.63",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Clara drar en vagn uppför en backe. Backen är 12 meter lång och höjdskillnaden mellan backens start och slut är 2,4 m. Vagnen har massan 8,0 kg. Friktionen försummas.</p>\n<ol><li>Hur mycket förändras vagnens lägesenergi?</li>\n<li>Hur stort arbete uträttar Clara?</li>\n<li>Hur stor kraft måste Clara använda för att dra vagnen uppför backen?</li></ol>",
+  "s": "<p>a) ΔE_p = mgh = 8,0·9,82·2,4 = <strong>189 J</strong></p>\n<p>b) <strong>189 Nm</strong></p>\n<p>c) F = W/s = 188,7/12 = <strong>16 N</strong> — mindre kraft, men längre sträcka</p>"
+ },
+ {
+  "id": "5.64",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>För att lyfta upp en vagn till ett bord kan Simon antingen lyfta den rakt upp, eller använda en ramp. Om han drar upp vagnen via rampen behöver han bara dra med en fjärdedel av den kraft som krävs för att lyfta den rakt upp.</p>\n<ol><li>Vad säger mekanikens gyllene regel?</li><li>Bestäm rampens lutning.</li></ol>",
+  "s": "<p>a) Det man vinner i kraft förlorar man i sträcka. Arbetet blir lika stort oavsett vilken väg man väljer.</p>\n<p>b) Kraften längs rampen är mg·sin v = mg/4, alltså sin v = 0,25 och v = <strong>14,5°</strong></p>"
+ },
+ {
+  "id": "5.65",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Bestäm rörelseenergin för ...</p>\n<ol><li>... en kvinna som väger 65 kg och springer med hastigheten 8,0 m/s.</li>\n<li>... en bil med massan 1400 kg som kör med hastigheten 70 km/h.</li>\n<li>... en insekt med massan 0,50 g som kryper med hastigheten 1,5 cm/s.</li></ol>",
+  "s": "<p>a) E_k = mv²/2 = 65·64/2 = <strong>2,1 kJ</strong></p>\n<p>b) 70 km/h = 19,4 m/s → 1400·378/2 = <strong>265 kJ</strong></p>\n<p>c) 5,0·10⁻⁴·(0,015)²/2 = <strong>5,6·10⁻⁸ J</strong></p>"
+ },
+ {
+  "id": "5.66",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>En löpare springer med hastigheten 6,8 m/s och har då rörelseenergin 1,9 kJ.</p>\n<p>Hur mycket väger löparen?</p>",
+  "s": "<p>m = 2E_k/v² = 2·1900/6,8² = 3800/46,2 = <strong>82 kg</strong></p>"
+ },
+ {
+  "id": "5.67",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En kula med massan 1,5 kg släpps från toppen av ett hus. Daniel vill veta vilken hastighet kulan har när den har fallit 4,0 meter.</p>\n<ol><li>Hur mycket förändras kulans lägesenergi under de första 4,0 metrarna?</li>\n<li>Vad händer med denna lägesenergi?</li>\n<li>Bestäm kulans hastighet efter att den har fallit 4,0 meter.</li></ol>",
+  "s": "<p>a) ΔE_p = 1,5·9,82·4,0 = <strong>59 J</strong></p>\n<p>b) Den omvandlas till rörelseenergi.</p>\n<p>c) mv²/2 = mgh ger v = √(2gh) = √(78,6) = <strong>8,9 m/s</strong> — massan spelar ingen roll</p>"
+ },
+ {
+  "id": "5.68",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Ellen kastar en järnbit rakt uppåt. När hon släpper taget om den har den rörelseenergin 6,0 J och lägesenergin 2,5 J. Luftmotståndet försummas.</p>\n<ol><li>Hur mycket rörelseenergi har järnbiten när den når sin maximala höjd?</li>\n<li>Hur mycket lägesenergi har den på denna höjd?</li>\n<li>Hur mycket rörelseenergi har den när lägesenergin är 5,0 J?</li>\n<li>Hur mycket rörelseenergi har den när den är tillbaka på samma höjd som Ellen släppte den?</li></ol>",
+  "s": "<p>a) <strong>0 J</strong> — den står stilla ett ögonblick</p>\n<p>b) Summan är konstant 8,5 J, så <strong>8,5 J</strong></p>\n<p>c) 8,5 − 5,0 = <strong>3,5 J</strong></p>\n<p>d) <strong>6,0 J</strong> — lika mycket som den kastades med</p>"
+ },
+ {
+  "id": "5.69",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Henrik kastar en sten snett nedåt med hastigheten 5,0 m/s från toppen av ett hus. När han släpper taget om stenen är den 10 meter över marken.</p>\n<ol><li>Vilken hastighet har stenen när den träffar marken?</li>\n<li>Spelar det någon roll åt vilket håll han kastar stenen, så länge farten är 5,0 m/s?</li></ol>",
+  "s": "<p>a) mv₁²/2 + mgh = mv₂²/2 ger v₂ = √(v₁² + 2gh) = √(25 + 196) = <strong>15 m/s</strong></p>\n<p>b) Nej. Energiprincipen bryr sig bara om farten och höjden, inte om riktningen. Riktningen påverkar däremot var stenen landar och hur lång tid fallet tar.</p>"
+ },
+ {
+  "id": "5.70",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En träkub kastas rakt uppåt med hastigheten 5,0 m/s från höjden 2,2 m.</p>\n<ol><li>Vilken hastighet har träkuben när den landar på marken?</li>\n<li>Hur högt över marken når träkuben som mest?</li></ol>",
+  "s": "<p>a) v = √(v₀² + 2gh) = √(25 + 43,2) = <strong>8,3 m/s</strong></p>\n<p>b) Stighöjden är v₀²/2g = 25/19,64 = 1,27 m, alltså <strong>3,5 m över marken</strong></p>"
+ },
+ {
+  "id": "5.71",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>När Anna släpper en metallkula från en viss höjd får den hastigheten v precis innan den träffar marken.</p>\n<ol><li>Vilken hastighet hade metallkulan när den var halvvägs till marken?</li>\n<li>På vilken andel av fallhöjden har kulan halva sluthastigheten?</li></ol>",
+  "s": "<p>a) Halva fallhöjden ger halva rörelseenergin, och eftersom E_k är proportionell mot v² blir hastigheten <strong>v/√2 ≈ 0,71v</strong></p>\n<p>b) Halva hastigheten betyder en fjärdedel av rörelseenergin, alltså efter <strong>en fjärdedel av fallhöjden</strong></p>"
+ },
+ {
+  "id": "5.72",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>En låda puttas med hastigheten v nerför en brant isbacke, som är tillräckligt hal för att friktionen ska kunna försummas. Höjdskillnaden mellan backens topp och slut är h. När backen planar ut glider lådan ut på ett strävare material med friktionstalet µ, och stannar efter en stund på den horisontella marken.</p>\n<p>Bestäm sträckan s som lådan hinner färdas på det strävare materialet.</p>",
+  "s": "<p>All energi vid backens slut omvandlas till värme genom friktionsarbetet:</p>\n<p>mv²/2 + mgh = µmg·s</p>\n<p><strong>s = (0,5v² + gh)/(µg)</strong></p>\n<p>Massan förkortas bort — en tung låda har mer energi, men bromsas också hårdare.</p>"
+ },
+ {
+  "id": "5.73",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Clara lyfter upp en låda på ett bord. Lådan har massan 12 kg, bordet är 1,2 m högt och lyftet tar 0,90 sekunder.</p>\n<ol><li>Hur mycket förändras lådans lägesenergi under lyftet?</li>\n<li>Vilken effekt utvecklar Clara när hon lyfter lådan?</li></ol>",
+  "s": "<p>a) ΔE_p = 12·9,82·1,2 = <strong>141 J</strong></p>\n<p>b) P = W/t = 141,4/0,90 = <strong>157 W</strong></p>"
+ },
+ {
+  "id": "5.74",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>En tvättmaskin förbrukar effekten 2,0 kW under uppvärmningen av vattnet.</p>\n<ol><li>Hur mycket energi förbrukar maskinen på 45 minuter? Svara både i joule och kWh.</li>\n<li>Hur lång tid tar det för maskinen att förbruka energin 1,0 MJ?</li></ol>",
+  "s": "<p>a) E = Pt = 2000·2700 = <strong>5,4 MJ</strong>, vilket är 5,4·10⁶/3,6·10⁶ = <strong>1,5 kWh</strong></p>\n<p>b) t = 1,0·10⁶/2000 = 500 s = <strong>8,3 minuter</strong></p>"
+ },
+ {
+  "id": "5.75",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En gammal glödlampa är märkt 40 W, vilket betyder att den förbrukar den elektriska effekten 40 W. Ungefär 1,6 W av detta blir ljus.</p>\n<ol><li>Hur mycket energi krävs för att lampan ska lysa i 15 minuter? Svara i joule.</li>\n<li>Hur mycket energi krävs för att lampan ska lysa i 6,0 timmar? Svara i kWh.</li>\n<li>Vilken verkningsgrad har glödlampan?</li></ol>",
+  "s": "<p>a) E = 40·900 = <strong>36 kJ</strong></p>\n<p>b) 0,040 kW · 6,0 h = <strong>0,24 kWh</strong></p>\n<p>c) η = 1,6/40 = <strong>0,040</strong>, alltså 4 %. Resten blir värme.</p>"
+ },
+ {
+  "id": "5.76",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Felicia har byggt ett vattenkraftverk i miniatyr vid ett litet vattenfall där vattnet faller 1,8 meter. Varje sekund passerar 2,5 liter vatten genom kraftverket.</p>\n<ol><li>Hur mycket lägesenergi förlorar vattnet som passerar kraftverket under en sekund?</li>\n<li>Hur stor effekt avger vattnet?</li>\n<li>Kraftverket har verkningsgraden 0,78. Hur stor elektrisk effekt kan det producera?</li></ol>",
+  "s": "<p>a) 2,5 liter vatten har massan 2,5 kg → E_p = 2,5·9,82·1,8 = <strong>44 J</strong></p>\n<p>b) P = 44,2/1,0 = <strong>44 W</strong></p>\n<p>c) 0,78·44,2 = <strong>34 W</strong></p>"
+ },
+ {
+  "id": "5.77",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>När Tobias, som väger 75 kg, gör armhävningar höjer han sin tyngdpunkt 18 cm varje gång. Han hinner göra 35 armhävningar per minut.</p>\n<ol><li>Hur stort arbete uträttar han per armhävning?</li>\n<li>Vilken effekt utvecklar han?</li></ol>",
+  "s": "<p>a) W = mgh = 75·9,82·0,18 = <strong>133 J</strong></p>\n<p>b) P = 132,6·35/60 = <strong>77 W</strong></p>"
+ },
+ {
+  "id": "5.78",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>En bil med massan 1000 kg ska accelerera från 0 till 100 km/h på 6,0 sekunder.</p>\n<ol><li>Vilken effekt måste motorn minst ha?</li>\n<li>Vilken effekt måste motorn ha om verkningsgraden är 0,35?</li></ol>",
+  "s": "<p>a) 100 km/h = 27,8 m/s → E_k = 1000·27,8²/2 = 386 kJ</p>\n<p>P = 386·10³/6,0 = <strong>64 kW</strong></p>\n<p>b) 64,3/0,35 = <strong>184 kW</strong></p>"
+ },
+ {
+  "id": "5.79",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Hissen i en byggnad har verkningsgraden 0,85. Hissen väger 350 kg och Johannes, som har massan 80 kg, går in i den. Hissen förbrukar effekten 2,5 kW.</p>\n<p>Vilken hastighet kan hissen som störst lyfta Johannes med?</p>",
+  "s": "<p>Den nyttiga effekten är 0,85·2500 = 2125 W</p>\n<p>P = Fv = mgv ger v = 2125/(430·9,82) = <strong>0,50 m/s</strong></p>"
+ },
+ {
+  "id": "5.80",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Bestäm rörelsemängden för ...</p>\n<ol><li>... en man som väger 78 kg och springer med hastigheten 5,5 m/s.</li>\n<li>... en bil med massan 1100 kg som kör med hastigheten 80 km/h.</li>\n<li>... ett flygplan som väger 280 ton och flyger med hastigheten 900 km/h.</li></ol>",
+  "s": "<p>a) p = mv = 78·5,5 = <strong>429 kgm/s</strong></p>\n<p>b) 80 km/h = 22,2 m/s → <strong>2,4·10⁴ kgm/s</strong></p>\n<p>c) 900 km/h = 250 m/s → 2,80·10⁵·250 = <strong>7,0·10⁷ kgm/s</strong></p>"
+ },
+ {
+  "id": "5.81",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Ett föremål med massan 30 kg har rörelsemängden 420 kgm/s.</p>\n<ol><li>Bestäm föremålets hastighet.</li>\n<li>Vilken rörelsemängd har en proton med hastigheten 2,0 Mm/s? Protonens massa är 1,673·10⁻²⁷ kg.</li></ol>",
+  "s": "<p>a) v = p/m = 420/30 = <strong>14 m/s</strong></p>\n<p>b) p = 1,673·10⁻²⁷·2,0·10⁶ = <strong>3,3·10⁻²¹ kgm/s</strong></p>"
+ },
+ {
+  "id": "5.82",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Två vagnar kör mot varandra. Den vänstra vagnen har massan 3,0 kg och hastigheten 2,5 m/s åt höger. Den högra vagnen har massan 4,0 kg och hastigheten 1,5 m/s åt vänster.</p>\n<ol><li>Bestäm rörelsemängden för vardera vagnen.</li>\n<li>Bestäm vagnarnas totala rörelsemängd.</li>\n<li>Vagnarna kolliderar och studsar isär. Den vänstra vagnen har efter kollisionen hastigheten 1,0 m/s åt vänster. Bestäm den högra vagnens hastighet efter kollisionen.</li></ol>",
+  "s": "<p>Räkna åt höger som positiv riktning.</p>\n<p>a) 3,0·2,5 = <strong>7,5 kgm/s åt höger</strong> och 4,0·1,5 = <strong>6,0 kgm/s åt vänster</strong></p>\n<p>b) 7,5 − 6,0 = <strong>1,5 kgm/s åt höger</strong></p>\n<p>c) Efter: −3,0 + 4,0v = 1,5 → v = <strong>1,1 m/s åt höger</strong></p>"
+ },
+ {
+  "id": "5.83",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Två vagnar kör rakt mot varandra. Den ena har massan 1,5 kg och farten 0,90 m/s. Den andra har massan 4,0 kg och farten 0,40 m/s. När vagnarna kolliderar fastnar de i varandra.</p>\n<ol><li>Bestäm vagnarnas totala rörelsemängd före kollisionen.</li>\n<li>Vilken hastighet får vagnarna efter kollisionen?</li></ol>",
+  "s": "<p>a) Med den lätta vagnens riktning som positiv: 1,5·0,90 − 4,0·0,40 = 1,35 − 1,60 = <strong>0,25 kgm/s</strong> i den tunga vagnens riktning</p>\n<p>b) v = 0,25/5,5 = <strong>0,045 m/s</strong> i den tunga vagnens ursprungliga riktning</p>"
+ },
+ {
+  "id": "5.84",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Sara puttar på en till en början stillastående vagn under tiden 0,40 s. Den resulterande kraften som verkar på vagnen är 220 N.</p>\n<ol><li>Hur stor impuls påverkas vagnen av?</li>\n<li>Hur mycket förändras vagnens rörelsemängd?</li>\n<li>Vagnen har massan 12 kg. Bestäm vagnens hastighet efteråt.</li></ol>",
+  "s": "<p>a) I = FΔt = 220·0,40 = <strong>88 Ns</strong></p>\n<p>b) <strong>88 kgm/s</strong> — impulsen är precis rörelsemängdsändringen</p>\n<p>c) v = 88/12 = <strong>7,3 m/s</strong></p>"
+ },
+ {
+  "id": "5.85",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>En vagn med massan 10 kg kör med hastigheten 2,5 m/s åt höger in i en stillastående vagn med massan 5,0 kg. Efter kollisionen får den högra vagnen hastigheten 3,2 m/s åt höger.</p>\n<ol><li>Vilken hastighet får den vänstra vagnen?</li>\n<li>Hur stor impuls fick den vänstra vagnen?</li>\n<li>Hur stor impuls fick den högra vagnen?</li></ol>",
+  "s": "<p>a) 10·2,5 = 10v + 5,0·3,2 ger v = (25 − 16)/10 = <strong>0,90 m/s åt höger</strong></p>\n<p>b) Δp = 10·0,90 − 10·2,5 = <strong>16 Ns åt vänster</strong></p>\n<p>c) 5,0·3,2 − 0 = <strong>16 Ns åt höger</strong> — lika stora och motriktade, precis som Newtons tredje lag kräver</p>"
+ },
+ {
+  "id": "5.86",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Två vagnar rullar åt samma håll. Den bakre vagnen har massan 2,5 kg och hastigheten 4,0 m/s, den främre har massan 4,0 kg och hastigheten 1,8 m/s. Den bakre vagnen kör ikapp den främre, och när de kolliderar fastnar de i varandra.</p>\n<p>Bestäm vagnarnas hastighet efter kollisionen.</p>",
+  "s": "<p>p = 2,5·4,0 + 4,0·1,8 = 10 + 7,2 = 17,2 kgm/s</p>\n<p>v = 17,2/6,5 = <strong>2,6 m/s</strong> i samma riktning som före</p>"
+ },
+ {
+  "id": "5.87",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Använd vagnarna i föregående uppgift, alltså kollisionen där en vagn på 10 kg med hastigheten 2,5 m/s kör in i en stillastående vagn på 5,0 kg och den högra vagnen får hastigheten 3,2 m/s.</p>\n<ol><li>Hur stor är vagnarnas totala rörelseenergi före kollisionen?</li>\n<li>Hur stor är den efter kollisionen?</li>\n<li>Är kollisionen en fullständigt elastisk stöt?</li></ol>",
+  "s": "<p>a) E_k = 10·2,5²/2 = <strong>31 J</strong></p>\n<p>b) 10·0,90²/2 + 5,0·3,2²/2 = 4,05 + 25,6 = <strong>30 J</strong></p>\n<p>c) <strong>Nej.</strong> Rörelseenergin har minskat något, så en del av energin har omvandlats till värme och ljud. Rörelsemängden bevaras däremot alltid.</p>"
+ },
+ {
+  "id": "5.88",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>Två vagnar kolliderar i en fullständigt elastisk stöt. Den vänstra vagnen har massan 2,0 kg och kör med hastigheten 4,0 m/s åt höger. Den högra vagnen har massan 3,0 kg och kör med hastigheten 1,0 m/s åt vänster.</p>\n<ol><li>Ställ upp en ekvation som visar att rörelsemängden bevaras.</li>\n<li>Ställ upp en ekvation med sambandet för hastigheterna vid fullständigt elastiska stötar.</li>\n<li>Bestäm vagnarnas hastigheter efter kollisionen.</li></ol>",
+  "s": "<p>a) 2,0·4,0 + 3,0·(−1,0) = 2,0v_A + 3,0v_B, alltså 5,0 = 2,0v_A + 3,0v_B</p>\n<p>b) Relativhastigheten byter tecken: 4,0 − (−1,0) = v_B − v_A</p>\n<p>c) v_B = v_A + 5,0 insatt ger 5,0 = 2,0v_A + 3,0v_A + 15 → <strong>v_A = −2,0 m/s</strong> och <strong>v_B = 3,0 m/s</strong></p>\n<p>Båda vagnarna byter alltså riktning. Kontroll: rörelseenergin är 17,5 J både före och efter.</p>"
+ },
+ {
+  "id": "5.89",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>Härled lagen om rörelsemängdens bevarande med hjälp av Newtons tredje lag. Utgå från två vagnar A och B som kolliderar med varandra under tiden Δt.</p>",
+  "s": "<p>Krafterna under stöten är lika stora och motriktade: F_A = −F_B</p>\n<p>Multiplicera med kollisionstiden, som är densamma för båda: F_A·Δt = −F_B·Δt</p>\n<p>m_A·a_A·Δt = −m_B·a_B·Δt → m_A·Δv_A = −m_B·Δv_B</p>\n<p>m_A(v_A2 − v_A1) = −m_B(v_B2 − v_B1)</p>\n<p><strong>m_A·v_A2 + m_B·v_B2 = m_A·v_A1 + m_B·v_B1</strong></p>\n<p>Den totala rörelsemängden är alltså lika stor före och efter kollisionen.</p>"
+ },
+ {
+  "id": "6.55",
+  "kap": 6,
+  "omr": "tryck",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>En kub står på ett golv. Kubens sidlängd är 25 cm och dess massa är 9,2 kg.</p>\n<p>Med hur stort tryck verkar kuben på golvet?</p>",
+  "s": "<p>F = mg = 9,2·9,82 = 90,3 N och A = 0,25² = 0,0625 m²</p>\n<p>p = F/A = 90,3/0,0625 = <strong>1,4 kPa</strong></p>"
+ },
+ {
+  "id": "6.56",
+  "kap": 6,
+  "omr": "tryck",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>En kubisk låda med sidlängden 10 cm står på ett bord. Lådan påverkar bordet med trycket 2,4 kPa.</p>\n<ol><li>Hur stor kraft verkar på bordet?</li><li>Bestäm lådans massa.</li></ol>",
+  "s": "<p>a) F = pA = 2400·0,010 = <strong>24 N</strong></p>\n<p>b) m = F/g = 24/9,82 = <strong>2,4 kg</strong></p>"
+ },
+ {
+  "id": "6.57",
+  "kap": 6,
+  "omr": "tryck",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En kub står på ett golv och påverkar golvet med trycket 5,8 kPa. Kuben har massan 6,0 kg.</p>\n<ol><li>Bestäm arean för en av kubens sidor.</li><li>Bestäm kubens densitet.</li></ol>",
+  "s": "<p>a) A = F/p = 58,9/5800 = 0,0102 m² = <strong>1,0 dm²</strong></p>\n<p>b) Sidan är √0,0102 = 0,101 m, så V = 1,02 dm³ → ρ = 6,0/1,02 = <strong>5,9 g/cm³</strong></p>"
+ },
+ {
+  "id": "6.58",
+  "kap": 6,
+  "omr": "tryck",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Ett rätblock har måtten 20 cm × 30 cm × 50 cm och massan 18 kg. Det kan ställas på tre olika sätt på ett bord.</p>\n<ol><li>Bestäm de olika tryck som blocket kan påverka bordet med.</li>\n<li>Vilket samband finns mellan tryck och anliggningsarea?</li></ol>",
+  "s": "<p>F = 18·9,82 = 177 N</p>\n<p>a) A = 0,060 m² → <strong>2,9 kPa</strong>; A = 0,10 m² → <strong>1,8 kPa</strong>; A = 0,15 m² → <strong>1,2 kPa</strong></p>\n<p>b) Trycket är omvänt proportionellt mot arean. Kraften är hela tiden densamma.</p>"
+ },
+ {
+  "id": "6.59",
+  "kap": 6,
+  "omr": "tryck",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>En annan enhet som används för tryck är bar. 1 bar är detsamma som 100 kPa.</p>\n<ol><li>Hur många pascal motsvarar 1 millibar?</li><li>Ange trycket 45 MPa i enheten bar.</li></ol>",
+  "s": "<p>a) <strong>100 Pa</strong></p><p>b) 45·10⁶/10⁵ = <strong>450 bar</strong></p>"
+ },
+ {
+  "id": "6.60",
+  "kap": 6,
+  "omr": "tryck",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Johanna ser ett papper på ett bord. Hon klipper pappret i två lika stora delar och lägger sedan tillbaka den ena delen på bordet.</p>\n<ol><li>Hur stort är trycket från halva pappret jämfört med trycket från hela pappret?</li>\n<li>Motivera ditt svar.</li></ol>",
+  "s": "<p>a) <strong>Lika stort</strong></p>\n<p>b) Både kraften och arean halveras, och trycket är kvoten mellan dem. Trycket beror på papprets tjocklek och densitet, inte på hur stort arket är.</p>"
+ },
+ {
+  "id": "6.61",
+  "kap": 6,
+  "omr": "vatsketryck",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>En simbassäng är 3,5 meter djup.</p>\n<ol><li>Hur stort är vätsketrycket på bassängens botten? Vatten har densiteten 998 kg/m³.</li>\n<li>Hur stort hade trycket varit om bassängen varit 5,0 meter djup?</li>\n<li>Hur stort hade trycket varit om den 3,5 meter djupa bassängen varit fylld med olivolja (916 kg/m³)?</li></ol>",
+  "s": "<p>a) p = ρgh = 998·9,82·3,5 = <strong>34 kPa</strong></p>\n<p>b) 998·9,82·5,0 = <strong>49 kPa</strong></p>\n<p>c) 916·9,82·3,5 = <strong>31 kPa</strong></p>"
+ },
+ {
+  "id": "6.62",
+  "kap": 6,
+  "omr": "vatsketryck",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Elin har köpt en klocka. Försäljaren hävdar att den tål ett vätsketryck på 700 kPa.</p>\n<p>Hur djupt ska man kunna dyka med klockan enligt försäljaren?</p>",
+  "s": "<p>h = p/(ρg) = 700 000/(998·9,82) = <strong>71 m</strong></p>"
+ },
+ {
+  "id": "6.63",
+  "kap": 6,
+  "omr": "vatsketryck",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En simbassäng är 3,5 meter djup och lufttrycket ovanför vattenytan är 101,3 kPa.</p>\n<ol><li>Beräkna det totala trycket på bassängens botten.</li>\n<li>På vilket vattendjup är det totala trycket dubbelt så stort som lufttrycket vid ytan?</li></ol>",
+  "s": "<p>a) 101,3 + 34,3 = <strong>136 kPa</strong></p>\n<p>b) Vätsketrycket ska bli 101,3 kPa: h = 101 300/(998·9,82) = <strong>10,3 m</strong></p>"
+ },
+ {
+  "id": "6.64",
+  "kap": 6,
+  "omr": "vatsketryck",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>En kubisk låda med sidlängden 50 cm stängs och görs vattentät. Lådan kedjas fast i botten av en sjö, 6,0 meter under vattenytan.</p>\n<ol><li>Hur stort är lufttrycket inuti lådan?</li>\n<li>Hur stort är det totala trycket utanför lådan?</li>\n<li>Hur stor kraft verkar på en av lådans sidor?</li></ol>",
+  "s": "<p>a) <strong>101,3 kPa</strong> — luften stängdes in vid ytan</p>\n<p>b) 101,3 + 998·9,82·6,0/1000 = <strong>160 kPa</strong></p>\n<p>c) Skillnaden mellan trycken är 58,8 kPa, och sidan har arean 0,25 m² → F = <strong>15 kN</strong></p>"
+ },
+ {
+  "id": "6.65",
+  "kap": 6,
+  "omr": "vatsketryck",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En sluten behållare består av två lodräta cylindrar som är förbundna med varandra och fyllda med vätska. På toppen av varje cylinder finns en yta som kan röra sig upp och ner. Man trycker på den lilla cylindern, som har radien 1,5 cm, med kraften 100 N.</p>\n<ol><li>Förklara med hjälp av Pascals princip varför den andra cylindern trycks uppåt.</li>\n<li>Hur stort tryck påverkas vätskan av?</li>\n<li>Den stora cylindern har radien 5,0 cm. Bestäm kraften på den.</li></ol>",
+  "s": "<p>a) I en instängd vätska sprids en tryckökning i alla riktningar till alla delar av vätskan. Tryckökningen når därför även den andra cylinderns yta och trycker den uppåt.</p>\n<p>b) p = F/A = 100/(π·0,015²) = <strong>141 kPa</strong></p>\n<p>c) F = pA = 141 470·π·0,050² = <strong>1,1 kN</strong></p>"
+ },
+ {
+  "id": "6.66",
+  "kap": 6,
+  "omr": "vatsketryck",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>En hydraulisk domkraft ska klara av att lyfta en bil med massan 900 kg, genom att en person med massan 70 kg ställer sig på den lilla cylindern. Den lilla cylindern har radien 1,0 cm.</p>\n<p>Hur stor ska den stora cylinderns radie vara?</p>",
+  "s": "<p>Trycket är detsamma i båda cylindrarna: F₁/A₁ = F₂/A₂</p>\n<p>A₂/A₁ = 900/70 = 12,9, och areorna förhåller sig som radierna i kvadrat</p>\n<p>R = 1,0·√12,9 = <strong>3,6 cm</strong></p>"
+ },
+ {
+  "id": "6.67",
+  "kap": 6,
+  "omr": "vatsketryck",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Hanna ska bestämma densiteten för en okänd vätska. Hon använder ett u-rör som fyllts med den okända vätskan samt vatten. Vätskorna blandar sig inte. Där vätskorna möts är deras vätsketryck lika stort. Den okända vätskan står 9,0 cm hög och vattnet 7,5 cm.</p>\n<p>Bestäm den okända vätskans densitet.</p>",
+  "s": "<p>ρ₁gh₁ = ρ₂gh₂ ger ρ₁ = 998·7,5/9,0 = <strong>832 kg/m³</strong></p>\n<p>Den okända vätskan är lättare än vatten, vilket stämmer med att dess pelare är högre.</p>"
+ },
+ {
+  "id": "6.68",
+  "kap": 6,
+  "omr": "vatsketryck",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Ett u-rör är fyllt med vatten och en vätska med densiteten 1,25 g/cm³. Vätskorna möts längst ner i röret, och där är deras vätsketryck lika stort. Summan av de båda vätskepelarnas höjder är 24 cm.</p>\n<p>Bestäm de båda höjderna.</p>",
+  "s": "<p>1,00·h_v = 1,25·h_t och h_v + h_t = 24</p>\n<p>1,25h_t + h_t = 24 → <strong>h_t = 10,7 cm</strong> och <strong>h_v = 13,3 cm</strong></p>\n<p>Den tyngre vätskan står lägre, precis som väntat.</p>"
+ },
+ {
+  "id": "6.69",
+  "kap": 6,
+  "omr": "vatsketryck",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Daniel har ritat en cirkel på marken med diametern 1,2 meter. Lufttrycket är 101,3 kPa.</p>\n<ol><li>Bestäm massan för all luft som finns rakt ovanför cirkeln, ända upp till atmosfärens gräns.</li>\n<li>Varför pressas inte marken ihop av denna luftpelare?</li></ol>",
+  "s": "<p>a) A = π·0,60² = 1,13 m². Luftpelarens tyngd är F = pA = 101 300·1,13 = 1,15·10⁵ N</p>\n<p>m = F/g = <strong>1,2·10⁴ kg</strong>, alltså ungefär tolv ton</p>\n<p>b) Trycket verkar i alla riktningar och motverkas av trycket underifrån och från sidorna. Marken pressas inte ihop eftersom den redan är i jämvikt med atmosfären.</p>"
+ },
+ {
+  "id": "6.70",
+  "kap": 6,
+  "omr": "vatsketryck",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Markus befinner sig på ett berg 3,0 km över havet, där lufttrycket är omkring 70 kPa. Han dricker upp en plastflaska med läsk och skruvar på korken så att flaskan är tät.</p>\n<ol><li>Beskriv vad som händer med flaskan när Markus tar ner den till havsnivån.</li>\n<li>Vad händer om han tar upp den på berget igen?</li></ol>",
+  "s": "<p>a) Flaskan pressas ihop, eftersom lufttrycket utanför är betydligt större än de 70 kPa som är instängda i flaskan.</p>\n<p>b) Den återgår helt eller delvis till sin ursprungliga form, om plasten inte har blivit permanent deformerad.</p>"
+ },
+ {
+  "id": "6.71",
+  "kap": 6,
+  "omr": "arkimedes",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>En järnkula har lagts i ett glas med vatten. Kulan har volymen 3,0 cm³, järn har densiteten 7,87 g/cm³ och vattnet 998 kg/m³.</p>\n<p>Bestäm lyftkraften som verkar på kulan.</p>",
+  "s": "<p>F = ρ_vatten·g·V = 998·9,82·3,0·10⁻⁶ = <strong>29 mN</strong></p>\n<p>Järnets densitet behövs inte — lyftkraften beror bara på den undanträngda vätskan.</p>"
+ },
+ {
+  "id": "6.72",
+  "kap": 6,
+  "omr": "arkimedes",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>En silverkub med sidlängden 2,0 cm har lagts i en skål med etanol (789 kg/m³).</p>\n<p>Bestäm lyftkraften som verkar på kuben.</p>",
+  "s": "<p>V = 2,0³ = 8,0 cm³ = 8,0·10⁻⁶ m³</p>\n<p>F = 789·9,82·8,0·10⁻⁶ = <strong>62 mN</strong></p>"
+ },
+ {
+  "id": "6.73",
+  "kap": 6,
+  "omr": "arkimedes",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Ett föremål ska kunna flyta i etanol, som har densiteten 0,789 g/cm³.</p>\n<ol><li>Hur hög densitet kan föremålet som högst ha?</li>\n<li>Skulle ett föremål av trä med densiteten 0,60 g/cm³ flyta?</li></ol>",
+  "s": "<p>a) Som högst <strong>0,789 g/cm³</strong>, alltså samma som etanolens</p>\n<p>b) Ja, och det skulle dessutom sticka upp ur vätskan med ungefär en fjärdedel av sin volym.</p>"
+ },
+ {
+  "id": "6.74",
+  "kap": 6,
+  "omr": "arkimedes",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En träplanka med massan 2,4 kg flyter på en sjö.</p>\n<ol><li>Vilka krafter verkar på plankan?</li>\n<li>Hur stor är kraftresultanten som verkar på plankan?</li>\n<li>Bestäm lyftkraften som verkar på plankan.</li>\n<li>Bestäm volymen för den del av plankan som är under vattenytan.</li></ol>",
+  "s": "<p>a) Tyngdkraften nedåt och lyftkraften enligt Arkimedes princip uppåt.</p>\n<p>b) <strong>0 N</strong>, eftersom plankan ligger stilla</p>\n<p>c) Lyftkraften måste vara lika stor som tyngdkraften: <strong>24 N</strong></p>\n<p>d) Den undanträngda vattenmassan är 2,4 kg → V = 2,4/0,998 = <strong>2,4 dm³</strong></p>"
+ },
+ {
+  "id": "6.75",
+  "kap": 6,
+  "omr": "arkimedes",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Markus har en liten järnbit med massan 90 g som han har hängt i en dynamometer. Han sänker ner järnbiten i en skål med vatten. Järn har densiteten 7,87 g/cm³.</p>\n<ol><li>Bestäm järnbitens volym.</li><li>Bestäm lyftkraften som verkar på järnbiten.</li>\n<li>Vilken kraft kommer dynamometern att visa?</li></ol>",
+  "s": "<p>a) V = 90/7,87 = <strong>11,4 cm³</strong></p>\n<p>b) F = 998·9,82·1,14·10⁻⁵ = <strong>112 mN</strong></p>\n<p>c) 0,090·9,82 − 0,112 = 0,884 − 0,112 = <strong>0,77 N</strong></p>"
+ },
+ {
+  "id": "6.76",
+  "kap": 6,
+  "omr": "arkimedes",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Felicia har fyllt en ballong med helium. Ballongen har ungefär formen av en sfär med radien 20 cm. Luftens densitet är 1,29 kg/m³ och heliumets 0,18 kg/m³. Plasten i ballongen väger 4,0 g.</p>\n<p>Hur stor massa skulle ballongen kunna lyfta utan att den sjunker mot marken?</p>",
+  "s": "<p>V = (4/3)π·0,20³ = 0,0335 m³</p>\n<p>Undanträngd luft: 1,29·0,0335 = 43,2 g. Helium inuti: 0,18·0,0335 = 6,0 g</p>\n<p>43,2 − 6,0 − 4,0 = <strong>33 g</strong></p>"
+ },
+ {
+  "id": "6.77",
+  "kap": 6,
+  "omr": "arkimedes",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Johanna har hängt ett föremål av okänt material i en dynamometer, som visar 5,6 N. När hon sänker ner föremålet i en skål med vatten minskar utslaget till 3,4 N.</p>\n<ol><li>Vilken massa har föremålet?</li><li>Hur stor är lyftkraften?</li>\n<li>Vilken volym har föremålet?</li><li>Bestäm materialets densitet.</li></ol>",
+  "s": "<p>a) m = 5,6/9,82 = <strong>0,57 kg</strong></p>\n<p>b) 5,6 − 3,4 = <strong>2,2 N</strong></p>\n<p>c) V = F/(ρg) = 2,2/(998·9,82) = 2,24·10⁻⁴ m³ = <strong>0,22 dm³</strong></p>\n<p>d) ρ = 0,570/2,24·10⁻⁴ = <strong>2,5 g/cm³</strong></p>"
+ },
+ {
+  "id": "6.78",
+  "kap": 6,
+  "omr": "arkimedes",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>En stålmutter hänger i en dynamometer och är nedsänkt i ett glas med vatten. Dynamometern visar kraften 0,55 N. Stål har densiteten 7,85 g/cm³.</p>\n<p>Bestäm mutterns massa.</p>",
+  "s": "<p>Dynamometern visar mg − ρ_v·g·V, där V = m/ρ_s</p>\n<p>F = mg(1 − ρ_v/ρ_s) = mg(1 − 0,998/7,85) = mg·0,873</p>\n<p>m = 0,55/(9,82·0,873) = <strong>64 g</strong></p>"
+ },
+ {
+  "id": "6.79",
+  "kap": 6,
+  "omr": "arkimedes",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>Helena har lärt sig om Arkimedes princip och funderar över normalkraften. När hon står på marken tänker hon att normalkraften är lika stor som tyngdkraften.</p>\n<ol><li>Hur stor blir normalkraften om man också tar hänsyn till lyftkraften från luften?</li>\n<li>Anta att Helena väger exakt 70 kg och att hennes kropps volym är 0,068 m³. Hur många procent mindre blir normalkraften?</li></ol>",
+  "s": "<p>a) Normalkraften blir <strong>tyngdkraften minus lyftkraften</strong>, eftersom kroppen tränger undan luft</p>\n<p>b) F_lyft = 1,29·9,82·0,068 = 0,86 N, medan tyngdkraften är 687 N</p>\n<p>0,86/687 = <strong>0,13 %</strong> — försumbart i praktiken, men fullt mätbart med en känslig våg</p>"
+ },
+ {
+  "id": "6.80",
+  "kap": 6,
+  "omr": "arkimedes",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>I ett experiment fylls en ballong med en gas som har lägre densitet än luft. Den maximala massan för en extra vikt som ballongen kan lyfta, utan att den sjunker mot marken, kan beräknas med formeln V(ρ_luft − ρ_gas). Här är V ballongens volym.</p>\n<p>Visa att formeln stämmer. Ballongens egen massa samt viktens volym är försumbara.</p>",
+  "s": "<p>Kraftresultanten på ballongen är F_lyft − mg = ρ_luft·gV − ρ_gas·gV = gV(ρ_luft − ρ_gas)</p>\n<p>Denna kraft är riktad uppåt och verkar på vikten som hängs i ballongen. Den andra kraften på vikten är dess tyngdkraft.</p>\n<p>Om vikten ska vara så tung som möjligt utan att ballongen sjunker hänger allt stilla, och kraftresultanten på vikten är 0 N:</p>\n<p>m_vikt·g = gV(ρ_luft − ρ_gas) → <strong>m_vikt = V(ρ_luft − ρ_gas)</strong></p>"
+ },
+ {
+  "id": "6.81",
+  "kap": 6,
+  "omr": "gaslagen",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Omvandla följande temperaturer till enheten kelvin.</p>\n<ol><li>25 °C</li><li>150 °C</li><li>−40 °C</li><li>480 °C</li></ol>",
+  "s": "<p>a) <strong>298 K</strong></p><p>b) <strong>423 K</strong></p>\n<p>c) <strong>233 K</strong></p><p>d) <strong>753 K</strong></p>"
+ },
+ {
+  "id": "6.82",
+  "kap": 6,
+  "omr": "gaslagen",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Omvandla följande temperaturer till enheten °C.</p>\n<ol><li>90 K</li><li>350 K</li><li>0 K</li><li>1500 K</li></ol>",
+  "s": "<p>a) <strong>−183 °C</strong></p><p>b) <strong>77 °C</strong></p>\n<p>c) <strong>−273 °C</strong>, den absoluta nollpunkten</p><p>d) <strong>1227 °C</strong></p>"
+ },
+ {
+  "id": "6.83",
+  "kap": 6,
+  "omr": "gaslagen",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Curt har en låda som kan stängas så att den är helt lufttät. Luften i rummet har trycket 101,3 kPa och temperaturen 18 °C. Curt stänger locket och värmer sedan upp lådan så att både lådan och luften inuti får temperaturen 45 °C. Lådan antas bestå av ett hållbart material.</p>\n<ol><li>Vilka av storheterna i den ideala gaslagen är lika stora före och efter uppvärmningen? Förklara varför.</li>\n<li>Omvandla temperaturerna till kelvin.</li>\n<li>Bestäm lufttrycket i den uppvärmda lådan.</li></ol>",
+  "s": "<p>a) <strong>n</strong>, eftersom lådan är lufttät och ingen gas kan ta sig in eller ut. <strong>R</strong>, eftersom den är en konstant. <strong>V</strong>, eftersom lådan inte ändrar form.</p>\n<p>b) 291 K respektive 318 K</p>\n<p>c) p₁/T₁ = p₂/T₂ ger p₂ = 101,3·318/291 = <strong>111 kPa</strong></p>"
+ },
+ {
+  "id": "6.84",
+  "kap": 6,
+  "omr": "gaslagen",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En ballong med volymen 3,0 dm³ ligger utomhus på ett bord. Temperaturen är 12 °C. Solen kommer fram och värmer ballongen till 30 °C, men lufttrycket utanför ballongen ändras inte.</p>\n<ol><li>Vilka storheter i den ideala gaslagen är lika stora före och efter uppvärmningen? Förklara varför.</li>\n<li>Bestäm ballongens volym när den har värmts upp.</li></ol>",
+  "s": "<p>a) <strong>n</strong>, eftersom ballongen är lufttät, och <strong>R</strong> eftersom den är konstant. Även <strong>p</strong>, eftersom luften inuti ballongen alltid har samma tryck som luften utanför — annars skulle ballongen växa eller pressas ihop tills trycken blev lika.</p>\n<p>b) V₁/T₁ = V₂/T₂ ger V₂ = 3,0·303/285 = <strong>3,2 dm³</strong></p>"
+ },
+ {
+  "id": "6.85",
+  "kap": 6,
+  "omr": "gaslagen",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Ett rum i en betongbunker har stängts så att det är helt lufttätt. Lufttrycket inne i rummet är 100 kPa och temperaturen 22 °C. Temperaturen förändras, och som en följd av detta minskar lufttrycket till 97 kPa.</p>\n<p>Bestäm rummets nya temperatur.</p>",
+  "s": "<p>T₂ = T₁·p₂/p₁ = 295·97/100 = 286 K</p>\n<p><strong>13 °C</strong></p>"
+ },
+ {
+  "id": "6.86",
+  "kap": 6,
+  "omr": "gaslagen",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Damien fyller en sopsäck med 50 liter luft när lufttrycket är 98 kPa. Han sätter en klämma på påsens ena ända så att den kan antas vara helt lufttät. Några timmar senare är lufttrycket 103 kPa, medan temperaturen är oförändrad.</p>\n<p>Vilken volym har påsen nu?</p>",
+  "s": "<p>p₁V₁ = p₂V₂ ger V₂ = 50·98/103 = <strong>48 liter</strong></p>"
+ },
+ {
+  "id": "6.87",
+  "kap": 6,
+  "omr": "gaslagen",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Emil har blåst upp en ballong som har formen av en sfär med radien 12,0 cm. Temperaturen i rummet förändras från 20,0 °C till 35,0 °C medan lufttrycket är konstant.</p>\n<p>Vilken radie får ballongen?</p>",
+  "s": "<p>V₂/V₁ = T₂/T₁ = 308/293 = 1,0512</p>\n<p>Volymen är proportionell mot r³, så r₂ = 12,0·∛1,0512 = <strong>12,2 cm</strong></p>\n<p>En rejäl temperaturökning ger alltså bara någon procents radieökning.</p>"
+ },
+ {
+  "id": "6.88",
+  "kap": 6,
+  "omr": "gaslagen",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>I en helt lufttät behållare fylld med en gas flyttas en av behållarens väggar, så att behållarens volym minskar med 25 %. Temperaturen i behållaren förändras inte.</p>\n<ol><li>Vad mer kommer att förändras, och hur mycket?</li>\n<li>Hur förändras gasens densitet?</li></ol>",
+  "s": "<p>a) Trycket. p₁V₁ = p₂V₂ ger p₂ = p₁/0,75 = 1,33p₁, alltså en <strong>ökning med 33 %</strong></p>\n<p>b) Massan är oförändrad medan volymen är 75 % av den ursprungliga, så densiteten ökar med <strong>33 %</strong></p>"
+ },
+ {
+  "id": "6.89",
+  "kap": 6,
+  "omr": "gaslagen",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>När en tornado passerar kan lufttrycket minska mycket snabbt. Betrakta en låda utan lock, där luften kan röra sig fritt in och ut. Trycket före tryckminskningen var 12 % större än efteråt, samtidigt som temperaturen inte förändrades.</p>\n<p>Vad skulle hända med densiteten av luften inuti lådan?</p>",
+  "s": "<p>Vid konstant temperatur och volym är gasens densitet proportionell mot trycket, eftersom pV = nRT ger n/V = p/RT.</p>\n<p>ρ_efter/ρ_före = 1/1,12 = 0,893</p>\n<p>Densiteten skulle alltså <strong>minska med ungefär 11 %</strong></p>"
+ },
+ {
+  "id": "7.33",
+  "kap": 7,
+  "omr": "varme",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Koppar har den specifika värmekapaciteten 0,385 kJ/(kg·K).</p>\n<p>Hur mycket energi krävs för att öka temperaturen för 3,0 kg koppar med 60 °C?</p>",
+  "s": "<p>Q = mcΔT = 3,0·0,385·60 = <strong>69 kJ</strong></p>"
+ },
+ {
+  "id": "7.34",
+  "kap": 7,
+  "omr": "varme",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Daniel värmer upp vatten som han tänker göra te med. Han vill göra 4,0 dl te och vattnet har temperaturen 18 °C i kranen.</p>\n<ol><li>Hur mycket energi krävs för att värma vattnet till 90 °C?</li>\n<li>Hur lång tid tar det med en vattenkokare på 2,0 kW, om all energi går till vattnet?</li></ol>",
+  "s": "<p>a) Q = 0,40·4,18·72 = <strong>120 kJ</strong></p>\n<p>b) t = 120 000/2000 = <strong>60 sekunder</strong></p>"
+ },
+ {
+  "id": "7.35",
+  "kap": 7,
+  "omr": "varme",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En skål med vatten som har temperaturen 50 °C ställs utomhus. Temperaturen utomhus är 12 °C. Vattnet står ute tills det har svalnat helt.</p>\n<ol><li>Vilken temperatur har vattnet när det har svalnat?</li>\n<li>När vattnet svalnade avgav det värmen 120 kJ. Vilken massa har vattnet?</li></ol>",
+  "s": "<p>a) <strong>12 °C</strong>, samma som omgivningen</p>\n<p>b) m = Q/(cΔT) = 120/(4,18·38) = <strong>0,76 kg</strong></p>"
+ },
+ {
+  "id": "7.36",
+  "kap": 7,
+  "omr": "varme",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En metallbit värms upp 120 K, och för detta behövs energin 32 kJ. Metallbitens massa är 600 g.</p>\n<ol><li>Bestäm metallens specifika värmekapacitet.</li>\n<li>Vilket ämne skulle metallbiten kunna vara gjord av?</li></ol>",
+  "s": "<p>a) c = Q/(mΔT) = 32/(0,600·120) = <strong>0,44 kJ/(kg·K)</strong></p>\n<p>b) <strong>Järn</strong>, som har 0,449 kJ/(kg·K), eller något annat ämne med liknande värde</p>"
+ },
+ {
+  "id": "7.37",
+  "kap": 7,
+  "omr": "varme",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Ellen har satt en doppvärmare i en hink med 4,0 liter vatten som har temperaturen 12 °C. Doppvärmaren är märkt 400 W.</p>\n<ol><li>Hur mycket energi avger doppvärmaren på 8,0 minuter?</li>\n<li>Hur varmt är vattnet efter dessa 8,0 minuter?</li>\n<li>Varför blir den verkliga temperaturen något lägre?</li></ol>",
+  "s": "<p>a) E = Pt = 400·480 = <strong>192 kJ</strong></p>\n<p>b) ΔT = Q/(mc) = 192/(4,0·4,18) = 11,5 °C → <strong>23,5 °C</strong></p>\n<p>c) En del av värmen går till hinken och till luften omkring, inte bara till vattnet.</p>"
+ },
+ {
+  "id": "7.38",
+  "kap": 7,
+  "omr": "varme",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Emilia sitter i en bastu där termometern visar 85 °C. Hon tänker att det borde brännas väldigt mycket att bada i vatten som har samma temperatur.</p>\n<ol><li>Förklara varför vattnet skulle bränna mer vid samma temperatur.</li>\n<li>Vad är det egentligen som avgör vilken temperatur ett föremål har?</li></ol>",
+  "s": "<p>a) Vatten leder värme betydligt bättre än luft och har dessutom mycket högre specifik värmekapacitet per volym. Värme överförs därför mycket snabbare från vattnet till huden än från luften.</p>\n<p>b) Hur stor rörelseenergi atomerna och molekylerna i föremålet har i genomsnitt.</p>"
+ },
+ {
+  "id": "7.39",
+  "kap": 7,
+  "omr": "varme",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Omvandla mellan temperaturskalorna.</p>\n<ol><li>Hur många K motsvarar temperaturen 210 °C?</li>\n<li>Hur många °C motsvarar temperaturen 450 K?</li>\n<li>Varför finns det en lägsta möjliga temperatur?</li></ol>",
+  "s": "<p>a) <strong>483 K</strong></p><p>b) <strong>177 °C</strong></p>\n<p>c) Vid 0 K har partiklarna ingen rörelseenergi kvar att göra sig av med, och lägre än så går inte att komma.</p>"
+ },
+ {
+  "id": "7.40",
+  "kap": 7,
+  "omr": "varme",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Erik jämför olika energislag. Han beräknar hur mycket energi som krävs för att värma upp 4,0 dm³ vatten från 15 °C till 75 °C.</p>\n<ol><li>Hur mycket energi krävs?</li>\n<li>Hur högt skulle man kunna lyfta en sten som väger 1,2 ton med samma energi?</li></ol>",
+  "s": "<p>a) Q = 4,0·4,18·60 = <strong>1,0 MJ</strong></p>\n<p>b) h = E/(mg) = 1,003·10⁶/(1200·9,82) = <strong>85 m</strong></p>\n<p>Att värma några liter vatten kräver alltså lika mycket energi som att lyfta ett ton nästan hundra meter.</p>"
+ },
+ {
+  "id": "7.41",
+  "kap": 7,
+  "omr": "varme",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>I en frys ligger två plattor, en av trä och en av järn. Johan tar ut plattorna och lägger dem på ett bord.</p>\n<ol><li>Vilken av plattorna känns kallast, och varför?</li>\n<li>Vilken av plattorna når rumstemperatur snabbast?</li></ol>",
+  "s": "<p>a) <strong>Järnplattan</strong>, eftersom järn leder värme mycket bättre än trä. Handen tappar därför värme snabbare mot järnet, trots att plattorna har samma temperatur.</p>\n<p>b) <strong>Järnplattan</strong>, av samma anledning. Värmeledningsförmågan avgör, och de båda ämnena har någorlunda lika specifik värmekapacitet.</p>"
+ },
+ {
+  "id": "7.42",
+  "kap": 7,
+  "omr": "varme",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En stålbit med massan 15 kg svalnar 35 K på 10 minuter. Stål har den specifika värmekapaciteten 0,46 kJ/(kg·K).</p>\n<ol><li>Hur mycket värme avger stålbiten?</li>\n<li>Vilken genomsnittlig effekt avger den till omgivningen?</li></ol>",
+  "s": "<p>a) Q = 15·0,46·35 = <strong>242 kJ</strong></p>\n<p>b) P = 241 500/600 = <strong>403 W</strong></p>"
+ },
+ {
+  "id": "7.43",
+  "kap": 7,
+  "omr": "varme",
+  "niva": "A",
+  "poang": "(0/2/1)",
+  "t": "<p>Johannes ska värma 400 cm³ vatten med temperaturen 15 °C som ligger i en bägare. För att göra detta lägger han i 250 g järn med temperaturen 95 °C. Efter en stund har järnet och vattnet samma temperatur. Varken bägaren eller luften kring bägaren värms upp.</p>\n<p>Vilken temperatur kommer järnet och vattnet att ha?</p>",
+  "s": "<p>Vattnet tar upp lika mycket värme som järnet avger:</p>\n<p>0,400·4,18·(T − 15) = 0,250·0,449·(95 − T)</p>\n<p>1,672T − 25,08 = 10,66 − 0,1123T → 1,784T = 35,74</p>\n<p>T = <strong>20 °C</strong> — vattnets höga värmekapacitet gör att temperaturen knappt ändras</p>"
+ },
+ {
+  "id": "7.44",
+  "kap": 7,
+  "omr": "varme",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>En blandning innehåller 25 volymprocent metanol och 75 volymprocent vatten. Metanol har densiteten 0,79 g/cm³ och den specifika värmekapaciteten 2,53 kJ/(kg·K).</p>\n<p>Bestäm blandningens specifika värmekapacitet.</p>",
+  "s": "<p>Utgå från en liter blandning. Metanolen väger 0,25·0,79 = 0,198 kg och vattnet 0,75 kg, alltså 0,948 kg totalt.</p>\n<p>c = (0,198·2,53 + 0,75·4,18)/0,948 = (0,500 + 3,135)/0,948</p>\n<p><strong>3,8 kJ/(kg·K)</strong> — blandningen viktas efter massa, inte efter volym</p>"
+ },
+ {
+  "id": "7.45",
+  "kap": 7,
+  "omr": "fasandring",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Emelie har hämtat 800 gram nollgradig is från utsidan på sitt hus. Isens smältentalpi är 334 kJ/kg.</p>\n<p>Hur mycket energi krävs för att smälta isen?</p>",
+  "s": "<p>Q = ml_s = 0,800·334 = <strong>267 kJ</strong></p>"
+ },
+ {
+  "id": "7.46",
+  "kap": 7,
+  "omr": "fasandring",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Joakim äger ett smycke gjort av 100 % silver som väger 80 gram. Smycket har temperaturen 20 °C och ska smältas ner hos en silversmed.</p>\n<ol><li>Hur mycket energi krävs för att värma upp smycket till dess smältpunkt?</li>\n<li>Hur mycket energi krävs totalt för att smälta smycket?</li></ol>",
+  "s": "<p>Silver har smältpunkten 962 °C, c = 0,234 kJ/(kg·K) och smältentalpin 105 kJ/kg.</p>\n<p>a) Q = 0,080·0,234·942 = <strong>18 kJ</strong></p>\n<p>b) Smältningen kräver ytterligare 0,080·105 = 8,4 kJ, alltså totalt <strong>26 kJ</strong></p>"
+ },
+ {
+  "id": "7.47",
+  "kap": 7,
+  "omr": "fasandring",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Med hjälp av en spis tillför Rebecka effekten 150 W till en isbit med massan 80 g. Isbiten har temperaturen −6,0 °C. Isens specifika värmekapacitet är 2,1 kJ/(kg·K).</p>\n<ol><li>Hur mycket energi krävs för att värma isen till 0 °C?</li>\n<li>Hur mycket energi krävs för att smälta isen?</li>\n<li>Hur lång tid tar det för hela isbiten att smälta?</li></ol>",
+  "s": "<p>a) Q = 0,080·2,1·6,0 = <strong>1,0 kJ</strong></p>\n<p>b) Q = 0,080·334 = <strong>26,7 kJ</strong></p>\n<p>c) t = 27 700/150 = 185 s ≈ <strong>3,1 minuter</strong></p>"
+ },
+ {
+  "id": "7.48",
+  "kap": 7,
+  "omr": "fasandring",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>I en kastrull finns 1,8 kg vatten med temperaturen 18 °C. Vattnets ångbildningsentalpi är 2260 kJ/kg.</p>\n<ol><li>Hur mycket energi behövs för att värma vattnet till dess kokpunkt?</li>\n<li>Hur mycket energi krävs ytterligare för att förånga vattnet?</li>\n<li>Kommentera skillnaden.</li></ol>",
+  "s": "<p>a) Q = 1,8·4,18·82 = <strong>617 kJ</strong></p>\n<p>b) Q = 1,8·2260 = <strong>4,1 MJ</strong></p>\n<p>c) Att koka bort vattnet kräver nästan sju gånger mer energi än att värma det från kranvatten till kokpunkten.</p>"
+ },
+ {
+  "id": "7.49",
+  "kap": 7,
+  "omr": "fasandring",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>För att förånga 5,0 kg av en viss vätska krävs energin 4,0 MJ.</p>\n<ol><li>Bestäm vätskans ångbildningsentalpi.</li><li>Vilken vätska skulle det kunna vara?</li></ol>",
+  "s": "<p>a) l = Q/m = 4,0·10⁶/5,0 = <strong>800 kJ/kg</strong></p>\n<p>b) <strong>Glykol</strong>, eller någon annan vätska med ångbildningsentalpi runt 800 kJ/kg</p>"
+ },
+ {
+  "id": "7.50",
+  "kap": 7,
+  "omr": "fasandring",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>En iskub med sidan 3,0 cm har temperaturen −15 °C. Isens densitet är 0,917 g/cm³.</p>\n<p>Hur mycket energi krävs för att smälta iskuben?</p>",
+  "s": "<p>V = 27 cm³ → m = 27·0,917 = 24,8 g</p>\n<p>Uppvärmning till 0 °C: 0,0248·2,1·15 = 0,78 kJ</p>\n<p>Smältning: 0,0248·334 = 8,27 kJ</p>\n<p>Totalt <strong>9,1 kJ</strong></p>"
+ },
+ {
+  "id": "7.51",
+  "kap": 7,
+  "omr": "fasandring",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En hink med 3,0 liter vatten står utomhus en vinterdag. Vattnets temperatur är 5,0 °C. Några dagar senare har allt vatten frusit till is med temperaturen −3,0 °C.</p>\n<ol><li>Hur mycket värme avger vattnet när det ändrar temperatur från 5,0 °C till 0,0 °C?</li>\n<li>Hur mycket värme avger vattnet när det fryser?</li>\n<li>Hur mycket värme avger isen när den ändrar temperatur från 0,0 °C till −3,0 °C?</li>\n<li>Hur mycket värme avger vattnet totalt?</li></ol>",
+  "s": "<p>a) 3,0·4,18·5,0 = <strong>63 kJ</strong></p>\n<p>b) 3,0·334 = <strong>1,0 MJ</strong></p>\n<p>c) 3,0·2,1·3,0 = <strong>19 kJ</strong></p>\n<p>d) <strong>1,08 MJ</strong> — nästan allt avges under själva frysningen</p>"
+ },
+ {
+  "id": "7.52",
+  "kap": 7,
+  "omr": "fasandring",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>En skål med 2,5 dl nollgradigt vatten och 120 g nollgradig is sätts in i en mikrovågsugn. På ugnen står det att den kräver 800 W elektrisk effekt. Efter 3,5 minuter innehåller skålen enbart vatten med temperaturen 18 °C.</p>\n<ol><li>Hur mycket värme upptog vattnet och isen?</li>\n<li>Vilken verkningsgrad har mikrovågsugnen?</li></ol>",
+  "s": "<p>a) Smältningen kräver 0,120·334 = 40,1 kJ. Uppvärmningen av allt vatten kräver 0,370·4,18·18 = 27,8 kJ</p>\n<p>Totalt <strong>68 kJ</strong></p>\n<p>b) Tillförd energi: 800·210 = 168 kJ → η = 67,9/168 = <strong>0,40</strong></p>"
+ },
+ {
+  "id": "7.53",
+  "kap": 7,
+  "omr": "fasandring",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>Emma lägger 2 isbitar med temperaturen −18 °C och massan 25 g styck i ett glas med 3,0 dl vatten. Vattnet har från början temperaturen 22 °C.</p>\n<p>Vilken temperatur kommer vattnet ha när allt i glaset har samma temperatur?</p>",
+  "s": "<p>Isen behöver 0,050·2,1·18 = 1,89 kJ för att nå 0 °C och 0,050·334 = 16,7 kJ för att smälta, alltså 18,6 kJ.</p>\n<p>Vattnet kan avge 0,300·4,18·22 = 27,6 kJ innan det når 0 °C, så all is hinner smälta.</p>\n<p>Kvar finns 9,0 kJ som värmer de 350 g vatten som nu finns: ΔT = 9,0/(0,350·4,18) = 6,2 °C</p>\n<p>Sluttemperaturen blir <strong>6,2 °C</strong></p>"
+ },
+ {
+  "id": "7.54",
+  "kap": 7,
+  "omr": "fasandring",
+  "niva": "A",
+  "poang": "(0/2/1)",
+  "t": "<p>Hur mycket energi krävs för att omvandla 0,80 kg is med temperaturen −10 °C till vattenånga med temperaturen 100 °C?</p>",
+  "s": "<p>Uppvärmning av isen: 0,80·2,1·10 = 16,8 kJ</p>\n<p>Smältning: 0,80·334 = 267 kJ</p>\n<p>Uppvärmning av vattnet: 0,80·4,18·100 = 334 kJ</p>\n<p>Förångning: 0,80·2260 = 1808 kJ</p>\n<p>Totalt <strong>2,4 MJ</strong>, varav tre fjärdedelar går åt till själva förångningen</p>"
+ },
+ {
+  "id": "8.68",
+  "kap": 8,
+  "omr": "laddning",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Elementarladdningen är 1,602·10⁻¹⁹ C.</p>\n<ol><li>En plastkula har laddats upp så att den har 12 000 fler elektroner än vad den brukar. Vilken laddning har plastkulan?</li>\n<li>En annan plastkula har laddningen −2,5 nC. Hur många överskottselektroner har den?</li></ol>",
+  "s": "<p>a) Q = 12 000·1,602·10⁻¹⁹ = <strong>−1,9·10⁻¹⁵ C</strong></p>\n<p>b) n = 2,5·10⁻⁹/1,602·10⁻¹⁹ = <strong>1,6·10¹⁰ elektroner</strong></p>"
+ },
+ {
+  "id": "8.69",
+  "kap": 8,
+  "omr": "laddning",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>En atom är uppbyggd av tre olika sorters partiklar.</p>\n<ol><li>Vilka partiklar består en atom av, och vilka laddningar har de?</li>\n<li>Varför är en vanlig atom oladdad?</li></ol>",
+  "s": "<p>a) <strong>Protoner</strong> med laddningen +e och <strong>neutroner</strong> utan laddning i kärnan, samt <strong>elektroner</strong> med laddningen −e utanför kärnan.</p>\n<p>b) Antalet protoner är lika stort som antalet elektroner, så de positiva och negativa laddningarna tar ut varandra.</p>"
+ },
+ {
+  "id": "8.70",
+  "kap": 8,
+  "omr": "laddning",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Två laddade partiklar befinner sig 8,0 cm ifrån varandra. Den ena har laddningen 6,0 nC och den andra 5,0 nC.</p>\n<ol><li>Bestäm storleken på den elektriska kraften som verkar på varje partikel.</li>\n<li>Vilken riktning har krafterna?</li>\n<li>Hur förändras kraften om avståndet fördubblas?</li></ol>",
+  "s": "<p>a) F = kq₁q₂/r² = 8,99·10⁹·6,0·10⁻⁹·5,0·10⁻⁹/0,080² = <strong>42 µN</strong></p>\n<p>b) Båda laddningarna är positiva, så krafterna är repulsiva och riktade bort från varandra. De är lika stora enligt Newtons tredje lag.</p>\n<p>c) Kraften blir en fjärdedel så stor, alltså <strong>11 µN</strong></p>"
+ },
+ {
+  "id": "8.71",
+  "kap": 8,
+  "omr": "laddning",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Två laddade partiklar påverkar varandra med den attraktiva elektriska kraften 4,5 mN. Den ena partikeln har laddningen 3,0 nC och den andra −4,0 nC.</p>\n<p>Bestäm avståndet mellan de båda partiklarna.</p>",
+  "s": "<p>r = √(kq₁q₂/F) = √(8,99·10⁹·3,0·10⁻⁹·4,0·10⁻⁹/4,5·10⁻³)</p>\n<p>r = √(2,40·10⁻⁵) = <strong>4,9 mm</strong></p>"
+ },
+ {
+  "id": "8.72",
+  "kap": 8,
+  "omr": "laddning",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Två kulor, den ena med laddningen 12 nC och den andra med laddningen −8,0 nC, förs ihop så att de nuddar varandra. Efter en stund förs de isär igen och placeras så att avståndet mellan dem är 4,0 cm.</p>\n<ol><li>Vilken laddning har varje kula efteråt?</li>\n<li>Bestäm den elektriska kraften som verkar på kulorna.</li></ol>",
+  "s": "<p>a) Den totala laddningen 12 − 8,0 = 4,0 nC fördelas lika: <strong>2,0 nC</strong> på vardera kulan</p>\n<p>b) F = 8,99·10⁹·(2,0·10⁻⁹)²/0,040² = <strong>22 µN</strong>, repulsiv</p>"
+ },
+ {
+  "id": "8.73",
+  "kap": 8,
+  "omr": "laddning",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>En negativt laddad stav förs in i närheten av ett metallblock, utan att nudda det.</p>\n<ol><li>Vad händer med elektronerna i metallblocket när staven är nära?</li>\n<li>Vad händer med elektronerna om man sedan för staven långt bort igen?</li>\n<li>Vad hade hänt om blocket varit gjort av plast istället för metall?</li></ol>",
+  "s": "<p>a) De stöts bort från staven och samlas i blockets bortre ände. Den sida som är nära staven blir därmed positiv, trots att blocket som helhet är oladdat.</p>\n<p>b) Elektronerna fördelar sig jämnt igen, eftersom de stöter bort varandra. Laddningsfördelningen försvinner. För att den ska bli permanent måste blocket jordas medan staven är nära.</p>\n<p>c) Plast är en isolator, så elektronerna kan inte röra sig fritt. Effekten blir mycket svagare och begränsar sig till att molekylerna vrider sig något.</p>"
+ },
+ {
+  "id": "8.74",
+  "kap": 8,
+  "omr": "laddning",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>När man studerar små laddade partiklar brukar man inte räkna med gravitationen. Undersök hur väl det stämmer för två protoner som befinner sig 1,0 cm ifrån varandra. En proton har massan 1,673·10⁻²⁷ kg.</p>\n<ol><li>Bestäm den elektriska kraften som verkar på varje proton.</li>\n<li>Bestäm gravitationskraften som protonerna påverkar varandra med.</li>\n<li>Jämför krafterna.</li></ol>",
+  "s": "<p>a) F = 8,99·10⁹·(1,602·10⁻¹⁹)²/(0,010)² = <strong>2,3·10⁻²⁴ N</strong></p>\n<p>b) F = 6,674·10⁻¹¹·(1,673·10⁻²⁷)²/(0,010)² = <strong>1,9·10⁻⁶⁰ N</strong></p>\n<p>c) Den elektriska kraften är omkring <strong>10³⁶ gånger större</strong>. Gravitationen är helt försumbar på partikelnivå.</p>"
+ },
+ {
+  "id": "8.75",
+  "kap": 8,
+  "omr": "kretsar",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Genom ett tvärsnitt av en strömförande kabel passerar laddningen 15 mC. Det tar 5,0 sekunder för laddningen att passera tvärsnittet.</p>\n<p>Hur stor ström går genom kabeln?</p>",
+  "s": "<p>I = Q/t = 0,015/5,0 = <strong>3,0 mA</strong></p>"
+ },
+ {
+  "id": "8.76",
+  "kap": 8,
+  "omr": "kretsar",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Genom en sladd går strömmen 0,40 A.</p>\n<ol><li>Hur stor laddning hinner passera ett tvärsnitt av sladden på 30 sekunder?</li>\n<li>Hur många elektroner har passerat tvärsnittet under dessa 30 sekunder?</li></ol>",
+  "s": "<p>a) Q = It = 0,40·30 = <strong>12 C</strong></p>\n<p>b) n = 12/1,602·10⁻¹⁹ = <strong>7,5·10¹⁹ elektroner</strong></p>"
+ },
+ {
+  "id": "8.77",
+  "kap": 8,
+  "omr": "kretsar",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Ett batteri ska laddas med laddningen 8,0 kC. Batteriets spänning är 1,5 V.</p>\n<p>Hur mycket energi krävs?</p>",
+  "s": "<p>E = QU = 8000·1,5 = <strong>12 kJ</strong></p>"
+ },
+ {
+  "id": "8.78",
+  "kap": 8,
+  "omr": "kretsar",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Ett batteri är laddat med 5,0 kC. Lina kopplar in ett motstånd till batteriet, och när batteriet är urladdat har motståndet mottagit energin 45 kJ.</p>\n<ol><li>Vilken spänning har batteriet?</li>\n<li>Hur lång tid tog urladdningen om strömmen var 250 mA?</li></ol>",
+  "s": "<p>a) U = E/Q = 45 000/5000 = <strong>9,0 V</strong></p>\n<p>b) t = Q/I = 5000/0,25 = 20 000 s = <strong>5,6 timmar</strong></p>"
+ },
+ {
+  "id": "8.79",
+  "kap": 8,
+  "omr": "kretsar",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Ohms första lag beskriver sambandet mellan spänning, ström och resistans.</p>\n<ol><li>Helena kopplar in en resistor med resistansen 400 Ω till ett batteri med spänningen 1,5 V. Hur stor blir strömmen?</li>\n<li>I ett svenskt vägguttag är spänningen 230 V. Fanny vill att strömmen genom hennes produkt ska vara 0,50 A. Vilken resistans ska produkten ha?</li></ol>",
+  "s": "<p>a) I = U/R = 1,5/400 = <strong>3,8 mA</strong></p>\n<p>b) R = U/I = 230/0,50 = <strong>460 Ω</strong></p>"
+ },
+ {
+  "id": "8.80",
+  "kap": 8,
+  "omr": "kretsar",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Anna har köpt en 2,5 meter lång koppartråd med radien 0,50 mm. Koppar har resistiviteten 1,7·10⁻⁸ Ωm.</p>\n<ol><li>Vilken resistans har tråden?</li>\n<li>Vilken spänning måste läggas över tråden för att strömmen ska bli 0,15 A?</li></ol>",
+  "s": "<p>a) A = πr² = π(0,50·10⁻³)² = 7,85·10⁻⁷ m²</p>\n<p>R = ρL/A = 1,7·10⁻⁸·2,5/7,85·10⁻⁷ = <strong>54 mΩ</strong></p>\n<p>b) U = RI = 0,0541·0,15 = <strong>8,1 mV</strong> — sladdar är avsiktligt gjorda så att spänningsfallet blir litet</p>"
+ },
+ {
+  "id": "8.81",
+  "kap": 8,
+  "omr": "kretsar",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Felix vill köpa en silvertråd som ska vara 25 cm lång och ha resistansen 8,0 mΩ. Silver har resistiviteten 1,6·10⁻⁸ Ωm.</p>\n<p>Vilken diameter ska tråden ha?</p>",
+  "s": "<p>A = ρL/R = 1,6·10⁻⁸·0,25/8,0·10⁻³ = 5,0·10⁻⁷ m²</p>\n<p>r = √(A/π) = 3,99·10⁻⁴ m → d = <strong>0,80 mm</strong></p>"
+ },
+ {
+  "id": "8.82",
+  "kap": 8,
+  "omr": "kretsar",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>En enhet som ofta används för laddning på batterier istället för coulomb är amperetimmar, Ah. Ett batteri på 1 Ah kan leverera strömmen 1 ampere i en timme. Ett batteri är märkt 2,5 Ah.</p>\n<ol><li>Hur länge kan man ta ut strömmen 1,5 A från batteriet innan det är urladdat?</li>\n<li>Hur många coulomb motsvarar 2,5 Ah?</li></ol>",
+  "s": "<p>a) t = 2,5/1,5 = 1,67 h = <strong>1 timme och 40 minuter</strong></p>\n<p>b) Q = 2,5·3600 = <strong>9,0 kC</strong></p>"
+ },
+ {
+  "id": "8.83",
+  "kap": 8,
+  "omr": "kretsar",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Jakob vill undersöka resistansen för en resistor. Han kopplar in den till en spänningskub och mäter spänningen tillsammans med strömmen vid några olika tillfällen.</p>\n<table class=\"data\"><tr><th>Spänning (V)</th><th>Ström (mA)</th></tr>\n<tr><td>3,0</td><td>12</td></tr><tr><td>5,0</td><td>20</td></tr><tr><td>7,2</td><td>29</td></tr></table>\n<ol><li>Förklara hur Jakob kan bestämma resistansen genom att anpassa en rät linje till sina mätningar.</li>\n<li>Bestäm resistorns resistans.</li></ol>",
+  "s": "<p>a) Ohms lag U = RI betyder att spänningen är proportionell mot strömmen. Ritar man U som funktion av I blir mätpunkterna en rät linje genom origo, och linjens lutning är resistansen. Att använda alla mätpunkter ger ett säkrare värde än en enskild mätning.</p>\n<p>b) Lutningen är ungefär (7,2 − 3,0)/(0,029 − 0,012) = 4,2/0,017 = <strong>250 Ω</strong></p>"
+ },
+ {
+  "id": "8.84",
+  "kap": 8,
+  "omr": "kretsar",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>Johan har en kopparkabel med resistiviteten 1,7·10⁻⁸ Ωm. Han vill köpa en guldkabel med resistiviteten 2,4·10⁻⁸ Ωm. Guldkabeln ska ha en åttondel av kopparkabelns resistans, samtidigt som den ska vara tre gånger så lång.</p>\n<p>Hur mycket tjockare än kopparkabeln måste guldkabeln vara?</p>",
+  "s": "<p>R = ρL/A ger A_guld/A_koppar = (ρ_g/ρ_k)·(L_g/L_k)·(R_k/R_g) = 1,41·3·8 = 34</p>\n<p>Arean är proportionell mot diametern i kvadrat, så diametern måste vara √34 = <strong>5,8 gånger så stor</strong></p>"
+ },
+ {
+  "id": "8.85",
+  "kap": 8,
+  "omr": "kopplingar",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>William har två resistorer med resistanserna 120 Ω respektive 280 Ω. Han seriekopplar dem och ansluter dem till ett batteri med spänningen 6,0 V.</p>\n<ol><li>Bestäm resistorernas ersättningsresistans.</li>\n<li>Beräkna strömmen genom kretsen.</li>\n<li>Beräkna spänningen över varje resistor.</li></ol>",
+  "s": "<p>a) R = 120 + 280 = <strong>400 Ω</strong></p>\n<p>b) I = 6,0/400 = <strong>15 mA</strong> — samma ström genom båda resistorerna</p>\n<p>c) U₁ = 0,015·120 = <strong>1,8 V</strong> och U₂ = 0,015·280 = <strong>4,2 V</strong>. Summan är 6,0 V.</p>"
+ },
+ {
+  "id": "8.86",
+  "kap": 8,
+  "omr": "kopplingar",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Tomas har två resistorer med resistanserna 400 Ω respektive 600 Ω. Han parallellkopplar dem och ansluter dem till ett batteri med spänningen 3,0 V.</p>\n<ol><li>Vilken spänning ligger över varje resistor?</li>\n<li>Beräkna strömmen genom varje resistor.</li>\n<li>Bestäm ersättningsresistansen och kontrollera med strömmen genom batteriet.</li></ol>",
+  "s": "<p>a) <strong>3,0 V</strong> över båda</p>\n<p>b) I₁ = 3,0/400 = <strong>7,5 mA</strong> och I₂ = 3,0/600 = <strong>5,0 mA</strong></p>\n<p>c) 1/R = 1/400 + 1/600 ger R = <strong>240 Ω</strong>. Strömmen genom batteriet blir 3,0/240 = 12,5 mA, precis summan av grenströmmarna.</p>"
+ },
+ {
+  "id": "8.87",
+  "kap": 8,
+  "omr": "kopplingar",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Man vill mäta strömmen genom och spänningen över en resistor.</p>\n<ol><li>Hur kopplar man in en amperemeter? Förklara med ord.</li>\n<li>Hur kopplar man in en voltmeter?</li>\n<li>Varför bör en amperemeter ha mycket låg resistans?</li></ol>",
+  "s": "<p>a) <strong>I serie</strong> med resistorn, så att hela strömmen genom resistorn också går genom mätaren.</p>\n<p>b) <strong>Parallellt</strong> med resistorn, så att mätaren ligger över samma två punkter.</p>\n<p>c) Annars skulle mätaren minska strömmen i kretsen och därmed förändra det den försöker mäta. Av samma skäl ska en voltmeter ha mycket hög resistans.</p>"
+ },
+ {
+  "id": "8.88",
+  "kap": 8,
+  "omr": "kopplingar",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Tre resistorer har kopplats till ett batteri med spänningen 9,0 V. R₁ = 100 Ω och R₂ = 200 Ω är seriekopplade med varandra, och denna kombination är parallellkopplad med R₃ = 300 Ω.</p>\n<ol><li>Bestäm ersättningsresistansen för R₁ och R₂.</li>\n<li>Bestäm ersättningsresistansen för hela kretsen.</li>\n<li>Hur stor ström går genom batteriet?</li></ol>",
+  "s": "<p>a) 100 + 200 = <strong>300 Ω</strong></p>\n<p>b) Två lika stora resistanser parallellt ger halva värdet: <strong>150 Ω</strong></p>\n<p>c) I = 9,0/150 = <strong>60 mA</strong></p>"
+ },
+ {
+  "id": "8.89",
+  "kap": 8,
+  "omr": "kopplingar",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Erik har kopplat ihop en krets med ett batteri på 12 V. Resistorn R₁ = 150 Ω är seriekopplad med två parallellkopplade resistorer, R₂ = 300 Ω och R₃ = 600 Ω.</p>\n<ol><li>Bestäm ersättningsresistansen för de två parallellkopplade resistorerna.</li>\n<li>Bestäm strömmen genom batteriet.</li>\n<li>Bestäm spänningen över de parallellkopplade resistorerna.</li>\n<li>Bestäm strömmen genom R₂.</li></ol>",
+  "s": "<p>a) 1/R = 1/300 + 1/600 → <strong>200 Ω</strong></p>\n<p>b) R_tot = 150 + 200 = 350 Ω → I = 12/350 = <strong>34 mA</strong></p>\n<p>c) U = 0,0343·200 = <strong>6,9 V</strong></p>\n<p>d) I₂ = 6,86/300 = <strong>23 mA</strong>, och resten, 11 mA, går genom R₃</p>"
+ },
+ {
+  "id": "8.90",
+  "kap": 8,
+  "omr": "kopplingar",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>Härled formeln för att beräkna ersättningsresistansen för två resistorer som parallellkopplas.</p>",
+  "s": "<p>Spänningen U är densamma över båda resistorerna, medan strömmarna adderas:</p>\n<p>I = I₁ + I₂</p>\n<p>U/R = U/R₁ + U/R₂</p>\n<p>Dividera med U:</p>\n<p><strong>1/R = 1/R₁ + 1/R₂</strong></p>\n<p>Ersättningsresistansen blir alltid mindre än den minsta av de två, eftersom strömmen får fler vägar att ta.</p>"
+ },
+ {
+  "id": "8.91",
+  "kap": 8,
+  "omr": "kopplingar",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>Daniel har ett stort lager av identiska resistorer. När han kopplar in en av resistorerna till ett batteri går strömmen I genom batteriet.</p>\n<ol><li>Hur stor ström går genom batteriet om han seriekopplar n stycken likadana resistorer? n är ett heltal.</li>\n<li>Hur stor blir strömmen om han istället parallellkopplar n stycken?</li></ol>",
+  "s": "<p>a) Ersättningsresistansen blir nR, så strömmen blir <strong>I/n</strong></p>\n<p>b) Ersättningsresistansen blir R/n, så strömmen blir <strong>n·I</strong></p>\n<p>Batteriets inre resistans försummas i båda fallen. I verkligheten sätter den en gräns för hur stor strömmen kan bli.</p>"
+ },
+ {
+  "id": "8.92",
+  "kap": 8,
+  "omr": "ems",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Spänningen över en resistor är 1,5 V och strömmen genom den är 50 mA.</p>\n<ol><li>Hur stor effekt utvecklas i resistorn?</li><li>Vilken resistans har resistorn?</li></ol>",
+  "s": "<p>a) P = UI = 1,5·0,050 = <strong>75 mW</strong></p>\n<p>b) R = U/I = <strong>30 Ω</strong></p>"
+ },
+ {
+  "id": "8.93",
+  "kap": 8,
+  "omr": "ems",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Genom en glödlampa med resistansen 1,5 kΩ går strömmen 180 mA.</p>\n<ol><li>Vilken effekt utvecklas i lampan?</li>\n<li>Hur stor ström ska man leda genom en glödlampa med resistansen 800 Ω för att den ska utveckla effekten 20 W?</li></ol>",
+  "s": "<p>a) P = RI² = 1500·0,180² = <strong>49 W</strong></p>\n<p>b) I = √(P/R) = √(20/800) = <strong>0,16 A</strong></p>"
+ },
+ {
+  "id": "8.94",
+  "kap": 8,
+  "omr": "ems",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Daniel har ett batteri med den inre resistansen 0,40 Ω. Batteriet är märkt 1,5 V, vilket betyder att dess ems är 1,5 V. Daniel kopplar in en resistor med resistansen 1,2 Ω till batteriet.</p>\n<ol><li>Hur stor ström går genom Daniels resistor?</li>\n<li>Hur stor är spänningen över resistorn?</li>\n<li>Hur stor är batteriets polspänning?</li></ol>",
+  "s": "<p>a) I = ε/(R + r) = 1,5/1,6 = <strong>0,94 A</strong></p>\n<p>b) U = RI = 1,2·0,9375 = <strong>1,1 V</strong></p>\n<p>c) <strong>1,1 V</strong> — polspänningen är just spänningen över den yttre kretsen, och den är lägre än emsen eftersom en del spänning tas upp inne i batteriet.</p>"
+ },
+ {
+  "id": "8.95",
+  "kap": 8,
+  "omr": "ems",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Ett batteri med ems 1,5 V och den inre resistansen 250 mΩ kopplas till en resistor. Strömmen genom resistorn blir 2,0 A.</p>\n<ol><li>Bestäm resistorns resistans.</li>\n<li>Hur stor är batteriets kortslutningsström?</li></ol>",
+  "s": "<p>a) R + r = 1,5/2,0 = 0,75 Ω → R = 0,75 − 0,25 = <strong>0,50 Ω</strong></p>\n<p>b) Vid kortslutning är R = 0: I = 1,5/0,25 = <strong>6,0 A</strong></p>"
+ },
+ {
+  "id": "8.96",
+  "kap": 8,
+  "omr": "ems",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>Ett batteris ems är 1,5 V och dess inre resistans är 600 mΩ. Henrik vill koppla en resistor till batteriet så att det utvecklas en så stor effekt som möjligt i resistorn.</p>\n<ol><li>Hur stor resistans ska resistorn ha?</li><li>Hur stor blir effekten i resistorn då?</li></ol>",
+  "s": "<p>a) Effekten P = RI² = Rε²/(R + r)² är som störst när <strong>R = r = 0,60 Ω</strong>. Väljer man mindre resistans blir strömmen större men spänningen mycket liten, och tvärtom.</p>\n<p>b) I = 1,5/1,2 = 1,25 A → P = 0,60·1,25² = <strong>0,94 W</strong></p>"
+ },
+ {
+  "id": "8.97",
+  "kap": 8,
+  "omr": "ems",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Clara har köpt en liten elmotor som ska driva en modellhiss. Spänningen över motorn är 3,0 V och strömmen genom den är 0,60 A. När motorn är inkopplad tar det 3,5 sekunder för den att lyfta en vikt med massan 700 gram 0,50 meter rakt upp.</p>\n<ol><li>Hur mycket elektrisk energi förbrukas?</li>\n<li>Hur stort är det nyttiga arbetet?</li><li>Vilken verkningsgrad har hissen?</li></ol>",
+  "s": "<p>a) E = UIt = 3,0·0,60·3,5 = <strong>6,3 J</strong></p>\n<p>b) W = mgh = 0,700·9,82·0,50 = <strong>3,4 J</strong></p>\n<p>c) η = 3,44/6,3 = <strong>0,55</strong>. Resten blir värme i motorn och friktion i hissen.</p>"
+ },
+ {
+  "id": "8.98",
+  "kap": 8,
+  "omr": "ems",
+  "niva": "A",
+  "poang": "(0/2/1)",
+  "t": "<p>För att bestämma egenskaperna hos ett batteri har man kopplat in det till en resistor med varierbar resistans. En voltmeter mäter spänningen över resistorn och en amperemeter strömmen genom den.</p>\n<table class=\"data\"><tr><th>Spänning (V)</th><th>Ström (A)</th></tr>\n<tr><td>1,42</td><td>0,25</td></tr><tr><td>1,28</td><td>0,60</td></tr>\n<tr><td>1,10</td><td>1,05</td></tr><tr><td>0,92</td><td>1,50</td></tr></table>\n<ol><li>Anpassa en rät linje till mätvärdena, där spänningen är en funktion av strömmen.</li>\n<li>Använd linjens ekvation för att bestämma batteriets ems.</li>\n<li>Använd linjens ekvation för att bestämma batteriets inre resistans.</li>\n<li>Bestäm batteriets kortslutningsström.</li></ol>",
+  "s": "<p>a) Linjen blir U = 1,52 − 0,40I, eftersom lutningen är (0,92 − 1,42)/(1,50 − 0,25) = −0,40</p>\n<p>b) Emsen är spänningen när ingen ström går, alltså m-värdet: <strong>1,52 V</strong></p>\n<p>c) U = ε − rI, så den inre resistansen är lutningens belopp: <strong>0,40 Ω</strong></p>\n<p>d) Kortslutningsströmmen är strömmen när U = 0: I = 1,52/0,40 = <strong>3,8 A</strong></p>"
+ },
+ {
+  "id": "8.99",
+  "kap": 8,
+  "omr": "ems",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Mats tänker köpa en resistor som han vill leda så stor ström som möjligt igenom. Han vet från Ohms första lag att U = R·I, och tänker därmed att desto mindre resistansen är, desto större blir strömmen. Mats köper en resistor med resistansen 0,10 Ω och kopplar in den till ett batteri med spänningen 9,0 V. Han räknar ut att strömmen borde bli 90 A.</p>\n<p>På vilket sätt har Mats tänkt fel?</p>",
+  "s": "<p>Mats har glömt batteriets <strong>inre resistans</strong>. Den verkliga strömmen är I = ε/(R + r), och när R är mycket liten är det r som avgör.</p>\n<p>Med en inre resistans på till exempel 0,5 Ω blir strömmen 9,0/0,6 = 15 A istället för 90 A. Dessutom sjunker polspänningen kraftigt, och batteriet blir varmt eftersom en stor del av effekten utvecklas inuti det.</p>"
+ },
+ {
+  "id": "8.100",
+  "kap": 8,
+  "omr": "falt",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>En laddad partikel med laddningen −8,0 nC befinner sig i ett elektriskt fält. På grund av fältet påverkas partikeln av en kraft med storleken 48 µN.</p>\n<p>Hur starkt är det elektriska fältet där partikeln befinner sig?</p>",
+  "s": "<p>E = F/Q = 48·10⁻⁶/8,0·10⁻⁹ = <strong>6,0 kV/m</strong></p>"
+ },
+ {
+  "id": "8.101",
+  "kap": 8,
+  "omr": "falt",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Två metallplattor är inkopplade till en spänningskub så att spänningen mellan dem är 12 V. Avståndet mellan plattorna är 2,5 cm.</p>\n<ol><li>Hur starkt är det elektriska fältet mellan plattorna?</li>\n<li>En liten kula med laddningen −4,0 nC placeras mellan plattorna. Bestäm storleken på den elektriska kraften på kulan.</li>\n<li>Åt vilket håll är kraften riktad?</li></ol>",
+  "s": "<p>a) E = U/d = 12/0,025 = <strong>480 V/m</strong></p>\n<p>b) F = QE = 4,0·10⁻⁹·480 = <strong>1,9 µN</strong></p>\n<p>c) Mot den <strong>positiva plattan</strong>, alltså motsatt fältlinjernas riktning, eftersom kulan är negativt laddad.</p>"
+ },
+ {
+  "id": "8.102",
+  "kap": 8,
+  "omr": "falt",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Johannes vill beräkna hur starkt det elektriska fältet är 4,0 cm ifrån en kula med laddningen 25 nC.</p>\n<ol><li>Beräkna kraften som verkar på en testpartikel med laddningen 1,0 C som befinner sig 4,0 cm ifrån kulan.</li>\n<li>Använd resultatet för att bestämma fältstyrkan på detta avstånd.</li>\n<li>Hur stark är fältstyrkan 8,0 cm ifrån kulan?</li></ol>",
+  "s": "<p>a) F = kQq/r² = 8,99·10⁹·25·10⁻⁹·1,0/0,040² = <strong>1,4·10⁵ N</strong></p>\n<p>b) E = F/q = <strong>1,4·10⁵ V/m</strong></p>\n<p>c) Fältstyrkan avtar med kvadraten på avståndet: <strong>3,5·10⁴ V/m</strong></p>"
+ },
+ {
+  "id": "8.103",
+  "kap": 8,
+  "omr": "falt",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Ett batteri med spänningen 9,0 V är kopplat till två seriekopplade resistorer, 200 Ω och 400 Ω. Batteriets minuspol är jordad. Punkten A ligger mellan batteriets pluspol och 200 Ω-resistorn, och punkten B ligger mellan de båda resistorerna.</p>\n<ol><li>Hur stor ström går genom kretsen?</li>\n<li>Bestäm spänningen över varje resistor.</li>\n<li>Bestäm potentialen i punkterna A och B.</li></ol>",
+  "s": "<p>a) I = 9,0/600 = <strong>15 mA</strong></p>\n<p>b) U₁ = 0,015·200 = <strong>3,0 V</strong> och U₂ = 0,015·400 = <strong>6,0 V</strong></p>\n<p>c) Jordningen sätter minuspolen till 0 V, så V_A = <strong>9,0 V</strong> och V_B = 9,0 − 3,0 = <strong>6,0 V</strong></p>"
+ },
+ {
+  "id": "8.104",
+  "kap": 8,
+  "omr": "falt",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Spänningen mellan två metallplattor är 180 V. En elektron som befinner sig mellan dem påverkas av kraften 7,2·10⁻¹⁶ N.</p>\n<p>Bestäm hur långt det är mellan plattorna.</p>",
+  "s": "<p>E = F/e = 7,2·10⁻¹⁶/1,602·10⁻¹⁹ = 4494 V/m</p>\n<p>d = U/E = 180/4494 = <strong>4,0 cm</strong></p>"
+ },
+ {
+  "id": "8.105",
+  "kap": 8,
+  "omr": "falt",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>Härled med hjälp av Coulombs lag en formel för den elektriska fältstyrkan på avståndet r från en laddad partikel med laddningen Q.</p>",
+  "s": "<p>Placera en testladdning q på avståndet r. Coulombs lag ger kraften</p>\n<p>F = kQq/r²</p>\n<p>Fältstyrkan definieras som kraften per laddning:</p>\n<p>E = F/q = <strong>kQ/r²</strong></p>\n<p>Testladdningen förkortas bort, vilket den måste göra — fältet finns där oavsett om man mäter det eller inte.</p>"
+ },
+ {
+  "id": "8.106",
+  "kap": 8,
+  "omr": "falt",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Två metallplattor befinner sig 5,0 cm ifrån varandra. En proton mellan plattorna ska accelereras med 80 Gm/s². Protonens massa är 1,673·10⁻²⁷ kg.</p>\n<p>Vilken spänning ska det vara mellan plattorna?</p>",
+  "s": "<p>F = ma = 1,673·10⁻²⁷·8,0·10¹⁰ = 1,34·10⁻¹⁶ N</p>\n<p>E = F/e = 1,34·10⁻¹⁶/1,602·10⁻¹⁹ = 835 V/m</p>\n<p>U = Ed = 835·0,050 = <strong>42 V</strong></p>"
+ },
+ {
+  "id": "8.107",
+  "kap": 8,
+  "omr": "falt",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Vilket eller vilka av följande påståenden är korrekta?</p>\n<ol><li>De elektriska fältlinjerna går alltid in mot positiva laddningar.</li>\n<li>En negativ laddning påverkas av en kraft i motsatt riktning mot fältlinjernas riktning.</li>\n<li>De elektriska fältlinjerna går alltid in mot negativa laddningar.</li>\n<li>En positiv laddning påverkas av en kraft i motsatt riktning mot fältlinjernas riktning.</li></ol>",
+  "s": "<p><strong>Påstående b och c är korrekta.</strong></p>\n<p>Fältlinjerna pekar alltid från positiv till negativ laddning, alltså åt det håll en positiv laddning skulle röra sig. En negativ laddning påverkas därför av en kraft åt motsatt håll.</p>"
+ },
+ {
+  "id": "9.46",
+  "kap": 9,
+  "omr": "karnreaktioner",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Vid vissa typer av sönderfall frigörs energi.</p>\n<ol><li>Varför kan det frigöras energi vid sönderfall?</li>\n<li>Vad menas med begreppet massdefekt?</li></ol>",
+  "s": "<p>a) Sönderfallsprodukterna har tillsammans mindre massa än kärnan hade innan. Den massa som försvinner omvandlas till energi enligt E = mc², främst som rörelseenergi hos partiklarna.</p>\n<p>b) Massdefekten är skillnaden i massa mellan en kärna och de delar den består av, eller mellan en kärna och de produkter den sönderfaller till.</p>"
+ },
+ {
+  "id": "9.47",
+  "kap": 9,
+  "omr": "karnreaktioner",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Vilka partiklar skickas ut vid följande typer av radioaktivt sönderfall?</p>\n<ol><li>β⁺-sönderfall</li><li>α-sönderfall</li><li>β⁻-sönderfall</li><li>γ-sönderfall</li></ol>",
+  "s": "<p>a) <strong>Positroner</strong>, elektronens antipartikel, samt en neutrino</p>\n<p>b) <strong>Heliumkärnor</strong>, alltså två protoner och två neutroner</p>\n<p>c) <strong>Elektroner</strong>, samt en antineutrino</p>\n<p>d) <strong>Fotoner</strong> med mycket kort våglängd</p>"
+ },
+ {
+  "id": "9.48",
+  "kap": 9,
+  "omr": "karnreaktioner",
+  "niva": "E",
+  "poang": "(2/1/0)",
+  "t": "<p>Skriv reaktionsformler för följande sönderfall.</p>\n<ol><li>²²⁶₈₈Ra sönderfaller med alfasönderfall.</li>\n<li>³²₁₅P sönderfaller med β⁻-sönderfall.</li></ol>",
+  "s": "<p>a) ²²⁶₈₈Ra → <strong>²²²₈₆Rn + ⁴₂He</strong></p>\n<p>b) ³²₁₅P → <strong>³²₁₆S + e⁻ + ν̄</strong></p>\n<p>Kontrollera alltid att masstal och laddning stämmer på båda sidor.</p>"
+ },
+ {
+  "id": "9.49",
+  "kap": 9,
+  "omr": "karnreaktioner",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Nukliden ⁵⁵₂₆Fe genomgår elektroninfångning.</p>\n<ol><li>Beskriv vad som händer vid elektroninfångning.</li>\n<li>Skriv en reaktionsformel för sönderfallet.</li></ol>",
+  "s": "<p>a) En av atomens elektroner rör sig in i kärnan och fångas av en av protonerna. Protonen och elektronen omvandlas till en neutron och en neutrino. Neutrinon lämnar atomen medan neutronen är kvar, så masstalet är oförändrat medan antalet protoner minskar med ett.</p>\n<p>b) <strong>⁵⁵₂₆Fe + e⁻ → ⁵⁵₂₅Mn + ν</strong></p>"
+ },
+ {
+  "id": "9.50",
+  "kap": 9,
+  "omr": "karnreaktioner",
+  "niva": "C",
+  "poang": "(0/2/0)",
+  "t": "<p>Skriv färdigt följande reaktionsformler.</p>\n<ol><li>²³⁹₉₄Pu → ____ + ⁴₂He</li>\n<li>²²₁₁Na → ____ + e⁺ + ν</li>\n<li>____ → ¹⁴₇N + e⁻ + ν̄</li>\n<li>⁶⁰₂₇Co → ⁶⁰₂₈Ni + ____ + ν̄</li></ol>",
+  "s": "<p>a) <strong>²³⁵₉₂U</strong></p><p>b) <strong>²²₁₀Ne</strong></p>\n<p>c) <strong>¹⁴₆C</strong></p><p>d) <strong>e⁻</strong></p>"
+ },
+ {
+  "id": "9.51",
+  "kap": 9,
+  "omr": "karnreaktioner",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>När Al-26 sönderfaller med β⁺-sönderfall väger sönderfallsprodukterna totalt 0,002815 u mindre än vad Al-26 gör. 1 u motsvarar 931,5 MeV.</p>\n<ol><li>Vad händer med massan som försvinner?</li>\n<li>Hur mycket energi frigörs vid sönderfallet? Svara i MeV.</li>\n<li>Hur många joule motsvarar det?</li></ol>",
+  "s": "<p>a) Den omvandlas till energi, framför allt rörelseenergi hos sönderfallsprodukterna.</p>\n<p>b) E = 0,002815·931,5 = <strong>2,62 MeV</strong></p>\n<p>c) 2,62·10⁶·1,602·10⁻¹⁹ = <strong>4,2·10⁻¹³ J</strong></p>"
+ },
+ {
+  "id": "9.52",
+  "kap": 9,
+  "omr": "karnreaktioner",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Använd din formelsamling för att bestämma hur mycket energi som frigörs när Po-210 alfasönderfaller. Atommassorna är m(Po-210) = 209,982874 u, m(Pb-206) = 205,974465 u och m(He-4) = 4,002603 u. 1 u motsvarar 931,5 MeV.</p>\n<p>Skriv även en reaktionsformel för sönderfallet.</p>",
+  "s": "<p>²¹⁰₈₄Po → ²⁰⁶₈₂Pb + ⁴₂He</p>\n<p>Δm = 209,982874 − (205,974465 + 4,002603) = 0,005806 u</p>\n<p>E = 0,005806·931,5 = <strong>5,41 MeV</strong></p>"
+ },
+ {
+  "id": "9.53",
+  "kap": 9,
+  "omr": "karnreaktioner",
+  "niva": "A",
+  "poang": "(0/2/1)",
+  "t": "<p>Uran-238 sönderfaller till en instabil nuklid, som även den sönderfaller, och så vidare. Följ sönderfallskedjan för uran-238 och skriv reaktionsformlerna för alla sönderfall tills du kommer fram till uran-234.</p>",
+  "s": "<p>²³⁸₉₂U → ²³⁴₉₀Th + ⁴₂He</p>\n<p>²³⁴₉₀Th → ²³⁴₉₁Pa + e⁻ + ν̄</p>\n<p>²³⁴₉₁Pa → ²³⁴₉₂U + e⁻ + ν̄</p>\n<p>Alfasönderfallet sänker masstalet med fyra, medan de båda betasönderfallen tar tillbaka protonerna. Kedjan slutar först vid bly-206, som är stabilt.</p>"
+ },
+ {
+  "id": "9.54",
+  "kap": 9,
+  "omr": "karnreaktioner",
+  "niva": "A",
+  "poang": "(0/1/2)",
+  "t": "<p>En atomkärna genomgår en serie av α- och β⁻-sönderfall. Från början har kärnan masstalet A och Z antal protoner. Kärnan genomgår totalt 4n stycken sönderfall, där n är ett heltal, och antalet α-sönderfall är tre gånger så många som antalet β⁻-sönderfall.</p>\n<p>Ange kärnans masstal och antal protoner efter sönderfallen.</p>",
+  "s": "<p>Av de 4n sönderfallen är 3n alfasönderfall och n betasönderfall.</p>\n<p>Masstal: endast alfasönderfallen ändrar masstalet, med 4 vardera → <strong>A − 12n</strong></p>\n<p>Protoner: −2 per alfasönderfall och +1 per betasönderfall → Z − 6n + n = <strong>Z − 5n</strong></p>"
+ },
+ {
+  "id": "9.55",
+  "kap": 9,
+  "omr": "aktivitet",
+  "niva": "E",
+  "poang": "(2/0/0)",
+  "t": "<p>Halveringstiden för ett visst radioaktivt material är 12 minuter. Emelie har stängt in ett preparat med detta material, som väger 20 mikrogram, i en blylåda.</p>\n<ol><li>Hur mycket finns det kvar av det radioaktiva materialet efter 24 minuter?</li>\n<li>Hur mycket finns kvar 36 minuter efter att det fanns 20 mikrogram?</li></ol>",
+  "s": "<p>a) 24 minuter är två halveringstider: 20/4 = <strong>5,0 mikrogram</strong></p>\n<p>b) Tre halveringstider: 20/8 = <strong>2,5 mikrogram</strong></p>"
+ },
+ {
+  "id": "9.56",
+  "kap": 9,
+  "omr": "aktivitet",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Aktiviteten för ett radioaktivt preparat är 4,0 kBq. Preparatets halveringstid är 20 minuter.</p>\n<ol><li>Hur stor var aktiviteten 60 minuter tidigare?</li>\n<li>Hur lång tid tar det innan aktiviteten har sjunkit till 500 Bq?</li></ol>",
+  "s": "<p>a) 60 minuter är tre halveringstider bakåt i tiden: 4,0·2³ = <strong>32 kBq</strong></p>\n<p>b) 4,0 kBq → 500 Bq är också tre halveringstider: <strong>60 minuter</strong></p>"
+ },
+ {
+  "id": "9.57",
+  "kap": 9,
+  "omr": "aktivitet",
+  "niva": "C",
+  "poang": "(1/2/0)",
+  "t": "<p>Ett preparat innehåller 5,0 miljoner atomkärnor av en nuklid med halveringstiden 2,4 minuter.</p>\n<ol><li>Bestäm sönderfallskonstanten för nukliden.</li>\n<li>Bestäm preparatets aktivitet.</li></ol>",
+  "s": "<p>a) λ = ln2/T½ = 0,693/144 = <strong>4,8·10⁻³ s⁻¹</strong></p>\n<p>b) A = λN = 4,81·10⁻³·5,0·10⁶ = <strong>24 kBq</strong></p>"
+ },
+ {
+  "id": "9.58",
+  "kap": 9,
+  "omr": "aktivitet",
+  "niva": "C",
+  "poang": "(0/2/1)",
+  "t": "<p>Kol-14-metoden bygger på att levande organismer tar upp kol-14 från omgivningen så länge de lever, och att halveringstiden är 5700 år.</p>\n<ol><li>Vilket eller vilka av följande föremål går att åldersbestämma med kol-14-metoden: en järngryta från medeltiden, en träskål från 1600-talet, ett dinosauriefossil, en 60-årig levande man?</li>\n<li>Motivera ditt svar.</li></ol>",
+  "s": "<p>a) <strong>Träskålen från 1600-talet</strong></p>\n<p>b) Järn har aldrig innehållit kol-14, så grytan går inte att datera. Dinosauriefossilet är många miljoner år gammalt, och efter så många halveringstider finns ingen mätbar mängd kol-14 kvar. Den levande mannen tar fortfarande upp kol-14, så hans halt motsvarar omgivningens oavsett ålder.</p>"
  }
 ];
