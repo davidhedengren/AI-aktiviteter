@@ -3103,5 +3103,255 @@ window.BANK = [
   "poang": "(0/2/0)",
   "t": "<p>Diagrammet visar bindningsenergin per nukleon för olika masstal.</p><svg viewBox=\"0 0 500 286\" style=\"max-width:500px;margin:12px 0\"><rect x=\"54\" y=\"26\" width=\"432\" height=\"220\" fill=\"#fff\"/><line x1=\"54\" y1=\"246\" x2=\"486\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"250\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0</text><line x1=\"54\" y1=\"202\" x2=\"486\" y2=\"202\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"206\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">2</text><line x1=\"54\" y1=\"158\" x2=\"486\" y2=\"158\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"162\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">4</text><line x1=\"54\" y1=\"114\" x2=\"486\" y2=\"114\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"118\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">6</text><line x1=\"54\" y1=\"70\" x2=\"486\" y2=\"70\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"74\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">8</text><line x1=\"54\" y1=\"26\" x2=\"486\" y2=\"26\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"30\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">10</text><line x1=\"54\" y1=\"26\" x2=\"54\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"54\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0</text><line x1=\"126\" y1=\"26\" x2=\"126\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"126\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">40</text><line x1=\"198\" y1=\"26\" x2=\"198\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"198\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">80</text><line x1=\"270\" y1=\"26\" x2=\"270\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"270\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">120</text><line x1=\"342\" y1=\"26\" x2=\"342\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"342\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">160</text><line x1=\"414\" y1=\"26\" x2=\"414\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"414\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">200</text><line x1=\"486\" y1=\"26\" x2=\"486\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"486\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">240</text><line x1=\"54\" y1=\"26\" x2=\"54\" y2=\"246\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"54\" y1=\"246\" x2=\"486\" y2=\"246\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><text x=\"16\" y=\"14\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">E (MeV)</text><text x=\"486\" y=\"282\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">masstal A</text><polyline points=\"57.6,221.8 61.2,89.80000000000001 75.6,76.6 100.80000000000001,59 154.8,52.39999999999998 234,59 324,65.60000000000002 482.40000000000003,78.80000000000001\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\" stroke-linejoin=\"round\"/><circle cx=\"57.6\" cy=\"221.8\" r=\"3.3\" fill=\"#B43123\"/><circle cx=\"61.2\" cy=\"89.80000000000001\" r=\"3.3\" fill=\"#B43123\"/><circle cx=\"75.6\" cy=\"76.6\" r=\"3.3\" fill=\"#B43123\"/><circle cx=\"100.80000000000001\" cy=\"59\" r=\"3.3\" fill=\"#B43123\"/><circle cx=\"154.8\" cy=\"52.39999999999998\" r=\"3.3\" fill=\"#B43123\"/><circle cx=\"234\" cy=\"59\" r=\"3.3\" fill=\"#B43123\"/><circle cx=\"324\" cy=\"65.60000000000002\" r=\"3.3\" fill=\"#B43123\"/><circle cx=\"482.40000000000003\" cy=\"78.80000000000001\" r=\"3.3\" fill=\"#B43123\"/></svg>\n<ol><li>Vid vilket masstal är kurvan högst?</li><li>Vad betyder ett högt värde?</li>\n<li>Förklara med kurvan varför både fusion och fission frigör energi.</li></ol>",
   "s": "<p>a) Kring <strong>A = 56</strong>, alltså järn</p>\n<p>b) Att kärnan är hårt bunden och stabil</p>\n<p>c) Båda processerna flyttar kärnorna mot toppen: lätta kärnor slås ihop och tunga klyvs. Skillnaden i bindningsenergi frigörs.</p>"
+ },
+ {
+  "id": "2.27",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "C",
+  "typ": "bestämma blandningsandel ur uppmätt densitet, ur text, sökt andel",
+  "poang": "(1/2/0)",
+  "t": "<p>En ring är gjord av en legering av guld (19,3 g/cm³) och koppar (8,93 g/cm³). Ringens densitet mäts upp till 14,8 g/cm³.</p>\n<ol><li>Ställ upp ett samband mellan legeringens densitet och guldets volymandel.</li>\n<li>Hur stor andel av ringens volym är guld?</li></ol>",
+  "s": "<p>a) ρ = x·ρ_guld + (1−x)·ρ_koppar, där x är guldets volymandel</p>\n<p>b) x = (14,8 − 8,93)/(19,3 − 8,93) = <strong>57 %</strong></p>\n<p>Legeringens densitet ligger mellan de rena ämnenas, vilket stämmer med svaret.</p>"
+ },
+ {
+  "id": "2.28",
+  "kap": 2,
+  "omr": "matnogg",
+  "niva": "A",
+  "typ": "välja mätmetod utifrån relativ osäkerhet, ur text, sökt resonemang",
+  "poang": "(0/1/2)",
+  "t": "<p>En elev ska bestämma tjockleken på ett papper. Två metoder föreslås.</p>\n<ol><li>Mät ett ark med skjutmått som visar 0,10 mm med osäkerheten ± 0,02 mm.</li>\n<li>Mät en bunt på 500 ark till 52 mm med osäkerheten ± 1 mm och dela med 500.</li></ol>\n<p>Vilken metod ger säkrast svar? Motivera med osäkerheten i procent.</p>",
+  "s": "<p>Metod 1: 0,02/0,10 = <strong>20 %</strong></p>\n<p>Metod 2: 1/52 = <strong>1,9 %</strong>, och den osäkerheten följer med när man delar med 500</p>\n<p>Metod 2 är tio gånger säkrare. Mätfelet är lika stort i absoluta tal men fördelas på en mycket större längd.</p>"
+ },
+ {
+  "id": "3.41",
+  "kap": 3,
+  "omr": "diagram",
+  "niva": "E",
+  "typ": "avläsa sträcka som area under v-t-kurva, ur diagram, sökt sträcka",
+  "poang": "(2/1/0)",
+  "t": "<p>Diagrammet visar farten hos en robotgräsklippare.</p><span class=\"fig\" style=\"max-width:500px\"><svg viewBox=\"0 0 500 286\"><rect x=\"54\" y=\"26\" width=\"432\" height=\"220\" fill=\"#fff\"/><line x1=\"54\" y1=\"246\" x2=\"486\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"250\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0</text><line x1=\"54\" y1=\"209.33333333333334\" x2=\"486\" y2=\"209.33333333333334\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"213.33333333333334\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">1</text><line x1=\"54\" y1=\"172.66666666666669\" x2=\"486\" y2=\"172.66666666666669\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"176.66666666666669\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">2</text><line x1=\"54\" y1=\"136\" x2=\"486\" y2=\"136\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"140\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">3</text><line x1=\"54\" y1=\"99.33333333333334\" x2=\"486\" y2=\"99.33333333333334\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"103.33333333333334\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">4</text><line x1=\"54\" y1=\"62.66666666666666\" x2=\"486\" y2=\"62.66666666666666\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"66.66666666666666\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">5</text><line x1=\"54\" y1=\"26\" x2=\"486\" y2=\"26\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"30\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">6</text><line x1=\"54\" y1=\"26\" x2=\"54\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"54\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0</text><line x1=\"115.71428571428571\" y1=\"26\" x2=\"115.71428571428571\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"115.71428571428571\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">2</text><line x1=\"177.42857142857142\" y1=\"26\" x2=\"177.42857142857142\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"177.42857142857142\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">4</text><line x1=\"239.14285714285714\" y1=\"26\" x2=\"239.14285714285714\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"239.14285714285714\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">6</text><line x1=\"300.85714285714283\" y1=\"26\" x2=\"300.85714285714283\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"300.85714285714283\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">8</text><line x1=\"362.57142857142856\" y1=\"26\" x2=\"362.57142857142856\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"362.57142857142856\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">10</text><line x1=\"424.2857142857143\" y1=\"26\" x2=\"424.2857142857143\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"424.2857142857143\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">12</text><line x1=\"486\" y1=\"26\" x2=\"486\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"486\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">14</text><line x1=\"54\" y1=\"26\" x2=\"54\" y2=\"246\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"54\" y1=\"246\" x2=\"486\" y2=\"246\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><text x=\"16\" y=\"14\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">v (m/s)</text><text x=\"486\" y=\"282\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">t (s)</text><polyline points=\"54,246 177.42857142857142,26 362.57142857142856,26 486,246\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\" stroke-linejoin=\"round\"/></svg></span>\n<ol><li>Under vilka tider accelererar klipparen?</li><li>Hur långt kör den under de första 4 sekunderna?</li>\n<li>Hur långt kör den totalt?</li></ol>",
+  "s": "<p>a) Mellan 0 och 4 s, där kurvan lutar uppåt</p>\n<p>b) Triangelns area: 6·4/2 = <strong>12 m</strong></p>\n<p>c) 12 + 36 + 12 = <strong>60 m</strong></p>"
+ },
+ {
+  "id": "3.42",
+  "kap": 3,
+  "omr": "diagram",
+  "niva": "C",
+  "typ": "tolka s-t-diagram för rörelse i två riktningar, ur diagram, sökt fart",
+  "poang": "(1/2/0)",
+  "t": "<p>Diagrammet visar en hisskorgs höjd över markplan.</p><span class=\"fig\" style=\"max-width:500px\"><svg viewBox=\"0 0 500 286\"><rect x=\"54\" y=\"26\" width=\"432\" height=\"220\" fill=\"#fff\"/><line x1=\"54\" y1=\"246\" x2=\"486\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"250\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0</text><line x1=\"54\" y1=\"214.57142857142858\" x2=\"486\" y2=\"214.57142857142858\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"218.57142857142858\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">2</text><line x1=\"54\" y1=\"183.14285714285714\" x2=\"486\" y2=\"183.14285714285714\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"187.14285714285714\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">4</text><line x1=\"54\" y1=\"151.71428571428572\" x2=\"486\" y2=\"151.71428571428572\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"155.71428571428572\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">6</text><line x1=\"54\" y1=\"120.28571428571429\" x2=\"486\" y2=\"120.28571428571429\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"124.28571428571429\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">8</text><line x1=\"54\" y1=\"88.85714285714286\" x2=\"486\" y2=\"88.85714285714286\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"92.85714285714286\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">10</text><line x1=\"54\" y1=\"57.428571428571445\" x2=\"486\" y2=\"57.428571428571445\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"61.428571428571445\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">12</text><line x1=\"54\" y1=\"26\" x2=\"486\" y2=\"26\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"30\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">14</text><line x1=\"54\" y1=\"26\" x2=\"54\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"54\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0</text><line x1=\"87.23076923076923\" y1=\"26\" x2=\"87.23076923076923\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"87.23076923076923\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">2</text><line x1=\"120.46153846153847\" y1=\"26\" x2=\"120.46153846153847\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"120.46153846153847\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">4</text><line x1=\"153.69230769230768\" y1=\"26\" x2=\"153.69230769230768\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"153.69230769230768\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">6</text><line x1=\"186.92307692307693\" y1=\"26\" x2=\"186.92307692307693\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"186.92307692307693\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">8</text><line x1=\"220.15384615384616\" y1=\"26\" x2=\"220.15384615384616\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"220.15384615384616\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">10</text><line x1=\"253.3846153846154\" y1=\"26\" x2=\"253.3846153846154\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"253.3846153846154\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">12</text><line x1=\"286.61538461538464\" y1=\"26\" x2=\"286.61538461538464\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"286.61538461538464\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">14</text><line x1=\"319.84615384615387\" y1=\"26\" x2=\"319.84615384615387\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"319.84615384615387\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">16</text><line x1=\"353.0769230769231\" y1=\"26\" x2=\"353.0769230769231\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"353.0769230769231\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">18</text><line x1=\"386.3076923076923\" y1=\"26\" x2=\"386.3076923076923\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"386.3076923076923\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">20</text><line x1=\"419.53846153846155\" y1=\"26\" x2=\"419.53846153846155\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"419.53846153846155\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">22</text><line x1=\"452.7692307692308\" y1=\"26\" x2=\"452.7692307692308\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"452.7692307692308\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">24</text><line x1=\"486\" y1=\"26\" x2=\"486\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"486\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">26</text><line x1=\"54\" y1=\"26\" x2=\"54\" y2=\"246\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"54\" y1=\"246\" x2=\"486\" y2=\"246\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><text x=\"16\" y=\"14\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">h (m)</text><text x=\"486\" y=\"282\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">t (s)</text><polyline points=\"54,246 153.69230769230768,57.428571428571445 286.61538461538464,57.428571428571445 386.3076923076923,183.14285714285714 486,183.14285714285714\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\" stroke-linejoin=\"round\"/></svg></span>\n<ol><li>Vilken fart har hissen under de första 6 sekunderna?</li>\n<li>Vad händer mellan 6 och 14 sekunder?</li><li>Vilken fart har hissen på slutet, och åt vilket håll?</li></ol>",
+  "s": "<p>a) v = 12/6,0 = <strong>2,0 m/s uppåt</strong></p>\n<p>b) Höjden är konstant 12 m — hissen står stilla på våningen</p>\n<p>c) v = (4 − 12)/(20 − 14) = <strong>1,3 m/s nedåt</strong></p>"
+ },
+ {
+  "id": "3.43",
+  "kap": 3,
+  "omr": "konstacc",
+  "niva": "A",
+  "typ": "bestämma ikappkörning ur två v-t-linjer, ur diagram, sökt tid",
+  "poang": "(0/2/2)",
+  "t": "<p>Diagrammet visar två bilar som startar samtidigt från samma plats. Bil A håller konstant fart, bil B startar från vila.</p><span class=\"fig\" style=\"max-width:500px\"><svg viewBox=\"0 0 500 286\"><rect x=\"54\" y=\"26\" width=\"432\" height=\"220\" fill=\"#fff\"/><line x1=\"54\" y1=\"246\" x2=\"486\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"250\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0</text><line x1=\"54\" y1=\"209.33333333333334\" x2=\"486\" y2=\"209.33333333333334\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"213.33333333333334\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">8</text><line x1=\"54\" y1=\"172.66666666666669\" x2=\"486\" y2=\"172.66666666666669\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"176.66666666666669\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">16</text><line x1=\"54\" y1=\"136\" x2=\"486\" y2=\"136\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"140\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">24</text><line x1=\"54\" y1=\"99.33333333333334\" x2=\"486\" y2=\"99.33333333333334\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"103.33333333333334\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">32</text><line x1=\"54\" y1=\"62.66666666666666\" x2=\"486\" y2=\"62.66666666666666\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"66.66666666666666\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">40</text><line x1=\"54\" y1=\"26\" x2=\"486\" y2=\"26\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"30\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">48</text><line x1=\"54\" y1=\"26\" x2=\"54\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"54\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0</text><line x1=\"126\" y1=\"26\" x2=\"126\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"126\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">2</text><line x1=\"198\" y1=\"26\" x2=\"198\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"198\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">4</text><line x1=\"270\" y1=\"26\" x2=\"270\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"270\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">6</text><line x1=\"342\" y1=\"26\" x2=\"342\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"342\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">8</text><line x1=\"414\" y1=\"26\" x2=\"414\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"414\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">10</text><line x1=\"486\" y1=\"26\" x2=\"486\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"486\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">12</text><line x1=\"54\" y1=\"26\" x2=\"54\" y2=\"246\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"54\" y1=\"246\" x2=\"486\" y2=\"246\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><text x=\"16\" y=\"14\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">v (m/s)</text><text x=\"486\" y=\"282\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">t (s)</text><polyline points=\"54,154.33333333333331 486,154.33333333333331\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\" stroke-linejoin=\"round\"/><text x=\"481\" y=\"145.33333333333331\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#B43123\">A</text><polyline points=\"54,246 486,26\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2.4\" stroke-linejoin=\"round\"/><text x=\"481\" y=\"17\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2A5D9E\">B</text></svg></span>\n<ol><li>Vilken acceleration har bil B?</li><li>När har bilarna samma fart?</li>\n<li>När kör B om A, och hur långt har de då kört?</li></ol>",
+  "s": "<p>a) a = 48/12 = <strong>4,0 m/s²</strong></p>\n<p>b) 4t = 20 → <strong>t = 5,0 s</strong></p>\n<p>c) Lika sträcka: 20t = 4t²/2 → t = <strong>10 s</strong>, sträcka <strong>200 m</strong></p>\n<p>Omkörningen sker dubbelt så sent som farterna blir lika, eftersom B först måste hämta in det försprång A byggt upp.</p>"
+ },
+ {
+  "id": "3.44",
+  "kap": 3,
+  "omr": "hastighet",
+  "niva": "C",
+  "typ": "räkna med relativ hastighet vid växling, ur text, sökt tid",
+  "poang": "(1/2/0)",
+  "t": "<p>Vid en stafettväxling springer den inkommande löparen 8,5 m/s och den mottagande 9,2 m/s. Växlingen ska ske inom en 20 m lång växlingszon.</p>\n<ol><li>Den mottagande startar när avståndet mellan dem är 6,0 m. Vilken är den relativa hastigheten strax efter starten?</li>\n<li>Förklara varför den mottagande måste starta innan den andra hunnit ikapp.</li></ol>",
+  "s": "<p>a) Direkt efter starten är mottagaren långsammare. När båda är uppe i fart blir skillnaden 8,5 − 9,2 = <strong>−0,7 m/s</strong>, alltså avlägsnar de sig från varandra</p>\n<p>b) Startar hon för sent måste hon springa långsammare än sin toppfart för att inte dra ifrån, och tid går förlorad. Startar hon i rätt ögonblick är farterna lika stora i växlingsögonblicket.</p>"
+ },
+ {
+  "id": "4.66",
+  "kap": 4,
+  "omr": "newton",
+  "niva": "E",
+  "typ": "bestämma resultant ur fritkroppsdiagram, ur diagram, sökt kraft",
+  "poang": "(2/1/0)",
+  "t": "<p>Figuren visar krafterna på en låda som dras uppåt längs ett golv.</p><span class=\"fig\" style=\"max-width:400px\"><svg viewBox=\"0 0 400 112\"><rect x=\"15\" y=\"80\" width=\"370\" height=\"9\" fill=\"#EDEEF1\"/><line x1=\"15\" y1=\"80\" x2=\"385\" y2=\"80\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><rect x=\"157\" y=\"32\" width=\"76\" height=\"48\" rx=\"3\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"233\" y1=\"56\" x2=\"275\" y2=\"56\" stroke=\"#B43123\" stroke-width=\"2.3\"/><polygon points=\"285,56 275,60.6 275,51.4\" fill=\"#B43123\"/><text x=\"305\" y=\"60\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#B43123\">60 N</text><line x1=\"157\" y1=\"56\" x2=\"135.8\" y2=\"55.99999999999999\" stroke=\"#B43123\" stroke-width=\"2.3\"/><polygon points=\"125.8,55.99999999999999 135.8,51.39999999999999 135.8,60.599999999999994\" fill=\"#B43123\"/><text x=\"105.8\" y=\"59.99999999999999\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#B43123\">25 N</text><text x=\"239\" y=\"25\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">8,0 kg</text></svg></span>\n<ol><li>Hur stor är den resulterande kraften?</li><li>Vilken acceleration får lådan?</li>\n<li>Vad skulle hända om de två krafterna var lika stora?</li></ol>",
+  "s": "<p>a) F = 60 − 25 = <strong>35 N åt höger</strong></p>\n<p>b) a = 35/8,0 = <strong>4,38 m/s²</strong></p>\n<p>c) Resultanten skulle bli noll och lådan skulle stå stilla eller fortsätta med konstant fart.</p>"
+ },
+ {
+  "id": "4.67",
+  "kap": 4,
+  "omr": "friktion",
+  "niva": "C",
+  "typ": "bestämma friktionskraft vid kraft i vinkel, ur text, sökt friktionskraft",
+  "poang": "(0/2/1)",
+  "t": "<p>En låda med massan 18 kg dras med konstant fart över ett vågrätt golv. Dragkraften är 120 N och bildar 30° med golvet.</p>\n<ol><li>Hur stor är kraftens vågräta komposant?</li><li>Hur stor är friktionskraften?</li>\n<li>Är normalkraften lika stor som tyngdkraften? Motivera.</li></ol>",
+  "s": "<p>a) F∥ = 120·cos 30° = <strong>104 N</strong></p>\n<p>b) Konstant fart ⇒ friktionen är lika stor: <strong>104 N</strong></p>\n<p>c) Nej. Den lodräta komposanten 60 N lyfter delvis lådan, så N = 177 − 60 = <strong>117 N</strong></p>"
+ },
+ {
+  "id": "4.68",
+  "kap": 4,
+  "omr": "moment",
+  "niva": "A",
+  "typ": "bestämma tippgräns för planka på två stöd, ur diagram, sökt sträcka",
+  "poang": "(0/1/2)",
+  "t": "<p>En planka som är 3,6 m lång och väger 14 kg vilar på två stöd. Det vänstra stödet sitter i plankans ände och det högra 0,9 m från den högra änden.</p>\n<ol><li>Var ligger plankans tyngdpunkt?</li>\n<li>En person på 65 kg går ut mot den högra änden. Hur långt utanför det högra stödet kan hon gå innan plankan tippar?</li></ol>",
+  "s": "<p>a) Mitt på plankan, 1,8 m från vänster ände</p>\n<p>b) Tippning sker kring det högra stödet. Plankans tyngd verkar 0,9 m innanför stödet</p>\n<p>Momentjämvikt: 65·9,82·x = 14·9,82·0,9 → x = <strong>0,19 m</strong></p>"
+ },
+ {
+  "id": "4.69",
+  "kap": 4,
+  "omr": "fjadrar",
+  "niva": "C",
+  "typ": "beräkna fjäderförlängning vid acceleration, ur text, sökt sträcka",
+  "poang": "(1/2/0)",
+  "t": "<p>En vikt på 2,5 kg hänger i en fjäder med fjäderkonstanten 180 N/m inne i en hiss.</p>\n<ol><li>Hur långt är fjädern utdragen när hissen står stilla?</li>\n<li>Hissen accelererar uppåt med 1,8 m/s². Hur långt är fjädern utdragen då?</li>\n<li>Vad visar fjädern under fritt fall?</li></ol>",
+  "s": "<p>a) Δl = mg/k = 24,6/180 = <strong>13,6 cm</strong></p>\n<p>b) F = m(g+a) = 29,1 N → Δl = <strong>16,1 cm</strong></p>\n<p>c) Vid fritt fall är a = g nedåt, kraften blir noll och fjädern drar ihop sig helt.</p>"
+ },
+ {
+  "id": "5.42",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "E",
+  "typ": "beräkna effekt vid lyft ur brunn, ur text, sökt effekt",
+  "poang": "(2/0/0)",
+  "t": "<p>En hink med vatten väger 12 kg och vevas upp 8 m ur en brunn på 25 sekunder.</p>\n<ol><li>Hur stort arbete uträttas?</li><li>Vilken effekt utvecklas?</li></ol>",
+  "s": "<p>a) W = mgh = 12·9,82·8 = <strong>0,94 kJ</strong></p>\n<p>b) P = W/t = 943/25 = <strong>38 W</strong></p>"
+ },
+ {
+  "id": "5.43",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "C",
+  "typ": "räkna om batterikapacitet till räckvidd och effekt, ur text, sökt effekt",
+  "poang": "(1/2/0)",
+  "t": "<p>En elscooter har ett batteri på 280 Wh och en räckvidd på 40 km vid farten 25 km/h.</p>\n<ol><li>Hur mycket energi förbrukas per kilometer?</li><li>Hur lång tid tar en full urladdning?</li>\n<li>Vilken medeleffekt drar motorn?</li></ol>",
+  "s": "<p>a) 280/40 = <strong>7,0 Wh/km</strong></p>\n<p>b) t = 40/25 = <strong>1,6 timmar</strong></p>\n<p>c) P = 280/1,6 = <strong>175 W</strong></p>"
+ },
+ {
+  "id": "5.44",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "A",
+  "typ": "tillämpa rörelsemängd på utkastad massa, ur text, sökt fart",
+  "poang": "(0/2/2)",
+  "t": "<p>En vattenraket innehåller 0,6 kg vatten. Raketens tomma massa är 0,15 kg. Vattnet pressas ut nedåt med farten 14 m/s.</p>\n<ol><li>Hur stor rörelsemängd får vattnet?</li><li>Vilken fart får raketen, om allt vatten lämnar den på en gång?</li>\n<li>Varför blir den verkliga farten lägre?</li></ol>",
+  "s": "<p>a) p = mv = 0,6·14 = <strong>8,4 kg·m/s</strong></p>\n<p>b) Rörelsemängden bevaras: v = 8,4/0,15 = <strong>56 m/s</strong></p>\n<p>c) Vattnet lämnar raketen successivt, och under tiden bär raketen fortfarande kvar en del av vattnet. Dessutom bromsar luftmotstånd och tyngdkraft.</p>"
+ },
+ {
+  "id": "5.45",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "C",
+  "typ": "omvandla fjäderenergi till lägesenergi, ur text, sökt sträcka",
+  "poang": "(1/2/0)",
+  "t": "<p>En fjäderkanon har fjäderkonstanten 900 N/m och trycks ihop 0,18 m. Projektilen väger 350 g och skjuts rakt uppåt. Energin i en hoptryckt fjäder är ½kx².</p>\n<ol><li>Hur mycket energi lagras i fjädern?</li><li>Hur högt når projektilen?</li></ol>",
+  "s": "<p>a) E = ½·900·0,18² = <strong>14,6 J</strong></p>\n<p>b) E = mgh → h = 14,6/(0,35·9,82) = <strong>4,2 m</strong></p>"
+ },
+ {
+  "id": "6.48",
+  "kap": 6,
+  "omr": "tryck",
+  "niva": "E",
+  "typ": "beräkna tryck i en spruta, ur text, sökt tryck",
+  "poang": "(2/0/0)",
+  "t": "<p>Man trycker med kraften 22 N på kolven i en spruta. Kolvens area är 1,80 cm².</p>\n<p>Hur stort tryck uppstår i vätskan?</p>",
+  "s": "<p>p = F/A</p><p>p = 22/0,000180 = <strong>122 kPa</strong></p>"
+ },
+ {
+  "id": "6.49",
+  "kap": 6,
+  "omr": "arkimedes",
+  "niva": "C",
+  "typ": "avgöra flytjämvikt ur lyftkraft och tyngd, ur diagram, sökt resonemang",
+  "poang": "(1/2/0)",
+  "t": "<p>En liten glasflaska med luft i har volymen 25 cm³ och väger 18 g. Den släpps ner i vatten.</p><span class=\"fig\" style=\"max-width:380px\"><svg viewBox=\"0 0 380 225\"><path d=\"M60 40 L60 200 L320 200 L320 40\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2.5\"/><rect x=\"62\" y=\"75.19999999999999\" width=\"256\" height=\"122.80000000000001\" fill=\"#DCE6F2\"/><line x1=\"62\" y1=\"75.19999999999999\" x2=\"318\" y2=\"75.19999999999999\" stroke=\"#2A5D9E\" stroke-width=\"2\" stroke-linecap=\"square\"/><rect x=\"150\" y=\"60.079999999999984\" width=\"80\" height=\"54\" rx=\"3\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"190\" y=\"91.07999999999998\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">flaska</text></svg></span>\n<ol><li>Hur stor är lyftkraften om flaskan är helt nedsänkt?</li><li>Hur stor är tyngdkraften?</li>\n<li>Flyter eller sjunker flaskan? Motivera.</li></ol>",
+  "s": "<p>a) F = ρgV = 998·9,82·0,000025 = <strong>0,245 N</strong></p>\n<p>b) F = mg = 0,018·9,82 = <strong>0,177 N</strong></p>\n<p>c) Lyftkraften är större, alltså <strong>flyter</strong> flaskan och stiger tills bara en del är under ytan.</p>"
+ },
+ {
+  "id": "6.50",
+  "kap": 6,
+  "omr": "gaslagen",
+  "niva": "A",
+  "typ": "räkna om luftförbrukning till djup med gaslagen, ur text, sökt tid",
+  "poang": "(0/2/2)",
+  "t": "<p>En dykare har en flaska på 12 liter fylld till 200 bar. Vid ytan andas hon 20 liter luft per minut.</p>\n<ol><li>Hur många liter luft vid normaltryck finns i flaskan?</li>\n<li>På 20 m djup är trycket 2,9 gånger yttrycket. Hur mycket luft förbrukas per minut där?</li>\n<li>Hur länge räcker flaskan på det djupet?</li></ol>",
+  "s": "<p>a) V = 12·200 = <strong>2400 liter</strong></p>\n<p>b) Varje andetag innehåller 2,9 gånger mer luft: 20·2,9 = <strong>59 liter/min</strong></p>\n<p>c) t = 2400/59 = <strong>41 minuter</strong></p>\n<p>Djupet mer än halverar dyktiden, vilket är själva skälet till att dyktabeller finns.</p>"
+ },
+ {
+  "id": "7.28",
+  "kap": 7,
+  "omr": "varme",
+  "niva": "E",
+  "typ": "beräkna energi för uppvärmning av luft, ur text, sökt energi",
+  "poang": "(2/1/0)",
+  "t": "<p>En bastu rymmer 12 m³ luft. Luften ska värmas 60 °C. Luftens densitet är 1,2 kg/m³ och dess specifika värmekapacitet 1005 J/(kg·K).</p>\n<ol><li>Vilken massa har luften?</li><li>Hur mycket energi krävs?</li>\n<li>Aggregatet ger 6,0 kW. Hur lång tid tar det, om ingen värme läcker ut?</li></ol>",
+  "s": "<p>a) m = ρV = 1,2·12 = <strong>14,4 kg</strong></p>\n<p>b) E = cmΔT = 1005·14,4·60 = <strong>868 kJ</strong></p>\n<p>c) t = 868320/6000 = <strong>2,4 minuter</strong></p>"
+ },
+ {
+  "id": "7.29",
+  "kap": 7,
+  "omr": "fasandring",
+  "niva": "C",
+  "typ": "beräkna tid för förångning med verkningsgrad, ur text, sökt tid",
+  "poang": "(1/2/0)",
+  "t": "<p>I en kastrull kokar 1,5 kg vatten på en platta som ger 1800 W. Bara 75 % av effekten går till vattnet. Ångbildningsentalpin är 2260 kJ/kg.</p>\n<ol><li>Hur mycket energi krävs för att koka bort allt vatten?</li><li>Hur lång tid tar det?</li>\n<li>Varför stiger inte temperaturen under tiden?</li></ol>",
+  "s": "<p>a) E = m·l_v = 1,5·2260 = <strong>3,4 MJ</strong></p>\n<p>b) Nyttig effekt 1350 W → t = 3390000/1350 = <strong>42 minuter</strong></p>\n<p>c) All tillförd energi går åt till att bryta bindningarna mellan vattenmolekylerna, inte till att öka deras rörelse.</p>"
+ },
+ {
+  "id": "8.61",
+  "kap": 8,
+  "omr": "kretsar",
+  "niva": "E",
+  "typ": "beräkna ström och effekt ur spänning och resistans, ur text, sökt effekt",
+  "poang": "(2/1/0)",
+  "t": "<p>Ett värmeelement har resistansen 52 Ω och ansluts till 230 V.</p>\n<ol><li>Hur stor ström går genom elementet?</li><li>Vilken effekt utvecklas?</li></ol>",
+  "s": "<p>a) I = U/R = 230/52 = <strong>4,42 A</strong></p>\n<p>b) P = U²/R = 230²/52 = <strong>1017 W</strong></p>"
+ },
+ {
+  "id": "8.62",
+  "kap": 8,
+  "omr": "kopplingar",
+  "niva": "C",
+  "typ": "tolka mätarnas placering i ett kopplingsschema, ur diagram, sökt spänning",
+  "poang": "(1/2/0)",
+  "t": "<p>Figuren visar en krets med en amperemeter inkopplad.</p><span class=\"fig\" style=\"max-width:500px\"><svg viewBox=\"0 0 500 250\"><line x1=\"120\" y1=\"48\" x2=\"120\" y2=\"113\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"120\" y1=\"147\" x2=\"120\" y2=\"210\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"105\" y1=\"122\" x2=\"135\" y2=\"122\" stroke=\"#2B2527\" stroke-width=\"2.6\" stroke-linecap=\"square\"/><line x1=\"114\" y1=\"138\" x2=\"126\" y2=\"138\" stroke=\"#2B2527\" stroke-width=\"4.5\" stroke-linecap=\"square\"/><text x=\"98\" y=\"135\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#B43123\">9 V</text><line x1=\"120\" y1=\"48\" x2=\"430\" y2=\"48\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"430\" y1=\"48\" x2=\"430\" y2=\"210\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"430\" y1=\"210\" x2=\"120\" y2=\"210\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><rect x=\"312\" y=\"38\" width=\"56\" height=\"20\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"340\" y=\"30\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">R₁ = 150 Ω</text><circle cx=\"225\" cy=\"48\" r=\"17\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"225\" y=\"53\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"13\" font-weight=\"600\" fill=\"#2B2527\">A</text></svg></span>\n<p>I kretsen finns även R₂ = 220 Ω i serie, som inte syns i figuren.</p>\n<ol><li>Vad visar amperemetern?</li><li>Vilken spänning ligger över R₁?</li>\n<li>Var skulle en voltmeter kopplas in för att mäta den spänningen?</li></ol>",
+  "s": "<p>a) I = U/(R₁+R₂) = 9/370 = <strong>24,3 mA</strong></p>\n<p>b) U₁ = I·R₁ = <strong>3,65 V</strong></p>\n<p>c) Parallellt med R₁, alltså med en anslutning på vardera sidan om resistorn.</p>"
+ },
+ {
+  "id": "8.63",
+  "kap": 8,
+  "omr": "ems",
+  "niva": "A",
+  "typ": "jämföra serie- och parallellkoppling av batterier, ur text, sökt ström",
+  "poang": "(0/2/2)",
+  "t": "<p>Tre likadana batterier har ems 1,5 V och inre resistansen 0,4 Ω vardera. De ska driva en resistor på 6 Ω.</p>\n<ol><li>Vilken ström fås om batterierna seriekopplas?</li>\n<li>Vilken ström fås om de parallellkopplas?</li><li>Vilken koppling ger störst effekt i resistorn?</li></ol>",
+  "s": "<p>a) Serie: ems 4,5 V och inre resistans 1,2 Ω → I = 4,5/7,2 = <strong>0,625 A</strong></p>\n<p>b) Parallellt: ems 1,5 V och inre resistans 0,133 Ω → I = <strong>0,245 A</strong></p>\n<p>c) Serie: P = RI² = <strong>2,34 W</strong> mot 0,36 W. Med en så stor yttre resistans lönar det sig att höja spänningen.</p>"
+ },
+ {
+  "id": "9.40",
+  "kap": 9,
+  "omr": "nuklider",
+  "niva": "E",
+  "typ": "bestämma neutronantal ur masstal och atomnummer, ur tabell, sökt antal",
+  "poang": "(2/0/0)",
+  "t": "<p>Tabellen visar fyra radioaktiva nuklider.</p>\n<table class=\"data\"><tr><th>Nuklid</th><th>Atomnummer</th><th>Masstal</th></tr>\n<tr><td>kol-14</td><td>6</td><td>14</td></tr><tr><td>kalium-40</td><td>19</td><td>40</td></tr><tr><td>jod-131</td><td>53</td><td>131</td></tr><tr><td>cesium-137</td><td>55</td><td>137</td></tr></table>\n<ol><li>Hur många neutroner har varje nuklid?</li><li>Vilken har störst neutronöverskott jämfört med antalet protoner?</li></ol>",
+  "s": "<p>a) kol-14: 8, kalium-40: 21, jod-131: 78, cesium-137: 82</p>\n<p>b) Skillnaden neutroner minus protoner: kol 2, kalium 2, jod 25, cesium 27</p>\n<p><strong>Cesium-137</strong> har störst överskott, vilket är typiskt för tunga kärnor.</p>"
+ },
+ {
+  "id": "9.41",
+  "kap": 9,
+  "omr": "aktivitet",
+  "niva": "C",
+  "typ": "räkna med halveringstid vid medicinsk behandling, ur text, sökt aktivitet",
+  "poang": "(1/2/0)",
+  "t": "<p>Vid behandling av sköldkörteln används jod-131 med halveringstiden 8,0 dygn. En patient får en dos med aktiviteten 400 MBq.</p>\n<ol><li>Vilken aktivitet återstår efter 24 dygn?</li><li>Hur många halveringstider är det?</li>\n<li>Varför väljs en nuklid med just några dygns halveringstid?</li></ol>",
+  "s": "<p>a) 24/8,0 = 3 halveringstider → A = 400/8 = <strong>50 MBq</strong></p>\n<p>b) <strong>3 halveringstider</strong></p>\n<p>c) Den ska hinna verka i körteln men ändå försvinna ur kroppen inom rimlig tid. Timmar vore för kort, år skulle ge onödig stråldos.</p>"
+ },
+ {
+  "id": "9.42",
+  "kap": 9,
+  "omr": "karnreaktioner",
+  "niva": "A",
+  "typ": "jämföra energitäthet hos kärnbränsle och fossilt bränsle, ur text, sökt antal",
+  "poang": "(0/1/2)",
+  "t": "<p>Ett gram U-235 ger 8,20·10¹⁰ J vid fission. En liter bensin ger 32 MJ.</p>\n<ol><li>Hur många liter bensin motsvarar ett gram U-235?</li>\n<li>En bil förbrukar 0,60 liter per mil. Hur långt skulle den komma på motsvarande energi?</li>\n<li>Vad säger jämförelsen om mängden bränsle ett kärnkraftverk behöver?</li></ol>",
+  "s": "<p>a) 8,20·10¹⁰/32·10⁶ = <strong>2563 liter</strong></p>\n<p>b) 2563/0,60 = <strong>4271 mil</strong>, alltså ungefär ett varv runt jorden</p>\n<p>c) Energitätheten är ungefär en miljon gånger högre. Därför räcker något ton bränsle per år där ett kolkraftverk kräver miljontals ton.</p>"
  }
 ];
