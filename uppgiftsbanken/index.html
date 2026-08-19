@@ -31,12 +31,12 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 ::selection{background:var(--ed-ring)}
 
 /* ── topprad ── */
-.top{height:64px;background:var(--surface);border-bottom:1px solid var(--line);
-  display:flex;align-items:center;gap:16px;padding:0 20px;position:relative;z-index:20}
+.top{height:80px;background:var(--surface);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:18px;padding:0 24px;position:relative;z-index:20}
 .märke{display:flex;align-items:center;gap:13px;min-width:0}
-.märke img{height:34px;width:auto;display:block}
+.märke img{height:46px;width:auto;display:block}
 .titel{display:flex;flex-direction:column;min-width:0}
-.titel h1{margin:0;font-size:16.5px;font-weight:600;letter-spacing:-.015em;white-space:nowrap;
+.titel h1{margin:0;font-size:21px;font-weight:600;letter-spacing:-.015em;white-space:nowrap;
   overflow:hidden;text-overflow:ellipsis}
 .titel span{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
 .top .fyll{flex:1}
@@ -58,7 +58,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 
 /* ── tre paneler ── */
 .arbetsyta{display:grid;grid-template-columns:272px minmax(0,1fr) 360px;
-  height:calc(100vh - 64px);overflow:hidden}
+  height:calc(100vh - 80px);overflow:hidden}
 .panel{overflow-y:auto;overscroll-behavior:contain}
 .panel::-webkit-scrollbar{width:10px}
 .panel::-webkit-scrollbar-thumb{background:#D6D5D9;border-radius:99px;border:3px solid var(--canvas)}
