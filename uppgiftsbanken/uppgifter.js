@@ -1,5 +1,5 @@
 window.BANK = [
- {
+ { 
   "id": "2.1",
   "kap": 2,
   "omr": "enheter",
