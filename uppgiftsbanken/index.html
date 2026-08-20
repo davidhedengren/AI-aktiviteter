@@ -51,10 +51,28 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .knapp.primär:hover{background:var(--ed-dark)}
 .knapp.tyst{background:transparent;color:var(--ink-2)}
 .knapp.tyst:hover{background:var(--sunken);color:var(--ink)}
+.knapp.tyst[aria-pressed="true"]{background:var(--ed-tint);color:var(--ed-dark)}
+.knapp.tyst[aria-pressed="true"]:hover{background:var(--ed-tint)}
 .knapp:disabled{opacity:.4;cursor:not-allowed;transform:none}
 .knapp:focus-visible,input:focus-visible,.omrad:focus-visible,.kort:focus-visible{
   outline:2px solid var(--ed);outline-offset:2px}
 .knapp svg{width:15px;height:15px;flex:none}
+
+/* ── kryssrutor i mittraden ── */
+.kryss{display:inline-flex;align-items:center;gap:9px;cursor:pointer;user-select:none;
+  position:relative;font-size:13px;color:var(--ink-2);background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r-s);padding:7px 13px 7px 10px;
+  transition:background .15s,border-color .15s,color .15s;white-space:nowrap}
+.kryss:hover{border-color:#D3D1D6;color:var(--ink)}
+.kryss input{position:absolute;opacity:0;width:0;height:0}
+.kryss .ruta{width:17px;height:17px;border-radius:5px;border:1.5px solid #CFCDD3;
+  background:var(--surface);display:grid;place-items:center;flex:none;transition:.15s}
+.kryss .ruta svg{width:11px;height:11px;color:#fff;opacity:0;transform:scale(.6);transition:.15s}
+.kryss input:checked~.ruta{background:var(--ed);border-color:var(--ed)}
+.kryss input:checked~.ruta svg{opacity:1;transform:scale(1)}
+.kryss input:focus-visible~.ruta{outline:2px solid var(--ed);outline-offset:2px}
+.kryss:has(input:checked){background:var(--ed-tint);border-color:transparent;color:var(--ed-dark)}
+.kryssgrupp{display:flex;gap:8px;flex-wrap:wrap}
 
 /* ── tre paneler ── */
 .arbetsyta{display:grid;grid-template-columns:272px minmax(0,1fr) 360px;
@@ -306,8 +324,19 @@ table.data th{background:var(--sunken);font-weight:600}
   <main class="panel mitten">
     <div class="mittopp">
       <span class="träffar" id="träffar"></span>
-      <div class="fyll"></div>
       <button class="knapp tyst" id="läggAlla">Lägg till alla</button>
+      <div class="fyll"></div>
+      <div class="kryssgrupp">
+        <button class="knapp tyst" id="sorteraKnapp" type="button" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+          <span id="sorteraLabel">Sortera: ID</span>
+        </button>
+        <label class="kryss" for="döljPoäng">
+          <input type="checkbox" id="döljPoäng">
+          <span class="ruta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>
+          Visa inte poäng, endast nivå
+        </label>
+      </div>
     </div>
     <div id="lista"></div>
   </main>
@@ -390,7 +419,8 @@ function LOS(html){
     return `<p class="komm">${b}</p>`;
   }).join('');
 }
-const state={omr:new Set(),nivåer:new Set(['E','C','A']),sök:'',blad:[]};
+const state={omr:new Set(),nivåer:new Set(['E','C','A']),sök:'',blad:[],döljPoäng:false,sorteraNivå:false};
+const NIVÅORDNING={E:0,C:1,A:2};
 const nyckel=x=>x.kap+':'+x.omr;
 
 /* ── vänsterpanelen ── */
@@ -426,6 +456,13 @@ $$('.nivåfilter button').forEach(b=>b.addEventListener('click',()=>{
   rita();
 }));
 $('#sökfält').addEventListener('input',e=>{state.sök=e.target.value.toLowerCase().trim();rita();});
+$('#sorteraKnapp').addEventListener('click',()=>{
+  state.sorteraNivå=!state.sorteraNivå;
+  $('#sorteraKnapp').setAttribute('aria-pressed',state.sorteraNivå);
+  $('#sorteraLabel').textContent=state.sorteraNivå?'Sortera: Nivå':'Sortera: ID';
+  rita();
+});
+$('#döljPoäng').addEventListener('change',e=>{state.döljPoäng=e.target.checked;rita();ritaBlad();});
 
 /* ── urvalet ── */
 function urval(){
@@ -437,7 +474,10 @@ function urval(){
       if(!t.includes(state.sök)) return false;
     }
     return true;
-  }).sort((a,b)=>a.id.localeCompare(b.id,'sv',{numeric:true}));
+  }).sort((a,b)=>{
+    if(state.sorteraNivå && a.niva!==b.niva) return NIVÅORDNING[a.niva]-NIVÅORDNING[b.niva];
+    return a.id.localeCompare(b.id,'sv',{numeric:true});
+  });
 }
 
 /* ── mittenlistan ── */
@@ -462,7 +502,7 @@ function rita(){
           <span class="id">${x.id}</span>
           <span class="nivå ${x.niva}">${x.niva}</span>
           <span class="område">${OMR[x.kap][x.omr]}</span>
-          <span class="poäng">${x.poang}</span>
+          ${state.döljPoäng?'':`<span class="poäng">${x.poang}</span>`}
         </div>
         <div class="kroppen">${x.t}</div>
         <button class="facitknapp" data-facit="${x.id}">Visa facit</button>
@@ -493,16 +533,20 @@ function vippa(id){
 
 /* ── övningsbladet ── */
 function ritaBlad(){
-  const b=state.blad;
-  const p={E:0,C:0,A:0};
-  b.forEach(x=>{const m=x.poang.match(/(\d+)\/(\d+)\/(\d+)/);p.E+=+m[1];p.C+=+m[2];p.A+=+m[3];});
+  const b=state.blad, dp=state.döljPoäng;
+  const p={E:0,C:0,A:0}, antalN={E:0,C:0,A:0};
+  b.forEach(x=>{const m=x.poang.match(/(\d+)\/(\d+)\/(\d+)/);p.E+=+m[1];p.C+=+m[2];p.A+=+m[3];antalN[x.niva]++;});
   const tot=p.E+p.C+p.A;
+  const antalTot=b.length;
+  $('#summa').style.display=dp?'none':'';
   $('#summa').innerHTML=tot+'<small>p</small>';
   $('#bAntal').textContent=b.length?b.length+(b.length===1?' uppgift':' uppgifter'):'inga uppgifter';
+  document.querySelector('.stapel').style.display=dp?'none':'';
   ['E','C','A'].forEach(n=>{
     $('#st'+n).style.width=(tot?p[n]/tot*100:0)+'%';
-    $('#p'+n).textContent=p[n];
+    $('#p'+n).textContent=dp?antalN[n]:p[n];
   });
+  $('#gränser').style.display=dp?'none':'';
   $('#gränser').innerHTML=tot
     ? `Förslag på gränser<br>E <b>${Math.round(tot*.28)} p</b> · C <b>${Math.round(tot*.55)} p</b> · A <b>${Math.round(tot*.78)} p</b>`
     : 'Kryssa i uppgifter så räknas poängen ihop här.';
@@ -510,7 +554,7 @@ function ritaBlad(){
   $('#blad').innerHTML=b.length ? b.map((x,i)=>`
     <div class="brad">
       <span class="num">${i+1}</span>
-      <span class="txt"><b>${x.id} · ${x.niva} · ${x.poang}</b>
+      <span class="txt"><b>${x.id} · ${x.niva}${dp?'':' · '+x.poang}</b>
         <span>${x.t.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,90)}…</span></span>
       <span class="bverktyg">
         <button data-upp="${i}" title="Flytta upp" ${i===0?'disabled':''}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg></button>
@@ -537,7 +581,11 @@ $('#läggAlla').addEventListener('click',()=>{
 });
 $('#rensaAllt').addEventListener('click',()=>{
   state.blad=[]; state.omr.clear(); state.sök=''; state.nivåer=new Set(['E','C','A']);
+  state.sorteraNivå=false; state.döljPoäng=false;
   $('#sökfält').value='';
+  $('#sorteraKnapp').setAttribute('aria-pressed','false');
+  $('#sorteraLabel').textContent='Sortera: ID';
+  $('#döljPoäng').checked=false;
   $$('.omrad').forEach(b=>b.setAttribute('aria-pressed','false'));
   $$('.nivåfilter button').forEach(b=>b.setAttribute('aria-pressed','true'));
   rita(); ritaBlad();
@@ -555,14 +603,19 @@ $('#slumpa').addEventListener('click',()=>{
 /* ── export ── */
 function bladHTML({facit}){
   const t=$('#bTitel').value||'Övningsblad', kl=$('#bKlass').value, da=$('#bDatum').value;
-  const p={E:0,C:0,A:0};
-  state.blad.forEach(x=>{const m=x.poang.match(/(\d+)\/(\d+)\/(\d+)/);p.E+=+m[1];p.C+=+m[2];p.A+=+m[3];});
+  const dp=state.döljPoäng;
+  const p={E:0,C:0,A:0}, antalN={E:0,C:0,A:0};
+  state.blad.forEach(x=>{const m=x.poang.match(/(\d+)\/(\d+)\/(\d+)/);p.E+=+m[1];p.C+=+m[2];p.A+=+m[3];antalN[x.niva]++;});
   const tot=p.E+p.C+p.A;
   const rad=[kl,da].filter(Boolean).join(' · ');
+  const sammanfattning=dp
+    ? `${state.blad.length} uppgifter (${antalN.E} E / ${antalN.C} C / ${antalN.A} A)`
+    : `Max ${tot} poäng (${p.E}/${p.C}/${p.A}) · ${state.blad.length} uppgifter`;
   let h=`<div class="ph"><img src="${LOGO}" alt=""><div><h1>${t}</h1>
-    <div class="pm">${rad?rad+' · ':''}Max ${tot} poäng (${p.E}/${p.C}/${p.A}) · ${state.blad.length} uppgifter</div></div></div>`;
+    <div class="pm">${rad?rad+' · ':''}${sammanfattning}</div></div></div>`;
   state.blad.forEach((x,i)=>{
-    h+=`<div class="pu"><div class="pn">${i+1}.</div><div><span class="pp">${x.poang}</span>${x.t}</div></div>`;
+    const märke=dp?x.niva:x.poang;
+    h+=`<div class="pu"><div class="pn">${i+1}.</div><div><span class="pp">${märke}</span>${x.t}</div></div>`;
   });
   if(facit){
     h+=`<div class="fk"><h1 style="font-size:14pt;margin-bottom:12pt">Facit</h1>`;
