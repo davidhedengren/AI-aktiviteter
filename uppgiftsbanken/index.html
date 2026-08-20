@@ -53,6 +53,8 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .knapp.tyst:hover{background:var(--sunken);color:var(--ink)}
 .knapp.tyst[aria-pressed="true"]{background:var(--ed-tint);color:var(--ed-dark)}
 .knapp.tyst[aria-pressed="true"]:hover{background:var(--ed-tint)}
+.knapp.liten{padding:6px 10px;font-size:12px;gap:5px}
+.knapp.liten svg{width:12.5px;height:12.5px}
 .knapp:disabled{opacity:.4;cursor:not-allowed;transform:none}
 .knapp:focus-visible,input:focus-visible,.omrad:focus-visible,.kort:focus-visible{
   outline:2px solid var(--ed);outline-offset:2px}
@@ -259,6 +261,12 @@ table.data th{background:var(--sunken);font-weight:600}
   #utskrift .pu p:last-child{margin-bottom:0}
   #utskrift .fu p{margin:0 0 3pt}
   #utskrift .pp{float:right;font-family:var(--mono);font-size:9.5pt;color:#444;margin-left:10pt}
+  #utskrift .nivåmärke{float:right;margin-left:10pt;-webkit-print-color-adjust:exact;print-color-adjust:exact;
+    font-family:var(--mono);font-size:9pt;font-weight:700;letter-spacing:.03em;
+    border-radius:4pt;padding:1.5pt 6pt;line-height:1.5}
+  #utskrift .nivåmärke.E{background:var(--nE-bg);color:var(--nE)}
+  #utskrift .nivåmärke.C{background:var(--nC-bg);color:var(--nC)}
+  #utskrift .nivåmärke.A{background:var(--nA-bg);color:var(--nA)}
   #utskrift ol{margin:6pt 0;padding-left:0;list-style:none;counter-reset:d}
   #utskrift li{padding-left:20pt;position:relative;margin-bottom:3pt}
   #utskrift li::before{counter-increment:d;content:counter(d,lower-alpha) ")";position:absolute;left:0;font-family:var(--mono)}
@@ -327,7 +335,7 @@ table.data th{background:var(--sunken);font-weight:600}
       <button class="knapp tyst" id="läggAlla">Lägg till alla</button>
       <div class="fyll"></div>
       <div class="kryssgrupp">
-        <button class="knapp tyst" id="sorteraKnapp" type="button" aria-pressed="false">
+        <button class="knapp tyst liten" id="sorteraKnapp" type="button" aria-pressed="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
           <span id="sorteraLabel">Sortera: ID</span>
         </button>
@@ -483,9 +491,7 @@ function urval(){
 /* ── mittenlistan ── */
 function rita(){
   const u=urval(), vald=new Set(state.blad.map(x=>x.id));
-  $('#träffar').innerHTML=state.omr.size===0&&!state.sök
-    ? `<b>${u.length}</b> uppgifter · välj område till vänster för att smalna av`
-    : `<b>${u.length}</b> ${u.length===1?'uppgift':'uppgifter'}`;
+  $('#träffar').innerHTML=`<b>${u.length}</b> ${u.length===1?'uppgift':'uppgifter'}`;
   $('#läggAlla').disabled=u.length===0;
 
   if(!u.length){
@@ -614,8 +620,10 @@ function bladHTML({facit}){
   let h=`<div class="ph"><img src="${LOGO}" alt=""><div><h1>${t}</h1>
     <div class="pm">${rad?rad+' · ':''}${sammanfattning}</div></div></div>`;
   state.blad.forEach((x,i)=>{
-    const märke=dp?x.niva:x.poang;
-    h+=`<div class="pu"><div class="pn">${i+1}.</div><div><span class="pp">${märke}</span>${x.t}</div></div>`;
+    const märke=dp
+      ? `<span class="nivåmärke ${x.niva}">${x.niva}</span>`
+      : `<span class="pp">${x.poang}</span>`;
+    h+=`<div class="pu"><div class="pn">${i+1}.</div><div>${märke}${x.t}</div></div>`;
   });
   if(facit){
     h+=`<div class="fk"><h1 style="font-size:14pt;margin-bottom:12pt">Facit</h1>`;
@@ -643,6 +651,11 @@ $('#expWord').addEventListener('click',()=>{
       .pu{margin-bottom:14pt}
       .pn{font-weight:bold;float:left;width:26pt}
       .pp{float:right;font-size:9.5pt;color:#444}
+      .nivåmärke{float:right;margin-left:10pt;font-weight:bold;font-size:9pt;letter-spacing:.3pt;
+        border-radius:4pt;padding:1.5pt 7pt}
+      .nivåmärke.E{background:#E9F3EF;color:#0F6B4F}
+      .nivåmärke.C{background:#EAF0F8;color:#2A5D9E}
+      .nivåmärke.A{background:#F2ECF6;color:#6E3B86}
       ol{margin:6pt 0 6pt 26pt}
       li{margin-bottom:3pt}
       table.data{border-collapse:collapse;font-size:10pt;margin:6pt 0}
