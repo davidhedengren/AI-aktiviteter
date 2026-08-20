@@ -21,14 +21,15 @@ window.OMR = {
  "5": {
   "arbete": "Arbete och energi",
   "effekt": "Effekt och verkningsgrad",
-  "rorelsemangd": "Rörelsemängd och kollisioner"
+  "rorelsemangd": "Rörelsemängd och kollisioner",
+"blandat": "Blandat - energi, rörelsemängd och kraft"
  },
  "6": {
   "tryck": "Tryck och kraft",
   "vatsketryck": "Vätsketryck och lufttryck",
   "arkimedes": "Arkimedes princip",
-  "gaslagen": "Allmänna gaslagen",
-"blandat": "Blandat - energi, rörelsemängd och kraft"
+  "gaslagen": "Allmänna gaslagen"
+
  },
  "7": {
   "varme": "Värmeöverföring och temperatur",
