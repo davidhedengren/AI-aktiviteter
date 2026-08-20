@@ -21,15 +21,14 @@ window.OMR = {
  "5": {
   "arbete": "Arbete och energi",
   "effekt": "Effekt och verkningsgrad",
-  "rorelsemangd": "Rörelsemängd och kollisioner",
-  "blandat": "Blandat - energi, rörelsemängd och kraft"
-
+  "rorelsemangd": "Rörelsemängd och kollisioner"
  },
  "6": {
   "tryck": "Tryck och kraft",
   "vatsketryck": "Vätsketryck och lufttryck",
   "arkimedes": "Arkimedes princip",
-  "gaslagen": "Allmänna gaslagen"
+  "gaslagen": "Allmänna gaslagen",
+"blandat": "Blandat - energi, rörelsemängd och kraft"
  },
  "7": {
   "varme": "Värmeöverföring och temperatur",
@@ -40,7 +39,8 @@ window.OMR = {
   "kretsar": "Ström, spänning och Ohms lag",
   "kopplingar": "Elektriska kopplingar",
   "ems": "Ems, polspänning och effekt",
-  "falt": "Elektriska fält och potential"
+  "falt": "Elektriska fält",
+  "potential": "Potential och potentialvandring"
  },
  "9": {
   "nuklider": "Isotoper och nuklider",
