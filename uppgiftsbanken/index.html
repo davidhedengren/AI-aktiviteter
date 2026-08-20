@@ -621,7 +621,7 @@ function rita(){
       <div>
         <div class="kortmeta">
           <span class="id">${x.id}</span>
-          <span class="nivå ${x.niva}${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
+          <span class="nivå ${x.niva.split('/')[0]}${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
             tabindex="0" title="${REDTITEL}">${x.niva}</span>
           <span class="område">${OMR[x.kap][x.omr]}</span>
           ${state.visaPoäng?`<span class="poäng${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
@@ -688,7 +688,7 @@ function ritaBlad(){
       <span class="txt">
         <span class="bmeta">
           <span class="bid">${x.id}</span>
-          <span class="bniva ${x.niva}${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
+          <span class="bniva ${x.niva.split('/')[0]}${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
             tabindex="0" title="${REDTITEL}">${x.niva}</span>
           ${vp?`<span class="bpoäng${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
             tabindex="0" title="${REDTITEL}">${x.poang}</span>`:''}
@@ -721,9 +721,9 @@ const PR=$('#poängred');
 let redigerar=null;
 
 function nivåAv(p){
-  if(p.A>0 && p.A>=p.C && p.A>=p.E) return 'A';
-  if(p.C>0 && p.C>=p.E) return 'C';
-  return 'E';
+  const max=Math.max(p.E,p.C,p.A);
+  const vinnare=['E','C','A'].filter(n=>p[n]===max&&p[n]>0);
+  return vinnare.length?vinnare.join('/'):'E';
 }
 function poängAv(x){
   const m=x.poang.match(/(\d+)\/(\d+)\/(\d+)/);
@@ -740,7 +740,7 @@ function ritaPR(){
   const x=redigerar; if(!x) return;
   const p=poängAv(x);
   $('#prId').textContent=x.id;
-  const nv=$('#prNiva'); nv.className='nivå '+x.niva; nv.textContent=x.niva;
+  const nv=$('#prNiva'); nv.className='nivå '+x.niva.split('/')[0]; nv.textContent=x.niva;
   $('#prSumma').textContent=(p.E+p.C+p.A)+' p totalt';
   ['E','C','A'].forEach(n=>{
     PR.querySelector('[data-v="'+n+'"]').textContent=p[n];
@@ -753,7 +753,7 @@ function ritaPR(){
 function patchaMärken(x){
   document.querySelectorAll('.kort[data-id="'+x.id+'"]').forEach(k=>{
     const n=k.querySelector('.nivå');
-    if(n){ n.className='nivå '+x.niva+(ändrad(x)?' ändrad':''); n.textContent=x.niva; }
+    if(n){ n.className='nivå '+x.niva.split('/')[0]+(ändrad(x)?' ändrad':''); n.textContent=x.niva; }
     const p=k.querySelector('.poäng');
     if(p){ p.textContent=x.poang; p.classList.toggle('ändrad',ändrad(x)); }
   });
