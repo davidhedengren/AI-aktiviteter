@@ -4093,6 +4093,356 @@ window.BANK = [
   "s": "<p>a) P: 25/10 = <strong>2,5 g/cm³</strong>, Q: 50/20 = <strong>2,5 g/cm³</strong>, R: 45/30 = <strong>1,5 g/cm³</strong></p>\n<p>b) <strong>P och Q</strong>. De har samma densitet och ligger därför på <strong>samma räta linje genom origo</strong>. R ligger under den linjen och är ett annat material.</p>\n<p>c) Ja. R har densiteten 1,5 g/cm³ &gt; 1,0 g/cm³, alltså <strong>sjunker</strong> den i vatten.</p>"
  },
  {
+  "id": "2.57",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "typ": "omvandla längder till meter, ur text, sökt längd",
+  "poang": "(2/0/0)",
+  "t": "<p>Omvandla följande längder till enheten meter.</p>\n<ol><li>45 cm</li><li>8,4 mm</li><li>0,75 km</li><li>3,2 mil</li><li>620 nm</li><li>15 dm</li></ol>",
+  "s": "\n<p>a) 45 cm = <strong>0,45 m</strong></p>\n<p>b) 8,4 mm = <strong>8,4·10⁻³ m</strong></p>\n<p>c) 0,75 km = <strong>750 m</strong></p>\n<p>d) 3,2 mil = <strong>32 000 m</strong></p>\n<p>e) 620 nm = <strong>6,2·10⁻⁷ m</strong></p>\n<p>f) 15 dm = <strong>1,5 m</strong></p>"
+ },
+ {
+  "id": "2.58",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "typ": "omvandla massor till kilogram, ur text, sökt massa",
+  "poang": "(2/0/0)",
+  "t": "<p>Omvandla följande massor till enheten kilogram.</p>\n<ol><li>250 g</li><li>45 mg</li><li>2,4 ton</li><li>780 hg</li><li>0,60 µg</li><li>12 000 g</li></ol>",
+  "s": "\n<p>a) 250 g = <strong>0,250 kg</strong></p>\n<p>b) 45 mg = <strong>4,5·10⁻⁵ kg</strong></p>\n<p>c) 2,4 ton = <strong>2400 kg</strong></p>\n<p>d) 780 hg = <strong>78 kg</strong></p>\n<p>e) 0,60 µg = <strong>6,0·10⁻¹⁰ kg</strong></p>\n<p>f) 12 000 g = <strong>12 kg</strong></p>"
+ },
+ {
+  "id": "2.59",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "typ": "omvandla tider till sekunder, ur text, sökt tid",
+  "poang": "(2/0/0)",
+  "t": "<p>Omvandla följande tider till enheten sekund. Räkna med att ett år är 3,156·10⁷ s.</p>\n<ol><li>25 min</li><li>3,5 h</li><li>2,0 dygn</li><li>480 ms</li><li>25 µs</li><li>1,5 år</li></ol>",
+  "s": "\n<p>a) 25 min = <strong>1500 s</strong></p>\n<p>b) 3,5 h = <strong>12 600 s</strong></p>\n<p>c) 2,0 dygn = <strong>1,728·10⁵ s</strong></p>\n<p>d) 480 ms = <strong>0,480 s</strong></p>\n<p>e) 25 µs = <strong>2,5·10⁻⁵ s</strong></p>\n<p>f) 1,5 år = <strong>4,73·10⁷ s</strong></p>"
+ },
+ {
+  "id": "2.60",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "typ": "omvandla areor till kvadratmeter, ur text, sökt area",
+  "poang": "(2/0/0)",
+  "t": "<p>Omvandla följande areor till enheten kvadratmeter. Ett hektar är 10 000 m².</p>\n<ol><li>350 cm²</li><li>4,2 dm²</li><li>1200 mm²</li><li>0,25 km²</li><li>3,0 hektar</li><li>45 dm²</li></ol>",
+  "s": "\n<p>a) 350 cm² = <strong>0,0350 m²</strong></p>\n<p>b) 4,2 dm² = <strong>0,042 m²</strong></p>\n<p>c) 1200 mm² = <strong>1,2·10⁻³ m²</strong></p>\n<p>d) 0,25 km² = <strong>2,5·10⁵ m²</strong></p>\n<p>e) 3,0 hektar = <strong>30 000 m²</strong></p>\n<p>f) 45 dm² = <strong>0,45 m²</strong></p>"
+ },
+ {
+  "id": "2.61",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "typ": "omvandla volymer till kubikmeter, ur text, sökt volym",
+  "poang": "(2/0/0)",
+  "t": "<p>Omvandla följande volymer till enheten kubikmeter.</p>\n<ol><li>250 cm³</li><li>3,5 dm³</li><li>12 liter</li><li>800 mm³</li><li>250 ml</li><li>4,0 hektoliter</li></ol>",
+  "s": "\n<p>a) 250 cm³ = <strong>2,5·10⁻⁴ m³</strong></p>\n<p>b) 3,5 dm³ = <strong>3,5·10⁻³ m³</strong></p>\n<p>c) 12 liter = <strong>0,012 m³</strong></p>\n<p>d) 800 mm³ = <strong>8,0·10⁻⁷ m³</strong></p>\n<p>e) 250 ml = <strong>2,5·10⁻⁴ m³</strong></p>\n<p>f) 4,0 hektoliter = <strong>0,40 m³</strong></p>"
+ },
+ {
+  "id": "2.62",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "typ": "omvandla mellan kilometer per timme och meter per sekund, ur text, sökt hastighet",
+  "poang": "(2/0/0)",
+  "t": "<p>Omvandla mellan km/h och m/s. Kom ihåg att man delar med 3,6 för att gå från km/h till m/s, och multiplicerar med 3,6 åt andra hållet.</p>\n<ol><li>90 km/h till m/s</li><li>15 m/s till km/h</li><li>5,0 km/h till m/s</li><li>340 m/s till km/h</li><li>108 km/h till m/s</li><li>0,50 m/s till km/h</li></ol>",
+  "s": "\n<p>a) 90/3,6 = <strong>25 m/s</strong></p>\n<p>b) 15 · 3,6 = <strong>54 km/h</strong></p>\n<p>c) 5,0/3,6 = <strong>1,4 m/s</strong></p>\n<p>d) 340 · 3,6 = <strong>1224 km/h</strong></p>\n<p>e) 108/3,6 = <strong>30 m/s</strong></p>\n<p>f) 0,50 · 3,6 = <strong>1,8 km/h</strong></p>"
+ },
+ {
+  "id": "2.63",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "typ": "omvandla densitet mellan gram per kubikcentimeter och kilogram per kubikmeter, ur text, sökt densitet",
+  "poang": "(2/0/0)",
+  "t": "<p>Omvandla mellan g/cm³ och kg/m³. Ett gram per kubikcentimeter motsvarar 1000 kilogram per kubikmeter.</p>\n<ol><li>2,7 g/cm³ till kg/m³</li><li>998 kg/m³ till g/cm³</li><li>13,6 g/cm³ till kg/m³</li><li>1,29 kg/m³ till g/cm³</li><li>0,92 g/cm³ till kg/m³</li><li>7870 kg/m³ till g/cm³</li></ol>",
+  "s": "\n<p>a) <strong>2700 kg/m³</strong></p>\n<p>b) <strong>0,998 g/cm³</strong></p>\n<p>c) <strong>13 600 kg/m³</strong></p>\n<p>d) <strong>1,29·10⁻³ g/cm³</strong></p>\n<p>e) <strong>920 kg/m³</strong></p>\n<p>f) <strong>7,87 g/cm³</strong></p>"
+ },
+ {
+  "id": "2.64",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "typ": "omvandla krafter till newton och tryck till pascal, ur text, sökt kraft och tryck",
+  "poang": "(2/0/0)",
+  "t": "<p>Omvandla följande krafter till newton och följande tryck till pascal. Ett bar är 100 kPa.</p>\n<ol><li>4,5 kN</li><li>250 mN</li><li>1,2 MN</li><li>300 kPa</li><li>2,5 bar</li><li>1013 hPa</li></ol>",
+  "s": "\n<p>a) 4,5 kN = <strong>4500 N</strong></p>\n<p>b) 250 mN = <strong>0,250 N</strong></p>\n<p>c) 1,2 MN = <strong>1,2·10⁶ N</strong></p>\n<p>d) 300 kPa = <strong>3,0·10⁵ Pa</strong></p>\n<p>e) 2,5 bar = <strong>2,5·10⁵ Pa</strong></p>\n<p>f) 1013 hPa = <strong>101 300 Pa</strong></p>"
+ },
+ {
+  "id": "2.65",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "typ": "omvandla energier till joule, ur text, sökt energi",
+  "poang": "(2/0/0)",
+  "t": "<p>Omvandla följande energier till enheten joule. En kilowattimme är 3,6·10⁶ J och en kalori är 4,184 J.</p>\n<ol><li>45 kJ</li><li>2,5 MJ</li><li>3,0 kWh</li><li>250 Wh</li><li>1,5 mJ</li><li>500 kcal</li></ol>",
+  "s": "\n<p>a) 45 kJ = <strong>45 000 J</strong></p>\n<p>b) 2,5 MJ = <strong>2,5·10⁶ J</strong></p>\n<p>c) 3,0 kWh = <strong>1,08·10⁷ J</strong></p>\n<p>d) 250 Wh = <strong>9,0·10⁵ J</strong></p>\n<p>e) 1,5 mJ = <strong>1,5·10⁻³ J</strong></p>\n<p>f) 500 kcal = <strong>2,09·10⁶ J</strong></p>"
+ },
+ {
+  "id": "2.66",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "typ": "omvandla effekter till watt, ur text, sökt effekt",
+  "poang": "(2/0/0)",
+  "t": "<p>Omvandla följande effekter till enheten watt. En hästkraft är 735 W.</p>\n<ol><li>2,4 kW</li><li>850 MW</li><li>45 mW</li><li>1,5 hk</li><li>0,60 kW</li><li>12 GW</li></ol>",
+  "s": "\n<p>a) 2,4 kW = <strong>2400 W</strong></p>\n<p>b) 850 MW = <strong>8,5·10⁸ W</strong></p>\n<p>c) 45 mW = <strong>0,045 W</strong></p>\n<p>d) 1,5 hk = <strong>1103 W</strong></p>\n<p>e) 0,60 kW = <strong>600 W</strong></p>\n<p>f) 12 GW = <strong>1,2·10¹⁰ W</strong></p>"
+ },
+ {
+  "id": "2.67",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "typ": "skriva om värden med lämpligt prefix, ur text, sökt prefix",
+  "poang": "(2/0/0)",
+  "t": "<p>Skriv om följande värden med ett lämpligt prefix, så att siffervärdet hamnar mellan 1 och 1000.</p>\n<ol><li>0,0045 m</li><li>3,2·10⁻⁶ s</li><li>5,6·10⁶ W</li><li>1,2·10⁻⁷ m</li><li>8,4·10⁹ Hz</li><li>0,025 A</li></ol>",
+  "s": "\n<p>a) <strong>4,5 mm</strong></p>\n<p>b) <strong>3,2 µs</strong></p>\n<p>c) <strong>5,6 MW</strong></p>\n<p>d) <strong>120 nm</strong></p>\n<p>e) <strong>8,4 GHz</strong></p>\n<p>f) <strong>25 mA</strong></p>"
+ },
+ {
+  "id": "2.68",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "typ": "skriva tal i grundpotensform, ur text, sökt grundpotensform",
+  "poang": "(2/0/0)",
+  "t": "<p>Skriv följande tal i grundpotensform, alltså på formen a·10ⁿ där a ligger mellan 1 och 10.</p>\n<ol><li>0,000 42</li><li>93 000 000</li><li>0,000 000 015 6</li><li>6021</li><li>0,75</li><li>250 000 000 000</li></ol>",
+  "s": "\n<p>a) <strong>4,2·10⁻⁴</strong></p>\n<p>b) <strong>9,3·10⁷</strong></p>\n<p>c) <strong>1,56·10⁻⁸</strong></p>\n<p>d) <strong>6,021·10³</strong></p>\n<p>e) <strong>7,5·10⁻¹</strong></p>\n<p>f) <strong>2,5·10¹¹</strong></p>"
+ },
+ {
+  "id": "2.69",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "typ": "omvandla mellan celsius och kelvin, ur text, sökt temperatur",
+  "poang": "(2/0/0)",
+  "t": "<p>Omvandla mellan celsius och kelvin. Noll grader celsius motsvarar 273,15 K.</p>\n<ol><li>25 °C till kelvin</li><li>−40 °C till kelvin</li><li>350 K till celsius</li><li>0 K till celsius</li><li>100 °C till kelvin</li><li>77 K till celsius</li></ol>",
+  "s": "\n<p>a) <strong>298 K</strong></p>\n<p>b) <strong>233 K</strong></p>\n<p>c) <strong>77 °C</strong></p>\n<p>d) <strong>−273 °C</strong></p>\n<p>e) <strong>373 K</strong></p>\n<p>f) <strong>−196 °C</strong></p>"
+ },
+ {
+  "id": "2.70",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "typ": "omvandla elektriska storheter till grundenheter, ur text, sökt ström spänning och resistans",
+  "poang": "(2/0/0)",
+  "t": "<p>Omvandla följande elektriska storheter till grundenheterna ampere, volt och ohm.</p>\n<ol><li>250 mA</li><li>45 µA</li><li>4,7 kΩ</li><li>2,2 MΩ</li><li>12 mV</li><li>400 kV</li></ol>",
+  "s": "\n<p>a) 250 mA = <strong>0,250 A</strong></p>\n<p>b) 45 µA = <strong>4,5·10⁻⁵ A</strong></p>\n<p>c) 4,7 kΩ = <strong>4700 Ω</strong></p>\n<p>d) 2,2 MΩ = <strong>2,2·10⁶ Ω</strong></p>\n<p>e) 12 mV = <strong>0,012 V</strong></p>\n<p>f) 400 kV = <strong>4,0·10⁵ V</strong></p>"
+ },
+ {
+  "id": "2.71",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "E",
+  "typ": "omvandla frekvens aktivitet och stråldos till grundenheter, ur text, sökt frekvens och dos",
+  "poang": "(2/0/0)",
+  "t": "<p>Omvandla följande storheter till grundenheterna hertz, becquerel, gray och sievert.</p>\n<ol><li>2,4 GHz</li><li>88 MHz</li><li>37 kBq</li><li>12 MBq</li><li>150 µGy</li><li>2,4 mSv</li></ol>",
+  "s": "\n<p>a) 2,4 GHz = <strong>2,4·10⁹ Hz</strong></p>\n<p>b) 88 MHz = <strong>8,8·10⁷ Hz</strong></p>\n<p>c) 37 kBq = <strong>37 000 Bq</strong></p>\n<p>d) 12 MBq = <strong>1,2·10⁷ Bq</strong></p>\n<p>e) 150 µGy = <strong>1,5·10⁻⁴ Gy</strong></p>\n<p>f) 2,4 mSv = <strong>2,4·10⁻³ Sv</strong></p>"
+ },
+ {
+  "id": "2.72",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "C",
+  "typ": "omvandla densitet mellan fyra olika sammansatta enheter, ur text, sökt densitet",
+  "poang": "(1/2/0)",
+  "t": "<p>Omvandla mellan olika sätt att ange densitet.</p>\n<ol><li>2,7 g/cm³ till kg/dm³</li><li>1000 kg/m³ till g/liter</li><li>5,0 g/ml till kg/m³</li><li>850 kg/m³ till g/cm³</li><li>1,0 kg/liter till kg/m³</li></ol>",
+  "s": "<p>Ett dm³ är samma sak som en liter, och ett cm³ är samma sak som en ml. Det är därför flera av omvandlingarna blir enkla.</p>\n<p>a) 1 dm³ = 1000 cm³ och 1 kg = 1000 g, så faktorerna tar ut varandra: <strong>2,7 kg/dm³</strong></p>\n<p>b) 1 m³ = 1000 liter och 1 kg = 1000 g: <strong>1000 g/liter</strong></p>\n<p>c) 1 ml = 1 cm³, alltså 5,0 g/cm³ = <strong>5000 kg/m³</strong></p>\n<p>d) <strong>0,850 g/cm³</strong></p>\n<p>e) 1 liter = 1 dm³, alltså 1,0 kg/dm³ = <strong>1000 kg/m³</strong></p>\n<p>Vatten har densiteten 1000 kg/m³, vilket alltså är samma sak som 1,0 g/cm³, 1,0 kg/liter och 1000 g/liter.</p>"
+ },
+ {
+  "id": "2.73",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "C",
+  "typ": "omvandla volymflöde och massflöde mellan olika enheter, ur text, sökt flöde",
+  "poang": "(1/2/0)",
+  "t": "<p>Omvandla följande flöden till de angivna enheterna.</p>\n<ol><li>30 liter/min till m³/s</li><li>1,2 m³/s till liter/min</li><li>18 ton/h till kg/s</li><li>250 ml/s till liter/h</li><li>2,0 kg/s till ton per dygn</li></ol>",
+  "s": "\n<p>a) 30 liter = 0,030 m³ och 1 min = 60 s: 0,030/60 = <strong>5,0·10⁻⁴ m³/s</strong></p>\n<p>b) 1,2 m³ = 1200 liter och en minut har 60 s: 1200 · 60 = <strong>72 000 liter/min</strong></p>\n<p>c) 18 ton = 18 000 kg och 1 h = 3600 s: 18000/3600 = <strong>5,0 kg/s</strong></p>\n<p>d) 250 ml = 0,250 liter och en timme har 3600 s: 0,250 · 3600 = <strong>900 liter/h</strong></p>\n<p>e) Ett dygn har 86 400 s: 2,0 · 86400 = 172 800 kg = <strong>173 ton per dygn</strong></p>\n<p>Vid flöden måste man omvandla både täljarens och nämnarens enhet, ett steg i taget.</p>"
+ },
+ {
+  "id": "2.74",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "C",
+  "typ": "undersöka hur area och volym ändras när längdmåtten skalas om, ur text, sökt area och volym",
+  "poang": "(1/2/0)",
+  "t": "<p>En kub har sidan 3,0 cm.</p>\n<ol><li>Vilken area har en av kubens sidoytor, i m²?</li><li>Vilken volym har kuben, i m³?</li><li>Sidan fördubblas till 6,0 cm. Hur många gånger större blir sidoytans area?</li><li>Hur många gånger större blir volymen?</li><li>En modell byggs i skala 1:10. Hur många gånger mindre blir modellens volym?</li></ol>",
+  "s": "\n<p>a) 3,0 cm = 0,030 m, alltså A = 0,030² = <strong>9,0·10⁻⁴ m²</strong></p>\n<p>b) V = 0,030³ = <strong>2,7·10⁻⁵ m³</strong></p>\n<p>c) Arean växer med kvadraten på längden: <strong>4 gånger</strong></p>\n<p>d) Volymen växer med kuben på längden: <strong>8 gånger</strong></p>\n<p>e) Volymen minskar med 10³, alltså <strong>1000 gånger</strong> mindre</p>\n<p>Det är därför man aldrig kan omvandla kvadratmeter genom att flytta decimaltecknet lika många steg som för meter. En faktor 100 i längd ger 10 000 i area och 1 000 000 i volym.</p>"
+ },
+ {
+  "id": "2.75",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "C",
+  "typ": "bestämma SI-enheten för en storhet ur dess formel, ur text, sökt enhet",
+  "poang": "(1/2/0)",
+  "t": "<p>Bestäm SI-enheten för storheten i varje formel genom att sätta in enheterna för de ingående storheterna. Ange svaret både i grundenheter och med en eventuell namngiven enhet.</p>\n<ol><li>E<sub>k</sub> = mv²/2</li><li>p = F/A</li><li>ρ = m/V</li><li>P = W/t</li><li>F = ma</li></ol>",
+  "s": "\n<p>a) kg · (m/s)² = <strong>kg·m²/s²</strong>, som är samma sak som <strong>joule</strong></p>\n<p>b) N/m² = <strong>kg/(m·s²)</strong>, som kallas <strong>pascal</strong></p>\n<p>c) <strong>kg/m³</strong>, som saknar eget namn</p>\n<p>d) J/s = <strong>kg·m²/s³</strong>, som kallas <strong>watt</strong></p>\n<p>e) kg · m/s² = <strong>kg·m/s²</strong>, som kallas <strong>newton</strong></p>\n<p>Att kontrollera enheterna är ett bra sätt att upptäcka fel i en uträkning. Får man till exempel meter per sekund när svaret ska vara en kraft har något gått snett på vägen.</p>"
+ },
+ {
+  "id": "2.76",
+  "kap": 2,
+  "omr": "enheter",
+  "niva": "C",
+  "typ": "omvandla vardagliga energienheter till joule och kilowattimmar, ur text, sökt energi",
+  "poang": "(1/2/0)",
+  "t": "<p>En kilowattimme är 3,6·10⁶ J, en kilokalori är 4184 J och en elektronvolt är 1,602·10⁻¹⁹ J.</p>\n<ol><li>En person äter 2000 kcal på en dag. Hur många joule är det?</li><li>Hur många kilowattimmar motsvarar det?</li><li>En lampa på 60 W är tänd i 5,0 timmar. Hur många kilowattimmar förbrukas?</li><li>Hur många joule är det?</li><li>Vid ett alfasönderfall frigörs 5,0 MeV. Hur många joule är det?</li></ol>",
+  "s": "\n<p>a) 2000 · 4184 = <strong>8,37·10⁶ J</strong></p>\n<p>b) 8,368·10⁶/3,6·10⁶ = <strong>2,3 kWh</strong></p>\n<p>c) 0,060 kW · 5,0 h = <strong>0,30 kWh</strong></p>\n<p>d) 0,30 · 3,6·10⁶ = <strong>1,08·10⁶ J</strong></p>\n<p>e) 5,0·10⁶ · 1,602·10⁻¹⁹ = <strong>8,0·10⁻¹³ J</strong></p>\n<p>En hel dags mat innehåller alltså ungefär lika mycket energi som en lampa på 60 W förbrukar under nästan två dygn.</p>"
+ },
+ {
+  "id": "2.77",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "E",
+  "typ": "beräkna densitet ur massa och volym och räkna om enheten, ur text, sökt densitet",
+  "poang": "(2/0/0)",
+  "t": "<p>Ett metallföremål har massan 240 g och volymen 30 cm³.</p>\n<ol><li>Vilken densitet har föremålet, i g/cm³?</li><li>Vilken densitet är det i kg/m³?</li></ol>",
+  "s": "<p>a) ρ = m/V = 240/30 = <strong>8,0 g/cm³</strong></p>\n<p>b) Multiplicera med 1000: <strong>8000 kg/m³</strong></p>"
+ },
+ {
+  "id": "2.78",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "E",
+  "typ": "beräkna massa ur densitet och volym, ur text, sökt massa",
+  "poang": "(2/1/0)",
+  "t": "<p>Järn har densiteten 7870 kg/m³. En järnbalk har volymen 0,25 m³.</p>\n<ol><li>Vilket samband använder du?</li><li>Hur stor massa har balken?</li><li>Hur många ton är det?</li></ol>",
+  "s": "<p>a) ρ = m/V kan skrivas om till <strong>m = ρV</strong></p>\n<p>b) m = 7870 · 0,25 = <strong>1968 kg</strong></p>\n<p>c) <strong>2,0 ton</strong></p>"
+ },
+ {
+  "id": "2.79",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "E",
+  "typ": "beräkna volym ur massa och densitet, ur text, sökt volym",
+  "poang": "(2/1/0)",
+  "t": "<p>Aluminium har densiteten 2,70 g/cm³. Ett aluminiumföremål har massan 500 g.</p>\n<ol><li>Vilket samband använder du?</li><li>Vilken volym har föremålet?</li><li>Hur många liter är det?</li></ol>",
+  "s": "<p>a) ρ = m/V kan skrivas om till <strong>V = m/ρ</strong></p>\n<p>b) V = 500/2,70 = <strong>185 cm³</strong></p>\n<p>c) 185 cm³ = <strong>0,185 liter</strong></p>"
+ },
+ {
+  "id": "2.80",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "E",
+  "typ": "fylla i saknade värden för densitet massa och volym, ur tabell, sökt densitet massa och volym",
+  "poang": "(2/0/0)",
+  "t": "<p>Tabellen gäller fyra föremål. Ett värde saknas på varje rad.</p><table class=\"data\"><tr><th>ρ (g/cm³)</th><th>m</th><th>V</th></tr><tr><td>?</td><td>540 g</td><td>200 cm³</td></tr><tr><td>11,3</td><td>?</td><td>50 cm³</td></tr><tr><td>0,92</td><td>460 g</td><td>?</td></tr><tr><td>?</td><td>1,5 kg</td><td>0,20 dm³</td></tr></table>\n<p><strong>Bestäm de värden som saknas.</strong></p>",
+  "s": "<p>Sambandet ρ = m/V kan skrivas om till m = ρV eller V = m/ρ.</p>\n<p>Rad 1: ρ = 540/200 = <strong>2,70 g/cm³</strong></p>\n<p>Rad 2: m = 11,3 · 50 = <strong>565 g</strong></p>\n<p>Rad 3: V = 460/0,92 = <strong>500 cm³</strong></p>\n<p>Rad 4: 1,5 kg = 1500 g och 0,20 dm³ = 200 cm³, alltså ρ = 1500/200 = <strong>7,5 g/cm³</strong></p>"
+ },
+ {
+  "id": "2.81",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "E",
+  "typ": "beräkna volym och densitet för en kub ur sidlängd och massa, ur diagram, sökt volym och densitet",
+  "poang": "(2/1/0)",
+  "t": "<p>Figuren visar en kub av metall. Alla sidor är 5,0 cm.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 300\"><polygon points=\"120,150 240,150 300,110 180,110\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linejoin=\"round\"/><polygon points=\"120,150 120,250 240,250 240,150\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linejoin=\"round\"/><polygon points=\"240,150 300,110 300,210 240,250\" fill=\"#E6E4E8\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linejoin=\"round\"/><line x1=\"120\" y1=\"278\" x2=\"240\" y2=\"278\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"120\" y1=\"273\" x2=\"120\" y2=\"283\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"240\" y1=\"273\" x2=\"240\" y2=\"283\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><text x=\"180\" y=\"294\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10\" font-weight=\"400\" fill=\"#5C575E\">5,0 cm</text><line x1=\"340\" y1=\"110\" x2=\"340\" y2=\"210\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"335\" y1=\"110\" x2=\"345\" y2=\"110\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"335\" y1=\"210\" x2=\"345\" y2=\"210\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><text x=\"348\" y=\"164\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10\" font-weight=\"400\" fill=\"#5C575E\">5,0 cm</text><text x=\"180\" y=\"205\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2B2527\">m = 1,05 kg</text></svg></span>\n<ol><li>Vilken volym har kuben?</li><li>Hur många gram väger den?</li><li>Vilken densitet har metallen, i g/cm³?</li><li>Vilken densitet är det i kg/m³?</li></ol>",
+  "s": "<p>a) V = s³ = 5,0³ = <strong>125 cm³</strong></p>\n<p>b) 1,05 kg = <strong>1050 g</strong></p>\n<p>c) ρ = m/V = 1050/125 = <strong>8,4 g/cm³</strong></p>\n<p>d) <strong>8400 kg/m³</strong>, vilket stämmer bra med mässing.</p>"
+ },
+ {
+  "id": "2.82",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "E",
+  "typ": "bestämma densitet ur lutningen i ett massa-volym-diagram, ur diagram, sökt massa och densitet",
+  "poang": "(2/1/0)",
+  "t": "<p>Diagrammet visar massan hos olika stora bitar av samma material.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 286\"><rect x=\"54\" y=\"26\" width=\"432\" height=\"220\" fill=\"#fff\"/><line x1=\"54\" y1=\"246\" x2=\"486\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"250\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0</text><line x1=\"54\" y1=\"218.5\" x2=\"486\" y2=\"218.5\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"222.5\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">50</text><line x1=\"54\" y1=\"191\" x2=\"486\" y2=\"191\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"195\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">100</text><line x1=\"54\" y1=\"163.5\" x2=\"486\" y2=\"163.5\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"167.5\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">150</text><line x1=\"54\" y1=\"136\" x2=\"486\" y2=\"136\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"140\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">200</text><line x1=\"54\" y1=\"108.5\" x2=\"486\" y2=\"108.5\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"112.5\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">250</text><line x1=\"54\" y1=\"81\" x2=\"486\" y2=\"81\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"85\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">300</text><line x1=\"54\" y1=\"53.5\" x2=\"486\" y2=\"53.5\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"57.5\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">350</text><line x1=\"54\" y1=\"26\" x2=\"486\" y2=\"26\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"30\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">400</text><line x1=\"54\" y1=\"26\" x2=\"54\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"54\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0</text><line x1=\"140.4\" y1=\"26\" x2=\"140.4\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"140.4\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">10</text><line x1=\"226.8\" y1=\"26\" x2=\"226.8\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"226.8\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">20</text><line x1=\"313.2\" y1=\"26\" x2=\"313.2\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"313.2\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">30</text><line x1=\"399.6\" y1=\"26\" x2=\"399.6\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"399.6\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">40</text><line x1=\"486\" y1=\"26\" x2=\"486\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"486\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">50</text><line x1=\"54\" y1=\"26\" x2=\"54\" y2=\"246\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"54\" y1=\"246\" x2=\"486\" y2=\"246\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><text x=\"16\" y=\"14\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">m (g)</text><text x=\"486\" y=\"282\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">V (cm³)</text><polyline points=\"54.00,246.00 486.00,26.00\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\" stroke-linejoin=\"round\"/><circle cx=\"54.00\" cy=\"246.00\" r=\"3.3\" fill=\"#B43123\"/><circle cx=\"486.00\" cy=\"26.00\" r=\"3.3\" fill=\"#B43123\"/></svg></span>\n<ol><li>Hur mycket väger en bit med volymen 20 cm³?</li><li>Bestäm materialets densitet ur den avläsningen.</li><li>Bestäm densiteten ur grafens lutning och jämför.</li><li>Vad betyder det att grafen är en rät linje genom origo?</li></ol>",
+  "s": "<p>a) Vid 20 cm³ avläses <strong>160 g</strong></p>\n<p>b) ρ = m/V = 160/20 = <strong>8,0 g/cm³</strong></p>\n<p>c) Lutningen är 400 g per 50 cm³, alltså 400/50 = <strong>8,0 g/cm³</strong>. Samma svar.</p>\n<p>d) Massan är proportionell mot volymen, alltså är densiteten densamma i alla bitarna. Det är precis vad man väntar sig av ett och samma material.</p>"
+ },
+ {
+  "id": "2.83",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "E",
+  "typ": "beräkna volym och densitet för ett rätblock ur måtten och massan, ur diagram, sökt volym och densitet",
+  "poang": "(2/1/0)",
+  "t": "<p>Figuren visar ett rätblock med måtten 10 cm × 6,0 cm × 4,0 cm.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 290\"><polygon points=\"90,180 250,180 310,140 150,140\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linejoin=\"round\"/><polygon points=\"90,180 90,240 250,240 250,180\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linejoin=\"round\"/><polygon points=\"250,180 310,140 310,200 250,240\" fill=\"#E6E4E8\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linejoin=\"round\"/><line x1=\"90\" y1=\"268\" x2=\"250\" y2=\"268\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"90\" y1=\"263\" x2=\"90\" y2=\"273\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"250\" y1=\"263\" x2=\"250\" y2=\"273\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><text x=\"170\" y=\"284\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10\" font-weight=\"400\" fill=\"#5C575E\">10 cm</text><line x1=\"350\" y1=\"140\" x2=\"350\" y2=\"200\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"345\" y1=\"140\" x2=\"355\" y2=\"140\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"345\" y1=\"200\" x2=\"355\" y2=\"200\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><text x=\"358\" y=\"174\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10\" font-weight=\"400\" fill=\"#5C575E\">6,0 cm</text><text x=\"200\" y=\"122\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10\" font-weight=\"400\" fill=\"#5C575E\">4,0 cm</text><text x=\"170\" y=\"216\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2B2527\">m = 288 g</text></svg></span>\n<ol><li>Vilken volym har blocket?</li><li>Vilken densitet har materialet, i g/cm³?</li><li>Vilken densitet är det i kg/m³?</li></ol>",
+  "s": "<p>a) V = 10 · 6,0 · 4,0 = <strong>240 cm³</strong></p>\n<p>b) ρ = m/V = 288/240 = <strong>1,20 g/cm³</strong></p>\n<p>c) <strong>1200 kg/m³</strong>, alltså något tyngre än vatten. Materialet skulle sjunka.</p>"
+ },
+ {
+  "id": "2.84",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "E",
+  "typ": "beräkna volym och densitet för en cylinder och identifiera materialet, ur diagram, sökt volym och densitet",
+  "poang": "(2/1/0)",
+  "t": "<p>Figuren visar en cylinder med diametern 4,0 cm och höjden 12 cm. Cylinderns volym ges av V = πr²h.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 420 275\"><ellipse cx=\"180\" cy=\"70\" rx=\"60\" ry=\"18\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M 120 70 L 120 200 A 60 18 0 0 0 240 200 L 240 70\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><ellipse cx=\"180\" cy=\"70\" rx=\"60\" ry=\"18\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"120\" y1=\"245\" x2=\"240\" y2=\"245\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"120\" y1=\"240\" x2=\"120\" y2=\"250\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"240\" y1=\"240\" x2=\"240\" y2=\"250\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><text x=\"180\" y=\"261\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10\" font-weight=\"400\" fill=\"#5C575E\">d = 4,0 cm</text><line x1=\"290\" y1=\"70\" x2=\"290\" y2=\"200\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"285\" y1=\"70\" x2=\"295\" y2=\"70\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"285\" y1=\"200\" x2=\"295\" y2=\"200\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><text x=\"298\" y=\"139\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10\" font-weight=\"400\" fill=\"#5C575E\">h = 12 cm</text><text x=\"180\" y=\"140\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2B2527\">m = 405 g</text></svg></span>\n<ol><li>Vilken radie har cylindern?</li><li>Vilken volym har den?</li><li>Vilken densitet har materialet?</li><li>Aluminium har densiteten 2,70 g/cm³ och zink 7,14 g/cm³. Vilket av dem är det troligen?</li></ol>",
+  "s": "<p>a) r = d/2 = <strong>2,0 cm</strong></p>\n<p>b) V = πr²h = π · 2,0² · 12 = <strong>151 cm³</strong></p>\n<p>c) ρ = m/V = 405/150,8 = <strong>2,69 g/cm³</strong></p>\n<p>d) <strong>Aluminium</strong>, eftersom 2,69 ligger mycket nära 2,70 g/cm³.</p>"
+ },
+ {
+  "id": "2.85",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "E",
+  "typ": "bestämma en vätskas densitet ur avläst volym och uppmätt massa, ur diagram, sökt volym och densitet",
+  "poang": "(2/1/0)",
+  "t": "<p>En vätska hälls i ett mätglas enligt figuren. Vätskan väger 197 g, glaset oräknat.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 280\"><rect x=\"109\" y=\"130\" width=\"102\" height=\"97\" fill=\"#DCE6F2\"/><path d=\"M 106 40 L 106 230 L 214 230 L 214 40\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><line x1=\"109\" y1=\"130\" x2=\"211\" y2=\"130\" stroke=\"#2A5D9E\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"106\" y1=\"190\" x2=\"120\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"1.4\" stroke-linecap=\"square\"/><text x=\"98\" y=\"194\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">100</text><line x1=\"106\" y1=\"150\" x2=\"120\" y2=\"150\" stroke=\"#2B2527\" stroke-width=\"1.4\" stroke-linecap=\"square\"/><text x=\"98\" y=\"154\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">200</text><line x1=\"106\" y1=\"110\" x2=\"120\" y2=\"110\" stroke=\"#2B2527\" stroke-width=\"1.4\" stroke-linecap=\"square\"/><text x=\"98\" y=\"114\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">300</text><text x=\"160\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">volym i ml</text><text x=\"300\" y=\"130\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2B2527\">vätskan väger 197 g</text></svg></span>\n<ol><li>Hur många milliliter vätska finns i mätglaset?</li><li>Hur många kubikcentimeter är det?</li><li>Vilken densitet har vätskan?</li><li>Etanol har densiteten 0,789 g/cm³ och vatten 0,998 g/cm³. Vilken vätska är det troligen?</li></ol>",
+  "s": "<p>a) Vätskeytan står vid <strong>250 ml</strong></p>\n<p>b) 1 ml = 1 cm³, alltså <strong>250 cm³</strong></p>\n<p>c) ρ = m/V = 197/250 = <strong>0,788 g/cm³</strong></p>\n<p>d) <strong>Etanol.</strong> Densiteten ligger mycket nära 0,789 g/cm³ och klart under vattnets värde.</p>"
+ },
+ {
+  "id": "2.86",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "C",
+  "typ": "bestämma två densiteter ur ett massa-volym-diagram och identifiera materialen, ur diagram, sökt densitet",
+  "poang": "(1/2/0)",
+  "t": "<p>Diagrammet visar massan som funktion av volymen för två olika material, A och B.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 286\"><rect x=\"54\" y=\"26\" width=\"432\" height=\"220\" fill=\"#fff\"/><line x1=\"54\" y1=\"246\" x2=\"486\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"250\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0</text><line x1=\"54\" y1=\"218.5\" x2=\"486\" y2=\"218.5\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"222.5\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">50</text><line x1=\"54\" y1=\"191\" x2=\"486\" y2=\"191\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"195\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">100</text><line x1=\"54\" y1=\"163.5\" x2=\"486\" y2=\"163.5\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"167.5\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">150</text><line x1=\"54\" y1=\"136\" x2=\"486\" y2=\"136\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"140\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">200</text><line x1=\"54\" y1=\"108.5\" x2=\"486\" y2=\"108.5\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"112.5\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">250</text><line x1=\"54\" y1=\"81\" x2=\"486\" y2=\"81\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"85\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">300</text><line x1=\"54\" y1=\"53.5\" x2=\"486\" y2=\"53.5\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"57.5\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">350</text><line x1=\"54\" y1=\"26\" x2=\"486\" y2=\"26\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"30\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">400</text><line x1=\"54\" y1=\"26\" x2=\"54\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"54\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0</text><line x1=\"140.4\" y1=\"26\" x2=\"140.4\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"140.4\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">10</text><line x1=\"226.8\" y1=\"26\" x2=\"226.8\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"226.8\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">20</text><line x1=\"313.2\" y1=\"26\" x2=\"313.2\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"313.2\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">30</text><line x1=\"399.6\" y1=\"26\" x2=\"399.6\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"399.6\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">40</text><line x1=\"486\" y1=\"26\" x2=\"486\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"486\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">50</text><line x1=\"54\" y1=\"26\" x2=\"54\" y2=\"246\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"54\" y1=\"246\" x2=\"486\" y2=\"246\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><text x=\"16\" y=\"14\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">m (g)</text><text x=\"486\" y=\"282\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">V (cm³)</text><polyline points=\"54.00,246.00 486.00,26.00\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\" stroke-linejoin=\"round\"/><circle cx=\"54.00\" cy=\"246.00\" r=\"3.3\" fill=\"#B43123\"/><circle cx=\"486.00\" cy=\"26.00\" r=\"3.3\" fill=\"#B43123\"/><text x=\"480\" y=\"16\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#B43123\">A</text><polyline points=\"54.00,246.00 486.00,218.50\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2.4\" stroke-linejoin=\"round\"/><circle cx=\"54.00\" cy=\"246.00\" r=\"3.3\" fill=\"#2A5D9E\"/><circle cx=\"486.00\" cy=\"218.50\" r=\"3.3\" fill=\"#2A5D9E\"/><text x=\"480\" y=\"208.5\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2A5D9E\">B</text></svg></span>\n<p><strong>Bestäm densiteten för båda materialen och avgör vilka de troligen är. Järn har densiteten 7,87 g/cm³, vatten 0,998 g/cm³ och aluminium 2,70 g/cm³.</strong></p>",
+  "s": "<p>Densiteten är grafens lutning, alltså massan delad med volymen.</p>\n<p>Material A: 400/50 = <strong>8,0 g/cm³</strong></p>\n<p>Material B: 50/50 = <strong>1,0 g/cm³</strong></p>\n<p>A är alltså troligen <strong>järn</strong> och B <strong>vatten</strong>. Aluminium kan uteslutas, eftersom ingen av linjerna har lutningen 2,7.</p>\n<p>Ju brantare linje, desto högre densitet. En viss volym av A väger åtta gånger så mycket som samma volym av B.</p>"
+ },
+ {
+  "id": "2.87",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "C",
+  "typ": "bestämma volym genom vattenundanträngning och därav densiteten, ur diagram, sökt volym och densitet",
+  "poang": "(1/2/0)",
+  "t": "<p>En sten läggs ned i ett mätglas med vatten. Figuren visar vattenytan före och efter. Stenen väger 74 g.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 660 280\"><rect x=\"77\" y=\"168\" width=\"86\" height=\"57\" fill=\"#DCE6F2\"/><path d=\"M 74 60 L 74 228 L 166 228 L 166 60\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><line x1=\"77\" y1=\"168\" x2=\"163\" y2=\"168\" stroke=\"#2A5D9E\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"74\" y1=\"198\" x2=\"88\" y2=\"198\" stroke=\"#2B2527\" stroke-width=\"1.4\" stroke-linecap=\"square\"/><text x=\"66\" y=\"202\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">25</text><line x1=\"74\" y1=\"168\" x2=\"88\" y2=\"168\" stroke=\"#2B2527\" stroke-width=\"1.4\" stroke-linecap=\"square\"/><text x=\"66\" y=\"172\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">50</text><line x1=\"74\" y1=\"138\" x2=\"88\" y2=\"138\" stroke=\"#2B2527\" stroke-width=\"1.4\" stroke-linecap=\"square\"/><text x=\"66\" y=\"142\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">75</text><line x1=\"74\" y1=\"108\" x2=\"88\" y2=\"108\" stroke=\"#2B2527\" stroke-width=\"1.4\" stroke-linecap=\"square\"/><text x=\"66\" y=\"112\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">100</text><text x=\"120\" y=\"258\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2B2527\">före</text><rect x=\"287\" y=\"134\" width=\"86\" height=\"91\" fill=\"#DCE6F2\"/><path d=\"M 284 60 L 284 228 L 376 228 L 376 60\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><line x1=\"287\" y1=\"134\" x2=\"373\" y2=\"134\" stroke=\"#2A5D9E\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"284\" y1=\"198\" x2=\"298\" y2=\"198\" stroke=\"#2B2527\" stroke-width=\"1.4\" stroke-linecap=\"square\"/><text x=\"276\" y=\"202\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">25</text><line x1=\"284\" y1=\"168\" x2=\"298\" y2=\"168\" stroke=\"#2B2527\" stroke-width=\"1.4\" stroke-linecap=\"square\"/><text x=\"276\" y=\"172\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">50</text><line x1=\"284\" y1=\"138\" x2=\"298\" y2=\"138\" stroke=\"#2B2527\" stroke-width=\"1.4\" stroke-linecap=\"square\"/><text x=\"276\" y=\"142\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">75</text><line x1=\"284\" y1=\"108\" x2=\"298\" y2=\"108\" stroke=\"#2B2527\" stroke-width=\"1.4\" stroke-linecap=\"square\"/><text x=\"276\" y=\"112\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">100</text><path d=\"M 316 200 Q 330 186 346 198 Q 350 214 330 216 Q 312 214 316 200 Z\" fill=\"#8C8890\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"330\" y=\"258\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2B2527\">efter</text><text x=\"455\" y=\"150\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2B2527\">stenen väger 74 g</text></svg></span>\n<p><strong>Bestäm stenens densitet.</strong></p>",
+  "s": "<p>Vattenytan stiger från 50 ml till 78 ml. Skillnaden är den volym stenen tränger undan, alltså stenens egen volym:</p>\n<p>V = 78 − 50 = 28 ml = 28 cm³</p>\n<p>ρ = m/V = 74/28 = <strong>2,6 g/cm³</strong></p>\n<p>Metoden fungerar för föremål med oregelbunden form, där man inte kan mäta volymen med linjal. Den kräver dock att föremålet sjunker och inte suger upp vatten.</p>"
+ },
+ {
+  "id": "2.88",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "C",
+  "typ": "bestämma hålrummets volym i en ihålig kropp ur medeldensiteten, ur text, sökt volym",
+  "poang": "(1/2/0)",
+  "t": "<p>En kula av järn har massan 1,2 kg och volymen 0,30 dm³. Järn har densiteten 7,87 g/cm³.</p>\n<p><strong>Visa att kulan måste vara ihålig och bestäm hålrummets volym.</strong></p>",
+  "s": "<p>Kulans medeldensitet är</p>\n<p>ρ = m/V = 1200/300 = 4,0 g/cm³</p>\n<p>Det är mycket lägre än järnets 7,87 g/cm³, alltså kan kulan inte vara massiv.</p>\n<p>Den volym som själva järnet upptar är</p>\n<p>V<sub>järn</sub> = m/ρ<sub>järn</sub> = 1200/7,87 = 152 cm³</p>\n<p>Hålrummet är resten:</p>\n<p>V<sub>hål</sub> = 300 − 152,5 = <strong>148 cm³</strong></p>\n<p>Nästan halva kulan är alltså tomrum.</p>"
+ },
+ {
+  "id": "2.89",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "C",
+  "typ": "beräkna densiteten hos en legering ur två ingående metallers massa och densitet, ur text, sökt volym och densitet",
+  "poang": "(1/2/0)",
+  "t": "<p>Mässing tillverkas av koppar och zink. En bit mässing innehåller 200 g koppar och 100 g zink. Koppar har densiteten 8,96 g/cm³ och zink 7,14 g/cm³. Volymerna kan antas adderas.</p>\n<p><strong>Vilken densitet har mässingen?</strong></p>",
+  "s": "<p>Beräkna först volymen av varje metall:</p>\n<p>V<sub>koppar</sub> = 200/8,96 = 22,3 cm³</p>\n<p>V<sub>zink</sub> = 100/7,14 = 14,0 cm³</p>\n<p>Total volym: 22,32 + 14,01 = 36,3 cm³</p>\n<p>Total massa: 200 + 100 = 300 g</p>\n<p>ρ = 300/36,33 = <strong>8,26 g/cm³</strong></p>\n<p>Lägg märke till att man inte får ta medelvärdet av densiteterna. Det hade gett 8,05 g/cm³, vilket är fel. Man måste gå via massa och volym, eftersom de två metallerna bidrar med olika stora volymer.</p>"
+ },
+ {
+  "id": "2.90",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "C",
+  "typ": "undersöka hur massan ändras när ett föremål skalas upp med bibehållet material, ur text, sökt densitet och massa",
+  "poang": "(1/2/0)",
+  "t": "<p>En kub med sidan 2,0 cm är gjord av en metall och väger 84 g.</p>\n<ol><li><strong>Vilken densitet har metallen?</strong></li>\n<li><strong>Hur mycket väger en kub av samma metall med sidan 4,0 cm?</strong></li></ol>",
+  "s": "<p>a) V = 2,0³ = 8,0 cm³</p>\n<p>ρ = 84/8,0 = <strong>10,5 g/cm³</strong>, vilket stämmer med silver.</p>\n<p>b) Den nya kubens volym är V = 4,0³ = 64 cm³, alltså åtta gånger så stor.</p>\n<p>m = ρV = 10,5 · 64 = <strong>672 g</strong></p>\n<p>Dubbel sidlängd ger alltså åtta gånger så stor massa, inte dubbelt. Densiteten är oförändrad, eftersom det är samma material.</p>"
+ },
+ {
+  "id": "2.91",
+  "kap": 2,
+  "omr": "densitet",
+  "niva": "C",
+  "typ": "beräkna luftens massa i ett rum och jämföra med vatten, ur text, sökt volym och massa",
+  "poang": "(1/2/0)",
+  "t": "<p>Ett rum är 4,0 m långt, 5,0 m brett och 2,5 m högt. Luft har densiteten 1,29 kg/m³ och vatten 1000 kg/m³.</p>\n<ol><li><strong>Hur mycket väger luften i rummet?</strong></li>\n<li><strong>Hur mycket skulle innehållet väga om rummet i stället var fyllt med vatten?</strong></li></ol>",
+  "s": "<p>a) V = 4,0 · 5,0 · 2,5 = 50 m³</p>\n<p>m = ρV = 1,29 · 50 = <strong>65 kg</strong></p>\n<p>b) m = 1000 · 50 = <strong>5,0·10⁴ kg</strong>, alltså 50 ton.</p>\n<p>Luften i ett vanligt rum väger alltså ungefär lika mycket som en person, vilket brukar överraska. Vatten är ändå nästan åttahundra gånger tyngre.</p>"
+ },
+ {
   "id": "3.49",
   "kap": 3,
   "omr": "hastighet",
@@ -5216,6 +5566,406 @@ window.BANK = [
   "poang": "(0/1/2)",
   "t": "<p>En vagn med massan 200 kg rullar friktionsfritt med farten 4,0 m/s. Ovanifrån faller sand ned i vagnen från ett stillastående magasin med 12 kg per sekund. Sanden har ingen vågrät hastighet när den landar.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 320 170\"><rect x=\"15\" y=\"148\" width=\"290\" height=\"8\" fill=\"#EDEEF1\"/><line x1=\"15\" y1=\"148\" x2=\"305\" y2=\"148\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><rect x=\"110\" y=\"14\" width=\"90\" height=\"36\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><polygon points=\"110,50 200,50 168,72 142,72\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linejoin=\"round\"/><text x=\"155\" y=\"38\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9\" font-weight=\"400\" fill=\"#2B2527\">sand</text><line x1=\"149\" y1=\"76\" x2=\"149\" y2=\"94\" stroke=\"#9A959C\" stroke-width=\"1.4\" stroke-dasharray=\"3 4\"/><line x1=\"157\" y1=\"76\" x2=\"157\" y2=\"94\" stroke=\"#9A959C\" stroke-width=\"1.4\" stroke-dasharray=\"3 4\"/><path d=\"M 100,96 L 100,132 L 220,132 L 220,96\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linejoin=\"round\"/><text x=\"160\" y=\"122\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9\" font-weight=\"400\" fill=\"#2B2527\">200 kg</text><circle cx=\"125\" cy=\"140\" r=\"8\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"195\" cy=\"140\" r=\"8\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"238\" y1=\"114\" x2=\"264\" y2=\"114\" stroke=\"#2A5D9E\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><polygon points=\"272,114 262,109.4 262,118.6\" fill=\"#2A5D9E\"/><text x=\"278\" y=\"118\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2A5D9E\">v</text></svg></span>\n<ol><li>Ingen kraft verkar vågrätt på systemet. Vilken fart har vagnen efter 10 s?</li>\n<li>Man vill i stället hålla farten konstant vid 4,0 m/s. Hur stor vågrät kraft krävs, och vilken effekt utvecklar den?</li>\n<li>Visa att bara hälften av den tillförda effekten hamnar som rörelseenergi hos sanden. Vart tar den andra hälften vägen?</li></ol>",
   "s": "<p>a) Rörelsemängden bevaras, eftersom sanden inte har någon vågrät rörelsemängd med sig:</p>\n<p>200 · 4,0 = (200 + 12 · 10)·v ger v = 800/320 = <strong>2,5 m/s</strong></p>\n<p>b) För att hålla farten konstant måste kraften ge den nytillkomna sanden dess rörelsemängd:</p>\n<p>F = Δp/Δt = (Δm/Δt)·v = 12 · 4,0 = <strong>48 N</strong></p>\n<p>P = Fv = 48 · 4,0 = <strong>192 W</strong></p>\n<p>c) Rörelseenergin hos sanden växer med</p>\n<p>ΔE<sub>k</sub>/Δt = ½·(Δm/Δt)·v² = ½ · 12 · 4,0² = <strong>96 W</strong></p>\n<p>Det är precis hälften av de 192 W som tillförs. De återstående <strong>96 W</strong> blir värme när varje sandkorn glider mot vagnens botten och accelereras från vila upp till 4,0 m/s.</p>\n<p>Att det blir exakt hälften är ingen slump. Sandkornet accelereras av en friktionskraft medan det glider, och under glidningen rör sig vagnen dubbelt så långt som sandkornet, eftersom kornets medelfart är halva vagnens. Samma kraft över dubbla sträckan ger dubbelt arbete, och skillnaden blir värme. Det är samma faktor två som dyker upp i en fullständigt oelastisk stöt mot en lika stor massa.</p>"
+ },
+ {
+  "id": "5.135",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "E",
+  "typ": "beräkna arbete ur kraft och sträcka och undersöka hur det ändras, ur text, sökt arbete",
+  "poang": "(2/1/0)",
+  "t": "<p>En person drar en kälke 40 meter längs en isbana med den konstanta kraften 250 N. Kraften är riktad längs rörelsen.</p>\n<ol><li>Hur stort arbete uträttar personen?</li>\n<li>Hur stort blir arbetet om kraften fördubblas men sträckan är densamma?</li>\n<li>Hur stort blir arbetet om kraften är 250 N men sträckan halveras?</li></ol>",
+  "s": "<p>a) W = Fs = 250 · 40 = <strong>10 kJ</strong></p>\n<p>b) Arbetet är proportionellt mot kraften: <strong>20 kJ</strong></p>\n<p>c) Arbetet är proportionellt mot sträckan: <strong>5,0 kJ</strong></p>"
+ },
+ {
+  "id": "5.136",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "E",
+  "typ": "beräkna lyftarbete ur massa och höjd, ur text, sökt kraft och arbete",
+  "poang": "(2/1/0)",
+  "t": "<p>En låda med massan 25 kg lyfts rakt upp 1,8 meter med konstant fart.</p>\n<ol><li>Hur stor lyftkraft krävs?</li>\n<li>Hur stort arbete uträttas vid lyftet?</li>\n<li>Hur stort blir arbetet om tolv likadana lådor lyfts lika högt?</li></ol>",
+  "s": "<p>a) Vid konstant fart är lyftkraften lika stor som tyngdkraften:</p>\n<p>F = mg = 25 · 9,82 = <strong>246 N</strong></p>\n<p>b) W = Fh = 245,5 · 1,8 = <strong>442 J</strong></p>\n<p>c) 12 · 441,9 = <strong>5,3 kJ</strong></p>"
+ },
+ {
+  "id": "5.137",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "E",
+  "typ": "tillämpa sambandet mellan arbete kraft och sträcka i tre riktningar, ur tabell, sökt arbete kraft och sträcka",
+  "poang": "(2/0/0)",
+  "t": "<p>Tabellen gäller tre fall där en konstant kraft verkar längs rörelsen. Ett värde saknas på varje rad.</p><table class=\"data\"><tr><th>F (N)</th><th>s (m)</th><th>W (J)</th></tr><tr><td>80</td><td>15</td><td>?</td></tr><tr><td>?</td><td>4,0</td><td>600</td></tr><tr><td>300</td><td>?</td><td>2400</td></tr></table>\n<p><strong>Bestäm de värden som saknas.</strong></p>",
+  "s": "<p>Sambandet W = Fs kan skrivas om till F = W/s eller s = W/F.</p>\n<p>Rad 1: W = 80 · 15 = <strong>1200 J</strong></p>\n<p>Rad 2: F = 600/4,0 = <strong>150 N</strong></p>\n<p>Rad 3: s = 2400/300 = <strong>8,0 m</strong></p>"
+ },
+ {
+  "id": "5.138",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "E",
+  "typ": "beräkna lägesenergi på olika höjder, ur text, sökt energi",
+  "poang": "(2/1/0)",
+  "t": "<p>En fågel med massan 0,80 kg sitter på en gren 15 meter över marken. Marken räknas som nollnivå.</p>\n<ol><li>Hur stor lägesenergi har fågeln?</li>\n<li>Fågeln flyger upp till 30 meters höjd. Hur stor blir lägesenergin då?</li>\n<li>Hur mycket arbete har fågeln uträttat mot tyngdkraften under flygningen?</li></ol>",
+  "s": "<p>a) E<sub>p</sub> = mgh = 0,80 · 9,82 · 15 = <strong>118 J</strong></p>\n<p>b) E<sub>p</sub> = 0,80 · 9,82 · 30 = <strong>236 J</strong></p>\n<p>c) Skillnaden: 235,7 − 117,8 = <strong>118 J</strong></p>\n<p>Dubbla höjden ger dubbelt så stor lägesenergi, eftersom E<sub>p</sub> är proportionell mot h.</p>"
+ },
+ {
+  "id": "5.139",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "E",
+  "typ": "beräkna rörelseenergi och undersöka hur den beror på farten, ur text, sökt energi",
+  "poang": "(2/1/0)",
+  "t": "<p>En pil med massan 25 g lämnar en pilbåge med farten 62 m/s.</p>\n<ol><li>Skriv om massan i kilogram.</li>\n<li>Hur stor rörelseenergi har pilen?</li>\n<li>Hur stor skulle rörelseenergin bli vid dubbla farten?</li></ol>",
+  "s": "<p>a) 25 g = <strong>0,025 kg</strong></p>\n<p>b) E<sub>k</sub> = mv²/2 = 0,025 · 62²/2 = <strong>48 J</strong></p>\n<p>c) Rörelseenergin är proportionell mot farten i kvadrat, så dubbel fart ger fyra gånger så mycket: <strong>192 J</strong></p>"
+ },
+ {
+  "id": "5.140",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "E",
+  "typ": "beräkna arbete när kraften bildar en vinkel mot rörelsen, ur diagram, sökt kraft och arbete",
+  "poang": "(2/1/0)",
+  "t": "<p>En låda dras 25 meter längs ett golv med kraften 120 N. Repet bildar vinkeln 40° mot marken enligt figuren.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 480 200\"><rect x=\"15\" y=\"150\" width=\"450\" height=\"8\" fill=\"#EDEEF1\"/><line x1=\"15\" y1=\"150\" x2=\"465\" y2=\"150\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><rect x=\"90\" y=\"96\" width=\"100\" height=\"54\" rx=\"3\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"140\" y=\"128\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#2B2527\">låda</text><line x1=\"190\" y1=\"100\" x2=\"281.925\" y2=\"22.8655\" stroke=\"#B43123\" stroke-width=\"2.3\" stroke-linecap=\"round\"/><polygon points=\"289.59,16.44 284.88,26.39 278.97,19.34\" fill=\"#B43123\"/><text x=\"303.586\" y=\"16.4376\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#B43123\">F = 120 N</text><line x1=\"190\" y1=\"100\" x2=\"320\" y2=\"100\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\" stroke-dasharray=\"5 4\"/><path d=\"M 228 100 A 38 38 0 0 0 219.1 75.6\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.3\"/><text x=\"242\" y=\"84\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">40°</text><line x1=\"90\" y1=\"178\" x2=\"340\" y2=\"178\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"90\" y1=\"173\" x2=\"90\" y2=\"183\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"340\" y1=\"173\" x2=\"340\" y2=\"183\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><text x=\"215\" y=\"194\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10\" font-weight=\"400\" fill=\"#5C575E\">s = 25 m</text></svg></span>\n<ol><li>Hur stor är kraftens komposant längs rörelsen?</li>\n<li>Hur stort arbete uträttar kraften?</li>\n<li>Hur stort arbete uträttar den lodräta komposanten? Motivera.</li></ol>",
+  "s": "<p>a) F<sub>x</sub> = F·cos 40° = 120 · 0,766 = <strong>92 N</strong></p>\n<p>b) W = F<sub>x</sub>s = 91,92 · 25 = <strong>2,3 kJ</strong></p>\n<p>Man kan också skriva W = Fs·cos α direkt.</p>\n<p>c) <strong>Inget arbete alls.</strong> Den lodräta komposanten är vinkelrät mot rörelsen, och lådan flyttar sig inte i den riktningen. En kraft uträttar bara arbete längs den sträcka kroppen faktiskt förflyttar sig i kraftens riktning.</p>"
+ },
+ {
+  "id": "5.141",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "C",
+  "typ": "beräkna totalt arbete vid dragning uppför lutande plan med friktion, ur text, sökt arbete",
+  "poang": "(1/2/0)",
+  "t": "<p>En låda med massan 40 kg dras 5,0 m uppför ett plan som lutar 20° mot horisontalplanet. Dragkraften är parallell med planet och friktionstalet är 0,25. Farten är konstant.</p>\n<p><strong>Hur stort arbete uträttar dragkraften?</strong></p>",
+  "s": "<p>Arbetet går dels till att höja lådan, dels till att övervinna friktionen.</p>\n<p>Höjdökningen: h = 5,0 · sin 20° = 1,71 m</p>\n<p>Lyftarbetet: mgh = 40 · 9,82 · 1,710 = 672 J</p>\n<p>Normalkraften: N = mg·cos 20° = 40 · 9,82 · 0,940 = 369 N</p>\n<p>Friktionskraften: f = μN = 0,25 · 369,0 = 92,3 N</p>\n<p>Friktionsarbetet: fs = 92,25 · 5,0 = 461 J</p>\n<p>Totalt: 672 + 461 = <strong>1,1 kJ</strong></p>\n<p>Ungefär 41 % av arbetet blir värme i stället för lägesenergi.</p>"
+ },
+ {
+  "id": "5.142",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "C",
+  "typ": "bestämma arbete som arean under ett kraft-sträcka-diagram, ur diagram, sökt arbete",
+  "poang": "(1/2/0)",
+  "t": "<p>Diagrammet visar den kraft som verkar på en vagn längs sträckan.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 286\"><rect x=\"54\" y=\"26\" width=\"432\" height=\"220\" fill=\"#fff\"/><line x1=\"54\" y1=\"246\" x2=\"486\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"250\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0</text><line x1=\"54\" y1=\"209.333\" x2=\"486\" y2=\"209.333\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"213.333\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">10</text><line x1=\"54\" y1=\"172.667\" x2=\"486\" y2=\"172.667\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"176.667\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">20</text><line x1=\"54\" y1=\"136\" x2=\"486\" y2=\"136\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"140\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">30</text><line x1=\"54\" y1=\"99.3333\" x2=\"486\" y2=\"99.3333\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"103.333\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">40</text><line x1=\"54\" y1=\"62.6667\" x2=\"486\" y2=\"62.6667\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"66.6667\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">50</text><line x1=\"54\" y1=\"26\" x2=\"486\" y2=\"26\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"30\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">60</text><line x1=\"54\" y1=\"26\" x2=\"54\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"54\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0</text><line x1=\"97.2\" y1=\"26\" x2=\"97.2\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"97.2\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">1</text><line x1=\"140.4\" y1=\"26\" x2=\"140.4\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"140.4\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">2</text><line x1=\"183.6\" y1=\"26\" x2=\"183.6\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"183.6\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">3</text><line x1=\"226.8\" y1=\"26\" x2=\"226.8\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"226.8\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">4</text><line x1=\"270\" y1=\"26\" x2=\"270\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"270\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">5</text><line x1=\"313.2\" y1=\"26\" x2=\"313.2\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"313.2\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">6</text><line x1=\"356.4\" y1=\"26\" x2=\"356.4\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"356.4\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">7</text><line x1=\"399.6\" y1=\"26\" x2=\"399.6\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"399.6\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">8</text><line x1=\"442.8\" y1=\"26\" x2=\"442.8\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"442.8\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">9</text><line x1=\"486\" y1=\"26\" x2=\"486\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"486\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">10</text><line x1=\"54\" y1=\"26\" x2=\"54\" y2=\"246\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"54\" y1=\"246\" x2=\"486\" y2=\"246\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><text x=\"16\" y=\"14\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">F (N)</text><text x=\"486\" y=\"282\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">s (m)</text><polyline points=\"54.00,246.00 313.20,26.00 486.00,26.00\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\" stroke-linejoin=\"round\"/><circle cx=\"54.00\" cy=\"246.00\" r=\"3.3\" fill=\"#B43123\"/><circle cx=\"313.20\" cy=\"26.00\" r=\"3.3\" fill=\"#B43123\"/><circle cx=\"486.00\" cy=\"26.00\" r=\"3.3\" fill=\"#B43123\"/></svg></span>\n<p><strong>Hur stort arbete uträttas på hela sträckan?</strong></p>",
+  "s": "<p>Arbetet är arean under kraft-sträcka-grafen, eftersom W = Fs för varje litet steg.</p>\n<p>Första delen är en triangel:</p>\n<p>W₁ = 6,0 · 60/2 = 180 J</p>\n<p>Andra delen är en rektangel:</p>\n<p>W₂ = 4,0 · 60 = 240 J</p>\n<p>Totalt: 180 + 240 = <strong>420 J</strong></p>\n<p>Metoden fungerar även när kraften varierar, till skillnad från formeln W = Fs som kräver konstant kraft.</p>"
+ },
+ {
+  "id": "5.143",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "C",
+  "typ": "använda energiprincipen för att bestämma fart med och utan friktion, ur text, sökt fart",
+  "poang": "(1/2/0)",
+  "t": "<p>En vagn med massan 3,0 kg står stilla. Ett arbete på 45 J uträttas på vagnen längs ett vågrätt spår.</p>\n<ol><li><strong>Vilken fart får vagnen om spåret är friktionsfritt?</strong></li>\n<li><strong>Vilken fart får den om friktionen tar upp 12 J av arbetet?</strong></li></ol>",
+  "s": "<p>a) Hela arbetet blir rörelseenergi:</p>\n<p>mv²/2 = 45 ger v = √(2 · 45/3,0) = <strong>5,5 m/s</strong></p>\n<p>b) Nu blir bara 45 − 12 = 33 J rörelseenergi:</p>\n<p>v = √(2 · 33/3,0) = <strong>4,7 m/s</strong></p>\n<p>Att en fjärdedel av energin försvann sänkte farten med bara 14 %, eftersom farten beror på roten ur energin.</p>"
+ },
+ {
+  "id": "5.144",
+  "kap": 5,
+  "omr": "arbete",
+  "niva": "A",
+  "typ": "beräkna arbete för att spänna en fjäder och jämföra två lika stora förlängningssteg, ur text, sökt kraft och energi",
+  "poang": "(0/1/2)",
+  "t": "<p>En fjäder har fjäderkonstanten 800 N/m.</p>\n<ol><li><strong>Hur stort arbete krävs för att dra ut fjädern 0,25 m från obelastat läge?</strong></li>\n<li><strong>Hur stor är den största kraften under sträckningen, och hur stor är medelkraften?</strong></li>\n<li><strong>Hur stort arbete krävs för att dra ut fjädern ytterligare 0,25 m, alltså från 0,25 m till 0,50 m? Förklara varför det inte är lika mycket.</strong></li></ol>",
+  "s": "<p>a) Kraften växer linjärt från noll, så arbetet är arean under kraft-förlängningsgrafen, alltså en triangel:</p>\n<p>W = kx²/2 = 800 · 0,25²/2 = <strong>25 J</strong></p>\n<p>b) F<sub>max</sub> = kx = 800 · 0,25 = <strong>200 N</strong></p>\n<p>Medelkraften är hälften så stor, <strong>100 N</strong>, vilket också ger W = 100 · 0,25 = 25 J.</p>\n<p>c) Arbetet för hela sträckningen till 0,50 m:</p>\n<p>W = 800 · 0,50²/2 = 100 J</p>\n<p>Andra steget kräver alltså 100 − 25 = <strong>75 J</strong>, tre gånger så mycket som det första.</p>\n<p>Anledningen är att kraften växer med förlängningen. Under det andra steget varierar kraften mellan 200 N och 400 N, med medelvärdet 300 N, medan den under det första steget bara var 100 N i medeltal. Energin växer med kvadraten på förlängningen, inte proportionellt.</p>"
+ },
+ {
+  "id": "5.145",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "E",
+  "typ": "beräkna arbete och effekt vid ett lyft, ur text, sökt arbete och effekt",
+  "poang": "(2/1/0)",
+  "t": "<p>En motor lyfter en last på 300 kg rakt upp 8,0 meter med konstant fart. Lyftet tar 12 sekunder.</p>\n<ol><li>Hur stort arbete uträttar motorn?</li>\n<li>Vilken effekt utvecklar motorn?</li>\n<li>Vilken effekt hade krävts om lyftet skulle ta 6,0 sekunder?</li></ol>",
+  "s": "<p>a) W = mgh = 300 · 9,82 · 8,0 = <strong>23,6 kJ</strong></p>\n<p>b) P = W/t = 23568/12 = <strong>2,0 kW</strong></p>\n<p>c) Halva tiden kräver dubbel effekt: <strong>3,9 kW</strong></p>\n<p>Arbetet är detsamma i båda fallen. Det är bara effekten som skiljer.</p>"
+ },
+ {
+  "id": "5.146",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "E",
+  "typ": "koppla effekt kraft och fart vid konstant hastighet, ur text, sökt effekt",
+  "poang": "(2/0/0)",
+  "t": "<p>En båt drivs framåt av en propeller som ger kraften 1800 N. Båten går med den konstanta farten 6,0 m/s.</p>\n<ol><li>Vilken effekt utvecklar propellern?</li>\n<li>Hur stort är vattnets motstånd mot båten? Motivera.</li></ol>",
+  "s": "<p>a) P = Fv = 1800 · 6,0 = <strong>10,8 kW</strong></p>\n<p>b) Farten är konstant, alltså är den resulterande kraften noll. Motståndet måste därför vara lika stort som drivkraften, <strong>1800 N</strong>.</p>"
+ },
+ {
+  "id": "5.147",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "E",
+  "typ": "tillämpa sambandet mellan effekt arbete och tid i tre riktningar, ur tabell, sökt effekt arbete och tid",
+  "poang": "(2/0/0)",
+  "t": "<p>Tabellen gäller tre olika maskiner. Ett värde saknas på varje rad.</p><table class=\"data\"><tr><th>W (J)</th><th>t (s)</th><th>P (W)</th></tr><tr><td>9000</td><td>15</td><td>?</td></tr><tr><td>?</td><td>40</td><td>250</td></tr><tr><td>72 000</td><td>?</td><td>400</td></tr></table>\n<p><strong>Bestäm de värden som saknas.</strong></p>",
+  "s": "<p>Sambandet P = W/t kan skrivas om till W = Pt eller t = W/P.</p>\n<p>Rad 1: P = 9000/15 = <strong>600 W</strong></p>\n<p>Rad 2: W = 250 · 40 = <strong>10 kJ</strong></p>\n<p>Rad 3: t = 72000/400 = <strong>180 s</strong></p>"
+ },
+ {
+  "id": "5.148",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "E",
+  "typ": "beräkna energi ur effekt och tid i både joule och kilowattimmar, ur text, sökt energi",
+  "poang": "(2/1/0)",
+  "t": "<p>En dammsugare har effekten 1200 W och används i 25 minuter.</p>\n<ol><li>Hur många sekunder är 25 minuter?</li>\n<li>Hur mycket energi förbrukas, i joule?</li>\n<li>Hur mycket är det i kilowattimmar?</li></ol>",
+  "s": "<p>a) 25 · 60 = <strong>1500 s</strong></p>\n<p>b) W = Pt = 1200 · 1500 = <strong>1,8 MJ</strong></p>\n<p>c) 1,2 kW under 25/60 = 0,4167 h ger 1,2 · 0,4167 = <strong>0,50 kWh</strong></p>\n<p>Kontroll: 0,50 kWh = 0,50 · 3,6·10⁶ = 1,8 MJ. Samma svar.</p>"
+ },
+ {
+  "id": "5.149",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "E",
+  "typ": "beräkna effekt vid löpning uppför en trappa, ur text, sökt arbete och effekt",
+  "poang": "(2/1/0)",
+  "t": "<p>En person med massan 68 kg springer uppför en trappa och höjer sig 4,5 meter på 6,0 sekunder.</p>\n<ol><li>Hur stort arbete uträttar personen mot tyngdkraften?</li>\n<li>Vilken effekt utvecklar personen?</li>\n<li>Hur många hästkrafter är det, om 1 hk är 735 W?</li></ol>",
+  "s": "<p>a) W = mgh = 68 · 9,82 · 4,5 = <strong>3,0 kJ</strong></p>\n<p>b) P = W/t = 3004,7/6,0 = <strong>501 W</strong></p>\n<p>c) 500,8/735 = <strong>0,68 hk</strong></p>\n<p>En vältränad person kan hålla ungefär en halv hästkraft under kort tid, men bara omkring 100 W under en hel arbetsdag.</p>"
+ },
+ {
+  "id": "5.150",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "E",
+  "typ": "beräkna verkningsgrad och förlusteffekt hos en motor, ur text, sökt verkningsgrad och effekt",
+  "poang": "(2/1/0)",
+  "t": "<p>En elmotor tar upp den elektriska effekten 750 W och lämnar 600 W som nyttig mekanisk effekt.</p>\n<ol><li>Vilken verkningsgrad har motorn?</li>\n<li>Hur stor effekt går förlorad?</li>\n<li>Vad händer med den förlorade energin?</li></ol>",
+  "s": "<p>a) η = P<sub>nyttig</sub>/P<sub>tillförd</sub> = 600/750 = <strong>0,80</strong>, alltså 80 %</p>\n<p>b) 750 − 600 = <strong>150 W</strong></p>\n<p>c) Den blir <strong>värme</strong> i lindningar och lager, och en liten del blir ljud. Energin försvinner inte, den hamnar bara i en form som inte går att använda till det man ville.</p>"
+ },
+ {
+  "id": "5.151",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "C",
+  "typ": "beräkna nödvändig eleffekt för en pump med given verkningsgrad, ur text, sökt effekt",
+  "poang": "(1/2/0)",
+  "t": "<p>En pump ska lyfta 8,0 liter vatten per sekund upp till en behållare 25 meter över pumpen. Vattnets densitet är 1000 kg/m³ och pumpens verkningsgrad är 0,65.</p>\n<p><strong>Vilken elektrisk effekt måste pumpen ta upp?</strong></p>",
+  "s": "<p>Varje sekund lyfts 8,0 kg vatten 25 meter:</p>\n<p>P<sub>nyttig</sub> = mgh/t = 8,0 · 9,82 · 25 = 1964 W</p>\n<p>Med verkningsgraden 0,65 krävs mer tillförd effekt:</p>\n<p>P<sub>el</sub> = P<sub>nyttig</sub>/η = 1964/0,65 = <strong>3,0 kW</strong></p>\n<p>Drygt en kilowatt går alltså åt till värme i motorn och till turbulens i vattnet.</p>"
+ },
+ {
+  "id": "5.152",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "C",
+  "typ": "jämföra effektbehov vid två farter när motståndskraften växer, ur text, sökt kraft och effekt",
+  "poang": "(1/2/0)",
+  "t": "<p>En cyklist utvecklar den nyttiga effekten 210 W och håller då den konstanta farten 7,5 m/s. Vid farten 9,0 m/s är den samlade motståndskraften 40 N.</p>\n<p><strong>Hur många procent mer effekt krävs vid den högre farten?</strong></p>",
+  "s": "<p>Vid 7,5 m/s är motståndet lika stort som drivkraften:</p>\n<p>F = P/v = 210/7,5 = 28 N</p>\n<p>Vid 9,0 m/s krävs</p>\n<p>P = Fv = 40 · 9,0 = 360 W</p>\n<p>Ökningen är (360 − 210)/210 = <strong>71 %</strong></p>\n<p>Farten ökade bara 20 %, men effektbehovet växte med över 70 %. Det beror på att både kraften och farten ökar samtidigt, och luftmotståndet växer ungefär med farten i kvadrat.</p>"
+ },
+ {
+  "id": "5.153",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "C",
+  "typ": "beräkna medeleffekt ur energiförbrukning per sträcka och fart, ur text, sökt tid och effekt",
+  "poang": "(1/2/0)",
+  "t": "<p>En elbil förbrukar 18 kWh per 100 km vid farten 90 km/h.</p>\n<p><strong>Vilken medeleffekt tar bilen ut ur batteriet vid den farten?</strong></p>",
+  "s": "<p>Tiden att köra 100 km i 90 km/h:</p>\n<p>t = 100/90 = 1,111 h</p>\n<p>Effekten är energi per tid:</p>\n<p>P = 18/1,111 = <strong>16 kW</strong></p>\n<p>Man kan också räkna i SI-enheter: 18 kWh = 6,48·10⁷ J och t = 4000 s, vilket ger 16 200 W. Samma svar.</p>"
+ },
+ {
+  "id": "5.154",
+  "kap": 5,
+  "omr": "effekt",
+  "niva": "A",
+  "typ": "beräkna momentan och genomsnittlig effekt under en likformig acceleration, ur text, sökt kraft och effekt",
+  "poang": "(0/1/2)",
+  "t": "<p>En bil med massan 1200 kg accelererar likformigt från vila till 25 m/s på 10 sekunder på en plan väg. Motståndskrafterna försummas.</p>\n<ol><li><strong>Hur stor är den resulterande kraften på bilen?</strong></li>\n<li><strong>Vilken momentan effekt utvecklas vid 2,0 s, vid 6,0 s och vid 10 s?</strong></li>\n<li><strong>Vilken medeleffekt utvecklas under de tio sekunderna? Jämför med svaren i b.</strong></li></ol>",
+  "s": "<p>a) a = 25/10 = 2,5 m/s² ger F = ma = 1200 · 2,5 = <strong>3,0 kN</strong></p>\n<p>b) Farten vid de tre tidpunkterna är 5,0, 15 och 25 m/s. Effekten är P = Fv:</p>\n<p>vid 2,0 s: 3000 · 5,0 = <strong>15 kW</strong></p>\n<p>vid 6,0 s: 3000 · 15 = <strong>45 kW</strong></p>\n<p>vid 10 s: 3000 · 25 = <strong>75 kW</strong></p>\n<p>c) Hela arbetet är lika med rörelseenergin vid slutet:</p>\n<p>W = 1200 · 25²/2 = 375 kJ</p>\n<p>P<sub>medel</sub> = 375000/10 = <strong>37,5 kW</strong></p>\n<p>Det är precis medelvärdet av 0 och 75 kW, vilket stämmer eftersom kraften är konstant och farten växer linjärt. Lägg märke till att effekten i slutet är dubbelt så stor som medeleffekten. En motor måste alltså dimensioneras efter det momentana behovet, inte efter medelvärdet.</p>"
+ },
+ {
+  "id": "5.155",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "E",
+  "typ": "beräkna rörelsemängd för tre kroppar med olika massa och fart, ur tabell, sökt rörelsemängd",
+  "poang": "(2/0/0)",
+  "t": "<p>Tabellen visar tre kroppar i rörelse.</p><table class=\"data\"><tr><th>Kropp</th><th>m (kg)</th><th>v (m/s)</th><th>p (kg·m/s)</th></tr><tr><td>handbollsspelare</td><td>75</td><td>6,0</td><td>?</td></tr><tr><td>moped</td><td>95</td><td>12</td><td>?</td></tr><tr><td>pingisboll</td><td>0,0027</td><td>25</td><td>?</td></tr></table>\n<ol><li>Beräkna rörelsemängden för de tre kropparna.</li>\n<li>Vilken kropp har störst rörelsemängd, och vilken har högst fart?</li></ol>",
+  "s": "<p>a) p = mv ger</p>\n<p>handbollsspelare: 75 · 6,0 = <strong>450 kg·m/s</strong></p>\n<p>moped: 95 · 12 = <strong>1140 kg·m/s</strong></p>\n<p>pingisboll: 0,0027 · 25 = <strong>0,068 kg·m/s</strong></p>\n<p>b) <strong>Mopeden</strong> har störst rörelsemängd, men <strong>pingisbollen</strong> har högst fart. Rörelsemängden beror på både massan och farten.</p>"
+ },
+ {
+  "id": "5.156",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "E",
+  "typ": "beräkna impuls och därav fartändring, ur text, sökt impuls och fart",
+  "poang": "(2/1/0)",
+  "t": "<p>En kraft på 80 N verkar på en kropp med massan 4,0 kg under 0,25 sekunder. Kraften är riktad längs rörelsen.</p>\n<ol><li>Hur stor impuls ger kraften?</li>\n<li>Hur mycket ändras kroppens rörelsemängd?</li>\n<li>Hur mycket ändras kroppens fart?</li></ol>",
+  "s": "<p>a) I = FΔt = 80 · 0,25 = <strong>20 Ns</strong></p>\n<p>b) Impulsen är precis lika med rörelsemängdsändringen: <strong>20 kg·m/s</strong></p>\n<p>c) Δp = mΔv ger Δv = 20/4,0 = <strong>5,0 m/s</strong></p>"
+ },
+ {
+  "id": "5.157",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "E",
+  "typ": "beräkna gemensam fart efter en fullständigt oelastisk stöt, ur text, sökt rörelsemängd och fart",
+  "poang": "(2/1/0)",
+  "t": "<p>En vagn med massan 6,0 kg rullar med farten 4,0 m/s in i en stillastående vagn med massan 2,0 kg. Vagnarna fastnar i varandra.</p>\n<ol><li>Hur stor är den totala rörelsemängden före stöten?</li>\n<li>Vilken total massa rör sig efter stöten?</li>\n<li>Vilken gemensam fart får vagnarna?</li></ol>",
+  "s": "<p>a) p = mv = 6,0 · 4,0 = <strong>24 kg·m/s</strong></p>\n<p>b) 6,0 + 2,0 = <strong>8,0 kg</strong></p>\n<p>c) Rörelsemängden bevaras: 24 = 8,0 · v ger v = <strong>3,0 m/s</strong></p>"
+ },
+ {
+  "id": "5.158",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "E",
+  "typ": "bestämma fart och massa ur rörelsemängden, ur text, sökt fart och massa",
+  "poang": "(2/0/0)",
+  "t": "<p>Ett föremål med massan 12 kg har rörelsemängden 90 kg·m/s.</p>\n<ol><li>Vilken fart har föremålet?</li>\n<li>Ett annat föremål har samma rörelsemängd men farten 3,0 m/s. Vilken massa har det?</li></ol>",
+  "s": "<p>a) p = mv ger v = p/m = 90/12 = <strong>7,5 m/s</strong></p>\n<p>b) m = p/v = 90/3,0 = <strong>30 kg</strong></p>"
+ },
+ {
+  "id": "5.159",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "E",
+  "typ": "beräkna rekylfart när en kropp kastar iväg en annan, ur text, sökt rörelsemängd och fart",
+  "poang": "(2/1/0)",
+  "t": "<p>En person med massan 55 kg står stilla på skridskor och kastar en boll med massan 4,0 kg vågrätt med farten 5,0 m/s. Friktionen mot isen försummas.</p>\n<ol><li>Hur stor rörelsemängd får bollen?</li>\n<li>Hur stor rörelsemängd får personen, och åt vilket håll?</li>\n<li>Vilken fart får personen?</li></ol>",
+  "s": "<p>a) p = mv = 4,0 · 5,0 = <strong>20 kg·m/s</strong></p>\n<p>b) Systemets totala rörelsemängd var noll före kastet och måste vara det efteråt också. Personen får därför <strong>20 kg·m/s åt motsatt håll</strong>.</p>\n<p>c) v = p/m = 20/55 = <strong>0,36 m/s</strong></p>"
+ },
+ {
+  "id": "5.160",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "E",
+  "typ": "beräkna kraft ur rörelsemängdsändring när en boll byter riktning, ur text, sökt rörelsemängd och kraft",
+  "poang": "(2/1/0)",
+  "t": "<p>En boll med massan 0,15 kg kommer med farten 20 m/s och studsar tillbaka med farten 25 m/s åt motsatt håll. Kontakten varar 8,0 millisekunder.</p>\n<ol><li>Hur stor är bollens rörelsemängd före och efter?</li>\n<li>Hur mycket ändras rörelsemängden?</li>\n<li>Hur stor är den genomsnittliga kraften?</li></ol>",
+  "s": "<p>a) Före: 0,15 · 20 = <strong>3,0 kg·m/s</strong>. Efter: 0,15 · 25 = <strong>3,75 kg·m/s</strong> åt motsatt håll.</p>\n<p>b) Eftersom riktningarna är motsatta adderas beloppen:</p>\n<p>Δp = 3,0 + 3,75 = <strong>6,75 kg·m/s</strong></p>\n<p>c) F = Δp/Δt = 6,75/0,0080 = <strong>844 N</strong></p>\n<p>Att bollen vänder gör ändringen mycket större än om den bara hade stannat.</p>"
+ },
+ {
+  "id": "5.161",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "C",
+  "typ": "bestämma gemensam fart och riktning efter en frontalkollision där kropparna fastnar, ur diagram, sökt fart",
+  "poang": "(1/2/0)",
+  "t": "<p>Två vagnar kör mot varandra enligt figuren och fastnar i varandra vid kollisionen.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 480 165\"><rect x=\"15\" y=\"140\" width=\"450\" height=\"8\" fill=\"#EDEEF1\"/><line x1=\"15\" y1=\"140\" x2=\"465\" y2=\"140\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><rect x=\"70\" y=\"84\" width=\"80\" height=\"40\" rx=\"3\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"110\" y=\"108\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10\" font-weight=\"600\" fill=\"#2B2527\">3,0 kg</text><rect x=\"330\" y=\"84\" width=\"70\" height=\"40\" rx=\"3\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"365\" y=\"108\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10\" font-weight=\"600\" fill=\"#2B2527\">2,0 kg</text><line x1=\"160\" y1=\"62\" x2=\"200\" y2=\"62\" stroke=\"#2A5D9E\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><polygon points=\"210.00,62.00 200.00,66.60 200.00,57.40\" fill=\"#2A5D9E\"/><text x=\"170\" y=\"50\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2A5D9E\">5,0 m/s</text><line x1=\"320\" y1=\"62\" x2=\"280\" y2=\"62\" stroke=\"#2A5D9E\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><polygon points=\"270.00,62.00 280.00,57.40 280.00,66.60\" fill=\"#2A5D9E\"/><text x=\"316\" y=\"50\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2A5D9E\">3,0 m/s</text></svg></span>\n<p><strong>Vilken fart och riktning får vagnarna efter kollisionen?</strong></p>",
+  "s": "<p>Rörelsemängd är en vektor, så riktningarna måste räknas med tecken. Räkna rörelse åt höger som positiv:</p>\n<p>p = 3,0 · 5,0 + 2,0 · (−3,0) = 15 − 6,0 = 9,0 kg·m/s</p>\n<p>Efter stöten rör sig 5,0 kg tillsammans:</p>\n<p>v = 9,0/5,0 = <strong>1,8 m/s åt höger</strong></p>\n<p>Svaret är positivt, alltså fortsätter de åt samma håll som den tyngre vagnen rörde sig. Hade den lättare vagnen haft farten 8,0 m/s i stället hade summan blivit noll och vagnarna stannat helt.</p>"
+ },
+ {
+  "id": "5.162",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "C",
+  "typ": "bestämma farter och lagrad energi när två kroppar skjuts isär av en fjäder, ur text, sökt fart och energi",
+  "poang": "(1/2/0)",
+  "t": "<p>Två vagnar med massorna 2,5 kg och 1,5 kg hålls ihop med en hoptryckt fjäder mellan sig på ett friktionsfritt bord. De släpps och skjuts isär. Den lättare vagnen får farten 6,0 m/s.</p>\n<ol><li><strong>Vilken fart får den tyngre vagnen?</strong></li>\n<li><strong>Hur mycket energi var lagrad i fjädern?</strong></li></ol>",
+  "s": "<p>a) Systemet stod stilla, så den totala rörelsemängden är noll både före och efter:</p>\n<p>2,5 · v = 1,5 · 6,0 = 9,0 kg·m/s</p>\n<p>v = 9,0/2,5 = <strong>3,6 m/s</strong> åt motsatt håll</p>\n<p>b) All fjäderenergi har blivit rörelseenergi:</p>\n<p>E = 1,5 · 6,0²/2 + 2,5 · 3,6²/2 = 27,0 + 16,2 = <strong>43 J</strong></p>\n<p>Den lättare vagnen får alltså 63 % av energin trots att båda får lika stor rörelsemängd. Det är samma sak som händer vid rekyl hos ett gevär.</p>"
+ },
+ {
+  "id": "5.163",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "C",
+  "typ": "bestämma impuls som arean under ett kraft-tid-diagram och därav fartändring, ur diagram, sökt impuls och fart",
+  "poang": "(1/2/0)",
+  "t": "<p>Diagrammet visar kraften på en fotboll under en spark. Bollen väger 0,45 kg och ligger stilla innan sparken.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 286\"><rect x=\"54\" y=\"26\" width=\"432\" height=\"220\" fill=\"#fff\"/><line x1=\"54\" y1=\"246\" x2=\"486\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"250\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0</text><line x1=\"54\" y1=\"209.333\" x2=\"486\" y2=\"209.333\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"213.333\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">50</text><line x1=\"54\" y1=\"172.667\" x2=\"486\" y2=\"172.667\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"176.667\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">100</text><line x1=\"54\" y1=\"136\" x2=\"486\" y2=\"136\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"140\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">150</text><line x1=\"54\" y1=\"99.3333\" x2=\"486\" y2=\"99.3333\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"103.333\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">200</text><line x1=\"54\" y1=\"62.6667\" x2=\"486\" y2=\"62.6667\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"66.6667\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">250</text><line x1=\"54\" y1=\"26\" x2=\"486\" y2=\"26\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"46\" y=\"30\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">300</text><line x1=\"54\" y1=\"26\" x2=\"54\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"54\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0,00</text><line x1=\"162\" y1=\"26\" x2=\"162\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"162\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0,05</text><line x1=\"270\" y1=\"26\" x2=\"270\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"270\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0,10</text><line x1=\"378\" y1=\"26\" x2=\"378\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"378\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0,15</text><line x1=\"486\" y1=\"26\" x2=\"486\" y2=\"246\" stroke=\"#E4E3E6\" stroke-width=\"1\" stroke-linecap=\"square\"/><text x=\"486\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">0,20</text><line x1=\"54\" y1=\"26\" x2=\"54\" y2=\"246\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"54\" y1=\"246\" x2=\"486\" y2=\"246\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><text x=\"16\" y=\"14\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">F (N)</text><text x=\"486\" y=\"282\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2B2527\">t (s)</text><polyline points=\"54.00,246.00 270.00,26.00 486.00,246.00\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\" stroke-linejoin=\"round\"/><circle cx=\"54.00\" cy=\"246.00\" r=\"3.3\" fill=\"#B43123\"/><circle cx=\"270.00\" cy=\"26.00\" r=\"3.3\" fill=\"#B43123\"/><circle cx=\"486.00\" cy=\"246.00\" r=\"3.3\" fill=\"#B43123\"/></svg></span>\n<p><strong>Vilken fart får bollen?</strong></p>",
+  "s": "<p>Impulsen är arean under kraft-tid-grafen. Här är den en triangel:</p>\n<p>I = 0,20 · 300/2 = 30 Ns</p>\n<p>Impulsen är lika med rörelsemängdsändringen, och bollen låg stilla från början:</p>\n<p>mv = 30 ger v = 30/0,45 = <strong>67 m/s</strong></p>\n<p>Man kan inte använda den största kraften 300 N rakt av. Kraften varierar under stöten, och det är arean som räknas. Den genomsnittliga kraften är här 150 N.</p>"
+ },
+ {
+  "id": "5.164",
+  "kap": 5,
+  "omr": "rorelsemangd",
+  "niva": "A",
+  "typ": "kedja oelastisk stöt med friktionssträcka och beräkna energiförlusten, ur text, sökt fart sträcka och energi",
+  "poang": "(0/1/2)",
+  "t": "<p>En kula med massan 15 g skjuts med farten 320 m/s in i ett träblock med massan 1,5 kg som står stilla på ett bord. Kulan fastnar i blocket. Friktionstalet mellan blocket och bordet är 0,35.</p>\n<ol><li><strong>Vilken gemensam fart får blocket med kulan?</strong></li>\n<li><strong>Hur långt glider blocket innan det stannar?</strong></li>\n<li><strong>Hur stor andel av kulans rörelseenergi försvann i själva stöten?</strong></li></ol>",
+  "s": "<p>a) Rörelsemängden bevaras i stöten:</p>\n<p>0,015 · 320 = (0,015 + 1,5)·v</p>\n<p>4,80 = 1,515v ger v = <strong>3,2 m/s</strong></p>\n<p>b) Efter stöten tar friktionen upp rörelseenergin:</p>\n<p>mv²/2 = μmgs, där massan förkortas bort</p>\n<p>s = v²/(2μg) = 3,168²/(2 · 0,35 · 9,82) = 10,04/6,874 = <strong>1,5 m</strong></p>\n<p>c) Före stöten: E<sub>k</sub> = 0,015 · 320²/2 = 768 J</p>\n<p>Efter stöten: E<sub>k</sub> = 1,515 · 3,168²/2 = 7,6 J</p>\n<p>Förlusten är 768 − 7,6 = 760 J, alltså <strong>99 %</strong>.</p>\n<p>Nästan all energi blev värme och deformation i träet redan i stöten. Rörelsemängden bevarades däremot helt, vilket är anledningen till att man måste börja med den och inte med energin.</p>"
+ },
+ {
+  "id": "5.165",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "E",
+  "typ": "dela upp dragkraftens arbete i friktionsarbete och rörelseenergi, ur text, sökt arbete och fart",
+  "poang": "(2/1/0)",
+  "t": "<p>En låda med massan 18 kg dras 12 meter längs ett golv av den konstanta kraften 55 N. Friktionskraften är 30 N. Lådan startar från vila.</p>\n<ol><li>Hur stort arbete uträttar dragkraften?</li>\n<li>Hur stort arbete uträttar friktionskraften?</li>\n<li>Hur stor rörelseenergi har lådan efter 12 meter?</li>\n<li>Vilken fart har lådan då?</li></ol>",
+  "s": "<p>a) W = Fs = 55 · 12 = <strong>660 J</strong></p>\n<p>b) W = fs = 30 · 12 = <strong>360 J</strong>, som blir värme</p>\n<p>c) Skillnaden blir rörelseenergi: 660 − 360 = <strong>300 J</strong></p>\n<p>d) mv²/2 = 300 ger v = √(2 · 300/18) = <strong>5,8 m/s</strong></p>"
+ },
+ {
+  "id": "5.166",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "E",
+  "typ": "följa energin från lägesenergi till rörelsemängd och kraft vid nedslag, ur text, sökt energi fart och kraft",
+  "poang": "(2/1/0)",
+  "t": "<p>En sten med massan 3,0 kg släpps från vila 8,0 meter över marken. Luftmotståndet försummas.</p>\n<ol><li>Hur stor lägesenergi har stenen från början?</li>\n<li>Vilken fart har den precis före nedslaget?</li>\n<li>Hur stor rörelsemängd har den då?</li>\n<li>Stenen landar i sand och stannar på 0,15 m. Hur stor är den genomsnittliga bromskraften?</li></ol>",
+  "s": "<p>a) E<sub>p</sub> = mgh = 3,0 · 9,82 · 8,0 = <strong>236 J</strong></p>\n<p>b) All lägesenergi blir rörelseenergi: v = √(2gh) = √(2 · 9,82 · 8,0) = <strong>12,5 m/s</strong></p>\n<p>c) p = mv = 3,0 · 12,53 = <strong>37,6 kg·m/s</strong></p>\n<p>d) Hela rörelseenergin bromsas bort på 0,15 m:</p>\n<p>F = E/s = 235,7/0,15 = <strong>1,6 kN</strong></p>"
+ },
+ {
+  "id": "5.167",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "E",
+  "typ": "beräkna farter före och efter en studs och den förlorade energin, ur text, sökt fart och energi",
+  "poang": "(2/1/0)",
+  "t": "<p>En boll med massan 0,20 kg släpps från vila 1,8 meter över golvet och studsar upp till 1,1 meter.</p>\n<ol><li>Vilken fart har bollen precis före studsen?</li>\n<li>Vilken fart har den precis efter studsen?</li>\n<li>Hur mycket energi försvann i studsen?</li>\n<li>Hur stor andel av energin försvann?</li></ol>",
+  "s": "<p>a) v = √(2gh) = √(2 · 9,82 · 1,8) = <strong>5,9 m/s</strong></p>\n<p>b) v = √(2 · 9,82 · 1,1) = <strong>4,6 m/s</strong></p>\n<p>c) Energin är proportionell mot höjden, så förlusten motsvarar höjdskillnaden:</p>\n<p>E = mgΔh = 0,20 · 9,82 · 0,70 = <strong>1,4 J</strong></p>\n<p>d) 0,70/1,8 = <strong>39 %</strong></p>"
+ },
+ {
+  "id": "5.168",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "E",
+  "typ": "beräkna bromskraft retardation och bromstid ur rörelseenergi och bromssträcka, ur text, sökt energi kraft och tid",
+  "poang": "(2/1/0)",
+  "t": "<p>En cyklist med cykel väger tillsammans 90 kg och håller farten 7,0 m/s. Bromssträckan är 12 meter.</p>\n<ol><li>Hur stor rörelseenergi har ekipaget?</li>\n<li>Hur stor är den genomsnittliga bromskraften?</li>\n<li>Vilken retardation ger det?</li>\n<li>Hur lång tid tar inbromsningen?</li></ol>",
+  "s": "<p>a) E<sub>k</sub> = mv²/2 = 90 · 7,0²/2 = <strong>2,2 kJ</strong></p>\n<p>b) F = E/s = 2205/12 = <strong>184 N</strong></p>\n<p>c) a = F/m = 183,75/90 = <strong>2,0 m/s²</strong></p>\n<p>d) Medelfarten är 3,5 m/s, alltså t = 12/3,5 = <strong>3,4 s</strong></p>"
+ },
+ {
+  "id": "5.169",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "E",
+  "typ": "omvandla fjäderenergi till fart rörelsemängd och stighöjd, ur text, sökt energi fart och höjd",
+  "poang": "(2/1/0)",
+  "t": "<p>En fjäderkanon har fjäderkonstanten 500 N/m. Fjädern trycks ihop 0,12 m och skjuter i väg en kula med massan 80 g rakt uppåt. Luftmotståndet försummas.</p>\n<ol><li>Hur mycket energi lagras i fjädern?</li>\n<li>Vilken fart får kulan?</li>\n<li>Hur stor rörelsemängd har kulan då?</li>\n<li>Hur högt kommer kulan?</li></ol>",
+  "s": "<p>a) E = kx²/2 = 500 · 0,12²/2 = <strong>3,6 J</strong></p>\n<p>b) mv²/2 = 3,6 ger v = √(2 · 3,6/0,080) = <strong>9,5 m/s</strong></p>\n<p>c) p = mv = 0,080 · 9,487 = <strong>0,76 kg·m/s</strong></p>\n<p>d) All rörelseenergi blir lägesenergi: h = E/(mg) = 3,6/(0,080 · 9,82) = <strong>4,6 m</strong></p>"
+ },
+ {
+  "id": "5.170",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "E",
+  "typ": "beräkna nyttig och tillförd effekt för en stigande drönare och därav flygtiden, ur diagram, sökt effekt och tid",
+  "poang": "(2/1/0)",
+  "t": "<p>En drönare med massan 1,8 kg stiger rakt uppåt med den konstanta farten 4,0 m/s. Batteriet rymmer 40 Wh och verkningsgraden från batteri till lyft är 0,55.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 480 220\"><path d=\"M 200 60 L 300 60 L 288 96 L 212 96 Z\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linejoin=\"round\"/><line x1=\"214\" y1=\"60\" x2=\"214\" y2=\"40\" stroke=\"#2B2527\" stroke-width=\"2.5\" stroke-linecap=\"square\"/><circle cx=\"214\" cy=\"34\" r=\"12\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"1.8\"/><line x1=\"286\" y1=\"60\" x2=\"286\" y2=\"40\" stroke=\"#2B2527\" stroke-width=\"2.5\" stroke-linecap=\"square\"/><circle cx=\"286\" cy=\"34\" r=\"12\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"1.8\"/><text x=\"250\" y=\"82\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#2B2527\">1,8 kg</text><line x1=\"340\" y1=\"100\" x2=\"340\" y2=\"54\" stroke=\"#2A5D9E\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><polygon points=\"340.00,44.00 344.60,54.00 335.40,54.00\" fill=\"#2A5D9E\"/><text x=\"354\" y=\"76\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2A5D9E\">v = 4,0 m/s</text><rect x=\"15\" y=\"200\" width=\"450\" height=\"8\" fill=\"#EDEEF1\"/><line x1=\"15\" y1=\"200\" x2=\"465\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/></svg></span>\n<ol><li>Hur stor lyftkraft ger propellrarna?</li>\n<li>Vilken nyttig effekt utvecklas?</li>\n<li>Vilken effekt tas ut ur batteriet?</li>\n<li>Hur länge kan drönaren stiga innan batteriet är tomt?</li></ol>",
+  "s": "<p>a) Farten är konstant, så lyftkraften är lika stor som tyngdkraften:</p>\n<p>F = mg = 1,8 · 9,82 = <strong>17,7 N</strong></p>\n<p>b) P = Fv = 17,676 · 4,0 = <strong>70,7 W</strong></p>\n<p>c) P<sub>batteri</sub> = P/η = 70,70/0,55 = <strong>129 W</strong></p>\n<p>d) t = 40 Wh/128,5 W = 0,311 h = <strong>19 minuter</strong></p>\n<p>I verkligheten blir tiden kortare, eftersom en drönare också förbrukar energi på att hålla sig stabil i luften.</p>"
+ },
+ {
+  "id": "5.171",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "C",
+  "typ": "bestämma fart vid vattenytan när hoppet börjar med en begynnelsefart uppåt, ur text, sökt fart",
+  "poang": "(1/2/0)",
+  "t": "<p>En person med massan 60 kg hoppar från en trampolin 3,0 meter över vattenytan. I hoppögonblicket rör sig personen uppåt med farten 2,0 m/s. Luftmotståndet försummas.</p>\n<p><strong>Vilken fart har personen när hon når vattenytan?</strong></p>",
+  "s": "<p>Använd energiprincipen mellan hoppögonblicket och vattenytan. Både rörelseenergin och lägesenergin räknas med:</p>\n<p>mv₀²/2 + mgh = mv²/2</p>\n<p>Massan förkortas bort:</p>\n<p>v² = v₀² + 2gh = 2,0² + 2 · 9,82 · 3,0 = 4,0 + 58,9 = 62,9</p>\n<p>v = <strong>7,9 m/s</strong></p>\n<p>Att hoppet börjar uppåt spelar ingen roll för slutfarten, bara för hur lång tid det tar. Personens massa på 60 kg behövs inte alls.</p>"
+ },
+ {
+  "id": "5.172",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "C",
+  "typ": "beräkna bromskraft ur energi och stopptid ur impuls för en kula i sand, ur text, sökt kraft och tid",
+  "poang": "(1/2/0)",
+  "t": "<p>En kula med massan 20 g träffar en sandlåda med farten 150 m/s och stannar på 8,0 cm.</p>\n<ol><li><strong>Hur stor är den genomsnittliga bromskraften?</strong></li>\n<li><strong>Hur lång tid tar inbromsningen?</strong></li></ol>",
+  "s": "<p>a) Hela rörelseenergin bromsas bort på 8,0 cm:</p>\n<p>E<sub>k</sub> = mv²/2 = 0,020 · 150²/2 = 225 J</p>\n<p>F = E/s = 225/0,080 = <strong>2,8 kN</strong></p>\n<p>b) Använd impulslagen med rörelsemängdsändringen:</p>\n<p>Δp = mv = 0,020 · 150 = 3,0 kg·m/s</p>\n<p>Δt = Δp/F = 3,0/2812,5 = <strong>1,1 ms</strong></p>\n<p>Energi över sträcka ger kraften, impuls över tid ger tiden. De två sambanden kompletterar varandra.</p>"
+ },
+ {
+  "id": "5.173",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "C",
+  "typ": "beräkna impuls kraft energi och effekt vid en fotbollsspark, ur text, sökt kraft och effekt",
+  "poang": "(1/2/0)",
+  "t": "<p>En fotboll med massan 0,43 kg ligger stilla och sparkas i väg med farten 25 m/s. Kontakten mellan foten och bollen varar 9,0 millisekunder.</p>\n<ol><li><strong>Hur stor är den genomsnittliga kraften på bollen?</strong></li>\n<li><strong>Vilken medeleffekt utvecklar sparken?</strong></li></ol>",
+  "s": "<p>a) Δp = mv = 0,43 · 25 = 10,75 kg·m/s</p>\n<p>F = Δp/Δt = 10,75/0,0090 = <strong>1,2 kN</strong></p>\n<p>b) E<sub>k</sub> = mv²/2 = 0,43 · 25²/2 = 134 J</p>\n<p>P = E/t = 134,4/0,0090 = <strong>15 kW</strong></p>\n<p>Effekten är enorm men varar bara nio millisekunder. Under den korta tiden överförs ungefär lika mycket energi som en glödlampa på 100 W ger ut under en och en halv sekund.</p>"
+ },
+ {
+  "id": "5.174",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "A",
+  "typ": "kedja energiprincipen oelastisk stöt och friktionsarbete för att bestämma friktionstalet, ur diagram, sökt fart och friktionstal",
+  "poang": "(0/1/2)",
+  "t": "<p>En vagn med massan 2,0 kg glider från vila ned för en friktionsfri bana från höjden 0,80 m. Längst ned kolliderar den med en stillastående vagn på 3,0 kg och de fastnar i varandra. Därefter glider de tillsammans 1,2 m innan de stannar.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 520 225\"><path d=\"M 60 60 Q 90 170 200 175 L 420 175\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"3\"/><rect x=\"46\" y=\"34\" width=\"44\" height=\"28\" rx=\"3\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"68\" y=\"53\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9\" font-weight=\"600\" fill=\"#2B2527\">2,0 kg</text><rect x=\"250\" y=\"145\" width=\"56\" height=\"30\" rx=\"3\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"278\" y=\"165\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9\" font-weight=\"600\" fill=\"#2B2527\">3,0 kg</text><line x1=\"440\" y1=\"60\" x2=\"440\" y2=\"175\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"435\" y1=\"60\" x2=\"445\" y2=\"60\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"435\" y1=\"175\" x2=\"445\" y2=\"175\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><text x=\"448\" y=\"121.5\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10\" font-weight=\"400\" fill=\"#5C575E\">h = 0,80 m</text><line x1=\"306\" y1=\"200\" x2=\"400\" y2=\"200\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"306\" y1=\"195\" x2=\"306\" y2=\"205\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><line x1=\"400\" y1=\"195\" x2=\"400\" y2=\"205\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"square\"/><text x=\"353\" y=\"216\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10\" font-weight=\"400\" fill=\"#5C575E\">s = 1,2 m</text></svg></span>\n<ol><li><strong>Vilken fart har den första vagnen längst ned i banan?</strong></li>\n<li><strong>Vilken gemensam fart får vagnarna efter stöten?</strong></li>\n<li><strong>Bestäm friktionstalet på den vågräta delen.</strong></li></ol>",
+  "s": "<p>a) Banan är friktionsfri, så all lägesenergi blir rörelseenergi:</p>\n<p>v = √(2gh) = √(2 · 9,82 · 0,80) = <strong>4,0 m/s</strong></p>\n<p>b) I stöten bevaras rörelsemängden, inte energin:</p>\n<p>2,0 · 3,964 = 5,0·v ger v = <strong>1,6 m/s</strong></p>\n<p>c) Efter stöten tar friktionen upp den kvarvarande rörelseenergin:</p>\n<p>E<sub>k</sub> = 5,0 · 1,586²/2 = 6,28 J</p>\n<p>μmgs = E<sub>k</sub> ger μ = 6,284/(5,0 · 9,82 · 1,2) = <strong>0,11</strong></p>\n<p>Lägg märke till vilken princip som gäller var. Energin bevaras i den friktionsfria banan men inte i stöten, medan rörelsemängden bevaras i stöten men inte under friktionsfasen. Att använda energiprincipen rakt igenom hade gett fel svar.</p>"
  },
  {
   "id": "6.55",
