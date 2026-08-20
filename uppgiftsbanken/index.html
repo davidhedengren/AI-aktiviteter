@@ -175,52 +175,74 @@ table.data th{background:var(--sunken);font-weight:600}
 
 /* ── höger: övningsbladet ── */
 .höger{background:var(--surface);border-left:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden}
-.bladtopp{padding:18px 18px 14px;border-bottom:1px solid var(--line-2)}
-.bladtopp h2{margin:0 0 12px;font-size:14px;font-weight:600;letter-spacing:-.01em}
-.fält{display:flex;flex-direction:column;gap:7px}
-.fält input{border:1px solid var(--line);background:var(--canvas);border-radius:var(--r-s);padding:8px 11px;font-size:13px}
-.fält .rad{display:flex;gap:7px}
+.bladtopp{padding:20px 18px 16px;border-bottom:1px solid var(--line-2)}
+.bladtopp h2{margin:0 0 13px;font-size:15px;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
+.fält{display:flex;flex-direction:column;gap:8px}
+.fält input{border:1px solid transparent;background:var(--sunken);border-radius:11px;padding:10px 13px;
+  font-size:13.5px;color:var(--ink);transition:background .15s,border-color .15s,box-shadow .15s}
+.fält input::placeholder{color:var(--muted)}
+.fält input:hover{background:#E7E7EB}
+.fält input:focus{outline:none;background:var(--surface);border-color:var(--ed);box-shadow:0 0 0 3.5px var(--ed-ring)}
+.fält .rad{display:flex;gap:8px}
 .fält .rad input{flex:1;min-width:0}
 
 /* signaturen: poängmätaren */
-.mätare{padding:16px 18px;border-bottom:1px solid var(--line-2)}
-.mätarhuvud{display:flex;align-items:baseline;gap:8px;margin-bottom:11px}
-.summa{font-family:var(--mono);font-size:26px;font-weight:600;letter-spacing:-.02em;line-height:1}
-.summa small{font-size:12px;font-weight:400;color:var(--muted);margin-left:3px}
-.mätarhuvud .antal{margin-left:auto;font-size:12px;color:var(--muted)}
-.stapel{height:9px;border-radius:99px;background:var(--sunken);display:flex;overflow:hidden}
-.stapel span{transition:width .4s cubic-bezier(.4,0,.2,1)}
+.mätare{padding:19px 18px;border-bottom:1px solid var(--line-2)}
+.mätarhuvud{display:flex;align-items:flex-end;gap:8px;margin-bottom:14px}
+.summa{font-family:var(--ui);font-size:32px;font-weight:800;letter-spacing:-.035em;line-height:1;
+  color:var(--ink);font-variant-numeric:tabular-nums}
+.summa small{font-size:13px;font-weight:600;color:var(--muted);margin-left:2px;letter-spacing:-.01em}
+.mätarhuvud .antal{margin-left:auto;font-size:12.5px;color:var(--muted);font-weight:500;padding-bottom:3px}
+.stapel{height:10px;border-radius:99px;background:var(--sunken);display:flex;overflow:hidden;
+  box-shadow:inset 0 1px 2px rgba(43,37,39,.06)}
+.stapel span{transition:width .5s cubic-bezier(.4,0,.2,1)}
 .stapel .sE{background:var(--nE)} .stapel .sC{background:var(--nC)} .stapel .sA{background:var(--nA)}
-.mätarnyckel{display:flex;gap:14px;margin-top:9px;font-family:var(--mono);font-size:11px;color:var(--muted)}
-.mätarnyckel i{width:7px;height:7px;border-radius:2px;display:inline-block;margin-right:5px}
-.gränser{margin-top:12px;font-family:var(--mono);font-size:11px;line-height:1.9;color:var(--ink-2)}
-.gränser b{color:var(--ink)}
+.mätarnyckel{display:flex;gap:16px;margin-top:12px;font-family:var(--ui);font-size:12.5px;color:var(--ink-2)}
+.mätarnyckel b{font-weight:700;color:var(--ink)}
+.mätarnyckel i{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+.gränser{margin-top:16px}
+.gränser .gränsrubrik{display:block;font-size:11px;font-weight:600;letter-spacing:.03em;color:var(--muted);
+  margin-bottom:8px}
+.gränsrad{display:flex;gap:6px}
+.chip{flex:1;display:flex;align-items:baseline;justify-content:center;gap:4px;border-radius:9px;
+  padding:6px 4px;font-family:var(--ui);font-size:12px;font-weight:600}
+.chip b{font-size:13px;font-weight:700}
+.chip.E{background:var(--nE-bg);color:var(--nE)} .chip.C{background:var(--nC-bg);color:var(--nC)}
+.chip.A{background:var(--nA-bg);color:var(--nA)}
 
 .bladlista{flex:1;overflow-y:auto;padding:10px 12px 20px}
-.brad{display:grid;grid-template-columns:20px 1fr auto;gap:10px;align-items:start;padding:9px 8px;
-  border-radius:var(--r-s);transition:background .13s}
+.brad{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:flex-start;padding:10px 9px;
+  border-radius:var(--r-m);transition:background .15s}
 .brad:hover{background:var(--canvas)}
-.brad .num{font-family:var(--mono);font-size:11.5px;color:var(--muted);padding-top:2px}
-.brad .txt{font-size:12.5px;line-height:1.45;color:var(--ink-2);min-width:0}
-.brad .txt b{display:block;color:var(--ink);font-family:var(--mono);font-size:11px;font-weight:600;margin-bottom:2px}
-.brad .txt span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.brad .num{width:22px;height:22px;border-radius:50%;background:var(--sunken);color:var(--ink-2);
+  font-family:var(--ui);font-size:11px;font-weight:700;display:grid;place-items:center;margin-top:1px}
+.brad .txt{font-size:12.5px;line-height:1.5;color:var(--ink-2);min-width:0}
+.bmeta{display:flex;align-items:center;gap:6px;margin-bottom:3px;flex-wrap:wrap}
+.bid{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--ink)}
+.bniva{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.05em;padding:1.5px 6px;border-radius:5px}
+.bniva.E{background:var(--nE-bg);color:var(--nE)} .bniva.C{background:var(--nC-bg);color:var(--nC)}
+.bniva.A{background:var(--nA-bg);color:var(--nA)}
+.bpoäng{font-family:var(--ui);font-size:11px;color:var(--muted);font-weight:500}
+.brad .txt .btext{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--ink-2)}
 .bverktyg{display:flex;gap:1px;opacity:0;transition:opacity .13s}
 .brad:hover .bverktyg,.brad:focus-within .bverktyg{opacity:1}
-.bverktyg button{width:24px;height:24px;border:none;background:none;border-radius:5px;cursor:pointer;
-  color:var(--muted);display:grid;place-items:center}
+.bverktyg button{width:25px;height:25px;border:none;background:none;border-radius:7px;cursor:pointer;
+  color:var(--muted);display:grid;place-items:center;transition:background .13s,color .13s}
 .bverktyg button:hover{background:var(--sunken);color:var(--ink)}
 .bverktyg button.bort:hover{background:var(--ed-tint);color:var(--ed)}
 .bverktyg svg{width:13px;height:13px}
-.bladfot{padding:14px 18px 18px;border-top:1px solid var(--line-2);background:var(--surface)}
-.exportrad{display:flex;gap:8px}
-.exportrad .knapp{flex:1;justify-content:center}
-.växel{display:flex;align-items:center;gap:9px;margin-bottom:12px;font-size:13px;color:var(--ink-2);cursor:pointer}
-.växel input{appearance:none;width:36px;height:21px;border-radius:99px;background:#D6D5D9;position:relative;
-  cursor:pointer;transition:background .18s;flex:none}
-.växel input::after{content:"";position:absolute;top:2.5px;left:2.5px;width:16px;height:16px;border-radius:50%;
-  background:#fff;box-shadow:var(--sh-1);transition:transform .18s}
+.bladfot{padding:16px 18px 20px;border-top:1px solid var(--line-2);background:var(--surface)}
+.exportrad{display:flex;gap:9px}
+.exportrad .knapp{flex:1;justify-content:center;padding:11px 14px;border-radius:11px;font-weight:600}
+.exportrad .knapp.primär{box-shadow:0 2px 8px rgba(180,49,35,.22)}
+.växel{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:13.5px;font-weight:500;
+  color:var(--ink-2);cursor:pointer}
+.växel input{appearance:none;width:38px;height:22px;border-radius:99px;background:#D6D5D9;position:relative;
+  cursor:pointer;transition:background .18s;flex:none;box-shadow:inset 0 1px 2px rgba(43,37,39,.08)}
+.växel input::after{content:"";position:absolute;top:2.5px;left:2.5px;width:17px;height:17px;border-radius:50%;
+  background:#fff;box-shadow:0 1px 3px rgba(43,37,39,.25);transition:transform .18s cubic-bezier(.4,0,.2,1)}
 .växel input:checked{background:var(--ed)}
-.växel input:checked::after{transform:translateX(15px)}
+.växel input:checked::after{transform:translateX(16px)}
 
 
 /* ── figurer ────────────────────────────────────────────────
@@ -372,9 +394,9 @@ table.data th{background:var(--sunken);font-weight:600}
         <span class="sA" id="stA" style="width:0"></span>
       </div>
       <div class="mätarnyckel">
-        <span><i style="background:var(--nE)"></i><span id="pE">0</span> E</span>
-        <span><i style="background:var(--nC)"></i><span id="pC">0</span> C</span>
-        <span><i style="background:var(--nA)"></i><span id="pA">0</span> A</span>
+        <span><i style="background:var(--nE)"></i><b id="pE">0</b> E</span>
+        <span><i style="background:var(--nC)"></i><b id="pC">0</b> C</span>
+        <span><i style="background:var(--nA)"></i><b id="pA">0</b> A</span>
       </div>
       <div class="gränser" id="gränser"></div>
     </div>
@@ -554,14 +576,25 @@ function ritaBlad(){
   });
   $('#gränser').style.display=dp?'none':'';
   $('#gränser').innerHTML=tot
-    ? `Förslag på gränser<br>E <b>${Math.round(tot*.28)} p</b> · C <b>${Math.round(tot*.55)} p</b> · A <b>${Math.round(tot*.78)} p</b>`
-    : 'Kryssa i uppgifter så räknas poängen ihop här.';
+    ? `<span class="gränsrubrik">Förslag på gränser</span>
+       <div class="gränsrad">
+         <span class="chip E">E <b>${Math.round(tot*.28)}p</b></span>
+         <span class="chip C">C <b>${Math.round(tot*.55)}p</b></span>
+         <span class="chip A">A <b>${Math.round(tot*.78)}p</b></span>
+       </div>`
+    : '<span class="gränsrubrik">Kryssa i uppgifter så räknas poängen ihop här.</span>';
 
   $('#blad').innerHTML=b.length ? b.map((x,i)=>`
     <div class="brad">
       <span class="num">${i+1}</span>
-      <span class="txt"><b>${x.id} · ${x.niva}${dp?'':' · '+x.poang}</b>
-        <span>${x.t.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,90)}…</span></span>
+      <span class="txt">
+        <span class="bmeta">
+          <span class="bid">${x.id}</span>
+          <span class="bniva ${x.niva}">${x.niva}</span>
+          ${dp?'':`<span class="bpoäng">${x.poang}</span>`}
+        </span>
+        <span class="btext">${x.t.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,90)}…</span>
+      </span>
       <span class="bverktyg">
         <button data-upp="${i}" title="Flytta upp" ${i===0?'disabled':''}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg></button>
         <button data-ner="${i}" title="Flytta ned" ${i===b.length-1?'disabled':''}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
