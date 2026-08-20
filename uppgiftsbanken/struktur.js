@@ -27,7 +27,8 @@ window.OMR = {
   "tryck": "Tryck och kraft",
   "vatsketryck": "Vätsketryck och lufttryck",
   "arkimedes": "Arkimedes princip",
-  "gaslagen": "Allmänna gaslagen"
+  "gaslagen": "Allmänna gaslagen",
+"blandat": "Blandat - energi, rörelsemängd och kraft"
  },
  "7": {
   "varme": "Värmeöverföring och temperatur",
