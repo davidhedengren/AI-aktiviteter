@@ -15,7 +15,8 @@ window.OMR = {
   "fjadrar": "Fjädrar och Hookes lag",
   "friktion": "Friktion och lutande plan",
   "moment": "Kraftmoment och tyngdpunkt",
-"ritakrafter": "Rita krafter"
+"ritakrafter": "Rita krafter",
+"blandat":"Blandat - rörelse och kraft"
  },
  "5": {
   "arbete": "Arbete och energi",
