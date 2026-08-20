@@ -4768,6 +4768,156 @@ window.BANK = [
   "s": "<p>Krafterna under stöten är lika stora och motriktade: F_A = −F_B</p>\n<p>Multiplicera med kollisionstiden, som är densamma för båda: F_A·Δt = −F_B·Δt</p>\n<p>m_A·a_A·Δt = −m_B·a_B·Δt → m_A·Δv_A = −m_B·Δv_B</p>\n<p>m_A(v_A2 − v_A1) = −m_B(v_B2 − v_B1)</p>\n<p><strong>m_A·v_A2 + m_B·v_B2 = m_A·v_A1 + m_B·v_B1</strong></p>\n<p>Den totala rörelsemängden är alltså lika stor före och efter kollisionen.</p>"
  },
  {
+  "id": "5.90",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "E",
+  "typ": "beräkna impuls och därefter fart rörelseenergi och kontaktsträcka, ur diagram, sökt impuls fart energi och sträcka",
+  "poang": "(2/1/0)",
+  "t": "<p>En ishockeypuck med massan 0,17 kg ligger stilla på isen. En klubba träffar pucken med den genomsnittliga kraften 90 N under 0,050 s.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 260 95\"><rect x=\"12\" y=\"68\" width=\"236\" height=\"8\" fill=\"#DCE6F2\"/><line x1=\"12\" y1=\"68\" x2=\"248\" y2=\"68\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"55\" y1=\"16\" x2=\"96\" y2=\"58\" stroke=\"#2B2527\" stroke-width=\"4\" stroke-linecap=\"round\"/><line x1=\"94\" y1=\"62\" x2=\"112\" y2=\"62\" stroke=\"#2B2527\" stroke-width=\"6\" stroke-linecap=\"round\"/><rect x=\"112\" y=\"56\" width=\"44\" height=\"12\" rx=\"4\" fill=\"#2B2527\"/><line x1=\"134\" y1=\"52\" x2=\"134\" y2=\"56\" stroke=\"#9A959C\" stroke-width=\"1.2\"/><text x=\"134\" y=\"48\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9\" font-weight=\"400\" fill=\"#5C575E\">0,17 kg</text></svg></span>\n<ol><li>Hur stor impuls får pucken?</li><li>Vilken fart får pucken?</li>\n<li>Hur stor rörelseenergi har pucken efter slaget?</li>\n<li>Hur långt hinner pucken röra sig medan klubban är i kontakt med den?</li></ol>",
+  "s": "<p>a) I = FΔt = 90 · 0,050 = <strong>4,5 Ns</strong></p>\n<p>b) Impulsen är lika med rörelsemängdsändringen: mv = 4,5 ger v = 4,5/0,17 = <strong>26 m/s</strong></p>\n<p>c) E<sub>k</sub> = mv²/2 = 0,17 · 26,5²/2 = <strong>60 J</strong></p>\n<p>d) a = F/m = 90/0,17 = 529 m/s² ger s = at²/2 = 529 · 0,050²/2 = <strong>0,66 m</strong></p>\n<p>Kontroll: klubbans arbete är W = Fs = 90 · 0,66 = 60 J, alltså exakt puckens rörelseenergi. Impuls och arbete är två sätt att beskriva samma kraft, det ena över tid och det andra över sträcka.</p>"
+ },
+ {
+  "id": "5.91",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "E",
+  "typ": "beräkna landningsfart ur lägesenergi och därefter kraft vid två bromssträckor, ur diagram, sökt energi fart och kraft",
+  "poang": "(2/1/0)",
+  "t": "<p>En person med massan 60 kg hoppar ned från en plattform 1,2 m över marken.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 220 180\"><rect x=\"15\" y=\"150\" width=\"190\" height=\"8\" fill=\"#EDEEF1\"/><line x1=\"15\" y1=\"150\" x2=\"205\" y2=\"150\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><rect x=\"30\" y=\"64\" width=\"70\" height=\"10\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><rect x=\"50\" y=\"74\" width=\"14\" height=\"76\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"85\" cy=\"34\" r=\"8\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"85\" y1=\"42\" x2=\"85\" y2=\"56\" stroke=\"#2B2527\" stroke-width=\"3.4\" stroke-linecap=\"round\"/><line x1=\"85\" y1=\"56\" x2=\"79\" y2=\"64\" stroke=\"#2B2527\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"85\" y1=\"56\" x2=\"91\" y2=\"64\" stroke=\"#2B2527\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"77\" y1=\"47\" x2=\"93\" y2=\"47\" stroke=\"#2B2527\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><line x1=\"130\" y1=\"64\" x2=\"130\" y2=\"150\" stroke=\"#9A959C\" stroke-width=\"1.2\"/><line x1=\"125\" y1=\"64\" x2=\"135\" y2=\"64\" stroke=\"#9A959C\" stroke-width=\"1.2\"/><line x1=\"125\" y1=\"150\" x2=\"135\" y2=\"150\" stroke=\"#9A959C\" stroke-width=\"1.2\"/><text x=\"142\" y=\"110\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">1,2 m</text></svg></span>\n<ol><li>Hur stor lägesenergi har personen på plattformen?</li>\n<li>Vilken fart har personen precis före landningen?</li>\n<li>Med raka ben bromsas kroppen på 2,0 cm. Hur stor blir den genomsnittliga kraften?</li>\n<li>Med böjda knän bromsas kroppen i stället på 40 cm. Hur stor blir kraften då?</li></ol>",
+  "s": "<p>a) E<sub>p</sub> = mgh = 60 · 9,82 · 1,2 = <strong>707 J</strong></p>\n<p>b) All lägesenergi blir rörelseenergi: v = √(2gh) = √(2 · 9,82 · 1,2) = <strong>4,9 m/s</strong></p>\n<p>c) Hela rörelseenergin ska bromsas bort på sträckan s, alltså F = E<sub>k</sub>/s:</p>\n<p>F = 707/0,020 = <strong>35 kN</strong></p>\n<p>d) F = 707/0,40 = <strong>1,8 kN</strong></p>\n<p>Tjugo gånger längre bromssträcka ger tjugo gånger mindre kraft. Det är därför man landar på böjda knän.</p>"
+ },
+ {
+  "id": "5.92",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "E",
+  "typ": "koppla effekt kraft och fart vid konstant hastighet, ur text, sökt kraft energi och tid",
+  "poang": "(2/1/0)",
+  "t": "<p>En bil kör på en rak väg med den konstanta farten 25 m/s. Motorns nyttiga effekt är 30 kW.</p>\n<ol><li>Hur stor är motorns drivkraft?</li>\n<li>Hur stora är motståndskrafterna på bilen? Motivera.</li>\n<li>Hur stort arbete uträttar motorn under en kilometer?</li>\n<li>Kontrollera svaret i c genom att i stället räkna med effekt och tid.</li></ol>",
+  "s": "<p>a) P = Fv ger F = P/v = 30000/25 = <strong>1200 N</strong></p>\n<p>b) Farten är konstant, alltså är den resulterande kraften noll. Motståndskrafterna måste vara lika stora som drivkraften, <strong>1200 N</strong>.</p>\n<p>c) W = Fs = 1200 · 1000 = <strong>1,2 MJ</strong></p>\n<p>d) Tiden är t = 1000/25 = 40 s och W = Pt = 30000 · 40 = <strong>1,2 MJ</strong>, samma svar.</p>\n<p>Hela arbetet går till att övervinna motståndet. Bilens rörelseenergi ändras inte alls, eftersom farten är konstant.</p>"
+ },
+ {
+  "id": "5.93",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "E",
+  "typ": "bestämma gemensam fart vid oelastisk stöt och därefter energiförlust, ur diagram, sökt rörelsemängd fart och energi",
+  "poang": "(2/1/0)",
+  "t": "<p>En vagn med massan 4,0 kg rullar med farten 3,0 m/s in i en stillastående vagn med massan 2,0 kg. Vagnarna fastnar i varandra vid kollisionen.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 340 125\"><rect x=\"15\" y=\"92\" width=\"310\" height=\"8\" fill=\"#EDEEF1\"/><line x1=\"15\" y1=\"92\" x2=\"325\" y2=\"92\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><rect x=\"60\" y=\"52\" width=\"70\" height=\"28\" rx=\"3\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"95\" y=\"70\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9\" font-weight=\"400\" fill=\"#2B2527\">4,0 kg</text><circle cx=\"78\" cy=\"86\" r=\"6\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"112\" cy=\"86\" r=\"6\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><rect x=\"210\" y=\"52\" width=\"56\" height=\"28\" rx=\"3\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"238\" y=\"70\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9\" font-weight=\"400\" fill=\"#2B2527\">2,0 kg</text><circle cx=\"224\" cy=\"86\" r=\"6\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"252\" cy=\"86\" r=\"6\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"142\" y1=\"40\" x2=\"174\" y2=\"40\" stroke=\"#2A5D9E\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><polygon points=\"182,40 172,35.4 172,44.6\" fill=\"#2A5D9E\"/><text x=\"188\" y=\"44\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2A5D9E\">v</text></svg></span>\n<ol><li>Hur stor är den totala rörelsemängden före kollisionen?</li>\n<li>Vilken gemensam fart får vagnarna?</li>\n<li>Beräkna rörelseenergin före och efter kollisionen.</li>\n<li>Vart tog den saknade energin vägen?</li></ol>",
+  "s": "<p>a) p = mv = 4,0 · 3,0 = <strong>12 kg·m/s</strong></p>\n<p>b) Rörelsemängden bevaras: 12 = (4,0 + 2,0)·v ger v = <strong>2,0 m/s</strong></p>\n<p>c) Före: E<sub>k</sub> = 4,0 · 3,0²/2 = <strong>18 J</strong></p>\n<p>Efter: E<sub>k</sub> = 6,0 · 2,0²/2 = <strong>12 J</strong></p>\n<p>d) 6,0 J har omvandlats till <strong>deformation, värme och ljud</strong> i själva kollisionen. Rörelsemängden bevaras alltid vid en stöt, men rörelseenergin gör det bara om stöten är elastisk.</p>"
+ },
+ {
+  "id": "5.94",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "E",
+  "typ": "beräkna stighöjd ur rörelseenergi och jämföra med tyngdkraftens impuls, ur text, sökt energi höjd tid och rörelsemängd",
+  "poang": "(2/1/0)",
+  "t": "<p>En boll med massan 0,25 kg kastas rakt uppåt med farten 12 m/s. Luftmotståndet försummas.</p>\n<ol><li>Hur stor rörelseenergi har bollen när den lämnar handen?</li>\n<li>Hur högt kommer bollen?</li><li>Hur lång tid tar det innan bollen vänder?</li>\n<li>Hur mycket har bollens rörelsemängd ändrats på vägen upp? Jämför med tyngdkraftens impuls under samma tid.</li></ol>",
+  "s": "<p>a) E<sub>k</sub> = mv²/2 = 0,25 · 12²/2 = <strong>18 J</strong></p>\n<p>b) All rörelseenergi blir lägesenergi: h = E<sub>k</sub>/(mg) = 18/(0,25 · 9,82) = <strong>7,3 m</strong></p>\n<p>c) v = v<sub>0</sub> − gt ger t = 12/9,82 = <strong>1,2 s</strong></p>\n<p>d) Rörelsemängden går från 0,25 · 12 = 3,0 kg·m/s till noll, alltså en ändring på <strong>3,0 kg·m/s</strong>.</p>\n<p>Tyngdkraftens impuls är I = mg·t = 0,25 · 9,82 · 1,22 = 3,0 Ns, precis lika stor.</p>\n<p>Energi och rörelsemängd ger alltså samma svar på olika frågor. Energin ger höjden, impulsen ger tiden.</p>"
+ },
+ {
+  "id": "5.95",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "E",
+  "typ": "beräkna rekylfart ur rörelsemängdens bevarande och jämföra energier, ur text, sökt rörelsemängd fart och energi",
+  "poang": "(2/1/0)",
+  "t": "<p>En person med massan 70 kg står stilla på skridskor och kastar i väg en boll med massan 3,0 kg vågrätt med farten 8,0 m/s. Friktionen mot isen försummas.</p>\n<ol><li>Hur stor rörelsemängd får bollen?</li>\n<li>Vilken fart får personen, och åt vilket håll?</li>\n<li>Beräkna rörelseenergin hos bollen och hos personen efter kastet.</li>\n<li>Systemets rörelsemängd var noll både före och efter kastet, men energin var det inte. Förklara.</li></ol>",
+  "s": "<p>a) p = mv = 3,0 · 8,0 = <strong>24 kg·m/s</strong></p>\n<p>b) Rörelsemängden bevaras och var noll före kastet, så personen måste få lika stor rörelsemängd åt andra hållet:</p>\n<p>v = 24/70 = <strong>0,34 m/s</strong> bakåt</p>\n<p>c) Bollen: 3,0 · 8,0²/2 = <strong>96 J</strong>. Personen: 70 · 0,343²/2 = <strong>4,1 J</strong></p>\n<p>d) Rörelsemängd är en vektor, och de två rörelsemängderna är motriktade och tar ut varandra. Rörelseenergi är en skalär som alltid är positiv, så de kan inte ta ut varandra. Energin på 100 J kommer från personens muskler och är alltså <strong>tillförd</strong>, inte bevarad.</p>"
+ },
+ {
+  "id": "5.96",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "C",
+  "typ": "beräkna sluthastighet nedför lutande plan med friktion via energi och kontrollera med kraft, ur diagram, sökt energi fart och rörelsemängd",
+  "poang": "(1/2/0)",
+  "t": "<p>En låda med massan 30 kg glider från vila 4,0 m nedför en ramp som lutar 25° mot horisontalplanet. Friktionstalet mellan lådan och rampen är 0,20.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 390 200\"><polygon points=\"30,175 360,175 360,21.1\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><g transform=\"translate(234.6,79.6) rotate(-25)\"><rect x=\"-28\" y=\"-30\" width=\"56\" height=\"30\" rx=\"3\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"0\" y=\"-11\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#2B2527\">30 kg</text><line x1=\"-36\" y1=\"-16\" x2=\"-70\" y2=\"-16\" stroke=\"#2A5D9E\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><polygon points=\"-78,-16 -68,-20.6 -68,-11.4\" fill=\"#2A5D9E\"/><text x=\"-52\" y=\"-26\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#2A5D9E\">v</text></g><path d=\"M 82 175 A 52 52 0 0 0 77.1 153.0\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.4\"/><text x=\"96\" y=\"163\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11.5\" font-weight=\"600\" fill=\"#5C575E\">25°</text></svg></span>\n<ol><li>Hur mycket sjunker lådan i höjdled, och hur stor lägesenergi omvandlas?</li>\n<li>Hur stort arbete uträttar friktionskraften?</li>\n<li>Vilken fart har lådan längst ned?</li>\n<li>Kontrollera svaret i c genom att i stället använda Newtons andra lag.</li></ol>",
+  "s": "<p>a) h = s·sin 25° = 4,0 · 0,423 = 1,69 m</p>\n<p>E<sub>p</sub> = mgh = 30 · 9,82 · 1,69 = <strong>498 J</strong></p>\n<p>b) Normalkraften är N = mg·cos 25° = 267 N, alltså f = μN = 0,20 · 267 = 53,4 N</p>\n<p>W<sub>f</sub> = fs = 53,4 · 4,0 = <strong>214 J</strong></p>\n<p>c) Det som blir kvar är rörelseenergi: E<sub>k</sub> = 498 − 214 = 284 J</p>\n<p>v = √(2E<sub>k</sub>/m) = √(2 · 284/30) = <strong>4,4 m/s</strong></p>\n<p>d) a = g(sin 25° − μ·cos 25°) = 9,82 · (0,423 − 0,181) = 2,37 m/s²</p>\n<p>v = √(2as) = √(2 · 2,37 · 4,0) = <strong>4,4 m/s</strong>, samma svar.</p>\n<p>Energimetoden är kortare när man bara söker farten. Kraftmetoden behövs när man också vill ha tiden.</p>"
+ },
+ {
+  "id": "5.97",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "C",
+  "typ": "jämföra krockkraft med och utan krockkudde via impulslagen, ur text, sökt rörelsemängd kraft och energi",
+  "poang": "(1/2/0)",
+  "t": "<p>En person med massan 75 kg åker bil i 14 m/s när bilen krockar och tvärstannar.</p>\n<ol><li>Hur stor rörelsemängd har personen strax före krocken?</li>\n<li>Krockkudden bromsar personen på 0,12 s. Hur stor blir den genomsnittliga kraften?</li>\n<li>Utan krockkudde stoppas personen av ratten på 0,020 s. Hur stor blir kraften då?</li>\n<li>Hur stor rörelseenergi ska bromsas bort i de två fallen?</li></ol>",
+  "s": "<p>a) p = mv = 75 · 14 = <strong>1050 kg·m/s</strong></p>\n<p>b) Impulslagen ger FΔt = Δp, alltså F = 1050/0,12 = <strong>8,8 kN</strong></p>\n<p>c) F = 1050/0,020 = <strong>53 kN</strong>, sex gånger så mycket</p>\n<p>d) E<sub>k</sub> = mv²/2 = 75 · 14²/2 = <strong>7,4 kJ</strong> i båda fallen.</p>\n<p>Energin som ska tas upp är alltså exakt densamma. Krockkudden minskar inte energin, den fördelar den över längre tid och längre sträcka, och det är kraften som blir mindre.</p>"
+ },
+ {
+  "id": "5.98",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "C",
+  "typ": "beräkna kraft och stöttid när hammares rörelseenergi driver in en spik, ur text, sökt energi kraft och tid",
+  "poang": "(1/2/0)",
+  "t": "<p>En hammare med massan 0,60 kg träffar en spik med farten 6,0 m/s och stannar helt. Spiken drivs in 8,0 mm i träet.</p>\n<ol><li>Hur stor rörelseenergi har hammaren i träffögonblicket?</li>\n<li>Hur stor är den genomsnittliga kraften på spiken?</li>\n<li>Hur lång tid varar slaget?</li>\n<li>Varför blir kraften så mycket större än hammarens tyngd?</li></ol>",
+  "s": "<p>a) E<sub>k</sub> = mv²/2 = 0,60 · 6,0²/2 = <strong>10,8 J</strong></p>\n<p>b) Hela rörelseenergin uträttas som arbete på sträckan 8,0 mm:</p>\n<p>F = W/s = 10,8/0,0080 = <strong>1,4 kN</strong></p>\n<p>c) Impulslagen ger Δt = Δp/F = (0,60 · 6,0)/1350 = 3,6/1350 = <strong>2,7 ms</strong></p>\n<p>d) Hammarens tyngd är bara 5,9 N. Kraften blir över tvåhundra gånger större eftersom rörelseenergin ska bromsas bort på en mycket kort sträcka. Ju hårdare träet är, desto kortare sträcka och desto större kraft.</p>"
+ },
+ {
+  "id": "5.99",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "C",
+  "typ": "beräkna drivkraft och effekt uppför lutning och fördela energin, ur text, sökt kraft effekt arbete och andel",
+  "poang": "(1/2/0)",
+  "t": "<p>En lastbil med massan 12 000 kg kör uppför en backe som lutar 4,0° mot horisontalplanet. Farten är konstant 15 m/s och rull- och luftmotstånd är tillsammans 2500 N.</p>\n<ol><li>Hur stor är motorns drivkraft?</li><li>Vilken effekt utvecklar motorn?</li>\n<li>Backen är 2,0 km lång. Hur stort arbete uträttar motorn?</li>\n<li>Hur stor andel av arbetet blir lägesenergi?</li></ol>",
+  "s": "<p>a) Farten är konstant, så drivkraften balanserar både tyngdkraftens komposant och motståndet:</p>\n<p>mg·sin 4,0° = 12000 · 9,82 · 0,0698 = 8,22 kN</p>\n<p>F = 8220 + 2500 = <strong>10,7 kN</strong></p>\n<p>b) P = Fv = 10720 · 15 = <strong>161 kW</strong></p>\n<p>c) W = Fs = 10720 · 2000 = <strong>21,4 MJ</strong></p>\n<p>d) Höjden är h = 2000 · sin 4,0° = 140 m, alltså E<sub>p</sub> = mgh = 12000 · 9,82 · 140 = 16,4 MJ</p>\n<p>Andelen är 16,4/21,4 = <strong>77 %</strong></p>\n<p>Resten, ungefär 5 MJ, går till motståndskrafterna och blir värme. Rörelseenergin ändras inte alls, eftersom farten är konstant hela vägen.</p>"
+ },
+ {
+  "id": "5.100",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "C",
+  "typ": "bestämma kraft från golvet vid studs via rörelsemängdsändring och energiförlust, ur diagram, sökt fart rörelsemängd kraft och energi",
+  "poang": "(1/2/0)",
+  "t": "<p>En golfboll med massan 45 g släpps från vila 2,50 m över golvet och studsar upp till 1,60 m. Kontakten med golvet varar 0,80 ms.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 260 190\"><rect x=\"15\" y=\"165\" width=\"230\" height=\"8\" fill=\"#EDEEF1\"/><line x1=\"15\" y1=\"165\" x2=\"245\" y2=\"165\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"80\" y1=\"50\" x2=\"80\" y2=\"165\" stroke=\"#9A959C\" stroke-width=\"1\" stroke-dasharray=\"4 4\"/><line x1=\"170\" y1=\"95\" x2=\"170\" y2=\"165\" stroke=\"#9A959C\" stroke-width=\"1\" stroke-dasharray=\"4 4\"/><circle cx=\"80\" cy=\"40\" r=\"10\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"170\" cy=\"85\" r=\"10\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"45\" y1=\"40\" x2=\"45\" y2=\"165\" stroke=\"#9A959C\" stroke-width=\"1.2\"/><line x1=\"40\" y1=\"40\" x2=\"50\" y2=\"40\" stroke=\"#9A959C\" stroke-width=\"1.2\"/><line x1=\"40\" y1=\"165\" x2=\"50\" y2=\"165\" stroke=\"#9A959C\" stroke-width=\"1.2\"/><text x=\"36\" y=\"106\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">2,50 m</text><line x1=\"205\" y1=\"85\" x2=\"205\" y2=\"165\" stroke=\"#9A959C\" stroke-width=\"1.2\"/><line x1=\"200\" y1=\"85\" x2=\"210\" y2=\"85\" stroke=\"#9A959C\" stroke-width=\"1.2\"/><line x1=\"200\" y1=\"165\" x2=\"210\" y2=\"165\" stroke=\"#9A959C\" stroke-width=\"1.2\"/><text x=\"214\" y=\"129\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">1,60 m</text></svg></span>\n<ol><li>Vilken fart har bollen strax före och strax efter studsen?</li>\n<li>Hur mycket ändras bollens rörelsemängd under studsen?</li>\n<li>Hur stor är den genomsnittliga kraften från golvet?</li>\n<li>Hur stor andel av energin försvinner i studsen?</li></ol>",
+  "s": "<p>a) Före: v = √(2gh) = √(2 · 9,82 · 2,50) = <strong>7,0 m/s</strong> nedåt</p>\n<p>Efter: v = √(2 · 9,82 · 1,60) = <strong>5,6 m/s</strong> uppåt</p>\n<p>b) Farterna är motriktade, så ändringen är summan av beloppen:</p>\n<p>Δp = m(v<sub>1</sub> + v<sub>2</sub>) = 0,045 · (7,01 + 5,61) = <strong>0,57 kg·m/s</strong></p>\n<p>c) F = Δp/Δt = 0,568/0,00080 = <strong>710 N</strong></p>\n<p>Det är omkring 1600 gånger bollens tyngd, som bara är 0,44 N.</p>\n<p>d) Energin är proportionell mot höjden, så andelen kvar är 1,60/2,50 = 64 %. Alltså försvinner <strong>36 %</strong>, vilket motsvarar mgΔh = 0,045 · 9,82 · 0,90 = 0,40 J.</p>"
+ },
+ {
+  "id": "5.101",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "C",
+  "typ": "koppla kraftjämvikt effekt och impuls vid fallskärmshopp, ur text, sökt kraft effekt energi och kraft vid landning",
+  "poang": "(1/2/0)",
+  "t": "<p>En fallskärmshoppare med utrustning väger 85 kg och faller med konstant fart 6,0 m/s under skärmen.</p>\n<ol><li>Hur stort är luftmotståndet på hopparen? Motivera.</li>\n<li>Vilken effekt omvandlar luftmotståndet till värme?</li>\n<li>Hur mycket energi omvandlas under 40 s? Kontrollera med hjälp av fallhöjden.</li>\n<li>Vid landningen bromsas hopparen på 0,25 s. Hur stor blir den genomsnittliga kraften?</li></ol>",
+  "s": "<p>a) Farten är konstant, alltså är den resulterande kraften noll och luftmotståndet lika stort som tyngdkraften: F = mg = 85 · 9,82 = <strong>835 N</strong></p>\n<p>b) P = Fv = 835 · 6,0 = <strong>5,0 kW</strong></p>\n<p>c) W = Pt = 5010 · 40 = <strong>200 kJ</strong></p>\n<p>Kontroll: fallhöjden är 6,0 · 40 = 240 m och mgh = 85 · 9,82 · 240 = 200 kJ, samma svar.</p>\n<p>d) Δp = mv = 85 · 6,0 = 510 kg·m/s ger F = 510/0,25 = <strong>2,0 kN</strong></p>\n<p>Hela lägesenergin blir värme i luften under fallet. Det är därför farten inte ökar, trots att hopparen faller i fyrtio sekunder.</p>"
+ },
+ {
+  "id": "5.102",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "A",
+  "typ": "jämföra elastisk och fullständigt oelastisk stöt med avseende på energi och impuls, ur text, sökt fart energi och kraft",
+  "poang": "(0/2/1)",
+  "t": "<p>En vagn med massan 2,0 kg rullar med farten 4,0 m/s in i en stillastående vagn med massan 3,0 kg.</p>\n<ol><li>Vagnarna fastnar i varandra. Bestäm den gemensamma farten och hur mycket rörelseenergi som försvinner.</li>\n<li>Stöten är i stället fullständigt elastisk. Visa att farterna efter stöten blir −0,80 m/s och 3,2 m/s, och kontrollera att både rörelsemängd och rörelseenergi bevaras.</li>\n<li>I vilket av fallen blir kraften på den stillastående vagnen störst, om stöten tar lika lång tid? Motivera.</li></ol>",
+  "s": "<p>a) Rörelsemängden bevaras: 2,0 · 4,0 = 5,0·v ger v = <strong>1,6 m/s</strong></p>\n<p>Före: 2,0 · 4,0²/2 = 16 J. Efter: 5,0 · 1,6²/2 = 6,4 J. Förlusten är <strong>9,6 J</strong>, alltså 60 %.</p>\n<p>b) Vid elastisk stöt gäller både p och E<sub>k</sub>. Kontroll av de givna farterna:</p>\n<p>Rörelsemängd: 2,0 · (−0,80) + 3,0 · 3,2 = −1,6 + 9,6 = 8,0 kg·m/s, samma som före.</p>\n<p>Rörelseenergi: 2,0 · 0,80²/2 + 3,0 · 3,2²/2 = 0,64 + 15,36 = 16 J, samma som före.</p>\n<p>Båda storheterna stämmer, alltså är farterna riktiga. Minustecknet betyder att den lätta vagnen studsar tillbaka, vilket den alltid gör mot en tyngre vagn.</p>\n<p>c) Kraften ges av impulsen dividerad med tiden. Den stillastående vagnen får:</p>\n<p>Oelastiskt: Δp = 3,0 · 1,6 = 4,8 kg·m/s. Elastiskt: Δp = 3,0 · 3,2 = 9,6 kg·m/s</p>\n<p>Kraften blir alltså <strong>dubbelt så stor vid den elastiska stöten</strong>. Att ingen energi försvinner betyder inte att stöten är skonsammare, tvärtom.</p>"
+ },
+ {
+  "id": "5.103",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "A",
+  "typ": "kedja fjäderenergi oelastisk stöt och friktionsarbete, ur diagram, sökt fart energiförlust och friktionstal",
+  "poang": "(0/2/1)",
+  "t": "<p>En fjäder med fjäderkonstanten 250 N/m trycks ihop 0,12 m och skjuter i väg en vagn med massan 0,80 kg längs ett vågrätt spår. Vagnen kolliderar med en stillastående vagn på 1,20 kg och de fastnar i varandra. Spåret är friktionsfritt fram till kollisionen.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 320 115\"><rect x=\"12\" y=\"92\" width=\"288\" height=\"8\" fill=\"#EDEEF1\"/><line x1=\"12\" y1=\"92\" x2=\"300\" y2=\"92\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"25\" y1=\"28\" x2=\"25\" y2=\"92\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><line x1=\"25\" y1=\"28\" x2=\"17\" y2=\"36\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><line x1=\"25\" y1=\"38\" x2=\"17\" y2=\"46\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><line x1=\"25\" y1=\"48\" x2=\"17\" y2=\"56\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><line x1=\"25\" y1=\"58\" x2=\"17\" y2=\"66\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><line x1=\"25\" y1=\"68\" x2=\"17\" y2=\"76\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><line x1=\"25\" y1=\"78\" x2=\"17\" y2=\"86\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><polyline points=\"25,64 31,56 38,72 45,56 52,72 59,56 66,64 70,64\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"1.8\" stroke-linejoin=\"round\"/><rect x=\"70\" y=\"46\" width=\"56\" height=\"34\" rx=\"3\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"98\" y=\"68\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9\" font-weight=\"400\" fill=\"#2B2527\">0,80 kg</text><circle cx=\"84\" cy=\"86\" r=\"6\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"114\" cy=\"86\" r=\"6\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><rect x=\"195\" y=\"46\" width=\"64\" height=\"34\" rx=\"3\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"227\" y=\"68\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9\" font-weight=\"400\" fill=\"#2B2527\">1,20 kg</text><circle cx=\"211\" cy=\"86\" r=\"6\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"243\" cy=\"86\" r=\"6\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/></svg></span>\n<ol><li>Vilken fart har den första vagnen strax före kollisionen?</li>\n<li>Vilken gemensam fart får vagnarna, och hur mycket energi försvinner i kollisionen?</li>\n<li>Efter kollisionen rullar vagnarna 1,5 m innan de stannar. Bestäm friktionstalet på den sträckan.</li></ol>",
+  "s": "<p>a) Fjäderns energi är E = kx²/2 = 250 · 0,12²/2 = 1,80 J</p>\n<p>Hela energin blir rörelseenergi: v = √(2E/m) = √(2 · 1,80/0,80) = <strong>2,1 m/s</strong></p>\n<p>b) Rörelsemängden bevaras: 0,80 · 2,121 = 2,00·v ger v = <strong>0,85 m/s</strong></p>\n<p>Rörelseenergin efter är 2,00 · 0,8485²/2 = 0,72 J, alltså försvinner 1,80 − 0,72 = <strong>1,08 J</strong>, vilket är 60 % av fjäderns energi.</p>\n<p>c) Friktionsarbetet tar upp resten av rörelseenergin: μmgs = 0,72 J</p>\n<p>μ = 0,72/(2,00 · 9,82 · 1,5) = <strong>0,024</strong></p>\n<p>Lägg märke till att energin bevaras i första steget men inte i det andra, medan rörelsemängden bevaras i kollisionen men inte under friktionsfasen. Vilken storhet som bevaras beror på vilka krafter som verkar.</p>"
+ },
+ {
+  "id": "5.104",
+  "kap": 5,
+  "omr": "blandat",
+  "niva": "A",
+  "typ": "analysera kast och fångst mellan två personer med rörelsemängd och energi i två steg, ur diagram, sökt fart rörelsemängd och energi",
+  "poang": "(0/1/2)",
+  "t": "<p>Två personer står stilla på skridskor på en isbana. Den ena väger 60 kg och den andra 75 kg. Den lättare personen kastar en boll med massan 2,0 kg vågrätt med farten 6,0 m/s, och den tyngre fångar den. Friktionen mot isen försummas.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 340 140\"><rect x=\"15\" y=\"112\" width=\"310\" height=\"8\" fill=\"#DCE6F2\"/><line x1=\"15\" y1=\"112\" x2=\"325\" y2=\"112\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"square\"/><circle cx=\"70\" cy=\"50\" r=\"9\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"70\" y1=\"59\" x2=\"70\" y2=\"82\" stroke=\"#2B2527\" stroke-width=\"3.4\" stroke-linecap=\"round\"/><line x1=\"70\" y1=\"82\" x2=\"62\" y2=\"108\" stroke=\"#2B2527\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"70\" y1=\"82\" x2=\"78\" y2=\"108\" stroke=\"#2B2527\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"70\" y1=\"64\" x2=\"88\" y2=\"58\" stroke=\"#2B2527\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><line x1=\"58\" y1=\"110\" x2=\"82\" y2=\"110\" stroke=\"#2B2527\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"250\" cy=\"50\" r=\"9\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"250\" y1=\"59\" x2=\"250\" y2=\"82\" stroke=\"#2B2527\" stroke-width=\"3.4\" stroke-linecap=\"round\"/><line x1=\"250\" y1=\"82\" x2=\"242\" y2=\"108\" stroke=\"#2B2527\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"250\" y1=\"82\" x2=\"258\" y2=\"108\" stroke=\"#2B2527\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"250\" y1=\"64\" x2=\"232\" y2=\"58\" stroke=\"#2B2527\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><line x1=\"238\" y1=\"110\" x2=\"262\" y2=\"110\" stroke=\"#2B2527\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"160\" cy=\"52\" r=\"7\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"174\" y1=\"52\" x2=\"198\" y2=\"52\" stroke=\"#2A5D9E\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><polygon points=\"206,52 196,47.4 196,56.6\" fill=\"#2A5D9E\"/><text x=\"160\" y=\"34\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9\" font-weight=\"400\" fill=\"#5C575E\">2,0 kg</text><text x=\"70\" y=\"132\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9\" font-weight=\"400\" fill=\"#2B2527\">60 kg</text><text x=\"250\" y=\"132\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9\" font-weight=\"400\" fill=\"#2B2527\">75 kg</text></svg></span>\n<ol><li>Vilken fart får den kastande personen?</li>\n<li>Vilken fart får den fångande personen med bollen i famnen?</li>\n<li>Visa att systemets totala rörelsemängd är noll både före kastet och efter fångsten.</li>\n<li>Beräkna systemets rörelseenergi efter kastet och efter fångsten. Kommentera skillnaden.</li></ol>",
+  "s": "<p>a) Rörelsemängden bevaras och var noll: 60·v = 2,0 · 6,0 ger v = <strong>0,20 m/s</strong> bakåt</p>\n<p>b) Bollen och den tyngre personen får en gemensam rörelse:</p>\n<p>2,0 · 6,0 = (75 + 2,0)·v ger v = 12/77 = <strong>0,16 m/s</strong></p>\n<p>c) Före kastet står allt stilla, alltså p = 0.</p>\n<p>Efter fångsten: den lätta personen har −60 · 0,20 = −12 kg·m/s och den tunga med bollen +77 · 0,1558 = +12 kg·m/s. Summan är <strong>0 kg·m/s</strong>.</p>\n<p>d) Efter kastet: 60 · 0,20²/2 + 2,0 · 6,0²/2 = 1,2 + 36 = <strong>37 J</strong></p>\n<p>Efter fångsten: 1,2 + 77 · 0,1558²/2 = 1,2 + 0,93 = <strong>2,1 J</strong></p>\n<p>Rörelsemängden är noll hela tiden, men energin ändras i båda stegen. Kastet tillför 37 J från musklerna, och fångsten är en fullständigt oelastisk stöt där 35 J blir värme och deformation. Att en storhet bevaras säger alltså ingenting om den andra.</p>"
+ },
+ {
   "id": "6.55",
   "kap": 6,
   "omr": "tryck",
