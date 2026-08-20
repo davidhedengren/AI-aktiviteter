@@ -327,6 +327,39 @@ table.data th{background:var(--sunken);font-weight:600}
   .vänster,.höger{border:none;border-bottom:1px solid var(--line)}
   .höger{max-height:none}
 }
+/* ── ändra poäng och nivå ── */
+[data-red]{cursor:pointer;transition:box-shadow .13s,background .13s,color .13s}
+.nivå[data-red]:hover,.bniva[data-red]:hover{box-shadow:0 0 0 2px rgba(43,37,39,.14)}
+.poäng[data-red],.bpoäng[data-red]{padding:2px 6px;border-radius:6px;margin-right:-6px}
+.poäng[data-red]:hover,.bpoäng[data-red]:hover{background:var(--sunken);color:var(--ink)}
+[data-red]:focus-visible{outline:2px solid var(--ed);outline-offset:2px}
+.poäng.ändrad,.bpoäng.ändrad{color:var(--ed-dark);font-weight:600}
+.nivå.ändrad,.bniva.ändrad{box-shadow:0 0 0 1.5px var(--ed-ring)}
+
+.poängred{position:fixed;z-index:60;width:258px;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r-m);box-shadow:var(--sh-3);padding:15px 15px 14px;
+  animation:prfram .15s cubic-bezier(.2,.9,.3,1)}
+.poängred[hidden]{display:none}
+@keyframes prfram{from{opacity:0;transform:translateY(-5px) scale(.98)}to{opacity:1;transform:none}}
+.prtopp{display:flex;align-items:center;gap:8px;margin-bottom:13px}
+.prid{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--ink)}
+.prsumma{margin-left:auto;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.prrad{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.pretikett{font-size:12.5px;color:var(--ink-2)}
+.prpunkt{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:8px}
+.prstep{margin-left:auto;display:flex;align-items:center;gap:2px;background:var(--sunken);
+  border-radius:9px;padding:2px}
+.prstep button{width:25px;height:25px;border:none;background:none;border-radius:7px;cursor:pointer;
+  color:var(--ink-2);display:grid;place-items:center;font-size:16px;font-weight:600;line-height:1}
+.prstep button:hover:not(:disabled){background:var(--surface);color:var(--ink);box-shadow:var(--sh-1)}
+.prstep button:disabled{opacity:.3;cursor:default}
+.prv{width:27px;text-align:center;font-family:var(--mono);font-size:13px;font-weight:600;
+  font-variant-numeric:tabular-nums;color:var(--ink)}
+.prnot{margin:12px 0 0;font-size:11.5px;line-height:1.5;color:var(--muted)}
+.prfot{display:flex;gap:6px;margin-top:13px}
+.prfot .knapp{flex:1;justify-content:center}
+.prfot .knapp:disabled{opacity:.4;cursor:default}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 <script src="struktur.js"></script>
@@ -444,6 +477,44 @@ table.data th{background:var(--sunken);font-weight:600}
   </aside>
 </div>
 
+<div class="poängred" id="poängred" role="dialog" aria-label="Ändra poäng och nivå" hidden>
+  <div class="prtopp">
+    <span class="prid" id="prId"></span>
+    <span class="nivå" id="prNiva"></span>
+    <span class="prsumma" id="prSumma"></span>
+  </div>
+  <div class="prrad">
+    <span class="pretikett"><i class="prpunkt" style="background:var(--nE)"></i>E-poäng</span>
+    <span class="prstep">
+      <button type="button" data-minus="E" aria-label="Färre E-poäng">−</button>
+      <span class="prv" data-v="E">0</span>
+      <button type="button" data-plus="E" aria-label="Fler E-poäng">+</button>
+    </span>
+  </div>
+  <div class="prrad">
+    <span class="pretikett"><i class="prpunkt" style="background:var(--nC)"></i>C-poäng</span>
+    <span class="prstep">
+      <button type="button" data-minus="C" aria-label="Färre C-poäng">−</button>
+      <span class="prv" data-v="C">0</span>
+      <button type="button" data-plus="C" aria-label="Fler C-poäng">+</button>
+    </span>
+  </div>
+  <div class="prrad">
+    <span class="pretikett"><i class="prpunkt" style="background:var(--nA)"></i>A-poäng</span>
+    <span class="prstep">
+      <button type="button" data-minus="A" aria-label="Färre A-poäng">−</button>
+      <span class="prv" data-v="A">0</span>
+      <button type="button" data-plus="A" aria-label="Fler A-poäng">+</button>
+    </span>
+  </div>
+  <p class="prnot">Uppgiften får den högsta nivå som har minst lika många poäng som nivåerna under sig.
+    Lika många A-poäng som C-poäng ger alltså A-nivå.</p>
+  <div class="prfot">
+    <button class="knapp tyst liten" id="prÅterställ" type="button">Återställ</button>
+    <button class="knapp primär liten" id="prKlar" type="button">Klar</button>
+  </div>
+</div>
+
 <div id="utskrift"></div>
 
 <script>
@@ -553,9 +624,11 @@ function rita(){
       <div>
         <div class="kortmeta">
           <span class="id">${x.id}</span>
-          <span class="nivå ${x.niva}">${x.niva}</span>
+          <span class="nivå ${x.niva}${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
+            tabindex="0" title="${REDTITEL}">${x.niva}</span>
           <span class="område">${OMR[x.kap][x.omr]}</span>
-          ${state.visaPoäng?`<span class="poäng">${x.poang}</span>`:''}
+          ${state.visaPoäng?`<span class="poäng${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
+            tabindex="0" title="${REDTITEL}">${x.poang}</span>`:''}
         </div>
         <div class="kroppen">${x.t}</div>
         <button class="facitknapp" data-facit="${x.id}">Visa facit</button>
@@ -565,8 +638,9 @@ function rita(){
 
   $$('.kort').forEach(k=>{
     const växla=()=>vippa(k.dataset.id);
-    k.addEventListener('click',e=>{ if(e.target.closest('.facitknapp'))return; växla(); });
-    k.addEventListener('keydown',e=>{ if(e.key===' '||e.key==='Enter'){e.preventDefault();växla();} });
+    k.addEventListener('click',e=>{ if(e.target.closest('.facitknapp,[data-red]'))return; växla(); });
+    k.addEventListener('keydown',e=>{ if(e.target.closest('[data-red]'))return;
+      if(e.key===' '||e.key==='Enter'){e.preventDefault();växla();} });
   });
   $$('.facitknapp').forEach(b=>b.addEventListener('click',e=>{
     e.stopPropagation();
@@ -617,8 +691,10 @@ function ritaBlad(){
       <span class="txt">
         <span class="bmeta">
           <span class="bid">${x.id}</span>
-          <span class="bniva ${x.niva}">${x.niva}</span>
-          ${vp?`<span class="bpoäng">${x.poang}</span>`:''}
+          <span class="bniva ${x.niva}${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
+            tabindex="0" title="${REDTITEL}">${x.niva}</span>
+          ${vp?`<span class="bpoäng${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
+            tabindex="0" title="${REDTITEL}">${x.poang}</span>`:''}
         </span>
         <span class="btext">${x.t.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,90)}…</span>
       </span>
@@ -638,6 +714,99 @@ function ritaBlad(){
   $$('[data-bort]').forEach(k=>k.addEventListener('click',()=>vippa(k.dataset.bort)));
   $('#expPdf').disabled=$('#expWord').disabled=!b.length;
 }
+
+/* ── ändra poäng och nivå ──
+   Läraren klickar på nivåmärket eller poängen och justerar E, C och A var för sig.
+   Nivån räknas om direkt: uppgiften hamnar på den högsta nivå som har minst lika
+   många poäng som nivåerna under sig. Lika många A-poäng som C-poäng ger A-nivå. */
+const REDTITEL='Klicka för att ändra poäng och nivå';
+const PR=$('#poängred');
+let redigerar=null;
+
+function nivåAv(p){
+  if(p.A>0 && p.A>=p.C && p.A>=p.E) return 'A';
+  if(p.C>0 && p.C>=p.E) return 'C';
+  return 'E';
+}
+function poängAv(x){
+  const m=x.poang.match(/(\d+)\/(\d+)\/(\d+)/);
+  return m?{E:+m[1],C:+m[2],A:+m[3]}:{E:0,C:0,A:0};
+}
+function sättPoäng(x,p){
+  if(x.origPoang===undefined){ x.origPoang=x.poang; x.origNiva=x.niva; }
+  x.poang=x.poang.replace(/(\d+)\/(\d+)\/(\d+)/,p.E+'/'+p.C+'/'+p.A);
+  x.niva=nivåAv(p);
+}
+function ändrad(x){ return x.origPoang!==undefined && x.poang!==x.origPoang; }
+
+function ritaPR(){
+  const x=redigerar; if(!x) return;
+  const p=poängAv(x);
+  $('#prId').textContent=x.id;
+  const nv=$('#prNiva'); nv.className='nivå '+x.niva; nv.textContent=x.niva;
+  $('#prSumma').textContent=(p.E+p.C+p.A)+' p totalt';
+  ['E','C','A'].forEach(n=>{
+    PR.querySelector('[data-v="'+n+'"]').textContent=p[n];
+    PR.querySelector('[data-minus="'+n+'"]').disabled=p[n]<=0;
+    PR.querySelector('[data-plus="'+n+'"]').disabled=p[n]>=9;
+  });
+  $('#prÅterställ').disabled=!ändrad(x);
+}
+/* uppdaterar märkena på plats så att kortet inte ritas om under fingret */
+function patchaMärken(x){
+  document.querySelectorAll('.kort[data-id="'+x.id+'"]').forEach(k=>{
+    const n=k.querySelector('.nivå');
+    if(n){ n.className='nivå '+x.niva+(ändrad(x)?' ändrad':''); n.textContent=x.niva; }
+    const p=k.querySelector('.poäng');
+    if(p){ p.textContent=x.poang; p.classList.toggle('ändrad',ändrad(x)); }
+  });
+}
+let nivåFörst=null;
+function öppnaPoäng(id,ankare){
+  const x=BANK.find(u=>u.id===id); if(!x) return;
+  redigerar=x; nivåFörst=x.niva;
+  PR.hidden=false;
+  ritaPR();
+  const r=ankare.getBoundingClientRect(), b=PR.getBoundingClientRect();
+  let v=Math.min(Math.max(12,r.left-12),innerWidth-b.width-12);
+  let t=r.bottom+8;
+  if(t+b.height>innerHeight-12) t=Math.max(12,r.top-b.height-8);
+  PR.style.left=v+'px'; PR.style.top=t+'px';
+}
+function stängPoäng(){
+  if(!redigerar) return;
+  const bytteNivå=redigerar.niva!==nivåFörst;
+  redigerar=null; PR.hidden=true;
+  if(bytteNivå) rita();
+  ritaBlad();
+}
+
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-red]');
+  if(t) öppnaPoäng(t.dataset.red,t);
+  else if(redigerar && !e.target.closest('#poängred')) stängPoäng();
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&redigerar){ stängPoäng(); return; }
+  if(e.key!=='Enter'&&e.key!==' ') return;
+  const t=e.target.closest&&e.target.closest('[data-red]');
+  if(t){ e.preventDefault(); öppnaPoäng(t.dataset.red,t); }
+});
+PR.addEventListener('click',e=>{
+  e.stopPropagation();
+  const b=e.target.closest('button'); if(!b||!redigerar) return;
+  const x=redigerar;
+  if(b.id==='prKlar'){ stängPoäng(); return; }
+  if(b.id==='prÅterställ'){
+    if(x.origPoang!==undefined){ x.poang=x.origPoang; x.niva=x.origNiva; }
+  }else{
+    const p=poängAv(x);
+    if(b.dataset.plus)  p[b.dataset.plus]=Math.min(9,p[b.dataset.plus]+1);
+    if(b.dataset.minus) p[b.dataset.minus]=Math.max(0,p[b.dataset.minus]-1);
+    sättPoäng(x,p);
+  }
+  ritaPR(); patchaMärken(x); ritaBlad();
+});
 
 /* ── knappar ── */
 $('#läggAlla').addEventListener('click',()=>{
