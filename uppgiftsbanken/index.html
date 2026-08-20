@@ -55,6 +55,22 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .knapp.tyst[aria-pressed="true"]:hover{background:var(--ed-tint)}
 .knapp.liten{padding:6px 10px;font-size:12px;gap:5px}
 .knapp.liten svg{width:12.5px;height:12.5px}
+
+/* ── slumpa-popover ── */
+.slumpwrap{position:relative}
+.slumpwrap .knapp[aria-expanded="true"]{background:var(--ed-tint);color:var(--ed-dark)}
+.slumppanel{position:absolute;top:calc(100% + 8px);right:0;width:220px;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r-l);box-shadow:var(--sh-3);padding:14px;z-index:30;
+  display:none}
+.slumppanel.öppen{display:block}
+.slumppanel label{display:block;font-size:11.5px;font-weight:600;color:var(--ink-2);margin-bottom:8px}
+.slumprad{display:flex;gap:8px}
+.slumprad input{width:64px;border:1px solid transparent;background:var(--sunken);border-radius:9px;
+  padding:9px 10px;font-size:14px;font-weight:600;color:var(--ink);text-align:center;
+  font-variant-numeric:tabular-nums;transition:background .15s,border-color .15s,box-shadow .15s}
+.slumprad input:hover{background:#E7E7EB}
+.slumprad input:focus{outline:none;background:var(--surface);border-color:var(--ed);box-shadow:0 0 0 3.5px var(--ed-ring)}
+.slumprad .knapp{flex:1;justify-content:center;padding:9px 10px}
 .knapp:disabled{opacity:.4;cursor:not-allowed;transform:none}
 .knapp:focus-visible,input:focus-visible,.omrad:focus-visible,.kort:focus-visible{
   outline:2px solid var(--ed);outline-offset:2px}
@@ -140,12 +156,12 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .kort.vald .bock{background:var(--ed);border-color:var(--ed)}
 .kort.vald .bock svg{opacity:1;transform:scale(1)}
 .kortmeta{display:flex;align-items:center;gap:9px;margin-bottom:7px;flex-wrap:wrap}
-.id{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--muted)}
+.id{font-family:var(--ui);font-size:11.5px;font-weight:600;color:var(--muted);letter-spacing:-.005em}
 .nivå{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.08em;padding:2.5px 7px;border-radius:5px}
 .nivå.E{background:var(--nE-bg);color:var(--nE)} .nivå.C{background:var(--nC-bg);color:var(--nC)}
 .nivå.A{background:var(--nA-bg);color:var(--nA)}
 .område{font-size:11.5px;color:var(--muted)}
-.poäng{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.poäng{margin-left:auto;font-family:var(--ui);font-size:11.5px;color:var(--muted);font-weight:500}
 .kroppen{font-family:var(--las);font-size:14.5px;line-height:1.62;color:var(--ink)}
 .kroppen p{margin:0 0 8px;max-width:66ch}
 .kroppen p:last-child{margin-bottom:0}
@@ -327,10 +343,19 @@ table.data th{background:var(--sunken);font-weight:600}
     </div>
   </div>
   <div class="fyll"></div>
-  <button class="knapp tyst" id="slumpa">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
-    Slumpa ett prov
-  </button>
+  <div class="slumpwrap">
+    <button class="knapp tyst" id="slumpaKnapp" type="button" aria-expanded="false" aria-controls="slumppanel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+      Slumpa ett övningsblad
+    </button>
+    <div class="slumppanel" id="slumppanel">
+      <label for="slumpaAntal">Antal uppgifter</label>
+      <div class="slumprad">
+        <input type="number" id="slumpaAntal" min="1" max="40" value="12">
+        <button class="knapp primär" id="slumpaKör" type="button">Slumpa</button>
+      </div>
+    </div>
+  </div>
   <button class="knapp tyst" id="rensaAllt">Börja om</button>
 </header>
 
@@ -361,10 +386,10 @@ table.data th{background:var(--sunken);font-weight:600}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
           <span id="sorteraLabel">Sortera: ID</span>
         </button>
-        <label class="kryss" for="döljPoäng">
-          <input type="checkbox" id="döljPoäng">
+        <label class="kryss" for="visaPoäng">
+          <input type="checkbox" id="visaPoäng">
           <span class="ruta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>
-          Visa inte poäng, endast nivå
+          Visa poäng
         </label>
       </div>
     </div>
@@ -449,7 +474,7 @@ function LOS(html){
     return `<p class="komm">${b}</p>`;
   }).join('');
 }
-const state={omr:new Set(),nivåer:new Set(['E','C','A']),sök:'',blad:[],döljPoäng:false,sorteraNivå:false};
+const state={omr:new Set(),nivåer:new Set(['E','C','A']),sök:'',blad:[],visaPoäng:false,sorteraNivå:false};
 const NIVÅORDNING={E:0,C:1,A:2};
 const nyckel=x=>x.kap+':'+x.omr;
 
@@ -492,7 +517,7 @@ $('#sorteraKnapp').addEventListener('click',()=>{
   $('#sorteraLabel').textContent=state.sorteraNivå?'Sortera: Nivå':'Sortera: ID';
   rita();
 });
-$('#döljPoäng').addEventListener('change',e=>{state.döljPoäng=e.target.checked;rita();ritaBlad();});
+$('#visaPoäng').addEventListener('change',e=>{state.visaPoäng=e.target.checked;rita();ritaBlad();});
 
 /* ── urvalet ── */
 function urval(){
@@ -530,7 +555,7 @@ function rita(){
           <span class="id">${x.id}</span>
           <span class="nivå ${x.niva}">${x.niva}</span>
           <span class="område">${OMR[x.kap][x.omr]}</span>
-          ${state.döljPoäng?'':`<span class="poäng">${x.poang}</span>`}
+          ${state.visaPoäng?`<span class="poäng">${x.poang}</span>`:''}
         </div>
         <div class="kroppen">${x.t}</div>
         <button class="facitknapp" data-facit="${x.id}">Visa facit</button>
@@ -561,20 +586,22 @@ function vippa(id){
 
 /* ── övningsbladet ── */
 function ritaBlad(){
-  const b=state.blad, dp=state.döljPoäng;
+  const b=state.blad, vp=state.visaPoäng;
   const p={E:0,C:0,A:0}, antalN={E:0,C:0,A:0};
   b.forEach(x=>{const m=x.poang.match(/(\d+)\/(\d+)\/(\d+)/);p.E+=+m[1];p.C+=+m[2];p.A+=+m[3];antalN[x.niva]++;});
   const tot=p.E+p.C+p.A;
   const antalTot=b.length;
-  $('#summa').style.display=dp?'none':'';
+  $('#summa').style.display=vp?'':'none';
   $('#summa').innerHTML=tot+'<small>p</small>';
   $('#bAntal').textContent=b.length?b.length+(b.length===1?' uppgift':' uppgifter'):'inga uppgifter';
-  document.querySelector('.stapel').style.display=dp?'none':'';
+  document.querySelector('.stapel').style.display='';
   ['E','C','A'].forEach(n=>{
-    $('#st'+n).style.width=(tot?p[n]/tot*100:0)+'%';
-    $('#p'+n).textContent=dp?antalN[n]:p[n];
+    const bas=vp?tot:antalTot;
+    const värde=vp?p[n]:antalN[n];
+    $('#st'+n).style.width=(bas?värde/bas*100:0)+'%';
+    $('#p'+n).textContent=vp?p[n]:antalN[n];
   });
-  $('#gränser').style.display=dp?'none':'';
+  $('#gränser').style.display=vp?'':'none';
   $('#gränser').innerHTML=tot
     ? `<span class="gränsrubrik">Förslag på gränser</span>
        <div class="gränsrad">
@@ -591,7 +618,7 @@ function ritaBlad(){
         <span class="bmeta">
           <span class="bid">${x.id}</span>
           <span class="bniva ${x.niva}">${x.niva}</span>
-          ${dp?'':`<span class="bpoäng">${x.poang}</span>`}
+          ${vp?`<span class="bpoäng">${x.poang}</span>`:''}
         </span>
         <span class="btext">${x.t.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,90)}…</span>
       </span>
@@ -620,42 +647,71 @@ $('#läggAlla').addEventListener('click',()=>{
 });
 $('#rensaAllt').addEventListener('click',()=>{
   state.blad=[]; state.omr.clear(); state.sök=''; state.nivåer=new Set(['E','C','A']);
-  state.sorteraNivå=false; state.döljPoäng=false;
+  state.sorteraNivå=false; state.visaPoäng=false;
   $('#sökfält').value='';
   $('#sorteraKnapp').setAttribute('aria-pressed','false');
   $('#sorteraLabel').textContent='Sortera: ID';
-  $('#döljPoäng').checked=false;
+  $('#visaPoäng').checked=false;
+  $('#slumpaAntal').value=12;
   $$('.omrad').forEach(b=>b.setAttribute('aria-pressed','false'));
   $$('.nivåfilter button').forEach(b=>b.setAttribute('aria-pressed','true'));
   rita(); ritaBlad();
 });
-$('#slumpa').addEventListener('click',()=>{
+$('#slumpaKnapp').addEventListener('click',e=>{
+  e.stopPropagation();
+  const öppen=$('#slumppanel').classList.toggle('öppen');
+  $('#slumpaKnapp').setAttribute('aria-expanded',öppen);
+  if(öppen) $('#slumpaAntal').select();
+});
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.slumpwrap')){
+    $('#slumppanel').classList.remove('öppen');
+    $('#slumpaKnapp').setAttribute('aria-expanded','false');
+  }
+});
+function körSlumpa(){
   const pool=urval(), fam=new Set(), ut=[];
-  [['E',5],['C',4],['A',3]].forEach(([n,antal])=>{
-    const p=pool.filter(x=>x.niva===n).sort(()=>Math.random()-.5);
+  const n=Math.max(1,Math.min(40,parseInt($('#slumpaAntal').value,10)||12));
+  $('#slumpaAntal').value=n;
+  const vikt={E:5,C:4,A:3}, viktSum=12;
+  const mål={}, rest=[];
+  ['E','C','A'].forEach(k=>{
+    const exakt=n*vikt[k]/viktSum;
+    mål[k]=Math.floor(exakt);
+    rest.push([k,exakt-mål[k]]);
+  });
+  let kvar=n-(mål.E+mål.C+mål.A);
+  rest.sort((a,b)=>b[1]-a[1]);
+  for(let i=0;i<kvar;i++) mål[rest[i%3][0]]++;
+  ['E','C','A'].forEach(nv=>{
+    const p=pool.filter(x=>x.niva===nv).sort(()=>Math.random()-.5);
     let c=0;
-    for(const x of p){ if(c>=antal)break; if(fam.has(x.familj))continue; fam.add(x.familj); ut.push(x); c++; }
+    for(const x of p){ if(c>=mål[nv])break; if(fam.has(x.familj))continue; fam.add(x.familj); ut.push(x); c++; }
   });
   state.blad=ut; rita(); ritaBlad();
-});
+  $('#slumppanel').classList.remove('öppen');
+  $('#slumpaKnapp').setAttribute('aria-expanded','false');
+}
+$('#slumpaKör').addEventListener('click',körSlumpa);
+$('#slumpaAntal').addEventListener('keydown',e=>{ if(e.key==='Enter'){e.preventDefault();körSlumpa();} });
 
 /* ── export ── */
 function bladHTML({facit}){
   const t=$('#bTitel').value||'Övningsblad', kl=$('#bKlass').value, da=$('#bDatum').value;
-  const dp=state.döljPoäng;
+  const vp=state.visaPoäng;
   const p={E:0,C:0,A:0}, antalN={E:0,C:0,A:0};
   state.blad.forEach(x=>{const m=x.poang.match(/(\d+)\/(\d+)\/(\d+)/);p.E+=+m[1];p.C+=+m[2];p.A+=+m[3];antalN[x.niva]++;});
   const tot=p.E+p.C+p.A;
   const rad=[kl,da].filter(Boolean).join(' · ');
-  const sammanfattning=dp
-    ? `${state.blad.length} uppgifter (${antalN.E} E / ${antalN.C} C / ${antalN.A} A)`
-    : `Max ${tot} poäng (${p.E}/${p.C}/${p.A}) · ${state.blad.length} uppgifter`;
+  const sammanfattning=vp
+    ? `Max ${tot} poäng (${p.E}/${p.C}/${p.A}) · ${state.blad.length} uppgifter`
+    : `${state.blad.length} uppgifter (${antalN.E} E / ${antalN.C} C / ${antalN.A} A)`;
   let h=`<div class="ph"><img src="${LOGO}" alt=""><div><h1>${t}</h1>
     <div class="pm">${rad?rad+' · ':''}${sammanfattning}</div></div></div>`;
   state.blad.forEach((x,i)=>{
-    const märke=dp
-      ? `<span class="nivåmärke ${x.niva}">${x.niva}</span>`
-      : `<span class="pp">${x.poang}</span>`;
+    const märke=vp
+      ? `<span class="pp">${x.poang}</span>`
+      : `<span class="nivåmärke ${x.niva}">${x.niva}</span>`;
     h+=`<div class="pu"><div class="pn">${i+1}.</div><div>${märke}${x.t}</div></div>`;
   });
   if(facit){
