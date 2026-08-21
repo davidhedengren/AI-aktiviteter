@@ -839,22 +839,69 @@ function körSlumpa(){
   const pool=urval(), fam=new Set(), ut=[];
   const n=Math.max(1,Math.min(40,parseInt($('#slumpaAntal').value,10)||12));
   $('#slumpaAntal').value=n;
-  const vikt={E:5,C:4,A:3}, viktSum=12;
-  const mål={}, rest=[];
-  ['E','C','A'].forEach(k=>{
-    const exakt=n*vikt[k]/viktSum;
-    mål[k]=Math.floor(exakt);
-    rest.push([k,exakt-mål[k]]);
-  });
-  let kvar=n-(mål.E+mål.C+mål.A);
-  rest.sort((a,b)=>b[1]-a[1]);
-  for(let i=0;i<kvar;i++) mål[rest[i%3][0]]++;
-  ['E','C','A'].forEach(nv=>{
-    const p=pool.filter(x=>x.niva===nv).sort(()=>Math.random()-.5);
+
+  // De nivåer som faktiskt är valda i nivåfiltret
+  const valdaNivåer=['E','C','A'].filter(nv=>state.nivåer.has(nv));
+
+  // Inga nivåer valda
+  if(!valdaNivåer.length){
+    state.blad=[];
+    rita();
+    ritaBlad();
+    $('#slumppanel').classList.remove('öppen');
+    $('#slumpaKnapp').setAttribute('aria-expanded','false');
+    return;
+  }
+
+  const mål={E:0,C:0,A:0};
+
+  // Om bara en nivå är vald ska ALLA uppgifter tas från den nivån
+  if(valdaNivåer.length===1){
+    mål[valdaNivåer[0]]=n;
+  }else{
+    // Fördelning mellan de nivåer som faktiskt är valda.
+    // De ursprungliga vikterna är E=5, C=4, A=3.
+    const vikt={E:5,C:4,A:3};
+    const viktSum=valdaNivåer.reduce((sum,nv)=>sum+vikt[nv],0);
+    const rest=[];
+
+    valdaNivåer.forEach(nv=>{
+      const exakt=n*vikt[nv]/viktSum;
+      mål[nv]=Math.floor(exakt);
+      rest.push([nv,exakt-mål[nv]]);
+    });
+
+    let kvar=n-valdaNivåer.reduce((sum,nv)=>sum+mål[nv],0);
+
+    rest.sort((a,b)=>b[1]-a[1]);
+
+    for(let i=0;i<kvar;i++){
+      mål[rest[i%rest.length][0]]++;
+    }
+  }
+
+  // Slumpa uppgifter inom varje vald nivå
+  valdaNivåer.forEach(nv=>{
+    const p=pool
+      .filter(x=>x.niva===nv)
+      .sort(()=>Math.random()-.5);
+
     let c=0;
-    for(const x of p){ if(c>=mål[nv])break; if(fam.has(x.familj))continue; fam.add(x.familj); ut.push(x); c++; }
+
+    for(const x of p){
+      if(c>=mål[nv]) break;
+      if(fam.has(x.familj)) continue;
+
+      fam.add(x.familj);
+      ut.push(x);
+      c++;
+    }
   });
-  state.blad=ut; rita(); ritaBlad();
+
+  state.blad=ut;
+  rita();
+  ritaBlad();
+
   $('#slumppanel').classList.remove('öppen');
   $('#slumpaKnapp').setAttribute('aria-expanded','false');
 }
