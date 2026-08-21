@@ -8,7 +8,7 @@ window.BANK2 = [
   "niva": "E",
   "typ": "identifiera hastighets- och accelerationsriktning i en cirkelbana, ur figur, sökt riktningar",
   "poang": "(2/0/0)",
-  "t": "<p>En vagn rör sig med konstant fart längs den cirkulära banan i pilens riktning.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Riktningsanalys i cirkelbana\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><circle cx=\"220\" cy=\"120\" r=\"78\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"3\"/><path d=\"M286 77 Q310 91 307 116\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"3\" marker-end=\"url(#arrb)\"/><circle cx=\"287\" cy=\"78\" r=\"8\" fill=\"#E8B04F\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"287\" y1=\"78\" x2=\"323\" y2=\"135\" stroke=\"#B43123\" stroke-width=\"2.5\" marker-end=\"url(#arr)\"/><text x=\"328\" y=\"144\" font-size=\"13\">A</text><line x1=\"287\" y1=\"78\" x2=\"239\" y2=\"103\" stroke=\"#B43123\" stroke-width=\"2.5\" marker-end=\"url(#arr)\"/><text x=\"230\" y=\"111\" font-size=\"13\">B</text><line x1=\"287\" y1=\"78\" x2=\"336\" y2=\"42\" stroke=\"#B43123\" stroke-width=\"2.5\" marker-end=\"url(#arr)\"/><text x=\"342\" y=\"41\" font-size=\"13\">C</text><text x=\"76\" y=\"36\" font-size=\"13\">Rörelseriktning</text></svg></span><p>Vilken av pilarna A–C visar <strong>hastighetens</strong> riktning och vilken visar <strong>accelerationens</strong> riktning i den markerade punkten?</p>",
+  "t": "<p>En vagn rör sig med konstant fart längs den cirkulära banan i pilens riktning.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Cirkulär bana med tre riktningspilar\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"215\" cy=\"116\" r=\"77\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><circle cx=\"292\" cy=\"116\" r=\"7\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"292\" y1=\"116\" x2=\"292.0\" y2=\"65.0\" stroke=\"#2A5D9E\" stroke-width=\"2.3\" stroke-linecap=\"round\"/><polygon points=\"292.0,55.0 296.6,65.0 287.4,65.0\" fill=\"#2A5D9E\"/><text x=\"306\" y=\"62\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">A</text><line x1=\"292\" y1=\"116\" x2=\"252.0\" y2=\"116.0\" stroke=\"#B43123\" stroke-width=\"2.3\" stroke-linecap=\"round\"/><polygon points=\"242.0,116.0 252.0,111.4 252.0,120.6\" fill=\"#B43123\"/><text x=\"257\" y=\"105\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#B43123\">B</text><line x1=\"292\" y1=\"116\" x2=\"323.2928281782741\" y2=\"88.00115373522843\" stroke=\"#9A959C\" stroke-width=\"2.0\" stroke-linecap=\"round\"/><polygon points=\"330.0,82.0 326.1,91.1 320.5,84.9\" fill=\"#9A959C\"/><text x=\"340\" y=\"79\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#9A959C\">C</text><line x1=\"175\" y1=\"47\" x2=\"197.27012048319003\" y2=\"41.06130120448266\" stroke=\"#2A5D9E\" stroke-width=\"1.8\" stroke-linecap=\"round\"/><polygon points=\"205.0,39.0 198.2,44.6 196.3,37.5\" fill=\"#2A5D9E\"/><text x=\"215\" y=\"216\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">rörelseriktning</text></svg></span><p>Vilken av pilarna A–C visar <strong>hastighetens</strong> riktning och vilken visar <strong>accelerationens</strong> riktning i den markerade punkten?</p>",
   "s": "<p>Hastigheten är tangent till banan: <strong>A</strong>.</p><p>Accelerationen är riktad mot cirkelns centrum: <strong>B</strong>.</p>"
 },
 {
@@ -18,7 +18,7 @@ window.BANK2 = [
   "niva": "E",
   "typ": "beräkna centripetalacceleration från fart och radie, ur text och figur, sökt acceleration",
   "poang": "(2/0/0)",
-  "t": "<p>En gokart kör med farten 14 m/s genom en kurva med radien 28 m.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Gokart på rundad bana\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><path d=\"M70 180 Q210 35 430 155\" fill=\"none\" stroke=\"#777\" stroke-width=\"10\"/><circle cx=\"300\" cy=\"78\" r=\"11\" fill=\"#B43123\"/><line x1=\"300\" y1=\"78\" x2=\"245\" y2=\"111\" stroke=\"#B43123\" stroke-width=\"2.5\" marker-end=\"url(#arr)\"/><text x=\"318\" y=\"62\" font-size=\"13\">14 m/s</text><line x1=\"245\" y1=\"111\" x2=\"300\" y2=\"78\" stroke=\"#9A959C\" stroke-width=\"1.4\"/><text x=\"245\" y=\"128\" font-size=\"13\">r = 28 m</text></svg></span><p>Bestäm centripetalaccelerationen.</p>",
+  "t": "<p>En gokart kör med farten 14 m/s genom en kurva med radien 28 m.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Gokart i cirkulär kurva med radie och hastighet\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M40 190 Q150 48 305 48 Q405 48 440 125\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"34\" stroke-linecap=\"round\"/><path d=\"M40 190 Q150 48 305 48 Q405 48 440 125\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" stroke-dasharray=\"12 10\"/><g transform=\"translate(305 48) rotate(4) scale(0.72)\"><path d=\"M-35 8 L-27 -10 Q-22 -19 -9 -21 L13 -21 Q25 -19 30 -9 L36 8 Z\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M-18 -10 Q-12 -16 -5 -16 L12 -16 Q19 -14 23 -10 Z\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"1.4\"/><circle cx=\"-23\" cy=\"9\" r=\"7\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"23\" cy=\"9\" r=\"7\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"-23\" cy=\"9\" r=\"2.5\" fill=\"#2B2527\"/><circle cx=\"23\" cy=\"9\" r=\"2.5\" fill=\"#2B2527\"/></g><line x1=\"305\" y1=\"48\" x2=\"205\" y2=\"106\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\" stroke-dasharray=\"4 4\"/><text x=\"196\" y=\"113\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"10\" font-weight=\"400\" fill=\"#5C575E\">centrum</text><line x1=\"205\" y1=\"106\" x2=\"305\" y2=\"48\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"205.0,106.0 212.6,105.1 209.6,99.9\" fill=\"#5C575E\"/><polygon points=\"305.0,48.0 300.4,54.1 297.4,48.9\" fill=\"#5C575E\"/><text x=\"248\" y=\"90\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">r = 28 m</text><line x1=\"305\" y1=\"48\" x2=\"342.0\" y2=\"48.0\" stroke=\"#2A5D9E\" stroke-width=\"2.4\" stroke-linecap=\"round\"/><polygon points=\"351.0,48.0 342.0,52.1 342.0,43.9\" fill=\"#2A5D9E\"/><text x=\"365\" y=\"42\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">v = 14 m/s</text></svg></span><p>Bestäm centripetalaccelerationen.</p>",
   "s": "<p>a<sub>c</sub> = v²/r = 14²/28 = <strong>7.0 m/s²</strong>.</p>"
 },
 {
@@ -28,7 +28,7 @@ window.BANK2 = [
   "niva": "E",
   "typ": "bestäm tangentiell fart från radie och periodtid, ur figur, sökt fart",
   "poang": "(2/0/0)",
-  "t": "<p>En observationsplattform roterar ett varv på 11 s. En person står 5,5 m från rotationsaxeln.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Roterande observationsplattform\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><circle cx=\"245\" cy=\"120\" r=\"82\" fill=\"#F4F5F7\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"245\" cy=\"120\" r=\"5\" fill=\"#2B2527\"/><line x1=\"245\" y1=\"120\" x2=\"327\" y2=\"120\" stroke=\"#9A959C\" stroke-width=\"1.5\"/><circle cx=\"327\" cy=\"120\" r=\"10\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><path d=\"M330 84 A42 42 0 0 1 360 112\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2.5\" marker-end=\"url(#arrb)\"/><text x=\"280\" y=\"145\" font-size=\"13\">5,5 m</text><text x=\"73\" y=\"52\" font-size=\"13\">1 varv på 11 s</text></svg></span><p>Vilken fart har personen?</p>",
+  "t": "<p>En observationsplattform roterar ett varv på 11 s. En person står 5,5 m från rotationsaxeln.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Roterande observationsplattform med person\" xmlns=\"http://www.w3.org/2000/svg\"><ellipse cx=\"230\" cy=\"122\" rx=\"135\" ry=\"74\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><circle cx=\"230\" cy=\"122\" r=\"6\" fill=\"#2B2527\"/><g transform=\"translate(350 120) scale(0.55)\"><circle cx=\"0\" cy=\"-30\" r=\"8\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"0\" y1=\"-22\" x2=\"0\" y2=\"12\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"-10\" x2=\"-15\" y2=\"2\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"-10\" x2=\"15\" y2=\"2\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"12\" x2=\"-12\" y2=\"34\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"12\" x2=\"12\" y2=\"34\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/></g><line x1=\"230\" y1=\"122\" x2=\"350\" y2=\"122\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><line x1=\"230\" y1=\"163\" x2=\"350\" y2=\"163\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"230.0,163.0 237.0,166.0 237.0,160.0\" fill=\"#5C575E\"/><polygon points=\"350.0,163.0 343.0,166.0 343.0,160.0\" fill=\"#5C575E\"/><text x=\"290\" y=\"181\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">5,5 m</text><path d=\"M126 105 A110 59 0 0 1 206 66\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2.3\"/><line x1=\"195\" y1=\"68\" x2=\"208.1412914686202\" y2=\"65.49689686311996\" stroke=\"#2A5D9E\" stroke-width=\"2.3\" stroke-linecap=\"round\"/><polygon points=\"216.0,64.0 208.8,69.1 207.5,61.9\" fill=\"#2A5D9E\"/><text x=\"122\" y=\"68\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"400\" fill=\"#5C575E\">T = 11 s</text></svg></span><p>Vilken fart har personen?</p>",
   "s": "<p>På ett varv färdas personen sträckan 2πr.</p><p>v = 2πr/T = 2π·5,5/11 = <strong>3.14 m/s</strong>.</p>"
 },
 {
@@ -38,7 +38,7 @@ window.BANK2 = [
   "niva": "E",
   "typ": "beräkna resultantkraft vid cirkelrörelse från massa fart och radie, ur figur, sökt kraft",
   "poang": "(2/0/0)",
-  "t": "<p>En träningsboll med massan 0,18 kg rör sig med 7,2 m/s i en cirkel med radien 0,60 m.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Träningsboll i horisontell cirkel\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><circle cx=\"255\" cy=\"120\" r=\"70\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/><line x1=\"255\" y1=\"120\" x2=\"325\" y2=\"120\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"325\" cy=\"120\" r=\"10\" fill=\"#E8B04F\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"325\" y1=\"120\" x2=\"278\" y2=\"120\" stroke=\"#B43123\" stroke-width=\"3\" marker-end=\"url(#arr)\"/><text x=\"292\" y=\"106\" font-size=\"12\">F?</text><path d=\"M324 87 Q345 101 348 121\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2.5\" marker-end=\"url(#arrb)\"/><text x=\"342\" y=\"82\" font-size=\"12\">7,2 m/s</text><text x=\"264\" y=\"144\" font-size=\"12\">0,60 m</text></svg></span><p>Hur stor resultantkraft måste verka på bollen?</p>",
+  "t": "<p>En träningsboll med massan 0,18 kg rör sig med 7,2 m/s i en cirkel med radien 0,60 m.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Träningsboll i cirkel med resultantkraft\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"226\" cy=\"116\" r=\"72\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.4\" stroke-dasharray=\"6 6\"/><circle cx=\"226\" cy=\"116\" r=\"5\" fill=\"#2B2527\"/><line x1=\"226\" y1=\"116\" x2=\"294\" y2=\"92\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><circle cx=\"294\" cy=\"92\" r=\"16\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"294\" y1=\"92\" x2=\"259.39793423488436\" y2=\"104.58256936913295\" stroke=\"#B43123\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><polygon points=\"250.0,108.0 257.8,100.3 261.0,108.9\" fill=\"#B43123\"/><text x=\"269\" y=\"76\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#B43123\">Fres</text><line x1=\"294\" y1=\"92\" x2=\"307.04331437552855\" y2=\"54.50047117035543\" stroke=\"#2A5D9E\" stroke-width=\"2.3\" stroke-linecap=\"round\"/><polygon points=\"310.0,46.0 311.0,55.9 303.1,53.1\" fill=\"#2A5D9E\"/><text x=\"341\" y=\"49\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">7,2 m/s</text><text x=\"264\" y=\"132\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">r = 0,60 m</text></svg></span><p>Hur stor resultantkraft måste verka på bollen?</p>",
   "s": "<p>F = mv²/r = 0,18·7,2²/0,60 = <strong>15.6 N</strong>, riktad mot centrum.</p>"
 },
 {
@@ -48,7 +48,7 @@ window.BANK2 = [
   "niva": "E",
   "typ": "jämföra centripetalaccelerationer proportionellt utan numeriska värden, ur figur, sökt förhållande",
   "poang": "(2/0/0)",
-  "t": "<p>Två små vagnar A och B kör med samma fart. Banas radie är r för A och 2r för B.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Jämförelse av två cirkelbanor\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><circle cx=\"145\" cy=\"122\" r=\"55\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"3\"/><circle cx=\"355\" cy=\"122\" r=\"85\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"3\"/><circle cx=\"200\" cy=\"122\" r=\"7\" fill=\"#2A5D9E\"/><circle cx=\"440\" cy=\"122\" r=\"7\" fill=\"#B43123\"/><text x=\"145\" y=\"205\" text-anchor=\"middle\" font-size=\"13\">A: r</text><text x=\"355\" y=\"220\" text-anchor=\"middle\" font-size=\"13\">B: 2r</text><text x=\"250\" y=\"34\" text-anchor=\"middle\" font-size=\"13\">samma fart v</text></svg></span><p>Hur förhåller sig deras centripetalaccelerationer till varandra?</p>",
+  "t": "<p>Två små vagnar A och B kör med samma fart. Banas radie är r för A och 2r för B.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Två cirkelbanor med radier r och 2r\" xmlns=\"http://www.w3.org/2000/svg\"><text x=\"118\" y=\"32\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"13\" font-weight=\"600\" fill=\"#2B2527\">A</text><text x=\"352\" y=\"32\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"13\" font-weight=\"600\" fill=\"#2B2527\">B</text><circle cx=\"118\" cy=\"125\" r=\"58\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"118\" cy=\"125\" r=\"4\" fill=\"#2B2527\"/><circle cx=\"352\" cy=\"125\" r=\"88\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"352\" cy=\"125\" r=\"4\" fill=\"#2B2527\"/><circle cx=\"176\" cy=\"125\" r=\"7\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"440\" cy=\"125\" r=\"7\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"118\" y1=\"125\" x2=\"176\" y2=\"125\" stroke=\"#9A959C\" stroke-width=\"1.1\" stroke-linecap=\"butt\"/><line x1=\"352\" y1=\"125\" x2=\"440\" y2=\"125\" stroke=\"#9A959C\" stroke-width=\"1.1\" stroke-linecap=\"butt\"/><text x=\"147\" y=\"143\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#5C575E\">r</text><text x=\"396\" y=\"143\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#5C575E\">2r</text><line x1=\"176\" y1=\"125\" x2=\"176.0\" y2=\"86.0\" stroke=\"#2A5D9E\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><polygon points=\"176.0,78.0 179.7,86.0 172.3,86.0\" fill=\"#2A5D9E\"/><text x=\"189\" y=\"89\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">v</text><line x1=\"440\" y1=\"125\" x2=\"440.0\" y2=\"86.0\" stroke=\"#2A5D9E\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><polygon points=\"440.0,78.0 443.7,86.0 436.3,86.0\" fill=\"#2A5D9E\"/><text x=\"452\" y=\"89\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">v</text></svg></span><p>Hur förhåller sig deras centripetalaccelerationer till varandra?</p>",
   "s": "<p>a<sub>c</sub> = v²/r. När radien fördubblas halveras accelerationen.</p><p><strong>A har dubbelt så stor centripetalacceleration som B.</strong></p>"
 },
 {
@@ -58,7 +58,7 @@ window.BANK2 = [
   "niva": "E",
   "typ": "bestäm radie baklänges från fart och centripetalacceleration, ur mätdata, sökt radie",
   "poang": "(2/0/0)",
-  "t": "<p>En rörelsesensor mäter farten 9,0 m/s och centripetalaccelerationen 3,6 m/s² när en robot följer en rundad bana.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Kurvradie bestäms från mätdata\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><path d=\"M65 175 Q210 40 435 160\" fill=\"none\" stroke=\"#777\" stroke-width=\"8\"/><circle cx=\"282\" cy=\"75\" r=\"10\" fill=\"#B43123\"/><line x1=\"282\" y1=\"75\" x2=\"338\" y2=\"56\" stroke=\"#2A5D9E\" stroke-width=\"2.5\" marker-end=\"url(#arrb)\"/><text x=\"332\" y=\"44\" font-size=\"12\">9,0 m/s</text><line x1=\"282\" y1=\"75\" x2=\"236\" y2=\"111\" stroke=\"#B43123\" stroke-width=\"2.5\" marker-end=\"url(#arr)\"/><text x=\"173\" y=\"122\" font-size=\"12\">a = 3,6 m/s²</text><text x=\"242\" y=\"147\" font-size=\"12\">r = ?</text></svg></span><p>Bestäm banans radie.</p>",
+  "t": "<p>En rörelsesensor mäter farten 9,0 m/s och centripetalaccelerationen 3,6 m/s² när en robot följer en rundad bana.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Robot på rundad bana med fart och centripetalacceleration\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M65 176 Q115 55 235 55 Q355 55 405 176\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"24\" stroke-linecap=\"round\"/><path d=\"M65 176 Q115 55 235 55 Q355 55 405 176\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1.6\" stroke-dasharray=\"10 9\"/><rect x=\"216\" y=\"38\" width=\"38\" height=\"34\" rx=\"6\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"225\" cy=\"55\" r=\"4\" fill=\"#2A5D9E\"/><circle cx=\"245\" cy=\"55\" r=\"4\" fill=\"#2A5D9E\"/><line x1=\"254\" y1=\"54\" x2=\"293.36\" y2=\"65.48\" stroke=\"#2A5D9E\" stroke-width=\"2.3\" stroke-linecap=\"round\"/><polygon points=\"302.0,68.0 292.2,69.5 294.5,61.5\" fill=\"#2A5D9E\"/><text x=\"320\" y=\"61\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">v = 9,0 m/s</text><line x1=\"235\" y1=\"55\" x2=\"235.0\" y2=\"104.0\" stroke=\"#B43123\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><polygon points=\"235.0,114.0 230.4,104.0 239.6,104.0\" fill=\"#B43123\"/><text x=\"292\" y=\"107\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#B43123\">a = 3,6 m/s²</text><circle cx=\"235\" cy=\"154\" r=\"4\" fill=\"#2B2527\"/><text x=\"245\" y=\"158\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10\" font-weight=\"400\" fill=\"#5C575E\">centrum</text></svg></span><p>Bestäm banans radie.</p>",
   "s": "<p>r = v²/a<sub>c</sub> = 9,0²/3,6 = <strong>22.5 m</strong>.</p>"
 },
 {
@@ -68,7 +68,7 @@ window.BANK2 = [
   "niva": "E",
   "typ": "identifiera vilken verklig kraft som ger centripetalresultanten i en plan bilkurva, begreppsresonemang",
   "poang": "(2/0/0)",
-  "t": "<p>En bil kör med konstant fart genom en plan kurva utan att sladda.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Bil i plan kurva\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><rect x=\"85\" y=\"48\" width=\"330\" height=\"130\" rx=\"65\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M115 115 Q250 52 385 115 Q250 178 115 115\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\" stroke-dasharray=\"8 7\"/><rect x=\"295\" y=\"91\" width=\"34\" height=\"20\" rx=\"4\" fill=\"#B43123\" transform=\"rotate(22 312 101)\"/><line x1=\"312\" y1=\"101\" x2=\"260\" y2=\"122\" stroke=\"#B43123\" stroke-width=\"3\" marker-end=\"url(#arr)\"/><text x=\"192\" y=\"142\" font-size=\"12\">mot kurvans centrum</text></svg></span><p>Vilken kraft ger den horisontella resultant som håller bilen kvar i kurvan?</p>",
+  "t": "<p>En bil kör med konstant fart genom en plan kurva utan att sladda.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Bil i plan kurva där statisk friktion ger centripetalkraften\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M65 198 Q100 58 235 43 Q365 30 420 135\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"58\" stroke-linecap=\"round\"/><path d=\"M65 198 Q100 58 235 43 Q365 30 420 135\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" stroke-dasharray=\"14 12\"/><g transform=\"translate(294 44) rotate(3) scale(0.75)\"><path d=\"M-35 8 L-27 -10 Q-22 -19 -9 -21 L13 -21 Q25 -19 30 -9 L36 8 Z\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M-18 -10 Q-12 -16 -5 -16 L12 -16 Q19 -14 23 -10 Z\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"1.4\"/><circle cx=\"-23\" cy=\"9\" r=\"7\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"23\" cy=\"9\" r=\"7\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"-23\" cy=\"9\" r=\"2.5\" fill=\"#2B2527\"/><circle cx=\"23\" cy=\"9\" r=\"2.5\" fill=\"#2B2527\"/></g><circle cx=\"185\" cy=\"123\" r=\"4\" fill=\"#2B2527\"/><text x=\"176\" y=\"141\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">kurvans centrum</text><line x1=\"294\" y1=\"44\" x2=\"233.15327202637735\" y2=\"87.20999522764508\" stroke=\"#B43123\" stroke-width=\"2.7\" stroke-linecap=\"round\"/><polygon points=\"225.0,93.0 230.5,83.5 235.8,91.0\" fill=\"#B43123\"/><text x=\"240\" y=\"55\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#B43123\">friktion</text></svg></span><p>Vilken kraft ger den horisontella resultant som håller bilen kvar i kurvan?</p>",
   "s": "<p>Det är den <strong>statiska friktionskraften mellan däcken och vägen</strong>. ”Centripetalkraft” är namnet på resultanten mot centrum, inte en extra kraft.</p>"
 },
 {
@@ -78,7 +78,7 @@ window.BANK2 = [
   "niva": "E",
   "typ": "bestäm rotationsfrekvens och varvtal från tangentiell fart och radie, ur teknisk situation",
   "poang": "(2/0/0)",
-  "t": "<p>Kanten på en slipsten med radien 0,32 m rör sig med 6,4 m/s.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Roterande slipsten\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><circle cx=\"250\" cy=\"118\" r=\"72\" fill=\"#F4F5F7\" stroke=\"#2B2527\" stroke-width=\"3\"/><circle cx=\"250\" cy=\"118\" r=\"7\" fill=\"#2B2527\"/><line x1=\"250\" y1=\"118\" x2=\"322\" y2=\"118\" stroke=\"#9A959C\"/><text x=\"274\" y=\"139\" font-size=\"12\">0,32 m</text><path d=\"M304 68 A72 72 0 0 1 330 110\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"3\" marker-end=\"url(#arrb)\"/><line x1=\"322\" y1=\"118\" x2=\"322\" y2=\"64\" stroke=\"#B43123\" stroke-width=\"2.5\" marker-end=\"url(#arr)\"/><text x=\"334\" y=\"76\" font-size=\"12\">6,4 m/s</text></svg></span><p>Bestäm rotationsfrekvensen i Hz och varvtalet i varv/minut.</p>",
+  "t": "<p>Kanten på en slipsten med radien 0,32 m rör sig med 6,4 m/s.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Slipsten med radie och tangentiell hastighetsvektor\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"225\" cy=\"118\" r=\"76\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"225\" cy=\"118\" r=\"19.76\" fill=\"#2B2527\"/><line x1=\"225\" y1=\"118\" x2=\"301\" y2=\"118\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><line x1=\"225\" y1=\"151\" x2=\"301\" y2=\"151\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"225.0,151.0 232.0,154.0 232.0,148.0\" fill=\"#5C575E\"/><polygon points=\"301.0,151.0 294.0,154.0 294.0,148.0\" fill=\"#5C575E\"/><text x=\"263\" y=\"169\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">0,32 m</text><line x1=\"301\" y1=\"118\" x2=\"301.0\" y2=\"64.0\" stroke=\"#2A5D9E\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><polygon points=\"301.0,54.0 305.6,64.0 296.4,64.0\" fill=\"#2A5D9E\"/><text x=\"350\" y=\"62\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">v = 6,4 m/s</text><path d=\"M165 71 A76 76 0 0 1 195 47\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.6\"/><line x1=\"192\" y1=\"48\" x2=\"198.30954693894634\" y2=\"46.058600941862665\" stroke=\"#9A959C\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><polygon points=\"205.0,44.0 199.3,49.1 197.4,43.0\" fill=\"#9A959C\"/></svg></span><p>Bestäm rotationsfrekvensen i Hz och varvtalet i varv/minut.</p>",
   "s": "<p>v = 2πrf ⇒ f = v/(2πr) = <strong>3.18 Hz</strong>.</p><p>Varvtal = 60f = <strong>191 varv/min</strong>.</p>"
 },
 {
@@ -88,7 +88,7 @@ window.BANK2 = [
   "niva": "C",
   "typ": "analysera krafter i toppen av en vertikal cirkelbåge och bestäm normalkraft, ur figur",
   "poang": "(1/2/0)",
-  "t": "<p>En bil med massan 1450 kg passerar ett brokrön med farten 24 m/s. Krökningsradien är 85 m.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Bil över brokrön\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><path d=\"M45 178 Q250 35 455 178\" fill=\"none\" stroke=\"#777\" stroke-width=\"12\"/><rect x=\"229\" y=\"61\" width=\"42\" height=\"22\" rx=\"4\" fill=\"#B43123\"/><circle cx=\"239\" cy=\"85\" r=\"6\"/><circle cx=\"262\" cy=\"85\" r=\"6\"/><line x1=\"250\" y1=\"72\" x2=\"250\" y2=\"132\" stroke=\"#B43123\" stroke-width=\"3\" marker-end=\"url(#arr)\"/><text x=\"260\" y=\"126\" font-size=\"12\">mg</text><line x1=\"250\" y1=\"72\" x2=\"250\" y2=\"35\" stroke=\"#2A5D9E\" stroke-width=\"3\" marker-end=\"url(#arrb)\"/><text x=\"260\" y=\"43\" font-size=\"12\">N</text><text x=\"310\" y=\"150\" font-size=\"12\">r = 85 m</text></svg></span><p>Bestäm normalkraften från vägen på bilen.</p>",
+  "t": "<p>En bil med massan 1450 kg passerar ett brokrön med farten 24 m/s. Krökningsradien är 85 m.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Bil på brokrön med normalkraft och tyngdkraft\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M30 180 Q235 20 440 180\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"18\" stroke-linecap=\"round\"/><path d=\"M30 180 Q235 20 440 180\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/><g transform=\"translate(235 86) rotate(0) scale(0.8)\"><path d=\"M-35 8 L-27 -10 Q-22 -19 -9 -21 L13 -21 Q25 -19 30 -9 L36 8 Z\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M-18 -10 Q-12 -16 -5 -16 L12 -16 Q19 -14 23 -10 Z\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"1.4\"/><circle cx=\"-23\" cy=\"9\" r=\"7\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"23\" cy=\"9\" r=\"7\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"-23\" cy=\"9\" r=\"2.5\" fill=\"#2B2527\"/><circle cx=\"23\" cy=\"9\" r=\"2.5\" fill=\"#2B2527\"/></g><line x1=\"235\" y1=\"83\" x2=\"235.0\" y2=\"46.0\" stroke=\"#B43123\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><polygon points=\"235.0,37.0 239.1,46.0 230.9,46.0\" fill=\"#B43123\"/><text x=\"250\" y=\"48\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#B43123\">N</text><line x1=\"235\" y1=\"91\" x2=\"235.0\" y2=\"142.0\" stroke=\"#B43123\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><polygon points=\"235.0,151.0 230.9,142.0 239.1,142.0\" fill=\"#B43123\"/><text x=\"251\" y=\"143\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#B43123\">mg</text><line x1=\"235\" y1=\"88\" x2=\"235\" y2=\"202\" stroke=\"#9A959C\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-dasharray=\"4 4\"/><text x=\"249\" y=\"198\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">r = 85 m</text></svg></span><p>Bestäm normalkraften från vägen på bilen.</p>",
   "s": "<p>Mot centrum är nedåt. Därför gäller mg − N = mv²/r.</p><p>N = mg − mv²/r = <strong>4413 N ≈ 4.4 kN</strong>.</p>"
 },
 {
@@ -98,7 +98,7 @@ window.BANK2 = [
   "niva": "C",
   "typ": "tolka upplevd tyngd via normalkraft i dalbotten, flera krafter och centripetalvillkor",
   "poang": "(1/2/0)",
-  "t": "<p>En passagerare med massan 65 kg sitter i en vagn som passerar botten av en dal med farten 18 m/s. Radien är 24 m.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Passagerare i dalbotten\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><path d=\"M50 60 Q250 205 450 60\" fill=\"none\" stroke=\"#777\" stroke-width=\"12\"/><circle cx=\"250\" cy=\"178\" r=\"11\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><line x1=\"250\" y1=\"178\" x2=\"250\" y2=\"120\" stroke=\"#2A5D9E\" stroke-width=\"3\" marker-end=\"url(#arrb)\"/><text x=\"262\" y=\"132\" font-size=\"12\">N</text><line x1=\"250\" y1=\"178\" x2=\"250\" y2=\"215\" stroke=\"#B43123\" stroke-width=\"3\" marker-end=\"url(#arr)\"/><text x=\"260\" y=\"218\" font-size=\"12\">mg</text><text x=\"335\" y=\"174\" font-size=\"12\">r = 24 m</text></svg></span><p>Hur stor kraft från sätet verkar på passageraren, och hur många gånger den vanliga tyngden motsvarar det?</p>",
+  "t": "<p>En passagerare med massan 65 kg sitter i en vagn som passerar botten av en dal med farten 18 m/s. Radien är 24 m.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Passagerare i dalbotten med normalkraft och tyngdkraft\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M30 45 Q235 220 440 45\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"18\" stroke-linecap=\"round\"/><path d=\"M30 45 Q235 220 440 45\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/><rect x=\"197\" y=\"151\" width=\"76\" height=\"28\" rx=\"7\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><g transform=\"translate(235 146) scale(0.45)\"><circle cx=\"0\" cy=\"-30\" r=\"8\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"0\" y1=\"-22\" x2=\"0\" y2=\"12\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"-10\" x2=\"-15\" y2=\"2\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"-10\" x2=\"15\" y2=\"2\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"12\" x2=\"-12\" y2=\"34\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"12\" x2=\"12\" y2=\"34\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/></g><line x1=\"235\" y1=\"148\" x2=\"235.0\" y2=\"105.0\" stroke=\"#B43123\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><polygon points=\"235.0,95.0 239.6,105.0 230.4,105.0\" fill=\"#B43123\"/><text x=\"251\" y=\"105\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#B43123\">N</text><line x1=\"235\" y1=\"148\" x2=\"235.0\" y2=\"193.0\" stroke=\"#B43123\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><polygon points=\"235.0,203.0 230.4,193.0 239.6,193.0\" fill=\"#B43123\"/><text x=\"252\" y=\"196\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#B43123\">mg</text><text x=\"320\" y=\"188\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">r = 24 m</text></svg></span><p>Hur stor kraft från sätet verkar på passageraren, och hur många gånger den vanliga tyngden motsvarar det?</p>",
   "s": "<p>N − mg = mv²/r ⇒ N = mg + mv²/r = <strong>1516 N</strong>.</p><p>N/(mg) = <strong>2.37</strong>. Passageraren belastas alltså av cirka <strong>2.4 g</strong>.</p>"
 },
 {
@@ -108,7 +108,7 @@ window.BANK2 = [
   "niva": "C",
   "typ": "bestäm maximal kurvhastighet när statisk friktion begränsar centripetalkraften, modellering av kraftgräns",
   "poang": "(1/2/0)",
-  "t": "<p>På en plan testbana är kurvradien 42 m och friktionstalet mellan däck och asfalt 0,58.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Friktionsgräns i kurva\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><rect x=\"35\" y=\"35\" width=\"430\" height=\"155\" rx=\"76\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M80 112 Q250 48 420 112\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\" stroke-dasharray=\"9 8\"/><rect x=\"318\" y=\"84\" width=\"38\" height=\"22\" rx=\"4\" fill=\"#B43123\" transform=\"rotate(20 337 95)\"/><line x1=\"337\" y1=\"95\" x2=\"273\" y2=\"116\" stroke=\"#B43123\" stroke-width=\"3\" marker-end=\"url(#arr)\"/><text x=\"194\" y=\"137\" font-size=\"12\">friktion</text><text x=\"76\" y=\"174\" font-size=\"12\">μ = 0,58</text><text x=\"345\" y=\"165\" font-size=\"12\">r = 42 m</text></svg></span><p>Bestäm den största fart en bil kan ha utan att börja glida.</p>",
+  "t": "<p>På en plan testbana är kurvradien 42 m och friktionstalet mellan däck och asfalt 0,58.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Bil på testbana med friktion mot kurvans centrum\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M55 184 Q95 60 235 50 Q370 40 425 152\" fill=\"none\" stroke=\"#EDEEF1\" stroke-width=\"70\" stroke-linecap=\"round\"/><path d=\"M55 184 Q95 60 235 50 Q370 40 425 152\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><path d=\"M55 184 Q95 60 235 50 Q370 40 425 152\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" stroke-dasharray=\"14 12\"/><g transform=\"translate(309 52) rotate(3) scale(0.78)\"><path d=\"M-35 8 L-27 -10 Q-22 -19 -9 -21 L13 -21 Q25 -19 30 -9 L36 8 Z\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M-18 -10 Q-12 -16 -5 -16 L12 -16 Q19 -14 23 -10 Z\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"1.4\"/><circle cx=\"-23\" cy=\"9\" r=\"7\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"23\" cy=\"9\" r=\"7\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"-23\" cy=\"9\" r=\"2.5\" fill=\"#2B2527\"/><circle cx=\"23\" cy=\"9\" r=\"2.5\" fill=\"#2B2527\"/></g><circle cx=\"203\" cy=\"128\" r=\"4\" fill=\"#2B2527\"/><text x=\"187\" y=\"145\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">centrum</text><line x1=\"309\" y1=\"52\" x2=\"251.32050294337844\" y2=\"90.4529980377477\" stroke=\"#B43123\" stroke-width=\"2.7\" stroke-linecap=\"round\"/><polygon points=\"243.0,96.0 248.8,86.6 253.9,94.3\" fill=\"#B43123\"/><text x=\"263\" y=\"55\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#B43123\">Ff</text><text x=\"75\" y=\"210\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">μ = 0,58</text><text x=\"340\" y=\"210\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">r = 42 m</text></svg></span><p>Bestäm den största fart en bil kan ha utan att börja glida.</p>",
   "s": "<p>Vid gränsen är friktionskraften μmg och hela den används som centripetalkraft:</p><p>μmg = mv²/r ⇒ v = √(μgr) = <strong>15.5 m/s = 56 km/h</strong>.</p>"
 },
 {
@@ -118,7 +118,7 @@ window.BANK2 = [
   "niva": "C",
   "typ": "bestäm konisk pendels vinkel och fart från periodtid och snörlängd, härleda via kraftkomponenter",
   "poang": "(1/2/0)",
-  "t": "<p>En liten lampa sitter i ett 1,20 m långt snöre och rör sig som en konisk pendel. Ett varv tar 1,85 s.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Konisk pendel\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><line x1=\"250\" y1=\"28\" x2=\"250\" y2=\"105\" stroke=\"#9A959C\" stroke-dasharray=\"5 4\"/><line x1=\"250\" y1=\"28\" x2=\"340\" y2=\"125\" stroke=\"#2B2527\" stroke-width=\"2.5\"/><circle cx=\"340\" cy=\"125\" r=\"11\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><ellipse cx=\"250\" cy=\"125\" rx=\"90\" ry=\"28\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/><path d=\"M250 62 A34 34 0 0 1 274 74\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2\"/><text x=\"279\" y=\"70\" font-size=\"12\">θ</text><text x=\"295\" y=\"72\" font-size=\"12\">L = 1,20 m</text><text x=\"70\" y=\"195\" font-size=\"12\">T = 1,85 s</text></svg></span><p>Bestäm vinkeln θ mot lodlinjen och lampans fart.</p>",
+  "t": "<p>En liten lampa sitter i ett 1,20 m långt snöre och rör sig som en konisk pendel. Ett varv tar 1,85 s.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Konisk pendel med lodlinje vinkel och cirkulär bana\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"220\" y1=\"25\" x2=\"220\" y2=\"65\" stroke=\"#2B2527\" stroke-width=\"2.3\" stroke-linecap=\"square\"/><circle cx=\"220\" cy=\"65\" r=\"5\" fill=\"#2B2527\"/><line x1=\"220\" y1=\"65\" x2=\"302\" y2=\"156\" stroke=\"#2B2527\" stroke-width=\"2.1\" stroke-linecap=\"round\"/><circle cx=\"302\" cy=\"156\" r=\"15\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"220\" y1=\"65\" x2=\"220\" y2=\"175\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"butt\" stroke-dasharray=\"5 5\"/><ellipse cx=\"220\" cy=\"156\" rx=\"82\" ry=\"27\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"1.8\" stroke-dasharray=\"7 6\"/><path d=\"M220 94 A29 29 0 0 1 240 86\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"1.8\"/><text x=\"245\" y=\"91\" text-anchor=\"600\" font-family=\"IBM Plex Mono\" font-size=\"12\" font-weight=\"400\" fill=\"#2B2527\">θ</text><text x=\"276\" y=\"92\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">L = 1,20 m</text><line x1=\"302\" y1=\"156\" x2=\"319.4647570941151\" y2=\"137.77590564092338\" stroke=\"#2A5D9E\" stroke-width=\"2.1\" stroke-linecap=\"round\"/><polygon points=\"325.0,132.0 322.1,140.3 316.8,135.2\" fill=\"#2A5D9E\"/><text x=\"335\" y=\"132\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">v</text></svg></span><p>Bestäm vinkeln θ mot lodlinjen och lampans fart.</p>",
   "s": "<p>För en konisk pendel ger kraftkomponenterna tanθ = v²/(rg), medan r = Lsinθ och v = 2πr/T. Detta kan förenklas till cosθ = gT²/(4π²L).</p><p>cosθ = 0.709 ⇒ θ = <strong>44.8°</strong>.</p><p>r = Lsinθ = 0.846 m och v = 2πr/T = <strong>2.87 m/s</strong>.</p>"
 },
 {
@@ -128,7 +128,7 @@ window.BANK2 = [
   "niva": "C",
   "typ": "kombinera gravitationskraft med cirkelrörelse för att bestämma omloppstid runt liten himlakropp",
   "poang": "(1/2/0)",
-  "t": "<p>En sond ska gå i cirkulär bana 140 km över en asteroid. Asteroidens radie är 260 km och massan 8,0·10²⁰ kg.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Sond i bana runt asteroid\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><circle cx=\"235\" cy=\"120\" r=\"45\" fill=\"#9A959C\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"235\" cy=\"120\" r=\"92\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2\" stroke-dasharray=\"7 5\"/><rect x=\"321\" y=\"111\" width=\"18\" height=\"12\" fill=\"#B43123\"/><line x1=\"235\" y1=\"120\" x2=\"327\" y2=\"120\" stroke=\"#9A959C\" stroke-width=\"1.3\"/><text x=\"251\" y=\"106\" font-size=\"11\">R = 260 km</text><text x=\"340\" y=\"145\" font-size=\"11\">h = 140 km</text><text x=\"68\" y=\"43\" font-size=\"12\">M = 8,0·10²⁰ kg</text></svg></span><p>Bestäm sondens omloppstid. Använd G = 6,67·10⁻¹¹ N·m²/kg².</p>",
+  "t": "<p>En sond ska gå i cirkulär bana 140 km över en asteroid. Asteroidens radie är 260 km och massan 8,0·10²⁰ kg.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Sond i cirkulär bana runt asteroid\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"225\" cy=\"122\" r=\"60\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2.3\"/><path d=\"M178 104 q20 -18 40 0 q16 12 34 -4 M198 144 q22 12 48 0\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.2\"/><circle cx=\"225\" cy=\"122\" r=\"4\" fill=\"#2B2527\"/><circle cx=\"382\" cy=\"122\" r=\"8\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><ellipse cx=\"225\" cy=\"122\" rx=\"157\" ry=\"96\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"1.7\" stroke-dasharray=\"7 6\"/><line x1=\"225\" y1=\"194\" x2=\"285\" y2=\"194\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"225.0,194.0 232.0,197.0 232.0,191.0\" fill=\"#5C575E\"/><polygon points=\"285.0,194.0 278.0,197.0 278.0,191.0\" fill=\"#5C575E\"/><text x=\"255\" y=\"212\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">260 km</text><line x1=\"285\" y1=\"194\" x2=\"382\" y2=\"194\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"285.0,194.0 292.0,197.0 292.0,191.0\" fill=\"#5C575E\"/><polygon points=\"382.0,194.0 375.0,197.0 375.0,191.0\" fill=\"#5C575E\"/><text x=\"334\" y=\"212\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">140 km</text><line x1=\"382\" y1=\"122\" x2=\"382.0\" y2=\"84.0\" stroke=\"#2A5D9E\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><polygon points=\"382.0,76.0 385.7,84.0 378.3,84.0\" fill=\"#2A5D9E\"/><text x=\"395\" y=\"86\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">v</text></svg></span><p>Bestäm sondens omloppstid. Använd G = 6,67·10⁻¹¹ N·m²/kg².</p>",
   "s": "<p>Banradien är r = (260+140) km = 4,00·10⁵ m.</p><p>GMm/r² = mv²/r och v = 2πr/T ger T = 2π√(r³/GM).</p><p>T = <strong>1.91 h</strong>.</p>"
 },
 {
@@ -138,7 +138,7 @@ window.BANK2 = [
   "niva": "A",
   "typ": "kombinera kontaktvillkor i loop med energibevarande för att bestämma minsta starthöjd, obekant flerstegsproblem",
   "poang": "(0/1/3)",
-  "t": "<p>En liten vagn släpps från vila på en friktionsfri bana och ska gå runt en vertikal loop med radien 5,0 m.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Vagn som rullar in i vertikal loop\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><path d=\"M45 190 H150\" stroke=\"#2B2527\" stroke-width=\"4\"/><line x1=\"150\" y1=\"190\" x2=\"280\" y2=\"190\" stroke=\"#777\" stroke-width=\"8\"/><circle cx=\"280\" cy=\"120\" r=\"70\" fill=\"none\" stroke=\"#777\" stroke-width=\"8\"/><path d=\"M45 76 L145 190\" stroke=\"#777\" stroke-width=\"8\"/><circle cx=\"65\" cy=\"98\" r=\"9\" fill=\"#B43123\"/><line x1=\"395\" y1=\"190\" x2=\"395\" y2=\"48\" stroke=\"#9A959C\" stroke-width=\"1.5\"/><text x=\"405\" y=\"124\" font-size=\"12\">2r</text><text x=\"80\" y=\"68\" font-size=\"12\">släpps från vila</text><text x=\"270\" y=\"215\" font-size=\"12\">r = 5,0 m</text></svg></span><p>Hur högt över loopens lägsta punkt måste vagnen minst starta för att precis behålla kontakten hela vägen?</p>",
+  "t": "<p>En liten vagn släpps från vila på en friktionsfri bana och ska gå runt en vertikal loop med radien 5,0 m.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Vagn på bana mot vertikal loop med starthöjd och loopradie\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M55 180 L160 180 Q180 180 190 160 L225 88 Q245 45 292 45 A70 70 0 1 1 222 115\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"12\" stroke-linecap=\"round\"/><path d=\"M55 180 L160 180 Q180 180 190 160 L225 88 Q245 45 292 45 A70 70 0 1 1 222 115\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"1.8\" stroke-linecap=\"round\"/><circle cx=\"111\" cy=\"133\" r=\"10\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"111\" y1=\"133\" x2=\"111\" y2=\"180\" stroke=\"#9A959C\" stroke-width=\"1.1\" stroke-linecap=\"butt\" stroke-dasharray=\"4 4\"/><line x1=\"75\" y1=\"180\" x2=\"75\" y2=\"133\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"75.0,180.0 78.0,173.0 72.0,173.0\" fill=\"#5C575E\"/><polygon points=\"75.0,133.0 78.0,140.0 72.0,140.0\" fill=\"#5C575E\"/><text x=\"57\" y=\"158\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">hmin</text><line x1=\"292\" y1=\"115\" x2=\"362\" y2=\"115\" stroke=\"#9A959C\" stroke-width=\"1.0\" stroke-linecap=\"butt\" stroke-dasharray=\"4 4\"/><line x1=\"376\" y1=\"45\" x2=\"376\" y2=\"185\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"376.0,45.0 373.0,52.0 379.0,52.0\" fill=\"#5C575E\"/><polygon points=\"376.0,185.0 373.0,178.0 379.0,178.0\" fill=\"#5C575E\"/><text x=\"394\" y=\"119\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">2r</text><text x=\"292\" y=\"211\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">r = 5,0 m</text></svg></span><p>Hur högt över loopens lägsta punkt måste vagnen minst starta för att precis behålla kontakten hela vägen?</p>",
   "s": "<p>I loopens topp är minsta möjliga normalkraft N = 0. Då gäller mg = mv²/r ⇒ v² = gr.</p><p>Energibevarande från starthöjden h till toppen:</p><p>mgh = mg·2r + ½m(gr).</p><p>h = 2r + r/2 = 2,5r = <strong>12.5 m</strong>.</p><p>Det avgörande är alltså inte bara att nå toppen, utan att fortfarande ha tillräcklig fart där för att banan ska kunna böja rörelsen.</p>"
 },
 {
@@ -148,7 +148,7 @@ window.BANK2 = [
   "niva": "A",
   "typ": "modellera artificiell tyngd i roterande habitat och analysera skillnad mellan huvud och fötter, cirkelrörelse i obekant situation",
   "poang": "(0/1/3)",
-  "t": "<p>Ett ringformat rymdhabitat har radien 120 m. Rotationens hastighet ska väljas så att en person vid golvet upplever en normalkraft motsvarande 0,90g.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Roterande rymdhabitat\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><circle cx=\"245\" cy=\"120\" r=\"95\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"9\"/><circle cx=\"245\" cy=\"120\" r=\"7\" fill=\"#2B2527\"/><line x1=\"245\" y1=\"120\" x2=\"340\" y2=\"120\" stroke=\"#9A959C\"/><text x=\"273\" y=\"108\" font-size=\"12\">120 m</text><rect x=\"331\" y=\"92\" width=\"16\" height=\"28\" rx=\"4\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><circle cx=\"339\" cy=\"86\" r=\"7\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><path d=\"M160 44 A98 98 0 0 1 230 24\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"3\" marker-end=\"url(#arrb)\"/><text x=\"64\" y=\"201\" font-size=\"12\">personens längd 1,8 m</text></svg></span><ol><li>Bestäm habitatets varvtal i varv/minut.</li><li>En person är 1,8 m lång. Hur stor centripetalacceleration får huvudet, och hur många procent mindre är den än vid fötterna?</li></ol>",
+  "t": "<p>Ett ringformat rymdhabitat har radien 120 m. Rotationens hastighet ska väljas så att en person vid golvet upplever en normalkraft motsvarande 0,90g.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Roterande ringformat rymdhabitat med person vid golvet\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"228\" cy=\"118\" r=\"94\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"16\"/><circle cx=\"228\" cy=\"118\" r=\"78\" fill=\"none\" stroke=\"#EDEEF1\" stroke-width=\"13\"/><circle cx=\"228\" cy=\"118\" r=\"4\" fill=\"#2B2527\"/><g transform=\"translate(228 51) scale(0.42)\"><circle cx=\"0\" cy=\"-30\" r=\"8\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"0\" y1=\"-22\" x2=\"0\" y2=\"12\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"-10\" x2=\"-15\" y2=\"2\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"-10\" x2=\"15\" y2=\"2\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"12\" x2=\"-12\" y2=\"34\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"12\" x2=\"12\" y2=\"34\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/></g><line x1=\"228\" y1=\"118\" x2=\"228\" y2=\"39\" stroke=\"#9A959C\" stroke-width=\"1.1\" stroke-linecap=\"butt\"/><line x1=\"260\" y1=\"118\" x2=\"260\" y2=\"39\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"260.0,118.0 263.0,111.0 257.0,111.0\" fill=\"#5C575E\"/><polygon points=\"260.0,39.0 263.0,46.0 257.0,46.0\" fill=\"#5C575E\"/><text x=\"285\" y=\"82\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">120 m</text><line x1=\"228\" y1=\"38\" x2=\"276.22531901826693\" y2=\"48.99875696907843\" stroke=\"#2A5D9E\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><polygon points=\"285.0,51.0 275.3,53.0 277.1,45.0\" fill=\"#2A5D9E\"/><text x=\"315\" y=\"53\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">rotation</text><line x1=\"210\" y1=\"62\" x2=\"210\" y2=\"80\" stroke=\"#9A959C\" stroke-width=\"1.0\" stroke-linecap=\"butt\"/><text x=\"199\" y=\"74\" text-anchor=\"end\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">1,8 m</text></svg></span><ol><li>Bestäm habitatets varvtal i varv/minut.</li><li>En person är 1,8 m lång. Hur stor centripetalacceleration får huvudet, och hur många procent mindre är den än vid fötterna?</li></ol>",
   "s": "<p>a) Vid golvet ska a = ω²R = 0,90g. Då ω = √(0,90g/R) = 0.271 rad/s.</p><p>Varvtalet blir n = ω/(2π)·60 = <strong>2.59 varv/min</strong>.</p><p>b) Huvudet ligger på radien 118,2 m. a<sub>huvud</sub> = ω²·118,2 = <strong>8.71 m/s²</strong>.</p><p>Huvudets acceleration är <strong>1.5 % mindre</strong> än vid fötterna. Det visar att ”tyngden” i ett roterande habitat inte är helt jämn över kroppen.</p>"
 },
 {
@@ -158,7 +158,7 @@ window.BANK2 = [
   "niva": "E",
   "typ": "horisontellt kast från given höjd, bestäm falltid och horisontell räckvidd",
   "poang": "(2/0/0)",
-  "t": "<p>En stålkula rullar horisontellt från ett 1,6 m högt bord med farten 4,2 m/s.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Kula som lämnar ett bord horisontellt\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><line x1=\"25\" y1=\"195\" x2=\"475\" y2=\"195\" stroke=\"#2B2527\" stroke-width=\"2\"/><rect x=\"55\" y=\"78\" width=\"155\" height=\"12\" fill=\"#9A959C\"/><line x1=\"70\" y1=\"90\" x2=\"70\" y2=\"195\" stroke=\"#777\" stroke-width=\"6\"/><circle cx=\"202\" cy=\"70\" r=\"9\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><line x1=\"202\" y1=\"70\" x2=\"267\" y2=\"70\" stroke=\"#2A5D9E\" stroke-width=\"3\" marker-end=\"url(#arrb)\"/><text x=\"214\" y=\"58\" font-size=\"12\">4,2 m/s</text><path d=\"M202 70 Q300 78 350 195\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.5\" stroke-dasharray=\"6 4\"/><line x1=\"45\" y1=\"78\" x2=\"45\" y2=\"195\" stroke=\"#9A959C\"/><text x=\"18\" y=\"140\" font-size=\"12\">1,6 m</text></svg></span><p>Hur långt från bordskanten träffar kulan golvet?</p>",
+  "t": "<p>En stålkula rullar horisontellt från ett 1,6 m högt bord med farten 4,2 m/s.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Stålkula lämnar bord horisontellt\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"35\" y1=\"188\" x2=\"440\" y2=\"188\" stroke=\"#2B2527\" stroke-width=\"1.8\" stroke-linecap=\"square\"/><rect x=\"50\" y=\"80\" width=\"135\" height=\"12\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"65\" y1=\"92\" x2=\"65\" y2=\"188\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"170\" y1=\"92\" x2=\"170\" y2=\"188\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"185\" cy=\"74\" r=\"8\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"185\" y1=\"74\" x2=\"236.0\" y2=\"74.0\" stroke=\"#2A5D9E\" stroke-width=\"2.4\" stroke-linecap=\"round\"/><polygon points=\"245.0,74.0 236.0,78.1 236.0,69.9\" fill=\"#2A5D9E\"/><text x=\"270\" y=\"68\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">4,2 m/s</text><path d=\"M185 74 Q280 98 345 188\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.6\" stroke-dasharray=\"6 5\"/><line x1=\"420\" y1=\"80\" x2=\"420\" y2=\"188\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"420.0,80.0 417.0,87.0 423.0,87.0\" fill=\"#5C575E\"/><polygon points=\"420.0,188.0 417.0,181.0 423.0,181.0\" fill=\"#5C575E\"/><text x=\"445\" y=\"137\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">1,6 m</text></svg></span><p>Hur långt från bordskanten träffar kulan golvet?</p>",
   "s": "<p>Falltiden bestäms av höjden: t = √(2h/g) = <strong>0.571 s</strong>.</p><p>x = v<sub>x</sub>t = 4,2·0.571 = <strong>2.40 m</strong>.</p>"
 },
 {
@@ -168,7 +168,7 @@ window.BANK2 = [
   "niva": "E",
   "typ": "dela upp begynnelsehastighet i horisontell och vertikal komponent, ur vektorfigur",
   "poang": "(2/0/0)",
-  "t": "<p>En handboll lämnar handen med farten 21 m/s i vinkeln 37° över horisontalplanet.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Uppdelning av kasthastighet\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><line x1=\"25\" y1=\"195\" x2=\"475\" y2=\"195\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"115\" cy=\"177\" r=\"8\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><line x1=\"115\" y1=\"177\" x2=\"215\" y2=\"102\" stroke=\"#2B2527\" stroke-width=\"3\" marker-end=\"url(#arrb)\"/><line x1=\"115\" y1=\"177\" x2=\"215\" y2=\"177\" stroke=\"#B43123\" stroke-width=\"2.5\" marker-end=\"url(#arr)\"/><line x1=\"215\" y1=\"177\" x2=\"215\" y2=\"102\" stroke=\"#B43123\" stroke-width=\"2.5\" marker-end=\"url(#arr)\"/><path d=\"M155 177 A40 40 0 0 0 147 153\" fill=\"none\" stroke=\"#777\"/><text x=\"158\" y=\"159\" font-size=\"12\">37°</text><text x=\"188\" y=\"93\" font-size=\"12\">21 m/s</text><text x=\"160\" y=\"194\" font-size=\"12\">vₓ</text><text x=\"224\" y=\"142\" font-size=\"12\">vᵧ</text></svg></span><p>Bestäm begynnelsehastighetens horisontella och vertikala komponent.</p>",
+  "t": "<p>En handboll lämnar handen med farten 21 m/s i vinkeln 37° över horisontalplanet.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Begynnelsehastighet uppdelad i horisontell och vertikal komponent\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"35\" y1=\"188\" x2=\"440\" y2=\"188\" stroke=\"#2B2527\" stroke-width=\"1.8\" stroke-linecap=\"square\"/><circle cx=\"105\" cy=\"171\" r=\"9\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"105\" y1=\"171\" x2=\"194.00989552163128\" y2=\"104.01317141155583\" stroke=\"#2A5D9E\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><polygon points=\"202.0,98.0 196.8,107.7 191.2,100.3\" fill=\"#2A5D9E\"/><text x=\"188\" y=\"86\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">v₀ = 21 m/s</text><line x1=\"105\" y1=\"171\" x2=\"202\" y2=\"171\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"butt\" stroke-dasharray=\"5 4\"/><line x1=\"202\" y1=\"171\" x2=\"202\" y2=\"98\" stroke=\"#9A959C\" stroke-width=\"1.2\" stroke-linecap=\"butt\" stroke-dasharray=\"5 4\"/><line x1=\"105\" y1=\"171\" x2=\"195.0\" y2=\"171.0\" stroke=\"#9A959C\" stroke-width=\"1.7\" stroke-linecap=\"round\"/><polygon points=\"202.0,171.0 195.0,174.2 195.0,167.8\" fill=\"#9A959C\"/><text x=\"155\" y=\"187\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#9A959C\">v₀x</text><line x1=\"202\" y1=\"171\" x2=\"202.0\" y2=\"105.0\" stroke=\"#9A959C\" stroke-width=\"1.7\" stroke-linecap=\"round\"/><polygon points=\"202.0,98.0 205.2,105.0 198.8,105.0\" fill=\"#9A959C\"/><text x=\"221\" y=\"138\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#9A959C\">v₀y</text><path d=\"M139 171 A34 34 0 0 0 132 151\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"1.6\"/><text x=\"145\" y=\"157\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">37°</text></svg></span><p>Bestäm begynnelsehastighetens horisontella och vertikala komponent.</p>",
   "s": "<p>v<sub>0x</sub> = v₀cos37° = <strong>16.8 m/s</strong>.</p><p>v<sub>0y</sub> = v₀sin37° = <strong>12.6 m/s</strong>.</p>"
 },
 {
@@ -178,7 +178,7 @@ window.BANK2 = [
   "niva": "E",
   "typ": "bestäm tid till vändpunkt från vertikal begynnelsekomponent, rörelse i y-led",
   "poang": "(2/0/0)",
-  "t": "<p>En boll har den vertikala begynnelsekomponenten 13 m/s.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Tid till högsta punkten\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><line x1=\"25\" y1=\"195\" x2=\"475\" y2=\"195\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"110\" cy=\"175\" r=\"8\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><path d=\"M110 175 Q240 35 365 170\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.5\" stroke-dasharray=\"6 4\"/><circle cx=\"238\" cy=\"69\" r=\"6\" fill=\"#B43123\"/><line x1=\"110\" y1=\"175\" x2=\"110\" y2=\"103\" stroke=\"#2A5D9E\" stroke-width=\"3\" marker-end=\"url(#arrb)\"/><text x=\"120\" y=\"112\" font-size=\"12\">v₀y = 13 m/s</text><text x=\"218\" y=\"48\" font-size=\"12\">vᵧ = 0</text></svg></span><p>Hur lång tid efter kastet når den sin högsta punkt?</p>",
+  "t": "<p>En boll har den vertikala begynnelsekomponenten 13 m/s.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Vertikal rörelse till högsta punkten\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"35\" y1=\"188\" x2=\"440\" y2=\"188\" stroke=\"#2B2527\" stroke-width=\"1.8\" stroke-linecap=\"square\"/><circle cx=\"140\" cy=\"167\" r=\"8\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"140\" y1=\"167\" x2=\"140.0\" y2=\"102.0\" stroke=\"#2A5D9E\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><polygon points=\"140.0,92.0 144.6,102.0 135.4,102.0\" fill=\"#2A5D9E\"/><text x=\"202\" y=\"105\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">v₀y = 13 m/s</text><path d=\"M140 167 C143 130 150 95 150 60\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.6\" stroke-dasharray=\"6 5\"/><circle cx=\"150\" cy=\"60\" r=\"5\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><text x=\"166\" y=\"63\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">vy = 0</text></svg></span><p>Hur lång tid efter kastet når den sin högsta punkt?</p>",
   "s": "<p>I högsta punkten är v<sub>y</sub> = 0.</p><p>0 = 13 − gt ⇒ t = 13/9,82 = <strong>1.32 s</strong>.</p>"
 },
 {
@@ -188,7 +188,7 @@ window.BANK2 = [
   "niva": "E",
   "typ": "bestäm maximal höjd för snett kast från begynnelsefart och vinkel",
   "poang": "(2/0/0)",
-  "t": "<p>En tennisboll kastas från marknivå med farten 17 m/s i vinkeln 54°.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Bestäm maximal kasthöjd\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><line x1=\"25\" y1=\"195\" x2=\"475\" y2=\"195\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"90\" cy=\"177\" r=\"8\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><path d=\"M90 177 Q245 32 400 177\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.5\"/><line x1=\"90\" y1=\"177\" x2=\"154\" y2=\"90\" stroke=\"#2A5D9E\" stroke-width=\"3\" marker-end=\"url(#arrb)\"/><text x=\"149\" y=\"82\" font-size=\"12\">17 m/s</text><text x=\"115\" y=\"162\" font-size=\"12\">54°</text><line x1=\"245\" y1=\"177\" x2=\"245\" y2=\"72\" stroke=\"#9A959C\" stroke-dasharray=\"4 4\"/><text x=\"253\" y=\"125\" font-size=\"12\">hmax?</text></svg></span><p>Hur högt över utkastpunkten når bollen?</p>",
+  "t": "<p>En tennisboll kastas från marknivå med farten 17 m/s i vinkeln 54°.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Tennisbollens kastbana och maximala höjd\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"35\" y1=\"188\" x2=\"440\" y2=\"188\" stroke=\"#2B2527\" stroke-width=\"1.8\" stroke-linecap=\"square\"/><circle cx=\"75\" cy=\"179\" r=\"7\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"75\" y1=\"179\" x2=\"131.52967465368633\" y2=\"105.1467153717969\" stroke=\"#2A5D9E\" stroke-width=\"2.4\" stroke-linecap=\"round\"/><polygon points=\"137.0,98.0 134.8,107.7 128.2,102.6\" fill=\"#2A5D9E\"/><text x=\"151\" y=\"94\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">17 m/s</text><path d=\"M75 179 Q215 35 365 179\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.7\" stroke-dasharray=\"6 5\"/><line x1=\"220\" y1=\"50\" x2=\"220\" y2=\"188\" stroke=\"#9A959C\" stroke-width=\"1.0\" stroke-linecap=\"butt\" stroke-dasharray=\"4 4\"/><line x1=\"244\" y1=\"188\" x2=\"244\" y2=\"50\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"244.0,188.0 247.0,181.0 241.0,181.0\" fill=\"#5C575E\"/><polygon points=\"244.0,50.0 247.0,57.0 241.0,57.0\" fill=\"#5C575E\"/><text x=\"268\" y=\"120\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">hmax</text><path d=\"M108 179 A34 34 0 0 0 95 152\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"1.6\"/><text x=\"116\" y=\"158\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">54°</text></svg></span><p>Hur högt över utkastpunkten når bollen?</p>",
   "s": "<p>v<sub>0y</sub> = 17sin54° = 13.75 m/s.</p><p>Vid toppen är v<sub>y</sub>=0, så h = v<sub>0y</sub>²/(2g) = <strong>9.63 m</strong>.</p>"
 },
 {
@@ -198,7 +198,7 @@ window.BANK2 = [
   "niva": "E",
   "typ": "bestäm total flygtid när start- och landningshöjd är samma, använda symmetri i vertikalrörelsen",
   "poang": "(2/0/0)",
-  "t": "<p>En frisbee kastas med 15 m/s i vinkeln 28° och landar på samma höjd som den kastades från.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Flygtid för ett snett kast\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><line x1=\"25\" y1=\"195\" x2=\"475\" y2=\"195\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"90\" cy=\"177\" r=\"8\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><path d=\"M90 177 Q250 65 410 177\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.5\"/><line x1=\"90\" y1=\"177\" x2=\"153\" y2=\"143\" stroke=\"#2A5D9E\" stroke-width=\"3\" marker-end=\"url(#arrb)\"/><text x=\"125\" y=\"132\" font-size=\"12\">15 m/s</text><text x=\"112\" y=\"174\" font-size=\"12\">28°</text><circle cx=\"410\" cy=\"177\" r=\"6\" fill=\"#2B2527\"/><text x=\"203\" y=\"210\" font-size=\"12\">samma höjd vid start och landning</text></svg></span><p>Bestäm flygtiden. Bortse från luftmotstånd.</p>",
+  "t": "<p>En frisbee kastas med 15 m/s i vinkeln 28° och landar på samma höjd som den kastades från.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Frisbeekast som startar och landar på samma höjd\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"35\" y1=\"188\" x2=\"440\" y2=\"188\" stroke=\"#2B2527\" stroke-width=\"1.8\" stroke-linecap=\"square\"/><circle cx=\"82\" cy=\"179\" r=\"7\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"82\" y1=\"179\" x2=\"133.1451766758918\" y2=\"150.39337575755204\" stroke=\"#2A5D9E\" stroke-width=\"2.4\" stroke-linecap=\"round\"/><polygon points=\"141.0,146.0 135.2,154.0 131.1,146.8\" fill=\"#2A5D9E\"/><text x=\"158\" y=\"145\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">15 m/s</text><path d=\"M82 179 Q225 75 382 179\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.7\" stroke-dasharray=\"6 5\"/><line x1=\"225\" y1=\"91\" x2=\"225\" y2=\"188\" stroke=\"#9A959C\" stroke-width=\"1.0\" stroke-linecap=\"butt\" stroke-dasharray=\"4 4\"/><text x=\"225\" y=\"213\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">symmetrisk flygtid</text><path d=\"M115 179 A33 33 0 0 0 111 163\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"1.5\"/><text x=\"122\" y=\"168\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">28°</text></svg></span><p>Bestäm flygtiden. Bortse från luftmotstånd.</p>",
   "s": "<p>v<sub>0y</sub> = 15sin28°. Tiden upp är v<sub>0y</sub>/g och nedtiden är lika lång.</p><p>T = 2v<sub>0y</sub>/g = <strong>1.43 s</strong>.</p>"
 },
 {
@@ -208,7 +208,7 @@ window.BANK2 = [
   "niva": "E",
   "typ": "bestäm kastlängd på samma höjd från fart och vinkel, kombinera flygtid och horisontell rörelse",
   "poang": "(2/0/0)",
-  "t": "<p>En boll kastas från marknivå med 19 m/s i vinkeln 41° och landar på marken igen.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Kastlängd på plan mark\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><line x1=\"25\" y1=\"195\" x2=\"475\" y2=\"195\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"65\" cy=\"177\" r=\"7\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><path d=\"M65 177 Q245 34 430 177\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.5\"/><line x1=\"65\" y1=\"177\" x2=\"132\" y2=\"118\" stroke=\"#2A5D9E\" stroke-width=\"3\" marker-end=\"url(#arrb)\"/><text x=\"121\" y=\"108\" font-size=\"12\">19 m/s</text><text x=\"89\" y=\"165\" font-size=\"12\">41°</text><line x1=\"65\" y1=\"205\" x2=\"430\" y2=\"205\" stroke=\"#9A959C\"/><text x=\"247\" y=\"222\" text-anchor=\"middle\" font-size=\"12\">R = ?</text></svg></span><p>Bestäm kastlängden.</p>",
+  "t": "<p>En boll kastas från marknivå med 19 m/s i vinkeln 41° och landar på marken igen.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Sned kastbana med markerad kastlängd\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"35\" y1=\"188\" x2=\"440\" y2=\"188\" stroke=\"#2B2527\" stroke-width=\"1.8\" stroke-linecap=\"square\"/><circle cx=\"72\" cy=\"179\" r=\"7\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"72\" y1=\"179\" x2=\"120.15791697546463\" y2=\"137.8468709482393\" stroke=\"#2A5D9E\" stroke-width=\"2.4\" stroke-linecap=\"round\"/><polygon points=\"127.0,132.0 122.8,141.0 117.5,134.7\" fill=\"#2A5D9E\"/><text x=\"143\" y=\"127\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">19 m/s</text><path d=\"M72 179 Q225 44 398 179\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.7\" stroke-dasharray=\"6 5\"/><line x1=\"72\" y1=\"211\" x2=\"398\" y2=\"211\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"72.0,211.0 79.0,214.0 79.0,208.0\" fill=\"#5C575E\"/><polygon points=\"398.0,211.0 391.0,214.0 391.0,208.0\" fill=\"#5C575E\"/><text x=\"235\" y=\"226\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">kastlängd R</text><path d=\"M105 179 A33 33 0 0 0 96 157\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"1.5\"/><text x=\"113\" y=\"161\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">41°</text></svg></span><p>Bestäm kastlängden.</p>",
   "s": "<p>R = v₀²sin(2θ)/g = 19²sin82°/9,82 = <strong>36.4 m</strong>.</p>"
 },
 {
@@ -218,7 +218,7 @@ window.BANK2 = [
   "niva": "E",
   "typ": "bestäm x- och y-position efter given tid i ett snett kast, behandla rörelsekomponenter separat",
   "poang": "(2/0/0)",
-  "t": "<p>En boll kastas från marken med 22 m/s i vinkeln 36°.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Position efter en given tid\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><line x1=\"25\" y1=\"195\" x2=\"475\" y2=\"195\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"75\" cy=\"177\" r=\"7\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><path d=\"M75 177 Q240 35 430 170\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.5\" stroke-dasharray=\"6 4\"/><circle cx=\"260\" cy=\"78\" r=\"7\" fill=\"#B43123\"/><line x1=\"260\" y1=\"78\" x2=\"260\" y2=\"195\" stroke=\"#9A959C\" stroke-dasharray=\"4 4\"/><line x1=\"75\" y1=\"210\" x2=\"260\" y2=\"210\" stroke=\"#9A959C\"/><text x=\"168\" y=\"226\" text-anchor=\"middle\" font-size=\"12\">x</text><text x=\"268\" y=\"135\" font-size=\"12\">y</text><text x=\"96\" y=\"146\" font-size=\"12\">22 m/s, 36°</text></svg></span><p>Var befinner sig bollen 1,4 s efter kastet? Ange x- och y-koordinat relativt kastpunkten.</p>",
+  "t": "<p>En boll kastas från marken med 22 m/s i vinkeln 36°.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Koordinatsystem med projektilens position efter 1,4 sekunder\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"65\" y1=\"190\" x2=\"430\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><line x1=\"65\" y1=\"190\" x2=\"65\" y2=\"35\" stroke=\"#2B2527\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><line x1=\"65\" y1=\"190\" x2=\"413.0\" y2=\"190.0\" stroke=\"#5C575E\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><polygon points=\"420.0,190.0 413.0,193.2 413.0,186.8\" fill=\"#5C575E\"/><line x1=\"65\" y1=\"190\" x2=\"65.0\" y2=\"42.0\" stroke=\"#5C575E\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><polygon points=\"65.0,35.0 68.2,42.0 61.8,42.0\" fill=\"#5C575E\"/><path d=\"M65 190 Q210 50 390 170\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.6\" stroke-dasharray=\"6 5\"/><circle cx=\"261\" cy=\"88\" r=\"7\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"261\" y1=\"88\" x2=\"261\" y2=\"190\" stroke=\"#9A959C\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-dasharray=\"4 4\"/><line x1=\"65\" y1=\"88\" x2=\"261\" y2=\"88\" stroke=\"#9A959C\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-dasharray=\"4 4\"/><text x=\"267\" y=\"80\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">t = 1,4 s</text><text x=\"424\" y=\"208\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"400\" fill=\"#2B2527\">x</text><text x=\"49\" y=\"39\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"400\" fill=\"#2B2527\">y</text></svg></span><p>Var befinner sig bollen 1,4 s efter kastet? Ange x- och y-koordinat relativt kastpunkten.</p>",
   "s": "<p>x = v₀cosθ·t = <strong>24.9 m</strong>.</p><p>y = v₀sinθ·t − gt²/2 = <strong>8.5 m</strong>.</p>"
 },
 {
@@ -228,7 +228,7 @@ window.BANK2 = [
   "niva": "E",
   "typ": "bestäm hastighetens storlek och riktning vid viss tid genom att kombinera komponenter",
   "poang": "(2/0/0)",
-  "t": "<p>En boll kastas med 20 m/s i vinkeln 50°. Bestäm fart och rörelseriktning 2,1 s efter kastet.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Hastighet under ett kast\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><line x1=\"25\" y1=\"195\" x2=\"475\" y2=\"195\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M70 177 Q230 35 410 177\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"2\" stroke-dasharray=\"6 4\"/><circle cx=\"286\" cy=\"82\" r=\"8\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><line x1=\"286\" y1=\"82\" x2=\"349\" y2=\"103\" stroke=\"#2A5D9E\" stroke-width=\"3\" marker-end=\"url(#arrb)\"/><line x1=\"286\" y1=\"82\" x2=\"349\" y2=\"82\" stroke=\"#B43123\" stroke-width=\"2\"/><line x1=\"349\" y1=\"82\" x2=\"349\" y2=\"103\" stroke=\"#B43123\" stroke-width=\"2\"/><text x=\"352\" y=\"116\" font-size=\"12\">v efter 2,1 s</text></svg></span>",
+  "t": "<p>En boll kastas med 20 m/s i vinkeln 50°. Bestäm fart och rörelseriktning 2,1 s efter kastet.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Projektil med momentan hastighetsvektor och komponenter\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"35\" y1=\"188\" x2=\"440\" y2=\"188\" stroke=\"#2B2527\" stroke-width=\"1.8\" stroke-linecap=\"square\"/><path d=\"M72 179 Q205 47 382 179\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.6\" stroke-dasharray=\"6 5\"/><circle cx=\"292\" cy=\"93\" r=\"7\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"292\" y1=\"93\" x2=\"341.40442276869885\" y2=\"108.33240706614792\" stroke=\"#2A5D9E\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><polygon points=\"350.0,111.0 340.2,112.3 342.6,104.4\" fill=\"#2A5D9E\"/><text x=\"362\" y=\"114\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">v</text><line x1=\"292\" y1=\"93\" x2=\"350\" y2=\"93\" stroke=\"#9A959C\" stroke-width=\"1.1\" stroke-linecap=\"butt\" stroke-dasharray=\"4 4\"/><line x1=\"350\" y1=\"93\" x2=\"350\" y2=\"111\" stroke=\"#9A959C\" stroke-width=\"1.1\" stroke-linecap=\"butt\" stroke-dasharray=\"4 4\"/><text x=\"290\" y=\"72\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">t = 2,1 s</text></svg></span>",
   "s": "<p>v<sub>x</sub> = 20cos50° = 12.86 m/s.</p><p>v<sub>y</sub> = 20sin50° − 9,82·2,1 = -5.30 m/s.</p><p>Farten blir <strong>13.9 m/s</strong>. Vinkeln är <strong>22.4° under horisontalplanet</strong>.</p>"
 },
 {
@@ -238,7 +238,7 @@ window.BANK2 = [
   "niva": "C",
   "typ": "bestäm okänd utgångshastighet för att passera given målpunkt vid bestämd kastvinkel, invertera kastbanans ekvation",
   "poang": "(1/2/0)",
-  "t": "<p>En basketboll släpps 2,0 m över golvet i vinkeln 47°. Ringens centrum är 6,8 m bort och 3,05 m över golvet.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Basketkast med okänd utgångshastighet\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><line x1=\"25\" y1=\"195\" x2=\"475\" y2=\"195\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"70\" cy=\"145\" r=\"7\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><line x1=\"70\" y1=\"145\" x2=\"130\" y2=\"91\" stroke=\"#2A5D9E\" stroke-width=\"3\" marker-end=\"url(#arrb)\"/><text x=\"95\" y=\"117\" font-size=\"12\">47°</text><path d=\"M70 145 Q220 32 365 90\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.5\"/><line x1=\"365\" y1=\"195\" x2=\"365\" y2=\"82\" stroke=\"#2B2527\" stroke-width=\"4\"/><ellipse cx=\"365\" cy=\"90\" rx=\"24\" ry=\"5\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2\"/><text x=\"380\" y=\"104\" font-size=\"12\">3,05 m</text><line x1=\"70\" y1=\"213\" x2=\"365\" y2=\"213\" stroke=\"#9A959C\"/><text x=\"218\" y=\"228\" text-anchor=\"middle\" font-size=\"12\">6,8 m</text><text x=\"38\" y=\"153\" font-size=\"12\">2,0 m</text></svg></span><p>Vilken utgångshastighet krävs för att bollen ska passera ringens centrum?</p>",
+  "t": "<p>En basketboll släpps 2,0 m över golvet i vinkeln 47°. Ringens centrum är 6,8 m bort och 3,05 m över golvet.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Basketkast mot ring med avstånd och höjd\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"35\" y1=\"198\" x2=\"440\" y2=\"198\" stroke=\"#2B2527\" stroke-width=\"1.8\" stroke-linecap=\"square\"/><g transform=\"translate(62 160) scale(0.58)\"><circle cx=\"0\" cy=\"-30\" r=\"8\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"0\" y1=\"-22\" x2=\"0\" y2=\"12\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"-10\" x2=\"-15\" y2=\"2\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"-10\" x2=\"15\" y2=\"2\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"12\" x2=\"-12\" y2=\"34\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"12\" x2=\"12\" y2=\"34\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/></g><circle cx=\"96\" cy=\"145\" r=\"7\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"96\" y1=\"145\" x2=\"138.89030222434948\" y2=\"98.60844861447913\" stroke=\"#2A5D9E\" stroke-width=\"2.4\" stroke-linecap=\"round\"/><polygon points=\"145.0,92.0 141.9,101.4 135.9,95.8\" fill=\"#2A5D9E\"/><text x=\"159\" y=\"88\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">v₀ ?</text><path d=\"M96 145 Q238 28 371 116\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.6\" stroke-dasharray=\"6 5\"/><line x1=\"370\" y1=\"68\" x2=\"370\" y2=\"198\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"square\"/><ellipse cx=\"354\" cy=\"116\" rx=\"22\" ry=\"5\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2\"/><line x1=\"96\" y1=\"220\" x2=\"354\" y2=\"220\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"96.0,220.0 103.0,223.0 103.0,217.0\" fill=\"#5C575E\"/><polygon points=\"354.0,220.0 347.0,223.0 347.0,217.0\" fill=\"#5C575E\"/><text x=\"225\" y=\"226\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">6,8 m</text><line x1=\"420\" y1=\"198\" x2=\"420\" y2=\"116\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"420.0,198.0 423.0,191.0 417.0,191.0\" fill=\"#5C575E\"/><polygon points=\"420.0,116.0 423.0,123.0 417.0,123.0\" fill=\"#5C575E\"/><text x=\"446\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">3,05 m</text></svg></span><p>Vilken utgångshastighet krävs för att bollen ska passera ringens centrum?</p>",
   "s": "<p>Kastbanan skrivs y = y₀ + x tanθ − gx²/(2v₀²cos²θ).</p><p>Med x=6,8 m, y₀=2,0 m, y=3,05 m och θ=47° fås v₀ = <strong>8.8 m/s</strong>.</p>"
 },
 {
@@ -248,7 +248,7 @@ window.BANK2 = [
   "niva": "C",
   "typ": "snett kast mellan olika höjder, lös flygtid med andragradsekvation och bestäm nedslagspunkt och slutfart",
   "poang": "(1/2/0)",
-  "t": "<p>En räddningslina skjuts från en 28 m hög klippkant med 23 m/s i vinkeln 30°.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Snett kast från klippa\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><line x1=\"25\" y1=\"195\" x2=\"475\" y2=\"195\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M45 72 H145 V195\" fill=\"#9A959C\"/><circle cx=\"135\" cy=\"63\" r=\"8\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><line x1=\"135\" y1=\"63\" x2=\"203\" y2=\"24\" stroke=\"#2A5D9E\" stroke-width=\"3\" marker-end=\"url(#arrb)\"/><text x=\"177\" y=\"20\" font-size=\"12\">23 m/s</text><text x=\"160\" y=\"58\" font-size=\"12\">30°</text><path d=\"M135 63 Q260 4 420 195\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.5\"/><line x1=\"25\" y1=\"72\" x2=\"25\" y2=\"195\" stroke=\"#9A959C\"/><text x=\"3\" y=\"139\" font-size=\"12\">28 m</text></svg></span><p>Bestäm hur långt från klippfoten projektilen landar och farten precis före nedslaget.</p>",
+  "t": "<p>En räddningslina skjuts från en 28 m hög klippkant med 23 m/s i vinkeln 30°.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Räddningslina skjuts från klippkant\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M35 72 L128 72 L128 192 L440 192\" fill=\"#EDEEF1\" stroke=\"none\"/><line x1=\"35\" y1=\"72\" x2=\"128\" y2=\"72\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"128\" y1=\"72\" x2=\"128\" y2=\"192\" stroke=\"#2B2527\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"35\" y1=\"192\" x2=\"440\" y2=\"192\" stroke=\"#2B2527\" stroke-width=\"1.8\" stroke-linecap=\"square\"/><circle cx=\"118\" cy=\"62\" r=\"7\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"118\" y1=\"62\" x2=\"166.18581172087985\" y2=\"34.4652504452115\" stroke=\"#2A5D9E\" stroke-width=\"2.4\" stroke-linecap=\"round\"/><polygon points=\"174.0,30.0 168.2,38.1 164.1,30.9\" fill=\"#2A5D9E\"/><text x=\"188\" y=\"29\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">23 m/s</text><path d=\"M118 62 Q260 8 385 192\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.6\" stroke-dasharray=\"6 5\"/><line x1=\"92\" y1=\"72\" x2=\"92\" y2=\"192\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"92.0,72.0 89.0,79.0 95.0,79.0\" fill=\"#5C575E\"/><polygon points=\"92.0,192.0 89.0,185.0 95.0,185.0\" fill=\"#5C575E\"/><text x=\"69\" y=\"135\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">28 m</text><path d=\"M149 62 A31 31 0 0 0 145 47\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"1.5\"/><text x=\"158\" y=\"49\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">30°</text></svg></span><p>Bestäm hur långt från klippfoten projektilen landar och farten precis före nedslaget.</p>",
   "s": "<p>Vertikalt: 0 = 28 + 11.50t − 4,91t². Den positiva lösningen är t = <strong>3.83 s</strong>.</p><p>x = v<sub>x</sub>t = 19.92·3.83 = <strong>76.3 m</strong>.</p><p>v<sub>y</sub> = 11.50 − 9,82·3.83 = -26.1 m/s. Slutfarten blir <strong>32.8 m/s</strong>.</p>"
 },
 {
@@ -258,7 +258,7 @@ window.BANK2 = [
   "niva": "C",
   "typ": "bestäm träffhöjd och hastighetsriktning vid en lodrät vägg från kastdata och horisontellt avstånd",
   "poang": "(1/2/0)",
-  "t": "<p>En boll kastas med 24 m/s i vinkeln 40° mot en lodrät vägg 26 m bort.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Projektil träffar lodrät vägg\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><line x1=\"25\" y1=\"195\" x2=\"475\" y2=\"195\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"60\" cy=\"177\" r=\"7\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><line x1=\"60\" y1=\"177\" x2=\"125\" y2=\"122\" stroke=\"#2A5D9E\" stroke-width=\"3\" marker-end=\"url(#arrb)\"/><text x=\"100\" y=\"112\" font-size=\"12\">24 m/s</text><text x=\"83\" y=\"169\" font-size=\"12\">40°</text><path d=\"M60 177 Q225 38 390 124\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.5\"/><rect x=\"390\" y=\"45\" width=\"12\" height=\"150\" fill=\"#9A959C\"/><circle cx=\"390\" cy=\"124\" r=\"6\" fill=\"#B43123\"/><line x1=\"60\" y1=\"214\" x2=\"390\" y2=\"214\" stroke=\"#9A959C\"/><text x=\"225\" y=\"228\" text-anchor=\"middle\" font-size=\"12\">26 m</text></svg></span><p>På vilken höjd träffar bollen väggen, och är den på väg upp eller ned? Ange även hastighetens vinkel mot horisontalplanet.</p>",
+  "t": "<p>En boll kastas med 24 m/s i vinkeln 40° mot en lodrät vägg 26 m bort.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Bollkast mot lodrät vägg\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"35\" y1=\"190\" x2=\"440\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"1.8\" stroke-linecap=\"square\"/><line x1=\"390\" y1=\"40\" x2=\"390\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"3\" stroke-linecap=\"square\"/><circle cx=\"70\" cy=\"181\" r=\"7\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"70\" y1=\"181\" x2=\"121.1250293700856\" y2=\"137.8081648425139\" stroke=\"#2A5D9E\" stroke-width=\"2.4\" stroke-linecap=\"round\"/><polygon points=\"128.0,132.0 123.8,141.0 118.5,134.6\" fill=\"#2A5D9E\"/><text x=\"142\" y=\"127\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">24 m/s</text><path d=\"M70 181 Q210 42 390 112\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.6\" stroke-dasharray=\"6 5\"/><circle cx=\"390\" cy=\"112\" r=\"6\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"390\" y1=\"112\" x2=\"422.6373526523322\" y2=\"125.87087487724119\" stroke=\"#2A5D9E\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><polygon points=\"430.0,129.0 421.2,129.3 424.1,122.5\" fill=\"#2A5D9E\"/><text x=\"441\" y=\"130\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">v</text><line x1=\"70\" y1=\"214\" x2=\"390\" y2=\"214\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"70.0,214.0 77.0,217.0 77.0,211.0\" fill=\"#5C575E\"/><polygon points=\"390.0,214.0 383.0,217.0 383.0,211.0\" fill=\"#5C575E\"/><text x=\"230\" y=\"226\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">26 m</text></svg></span><p>På vilken höjd träffar bollen väggen, och är den på väg upp eller ned? Ange även hastighetens vinkel mot horisontalplanet.</p>",
   "s": "<p>Tiden till väggen är t = x/v<sub>x</sub> = <strong>1.41 s</strong>.</p><p>Höjden blir y = <strong>12.0 m</strong>.</p><p>v<sub>y</sub> = 1.5 m/s, alltså är bollen på väg <strong>ned</strong>. Hastigheten lutar <strong>4.8° nedåt</strong> från horisontalplanet.</p>"
 },
 {
@@ -268,7 +268,7 @@ window.BANK2 = [
   "niva": "C",
   "typ": "bestäm okänd begynnelsehastighet och kastvinkel ur videodata vid två tidpunkter, modellera komponentrörelse",
   "poang": "(1/2/0)",
-  "t": "<p>I en videomätning sätts kastpunkten till (0,0). Efter 0,50 s är bollen vid (4.0 m, 4.27 m) och efter 1,00 s vid (8.0 m, 6.09 m).</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Videomätning av kastbana\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><line x1=\"25\" y1=\"195\" x2=\"475\" y2=\"195\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"70\" cy=\"177\" r=\"6\" fill=\"#2B2527\"/><circle cx=\"190\" cy=\"105\" r=\"7\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><circle cx=\"310\" cy=\"93\" r=\"7\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><text x=\"171\" y=\"88\" font-size=\"11\">t = 0,50 s</text><text x=\"291\" y=\"76\" font-size=\"11\">t = 1,00 s</text><line x1=\"70\" y1=\"205\" x2=\"190\" y2=\"205\" stroke=\"#9A959C\"/><text x=\"130\" y=\"220\" text-anchor=\"middle\" font-size=\"11\">x = 4.0 m</text><line x1=\"190\" y1=\"205\" x2=\"310\" y2=\"205\" stroke=\"#9A959C\"/><text x=\"250\" y=\"220\" text-anchor=\"middle\" font-size=\"11\">ytterligare 4.0 m</text><text x=\"355\" y=\"112\" font-size=\"11\">y₁=4.27 m</text><text x=\"355\" y=\"132\" font-size=\"11\">y₂=6.09 m</text></svg></span><p>Bestäm bollens begynnelsefart och kastvinkel. Bortse från luftmotstånd.</p>",
+  "t": "<p>I en videomätning sätts kastpunkten till (0,0). Efter 0,50 s är bollen vid (4.0 m, 4.27 m) och efter 1,00 s vid (8.0 m, 6.09 m).</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Videomätning av bollens läge vid två tidpunkter\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"55\" y1=\"190\" x2=\"430\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><line x1=\"55\" y1=\"190\" x2=\"55\" y2=\"35\" stroke=\"#2B2527\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><path d=\"M55 190 Q180 40 370 142\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.6\" stroke-dasharray=\"6 5\"/><circle cx=\"174\" cy=\"92\" r=\"6\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"294\" cy=\"70\" r=\"6\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"171\" y=\"78\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10\" font-weight=\"400\" fill=\"#5C575E\">0,50 s</text><text x=\"294\" y=\"55\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10\" font-weight=\"400\" fill=\"#5C575E\">1,00 s</text><line x1=\"174\" y1=\"92\" x2=\"174\" y2=\"190\" stroke=\"#9A959C\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-dasharray=\"4 4\"/><line x1=\"294\" y1=\"70\" x2=\"294\" y2=\"190\" stroke=\"#9A959C\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-dasharray=\"4 4\"/><text x=\"174\" y=\"207\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">x=4,0 m</text><text x=\"294\" y=\"207\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">x=8,0 m</text></svg></span><p>Bestäm bollens begynnelsefart och kastvinkel. Bortse från luftmotstånd.</p>",
   "s": "<p>Horisontellt är farten konstant: v<sub>0x</sub> = 8.0/1,00 = <strong>8.0 m/s</strong>.</p><p>Vertikalt: y = v<sub>0y</sub>t − gt²/2. Med t=1,00 s fås v<sub>0y</sub> = 6.09+4,91 = <strong>11.0 m/s</strong>.</p><p>v₀ = √(8²+11²) = <strong>13.6 m/s</strong> och θ = arctan(11/8) = <strong>54.0°</strong>.</p>"
 },
 {
@@ -278,7 +278,7 @@ window.BANK2 = [
   "niva": "C",
   "typ": "bestäm två möjliga kastvinklar för samma räckvidd vid given fart, tolka trigonometriska dubbellösningar",
   "poang": "(1/2/0)",
-  "t": "<p>En boll kastas från marknivå med farten 20 m/s och ska landa 30 m bort på samma höjd.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Två kastbanor till samma mål\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><line x1=\"25\" y1=\"195\" x2=\"475\" y2=\"195\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"60\" cy=\"177\" r=\"7\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><circle cx=\"410\" cy=\"177\" r=\"7\" fill=\"#2B2527\"/><path d=\"M60 177 Q235 135 410 177\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2.5\"/><path d=\"M60 177 Q235 12 410 177\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.5\"/><line x1=\"60\" y1=\"210\" x2=\"410\" y2=\"210\" stroke=\"#9A959C\"/><text x=\"235\" y=\"226\" text-anchor=\"middle\" font-size=\"12\">30 m</text><text x=\"220\" y=\"97\" font-size=\"12\">samma v₀ = 20 m/s</text></svg></span><p>Bestäm de två kastvinklar som ger rätt kastlängd.</p>",
+  "t": "<p>En boll kastas från marknivå med farten 20 m/s och ska landa 30 m bort på samma höjd.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Två möjliga kastbanor med samma räckvidd\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"35\" y1=\"190\" x2=\"440\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"1.8\" stroke-linecap=\"square\"/><circle cx=\"72\" cy=\"181\" r=\"6\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M72 181 Q235 32 400 181\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"1.8\" stroke-dasharray=\"7 5\"/><path d=\"M72 181 Q235 125 400 181\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"1.8\" stroke-dasharray=\"7 5\"/><line x1=\"72\" y1=\"181\" x2=\"111.8283999243682\" y2=\"115.82625466921567\" stroke=\"#2A5D9E\" stroke-width=\"2.0\" stroke-linecap=\"round\"/><polygon points=\"116.0,109.0 115.0,117.7 108.7,113.9\" fill=\"#2A5D9E\"/><line x1=\"72\" y1=\"181\" x2=\"128.50936657944766\" y2=\"159.80898753270714\" stroke=\"#B43123\" stroke-width=\"2.0\" stroke-linecap=\"round\"/><polygon points=\"136.0,157.0 129.8,163.3 127.2,156.4\" fill=\"#B43123\"/><line x1=\"72\" y1=\"214\" x2=\"400\" y2=\"214\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"72.0,214.0 79.0,217.0 79.0,211.0\" fill=\"#5C575E\"/><polygon points=\"400.0,214.0 393.0,217.0 393.0,211.0\" fill=\"#5C575E\"/><text x=\"236\" y=\"227\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">30 m</text><text x=\"122\" y=\"101\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#2A5D9E\">θ₂</text><text x=\"141\" y=\"159\" text-anchor=\"start\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#B43123\">θ₁</text></svg></span><p>Bestäm de två kastvinklar som ger rätt kastlängd.</p>",
   "s": "<p>R = v₀²sin(2θ)/g ⇒ sin(2θ) = Rg/v₀² = 0.737.</p><p>Det ger 2θ = 47.4° eller 132.6°.</p><p>Alltså θ = <strong>23.7°</strong> eller <strong>66.3°</strong>. De två banorna är en låg och en hög kastbana.</p>"
 },
 {
@@ -288,7 +288,7 @@ window.BANK2 = [
   "niva": "A",
   "typ": "bestäm intervall av utgångshastigheter för att träffa ett rörligt mål, kombinera projektilrörelse med relativ förflyttning och olikheter",
   "poang": "(0/0/3)",
-  "t": "<p>En boll kastas i 45° från samma höjd som ett 2,8 m långt lastflak. I kastögonblicket är flakets bakre kant 7,0 m framför kastpunkten. Lastbilen kör bort från kastaren med 5,0 m/s.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Kast mot rörligt lastflak\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><line x1=\"25\" y1=\"195\" x2=\"475\" y2=\"195\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"55\" cy=\"177\" r=\"7\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><line x1=\"55\" y1=\"177\" x2=\"112\" y2=\"120\" stroke=\"#2A5D9E\" stroke-width=\"3\" marker-end=\"url(#arrb)\"/><text x=\"79\" y=\"142\" font-size=\"12\">45°</text><path d=\"M55 177 Q210 30 365 177\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.5\"/><rect x=\"320\" y=\"164\" width=\"78\" height=\"24\" fill=\"#C8D7E8\" stroke=\"#2B2527\"/><line x1=\"338\" y1=\"164\" x2=\"338\" y2=\"138\" stroke=\"#2B2527\"/><line x1=\"380\" y1=\"164\" x2=\"380\" y2=\"138\" stroke=\"#2B2527\"/><line x1=\"322\" y1=\"151\" x2=\"397\" y2=\"151\" stroke=\"#2A5D9E\" stroke-width=\"2.5\" marker-end=\"url(#arrb)\"/><text x=\"344\" y=\"142\" font-size=\"11\">5,0 m/s</text><text x=\"321\" y=\"205\" font-size=\"11\">lastflak 2,8 m</text></svg></span><p>Inom vilket intervall måste bollens utgångshastighet ligga för att den ska landa på flaket?</p>",
+  "t": "<p>En boll kastas i 45° från samma höjd som ett 2,8 m långt lastflak. I kastögonblicket är flakets bakre kant 7,0 m framför kastpunkten. Lastbilen kör bort från kastaren med 5,0 m/s.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Boll kastas mot lastbilens rörliga flak\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"35\" y1=\"192\" x2=\"440\" y2=\"192\" stroke=\"#2B2527\" stroke-width=\"1.8\" stroke-linecap=\"square\"/><g transform=\"translate(55 160) scale(0.52)\"><circle cx=\"0\" cy=\"-30\" r=\"8\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"0\" y1=\"-22\" x2=\"0\" y2=\"12\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"-10\" x2=\"-15\" y2=\"2\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"-10\" x2=\"15\" y2=\"2\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"12\" x2=\"-12\" y2=\"34\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"0\" y1=\"12\" x2=\"12\" y2=\"34\" stroke=\"#2B2527\" stroke-width=\"2.2\" stroke-linecap=\"round\"/></g><circle cx=\"86\" cy=\"147\" r=\"7\" fill=\"#D9A441\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"86\" y1=\"147\" x2=\"124.2785023807918\" y2=\"109.59146358240801\" stroke=\"#2A5D9E\" stroke-width=\"2.3\" stroke-linecap=\"round\"/><polygon points=\"130.0,104.0 126.9,112.2 121.7,107.0\" fill=\"#2A5D9E\"/><text x=\"136\" y=\"101\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">45°</text><path d=\"M86 147 Q215 42 345 147\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.6\" stroke-dasharray=\"6 5\"/><rect x=\"300\" y=\"153\" width=\"115\" height=\"28\" rx=\"3\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><rect x=\"382\" y=\"132\" width=\"33\" height=\"21\" rx=\"3\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"322\" cy=\"184\" r=\"10\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"322\" cy=\"184\" r=\"2.6\" fill=\"#2B2527\"/><circle cx=\"393\" cy=\"184\" r=\"10\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"393\" cy=\"184\" r=\"2.6\" fill=\"#2B2527\"/><line x1=\"415\" y1=\"140\" x2=\"444.0\" y2=\"140.0\" stroke=\"#2A5D9E\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><polygon points=\"452.0,140.0 444.0,143.7 444.0,136.3\" fill=\"#2A5D9E\"/><text x=\"430\" y=\"126\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">5,0 m/s</text><line x1=\"86\" y1=\"219\" x2=\"300\" y2=\"219\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"86.0,219.0 93.0,222.0 93.0,216.0\" fill=\"#5C575E\"/><polygon points=\"300.0,219.0 293.0,222.0 293.0,216.0\" fill=\"#5C575E\"/><text x=\"193\" y=\"228\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">7,0 m</text><text x=\"357\" y=\"148\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">2,8 m flak</text></svg></span><p>Inom vilket intervall måste bollens utgångshastighet ligga för att den ska landa på flaket?</p>",
   "s": "<p>För 45° och samma start- och sluthöjd är flygtiden T = √2v₀/g och bollens räckvidd R = v₀²/g.</p><p>Under flygtiden ligger flaket mellan x = 7,0+5,0T och x = 9,8+5,0T.</p><p>Kravet 7,0+5T ≤ R ≤ 9,8+5T ger efter insättning <strong>12.55 m/s ≤ v₀ ≤ 13.96 m/s</strong>.</p>"
 },
 {
@@ -298,7 +298,7 @@ window.BANK2 = [
   "niva": "A",
   "typ": "bestäm minsta utgångshastighet under flera geometriska villkor, jämför hinderkrav och räckviddskrav för projektilbana",
   "poang": "(0/1/3)",
-  "t": "<p>En motorcykel lämnar en ramp 0,90 m över marken i vinkeln 27°. Ett 2,4 m högt hinder står 10 m från rampkanten. Landningszonen börjar 18 m från rampkanten.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" role=\"img\" aria-label=\"Motorcykelkast över hinder till landningszon\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker><marker id=\"arrb\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#2A5D9E\"/></marker></defs><line x1=\"25\" y1=\"195\" x2=\"475\" y2=\"195\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M40 175 L105 138\" stroke=\"#777\" stroke-width=\"10\"/><circle cx=\"105\" cy=\"134\" r=\"8\" fill=\"#B43123\"/><line x1=\"105\" y1=\"134\" x2=\"170\" y2=\"103\" stroke=\"#2A5D9E\" stroke-width=\"3\" marker-end=\"url(#arrb)\"/><text x=\"123\" y=\"124\" font-size=\"12\">27°</text><rect x=\"265\" y=\"112\" width=\"10\" height=\"83\" fill=\"#9A959C\"/><text x=\"250\" y=\"103\" font-size=\"11\">2,4 m</text><rect x=\"390\" y=\"188\" width=\"75\" height=\"7\" fill=\"#A6B88C\"/><text x=\"395\" y=\"179\" font-size=\"11\">landning från 18 m</text><path d=\"M105 134 Q250 28 425 190\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.5\" stroke-dasharray=\"6 4\"/></svg></span><p>Bestäm den minsta utgångshastighet som både klarar hindret och når landningszonen. Bortse från luftmotstånd.</p>",
+  "t": "<p>En motorcykel lämnar en ramp 0,90 m över marken i vinkeln 27°. Ett 2,4 m högt hinder står 10 m från rampkanten. Landningszonen börjar 18 m från rampkanten.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 470 230\" role=\"img\" aria-label=\"Motorcykel lämnar ramp och ska klara hinder samt landningszon\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"35\" y1=\"194\" x2=\"440\" y2=\"194\" stroke=\"#2B2527\" stroke-width=\"1.8\" stroke-linecap=\"square\"/><path d=\"M42 194 L115 194 L165 166\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"8\" stroke-linecap=\"square\"/><g transform=\"translate(153 150) rotate(-27) scale(0.58)\"><path d=\"M-35 8 L-27 -10 Q-22 -19 -9 -21 L13 -21 Q25 -19 30 -9 L36 8 Z\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M-18 -10 Q-12 -16 -5 -16 L12 -16 Q19 -14 23 -10 Z\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"1.4\"/><circle cx=\"-23\" cy=\"9\" r=\"7\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"23\" cy=\"9\" r=\"7\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"-23\" cy=\"9\" r=\"2.5\" fill=\"#2B2527\"/><circle cx=\"23\" cy=\"9\" r=\"2.5\" fill=\"#2B2527\"/></g><line x1=\"165\" y1=\"160\" x2=\"209.9806445282664\" y2=\"137.08533203276994\" stroke=\"#2A5D9E\" stroke-width=\"2.3\" stroke-linecap=\"round\"/><polygon points=\"218.0,133.0 211.9,140.8 208.1,133.4\" fill=\"#2A5D9E\"/><text x=\"232\" y=\"129\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">v₀ ?</text><path d=\"M165 160 Q275 65 408 194\" fill=\"none\" stroke=\"#9A959C\" stroke-width=\"1.6\" stroke-dasharray=\"6 5\"/><rect x=\"286\" y=\"120\" width=\"13\" height=\"74\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"292\" y=\"112\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"400\" fill=\"#5C575E\">2,4 m</text><rect x=\"375\" y=\"186\" width=\"60\" height=\"8\" fill=\"#C7D8B5\" stroke=\"#2B2527\" stroke-width=\"1.4\"/><text x=\"405\" y=\"177\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"9.5\" font-weight=\"400\" fill=\"#5C575E\">landningszon</text><line x1=\"165\" y1=\"219\" x2=\"286\" y2=\"219\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"165.0,219.0 172.0,222.0 172.0,216.0\" fill=\"#5C575E\"/><polygon points=\"286.0,219.0 279.0,222.0 279.0,216.0\" fill=\"#5C575E\"/><text x=\"225\" y=\"228\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">10 m</text><line x1=\"286\" y1=\"219\" x2=\"375\" y2=\"219\" stroke=\"#5C575E\" stroke-width=\"1.2\" stroke-linecap=\"butt\"/><polygon points=\"286.0,219.0 293.0,222.0 293.0,216.0\" fill=\"#5C575E\"/><polygon points=\"375.0,219.0 368.0,222.0 368.0,216.0\" fill=\"#5C575E\"/><text x=\"330\" y=\"228\" text-anchor=\"middle\" font-family=\"IBM Plex Mono\" font-size=\"10.5\" font-weight=\"600\" fill=\"#5C575E\">8 m</text></svg></span><p>Bestäm den minsta utgångshastighet som både klarar hindret och når landningszonen. Bortse från luftmotstånd.</p>",
   "s": "<p>Kastbanan är y = y₀ + x tanθ − gx²/(2v₀²cos²θ).</p><p>Villkoret y(10) ≥ 2,4 ger v₀ ≥ <strong>13.1 m/s</strong>.</p><p>Villkoret y(18) ≥ 0 ger v₀ ≥ <strong>14.1 m/s</strong>.</p><p>Det strängaste villkoret styr, alltså v₀,min = <strong>14.1 m/s</strong>.</p><p>Med denna fart är höjden vid hindret 2.89 m och nedslaget sker vid x ≈ 18.0 m, så båda kraven är precis uppfyllda.</p>"
 },
 {
@@ -306,273 +306,453 @@ window.BANK2 = [
   "kap": 2,
   "omr": "fjadrar",
   "niva": "E",
+  "typ": "beräkna fjäderkraft direkt med Hookes lag",
   "poang": "(2/0/0)",
-  "t": "<p>En fjäder med fjäderkonstanten 180 N/m dras ut 4,0 cm från sitt obelastade läge. Bestäm fjäderkraftens storlek.</p>",
-  "s": "<p>Hookes lag: F = kx.</p><p>F = 180·0,040 = <strong>7,2 N</strong>.</p>"
+  "t": "<p>En fjäder med fjäderkonstanten 180 N/m dras ut 6,0 cm. Hur stor är fjäderkraften?</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Horisontell fjäder som dras ut 6,0 cm\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"45\" y1=\"150\" x2=\"150\" y2=\"150\" stroke=\"#2B2527\" stroke-width=\"5\"/>\n<polyline points=\"150.0,150.0 162.0,150.0 169.8,160.0 177.6,140.0 185.4,160.0 193.2,140.0 201.0,160.0 208.8,140.0 216.6,160.0 224.4,140.0 232.2,160.0 240.0,140.0 247.8,160.0 255.6,140.0 263.4,160.0 271.2,140.0 279.0,160.0 286.8,140.0 294.6,160.0 302.4,140.0 310.2,160.0 318.0,140.0 318.0,150.0 330.0,150.0\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<rect x=\"330\" y=\"125\" width=\"70\" height=\"50\" rx=\"5\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"365\" y1=\"115\" x2=\"365\" y2=\"72\" stroke=\"#B43123\" stroke-width=\"2.5\" marker-end=\"url(#arr)\"/>\n<text x=\"374\" y=\"86\" font-size=\"12\" fill=\"#B43123\">dragkraft</text>\n<line x1=\"150\" y1=\"195\" x2=\"330\" y2=\"195\" stroke=\"#5C575E\"/><text x=\"240\" y=\"214\" text-anchor=\"middle\" font-size=\"12\">Δx = 6,0 cm</text></svg></span>",
+  "s": "<p>F = kx = 180·0,060 = <strong>10,8 N</strong>.</p>"
 },
 {
   "id": "2.2",
   "kap": 2,
   "omr": "fjadrar",
   "niva": "E",
+  "typ": "bestämma fjäderkonstant från en uppmätt kraft och förlängning",
   "poang": "(2/0/0)",
-  "t": "<p>En massa på 0,32 kg hängs i en vertikal fjäder. När massan är i jämvikt har fjädern förlängts 5,5 cm. Bestäm fjäderkonstanten.</p>",
-  "s": "<p>I jämvikt är fjäderkraften lika stor som tyngdkraften: kx = mg.</p><p>k = mg/x = 0,32·9,82/0,055 = <strong>57,1 N/m</strong>.</p>"
+  "t": "<p>En kraft på 3,6 N förlänger en fjäder 4,5 cm. Bestäm fjäderkonstanten.</p>",
+  "s": "<p>k = F/x = 3,6/0,045 = <strong>80 N/m</strong>.</p>"
 },
 {
   "id": "2.3",
   "kap": 2,
   "omr": "fjadrar",
   "niva": "E",
+  "typ": "bestämma fjäderkonstant ur statisk jämvikt med hängande massa",
   "poang": "(2/0/0)",
-  "t": "<p>En fjäder har fjäderkonstanten 75 N/m. Hur mycket förlängs den av en kraft på 6,0 N?</p>",
-  "s": "<p>x = F/k = 6,0/75 = 0,080 m.</p><p>Förlängningen är <strong>8,0 cm</strong>.</p>"
+  "t": "<p>En massa på 0,40 kg förlänger en lodrät fjäder 3,2 cm när den hänger stilla. Bestäm fjäderkonstanten.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Massa som hänger i en vertikal fjäder\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"130\" y1=\"28\" x2=\"330\" y2=\"28\" stroke=\"#2B2527\" stroke-width=\"5\"/>\n<polyline points=\"230.0,28.0 230.0,40.0 240.0,44.5 220.0,49.0 240.0,53.5 220.0,58.0 240.0,62.5 220.0,67.0 240.0,71.5 220.0,76.0 240.0,80.5 220.0,85.0 240.0,89.5 220.0,94.0 240.0,98.5 220.0,103.0 240.0,107.5 220.0,112.0 240.0,116.5 220.0,121.0 240.0,125.5 220.0,130.0 230.0,130.0 230.0,142.0\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<rect x=\"195\" y=\"142\" width=\"70\" height=\"46\" rx=\"5\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<text x=\"230\" y=\"171\" text-anchor=\"middle\" font-size=\"12\">0,40 kg</text>\n<line x1=\"290\" y1=\"73\" x2=\"290\" y2=\"142\" stroke=\"#5C575E\"/><text x=\"300\" y=\"111\" font-size=\"12\">3,2 cm</text></svg></span>",
+  "s": "<p>I jämvikt är kx = mg. k = mg/x = 0,40·9,82/0,032 = <strong>123 N/m</strong>.</p>"
 },
 {
   "id": "2.4",
   "kap": 2,
   "omr": "fjadrar",
   "niva": "E",
+  "typ": "bestämma okänd massa från statisk fjäderförlängning",
   "poang": "(2/0/0)",
-  "t": "<p>En fjäder med fjäderkonstanten 240 N/m trycks ihop 6,0 cm. Hur stor elastisk potentiell energi lagras i fjädern?</p>",
-  "s": "<p>E = ½kx².</p><p>E = 0,5·240·0,060² = <strong>0,432 J</strong>.</p>"
+  "t": "<p>En fjäder med k = 95 N/m förlängs 7,5 cm av en hängande last. Bestäm lastens massa.</p>",
+  "s": "<p>kx = mg ⇒ m = kx/g = 95·0,075/9,82 = <strong>0.726 kg ≈ 726 g</strong>.</p>"
 },
 {
   "id": "2.5",
   "kap": 2,
   "omr": "fjadrar",
   "niva": "E",
+  "typ": "beräkna elastisk potentiell energi i en komprimerad fjäder",
   "poang": "(2/0/0)",
-  "t": "<p>Två likadana fjädrar med fjäderkonstanten 100 N/m håller tillsammans en last lodrätt och delar lasten lika. Lasten väger 1,0 kg. Hur mycket förlängs varje fjäder?</p>",
-  "s": "<p>Varje fjäder bär halva tyngden: F = mg/2.</p><p>x = F/k = 1,0·9,82/(2·100) = 0,0491 m = <strong>4,91 cm</strong>.</p>"
+  "t": "<p>En fjäder med k = 250 N/m trycks ihop 0,12 m. Hur mycket energi lagras i fjädern?</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Komprimerad fjäder framför en kloss\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"35\" y1=\"170\" x2=\"420\" y2=\"170\" stroke=\"#9A959C\" stroke-width=\"2\"/>\n<line x1=\"55\" y1=\"70\" x2=\"55\" y2=\"170\" stroke=\"#2B2527\" stroke-width=\"5\"/>\n<polyline points=\"55.0,130.0 67.0,130.0 77.0,140.0 87.1,120.0 97.1,140.0 107.2,120.0 117.2,140.0 127.3,120.0 137.3,140.0 147.4,120.0 157.5,140.0 167.5,120.0 177.6,140.0 187.6,120.0 197.7,140.0 207.7,120.0 217.8,140.0 227.8,120.0 237.9,140.0 247.9,120.0 258.0,140.0 268.0,120.0 268.0,130.0 280.0,130.0\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<rect x=\"280\" y=\"105\" width=\"75\" height=\"50\" rx=\"5\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"280\" y1=\"195\" x2=\"355\" y2=\"195\" stroke=\"#5C575E\"/><text x=\"318\" y=\"215\" text-anchor=\"middle\" font-size=\"12\">x = 0,12 m</text></svg></span>",
+  "s": "<p>E = ½kx² = 0,5·250·0,12² = <strong>1.80 J</strong>.</p>"
 },
 {
   "id": "2.6",
   "kap": 2,
   "omr": "fjadrar",
-  "niva": "C",
-  "poang": "(1/2/0)",
-  "t": "<p>En kula på 0,50 kg hängs i en fjäder. I jämvikt är fjädern 8,0 cm längre än obelastad. Kulan dras sedan ytterligare 4,5 cm nedåt. Bestäm fjäderkonstanten och fjäderkraftens största värde under den efterföljande svängningen.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Fjäder med jämviktsläge och neddraget läge\"><rect x=\"8\" y=\"8\" width=\"484\" height=\"214\" rx=\"12\" fill=\"#FBFBFA\" stroke=\"#DEDAD5\"/><line x1=\"170\" y1=\"35\" x2=\"330\" y2=\"35\" stroke=\"#2B2527\" stroke-width=\"5\"/><polyline points=\"250,38 235,52 265,66 235,80 265,94 235,108 265,122 250,136\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/><rect x=\"220\" y=\"136\" width=\"60\" height=\"38\" rx=\"5\" fill=\"#E9EDF1\" stroke=\"#2B2527\"/><line x1=\"350\" y1=\"136\" x2=\"350\" y2=\"190\" stroke=\"#8A858E\" stroke-dasharray=\"5 4\"/><text x=\"360\" y=\"154\" font-size=\"12\">jämvikt</text><line x1=\"220\" y1=\"194\" x2=\"280\" y2=\"194\" stroke=\"#B43123\" stroke-width=\"3\"/><text x=\"290\" y=\"198\" font-size=\"12\">4,5 cm extra</text></svg></span>",
-  "s": "<p>I jämvikt: k·0,080 = mg ⇒ k = <strong>61,4 N/m</strong>.</p><p>Fjädern är längst i nedersta vändläget: total förlängning = 0,080 + 0,045 = 0,125 m.</p><p>F_max = k·0,125 = <strong>7,67 N</strong>.</p>"
+  "niva": "E",
+  "typ": "jämföra fjäderkonstanter utifrån lutningen i ett kraft-förlängningsdiagram",
+  "poang": "(2/0/0)",
+  "t": "<p>Diagrammet visar F som funktion av x för två fjädrar. Vilken fjäder har störst fjäderkonstant? Motivera kort.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Kraft-förlängningsdiagram för två fjädrar\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"70\" y1=\"185\" x2=\"410\" y2=\"185\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"70\" y1=\"185\" x2=\"70\" y2=\"35\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"70\" y1=\"185\" x2=\"340\" y2=\"55\" stroke=\"#B43123\" stroke-width=\"3\"/><line x1=\"70\" y1=\"185\" x2=\"390\" y2=\"110\" stroke=\"#2A5D9E\" stroke-width=\"3\"/>\n<text x=\"330\" y=\"48\" fill=\"#B43123\" font-size=\"13\">A</text><text x=\"392\" y=\"106\" fill=\"#2A5D9E\" font-size=\"13\">B</text>\n<text x=\"235\" y=\"215\" text-anchor=\"middle\" font-size=\"12\">förlängning x</text><text x=\"28\" y=\"110\" font-size=\"12\" transform=\"rotate(-90 28 110)\">kraft F</text></svg></span>",
+  "s": "<p>Hookes lag är F = kx. Lutningen i ett F–x-diagram är därför k. Linje A är brantare, alltså har <strong>fjäder A störst fjäderkonstant</strong>.</p>"
 },
 {
   "id": "2.7",
   "kap": 2,
   "omr": "fjadrar",
-  "niva": "C",
-  "poang": "(1/2/0)",
-  "t": "<p>Två fjädrar med fjäderkonstanterna 120 N/m och 180 N/m kopplas i serie. De dras tillsammans ut 5,0 cm. Bestäm kraften i fjädrarna och hur mycket var och en förlängs.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Två fjädrar i serie\"><rect x=\"8\" y=\"8\" width=\"484\" height=\"214\" rx=\"12\" fill=\"#FBFBFA\" stroke=\"#DEDAD5\"/><line x1=\"80\" y1=\"112\" x2=\"130\" y2=\"112\" stroke=\"#2B2527\" stroke-width=\"4\"/><polyline points=\"130,112 145,96 160,128 175,96 190,128 205,112\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"215\" cy=\"112\" r=\"5\" fill=\"#2B2527\"/><polyline points=\"220,112 235,96 250,128 265,96 280,128 295,112\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"295\" y1=\"112\" x2=\"410\" y2=\"112\" stroke=\"#2B2527\" stroke-width=\"4\"/><text x=\"168\" y=\"78\" font-size=\"12\">120 N/m</text><text x=\"250\" y=\"78\" font-size=\"12\">180 N/m</text><line x1=\"130\" y1=\"160\" x2=\"295\" y2=\"160\" stroke=\"#B43123\"/><text x=\"212\" y=\"178\" text-anchor=\"middle\" font-size=\"12\">total förlängning 5,0 cm</text></svg></span>",
-  "s": "<p>För seriekopplade fjädrar: 1/k_eq = 1/120 + 1/180 ⇒ k_eq = <strong>72 N/m</strong>.</p><p>F = k_eq x = 72·0,050 = <strong>3,6 N</strong>.</p><p>x₁=F/k₁=<strong>3 cm</strong>, x₂=F/k₂=<strong>2 cm</strong>. Summan blir 5,0 cm.</p>"
+  "niva": "E",
+  "typ": "ange riktningen på återförande fjäderkraft från en figur",
+  "poang": "(1/0/0)",
+  "t": "<p>En kloss är dragen åt höger från fjäderns jämviktsläge. Åt vilket håll verkar fjäderkraften?</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Kloss utdragen till höger från fjäderns jämviktsläge\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"45\" y1=\"165\" x2=\"415\" y2=\"165\" stroke=\"#9A959C\" stroke-width=\"2\"/>\n<line x1=\"55\" y1=\"60\" x2=\"55\" y2=\"165\" stroke=\"#2B2527\" stroke-width=\"5\"/>\n<polyline points=\"55.0,125.0 67.0,125.0 77.0,135.0 87.1,115.0 97.1,135.0 107.2,115.0 117.2,135.0 127.3,115.0 137.3,135.0 147.4,115.0 157.5,135.0 167.5,115.0 177.6,135.0 187.6,115.0 197.7,135.0 207.7,115.0 217.8,135.0 227.8,115.0 237.9,135.0 247.9,115.0 258.0,135.0 268.0,115.0 268.0,125.0 280.0,125.0\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<rect x=\"280\" y=\"100\" width=\"70\" height=\"50\" rx=\"5\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<circle cx=\"245\" cy=\"125\" r=\"4\" fill=\"#B43123\"/><text x=\"218\" y=\"95\" font-size=\"12\">jämviktsläge</text>\n<line x1=\"315\" y1=\"88\" x2=\"265\" y2=\"88\" stroke=\"#B43123\" stroke-width=\"2.5\" marker-end=\"url(#arr)\"/></svg></span>",
+  "s": "<p>Fjäderkraften är återförande och verkar mot jämviktsläget: <strong>åt vänster</strong>.</p>"
 },
 {
   "id": "2.8",
   "kap": 2,
   "omr": "fjadrar",
-  "niva": "C",
-  "poang": "(1/2/0)",
-  "t": "<p>En plattform med massan 0,80 kg hänger i två parallella fjädrar med fjäderkonstanterna 90 N/m och 150 N/m. Bestäm jämviktsförlängningen. Hur stor del av tyngdkraften bär respektive fjäder?</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Plattform i två parallella fjädrar\"><rect x=\"8\" y=\"8\" width=\"484\" height=\"214\" rx=\"12\" fill=\"#FBFBFA\" stroke=\"#DEDAD5\"/><line x1=\"130\" y1=\"35\" x2=\"370\" y2=\"35\" stroke=\"#2B2527\" stroke-width=\"5\"/><polyline points=\"190,38 175,52 205,66 175,80 205,94 190,108\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/><polyline points=\"310,38 295,52 325,66 295,80 325,94 310,108\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/><rect x=\"150\" y=\"108\" width=\"200\" height=\"35\" fill=\"#DCE3E8\" stroke=\"#2B2527\"/><text x=\"190\" y=\"92\" text-anchor=\"middle\" font-size=\"12\">90 N/m</text><text x=\"310\" y=\"92\" text-anchor=\"middle\" font-size=\"12\">150 N/m</text><text x=\"250\" y=\"130\" text-anchor=\"middle\" font-size=\"12\">0,80 kg</text></svg></span>",
-  "s": "<p>Parallellt får fjädrarna samma förlängning och k_tot = 90+150 = 240 N/m.</p><p>x = mg/k_tot = 0,80·9,82/240 = <strong>3,27 cm</strong>.</p><p>F₁=k₁x=<strong>2,95 N</strong> och F₂=k₂x=<strong>4,91 N</strong>.</p>"
+  "niva": "E",
+  "typ": "bestämma en fjäders obelastade längd från belastning och fjäderkonstant",
+  "poang": "(2/0/0)",
+  "t": "<p>En fjäder är 18,4 cm lång när den belastas med 2,0 N. Fjäderkonstanten är 125 N/m. Bestäm fjäderns obelastade längd.</p>",
+  "s": "<p>x = F/k = 2,0/125 = 0,016 m = 1,6 cm. Obelastad längd = 18,4 − 1,6 = <strong>16,8 cm</strong>.</p>"
 },
 {
   "id": "2.9",
   "kap": 2,
   "omr": "fjadrar",
-  "niva": "A",
-  "poang": "(0/1/3)",
-  "t": "<p>En okänd fjäder testas. När dess längd är 18,0 cm visar kraftmätaren 3,0 N och när längden är 26,0 cm visar den 7,0 N. Fjädern antas följa Hookes lag. Bestäm fjäderkonstanten och fjäderns obelastade längd. Därefter hängs en massa på 0,60 kg i fjädern. Vilken blir fjäderns totala längd i jämvikt?</p>",
-  "s": "<p>Hookes lag kan skrivas F = k(L−L₀). Skillnaden mellan mätpunkterna eliminerar L₀.</p><p>k = ΔF/ΔL = 4,0/0,080 = <strong>50 N/m</strong>.</p><p>L₀ = 0,180 − 3,0/50 = <strong>12 cm</strong>.</p><p>Med 0,60 kg blir förlängningen x=mg/k=11,8 cm och totallängden <strong>23,8 cm</strong>.</p>"
+  "niva": "C",
+  "typ": "kombinera två parallella fjädrar och bestämma gemensam statisk förlängning",
+  "poang": "(1/2/0)",
+  "t": "<p>En 6,0 kg plattform hänger i två parallella fjädrar med k₁ = 120 N/m och k₂ = 180 N/m. Hur långt sjunker plattformen från fjädrarnas obelastade läge?</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Plattform upphängd i två parallella fjädrar\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"90\" y1=\"28\" x2=\"370\" y2=\"28\" stroke=\"#2B2527\" stroke-width=\"5\"/>\n<polyline points=\"160.0,28.0 160.0,40.0 170.0,44.1 150.0,48.3 170.0,52.4 150.0,56.6 170.0,60.7 150.0,64.9 170.0,69.0 150.0,73.2 170.0,77.4 150.0,81.5 170.0,85.7 150.0,89.8 170.0,94.0 150.0,98.1 170.0,102.3 150.0,106.4 170.0,110.6 150.0,114.7 170.0,118.9 150.0,123.0 160.0,123.0 160.0,135.0\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<polyline points=\"300.0,28.0 300.0,40.0 310.0,44.1 290.0,48.3 310.0,52.4 290.0,56.6 310.0,60.7 290.0,64.9 310.0,69.0 290.0,73.2 310.0,77.4 290.0,81.5 310.0,85.7 290.0,89.8 310.0,94.0 290.0,98.1 310.0,102.3 290.0,106.4 310.0,110.6 290.0,114.7 310.0,118.9 290.0,123.0 300.0,123.0 300.0,135.0\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<rect x=\"110\" y=\"135\" width=\"240\" height=\"28\" rx=\"4\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<text x=\"160\" y=\"72\" font-size=\"11\">k₁=120</text><text x=\"300\" y=\"72\" font-size=\"11\">k₂=180 N/m</text>\n<text x=\"230\" y=\"195\" text-anchor=\"middle\" font-size=\"12\">m = 6,0 kg</text></svg></span>",
+  "s": "<p>Båda fjädrarna förlängs lika mycket: (k₁+k₂)x = mg. x = 6,0·9,82/300 = <strong>0.196 m = 19.6 cm</strong>.</p>"
 },
 {
   "id": "2.10",
   "kap": 2,
   "omr": "fjadrar",
-  "niva": "A",
-  "poang": "(0/1/3)",
-  "t": "<p>En stuntperson med massan 75 kg landar på en fjäderplattform efter ett fritt fall på 0,45 m. Plattformen börjar komprimeras när personen träffar den. Fjädrarna ska vara som mest 22 cm hoptryckta innan personen vänder. Bortse från energiförluster och plattformens massa. Bestäm den sammanlagda fjäderkonstant som krävs och personens största acceleration under inbromsningen.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Stuntlandning på fjäderplattform\"><rect x=\"8\" y=\"8\" width=\"484\" height=\"214\" rx=\"12\" fill=\"#FBFBFA\" stroke=\"#DEDAD5\"/><line x1=\"60\" y1=\"200\" x2=\"440\" y2=\"200\" stroke=\"#777\" stroke-width=\"2\"/><rect x=\"190\" y=\"150\" width=\"120\" height=\"12\" fill=\"#7D8790\" stroke=\"#2B2527\"/><polyline points=\"205,162 195,172 215,182 195,192 205,200\" fill=\"none\" stroke=\"#2B2527\"/><polyline points=\"295,162 285,172 305,182 285,192 295,200\" fill=\"none\" stroke=\"#2B2527\"/><circle cx=\"250\" cy=\"62\" r=\"10\" fill=\"#E0B28A\" stroke=\"#2B2527\"/><line x1=\"250\" y1=\"72\" x2=\"250\" y2=\"112\" stroke=\"#2B2527\" stroke-width=\"3\"/><line x1=\"250\" y1=\"84\" x2=\"230\" y2=\"100\" stroke=\"#2B2527\" stroke-width=\"3\"/><line x1=\"250\" y1=\"84\" x2=\"270\" y2=\"100\" stroke=\"#2B2527\" stroke-width=\"3\"/><line x1=\"250\" y1=\"112\" x2=\"235\" y2=\"138\" stroke=\"#2B2527\" stroke-width=\"3\"/><line x1=\"250\" y1=\"112\" x2=\"265\" y2=\"138\" stroke=\"#2B2527\" stroke-width=\"3\"/><line x1=\"330\" y1=\"62\" x2=\"330\" y2=\"150\" stroke=\"#8A858E\"/><text x=\"338\" y=\"108\" font-size=\"12\">0,45 m</text><text x=\"250\" y=\"180\" text-anchor=\"middle\" font-size=\"12\">max 22 cm kompression</text></svg></span>",
-  "s": "<p>Från start till nedersta läget minskar gravitationsenergin med mg(h+x) och blir fjäderenergi.</p><p>mg(h+x)=½kx² ⇒ k=2mg(h+x)/x² = <strong>2,04·10<sup>4</sup> N/m</strong>.</p><p>I nedersta läget är fjäderkraften kx=4486 N uppåt. Resultantkraften är kx−mg, så a=(kx−mg)/m=<strong>50 m/s²</strong> uppåt.</p><p>Maxaccelerationen inträffar vid maximal kompression eftersom fjäderkraften då är störst.</p>"
+  "niva": "C",
+  "typ": "bestämma både obelastad längd och fjäderkonstant från två belastningsmätningar",
+  "poang": "(1/2/0)",
+  "t": "<p>En fjäder är 21,0 cm lång vid kraften 2,0 N och 25,0 cm lång vid 5,0 N. Bestäm fjäderkonstanten och fjäderns obelastade längd.</p>",
+  "s": "<p>Skillnaden 3,0 N ger 4,0 cm extra förlängning: k = 3,0/0,040 = <strong>75 N/m</strong>. Vid 2,0 N är x = 2,0/75 = 2,67 cm. Obelastad längd = 21,0 − 2,67 = <strong>18,3 cm</strong>.</p>"
 },
 {
   "id": "2.11",
   "kap": 2,
-  "omr": "svangningar",
-  "niva": "E",
-  "poang": "(2/0/0)",
-  "t": "<p>En harmonisk svängning har periodtiden 0,80 s. Bestäm frekvensen.</p>",
-  "s": "<p>f=1/T=1/0,80=<strong>1,25 Hz</strong>.</p>"
+  "omr": "fjadrar",
+  "niva": "C",
+  "typ": "omvandla fjäderenergi till gravitationell lägesenergi på en ramp",
+  "poang": "(1/2/0)",
+  "t": "<p>En 1,5 kg kloss skjuts uppför en friktionsfri ramp av en fjäder med k = 400 N/m som tryckts ihop 8,0 cm. Hur högt stiger klossen?</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Fjäder skjuter en kloss uppför en friktionsfri ramp\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"25\" y1=\"175\" x2=\"430\" y2=\"175\" stroke=\"#9A959C\" stroke-width=\"2\"/>\n<line x1=\"50\" y1=\"80\" x2=\"50\" y2=\"175\" stroke=\"#2B2527\" stroke-width=\"5\"/>\n<polyline points=\"50.0,135.0 62.0,135.0 67.5,145.0 73.1,125.0 78.6,145.0 84.2,125.0 89.7,145.0 95.3,125.0 100.8,145.0 106.4,125.0 111.9,145.0 117.5,125.0 123.0,145.0 128.6,125.0 134.1,145.0 139.7,125.0 145.2,145.0 150.8,125.0 156.4,145.0 161.9,125.0 167.5,145.0 173.0,125.0 173.0,135.0 185.0,135.0\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<rect x=\"185\" y=\"112\" width=\"62\" height=\"46\" rx=\"4\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<path d=\"M265 175 L405 80\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"4\"/><text x=\"365\" y=\"105\" font-size=\"12\">h</text></svg></span>",
+  "s": "<p>½kx² = mgh. h = kx²/(2mg) = 400·0,080²/(2·1,5·9,82) = <strong>0.087 m = 8.7 cm</strong>.</p>"
 },
 {
   "id": "2.12",
   "kap": 2,
-  "omr": "svangningar",
-  "niva": "E",
-  "poang": "(2/0/0)",
-  "t": "<p>En vikt svänger harmoniskt med amplituden 6,0 cm. Hur långt färdas vikten under ett helt varv i svängningen, från ett vändläge tillbaka till samma vändläge?</p>",
-  "s": "<p>Under en period går vikten från +A till −A och tillbaka: sträckan är 4A.</p><p>s=4·6,0 cm=<strong>24 cm</strong>.</p>"
+  "omr": "fjadrar",
+  "niva": "C",
+  "typ": "kalibrera en fjädervåg och använda linjäritet för ett okänt mätvärde",
+  "poang": "(1/2/0)",
+  "t": "<p>En fjädervåg ger 0 N vid 4,0 cm och 6,0 N vid 10,0 cm på skalan. Vilken kraft motsvarar 7,5 cm?</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Skala som ska graderas med hjälp av en fjäder\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<rect x=\"80\" y=\"40\" width=\"300\" height=\"150\" rx=\"8\" fill=\"#FAF9F7\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"130\" y1=\"70\" x2=\"130\" y2=\"165\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"130\" y1=\"70\" x2=\"320\" y2=\"70\" stroke=\"#B43123\" stroke-width=\"2\"/>\n<line x1=\"130\" y1=\"112\" x2=\"280\" y2=\"112\" stroke=\"#2A5D9E\" stroke-width=\"2\"/>\n<line x1=\"130\" y1=\"154\" x2=\"220\" y2=\"154\" stroke=\"#5C575E\" stroke-width=\"2\"/>\n<text x=\"325\" y=\"74\" font-size=\"12\">6,0 N</text><text x=\"285\" y=\"116\" font-size=\"12\">?</text><text x=\"225\" y=\"158\" font-size=\"12\">0 N</text></svg></span>",
+  "s": "<p>6,0 N motsvarar 6,0 cm förlängning, alltså 1,0 N/cm. Vid 7,5 cm är förlängningen 3,5 cm. Kraften är därför <strong>3,5 N</strong>.</p>"
 },
 {
   "id": "2.13",
   "kap": 2,
-  "omr": "svangningar",
-  "niva": "E",
-  "poang": "(2/0/0)",
-  "t": "<p>En harmonisk oscillator har amplituden 4,5 cm och periodtiden 0,60 s. Bestäm den största hastigheten.</p>",
-  "s": "<p>ω=2π/T.</p><p>v_max=ωA=(2π/0,60)·0,045=<strong>0,471 m/s</strong>.</p>"
+  "omr": "fjadrar",
+  "niva": "C",
+  "typ": "härleda och använda effektiv fjäderkonstant för två seriekopplade fjädrar",
+  "poang": "(0/3/0)",
+  "t": "<p>Två fjädrar med k₁ = 100 N/m och k₂ = 200 N/m kopplas i serie och belastas med 3,0 kg. Bestäm den totala förlängningen.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Två fjädrar kopplade i serie\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"150\" y1=\"25\" x2=\"310\" y2=\"25\" stroke=\"#2B2527\" stroke-width=\"5\"/>\n<polyline points=\"230.0,25.0 230.0,37.0 240.0,40.8 220.0,44.7 240.0,48.5 220.0,52.3 240.0,56.2 220.0,60.0 240.0,63.8 220.0,67.7 240.0,71.5 220.0,75.3 240.0,79.2 220.0,83.0 230.0,83.0 230.0,95.0\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2\"/>\n<circle cx=\"230\" cy=\"102\" r=\"5\" fill=\"#2B2527\"/>\n<polyline points=\"230.0,108.0 230.0,120.0 240.0,123.8 220.0,127.7 240.0,131.5 220.0,135.3 240.0,139.2 220.0,143.0 240.0,146.8 220.0,150.7 240.0,154.5 220.0,158.3 240.0,162.2 220.0,166.0 230.0,166.0 230.0,178.0\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2\"/>\n<rect x=\"195\" y=\"178\" width=\"70\" height=\"34\" rx=\"4\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<text x=\"285\" y=\"70\" font-size=\"11\">k₁=100</text><text x=\"285\" y=\"145\" font-size=\"11\">k₂=200 N/m</text></svg></span>",
+  "s": "<p>Samma kraft F = mg verkar i båda. x = F/k₁ + F/k₂ = mg(1/k₁+1/k₂). Det motsvarar k<sub>eff</sub> = 66.7 N/m. x = 3,0·9,82/66.7 = <strong>0.442 m = 44.2 cm</strong>.</p>"
 },
 {
   "id": "2.14",
   "kap": 2,
-  "omr": "svangningar",
-  "niva": "E",
-  "poang": "(2/0/0)",
-  "t": "<p>En punkt svänger harmoniskt med amplituden 3,0 cm och periodtiden 0,50 s. Bestäm accelerationens största belopp.</p>",
-  "s": "<p>a_max=ω²A och ω=2π/T.</p><p>a_max=(2π/0,50)²·0,030=<strong>4,74 m/s²</strong>.</p>"
+  "omr": "fjadrar",
+  "niva": "A",
+  "typ": "välja och motivera fjäderkoppling utifrån samtidiga krav på mätområde och maxkraft",
+  "poang": "(0/1/3)",
+  "t": "<p>En 6,0 kg last ska ge 10–15 cm förlängning. Två fjädrar, 180 och 300 N/m, får kopplas i serie eller parallellt. Ingen fjäder får belastas med mer än 40 N. Vilken koppling fungerar?</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Två möjliga kopplingar av två fjädrar\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<text x=\"115\" y=\"30\" text-anchor=\"middle\" font-size=\"12\">Alternativ A: parallellt</text>\n<line x1=\"45\" y1=\"45\" x2=\"185\" y2=\"45\" stroke=\"#2B2527\" stroke-width=\"4\"/>\n<polyline points=\"85.0,45.0 85.0,57.0 95.0,61.7 75.0,66.4 95.0,71.1 75.0,75.9 95.0,80.6 75.0,85.3 95.0,90.0 75.0,94.7 95.0,99.4 75.0,104.1 95.0,108.9 75.0,113.6 95.0,118.3 75.0,123.0 85.0,123.0 85.0,135.0\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2\"/>\n<polyline points=\"145.0,45.0 145.0,57.0 155.0,61.7 135.0,66.4 155.0,71.1 135.0,75.9 155.0,80.6 135.0,85.3 155.0,90.0 135.0,94.7 155.0,99.4 135.0,104.1 155.0,108.9 135.0,113.6 155.0,118.3 135.0,123.0 145.0,123.0 145.0,135.0\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2\"/>\n<rect x=\"60\" y=\"135\" width=\"110\" height=\"28\" rx=\"4\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<text x=\"345\" y=\"30\" text-anchor=\"middle\" font-size=\"12\">Alternativ B: serie</text>\n<line x1=\"275\" y1=\"45\" x2=\"415\" y2=\"45\" stroke=\"#2B2527\" stroke-width=\"4\"/>\n<polyline points=\"345.0,45.0 345.0,57.0 355.0,60.1 335.0,63.2 355.0,66.3 335.0,69.4 355.0,72.5 335.0,75.6 355.0,78.7 335.0,81.8 355.0,84.9 335.0,88.0 345.0,88.0 345.0,100.0\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2\"/>\n<polyline points=\"345.0,108.0 345.0,120.0 355.0,123.1 335.0,126.2 355.0,129.3 335.0,132.4 355.0,135.5 335.0,138.6 355.0,141.7 335.0,144.8 355.0,147.9 335.0,151.0 345.0,151.0 345.0,163.0\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2\"/>\n<rect x=\"310\" y=\"165\" width=\"70\" height=\"28\" rx=\"4\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<text x=\"115\" y=\"205\" text-anchor=\"middle\" font-size=\"11\">k₁=180, k₂=300 N/m</text><text x=\"345\" y=\"205\" text-anchor=\"middle\" font-size=\"11\">last 6,0 kg</text></svg></span>",
+  "s": "<p><strong>Parallellt:</strong> k<sub>eff</sub>=480 N/m och x=mg/k=6,0·9,82/480=<strong>12,3 cm</strong>. Krafterna blir 180·0,123=22,1 N och 300·0,123=36,8 N, båda under 40 N.</p><p><strong>Serie:</strong> k<sub>eff</sub>=(1/180+1/300)<sup>−1</sup>=112,5 N/m, vilket ger x=58,9/112,5=<strong>52,4 cm</strong>. Dessutom belastas varje fjäder med hela 58,9 N, över 40 N.</p><p>Alltså fungerar endast <strong>parallellkopplingen</strong>.</p>"
 },
 {
   "id": "2.15",
   "kap": 2,
-  "omr": "svangningar",
-  "niva": "E",
-  "poang": "(2/0/0)",
-  "t": "<p>En harmonisk oscillator befinner sig i jämviktsläget och rör sig åt höger. Ange då tecken på elongation, hastighet och acceleration.</p>",
-  "s": "<p>I jämviktsläget är elongationen <strong>x=0</strong>.</p><p>Hastigheten är positiv och maximal eftersom rörelsen är åt höger.</p><p>Accelerationen är <strong>0</strong>, eftersom återförande kraften är noll i jämviktsläget.</p>"
+  "omr": "fjadrar",
+  "niva": "A",
+  "typ": "dimensionera en fjäderbuffert med samtidiga krav på stoppsträcka och maximal kraft",
+  "poang": "(0/1/3)",
+  "t": "<p>En 500 kg vagn kör 4,0 m/s mot en fjäderbuffert. Fjädern får tryckas ihop högst 0,30 m och kraften får aldrig överstiga 30 kN. Vilket intervall på k uppfyller båda kraven?</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Vagn bromsas av en fjäderbuffert\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"25\" y1=\"180\" x2=\"435\" y2=\"180\" stroke=\"#9A959C\" stroke-width=\"2\"/>\n<rect x=\"60\" y=\"120\" width=\"105\" height=\"55\" rx=\"5\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"82\" cy=\"180\" r=\"12\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"144\" cy=\"180\" r=\"12\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"385\" y1=\"80\" x2=\"385\" y2=\"180\" stroke=\"#2B2527\" stroke-width=\"5\"/>\n<polyline points=\"270.0,140.0 282.0,140.0 286.6,150.0 291.1,130.0 295.7,150.0 300.2,130.0 304.8,150.0 309.3,130.0 313.9,150.0 318.4,130.0 323.0,150.0 327.5,130.0 332.1,150.0 336.6,130.0 341.2,150.0 345.7,130.0 350.3,150.0 354.8,130.0 359.4,150.0 363.9,130.0 368.5,150.0 373.0,130.0 373.0,140.0 385.0,140.0\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2\"/>\n<line x1=\"165\" y1=\"105\" x2=\"240\" y2=\"105\" stroke=\"#B43123\" stroke-width=\"2.5\" marker-end=\"url(#arr)\"/><text x=\"185\" y=\"92\" font-size=\"12\">4,0 m/s</text></svg></span>",
+  "s": "<p>Energin kräver ½kx² ≥ ½mv². Med x = 0,30 m fås k ≥ mv²/x² = <strong>88.9 kN/m</strong>.</p><p>Vid maximal kompression gäller F<sub>max</sub>=kx = v√(km). Kravet F≤30 kN ger k ≤ F²/(mv²) = <strong>112.5 kN/m</strong>.</p><p>Alltså <strong>88.9 ≤ k ≤ 112.5 kN/m</strong>.</p>"
 },
 {
   "id": "2.16",
   "kap": 2,
   "omr": "svangningar",
-  "niva": "C",
-  "poang": "(1/2/0)",
-  "t": "<p>En massa på 0,28 kg utför harmoniska svängningar. Ur ett läge-tid-diagram avläses periodtiden 0,84 s och amplituden 5,0 cm. Bestäm fjäderkonstanten och massans största hastighet.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Uppmätt läge som funktion av tid\"><rect x=\"8\" y=\"8\" width=\"484\" height=\"214\" rx=\"12\" fill=\"#FBFBFA\" stroke=\"#DEDAD5\"/><line x1=\"40\" y1=\"112\" x2=\"460\" y2=\"112\" stroke=\"#777\"/><line x1=\"50\" y1=\"190\" x2=\"50\" y2=\"30\" stroke=\"#777\"/><polyline points=\"45.0,54.0 47.9,54.2 50.9,54.9 53.8,56.1 56.7,57.7 59.6,59.7 62.6,62.2 65.5,65.1 68.4,68.3 71.4,71.9 74.3,75.8 77.2,80.0 80.1,84.5 83.1,89.2 86.0,94.1 88.9,99.1 91.9,104.2 94.8,109.4 97.7,114.6 100.6,119.8 103.6,124.9 106.5,129.9 109.4,134.8 112.4,139.5 115.3,144.0 118.2,148.2 121.1,152.1 124.1,155.7 127.0,158.9 129.9,161.8 132.9,164.3 135.8,166.3 138.7,167.9 141.6,169.1 144.6,169.8 147.5,170.0 150.4,169.8 153.4,169.1 156.3,167.9 159.2,166.3 162.1,164.3 165.1,161.8 168.0,158.9 170.9,155.7 173.9,152.1 176.8,148.2 179.7,144.0 182.6,139.5 185.6,134.8 188.5,129.9 191.4,124.9 194.4,119.8 197.3,114.6 200.2,109.4 203.1,104.2 206.1,99.1 209.0,94.1 211.9,89.2 214.9,84.5 217.8,80.0 220.7,75.8 223.6,71.9 226.6,68.3 229.5,65.1 232.4,62.2 235.4,59.7 238.3,57.7 241.2,56.1 244.1,54.9 247.1,54.2 250.0,54.0 252.9,54.2 255.9,54.9 258.8,56.1 261.7,57.7 264.6,59.7 267.6,62.2 270.5,65.1 273.4,68.3 276.4,71.9 279.3,75.8 282.2,80.0 285.1,84.5 288.1,89.2 291.0,94.1 293.9,99.1 296.9,104.2 299.8,109.4 302.7,114.6 305.6,119.8 308.6,124.9 311.5,129.9 314.4,134.8 317.4,139.5 320.3,144.0 323.2,148.2 326.1,152.1 329.1,155.7 332.0,158.9 334.9,161.8 337.9,164.3 340.8,166.3 343.7,167.9 346.6,169.1 349.6,169.8 352.5,170.0 355.4,169.8 358.4,169.1 361.3,167.9 364.2,166.3 367.1,164.3 370.1,161.8 373.0,158.9 375.9,155.7 378.9,152.1 381.8,148.2 384.7,144.0 387.6,139.5 390.6,134.8 393.5,129.9 396.4,124.9 399.4,119.8 402.3,114.6 405.2,109.4 408.1,104.2 411.1,99.1 414.0,94.1 416.9,89.2 419.9,84.5 422.8,80.0 425.7,75.8 428.6,71.9 431.6,68.3 434.5,65.1 437.4,62.2 440.4,59.7 443.3,57.7 446.2,56.1 449.1,54.9 452.1,54.2 455.0,54.0\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"3\"/><text x=\"60\" y=\"54\" font-size=\"12\">+5,0 cm</text><text x=\"300\" y=\"205\" font-size=\"12\">T = 0,84 s</text></svg></span>",
-  "s": "<p>För fjäderoscillatorn T=2π√(m/k) ⇒ k=4π²m/T²=<strong>15,7 N/m</strong>.</p><p>ω=2π/T och v_max=ωA=(2π/0,84)·0,050=<strong>0,374 m/s</strong>.</p>"
+  "niva": "E",
+  "typ": "beräkna periodtid för massa-fjädersystem från massa och fjäderkonstant",
+  "poang": "(2/0/0)",
+  "t": "<p>En massa på 0,25 kg svänger i en fjäder med k = 100 N/m. Bestäm periodtiden.</p>",
+  "s": "<p>T = 2π√(m/k) = <strong>0.314 s</strong>.</p>"
 },
 {
   "id": "2.17",
   "kap": 2,
   "omr": "svangningar",
-  "niva": "C",
-  "poang": "(1/2/0)",
-  "t": "<p>En kloss på 0,40 kg sitter i en horisontell fjäder med k=64 N/m och svänger med amplituden 10 cm. Bestäm klossens fart när den är 6,0 cm från jämviktsläget.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Horisontell fjäderoscillator\"><rect x=\"8\" y=\"8\" width=\"484\" height=\"214\" rx=\"12\" fill=\"#FBFBFA\" stroke=\"#DEDAD5\"/><line x1=\"55\" y1=\"180\" x2=\"445\" y2=\"180\" stroke=\"#777\" stroke-width=\"2\"/><line x1=\"70\" y1=\"55\" x2=\"70\" y2=\"180\" stroke=\"#2B2527\" stroke-width=\"5\"/><polyline points=\"70,130 90,112 110,148 130,112 150,148 170,112 190,130\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/><rect x=\"190\" y=\"105\" width=\"85\" height=\"50\" rx=\"5\" fill=\"#E7ECEF\" stroke=\"#2B2527\"/><line x1=\"330\" y1=\"75\" x2=\"330\" y2=\"170\" stroke=\"#8A858E\" stroke-dasharray=\"5 4\"/><text x=\"330\" y=\"68\" text-anchor=\"middle\" font-size=\"12\">jämviktsläge</text><line x1=\"275\" y1=\"165\" x2=\"330\" y2=\"165\" stroke=\"#B43123\"/><text x=\"302\" y=\"158\" text-anchor=\"middle\" font-size=\"12\">6,0 cm</text></svg></span>",
-  "s": "<p>Den mekaniska energin är ½kA². Vid elongationen x finns både fjäderenergi och rörelseenergi.</p><p>½kA² = ½kx² + ½mv².</p><p>v=√[(k/m)(A²−x²)] = <strong>1,01 m/s</strong>.</p>"
+  "niva": "E",
+  "typ": "omvandla periodtid till frekvens för en harmonisk svängning",
+  "poang": "(1/0/0)",
+  "t": "<p>En svängning har perioden 0,80 s. Bestäm frekvensen.</p>",
+  "s": "<p>f = 1/T = 1/0,80 = <strong>1,25 Hz</strong>.</p>"
 },
 {
   "id": "2.18",
   "kap": 2,
   "omr": "svangningar",
-  "niva": "C",
-  "poang": "(1/2/0)",
-  "t": "<p>En harmonisk svängning startar i sitt positiva vändläge vid t=0. Periodtiden är 0,90 s. Hur lång tid tar det första gången tills elongationen har minskat till hälften av amplituden? Bestäm också hastighetens belopp då om amplituden är 8,0 cm.</p>",
-  "s": "<p>Med start i vändläget kan x=A cos(ωt). Villkoret x=A/2 ger cos(ωt)=1/2 ⇒ ωt=π/3.</p><p>Eftersom ω=2π/T blir t=T/6=<strong>0,150 s</strong>.</p><p>v=ωA sin(π/3)=(2π/0,90)·0,080·√3/2=<strong>0,484 m/s</strong>.</p>"
+  "niva": "E",
+  "typ": "avläsa amplitud och periodtid ur ett läge-tid-diagram",
+  "poang": "(2/0/0)",
+  "t": "<p>Bestäm amplituden och periodtiden ur diagrammet.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Lägesdiagram för harmonisk svängning\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"55\" y1=\"115\" x2=\"430\" y2=\"115\" stroke=\"#5C575E\"/><line x1=\"75\" y1=\"28\" x2=\"75\" y2=\"200\" stroke=\"#5C575E\"/>\n<path d=\"M75 115 C105 40 135 40 165 115 S225 190 255 115 S315 40 345 115 S405 190 430 125\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"3\"/>\n<text x=\"45\" y=\"52\" font-size=\"11\">+6 cm</text><text x=\"45\" y=\"184\" font-size=\"11\">−6 cm</text>\n<text x=\"73\" y=\"216\" font-size=\"11\">0</text><text x=\"252\" y=\"216\" font-size=\"11\">1,2 s</text><text x=\"408\" y=\"216\" font-size=\"11\">2,4 s</text></svg></span>",
+  "s": "<p>Största avståndet från jämviktsläget är <strong>6,0 cm</strong>. Tiden mellan två motsvarande lägen är <strong>1,2 s</strong>.</p>"
 },
 {
   "id": "2.19",
   "kap": 2,
   "omr": "svangningar",
-  "niva": "A",
-  "poang": "(0/1/3)",
-  "t": "<p>En vikt hänger i en vertikal fjäder och utför harmoniska svängningar. Periodtiden är 0,85 s och amplituden 12 cm. När vikten passerar jämviktsläget är fjäderkraften 5,0 N. Bestäm massan, fjäderkonstanten och fjäderkraftens största värde under svängningen.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Vertikal svängning med tre karakteristiska lägen\"><rect x=\"8\" y=\"8\" width=\"484\" height=\"214\" rx=\"12\" fill=\"#FBFBFA\" stroke=\"#DEDAD5\"/><line x1=\"110\" y1=\"35\" x2=\"390\" y2=\"35\" stroke=\"#2B2527\" stroke-width=\"5\"/><line x1=\"250\" y1=\"45\" x2=\"250\" y2=\"195\" stroke=\"#AAA\" stroke-dasharray=\"5 4\"/><rect x=\"220\" y=\"67\" width=\"60\" height=\"28\" fill=\"#EEF1F3\" stroke=\"#2B2527\"/><rect x=\"220\" y=\"111\" width=\"60\" height=\"28\" fill=\"#DDE7ED\" stroke=\"#2B2527\"/><rect x=\"220\" y=\"155\" width=\"60\" height=\"28\" fill=\"#EEF1F3\" stroke=\"#2B2527\"/><text x=\"295\" y=\"85\" font-size=\"12\">övre vändläge</text><text x=\"295\" y=\"129\" font-size=\"12\">jämvikt</text><text x=\"295\" y=\"173\" font-size=\"12\">nedre vändläge</text><line x1=\"195\" y1=\"83\" x2=\"195\" y2=\"167\" stroke=\"#B43123\"/><text x=\"175\" y=\"128\" text-anchor=\"middle\" font-size=\"12\">2A</text></svg></span>",
-  "s": "<p>I jämviktsläget är fjäderkraften lika med tyngdkraften: m=5,0/g=<strong>0,509 kg</strong>.</p><p>T=2π√(m/k) ⇒ k=4π²m/T²=<strong>27,8 N/m</strong>.</p><p>Fjäderkraften är störst i nedersta vändläget, där fjädern är ytterligare A utdragen.</p><p>F_max=mg+kA=5,0+27,8·0,12=<strong>8,34 N</strong>.</p>"
+  "niva": "E",
+  "typ": "beräkna vinkelhastighet från periodtid",
+  "poang": "(2/0/0)",
+  "t": "<p>En harmonisk oscillator har perioden 0,50 s. Bestäm vinkelhastigheten ω.</p>",
+  "s": "<p>ω = 2π/T = 2π/0,50 = <strong>12.6 rad/s</strong>.</p>"
 },
 {
   "id": "2.20",
   "kap": 2,
   "omr": "svangningar",
-  "niva": "A",
-  "poang": "(0/1/3)",
-  "t": "<p>En horisontell oscillator är dold i en låda. Sensorer visar att dess maximala hastighet är 1,20 m/s, maximala acceleration 18,0 m/s² och den största återförande kraften 7,20 N. Anta harmonisk svängning. Bestäm amplituden, periodtiden, fjäderkonstanten och den svängande massan.</p>",
-  "s": "<p>För harmonisk svängning gäller v_max=ωA och a_max=ω²A. Division ger ω=a_max/v_max=18,0/1,20=<strong>15,0 rad/s</strong>.</p><p>A=v_max/ω=1,20/15,0=<strong>0,08 m</strong>. T=2π/ω=<strong>0,419 s</strong>.</p><p>F_max=kA ⇒ k=7,20/0,08=<strong>90 N/m</strong>.</p><p>ω²=k/m ⇒ m=k/ω²=<strong>0,4 kg</strong>.</p>"
+  "niva": "E",
+  "typ": "beräkna maximal hastighet från amplitud och periodtid",
+  "poang": "(2/0/0)",
+  "t": "<p>En harmonisk svängning har amplituden 8,0 cm och periodtiden 0,64 s. Bestäm den största hastigheten.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Kloss på fjäder med markerad amplitud\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"60\" y1=\"145\" x2=\"410\" y2=\"145\" stroke=\"#9A959C\" stroke-width=\"2\"/>\n<line x1=\"80\" y1=\"80\" x2=\"80\" y2=\"145\" stroke=\"#2B2527\" stroke-width=\"5\"/>\n<polyline points=\"80,120 95,120 108,108 122,132 136,108 150,132 164,108 178,132 192,120 208,120\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<rect x=\"208\" y=\"98\" width=\"58\" height=\"44\" rx=\"4\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"237\" y1=\"85\" x2=\"315\" y2=\"85\" stroke=\"#B43123\" stroke-width=\"2.5\" marker-end=\"url(#arr)\"/><text x=\"270\" y=\"72\" font-size=\"11\">vmax vid mitten</text>\n<line x1=\"208\" y1=\"185\" x2=\"330\" y2=\"185\" stroke=\"#5C575E\"/><text x=\"269\" y=\"205\" text-anchor=\"middle\" font-size=\"11\">A = 8,0 cm</text></svg></span>",
+  "s": "<p>v<sub>max</sub> = ωA = (2π/T)A = <strong>0.79 m/s</strong>.</p>"
 },
 {
   "id": "2.21",
   "kap": 2,
-  "omr": "pendlar",
+  "omr": "svangningar",
   "niva": "E",
+  "typ": "beräkna maximal acceleration från amplitud och frekvens",
   "poang": "(2/0/0)",
-  "t": "<p>En matematisk pendel är 1,00 m lång. Bestäm periodtiden för små svängningar.</p>",
-  "s": "<p>T=2π√(L/g)=2π√(1,00/9,82)=<strong>2,01 s</strong>.</p>"
+  "t": "<p>En oscillator har amplituden 5,0 cm och frekvensen 2,0 Hz. Bestäm största accelerationen.</p>",
+  "s": "<p>a<sub>max</sub> = ω²A = (2πf)²A = <strong>7.90 m/s²</strong>.</p>"
 },
 {
   "id": "2.22",
   "kap": 2,
-  "omr": "pendlar",
+  "omr": "svangningar",
   "niva": "E",
+  "typ": "identifiera var fart och acceleration är störst i en harmonisk svängning",
   "poang": "(2/0/0)",
-  "t": "<p>En pendel har periodtiden 1,60 s. Bestäm pendelns längd.</p>",
-  "s": "<p>L=g(T/2π)².</p><p>L=9,82·(1,60/2π)²=<strong>0,637 m</strong>.</p>"
+  "t": "<p>En kropp svänger mellan A och C med jämviktsläget B. Var är farten störst och var är accelerationens belopp störst?</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Tre lägen i en harmonisk svängning\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"55\" y1=\"130\" x2=\"405\" y2=\"130\" stroke=\"#5C575E\" stroke-width=\"2\"/>\n<circle cx=\"95\" cy=\"130\" r=\"8\" fill=\"#B43123\"/><circle cx=\"230\" cy=\"130\" r=\"8\" fill=\"#2A5D9E\"/><circle cx=\"365\" cy=\"130\" r=\"8\" fill=\"#B43123\"/>\n<text x=\"95\" y=\"105\" text-anchor=\"middle\" font-size=\"12\">A</text><text x=\"230\" y=\"105\" text-anchor=\"middle\" font-size=\"12\">B</text><text x=\"365\" y=\"105\" text-anchor=\"middle\" font-size=\"12\">C</text>\n<text x=\"230\" y=\"165\" text-anchor=\"middle\" font-size=\"11\">jämviktsläge</text><text x=\"95\" y=\"165\" text-anchor=\"middle\" font-size=\"11\">−A</text><text x=\"365\" y=\"165\" text-anchor=\"middle\" font-size=\"11\">+A</text></svg></span>",
+  "s": "<p>Farten är störst i <strong>B</strong>. Accelerationens belopp är störst i vändlägena <strong>A och C</strong>.</p>"
 },
 {
   "id": "2.23",
   "kap": 2,
-  "omr": "pendlar",
+  "omr": "svangningar",
   "niva": "E",
-  "poang": "(2/0/0)",
-  "t": "<p>En pendel är 75 cm lång. Ungefär hur många hela svängningar gör den på en minut?</p>",
-  "s": "<p>T=2π√(0,75/9,82)=<strong>1,74 s</strong>.</p><p>N=60/T≈<strong>35 svängningar</strong>.</p>"
+  "typ": "resonera om hur periodtiden ändras när massan förändras",
+  "poang": "(1/0/0)",
+  "t": "<p>Massan i ett fjäder-system fyrdubblas medan samma fjäder används. Hur ändras periodtiden?</p>",
+  "s": "<p>T ∝ √m. Fyra gånger större massa ger √4 = 2 gånger större period. Periodtiden <strong>fördubblas</strong>.</p>"
 },
 {
   "id": "2.24",
   "kap": 2,
-  "omr": "pendlar",
-  "niva": "E",
-  "poang": "(2/0/0)",
-  "t": "<p>Två pendlar har samma längd men den ena kulan har dubbelt så stor massa. Jämför deras periodtider vid små svängningar.</p>",
-  "s": "<p>För en matematisk pendel är T=2π√(L/g). Massan finns inte med i uttrycket.</p><p>Pendlarna får därför <strong>samma periodtid</strong>.</p>"
+  "omr": "svangningar",
+  "niva": "C",
+  "typ": "bestämma fjäderkonstant ur statisk förlängning och därefter periodtid",
+  "poang": "(1/2/0)",
+  "t": "<p>En massa på 0,45 kg förlänger en fjäder 7,5 cm i jämvikt. Massan dras ned lite och släpps. Bestäm svängningens periodtid.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Massa i lodrät fjäder som först hänger i jämvikt och sedan sätts i svängning\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"90\" y1=\"25\" x2=\"370\" y2=\"25\" stroke=\"#2B2527\" stroke-width=\"5\"/>\n<polyline points=\"230.0,25.0 230.0,37.0 240.0,41.5 220.0,46.1 240.0,50.6 220.0,55.2 240.0,59.7 220.0,64.3 240.0,68.8 220.0,73.4 240.0,77.9 220.0,82.5 240.0,87.0 220.0,91.6 240.0,96.1 220.0,100.7 240.0,105.2 220.0,109.8 240.0,114.3 220.0,118.9 240.0,123.4 220.0,128.0 230.0,128.0 230.0,140.0\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<rect x=\"195\" y=\"140\" width=\"70\" height=\"42\" rx=\"4\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"305\" y1=\"70\" x2=\"305\" y2=\"140\" stroke=\"#5C575E\"/><text x=\"315\" y=\"110\" font-size=\"11\">7,5 cm</text>\n<line x1=\"230\" y1=\"195\" x2=\"230\" y2=\"215\" stroke=\"#B43123\" stroke-width=\"2.5\" marker-end=\"url(#arr)\"/></svg></span>",
+  "s": "<p>Först k = mg/x = 58.9 N/m. Sedan T = 2π√(m/k) = <strong>0.549 s</strong>.</p>"
 },
 {
   "id": "2.25",
   "kap": 2,
-  "omr": "pendlar",
-  "niva": "E",
-  "poang": "(2/0/0)",
-  "t": "<p>En pendel har periodtiden 2,00 s på jorden. Samma pendel tas till månen där g=1,62 m/s². Bestäm periodtiden på månen.</p>",
-  "s": "<p>För samma längd gäller T∝1/√g.</p><p>T_måne=T_jord√(g_jord/g_måne)=2,00√(9,82/1,62)=<strong>4,92 s</strong>.</p>"
+  "omr": "svangningar",
+  "niva": "C",
+  "typ": "bestämma hastighet vid given elongation med energibevarande",
+  "poang": "(1/2/0)",
+  "t": "<p>En 0,60 kg kloss svänger friktionsfritt i en fjäder med k = 150 N/m och amplituden 10 cm. Bestäm farten när elongationen är 6,0 cm.</p>",
+  "s": "<p>½kA² = ½kx² + ½mv². v = √[(k/m)(A²−x²)] = <strong>1.26 m/s</strong>.</p>"
 },
 {
   "id": "2.26",
   "kap": 2,
-  "omr": "pendlar",
+  "omr": "svangningar",
   "niva": "C",
+  "typ": "bestämma accelerationens storlek och riktning vid given elongation",
   "poang": "(1/2/0)",
-  "t": "<p>I ett experiment är pendellängden 0,994 m. Fyrtio hela svängningar tar 80,2 s. Bestäm ett experimentellt värde på tyngdaccelerationen.</p>",
-  "s": "<p>T=80,2/40=<strong>2 s</strong>.</p><p>Ur T=2π√(L/g) fås g=4π²L/T².</p><p>g=<strong>9,76 m/s²</strong>.</p>"
+  "t": "<p>En 0,40 kg kloss sitter i en fjäder med k = 80 N/m. I ett ögonblick är klossen 3,5 cm till höger om jämviktsläget. Bestäm accelerationen.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Oscillator till höger om jämviktsläget\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"60\" y1=\"145\" x2=\"410\" y2=\"145\" stroke=\"#9A959C\" stroke-width=\"2\"/>\n<line x1=\"80\" y1=\"75\" x2=\"80\" y2=\"145\" stroke=\"#2B2527\" stroke-width=\"5\"/>\n<polyline points=\"80,120 95,120 108,108 122,132 136,108 150,132 164,108 178,132 192,120 208,120\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<rect x=\"278\" y=\"98\" width=\"58\" height=\"44\" rx=\"4\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"230\" y1=\"80\" x2=\"230\" y2=\"165\" stroke=\"#5C575E\" stroke-dasharray=\"5 4\"/><text x=\"230\" y=\"183\" text-anchor=\"middle\" font-size=\"11\">x=0</text>\n<line x1=\"307\" y1=\"88\" x2=\"250\" y2=\"88\" stroke=\"#B43123\" stroke-width=\"2.5\" marker-end=\"url(#arr)\"/></svg></span>",
+  "s": "<p>a = −kx/m. Beloppet är 80·0,035/0,40 = <strong>7.0 m/s²</strong>. Riktningen är <strong>åt vänster</strong>, mot jämviktsläget.</p>"
 },
 {
   "id": "2.27",
   "kap": 2,
-  "omr": "pendlar",
+  "omr": "svangningar",
   "niva": "C",
+  "typ": "bestämma amplitud baklänges från maximal hastighet och periodtid",
   "poang": "(1/2/0)",
-  "t": "<p>En pendelklockas pendel är 1,000 m lång när klockan går rätt. En varm dag blir pendeln 2,0 mm längre. Hur mycket går klockan fel under ett dygn om övrigt är oförändrat?</p>",
-  "s": "<p>Perioden är proportionell mot √L. Den nya perioden blir T_ny/T_gammal=√(1,002/1,000).</p><p>Klockan går långsammare med samma relativa faktor.</p><p>Förlusten under 86400 s blir ungefär <strong>86,4 s per dygn</strong>.</p>"
+  "t": "<p>En oscillator har periodtiden 0,90 s och maximal hastighet 0,85 m/s. Bestäm amplituden.</p>",
+  "s": "<p>v<sub>max</sub>=2πA/T ⇒ A=v<sub>max</sub>T/(2π)=<strong>0.122 m = 12.2 cm</strong>.</p>"
 },
 {
   "id": "2.28",
   "kap": 2,
-  "omr": "pendlar",
+  "omr": "svangningar",
   "niva": "C",
-  "poang": "(1/2/0)",
-  "t": "<p>En pendelkula släpps från vila när snöret, som är 1,20 m långt, bildar vinkeln 25° mot lodlinjen. Bestäm kulans fart i lägsta punkten och pendelns periodtid enligt småvinkelmodellen. Kommentera kort varför periodformeln bara är ungefärlig här.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Pendel släpps från 25 grader\"><rect x=\"8\" y=\"8\" width=\"484\" height=\"214\" rx=\"12\" fill=\"#FBFBFA\" stroke=\"#DEDAD5\"/><line x1=\"150\" y1=\"35\" x2=\"350\" y2=\"35\" stroke=\"#2B2527\" stroke-width=\"5\"/><line x1=\"250\" y1=\"40\" x2=\"250\" y2=\"190\" stroke=\"#AAA\" stroke-dasharray=\"5 4\"/><line x1=\"250\" y1=\"40\" x2=\"330\" y2=\"160\" stroke=\"#2B2527\" stroke-width=\"2.5\"/><circle cx=\"330\" cy=\"160\" r=\"14\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><path d=\"M250 84 A44 44 0 0 1 273 77\" fill=\"none\" stroke=\"#B43123\"/><text x=\"280\" y=\"80\" font-size=\"12\">25°</text><text x=\"295\" y=\"105\" font-size=\"12\">1,20 m</text><circle cx=\"250\" cy=\"190\" r=\"7\" fill=\"#E8B04F\" stroke=\"#2B2527\"/></svg></span>",
-  "s": "<p>Höjdskillnaden är h=L(1−cos25°)=<strong>0,112 m</strong>. Energi: mgh=½mv² ⇒ v=<strong>1,49 m/s</strong>.</p><p>Småvinkelmodellen ger T=2π√(L/g)=<strong>2,2 s</strong>.</p><p>Vid 25° är vinkeln inte särskilt liten, så den verkliga perioden blir något längre än småvinkelapproximationen.</p>"
+  "typ": "bestämma tid till ett givet läge med sinusmodell och fas",
+  "poang": "(0/3/0)",
+  "t": "<p>En oscillator startar i högra vändläget med amplituden 6,0 cm och perioden 0,80 s. När passerar den första gången x = +3,0 cm?</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Sinusformad lägeskurva med markerad halv amplitud\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"60\" y1=\"115\" x2=\"420\" y2=\"115\" stroke=\"#5C575E\"/><line x1=\"80\" y1=\"30\" x2=\"80\" y2=\"200\" stroke=\"#5C575E\"/>\n<path d=\"M80 55 C125 55 125 175 170 175 S215 55 260 55 S305 175 350 175 S395 55 420 65\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"3\"/>\n<line x1=\"80\" y1=\"85\" x2=\"420\" y2=\"85\" stroke=\"#B43123\" stroke-dasharray=\"5 4\"/><text x=\"425\" y=\"89\" font-size=\"11\">3 cm</text></svg></span>",
+  "s": "<p>x=A cos(ωt). Här är x/A=0,5, alltså cos(ωt)=0,5 och första lösningen är ωt=π/3. Med ω=2π/T fås t=T/6=<strong>0,133 s</strong>.</p>"
 },
 {
   "id": "2.29",
   "kap": 2,
-  "omr": "pendlar",
+  "omr": "svangningar",
   "niva": "A",
+  "typ": "rekonstruera fjäderkonstant amplitud och maximal hastighet från ett kraft-tid-diagram",
   "poang": "(0/1/3)",
-  "t": "<p>På en planet ska g bestämmas med en pendel, men mätningen av pendellängden har ett okänt systematiskt fel d eftersom upphängningspunkten sitter dold. När den uppmätta längden är 0,60 m blir perioden 2,61 s och när den uppmätta längden är 1,10 m blir perioden 3,49 s. Den verkliga längden är L+d. Bestäm både d och planetens tyngdacceleration.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Pendelförsök med dold upphängningspunkt\"><rect x=\"8\" y=\"8\" width=\"484\" height=\"214\" rx=\"12\" fill=\"#FBFBFA\" stroke=\"#DEDAD5\"/><rect x=\"170\" y=\"25\" width=\"160\" height=\"35\" fill=\"#777\"/><circle cx=\"250\" cy=\"47\" r=\"5\" fill=\"#2B2527\"/><line x1=\"250\" y1=\"47\" x2=\"315\" y2=\"172\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"315\" cy=\"172\" r=\"13\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><line x1=\"180\" y1=\"62\" x2=\"180\" y2=\"172\" stroke=\"#8A858E\"/><text x=\"145\" y=\"112\" font-size=\"12\">uppmätt L</text><line x1=\"250\" y1=\"47\" x2=\"250\" y2=\"72\" stroke=\"#B43123\" stroke-width=\"4\"/><text x=\"260\" y=\"68\" font-size=\"12\">okänt fel d</text></svg></span>",
-  "s": "<p>För varje mätning gäller T²=4π²(L+d)/g. Subtraktion eliminerar d.</p><p>g=4π²(L₂−L₁)/(T₂²−T₁²).</p><p>Insättning ger g≈<strong>3,7 m/s²</strong>.</p><p>Sedan d=gT₁²/(4π²)−L₁≈<strong>0,04 m</strong>, alltså cirka 4 cm.</p>"
+  "t": "<p>En 0,50 kg oscillator har kraftkurvan i figuren. Perioden är 0,70 s och kraftamplituden 6,0 N. Bestäm k, amplituden och största hastigheten.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Fjäderkraft som funktion av tiden\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"55\" y1=\"115\" x2=\"430\" y2=\"115\" stroke=\"#5C575E\"/><line x1=\"75\" y1=\"28\" x2=\"75\" y2=\"200\" stroke=\"#5C575E\"/>\n<path d=\"M75 55 C120 55 120 175 165 175 S210 55 255 55 S300 175 345 175 S390 55 430 70\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"3\"/>\n<text x=\"36\" y=\"60\" font-size=\"11\">+6 N</text><text x=\"36\" y=\"178\" font-size=\"11\">−6 N</text><text x=\"250\" y=\"215\" font-size=\"11\">T = 0,70 s</text></svg></span>",
+  "s": "<p>T=2π√(m/k) ⇒ k=4π²m/T²=<strong>40.3 N/m</strong>. F<sub>max</sub>=kA ⇒ A=6,0/k=<strong>14.9 cm</strong>. v<sub>max</sub>=ωA=<strong>1.34 m/s</strong>.</p>"
 },
 {
   "id": "2.30",
   "kap": 2,
-  "omr": "pendlar",
+  "omr": "svangningar",
   "niva": "A",
+  "typ": "bestämma massa fjäderkonstant och amplitud från extremvärden hos fjäderkraft och periodtid",
   "poang": "(0/1/3)",
-  "t": "<p>En 1,00 m lång pendel hänger i en hiss. Under en del av färden mäts periodtiden till 1,80 s. Bestäm hissens accelerationsbelopp och riktning. En elev påstår att hissen måste röra sig uppåt eftersom perioden är kortare än normalt. Bedöm påståendet.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 500 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Pendel i accelererande hiss\"><rect x=\"8\" y=\"8\" width=\"484\" height=\"214\" rx=\"12\" fill=\"#FBFBFA\" stroke=\"#DEDAD5\"/><rect x=\"95\" y=\"30\" width=\"310\" height=\"170\" fill=\"none\" stroke=\"#687078\" stroke-width=\"4\"/><line x1=\"190\" y1=\"55\" x2=\"310\" y2=\"55\" stroke=\"#2B2527\" stroke-width=\"4\"/><line x1=\"250\" y1=\"55\" x2=\"305\" y2=\"155\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"305\" cy=\"155\" r=\"13\" fill=\"#E8B04F\" stroke=\"#2B2527\"/><line x1=\"380\" y1=\"150\" x2=\"380\" y2=\"80\" stroke=\"#B43123\" stroke-width=\"2.5\"/><polygon points=\"380,80 384.3,89.0 375.7,89.0\" fill=\"#B43123\"/><text x=\"380\" y=\"108\" text-anchor=\"middle\" font-size=\"12\" fill=\"#B43123\">a ?</text><text x=\"115\" y=\"185\" font-size=\"12\">T = 1,80 s</text></svg></span>",
-  "s": "<p>Pendeln reagerar på den effektiva tyngdaccelerationen g_eff. T=2π√(L/g_eff) ⇒ g_eff=4π²L/T²=<strong>12,2 m/s²</strong>.</p><p>Eftersom g_eff>g gäller g_eff=g+a, alltså a=<strong>2,36 m/s² uppåt</strong>.</p><p>Det betyder att hissens <em>acceleration</em> är uppåt. Hissen kan samtidigt röra sig uppåt och öka farten eller röra sig nedåt och bromsa. Elevens slutsats om rörelseriktningen är därför inte säker.</p>"
+  "t": "<p>En lodrät fjäderoscillator har perioden 0,60 s. Kraftsensorn i fjädern visar 2,0 N som minst och 14 N som störst. Bestäm massan och svängningens amplitud.</p>",
+  "s": "<p>Medelkraften är mg=(F<sub>max</sub>+F<sub>min</sub>)/2=8,0 N ⇒ m=<strong>0.815 kg</strong>. k=4π²m/T²=<strong>89.3 N/m</strong>. Kraftamplituden är (14−2)/2=6,0 N, så A=6,0/k=<strong>6.72 cm</strong>.</p>"
 },
 {
   "id": "2.31",
+  "kap": 2,
+  "omr": "pendlar",
+  "niva": "E",
+  "typ": "beräkna periodtid för matematisk pendel från längden",
+  "poang": "(2/0/0)",
+  "t": "<p>En matematisk pendel är 1,0 m lång. Bestäm periodtiden.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Enkel pendel med längden 1,0 m\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"120\" y1=\"28\" x2=\"340\" y2=\"28\" stroke=\"#2B2527\" stroke-width=\"5\"/>\n<circle cx=\"230\" cy=\"32\" r=\"6\" fill=\"#2B2527\"/><line x1=\"230\" y1=\"32\" x2=\"285\" y2=\"165\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<circle cx=\"285\" cy=\"165\" r=\"18\" fill=\"#E8B04F\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<path d=\"M230 80 A50 50 0 0 1 250 84\" fill=\"none\" stroke=\"#5C575E\"/><text x=\"272\" y=\"90\" font-size=\"11\">l = 1,0 m</text></svg></span>",
+  "s": "<p>T = 2π√(l/g) = <strong>2.01 s</strong>.</p>"
+},
+{
+  "id": "2.32",
+  "kap": 2,
+  "omr": "pendlar",
+  "niva": "E",
+  "typ": "bestämma pendellängd från uppmätt periodtid",
+  "poang": "(2/0/0)",
+  "t": "<p>En pendel har periodtiden 1,60 s. Bestäm pendelns längd.</p>",
+  "s": "<p>l = g(T/2π)² = <strong>0.637 m ≈ 63.7 cm</strong>.</p>"
+},
+{
+  "id": "2.33",
+  "kap": 2,
+  "omr": "pendlar",
+  "niva": "E",
+  "typ": "bestämma periodtid från antal svängningar under en uppmätt tid",
+  "poang": "(2/0/0)",
+  "t": "<p>En pendel gör 36 hela svängningar på 54 s. Bestäm periodtiden.</p>",
+  "s": "<p>T = 54/36 = <strong>1,50 s</strong>.</p>"
+},
+{
+  "id": "2.34",
+  "kap": 2,
+  "omr": "pendlar",
+  "niva": "E",
+  "typ": "bestämma frekvens från pendelns periodtid",
+  "poang": "(1/0/0)",
+  "t": "<p>En pendel har periodtiden 2,5 s. Bestäm frekvensen.</p>",
+  "s": "<p>f = 1/T = 1/2,5 = <strong>0,40 Hz</strong>.</p>"
+},
+{
+  "id": "2.35",
+  "kap": 2,
+  "omr": "pendlar",
+  "niva": "E",
+  "typ": "resonera om massans betydelse för pendelns periodtid",
+  "poang": "(1/0/0)",
+  "t": "<p>Två lika långa pendlar har massorna 0,10 kg och 0,80 kg. Vilken har längst periodtid vid små utslag?</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Två lika långa pendlar med olika massor\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"90\" y1=\"30\" x2=\"370\" y2=\"30\" stroke=\"#2B2527\" stroke-width=\"5\"/>\n<circle cx=\"160\" cy=\"34\" r=\"5\" fill=\"#2B2527\"/><line x1=\"160\" y1=\"34\" x2=\"140\" y2=\"155\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"140\" cy=\"155\" r=\"12\" fill=\"#E8B04F\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<circle cx=\"300\" cy=\"34\" r=\"5\" fill=\"#2B2527\"/><line x1=\"300\" y1=\"34\" x2=\"320\" y2=\"155\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"320\" cy=\"155\" r=\"24\" fill=\"#9DB7D5\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<text x=\"140\" y=\"195\" text-anchor=\"middle\" font-size=\"11\">0,10 kg</text><text x=\"320\" y=\"195\" text-anchor=\"middle\" font-size=\"11\">0,80 kg</text></svg></span>",
+  "s": "<p>Perioden T=2π√(l/g) innehåller inte massan. De får därför <strong>samma periodtid</strong>.</p>"
+},
+{
+  "id": "2.36",
+  "kap": 2,
+  "omr": "pendlar",
+  "niva": "E",
+  "typ": "beräkna pendelperiod i ett annat gravitationsfält",
+  "poang": "(2/0/0)",
+  "t": "<p>En 0,80 m lång pendel används på månen där g = 1,62 m/s². Bestäm periodtiden.</p>",
+  "s": "<p>T = 2π√(0,80/1,62) = <strong>4.42 s</strong>.</p>"
+},
+{
+  "id": "2.37",
+  "kap": 2,
+  "omr": "pendlar",
+  "niva": "E",
+  "typ": "jämföra periodtider för pendlar med olika längd",
+  "poang": "(1/0/0)",
+  "t": "<p>Pendel B är fyra gånger så lång som pendel A. Hur många gånger större periodtid får B?</p>",
+  "s": "<p>T ∝ √l. √4 = 2, så pendel B får <strong>dubbelt så stor periodtid</strong>.</p>"
+},
+{
+  "id": "2.38",
+  "kap": 2,
+  "omr": "pendlar",
+  "niva": "E",
+  "typ": "identifiera korrekt pendellängd i en fysisk uppställning",
+  "poang": "(1/0/0)",
+  "t": "<p>Avståndet från upphängningspunkten till lodets centrum är 0,95 m. Vilken längd ska användas i pendelformeln?</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Pendel där längden mäts till lodets centrum\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"90\" y1=\"28\" x2=\"370\" y2=\"28\" stroke=\"#2B2527\" stroke-width=\"5\"/>\n<circle cx=\"230\" cy=\"32\" r=\"5\" fill=\"#2B2527\"/><line x1=\"230\" y1=\"32\" x2=\"230\" y2=\"174\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<circle cx=\"230\" cy=\"174\" r=\"22\" fill=\"#E8B04F\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"230\" cy=\"174\" r=\"3\" fill=\"#2B2527\"/>\n<line x1=\"270\" y1=\"32\" x2=\"270\" y2=\"174\" stroke=\"#5C575E\"/><text x=\"280\" y=\"105\" font-size=\"11\">0,95 m</text></svg></span>",
+  "s": "<p>Den matematiska pendelns längd mäts till massans tyngdpunkt. Man använder därför <strong>l = 0,95 m</strong>.</p>"
+},
+{
+  "id": "2.39",
+  "kap": 2,
+  "omr": "pendlar",
+  "niva": "C",
+  "typ": "bestämma tyngdaccelerationen ur pendellängd och tidsmätning av många svängningar",
+  "poang": "(1/2/0)",
+  "t": "<p>En 0,72 m lång pendel gör 25 svängningar på 42,6 s. Bestäm ett experimentellt värde på g.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Pendelexperiment med stoppur\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"55\" y1=\"190\" x2=\"420\" y2=\"190\" stroke=\"#9A959C\" stroke-width=\"2\"/>\n<rect x=\"70\" y=\"55\" width=\"110\" height=\"110\" rx=\"7\" fill=\"#FAF9F7\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"125\" y=\"100\" text-anchor=\"middle\" font-size=\"13\">stoppur</text><text x=\"125\" y=\"127\" text-anchor=\"middle\" font-size=\"12\">25 svängningar</text><text x=\"125\" y=\"148\" text-anchor=\"middle\" font-size=\"12\">42,6 s</text>\n<circle cx=\"290\" cy=\"50\" r=\"5\" fill=\"#2B2527\"/><line x1=\"290\" y1=\"50\" x2=\"330\" y2=\"155\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"330\" cy=\"155\" r=\"16\" fill=\"#E8B04F\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"305\" y=\"100\" font-size=\"11\">0,72 m</text></svg></span>",
+  "s": "<p>T = 42,6/25 = 1.704 s. Ur T=2π√(l/g) fås g=4π²l/T²=<strong>9.79 m/s²</strong>.</p>"
+},
+{
+  "id": "2.40",
+  "kap": 2,
+  "omr": "pendlar",
+  "niva": "C",
+  "typ": "beräkna tidsfel hos pendelur när pendellängden förändras",
+  "poang": "(1/2/0)",
+  "t": "<p>Ett pendelur får 0,20 % längre pendel när temperaturen stiger. Hur mycket efter går klockan på ett dygn?</p>",
+  "s": "<p>T ∝ √l, så perioden ökar med faktorn √1,002 = 1.001000. Klockan går därför långsammare och förlorar cirka <strong>86 s ≈ 1.4 min per dygn</strong>.</p>"
+},
+{
+  "id": "2.41",
+  "kap": 2,
+  "omr": "pendlar",
+  "niva": "C",
+  "typ": "kombinera pendelgeometri och energibevarande för att bestämma farten i botten",
+  "poang": "(1/2/0)",
+  "t": "<p>En 1,2 m lång pendel släpps från vila vid vinkeln 25° från lodlinjen. Bestäm farten i bottenläget.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Pendel släppt från 25 graders vinkel\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"85\" y1=\"28\" x2=\"375\" y2=\"28\" stroke=\"#2B2527\" stroke-width=\"5\"/>\n<circle cx=\"230\" cy=\"32\" r=\"5\" fill=\"#2B2527\"/><line x1=\"230\" y1=\"32\" x2=\"230\" y2=\"180\" stroke=\"#9A959C\" stroke-dasharray=\"5 4\"/>\n<line x1=\"230\" y1=\"32\" x2=\"292\" y2=\"166\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"292\" cy=\"166\" r=\"17\" fill=\"#E8B04F\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<path d=\"M230 82 A50 50 0 0 1 250 86\" fill=\"none\" stroke=\"#B43123\"/><text x=\"252\" y=\"80\" font-size=\"11\">25°</text><text x=\"300\" y=\"110\" font-size=\"11\">1,2 m</text></svg></span>",
+  "s": "<p>Höjdskillnaden är h=l(1−cosθ)=0.112 m. mgh=½mv² ⇒ v=√(2gh)=<strong>1.49 m/s</strong>.</p>"
+},
+{
+  "id": "2.42",
+  "kap": 2,
+  "omr": "pendlar",
+  "niva": "C",
+  "typ": "bestämma lokal tyngdacceleration från periodjämförelse med en referensplats",
+  "poang": "(1/2/0)",
+  "t": "<p>Samma pendel har perioden 2,00 s på jorden och 2,40 s på en annan himlakropp. Bestäm tyngdaccelerationen där.</p>",
+  "s": "<p>För samma l gäller T ∝ 1/√g. g₂=g₁(T₁/T₂)²=9,82·(2,00/2,40)²=<strong>6.82 m/s²</strong>.</p>"
+},
+{
+  "id": "2.43",
+  "kap": 2,
+  "omr": "pendlar",
+  "niva": "C",
+  "typ": "analysera konisk pendel med kraftkomposanter och cirkelrörelse",
+  "poang": "(0/3/0)",
+  "t": "<p>En 0,75 m lång konisk pendel bildar 30° mot lodlinjen. Bestäm omloppstiden.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Konisk pendel med cirkulär bana\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<line x1=\"80\" y1=\"30\" x2=\"380\" y2=\"30\" stroke=\"#2B2527\" stroke-width=\"5\"/><circle cx=\"230\" cy=\"34\" r=\"5\" fill=\"#2B2527\"/>\n<line x1=\"230\" y1=\"34\" x2=\"310\" y2=\"150\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"310\" cy=\"150\" r=\"15\" fill=\"#E8B04F\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<ellipse cx=\"230\" cy=\"150\" rx=\"80\" ry=\"28\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2\" stroke-dasharray=\"6 4\"/>\n<line x1=\"230\" y1=\"34\" x2=\"230\" y2=\"160\" stroke=\"#9A959C\" stroke-dasharray=\"5 4\"/><text x=\"258\" y=\"70\" font-size=\"11\">30°</text></svg></span>",
+  "s": "<p>Kraftkomposanterna ger ω²=g/(l cosθ). Därför T=2π√(l cosθ/g)=<strong>1.62 s</strong>.</p>"
+},
+{
+  "id": "2.44",
+  "kap": 2,
+  "omr": "pendlar",
+  "niva": "A",
+  "typ": "analysera pendel i ett accelererande referenssystem med effektiv tyngdacceleration",
+  "poang": "(0/1/3)",
+  "t": "<p>En 1,0 m pendel hänger i en hiss. Bestäm periodtiden när hissen accelererar 2,0 m/s² uppåt och när den accelererar lika mycket nedåt.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Pendel i accelererande hiss\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<rect x=\"115\" y=\"30\" width=\"230\" height=\"170\" rx=\"8\" fill=\"#FAF9F7\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<circle cx=\"230\" cy=\"55\" r=\"5\" fill=\"#2B2527\"/><line x1=\"230\" y1=\"55\" x2=\"270\" y2=\"155\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"270\" cy=\"155\" r=\"15\" fill=\"#E8B04F\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"375\" y1=\"160\" x2=\"375\" y2=\"80\" stroke=\"#B43123\" stroke-width=\"2.5\" marker-end=\"url(#arr)\"/><text x=\"385\" y=\"120\" font-size=\"11\">a = 2,0 m/s²</text><text x=\"230\" y=\"220\" text-anchor=\"middle\" font-size=\"12\">hiss</text></svg></span>",
+  "s": "<p>I hissystemet blir g<sub>eff</sub>=g+a uppåt och g−a nedåt. T<sub>upp</sub>=2π√(1/(9,82+2,0))=<strong>1.83 s</strong>. T<sub>ned</sub>=2π√(1/(9,82−2,0))=<strong>2.25 s</strong>.</p>"
+},
+{
+  "id": "2.45",
+  "kap": 2,
+  "omr": "pendlar",
+  "niva": "A",
+  "typ": "kombinera pendelmätning och satellitens omloppstid för att bestämma en planets radie",
+  "poang": "(0/1/3)",
+  "t": "<p>På en planet har en 0,64 m pendel perioden 1,50 s. En satellit precis ovanför ytan har omloppstiden 2,0 h. Bestäm planetens radie.</p><span class=\"fig\"><svg preserveAspectRatio=\"xMinYMid meet\" viewBox=\"0 0 460 230\" role=\"img\" aria-label=\"Pendelexperiment och satellitbana kring samma planet\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"arr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 z\" fill=\"#B43123\"/></marker></defs>\n<circle cx=\"235\" cy=\"125\" r=\"68\" fill=\"#D8E2C4\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<ellipse cx=\"235\" cy=\"125\" rx=\"125\" ry=\"92\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2\" stroke-dasharray=\"6 4\"/>\n<circle cx=\"360\" cy=\"125\" r=\"9\" fill=\"#E8B04F\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"55\" y1=\"40\" x2=\"55\" y2=\"155\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"55\" cy=\"155\" r=\"12\" fill=\"#E8B04F\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<text x=\"78\" y=\"92\" font-size=\"11\">l=0,64 m</text><text x=\"310\" y=\"40\" font-size=\"11\">satellit T=2,0 h</text></svg></span>",
+  "s": "<p>Pendeln ger g=4π²l/T²=<strong>11.23 m/s²</strong>. För en satellit nära ytan gäller g=4π²R/P². Alltså R=gP²/(4π²)=<strong>14746 km</strong>.</p>"
+},
+{
+  "id": "2.46",
   "kap": 2,
   "omr": "vagrorelser",
   "niva": "E",
@@ -581,7 +761,7 @@ window.BANK2 = [
   "s": "<p>v=fλ=6,0·1,5=<strong>9,0 m/s</strong>.</p>"
 },
 {
-  "id": "2.32",
+  "id": "2.47",
   "kap": 2,
   "omr": "vagrorelser",
   "niva": "E",
@@ -590,7 +770,7 @@ window.BANK2 = [
   "s": "<p>λ=v/f=12/4,0=<strong>3,0 m</strong>.</p>"
 },
 {
-  "id": "2.33",
+  "id": "2.48",
   "kap": 2,
   "omr": "vagrorelser",
   "niva": "E",
@@ -599,7 +779,7 @@ window.BANK2 = [
   "s": "<p>f=1/T=1/0,25=<strong>4,0 Hz</strong>.</p>"
 },
 {
-  "id": "2.34",
+  "id": "2.49",
   "kap": 2,
   "omr": "vagrorelser",
   "niva": "E",
@@ -608,7 +788,7 @@ window.BANK2 = [
   "s": "<p>Vid själva vändläget är punktens momentana tvärhastighet <strong>0</strong>.</p><p>Vågmönstret rör sig åt höger, men materialpunkten rör sig inte åt höger med vågen.</p>"
 },
 {
-  "id": "2.35",
+  "id": "2.50",
   "kap": 2,
   "omr": "vagrorelser",
   "niva": "E",
@@ -617,7 +797,7 @@ window.BANK2 = [
   "s": "<p>Vid en fast ände reflekteras pulsen <strong>inverterad</strong>.</p><p>En uppåtriktad puls kommer alltså tillbaka som en nedåtriktad puls och rör sig åt vänster.</p>"
 },
 {
-  "id": "2.36",
+  "id": "2.51",
   "kap": 2,
   "omr": "vagrorelser",
   "niva": "C",
@@ -626,7 +806,7 @@ window.BANK2 = [
   "s": "<p>Perioden T=λ/v=4,0/2,0=<strong>2 s</strong>.</p><p>Punkten utför harmonisk svängning. Med x(0)=0 och rörelse uppåt kan y=A sin(2πt/T).</p><p>y=0,060 sin(2π·0,75/2)=<strong>4,24 cm</strong>. Negativt värde betyder under jämviktsläget.</p>"
 },
 {
-  "id": "2.37",
+  "id": "2.52",
   "kap": 2,
   "omr": "vagrorelser",
   "niva": "C",
@@ -635,7 +815,7 @@ window.BANK2 = [
   "s": "<p>Tre bukar betyder tredje harmoniska svängningen: L=3λ/2.</p><p>λ=2L/3=<strong>0,8 m</strong>. v=fλ=45·0,8=<strong>36 m/s</strong>.</p><p>Grundtonen har en tredjedel av frekvensen: f₁=<strong>15 Hz</strong>.</p>"
 },
 {
-  "id": "2.38",
+  "id": "2.53",
   "kap": 2,
   "omr": "vagrorelser",
   "niva": "C",
@@ -644,7 +824,7 @@ window.BANK2 = [
   "s": "<p>f=v₁/λ₁=0,30/0,10=3,0 Hz. v₂=fλ₂=3,0·0,065=<strong>0,195 m/s</strong>.</p><p>När en del av vågfronten går in i det långsammare området först bromsas den delen först. Därför vrids vågfronten och utbredningsriktningen bryts.</p>"
 },
 {
-  "id": "2.39",
+  "id": "2.54",
   "kap": 2,
   "omr": "vagrorelser",
   "niva": "A",
@@ -653,7 +833,7 @@ window.BANK2 = [
   "s": "<p>Närmaste kanterna närmar sig med 20+10=30 cm/s.</p><p>t=45/30=<strong>1,50 s</strong>.</p><p>Vid överlappning gäller superpositionsprincipen. Elongationerna adderas algebraiskt: +4,0+(−2,5)=<strong>+1,5 cm</strong>.</p><p>Pulserna påverkar inte varandras fortsatta form efter mötet i den idealiserade linan.</p>"
 },
 {
-  "id": "2.40",
+  "id": "2.55",
   "kap": 2,
   "omr": "vagrorelser",
   "niva": "A",
@@ -662,7 +842,7 @@ window.BANK2 = [
   "s": "<p>För vågbrytning gäller sinθ₁/sinθ₂=v₁/v₂.</p><p>sinθ₂=(v₂/v₁)sin40° ⇒ θ₂=<strong>22,7°</strong>.</p><p>Frekvensen f=v₁/λ₁=0,50/0,12=4,17 Hz. λ₂=v₂/f=<strong>7,2 cm</strong>.</p><p>Frekvensen bestäms av källan och måste vara samma på båda sidor om gränsen; annars skulle vågtoppar skapas eller försvinna vid gränsen.</p>"
 },
 {
-  "id": "2.41",
+  "id": "2.56",
   "kap": 2,
   "omr": "ljudvagor",
   "niva": "E",
@@ -671,7 +851,7 @@ window.BANK2 = [
   "s": "<p>λ=v/f=340/680=<strong>0,50 m</strong>.</p>"
 },
 {
-  "id": "2.42",
+  "id": "2.57",
   "kap": 2,
   "omr": "ljudvagor",
   "niva": "E",
@@ -680,7 +860,7 @@ window.BANK2 = [
   "s": "<p>Ljudet färdas fram och tillbaka: s=2·102=204 m.</p><p>t=s/v=204/340=<strong>0,60 s</strong>.</p>"
 },
 {
-  "id": "2.43",
+  "id": "2.58",
   "kap": 2,
   "omr": "ljudvagor",
   "niva": "E",
@@ -689,7 +869,7 @@ window.BANK2 = [
   "s": "<p>För ett öppet rör gäller L=λ/2 i grundtonen.</p><p>λ=2L=1,36 m.</p><p>f=v/λ=340/1,36=<strong>25 Hz</strong>.</p>"
 },
 {
-  "id": "2.44",
+  "id": "2.59",
   "kap": 2,
   "omr": "ljudvagor",
   "niva": "E",
@@ -698,7 +878,7 @@ window.BANK2 = [
   "s": "<p>För ett halvöppet rör gäller L=λ/4.</p><p>λ=4L=1,60 m.</p><p>f=340/1,60=<strong>212 Hz</strong>.</p>"
 },
 {
-  "id": "2.45",
+  "id": "2.60",
   "kap": 2,
   "omr": "ljudvagor",
   "niva": "E",
@@ -707,7 +887,7 @@ window.BANK2 = [
   "s": "<p>I ett öppet rör finns alla heltalsmultiplar av grundtonen.</p><p>Första övertonen är andra harmoniska: f₂=2f₁=<strong>440 Hz</strong>.</p>"
 },
 {
-  "id": "2.46",
+  "id": "2.61",
   "kap": 2,
   "omr": "ljudvagor",
   "niva": "C",
@@ -716,7 +896,7 @@ window.BANK2 = [
   "s": "<p>Mellan två närliggande resonanslägen skiljer en halv våglängd.</p><p>λ/2=0,533−0,168=0,365 m ⇒ λ=0,730 m.</p><p>v=fλ=467·0,730=<strong>341 m/s</strong>.</p>"
 },
 {
-  "id": "2.47",
+  "id": "2.62",
   "kap": 2,
   "omr": "ljudvagor",
   "niva": "C",
@@ -725,7 +905,7 @@ window.BANK2 = [
   "s": "<p>För öppet rör är f_n=n·v/(2L).</p><p>f₅=5·340/(2·0,85)=<strong>1 Hz</strong>.</p><p>Femte harmoniska är <strong>fjärde övertonen</strong>, eftersom grundtonen räknas som första harmoniska.</p>"
 },
 {
-  "id": "2.48",
+  "id": "2.63",
   "kap": 2,
   "omr": "ljudvagor",
   "niva": "C",
@@ -734,7 +914,7 @@ window.BANK2 = [
   "s": "<p>λ=v/f=340/850=<strong>0,4 m</strong>.</p><p>För första minimum krävs vägskillnaden λ/2=0,20 m.</p><p>Det andra avståndet ska därför vara 3,20+0,20=<strong>3,40 m</strong>.</p>"
 },
 {
-  "id": "2.49",
+  "id": "2.64",
   "kap": 2,
   "omr": "ljudvagor",
   "niva": "A",
@@ -743,7 +923,7 @@ window.BANK2 = [
   "s": "<p>I ett öppet rör ligger närliggande harmoniska frekvenser ett grundtonsintervall f₁ från varandra. Då skulle f₁=170 Hz, men 255/170=1,5 är inte ett heltal, så detta passar inte ett öppet rör.</p><p>I ett halvöppet rör förekommer bara udda harmoniska. Närliggande tillåtna frekvenser skiljer 2f₁.</p><p>2f₁=425−255=170 ⇒ f₁=<strong>85 Hz</strong>. 255=3f₁ och 425=5f₁, vilket stämmer.</p><p>För halvöppet rör: f₁=v/(4L) ⇒ L=340/(4·85)=<strong>1 m</strong>.</p>"
 },
 {
-  "id": "2.50",
+  "id": "2.65",
   "kap": 2,
   "omr": "ljudvagor",
   "niva": "A",
@@ -752,7 +932,7 @@ window.BANK2 = [
   "s": "<p>För ett öppet rör är v=2Lf=2·0,650·270=<strong>351 m/s</strong>.</p><p>331+0,60T=351 ⇒ T=<strong>33,3 °C</strong>.</p><p>Temperaturen blir ungefär 33 °C. Det är möjligt men ovanligt varmt för ett klassrum. Mätningen behöver alltså inte vara matematiskt fel, men temperatur, ändkorrektion och mätosäkerhet bör kontrolleras.</p>"
 },
 {
-  "id": "2.51",
+  "id": "2.66",
   "kap": 2,
   "omr": "ljud_horsel",
   "niva": "E",
@@ -761,7 +941,7 @@ window.BANK2 = [
   "s": "<p>L=10log₁₀(I/I₀).</p><p>L=10log₁₀(10⁶)=<strong>60 dB</strong>.</p>"
 },
 {
-  "id": "2.52",
+  "id": "2.67",
   "kap": 2,
   "omr": "ljud_horsel",
   "niva": "E",
@@ -770,7 +950,7 @@ window.BANK2 = [
   "s": "<p>En ökning med 10 dB motsvarar en faktor 10 i intensitet.</p><p>Intensiteten blir <strong>10 gånger större</strong>.</p>"
 },
 {
-  "id": "2.53",
+  "id": "2.68",
   "kap": 2,
   "omr": "ljud_horsel",
   "niva": "E",
@@ -779,7 +959,7 @@ window.BANK2 = [
   "s": "<p>I=P/(4πr²).</p><p>I=0,050/(4π·4,0²)=<strong>2,49·10<sup>-4</sup> W/m²</strong>.</p>"
 },
 {
-  "id": "2.54",
+  "id": "2.69",
   "kap": 2,
   "omr": "ljud_horsel",
   "niva": "E",
@@ -788,7 +968,7 @@ window.BANK2 = [
   "s": "<p>Två lika intensiteter ger dubbla intensiteten.</p><p>ΔL=10log₁₀2≈3,0 dB.</p><p>Total nivå ≈ <strong>73 dB</strong>.</p>"
 },
 {
-  "id": "2.55",
+  "id": "2.70",
   "kap": 2,
   "omr": "ljud_horsel",
   "niva": "E",
@@ -797,7 +977,7 @@ window.BANK2 = [
   "s": "<p>Det ungefärliga hörselområdet brukar anges till 20 Hz–20 kHz.</p><p><strong>15 kHz</strong> ligger inom området, medan 25 kHz är ultraljud.</p>"
 },
 {
-  "id": "2.56",
+  "id": "2.71",
   "kap": 2,
   "omr": "ljud_horsel",
   "niva": "C",
@@ -806,7 +986,7 @@ window.BANK2 = [
   "s": "<p>Intensiteten avtar som 1/r², så nivåskillnaden kan skrivas ΔL=20log₁₀(r₂/r₁).</p><p>ΔL=20log₁₀(8/2)=<strong>12 dB</strong>.</p><p>L₂=84−12=<strong>72 dB</strong>.</p>"
 },
 {
-  "id": "2.57",
+  "id": "2.72",
   "kap": 2,
   "omr": "ljud_horsel",
   "niva": "C",
@@ -815,7 +995,7 @@ window.BANK2 = [
   "s": "<p>Ljudnivåer måste först omvandlas till relativa intensiteter.</p><p>I_rel,medel=[10^(90/10)·1 + 10^(87/10)·3]/4.</p><p>L_eq=10log₁₀(I_rel,medel)=<strong>88 dB</strong>.</p>"
 },
 {
-  "id": "2.58",
+  "id": "2.73",
   "kap": 2,
   "omr": "ljud_horsel",
   "niva": "C",
@@ -824,7 +1004,7 @@ window.BANK2 = [
   "s": "<p>I=I₀·10^(L/10)=10⁻¹²·10^7,8=<strong>6,31·10<sup>-5</sup> W/m²</strong>.</p><p>P=I·4πr²=6,31·10<sup>-5</sup>·4π·6,0²=<strong>0,029 W</strong>.</p>"
 },
 {
-  "id": "2.59",
+  "id": "2.74",
   "kap": 2,
   "omr": "ljud_horsel",
   "niva": "A",
@@ -833,7 +1013,7 @@ window.BANK2 = [
   "s": "<p>Fyra oberoende lika källor ger +10log₁₀4 = +6,02 dB.</p><p>Ökat avstånd 3→12 m ger −20log₁₀(12/3)=−12,04 dB.</p><p>Skärmen multiplicerar intensiteten med 0,12 och ger 10log₁₀0,12=−9,21 dB.</p><p>L=82+6,02−12,04−9,21=<strong>66,8 dB</strong>.</p>"
 },
 {
-  "id": "2.60",
+  "id": "2.75",
   "kap": 2,
   "omr": "ljud_horsel",
   "niva": "A",
@@ -842,7 +1022,7 @@ window.BANK2 = [
   "s": "<p>För sfärisk spridning är nivåskillnaden ΔL=20log₁₀(r₂/r₁).</p><p>6,0=20log₁₀((r₁+5)/r₁) ⇒ r₁=<strong>5,02 m</strong>.</p><p>Vid 86 dB är I=I₀10^(8,6)=<strong>3,98·10<sup>-4</sup> W/m²</strong>.</p><p>P=4πr₁²I=<strong>0,126 W</strong>.</p>"
 },
 {
-  "id": "2.61",
+  "id": "2.76",
   "kap": 2,
   "omr": "extrema_frekvenser",
   "niva": "E",
@@ -851,7 +1031,7 @@ window.BANK2 = [
   "s": "<p>λ=v/f=1500/50000=<strong>0,030 m = 3,0 cm</strong>.</p>"
 },
 {
-  "id": "2.62",
+  "id": "2.77",
   "kap": 2,
   "omr": "extrema_frekvenser",
   "niva": "E",
@@ -860,7 +1040,7 @@ window.BANK2 = [
   "s": "<p>Pulsen går ned och tillbaka, alltså 2d=vt.</p><p>d=vt/2=1500·0,80/2=<strong>600 m</strong>.</p>"
 },
 {
-  "id": "2.63",
+  "id": "2.78",
   "kap": 2,
   "omr": "extrema_frekvenser",
   "niva": "E",
@@ -869,7 +1049,7 @@ window.BANK2 = [
   "s": "<p>24 kHz ligger över ungefär 20 kHz. Det är därför <strong>ultraljud</strong> för människan.</p>"
 },
 {
-  "id": "2.64",
+  "id": "2.79",
   "kap": 2,
   "omr": "extrema_frekvenser",
   "niva": "E",
@@ -878,7 +1058,7 @@ window.BANK2 = [
   "s": "<p>λ=v/f=340/8,0=<strong>42,5 m</strong>.</p>"
 },
 {
-  "id": "2.65",
+  "id": "2.80",
   "kap": 2,
   "omr": "extrema_frekvenser",
   "niva": "E",
@@ -887,7 +1067,7 @@ window.BANK2 = [
   "s": "<p>Högre frekvens ger kortare våglängd när ljudhastigheten är ungefär given.</p><p>Kortare våglängd gör det möjligt att urskilja <strong>mindre strukturer</strong>.</p>"
 },
 {
-  "id": "2.66",
+  "id": "2.81",
   "kap": 2,
   "omr": "extrema_frekvenser",
   "niva": "C",
@@ -896,7 +1076,7 @@ window.BANK2 = [
   "s": "<p>Ekopulsen färdas fram och tillbaka.</p><p>d=vt/2=1540·130·10⁻⁶/2=<strong>10 cm</strong>.</p>"
 },
 {
-  "id": "2.67",
+  "id": "2.82",
   "kap": 2,
   "omr": "extrema_frekvenser",
   "niva": "C",
@@ -905,7 +1085,7 @@ window.BANK2 = [
   "s": "<p>För en källa som rör sig mot en stillastående observatör gäller f_obs=f₀·v/(v−v_s).</p><p>f_obs=45,0 kHz·340/(340−8,0)=<strong>46,1 kHz</strong>.</p>"
 },
 {
-  "id": "2.68",
+  "id": "2.83",
   "kap": 2,
   "omr": "extrema_frekvenser",
   "niva": "C",
@@ -914,7 +1094,7 @@ window.BANK2 = [
   "s": "<p>f=v/λ.</p><p>f_min=1540/(0,50·10⁻³)=<strong>3,08 MHz</strong>.</p>"
 },
 {
-  "id": "2.69",
+  "id": "2.84",
   "kap": 2,
   "omr": "extrema_frekvenser",
   "niva": "A",
@@ -923,7 +1103,7 @@ window.BANK2 = [
   "s": "<p>För ett mål som rör sig bort blir den reflekterade frekvenskvoten f_eko/f₀=(v−u)/(v+u).</p><p>Här är f_eko/f₀=0,978.</p><p>0,978=(1500−u)/(1500+u) ⇒ u=<strong>16,7 m/s</strong>, cirka 60,1 km/h.</p>"
 },
 {
-  "id": "2.70",
+  "id": "2.85",
   "kap": 2,
   "omr": "extrema_frekvenser",
   "niva": "A",
@@ -932,7 +1112,7 @@ window.BANK2 = [
   "s": "<p>v=Δf·c/(2f₀cosθ)=1800·1540/[2·5,0·10⁶·cos60°]=<strong>0,554 m/s</strong>.</p><p>Eftersom den uppmätta dopplerförskjutningen innehåller faktorn cosθ blir den beräknade hastigheten mycket känslig för fel i vinkeln när θ är stor. Vid 90° skulle ingen dopplerförskjutning mätas trots att blodet rör sig.</p>"
 },
 {
-  "id": "2.71",
+  "id": "2.86",
   "kap": 2,
   "omr": "vagor",
   "niva": "E",
@@ -941,7 +1121,7 @@ window.BANK2 = [
   "s": "<p>Elongationerna adderas enligt superpositionsprincipen.</p><p>Två lika stora vågtoppar ger <strong>dubbla amplituden</strong>: konstruktiv interferens.</p>"
 },
 {
-  "id": "2.72",
+  "id": "2.87",
   "kap": 2,
   "omr": "vagor",
   "niva": "E",
@@ -950,7 +1130,7 @@ window.BANK2 = [
   "s": "<p>Δs=0,80 m=2λ. En heltalsmultipel av λ ger <strong>konstruktiv interferens</strong>.</p>"
 },
 {
-  "id": "2.73",
+  "id": "2.88",
   "kap": 2,
   "omr": "vagor",
   "niva": "E",
@@ -959,7 +1139,7 @@ window.BANK2 = [
   "s": "<p>Δs=0,25 m=λ/2. En udda halv våglängd ger <strong>destruktiv interferens</strong>.</p>"
 },
 {
-  "id": "2.74",
+  "id": "2.89",
   "kap": 2,
   "omr": "vagor",
   "niva": "E",
@@ -968,7 +1148,7 @@ window.BANK2 = [
   "s": "<p>Vågen böjs av och sprids åt flera håll. Fenomenet kallas <strong>diffraktion</strong>.</p>"
 },
 {
-  "id": "2.75",
+  "id": "2.90",
   "kap": 2,
   "omr": "vagor",
   "niva": "E",
@@ -977,7 +1157,7 @@ window.BANK2 = [
   "s": "<p>Frekvensen bestäms av källan och <strong>ändras inte</strong> vid övergången.</p><p>Om våghastigheten ändras måste i stället våglängden ändras eftersom v=fλ.</p>"
 },
 {
-  "id": "2.76",
+  "id": "2.91",
   "kap": 2,
   "omr": "vagor",
   "niva": "C",
@@ -986,7 +1166,7 @@ window.BANK2 = [
   "s": "<p>Vägskillnaden Δs=6,00−5,10=<strong>0,9 m</strong>.</p><p>Δs/0,6=1,5 = 1,5. Det är en udda halv multipel av λ.</p><p>P ligger därför i ett <strong>interferensminimum</strong>.</p>"
 },
 {
-  "id": "2.77",
+  "id": "2.92",
   "kap": 2,
   "omr": "vagor",
   "niva": "C",
@@ -995,7 +1175,7 @@ window.BANK2 = [
   "s": "<p>Från maximum till nästa maximum ändras vägskillnaden med en våglängd. Här passeras två maximumintervall, alltså 18 cm=2λ.</p><p>λ=<strong>9 cm</strong>.</p><p>f=v/λ=340/0,090=<strong>3778 Hz</strong>.</p>"
 },
 {
-  "id": "2.78",
+  "id": "2.93",
   "kap": 2,
   "omr": "vagor",
   "niva": "C",
@@ -1004,7 +1184,7 @@ window.BANK2 = [
   "s": "<p>Fyra bukar ger fyra halva våglängder längs strängen: L=4λ/2.</p><p>Det finns en nod i varje ände och mellan varje par bukar: <strong>5 noder</strong>.</p><p>λ=2L/4=<strong>0,8 m</strong>. v=fλ=20·0,8=<strong>16 m/s</strong>.</p>"
 },
 {
-  "id": "2.79",
+  "id": "2.94",
   "kap": 2,
   "omr": "vagor",
   "niva": "A",
@@ -1013,7 +1193,7 @@ window.BANK2 = [
   "s": "<p>Vägskillnaden är Δs=0,90 m=1,5λ. Denna vägskillnad ger en fasförskjutning 3π.</p><p>Källorna startar dessutom i motfas, alltså ytterligare π. Total fasskillnad blir 4π, vilket är <strong>konstruktiv interferens</strong>.</p><p>För att gå från maximum till närmaste minimum måste total fas ändras π, vilket motsvarar en ändring av vägskillnaden λ/2.</p><p>Minsta ändring är därför <strong>0,30 m</strong>.</p>"
 },
 {
-  "id": "2.80",
+  "id": "2.95",
   "kap": 2,
   "omr": "vagor",
   "niva": "A",
