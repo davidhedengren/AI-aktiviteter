@@ -2,8 +2,6 @@
 
 window.OMR2 = {
  "1": {
-  "krafter": "Mer om krafter",
-  "friktion": "Friktion",
   "cirkel": "Cirkulär centralrörelse",
   "kast": "Kaströrelse"
  },
