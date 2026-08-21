@@ -502,6 +502,47 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
   transform:translateX(-.5px);
 }
 
+
+/* ── v4 · faktisk högerplacering och centrerad pil ── */
+.kk-fot{
+  display:flex;
+  flex-direction:row;
+  align-items:flex-end;
+  width:100%;
+}
+.kk-action{
+  margin-left:auto;            /* alltid längst till höger, även utan status */
+  width:42px;
+  height:42px;
+  flex:0 0 42px;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+}
+.kk-action svg{
+  width:19px;
+  height:19px;
+  display:block;
+  margin:0;
+  transform:none!important;
+  position:static;
+}
+.kurskort:hover .kk-action svg{
+  transform:none!important;
+}
+
+
+/* ── v5 · längre pil ── */
+.kk-action svg{
+  width:21px;
+  height:21px;
+  display:block;
+  margin:0;
+  transform:none!important;
+}
+
 /* ── topprad ── */
 .top{height:80px;background:var(--surface);border-bottom:1px solid var(--line);
   display:flex;align-items:center;gap:18px;padding:0 24px;position:relative;z-index:20}
@@ -1108,7 +1149,7 @@ function ritaKursval(){
         ${k.data?`<span class="kk-status">${k.data.bank.length} uppgifter redo</span>`:''}
         <span class="kk-action" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6.5 12h10.5M13 8l4 4-4 4"/>
+            <path d="M4.5 12h14M14 7.5l4.5 4.5-4.5 4.5"/>
           </svg>
         </span>
       </span>
