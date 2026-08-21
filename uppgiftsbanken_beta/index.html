@@ -437,6 +437,71 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
   .kurskort{padding:23px 22px 20px}
 }
 
+
+/* ── v2 · ren CTA och tydligare pil ── */
+.kk-fot{
+  flex-direction:row;
+  align-items:flex-end;
+  justify-content:space-between;
+  min-height:48px;
+  padding-top:14px;
+  border-top:1px solid rgba(43,37,39,.065);
+}
+.kk-status{
+  margin-bottom:7px;
+}
+.kk-action{
+  width:42px;
+  height:42px;
+  padding:0;
+  border:1px solid rgba(180,49,35,.14);
+  border-radius:50%;
+  background:var(--ed-tint);
+  display:grid;
+  place-items:center;
+  flex:none;
+  color:var(--ed);
+  transition:
+    transform .2s cubic-bezier(.2,.8,.2,1),
+    background .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease;
+}
+.kk-action svg{
+  width:20px;
+  height:20px;
+  color:inherit;
+}
+.kurskort:hover .kk-action{
+  transform:translateX(2px);
+  background:#F7E3DF;
+  border-color:rgba(180,49,35,.22);
+  box-shadow:0 6px 18px rgba(180,49,35,.10);
+}
+.kurskort:hover .kk-action svg{
+  transform:none;
+}
+
+
+/* ── v3 · optiskt centrerad kortpil ── */
+.kk-action{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+}
+.kk-action svg{
+  display:block;
+  width:18px;
+  height:18px;
+  margin:0;
+  transform:translateX(-.5px);
+  overflow:visible;
+}
+.kurskort:hover .kk-action svg{
+  transform:translateX(-.5px);
+}
+
 /* ── topprad ── */
 .top{height:80px;background:var(--surface);border-bottom:1px solid var(--line);
   display:flex;align-items:center;gap:18px;padding:0 24px;position:relative;z-index:20}
@@ -781,7 +846,7 @@ table.data th{background:var(--sunken);font-weight:600}
         <span class="kv-logo-shell"><img src="logo.png" alt="Erik Dahlbergsgymnasiet"></span>
         <span class="kv-brandtext">
           <span class="kv-brandname">Erik Dahlbergsgymnasiets uppgiftsbank</span>
-          <span class="kv-brandmeta">Välj kurs för att börja</span>
+          <span class="kv-brandmeta">Välj kurs för att skapa övningsblad</span>
         </span>
       </div>
     </header>
@@ -1042,9 +1107,8 @@ function ritaKursval(){
       <span class="kk-fot">
         ${k.data?`<span class="kk-status">${k.data.bank.length} uppgifter redo</span>`:''}
         <span class="kk-action" aria-hidden="true">
-          <span>Öppna provbanken för att skapa prov och övningsblad</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h13M13 7l5 5-5 5"/>
+            <path d="M6.5 12h10.5M13 8l4 4-4 4"/>
           </svg>
         </span>
       </span>
