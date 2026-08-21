@@ -267,6 +267,49 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
   .kk-tag{font-size:9px;padding:5px 9px;min-height:28px}
 }
 
+
+/* ── slutlig finjustering av kursväljaren ── */
+.kv-inner{width:min(1080px,100%)}
+.kv-brandname{
+  font-size:clamp(30px,3vw,44px);
+  letter-spacing:-.05em;
+  line-height:1;
+}
+.kv-brandmeta{
+  margin-top:11px;
+  font-family:"Manrope",system-ui,sans-serif;
+  font-size:12px;
+  line-height:1.2;
+  font-weight:650;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  color:var(--ed);
+}
+.kv-kort{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px;
+}
+.kurskort{
+  min-height:288px;
+  padding:34px 34px 30px;
+}
+.kk-taggar{margin-top:18px}
+.kk-cta{
+  max-width:88%;
+  font-size:10px;
+  line-height:1.45;
+  letter-spacing:.02em;
+}
+@media(max-width:900px){
+  .kv-inner{width:min(760px,100%)}
+  .kv-kort{grid-template-columns:1fr}
+  .kurskort{min-height:270px}
+}
+@media(max-width:520px){
+  .kurskort{padding:28px 24px 26px}
+  .kk-cta{max-width:94%}
+}
+
 /* ── topprad ── */
 .top{height:80px;background:var(--surface);border-bottom:1px solid var(--line);
   display:flex;align-items:center;gap:18px;padding:0 24px;position:relative;z-index:20}
@@ -870,8 +913,8 @@ function ritaKursval(){
       <span class="kk-namn">${k.titel}</span>
       <span class="kk-taggar">${(k.taggar||[]).map(t=>`<span class="kk-tag">${t}</span>`).join('')}</span>
       <span class="kk-fot">
-        <span class="kk-status">${k.data?k.data.bank.length+' uppgifter redo':'Öppna banken'}</span>
-        <span class="kk-cta" aria-hidden="true">${svgPil}</span>
+        <span class="kk-status">${k.data?k.data.bank.length+' uppgifter redo':'Öppna provbanken för att skapa prov och övningsblad'}</span>
+        <span class="kk-cta" aria-hidden="true">Öppna provbanken för att skapa prov och övningsblad</span>
       </span>
     </button>`).join('');
 
