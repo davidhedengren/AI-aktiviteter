@@ -310,6 +310,133 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
   .kk-cta{max-width:94%}
 }
 
+
+/* ── kursväljare · compact editorial pass ── */
+.kursval{
+  padding:clamp(24px,3.3vw,48px);
+}
+.kv-inner{
+  width:min(1010px,100%);
+}
+.kv-nav{
+  margin-bottom:38px;
+}
+.kv-logo-shell{
+  width:88px;
+  height:88px;
+  border-radius:22px;
+  box-shadow:0 12px 34px rgba(43,37,39,.10),0 2px 8px rgba(43,37,39,.05);
+}
+.kv-logo-shell img{
+  width:80px;
+  height:80px;
+}
+.kv-brand{
+  gap:24px;
+}
+.kv-brandname{
+  font-size:clamp(31px,3.1vw,43px);
+}
+.kv-brandmeta{
+  margin-top:9px;
+  font-size:12px;
+  letter-spacing:.105em;
+}
+.kv-sektionstopp{
+  margin-bottom:12px;
+}
+.kv-kort{
+  gap:18px;
+}
+.kurskort{
+  min-height:255px;
+  padding:25px 27px 22px;
+  border-radius:26px;
+}
+.kk-top{
+  align-items:center;
+}
+.kk-index{
+  font-size:10px;
+}
+.kk-number{
+  font-size:43px;
+  line-height:.82;
+}
+.kk-namn{
+  margin-top:22px;
+  font-size:28px;
+}
+.kk-taggar{
+  margin-top:15px;
+  gap:6px;
+  max-width:100%;
+}
+.kk-tag{
+  min-height:27px;
+  padding:5px 10px;
+  font-size:9px;
+}
+.kk-fot{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:auto;
+  padding-top:18px;
+}
+.kk-status{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  width:max-content;
+  font-size:10.5px;
+  color:var(--ink-2);
+}
+.kk-action{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  width:100%;
+  padding-top:12px;
+  border-top:1px solid rgba(43,37,39,.07);
+  color:var(--ink);
+  font-size:10.5px;
+  line-height:1.4;
+  font-weight:600;
+  letter-spacing:-.005em;
+  transition:color .18s ease;
+}
+.kk-action svg{
+  width:17px;
+  height:17px;
+  flex:none;
+  color:var(--ed);
+  transition:transform .2s cubic-bezier(.2,.8,.2,1);
+}
+.kurskort:hover .kk-action{
+  color:var(--ed-dark);
+}
+.kurskort:hover .kk-action svg{
+  transform:translateX(3px);
+}
+.kk-cta{
+  display:none!important;
+}
+@media(max-width:900px){
+  .kv-inner{width:min(720px,100%)}
+  .kv-nav{margin-bottom:30px}
+  .kurskort{min-height:245px}
+}
+@media(max-width:520px){
+  .kv-logo-shell{width:72px;height:72px;border-radius:19px}
+  .kv-logo-shell img{width:65px;height:65px}
+  .kv-brand{gap:17px}
+  .kurskort{padding:23px 22px 20px}
+}
+
 /* ── topprad ── */
 .top{height:80px;background:var(--surface);border-bottom:1px solid var(--line);
   display:flex;align-items:center;gap:18px;padding:0 24px;position:relative;z-index:20}
@@ -913,8 +1040,13 @@ function ritaKursval(){
       <span class="kk-namn">${k.titel}</span>
       <span class="kk-taggar">${(k.taggar||[]).map(t=>`<span class="kk-tag">${t}</span>`).join('')}</span>
       <span class="kk-fot">
-        <span class="kk-status">${k.data?k.data.bank.length+' uppgifter redo':'Öppna provbanken för att skapa prov och övningsblad'}</span>
-        <span class="kk-cta" aria-hidden="true">Öppna provbanken för att skapa prov och övningsblad</span>
+        ${k.data?`<span class="kk-status">${k.data.bank.length} uppgifter redo</span>`:''}
+        <span class="kk-action" aria-hidden="true">
+          <span>Öppna provbanken för att skapa prov och övningsblad</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h13M13 7l5 5-5 5"/>
+          </svg>
+        </span>
       </span>
     </button>`).join('');
 
@@ -943,7 +1075,13 @@ async function väljKurs(kurs,kort){
   $('#kvFel').hidden=true;
   if(kurs.data){ startaKurs(kurs); return; }
   kort.classList.add('laddar');
-  kort.querySelector('.kk-status').textContent='Läser in…';
+  let status=kort.querySelector('.kk-status');
+  if(!status){
+    status=document.createElement('span');
+    status.className='kk-status';
+    kort.querySelector('.kk-fot').prepend(status);
+  }
+  status.textContent='Läser in…';
   try{
     for(const f of kurs.filer) await laddaSkript(f);
     const bank=hämtaGlobal(kurs.globaler.bank);
