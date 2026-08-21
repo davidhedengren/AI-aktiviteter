@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Erik Dahlbergsgymnasiets uppgiftsbank</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --canvas:#F4F5F7; --surface:#FFFFFF; --sunken:#EDEEF1;
+  --ink:#2B2527; --ink-2:#5C575E; --muted:#8A858E; --line:#E4E3E6; --line-2:#EFEEF0;
+  --ed:#B43123; --ed-dark:#8E2519; --ed-tint:#FBF0EE; --ed-ring:rgba(180,49,35,.18);
+  --nE:#0F6B4F; --nC:#2A5D9E; --nA:#6E3B86;
+  --nE-bg:#E9F3EF; --nC-bg:#EAF0F8; --nA-bg:#F2ECF6;
+  --r-s:8px; --r-m:12px; --r-l:16px;
+  --sh-1:0 1px 2px rgba(43,37,39,.05), 0 1px 3px rgba(43,37,39,.04);
+  --sh-2:0 4px 12px rgba(43,37,39,.07), 0 1px 3px rgba(43,37,39,.05);
+  --sh-3:0 12px 32px rgba(43,37,39,.12);
+  --ui:'Instrument Sans',system-ui,sans-serif;
+  --las:'Atkinson Hyperlegible',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--ui);
+  font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow:hidden}
+button,input,select{font-family:inherit;font-size:inherit;color:inherit}
+::selection{background:var(--ed-ring)}
+[hidden]{display:none!important}
+
+/* ── kursväljaren ── */
+.kursval{position:fixed;inset:0;background:var(--canvas);z-index:100;
+  display:grid;place-items:center;padding:28px;overflow:auto}
+.kv-inner{width:100%;max-width:720px}
+.kv-topp{display:flex;align-items:center;gap:15px;margin-bottom:30px}
+.kv-topp img{height:54px;width:auto;display:block}
+.kv-topp h1{margin:0;font-size:22px;font-weight:600;letter-spacing:-.015em}
+.kv-under{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--muted)}
+.kv-kort{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.kurskort{position:relative;overflow:hidden;text-align:left;display:flex;flex-direction:column;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);
+  padding:24px 22px 20px;cursor:pointer;font-family:inherit;
+  transition:border-color .18s,box-shadow .18s,transform .18s}
+.kurskort:hover{border-color:var(--ed);box-shadow:var(--sh-2);transform:translateY(-2px)}
+.kurskort:active{transform:translateY(0)}
+.kurskort:focus-visible{outline:2px solid var(--ed);outline-offset:2px}
+.kurskort::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ed);
+  transform:scaleY(0);transform-origin:top;transition:transform .22s cubic-bezier(.4,0,.2,1)}
+.kurskort:hover::before{transform:scaleY(1)}
+.kk-spok{position:absolute;right:12px;top:-14px;font-size:104px;font-weight:800;line-height:1;
+  color:var(--sunken);letter-spacing:-.06em;pointer-events:none;user-select:none;transition:color .18s}
+.kurskort:hover .kk-spok{color:var(--ed-tint)}
+.kk-etikett{position:relative;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);font-weight:600}
+.kk-namn{position:relative;font-size:21px;font-weight:700;letter-spacing:-.02em;margin:5px 0 9px}
+.kk-text{position:relative;font-size:13px;line-height:1.55;color:var(--ink-2);max-width:30ch}
+.kk-fot{position:relative;display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:18px;
+  font-family:var(--mono);font-size:11px;color:var(--muted)}
+.kk-fot svg{width:16px;height:16px;margin-left:auto;color:var(--ed);
+  transform:translateX(-4px);opacity:0;transition:transform .2s,opacity .2s}
+.kurskort:hover .kk-fot svg{transform:none;opacity:1}
+.kurskort.laddar{pointer-events:none;opacity:.65}
+.kv-fel{margin-top:18px;font-size:13px;line-height:1.6;color:var(--ed-dark);
+  background:var(--ed-tint);border-radius:var(--r-m);padding:13px 16px}
+.kv-fel code{font-family:var(--mono);font-size:12px}
+@media (max-width:640px){.kv-kort{grid-template-columns:1fr}.kk-spok{font-size:84px}}
+
+/* ── topprad ── */
+.top{height:80px;background:var(--surface);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:18px;padding:0 24px;position:relative;z-index:20}
+.märke{display:flex;align-items:center;gap:13px;min-width:0}
+.märke img{height:46px;width:auto;display:block}
+.titel{display:flex;flex-direction:column;min-width:0}
+.titel h1{margin:0;font-size:21px;font-weight:600;letter-spacing:-.015em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.titel span{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.top .fyll{flex:1}
+
+/* ── knappar ── */
+.knapp{display:inline-flex;align-items:center;gap:7px;border:none;cursor:pointer;
+  border-radius:var(--r-s);padding:9px 14px;font-weight:500;font-size:13.5px;
+  background:var(--sunken);color:var(--ink);transition:background .15s,transform .08s,box-shadow .15s}
+.knapp:hover{background:#E3E5E9}
+.knapp:active{transform:translateY(.5px)}
+.knapp.primär{background:var(--ed);color:#fff;box-shadow:var(--sh-1)}
+.knapp.primär:hover{background:var(--ed-dark)}
+.knapp.tyst{background:transparent;color:var(--ink-2)}
+.knapp.tyst:hover{background:var(--sunken);color:var(--ink)}
+.knapp.tyst[aria-pressed="true"]{background:var(--ed-tint);color:var(--ed-dark)}
+.knapp.tyst[aria-pressed="true"]:hover{background:var(--ed-tint)}
+.knapp.liten{padding:6px 10px;font-size:12px;gap:5px}
+.knapp.liten svg{width:12.5px;height:12.5px}
+
+/* ── slumpa-popover ── */
+.slumpwrap{position:relative}
+.slumpwrap .knapp[aria-expanded="true"]{background:var(--ed-tint);color:var(--ed-dark)}
+.slumppanel{position:absolute;top:calc(100% + 8px);right:0;width:220px;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r-l);box-shadow:var(--sh-3);padding:14px;z-index:30;
+  display:none}
+.slumppanel.öppen{display:block}
+.slumppanel label{display:block;font-size:11.5px;font-weight:600;color:var(--ink-2);margin-bottom:8px}
+.slumprad{display:flex;gap:8px}
+.slumprad input{width:64px;border:1px solid transparent;background:var(--sunken);border-radius:9px;
+  padding:9px 10px;font-size:14px;font-weight:600;color:var(--ink);text-align:center;
+  font-variant-numeric:tabular-nums;transition:background .15s,border-color .15s,box-shadow .15s}
+.slumprad input:hover{background:#E7E7EB}
+.slumprad input:focus{outline:none;background:var(--surface);border-color:var(--ed);box-shadow:0 0 0 3.5px var(--ed-ring)}
+.slumprad .knapp{flex:1;justify-content:center;padding:9px 10px}
+.knapp:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.knapp:focus-visible,input:focus-visible,.omrad:focus-visible,.kort:focus-visible{
+  outline:2px solid var(--ed);outline-offset:2px}
+.knapp svg{width:15px;height:15px;flex:none}
+
+/* ── kryssrutor i mittraden ── */
+.kryss{display:inline-flex;align-items:center;gap:9px;cursor:pointer;user-select:none;
+  position:relative;font-size:13px;color:var(--ink-2);background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r-s);padding:7px 13px 7px 10px;
+  transition:background .15s,border-color .15s,color .15s;white-space:nowrap}
+.kryss:hover{border-color:#D3D1D6;color:var(--ink)}
+.kryss input{position:absolute;opacity:0;width:0;height:0}
+.kryss .ruta{width:17px;height:17px;border-radius:5px;border:1.5px solid #CFCDD3;
+  background:var(--surface);display:grid;place-items:center;flex:none;transition:.15s}
+.kryss .ruta svg{width:11px;height:11px;color:#fff;opacity:0;transform:scale(.6);transition:.15s}
+.kryss input:checked~.ruta{background:var(--ed);border-color:var(--ed)}
+.kryss input:checked~.ruta svg{opacity:1;transform:scale(1)}
+.kryss input:focus-visible~.ruta{outline:2px solid var(--ed);outline-offset:2px}
+.kryss:has(input:checked){background:var(--ed-tint);border-color:transparent;color:var(--ed-dark)}
+.kryssgrupp{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ── tre paneler ── */
+.arbetsyta{display:grid;grid-template-columns:272px minmax(0,1fr) 360px;
+  height:calc(100vh - 80px);overflow:hidden}
+.panel{overflow-y:auto;overscroll-behavior:contain}
+.panel::-webkit-scrollbar{width:10px}
+.panel::-webkit-scrollbar-thumb{background:#D6D5D9;border-radius:99px;border:3px solid var(--canvas)}
+.panel::-webkit-scrollbar-track{background:transparent}
+
+/* ── vänster: områden ── */
+.vänster{background:var(--surface);border-right:1px solid var(--line);padding:16px 12px 40px}
+.sök{position:relative;margin:0 4px 14px}
+.sök input{width:100%;border:1px solid var(--line);background:var(--canvas);border-radius:var(--r-s);
+  padding:9px 12px 9px 33px;font-size:13.5px}
+.sök input::placeholder{color:var(--muted)}
+.sök svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--muted)}
+.etikett{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 8px;padding:0 8px;font-weight:600}
+.nivåfilter{display:flex;gap:6px;margin:0 4px 18px}
+.nivåfilter button{flex:1;border:1px solid var(--line);background:var(--surface);border-radius:var(--r-s);
+  padding:7px 0;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--muted);transition:.15s}
+.nivåfilter button[aria-pressed="true"].E{background:var(--nE-bg);color:var(--nE);border-color:transparent}
+.nivåfilter button[aria-pressed="true"].C{background:var(--nC-bg);color:var(--nC);border-color:transparent}
+.nivåfilter button[aria-pressed="true"].A{background:var(--nA-bg);color:var(--nA);border-color:transparent}
+.kapgrupp{margin-bottom:4px}
+.kaprad{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;cursor:pointer;
+  padding:7px 8px;border-radius:var(--r-s);text-align:left;font-weight:600;font-size:13.5px;color:var(--ink)}
+.kaprad:hover{background:var(--canvas)}
+.kaprad .pil{width:12px;height:12px;color:var(--muted);transition:transform .18s}
+.kapgrupp.stängd .pil{transform:rotate(-90deg)}
+.kaprad .nr{font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500}
+.kaprad .antal{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:400}
+.omrlista{padding-left:6px}
+.kapgrupp.stängd .omrlista{display:none}
+.omrad{display:flex;align-items:center;gap:9px;width:100%;background:none;border:none;cursor:pointer;
+  padding:6px 8px 6px 14px;border-radius:var(--r-s);text-align:left;font-size:13px;color:var(--ink-2);
+  position:relative;transition:background .13s,color .13s}
+.omrad:hover{background:var(--canvas);color:var(--ink)}
+.omrad[aria-pressed="true"]{background:var(--ed-tint);color:var(--ed-dark);font-weight:500}
+.omrad[aria-pressed="true"]::before{content:"";position:absolute;left:3px;top:7px;bottom:7px;width:2.5px;
+  border-radius:2px;background:var(--ed)}
+.omrad{align-items:flex-start}
+.omrad>span:first-child{line-height:1.35}
+.omrad .antal{margin-left:auto;padding-left:8px;font-family:var(--mono);font-size:10.5px;color:var(--muted);flex:none;padding-top:1px}
+.omrad[aria-pressed="true"] .antal{color:var(--ed)}
+
+/* ── mitten: uppgifter ── */
+.mitten{background:var(--canvas);padding:0 22px 60px}
+.mittopp{position:sticky;top:0;background:linear-gradient(var(--canvas) 72%,transparent);
+  padding:18px 0 12px;z-index:5;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.träffar{font-size:13.5px;color:var(--ink-2)}
+.träffar b{color:var(--ink);font-weight:600}
+.mittopp .fyll{flex:1}
+.kort{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);
+  padding:15px 17px 15px 15px;margin-bottom:9px;display:grid;grid-template-columns:22px 1fr;gap:13px;
+  cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .12s}
+.kort:hover{border-color:#D3D1D6;box-shadow:var(--sh-1)}
+.kort.vald{border-color:var(--ed);box-shadow:0 0 0 3px var(--ed-ring)}
+.kort.vald .id{color:var(--ed-dark)}
+.bock{width:20px;height:20px;border-radius:6px;border:1.5px solid #CFCDD3;background:var(--surface);
+  margin-top:2px;display:grid;place-items:center;transition:.15s}
+.bock svg{width:12px;height:12px;color:#fff;opacity:0;transform:scale(.6);transition:.15s}
+.kort.vald .bock{background:var(--ed);border-color:var(--ed)}
+.kort.vald .bock svg{opacity:1;transform:scale(1)}
+.kortmeta{display:flex;align-items:center;gap:9px;margin-bottom:7px;flex-wrap:wrap}
+.id{font-family:var(--ui);font-size:11.5px;font-weight:600;color:var(--muted);letter-spacing:-.005em}
+.nivå{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.08em;padding:2.5px 7px;border-radius:5px}
+.nivå.E{background:var(--nE-bg);color:var(--nE)} .nivå.C{background:var(--nC-bg);color:var(--nC)}
+.nivå.A{background:var(--nA-bg);color:var(--nA)}
+.område{font-size:11.5px;color:var(--muted)}
+.poäng{margin-left:auto;font-family:var(--ui);font-size:11.5px;color:var(--muted);font-weight:500}
+.kroppen{font-family:var(--las);font-size:14.5px;line-height:1.62;color:var(--ink)}
+.kroppen p{margin:0 0 8px;max-width:66ch}
+.kroppen p:last-child{margin-bottom:0}
+.kroppen ol{margin:9px 0 4px;padding-left:0;list-style:none;counter-reset:d}
+.kroppen li{margin-bottom:5px;padding-left:26px;position:relative;max-width:62ch}
+.kroppen li::before{counter-increment:d;content:counter(d,lower-alpha) ")";position:absolute;left:0;
+  font-family:var(--mono);font-weight:600;font-size:12.5px;color:var(--ed)}
+table.data{border-collapse:collapse;font-family:var(--mono);font-size:12.5px;margin:9px 0}
+table.data th,table.data td{border:1px solid var(--line);padding:5px 12px;text-align:right}
+table.data th{background:var(--sunken);font-weight:600}
+.facitknapp{margin-top:10px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:pointer;padding:3px 0}
+.facitknapp:hover{color:var(--ed)}
+.facit{display:none;margin-top:9px;padding:11px 14px;background:var(--sunken);border-radius:var(--r-s)}
+.facit.öppen{display:block}
+.facit p{margin:3px 0;font-family:var(--mono);font-size:12.5px;line-height:1.75}
+.facit .steg{position:relative;padding-left:27px;margin:7px 0}
+.facit .stegnr{position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:5px;
+  background:var(--ed);color:#fff;font-size:10.5px;font-weight:700;display:grid;place-items:center;
+  font-family:var(--ui);line-height:1}
+.facit .stegprick{background:none;color:var(--ed);font-size:15px}
+.facit .komm{padding-left:27px;font-family:var(--las);font-size:13px;color:var(--ink-2);line-height:1.55}
+.facit strong{color:var(--ed-dark)}
+.tomt{text-align:center;padding:70px 20px;color:var(--muted)}
+.tomt h3{font-size:15px;font-weight:600;color:var(--ink-2);margin:0 0 5px}
+.tomt p{margin:0;font-size:13.5px;max-width:34ch;margin-inline:auto}
+
+/* ── höger: övningsbladet ── */
+.höger{background:var(--surface);border-left:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden}
+.bladtopp{padding:20px 18px 16px;border-bottom:1px solid var(--line-2)}
+.bladtopp h2{margin:0 0 13px;font-size:15px;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
+.fält{display:flex;flex-direction:column;gap:8px}
+.fält input{border:1px solid transparent;background:var(--sunken);border-radius:11px;padding:10px 13px;
+  font-size:13.5px;color:var(--ink);transition:background .15s,border-color .15s,box-shadow .15s}
+.fält input::placeholder{color:var(--muted)}
+.fält input:hover{background:#E7E7EB}
+.fält input:focus{outline:none;background:var(--surface);border-color:var(--ed);box-shadow:0 0 0 3.5px var(--ed-ring)}
+.fält .rad{display:flex;gap:8px}
+.fält .rad input{flex:1;min-width:0}
+
+/* signaturen: poängmätaren */
+.mätare{padding:19px 18px;border-bottom:1px solid var(--line-2)}
+.mätarhuvud{display:flex;align-items:flex-end;gap:8px;margin-bottom:14px}
+.summa{font-family:var(--ui);font-size:32px;font-weight:800;letter-spacing:-.035em;line-height:1;
+  color:var(--ink);font-variant-numeric:tabular-nums}
+.summa small{font-size:13px;font-weight:600;color:var(--muted);margin-left:2px;letter-spacing:-.01em}
+.mätarhuvud .antal{margin-left:auto;font-size:12.5px;color:var(--muted);font-weight:500;padding-bottom:3px}
+.stapel{height:10px;border-radius:99px;background:var(--sunken);display:flex;overflow:hidden;
+  box-shadow:inset 0 1px 2px rgba(43,37,39,.06)}
+.stapel span{transition:width .5s cubic-bezier(.4,0,.2,1)}
+.stapel .sE{background:var(--nE)} .stapel .sC{background:var(--nC)} .stapel .sA{background:var(--nA)}
+.mätarnyckel{display:flex;gap:16px;margin-top:12px;font-family:var(--ui);font-size:12.5px;color:var(--ink-2)}
+.mätarnyckel b{font-weight:700;color:var(--ink)}
+.mätarnyckel i{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+.gränser{margin-top:16px}
+.gränser .gränsrubrik{display:block;font-size:11px;font-weight:600;letter-spacing:.03em;color:var(--muted);
+  margin-bottom:8px}
+.gränsrad{display:flex;gap:6px}
+.chip{flex:1;display:flex;align-items:baseline;justify-content:center;gap:4px;border-radius:9px;
+  padding:6px 4px;font-family:var(--ui);font-size:12px;font-weight:600}
+.chip b{font-size:13px;font-weight:700}
+.chip.E{background:var(--nE-bg);color:var(--nE)} .chip.C{background:var(--nC-bg);color:var(--nC)}
+.chip.A{background:var(--nA-bg);color:var(--nA)}
+
+.bladlista{flex:1;overflow-y:auto;padding:10px 12px 20px}
+.brad{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:flex-start;padding:10px 9px;
+  border-radius:var(--r-m);transition:background .15s}
+.brad:hover{background:var(--canvas)}
+.brad .num{width:22px;height:22px;border-radius:50%;background:var(--sunken);color:var(--ink-2);
+  font-family:var(--ui);font-size:11px;font-weight:700;display:grid;place-items:center;margin-top:1px}
+.brad .txt{font-size:12.5px;line-height:1.5;color:var(--ink-2);min-width:0}
+.bmeta{display:flex;align-items:center;gap:6px;margin-bottom:3px;flex-wrap:wrap}
+.bid{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--ink)}
+.bniva{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.05em;padding:1.5px 6px;border-radius:5px}
+.bniva.E{background:var(--nE-bg);color:var(--nE)} .bniva.C{background:var(--nC-bg);color:var(--nC)}
+.bniva.A{background:var(--nA-bg);color:var(--nA)}
+.bpoäng{font-family:var(--ui);font-size:11px;color:var(--muted);font-weight:500}
+.brad .txt .btext{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--ink-2)}
+.bverktyg{display:flex;gap:1px;opacity:0;transition:opacity .13s}
+.brad:hover .bverktyg,.brad:focus-within .bverktyg{opacity:1}
+.bverktyg button{width:25px;height:25px;border:none;background:none;border-radius:7px;cursor:pointer;
+  color:var(--muted);display:grid;place-items:center;transition:background .13s,color .13s}
+.bverktyg button:hover{background:var(--sunken);color:var(--ink)}
+.bverktyg button.bort:hover{background:var(--ed-tint);color:var(--ed)}
+.bverktyg svg{width:13px;height:13px}
+.bladfot{padding:16px 18px 20px;border-top:1px solid var(--line-2);background:var(--surface)}
+.exportrad{display:flex;gap:9px}
+.exportrad .knapp{flex:1;justify-content:center;padding:11px 14px;border-radius:11px;font-weight:600}
+.exportrad .knapp.primär{box-shadow:0 2px 8px rgba(180,49,35,.22)}
+.växel{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:13.5px;font-weight:500;
+  color:var(--ink-2);cursor:pointer}
+.växel input{appearance:none;width:38px;height:22px;border-radius:99px;background:#D6D5D9;position:relative;
+  cursor:pointer;transition:background .18s;flex:none;box-shadow:inset 0 1px 2px rgba(43,37,39,.08)}
+.växel input::after{content:"";position:absolute;top:2.5px;left:2.5px;width:17px;height:17px;border-radius:50%;
+  background:#fff;box-shadow:0 1px 3px rgba(43,37,39,.25);transition:transform .18s cubic-bezier(.4,0,.2,1)}
+.växel input:checked{background:var(--ed)}
+.växel input:checked::after{transform:translateX(16px)}
+
+
+/* ── figurer ────────────────────────────────────────────────
+   Klasserna styr ram och storlek. Färger sätts som attribut direkt
+   i SVG-koden, så att en uppgift kan klippas ut och fungera fristående. */
+.fig{margin:12px 0;max-width:520px}
+.fig.smal{max-width:380px}
+.fig.bred{max-width:620px}
+.fig svg{display:block;width:100%;height:auto}
+.fig-axel{stroke:#2B2527;stroke-width:2}
+.fig-rutnat{stroke:#E4E3E6;stroke-width:1}
+.fig-kurva{fill:none;stroke:#B43123;stroke-width:2.4;stroke-linejoin:round}
+.fig-kurva2{fill:none;stroke:#2A5D9E;stroke-width:2.4;stroke-linejoin:round}
+.fig-area{fill:#B43123;fill-opacity:.12}
+.fig-hjalp{stroke:#9A959C;stroke-width:1.2;stroke-dasharray:4 3}
+.fig-kropp{fill:#fff;stroke:#2B2527;stroke-width:2}
+.fig-underlag{fill:#EDEEF1;stroke:#2B2527;stroke-width:2}
+.fig-vatska{fill:#DCE6F2}
+.fig-pil{stroke:#B43123;stroke-width:2.3;fill:none}
+.fig-pilspets{fill:#B43123}
+.fig-num{font-family:'IBM Plex Mono',monospace;font-size:11px;fill:#5C575E}
+.fig-namn{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;fill:#2B2527}
+.fig-etikett{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;fill:#B43123}
+
+/* ── utskrift ── */
+#utskrift{display:none}
+@media print{
+  body{overflow:visible;background:#fff}
+  .kursval,.top,.arbetsyta{display:none!important}
+  #utskrift{display:block;font-family:var(--las);font-size:11.5pt;line-height:1.6;color:#000}
+  #utskrift .ph{display:flex;align-items:center;gap:14px;border-bottom:2px solid #000;padding-bottom:10px;margin-bottom:22px}
+  #utskrift .ph img{height:40px}
+  #utskrift h1{font-family:var(--ui);font-size:17pt;margin:0;font-weight:700}
+  #utskrift .pm{font-family:var(--mono);font-size:9.5pt;color:#444;margin-top:2px}
+  #utskrift .pu{margin-bottom:16pt;break-inside:avoid;display:grid;grid-template-columns:24pt 1fr;gap:6pt}
+  #utskrift .pn{font-family:var(--mono);font-weight:600}
+  #utskrift .pu p{margin:0 0 6pt}
+  #utskrift .pu p:last-child{margin-bottom:0}
+  #utskrift .fu p{margin:0 0 3pt}
+  #utskrift .pp{float:right;font-family:var(--mono);font-size:9.5pt;color:#444;margin-left:10pt}
+  #utskrift .nivåmärke{float:right;margin-left:10pt;-webkit-print-color-adjust:exact;print-color-adjust:exact;
+    font-family:var(--mono);font-size:9pt;font-weight:700;letter-spacing:.03em;
+    border-radius:4pt;padding:1.5pt 6pt;line-height:1.5}
+  #utskrift .nivåmärke.E{background:var(--nE-bg);color:var(--nE)}
+  #utskrift .nivåmärke.C{background:var(--nC-bg);color:var(--nC)}
+  #utskrift .nivåmärke.A{background:var(--nA-bg);color:var(--nA)}
+  #utskrift ol{margin:6pt 0;padding-left:0;list-style:none;counter-reset:d}
+  #utskrift li{padding-left:20pt;position:relative;margin-bottom:3pt}
+  #utskrift li::before{counter-increment:d;content:counter(d,lower-alpha) ")";position:absolute;left:0;font-family:var(--mono)}
+  #utskrift .fk{page-break-before:always;border-top:2px solid #000;padding-top:14pt}
+  #utskrift .fu{margin-bottom:12pt;break-inside:avoid;font-family:var(--mono);font-size:9.5pt;line-height:1.7}
+  #utskrift .fu .steg{padding-left:22pt;position:relative;margin:3pt 0}
+  #utskrift .fu .stegnr{position:absolute;left:2pt;font-weight:700;color:#B43123}
+  #utskrift .fu .komm{padding-left:22pt;font-family:var(--las);font-size:9.5pt;color:#333}
+  #utskrift table.data th{background:#eee}
+  #utskrift .fig{max-width:120mm;margin:5pt 0}
+  #utskrift .fig svg{max-width:120mm}
+}
+@media (max-width:1180px){
+  .arbetsyta{grid-template-columns:240px minmax(0,1fr) 320px}
+}
+@media (max-width:960px){
+  body{overflow:auto}
+  .arbetsyta{grid-template-columns:1fr;height:auto}
+  .panel{overflow:visible}
+  .vänster,.höger{border:none;border-bottom:1px solid var(--line)}
+  .höger{max-height:none}
+}
+/* ── ändra poäng och nivå ── */
+[data-red]{cursor:pointer;transition:box-shadow .13s,background .13s,color .13s}
+.nivå[data-red]:hover,.bniva[data-red]:hover{box-shadow:0 0 0 2px rgba(43,37,39,.14)}
+.poäng[data-red],.bpoäng[data-red]{padding:2px 6px;border-radius:6px;margin-right:-6px}
+.poäng[data-red]:hover,.bpoäng[data-red]:hover{background:var(--sunken);color:var(--ink)}
+[data-red]:focus-visible{outline:2px solid var(--ed);outline-offset:2px}
+.poäng.ändrad,.bpoäng.ändrad{color:var(--ed-dark);font-weight:600}
+.nivå.ändrad,.bniva.ändrad{box-shadow:0 0 0 1.5px var(--ed-ring)}
+
+.poängred{position:fixed;z-index:60;width:258px;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r-m);box-shadow:var(--sh-3);padding:15px 15px 14px;
+  animation:prfram .15s cubic-bezier(.2,.9,.3,1)}
+.poängred[hidden]{display:none}
+@keyframes prfram{from{opacity:0;transform:translateY(-5px) scale(.98)}to{opacity:1;transform:none}}
+.prtopp{display:flex;align-items:center;gap:8px;margin-bottom:13px}
+.prid{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--ink)}
+.prsumma{margin-left:auto;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.prrad{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.pretikett{font-size:12.5px;color:var(--ink-2)}
+.prpunkt{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:8px}
+.prstep{margin-left:auto;display:flex;align-items:center;gap:2px;background:var(--sunken);
+  border-radius:9px;padding:2px}
+.prstep button{width:25px;height:25px;border:none;background:none;border-radius:7px;cursor:pointer;
+  color:var(--ink-2);display:grid;place-items:center;font-size:16px;font-weight:600;line-height:1}
+.prstep button:hover:not(:disabled){background:var(--surface);color:var(--ink);box-shadow:var(--sh-1)}
+.prstep button:disabled{opacity:.3;cursor:default}
+.prv{width:27px;text-align:center;font-family:var(--mono);font-size:13px;font-weight:600;
+  font-variant-numeric:tabular-nums;color:var(--ink)}
+.prfot{display:flex;gap:6px;margin-top:14px}
+.prfot .knapp{flex:1;justify-content:center}
+.prfot .knapp:disabled{opacity:.4;cursor:default}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ═══ kursväljaren ═══
+     Kurserna definieras i KURSER längst ned i skriptet. Varje kurs har sina
+     egna filer och sina egna globala namn, så att två kurser aldrig krockar. -->
+<div class="kursval" id="kursval">
+  <div class="kv-inner">
+    <div class="kv-topp">
+      <img src="logo.png" alt="Erik Dahlbergsgymnasiet">
+      <div>
+        <h1>Erik Dahlbergsgymnasiets uppgiftsbank</h1>
+        <span class="kv-under">Välj kurs för att börja</span>
+      </div>
+    </div>
+    <div class="kv-kort" id="kvKort"></div>
+    <p class="kv-fel" id="kvFel" hidden></p>
+  </div>
+</div>
+
+<header class="top" hidden>
+  <div class="märke">
+    <img src="logo.png" alt="Erik Dahlbergsgymnasiet">
+    <div class="titel">
+      <h1>Erik Dahlbergsgymnasiets uppgiftsbank</h1>
+      <span id="banktal"></span>
+    </div>
+  </div>
+  <div class="fyll"></div>
+  <div class="slumpwrap">
+    <button class="knapp tyst" id="slumpaKnapp" type="button" aria-expanded="false" aria-controls="slumppanel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+      Slumpa ett övningsblad
+    </button>
+    <div class="slumppanel" id="slumppanel">
+      <label for="slumpaAntal">Antal uppgifter</label>
+      <div class="slumprad">
+        <input type="number" id="slumpaAntal" min="1" max="40" value="12">
+        <button class="knapp primär" id="slumpaKör" type="button">Slumpa</button>
+      </div>
+    </div>
+  </div>
+  <button class="knapp tyst" id="bytKurs" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v6h6M20 20v-6h-6"/><path d="M20 9A8 8 0 0 0 6.3 5.3L4 7.5M4 15a8 8 0 0 0 13.7 3.7L20 16.5"/></svg>
+    Byt kurs
+  </button>
+  <button class="knapp tyst" id="rensaAllt">Börja om</button>
+</header>
+
+<div class="arbetsyta" hidden>
+
+  <aside class="panel vänster">
+    <div class="sök">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="sökfält" placeholder="Sök i uppgifterna" autocomplete="off">
+    </div>
+    <p class="etikett">Nivå</p>
+    <div class="nivåfilter">
+      <button class="E" data-niva="E" aria-pressed="true">E</button>
+      <button class="C" data-niva="C" aria-pressed="true">C</button>
+      <button class="A" data-niva="A" aria-pressed="true">A</button>
+    </div>
+    <p class="etikett">Kapitel och område</p>
+    <div id="träd"></div>
+  </aside>
+
+  <main class="panel mitten">
+    <div class="mittopp">
+      <span class="träffar" id="träffar"></span>
+      <button class="knapp tyst" id="läggAlla">Lägg till alla</button>
+      <div class="fyll"></div>
+      <div class="kryssgrupp">
+        <button class="knapp tyst liten" id="sorteraKnapp" type="button" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+          <span id="sorteraLabel">Sortera: ID</span>
+        </button>
+        <label class="kryss" for="visaPoäng">
+          <input type="checkbox" id="visaPoäng">
+          <span class="ruta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span>
+          Visa poäng
+        </label>
+      </div>
+    </div>
+    <div id="lista"></div>
+  </main>
+
+  <aside class="höger">
+    <div class="bladtopp">
+      <h2>Övningsblad</h2>
+      <div class="fält">
+        <input id="bTitel" value="Övningsblad" aria-label="Rubrik">
+        <div class="rad">
+          <input id="bKlass" placeholder="Klass" aria-label="Klass">
+          <input id="bDatum" placeholder="Datum" aria-label="Datum">
+        </div>
+      </div>
+    </div>
+
+    <div class="mätare">
+      <div class="mätarhuvud">
+        <span class="summa" id="summa">0<small>p</small></span>
+        <span class="antal" id="bAntal">inga uppgifter</span>
+      </div>
+      <div class="stapel">
+        <span class="sE" id="stE" style="width:0"></span>
+        <span class="sC" id="stC" style="width:0"></span>
+        <span class="sA" id="stA" style="width:0"></span>
+      </div>
+      <div class="mätarnyckel">
+        <span><i style="background:var(--nE)"></i><b id="pE">0</b> E</span>
+        <span><i style="background:var(--nC)"></i><b id="pC">0</b> C</span>
+        <span><i style="background:var(--nA)"></i><b id="pA">0</b> A</span>
+      </div>
+      <div class="gränser" id="gränser"></div>
+    </div>
+
+    <div class="panel bladlista" id="blad"></div>
+
+    <div class="bladfot">
+      <label class="växel"><input type="checkbox" id="taMedFacit" checked> Ta med facit</label>
+      <div class="exportrad">
+        <button class="knapp primär" id="expPdf">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V4h12v5M6 18H4v-6h16v6h-2M8 14h8v7H8z"/></svg>
+          PDF
+        </button>
+        <button class="knapp" id="expWord">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>
+          Word
+        </button>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<div class="poängred" id="poängred" role="dialog" aria-label="Ändra poäng och nivå" hidden>
+  <div class="prtopp">
+    <span class="prid" id="prId"></span>
+    <span class="nivå" id="prNiva"></span>
+    <span class="prsumma" id="prSumma"></span>
+  </div>
+  <div class="prrad">
+    <span class="pretikett"><i class="prpunkt" style="background:var(--nE)"></i>E-poäng</span>
+    <span class="prstep">
+      <button type="button" data-minus="E" aria-label="Färre E-poäng">−</button>
+      <span class="prv" data-v="E">0</span>
+      <button type="button" data-plus="E" aria-label="Fler E-poäng">+</button>
+    </span>
+  </div>
+  <div class="prrad">
+    <span class="pretikett"><i class="prpunkt" style="background:var(--nC)"></i>C-poäng</span>
+    <span class="prstep">
+      <button type="button" data-minus="C" aria-label="Färre C-poäng">−</button>
+      <span class="prv" data-v="C">0</span>
+      <button type="button" data-plus="C" aria-label="Fler C-poäng">+</button>
+    </span>
+  </div>
+  <div class="prrad">
+    <span class="pretikett"><i class="prpunkt" style="background:var(--nA)"></i>A-poäng</span>
+    <span class="prstep">
+      <button type="button" data-minus="A" aria-label="Färre A-poäng">−</button>
+      <span class="prv" data-v="A">0</span>
+      <button type="button" data-plus="A" aria-label="Fler A-poäng">+</button>
+    </span>
+  </div>
+  <div class="prfot">
+    <button class="knapp tyst liten" id="prÅterställ" type="button">Återställ</button>
+    <button class="knapp primär liten" id="prKlar" type="button">Klar</button>
+  </div>
+</div>
+
+<div id="utskrift"></div>
+
+<script>
+/* ═══════════════ kurser ═══════════════
+   Varje kurs pekar ut sina egna filer och sina egna globala namn.
+   Vill du lägga till Fysik 3 eller Matematik räcker det att lägga till
+   ett objekt här och skapa motsvarande två filer. Namnen i "globaler"
+   måste vara unika mellan kurserna, annars krockar deklarationerna. */
+const KURSER=[
+  {
+    id:'fy1',
+    titel:'Fysik 1',
+    siffra:'1',
+    text:'Rörelse, kraft, energi, tryck, värme, ellära och kärnfysik.',
+    filer:['struktur.js','uppgifter.js'],
+    globaler:{bank:'BANK',kapnamn:'KAPNAMN',omr:'OMR'}
+  },
+  {
+    id:'fy2',
+    titel:'Fysik 2',
+    siffra:'2',
+    text:'Kaströrelse, svängningar, vågor, fält, induktion och modern fysik.',
+    filer:['struktur2.js','uppgifter2.js'],
+    globaler:{bank:'BANK2',kapnamn:'KAPNAMN2',omr:'OMR2'}
+  }
+];
+
+/* ═══════════════ app ═══════════════ */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const svgBock='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg>';
+const svgPil='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+/* Logotypen bäddas in som data-URL när sidan laddas, så att den följer med
+   i Word-exporten. Misslyckas hämtningen (till exempel vid file://) används
+   den vanliga sökvägen, som ändå fungerar vid utskrift från sidan. */
+let LOGO='logo.png';
+(async()=>{ try{
+  const svar=await fetch('logo.png');
+  const blob=await svar.blob();
+  LOGO=await new Promise(ok=>{const f=new FileReader();f.onload=()=>ok(f.result);f.readAsDataURL(blob);});
+}catch(e){} })();
+
+/* ═══ tillstånd ═══ */
+let AKTIV=null;                                   /* vald kurs */
+let DB={bank:[],kapnamn:{},omr:{}};               /* kursens data */
+const state={omr:new Set(),nivåer:new Set(['E','C','A']),sök:'',blad:[],visaPoäng:false,sorteraNivå:false};
+const NIVÅORDNING={E:0,C:1,A:2};
+const nyckel=x=>x.kap+':'+x.omr;
+
+/* Strukturerar ett facit.
+   Har uppgiften deluppgifter (a, b, c) används de bokstäverna som markörer.
+   Annars numreras räknestegen 1, 2, 3. Rader utan beräkning blir förklaringar. */
+function LOS(html){
+  const bitar=[...html.matchAll(/<p>([\s\S]*?)<\/p>/g)].map(m=>m[1]);
+  if(!bitar.length) return html;
+  const bokstav=b=>/^\s*<?[a-z]?>?\s*([a-e])\)/.exec(b.replace(/<[^>]+>/g,'').trim());
+  const harDelar=bitar.some(bokstav);
+  let n=0;
+  return bitar.map(b=>{
+    const bo=bokstav(b);
+    if(bo) return `<p class="steg"><span class="stegnr">${bo[1]}</span>${b.replace(/^(\s*)([a-e])\)\s*/,'$1')}</p>`;
+    const räkne=/[=→]/.test(b)||/<strong>/.test(b);
+    if(räkne&&!harDelar){n++;return `<p class="steg"><span class="stegnr">${n}</span>${b}</p>`;}
+    if(räkne) return `<p class="steg"><span class="stegnr stegprick">·</span>${b}</p>`;
+    return `<p class="komm">${b}</p>`;
+  }).join('');
+}
+
+/* ═══ kursväljaren ═══ */
+function ritaKursval(){
+  $('#kvKort').innerHTML=KURSER.map(k=>`
+    <button class="kurskort" type="button" data-kurs="${k.id}">
+      <span class="kk-spok">${k.siffra}</span>
+      <span class="kk-etikett">Kurs</span>
+      <span class="kk-namn">${k.titel}</span>
+      <span class="kk-text">${k.text}</span>
+      <span class="kk-fot"><span class="kk-status">${k.data?k.data.bank.length+' uppgifter':'Öppna banken'}</span>${svgPil}</span>
+    </button>`).join('');
+  $$('.kurskort').forEach(k=>k.addEventListener('click',()=>
+    väljKurs(KURSER.find(x=>x.id===k.dataset.kurs),k)));
+}
+function laddaSkript(src){
+  return new Promise((ok,fel)=>{
+    const s=document.createElement('script');
+    s.src=src; s.onload=()=>ok(); s.onerror=()=>fel(new Error(src));
+    document.head.appendChild(s);
+  });
+}
+/* Läser en global oavsett om filen använder window.NAMN eller const NAMN. */
+function hämtaGlobal(namn){
+  if(namn in window && window[namn]!==undefined) return window[namn];
+  try{ return (0,eval)(namn); }catch(e){ return undefined; }
+}
+async function väljKurs(kurs,kort){
+  $('#kvFel').hidden=true;
+  if(kurs.data){ startaKurs(kurs); return; }
+  kort.classList.add('laddar');
+  kort.querySelector('.kk-status').textContent='Läser in…';
+  try{
+    for(const f of kurs.filer) await laddaSkript(f);
+    const bank=hämtaGlobal(kurs.globaler.bank);
+    const kapnamn=hämtaGlobal(kurs.globaler.kapnamn);
+    const omr=hämtaGlobal(kurs.globaler.omr);
+    if(!Array.isArray(bank)||!kapnamn||!omr) throw new Error('data saknas');
+    kurs.data={bank,kapnamn,omr};
+    startaKurs(kurs);
+  }catch(e){
+    $('#kvFel').innerHTML=`<b>${kurs.titel} kunde inte läsas in.</b><br>
+      Kontrollera att <code>${kurs.filer.join('</code> och <code>')}</code> ligger i samma mapp
+      som sidan, och att de sätter
+      <code>window.${kurs.globaler.bank}</code>,
+      <code>window.${kurs.globaler.kapnamn}</code> och
+      <code>window.${kurs.globaler.omr}</code>.`;
+    $('#kvFel').hidden=false;
+  }finally{
+    kort.classList.remove('laddar');
+    ritaKursval();
+  }
+}
+function visaKursval(){
+  AKTIV=null;
+  document.querySelector('.top').hidden=true;
+  document.querySelector('.arbetsyta').hidden=true;
+  $('#kursval').hidden=false;
+  $('#kvFel').hidden=true;
+  ritaKursval();
+}
+function startaKurs(kurs){
+  AKTIV=kurs; DB=kurs.data;
+  DB.bank.forEach(x=>{ if(!x.familj) x.familj=x.id.replace(/[a-z]$/,''); });
+  state.omr.clear(); state.blad=[]; state.sök='';
+  state.nivåer=new Set(['E','C','A']); state.sorteraNivå=false; state.visaPoäng=false;
+  $('#sökfält').value=''; $('#visaPoäng').checked=false;
+  $('#sorteraKnapp').setAttribute('aria-pressed','false');
+  $('#sorteraLabel').textContent='Sortera: ID';
+  $$('.nivåfilter button').forEach(b=>b.setAttribute('aria-pressed','true'));
+  $('#slumpaAntal').value=12;
+  $('#bTitel').value='Övningsblad '+kurs.titel;
+  $('#banktal').textContent=kurs.titel+' · '+DB.bank.length+' uppgifter';
+  byggTräd();
+  $('#kursval').hidden=true;
+  document.querySelector('.top').hidden=false;
+  document.querySelector('.arbetsyta').hidden=false;
+  rita(); ritaBlad();
+}
+
+/* ── vänsterpanelen ── */
+function byggTräd(){
+  const kapitel=[...new Set(DB.bank.map(x=>x.kap))].sort((a,b)=>a-b);
+  $('#träd').innerHTML=kapitel.map(k=>{
+    const omrs=[...new Set(DB.bank.filter(x=>x.kap===k).map(x=>x.omr))];
+    return `<div class="kapgrupp" data-kap="${k}">
+      <button class="kaprad" data-fäll="${k}">
+        <svg class="pil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        <span class="nr">${k}</span><span>${DB.kapnamn[k]}</span>
+        <span class="antal">${DB.bank.filter(x=>x.kap===k).length}</span>
+      </button>
+      <div class="omrlista">${omrs.map(o=>`
+        <button class="omrad" data-omr="${k}:${o}" aria-pressed="false">
+          <span>${DB.omr[k][o]}</span>
+          <span class="antal">${DB.bank.filter(x=>x.kap===k&&x.omr===o).length}</span>
+        </button>`).join('')}</div>
+    </div>`;
+  }).join('');
+  $$('.kaprad').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('stängd')));
+  $$('.omrad').forEach(b=>b.addEventListener('click',()=>{
+    const v=b.dataset.omr;
+    if(state.omr.has(v)) state.omr.delete(v); else state.omr.add(v);
+    b.setAttribute('aria-pressed',state.omr.has(v));
+    rita();
+  }));
+  document.querySelectorAll('.kapgrupp').forEach((g,i)=>{ if(i>2) g.classList.add('stängd'); });
+}
+
+/* ── statiska lyssnare ── */
+$$('.nivåfilter button').forEach(b=>b.addEventListener('click',()=>{
+  const n=b.dataset.niva;
+  if(state.nivåer.has(n)&&state.nivåer.size>1) state.nivåer.delete(n); else state.nivåer.add(n);
+  b.setAttribute('aria-pressed',state.nivåer.has(n));
+  rita();
+}));
+$('#sökfält').addEventListener('input',e=>{state.sök=e.target.value.toLowerCase().trim();rita();});
+$('#sorteraKnapp').addEventListener('click',()=>{
+  state.sorteraNivå=!state.sorteraNivå;
+  $('#sorteraKnapp').setAttribute('aria-pressed',state.sorteraNivå);
+  $('#sorteraLabel').textContent=state.sorteraNivå?'Sortera: Nivå':'Sortera: ID';
+  rita();
+});
+$('#visaPoäng').addEventListener('change',e=>{state.visaPoäng=e.target.checked;rita();ritaBlad();});
+$('#bytKurs').addEventListener('click',visaKursval);
+
+/* ── urvalet ── */
+function urval(){
+  return DB.bank.filter(x=>{
+    if(!state.nivåer.has(x.niva)) return false;
+    if(state.omr.size && !state.omr.has(nyckel(x))) return false;
+    if(state.sök){
+      const t=(x.t+' '+x.id+' '+DB.omr[x.kap][x.omr]).replace(/<[^>]+>/g,' ').toLowerCase();
+      if(!t.includes(state.sök)) return false;
+    }
+    return true;
+  }).sort((a,b)=>{
+    if(state.sorteraNivå && a.niva!==b.niva) return NIVÅORDNING[a.niva]-NIVÅORDNING[b.niva];
+    return a.id.localeCompare(b.id,'sv',{numeric:true});
+  });
+}
+
+/* ── mittenlistan ── */
+function rita(){
+  const u=urval(), vald=new Set(state.blad.map(x=>x.id));
+  $('#träffar').innerHTML=`<b>${u.length}</b> ${u.length===1?'uppgift':'uppgifter'}`;
+  $('#läggAlla').disabled=u.length===0;
+
+  if(!u.length){
+    $('#lista').innerHTML=`<div class="tomt"><h3>Inga uppgifter matchar</h3>
+      <p>Prova ett annat område, en annan nivå eller en kortare sökning.</p></div>`;
+    return;
+  }
+  $('#lista').innerHTML=u.map(x=>`
+    <article class="kort${vald.has(x.id)?' vald':''}" data-id="${x.id}" tabindex="0" role="button"
+      aria-pressed="${vald.has(x.id)}">
+      <div class="bock">${svgBock}</div>
+      <div>
+        <div class="kortmeta">
+          <span class="id">${x.id}</span>
+          <span class="nivå ${x.niva.split('/')[0]}${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
+            tabindex="0" title="${REDTITEL}">${x.niva}</span>
+          <span class="område">${DB.omr[x.kap][x.omr]}</span>
+          ${state.visaPoäng?`<span class="poäng${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
+            tabindex="0" title="${REDTITEL}">${x.poang}</span>`:''}
+        </div>
+        <div class="kroppen">${x.t}</div>
+        <button class="facitknapp" data-facit="${x.id}">Visa facit</button>
+        <div class="facit" data-fbox="${x.id}">${LOS(x.s)}</div>
+      </div>
+    </article>`).join('');
+
+  $$('.kort').forEach(k=>{
+    const växla=()=>vippa(k.dataset.id);
+    k.addEventListener('click',e=>{ if(e.target.closest('.facitknapp,[data-red]'))return; växla(); });
+    k.addEventListener('keydown',e=>{ if(e.target.closest('[data-red]'))return;
+      if(e.key===' '||e.key==='Enter'){e.preventDefault();växla();} });
+  });
+  $$('.facitknapp').forEach(b=>b.addEventListener('click',e=>{
+    e.stopPropagation();
+    const box=document.querySelector(`[data-fbox="${b.dataset.facit}"]`);
+    const på=box.classList.toggle('öppen');
+    b.textContent=på?'Dölj facit':'Visa facit';
+  }));
+}
+
+function vippa(id){
+  const i=state.blad.findIndex(x=>x.id===id);
+  if(i>=0) state.blad.splice(i,1); else state.blad.push(DB.bank.find(x=>x.id===id));
+  const k=document.querySelector(`.kort[data-id="${id}"]`);
+  if(k){ k.classList.toggle('vald',i<0); k.setAttribute('aria-pressed',i<0); }
+  ritaBlad();
+}
+
+/* ── övningsbladet ── */
+function ritaBlad(){
+  const b=state.blad, vp=state.visaPoäng;
+  const p={E:0,C:0,A:0}, antalN={E:0,C:0,A:0};
+  b.forEach(x=>{const m=x.poang.match(/(\d+)\/(\d+)\/(\d+)/);p.E+=+m[1];p.C+=+m[2];p.A+=+m[3];antalN[x.niva]++;});
+  const tot=p.E+p.C+p.A;
+  const antalTot=b.length;
+  $('#summa').style.display=vp?'':'none';
+  $('#summa').innerHTML=tot+'<small>p</small>';
+  $('#bAntal').textContent=b.length?b.length+(b.length===1?' uppgift':' uppgifter'):'inga uppgifter';
+  document.querySelector('.stapel').style.display='';
+  ['E','C','A'].forEach(n=>{
+    const bas=vp?tot:antalTot;
+    const värde=vp?p[n]:antalN[n];
+    $('#st'+n).style.width=(bas?värde/bas*100:0)+'%';
+    $('#p'+n).textContent=vp?p[n]:antalN[n];
+  });
+  $('#gränser').style.display=vp?'':'none';
+  $('#gränser').innerHTML=tot
+    ? `<span class="gränsrubrik">Förslag på gränser</span>
+       <div class="gränsrad">
+         <span class="chip E">E <b>${Math.round(tot*.28)}p</b></span>
+         <span class="chip C">C <b>${Math.round(tot*.55)}p</b></span>
+         <span class="chip A">A <b>${Math.round(tot*.78)}p</b></span>
+       </div>`
+    : '<span class="gränsrubrik">Kryssa i uppgifter så räknas poängen ihop här.</span>';
+
+  $('#blad').innerHTML=b.length ? b.map((x,i)=>`
+    <div class="brad">
+      <span class="num">${i+1}</span>
+      <span class="txt">
+        <span class="bmeta">
+          <span class="bid">${x.id}</span>
+          <span class="bniva ${x.niva.split('/')[0]}${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
+            tabindex="0" title="${REDTITEL}">${x.niva}</span>
+          ${vp?`<span class="bpoäng${ändrad(x)?' ändrad':''}" data-red="${x.id}" role="button"
+            tabindex="0" title="${REDTITEL}">${x.poang}</span>`:''}
+        </span>
+        <span class="btext">${x.t.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,90)}…</span>
+      </span>
+      <span class="bverktyg">
+        <button data-upp="${i}" title="Flytta upp" ${i===0?'disabled':''}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg></button>
+        <button data-ner="${i}" title="Flytta ned" ${i===b.length-1?'disabled':''}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+        <button class="bort" data-bort="${x.id}" title="Ta bort"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      </span>
+    </div>`).join('')
+    : `<div class="tomt" style="padding:44px 16px"><h3>Bladet är tomt</h3>
+       <p>Klicka på uppgifterna i mitten för att lägga till dem här.</p></div>`;
+
+  $$('[data-upp]').forEach(k=>k.addEventListener('click',()=>{const i=+k.dataset.upp;
+    [state.blad[i-1],state.blad[i]]=[state.blad[i],state.blad[i-1]];ritaBlad();}));
+  $$('[data-ner]').forEach(k=>k.addEventListener('click',()=>{const i=+k.dataset.ner;
+    [state.blad[i+1],state.blad[i]]=[state.blad[i],state.blad[i+1]];ritaBlad();}));
+  $$('[data-bort]').forEach(k=>k.addEventListener('click',()=>vippa(k.dataset.bort)));
+  $('#expPdf').disabled=$('#expWord').disabled=!b.length;
+}
+
+/* ── ändra poäng och nivå ──
+   Läraren klickar på nivåmärket eller poängen och justerar E, C och A var för sig.
+   Nivån räknas om direkt: uppgiften hamnar på den högsta nivå som har minst lika
+   många poäng som nivåerna under sig. Lika många A-poäng som C-poäng ger A-nivå. */
+const REDTITEL='Klicka för att ändra poäng och nivå';
+const PR=$('#poängred');
+let redigerar=null;
+
+function nivåAv(p){
+  const max=Math.max(p.E,p.C,p.A);
+  const vinnare=['E','C','A'].filter(n=>p[n]===max&&p[n]>0);
+  return vinnare.length?vinnare.join('/'):'E';
+}
+function poängAv(x){
+  const m=x.poang.match(/(\d+)\/(\d+)\/(\d+)/);
+  return m?{E:+m[1],C:+m[2],A:+m[3]}:{E:0,C:0,A:0};
+}
+function sättPoäng(x,p){
+  if(x.origPoang===undefined){ x.origPoang=x.poang; x.origNiva=x.niva; }
+  x.poang=x.poang.replace(/(\d+)\/(\d+)\/(\d+)/,p.E+'/'+p.C+'/'+p.A);
+  x.niva=nivåAv(p);
+}
+function ändrad(x){ return x.origPoang!==undefined && x.poang!==x.origPoang; }
+
+function ritaPR(){
+  const x=redigerar; if(!x) return;
+  const p=poängAv(x);
+  $('#prId').textContent=x.id;
+  const nv=$('#prNiva'); nv.className='nivå '+x.niva.split('/')[0]; nv.textContent=x.niva;
+  $('#prSumma').textContent=(p.E+p.C+p.A)+' p totalt';
+  ['E','C','A'].forEach(n=>{
+    PR.querySelector('[data-v="'+n+'"]').textContent=p[n];
+    PR.querySelector('[data-minus="'+n+'"]').disabled=p[n]<=0;
+    PR.querySelector('[data-plus="'+n+'"]').disabled=p[n]>=9;
+  });
+  $('#prÅterställ').disabled=!ändrad(x);
+}
+/* uppdaterar märkena på plats så att kortet inte ritas om under fingret */
+function patchaMärken(x){
+  document.querySelectorAll('.kort[data-id="'+x.id+'"]').forEach(k=>{
+    const n=k.querySelector('.nivå');
+    if(n){ n.className='nivå '+x.niva.split('/')[0]+(ändrad(x)?' ändrad':''); n.textContent=x.niva; }
+    const p=k.querySelector('.poäng');
+    if(p){ p.textContent=x.poang; p.classList.toggle('ändrad',ändrad(x)); }
+  });
+}
+let nivåFörst=null;
+function öppnaPoäng(id,ankare){
+  const x=DB.bank.find(u=>u.id===id); if(!x) return;
+  redigerar=x; nivåFörst=x.niva;
+  PR.hidden=false;
+  ritaPR();
+  const r=ankare.getBoundingClientRect(), b=PR.getBoundingClientRect();
+  let v=Math.min(Math.max(12,r.left-12),innerWidth-b.width-12);
+  let t=r.bottom+8;
+  if(t+b.height>innerHeight-12) t=Math.max(12,r.top-b.height-8);
+  PR.style.left=v+'px'; PR.style.top=t+'px';
+}
+function stängPoäng(){
+  if(!redigerar) return;
+  const bytteNivå=redigerar.niva!==nivåFörst;
+  redigerar=null; PR.hidden=true;
+  if(bytteNivå) rita();
+  ritaBlad();
+}
+
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-red]');
+  if(t) öppnaPoäng(t.dataset.red,t);
+  else if(redigerar && !e.target.closest('#poängred')) stängPoäng();
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&redigerar){ stängPoäng(); return; }
+  if(e.key!=='Enter'&&e.key!==' ') return;
+  const t=e.target.closest&&e.target.closest('[data-red]');
+  if(t){ e.preventDefault(); öppnaPoäng(t.dataset.red,t); }
+});
+PR.addEventListener('click',e=>{
+  e.stopPropagation();
+  const b=e.target.closest('button'); if(!b||!redigerar) return;
+  const x=redigerar;
+  if(b.id==='prKlar'){ stängPoäng(); return; }
+  if(b.id==='prÅterställ'){
+    if(x.origPoang!==undefined){ x.poang=x.origPoang; x.niva=x.origNiva; }
+  }else{
+    const p=poängAv(x);
+    if(b.dataset.plus)  p[b.dataset.plus]=Math.min(9,p[b.dataset.plus]+1);
+    if(b.dataset.minus) p[b.dataset.minus]=Math.max(0,p[b.dataset.minus]-1);
+    sättPoäng(x,p);
+  }
+  ritaPR(); patchaMärken(x); ritaBlad();
+});
+
+/* ── knappar ── */
+$('#läggAlla').addEventListener('click',()=>{
+  const har=new Set(state.blad.map(x=>x.id));
+  urval().forEach(x=>{if(!har.has(x.id))state.blad.push(x);});
+  rita(); ritaBlad();
+});
+$('#rensaAllt').addEventListener('click',()=>{
+  state.blad=[]; state.omr.clear(); state.sök=''; state.nivåer=new Set(['E','C','A']);
+  state.sorteraNivå=false; state.visaPoäng=false;
+  $('#sökfält').value='';
+  $('#sorteraKnapp').setAttribute('aria-pressed','false');
+  $('#sorteraLabel').textContent='Sortera: ID';
+  $('#visaPoäng').checked=false;
+  $('#slumpaAntal').value=12;
+  $$('.omrad').forEach(b=>b.setAttribute('aria-pressed','false'));
+  $$('.nivåfilter button').forEach(b=>b.setAttribute('aria-pressed','true'));
+  rita(); ritaBlad();
+});
+$('#slumpaKnapp').addEventListener('click',e=>{
+  e.stopPropagation();
+  const öppen=$('#slumppanel').classList.toggle('öppen');
+  $('#slumpaKnapp').setAttribute('aria-expanded',öppen);
+  if(öppen) $('#slumpaAntal').select();
+});
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.slumpwrap')){
+    $('#slumppanel').classList.remove('öppen');
+    $('#slumpaKnapp').setAttribute('aria-expanded','false');
+  }
+});
+function körSlumpa(){
+  const pool=urval(), fam=new Set(), ut=[];
+  const n=Math.max(1,Math.min(40,parseInt($('#slumpaAntal').value,10)||12));
+  $('#slumpaAntal').value=n;
+  const vikt={E:5,C:4,A:3}, viktSum=12;
+  const mål={}, rest=[];
+  ['E','C','A'].forEach(k=>{
+    const exakt=n*vikt[k]/viktSum;
+    mål[k]=Math.floor(exakt);
+    rest.push([k,exakt-mål[k]]);
+  });
+  let kvar=n-(mål.E+mål.C+mål.A);
+  rest.sort((a,b)=>b[1]-a[1]);
+  for(let i=0;i<kvar;i++) mål[rest[i%3][0]]++;
+  ['E','C','A'].forEach(nv=>{
+    const p=pool.filter(x=>x.niva===nv).sort(()=>Math.random()-.5);
+    let c=0;
+    for(const x of p){ if(c>=mål[nv])break; if(fam.has(x.familj))continue; fam.add(x.familj); ut.push(x); c++; }
+  });
+  state.blad=ut; rita(); ritaBlad();
+  $('#slumppanel').classList.remove('öppen');
+  $('#slumpaKnapp').setAttribute('aria-expanded','false');
+}
+$('#slumpaKör').addEventListener('click',körSlumpa);
+$('#slumpaAntal').addEventListener('keydown',e=>{ if(e.key==='Enter'){e.preventDefault();körSlumpa();} });
+
+/* ── export ── */
+function bladHTML({facit}){
+  const t=$('#bTitel').value||'Övningsblad', kl=$('#bKlass').value, da=$('#bDatum').value;
+  const vp=state.visaPoäng;
+  const p={E:0,C:0,A:0}, antalN={E:0,C:0,A:0};
+  state.blad.forEach(x=>{const m=x.poang.match(/(\d+)\/(\d+)\/(\d+)/);p.E+=+m[1];p.C+=+m[2];p.A+=+m[3];antalN[x.niva]++;});
+  const tot=p.E+p.C+p.A;
+  const rad=[AKTIV?AKTIV.titel:'',kl,da].filter(Boolean).join(' · ');
+  const sammanfattning=vp
+    ? `Max ${tot} poäng (${p.E}/${p.C}/${p.A}) · ${state.blad.length} uppgifter`
+    : `${state.blad.length} uppgifter (${antalN.E} E / ${antalN.C} C / ${antalN.A} A)`;
+  let h=`<div class="ph"><img src="${LOGO}" alt=""><div><h1>${t}</h1>
+    <div class="pm">${rad?rad+' · ':''}${sammanfattning}</div></div></div>`;
+  state.blad.forEach((x,i)=>{
+    const märke=vp
+      ? `<span class="pp">${x.poang}</span>`
+      : `<span class="nivåmärke ${x.niva}">${x.niva}</span>`;
+    h+=`<div class="pu"><div class="pn">${i+1}.</div><div>${märke}${x.t}</div></div>`;
+  });
+  if(facit){
+    h+=`<div class="fk"><h1 style="font-size:14pt;margin-bottom:12pt">Facit</h1>`;
+    state.blad.forEach((x,i)=>{ h+=`<div class="fu"><b>${i+1}.</b> ${LOS(x.s)}</div>`; });
+    h+=`</div>`;
+  }
+  return h;
+}
+$('#expPdf').addEventListener('click',()=>{
+  $('#utskrift').innerHTML=bladHTML({facit:$('#taMedFacit').checked});
+  window.print();
+});
+$('#expWord').addEventListener('click',()=>{
+  const kropp=bladHTML({facit:$('#taMedFacit').checked});
+  const doc=`<html xmlns:o="urn:schemas-microsoft-com:office:office"
+    xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+    <head><meta charset="utf-8"><title>${$('#bTitel').value}</title>
+    <style>
+      @page{size:A4;margin:2cm}
+      body{font-family:Verdana,Arial,sans-serif;font-size:11pt;line-height:1.6;color:#000}
+      .ph{border-bottom:2px solid #000;padding-bottom:8pt;margin-bottom:18pt}
+      .ph img{height:38px}
+      h1{font-size:16pt;margin:6pt 0 0}
+      .pm{font-size:9.5pt;color:#444}
+      .pu{margin-bottom:14pt}
+      .pn{font-weight:bold;float:left;width:26pt}
+      .pp{float:right;font-size:9.5pt;color:#444}
+      .nivåmärke{float:right;margin-left:10pt;font-weight:bold;font-size:9pt;letter-spacing:.3pt;
+        border-radius:4pt;padding:1.5pt 7pt}
+      .nivåmärke.E{background:#E9F3EF;color:#0F6B4F}
+      .nivåmärke.C{background:#EAF0F8;color:#2A5D9E}
+      .nivåmärke.A{background:#F2ECF6;color:#6E3B86}
+      ol{margin:6pt 0 6pt 26pt}
+      li{margin-bottom:3pt}
+      table.data{border-collapse:collapse;font-size:10pt;margin:6pt 0}
+      table.data th,table.data td{border:1px solid #999;padding:3pt 9pt;text-align:right}
+      table.data th{background:#eee}
+      .fk{page-break-before:always;border-top:2px solid #000;padding-top:12pt}
+      .fu{margin-bottom:11pt;font-size:10pt}
+      .steg{margin:3pt 0 3pt 24pt}
+      .stegnr{font-weight:bold;color:#B43123;margin-right:8pt}
+      .komm{margin-left:24pt;color:#333}
+    </style></head><body>${kropp}</body></html>`;
+  const namn=($('#bTitel').value||'Övningsblad').replace(/[^\wåäöÅÄÖ -]/g,'').trim()||'Övningsblad';
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob(['\ufeff'+doc],{type:'application/msword'}));
+  a.download=namn+'.doc';
+  document.body.appendChild(a); a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},400);
+});
+
+/* ── igång ── */
+$('#bDatum').value=new Date().toLocaleDateString('sv-SE');
+ritaKursval();
+</script>
+</body>
+</html>
