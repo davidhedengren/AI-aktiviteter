@@ -128,6 +128,145 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
   .kv-sektionstopp span,.kv-footer .kv-footmono{display:none}.kv-footer{padding-top:24px}
 }
 @media (max-width:420px){.kursval{padding:16px}.kv-brandname{font-size:12.5px}.kv-brandmeta{font-size:8.5px}.kv-hero{padding-top:45px}.kurskort{padding:21px}.kk-taggar{gap:5px}}
+
+/* ── kursväljaren · renare variant ── */
+.kursval{
+  display:grid;
+  place-items:center;
+  padding:clamp(28px,4vw,64px);
+}
+.kv-inner{
+  width:min(1180px,100%);
+  min-height:0;
+  margin:0 auto;
+  display:block;
+}
+.kv-nav{
+  min-height:0;
+  justify-content:flex-start;
+  margin-bottom:clamp(54px,7vw,82px);
+}
+.kv-logo-shell{
+  width:72px;
+  height:72px;
+  border-radius:18px;
+}
+.kv-logo-shell img{
+  width:65px;
+  height:65px;
+}
+.kv-brand{
+  gap:20px;
+}
+.kv-brandname{
+  font-size:clamp(25px,2.45vw,38px);
+  line-height:1.05;
+  font-weight:700;
+  letter-spacing:-.045em;
+  color:#211D1F;
+}
+.kv-brandmeta{
+  margin-top:10px;
+  font-size:11px;
+  letter-spacing:.18em;
+  font-weight:500;
+  color:var(--ed);
+}
+.kv-kurssektion{
+  width:100%;
+}
+.kv-sektionstopp{
+  margin-bottom:14px;
+}
+.kv-sektionstopp h2{
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.kv-sektionstopp span,
+.kv-navnote,
+.kv-hero,
+.kv-footer{
+  display:none!important;
+}
+.kurskort{
+  min-height:280px;
+}
+
+@media (max-width:760px){
+  .kursval{padding:22px}
+  .kv-nav{margin-bottom:42px}
+  .kv-logo-shell{width:60px;height:60px;border-radius:16px}
+  .kv-logo-shell img{width:54px;height:54px}
+  .kv-brand{gap:15px}
+  .kv-brandname{font-size:clamp(22px,7vw,30px)}
+  .kv-brandmeta{margin-top:7px;font-size:9.5px}
+}
+@media (max-width:520px){
+  .kv-brandname{white-space:normal}
+}
+
+
+/* ── kurskort · kapitelchips ── */
+.kurskort{
+  min-height:318px;
+}
+.kk-namn{
+  margin-bottom:0;
+}
+.kk-text{
+  display:none!important;
+}
+.kk-taggar{
+  position:relative;
+  display:flex;
+  align-content:flex-start;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:22px;
+  max-width:94%;
+}
+.kk-tag{
+  display:inline-flex;
+  align-items:center;
+  min-height:30px;
+  height:auto;
+  padding:6px 11px;
+  border:1px solid rgba(43,37,39,.08);
+  background:rgba(247,247,249,.9);
+  border-radius:999px;
+  font-family:var(--mono);
+  font-size:9.5px;
+  line-height:1.25;
+  letter-spacing:.025em;
+  color:#716C74;
+  white-space:normal;
+  transition:
+    background .18s ease,
+    border-color .18s ease,
+    color .18s ease,
+    transform .18s ease;
+}
+.kurskort:hover .kk-tag{
+  background:rgba(255,255,255,.94);
+  border-color:rgba(180,49,35,.12);
+  color:#5C575E;
+}
+.kurskort:hover .kk-tag:nth-child(2n){
+  transform:translateY(-1px);
+}
+.kk-index{
+  text-transform:none;
+}
+@media (max-width:760px){
+  .kurskort{min-height:290px}
+  .kk-taggar{max-width:100%;margin-top:18px;gap:6px}
+  .kk-tag{font-size:9px;padding:5px 9px;min-height:28px}
+}
+
 /* ── topprad ── */
 .top{height:80px;background:var(--surface);border-bottom:1px solid var(--line);
   display:flex;align-items:center;gap:18px;padding:0 24px;position:relative;z-index:20}
@@ -467,36 +606,23 @@ table.data th{background:var(--sunken);font-weight:600}
      egna filer och sina egna globala namn, så att två kurser aldrig krockar. -->
 <div class="kursval" id="kursval">
   <div class="kv-inner">
-    <nav class="kv-nav" aria-label="Uppgiftsbanken">
+    <header class="kv-nav" aria-label="Uppgiftsbanken">
       <div class="kv-brand">
         <span class="kv-logo-shell"><img src="logo.png" alt="Erik Dahlbergsgymnasiet"></span>
         <span class="kv-brandtext">
           <span class="kv-brandname">Erik Dahlbergsgymnasiets uppgiftsbank</span>
-          <span class="kv-brandmeta">Fysik · lärarverktyg</span>
+          <span class="kv-brandmeta">Välj kurs för att börja</span>
         </span>
       </div>
-      <span class="kv-navnote">Redo att bygga övningsblad</span>
-    </nav>
+    </header>
 
-    <section class="kv-hero" aria-labelledby="kvRubrik">
-      <div class="kv-eyebrow">Uppgiftsbank</div>
-      <h1 id="kvRubrik">Välj kurs.<br><span class="kv-accent">Bygg bättre fysikuppgifter.</span></h1>
-      <p class="kv-intro">Skapa övningsblad och prov från en strukturerad uppgiftsbank med nivåer, poäng, figurer och fullständiga lösningar.</p>
-    </section>
-
-    <section aria-labelledby="kvKurserRubrik">
+    <section class="kv-kurssektion" aria-labelledby="kvKurserRubrik">
       <div class="kv-sektionstopp">
-        <h2 id="kvKurserRubrik">Dina kurser</h2>
-        <span>Välj en kurs för att öppna banken</span>
+        <h2 id="kvKurserRubrik">Kurser</h2>
       </div>
       <div class="kv-kort" id="kvKort"></div>
       <p class="kv-fel" id="kvFel" hidden></p>
     </section>
-
-    <footer class="kv-footer">
-      <span><strong>Erik Dahlbergsgymnasiet</strong> · Jönköping</span>
-      <span class="kv-footmono">Designad för undervisning</span>
-    </footer>
   </div>
 </div>
 
@@ -663,8 +789,16 @@ const KURSER=[
     id:'fy1',
     titel:'Fysik 1',
     siffra:'1',
-    text:'Rörelse, kraft, energi, tryck, värme, ellära och kärnfysik.',
-    taggar:['Mekanik','Energi','Ellära'],
+    taggar:[
+      'Fysikens grunder',
+      'Rörelse',
+      'Kraft',
+      'Energi och rörelsemängd',
+      'Tryck',
+      'Värme och temperatur',
+      'Elektricitet',
+      'Partikel- och kärnfysik'
+    ],
     filer:['struktur.js','uppgifter.js'],
     globaler:{bank:'BANK',kapnamn:'KAPNAMN',omr:'OMR'}
   },
@@ -672,8 +806,14 @@ const KURSER=[
     id:'fy2',
     titel:'Fysik 2',
     siffra:'2',
-    text:'Kaströrelse, svängningar, vågor, fält, induktion och modern fysik.',
-    taggar:['Svängningar','Vågor','Fält'],
+    taggar:[
+      'Rörelse och krafter',
+      'Ljud och andra mekaniska vågor',
+      'Elektromagnetism',
+      'Vågor och partiklar',
+      'Astrofysik',
+      'Relativitetsteori'
+    ],
     filer:['struktur2.js','uppgifter2.js'],
     globaler:{bank:'BANK2',kapnamn:'KAPNAMN2',omr:'OMR2'}
   }
@@ -724,12 +864,11 @@ function ritaKursval(){
   $('#kvKort').innerHTML=KURSER.map(k=>`
     <button class="kurskort" type="button" data-kurs="${k.id}" data-ready="${!!k.data}" aria-label="Öppna ${k.titel}">
       <span class="kk-top">
-        <span class="kk-index">Kurs ${k.siffra}</span>
+        <span class="kk-index">Nivå ${k.siffra}</span>
         <span class="kk-number" aria-hidden="true">0${k.siffra}</span>
       </span>
       <span class="kk-namn">${k.titel}</span>
-      <span class="kk-text">${k.text}</span>
-      <span class="kk-taggar" aria-hidden="true">${(k.taggar||[]).map(t=>`<span class="kk-tag">${t}</span>`).join('')}</span>
+      <span class="kk-taggar">${(k.taggar||[]).map(t=>`<span class="kk-tag">${t}</span>`).join('')}</span>
       <span class="kk-fot">
         <span class="kk-status">${k.data?k.data.bank.length+' uppgifter redo':'Öppna banken'}</span>
         <span class="kk-cta" aria-hidden="true">${svgPil}</span>
