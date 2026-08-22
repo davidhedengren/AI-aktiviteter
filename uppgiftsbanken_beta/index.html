@@ -964,7 +964,7 @@ table.data th{background:var(--sunken);font-weight:600}
   #utskrift .fu .stegnr{position:absolute;left:2pt;font-weight:700;color:#B43123}
   #utskrift .fu .komm{padding-left:22pt;font-family:var(--las);font-size:9.5pt;color:#333}
   #utskrift table.data th{background:#eee}
-  #utskrift .fig{max-width:120mm;margin:5pt 0}
+  #utskrift .fig{max-width:120mm;margin:2pt 0 3pt}
   #utskrift .fig svg,#utskrift .fig img{max-width:120mm;max-height:90mm;width:auto;height:auto}
 }
 @media (max-width:1180px){
@@ -2025,6 +2025,31 @@ function körSlumpa(){
 $('#slumpaKör').addEventListener('click',körSlumpa);
 $('#slumpaAntal').addEventListener('keydown',e=>{ if(e.key==='Enter'){e.preventDefault();körSlumpa();} });
 
+
+/* Trimma tom SVG-yta vid utskrift.
+   Används på figurer vars storlek har ändrats i redigeraren. */
+function trimmaUtskriftsFigurer(root){
+  if(!root)return;
+  root.querySelectorAll('.fig[style*="width"] svg').forEach(svg=>{
+    try{
+      // getBBox omfattar det faktiskt ritade innehållet, inklusive text.
+      const b=svg.getBBox();
+      if(!b||!isFinite(b.x)||!isFinite(b.y)||b.width<=0||b.height<=0)return;
+
+      // Lite säkerhetsmarginal så pilspetsar/strokes aldrig kapas.
+      const padX=Math.max(4,b.width*.025);
+      const padY=Math.max(4,b.height*.035);
+      svg.setAttribute('viewBox',
+        `${b.x-padX} ${b.y-padY} ${b.width+2*padX} ${b.height+2*padY}`);
+      svg.removeAttribute('width');
+      svg.removeAttribute('height');
+      svg.style.width='100%';
+      svg.style.height='auto';
+      svg.style.display='block';
+    }catch(_){}
+  });
+}
+
 /* ── export ── */
 function bladHTML({facit}){
   const t=$('#bTitel').value||'Övningsblad', kl=$('#bKlass').value, da=$('#bDatum').value;
@@ -2052,11 +2077,22 @@ function bladHTML({facit}){
   return h;
 }
 $('#expPdf').addEventListener('click',()=>{
-  $('#utskrift').innerHTML=bladHTML({facit:$('#taMedFacit').checked});
-  window.print();
+  const u=$('#utskrift');
+  u.innerHTML=bladHTML({facit:$('#taMedFacit').checked});
+  // Låt SVG:erna komma in i DOM innan getBBox beräknas.
+  requestAnimationFrame(()=>{
+    trimmaUtskriftsFigurer(u);
+    requestAnimationFrame(()=>window.print());
+  });
 });
 $('#expWord').addEventListener('click',()=>{
-  const kropp=bladHTML({facit:$('#taMedFacit').checked});
+  const temp=document.createElement('div');
+  temp.style.cssText='position:fixed;left:-100000px;top:0;width:180mm;background:#fff';
+  temp.innerHTML=bladHTML({facit:$('#taMedFacit').checked});
+  document.body.appendChild(temp);
+  trimmaUtskriftsFigurer(temp);
+  const kropp=temp.innerHTML;
+  temp.remove();
   const doc=`<html xmlns:o="urn:schemas-microsoft-com:office:office"
     xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
     <head><meta charset="utf-8"><title>${$('#bTitel').value}</title>
