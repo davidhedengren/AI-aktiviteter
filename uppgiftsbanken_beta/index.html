@@ -867,6 +867,46 @@ table.data th{background:var(--sunken);font-weight:600}
   .ru-text{min-height:180px}
 }
 
+
+/* ── mobilfix för uppgiftsredigeraren ── */
+.redigera-uppgift{
+  min-height:100dvh;
+}
+.ru-dialog{
+  max-height:min(820px,calc(100dvh - 24px));
+}
+@media(max-width:720px){
+  .redigera-uppgift{
+    padding:8px;
+    place-items:stretch;
+  }
+  .ru-dialog{
+    width:100%;
+    max-width:none;
+    max-height:calc(100dvh - 16px);
+    margin:auto;
+    border-radius:16px;
+  }
+  .ru-topp{padding:14px 15px}
+  .ru-body{padding:14px;gap:16px}
+  .ru-fot{
+    position:sticky;
+    bottom:0;
+    padding:11px 14px;
+    box-shadow:0 -8px 24px rgba(43,37,39,.06);
+  }
+  .ru-fot .ru-info{display:none}
+  .ru-fot .knapp{min-height:42px}
+  .ru-bildverktyg .knapp{
+    min-height:38px;
+  }
+  .kortred{
+    min-height:34px;
+    padding:6px 9px;
+    touch-action:manipulation;
+  }
+}
+
 /* ── utskrift ── */
 #utskrift{display:none}
 @media print{
@@ -911,197 +951,6 @@ table.data th{background:var(--sunken);font-weight:600}
   .vänster,.höger{border:none;border-bottom:1px solid var(--line)}
   .höger{max-height:none}
 }
-
-/* ── redigera uppgift före tillägg ── */
-const UR=$('#uppgiftsred');
-let urOriginal=null;
-let urKopia=null;
-let urRedigerarBlad=false;
-let urBildHTML='';
-let urOriginalBildHTML='';
-
-function djupKopia(x){
-  return JSON.parse(JSON.stringify(x));
-}
-function figurUr(html){
-  const m=html.match(/<span class="fig[^"]*"[^>]*>[\s\S]*?<\/span>/i);
-  if(m) return m[0];
-  const s=html.match(/<svg\b[\s\S]*?<\/svg>/i);
-  if(s) return `<span class="fig">${s[0]}</span>`;
-  const im=html.match(/<img\b[^>]*>/i);
-  return im?`<span class="fig">${im[0]}</span>`:'';
-}
-function utanFigur(html){
-  return html
-    .replace(/<span class="fig[^"]*"[^>]*>[\s\S]*?<\/span>/ig,'')
-    .replace(/<svg\b[\s\S]*?<\/svg>/ig,'')
-    .replace(/<img\b[^>]*>/ig,'')
-    .trim();
-}
-function htmlTillRedigerbarText(html){
-  const d=document.createElement('div');
-  d.innerHTML=utanFigur(html);
-  d.querySelectorAll('br').forEach(br=>br.replaceWith('\n'));
-  d.querySelectorAll('li').forEach(li=>{
-    const p=li.parentElement;
-    const idx=[...p.children].indexOf(li);
-    li.insertAdjacentText('afterbegin',String.fromCharCode(97+idx)+') ');
-    li.append('\n');
-  });
-  d.querySelectorAll('p').forEach(p=>p.append('\n\n'));
-  return d.textContent.replace(/\n{3,}/g,'\n\n').trim();
-}
-function redigerbarTextTillHTML(text){
-  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  const rader=text.replace(/\r/g,'').split('\n');
-  let out='', lista=[];
-  const tömLista=()=>{
-    if(lista.length){ out+='<ol>'+lista.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol>'; lista=[]; }
-  };
-  rader.forEach(rad=>{
-    const s=rad.trim();
-    const m=/^[a-e]\)\s*(.*)$/i.exec(s);
-    if(m){ lista.push(m[1]); return; }
-    tömLista();
-    if(s) out+='<p>'+esc(s)+'</p>';
-  });
-  tömLista();
-  return out;
-}
-function ritaUrBild(){
-  const box=$('#ruBildbox');
-  box.innerHTML=urBildHTML||'<span class="ru-ingenbild">Ingen figur i uppgiften</span>';
-  $('#ruBildstatus').textContent=urBildHTML?'Bild finns':'Ingen bild';
-  $('#ruKopieraBild').disabled=!urBildHTML;
-  $('#ruTaBortBild').disabled=!urBildHTML;
-  $('#ruÅterBild').disabled=urBildHTML===urOriginalBildHTML;
-}
-function öppnaUppgiftsredigering(x,frånBlad=false){
-  if(!x) return;
-  urOriginal=x;
-  urKopia=djupKopia(x);
-  urRedigerarBlad=frånBlad;
-  urOriginalBildHTML=figurUr(x.t);
-  urBildHTML=urOriginalBildHTML;
-  $('#ruId').textContent=x.id+' · '+(DB.omr[x.kap]?.[x.omr]||'');
-  $('#ruText').value=htmlTillRedigerbarText(x.t);
-  $('#ruLäggTill').textContent=frånBlad?'Spara ändringar':'Lägg till i övningsbladet';
-  $('#ruInfo').textContent=frånBlad?'Du redigerar kopian i övningsbladet.':'Originalet i uppgiftsbanken ändras inte.';
-  ritaUrBild();
-  UR.hidden=false;
-  setTimeout(()=>$('#ruText').focus(),0);
-}
-function stängUppgiftsredigering(){
-  UR.hidden=true; urOriginal=null; urKopia=null; urBildHTML=''; urOriginalBildHTML='';
-  $('#ruFil').value='';
-}
-function sparaUppgiftsredigering(){
-  if(!urOriginal||!urKopia) return;
-  const nyText=redigerbarTextTillHTML($('#ruText').value.trim());
-  urKopia.t=(nyText||'<p></p>')+(urBildHTML||'');
-  urKopia._redigerad=true;
-
-  if(urRedigerarBlad){
-    const i=state.blad.indexOf(urOriginal);
-    if(i>=0) state.blad[i]=urKopia;
-    else{
-      const j=state.blad.findIndex(x=>x.id===urOriginal.id);
-      if(j>=0) state.blad[j]=urKopia;
-    }
-  }else{
-    const i=state.blad.findIndex(x=>x.id===urOriginal.id);
-    if(i>=0) state.blad[i]=urKopia;
-    else state.blad.push(urKopia);
-  }
-  stängUppgiftsredigering();
-  rita(); ritaBlad();
-}
-async function kopieraText(){
-  const text=$('#ruText').value;
-  try{
-    await navigator.clipboard.writeText(text);
-    $('#ruKopieraText').textContent='Kopierat!';
-  }catch(e){
-    $('#ruText').select(); document.execCommand('copy');
-    $('#ruKopieraText').textContent='Kopierat!';
-  }
-  setTimeout(()=>$('#ruKopieraText').textContent='Kopiera text',1200);
-}
-async function figurSomPngBlob(figHTML){
-  const holder=document.createElement('div');
-  holder.style.cssText='position:fixed;left:-10000px;top:0;background:#fff';
-  holder.innerHTML=figHTML;
-  document.body.appendChild(holder);
-  const svg=holder.querySelector('svg');
-  const img0=holder.querySelector('img');
-  try{
-    let src,w=900,h=600;
-    if(svg){
-      const vb=svg.viewBox?.baseVal;
-      if(vb&&vb.width&&vb.height){w=900;h=Math.round(900*vb.height/vb.width);}
-      const xml=new XMLSerializer().serializeToString(svg);
-      src=URL.createObjectURL(new Blob([xml],{type:'image/svg+xml;charset=utf-8'}));
-    }else if(img0){
-      src=img0.src;
-      w=img0.naturalWidth||900; h=img0.naturalHeight||600;
-      const scale=Math.min(1,1200/w);w=Math.round(w*scale);h=Math.round(h*scale);
-    }else throw new Error('Ingen bild');
-
-    const im=new Image();
-    if(!src.startsWith('data:')) im.crossOrigin='anonymous';
-    await new Promise((ok,fel)=>{im.onload=ok;im.onerror=fel;im.src=src;});
-    const c=document.createElement('canvas');c.width=w;c.height=h;
-    const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);ctx.drawImage(im,0,0,w,h);
-    if(svg) URL.revokeObjectURL(src);
-    return await new Promise(ok=>c.toBlob(ok,'image/png'));
-  }finally{holder.remove();}
-}
-async function kopieraBild(){
-  if(!urBildHTML) return;
-  const knapp=$('#ruKopieraBild');
-  try{
-    const blob=await figurSomPngBlob(urBildHTML);
-    if(navigator.clipboard?.write && window.ClipboardItem){
-      await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
-      knapp.textContent='Bild kopierad!';
-    }else{
-      const svg=urBildHTML.match(/<svg\b[\s\S]*?<\/svg>/i);
-      await navigator.clipboard.writeText(svg?svg[0]:urBildHTML);
-      knapp.textContent='Bildkod kopierad!';
-    }
-  }catch(e){
-    const svg=urBildHTML.match(/<svg\b[\s\S]*?<\/svg>/i);
-    try{await navigator.clipboard.writeText(svg?svg[0]:urBildHTML);knapp.textContent='Bildkod kopierad!';}
-    catch(_){knapp.textContent='Kunde inte kopiera';}
-  }
-  setTimeout(()=>knapp.textContent='Kopiera bild',1400);
-}
-function laddaEgenBild(file){
-  if(!file||!file.type.startsWith('image/')) return;
-  const läs=new FileReader();
-  läs.onload=()=>{
-    const alt=file.name.replace(/"/g,'');
-    urBildHTML=`<span class="fig"><img src="${läs.result}" alt="${alt}"></span>`;
-    ritaUrBild();
-  };
-  läs.readAsDataURL(file);
-}
-
-$$('[data-redigera]').forEach(()=>{}); // lyssnare kopplas efter varje rendering
-$('#ruStäng').addEventListener('click',stängUppgiftsredigering);
-$('#ruAvbryt').addEventListener('click',stängUppgiftsredigering);
-$('#ruLäggTill').addEventListener('click',sparaUppgiftsredigering);
-$('#ruKopieraText').addEventListener('click',kopieraText);
-$('#ruKopieraBild').addEventListener('click',kopieraBild);
-$('#ruLaddaBild').addEventListener('click',()=>$('#ruFil').click());
-$('#ruFil').addEventListener('change',e=>laddaEgenBild(e.target.files?.[0]));
-$('#ruTaBortBild').addEventListener('click',()=>{urBildHTML='';ritaUrBild();});
-$('#ruÅterBild').addEventListener('click',()=>{urBildHTML=urOriginalBildHTML;ritaUrBild();});
-UR.addEventListener('click',e=>{if(e.target===UR)stängUppgiftsredigering();});
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'&&!UR.hidden){e.stopImmediatePropagation();stängUppgiftsredigering();}
-});
-
 
 /* ── ändra poäng och nivå ── */
 [data-red]{cursor:pointer;transition:box-shadow .13s,background .13s,color .13s}
@@ -1652,10 +1501,14 @@ function rita(){
     k.addEventListener('keydown',e=>{ if(e.target.closest('[data-red],[data-redigera]'))return;
       if(e.key===' '||e.key==='Enter'){e.preventDefault();växla();} });
   });
-  $$('[data-redigera]').forEach(b=>b.addEventListener('click',e=>{
-    e.stopPropagation();
-    öppnaUppgiftsredigering(DB.bank.find(x=>x.id===b.dataset.redigera),false);
-  }));
+  $$('[data-redigera]').forEach(b=>{
+    b.addEventListener('pointerdown',e=>e.stopPropagation());
+    b.addEventListener('click',e=>{
+      e.preventDefault();
+      e.stopPropagation();
+      öppnaUppgiftsredigering(DB.bank.find(x=>x.id===b.dataset.redigera),false);
+    });
+  });
   $$('.facitknapp').forEach(b=>b.addEventListener('click',e=>{
     e.stopPropagation();
     const box=document.querySelector(`[data-fbox="${b.dataset.facit}"]`);
@@ -1725,7 +1578,13 @@ function ritaBlad(){
     : `<div class="tomt" style="padding:44px 16px"><h3>Bladet är tomt</h3>
        <p>Klicka på uppgifterna i mitten för att lägga till dem här.</p></div>`;
 
-  $$('[data-redigera-blad]').forEach(k=>k.addEventListener('click',()=>öppnaUppgiftsredigering(state.blad[+k.dataset.redigeraBlad],true)));
+  $$('[data-redigera-blad]').forEach(k=>{
+    k.addEventListener('pointerdown',e=>e.stopPropagation());
+    k.addEventListener('click',e=>{
+      e.preventDefault();e.stopPropagation();
+      öppnaUppgiftsredigering(state.blad[+k.dataset.redigeraBlad],true);
+    });
+  });
   $$('[data-upp]').forEach(k=>k.addEventListener('click',()=>{const i=+k.dataset.upp;
     [state.blad[i-1],state.blad[i]]=[state.blad[i],state.blad[i-1]];ritaBlad();}));
   $$('[data-ner]').forEach(k=>k.addEventListener('click',()=>{const i=+k.dataset.ner;
@@ -1733,6 +1592,198 @@ function ritaBlad(){
   $$('[data-bort]').forEach(k=>k.addEventListener('click',()=>vippa(k.dataset.bort)));
   $('#expPdf').disabled=$('#expWord').disabled=!b.length;
 }
+
+/* ── redigera uppgift före tillägg ── */
+const UR=$('#uppgiftsred');
+let urOriginal=null;
+let urKopia=null;
+let urRedigerarBlad=false;
+let urBildHTML='';
+let urOriginalBildHTML='';
+
+function djupKopia(x){
+  return JSON.parse(JSON.stringify(x));
+}
+function figurUr(html){
+  const m=html.match(/<span class="fig[^"]*"[^>]*>[\s\S]*?<\/span>/i);
+  if(m) return m[0];
+  const s=html.match(/<svg\b[\s\S]*?<\/svg>/i);
+  if(s) return `<span class="fig">${s[0]}</span>`;
+  const im=html.match(/<img\b[^>]*>/i);
+  return im?`<span class="fig">${im[0]}</span>`:'';
+}
+function utanFigur(html){
+  return html
+    .replace(/<span class="fig[^"]*"[^>]*>[\s\S]*?<\/span>/ig,'')
+    .replace(/<svg\b[\s\S]*?<\/svg>/ig,'')
+    .replace(/<img\b[^>]*>/ig,'')
+    .trim();
+}
+function htmlTillRedigerbarText(html){
+  const d=document.createElement('div');
+  d.innerHTML=utanFigur(html);
+  d.querySelectorAll('br').forEach(br=>br.replaceWith('\n'));
+  d.querySelectorAll('li').forEach(li=>{
+    const p=li.parentElement;
+    const idx=[...p.children].indexOf(li);
+    li.insertAdjacentText('afterbegin',String.fromCharCode(97+idx)+') ');
+    li.append('\n');
+  });
+  d.querySelectorAll('p').forEach(p=>p.append('\n\n'));
+  return d.textContent.replace(/\n{3,}/g,'\n\n').trim();
+}
+function redigerbarTextTillHTML(text){
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const rader=text.replace(/\r/g,'').split('\n');
+  let out='', lista=[];
+  const tömLista=()=>{
+    if(lista.length){ out+='<ol>'+lista.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol>'; lista=[]; }
+  };
+  rader.forEach(rad=>{
+    const s=rad.trim();
+    const m=/^[a-e]\)\s*(.*)$/i.exec(s);
+    if(m){ lista.push(m[1]); return; }
+    tömLista();
+    if(s) out+='<p>'+esc(s)+'</p>';
+  });
+  tömLista();
+  return out;
+}
+function ritaUrBild(){
+  const box=$('#ruBildbox');
+  box.innerHTML=urBildHTML||'<span class="ru-ingenbild">Ingen figur i uppgiften</span>';
+  $('#ruBildstatus').textContent=urBildHTML?'Bild finns':'Ingen bild';
+  $('#ruKopieraBild').disabled=!urBildHTML;
+  $('#ruTaBortBild').disabled=!urBildHTML;
+  $('#ruÅterBild').disabled=urBildHTML===urOriginalBildHTML;
+}
+function öppnaUppgiftsredigering(x,frånBlad=false){
+  if(!x) return;
+  urOriginal=x;
+  urKopia=djupKopia(x);
+  urRedigerarBlad=frånBlad;
+  urOriginalBildHTML=figurUr(x.t);
+  urBildHTML=urOriginalBildHTML;
+  $('#ruId').textContent=x.id+' · '+(DB.omr[x.kap]?.[x.omr]||'');
+  $('#ruText').value=htmlTillRedigerbarText(x.t);
+  $('#ruLäggTill').textContent=frånBlad?'Spara ändringar':'Lägg till i övningsbladet';
+  $('#ruInfo').textContent=frånBlad?'Du redigerar kopian i övningsbladet.':'Originalet i uppgiftsbanken ändras inte.';
+  ritaUrBild();
+  UR.hidden=false;
+  if(!matchMedia('(pointer:coarse)').matches){
+    setTimeout(()=>$('#ruText').focus(),50);
+  }
+}
+function stängUppgiftsredigering(){
+  UR.hidden=true; urOriginal=null; urKopia=null; urBildHTML=''; urOriginalBildHTML='';
+  $('#ruFil').value='';
+}
+function sparaUppgiftsredigering(){
+  if(!urOriginal||!urKopia) return;
+  const nyText=redigerbarTextTillHTML($('#ruText').value.trim());
+  urKopia.t=(nyText||'<p></p>')+(urBildHTML||'');
+  urKopia._redigerad=true;
+
+  if(urRedigerarBlad){
+    const i=state.blad.indexOf(urOriginal);
+    if(i>=0) state.blad[i]=urKopia;
+    else{
+      const j=state.blad.findIndex(x=>x.id===urOriginal.id);
+      if(j>=0) state.blad[j]=urKopia;
+    }
+  }else{
+    const i=state.blad.findIndex(x=>x.id===urOriginal.id);
+    if(i>=0) state.blad[i]=urKopia;
+    else state.blad.push(urKopia);
+  }
+  stängUppgiftsredigering();
+  rita(); ritaBlad();
+}
+async function kopieraText(){
+  const text=$('#ruText').value;
+  try{
+    await navigator.clipboard.writeText(text);
+    $('#ruKopieraText').textContent='Kopierat!';
+  }catch(e){
+    $('#ruText').select(); document.execCommand('copy');
+    $('#ruKopieraText').textContent='Kopierat!';
+  }
+  setTimeout(()=>$('#ruKopieraText').textContent='Kopiera text',1200);
+}
+async function figurSomPngBlob(figHTML){
+  const holder=document.createElement('div');
+  holder.style.cssText='position:fixed;left:-10000px;top:0;background:#fff';
+  holder.innerHTML=figHTML;
+  document.body.appendChild(holder);
+  const svg=holder.querySelector('svg');
+  const img0=holder.querySelector('img');
+  try{
+    let src,w=900,h=600;
+    if(svg){
+      const vb=svg.viewBox?.baseVal;
+      if(vb&&vb.width&&vb.height){w=900;h=Math.round(900*vb.height/vb.width);}
+      const xml=new XMLSerializer().serializeToString(svg);
+      src=URL.createObjectURL(new Blob([xml],{type:'image/svg+xml;charset=utf-8'}));
+    }else if(img0){
+      src=img0.src;
+      w=img0.naturalWidth||900; h=img0.naturalHeight||600;
+      const scale=Math.min(1,1200/w);w=Math.round(w*scale);h=Math.round(h*scale);
+    }else throw new Error('Ingen bild');
+
+    const im=new Image();
+    if(!src.startsWith('data:')) im.crossOrigin='anonymous';
+    await new Promise((ok,fel)=>{im.onload=ok;im.onerror=fel;im.src=src;});
+    const c=document.createElement('canvas');c.width=w;c.height=h;
+    const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);ctx.drawImage(im,0,0,w,h);
+    if(svg) URL.revokeObjectURL(src);
+    return await new Promise(ok=>c.toBlob(ok,'image/png'));
+  }finally{holder.remove();}
+}
+async function kopieraBild(){
+  if(!urBildHTML) return;
+  const knapp=$('#ruKopieraBild');
+  try{
+    const blob=await figurSomPngBlob(urBildHTML);
+    if(navigator.clipboard?.write && window.ClipboardItem){
+      await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
+      knapp.textContent='Bild kopierad!';
+    }else{
+      const svg=urBildHTML.match(/<svg\b[\s\S]*?<\/svg>/i);
+      await navigator.clipboard.writeText(svg?svg[0]:urBildHTML);
+      knapp.textContent='Bildkod kopierad!';
+    }
+  }catch(e){
+    const svg=urBildHTML.match(/<svg\b[\s\S]*?<\/svg>/i);
+    try{await navigator.clipboard.writeText(svg?svg[0]:urBildHTML);knapp.textContent='Bildkod kopierad!';}
+    catch(_){knapp.textContent='Kunde inte kopiera';}
+  }
+  setTimeout(()=>knapp.textContent='Kopiera bild',1400);
+}
+function laddaEgenBild(file){
+  if(!file||!file.type.startsWith('image/')) return;
+  const läs=new FileReader();
+  läs.onload=()=>{
+    const alt=file.name.replace(/"/g,'');
+    urBildHTML=`<span class="fig"><img src="${läs.result}" alt="${alt}"></span>`;
+    ritaUrBild();
+  };
+  läs.readAsDataURL(file);
+}
+
+$$('[data-redigera]').forEach(()=>{}); // lyssnare kopplas efter varje rendering
+$('#ruStäng').addEventListener('click',stängUppgiftsredigering);
+$('#ruAvbryt').addEventListener('click',stängUppgiftsredigering);
+$('#ruLäggTill').addEventListener('click',sparaUppgiftsredigering);
+$('#ruKopieraText').addEventListener('click',kopieraText);
+$('#ruKopieraBild').addEventListener('click',kopieraBild);
+$('#ruLaddaBild').addEventListener('click',()=>$('#ruFil').click());
+$('#ruFil').addEventListener('change',e=>laddaEgenBild(e.target.files?.[0]));
+$('#ruTaBortBild').addEventListener('click',()=>{urBildHTML='';ritaUrBild();});
+$('#ruÅterBild').addEventListener('click',()=>{urBildHTML=urOriginalBildHTML;ritaUrBild();});
+UR.addEventListener('click',e=>{if(e.target===UR)stängUppgiftsredigering();});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&!UR.hidden){e.stopImmediatePropagation();stängUppgiftsredigering();}
+});
 
 /* ── ändra poäng och nivå ──
    Läraren klickar på nivåmärket eller poängen och justerar E, C och A var för sig.
