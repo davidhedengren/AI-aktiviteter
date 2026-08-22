@@ -938,6 +938,33 @@ table.data th{background:var(--sunken);font-weight:600}
 .fig[style*="width"]{display:block;max-width:none}
 .fig[style*="width"] svg,.fig[style*="width"] img{width:100%;max-width:none;height:auto}
 
+
+/* ── robust figurstorlek: relativt figurens ursprungsbredd ── */
+.fig[data-bildskala]{
+  display:block!important;
+  width:min(var(--bildbredd,520px),100%)!important;
+  max-width:none!important;
+}
+.fig[data-bildskala] svg,.fig[data-bildskala] img{
+  display:block!important;width:100%!important;max-width:none!important;height:auto!important;
+}
+/* I redigeraren får bilden växa fritt; boxen scrollar vid behov. */
+.ru-bildbox .fig[data-bildskala]{
+  width:var(--bildbredd,520px)!important;
+  max-width:none!important;
+}
+@media print{
+  /* Viktigt: aldrig bredare än utskriftskolumnen, annars skalar Chrome ned hela sidan. */
+  #utskrift .fig[data-bildskala]{
+    display:block!important;
+    width:min(var(--bildbredd,120mm),100%)!important;
+    max-width:100%!important;
+  }
+  #utskrift .fig[data-bildskala] svg,#utskrift .fig[data-bildskala] img{
+    width:100%!important;max-width:none!important;height:auto!important;
+  }
+}
+
 /* ── utskrift ── */
 #utskrift{display:none}
 @media print{
@@ -1018,6 +1045,20 @@ table.data th{background:var(--sunken);font-weight:600}
 .prfot .knapp:disabled{opacity:.4;cursor:default}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* Slutlig utskriftsregel för redigerad figurstorlek. */
+@media print{
+  #utskrift .fig[data-bildskala]{
+    display:block!important;
+    width:min(var(--bildbredd,520px),100%)!important;
+    max-width:100%!important;
+    margin:2pt 0 3pt!important;
+  }
+  #utskrift .fig[data-bildskala] svg,#utskrift .fig[data-bildskala] img{
+    display:block!important;width:100%!important;max-width:none!important;height:auto!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1645,6 +1686,7 @@ let urBildHTML='';
 let urOriginalBildHTML='';
 let urBildBredd=100;
 let urBildStorlekÄndrad=false;
+let urBildBas=0;
 
 function djupKopia(x){
   return JSON.parse(JSON.stringify(x));
@@ -1695,19 +1737,46 @@ function redigerbarTextTillHTML(text){
   return out;
 }
 
-function figurBreddUrHTML(figHTML){
-  const m=figHTML.match(/style\s*=\s*["'][^"']*width\s*:\s*(\d+(?:\.\d+)?)%/i);
-  return m?Math.max(10,Math.min(180,Math.round(+m[1]/5)*5)):null;
+function figurStorlekUrHTML(figHTML){
+  const box=document.createElement('div');
+  box.innerHTML=figHTML||'';
+  const fig=box.querySelector('.fig')||box.firstElementChild;
+  if(!fig)return {skala:null,bas:null};
+  const ds=fig.getAttribute('data-bildskala');
+  const db=fig.getAttribute('data-bildbas');
+  if(ds&&db)return {skala:+ds,bas:+db};
+
+  // Bakåtkompatibilitet med de tidigare procentbaserade versionerna.
+  const style=fig.getAttribute('style')||'';
+  const wm=/width\s*:\s*(\d+(?:\.\d+)?)%/i.exec(style);
+  return {skala:wm?+wm[1]:null,bas:null};
 }
-function sättFigurBreddHTML(figHTML,pct){
+function mätBildBas(){
+  if(urBildBas>0)return urBildBas;
+  const fig=$('#ruBildbox .fig');
+  if(!fig)return 520;
+  const r=fig.getBoundingClientRect();
+  const aktuell=Math.max(1,r.width||520);
+  // Om en gammal procentstorlek är aktiv räknas originalbredden baklänges.
+  urBildBas=urBildStorlekÄndrad&&urBildBredd>0
+    ? aktuell/(urBildBredd/100)
+    : aktuell;
+  return urBildBas;
+}
+function sättFigurBreddHTML(figHTML,pct,bas){
   if(!figHTML)return figHTML;
   const box=document.createElement('div');
   box.innerHTML=figHTML;
   const fig=box.querySelector('.fig')||box.firstElementChild;
   if(!fig)return figHTML;
+  const b=Math.max(40,bas||520);
+  const px=Math.round(b*(pct/100)*10)/10;
   fig.style.display='block';
-  fig.style.width=pct+'%';
+  fig.style.width=`min(${px}px, 100%)`;
   fig.style.maxWidth='none';
+  fig.style.setProperty('--bildbredd',px+'px');
+  fig.setAttribute('data-bildskala',String(pct));
+  fig.setAttribute('data-bildbas',String(Math.round(b*10)/10));
   const media=fig.querySelector('svg,img');
   if(media){
     media.style.width='100%';
@@ -1723,15 +1792,16 @@ function ritaUrBild(){
   if(urBildHTML&&urBildStorlekÄndrad){
     const fig=box.querySelector('.fig')||box.firstElementChild;
     if(fig){
+      const bas=urBildBas||mätBildBas();
+      const px=Math.round(bas*(urBildBredd/100)*10)/10;
       fig.style.display='block';
-      fig.style.width=urBildBredd+'%';
+      fig.style.width=px+'px';
       fig.style.maxWidth='none';
+      fig.style.setProperty('--bildbredd',px+'px');
+      fig.setAttribute('data-bildskala',String(urBildBredd));
+      fig.setAttribute('data-bildbas',String(Math.round(bas*10)/10));
       const media=fig.querySelector('svg,img');
-      if(media){
-        media.style.width='100%';
-        media.style.maxWidth='none';
-        media.style.height='auto';
-      }
+      if(media){media.style.width='100%';media.style.maxWidth='none';media.style.height='auto';}
     }
   }
   $('#ruBildstatus').textContent=urBildHTML?'Bild finns':'Ingen bild';
@@ -1750,29 +1820,31 @@ function öppnaUppgiftsredigering(x,frånBlad=false){
   urRedigerarBlad=frånBlad;
   urOriginalBildHTML=figurUr(x.t);
   urBildHTML=urOriginalBildHTML;
-  const befBredd=figurBreddUrHTML(urBildHTML);
-  urBildBredd=befBredd||100;
-  urBildStorlekÄndrad=befBredd!==null;
+  const befStorlek=figurStorlekUrHTML(urBildHTML);
+  urBildBredd=befStorlek.skala||100;
+  urBildBas=befStorlek.bas||0;
+  urBildStorlekÄndrad=befStorlek.skala!==null;
   $('#ruId').textContent=x.id+' · '+(DB.omr[x.kap]?.[x.omr]||'');
   $('#ruText').value=htmlTillRedigerbarText(x.t);
   $('#ruLäggTill').textContent=frånBlad?'Spara ändringar':'Lägg till i övningsbladet';
   $('#ruInfo').textContent=frånBlad?'Du redigerar kopian i övningsbladet.':'Originalet i uppgiftsbanken ändras inte.';
   ritaUrBild();
   UR.hidden=false;
+  requestAnimationFrame(()=>{if(!urBildBas&&urBildHTML){urBildBas=mätBildBas();}});
   if(!matchMedia('(pointer:coarse)').matches){
     setTimeout(()=>$('#ruText').focus(),50);
   }
 }
 function stängUppgiftsredigering(){
   UR.hidden=true; urOriginal=null; urKopia=null; urBildHTML=''; urOriginalBildHTML='';
-  urBildBredd=100;urBildStorlekÄndrad=false;
+  urBildBredd=100;urBildStorlekÄndrad=false;urBildBas=0;
   $('#ruFil').value='';
 }
 function sparaUppgiftsredigering(){
   if(!urOriginal||!urKopia) return;
   const nyText=redigerbarTextTillHTML($('#ruText').value.trim());
   const sparadBild=urBildHTML
-    ?(urBildStorlekÄndrad?sättFigurBreddHTML(urBildHTML,urBildBredd):urBildHTML)
+    ?(urBildStorlekÄndrad?sättFigurBreddHTML(urBildHTML,urBildBredd,urBildBas||mätBildBas()):urBildHTML)
     :'';
   urKopia.t=(nyText||'<p></p>')+sparadBild;
   urKopia._redigerad=true;
@@ -1858,8 +1930,9 @@ function laddaEgenBild(file){
   läs.onload=()=>{
     const alt=file.name.replace(/"/g,'');
     urBildHTML=`<span class="fig"><img src="${läs.result}" alt="${alt}"></span>`;
-    urBildBredd=100;urBildStorlekÄndrad=false;
+    urBildBredd=100;urBildStorlekÄndrad=false;urBildBas=0;
     ritaUrBild();
+    requestAnimationFrame(()=>{urBildBas=mätBildBas();});
   };
   läs.readAsDataURL(file);
 }
@@ -1872,23 +1945,25 @@ $('#ruKopieraText').addEventListener('click',kopieraText);
 $('#ruKopieraBild').addEventListener('click',kopieraBild);
 $('#ruLaddaBild').addEventListener('click',()=>$('#ruFil').click());
 $('#ruFil').addEventListener('change',e=>laddaEgenBild(e.target.files?.[0]));
-$('#ruTaBortBild').addEventListener('click',()=>{urBildHTML='';urBildBredd=100;urBildStorlekÄndrad=false;ritaUrBild();});
+$('#ruTaBortBild').addEventListener('click',()=>{urBildHTML='';urBildBredd=100;urBildStorlekÄndrad=false;urBildBas=0;ritaUrBild();});
 $('#ruÅterBild').addEventListener('click',()=>{
   urBildHTML=urOriginalBildHTML;
-  const b=figurBreddUrHTML(urBildHTML);
-  urBildBredd=b||100;urBildStorlekÄndrad=b!==null;
+  const st=figurStorlekUrHTML(urBildHTML);
+  urBildBredd=st.skala||100;urBildBas=st.bas||0;urBildStorlekÄndrad=st.skala!==null;
   ritaUrBild();
+  requestAnimationFrame(()=>{if(!urBildBas&&urBildHTML)urBildBas=mätBildBas();});
 });
 
 $('#ruBildStorlek').addEventListener('input',e=>{
+  if(!urBildBas)urBildBas=mätBildBas();
   urBildBredd=+e.target.value;
   urBildStorlekÄndrad=true;
   ritaUrBild();
 });
 $('#ruÅterStorlek').addEventListener('click',()=>{
-  const b=figurBreddUrHTML(urBildHTML);
-  if(b!==null){
-    urBildBredd=b;urBildStorlekÄndrad=true;
+  const st=figurStorlekUrHTML(urBildHTML);
+  if(st.skala!==null){
+    urBildBredd=st.skala;urBildBas=st.bas||urBildBas;urBildStorlekÄndrad=true;
   }else{
     urBildBredd=100;urBildStorlekÄndrad=false;
   }
@@ -2074,7 +2149,7 @@ function trimmaUtskriftsFigurer(root){
     ].join(';');
   }
 
-  root.querySelectorAll('.fig[style*="width"] svg').forEach(svg=>{
+  root.querySelectorAll('.fig[data-bildskala] svg,.fig[style*="width"] svg').forEach(svg=>{
     try{
       const b=svg.getBBox();
       if(!b||!isFinite(b.x)||!isFinite(b.y)||b.width<=0||b.height<=0)return;
@@ -2193,6 +2268,8 @@ $('#expWord').addEventListener('click',()=>{
 
       .fig[style*="width"]{display:block!important;max-width:none!important}
       .fig[style*="width"] img,.fig[style*="width"] svg{max-width:none!important;width:100%!important;height:auto!important}
+      .fig[data-bildskala]{display:block!important;width:min(var(--bildbredd,450pt),100%)!important;max-width:100%!important}
+      .fig[data-bildskala] img,.fig[data-bildskala] svg{width:100%!important;max-width:none!important;height:auto!important}
       .fk{page-break-before:always;border-top:2px solid #000;padding-top:12pt}
       .fu{margin-bottom:11pt;font-size:10pt}
       .steg{margin:3pt 0 3pt 24pt}
