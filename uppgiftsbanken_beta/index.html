@@ -838,7 +838,7 @@ table.data th{background:var(--sunken);font-weight:600}
   min-height:220px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--canvas);
   display:block;overflow:auto
 }
-.ru-bildbox .fig{margin:0;max-width:none;width:100%}
+.ru-bildbox .fig{display:block;margin:0;max-width:none;width:100%}
 .ru-bildbox .fig svg,.ru-bildbox .fig img{display:block;max-width:none;max-height:none;width:100%;height:auto;margin:0}
 .ru-ingenbild{font-size:12px;color:var(--muted);text-align:center}
 .ru-bildverktyg{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
@@ -935,7 +935,7 @@ table.data th{background:var(--sunken);font-weight:600}
 
 
 /* Redigerad bildstorlek får överskrida figurens normala maxbredd. */
-.fig[style*="width"]{max-width:none}
+.fig[style*="width"]{display:block;max-width:none}
 .fig[style*="width"] svg,.fig[style*="width"] img{width:100%;max-width:none;height:auto}
 
 /* ── utskrift ── */
@@ -971,7 +971,7 @@ table.data th{background:var(--sunken);font-weight:600}
   #utskrift .fu .komm{padding-left:22pt;font-family:var(--las);font-size:9.5pt;color:#333}
   #utskrift table.data th{background:#eee}
   #utskrift .fig{max-width:120mm;margin:2pt 0 3pt}
-  #utskrift .fig[style*="width"]{max-width:none!important}
+  #utskrift .fig[style*="width"]{display:block!important;max-width:none!important}
   #utskrift .fig svg,#utskrift .fig img{max-width:120mm;max-height:90mm;width:auto;height:auto}
 }
 @media (max-width:1180px){
@@ -1705,6 +1705,7 @@ function sättFigurBreddHTML(figHTML,pct){
   box.innerHTML=figHTML;
   const fig=box.querySelector('.fig')||box.firstElementChild;
   if(!fig)return figHTML;
+  fig.style.display='block';
   fig.style.width=pct+'%';
   fig.style.maxWidth='none';
   const media=fig.querySelector('svg,img');
@@ -1722,6 +1723,7 @@ function ritaUrBild(){
   if(urBildHTML&&urBildStorlekÄndrad){
     const fig=box.querySelector('.fig')||box.firstElementChild;
     if(fig){
+      fig.style.display='block';
       fig.style.width=urBildBredd+'%';
       fig.style.maxWidth='none';
       const media=fig.querySelector('svg,img');
@@ -2189,7 +2191,7 @@ $('#expWord').addEventListener('click',()=>{
       table.data th{background:#eee}
       .fig img,.fig svg{max-width:100%;max-height:300pt;width:auto;height:auto}
 
-      .fig[style*="width"]{max-width:none!important}
+      .fig[style*="width"]{display:block!important;max-width:none!important}
       .fig[style*="width"] img,.fig[style*="width"] svg{max-width:none!important;width:100%!important;height:auto!important}
       .fk{page-break-before:always;border-top:2px solid #000;padding-top:12pt}
       .fu{margin-bottom:11pt;font-size:10pt}
