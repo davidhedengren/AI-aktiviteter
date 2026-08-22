@@ -907,6 +907,32 @@ table.data th{background:var(--sunken);font-weight:600}
   }
 }
 
+
+/* ── bildstorlek i uppgiftsredigeraren ── */
+.ru-storlek{
+  margin-top:12px;padding:11px 12px;border:1px solid var(--line);
+  border-radius:11px;background:var(--surface)
+}
+.ru-storlek-topp{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px
+}
+.ru-storlek-topp label{font-size:11.5px;font-weight:700;color:var(--ink-2)}
+.ru-storlek-värde{
+  min-width:44px;text-align:right;font-family:var(--mono);font-size:10.5px;
+  font-weight:600;color:var(--ed-dark)
+}
+.ru-storlek-rad{display:flex;align-items:center;gap:10px}
+.ru-storlek input[type="range"]{
+  flex:1;min-width:0;accent-color:var(--ed);cursor:pointer
+}
+.ru-storlek input[type="range"]:disabled{opacity:.35;cursor:default}
+.ru-storlek .knapp{flex:none;padding:6px 9px;font-size:11px}
+@media(max-width:720px){
+  .ru-storlek{padding:10px}
+  .ru-storlek-rad{gap:8px}
+  .ru-storlek .knapp{min-height:36px}
+}
+
 /* ── utskrift ── */
 #utskrift{display:none}
 @media print{
@@ -1167,6 +1193,16 @@ table.data th{background:var(--sunken);font-weight:600}
           <button class="knapp tyst liten" id="ruTaBortBild" type="button">Ta bort bild</button>
           <button class="knapp tyst liten" id="ruÅterBild" type="button">Återställ bild</button>
           <input class="ru-upload" id="ruFil" type="file" accept="image/*">
+        </div>
+        <div class="ru-storlek">
+          <div class="ru-storlek-topp">
+            <label for="ruBildStorlek">Bildstorlek</label>
+            <span class="ru-storlek-värde" id="ruBildStorlekVärde">Original</span>
+          </div>
+          <div class="ru-storlek-rad">
+            <input id="ruBildStorlek" type="range" min="30" max="100" step="5" value="100">
+            <button class="knapp tyst liten" id="ruÅterStorlek" type="button">Återställ storlek</button>
+          </div>
         </div>
       </section>
     </div>
@@ -1600,6 +1636,8 @@ let urKopia=null;
 let urRedigerarBlad=false;
 let urBildHTML='';
 let urOriginalBildHTML='';
+let urBildBredd=100;
+let urBildStorlekÄndrad=false;
 
 function djupKopia(x){
   return JSON.parse(JSON.stringify(x));
@@ -1649,13 +1687,37 @@ function redigerbarTextTillHTML(text){
   tömLista();
   return out;
 }
+
+function figurBreddUrHTML(figHTML){
+  const m=figHTML.match(/style\s*=\s*["'][^"']*width\s*:\s*(\d+(?:\.\d+)?)%/i);
+  return m?Math.max(30,Math.min(100,Math.round(+m[1]/5)*5)):null;
+}
+function sättFigurBreddHTML(figHTML,pct){
+  if(!figHTML)return figHTML;
+  const box=document.createElement('div');
+  box.innerHTML=figHTML;
+  const fig=box.querySelector('.fig')||box.firstElementChild;
+  if(!fig)return figHTML;
+  fig.style.width=pct+'%';
+  fig.style.maxWidth='none';
+  return box.innerHTML;
+}
+
 function ritaUrBild(){
   const box=$('#ruBildbox');
   box.innerHTML=urBildHTML||'<span class="ru-ingenbild">Ingen figur i uppgiften</span>';
+  if(urBildHTML&&urBildStorlekÄndrad){
+    const fig=box.querySelector('.fig')||box.firstElementChild;
+    if(fig){fig.style.width=urBildBredd+'%';fig.style.maxWidth='none';}
+  }
   $('#ruBildstatus').textContent=urBildHTML?'Bild finns':'Ingen bild';
   $('#ruKopieraBild').disabled=!urBildHTML;
   $('#ruTaBortBild').disabled=!urBildHTML;
   $('#ruÅterBild').disabled=urBildHTML===urOriginalBildHTML;
+  $('#ruBildStorlek').disabled=!urBildHTML;
+  $('#ruÅterStorlek').disabled=!urBildHTML||!urBildStorlekÄndrad;
+  $('#ruBildStorlek').value=urBildBredd;
+  $('#ruBildStorlekVärde').textContent=urBildHTML?(urBildStorlekÄndrad?urBildBredd+' %':'Original'):'—';
 }
 function öppnaUppgiftsredigering(x,frånBlad=false){
   if(!x) return;
@@ -1664,6 +1726,9 @@ function öppnaUppgiftsredigering(x,frånBlad=false){
   urRedigerarBlad=frånBlad;
   urOriginalBildHTML=figurUr(x.t);
   urBildHTML=urOriginalBildHTML;
+  const befBredd=figurBreddUrHTML(urBildHTML);
+  urBildBredd=befBredd||100;
+  urBildStorlekÄndrad=befBredd!==null;
   $('#ruId').textContent=x.id+' · '+(DB.omr[x.kap]?.[x.omr]||'');
   $('#ruText').value=htmlTillRedigerbarText(x.t);
   $('#ruLäggTill').textContent=frånBlad?'Spara ändringar':'Lägg till i övningsbladet';
@@ -1676,12 +1741,16 @@ function öppnaUppgiftsredigering(x,frånBlad=false){
 }
 function stängUppgiftsredigering(){
   UR.hidden=true; urOriginal=null; urKopia=null; urBildHTML=''; urOriginalBildHTML='';
+  urBildBredd=100;urBildStorlekÄndrad=false;
   $('#ruFil').value='';
 }
 function sparaUppgiftsredigering(){
   if(!urOriginal||!urKopia) return;
   const nyText=redigerbarTextTillHTML($('#ruText').value.trim());
-  urKopia.t=(nyText||'<p></p>')+(urBildHTML||'');
+  const sparadBild=urBildHTML
+    ?(urBildStorlekÄndrad?sättFigurBreddHTML(urBildHTML,urBildBredd):urBildHTML)
+    :'';
+  urKopia.t=(nyText||'<p></p>')+sparadBild;
   urKopia._redigerad=true;
 
   if(urRedigerarBlad){
@@ -1765,6 +1834,7 @@ function laddaEgenBild(file){
   läs.onload=()=>{
     const alt=file.name.replace(/"/g,'');
     urBildHTML=`<span class="fig"><img src="${läs.result}" alt="${alt}"></span>`;
+    urBildBredd=100;urBildStorlekÄndrad=false;
     ritaUrBild();
   };
   läs.readAsDataURL(file);
@@ -1778,8 +1848,29 @@ $('#ruKopieraText').addEventListener('click',kopieraText);
 $('#ruKopieraBild').addEventListener('click',kopieraBild);
 $('#ruLaddaBild').addEventListener('click',()=>$('#ruFil').click());
 $('#ruFil').addEventListener('change',e=>laddaEgenBild(e.target.files?.[0]));
-$('#ruTaBortBild').addEventListener('click',()=>{urBildHTML='';ritaUrBild();});
-$('#ruÅterBild').addEventListener('click',()=>{urBildHTML=urOriginalBildHTML;ritaUrBild();});
+$('#ruTaBortBild').addEventListener('click',()=>{urBildHTML='';urBildBredd=100;urBildStorlekÄndrad=false;ritaUrBild();});
+$('#ruÅterBild').addEventListener('click',()=>{
+  urBildHTML=urOriginalBildHTML;
+  const b=figurBreddUrHTML(urBildHTML);
+  urBildBredd=b||100;urBildStorlekÄndrad=b!==null;
+  ritaUrBild();
+});
+
+$('#ruBildStorlek').addEventListener('input',e=>{
+  urBildBredd=+e.target.value;
+  urBildStorlekÄndrad=true;
+  ritaUrBild();
+});
+$('#ruÅterStorlek').addEventListener('click',()=>{
+  const b=figurBreddUrHTML(urBildHTML);
+  if(b!==null){
+    urBildBredd=b;urBildStorlekÄndrad=true;
+  }else{
+    urBildBredd=100;urBildStorlekÄndrad=false;
+  }
+  ritaUrBild();
+});
+
 UR.addEventListener('click',e=>{if(e.target===UR)stängUppgiftsredigering();});
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&!UR.hidden){e.stopImmediatePropagation();stängUppgiftsredigering();}
