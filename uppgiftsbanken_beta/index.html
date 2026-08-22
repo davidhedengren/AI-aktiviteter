@@ -947,6 +947,7 @@ table.data th{background:var(--sunken);font-weight:600}
   #utskrift .pn{font-family:var(--mono);font-weight:600}
   #utskrift .pu p{margin:0 0 6pt}
   #utskrift .pu p:last-child{margin-bottom:0}
+  #utskrift .pu .fig{margin-top:2pt!important}
   #utskrift .fu p{margin:0 0 3pt}
   #utskrift .pp{float:right;font-family:var(--mono);font-size:9.5pt;color:#444;margin-left:10pt}
   #utskrift .nivåmärke{float:right;margin-left:10pt;-webkit-print-color-adjust:exact;print-color-adjust:exact;
@@ -965,6 +966,7 @@ table.data th{background:var(--sunken);font-weight:600}
   #utskrift .fu .komm{padding-left:22pt;font-family:var(--las);font-size:9.5pt;color:#333}
   #utskrift table.data th{background:#eee}
   #utskrift .fig{max-width:120mm;margin:2pt 0 3pt}
+  #utskrift .fig[style*="width"]{max-width:100%!important}
   #utskrift .fig svg,#utskrift .fig img{max-width:120mm;max-height:90mm;width:auto;height:auto}
 }
 @media (max-width:1180px){
@@ -1200,7 +1202,7 @@ table.data th{background:var(--sunken);font-weight:600}
             <span class="ru-storlek-värde" id="ruBildStorlekVärde">Original</span>
           </div>
           <div class="ru-storlek-rad">
-            <input id="ruBildStorlek" type="range" min="30" max="100" step="5" value="100">
+            <input id="ruBildStorlek" type="range" min="10" max="180" step="5" value="100">
             <button class="knapp tyst liten" id="ruÅterStorlek" type="button">Återställ storlek</button>
           </div>
         </div>
@@ -1690,7 +1692,7 @@ function redigerbarTextTillHTML(text){
 
 function figurBreddUrHTML(figHTML){
   const m=figHTML.match(/style\s*=\s*["'][^"']*width\s*:\s*(\d+(?:\.\d+)?)%/i);
-  return m?Math.max(30,Math.min(100,Math.round(+m[1]/5)*5)):null;
+  return m?Math.max(10,Math.min(180,Math.round(+m[1]/5)*5)):null;
 }
 function sättFigurBreddHTML(figHTML,pct){
   if(!figHTML)return figHTML;
@@ -2030,24 +2032,52 @@ $('#slumpaAntal').addEventListener('keydown',e=>{ if(e.key==='Enter'){e.preventD
    Används på figurer vars storlek har ändrats i redigeraren. */
 function trimmaUtskriftsFigurer(root){
   if(!root)return;
+
+  // getBBox fungerar inte på innehåll under display:none.
+  // Gör därför utskriftsytan mätbar men helt osynlig utanför skärmen.
+  const cs=getComputedStyle(root);
+  const varDold=cs.display==='none';
+  const gammalStyle=root.getAttribute('style');
+
+  if(varDold){
+    root.style.cssText=[
+      'display:block',
+      'position:fixed',
+      'left:-100000px',
+      'top:0',
+      'width:180mm',
+      'visibility:hidden',
+      'pointer-events:none',
+      'background:#fff'
+    ].join(';');
+  }
+
   root.querySelectorAll('.fig[style*="width"] svg').forEach(svg=>{
     try{
-      // getBBox omfattar det faktiskt ritade innehållet, inklusive text.
       const b=svg.getBBox();
       if(!b||!isFinite(b.x)||!isFinite(b.y)||b.width<=0||b.height<=0)return;
 
-      // Lite säkerhetsmarginal så pilspetsar/strokes aldrig kapas.
-      const padX=Math.max(4,b.width*.025);
-      const padY=Math.max(4,b.height*.035);
-      svg.setAttribute('viewBox',
-        `${b.x-padX} ${b.y-padY} ${b.width+2*padX} ${b.height+2*padY}`);
+      // Liten marginal för strokes, pilspetsar och text.
+      const padX=Math.max(3,b.width*.018);
+      const padY=Math.max(3,b.height*.025);
+
+      svg.setAttribute(
+        'viewBox',
+        `${b.x-padX} ${b.y-padY} ${b.width+2*padX} ${b.height+2*padY}`
+      );
       svg.removeAttribute('width');
       svg.removeAttribute('height');
+      svg.setAttribute('preserveAspectRatio','xMinYMin meet');
       svg.style.width='100%';
       svg.style.height='auto';
       svg.style.display='block';
     }catch(_){}
   });
+
+  if(varDold){
+    if(gammalStyle===null)root.removeAttribute('style');
+    else root.setAttribute('style',gammalStyle);
+  }
 }
 
 /* ── export ── */
@@ -2079,10 +2109,31 @@ function bladHTML({facit}){
 $('#expPdf').addEventListener('click',()=>{
   const u=$('#utskrift');
   u.innerHTML=bladHTML({facit:$('#taMedFacit').checked});
-  // Låt SVG:erna komma in i DOM innan getBBox beräknas.
+
+  // Första frame: DOM + SVG läggs ut.
+  // Andra frame: trimma verklig geometri.
+  // Tredje frame: öppna utskriftsdialogen med färdig layout.
   requestAnimationFrame(()=>{
-    trimmaUtskriftsFigurer(u);
-    requestAnimationFrame(()=>window.print());
+    const gammal=u.getAttribute('style');
+    u.style.cssText=[
+      'display:block',
+      'position:fixed',
+      'left:-100000px',
+      'top:0',
+      'width:180mm',
+      'visibility:hidden',
+      'pointer-events:none',
+      'background:#fff'
+    ].join(';');
+
+    requestAnimationFrame(()=>{
+      trimmaUtskriftsFigurer(u);
+
+      if(gammal===null)u.removeAttribute('style');
+      else u.setAttribute('style',gammal);
+
+      requestAnimationFrame(()=>window.print());
+    });
   });
 });
 $('#expWord').addEventListener('click',()=>{
@@ -2116,7 +2167,7 @@ $('#expWord').addEventListener('click',()=>{
       table.data{border-collapse:collapse;font-size:10pt;margin:6pt 0}
       table.data th,table.data td{border:1px solid #999;padding:3pt 9pt;text-align:right}
       table.data th{background:#eee}
-      .fig img,.fig svg{max-width:450pt;max-height:300pt;width:auto;height:auto}
+      .fig img,.fig svg{max-width:100%;max-height:300pt;width:auto;height:auto}
       .fk{page-break-before:always;border-top:2px solid #000;padding-top:12pt}
       .fu{margin-bottom:11pt;font-size:10pt}
       .steg{margin:3pt 0 3pt 24pt}
