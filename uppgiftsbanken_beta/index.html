@@ -780,7 +780,7 @@ table.data th{background:var(--sunken);font-weight:600}
 .fig{margin:12px 0;max-width:520px}
 .fig.smal{max-width:380px}
 .fig.bred{max-width:620px}
-.fig svg{display:block;width:100%;height:auto}
+.fig svg{display:block;width:auto;max-width:100%;height:auto}
 .fig-axel{stroke:#2B2527;stroke-width:2}
 .fig-rutnat{stroke:#E4E3E6;stroke-width:1}
 .fig-kurva{fill:none;stroke:#B43123;stroke-width:2.4;stroke-linejoin:round}
@@ -858,7 +858,7 @@ table.data th{background:var(--sunken);font-weight:600}
 .kortred:hover{background:var(--sunken);color:var(--ed-dark)}
 .kortred svg{width:12px;height:12px}
 .bverktyg button.redigera:hover{background:var(--ed-tint);color:var(--ed-dark)}
-.fig img{display:block;max-width:100%;height:auto}
+.fig img{display:block;width:auto;max-width:100%;height:auto}
 
 @media(max-width:720px){
   .redigera-uppgift{padding:10px}
@@ -963,6 +963,21 @@ table.data th{background:var(--sunken);font-weight:600}
   #utskrift .fig[data-bildskala] svg,#utskrift .fig[data-bildskala] img{
     width:100%!important;max-width:none!important;height:auto!important;
   }
+}
+
+
+/* ── figurstorlek i uppgiftslistan ──
+   Vanliga SVG:er använder sina width/height-attribut från uppgiftsbanken.
+   Manuellt storleksändrade figurer styrs fortfarande av redigeringsreglaget. */
+.kroppen .fig:not([style*="width"]) svg{
+  width:auto;
+  max-width:100%;
+  height:auto;
+}
+.kroppen .fig:not([style*="width"]) img{
+  width:auto;
+  max-width:100%;
+  height:auto;
 }
 
 /* ── utskrift ── */
