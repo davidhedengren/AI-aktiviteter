@@ -1,4 +1,4 @@
-/* struktur2.js — Fysik 2 enligt bokens innehållsförteckning. */
+/* struktur2.js — Fysik 2  */
 
 window.OMR2 = {
  "1": {
@@ -40,6 +40,13 @@ window.OMR2 = {
   "stjarnornas_utveckling": "Stjärnornas utveckling",
   "kosmologi": "Kosmologi",
   "framtiden": "Framtiden"
+ },
+ "6": {
+  "tidsdilatation": "Tidsdilatation",
+  "langdkontraktion": "Längdkontraktion",
+  "tid_och_langd": "Tidsdilatation och längdkontraktion",
+  "massa_och_energi": "Massa och energi",
+  "relativistisk_energi": "Relativistisk rörelseenergi"
  }
 };
 
@@ -48,5 +55,6 @@ window.KAPNAMN2 = {
  "2": "Ljud och andra mekaniska vågor",
  "3": "Elektromagnetism",
  "4": "Vågor och partiklar",
- "5": "Astrofysik"
+ "5": "Astrofysik",
+ "6": "Relativitetsteori"
 };
