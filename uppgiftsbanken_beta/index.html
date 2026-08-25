@@ -1075,6 +1075,10 @@ table.data th{background:var(--sunken);font-weight:600}
 }
 
 </style>
+<!-- KaTeX för matematikrendering -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
 </head>
 <body>
 
@@ -1594,6 +1598,9 @@ function rita(){
       </div>
     </article>`).join('');
 
+  /* rendera KaTeX i uppgiftstexterna direkt */
+  renderKatex($('#lista'));
+
   $$('.kort').forEach(k=>{
     const växla=()=>vippa(k.dataset.id);
     k.addEventListener('click',e=>{ if(e.target.closest('.facitknapp,[data-red],[data-redigera]'))return; växla(); });
@@ -1613,6 +1620,7 @@ function rita(){
     const box=document.querySelector(`[data-fbox="${b.dataset.facit}"]`);
     const på=box.classList.toggle('öppen');
     b.textContent=på?'Dölj facit':'Visa facit';
+    if(på) renderKatex(box);
   }));
 }
 
@@ -2285,6 +2293,7 @@ $('#expWord').addEventListener('click',()=>{
       .fig[style*="width"] img,.fig[style*="width"] svg{max-width:none!important;width:100%!important;height:auto!important}
       .fig[data-bildskala]{display:block!important;width:min(var(--bildbredd,450pt),100%)!important;max-width:100%!important}
       .fig[data-bildskala] img,.fig[data-bildskala] svg{width:100%!important;max-width:none!important;height:auto!important}
+      .katex{font-size:1.05em}.katex-display{margin:.4em 0}
       .fk{page-break-before:always;border-top:2px solid #000;padding-top:12pt}
       .fu{margin-bottom:11pt;font-size:10pt}
       .steg{margin:3pt 0 3pt 24pt}
@@ -2298,6 +2307,20 @@ $('#expWord').addEventListener('click',()=>{
   document.body.appendChild(a); a.click();
   setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},400);
 });
+
+/* ── KaTeX: kör på alla öppna facit efter att listan ritats om ── */
+function renderKatex(root){
+  if(!window.renderMathInElement) return;
+  renderMathInElement(root||document.body,{
+    delimiters:[
+      {left:'\\[',right:'\\]',display:true},
+      {left:'\\(',right:'\\)',display:false}
+    ],
+    throwOnError:false
+  });
+}
+/* Kör när KaTeX-scriptet är laddat (defer, så det händer efter DOMContentLoaded) */
+window.addEventListener('load',()=>{ if(window.renderMathInElement) renderKatex(); });
 
 /* ── igång ── */
 $('#bDatum').value=new Date().toLocaleDateString('sv-SE');
