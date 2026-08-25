@@ -2117,21 +2117,43 @@ function körSlumpa(){
   const pool=urval(), fam=new Set(), ut=[];
   const n=Math.max(1,Math.min(40,parseInt($('#slumpaAntal').value,10)||12));
   $('#slumpaAntal').value=n;
-  const vikt={E:5,C:4,A:3}, viktSum=12;
+  const blanda=a=>{
+    const b=[...a];
+    for(let i=b.length-1;i>0;i--){
+      const j=Math.floor(Math.random()*(i+1));
+      [b[i],b[j]]=[b[j],b[i]];
+    }
+    return b;
+  };
+  const valda=['E','C','A'].filter(nv=>state.nivåer.has(nv));
+  const vikt={E:5,C:4,A:3};
+  const viktSum=valda.reduce((sum,nv)=>sum+vikt[nv],0);
   const mål={}, rest=[];
-  ['E','C','A'].forEach(k=>{
+  valda.forEach(k=>{
     const exakt=n*vikt[k]/viktSum;
     mål[k]=Math.floor(exakt);
     rest.push([k,exakt-mål[k]]);
   });
-  let kvar=n-(mål.E+mål.C+mål.A);
+  let kvar=n-valda.reduce((sum,nv)=>sum+mål[nv],0);
   rest.sort((a,b)=>b[1]-a[1]);
-  for(let i=0;i<kvar;i++) mål[rest[i%3][0]]++;
-  ['E','C','A'].forEach(nv=>{
-    const p=pool.filter(x=>x.niva===nv).sort(()=>Math.random()-.5);
+  for(let i=0;i<kvar;i++) mål[rest[i%rest.length][0]]++;
+  valda.forEach(nv=>{
+    const p=blanda(pool.filter(x=>x.niva===nv));
     let c=0;
-    for(const x of p){ if(c>=mål[nv])break; if(fam.has(x.familj))continue; fam.add(x.familj); ut.push(x); c++; }
+    for(const x of p){
+      if(c>=mål[nv]) break;
+      const familj=x.familj||x.id;
+      if(fam.has(familj)) continue;
+      fam.add(familj); ut.push(x); c++;
+    }
   });
+  /* Om någon nivå hade för få uppgifter fylls bladet från övriga valda nivåer. */
+  for(const x of blanda(pool)){
+    if(ut.length>=n) break;
+    const familj=x.familj||x.id;
+    if(fam.has(familj)) continue;
+    fam.add(familj); ut.push(x);
+  }
   state.blad=ut; rita(); ritaBlad();
   $('#slumppanel').classList.remove('öppen');
   $('#slumpaKnapp').setAttribute('aria-expanded','false');
