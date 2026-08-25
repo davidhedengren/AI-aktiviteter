@@ -2229,6 +2229,8 @@ function bladHTML({facit}){
 $('#expPdf').addEventListener('click',()=>{
   const u=$('#utskrift');
   u.innerHTML=bladHTML({facit:$('#taMedFacit').checked});
+  /* KaTeX måste renderas medan elementet är i DOM:en, innan geometrin mäts */
+  renderKatex(u);
 
   // Första frame: DOM + SVG läggs ut.
   // Andra frame: trimma verklig geometri.
@@ -2261,7 +2263,30 @@ $('#expWord').addEventListener('click',()=>{
   temp.style.cssText='position:fixed;left:-100000px;top:0;width:180mm;background:#fff';
   temp.innerHTML=bladHTML({facit:$('#taMedFacit').checked});
   document.body.appendChild(temp);
+  /* Rendera KaTeX medan temp-elementet är i DOM:en så att HTML-resultatet */
+  /* innehåller KaTeX-spans som fungerar utan externa resurser i Word        */
+  renderKatex(temp);
   trimmaUtskriftsFigurer(temp);
+  /* Word förstår inte KaTeX-CSS. Ersätt .katex-element med sin textrepresentation */
+  temp.querySelectorAll('.katex').forEach(el=>{
+    const ann=el.querySelector('annotation[encoding="application/x-tex"]');
+    if(ann){
+      /* Inline math */
+      const span=document.createElement('span');
+      span.style.fontStyle='italic';
+      span.textContent=ann.textContent;
+      el.replaceWith(span);
+    }
+  });
+  temp.querySelectorAll('.katex-display').forEach(el=>{
+    const ann=el.querySelector('annotation[encoding="application/x-tex"]');
+    if(ann){
+      const p=document.createElement('p');
+      p.style.cssText='text-align:center;font-style:italic;margin:6pt 0';
+      p.textContent=ann.textContent;
+      el.replaceWith(p);
+    }
+  });
   const kropp=temp.innerHTML;
   temp.remove();
   const doc=`<html xmlns:o="urn:schemas-microsoft-com:office:office"
