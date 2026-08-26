@@ -1035,7 +1035,13 @@ table.data th{background:var(--sunken);font-weight:600}
   #utskrift li{padding-left:20pt;position:relative;margin-bottom:3pt}
   #utskrift li::before{counter-increment:d;content:counter(d,lower-alpha) ")";position:absolute;left:0;font-family:var(--mono)}
   #utskrift .fk{page-break-before:always;border-top:2px solid #000;padding-top:14pt}
-  #utskrift .fu{margin-bottom:12pt;break-inside:avoid;font-family:var(--mono);font-size:9.5pt;line-height:1.7}
+  #utskrift .fk h1{break-after:avoid;page-break-after:avoid}
+  /* Facit får brytas över sidor. Med break-inside:avoid flyttades ett långt
+     facit i sin helhet till nästa sida och lämnade en nästan tom sida efter
+     rubriken. */
+  #utskrift .fu{margin-bottom:12pt;font-family:var(--mono);font-size:9.5pt;line-height:1.7}
+  #utskrift .fu .fig{break-inside:avoid;page-break-inside:avoid;max-width:90mm;margin:3pt 0}
+  #utskrift .fu .fig svg,#utskrift .fu .fig img{max-width:90mm;max-height:60mm;width:auto;height:auto}
   #utskrift .fu .steg{padding-left:0;margin:3pt 0}
   #utskrift .fu .stegnr{display:inline-block;min-width:15pt;font-weight:700;color:#B43123}
   #utskrift .fu .komm{padding-left:15pt;font-family:var(--las);font-size:9.5pt;color:#333}
@@ -2305,14 +2311,22 @@ function trimmaUtskriftsFigurer(root){
       const b=svg.getBBox();
       if(!b||!isFinite(b.x)||!isFinite(b.y)||b.width<=0||b.height<=0)return;
 
-      // Liten marginal för strokes, pilspetsar och text.
-      const padX=Math.max(3,b.width*.018);
-      const padY=Math.max(3,b.height*.025);
+      /* getBBox mäter bara geometrin och räknar varken in linjebredd,
+         pilspetsar eller textens överhäng. Marginalen måste därför vara
+         rejäl, annars kapas pilspetsar och etiketter i kanterna. */
+      const pad=Math.max(8,b.width*.04,b.height*.04);
 
-      svg.setAttribute(
-        'viewBox',
-        `${b.x-padX} ${b.y-padY} ${b.width+2*padX} ${b.height+2*padY}`
-      );
+      /* Krymp aldrig innanför figurens egen viewBox — den är redan satt
+         med korrekta marginaler när figuren ritades. */
+      const vb=(svg.getAttribute('viewBox')||'').split(/[\s,]+/).map(Number);
+      let x=b.x-pad, y=b.y-pad, w=b.width+2*pad, h=b.height+2*pad;
+      if(vb.length===4&&vb.every(isFinite)&&vb[2]>0&&vb[3]>0){
+        const x2=Math.max(x+w,vb[0]+vb[2]), y2=Math.max(y+h,vb[1]+vb[3]);
+        x=Math.min(x,vb[0]); y=Math.min(y,vb[1]);
+        w=x2-x; h=y2-y;
+      }
+
+      svg.setAttribute('viewBox',`${x} ${y} ${w} ${h}`);
       svg.removeAttribute('width');
       svg.removeAttribute('height');
       svg.setAttribute('preserveAspectRatio','xMinYMin meet');
