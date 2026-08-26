@@ -4512,3 +4512,15 @@ function markeraOmarkeradInlineMatematikF2V5(html) {
 for (const uppgift of window.BANK2) {
   uppgift.s = markeraOmarkeradInlineMatematikF2V5(uppgift.s);
 }
+
+// Skydda olikhetstecken i LaTeX innan facit sätts med innerHTML.
+// Då kan webbläsaren inte misstolka exempelvis "<m" som en HTML-tagg.
+function kodaOlikhetsteckenIMatematikF2V6(html) {
+  return html.replace(/\\\([\s\S]*?\\\)|\\\[[\s\S]*?\\\]/g, (matematik) =>
+    matematik.replace(/</g, "&lt;").replace(/>/g, "&gt;")
+  );
+}
+
+for (const uppgift of window.BANK2) {
+  uppgift.s = kodaOlikhetsteckenIMatematikF2V6(uppgift.s);
+}

@@ -14254,39 +14254,39 @@ function byggSituationsfigurV4(uppgiftId, krafter, aria) {
 }
 
 const FACIT_RITAKRAFTER_FIGURER_V4 = {
-  "4.132": byggSituationsfigurV4("4.132", [["N",180,80,180,35],["F_g",210,56,210,101,218,106]], "Bok på bord med normalkraft från kontaktytan och tyngdkraft från tyngdpunkten."),
-  "4.133": byggSituationsfigurV4("4.133", [["N",180,80,180,35],["F_g",210,56,210,101,218,106],["S",233,56,290,56],["f",170,80,113,80]], "Låda på golv med normalkraft, tyngdkraft, snörkraft och friktion vid sina angreppspunkter."),
+  "4.132": byggSituationsfigurV4("4.132", [["N",180,80,180,35],["F_g",195,56,195,101,203,106]], "Bok på bord med normalkraft från kontaktytan och tyngdkraft från tyngdpunkten."),
+  "4.133": byggSituationsfigurV4("4.133", [["N",180,80,180,35],["F_g",195,56,195,101,203,106],["S",233,56,290,56],["f",170,80,113,80]], "Låda på golv med normalkraft, tyngdkraft, snörkraft och friktion vid sina angreppspunkter."),
   "4.134": byggSituationsfigurV4("4.134", [["F_g",172,92,172,152],["N",170,110,147,60],["f",190,101,240,78]], "Låda på lutande plan med tyngdkraft från tyngdpunkten samt normal- och friktionskraft från kontaktytan."),
   "4.135": byggSituationsfigurV4("4.135", [["S",160,105,160,76],["F_g",160,128,160,157,168,154]], "Hängande lampa med snörkraft vid upphängningen och tyngdkraft från tyngdpunkten."),
   "4.136": byggSituationsfigurV4("4.136", [["N",153,196,153,116],["F_g",170,134,170,194]], "Person i hiss med en längre normalkraft från golvet och en kortare tyngdkraft från kroppens tyngdpunkt."),
   "4.137": byggSituationsfigurV4("4.137", [["F_g",170,52,170,120]], "Boll i kaströrelse med endast tyngdkraft riktad lodrätt nedåt."),
-  "4.139": byggSituationsfigurV4("4.139", [["N",108,120,108,82],["F_{g,k}",132,104,132,142],["S",156,96,226,96],["f",105,120,52,120],["S",316,180,316,158],["F_{g,v}",316,195,316,222,324,218]], "Kloss och hängande vikt i samma situation med samtliga krafter ritade vid respektive kropp."),
+  "4.139": byggSituationsfigurV4("4.139", [["N",108,120,108,82],["F_{g,k}",123,104,123,142],["S",156,96,226,96],["f",105,120,52,120],["S",316,180,316,158],["F_{g,v}",316,195,316,222,324,218]], "Kloss och hängande vikt i samma situation med samtliga krafter ritade vid respektive kropp."),
   "4.141": byggSituationsfigurV4("4.141", [["F_A",190,126,190,71],["F_g",190,110,190,165]], "Båt i vatten med lyftkraft från vattnet och tyngdkraft från båtens tyngdpunkt."),
   "4.142": byggSituationsfigurV4("4.142", [["F_g",145,76,145,145],["N",153,106,123,54],["f",175,94,220,68]], "Skidåkare på lutning med tyngdkraft, normalkraft och friktion ritade på hela situationen."),
   "4.143": byggSituationsfigurV4("4.143", [["S",160,97,185,31],["F_{mag}",178,115,235,115],["F_g",160,115,160,170]], "Järnkula vid magnet med spännkraften riktad längs snöret mot takfästet, magnetkraft åt höger och tyngdkraft nedåt."),
   "4.144": byggSituationsfigurV4("4.144", [["N",30,92,115,92],["F",95,118,10,118],["f",30,105,30,45],["F_g",62,105,62,165]], "Kloss mot vägg med handkraft, väggens normalkraft, friktion och tyngdkraft vid rätt angreppspunkter."),
-  "4.145": byggSituationsfigurV4("4.145", [["F_L",205,70,205,20],["F_g",220,92,220,142],["F_D",166,146,236,146],["F_{luft}",356,92,286,92]], "Flygplan med lyftkraft, tyngdkraft, dragkraft och luftmotstånd ritade på flygplanet."),
+  "4.145": byggSituationsfigurV4("4.145", [["F_L",205,70,205,20],["F_g",215,92,215,142],["F_D",166,146,236,146],["F_{luft}",356,92,286,92]], "Flygplan med lyftkraft, tyngdkraft, dragkraft och luftmotstånd ritade på flygplanet."),
   "4.146": byggSituationsfigurV4("4.146", [["F_E",190,100,190,52],["F_g",190,100,190,148]], "Positivt laddad boll med lika stora elektriska kraften uppåt och tyngdkraften nedåt."),
   "4.147": byggSituationsfigurV4("4.147", [["S_1",210,120,153,76],["S_2",220,120,271,69],["F_g",215,146,215,180,223,176]], "Lampa med två spännkrafter längs snörena och tyngdkraft nedåt."),
   "4.148": byggSituationsfigurV4("4.148", [["F_g",190,48,190,110]], "Uppåtrörlig boll med endast tyngdkraft riktad nedåt."),
-  "4.149": byggSituationsfigurV4("4.149", [["N",170,130,170,73],["F_g",205,104,205,161,213,168],["f",190,130,255,130]], "Låda på transportband med normalkraft, tyngdkraft och friktion åt höger."),
+  "4.149": byggSituationsfigurV4("4.149", [["N",170,130,170,73],["F_g",190,104,190,161,198,168],["f",190,130,255,130]], "Låda på transportband med normalkraft, tyngdkraft och friktion åt höger."),
   "4.150": byggSituationsfigurV4("4.150", [["F_g",190,60,190,125]], "Rymdskepp ovanför jorden med tyngdkraften riktad nedåt mot jordens centrum."),
-  "4.196": byggSituationsfigurV4("4.196", [["N",232,64,232,15],["F_g",250,42,250,91]], "Fågel på gren med normalkraft från grenen och tyngdkraft från fågelns tyngdpunkt."),
+  "4.196": byggSituationsfigurV4("4.196", [["N",232,64,232,15],["F_g",240,42,240,91]], "Fågel på gren med normalkraft från grenen och tyngdkraft från fågelns tyngdpunkt."),
   "4.197": byggSituationsfigurV4("4.197", [["F_f",220,110,220,65],["F_g",220,132,220,177,228,183]], "Kloss i fjäder med lika stora fjäderkraften uppåt och tyngdkraften nedåt."),
-  "4.198": byggSituationsfigurV4("4.198", [["N_{bok}",215,118,215,68],["F_g",240,96,240,146]], "Övre bok med normalkraft från den undre boken och tyngdkraft från tyngdpunkten."),
-  "4.199": byggSituationsfigurV4("4.199", [["N",215,160,215,105],["F_g",245,112,245,167],["F_{driv}",180,160,270,160],["F_{mot}",340,112,250,112]], "Bil i konstant fart med normal- och tyngdkraft samt lika stora driv- och motståndskrafter."),
+  "4.198": byggSituationsfigurV4("4.198", [["N_{bok}",215,118,215,68],["F_g",230,96,230,146]], "Övre bok med normalkraft från den undre boken och tyngdkraft från tyngdpunkten."),
+  "4.199": byggSituationsfigurV4("4.199", [["N",215,160,215,105],["F_g",240,112,240,167],["F_{driv}",180,160,270,160],["F_{mot}",340,112,250,112]], "Bil i konstant fart med normal- och tyngdkraft samt lika stora driv- och motståndskrafter."),
   "4.200": byggSituationsfigurV4("4.200", [["F_{luft}",250,40,250,5],["F_g",250,152,250,187]], "Fallskärmshoppare med lika stora luftmotståndet uppåt och tyngdkraften nedåt."),
   "4.221": byggSituationsfigurV4("4.221", [["S",220,96,220,51],["F_g",220,126,220,171]], "Hink som dras med konstant fart med lika långa pilar för snörkraft och tyngdkraft."),
   "4.222": byggSituationsfigurV4("4.222", [["N",190,137,190,82],["F_g",200,112,200,167,208,163]], "Rullande boll med normalkraft från kontakten mot marken och tyngdkraft från bollens centrum."),
   "4.223": byggSituationsfigurV4("4.223", [["S_1",210,92,160,26],["S_2",270,92,320,26],["F_g",240,123,240,185,248,181]], "Tavla med två spännkrafter längs snörena och tyngdkraft från tyngdpunkten."),
   "4.257": byggSituationsfigurV4("4.257", [["N",170,145,170,102],["F_g",190,120,190,170,198,166],["S",240,100,300,66],["f",165,145,105,145]], "Låda som dras med snett snöre med krafterna ritade från kontakt-, fäst- och tyngdpunkter."),
-  "4.258": byggSituationsfigurV4("4.258", [["F_g",167,69,167,139],["N",170,89,147,39],["f",180,84,230,61]], "Kloss på lutande plan med tyngdkraft, normalkraft och statisk friktion vid rätt angreppspunkter."),
+  "4.258": byggSituationsfigurV4("4.258", [["F_g",166.75,68.83,166.75,139],["N",170,89,147,39],["f",180,84,230,61]], "Kloss på lutande plan med tyngdkraft, normalkraft och statisk friktion vid rätt angreppspunkter."),
   "4.259": byggSituationsfigurV4("4.259", [["N",280,172,280,118],["F_g",300,106,300,160],["F_{vägg}",396,92,340,92],["f",324,172,380,172]], "Person som trycker mot en vägg med krafter från golv, vägg och jord vid rätt angreppspunkter."),
   "4.260": byggSituationsfigurV4("4.260", [["N_{golv}",190,152,190,77],["F_{g,undre}",220,126,220,179,228,175],["N_{övre}",250,97,250,119,258,115]], "Undre låda med golvets normalkraft, egen tyngdkraft och den övre lådans kontaktkraft."),
   "4.261": byggSituationsfigurV4("4.261", [["N",190,165,190,112],["F_g",227,118,227,171,235,167],["f",168,165,100,165],["F_{luft}",322,110,270,110]], "Bromsande bil med normalkraft och tyngdkraft samt två bakåtriktade bromsande krafter."),
   "4.262": byggSituationsfigurV4("4.262", [["F_A",288,66,288,8],["F_g",288,66,288,110],["S",288,120,230,146],["F_{vind}",252,66,340,66]], "Förankrad ballong med lyftkraft, tyngdkraft, snörkraft och vindkraft vid rätt angreppspunkter."),
   "4.263": byggSituationsfigurV4("4.263", [["N",140,88,225,88],["F_{hand}",202,110,117,110],["f",140,99,140,40],["F_g",171,99,171,158]], "Kloss som trycks mot vägg med väggens normalkraft, handkraft, friktion och tyngdkraft."),
-  "4.264": byggSituationsfigurV4("4.264", [["N",162,120,162,65],["F_g",190,97,190,152],["f_s",190,120,250,120]], "Låda på accelererande lastbil med normal- och tyngdkraft samt statisk friktion framåt."),
+  "4.264": byggSituationsfigurV4("4.264", [["N",162,120,162,65],["F_g",178,97,178,152],["f_s",190,120,250,120]], "Låda på accelererande lastbil med normal- och tyngdkraft samt statisk friktion framåt."),
   "4.265": byggSituationsfigurV4("4.265", [["S_1",300,126,255,62],["S_2",325,142,385,142],["F_g",300,148,300,195,308,191]], "Blomkruka med två spännkrafter längs snörena och tyngdkraft från tyngdpunkten."),
   "4.266": byggSituationsfigurV4("4.266", [["F_g",265,114,265,184],["N_g",152,186,152,116],["f_g",152,186,227,186],["N_v",382,48,307,48]], "Stege mot vägg med tyngdkraft i mitten, golvets krafter vid foten och väggens normalkraft vid toppen.")
 };
@@ -18294,4 +18294,17 @@ function markeraOmarkeradInlineMatematikF1V5(html) {
 
 for (const uppgift of window.BANK) {
   uppgift.s = markeraOmarkeradInlineMatematikF1V5(uppgift.s);
+}
+
+// Olikhetstecken i LaTeX måste vara HTML-kodade innan facit sätts med
+// innerHTML. Annars kan webbläsaren tolka exempelvis "<m" som en HTML-tagg
+// och lämna en avhuggen, synlig LaTeX-sträng i facit.
+function kodaOlikhetsteckenIMatematikF1V6(html) {
+  return html.replace(/\\\([\s\S]*?\\\)|\\\[[\s\S]*?\\\]/g, (matematik) =>
+    matematik.replace(/</g, "&lt;").replace(/>/g, "&gt;")
+  );
+}
+
+for (const uppgift of window.BANK) {
+  uppgift.s = kodaOlikhetsteckenIMatematikF1V6(uppgift.s);
 }
