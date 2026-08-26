@@ -822,6 +822,22 @@ table.data th{background:var(--sunken);font-weight:600}
 .ru-stäng svg{width:17px;height:17px}
 .ru-body{padding:20px;overflow:auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);gap:20px;align-items:start}
 .ru-vänster{display:flex;flex-direction:column;gap:18px;min-width:0}
+/* Facit ligger hopfällt så att man inte råkar ändra det av misstag. */
+.ru-facit-fäll{border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.ru-facit-topp{
+  display:flex;align-items:center;gap:9px;padding:11px 13px;cursor:pointer;
+  font-size:11.5px;font-weight:700;color:var(--ink-2);list-style:none;user-select:none;
+  border-radius:12px
+}
+.ru-facit-topp::-webkit-details-marker{display:none}
+.ru-facit-topp:hover{background:var(--canvas)}
+.ru-facit-pil{width:13px;height:13px;flex:none;color:var(--muted);transition:transform .18s}
+.ru-facit-fäll[open] .ru-facit-pil{transform:rotate(90deg)}
+.ru-facit-fäll[open] .ru-facit-topp{border-bottom:1px solid var(--line-2);border-radius:12px 12px 0 0}
+.ru-facit-status{margin-left:auto;font-size:10.5px;font-weight:400;color:var(--muted)}
+.ru-facit-kropp{padding:12px 13px 13px}
+.ru-facit-fäll:focus-within .ru-facit-topp{outline:none}
+.ru-facit-topp:focus-visible{outline:2px solid var(--ed);outline-offset:-2px}
 .ru-sektion{min-width:0}
 .ru-label{
   display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px;
@@ -867,6 +883,7 @@ table.data th{background:var(--sunken);font-weight:600}
   .ru-body{grid-template-columns:1fr;padding:16px}
   .ru-vänster{gap:14px}
   .ru-bildbox{min-height:160px;max-height:220px}
+  .ru-facit-topp{padding:13px;min-height:44px}
   .ru-text{min-height:180px}
   #ruFacit{min-height:130px!important}
 }
@@ -1019,9 +1036,9 @@ table.data th{background:var(--sunken);font-weight:600}
   #utskrift li::before{counter-increment:d;content:counter(d,lower-alpha) ")";position:absolute;left:0;font-family:var(--mono)}
   #utskrift .fk{page-break-before:always;border-top:2px solid #000;padding-top:14pt}
   #utskrift .fu{margin-bottom:12pt;break-inside:avoid;font-family:var(--mono);font-size:9.5pt;line-height:1.7}
-  #utskrift .fu .steg{padding-left:22pt;position:relative;margin:3pt 0}
-  #utskrift .fu .stegnr{position:absolute;left:2pt;font-weight:700;color:#B43123}
-  #utskrift .fu .komm{padding-left:22pt;font-family:var(--las);font-size:9.5pt;color:#333}
+  #utskrift .fu .steg{padding-left:0;margin:3pt 0}
+  #utskrift .fu .stegnr{display:inline-block;min-width:15pt;font-weight:700;color:#B43123}
+  #utskrift .fu .komm{padding-left:15pt;font-family:var(--las);font-size:9.5pt;color:#333}
   #utskrift table.data th{background:#eee}
   #utskrift .fig{max-width:120mm;margin:2pt 0 3pt}
   #utskrift .fig[style*="width"]{display:block!important;max-width:none!important}
@@ -1260,18 +1277,23 @@ table.data th{background:var(--sunken);font-weight:600}
         </div>
       </section>
 
-      <section class="ru-sektion">
-        <label class="ru-label" for="ruFacit">
+      <details class="ru-sektion ru-facit-fäll" id="ruFacitFäll">
+        <summary class="ru-facit-topp">
+          <svg class="ru-facit-pil" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
           <span>Facit</span>
-          <span class="ru-hjälp">Markera svar med **dubbla asterisker**</span>
-        </label>
-        <textarea class="ru-text" id="ruFacit" style="min-height:150px"></textarea>
-        <div class="ru-kopiera-rad">
-          <button class="knapp tyst liten" id="ruKopieraFacit" type="button">
-            Kopiera facit
-          </button>
+          <span class="ru-facit-status" id="ruFacitStatus"></span>
+        </summary>
+        <div class="ru-facit-kropp">
+          <p class="ru-hjälp" style="margin:0 0 8px">Markera svar med **dubbla asterisker**</p>
+          <textarea class="ru-text" id="ruFacit" style="min-height:150px"></textarea>
+          <div class="ru-kopiera-rad">
+            <button class="knapp tyst liten" id="ruKopieraFacit" type="button">
+              Kopiera facit
+            </button>
+          </div>
         </div>
-      </section>
+      </details>
       </div>
 
       <section class="ru-sektion">
@@ -1775,6 +1797,31 @@ function htmlTillRedigerbarText(html){
   d.querySelectorAll('p').forEach(p=>p.append('\n\n'));
   return d.textContent.replace(/\n{3,}/g,'\n\n').trim();
 }
+/* Facit konverteras separat: deluppgiftsbokstäver ska förbli vanliga
+   stycken, eftersom LOS() bygger sin numrering på <p>-taggar. En <ol>
+   här skulle göra att facit renderas olika före och efter redigering. */
+function facitTillText(html){
+  const d=document.createElement('div');
+  d.innerHTML=utanFigur(html||'');
+  d.querySelectorAll('br').forEach(br=>br.replaceWith('\n'));
+  d.querySelectorAll('strong').forEach(el=>el.replaceWith('**'+el.textContent+'**'));
+  d.querySelectorAll('li').forEach(li=>{
+    const p=li.parentElement;
+    const idx=[...p.children].indexOf(li);
+    li.insertAdjacentText('afterbegin',String.fromCharCode(97+idx)+') ');
+    li.append('\n');
+  });
+  d.querySelectorAll('p').forEach(p=>p.append('\n'));
+  return d.textContent.replace(/\n{3,}/g,'\n\n').trim();
+}
+function textTillFacitHTML(text){
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const bold=s=>esc(s).replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+  return text.replace(/\r/g,'').split('\n')
+    .map(r=>r.trim()).filter(Boolean)
+    .map(r=>'<p>'+bold(r)+'</p>').join('');
+}
+
 function redigerbarTextTillHTML(text){
   const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   /* Konvertera **text** till <strong> (görs efter esc för säkerhets skull) */
@@ -1896,7 +1943,13 @@ function öppnaUppgiftsredigering(x,frånBlad=false){
   urBildStorlekÄndrad=befStorlek.skala!==null;
   $('#ruId').textContent=x.id+' · '+(DB.omr[x.kap]?.[x.omr]||'');
   $('#ruText').value=htmlTillRedigerbarText(x.t);
-  $('#ruFacit').value=htmlTillRedigerbarText(x.s||'');
+  $('#ruFacit').value=facitTillText(x.s||'');
+  /* Facit börjar alltid hopfällt så att det inte ändras av misstag. */
+  $('#ruFacitFäll').open=false;
+  const facitRader=$('#ruFacit').value.split('\n').filter(r=>r.trim()).length;
+  $('#ruFacitStatus').textContent=facitRader
+    ? facitRader+(facitRader===1?' rad':' rader')
+    : 'tomt';
   $('#ruLäggTill').textContent=frånBlad?'Spara ändringar':'Lägg till i övningsbladet';
   $('#ruInfo').textContent=frånBlad?'Du redigerar kopian i övningsbladet.':'Originalet i uppgiftsbanken ändras inte.';
   ritaUrBild();
@@ -1911,11 +1964,12 @@ function stängUppgiftsredigering(){
   urBildBredd=100;urBildStorlekÄndrad=false;urBildBas=0;
   $('#ruFil').value='';
   $('#ruFacit').value='';
+  $('#ruFacitFäll').open=false;
 }
 function sparaUppgiftsredigering(){
   if(!urOriginal||!urKopia) return;
   const nyText=redigerbarTextTillHTML($('#ruText').value.trim());
-  const nyFacit=redigerbarTextTillHTML($('#ruFacit').value.trim());
+  const nyFacit=textTillFacitHTML($('#ruFacit').value.trim());
   const sparadBild=urBildHTML
     ?(urBildStorlekÄndrad?sättFigurBreddHTML(urBildHTML,urBildBredd,urBildBas||mätBildBas()):urBildHTML)
     :'';
@@ -2024,6 +2078,11 @@ async function kopieraFacit(){
   setTimeout(()=>$('#ruKopieraFacit').textContent='Kopiera facit',1200);
 }
 $('#ruKopieraFacit').addEventListener('click',kopieraFacit);
+/* Håll radräknaren i rubriken aktuell medan man skriver. */
+$('#ruFacit').addEventListener('input',()=>{
+  const n=$('#ruFacit').value.split('\n').filter(r=>r.trim()).length;
+  $('#ruFacitStatus').textContent=n?n+(n===1?' rad':' rader'):'tomt';
+});
 $('#ruKopieraBild').addEventListener('click',kopieraBild);
 $('#ruLaddaBild').addEventListener('click',()=>$('#ruFil').click());
 $('#ruFil').addEventListener('change',e=>laddaEgenBild(e.target.files?.[0]));
