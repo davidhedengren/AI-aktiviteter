@@ -2256,24 +2256,57 @@ document.addEventListener('click',e=>{
   }
 });
 function körSlumpa(){
-  const pool=urval(), fam=new Set(), ut=[];
+  const pool=urval();
   const n=Math.max(1,Math.min(40,parseInt($('#slumpaAntal').value,10)||12));
   $('#slumpaAntal').value=n;
-  const vikt={E:5,C:4,A:3}, viktSum=12;
-  const mål={}, rest=[];
-  ['E','C','A'].forEach(k=>{
-    const exakt=n*vikt[k]/viktSum;
-    mål[k]=Math.floor(exakt);
-    rest.push([k,exakt-mål[k]]);
-  });
-  let kvar=n-(mål.E+mål.C+mål.A);
-  rest.sort((a,b)=>b[1]-a[1]);
-  for(let i=0;i<kvar;i++) mål[rest[i%3][0]]++;
-  ['E','C','A'].forEach(nv=>{
-    const p=pool.filter(x=>x.niva===nv).sort(()=>Math.random()-.5);
-    let c=0;
-    for(const x of p){ if(c>=mål[nv])break; if(fam.has(x.familj))continue; fam.add(x.familj); ut.push(x); c++; }
-  });
+
+  /* Blanda forst och plocka bort uppgifter ur samma familj, sa att
+     kandidatlistorna redan ar avdubblade nar kvoterna raknas ut. */
+  const blandad=pool.slice().sort(()=>Math.random()-.5);
+  const fam=new Set(), kand={E:[],C:[],A:[]};
+  for(const x of blandad){
+    if(fam.has(x.familj))continue;
+    fam.add(x.familj);
+    if(kand[x.niva]) kand[x.niva].push(x);
+  }
+
+  /* Fordela bara over de nivaer som faktiskt finns i urvalet. Har laren
+     filtrerat pa enbart E ska alla n uppgifter tas darifran. */
+  const vikt={E:5,C:4,A:3};
+  const nivaer=['E','C','A'].filter(k=>kand[k].length);
+  const ut=[];
+  if(nivaer.length){
+    const summa=nivaer.reduce((s,k)=>s+vikt[k],0);
+    const mal={}, rest=[];
+    nivaer.forEach(k=>{
+      const exakt=n*vikt[k]/summa;
+      mal[k]=Math.min(kand[k].length,Math.floor(exakt));
+      rest.push([k,exakt-Math.floor(exakt)]);
+    });
+    rest.sort((a,b)=>b[1]-a[1]);
+    /* Dela ut resterande platser, och hoppa over nivaer som tagit slut. */
+    let kvar=n-nivaer.reduce((s,k)=>s+mal[k],0);
+    let varv=0;
+    while(kvar>0&&varv<nivaer.length*40){
+      const k=rest[varv%rest.length][0];
+      if(mal[k]<kand[k].length){mal[k]++;kvar--;}
+      varv++;
+    }
+    nivaer.forEach(k=>ut.push(...kand[k].slice(0,mal[k])));
+
+    /* Ryck in uppgifter fran ovriga nivaer om nagon niva tog slut. */
+    if(ut.length<n){
+      const har=new Set(ut.map(x=>x.id));
+      for(const k of nivaer){
+        for(const x of kand[k]){
+          if(ut.length>=n)break;
+          if(!har.has(x.id)){ut.push(x);har.add(x.id);}
+        }
+        if(ut.length>=n)break;
+      }
+    }
+  }
+
   state.blad=ut; rita(); ritaBlad();
   $('#slumppanel').classList.remove('öppen');
   $('#slumpaKnapp').setAttribute('aria-expanded','false');
