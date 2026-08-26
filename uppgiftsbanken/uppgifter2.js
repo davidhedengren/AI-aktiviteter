@@ -4466,8 +4466,12 @@ function hogtalareInterferensF2V8(x, y, etikett) {
   return `<g transform="translate(${x} ${y})"><rect x="-18" y="-25" width="26" height="50" rx="3" fill="#EDEEF1" stroke="#2B2527" stroke-width="2"/><polygon points="8,-13 27,-23 27,23 8,13" fill="#fff" stroke="#2B2527" stroke-width="2"/><path d="M33,-14 Q47,0 33,14" fill="none" stroke="#2A5D9E" stroke-width="1.8"/><path d="M39,-21 Q60,0 39,21" fill="none" stroke="#2A5D9E" stroke-width="1.4"/><text x="0" y="42" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#2B2527">${etikett}</text></g>`;
 }
 
-function mikrofonInterferensF2V8(x, y, etikett) {
-  return `<g transform="translate(${x} ${y})"><circle cx="0" cy="0" r="8" fill="#fff" stroke="#B43123" stroke-width="2"/><line x1="0" y1="8" x2="0" y2="25" stroke="#2B2527" stroke-width="2"/><line x1="-10" y1="25" x2="10" y2="25" stroke="#2B2527" stroke-width="2"/><text x="0" y="42" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#B43123">${etikett}</text></g>`;
+function punktInterferensF2V8(x, y, etikett, dx = 12, dy = 4, ankare = "start") {
+  return `<circle cx="${x}" cy="${y}" r="5" fill="#B43123"/><text x="${x + dx}" y="${y + dy}" text-anchor="${ankare}" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#B43123">${etikett}</text>`;
+}
+
+function oraInterferensF2V8(x, y) {
+  return `<g transform="translate(${x} ${y})"><path d="M2,-17 C-15,-17 -17,1 -8,8 C-2,13 -6,19 2,19 C10,19 11,10 8,5 C5,1 12,-3 8,-9 C6,-13 1,-12 -1,-8" fill="#fff" stroke="#2B2527" stroke-width="2" stroke-linecap="round"/><path d="M-1,-7 C5,-8 7,-2 3,2 C0,5 0,9 3,11" fill="none" stroke="#9A959C" stroke-width="1.5" stroke-linecap="round"/><text x="0" y="38" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#2B2527">öra</text></g>`;
 }
 
 function figurInterferensF2V8(aria, inre, viewHojd = 220) {
@@ -4479,27 +4483,27 @@ function figurInterferensF2V8(aria, inre, viewHojd = 220) {
 const FIGUR_INTERFERENS_F2_V8 = {
   "2.152": figurInterferensF2V8(
     "Festivalområde med två högtalare och en lyssnare med två markerade ljudvägar.",
-    `<rect x="20" y="158" width="400" height="10" fill="#EDEEF1"/>${hogtalareInterferensF2V8(75,130,"S₁")}${hogtalareInterferensF2V8(75,55,"S₂")}${mikrofonInterferensF2V8(350,105,"P")}<line x1="102" y1="130" x2="342" y2="108" stroke="#B43123" stroke-width="2" stroke-dasharray="6 4"/><line x1="102" y1="55" x2="342" y2="102" stroke="#2A5D9E" stroke-width="2" stroke-dasharray="6 4"/><text x="225" y="133" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#B43123">6,4 m</text><text x="225" y="67" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#2A5D9E">7,2 m</text><text x="220" y="195" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5C575E">festivalområde</text>`
+    `<rect x="20" y="158" width="400" height="10" fill="#EDEEF1"/>${hogtalareInterferensF2V8(75,130,"S₁")}${hogtalareInterferensF2V8(75,55,"S₂")}${punktInterferensF2V8(350,105,"P")}<line x1="102" y1="130" x2="350" y2="105" stroke="#B43123" stroke-width="2" stroke-dasharray="6 4"/><line x1="102" y1="55" x2="350" y2="105" stroke="#2A5D9E" stroke-width="2" stroke-dasharray="6 4"/><text x="225" y="133" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#B43123">6,4 m</text><text x="225" y="67" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#2A5D9E">7,2 m</text><text x="220" y="195" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5C575E">festivalområde</text>`
   ),
   "2.153": figurInterferensF2V8(
     "Vågbassäng med två punktkällor och en mätpunkt.",
-    `<rect x="20" y="25" width="400" height="160" rx="8" fill="#DCE6F2" stroke="#2A5D9E" stroke-width="1.5"/><circle cx="85" cy="70" r="7" fill="#fff" stroke="#2B2527" stroke-width="2"/><circle cx="85" cy="145" r="7" fill="#fff" stroke="#2B2527" stroke-width="2"/><circle cx="345" cy="105" r="6" fill="#B43123"/><path d="M85 70 Q220 35 345 105" fill="none" stroke="#2A5D9E" stroke-width="2" stroke-dasharray="6 4"/><path d="M85 145 Q220 170 345 105" fill="none" stroke="#B43123" stroke-width="2" stroke-dasharray="6 4"/><text x="65" y="62" font-family="IBM Plex Mono" font-size="11" font-weight="600">K₁</text><text x="65" y="162" font-family="IBM Plex Mono" font-size="11" font-weight="600">K₂</text><text x="356" y="109" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#B43123">P</text><text x="210" y="54" font-family="IBM Plex Mono" font-size="11" fill="#2A5D9E">2,10 m</text><text x="210" y="164" font-family="IBM Plex Mono" font-size="11" fill="#B43123">2,55 m</text>`
+    `<rect x="20" y="25" width="400" height="160" rx="8" fill="#DCE6F2" stroke="#2A5D9E" stroke-width="1.5"/><circle cx="85" cy="70" r="7" fill="#fff" stroke="#2B2527" stroke-width="2"/><circle cx="85" cy="145" r="7" fill="#fff" stroke="#2B2527" stroke-width="2"/>${punktInterferensF2V8(345,105,"P")}<line x1="85" y1="70" x2="345" y2="105" stroke="#2A5D9E" stroke-width="2" stroke-dasharray="6 4"/><line x1="85" y1="145" x2="345" y2="105" stroke="#B43123" stroke-width="2" stroke-dasharray="6 4"/><text x="65" y="62" font-family="IBM Plex Mono" font-size="11" font-weight="600">K₁</text><text x="65" y="162" font-family="IBM Plex Mono" font-size="11" font-weight="600">K₂</text><text x="210" y="76" font-family="IBM Plex Mono" font-size="11" fill="#2A5D9E">2,10 m</text><text x="210" y="145" font-family="IBM Plex Mono" font-size="11" fill="#B43123">2,55 m</text>`
   ),
   "2.154": figurInterferensF2V8(
     "Principbild av aktiv bullerdämpning med huvudljud, motljud och en lyssnare.",
-    `<rect x="22" y="150" width="396" height="9" fill="#EDEEF1"/><g transform="translate(75 98)"><circle cx="0" cy="0" r="22" fill="#EDEEF1" stroke="#2B2527" stroke-width="2"/><path d="M-8,-8 Q0,-18 8,-8 M-8,8 Q0,18 8,8" fill="none" stroke="#2B2527" stroke-width="2"/><text x="0" y="39" text-anchor="middle" font-family="IBM Plex Mono" font-size="10">fläkt</text></g>${hogtalareInterferensF2V8(185,98,"motljud")}${mikrofonInterferensF2V8(360,98,"öra")}<path d="M100 90 Q135 65 160 90 T220 90 T280 90 T335 90" fill="none" stroke="#B43123" stroke-width="2.3"/><path d="M212 108 Q245 133 275 108 T335 108" fill="none" stroke="#2A5D9E" stroke-width="2.3"/><text x="255" y="52" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5C575E">180° fasförskjutning</text>`
+    `<rect x="22" y="150" width="396" height="9" fill="#EDEEF1"/><g transform="translate(75 98)"><circle cx="0" cy="0" r="22" fill="#EDEEF1" stroke="#2B2527" stroke-width="2"/><path d="M-8,-8 Q0,-18 8,-8 M-8,8 Q0,18 8,8" fill="none" stroke="#2B2527" stroke-width="2"/><text x="0" y="39" text-anchor="middle" font-family="IBM Plex Mono" font-size="10">fläkt</text></g>${hogtalareInterferensF2V8(185,98,"motljud")}${oraInterferensF2V8(360,98)}<path d="M100 90 Q135 65 160 90 T220 90 T280 90 T335 90" fill="none" stroke="#B43123" stroke-width="2.3"/><path d="M212 108 Q245 133 275 108 T335 108" fill="none" stroke="#2A5D9E" stroke-width="2.3"/>`
   ),
   "2.155": figurInterferensF2V8(
     "Laborationsbana där en mikrofon flyttas från ett maximum till närmaste minimum.",
-    `${hogtalareInterferensF2V8(55,90,"S₁")}${hogtalareInterferensF2V8(55,155,"S₂")}<line x1="115" y1="125" x2="390" y2="125" stroke="#9A959C" stroke-width="2"/><line x1="250" y1="115" x2="250" y2="135" stroke="#2B2527" stroke-width="1.5"/><line x1="335" y1="115" x2="335" y2="135" stroke="#2B2527" stroke-width="1.5"/>${mikrofonInterferensF2V8(250,95,"max")}${mikrofonInterferensF2V8(335,95,"min")}<line x1="250" y1="170" x2="335" y2="170" stroke="#5C575E" stroke-width="1.4"/><line x1="250" y1="164" x2="250" y2="176" stroke="#5C575E"/><line x1="335" y1="164" x2="335" y2="176" stroke="#5C575E"/><text x="292" y="190" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5C575E">Δ(Δr) = 8,5 cm</text>`
+    `${hogtalareInterferensF2V8(55,90,"S₁")}${hogtalareInterferensF2V8(55,155,"S₂")}<line x1="115" y1="125" x2="390" y2="125" stroke="#9A959C" stroke-width="2"/><line x1="250" y1="115" x2="250" y2="135" stroke="#2B2527" stroke-width="1.5"/><line x1="335" y1="115" x2="335" y2="135" stroke="#2B2527" stroke-width="1.5"/>${punktInterferensF2V8(250,125,"max",0,24,"middle")}${punktInterferensF2V8(335,125,"min",0,24,"middle")}<line x1="250" y1="170" x2="335" y2="170" stroke="#5C575E" stroke-width="1.4"/><line x1="250" y1="164" x2="250" y2="176" stroke="#5C575E"/><line x1="335" y1="164" x2="335" y2="176" stroke="#5C575E"/><text x="292" y="190" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5C575E">Δ(Δr) = 8,5 cm</text>`
   ),
   "2.156": figurInterferensF2V8(
     "Järnvägsplattform med två synkroniserade högtalare och en resenär.",
-    `<rect x="20" y="165" width="400" height="10" fill="#EDEEF1"/><line x1="20" y1="180" x2="420" y2="180" stroke="#2B2527" stroke-width="2"/>${hogtalareInterferensF2V8(70,115,"S₁")}${hogtalareInterferensF2V8(160,115,"S₂")}<g transform="translate(365 136)"><circle cx="0" cy="-25" r="10" fill="#fff" stroke="#2B2527" stroke-width="2"/><line x1="0" y1="-15" x2="0" y2="12" stroke="#2B2527" stroke-width="2"/><line x1="0" y1="-2" x2="-12" y2="8" stroke="#2B2527" stroke-width="2"/><line x1="0" y1="-2" x2="12" y2="8" stroke="#2B2527" stroke-width="2"/><text x="0" y="34" text-anchor="middle" font-family="IBM Plex Mono" font-size="11">P</text></g><path d="M97 115 Q230 70 355 111" fill="none" stroke="#2A5D9E" stroke-width="2" stroke-dasharray="6 4"/><path d="M187 115 Q270 135 355 111" fill="none" stroke="#B43123" stroke-width="2" stroke-dasharray="6 4"/><text x="238" y="69" font-family="IBM Plex Mono" font-size="11" fill="#2A5D9E">4,75 m</text><text x="265" y="145" font-family="IBM Plex Mono" font-size="11" fill="#B43123">4,00 m</text>`
+    `<rect x="20" y="165" width="400" height="10" fill="#EDEEF1"/><line x1="20" y1="180" x2="420" y2="180" stroke="#2B2527" stroke-width="2"/>${hogtalareInterferensF2V8(70,115,"S₁")}${hogtalareInterferensF2V8(160,115,"S₂")}${punktInterferensF2V8(365,111,"P")}<line x1="97" y1="115" x2="365" y2="111" stroke="#2A5D9E" stroke-width="2" stroke-dasharray="6 4"/><line x1="187" y1="115" x2="365" y2="111" stroke="#B43123" stroke-width="2" stroke-dasharray="6 4"/><text x="238" y="91" font-family="IBM Plex Mono" font-size="11" fill="#2A5D9E">4,75 m</text><text x="265" y="136" font-family="IBM Plex Mono" font-size="11" fill="#B43123">4,00 m</text>`
   ),
   "2.157": figurInterferensF2V8(
     "Teatersalong med två högtalare tre meter från varandra och en plats fyra meter framför den vänstra.",
-    `${hogtalareInterferensF2V8(75,165,"S₁")}${hogtalareInterferensF2V8(315,165,"S₂")}${mikrofonInterferensF2V8(75,55,"P")}<line x1="75" y1="78" x2="75" y2="140" stroke="#B43123" stroke-width="2"/><line x1="75" y1="55" x2="315" y2="165" stroke="#2A5D9E" stroke-width="2"/><line x1="75" y1="202" x2="315" y2="202" stroke="#5C575E"/><line x1="75" y1="196" x2="75" y2="208" stroke="#5C575E"/><line x1="315" y1="196" x2="315" y2="208" stroke="#5C575E"/><text x="195" y="218" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5C575E">3,0 m</text><text x="54" y="112" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#B43123" transform="rotate(-90 54 112)">4,0 m</text><text x="220" y="100" font-family="IBM Plex Mono" font-size="11" fill="#2A5D9E">r₂</text>`,
+    `${hogtalareInterferensF2V8(75,165,"S₁")}${hogtalareInterferensF2V8(315,165,"S₂")}${punktInterferensF2V8(75,55,"P")}<line x1="75" y1="55" x2="75" y2="140" stroke="#B43123" stroke-width="2"/><line x1="75" y1="55" x2="315" y2="165" stroke="#2A5D9E" stroke-width="2"/><line x1="75" y1="202" x2="315" y2="202" stroke="#5C575E"/><line x1="75" y1="196" x2="75" y2="208" stroke="#5C575E"/><line x1="315" y1="196" x2="315" y2="208" stroke="#5C575E"/><text x="195" y="218" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5C575E">3,0 m</text><text x="54" y="112" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#B43123" transform="rotate(-90 54 112)">4,0 m</text><text x="220" y="100" font-family="IBM Plex Mono" font-size="11" fill="#2A5D9E">r₂</text>`,
     235
   ),
   "2.158": figurInterferensF2V8(
@@ -4508,17 +4512,17 @@ const FIGUR_INTERFERENS_F2_V8 = {
   ),
   "2.159": figurInterferensF2V8(
     "Idrottsarena med två högtalare sex meter från varandra och en mätpunkt åtta meter framför den ena.",
-    `<path d="M20 190 Q220 150 420 190" fill="#E8EDF5" stroke="#2B2527" stroke-width="2"/>${hogtalareInterferensF2V8(80,165,"S₁")}${hogtalareInterferensF2V8(320,165,"S₂")}${mikrofonInterferensF2V8(80,45,"P")}<line x1="80" y1="70" x2="80" y2="140" stroke="#B43123" stroke-width="2"/><line x1="80" y1="45" x2="320" y2="165" stroke="#2A5D9E" stroke-width="2"/><text x="58" y="112" font-family="IBM Plex Mono" font-size="11" fill="#B43123">8,0 m</text><text x="202" y="116" font-family="IBM Plex Mono" font-size="11" fill="#2A5D9E">10,0 m</text><text x="200" y="213" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5C575E">6,0 m mellan högtalarna</text>`,
+    `<path d="M20 190 Q220 150 420 190" fill="#E8EDF5" stroke="#2B2527" stroke-width="2"/>${hogtalareInterferensF2V8(80,165,"S₁")}${hogtalareInterferensF2V8(320,165,"S₂")}${punktInterferensF2V8(80,45,"P")}<line x1="80" y1="45" x2="80" y2="140" stroke="#B43123" stroke-width="2"/><line x1="80" y1="45" x2="320" y2="165" stroke="#2A5D9E" stroke-width="2"/><text x="58" y="112" font-family="IBM Plex Mono" font-size="11" fill="#B43123">8,0 m</text><text x="202" y="116" font-family="IBM Plex Mono" font-size="11" fill="#2A5D9E">10,0 m</text><text x="200" y="213" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5C575E">6,0 m mellan högtalarna</text>`,
     230
   ),
   "2.160": figurInterferensF2V8(
     "Varningssystem med två sirener, en punkt på centrallinjen och en punkt i en 6–8–10-triangel.",
-    `<rect x="20" y="190" width="400" height="10" fill="#EDEEF1"/>${hogtalareInterferensF2V8(75,165,"S₁")}${hogtalareInterferensF2V8(315,165,"S₂")}${mikrofonInterferensF2V8(195,45,"Q")}${mikrofonInterferensF2V8(75,65,"P")}<line x1="75" y1="65" x2="75" y2="140" stroke="#B43123" stroke-width="2"/><line x1="75" y1="65" x2="315" y2="165" stroke="#2A5D9E" stroke-width="2"/><line x1="195" y1="70" x2="75" y2="165" stroke="#9A959C" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="195" y1="70" x2="315" y2="165" stroke="#9A959C" stroke-width="1.5" stroke-dasharray="5 4"/><text x="90" y="56" font-family="IBM Plex Mono" font-size="10" font-weight="600" fill="#B43123">2:a maximum</text><text x="210" y="42" font-family="IBM Plex Mono" font-size="10" font-weight="600" fill="#B43123">minimum</text><text x="47" y="125" font-family="IBM Plex Mono" font-size="11" fill="#B43123">8,0 m</text><text x="206" y="107" font-family="IBM Plex Mono" font-size="11" fill="#2A5D9E">10,0 m</text><text x="195" y="219" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5C575E">6,0 m</text>`,
+    `<rect x="20" y="190" width="400" height="10" fill="#EDEEF1"/>${hogtalareInterferensF2V8(75,165,"S₁")}${hogtalareInterferensF2V8(315,165,"S₂")}${punktInterferensF2V8(195,45,"Q",-12,-3,"end")}${punktInterferensF2V8(75,65,"P",-12,-3,"end")}<line x1="75" y1="65" x2="75" y2="140" stroke="#B43123" stroke-width="2"/><line x1="75" y1="65" x2="315" y2="165" stroke="#2A5D9E" stroke-width="2"/><line x1="195" y1="45" x2="75" y2="165" stroke="#9A959C" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="195" y1="45" x2="315" y2="165" stroke="#9A959C" stroke-width="1.5" stroke-dasharray="5 4"/><text x="90" y="56" font-family="IBM Plex Mono" font-size="10" font-weight="600" fill="#B43123">2:a maximum</text><text x="210" y="42" font-family="IBM Plex Mono" font-size="10" font-weight="600" fill="#B43123">minimum</text><text x="47" y="125" font-family="IBM Plex Mono" font-size="11" fill="#B43123">8,0 m</text><text x="206" y="107" font-family="IBM Plex Mono" font-size="11" fill="#2A5D9E">10,0 m</text><text x="195" y="219" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5C575E">6,0 m</text>`,
     235
   ),
   "2.161": figurInterferensF2V8(
     "Akustisk testkammare med två högtalare och två mätpunkter framför den vänstra högtalaren.",
-    `<rect x="18" y="18" width="404" height="202" rx="8" fill="#F7F7F8" stroke="#9A959C" stroke-width="1.5"/>${hogtalareInterferensF2V8(80,185,"S₁")}${hogtalareInterferensF2V8(320,185,"S₂")}${mikrofonInterferensF2V8(80,55,"P")}${mikrofonInterferensF2V8(80,112,"Q")}<line x1="80" y1="55" x2="80" y2="160" stroke="#B43123" stroke-width="2"/><line x1="80" y1="55" x2="320" y2="185" stroke="#2A5D9E" stroke-width="2"/><line x1="80" y1="112" x2="320" y2="185" stroke="#2A5D9E" stroke-width="1.6" stroke-dasharray="5 4"/><text x="98" y="52" font-family="IBM Plex Mono" font-size="10" font-weight="600" fill="#B43123">minimum</text><text x="98" y="109" font-family="IBM Plex Mono" font-size="10" font-weight="600" fill="#B43123">maximum</text><text x="42" y="82" font-family="IBM Plex Mono" font-size="10" fill="#B43123">2,25 m</text><text x="42" y="146" font-family="IBM Plex Mono" font-size="10" fill="#B43123">1,25 m</text><text x="207" y="102" font-family="IBM Plex Mono" font-size="10" fill="#2A5D9E">3,75 m</text><text x="216" y="158" font-family="IBM Plex Mono" font-size="10" fill="#2A5D9E">3,25 m</text><text x="200" y="214" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#5C575E">3,0 m</text>`,
+    `<rect x="18" y="18" width="404" height="202" rx="8" fill="#F7F7F8" stroke="#9A959C" stroke-width="1.5"/>${hogtalareInterferensF2V8(80,185,"S₁")}${hogtalareInterferensF2V8(320,185,"S₂")}${punktInterferensF2V8(80,55,"P",-12,-3,"end")}${punktInterferensF2V8(80,112,"Q",-12,-3,"end")}<line x1="80" y1="55" x2="80" y2="160" stroke="#B43123" stroke-width="2"/><line x1="80" y1="55" x2="320" y2="185" stroke="#2A5D9E" stroke-width="2"/><line x1="80" y1="112" x2="320" y2="185" stroke="#2A5D9E" stroke-width="1.6" stroke-dasharray="5 4"/><text x="98" y="52" font-family="IBM Plex Mono" font-size="10" font-weight="600" fill="#B43123">minimum</text><text x="98" y="109" font-family="IBM Plex Mono" font-size="10" font-weight="600" fill="#B43123">maximum</text><text x="42" y="82" font-family="IBM Plex Mono" font-size="10" fill="#B43123">2,25 m</text><text x="42" y="146" font-family="IBM Plex Mono" font-size="10" fill="#B43123">1,25 m</text><text x="207" y="102" font-family="IBM Plex Mono" font-size="10" fill="#2A5D9E">3,75 m</text><text x="216" y="158" font-family="IBM Plex Mono" font-size="10" fill="#2A5D9E">3,25 m</text><text x="200" y="214" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#5C575E">3,0 m</text>`,
     240
   )
 };
@@ -4556,13 +4560,13 @@ const NYA_INTERFERENS_F2_V8 = [
     ], String.raw`Våglängden är \(0{,}90\ \mathrm m\) och frekvensen \(0{,}60\ \mathrm{Hz}\).`)
   },
   {
-    id: "2.154", kap: 2, omr: "interferens", niva: "E", poang: "(2/0/0)",
+    id: "2.154", kap: 2, omr: "interferens", niva: "C", poang: "(2/2/0)",
     typ: "resonera om aktiv bullerdämpning med källor i motfas",
-    t: `<p>Ett system för aktiv bullerdämpning skapar ett motljud med samma frekvens och amplitud som fläktljudet, men i motfas. Ljudets våglängd är 0,60 m.</p>${FIGUR_INTERFERENS_F2_V8["2.154"]}<ol><li>Vad händer där de båda ljudvägarna är lika långa?</li><li>Vad händer om motljudets väg i stället blir 0,30 m längre?</li></ol>`,
+    t: `<p>Ett system för aktiv bullerdämpning skapar ett motljud med samma frekvens och amplitud som fläktljudet, men i motfas. Det betyder att när fläktljudet skickar ut en vågtopp skickar högtalaren samtidigt ut en vågdal, och tvärtom. Ljudets våglängd är 0,60 m.</p>${FIGUR_INTERFERENS_F2_V8["2.154"]}<ol><li>Vad händer där de båda ljudvägarna är lika långa?</li><li>Vad händer om motljudets väg i stället blir 0,30 m längre?</li></ol>`,
     s: byggFacitInterferensF2V8([
-      ["a", "Vid lika långa vägar är vägskillnaden noll. Källornas fasförskjutning på 180° finns då kvar vid lyssnaren.", String.raw`\[\Delta\phi=\pi\]`, "Ljuden släcker ut varandra om amplituderna är lika."],
-      ["b", "En extra halv våglängd ger ytterligare 180° fasförskjutning.", String.raw`\[\Delta r=0{,}30\ \mathrm m=\frac{\lambda}{2}\quad\Rightarrow\quad\Delta\phi_{\mathrm{tot}}=\pi+\pi=2\pi\]`, "Ljuden kommer då i fas och förstärker varandra."]
-    ], String.raw`Lika vägar ger minimum. En extra väg på \(0{,}30\ \mathrm m\) byter resultatet till maximum.`)
+      ["a", "När vägarna är lika långa kommer vågtoppen från det ena ljudet fram samtidigt som vågdalen från det andra.", "", "Om ljuden har lika stor amplitud tar de ut varandra. Lyssnaren befinner sig då i ett minimum."],
+      ["b", "Den extra vägen är en halv våglängd.", String.raw`\[\Delta r=0{,}30\ \mathrm m=\frac{\lambda}{2}\]`, "Under en halv våglängd byter en vågtopp plats med en vågdal. Motljudet vänds därför en gång till, så de båda ljuden kommer fram med vågtoppar och vågdalar samtidigt och förstärker varandra."]
+    ], String.raw`Lika långa vägar ger minimum. Om motljudets väg blir \(0{,}30\ \mathrm m\) längre blir det i stället maximum.`)
   },
   {
     id: "2.155", kap: 2, omr: "interferens", niva: "E", poang: "(2/0/0)",
@@ -4638,6 +4642,139 @@ const NYA_INTERFERENS_F2_V8 = [
 
 const BEFINTLIGA_ID_F2_V8 = new Set(window.BANK2.map((uppgift) => uppgift.id));
 for (const uppgift of NYA_INTERFERENS_F2_V8) {
+  if (BEFINTLIGA_ID_F2_V8.has(uppgift.id)) throw new Error(`ID ${uppgift.id} finns redan i Fysik 2-banken.`);
+  window.BANK2.push(uppgift);
+  BEFINTLIGA_ID_F2_V8.add(uppgift.id);
+}
+
+/* Fler geometriuppgifter enligt modellen i 2.150: två ljudkällor,
+   en parallell mätlinje och vägskillnad beräknad med Pythagoras sats. */
+function ljudkallaFramifranF2V9(x, y, etikett) {
+  return `<g transform="translate(${x} ${y})"><rect x="-17" y="-24" width="34" height="48" rx="3" fill="#EDEEF1" stroke="#2B2527" stroke-width="2"/><circle cx="0" cy="-7" r="8" fill="#C9CCD2" stroke="#2B2527" stroke-width="1.5"/><circle cx="0" cy="12" r="4" fill="#C9CCD2" stroke="#2B2527" stroke-width="1.3"/><text x="0" y="39" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#2B2527">${etikett}</text></g>`;
+}
+
+function figurMatlinjeInterferensF2V9({
+  aria, kallavstand, linjeavstand, forskjutning, forskjutningText,
+  plats, extraForskjutning = null, extraText = ""
+}) {
+  const mittX = 220;
+  const vansterX = 110;
+  const hogerX = 330;
+  const kallaY = 190;
+  const linjeY = 48;
+  const halv = kallavstand / 2;
+  const skala = 110 / halv;
+  const punktX = mittX + forskjutning * skala;
+  const extraX = extraForskjutning === null ? null : mittX + extraForskjutning * skala;
+  const forskjutningsEtikett = forskjutningText || `${String(forskjutning).replace(".", ",")} m`;
+  const extraPunkt = extraX === null ? "" :
+    `<circle cx="${extraX}" cy="${linjeY}" r="5" fill="#2A5D9E"/><text x="${extraX + 10}" y="${linjeY - 9}" font-family="IBM Plex Mono" font-size="11" font-weight="700" fill="#2A5D9E">Q</text><line x1="${mittX}" y1="20" x2="${extraX}" y2="20" stroke="#2A5D9E" stroke-width="1.2"/><line x1="${mittX}" y1="15" x2="${mittX}" y2="25" stroke="#2A5D9E" stroke-width="1.2"/><line x1="${extraX}" y1="15" x2="${extraX}" y2="25" stroke="#2A5D9E" stroke-width="1.2"/><text x="${(mittX + extraX) / 2}" y="13" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" font-weight="600" fill="#2A5D9E">${extraText}</text><line x1="${vansterX}" y1="${kallaY}" x2="${extraX}" y2="${linjeY}" stroke="#9A959C" stroke-width="1.2" stroke-dasharray="4 4"/><line x1="${hogerX}" y1="${kallaY}" x2="${extraX}" y2="${linjeY}" stroke="#9A959C" stroke-width="1.2" stroke-dasharray="4 4"/>`;
+  const visadHojd = Number((320 * 255 / 440).toFixed(2));
+  return `<span class="fig"><svg viewBox="0 0 440 255" width="320" height="${visadHojd}" style="max-width:100%;height:auto" preserveAspectRatio="xMinYMid meet" role="img" aria-label="${aria}" xmlns="http://www.w3.org/2000/svg"><title>${aria}</title><rect x="20" y="32" width="400" height="176" rx="8" fill="#FAFAFB" stroke="#D5D2D7" stroke-width="1.4"/><line x1="42" y1="${linjeY}" x2="408" y2="${linjeY}" stroke="#5C575E" stroke-width="1.7"/><text x="405" y="40" text-anchor="end" font-family="IBM Plex Mono" font-size="9.5" fill="#5C575E">mätlinje</text><line x1="${mittX}" y1="${linjeY}" x2="${mittX}" y2="${kallaY}" stroke="#9A959C" stroke-width="1.2" stroke-dasharray="5 5"/>${ljudkallaFramifranF2V9(vansterX,kallaY,"S₁")}${ljudkallaFramifranF2V9(hogerX,kallaY,"S₂")}<circle cx="${mittX}" cy="${linjeY}" r="5" fill="#2B2527"/><text x="${mittX - 10}" y="${linjeY - 9}" text-anchor="end" font-family="IBM Plex Mono" font-size="11" font-weight="700" fill="#2B2527">M</text><circle cx="${punktX}" cy="${linjeY}" r="5" fill="#B43123"/><text x="${punktX + 10}" y="${linjeY - 9}" font-family="IBM Plex Mono" font-size="11" font-weight="700" fill="#B43123">P</text><line x1="${vansterX}" y1="${kallaY}" x2="${punktX}" y2="${linjeY}" stroke="#B43123" stroke-width="1.8" stroke-dasharray="6 4"/><line x1="${hogerX}" y1="${kallaY}" x2="${punktX}" y2="${linjeY}" stroke="#2A5D9E" stroke-width="1.8" stroke-dasharray="6 4"/><text x="${(vansterX + punktX) / 2 - 10}" y="${(kallaY + linjeY) / 2 + 10}" font-family="IBM Plex Mono" font-size="10" font-weight="600" fill="#B43123">r₂</text><text x="${(hogerX + punktX) / 2 + 8}" y="${(kallaY + linjeY) / 2 - 8}" font-family="IBM Plex Mono" font-size="10" font-weight="600" fill="#2A5D9E">r₁</text><line x1="${mittX}" y1="72" x2="${punktX}" y2="72" stroke="#B43123" stroke-width="1.2"/><line x1="${mittX}" y1="67" x2="${mittX}" y2="77" stroke="#B43123" stroke-width="1.2"/><line x1="${punktX}" y1="67" x2="${punktX}" y2="77" stroke="#B43123" stroke-width="1.2"/><text x="${(mittX + punktX) / 2}" y="88" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" font-weight="600" fill="#B43123">${forskjutningsEtikett}</text><line x1="58" y1="${linjeY}" x2="58" y2="${kallaY}" stroke="#5C575E" stroke-width="1.2"/><line x1="53" y1="${linjeY}" x2="63" y2="${linjeY}" stroke="#5C575E" stroke-width="1.2"/><line x1="53" y1="${kallaY}" x2="63" y2="${kallaY}" stroke="#5C575E" stroke-width="1.2"/><text x="49" y="${(linjeY + kallaY) / 2}" text-anchor="end" font-family="IBM Plex Mono" font-size="10" font-weight="600" fill="#5C575E">${String(linjeavstand).replace(".", ",")} m</text><line x1="${vansterX}" y1="228" x2="${hogerX}" y2="228" stroke="#5C575E" stroke-width="1.2"/><line x1="${vansterX}" y1="223" x2="${vansterX}" y2="233" stroke="#5C575E" stroke-width="1.2"/><line x1="${hogerX}" y1="223" x2="${hogerX}" y2="233" stroke="#5C575E" stroke-width="1.2"/><text x="${mittX}" y="244" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" font-weight="600" fill="#5C575E">${String(kallavstand).replace(".", ",")} m · ${plats}</text>${extraPunkt}</svg></span>`;
+}
+
+const FIGUR_INTERFERENS_F2_V9 = {
+  "2.162": figurMatlinjeInterferensF2V9({aria:"Mätlinje i en aula framför två högtalare; punkten P ligger 0,50 meter från mittpunkten M.",kallavstand:3.0,linjeavstand:4.0,forskjutning:0.50,forskjutningText:"0,50 m",plats:"aula"}),
+  "2.163": figurMatlinjeInterferensF2V9({aria:"Mätlinje vid en utomhusbio framför två högtalare; punkten P ligger 1,0 meter från M.",kallavstand:4.0,linjeavstand:3.0,forskjutning:1.0,forskjutningText:"1,0 m",plats:"utomhusbio"}),
+  "2.164": figurMatlinjeInterferensF2V9({aria:"Mätlinje i en vågbassäng framför två vågkällor; punkten P ligger 0,50 meter från M.",kallavstand:3.0,linjeavstand:2.0,forskjutning:0.50,forskjutningText:"0,50 m",plats:"vågbassäng"}),
+  "2.165": figurMatlinjeInterferensF2V9({aria:"Mätlinje i en idrottshall framför två högtalare; punkten P ligger 0,75 meter från M.",kallavstand:2.0,linjeavstand:3.0,forskjutning:0.75,forskjutningText:"0,75 m",plats:"idrottshall"}),
+  "2.166": figurMatlinjeInterferensF2V9({aria:"Mätlinje i en färjeterminal framför två högtalare; punkten P ligger 1,0 meter från M.",kallavstand:5.0,linjeavstand:6.0,forskjutning:1.0,forskjutningText:"1,0 m",plats:"terminal"}),
+  "2.167": figurMatlinjeInterferensF2V9({aria:"Mätlinje i en konsertsal framför två högtalare; det första minimumet P ligger 0,80 meter från M.",kallavstand:2.4,linjeavstand:5.0,forskjutning:0.80,forskjutningText:"0,80 m",plats:"konsertsal"}),
+  "2.168": figurMatlinjeInterferensF2V9({aria:"Mätlinje framför två sirener; det första maximumet utanför M ligger 0,60 meter från M.",kallavstand:3.6,linjeavstand:4.8,forskjutning:0.60,forskjutningText:"0,60 m",plats:"varningsplats"}),
+  "2.169": figurMatlinjeInterferensF2V9({aria:"Mätlinje i en lagerhall framför två högtalare; punkten P ligger 1,5 meter från M.",kallavstand:4.0,linjeavstand:5.0,forskjutning:1.50,forskjutningText:"1,5 m",plats:"lagerhall"}),
+  "2.170": figurMatlinjeInterferensF2V9({aria:"Mätlinje i ett akustiklaboratorium; avståndet x från M till det första minimumet P ska bestämmas.",kallavstand:3.0,linjeavstand:4.0,forskjutning:1.0,forskjutningText:"x",plats:"akustiklab"}),
+  "2.171": figurMatlinjeInterferensF2V9({aria:"Mätlinje framför två scenhögtalare med ett första minimum i P och nästa maximum i Q.",kallavstand:3.2,linjeavstand:4.5,forskjutning:0.65,forskjutningText:"0,65 m",plats:"scen",extraForskjutning:1.33,extraText:"sökt avstånd"})
+};
+
+const NYA_INTERFERENS_F2_V9 = [
+  {
+    id:"2.162",kap:2,omr:"interferens",niva:"E",poang:"(2/0/0)",typ:"beräkna två ljudvägar med Pythagoras sats och avgöra minimum",
+    t:`<p>I en aula står två högtalare 3,0 m från varandra och spelar samma ton i fas. En mätlinje ligger 4,0 m framför högtalarna. Punkten P ligger 0,50 m från mittpunkten M. Våglängden är 0,70 m.</p>${FIGUR_INTERFERENS_F2_V9["2.162"]}<ol><li>Beräkna de båda ljudvägarna till P.</li><li>Avgör om P ligger i ett maximum eller minimum.</li></ol>`,
+    s:byggFacitInterferensF2V8([
+      ["a","De vågräta avstånden från P till högtalarna är 1,0 m och 2,0 m. Använd Pythagoras sats.",String.raw`\[r_1=\sqrt{4{,}0^2+1{,}0^2}=4{,}12\ \mathrm m\]\[r_2=\sqrt{4{,}0^2+2{,}0^2}=4{,}47\ \mathrm m\]`,""],
+      ["b","Beräkna vägskillnaden och jämför med våglängden.",String.raw`\[\Delta r=4{,}47-4{,}12=0{,}35\ \mathrm m=\frac{\lambda}{2}\]`,"En halv våglängds vägskillnad ger minimum när högtalarna spelar i fas."]
+    ],String.raw`Ljudvägarna är cirka \(4{,}12\ \mathrm m\) och \(4{,}47\ \mathrm m\). P ligger i ett minimum.`)
+  },
+  {
+    id:"2.163",kap:2,omr:"interferens",niva:"E",poang:"(2/0/0)",typ:"beräkna vägskillnad med Pythagoras sats och avgöra maximum",
+    t:`<p>Vid en utomhusbio står två högtalare 4,0 m från varandra och spelar i fas. Mätlinjen ligger 3,0 m framför dem och P ligger 1,0 m från M. Våglängden är 1,08 m.</p>${FIGUR_INTERFERENS_F2_V9["2.163"]}<p>Beräkna vägskillnaden och avgör om ljudet förstärks eller försvagas i P.</p>`,
+    s:byggFacitInterferensF2V8([
+      ["1","De vågräta avstånden är 1,0 m och 3,0 m.",String.raw`\[r_1=\sqrt{3{,}0^2+1{,}0^2}=3{,}16\ \mathrm m\]\[r_2=\sqrt{3{,}0^2+3{,}0^2}=4{,}24\ \mathrm m\]`,""],
+      ["2","Jämför vägskillnaden med våglängden.",String.raw`\[\Delta r=4{,}24-3{,}16=1{,}08\ \mathrm m=\lambda\]`,"En hel våglängds vägskillnad ger maximum."]
+    ],String.raw`Ljudet förstärks i P; punkten ligger i ett maximum.`)
+  },
+  {
+    id:"2.164",kap:2,omr:"interferens",niva:"E",poang:"(2/0/0)",typ:"beräkna vägskillnad för vattenvågor och avgöra minimum",
+    t:`<p>Två vågkällor i en vågbassäng står 3,0 m från varandra och svänger i fas. Mätlinjen ligger 2,0 m framför källorna och P ligger 0,50 m från M. Våglängden är 1,18 m.</p>${FIGUR_INTERFERENS_F2_V9["2.164"]}<p>Avgör om P ligger i ett maximum eller minimum.</p>`,
+    s:byggFacitInterferensF2V8([
+      ["1","Beräkna avstånden från källorna till P.",String.raw`\[r_1=\sqrt{2{,}0^2+1{,}0^2}=2{,}24\ \mathrm m\]\[r_2=\sqrt{2{,}0^2+2{,}0^2}=2{,}83\ \mathrm m\]`,""],
+      ["2","Vägskillnaden är ungefär en halv våglängd.",String.raw`\[\Delta r=2{,}83-2{,}24=0{,}59\ \mathrm m=\frac{\lambda}{2}\]`,""]
+    ],String.raw`P ligger i ett minimum.`)
+  },
+  {
+    id:"2.165",kap:2,omr:"interferens",niva:"E",poang:"(2/0/0)",typ:"avgöra interferensmaximum ur frekvens och geometrisk vägskillnad",
+    t:`<p>I en idrottshall står två högtalare 2,0 m från varandra och spelar i fas. Mätlinjen ligger 3,0 m framför dem och P ligger 0,75 m från M. Frekvensen är 735 Hz. Använd ljudhastigheten 340 m/s.</p>${FIGUR_INTERFERENS_F2_V9["2.165"]}<p>Är ljudet starkt eller svagt i P?</p>`,
+    s:byggFacitInterferensF2V8([
+      ["1","Beräkna ljudvägarna och deras skillnad.",String.raw`\[r_1=\sqrt{3{,}0^2+0{,}25^2}=3{,}010\ \mathrm m\]\[r_2=\sqrt{3{,}0^2+1{,}75^2}=3{,}473\ \mathrm m\]\[\Delta r=0{,}463\ \mathrm m\]`,""],
+      ["2","Beräkna våglängden.",String.raw`\[\lambda=\frac{340}{735}=0{,}463\ \mathrm m\]`,"Vägskillnaden är en hel våglängd, så ljuden förstärker varandra."]
+    ],String.raw`Ljudet är starkt i P; punkten ligger i ett maximum.`)
+  },
+  {
+    id:"2.166",kap:2,omr:"interferens",niva:"E",poang:"(2/0/0)",typ:"avgöra interferensminimum ur frekvens och geometri",
+    t:`<p>I en färjeterminal står två synkroniserade högtalare 5,0 m från varandra. Mätlinjen ligger 6,0 m framför dem och P ligger 1,0 m från M. Högtalarna spelar i fas med frekvensen 223 Hz. Använd ljudhastigheten 340 m/s.</p>${FIGUR_INTERFERENS_F2_V9["2.166"]}<p>Avgör om P ligger i ett maximum eller minimum.</p>`,
+    s:byggFacitInterferensF2V8([
+      ["1","Beräkna de två ljudvägarna.",String.raw`\[r_1=\sqrt{6{,}0^2+1{,}5^2}=6{,}185\ \mathrm m\]\[r_2=\sqrt{6{,}0^2+3{,}5^2}=6{,}946\ \mathrm m\]\[\Delta r=0{,}762\ \mathrm m\]`,""],
+      ["2","Våglängden är",String.raw`\[\lambda=\frac{340}{223}=1{,}52\ \mathrm m\quad\Rightarrow\quad\Delta r\approx\frac{\lambda}{2}\]`,""]
+    ],String.raw`P ligger i ett minimum.`)
+  },
+  {
+    id:"2.167",kap:2,omr:"interferens",niva:"C",poang:"(2/2/0)",typ:"bestämma frekvens ur första minimum och två geometriska ljudvägar",
+    t:`<p>I en konsertsal står två högtalare 2,4 m från varandra och spelar i fas. Mätlinjen ligger 5,0 m framför dem. Det första minimumet finns i P, 0,80 m från M. Använd ljudhastigheten 340 m/s.</p>${FIGUR_INTERFERENS_F2_V9["2.167"]}<p>Bestäm ljudets våglängd och frekvens.</p>`,
+    s:byggFacitInterferensF2V8([
+      ["1","De vågräta avstånden är 0,40 m och 2,00 m.",String.raw`\[r_1=\sqrt{5{,}0^2+0{,}40^2}=5{,}016\ \mathrm m\]\[r_2=\sqrt{5{,}0^2+2{,}00^2}=5{,}385\ \mathrm m\]`,""],
+      ["2","Beräkna vägskillnaden. Vid det första minimumet är den en halv våglängd.",String.raw`\[\Delta r=5{,}385-5{,}016=0{,}369\ \mathrm m\]\[\lambda=2\Delta r=0{,}738\ \mathrm m\]`,""],
+      ["3","Använd vågekvationen.",String.raw`\[f=\frac{340}{0{,}738}=461\ \mathrm{Hz}\]`,""]
+    ],String.raw`Våglängden är cirka \(0{,}74\ \mathrm m\) och frekvensen cirka \(460\ \mathrm{Hz}\).`)
+  },
+  {
+    id:"2.168",kap:2,omr:"interferens",niva:"C",poang:"(2/2/0)",typ:"bestämma frekvens ur första maximum utanför mittlinjen",
+    t:`<p>Två sirener står 3,6 m från varandra och sänder samma ton i fas. Mätlinjen ligger 4,8 m framför dem. I M är ljudet starkt. Det första maximumet utanför M finns i P, 0,60 m från M. Använd ljudhastigheten 340 m/s.</p>${FIGUR_INTERFERENS_F2_V9["2.168"]}<p>Bestäm tonens våglängd och frekvens.</p>`,
+    s:byggFacitInterferensF2V8([
+      ["1","De vågräta avstånden från P är 1,2 m och 2,4 m.",String.raw`\[r_1=\sqrt{4{,}8^2+1{,}2^2}=4{,}948\ \mathrm m\]\[r_2=\sqrt{4{,}8^2+2{,}4^2}=5{,}367\ \mathrm m\]`,""],
+      ["2","Det första maximumet utanför M uppstår när vägskillnaden är en våglängd.",String.raw`\[\lambda=\Delta r=5{,}367-4{,}948=0{,}419\ \mathrm m\]`,""],
+      ["3","Beräkna frekvensen.",String.raw`\[f=\frac{340}{0{,}419}=812\ \mathrm{Hz}\]`,""]
+    ],String.raw`Våglängden är cirka \(0{,}42\ \mathrm m\) och frekvensen cirka \(810\ \mathrm{Hz}\).`)
+  },
+  {
+    id:"2.169",kap:2,omr:"interferens",niva:"C",poang:"(2/2/0)",typ:"bestämma vilket interferensmaximum en punkt ligger i",
+    t:`<p>I en lagerhall står två högtalare 4,0 m från varandra och spelar i fas med frekvensen 630 Hz. Mätlinjen ligger 5,0 m framför högtalarna och P ligger 1,5 m från M. Använd ljudhastigheten 340 m/s.</p>${FIGUR_INTERFERENS_F2_V9["2.169"]}<p>Avgör om P ligger i ett maximum eller minimum. Ange också vilket maximum eller minimum det är räknat från M.</p>`,
+    s:byggFacitInterferensF2V8([
+      ["1","Beräkna ljudvägarna och vägskillnaden.",String.raw`\[r_1=\sqrt{5{,}0^2+0{,}5^2}=5{,}025\ \mathrm m\]\[r_2=\sqrt{5{,}0^2+3{,}5^2}=6{,}103\ \mathrm m\]\[\Delta r=1{,}078\ \mathrm m\]`,""],
+      ["2","Beräkna våglängden och jämför.",String.raw`\[\lambda=\frac{340}{630}=0{,}540\ \mathrm m\]\[\Delta r\approx2\lambda\]`,"Två hela våglängder ger maximum."]
+    ],String.raw`P ligger i det andra maximumet utanför M.`)
+  },
+  {
+    id:"2.170",kap:2,omr:"interferens",niva:"A",poang:"(2/2/2)",typ:"bestämma läget för första minimum ur frekvens och geometri",
+    t:`<p>I ett akustiklaboratorium står två högtalare 3,0 m från varandra och spelar i fas med frekvensen 248 Hz. En mätlinje ligger 4,0 m framför högtalarna. Punkten P är det första minimumet på ena sidan om M. Använd ljudhastigheten 340 m/s.</p>${FIGUR_INTERFERENS_F2_V9["2.170"]}<p>Bestäm avståndet x från M till P.</p>`,
+    s:byggFacitInterferensF2V8([
+      ["1","Beräkna våglängden. Vid det första minimumet ska vägskillnaden vara en halv våglängd.",String.raw`\[\lambda=\frac{340}{248}=1{,}371\ \mathrm m\]\[\Delta r=\frac{\lambda}{2}=0{,}6855\ \mathrm m\]`,""],
+      ["2","Om P ligger x meter från M är de vågräta avstånden till högtalarna 1,5−x och 1,5+x.",String.raw`\[\sqrt{4{,}0^2+(1{,}5+x)^2}-\sqrt{4{,}0^2+(1{,}5-x)^2}=0{,}6855\]`,""],
+      ["3","Pröva närliggande värden eller lös ekvationen med ett digitalt verktyg.",String.raw`\[x\approx1{,}00\ \mathrm m\]`,"Kontroll: vid x=1,00 m blir ljudvägarna 4,031 m och 4,717 m, vars skillnad är 0,686 m."]
+    ],String.raw`Det första minimumet ligger cirka \(1{,}00\ \mathrm m\) från M.`)
+  },
+  {
+    id:"2.171",kap:2,omr:"interferens",niva:"A",poang:"(2/2/2)",typ:"bestämma frekvens från första minimum och läget för nästa maximum",
+    t:`<p>Två scenhögtalare står 3,2 m från varandra och spelar i fas. Mätlinjen ligger 4,5 m framför dem. Det första minimumet finns i P, 0,65 m från M. Punkten Q är nästa maximum längre bort på samma sida. Använd ljudhastigheten 340 m/s.</p>${FIGUR_INTERFERENS_F2_V9["2.171"]}<ol><li>Bestäm ljudets frekvens.</li><li>Bestäm avståndet från M till Q.</li></ol>`,
+    s:byggFacitInterferensF2V8([
+      ["a","Beräkna ljudvägarna till P. De vågräta avstånden är 0,95 m och 2,25 m.",String.raw`\[r_1=\sqrt{4{,}5^2+0{,}95^2}=4{,}599\ \mathrm m\]\[r_2=\sqrt{4{,}5^2+2{,}25^2}=5{,}031\ \mathrm m\]\[\Delta r_P=0{,}432\ \mathrm m\]`,""],
+      ["b","P är det första minimumet, så vägskillnaden är en halv våglängd.",String.raw`\[\lambda=2\Delta r_P=0{,}864\ \mathrm m\]\[f=\frac{340}{0{,}864}=394\ \mathrm{Hz}\]`,""],
+      ["c","Vid nästa maximum ska vägskillnaden vara en hel våglängd. Låt avståndet MQ vara x.",String.raw`\[\sqrt{4{,}5^2+(1{,}6+x)^2}-\sqrt{4{,}5^2+(1{,}6-x)^2}=0{,}864\]`,""],
+      ["d","Lös ekvationen genom att pröva värden eller med ett digitalt verktyg.",String.raw`\[x\approx1{,}33\ \mathrm m\]`,""]
+    ],String.raw`Frekvensen är cirka \(394\ \mathrm{Hz}\), och Q ligger cirka \(1{,}33\ \mathrm m\) från M.`)
+  }
+];
+
+for (const uppgift of NYA_INTERFERENS_F2_V9) {
   if (BEFINTLIGA_ID_F2_V8.has(uppgift.id)) throw new Error(`ID ${uppgift.id} finns redan i Fysik 2-banken.`);
   window.BANK2.push(uppgift);
   BEFINTLIGA_ID_F2_V8.add(uppgift.id);
