@@ -1,4 +1,4 @@
-/* struktur2.js — kapitel och områden för Fysik 2. */
+/* struktur2.js — Fysik 2 */
 
 window.OMR2 = {
  "1": {
@@ -11,6 +11,7 @@ window.OMR2 = {
   "pendlar": "Pendlar",
   "vagrorelser": "Vågrörelser",
   "ljudvagor": "Ljudvågor",
+  "interferens": "Interferens",
   "ljud_horsel": "Ljud och hörsel",
   "extrema_frekvenser": "Ljud med extrema frekvenser",
   "vagor": "Vågor"
@@ -35,6 +36,7 @@ window.OMR2 = {
   "atomstruktur": "Atomens elektronstruktur"
  },
  "5": {
+  "avstandsmatning": "Avståndsmätning",
   "farg_ljusstyrka": "Färg och ljusstyrka",
   "exoplaneter": "Exoplaneter",
   "stjarnornas_utveckling": "Stjärnornas utveckling",
@@ -42,9 +44,11 @@ window.OMR2 = {
   "framtiden": "Framtiden"
  },
  "6": {
-  "postulat": "Relativitetsteorins grunder",
-  "tid_langd": "Tidsdilatation och längdkontraktion",
-  "massa_energi": "Massa, energi och rörelsemängd"
+  "tidsdilatation": "Tidsdilatation",
+  "langdkontraktion": "Längdkontraktion",
+  "tid_och_langd": "Tidsdilatation och längdkontraktion",
+  "massa_och_energi": "Massa och energi",
+  "relativistisk_energi": "Relativistisk rörelseenergi"
  }
 };
 

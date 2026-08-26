@@ -628,6 +628,14 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .nivåfilter button[aria-pressed="true"].E{background:var(--nE-bg);color:var(--nE);border-color:transparent}
 .nivåfilter button[aria-pressed="true"].C{background:var(--nC-bg);color:var(--nC);border-color:transparent}
 .nivåfilter button[aria-pressed="true"].A{background:var(--nA-bg);color:var(--nA);border-color:transparent}
+
+.ma-inriktning{margin:0 4px 18px}
+.ma-inriktning[hidden]{display:none!important}
+.ma-inriktning .variantfilter{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.ma-inriktning button{border:1px solid var(--line);background:var(--surface);border-radius:var(--r-s);
+  padding:8px 0;font-size:12.5px;font-weight:700;cursor:pointer;color:var(--muted);transition:.15s}
+.ma-inriktning button:hover{border-color:#D3D1D6;color:var(--ink)}
+.ma-inriktning button[aria-pressed="true"]{background:var(--ed-tint);color:var(--ed-dark);border-color:transparent}
 .kapgrupp{margin-bottom:4px}
 .kaprad{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;cursor:pointer;
   padding:7px 8px;border-radius:var(--r-s);text-align:left;font-weight:600;font-size:13.5px;color:var(--ink)}
@@ -822,6 +830,22 @@ table.data th{background:var(--sunken);font-weight:600}
 .ru-stäng svg{width:17px;height:17px}
 .ru-body{padding:20px;overflow:auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);gap:20px;align-items:start}
 .ru-vänster{display:flex;flex-direction:column;gap:18px;min-width:0}
+/* Facit ligger hopfällt så att man inte råkar ändra det av misstag. */
+.ru-facit-fäll{border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.ru-facit-topp{
+  display:flex;align-items:center;gap:9px;padding:11px 13px;cursor:pointer;
+  font-size:11.5px;font-weight:700;color:var(--ink-2);list-style:none;user-select:none;
+  border-radius:12px
+}
+.ru-facit-topp::-webkit-details-marker{display:none}
+.ru-facit-topp:hover{background:var(--canvas)}
+.ru-facit-pil{width:13px;height:13px;flex:none;color:var(--muted);transition:transform .18s}
+.ru-facit-fäll[open] .ru-facit-pil{transform:rotate(90deg)}
+.ru-facit-fäll[open] .ru-facit-topp{border-bottom:1px solid var(--line-2);border-radius:12px 12px 0 0}
+.ru-facit-status{margin-left:auto;font-size:10.5px;font-weight:400;color:var(--muted)}
+.ru-facit-kropp{padding:12px 13px 13px}
+.ru-facit-fäll:focus-within .ru-facit-topp{outline:none}
+.ru-facit-topp:focus-visible{outline:2px solid var(--ed);outline-offset:-2px}
 .ru-sektion{min-width:0}
 .ru-label{
   display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px;
@@ -836,11 +860,11 @@ table.data th{background:var(--sunken);font-weight:600}
 .ru-text:focus{outline:none;background:#fff;border-color:var(--ed);box-shadow:0 0 0 3.5px var(--ed-ring)}
 .ru-kopiera-rad{display:flex;justify-content:flex-end;margin-top:8px}
 .ru-bildbox{
-  min-height:220px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--canvas);
-  display:block;overflow:auto
+  min-height:220px;max-height:300px;padding:14px;border:1px solid var(--line);
+  border-radius:12px;background:var(--canvas);display:block;overflow:auto
 }
 .ru-bildbox .fig{display:block;margin:0 auto;max-width:100%;width:auto}
-.ru-bildbox .fig svg,.ru-bildbox .fig img{display:block;max-width:100%;max-height:260px;width:auto;height:auto;margin:0 auto}
+.ru-bildbox .fig svg,.ru-bildbox .fig img{display:block;max-width:100%;width:auto;height:auto;margin:0 auto}
 .ru-ingenbild{font-size:12px;color:var(--muted);text-align:center}
 .ru-bildverktyg{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
 .ru-bildverktyg .knapp{padding:7px 10px;font-size:11.5px}
@@ -866,6 +890,8 @@ table.data th{background:var(--sunken);font-weight:600}
   .ru-dialog{width:100%;max-height:calc(100vh - 20px)}
   .ru-body{grid-template-columns:1fr;padding:16px}
   .ru-vänster{gap:14px}
+  .ru-bildbox{min-height:160px;max-height:220px}
+  .ru-facit-topp{padding:13px;min-height:44px}
   .ru-text{min-height:180px}
   #ruFacit{min-height:130px!important}
 }
@@ -951,15 +977,16 @@ table.data th{background:var(--sunken);font-weight:600}
 .fig[data-bildskala] svg,.fig[data-bildskala] img{
   display:block!important;width:100%!important;max-width:none!important;height:auto!important;
 }
-/* I redigeraren visas bilden nedskalad så att den ryms i panelen. */
+/* I redigeraren visas bilden i sin valda skala; boxen scrollar vid behov. */
 .ru-bildbox .fig[data-bildskala]{
-  width:auto!important;
-  max-width:100%!important;
+  width:var(--bildbredd,520px)!important;
+  max-width:none!important;
+  margin:0 auto!important;
 }
 .ru-bildbox .fig[data-bildskala] svg,.ru-bildbox .fig[data-bildskala] img{
-  width:auto!important;
-  max-width:100%!important;
-  max-height:240px!important;
+  width:100%!important;
+  max-width:none!important;
+  max-height:none!important;
   height:auto!important;
 }
 @media print{
@@ -1016,10 +1043,16 @@ table.data th{background:var(--sunken);font-weight:600}
   #utskrift li{padding-left:20pt;position:relative;margin-bottom:3pt}
   #utskrift li::before{counter-increment:d;content:counter(d,lower-alpha) ")";position:absolute;left:0;font-family:var(--mono)}
   #utskrift .fk{page-break-before:always;border-top:2px solid #000;padding-top:14pt}
-  #utskrift .fu{margin-bottom:12pt;break-inside:avoid;font-family:var(--mono);font-size:9.5pt;line-height:1.7}
-  #utskrift .fu .steg{padding-left:22pt;position:relative;margin:3pt 0}
-  #utskrift .fu .stegnr{position:absolute;left:2pt;font-weight:700;color:#B43123}
-  #utskrift .fu .komm{padding-left:22pt;font-family:var(--las);font-size:9.5pt;color:#333}
+  #utskrift .fk h1{break-after:avoid;page-break-after:avoid}
+  /* Facit får brytas över sidor. Med break-inside:avoid flyttades ett långt
+     facit i sin helhet till nästa sida och lämnade en nästan tom sida efter
+     rubriken. */
+  #utskrift .fu{margin-bottom:12pt;font-family:var(--mono);font-size:9.5pt;line-height:1.7}
+  #utskrift .fu .fig{break-inside:avoid;page-break-inside:avoid;max-width:90mm;margin:3pt 0}
+  #utskrift .fu .fig svg,#utskrift .fu .fig img{max-width:90mm;max-height:60mm;width:auto;height:auto}
+  #utskrift .fu .steg{padding-left:0;margin:3pt 0}
+  #utskrift .fu .stegnr{display:inline-block;min-width:15pt;font-weight:700;color:#B43123}
+  #utskrift .fu .komm{padding-left:15pt;font-family:var(--las);font-size:9.5pt;color:#333}
   #utskrift table.data th{background:#eee}
   #utskrift .fig{max-width:120mm;margin:2pt 0 3pt}
   #utskrift .fig[style*="width"]{display:block!important;max-width:none!important}
@@ -1152,6 +1185,14 @@ table.data th{background:var(--sunken);font-weight:600}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input type="search" id="sökfält" placeholder="Sök i uppgifterna" autocomplete="off">
     </div>
+    <div class="ma-inriktning" id="maInriktning" hidden>
+      <p class="etikett" style="padding-left:4px">Inriktning</p>
+      <div class="variantfilter">
+        <button type="button" data-ma-kurs="1a" aria-pressed="false">1a</button>
+        <button type="button" data-ma-kurs="1b" aria-pressed="false">1b</button>
+        <button type="button" data-ma-kurs="1c" aria-pressed="true">1c</button>
+      </div>
+    </div>
     <p class="etikett">Nivå</p>
     <div class="nivåfilter">
       <button class="E" data-niva="E" aria-pressed="true">E</button>
@@ -1258,18 +1299,23 @@ table.data th{background:var(--sunken);font-weight:600}
         </div>
       </section>
 
-      <section class="ru-sektion">
-        <label class="ru-label" for="ruFacit">
+      <details class="ru-sektion ru-facit-fäll" id="ruFacitFäll">
+        <summary class="ru-facit-topp">
+          <svg class="ru-facit-pil" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
           <span>Facit</span>
-          <span class="ru-hjälp">Markera svar med **dubbla asterisker**</span>
-        </label>
-        <textarea class="ru-text" id="ruFacit" style="min-height:150px"></textarea>
-        <div class="ru-kopiera-rad">
-          <button class="knapp tyst liten" id="ruKopieraFacit" type="button">
-            Kopiera facit
-          </button>
+          <span class="ru-facit-status" id="ruFacitStatus"></span>
+        </summary>
+        <div class="ru-facit-kropp">
+          <p class="ru-hjälp" style="margin:0 0 8px">Markera svar med **dubbla asterisker**</p>
+          <textarea class="ru-text" id="ruFacit" style="min-height:150px"></textarea>
+          <div class="ru-kopiera-rad">
+            <button class="knapp tyst liten" id="ruKopieraFacit" type="button">
+              Kopiera facit
+            </button>
+          </div>
         </div>
-      </section>
+      </details>
       </div>
 
       <section class="ru-sektion">
@@ -1383,6 +1429,21 @@ const KURSER=[
     ],
     filer:['struktur2.js','uppgifter2.js'],
     globaler:{bank:'BANK2',kapnamn:'KAPNAMN2',omr:'OMR2'}
+  },
+  {
+    id:'ma1',
+    titel:'Matematik nivå 1',
+    siffra:'1',
+    taggar:[
+      '1a · 1b · 1c',
+      'Algebra och funktioner',
+      'Procent och förändringar',
+      'Geometri och vektorer',
+      'Sannolikhet och statistik',
+      'Problemlösning och modellering'
+    ],
+    filer:['strukturma1.js','uppgifterma1.js'],
+    globaler:{bank:'BANKMA1',kapnamn:'KAPNAMNMA1',omr:'OMRMA1'}
   }
 ];
 
@@ -1403,15 +1464,40 @@ let LOGO='logo.png';
 /* ═══ tillstånd ═══ */
 let AKTIV=null;                                   /* vald kurs */
 let DB={bank:[],kapnamn:{},omr:{}};               /* kursens data */
-const state={omr:new Set(),nivåer:new Set(['E','C','A']),sök:'',blad:[],visaPoäng:false,sorteraNivå:false};
+const state={omr:new Set(),nivåer:new Set(['E','C','A']),sök:'',blad:[],visaPoäng:false,sorteraNivå:false,maKurs:'1c'};
 const NIVÅORDNING={E:0,C:1,A:2};
 const nyckel=x=>x.kap+':'+x.omr;
+const ärMatematik=()=>AKTIV?.id==='ma1';
+function hörTillMaKurs(x,kurs=state.maKurs){
+  if(!ärMatematik()) return true;
+  if(!Array.isArray(x.kurs)||!x.kurs.length) return true;
+  return x.kurs.includes(kurs);
+}
+function variantBank(){ return DB.bank.filter(x=>hörTillMaKurs(x)); }
+function uppdateraMaRubriker(){
+  if(!AKTIV)return;
+  const n=variantBank().length;
+  $('#banktal').textContent=ärMatematik()
+    ? `${AKTIV.titel} · ${state.maKurs} · ${n} uppgifter`
+    : `${AKTIV.titel} · ${DB.bank.length} uppgifter`;
+  if(ärMatematik()) $('#bTitel').value=`Övningsblad Matematik nivå ${state.maKurs}`;
+}
 
 /* Strukturerar ett facit.
    Har uppgiften deluppgifter (a, b, c) används de bokstäverna som markörer.
    Annars numreras räknestegen 1, 2, 3. Rader utan beräkning blir förklaringar. */
+/* Listor plattas till stycken sa att facit renderas likadant oavsett om
+   det kommer fran banken (<ol><li>) eller fran redigeraren (<p>a) ...). */
+function plattaListor(html){
+  return html.replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gi,(hel,inner)=>{
+    let i=0;
+    return inner.replace(/<li[^>]*>([\s\S]*?)<\/li>/gi,(h,t)=>
+      '<p>'+String.fromCharCode(97+(i++))+') '+t.trim()+'</p>');
+  });
+}
 function LOS(html){
   if(!html) return '';
+  html=plattaListor(html);
   if(!/<p>/i.test(html)) return html;
   const bokstav=b=>/^\s*<?[a-z]?>?\s*([a-e])\)/.exec(b.replace(/<[^>]+>/g,'').trim());
   const bitar=[...html.matchAll(/<p>([\s\S]*?)<\/p>/g)].map(m=>m[1]);
@@ -1515,13 +1601,16 @@ function startaKurs(kurs){
   DB.bank.forEach(x=>{ if(!x.familj) x.familj=x.id.replace(/[a-z]$/,''); });
   state.omr.clear(); state.blad=[]; state.sök='';
   state.nivåer=new Set(['E','C','A']); state.sorteraNivå=false; state.visaPoäng=false;
+  if(kurs.id==='ma1') state.maKurs='1c';
+  $('#maInriktning').hidden=kurs.id!=='ma1';
+  $$('[data-ma-kurs]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.maKurs===state.maKurs));
   $('#sökfält').value=''; $('#visaPoäng').checked=false;
   $('#sorteraKnapp').setAttribute('aria-pressed','false');
   $('#sorteraLabel').textContent='Sortera: ID';
   $$('.nivåfilter button').forEach(b=>b.setAttribute('aria-pressed','true'));
   $('#slumpaAntal').value=12;
   $('#bTitel').value='Övningsblad '+kurs.titel;
-  $('#banktal').textContent=kurs.titel+' · '+DB.bank.length+' uppgifter';
+  uppdateraMaRubriker();
   byggTräd();
   $('#kursval').hidden=true;
   document.querySelector('.top').hidden=false;
@@ -1531,19 +1620,21 @@ function startaKurs(kurs){
 
 /* ── vänsterpanelen ── */
 function byggTräd(){
-  const kapitel=[...new Set(DB.bank.map(x=>x.kap))].sort((a,b)=>a-b);
+  const bas=variantBank();
+  const kapitel=[...new Set(bas.map(x=>x.kap))].sort((a,b)=>a-b);
   $('#träd').innerHTML=kapitel.map(k=>{
-    const omrs=[...new Set(DB.bank.filter(x=>x.kap===k).map(x=>x.omr))];
+    const kb=bas.filter(x=>x.kap===k);
+    const omrs=[...new Set(kb.map(x=>x.omr))];
     return `<div class="kapgrupp" data-kap="${k}">
       <button class="kaprad" data-fäll="${k}">
         <svg class="pil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-        <span class="nr">${k}</span><span>${DB.kapnamn[k]}</span>
-        <span class="antal">${DB.bank.filter(x=>x.kap===k).length}</span>
+        <span class="nr">${k}</span><span>${DB.kapnamn[k]||('Kapitel '+k)}</span>
+        <span class="antal">${kb.length}</span>
       </button>
       <div class="omrlista">${omrs.map(o=>`
-        <button class="omrad" data-omr="${k}:${o}" aria-pressed="false">
-          <span>${DB.omr[k][o]}</span>
-          <span class="antal">${DB.bank.filter(x=>x.kap===k&&x.omr===o).length}</span>
+        <button class="omrad" data-omr="${k}:${o}" aria-pressed="${state.omr.has(k+':'+o)}">
+          <span>${DB.omr[k]?.[o]||o}</span>
+          <span class="antal">${kb.filter(x=>x.omr===o).length}</span>
         </button>`).join('')}</div>
     </div>`;
   }).join('');
@@ -1558,6 +1649,16 @@ function byggTräd(){
 }
 
 /* ── statiska lyssnare ── */
+$$('[data-ma-kurs]').forEach(b=>b.addEventListener('click',()=>{
+  if(!ärMatematik()||b.dataset.maKurs===state.maKurs)return;
+  state.maKurs=b.dataset.maKurs;
+  state.omr.clear();
+  state.blad=state.blad.filter(x=>hörTillMaKurs(x));
+  $$('[data-ma-kurs]').forEach(k=>k.setAttribute('aria-pressed',k.dataset.maKurs===state.maKurs));
+  uppdateraMaRubriker();
+  byggTräd();
+  rita(); ritaBlad();
+}));
 $$('.nivåfilter button').forEach(b=>b.addEventListener('click',()=>{
   const n=b.dataset.niva;
   if(state.nivåer.has(n)&&state.nivåer.size>1) state.nivåer.delete(n); else state.nivåer.add(n);
@@ -1577,10 +1678,11 @@ $('#bytKurs').addEventListener('click',visaKursval);
 /* ── urvalet ── */
 function urval(){
   return DB.bank.filter(x=>{
+    if(!hörTillMaKurs(x)) return false;
     if(!state.nivåer.has(x.niva)) return false;
     if(state.omr.size && !state.omr.has(nyckel(x))) return false;
     if(state.sök){
-      const t=(x.t+' '+x.id+' '+DB.omr[x.kap][x.omr]).replace(/<[^>]+>/g,' ').toLowerCase();
+      const t=(x.t+' '+x.id+' '+(DB.omr[x.kap]?.[x.omr]||'')).replace(/<[^>]+>/g,' ').toLowerCase();
       if(!t.includes(state.sök)) return false;
     }
     return true;
@@ -1773,6 +1875,31 @@ function htmlTillRedigerbarText(html){
   d.querySelectorAll('p').forEach(p=>p.append('\n\n'));
   return d.textContent.replace(/\n{3,}/g,'\n\n').trim();
 }
+/* Facit konverteras separat: deluppgiftsbokstäver ska förbli vanliga
+   stycken, eftersom LOS() bygger sin numrering på <p>-taggar. En <ol>
+   här skulle göra att facit renderas olika före och efter redigering. */
+function facitTillText(html){
+  const d=document.createElement('div');
+  d.innerHTML=utanFigur(html||'');
+  d.querySelectorAll('br').forEach(br=>br.replaceWith('\n'));
+  d.querySelectorAll('strong').forEach(el=>el.replaceWith('**'+el.textContent+'**'));
+  d.querySelectorAll('li').forEach(li=>{
+    const p=li.parentElement;
+    const idx=[...p.children].indexOf(li);
+    li.insertAdjacentText('afterbegin',String.fromCharCode(97+idx)+') ');
+    li.append('\n');
+  });
+  d.querySelectorAll('p').forEach(p=>p.append('\n'));
+  return d.textContent.replace(/\n{3,}/g,'\n\n').trim();
+}
+function textTillFacitHTML(text){
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const bold=s=>esc(s).replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+  return text.replace(/\r/g,'').split('\n')
+    .map(r=>r.trim()).filter(Boolean)
+    .map(r=>'<p>'+bold(r)+'</p>').join('');
+}
+
 function redigerbarTextTillHTML(text){
   const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   /* Konvertera **text** till <strong> (görs efter esc för säkerhets skull) */
@@ -1859,17 +1986,17 @@ function ritaUrBild(){
     if(fig){
       const bas=urBildBas||mätBildBas();
       const px=Math.round(bas*(urBildBredd/100)*10)/10;
-      /* Skalan sparas som attribut, men förhandsvisningen hålls inom panelen
-         så att stora figurer inte tar över hela dialogen. */
+      /* Bilden visas i sin valda skala. Boxen har fast höjd och scrollar,
+         så stora figurer tar inte över dialogen. */
       fig.style.display='block';
-      fig.style.width='auto';
-      fig.style.maxWidth='100%';
+      fig.style.width=px+'px';
+      fig.style.maxWidth='none';
       fig.style.setProperty('--bildbredd',px+'px');
       fig.setAttribute('data-bildskala',String(urBildBredd));
       fig.setAttribute('data-bildbas',String(Math.round(bas*10)/10));
       const media=fig.querySelector('svg,img');
-      if(media){media.style.width='auto';media.style.maxWidth='100%';
-                media.style.maxHeight='240px';media.style.height='auto';}
+      if(media){media.style.width='100%';media.style.maxWidth='none';
+                media.style.maxHeight='none';media.style.height='auto';}
     }
   }
   $('#ruBildstatus').textContent=urBildHTML?'Bild finns':'Ingen bild';
@@ -1894,7 +2021,13 @@ function öppnaUppgiftsredigering(x,frånBlad=false){
   urBildStorlekÄndrad=befStorlek.skala!==null;
   $('#ruId').textContent=x.id+' · '+(DB.omr[x.kap]?.[x.omr]||'');
   $('#ruText').value=htmlTillRedigerbarText(x.t);
-  $('#ruFacit').value=htmlTillRedigerbarText(x.s||'');
+  $('#ruFacit').value=facitTillText(x.s||'');
+  /* Facit börjar alltid hopfällt så att det inte ändras av misstag. */
+  $('#ruFacitFäll').open=false;
+  const facitRader=$('#ruFacit').value.split('\n').filter(r=>r.trim()).length;
+  $('#ruFacitStatus').textContent=facitRader
+    ? facitRader+(facitRader===1?' rad':' rader')
+    : 'tomt';
   $('#ruLäggTill').textContent=frånBlad?'Spara ändringar':'Lägg till i övningsbladet';
   $('#ruInfo').textContent=frånBlad?'Du redigerar kopian i övningsbladet.':'Originalet i uppgiftsbanken ändras inte.';
   ritaUrBild();
@@ -1909,11 +2042,12 @@ function stängUppgiftsredigering(){
   urBildBredd=100;urBildStorlekÄndrad=false;urBildBas=0;
   $('#ruFil').value='';
   $('#ruFacit').value='';
+  $('#ruFacitFäll').open=false;
 }
 function sparaUppgiftsredigering(){
   if(!urOriginal||!urKopia) return;
   const nyText=redigerbarTextTillHTML($('#ruText').value.trim());
-  const nyFacit=redigerbarTextTillHTML($('#ruFacit').value.trim());
+  const nyFacit=textTillFacitHTML($('#ruFacit').value.trim());
   const sparadBild=urBildHTML
     ?(urBildStorlekÄndrad?sättFigurBreddHTML(urBildHTML,urBildBredd,urBildBas||mätBildBas()):urBildHTML)
     :'';
@@ -2022,6 +2156,11 @@ async function kopieraFacit(){
   setTimeout(()=>$('#ruKopieraFacit').textContent='Kopiera facit',1200);
 }
 $('#ruKopieraFacit').addEventListener('click',kopieraFacit);
+/* Håll radräknaren i rubriken aktuell medan man skriver. */
+$('#ruFacit').addEventListener('input',()=>{
+  const n=$('#ruFacit').value.split('\n').filter(r=>r.trim()).length;
+  $('#ruFacitStatus').textContent=n?n+(n===1?' rad':' rader'):'tomt';
+});
 $('#ruKopieraBild').addEventListener('click',kopieraBild);
 $('#ruLaddaBild').addEventListener('click',()=>$('#ruFil').click());
 $('#ruFil').addEventListener('change',e=>laddaEgenBild(e.target.files?.[0]));
@@ -2164,6 +2303,7 @@ $('#rensaAllt').addEventListener('click',()=>{
   $('#slumpaAntal').value=12;
   $$('.omrad').forEach(b=>b.setAttribute('aria-pressed','false'));
   $$('.nivåfilter button').forEach(b=>b.setAttribute('aria-pressed','true'));
+  byggTräd();
   rita(); ritaBlad();
 });
 $('#slumpaKnapp').addEventListener('click',e=>{
@@ -2179,24 +2319,57 @@ document.addEventListener('click',e=>{
   }
 });
 function körSlumpa(){
-  const pool=urval(), fam=new Set(), ut=[];
+  const pool=urval();
   const n=Math.max(1,Math.min(40,parseInt($('#slumpaAntal').value,10)||12));
   $('#slumpaAntal').value=n;
-  const vikt={E:5,C:4,A:3}, viktSum=12;
-  const mål={}, rest=[];
-  ['E','C','A'].forEach(k=>{
-    const exakt=n*vikt[k]/viktSum;
-    mål[k]=Math.floor(exakt);
-    rest.push([k,exakt-mål[k]]);
-  });
-  let kvar=n-(mål.E+mål.C+mål.A);
-  rest.sort((a,b)=>b[1]-a[1]);
-  for(let i=0;i<kvar;i++) mål[rest[i%3][0]]++;
-  ['E','C','A'].forEach(nv=>{
-    const p=pool.filter(x=>x.niva===nv).sort(()=>Math.random()-.5);
-    let c=0;
-    for(const x of p){ if(c>=mål[nv])break; if(fam.has(x.familj))continue; fam.add(x.familj); ut.push(x); c++; }
-  });
+
+  /* Blanda forst och plocka bort uppgifter ur samma familj, sa att
+     kandidatlistorna redan ar avdubblade nar kvoterna raknas ut. */
+  const blandad=pool.slice().sort(()=>Math.random()-.5);
+  const fam=new Set(), kand={E:[],C:[],A:[]};
+  for(const x of blandad){
+    if(fam.has(x.familj))continue;
+    fam.add(x.familj);
+    if(kand[x.niva]) kand[x.niva].push(x);
+  }
+
+  /* Fordela bara over de nivaer som faktiskt finns i urvalet. Har laren
+     filtrerat pa enbart E ska alla n uppgifter tas darifran. */
+  const vikt={E:5,C:4,A:3};
+  const nivaer=['E','C','A'].filter(k=>kand[k].length);
+  const ut=[];
+  if(nivaer.length){
+    const summa=nivaer.reduce((s,k)=>s+vikt[k],0);
+    const mal={}, rest=[];
+    nivaer.forEach(k=>{
+      const exakt=n*vikt[k]/summa;
+      mal[k]=Math.min(kand[k].length,Math.floor(exakt));
+      rest.push([k,exakt-Math.floor(exakt)]);
+    });
+    rest.sort((a,b)=>b[1]-a[1]);
+    /* Dela ut resterande platser, och hoppa over nivaer som tagit slut. */
+    let kvar=n-nivaer.reduce((s,k)=>s+mal[k],0);
+    let varv=0;
+    while(kvar>0&&varv<nivaer.length*40){
+      const k=rest[varv%rest.length][0];
+      if(mal[k]<kand[k].length){mal[k]++;kvar--;}
+      varv++;
+    }
+    nivaer.forEach(k=>ut.push(...kand[k].slice(0,mal[k])));
+
+    /* Ryck in uppgifter fran ovriga nivaer om nagon niva tog slut. */
+    if(ut.length<n){
+      const har=new Set(ut.map(x=>x.id));
+      for(const k of nivaer){
+        for(const x of kand[k]){
+          if(ut.length>=n)break;
+          if(!har.has(x.id)){ut.push(x);har.add(x.id);}
+        }
+        if(ut.length>=n)break;
+      }
+    }
+  }
+
   state.blad=ut; rita(); ritaBlad();
   $('#slumppanel').classList.remove('öppen');
   $('#slumpaKnapp').setAttribute('aria-expanded','false');
@@ -2234,14 +2407,22 @@ function trimmaUtskriftsFigurer(root){
       const b=svg.getBBox();
       if(!b||!isFinite(b.x)||!isFinite(b.y)||b.width<=0||b.height<=0)return;
 
-      // Liten marginal för strokes, pilspetsar och text.
-      const padX=Math.max(3,b.width*.018);
-      const padY=Math.max(3,b.height*.025);
+      /* getBBox mäter bara geometrin och räknar varken in linjebredd,
+         pilspetsar eller textens överhäng. Marginalen måste därför vara
+         rejäl, annars kapas pilspetsar och etiketter i kanterna. */
+      const pad=Math.max(8,b.width*.04,b.height*.04);
 
-      svg.setAttribute(
-        'viewBox',
-        `${b.x-padX} ${b.y-padY} ${b.width+2*padX} ${b.height+2*padY}`
-      );
+      /* Krymp aldrig innanför figurens egen viewBox — den är redan satt
+         med korrekta marginaler när figuren ritades. */
+      const vb=(svg.getAttribute('viewBox')||'').split(/[\s,]+/).map(Number);
+      let x=b.x-pad, y=b.y-pad, w=b.width+2*pad, h=b.height+2*pad;
+      if(vb.length===4&&vb.every(isFinite)&&vb[2]>0&&vb[3]>0){
+        const x2=Math.max(x+w,vb[0]+vb[2]), y2=Math.max(y+h,vb[1]+vb[3]);
+        x=Math.min(x,vb[0]); y=Math.min(y,vb[1]);
+        w=x2-x; h=y2-y;
+      }
+
+      svg.setAttribute('viewBox',`${x} ${y} ${w} ${h}`);
       svg.removeAttribute('width');
       svg.removeAttribute('height');
       svg.setAttribute('preserveAspectRatio','xMinYMin meet');
@@ -2264,7 +2445,8 @@ function bladHTML({facit}){
   const p={E:0,C:0,A:0}, antalN={E:0,C:0,A:0};
   state.blad.forEach(x=>{const m=x.poang.match(/(\d+)\/(\d+)\/(\d+)/);p.E+=+m[1];p.C+=+m[2];p.A+=+m[3];antalN[x.niva]++;});
   const tot=p.E+p.C+p.A;
-  const rad=[AKTIV?AKTIV.titel:'',kl,da].filter(Boolean).join(' · ');
+  const kursnamn=AKTIV?(ärMatematik()?`Matematik nivå ${state.maKurs}`:AKTIV.titel):'';
+  const rad=[kursnamn,kl,da].filter(Boolean).join(' · ');
   const sammanfattning=vp
     ? `Max ${tot} poäng (${p.E}/${p.C}/${p.A}) · ${state.blad.length} uppgifter`
     : `${state.blad.length} uppgifter (${antalN.E} E / ${antalN.C} C / ${antalN.A} A)`;
