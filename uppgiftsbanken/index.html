@@ -1434,8 +1434,18 @@ const nyckel=x=>x.kap+':'+x.omr;
 /* Strukturerar ett facit.
    Har uppgiften deluppgifter (a, b, c) används de bokstäverna som markörer.
    Annars numreras räknestegen 1, 2, 3. Rader utan beräkning blir förklaringar. */
+/* Listor plattas till stycken sa att facit renderas likadant oavsett om
+   det kommer fran banken (<ol><li>) eller fran redigeraren (<p>a) ...). */
+function plattaListor(html){
+  return html.replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gi,(hel,inner)=>{
+    let i=0;
+    return inner.replace(/<li[^>]*>([\s\S]*?)<\/li>/gi,(h,t)=>
+      '<p>'+String.fromCharCode(97+(i++))+') '+t.trim()+'</p>');
+  });
+}
 function LOS(html){
   if(!html) return '';
+  html=plattaListor(html);
   if(!/<p>/i.test(html)) return html;
   const bokstav=b=>/^\s*<?[a-z]?>?\s*([a-e])\)/.exec(b.replace(/<[^>]+>/g,'').trim());
   const bitar=[...html.matchAll(/<p>([\s\S]*?)<\/p>/g)].map(m=>m[1]);
