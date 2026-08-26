@@ -1411,19 +1411,22 @@ const nyckel=x=>x.kap+':'+x.omr;
    Har uppgiften deluppgifter (a, b, c) används de bokstäverna som markörer.
    Annars numreras räknestegen 1, 2, 3. Rader utan beräkning blir förklaringar. */
 function LOS(html){
-  const bitar=[...html.matchAll(/<p>([\s\S]*?)<\/p>/g)].map(m=>m[1]);
-  if(!bitar.length) return html;
+  if(!html) return '';
+  if(!/<p>/i.test(html)) return html;
   const bokstav=b=>/^\s*<?[a-z]?>?\s*([a-e])\)/.exec(b.replace(/<[^>]+>/g,'').trim());
+  const bitar=[...html.matchAll(/<p>([\s\S]*?)<\/p>/g)].map(m=>m[1]);
   const harDelar=bitar.some(bokstav);
   let n=0;
-  return bitar.map(b=>{
+  /* Ersatt varje stycke pa plats sa att mellanliggande innehall blir kvar,
+     till exempel fristaende LaTeX-block. */
+  return html.replace(/<p>([\s\S]*?)<\/p>/g,(hel,b)=>{
     const bo=bokstav(b);
     if(bo) return `<p class="steg"><span class="stegnr">${bo[1]}</span>${b.replace(/^(\s*)([a-e])\)\s*/,'$1')}</p>`;
-    const räkne=/[=→]/.test(b)||/<strong>/.test(b);
-    if(räkne&&!harDelar){n++;return `<p class="steg"><span class="stegnr">${n}</span>${b}</p>`;}
-    if(räkne) return `<p class="steg"><span class="stegnr stegprick">·</span>${b}</p>`;
+    const rakne=/[=\u2192]/.test(b)||/<strong>/.test(b);
+    if(rakne&&!harDelar){n++;return `<p class="steg"><span class="stegnr">${n}</span>${b}</p>`;}
+    if(rakne) return `<p class="steg"><span class="stegnr stegprick">\u00b7</span>${b}</p>`;
     return `<p class="komm">${b}</p>`;
-  }).join('');
+  });
 }
 
 /* ═══ kursväljaren ═══ */
