@@ -820,7 +820,8 @@ table.data th{background:var(--sunken);font-weight:600}
 }
 .ru-stäng:hover{background:var(--sunken);color:var(--ink)}
 .ru-stäng svg{width:17px;height:17px}
-.ru-body{padding:20px;overflow:auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);gap:20px}
+.ru-body{padding:20px;overflow:auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);gap:20px;align-items:start}
+.ru-vänster{display:flex;flex-direction:column;gap:18px;min-width:0}
 .ru-sektion{min-width:0}
 .ru-label{
   display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px;
@@ -838,8 +839,8 @@ table.data th{background:var(--sunken);font-weight:600}
   min-height:220px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--canvas);
   display:block;overflow:auto
 }
-.ru-bildbox .fig{display:block;margin:0;max-width:none;width:100%}
-.ru-bildbox .fig svg,.ru-bildbox .fig img{display:block;max-width:none;max-height:none;width:100%;height:auto;margin:0}
+.ru-bildbox .fig{display:block;margin:0 auto;max-width:100%;width:auto}
+.ru-bildbox .fig svg,.ru-bildbox .fig img{display:block;max-width:100%;max-height:260px;width:auto;height:auto;margin:0 auto}
 .ru-ingenbild{font-size:12px;color:var(--muted);text-align:center}
 .ru-bildverktyg{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
 .ru-bildverktyg .knapp{padding:7px 10px;font-size:11.5px}
@@ -864,7 +865,9 @@ table.data th{background:var(--sunken);font-weight:600}
   .redigera-uppgift{padding:10px}
   .ru-dialog{width:100%;max-height:calc(100vh - 20px)}
   .ru-body{grid-template-columns:1fr;padding:16px}
+  .ru-vänster{gap:14px}
   .ru-text{min-height:180px}
+  #ruFacit{min-height:130px!important}
 }
 
 
@@ -948,10 +951,16 @@ table.data th{background:var(--sunken);font-weight:600}
 .fig[data-bildskala] svg,.fig[data-bildskala] img{
   display:block!important;width:100%!important;max-width:none!important;height:auto!important;
 }
-/* I redigeraren får bilden växa fritt; boxen scrollar vid behov. */
+/* I redigeraren visas bilden nedskalad så att den ryms i panelen. */
 .ru-bildbox .fig[data-bildskala]{
-  width:var(--bildbredd,520px)!important;
-  max-width:none!important;
+  width:auto!important;
+  max-width:100%!important;
+}
+.ru-bildbox .fig[data-bildskala] svg,.ru-bildbox .fig[data-bildskala] img{
+  width:auto!important;
+  max-width:100%!important;
+  max-height:240px!important;
+  height:auto!important;
 }
 @media print{
   /* Viktigt: aldrig bredare än utskriftskolumnen, annars skalar Chrome ned hela sidan. */
@@ -1075,6 +1084,10 @@ table.data th{background:var(--sunken);font-weight:600}
 }
 
 </style>
+<!-- KaTeX för matematikrendering -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
 </head>
 <body>
 
@@ -1231,6 +1244,7 @@ table.data th{background:var(--sunken);font-weight:600}
     </div>
 
     <div class="ru-body">
+      <div class="ru-vänster">
       <section class="ru-sektion">
         <label class="ru-label" for="ruText">
           <span>Uppgiftstext</span>
@@ -1243,6 +1257,20 @@ table.data th{background:var(--sunken);font-weight:600}
           </button>
         </div>
       </section>
+
+      <section class="ru-sektion">
+        <label class="ru-label" for="ruFacit">
+          <span>Facit</span>
+          <span class="ru-hjälp">Markera svar med **dubbla asterisker**</span>
+        </label>
+        <textarea class="ru-text" id="ruFacit" style="min-height:150px"></textarea>
+        <div class="ru-kopiera-rad">
+          <button class="knapp tyst liten" id="ruKopieraFacit" type="button">
+            Kopiera facit
+          </button>
+        </div>
+      </section>
+      </div>
 
       <section class="ru-sektion">
         <div class="ru-label">
@@ -1383,19 +1411,22 @@ const nyckel=x=>x.kap+':'+x.omr;
    Har uppgiften deluppgifter (a, b, c) används de bokstäverna som markörer.
    Annars numreras räknestegen 1, 2, 3. Rader utan beräkning blir förklaringar. */
 function LOS(html){
-  const bitar=[...html.matchAll(/<p>([\s\S]*?)<\/p>/g)].map(m=>m[1]);
-  if(!bitar.length) return html;
+  if(!html) return '';
+  if(!/<p>/i.test(html)) return html;
   const bokstav=b=>/^\s*<?[a-z]?>?\s*([a-e])\)/.exec(b.replace(/<[^>]+>/g,'').trim());
+  const bitar=[...html.matchAll(/<p>([\s\S]*?)<\/p>/g)].map(m=>m[1]);
   const harDelar=bitar.some(bokstav);
   let n=0;
-  return bitar.map(b=>{
+  /* Ersatt varje stycke pa plats sa att mellanliggande innehall blir kvar,
+     till exempel fristaende LaTeX-block. */
+  return html.replace(/<p>([\s\S]*?)<\/p>/g,(hel,b)=>{
     const bo=bokstav(b);
     if(bo) return `<p class="steg"><span class="stegnr">${bo[1]}</span>${b.replace(/^(\s*)([a-e])\)\s*/,'$1')}</p>`;
-    const räkne=/[=→]/.test(b)||/<strong>/.test(b);
-    if(räkne&&!harDelar){n++;return `<p class="steg"><span class="stegnr">${n}</span>${b}</p>`;}
-    if(räkne) return `<p class="steg"><span class="stegnr stegprick">·</span>${b}</p>`;
+    const rakne=/[=\u2192]/.test(b)||/<strong>/.test(b);
+    if(rakne&&!harDelar){n++;return `<p class="steg"><span class="stegnr">${n}</span>${b}</p>`;}
+    if(rakne) return `<p class="steg"><span class="stegnr stegprick">\u00b7</span>${b}</p>`;
     return `<p class="komm">${b}</p>`;
-  }).join('');
+  });
 }
 
 /* ═══ kursväljaren ═══ */
@@ -1594,6 +1625,9 @@ function rita(){
       </div>
     </article>`).join('');
 
+  /* rendera KaTeX i uppgiftstexterna direkt */
+  renderKatex($('#lista'));
+
   $$('.kort').forEach(k=>{
     const växla=()=>vippa(k.dataset.id);
     k.addEventListener('click',e=>{ if(e.target.closest('.facitknapp,[data-red],[data-redigera]'))return; växla(); });
@@ -1613,6 +1647,7 @@ function rita(){
     const box=document.querySelector(`[data-fbox="${b.dataset.facit}"]`);
     const på=box.classList.toggle('öppen');
     b.textContent=på?'Dölj facit':'Visa facit';
+    if(på) renderKatex(box);
   }));
 }
 
@@ -1725,6 +1760,10 @@ function htmlTillRedigerbarText(html){
   const d=document.createElement('div');
   d.innerHTML=utanFigur(html);
   d.querySelectorAll('br').forEach(br=>br.replaceWith('\n'));
+  /* Konvertera <strong> till **text** */
+  d.querySelectorAll('strong').forEach(el=>{
+    el.replaceWith('**'+el.textContent+'**');
+  });
   d.querySelectorAll('li').forEach(li=>{
     const p=li.parentElement;
     const idx=[...p.children].indexOf(li);
@@ -1736,17 +1775,19 @@ function htmlTillRedigerbarText(html){
 }
 function redigerbarTextTillHTML(text){
   const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  /* Konvertera **text** till <strong> (görs efter esc för säkerhets skull) */
+  const bold=s=>esc(s).replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
   const rader=text.replace(/\r/g,'').split('\n');
   let out='', lista=[];
   const tömLista=()=>{
-    if(lista.length){ out+='<ol>'+lista.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol>'; lista=[]; }
+    if(lista.length){ out+='<ol>'+lista.map(x=>'<li>'+bold(x)+'</li>').join('')+'</ol>'; lista=[]; }
   };
   rader.forEach(rad=>{
     const s=rad.trim();
     const m=/^[a-e]\)\s*(.*)$/i.exec(s);
     if(m){ lista.push(m[1]); return; }
     tömLista();
-    if(s) out+='<p>'+esc(s)+'</p>';
+    if(s) out+='<p>'+bold(s)+'</p>';
   });
   tömLista();
   return out;
@@ -1768,14 +1809,23 @@ function figurStorlekUrHTML(figHTML){
 }
 function mätBildBas(){
   if(urBildBas>0)return urBildBas;
+  /* Läs figurens naturliga bredd ur SVG:ns egna attribut, inte ur den
+     nedskalade förhandsvisningen — annars blir referensbredden fel. */
+  const box=document.createElement('div');
+  box.innerHTML=urBildHTML||'';
+  const svg=box.querySelector('svg');
+  if(svg){
+    const w=parseFloat(svg.getAttribute('width'));
+    if(w>0){ urBildBas=w; return urBildBas; }
+    const vb=(svg.getAttribute('viewBox')||'').split(/\s+/);
+    if(vb.length===4&&parseFloat(vb[2])>0){ urBildBas=parseFloat(vb[2]); return urBildBas; }
+  }
+  const img=box.querySelector('img');
+  if(img&&img.naturalWidth>0){ urBildBas=img.naturalWidth; return urBildBas; }
   const fig=$('#ruBildbox .fig');
   if(!fig)return 520;
   const r=fig.getBoundingClientRect();
-  const aktuell=Math.max(1,r.width||520);
-  // Om en gammal procentstorlek är aktiv räknas originalbredden baklänges.
-  urBildBas=urBildStorlekÄndrad&&urBildBredd>0
-    ? aktuell/(urBildBredd/100)
-    : aktuell;
+  urBildBas=Math.max(1,r.width||520);
   return urBildBas;
 }
 function sättFigurBreddHTML(figHTML,pct,bas){
@@ -1809,14 +1859,17 @@ function ritaUrBild(){
     if(fig){
       const bas=urBildBas||mätBildBas();
       const px=Math.round(bas*(urBildBredd/100)*10)/10;
+      /* Skalan sparas som attribut, men förhandsvisningen hålls inom panelen
+         så att stora figurer inte tar över hela dialogen. */
       fig.style.display='block';
-      fig.style.width=px+'px';
-      fig.style.maxWidth='none';
+      fig.style.width='auto';
+      fig.style.maxWidth='100%';
       fig.style.setProperty('--bildbredd',px+'px');
       fig.setAttribute('data-bildskala',String(urBildBredd));
       fig.setAttribute('data-bildbas',String(Math.round(bas*10)/10));
       const media=fig.querySelector('svg,img');
-      if(media){media.style.width='100%';media.style.maxWidth='none';media.style.height='auto';}
+      if(media){media.style.width='auto';media.style.maxWidth='100%';
+                media.style.maxHeight='240px';media.style.height='auto';}
     }
   }
   $('#ruBildstatus').textContent=urBildHTML?'Bild finns':'Ingen bild';
@@ -1841,6 +1894,7 @@ function öppnaUppgiftsredigering(x,frånBlad=false){
   urBildStorlekÄndrad=befStorlek.skala!==null;
   $('#ruId').textContent=x.id+' · '+(DB.omr[x.kap]?.[x.omr]||'');
   $('#ruText').value=htmlTillRedigerbarText(x.t);
+  $('#ruFacit').value=htmlTillRedigerbarText(x.s||'');
   $('#ruLäggTill').textContent=frånBlad?'Spara ändringar':'Lägg till i övningsbladet';
   $('#ruInfo').textContent=frånBlad?'Du redigerar kopian i övningsbladet.':'Originalet i uppgiftsbanken ändras inte.';
   ritaUrBild();
@@ -1854,14 +1908,17 @@ function stängUppgiftsredigering(){
   UR.hidden=true; urOriginal=null; urKopia=null; urBildHTML=''; urOriginalBildHTML='';
   urBildBredd=100;urBildStorlekÄndrad=false;urBildBas=0;
   $('#ruFil').value='';
+  $('#ruFacit').value='';
 }
 function sparaUppgiftsredigering(){
   if(!urOriginal||!urKopia) return;
   const nyText=redigerbarTextTillHTML($('#ruText').value.trim());
+  const nyFacit=redigerbarTextTillHTML($('#ruFacit').value.trim());
   const sparadBild=urBildHTML
     ?(urBildStorlekÄndrad?sättFigurBreddHTML(urBildHTML,urBildBredd,urBildBas||mätBildBas()):urBildHTML)
     :'';
   urKopia.t=(nyText||'<p></p>')+sparadBild;
+  if(nyFacit) urKopia.s=nyFacit;
   urKopia._redigerad=true;
 
   if(urRedigerarBlad){
@@ -1957,6 +2014,14 @@ $('#ruStäng').addEventListener('click',stängUppgiftsredigering);
 $('#ruAvbryt').addEventListener('click',stängUppgiftsredigering);
 $('#ruLäggTill').addEventListener('click',sparaUppgiftsredigering);
 $('#ruKopieraText').addEventListener('click',kopieraText);
+async function kopieraFacit(){
+  const text=$('#ruFacit').value;
+  try{ await navigator.clipboard.writeText(text); }
+  catch(e){ $('#ruFacit').select(); document.execCommand('copy'); }
+  $('#ruKopieraFacit').textContent='Kopierat!';
+  setTimeout(()=>$('#ruKopieraFacit').textContent='Kopiera facit',1200);
+}
+$('#ruKopieraFacit').addEventListener('click',kopieraFacit);
 $('#ruKopieraBild').addEventListener('click',kopieraBild);
 $('#ruLaddaBild').addEventListener('click',()=>$('#ruFil').click());
 $('#ruFil').addEventListener('change',e=>laddaEgenBild(e.target.files?.[0]));
@@ -2117,43 +2182,21 @@ function körSlumpa(){
   const pool=urval(), fam=new Set(), ut=[];
   const n=Math.max(1,Math.min(40,parseInt($('#slumpaAntal').value,10)||12));
   $('#slumpaAntal').value=n;
-  const blanda=a=>{
-    const b=[...a];
-    for(let i=b.length-1;i>0;i--){
-      const j=Math.floor(Math.random()*(i+1));
-      [b[i],b[j]]=[b[j],b[i]];
-    }
-    return b;
-  };
-  const valda=['E','C','A'].filter(nv=>state.nivåer.has(nv));
-  const vikt={E:5,C:4,A:3};
-  const viktSum=valda.reduce((sum,nv)=>sum+vikt[nv],0);
+  const vikt={E:5,C:4,A:3}, viktSum=12;
   const mål={}, rest=[];
-  valda.forEach(k=>{
+  ['E','C','A'].forEach(k=>{
     const exakt=n*vikt[k]/viktSum;
     mål[k]=Math.floor(exakt);
     rest.push([k,exakt-mål[k]]);
   });
-  let kvar=n-valda.reduce((sum,nv)=>sum+mål[nv],0);
+  let kvar=n-(mål.E+mål.C+mål.A);
   rest.sort((a,b)=>b[1]-a[1]);
-  for(let i=0;i<kvar;i++) mål[rest[i%rest.length][0]]++;
-  valda.forEach(nv=>{
-    const p=blanda(pool.filter(x=>x.niva===nv));
+  for(let i=0;i<kvar;i++) mål[rest[i%3][0]]++;
+  ['E','C','A'].forEach(nv=>{
+    const p=pool.filter(x=>x.niva===nv).sort(()=>Math.random()-.5);
     let c=0;
-    for(const x of p){
-      if(c>=mål[nv]) break;
-      const familj=x.familj||x.id;
-      if(fam.has(familj)) continue;
-      fam.add(familj); ut.push(x); c++;
-    }
+    for(const x of p){ if(c>=mål[nv])break; if(fam.has(x.familj))continue; fam.add(x.familj); ut.push(x); c++; }
   });
-  /* Om någon nivå hade för få uppgifter fylls bladet från övriga valda nivåer. */
-  for(const x of blanda(pool)){
-    if(ut.length>=n) break;
-    const familj=x.familj||x.id;
-    if(fam.has(familj)) continue;
-    fam.add(familj); ut.push(x);
-  }
   state.blad=ut; rita(); ritaBlad();
   $('#slumppanel').classList.remove('öppen');
   $('#slumpaKnapp').setAttribute('aria-expanded','false');
@@ -2243,6 +2286,8 @@ function bladHTML({facit}){
 $('#expPdf').addEventListener('click',()=>{
   const u=$('#utskrift');
   u.innerHTML=bladHTML({facit:$('#taMedFacit').checked});
+  /* KaTeX måste renderas medan elementet är i DOM:en, innan geometrin mäts */
+  renderKatex(u);
 
   // Första frame: DOM + SVG läggs ut.
   // Andra frame: trimma verklig geometri.
@@ -2275,7 +2320,30 @@ $('#expWord').addEventListener('click',()=>{
   temp.style.cssText='position:fixed;left:-100000px;top:0;width:180mm;background:#fff';
   temp.innerHTML=bladHTML({facit:$('#taMedFacit').checked});
   document.body.appendChild(temp);
+  /* Rendera KaTeX medan temp-elementet är i DOM:en så att HTML-resultatet */
+  /* innehåller KaTeX-spans som fungerar utan externa resurser i Word        */
+  renderKatex(temp);
   trimmaUtskriftsFigurer(temp);
+  /* Word förstår inte KaTeX-CSS. Ersätt .katex-element med sin textrepresentation */
+  temp.querySelectorAll('.katex').forEach(el=>{
+    const ann=el.querySelector('annotation[encoding="application/x-tex"]');
+    if(ann){
+      /* Inline math */
+      const span=document.createElement('span');
+      span.style.fontStyle='italic';
+      span.textContent=ann.textContent;
+      el.replaceWith(span);
+    }
+  });
+  temp.querySelectorAll('.katex-display').forEach(el=>{
+    const ann=el.querySelector('annotation[encoding="application/x-tex"]');
+    if(ann){
+      const p=document.createElement('p');
+      p.style.cssText='text-align:center;font-style:italic;margin:6pt 0';
+      p.textContent=ann.textContent;
+      el.replaceWith(p);
+    }
+  });
   const kropp=temp.innerHTML;
   temp.remove();
   const doc=`<html xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -2307,6 +2375,7 @@ $('#expWord').addEventListener('click',()=>{
       .fig[style*="width"] img,.fig[style*="width"] svg{max-width:none!important;width:100%!important;height:auto!important}
       .fig[data-bildskala]{display:block!important;width:min(var(--bildbredd,450pt),100%)!important;max-width:100%!important}
       .fig[data-bildskala] img,.fig[data-bildskala] svg{width:100%!important;max-width:none!important;height:auto!important}
+      .katex{font-size:1.05em}.katex-display{margin:.4em 0}
       .fk{page-break-before:always;border-top:2px solid #000;padding-top:12pt}
       .fu{margin-bottom:11pt;font-size:10pt}
       .steg{margin:3pt 0 3pt 24pt}
@@ -2320,6 +2389,20 @@ $('#expWord').addEventListener('click',()=>{
   document.body.appendChild(a); a.click();
   setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},400);
 });
+
+/* ── KaTeX: kör på alla öppna facit efter att listan ritats om ── */
+function renderKatex(root){
+  if(!window.renderMathInElement) return;
+  renderMathInElement(root||document.body,{
+    delimiters:[
+      {left:'\\[',right:'\\]',display:true},
+      {left:'\\(',right:'\\)',display:false}
+    ],
+    throwOnError:false
+  });
+}
+/* Kör när KaTeX-scriptet är laddat (defer, så det händer efter DOMContentLoaded) */
+window.addEventListener('load',()=>{ if(window.renderMathInElement) renderKatex(); });
 
 /* ── igång ── */
 $('#bDatum').value=new Date().toLocaleDateString('sv-SE');
