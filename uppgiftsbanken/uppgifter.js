@@ -13994,17 +13994,7 @@ for (const uppgift of window.BANK) {
 
 function byggKraftfigur2DV3({ id, objekt, krafter, aria }) {
   const pil = `kraftpil-${id}`;
-  const justeradeKrafter = krafter.map(([etikett, x1, y1, x2, y2]) => {
-    const arLodratUppatriktadNormalkraft = /^N(?:_|$)/.test(etikett) && x1 === x2 && y2 < y1;
-    const sammanfallerMedNedatriktadKraft = krafter.some(([, ox1, oy1, ox2, oy2]) =>
-      ox1 === x1 && ox2 === x2 && oy2 > oy1
-    );
-    if (arLodratUppatriktadNormalkraft && sammanfallerMedNedatriktadKraft) {
-      return [etikett, x1 - 28, y1, x2 - 28, y2];
-    }
-    return [etikett, x1, y1, x2, y2];
-  });
-  const pilar = justeradeKrafter.map(([etikett, x1, y1, x2, y2]) => {
+  const pilar = krafter.map(([etikett, x1, y1, x2, y2]) => {
     const dx = x2 - x1, dy = y2 - y1;
     const tx = x2 + (dx < -10 ? -8 : 8);
     const ty = y2 + (dy > 10 ? 16 : dy < -10 ? -8 : 4);
