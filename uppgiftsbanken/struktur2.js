@@ -1,4 +1,4 @@
-/* struktur2.js — Fysik 2  */
+/* struktur2.js — Fysik 2 */
 
 window.OMR2 = {
  "1": {
@@ -36,6 +36,7 @@ window.OMR2 = {
   "atomstruktur": "Atomens elektronstruktur"
  },
  "5": {
+  "avstandsmatning": "Avståndsmätning",
   "farg_ljusstyrka": "Färg och ljusstyrka",
   "exoplaneter": "Exoplaneter",
   "stjarnornas_utveckling": "Stjärnornas utveckling",

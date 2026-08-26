@@ -4983,3 +4983,423 @@ if (uppgift160F2V9) {
   uppgift160F2V9.t = uppgift160F2V9.t.replace("\n<li>Blir det mål?</li>", "");
   uppgift160F2V9.s = uppgift160F2V9.s.replace(" Den är över marken och under ribban, så det blir mål.", "");
 }
+
+// Avståndsmätning och fördjupad stjärnfysik, tillagda från ett nytt
+// uppgiftsunderlag. Talen och kontexterna är bearbetade och faciten
+// har räknats om oberoende av underlagets kortfacit.
+function byggFacitF2V10(metod, matte, svar, efter) {
+  return '<div class="facit-v2"><p class="facit-metod">' + metod + '</p>' +
+    (matte ? '<div class="facit-matte">' + matte + '</div>' : '') +
+    (efter ? '<p class="facit-metod">' + efter + '</p>' : '') +
+    '<p class="facit-svar"><strong>Svar:</strong> ' + svar + '</p></div>';
+}
+
+const figurSynvinkelF2V10 =
+  '<span class="fig"><svg viewBox="0 0 520 190" width="520" height="190" style="max-width:100%;height:auto" preserveAspectRatio="xMidYMid meet" role="img" aria-label="En observatör ser en cirkelformad markering under synvinkeln alfa.">' +
+  '<title>Synvinkel och avstånd till en markering.</title>' +
+  '<circle cx="54" cy="94" r="8" fill="#fff" stroke="#2B2527" stroke-width="2"/>' +
+  '<line x1="62" y1="94" x2="446" y2="45" stroke="#5C575E" stroke-width="1.8"/>' +
+  '<line x1="62" y1="94" x2="446" y2="143" stroke="#5C575E" stroke-width="1.8"/>' +
+  '<line x1="446" y1="45" x2="446" y2="143" stroke="#B43123" stroke-width="4"/>' +
+  '<path d="M112 88 A58 58 0 0 1 112 100" fill="none" stroke="#2A5D9E" stroke-width="2"/>' +
+  '<text x="120" y="80" font-family="IBM Plex Mono" font-size="15" fill="#2A5D9E">α</text>' +
+  '<line x1="72" y1="164" x2="436" y2="164" stroke="#9A959C" stroke-width="1.4"/>' +
+  '<line x1="72" y1="158" x2="72" y2="170" stroke="#9A959C" stroke-width="1.4"/>' +
+  '<line x1="436" y1="158" x2="436" y2="170" stroke="#9A959C" stroke-width="1.4"/>' +
+  '<text x="254" y="184" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#5C575E">avstånd d</text>' +
+  '<text x="462" y="98" font-family="IBM Plex Mono" font-size="13" fill="#B43123">diameter D</text>' +
+  '</svg></span>';
+
+const figurParallaxF2V10 =
+  '<span class="fig"><svg viewBox="0 0 540 230" width="540" height="230" style="max-width:100%;height:auto" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Jorden observerar en närbelägen stjärna från två platser i sin bana med sex månaders mellanrum.">' +
+  '<title>Stjärnparallax med en astronomisk enhet som baslinje.</title>' +
+  '<circle cx="270" cy="188" r="17" fill="#F4C95D" stroke="#2B2527" stroke-width="2"/>' +
+  '<ellipse cx="270" cy="188" rx="174" ry="28" fill="none" stroke="#9A959C" stroke-width="1.5" stroke-dasharray="7 6"/>' +
+  '<circle cx="96" cy="188" r="7" fill="#2A5D9E"/><circle cx="444" cy="188" r="7" fill="#2A5D9E"/>' +
+  '<circle cx="270" cy="34" r="7" fill="#fff" stroke="#B43123" stroke-width="2.5"/>' +
+  '<line x1="96" y1="188" x2="270" y2="34" stroke="#5C575E" stroke-width="1.6"/>' +
+  '<line x1="444" y1="188" x2="270" y2="34" stroke="#5C575E" stroke-width="1.6"/>' +
+  '<line x1="270" y1="188" x2="270" y2="34" stroke="#9A959C" stroke-width="1.3" stroke-dasharray="5 4"/>' +
+  '<path d="M252 50 A25 25 0 0 0 270 59" fill="none" stroke="#B43123" stroke-width="2"/>' +
+  '<text x="245" y="68" font-family="IBM Plex Mono" font-size="15" fill="#B43123">p</text>' +
+  '<text x="270" y="217" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#5C575E">jordens bana</text>' +
+  '<text x="287" y="30" font-family="IBM Plex Mono" font-size="13" fill="#B43123">stjärna</text>' +
+  '</svg></span>';
+
+const nyaAvstandsuppgifterF2V10 = [
+  {
+    id: "5.16", kap: 5, omr: "avstandsmatning", niva: "E", poang: "(2/0/0)",
+    typ: "beräkna avstånd från föremålets diameter och synvinkel, ur figur, sökt tre avstånd",
+    t: '<p>En drönarkamera ser en cirkelformad landningsmarkering med diametern 0,60 m.</p>' + figurSynvinkelF2V10 +
+       '<p>Hur långt från markeringen är kameran när markeringens synvinkel är a) 2,0°, b) 2,0 bågminuter och c) 2,0 bågsekunder? Använd småvinkelapproximationen.</p>',
+    s: byggFacitF2V10(
+      'För en liten synvinkel i radianer gäller \\(\\alpha\\approx D/d\\), alltså \\(d\\approx D/\\alpha\\). Vinklarna måste först skrivas i radianer.',
+      '\\[2{,}0^\\circ=0{,}03491\\ \\mathrm{rad}\\Rightarrow d=\\frac{0{,}60}{0{,}03491}=17{,}2\\ \\mathrm m\\]' +
+      '\\[2{,}0\\prime=\\frac{2}{60}^\\circ=5{,}818\\cdot10^{-4}\\ \\mathrm{rad}\\Rightarrow d=1{,}03\\cdot10^3\\ \\mathrm m\\]' +
+      '\\[2{,}0\\prime\\prime=\\frac{2}{3600}^\\circ=9{,}696\\cdot10^{-6}\\ \\mathrm{rad}\\Rightarrow d=6{,}19\\cdot10^4\\ \\mathrm m\\]',
+      'Avstånden är a) \\(17\\ \\mathrm m\\), b) \\(1{,}03\\ \\mathrm{km}\\) och c) \\(61{,}9\\ \\mathrm{km}\\).',
+      'När synvinkeln blir mycket mindre måste föremålet vara mycket längre bort för att se lika litet ut.'
+    )
+  },
+  {
+    id: "5.17", kap: 5, omr: "avstandsmatning", niva: "C", poang: "(2/2/0)",
+    typ: "bestämma största och minsta avstånd från varierande synvinkel, ur text, sökt avståndsintervall",
+    t: '<p>Månens diameter är 3474 km. Under en månad varierar dess synvinkel mellan 0,491° och 0,568°.</p><p>Beräkna månens största och minsta avstånd från jorden. Förklara vilken av vinklarna som hör ihop med det största avståndet.</p>',
+    s: byggFacitF2V10(
+      'Använd den exakta geometrin \\(d=D/[2\\tan(\\alpha/2)]\\). En mindre synvinkel betyder ett större avstånd.',
+      '\\[d_{\\max}=\\frac{3474}{2\\tan(0{,}491^\\circ/2)}=4{,}05\\cdot10^5\\ \\mathrm{km}\\]' +
+      '\\[d_{\\min}=\\frac{3474}{2\\tan(0{,}568^\\circ/2)}=3{,}50\\cdot10^5\\ \\mathrm{km}\\]',
+      'Avståndet varierar ungefär mellan \\(3{,}50\\cdot10^5\\) km och \\(4{,}05\\cdot10^5\\) km. Den mindre vinkeln, 0,491°, ger det största avståndet.',
+      ''
+    )
+  },
+  {
+    id: "5.18", kap: 5, omr: "avstandsmatning", niva: "C", poang: "(2/2/0)",
+    typ: "jämföra två planeters synvinklar från diameter och avstånd, ur tabell, sökt vinklar och jämförelse",
+    t: '<p>Vid två observationer samlas följande data in:</p><table class="facit-tabell"><thead><tr><th>Planet</th><th>Diameter</th><th>Avstånd från jorden</th></tr></thead><tbody><tr><td>Mars</td><td>6779 km</td><td>62·10<sup>6</sup> km</td></tr><tr><td>Venus</td><td>12 104 km</td><td>45·10<sup>6</sup> km</td></tr></tbody></table><p>Beräkna planeternas synvinklar i bågsekunder och avgör vilken planet som ser störst ut.</p>',
+    s: byggFacitF2V10(
+      'För små vinklar gäller \\(\\alpha\\approx D/d\\). Resultatet i radianer multipliceras med 206 265 för att få bågsekunder.',
+      '\\[\\alpha_{\\mathrm{Mars}}=\\frac{6779}{62\\cdot10^6}\\cdot206265=22{,}6\\prime\\prime\\]' +
+      '\\[\\alpha_{\\mathrm{Venus}}=\\frac{12104}{45\\cdot10^6}\\cdot206265=55{,}5\\prime\\prime\\]',
+      'Mars synvinkel är cirka \\(22{,}6\\prime\\prime\\) och Venus synvinkel cirka \\(55{,}5\\prime\\prime\\). Venus ser störst ut.',
+      ''
+    )
+  },
+  {
+    id: "5.19", kap: 5, omr: "avstandsmatning", niva: "E", poang: "(2/0/0)",
+    typ: "omvandla ett astronomiskt avstånd från kiloparsec till meter och ljusår, ur text, sökt två enheter",
+    t: '<p>En dvärggalax ligger 62 kpc från jorden. Bestäm avståndet i a) meter och b) ljusår.</p><p>Använd 1 pc = 3,086·10<sup>16</sup> m och 1 pc = 3,262 ljusår.</p>',
+    s: byggFacitF2V10(
+      'Prefixet kilo betyder tusen, så \\(62\\ \\mathrm{kpc}=62\\,000\\ \\mathrm{pc}\\).',
+      '\\[d=62000\\cdot3{,}086\\cdot10^{16}=1{,}91\\cdot10^{21}\\ \\mathrm m\\]' +
+      '\\[d=62000\\cdot3{,}262=2{,}02\\cdot10^5\\ \\mathrm{ljusår}\\]',
+      'Avståndet är a) \\(1{,}91\\cdot10^{21}\\ \\mathrm m\\) och b) cirka \\(202\\,000\\) ljusår.',
+      ''
+    )
+  },
+  {
+    id: "5.20", kap: 5, omr: "avstandsmatning", niva: "E", poang: "(2/0/0)",
+    typ: "beräkna stjärnavstånd från parallax och omvandla till meter, ur figur, sökt två enheter",
+    t: '<p>En stjärnas parallax mäts till 0,393 bågsekunder.</p>' + figurParallaxF2V10 + '<p>Bestäm avståndet i a) parsec och b) meter. Använd 1 pc = 3,086·10<sup>16</sup> m.</p>',
+    s: byggFacitF2V10(
+      'När parallaxen \\(p\\) anges i bågsekunder fås avståndet i parsec direkt från \\(d=1/p\\).',
+      '\\[d=\\frac{1}{0{,}393}=2{,}54\\ \\mathrm{pc}\\]' +
+      '\\[d=2{,}54\\cdot3{,}086\\cdot10^{16}=7{,}85\\cdot10^{16}\\ \\mathrm m\\]',
+      'Avståndet är a) \\(2{,}54\\ \\mathrm{pc}\\) och b) \\(7{,}85\\cdot10^{16}\\ \\mathrm m\\).',
+      ''
+    )
+  },
+  {
+    id: "5.21", kap: 5, omr: "avstandsmatning", niva: "E", poang: "(2/0/0)",
+    typ: "omvandla ljusår till parsec och bestämma parallax, ur text, sökt parallax",
+    t: '<p>Stjärnan Procyon ligger 11,40 ljusår från jorden. Bestäm avståndet i parsec och stjärnans parallax.</p><p>Använd 1 pc = 3,262 ljusår.</p>',
+    s: byggFacitF2V10(
+      'Omvandla först avståndet till parsec och använd sedan \\(p=1/d\\).',
+      '\\[d=\\frac{11{,}40}{3{,}262}=3{,}495\\ \\mathrm{pc}\\]' +
+      '\\[p=\\frac{1}{3{,}495}=0{,}286\\prime\\prime\\]',
+      'Avståndet är \\(3{,}50\\ \\mathrm{pc}\\) och parallaxen är \\(0{,}286\\prime\\prime\\).',
+      ''
+    )
+  },
+  {
+    id: "5.22", kap: 5, omr: "avstandsmatning", niva: "C", poang: "(2/2/0)",
+    typ: "beräkna avstånd med felmarginal från parallax med osäkerhet, ur text, sökt avstånd och osäkerhet",
+    t: '<p>Parallaxen för en närbelägen stjärna mäts till (0,76850 ± 0,00020) bågsekunder.</p><p>Bestäm avståndet i ljusår med osäkerhet. Använd 1 pc = 3,262 ljusår och approximationen Δd/d ≈ Δp/p.</p>',
+    s: byggFacitF2V10(
+      'Eftersom \\(d=1/p\\) får avståndet samma relativa osäkerhet som parallaxen.',
+      '\\[d=\\frac{1}{0{,}76850}\\cdot3{,}262=4{,}2441\\ \\mathrm{ljusår}\\]' +
+      '\\[\\Delta d=d\\frac{\\Delta p}{p}=4{,}2441\\frac{0{,}00020}{0{,}76850}=0{,}0011\\ \\mathrm{ljusår}\\]',
+      'Avståndet är \\((4{,}244\\pm0{,}001)\\) ljusår.',
+      'Fler decimaler än så stöds inte av mätosäkerheten.'
+    )
+  },
+  {
+    id: "5.23", kap: 5, omr: "avstandsmatning", niva: "A", poang: "(2/2/2)",
+    typ: "beräkna förändrad parallax för en stjärna med radialhastighet, ur text, sökt framtida parallax",
+    t: '<p>En stjärna har i dag parallaxen 0,54831 bågsekunder och rör sig rakt bort från solsystemet med 110 km/s.</p><p>Vilken parallax får stjärnan om 100 år? Använd 1 ljusår = 9,461·10<sup>12</sup> km och 1 pc = 3,262 ljusår.</p>',
+    s: byggFacitF2V10(
+      'Beräkna först dagens avstånd, lägg sedan till den sträcka stjärnan rör sig på 100 år och omvandla tillbaka till parallax.',
+      '\\[d_0=\\frac{1}{0{,}54831}\\cdot3{,}262=5{,}948\\ \\mathrm{ljusår}\\]' +
+      '\\[\\Delta d=\\frac{110\\cdot100\\cdot365{,}25\\cdot24\\cdot3600}{9{,}461\\cdot10^{12}}=0{,}0367\\ \\mathrm{ljusår}\\]' +
+      '\\[d_1=5{,}985\\ \\mathrm{ljusår}=1{,}835\\ \\mathrm{pc}\\]' +
+      '\\[p_1=\\frac{1}{1{,}835}=0{,}54495\\prime\\prime\\]',
+      'Efter 100 år är parallaxen cirka \\(0{,}54495\\prime\\prime\\).',
+      'Parallaxen minskar eftersom stjärnan kommer längre bort.'
+    )
+  },
+  {
+    id: "5.24", kap: 5, omr: "avstandsmatning", niva: "E", poang: "(2/0/0)",
+    typ: "tolka apparent och absolut magnitud samt avståndsmodulen, ur text, sökt jämförelse och begrepp",
+    t: '<p>Stjärna A har apparent magnitud +3,2 och absolut magnitud +5,0. Stjärna B har apparent magnitud +9,1.</p><ol><li>Vilken stjärna ser ljusast ut från jorden?</li><li>Ligger stjärna A närmare eller längre bort än 10 pc?</li><li>Förklara skillnaden mellan apparent och absolut magnitud.</li></ol>',
+    s: byggFacitF2V10(
+      'På magnitudskalan betyder ett lägre tal större observerad ljusstyrka. Absolut magnitud är den magnitud stjärnan skulle ha på avståndet 10 pc.',
+      '\\[m_A=3{,}2<m_B=9{,}1\\]' +
+      '\\[m_A<M_A\\Rightarrow d_A<10\\ \\mathrm{pc}\\]',
+      'A ser ljusast ut och ligger närmare än 10 pc. Apparent magnitud beskriver hur ljus stjärnan ser ut från jorden; absolut magnitud beskriver hur ljus den skulle se ut på 10 pc.',
+      ''
+    )
+  },
+  {
+    id: "5.25", kap: 5, omr: "avstandsmatning", niva: "C", poang: "(2/2/0)",
+    typ: "beräkna avstånd från apparent och absolut magnitud, ur text, sökt avstånd och parallax",
+    t: '<p>En stjärna har apparent magnitud m = +4,10 och absolut magnitud M = +1,30.</p><p>Bestäm a) avståndet i parsec och b) stjärnans parallax.</p>',
+    s: byggFacitF2V10(
+      'Använd avståndsmodulen \\(m-M=5\\log_{10}d-5\\), där \\(d\\) anges i parsec.',
+      '\\[d=10^{(m-M+5)/5}=10^{(4{,}10-1{,}30+5)/5}=36{,}3\\ \\mathrm{pc}\\]' +
+      '\\[p=\\frac1d=\\frac{1}{36{,}3}=0{,}0275\\prime\\prime\\]',
+      'Avståndet är \\(36{,}3\\ \\mathrm{pc}\\) och parallaxen är \\(0{,}0275\\prime\\prime\\).',
+      ''
+    )
+  },
+  {
+    id: "5.26", kap: 5, omr: "avstandsmatning", niva: "C", poang: "(2/2/0)",
+    typ: "bestämma absolut magnitud från parallax och apparent magnitud, ur text, sökt absolut magnitud",
+    t: '<p>En stjärna har apparent magnitud m = +6,80 och parallaxen 0,125 bågsekunder. Bestäm stjärnans absoluta magnitud.</p>',
+    s: byggFacitF2V10(
+      'Parallaxen ger först avståndet. Sätt sedan in avståndet i magnitudformeln.',
+      '\\[d=\\frac{1}{0{,}125}=8{,}00\\ \\mathrm{pc}\\]' +
+      '\\[M=m+5-5\\log_{10}d=6{,}80+5-5\\log_{10}8{,}00=7{,}28\\]',
+      'Stjärnans absoluta magnitud är \\(M\\approx+7{,}28\\).',
+      ''
+    )
+  },
+  {
+    id: "5.27", kap: 5, omr: "avstandsmatning", niva: "C", poang: "(2/2/0)",
+    typ: "bestämma apparent magnitud från absolut magnitud och parallax samt bedöma synlighet, ur text, sökt magnitud",
+    t: '<p>En stjärna har absolut magnitud M = +9,20 och parallaxen 0,200 bågsekunder.</p><ol><li>Bestäm stjärnans apparenta magnitud.</li><li>Kan den ses med blotta ögat om gränsen är m = +6,0?</li></ol>',
+    s: byggFacitF2V10(
+      'Parallaxen ger \\(d=1/p\\). Därefter används \\(m=M-5+5\\log_{10}d\\).',
+      '\\[d=\\frac{1}{0{,}200}=5{,}00\\ \\mathrm{pc}\\]' +
+      '\\[m=9{,}20-5+5\\log_{10}5{,}00=7{,}69\\]',
+      'Den apparenta magnituden är \\(m\\approx+7{,}69\\). Stjärnan är svagare än gränsen +6,0 och kan därför inte ses med blotta ögat under de givna förhållandena.',
+      ''
+    )
+  },
+  {
+    id: "5.28", kap: 5, omr: "avstandsmatning", niva: "C", poang: "(2/2/0)",
+    typ: "fylla i tabell med parallax, avstånd och magnituder, ur tabell, sökt saknade värden",
+    t: '<p>Fyll i de tomma rutorna. Avståndet anges i parsec och parallaxen i bågsekunder.</p>' +
+       '<table class="facit-tabell"><thead><tr><th>Stjärna</th><th>m</th><th>p</th><th>d</th><th>M</th></tr></thead><tbody>' +
+       '<tr><td>A</td><td>+1,00</td><td>0,100</td><td>?</td><td>?</td></tr>' +
+       '<tr><td>B</td><td>+4,00</td><td>?</td><td>25,0</td><td>?</td></tr>' +
+       '<tr><td>C</td><td>?</td><td>0,0500</td><td>?</td><td>−1,50</td></tr>' +
+       '<tr><td>D</td><td>+8,00</td><td>?</td><td>?</td><td>+3,00</td></tr></tbody></table>',
+    s: byggFacitF2V10(
+      'Använd \\(d=1/p\\) och \\(M=m+5-5\\log_{10}d\\). För D löses avståndet ur avståndsmodulen.',
+      '\\[A:\\quad d=10{,}0\\ \\mathrm{pc},\\quad M=+1{,}00\\]' +
+      '\\[B:\\quad p=0{,}0400\\prime\\prime,\\quad M=4{,}00+5-5\\log_{10}25=+2{,}01\\]' +
+      '\\[C:\\quad d=20{,}0\\ \\mathrm{pc},\\quad m=-1{,}50-5+5\\log_{10}20\\approx0{,}00\\]' +
+      '\\[D:\\quad d=10^{(8-3+5)/5}=100\\ \\mathrm{pc},\\quad p=0{,}0100\\prime\\prime\\]',
+      'De saknade värdena är A: \\(d=10{,}0\\), \\(M=+1{,}00\\); B: \\(p=0{,}0400\\prime\\prime\\), \\(M=+2{,}01\\); C: \\(m\\approx0{,}00\\), \\(d=20{,}0\\); D: \\(p=0{,}0100\\prime\\prime\\), \\(d=100\\).',
+      ''
+    )
+  },
+  {
+    id: "5.29", kap: 5, omr: "avstandsmatning", niva: "A", poang: "(2/2/2)",
+    typ: "bestämma största synavstånd från magnitudskillnad och omvandla AU till parsec, ur text, sökt avstånd",
+    t: '<p>Solen har apparent magnitud −26,74 på avståndet 1 AU. Anta att den svagaste ljuskälla som kan ses med blotta ögat har apparent magnitud +6,0.</p><p>Hur långt från solen skulle en observatör som mest kunna befinna sig och fortfarande se den med blotta ögat? Svara i parsec och ljusår. Använd 1 pc = 206 265 AU och 1 pc = 3,262 ljusår.</p>',
+    s: byggFacitF2V10(
+      'När samma källa flyttas ändras flödet som \\(1/d^2\\). Magnitudskillnaden ger avståndsfaktorn \\(10^{\\Delta m/5}\\).',
+      '\\[\\Delta m=6{,}0-(-26{,}74)=32{,}74\\]' +
+      '\\[\\frac{d}{1\\ \\mathrm{AU}}=10^{32{,}74/5}=3{,}53\\cdot10^6\\]' +
+      '\\[d=\\frac{3{,}53\\cdot10^6}{206265}=17{,}1\\ \\mathrm{pc}\\]' +
+      '\\[d=17{,}1\\cdot3{,}262=55{,}8\\ \\mathrm{ljusår}\\]',
+      'Det största avståndet är cirka \\(17{,}1\\ \\mathrm{pc}\\), eller \\(55{,}8\\) ljusår.',
+      'Beräkningen bortser från ljusabsorption mellan solen och observatören.'
+    )
+  }
+];
+
+window.BANK2.push(...nyaAvstandsuppgifterF2V10);
+
+const nyaStjarnuppgifterF2V10 = [
+  {
+    id: "5.30", kap: 5, omr: "farg_ljusstyrka", niva: "E", poang: "(2/0/0)",
+    typ: "beräkna luminositet från absolut magnitud, ur text, sökt luminositet",
+    t: '<p>Stjärnan Vega har den absoluta magnituden M = +0,58. Beräkna dess luminositet a) i enheter av solens luminositet och b) i watt.</p><p>Använd M<sub>sol</sub> = +4,83 och L<sub>sol</sub> = 3,828·10<sup>26</sup> W.</p>',
+    s: byggFacitF2V10(
+      'Magnitudskillnaden motsvarar en luminositetskvot enligt \\(L/L_\\odot=10^{-0{,}4(M-M_\\odot)}\\).',
+      '\\[\\frac{L}{L_\\odot}=10^{-0{,}4(0{,}58-4{,}83)}=50{,}1\\]' +
+      '\\[L=50{,}1\\cdot3{,}828\\cdot10^{26}=1{,}92\\cdot10^{28}\\ \\mathrm W\\]',
+      'Vega har luminositeten \\(50{,}1L_\\odot\\), vilket är \\(1{,}92\\cdot10^{28}\\ \\mathrm W\\).',
+      ''
+    )
+  },
+  {
+    id: "5.31", kap: 5, omr: "farg_ljusstyrka", niva: "E", poang: "(2/0/0)",
+    typ: "beräkna absolut magnitud från luminositet, ur text, sökt magnitud",
+    t: '<p>En röd dvärgstjärna strålar ut 6,89·10<sup>23</sup> W. Bestäm stjärnans absoluta magnitud.</p><p>Använd L<sub>sol</sub> = 3,828·10<sup>26</sup> W och M<sub>sol</sub> = +4,83.</p>',
+    s: byggFacitF2V10(
+      'Skriv först luminositeten som andel av solens och använd sedan magnitudformeln.',
+      '\\[\\frac{L}{L_\\odot}=\\frac{6{,}89\\cdot10^{23}}{3{,}828\\cdot10^{26}}=1{,}80\\cdot10^{-3}\\]' +
+      '\\[M=M_\\odot-2{,}5\\log_{10}\\left(\\frac{L}{L_\\odot}\\right)=4{,}83-2{,}5\\log_{10}(1{,}80\\cdot10^{-3})=11{,}69\\]',
+      'Stjärnans absoluta magnitud är \\(M\\approx+11{,}7\\).',
+      ''
+    )
+  },
+  {
+    id: "5.32", kap: 5, omr: "farg_ljusstyrka", niva: "C", poang: "(2/2/0)",
+    typ: "beräkna luminositet och absolut magnitud från radie och temperatur, ur text, sökt två storheter",
+    t: '<p>En blåvit stjärna har radien 3,4 R<sub>sol</sub> och yttemperaturen 12 000 K.</p><ol><li>Beräkna luminositeten i enheter av solens luminositet.</li><li>Bestäm stjärnans absoluta magnitud.</li></ol><p>Använd T<sub>sol</sub> = 5772 K och M<sub>sol</sub> = +4,83.</p>',
+    s: byggFacitF2V10(
+      'I förhållande till solen kan Stefan–Boltzmanns lag skrivas utan att konstanten behöver sättas in.',
+      '\\[\\frac{L}{L_\\odot}=\\left(\\frac{R}{R_\\odot}\\right)^2\\left(\\frac{T}{T_\\odot}\\right)^4=3{,}4^2\\left(\\frac{12000}{5772}\\right)^4=216\\]' +
+      '\\[M=4{,}83-2{,}5\\log_{10}(216)=-1{,}01\\]',
+      'Luminositeten är cirka \\(216L_\\odot\\) och den absoluta magnituden är \\(M\\approx-1{,}01\\).',
+      ''
+    )
+  },
+  {
+    id: "5.33", kap: 5, omr: "farg_ljusstyrka", niva: "C", poang: "(2/2/0)",
+    typ: "beräkna stjärnradie från absolut magnitud och temperatur, ur text, sökt radie",
+    t: '<p>En varm stjärna har absolut magnitud M = −3,55 och yttemperaturen 21 000 K. Bestäm radien i enheter av solens radie.</p><p>Använd M<sub>sol</sub> = +4,83 och T<sub>sol</sub> = 5772 K.</p>',
+    s: byggFacitF2V10(
+      'Den absoluta magnituden ger luminositeten. Därefter löses radien ut ur Stefan–Boltzmanns lag i relativ form.',
+      '\\[\\frac{L}{L_\\odot}=10^{-0{,}4(-3{,}55-4{,}83)}=2249\\]' +
+      '\\[\\frac{R}{R_\\odot}=\\sqrt{\\frac{L/L_\\odot}{(T/T_\\odot)^4}}=\\sqrt{\\frac{2249}{(21000/5772)^4}}=3{,}58\\]',
+      'Stjärnans radie är cirka \\(3{,}58R_\\odot\\).',
+      ''
+    )
+  },
+  {
+    id: "5.34", kap: 5, omr: "farg_ljusstyrka", niva: "C", poang: "(2/2/0)",
+    typ: "beräkna stjärntemperatur från absolut magnitud och radie, ur text, sökt temperatur",
+    t: '<p>En superjätte har absolut magnitud M = −6,93 och radien 203 R<sub>sol</sub>. Bestäm stjärnans yttemperatur.</p><p>Använd M<sub>sol</sub> = +4,83 och T<sub>sol</sub> = 5772 K.</p>',
+    s: byggFacitF2V10(
+      'Bestäm först luminositetskvoten och lös sedan ut temperaturkvoten ur \\(L/L_\\odot=(R/R_\\odot)^2(T/T_\\odot)^4\\).',
+      '\\[\\frac{L}{L_\\odot}=10^{-0{,}4(-6{,}93-4{,}83)}=5{,}06\\cdot10^4\\]' +
+      '\\[T=T_\\odot\\left(\\frac{L/L_\\odot}{(R/R_\\odot)^2}\\right)^{1/4}=5772\\left(\\frac{5{,}06\\cdot10^4}{203^2}\\right)^{1/4}=6{,}08\\cdot10^3\\ \\mathrm K\\]',
+      'Yttemperaturen är cirka \\(6{,}1\\cdot10^3\\ \\mathrm K\\).',
+      ''
+    )
+  },
+  {
+    id: "5.35", kap: 5, omr: "farg_ljusstyrka", niva: "A", poang: "(2/2/2)",
+    typ: "jämföra två stjärnors luminositet, absoluta magnitud och avstånd, ur tabell, sökt flera storheter",
+    t: '<p>Två stjärnor observeras med följande data:</p><table class="facit-tabell"><thead><tr><th>Stjärna</th><th>Radie</th><th>Temperatur</th><th>Apparent magnitud</th></tr></thead><tbody><tr><td>A</td><td>2,8 R<sub>sol</sub></td><td>10 300 K</td><td>+1,58</td></tr><tr><td>B</td><td>8,8 R<sub>sol</sub></td><td>4700 K</td><td>+1,14</td></tr></tbody></table><p>Bestäm för båda stjärnorna a) luminositeten i L<sub>sol</sub>, b) den absoluta magnituden och c) avståndet i parsec.</p><p>Använd T<sub>sol</sub> = 5772 K och M<sub>sol</sub> = +4,83.</p>',
+    s: byggFacitF2V10(
+      'Först används Stefan–Boltzmanns lag relativt solen. Sedan omvandlas luminositeten till absolut magnitud och avståndsmodulen ger avståndet.',
+      '\\[\\frac{L_A}{L_\\odot}=2{,}8^2\\left(\\frac{10300}{5772}\\right)^4=79{,}5,\\qquad M_A=4{,}83-2{,}5\\log_{10}(79{,}5)=+0{,}08\\]' +
+      '\\[d_A=10^{(1{,}58-0{,}08+5)/5}=20{,}0\\ \\mathrm{pc}\\]' +
+      '\\[\\frac{L_B}{L_\\odot}=8{,}8^2\\left(\\frac{4700}{5772}\\right)^4=34{,}0,\\qquad M_B=4{,}83-2{,}5\\log_{10}(34{,}0)=+1{,}00\\]' +
+      '\\[d_B=10^{(1{,}14-1{,}00+5)/5}=10{,}7\\ \\mathrm{pc}\\]',
+      'A: \\(L_A=79{,}5L_\\odot\\), \\(M_A\\approx+0{,}08\\), \\(d_A\\approx20{,}0\\ \\mathrm{pc}\\). B: \\(L_B=34{,}0L_\\odot\\), \\(M_B\\approx+1{,}00\\), \\(d_B\\approx10{,}7\\ \\mathrm{pc}\\).',
+      'B ser något ljusare ut från jorden trots att A har större luminositet, eftersom B ligger närmare.'
+    )
+  },
+  {
+    id: "5.36", kap: 5, omr: "farg_ljusstyrka", niva: "C", poang: "(2/2/0)",
+    typ: "bestämma temperaturförhållande från magnitudskillnad vid samma radie, ur text, sökt förhållande",
+    t: '<p>Två stjärnor har samma radie. Stjärna A har absolut magnitud +2,0 och stjärna B absolut magnitud +3,0.</p><p>Hur många gånger högre är A:s yttemperatur än B:s?</p>',
+    s: byggFacitF2V10(
+      'En magnitudskillnad på 1,0 motsvarar luminositetskvoten \\(10^{0{,}4}=2{,}512\\). Vid samma radie gäller \\(L\\propto T^4\\).',
+      '\\[\\frac{L_A}{L_B}=10^{-0{,}4(M_A-M_B)}=10^{0{,}4}=2{,}512\\]' +
+      '\\[\\frac{T_A}{T_B}=\\left(\\frac{L_A}{L_B}\\right)^{1/4}=2{,}512^{1/4}=1{,}259\\]',
+      'A:s yttemperatur är cirka \\(1{,}26\\) gånger B:s.',
+      ''
+    )
+  },
+  {
+    id: "5.37", kap: 5, omr: "farg_ljusstyrka", niva: "C", poang: "(2/2/0)",
+    typ: "jämföra luminositet och absolut magnitud för två stjärnor med olika radie och temperatur, ur text, sökt två förhållanden",
+    t: '<p>Stjärna B har hälften så stor radie som stjärna A men dubbelt så hög yttemperatur.</p><ol><li>Bestäm luminositetsförhållandet L<sub>B</sub>/L<sub>A</sub>.</li><li>Hur mycket skiljer deras absoluta magnituder och vilken stjärna har lägst magnitud?</li></ol>',
+    s: byggFacitF2V10(
+      'Luminositeten beror på radien i kvadrat och temperaturen upphöjd till fyra.',
+      '\\[\\frac{L_B}{L_A}=0{,}5^2\\cdot2^4=4\\]' +
+      '\\[M_B-M_A=-2{,}5\\log_{10}\\left(\\frac{L_B}{L_A}\\right)=-2{,}5\\log_{10}4=-1{,}51\\]',
+      'B har fyra gånger större luminositet och dess absoluta magnitud är cirka 1,51 magnitudenheter lägre än A:s.',
+      'Den högre temperaturen påverkar luminositeten mycket kraftigt eftersom den står upphöjd till fyra.'
+    )
+  },
+  {
+    id: "5.38", kap: 5, omr: "farg_ljusstyrka", niva: "A", poang: "(2/2/2)",
+    typ: "använda Stefan-Boltzmanns lag i flera relativa jämförelser, ur text, sökt temperatur, luminositet och radie",
+    t: '<p>Solens luminositet är 3,828·10<sup>26</sup> W och radien är 6,957·10<sup>8</sup> m. Använd Stefan–Boltzmanns lag och σ = 5,670·10<sup>−8</sup> W/(m²·K⁴).</p><ol><li>Beräkna solens yttemperatur.</li><li>Hur stor luminositet får en stjärna med 2 R<sub>sol</sub> och T<sub>sol</sub>?</li><li>Hur stor luminositet får en stjärna med R<sub>sol</sub> och 2 T<sub>sol</sub>?</li><li>Vilken temperatur krävs för L<sub>sol</sub> om radien är 0,5 R<sub>sol</sub>?</li><li>Vilken radie krävs för 5 L<sub>sol</sub> om temperaturen är 4 T<sub>sol</sub>?</li></ol>',
+    s: byggFacitF2V10(
+      'Utgå från \\(L=4\\pi R^2\\sigma T^4\\). I del b–e är det enklast att dividera med motsvarande uttryck för solen.',
+      '\\[T_\\odot=\\left(\\frac{L_\\odot}{4\\pi R_\\odot^2\\sigma}\\right)^{1/4}=5772\\ \\mathrm K\\]' +
+      '\\[\\frac{L_b}{L_\\odot}=2^2=4\\]' +
+      '\\[\\frac{L_c}{L_\\odot}=2^4=16\\]' +
+      '\\[1=0{,}5^2\\left(\\frac{T_d}{T_\\odot}\\right)^4\\Rightarrow T_d=\\sqrt2\\,T_\\odot=8163\\ \\mathrm K\\]' +
+      '\\[5=\\left(\\frac{R_e}{R_\\odot}\\right)^2 4^4\\Rightarrow \\frac{R_e}{R_\\odot}=\\sqrt{\\frac5{256}}=0{,}140\\]',
+      'a) \\(5772\\ \\mathrm K\\), b) \\(4L_\\odot\\), c) \\(16L_\\odot\\), d) cirka \\(8160\\ \\mathrm K\\), e) \\(0{,}140R_\\odot\\).',
+      ''
+    )
+  },
+  {
+    id: "5.39", kap: 5, omr: "farg_ljusstyrka", niva: "C", poang: "(2/2/0)",
+    typ: "beräkna luminositet och absolut magnitud från temperatur och radie, ur text, sökt två storheter",
+    t: '<p>Stjärnan Procyon har yttemperaturen 6530 K och radien 2,05 R<sub>sol</sub>.</p><ol><li>Beräkna luminositeten i L<sub>sol</sub>.</li><li>Bestäm den absoluta magnituden.</li></ol><p>Använd T<sub>sol</sub> = 5772 K och M<sub>sol</sub> = +4,83.</p>',
+    s: byggFacitF2V10(
+      'Beräkna först luminositeten relativt solen och använd därefter magnitudskalan.',
+      '\\[\\frac{L}{L_\\odot}=2{,}05^2\\left(\\frac{6530}{5772}\\right)^4=6{,}88\\]' +
+      '\\[M=4{,}83-2{,}5\\log_{10}(6{,}88)=+2{,}74\\]',
+      'Luminositeten är \\(6{,}88L_\\odot\\) och den absoluta magnituden är \\(M\\approx+2{,}74\\).',
+      ''
+    )
+  },
+  {
+    id: "5.40", kap: 5, omr: "avstandsmatning", niva: "A", poang: "(2/2/2)",
+    typ: "kombinera parallax, magnitud och temperatur för att bestämma avstånd, luminositet och radie, ur text, sökt fyra storheter",
+    t: '<p>En röd superjätte har parallaxen 0,00451 bågsekunder, apparent magnitud +0,50 och yttemperaturen 3500 K.</p><ol><li>Bestäm avståndet i parsec.</li><li>Bestäm den absoluta magnituden.</li><li>Bestäm luminositeten i L<sub>sol</sub>.</li><li>Bestäm radien i R<sub>sol</sub>.</li></ol><p>Använd M<sub>sol</sub> = +4,83 och T<sub>sol</sub> = 5772 K.</p>',
+    s: byggFacitF2V10(
+      'Uppgiften bildar en kedja: parallax ger avstånd, avstånd och apparent magnitud ger absolut magnitud, och den ger sedan luminositet och radie.',
+      '\\[d=\\frac1{0{,}00451}=222\\ \\mathrm{pc}\\]' +
+      '\\[M=0{,}50+5-5\\log_{10}(221{,}7)=-6{,}23\\]' +
+      '\\[\\frac{L}{L_\\odot}=10^{-0{,}4(-6{,}23-4{,}83)}=2{,}65\\cdot10^4\\]' +
+      '\\[\\frac{R}{R_\\odot}=\\sqrt{\\frac{L/L_\\odot}{(T/T_\\odot)^4}}=\\sqrt{\\frac{2{,}65\\cdot10^4}{(3500/5772)^4}}=443\\]',
+      'Avståndet är cirka \\(222\\ \\mathrm{pc}\\), den absoluta magnituden \\(-6{,}23\\), luminositeten \\(2{,}65\\cdot10^4L_\\odot\\) och radien cirka \\(443R_\\odot\\).',
+      ''
+    )
+  },
+  {
+    id: "5.41", kap: 5, omr: "farg_ljusstyrka", niva: "C", poang: "(2/2/0)",
+    typ: "beräkna luminositetskvot från skillnad i absolut magnitud, ur text, sökt kvot",
+    t: '<p>Stjärna A har 3,83 magnitudenheter lägre absolut magnitud än stjärna B.</p><p>Hur många gånger större luminositet har A än B?</p>',
+    s: byggFacitF2V10(
+      'En skillnad i absolut magnitud kopplas till luminositetskvoten med \\(L_A/L_B=10^{-0{,}4(M_A-M_B)}\\). Här är \\(M_A-M_B=-3{,}83\\).',
+      '\\[\\frac{L_A}{L_B}=10^{-0{,}4(-3{,}83)}=10^{1{,}532}=34{,}0\\]',
+      'A har cirka 34 gånger större luminositet än B.',
+      'Det är viktigt att använda faktorn 0,4 i exponenten; magnitudskalan är logaritmisk.'
+    )
+  },
+  {
+    id: "5.42", kap: 5, omr: "avstandsmatning", niva: "A", poang: "(2/2/2)",
+    typ: "kombinera parallax, magnitud, Wiens lag, luminositet och fotonenergi, ur text, sökt sex storheter",
+    t: '<p>En stjärna har apparent magnitud +4,36, parallaxen 0,01925 bågsekunder och strålningsmaximum vid våglängden 632 nm.</p><ol><li>Bestäm avståndet.</li><li>Bestäm den absoluta magnituden.</li><li>Bestäm yttemperaturen.</li><li>Bestäm luminositeten.</li><li>Bestäm strålningsflödet vid jorden.</li><li>Ett teleskop har öppningsradien 3,0 m. Hur många fotoner per sekund träffar öppningen om allt infallande ljus förenklat antas ha våglängden 632 nm?</li></ol><p>Använd b = 2,898·10<sup>−3</sup> m·K, M<sub>sol</sub> = +4,83, L<sub>sol</sub> = 3,828·10<sup>26</sup> W, 1 pc = 3,086·10<sup>16</sup> m, h = 6,626·10<sup>−34</sup> Js och c = 3,00·10<sup>8</sup> m/s.</p>',
+    s: byggFacitF2V10(
+      'Lös delarna i ordning. Varje resultat används i nästa steg.',
+      '\\[d=\\frac1p=51{,}95\\ \\mathrm{pc}\\]' +
+      '\\[M=4{,}36+5-5\\log_{10}(51{,}95)=+0{,}782\\]' +
+      '\\[T=\\frac{b}{\\lambda_{\\max}}=\\frac{2{,}898\\cdot10^{-3}}{632\\cdot10^{-9}}=4585\\ \\mathrm K\\]' +
+      '\\[\\frac{L}{L_\\odot}=10^{-0{,}4(0{,}782-4{,}83)}=41{,}6\\Rightarrow L=1{,}59\\cdot10^{28}\\ \\mathrm W\\]' +
+      '\\[F=\\frac{L}{4\\pi d^2}=\\frac{1{,}59\\cdot10^{28}}{4\\pi(51{,}95\\cdot3{,}086\\cdot10^{16})^2}=4{,}93\\cdot10^{-10}\\ \\mathrm{W/m^2}\\]' +
+      '\\[E_\\gamma=\\frac{hc}{\\lambda}=3{,}14\\cdot10^{-19}\\ \\mathrm J\\]' +
+      '\\[N=\\frac{F\\pi r^2}{E_\\gamma}=\\frac{4{,}93\\cdot10^{-10}\\pi\\cdot3{,}0^2}{3{,}14\\cdot10^{-19}}=4{,}44\\cdot10^{10}\\ \\mathrm{s^{-1}}\\]',
+      'a) \\(51{,}95\\ \\mathrm{pc}\\), b) \\(M=+0{,}782\\), c) \\(4585\\ \\mathrm K\\), d) \\(41{,}6L_\\odot\\), e) \\(4{,}93\\cdot10^{-10}\\ \\mathrm{W/m^2}\\), f) cirka \\(4{,}4\\cdot10^{10}\\) fotoner per sekund.',
+      'Fotonberäkningen är en förenklad övre uppskattning eftersom verkliga stjärnor sänder ut många våglängder och ett teleskop inte registrerar allt infallande ljus.'
+    )
+  },
+  {
+    id: "5.43", kap: 5, omr: "avstandsmatning", niva: "A", poang: "(2/2/2)",
+    typ: "rangordna stjärnors apparenta ljusstyrka från radie, temperatur och avstånd, ur tabell, sökt ordning",
+    t: '<p>Rangordna stjärnorna från den som ser ljusast ut från jorden till den som ser svagast ut.</p>' +
+       '<table class="facit-tabell"><thead><tr><th>Stjärna</th><th>Temperatur</th><th>Radie</th><th>Avstånd</th></tr></thead><tbody>' +
+       '<tr><td>Altair</td><td>7992 K</td><td>1,75 R<sub>sol</sub></td><td>16,6 ljusår</td></tr>' +
+       '<tr><td>Canopus</td><td>7350 K</td><td>71,4 R<sub>sol</sub></td><td>310 ljusår</td></tr>' +
+       '<tr><td>Sigma Draconis</td><td>5255 K</td><td>0,776 R<sub>sol</sub></td><td>18,6 ljusår</td></tr>' +
+       '<tr><td>Vega</td><td>9602 K</td><td>2,50 R<sub>sol</sub></td><td>25,0 ljusår</td></tr></tbody></table>' +
+       '<p>Använd T<sub>sol</sub> = 5772 K, M<sub>sol</sub> = +4,83 och 1 pc = 3,262 ljusår. Visa hur du jämför stjärnorna.</p>',
+    s: byggFacitF2V10(
+      'Beräkna \\(L/L_\\odot=R^2(T/T_\\odot)^4\\), sedan \\(M=4{,}83-2{,}5\\log_{10}(L/L_\\odot)\\) och till sist \\(m=M-5+5\\log_{10}d\\), där \\(d\\) anges i parsec.',
+      '\\[m_{\\mathrm{Altair}}\\approx+0{,}73\\]' +
+      '\\[m_{\\mathrm{Canopus}}\\approx-0{,}60\\]' +
+      '\\[m_{\\mathrm{Sigma\\ Draconis}}\\approx+4{,}57\\]' +
+      '\\[m_{\\mathrm{Vega}}\\approx+0{,}05\\]',
+      'Rangordningen blir Canopus, Vega, Altair och sist Sigma Draconis.',
+      'Lägre apparent magnitud betyder att stjärnan ser ljusare ut.'
+    )
+  }
+];
+
+window.BANK2.push(...nyaStjarnuppgifterF2V10);
