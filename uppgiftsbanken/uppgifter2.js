@@ -4453,3 +4453,62 @@ for (const uppgift of window.BANK2) {
 for (const uppgift of window.BANK2) {
   uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
 }
+
+function markeraOmarkeradInlineMatematikF2V5(html) {
+  const serUtSomMatematik = (innehall) => {
+    const text = innehall.trim();
+    return /\\(?:[A-Za-z]+|[ ,;!])/.test(text) ||
+      /[_^=]|\{,\}/.test(text) ||
+      /[A-Za-z0-9}]\s*\/\s*[A-Za-z0-9{]/.test(text) ||
+      /^[+-]?\d+(?:\{,\}\d+)?$/.test(text) ||
+      /[<>%·]/.test(text) ||
+      /^[+\-−]?(?=.*\d)[A-Za-z0-9,.\s·%<>+\-−]+$/.test(text) ||
+      /^[+\-−]?[A-Za-z]{1,4}(?:·[A-Za-z]{1,3})?$/.test(text) ||
+      /^[A-Za-z](?:_\{?[^} ]+\}?)?$/.test(text);
+  };
+  const markeraText = (text) => {
+    let resultat = "";
+    for (let i = 0; i < text.length;) {
+      if (text.startsWith("\\(", i)) {
+        const slut = text.indexOf("\\)", i + 2);
+        if (slut >= 0) {
+          resultat += text.slice(i, slut + 2);
+          i = slut + 2;
+          continue;
+        }
+      }
+      if (text.startsWith("\\[", i)) {
+        const slut = text.indexOf("\\]", i + 2);
+        if (slut >= 0) {
+          resultat += text.slice(i, slut + 2);
+          i = slut + 2;
+          continue;
+        }
+      }
+      if (text[i] !== "(") {
+        resultat += text[i++];
+        continue;
+      }
+      let djup = 1;
+      let slut = i + 1;
+      while (slut < text.length && djup > 0) {
+        if (text[slut] === "(") djup += 1;
+        if (text[slut] === ")") djup -= 1;
+        slut += 1;
+      }
+      if (djup !== 0) {
+        resultat += text[i++];
+        continue;
+      }
+      const innehall = text.slice(i + 1, slut - 1);
+      resultat += serUtSomMatematik(innehall) ? `\\(${innehall}\\)` : text.slice(i, slut);
+      i = slut;
+    }
+    return resultat;
+  };
+  return html.split(/(<[^>]+>)/g).map((del) => del.startsWith("<") ? del : markeraText(del)).join("");
+}
+
+for (const uppgift of window.BANK2) {
+  uppgift.s = markeraOmarkeradInlineMatematikF2V5(uppgift.s);
+}
