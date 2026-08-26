@@ -4878,11 +4878,37 @@ function normaliseraFigurstorlekF2V7(html, maxBredd, maxHojd) {
   });
 }
 
+// De breda fotbollsfigurerna hade en stor tom yta ovanför själva motivet.
+// Beskär bara SVG-ytan; figurernas geometri och proportioner ändras inte.
+const beskarningFotbollsfigurerF2V7B = {
+  "1.58": "0 74 430 132",
+  "1.59": "0 93 430 113",
+  "1.60": "0 88 430 118",
+  "1.65": "0 78 430 128",
+  "1.66": "0 90 430 116",
+  "1.67": "0 118 430 88",
+  "1.70": "0 73 430 133",
+  "1.71": "0 115 430 91",
+  "1.72": "0 112 430 94",
+  "1.74": "0 115 430 91",
+  "1.77": "0 67 430 113",
+  "1.78": "0 48 470 196",
+  "1.79": "0 48 470 196"
+};
+
+function beskarFigurytaF2V7B(html, nyViewBox) {
+  return html.replace(/(<svg\b[^>]*\bviewBox=")[^"]+("[^>]*>)/, `$1${nyViewBox}$2`);
+}
+
 for (const uppgift of window.BANK2) {
   const arKastrorelse = uppgift.kap === 1 && uppgift.omr === "kast";
   if (!arKastrorelse && uppgift.id !== "1.36") continue;
-  const maxBredd = 360;
-  const maxHojd = 240;
+  const nyViewBox = beskarningFotbollsfigurerF2V7B[uppgift.id];
+  if (nyViewBox) uppgift.t = beskarFigurytaF2V7B(uppgift.t, nyViewBox);
+  const uppgiftstextUtanFigur = uppgift.t.replace(/<svg\b[\s\S]*?<\/svg>/gi, " ");
+  const arFotbollsuppgift = /fotboll|frispark|målvakt|straff|hörna|anfallare|mållinj|ribba|volleyskott|djupledsboll|sparkas|Manchester United|Liverpool/i.test(uppgiftstextUtanFigur);
+  const maxBredd = arFotbollsuppgift ? 500 : 360;
+  const maxHojd = arFotbollsuppgift ? 320 : 240;
   uppgift.t = normaliseraFigurstorlekF2V7(uppgift.t, maxBredd, maxHojd);
 }
 
