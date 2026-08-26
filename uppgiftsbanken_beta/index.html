@@ -951,10 +951,16 @@ table.data th{background:var(--sunken);font-weight:600}
 .fig[data-bildskala] svg,.fig[data-bildskala] img{
   display:block!important;width:100%!important;max-width:none!important;height:auto!important;
 }
-/* I redigeraren får bilden växa fritt; boxen scrollar vid behov. */
+/* I redigeraren visas bilden nedskalad så att den ryms i panelen. */
 .ru-bildbox .fig[data-bildskala]{
-  width:var(--bildbredd,520px)!important;
-  max-width:none!important;
+  width:auto!important;
+  max-width:100%!important;
+}
+.ru-bildbox .fig[data-bildskala] svg,.ru-bildbox .fig[data-bildskala] img{
+  width:auto!important;
+  max-width:100%!important;
+  max-height:240px!important;
+  height:auto!important;
 }
 @media print{
   /* Viktigt: aldrig bredare än utskriftskolumnen, annars skalar Chrome ned hela sidan. */
@@ -1267,6 +1273,8 @@ table.data th{background:var(--sunken);font-weight:600}
       </div>
 
       <section class="ru-sektion">
+        <div class="ru-label">
+          <span>Figur / bild</span>
           <span class="ru-hjälp" id="ruBildstatus"></span>
         </div>
         <div class="ru-bildbox" id="ruBildbox"></div>
@@ -1798,14 +1806,23 @@ function figurStorlekUrHTML(figHTML){
 }
 function mätBildBas(){
   if(urBildBas>0)return urBildBas;
+  /* Läs figurens naturliga bredd ur SVG:ns egna attribut, inte ur den
+     nedskalade förhandsvisningen — annars blir referensbredden fel. */
+  const box=document.createElement('div');
+  box.innerHTML=urBildHTML||'';
+  const svg=box.querySelector('svg');
+  if(svg){
+    const w=parseFloat(svg.getAttribute('width'));
+    if(w>0){ urBildBas=w; return urBildBas; }
+    const vb=(svg.getAttribute('viewBox')||'').split(/\s+/);
+    if(vb.length===4&&parseFloat(vb[2])>0){ urBildBas=parseFloat(vb[2]); return urBildBas; }
+  }
+  const img=box.querySelector('img');
+  if(img&&img.naturalWidth>0){ urBildBas=img.naturalWidth; return urBildBas; }
   const fig=$('#ruBildbox .fig');
   if(!fig)return 520;
   const r=fig.getBoundingClientRect();
-  const aktuell=Math.max(1,r.width||520);
-  // Om en gammal procentstorlek är aktiv räknas originalbredden baklänges.
-  urBildBas=urBildStorlekÄndrad&&urBildBredd>0
-    ? aktuell/(urBildBredd/100)
-    : aktuell;
+  urBildBas=Math.max(1,r.width||520);
   return urBildBas;
 }
 function sättFigurBreddHTML(figHTML,pct,bas){
@@ -1839,14 +1856,17 @@ function ritaUrBild(){
     if(fig){
       const bas=urBildBas||mätBildBas();
       const px=Math.round(bas*(urBildBredd/100)*10)/10;
+      /* Skalan sparas som attribut, men förhandsvisningen hålls inom panelen
+         så att stora figurer inte tar över hela dialogen. */
       fig.style.display='block';
-      fig.style.width=px+'px';
-      fig.style.maxWidth='none';
+      fig.style.width='auto';
+      fig.style.maxWidth='100%';
       fig.style.setProperty('--bildbredd',px+'px');
       fig.setAttribute('data-bildskala',String(urBildBredd));
       fig.setAttribute('data-bildbas',String(Math.round(bas*10)/10));
       const media=fig.querySelector('svg,img');
-      if(media){media.style.width='100%';media.style.maxWidth='none';media.style.height='auto';}
+      if(media){media.style.width='auto';media.style.maxWidth='100%';
+                media.style.maxHeight='240px';media.style.height='auto';}
     }
   }
   $('#ruBildstatus').textContent=urBildHTML?'Bild finns':'Ingen bild';
