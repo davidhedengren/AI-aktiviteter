@@ -4973,3 +4973,13 @@ for (const uppgift of window.BANK2) {
     }
   }
 }
+
+// Uppgift 1.60 frågar endast efter rörelsen fram till mållinjen.
+// En bedömning av om det blir mål blir tvetydig om bollen hinner studsa.
+const uppgift160F2V9 = window.BANK2.find(uppgift => uppgift.id === "1.60");
+if (uppgift160F2V9) {
+  uppgift160F2V9.poang = "(2/0/0)";
+  uppgift160F2V9.typ = "beräkna tid och höjd för ett vågrätt skott vid mållinjen, ur diagram, sökt tid och höjd";
+  uppgift160F2V9.t = uppgift160F2V9.t.replace("\n<li>Blir det mål?</li>", "");
+  uppgift160F2V9.s = uppgift160F2V9.s.replace(" Den är över marken och under ribban, så det blir mål.", "");
+}
