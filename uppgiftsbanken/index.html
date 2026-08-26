@@ -836,11 +836,11 @@ table.data th{background:var(--sunken);font-weight:600}
 .ru-text:focus{outline:none;background:#fff;border-color:var(--ed);box-shadow:0 0 0 3.5px var(--ed-ring)}
 .ru-kopiera-rad{display:flex;justify-content:flex-end;margin-top:8px}
 .ru-bildbox{
-  min-height:220px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--canvas);
-  display:block;overflow:auto
+  min-height:220px;max-height:300px;padding:14px;border:1px solid var(--line);
+  border-radius:12px;background:var(--canvas);display:block;overflow:auto
 }
 .ru-bildbox .fig{display:block;margin:0 auto;max-width:100%;width:auto}
-.ru-bildbox .fig svg,.ru-bildbox .fig img{display:block;max-width:100%;max-height:260px;width:auto;height:auto;margin:0 auto}
+.ru-bildbox .fig svg,.ru-bildbox .fig img{display:block;max-width:100%;width:auto;height:auto;margin:0 auto}
 .ru-ingenbild{font-size:12px;color:var(--muted);text-align:center}
 .ru-bildverktyg{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
 .ru-bildverktyg .knapp{padding:7px 10px;font-size:11.5px}
@@ -866,6 +866,7 @@ table.data th{background:var(--sunken);font-weight:600}
   .ru-dialog{width:100%;max-height:calc(100vh - 20px)}
   .ru-body{grid-template-columns:1fr;padding:16px}
   .ru-vänster{gap:14px}
+  .ru-bildbox{min-height:160px;max-height:220px}
   .ru-text{min-height:180px}
   #ruFacit{min-height:130px!important}
 }
@@ -951,15 +952,16 @@ table.data th{background:var(--sunken);font-weight:600}
 .fig[data-bildskala] svg,.fig[data-bildskala] img{
   display:block!important;width:100%!important;max-width:none!important;height:auto!important;
 }
-/* I redigeraren visas bilden nedskalad så att den ryms i panelen. */
+/* I redigeraren visas bilden i sin valda skala; boxen scrollar vid behov. */
 .ru-bildbox .fig[data-bildskala]{
-  width:auto!important;
-  max-width:100%!important;
+  width:var(--bildbredd,520px)!important;
+  max-width:none!important;
+  margin:0 auto!important;
 }
 .ru-bildbox .fig[data-bildskala] svg,.ru-bildbox .fig[data-bildskala] img{
-  width:auto!important;
-  max-width:100%!important;
-  max-height:240px!important;
+  width:100%!important;
+  max-width:none!important;
+  max-height:none!important;
   height:auto!important;
 }
 @media print{
@@ -1859,17 +1861,17 @@ function ritaUrBild(){
     if(fig){
       const bas=urBildBas||mätBildBas();
       const px=Math.round(bas*(urBildBredd/100)*10)/10;
-      /* Skalan sparas som attribut, men förhandsvisningen hålls inom panelen
-         så att stora figurer inte tar över hela dialogen. */
+      /* Bilden visas i sin valda skala. Boxen har fast höjd och scrollar,
+         så stora figurer tar inte över dialogen. */
       fig.style.display='block';
-      fig.style.width='auto';
-      fig.style.maxWidth='100%';
+      fig.style.width=px+'px';
+      fig.style.maxWidth='none';
       fig.style.setProperty('--bildbredd',px+'px');
       fig.setAttribute('data-bildskala',String(urBildBredd));
       fig.setAttribute('data-bildbas',String(Math.round(bas*10)/10));
       const media=fig.querySelector('svg,img');
-      if(media){media.style.width='auto';media.style.maxWidth='100%';
-                media.style.maxHeight='240px';media.style.height='auto';}
+      if(media){media.style.width='100%';media.style.maxWidth='none';
+                media.style.maxHeight='none';media.style.height='auto';}
     }
   }
   $('#ruBildstatus').textContent=urBildHTML?'Bild finns':'Ingen bild';
