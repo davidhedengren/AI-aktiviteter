@@ -4881,7 +4881,69 @@ function normaliseraFigurstorlekF2V7(html, maxBredd, maxHojd) {
 for (const uppgift of window.BANK2) {
   const arKastrorelse = uppgift.kap === 1 && uppgift.omr === "kast";
   if (!arKastrorelse && uppgift.id !== "1.36") continue;
-  const maxBredd = uppgift.id === "1.30" ? 280 : 240;
-  const maxHojd = uppgift.id === "1.36" ? 130 : 150;
+  const maxBredd = 360;
+  const maxHojd = 240;
   uppgift.t = normaliseraFigurstorlekF2V7(uppgift.t, maxBredd, maxHojd);
+}
+
+// I pipuppgifterna benämns resonanserna som grundton och övertoner.
+// Heltalsfaktorerna i beräkningarna behålls, men den verbala benämningen
+// "harmonisk" används inte för dessa uppgifter.
+const terminologiPiporF2V8 = {
+  "2.77": {
+    s: [
+      ["Fem halva våglängder innebär \\(n=5\\), alltså femte harmoniska tonen.", "Fem halva våglängder innebär att mönstret är fjärde övertonen."],
+      ["\\[f_n=\\frac{nv}{2L}\\]\\[f_5=\\frac{5\\cdot340}{2\\cdot0{,}85}=1000\\ \\mathrm{Hz}\\]", "\\[f=\\frac{5v}{2L}=\\frac{5\\cdot340}{2\\cdot0{,}85}=1000\\ \\mathrm{Hz}\\]"]
+    ]
+  },
+  "2.81": {
+    t: [["tredje harmoniska svängningen", "andra övertonen"]],
+    s: [["Tre bukar betyder tredje harmoniska tonen i det öppna röret.", "Tre bukar i det öppna röret betyder att mönstret är andra övertonen."]]
+  },
+  "2.82": {
+    s: [["Ett halvöppet rör har bara de udda harmoniska frekvenserna.", "I ett halvöppet rör följs grundtonen av första övertonen, andra övertonen och så vidare. Frekvenserna är"]]
+  },
+  "2.92": {
+    t: [["tredje harmoniska svängningen", "andra övertonen"]],
+    s: [
+      ["Tre halva våglängder betyder \\(n=3\\), alltså andra övertonen.", "Tre halva våglängder betyder att mönstret är andra övertonen."],
+      ["\\[\\lambda_3=\\frac{2L}{3}", "\\[\\lambda=\\frac{2L}{3}"],
+      ["\\[f_3=\\frac{v}{\\lambda_3}", "\\[f=\\frac{v}{\\lambda}"],
+      ["Nästa resonans har \\(n=4\\).", "Nästa resonans är tredje övertonen och innehåller fyra halva våglängder."],
+      ["\\[f_4=\\frac{4v}{2L}", "\\[f_{\\text{nästa}}=\\frac{4v}{2L}"]
+    ]
+  },
+  "2.128": {
+    s: [["Första övertonen i en öppen pipa är andra harmoniska tonen. Förskjutningen har", "I första övertonen har luftens förskjutning"]]
+  },
+  "2.135": {
+    typ: [["harmoniska svängningar", "stående vågmönster"]]
+  },
+  "2.140": {
+    s: [["Figuren rymmer \\(3/4\\) våglängd, alltså den första övertonen med harmoniskt tal \\(n=3\\).", "Figuren rymmer \\(3/4\\) våglängd, vilket betyder att den visar första övertonen."]]
+  },
+  "2.141": {
+    s: [
+      ["De fyra markerade inre noderna visar att det är fjärde harmoniska svängningen, alltså tredje övertonen.", "De fyra markerade inre noderna visar att mönstret är tredje övertonen."],
+      ["\\[\\lambda_4=\\frac{2L}{4}", "\\[\\lambda=\\frac{2L}{4}"],
+      ["\\[f_4=\\frac{v}{\\lambda_4}", "\\[f=\\frac{v}{\\lambda}"],
+      ["\\[f_1=\\frac{f_4}{4}", "\\[f_1=\\frac{f}{4}"]
+    ]
+  },
+  "2.143": {
+    s: [["eftersom de jämna harmoniska tonerna saknas.", "eftersom övertonerna ligger vid andra frekvenser: första övertonen är \\(3f_1\\), andra övertonen \\(5f_1\\) och så vidare."]]
+  },
+  "2.146": {
+    s: [["Andra övertonen i ett öppet rör är tredje harmoniska svängningen, \\(n=3\\). Förskjutningen har buk vid båda öppningarna och totalt tre halva våglängder ryms i röret.", "När andra övertonen ljuder har luftens förskjutning buk vid båda öppningarna, och totalt tre halva våglängder ryms i röret."]]
+  }
+};
+
+for (const uppgift of window.BANK2) {
+  const andringar = terminologiPiporF2V8[uppgift.id];
+  if (!andringar) continue;
+  for (const [falt, ersattningar] of Object.entries(andringar)) {
+    for (const [gammalText, nyText] of ersattningar) {
+      uppgift[falt] = uppgift[falt].replaceAll(gammalText, nyText);
+    }
+  }
 }
