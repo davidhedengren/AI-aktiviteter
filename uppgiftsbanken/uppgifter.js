@@ -11445,3 +11445,6713 @@ window.BANK = [
   "s": "<p>Tyngdkraften på viktmagasinet:</p>\n<p>F<sub>tyngd</sub> = mg = 40 · 9,82 = 392,8 N</p>\n<p>Titta på den rörliga trissan med magasinet. Uppåt går två vajerdelar: den ena upp till fästet i taket, den andra upp till den fasta trissan. Eftersom det är en enda vajer som löper friktionsfritt är kraften lika stor i båda delarna. Kalla den F.</p>\n<p>Kraftjämvikt för den rörliga trissan med magasinet:</p>\n<p>2F = 392,8</p>\n<p>F = <strong>1,96·10² N</strong></p>\n<p>Den fasta trissan ändrar bara vajerns riktning, inte kraftens storlek. Personen drar alltså i handtaget med samma kraft, ungefär 196 N, vilket motsvarar tyngden av 20 kg trots att magasinet väger 40 kg.</p>\n<p>För sträckan: om den rörliga trissan höjs 20 cm blir båda vajerdelarna ovanför den 20 cm kortare, alltså 40 cm vajer sammanlagt. Den vajern måste komma någonstans ifrån, och det enda som kan ge efter är handtagsänden:</p>\n<p>s = 2 · 20 = <strong>40 cm</strong></p>\n<p>Kontrollera med arbete. Lyftet av magasinet kostar 392,8 · 0,20 = 78,6 J, och personen uträttar 196,4 · 0,40 = 78,6 J. Lika mycket, precis som det ska vara i en friktionsfri maskin.</p>\n<p>Det är den generella regeln för alla enkla maskiner: det man vinner i kraft förlorar man i väg. Halva kraften kräver dubbla sträckan. En rörlig trissa gör alltså inte arbetet mindre, den fördelar bara ut det över en längre rörelse, vilket är precis vad man vill när man ska träna med lagom motstånd.</p>"
  }
 ];
+
+/* Gemensam facitstandard: KaTeX, tydliga delsteg och ett markerat slutsvar. */
+function byggFacitListaV2(rader, slutsvar, notering = "") {
+  const delar = rader.map(([mark, metod, matte, svar]) =>
+    `<div class="facit-del"><span class="facit-mark">${mark}</span><div class="facit-arbete">` +
+    (metod ? `<p class="facit-metod">${metod}</p>` : "") +
+    (matte ? `<div class="facit-matte">${matte}</div>` : "") +
+    (svar ? `<p>${svar}</p>` : "") +
+    `</div></div>`
+  ).join("");
+  return `<div class="facit-v2">${delar}<p class="facit-svar"><strong>Svar:</strong> ${slutsvar}</p>` +
+    (notering ? `<p class="facit-not">${notering}</p>` : "") + `</div>`;
+}
+
+const FACIT_ENHETER_V2 = {
+  "2.1": byggFacitListaV2([
+    ["a", "Använd Pythagoras sats för att få skärmens diagonal i pixlar och omvandla tum till millimeter.", String.raw`\[d_{\mathrm{px}}=\sqrt{2778^2+1284^2}=3061\ \mathrm{px}\]\[d=6{,}1\cdot25{,}4=154{,}9\ \mathrm{mm}\]\[\frac{3061}{154{,}9}=19{,}8\ \mathrm{px/mm}\]`, ""],
+    ["b", "Pixelstorleken är inversen av pixeltätheten.", String.raw`\[b=\frac{1}{19{,}8}\ \mathrm{mm}=0{,}0506\ \mathrm{mm}=50{,}6\ \mu\mathrm m\]`, ""]
+  ], String.raw`Pixeltätheten är \(19{,}8\ \mathrm{px/mm}\) och en pixel är cirka \(51\ \mu\mathrm m\) bred.`),
+  "2.5": byggFacitListaV2([
+    ["a", "Skalan är modellens längd dividerad med verklighetens längd.", String.raw`\[k=\frac{0{,}22}{1{,}392\cdot10^9}=1{,}58\cdot10^{-10}\]`, ""],
+    ["b", "Alla längder multipliceras med samma skalfaktor.", String.raw`\[d_{\mathrm{modell}}=1{,}496\cdot10^{11}\cdot1{,}58\cdot10^{-10}=23{,}6\ \mathrm m\]`, ""],
+    ["c", "Skala även jordens diameter.", String.raw`\[D_{\mathrm{jord}}=1{,}276\cdot10^7\cdot1{,}58\cdot10^{-10}=2{,}02\cdot10^{-3}\ \mathrm m\]`, ""]
+  ], String.raw`Skalan är \(1{,}58\cdot10^{-10}\), jorden placeras \(23{,}6\ \mathrm m\) bort och får diametern cirka \(2{,}0\ \mathrm{mm}\).`),
+  "2.9": byggFacitListaV2([
+    ["a", "En svensk mil är 10 km.", String.raw`\[0{,}58\ \mathrm{l/mil}=0{,}58\cdot10=5{,}8\ \mathrm{l/100\,km}\]`, ""],
+    ["b", "Multiplicera bränslevolymen med energiinnehållet per liter.", String.raw`\[E=5{,}8\cdot9{,}7=56{,}3\ \mathrm{kWh/100\,km}\]`, ""],
+    ["c", "Jämför den tillförda energin.", String.raw`\[\frac{56{,}3}{18}=3{,}13\]`, ""]
+  ], String.raw`Bilen förbrukar \(5{,}8\ \mathrm{l/100\,km}\), motsvarande cirka \(56\ \mathrm{kWh/100\,km}\). Elbilen använder ungefär en tredjedel så mycket energi, främst tack vare högre verkningsgrad.`),
+  "2.10": byggFacitListaV2([
+    ["a", "Omvandla knop till kilometer per timme.", String.raw`\[v=22\cdot1{,}852=40{,}7\ \mathrm{km/h}\]`, ""],
+    ["b", "Från km/h till m/s dividerar man med 3,6.", String.raw`\[v=\frac{40{,}7}{3{,}6}=11{,}3\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Farten är \(40{,}7\ \mathrm{km/h}=11{,}3\ \mathrm{m/s}\).`),
+  "2.11": byggFacitListaV2([
+    ["a", "Omvandla båda sidlängderna till meter före areaberäkningen.", String.raw`\[A_{\mathrm{A4}}=0{,}210\cdot0{,}297=0{,}06237\ \mathrm{m^2}\]`, ""],
+    ["b", "Dividera planens area med arean per ark.", String.raw`\[A_{\mathrm{plan}}=105\cdot68=7140\ \mathrm{m^2}\]\[N=\frac{7140}{0{,}06237}=1{,}145\cdot10^5\]`, ""]
+  ], String.raw`Ett A4-ark har arean \(0{,}0624\ \mathrm{m^2}\). Det behövs ungefär \(1{,}15\cdot10^5\), alltså 115 000 ark.`),
+  "2.12": byggFacitListaV2([
+    ["a", "Multiplicera åldern i år med antalet sekunder per år.", String.raw`\[t=17\cdot3{,}156\cdot10^7=5{,}3652\cdot10^8\ \mathrm s\]`, ""],
+    ["b", "Avrunda till två värdesiffror.", String.raw`\[t\approx5{,}4\cdot10^8\ \mathrm s\]`, ""],
+    ["c", "Åldern är bara angiven i hela år och begränsar därför noggrannheten.", "", "Två värdesiffror är rimligt; fler skulle antyda en noggrannare ålder än den givna."]
+  ], String.raw`En 17-åring har levt ungefär \(5{,}4\cdot10^8\ \mathrm s\).`),
+  "2.19": byggFacitListaV2([
+    ["a", "Dela tidsintervallet vid ett helt klockslag.", String.raw`\[18{:}40\rightarrow21{:}00=140\ \mathrm{min}\]\[21{:}00\rightarrow21{:}15=15\ \mathrm{min}\]\[t=155\ \mathrm{min}\]`, ""],
+    ["b", "En minut är 60 sekunder.", String.raw`\[t=155\cdot60=9300\ \mathrm s\]`, ""]
+  ], String.raw`Filmen är \(155\ \mathrm{min}\), vilket är \(9300\ \mathrm s\).`),
+  "2.20": byggFacitListaV2([
+    ["a", "Bassängen behandlas som ett rätblock.", String.raw`\[V=lbh=12\cdot5{,}0\cdot1{,}6=96\ \mathrm{m^3}\]`, ""],
+    ["b", "En kubikmeter är 1000 liter.", String.raw`\[V=96\cdot1000=9{,}6\cdot10^4\ \mathrm l\]`, ""]
+  ], String.raw`Volymen är \(96\ \mathrm{m^3}=96\,000\ \mathrm l\).`),
+  "2.21": byggFacitListaV2([
+    ["a", String.raw`Prefixet mikro betyder \(10^{-6}\).`, String.raw`\[4{,}5\ \mu\mathrm m=4{,}5\cdot10^{-6}\ \mathrm m\]`, ""],
+    ["b", "Skriv talet i grundpotensform och välj ett lämpligt prefix.", String.raw`\[1{,}2\cdot10^{-7}\ \mathrm m=120\ \mathrm{nm}=0{,}12\ \mu\mathrm m\]`, ""],
+    ["c", "Skriv båda i samma enhet.", String.raw`\[500\ \mathrm{nm}=0{,}500\ \mu\mathrm m>0{,}3\ \mu\mathrm m\]`, ""]
+  ], String.raw`\(4{,}5\ \mu\mathrm m=4{,}5\cdot10^{-6}\ \mathrm m\), \(0{,}000\,000\,12\ \mathrm m=120\ \mathrm{nm}\), och \(500\ \mathrm{nm}\) är störst.`),
+  "2.22": byggFacitListaV2([
+    ["a", "Identifiera SI-enheterna.", String.raw`\[[g]=\mathrm{m/s^2},\qquad[h]=\mathrm m\]`, ""],
+    ["b", "Multiplicera enheterna och jämför med en fart.", String.raw`\[[2gh]=\frac{\mathrm m}{\mathrm{s^2}}\cdot\mathrm m=\frac{\mathrm{m^2}}{\mathrm{s^2}}\]\[\left[\sqrt{2gh}\right]=\sqrt{\frac{\mathrm{m^2}}{\mathrm{s^2}}}=\mathrm{m/s}\]`, ""],
+    ["c", "En fart måste ha enheten m/s.", String.raw`\[v=\sqrt{2gh}\]`, ""]
+  ], String.raw`Endast \(v=\sqrt{2gh}\) har rätt enhet för fart. Enhetsanalys bevisar att \(v=2gh\) är fel, men kan inte ensam bevisa alla numeriska faktorer i den korrekta formeln.`),
+  "2.29": byggFacitListaV2([
+    ["a", "Massan följer volymen och skalfaktorn i kubik.", String.raw`\[m=45\cdot20^3=3{,}60\cdot10^5\ \mathrm{kg}=360\ \mathrm{ton}\]`, ""],
+    ["b", "Pelarnas bärförmåga antas följa tvärsnittsarean och därmed skalfaktorn i kvadrat.", String.raw`\[F_{\max}=12\cdot20^2=4800\ \mathrm{kN}=4{,}8\ \mathrm{MN}\]`, ""],
+    ["c", "Jämför bärförmågan med tyngden i båda fallen.", String.raw`\[\frac{12\,000}{45\cdot9{,}82}=27{,}2\]\[\frac{4{,}8\cdot10^6}{3{,}60\cdot10^5\cdot9{,}82}=1{,}36\]`, ""]
+  ], String.raw`Bron får massan \(3{,}6\cdot10^5\ \mathrm{kg}\), och pelaren klarar \(4{,}8\ \mathrm{MN}\). Den riktiga bron bär sig enligt modellen, men säkerhetsmarginalen minskar från cirka 27 till 1,4.`),
+  "2.32": byggFacitListaV2([
+    ["a", "Deci betyder en tiondel.", String.raw`\[45\ \mathrm{dm}=45\cdot10^{-1}=4{,}5\ \mathrm m\]`, ""],
+    ["b", "Kilo betyder tusen.", String.raw`\[0{,}75\ \mathrm{km}=0{,}75\cdot10^3=750\ \mathrm m\]`, ""],
+    ["c", "Milli betyder en tusendel.", String.raw`\[8{,}4\ \mathrm{mm}=8{,}4\cdot10^{-3}\ \mathrm m\]`, ""],
+    ["d", "En svensk mil är 10 km.", String.raw`\[3{,}2\ \mathrm{mil}=3{,}2\cdot10^4=32\,000\ \mathrm m\]`, ""]
+  ], String.raw`\(4{,}5\ \mathrm m\), \(750\ \mathrm m\), \(8{,}4\cdot10^{-3}\ \mathrm m\) och \(3{,}2\cdot10^4\ \mathrm m\).`),
+  "2.33": byggFacitListaV2([
+    ["a", String.raw`Nano betyder \(10^{-9}\).`, String.raw`\[6{,}2\ \mathrm{nm}=6{,}2\cdot10^{-9}\ \mathrm m\]`, ""],
+    ["b", String.raw`Giga betyder \(10^9\).`, String.raw`\[24\ \mathrm{Gm}=24\cdot10^9=2{,}4\cdot10^{10}\ \mathrm m\]`, ""],
+    ["c", String.raw`En kilometer är \(10^3\) meter.`, String.raw`\[3{,}4\cdot10^3\ \mathrm{km}=3{,}4\cdot10^6\ \mathrm m\]`, ""],
+    ["d", String.raw`Piko betyder \(10^{-12}\).`, String.raw`\[155\ \mathrm{pm}=155\cdot10^{-12}=1{,}55\cdot10^{-10}\ \mathrm m\]`, ""]
+  ], String.raw`\(6{,}2\cdot10^{-9}\ \mathrm m\), \(2{,}4\cdot10^{10}\ \mathrm m\), \(3{,}4\cdot10^6\ \mathrm m\) och \(1{,}55\cdot10^{-10}\ \mathrm m\).`),
+  "2.34": byggFacitListaV2([
+    ["a", String.raw`Areafaktorn är \((0{,}1)^2\).`, String.raw`\[7{,}0\ \mathrm{dm^2}=7{,}0\cdot10^{-2}=0{,}070\ \mathrm{m^2}\]`, ""],
+    ["b", String.raw`Areafaktorn är \((0{,}01)^2\).`, String.raw`\[25\ \mathrm{cm^2}=25\cdot10^{-4}=2{,}5\cdot10^{-3}\ \mathrm{m^2}\]`, ""],
+    ["c", String.raw`Areafaktorn är \((10^{-3})^2\).`, String.raw`\[640\ \mathrm{mm^2}=640\cdot10^{-6}=6{,}4\cdot10^{-4}\ \mathrm{m^2}\]`, ""],
+    ["d", String.raw`\(1\ \mathrm{dm^3}=1000\ \mathrm{cm^3}\).`, String.raw`\[62\ \mathrm{cm^3}=0{,}062\ \mathrm{dm^3}\]`, ""],
+    ["e", String.raw`\(1000\ \mathrm l=1\ \mathrm{m^3}\).`, String.raw`\[25\ \mathrm l=0{,}025\ \mathrm{m^3}\]`, ""]
+  ], String.raw`\(0{,}070\ \mathrm{m^2}\), \(2{,}5\cdot10^{-3}\ \mathrm{m^2}\), \(6{,}4\cdot10^{-4}\ \mathrm{m^2}\), \(0{,}062\ \mathrm{dm^3}\) och \(0{,}025\ \mathrm{m^3}\).`),
+  "2.35": byggFacitListaV2([
+    ["a", "Skriv sidan i meter och kvadrera.", String.raw`\[s=0{,}01x\ \mathrm m\Rightarrow A=s^2=1{,}0\cdot10^{-4}x^2\ \mathrm{m^2}\]`, ""],
+    ["b", "Kubera samma omräknade sidlängd.", String.raw`\[V=s^3=(0{,}01x)^3=1{,}0\cdot10^{-6}x^3\ \mathrm{m^3}\]`, ""],
+    ["c", String.raw`Sätt \(x=4{,}0\).`, String.raw`\[V=1{,}0\cdot10^{-6}\cdot4{,}0^3=6{,}4\cdot10^{-5}\ \mathrm{m^3}=64\ \mathrm{cm^3}\]`, ""]
+  ], String.raw`\(A=1{,}0\cdot10^{-4}x^2\ \mathrm{m^2}\) och \(V=1{,}0\cdot10^{-6}x^3\ \mathrm{m^3}\). För \(x=4{,}0\) blir volymen \(6{,}4\cdot10^{-5}\ \mathrm{m^3}\).`),
+  "2.36": byggFacitListaV2([
+    ["1", "Omvandla samtliga areor till kvadratmeter.", String.raw`\[34\ \mathrm{dm^2}=0{,}34\ \mathrm{m^2}\]\[0{,}45\ \mathrm{m^2}=0{,}45\ \mathrm{m^2}\]\[3200\ \mathrm{mm^2}=0{,}0032\ \mathrm{m^2}\]\[4150\ \mathrm{cm^2}=0{,}415\ \mathrm{m^2}\]`, ""]
+  ], String.raw`\(0{,}45\ \mathrm{m^2}>4150\ \mathrm{cm^2}>34\ \mathrm{dm^2}>3200\ \mathrm{mm^2}\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_ENHETER_V2[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_ENHETER_V2[uppgift.id];
+  }
+}
+
+const FACIT_ENHETER_V2_DEL2 = {
+  "2.57": byggFacitListaV2([
+    ["1", "Använd längdprefixens tiopotenser och skriv varje värde i meter.", String.raw`\[\begin{aligned}45\ \mathrm{cm}&=45\cdot10^{-2}=0{,}45\ \mathrm m\\8{,}4\ \mathrm{mm}&=8{,}4\cdot10^{-3}\ \mathrm m\\0{,}75\ \mathrm{km}&=0{,}75\cdot10^3=750\ \mathrm m\\3{,}2\ \mathrm{mil}&=3{,}2\cdot10^4=32\,000\ \mathrm m\\620\ \mathrm{nm}&=620\cdot10^{-9}=6{,}2\cdot10^{-7}\ \mathrm m\\15\ \mathrm{dm}&=15\cdot10^{-1}=1{,}5\ \mathrm m\end{aligned}\]`, ""]
+  ], String.raw`\(0{,}45\ \mathrm m\), \(8{,}4\cdot10^{-3}\ \mathrm m\), \(750\ \mathrm m\), \(32\,000\ \mathrm m\), \(6{,}2\cdot10^{-7}\ \mathrm m\) och \(1{,}5\ \mathrm m\).`),
+  "2.58": byggFacitListaV2([
+    ["1", "Omvandla varje massenhet till kilogram.", String.raw`\[\begin{aligned}250\ \mathrm g&=250\cdot10^{-3}=0{,}250\ \mathrm{kg}\\45\ \mathrm{mg}&=45\cdot10^{-6}=4{,}5\cdot10^{-5}\ \mathrm{kg}\\2{,}4\ \mathrm{ton}&=2{,}4\cdot10^3=2400\ \mathrm{kg}\\780\ \mathrm{hg}&=780\cdot10^{-1}=78\ \mathrm{kg}\\0{,}60\ \mu\mathrm g&=0{,}60\cdot10^{-9}=6{,}0\cdot10^{-10}\ \mathrm{kg}\\12\,000\ \mathrm g&=12\ \mathrm{kg}\end{aligned}\]`, ""]
+  ], String.raw`\(0{,}250\ \mathrm{kg}\), \(4{,}5\cdot10^{-5}\ \mathrm{kg}\), \(2400\ \mathrm{kg}\), \(78\ \mathrm{kg}\), \(6{,}0\cdot10^{-10}\ \mathrm{kg}\) och \(12\ \mathrm{kg}\).`),
+  "2.59": byggFacitListaV2([
+    ["1", "Använd 60 s/min, 3600 s/h och 86 400 s/dygn.", String.raw`\[\begin{aligned}25\ \mathrm{min}&=25\cdot60=1500\ \mathrm s\\3{,}5\ \mathrm h&=3{,}5\cdot3600=12\,600\ \mathrm s\\2{,}0\ \mathrm{dygn}&=2{,}0\cdot86\,400=1{,}728\cdot10^5\ \mathrm s\\480\ \mathrm{ms}&=480\cdot10^{-3}=0{,}480\ \mathrm s\\25\ \mu\mathrm s&=25\cdot10^{-6}=2{,}5\cdot10^{-5}\ \mathrm s\\1{,}5\ \mathrm{år}&=1{,}5\cdot3{,}156\cdot10^7=4{,}73\cdot10^7\ \mathrm s\end{aligned}\]`, ""]
+  ], String.raw`\(1500\ \mathrm s\), \(12\,600\ \mathrm s\), \(1{,}728\cdot10^5\ \mathrm s\), \(0{,}480\ \mathrm s\), \(2{,}5\cdot10^{-5}\ \mathrm s\) och \(4{,}73\cdot10^7\ \mathrm s\).`),
+  "2.60": byggFacitListaV2([
+    ["1", "För area måste längdens omräkningsfaktor kvadreras.", String.raw`\[\begin{aligned}350\ \mathrm{cm^2}&=350\cdot10^{-4}=0{,}0350\ \mathrm{m^2}\\4{,}2\ \mathrm{dm^2}&=4{,}2\cdot10^{-2}=0{,}042\ \mathrm{m^2}\\1200\ \mathrm{mm^2}&=1200\cdot10^{-6}=1{,}2\cdot10^{-3}\ \mathrm{m^2}\\0{,}25\ \mathrm{km^2}&=0{,}25\cdot10^6=2{,}5\cdot10^5\ \mathrm{m^2}\\3{,}0\ \mathrm{ha}&=3{,}0\cdot10^4=30\,000\ \mathrm{m^2}\\45\ \mathrm{dm^2}&=45\cdot10^{-2}=0{,}45\ \mathrm{m^2}\end{aligned}\]`, ""]
+  ], String.raw`\(0{,}0350\ \mathrm{m^2}\), \(0{,}042\ \mathrm{m^2}\), \(1{,}2\cdot10^{-3}\ \mathrm{m^2}\), \(2{,}5\cdot10^5\ \mathrm{m^2}\), \(30\,000\ \mathrm{m^2}\) och \(0{,}45\ \mathrm{m^2}\).`),
+  "2.61": byggFacitListaV2([
+    ["1", "För volym kuberas längdens omräkningsfaktor. Dessutom gäller 1 liter = 1 dm³.", String.raw`\[\begin{aligned}250\ \mathrm{cm^3}&=250\cdot10^{-6}=2{,}5\cdot10^{-4}\ \mathrm{m^3}\\3{,}5\ \mathrm{dm^3}&=3{,}5\cdot10^{-3}\ \mathrm{m^3}\\12\ \mathrm l&=12\cdot10^{-3}=0{,}012\ \mathrm{m^3}\\800\ \mathrm{mm^3}&=800\cdot10^{-9}=8{,}0\cdot10^{-7}\ \mathrm{m^3}\\250\ \mathrm{ml}&=250\cdot10^{-6}=2{,}5\cdot10^{-4}\ \mathrm{m^3}\\4{,}0\ \mathrm{hl}&=400\ \mathrm l=0{,}40\ \mathrm{m^3}\end{aligned}\]`, ""]
+  ], String.raw`\(2{,}5\cdot10^{-4}\ \mathrm{m^3}\), \(3{,}5\cdot10^{-3}\ \mathrm{m^3}\), \(0{,}012\ \mathrm{m^3}\), \(8{,}0\cdot10^{-7}\ \mathrm{m^3}\), \(2{,}5\cdot10^{-4}\ \mathrm{m^3}\) och \(0{,}40\ \mathrm{m^3}\).`),
+  "2.62": byggFacitListaV2([
+    ["1", "Dividera med 3,6 från km/h till m/s och multiplicera med 3,6 åt andra hållet.", String.raw`\[\begin{aligned}90/3{,}6&=25\ \mathrm{m/s}\\15\cdot3{,}6&=54\ \mathrm{km/h}\\5{,}0/3{,}6&=1{,}39\ \mathrm{m/s}\\340\cdot3{,}6&=1224\ \mathrm{km/h}\\108/3{,}6&=30\ \mathrm{m/s}\\0{,}50\cdot3{,}6&=1{,}8\ \mathrm{km/h}\end{aligned}\]`, ""]
+  ], String.raw`\(25\ \mathrm{m/s}\), \(54\ \mathrm{km/h}\), \(1{,}4\ \mathrm{m/s}\), \(1224\ \mathrm{km/h}\), \(30\ \mathrm{m/s}\) och \(1{,}8\ \mathrm{km/h}\).`),
+  "2.63": byggFacitListaV2([
+    ["1", String.raw`Använd \(1\ \mathrm{g/cm^3}=1000\ \mathrm{kg/m^3}\).`, String.raw`\[\begin{aligned}2{,}7\ \mathrm{g/cm^3}&=2700\ \mathrm{kg/m^3}\\998\ \mathrm{kg/m^3}&=0{,}998\ \mathrm{g/cm^3}\\13{,}6\ \mathrm{g/cm^3}&=13\,600\ \mathrm{kg/m^3}\\1{,}29\ \mathrm{kg/m^3}&=1{,}29\cdot10^{-3}\ \mathrm{g/cm^3}\\0{,}92\ \mathrm{g/cm^3}&=920\ \mathrm{kg/m^3}\\7870\ \mathrm{kg/m^3}&=7{,}87\ \mathrm{g/cm^3}\end{aligned}\]`, ""]
+  ], String.raw`\(2700\ \mathrm{kg/m^3}\), \(0{,}998\ \mathrm{g/cm^3}\), \(13\,600\ \mathrm{kg/m^3}\), \(1{,}29\cdot10^{-3}\ \mathrm{g/cm^3}\), \(920\ \mathrm{kg/m^3}\) och \(7{,}87\ \mathrm{g/cm^3}\).`),
+  "2.64": byggFacitListaV2([
+    ["1", "Ersätt prefixen med motsvarande tiopotenser. Ett bar är 100 kPa.", String.raw`\[\begin{aligned}4{,}5\ \mathrm{kN}&=4{,}5\cdot10^3=4500\ \mathrm N\\250\ \mathrm{mN}&=250\cdot10^{-3}=0{,}250\ \mathrm N\\1{,}2\ \mathrm{MN}&=1{,}2\cdot10^6\ \mathrm N\\300\ \mathrm{kPa}&=3{,}0\cdot10^5\ \mathrm{Pa}\\2{,}5\ \mathrm{bar}&=2{,}5\cdot10^5\ \mathrm{Pa}\\1013\ \mathrm{hPa}&=1013\cdot10^2=101\,300\ \mathrm{Pa}\end{aligned}\]`, ""]
+  ], String.raw`\(4500\ \mathrm N\), \(0{,}250\ \mathrm N\), \(1{,}2\cdot10^6\ \mathrm N\), \(3{,}0\cdot10^5\ \mathrm{Pa}\), \(2{,}5\cdot10^5\ \mathrm{Pa}\) och \(101\,300\ \mathrm{Pa}\).`),
+  "2.65": byggFacitListaV2([
+    ["1", String.raw`Använd \(1\ \mathrm{kWh}=3{,}6\cdot10^6\ \mathrm J\), \(1\ \mathrm{Wh}=3600\ \mathrm J\) och \(1\ \mathrm{kcal}=4184\ \mathrm J\).`, String.raw`\[\begin{aligned}45\ \mathrm{kJ}&=4{,}5\cdot10^4\ \mathrm J\\2{,}5\ \mathrm{MJ}&=2{,}5\cdot10^6\ \mathrm J\\3{,}0\ \mathrm{kWh}&=1{,}08\cdot10^7\ \mathrm J\\250\ \mathrm{Wh}&=9{,}0\cdot10^5\ \mathrm J\\1{,}5\ \mathrm{mJ}&=1{,}5\cdot10^{-3}\ \mathrm J\\500\ \mathrm{kcal}&=2{,}092\cdot10^6\ \mathrm J\end{aligned}\]`, ""]
+  ], String.raw`\(4{,}5\cdot10^4\ \mathrm J\), \(2{,}5\cdot10^6\ \mathrm J\), \(1{,}08\cdot10^7\ \mathrm J\), \(9{,}0\cdot10^5\ \mathrm J\), \(1{,}5\cdot10^{-3}\ \mathrm J\) och \(2{,}09\cdot10^6\ \mathrm J\).`),
+  "2.66": byggFacitListaV2([
+    ["1", "Ersätt prefixen och använd 1 hk = 735 W.", String.raw`\[\begin{aligned}2{,}4\ \mathrm{kW}&=2400\ \mathrm W\\850\ \mathrm{MW}&=8{,}5\cdot10^8\ \mathrm W\\45\ \mathrm{mW}&=0{,}045\ \mathrm W\\1{,}5\ \mathrm{hk}&=1{,}5\cdot735=1102{,}5\ \mathrm W\\0{,}60\ \mathrm{kW}&=600\ \mathrm W\\12\ \mathrm{GW}&=1{,}2\cdot10^{10}\ \mathrm W\end{aligned}\]`, ""]
+  ], String.raw`\(2400\ \mathrm W\), \(8{,}5\cdot10^8\ \mathrm W\), \(0{,}045\ \mathrm W\), cirka \(1100\ \mathrm W\), \(600\ \mathrm W\) och \(1{,}2\cdot10^{10}\ \mathrm W\).`),
+  "2.67": byggFacitListaV2([
+    ["1", "Välj ett prefix som ger ett siffervärde mellan 1 och 1000.", String.raw`\[\begin{aligned}0{,}0045\ \mathrm m&=4{,}5\ \mathrm{mm}\\3{,}2\cdot10^{-6}\ \mathrm s&=3{,}2\ \mu\mathrm s\\5{,}6\cdot10^6\ \mathrm W&=5{,}6\ \mathrm{MW}\\1{,}2\cdot10^{-7}\ \mathrm m&=120\ \mathrm{nm}\\8{,}4\cdot10^9\ \mathrm{Hz}&=8{,}4\ \mathrm{GHz}\\0{,}025\ \mathrm A&=25\ \mathrm{mA}\end{aligned}\]`, ""]
+  ], String.raw`\(4{,}5\ \mathrm{mm}\), \(3{,}2\ \mu\mathrm s\), \(5{,}6\ \mathrm{MW}\), \(120\ \mathrm{nm}\), \(8{,}4\ \mathrm{GHz}\) och \(25\ \mathrm{mA}\).`),
+  "2.68": byggFacitListaV2([
+    ["1", "Flytta decimaltecknet så att koefficienten ligger mellan 1 och 10; antalet steg bestämmer exponenten.", String.raw`\[\begin{aligned}0{,}000\,42&=4{,}2\cdot10^{-4}\\93\,000\,000&=9{,}3\cdot10^7\\0{,}000\,000\,0156&=1{,}56\cdot10^{-8}\\6021&=6{,}021\cdot10^3\\0{,}75&=7{,}5\cdot10^{-1}\\250\,000\,000\,000&=2{,}5\cdot10^{11}\end{aligned}\]`, ""]
+  ], String.raw`\(4{,}2\cdot10^{-4}\), \(9{,}3\cdot10^7\), \(1{,}56\cdot10^{-8}\), \(6{,}021\cdot10^3\), \(7{,}5\cdot10^{-1}\) och \(2{,}5\cdot10^{11}\).`),
+  "2.69": byggFacitListaV2([
+    ["1", String.raw`Använd \(T=t_{^\circ\mathrm C}+273{,}15\) respektive \(t_{^\circ\mathrm C}=T-273{,}15\).`, String.raw`\[\begin{aligned}25\,^{\circ}\mathrm C&=298{,}15\ \mathrm K\\-40\,^{\circ}\mathrm C&=233{,}15\ \mathrm K\\350\ \mathrm K&=76{,}85\,^{\circ}\mathrm C\\0\ \mathrm K&=-273{,}15\,^{\circ}\mathrm C\\100\,^{\circ}\mathrm C&=373{,}15\ \mathrm K\\77\ \mathrm K&=-196{,}15\,^{\circ}\mathrm C\end{aligned}\]`, ""]
+  ], String.raw`Cirka \(298\ \mathrm K\), \(233\ \mathrm K\), \(77\,^{\circ}\mathrm C\), \(-273\,^{\circ}\mathrm C\), \(373\ \mathrm K\) och \(-196\,^{\circ}\mathrm C\).`),
+  "2.70": byggFacitListaV2([
+    ["1", "Ersätt milli, mikro, kilo och mega med tiopotenser.", String.raw`\[\begin{aligned}250\ \mathrm{mA}&=0{,}250\ \mathrm A\\45\ \mu\mathrm A&=4{,}5\cdot10^{-5}\ \mathrm A\\4{,}7\ \mathrm{k\Omega}&=4700\ \Omega\\2{,}2\ \mathrm{M\Omega}&=2{,}2\cdot10^6\ \Omega\\12\ \mathrm{mV}&=0{,}012\ \mathrm V\\400\ \mathrm{kV}&=4{,}0\cdot10^5\ \mathrm V\end{aligned}\]`, ""]
+  ], String.raw`\(0{,}250\ \mathrm A\), \(4{,}5\cdot10^{-5}\ \mathrm A\), \(4700\ \Omega\), \(2{,}2\cdot10^6\ \Omega\), \(0{,}012\ \mathrm V\) och \(4{,}0\cdot10^5\ \mathrm V\).`),
+  "2.71": byggFacitListaV2([
+    ["1", "Ersätt respektive prefix med dess tiopotens.", String.raw`\[\begin{aligned}2{,}4\ \mathrm{GHz}&=2{,}4\cdot10^9\ \mathrm{Hz}\\88\ \mathrm{MHz}&=8{,}8\cdot10^7\ \mathrm{Hz}\\37\ \mathrm{kBq}&=3{,}7\cdot10^4\ \mathrm{Bq}\\12\ \mathrm{MBq}&=1{,}2\cdot10^7\ \mathrm{Bq}\\150\ \mu\mathrm{Gy}&=1{,}5\cdot10^{-4}\ \mathrm{Gy}\\2{,}4\ \mathrm{mSv}&=2{,}4\cdot10^{-3}\ \mathrm{Sv}\end{aligned}\]`, ""]
+  ], String.raw`\(2{,}4\cdot10^9\ \mathrm{Hz}\), \(8{,}8\cdot10^7\ \mathrm{Hz}\), \(3{,}7\cdot10^4\ \mathrm{Bq}\), \(1{,}2\cdot10^7\ \mathrm{Bq}\), \(1{,}5\cdot10^{-4}\ \mathrm{Gy}\) och \(2{,}4\cdot10^{-3}\ \mathrm{Sv}\).`),
+  "2.72": byggFacitListaV2([
+    ["1", String.raw`Använd \(1\ \mathrm{dm^3}=1\ \mathrm l\), \(1\ \mathrm{cm^3}=1\ \mathrm{ml}\) och \(1\ \mathrm{g/cm^3}=1000\ \mathrm{kg/m^3}\).`, String.raw`\[\begin{aligned}2{,}7\ \mathrm{g/cm^3}&=2{,}7\ \mathrm{kg/dm^3}\\1000\ \mathrm{kg/m^3}&=1000\ \mathrm{g/l}\\5{,}0\ \mathrm{g/ml}&=5000\ \mathrm{kg/m^3}\\850\ \mathrm{kg/m^3}&=0{,}850\ \mathrm{g/cm^3}\\1{,}0\ \mathrm{kg/l}&=1000\ \mathrm{kg/m^3}\end{aligned}\]`, ""]
+  ], String.raw`\(2{,}7\ \mathrm{kg/dm^3}\), \(1000\ \mathrm{g/l}\), \(5000\ \mathrm{kg/m^3}\), \(0{,}850\ \mathrm{g/cm^3}\) och \(1000\ \mathrm{kg/m^3}\).`),
+  "2.73": byggFacitListaV2([
+    ["a", "Omvandla både volym och tid.", String.raw`\[30\ \mathrm{l/min}=\frac{0{,}030}{60}=5{,}0\cdot10^{-4}\ \mathrm{m^3/s}\]`, ""],
+    ["b", "En kubikmeter är 1000 liter och en minut 60 sekunder.", String.raw`\[1{,}2\cdot1000\cdot60=72\,000\ \mathrm{l/min}\]`, ""],
+    ["c", "Omvandla ton till kilogram och timme till sekunder.", String.raw`\[\frac{18\,000}{3600}=5{,}0\ \mathrm{kg/s}\]`, ""],
+    ["d", "Omvandla milliliter till liter och sekunder till timmar.", String.raw`\[0{,}250\cdot3600=900\ \mathrm{l/h}\]`, ""],
+    ["e", "Ett dygn har 86 400 sekunder.", String.raw`\[2{,}0\cdot86\,400=172\,800\ \mathrm{kg/dygn}=173\ \mathrm{ton/dygn}\]`, ""]
+  ], String.raw`\(5{,}0\cdot10^{-4}\ \mathrm{m^3/s}\), \(72\,000\ \mathrm{l/min}\), \(5{,}0\ \mathrm{kg/s}\), \(900\ \mathrm{l/h}\) och cirka \(173\ \mathrm{ton/dygn}\).`),
+  "2.74": byggFacitListaV2([
+    ["a", "Omvandla sidan till meter och kvadrera.", String.raw`\[A=(0{,}030)^2=9{,}0\cdot10^{-4}\ \mathrm{m^2}\]`, ""],
+    ["b", "Kubera sidan för volymen.", String.raw`\[V=(0{,}030)^3=2{,}7\cdot10^{-5}\ \mathrm{m^3}\]`, ""],
+    ["c–d", "När längden fördubblas växer arean med längdfaktorn i kvadrat och volymen med faktorn i kubik.", String.raw`\[\frac{A_2}{A_1}=2^2=4,\qquad\frac{V_2}{V_1}=2^3=8\]`, ""],
+    ["e", "Skala 1:10 ger längdfaktorn 1/10.", String.raw`\[\frac{V_{\mathrm{modell}}}{V}=\left(\frac1{10}\right)^3=\frac1{1000}\]`, ""]
+  ], String.raw`Arean är \(9{,}0\cdot10^{-4}\ \mathrm{m^2}\) och volymen \(2{,}7\cdot10^{-5}\ \mathrm{m^3}\). Fördubblad sida ger 4 gånger större area och 8 gånger större volym; skala 1:10 ger 1000 gånger mindre volym.`),
+  "2.75": byggFacitListaV2([
+    ["a", "Sätt in SI-enheterna i rörelseenergin.", String.raw`\[[E_k]=\mathrm{kg}\left(\frac{\mathrm m}{\mathrm s}\right)^2=\frac{\mathrm{kg\,m^2}}{\mathrm{s^2}}=\mathrm J\]`, ""],
+    ["b", "Tryck är kraft per area.", String.raw`\[[p]=\frac{\mathrm N}{\mathrm{m^2}}=\frac{\mathrm{kg}}{\mathrm{m\,s^2}}=\mathrm{Pa}\]`, ""],
+    ["c", "Densitet är massa per volym.", String.raw`\[[\rho]=\mathrm{kg/m^3}\]`, ""],
+    ["d", "Effekt är energi per tid.", String.raw`\[[P]=\frac{\mathrm J}{\mathrm s}=\frac{\mathrm{kg\,m^2}}{\mathrm{s^3}}=\mathrm W\]`, ""],
+    ["e", "Kraft är massa gånger acceleration.", String.raw`\[[F]=\mathrm{kg}\frac{\mathrm m}{\mathrm{s^2}}=\mathrm N\]`, ""]
+  ], String.raw`Enheterna blir \(\mathrm J\), \(\mathrm{Pa}\), \(\mathrm{kg/m^3}\), \(\mathrm W\) och \(\mathrm N\).`),
+  "2.76": byggFacitListaV2([
+    ["a–b", "Omvandla matens energi till joule och därefter till kilowattimmar.", String.raw`\[E=2000\cdot4184=8{,}368\cdot10^6\ \mathrm J\]\[E=\frac{8{,}368\cdot10^6}{3{,}6\cdot10^6}=2{,}32\ \mathrm{kWh}\]`, ""],
+    ["c–d", "Använd energi = effekt gånger tid.", String.raw`\[E=0{,}060\ \mathrm{kW}\cdot5{,}0\ \mathrm h=0{,}30\ \mathrm{kWh}\]\[E=0{,}30\cdot3{,}6\cdot10^6=1{,}08\cdot10^6\ \mathrm J\]`, ""],
+    ["e", "Omvandla MeV till eV och därefter till joule.", String.raw`\[E=5{,}0\cdot10^6\cdot1{,}602\cdot10^{-19}=8{,}01\cdot10^{-13}\ \mathrm J\]`, ""]
+  ], String.raw`Maten ger \(8{,}37\cdot10^6\ \mathrm J=2{,}32\ \mathrm{kWh}\). Lampan använder \(0{,}30\ \mathrm{kWh}=1{,}08\cdot10^6\ \mathrm J\). Alfasönderfallet frigör \(8{,}0\cdot10^{-13}\ \mathrm J\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_ENHETER_V2_DEL2[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_ENHETER_V2_DEL2[uppgift.id];
+  }
+}
+
+const FACIT_DENSITET_V2_DEL1 = {
+  "2.2": byggFacitListaV2([
+    ["a", "Beräkna först guldets volym och använd därefter \(V=At\).", String.raw`\[V=\frac m\rho=\frac{1{,}0}{19{,}3}=0{,}0518\ \mathrm{cm^3}\]\[A=0{,}50\ \mathrm{m^2}=5000\ \mathrm{cm^2}\]\[t=\frac VA=\frac{0{,}0518}{5000}=1{,}04\cdot10^{-5}\ \mathrm{cm}=104\ \mathrm{nm}\]`, ""],
+    ["b", "Dividera foliens tjocklek med en atoms ungefärliga diameter.", String.raw`\[N=\frac{104}{0{,}29}=3{,}6\cdot10^2\]`, ""]
+  ], String.raw`Folien är cirka \(104\ \mathrm{nm}\) tjock, vilket motsvarar ungefär 360 atomlager.`),
+  "2.6": byggFacitListaV2([
+    ["a", "Beräkna rummets volym och använd \(m=\rho V\).", String.raw`\[V=8{,}0\cdot6{,}0\cdot2{,}7=129{,}6\ \mathrm{m^3}\]\[m=1{,}20\cdot129{,}6=155{,}5\ \mathrm{kg}\]`, ""],
+    ["b", "Jämför massorna genom en kvot.", String.raw`\[\frac{155{,}5}{60}=2{,}59\]`, ""]
+  ], String.raw`Luften har massan cirka \(156\ \mathrm{kg}\), motsvarande ungefär 2,6 elever med massan 60 kg.`),
+  "2.7": byggFacitListaV2([
+    ["a", "Densitet är massa dividerad med volym.", String.raw`\[\rho_{\mathrm{före}}=\frac{0{,}15}{0{,}12}=1{,}25\ \mathrm{g/cm^3}\]\[\rho_{\mathrm{efter}}=\frac{0{,}15}{2{,}4}=0{,}0625\ \mathrm{g/cm^3}\]`, ""],
+    ["b", "Anta att den fasta materiens densitet är oförändrad. Då visar densitetskvoten hur stor del av volymen som är fast materia.", String.raw`\[f_{\mathrm{fast}}=\frac{0{,}0625}{1{,}25}=0{,}050\]\[f_{\mathrm{luft}}=1-0{,}050=0{,}950\]`, ""],
+    ["c", "Det poppade kornets medeldensitet är mycket lägre än vattnets.", String.raw`\[0{,}0625<1{,}00\]`, ""]
+  ], String.raw`Densiteten ändras från \(1{,}25\) till \(0{,}0625\ \mathrm{g/cm^3}\). Cirka 95 % av volymen är luft, så popcornet flyter i vatten.`),
+  "2.8": byggFacitListaV2([
+    ["a", "Ett mol järn har massan \(M\). Dividera molvolymen med antalet atomer.", String.raw`\[V_{\mathrm{mol}}=\frac M\rho=\frac{55{,}85\cdot10^{-3}}{7870}=7{,}10\cdot10^{-6}\ \mathrm{m^3}\]\[V_{\mathrm{atom}}=\frac{V_{\mathrm{mol}}}{N_A}=\frac{7{,}10\cdot10^{-6}}{6{,}022\cdot10^{23}}=1{,}18\cdot10^{-29}\ \mathrm{m^3}\]`, ""],
+    ["b", "Om varje atom ersätts av en kub är diametern ungefär kubens sida.", String.raw`\[d\approx\sqrt[3]{V_{\mathrm{atom}}}=\sqrt[3]{1{,}18\cdot10^{-29}}=2{,}28\cdot10^{-10}\ \mathrm m=0{,}228\ \mathrm{nm}\]`, ""],
+    ["c", "Modellen bortser från atomernas form och kristallstrukturens mellanrum.", "", "Därför ger den bara rätt storleksordning."]
+  ], String.raw`En atom upptar ungefär \(1{,}18\cdot10^{-29}\ \mathrm{m^3}\), vilket ger diametern cirka \(0{,}23\ \mathrm{nm}\).`),
+  "2.17": byggFacitListaV2([
+    ["1", "Välj exempelvis totalvolymen \(1{,}00\ \mathrm{m^3}\). Massan blir summan av de båda delarnas massor.", String.raw`\[m=0{,}60\rho_{\mathrm{Cu}}+0{,}40\rho_{\mathrm{Zn}}\]\[\rho_{\mathrm{mässing}}=0{,}60\cdot8930+0{,}40\cdot7130=8210\ \mathrm{kg/m^3}\]`, ""]
+  ], String.raw`Legeringens densitet är \(8{,}21\cdot10^3\ \mathrm{kg/m^3}\).`),
+  "2.18": byggFacitListaV2([
+    ["a", "Massan är densamma före och efter frysningen. Volymen är därför omvänt proportionell mot densiteten.", String.raw`\[\frac{V_{\mathrm{is}}}{V_{\mathrm{vatten}}}=\frac{\rho_{\mathrm{vatten}}}{\rho_{\mathrm{is}}}=\frac{998}{917}=1{,}0883\]\[\Delta V=8{,}83\,\%\]`, ""],
+    ["b", "Beräkna den volym is som samma vattenmassa behöver.", String.raw`\[V_{\mathrm{is}}=0{,}50\cdot\frac{998}{917}=0{,}544\ \mathrm l\]`, ""],
+    ["c", "Vid frysning ordnas vattenmolekylerna i ett öppet kristallgitter.", "", "Gittret tar större plats och ger is lägre densitet än flytande vatten."]
+  ], String.raw`Volymen ökar med cirka \(8{,}8\,\%\). Isen behöver \(0{,}544\ \mathrm l\), så en helt fylld styv glasflaska riskerar att spricka.`),
+  "2.23": byggFacitListaV2([
+    ["a", "En liter är \(1000\ \mathrm{cm^3}\), och \(1{,}03\ \mathrm{kg}=1030\ \mathrm g\).", String.raw`\[\rho=\frac{1030}{1000}=1{,}03\ \mathrm{g/cm^3}\]`, ""],
+    ["b", "Jämför med vattnets densitet.", String.raw`\[1{,}03>1{,}00\]`, ""]
+  ], String.raw`Mjölkens densitet är \(1{,}03\ \mathrm{g/cm^3}\). Om vätskorna skiktas tenderar mjölken att sjunka, men den blandas samtidigt med vattnet.`),
+  "2.24": byggFacitListaV2([
+    ["a", "Lös ut volymen ur densitetssambandet.", String.raw`\[V=\frac m\rho=\frac{8{,}4}{19{,}3}=0{,}435\ \mathrm{cm^3}\]`, ""],
+    ["b", "Använd undanträngningsmetoden.", "", "Sänk ringen helt i ett graderat mätglas och avläs vattennivåns ökning."]
+  ], String.raw`Ringens volym är cirka \(0{,}44\ \mathrm{cm^3}\). Den kan mätas utan skada genom vattenundanträngning.`),
+  "2.25": byggFacitListaV2([
+    ["a", "Beräkna den volym som själva järnet skulle uppta.", String.raw`\[V_{\mathrm{järn}}=\frac{500}{7{,}87}=63{,}5\ \mathrm{cm^3}\]`, ""],
+    ["b", "Skillnaden mot yttervolymen är hålrummet.", String.raw`\[V_{\mathrm{hål}}=90-63{,}5=26{,}5\ \mathrm{cm^3}\]`, ""],
+    ["c", "Klumpens uppmätta medeldensitet inkluderar hålrummet.", String.raw`\[\rho_{\mathrm{medel}}=\frac{500}{90}=5{,}56\ \mathrm{g/cm^3}\]`, ""]
+  ], String.raw`Massivt järn skulle uppta \(63{,}5\ \mathrm{cm^3}\). Hålrummet är cirka \(26{,}5\ \mathrm{cm^3}\), och klumpens medeldensitet är \(5{,}6\ \mathrm{g/cm^3}\).`),
+  "2.26": byggFacitListaV2([
+    ["a", "Omvandla radien till meter, beräkna klotets volym och dividera massan med volymen.", String.raw`\[r=6371\ \mathrm{km}=6{,}371\cdot10^6\ \mathrm m\]\[V=\frac{4\pi r^3}{3}=1{,}083\cdot10^{21}\ \mathrm{m^3}\]\[\rho=\frac{5{,}97\cdot10^{24}}{1{,}083\cdot10^{21}}=5{,}51\cdot10^3\ \mathrm{kg/m^3}\]`, ""],
+    ["b", "Jämför med bergens densitet.", String.raw`\[\frac{5510}{2700}\approx2{,}0\]`, ""]
+  ], String.raw`Jordens medeldensitet är cirka \(5510\ \mathrm{kg/m^3}\). Den höga medeldensiteten visar att jordens inre måste innehålla betydligt tätare material, framför allt järn och nickel.`),
+  "2.27": byggFacitListaV2([
+    ["a", "Låt \(x\) vara guldets volymandel. Kopparns andel blir då \(1-x\).", String.raw`\[\rho=x\rho_{\mathrm{Au}}+(1-x)\rho_{\mathrm{Cu}}\]`, ""],
+    ["b", "Sätt in den uppmätta densiteten och lös ekvationen.", String.raw`\[14{,}8=19{,}3x+8{,}93(1-x)\]\[x=\frac{14{,}8-8{,}93}{19{,}3-8{,}93}=0{,}566\]`, ""]
+  ], String.raw`Guldets volymandel är cirka \(0{,}57\), alltså 57 %.`),
+  "2.31": byggFacitListaV2([
+    ["a", "Varje skikts volym är \(V=Ah\), och massan är \(m=\rho V\).", String.raw`\[\begin{aligned}V_o&=6{,}0\cdot5{,}0=30\ \mathrm{cm^3},&m_o&=0{,}92\cdot30=27{,}6\ \mathrm g\\V_v&=6{,}0\cdot6{,}0=36\ \mathrm{cm^3},&m_v&=1{,}00\cdot36=36{,}0\ \mathrm g\\V_s&=6{,}0\cdot4{,}0=24\ \mathrm{cm^3},&m_s&=1{,}38\cdot24=33{,}1\ \mathrm g\end{aligned}\]`, ""],
+    ["b", "Dividera den sammanlagda massan med den sammanlagda volymen.", String.raw`\[\rho_{\mathrm{medel}}=\frac{27{,}6+36{,}0+33{,}1}{30+36+24}=1{,}07\ \mathrm{g/cm^3}\]`, ""],
+    ["c", "Plasten är tätare än olja och vatten men mindre tät än sirap.", String.raw`\[1{,}00<1{,}05<1{,}38\]`, ""]
+  ], String.raw`Massorna är \(27{,}6\ \mathrm g\), \(36{,}0\ \mathrm g\) och \(33{,}1\ \mathrm g\). Medeldensiteten är \(1{,}07\ \mathrm{g/cm^3}\), och plastbiten stannar i gränsen mellan vatten och sirap.`),
+  "2.37": byggFacitListaV2([
+    ["a", "Lös ut volymen ur \(\rho=m/V\).", String.raw`\[V=\frac m\rho=\frac{450}{8{,}96}=50{,}2\ \mathrm{cm^3}\]`, ""],
+    ["b", "Beräkna kubens volym och multiplicera med densiteten.", String.raw`\[V=3{,}0^3=27\ \mathrm{cm^3}\]\[m=\rho V=8{,}96\cdot27=242\ \mathrm g\]`, ""]
+  ], String.raw`Kopparbitens volym är cirka \(50\ \mathrm{cm^3}\), och kubens massa cirka \(242\ \mathrm g\).`),
+  "2.38": byggFacitListaV2([
+    ["a", String.raw`Använd \(1\ \mathrm{g/cm^3}=1000\ \mathrm{kg/m^3}\).`, String.raw`\[8{,}4\ \mathrm{g/cm^3}=8400\ \mathrm{kg/m^3}\]`, ""],
+    ["b", "Dividera kg/m³ med 1000.", String.raw`\[998\ \mathrm{kg/m^3}=0{,}998\ \mathrm{g/cm^3}\]`, ""],
+    ["c", "Massfaktorn är \(10^{-3}\), medan volymfaktorn är \(10^{-6}\).", String.raw`\[\frac{10^{-3}}{10^{-6}}=10^3=1000\]`, ""]
+  ], String.raw`\(8{,}4\ \mathrm{g/cm^3}=8400\ \mathrm{kg/m^3}\) och \(998\ \mathrm{kg/m^3}=0{,}998\ \mathrm{g/cm^3}\). Omräkningsfaktorn är 1000 eftersom kubikcentimetern innehåller en kuberad längdfaktor.`),
+  "2.39": byggFacitListaV2([
+    ["a", "Vid gränsen till att flyta är föremålets medeldensitet lika med vätskans.", String.raw`\[V_{\min}\approx\frac m{\rho_{\mathrm{vatten}}}=\frac{3{,}5}{998}=3{,}51\cdot10^{-3}\ \mathrm{m^3}=3{,}51\ \mathrm{dm^3}\]`, ""],
+    ["b", "Gör samma beräkning för etanol.", String.raw`\[V_{\min}\approx\frac{3{,}5}{789}=4{,}44\cdot10^{-3}\ \mathrm{m^3}=4{,}44\ \mathrm{dm^3}\]`, ""]
+  ], String.raw`Volymen måste vara minst ungefär \(3{,}5\ \mathrm{dm^3}\) i vatten och \(4{,}4\ \mathrm{dm^3}\) i etanol. För att faktiskt flyta med marginal måste densiteten vara något lägre än vätskans.`),
+  "2.40": byggFacitListaV2([
+    ["a", "Beräkna densiteten direkt.", String.raw`\[\rho=\frac mV=\frac{810}{72}=11{,}25\ \mathrm{g/cm^3}\]`, ""],
+    ["b", "Jämför med tabellvärden.", "", "Värdet ligger nära bly, som har densiteten cirka \(11{,}3\ \mathrm{g/cm^3}\)."],
+    ["c", "Ett hålrum ökar yttervolymen utan motsvarande massa.", "", "Den beräknade medeldensiteten blir då lägre än själva materialets densitet."]
+  ], String.raw`Densiteten är cirka \(11{,}3\ \mathrm{g/cm^3}\), så metallen kan vara bly. Ett hålrum skulle ge ett för lågt densitetsvärde.`),
+  "2.41": byggFacitListaV2([
+    ["a", "Låt \(V_v\) och \(V_e\) vara volymerna vatten respektive etanol.", String.raw`\[V_v+V_e=80\]\[1{,}00V_v+0{,}79V_e=68\]`, ""],
+    ["b", "Sätt \(V_e=80-V_v\) i masse­kvationen.", String.raw`\[V_v+0{,}79(80-V_v)=68\]\[0{,}21V_v=4{,}8\Rightarrow V_v=22{,}9\ \mathrm{cm^3}\]\[V_e=80-22{,}9=57{,}1\ \mathrm{cm^3}\]`, ""],
+    ["c", "Lösningen antar att vätskornas volymer kan adderas exakt.", "", "I verkligheten kontraherar en vatten–etanolblandning något."]
+  ], String.raw`Clara ska enligt modellen ta cirka \(23\ \mathrm{cm^3}\) vatten och \(57\ \mathrm{cm^3}\) etanol.`),
+  "2.42": byggFacitListaV2([
+    ["a", "Samma massa innebär \(\rho_jV_j=\rho_aV_a\). För klot är volymen proportionell mot \(r^3\).", String.raw`\[\rho_jr_j^3=\rho_ar_a^3\Rightarrow\frac{r_a}{r_j}=\sqrt[3]{\frac{\rho_j}{\rho_a}}\]\[\frac{r_a}{r_j}=\sqrt[3]{\frac{7{,}87}{2{,}70}}=1{,}429\]`, ""],
+    ["b", "Omvandla radiekvoten till procentuell ökning.", String.raw`\[(1{,}429-1)\cdot100\,\%=42{,}9\,\%\]`, ""]
+  ], String.raw`Aluminiumklotets radie är \(1{,}43\) gånger järnklotets, alltså cirka 43 % större.`),
+  "2.43": byggFacitListaV2([
+    ["a", "Omvandla massan till gram och lös ut volymen.", String.raw`\[V=\frac{15\,000}{11{,}3}=1{,}327\cdot10^3\ \mathrm{cm^3}\]`, ""],
+    ["b", "Lös ut radien ur klotvolymen.", String.raw`\[r=\sqrt[3]{\frac{3V}{4\pi}}=\sqrt[3]{\frac{3\cdot1327}{4\pi}}=6{,}82\ \mathrm{cm}\]`, ""],
+    ["c", "Dubbel massa ger dubbel volym och därmed radiefaktorn \(\sqrt[3]{2}\).", String.raw`\[r_2=r_1\sqrt[3]{2}=6{,}82\cdot1{,}260=8{,}59\ \mathrm{cm}\]`, ""]
+  ], String.raw`Volymen är \(1{,}33\cdot10^3\ \mathrm{cm^3}\), radien cirka \(6{,}8\ \mathrm{cm}\), och vid dubbel massa blir radien cirka \(8{,}6\ \mathrm{cm}\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_DENSITET_V2_DEL1[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_DENSITET_V2_DEL1[uppgift.id];
+  }
+}
+
+const FACIT_DENSITET_V2_DEL2 = {
+  "2.50": byggFacitListaV2([
+    ["a", "Välj två tydliga punkter långt från varandra på linjen.", String.raw`\[(V_1,m_1)=(5\ \mathrm{cm^3},10\ \mathrm g)\]\[(V_2,m_2)=(25\ \mathrm{cm^3},50\ \mathrm g)\]`, ""],
+    ["b", "I ett massa–volym-diagram är densiteten linjens lutning.", String.raw`\[\rho=\frac{\Delta m}{\Delta V}=\frac{50-10}{25-5}=2{,}0\ \mathrm{g/cm^3}\]`, ""],
+    ["c", "Använd \(m=\rho V\).", String.raw`\[m=2{,}0\cdot35=70\ \mathrm g\]`, ""]
+  ], String.raw`Exempel på punkter är \((5,10)\) och \((25,50)\). Densiteten är \(2{,}0\ \mathrm{g/cm^3}\), och \(35\ \mathrm{cm^3}\) har massan \(70\ \mathrm g\).`),
+  "2.51": byggFacitListaV2([
+    ["a", "Den brantaste linjen ger störst massaökning per volymökning och därmed störst densitet.", "", "Linje A är brantast."],
+    ["b", "Läs av en punkt på vardera linjen. Båda går genom origo.", String.raw`\[\rho_A=\frac{60}{20}=3{,}0\ \mathrm{g/cm^3}\]\[\rho_B=\frac{40}{40}=1{,}0\ \mathrm{g/cm^3}\]`, ""],
+    ["c", "Vatten har densiteten ungefär \(1{,}0\ \mathrm{g/cm^3}\).", "", "Material B är vatten."]
+  ], String.raw`A har störst densitet. \(\rho_A=3{,}0\ \mathrm{g/cm^3}\), \(\rho_B=1{,}0\ \mathrm{g/cm^3}\), och B är vatten.`),
+  "2.52": String.raw`<div class="facit-v2"><p class="facit-metod">Placera volymen på x-axeln och massan på y-axeln. Punkterna ligger nära en rät linje genom origo.</p><span class="fig"><svg viewBox="0 0 390 245" role="img" aria-label="Massa-volym-diagram med fem mätpunkter och en anpassad rät linje genom origo." xmlns="http://www.w3.org/2000/svg"><line x1="48" y1="205" x2="370" y2="205" stroke="#2B2527" stroke-width="2"/><line x1="48" y1="205" x2="48" y2="20" stroke="#2B2527" stroke-width="2"/><g stroke="#E4E3E6" stroke-width="1"><line x1="108" y1="25" x2="108" y2="205"/><line x1="168" y1="25" x2="168" y2="205"/><line x1="228" y1="25" x2="228" y2="205"/><line x1="288" y1="25" x2="288" y2="205"/><line x1="48" y1="169" x2="360" y2="169"/><line x1="48" y1="133" x2="360" y2="133"/><line x1="48" y1="97" x2="360" y2="97"/><line x1="48" y1="61" x2="360" y2="61"/></g><line x1="48" y1="205" x2="348" y2="51.7" stroke="#2A5D9E" stroke-width="3"/><g fill="#B43123"><circle cx="108" cy="174.4" r="4"/><circle cx="168" cy="142" r="4"/><circle cx="228" cy="114.1" r="4"/><circle cx="288" cy="80.8" r="4"/><circle cx="348" cy="52.9" r="4"/></g><g font-family="IBM Plex Mono" font-size="11" fill="#5C575E"><text x="370" y="226" text-anchor="end">V / cm³</text><text x="12" y="20">m / g</text><text x="108" y="221" text-anchor="middle">4</text><text x="168" y="221" text-anchor="middle">8</text><text x="228" y="221" text-anchor="middle">12</text><text x="288" y="221" text-anchor="middle">16</text><text x="348" y="221" text-anchor="middle">20</text><text x="42" y="173" text-anchor="end">40</text><text x="42" y="137" text-anchor="end">80</text><text x="42" y="101" text-anchor="end">120</text><text x="42" y="65" text-anchor="end">160</text></g></svg></span><p class="facit-metod">En linjeanpassning genom origo ger lutningen</p><div class="facit-matte">\[\rho\approx\frac{170\ \mathrm g}{20\ \mathrm{cm^3}}\approx8{,}5\ \mathrm{g/cm^3}\]</div><p class="facit-svar"><strong>Svar:</strong> Metallens densitet är cirka \(8{,}5\ \mathrm{g/cm^3}\), vilket stämmer väl med mässing.</p><p class="facit-not">En beräkning med alla fem punkter ger ungefär \(8{,}52\ \mathrm{g/cm^3}\).</p></div>`,
+  "2.53": byggFacitListaV2([
+    ["a", "Bägarens konstanta massa försvinner när två punkter subtraheras. Densiteten är därför linjens lutning.", String.raw`\[\rho=\frac{\Delta m}{\Delta V}=\frac{90-50}{60-20}=1{,}0\ \mathrm{g/cm^3}\]`, ""],
+    ["b", "Skärningen med y-axeln visar massan vid noll vätskevolym.", String.raw`\[m(0)=30\ \mathrm g\]`, "Detta är den tomma bägarens massa."],
+    ["c", "Kvoten mellan vågens hela utslag och vätskevolymen inkluderar bägaren.", String.raw`\[\frac{50}{20}=2{,}5\ \mathrm{g/cm^3}\]`, "Det blir ett för stort värde."]
+  ], String.raw`Vätskans densitet är \(1{,}0\ \mathrm{g/cm^3}\). Linjen går inte genom origo eftersom bägaren väger \(30\ \mathrm g\); därför måste densiteten tas från lutningen.`),
+  "2.54": String.raw`<div class="facit-v2"><p class="facit-metod">Fyra punkter följer en nästan rät linje genom origo. Punkten \((20\ \mathrm{cm^3},74\ \mathrm g)\) ligger tydligt utanför mönstret.</p><span class="fig"><svg viewBox="0 0 390 245" role="img" aria-label="Massa-volym-diagram där punkten vid 20 kubikcentimeter och 74 gram markeras som avvikare." xmlns="http://www.w3.org/2000/svg"><line x1="48" y1="205" x2="370" y2="205" stroke="#2B2527" stroke-width="2"/><line x1="48" y1="205" x2="48" y2="20" stroke="#2B2527" stroke-width="2"/><line x1="48" y1="205" x2="348" y2="40" stroke="#2A5D9E" stroke-width="3"/><g fill="#2A5D9E"><circle cx="108" cy="173.5" r="4"/><circle cx="168" cy="139.5" r="4"/><circle cx="228" cy="105.5" r="4"/><circle cx="348" cy="40" r="4"/></g><circle cx="288" cy="25" r="6" fill="#fff" stroke="#B43123" stroke-width="3"/><line x1="298" y1="31" x2="330" y2="52" stroke="#B43123" stroke-width="1.5"/><text x="334" y="56" font-family="IBM Plex Mono" font-size="11" fill="#B43123">avvikare</text><g font-family="IBM Plex Mono" font-size="11" fill="#5C575E"><text x="370" y="226" text-anchor="end">V / cm³</text><text x="12" y="20">m / g</text><text x="108" y="221" text-anchor="middle">5</text><text x="168" y="221" text-anchor="middle">10</text><text x="228" y="221" text-anchor="middle">15</text><text x="288" y="221" text-anchor="middle">20</text><text x="348" y="221" text-anchor="middle">25</text></g></svg></span><p class="facit-metod">Anpassa linjen till de fyra övriga punkterna. En punkt långt ut på linjen ger</p><div class="facit-matte">\[\rho\approx\frac{68}{25}=2{,}72\ \mathrm{g/cm^3}\]</div><p class="facit-svar"><strong>Svar:</strong> Mätningen \(20\ \mathrm{cm^3},74\ \mathrm g\) är felaktig. De övriga punkterna ger densiteten cirka \(2{,}7\ \mathrm{g/cm^3}\), vilket stämmer med aluminium.</p></div>`,
+  "2.55": byggFacitListaV2([
+    ["a", "Avläs linjen vid \(V=50\ \mathrm{cm^3}\).", String.raw`\[m=40\ \mathrm g\]`, ""],
+    ["b", "Avläs volymen där \(m=80\ \mathrm g\).", String.raw`\[V=100\ \mathrm{cm^3}\]`, ""],
+    ["c", "Densiteten är grafens lutning.", String.raw`\[\rho=\frac{80}{100}=0{,}80\ \mathrm{g/cm^3}\]`, ""],
+    ["d", "Oljans densitet är lägre än vattnets.", String.raw`\[0{,}80<1{,}00\]`, ""]
+  ], String.raw`\(50\ \mathrm{cm^3}\) väger \(40\ \mathrm g\), \(80\ \mathrm g\) upptar \(100\ \mathrm{cm^3}\), och densiteten är \(0{,}80\ \mathrm{g/cm^3}\). Oljan flyter på vatten.`),
+  "2.56": byggFacitListaV2([
+    ["a", "Beräkna massan dividerad med volymen för varje punkt.", String.raw`\[\rho_P=\frac{25}{10}=2{,}5\ \mathrm{g/cm^3}\]\[\rho_Q=\frac{50}{20}=2{,}5\ \mathrm{g/cm^3}\]\[\rho_R=\frac{45}{30}=1{,}5\ \mathrm{g/cm^3}\]`, ""],
+    ["b", "P och Q har samma kvot och ligger på samma linje genom origo.", "", "De är därför av samma bergart."],
+    ["c", "Jämför R:s densitet med vattnets.", String.raw`\[1{,}5>1{,}0\]`, ""]
+  ], String.raw`\(\rho_P=\rho_Q=2{,}5\ \mathrm{g/cm^3}\) och \(\rho_R=1{,}5\ \mathrm{g/cm^3}\). P och Q är samma bergart, och R sjunker i vatten.`),
+  "2.77": byggFacitListaV2([
+    ["a", "Använd densitetssambandet.", String.raw`\[\rho=\frac mV=\frac{240}{30}=8{,}0\ \mathrm{g/cm^3}\]`, ""],
+    ["b", "Multiplicera g/cm³ med 1000.", String.raw`\[8{,}0\ \mathrm{g/cm^3}=8{,}0\cdot10^3\ \mathrm{kg/m^3}\]`, ""]
+  ], String.raw`Densiteten är \(8{,}0\ \mathrm{g/cm^3}=8000\ \mathrm{kg/m^3}\).`),
+  "2.78": byggFacitListaV2([
+    ["a", "Lös ut massan ur \(\rho=m/V\).", String.raw`\[m=\rho V\]`, ""],
+    ["b", "Sätt in densitet och volym.", String.raw`\[m=7870\cdot0{,}25=1967{,}5\ \mathrm{kg}\]`, ""],
+    ["c", "Ett ton är 1000 kg.", String.raw`\[m=1{,}97\ \mathrm{ton}\]`, ""]
+  ], String.raw`Balkens massa är cirka \(1970\ \mathrm{kg}=2{,}0\ \mathrm{ton}\).`),
+  "2.79": byggFacitListaV2([
+    ["a", "Lös ut volymen ur densitetssambandet.", String.raw`\[V=\frac m\rho\]`, ""],
+    ["b", "Sätt in massan och densiteten.", String.raw`\[V=\frac{500}{2{,}70}=185\ \mathrm{cm^3}\]`, ""],
+    ["c", "En liter är 1000 cm³.", String.raw`\[V=\frac{185}{1000}=0{,}185\ \mathrm l\]`, ""]
+  ], String.raw`Volymen är cirka \(185\ \mathrm{cm^3}=0{,}185\ \mathrm l\).`),
+  "2.80": byggFacitListaV2([
+    ["1", "Använd \(\rho=m/V\) och dess omskrivningar rad för rad.", String.raw`\[\rho_1=\frac{540}{200}=2{,}70\ \mathrm{g/cm^3}\]\[m_2=11{,}3\cdot50=565\ \mathrm g\]\[V_3=\frac{460}{0{,}92}=500\ \mathrm{cm^3}\]\[\rho_4=\frac{1500\ \mathrm g}{200\ \mathrm{cm^3}}=7{,}5\ \mathrm{g/cm^3}\]`, ""]
+  ], String.raw`De saknade värdena är \(2{,}70\ \mathrm{g/cm^3}\), \(565\ \mathrm g\), \(500\ \mathrm{cm^3}\) och \(7{,}5\ \mathrm{g/cm^3}\).`),
+  "2.81": byggFacitListaV2([
+    ["a", "Kubens volym är sidan i kubik.", String.raw`\[V=5{,}0^3=125\ \mathrm{cm^3}\]`, ""],
+    ["b", "Omvandla kilogram till gram.", String.raw`\[1{,}05\ \mathrm{kg}=1050\ \mathrm g\]`, ""],
+    ["c", "Dividera massan med volymen.", String.raw`\[\rho=\frac{1050}{125}=8{,}40\ \mathrm{g/cm^3}\]`, ""],
+    ["d", "Omvandla till kg/m³.", String.raw`\[\rho=8400\ \mathrm{kg/m^3}\]`, ""]
+  ], String.raw`Volymen är \(125\ \mathrm{cm^3}\), massan \(1050\ \mathrm g\) och densiteten \(8{,}4\ \mathrm{g/cm^3}=8400\ \mathrm{kg/m^3}\), nära mässing.`),
+  "2.82": byggFacitListaV2([
+    ["a", "Avläs grafen vid \(20\ \mathrm{cm^3}\).", String.raw`\[m=160\ \mathrm g\]`, ""],
+    ["b", "Beräkna densiteten ur den punkten.", String.raw`\[\rho=\frac{160}{20}=8{,}0\ \mathrm{g/cm^3}\]`, ""],
+    ["c", "Grafens lutning ger samma densitet.", String.raw`\[k=\frac{400-0}{50-0}=8{,}0\ \mathrm{g/cm^3}\]`, ""],
+    ["d", "En rät linje genom origo visar proportionalitet.", String.raw`\[m=\rho V\]`, ""]
+  ], String.raw`Massan är \(160\ \mathrm g\), och båda metoderna ger \(\rho=8{,}0\ \mathrm{g/cm^3}\). Linjen genom origo visar att massan är proportionell mot volymen.`),
+  "2.83": byggFacitListaV2([
+    ["a", "Beräkna rätblockets volym.", String.raw`\[V=10\cdot6{,}0\cdot4{,}0=240\ \mathrm{cm^3}\]`, ""],
+    ["b", "Dividera massan med volymen.", String.raw`\[\rho=\frac{288}{240}=1{,}20\ \mathrm{g/cm^3}\]`, ""],
+    ["c", "Multiplicera med 1000 för kg/m³.", String.raw`\[\rho=1200\ \mathrm{kg/m^3}\]`, ""]
+  ], String.raw`Volymen är \(240\ \mathrm{cm^3}\) och densiteten \(1{,}20\ \mathrm{g/cm^3}=1200\ \mathrm{kg/m^3}\).`),
+  "2.84": byggFacitListaV2([
+    ["a", "Radien är halva diametern.", String.raw`\[r=\frac d2=2{,}0\ \mathrm{cm}\]`, ""],
+    ["b", "Använd cylinderns volym.", String.raw`\[V=\pi r^2h=\pi\cdot2{,}0^2\cdot12=150{,}8\ \mathrm{cm^3}\]`, ""],
+    ["c", "Beräkna densiteten.", String.raw`\[\rho=\frac{405}{150{,}8}=2{,}69\ \mathrm{g/cm^3}\]`, ""],
+    ["d", "Jämför med tabellvärdena.", "", "Värdet ligger mycket nära aluminiumets \(2{,}70\ \mathrm{g/cm^3}\)."]
+  ], String.raw`Radien är \(2{,}0\ \mathrm{cm}\), volymen \(151\ \mathrm{cm^3}\) och densiteten \(2{,}69\ \mathrm{g/cm^3}\). Materialet är troligen aluminium.`),
+  "2.85": byggFacitListaV2([
+    ["a–b", "Läs av vätskeytan och använd \(1\ \mathrm{ml}=1\ \mathrm{cm^3}\).", String.raw`\[V=250\ \mathrm{ml}=250\ \mathrm{cm^3}\]`, ""],
+    ["c", "Dividera vätskans massa med volymen.", String.raw`\[\rho=\frac{197}{250}=0{,}788\ \mathrm{g/cm^3}\]`, ""],
+    ["d", "Jämför med de givna densiteterna.", "", "Värdet ligger nära etanolens \(0{,}789\ \mathrm{g/cm^3}\)."]
+  ], String.raw`Volymen är \(250\ \mathrm{ml}=250\ \mathrm{cm^3}\), densiteten \(0{,}788\ \mathrm{g/cm^3}\), och vätskan är troligen etanol.`),
+  "2.86": byggFacitListaV2([
+    ["A", "Densiteten är linjens lutning.", String.raw`\[\rho_A=\frac{400}{50}=8{,}0\ \mathrm{g/cm^3}\]`, ""],
+    ["B", "Gör samma avläsning för B.", String.raw`\[\rho_B=\frac{50}{50}=1{,}0\ \mathrm{g/cm^3}\]`, ""],
+    ["3", "Jämför med tabellvärdena.", "", "A ligger nära järn och B nära vatten."]
+  ], String.raw`A har densiteten \(8{,}0\ \mathrm{g/cm^3}\) och är troligen järn. B har densiteten \(1{,}0\ \mathrm{g/cm^3}\) och är troligen vatten.`),
+  "2.87": byggFacitListaV2([
+    ["1", "Stenens volym är ökningen av vattenvolymen.", String.raw`\[V=78-50=28\ \mathrm{ml}=28\ \mathrm{cm^3}\]`, ""],
+    ["2", "Beräkna densiteten.", String.raw`\[\rho=\frac{74}{28}=2{,}64\ \mathrm{g/cm^3}\]`, ""]
+  ], String.raw`Stenens densitet är cirka \(2{,}6\ \mathrm{g/cm^3}\).`),
+  "2.88": byggFacitListaV2([
+    ["a", "Beräkna först kulans medeldensitet.", String.raw`\[m=1200\ \mathrm g,\qquad V=0{,}30\ \mathrm{dm^3}=300\ \mathrm{cm^3}\]\[\rho_{\mathrm{medel}}=\frac{1200}{300}=4{,}0\ \mathrm{g/cm^3}\]`, ""],
+    ["b", "Medeldensiteten är lägre än järnets, så kulan måste innehålla tomrum. Beräkna järnets egen volym.", String.raw`\[V_{\mathrm{järn}}=\frac{1200}{7{,}87}=152{,}5\ \mathrm{cm^3}\]`, ""],
+    ["c", "Subtrahera från kulans yttervolym.", String.raw`\[V_{\mathrm{hål}}=300-152{,}5=147{,}5\ \mathrm{cm^3}\]`, ""]
+  ], String.raw`Kulan måste vara ihålig eftersom medeldensiteten bara är \(4{,}0\ \mathrm{g/cm^3}\). Hålrummet är cirka \(148\ \mathrm{cm^3}\).`),
+  "2.89": byggFacitListaV2([
+    ["a", "Beräkna de båda metallernas volymer var för sig.", String.raw`\[V_{\mathrm{Cu}}=\frac{200}{8{,}96}=22{,}32\ \mathrm{cm^3}\]\[V_{\mathrm{Zn}}=\frac{100}{7{,}14}=14{,}01\ \mathrm{cm^3}\]`, ""],
+    ["b", "Addera massor och volymer och beräkna blandningens densitet.", String.raw`\[m=300\ \mathrm g,\qquad V=36{,}33\ \mathrm{cm^3}\]\[\rho=\frac{300}{36{,}33}=8{,}26\ \mathrm{g/cm^3}\]`, ""]
+  ], String.raw`Mässingens densitet blir cirka \(8{,}26\ \mathrm{g/cm^3}\).`),
+  "2.90": byggFacitListaV2([
+    ["a", "Beräkna den lilla kubens volym och densitet.", String.raw`\[V_1=2{,}0^3=8{,}0\ \mathrm{cm^3}\]\[\rho=\frac{84}{8{,}0}=10{,}5\ \mathrm{g/cm^3}\]`, ""],
+    ["b", "Den större kuben har dubbel sida och därmed åtta gånger större volym.", String.raw`\[V_2=4{,}0^3=64\ \mathrm{cm^3}\]\[m_2=\rho V_2=10{,}5\cdot64=672\ \mathrm g\]`, ""]
+  ], String.raw`Densiteten är \(10{,}5\ \mathrm{g/cm^3}\), nära silver. Kuben med sidan \(4{,}0\ \mathrm{cm}\) väger \(672\ \mathrm g\).`),
+  "2.91": byggFacitListaV2([
+    ["a", "Beräkna först rummets volym och sedan luftens massa.", String.raw`\[V=4{,}0\cdot5{,}0\cdot2{,}5=50\ \mathrm{m^3}\]\[m_{\mathrm{luft}}=1{,}29\cdot50=64{,}5\ \mathrm{kg}\]`, ""],
+    ["b", "Använd samma volym men vattnets densitet.", String.raw`\[m_{\mathrm{vatten}}=1000\cdot50=5{,}0\cdot10^4\ \mathrm{kg}=50\ \mathrm{ton}\]`, ""]
+  ], String.raw`Luften väger cirka \(65\ \mathrm{kg}\). Samma rum fyllt med vatten skulle innehålla \(50\,000\ \mathrm{kg}=50\ \mathrm{ton}\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_DENSITET_V2_DEL2[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_DENSITET_V2_DEL2[uppgift.id];
+  }
+}
+
+const FACIT_MATNOGGRANNHET_V2 = {
+  "2.3": byggFacitListaV2([
+    ["a", "Omkretsen ger radien. Sätt sedan in radien i cylinderns volym.", String.raw`\[r=\frac{C}{2\pi}=\frac{1{,}45}{2\pi}=0{,}2308\ \mathrm m\]\[V=\pi r^2h=\pi(0{,}2308)^2\cdot12{,}0=2{,}01\ \mathrm{m^3}\]`, ""],
+    ["b", "Minsta volym fås av minsta omkrets och längd; största volym av de största värdena.", String.raw`\[V_{\min}=\pi\left(\frac{1{,}43}{2\pi}\right)^2\cdot11{,}7=1{,}90\ \mathrm{m^3}\]\[V_{\max}=\pi\left(\frac{1{,}47}{2\pi}\right)^2\cdot12{,}3=2{,}12\ \mathrm{m^3}\]`, ""]
+  ], String.raw`Volymen är cirka \(2{,}01\ \mathrm{m^3}\), med intervallet \(1{,}90\leq V\leq2{,}12\ \mathrm{m^3}\).`),
+  "2.4": byggFacitListaV2([
+    ["a", "Utgå från \(V=\pi r^2h\) och sätt in de största möjliga måtten.", String.raw`\[V_{\max}=\pi(r+\Delta r)^2(h+\Delta h)\]\[V_{\max}\approx\pi r^2h\left(1+2\frac{\Delta r}{r}+\frac{\Delta h}{h}\right)\]`, "Här har produkter av små osäkerheter försummats."],
+    ["b", "Radien förekommer i kvadrat.", String.raw`\[\frac{\Delta V}{V}\approx2\frac{\Delta r}{r}+\frac{\Delta h}{h}\]`, "Samma relativa fel i radien bidrar därför dubbelt så mycket som felet i höjden."],
+    ["c", "Radie och omkrets har samma relativa osäkerhet eftersom \(r=C/(2\pi)\).", String.raw`\[\frac{\Delta V}{V}\approx2\cdot1{,}4\,\%+2{,}5\,\%=5{,}3\,\%\]`, ""]
+  ], String.raw`Den relativa volymosäkerheten är ungefär \(2\Delta r/r+\Delta h/h\). I det givna fallet blir den cirka \(5{,}3\,\%\).`),
+  "2.13": byggFacitListaV2([
+    ["a", "Nollan efter decimaltecknet räknas som en värdesiffra.", String.raw`\[12{,}4\ \mathrm{cm}:3\ \text{värdesiffror}\]\[3{,}0\ \mathrm{cm}:2\ \text{värdesiffror}\]`, ""],
+    ["b", "Multiplicera och avrunda till lika många värdesiffror som det minst noggranna mätvärdet.", String.raw`\[A=12{,}4\cdot3{,}0=37{,}2\ \mathrm{cm^2}\approx37\ \mathrm{cm^2}\]`, ""]
+  ], String.raw`Mätvärdena har 3 respektive 2 värdesiffror. Arean ska anges som \(37\ \mathrm{cm^2}\).`),
+  "2.14": byggFacitListaV2([
+    ["a", "Beräkna aritmetiskt medelvärde för varje elev.", String.raw`\[\bar t_A=\frac{1{,}42+1{,}41+1{,}43+1{,}42+1{,}42}{5}=1{,}420\ \mathrm s\]\[\bar t_B=\frac{1{,}38+1{,}47+1{,}35+1{,}50+1{,}40}{5}=1{,}420\ \mathrm s\]`, ""],
+    ["b", "Jämför mätseriernas variationsbredd.", String.raw`\[R_A=1{,}43-1{,}41=0{,}02\ \mathrm s\]\[R_B=1{,}50-1{,}35=0{,}15\ \mathrm s\]`, ""],
+    ["c", "Liten spridning betyder hög precision, inte nödvändigtvis hög riktighet.", "", "Ett systematiskt fel kan flytta alla mätningar lika mycket."]
+  ], String.raw`Båda får medelvärdet \(1{,}42\ \mathrm s\). Elev A mäter mer precist, men det visar inte ensamt vem som ligger närmast det sanna värdet.`),
+  "2.15": byggFacitListaV2([
+    ["a", "Relativ osäkerhet är absolut osäkerhet dividerad med mätvärdet.", String.raw`\[\frac{\Delta t}{t}=\frac{0{,}20}{1{,}4}=0{,}143=14\,\%\]`, ""],
+    ["b", "På hela 20-periodsmätningen är den absoluta tidtagningsosäkerheten fortfarande \(0{,}20\ \mathrm s\).", String.raw`\[\frac{\Delta t_{20}}{t_{20}}=\frac{0{,}20}{28}=0{,}00714=0{,}71\,\%\]`, ""],
+    ["c", "Start- och stoppfelet fördelas över en tjugo gånger längre mättid.", "", "Därför blir den relativa osäkerheten mycket mindre."]
+  ], String.raw`En period ger cirka \(14\,\%\) osäkerhet, medan 20 perioder ger cirka \(0{,}7\,\%\).`),
+  "2.16": byggFacitListaV2([
+    ["a", "Ett konstant offsetfel påverkar alla mätningar åt samma håll.", "", "Den första vågen har ett systematiskt fel på \(+0{,}3\ \mathrm{kg}\). Den andra har slumpmässiga fel."],
+    ["b", "Medelvärdesbildning låter slumpmässiga avvikelser delvis ta ut varandra.", "", "Det slumpmässiga felet minskar, men det systematiska felet ligger kvar."],
+    ["c", "Jämför vågen med en oberoende känd massa.", "", "Kalibrera därefter nollpunkt eller skalfaktor."]
+  ], String.raw`Upprepade mätningar minskar den andra vågens slumpfel men inte den första vågens \(+0{,}3\ \mathrm{kg}\). Det kvarvarande felet upptäcks och korrigeras genom kalibrering.`),
+  "2.28": byggFacitListaV2([
+    ["1", "Beräkna relativ osäkerhet för ett enda ark.", String.raw`\[\frac{0{,}02}{0{,}10}=0{,}20=20\,\%\]`, ""],
+    ["2", "När buntens tjocklek delas med 500 delas både mätvärdet och den absoluta osäkerheten med 500; den relativa osäkerheten är oförändrad.", String.raw`\[t=\frac{52}{500}=0{,}104\ \mathrm{mm}\]\[\frac{\Delta t}{t}=\frac{1}{52}=0{,}0192=1{,}9\,\%\]`, ""]
+  ], String.raw`Buntmetoden är klart säkrast: cirka \(1{,}9\,\%\) relativ osäkerhet mot \(20\,\%\) för ett enda ark.`),
+  "2.30": byggFacitListaV2([
+    ["a", "Subtrahera slutmassan från startmassan. Vid ett värsta-fall-intervall adderas de absoluta osäkerheterna.", String.raw`\[\Delta m=312-309=3\ \mathrm g\]\[\delta(\Delta m)=1+1=2\ \mathrm g\]`, ""],
+    ["b", "Jämför relativ osäkerhet i en vägning och i den lilla differensen.", String.raw`\[\frac{1}{312}=0{,}0032=0{,}32\,\%\]\[\frac{2}{3}=0{,}67=67\,\%\]`, ""],
+    ["c", "Låt en större massa hinna avdunsta utan att byta våg.", "", "Längre mättid gör differensen större medan den absoluta avläsningsosäkerheten förblir ungefär densamma."]
+  ], String.raw`Avdunstningen är \((3\pm2)\ \mathrm g\). En vägning har cirka \(0{,}3\,\%\) relativ osäkerhet, men differensen cirka \(67\,\%\); en betydligt längre mättid ger säkrare resultat.`),
+  "2.44": byggFacitListaV2([
+    ["1", "Inledande nollor räknas inte. Nollor efter decimaltecken räknas. Avslutande nollor i ett heltal utan decimaltecken är tvetydiga.", String.raw`\[\begin{aligned}25\ \mathrm{kg}&:2\\25{,}0\ \mathrm{kg}&:3\\0{,}04\ \mathrm m&:1\\0{,}040\ \mathrm m&:2\\3000\ \mathrm{cm}&:\text{tvetydigt, 1--4}\\3{,}000\ \mathrm m&:4\end{aligned}\]`, ""]
+  ], String.raw`Antalen är 2, 3, 1, 2, tvetydigt 1–4 samt 4 värdesiffror.`),
+  "2.45": byggFacitListaV2([
+    ["a–b", "Heltalet 24 km antas vara avrundat till närmaste kilometer.", String.raw`\[23{,}5\ \mathrm{km}\leq d<24{,}5\ \mathrm{km}\]`, ""],
+    ["c", "Värdet 24,0 km är avrundat till närmaste tiondels kilometer.", String.raw`\[23{,}95\ \mathrm{km}\leq d<24{,}05\ \mathrm{km}\]`, ""]
+  ], String.raw`För 24 km ligger avståndet från \(23{,}5\) upp till strax under \(24{,}5\ \mathrm{km}\). För 24,0 km krymper intervallet till \(23{,}95\)–\(24{,}05\ \mathrm{km}\).`),
+  "2.46": byggFacitListaV2([
+    ["a", "Densiteten blir störst med största massa och minsta volym; minst med minsta massa och största volym.", String.raw`\[m_{\max}=295\ \mathrm g,\quad V_{\min}=160\ \mathrm{cm^3}\]\[m_{\min}=275\ \mathrm g,\quad V_{\max}=190\ \mathrm{cm^3}\]`, ""],
+    ["b", "Beräkna intervallets båda gränser.", String.raw`\[\rho_{\max}=\frac{295}{160}=1{,}84\ \mathrm{g/cm^3}\]\[\rho_{\min}=\frac{275}{190}=1{,}45\ \mathrm{g/cm^3}\]`, ""]
+  ], String.raw`Densiteten ligger ungefär mellan \(1{,}45\) och \(1{,}84\ \mathrm{g/cm^3}\).`),
+  "2.47": byggFacitListaV2([
+    ["a", "Omvandla massan till gram och använd volymen i cm³.", String.raw`\[\rho=\frac{580}{480}=1{,}208\ \mathrm{g/cm^3}\]`, ""],
+    ["b", "Största densitet fås av största massa och minsta volym; minsta densitet tvärtom.", String.raw`\[\rho_{\max}=\frac{590}{460}=1{,}283\ \mathrm{g/cm^3}\]\[\rho_{\min}=\frac{570}{500}=1{,}140\ \mathrm{g/cm^3}\]`, ""]
+  ], String.raw`Densiteten är cirka \(1{,}21\ \mathrm{g/cm^3}\) och kan enligt gränsvärdena ligga mellan \(1{,}14\) och \(1{,}28\ \mathrm{g/cm^3}\).`),
+  "2.48": byggFacitListaV2([
+    ["a", "Omvandla centiliter till kubikcentimeter och anpassa en rät linje \(m=kV+m_0\).", String.raw`\[10\ \mathrm{cl}=100\ \mathrm{cm^3}\]\[k\approx0{,}837\ \mathrm{g/cm^3},\qquad m_0\approx6{,}7\ \mathrm g\]`, ""],
+    ["b", "Lutningen är massaökning per volymökning och därmed vätskans densitet.", String.raw`\[\rho=k\approx0{,}84\ \mathrm{g/cm^3}\]`, ""],
+    ["c", "En positiv skärning med massaxeln visar att vågen registrerar massa även vid noll vätskevolym.", "", "Det kan bero på en otillräckligt tarerad bägare eller ett nollpunktsfel."]
+  ], String.raw`Den anpassade linjens lutning är cirka \(0{,}837\ \mathrm{g/cm^3}\), så vätskans densitet är ungefär \(0{,}84\ \mathrm{g/cm^3}\). Skärningen tyder på ett systematiskt offsetfel.`),
+  "2.49": byggFacitListaV2([
+    ["a", "Längsta sträckan fås när både fart och tid antar sina största värden.", String.raw`\[s_{\max}=(v+\Delta v)(t+\Delta t)\]`, ""],
+    ["b", "Kortaste sträckan är \((v-\Delta v)(t-\Delta t)\). Subtrahera och utveckla parenteserna.", String.raw`\[s_{\max}-s_{\min}=(v+\Delta v)(t+\Delta t)-(v-\Delta v)(t-\Delta t)\]\[=2v\Delta t+2t\Delta v\]`, ""],
+    ["c", "Sätt in givna värden.", String.raw`\[\Delta s=2\cdot6{,}0\cdot10+2\cdot300\cdot0{,}2=240\ \mathrm m\]`, ""]
+  ], String.raw`\(s_{\max}=(v+\Delta v)(t+\Delta t)\), och hela möjliga sträckintervallets bredd är \(2v\Delta t+2t\Delta v\). Här blir den \(240\ \mathrm m\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_MATNOGGRANNHET_V2[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_MATNOGGRANNHET_V2[uppgift.id];
+  }
+}
+
+const FACIT_HASTIGHET_V2_DEL1 = {
+  "3.1": byggFacitListaV2([
+    ["1", "Ekot innebär att ljudet går från dig till väggen och tillbaka. Den totala sträckan är därför dubbel.", String.raw`\[s=2d=2\cdot85=170\ \mathrm m\]`, ""],
+    ["2", "Använd sambandet mellan sträcka, tid och fart.", String.raw`\[v=\frac{s}{t}=\frac{170}{0{,}50}=340\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Ljudets fart är \(340\ \mathrm{m/s}\).`),
+  "3.2": byggFacitListaV2([
+    ["a", "När du står stilla relativt trappan är farten relativt marken trappans fart.", String.raw`\[t=\frac{s}{v}=\frac{18}{0{,}50}=36\ \mathrm s\]`, ""],
+    ["b", "När du går uppåt adderas din fart relativt stegen och trappans fart.", String.raw`\[v=0{,}75+0{,}50=1{,}25\ \mathrm{m/s}\]\[t=\frac{18}{1{,}25}=14{,}4\ \mathrm s\]`, ""],
+    ["c", "Välj uppåt som positiv riktning. Kompisens fart relativt stegen är då negativ.", String.raw`\[v=0{,}50-0{,}75=-0{,}25\ \mathrm{m/s}\]\[t=\frac{18}{0{,}25}=72\ \mathrm s\]`, "Minustecknet visar att rörelsen relativt marken är nedåt."]
+  ], String.raw`Tiderna är \(36\ \mathrm s\) stående och \(14{,}4\ \mathrm s\) gående uppåt. Kompisen rör sig nedåt med \(0{,}25\ \mathrm{m/s}\) och når nedre änden efter \(72\ \mathrm s\).`),
+  "3.3": byggFacitListaV2([
+    ["1", "Tågens relativa fart är summan av farterna eftersom de kör mot varandra.", String.raw`\[v_{\mathrm{rel}}=90+90=180\ \mathrm{km/h}\]`, ""],
+    ["2", "Beräkna tiden tills tågen möts.", String.raw`\[t=\frac{60}{180}=\frac13\ \mathrm h\]`, ""],
+    ["3", "Flugan flyger med konstant fart under hela denna tid. Antalet vändningar behöver inte beräknas.", String.raw`\[s_f=v_ft=120\cdot\frac13=40\ \mathrm{km}\]`, ""]
+  ], String.raw`Flugan flyger totalt \(40\ \mathrm{km}\).`),
+  "3.7": byggFacitListaV2([
+    ["a", "Medelfarten på varje del är delsträckan dividerad med tiden för just den delen.", String.raw`\[v_1=\frac{30}{4{,}20}=7{,}14\ \mathrm{m/s}\]\[v_2=\frac{30}{2{,}70}=11{,}1\ \mathrm{m/s}\]\[v_3=\frac{40}{3{,}80}=10{,}5\ \mathrm{m/s}\]`, ""],
+    ["b", "Använd hela sträckan och summan av alla tider.", String.raw`\[t_{\mathrm{tot}}=4{,}20+2{,}70+3{,}80=10{,}70\ \mathrm s\]\[v_{\mathrm{med}}=\frac{100}{10{,}70}=9{,}35\ \mathrm{m/s}\]`, ""],
+    ["c", "Den största kvoten fås på sträckan 30–60 m.", "", "Första delen innehåller accelerationen från vila; därför är dess medelfart lägre än löparens fart när hon väl kommit upp i tempo."]
+  ], String.raw`Delarnas medelfarter är \(7{,}14\), \(11{,}1\) och \(10{,}5\ \mathrm{m/s}\). Hela loppets medelfart är \(9{,}35\ \mathrm{m/s}\), och löparen är snabbast mellan 30 och 60 m.`),
+  "3.8": byggFacitListaV2([
+    ["a", "Ett ljusår är den sträcka ljuset färdas under ett år.", String.raw`\[s=ct=(2{,}998\cdot10^8)(3{,}156\cdot10^7)\]\[s=9{,}462\cdot10^{15}\ \mathrm m\]`, ""],
+    ["b", "Radiosignalen färdas med ljusets fart.", String.raw`\[t=\frac{s}{c}=\frac{2{,}5\cdot10^{11}}{2{,}998\cdot10^8}=8{,}34\cdot10^2\ \mathrm s\]\[t=\frac{834}{60}=13{,}9\ \mathrm{min}\]`, "Detta är tiden i en riktning; ett svar från Mars tar lika lång tid tillbaka."]
+  ], String.raw`Ett ljusår är \(9{,}46\cdot10^{15}\ \mathrm m\). Signalen till Mars tar cirka \(834\ \mathrm s=13{,}9\ \mathrm{min}\).`),
+  "3.9": byggFacitListaV2([
+    ["a", "När cyklisterna rör sig mot varandra adderas deras farter.", String.raw`\[v_{\mathrm{rel}}=6{,}0+4{,}5=10{,}5\ \mathrm{m/s}\]\[t=\frac{900}{10{,}5}=85{,}7\ \mathrm s\]`, ""],
+    ["b", "Båda cyklar under samma tid.", String.raw`\[s_1=6{,}0\cdot85{,}7=514\ \mathrm m\]\[s_2=4{,}5\cdot85{,}7=386\ \mathrm m\]`, String.raw`Kontroll: \(514+386=900\ \mathrm m\).`],
+    ["c", "Den snabbare cyklisten hinner längre under samma tid.", "", "Mötet sker 514 m från den snabbare cyklistens start, alltså 386 m från den långsammare cyklistens start."]
+  ], String.raw`De möts efter cirka \(86\ \mathrm s\). Då har de färdats ungefär \(514\ \mathrm m\) respektive \(386\ \mathrm m\).`),
+  "3.19": byggFacitListaV2([
+    ["1", "Skriv hela tiden i timmar.", String.raw`\[t=2+\frac{50}{60}=2{,}833\ \mathrm h\]`, ""],
+    ["2", "Dividera hela sträckan med hela tiden.", String.raw`\[v_{\mathrm{med}}=\frac{340}{2{,}833}=120\ \mathrm{km/h}\]`, ""]
+  ], String.raw`Tågets medelhastighet är \(120\ \mathrm{km/h}\).`),
+  "3.20": byggFacitListaV2([
+    ["a", "Tidsskillnaden är i praktiken ljudets restid.", String.raw`\[s=v_{\mathrm{ljud}}t=340\cdot6{,}0=2040\ \mathrm m\approx2{,}0\ \mathrm{km}\]`, ""],
+    ["b", "Kontrollera hur lång tid ljuset behöver för samma sträcka.", String.raw`\[t_{\mathrm{ljus}}=\frac{2040}{3{,}00\cdot10^8}=6{,}8\cdot10^{-6}\ \mathrm s\]`, "Det är bara 6,8 mikrosekunder jämfört med 6,0 sekunder."]
+  ], String.raw`Blixten slog ned cirka \(2{,}0\ \mathrm{km}\) bort. Ljusets restid är försumbar i denna beräkning.`),
+  "3.21": byggFacitListaV2([
+    ["a", "Medelfart bygger på den tillryggalagda vägsträckan.", String.raw`\[\bar v_{\mathrm{fart}}=\frac{400}{62}=6{,}45\ \mathrm{m/s}\]`, ""],
+    ["b", "Medelhastighet bygger på förskjutningen. Start- och slutpunkten är samma.", String.raw`\[\Delta x=0\Rightarrow \vec v_{\mathrm{med}}=\frac{\Delta\vec x}{\Delta t}=0\ \mathrm{m/s}\]`, ""],
+    ["c", "Fart beskriver hur snabbt vägsträckan växer. Hastighet är en vektor och beskriver även riktning och nettoförflyttning.", "", "Därför kan medelfarten vara positiv samtidigt som medelhastigheten är noll."]
+  ], String.raw`Medelfarten är \(6{,}5\ \mathrm{m/s}\), medan medelhastigheten är \(0\ \mathrm{m/s}\).`),
+  "3.22": byggFacitListaV2([
+    ["a", "Medströms adderas båtens fart genom vattnet och strömmens fart.", String.raw`\[v_+=4{,}2+1{,}3=5{,}5\ \mathrm{m/s}\]\[t_+=\frac{850}{5{,}5}=155\ \mathrm s\]`, ""],
+    ["b", "Motströms subtraheras strömmens fart.", String.raw`\[v_-=4{,}2-1{,}3=2{,}9\ \mathrm{m/s}\]\[t_-=\frac{850}{2{,}9}=293\ \mathrm s\]`, ""],
+    ["c", "Jämför tur–returtiden med samma resa i stilla vatten.", String.raw`\[t_{\mathrm{ström}}=155+293=448\ \mathrm s\]\[t_0=2\frac{850}{4{,}2}=405\ \mathrm s\]`, "Tidsförlusten motströms är större än tidsvinsten medströms eftersom tiden är omvänt proportionell mot farten."]
+  ], String.raw`Det tar cirka \(155\ \mathrm s\) medströms och \(293\ \mathrm s\) motströms. Tur och retur tar \(448\ \mathrm s\), alltså längre än utan ström.`),
+  "3.44": byggFacitListaV2([
+    ["a", "Med de angivna löpfarterna blir den inkommande löparens hastighet relativt mottagaren", String.raw`\[v_{\mathrm{in/mot}}=8{,}5-9{,}2=-0{,}7\ \mathrm{m/s}\]`, String.raw`Minustecknet betyder att mottagaren drar ifrån med \(0{,}7\ \mathrm{m/s}\) när båda håller de angivna farterna.`],
+    ["b", "Mottagaren behöver hinna accelerera innan den inkommande löparen når fram.", "", "Vid en bra växling är mottagaren nära sin tävlingsfart när pinnen lämnas över, så laget tappar så lite fart som möjligt."]
+  ], String.raw`När båda håller sina angivna farter ökar avståndet med \(0{,}7\ \mathrm{m/s}\). En bokstavlig hastighet precis efter starten kan inte bestämmas utan uppgifter om mottagarens acceleration.`),
+  "3.46": String.raw`<div class="facit-v2"><div class="facit-del"><span class="facit-mark">a</span><div class="facit-arbete"><p class="facit-metod">När färjan riktas rakt över älven är tvärkomponenten \(3{,}0\ \mathrm{m/s}\).</p><div class="facit-matte">\[t=\frac{240}{3{,}0}=80\ \mathrm s\]\[s_{\mathrm{drift}}=1{,}2\cdot80=96\ \mathrm m\]</div></div></div><div class="facit-del"><span class="facit-mark">b</span><div class="facit-arbete"><p class="facit-metod">För att färdas rakt över måste färjans uppströmskomponent vara lika stor som strömmen.</p><span class="fig"><svg viewBox="0 0 390 220" role="img" aria-label="Hastighetstriangel för färjan med uppströmskomponenten 1,2 meter per sekund och tvärkomponenten 2,75 meter per sekund." xmlns="http://www.w3.org/2000/svg"><defs><marker id="pil-hastighet-346" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#2A5D9E"/></marker><marker id="pil-resultat-346" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#B43123"/></marker></defs><line x1="85" y1="175" x2="85" y2="55" stroke="#2A5D9E" stroke-width="3" marker-end="url(#pil-hastighet-346)"/><line x1="85" y1="175" x2="225" y2="175" stroke="#2A5D9E" stroke-width="3" marker-end="url(#pil-hastighet-346)"/><line x1="85" y1="175" x2="225" y2="55" stroke="#B43123" stroke-width="3" marker-end="url(#pil-resultat-346)"/><line x1="85" y1="55" x2="225" y2="55" stroke="#9A959C" stroke-dasharray="6 5"/><line x1="225" y1="175" x2="225" y2="55" stroke="#9A959C" stroke-dasharray="6 5"/><g font-family="IBM Plex Mono" font-size="11" fill="#5C575E"><text x="70" y="112" text-anchor="end">1,2 m/s uppströms</text><text x="155" y="198" text-anchor="middle">2,75 m/s tvärs</text><text x="175" y="103" transform="rotate(-41 175 103)" fill="#B43123">3,0 m/s genom vattnet</text></g></svg></span><div class="facit-matte">\[3{,}0\sin\alpha=1{,}2\]\[\alpha=\arcsin\!\left(\frac{1{,}2}{3{,}0}\right)=23{,}6^\circ\]</div></div></div><div class="facit-del"><span class="facit-mark">c</span><div class="facit-arbete"><p class="facit-metod">Pythagoras sats ger fartkomponenten rakt över.</p><div class="facit-matte">\[v_\perp=\sqrt{3{,}0^2-1{,}2^2}=2{,}75\ \mathrm{m/s}\]\[t=\frac{240}{2{,}75}=87{,}3\ \mathrm s\]</div></div></div><p class="facit-svar"><strong>Svar:</strong> Rakt riktad tar färjan \(80\ \mathrm s\) och driver \(96\ \mathrm m\). För att nå rakt över ska den riktas \(23{,}6^\circ\) uppströms; då tar färden cirka \(87\ \mathrm s\).</p></div>`,
+  "3.49": byggFacitListaV2([
+    ["1", "Omvandla först farten till m/s.", String.raw`\[v=\frac{80}{3{,}6}=22{,}2\ \mathrm{m/s}\]`, ""],
+    ["a", String.raw`Lös ut tiden ur \(v=s/t\).`, String.raw`\[t=\frac{s}{v}=\frac{150}{22{,}2}=6{,}75\ \mathrm s\]`, ""],
+    ["b", String.raw`Använd \(s=vt\).`, String.raw`\[s=22{,}2\cdot2{,}5=55{,}6\ \mathrm m\]`, ""]
+  ], String.raw`Det tar cirka \(6{,}8\ \mathrm s\) att köra 150 m, och bilen hinner cirka \(56\ \mathrm m\) på 2,5 s.`),
+  "3.50": byggFacitListaV2([
+    ["a", "Dividera hela sträckan med hela tiden.", String.raw`\[v_{\mathrm{med}}=\frac{200}{19{,}8}=10{,}10\ \mathrm{m/s}\]`, ""],
+    ["b", "Omvandla m/s till km/h genom att multiplicera med 3,6.", String.raw`\[10{,}10\cdot3{,}6=36{,}4\ \mathrm{km/h}\]`, ""],
+    ["c", "Medelfarten omfattar även starten från vila och eventuella delar där hon springer långsammare än toppfarten.", String.raw`\[10{,}10<11{,}5\]`, ""]
+  ], String.raw`Medelhastigheten är \(10{,}1\ \mathrm{m/s}=36{,}4\ \mathrm{km/h}\). Den är lägre än topphastigheten eftersom toppfarten inte hålls under hela loppet.`),
+  "3.51": byggFacitListaV2([
+    ["a", "Banradien är jordradien plus höjden över jordytan.", String.raw`\[r=6371+700=7071\ \mathrm{km}\]\[s=2\pi r=2\pi\cdot7071=4{,}443\cdot10^4\ \mathrm{km}\]`, ""],
+    ["b", "Dividera banans längd med satellitens fart.", String.raw`\[t=\frac{4{,}443\cdot10^4}{7{,}5}=5{,}92\cdot10^3\ \mathrm s\]\[t=\frac{5924}{60}=98{,}7\ \mathrm{min}\]`, ""]
+  ], String.raw`Banans längd är cirka \(4{,}44\cdot10^4\ \mathrm{km}\), och ett varv tar cirka \(99\ \mathrm{min}\).`),
+  "3.52": byggFacitListaV2([
+    ["a", "När båda rör sig åt samma håll subtraheras farterna.", String.raw`\[v_{\mathrm{cyklist/löpare}}=6{,}0-2{,}8=3{,}2\ \mathrm{m/s}\]`, ""],
+    ["b", "När de rör sig mot varandra adderas fartbeloppen.", String.raw`\[v_{\mathrm{rel}}=6{,}0+2{,}8=8{,}8\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Cyklisten närmar sig med \(3{,}2\ \mathrm{m/s}\) bakifrån och med \(8{,}8\ \mathrm{m/s}\) om de möts framifrån.`),
+  "3.53": byggFacitListaV2([
+    ["1", "Omvandla tågets fart.", String.raw`\[90\ \mathrm{km/h}=\frac{90}{3{,}6}=25\ \mathrm{m/s}\]`, ""],
+    ["a", "När bollen rullas i tågets färdriktning adderas hastigheterna.", String.raw`\[v_{\mathrm{boll/mark}}=25+1{,}5=26{,}5\ \mathrm{m/s}\]`, ""],
+    ["b", "När bollen rullas bakåt subtraheras dess fart relativt tåget.", String.raw`\[v_{\mathrm{boll/mark}}=25-1{,}5=23{,}5\ \mathrm{m/s}\]`, ""],
+    ["c", "Hastigheten måste alltid anges relativt ett valt referenssystem.", "", String.raw`Du mäter relativt tåget och får \(1{,}5\ \mathrm{m/s}\); personen på perrongen mäter relativt marken och får 26,5 eller 23,5 m/s. Båda har rätt.`]
+  ], String.raw`Relativt marken är bollens hastighet \(26{,}5\ \mathrm{m/s}\) framåt eller \(23{,}5\ \mathrm{m/s}\) när den rullas bakåt i tåget.`),
+  "3.54": byggFacitListaV2([
+    ["a", "Välj en enkel totalsträcka, exempelvis 200 km. Bil 1 kör hela sträckan i 100 km/h.", String.raw`\[t_1=\frac{200}{100}=2{,}00\ \mathrm h\]`, ""],
+    ["b", "Bil 2 kör 100 km med vardera farten.", String.raw`\[t_2=\frac{100}{80}+\frac{100}{120}=1{,}25+0{,}833=2{,}083\ \mathrm h\]\[v_{\mathrm{med},2}=\frac{200}{2{,}083}=96\ \mathrm{km/h}\]`, "Den långsamma halvan tar längre tid än den snabba och får därför större tidsmässig vikt."]
+  ], String.raw`Bilen som håller \(100\ \mathrm{km/h}\) kommer först. Den andra bilens medelfart är \(96\ \mathrm{km/h}\), inte 100 km/h.`),
+  "3.55": byggFacitListaV2([
+    ["a", "Den första bilens tid är sträcka dividerad med fart.", String.raw`\[t_1=\frac{s}{v}\]`, ""],
+    ["b", String.raw`Den andra bilen kör halva sträckan med \(0{,}8v\) och halva med \(1{,}2v\).`, String.raw`\[t_2=\frac{s/2}{0{,}8v}+\frac{s/2}{1{,}2v}\]\[t_2=\frac{s}{v}\left(\frac{1}{1{,}6}+\frac{1}{2{,}4}\right)=\frac{25}{24}\frac{s}{v}\]`, ""],
+    ["c", "Jämför tiderna.", String.raw`\[\frac{t_2}{t_1}=\frac{25}{24}=1{,}0417\]`, String.raw`Kvoten är större än 1 för alla positiva \(v\), så slutsatsen beror inte på vilket värde \(v\) har.`]
+  ], String.raw`Den andra bilen tar \(25/24\) av den första bilens tid, alltså cirka \(4{,}2\,\%\) längre tid, och kommer alltid sist.`),
+  "3.95": byggFacitListaV2([
+    ["a", "Använd medelfartssambandet.", String.raw`\[v=\frac{s}{t}=\frac{210}{7{,}0}=30\ \mathrm{m/s}\]`, ""],
+    ["b", "Omvandla till km/h.", String.raw`\[30\cdot3{,}6=108\ \mathrm{km/h}\]`, ""],
+    ["c", "Jämför fartbeloppen med en kvot.", String.raw`\[\frac{108}{90}=1{,}20\]`, "Det motsvarar 20 % högre fart än bilen."]
+  ], String.raw`Gepardens medelfart är \(30\ \mathrm{m/s}=108\ \mathrm{km/h}\), alltså \(1{,}20\) gånger bilens fart.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_HASTIGHET_V2_DEL1[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_HASTIGHET_V2_DEL1[uppgift.id];
+  }
+}
+
+const FACIT_HASTIGHET_V2_DEL2 = {
+  "3.96": byggFacitListaV2([
+    ["1", "Från m/s till km/h multiplicerar man med 3,6. Från km/h till m/s dividerar man med 3,6.", String.raw`\[1\ \mathrm{m/s}=3{,}6\ \mathrm{km/h}\]`, ""],
+    ["2", "Fyll i rad för rad.", String.raw`\[1{,}5\cdot3{,}6=5{,}4\ \mathrm{km/h}\]\[\frac{54}{3{,}6}=15\ \mathrm{m/s}\]\[90\cdot3{,}6=324\ \mathrm{km/h}\]\[\frac{72}{3{,}6}=20\ \mathrm{m/s}\]`, ""]
+  ], String.raw`De saknade värdena är \(5{,}4\ \mathrm{km/h}\), \(15\ \mathrm{m/s}\), \(324\ \mathrm{km/h}\) och \(20\ \mathrm{m/s}\).`),
+  "3.97": byggFacitListaV2([
+    ["a", "Omvandla till SI-enheter.", String.raw`\[45\ \mathrm{cm}=0{,}45\ \mathrm m\]\[15\ \mathrm{min}=15\cdot60=900\ \mathrm s\]`, ""],
+    ["b", "Dividera sträckan med tiden.", String.raw`\[v=\frac{0{,}45}{900}=5{,}0\cdot10^{-4}\ \mathrm{m/s}\]`, ""],
+    ["c", "Ett dygn är 86 400 s. Multiplicera farten med denna tid.", String.raw`\[t=24\cdot3600=86\,400\ \mathrm s\]\[s=vt=(5{,}0\cdot10^{-4})\cdot86\,400=43{,}2\ \mathrm m\]`, ""]
+  ], String.raw`Snigelns medelfart är \(5{,}0\cdot10^{-4}\ \mathrm{m/s}\), och på ett dygn hinner den cirka \(43\ \mathrm m\).`),
+  "3.98": byggFacitListaV2([
+    ["a", "Beräkna ljudpulsens hela sträcka under tur och retur.", String.raw`\[s=vt=1500\cdot0{,}80=1200\ \mathrm m\]`, ""],
+    ["b", "Djupet är halva den sträcka pulsen färdas.", String.raw`\[d=\frac{s}{2}=\frac{1200}{2}=600\ \mathrm m\]`, ""],
+    ["c", "Använd samma resonemang för den kortare ekotiden.", String.raw`\[d=\frac{vt}{2}=\frac{1500\cdot0{,}20}{2}=150\ \mathrm m\]`, ""]
+  ], String.raw`Ljudet färdas \(1200\ \mathrm m\) på 0,80 s, vilket ger djupet \(600\ \mathrm m\). Vid 0,20 s är djupet \(150\ \mathrm m\).`),
+  "3.99": byggFacitListaV2([
+    ["a", "Addera de fyra löparnas tider.", String.raw`\[t_{\mathrm{tot}}=11{,}2+10{,}4+10{,}8+10{,}6=43{,}0\ \mathrm s\]`, ""],
+    ["b", "Laget springer totalt 400 m.", String.raw`\[v_{\mathrm{med}}=\frac{400}{43{,}0}=9{,}30\ \mathrm{m/s}\]`, ""],
+    ["c", "Alla springer samma sträcka, så kortast tid ger störst medelfart.", String.raw`\[v_2=\frac{100}{10{,}4}=9{,}62\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Stafetten tar \(43{,}0\ \mathrm s\), och lagets medelfart är \(9{,}30\ \mathrm{m/s}\). Löpare 2 är snabbast med \(9{,}62\ \mathrm{m/s}\).`),
+  "3.100": byggFacitListaV2([
+    ["a", "Omvandla åtta månader till sekunder enligt uppgiftens antagande.", String.raw`\[t=8\cdot30\cdot24\cdot3600=20\,736\,000\ \mathrm s\]\[t=2{,}0736\cdot10^7\ \mathrm s\]`, ""],
+    ["b", "Omvandla sträckan till meter och dividera med tiden.", String.raw`\[s=70\,000\ \mathrm{km}=7{,}0\cdot10^7\ \mathrm m\]\[v=\frac{7{,}0\cdot10^7}{2{,}0736\cdot10^7}=3{,}38\ \mathrm{m/s}\]`, ""],
+    ["c", "Omvandla till km/h.", String.raw`\[3{,}38\cdot3{,}6=12{,}2\ \mathrm{km/h}\]`, "Medelfarten omfattar även raster och födosök; flygfarten är därför högre."]
+  ], String.raw`Flyttningens medelfart är cirka \(3{,}4\ \mathrm{m/s}=12\ \mathrm{km/h}\).`),
+  "3.101": byggFacitListaV2([
+    ["a", "Medströms verkar kanotens egen fart och strömmen åt samma håll.", String.raw`\[v_+=1{,}8+0{,}7=2{,}5\ \mathrm{m/s}\]`, ""],
+    ["b", "Motströms verkar farterna åt motsatta håll.", String.raw`\[v_-=1{,}8-0{,}7=1{,}1\ \mathrm{m/s}\]`, ""],
+    ["c", String.raw`Använd \(t=s/v\) för vardera riktningen.`, String.raw`\[t_+=\frac{500}{2{,}5}=200\ \mathrm s\]\[t_-=\frac{500}{1{,}1}=455\ \mathrm s\]`, ""]
+  ], String.raw`Farten är \(2{,}5\ \mathrm{m/s}\) medströms och \(1{,}1\ \mathrm{m/s}\) motströms. Tiderna för 500 m blir \(200\ \mathrm s\) respektive cirka \(455\ \mathrm s\).`),
+  "3.102": byggFacitListaV2([
+    ["a", "Medelfarten använder hela den tillryggalagda sträckan.", String.raw`\[\bar v_{\mathrm{fart}}=\frac{400}{96}=4{,}17\ \mathrm{m/s}\]`, ""],
+    ["b", "Efter ett helt varv sammanfaller slutpunkten med startpunkten.", String.raw`\[\Delta x=0\ \mathrm m\]`, ""],
+    ["c", "Medelhastigheten beräknas med förskjutningen, inte vägsträckan.", String.raw`\[\vec v_{\mathrm{med}}=\frac{\Delta\vec x}{\Delta t}=\frac{0}{96}=0\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Medelfarten är \(4{,}2\ \mathrm{m/s}\), förskjutningen \(0\ \mathrm m\) och medelhastigheten \(0\ \mathrm{m/s}\).`),
+  "3.103": byggFacitListaV2([
+    ["a", "Omvandla minuter till sekunder.", String.raw`\[t=92\cdot60=5520\ \mathrm s\]`, ""],
+    ["b", "Dividera banans omkrets med omloppstiden.", String.raw`\[v=\frac{4{,}25\cdot10^7}{5520}=7{,}70\cdot10^3\ \mathrm{m/s}\]`, ""],
+    ["c", "Multiplicera med 3,6.", String.raw`\[v=(7{,}70\cdot10^3)\cdot3{,}6=2{,}77\cdot10^4\ \mathrm{km/h}\]`, ""]
+  ], String.raw`ISS färdas med cirka \(7{,}7\cdot10^3\ \mathrm{m/s}=2{,}8\cdot10^4\ \mathrm{km/h}\).`),
+  "3.104": byggFacitListaV2([
+    ["a", "Omvandla timmar och minuter till sekunder.", String.raw`\[t=2\cdot3600+5\cdot60=7500\ \mathrm s\]`, ""],
+    ["b", "Omvandla sträckan till meter och dividera med tiden.", String.raw`\[s=42{,}195\ \mathrm{km}=42\,195\ \mathrm m\]\[v=\frac{42\,195}{7500}=5{,}63\ \mathrm{m/s}\]`, ""],
+    ["c", "Dividera hela tiden med antalet kilometer.", String.raw`\[t_{1\,\mathrm{km}}=\frac{7500}{42{,}195}=177{,}7\ \mathrm s\]\[177{,}7\ \mathrm s=2\ \mathrm{min}\ 57{,}7\ \mathrm s\]`, ""]
+  ], String.raw`Loppet tar \(7500\ \mathrm s\), medelfarten är \(5{,}63\ \mathrm{m/s}\), och kilometertiden är cirka 2 min 58 s.`),
+  "3.125": byggFacitListaV2([
+    ["a", String.raw`Lös ut tiden ur \(v=s/t\).`, String.raw`\[t=\frac{s}{v}=\frac{380}{9{,}5}=40\ \mathrm s\]`, ""],
+    ["b", "Omvandla m/s till km/h.", String.raw`\[9{,}5\cdot3{,}6=34{,}2\ \mathrm{km/h}\]`, ""]
+  ], String.raw`Det tar \(40\ \mathrm s\), och delfinens fart är \(34{,}2\ \mathrm{km/h}\).`),
+  "3.126": byggFacitListaV2([
+    ["a", "Omvandla timmar till sekunder.", String.raw`\[t=2{,}5\cdot3600=9000\ \mathrm s\]`, ""],
+    ["b", String.raw`Beräkna sträckan med \(s=vt\).`, String.raw`\[s=22\cdot9000=198\,000\ \mathrm m\]`, ""],
+    ["c", "Dela antalet meter med 1000.", String.raw`\[198\,000\ \mathrm m=198\ \mathrm{km}\]`, ""]
+  ], String.raw`Tåget kör \(198\,000\ \mathrm m=198\ \mathrm{km}\).`),
+  "3.127": byggFacitListaV2([
+    ["a", String.raw`Prefixet milli betyder \(10^{-3}\).`, String.raw`\[12\ \mathrm{ms}=12\cdot10^{-3}\ \mathrm s=0{,}012\ \mathrm s\]`, ""],
+    ["b", "Beräkna ljudets hela sträcka under ekotiden.", String.raw`\[s=vt=340\cdot0{,}012=4{,}08\ \mathrm m\]`, ""],
+    ["c", "Ljudet färdas till insekten och tillbaka, så enkelavståndet är hälften.", String.raw`\[d=\frac{s}{2}=\frac{4{,}08}{2}=2{,}04\ \mathrm m\]`, ""]
+  ], String.raw`Insekten är cirka \(2{,}0\ \mathrm m\) bort.`),
+  "3.128": byggFacitListaV2([
+    ["a", "Addera delsträckorna.", String.raw`\[s_{\mathrm{tot}}=3{,}0+2{,}0=5{,}0\ \mathrm{km}=5000\ \mathrm m\]`, ""],
+    ["b", "Addera tiderna och omvandla till sekunder.", String.raw`\[t_{\mathrm{tot}}=15+20=35\ \mathrm{min}\]\[t_{\mathrm{tot}}=35\cdot60=2100\ \mathrm s\]`, ""],
+    ["c", "Medelfarten är hela sträckan dividerad med hela tiden.", String.raw`\[v_{\mathrm{med}}=\frac{5000}{2100}=2{,}38\ \mathrm{m/s}\]`, "Man ska inte ta ett oviktat medelvärde av delfarterna."]
+  ], String.raw`Hela sträckan är \(5{,}0\ \mathrm{km}\), tiden \(2100\ \mathrm s\) och medelfarten cirka \(2{,}4\ \mathrm{m/s}\).`),
+  "3.129": byggFacitListaV2([
+    ["1", "Använd de tre formerna av samma samband.", String.raw`\[v=\frac{s}{t},\qquad s=vt,\qquad t=\frac{s}{v}\]`, ""],
+    ["2", "Beräkna det saknade värdet på varje rad.", String.raw`\[s_1=12\cdot25=300\ \mathrm m\]\[v_2=\frac{450}{30}=15\ \mathrm{m/s}\]\[t_3=\frac{800}{16}=50\ \mathrm s\]`, ""]
+  ], String.raw`De saknade värdena är \(300\ \mathrm m\), \(15\ \mathrm{m/s}\) och \(50\ \mathrm s\).`),
+  "3.130": byggFacitListaV2([
+    ["1", "Tågens avstånd minskar med summan av deras farter.", String.raw`\[v_{\mathrm{rel}}=90+110=200\ \mathrm{km/h}\]`, ""],
+    ["2", "Beräkna tiden till mötet.", String.raw`\[t=\frac{120}{200}=0{,}60\ \mathrm h=36\ \mathrm{min}\]`, ""],
+    ["3", "Det snabbare tåget håller 110 km/h under denna tid.", String.raw`\[s_{110}=110\cdot0{,}60=66\ \mathrm{km}\]`, String.raw`Kontroll: det andra tåget kör \(90\cdot0{,}60=54\ \mathrm{km}\), och \(66+54=120\ \mathrm{km}\).`]
+  ], String.raw`Tågen möts efter \(0{,}60\ \mathrm h=36\ \mathrm{min}\). Det snabbare tåget har då kört \(66\ \mathrm{km}\).`),
+  "3.131": byggFacitListaV2([
+    ["1", "Beräkna tiderna uppför och nedför.", String.raw`\[t_{\mathrm{upp}}=\frac{2{,}0}{10}=0{,}20\ \mathrm h\]\[t_{\mathrm{ned}}=\frac{2{,}0}{30}=0{,}0667\ \mathrm h\]`, ""],
+    ["2", "Medelfarten använder hela vägsträckan.", String.raw`\[\bar v_{\mathrm{fart}}=\frac{2{,}0+2{,}0}{0{,}20+0{,}0667}=15\ \mathrm{km/h}\]`, ""],
+    ["3", "Efter turen är cyklisten tillbaka vid startpunkten, så förskjutningen är noll.", String.raw`\[\vec v_{\mathrm{med}}=\frac{\Delta\vec x}{\Delta t}=0\ \mathrm{km/h}\]`, "Uppgiften använder ordet medelhastighet där den sannolikt avser medelfart."]
+  ], String.raw`Medelfarten över hela turen är \(15\ \mathrm{km/h}\). Den vektoriella medelhastigheten är däremot \(0\ \mathrm{km/h}\), eftersom cyklisten återvänder till startpunkten.`),
+  "3.132": byggFacitListaV2([
+    ["a", String.raw`Omvandla höjden till meter och använd \(t=s/c\).`, String.raw`\[s=20\,200\ \mathrm{km}=2{,}020\cdot10^7\ \mathrm m\]\[t=\frac{2{,}020\cdot10^7}{3{,}00\cdot10^8}=6{,}73\cdot10^{-2}\ \mathrm s\]`, ""],
+    ["b", String.raw`Ett mikrosekundfel motsvarar \(10^{-6}\ \mathrm s\).`, String.raw`\[\Delta s=c\Delta t=(3{,}00\cdot10^8)(1{,}0\cdot10^{-6})=300\ \mathrm m\]`, ""]
+  ], String.raw`Signalen tar cirka \(0{,}0673\ \mathrm s=67{,}3\ \mathrm{ms}\). Ett klockfel på \(1\ \mu\mathrm s\) ger ett avståndsfel på \(300\ \mathrm m\).`),
+  "3.133": byggFacitListaV2([
+    ["a", "Beräkna båda löparnas lägen efter 60 s.", String.raw`\[x_A=4{,}5\cdot60=270\ \mathrm m\]\[x_B=3{,}0\cdot60=180\ \mathrm m\]\[\Delta x=270-180=90\ \mathrm m\]`, ""],
+    ["b", String.raw`Efter fartökningen närmar sig B med den relativa farten \(6{,}5-4{,}5\).`, String.raw`\[v_{\mathrm{rel}}=2{,}0\ \mathrm{m/s}\]\[\Delta t=\frac{90}{2{,}0}=45\ \mathrm s\]\[t=60+45=105\ \mathrm s\]`, ""],
+    ["c", "Bestäm mötesplatsen med A:s rörelse.", String.raw`\[x=4{,}5\cdot105=472{,}5\ \mathrm m\]`, "Mötet sker långt före mållinjen vid 1500 m."]
+  ], String.raw`A:s försprång är \(90\ \mathrm m\). B hinner ikapp efter \(105\ \mathrm s\), vid ungefär \(473\ \mathrm m\), alltså före målet.`),
+  "3.134": byggFacitListaV2([
+    ["a", String.raw`Varje eko motsvarar en tur och retur. Avståndet till väggen är därför \(d=vt/2\).`, String.raw`\[d_1=\frac{340\cdot0{,}40}{2}=68\ \mathrm m\]`, ""],
+    ["b", "Använd den längre ekotiden för den bortre väggen.", String.raw`\[d_2=\frac{340\cdot1{,}10}{2}=187\ \mathrm m\]`, ""],
+    ["c", "Personen står mellan väggarna, så väggavståndet är summan av enkelavstånden.", String.raw`\[D=d_1+d_2=68+187=255\ \mathrm m\]`, ""]
+  ], String.raw`Det är \(68\ \mathrm m\) till den närmaste väggen och \(187\ \mathrm m\) till den bortre. Mellan väggarna är det \(255\ \mathrm m\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_HASTIGHET_V2_DEL2[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_HASTIGHET_V2_DEL2[uppgift.id];
+  }
+}
+
+const FACIT_KONSTACC_V2_DEL1 = {
+  "3.4": byggFacitListaV2([
+    ["1", "Omvandla farten och beräkna bromssträckan efter att bromsningen har börjat.", String.raw`\[v_0=\frac{80}{3{,}6}=22{,}2\ \mathrm{m/s}\]\[s_b=\frac{v_0^2}{2a}=\frac{22{,}2^2}{2\cdot7{,}0}=35{,}3\ \mathrm m\]`, ""],
+    ["a", "Under reaktionstiden är farten oförändrad. Lägg reaktionssträckan till bromssträckan.", String.raw`\[s_{r,1}=22{,}2\cdot0{,}8=17{,}8\ \mathrm m\]\[s_{\mathrm{stopp},1}=17{,}8+35{,}3=53{,}1\ \mathrm m\]\[s_{r,2}=22{,}2\cdot2{,}3=51{,}1\ \mathrm m\]\[s_{\mathrm{stopp},2}=51{,}1+35{,}3=86{,}4\ \mathrm m\]`, ""],
+    ["b", "Den uppmärksamma föraren stannar före 60 m. För den distraherade återstår bara 8,9 m att bromsa på.", String.raw`\[60-53{,}1=6{,}9\ \mathrm m\]\[v^2=22{,}2^2-2\cdot7{,}0\cdot(60-51{,}1)\]\[v=19{,}2\ \mathrm{m/s}\approx69\ \mathrm{km/h}\]`, ""]
+  ], String.raw`Stoppsträckorna är cirka \(53\ \mathrm m\) och \(86\ \mathrm m\). Den uppmärksamma föraren stannar ungefär 7 m före barnet; den distraherade träffar barnet med cirka \(19\ \mathrm{m/s}\).`),
+  "3.5": byggFacitListaV2([
+    ["a", "I ett referenssystem som följer hissen har muttern och golvet samma begynnelsefart. Den relativa begynnelsefarten är därför noll.", String.raw`\[2{,}6=\frac{gt^2}{2}\Rightarrow t=\sqrt{\frac{2\cdot2{,}6}{9{,}82}}=0{,}728\ \mathrm s\]`, ""],
+    ["b", "Hissens konstanta fart finns hos både golvet och muttern när muttern lossnar.", "", "Den gemensamma farten försvinner när den relativa rörelsen beräknas och påverkar därför inte falltiden."],
+    ["c", "När hissen accelererar uppåt ökar mutterns acceleration nedåt relativt hissgolvet.", String.raw`\[a_{\mathrm{rel}}=g+1{,}2=11{,}02\ \mathrm{m/s^2}\]\[t=\sqrt{\frac{2\cdot2{,}6}{11{,}02}}=0{,}687\ \mathrm s\]`, ""]
+  ], String.raw`Falltiden är \(0{,}73\ \mathrm s\) vid konstant hissfart och \(0{,}69\ \mathrm s\) när hissen accelererar uppåt.`),
+  "3.6": byggFacitListaV2([
+    ["1", "Låt tiden räknas från det första kastet. Boll 2 har då varit i luften i tiden t − 1,0 s.", String.raw`\[y_1=15t-\frac{gt^2}{2}\]\[y_2=15(t-1)-\frac{g(t-1)^2}{2}\]`, ""],
+    ["2", "Sätt höjderna lika. Kvadrattermerna tar ut varandra eftersom båda bollarna har samma acceleration.", String.raw`\[15t-\frac{gt^2}{2}=15(t-1)-\frac{g(t-1)^2}{2}\]\[15+\frac g2-gt=0\Rightarrow t=\frac{15+g/2}{g}=2{,}03\ \mathrm s\]`, ""],
+    ["3", "Sätt in tiden i den första bollens höjd.", String.raw`\[y=15\cdot2{,}03-\frac{9{,}82\cdot2{,}03^2}{2}=10{,}2\ \mathrm m\]`, ""]
+  ], String.raw`Bollarna möts cirka \(2{,}03\ \mathrm s\) efter det första kastet, på höjden \(10{,}2\ \mathrm m\).`),
+  "3.10": byggFacitListaV2([
+    ["1", "Omvandla begynnelsefarten.", String.raw`\[v_0=\frac{70}{3{,}6}=19{,}44\ \mathrm{m/s}\]`, ""],
+    ["a", "Vid stopp gäller noll slutfart i sambandet utan tid.", String.raw`\[s=\frac{v_0^2}{2a}\]\[s_{\mathrm{torr}}=\frac{19{,}44^2}{2\cdot7{,}0}=27{,}0\ \mathrm m\]\[s_{\mathrm{is}}=\frac{19{,}44^2}{2\cdot1{,}5}=126\ \mathrm m\]`, ""],
+    ["b–c", "Jämför sträckorna och retardationerna.", String.raw`\[\frac{s_{\mathrm{is}}}{s_{\mathrm{torr}}}=\frac{126}{27{,}0}=4{,}67\]\[\frac{a_{\mathrm{torr}}}{a_{\mathrm{is}}}=\frac{7{,}0}{1{,}5}=4{,}67\]`, "Bromssträckan är omvänt proportionell mot retardationens storlek när begynnelsefarten är densamma."]
+  ], String.raw`Bromssträckan är cirka \(27\ \mathrm m\) på torr asfalt och \(126\ \mathrm m\) på is, alltså \(4{,}7\) gånger längre på is.`),
+  "3.17": byggFacitListaV2([
+    ["a", "Planet startar från vila, så slutfarten är lika med acceleration gånger tid.", String.raw`\[t=\frac{v}{a}=\frac{72}{2{,}4}=30\ \mathrm s\]`, ""],
+    ["b", "Använd sambandet utan tid eller medelfarten under accelerationen.", String.raw`\[s=\frac{v^2}{2a}=\frac{72^2}{2\cdot2{,}4}=1080\ \mathrm m\]`, ""]
+  ], String.raw`Starten tar \(30\ \mathrm s\) och kräver cirka \(1{,}08\ \mathrm{km}\) startbana.`),
+  "3.18": byggFacitListaV2([
+    ["a", "Beräkna tid och sträcka under accelerationen.", String.raw`\[t_1=\frac{2{,}0}{0{,}80}=2{,}5\ \mathrm s\]\[s_1=\frac{2{,}0^2}{2\cdot0{,}80}=2{,}5\ \mathrm m\]`, ""],
+    ["b", "Under konstant fart och inbromsning blir sträckorna", String.raw`\[s_2=2{,}0\cdot4{,}0=8{,}0\ \mathrm m\]\[s_3=s_1=2{,}5\ \mathrm m\]\[s_{\mathrm{tot}}=2{,}5+8{,}0+2{,}5=13\ \mathrm m\]`, ""],
+    ["c", "Inbromsningen tar lika lång tid som accelerationen eftersom fartändringen och accelerationens storlek är desamma.", String.raw`\[t_{\mathrm{tot}}=2{,}5+4{,}0+2{,}5=9{,}0\ \mathrm s\]`, ""]
+  ], String.raw`Accelerationsfasen tar \(2{,}5\ \mathrm s\) och omfattar \(2{,}5\ \mathrm m\). Hela färden är \(13\ \mathrm m\) och tar \(9{,}0\ \mathrm s\).`),
+  "3.27": byggFacitListaV2([
+    ["a", "Stenen släpps från vila. Välj nedåt som positiv riktning.", String.raw`\[h=\frac{gt^2}{2}\Rightarrow t=\sqrt{\frac{2h}{g}}=\sqrt{\frac{2\cdot45}{9{,}82}}=3{,}03\ \mathrm s\]`, ""],
+    ["b", "Beräkna farten vid denna tid.", String.raw`\[v=gt=9{,}82\cdot3{,}03=29{,}7\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Fallet tar cirka \(3{,}0\ \mathrm s\), och stenen träffar marken med farten cirka \(30\ \mathrm{m/s}\).`),
+  "3.28": byggFacitListaV2([
+    ["a", "Räkna nedåt som positivt och använd sambandet utan tid.", String.raw`\[v^2=v_0^2+2gh=8{,}0^2+2\cdot9{,}82\cdot22\]\[v=22{,}3\ \mathrm{m/s}\]`, ""],
+    ["b", "Använd fartändringen för att få tiden.", String.raw`\[t=\frac{v-v_0}{g}=\frac{22{,}3-8{,}0}{9{,}82}=1{,}46\ \mathrm s\]`, ""],
+    ["c", "Jämför med ett fall från vila från samma höjd.", String.raw`\[t_0=\sqrt{\frac{2\cdot22}{9{,}82}}=2{,}12\ \mathrm s\]\[\Delta t=2{,}12-1{,}46=0{,}66\ \mathrm s\]`, ""]
+  ], String.raw`Stenen träffar vattnet med \(22{,}3\ \mathrm{m/s}\) efter \(1{,}46\ \mathrm s\). Det är cirka \(0{,}66\ \mathrm s\) snabbare än om den släpps.`),
+  "3.29": byggFacitListaV2([
+    ["a", "Under accelerationen gäller", String.raw`\[t_1=\frac{25}{2{,}5}=10\ \mathrm s\]\[s_1=\frac{25^2}{2\cdot2{,}5}=125\ \mathrm m\]`, ""],
+    ["b", "Efter accelerationen återstår 75 m med konstant fart.", String.raw`\[s_2=200-125=75\ \mathrm m\]\[t_2=\frac{75}{25}=3{,}0\ \mathrm s\]\[t_{\mathrm{tot}}=10+3{,}0=13\ \mathrm s\]`, ""]
+  ], String.raw`Accelerationen tar \(10\ \mathrm s\) och omfattar \(125\ \mathrm m\). Hela sträckan 200 m tar \(13\ \mathrm s\).`),
+  "3.30": byggFacitListaV2([
+    ["a", "Omvandla farten och lös ut retardationens storlek.", String.raw`\[v_1=\frac{90}{3{,}6}=25{,}0\ \mathrm{m/s}\]\[a=\frac{v_1^2}{2s_1}=\frac{25{,}0^2}{2\cdot55}=5{,}68\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Använd samma retardation vid 120 km/h.", String.raw`\[v_2=\frac{120}{3{,}6}=33{,}3\ \mathrm{m/s}\]\[s_2=\frac{v_2^2}{2a}=97{,}8\ \mathrm m\]`, ""],
+    ["c", "Beräkna den relativa ökningen.", String.raw`\[\frac{97{,}8-55}{55}\cdot100\,\%=77{,}8\,\%\]`, "Bromssträckan är proportionell mot fartens kvadrat. Fartfaktorn 4/3 ger sträckfaktorn 16/9, alltså cirka 1,78."]
+  ], String.raw`Retardationen är \(5{,}7\ \mathrm{m/s^2}\). Vid 120 km/h blir bromssträckan cirka \(98\ \mathrm m\), vilket är ungefär 78 % längre.`),
+  "3.39": byggFacitListaV2([
+    ["a", "Lutningen i fart–tid-diagrammet är accelerationen.", String.raw`\[a=\frac{0-25}{5{,}0-0}=-5{,}0\ \mathrm{m/s^2}\]`, "Retardationens storlek är 5,0 m/s²."],
+    ["b", "Bromssträckan är arean under kurvan, här en triangel.", String.raw`\[s=\frac{25\cdot5{,}0}{2}=62{,}5\ \mathrm m\]`, ""],
+    ["c", "Vid samma retardation är bromssträckan proportionell mot begynnelsefartens kvadrat.", String.raw`\[s_2=2^2s_1=4\cdot62{,}5=250\ \mathrm m\]`, ""]
+  ], String.raw`Retardationen är \(5{,}0\ \mathrm{m/s^2}\), bromssträckan \(62{,}5\ \mathrm m\), och vid dubbel fart blir den \(250\ \mathrm m\).`),
+  "3.43": byggFacitListaV2([
+    ["a", "Bil B:s acceleration är linjens lutning.", String.raw`\[a_B=\frac{48-0}{12-0}=4{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Bil A håller 20 m/s. Sätt B:s fart lika med 20 m/s.", String.raw`\[4{,}0t=20\Rightarrow t=5{,}0\ \mathrm s\]`, ""],
+    ["c", "Vid omkörningen är areorna under de båda fartkurvorna lika.", String.raw`\[s_A=20t,\qquad s_B=\frac{4{,}0t^2}{2}\]\[20t=2t^2\Rightarrow t=10\ \mathrm s\]\[s=20\cdot10=200\ \mathrm m\]`, ""]
+  ], String.raw`Bil B accelererar med \(4{,}0\ \mathrm{m/s^2}\), har samma fart som A efter 5,0 s och kör om efter 10 s vid 200 m.`),
+  "3.45": byggFacitListaV2([
+    ["a", "Linjalens fall börjar från vila.", String.raw`\[t_1=\sqrt{\frac{2s}{g}}=\sqrt{\frac{2\cdot0{,}18}{9{,}82}}=0{,}191\ \mathrm s\]`, ""],
+    ["b", "Gör samma beräkning för 25 cm.", String.raw`\[t_2=\sqrt{\frac{2\cdot0{,}25}{9{,}82}}=0{,}226\ \mathrm s\]\[\Delta t=0{,}226-0{,}191=0{,}034\ \mathrm s\]`, ""],
+    ["c", "Fallsträckan är proportionell mot tidens kvadrat.", String.raw`\[s(0{,}10)=4{,}91\ \mathrm{cm}\]\[s(0{,}20)=19{,}6\ \mathrm{cm}\]\[s(0{,}30)=44{,}2\ \mathrm{cm}\]`, "Markeringarna måste därför ligga allt glesare ju längre ned på linjalen man kommer."]
+  ], String.raw`Reaktionstiderna är cirka \(0{,}191\ \mathrm s\) och \(0{,}226\ \mathrm s\), en skillnad på \(0{,}034\ \mathrm s\).`),
+  "3.48": byggFacitListaV2([
+    ["a", "Vid start från vila och konstant acceleration ska läget vara proportionellt mot tidens kvadrat.", String.raw`\[1^2:2^2:3^2=1:4:9\]\[12:48:108=1:4:9\]`, "Mätvärdena följer alltså modellen för konstant acceleration."],
+    ["b", "Använd den första mätpunkten.", String.raw`\[0{,}12=\frac{a\cdot1{,}0^2}{2}\Rightarrow a=0{,}24\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Sträckan under den fjärde sekunden är skillnaden mellan lägena vid 4,0 s och 3,0 s.", String.raw`\[s(4)=\frac{0{,}24\cdot4^2}{2}=1{,}92\ \mathrm m\]\[\Delta s_4=1{,}92-1{,}08=0{,}84\ \mathrm m\]`, ""],
+    ["d", "Farten efter 3,0 s är", String.raw`\[v=at=0{,}24\cdot3{,}0=0{,}72\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Accelerationen är \(0{,}24\ \mathrm{m/s^2}\). Under fjärde sekunden rullar kulan \(0{,}84\ \mathrm m\), och efter 3,0 s är farten \(0{,}72\ \mathrm{m/s}\).`),
+  "3.62": byggFacitListaV2([
+    ["a", "Använd fartlagen för konstant acceleration.", String.raw`\[v=v_0+at=2{,}2+0{,}25\cdot6{,}0=3{,}7\ \mathrm{m/s}\]`, ""],
+    ["b", "Ta med både begynnelsefarten och accelerationsbidraget.", String.raw`\[s=v_0t+\frac{at^2}{2}=2{,}2\cdot6{,}0+\frac{0{,}25\cdot6{,}0^2}{2}=17{,}7\ \mathrm m\]`, ""]
+  ], String.raw`Efter 6,0 s är farten \(3{,}7\ \mathrm{m/s}\), och joggaren har färdats cirka \(18\ \mathrm m\).`),
+  "3.63": byggFacitListaV2([
+    ["a", "När luftmotståndet försummas är accelerationen tyngdaccelerationen under hela fallet.", String.raw`\[a=g=9{,}82\ \mathrm{m/s^2}\quad\text{nedåt}\]`, ""],
+    ["b", "Stenen släpps från vila.", String.raw`\[t=\sqrt{\frac{2h}{g}}=\sqrt{\frac{2\cdot45}{9{,}82}}=3{,}03\ \mathrm s\]`, ""],
+    ["c", "Beräkna slutfarten.", String.raw`\[v=gt=9{,}82\cdot3{,}03=29{,}7\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Accelerationen är \(9{,}82\ \mathrm{m/s^2}\) nedåt. Fallet tar \(3{,}03\ \mathrm s\), och slutfarten är cirka \(30\ \mathrm{m/s}\).`),
+  "3.64": byggFacitListaV2([
+    ["1", "Omvandla 90 km/h.", String.raw`\[v_0=25{,}0\ \mathrm{m/s}\]`, ""],
+    ["a", "Accelerationen är fartändringen per tid.", String.raw`\[a=\frac{0-25{,}0}{4{,}5}=-5{,}56\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Vid konstant acceleration är medelfarten medelvärdet av start- och slutfarten.", String.raw`\[s=\frac{25{,}0+0}{2}\cdot4{,}5=56{,}3\ \mathrm m\]`, ""],
+    ["c", "Halva starthastigheten och samma retardation ger en fjärdedel av sträckan.", String.raw`\[s_2=\frac{12{,}5^2}{2\cdot5{,}56}=14{,}1\ \mathrm m\]`, ""]
+  ], String.raw`Retardationen är \(5{,}6\ \mathrm{m/s^2}\). Bromssträckan är cirka \(56\ \mathrm m\) från 90 km/h och \(14\ \mathrm m\) från 45 km/h.`),
+  "3.65": byggFacitListaV2([
+    ["a", "Sätt in sträckan i lägesekvationen.", String.raw`\[40=12t+\frac{1{,}2t^2}{2}\]\[0{,}6t^2+12t-40=0\]`, ""],
+    ["2", "Välj den positiva roten eftersom tiden efter start ska vara positiv.", String.raw`\[t=\frac{-12+\sqrt{12^2+4\cdot0{,}6\cdot40}}{2\cdot0{,}6}=2{,}91\ \mathrm s\]`, ""],
+    ["b", "Beräkna slutfarten.", String.raw`\[v=12+1{,}2\cdot2{,}91=15{,}5\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Accelerationen varar cirka \(2{,}9\ \mathrm s\), och slutfarten är cirka \(15{,}5\ \mathrm{m/s}\).`),
+  "3.66": byggFacitListaV2([
+    ["a", "I högsta punkten är hastigheten noll.", String.raw`\[0=9{,}0-9{,}82t\Rightarrow t=0{,}916\ \mathrm s\]`, ""],
+    ["b", "Beräkna stighöjden och lägg till utgångshöjden.", String.raw`\[\Delta h=\frac{9{,}0^2}{2\cdot9{,}82}=4{,}12\ \mathrm m\]\[h_{\max}=1{,}5+4{,}12=5{,}62\ \mathrm m\]`, ""],
+    ["c", "Sätt marknivån till noll och lös höjdfunktionen.", String.raw`\[0=1{,}5+9{,}0t-4{,}91t^2\]\[t=1{,}99\ \mathrm s\]`, "Den negativa roten motsvarar en tidpunkt före kastet och förkastas."]
+  ], String.raw`Bollen når högsta punkten efter \(0{,}92\ \mathrm s\), når \(5{,}6\ \mathrm m\) över marken och landar efter cirka \(2{,}0\ \mathrm s\).`),
+  "3.67": byggFacitListaV2([
+    ["a", "Jämför raketens acceleration med tyngdaccelerationen.", String.raw`\[\frac{30}{9{,}82}=3{,}05\Rightarrow a\approx3{,}1g\]`, ""],
+    ["b", "Omvandla fartökningen till m/s och dividera med accelerationen.", String.raw`\[\Delta v=\frac{150}{3{,}6}=41{,}7\ \mathrm{m/s}\]\[t=\frac{41{,}7}{30}=1{,}39\ \mathrm s\]`, ""],
+    ["c", "Raketen startar från vila.", String.raw`\[s=\frac{at^2}{2}=\frac{30\cdot1{,}39^2}{2}=28{,}9\ \mathrm m\]`, ""]
+  ], String.raw`Accelerationen är cirka \(3{,}1g\). Fartökningen tar \(1{,}39\ \mathrm s\), och raketen färdas cirka \(29\ \mathrm m\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_KONSTACC_V2_DEL1[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_KONSTACC_V2_DEL1[uppgift.id];
+  }
+}
+
+const FACIT_KONSTACC_V2_DEL2 = {
+  "3.68": byggFacitListaV2([
+    ["1", "Omvandla slutfarten.", String.raw`\[v=\frac{60}{3{,}6}=16{,}7\ \mathrm{m/s}\]`, ""],
+    ["a", "Bilen startar från vila och tiden är okänd, så använd sambandet utan tid.", String.raw`\[v^2=2as\Rightarrow a=\frac{v^2}{2s}=\frac{16{,}7^2}{2\cdot50}=2{,}78\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Beräkna tiden ur fartlagen.", String.raw`\[t=\frac{v}{a}=\frac{16{,}7}{2{,}78}=6{,}0\ \mathrm s\]`, ""]
+  ], String.raw`Bilens acceleration är cirka \(2{,}8\ \mathrm{m/s^2}\), och accelerationen tar \(6{,}0\ \mathrm s\).`),
+  "3.69": byggFacitListaV2([
+    ["a", "Utgå från fallets läges- och fartlagar.", String.raw`\[h=\frac{gt^2}{2}\Rightarrow t=\sqrt{\frac{2h}{g}}\]\[v=gt=g\sqrt{\frac{2h}{g}}=\sqrt{2gh}\]`, ""],
+    ["b", "Låt den nya höjden vara H och kräv dubbla slutfarten.", String.raw`\[\sqrt{2gH}=2\sqrt{2gh}\]\[2gH=4\cdot2gh\Rightarrow H=4h\]`, ""]
+  ], String.raw`Slutfarten är \(v=\sqrt{2gh}\). För dubbel slutfart krävs fyra gånger så stor fallhöjd.`),
+  "3.70": byggFacitListaV2([
+    ["a", "Accelerationen i första fasen är fartkurvans lutning.", String.raw`\[a=\frac{10-0}{5-0}=2{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Sträckan är summan av areorna under de tre delarna av fartkurvan.", String.raw`\[s_1=\frac{5\cdot10}{2}=25\ \mathrm m\]\[s_2=4\cdot10=40\ \mathrm m\]\[s_3=\frac{4\cdot10}{2}=20\ \mathrm m\]\[s_{\mathrm{tot}}=85\ \mathrm m\]`, ""],
+    ["c", "Dividera total sträcka med total tid.", String.raw`\[v_{\mathrm{med}}=\frac{85}{13}=6{,}54\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Accelerationen är \(2{,}0\ \mathrm{m/s^2}\), totalsträckan \(85\ \mathrm m\) och medelfarten cirka \(6{,}5\ \mathrm{m/s}\).`),
+  "3.71": byggFacitListaV2([
+    ["a", "Arean under ett acceleration–tid-diagram är hastighetsändringen.", String.raw`\[v(4)=0+3\cdot4=12\ \mathrm{m/s}\]`, ""],
+    ["b", "Från 4 till 10 s är accelerationen 1 m/s².", String.raw`\[v(10)=12+1\cdot(10-4)=18\ \mathrm{m/s}\]`, ""],
+    ["c", "Under de första fyra sekunderna är accelerationen konstant och fordonet startar från vila.", String.raw`\[s=\frac{3\cdot4^2}{2}=24\ \mathrm m\]`, ""]
+  ], String.raw`Farten är \(12\ \mathrm{m/s}\) efter 4 s och \(18\ \mathrm{m/s}\) efter 10 s. Under de första 4 s färdas fordonet \(24\ \mathrm m\).`),
+  "3.72": byggFacitListaV2([
+    ["a", "Fartökningen är densamma i varje tvåsekundersintervall.", String.raw`\[\Delta v=3{,}0\ \mathrm{m/s},\qquad \Delta t=2{,}0\ \mathrm s\]`, "Det visar att accelerationen är konstant."],
+    ["b", "Beräkna accelerationens storlek.", String.raw`\[a=\frac{\Delta v}{\Delta t}=\frac{3{,}0}{2{,}0}=1{,}5\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Vagnen startar från vila.", String.raw`\[s=\frac{at^2}{2}=\frac{1{,}5\cdot8^2}{2}=48\ \mathrm m\]`, ""]
+  ], String.raw`Accelerationen är konstant och lika med \(1{,}5\ \mathrm{m/s^2}\). Efter 8 s har vagnen färdats \(48\ \mathrm m\).`),
+  "3.73": byggFacitListaV2([
+    ["a", "Medelfarten i varje intervall är lägesändringen under en sekund.", String.raw`\[\bar v_{0-1}=1{,}0\ \mathrm{m/s}\]\[\bar v_{1-2}=3{,}0\ \mathrm{m/s}\]\[\bar v_{2-3}=5{,}0\ \mathrm{m/s}\]\[\bar v_{3-4}=7{,}0\ \mathrm{m/s}\]`, ""],
+    ["b", "Medelfarten ökar med 2,0 m/s för varje ny sekund.", "", "Det är kännetecknande för en rörelse med konstant acceleration."],
+    ["c", "Tabellen följer s = t². Jämför med s = at²/2.", String.raw`\[t^2=\frac{at^2}{2}\Rightarrow a=2{,}0\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`Intervallens medelfarter är \(1{,}0\), \(3{,}0\), \(5{,}0\) och \(7{,}0\ \mathrm{m/s}\). Accelerationen är \(2{,}0\ \mathrm{m/s^2}\).`),
+  "3.74": byggFacitListaV2([
+    ["a", "När kurvan skär tidsaxeln är hastigheten noll.", "", "Bollen befinner sig då i sin högsta punkt och byter rörelseriktning."],
+    ["b", "Höjdökningen är den positiva arean under fartkurvan.", String.raw`\[h=\frac{19{,}6\cdot2{,}00}{2}=19{,}6\ \mathrm m\]`, ""],
+    ["c", "Utan luftmotstånd är rörelsen symmetrisk kring vändpunkten.", String.raw`\[t_{\mathrm{luft}}=2\cdot2{,}00=4{,}00\ \mathrm s\]`, ""]
+  ], String.raw`Bollen vänder efter \(2{,}00\ \mathrm s\), når \(19{,}6\ \mathrm m\) över kastpunkten och är i luften \(4{,}00\ \mathrm s\).`),
+  "3.75": byggFacitListaV2([
+    ["a", "Stenen släpps från vila.", String.raw`\[t=\sqrt{\frac{2h}{g}}=\sqrt{\frac{2\cdot18}{9{,}82}}=1{,}91\ \mathrm s\]`, ""],
+    ["b", "Farten vid marken är", String.raw`\[v=gt=9{,}82\cdot1{,}91=18{,}8\ \mathrm{m/s}\]`, ""],
+    ["c", "Halva sträckan är 9,0 m.", String.raw`\[t_{1/2}=\sqrt{\frac{2\cdot9{,}0}{9{,}82}}=1{,}35\ \mathrm s\]\[\frac{t_{1/2}}{t}=0{,}707\]`, "Det är mer än halva falltiden eftersom stenen rör sig långsammare i början."]
+  ], String.raw`Fallet tar \(1{,}91\ \mathrm s\), slutfarten är \(18{,}8\ \mathrm{m/s}\), och halva sträckan nås efter \(1{,}35\ \mathrm s\).`),
+  "3.76": byggFacitListaV2([
+    ["a", "Planet startar från vila. Använd sambandet utan tid.", String.raw`\[a=\frac{v^2}{2s}=\frac{68^2}{2\cdot1156}=2{,}00\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Beräkna tiden till lyftfarten.", String.raw`\[t=\frac{v}{a}=\frac{68}{2{,}00}=34\ \mathrm s\]`, ""],
+    ["c", "Behåll samma acceleration men byt slutfart.", String.raw`\[s_2=\frac{78^2}{2\cdot2{,}00}=1521\ \mathrm m\]`, "Det är 365 m längre än den första startsträckan."]
+  ], String.raw`Accelerationen är \(2{,}00\ \mathrm{m/s^2}\), starten tar \(34\ \mathrm s\), och 78 m/s skulle kräva cirka \(1{,}52\ \mathrm{km}\).`),
+  "3.77": byggFacitListaV2([
+    ["a", "Läs av inbromsningsdelen och beräkna lutningen.", String.raw`\[a=\frac{0-30}{130-100}=-1{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Avståndet är arean under hela fartkurvan.", String.raw`\[s=\frac{20\cdot30}{2}+80\cdot30+\frac{30\cdot30}{2}\]\[s=300+2400+450=3150\ \mathrm m\]`, ""],
+    ["c", "Dividera totalsträckan med 130 s.", String.raw`\[v_{\mathrm{med}}=\frac{3150}{130}=24{,}2\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Retardationen är \(1{,}0\ \mathrm{m/s^2}\), stationsavståndet \(3150\ \mathrm m\), och medelfarten \(24{,}2\ \mathrm{m/s}\).`),
+  "3.78": byggFacitListaV2([
+    ["a", "Tyngdkraftens komponent längs backen ger accelerationen.", String.raw`\[a=g\sin8^\circ=9{,}82\sin8^\circ=1{,}37\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Cyklisten startar från vila enligt modellen.", String.raw`\[v=\sqrt{2as}=\sqrt{2\cdot1{,}37\cdot120}=18{,}1\ \mathrm{m/s}\]`, ""],
+    ["c", "Vid samma acceleration är sträckan proportionell mot fartens kvadrat.", String.raw`\[s_2=2^2\cdot120=480\ \mathrm m\]`, ""]
+  ], String.raw`Accelerationen är \(1{,}37\ \mathrm{m/s^2}\), farten efter 120 m är \(18{,}1\ \mathrm{m/s}\), och dubbel fart kräver \(480\ \mathrm m\).`),
+  "3.79": byggFacitListaV2([
+    ["a", "Accelerationerna är linjernas lutningar.", String.raw`\[a_A=\frac{12}{6}=2{,}0\ \mathrm{m/s^2}\]\[a_B=\frac{12}{8}=1{,}5\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Sträckorna fram till slutfarten är triangelareorna under kurvorna.", String.raw`\[s_A=\frac{6\cdot12}{2}=36\ \mathrm m\]\[s_B=\frac{8\cdot12}{2}=48\ \mathrm m\]`, ""],
+    ["c", "Subtrahera areorna.", String.raw`\[\Delta s=48-36=12\ \mathrm m\]`, ""]
+  ], String.raw`Accelerationerna är \(2{,}0\) respektive \(1{,}5\ \mathrm{m/s^2}\). Fordon B färdas längst, med \(12\ \mathrm m\) större sträcka.`),
+  "3.80": byggFacitListaV2([
+    ["a", "Stenen släpps från vila.", String.raw`\[t=\sqrt{\frac{2\cdot45}{9{,}82}}=3{,}03\ \mathrm s\]`, ""],
+    ["b", "Beräkna farten vid vattenytan.", String.raw`\[v=gt=9{,}82\cdot3{,}03=29{,}7\ \mathrm{m/s}\]`, ""],
+    ["c", "Fallsträckan är proportionell mot tidens kvadrat.", String.raw`\[\frac{h_2}{h_1}=\left(\frac{2t}{t}\right)^2=4\Rightarrow h_2=4\cdot45=180\ \mathrm m\]`, ""]
+  ], String.raw`Fallet tar \(3{,}03\ \mathrm s\), slutfarten är \(29{,}7\ \mathrm{m/s}\), och dubbel falltid motsvarar djupet \(180\ \mathrm m\).`),
+  "3.81": byggFacitListaV2([
+    ["a", "När fordonen rör sig åt samma håll subtraheras farterna.", String.raw`\[v_{\mathrm{rel}}=25-20=5{,}0\ \mathrm{m/s}\]`, ""],
+    ["b", "Bilen ska vinna 100 m relativt lastbilen.", String.raw`\[t=\frac{100}{5{,}0}=20\ \mathrm s\]`, ""],
+    ["c", "Sett från vägen håller bilen 25 m/s.", String.raw`\[s=25\cdot20=500\ \mathrm m\]`, ""]
+  ], String.raw`Den relativa hastigheten är \(5{,}0\ \mathrm{m/s}\). Omkörningen tar \(20\ \mathrm s\), och bilen kör då \(500\ \mathrm m\).`),
+  "3.82": byggFacitListaV2([
+    ["a", "Under de första 3 s är accelerationen 4 m/s². Arean ger fartökningen.", String.raw`\[v(3)=4\cdot3=12\ \mathrm{m/s}\]`, ""],
+    ["b", "Mellan 3 och 5 s är accelerationen 6 m/s².", String.raw`\[v(5)=12+6\cdot2=24\ \mathrm{m/s}\]`, ""],
+    ["c", "När motorn slocknar verkar tyngdkraften fortfarande.", String.raw`\[a=-g=-9{,}82\ \mathrm{m/s^2}\]`, "Farten uppåt minskar tills raketen vänder. Detta förutsätter att diagrammet visar motorns drivande acceleration; om det visar nettoaccelerationen måste gravitationen redan vara inräknad."]
+  ], String.raw`Farten är \(12\ \mathrm{m/s}\) efter 3 s och \(24\ \mathrm{m/s}\) vid 5 s. Därefter minskar uppåtfarten på grund av tyngdkraften.`),
+  "3.83": byggFacitListaV2([
+    ["a", "Accelerationen är fartkurvans lutning.", String.raw`\[a=\frac{5{,}7-2{,}5}{8}=0{,}40\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Sträckan är trapetsarean under kurvan.", String.raw`\[s=\frac{v_0+v}{2}t=\frac{2{,}5+5{,}7}{2}\cdot8=32{,}8\ \mathrm m\]`, ""],
+    ["c", "Formeln at²/2 beskriver bara accelerationsbidraget när begynnelsefarten är noll.", String.raw`\[s=v_0t+\frac{at^2}{2}\]`, "Här måste termen med begynnelsefarten tas med."]
+  ], String.raw`Accelerationen är \(0{,}40\ \mathrm{m/s^2}\), och skidåkaren färdas cirka \(33\ \mathrm m\).`),
+  "3.84": byggFacitListaV2([
+    ["a", "I högsta punkten är hastigheten noll.", String.raw`\[0=11^2-2g\Delta h\Rightarrow \Delta h=\frac{11^2}{2\cdot9{,}82}=6{,}16\ \mathrm m\]`, ""],
+    ["b", "Lägg till balkongens höjd.", String.raw`\[h_{\max}=4{,}0+6{,}16=10{,}16\ \mathrm m\]`, ""],
+    ["c", "På samma höjd är fartbeloppet lika stort utan luftmotstånd.", String.raw`\[v=-11\ \mathrm{m/s}\]`, "Minustecknet visar att hastigheten är riktad nedåt."]
+  ], String.raw`Bollen stiger \(6{,}2\ \mathrm m\) över balkongen och når \(10{,}2\ \mathrm m\) över marken. Vid balkongen på väg ned är farten \(11\ \mathrm{m/s}\).`),
+  "3.85": byggFacitListaV2([
+    ["a", "Retardationen är fartkurvans lutning.", String.raw`\[a=\frac{0-14}{7-0}=-2{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Inbromsningssträckan är triangelarean.", String.raw`\[s=\frac{14\cdot7}{2}=49\ \mathrm m\]`, ""],
+    ["c", "Passagerarens kropp vill fortsätta med den ursprungliga hastigheten när bussen bromsar under fötterna.", "", "Relativt bussen faller passageraren därför framåt. Detta är ett uttryck för tröghet."]
+  ], String.raw`Retardationen är \(2{,}0\ \mathrm{m/s^2}\), bromssträckan \(49\ \mathrm m\), och passageraren faller framåt.`),
+  "3.86": byggFacitListaV2([
+    ["a", "Omvandla slutfarten.", String.raw`\[v=\frac{100}{3{,}6}=27{,}78\ \mathrm{m/s}\]`, ""],
+    ["b", "Tabellvärdena ligger nära en rät fartökning, så använd hela intervallet.", String.raw`\[a=\frac{27{,}78-0}{6{,}5}=4{,}27\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Vid konstant acceleration från vila är medelfarten halva slutfarten.", String.raw`\[s=\frac{0+27{,}78}{2}\cdot6{,}5=90{,}3\ \mathrm m\]`, ""]
+  ], String.raw`Slutfarten är \(27{,}8\ \mathrm{m/s}\), accelerationen \(4{,}27\ \mathrm{m/s^2}\), och bilen färdas cirka \(90\ \mathrm m\).`),
+  "3.87": byggFacitListaV2([
+    ["a", "Medelfarten under första sekunden är sekantens lutning mellan 0 och 1 s.", String.raw`\[\bar v_{0-1}=\frac{6{,}75-0}{1{,}0}=6{,}75\ \mathrm{m/s}\]`, ""],
+    ["b", "Gör motsvarande avläsning mellan 3 och 4 s.", String.raw`\[\bar v_{3-4}=\frac{36{,}0-24{,}75}{1{,}0}=11{,}25\ \mathrm{m/s}\]`, ""],
+    ["c", "Medelfarten ökar med 1,5 m/s för varje sekund och lägeskurvan blir allt brantare.", "", "Det visar att vagnen har konstant positiv acceleration."]
+  ], String.raw`Medelfarterna är cirka \(6{,}75\ \mathrm{m/s}\) under första sekunden och \(11{,}25\ \mathrm{m/s}\) under sista sekunden.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_KONSTACC_V2_DEL2[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_KONSTACC_V2_DEL2[uppgift.id];
+  }
+}
+
+const FACIT_KONSTACC_V2_DEL3 = {
+  "3.88": byggFacitListaV2([
+    ["a", "Bilen byter riktning när hastigheten byter tecken, alltså där kurvan skär tidsaxeln.", String.raw`\[t\approx12{,}5\ \mathrm s\]`, ""],
+    ["b", "Total vägsträcka fås genom att addera de positiva beloppen av areorna över och under tidsaxeln.", String.raw`\[s_{\mathrm{fram}}=66\ \mathrm m\]\[s_{\mathrm{bak}}=24\ \mathrm m\]\[s_{\mathrm{tot}}=66+24=90\ \mathrm m\]`, ""],
+    ["c", "Förskjutningen fås med tecken på areorna.", String.raw`\[\Delta x=66-24=42\ \mathrm m\]`, ""]
+  ], String.raw`Bilen vänder vid cirka \(12{,}5\ \mathrm s\), färdas totalt \(90\ \mathrm m\) och slutar \(42\ \mathrm m\) framför startpunkten.`),
+  "3.89": byggFacitListaV2([
+    ["a", "Löparen startar från vila.", String.raw`\[t_1=\frac{v}{a}=\frac{9}{1{,}8}=5{,}0\ \mathrm s\]`, ""],
+    ["b", "Beräkna sträckan under accelerationen.", String.raw`\[s_1=\frac{v^2}{2a}=\frac{9^2}{2\cdot1{,}8}=22{,}5\ \mathrm m\]`, ""],
+    ["c", "Återstående sträcka springs med konstant fart.", String.raw`\[s_2=100-22{,}5=77{,}5\ \mathrm m\]\[t_2=\frac{77{,}5}{9}=8{,}61\ \mathrm s\]\[t_{\mathrm{tot}}=5{,}0+8{,}61=13{,}6\ \mathrm s\]`, ""]
+  ], String.raw`Accelerationen tar \(5{,}0\ \mathrm s\) och omfattar \(22{,}5\ \mathrm m\). Sluttiden blir cirka \(13{,}6\ \mathrm s\).`),
+  "3.90": byggFacitListaV2([
+    ["a", "Acceleration är linjens lutning.", String.raw`\[a_A=\frac{17{,}2-6{,}0}{8}=1{,}4\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Kurvorna har samma lutning och ligger hela tiden 6 m/s från varandra. Skillnaden i sträcka är rektangelarean mellan dem.", String.raw`\[\Delta s=6{,}0\cdot8=48\ \mathrm m\]`, ""],
+    ["c", "Samma acceleration innebär konstant fartskillnad.", "", "Om de startar från samma plats ökar A:s försprång hela tiden, så B hinner aldrig ikapp." ]
+  ], String.raw`Accelerationen är \(1{,}4\ \mathrm{m/s^2}\). A har kört \(48\ \mathrm m\) längre efter 8 s, och B hinner inte ikapp.`),
+  "3.91": byggFacitListaV2([
+    ["a", "Sträckan uppåt är den positiva arean under fartkurvan.", String.raw`\[s_\uparrow=4+12+4=20\ \mathrm m\]`, ""],
+    ["b", "Sträckan nedåt är beloppet av den negativa arean.", String.raw`\[s_\downarrow=4+12+4=20\ \mathrm m\]`, ""],
+    ["c", "Förskjutningen är den tecknade arean.", String.raw`\[\Delta y=20-20=0\ \mathrm m\]`, ""]
+  ], String.raw`Hissen åker \(20\ \mathrm m\) uppåt och \(20\ \mathrm m\) nedåt och slutar vid startpunkten.`),
+  "3.92": byggFacitListaV2([
+    ["a", "Vagnen startar från vila.", String.raw`\[24=\frac{a\cdot4^2}{2}\Rightarrow a=3{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Beräkna slutfarten.", String.raw`\[v=at=3{,}0\cdot4=12\ \mathrm{m/s}\]`, ""],
+    ["c", "Medelfarten är total sträcka delad med tid.", String.raw`\[v_{\mathrm{med}}=\frac{24}{4}=6{,}0\ \mathrm{m/s}\]`, "Vid konstant acceleration från vila är medelfarten halva slutfarten."]
+  ], String.raw`Accelerationen är \(3{,}0\ \mathrm{m/s^2}\), slutfarten \(12\ \mathrm{m/s}\) och medelfarten \(6{,}0\ \mathrm{m/s}\).`),
+  "3.93": byggFacitListaV2([
+    ["a", "Använd sista mätpunkten och att kulan startar från vila.", String.raw`\[a=\frac{2s}{t^2}=\frac{2\cdot19{,}2}{4^2}=2{,}4\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Kontrollera modellen vid 2,0 s.", String.raw`\[s=\frac{2{,}4\cdot2{,}0^2}{2}=4{,}8\ \mathrm m\]`, "Det överensstämmer med tabellen."],
+    ["c", "Farten efter 4 s är", String.raw`\[v=at=2{,}4\cdot4=9{,}6\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Accelerationen är \(2{,}4\ \mathrm{m/s^2}\), vilket passar tabellen. Vid 4 s är farten \(9{,}6\ \mathrm{m/s}\).`),
+  "3.94": byggFacitListaV2([
+    ["a", "Retardationen är fartkurvans lutning.", String.raw`\[a=\frac{0-20}{8}=-2{,}5\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Bromssträckan är arean under kurvan.", String.raw`\[s=\frac{20\cdot8}{2}=80\ \mathrm m\]`, ""],
+    ["c", "Jämför bromssträckan med avståndet till hindret.", String.raw`\[90-80=10\ \mathrm m\]`, ""]
+  ], String.raw`Retardationen är \(2{,}5\ \mathrm{m/s^2}\), bromssträckan \(80\ \mathrm m\), och trucken stannar med \(10\ \mathrm m\) marginal.`),
+  "3.115": byggFacitListaV2([
+    ["a", "Simmaren startar från vila.", String.raw`\[v=at=1{,}2\cdot2{,}5=3{,}0\ \mathrm{m/s}\]`, ""],
+    ["b", "Beräkna sträckan.", String.raw`\[s=\frac{at^2}{2}=\frac{1{,}2\cdot2{,}5^2}{2}=3{,}75\ \mathrm m\]`, ""]
+  ], String.raw`Efter 2,5 s är farten \(3{,}0\ \mathrm{m/s}\), och simmaren har kommit cirka \(3{,}8\ \mathrm m\).`),
+  "3.116": byggFacitListaV2([
+    ["a", "Kotten faller fritt när luftmotståndet försummas.", String.raw`\[a=g=9{,}82\ \mathrm{m/s^2}\quad\text{nedåt}\]`, ""],
+    ["b", "Kotten startar från vila.", String.raw`\[t=\sqrt{\frac{2\cdot12}{9{,}82}}=1{,}56\ \mathrm s\]`, ""],
+    ["c", "Beräkna slutfarten.", String.raw`\[v=gt=9{,}82\cdot1{,}56=15{,}3\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Accelerationen är \(9{,}82\ \mathrm{m/s^2}\) nedåt. Fallet tar \(1{,}56\ \mathrm s\), och slutfarten är cirka \(15\ \mathrm{m/s}\).`),
+  "3.117": byggFacitListaV2([
+    ["a", "Välj rörelseriktningen som positiv. Vid stopp är slutfarten noll.", String.raw`\[0=6{,}0^2+2a\cdot4{,}0\Rightarrow a=-4{,}5\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Medelfarten är medelvärdet av start- och slutfarten.", String.raw`\[\bar v=\frac{6{,}0+0}{2}=3{,}0\ \mathrm{m/s}\]\[t=\frac{s}{\bar v}=\frac{4{,}0}{3{,}0}=1{,}33\ \mathrm s\]`, ""]
+  ], String.raw`Accelerationen är \(-4{,}5\ \mathrm{m/s^2}\), alltså retardationen \(4{,}5\ \mathrm{m/s^2}\). Inbromsningen tar \(1{,}3\ \mathrm s\).`),
+  "3.118": byggFacitListaV2([
+    ["1", "Använd fartlagen rad för rad.", String.raw`\[v=v_0+at\]`, ""],
+    ["2", "De fyra raderna ger", String.raw`\[v_1=0+3{,}0\cdot5{,}0=15\ \mathrm{m/s}\]\[a_2=\frac{20-8{,}0}{4{,}0}=3{,}0\ \mathrm{m/s^2}\]\[t_3=\frac{4{,}0-12}{-2{,}0}=4{,}0\ \mathrm s\]\[v_{0,4}=15-1{,}5\cdot6{,}0=6{,}0\ \mathrm{m/s}\]`, ""]
+  ], String.raw`De saknade värdena är \(15\ \mathrm{m/s}\), \(3{,}0\ \mathrm{m/s^2}\), \(4{,}0\ \mathrm s\) och \(6{,}0\ \mathrm{m/s}\).`),
+  "3.119": byggFacitListaV2([
+    ["a", "Tyngdaccelerationen är riktad nedåt under hela rörelsen, även när bollen rör sig uppåt.", String.raw`\[a=-g=-9{,}82\ \mathrm{m/s^2}\]`, "Uppåt har valts som positiv riktning."],
+    ["b", "I vändpunkten är hastigheten noll.", String.raw`\[0=14-9{,}82t\Rightarrow t=1{,}43\ \mathrm s\]`, ""],
+    ["c", "Använd sambandet utan tid.", String.raw`\[0=14^2-2g h\Rightarrow h=\frac{14^2}{2\cdot9{,}82}=9{,}98\ \mathrm m\]`, ""]
+  ], String.raw`Accelerationen är \(9{,}82\ \mathrm{m/s^2}\) nedåt. Bollen vänder efter \(1{,}43\ \mathrm s\) på höjden cirka \(10{,}0\ \mathrm m\).`),
+  "3.120": byggFacitListaV2([
+    ["a", "Backhopparen startar från vila och tiden är okänd.", String.raw`\[a=\frac{v^2}{2s}=\frac{24^2}{2\cdot72}=4{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Beräkna tiden ur fartlagen.", String.raw`\[t=\frac{v}{a}=\frac{24}{4{,}0}=6{,}0\ \mathrm s\]`, ""]
+  ], String.raw`Accelerationen är \(4{,}0\ \mathrm{m/s^2}\), och åkningen nedför ansatsen tar \(6{,}0\ \mathrm s\).`),
+  "3.121": byggFacitListaV2([
+    ["a", "Använd fallsträckan från vila.", String.raw`\[s=\frac{gt^2}{2}\]\[s(1)=4{,}91\ \mathrm m,\quad s(2)=19{,}64\ \mathrm m\]\[s(3)=44{,}19\ \mathrm m,\quad s(4)=78{,}56\ \mathrm m\]`, ""],
+    ["b", "Jämför de två första sträckorna.", String.raw`\[\frac{s(2)}{s(1)}=\frac{19{,}64}{4{,}91}=4\]`, ""],
+    ["c", "Fallsträckan är proportionell mot tidens kvadrat.", String.raw`\[s\propto t^2\]`, "Dubbelt så lång tid ger fyra gånger så lång sträcka; tre gånger så lång tid ger nio gånger så lång sträcka."]
+  ], String.raw`Fallsträckorna är cirka \(4{,}9\), \(19{,}6\), \(44{,}2\) och \(78{,}6\ \mathrm m\). Vid 2 s är sträckan fyra gånger sträckan vid 1 s.`),
+  "3.122": byggFacitListaV2([
+    ["a", "Acceleration är fartändring dividerad med tid.", String.raw`\[a=\frac{1{,}0-5{,}0}{8{,}0}=-0{,}50\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Vid konstant acceleration är medelfarten medelvärdet av ändpunkternas farter.", String.raw`\[\bar v=\frac{5{,}0+1{,}0}{2}=3{,}0\ \mathrm{m/s}\]`, ""],
+    ["c", "Multiplicera medelfarten med tiden.", String.raw`\[s=\bar vt=3{,}0\cdot8{,}0=24\ \mathrm m\]`, ""]
+  ], String.raw`Accelerationen är \(-0{,}50\ \mathrm{m/s^2}\), medelfarten \(3{,}0\ \mathrm{m/s}\), och sträckan \(24\ \mathrm m\).`),
+  "3.123": byggFacitListaV2([
+    ["a", "Pilen startar från vila och accelererar över 0,60 m.", String.raw`\[a=\frac{v^2}{2s}=\frac{55^2}{2\cdot0{,}60}=2{,}52\cdot10^3\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Jämför med tyngdaccelerationen.", String.raw`\[\frac{a}{g}=\frac{2521}{9{,}82}=257\]`, ""],
+    ["c", "Beräkna tiden till slutfarten.", String.raw`\[t=\frac{v}{a}=\frac{55}{2521}=2{,}18\cdot10^{-2}\ \mathrm s\]`, ""]
+  ], String.raw`Accelerationen är cirka \(2{,}5\cdot10^3\ \mathrm{m/s^2}\), ungefär \(257g\). Kontakttiden är cirka \(0{,}022\ \mathrm s=22\ \mathrm{ms}\).`),
+  "3.124": byggFacitListaV2([
+    ["a", "Ljudets restid försummas, så 2,0 s är stenens falltid.", String.raw`\[h=\frac{gt^2}{2}=\frac{9{,}82\cdot2{,}0^2}{2}=19{,}6\ \mathrm m\]`, ""],
+    ["b", "Farten efter 2,0 s är", String.raw`\[v=gt=9{,}82\cdot2{,}0=19{,}6\ \mathrm{m/s}\]`, ""],
+    ["c", "Dubbel höjd ger tidsfaktorn roten ur två.", String.raw`\[t_2=\sqrt{\frac{2\cdot(2h)}{g}}=\sqrt2\,t=2{,}83\ \mathrm s\]`, ""]
+  ], String.raw`Brunnen är cirka \(19{,}6\ \mathrm m\) djup och slutfarten \(19{,}6\ \mathrm{m/s}\). Vid dubbel höjd blir falltiden \(2{,}83\ \mathrm s\), inte 4,0 s.`),
+  "3.145": byggFacitListaV2([
+    ["a", "Använd fartlagen.", String.raw`\[v=2{,}0+0{,}40\cdot5{,}0=4{,}0\ \mathrm{m/s}\]`, ""],
+    ["b", "Ta med begynnelsefarten i sträckformeln.", String.raw`\[s=2{,}0\cdot5{,}0+\frac{0{,}40\cdot5{,}0^2}{2}=15\ \mathrm m\]`, "Kontroll: medelfarten är 3,0 m/s och 3,0 · 5,0 = 15 m."]
+  ], String.raw`Efter 5,0 s är farten \(4{,}0\ \mathrm{m/s}\), och kajaken har färdats \(15\ \mathrm m\).`),
+  "3.146": byggFacitListaV2([
+    ["a", "Stenen släpps från vila.", String.raw`\[h=\frac{gt^2}{2}=\frac{9{,}82\cdot2{,}5^2}{2}=30{,}7\ \mathrm m\]`, ""],
+    ["b", "Beräkna farten före nedslaget.", String.raw`\[v=gt=9{,}82\cdot2{,}5=24{,}6\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Huset är cirka \(31\ \mathrm m\) högt, och stenen träffar marken med farten cirka \(25\ \mathrm{m/s}\).`),
+  "3.147": byggFacitListaV2([
+    ["a", "Vid stopp är slutfarten noll.", String.raw`\[0=8{,}0-2{,}0t\Rightarrow t=4{,}0\ \mathrm s\]`, ""],
+    ["b", "Medelfarten under en likformig inbromsning är halva begynnelsefarten.", String.raw`\[\bar v=\frac{8{,}0+0}{2}=4{,}0\ \mathrm{m/s}\]\[s=\bar vt=4{,}0\cdot4{,}0=16\ \mathrm m\]`, ""]
+  ], String.raw`Cyklisten stannar efter \(4{,}0\ \mathrm s\), och bromssträckan är \(16\ \mathrm m\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_KONSTACC_V2_DEL3[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_KONSTACC_V2_DEL3[uppgift.id];
+  }
+}
+
+const FACIT_KONSTACC_V2_DEL4 = {
+  "3.148": byggFacitListaV2([
+    ["a", "Hissen startar från vila.", String.raw`\[t_1=\frac{v}{a}=\frac{2{,}0}{1{,}0}=2{,}0\ \mathrm s\]`, ""],
+    ["b", "Beräkna sträckan under accelerationen.", String.raw`\[s_1=\frac{at_1^2}{2}=\frac{1{,}0\cdot2{,}0^2}{2}=2{,}0\ \mathrm m\]`, ""],
+    ["c", "Därefter är farten konstant.", String.raw`\[s_2=vt=2{,}0\cdot8{,}0=16\ \mathrm m\]`, ""]
+  ], String.raw`Accelerationen tar \(2{,}0\ \mathrm s\) och omfattar \(2{,}0\ \mathrm m\). Under följande 8,0 s åker hissen \(16\ \mathrm m\).`),
+  "3.149": byggFacitListaV2([
+    ["1", "Använd lägesekvationen för konstant acceleration.", String.raw`\[s=v_0t+\frac{at^2}{2}\]`, ""],
+    ["2", "Sätt in värdena på de tre raderna.", String.raw`\[s_1=0+\frac{2{,}0\cdot3{,}0^2}{2}=9{,}0\ \mathrm m\]\[s_2=5{,}0\cdot4{,}0=20\ \mathrm m\]\[s_3=10\cdot3{,}0-\frac{2{,}0\cdot3{,}0^2}{2}=21\ \mathrm m\]`, ""],
+    ["b", "På rad 2 är accelerationen noll.", String.raw`\[a=0\Rightarrow v=v_0=5{,}0\ \mathrm{m/s}\]`, "Rörelsen har konstant fart."]
+  ], String.raw`Sträckorna är \(9{,}0\ \mathrm m\), \(20\ \mathrm m\) och \(21\ \mathrm m\). På rad 2 är farten konstant.`),
+  "3.150": byggFacitListaV2([
+    ["1", "Räkna nedåt som positiv riktning och ställ upp lägesekvationen.", String.raw`\[25=4{,}0t+\frac{9{,}82t^2}{2}\]\[4{,}91t^2+4{,}0t-25=0\]`, ""],
+    ["2", "Lös andragradsekvationen och välj den positiva roten.", String.raw`\[t=\frac{-4{,}0+\sqrt{4{,}0^2+4\cdot4{,}91\cdot25}}{2\cdot4{,}91}=1{,}89\ \mathrm s\]`, ""],
+    ["3", "Beräkna slutfarten.", String.raw`\[v=4{,}0+9{,}82\cdot1{,}89=22{,}5\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Fallet tar cirka \(1{,}89\ \mathrm s\), och stenen träffar marken med farten \(22{,}5\ \mathrm{m/s}\).`),
+  "3.151": byggFacitListaV2([
+    ["1", "Accelerationsfasen ger slutfarten och den första delsträckan.", String.raw`\[v=1{,}2\cdot10=12\ \mathrm{m/s}\]\[s_1=\frac{1{,}2\cdot10^2}{2}=60\ \mathrm m\]`, ""],
+    ["2", "Under konstant fart färdas vagnen", String.raw`\[s_2=12\cdot40=480\ \mathrm m\]`, ""],
+    ["3", "Vid inbromsningen är medelfarten 6,0 m/s och bromstiden 8,0 s.", String.raw`\[t_3=\frac{12}{1{,}5}=8{,}0\ \mathrm s\]\[s_3=\frac{12+0}{2}\cdot8{,}0=48\ \mathrm m\]`, ""],
+    ["4", "Addera delsträckorna.", String.raw`\[s_{\mathrm{tot}}=60+480+48=588\ \mathrm m\]`, ""]
+  ], String.raw`Tunnelbanevagnen kör \(588\ \mathrm m\) mellan stationerna.`),
+  "3.152": byggFacitListaV2([
+    ["1", "Mät höjd från marken. Båda bollarna har samma acceleration nedåt.", String.raw`\[y_1=20t-\frac{gt^2}{2}\]\[y_2=40-\frac{gt^2}{2}\]`, ""],
+    ["2", "Sätt höjderna lika. Tyngdtermerna tar ut varandra.", String.raw`\[20t=40\Rightarrow t=2{,}0\ \mathrm s\]`, ""],
+    ["3", "Beräkna möteshöjden.", String.raw`\[y=40-\frac{9{,}82\cdot2{,}0^2}{2}=20{,}36\ \mathrm m\]`, ""]
+  ], String.raw`Bollarna möts efter \(2{,}0\ \mathrm s\), på höjden cirka \(20{,}4\ \mathrm m\) över marken.`),
+  "3.153": byggFacitListaV2([
+    ["a", "Under reaktionstiden är farten konstant.", String.raw`\[s_r=9{,}0\cdot0{,}70=6{,}3\ \mathrm m\]`, ""],
+    ["b", "Beräkna bromssträckan och addera reaktionssträckan.", String.raw`\[s_b=\frac{9{,}0^2}{2\cdot3{,}5}=11{,}6\ \mathrm m\]\[s_{\mathrm{stopp}}=6{,}3+11{,}6=17{,}9\ \mathrm m\]`, ""],
+    ["c", "Vid dubbel fart fördubblas reaktionssträckan men bromssträckan fyrdubblas.", String.raw`\[s_{r,2}=18\cdot0{,}70=12{,}6\ \mathrm m\]\[s_{b,2}=\frac{18^2}{2\cdot3{,}5}=46{,}3\ \mathrm m\]\[s_{\mathrm{stopp},2}=58{,}9\ \mathrm m\]`, ""]
+  ], String.raw`Stoppsträckan är \(17{,}9\ \mathrm m\) vid 9,0 m/s och \(58{,}9\ \mathrm m\) vid 18 m/s. Den blir alltså mer än tre gånger så lång.`),
+  "3.154": byggFacitListaV2([
+    ["1", "Låt den totala falltiden vara T. Sträckan före den sista sekunden är 60 % av totalsträckan.", String.raw`\[\frac{g(T-1)^2}{2}=0{,}60\frac{gT^2}{2}\]`, ""],
+    ["a", "Förkorta bort g/2 och ta den positiva roten.", String.raw`\[T-1=\sqrt{0{,}60}\,T\]\[T=\frac{1}{1-\sqrt{0{,}60}}=4{,}44\ \mathrm s\]`, ""],
+    ["b", "Beräkna hela fallhöjden.", String.raw`\[H=\frac{gT^2}{2}=\frac{9{,}82\cdot4{,}44^2}{2}=96{,}6\ \mathrm m\]`, ""]
+  ], String.raw`Hela fallet tar cirka \(4{,}44\ \mathrm s\), och föremålet släpps från ungefär \(97\ \mathrm m\).`),
+  "3.155": byggFacitListaV2([
+    ["a", "Beräkna slutfarten.", String.raw`\[v=v_0+at=8{,}0+3{,}0\cdot6{,}0=26\ \mathrm{m/s}\]`, ""],
+    ["b", "Beräkna sträckan med begynnelsefart.", String.raw`\[s=8{,}0\cdot6{,}0+\frac{3{,}0\cdot6{,}0^2}{2}=102\ \mathrm m\]`, ""],
+    ["c", "Dividera sträckan med tiden.", String.raw`\[\bar v=\frac{102}{6{,}0}=17\ \mathrm{m/s}\]`, ""],
+    ["d", "Jämför med ändpunktsmedelvärdet.", String.raw`\[\frac{v_0+v}{2}=\frac{8{,}0+26}{2}=17\ \mathrm{m/s}\]`, "Vid konstant acceleration är detta exakt samma värde."]
+  ], String.raw`Slutfarten är \(26\ \mathrm{m/s}\), sträckan \(102\ \mathrm m\) och medelfarten \(17\ \mathrm{m/s}\).`),
+  "3.156": byggFacitListaV2([
+    ["a", "Tiden är okänd, så använd sambandet utan tid.", String.raw`\[v^2=4{,}0^2+2\cdot0{,}80\cdot60=112\]\[v=10{,}58\ \mathrm{m/s}\]`, ""],
+    ["b", "Beräkna tiden ur fartlagen.", String.raw`\[t=\frac{10{,}58-4{,}0}{0{,}80}=8{,}23\ \mathrm s\]`, ""],
+    ["c", "Medelfarten kan tas som ändpunktsmedelvärdet.", String.raw`\[\bar v=\frac{4{,}0+10{,}58}{2}=7{,}29\ \mathrm{m/s}\]`, ""],
+    ["d", "Beräkna läget efter 4,0 s.", String.raw`\[s=4{,}0\cdot4{,}0+\frac{0{,}80\cdot4{,}0^2}{2}=22{,}4\ \mathrm m\]`, "Det är mindre än halva backen eftersom farten är lägre under den första delen av tiden."]
+  ], String.raw`Slutfarten är \(10{,}6\ \mathrm{m/s}\), tiden \(8{,}23\ \mathrm s\), medelfarten \(7{,}29\ \mathrm{m/s}\), och efter 4,0 s har cyklisten färdats \(22{,}4\ \mathrm m\).`),
+  "3.157": byggFacitListaV2([
+    ["1", "Omvandla farterna.", String.raw`\[v_0=\frac{70}{3{,}6}=19{,}44\ \mathrm{m/s}\]\[v=\frac{90}{3{,}6}=25{,}0\ \mathrm{m/s}\]`, ""],
+    ["a", "Beräkna bil A:s acceleration.", String.raw`\[a=\frac{25{,}0-19{,}44}{4{,}0}=1{,}39\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Använd medelfarten för bil A.", String.raw`\[s_A=\frac{19{,}44+25{,}0}{2}\cdot4{,}0=88{,}9\ \mathrm m\]`, ""],
+    ["c–d", "Bil B håller konstant fart. Subtrahera sträckorna.", String.raw`\[s_B=19{,}44\cdot4{,}0=77{,}8\ \mathrm m\]\[\Delta s=88{,}9-77{,}8=11{,}1\ \mathrm m\]`, ""]
+  ], String.raw`Bil A accelererar med \(1{,}39\ \mathrm{m/s^2}\) och kör \(88{,}9\ \mathrm m\). Bil B kör \(77{,}8\ \mathrm m\), så A vinner \(11{,}1\ \mathrm m\).`),
+  "3.158": byggFacitListaV2([
+    ["a", "Välj rörelseriktningen som positiv, så accelerationen är negativ.", String.raw`\[v=12-0{,}40\cdot10=8{,}0\ \mathrm{m/s}\]`, ""],
+    ["b", "Beräkna sträckan under de första 10 s.", String.raw`\[s=12\cdot10-\frac{0{,}40\cdot10^2}{2}=100\ \mathrm m\]`, ""],
+    ["c", "Pucken stannar när hastigheten är noll.", String.raw`\[0=12-0{,}40t\Rightarrow t=30\ \mathrm s\]`, ""],
+    ["d", "Beräkna totalsträckan med sambandet utan tid.", String.raw`\[0=12^2-2\cdot0{,}40s\Rightarrow s=180\ \mathrm m\]`, ""]
+  ], String.raw`Efter 10 s är farten \(8{,}0\ \mathrm{m/s}\) och sträckan \(100\ \mathrm m\). Pucken stannar efter 30 s och har då glidit \(180\ \mathrm m\).`),
+  "3.159": byggFacitListaV2([
+    ["a", "Rad 1 startar från vila.", String.raw`\[v_1=2{,}0\cdot5{,}0=10\ \mathrm{m/s}\]\[s_1=\frac{2{,}0\cdot5{,}0^2}{2}=25\ \mathrm m\]`, ""],
+    ["b", "Rad 2 har begynnelsefart.", String.raw`\[v_2=6{,}0+1{,}0\cdot4{,}0=10\ \mathrm{m/s}\]\[s_2=6{,}0\cdot4{,}0+\frac{1{,}0\cdot4{,}0^2}{2}=32\ \mathrm m\]`, ""],
+    ["c", "Rad 3 bromsar till vila.", String.raw`\[t_3=\frac{0-20}{-2{,}5}=8{,}0\ \mathrm s\]\[s_3=\frac{20+0}{2}\cdot8{,}0=80\ \mathrm m\]`, ""],
+    ["d", "På rad 4 är tiden okänd. Bestäm först accelerationen.", String.raw`\[a_4=\frac{15^2-5{,}0^2}{2\cdot40}=2{,}5\ \mathrm{m/s^2}\]\[t_4=\frac{15-5{,}0}{2{,}5}=4{,}0\ \mathrm s\]`, ""]
+  ], String.raw`Rad 1: \(v=10\ \mathrm{m/s}\), \(s=25\ \mathrm m\). Rad 2: \(v=10\ \mathrm{m/s}\), \(s=32\ \mathrm m\). Rad 3: \(t=8{,}0\ \mathrm s\), \(s=80\ \mathrm m\). Rad 4: \(a=2{,}5\ \mathrm{m/s^2}\), \(t=4{,}0\ \mathrm s\).`),
+  "3.160": byggFacitListaV2([
+    ["a", "Planet startar från vila.", String.raw`\[t=\frac{65}{2{,}5}=26\ \mathrm s\]`, ""],
+    ["b", "Beräkna sträckan till lyftfarten.", String.raw`\[s=\frac{65^2}{2\cdot2{,}5}=845\ \mathrm m\]`, "Banan på 800 m är alltså för kort med denna acceleration."],
+    ["c", "Beräkna farten vid banans slut.", String.raw`\[v=\sqrt{2\cdot2{,}5\cdot800}=63{,}2\ \mathrm{m/s}\]`, ""],
+    ["d", "Lös ut den acceleration som krävs för 65 m/s på 800 m.", String.raw`\[a=\frac{65^2}{2\cdot800}=2{,}64\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`Lyftfarten nås efter 26 s men kräver \(845\ \mathrm m\). Vid 800 m är farten \(63{,}2\ \mathrm{m/s}\); minst \(2{,}64\ \mathrm{m/s^2}\) krävs för att lyfta precis vid banans slut.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_KONSTACC_V2_DEL4[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_KONSTACC_V2_DEL4[uppgift.id];
+  }
+}
+
+const FACIT_KONSTACC_V2_DEL5 = {
+  "3.161": byggFacitListaV2([
+    ["a", "Räkna nedåt som positiv riktning. Accelerationen blir negativ när skärmen bromsar rörelsen.", String.raw`\[a=\frac{6{,}0-55}{3{,}0}=-16{,}3\ \mathrm{m/s^2}\]`, "Retardationens storlek är 16,3 m/s²."],
+    ["b", "Vid konstant acceleration kan sträckan beräknas med medelfarten.", String.raw`\[s=\frac{55+6{,}0}{2}\cdot3{,}0=91{,}5\ \mathrm m\]`, ""],
+    ["c", "Jämför retardationens storlek med g.", String.raw`\[\frac{16{,}3}{9{,}82}=1{,}66\]`, ""],
+    ["d", "Använd fartlagen efter 1,0 s.", String.raw`\[v=55-16{,}3\cdot1{,}0=38{,}7\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Retardationen är \(16{,}3\ \mathrm{m/s^2}\approx1{,}66g\). Hopparen faller \(91{,}5\ \mathrm m\), och efter 1,0 s är farten cirka \(38{,}7\ \mathrm{m/s}\).`),
+  "3.162": byggFacitListaV2([
+    ["1", "Välj uppför planet som positiv riktning. Accelerationen är då −2,0 m/s².", String.raw`\[v_0=6{,}0\ \mathrm{m/s},\qquad a=-2{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["a", "I vändpunkten är hastigheten noll.", String.raw`\[0=6{,}0^2+2(-2{,}0)s\Rightarrow s=9{,}0\ \mathrm m\]`, ""],
+    ["b", "Beräkna tiden till vändpunkten.", String.raw`\[0=6{,}0-2{,}0t\Rightarrow t=3{,}0\ \mathrm s\]`, ""],
+    ["c–d", "Bestäm läget efter 4,0 s.", String.raw`\[x=6{,}0\cdot4{,}0-\frac{2{,}0\cdot4{,}0^2}{2}=8{,}0\ \mathrm m\]`, "Kulan har vänt efter 3,0 s och rullat 1,0 m tillbaka. Den totala rullsträckan är 10,0 m, medan läget är 8,0 m från start."]
+  ], String.raw`Kulan vänder \(9{,}0\ \mathrm m\) uppför planet efter \(3{,}0\ \mathrm s\). Efter 4,0 s är den \(8{,}0\ \mathrm m\) från startpunkten.`),
+  "3.163": byggFacitListaV2([
+    ["a", "Bilen startar från vila.", String.raw`\[s(1)=\frac{3{,}0\cdot1^2}{2}=1{,}5\ \mathrm m\]`, ""],
+    ["b", "Beräkna läget efter 2,0 s.", String.raw`\[s(2)=\frac{3{,}0\cdot2^2}{2}=6{,}0\ \mathrm m\]`, ""],
+    ["c", "Sträckan under andra sekunden är skillnaden mellan två lägen.", String.raw`\[\Delta s_2=s(2)-s(1)=6{,}0-1{,}5=4{,}5\ \mathrm m\]`, ""],
+    ["d", "Gör samma sak för tredje sekunden.", String.raw`\[s(3)=\frac{3{,}0\cdot3^2}{2}=13{,}5\ \mathrm m\]\[\Delta s_3=13{,}5-6{,}0=7{,}5\ \mathrm m\]`, "Sträckorna under sekund 1, 2 och 3 är 1,5, 4,5 och 7,5 m, alltså proportionella mot 1 : 3 : 5."]
+  ], String.raw`Lägena efter 1 s och 2 s är \(1{,}5\ \mathrm m\) och \(6{,}0\ \mathrm m\). Under andra sekunden kör bilen \(4{,}5\ \mathrm m\), och under tredje \(7{,}5\ \mathrm m\).`),
+  "3.164": byggFacitListaV2([
+    ["a", "Tåget bromsar från 30 m/s till vila med 0,50 m/s².", String.raw`\[t=\frac{30}{0{,}50}=60\ \mathrm s\]`, ""],
+    ["b", "Beräkna bromssträckan.", String.raw`\[s=\frac{30^2}{2\cdot0{,}50}=900\ \mathrm m\]`, ""],
+    ["c", "Efter 400 m gäller sambandet utan tid.", String.raw`\[v^2=30^2-2\cdot0{,}50\cdot400=500\]\[v=22{,}4\ \mathrm{m/s}\]`, ""],
+    ["d", "När farten är 10 m/s återstår bromssträckan från 10 m/s till noll.", String.raw`\[s_{\mathrm{kvar}}=\frac{10^2}{2\cdot0{,}50}=100\ \mathrm m\]`, ""]
+  ], String.raw`Inbromsningen tar \(60\ \mathrm s\) och \(900\ \mathrm m\). Efter 400 m är farten \(22{,}4\ \mathrm{m/s}\), och vid 10 m/s återstår \(100\ \mathrm m\).`),
+  "3.165": byggFacitListaV2([
+    ["1", "Skriv båda fordonens lägen från trafikljuset.", String.raw`\[x_L=15t\]\[x_B=\frac{2{,}5t^2}{2}=1{,}25t^2\]`, ""],
+    ["2", "Försprånget är störst när bilens fart precis blivit lika med lastbilens.", String.raw`\[v_B=2{,}5t=15\Rightarrow t=6{,}0\ \mathrm s\]\[\Delta x_{\max}=15\cdot6-1{,}25\cdot6^2=45\ \mathrm m\]`, ""],
+    ["3", "Bilen är ikapp när lägena är lika.", String.raw`\[1{,}25t^2=15t\Rightarrow t=12\ \mathrm s\]`, "Den andra lösningen t = 0 är startögonblicket och inte omkörningen."]
+  ], String.raw`Lastbilens största försprång är \(45\ \mathrm m\) efter 6,0 s. Bilen kör ikapp efter \(12\ \mathrm s\), vid läget \(180\ \mathrm m\).`),
+  "3.166": byggFacitListaV2([
+    ["1", "Låt v₁ vara stenens fart vid fönstrets överkant. Under fönsterpassagen gäller", String.raw`\[2{,}0=v_1\cdot0{,}18+\frac{9{,}82\cdot0{,}18^2}{2}\]`, ""],
+    ["2", "Lös ut farten vid överkanten.", String.raw`\[v_1=\frac{2{,}0-0{,}159}{0{,}18}=10{,}23\ \mathrm{m/s}\]`, ""],
+    ["3", "Fallet fram till överkanten började från vila.", String.raw`\[v_1^2=2gh\Rightarrow h=\frac{10{,}23^2}{2\cdot9{,}82}=5{,}33\ \mathrm m\]`, ""]
+  ], String.raw`Stenen släpptes cirka \(5{,}3\ \mathrm m\) ovanför fönstrets överkant.`),
+  "3.167": byggFacitListaV2([
+    ["1", "Beräkna tid och sträcka under accelerationen.", String.raw`\[t_1=\frac{24}{0{,}60}=40\ \mathrm s\]\[s_1=\frac{24^2}{2\cdot0{,}60}=480\ \mathrm m\]`, ""],
+    ["2", "Gör samma sak för inbromsningen.", String.raw`\[t_3=\frac{24}{0{,}80}=30\ \mathrm s\]\[s_3=\frac{24^2}{2\cdot0{,}80}=360\ \mathrm m\]`, ""],
+    ["3", "Resten av stationsavståndet körs med 24 m/s.", String.raw`\[s_2=2400-480-360=1560\ \mathrm m\]\[t_2=\frac{1560}{24}=65\ \mathrm s\]`, ""],
+    ["4", "Addera tiderna.", String.raw`\[t_{\mathrm{tot}}=40+65+30=135\ \mathrm s\]`, ""]
+  ], String.raw`Resan tar \(135\ \mathrm s=2\ \mathrm{min}\ 15\ \mathrm s\).`),
+  "3.168": byggFacitListaV2([
+    ["1", "Räkna uppåt som positiv riktning och sätt höjden till 20 m.", String.raw`\[20=25t-\frac{9{,}82t^2}{2}\]\[4{,}91t^2-25t+20=0\]`, ""],
+    ["2", "Lös andragradsekvationen.", String.raw`\[t=\frac{25\pm\sqrt{25^2-4\cdot4{,}91\cdot20}}{2\cdot4{,}91}\]\[t_1=0{,}994\ \mathrm s,\qquad t_2=4{,}10\ \mathrm s\]`, ""],
+    ["3", "Kontrollera att bollen faktiskt når högre än 20 m.", String.raw`\[h_{\max}=\frac{25^2}{2\cdot9{,}82}=31{,}8\ \mathrm m\]`, "Den första tiden gäller på väg upp och den andra på väg ned."]
+  ], String.raw`Bollen befinner sig 20 m över marken efter cirka \(0{,}99\ \mathrm s\) och \(4{,}10\ \mathrm s\).`),
+  "3.169": byggFacitListaV2([
+    ["1", "Vid konstant acceleration är sträckan under sekund nummer n", String.raw`\[\Delta s_n=s(n)-s(n-1)=v_0+a\left(n-\frac12\right)\]`, ""],
+    ["2", "Använd uppgifterna för första och fjärde sekunden.", String.raw`\[v_0+0{,}5a=22\]\[v_0+3{,}5a=10\]`, ""],
+    ["3", "Subtrahera ekvationerna och bestäm sedan begynnelsefarten.", String.raw`\[3a=-12\Rightarrow a=-4{,}0\ \mathrm{m/s^2}\]\[v_0=22-0{,}5(-4{,}0)=24\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Bilens acceleration är \(-4{,}0\ \mathrm{m/s^2}\), alltså retardationen \(4{,}0\ \mathrm{m/s^2}\). Begynnelsefarten är \(24\ \mathrm{m/s}\).`),
+  "3.170": byggFacitListaV2([
+    ["a", "Den första droppen faller 1,2 m under tre lika tidsintervall. Låt hela falltiden vara T.", String.raw`\[1{,}2=\frac{gT^2}{2}\Rightarrow T=0{,}494\ \mathrm s\]\[\Delta t=\frac{T}{3}=0{,}165\ \mathrm s\]`, ""],
+    ["b", "Droppe 3 har fallit under T/3 och droppe 2 under 2T/3.", String.raw`\[s_3=1{,}2\left(\frac13\right)^2=0{,}133\ \mathrm m\]\[s_2=1{,}2\left(\frac23\right)^2=0{,}533\ \mathrm m\]\[h_3=1{,}2-0{,}133=1{,}07\ \mathrm m\]\[h_2=1{,}2-0{,}533=0{,}667\ \mathrm m\]`, ""],
+    ["c", "Fallsträckorna efter 0, 1, 2 och 3 intervall är proportionella mot 0², 1², 2² och 3².", String.raw`\[0:1:4:9\Rightarrow(1-0):(4-1):(9-4)=1:3:5\]`, ""]
+  ], String.raw`Tidsmellanrummet är \(0{,}165\ \mathrm s\). Droppe 2 och 3 är cirka \(0{,}67\ \mathrm m\) respektive \(1{,}07\ \mathrm m\) över golvet, och mellanrummen följer \(1:3:5\).`),
+  "3.171": byggFacitListaV2([
+    ["1", "Låt t räknas från första kastet. Boll 2 har varit i luften i t − 1,5 s.", String.raw`\[y_1=20t-\frac{gt^2}{2}\]\[y_2=20(t-1{,}5)-\frac{g(t-1{,}5)^2}{2}\]`, ""],
+    ["a", "Sätt höjderna lika och förenkla.", String.raw`\[20t-\frac{gt^2}{2}=20(t-1{,}5)-\frac{g(t-1{,}5)^2}{2}\]\[t=2{,}79\ \mathrm s\]`, ""],
+    ["b", "Beräkna möteshöjden.", String.raw`\[y=20\cdot2{,}79-\frac{9{,}82\cdot2{,}79^2}{2}=17{,}6\ \mathrm m\]`, ""],
+    ["c", "Beräkna båda hastigheterna vid mötet.", String.raw`\[v_1=20-9{,}82\cdot2{,}79=-7{,}37\ \mathrm{m/s}\]\[v_2=20-9{,}82(2{,}79-1{,}5)=+7{,}37\ \mathrm{m/s}\]`, "De har lika stora men motriktade hastigheter: boll 1 är på väg ned och boll 2 på väg upp."]
+  ], String.raw`Bollarna möts efter \(2{,}79\ \mathrm s\), på höjden \(17{,}6\ \mathrm m\). Hastigheterna är ungefär \(-7{,}4\) och \(+7{,}4\ \mathrm{m/s}\).`),
+  "3.172": byggFacitListaV2([
+    ["1", "När säcken lossnar har den ballongens hastighet 5,0 m/s uppåt.", String.raw`\[y=80+5{,}0t-\frac{gt^2}{2}\]`, ""],
+    ["a", "Beräkna den extra stighöjden innan säcken vänder.", String.raw`\[\Delta h=\frac{5{,}0^2}{2\cdot9{,}82}=1{,}27\ \mathrm m\]\[h_{\max}=81{,}3\ \mathrm m\]`, ""],
+    ["b", "Sätt markhöjden till noll och välj den positiva roten.", String.raw`\[0=80+5{,}0t-4{,}91t^2\Rightarrow t=4{,}58\ \mathrm s\]\[v=5{,}0-9{,}82\cdot4{,}58=-39{,}95\ \mathrm{m/s}\]`, ""],
+    ["c", "Om ballongen sjunker är begynnelsehastigheten −5,0 m/s.", String.raw`\[0=80-5{,}0t-4{,}91t^2\Rightarrow t=3{,}56\ \mathrm s\]\[\Delta t=4{,}58-3{,}56=1{,}02\ \mathrm s\]`, "Skillnaden är tiden för säcken att först stiga och sedan återvända till 80 m med farten 5,0 m/s nedåt."]
+  ], String.raw`Säcken når \(81{,}3\ \mathrm m\). Den träffar marken efter \(4{,}58\ \mathrm s\) med farten cirka \(40\ \mathrm{m/s}\). Om ballongen sjunker tar fallet \(3{,}56\ \mathrm s\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_KONSTACC_V2_DEL5[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_KONSTACC_V2_DEL5[uppgift.id];
+  }
+}
+
+function byggFacitGrafV2({ xMax, yMin = 0, yMax, serier, xEtikett = "t / s", yEtikett = "", aria = "Lösningsdiagram" }) {
+  const vänster = 48, höger = 372, topp = 20, botten = 210;
+  const sx = x => vänster + (x / xMax) * (höger - vänster);
+  const sy = y => botten - ((y - yMin) / (yMax - yMin)) * (botten - topp);
+  const nollY = sy(0);
+  const färger = ["#2A5D9E", "#B43123", "#5C575E"];
+  const rutnät = [0.25, 0.5, 0.75].map(p =>
+    `<line x1="${vänster}" y1="${topp + p * (botten - topp)}" x2="${höger}" y2="${topp + p * (botten - topp)}" stroke="#E4E3E6" stroke-width="1"/>`
+  ).join("") + [0.25, 0.5, 0.75].map(p =>
+    `<line x1="${vänster + p * (höger - vänster)}" y1="${topp}" x2="${vänster + p * (höger - vänster)}" y2="${botten}" stroke="#E4E3E6" stroke-width="1"/>`
+  ).join("");
+  const kurvor = serier.map((serie, i) => {
+    const punkter = serie.punkter.map(([x, y]) => `${sx(x).toFixed(1)},${sy(y).toFixed(1)}`).join(" ");
+    const sista = serie.punkter[serie.punkter.length - 1];
+    return `<polyline points="${punkter}" fill="none" stroke="${färger[i % färger.length]}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>` +
+      (serie.namn ? `<text x="${(sx(sista[0]) + 8).toFixed(1)}" y="${(sy(sista[1]) - 7).toFixed(1)}" font-family="IBM Plex Mono" font-size="11" fill="${färger[i % färger.length]}">${serie.namn}</text>` : "");
+  }).join("");
+  return `<span class="fig"><svg viewBox="0 0 400 245" role="img" aria-label="${aria}" xmlns="http://www.w3.org/2000/svg">${rutnät}<line x1="${vänster}" y1="${nollY}" x2="${höger}" y2="${nollY}" stroke="#2B2527" stroke-width="2"/><line x1="${vänster}" y1="${topp}" x2="${vänster}" y2="${botten}" stroke="#2B2527" stroke-width="2"/>${kurvor}<g font-family="IBM Plex Mono" font-size="11" fill="#5C575E"><text x="${höger}" y="235" text-anchor="end">${xEtikett}</text><text x="13" y="115" text-anchor="middle" transform="rotate(-90 13 115)">${yEtikett}</text><text x="${vänster}" y="227" text-anchor="middle">0</text><text x="${höger}" y="227" text-anchor="middle">${xMax}</text><text x="40" y="${(sy(yMax) + 4).toFixed(1)}" text-anchor="end">${yMax}</text>${yMin < 0 ? `<text x="40" y="${(sy(yMin) + 4).toFixed(1)}" text-anchor="end">${yMin}</text>` : ""}</g></svg></span>`;
+}
+
+function byggFacitMedGrafV2(graf, rader, slutsvar, notering = "") {
+  return byggFacitListaV2(rader, slutsvar, notering).replace('<div class="facit-v2">', `<div class="facit-v2">${graf}`);
+}
+
+const FACIT_DIAGRAM_V2_DEL1 = {
+  "3.11": byggFacitListaV2([
+    ["a", "Vid en given högsta höjd är den mekaniska energin proportionell mot höjden.", String.raw`\[r=\frac{E_{n+1}}{E_n}=\frac{h_{n+1}}{h_n}=\frac{1{,}15}{1{,}80}=0{,}6389\]`, "Det betyder att 63,9 % är kvar och 36,1 % förloras vid varje studs."],
+    ["b", "Efter fem studsar har höjden multiplicerats med r fem gånger.", String.raw`\[h_5=1{,}80\,r^5=1{,}80(0{,}6389)^5=0{,}192\ \mathrm m\]`, ""],
+    ["c", "Bollen faller först 1,80 m. Varje studshöjd passeras sedan både uppåt och nedåt.", String.raw`\[s=1{,}80+2\sum_{n=1}^{\infty}1{,}80r^n\]\[s=1{,}80+2\cdot1{,}80\frac{r}{1-r}=8{,}17\ \mathrm m\]`, ""]
+  ], String.raw`Efter varje studs återstår cirka \(63{,}9\,\%\) av energin. Efter fem studsar når bollen \(0{,}19\ \mathrm m\), och den totala sträckan blir cirka \(8{,}2\ \mathrm m\).`),
+  "3.12": byggFacitMedGrafV2(
+    byggFacitGrafV2({xMax:12,yMax:55,serier:[{punkter:[[0,0],[2,18.9],[4,33.8],[6,43.5],[8,49.1],[10,52.0],[12,53.5]]}],xEtikett:"t / s",yEtikett:"v / (m/s)",aria:"Hastigheten ökar snabbt i början och planar asymptotiskt ut mot 55 meter per sekund."}),
+    [
+      ["a", "Vid terminalfarten är tyngdkraften och luftmotståndet lika stora.", String.raw`\[kv_T^2=mg\Rightarrow k=\frac{80\cdot9{,}82}{55^2}=0{,}260\ \mathrm{kg/m}\]`, ""],
+      ["b", "Vid 30 m/s är nettokraften nedåt", String.raw`\[F_{\mathrm{net}}=mg-kv^2=80\cdot9{,}82-0{,}260\cdot30^2=552\ \mathrm N\]\[a=\frac{F_{\mathrm{net}}}{m}=6{,}90\ \mathrm{m/s^2}\]`, ""],
+      ["c", "Kurvan startar med lutningen g, men luftmotståndet växer med fartens kvadrat.", "", "Därför minskar accelerationen och hastigheten närmar sig 55 m/s asymptotiskt utan att passera terminalfarten."]
+    ],
+    String.raw`\(k=0{,}260\ \mathrm{kg/m}\). Vid 30 m/s är accelerationen cirka \(6{,}9\ \mathrm{m/s^2}\) nedåt.`
+  ),
+  "3.13": byggFacitMedGrafV2(
+    byggFacitGrafV2({xMax:8,yMax:16,serier:[{punkter:[[0,0],[2,4],[4,8],[6,12],[8,16]]}],xEtikett:"t / s",yEtikett:"v / (m/s)",aria:"Rät fart-tid-graf från noll till 16 meter per sekund på åtta sekunder."}),
+    [
+      ["a", "Mätpunkterna ligger på en rät linje genom origo.", "", "Det visar att farten ökar lika mycket under lika långa tidsintervall."],
+      ["b", "Accelerationen är linjens lutning.", String.raw`\[a=\frac{\Delta v}{\Delta t}=\frac{16-0}{8-0}=2{,}0\ \mathrm{m/s^2}\]`, ""],
+      ["c", "Sträckan är triangelarean under fartkurvan.", String.raw`\[s=\frac{8\cdot16}{2}=64\ \mathrm m\]`, ""]
+    ],
+    String.raw`Accelerationen är \(2{,}0\ \mathrm{m/s^2}\), och bilen färdas \(64\ \mathrm m\).`
+  ),
+  "3.14": byggFacitMedGrafV2(
+    byggFacitGrafV2({xMax:10,yMax:6,serier:[{punkter:[[0,0],[2,3],[4,6],[6,6],[8,6],[10,2]]}],xEtikett:"t / s",yEtikett:"s / m",aria:"Läge-tid-diagram som först stiger linjärt, sedan är vågrätt och till sist sjunker."}) +
+    byggFacitGrafV2({xMax:10,yMin:-2,yMax:2,serier:[{punkter:[[0,1.5],[4,1.5],[4,0],[8,0],[8,-2],[10,-2]]}],xEtikett:"t / s",yEtikett:"v / (m/s)",aria:"Motsvarande fart-tid-diagram med nivåerna 1,5, noll och minus 2 meter per sekund."}),
+    [
+      ["a", "Placera tabellpunkterna i ett läge–tid-diagram och dra räta linjer mellan dem.", "", "Grafen visas ovan."],
+      ["b", "Lutningen ger hastigheten i varje fas.", String.raw`\[v_{0-4}=\frac{6-0}{4}=1{,}5\ \mathrm{m/s}\]\[v_{4-8}=0\]\[v_{8-10}=\frac{2-6}{2}=-2{,}0\ \mathrm{m/s}\]`, ""],
+      ["c", "Översätt de tre lutningarna till ett fart–tid-diagram.", "", "Personen går framåt i 4 s, står stilla i 4 s och går därefter tillbaka i 2 s."]
+    ],
+    String.raw`Hastigheterna är \(+1{,}5\), \(0\) och \(-2{,}0\ \mathrm{m/s}\). Personen slutar 2,0 m från startpunkten.`
+  ),
+  "3.15": byggFacitMedGrafV2(
+    byggFacitGrafV2({xMax:20,yMax:8,serier:[{punkter:[[0,0],[6,8],[16,8],[20,0]]}],xEtikett:"t / s",yEtikett:"v / (m/s)",aria:"Fart-tid-diagram med acceleration, konstant fart och inbromsning."}),
+    [
+      ["a", "Grafen består av en stigande linje, en vågrät del och en fallande linje.", "", "Brytpunkterna är (0,0), (6,8), (16,8) och (20,0)."],
+      ["b", "Addera två triangelareor och en rektangelarea.", String.raw`\[s=\frac{6\cdot8}{2}+10\cdot8+\frac{4\cdot8}{2}=24+80+16=120\ \mathrm m\]`, ""],
+      ["c", "Hela förloppet tar 20 s.", String.raw`\[v_{\mathrm{med}}=\frac{120}{20}=6{,}0\ \mathrm{m/s}\]`, ""]
+    ],
+    String.raw`Den totala sträckan är \(120\ \mathrm m\), och medelfarten är \(6{,}0\ \mathrm{m/s}\).`
+  ),
+  "3.16": byggFacitMedGrafV2(
+    byggFacitGrafV2({xMax:16,yMax:8,serier:[{namn:"A",punkter:[[0,4],[16,4]]},{namn:"B",punkter:[[0,0],[16,8]]}],xEtikett:"t / s",yEtikett:"v / (m/s)",aria:"Två fartkurvor: A konstant på 4 meter per sekund och B linjärt stigande."}),
+    [
+      ["a", "Löpare A ger en vågrät linje. Löpare B ger en rät linje med lutningen 0,50 m/s².", "", "Diagrammet visas ovan."],
+      ["b", "Sätt farterna lika.", String.raw`\[0{,}50t=4{,}0\Rightarrow t=8{,}0\ \mathrm s\]`, ""],
+      ["c", "Vid ikappspringningen är areorna under kurvorna lika.", String.raw`\[4{,}0t=\frac{0{,}50t^2}{2}\Rightarrow t=16\ \mathrm s\]\[s=4{,}0\cdot16=64\ \mathrm m\]`, ""],
+      ["d", "När farterna är lika har A redan byggt upp ett försprång.", "", "B hinner ikapp först när B:s sammanlagda area har blivit lika stor som A:s."]
+    ],
+    String.raw`Farterna är lika efter \(8{,}0\ \mathrm s\). B hinner ikapp efter \(16\ \mathrm s\), vid \(64\ \mathrm m\).`
+  ),
+  "3.23": byggFacitMedGrafV2(
+    byggFacitGrafV2({xMax:4,yMax:3,serier:[{punkter:[[0,3],[4,3]]}],xEtikett:"t / s",yEtikett:"a / (m/s²)",aria:"Acceleration-tid-diagram med konstant acceleration 3 meter per sekundkvadrat."}),
+    [
+      ["a", "Konstant acceleration visas som en vågrät linje på nivån 3,0 m/s².", "", ""],
+      ["b", "Arean under acceleration–tid-kurvan är hastighetsändringen.", String.raw`\[v=0+3{,}0\cdot4{,}0=12\ \mathrm{m/s}\]`, ""],
+      ["c", "Vagnen startar från vila.", String.raw`\[s=\frac{3{,}0\cdot4{,}0^2}{2}=24\ \mathrm m\]`, ""]
+    ],
+    String.raw`Efter 4,0 s är farten \(12\ \mathrm{m/s}\), och vagnen har färdats \(24\ \mathrm m\).`
+  ),
+  "3.24": byggFacitMedGrafV2(
+    byggFacitGrafV2({xMax:8,yMin:-4,yMax:6,serier:[{punkter:[[0,6],[5,6],[5,-4],[8,-4]]}],xEtikett:"t / s",yEtikett:"v / (m/s)",aria:"Fart-tid-diagram med 6 meter per sekund framåt och därefter minus 4 meter per sekund bakåt."}),
+    [
+      ["a", "Framåt är positivt och bakåt negativt.", "", "Grafen ligger på +6 m/s i 5 s och på −4 m/s i 3 s."],
+      ["b", "Total sträcka är summan av areornas belopp.", String.raw`\[s_{\mathrm{tot}}=6{,}0\cdot5{,}0+4{,}0\cdot3{,}0=42\ \mathrm m\]`, ""],
+      ["c", "Förskjutningen använder tecken.", String.raw`\[\Delta x=30-12=18\ \mathrm m\]`, ""]
+    ],
+    String.raw`Tåget färdas totalt \(42\ \mathrm m\) och slutar \(18\ \mathrm m\) framför startpunkten.`
+  ),
+  "3.25": byggFacitListaV2([
+    ["a", "I ett läge–tid-diagram är kurvans lutning hastigheten.", "", "När kurvan blir brantare ökar hastigheten."],
+    ["b", "En ökande lutning betyder positiv acceleration.", "", "Om kurvan är en parabel motsvarar det konstant positiv acceleration; en allmänt uppåtböjd kurva behöver inte ge konstant acceleration."],
+    ["c", "Rita en tangent till kurvan vid den önskade tidpunkten och välj två tydliga punkter på tangenten.", String.raw`\[v(t)=\frac{\Delta s_{\mathrm{tangent}}}{\Delta t}\]`, ""]
+  ], String.raw`Farten ökar och accelerationen är positiv. Momentanhastigheten fås från tangentens lutning.`),
+  "3.26": byggFacitListaV2([
+    ["a", "En korsning i ett läge–tid-diagram betyder samma läge vid samma tid.", "", "Vid t = 20 s är bilarna jämsides; om B går från bakom till framför kör B om A."],
+    ["b", "Farten bestäms av kurvans lutning, inte av vilken kurva som ligger högst.", "", "A är snabbare i början. När B:s tangent blir brantare än A:s linje är B snabbare, vilket sker redan före korsningen."],
+    ["c", "Bilarna har samma fart där deras grafer har samma lutning.", "", "Rita en tangent till B:s kurva som är parallell med A:s räta linje. Den tidpunkten ligger före omkörningen."]
+  ], String.raw`Korsningen betyder att bilarna är på samma plats. A är snabbast först, B snabbast senare, och farterna är lika där grafernas lutningar är lika.`),
+  "3.31": byggFacitListaV2([
+    ["a", "Läs av fartkurvan vid 4,0 s.", String.raw`\[v(4{,}0)=8{,}0\ \mathrm{m/s}\]`, ""],
+    ["b", "Accelerationen är linjens lutning.", String.raw`\[a=\frac{12-0}{6{,}0-0}=2{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Sträckan är triangelarean under kurvan.", String.raw`\[s=\frac{6{,}0\cdot12}{2}=36\ \mathrm m\]`, ""]
+  ], String.raw`Efter 4,0 s är farten \(8{,}0\ \mathrm{m/s}\). Accelerationen är \(2{,}0\ \mathrm{m/s^2}\), och sträckan efter 6,0 s är \(36\ \mathrm m\).`),
+  "3.32": byggFacitListaV2([
+    ["a", "Läs av läget vid 4,0 s.", String.raw`\[s(4{,}0)=8{,}0\ \mathrm m\]`, ""],
+    ["b", "Mellan 4 och 7 s är lägeskurvan vågrät.", String.raw`\[\Delta s=0\Rightarrow v=0\]`, "Personen står stilla."],
+    ["c", "Under sista delen minskar läget från 8,0 m till 0 på 5,0 s.", String.raw`\[v=\frac{0-8{,}0}{12-7}=-1{,}6\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Personen är 8,0 m från start efter 4,0 s, står stilla mellan 4 och 7 s och går sedan tillbaka med hastigheten \(-1{,}6\ \mathrm{m/s}\).`),
+  "3.33": byggFacitListaV2([
+    ["a", "Dela rörelsen vid diagrammets brytpunkter.", "", "Tåget accelererar 0–20 s, håller 15 m/s under 20–60 s och bromsar 60–80 s."],
+    ["b", "Accelerationen i första fasen är lutningen.", String.raw`\[a=\frac{15}{20}=0{,}75\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Addera areorna under de tre faserna.", String.raw`\[s=\frac{20\cdot15}{2}+40\cdot15+\frac{20\cdot15}{2}=150+600+150=900\ \mathrm m\]`, ""]
+  ], String.raw`Accelerationen är \(0{,}75\ \mathrm{m/s^2}\), och tåget färdas totalt \(900\ \mathrm m\).`),
+  "3.34": byggFacitListaV2([
+    ["a", "Joggaren vänder när hastigheten går genom noll.", String.raw`\[t=5{,}33\ \mathrm s\]`, ""],
+    ["b", "Beräkna lutningen under de första 8 s.", String.raw`\[a=\frac{-2-4}{8}=-0{,}75\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Förskjutningen är positiv area minus negativ area.", String.raw`\[A_+=\frac{5{,}33\cdot4}{2}=10{,}67\ \mathrm m\]\[|A_-|=\frac{(8-5{,}33)\cdot2}{2}+(14-8)\cdot2=14{,}67\ \mathrm m\]\[\Delta x=10{,}67-14{,}67=-4{,}0\ \mathrm m\]`, ""]
+  ], String.raw`Joggaren vänder efter cirka \(5{,}3\ \mathrm s\), accelerationen är \(-0{,}75\ \mathrm{m/s^2}\), och slutläget är 4,0 m bakom startpunkten.`),
+  "3.35": byggFacitListaV2([
+    ["a", "Den cyklist vars lägeskurva ligger högst har kommit längst.", "", "Efter 10 s leder cyklist A."],
+    ["b", "Cyklarna är jämsides där lägeskurvorna skär varandra.", String.raw`\[t\approx17\ \mathrm s\]`, ""],
+    ["c", "Farten är lägeskurvans lutning.", "", "På slutet är B:s kurva brantare, så B har högst fart och kör om A vid korsningen."]
+  ], String.raw`A leder efter 10 s. De är jämsides efter cirka 17 s, och då passerar B eftersom B har störst lutning och fart.`),
+  "3.36": byggFacitListaV2([
+    ["a", "Farten är den sammanlagda arean under acceleration–tid-kurvan.", String.raw`\[v(4)=3{,}0\cdot4{,}0=12\ \mathrm{m/s}\]`, ""],
+    ["b", "Mellan 4 och 7 s är accelerationen noll.", "", "Vagnen fortsätter därför med den konstanta farten 12 m/s."],
+    ["c", "Från 7 s är accelerationen −2,0 m/s². Det tar 6,0 s att minska farten till noll.", String.raw`\[\Delta t=\frac{12}{2{,}0}=6{,}0\ \mathrm s\]\[t=7+6=13\ \mathrm s\]`, ""]
+  ], String.raw`Farten efter 4,0 s är \(12\ \mathrm{m/s}\), den är konstant mellan 4 och 7 s, och vagnen stannar igen vid \(t=13\ \mathrm s\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_DIAGRAM_V2_DEL1[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_DIAGRAM_V2_DEL1[uppgift.id];
+  }
+}
+
+const FACIT_DIAGRAM_V2_DEL2 = {
+  "3.37": byggFacitListaV2([
+    ["a", "Sätt bil B:s fart lika med bil A:s konstanta fart.", String.raw`\[4t=20\Rightarrow t=5{,}0\ \mathrm s\]`, ""],
+    ["b", "Efter 5,0 s är sträckorna areorna under kurvorna.", String.raw`\[s_A=20\cdot5=100\ \mathrm m\]\[s_B=\frac{5\cdot20}{2}=50\ \mathrm m\]`, "Bil A leder med 50 m."],
+    ["c", "Vid lika lång sträcka är areorna lika.", String.raw`\[20t=\frac{t\cdot4t}{2}=2t^2\Rightarrow t=10\ \mathrm s\]\[s=20\cdot10=200\ \mathrm m\]`, ""]
+  ], String.raw`Farterna är lika efter \(5{,}0\ \mathrm s\), men A leder då. Bilarna har kört lika långt efter \(10\ \mathrm s\), vid \(200\ \mathrm m\).`),
+  "3.38": byggFacitListaV2([
+    ["a", "När fartkurvan skär tidsaxeln är hastigheten noll.", "", "Föremålet är då i högsta punkten och byter riktning."],
+    ["b", "Accelerationen är fartkurvans lutning.", String.raw`\[a=\frac{-20-20}{4{,}07-0}=-9{,}83\ \mathrm{m/s^2}\]`, "Detta är tyngdaccelerationen nedåt."],
+    ["c", "Höjdökningen är den positiva triangelarean fram till vändpunkten.", String.raw`\[h=\frac{20\cdot2{,}04}{2}=20{,}4\ \mathrm m\]`, ""]
+  ], String.raw`Föremålet vänder när hastigheten är noll. Accelerationen är cirka \(-9{,}8\ \mathrm{m/s^2}\), och höjdökningen är ungefär \(20\ \mathrm m\).`),
+  "3.40": byggFacitListaV2([
+    ["a", "Den vågräta delen på fartkurvan går från 3 s till 9 s.", String.raw`\[\Delta t=9-3=6{,}0\ \mathrm s\]`, ""],
+    ["b", "Sträckan är två trianglar och en rektangel.", String.raw`\[s=\frac{3\cdot2}{2}+6\cdot2+\frac{3\cdot2}{2}=3+12+3=18\ \mathrm m\]`, ""]
+  ], String.raw`Hissen håller konstant fart i \(6{,}0\ \mathrm s\) och åker totalt \(18\ \mathrm m\).`),
+  "3.41": byggFacitListaV2([
+    ["a", "Klipparen accelererar där fartkurvan lutar uppåt.", "", "Det sker mellan 0 och 4 s."],
+    ["b", "Sträckan under de första 4 s är triangelarean.", String.raw`\[s_{0-4}=\frac{4\cdot6}{2}=12\ \mathrm m\]`, ""],
+    ["c", "Addera accelerations-, konstantfarts- och inbromsningsdelarna.", String.raw`\[s_{\mathrm{tot}}=12+6\cdot6+12=60\ \mathrm m\]`, ""]
+  ], String.raw`Klipparen accelererar 0–4 s, kör \(12\ \mathrm m\) under den tiden och \(60\ \mathrm m\) totalt.`),
+  "3.42": byggFacitListaV2([
+    ["a", "Farten är höjdgrafens lutning under de första 6 s.", String.raw`\[v=\frac{12-0}{6-0}=2{,}0\ \mathrm{m/s}\]`, ""],
+    ["b", "Mellan 6 och 14 s är höjden konstant.", "", "Hissen står stilla 12 m över markplanet."],
+    ["c", "Under sista delen minskar höjden från 12 m till 4 m på 6 s.", String.raw`\[v=\frac{4-12}{20-14}=-1{,}33\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Hissen går först uppåt med \(2{,}0\ \mathrm{m/s}\), står stilla 6–14 s och går sedan nedåt med cirka \(1{,}3\ \mathrm{m/s}\).`),
+  "3.47": byggFacitListaV2([
+    ["a", "Läs av den nivå som kurvan närmar sig.", String.raw`\[v_{\max}\approx40\ \mathrm{m/s}\]`, ""],
+    ["b", "Medelaccelerationen är fartändringen under de första 4 s.", String.raw`\[a_{\mathrm{med}}=\frac{v(4)-v(0)}{4}\approx\frac{19}{4}=4{,}8\ \mathrm{m/s^2}\]`, "En avläsning på 20 m/s ger 5,0 m/s² och är också rimlig."],
+    ["c", "Sträckan är arean under kurvan. Uppskatta med rutorna eller trapetser.", String.raw`\[s_{0-8}\approx140\ \mathrm m\]`, ""],
+    ["d", "Kurvans lutning minskar när farten ökar.", "", "Luftmotståndet växer och motorns tillgängliga dragkraft kan minska. Nettokraften och därmed accelerationen avtar; vid toppfarten är nettokraften noll."]
+  ], String.raw`Toppfarten är cirka \(40\ \mathrm{m/s}\), medelaccelerationen de första 4 s cirka \(4{,}9\ \mathrm{m/s^2}\), och sträckan de första 8 s ungefär \(140\ \mathrm m\).`),
+  "3.56": byggFacitMedGrafV2(
+    byggFacitGrafV2({xMax:120,yMax:120,serier:[{punkter:[[0,120],[60,60],[90,60],[120,0]]}],xEtikett:"t / s",yEtikett:"avstånd / m",aria:"Arnes avstånd från huset minskar, är konstant under vilan och minskar sedan snabbare till noll."}),
+    [
+      ["a", "Under första minuten minskar avståndet med 60 m. Därefter är avståndet konstant i 30 s.", String.raw`\[d(60)=120-1{,}0\cdot60=60\ \mathrm m\]`, ""],
+      ["2", "Den sista sträckan är 60 m och joggas med 2,0 m/s.", String.raw`\[t_3=\frac{60}{2{,}0}=30\ \mathrm s\]`, ""],
+      ["b", "Addera gångtid, vila och joggning.", String.raw`\[t_{\mathrm{tot}}=60+30+30=120\ \mathrm s\]`, ""]
+    ],
+    String.raw`Diagrammets brytpunkter är \((0,120)\), \((60,60)\), \((90,60)\) och \((120,0)\). Hela promenaden tar \(120\ \mathrm s\).`
+  ),
+  "3.57": byggFacitMedGrafV2(
+    byggFacitGrafV2({xMax:620,yMax:1200,serier:[{punkter:[[0,0],[100,600],[250,1200],[370,1200],[620,0]]}],xEtikett:"t / s",yEtikett:"läge / m",aria:"Peters läge ökar i två linjära faser, är konstant i affären och minskar sedan linjärt till hemmet."}),
+    [
+      ["a", "Varje halva är 600 m.", String.raw`\[t_{\mathrm{dit}}=\frac{600}{6{,}0}+\frac{600}{4{,}0}=100+150=250\ \mathrm s\]`, ""],
+      ["b", "Hemresan är 1200 m och tar också 250 s.", String.raw`\[v_{\mathrm{hem}}=\frac{1200}{250}=4{,}8\ \mathrm{m/s}\]`, ""],
+      ["c", "Affärsbesöket varar 120 s.", "", "Diagrammets brytpunkter är (0,0), (100,600), (250,1200), (370,1200) och (620,0)."]
+    ],
+    String.raw`Resan till affären tar \(250\ \mathrm s\), och hemfarten är \(4{,}8\ \mathrm{m/s}\).`
+  ),
+  "3.58": byggFacitListaV2([
+    ["a", "En lodrät linje har ändligt lägessteg men ingen tidsåtgång.", String.raw`\[v=\frac{\Delta s}{\Delta t}\to\infty\quad\text{när}\quad\Delta t\to0\]`, ""],
+    ["b", "Ett verkligt föremål kan inte byta läge momentant.", "", "Diagrammet är därför fysikaliskt orimligt eller felritat."],
+    ["c", "Vid mycket hög men ändlig fart ska linjen vara mycket brant men inte lodrät.", "", "Om föremålet accelererar under intervallet ska kurvans lutning dessutom förändras kontinuerligt."]
+  ], String.raw`En lodrät del skulle innebära oändlig hastighet. Den ska ersättas av en mycket brant lutande, och vid acceleration böjd, kurva.`),
+  "3.59": byggFacitListaV2([
+    ["a", "Lutningens enhet är y-enheten dividerad med x-enheten.", String.raw`\[\frac{\mathrm{km/h}}{\mathrm s}=\frac{\mathrm{km}}{\mathrm{h\,s}}\]`, "För att få m/s² kan det numeriska värdet i (km/h)/s divideras med 3,6."],
+    ["b", "Areans enhet är axelenheternas produkt.", String.raw`\[\frac{\mathrm{km}}{\mathrm h}\cdot\mathrm s=\frac{\mathrm{km\,s}}{\mathrm h}\]`, "Eftersom 1 h = 3600 s divideras det numeriska areavärdet med 3600 för att få kilometer."],
+    ["c", "I ett acceleration–tid-diagram blir areans enhet", String.raw`\[\frac{\mathrm m}{\mathrm{s^2}}\cdot\mathrm s=\frac{\mathrm m}{\mathrm s}\]`, "Arean är en hastighetsändring."]
+  ], String.raw`Lutningen får enheten \((\mathrm{km/h})/\mathrm s\), fartgrafens area motsvarar sträcka och accelerationgrafens area får enheten \(\mathrm{m/s}\).`),
+  "3.60": byggFacitMedGrafV2(
+    byggFacitGrafV2({xMax:22,yMin:-6,yMax:4,serier:[{punkter:[[0,4],[12,4],[12,0],[16,0],[16,-6],[22,-6]]}],xEtikett:"t / s",yEtikett:"v / (m/s)",aria:"Daniels fart är 4 meter per sekund, därefter noll och slutligen minus 6 meter per sekund."}),
+    [
+      ["a", "Framåt är positivt. Stillastående ger noll och tillbaka ger negativ hastighet.", "", "Grafen visas ovan."],
+      ["b", "Förskjutningen är den tecknade arean.", String.raw`\[\Delta x=4{,}0\cdot12-6{,}0\cdot6{,}0=12\ \mathrm m\]`, ""],
+      ["c", "Medelhastigheten använder förskjutningen.", String.raw`\[v_{\mathrm{med}}=\frac{12}{22}=0{,}545\ \mathrm{m/s}\]`, "Medelfarten skulle i stället bli 84/22 = 3,82 m/s."]
+    ],
+    String.raw`Daniel slutar \(12\ \mathrm m\) framför utgångsläget. Medelhastigheten är cirka \(+0{,}55\ \mathrm{m/s}\).`
+  ),
+  "3.61": byggFacitListaV2([
+    ["a", "Rita en tangent till lägeskurvan vid den aktuella tidpunkten.", String.raw`\[v(t)=\frac{\Delta s_{\mathrm{tangent}}}{\Delta t}\]`, "Tangentens lutning är momentanhastigheten."],
+    ["b", "När lutningen ökar växer hastigheten.", "", "Föremålet accelererar i positiv riktning."],
+    ["c", "I fart–tid-diagrammet blir kurvan stigande.", "", "Om accelerationen är konstant är fartkurvan en rät linje med positiv lutning; annars är den i allmänhet böjd."]
+  ], String.raw`Momentanhastigheten fås från tangentens lutning. Den ökande lutningen visar positiv acceleration, så motsvarande fartkurva stiger.`),
+  "3.105": byggFacitListaV2([
+    ["a", "Läs av fartkurvan vid 4,0 s.", String.raw`\[v(4)=6{,}0\ \mathrm{m/s}\]`, ""],
+    ["b", "Accelerationen är linjens lutning.", String.raw`\[a=\frac{12-0}{8-0}=1{,}5\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Sträckan är triangelarean under grafen.", String.raw`\[s=\frac{8{,}0\cdot12}{2}=48\ \mathrm m\]`, ""]
+  ], String.raw`Efter 4,0 s är farten \(6{,}0\ \mathrm{m/s}\). Accelerationen är \(1{,}5\ \mathrm{m/s^2}\), och sträckan efter 8,0 s är \(48\ \mathrm m\).`),
+  "3.106": byggFacitListaV2([
+    ["a", "Läs av den vågräta delen vid 5,0 s.", String.raw`\[s(5)=18\ \mathrm m\]`, ""],
+    ["b", "Första delens lutning ger hastigheten.", String.raw`\[v_{0-3}=\frac{18-0}{3-0}=6{,}0\ \mathrm{m/s}\]`, ""],
+    ["c", "Mellan 3 och 7 s är läget oförändrat.", "", "Hunden står stilla."],
+    ["d", "Sista delens lutning är", String.raw`\[v_{7-12}=\frac{42-18}{12-7}=4{,}8\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Hunden är 18 m från start vid 5,0 s. Hastigheterna är \(6{,}0\ \mathrm{m/s}\) först, 0 mellan 3 och 7 s och \(4{,}8\ \mathrm{m/s}\) sist.`),
+  "3.107": byggFacitListaV2([
+    ["a", "Accelerationen är lutningen under de första 10 s.", String.raw`\[a=\frac{4{,}0}{10}=0{,}40\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Den vågräta delen går från 10 s till 50 s.", String.raw`\[\Delta t=40\ \mathrm s\]`, ""],
+    ["c", "Addera två trianglar och rektangeln.", String.raw`\[s=\frac{10\cdot4}{2}+40\cdot4+\frac{10\cdot4}{2}=200\ \mathrm m\]`, ""]
+  ], String.raw`Accelerationen är \(0{,}40\ \mathrm{m/s^2}\), konstantfarten varar 40 s, och hela sträckan är \(200\ \mathrm m\).`),
+  "3.108": byggFacitListaV2([
+    ["a", "Drönaren sjunker när fartkurvan ligger under tidsaxeln.", String.raw`\[14<t<28\ \mathrm s\]`, ""],
+    ["b", "Höjdökningen till 14 s är den positiva arean.", String.raw`\[\Delta h_+=\frac{4\cdot8}{2}+6\cdot8+\frac{4\cdot8}{2}=80\ \mathrm m\]`, ""],
+    ["c", "Sänkningen är beloppet av arean under tidsaxeln.", String.raw`\[|\Delta h_-|=\frac{4\cdot6}{2}+6\cdot6+\frac{4\cdot6}{2}=60\ \mathrm m\]`, ""],
+    ["d", "Nettoförskjutningen är positiv area minus negativ area.", String.raw`\[\Delta h=80-60=20\ \mathrm m\]`, ""]
+  ], String.raw`Drönaren sjunker mellan 14 och 28 s. Den stiger först 80 m, sjunker sedan 60 m och slutar 20 m över startpunkten.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_DIAGRAM_V2_DEL2[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_DIAGRAM_V2_DEL2[uppgift.id];
+  }
+}
+
+const FACIT_DIAGRAM_V2_DEL3 = {
+  "3.109": byggFacitMedGrafV2(
+    byggFacitGrafV2({xMax:4,yMax:6,serier:[{punkter:[[0,0],[1,1.5],[2,3],[3,4.5],[4,6]]}],xEtikett:"t / s",yEtikett:"v / (m/s)",aria:"Rät fart-tid-graf genom tabellens fem mätpunkter."}),
+    [
+      ["a", "Sätt tiden på x-axeln och farten på y-axeln. Punkterna ligger på en rät linje genom origo.", "", "Grafen visas ovan."],
+      ["b", "Accelerationen är grafens lutning.", String.raw`\[a=\frac{6{,}0-0}{4{,}0-0}=1{,}5\ \mathrm{m/s^2}\]`, ""],
+      ["c", "Sträckan är triangelarean under grafen.", String.raw`\[s=\frac{4{,}0\cdot6{,}0}{2}=12\ \mathrm m\]`, ""]
+    ],
+    String.raw`Accelerationen är \(1{,}5\ \mathrm{m/s^2}\), och bollen rullar \(12\ \mathrm m\) på 4,0 s.`
+  ),
+  "3.110": byggFacitListaV2([
+    ["a", "Hastigheten bort från startkanten är den första linjens lutning.", String.raw`\[v=\frac{50}{25}=2{,}0\ \mathrm{m/s}\]`, ""],
+    ["b", "Mellan 25 och 30 s är läget konstant 50 m.", "", "Simmaren vilar vid bortre kanten i 5 s."],
+    ["c", "Efter 30 s lutar grafen nedåt.", "", "Läget från startkanten minskar, så simmaren rör sig tillbaka mot start."],
+    ["d", "Addera vägsträckan ut och tillbaka.", String.raw`\[s_{\mathrm{tot}}=50+50=100\ \mathrm m\]`, "Förskjutningen är däremot noll eftersom slutpunkten är startpunkten."]
+  ], String.raw`Simmaren håller \(2{,}0\ \mathrm{m/s}\) utåt, vilar 5 s och simmar tillbaka. Den totala sträckan är \(100\ \mathrm m\).`),
+  "3.111": byggFacitListaV2([
+    ["a", "Läs av fartkurvan vid t = 0.", String.raw`\[v_0=2{,}0\ \mathrm{m/s}\]`, ""],
+    ["b", "Mellan 20 och 60 s ökar farten linjärt.", String.raw`\[a=\frac{6{,}0-2{,}0}{60-20}=0{,}10\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Under de första 20 s är farten konstant.", String.raw`\[s_{0-20}=2{,}0\cdot20=40\ \mathrm m\]`, ""],
+    ["d", "Mellan 60 och 80 s är farten 6,0 m/s.", String.raw`\[s_{60-80}=6{,}0\cdot20=120\ \mathrm m\]`, ""]
+  ], String.raw`Startfarten är \(2{,}0\ \mathrm{m/s}\), accelerationen \(0{,}10\ \mathrm{m/s^2}\), och delsträckorna är \(40\ \mathrm m\) respektive \(120\ \mathrm m\).`),
+  "3.112": byggFacitListaV2([
+    ["a", "A:s hastighet är linjens lutning från origo.", String.raw`\[v_A=\frac{120}{20}=6{,}0\ \mathrm{m/s}\]`, ""],
+    ["b", "B:s linje går från 20 m till 100 m på 20 s.", String.raw`\[v_B=\frac{100-20}{20}=4{,}0\ \mathrm{m/s}\]`, ""],
+    ["c", "B:s y-skärning anger startförsprånget.", String.raw`\[s_B(0)=20\ \mathrm m\]`, ""],
+    ["d", "Graferna skär varandra vid samma tid och läge.", String.raw`\[6t=20+4t\Rightarrow t=10\ \mathrm s\]\[s=6\cdot10=60\ \mathrm m\]`, ""]
+  ], String.raw`A håller \(6{,}0\ \mathrm{m/s}\), B \(4{,}0\ \mathrm{m/s}\) och har 20 m försprång. A hinner ikapp efter 10 s vid 60 m.`),
+  "3.113": byggFacitListaV2([
+    ["a", "Läs av accelerationens nivå under de första 5 s.", String.raw`\[a=12\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Fartändringen är arean under acceleration–tid-kurvan.", String.raw`\[v(5)=0+12\cdot5=60\ \mathrm{m/s}\]`, ""],
+    ["c", "Mellan 5 och 10 s visar diagrammet noll nettoacceleration.", String.raw`\[a=0\Rightarrow v=\text{konstant}\]`, "Noll acceleration betyder inte noll fart."],
+    ["d", "Farten ändras därför inte under den andra fasen.", String.raw`\[v(10)=60\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Accelerationen är \(12\ \mathrm{m/s^2}\) under de första 5 s. Farten blir \(60\ \mathrm{m/s}\) och förblir sedan konstant till 10 s.`),
+  "3.114": byggFacitListaV2([
+    ["a", "Läs av läget vid 4,0 s.", String.raw`\[s(4)=16\ \mathrm m\]`, ""],
+    ["b", "Medelhastigheten under de första 4 s är sekantens lutning.", String.raw`\[\bar v_{0-4}=\frac{16-0}{4}=4{,}0\ \mathrm{m/s}\]`, ""],
+    ["c", "Mellan 4 och 8 s ökar läget från 16 m till 64 m.", String.raw`\[\bar v_{4-8}=\frac{64-16}{8-4}=12\ \mathrm{m/s}\]`, ""],
+    ["d", "Grafen böjer uppåt och blir brantare.", "", "Eftersom lutningen är hastigheten betyder det att cyklisten ökar farten och accelererar."]
+  ], String.raw`Efter 4,0 s är läget 16 m. Medelhastigheterna är \(4{,}0\ \mathrm{m/s}\) under 0–4 s och \(12\ \mathrm{m/s}\) under 4–8 s.`),
+  "3.135": byggFacitListaV2([
+    ["a", "Accelerationen är lutningen under de första 6 s.", String.raw`\[a=\frac{3{,}0-0}{6{,}0}=0{,}50\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Sträckan de första 6 s är triangelarean.", String.raw`\[s_{0-6}=\frac{6\cdot3}{2}=9{,}0\ \mathrm m\]`, ""],
+    ["c", "Från 6 till 20 s är farten 3,0 m/s.", String.raw`\[s_{6-20}=14\cdot3=42\ \mathrm m\]\[s_{\mathrm{tot}}=9+42=51\ \mathrm m\]`, ""]
+  ], String.raw`Accelerationen är \(0{,}50\ \mathrm{m/s^2}\). Kajaken paddlar 9,0 m under de första 6 s och är 51 m från stranden efter 20 s.`),
+  "3.136": byggFacitListaV2([
+    ["a", "Grafens skärning med lägesaxeln är startläget.", String.raw`\[s_0=20\ \mathrm m\]`, ""],
+    ["b", "Hastigheten är den räta linjens lutning.", String.raw`\[v=\frac{100-20}{8-0}=10\ \mathrm{m/s}\]`, ""],
+    ["c", "Fortsätt samma linjära rörelse till 12 s.", String.raw`\[s(12)=20+10\cdot12=140\ \mathrm m\]`, ""]
+  ], String.raw`Isbrytaren börjar vid 20 m, håller \(10\ \mathrm{m/s}\) och är vid 140 m efter 12 s.`),
+  "3.137": byggFacitListaV2([
+    ["a", "Den vågräta delen visar konstant fart.", "", "Tåget håller 20 m/s under de första 10 s."],
+    ["b", "Accelerationen under inbromsningen är lutningen.", String.raw`\[a=\frac{0-20}{50-10}=-0{,}50\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Addera rektangel- och triangelarean.", String.raw`\[s=10\cdot20+\frac{40\cdot20}{2}=200+400=600\ \mathrm m\]`, ""]
+  ], String.raw`Tåget håller konstant fart i 10 s, bromsar med \(-0{,}50\ \mathrm{m/s^2}\) och färdas totalt \(600\ \mathrm m\).`),
+  "3.138": byggFacitMedGrafV2(
+    byggFacitGrafV2({xMax:25,yMax:225,serier:[{punkter:[[0,0],[5,45],[10,90],[15,135],[20,180],[25,225]]}],xEtikett:"t / s",yEtikett:"s / m",aria:"Rät läge-tid-graf för gruvhissen med konstant fart."}),
+    [
+      ["a", "Mätpunkterna ligger på en rät linje genom origo.", "", "Det visar att hissen rör sig med konstant fart."],
+      ["b", "Farten är linjens lutning.", String.raw`\[v=\frac{180-0}{20-0}=9{,}0\ \mathrm{m/s}\]`, ""],
+      ["c", "Fortsätt den linjära modellen till 25 s.", String.raw`\[s=9{,}0\cdot25=225\ \mathrm m\]`, ""]
+    ],
+    String.raw`Hissens fart är \(9{,}0\ \mathrm{m/s}\), och efter 25 s har den kommit \(225\ \mathrm m\) nedåt.`
+  ),
+  "3.139": byggFacitListaV2([
+    ["a", "Den brantaste fartkurvan har störst acceleration.", "", "Hiss A accelererar snabbast."],
+    ["b", "Beräkna respektive linjes lutning.", String.raw`\[a_A=\frac{10}{5}=2{,}0\ \mathrm{m/s^2}\]\[a_B=\frac{10}{10}=1{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Sträckorna är areorna under kurvorna fram till 20 s.", String.raw`\[s_A=\frac{5\cdot10}{2}+15\cdot10=175\ \mathrm m\]\[s_B=\frac{10\cdot10}{2}+10\cdot10=150\ \mathrm m\]`, ""]
+  ], String.raw`A accelererar med \(2{,}0\ \mathrm{m/s^2}\) och färdas 175 m. B accelererar med \(1{,}0\ \mathrm{m/s^2}\) och färdas 150 m.`),
+  "3.140": byggFacitListaV2([
+    ["1", "Arean över tidsaxeln är positiv förskjutning uppåt.", String.raw`\[A_+=\frac{4\cdot6}{2}+6\cdot6+\frac{4\cdot6}{2}=60\ \mathrm m\]`, ""],
+    ["2", "Arean under tidsaxeln motsvarar rörelse nedåt.", String.raw`\[|A_-|=\frac{4\cdot9}{2}+4\cdot9+\frac{4\cdot9}{2}=72\ \mathrm m\]`, ""],
+    ["3", "Förskjutning använder tecken, medan vägsträcka använder belopp.", String.raw`\[\Delta y=60-72=-12\ \mathrm m\]\[s_{\mathrm{tot}}=60+72=132\ \mathrm m\]`, ""]
+  ], String.raw`Hissens förskjutning är \(-12\ \mathrm m\), alltså 12 m nedåt. Den totala sträckan är \(132\ \mathrm m\).`),
+  "3.141": byggFacitListaV2([
+    ["1", "Momentanhastigheten är tangentens lutning, inte kordans lutning från origo.", String.raw`\[v(2)=\left.\frac{\mathrm ds}{\mathrm dt}\right|_{t=2}\]`, ""],
+    ["2", "Rita en tangent vid t = 2,0 s och läs av två punkter långt från varandra på tangenten.", String.raw`\[v(2)\approx20\ \mathrm{m/s}\]`, ""],
+    ["3", "Kontrollera mot modellen för fritt fall.", String.raw`\[v=gt=9{,}82\cdot2{,}0=19{,}6\ \mathrm{m/s}\]`, "Att dividera 19,6 m med 2,0 s ger medelhastigheten 9,8 m/s, inte momentanhastigheten vid 2 s."]
+  ], String.raw`Tangentens lutning ger ungefär \(20\ \mathrm{m/s}\); det exakta modellvärdet är \(19{,}6\ \mathrm{m/s}\).`),
+  "3.142": byggFacitMedGrafV2(
+    byggFacitGrafV2({xMax:12,yMax:64,serier:[{punkter:[[0,0],[1,1],[2,4],[3,9],[4,16],[6,32],[8,48],[9,55],[10,60],[11,63],[12,64]]}],xEtikett:"t / s",yEtikett:"s / m",aria:"Läge-tid-diagram som böjer uppåt, fortsätter linjärt och sedan planar ut."}),
+    [
+      ["1", "Läget är den ackumulerade arean under fartkurvan.", String.raw`\[s(4)=\frac{4\cdot8}{2}=16\ \mathrm m\]`, ""],
+      ["2", "Mellan 4 och 8 s tillkommer en rektangelarea.", String.raw`\[s(8)=16+4\cdot8=48\ \mathrm m\]`, ""],
+      ["3", "Mellan 8 och 12 s tillkommer en triangelarea.", String.raw`\[s(12)=48+\frac{4\cdot8}{2}=64\ \mathrm m\]`, ""],
+      ["4", "Lägeskurvans lutning följer farten.", "", "Den böjer uppåt 0–4 s, är rät 4–8 s och planar ut 8–12 s tills lutningen blir noll."]
+    ],
+    String.raw`Lägena är \(16\ \mathrm m\) vid 4 s, \(48\ \mathrm m\) vid 8 s och \(64\ \mathrm m\) vid 12 s.`
+  ),
+  "3.143": byggFacitListaV2([
+    ["a", "Farterna är lika där kurvorna skär varandra.", String.raw`\[t=6{,}0\ \mathrm s,\qquad v=12\ \mathrm{m/s}\]`, ""],
+    ["b", "Före 6 s ligger B:s fartkurva under A:s.", "", "A:s area och därmed sträcka är större, så A leder strax efter starten."],
+    ["c", "B accelererar med 2,0 m/s², så dess fart är 2t. Sätt areorna lika.", String.raw`\[12t=\frac{t\cdot2t}{2}=t^2\Rightarrow t=12\ \mathrm s\]\[s=12\cdot12=144\ \mathrm m\]`, ""]
+  ], String.raw`Farterna är lika efter 6,0 s, men A leder då. Kajakerna är jämsides efter \(12\ \mathrm s\), vid \(144\ \mathrm m\).`),
+  "3.144": byggFacitListaV2([
+    ["a", "Fartändringen är arean under acceleration–tid-kurvan.", String.raw`\[v(4)=3{,}0\cdot4{,}0=12\ \mathrm{m/s}\]`, ""],
+    ["b", "Efter 4 s är accelerationen −2,0 m/s². Det tar 6,0 s att bromsa bort 12 m/s.", String.raw`\[\Delta t=\frac{12}{2{,}0}=6{,}0\ \mathrm s\]\[t_{\mathrm{stopp}}=4+6=10\ \mathrm s\]`, ""],
+    ["c", "Beräkna sträckan i de två faserna.", String.raw`\[s_1=\frac{3{,}0\cdot4^2}{2}=24\ \mathrm m\]\[s_2=\frac{12+0}{2}\cdot6=36\ \mathrm m\]\[s_{\mathrm{tot}}=60\ \mathrm m\]`, "Negativ acceleration under andra fasen betyder minskande framåtfart, inte omedelbar rörelse bakåt."]
+  ], String.raw`Farten efter 4,0 s är \(12\ \mathrm{m/s}\). Vagnen stannar vid 10 s och har då kommit \(60\ \mathrm m\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_DIAGRAM_V2_DEL3[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_DIAGRAM_V2_DEL3[uppgift.id];
+  }
+}
+
+const FACIT_NEWTON_V2_DEL1 = {
+  "4.1": byggFacitListaV2([
+    ["1", "Skylten är i jämvikt. Vajrarnas vågräta kraftkomposanter tar ut varandra, medan de lodräta tillsammans bär tyngden.", String.raw`\[F_g=mg=12\cdot9{,}82=117{,}8\ \mathrm N\]`, ""],
+    ["2", String.raw`Varje vajer bildar (25^\circ) mot lodlinjen, så dess lodräta komposant är (S\cos25^\circ).`, String.raw`\[2S\cos25^\circ=117{,}8\]`, ""],
+    ["3", "Lös ut spännkraften.", String.raw`\[S=\frac{117{,}8}{2\cos25^\circ}=65{,}0\ \mathrm N\]`, ""]
+  ], String.raw`Spännkraften är (65\ \mathrm N) i vardera vajern.`),
+  "4.2": byggFacitListaV2([
+    ["a", "Vid svävning är accelerationen noll och rotorernas sammanlagda lyftkraft balanserar tyngdkraften.", String.raw`\[4F_R=mg=0{,}900\cdot9{,}82=8{,}838\ \mathrm N\]\[F_R=\frac{8{,}838}{4}=2{,}21\ \mathrm N\]`, ""],
+    ["b", "Räkna uppåt som positiv riktning och använd Newtons andra lag.", String.raw`\[4F_R-mg=ma\]\[F_R=\frac{m(g+a)}4=\frac{0{,}900(9{,}82+1{,}5)}4=2{,}55\ \mathrm N\]`, ""],
+    ["c", "Konstant fart innebär åter att accelerationen och den resulterande kraften är noll.", String.raw`\[a=0\Rightarrow F_R=2{,}21\ \mathrm N\]`, ""]
+  ], String.raw`Varje rotor ger (2{,}21\ \mathrm N) vid svävning eller konstant stigfart och (2{,}55\ \mathrm N) när accelerationen uppåt är (1{,}5\ \mathrm{m/s^2}).`),
+  "4.3": byggFacitListaV2([
+    ["a", "Vajern drar framåt och rullmotståndet bakåt. Vid brottgränsen är dragkraften 8,0 kN.", String.raw`\[F_{\mathrm{res}}=8000-300=7700\ \mathrm N\]\[a_{\max}=\frac{7700}{1400}=5{,}50\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Med säkerhetsfaktor 3 får vajern belastas med högst en tredjedel av brottgränsen.", String.raw`\[F_{\mathrm{till}}=\frac{8000}{3}=2667\ \mathrm N\]\[a=\frac{2667-300}{1400}=1{,}69\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`Den teoretiska största accelerationen är (5{,}5\ \mathrm{m/s^2}). Med säkerhetsfaktor 3 blir den tillåtna accelerationen cirka (1{,}7\ \mathrm{m/s^2}).`),
+  "4.4": byggFacitListaV2([
+    ["1", String.raw`Låt (S_1) vara kraften i repet som gör (25^\circ) mot lodlinjen och (S_2) kraften i det andra repet.`, String.raw`\[F_g=mg=78\cdot9{,}82=766\ \mathrm N\]`, ""],
+    ["2", "Vågrät jämvikt ger lika stora sidokomposanter.", String.raw`\[S_1\sin25^\circ=S_2\sin40^\circ\]\[S_1=\frac{\sin40^\circ}{\sin25^\circ}S_2=1{,}521S_2\]`, ""],
+    ["3", "De lodräta komposanterna bär klättrarens tyngd.", String.raw`\[S_1\cos25^\circ+S_2\cos40^\circ=766\]\[(1{,}521\cos25^\circ+\cos40^\circ)S_2=766\]\[S_2=357\ \mathrm N,\qquad S_1=543\ \mathrm N\]`, ""]
+  ], String.raw`Spännkraften är cirka (543\ \mathrm N) i repet vid (25^\circ) och (357\ \mathrm N) i repet vid (40^\circ).`),
+  "4.5": byggFacitListaV2([
+    ["1", "Jackan hänger mitt på linan. Varje linhalva har längden 3,0 m och samma spännkraft.", String.raw`\[F_g=2{,}5\cdot9{,}82=24{,}55\ \mathrm N\]`, ""],
+    ["a", "Bestäm linans vinkel mot horisontalplanet från geometrin och använd lodrät jämvikt.", String.raw`\[\sin\theta=\frac{0{,}12}{3{,}0}=0{,}0400\]\[2S\sin\theta=F_g\Rightarrow S=\frac{24{,}55}{2\cdot0{,}0400}=307\ \mathrm N\]`, ""],
+    ["b", "När nedhänget är 2,0 cm blir vinkeln ännu mindre.", String.raw`\[\sin\theta=\frac{0{,}020}{3{,}0}=0{,}00667\]\[S=\frac{24{,}55}{2\cdot0{,}00667}=1{,}84\cdot10^3\ \mathrm N\]`, ""],
+    ["c", String.raw`Om linan vore helt rak skulle (	heta=0) och därmed (sin\theta=0).`, String.raw`\[S=\frac{F_g}{2\sin\theta}\longrightarrow\infty\quad\text{när}\quad\theta\longrightarrow0\]`, "En verklig lina går av eller töjs innan den blir helt rak."]
+  ], String.raw`Spännkraften är cirka (307\ \mathrm N) vid 12 cm nedhäng och (1{,}84\ \mathrm{kN}) vid 2,0 cm. Linan kan inte spännas helt rak med en last i mitten.`),
+  "4.31": byggFacitListaV2([
+    ["a", "De två givna krafterna är vinkelräta. Resultantens storlek fås med Pythagoras sats.", String.raw`\[R=\sqrt{30^2+40^2}=50\ \mathrm N\]\[\alpha=\arctan\!\left(\frac{40}{30}\right)=53{,}1^\circ\]`, "Resultanten är riktad 53,1° ovanför riktningen åt höger."],
+    ["b", "Bollen ligger stilla, så kraftsumman måste vara noll. Den tredje kraften ska därför vara lika stor som resultanten men motriktad.", String.raw`\[\vec F_3=-\vec R\]`, ""]
+  ], String.raw`De två krafternas resultant är (50\ \mathrm N) snett uppåt åt höger. Den tredje kraften är (50\ \mathrm N) snett nedåt åt vänster.`),
+  "4.32": byggFacitListaV2([
+    ["a", "Tyngdkraften är riktad nedåt.", String.raw`\[F_g=mg=5000\cdot9{,}82=49\,100\ \mathrm N=49{,}1\ \mathrm{kN}\]`, ""],
+    ["b", "Motorkraften verkar uppåt. Subtrahera tyngdkraften och använd Newtons andra lag.", String.raw`\[F_{\mathrm{res}}=90{,}0-49{,}1=40{,}9\ \mathrm{kN}\]\[a=\frac{40\,900}{5000}=8{,}18\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`Tyngdkraften är (49{,}1\ \mathrm{kN}) nedåt och raketens acceleration blir (8{,}2\ \mathrm{m/s^2}) uppåt.`),
+  "4.33": byggFacitListaV2([
+    ["a", "Betrakta först båda klossarna som ett enda system. Kontaktkrafterna är då inre krafter och tar ut varandra.", String.raw`\[m_{\mathrm{tot}}=3{,}0+5{,}0=8{,}0\ \mathrm{kg}\]\[a=\frac{24}{8{,}0}=3{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Frilägg 5,0-kilosklossen. Kontaktkraften är dess enda vågräta kraft.", String.raw`\[F_k=m_2a=5{,}0\cdot3{,}0=15\ \mathrm N\]`, ""],
+    ["c", "Enligt Newtons tredje lag trycker 5,0-kilosklossen tillbaka på 3,0-kilosklossen med lika stor men motriktad kraft.", String.raw`\[F_{2\to1}=F_{1\to2}=15\ \mathrm N\]`, "Dessa två krafter verkar på olika klossar och tar därför inte ut varandra i en enskild friläggning."]
+  ], String.raw`Klossarna accelererar med (3{,}0\ \mathrm{m/s^2}). Kontaktkrafterna är (15\ \mathrm N), lika stora och motriktade.`),
+  "4.34": byggFacitListaV2([
+    ["a", "Den hängande viktens tyngdkraft är den yttre kraft som driver hela systemet.", String.raw`\[F_g=m_2g=0{,}50\cdot9{,}82=4{,}91\ \mathrm N\]`, ""],
+    ["b", "Tyngdkraften ska accelerera båda massorna.", String.raw`\[a=\frac{m_2g}{m_1+m_2}=\frac{4{,}91}{2{,}0+0{,}50}=1{,}964\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Frilägg klossen på bordet. Spännkraften är dess enda vågräta kraft.", String.raw`\[S=m_1a=2{,}0\cdot1{,}964=3{,}93\ \mathrm N\]`, "Spännkraften är mindre än den hängande viktens tyngd, eftersom en del av tyngdkraften accelererar den hängande vikten själv."]
+  ], String.raw`Drivkraften är (4{,}91\ \mathrm N), accelerationen (1{,}96\ \mathrm{m/s^2}) och spännkraften (3{,}93\ \mathrm N).`),
+  "4.35": byggFacitMedGrafV2(
+    byggFacitGrafV2({xMax:6,yMax:1.4,serier:[{punkter:[[0,1],[0.5,1.2],[1.5,1.2],[2,1],[4,1],[4.5,0.8],[5.5,0.8],[6,1]]}],xEtikett:"tid",yEtikett:"N / mg",aria:"Vågens utslag är först högre än normalt, sedan normalt, därefter lägre och till sist normalt igen."}),
+    [
+      ["1", "Vågen mäter normalkraften N. Räkna uppåt som positiv riktning.", String.raw`\[N-mg=ma\Rightarrow N=m(g+a)\]`, ""],
+      ["2", "Vid starten accelererar hissen uppåt.", String.raw`\[a>0\Rightarrow N>mg\]`, "Vågen visar mer än personens vanliga tyngd."],
+      ["3", "Under fasen med konstant fart är accelerationen noll.", String.raw`\[a=0\Rightarrow N=mg\]`, ""],
+      ["4", "När hissen bromsar på väg upp är accelerationen riktad nedåt.", String.raw`\[a<0\Rightarrow N<mg\]`, ""],
+      ["5", "Om linan går av faller både personen och vågen fritt med accelerationen g.", String.raw`\[N=m(g-g)=0\]`, ""]
+    ],
+    String.raw`Vågen visar mer än normalt vid starten, normalt vid jämn fart och mindre än normalt under inbromsningen. Vid fritt fall visar den (0\ \mathrm N).`,
+    "Grafens tider och nivåskillnader är schematiska; det viktiga är ordningen mellan de tre faserna."
+  ),
+  "4.52": byggFacitListaV2([
+    ["a", "Välj höger som positiv riktning. Krafterna verkar åt motsatta håll.", String.raw`\[F_{\mathrm{res}}=42-15=27\ \mathrm N\]`, ""],
+    ["b", "Använd Newtons andra lag.", String.raw`\[a=\frac{F_{\mathrm{res}}}{m}=\frac{27}{6{,}0}=4{,}5\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`Resultanten är (27\ \mathrm N) åt höger och accelerationen (4{,}5\ \mathrm{m/s^2}) åt höger.`),
+  "4.53": byggFacitListaV2([
+    ["a", "Normalkraften och tyngdkraften är lika stora och motriktade, så deras vektorsumma är noll.", String.raw`\[N-F_g=50-50=0\ \mathrm N\]`, "De verkar på samma låda och är ett jämviktspar, inte ett kraft–motkraftspar enligt Newtons tredje lag."],
+    ["b", "Den enda kvarvarande kraften är den vågräta kraften.", String.raw`\[F_{\mathrm{res}}=30\ \mathrm N\quad\text{åt höger}\]`, ""],
+    ["c", "Beräkna accelerationen.", String.raw`\[a=\frac{30}{4{,}0}=7{,}5\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`Normalkraften och tyngdkraften tar ut varandra. Resultanten är (30\ \mathrm N) och accelerationen (7{,}5\ \mathrm{m/s^2}), båda åt höger.`),
+  "4.54": byggFacitListaV2([
+    ["a", "Lådan är stilla och har därför ingen acceleration.", String.raw`\[\sum\vec F=\vec0\]`, ""],
+    ["b", "Snörenas vågräta komposanter måste vara lika stora och motriktade.", String.raw`\[S_1\sin30^\circ=S_2\sin30^\circ\Rightarrow S_1=S_2=S\]`, ""],
+    ["c", "De lodräta komposanterna bär lådans tyngd.", String.raw`\[2S\cos30^\circ=mg=8{,}0\cdot9{,}82\]\[S=\frac{78{,}56}{2\cos30^\circ}=45{,}4\ \mathrm N\]`, ""]
+  ], String.raw`Kraftsumman är noll, sidokomposanterna tar ut varandra och spännkraften är cirka (45\ \mathrm N) i vardera snöret.`),
+  "4.55": byggFacitListaV2([
+    ["a", "Tyngdkraften är större än luftmotståndet, så resultanten är riktad nedåt.", String.raw`\[F_{\mathrm{res}}=785-600=185\ \mathrm N\quad\text{nedåt}\]`, ""],
+    ["b", "Massan kan bestämmas av den angivna tyngdkraften och därefter används Newtons andra lag.", String.raw`\[m=\frac{785}{9{,}82}=79{,}9\ \mathrm{kg}\]\[a=\frac{185}{79{,}9}=2{,}32\ \mathrm{m/s^2}\quad\text{nedåt}\]`, ""],
+    ["c", "När farten ökar växer luftmotståndet. Accelerationen minskar därför successivt.", String.raw`\[F_{\mathrm{luft}}\longrightarrow F_g=785\ \mathrm N\Rightarrow F_{\mathrm{res}}\longrightarrow0\]`, "När krafterna är lika stora fortsätter hopparen med konstant terminalfart."]
+  ], String.raw`Resultanten är (185\ \mathrm N) nedåt och accelerationen cirka (2{,}3\ \mathrm{m/s^2}) nedåt. Till slut blir luftmotståndet (785\ \mathrm N) och farten konstant.`),
+  "4.56": byggFacitListaV2([
+    ["a", "Den hängande viktens tyngdkraft driver systemet.", String.raw`\[F_g=m_2g=1{,}0\cdot9{,}82=9{,}82\ \mathrm N\]`, ""],
+    ["b", "Betrakta båda massorna som ett system.", String.raw`\[a=\frac{m_2g}{m_1+m_2}=\frac{9{,}82}{3{,}0+1{,}0}=2{,}455\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Frilägg klossen på bordet. Spännkraften är dess enda vågräta kraft.", String.raw`\[S=m_1a=3{,}0\cdot2{,}455=7{,}37\ \mathrm N\]`, ""]
+  ], String.raw`Drivkraften är (9{,}82\ \mathrm N), accelerationen (2{,}46\ \mathrm{m/s^2}) och spännkraften (7{,}37\ \mathrm N).`),
+  "4.66": byggFacitListaV2([
+    ["a", "Välj höger som positiv riktning och summera de motriktade krafterna.", String.raw`\[F_{\mathrm{res}}=60-25=35\ \mathrm N\quad\text{åt höger}\]`, ""],
+    ["b", "Använd Newtons andra lag.", String.raw`\[a=\frac{35}{8{,}0}=4{,}375\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Om krafterna vore lika stora skulle resultanten och accelerationen vara noll.", String.raw`\[F_{\mathrm{res}}=0\Rightarrow a=0\]`, "Lådan skulle stå stilla om den först var stilla, eller fortsätta med konstant hastighet om den redan rörde sig."]
+  ], String.raw`Resultanten är (35\ \mathrm N) åt höger och accelerationen cirka (4{,}4\ \mathrm{m/s^2}). Lika stora motriktade krafter ger ingen acceleration.`),
+  "4.70": byggFacitListaV2([
+    ["a", "Den tyngre viktens tyngdkraft driver nedåt och den lättares motverkar rörelsen.", String.raw`\[F_{\mathrm{driv}}=(m_1-m_2)g=(1{,}2-0{,}80)9{,}82=3{,}928\ \mathrm N\]`, ""],
+    ["b", "Drivkraften accelererar båda vikterna.", String.raw`\[a=\frac{F_{\mathrm{driv}}}{m_1+m_2}=\frac{3{,}928}{2{,}0}=1{,}964\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Frilägg den lättare vikten, som accelererar uppåt.", String.raw`\[S-m_2g=m_2a\]\[S=m_2(g+a)=0{,}80(9{,}82+1{,}964)=9{,}43\ \mathrm N\]`, ""],
+    ["d", "Jämför med de båda tyngdkrafterna.", String.raw`\[m_1g=11{,}8\ \mathrm N,\qquad m_2g=7{,}86\ \mathrm N\]`, "Spännkraften ligger mellan tyngdkrafterna: mindre än den tyngres, som accelererar nedåt, och större än den lättares, som accelererar uppåt."]
+  ], String.raw`Drivkraften är (3{,}93\ \mathrm N), accelerationen (1{,}96\ \mathrm{m/s^2}) och spännkraften (9{,}43\ \mathrm N).`),
+  "4.82": byggFacitListaV2([
+    ["a", "Tyngdkraften på lådan är riktad nedåt.", String.raw`\[F_g=mg=12\cdot9{,}82=117{,}8\ \mathrm N\]`, ""],
+    ["b", "Lådan står stilla. Golvet måste därför balansera både tyngdkraften och handens kraft nedåt.", String.raw`\[N-F_g-40=0\Rightarrow N=117{,}8+40=157{,}8\ \mathrm N\]`, ""],
+    ["c", "När personen lyfter uppåt hjälper handen golvet att bära lådan.", String.raw`\[N+40-F_g=0\Rightarrow N=117{,}8-40=77{,}8\ \mathrm N\]`, "Normalkraften är inte alltid lika stor som tyngdkraften; den anpassas till övriga lodräta krafter och accelerationen."]
+  ], String.raw`Tyngdkraften är (118\ \mathrm N). Normalkraften blir (158\ \mathrm N) vid tryck nedåt och (78\ \mathrm N) vid lyft uppåt.`),
+  "4.83": byggFacitListaV2([
+    ["a", "På jorden används tyngdaccelerationen 9,82 m/s².", String.raw`\[F_{g,\mathrm j}=120\cdot9{,}82=1178\ \mathrm N\approx1{,}18\ \mathrm{kN}\]`, ""],
+    ["b", "På månen är tyngdaccelerationen mindre.", String.raw`\[F_{g,\mathrm m}=120\cdot1{,}62=194{,}4\ \mathrm N\]`, ""],
+    ["c", "Massan beskriver mängden materia och ändras inte när astronauten förflyttas.", String.raw`\[m_{\mathrm m}=120\ \mathrm{kg}\]`, ""],
+    ["d", "Astronauten står stilla på månytan, så normalkraften balanserar tyngdkraften.", String.raw`\[N=F_{g,\mathrm m}=194{,}4\ \mathrm N\]`, ""]
+  ], String.raw`Tyngdkraften är (1{,}18\ \mathrm{kN}) på jorden och (194\ \mathrm N) på månen. Massan är fortfarande (120\ \mathrm{kg}), och månens normalkraft är (194\ \mathrm N).`),
+  "4.84": byggFacitListaV2([
+    ["1", "Vågen mäter normalkraften N. Välj uppåt som positiv riktning.", String.raw`\[N-mg=ma\Rightarrow N=m(g+a)\]`, ""],
+    ["a", "När hissen står stilla eller går med konstant fart är accelerationen noll.", String.raw`\[N=65\cdot9{,}82=638\ \mathrm N\]`, ""],
+    ["b", "Vid acceleration uppåt är a positiv.", String.raw`\[N=65(9{,}82+1{,}5)=735{,}8\ \mathrm N\]`, ""],
+    ["c", "Vid acceleration nedåt sätter vi a = −1,5 m/s².", String.raw`\[N=65(9{,}82-1{,}5)=540{,}8\ \mathrm N\]`, "Massan är hela tiden 65 kg; det är normalkraften, och därmed vågens utslag, som ändras."]
+  ], String.raw`Vågen visar (638\ \mathrm N) utan acceleration, (736\ \mathrm N) vid acceleration uppåt och (541\ \mathrm N) vid acceleration nedåt.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_NEWTON_V2_DEL1[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_NEWTON_V2_DEL1[uppgift.id];
+  }
+}
+
+const FIGUR_FACIT_PUCK_V2 = `<span class="fig"><svg viewBox="0 0 430 230" role="img" aria-label="Friläggning av en puck med tyngdkraft nedåt, normalkraft uppåt och friktionskraft åt vänster" xmlns="http://www.w3.org/2000/svg"><defs><marker id="pil-puck-v2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 Z" fill="#B43123"/></marker></defs><line x1="30" y1="178" x2="400" y2="178" stroke="#2B2527" stroke-width="2"/><ellipse cx="215" cy="158" rx="58" ry="19" fill="#EDEEF1" stroke="#2B2527" stroke-width="2.4"/><circle cx="215" cy="158" r="4" fill="#2B2527"/><g stroke="#B43123" stroke-width="3" marker-end="url(#pil-puck-v2)"><line x1="215" y1="150" x2="215" y2="55"/><line x1="215" y1="166" x2="215" y2="218"/><line x1="158" y1="158" x2="70" y2="158"/></g><g font-family="IBM Plex Mono" font-size="15" font-weight="600" fill="#B43123"><text x="226" y="61">N</text><text x="226" y="215">F<tspan baseline-shift="sub" font-size="11">g</tspan></text><text x="72" y="145">F<tspan baseline-shift="sub" font-size="11">fr</tspan></text></g><g font-family="IBM Plex Mono" font-size="13" fill="#5C575E"><text x="215" y="28" text-anchor="middle">normalkraft</text><text x="45" y="185">friktion</text><text x="250" y="196">tyngdkraft</text></g></svg></span>`;
+
+const FACIT_NEWTON_V2_DEL2 = {
+  "4.85": byggFacitListaV2([
+    ["a", "Frilägg den övre lådan. Den står stilla, så normalkraften från den undre lådan balanserar dess tyngdkraft.", String.raw`\[N_1=m_{\mathrm{ö}}g=6{,}0\cdot9{,}82=58{,}9\ \mathrm N\]`, ""],
+    ["b", "Bordet bär båda lådorna. Frilägg hela stapeln.", String.raw`\[N_2=(m_{\mathrm{u}}+m_{\mathrm{ö}})g\]\[N_2=(15+6{,}0)9{,}82=206\ \mathrm N\]`, ""],
+    ["c", "Bordet trycker uppåt på stapeln med 206 N. Enligt Newtons tredje lag trycker den undre lådan nedåt på bordet med lika stor kraft.", String.raw`\[F_{\mathrm{låda\to bord}}=F_{\mathrm{bord\to låda}}=206\ \mathrm N\]`, "Krafterna är lika stora och motriktade men verkar på olika kroppar."]
+  ], String.raw`(N_1=58{,}9\ \mathrm N) och (N_2=206\ \mathrm N). Den undre lådan trycker på bordet med (206\ \mathrm N) nedåt; detta är motkraften till bordets normalkraft enligt Newtons tredje lag.`),
+  "4.86": byggFacitListaV2([
+    ["a", "Lampans tyngdkraft är riktad lodrätt nedåt.", String.raw`\[F_g=mg=4{,}0\cdot9{,}82=39{,}3\ \mathrm N\]`, ""],
+    ["b", String.raw`Snörena är symmetriska och gör (30^\circ) mot taket, alltså mot horisontalplanet. De vågräta komposanterna tar ut varandra.`, String.raw`\[2S\sin30^\circ=F_g\]\[S=\frac{39{,}3}{2\sin30^\circ}=39{,}3\ \mathrm N\]`, ""],
+    ["c", "När snörena blir mer vågräta minskar den lodräta andelen av varje spännkraft.", String.raw`\[S=\frac{mg}{2\sin\theta}\longrightarrow\infty\quad\text{när}\quad\theta\longrightarrow0\]`, "Ett belastat snöre kan därför inte vara fullständigt vågrätt."]
+  ], String.raw`Tyngdkraften är (39{,}3\ \mathrm N) och spännkraften (39{,}3\ \mathrm N) i vardera snöret. Spännkraften växer kraftigt när snörena närmar sig horisontellt läge.`),
+  "4.87": byggFacitListaV2([
+    ["a", "Lådan följer hissens acceleration uppåt. Newtons andra lag lodrätt ger", String.raw`\[N-mg=ma\Rightarrow N=m(g+a)\]\[N=20(9{,}82+2{,}0)=236{,}4\ \mathrm N\]`, ""],
+    ["b", "Den största statiska friktionskraften är proportionell mot normalkraften.", String.raw`\[f_{\max}=\mu N=0{,}25\cdot236{,}4=59{,}1\ \mathrm N\]`, ""],
+    ["c", "När hissen står stilla är normalkraften mg.", String.raw`\[f_{\max,0}=\mu mg=0{,}25\cdot20\cdot9{,}82=49{,}1\ \mathrm N\]\[\frac{59{,}1}{49{,}1}=1{,}20\]`, "Det krävs alltså ungefär 20 % större vågrät kraft för att glidningen ska börja."],
+    ["d", "Vid fritt fall accelererar både lådan och golvet nedåt med g.", String.raw`\[N=m(g-g)=0\Rightarrow f_{\max}=\mu N=0\]`, "Lådan är tyngdlös relativt hissgolvet och kan inte få någon friktionskraft från det."]
+  ], String.raw`Normalkraften är (236\ \mathrm N) och den maximala friktionen (59\ \mathrm N). Det är 20 % mer än i en stillastående hiss. Vid fritt fall blir både normalkraften och friktionen noll.`),
+  "4.88": byggFacitListaV2([
+    ["a", "Välj höger som positiv riktning och subtrahera de motriktade krafterna.", String.raw`\[F_{\mathrm{res}}=45-18=27\ \mathrm N\quad\text{åt höger}\]`, ""],
+    ["b", "Använd Newtons andra lag.", String.raw`\[a=\frac{F_{\mathrm{res}}}{m}=\frac{27}{6{,}0}=4{,}5\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`Resultanten är (27\ \mathrm N) åt höger och accelerationen (4{,}5\ \mathrm{m/s^2}) åt höger.`),
+  "4.89": byggFacitListaV2([
+    ["a", "Den resulterande kraften fås direkt ur Newtons andra lag.", String.raw`\[F_{\mathrm{res}}=ma=3500\cdot1{,}4=4900\ \mathrm N=4{,}9\ \mathrm{kN}\]`, ""],
+    ["b", "Samma kraft ger större acceleration åt den lättare bilen.", String.raw`\[a=\frac{F_{\mathrm{res}}}{m}=\frac{4900}{1400}=3{,}5\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`Lastbilen behöver resultanten (4{,}9\ \mathrm{kN}). Samma kraft ger personbilen accelerationen (3{,}5\ \mathrm{m/s^2}).`),
+  "4.90": byggFacitListaV2([
+    ["a", "Krafterna är vinkelräta, så resultantens storlek beräknas med Pythagoras sats.", String.raw`\[F_{\mathrm{res}}=\sqrt{24^2+10^2}=\sqrt{676}=26\ \mathrm N\]`, ""],
+    ["b", "Accelerationen har samma riktning som resultanten.", String.raw`\[a=\frac{F_{\mathrm{res}}}{m}=\frac{26}{2{,}0}=13\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`Kraftresultanten är (26\ \mathrm N) och stenens acceleration (13\ \mathrm{m/s^2}), i resultantens riktning.`),
+  "4.91": byggFacitListaV2([
+    ["a", "Anta att den angivna dragkraften är den resulterande kraften. Lös ut massan ur Newtons andra lag.", String.raw`\[m=\frac{F}{a}=\frac{75}{4{,}2}=17{,}86\ \mathrm{kg}\]`, ""],
+    ["b", "Massan är oförändrad. Beräkna kraften vid den nya accelerationen.", String.raw`\[F=ma=17{,}86\cdot6{,}0=107\ \mathrm N\]`, ""]
+  ], String.raw`Vagnens massa är cirka (18\ \mathrm{kg}), och accelerationen (6{,}0\ \mathrm{m/s^2}) kräver cirka (107\ \mathrm N).`),
+  "4.92": byggFacitListaV2([
+    ["a", "Lådan står stilla och har därmed accelerationen noll.", String.raw`\[F_{\mathrm{res}}=ma=0\ \mathrm N\]`, ""],
+    ["b", "Den vågräta kraftsumman måste vara noll. Den övriga vågräta kraften är därför lika stor och motriktad.", String.raw`\[350-F_{\mathrm{fr}}=0\Rightarrow F_{\mathrm{fr}}=350\ \mathrm N\quad\text{åt vänster}\]`, ""],
+    ["c", "Kraften är statisk friktion mellan lådan och golvet.", "", "Den statiska friktionen anpassar sig till den pålagda kraften så länge dess maximala värde inte överskrids."]
+  ], String.raw`Resultanten är (0\ \mathrm N). Golvet utövar en statisk friktionskraft på (350\ \mathrm N) åt vänster.`),
+  "4.93": byggFacitListaV2([
+    ["a", "Newtons första lag beskriver rörelse när kraftresultanten är noll.", String.raw`\[\sum\vec F=\vec0\Rightarrow\vec v=\text{konstant}\]`, "Föremålet förblir i vila eller rör sig rätlinjigt med konstant fart."],
+    ["b", "Newtons andra lag kopplar kraftresultanten till accelerationen.", String.raw`\[\sum\vec F=m\vec a\]`, "Accelerationen får kraftresultantens riktning och blir större för större resultant men mindre för större massa."],
+    ["c", "En bil som kör rakt fram med konstant fart är ett vardagligt exempel.", String.raw`\[F_{\mathrm{driv}}-F_{\mathrm{luft}}-F_{\mathrm{rull}}=0\]`, "Bilen rör sig trots att kraftresultanten är noll."]
+  ], String.raw`Första lagen gäller konstant hastighet när (sum\vec F=0). Andra lagen är (sum\vec F=m\vec a). En bil med konstant fart har balanserad drivkraft och motstånd.`),
+  "4.94": byggFacitListaV2([
+    ["a", "Konstant hastighet innebär noll acceleration och därmed noll kraftresultant.", String.raw`\[F_{\mathrm{drag}}-F_{\mathrm{fr}}=0\]\[F_{\mathrm{fr}}=75\ \mathrm N\]`, "Friktionskraften är riktad motsatt rörelsen."],
+    ["b", "Vid den nya konstanta hastigheten är accelerationen åter noll.", String.raw`\[F_{\mathrm{motstånd}}=82\ \mathrm N\]\[F_{\mathrm{res}}=82-82=0\ \mathrm N\]`, "Den större dragkraften balanseras av ett lika stort sammanlagt motstånd." ]
+  ], String.raw`Friktionskraften är först (75\ \mathrm N). Vid den nya konstanta farten är kraftresultanten fortfarande (0\ \mathrm N).`),
+  "4.95": byggFacitListaV2([
+    ["1", "Omvandla begynnelsefarten till meter per sekund.", String.raw`\[v_0=\frac{60}{3{,}6}=16{,}67\ \mathrm{m/s}\]`, ""],
+    ["a", "Välj bilens färdriktning som positiv. Hastighetsändringen är negativ.", String.raw`\[a=\frac{v-v_0}{t}=\frac{0-16{,}67}{3{,}5}=-4{,}76\ \mathrm{m/s^2}\]`, "Retardationens storlek är 4,76 m/s²."],
+    ["b", "Använd Newtons andra lag med tecken för riktningen.", String.raw`\[F_{\mathrm{res}}=ma=1300(-4{,}76)=-6{,}19\cdot10^3\ \mathrm N\]`, ""]
+  ], String.raw`Retardationen är (4{,}8\ \mathrm{m/s^2}). Den resulterande kraften är cirka (6{,}2\ \mathrm{kN}) bakåt.`),
+  "4.96": byggFacitListaV2([
+    ["a", "Den markparallella komposanten ligger intill vinkeln.", String.raw`\[F_{\parallel}=F\cos35^\circ=180\cos35^\circ=147\ \mathrm N\]`, ""],
+    ["b", "Den vinkelräta komposanten ligger mittemot vinkeln.", String.raw`\[F_{\perp}=F\sin35^\circ=180\sin35^\circ=103\ \mathrm N\]`, ""],
+    ["c", String.raw`När vinkeln (	heta) ökar minskar (cos\theta) medan (sin\theta) ökar.`, String.raw`\[F_{\parallel}=F\cos\theta\downarrow,\qquad F_{\perp}=F\sin\theta\uparrow\]`, "En större del av kraften lyfter då vagnen och en mindre del drar den framåt."]
+  ], String.raw`Komposanterna är (147\ \mathrm N) parallellt med marken och (103\ \mathrm N) vinkelrätt uppåt. Vid större vinkel minskar den parallella och ökar den vinkelräta komposanten.`),
+  "4.97": byggFacitListaV2([
+    ["1", "Summera först krafterna i varje riktning enligt figurens pilar.", String.raw`\[F_x=50-25=25\ \mathrm N\quad\text{åt vänster}\]\[F_y=60\ \mathrm N\quad\text{nedåt}\]`, ""],
+    ["a", "De resulterande komposanterna är vinkelräta.", String.raw`\[F_{\mathrm{res}}=\sqrt{25^2+60^2}=65\ \mathrm N\]`, ""],
+    ["b", "Beräkna vinkeln från lodlinjen.", String.raw`\[\tan\theta=\frac{25}{60}\Rightarrow\theta=22{,}6^\circ\]`, ""]
+  ], String.raw`Resultanten är (65\ \mathrm N), riktad cirka (23^\circ) åt vänster från lodlinjen nedåt.`),
+  "4.98": byggFacitListaV2([
+    ["a", "Den resulterande kraftens storlek följer av Newtons andra lag.", String.raw`\[F_{\mathrm{res}}=ma=0{,}60\cdot9{,}0=5{,}4\ \mathrm N\]`, ""],
+    ["b", "De två krafterna är vinkelräta, så de och resultanten bildar en rätvinklig triangel.", String.raw`\[F_{\mathrm{res}}^2=F_1^2+F_2^2\]\[F_2=\sqrt{5{,}4^2-4{,}0^2}=3{,}63\ \mathrm N\]`, ""]
+  ], String.raw`Kraftresultanten är (5{,}4\ \mathrm N), och den andra kraften är cirka (3{,}6\ \mathrm N).`),
+  "4.99": byggFacitListaV2([
+    ["a", "Peters hand trycker på väggen. Motkraften verkar på handen, inte på väggen.", String.raw`\[\vec F_{\mathrm{vägg\to hand}}=-\vec F_{\mathrm{hand\to vägg}}\]`, "Väggen trycker alltså tillbaka med 60 N i motsatt riktning."],
+    ["b", "Vid slaget påverkar handen ansiktet och ansiktet handen med lika stora, motriktade krafter.", String.raw`\[|\vec F_{\mathrm{hand\to ansikte}}|=|\vec F_{\mathrm{ansikte\to hand}}|\]`, "Olika skador beror på vävnadernas tålighet och hur kraften fördelas, inte på att den ena kraften är större."]
+  ], String.raw`Väggen trycker på handen med (60\ \mathrm N). I boxningsslaget är krafterna på handen och ansiktet lika stora men motriktade.`),
+  "4.140": byggFacitMedGrafV2(
+    FIGUR_FACIT_PUCK_V2,
+    [
+      ["a", "Frilägg pucken efter att knuffen har upphört.", String.raw`\[\vec F_g\ \text{nedåt},\qquad\vec N\ \text{uppåt},\qquad\vec F_{\mathrm{fr}}\ \text{åt vänster}\]`, "Normalkraften och tyngdkraften balanserar varandra. Friktionen är den enda vågräta kraften."],
+      ["b", "En framåtriktad kraft behövs inte för att hålla en kropp i rörelse.", String.raw`\[\sum F_x=-F_{\mathrm{fr}}\Rightarrow a_x<0\]`, "Pucken fortsätter åt höger av tröghet men bromsas av friktionen."],
+      ["c", "På helt friktionsfri is återstår bara de balanserade lodräta krafterna.", String.raw`\[\sum\vec F=\vec0\Rightarrow\vec v=\text{konstant}\]`, "Pucken skulle glida rätlinjigt vidare med oförändrad hastighet."]
+    ],
+    String.raw`På pucken verkar tyngdkraft, normalkraft och friktion bakåt — ingen kraft framåt. Utan friktion skulle puckens hastighet förbli konstant.`
+  ),
+  "4.100": byggFacitListaV2([
+    ["a", "I ett lätt rep med försumbar acceleration är spännkraften lika stor i båda ändar. Repet drar därför lagen med lika stora krafter åt motsatta håll.", "", "Krafterna från lagen på samma rep är inte i sig ett kraft–motkraftspar. Varje lags kraft på repet bildar i stället par med repets kraft på just det laget."],
+    ["b", "För varje lag är markens statiska friktion den avgörande yttre kraften framåt. Repet drar laget mot motståndaren.", String.raw`\[F_{\mathrm{res}}=F_{\mathrm{fr,mark}}-S\]`, "Det lag som kan skapa störst friktionskraft utan att glida kan överföra den största dragkraften."],
+    ["c", "När ett lag börjar glida övergår den statiska friktionen till glidfriktion, som vanligen är mindre.", String.raw`\[F_{\mathrm{fr}}<S\Rightarrow F_{\mathrm{res}}\ \text{riktas mot motståndaren}\]`, "Laget accelererar då i den förlorande riktningen."]
+  ], String.raw`Repkrafterna är lika stora i ett idealiskt rep, men markfriktionen avgör. Laget med bäst grepp kan balansera en större repkraft; ett lag som börjar glida får en nettokraft mot motståndaren.`),
+  "4.101": byggFacitListaV2([
+    ["a", "Den översta boken är i jämvikt. Dess tyngd överförs som en normalkraft nedåt på mittenboken.", String.raw`\[F_{\mathrm{ö\to m}}=m_{\mathrm{ö}}g=1{,}040\cdot9{,}82=10{,}21\ \mathrm N\]`, ""],
+    ["b", "På mittenboken verkar dess egen tyngd och kraften från den övre boken nedåt. Den understa boken måste balansera båda.", String.raw`\[F_{\mathrm{u\to m}}=(m_{\mathrm{ö}}+m_{\mathrm m})g\]\[F_{\mathrm{u\to m}}=(1{,}040+1{,}125)9{,}82=21{,}26\ \mathrm N\]`, ""],
+    ["c", "På den understa boken verkar tre krafter: dess egen tyngdkraft nedåt, mittenbokens normalkraft nedåt och golvets normalkraft uppåt.", String.raw`\[F_{g,\mathrm u}=2{,}055\cdot9{,}82=20{,}18\ \mathrm N\]\[F_{\mathrm{m\to u}}=21{,}26\ \mathrm N\]\[N_{\mathrm{golv}}=(1{,}040+1{,}125+2{,}055)9{,}82=41{,}44\ \mathrm N\]`, "De två normalkrafterna är kontaktkrafter. Tyngdkraften är en gravitationskraft." ]
+  ], String.raw`Den översta boken trycker med (10{,}2\ \mathrm N) på mittenboken, och den understa trycker med (21{,}3\ \mathrm N) uppåt på den. På understa boken verkar (20{,}2\ \mathrm N) och (21{,}3\ \mathrm N) nedåt samt (41{,}4\ \mathrm N) uppåt.`),
+  "4.102": byggFacitListaV2([
+    ["a", "Normalkraften N är bordets kraft uppåt på boken. Newtons tredje lag ger en lika stor motkraft på en annan kropp.", String.raw`\[\vec F_{\mathrm{bok\to bord}}=-\vec N_{\mathrm{bord\to bok}}\]`, "Motkraften är alltså bokens kontaktkraft nedåt på bordet."],
+    ["b", "På boken själv balanseras normalkraften av tyngdkraften när boken är i vila.", String.raw`\[N-F_g=0\Rightarrow N=mg\]`, "Normalkraften och tyngdkraften verkar på samma kropp och är därför ett jämviktspar, inte ett N3-par."]
+  ], String.raw`Normalkraftens motkraft är bokens kraft nedåt på bordet. Normalkraftens jämviktspar på boken är tyngdkraften (mg).`),
+  "4.106": byggFacitListaV2([
+    ["1", String.raw`Vinkeln (135^\circ) innebär att tråd A ligger (45^\circ) ovanför horisontalplanet åt vänster. Knutpunkten O är i jämvikt.`, "", ""],
+    ["a", "Horisontellt balanserar A-trådens komposant kraften 30 N i tråd B.", String.raw`\[S_A\cos45^\circ=30\Rightarrow S_A=\frac{30}{\cos45^\circ}=42{,}4\ \mathrm N\]`, "A-trådens lodräta komposant blir då också 30 N."],
+    ["b", "Den lodräta komposanten i A balanserar kraften i tråd C, som i sin tur bär vikten.", String.raw`\[S_A\sin45^\circ=S_C=mg=30\ \mathrm N\]\[m=\frac{30}{9{,}82}=3{,}05\ \mathrm{kg}\]`, ""]
+  ], String.raw`Viktens massa är cirka (3{,}1\ \mathrm{kg}), och spännkraften i tråd A är cirka (42\ \mathrm N).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_NEWTON_V2_DEL2[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_NEWTON_V2_DEL2[uppgift.id];
+  }
+}
+
+function byggVertikalKraftfigurV2({ id, objekt, upp = [], ned = [], aria }) {
+  const pil = `pil-${id}`;
+  const xLägen = antal => antal === 1 ? [215] : antal === 2 ? [185, 245] : [165, 215, 265];
+  const ritaPilar = (krafter, riktning) => krafter.map((kraft, i) => {
+    const x = xLägen(krafter.length)[i];
+    const y1 = riktning === "upp" ? 117 : 153;
+    const y2 = riktning === "upp" ? 43 : 222;
+    const textY = riktning === "upp" ? 34 : 237;
+    const textX = krafter.length === 1 ? x + 8 : i === 0 ? x - 8 : x + 8;
+    const ankare = krafter.length === 1 || i > 0 ? "start" : "end";
+    return `<line x1="${x}" y1="${y1}" x2="${x}" y2="${y2}" stroke="#B43123" stroke-width="3" marker-end="url(#${pil})"/><text x="${textX}" y="${textY}" text-anchor="${ankare}" font-family="IBM Plex Mono" font-size="13" font-weight="600" fill="#B43123">${kraft}</text>`;
+  }).join("");
+  return `<span class="fig"><svg viewBox="0 0 430 250" role="img" aria-label="${aria}" xmlns="http://www.w3.org/2000/svg"><defs><marker id="${pil}" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 Z" fill="#B43123"/></marker></defs><rect x="160" y="118" width="110" height="35" rx="17" fill="#EDEEF1" stroke="#2B2527" stroke-width="2.2"/><text x="215" y="140" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#2B2527">${objekt}</text>${ritaPilar(upp, "upp")}${ritaPilar(ned, "ned")}</svg></span>`;
+}
+
+const FACIT_NEWTON_V2_DEL3 = {
+  "4.107": byggFacitListaV2([
+    ["1", String.raw`Låt (F_1) höra till linan vid (35^\circ) och (F_2) till linan vid (43^\circ). Vinklarna mäts mot det vågräta taket.`, String.raw`\[F_g=mg=120\cdot9{,}82=1178{,}4\ \mathrm N\]`, ""],
+    ["2", "Trafikljuset är i jämvikt. De vågräta komposanterna måste ta ut varandra.", String.raw`\[F_1\cos35^\circ=F_2\cos43^\circ\]\[F_1=\frac{\cos43^\circ}{\cos35^\circ}F_2=0{,}893F_2\]`, ""],
+    ["3", "De lodräta komposanterna bär tyngden.", String.raw`\[F_1\sin35^\circ+F_2\sin43^\circ=1178{,}4\]\[(0{,}893\sin35^\circ+\sin43^\circ)F_2=1178{,}4\]\[F_2=987\ \mathrm N,\qquad F_1=881\ \mathrm N\]`, ""]
+  ], String.raw`Spännkrafterna är (F_1\approx880\ \mathrm N) i linan vid (35^\circ) och (F_2\approx990\ \mathrm N) i linan vid (43^\circ).`),
+  "4.110": byggFacitMedGrafV2(
+    byggVertikalKraftfigurV2({id:"410",objekt:"kula",upp:["S = 245 N"],ned:["F_g = 245 N"],aria:"Metallkula med snörkraft 245 newton uppåt och tyngdkraft 245 newton nedåt."}),
+    [
+      ["1", "Tyngdkraften verkar i kulans tyngdpunkt och är riktad nedåt.", String.raw`\[F_g=mg=25\cdot9{,}82=245{,}5\ \mathrm N\]`, ""],
+      ["2", "Kulan hänger stilla, så snörkraften uppåt balanserar tyngdkraften.", String.raw`\[S-F_g=0\Rightarrow S=245{,}5\ \mathrm N\]`, ""]
+    ],
+    String.raw`På kulan verkar tyngdkraften (245\ \mathrm N) nedåt och snörkraften (245\ \mathrm N) uppåt.`
+  ),
+  "4.111": byggFacitMedGrafV2(
+    byggVertikalKraftfigurV2({id:"411",objekt:"laptop",upp:["N_b = 10,0 N"],ned:["F_g = 8,05 N","N_m = 1,96 N"],aria:"Frilagd laptop med bordets normalkraft uppåt samt tyngdkraft och telefonens normalkraft nedåt."}),
+    [
+      ["1", "Telefonen står stilla och trycker därför på laptopen med sin tyngd.", String.raw`\[N_m=m_mg=0{,}200\cdot9{,}82=1{,}964\ \mathrm N\]`, ""],
+      ["2", "Laptopens egen tyngdkraft verkar nedåt.", String.raw`\[F_g=m_Lg=0{,}820\cdot9{,}82=8{,}052\ \mathrm N\]`, ""],
+      ["3", "Bordets normalkraft måste balansera båda nedåtkrafterna.", String.raw`\[N_b-N_m-F_g=0\]\[N_b=(0{,}200+0{,}820)9{,}82=10{,}016\ \mathrm N\]`, ""]
+    ],
+    String.raw`På laptopen verkar (1{,}96\ \mathrm N) och (8{,}05\ \mathrm N) nedåt samt bordets normalkraft (10{,}0\ \mathrm N) uppåt.`
+  ),
+  "4.112": byggFacitMedGrafV2(
+    byggVertikalKraftfigurV2({id:"412",objekt:"ballong",upp:["F_lyft = 70 mN"],ned:["F_g = 49 mN","N_tak = 21 mN"],aria:"Frilagd heliumballong med lyftkraft uppåt samt tyngdkraft och takets kontaktkraft nedåt."}),
+    [
+      ["1", "Omvandla massan till kilogram och beräkna tyngdkraften.", String.raw`\[m=5{,}0\ \mathrm g=0{,}0050\ \mathrm{kg}\]\[F_g=mg=0{,}0050\cdot9{,}82=0{,}0491\ \mathrm N=49{,}1\ \mathrm{mN}\]`, ""],
+      ["2", "Ballongen är i vila mot taket. Takets kontaktkraft måste tillsammans med tyngdkraften balansera lyftkraften.", String.raw`\[F_{\mathrm{lyft}}-F_g-N_{\mathrm{tak}}=0\]\[N_{\mathrm{tak}}=70-49{,}1=20{,}9\ \mathrm{mN}\]`, ""]
+    ],
+    String.raw`På ballongen verkar lyftkraften (70\ \mathrm{mN}) uppåt samt tyngdkraften (49\ \mathrm{mN}) och takets kontaktkraft (21\ \mathrm{mN}) nedåt.`
+  ),
+  "4.115": byggFacitListaV2([
+    ["a", "Vågens visning i gram motsvarar den massa vars tyngd ger normalkraften. När dynamometern drar långsamt är kraftsumman noll.", String.raw`\[T+N-mg=0\]\[T=(0{,}423-0{,}257)g=0{,}166\cdot9{,}82=1{,}63\ \mathrm N\]`, ""],
+    ["b", "När vikten hänger fritt bär dynamometern hela tyngden.", String.raw`\[T=mg=0{,}423\cdot9{,}82=4{,}15\ \mathrm N\]`, ""],
+    ["c", "Använd Hookes lag för dynamometerns fjäder.", String.raw`\[T=kx\Rightarrow x=\frac{T}{k}=\frac{4{,}15}{25}=0{,}166\ \mathrm m\]`, ""]
+  ], String.raw`Dynamometern visar (1{,}63\ \mathrm N) i a och (4{,}15\ \mathrm N) när vikten hänger fritt. Då är fjädern utdragen (0{,}166\ \mathrm m=16{,}6\ \mathrm{cm}).`),
+  "4.171": byggFacitListaV2([
+    ["a", "När krafterna är motriktade subtraheras deras storlekar.", String.raw`\[F_{\mathrm{res}}=18-6{,}0=12\ \mathrm N\quad\text{åt höger}\]`, ""],
+    ["b", "Newton II ger accelerationen.", String.raw`\[a=\frac{12}{4{,}0}=3{,}0\ \mathrm{m/s^2}\quad\text{åt höger}\]`, ""],
+    ["c", "När båda krafterna verkar åt höger adderas de.", String.raw`\[F_{\mathrm{res}}=18+6{,}0=24\ \mathrm N\]`, ""],
+    ["d", "Beräkna accelerationen i det nya fallet.", String.raw`\[a=\frac{24}{4{,}0}=6{,}0\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`Motriktade krafter ger (12\ \mathrm N) och (3{,}0\ \mathrm{m/s^2}) åt höger. När båda verkar åt höger blir värdena (24\ \mathrm N) och (6{,}0\ \mathrm{m/s^2}).`),
+  "4.172": byggFacitListaV2([
+    ["a–b", "När personerna knuffar varandra bildar kontaktkrafterna ett kraft–motkraftspar.", String.raw`\[|\vec F_{50\to75}|=|\vec F_{75\to50}|=150\ \mathrm N\]`, "Krafterna är motriktade och verkar på olika personer."],
+    ["c", "Samma kraft verkar på olika massor.", String.raw`\[a_{50}=\frac{150}{50}=3{,}0\ \mathrm{m/s^2}\]\[a_{75}=\frac{150}{75}=2{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["d", "Om krafterna verkar lika länge från vila får den lättare personen större fartändring.", String.raw`\[\Delta v=a\Delta t\]`, "Den mindre massan ger större acceleration för samma kraft."]
+  ], String.raw`Båda påverkas av (150\ \mathrm N) i motsatta riktningar. Accelerationerna är (3{,}0\ \mathrm{m/s^2}) för 50-kilospersonen och (2{,}0\ \mathrm{m/s^2}) för 75-kilospersonen; den lättare får störst fart.`),
+  "4.173": byggFacitListaV2([
+    ["a", "Newtons andra lag och dess omskrivning är", String.raw`\[F_{\mathrm{res}}=ma,\qquad m=\frac{F_{\mathrm{res}}}{a}\]`, ""],
+    ["b", "Sätt in de givna värdena.", String.raw`\[m=\frac{270}{4{,}5}=60\ \mathrm{kg}\]`, ""],
+    ["c", "När massan är konstant fördubblas accelerationen om kraften fördubblas.", String.raw`\[a=\frac{2\cdot270}{60}=9{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["d", "Beräkna kraften för accelerationen 1,5 m/s².", String.raw`\[F=ma=60\cdot1{,}5=90\ \mathrm N\]`, ""]
+  ], String.raw`Massan är (60\ \mathrm{kg}). Dubbel kraft ger (9{,}0\ \mathrm{m/s^2}), och accelerationen (1{,}5\ \mathrm{m/s^2}) kräver (90\ \mathrm N).`),
+  "4.174": byggFacitListaV2([
+    ["a", "Varje linas komposant längs färdriktningen är närliggande katet.", String.raw`\[F_{\parallel}=800\cos30^\circ=693\ \mathrm N\]`, ""],
+    ["b", "Sidokomposanterna har vardera storleken 800 sin 30° men pekar åt motsatta håll.", String.raw`\[F_{\perp,1}+F_{\perp,2}=400-400=0\ \mathrm N\]`, ""],
+    ["c", "Komposanterna framåt adderas.", String.raw`\[F_{\mathrm{res}}=2\cdot693=1386\ \mathrm N\approx1{,}39\ \mathrm{kN}\]`, ""],
+    ["d", "Använd hela pråmens massa.", String.raw`\[a=\frac{1386}{4000}=0{,}347\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`Varje lina bidrar med (693\ \mathrm N) framåt. Sidokomposanterna tar ut varandra, resultanten blir (1{,}39\ \mathrm{kN}) och accelerationen (0{,}35\ \mathrm{m/s^2}).`),
+  "4.175": byggFacitListaV2([
+    ["a", "Klossarna rör sig tillsammans och behandlas först som ett system.", String.raw`\[m_{\mathrm{tot}}=3{,}0+2{,}0=5{,}0\ \mathrm{kg}\]`, ""],
+    ["b", "Den yttre kraften accelererar hela systemet.", String.raw`\[a=\frac{20}{5{,}0}=4{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["c", "När kraften läggs på från vänster friläggs 2,0-kilosklossen. Kontaktkraften är dess enda vågräta kraft.", String.raw`\[F_k=2{,}0\cdot4{,}0=8{,}0\ \mathrm N\]`, ""],
+    ["d", "När man trycker från höger är det i stället 3,0-kilosklossen som accelereras av kontaktkraften.", String.raw`\[F_k=3{,}0\cdot4{,}0=12\ \mathrm N\]`, "Kontaktkraften beror på hur stor massa som ligger framför kontaktytan."]
+  ], String.raw`Den totala massan är (5{,}0\ \mathrm{kg}) och accelerationen (4{,}0\ \mathrm{m/s^2}). Kontaktkraften är (8{,}0\ \mathrm N) vid tryck från vänster och (12\ \mathrm N) vid tryck från höger.`),
+  "4.206": byggFacitListaV2([
+    ["1", "Välj höger som positiv riktning och summera alla fyra krafterna med tecken.", String.raw`\[F_{\mathrm{res}}=25+8{,}0-12-15=6{,}0\ \mathrm N\]`, ""],
+    ["2", "Resultanten är positiv och därmed riktad åt höger. Beräkna accelerationen.", String.raw`\[a=\frac{6{,}0}{3{,}0}=2{,}0\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`Resultanten är (6{,}0\ \mathrm N) åt höger och accelerationen (2{,}0\ \mathrm{m/s^2}) åt höger.`),
+  "4.207": byggFacitListaV2([
+    ["a", "De två krafterna är vinkelräta.", String.raw`\[F_{\mathrm{res}}=\sqrt{40^2+30^2}=50\ \mathrm N\]`, ""],
+    ["b", "Accelerationen får samma riktning som resultanten.", String.raw`\[a=\frac{50}{10}=5{,}0\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`Resultanten är (50\ \mathrm N), och accelerationen är (5{,}0\ \mathrm{m/s^2}) i samma riktning.`),
+  "4.208": byggFacitListaV2([
+    ["1", "Använd Newtons andra lag i den form som passar varje rad.", String.raw`\[F=ma,\qquad a=\frac Fm,\qquad m=\frac Fa\]`, ""],
+    ["rad 1", "Beräkna accelerationen.", String.raw`\[a=\frac{120}{40}=3{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["rad 2", "Beräkna kraften.", String.raw`\[F=6{,}0\cdot2{,}5=15\ \mathrm N\]`, ""],
+    ["rad 3", "Beräkna massan.", String.raw`\[m=\frac{90}{4{,}5}=20\ \mathrm{kg}\]`, ""],
+    ["rad 4", "Beräkna accelerationen.", String.raw`\[a=\frac{250}{50}=5{,}0\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`De saknade värdena är (3{,}0\ \mathrm{m/s^2}), (15\ \mathrm N), (20\ \mathrm{kg}) och (5{,}0\ \mathrm{m/s^2}).`),
+  "4.227": byggFacitListaV2([
+    ["a", "Omvandla millinewton till newton och använd Newtons andra lag.", String.raw`\[F=90\ \mathrm{mN}=0{,}090\ \mathrm N\]\[a=\frac{0{,}090}{500}=1{,}8\cdot10^{-4}\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Kraften och därmed accelerationen är konstant.", String.raw`\[t=\frac{\Delta v}{a}=\frac{900}{1{,}8\cdot10^{-4}}=5{,}0\cdot10^6\ \mathrm s\]`, ""],
+    ["c", "Ett dygn är 86 400 s.", String.raw`\[t=\frac{5{,}0\cdot10^6}{86\,400}=57{,}9\ \text{dygn}\]`, ""],
+    ["d", "För samma fartändring på en timme krävs en mycket större acceleration.", String.raw`\[F=m\frac{\Delta v}{\Delta t}=500\frac{900}{3600}=125\ \mathrm N\]`, ""]
+  ], String.raw`Jonmotorn ger (1{,}8\cdot10^{-4}\ \mathrm{m/s^2}). Fartökningen tar (5{,}0\cdot10^6\ \mathrm s\approx58) dygn. På en timme skulle det krävas (125\ \mathrm N).`),
+  "4.228": byggFacitListaV2([
+    ["a", String.raw`Punkten P på linje A är ((a,F)=(2{,}5\ \mathrm{m/s^2},10\ \mathrm N)). I ett F–a-diagram är lutningen massan.`, String.raw`\[m_A=\frac Fa=\frac{10}{2{,}5}=4{,}0\ \mathrm{kg}\]`, ""],
+    ["b", String.raw`Punkten Q på linje B är ((4{,}0\ \mathrm{m/s^2},8{,}0\ \mathrm N)).`, String.raw`\[m_B=\frac{8{,}0}{4{,}0}=2{,}0\ \mathrm{kg}\]`, ""],
+    ["c", "Linje A är brantast och hör därför till den tyngsta vagnen.", String.raw`\[F=ma\Rightarrow\frac{\Delta F}{\Delta a}=m\]`, ""],
+    ["d", "Använd vagn A:s massa.", String.raw`\[F=m_Aa=4{,}0\cdot3{,}0=12\ \mathrm N\]`, ""]
+  ], String.raw`Vagn A har massan (4{,}0\ \mathrm{kg}) och vagn B (2{,}0\ \mathrm{kg}). A:s brantare linje visar den större massan. Vid (3{,}0\ \mathrm{m/s^2}) kräver A kraften (12\ \mathrm N).`),
+  "4.229": byggFacitListaV2([
+    ["a", "Addera lokets och vagnarnas massor.", String.raw`\[m_{\mathrm{tot}}=(40+20+20)\ \mathrm t=80\ \mathrm t=8{,}0\cdot10^4\ \mathrm{kg}\]`, ""],
+    ["b", "Dragkraften accelererar hela tåget.", String.raw`\[a=\frac{48\,000}{80\,000}=0{,}60\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Koppel 1 måste accelerera båda vagnarna bakom loket.", String.raw`\[F_1=(20\,000+20\,000)0{,}60=24\,000\ \mathrm N=24\ \mathrm{kN}\]`, ""],
+    ["d", "Koppel 2 accelererar bara den sista vagnen.", String.raw`\[F_2=20\,000\cdot0{,}60=12\ \mathrm{kN}\]`, "Ju längre bak ett koppel sitter, desto mindre massa finns bakom det att accelerera."]
+  ], String.raw`Tågets massa är (80\ \mathrm t) och accelerationen (0{,}60\ \mathrm{m/s^2}). Koppel 1 belastas med (24\ \mathrm{kN}) och koppel 2 med (12\ \mathrm{kN}).`),
+  "4.230": byggFacitListaV2([
+    ["a", "Omvandla farten och beräkna bussens acceleration.", String.raw`\[v_0=\frac{50}{3{,}6}=13{,}89\ \mathrm{m/s}\]\[a=\frac{0-13{,}89}{4{,}0}=-3{,}47\ \mathrm{m/s^2}\]`, "Retardationens storlek är 3,47 m/s²."],
+    ["b", "För att följa bordet utan att glida måste muggen få samma acceleration bakåt som bussen.", String.raw`\[F_{\mathrm{krav}}=m|a|=0{,}25\cdot3{,}47=0{,}868\ \mathrm N\]`, ""],
+    ["c", "Jämför den nödvändiga kraften med den största möjliga friktionen.", String.raw`\[0{,}60<0{,}868\Rightarrow\text{muggen glider}\]`, ""],
+    ["d", "Muggen behåller mer av sin ursprungliga fart än bussen och rör sig därför framåt relativt bussens bord.", "", "Newtons första lag förklarar rörelsen. Ingen kraft kastar muggen framåt; friktionskraften bakåt är bara för liten för att bromsa den lika snabbt som bussen."]
+  ], String.raw`Bussens retardation är (3{,}47\ \mathrm{m/s^2}). Muggen skulle behöva (0{,}87\ \mathrm N) bakåt men friktionen kan bara ge (0{,}60\ \mathrm N), så den glider framåt relativt bussen.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_NEWTON_V2_DEL3[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_NEWTON_V2_DEL3[uppgift.id];
+  }
+}
+
+const FACIT_NEWTON_V2_DEL4 = {
+  "4.231": byggFacitListaV2([
+    ["a", "Tyngdkraften på vikten är", String.raw`\[F_g=mg=2{,}0\cdot9{,}82=19{,}64\ \mathrm N\]`, ""],
+    ["b", "När dynamometrarna är masslösa och allt hänger stilla är spännkraften lika stor som viktens tyngd.", String.raw`\[S_B-F_g=0\Rightarrow S_B=19{,}64\ \mathrm N\]`, ""],
+    ["c", "Den masslösa dynamometern B kräver ingen extra bärkraft. Samma spännkraft överförs därför till A.", String.raw`\[S_A=S_B=19{,}64\ \mathrm N\]`, "Dynamometrarna delar inte på kraften; båda visar kraften som går genom deras egen fjäder."],
+    ["d", "Om varje dynamometer har massan 0,10 kg bär B fortfarande bara 2,0-kilosvikten, medan A dessutom bär dynamometer B.", String.raw`\[S_B=2{,}0g=19{,}6\ \mathrm N\]\[S_A=(2{,}0+0{,}10)g=20{,}6\ \mathrm N\]`, "Här används den vanliga idealiserade modellen där mätaren visar dragkraften i fjädern mot lasten under den; A:s egen vikt bärs av stativet ovanför A."]
+  ], String.raw`Med masslösa dynamometrar visar både A och B (19{,}6\ \mathrm N). Om vardera väger 0,10 kg visar B (19{,}6\ \mathrm N) och A (20{,}6\ \mathrm N).`),
+  "4.232": byggFacitListaV2([
+    ["a", "Beräkna raketens tyngdkraft vid starten.", String.raw`\[F_g=mg=0{,}60\cdot9{,}82=5{,}89\ \mathrm N\]`, ""],
+    ["b", "Strålkraften verkar uppåt och tyngdkraften nedåt.", String.raw`\[F_{\mathrm{res}}=45-5{,}89=39{,}11\ \mathrm N\quad\text{uppåt}\]`, ""],
+    ["c", "Använd Newtons andra lag med startmassan.", String.raw`\[a=\frac{39{,}11}{0{,}60}=65{,}2\ \mathrm{m/s^2}\quad\text{uppåt}\]`, ""],
+    ["d", "När vattnet är slut har strålkraften upphört. Om luftmotståndet försummas verkar bara tyngdkraften.", String.raw`\[a=-g=-9{,}82\ \mathrm{m/s^2}\]`, "Raketen kan fortfarande röra sig uppåt, men hastigheten minskar eftersom accelerationen är nedåtriktad."]
+  ], String.raw`Vid starten är tyngdkraften (5{,}89\ \mathrm N), resultanten (39{,}1\ \mathrm N) uppåt och accelerationen (65\ \mathrm{m/s^2}) uppåt. När strålen upphör är accelerationen (9{,}82\ \mathrm{m/s^2}) nedåt.`),
+  "4.233": byggFacitListaV2([
+    ["a", String.raw`Ur (F=ma) följer att kvoten (F/a) ska vara vagnens konstanta massa.`, String.raw`\[\frac{3{,}0}{1{,}2}=2{,}5,\quad\frac{6{,}0}{2{,}4}=2{,}5,\quad\frac{9{,}0}{3{,}6}=2{,}5\]\[\frac{12{,}0}{6{,}0}=2{,}0,\quad\frac{15{,}0}{6{,}0}=2{,}5\quad(\mathrm{kg})\]`, ""],
+    ["b", "Försök 4 avviker eftersom det ger en annan kvot än de övriga fyra.", "", ""],
+    ["c", "De samstämmiga försöken ger vagnens massa.", String.raw`\[m=2{,}5\ \mathrm{kg}\]`, ""],
+    ["d", "Beräkna den förväntade accelerationen i försök 4.", String.raw`\[a=\frac{12{,}0}{2{,}5}=4{,}8\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`Kvoterna är (2{,}5, 2{,}5, 2{,}5, 2{,}0, 2{,}5\ \mathrm{kg}). Försök 4 avviker. Massan är (2{,}5\ \mathrm{kg}), och försök 4 borde ha gett (4{,}8\ \mathrm{m/s^2}).`),
+  "4.234": byggFacitListaV2([
+    ["a", "Läs av slutpunkten för den räta delen av fart–tid-diagrammet.", String.raw`\[v=0{,}80\ \mathrm{m/s},\qquad\Delta t=1{,}2\ \mathrm{ms}=1{,}2\cdot10^{-3}\ \mathrm s\]`, ""],
+    ["b", "Accelerationen är grafens lutning.", String.raw`\[a=\frac{\Delta v}{\Delta t}=\frac{0{,}80}{1{,}2\cdot10^{-3}}=6{,}67\cdot10^2\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Omvandla massan och beräkna den resulterande kraft som ger accelerationen.", String.raw`\[m=0{,}45\ \mathrm{mg}=4{,}5\cdot10^{-7}\ \mathrm{kg}\]\[F_{\mathrm{res}}=ma=(4{,}5\cdot10^{-7})(6{,}67\cdot10^2)=3{,}0\cdot10^{-4}\ \mathrm N\]`, ""],
+    ["d", "Jämför resultanten med tyngdkraften.", String.raw`\[F_g=mg=4{,}42\cdot10^{-6}\ \mathrm N\]\[\frac{F_{\mathrm{res}}}{F_g}=\frac{a}{g}=67{,}9\]`, "Den resulterande kraften är cirka 68 gånger tyngdkraften. Underlagets verkliga kraft uppåt är (N=ma+mg=3{,}04\cdot10^{-4}\ \mathrm N), alltså cirka 69 gånger tyngdkraften." ]
+  ], String.raw`Loppan lämnar underlaget med (0{,}80\ \mathrm{m/s}) efter (1{,}2\ \mathrm{ms}). Accelerationen är (6{,}7\cdot10^2\ \mathrm{m/s^2}) och resultanten (3{,}0\cdot10^{-4}\ \mathrm N), cirka 68 gånger tyngdkraften.`),
+  "4.235": byggFacitListaV2([
+    ["a", "Dela upp linornas kraft i en komposant längs vattenytan.", String.raw`\[F_x=500\cos35^\circ=409{,}6\ \mathrm N\]`, ""],
+    ["b", "Den lodräta komposanten är riktad uppåt.", String.raw`\[F_y=500\sin35^\circ=286{,}8\ \mathrm N\]`, ""],
+    ["c", "Vågrätt motverkas dragkraften av vattnets bromskraft.", String.raw`\[F_{\mathrm{res},x}=409{,}6-220=189{,}6\ \mathrm N\]\[a=\frac{189{,}6}{78}=2{,}43\ \mathrm{m/s^2}\]`, ""],
+    ["d", "Ingen lodrät acceleration anges, så de lodräta krafterna balanserar varandra.", String.raw`\[N+F_y-mg=0\]\[N=78\cdot9{,}82-286{,}8=479\ \mathrm N\]`, "Draken bär en del av tyngden och minskar därför brädans tryck mot vattnet."]
+  ], String.raw`Komposanterna är (410\ \mathrm N) framåt och (287\ \mathrm N) uppåt. Accelerationen är (2{,}4\ \mathrm{m/s^2}), och normalkraften från vattnet är cirka (479\ \mathrm N).`),
+  "4.236": byggFacitListaV2([
+    ["a", "Accelerationen är fartgrafens lutning i varje fas.", String.raw`\[a_1=\frac{2{,}0-0}{4{,}0-0}=0{,}50\ \mathrm{m/s^2}\]\[a_2=0\]\[a_3=\frac{0-2{,}0}{16-14}=-1{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["b", "För linans kraft gäller S − mg = ma när uppåt är positiv riktning.", String.raw`\[S_1=m(g+a_1)=320(9{,}82+0{,}50)=3302\ \mathrm N\]`, ""],
+    ["c", "Använd respektive acceleration i de två följande faserna.", String.raw`\[S_2=320\cdot9{,}82=3142\ \mathrm N\]\[S_3=320(9{,}82-1{,}0)=2822\ \mathrm N\]`, ""],
+    ["d", "Höjden är arean under fart–tid-grafen: en triangel, en rektangel och en triangel.", String.raw`\[s=\frac{4\cdot2}{2}+10\cdot2+\frac{2\cdot2}{2}=4+20+2=26\ \mathrm m\]`, ""]
+  ], String.raw`Accelerationerna är (0{,}50, 0) och (-1{,}0\ \mathrm{m/s^2}). Linkrafterna är cirka (3{,}30, 3{,}14) och (2{,}82\ \mathrm{kN}). Hissen stannar på höjden (26\ \mathrm m).`),
+  "4.237": byggFacitListaV2([
+    ["1", "Omvandla krockfarten till meter per sekund.", String.raw`\[v_0=\frac{50}{3{,}6}=13{,}89\ \mathrm{m/s}\]`, ""],
+    ["a", "Beräkna retardationens storlek som fartändring dividerad med stopptid.", String.raw`\[|a_A|=\frac{13{,}89}{0{,}12}=116\ \mathrm{m/s^2}\]\[|a_B|=\frac{13{,}89}{0{,}015}=926\ \mathrm{m/s^2}\]`, ""],
+    ["b", "De genomsnittliga resulterande krafterna blir", String.raw`\[F_A=75\cdot116=8{,}68\ \mathrm{kN}\]\[F_B=75\cdot926=69{,}4\ \mathrm{kN}\]`, ""],
+    ["c", "Jämför kraften i fall B med dockans tyngdkraft.", String.raw`\[F_g=75\cdot9{,}82=736{,}5\ \mathrm N\]\[\frac{69\,400}{736{,}5}=94{,}3\]`, ""],
+    ["d", "Vid konstant retardation är medelfarten hälften av begynnelsefarten.", String.raw`\[s_A=\frac{13{,}89}{2}\cdot0{,}12=0{,}833\ \mathrm m\]\[s_B=\frac{13{,}89}{2}\cdot0{,}015=0{,}104\ \mathrm m\]`, "Bälte och krockkudde förlänger stopptiden och stoppsträckan. Samma fartändring sker då med mycket mindre acceleration och kraft."]
+  ], String.raw`Retardationerna är cirka (116) och (926\ \mathrm{m/s^2}), och krafterna (8{,}7) respektive (69\ \mathrm{kN}). Fall B motsvarar cirka 94 gånger tyngdkraften. Stoppsträckorna är (0{,}83) och (0{,}10\ \mathrm m).`),
+  "4.238": byggFacitListaV2([
+    ["a", "Beräkna tyngdkraften före ballasten släpps.", String.raw`\[F_g=4{,}0\cdot9{,}82=39{,}28\ \mathrm N\]`, ""],
+    ["b", "Lyftkraften är större än tyngdkraften.", String.raw`\[F_{\mathrm{res}}=52-39{,}28=12{,}72\ \mathrm N\]\[a=\frac{12{,}72}{4{,}0}=3{,}18\ \mathrm{m/s^2}\quad\text{uppåt}\]`, ""],
+    ["c", "Efter släppet är massan 3,5 kg medan lyftkraften är oförändrad.", String.raw`\[F_{\mathrm{res}}=52-3{,}5\cdot9{,}82=17{,}63\ \mathrm N\]\[a=\frac{17{,}63}{3{,}5}=5{,}04\ \mathrm{m/s^2}\quad\text{uppåt}\]`, ""],
+    ["d", "Vid svävning är kraftresultanten noll.", String.raw`\[52-mg=0\Rightarrow m=\frac{52}{9{,}82}=5{,}30\ \mathrm{kg}\]`, ""]
+  ], String.raw`Tyngdkraften är (39{,}3\ \mathrm N), och startaccelerationen (3{,}18\ \mathrm{m/s^2}) uppåt. Efter ballastsläppet blir accelerationen (5{,}04\ \mathrm{m/s^2}). Svävning kräver totalmassan (5{,}30\ \mathrm{kg}).`),
+  "4.239": byggFacitListaV2([
+    ["a", "Farkosten trycker gaserna bakåt med 2,4 kN. Enligt Newtons tredje lag trycker gaserna på farkosten med lika stor kraft framåt.", String.raw`\[\vec F_{\mathrm{gas\to farkost}}=-\vec F_{\mathrm{farkost\to gas}}\]`, "Motkraften är alltså 2,4 kN framåt och verkar på farkosten."],
+    ["b", "Beräkna farkostens acceleration.", String.raw`\[a=\frac{2400}{800}=3{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Raketen behöver inte trycka mot omgivande luft. Den accelererar sina egna gaser bakåt och får själv motkraften framåt.", "", "Kraft och motkraft tar inte ut varandra eftersom de verkar på olika kroppar."],
+    ["d", "I vakuum saknas luftmotstånd och det omgivande trycket vid munstycket är lägre.", "", "Därför ger en given raketmotor normalt något större nettodragkraft i vakuum än vid havsnivå."]
+  ], String.raw`Gaserna trycker farkosten framåt med (2{,}4\ \mathrm{kN}), vilket ger (3{,}0\ \mathrm{m/s^2}). En raket fungerar genom att kasta ut egen massa bakåt och behöver ingen luft att trycka mot.`),
+  "4.240": byggFacitMedGrafV2(
+    byggFacitGrafV2({xMax:3,yMax:7.5,serier:[{punkter:[[0,0],[0.25,2.35],[0.5,4.20],[0.75,5.41],[1,6.08],[1.5,6.62],[2,6.76],[2.5,6.79],[3,6.80]]},{punkter:[[0,6.8],[3,6.8]],namn:"v_g"}],xEtikett:"t / s",yEtikett:"v / (m/s)",aria:"Badmintonbollens fart ökar snabbt från noll och planar asymptotiskt ut mot gränsfarten 6,8 meter per sekund."}),
+    [
+      ["a", "Vid gränsfarten är accelerationen noll. Luftmotståndet uppåt balanserar tyngdkraften nedåt.", String.raw`\[kv_g^2=mg\]\[k=\frac{mg}{v_g^2}=\frac{0{,}0050\cdot9{,}82}{6{,}8^2}=1{,}06\cdot10^{-3}\ \mathrm{kg/m}\]`, ""],
+      ["b", "Vid halva gränsfarten är luftmotståndet en fjärdedel av värdet vid gränsfarten.", String.raw`\[F_{\mathrm{luft}}=k(3{,}4)^2=0{,}0123\ \mathrm N\]\[F_{\mathrm{res}}=0{,}0491-0{,}0123=0{,}0368\ \mathrm N\]\[a=\frac{0{,}0368}{0{,}0050}=7{,}37\ \mathrm{m/s^2}\quad\text{nedåt}\]`, ""],
+      ["c", String.raw`Sätt generellt (v=v_g/2) och använd (kv_g^2=mg).`, String.raw`\[F_{\mathrm{luft}}=k\left(\frac{v_g}{2}\right)^2=\frac14kv_g^2=\frac14mg\]\[a=\frac{mg-\frac14mg}{m}=\frac34g=0{,}75g\]`, "Massan, k och gränsfarten försvinner ur uttrycket."],
+      ["d", "Från vila är luftmotståndet först noll och accelerationen g. När farten växer ökar motståndet, så grafens lutning minskar.", String.raw`\[v\longrightarrow v_g=6{,}8\ \mathrm{m/s}\]`, "Om farten blev större än gränsfarten skulle luftmotståndet bli större än tyngdkraften och bromsa bollen tillbaka."]
+    ],
+    String.raw`(k=1{,}06\cdot10^{-3}\ \mathrm{kg/m}). Vid (3{,}4\ \mathrm{m/s}) är accelerationen (7{,}37\ \mathrm{m/s^2}=0{,}75g) nedåt. Farten närmar sig asymptotiskt (6{,}8\ \mathrm{m/s}).`
+  ),
+  "4.241": byggFacitListaV2([
+    ["a", "Den yttre kraften 30 N accelererar hela kedjan.", String.raw`\[a=\frac{F}{m}=\frac{30}{12}=2{,}5\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Ett snitt mitt på kedjan måste dra den bakre halvan, vars massa är 6,0 kg.", String.raw`\[S_{\mathrm{mitt}}=6{,}0\cdot2{,}5=15\ \mathrm N\]`, ""],
+    ["c", "Massan per meter är 12/3,0 = 4,0 kg/m. Bakom ett snitt på avståndet x från den dragna änden finns längden 3,0 − x.", String.raw`\[m_{\mathrm{bak}}=4{,}0(3{,}0-x)\]\[S(x)=m_{\mathrm{bak}}a=4{,}0(3{,}0-x)2{,}5\]\[S(x)=30-10x\]`, String.raw`Här anges (S) i newton och (x) i meter.`],
+    ["d", "Vid den fria bakänden är x = 3,0 m.", String.raw`\[S(3{,}0)=30-10\cdot3{,}0=0\ \mathrm N\]`, "Bakom ändpunkten finns ingen återstående kedjemassa att accelerera. Spännkraften avtar därför linjärt från 30 N till noll."]
+  ], String.raw`Kedjans acceleration är (2{,}5\ \mathrm{m/s^2}), spännkraften mitt på är (15\ \mathrm N), och (S(x)=30-10x). Vid den fria änden är spännkraften noll.`),
+  "4.290": byggFacitListaV2([
+    ["a", "Viktmagasinets tyngdkraft är", String.raw`\[F_g=mg=35\cdot9{,}82=343{,}7\ \mathrm N\]`, ""],
+    ["b", "Magasinet hänger stilla, så vajerkraften balanserar tyngdkraften.", String.raw`\[S=F_g=343{,}7\ \mathrm N\]`, ""],
+    ["c", "I en masslös vajer över en friktionsfri trissa är spännkraften lika stor på båda sidor.", String.raw`\[F_{\mathrm{hand}}=S=343{,}7\ \mathrm N\]`, "Den fasta trissan ändrar kraftens riktning men ger ingen kraftvinst."],
+    ["d", "Båda lodräta vajerdelarna drar trissan nedåt med S.", String.raw`\[F_{\mathrm{axel}}=2S=2\cdot343{,}7=687{,}4\ \mathrm N\]`, "Axeln ger en lika stor stödreaktion uppåt på trissan."]
+  ], String.raw`Tyngdkraften, vajerkraften och handkraften är vardera cirka (344\ \mathrm N). Trissans axel belastas med cirka (687\ \mathrm N).`),
+  "4.292": byggFacitListaV2([
+    ["a", "Tyngdkraften verkar nedåt.", String.raw`\[F_g=mg=80\cdot9{,}82=785{,}6\ \mathrm N\]`, ""],
+    ["b", "Den resulterande kraften ska ge accelerationen 0,60 m/s² uppåt.", String.raw`\[F_{\mathrm{res}}=ma=80\cdot0{,}60=48\ \mathrm N\quad\text{uppåt}\]`, ""],
+    ["c", "Lyftkraften måste både balansera tyngdkraften och ge resultanten uppåt.", String.raw`\[F_{\mathrm{lyft}}-F_g=ma\]\[F_{\mathrm{lyft}}=785{,}6+48=833{,}6\ \mathrm N\]`, ""],
+    ["d", "Vid konstant fart är accelerationen noll.", String.raw`\[F_{\mathrm{lyft}}=F_g=785{,}6\ \mathrm N\]`, ""]
+  ], String.raw`Tyngdkraften är (786\ \mathrm N), resultanten (48\ \mathrm N) uppåt och lyftkraften (834\ \mathrm N). Vid konstant fart är lyftkraften (786\ \mathrm N).`),
+  "4.293": byggFacitListaV2([
+    ["a", "Personens tyngdkraft är", String.raw`\[F_g=mg=65\cdot9{,}82=638{,}3\ \mathrm N\]`, ""],
+    ["b", "När personen hänger stilla och armarna belastas lika delar de på tyngden.", String.raw`\[2F=F_g\Rightarrow F=\frac{638{,}3}{2}=319\ \mathrm N\]`, ""],
+    ["c", "Med en hand måste den enda armen bära hela tyngden.", String.raw`\[F=638\ \mathrm N\]`, ""],
+    ["d", "När personen accelererar uppåt ska armarnas sammanlagda kraft dessutom ge en resultant uppåt.", String.raw`\[F_{\mathrm{arm}}-mg=ma\]\[F_{\mathrm{arm}}=65(9{,}82+0{,}80)=690\ \mathrm N\]`, ""]
+  ], String.raw`Tyngdkraften är (638\ \mathrm N). Varje arm belastas med (319\ \mathrm N) vid stilla tvåhandshäng och en arm med (638\ \mathrm N). Vid accelerationen (0{,}80\ \mathrm{m/s^2}) är armarnas sammanlagda kraft (690\ \mathrm N).`),
+  "4.298": byggFacitListaV2([
+    ["1", "Varje kabelkraft delas upp i en bakåtkomposant och en sidokomposant.", String.raw`\[F_{\mathrm{bak},1}=200\cos40^\circ=153{,}2\ \mathrm N\]\[F_{\mathrm{sida},1}=200\sin40^\circ=128{,}6\ \mathrm N\]`, ""],
+    ["a", "Sidokomposanterna är lika stora och motriktade. Bakåtkomposanterna verkar åt samma håll.", String.raw`\[F_{\mathrm{bak,tot}}=2\cdot153{,}2=306{,}4\ \mathrm N\]`, ""],
+    ["b", "Kablarna drar vågrätt, så normalkraften är lika stor som tyngdkraften. Den maximala statiska friktionen måste minst balansera kabelkraften.", String.raw`\[N=mg=65\cdot9{,}82=638{,}3\ \mathrm N\]\[\mu_{\min}N=306{,}4\Rightarrow\mu_{\min}=\frac{306{,}4}{638{,}3}=0{,}480\]`, ""]
+  ], String.raw`Kablarna drar sammanlagt (306\ \mathrm N) bakåt. Det behövs minst friktionstalet (mu\approx0{,}48) för att personen ska stå kvar.`),
+  "4.303": byggFacitListaV2([
+    ["1", "Magasinet rör sig med konstant fart, så den rörliga trissan med lasten är i kraftjämvikt.", String.raw`\[F_g=mg=40\cdot9{,}82=392{,}8\ \mathrm N\]`, ""],
+    ["2", "Två vajerdelar bär den rörliga trissan. I den friktionsfria, masslösa vajern är spännkraften S lika stor överallt.", String.raw`\[2S=F_g\Rightarrow S=\frac{392{,}8}{2}=196{,}4\ \mathrm N\]`, "Den fasta trissan ändrar bara dragriktningen, så personen drar med samma kraft S."],
+    ["3", "När den rörliga trissan höjs 20 cm förkortas vardera bärande vajerdel med 20 cm.", String.raw`\[s_{\mathrm{hand}}=2\cdot0{,}20=0{,}40\ \mathrm m\]`, ""],
+    ["4", "Kontrollera med arbete i den ideala maskinen.", String.raw`\[W_{\mathrm{person}}=196{,}4\cdot0{,}40=78{,}6\ \mathrm J\]\[\Delta E_p=392{,}8\cdot0{,}20=78{,}6\ \mathrm J\]`, "Det man vinner i kraft förlorar man i väg."]
+  ], String.raw`Personen drar med cirka (196\ \mathrm N) och måste dra handtaget (0{,}40\ \mathrm m=40\ \mathrm{cm}) för att lyfta magasinet 20 cm.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_NEWTON_V2_DEL4[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_NEWTON_V2_DEL4[uppgift.id];
+  }
+}
+
+const FACIT_MOMENT_V2_DEL1 = {
+  "4.6": byggFacitListaV2([
+    ["1", String.raw`Låt stegens längd vara (L). Väggen är slät, så den ger bara en horisontell normalkraft (N_v) vid stegens överände.`, "", "Vid golvet verkar en normalkraft uppåt och statisk friktion horisontellt."],
+    ["2", "Ta moment kring stegens fot. Då ger krafterna från golvet inget moment.", String.raw`\[N_vL\sin\theta=mg\frac L2\cos\theta\]\[N_v=\frac{mg}{2\tan\theta}\]`, ""],
+    ["3", "Horisontell jämvikt ger att friktionen är lika stor som väggens normalkraft. Golvets normalkraft är mg.", String.raw`\[f=N_v,\qquad N_g=mg\]`, ""],
+    ["a", "Vid glidgränsen är den statiska friktionen som störst.", String.raw`\[\frac{mg}{2\tan\theta}\leq\mu mg\]\[\tan\theta\geq\frac{1}{2\mu}=\frac{1}{0{,}80}=1{,}25\]\[\theta_{\min}=\arctan(1{,}25)=51{,}3^\circ\]`, ""],
+    ["b", "Massan förkortas bort ur villkoret.", "", "För en likformig stege med samma friktionstal spelar massan därför ingen roll för gränsvinkeln."]
+  ], String.raw`Stegen måste bilda minst (51{,}3^\circ) mot golvet. I den idealiserade modellen är gränsvinkeln oberoende av stegens massa.`),
+  "4.7": byggFacitListaV2([
+    ["a", "Kraften är vinkelrät mot handtaget, så hävarmen är hela handtagslängden.", String.raw`\[M=Fl\Rightarrow F=\frac Ml=\frac{180}{0{,}40}=450\ \mathrm N\]`, ""],
+    ["b", "Lös i stället ut den hävarm som behövs när kraften högst är 250 N.", String.raw`\[l=\frac MF=\frac{180}{250}=0{,}72\ \mathrm m\]`, ""],
+    ["c", "Ett förlängningsrör ökar hävarmen och gör det lätt att skapa stora moment med liten handkraft.", "", "På en vanlig nyckel kan bulten därför överbelastas. En klickmomentnyckel är däremot kalibrerad som ett helt verktyg: ett rör kan belasta handtaget fel, skada mekanismen och försämra noggrannheten. Det betyder inte automatiskt att bultmomentet blir större än inställningen vid ett normalt klick." ]
+  ], String.raw`Det krävs (450\ \mathrm N) med ett 0,40 m långt handtag. Vid högst (250\ \mathrm N) behövs (0{,}72\ \mathrm m). Förlängningsrör ska inte användas på en momentnyckel om tillverkaren inte uttryckligen tillåter det.`),
+  "4.10": byggFacitListaV2([
+    ["a", "Vid tippgränsen är momenten kring tornet lika stora.", String.raw`\[m_Lg\cdot15=(4000g)\cdot6{,}0\]\[m_L=\frac{4000\cdot6{,}0}{15}=1600\ \mathrm{kg}\]`, "Tyngdaccelerationen finns på båda sidor och förkortas bort."],
+    ["b", "Lastens moment är produkten av dess tyngdkraft och avståndet till tornet.", String.raw`\[M_L=m_Lgr\]`, "När lasten flyttas längre ut ökar momentet. Utan ytterligare motmoment kan kranen tippa."],
+    ["c", "En kort motviktsarm kräver en stor motviktsmassa för samma moment.", "", "Den kortare bakarmen håller kranen kompakt och minskar det område som måste vara fritt när kranen svänger, men kräver en tung motvikt." ]
+  ], String.raw`Kranen klarar (1600\ \mathrm{kg}) på 15 m avstånd i den idealiserade jämviktsmodellen. Längre avstånd minskar den tillåtna lasten eftersom lastmomentet ökar.`),
+  "4.11": byggFacitListaV2([
+    ["1", "Välj hjulaxeln som vridningspunkt. Då ger hjulets stödreaktion inget moment.", String.raw`\[F_g=mg=60\cdot9{,}82=589{,}2\ \mathrm N\]`, ""],
+    ["a", "Momentjämvikt ger", String.raw`\[F\cdot1{,}4=589{,}2\cdot0{,}45\]\[F=189{,}4\ \mathrm N\]`, ""],
+    ["b", "Om lasten flyttas närmare hjulet minskar dess hävarm och därmed dess moment.", String.raw`\[F=\frac{mgl_{\mathrm{last}}}{l_{\mathrm{handtag}}}\]`, "Lyftkraften vid handtagen blir därför mindre." ]
+  ], String.raw`Det krävs cirka (189\ \mathrm N) vid handtagen. Kraften minskar när lasten flyttas närmare hjulet.`),
+  "4.12": byggFacitListaV2([
+    ["1", "Mobilen är i momentjämvikt kring upphängningspunkten. Tyngdaccelerationen är gemensam för båda figurerna.", String.raw`\[m_1g l_1=m_2g l_2\Rightarrow m_1l_1=m_2l_2\]`, ""],
+    ["2", "Sätt in massan 30 g och de två hävarmarna.", String.raw`\[m_2=\frac{30\cdot12}{28}=12{,}86\ \mathrm g\]`, ""]
+  ], String.raw`Figuren på andra sidan ska ha massan cirka (12{,}9\ \mathrm g).`),
+  "4.14": byggFacitListaV2([
+    ["1", "Välj kajkanten som möjlig tippunkt. Plankan är likformig, så tyngdpunkten ligger mitt på den 4,0 m långa plankan.", String.raw`\[x_{\mathrm{tp}}=-3{,}2+2{,}0=-1{,}2\ \mathrm m\]`, "Plankans tyngd verkar alltså 1,2 m innanför kajkanten."],
+    ["2", "Vid tippgränsen är kajens övriga stödreaktion noll och momenten kring kanten lika stora.", String.raw`\[(70g)x=(20g)1{,}2\]`, ""],
+    ["3", "Lös ut personens avstånd från kanten.", String.raw`\[x=\frac{20\cdot1{,}2}{70}=0{,}343\ \mathrm m\]`, ""]
+  ], String.raw`Personen kan gå cirka (0{,}34\ \mathrm m) utanför kajkanten innan plankan börjar tippa.`),
+  "4.15": byggFacitListaV2([
+    ["a", "Kraften är vinkelrät mot dörren, så den vinkelräta hävarmen är 0,80 m.", String.raw`\[M=Fl=15\cdot0{,}80=12\ \mathrm{Nm}\]`, ""],
+    ["b", "Mitt på dörren är hävarmen 0,40 m. Samma moment ska åstadkommas.", String.raw`\[F=\frac{M}{l}=\frac{12}{0{,}40}=30\ \mathrm N\]`, ""]
+  ], String.raw`Momentet är (12\ \mathrm{Nm}). Om kraften angriper mitt på dörren krävs (30\ \mathrm N).`),
+  "4.48": byggFacitListaV2([
+    ["1", "Stenens tyngdkraft verkar 0,30 m från stödpunkten.", String.raw`\[F_g=mg=25\cdot9{,}82=245{,}5\ \mathrm N\]`, ""],
+    ["2", "Vid begynnande lyft balanserar momenten kring stödpunkten varandra.", String.raw`\[F\cdot1{,}2=245{,}5\cdot0{,}30\]`, ""],
+    ["3", "Lös ut handkraften.", String.raw`\[F=\frac{245{,}5\cdot0{,}30}{1{,}2}=61{,}4\ \mathrm N\]`, ""]
+  ], String.raw`Det krävs cirka (61\ \mathrm N), om spettets massa och övriga förluster försummas.`),
+  "4.49": byggFacitListaV2([
+    ["1", "Personens tyngdkraft är den enda lasten på den masslösa bryggan.", String.raw`\[F_g=60\cdot9{,}82=589{,}2\ \mathrm N\]`, ""],
+    ["a", "Ta moment kring vänster stöd. Då försvinner vänster stödreaktion ur momentekvationen.", String.raw`\[R_H\cdot4{,}0=589{,}2\cdot1{,}0\]\[R_H=147{,}3\ \mathrm N\]`, ""],
+    ["b", "Kraftjämvikt lodrätt ger vänster stödreaktion.", String.raw`\[R_V+R_H=589{,}2\]\[R_V=589{,}2-147{,}3=441{,}9\ \mathrm N\]`, ""],
+    ["c", "När personen går mot mitten ökar kraften i höger stöd och minskar i vänster.", String.raw`\[x=2{,}0\ \mathrm m\Rightarrow R_V=R_H=\frac{589{,}2}{2}=294{,}6\ \mathrm N\]`, ""]
+  ], String.raw`Höger stöd bär (147\ \mathrm N) och vänster (442\ \mathrm N). Vid mitten bär de (295\ \mathrm N) vardera.`),
+  "4.50": byggFacitListaV2([
+    ["a", "Det är kraftens vinkelräta komposant som skapar moment kring muttern.", String.raw`\[M=Fl\sin\theta=200\cdot0{,}35\sin55^\circ=57{,}3\ \mathrm{Nm}\]`, ""],
+    ["b", "Vid vinkelrätt drag är vinkeln 90° och sinusvärdet 1.", String.raw`\[M_{90}=200\cdot0{,}35=70\ \mathrm{Nm}\]`, ""],
+    ["c", "Momentet blir störst när kraften är vinkelrät och angriper så långt från vridningspunkten som möjligt.", String.raw`\[M_{\max}=Fl\]`, ""]
+  ], String.raw`Momentet är cirka (57\ \mathrm{Nm}) vid (55^\circ) och (70\ \mathrm{Nm}) vid vinkelrätt drag.`),
+  "4.51": byggFacitMedGrafV2(
+    byggFacitGrafV2({xMax:20,yMax:2500,serier:[{punkter:[[8,2187.5],[10,1750],[12,1458.3],[14,1250],[16,1093.8],[18,972.2],[20,875]]}],xEtikett:"r / m",yEtikett:"m_max / kg",aria:"Den största tillåtna lastmassan minskar hyperboliskt från drygt 2 100 kilogram vid 8 meter till 875 kilogram vid 20 meter."}),
+    [
+      ["1", "Vid tippgränsen balanserar lastens moment motviktens moment.", String.raw`\[m_Lgr=(3500g)5{,}0\Rightarrow m_L(r)=\frac{17\,500}{r}\]`, ""],
+      ["a", "Beräkna lasten vid 20 m.", String.raw`\[m_L(20)=\frac{17\,500}{20}=875\ \mathrm{kg}\]`, ""],
+      ["b", "Beräkna lasten vid 8,0 m.", String.raw`\[m_L(8{,}0)=\frac{17\,500}{8{,}0}=2187{,}5\ \mathrm{kg}\]`, ""],
+      ["c", String.raw`Sambandet (m_L=17\,500/r) är omvänt proportionellt.`, "", "Grafen är en avtagande hyperbel: massan minskar snabbt vid små avstånd och långsammare längre ut." ]
+    ],
+    String.raw`Kranen klarar (875\ \mathrm{kg}) vid 20 m och cirka (2{,}19\ \mathrm t) vid 8,0 m. Lastkurvan är hyperbolisk.`
+  ),
+  "4.60": byggFacitListaV2([
+    ["a", "Jämvikt kräver lika stora motriktade moment kring stödpunkten.", String.raw`\[F_1\cdot0{,}40=F_2\cdot1{,}2\]`, ""],
+    ["b", "Lös ut F₂ när F₁ = 300 N.", String.raw`\[F_2=\frac{300\cdot0{,}40}{1{,}2}=100\ \mathrm N\]`, ""]
+  ], String.raw`Momentvillkoret är (F_1\cdot0{,}40=F_2\cdot1{,}2), vilket ger (F_2=100\ \mathrm N).`),
+  "4.61": byggFacitListaV2([
+    ["a", "Barnens tyngdkrafter ger motriktade moment. Tyngdaccelerationen förkortas bort.", String.raw`\[(35g)1{,}5=(m_Hg)1{,}0\]\[m_H=35\cdot1{,}5=52{,}5\ \mathrm{kg}\]`, ""],
+    ["b", "Jämför momenten när det högra barnet i stället har massan 48 kg.", String.raw`\[M_V=35g\cdot1{,}5=515{,}6\ \mathrm{Nm}\]\[M_H=48g\cdot1{,}0=471{,}4\ \mathrm{Nm}\]`, "Vänstermomentet är störst, så vänster sida går ned." ]
+  ], String.raw`Det högra barnet behöver väga (52{,}5\ \mathrm{kg}) för jämvikt. Med (48\ \mathrm{kg}) tippar brädan åt vänster.`),
+  "4.62": byggFacitListaV2([
+    ["a", "Beräkna momentbeloppen kring stödet.", String.raw`\[M_V=600\cdot0{,}80=480\ \mathrm{Nm}\]\[M_H=240\cdot2{,}0=480\ \mathrm{Nm}\]`, ""],
+    ["b", "Momenten är lika stora och har motsatta vridriktningar.", String.raw`\[\sum M=480-480=0\]`, "Balken är därför i rotationsjämvikt."],
+    ["c", "Lös momentvillkoret för den högra hävarmen.", String.raw`\[600\cdot0{,}80=240x\Rightarrow x=2{,}0\ \mathrm m\]`, ""]
+  ], String.raw`Båda momenten är (480\ \mathrm{Nm}), så balken är i jämvikt. Den högra lasten ska sitta (2{,}0\ \mathrm m) från stödet.`),
+  "4.68": byggFacitListaV2([
+    ["a", "En likformig plankas tyngdpunkt ligger mitt på längden.", String.raw`\[x_{\mathrm{tp}}=\frac{3{,}6}{2}=1{,}8\ \mathrm m\quad\text{från vänster ände}\]`, ""],
+    ["b", "Det högra stödet ligger 3,6 − 0,9 = 2,7 m från vänster ände. Plankans tyngdpunkt är därför 0,9 m innanför detta stöd.", String.raw`\[l_{\mathrm{planka}}=2{,}7-1{,}8=0{,}9\ \mathrm m\]`, ""],
+    ["c", "Vid tippgränsen är stödreaktionen vid vänster stöd noll. Ta moment kring höger stöd.", String.raw`\[(65g)x=(14g)0{,}9\]\[x=\frac{14\cdot0{,}9}{65}=0{,}194\ \mathrm m\]`, ""]
+  ], String.raw`Tyngdpunkten ligger (1{,}8\ \mathrm m) från vänster ände. Personen kan gå cirka (0{,}19\ \mathrm m) utanför det högra stödet innan plankan tippar.`),
+  "4.72": byggFacitListaV2([
+    ["a", "Stöden bär hantverkarens och plankans sammanlagda tyngd.", String.raw`\[R_V+R_H=(78+32)9{,}82=1080{,}2\ \mathrm N\]`, ""],
+    ["b", "Ta moment kring vänster stöd. Plankans tyngd verkar mitt på plankan.", String.raw`\[R_H\cdot5{,}0=(78g)1{,}5+(32g)2{,}5\]\[R_H=386{,}9\ \mathrm N\]\[R_V=1080{,}2-386{,}9=693{,}3\ \mathrm N\]`, ""],
+    ["c", "Plankans egen tyngd ligger redan symmetriskt mellan stöden. För lika stödreaktioner måste även hantverkarens tyngd verka mitt emellan dem.", String.raw`\[x=2{,}5\ \mathrm m\]`, ""]
+  ], String.raw`Stöden bär tillsammans (1{,}08\ \mathrm{kN}). Vänster stöd bär (693\ \mathrm N) och höger (387\ \mathrm N). De bär lika mycket när hantverkaren står mitt på plankan.`),
+  "4.75": byggFacitListaV2([
+    ["a", "Kraften är vinkelrät, så hävarmen är 0,18 m.", String.raw`\[M=Fl=120\cdot0{,}18=21{,}6\ \mathrm{Nm}\]`, ""],
+    ["b", "Samma moment ska skapas med hävarmen 0,12 m.", String.raw`\[F=\frac{21{,}6}{0{,}12}=180\ \mathrm N\]`, ""]
+  ], String.raw`Momentet är (21{,}6\ \mathrm{Nm}). Vid 12 cm hävarm krävs (180\ \mathrm N).`),
+  "4.76": byggFacitListaV2([
+    ["a", "Vid handtaget är hävarmen 0,75 m.", String.raw`\[M_{75}=25\cdot0{,}75=18{,}75\ \mathrm{Nm}\]`, ""],
+    ["b", "Närmare gångjärnet är hävarmen bara 0,20 m.", String.raw`\[M_{20}=25\cdot0{,}20=5{,}0\ \mathrm{Nm}\]`, ""],
+    ["c", "För en given handkraft är momentet proportionellt mot hävarmen.", String.raw`\[\frac{M_{75}}{M_{20}}=\frac{0{,}75}{0{,}20}=3{,}75\]`, "Därför placeras handtaget långt från gångjärnen." ]
+  ], String.raw`Momenten är (18{,}8\ \mathrm{Nm}) vid 75 cm och (5{,}0\ \mathrm{Nm}) vid 20 cm. Det yttre läget ger 3,75 gånger större moment.`),
+  "4.77": byggFacitListaV2([
+    ["1", "Lastens tyngdkraft är", String.raw`\[F_g=60\cdot9{,}82=589{,}2\ \mathrm N\]`, ""],
+    ["a", "Ta moment kring hjulaxeln.", String.raw`\[F_H\cdot1{,}40=589{,}2\cdot0{,}50\]\[F_H=210{,}4\ \mathrm N\]`, ""],
+    ["b", "Kraftjämvikt lodrätt ger hjulets stödreaktion.", String.raw`\[R_{\mathrm{hjul}}+F_H-F_g=0\]\[R_{\mathrm{hjul}}=589{,}2-210{,}4=378{,}8\ \mathrm N\]`, ""],
+    ["c", "När lasten skjuts närmare hjulet minskar dess hävarm och moment.", "", "Därmed behövs mindre lyftkraft vid handtagen." ]
+  ], String.raw`Lyftkraften är cirka (210\ \mathrm N) och hjulet bär cirka (379\ \mathrm N). När lasten flyttas närmare hjulet minskar lyftkraften.`),
+  "4.78": byggFacitListaV2([
+    ["1", "Plankans tyngdpunkt ligger mitt på plankan, 2,0 m från vänster ände. Den ligger alltså 0,50 m till höger om stödet.", "", ""],
+    ["a", "Klossen ligger 1,5 m till vänster om stödet. Momentjämvikt ger", String.raw`\[(m_kg)1{,}5=(18g)0{,}50\]\[m_k=\frac{18\cdot0{,}50}{1{,}5}=6{,}0\ \mathrm{kg}\]`, ""],
+    ["b", "Stödet bär hela den sammanlagda tyngden.", String.raw`\[R=(18+6{,}0)9{,}82=235{,}7\ \mathrm N\]`, ""],
+    ["c", "På månen multipliceras båda momenten med samma mindre tyngdacceleration.", String.raw`\[m_kg_{\mathrm m}l_1=m_pg_{\mathrm m}l_2\Rightarrow m_kl_1=m_pl_2\]`, "Massan som krävs för balans är därför fortfarande 6,0 kg." ]
+  ], String.raw`Klossens massa är (6{,}0\ \mathrm{kg}), och stödet trycker uppåt med cirka (236\ \mathrm N) på jorden. Balansmassan är densamma på månen.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_MOMENT_V2_DEL1[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_MOMENT_V2_DEL1[uppgift.id];
+  }
+}
+
+const FACIT_MOMENT_V2_DEL2 = {
+  "4.79": byggFacitListaV2([
+    ["a", "Tornet är vridningspunkt. Vid momentjämvikt är motviktens och lastens moment lika stora.", String.raw`\[(m_Mg)4{,}0=(800g)10\]\[m_M=\frac{800\cdot10}{4{,}0}=2000\ \mathrm{kg}\]`, ""],
+    ["b", "När lasten flyttas till 12 m ökar dess moment, medan motviktens moment är oförändrat.", String.raw`\[M_L/g=800\cdot12=9600\ \mathrm{kg,m}\]\[M_M/g=2000\cdot4{,}0=8000\ \mathrm{kg,m}\]`, "Lastsidan ger det större momentet och kranen tenderar att tippa framåt."],
+    ["c", "Lös momentvillkoret för lastens största avstånd med samma motvikt.", String.raw`\[(2000g)4{,}0=(800g)r_{\max}\]\[r_{\max}=10\ \mathrm m\]`, ""]
+  ], String.raw`Motvikten behöver ha massan (2000\ \mathrm{kg}). Med lasten på 12 m tippar momentbalansen åt lastsidan. Jämviktsgränsen ligger vid (10\ \mathrm m).`),
+  "4.80": byggFacitListaV2([
+    ["1", "Beräkna först höjden där stegen träffar väggen.", String.raw`\[h=\sqrt{4{,}0^2-1{,}6^2}=3{,}666\ \mathrm m\]`, ""],
+    ["2", "Stegen är homogen. Tyngdpunkten ligger därför mitt på och dess lodräta verkningslinje är 0,80 m från stegens fot i horisontalled.", String.raw`\[F_g=mg=12\cdot9{,}82=117{,}84\ \mathrm N\]`, ""],
+    ["a", "Ta moment kring foten. Väggens normalkraft är vågrät och har hävarmen h.", String.raw`\[N_vh=F_g\cdot0{,}80\]\[N_v=\frac{117{,}84\cdot0{,}80}{3{,}666}=25{,}7\ \mathrm N\]`, ""],
+    ["b", "Horisontell kraftjämvikt kräver att golvfriktionen balanserar väggkraften.", String.raw`\[f=N_v=25{,}7\ \mathrm N\]`, ""],
+    ["c", "Lodrätt bär golvets normalkraft hela stegens tyngd. Vid glidgränsen gäller f = μN.", String.raw`\[N_g=117{,}84\ \mathrm N\]\[\mu_{\min}=\frac{25{,}7}{117{,}84}=0{,}218\]`, ""]
+  ], String.raw`Väggen trycker med (25{,}7\ \mathrm N), golvets friktion är (25{,}7\ \mathrm N), och det minsta friktionstalet är cirka (0{,}22).`),
+  "4.81": byggFacitListaV2([
+    ["1", "Hyllan tippar kring den främre nedre kanten. Tyngdpunkten ligger 0,20 m innanför kanten.", String.raw`\[M_g=mg\cdot0{,}20=35\cdot9{,}82\cdot0{,}20=68{,}74\ \mathrm{Nm}\]`, ""],
+    ["a", "Vid tippgränsen balanserar dragkraftens moment tyngdkraftens återställande moment.", String.raw`\[F\cdot1{,}80=68{,}74\Rightarrow F=38{,}2\ \mathrm N\]`, ""],
+    ["b", "När kraften angriper på halva höjden halveras dess hävarm.", String.raw`\[F\cdot0{,}90=68{,}74\Rightarrow F=76{,}4\ \mathrm N\]`, ""],
+    ["c", "Stor höjd ger en stor hävarm för den tippande kraften, medan litet djup ger en liten hävarm för tyngdkraften.", "", "Beräkningen förutsätter att hyllan inte börjar glida innan den tippar. Höga, smala möbler bör förankras i väggen." ]
+  ], String.raw`Det krävs cirka (38\ \mathrm N) i överkanten eller (76\ \mathrm N) på 0,90 m höjd för att nå tippgränsen.`),
+  "4.127": byggFacitListaV2([
+    ["1", "Axeln går genom plankans tyngdpunkt, så plankans egen tyngd ger inget moment. För varje fall gäller", String.raw`\[m_1gr_1=m_2gr_2\Rightarrow m_1r_1=m_2r_2\]`, ""],
+    ["a", "Sätt in hävarmarna 1,2 m och 1,5 m.", String.raw`\[m=\frac{5{,}0\cdot1{,}2}{1{,}5}=4{,}0\ \mathrm{kg}\]`, ""],
+    ["b", "Använd motsvarande avstånd i fall b.", String.raw`\[m=\frac{6{,}0\cdot0{,}8}{1{,}4}=3{,}43\ \mathrm{kg}\]`, ""],
+    ["c", "I fall c är den okända massan på sidan med hävarmen 0,8 m.", String.raw`\[m\cdot0{,}8=4{,}0\cdot1{,}4\Rightarrow m=7{,}0\ \mathrm{kg}\]`, ""]
+  ], String.raw`Massorna är a) (4{,}0\ \mathrm{kg}), b) (3{,}4\ \mathrm{kg}) och c) (7{,}0\ \mathrm{kg}).`),
+  "4.128": byggFacitListaV2([
+    ["1", "Stödpunkten vid flaskkanten är vridningsaxel. Korkens kraft har hävarmen 9 mm och handens kraft hävarmen 9 + 70 = 79 mm.", String.raw`\[l_k=0{,}009\ \mathrm m,\qquad l_H=0{,}079\ \mathrm m\]`, ""],
+    ["2", "Momentjämvikt ger handkraften som funktion av korkens motståndskraft.", String.raw`\[F_Hl_H=F_kl_k\Rightarrow F_H=F_k\frac{0{,}009}{0{,}079}\]`, ""],
+    ["3", "Beräkna intervallets båda gränser.", String.raw`\[F_{H,\min}=200\frac{9}{79}=22{,}8\ \mathrm N\]\[F_{H,\max}=400\frac{9}{79}=45{,}6\ \mathrm N\]`, ""]
+  ], String.raw`Handkraften kan variera från cirka (23\ \mathrm N) till (46\ \mathrm N).`),
+  "4.129": byggFacitListaV2([
+    ["1", "Plankan balanserar vid sin tyngdpunkt, så stödet ligger mitt på och plankans egen tyngd ger inget moment. Barn A och B sitter 3,0 m från stödet.", "", ""],
+    ["2", "Barn A:s moment måste balanseras av barn B och C på motsatt sida.", String.raw`\[(45g)3{,}0=(35g)3{,}0+(25g)x\]`, ""],
+    ["3", "Förkorta bort g och lös ut x.", String.raw`\[135=105+25x\Rightarrow x=1{,}2\ \mathrm m\]`, ""]
+  ], String.raw`Barn C ska sitta (1{,}2\ \mathrm m) från stenen, på samma sida som barn B.`),
+  "4.130": byggFacitListaV2([
+    ["a", "Vid balans kring tornet är motviktens och lastens moment lika stora.", String.raw`\[(9500g)d=(2800g)7{,}7\]\[d=\frac{2800\cdot7{,}7}{9500}=2{,}27\ \mathrm m\]`, ""],
+    ["b", "Placera motvikten på största avståndet 3,4 m och lös ut lastmassan.", String.raw`\[(9500g)3{,}4=(m_Lg)7{,}7\]\[m_L=4195\ \mathrm{kg}\]`, "Den teoretiska gränsen är cirka 4,19 ton. Om ett säkert helt hundratal kilogram ska anges avrundar man nedåt till 4,1 ton, inte uppåt över gränsen." ]
+  ], String.raw`Motvikten ska placeras cirka (2{,}27\ \mathrm m) bakom tornet. Med motvikten på 3,4 m är den teoretiska maxlasten cirka (4{,}19\ \mathrm t).`),
+  "4.131": byggFacitListaV2([
+    ["1", "Vid tippögonblicket är bordskanten vridningsaxel. Den utskjutande änden ligger 21,0 cm utanför kanten.", "", ""],
+    ["2", "Vikten sitter 1,0 cm från den utskjutande änden och får därför hävarmen 20,0 cm. Linjalens tyngdpunkt ligger 25,0 cm från samma ände och därmed 4,0 cm innanför kanten.", String.raw`\[l_v=21{,}0-1{,}0=20{,}0\ \mathrm{cm}\]\[l_L=25{,}0-21{,}0=4{,}0\ \mathrm{cm}\]`, ""],
+    ["3", "Momentjämvikt ger linjalens massa.", String.raw`\[(20{,}0g)20{,}0=(m_Lg)4{,}0\]\[m_L=100\ \mathrm g\]`, ""]
+  ], String.raw`Linjalens massa är (100\ \mathrm g).`),
+  "4.191": byggFacitListaV2([
+    ["a", "Beräkna det vänstra barnets tyngdkraft.", String.raw`\[F_V=mg=30\cdot9{,}82=294{,}6\ \mathrm N\]`, ""],
+    ["b", "Momentet kring stödpunkten är kraft gånger vinkelrät hävarm.", String.raw`\[M_V=294{,}6\cdot1{,}5=441{,}9\ \mathrm{Nm}\]`, ""],
+    ["c", "Vid jämvikt måste det högra barnets moment vara lika stort och motriktat.", String.raw`\[M_H=441{,}9\ \mathrm{Nm}\]`, ""],
+    ["d", "Bestäm först tyngdkraften på 45-kilogramsbarnet och sedan hävarmen.", String.raw`\[F_H=45\cdot9{,}82=441{,}9\ \mathrm N\]\[l_H=\frac{M_H}{F_H}=1{,}0\ \mathrm m\]`, ""]
+  ], String.raw`Det vänstra barnets tyngdkraft är (295\ \mathrm N) och momentet (442\ \mathrm{Nm}). Det högra barnet ska ge samma moment och sitter (1{,}0\ \mathrm m) från stödet.`),
+  "4.192": byggFacitListaV2([
+    ["a", "Endast kraftens komposant vinkelrätt mot nyckeln bidrar till momentet.", String.raw`\[F_\perp=F\sin60^\circ=150\sin60^\circ=129{,}9\ \mathrm N\]`, ""],
+    ["b", "Multiplicera den vinkelräta komposanten med nyckelns längd.", String.raw`\[M=F_\perp l=129{,}9\cdot0{,}40=52{,}0\ \mathrm{Nm}\]`, ""],
+    ["c", "Vid vinkelrätt drag bidrar hela kraften.", String.raw`\[M_{90}=150\cdot0{,}40=60\ \mathrm{Nm}\]`, ""],
+    ["d", "För största moment ska kraften angripa längst ut och vara vinkelrät mot nyckeln.", String.raw`\[M=Fl\sin\theta\quad\text{är störst när}\quad\theta=90^\circ\]`, ""]
+  ], String.raw`Den vinkelräta komposanten är (130\ \mathrm N), vilket ger (52\ \mathrm{Nm}). Vinkelrätt drag ger (60\ \mathrm{Nm}).`),
+  "4.193": byggFacitListaV2([
+    ["a", "Lastens tyngdkraft är", String.raw`\[F_g=100\cdot9{,}82=982\ \mathrm N\]`, ""],
+    ["b", "Ta moment kring stödet B. Lasten ligger 3,0 m från B och stöd A 4,0 m från B.", String.raw`\[R_A\cdot4{,}0=982\cdot3{,}0\]\[R_A=736{,}5\ \mathrm N\]`, ""],
+    ["c", "Lodrät kraftjämvikt ger stöd B:s kraft.", String.raw`\[R_A+R_B=982\Rightarrow R_B=245{,}5\ \mathrm N\]`, ""],
+    ["d", "Stöd A bär mest eftersom lasten står närmare A.", String.raw`\[R_A:R_B=3:1\]`, "Lastens läge gör att tre fjärdedelar av tyngden bärs av A och en fjärdedel av B." ]
+  ], String.raw`Lastens tyngdkraft är (982\ \mathrm N). Stöd A bär (737\ \mathrm N) och stöd B (246\ \mathrm N).`),
+  "4.194": byggFacitListaV2([
+    ["a", "Den vänstra figurens tyngdkraft är", String.raw`\[F_V=0{,}300\cdot9{,}82=2{,}946\ \mathrm N\]`, ""],
+    ["b", "Beräkna momentet kring upphängningspunkten.", String.raw`\[M_V=2{,}946\cdot0{,}20=0{,}5892\ \mathrm{Nm}\]`, ""],
+    ["c", "Den högra figurens hävarm är enligt figuren", String.raw`\[l_H=0{,}40\ \mathrm m\]`, ""],
+    ["d", "Momentjämvikt ger den högra figurens tyngdkraft och massa.", String.raw`\[F_H=\frac{0{,}5892}{0{,}40}=1{,}473\ \mathrm N\]\[m_H=\frac{1{,}473}{9{,}82}=0{,}150\ \mathrm{kg}\]`, ""]
+  ], String.raw`Den vänstra tyngdkraften är (2{,}95\ \mathrm N) och momentet (0{,}589\ \mathrm{Nm}). Den högra hävarmen är 0,40 m och massan (0{,}150\ \mathrm{kg}).`),
+  "4.195": byggFacitListaV2([
+    ["a", "När kraften är vinkelrät mot hävarmen gäller", String.raw`\[M=Fl\]`, ""],
+    ["b", "Med hävarmen 0,30 m behövs", String.raw`\[F=\frac Ml=\frac{90}{0{,}30}=300\ \mathrm N\]`, ""],
+    ["c", "Med den längre hävarmen 0,45 m blir kraften", String.raw`\[F=\frac{90}{0{,}45}=200\ \mathrm N\]`, ""],
+    ["d", "En längre hävarm minskar den kraft som krävs för samma moment.", "", "Det blir samtidigt lättare att av misstag skapa ett för stort moment och skada bult eller gängor." ]
+  ], String.raw`Sambandet är (M=Fl). Det krävs (300\ \mathrm N) vid 0,30 m och (200\ \mathrm N) vid 0,45 m.`),
+  "4.218": byggFacitListaV2([
+    ["1", "Kraften är vinkelrät och oförändrad, så momentet är direkt proportionellt mot hävarmen.", String.raw`\[M=Fl=200l\]`, ""],
+    ["a", "Beräkna tabellens tre moment.", String.raw`\[M(0{,}25)=200\cdot0{,}25=50\ \mathrm{Nm}\]\[M(0{,}50)=200\cdot0{,}50=100\ \mathrm{Nm}\]\[M(0{,}75)=200\cdot0{,}75=150\ \mathrm{Nm}\]`, ""],
+    ["b", "Om hävarmen fördubblas vid konstant kraft fördubblas även momentet.", String.raw`\[M(2l)=F(2l)=2Fl=2M(l)\]`, ""]
+  ], String.raw`Momenten är (50, 100) och (150\ \mathrm{Nm}). En fördubblad hävarm ger ett fördubblat moment.`),
+  "4.219": byggFacitListaV2([
+    ["a", "Lastens tyngdkraft är", String.raw`\[F_g=mg=50\cdot9{,}82=491\ \mathrm N\]`, ""],
+    ["b", "Tyngdkraftens moment kring hjulaxeln blir", String.raw`\[M_g=491\cdot0{,}50=245{,}5\ \mathrm{Nm}\]`, ""],
+    ["c", "Vid jämvikt ger lyftkraften vid handtagen ett lika stort motriktat moment.", String.raw`\[F_H\cdot1{,}4=245{,}5\]\[F_H=175{,}4\ \mathrm N\]`, "Hjulet bär resten av lastens tyngd." ]
+  ], String.raw`Tyngdkraften är (491\ \mathrm N), dess moment (246\ \mathrm{Nm}), och lyftkraften vid handtagen cirka (175\ \mathrm N).`),
+  "4.220": byggFacitListaV2([
+    ["1", "Viktens tyngdkraft verkar 0,60 m till vänster om stödet.", String.raw`\[F_g=4{,}0\cdot9{,}82=39{,}28\ \mathrm N\]`, ""],
+    ["2", "Beräkna tyngdkraftens moment.", String.raw`\[M_g=39{,}28\cdot0{,}60=23{,}57\ \mathrm{Nm}\]`, ""],
+    ["3", "Kraften F har motsatt vridriktning och hävarmen 0,30 m.", String.raw`\[F\cdot0{,}30=23{,}57\Rightarrow F=78{,}6\ \mathrm N\]`, ""]
+  ], String.raw`Kraften måste vara cirka (79\ \mathrm N) nedåt.`),
+  "4.242": byggFacitListaV2([
+    ["a", "Betrakta en av nötknäpparens skänklar. Handkraftens moment kring leden är", String.raw`\[M_H=40\cdot0{,}14=5{,}6\ \mathrm{Nm}\]`, ""],
+    ["b", "Käftens kraft på nöten har hävarmen 0,035 m och ger ett lika stort motmoment.", String.raw`\[F_N\cdot0{,}035=5{,}6\Rightarrow F_N=160\ \mathrm N\]`, "Varje käft trycker på nöten med 160 N. De två kontaktkrafterna är motriktade och komprimerar nöten; deras vektorsumma på nöten är inte 320 N."],
+    ["c", "För att varje käft ska trycka med 250 N krävs handkraften", String.raw`\[F_H\cdot0{,}14=250\cdot0{,}035\]\[F_H=62{,}5\ \mathrm N\]`, ""],
+    ["d", "Kraftförstärkningen är kvoten mellan handens och nötens hävarmar.", String.raw`\[\frac{F_N}{F_H}=\frac{0{,}14}{0{,}035}=4\]`, "Nöten placeras nära leden för att få stor kontaktkraft." ]
+  ], String.raw`Handkraftens moment är (5{,}6\ \mathrm{Nm}), och varje käft trycker med (160\ \mathrm N). För att nå (250\ \mathrm N) behövs cirka (63\ \mathrm N) på vardera skänkeln.`),
+  "4.243": byggFacitListaV2([
+    ["a", "När veven är vågrät är den nedåtriktade kraften vinkelrät mot hela vevarmen.", String.raw`\[M_{\max}=Fl=320\cdot0{,}17=54{,}4\ \mathrm{Nm}\]`, ""],
+    ["b", "I figurens läge är hävarmen det vågräta avståndet från axeln till kraftens verkningslinje.", String.raw`\[l_\perp=0{,}17\cos60^\circ=0{,}085\ \mathrm m\]`, ""],
+    ["c", "Beräkna momentet med den vinkelräta hävarmen.", String.raw`\[M=320\cdot0{,}085=27{,}2\ \mathrm{Nm}\]`, ""],
+    ["d", "När veven pekar rakt upp går kraftens verkningslinje genom axeln.", String.raw`\[l_\perp=0\Rightarrow M=0\]`, "Detta kallas dödläge." ]
+  ], String.raw`Momentet är (54{,}4\ \mathrm{Nm}) med vågrät vev och (27{,}2\ \mathrm{Nm}) i figurens läge. Med lodrät vev är momentet noll: dödläge.`),
+  "4.244": byggFacitListaV2([
+    ["a", "Hinkens tyngdkraft är", String.raw`\[F_g=12\cdot9{,}82=117{,}84\ \mathrm N\]`, ""],
+    ["b", "Repet ger moment kring trummans axel med radien 0,080 m.", String.raw`\[M_g=117{,}84\cdot0{,}080=9{,}43\ \mathrm{Nm}\]`, ""],
+    ["c", "Vid jämn vevning balanserar handens moment repets moment.", String.raw`\[F_H\cdot0{,}35=9{,}43\Rightarrow F_H=26{,}9\ \mathrm N\]`, ""],
+    ["d", "Jämför kraft- och radiekvoterna.", String.raw`\[\frac{F_g}{F_H}=\frac{117{,}84}{26{,}9}=4{,}38=\frac{0{,}35}{0{,}080}\]`, "Handen behöver bara ungefär en fjärdedel av hinkens tyngd."],
+    ["e", "Kraftvinsten betalas med längre väg.", String.raw`\[s_H=2\pi(0{,}35)=2{,}20\ \mathrm m\]\[s_{\mathrm{hink}}=2\pi(0{,}080)=0{,}503\ \mathrm m\]`, "Handen rör sig 4,38 gånger längre än hinken per varv." ]
+  ], String.raw`Tyngdkraften är (118\ \mathrm N), momentet (9{,}43\ \mathrm{Nm}) och vevkraften (26{,}9\ \mathrm N). Kraften minskar med faktorn 4,38 men handen måste röra sig 4,38 gånger längre.`),
+  "4.245": byggFacitListaV2([
+    ["a", String.raw`På den övre linjen kan punkten ((l,M)=(0{,}30\ \mathrm m,60\ \mathrm{Nm})) läsas av. Linjens lutning är kraften.`, String.raw`\[F_1=\frac Ml=\frac{60}{0{,}30}=200\ \mathrm N\]`, ""],
+    ["b", String.raw`Den undre linjen går exempelvis genom ((0{,}60\ \mathrm m,60\ \mathrm{Nm})).`, String.raw`\[F_2=\frac{60}{0{,}60}=100\ \mathrm N\]`, ""],
+    ["c", "Beräkna F₁:s moment vid hävarmen 0,55 m.", String.raw`\[M=200\cdot0{,}55=110\ \mathrm{Nm}\]`, ""],
+    ["d", "Lös ut hävarmen för momentet 130 Nm.", String.raw`\[l=\frac{130}{200}=0{,}65\ \mathrm m\]`, ""]
+  ], String.raw`Krafterna är (F_1=200\ \mathrm N) och (F_2=100\ \mathrm N). (F_1) ger (110\ \mathrm{Nm}) vid 0,55 m och behöver hävarmen (0{,}65\ \mathrm m) för 130 Nm.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_MOMENT_V2_DEL2[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_MOMENT_V2_DEL2[uppgift.id];
+  }
+}
+
+const FACIT_MOMENT_V2_DEL3 = {
+  "4.246": byggFacitListaV2([
+    ["a", "Vid jämvikt är momenten kring upphängningspunkten lika stora.", String.raw`\[m_{\mathrm{varor}}g\cdot0{,}24=m_{\mathrm{vikter}}g\cdot0{,}20\]`, ""],
+    ["b", String.raw`Sätt \(m_{\mathrm{vikter}}=3{,}0\ \mathrm{kg}\) och förkorta bort \(g\).`, String.raw`\[m_{\mathrm{varor}}=3{,}0\frac{0{,}20}{0{,}24}=2{,}5\ \mathrm{kg}\]`, ""],
+    ["c", "Beräkna mängden varor per uppvägt kilogram.", String.raw`\[\frac{0{,}20}{0{,}24}=0{,}833\]`, "Kunden får bara 0,83 kg per betalt kilogram, alltså cirka 17 % för lite."],
+    ["d", "Byt plats på varor och vikter. En riktig likarmad våg är fortfarande i jämvikt efter bytet, medan denna våg inte är det.", "", ""]
+  ], String.raw`Vid \(3{,}0\ \mathrm{kg}\) vikter balanserar \(2{,}5\ \mathrm{kg}\) varor. Kunden får cirka \(0{,}83\ \mathrm{kg}\) per betalt kilogram.`),
+  "4.247": byggFacitListaV2([
+    ["a", "Lastbilens massa är summan av axelbelastningarna.", String.raw`\[m=3{,}2+5{,}4=8{,}6\ \mathrm{ton}\]`, ""],
+    ["b", "Ta moment kring framaxeln. Framaxelns stödkraft får då hävarmen noll.", String.raw`\[8{,}6g\,x=5{,}4g\cdot4{,}2\]`, ""],
+    ["c", "Förkorta bort tyngdaccelerationen och lös ut tyngdpunktens läge.", String.raw`\[x=\frac{5{,}4\cdot4{,}2}{8{,}6}=2{,}64\ \mathrm m\]`, ""],
+    ["d", "När mer gods placeras längst bak flyttas tyngdpunkten bakåt.", "", "Bakaxeltrycket ökar och framaxeltrycket minskar."]
+  ], String.raw`Massan är \(8{,}6\ \mathrm{ton}\), och tyngdpunkten ligger cirka \(2{,}6\ \mathrm m\) bakom framaxeln.`),
+  "4.248": byggFacitListaV2([
+    ["a", "Bommens tyngdkraft är", String.raw`\[F_g=mg=16\cdot9{,}82=157\ \mathrm N\]`, ""],
+    ["b", "Tyngdpunkten ligger mitt på den 4,0 m långa bommen.", String.raw`\[M_g=157\cdot2{,}0=314\ \mathrm{Nm}\]`, ""],
+    ["c", "Motvikten 0,50 m från axeln ska ge samma moment.", String.raw`\[m_mg\cdot0{,}50=314\Rightarrow m_m=64\ \mathrm{kg}\]`, ""],
+    ["d", "Med den längre hävarmen 0,80 m behövs mindre massa.", String.raw`\[m_m=\frac{314}{9{,}82\cdot0{,}80}=40\ \mathrm{kg}\]`, ""]
+  ], String.raw`Bommens tyngdkraft är \(157\ \mathrm N\) och momentet \(314\ \mathrm{Nm}\). Motvikten ska vara \(64\ \mathrm{kg}\) vid 0,50 m eller \(40\ \mathrm{kg}\) vid 0,80 m.`),
+  "4.249": byggFacitListaV2([
+    ["a", "Hantelns tyngdkraft är", String.raw`\[F_g=5{,}0\cdot9{,}82=49{,}1\ \mathrm N\]`, ""],
+    ["b", "Momentet kring armbågsleden blir", String.raw`\[M_g=49{,}1\cdot0{,}32=15{,}7\ \mathrm{Nm}\]`, ""],
+    ["c", "Bicepsens moment ska balansera hantelns moment.", String.raw`\[F_b\cdot0{,}040=15{,}7\Rightarrow F_b=393\ \mathrm N\]`, ""],
+    ["d", "Jämför krafterna.", String.raw`\[\frac{F_b}{F_g}=\frac{393}{49{,}1}=8{,}0\]`, "Den korta muskelfästarmen kräver stor muskelkraft men ger handen stor rörelse och fart."]
+  ], String.raw`Bicepsen måste dra med cirka \(3{,}9\cdot10^2\ \mathrm N\), vilket är 8 gånger hantelns tyngd.`),
+  "4.250": byggFacitListaV2([
+    ["a", "Lådans tyngdkraft är", String.raw`\[F_g=12\cdot9{,}82=118\ \mathrm N\]`, ""],
+    ["b", "Kring den nedre skruven ger lådan momentet", String.raw`\[M_g=118\cdot0{,}18=21{,}2\ \mathrm{Nm}\]`, ""],
+    ["c", "Den övre skruvens utdragningskraft har hävarmen 0,20 m.", String.raw`\[F\cdot0{,}20=21{,}2\Rightarrow F=106\ \mathrm N\]`, ""],
+    ["d", "Halverad skruvseparation halverar hävarmen och fördubblar kraften.", String.raw`\[F=\frac{21{,}2}{0{,}10}=212\ \mathrm N\]`, ""]
+  ], String.raw`Tyngdkraften är \(118\ \mathrm N\), lådans moment \(21{,}2\ \mathrm{Nm}\) och utdragningskraften \(106\ \mathrm N\). Vid 0,10 m skruvavstånd blir den \(212\ \mathrm N\).`),
+  "4.251": byggFacitListaV2([
+    ["a", "Nyckeln klickar när momentet kring huvudet når 120 Nm.", String.raw`\[F=\frac{120}{0{,}45}=267\ \mathrm N\]`, ""],
+    ["b", "Avståndet från handen till bulten är 0,55 m.", String.raw`\[M_{\mathrm{bult}}=267\cdot0{,}55=147\ \mathrm{Nm}\]`, ""],
+    ["c", "För önskat bultmoment 120 Nm ska handkraften vara \(120/0{,}55\). Nyckelns inställning blir", String.raw`\[M_{\mathrm{inst}}=\frac{120}{0{,}55}\cdot0{,}45=98{,}2\ \mathrm{Nm}\]`, ""],
+    ["d", "Samma resonemang med nyckellängden L och förlängningen d ger", String.raw`\[M_{\mathrm{inst}}=M_{\mathrm{bult}}\frac{L}{L+d}\]`, ""]
+  ], String.raw`Kraften är \(267\ \mathrm N\), bulten får cirka \(147\ \mathrm{Nm}\), och nyckeln ska ställas på cirka \(98\ \mathrm{Nm}\) för att bulten ska få 120 Nm.`),
+  "4.252": byggFacitListaV2([
+    ["a", "Bryggans tyngdkraft angriper i mitten, 1,5 m från gångjärnet.", String.raw`\[F_g=400\cdot9{,}82=3928\ \mathrm N\]`, ""],
+    ["b", "Tyngdkraftens moment är", String.raw`\[M_g=3928\cdot1{,}5=5892\ \mathrm{Nm}\]`, ""],
+    ["c", "Endast kedjekraftens vinkelräta komponent \(S\sin40^\circ\) ger moment.", String.raw`\[S\sin40^\circ\cdot3{,}0=5892\]\[S=3{,}06\ \mathrm{kN}\]`, ""],
+    ["d", "Med en vinkelrät kedja verkar hela kraften momentbildande.", String.raw`\[S_\perp=\frac{5892}{3{,}0}=1{,}96\ \mathrm{kN}\]`, "En sned lina behöver större kraft eftersom bara en del av kraften ger vridmoment."]
+  ], String.raw`Kedjekraften är cirka \(3{,}1\ \mathrm{kN}\) vid \(40^\circ\), men bara \(2{,}0\ \mathrm{kN}\) om kedjan står vinkelrätt mot bryggan.`),
+  "4.253": byggFacitListaV2([
+    ["a", "Skylten tippar kring fotens nedvindskant. Därifrån är det vågräta avståndet till tyngdpunkten 0,30 m.", "", `<span class="fig"><svg viewBox="0 0 360 150" role="img" aria-label="Skylt med markerad tippkant"><line x1="35" y1="124" x2="325" y2="124" stroke="#2B2527" stroke-width="2"/><rect x="145" y="24" width="70" height="95" fill="#EDEEF1" stroke="#2B2527" stroke-width="2"/><line x1="105" y1="119" x2="255" y2="119" stroke="#2B2527" stroke-width="8"/><circle cx="255" cy="119" r="7" fill="#B43123"/><text x="255" y="143" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#B43123">tippkant</text><line x1="180" y1="64" x2="180" y2="105" stroke="#2A5D9E" stroke-width="2"/><polygon points="180,115 175,104 185,104" fill="#2A5D9E"/><text x="190" y="84" font-family="IBM Plex Mono" font-size="12" fill="#2A5D9E">F_g</text></svg></span>`],
+    ["b", "Tyngdkraftens stabiliserande moment kring tippkanten är", String.raw`\[M_g=22\cdot9{,}82\cdot0{,}30=64{,}8\ \mathrm{Nm}\]`, ""],
+    ["c", "Vid gränsen till vältning är vindens moment lika stort.", String.raw`\[F_v\cdot1{,}2=64{,}8\Rightarrow F_v=54\ \mathrm N\]`, ""],
+    ["d", "För att tåla 120 N krävs totalmassan", String.raw`\[m_{\mathrm{tot}}g\cdot0{,}30=120\cdot1{,}2\]\[m_{\mathrm{tot}}=48{,}9\ \mathrm{kg}\]\[m_{\mathrm{ballast}}=48{,}9-22=26{,}9\ \mathrm{kg}\]`, ""]
+  ], String.raw`Skylten tippar kring nedvindskanten. Den välter vid cirka \(54\ \mathrm N\), och för att tåla 120 N behövs cirka \(27\ \mathrm{kg}\) ballast.`),
+  "4.254": byggFacitListaV2([
+    ["a", "Pedalkraften ger först moment kring vevaxeln.", String.raw`\[M_v=300\cdot0{,}17=51\ \mathrm{Nm}\]\[F_k=\frac{51}{0{,}090}=567\ \mathrm N\]`, ""],
+    ["a", "Kedjan ger moment på bakdrevet och hjulet överför det till marken.", String.raw`\[M_h=567\cdot0{,}045=25{,}5\ \mathrm{Nm}\]\[F_{\mathrm{driv}}=\frac{25{,}5}{0{,}34}=75\ \mathrm N\]`, ""],
+    ["b", "Med bakdrevsradien 0,030 m blir hjulmomentet mindre.", String.raw`\[F_{\mathrm{driv}}=\frac{567\cdot0{,}030}{0{,}34}=50\ \mathrm N\]`, "Det är en högre växel: mindre drivkraft men större hjulrotation per tramptag."],
+    ["c", "Sätt ihop momentleden. Kedjekraften behöver inte räknas ut separat.", String.raw`\[F_{\mathrm{driv}}=F_{\mathrm{pedal}}\frac{l_{\mathrm{vev}}}{r_{\mathrm{fram}}}\frac{r_{\mathrm{bak}}}{r_{\mathrm{hjul}}}\]`, "Kedjekraften förekommer som samma mellanled på båda dreven och elimineras när uttrycken kombineras."]
+  ], String.raw`Drivkraften är \(75\ \mathrm N\) med bakdrevet 4,5 cm och \(50\ \mathrm N\) med bakdrevet 3,0 cm.`),
+  "4.255": byggFacitListaV2([
+    ["a", "Momentjämvikt kring upphängningspunkten ger", String.raw`\[6{,}0g\cdot0{,}050=2{,}0g\,x\Rightarrow x=0{,}150\ \mathrm m\]`, ""],
+    ["b", "Med lastmassan m blir sambandet", String.raw`\[mg\cdot0{,}050=2{,}0g\,x\Rightarrow x=0{,}025m\]`, "Här anges x i meter när m anges i kilogram."],
+    ["c", "Eftersom x är proportionellt mot m blir skalan linjär.", "", "Skalstrecken ska ligga jämnt med 2,5 cm per kilogram."],
+    ["d", "Vid armens slut är \(x=0{,}60\ \mathrm m\).", String.raw`\[m_{\max}=\frac{0{,}60}{0{,}025}=24\ \mathrm{kg}\]`, "En lastkrok 2,5 cm från upphängningen halverar lastens hävarm och fördubblar mätområdet till 48 kg."]
+  ], String.raw`Motvikten ska stå 15 cm från stödpunkten. Sambandet är \(x=0{,}025m\), och största lasten är \(24\ \mathrm{kg}\).`),
+  "4.256": byggFacitListaV2([
+    ["a", "Skylten angriper 1,20 m från leden och stångens tyngd i dess mitt.", String.raw`\[M_s=18\cdot9{,}82\cdot1{,}20=212\ \mathrm{Nm}\]\[M_{\mathrm{stång}}=4{,}0\cdot9{,}82\cdot0{,}60=23{,}6\ \mathrm{Nm}\]`, ""],
+    ["b", "Stagets vinkelräta komponent ska balansera summan av momenten.", String.raw`\[S\sin35^\circ\cdot1{,}20=212+23{,}6\]\[S=342\ \mathrm N\]`, ""],
+    ["c", "Ledens vågräta kraft balanserar stagets vågräta komponent.", String.raw`\[F_x=S\cos35^\circ=280\ \mathrm N\]`, ""],
+    ["d", "Lodrätt gäller kraftjämvikt.", String.raw`\[F_y+S\sin35^\circ-(18+4)g=0\]\[F_y=19{,}6\ \mathrm N\]`, "Leden tar liten lodrät kraft men en betydligt större vågrät kraft."],
+    ["e", "Med den flackare vinkeln 20° krävs", String.raw`\[S=\frac{235{,}7}{1{,}20\sin20^\circ}=574\ \mathrm N\]`, ""]
+  ], String.raw`Stagkraften är cirka \(342\ \mathrm N\). Leden tar cirka \(280\ \mathrm N\) vågrätt och \(20\ \mathrm N\) uppåt. Vid \(20^\circ\) ökar stagkraften till cirka \(574\ \mathrm N\).`),
+  "4.287": byggFacitListaV2([
+    ["a", "Hantelns tyngdkraft är", String.raw`\[F_g=6{,}0\cdot9{,}82=58{,}9\ \mathrm N\]`, ""],
+    ["b", "Momentet kring axelleden blir", String.raw`\[M_g=58{,}9\cdot0{,}60=35{,}4\ \mathrm{Nm}\]`, ""],
+    ["c", "Deltoideus ska ge samma moment med hävarmen 0,15 m.", String.raw`\[F_d\cdot0{,}15=35{,}4\Rightarrow F_d=236\ \mathrm N\]`, ""],
+    ["d", "Kraftkvoten blir", String.raw`\[\frac{F_d}{F_g}=\frac{236}{58{,}9}=4{,}0\]`, ""]
+  ], String.raw`Deltoideus måste dra med cirka \(236\ \mathrm N\), fyra gånger hantelns tyngd.`),
+  "4.288": byggFacitListaV2([
+    ["a", "Personens tyngdkraft är", String.raw`\[F_g=72\cdot9{,}82=707\ \mathrm N\]`, ""],
+    ["b", "Kring trampdynan ger kroppstyngden momentet", String.raw`\[M_g=707\cdot0{,}12=84{,}8\ \mathrm{Nm}\]`, ""],
+    ["c", "Akillessenans kraft har hävarmen 0,18 m.", String.raw`\[F_A\cdot0{,}18=84{,}8\Rightarrow F_A=471\ \mathrm N\]`, ""],
+    ["d", "Jämför hävarmar och krafter.", String.raw`\[\frac{F_A}{F_g}=\frac{0{,}12}{0{,}18}=0{,}667\]`, "Senans längre hävarm gör att den i denna förenklade modell behöver mindre kraft än kroppstyngden."]
+  ], String.raw`Akillessenan drar med cirka \(471\ \mathrm N\), ungefär 67 % av kroppstyngden.`),
+  "4.289": byggFacitListaV2([
+    ["a", "Personens tyngdkraft är", String.raw`\[F_g=70\cdot9{,}82=687\ \mathrm N\]`, ""],
+    ["b", "Tyngdkraftens moment kring tårna är", String.raw`\[M_g=687\cdot1{,}05=722\ \mathrm{Nm}\]`, ""],
+    ["c", "Handkraftens moment balanserar tyngdkraftens moment.", String.raw`\[N_h\cdot1{,}50=722\Rightarrow N_h=481\ \mathrm N\]`, ""],
+    ["d", "Andelen av kroppstyngden blir", String.raw`\[\frac{481}{687}\cdot100\%=70\%\]`, ""]
+  ], String.raw`Golvet trycker upp med cirka \(481\ \mathrm N\) under händerna, vilket är 70 % av kroppstyngden.`),
+  "4.291": byggFacitListaV2([
+    ["a", "Totalmassan är 25 + 20 + 15 kg.", String.raw`\[F_g=60\cdot9{,}82=589\ \mathrm N\]`, ""],
+    ["b", "Stångens egen tyngd verkar 1,10 m från vänster ände.", String.raw`\[M_{\mathrm{stång}}=20\cdot9{,}82\cdot1{,}10=216\ \mathrm{Nm}\]`, ""],
+    ["c", "De högra skivorna sitter 2,20 m från vänster ände.", String.raw`\[M_h=15\cdot9{,}82\cdot2{,}20=324\ \mathrm{Nm}\]`, ""],
+    ["d", "De vänstra skivorna har hävarmen noll. Låt hela tyngden angripa på avståndet x.", String.raw`\[589x=216+324\Rightarrow x=0{,}917\ \mathrm m\]`, ""]
+  ], String.raw`Tyngdpunkten ligger cirka \(0{,}92\ \mathrm m\) från den vänstra änden.`),
+  "4.294": byggFacitListaV2([
+    ["1", "Hantelns tyngdkraft är", String.raw`\[F_g=8{,}0\cdot9{,}82=78{,}6\ \mathrm N\]`, ""],
+    ["2", "När underarmen är vågrät är hävarmen 0,32 m.", String.raw`\[F_b\cdot0{,}040=78{,}6\cdot0{,}32\]\[F_b=628\ \mathrm N\]`, ""],
+    ["3", "Vid 60° mot vågplanet är tyngdkraftens vinkelräta hävarm \(0{,}32\cos60^\circ\).", String.raw`\[F_b=\frac{78{,}6\cdot0{,}32\cos60^\circ}{0{,}040}=314\ \mathrm N\]`, ""],
+    ["4", "När underarmen närmar sig lodrätt går tyngdkraftens verkningslinje närmare armbågsleden.", "", "Hävarmen och därmed det nödvändiga muskelmomentet minskar."]
+  ], String.raw`Muskelkraften är cirka \(628\ \mathrm N\) med vågrät underarm och \(314\ \mathrm N\) vid \(60^\circ\).`),
+  "4.295": byggFacitListaV2([
+    ["1", "Personens tyngdkraft är", String.raw`\[F_g=68\cdot9{,}82=668\ \mathrm N\]`, ""],
+    ["2", "Ta moment kring tårna.", String.raw`\[N_a\cdot1{,}45=668\cdot1{,}00\Rightarrow N_a=461\ \mathrm N\]`, ""],
+    ["3", "Andelen på underarmarna är", String.raw`\[\frac{461}{668}\cdot100\%=69{,}0\%\]`, ""],
+    ["4", "När stödet flyttas till händerna 1,55 m från tårna blir", String.raw`\[N_h=\frac{668\cdot1{,}00}{1{,}55}=431\ \mathrm N\]`, "Kraften blir mindre eftersom stödets hävarm blir längre."]
+  ], String.raw`Underarmarna bär cirka \(461\ \mathrm N\), eller 69 % av kroppstyngden. Med händerna som stöd blir kraften cirka \(431\ \mathrm N\).`),
+  "4.296": byggFacitListaV2([
+    ["1", "Överkroppens och skivstångens tyngdkrafter ger moment åt samma håll.", String.raw`\[M_1=40\cdot9{,}82\cdot0{,}35=137{,}5\ \mathrm{Nm}\]\[M_2=60\cdot9{,}82\cdot0{,}60=353{,}5\ \mathrm{Nm}\]`, ""],
+    ["2", "Det sammanlagda momentet är", String.raw`\[M=137{,}5+353{,}5=491\ \mathrm{Nm}\]`, ""],
+    ["3", "Ryggmusklerna balanserar momentet med hävarmen 0,050 m.", String.raw`\[F_r=\frac{491}{0{,}050}=9820\ \mathrm N=9{,}82\ \mathrm{kN}\]`, ""],
+    ["4", "Jämför med skivstångens tyngd.", String.raw`\[\frac{9820}{60\cdot9{,}82}=16{,}7\]`, ""]
+  ], String.raw`Ryggmusklernas kraft är cirka \(9{,}8\ \mathrm{kN}\), ungefär 17 gånger skivstångens tyngd.`),
+  "4.297": byggFacitListaV2([
+    ["1", "Vadstödet pressar med kraften", String.raw`\[F_v=25\cdot9{,}82=245{,}5\ \mathrm N\]`, ""],
+    ["2", "Med stödet 0,40 m från knät blir momentet", String.raw`\[M=245{,}5\cdot0{,}40=98{,}2\ \mathrm{Nm}\]`, ""],
+    ["3", "Senan har hävarmen 0,045 m.", String.raw`\[F_s=\frac{98{,}2}{0{,}045}=2182\ \mathrm N\]`, ""],
+    ["4", "Med stödet på 0,30 m blir", String.raw`\[F_s'=\frac{245{,}5\cdot0{,}30}{0{,}045}=1637\ \mathrm N\]\[\Delta F=2182-1637=545\ \mathrm N\]`, ""]
+  ], String.raw`Senans kraft är cirka \(2{,}18\ \mathrm{kN}\). När stödet flyttas in till 30 cm minskar den till \(1{,}64\ \mathrm{kN}\), en minskning med cirka \(545\ \mathrm N\).`),
+  "4.299": byggFacitListaV2([
+    ["1", "Skivstångens tyngdkraft är", String.raw`\[F_s=60\cdot9{,}82=589\ \mathrm N\]`, ""],
+    ["2", "Kroppens egen tyngd verkar genom fotens mittpunkt och ger därför inget moment kring den punkten.", String.raw`\[M_{\mathrm{nack}}=589\cdot0{,}060=35{,}4\ \mathrm{Nm}\]\[M_{\mathrm{front}}=589\cdot0{,}040=23{,}6\ \mathrm{Nm}\]`, ""],
+    ["3", "Den gemensamma tyngdpunkten fås genom att dela nettomomentet med totaltyngden. Här kan g förkortas bort.", String.raw`\[x_{\mathrm{nack}}=\frac{60\cdot6{,}0}{75+60}=2{,}67\ \mathrm{cm\ bakom}\]\[x_{\mathrm{front}}=\frac{60\cdot4{,}0}{75+60}=1{,}78\ \mathrm{cm\ framför}\]`, ""],
+    ["4", "Frontböjens gemensamma tyngdpunkt ligger närmare fotens mitt.", "", "Den kräver därför minst kompensation av kroppsställningen i den förenklade modellen."]
+  ], String.raw`Momenten är \(35{,}4\ \mathrm{Nm}\) bakåt i nackböj och \(23{,}6\ \mathrm{Nm}\) framåt i frontböj. Frontböjen kräver minst lägesändring.`),
+  "4.300": byggFacitListaV2([
+    ["a", "Vajern bär viktmagasinet och har samma spänning i båda lägena eftersom vajern är sammanhängande och friktionsfri.", String.raw`\[F_v=30\cdot9{,}82=294{,}6\ \mathrm N\]`, ""],
+    ["b", "Kammens varierande radie ändrar momentet.", String.raw`\[M_{\mathrm{början}}=294{,}6\cdot0{,}050=14{,}7\ \mathrm{Nm}\]\[M_{\mathrm{slut}}=294{,}6\cdot0{,}090=26{,}5\ \mathrm{Nm}\]`, ""],
+    ["c", "Handtaget sitter 0,35 m från axeln.", String.raw`\[F_{\mathrm{början}}=\frac{14{,}7}{0{,}35}=42{,}1\ \mathrm N\]\[F_{\mathrm{slut}}=\frac{26{,}5}{0{,}35}=75{,}8\ \mathrm N\]`, ""],
+    ["d", "En kam anpassar hävarmen efter muskelns styrka under rörelsen.", "", "Motståndet kan göras mindre i svaga lägen och större i starka lägen trots oförändrat viktmagasin."]
+  ], String.raw`Vajerkraften är \(295\ \mathrm N\). Momentet ökar från \(14{,}7\) till \(26{,}5\ \mathrm{Nm}\), och handtagskraften från \(42\) till \(76\ \mathrm N\).`),
+  "4.301": byggFacitListaV2([
+    ["a", "Vågarnas utslag summeras till personens massa.", String.raw`\[m=46+22=68\ \mathrm{kg}\]`, ""],
+    ["b", "Ta moment kring tårna. Tyngdaccelerationen förkortas bort.", String.raw`\[46\cdot1{,}50=68x\Rightarrow x=1{,}015\ \mathrm m\]`, ""],
+    ["c", "I plankan ligger stödet under armarna 1,20 m från tårna.", String.raw`\[m_{\mathrm{arm}}\cdot1{,}20=68\cdot1{,}015\]\[m_{\mathrm{arm}}=57{,}5\ \mathrm{kg}\]`, ""]
+  ], String.raw`Personens massa är \(68\ \mathrm{kg}\), tyngdpunkten ligger cirka \(1{,}01\ \mathrm m\) från tårna och armvågen visar cirka \(58\ \mathrm{kg}\) i plankan.`),
+  "4.302": byggFacitListaV2([
+    ["a", "När ryggen lutar vinkeln v från lodrätt minskar båda tyngdkrafternas hävarmar med faktorn \(\sin v\).", String.raw`\[M(v)=491\sin v\]`, ""],
+    ["a", "Ryggmusklerna har hävarmen 0,050 m.", String.raw`\[F_r=\frac{491\sin v}{0{,}050}=9{,}82\cdot10^3\sin v\ \mathrm N\]`, ""],
+    ["b", "Halva maxkraften ger", String.raw`\[\sin v=\frac12\Rightarrow v=30^\circ\]`, ""],
+    ["c", "Skivstångens tyngd är \(60\cdot9{,}82=589\ \mathrm N\).", String.raw`\[9{,}82\cdot10^3\sin v=589\]\[\sin v=0{,}0600\Rightarrow v=3{,}44^\circ\]`, ""]
+  ], String.raw`\(F_r=9{,}82\cdot10^3\sin v\ \mathrm N\). Kraften är halva maxvärdet vid \(30^\circ\) och lika stor som skivstångens tyngd redan vid cirka \(3{,}4^\circ\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (uppgift.id === "4.254") {
+    uppgift.t = uppgift.t.replace("produkten av pedalkraften och tre kvoter", "produkten av pedalkraften och två längdkvoter");
+  }
+  if (FACIT_MOMENT_V2_DEL3[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_MOMENT_V2_DEL3[uppgift.id];
+  }
+}
+
+const FACIT_FJADRAR_V2_DEL1 = {
+  "4.8": byggFacitListaV2([
+    ["a", "Omvandla först förlängningen till meter och använd Hookes lag.", String.raw`\[\Delta l=25\ \mathrm{cm}=0{,}25\ \mathrm m\]\[F=k\Delta l\Rightarrow k=\frac{45}{0{,}25}=180\ \mathrm{N/m}\]`, ""],
+    ["b", "Parallellkopplade fjädrar får samma förlängning och deras krafter adderas.", String.raw`\[k_{\mathrm{tot}}=k_1+k_2=180+180=360\ \mathrm{N/m}\]`, ""]
+  ], String.raw`Bandets fjäderkonstant är \(180\ \mathrm{N/m}\). Två likadana band parallellt ger \(360\ \mathrm{N/m}\).`),
+  "4.16": byggFacitListaV2([
+    ["1", "När föremålet hänger stilla är fjäderkraften lika stor som tyngdkraften.", String.raw`\[F_f=k\Delta l=120\cdot0{,}085=10{,}2\ \mathrm N\]`, ""],
+    ["2", "Sätt \(F_g=mg=F_f\) och lös ut massan.", String.raw`\[m=\frac{10{,}2}{9{,}82}=1{,}04\ \mathrm{kg}\]`, ""]
+  ], String.raw`Föremålets massa är cirka \(1{,}0\ \mathrm{kg}\).`),
+  "4.17": byggFacitListaV2([
+    ["a", "I serie verkar samma kraft genom båda fjädrarna, medan förlängningarna adderas.", String.raw`\[\frac1{k_s}=\frac1{40}+\frac1{60}=\frac1{24}\]\[k_s=24\ \mathrm{N/m}\]`, ""],
+    ["b", "Parallellt får fjädrarna samma förlängning och krafterna adderas.", String.raw`\[k_p=40+60=100\ \mathrm{N/m}\]`, ""],
+    ["c", "Vid seriekoppling dras båda fjädrarna ut av samma kraft.", "", "Den sammanlagda förlängningen blir större än för var och en av fjädrarna, så kopplingen blir mjukare än den mjukaste fjädern."]
+  ], String.raw`Seriekopplingen ger \(24\ \mathrm{N/m}\), medan parallellkopplingen ger \(100\ \mathrm{N/m}\).`),
+  "4.18": byggFacitListaV2([
+    ["a", "Fyra likadana fjädrar parallellt ger den sammanlagda fjäderkonstanten", String.raw`\[k_{\mathrm{tot}}=4\cdot25\,000=100\,000\ \mathrm{N/m}\]`, ""],
+    ["a", "Lastens tyngd balanseras av fjädrarna.", String.raw`\[\Delta l=\frac{mg}{k_{\mathrm{tot}}}=\frac{300\cdot9{,}82}{100\,000}=0{,}0295\ \mathrm m\]`, ""],
+    ["b", "Styvare fjädrar ger mindre rörelse för samma kraft.", "", "Bilen sjunker mindre men överför mer av vägens ojämnheter till karossen, vilket normalt ger sämre komfort."]
+  ], String.raw`Bilen sjunker cirka \(2{,}9\ \mathrm{cm}\). Betydligt styvare fjädrar ger mindre fjädringsrörelse och hårdare gång.`),
+  "4.19": byggFacitListaV2([
+    ["a", "Den elastiska energin i en ihoptryckt fjäder är", String.raw`\[E_f=\frac12kx^2=\frac12\cdot350\cdot0{,}12^2=2{,}52\ \mathrm J\]`, ""],
+    ["b", "Om all fjäderenergi blir rörelseenergi gäller", String.raw`\[\frac12kx^2=\frac12mv^2\]\[v=x\sqrt{\frac{k}{m}}=0{,}12\sqrt{\frac{350}{0{,}020}}=15{,}9\ \mathrm{m/s}\]`, ""],
+    ["c", "I verkligheten går energi bland annat till friktion, ljud, luftmotstånd och fjäderns egen rörelse.", "", "Därför blir projektilens fart lägre än det ideala värdet."]
+  ], String.raw`Fjädern lagrar \(2{,}52\ \mathrm J\), vilket idealiskt ger projektilen farten \(15{,}9\ \mathrm{m/s}\).`),
+  "4.20": byggFacitListaV2([
+    ["a", "Repet är först slappt under 15 m. Avståndet som återstår till vattnet blir repets största sträckning.", String.raw`\[x=25-15=10\ \mathrm m\]`, ""],
+    ["b", "Hopparen startar 25 m över slutläget. Vid vändläget är farten noll.", String.raw`\[mgh=\frac12kx^2\]\[k=\frac{2mgh}{x^2}=\frac{2\cdot70\cdot9{,}82\cdot25}{10^2}=344\ \mathrm{N/m}\]`, ""],
+    ["c", "Om samma rep är en meter längre återstår bara 9 m sträckning före vattenytan.", String.raw`\[E_f=\frac12k\cdot9^2<\frac12k\cdot10^2\]`, "Repet hinner då lagra mindre energi innan hopparen når vattnet, samtidigt som fallhöjden är oförändrad. Hopparen har därför fortfarande fart vid vattenytan."]
+  ], String.raw`Repet sträcks \(10\ \mathrm m\) och behöver fjäderkonstanten cirka \(344\ \mathrm{N/m}\). En meter längre rep tar inte upp all rörelseenergi före vattenytan.`),
+  "4.40": byggFacitListaV2([
+    ["1", "Vid jämvikt är fjäderkraften lika stor som tyngdkraften.", String.raw`\[F_f=F_g=mg=1{,}4\cdot9{,}82=13{,}75\ \mathrm N\]`, ""],
+    ["2", "Använd Hookes lag och lös ut förlängningen.", String.raw`\[\Delta l=\frac{F_f}{k}=\frac{13{,}75}{95}=0{,}1447\ \mathrm m\]`, ""]
+  ], String.raw`Fjädern dras ut cirka \(0{,}145\ \mathrm m=14{,}5\ \mathrm{cm}\).`),
+  "4.41": byggFacitListaV2([
+    ["a", "Fjädrarna sitter i serie. När systemet är stilla överförs hela viktens tyngd genom båda.", String.raw`\[F_1=F_2=mg=0{,}50\cdot9{,}82=4{,}91\ \mathrm N\]`, ""],
+    ["b", "Beräkna varje fjäders förlängning separat.", String.raw`\[x_1=\frac{4{,}91}{30}=0{,}1637\ \mathrm m\]\[x_2=\frac{4{,}91}{45}=0{,}1091\ \mathrm m\]`, ""],
+    ["c", "I serie adderas förlängningarna.", String.raw`\[x_{\mathrm{tot}}=0{,}1637+0{,}1091=0{,}2728\ \mathrm m\]`, ""]
+  ], String.raw`Varje fjäder belastas med \(4{,}91\ \mathrm N\). De förlängs \(16{,}4\) respektive \(10{,}9\ \mathrm{cm}\), totalt cirka \(27{,}3\ \mathrm{cm}\).`),
+  "4.42": byggFacitMedGrafV2(
+    byggFacitGrafV2({xMax:25,yMax:15,serier:[{punkter:[[0,0],[5,3],[10,6],[15,9],[20,12],[25,15]]}],xEtikett:"förlängning / cm",yEtikett:"F / N",aria:"Rät kraft–förlängningsgraf genom mätpunkterna och origo."}),
+    [
+      ["a", "Markera mätpunkterna med förlängningen på x-axeln och kraften på y-axeln. Punkterna ligger på en rät linje genom origo.", "", ""],
+      ["b", "Lutningen ska beräknas med förlängningen i meter.", String.raw`\[k=\frac{\Delta F}{\Delta x}=\frac{12{,}0}{0{,}20}=60\ \mathrm{N/m}\]`, ""],
+      ["c", "Lös ut förlängningen vid 15 N.", String.raw`\[x=\frac{F}{k}=\frac{15}{60}=0{,}25\ \mathrm m=25\ \mathrm{cm}\]`, "Detta gäller så länge fjädern fortsätter följa Hookes lag."]
+    ],
+    String.raw`Fjäderkonstanten är \(60\ \mathrm{N/m}\), och 15 N ger förlängningen \(25\ \mathrm{cm}\).`
+  ),
+  "4.43": byggFacitListaV2([
+    ["a", "Gränskraften fås direkt ur Hookes lag.", String.raw`\[F_{\max}=kx_{\max}=250\cdot0{,}30=75\ \mathrm N\]`, ""],
+    ["b", "För en stilla vikt gäller \(mg=F_{\max}\).", String.raw`\[m_{\max}=\frac{75}{9{,}82}=7{,}64\ \mathrm{kg}\]`, ""],
+    ["c", "En vikt som släpps från den obelastade längden har både förlorad lägesenergi och fjäderenergi vid vändläget.", String.raw`\[mgx=\frac12kx^2\Rightarrow x=\frac{2mg}{k}\]`, "Den dynamiska maxförlängningen blir dubbelt så stor som jämviktsförlängningen. Därför kan en massa över cirka 3,8 kg nå skadegränsen när den släpps från fjäderns naturliga längd."]
+  ], String.raw`Gränsen motsvarar \(75\ \mathrm N\) och en stilla massa på \(7{,}6\ \mathrm{kg}\). Vid ett plötsligt släpp kan maxförlängningen bli dubbelt så stor som jämviktsförlängningen.`),
+  "4.63": byggFacitListaV2([
+    ["a", "Fjäderkonstanten är kraft–förlängningsgrafens lutning.", String.raw`\[k=\frac{20}{0{,}25}=80\ \mathrm{N/m}\]`, ""],
+    ["b", "Använd Hookes lag vid 0,15 m.", String.raw`\[F=kx=80\cdot0{,}15=12\ \mathrm N\]`, ""],
+    ["c", "Arean under grafen är arbetet som krävs för att dra ut fjädern och därmed den lagrade elastiska energin.", String.raw`\[E_f=\frac12Fx=\frac12\cdot20\cdot0{,}25=2{,}5\ \mathrm J\]`, ""]
+  ], String.raw`Fjäderkonstanten är \(80\ \mathrm{N/m}\), kraften vid 0,15 m är \(12\ \mathrm N\), och hela triangelarean motsvarar \(2{,}5\ \mathrm J\).`),
+  "4.64": byggFacitListaV2([
+    ["a", "Den brantare linjen kräver större kraft för samma förlängning.", "", "Fjäder A är därför styvast."],
+    ["b", "Läs en punkt på respektive linje och beräkna lutningen.", String.raw`\[k_A=120\ \mathrm{N/m},\qquad k_B=50\ \mathrm{N/m}\]`, ""],
+    ["c", "För samma kraft gäller \(x=F/k\).", "", "Fjäder B har mindre fjäderkonstant och dras därför ut mest."]
+  ], String.raw`\(k_A=120\ \mathrm{N/m}\) och \(k_B=50\ \mathrm{N/m}\). A är styvast, medan B dras ut mest av samma vikt.`),
+  "4.65": byggFacitListaV2([
+    ["a", "Hookes lag gäller där grafen är en rät linje genom origo.", String.raw`\[0\leq x\leq0{,}15\ \mathrm m\]`, ""],
+    ["b", "Linjens lutning i det området är", String.raw`\[k=\frac{30}{0{,}15}=200\ \mathrm{N/m}\]`, ""],
+    ["c", "Efter 0,15 m böjer grafen av.", "", "Fjädern följer inte längre Hookes lag. Enligt diagrammets tolkning börjar den deformeras och riskerar att inte återgå till sin ursprungliga längd."]
+  ], String.raw`Hookes lag gäller till \(0{,}15\ \mathrm m\), där \(k=200\ \mathrm{N/m}\). Därefter lämnar fjädern det linjära området.`),
+  "4.69": byggFacitListaV2([
+    ["a", "När hissen står stilla balanserar fjäderkraften tyngdkraften.", String.raw`\[x_0=\frac{mg}{k}=\frac{2{,}5\cdot9{,}82}{180}=0{,}136\ \mathrm m\]`, ""],
+    ["b", "Vid acceleration uppåt behövs den större fjäderkraften \(m(g+a)\).", String.raw`\[F_f=2{,}5(9{,}82+1{,}8)=29{,}05\ \mathrm N\]\[x=\frac{29{,}05}{180}=0{,}161\ \mathrm m\]`, ""],
+    ["c", "I fritt fall accelererar vikt och upphängning lika mycket. Den skenbara tyngden är då noll.", String.raw`\[F_f=0\Rightarrow x_{\mathrm{jämvikt}}=0\]`, "En verklig fjäder kan svänga kring sin obelastade längd efter att fallet börjar; den visar inte någon tyngd i fritt fall."]
+  ], String.raw`Förlängningen är \(13{,}6\ \mathrm{cm}\) i vila och \(16{,}1\ \mathrm{cm}\) vid accelerationen uppåt. Under fritt fall visar fjädervågen noll.`),
+  "4.73": byggFacitListaV2([
+    ["a", "Den hela fjädern kan ses som två lika halvor i serie. Varje halva står för halva förlängningen vid samma kraft.", String.raw`\[k_{\mathrm{halva}}=2k=120\ \mathrm{N/m}\]`, ""],
+    ["b", "Två halvor parallellt ger", String.raw`\[k_p=120+120=240\ \mathrm{N/m}\]\[x_p=\frac{1{,}5\cdot9{,}82}{240}=0{,}0614\ \mathrm m\]`, ""],
+    ["c", "Den hela fjädern har fjäderkonstanten 60 N/m.", String.raw`\[x_{\mathrm{hel}}=\frac{1{,}5\cdot9{,}82}{60}=0{,}2455\ \mathrm m\]`, ""]
+  ], String.raw`Varje halva får \(k=120\ \mathrm{N/m}\). Parallellkopplade sträcks halvorna \(6{,}1\ \mathrm{cm}\), medan den hela fjädern sträcks \(24{,}6\ \mathrm{cm}\).`),
+  "4.181": byggFacitListaV2([
+    ["a", "Läs av grafen vid förlängningen 10 cm.", String.raw`\[F=15\ \mathrm N\]`, ""],
+    ["b", "Skriv förlängningen i meter.", String.raw`\[10\ \mathrm{cm}=0{,}10\ \mathrm m\]`, ""],
+    ["c", "Grafens lutning är fjäderkonstanten.", String.raw`\[k=\frac{F}{x}=\frac{15}{0{,}10}=150\ \mathrm{N/m}\]`, ""],
+    ["d", "En rät linje genom origo betyder att kraften är proportionell mot förlängningen.", "", "Fjädern följer Hookes lag och har konstant k i det visade området."]
+  ], String.raw`Vid 10 cm krävs \(15\ \mathrm N\), och fjäderkonstanten är \(150\ \mathrm{N/m}\).`),
+  "4.182": byggFacitListaV2([
+    ["a", "Använd Hookes lag med 6,0 cm = 0,060 m.", String.raw`\[F_f=kx=400\cdot0{,}060=24\ \mathrm N\]`, ""],
+    ["b", "Påsen hänger stilla, så tyngdkraften är lika stor som fjäderkraften.", String.raw`\[F_g=24\ \mathrm N\]`, ""],
+    ["c", "Bestäm massan på jorden.", String.raw`\[m=\frac{F_g}{g}=\frac{24}{9{,}82}=2{,}44\ \mathrm{kg}\]`, ""],
+    ["d", "Massan är oförändrad på månen, men tyngdkraften är mindre.", String.raw`\[F_{g,M}=2{,}44\cdot1{,}62=3{,}96\ \mathrm N\]\[x_M=\frac{3{,}96}{400}=0{,}00990\ \mathrm m=0{,}990\ \mathrm{cm}\]`, ""]
+  ], String.raw`Fjäderkraften och tyngdkraften är \(24\ \mathrm N\), massan \(2{,}44\ \mathrm{kg}\), och på månen blir förlängningen cirka \(0{,}99\ \mathrm{cm}\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_FJADRAR_V2_DEL1[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_FJADRAR_V2_DEL1[uppgift.id];
+  }
+}
+
+const FACIT_FJADRAR_V2_DEL2 = {
+  "4.183": byggFacitListaV2([
+    ["a", "Omvandla 15 cm till 0,15 m och använd Hookes lag.", String.raw`\[k=\frac{F}{x}=\frac{12}{0{,}15}=80\ \mathrm{N/m}\]`, ""],
+    ["b", "Vid 25 cm förlängning krävs", String.raw`\[F=kx=80\cdot0{,}25=20\ \mathrm N\]`, ""],
+    ["c", "Vid kraften 30 N blir förlängningen", String.raw`\[x=\frac{30}{80}=0{,}375\ \mathrm m=37{,}5\ \mathrm{cm}\]`, ""],
+    ["d", "Först bestäms kraften vid 20 cm och därefter massan.", String.raw`\[F=80\cdot0{,}20=16\ \mathrm N\]\[m=\frac{16}{9{,}82}=1{,}63\ \mathrm{kg}\]`, ""]
+  ], String.raw`\(k=80\ \mathrm{N/m}\). Svaren blir \(20\ \mathrm N\), \(37{,}5\ \mathrm{cm}\) och \(1{,}63\ \mathrm{kg}\).`),
+  "4.184": byggFacitListaV2([
+    ["a", "Personens tyngdkraft är", String.raw`\[F_g=75\cdot9{,}82=736{,}5\ \mathrm N\]`, ""],
+    ["b", "Lasten delas lika mellan sex fjädrar.", String.raw`\[F_1=\frac{736{,}5}{6}=122{,}75\ \mathrm N\]`, ""],
+    ["c", "Varje fjäder trycks ihop lika mycket, 4,0 cm.", String.raw`\[k_1=\frac{122{,}75}{0{,}040}=3{,}07\cdot10^3\ \mathrm{N/m}\]`, ""],
+    ["d", "Nedsjunkningen är proportionell mot belastningen.", String.raw`\[x_2=4{,}0\ \mathrm{cm}\cdot\frac{100}{75}=5{,}33\ \mathrm{cm}\]`, ""]
+  ], String.raw`Varje fjäder tar \(123\ \mathrm N\) och har \(k\approx3{,}07\ \mathrm{kN/m}\). En person på 100 kg sänker soffan cirka \(5{,}3\ \mathrm{cm}\).`),
+  "4.185": byggFacitListaV2([
+    ["a", "Förlängningen är skillnaden mellan belastad och obelastad längd.", String.raw`\[x=26-20=6{,}0\ \mathrm{cm}=0{,}060\ \mathrm m\]`, ""],
+    ["b", "Viktens tyngdkraft är", String.raw`\[F_g=0{,}500\cdot9{,}82=4{,}91\ \mathrm N\]`, ""],
+    ["c", "Vid jämvikt gäller \(kx=mg\).", String.raw`\[k=\frac{4{,}91}{0{,}060}=81{,}8\ \mathrm{N/m}\]`, ""],
+    ["d", "Beräkna först den nya förlängningen och lägg sedan till den obelastade längden.", String.raw`\[x_2=\frac{1{,}2\cdot9{,}82}{81{,}8}=0{,}144\ \mathrm m\]\[l_2=0{,}200+0{,}144=0{,}344\ \mathrm m\]`, ""]
+  ], String.raw`Fjäderkonstanten är cirka \(81{,}8\ \mathrm{N/m}\), och med massan 1,2 kg blir fjäderns hela längd cirka \(34{,}4\ \mathrm{cm}\).`),
+  "4.212": byggFacitListaV2([
+    ["1", "Använd \(F=kx\) på den första raden.", String.raw`\[F=200\cdot0{,}15=30\ \mathrm N\]`, ""],
+    ["2", "Lös ut k på den andra raden.", String.raw`\[k=\frac{45}{0{,}25}=180\ \mathrm{N/m}\]`, ""],
+    ["3", "Lös ut förlängningen på den tredje raden.", String.raw`\[x=\frac{28}{350}=0{,}080\ \mathrm m\]`, ""]
+  ], String.raw`De saknade värdena är \(30\ \mathrm N\), \(180\ \mathrm{N/m}\) och \(0{,}080\ \mathrm m\).`),
+  "4.213": byggFacitListaV2([
+    ["a", "Viktens tyngdkraft är", String.raw`\[F_g=mg=0{,}80\cdot9{,}82=7{,}86\ \mathrm N\]`, ""],
+    ["b", "Vid jämvikt är fjäderkraften lika stor som tyngdkraften.", String.raw`\[x=\frac{F_g}{k}=\frac{7{,}86}{120}=0{,}0655\ \mathrm m\]`, ""]
+  ], String.raw`Tyngdkraften är \(7{,}86\ \mathrm N\), och fjädern dras ut cirka \(6{,}55\ \mathrm{cm}\).`),
+  "4.214": byggFacitListaV2([
+    ["a", "Fjäderkonstanten anger kraftbehovet per meter förlängning.", String.raw`\[400\ \mathrm{N/m}>150\ \mathrm{N/m}\]`, "Fjädern med 400 N/m är styvast."],
+    ["b", "Den mjukare fjädern har k = 150 N/m.", String.raw`\[x_m=\frac{20}{150}=0{,}133\ \mathrm m=13{,}3\ \mathrm{cm}\]`, ""],
+    ["c", "För den styvare fjädern blir", String.raw`\[x_s=\frac{20}{400}=0{,}050\ \mathrm m=5{,}0\ \mathrm{cm}\]`, "Samma kraft drar ut den mjuka fjädern 2,67 gånger så långt som den styva."]
+  ], String.raw`Fjädern med \(400\ \mathrm{N/m}\) är styvast. Förlängningarna är \(13{,}3\ \mathrm{cm}\) respektive \(5{,}0\ \mathrm{cm}\).`),
+  "4.267": byggFacitListaV2([
+    ["a", "Viktens tyngdkraft är", String.raw`\[F_g=1{,}2\cdot9{,}82=11{,}78\ \mathrm N\]`, ""],
+    ["b", "När vikten hänger stilla är resultanten noll.", String.raw`\[F_f=F_g=11{,}78\ \mathrm N\]`, ""],
+    ["c", "Hookes lag ger förlängningen.", String.raw`\[x=\frac{F_f}{k}=\frac{11{,}78}{85}=0{,}1386\ \mathrm m\]`, ""],
+    ["d", "Lägg förlängningen till den obelastade längden.", String.raw`\[l=24{,}0+13{,}86=37{,}86\ \mathrm{cm}\]`, ""]
+  ], String.raw`Tyngdkraften och fjäderkraften är \(11{,}8\ \mathrm N\). Fjädern förlängs \(13{,}9\ \mathrm{cm}\) och blir cirka \(37{,}9\ \mathrm{cm}\) lång.`),
+  "4.268": byggFacitListaV2([
+    ["a", "Läs av kraften vid 20 cm i diagrammet.", String.raw`\[F=50\ \mathrm N\]`, ""],
+    ["b", "Grafens lutning beräknas med förlängningen i meter.", String.raw`\[k=\frac{50}{0{,}20}=250\ \mathrm{N/m}\]`, ""],
+    ["c", "Vid 12 cm blir kraften", String.raw`\[F=250\cdot0{,}12=30\ \mathrm N\]`, ""],
+    ["d", "Vid kraften 40 N blir förlängningen", String.raw`\[x=\frac{40}{250}=0{,}16\ \mathrm m=16\ \mathrm{cm}\]`, ""]
+  ], String.raw`Vid 20 cm krävs \(50\ \mathrm N\), \(k=250\ \mathrm{N/m}\), 12 cm ger \(30\ \mathrm N\), och 40 N ger 16 cm.`),
+  "4.269": byggFacitListaV2([
+    ["a", "Omvandla massan till kilogram.", String.raw`\[F_g=0{,}250\cdot9{,}82=2{,}455\ \mathrm N\]`, ""],
+    ["b", "Förlängningen 4,0 cm är 0,040 m.", String.raw`\[k=\frac{2{,}455}{0{,}040}=61{,}4\ \mathrm{N/m}\]`, ""],
+    ["c", "Vid dragkraften 6,0 N blir", String.raw`\[x=\frac{6{,}0}{61{,}4}=0{,}0978\ \mathrm m=9{,}78\ \mathrm{cm}\]`, ""],
+    ["d", "Först bestäms kraften vid 10 cm och därefter massan.", String.raw`\[F=61{,}4\cdot0{,}10=6{,}14\ \mathrm N\]\[m=\frac{6{,}14}{9{,}82}=0{,}625\ \mathrm{kg}\]`, ""]
+  ], String.raw`Tyngdkraften är \(2{,}46\ \mathrm N\), \(k=61{,}4\ \mathrm{N/m}\), 6,0 N ger \(9{,}78\ \mathrm{cm}\), och 10 cm kräver massan cirka \(0{,}625\ \mathrm{kg}\).`),
+  "4.270": byggFacitListaV2([
+    ["a", "Klossens tyngdkraft är", String.raw`\[F_g=3{,}0\cdot9{,}82=29{,}46\ \mathrm N\]`, ""],
+    ["b", "Klossen ligger stilla, så fjäderkraften balanserar tyngdkraften.", String.raw`\[F_f=29{,}46\ \mathrm N\]`, ""],
+    ["c", "Hookes lag gäller även vid hoptryckning.", String.raw`\[x=\frac{29{,}46}{600}=0{,}0491\ \mathrm m=4{,}91\ \mathrm{cm}\]`, ""],
+    ["d", "Den nya höjden är den obelastade höjden minus hoptryckningen.", String.raw`\[l=20{,}0-4{,}91=15{,}09\ \mathrm{cm}\]`, ""]
+  ], String.raw`Fjäderkraften är \(29{,}5\ \mathrm N\), fjädern trycks ihop \(4{,}91\ \mathrm{cm}\) och blir cirka \(15{,}1\ \mathrm{cm}\) hög.`),
+  "4.271": byggFacitListaV2([
+    ["a", "Förlängningen är skillnaden mellan de två längderna.", String.raw`\[x=24{,}5-18{,}0=6{,}5\ \mathrm{cm}=0{,}065\ \mathrm m\]`, ""],
+    ["b", "Tyngdkraften på massan 0,40 kg är", String.raw`\[F_g=0{,}40\cdot9{,}82=3{,}928\ \mathrm N\]`, ""],
+    ["c", "Vid jämvikt gäller \(kx=mg\).", String.raw`\[k=\frac{3{,}928}{0{,}065}=60{,}4\ \mathrm{N/m}\]`, ""],
+    ["d", "Beräkna den nya förlängningen och därefter hela längden.", String.raw`\[x_2=\frac{0{,}60\cdot9{,}82}{60{,}4}=0{,}0975\ \mathrm m\]\[l_2=18{,}0+9{,}75=27{,}75\ \mathrm{cm}\]`, ""]
+  ], String.raw`Fjäderkonstanten är \(60{,}4\ \mathrm{N/m}\). Med massan 0,60 kg blir fjädern cirka \(27{,}8\ \mathrm{cm}\) lång.`),
+  "4.272": byggFacitListaV2([
+    ["a", "Använd Hookes lag och lös ut förlängningen.", String.raw`\[x=\frac{24}{300}=0{,}080\ \mathrm m=8{,}0\ \mathrm{cm}\]`, ""],
+    ["b", "Vid 12 cm förlängning krävs", String.raw`\[F=300\cdot0{,}12=36\ \mathrm N\]`, ""],
+    ["c", "Vid 5,0 cm hoptryckning är kraftens belopp", String.raw`\[F=300\cdot0{,}050=15\ \mathrm N\]`, ""],
+    ["d", "Fjäderkraften är alltid återförande, alltså riktad mot den obelastade längden.", "", "När änden har tryckts åt vänster trycker fjädern den åt höger."]
+  ], String.raw`Förlängningen är \(8{,}0\ \mathrm{cm}\). Krafterna är \(36\ \mathrm N\) vid 12 cm förlängning och \(15\ \mathrm N\) vid 5,0 cm hoptryckning.`),
+  "4.273": byggFacitListaV2([
+    ["1", "Viktens tyngdkraft verkar genom båda seriekopplade fjädrarna.", String.raw`\[F=mg=2{,}5\cdot9{,}82=24{,}55\ \mathrm N\]`, ""],
+    ["2", "Varje fjäder förlängs lika mycket.", String.raw`\[x_1=x_2=\frac{24{,}55}{200}=0{,}1228\ \mathrm m\]`, ""],
+    ["3", "Förlängningarna adderas i serie.", String.raw`\[x_{\mathrm{tot}}=x_1+x_2=0{,}2455\ \mathrm m\]`, "En enda sådan fjäder hade förlängts 12,3 cm, så vikten sjunker dubbelt så långt med två i serie."],
+    ["4", "Ersättningskonstanten blir", String.raw`\[k_{\mathrm{ers}}=\frac{F}{x_{\mathrm{tot}}}=\frac{24{,}55}{0{,}2455}=100\ \mathrm{N/m}\]`, ""]
+  ], String.raw`Vikten sjunker \(24{,}6\ \mathrm{cm}\), dubbelt så långt som med en fjäder. Ersättningskonstanten är \(100\ \mathrm{N/m}\).`),
+  "4.274": byggFacitListaV2([
+    ["1", "Fjädrarna är parallellkopplade och dras ut lika mycket. Tillsammans bär de hela tyngden.", String.raw`\[(k_1+k_2)x=mg\]`, ""],
+    ["2", "Lös ut den gemensamma förlängningen.", String.raw`\[x=\frac{4{,}0\cdot9{,}82}{150+250}=0{,}0982\ \mathrm m\]`, ""],
+    ["3", "Beräkna respektive fjäderkraft.", String.raw`\[F_1=150\cdot0{,}0982=14{,}73\ \mathrm N\]\[F_2=250\cdot0{,}0982=24{,}55\ \mathrm N\]`, ""],
+    ["4", "Andelarna följer fjäderkonstanternas andelar av totalsumman.", String.raw`\[\frac{F_1}{mg}=37{,}5\%,\qquad\frac{F_2}{mg}=62{,}5\%\]`, ""]
+  ], String.raw`Båda fjädrarna förlängs \(9{,}82\ \mathrm{cm}\). Fjädern med 150 N/m bär \(14{,}7\ \mathrm N\) och den med 250 N/m bär \(24{,}6\ \mathrm N\).`),
+  "4.275": byggFacitListaV2([
+    ["1", "Grafens lutningar ger fjäderkonstanterna.", String.raw`\[k_A=\frac{40}{0{,}10}=400\ \mathrm{N/m}\]\[k_B=\frac{30}{0{,}20}=150\ \mathrm{N/m}\]`, ""],
+    ["2", "Kraften som krävs för att dra ut B 12 cm är", String.raw`\[F=k_Bx=150\cdot0{,}12=18\ \mathrm N\]`, ""],
+    ["3", "Den hängande massan fås ur \(mg=18\ \mathrm N\).", String.raw`\[m=\frac{18}{9{,}82}=1{,}83\ \mathrm{kg}\]`, ""],
+    ["4", "Samma vikt ger samma kraft i A.", String.raw`\[x_A=\frac{18}{400}=0{,}045\ \mathrm m=4{,}5\ \mathrm{cm}\]`, ""]
+  ], String.raw`Massan ska vara cirka \(1{,}83\ \mathrm{kg}\). Samma vikt drar ut fjäder A \(4{,}5\ \mathrm{cm}\).`),
+  "4.276": byggFacitListaV2([
+    ["1", "Betrakta den hela fjädern som två lika halvor i serie. Varje halva får halva förlängningen vid samma kraft.", String.raw`\[k_{\mathrm{halva}}=2k_{\mathrm{hel}}=2\cdot120=240\ \mathrm{N/m}\]`, ""],
+    ["2", "Viktens tyngdkraft är", String.raw`\[F_g=1{,}5\cdot9{,}82=14{,}73\ \mathrm N\]`, ""],
+    ["3", "Halvans förlängning blir", String.raw`\[x=\frac{14{,}73}{240}=0{,}0614\ \mathrm m=6{,}14\ \mathrm{cm}\]`, ""],
+    ["4", "En kortare fjäder av samma typ har färre aktiva varv.", "", "Den deformeras därför mindre av samma kraft och har större fjäderkonstant."]
+  ], String.raw`Halvan får fjäderkonstanten \(240\ \mathrm{N/m}\) och dras ut cirka \(6{,}1\ \mathrm{cm}\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_FJADRAR_V2_DEL2[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_FJADRAR_V2_DEL2[uppgift.id];
+  }
+}
+
+function byggKraftfigur2DV3({ id, objekt, krafter, aria }) {
+  const pil = `kraftpil-${id}`;
+  const justeradeKrafter = krafter.map(([etikett, x1, y1, x2, y2]) => {
+    const arLodratUppatriktadNormalkraft = /^N(?:_|$)/.test(etikett) && x1 === x2 && y2 < y1;
+    const sammanfallerMedNedatriktadKraft = krafter.some(([, ox1, oy1, ox2, oy2]) =>
+      ox1 === x1 && ox2 === x2 && oy2 > oy1
+    );
+    if (arLodratUppatriktadNormalkraft && sammanfallerMedNedatriktadKraft) {
+      return [etikett, x1 - 28, y1, x2 - 28, y2];
+    }
+    return [etikett, x1, y1, x2, y2];
+  });
+  const pilar = justeradeKrafter.map(([etikett, x1, y1, x2, y2]) => {
+    const dx = x2 - x1, dy = y2 - y1;
+    const tx = x2 + (dx < -10 ? -8 : 8);
+    const ty = y2 + (dy > 10 ? 16 : dy < -10 ? -8 : 4);
+    const ankare = dx < -10 ? "end" : "start";
+    return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#B43123" stroke-width="3" marker-end="url(#${pil})"/><text x="${tx}" y="${ty}" text-anchor="${ankare}" font-family="IBM Plex Mono" font-size="12" font-weight="600" fill="#B43123">${etikett}</text>`;
+  }).join("");
+  return `<span class="fig"><svg viewBox="0 0 430 260" role="img" aria-label="${aria}" xmlns="http://www.w3.org/2000/svg"><defs><marker id="${pil}" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 Z" fill="#B43123"/></marker></defs><rect x="165" y="105" width="100" height="50" rx="12" fill="#EDEEF1" stroke="#2B2527" stroke-width="2.2"/><text x="215" y="135" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#2B2527">${objekt}</text>${pilar}</svg></span>`;
+}
+
+const FACIT_RITAKRAFTER_V2_DEL1 = {
+  "4.132": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4132",objekt:"bok",krafter:[["N",215,155,215,48],["F_g",215,130,215,225]],aria:"Frilagd bok med normalkraft uppåt och tyngdkraft nedåt."}),
+    [["a", "På boken verkar tyngdkraften från jorden och normalkraften från bordet.", String.raw`\[\vec F_g\ \text{nedåt},\qquad \vec N\ \text{uppåt}\]`, ""], ["b", "Boken är i vila, så accelerationen och kraftresultanten är noll.", String.raw`\[\sum F_y=N-F_g=0\Rightarrow N=F_g\]`, "Krafterna är inte ett kraft–motkraftspar eftersom båda verkar på boken."]],
+    String.raw`Tyngdkraften och normalkraften är lika stora och motriktade.`
+  ),
+  "4.133": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4133",objekt:"låda",krafter:[["N",215,155,215,48],["F_g",215,130,215,225],["F_D",265,130,355,130],["f",215,155,115,155]],aria:"Frilagd låda med tyngdkraft, normalkraft, dragkraft och friktion."}),
+    [["a", "De fyra krafterna är tyngdkraft, normalkraft, snörets dragkraft och friktionskraft.", "", "Friktionen verkar vid kontaktytan och är riktad mot glidningen."], ["b", "Konstant fart innebär noll acceleration i båda riktningarna.", String.raw`\[\sum F_y=N-F_g=0\Rightarrow N=F_g\]\[\sum F_x=F_D-f=0\Rightarrow F_D=f\]`, ""]],
+    String.raw`Lodrätt gäller \(N=F_g\), och vågrätt gäller \(F_D=f\).`
+  ),
+  "4.134": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4134",objekt:"kloss",krafter:[["F_g",215,130,215,225],["N",195,110,155,40],["f",245,115,330,72]],aria:"Frilagd kloss på lutande plan med tyngdkraft nedåt, normalkraft vinkelrätt mot planet och friktion uppför planet."}),
+    [["a", "Tyngdkraften pekar lodrätt nedåt, normalkraften vinkelrätt från planet och den statiska friktionen längs planet.", "", ""], ["b", "Utan friktion skulle klossen börja glida nedför planet.", "", "Friktionen pekar därför uppför planet."], ["c", "Normalkraften balanserar bara tyngdkraftens vinkelräta komposant.", String.raw`\[N=mg\cos25^\circ\approx0{,}906mg\]`, ""]],
+    String.raw`Normalkraften är mindre än tyngdkraften och friktionen pekar uppför planet.`
+  ),
+  "4.135": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4135",objekt:"lampa",krafter:[["S",215,105,215,35],["F_g",215,130,215,225]],aria:"Frilagd lampa med snörkraft uppåt och tyngdkraft nedåt."}),
+    [["a", "På lampan verkar snörkraften uppåt längs snöret och tyngdkraften nedåt.", "", ""], ["b", "Lampan är i jämvikt.", String.raw`\[S-mg=0\Rightarrow S=mg\]`, "Dubbel massa ger dubbel tyngdkraft och därför dubbel spännkraft."]],
+    String.raw`I vila är \(S=mg\). En dubbelt så tung lampa ger dubbelt så stor spännkraft.`
+  ),
+  "4.136": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4136",objekt:"person",krafter:[["N",215,155,215,35],["F_g",215,130,215,215]],aria:"Person i accelererande hiss med en större normalkraft uppåt än tyngdkraften nedåt."}),
+    [["a", "På personen verkar tyngdkraften nedåt och normalkraften från hissgolvet uppåt.", "", ""], ["b", "Räkna uppåt som positiv riktning.", String.raw`\[N-mg=ma\Rightarrow N=m(g+a)>mg\]`, "Normalkraften är alltså störst när hissen accelererar uppåt."], ["c", "En badrumsvåg reagerar på normalkraften.", "", "Den visar ett större värde än när hissen står stilla."]],
+    String.raw`\(N=m(g+a)\), så personen får större skenbar tyngd än i vila.`
+  ),
+  "4.137": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4137",objekt:"boll",krafter:[["F_g",215,130,215,225]],aria:"Boll i kaströrelse med endast tyngdkraft nedåt."}),
+    [["a", "Efter att bollen lämnat handen och när luftmotstånd försummas verkar bara tyngdkraften.", String.raw`\[\sum\vec F=\vec F_g=m\vec g\]`, ""], ["b", "En kraft framåt behövs inte för att bevara den vågräta hastigheten.", "", "Bollen fortsätter framåt av tröghet, medan tyngdkraften ändrar den lodräta hastigheten och böjer banan."]],
+    String.raw`Endast tyngdkraften verkar, riktad lodrätt nedåt.`
+  ),
+  "4.139": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4139a",objekt:"kloss",krafter:[["N",215,155,215,48],["F_g",215,130,215,225],["S",265,130,355,130],["f",215,155,115,155]],aria:"Frilagd kloss på bord med normalkraft, tyngdkraft, snörkraft och friktion."})+
+    byggKraftfigur2DV3({id:"4139b",objekt:"hängvikt",krafter:[["S",215,105,215,38],["F_g",215,130,215,225]],aria:"Frilagd hängvikt med snörkraft uppåt och tyngdkraft nedåt."}),
+    [["a", "På klossen verkar \(F_g\), \(N\), snörkraften S och friktionen f.", String.raw`\[N=F_g,\qquad S-f=m_{\mathrm k}a\]`, ""], ["b", "På den hängande vikten verkar tyngdkraften nedåt och snörkraften uppåt.", String.raw`\[m_{\mathrm v}g-S=m_{\mathrm v}a\]`, ""], ["c", "Eftersom vikten accelererar nedåt måste den nedåtriktade kraften vara störst.", String.raw`\[S=m_{\mathrm v}(g-a)<m_{\mathrm v}g\]`, ""]],
+    String.raw`Spännkraften är mindre än den hängande viktens tyngdkraft när systemet accelererar.`
+  ),
+  "4.141": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4141",objekt:"båt",krafter:[["F_A",215,155,215,45],["F_g",215,130,215,225]],aria:"Flytande båt med Archimedeskraft uppåt och tyngdkraft nedåt."}),
+    [["a", "På båten verkar tyngdkraften nedåt och vattnets lyftkraft uppåt.", "", ""], ["b", "Båten flyter stilla, så kraftresultanten är noll.", String.raw`\[F_A-F_g=0\Rightarrow F_A=mg\]`, "Den uppåtriktade kraften kallas Archimedeskraft eller lyftkraft."]],
+    String.raw`Archimedeskraften är lika stor som båtens tyngdkraft.`
+  ),
+  "4.142": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4142",objekt:"skidåkare",krafter:[["F_g",215,130,215,225],["N",195,110,150,35],["f",245,115,325,70]],aria:"Skidåkare på lutning med tyngdkraft, normalkraft och friktion."}),
+    [["a", "Krafterna är tyngdkraften lodrätt nedåt, normalkraften vinkelrätt från underlaget och friktionen uppför backen.", "", ""], ["b", "En normalkraft är per definition vinkelrät mot kontaktytan.", "", "Eftersom underlaget lutar 30° kan normalkraften inte peka lodrätt uppåt."]],
+    String.raw`Normalkraften pekar 90° från backens yta, och friktionen pekar uppför backen.`
+  ),
+  "4.143": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4143",objekt:"järnkula",krafter:[["F_g",215,130,215,225],["S",190,110,125,38],["F_{mag}",265,130,355,130]],aria:"Järnkula i jämvikt med tyngdkraft nedåt, magnetkraft åt höger och snörkraft snett uppåt vänster."}),
+    [["a", "På kulan verkar tyngdkraften nedåt, magnetkraften åt höger och spännkraften längs snöret uppåt åt vänster.", "", ""], ["b", "Jämvikt kräver att spännkraftens komposanter balanserar de två andra krafterna.", String.raw`\[S_x=F_{\mathrm{mag}},\qquad S_y=mg\]`, "Därför måste snöret luta."]],
+    String.raw`Snörkraftens horisontella komposant balanserar magnetkraften och dess lodräta komposant balanserar tyngdkraften.`
+  ),
+  "4.144": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4144",objekt:"kloss",krafter:[["F_g",215,130,215,225],["f",215,105,215,35],["F",165,130,75,130],["N",265,130,355,130]],aria:"Kloss mot vägg med tyngdkraft nedåt, friktion uppåt och två motriktade horisontella krafter."}),
+    [["a", "Krafterna är tyngdkraften nedåt, friktionen uppåt, handens tryckkraft in mot väggen och väggens normalkraft ut från väggen.", "", ""], ["b", "Normalkraften är vinkelrät mot väggytan.", String.raw`\[\sum F_x=0\Rightarrow N=F\]\[\sum F_y=0\Rightarrow f=mg\]`, ""]],
+    String.raw`Normalkraften pekar horisontellt ut från väggen; friktionen hindrar klossen från att glida ned.`
+  ),
+  "4.145": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4145",objekt:"flygplan",krafter:[["F_L",215,105,215,35],["F_g",215,130,215,225],["F_D",265,130,355,130],["F_{luft}",165,130,75,130]],aria:"Flygplan med lyftkraft, tyngdkraft, dragkraft och luftmotstånd."}),
+    [["a", "De fyra krafterna är lyftkraft uppåt, tyngdkraft nedåt, motorernas dragkraft framåt och luftmotstånd bakåt.", "", ""], ["b", "Konstant hastighet och höjd innebär noll acceleration.", String.raw`\[F_L=F_g,\qquad F_D=F_{\mathrm{luft}}\]`, ""]],
+    String.raw`Lyftkraften balanserar tyngdkraften och dragkraften balanserar luftmotståndet.`
+  ),
+  "4.146": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4146",objekt:"+q",krafter:[["F_E",215,105,215,35],["F_g",215,130,215,225]],aria:"Positiv laddning mellan plattor med elektrisk kraft uppåt och tyngdkraft nedåt."}),
+    [["a", "På bollen verkar tyngdkraften nedåt och den elektriska kraften uppåt.", String.raw`\[F_E=F_g=mg\]`, ""], ["b", "Fältet går från den positiva undre plattan till den negativa övre plattan.", String.raw`\[\vec F_E=q\vec E\]`, "För en positiv laddning pekar kraften i fältets riktning, alltså uppåt."]],
+    String.raw`Den elektriska kraften pekar uppåt och är lika stor som tyngdkraften.`
+  ),
+  "4.147": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4147",objekt:"lampa",krafter:[["S_1",185,110,115,35],["S_2",245,110,325,45],["F_g",215,130,215,225]],aria:"Lampa med två sneda spännkrafter och tyngdkraft nedåt."}),
+    [["a", "På lampan verkar tyngdkraften samt en spännkraft längs vardera snöret.", "", ""], ["b", "Horisontella och lodräta komponenter måste ge jämvikt.", String.raw`\[S_1\cos\alpha=S_2\cos\beta\]\[S_1\sin\alpha+S_2\sin\beta=mg\]`, "Om vinklarna skiljer sig behöver spännkrafterna i allmänhet vara olika."]],
+    String.raw`Spännkrafterna är lika endast i ett symmetriskt fall med lika vinklar.`
+  ),
+  "4.148": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4148",objekt:"boll",krafter:[["F_g",215,130,215,225]],aria:"Uppåtkastad boll med endast tyngdkraft nedåt."}),
+    [["a", "När bollen har lämnat handen och luftmotstånd försummas verkar endast tyngdkraften.", "", ""], ["b", "Bollens hastighet är uppåt men dess acceleration är nedåt.", String.raw`\[\sum\vec F=m\vec g\]`, "Det finns inget föremål som fortsätter utöva en kraft uppåt efter kastet."]],
+    String.raw`Endast tyngdkraften verkar, riktad nedåt även när bollen rör sig uppåt.`
+  ),
+  "4.149": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4149",objekt:"låda",krafter:[["N",215,155,215,48],["F_g",215,130,215,225],["f",215,155,330,155]],aria:"Låda på transportband med normalkraft, tyngdkraft och friktion åt höger."}),
+    [["a", "På lådan verkar tre krafter: tyngdkraften, normalkraften och friktionskraften från bandet.", "", ""], ["b", "Bandets yta rör sig åt höger relativt lådans undersida.", "", "Friktionen på lådan pekar därför åt höger och accelererar den tills halkningen upphör."], ["c", "Lodrätt tar krafterna ut varandra, medan friktionen är den enda vågräta kraften.", String.raw`\[N=mg,\qquad f=ma\]`, ""]],
+    String.raw`Tre krafter verkar. Friktionen pekar åt höger och är den kraft som accelererar lådan.`
+  ),
+  "4.150": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4150",objekt:"rymdskepp",krafter:[["F_g\ mot\ jorden",165,130,65,130]],aria:"Rymdskepp i omloppsbana med endast jordens tyngdkraft riktad mot jorden."}),
+    [["a", "När motorerna är avstängda och andra himlakroppar försummas verkar endast jordens tyngdkraft.", "", ""], ["b", "Rymdskeppet och allt ombord faller tillsammans mot jorden.", "", "Det ger upplevd viktlöshet trots att tyngdkraften är stark."], ["c", "Tyngdkraften pekar mot jordens centrum och fungerar som centripetalkraft.", String.raw`\[F_g=F_c=\frac{mv^2}{r}\]`, "Den ändrar hastighetens riktning och håller banan krökt."]],
+    String.raw`Endast jordens tyngdkraft verkar; den är centripetalkraften som håller rymdskeppet i omloppsbana.`
+  ),
+  "4.196": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4196",objekt:"fågel",krafter:[["N",215,155,215,48],["F_g",215,130,215,225]],aria:"Fågel på gren med normalkraft uppåt och tyngdkraft nedåt."}),
+    [["a", "På fågeln verkar tyngdkraften nedåt och grenens normalkraft uppåt.", "", ""], ["b", "Fågeln är stilla.", String.raw`\[N-F_g=0\Rightarrow N=F_g\]`, ""], ["c", "Motkraften till grenens normalkraft på fågeln är fågelns lika stora kraft nedåt på grenen.", "", "Den verkar på grenen och ska därför inte ritas i fågelns friläggning."]],
+    String.raw`Normalkraften och tyngdkraften är lika stora. Normalkraftens motkraft verkar på grenen.`
+  )
+};
+
+for (const uppgift of window.BANK) {
+  if (uppgift.id === "4.143") {
+    uppgift.t = uppgift.t.replace("Snöret är inte vertikalt, vad gör det vinkelrätt mot rörelseriktningen?", "Varför hänger snöret snett i jämviktsläget?");
+  }
+  if (uppgift.id === "4.149") {
+    uppgift.t = uppgift.t.replace("Vilka fyra krafter verkar på lådan?", "Vilka tre krafter verkar på lådan?");
+  }
+  if (FACIT_RITAKRAFTER_V2_DEL1[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_RITAKRAFTER_V2_DEL1[uppgift.id];
+  }
+}
+
+const FACIT_RITAKRAFTER_V2_DEL2 = {
+  "4.197": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4197",objekt:"kloss",krafter:[["F_f",215,105,215,35],["F_g",215,130,215,225]],aria:"Kloss i fjäder med fjäderkraft uppåt och tyngdkraft nedåt."}),
+    [["a", "På klossen verkar tyngdkraften nedåt och fjäderkraften uppåt.", "", ""], ["b", "Klossen hänger stilla, så resultanten är noll.", String.raw`\[F_f-F_g=0\Rightarrow F_f=mg\]`, ""], ["c", "En tyngre kloss ger större tyngdkraft.", String.raw`\[F_f=kx=mg\Rightarrow x=\frac{mg}{k}\]`, "Fjädern förlängs mer tills den större fjäderkraften åter ger jämvikt."]],
+    String.raw`I jämvikt är fjäderkraften lika stor som tyngdkraften. En tyngre kloss ger större förlängning.`
+  ),
+  "4.198": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4198",objekt:"övre bok",krafter:[["N_{bok}",215,155,215,48],["F_g",215,130,215,225]],aria:"Övre bok med normalkraft från den undre boken uppåt och tyngdkraft nedåt."}),
+    [["a", "På den övre boken verkar dess tyngdkraft och normalkraften från den undre boken.", String.raw`\[N_{\mathrm{bok}}=F_g\]`, ""], ["b", "Normalkraften kommer från den kropp som den övre boken faktiskt berör.", "", "Det är den undre boken."], ["c", "Bordet har ingen direkt kontakt med den övre boken.", "", "Bordets normalkraft verkar därför inte på den övre boken; stödet förmedlas genom den undre."]],
+    String.raw`Den övre boken påverkas av sin tyngdkraft och en lika stor normalkraft från den undre boken.`
+  ),
+  "4.199": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4199",objekt:"bil",krafter:[["N",215,155,215,48],["F_g",215,130,215,225],["F_{driv}",265,130,355,130],["F_{mot}",165,130,75,130]],aria:"Bil med tyngdkraft, normalkraft, drivkraft och motståndskraft."}),
+    [["a", "På bilen verkar tyngdkraft, normalkraft, drivkraft framåt samt luft- och rullmotstånd bakåt.", "", ""], ["b", "Konstant fart på rak väg innebär noll acceleration.", String.raw`\[\sum F_x=F_{\mathrm{driv}}-F_{\mathrm{mot}}=0\]\[\sum F_y=N-F_g=0\]`, ""], ["c", "Om drivkraften ökar blir resultanten först framåtriktad.", "", "Bilen accelererar tills växande motstånd åter balanserar drivkraften vid en högre fart."]],
+    String.raw`Kraftresultanten är noll vid konstant fart. Mer gas ger en framåtriktad resultant och acceleration.`
+  ),
+  "4.200": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4200",objekt:"hoppare",krafter:[["F_{luft}",215,105,215,35],["F_g",215,130,215,225]],aria:"Fallskärmshoppare vid konstant fallfart med luftmotstånd uppåt och tyngdkraft nedåt."}),
+    [["a", "På hopparen med skärm verkar tyngdkraften nedåt och luftmotståndet uppåt.", "", ""], ["b", "Konstant fallfart betyder att accelerationen är noll.", String.raw`\[F_g-F_{\mathrm{luft}}=0\Rightarrow F_{\mathrm{luft}}=F_g\]`, ""], ["c", "Rörelseriktningen bestämmer inte resultanten.", "", "Hopparen rör sig nedåt trots att den resulterande kraften är noll."]],
+    String.raw`Tyngdkraften och luftmotståndet är lika stora; resultanten är noll.`
+  ),
+  "4.221": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4221",objekt:"hink",krafter:[["S",215,105,215,35],["F_g",215,130,215,225]],aria:"Hink som dras upp med konstant fart med snörkraft uppåt och tyngdkraft nedåt."}),
+    [["a", "På hinken verkar snörkraften uppåt och tyngdkraften nedåt.", "", ""], ["b", "Konstant fart innebär noll acceleration.", String.raw`\[S-mg=0\Rightarrow S=mg\]`, ""], ["c", "Att hinken rör sig uppåt kräver inte en uppåtriktad resultant.", "", "En uppåtriktad resultant behövs bara när dess uppåthastighet ökar."]],
+    String.raw`Snörkraften och tyngdkraften är lika stora; resultanten är noll.`
+  ),
+  "4.222": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4222",objekt:"boll",krafter:[["N",215,155,215,48],["F_g",215,130,215,225]],aria:"Rullande boll med normalkraft uppåt och tyngdkraft nedåt."}),
+    [["a", "När friktion och luftmotstånd försummas verkar bara tyngdkraften och normalkraften.", String.raw`\[N=F_g\]`, ""], ["b", "Ingen kraft verkar framåt.", "", "Enligt Newtons första lag bevaras hastigheten när resultanten är noll."], ["c", "Om samtliga krafter upphör fortsätter bollen med oförändrad hastighetsvektor.", "", "Den rör sig rätlinjigt med konstant fart."]],
+    String.raw`Ingen framåtkraft behövs. Bollen fortsätter åt höger eftersom den redan har den hastigheten.`
+  ),
+  "4.223": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4223",objekt:"tavla",krafter:[["S_1",185,110,115,35],["S_2",245,110,315,35],["F_g",215,130,215,225]],aria:"Tavla med två symmetriska snörkrafter och tyngdkraft."}),
+    [["a", "Tre krafter verkar: tyngdkraften och två spännkrafter längs snörena.", "", ""], ["b", "Symmetrin ger lika stora spännkrafter.", String.raw`\[S_1=S_2=S\]`, ""], ["c", "De vågräta komposanterna tar ut varandra. De lodräta bär tavlan.", String.raw`\[2S\sin\theta=mg\]`, "Eftersom \(\sin\theta<1\) är summan \(S_1+S_2\) större än tyngdkraften när snörena lutar."]],
+    String.raw`Spännkrafterna är lika stora. Det är deras lodräta komposanter, inte summan av beloppen, som tillsammans motsvarar tyngdkraften.`
+  ),
+  "4.257": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4257",objekt:"låda",krafter:[["F_g",215,130,215,225],["N",215,155,215,48],["S",260,115,340,68],["f",215,155,115,155]],aria:"Låda dragen med snett snöre med tyngdkraft, normalkraft, spännkraft och friktion."}),
+    [["a", "Krafterna är tyngdkraft, normalkraft, snörkraft och friktion.", "", ""], ["b", "Lådan glider åt höger, så friktionen pekar åt vänster.", "", ""], ["c", "Snörets lodräta komposant hjälper till att bära lådan.", String.raw`\[N+S\sin30^\circ=mg\Rightarrow N=mg-S\sin30^\circ<mg\]`, "Vid konstant fart gäller dessutom \(S\cos30^\circ=f\)."]],
+    String.raw`Friktionen pekar bakåt och normalkraften är mindre än tyngdkraften.`
+  ),
+  "4.258": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4258",objekt:"kloss",krafter:[["F_g",215,130,215,225],["N",195,110,150,35],["f",245,115,330,72]],aria:"Kloss i vila på lutande plan med tyngdkraft, normalkraft och statisk friktion."}),
+    [["a", "Krafterna är tyngdkraften, normalkraften och den statiska friktionen.", "", ""], ["b", "Klossen skulle annars glida nedför planet, så friktionen pekar uppför.", "", ""], ["c", "Dela upp tyngdkraften längs och vinkelrätt mot planet.", String.raw`\[N=mg\cos v,\qquad f=mg\sin v\]`, "Normalkraften är alltså mindre än tyngdkraften."], ["d", "När vinkeln v ökar, ökar \(mg\sin v\) och \(mg\cos v\) minskar.", "", "Den nödvändiga friktionen ökar samtidigt som maximal statisk friktion minskar; till slut börjar klossen glida."]],
+    String.raw`Friktionen pekar uppför planet. Den ökar när planet görs brantare, tills greppet inte längre räcker.`
+  ),
+  "4.259": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4259",objekt:"person",krafter:[["F_g",215,130,215,225],["N",215,155,215,48],["F_{vägg}",265,130,355,130],["f",215,155,115,155]],aria:"Person som trycker mot vägg med väggkraft bakåt och golvfriktion framåt."}),
+    [["a", "På personen verkar tyngdkraft, golvets normalkraft, väggens kraft och golvets friktionskraft.", "", ""], ["b", "Newtons tredje lag ger väggens motkraft.", String.raw`\[F_{\mathrm{vägg\ på\ person}}=150\ \mathrm N\]`, "Den är riktad bort från väggen."], ["c", "Personen står stilla, så de vågräta krafterna balanserar.", String.raw`\[f=150\ \mathrm N\]`, ""], ["d", "På is räcker den statiska friktionen inte till.", "", "Personen glider bort från väggen."]],
+    String.raw`Väggen trycker tillbaka med \(150\ \mathrm N\), och golvets friktion är \(150\ \mathrm N\) mot väggen.`
+  ),
+  "4.260": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4260",objekt:"undre låda",krafter:[["N_{golv}",215,155,215,35],["F_{g,undre}",195,130,195,225],["N_{övre}",235,105,235,225]],aria:"Undre låda med golvets normalkraft uppåt samt egen tyngdkraft och den övre lådans tryck nedåt."}),
+    [["a", "På den undre lådan verkar dess egen tyngdkraft, golvets normalkraft och den övre lådans kontaktkraft.", "", ""], ["b", "Den övre lådan är i jämvikt och trycker därför nedåt med", String.raw`\[N_{\mathrm{övre}}=5{,}0\cdot9{,}82=49{,}1\ \mathrm N\]`, ""], ["c", "Golvet bär båda lådornas tyngd.", String.raw`\[N_{\mathrm{golv}}=(12+5{,}0)9{,}82=166{,}9\ \mathrm N\]`, ""], ["d", "Den övre lådans tyngdkraft verkar på den övre lådan.", "", "På den undre verkar i stället kontaktkraften från den övre lådan."]],
+    String.raw`Den övre lådan trycker med \(49{,}1\ \mathrm N\), och golvets normalkraft är cirka \(167\ \mathrm N\).`
+  ),
+  "4.261": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4261",objekt:"bil",krafter:[["N",215,155,215,48],["F_g",215,130,215,225],["f",215,155,105,155],["F_{luft}",165,125,75,125]],aria:"Bromsande bil med normalkraft, tyngdkraft, vägfriktion och luftmotstånd."}),
+    [["a", "På bilen verkar tyngdkraft, normalkraft, bromsande friktion från vägen och luftmotstånd.", "", ""], ["b", "Bilen rör sig åt höger men farten minskar, så accelerationen och resultanten pekar åt vänster.", String.raw`\[\sum F_x=-(f+F_{\mathrm{luft}})\]`, ""], ["c", "Ingen framåtriktad kraft behövs för att bilen fortfarande ska röra sig framåt.", "", ""], ["d", "Bromsarna minskar hjulens rotation; kraften som bromsar bilens rörelse utifrån är vägbanans friktion vid däcken, tillsammans med luftmotståndet.", "", ""]],
+    String.raw`Resultanten pekar bakåt. Vägfriktionen vid däcken och luftmotståndet bromsar bilen.`
+  ),
+  "4.262": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4262",objekt:"ballong",krafter:[["F_A",215,105,215,28],["F_g",215,130,215,225],["S",185,150,120,225],["F_{vind}",265,130,355,130]],aria:"Heliumballong med lyftkraft, tyngdkraft, sned snörkraft och vindkraft."}),
+    [["a", "Krafterna är lyftkraft uppåt, tyngdkraft nedåt, vindkraft åt sidan och snörkraft längs snöret mot markfästet.", "", ""], ["b", "Snöret måste luta för att dess vågräta komposant ska balansera vindkraften.", "", ""], ["c", "Snörkraftens lodräta komposant pekar nedåt.", String.raw`\[F_A=F_g+|S_y|>F_g\]`, ""], ["d", "Starkare vind kräver större vågrät spännkraftskomposant.", "", "Snöret lutar därför mer bort från lodlinjen."]],
+    String.raw`Lyftkraften är större än tyngdkraften eftersom den även balanserar snörkraftens nedåtriktade komposant.`
+  ),
+  "4.263": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4263",objekt:"kloss",krafter:[["F_g",215,130,215,225],["f",215,105,215,35],["F_{hand}",165,130,75,130],["N",265,130,355,130]],aria:"Kloss mot vägg med handkraft, normalkraft, friktion och tyngdkraft."}),
+    [["a", "Krafterna är handens tryckkraft, väggens normalkraft, tyngdkraften och den statiska friktionen.", "", ""], ["b", "Klossen är i lodrät jämvikt.", String.raw`\[f-mg=0\Rightarrow f=2{,}0\cdot9{,}82=19{,}6\ \mathrm N\]`, "Friktionen pekar uppåt."], ["c", "När handen trycker hårdare ökar N, men den friktion som behövs för jämvikt är fortfarande mg.", String.raw`\[f=mg,\qquad f_{\max}=\mu_sN\]`, "Marginalen till den maximala statiska friktionen ökar, så klossen sitter säkrare."]],
+    String.raw`Friktionskraften är \(19{,}6\ \mathrm N\) uppåt. Hårdare tryck ökar inte den aktuella friktionen, men höjer dess möjliga maxvärde.`
+  ),
+  "4.264": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4264",objekt:"låda",krafter:[["N",215,155,215,48],["F_g",215,130,215,225],["f_s",215,155,330,155]],aria:"Låda på accelererande lastbil med statisk friktion framåt."}),
+    [["a", "På lådan verkar tyngdkraften, normalkraften och statisk friktion framåt.", "", ""], ["b", "Tyngdkraft och normalkraft tar ut varandra. Friktionen är den enda vågräta kraften och ger accelerationen.", String.raw`\[f_s=ma=25\cdot1{,}6=40\ \mathrm N\]`, ""], ["c", "Om flaket är mycket halt räcker friktionen inte till.", "", "Lådan behåller nästan sin gamla fart medan flaket accelererar under den och glider därför bakåt relativt flaket."]],
+    String.raw`Den statiska friktionen är \(40\ \mathrm N\) framåt och accelererar lådan.`
+  ),
+  "4.265": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4265",objekt:"kruka",krafter:[["F_g",215,130,215,225],["S_1",190,110,125,35],["S_2",265,130,355,130]],aria:"Kruka med tyngdkraft, sned övre snörkraft och vågrät snörkraft."}),
+    [["a", "På krukan verkar tyngdkraften samt spännkraften från vart och ett av snörena.", "", ""], ["b", "Ett snöre drar alltid längs sin egen riktning mot fästpunkten.", "", "Det vågräta snöret drar åt höger."], ["c", "Endast den lodräta komponenten av det övre snörets kraft bär krukan.", String.raw`\[S_1\cos35^\circ=mg\Rightarrow S_1=\frac{mg}{\cos35^\circ}>mg\]`, ""], ["d", "När vinkeln från lodlinjen ökar minskar cosinus.", "", "Därför måste \(S_1\) öka."]],
+    String.raw`Det övre snörets kraft är större än tyngdkraften och ökar när krukan dras längre åt sidan.`
+  ),
+  "4.266": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4266",objekt:"stege",krafter:[["F_g",215,130,215,225],["N_g",190,155,190,45],["f_g",165,150,80,150],["N_v",265,110,350,110]],aria:"Stege mot slät vägg med tyngdkraft, golvets normal- och friktionskraft samt väggens normalkraft."}),
+    [["a", "Tyngdkraften angriper i stegens tyngdpunkt. Golvets normalkraft och friktion angriper vid foten, och väggens normalkraft vid toppen.", "", ""], ["b", "Väggens normalkraft trycker toppen bort från väggen.", "", "Golvfriktionen måste balansera den vågrätt; annars glider foten ut."], ["c", "Väggen är slät och ger ingen lodrät kraft.", String.raw`\[N_{\mathrm{golv}}-mg=0\Rightarrow N_{\mathrm{golv}}=mg\]`, ""], ["d", "När en person klättrar upp ökar det vridande momentet kring stegens fot.", "", "Väggens normalkraft och den nödvändiga golvfriktionen ökar, särskilt när personen står högt."]],
+    String.raw`Golvets normalkraft är lika stor som stegens tyngdkraft. Friktion vid foten krävs för att balansera väggens kraft.`
+  )
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_RITAKRAFTER_V2_DEL2[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_RITAKRAFTER_V2_DEL2[uppgift.id];
+  }
+}
+
+const FACIT_FRIKTION_V2_DEL1 = {
+  "4.13": byggFacitListaV2([
+    ["a", "Vid glidgränsen är tyngdkomposanten längs flaket lika stor som maximal friktion.", String.raw`\[mg\sin\theta=\mu mg\cos\theta\Rightarrow\tan\theta=\mu\]\[\theta_{\mathrm{glid}}=\arctan0{,}60=31{,}0^\circ\]`, ""],
+    ["b", "Tippning börjar när tyngdpunktens lodlinje passerar den nedre kanten. Halva bredden och halva höjden ger", String.raw`\[\tan\theta_{\mathrm{tipp}}=\frac{1{,}2}{1{,}3}=\frac{2{,}4}{2{,}6}\]\[\theta_{\mathrm{tipp}}=42{,}7^\circ\]`, ""],
+    ["c", "Jämför gränsvinklarna.", String.raw`\[31{,}0^\circ<42{,}7^\circ\]`, "Containern börjar glida innan den tippar. Lastsäkringen måste framför allt hindra sidoförskjutning, men ska dimensioneras för båda riskerna."]
+  ], String.raw`Glidning börjar vid \(31{,}0^\circ\) och tippning först vid \(42{,}7^\circ\). Glidning sker alltså först.`),
+  "4.26": byggFacitListaV2([
+    ["a", "Normalkraften balanserar tyngdkraftens komponent vinkelrätt mot planet.", String.raw`\[N=mg\cos18^\circ=25\cdot9{,}82\cos18^\circ=233\ \mathrm N\]`, ""],
+    ["b", "Maximal statisk friktion är", String.raw`\[f_{s,\max}=\mu N=0{,}35\cdot233=81{,}7\ \mathrm N\]`, ""],
+    ["c", "Jämför med tyngdkomposanten nedför planet.", String.raw`\[F_{\parallel}=mg\sin18^\circ=75{,}8\ \mathrm N\]`, "Eftersom 75,8 N är mindre än 81,7 N kan friktionen hålla lådan stilla."]
+  ], String.raw`\(N\approx233\ \mathrm N\), \(f_{s,\max}\approx81{,}7\ \mathrm N\), och lådan glider inte.`),
+  "4.27": byggFacitListaV2([
+    ["a", "Kraften som krävs för att starta rörelsen bestäms av maximal vilofriktion. Under glidning verkar glidfriktion.", "", ""],
+    ["b", "På vågrätt golv är normalkraften", String.raw`\[N=mg=40\cdot9{,}82=392{,}8\ \mathrm N\]`, ""],
+    ["b", "Beräkna friktionstalen.", String.raw`\[\mu_s=\frac{95}{392{,}8}=0{,}242\]\[\mu_k=\frac{70}{392{,}8}=0{,}178\]`, ""]
+  ], String.raw`Vilofriktionstalet är cirka \(0{,}24\) och glidfriktionstalet cirka \(0{,}18\).`),
+  "4.28": byggFacitListaV2([
+    ["a", "Den största statiska friktionen är den enda kraft som kan bromsa lådan tillsammans med flaket.", String.raw`\[f_{s,\max}=\mu mg=ma_{\max}\Rightarrow a_{\max}=\mu g\]\[a_{\max}=0{,}35\cdot9{,}82=3{,}44\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Den aktuella retardationen är större än gränsen.", String.raw`\[4{,}0>3{,}44\]`, "Lådan kan inte följa flakets inbromsning och glider framåt relativt flaket."],
+    ["c", "Massan förkortas bort i \(\mu mg=ma\).", "", "Gränsaccelerationen är oberoende av lådans massa."]
+  ], String.raw`Lådan kan följa med upp till cirka \(3{,}44\ \mathrm{m/s^2}\). Vid \(4{,}0\ \mathrm{m/s^2}\) glider den framåt.`),
+  "4.29": byggFacitListaV2([
+    ["a", "Räkna nedför backen som positiv riktning.", String.raw`\[ma=mg\sin12^\circ-\mu mg\cos12^\circ\]\[a=g(\sin12^\circ-0{,}080\cos12^\circ)=1{,}27\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Åkaren startar från vila och accelerationen antas konstant.", String.raw`\[v^2=2as\Rightarrow v=\sqrt{2\cdot1{,}27\cdot60}=12{,}35\ \mathrm{m/s}\]`, ""],
+    ["c", "Konstant fart kräver noll resultant längs backen.", String.raw`\[mg\sin12^\circ=\mu mg\cos12^\circ\Rightarrow\mu=\tan12^\circ=0{,}213\]`, "Alternativt kan ett tillräckligt stort luftmotstånd balansera överskottet."]
+  ], String.raw`Accelerationen är \(1{,}27\ \mathrm{m/s^2}\) och farten efter 60 m cirka \(12{,}4\ \mathrm{m/s}\).`),
+  "4.30": byggFacitListaV2([
+    ["a", "Ytkornen ligger precis vid glidgränsen: tyngdkomposanten nedför ytan balanseras av maximal friktion.", String.raw`\[mg\sin\theta=\mu mg\cos\theta\]`, ""],
+    ["b", "Lös ut friktionstalet.", String.raw`\[\mu=\tan\theta=\tan34^\circ=0{,}675\]`, ""],
+    ["c", "Både m och g förkortas bort.", "", "Därför beror rasvinkeln på kornens friktion och form, inte på högens totala massa eller storlek."]
+  ], String.raw`Rasvinkeln \(34^\circ\) motsvarar friktionstalet cirka \(0{,}67\).`),
+  "4.44": byggFacitListaV2([
+    ["1", "Jämn fart ger noll vågrät resultant, så friktionen är 140 N.", String.raw`\[f=140\ \mathrm N\]`, ""],
+    ["2", "På ett vågrätt golv är normalkraften lika stor som tyngdkraften.", String.raw`\[N=mg=45\cdot9{,}82=441{,}9\ \mathrm N\]`, ""],
+    ["3", "Beräkna friktionstalet.", String.raw`\[\mu=\frac fN=\frac{140}{441{,}9}=0{,}317\]`, ""]
+  ], String.raw`Friktionstalet är cirka \(0{,}32\).`),
+  "4.45": byggFacitListaV2([
+    ["a", "Tyngdkomposanten nedför planet är", String.raw`\[F_{g,\parallel}=mg\sin15^\circ=30\cdot9{,}82\sin15^\circ=76{,}2\ \mathrm N\]`, ""],
+    ["b", "Normalkraften och friktionen blir", String.raw`\[N=mg\cos15^\circ=284{,}6\ \mathrm N\]\[f=\mu N=0{,}25\cdot284{,}6=71{,}2\ \mathrm N\]`, ""],
+    ["c", "Vid jämn fart uppför balanserar dragkraften både tyngdkomposanten och friktionen.", String.raw`\[F=76{,}2+71{,}2=147{,}4\ \mathrm N\]`, ""]
+  ], String.raw`Tyngdkomposanten är \(76{,}2\ \mathrm N\), friktionen \(71{,}2\ \mathrm N\) och dragkraften cirka \(147\ \mathrm N\).`),
+  "4.46": byggFacitListaV2([
+    ["a", "Omvandla farten och använd sambandet utan tid.", String.raw`\[v_0=\frac{90}{3{,}6}=25\ \mathrm{m/s}\]\[0=v_0^2+2as\Rightarrow a=-\frac{25^2}{2\cdot48}=-6{,}51\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Om friktionen begränsar bromsningen gäller \(|a|=\mu g\).", String.raw`\[\mu=\frac{6{,}51}{9{,}82}=0{,}663\]`, ""],
+    ["c", "Ett värde omkring 0,66 är förenligt med gott väggrepp på torr väg.", "", "På våt eller isig väg är friktionstalet normalt lägre och bromssträckan längre."]
+  ], String.raw`Retardationens belopp är \(6{,}51\ \mathrm{m/s^2}\), vilket motsvarar \(\mu\approx0{,}66\).`),
+  "4.47": byggFacitListaV2([
+    ["a", "Vid glidgränsen i backen gäller", String.raw`\[mg\sin8{,}0^\circ=\mu mg\cos8{,}0^\circ\]\[\mu_{\min}=\tan8{,}0^\circ=0{,}141\]`, ""],
+    ["b", "Massan finns på båda sidor och förkortas bort.", "", "Gränsvinkeln beror därför inte på bilens massa."],
+    ["c", "Med \(\mu=0{,}10\) blir", String.raw`\[\theta=\arctan0{,}10=5{,}71^\circ\]`, ""]
+  ], String.raw`Minst \(\mu\approx0{,}14\) krävs vid 8,0°. Med \(\mu=0{,}10\) börjar bilen glida vid cirka \(5{,}7^\circ\).`),
+  "4.57": byggFacitListaV2([
+    ["a", "Tyngdkraftens komposant längs planet är", String.raw`\[F_{g,\parallel}=mg\sin20^\circ=15\cdot9{,}82\sin20^\circ=50{,}4\ \mathrm N\]`, ""],
+    ["b", "Normalkraften balanserar den vinkelräta komposanten.", String.raw`\[N=mg\cos20^\circ=138{,}4\ \mathrm N\]`, ""]
+  ], String.raw`Komposanten längs planet är \(50{,}4\ \mathrm N\) och normalkraften \(138\ \mathrm N\).`),
+  "4.58": byggFacitListaV2([
+    ["a", "Konstant fart innebär noll resultant längs planet.", String.raw`\[f=mg\sin26^\circ=22\cdot9{,}82\sin26^\circ=94{,}7\ \mathrm N\]`, ""],
+    ["b", "Normalkraften är \(mg\cos26^\circ\).", String.raw`\[\mu=\frac{mg\sin26^\circ}{mg\cos26^\circ}=\tan26^\circ=0{,}488\]`, ""],
+    ["c", "Vid 30° blir \(\tan30^\circ=0{,}577>0{,}488\).", "", "Tyngdkomposanten överstiger glidfriktionen och lådan accelererar nedför."]
+  ], String.raw`Friktionen är cirka \(94{,}7\ \mathrm N\) och \(\mu\approx0{,}49\). Vid 30° accelererar lådan nedför.`),
+  "4.59": byggFacitListaV2([
+    ["a", "När lådan dras uppför verkar dragkraften uppför, medan både tyngdkomposanten och friktionen verkar nedför.", "", ""],
+    ["b", "Vid konstant fart är resultanten noll.", String.raw`\[F=mg\sin18^\circ+\mu mg\cos18^\circ\]\[F=40\cdot9{,}82(\sin18^\circ+0{,}30\cos18^\circ)=233\ \mathrm N\]`, ""],
+    ["c", "För att precis hindra glidning nedåt får friktionen verka uppför med sitt maxvärde.", String.raw`\[F_{\min}=mg\sin18^\circ-\mu mg\cos18^\circ\]\[F_{\min}=121{,}4-112{,}1=9{,}3\ \mathrm N\]`, ""]
+  ], String.raw`För jämn fart uppför krävs cirka \(233\ \mathrm N\). Minsta hållkraft är cirka \(9\ \mathrm N\) uppför planet.`),
+  "4.67": byggFacitListaV2([
+    ["a", "Dela upp dragkraften i komponenter.", String.raw`\[F_x=120\cos30^\circ=103{,}9\ \mathrm N\]\[F_y=120\sin30^\circ=60{,}0\ \mathrm N\]`, ""],
+    ["b", "Konstant fart ger noll vågrät resultant.", String.raw`\[f=F_x=103{,}9\ \mathrm N\]`, ""],
+    ["c", "Den uppåtriktade komponenten minskar golvets normalkraft.", String.raw`\[N+F_y-mg=0\]\[N=18\cdot9{,}82-60{,}0=116{,}8\ \mathrm N\]`, ""]
+  ], String.raw`Den vågräta komponenten och friktionen är cirka \(104\ \mathrm N\). Normalkraften är cirka \(117\ \mathrm N\), alltså mindre än tyngdkraften.`),
+  "4.71": byggFacitListaV2([
+    ["a", "Den enda vågräta kraften på den övre klossen är friktionen.", String.raw`\[f_{s,\max}=\mu m_1g=m_1a_{\max}\Rightarrow a_{\max}=\mu g=2{,}95\ \mathrm{m/s^2}\]`, ""],
+    ["b", "När klossarna följs åt accelererar F hela massan 7,0 kg.", String.raw`\[F_{\max}=(2{,}0+5{,}0)2{,}946=20{,}6\ \mathrm N\]`, ""],
+    ["c", "Vid 30 N glider klossarna mot varandra. Med friktionskraften \(0{,}30\cdot2{,}0\cdot9{,}82=5{,}89\ \mathrm N\) får den undre klossen", String.raw`\[a_2=\frac{30-5{,}89}{5{,}0}=4{,}82\ \mathrm{m/s^2}\]`, "Den övre når bara 2,95 m/s² och halkar bakåt relativt den undre."]
+  ], String.raw`Största gemensamma acceleration är \(2{,}95\ \mathrm{m/s^2}\), vilket kräver högst cirka \(20{,}6\ \mathrm N\). Vid 30 N glider klossarna isär.`),
+  "4.118": byggFacitListaV2([
+    ["a", "Dragkraften är vågrät, så lodrätt gäller", String.raw`\[N=mg=8{,}0\cdot9{,}82=78{,}6\ \mathrm N\]`, ""],
+    ["b", "Friktionen är", String.raw`\[f=\mu N=0{,}30\cdot78{,}6=23{,}6\ \mathrm N\]`, ""],
+    ["c", "Konstant hastighet innebär noll vågrät resultant.", String.raw`\[F_D=f=23{,}6\ \mathrm N\]`, ""]
+  ], String.raw`Normalkraften är \(78{,}6\ \mathrm N\), och både friktionskraften och Ellens dragkraft är cirka \(23{,}6\ \mathrm N\).`),
+  "4.119": byggFacitListaV2([
+    ["a", "Konstant hastighet ger noll vågrät resultant.", String.raw`\[f=F_D=42\ \mathrm N\]`, ""],
+    ["b", "På vågrätt underlag är \(N=mg\).", String.raw`\[N=9{,}5\cdot9{,}82=93{,}29\ \mathrm N\]\[\mu=\frac{42}{93{,}29}=0{,}450\]`, ""]
+  ], String.raw`Friktionskraften är \(42\ \mathrm N\) och friktionstalet \(0{,}45\).`),
+  "4.120": byggFacitListaV2([
+    ["a", "Konstant hastighet innebär att tryckkraften balanserar friktionen.", String.raw`\[52=\mu mg\Rightarrow m=\frac{52}{0{,}35\cdot9{,}82}=15{,}13\ \mathrm{kg}\]`, ""],
+    ["b", "Med samma massa men \(\mu=0{,}20\) blir", String.raw`\[F=\mu mg=0{,}20\cdot15{,}13\cdot9{,}82=29{,}7\ \mathrm N\]`, ""]
+  ], String.raw`Lådans massa är cirka \(15{,}1\ \mathrm{kg}\). På det halare underlaget krävs cirka \(29{,}7\ \mathrm N\).`),
+  "4.121": byggFacitListaV2([
+    ["1", "På vågrätt golv är friktionen \(f=\mu mg\). Newtons andra lag ger", String.raw`\[F-\mu mg=ma\]`, ""],
+    ["2", "Samla termerna med m.", String.raw`\[F=m(a+\mu g)\]`, ""],
+    ["3", "Sätt in värdena.", String.raw`\[m=\frac{9{,}0}{2{,}8+0{,}35\cdot9{,}82}=1{,}44\ \mathrm{kg}\]`, ""]
+  ], String.raw`Lådans massa är cirka \(1{,}4\ \mathrm{kg}\).`),
+  "4.122": byggFacitListaV2([
+    ["a", "Tyngdkraftens storlek är", String.raw`\[F_g=mg=5{,}0\cdot9{,}82=49{,}1\ \mathrm N\]`, ""],
+    ["b", "Normalkraften balanserar den vinkelräta komposanten.", String.raw`\[N=mg\cos15^\circ=47{,}4\ \mathrm N\]`, ""],
+    ["c", "Klossen ligger stilla, så statisk friktion balanserar komposanten längs planet.", String.raw`\[f_s=mg\sin15^\circ=12{,}7\ \mathrm N\]`, ""]
+  ], String.raw`Tyngdkraften är \(49{,}1\ \mathrm N\), normalkraften \(47{,}4\ \mathrm N\) och friktionen \(12{,}7\ \mathrm N\) uppför planet.`),
+  "4.123": byggFacitListaV2([
+    ["a", "Konstant hastighet innebär noll resultant längs planet.", String.raw`\[f=mg\sin20^\circ=12\cdot9{,}82\sin20^\circ=40{,}3\ \mathrm N\]`, ""],
+    ["b", "Dividera med normalkraften \(mg\cos20^\circ\).", String.raw`\[\mu=\frac{mg\sin20^\circ}{mg\cos20^\circ}=\tan20^\circ=0{,}364\]`, ""]
+  ], String.raw`Friktionskraften är cirka \(40{,}3\ \mathrm N\) och friktionstalet cirka \(0{,}36\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_FRIKTION_V2_DEL1[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_FRIKTION_V2_DEL1[uppgift.id];
+  }
+}
+
+const FACIT_FRIKTION_V2_DEL2 = {
+  "4.124": byggFacitListaV2([
+    ["a", "Plankan är hypotenusan i en rätvinklig triangel.", String.raw`\[\sin v=\frac{0{,}70}{2{,}0}=0{,}35\]\[v=\arcsin0{,}35=20{,}5^\circ\]`, ""],
+    ["b", "När lådan precis börjar glida är tyngdkomposanten lika stor som maximal statisk friktion.", String.raw`\[mg\sin v=\mu mg\cos v\Rightarrow\mu=\tan v\]\[\mu=\tan20{,}5^\circ=0{,}374\]`, ""]
+  ], String.raw`Planet lutar cirka \(20{,}5^\circ\), och friktionstalet är cirka \(0{,}37\).`),
+  "4.125": byggFacitListaV2([
+    ["1", "Vid gränsen till glidning gäller", String.raw`\[mg\sin v=\mu mg\cos v\]`, ""],
+    ["a", "Förkorta bort mg och lös ut vinkeln.", String.raw`\[\tan v=\mu=0{,}28\]\[v=\arctan0{,}28=15{,}6^\circ\]`, ""],
+    ["b", "Massan försvinner ur ekvationen.", "", "En tyngre låda får både större dragning nedför och större maximal friktion i samma proportion."]
+  ], String.raw`Största lutningen är cirka \(15{,}6^\circ\), oberoende av lådans massa.`),
+  "4.126": byggFacitListaV2([
+    ["a", "Utan friktion är tyngdkomposanten den enda kraften längs planet.", String.raw`\[a=g\sin14^\circ=2{,}38\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Med friktion motverkas rörelsen nedför.", String.raw`\[a=g(\sin14^\circ-0{,}15\cos14^\circ)\]\[a=0{,}947\ \mathrm{m/s^2}\]`, ""],
+    ["c", "För en allmän lutning v och glidfriktionstal μ blir", String.raw`\[a=g(\sin v-\mu\cos v)\]`, "Uttrycket gäller när klossen faktiskt glider nedför. Vid \(\tan v\leq\mu_s\) kan statisk friktion hålla den stilla."]
+  ], String.raw`Accelerationen är \(2{,}38\ \mathrm{m/s^2}\) utan friktion och \(0{,}95\ \mathrm{m/s^2}\) med \(\mu=0{,}15\).`),
+  "4.138": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4138",objekt:"låda",krafter:[["N",215,155,215,48],["F_g",215,130,215,225],["f_s",215,155,330,155]],aria:"Låda på accelererande lastbilsflak med statisk friktion framåt."}),
+    [["a", "På lådan verkar tyngdkraften, normalkraften och statisk friktion framåt.", "", ""], ["b", "Friktionen är den enda vågräta kraften.", String.raw`\[f_s=ma\]`, "Den får lådan att accelerera tillsammans med flaket."], ["c", "Friktionen kan högst bli \(\mu_sN=\mu_smg\).", String.raw`\[ma\leq\mu_smg\Rightarrow a\leq\mu_sg\]`, "Vid större acceleration glider lådan bakåt relativt flaket."]],
+    String.raw`Statisk friktion framåt accelererar lådan. Gränsen för att följa med är \(a_{\max}=\mu_sg\).`
+  ),
+  "4.103": byggFacitListaV2([
+    ["1", "Konstant hastighet innebär jämvikt. Den hängande viktens tyngd ger snörkraften.", String.raw`\[S=0{,}300\cdot9{,}82=2{,}946\ \mathrm N\]`, ""],
+    ["2", "På blocket balanserar friktionen snörkraften.", String.raw`\[f=S=2{,}946\ \mathrm N\]`, ""],
+    ["3", "Normalkraften är \(N=1{,}2g\).", String.raw`\[\mu=\frac fN=\frac{0{,}300g}{1{,}2g}=0{,}250\]`, ""]
+  ], String.raw`Friktionstalet är \(\mu=0{,}25\).`),
+  "4.104": byggFacitListaV2([
+    ["1", "Boken är på gränsen till att glida nedåt, så maximal statisk friktion bär tyngden.", String.raw`\[f_{s,\max}=mg=2{,}0\cdot9{,}82=19{,}64\ \mathrm N\]`, ""],
+    ["2", "Horisontellt balanserar väggen handens kraft, så \(N=F\).", String.raw`\[f_{s,\max}=\mu N=\mu F\]`, ""],
+    ["3", "Lös ut minsta tryckkraft.", String.raw`\[F_{\min}=\frac{19{,}64}{0{,}25}=78{,}6\ \mathrm N\]`, ""]
+  ], String.raw`Boken måste tryckas mot väggen med minst cirka \(79\ \mathrm N\).`),
+  "4.105": byggFacitListaV2([
+    ["1", "Räkna nedför planet som positiv riktning.", String.raw`\[ma=mg\sin25^\circ-\mu mg\cos25^\circ\]`, ""],
+    ["2", "Massan förkortas bort.", String.raw`\[a=g(\sin25^\circ-0{,}40\cos25^\circ)\]`, ""],
+    ["3", "Sätt in värdena.", String.raw`\[a=9{,}82(0{,}4226-0{,}40\cdot0{,}9063)=0{,}590\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`Klossen accelererar nedför planet med cirka \(0{,}59\ \mathrm{m/s^2}\).`),
+  "4.108": byggFacitListaV2([
+    ["1", "Med konstant retardation är medelfarten halva begynnelsefarten.", String.raw`\[s=\frac{v_0+0}{2}t\Rightarrow v_0=\frac{2s}{t}=\frac{2\cdot9{,}2}{2{,}3}=8{,}0\ \mathrm{m/s}\]`, ""],
+    ["2", "Bestäm retardationens belopp.", String.raw`\[|a|=\frac{v_0}{t}=\frac{8{,}0}{2{,}3}=3{,}48\ \mathrm{m/s^2}\]`, ""],
+    ["3", "På vågrätt underlag ger glidfriktionen \(|a|=\mu g\).", String.raw`\[\mu=\frac{3{,}48}{9{,}82}=0{,}354\]`, ""]
+  ], String.raw`Friktionstalet är cirka \(0{,}35\).`),
+  "4.109": byggFacitListaV2([
+    ["1", "Den uppåtriktade kraftkomposanten minskar normalkraften.", String.raw`\[N=mg-F\sin30^\circ=98{,}2-0{,}5F\]`, ""],
+    ["2", "Vid rörelsegränsen balanserar den vågräta komponenten maximal friktion.", String.raw`\[F\cos30^\circ=0{,}32N\]`, ""],
+    ["3", "Sätt in N och lös ekvationen.", String.raw`\[0{,}866F=0{,}32(98{,}2-0{,}5F)\]\[1{,}026F=31{,}424\Rightarrow F=30{,}6\ \mathrm N\]`, ""]
+  ], String.raw`Kraften måste vara cirka \(31\ \mathrm N\).`),
+  "4.113": byggFacitMedGrafV2(
+    byggKraftfigur2DV3({id:"4113",objekt:"låda",krafter:[["N",215,155,215,48],["F_g",215,130,215,225],["F_D",265,130,355,130],["f_k",215,155,115,155]],aria:"Glidande låda med normalkraft, tyngdkraft, dragkraft och glidfriktion."}),
+    [["a", "Lodrätt gäller jämvikt eftersom dragkraften är vågrät.", String.raw`\[N=mg=5{,}0\cdot9{,}82=49{,}1\ \mathrm N\]`, ""], ["b", "Vid den ursprungliga konstanta farten är glidfriktionen 18 N.", String.raw`\[f_k=18\ \mathrm N,\qquad\mu_k=\frac{18}{49{,}1}=0{,}367\]`, ""], ["c", "När dragkraften plötsligt sänks till 10 N medan lådan fortfarande glider är glidfriktionen fortfarande 18 N.", String.raw`\[F_{\mathrm{net}}=10-18=-8\ \mathrm N\]`, "Lådan bromsar. När den har stannat anpassar sig den statiska friktionen till 10 N och håller den stilla."]],
+    String.raw`Normalkraften är \(49{,}1\ \mathrm N\). Friktionen är 18 N medan lådan glider och 10 N efter att den stannat.`
+  ),
+  "4.114": byggFacitListaV2([
+    ["a", "Konstant hastighet ger \(f=0{,}32\ \mathrm N\).", String.raw`\[\mu=\frac fN=\frac{0{,}32}{0{,}12\cdot9{,}82}=0{,}272\]`, ""],
+    ["b", "Med den extra massan blir totalmassan 0,42 kg.", String.raw`\[N_2=0{,}42\cdot9{,}82=4{,}124\ \mathrm N\]\[F_2=\mu N_2=0{,}272\cdot4{,}124=1{,}12\ \mathrm N\]`, ""]
+  ], String.raw`Friktionstalet är cirka \(0{,}27\), och den nya dragkraften blir cirka \(1{,}12\ \mathrm N\).`),
+  "4.116": byggFacitListaV2([
+    ["a", "När dynamometern drar uppåt delar den och bordet på att bära vikten.", String.raw`\[N+3{,}5=1{,}5\cdot9{,}82\]\[N=11{,}23\ \mathrm N\]`, ""],
+    ["b", "Vid vågrätt drag är \(N=mg\), och konstant hastighet ger \(f=3{,}5\ \mathrm N\).", String.raw`\[\mu=\frac{3{,}5}{1{,}5\cdot9{,}82}=0{,}238\]`, ""]
+  ], String.raw`Normalkraften vid drag uppåt är \(11{,}2\ \mathrm N\). Vid vågrätt drag är friktionstalet cirka \(0{,}24\).`),
+  "4.117": byggFacitListaV2([
+    ["a", "Den övre klossen glider mot den undre. Friktionen på den övre balanseras av tråden.", String.raw`\[S=f_1=\mu m_1g=0{,}25\cdot0{,}100\cdot9{,}82=0{,}2455\ \mathrm N\]`, ""],
+    ["b", "Golvet bär båda klossarna.", String.raw`\[f_2=\mu(m_1+m_2)g=0{,}25\cdot0{,}200\cdot9{,}82=0{,}491\ \mathrm N\]`, ""],
+    ["b", "På den undre klossen verkar både golvfriktionen och reaktionskraften från den övre bakåt.", String.raw`\[F=f_2+f_1=0{,}491+0{,}2455=0{,}737\ \mathrm N\]`, ""]
+  ], String.raw`Trådkraften är cirka \(0{,}25\ \mathrm N\), och dragkraften måste vara cirka \(0{,}74\ \mathrm N\).`),
+  "4.176": byggFacitListaV2([
+    ["a", "Lådans tyngdkraft är", String.raw`\[F_g=30\cdot9{,}82=294{,}6\ \mathrm N\]`, ""],
+    ["b", "På vågrätt golv utan andra lodräta krafter gäller", String.raw`\[N=F_g=294{,}6\ \mathrm N\]`, ""],
+    ["c", "Vid jämn fart balanserar dragkraften glidfriktionen.", String.raw`\[F_D=f=\mu N=0{,}30\cdot294{,}6=88{,}4\ \mathrm N\]`, ""],
+    ["d", "Med ytterligare 10 kg blir totalmassan 40 kg.", String.raw`\[F_D=0{,}30\cdot40\cdot9{,}82=117{,}8\ \mathrm N\]`, ""]
+  ], String.raw`Krafterna är \(294{,}6\ \mathrm N\), \(294{,}6\ \mathrm N\), \(88{,}4\ \mathrm N\) och efter lastningen \(117{,}8\ \mathrm N\).`),
+  "4.177": byggFacitListaV2([
+    ["a", "Grafens topp motsvarar maximal vilofriktion.", String.raw`\[f_{s,\max}=90\ \mathrm N\]`, ""],
+    ["b", "Platån efter att rörelsen börjat motsvarar glidfriktionen.", String.raw`\[f_k=60\ \mathrm N\]`, ""],
+    ["c", "Normalkraften är", String.raw`\[N=mg=20\cdot9{,}82=196{,}4\ \mathrm N\]`, ""],
+    ["d", "Beräkna båda friktionstalen.", String.raw`\[\mu_s=\frac{90}{196{,}4}=0{,}458\]\[\mu_k=\frac{60}{196{,}4}=0{,}305\]`, ""]
+  ], String.raw`Maximal vilofriktion är 90 N och glidfriktionen 60 N. Friktionstalen är cirka \(0{,}46\) och \(0{,}31\).`),
+  "4.178": byggFacitListaV2([
+    ["a", "Normalkraften är tyngdkraftens vinkelräta komposant.", String.raw`\[N=8{,}0\cdot9{,}82\cos20^\circ=73{,}8\ \mathrm N\]`, ""],
+    ["b", "Största statiska friktionen är", String.raw`\[f_{s,\max}=0{,}25\cdot73{,}8=18{,}45\ \mathrm N\]`, ""],
+    ["c", "Tyngdkomposanten längs planet är", String.raw`\[F_{g,\parallel}=8{,}0\cdot9{,}82\sin20^\circ=26{,}9\ \mathrm N\]`, ""],
+    ["d", "Jämför krafterna.", String.raw`\[26{,}9>18{,}45\]`, "Friktionen räcker inte till, så klossen glider nedför."]
+  ], String.raw`\(N=73{,}8\ \mathrm N\), \(f_{s,\max}=18{,}5\ \mathrm N\), och klossen glider eftersom den drivande komposanten är \(26{,}9\ \mathrm N\).`),
+  "4.179": byggFacitListaV2([
+    ["a", "På plan väg är normalkraften", String.raw`\[N=mg=1400\cdot9{,}82=13{,}75\ \mathrm{kN}\]`, ""],
+    ["b", "Största friktionskraften på torr asfalt är", String.raw`\[f_{\max}=0{,}80\cdot13{,}748=11{,}0\ \mathrm{kN}\]`, ""],
+    ["c", "Friktionsgränsen ger maximal acceleration.", String.raw`\[a_{\max}=\frac{f_{\max}}m=\mu g=0{,}80\cdot9{,}82=7{,}86\ \mathrm{m/s^2}\]`, ""],
+    ["d", "På is med \(\mu=0{,}10\) blir", String.raw`\[a_{\max}=0{,}982\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`Maxaccelerationen är cirka \(7{,}86\ \mathrm{m/s^2}\) på torr asfalt och \(0{,}98\ \mathrm{m/s^2}\) på is.`),
+  "4.180": byggFacitListaV2([
+    ["a", "Vid glidgränsen är tyngdkomposanten och maximal statisk friktion lika stora.", String.raw`\[mg\sin\alpha=\mu mg\cos\alpha\]`, ""],
+    ["b–c", "Förkorta bort mg och dividera med cosinus.", String.raw`\[\mu=\frac{\sin\alpha}{\cos\alpha}=\tan\alpha\]\[\mu=\tan22^\circ=0{,}404\]`, ""],
+    ["d", "Massan har förkortats bort.", "", "Lådor av samma materialkombination börjar därför glida vid samma vinkel oberoende av massan."]
+  ], String.raw`Friktionstalet är cirka \(0{,}40\), och glidvinkeln är oberoende av lådans massa.`),
+  "4.209": byggFacitListaV2([
+    ["1", "Jämn fart innebär att friktionen är lika stor som dragkraften.", String.raw`\[f=160\ \mathrm N\]`, ""],
+    ["2", "Normalkraften på vågrätt golv är", String.raw`\[N=mg=50\cdot9{,}82=491\ \mathrm N\]`, ""],
+    ["3", "Beräkna friktionstalet.", String.raw`\[\mu=\frac{160}{491}=0{,}326\]`, ""]
+  ], String.raw`Friktionstalet är cirka \(0{,}33\).`),
+  "4.210": byggFacitListaV2([
+    ["a", "Normalkraften är", String.raw`\[N=mg=25\cdot9{,}82=245{,}5\ \mathrm N\]`, ""],
+    ["b", "Använd \(f=\mu N\) för varje underlag.", String.raw`\[\begin{aligned}f_{\mathrm{is}}&=0{,}10\cdot245{,}5=24{,}6\ \mathrm N\\f_{\mathrm{trä}}&=0{,}20\cdot245{,}5=49{,}1\ \mathrm N\\f_{\mathrm{betong}}&=0{,}40\cdot245{,}5=98{,}2\ \mathrm N\\f_{\mathrm{gummi}}&=0{,}60\cdot245{,}5=147{,}3\ \mathrm N\end{aligned}\]`, ""],
+    ["c", "Gummimattan har störst friktionstal.", "", "Den kräver därför störst dragkraft för jämn fart."]
+  ], String.raw`Normalkraften är \(245{,}5\ \mathrm N\). Friktionskrafterna är cirka 24,6 N, 49,1 N, 98,2 N och 147,3 N; gummimattan ger störst.`),
+  "4.211": byggFacitListaV2([
+    ["a", "Tyngdkomposanten nedför planet är", String.raw`\[F_{g,\parallel}=12\cdot9{,}82\sin15^\circ=30{,}5\ \mathrm N\]`, ""],
+    ["b", "Beräkna normalkraft och maximal statisk friktion.", String.raw`\[N=12\cdot9{,}82\cos15^\circ=113{,}8\ \mathrm N\]\[f_{s,\max}=0{,}45\cdot113{,}8=51{,}2\ \mathrm N\]`, ""],
+    ["c", "Den friktion som behövs, 30,5 N, är mindre än maxvärdet.", "", "Lådan ligger stilla. Den verkliga statiska friktionen är 30,5 N, inte 51,2 N."]
+  ], String.raw`Tyngdkomposanten är \(30{,}5\ \mathrm N\) och maximal friktion \(51{,}2\ \mathrm N\). Lådan ligger stilla.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (uppgift.id === "4.113") {
+    uppgift.t = uppgift.t.replace("Hur stor är friktionskraften om dragkraften ändras till 10 N?", "Dragkraften minskas plötsligt till 10 N medan lådan fortfarande glider. Hur stor är friktionskraften omedelbart efter ändringen, och vad blir den efter att lådan har stannat?");
+  }
+  if (FACIT_FRIKTION_V2_DEL2[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_FRIKTION_V2_DEL2[uppgift.id];
+  }
+}
+
+const FACIT_GRAVITATION_V2 = {
+  "4.9": byggFacitListaV2([
+    ["a", "Systemets rörelsemängd är noll före kastet och bevaras under kastet. Anta att verktygets angivna fart är relativt stationen.", String.raw`\[m_vv_v+m_av_a=0\]\[v_a=-\frac{m_vv_v}{m_a}=-\frac{3{,}0\cdot4{,}0}{90}=-0{,}133\ \mathrm{m/s}\]`, "Minustecknet visar att astronauten rör sig mot stationen."],
+    ["b", "Med jämn fart över 8,0 m blir tiden", String.raw`\[t=\frac{s}{|v_a|}=\frac{8{,}0}{0{,}133}=60\ \mathrm s\]`, ""],
+    ["c", "Astronauten och verktyget påverkar varandra med lika stora och motriktade krafter.", "", "Inget yttre stöd behövs; krafterna är interna och ger motsatta rörelsemängder."]
+  ], String.raw`Astronauten får farten \(0{,}133\ \mathrm{m/s}\) mot stationen och når den efter cirka \(60\ \mathrm s\).`),
+  "4.21": byggFacitListaV2([
+    ["a", "På månen är tyngden", String.raw`\[F_{g,M}=mg_M=65\cdot1{,}62=105{,}3\ \mathrm N\]`, ""],
+    ["b", "På jorden blir", String.raw`\[F_{g,J}=65\cdot9{,}82=638{,}3\ \mathrm N\]`, ""],
+    ["c", "Massan beskriver tröghet och materiemängd.", "", "Den är fortfarande 65 kg; det är tyngdkraften som ändras."]
+  ], String.raw`Tyngden är cirka \(105\ \mathrm N\) på månen och \(638\ \mathrm N\) på jorden. Massan är \(65\ \mathrm{kg}\) på båda.`),
+  "4.22": byggFacitListaV2([
+    ["a", "I vila är accelerationen noll.", String.raw`\[N=mg=12\cdot9{,}82=117{,}8\ \mathrm N\]`, ""],
+    ["b", "Vid acceleration uppåt gäller", String.raw`\[N-mg=ma\Rightarrow N=m(g+a)\]\[N=12(9{,}82+1{,}5)=135{,}8\ \mathrm N\]`, ""],
+    ["c", "Vid acceleration nedåt minskar normalkraften.", String.raw`\[mg-N=ma\Rightarrow N=m(g-a)\]\[N=12(9{,}82-1{,}5)=99{,}8\ \mathrm N\]`, ""]
+  ], String.raw`Normalkraften är cirka \(118\ \mathrm N\), \(136\ \mathrm N\) respektive \(99{,}8\ \mathrm N\).`),
+  "4.23": byggFacitListaV2([
+    ["a", "Vågens kilogramvisning motsvarar normalkraften \(N=75g\). Personens verkliga massa är 68 kg.", String.raw`\[N-mg=ma\]\[75g-68g=68a\]\[a=\frac{(75-68)9{,}82}{68}=1{,}01\ \mathrm{m/s^2}\]`, "Accelerationen är riktad uppåt eftersom N är större än mg."],
+    ["b", "En uppåtriktad acceleration kan förekomma både när hissen ökar sin fart uppåt och när den bromsar på väg nedåt.", "", "Vågen avslöjar accelerationens riktning men inte hissens rörelseriktning."]
+  ], String.raw`Hissens acceleration är cirka \(1{,}0\ \mathrm{m/s^2}\) uppåt. Vågen kan inte avgöra om hissen rör sig uppåt eller nedåt.`),
+  "4.24": byggFacitListaV2([
+    ["a", "Använd Newtons gravitationslag.", String.raw`\[F=G\frac{m_1m_2}{r^2}=6{,}674\cdot10^{-11}\frac{70^2}{1{,}0^2}\]\[F=3{,}27\cdot10^{-7}\ \mathrm N\]`, ""],
+    ["b", "Jordens tyngdkraft på en person är", String.raw`\[F_g=70\cdot9{,}82=687\ \mathrm N\]\[\frac{687}{3{,}27\cdot10^{-7}}=2{,}10\cdot10^9\]`, ""],
+    ["c", "Gravitationskonstanten G är mycket liten.", "", "Mellan vardagsmassor blir kraften försumbar; den blir tydlig först när minst en massa är astronomiskt stor."]
+  ], String.raw`Personerna drar i varandra med cirka \(3{,}3\cdot10^{-7}\ \mathrm N\). Jordens dragning är ungefär \(2{,}1\) miljarder gånger större.`),
+  "4.25": byggFacitListaV2([
+    ["a", "Använd inversa kvadratlagen relativt jordytan.", String.raw`\[\frac{g(r)}{g_0}=\left(\frac Rr\right)^2=\frac12\]\[r=R\sqrt2=6371\sqrt2=9010\ \mathrm{km}\]`, ""],
+    ["b", "Höjden mäts från jordytan.", String.raw`\[h=r-R=9010-6371=2639\ \mathrm{km}\]`, ""],
+    ["c", "För ISS är avståndet från jordens centrum \(6371+420=6791\ \mathrm{km}\).", String.raw`\[g_{ISS}=9{,}82\left(\frac{6371}{6791}\right)^2=8{,}64\ \mathrm{m/s^2}\]`, "Astronauterna upplever tyngdlöshet eftersom stationen och allt ombord faller fritt tillsammans runt jorden."]
+  ], String.raw`Halva g fås på avståndet \(9010\ \mathrm{km}\) från centrum, alltså cirka \(2640\ \mathrm{km}\) över marken. Vid ISS är \(g\approx8{,}64\ \mathrm{m/s^2}\).`),
+  "4.36": byggFacitListaV2([
+    ["a", "Robotens tyngd på Mars är", String.raw`\[F_{g,M}=78\cdot3{,}71=289{,}4\ \mathrm N\]`, ""],
+    ["b", "På jorden är tyngden \(78\cdot9{,}82=766{,}0\ \mathrm N\).", String.raw`\[\frac{766{,}0}{289{,}4}=2{,}65\]`, ""]
+  ], String.raw`Robotens tyngd är cirka \(289\ \mathrm N\) på Mars och \(2{,}65\) gånger större på jorden.`),
+  "4.37": byggFacitListaV2([
+    ["a", "Omvandla radien till meter och använd \(g=GM/r^2\).", String.raw`\[r=5000\ \mathrm{km}=5{,}0\cdot10^6\ \mathrm m\]\[g=\frac{6{,}674\cdot10^{-11}\cdot4{,}0\cdot10^{24}}{(5{,}0\cdot10^6)^2}=10{,}68\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Personens tyngd blir", String.raw`\[F_g=mg=70\cdot10{,}68=748\ \mathrm N\]`, ""]
+  ], String.raw`Tyngdaccelerationen är cirka \(10{,}7\ \mathrm{m/s^2}\), och personen väger cirka \(748\ \mathrm N\).`),
+  "4.38": byggFacitListaV2([
+    ["a", "När hissen står stilla är", String.raw`\[N=mg=20\cdot9{,}82=196{,}4\ \mathrm N\]`, ""],
+    ["b", "Bromsning under rörelse nedåt betyder acceleration uppåt.", String.raw`\[N-mg=ma\Rightarrow N=m(g+a)\]\[N=20(9{,}82+2{,}0)=236{,}4\ \mathrm N\]`, ""],
+    ["c", "Accelerationen är motsatt den nedåtriktade hastigheten.", "", "Den pekar uppåt."]
+  ], String.raw`Normalkraften är \(196\ \mathrm N\) i vila och \(236\ \mathrm N\) under inbromsningen. Accelerationen pekar uppåt.`),
+  "4.39": byggFacitListaV2([
+    ["a", "Äpplet, personen och hissen får samma fallacceleration.", String.raw`\[a=g\]`, "Sett inifrån behåller äpplet sitt läge relativt personen och ser ut att sväva."],
+    ["b", "Sett utifrån faller alla tre mot jorden med ungefär 9,82 m/s².", "", ""],
+    ["c", "Personen upplever tyngdlöshet eftersom golvets normalkraft är noll.", String.raw`\[N=0\]`, "Gravitationskraften \(mg\) verkar fortfarande; hela systemet är i fritt fall."]
+  ], String.raw`Inifrån svävar äpplet. Utifrån faller äpple, person och hiss tillsammans. Tyngdkraften verkar, men normalkraften är noll.`),
+  "4.74": byggFacitListaV2([
+    ["a", "Jordens gravitationskraft på månen är", String.raw`\[F_{J}=G\frac{M_JM_M}{r_{JM}^2}\]\[F_J=6{,}674\cdot10^{-11}\frac{5{,}97\cdot10^{24}\cdot7{,}35\cdot10^{22}}{(3{,}84\cdot10^8)^2}=1{,}99\cdot10^{20}\ \mathrm N\]`, ""],
+    ["b", "Solens gravitationskraft på månen är", String.raw`\[F_S=6{,}674\cdot10^{-11}\frac{1{,}989\cdot10^{30}\cdot7{,}35\cdot10^{22}}{(1{,}496\cdot10^{11})^2}=4{,}36\cdot10^{20}\ \mathrm N\]`, ""],
+    ["c", "Solen drar även jorden nästan lika starkt per kilogram eftersom jord och måne ligger nästan lika långt från solen.", "", "Det är skillnaden i solens acceleration på jord och måne som stör deras relativa rörelse. Jordens dragning räcker för att hålla månen bunden till jorden samtidigt som båda kretsar runt solen."]
+  ], String.raw`Jorden drar månen med cirka \(1{,}99\cdot10^{20}\ \mathrm N\) och solen med \(4{,}36\cdot10^{20}\ \mathrm N\).`),
+  "4.186": byggFacitListaV2([
+    ["a", "På jorden blir tyngden", String.raw`\[F_{g,J}=70\cdot9{,}82=687{,}4\ \mathrm N\]`, ""],
+    ["b", "På månen blir den", String.raw`\[F_{g,M}=70\cdot1{,}62=113{,}4\ \mathrm N\]`, ""],
+    ["c", "Massan är platsoberoende.", String.raw`\[m=70\ \mathrm{kg}\]`, ""],
+    ["d", "Massa mäts i kilogram och beskriver kroppens tröghet. Tyngd är gravitationskraften och mäts i newton.", "", ""]
+  ], String.raw`Tyngden är \(687\ \mathrm N\) på jorden och \(113\ \mathrm N\) på månen, medan massan är \(70\ \mathrm{kg}\) på båda.`),
+  "4.187": byggFacitListaV2([
+    ["a", "Sambandet är", String.raw`\[F_g=mg\]`, ""],
+    ["b", "Lös ut planetens tyngdacceleration.", String.raw`\[g=\frac{24{,}6}{3{,}0}=8{,}20\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Samma sten på jorden får tyngden", String.raw`\[F_{g,J}=3{,}0\cdot9{,}82=29{,}46\ \mathrm N\]`, ""],
+    ["d", "En kropp som väger 24,6 N på jorden har massan", String.raw`\[m=\frac{24{,}6}{9{,}82}=2{,}51\ \mathrm{kg}\]`, ""]
+  ], String.raw`Planetens \(g=8{,}20\ \mathrm{m/s^2}\). Övriga svar är \(29{,}5\ \mathrm N\) och \(2{,}51\ \mathrm{kg}\).`),
+  "4.188": byggFacitListaV2([
+    ["a", "I stillastående hiss är", String.raw`\[N=mg=60\cdot9{,}82=589{,}2\ \mathrm N\]`, ""],
+    ["b", "Vid acceleration uppåt gäller", String.raw`\[N-mg=ma\Rightarrow N=m(g+a)\]\[N=60(9{,}82+1{,}5)=679{,}2\ \mathrm N\]`, ""],
+    ["c", "Vågens kilogramskala dividerar normalkraften med jordens g.", String.raw`\[m_{\mathrm{visad}}=\frac{679{,}2}{9{,}82}=69{,}2\ \mathrm{kg}\]`, ""],
+    ["d", "Personens massa har inte ändrats.", "", "Det är normalkraften och därmed den skenbara tyngden som har ökat."]
+  ], String.raw`Normalkraften är \(589\ \mathrm N\) i vila och \(679\ \mathrm N\) vid accelerationen. Vågen visar cirka \(69{,}2\ \mathrm{kg}\), men massan är fortfarande 60 kg.`),
+  "4.189": byggFacitListaV2([
+    ["a", "Newtons gravitationslag är", String.raw`\[F=G\frac{m_1m_2}{r^2}\]`, ""],
+    ["b", "Sätt in fartygens massor och avståndet.", String.raw`\[F=6{,}674\cdot10^{-11}\frac{(5{,}0\cdot10^7)^2}{200^2}=4{,}17\ \mathrm N\]`, ""],
+    ["c", "Jordens dragning på ett fartyg är", String.raw`\[F_g=5{,}0\cdot10^7\cdot9{,}82=4{,}91\cdot10^8\ \mathrm N\]`, ""],
+    ["d", "Jämför krafterna.", String.raw`\[\frac{4{,}91\cdot10^8}{4{,}17}=1{,}18\cdot10^8\]`, ""]
+  ], String.raw`Fartygen drar i varandra med cirka \(4{,}17\ \mathrm N\). Jordens kraft är ungefär \(1{,}2\cdot10^8\) gånger större.`),
+  "4.190": byggFacitListaV2([
+    ["a", "På jorden är tyngden", String.raw`\[F_J=45\cdot9{,}82=441{,}9\ \mathrm N\]`, ""],
+    ["b", "På månen och Mars blir", String.raw`\[F_M=45\cdot1{,}62=72{,}9\ \mathrm N\]\[F_{Mars}=45\cdot3{,}71=167{,}0\ \mathrm N\]`, ""],
+    ["c", "På Jupiter blir", String.raw`\[F_{Jup}=45\cdot24{,}8=1116\ \mathrm N\]`, ""],
+    ["d", "Jupiter har störst tyngdacceleration av alternativen.", "", "Där krävs därför störst lyftkraft."]
+  ], String.raw`Tyngderna är cirka \(442\ \mathrm N\), \(72{,}9\ \mathrm N\), \(167\ \mathrm N\) och \(1{,}12\ \mathrm{kN}\).`),
+  "4.215": byggFacitListaV2([
+    ["a", "Bestäm massan från tyngden på jorden.", String.raw`\[m=\frac{588}{9{,}82}=59{,}9\ \mathrm{kg}\]`, ""],
+    ["b", "På Venus blir tyngden", String.raw`\[F_V=59{,}9\cdot8{,}87=531\ \mathrm N\]`, ""]
+  ], String.raw`Massan är cirka \(59{,}9\ \mathrm{kg}\), och tyngden på Venus cirka \(531\ \mathrm N\).`),
+  "4.216": byggFacitListaV2([
+    ["a", "Klossens tyngdkraft är", String.raw`\[F_g=10\cdot9{,}82=98{,}2\ \mathrm N\]`, ""],
+    ["b", "Normalkraften balanserar tyngdkomposanten vinkelrätt mot planet.", String.raw`\[N=mg\cos25^\circ=98{,}2\cos25^\circ=89{,}0\ \mathrm N\]`, ""],
+    ["c", "Tyngdkraften är inte vinkelrät mot det lutande planet.", "", "Endast komponenten \(mg\cos25^\circ\) pressar klossen mot ytan; därför är N mindre än mg."]
+  ], String.raw`Tyngdkraften är \(98{,}2\ \mathrm N\) och normalkraften cirka \(89{,}0\ \mathrm N\).`),
+  "4.217": byggFacitListaV2([
+    ["a", "Avståndet från jordens medelpunkt är jordradien plus höjden.", String.raw`\[r=6371+400=6771\ \mathrm{km}=6{,}771\cdot10^6\ \mathrm m\]`, ""],
+    ["b", "Använd Newtons gravitationslag.", String.raw`\[F=G\frac{M_Jm}{r^2}\]\[F=6{,}674\cdot10^{-11}\frac{5{,}97\cdot10^{24}\cdot1200}{(6{,}771\cdot10^6)^2}=1{,}04\cdot10^4\ \mathrm N\]`, ""],
+    ["c", "Vid jordytan blir tyngden", String.raw`\[F_{g,0}=1200\cdot9{,}82=1{,}178\cdot10^4\ \mathrm N\]`, "Gravitationen har bara minskat omkring 12 %. Satelliten är i fritt fall och därför skenbart tyngdlös."]
+  ], String.raw`Satelliten är \(6{,}771\cdot10^6\ \mathrm m\) från centrum. Gravitationskraften är cirka \(10{,}4\ \mathrm{kN}\), jämfört med \(11{,}8\ \mathrm{kN}\) vid jordytan.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_GRAVITATION_V2[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_GRAVITATION_V2[uppgift.id];
+  }
+}
+
+const FACIT_BLANDAT_KRAFTER_V2 = {
+  "4.151": byggFacitListaV2([
+    ["a", "Friktionen försummas, så skjutkraften är den resulterande kraften.", String.raw`\[a=\frac{F}{m}=\frac{36}{24}=1{,}50\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Vagnen startar från vila.", String.raw`\[v=at=1{,}50\cdot4{,}0=6{,}0\ \mathrm{m/s}\]`, ""],
+    ["c", "Använd rörelseformeln för konstant acceleration.", String.raw`\[s=\frac{at^2}{2}=\frac{1{,}50\cdot4{,}0^2}{2}=12\ \mathrm m\]`, ""]
+  ], String.raw`Accelerationen är \(1{,}50\ \mathrm{m/s^2}\). Efter \(4{,}0\ \mathrm s\) är farten \(6{,}0\ \mathrm{m/s}\) och sträckan \(12\ \mathrm m\).`),
+  "4.152": byggFacitListaV2([
+    ["a", "Lutningen i fart–tid-diagrammet ger accelerationen.", String.raw`\[a=\frac{24-0}{8{,}0}=3{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Newtons andra lag ger resultanten.", String.raw`\[F_{\mathrm{res}}=ma=1200\cdot3{,}0=3{,}6\cdot10^3\ \mathrm N\]`, ""],
+    ["c", "Sträckan är arean under grafen.", String.raw`\[s=\frac{8{,}0\cdot24}{2}=96\ \mathrm m\]`, "Motorkraften måste vara större än resultanten om luft- och rullmotstånd också verkar bakåt."]
+  ], String.raw`\(a=3{,}0\ \mathrm{m/s^2}\), \(F_{\mathrm{res}}=3{,}6\ \mathrm{kN}\) och \(s=96\ \mathrm m\).`),
+  "4.153": byggFacitListaV2([
+    ["a", "Dragkraft och friktion är motriktade.", String.raw`\[F_{\mathrm{res}}=20-4{,}0=16\ \mathrm N\]\[a=\frac{16}{32}=0{,}50\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Pulken startar från vila.", String.raw`\[v=at=0{,}50\cdot6{,}0=3{,}0\ \mathrm{m/s}\]\[s=\frac{at^2}{2}=\frac{0{,}50\cdot6{,}0^2}{2}=9{,}0\ \mathrm m\]`, ""]
+  ], String.raw`Resultanten är \(16\ \mathrm N\), accelerationen \(0{,}50\ \mathrm{m/s^2}\), farten \(3{,}0\ \mathrm{m/s}\) och sträckan \(9{,}0\ \mathrm m\).`),
+  "4.154": byggFacitListaV2([
+    ["a", "Välj färdriktningen som positiv.", String.raw`\[a=\frac{0-8{,}0}{5{,}0}=-1{,}60\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Kraften har samma riktning som accelerationen.", String.raw`\[F=ma=75(-1{,}60)=-120\ \mathrm N\]`, "Alltså 120 N bakåt."],
+    ["c", "Vid jämn inbromsning är medelfarten halva startfarten.", String.raw`\[s=\frac{8{,}0+0}{2}\cdot5{,}0=20\ \mathrm m\]`, ""]
+  ], String.raw`Accelerationen är \(-1{,}60\ \mathrm{m/s^2}\), bromskraften \(120\ \mathrm N\) bakåt och sträckan \(20\ \mathrm m\).`),
+  "4.155": byggFacitListaV2([
+    ["a", "Tyngdkraftens komponent längs planet driver klossen.", String.raw`\[F_{\parallel}=mg\sin20^\circ=2{,}5\cdot9{,}82\sin20^\circ=8{,}40\ \mathrm N\]\[a=g\sin20^\circ=3{,}36\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Klossen startar från vila och glider 3,0 m.", String.raw`\[v=\sqrt{2as}=\sqrt{2\cdot3{,}36\cdot3{,}0}=4{,}49\ \mathrm{m/s}\]\[t=\frac va=1{,}34\ \mathrm s\]`, ""]
+  ], String.raw`Kraftkomponenten är \(8{,}40\ \mathrm N\), accelerationen \(3{,}36\ \mathrm{m/s^2}\), slutfarten \(4{,}49\ \mathrm{m/s}\) och tiden \(1{,}34\ \mathrm s\).`),
+  "4.156": byggFacitListaV2([
+    ["a", "På det vågräta golvet är normalkraften \(N=mg\).", String.raw`\[f=\mu mg=0{,}25\cdot18\cdot9{,}82=44{,}2\ \mathrm N\]\[F_{\mathrm{res}}=60-44{,}2=15{,}8\ \mathrm N\]\[a=\frac{15{,}8}{18}=0{,}878\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Efter 5,0 m fås farten ur \(v^2=2as\).", String.raw`\[v=\sqrt{2\cdot0{,}878\cdot5{,}0}=2{,}96\ \mathrm{m/s}\]`, ""],
+    ["c", "När dragkraften släpps bromsar enbart friktionen.", String.raw`\[a_f=\mu g=2{,}455\ \mathrm{m/s^2}\]\[s_f=\frac{v^2}{2a_f}=\frac{2{,}96^2}{2\cdot2{,}455}=1{,}79\ \mathrm m\]`, ""]
+  ], String.raw`Accelerationen under dragningen är \(0{,}878\ \mathrm{m/s^2}\), farten efter 5,0 m är \(2{,}96\ \mathrm{m/s}\), och därefter glider lådan ytterligare \(1{,}79\ \mathrm m\).`),
+  "4.157": byggFacitListaV2([
+    ["a", "Vågens utslag är normalkraften. Eftersom \(N>mg\) är accelerationen uppåt.", String.raw`\[N-mg=ma\]\[a=\frac{700-62\cdot9{,}82}{62}=1{,}47\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Hissen startar från vila och accelererar i 2,0 s.", String.raw`\[v=at=1{,}47\cdot2{,}0=2{,}94\ \mathrm{m/s}\]\[s=\frac{at^2}{2}=2{,}94\ \mathrm m\]`, ""],
+    ["c", "Vid konstant fart är accelerationen noll.", String.raw`\[N=mg=62\cdot9{,}82=609\ \mathrm N\]`, ""]
+  ], String.raw`Accelerationen är \(1{,}47\ \mathrm{m/s^2}\) uppåt. Efter 2,0 s är \(v=2{,}94\ \mathrm{m/s}\) och \(s=2{,}94\ \mathrm m\); vid konstant fart visar vågen cirka \(609\ \mathrm N\).`),
+  "4.158": byggFacitListaV2([
+    ["a", "Bestäm grafens lutning i varje tidsintervall och använd \(F=ma\).", String.raw`\[F_{0-100}=2{,}0\cdot10^5\frac{20}{100}=4{,}0\cdot10^4\ \mathrm N\]\[F_{100-300}=0\]\[F_{300-350}=2{,}0\cdot10^5\frac{-20}{50}=-8{,}0\cdot10^4\ \mathrm N\]`, ""],
+    ["b", "Sträckan är den sammanlagda arean under fart–tid-grafen.", String.raw`\[s=\frac{100\cdot20}{2}+200\cdot20+\frac{50\cdot20}{2}=5500\ \mathrm m\]`, ""]
+  ], String.raw`Krafterna är \(40\ \mathrm{kN}\) framåt, \(0\), och \(80\ \mathrm{kN}\) bakåt. Den totala sträckan är \(5{,}50\ \mathrm{km}\).`),
+  "4.159": byggFacitListaV2([
+    ["a", "Betrakta båda massorna som ett system. Den hängande tyngden driver och friktionen bromsar.", String.raw`\[f=0{,}20\cdot3{,}0\cdot9{,}82=5{,}892\ \mathrm N\]\[a=\frac{1{,}2\cdot9{,}82-5{,}892}{3{,}0+1{,}2}=1{,}40\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Frilägg den hängande massan.", String.raw`\[1{,}2g-S=1{,}2a\Rightarrow S=1{,}2(g-a)=10{,}1\ \mathrm N\]`, ""],
+    ["c", "Massan faller 0,80 m från vila.", String.raw`\[v=\sqrt{2as}=1{,}50\ \mathrm{m/s}\]\[t=\sqrt{\frac{2s}{a}}=1{,}07\ \mathrm s\]`, ""]
+  ], String.raw`\(a=1{,}40\ \mathrm{m/s^2}\), \(S=10{,}1\ \mathrm N\), \(v=1{,}50\ \mathrm{m/s}\) och \(t=1{,}07\ \mathrm s\).`),
+  "4.160": byggFacitListaV2([
+    ["a", "Accelerationen är \(a=2{,}0/4{,}0=0{,}50\ \mathrm{m/s^2}\). Den uppåtriktade kraftkomponenten minskar normalkraften.", String.raw`\[N=mg-F\sin30^\circ\]\[F\cos30^\circ-\mu N=ma\]`, ""],
+    ["b", "Sätt in normalkraften och lös ut dragkraften.", String.raw`\[F(\cos30^\circ+0{,}30\sin30^\circ)=25\cdot0{,}50+0{,}30\cdot25\cdot9{,}82\]\[F=84{,}8\ \mathrm N\]`, ""],
+    ["c", "Sträckan under accelerationen är", String.raw`\[s=\frac{at^2}{2}=4{,}0\ \mathrm m\]`, "En vågrät dragkraft skulle behöva vara \(ma+\mu mg=86{,}2\ \mathrm N\), alltså något större." ]
+  ], String.raw`Dragkraften är cirka \(84{,}8\ \mathrm N\), och lådan hinner \(4{,}0\ \mathrm m\). En vågrät kraft skulle behöva vara cirka \(86{,}2\ \mathrm N\).`),
+  "4.161": byggFacitListaV2([
+    ["a", "Under lyftet gäller \(S-mg=ma\).", String.raw`\[S=m(g+a)=350(9{,}82+0{,}60)=3647\ \mathrm N\]`, ""],
+    ["b", "Lasten startar från vila.", String.raw`\[v=at=0{,}60\cdot3{,}0=1{,}8\ \mathrm{m/s}\]\[s=\frac{at^2}{2}=2{,}7\ \mathrm m\]`, ""],
+    ["c", "Vid konstant fart är resultanten noll.", String.raw`\[S=mg=350\cdot9{,}82=3437\ \mathrm N\]`, ""]
+  ], String.raw`Linan drar med cirka \(3{,}65\ \mathrm{kN}\) under accelerationen. Efter 3,0 s är \(v=1{,}8\ \mathrm{m/s}\) och \(s=2{,}7\ \mathrm m\); vid konstant fart är linkraften \(3{,}44\ \mathrm{kN}\).`),
+  "4.162": byggFacitListaV2([
+    ["a", "Newtons andra lag ger accelerationen.", String.raw`\[a=\frac{8{,}0\cdot10^4}{4{,}0\cdot10^4}=2{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Från vila till lyftfarten 60 m/s.", String.raw`\[t=\frac va=30\ \mathrm s\]\[s=\frac{v^2}{2a}=900\ \mathrm m\]`, ""],
+    ["c", "Kontrollera farten efter 700 m.", String.raw`\[v=\sqrt{2as}=\sqrt{2\cdot2{,}0\cdot700}=52{,}9\ \mathrm{m/s}\]`, "Det är mindre än lyftfarten 60 m/s." ]
+  ], String.raw`Accelerationen är \(2{,}0\ \mathrm{m/s^2}\). Det behövs \(30\ \mathrm s\) och \(900\ \mathrm m\); en 700 m lång bana räcker inte.`),
+  "4.163": byggFacitListaV2([
+    ["a", "Välj rörelseriktningen som positiv.", String.raw`\[a=\frac{1{,}2-2{,}4}{8{,}0}=-0{,}150\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Friktionen är den enda horisontella kraften.", String.raw`\[f=m|a|=19\cdot0{,}150=2{,}85\ \mathrm N\]`, ""],
+    ["c", "Använd medelfarten vid konstant acceleration.", String.raw`\[s=\frac{2{,}4+1{,}2}{2}\cdot8{,}0=14{,}4\ \mathrm m\]`, ""],
+    ["d", "På plan is är \(N=mg\).", String.raw`\[\mu=\frac{f}{mg}=\frac{2{,}85}{19\cdot9{,}82}=0{,}0153\]`, ""]
+  ], String.raw`\(a=-0{,}150\ \mathrm{m/s^2}\), \(f=2{,}85\ \mathrm N\), \(s=14{,}4\ \mathrm m\) och \(\mu=0{,}0153\).`),
+  "4.164": byggFacitListaV2([
+    ["a", "Under de första fyra sekunderna ökar farten linjärt från 0 till 8,0 m/s.", String.raw`\[a=\frac{8{,}0}{4{,}0}=2{,}0\ \mathrm{m/s^2}\]\[F_{\mathrm{res}}=68\cdot2{,}0=136\ \mathrm N\]`, ""],
+    ["b", "Sträckan är arean under fart–tid-grafen.", String.raw`\[s=\frac{4{,}0\cdot8{,}0}{2}+6{,}0\cdot8{,}0=64\ \mathrm m\]`, ""],
+    ["c", "Efter 4,0 s är farten konstant.", String.raw`\[a=0\Rightarrow F_{\mathrm{res}}=0\]`, "Löparen trycker fortfarande ifrån; den framåtriktade kraften balanseras av motståndskrafter." ]
+  ], String.raw`\(a=2{,}0\ \mathrm{m/s^2}\), \(F_{\mathrm{res}}=136\ \mathrm N\) och \(s=64\ \mathrm m\). Efter 4,0 s är resultanten noll.`),
+  "4.165": byggFacitListaV2([
+    ["a", "Betrakta bil och släp som ett system.", String.raw`\[F_{\mathrm{res}}=(1400+600)0{,}80=1600\ \mathrm N\]`, ""],
+    ["b", "Frilägg därefter släpvagnen.", String.raw`\[S=600\cdot0{,}80=480\ \mathrm N\]`, ""],
+    ["c", "Ekipaget startar från vila.", String.raw`\[v=at=9{,}6\ \mathrm{m/s}\]\[s=\frac{at^2}{2}=57{,}6\ \mathrm m\]`, ""],
+    ["d", "Med rullmotstånd måste vajern både accelerera släpet och övervinna motståndet.", String.raw`\[S=600\cdot0{,}80+150=630\ \mathrm N\]`, ""]
+  ], String.raw`Resultanten är \(1{,}60\ \mathrm{kN}\). Vajerkraften är \(480\ \mathrm N\), eller \(630\ \mathrm N\) med rullmotstånd; efter 12 s är \(v=9{,}6\ \mathrm{m/s}\) och \(s=57{,}6\ \mathrm m\).`),
+  "4.166": byggFacitListaV2([
+    ["a", "Bilen bromsas från 14 m/s till vila över 0,60 m.", String.raw`\[0=14^2+2a\cdot0{,}60\Rightarrow a=-163\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Newtons andra lag och \(v=v_0+at\) ger", String.raw`\[F=ma=1{,}3\cdot10^3(-163)=-2{,}12\cdot10^5\ \mathrm N\]\[t=\frac{14}{163}=0{,}0857\ \mathrm s\]`, ""],
+    ["c", "Med krockzonen 0,20 m blir retardationen tre gånger större.", String.raw`\[|a|=\frac{14^2}{2\cdot0{,}20}=490\ \mathrm{m/s^2}\]\[|F|=1{,}3\cdot10^3\cdot490=6{,}37\cdot10^5\ \mathrm N\]`, ""]
+  ], String.raw`För 0,60 m blir \(a=-163\ \mathrm{m/s^2}\), kraften cirka \(2{,}12\cdot10^5\ \mathrm N\) bakåt och tiden \(0{,}0857\ \mathrm s\). Vid 0,20 m blir kraften cirka \(6{,}37\cdot10^5\ \mathrm N\).`),
+  "4.167": byggFacitListaV2([
+    ["a", "På väg upp verkar både tyngdkomponenten och friktionen nedför planet.", String.raw`\[F_{\mathrm{res}}=mg(\sin25^\circ+0{,}30\cos25^\circ)=10{,}23\ \mathrm N\]`, ""],
+    ["b", "Retardationens storlek är \(F_{\mathrm{res}}/m\).", String.raw`\[|a|=6{,}82\ \mathrm{m/s^2}\]\[s=\frac{4{,}0^2}{2\cdot6{,}82}=1{,}17\ \mathrm m\]\[t=\frac{4{,}0}{6{,}82}=0{,}587\ \mathrm s\]`, ""],
+    ["c", "När klossen har stannat jämförs kraften nedför planet med största möjliga statiska friktion.", String.raw`\[mg\sin25^\circ=6{,}22\ \mathrm N>\mu mg\cos25^\circ=4{,}00\ \mathrm N\]`, "Klossen glider därför tillbaka nedför." ]
+  ], String.raw`Resultanten på väg upp är \(10{,}23\ \mathrm N\) nedför. Klossen når \(1{,}17\ \mathrm m\), stannar efter \(0{,}587\ \mathrm s\) och glider sedan tillbaka.`),
+  "4.168": byggFacitListaV2([
+    ["a", "Motorkraften verkar uppåt och tyngdkraften nedåt.", String.raw`\[F_{\mathrm{res}}=12-0{,}80\cdot9{,}82=4{,}144\ \mathrm N\]\[a=\frac{4{,}144}{0{,}80}=5{,}18\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Under motorfasens 2,0 s startar raketen från vila.", String.raw`\[v=at=10{,}36\ \mathrm{m/s}\]\[h_1=\frac{at^2}{2}=10{,}36\ \mathrm m\]`, ""],
+    ["c", "Efter att motorn slocknat bromsar tyngdkraften raketen.", String.raw`\[\Delta h=\frac{v^2}{2g}=5{,}46\ \mathrm m\]\[h_{\max}=10{,}36+5{,}46=15{,}82\ \mathrm m\]`, ""]
+  ], String.raw`Resultanten är \(4{,}14\ \mathrm N\) uppåt och accelerationen \(5{,}18\ \mathrm{m/s^2}\). Vid motorstopp är \(v=10{,}36\ \mathrm{m/s}\) och \(h=10{,}36\ \mathrm m\); största höjden är \(15{,}8\ \mathrm m\).`),
+  "4.169": byggFacitListaV2([
+    ["a", "Bandet glider framåt under paketet, så rörelsefriktionen på paketet verkar framåt.", String.raw`\[f=\mu mg=0{,}25\cdot8{,}0\cdot9{,}82=19{,}64\ \mathrm N\]\[a=\frac fm=2{,}455\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Glidningen upphör när paketets fart har blivit 1,5 m/s.", String.raw`\[t=\frac{1{,}5}{2{,}455}=0{,}611\ \mathrm s\]`, ""],
+    ["c", "Jämför bandets och paketets sträckor under tiden.", String.raw`\[s_{\mathrm{band}}=1{,}5\cdot0{,}611=0{,}916\ \mathrm m\]\[s_{\mathrm{paket}}=\frac{1{,}5^2}{2\cdot2{,}455}=0{,}458\ \mathrm m\]\[s_{\mathrm{rel}}=0{,}458\ \mathrm m\]`, ""],
+    ["d", "När hastigheterna är lika och bandet går med konstant fart behövs ingen horisontell resultant.", String.raw`\[f=0\]`, ""]
+  ], String.raw`Friktionen är \(19{,}64\ \mathrm N\) framåt. Paketet följer bandet efter \(0{,}611\ \mathrm s\), har då glidit \(0{,}458\ \mathrm m\) relativt bandet, och friktionen blir därefter noll.`),
+  "4.170": byggFacitListaV2([
+    ["a", "Accelerationen i backen är \(20/12=1{,}667\ \mathrm{m/s^2}\).", String.raw`\[F-mg\sin6{,}0^\circ-400=ma\]\[F=1500\cdot1{,}667+1500\cdot9{,}82\sin6{,}0^\circ+400=4439\ \mathrm N\]`, ""],
+    ["b", "Vid jämn acceleration från vila är medelfarten 10 m/s.", String.raw`\[s=10\cdot12=120\ \mathrm m\]`, ""],
+    ["c", "På plan väg återstår drivkraften och motståndet.", String.raw`\[a=\frac{4439-400}{1500}=2{,}69\ \mathrm{m/s^2}\]\[t=\frac{20}{2{,}69}=7{,}43\ \mathrm s\]`, ""]
+  ], String.raw`Drivkraften är cirka \(4{,}44\ \mathrm{kN}\), sträckan i backen \(120\ \mathrm m\), och tiden till 20 m/s på plan väg \(7{,}43\ \mathrm s\).`),
+  "4.201": byggFacitListaV2([
+    ["a", "Lådan startar från vila och accelerationen är konstant.", String.raw`\[a=\frac{2s}{t^2}=\frac{2\cdot9{,}0}{3{,}0^2}=2{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Resultanten och skjutkraften blir", String.raw`\[F_{\mathrm{res}}=ma=20\cdot2{,}0=40\ \mathrm N\]\[F_{\mathrm{skjut}}=40+25=65\ \mathrm N\]`, ""],
+    ["c", "Slutfarten är", String.raw`\[v=at=2{,}0\cdot3{,}0=6{,}0\ \mathrm{m/s}\]`, ""]
+  ], String.raw`\(a=2{,}0\ \mathrm{m/s^2}\), \(F_{\mathrm{res}}=40\ \mathrm N\), skjutkraften \(65\ \mathrm N\) och slutfarten \(6{,}0\ \mathrm{m/s}\).`),
+  "4.202": byggFacitListaV2([
+    ["a", "Hissen rör sig nedåt men bromsas, så accelerationen är uppåt.", String.raw`\[a=\frac{3{,}0}{2{,}0}=1{,}50\ \mathrm{m/s^2}\]\[F_{\mathrm{res}}=500\cdot1{,}50=750\ \mathrm N\]`, ""],
+    ["b", "Med uppåt som positiv riktning gäller \(S-mg=ma\).", String.raw`\[S=500(9{,}82+1{,}50)=5660\ \mathrm N\]`, ""],
+    ["c", "Medelfarten under inbromsningen är 1,5 m/s.", String.raw`\[s=1{,}5\cdot2{,}0=3{,}0\ \mathrm m\]`, ""]
+  ], String.raw`Accelerationen är \(1{,}50\ \mathrm{m/s^2}\) uppåt, resultanten \(750\ \mathrm N\) uppåt, linkraften \(5{,}66\ \mathrm{kN}\) och sträckan \(3{,}0\ \mathrm m\).`),
+  "4.203": byggFacitListaV2([
+    ["a", "Fartändringen sker på 5,0 s.", String.raw`\[a=\frac{25-10}{5{,}0}=3{,}0\ \mathrm{m/s^2}\]\[F_{\mathrm{res}}=220\cdot3{,}0=660\ \mathrm N\]`, ""],
+    ["b", "Vid konstant acceleration används medelfarten.", String.raw`\[s=\frac{10+25}{2}\cdot5{,}0=87{,}5\ \mathrm m\]`, ""],
+    ["c", "Samma kraft på den större massan ger", String.raw`\[a=\frac{660}{300}=2{,}20\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`\(a=3{,}0\ \mathrm{m/s^2}\), \(F_{\mathrm{res}}=660\ \mathrm N\), \(s=87{,}5\ \mathrm m\). Med passagerare blir accelerationen \(2{,}20\ \mathrm{m/s^2}\).`),
+  "4.204": byggFacitListaV2([
+    ["a", "Tyngdkraften är", String.raw`\[F_g=mg=0{,}50\cdot9{,}82=4{,}91\ \mathrm N\]`, ""],
+    ["b", "Tyngdkraften är den enda kraften.", String.raw`\[a=\frac{F_g}{m}=\frac{mg}{m}=g=9{,}82\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Bollen faller 20 m från vila.", String.raw`\[t=\sqrt{\frac{2s}{g}}=\sqrt{\frac{40}{9{,}82}}=2{,}02\ \mathrm s\]\[v=gt=19{,}8\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Tyngdkraften är \(4{,}91\ \mathrm N\), accelerationen \(9{,}82\ \mathrm{m/s^2}\) nedåt, falltiden \(2{,}02\ \mathrm s\) och slutfarten \(19{,}8\ \mathrm{m/s}\).`),
+  "4.205": byggFacitListaV2([
+    ["a", "Tyngdkraftens komponent längs planet är", String.raw`\[F_{\parallel}=mg\sin30^\circ=4{,}0\cdot9{,}82\cdot0{,}5=19{,}64\ \mathrm N\]`, ""],
+    ["b", "På det friktionsfria planet är detta den resulterande kraften.", String.raw`\[a=\frac{F_{\parallel}}m=g\sin30^\circ=4{,}91\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Efter 2,0 s från vila blir", String.raw`\[v=at=9{,}82\ \mathrm{m/s}\]\[s=\frac{at^2}{2}=9{,}82\ \mathrm m\]`, ""]
+  ], String.raw`Kraftkomponenten är \(19{,}64\ \mathrm N\), accelerationen \(4{,}91\ \mathrm{m/s^2}\), farten \(9{,}82\ \mathrm{m/s}\) och sträckan \(9{,}82\ \mathrm m\).`),
+  "4.224": byggFacitListaV2([
+    ["a", "Bilen startar från vila.", String.raw`\[a=\frac{20}{8{,}0}=2{,}50\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Använd Newtons andra lag.", String.raw`\[F_{\mathrm{res}}=ma=900\cdot2{,}50=2250\ \mathrm N\]`, ""]
+  ], String.raw`Accelerationen är \(2{,}50\ \mathrm{m/s^2}\) och den resulterande kraften \(2{,}25\ \mathrm{kN}\).`),
+  "4.225": byggFacitListaV2([
+    ["a", "Dragkraften och friktionen är motriktade.", String.raw`\[F_{\mathrm{res}}=30-12=18\ \mathrm N\]\[a=\frac{18}{6{,}0}=3{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Lådan startar från vila.", String.raw`\[v=at=3{,}0\cdot4{,}0=12\ \mathrm{m/s}\]\[s=\frac{at^2}{2}=24\ \mathrm m\]`, ""]
+  ], String.raw`Resultanten är \(18\ \mathrm N\), accelerationen \(3{,}0\ \mathrm{m/s^2}\), farten \(12\ \mathrm{m/s}\) och sträckan \(24\ \mathrm m\).`),
+  "4.226": byggFacitListaV2([
+    ["a", "Hissen accelererar uppåt från vila.", String.raw`\[a=\frac{2{,}4}{3{,}0}=0{,}80\ \mathrm{m/s^2}\]\[F_{\mathrm{res}}=700\cdot0{,}80=560\ \mathrm N\]`, ""],
+    ["b", "Linkraften måste både balansera tyngden och ge resultanten.", String.raw`\[S=m(g+a)=700(9{,}82+0{,}80)=7434\ \mathrm N\]`, ""],
+    ["c", "Sträckan under accelerationen är", String.raw`\[s=\frac{at^2}{2}=\frac{0{,}80\cdot3{,}0^2}{2}=3{,}60\ \mathrm m\]`, ""]
+  ], String.raw`\(a=0{,}80\ \mathrm{m/s^2}\) uppåt, \(F_{\mathrm{res}}=560\ \mathrm N\), \(S=7{,}43\ \mathrm{kN}\) och \(s=3{,}60\ \mathrm m\).`),
+  "4.277": byggFacitListaV2([
+    ["a", "Hookes lag ger fjäderkraften i släppögonblicket.", String.raw`\[F=kx=180\cdot0{,}20=36\ \mathrm N\]`, "Kraften är riktad in mot jämviktsläget."],
+    ["b", "Newtons andra lag ger den momentana accelerationen.", String.raw`\[a=\frac Fm=\frac{36}{2{,}5}=14{,}4\ \mathrm{m/s^2}\]`, "När klossen närmar sig jämviktsläget minskar x, fjäderkraften och accelerationens storlek till noll." ]
+  ], String.raw`I släppögonblicket är kraften \(36\ \mathrm N\) mot jämviktsläget och accelerationen \(14{,}4\ \mathrm{m/s^2}\). Accelerationen avtar mot noll.`),
+  "4.278": byggFacitListaV2([
+    ["a", "Fjäderkraften vid hoptryckningen 8,0 cm är", String.raw`\[F=kx=400\cdot0{,}080=32\ \mathrm N\]`, ""],
+    ["b", "Den momentana accelerationen och antalet g blir", String.raw`\[a=\frac{32}{0{,}60}=53{,}3\ \mathrm{m/s^2}\]\[\frac ag=\frac{53{,}3}{9{,}82}=5{,}43\]`, ""],
+    ["c", "Accelerationen är inte konstant.", String.raw`\[a(x)=\frac{kx}{m}\]`, "Den minskar när fjädern rätas ut och är noll när vagnen lämnar en okopplad fjäder i dess naturliga längd." ]
+  ], String.raw`Kraften är \(32\ \mathrm N\) och begynnelseaccelerationen \(53{,}3\ \mathrm{m/s^2}=5{,}43g\). Accelerationen avtar under knuffen.`),
+  "4.279": byggFacitListaV2([
+    ["a", "Dynamometerns dragkraft motverkas av friktionen.", String.raw`\[F_{\mathrm{res}}=30-18=12\ \mathrm N\]\[a=\frac{12}{8{,}0}=1{,}50\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Från vila efter 4,0 s blir farten", String.raw`\[v=at=1{,}50\cdot4{,}0=6{,}0\ \mathrm{m/s}\]`, ""],
+    ["c", "Dynamometerns kraft är dess fjäderkraft.", String.raw`\[x=\frac Fk=\frac{30}{500}=0{,}060\ \mathrm m=6{,}0\ \mathrm{cm}\]`, ""]
+  ], String.raw`Resultanten är \(12\ \mathrm N\), accelerationen \(1{,}50\ \mathrm{m/s^2}\), farten \(6{,}0\ \mathrm{m/s}\) och förlängningen \(6{,}0\ \mathrm{cm}\).`),
+  "4.280": byggFacitListaV2([
+    ["a", "Eftersom förlängningen hålls konstant är även fjäderkraften konstant.", String.raw`\[F_f=kx=240\cdot0{,}050=12\ \mathrm N\]`, ""],
+    ["b", "Friktionen verkar bakåt.", String.raw`\[F_{\mathrm{res}}=12-6{,}0=6{,}0\ \mathrm N\]\[a=\frac{6{,}0}{1{,}2}=5{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Vagnen startar från vila.", String.raw`\[s=\frac{at^2}{2}=\frac{5{,}0\cdot2{,}0^2}{2}=10\ \mathrm m\]`, ""]
+  ], String.raw`Fjäderkraften är \(12\ \mathrm N\), resultanten \(6{,}0\ \mathrm N\), accelerationen \(5{,}0\ \mathrm{m/s^2}\) och sträckan \(10\ \mathrm m\).`),
+  "4.281": byggFacitListaV2([
+    ["1", "Bestäm fjäderkraften och friktionen.", String.raw`\[F_f=kx=250\cdot0{,}12=30\ \mathrm N\]\[f=\mu mg=0{,}25\cdot3{,}0\cdot9{,}82=7{,}365\ \mathrm N\]`, ""],
+    ["2", "Differensen är den resulterande kraften.", String.raw`\[a=\frac{30-7{,}365}{3{,}0}=7{,}545\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`Klossens acceleration är cirka \(7{,}5\ \mathrm{m/s^2}\) i fjäderns dragriktning.`),
+  "4.282": byggFacitListaV2([
+    ["1", "Fjäderkraften uppåt jämförs med tyngdkraften nedåt.", String.raw`\[F_f=kx=350\cdot0{,}072=25{,}2\ \mathrm N\]\[F_g=mg=2{,}0\cdot9{,}82=19{,}64\ \mathrm N\]`, ""],
+    ["2", "Resultanten är uppåt.", String.raw`\[a=\frac{25{,}2-19{,}64}{2{,}0}=2{,}78\ \mathrm{m/s^2}\]`, "Accelerationen säger inte om hissen för tillfället rör sig uppåt eller nedåt." ]
+  ], String.raw`Hissens acceleration är \(2{,}78\ \mathrm{m/s^2}\) uppåt.`),
+  "4.283": byggFacitListaV2([
+    ["a", "I jämvikt balanserar fjäderkraften tyngdkomponenten längs planet.", String.raw`\[kx=mg\sin25^\circ\Rightarrow x=\frac{1{,}5\cdot9{,}82\sin25^\circ}{120}=0{,}0519\ \mathrm m\]`, ""],
+    ["b", "Vid 50° blir förlängningen", String.raw`\[x_{50}=\frac{1{,}5\cdot9{,}82\sin50^\circ}{120}=0{,}0940\ \mathrm m\]\[\frac{x_{50}}{x_{25}}=\frac{\sin50^\circ}{\sin25^\circ}=1{,}81\]`, "Den fördubblas alltså inte." ]
+  ], String.raw`Förlängningen är \(5{,}19\ \mathrm{cm}\) vid 25° och \(9{,}40\ \mathrm{cm}\) vid 50°; ökningen är en faktor \(1{,}81\), inte 2.`),
+  "4.284": byggFacitListaV2([
+    ["1", "Betrakta först båda klossarna som ett system.", String.raw`\[a=\frac{20}{3{,}0+2{,}0}=4{,}0\ \mathrm{m/s^2}\]`, ""],
+    ["2", "På den bakre 3,0-kilogramsklossen är fjäderkraften den enda horisontella kraften.", String.raw`\[F_f=3{,}0\cdot4{,}0=12\ \mathrm N\]\[x=\frac{F_f}{k}=\frac{12}{500}=0{,}024\ \mathrm m\]`, ""]
+  ], String.raw`Fjädern är utdragen \(0{,}024\ \mathrm m=2{,}4\ \mathrm{cm}\).`),
+  "4.285": byggFacitListaV2([
+    ["a", "Den momentana accelerationen följer av Hookes lag.", String.raw`\[|a|=\frac{k|x|}{m}\]`, "Den är alltid riktad mot jämviktsläget."],
+    ["b", "Sätt in de tre lägena.", String.raw`\[|a(0{,}24)|=\frac{50\cdot0{,}24}{0{,}80}=15\ \mathrm{m/s^2}\]\[|a(0{,}12)|=7{,}5\ \mathrm{m/s^2}\]\[a(0)=0\]`, ""],
+    ["c", "Formeln \(s=at^2/2\) kräver konstant acceleration.", "", "Här ändras accelerationen kontinuerligt med läget, så den formeln kan inte användas för tiden till jämviktsläget." ]
+  ], String.raw`Accelerationens storlek är \(15\ \mathrm{m/s^2}\), \(7{,}5\ \mathrm{m/s^2}\) respektive \(0\). Den är inte konstant.`),
+  "4.286": byggFacitListaV2([
+    ["1", "Omvandla fjäderkonstanten och hoptryckningen till SI-enheter.", String.raw`\[F=kx=80\cdot10^3\cdot0{,}15=1{,}20\cdot10^4\ \mathrm N\]`, "Kraften verkar bakåt."],
+    ["2", "Beräkna den momentana retardationen.", String.raw`\[|a|=\frac{1{,}20\cdot10^4}{250}=48\ \mathrm{m/s^2}\]\[\frac{|a|}{g}=\frac{48}{9{,}82}=4{,}89\]`, "Retardationen är inte konstant eftersom fjäderkraften växer med hoptryckningen." ]
+  ], String.raw`Bromskraften är \(12{,}0\ \mathrm{kN}\) och den momentana retardationen \(48\ \mathrm{m/s^2}=4{,}89g\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_BLANDAT_KRAFTER_V2[uppgift.id]) {
+    uppgift.t = uppgift.t.replace(/<\/?strong>/g, "");
+    uppgift.s = FACIT_BLANDAT_KRAFTER_V2[uppgift.id];
+  }
+}
+
+/*
+ * Övergångsmall för ännu ej detaljomskrivna facit. Den bevarar alla befintliga
+ * beräkningar men ger samma rena deluppgiftsstruktur som de nya faciten.
+ * När ett område skrivs om från grunden ersätts denna version av ett ämnesspecifikt
+ * FACIT_*_V2-block längre ned i filen.
+ */
+function byggOvergangsFacitV2(gammaltFacit) {
+  const resultat = [...gammaltFacit.matchAll(/<strong>([\s\S]*?)<\/strong>/gi)]
+    .map(match => match[1].replace(/<[^>]+>/g, "").trim())
+    .filter(Boolean);
+  const stycken = [...gammaltFacit.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)]
+    .flatMap(match => match[1]
+      .replace(/<\/?strong>/gi, "")
+      .split(/(?=\s+[a-zåäö]\)\s+)/gi))
+    .map(stycke => stycke.trim())
+    .filter(Boolean);
+
+  const grupper = [];
+  for (const stycke of stycken) {
+    const del = stycke.match(/^\s*([a-zåäö]|\d+)\)\s*([\s\S]*)$/i);
+    if (del) {
+      grupper.push({ mark: del[1], innehall: [del[2]] });
+    } else if (grupper.length) {
+      grupper[grupper.length - 1].innehall.push(stycke);
+    } else {
+      grupper.push({ mark: "1", innehall: [stycke] });
+    }
+  }
+
+  const delar = grupper.map(grupp =>
+    `<div class="facit-del"><span class="facit-mark">${grupp.mark}</span>` +
+    `<div class="facit-arbete">${grupp.innehall.map(text => `<p>${text}</p>`).join("")}</div></div>`
+  ).join("");
+  const slutsvar = resultat.length
+    ? resultat.join("; ")
+    : "Resultaten och motiveringen framgår av delstegen ovan.";
+  return `<div class="facit-v2 facit-v2-overgang">${delar}` +
+    `<p class="facit-svar"><strong>Svar:</strong> ${slutsvar}</p></div>`;
+}
+
+for (const uppgift of window.BANK) {
+  uppgift.t = uppgift.t.replace(/<\/?strong>/gi, "");
+  if (!uppgift.s.includes("facit-v2")) {
+    uppgift.s = byggOvergangsFacitV2(uppgift.s);
+  }
+}
+
+/* Sakrättningar som upptäcktes vid genomgången av kapitel 5. */
+const uppgift5110 = window.BANK.find(uppgift => uppgift.id === "5.110");
+if (uppgift5110) {
+  uppgift5110.t = uppgift5110.t.replace(
+    "Höjdskillnaden är 25 m.",
+    "Bestäm höjdskillnaden ur backens längd och lutning."
+  ).replace(">25 m<", ">41 m<");
+  uppgift5110.s = byggFacitListaV2([
+    ["a", "Höjdskillnaden måste följa av den angivna längden längs backen och lutningsvinkeln.", String.raw`\[h=s\sin20^\circ=120\sin20^\circ=41{,}0\ \mathrm m\]\[\Delta E_p=mgh=80\cdot9{,}82\cdot41{,}0=3{,}22\cdot10^4\ \mathrm J\]`, ""],
+    ["b", "Normalkraften är \(N=mg\cos20^\circ\). Friktionens arbete är negativt.", String.raw`\[W_f=-\mu Ns=-0{,}08\cdot80\cdot9{,}82\cos20^\circ\cdot120\]\[W_f=-7{,}09\cdot10^3\ \mathrm J\]`, ""],
+    ["c", "Energiprincipen ger rörelseenergin längst ned.", String.raw`\[E_k=\Delta E_p+W_f=3{,}22\cdot10^4-7{,}09\cdot10^3=2{,}51\cdot10^4\ \mathrm J\]\[v=\sqrt{\frac{2E_k}{m}}=25{,}1\ \mathrm{m/s}\]`, ""],
+    ["d", "Kontrollera med Newtons andra lag längs planet.", String.raw`\[a=g(\sin20^\circ-\mu\cos20^\circ)=2{,}62\ \mathrm{m/s^2}\]\[v=\sqrt{2as}=\sqrt{2\cdot2{,}62\cdot120}=25{,}1\ \mathrm{m/s}\]`, "Metoderna ger samma resultat när geometrin är konsekvent."]
+  ], String.raw`Höjdskillnaden är \(41{,}0\ \mathrm m\), tyngdkraften tillför \(32{,}2\ \mathrm{kJ}\), friktionen tar bort \(7{,}09\ \mathrm{kJ}\), och slutfarten blir \(25{,}1\ \mathrm{m/s}\).`);
+}
+
+const uppgift5113 = window.BANK.find(uppgift => uppgift.id === "5.113");
+if (uppgift5113) {
+  uppgift5113.t = uppgift5113.t.replace(
+    "Luftmotståndet försummas.",
+    "Luftmotståndet försummas. Använd den förenklade modellen att raketens massa är 1,2 kg under hela motorfasen och 0,80 kg efter att bränslet har förbrukats."
+  );
+  uppgift5113.s = byggFacitListaV2([
+    ["a", "Under motorfasen används den massa som uppgiften anger för den förenklade modellen.", String.raw`\[F_{\mathrm{res}}=18-1{,}2\cdot9{,}82=6{,}216\ \mathrm N\]\[a=\frac{6{,}216}{1{,}2}=5{,}18\ \mathrm{m/s^2}\]`, ""],
+    ["b", "Raketen startar från vila och motorn arbetar i 1,5 s.", String.raw`\[v=at=5{,}18\cdot1{,}5=7{,}77\ \mathrm{m/s}\]\[h_1=\frac{at^2}{2}=5{,}83\ \mathrm m\]`, ""],
+    ["c", "Efter motorstopp bromsar tyngdkraften raketen.", String.raw`\[\Delta h=\frac{v^2}{2g}=\frac{7{,}77^2}{2\cdot9{,}82}=3{,}07\ \mathrm m\]\[h_{\max}=5{,}83+3{,}07=8{,}90\ \mathrm m\]`, ""],
+    ["d", "I vändläget är farten noll. Vid marken används energiprincipen med slutmassan 0,80 kg.", String.raw`\[p_{\mathrm{top}}=0\]\[v_{\mathrm{mark}}=\sqrt{2gh_{\max}}=13{,}2\ \mathrm{m/s}\]\[p_{\mathrm{mark}}=0{,}80\cdot13{,}2=10{,}6\ \mathrm{kg\,m/s}\]`, "Rörelsemängden vid marken är riktad nedåt."]
+  ], String.raw`Under motorfasen är \(F_{\mathrm{res}}=6{,}22\ \mathrm N\) och \(a=5{,}18\ \mathrm{m/s^2}\). Vid motorstopp är \(v=7{,}77\ \mathrm{m/s}\) och \(h=5{,}83\ \mathrm m\); maxhöjden är \(8{,}90\ \mathrm m\). Rörelsemängden är \(0\) i toppen och \(10{,}6\ \mathrm{kg\,m/s}\) nedåt vid marken.`);
+}
+
+const uppgift5116 = window.BANK.find(uppgift => uppgift.id === "5.116");
+if (uppgift5116) {
+  uppgift5116.t = uppgift5116.t.replace(
+    "hur mycket energi har motorn förbrukat totalt (inklusive det som gick till rullmotstånd)?",
+    "kan motorns totala energiförbrukning, inklusive arbetet mot rullmotståndet, bestämmas av uppgifterna? Motivera."
+  );
+  uppgift5116.s = byggFacitListaV2([
+    ["a", "Vid konstant effekt är drivkraften \(P/v\). Resultanten fås efter att rullmotståndet har dragits bort.", String.raw`\[F_{\mathrm{res}}(5{,}0)=\frac{18000}{5{,}0}-50=3550\ \mathrm N\]\[F_{\mathrm{res}}(25)=\frac{18000}{25}-50=670\ \mathrm N\]`, ""],
+    ["b", "När farten ökar minskar \(P/v\), och därmed minskar även accelerationen \(a=F_{\mathrm{res}}/m\).", "", ""],
+    ["c", "Rörelseenergin vid 30 m/s kan bestämmas direkt.", String.raw`\[E_k=\frac{mv^2}{2}=\frac{260\cdot30^2}{2}=1{,}17\cdot10^5\ \mathrm J\]`, "Motorns totala energi är \(E_{\mathrm{motor}}=E_k+50s\). Eftersom sträckan s saknas kan ett numeriskt totalvärde inte bestämmas."],
+    ["d", "Impulsändringen under nödstoppet ger medelkraften.", String.raw`\[|F_{\mathrm{medel}}|=\frac{m\Delta v}{\Delta t}=\frac{260\cdot30}{2{,}5}=3120\ \mathrm N\]`, "Kraften är riktad bakåt."]
+  ], String.raw`Resultanten är \(3{,}55\ \mathrm{kN}\) vid 5,0 m/s och \(670\ \mathrm N\) vid 25 m/s. Rörelseenergin är \(117\ \mathrm{kJ}\); total motorenergi kan inte bestämmas utan sträckan. Bromskraftens medelvärde är \(3{,}12\ \mathrm{kN}\) bakåt.`);
+}
+
+function byggKraftStrackaGrafPilbageV2() {
+  return `<span class="fig"><svg preserveAspectRatio="xMinYMid meet" viewBox="0 0 430 250" role="img" aria-label="Kraft–förlängningsdiagram med en rät linje från noll till 300 newton vid 0,55 meter.">
+    <defs><marker id="pil-axel-55" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#2B2527"/></marker></defs>
+    <line x1="58" y1="205" x2="395" y2="205" stroke="#2B2527" stroke-width="2" marker-end="url(#pil-axel-55)"/>
+    <line x1="58" y1="205" x2="58" y2="25" stroke="#2B2527" stroke-width="2" marker-end="url(#pil-axel-55)"/>
+    <path d="M58 205 L360 45 L360 205 Z" fill="#B43123" fill-opacity="0.12" stroke="none"/>
+    <line x1="58" y1="205" x2="360" y2="45" stroke="#B43123" stroke-width="3"/>
+    <line x1="360" y1="45" x2="360" y2="205" stroke="#9A959C" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <line x1="58" y1="45" x2="360" y2="45" stroke="#9A959C" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <text x="398" y="225" text-anchor="end" font-family="IBM Plex Mono" font-size="14" fill="#2B2527">x (m)</text>
+    <text x="45" y="24" text-anchor="end" font-family="IBM Plex Mono" font-size="14" fill="#2B2527">F (N)</text>
+    <text x="360" y="226" text-anchor="middle" font-family="IBM Plex Mono" font-size="14" fill="#2B2527">0,55</text>
+    <text x="48" y="50" text-anchor="end" font-family="IBM Plex Mono" font-size="14" fill="#2B2527">300</text>
+    <text x="245" y="152" text-anchor="middle" font-family="IBM Plex Mono" font-size="14" fill="#B43123">area = lagrad energi</text>
+  </svg></span>`;
+}
+
+const FACIT_ARBETE_V2_DEL1 = {
+  "5.2": byggFacitListaV2([
+    ["a", "Omvandla först laddningskapaciteten till amperetimmar och därefter till coulomb.", String.raw`\[10\,000\ \mathrm{mAh}=10{,}0\ \mathrm{Ah}\]\[Q=10{,}0\cdot3600=3{,}60\cdot10^4\ \mathrm C\]`, ""],
+    ["b", "Den elektriska energin är laddning gånger spänning.", String.raw`\[E=QU=3{,}60\cdot10^4\cdot3{,}7=1{,}33\cdot10^5\ \mathrm J\]`, ""],
+    ["c", "Sätt den lagrade energin lika med ökningen i lägesenergi.", String.raw`\[mgh=E\Rightarrow h=\frac{E}{mg}=\frac{1{,}332\cdot10^5}{70\cdot9{,}82}=194\ \mathrm m\]`, "Detta är en ideal övre gräns; verkliga omvandlingsförluster minskar höjden."]
+  ], String.raw`Powerbanken lagrar cirka \(1{,}33\cdot10^5\ \mathrm J=133\ \mathrm{kJ}\), vilket idealt räcker för att lyfta personen cirka \(194\ \mathrm m\).`),
+  "5.4": byggFacitListaV2([
+    ["1", "Från startläget till vändläget sjunker personen totalt", String.raw`\[\Delta h=2{,}4+0{,}80=3{,}20\ \mathrm m\]`, ""],
+    ["2", "Mattan verkar under hoptryckningssträckan 0,80 m. Dess arbete tar upp hela minskningen i lägesenergi.", String.raw`\[F_{\mathrm{med}}\cdot0{,}80=mg\cdot3{,}20\]\[F_{\mathrm{med}}=\frac{55\cdot9{,}82\cdot3{,}20}{0{,}80}=2{,}16\cdot10^3\ \mathrm N\]`, ""],
+    ["3", "Jämför med personens tyngd.", String.raw`\[F_g=55\cdot9{,}82=540\ \mathrm N\]\[\frac{F_{\mathrm{med}}}{F_g}=4{,}00\]`, ""]
+  ], String.raw`Studsmattan verkar i genomsnitt med cirka \(2{,}16\ \mathrm{kN}\) uppåt, alltså fyra gånger personens tyngd.`),
+  "5.5": byggFacitListaV2([
+    ["a", "Eftersom kraften växer linjärt blir kraft–förlängningsgrafen en rät linje. Den lagrade energin är triangelns area.", String.raw`\[E=\frac{Fx}{2}=\frac{300\cdot0{,}55}{2}=82{,}5\ \mathrm J\]` + byggKraftStrackaGrafPilbageV2(), ""],
+    ["b", "Om all energi blir rörelseenergi för pilen med massan \(25\ \mathrm g=0{,}025\ \mathrm{kg}\):", String.raw`\[\frac{mv^2}{2}=E\Rightarrow v=\sqrt{\frac{2E}{m}}=\sqrt{\frac{2\cdot82{,}5}{0{,}025}}=81{,}2\ \mathrm{m/s}\]`, ""],
+    ["c", "Vid 80 procents verkningsgrad överförs", String.raw`\[E_{\mathrm{pil}}=0{,}80\cdot82{,}5=66{,}0\ \mathrm J\]\[v=\sqrt{\frac{2\cdot66{,}0}{0{,}025}}=72{,}7\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Bågen lagrar \(82{,}5\ \mathrm J\). Pilen får idealt \(81{,}2\ \mathrm{m/s}\), eller \(72{,}7\ \mathrm{m/s}\) vid 80 procents verkningsgrad.`),
+  "5.8": byggFacitListaV2([
+    ["a", "Lägesenergin i startläget omvandlas till rörelseenergi i bottenläget.", String.raw`\[mgh=\frac{mv^2}{2}\Rightarrow v=\sqrt{2gh}\]\[v=\sqrt{2\cdot9{,}82\cdot0{,}60}=3{,}43\ \mathrm{m/s}\]`, ""],
+    ["b", "Massan finns på båda sidor och förkortas bort.", "", "I modellen utan motstånd får därför ett lätt och ett tungt barn samma fart från samma höjd." ]
+  ], String.raw`Farten i det lägsta läget är cirka \(3{,}4\ \mathrm{m/s}\). Den är oberoende av barnets massa.`),
+  "5.10": byggFacitListaV2([
+    ["a", "Bromsen måste ta upp lägesenergin som förloras under både det fria fallet och bromssträckan.", String.raw`\[E_{\mathrm{broms}}=mg(3{,}0+1{,}5)\]\[E_{\mathrm{broms}}=1200\cdot9{,}82\cdot4{,}5=5{,}30\cdot10^4\ \mathrm J\]`, ""],
+    ["b", "Bromskraftens arbete under 1,5 m är lika stort som energin den tar upp.", String.raw`\[F_{\mathrm{med}}=\frac{E_{\mathrm{broms}}}{s}=\frac{5{,}3028\cdot10^4}{1{,}5}=3{,}54\cdot10^4\ \mathrm N\]`, "Kraften verkar uppåt och är tre gånger hissens tyngd." ]
+  ], String.raw`Bromsen ska ta upp cirka \(53\ \mathrm{kJ}\), och dess genomsnittliga kraft är cirka \(35\ \mathrm{kN}\) uppåt.`),
+  "5.11": byggFacitListaV2([
+    ["a", "Kulans rörelseenergi när den lämnar handen är", String.raw`\[E_k=\frac{mv^2}{2}=\frac{7{,}26\cdot13{,}5^2}{2}=662\ \mathrm J\]`, ""],
+    ["b", "Arbetet för att lyfta kulan 2,0 m blir", String.raw`\[\Delta E_p=mgh=7{,}26\cdot9{,}82\cdot2{,}0=143\ \mathrm J\]`, ""],
+    ["c", "Jämför energierna.", String.raw`\[\frac{662}{143}=4{,}64\]`, "Stötaren lägger klart mest arbete på att ge kulan fart." ]
+  ], String.raw`Rörelseenergin är \(662\ \mathrm J\), medan höjningen 2,0 m kräver \(143\ \mathrm J\). Fartökningen kräver ungefär 4,6 gånger mer energi.`),
+  "5.19": byggFacitListaV2([
+    ["a", "Konstant fart innebär kraftjämvikt. På plant golv är \(N=mg\).", String.raw`\[F_{\mathrm{drag}}=f=\mu N=0{,}40\cdot25\cdot9{,}82=98{,}2\ \mathrm N\]`, ""],
+    ["b", "Dragkraften är parallell med förflyttningen.", String.raw`\[W=Fs=98{,}2\cdot8{,}0=786\ \mathrm J\]`, ""],
+    ["c", "Rörelseenergin ändras inte när farten är konstant.", "", "Arbetet omvandlas huvudsakligen till värme i kontaktytorna." ]
+  ], String.raw`Dragkraften är \(98{,}2\ \mathrm N\) och arbetet \(786\ \mathrm J\approx0{,}79\ \mathrm{kJ}\). Energin blir värme.`),
+  "5.20": byggFacitListaV2([
+    ["a", "Från 32 m till marknivån omvandlas all lägesenergi till rörelseenergi.", String.raw`\[v=\sqrt{2g\Delta h}=\sqrt{2\cdot9{,}82\cdot32}=25{,}1\ \mathrm{m/s}\]`, ""],
+    ["b", "På kullen 12 m över marken har vagnen sjunkit \(32-12=20\ \mathrm m\).", String.raw`\[v=\sqrt{2\cdot9{,}82\cdot20}=19{,}8\ \mathrm{m/s}\]`, ""],
+    ["c", "Utan tillförd energi kan vagnen högst återvända till starthöjden 32 m.", "", "Den når därför inte över en 35 m hög kulle." ]
+  ], String.raw`Farten är \(25{,}1\ \mathrm{m/s}\) längst ned och \(19{,}8\ \mathrm{m/s}\) på 12-meterskullen. Vagnen klarar inte 35 m.`),
+  "5.23": byggFacitListaV2([
+    ["1", "Arbetet per låda motsvarar ökningen i lägesenergi.", String.raw`\[W_1=mgh=15\cdot9{,}82\cdot1{,}4=206\ \mathrm J\]`, ""],
+    ["2", "Multiplicera med antalet lådor.", String.raw`\[W_{12}=12\cdot206=2475\ \mathrm J\]`, ""]
+  ], String.raw`Det totala arbetet är cirka \(2{,}5\ \mathrm{kJ}\).`),
+  "5.24": byggFacitListaV2([
+    ["a", "Normalkraften och friktionen är", String.raw`\[N=mg\cos10^\circ\]\[f=\mu N=0{,}30\cdot20\cdot9{,}82\cos10^\circ=58{,}0\ \mathrm N\]`, ""],
+    ["b", "Arbetet mot friktionen under 12 m blir", String.raw`\[W_f=fs=58{,}0\cdot12=696\ \mathrm J\]`, ""],
+    ["c", "Höjdökningen och lägesenergin är", String.raw`\[h=12\sin10^\circ=2{,}08\ \mathrm m\]\[\Delta E_p=mgh=20\cdot9{,}82\cdot2{,}08=409\ \mathrm J\]`, ""],
+    ["d", "Vid oförändrad fart är det totala dragarbetet summan.", String.raw`\[W_{\mathrm{tot}}=696+409=1105\ \mathrm J\]`, ""]
+  ], String.raw`Arbetet mot friktion är \(696\ \mathrm J\), ökningen i lägesenergi \(409\ \mathrm J\), och det totala arbetet cirka \(1{,}11\ \mathrm{kJ}\).`),
+  "5.25": byggFacitListaV2([
+    ["a", "Ett trappsteg höjer personen 0,18 m.", String.raw`\[E_{\mathrm{steg}}=mgh=65\cdot9{,}82\cdot0{,}18=115\ \mathrm J\]`, ""],
+    ["b", "Med ideal energiomvandling blir antalet steg", String.raw`\[n_{\mathrm{ideal}}=\frac{1{,}20\cdot10^6}{115}=1{,}04\cdot10^4\]`, ""],
+    ["c", "Vid 20 procents verkningsgrad blir bara 20 procent mekaniskt arbete.", String.raw`\[n=0{,}20\cdot1{,}04\cdot10^4=2{,}09\cdot10^3\]`, ""]
+  ], String.raw`Varje steg kräver cirka \(115\ \mathrm J\). Smörgåsen motsvarar idealt cirka 10 400 steg, men vid 20 procents verkningsgrad cirka 2 100 steg.`),
+  "5.26": byggFacitListaV2([
+    ["a", "Fjäderns lagrade energi är", String.raw`\[E_f=\frac{kx^2}{2}=\frac{800\cdot0{,}25^2}{2}=25{,}0\ \mathrm J\]`, ""],
+    ["b", "Massan är \(150\ \mathrm g=0{,}150\ \mathrm{kg}\). Sätt fjäderenergin lika med rörelseenergin.", String.raw`\[v=\sqrt{\frac{2E_f}{m}}=\sqrt{\frac{50{,}0}{0{,}150}}=18{,}3\ \mathrm{m/s}\]`, ""],
+    ["c", "Vid lodrätt skott blir energin lägesenergi i vändläget.", String.raw`\[h=\frac{E_f}{mg}=\frac{25{,}0}{0{,}150\cdot9{,}82}=17{,}0\ \mathrm m\]`, ""]
+  ], String.raw`Fjädern lagrar \(25{,}0\ \mathrm J\), projektilens fart blir \(18{,}3\ \mathrm{m/s}\) och den ideala stighöjden \(17{,}0\ \mathrm m\).`),
+  "5.35": byggFacitListaV2([
+    ["a", "Farten är störst där lägesenergin är minst, alltså i banans lägsta punkt B.", "", ""],
+    ["b", "Vagnen har sjunkit 2,8 m från A till B.", String.raw`\[mgh=\frac{mv_B^2}{2}\Rightarrow v_B=\sqrt{2g\cdot2{,}8}=7{,}42\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Farten är störst i B och är där cirka \(7{,}4\ \mathrm{m/s}\).`),
+  "5.36": byggFacitListaV2([
+    ["a", "Från A till B minskar höjden med 24 m.", String.raw`\[v_B=\sqrt{2g\cdot24}=21{,}7\ \mathrm{m/s}\]`, ""],
+    ["b", "Punkt C ligger 8,0 m under startnivån.", String.raw`\[v_C=\sqrt{2g\cdot8{,}0}=12{,}5\ \mathrm{m/s}\]`, ""],
+    ["c", "Startnivån är 30 m. Utan energitillskott kan vagnen inte nå högre än så.", "", "Den klarar alltså inte en kulle på 32 m." ]
+  ], String.raw`\(v_B\approx21{,}7\ \mathrm{m/s}\), \(v_C\approx12{,}5\ \mathrm{m/s}\), och vagnen klarar inte 32-meterskullen.`),
+  "5.37": byggFacitListaV2([
+    ["a", "Arbetet är arean under kraft–sträcka-grafen. Under de första 4,0 m är kraften 20 N.", String.raw`\[W_{0-4}=20\cdot4{,}0=80\ \mathrm J\]`, ""],
+    ["b", "Under de följande 6,0 m är kraften 10 N.", String.raw`\[W_{\mathrm{tot}}=80+10\cdot6{,}0=140\ \mathrm J\]`, ""],
+    ["c", "Arbets–energisambandet ger slutfarten.", String.raw`\[W_{\mathrm{tot}}=\Delta E_k=\frac{mv^2}{2}\]\[v=\sqrt{\frac{2\cdot140}{5{,}0}}=7{,}48\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Arbetet är \(80\ \mathrm J\) under de första 4,0 m och \(140\ \mathrm J\) totalt. Slutfarten är cirka \(7{,}5\ \mathrm{m/s}\).`),
+  "5.38": byggFacitListaV2([
+    ["a", "Kurvan är inte en rät linje genom origo, så kraften är inte proportionell mot förlängningen och bågen följer inte Hookes lag.", "", ""],
+    ["b", "Dela arean under kurvan i trapetser och summera.", String.raw`\[E\approx18+46+60=124\ \mathrm J\]`, "Avläsningen är en uppskattning eftersom grafens area uppskattas."],
+    ["c", "Av energin överförs 80 procent till pilen med massan \(0{,}024\ \mathrm{kg}\).", String.raw`\[E_k=0{,}80\cdot124=99{,}2\ \mathrm J\]\[v=\sqrt{\frac{2E_k}{m}}=\sqrt{\frac{2\cdot99{,}2}{0{,}024}}=90{,}9\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Den lagrade energin är ungefär \(124\ \mathrm J\), och pilens fart blir cirka \(91\ \mathrm{m/s}\).`),
+  "5.45": byggFacitListaV2([
+    ["a", "Fjäderenergin vid hoptryckningen 0,18 m är", String.raw`\[E_f=\frac{kx^2}{2}=\frac{900\cdot0{,}18^2}{2}=14{,}58\ \mathrm J\]`, ""],
+    ["b", "I vändläget har energin blivit lägesenergi.", String.raw`\[mgh=E_f\Rightarrow h=\frac{14{,}58}{0{,}350\cdot9{,}82}=4{,}24\ \mathrm m\]`, ""]
+  ], String.raw`Fjädern lagrar \(14{,}6\ \mathrm J\), vilket idealt ger stighöjden \(4{,}24\ \mathrm m\).`),
+  "5.46": byggFacitListaV2([
+    ["a", "Per kilogram är massan \(m=1\ \mathrm{kg}\).", String.raw`\[\frac{\Delta E_p}{m}=gh=9{,}82\cdot93=913\ \mathrm{J/kg}\]`, ""],
+    ["b", "Om all mekanisk energi till slut blir värme i vattnet gäller \(Q=mc\Delta T\).", String.raw`\[\Delta T=\frac{gh}{c}=\frac{913}{4180}=0{,}218\ \mathrm K\]`, ""],
+    ["c", "För en temperaturökning på 1,0 K behövs höjden", String.raw`\[h=\frac{c\Delta T}{g}=\frac{4180\cdot1{,}0}{9{,}82}=426\ \mathrm m\]`, ""],
+    ["d", "En del energi förs till luft, stänk och avdunstning; avdunstningen kyler dessutom vattnet.", "", "Temperaturökningen är också liten jämfört med osäkerheten hos en vanlig termometer." ]
+  ], String.raw`Fallet frigör \(913\ \mathrm{J/kg}\), vilket idealt höjer temperaturen med \(0{,}218\ ^\circ\mathrm C\). Ett idealiskt fall på cirka \(426\ \mathrm m\) krävs för \(1{,}0\ ^\circ\mathrm C\).`),
+  "5.50": byggFacitListaV2([
+    ["a", "Stenens lägesenergi relativt marken är", String.raw`\[E_p=mgh=2{,}5\cdot9{,}82\cdot8{,}0=196{,}4\ \mathrm J\]`, ""],
+    ["b", "Utan luftmotstånd omvandlas hela lägesenergin till rörelseenergi.", String.raw`\[E_k=196{,}4\ \mathrm J\]`, ""],
+    ["c", "Sätt \(E_k=mv^2/2\).", String.raw`\[v=\sqrt{\frac{2E_k}{m}}=\sqrt{2gh}=12{,}5\ \mathrm{m/s}\]`, "Massan förkortas bort." ]
+  ], String.raw`Startenergin och rörelseenergin före marken är båda \(196\ \mathrm J\). Farten blir \(12{,}5\ \mathrm{m/s}\).`),
+  "5.51": byggFacitListaV2([
+    ["a", "I startläget ligger kulan 0,25 m över bottenläget.", String.raw`\[E_p=mgh=0{,}80\cdot9{,}82\cdot0{,}25=1{,}964\ \mathrm J\]`, ""],
+    ["b", "I bottenläget har energin blivit rörelseenergi.", String.raw`\[v=\sqrt{2gh}=\sqrt{2\cdot9{,}82\cdot0{,}25}=2{,}22\ \mathrm{m/s}\]`, ""],
+    ["c", "Utan förluster återfår kulan samma lägesenergi på andra sidan.", "", "Den stiger därför 0,25 m över det lägsta läget." ]
+  ], String.raw`Lägesenergin är \(1{,}96\ \mathrm J\), farten i botten \(2{,}22\ \mathrm{m/s}\), och pendeln stiger \(25\ \mathrm{cm}\) på andra sidan.`),
+  "5.52": byggFacitListaV2([
+    ["a", "Lägesenergin vid starten är", String.raw`\[E_p=mgh=40\cdot9{,}82\cdot6{,}0=2357\ \mathrm J\]`, ""],
+    ["b", "Rörelseenergin vid backens fot är", String.raw`\[E_k=\frac{mv^2}{2}=\frac{40\cdot9{,}0^2}{2}=1620\ \mathrm J\]`, ""],
+    ["c", "Skillnaden har omvandlats till värme.", String.raw`\[E_{\mathrm{värme}}=2357-1620=737\ \mathrm J\]`, ""],
+    ["d", "Utan förluster gäller \(mgh=mv^2/2\).", String.raw`\[v=\sqrt{2gh}=10{,}9\ \mathrm{m/s}\]`, ""]
+  ], String.raw`\(E_p=2{,}36\ \mathrm{kJ}\), \(E_k=1{,}62\ \mathrm{kJ}\), och \(0{,}737\ \mathrm{kJ}\) blir värme. Utan friktion hade farten varit \(10{,}9\ \mathrm{m/s}\).`),
+  "5.53": byggFacitListaV2([
+    ["a", "Fjädern trycks ihop \(12\ \mathrm{cm}=0{,}12\ \mathrm m\).", String.raw`\[E_f=\frac{kx^2}{2}=\frac{250\cdot0{,}12^2}{2}=1{,}80\ \mathrm J\]`, ""],
+    ["b", "Kulans massa är \(50\ \mathrm g=0{,}050\ \mathrm{kg}\).", String.raw`\[v=\sqrt{\frac{2E_f}{m}}=\sqrt{\frac{3{,}60}{0{,}050}}=8{,}49\ \mathrm{m/s}\]`, ""],
+    ["c", "Vid ett lodrätt skott blir energin lägesenergi.", String.raw`\[h=\frac{E_f}{mg}=\frac{1{,}80}{0{,}050\cdot9{,}82}=3{,}67\ \mathrm m\]`, ""]
+  ], String.raw`Fjäderenergin är \(1{,}80\ \mathrm J\), farten \(8{,}49\ \mathrm{m/s}\), och den ideala stighöjden \(3{,}67\ \mathrm m\).`),
+  "5.55": byggFacitListaV2([
+    ["a", "Jämför rörelseenergin vid foten med lägesenergin vid starten.", String.raw`\[E_p=70\cdot9{,}82\cdot24=16\,498\ \mathrm J\]\[E_k=\frac{70\cdot18^2}{2}=11\,340\ \mathrm J\]\[\eta=\frac{E_k}{E_p}=0{,}687=68{,}7\,\%\]`, ""],
+    ["b", "På den plana sträckan tar friktionens arbete upp hela rörelseenergin.", String.raw`\[fs=E_k\Rightarrow f=\frac{11\,340}{60}=189\ \mathrm N\]`, ""],
+    ["c", "På plan mark är normalkraften \(N=mg\).", String.raw`\[\mu=\frac{f}{mg}=\frac{189}{70\cdot9{,}82}=0{,}275\]`, ""]
+  ], String.raw`Cirka \(68{,}7\,\%\) blir rörelseenergi. Bromskraften är \(189\ \mathrm N\), motsvarande friktionstalet \(\mu\approx0{,}275\).`),
+  "5.56": byggFacitListaV2([
+    ["a", "Före fallet är lägesenergin", String.raw`\[E_1=0{,}120\cdot9{,}82\cdot1{,}80=2{,}12\ \mathrm J\]`, ""],
+    ["b", "I studsens högsta läge är den", String.raw`\[E_2=0{,}120\cdot9{,}82\cdot1{,}25=1{,}47\ \mathrm J\]`, ""],
+    ["c", "Andelen som försvinner är", String.raw`\[1-\frac{E_2}{E_1}=1-\frac{1{,}25}{1{,}80}=0{,}306=30{,}6\,\%\]`, ""],
+    ["d", "Nästa studs behåller samma andel energi och därmed samma andel höjd.", String.raw`\[h_3=1{,}25\cdot\frac{1{,}25}{1{,}80}=0{,}868\ \mathrm m\]`, ""]
+  ], String.raw`Energierna är \(2{,}12\ \mathrm J\) och \(1{,}47\ \mathrm J\). \(30{,}6\,\%\) försvinner, och nästa studshöjd blir cirka \(0{,}87\ \mathrm m\).`),
+  "5.57": byggFacitListaV2([
+    ["a", "Kraften är parallell med förflyttningen.", String.raw`\[W=Fs=45\cdot80=3600\ \mathrm J\]`, ""],
+    ["b", "Lös ut sträckan när arbetet ska vara 5,4 kJ.", String.raw`\[s=\frac WF=\frac{5400}{45}=120\ \mathrm m\]`, ""]
+  ], String.raw`Arbetet är \(3{,}6\ \mathrm{kJ}\), och för \(5{,}4\ \mathrm{kJ}\) måste vagnen dras \(120\ \mathrm m\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_ARBETE_V2_DEL1[uppgift.id]) uppgift.s = FACIT_ARBETE_V2_DEL1[uppgift.id];
+}
+
+const FACIT_ARBETE_V2_DEL2 = {
+  "5.58": byggFacitListaV2([
+    ["a", "Omvandla först prefixen: \(360\ \mathrm{MNm}=360\cdot10^6\ \mathrm J\) och \(180\ \mathrm{km}=180\cdot10^3\ \mathrm m\).", String.raw`\[F=\frac Ws=\frac{360\cdot10^6}{180\cdot10^3}=2{,}0\cdot10^3\ \mathrm N\]`, ""],
+    ["b", "Fysikaliskt arbete kräver en förflyttning i kraftens riktning.", String.raw`\[W=Fs=F\cdot0=0\ \mathrm J\]`, "Musklerna förbrukar kemisk energi trots att arbetet på vikten är noll." ]
+  ], String.raw`Kraften var \(2{,}0\ \mathrm{kN}\). Arbetet på den stillastående vikten är \(0\ \mathrm J\).`),
+  "5.59": byggFacitListaV2([
+    ["a", "Konstant fart innebär att dragkraften balanserar friktionen.", String.raw`\[F=\mu mg=0{,}38\cdot18\cdot9{,}82=67{,}2\ \mathrm N\]`, ""],
+    ["b", "Kraften verkar längs rörelsen.", String.raw`\[W=Fs=67{,}2\cdot30=2015\ \mathrm J\]`, ""],
+    ["c", "Rörelseenergin är oförändrad.", "", "Dragkraftens arbete omvandlas till värme i lådan och underlaget." ]
+  ], String.raw`Dragkraften är \(67{,}2\ \mathrm N\) och arbetet cirka \(2{,}0\ \mathrm{kJ}\). Energin blir värme.`),
+  "5.60": byggFacitListaV2([
+    ["a", "Endast kraftkomposanten parallell med rörelsen uträttar arbete.", String.raw`\[F_x=F\cos35^\circ\]\[W=F_xs=180\cos35^\circ\cdot6{,}0=885\ \mathrm J\]`, ""],
+    ["b", "Vid parallell dragning är vinkeln noll.", String.raw`\[W=Fs=180\cdot6{,}0=1080\ \mathrm J\]`, ""]
+  ], String.raw`Johannes uträttar \(885\ \mathrm J\). Med kraften parallell med marken hade arbetet varit \(1{,}08\ \mathrm{kJ}\).`),
+  "5.61": byggFacitListaV2([
+    ["a", "På nollnivån är lägesenergin per definition", String.raw`\[E_p=0\ \mathrm J\]`, ""],
+    ["b", "På bordet är höjden 0,75 m.", String.raw`\[E_p=mgh=4{,}0\cdot9{,}82\cdot0{,}75=29{,}5\ \mathrm J\]`, ""],
+    ["c", "Vid ett lugnt lyft utan förluster är arbetet lika med ökningen i lägesenergi.", String.raw`\[W=29{,}5\ \mathrm J\]`, ""],
+    ["d", "Den nya höjden är \(0{,}75+0{,}40=1{,}15\ \mathrm m\).", String.raw`\[E_p=4{,}0\cdot9{,}82\cdot1{,}15=45{,}2\ \mathrm J\]`, ""]
+  ], String.raw`Lägesenergin är \(0\), \(29{,}5\ \mathrm J\) och slutligen \(45{,}2\ \mathrm J\). Arbetet till bordet är \(29{,}5\ \mathrm J\).`),
+  "5.62": byggFacitListaV2([
+    ["a", "Lyftarbetet blir en lika stor ökning av lägesenergin.", String.raw`\[\Delta E_p=42\ \mathrm J\]`, ""],
+    ["b", "Lös ut lyfthöjden.", String.raw`\[h=\frac{\Delta E_p}{mg}=\frac{42}{3{,}0\cdot9{,}82}=1{,}43\ \mathrm m\]`, ""],
+    ["c", "Gör samma sak för datorn.", String.raw`\[h=\frac{32}{2{,}4\cdot9{,}82}=1{,}36\ \mathrm m\]`, ""]
+  ], String.raw`Viktens lägesenergi ökar med \(42\ \mathrm J\) och den lyfts \(1{,}43\ \mathrm m\). Datorn befinner sig \(1{,}36\ \mathrm m\) över nollnivån.`),
+  "5.63": byggFacitListaV2([
+    ["a", "Endast höjdskillnaden bestämmer ändringen i lägesenergi.", String.raw`\[\Delta E_p=mgh=8{,}0\cdot9{,}82\cdot2{,}4=188{,}5\ \mathrm J\]`, ""],
+    ["b", "Utan friktion och fartändring är Claras arbete lika med energiökningen.", String.raw`\[W=188{,}5\ \mathrm J\]`, ""],
+    ["c", "Arbetet fördelas över rampens längd 12 m.", String.raw`\[F=\frac Ws=\frac{188{,}5}{12}=15{,}7\ \mathrm N\]`, ""]
+  ], String.raw`Lägesenergin och arbetet är cirka \(189\ \mathrm J\). Dragkraften är \(15{,}7\ \mathrm N\).`),
+  "5.64": byggFacitListaV2([
+    ["a", "Mekanikens gyllene regel säger att det man vinner i kraft förlorar man i väg. I en ideal maskin är arbetet oförändrat.", String.raw`\[F_1s_1=F_2s_2\]`, ""],
+    ["b", "På en friktionsfri ramp balanserar dragkraften tyngdkraftens komponent längs planet.", String.raw`\[mg\sin\theta=\frac{mg}{4}\Rightarrow\sin\theta=0{,}25\]\[\theta=\arcsin(0{,}25)=14{,}5^\circ\]`, ""]
+  ], String.raw`Rampens lutning är cirka \(14{,}5^\circ\).`),
+  "5.65": byggFacitListaV2([
+    ["a", "För kvinnan används värdena direkt.", String.raw`\[E_k=\frac{65\cdot8{,}0^2}{2}=2{,}08\cdot10^3\ \mathrm J\]`, ""],
+    ["b", "Bilens fart måste först omvandlas.", String.raw`\[70\ \mathrm{km/h}=\frac{70}{3{,}6}=19{,}44\ \mathrm{m/s}\]\[E_k=\frac{1400\cdot19{,}44^2}{2}=2{,}65\cdot10^5\ \mathrm J\]`, ""],
+    ["c", "För insekten är \(m=5{,}0\cdot10^{-4}\ \mathrm{kg}\) och \(v=0{,}015\ \mathrm{m/s}\).", String.raw`\[E_k=\frac{5{,}0\cdot10^{-4}\cdot0{,}015^2}{2}=5{,}6\cdot10^{-8}\ \mathrm J\]`, ""]
+  ], String.raw`Rörelseenergierna är \(2{,}08\ \mathrm{kJ}\), \(265\ \mathrm{kJ}\) och \(5{,}6\cdot10^{-8}\ \mathrm J\).`),
+  "5.66": byggFacitListaV2([
+    ["1", "Lös ut massan ur rörelseenergin.", String.raw`\[E_k=\frac{mv^2}{2}\Rightarrow m=\frac{2E_k}{v^2}\]`, ""],
+    ["2", "Sätt in \(E_k=1{,}9\ \mathrm{kJ}=1900\ \mathrm J\).", String.raw`\[m=\frac{2\cdot1900}{6{,}8^2}=82{,}2\ \mathrm{kg}\]`, ""]
+  ], String.raw`Löparens massa är cirka \(82\ \mathrm{kg}\).`),
+  "5.67": byggFacitListaV2([
+    ["a", "Lägesenergin minskar när kulan faller 4,0 m.", String.raw`\[|\Delta E_p|=mgh=1{,}5\cdot9{,}82\cdot4{,}0=58{,}9\ \mathrm J\]`, ""],
+    ["b", "Utan luftmotstånd omvandlas minskningen helt till rörelseenergi.", String.raw`\[\Delta E_k=58{,}9\ \mathrm J\]`, ""],
+    ["c", "Kulan startar från vila.", String.raw`\[mgh=\frac{mv^2}{2}\Rightarrow v=\sqrt{2gh}=8{,}86\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Lägesenergin minskar med \(58{,}9\ \mathrm J\), som blir rörelseenergi. Farten efter 4,0 m är \(8{,}86\ \mathrm{m/s}\).`),
+  "5.68": byggFacitListaV2([
+    ["a", "I den högsta punkten är farten tillfälligt noll.", String.raw`\[E_k=0\ \mathrm J\]`, ""],
+    ["b", "Den mekaniska energin bevaras.", String.raw`\[E_{\mathrm{mek}}=6{,}0+2{,}5=8{,}5\ \mathrm J\]\[E_{p,\max}=8{,}5\ \mathrm J\]`, ""],
+    ["c", "När lägesenergin är 5,0 J återstår", String.raw`\[E_k=8{,}5-5{,}0=3{,}5\ \mathrm J\]`, ""],
+    ["d", "På samma höjd som vid kastet är lägesenergin åter 2,5 J.", String.raw`\[E_k=8{,}5-2{,}5=6{,}0\ \mathrm J\]`, ""]
+  ], String.raw`Rörelseenergin är \(0\ \mathrm J\) i toppen, lägesenergin där \(8{,}5\ \mathrm J\), och de två efterfrågade rörelseenergierna \(3{,}5\ \mathrm J\) respektive \(6{,}0\ \mathrm J\).`),
+  "5.69": byggFacitListaV2([
+    ["a", "Sätt marken som nollnivå och bevara den mekaniska energin.", String.raw`\[\frac{mv_0^2}{2}+mgh=\frac{mv^2}{2}\]\[v=\sqrt{v_0^2+2gh}=\sqrt{5{,}0^2+2\cdot9{,}82\cdot10}=14{,}9\ \mathrm{m/s}\]`, ""],
+    ["b", "Rörelseenergin beror på fartens storlek, inte dess riktning.", "", "Kastriktningen påverkar bana och flygtid men inte slutfartens storlek när luftmotståndet försummas." ]
+  ], String.raw`Stenen träffar marken med farten cirka \(14{,}9\ \mathrm{m/s}\), oberoende av den ursprungliga kastriktningen.`),
+  "5.70": byggFacitListaV2([
+    ["a", "Vid marken har både den ursprungliga rörelseenergin och lägesenergin omvandlats till rörelseenergi.", String.raw`\[v=\sqrt{v_0^2+2gh}=\sqrt{5{,}0^2+2\cdot9{,}82\cdot2{,}2}=8{,}26\ \mathrm{m/s}\]`, ""],
+    ["b", "Stighöjden över kastpunkten är", String.raw`\[\Delta h=\frac{v_0^2}{2g}=\frac{25}{19{,}64}=1{,}27\ \mathrm m\]\[h_{\max}=2{,}2+1{,}27=3{,}47\ \mathrm m\]`, ""]
+  ], String.raw`Landningsfarten är \(8{,}26\ \mathrm{m/s}\), och största höjden över marken \(3{,}47\ \mathrm m\).`),
+  "5.71": byggFacitListaV2([
+    ["a", "Efter halva fallsträckan har kulan omvandlat halva slutliga lägesenergiförlusten till rörelseenergi.", String.raw`\[\frac{mv_{1/2}^2}{2}=\frac12\frac{mv^2}{2}\Rightarrow v_{1/2}=\frac{v}{\sqrt2}=0{,}707v\]`, ""],
+    ["b", "Halva slutfarten motsvarar en fjärdedel av slutenergin.", String.raw`\[\frac{(v/2)^2}{v^2}=\frac14\]`, "Kulan har därför fallit en fjärdedel av den totala höjden." ]
+  ], String.raw`Halvvägs har kulan farten \(v/\sqrt2\approx0{,}707v\). Farten \(v/2\) nås efter en fjärdedel av fallhöjden.`),
+  "5.72": byggFacitListaV2([
+    ["1", "Vid det sträva materialets början består energin av ursprunglig rörelseenergi plus den lägesenergi som frigjorts i backen.", String.raw`\[E=\frac{mv^2}{2}+mgh\]`, ""],
+    ["2", "På den horisontella ytan är friktionskraften \(f=\mu mg\), och dess arbete stoppar lådan.", String.raw`\[\mu mgs=\frac{mv^2}{2}+mgh\]`, ""],
+    ["3", "Lös ut sträckan och förkorta massan.", String.raw`\[s=\frac{v^2/2+gh}{\mu g}=\frac{v^2+2gh}{2\mu g}\]`, ""]
+  ], String.raw`Lådan glider sträckan \(\displaystyle s=\frac{v^2+2gh}{2\mu g}\).`),
+  "5.135": byggFacitListaV2([
+    ["a", "Kraften verkar längs rörelsen.", String.raw`\[W=Fs=250\cdot40=10\,000\ \mathrm J\]`, ""],
+    ["b", "Vid dubblerad kraft och samma sträcka dubbleras arbetet.", String.raw`\[W=500\cdot40=20\ \mathrm{kJ}\]`, ""],
+    ["c", "Vid halverad sträcka och samma kraft halveras arbetet.", String.raw`\[W=250\cdot20=5{,}0\ \mathrm{kJ}\]`, ""]
+  ], String.raw`Arbetena är \(10\ \mathrm{kJ}\), \(20\ \mathrm{kJ}\) och \(5{,}0\ \mathrm{kJ}\).`),
+  "5.136": byggFacitListaV2([
+    ["a", "Konstant fart innebär att lyftkraften balanserar tyngdkraften.", String.raw`\[F=mg=25\cdot9{,}82=245{,}5\ \mathrm N\]`, ""],
+    ["b", "Arbetet under lyftet 1,8 m är", String.raw`\[W=Fh=245{,}5\cdot1{,}8=441{,}9\ \mathrm J\]`, ""],
+    ["c", "För tolv likadana lådor blir", String.raw`\[W_{12}=12\cdot441{,}9=5303\ \mathrm J\]`, ""]
+  ], String.raw`Lyftkraften är \(246\ \mathrm N\), arbetet per låda \(442\ \mathrm J\), och för tolv lådor \(5{,}30\ \mathrm{kJ}\).`),
+  "5.137": byggFacitListaV2([
+    ["1", "Använd \(W=Fs\) på den första raden.", String.raw`\[W=80\cdot15=1200\ \mathrm J\]`, ""],
+    ["2", "Lös ut kraften på den andra raden.", String.raw`\[F=\frac Ws=\frac{600}{4{,}0}=150\ \mathrm N\]`, ""],
+    ["3", "Lös ut sträckan på den tredje raden.", String.raw`\[s=\frac WF=\frac{2400}{300}=8{,}0\ \mathrm m\]`, ""]
+  ], String.raw`De saknade värdena är \(1200\ \mathrm J\), \(150\ \mathrm N\) och \(8{,}0\ \mathrm m\).`),
+  "5.138": byggFacitListaV2([
+    ["a", "På 15 m höjd är lägesenergin", String.raw`\[E_{p,1}=0{,}80\cdot9{,}82\cdot15=117{,}8\ \mathrm J\]`, ""],
+    ["b", "På 30 m höjd blir den", String.raw`\[E_{p,2}=0{,}80\cdot9{,}82\cdot30=235{,}7\ \mathrm J\]`, ""],
+    ["c", "Arbetet mot tyngdkraften är ökningen i lägesenergi.", String.raw`\[W=235{,}7-117{,}8=117{,}8\ \mathrm J\]`, ""]
+  ], String.raw`Lägesenergierna är \(118\ \mathrm J\) och \(236\ \mathrm J\). Fågelns arbete mot tyngdkraften är \(118\ \mathrm J\).`),
+  "5.139": byggFacitListaV2([
+    ["a", "Omvandla massan till kilogram.", String.raw`\[25\ \mathrm g=0{,}025\ \mathrm{kg}\]`, ""],
+    ["b", "Beräkna rörelseenergin.", String.raw`\[E_k=\frac{0{,}025\cdot62^2}{2}=48{,}05\ \mathrm J\]`, ""],
+    ["c", "Rörelseenergin är proportionell mot \(v^2\).", String.raw`\[E_k(2v)=4E_k(v)=192\ \mathrm J\]`, ""]
+  ], String.raw`Massan är \(0{,}025\ \mathrm{kg}\), energin cirka \(48\ \mathrm J\), och vid dubbla farten cirka \(192\ \mathrm J\).`),
+  "5.140": byggFacitListaV2([
+    ["a", "Kraftkomposanten längs golvet är", String.raw`\[F_x=F\cos40^\circ=120\cos40^\circ=91{,}9\ \mathrm N\]`, ""],
+    ["b", "Det är denna komponent som uträttar arbete under den vågräta förflyttningen.", String.raw`\[W=F_xs=91{,}9\cdot25=2298\ \mathrm J\]`, ""],
+    ["c", "Den lodräta komponenten är vinkelrät mot förflyttningen.", String.raw`\[W_y=F_y s\cos90^\circ=0\]`, ""]
+  ], String.raw`Den parallella komponenten är \(91{,}9\ \mathrm N\), arbetet \(2{,}30\ \mathrm{kJ}\), och den lodräta komponentens arbete \(0\ \mathrm J\).`),
+  "5.141": byggFacitListaV2([
+    ["1", "Vid konstant fart måste dragkraften balansera både tyngdkomponenten och friktionen.", String.raw`\[F=mg\sin20^\circ+\mu mg\cos20^\circ\]`, ""],
+    ["2", "Sätt in värdena.", String.raw`\[F=40\cdot9{,}82(\sin20^\circ+0{,}25\cos20^\circ)=226{,}7\ \mathrm N\]`, ""],
+    ["3", "Arbetet över 5,0 m blir", String.raw`\[W=Fs=226{,}7\cdot5{,}0=1134\ \mathrm J\]`, "Kontroll: 672 J blir lägesenergi och 461 J blir värme." ]
+  ], String.raw`Dragkraftens arbete är cirka \(1{,}13\ \mathrm{kJ}\).`),
+  "5.142": byggFacitListaV2([
+    ["1", "Arbetet är arean under kraft–sträcka-grafen.", "", ""],
+    ["2", "Den första delen är en triangel och den andra en rektangel.", String.raw`\[W_1=\frac{6{,}0\cdot60}{2}=180\ \mathrm J\]\[W_2=4{,}0\cdot60=240\ \mathrm J\]`, ""],
+    ["3", "Summera delareorna.", String.raw`\[W=180+240=420\ \mathrm J\]`, ""]
+  ], String.raw`Det totala arbetet är \(420\ \mathrm J\).`),
+  "5.143": byggFacitListaV2([
+    ["a", "På det friktionsfria spåret blir hela arbetet rörelseenergi.", String.raw`\[45=\frac{3{,}0v^2}{2}\Rightarrow v=\sqrt{\frac{2\cdot45}{3{,}0}}=5{,}48\ \mathrm{m/s}\]`, ""],
+    ["b", "När friktionen tar 12 J återstår 33 J.", String.raw`\[E_k=45-12=33\ \mathrm J\]\[v=\sqrt{\frac{2\cdot33}{3{,}0}}=4{,}69\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Farten blir \(5{,}48\ \mathrm{m/s}\) utan friktion och \(4{,}69\ \mathrm{m/s}\) när 12 J förloras.`),
+  "5.144": byggFacitListaV2([
+    ["a", "Arbetet från 0 till 0,25 m är arean under den linjära kraftkurvan.", String.raw`\[W_{0\to0{,}25}=\frac{kx^2}{2}=\frac{800\cdot0{,}25^2}{2}=25\ \mathrm J\]`, ""],
+    ["b", "Slutkraften och medelkraften är", String.raw`\[F_{\max}=kx=800\cdot0{,}25=200\ \mathrm N\]\[F_{\mathrm{med}}=\frac{0+200}{2}=100\ \mathrm N\]`, ""],
+    ["c", "Beräkna energin vid 0,50 m och subtrahera energin vid 0,25 m.", String.raw`\[E_f(0{,}50)=\frac{800\cdot0{,}50^2}{2}=100\ \mathrm J\]\[W_{0{,}25\to0{,}50}=100-25=75\ \mathrm J\]`, "Under den andra sträckningen är kraften större; därför krävs tre gånger så mycket arbete." ]
+  ], String.raw`Första sträckningen kräver \(25\ \mathrm J\), med \(F_{\max}=200\ \mathrm N\) och \(F_{\mathrm{med}}=100\ \mathrm N\). Nästa 0,25 m kräver \(75\ \mathrm J\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_ARBETE_V2_DEL2[uppgift.id]) uppgift.s = FACIT_ARBETE_V2_DEL2[uppgift.id];
+}
+
+const FACIT_EFFEKT_V2 = {
+  "5.1": byggFacitListaV2([
+    ["1", "Arbetet mot tyngdkraften är ökningen i lägesenergi.", String.raw`\[W=mgh=60\cdot9{,}82\cdot4{,}2=2475\ \mathrm J\]`, ""],
+    ["2", "Effekt är arbete per tid.", String.raw`\[P=\frac Wt=\frac{2475}{12}=206\ \mathrm W\]`, ""]
+  ], String.raw`Personen utvecklar den genomsnittliga effekten cirka \(206\ \mathrm W\).`),
+  "5.3": byggFacitListaV2([
+    ["a", "Regndjupet \(18\ \mathrm{mm}=0{,}018\ \mathrm m\) över takytan ger vattenvolymen och massan", String.raw`\[V=0{,}018\cdot120=2{,}16\ \mathrm{m^3}\]\[m=\rho V=1000\cdot2{,}16=2160\ \mathrm{kg}\]`, ""],
+    ["b", "Lägesenergin som frigörs under fallet 6,0 m är", String.raw`\[E=mgh=2160\cdot9{,}82\cdot6{,}0=1{,}27\cdot10^5\ \mathrm J\]`, ""],
+    ["c", "Två timmar är 7200 s.", String.raw`\[P=\frac{1{,}2727\cdot10^5}{7200}=17{,}7\ \mathrm W\]`, "En verklig liten generator skulle ge ännu mindre på grund av förluster; energiutbytet är därför opraktiskt litet." ]
+  ], String.raw`Regnet frigör cirka \(127\ \mathrm{kJ}\), motsvarande bara \(17{,}7\ \mathrm W\) i medeleffekt.`),
+  "5.7": byggFacitListaV2([
+    ["a", "Vid konstant fart behöver motorn balansera skillnaden mellan hissens och motviktens tyngder.", String.raw`\[F=[(800+400)-700]g=500\cdot9{,}82=4910\ \mathrm N\]`, ""],
+    ["b", "Utan motvikt måste hela hissmassans tyngd balanseras.", String.raw`\[F_0=1200\cdot9{,}82=11\,784\ \mathrm N\]`, ""],
+    ["c", "Vid farten 2,0 m/s gäller \(P=Fv\).", String.raw`\[P=4910\cdot2{,}0=9{,}82\ \mathrm{kW}\]\[P_0=11\,784\cdot2{,}0=23{,}6\ \mathrm{kW}\]`, ""]
+  ], String.raw`Med motvikt krävs \(4{,}91\ \mathrm{kN}\) och \(9{,}82\ \mathrm{kW}\); utan motvikt \(11{,}8\ \mathrm{kN}\) och \(23{,}6\ \mathrm{kW}\).`),
+  "5.9": byggFacitListaV2([
+    ["a", "Rotorns radie är 45 m och den svepta arean är", String.raw`\[A=\pi r^2=\pi\cdot45^2=6362\ \mathrm{m^2}\]`, ""],
+    ["b", "Sätt in vindhastigheten 8,0 m/s.", String.raw`\[P_{\mathrm{vind}}=\frac12\rho Av^3=\frac12\cdot1{,}29\cdot6362\cdot8{,}0^3=2{,}10\ \mathrm{MW}\]\[P_{\mathrm{el}}=0{,}45P_{\mathrm{vind}}=0{,}946\ \mathrm{MW}\]`, ""],
+    ["c", "Effekten är proportionell mot kuben på farten.", String.raw`\[P(2v)=2^3P(v)=8P(v)\]`, ""]
+  ], String.raw`Vinden innehåller cirka \(2{,}10\ \mathrm{MW}\) genom rotorarean och verket ger cirka \(0{,}95\ \mathrm{MW}\). Dubbel vindhastighet ger åtta gånger effekten i modellen.`),
+  "5.12": byggFacitListaV2([
+    ["a", "Omvandla \(90\ \mathrm{km/h}=25{,}0\ \mathrm{m/s}\).", String.raw`\[E_k=\frac{1600\cdot25{,}0^2}{2}=5{,}00\cdot10^5\ \mathrm J\]`, ""],
+    ["b", "En kilowattimme är \(3{,}6\cdot10^6\ \mathrm J\).", String.raw`\[E_k=\frac{5{,}00\cdot10^5}{3{,}6\cdot10^6}=0{,}1389\ \mathrm{kWh}\]\[E_{\mathrm{åter}}=0{,}70\cdot0{,}1389=0{,}0972\ \mathrm{kWh}\]`, ""],
+    ["c", "Jämför med batteriets kapacitet.", String.raw`\[\frac{0{,}0972}{60}\cdot100=0{,}162\,\%\]`, "En inbromsning ger en liten andel, men många inbromsningar i stadstrafik gör tekniken värdefull." ]
+  ], String.raw`Rörelseenergin är \(500\ \mathrm{kJ}=0{,}139\ \mathrm{kWh}\). Cirka \(0{,}097\ \mathrm{kWh}\) återvinns, motsvarande \(0{,}162\,\%\) av batteriet.`),
+  "5.21": byggFacitListaV2([
+    ["a", "En lutning på 6,0 procent betyder \(\tan\theta=0{,}060\); för den lilla vinkeln är \(\sin\theta\approx0{,}060\).", String.raw`\[P=Fv=mg\sin\theta\,v\]\[P\approx85\cdot9{,}82\cdot0{,}060\cdot5{,}0=250\ \mathrm W\]`, ""],
+    ["b", "Den verkliga effekten måste dessutom övervinna rullmotstånd och luftmotstånd samt täcka förluster i drivlinan.", "", ""]
+  ], String.raw`Minst cirka \(250\ \mathrm W\) går åt till höjdökningen; den verkliga effekten är större.`),
+  "5.22": byggFacitListaV2([
+    ["a", "Verkningsgraden är nyttig effekt dividerad med tillförd effekt.", String.raw`\[P_{\mathrm{tot}}=\frac{180}{0{,}22}=818\ \mathrm W\]`, ""],
+    ["b", "Trettio minuter är 1800 s.", String.raw`\[E=P_{\mathrm{tot}}t=818\cdot1800=1{,}47\cdot10^6\ \mathrm J\]`, ""],
+    ["c", "Den del som inte blir mekaniskt arbete blir främst värme i kroppen och avges till omgivningen.", "", ""]
+  ], String.raw`Kroppen omsätter cirka \(818\ \mathrm W\) och \(1{,}47\ \mathrm{MJ}\) under 30 minuter.`),
+  "5.27": byggFacitListaV2([
+    ["1", "Åtta liter vatten har massan cirka 8,0 kg.", String.raw`\[W=mgh=8{,}0\cdot9{,}82\cdot12=943\ \mathrm J\]`, ""],
+    ["2", "Dividera med tiden 20 s.", String.raw`\[P=\frac{943}{20}=47{,}1\ \mathrm W\]`, ""]
+  ], String.raw`Effekten är cirka \(47\ \mathrm W\).`),
+  "5.28": byggFacitListaV2([
+    ["a", "Fem liter vatten per sekund motsvarar massflödet \(5{,}0\ \mathrm{kg/s}\).", String.raw`\[P_{\mathrm{nyttig}}=\dot mgh=5{,}0\cdot9{,}82\cdot30=1473\ \mathrm W\]`, ""],
+    ["b", "Ta hänsyn till verkningsgraden.", String.raw`\[P_{\mathrm{el}}=\frac{1473}{0{,}65}=2266\ \mathrm W\]`, ""],
+    ["c", "Ett dygn är 24 timmar.", String.raw`\[E=2{,}266\cdot24=54{,}4\ \mathrm{kWh}\]\[K=54{,}4\cdot2{,}50=136\ \mathrm{kr}\]`, ""]
+  ], String.raw`Nyttig effekt \(1{,}47\ \mathrm{kW}\), eleffekt \(2{,}27\ \mathrm{kW}\), och dygnskostnad cirka \(136\ \mathrm{kr}\).`),
+  "5.29": byggFacitListaV2([
+    ["a", "Verkningsgraden är", String.raw`\[\eta=\frac{P_{\mathrm{nyttig}}}{P_{\mathrm{tillförd}}}=\frac{15}{45}=0{,}333=33{,}3\,\%\]`, ""],
+    ["b", "Skillnaden blir spillvärme och andra förluster.", String.raw`\[P_{\mathrm{förlust}}=45-15=30\ \mathrm{kW}\]`, ""],
+    ["c", "Hundra procents verkningsgrad skulle kräva att ingen energi alls överfördes till värme, ljud eller andra oönskade former.", "", "Det kan inte uppnås i en verklig motor." ]
+  ], String.raw`Verkningsgraden är \(33{,}3\,\%\), och \(30\ \mathrm{kW}\) går förlorad som främst värme.`),
+  "5.30": byggFacitListaV2([
+    ["a", "Årsenergin är toppeffekt gånger motsvarande fullasttimmar.", String.raw`\[E=6{,}0\cdot900=5400\ \mathrm{kWh}\]`, ""],
+    ["b", "Andelen av årsförbrukningen är", String.raw`\[\frac{5400}{15\,000}=0{,}36=36\,\%\]`, ""],
+    ["c", "Produktion och förbrukning sammanfaller inte i tiden: produktionen är hög på ljusa sommardagar medan behovet ofta är stort vintertid och kvällstid.", "", "Utan tillräcklig lagring behövs därför elnätet." ]
+  ], String.raw`Anläggningen producerar cirka \(5400\ \mathrm{kWh/år}\), vilket motsvarar \(36\,\%\) av årsbehovet.`),
+  "5.42": byggFacitListaV2([
+    ["a", "Arbetet är ökningen i lägesenergi.", String.raw`\[W=mgh=12\cdot9{,}82\cdot8{,}0=943\ \mathrm J\]`, ""],
+    ["b", "Effekten blir", String.raw`\[P=\frac Wt=\frac{943}{25}=37{,}7\ \mathrm W\]`, ""]
+  ], String.raw`Arbetet är \(943\ \mathrm J\) och effekten cirka \(38\ \mathrm W\).`),
+  "5.43": byggFacitListaV2([
+    ["a", "Fördela batteriets energi över räckvidden.", String.raw`\[\frac{280\ \mathrm{Wh}}{40\ \mathrm{km}}=7{,}0\ \mathrm{Wh/km}\]`, ""],
+    ["b", "Körtiden vid 25 km/h är", String.raw`\[t=\frac{40}{25}=1{,}60\ \mathrm h\]`, ""],
+    ["c", "Medeleffekten under körningen blir", String.raw`\[P=\frac Et=\frac{280}{1{,}60}=175\ \mathrm W\]`, ""]
+  ], String.raw`Förbrukningen är \(7{,}0\ \mathrm{Wh/km}\), körtiden \(1{,}60\ \mathrm h\), och medeleffekten \(175\ \mathrm W\).`),
+  "5.47": byggFacitListaV2([
+    ["a", "Verkningsgrader i en kedja multipliceras.", String.raw`\[\eta_{\mathrm{tot}}=0{,}38\cdot0{,}92\cdot0{,}40=0{,}1398\approx14{,}0\,\%\]`, ""],
+    ["b", "Lös ut den tillförda bränsleeffekten.", String.raw`\[P_{\mathrm{bränsle}}=\frac{25}{0{,}1398}=179\ \mathrm W\]`, ""],
+    ["c", "Följ effekten genom leden.", String.raw`\[179\to68{,}0\to62{,}6\to25\ \mathrm W\]`, "Förlusterna är ungefär 111 W i kraftverket, 5,4 W i nätet och 37,6 W i lampan; kraftverket står för den största." ]
+  ], String.raw`Total verkningsgrad \(14{,}0\,\%\), nödvändig bränsleeffekt \(179\ \mathrm W\), och störst förlust sker i kraftverket.`),
+  "5.54": byggFacitListaV2([
+    ["a", "Vid konstant fart motsvarar arbetet ökningen i lägesenergi.", String.raw`\[W=mgh=450\cdot9{,}82\cdot18=79{,}5\ \mathrm{kJ}\]`, ""],
+    ["b", "Den nyttiga effekten är", String.raw`\[P_{\mathrm{nyttig}}=\frac{79\,542}{25}=3182\ \mathrm W\]`, ""],
+    ["c", "Motorns eleffekt fås ur verkningsgraden.", String.raw`\[P_{\mathrm{el}}=\frac{3182}{0{,}78}=4080\ \mathrm W\]`, ""]
+  ], String.raw`Arbetet är \(79{,}5\ \mathrm{kJ}\), nyttig effekt \(3{,}18\ \mathrm{kW}\), och eleffekt \(4{,}08\ \mathrm{kW}\).`),
+  "5.73": byggFacitListaV2([
+    ["a", "Lådans lägesenergi ökar med", String.raw`\[\Delta E_p=mgh=12\cdot9{,}82\cdot1{,}2=141{,}4\ \mathrm J\]`, ""],
+    ["b", "Claras medeleffekt under 0,90 s är", String.raw`\[P=\frac{141{,}4}{0{,}90}=157\ \mathrm W\]`, ""]
+  ], String.raw`Lägesenergin ökar med \(141\ \mathrm J\), och effekten är cirka \(157\ \mathrm W\).`),
+  "5.74": byggFacitListaV2([
+    ["a", "Fyrtiofem minuter är 2700 s eller 0,75 h.", String.raw`\[E=Pt=2000\cdot2700=5{,}40\cdot10^6\ \mathrm J\]\[E=2{,}0\cdot0{,}75=1{,}50\ \mathrm{kWh}\]`, ""],
+    ["b", "Tiden för 1,0 MJ blir", String.raw`\[t=\frac EP=\frac{1{,}0\cdot10^6}{2000}=500\ \mathrm s=8{,}33\ \mathrm{min}\]`, ""]
+  ], String.raw`På 45 minuter används \(5{,}40\ \mathrm{MJ}=1{,}50\ \mathrm{kWh}\). För \(1{,}0\ \mathrm{MJ}\) krävs \(500\ \mathrm s\).`),
+  "5.75": byggFacitListaV2([
+    ["a", "Femton minuter är 900 s.", String.raw`\[E=Pt=40\cdot900=36\,000\ \mathrm J\]`, ""],
+    ["b", "För 6,0 timmar används kilowatt och timmar.", String.raw`\[E=0{,}040\cdot6{,}0=0{,}240\ \mathrm{kWh}\]`, ""],
+    ["c", "Ljuseffekten är den nyttiga effekten.", String.raw`\[\eta=\frac{1{,}6}{40}=0{,}040=4{,}0\,\%\]`, ""]
+  ], String.raw`Energierna är \(36\ \mathrm{kJ}\) och \(0{,}240\ \mathrm{kWh}\). Verkningsgraden är \(4{,}0\,\%\).`),
+  "5.76": byggFacitListaV2([
+    ["a", "Massflödet 2,5 liter per sekund motsvarar 2,5 kg per sekund.", String.raw`\[\Delta E_p=2{,}5\cdot9{,}82\cdot1{,}8=44{,}2\ \mathrm J\]`, ""],
+    ["b", "Detta sker varje sekund.", String.raw`\[P_{\mathrm{vatten}}=44{,}2\ \mathrm W\]`, ""],
+    ["c", "Den elektriska effekten är 78 procent av detta.", String.raw`\[P_{\mathrm{el}}=0{,}78\cdot44{,}2=34{,}5\ \mathrm W\]`, ""]
+  ], String.raw`Vattnet avger \(44{,}2\ \mathrm J\) per sekund, alltså \(44{,}2\ \mathrm W\); elproduktionen blir cirka \(34{,}5\ \mathrm W\).`),
+  "5.77": byggFacitListaV2([
+    ["a", "Arbetet per armhävning uppskattas som tyngdpunktens ökning i lägesenergi.", String.raw`\[W=mgh=75\cdot9{,}82\cdot0{,}18=132{,}6\ \mathrm J\]`, ""],
+    ["b", "På en minut utförs 35 armhävningar.", String.raw`\[P=\frac{35\cdot132{,}6}{60}=77{,}4\ \mathrm W\]`, ""]
+  ], String.raw`Arbetet är cirka \(133\ \mathrm J\) per armhävning och medeleffekten \(77\ \mathrm W\).`),
+  "5.78": byggFacitListaV2([
+    ["a", "Omvandla först \(100\ \mathrm{km/h}=27{,}78\ \mathrm{m/s}\).", String.raw`\[\Delta E_k=\frac{1000\cdot27{,}78^2}{2}=3{,}86\cdot10^5\ \mathrm J\]\[P_{\mathrm{nyttig}}=\frac{3{,}86\cdot10^5}{6{,}0}=64{,}3\ \mathrm{kW}\]`, ""],
+    ["b", "Vid verkningsgraden 0,35 måste den tillförda effekten vara", String.raw`\[P_{\mathrm{till}}=\frac{64{,}3}{0{,}35}=184\ \mathrm{kW}\]`, ""]
+  ], String.raw`Minsta nyttiga medeleffekt är \(64{,}3\ \mathrm{kW}\); vid \(35\,\%\) verkningsgrad krävs cirka \(184\ \mathrm{kW}\) tillförd effekt.`),
+  "5.79": byggFacitListaV2([
+    ["1", "Den sammanlagda massan är \(350+80=430\ \mathrm{kg}\). Nyttig effekt från motorn är", String.raw`\[P_{\mathrm{nyttig}}=0{,}85\cdot2500=2125\ \mathrm W\]`, ""],
+    ["2", "Vid konstant fart gäller \(P=Fv=mgv\).", String.raw`\[v=\frac{P_{\mathrm{nyttig}}}{mg}=\frac{2125}{430\cdot9{,}82}=0{,}503\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Hissen kan som mest lyfta Johannes med den konstanta farten cirka \(0{,}50\ \mathrm{m/s}\).`),
+  "5.145": byggFacitListaV2([
+    ["a", "Arbetet beror på höjden, inte på lyfttiden.", String.raw`\[W=mgh=300\cdot9{,}82\cdot8{,}0=23{,}57\ \mathrm{kJ}\]`, ""],
+    ["b", "För 12 s blir effekten", String.raw`\[P=\frac{23\,568}{12}=1{,}96\ \mathrm{kW}\]`, ""],
+    ["c", "När tiden halveras dubbleras effekten.", String.raw`\[P_6=\frac{23\,568}{6{,}0}=3{,}93\ \mathrm{kW}\]`, ""]
+  ], String.raw`Arbetet är \(23{,}6\ \mathrm{kJ}\). Effekten är \(1{,}96\ \mathrm{kW}\) för 12 s och \(3{,}93\ \mathrm{kW}\) för 6,0 s.`),
+  "5.146": byggFacitListaV2([
+    ["a", "Propellerkraften verkar i färdriktningen.", String.raw`\[P=Fv=1800\cdot6{,}0=10\,800\ \mathrm W\]`, ""],
+    ["b", "Konstant fart betyder att resultanten är noll.", String.raw`\[F_{\mathrm{motstånd}}=F_{\mathrm{propeller}}=1800\ \mathrm N\]`, "Motståndet är riktat bakåt." ]
+  ], String.raw`Propellerns effekt är \(10{,}8\ \mathrm{kW}\), och vattenmotståndet är \(1800\ \mathrm N\) bakåt.`),
+  "5.147": byggFacitListaV2([
+    ["1", "Första raden: dividera arbete med tid.", String.raw`\[P=\frac{9000}{15}=600\ \mathrm W\]`, ""],
+    ["2", "Andra raden: multiplicera effekt och tid.", String.raw`\[W=250\cdot40=10\,000\ \mathrm J\]`, ""],
+    ["3", "Tredje raden: dividera arbete med effekt.", String.raw`\[t=\frac{72\,000}{400}=180\ \mathrm s\]`, ""]
+  ], String.raw`De saknade värdena är \(600\ \mathrm W\), \(10\ \mathrm{kJ}\) och \(180\ \mathrm s\).`),
+  "5.148": byggFacitListaV2([
+    ["a", "Omvandla tiden.", String.raw`\[25\ \mathrm{min}=25\cdot60=1500\ \mathrm s\]`, ""],
+    ["b", "Energin i joule är", String.raw`\[E=Pt=1200\cdot1500=1{,}80\cdot10^6\ \mathrm J\]`, ""],
+    ["c", "I kilowattimmar används 1,2 kW och \(25/60\) h.", String.raw`\[E=1{,}2\cdot\frac{25}{60}=0{,}500\ \mathrm{kWh}\]`, ""]
+  ], String.raw`Tiden är \(1500\ \mathrm s\), och energin \(1{,}80\ \mathrm{MJ}=0{,}500\ \mathrm{kWh}\).`),
+  "5.149": byggFacitListaV2([
+    ["a", "Arbetet mot tyngdkraften är", String.raw`\[W=mgh=68\cdot9{,}82\cdot4{,}5=3005\ \mathrm J\]`, ""],
+    ["b", "Effekten under 6,0 s är", String.raw`\[P=\frac{3005}{6{,}0}=501\ \mathrm W\]`, ""],
+    ["c", "Omvandla med \(1\ \mathrm{hk}=735\ \mathrm W\).", String.raw`\[P=\frac{501}{735}=0{,}681\ \mathrm{hk}\]`, ""]
+  ], String.raw`Arbetet är \(3{,}00\ \mathrm{kJ}\), effekten \(501\ \mathrm W\), vilket motsvarar \(0{,}681\ \mathrm{hk}\).`),
+  "5.150": byggFacitListaV2([
+    ["a", "Verkningsgraden är", String.raw`\[\eta=\frac{600}{750}=0{,}80=80\,\%\]`, ""],
+    ["b", "Förlusteffekten är skillnaden.", String.raw`\[P_{\mathrm{förlust}}=750-600=150\ \mathrm W\]`, ""],
+    ["c", "Energin omvandlas främst till värme i lindningar och lager och i liten grad till ljud.", "", "Energi försvinner inte; den byter form." ]
+  ], String.raw`Verkningsgraden är \(80\,\%\), och \(150\ \mathrm W\) blir förlusteffekt.`),
+  "5.151": byggFacitListaV2([
+    ["1", "Åtta liter vatten per sekund motsvarar \(8{,}0\ \mathrm{kg/s}\).", String.raw`\[P_{\mathrm{nyttig}}=\dot mgh=8{,}0\cdot9{,}82\cdot25=1964\ \mathrm W\]`, ""],
+    ["2", "Den elektriska effekten måste vara större.", String.raw`\[P_{\mathrm{el}}=\frac{1964}{0{,}65}=3022\ \mathrm W\]`, ""]
+  ], String.raw`Pumpen måste ta upp cirka \(3{,}02\ \mathrm{kW}\) elektrisk effekt.`),
+  "5.152": byggFacitListaV2([
+    ["1", "Vid konstant fart är drivkraft och motståndskraft lika stora.", String.raw`\[F_{7{,}5}=\frac Pv=\frac{210}{7{,}5}=28\ \mathrm N\]`, ""],
+    ["2", "Vid 9,0 m/s och motståndet 40 N krävs", String.raw`\[P_2=Fv=40\cdot9{,}0=360\ \mathrm W\]`, ""],
+    ["3", "Den relativa ökningen är", String.raw`\[\frac{360-210}{210}\cdot100=71{,}4\,\%\]`, ""]
+  ], String.raw`Vid den högre farten krävs \(360\ \mathrm W\), vilket är cirka \(71\,\%\) mer.`),
+  "5.153": byggFacitListaV2([
+    ["1", "Tiden för 100 km vid 90 km/h är", String.raw`\[t=\frac{100}{90}=1{,}111\ \mathrm h\]`, ""],
+    ["2", "Medeleffekten blir", String.raw`\[P=\frac Et=\frac{18\ \mathrm{kWh}}{1{,}111\ \mathrm h}=16{,}2\ \mathrm{kW}\]`, ""]
+  ], String.raw`Bilen tar i genomsnitt ut cirka \(16{,}2\ \mathrm{kW}\) ur batteriet.`),
+  "5.154": byggFacitListaV2([
+    ["a", "Den konstanta accelerationen och resultanten är", String.raw`\[a=\frac{25}{10}=2{,}5\ \mathrm{m/s^2}\]\[F=ma=1200\cdot2{,}5=3000\ \mathrm N\]`, ""],
+    ["b", "Farten är \(v=at\), och den momentana effekten är \(P=Fv\).", String.raw`\[P(2{,}0)=3000\cdot5{,}0=15\ \mathrm{kW}\]\[P(6{,}0)=3000\cdot15=45\ \mathrm{kW}\]\[P(10)=3000\cdot25=75\ \mathrm{kW}\]`, ""],
+    ["c", "Medeleffekten fås från den totala ändringen i rörelseenergi.", String.raw`\[\bar P=\frac{mv^2/2}{t}=\frac{1200\cdot25^2/2}{10}=37{,}5\ \mathrm{kW}\]`, "Den är hälften av sluteffekten eftersom effekten växer linjärt från 0 till 75 kW." ]
+  ], String.raw`Resultanten är \(3{,}0\ \mathrm{kN}\). Effekterna är \(15\), \(45\) och \(75\ \mathrm{kW}\); medeleffekten är \(37{,}5\ \mathrm{kW}\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_EFFEKT_V2[uppgift.id]) uppgift.s = FACIT_EFFEKT_V2[uppgift.id];
+}
+
+const FACIT_RORELSEMANGD_V2 = {
+  "5.6": byggFacitListaV2([
+    ["a", "Välj lastbilens riktning som positiv och omvandla \(50\ \mathrm{km/h}=13{,}89\ \mathrm{m/s}\).", String.raw`\[p_i=16\,000\cdot13{,}89-1400\cdot13{,}89\]\[(16\,000+1400)v=p_i\Rightarrow v=11{,}65\ \mathrm{m/s}\]`, ""],
+    ["b", "Hastighetsändringarnas storlek blir", String.raw`\[|\Delta v_{\mathrm{bil}}|=|11{,}65-(-13{,}89)|=25{,}54\ \mathrm{m/s}\]\[|\Delta v_{\mathrm{lastbil}}|=|11{,}65-13{,}89|=2{,}24\ \mathrm{m/s}\]`, ""],
+    ["c", "Enligt Newtons tredje lag verkar fordonen på varandra med lika stora motriktade krafter.", "", "Bilens mindre massa ger däremot mycket större acceleration och hastighetsändring." ]
+  ], String.raw`Fordonens gemensamma hastighet är \(11{,}65\ \mathrm{m/s}\) i lastbilens riktning. Bilen ändrar hastighet \(25{,}54\ \mathrm{m/s}\), lastbilen \(2{,}24\ \mathrm{m/s}\), men krafterna är lika stora.`),
+  "5.13": byggFacitListaV2([
+    ["a", "En kula in med farten v och en lika stor kula ut med samma fart ger", String.raw`\[p_i=mv=p_f\]\[E_{k,i}=\frac{mv^2}{2}=E_{k,f}\]`, "Både rörelsemängd och rörelseenergi bevaras."],
+    ["b", "Två kulor som lämnar med farten \(v/2\) ger", String.raw`\[p_f=2m\frac v2=mv\]\[E_{k,f}=2\cdot\frac{m(v/2)^2}{2}=\frac{mv^2}{4}\]`, "Rörelsemängden bevaras men bara hälften av den ursprungliga rörelseenergin återstår."],
+    ["c", "Stöten mellan stålkulorna är nära elastisk och måste därför ungefär bevara även rörelseenergin.", "", "Det är därför en kula lämnar med nästan samma fart." ]
+  ], String.raw`En kula ut med farten v bevarar både p och \(E_k\); två kulor med \(v/2\) bevarar p men inte \(E_k\).`),
+  "5.14": byggFacitListaV2([
+    ["a", "Cyklisten:", String.raw`\[p=mv=80\cdot7{,}0=560\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Bilen:", String.raw`\[p=1200\cdot25=3{,}00\cdot10^4\ \mathrm{kg\,m/s}\]`, ""],
+    ["c", "Kulan har massan \(10\ \mathrm g=0{,}010\ \mathrm{kg}\).", String.raw`\[p=0{,}010\cdot400=4{,}0\ \mathrm{kg\,m/s}\]`, "Bilen har klart störst rörelsemängd och kräver störst impuls för att stoppas." ]
+  ], String.raw`Rörelsemängderna är \(560\), \(30\,000\) och \(4{,}0\ \mathrm{kg\,m/s}\).`),
+  "5.15": byggFacitListaV2([
+    ["a", "Systemets rörelsemängd är noll före skottet. Kulans massa är 0,0095 kg.", String.raw`\[m_kv_k+m_gv_g=0\]\[v_g=-\frac{0{,}0095\cdot780}{4{,}2}=-1{,}76\ \mathrm{m/s}\]`, ""],
+    ["b", "Samma rörelsemängdsändring sker under mycket kort tid.", String.raw`\[F_{\mathrm{med}}=\frac{\Delta p}{\Delta t}\]`, "Därför kan rekylkraften kännas stor trots den relativt lilla rekylfarten." ]
+  ], String.raw`Gevärets rekylfart är \(1{,}76\ \mathrm{m/s}\) bakåt.`),
+  "5.16": byggFacitListaV2([
+    ["a", "För lika massor ger rörelsemängden och energin", String.raw`\[v=u_1+u_2\]\[v^2=u_1^2+u_2^2\]`, ""],
+    ["b", "Kvadrera den första ekvationen och jämför med den andra.", String.raw`\[v^2=u_1^2+2u_1u_2+u_2^2\Rightarrow2u_1u_2=0\]`, "Den fysiska kollisionslösningen är \(u_1=0\) och \(u_2=v\)."],
+    ["c", "Med \(v=2{,}4\ \mathrm{m/s}\):", String.raw`\[u_2=2{,}4\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Den första bollen stannar och den andra får farten \(2{,}4\ \mathrm{m/s}\).`),
+  "5.17": byggFacitListaV2([
+    ["a", "Varje sekund stoppas 2,5 kg vatten i riktningen mot väggen.", String.raw`\[\Delta p=\Delta m\,v=2{,}5\cdot12=30\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Rörelsemängdsändring per sekund är kraft.", String.raw`\[F=\frac{\Delta p}{\Delta t}=30\ \mathrm N\]`, ""],
+    ["c", "Vid studs från \(+v\) till \(-v\) dubbleras ändringen.", String.raw`\[F=2\dot m v=60\ \mathrm N\]`, ""]
+  ], String.raw`Väggen tar emot \(30\ \mathrm{kg\,m/s}\) per sekund och påverkas av \(30\ \mathrm N\); vid fullständig återstuds blir kraften \(60\ \mathrm N\).`),
+  "5.18": byggFacitListaV2([
+    ["a", "I uppgiftens förenklade impulsmodell får gas och satellit lika stora motriktade rörelsemängder.", String.raw`\[m_s\Delta v=m_gu\]\[\Delta v=\frac{4{,}0\cdot2500}{900}=11{,}1\ \mathrm{m/s}\]`, ""],
+    ["b", "Drivningen fungerar i vakuum eftersom satelliten trycker på gasen och gasen ger satelliten en lika stor motriktad impuls.", "", "Inget yttre medium behövs."],
+    ["c", "I samma förenklade modell fördubblas hastighetsändringen om gasmassan eller utströmningsfarten fördubblas.", "", ""]
+  ], String.raw`Satellitens hastighet ändras med cirka \(11\ \mathrm{m/s}\), motsatt gasens riktning.`),
+  "5.31": byggFacitListaV2([
+    ["a", "Impulsen är kraft gånger verkningstid.", String.raw`\[I=F\Delta t=250\cdot0{,}040=10{,}0\ \mathrm{Ns}\]`, ""],
+    ["b", "Impulsen är lika med rörelsemängdsändringen.", String.raw`\[I=m\Delta v\Rightarrow\Delta v=\frac{10{,}0}{0{,}60}=16{,}7\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Impulsen är \(10{,}0\ \mathrm{Ns}\), och bollens fart ändras med \(16{,}7\ \mathrm{m/s}\).`),
+  "5.32": byggFacitListaV2([
+    ["a", "Den lättare åkarens rörelsemängd är", String.raw`\[p_1=55\cdot1{,}2=66\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Totalsumman ska förbli noll.", String.raw`\[55\cdot1{,}2+70v_2=0\Rightarrow v_2=-0{,}943\ \mathrm{m/s}\]`, ""],
+    ["c", "Åkarna får lika stora motriktade rörelsemängder genom sina inre krafter.", "", "Därför är systemets totala rörelsemängd fortfarande noll." ]
+  ], String.raw`Rörelsemängderna är \(66\ \mathrm{kg\,m/s}\) åt motsatta håll. Den tyngre åkaren får farten \(0{,}943\ \mathrm{m/s}\).`),
+  "5.33": byggFacitListaV2([
+    ["a", "Vagnarna fastnar, så rörelsemängden bevaras men inte rörelseenergin.", String.raw`\[900\cdot15=(900+1500)v\Rightarrow v=5{,}625\ \mathrm{m/s}\]`, ""],
+    ["b", "Före krocken är energin", String.raw`\[E_{k,i}=\frac{900\cdot15^2}{2}=101{,}25\ \mathrm{kJ}\]`, ""],
+    ["c", "Efter krocken är den", String.raw`\[E_{k,f}=\frac{2400\cdot5{,}625^2}{2}=37{,}97\ \mathrm{kJ}\]\[\Delta E=63{,}28\ \mathrm{kJ}\]`, "Resten blir deformation, värme och ljud." ]
+  ], String.raw`Gemensam fart \(5{,}625\ \mathrm{m/s}\). Energin minskar från \(101{,}25\ \mathrm{kJ}\) till \(37{,}97\ \mathrm{kJ}\), alltså med \(63{,}28\ \mathrm{kJ}\).`),
+  "5.34": byggFacitListaV2([
+    ["a", "Med höger som positiv riktning gäller", String.raw`\[0{,}50\cdot3{,}0=0{,}50u_1+1{,}5u_2\]`, ""],
+    ["b", "För en fullständigt elastisk endimensionell stöt byter den relativa hastigheten tecken.", String.raw`\[3{,}0-0=u_2-u_1\]`, ""],
+    ["c", "Lös ekvationssystemet.", String.raw`\[u_1=-1{,}50\ \mathrm{m/s},\qquad u_2=1{,}50\ \mathrm{m/s}\]`, "Den lätta bollen studsar tillbaka eftersom den möter en tre gånger större massa." ]
+  ], String.raw`Den lätta bollen får \(-1{,}50\ \mathrm{m/s}\) och den tunga \(+1{,}50\ \mathrm{m/s}\).`),
+  "5.39": byggFacitListaV2([
+    ["a", "Den högra vagnen står stilla före stöten.", String.raw`\[p_i=2{,}0\cdot3{,}0=6{,}0\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Efter stöten rör sig den sammanlagda massan 6,0 kg.", String.raw`\[v=\frac{6{,}0}{2{,}0+4{,}0}=1{,}0\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Rörelsemängden är \(6{,}0\ \mathrm{kg\,m/s}\), och den gemensamma farten \(1{,}0\ \mathrm{m/s}\).`),
+  "5.40": byggFacitListaV2([
+    ["a", "Med höger som positiv riktning är", String.raw`\[p_i=1{,}5\cdot4{,}0+2{,}5(-2{,}0)=1{,}0\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Efter stöten rör sig den lätta vagnen 1,0 m/s åt vänster.", String.raw`\[1{,}0=1{,}5(-1{,}0)+2{,}5v\Rightarrow v=1{,}0\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Den totala rörelsemängden är \(1{,}0\ \mathrm{kg\,m/s}\) åt höger, och den tyngre vagnen får \(1{,}0\ \mathrm{m/s}\) åt höger.`),
+  "5.41": byggFacitListaV2([
+    ["a", "Före stöten har 3,0-kilogramsvagnen farten 2,4 m/s. Efteråt har den andra vagnen samma fart medan den första står stilla.", String.raw`\[3{,}0\cdot2{,}4=m\cdot2{,}4\Rightarrow m=3{,}0\ \mathrm{kg}\]`, ""],
+    ["b", "Kontrollera rörelseenergin.", String.raw`\[E_{k,i}=\frac{3{,}0\cdot2{,}4^2}{2}=8{,}64\ \mathrm J\]\[E_{k,f}=\frac{3{,}0\cdot2{,}4^2}{2}=8{,}64\ \mathrm J\]`, "Stöten är elastisk." ]
+  ], String.raw`Den andra vagnen måste också ha massan \(3{,}0\ \mathrm{kg}\). Rörelseenergin bevaras, så stöten är elastisk.`),
+  "5.44": byggFacitListaV2([
+    ["a", "Vattnets rörelsemängd är", String.raw`\[p_v=0{,}60\cdot14=8{,}4\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Om allt vatten idealiserat lämnar på en gång får den tomma raketen lika stor motriktad rörelsemängd.", String.raw`\[0{,}15v_r=8{,}4\Rightarrow v_r=56\ \mathrm{m/s}\]`, ""],
+    ["c", "I verkligheten lämnar vattnet successivt medan raketens massa ändras, och tyngdkraft samt luftmotstånd verkar under utströmningen.", "", "Därför blir den verkliga farten lägre än engångsmodellen." ]
+  ], String.raw`Vattnets rörelsemängd är \(8{,}4\ \mathrm{kg\,m/s}\), och engångsmodellen ger raketfarten \(56\ \mathrm{m/s}\).`),
+  "5.48": byggFacitListaV2([
+    ["a", "Under uppsvingen bevaras den mekaniska energin.", String.raw`\[\frac{Mv^2}{2}=Mgh\Rightarrow v=\sqrt{2gh}=\sqrt{2\cdot9{,}82\cdot0{,}12}=1{,}535\ \mathrm{m/s}\]`, ""],
+    ["b", "I själva stöten bevaras rörelsemängden. \(M=1{,}20+0{,}0080=1{,}208\ \mathrm{kg}\).", String.raw`\[0{,}0080u=1{,}208\cdot1{,}535\Rightarrow u=232\ \mathrm{m/s}\]`, ""],
+    ["c", "Jämför energin direkt före och efter stöten.", String.raw`\[E_i=\frac{0{,}0080\cdot232^2}{2}\approx215\ \mathrm J\]\[E_f=\frac{1{,}208\cdot1{,}535^2}{2}=1{,}42\ \mathrm J\]\[\frac{E_f}{E_i}=0{,}0066=0{,}66\,\%\]`, ""]
+  ], String.raw`Farten direkt efter stöten är \(1{,}535\ \mathrm{m/s}\), kulans fart före stöten cirka \(232\ \mathrm{m/s}\), och cirka \(0{,}66\,\%\) av rörelseenergin återstår.`),
+  "5.49": byggFacitListaV2([
+    ["a", "Impulsen är triangelarean under kraft–tid-grafen.", String.raw`\[I=\frac{0{,}012\cdot800}{2}=4{,}8\ \mathrm{Ns}\]`, ""],
+    ["b", "Bollen startar från vila.", String.raw`\[v=\frac Im=\frac{4{,}8}{0{,}43}=11{,}2\ \mathrm{m/s}\]`, ""],
+    ["c", "Medelkraften är", String.raw`\[F_{\mathrm{med}}=\frac I{\Delta t}=\frac{4{,}8}{0{,}012}=400\ \mathrm N\]`, "Triangelns medelhöjd är halva topphöjden, så toppkraften 800 N är dubbla medelkraften." ]
+  ], String.raw`Impulsen är \(4{,}8\ \mathrm{Ns}\), bollens fart \(11{,}2\ \mathrm{m/s}\), och medelkraften \(400\ \mathrm N\).`),
+  "5.80": byggFacitListaV2([
+    ["a", "Mannen:", String.raw`\[p=78\cdot5{,}5=429\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Bilen: \(80\ \mathrm{km/h}=22{,}22\ \mathrm{m/s}\).", String.raw`\[p=1100\cdot22{,}22=2{,}44\cdot10^4\ \mathrm{kg\,m/s}\]`, ""],
+    ["c", "Flygplanet: \(280\ \mathrm{ton}=2{,}80\cdot10^5\ \mathrm{kg}\) och \(900\ \mathrm{km/h}=250\ \mathrm{m/s}\).", String.raw`\[p=2{,}80\cdot10^5\cdot250=7{,}0\cdot10^7\ \mathrm{kg\,m/s}\]`, ""]
+  ], String.raw`Rörelsemängderna är \(429\), \(2{,}44\cdot10^4\) och \(7{,}0\cdot10^7\ \mathrm{kg\,m/s}\).`),
+  "5.81": byggFacitListaV2([
+    ["a", "Lös ut farten.", String.raw`\[v=\frac pm=\frac{420}{30}=14\ \mathrm{m/s}\]`, ""],
+    ["b", "Protonens fart är \(2{,}0\ \mathrm{Mm/s}=2{,}0\cdot10^6\ \mathrm{m/s}\).", String.raw`\[p=1{,}673\cdot10^{-27}\cdot2{,}0\cdot10^6=3{,}35\cdot10^{-21}\ \mathrm{kg\,m/s}\]`, ""]
+  ], String.raw`Farten är \(14\ \mathrm{m/s}\), och protonens rörelsemängd \(3{,}35\cdot10^{-21}\ \mathrm{kg\,m/s}\).`),
+  "5.82": byggFacitListaV2([
+    ["a", "Med höger som positiv riktning:", String.raw`\[p_1=3{,}0\cdot2{,}5=7{,}5\ \mathrm{kg\,m/s}\]\[p_2=4{,}0(-1{,}5)=-6{,}0\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Totalsumman är", String.raw`\[p_{\mathrm{tot}}=7{,}5-6{,}0=1{,}5\ \mathrm{kg\,m/s}\]`, ""],
+    ["c", "Efter stöten har vänstervagnen farten \(-1{,}0\ \mathrm{m/s}\).", String.raw`\[1{,}5=3{,}0(-1{,}0)+4{,}0v\Rightarrow v=1{,}125\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Före stöten är rörelsemängderna \(+7{,}5\) och \(-6{,}0\ \mathrm{kg\,m/s}\). Den högra vagnen får \(1{,}125\ \mathrm{m/s}\) åt höger.`),
+  "5.83": byggFacitListaV2([
+    ["a", "Välj den lätta vagnens riktning som positiv.", String.raw`\[p_i=1{,}5\cdot0{,}90-4{,}0\cdot0{,}40=-0{,}25\ \mathrm{kg\,m/s}\]`, "Minustecknet betyder den tunga vagnens ursprungliga riktning."],
+    ["b", "Efter stöten är massan \(1{,}5+4{,}0=5{,}5\ \mathrm{kg}\).", String.raw`\[v=\frac{-0{,}25}{5{,}5}=-0{,}0455\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Vagnarna får farten \(0{,}045\ \mathrm{m/s}\) i den tunga vagnens ursprungliga riktning.`),
+  "5.84": byggFacitListaV2([
+    ["a", "Impulsen är", String.raw`\[I=F\Delta t=220\cdot0{,}40=88\ \mathrm{Ns}\]`, ""],
+    ["b", "Impuls och rörelsemängdsändring är samma storhet.", String.raw`\[\Delta p=88\ \mathrm{kg\,m/s}\]`, ""],
+    ["c", "Vagnen startar från vila.", String.raw`\[v=\frac{\Delta p}{m}=\frac{88}{12}=7{,}33\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Impulsen och rörelsemängdsändringen är \(88\ \mathrm{Ns}\); slutfarten är \(7{,}33\ \mathrm{m/s}\).`),
+  "5.85": byggFacitListaV2([
+    ["a", "Rörelsemängden bevaras.", String.raw`\[10\cdot2{,}5=10v+5{,}0\cdot3{,}2\Rightarrow v=0{,}90\ \mathrm{m/s}\]`, ""],
+    ["b", "Vänstervagnens impuls är dess rörelsemängdsändring.", String.raw`\[I_L=10(0{,}90-2{,}5)=-16\ \mathrm{Ns}\]`, ""],
+    ["c", "Högervagnen startar från vila.", String.raw`\[I_H=5{,}0\cdot3{,}2=+16\ \mathrm{Ns}\]`, "Impulserna är lika stora och motriktade." ]
+  ], String.raw`Vänstervagnen får \(0{,}90\ \mathrm{m/s}\). Impulserna är \(16\ \mathrm{Ns}\) åt vänster respektive höger.`),
+  "5.86": byggFacitListaV2([
+    ["1", "Båda vagnarna rör sig åt samma håll före stöten.", String.raw`\[p_i=2{,}5\cdot4{,}0+4{,}0\cdot1{,}8=17{,}2\ \mathrm{kg\,m/s}\]`, ""],
+    ["2", "Efter stöten är den gemensamma massan 6,5 kg.", String.raw`\[v=\frac{17{,}2}{6{,}5}=2{,}65\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Den gemensamma farten är cirka \(2{,}65\ \mathrm{m/s}\) i ursprunglig riktning.`),
+  "5.87": byggFacitListaV2([
+    ["a", "Före kollisionen rör sig bara 10-kilogramsvagnen.", String.raw`\[E_{k,i}=\frac{10\cdot2{,}5^2}{2}=31{,}25\ \mathrm J\]`, ""],
+    ["b", "Efteråt är farterna 0,90 m/s och 3,2 m/s.", String.raw`\[E_{k,f}=\frac{10\cdot0{,}90^2}{2}+\frac{5{,}0\cdot3{,}2^2}{2}=29{,}65\ \mathrm J\]`, ""],
+    ["c", "Rörelseenergin har minskat med 1,60 J.", "", "Stöten är därför inte fullständigt elastisk." ]
+  ], String.raw`Energin minskar från \(31{,}25\ \mathrm J\) till \(29{,}65\ \mathrm J\); stöten är inte fullständigt elastisk.`),
+  "5.88": byggFacitListaV2([
+    ["a", "Med höger som positiv riktning ger rörelsemängden", String.raw`\[2{,}0\cdot4{,}0+3{,}0(-1{,}0)=2{,}0v_A+3{,}0v_B\]\[5{,}0=2{,}0v_A+3{,}0v_B\]`, ""],
+    ["b", "Vid en elastisk stöt byter relativa hastigheten tecken.", String.raw`\[4{,}0-(-1{,}0)=v_B-v_A\]`, ""],
+    ["c", "Lös ekvationssystemet.", String.raw`\[v_A=-2{,}0\ \mathrm{m/s},\qquad v_B=3{,}0\ \mathrm{m/s}\]`, "Kontroll ger \(E_k=17{,}5\ \mathrm J\) både före och efter." ]
+  ], String.raw`Vagn A får \(-2{,}0\ \mathrm{m/s}\) och vagn B \(+3{,}0\ \mathrm{m/s}\).`),
+  "5.89": byggFacitListaV2([
+    ["1", "Newtons tredje lag ger lika stora motriktade krafter under samma kollisionstid.", String.raw`\[F_A=-F_B\Rightarrow F_A\Delta t=-F_B\Delta t\]`, ""],
+    ["2", "Impuls är rörelsemängdsändring.", String.raw`\[m_A(v_{A2}-v_{A1})=-m_B(v_{B2}-v_{B1})\]`, ""],
+    ["3", "Samla sluttillståndet på ena sidan.", String.raw`\[m_Av_{A2}+m_Bv_{B2}=m_Av_{A1}+m_Bv_{B1}\]`, "Den totala rörelsemängden är alltså oförändrad när den yttre impulsen är försumbar." ]
+  ], String.raw`Newtons tredje lag leder direkt till \(\mathbf p_{\mathrm{efter}}=\mathbf p_{\mathrm{före}}\).`),
+  "5.155": byggFacitListaV2([
+    ["a", "Beräkna \(p=mv\) för varje kropp.", String.raw`\[p_{\mathrm{spelare}}=75\cdot6{,}0=450\ \mathrm{kg\,m/s}\]\[p_{\mathrm{moped}}=95\cdot12=1140\ \mathrm{kg\,m/s}\]\[p_{\mathrm{boll}}=0{,}0027\cdot25=0{,}0675\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Jämför massa gånger fart respektive enbart fart.", "", "Mopeden har störst rörelsemängd, men pingisbollen har högst fart." ]
+  ], String.raw`Rörelsemängderna är \(450\), \(1140\) och \(0{,}0675\ \mathrm{kg\,m/s}\).`),
+  "5.156": byggFacitListaV2([
+    ["a", "Impulsen är", String.raw`\[I=F\Delta t=80\cdot0{,}25=20\ \mathrm{Ns}\]`, ""],
+    ["b", "Därmed är", String.raw`\[\Delta p=20\ \mathrm{kg\,m/s}\]`, ""],
+    ["c", "Fartändringen blir", String.raw`\[\Delta v=\frac{\Delta p}{m}=\frac{20}{4{,}0}=5{,}0\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Impulsen och rörelsemängdsändringen är \(20\ \mathrm{Ns}\); farten ändras med \(5{,}0\ \mathrm{m/s}\).`),
+  "5.157": byggFacitListaV2([
+    ["a", "Före stöten rör sig bara 6,0-kilogramsvagnen.", String.raw`\[p_i=6{,}0\cdot4{,}0=24\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Efter stöten rör sig massan", String.raw`\[m=6{,}0+2{,}0=8{,}0\ \mathrm{kg}\]`, ""],
+    ["c", "Rörelsemängden bevaras.", String.raw`\[v=\frac{24}{8{,}0}=3{,}0\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Rörelsemängden är \(24\ \mathrm{kg\,m/s}\), den gemensamma massan \(8{,}0\ \mathrm{kg}\), och farten \(3{,}0\ \mathrm{m/s}\).`),
+  "5.158": byggFacitListaV2([
+    ["a", "Farten är", String.raw`\[v=\frac pm=\frac{90}{12}=7{,}5\ \mathrm{m/s}\]`, ""],
+    ["b", "Det andra föremålets massa är", String.raw`\[m=\frac pv=\frac{90}{3{,}0}=30\ \mathrm{kg}\]`, ""]
+  ], String.raw`Farten är \(7{,}5\ \mathrm{m/s}\), och det andra föremålets massa \(30\ \mathrm{kg}\).`),
+  "5.159": byggFacitListaV2([
+    ["a", "Bollens rörelsemängd är", String.raw`\[p_b=4{,}0\cdot5{,}0=20\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Systemet startar med total rörelsemängd noll.", String.raw`\[p_p=-20\ \mathrm{kg\,m/s}\]`, ""],
+    ["c", "Personens fart blir", String.raw`\[v_p=\frac{20}{55}=0{,}364\ \mathrm{m/s}\]`, "Åt motsatt håll mot bollen." ]
+  ], String.raw`Bollen och personen får \(20\ \mathrm{kg\,m/s}\) åt motsatta håll; personens fart blir \(0{,}364\ \mathrm{m/s}\).`),
+  "5.160": byggFacitListaV2([
+    ["a", "Välj bollens ursprungliga riktning som positiv.", String.raw`\[p_i=0{,}15\cdot20=+3{,}00\ \mathrm{kg\,m/s}\]\[p_f=0{,}15(-25)=-3{,}75\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Rörelsemängdsändringen är", String.raw`\[\Delta p=p_f-p_i=-3{,}75-3{,}00=-6{,}75\ \mathrm{kg\,m/s}\]`, ""],
+    ["c", "Åtta millisekunder är 0,0080 s.", String.raw`\[F_{\mathrm{med}}=\frac{\Delta p}{\Delta t}=\frac{-6{,}75}{0{,}0080}=-844\ \mathrm N\]`, ""]
+  ], String.raw`Rörelsemängden ändras med \(6{,}75\ \mathrm{kg\,m/s}\) och medelkraften är \(844\ \mathrm N\), båda mot den ursprungliga rörelseriktningen.`),
+  "5.161": byggFacitListaV2([
+    ["1", "Välj höger som positiv riktning.", String.raw`\[p_i=3{,}0\cdot5{,}0+2{,}0(-3{,}0)=9{,}0\ \mathrm{kg\,m/s}\]`, ""],
+    ["2", "Efter stöten rör sig 5,0 kg tillsammans.", String.raw`\[v=\frac{9{,}0}{5{,}0}=1{,}8\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Vagnarna får den gemensamma farten \(1{,}8\ \mathrm{m/s}\) åt höger.`),
+  "5.162": byggFacitListaV2([
+    ["a", "Den ursprungliga totalsumman är noll, så vagnarna får lika stora motriktade rörelsemängder.", String.raw`\[2{,}5v=1{,}5\cdot6{,}0\Rightarrow v=3{,}6\ \mathrm{m/s}\]`, ""],
+    ["b", "Fjäderenergin blir summan av vagnarnas rörelseenergier.", String.raw`\[E_f=\frac{2{,}5\cdot3{,}6^2}{2}+\frac{1{,}5\cdot6{,}0^2}{2}=43{,}2\ \mathrm J\]`, ""]
+  ], String.raw`Den tyngre vagnen får \(3{,}6\ \mathrm{m/s}\) åt motsatt håll, och fjädern lagrade \(43{,}2\ \mathrm J\).`),
+  "5.163": byggFacitListaV2([
+    ["1", "Impulsen är triangelarean under kraft–tid-grafen.", String.raw`\[I=\frac{0{,}20\cdot300}{2}=30\ \mathrm{Ns}\]`, ""],
+    ["2", "Bollen startar från vila.", String.raw`\[mv=I\Rightarrow v=\frac{30}{0{,}45}=66{,}7\ \mathrm{m/s}\]`, "Den relevanta kraften är grafens area, inte enbart toppkraften." ]
+  ], String.raw`Bollen får farten cirka \(66{,}7\ \mathrm{m/s}\).`),
+  "5.164": byggFacitListaV2([
+    ["a", "Kulans massa är 0,015 kg. Rörelsemängden bevaras i den oelastiska stöten.", String.raw`\[0{,}015\cdot320=(1{,}515)v\Rightarrow v=3{,}168\ \mathrm{m/s}\]`, ""],
+    ["b", "Efter stöten tar friktionsarbetet upp rörelseenergin.", String.raw`\[\mu mgs=\frac{mv^2}{2}\Rightarrow s=\frac{v^2}{2\mu g}=1{,}46\ \mathrm m\]`, ""],
+    ["c", "Energierna precis före och efter stöten är", String.raw`\[E_i=\frac{0{,}015\cdot320^2}{2}=768\ \mathrm J\]\[E_f=\frac{1{,}515\cdot3{,}168^2}{2}=7{,}60\ \mathrm J\]\[1-\frac{E_f}{E_i}=0{,}990=99{,}0\,\%\]`, ""]
+  ], String.raw`Gemensam fart \(3{,}168\ \mathrm{m/s}\), glidsträcka \(1{,}46\ \mathrm m\), och cirka \(99{,}0\,\%\) av kulans rörelseenergi försvinner i stöten.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_RORELSEMANGD_V2[uppgift.id]) uppgift.s = FACIT_RORELSEMANGD_V2[uppgift.id];
+}
+
+const FACIT_BLANDAT_KAP5_V2_DEL1 = {
+  "5.90": byggFacitListaV2([
+    ["a", "Impulsen under klubbkontakten är", String.raw`\[I=F\Delta t=90\cdot0{,}050=4{,}50\ \mathrm{Ns}\]`, ""],
+    ["b", "Pucken startar från vila.", String.raw`\[v=\frac Im=\frac{4{,}50}{0{,}17}=26{,}5\ \mathrm{m/s}\]`, ""],
+    ["c", "Rörelseenergin efter slaget är", String.raw`\[E_k=\frac{0{,}17\cdot26{,}5^2}{2}=59{,}6\ \mathrm J\]`, ""],
+    ["d", "Med konstant medelkraft blir accelerationen \(a=90/0{,}17=529\ \mathrm{m/s^2}\).", String.raw`\[s=\frac{a\Delta t^2}{2}=\frac{529\cdot0{,}050^2}{2}=0{,}662\ \mathrm m\]`, "Kontroll: \(Fs=59{,}6\ \mathrm J\), samma som rörelseenergin." ]
+  ], String.raw`\(I=4{,}50\ \mathrm{Ns}\), \(v=26{,}5\ \mathrm{m/s}\), \(E_k=59{,}6\ \mathrm J\) och kontaktsträckan är cirka \(0{,}662\ \mathrm m\).`),
+  "5.91": byggFacitListaV2([
+    ["a", "Lägesenergin på plattformen är", String.raw`\[E_p=mgh=60\cdot9{,}82\cdot1{,}2=707\ \mathrm J\]`, ""],
+    ["b", "Precis före marken gäller", String.raw`\[v=\sqrt{2gh}=4{,}85\ \mathrm{m/s}\]`, ""],
+    ["c", "Under inbromsningen fortsätter tyngdkraften att uträtta positivt arbete. Markkraften N måste därför ta upp \(mg(h+s)\).", String.raw`\[N=\frac{mg(h+s)}s\]`, ""],
+    ["d", "För raka respektive böjda ben:", String.raw`\[N_{0{,}020}=\frac{60\cdot9{,}82(1{,}2+0{,}020)}{0{,}020}=35{,}9\ \mathrm{kN}\]\[N_{0{,}40}=\frac{60\cdot9{,}82(1{,}2+0{,}40)}{0{,}40}=2{,}36\ \mathrm{kN}\]`, ""]
+  ], String.raw`Lägesenergin är \(707\ \mathrm J\) och landningsfarten \(4{,}85\ \mathrm{m/s}\). Markkraften blir cirka \(35{,}9\ \mathrm{kN}\) med raka ben och \(2{,}36\ \mathrm{kN}\) med böjda knän.`),
+  "5.92": byggFacitListaV2([
+    ["a", "Vid konstant fart gäller \(P=Fv\).", String.raw`\[F=\frac Pv=\frac{30\,000}{25}=1200\ \mathrm N\]`, ""],
+    ["b", "Resultanten är noll, så motståndskrafternas summa är 1200 N bakåt.", "", ""],
+    ["c", "Under en kilometer utför motorn", String.raw`\[W=Fs=1200\cdot1000=1{,}20\ \mathrm{MJ}\]`, ""],
+    ["d", "Kontroll med tiden \(t=1000/25=40\ \mathrm s\):", String.raw`\[W=Pt=30\,000\cdot40=1{,}20\ \mathrm{MJ}\]`, ""]
+  ], String.raw`Drivkraft och motståndskraft är vardera \(1200\ \mathrm N\). Motorn uträttar \(1{,}20\ \mathrm{MJ}\) per kilometer.`),
+  "5.93": byggFacitListaV2([
+    ["a", "Före stöten rör sig bara 4,0-kilogramsvagnen.", String.raw`\[p_i=4{,}0\cdot3{,}0=12\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Efter stöten rör sig 6,0 kg tillsammans.", String.raw`\[v=\frac{12}{6{,}0}=2{,}0\ \mathrm{m/s}\]`, ""],
+    ["c", "Energierna är", String.raw`\[E_i=\frac{4{,}0\cdot3{,}0^2}{2}=18\ \mathrm J\]\[E_f=\frac{6{,}0\cdot2{,}0^2}{2}=12\ \mathrm J\]`, ""],
+    ["d", "Skillnaden 6,0 J blir deformation, värme och ljud.", "", ""]
+  ], String.raw`Rörelsemängden är \(12\ \mathrm{kg\,m/s}\), gemensam fart \(2{,}0\ \mathrm{m/s}\), och \(6{,}0\ \mathrm J\) rörelseenergi försvinner.`),
+  "5.94": byggFacitListaV2([
+    ["a", "Startenergin är", String.raw`\[E_k=\frac{0{,}25\cdot12^2}{2}=18\ \mathrm J\]`, ""],
+    ["b", "I toppen har den blivit lägesenergi.", String.raw`\[h=\frac{E_k}{mg}=\frac{18}{0{,}25\cdot9{,}82}=7{,}33\ \mathrm m\]`, ""],
+    ["c", "Tiden till vändläget är", String.raw`\[t=\frac{v_0}{g}=\frac{12}{9{,}82}=1{,}22\ \mathrm s\]`, ""],
+    ["d", "Rörelsemängden ändras från \(+3{,}0\) till 0.", String.raw`\[\Delta p=-3{,}0\ \mathrm{kg\,m/s}\]\[I_g=-mgt=-0{,}25\cdot9{,}82\cdot1{,}22=-3{,}0\ \mathrm{Ns}\]`, ""]
+  ], String.raw`\(E_k=18\ \mathrm J\), \(h=7{,}33\ \mathrm m\), \(t=1{,}22\ \mathrm s\), och rörelsemängden ändras \(3{,}0\ \mathrm{kg\,m/s}\) nedåt, lika med tyngdkraftens impuls.`),
+  "5.95": byggFacitListaV2([
+    ["a", "Bollens rörelsemängd är", String.raw`\[p_b=3{,}0\cdot8{,}0=24\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Personen får lika stor motriktad rörelsemängd.", String.raw`\[v_p=-\frac{24}{70}=-0{,}343\ \mathrm{m/s}\]`, ""],
+    ["c", "Energierna efter kastet är", String.raw`\[E_b=\frac{3{,}0\cdot8{,}0^2}{2}=96\ \mathrm J\]\[E_p=\frac{70\cdot0{,}343^2}{2}=4{,}11\ \mathrm J\]`, ""],
+    ["d", "Motriktade rörelsemängder tar ut varandra, men rörelseenergi är en positiv skalär.", "", "De cirka 100 J kommer från personens kemiska energi." ]
+  ], String.raw`Bollen får \(24\ \mathrm{kg\,m/s}\), personen \(0{,}343\ \mathrm{m/s}\) bakåt. Rörelseenergierna är \(96\ \mathrm J\) och \(4{,}11\ \mathrm J\).`),
+  "5.96": byggFacitListaV2([
+    ["a", "Höjdförlusten och frigjord lägesenergi är", String.raw`\[h=4{,}0\sin25^\circ=1{,}69\ \mathrm m\]\[\Delta E_p=30\cdot9{,}82\cdot1{,}69=498\ \mathrm J\]`, ""],
+    ["b", "Friktionen och dess arbete blir", String.raw`\[f=\mu mg\cos25^\circ=53{,}4\ \mathrm N\]\[W_f=-fs=-214\ \mathrm J\]`, ""],
+    ["c", "Kvarvarande energi är rörelseenergi.", String.raw`\[E_k=498-214=284\ \mathrm J\]\[v=\sqrt{\frac{2E_k}{m}}=4{,}35\ \mathrm{m/s}\]`, ""],
+    ["d", "Kraftkontroll:", String.raw`\[a=g(\sin25^\circ-0{,}20\cos25^\circ)=2{,}37\ \mathrm{m/s^2}\]\[v=\sqrt{2as}=4{,}35\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Höjden minskar \(1{,}69\ \mathrm m\), \(498\ \mathrm J\) frigörs, friktionen utför \(-214\ \mathrm J\), och slutfarten är \(4{,}35\ \mathrm{m/s}\).`),
+  "5.97": byggFacitListaV2([
+    ["a", "Personens rörelsemängd före krocken är", String.raw`\[p=75\cdot14=1050\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Med krockkudde:", String.raw`\[F_{\mathrm{net}}=\frac{1050}{0{,}12}=8{,}75\ \mathrm{kN}\]`, ""],
+    ["c", "Utan krockkudde:", String.raw`\[F_{\mathrm{net}}=\frac{1050}{0{,}020}=52{,}5\ \mathrm{kN}\]`, ""],
+    ["d", "Samma rörelseenergi ska tas upp i båda fallen.", String.raw`\[E_k=\frac{75\cdot14^2}{2}=7{,}35\ \mathrm{kJ}\]`, ""]
+  ], String.raw`Rörelsemängden är \(1050\ \mathrm{kg\,m/s}\). Nettobromskraften blir \(8{,}75\ \mathrm{kN}\) respektive \(52{,}5\ \mathrm{kN}\); energin är \(7{,}35\ \mathrm{kJ}\) i båda fallen.`),
+  "5.98": byggFacitListaV2([
+    ["a", "Hammarens rörelseenergi är", String.raw`\[E_k=\frac{0{,}60\cdot6{,}0^2}{2}=10{,}8\ \mathrm J\]`, ""],
+    ["b", "Spiken drivs in \(8{,}0\ \mathrm{mm}=0{,}0080\ \mathrm m\).", String.raw`\[F_{\mathrm{med}}\approx\frac{E_k}{s}=\frac{10{,}8}{0{,}0080}=1350\ \mathrm N\]`, ""],
+    ["c", "Impulsen stoppar hammaren.", String.raw`\[\Delta t=\frac{m\Delta v}{F}=\frac{0{,}60\cdot6{,}0}{1350}=2{,}67\ \mathrm{ms}\]`, ""],
+    ["d", "Den korta bromssträckan och tiden gör kraften mycket större än tyngden \(mg=5{,}9\ \mathrm N\).", "", ""]
+  ], String.raw`\(E_k=10{,}8\ \mathrm J\), medelkraften cirka \(1{,}35\ \mathrm{kN}\), och slagtiden cirka \(2{,}67\ \mathrm{ms}\).`),
+  "5.99": byggFacitListaV2([
+    ["a", "Konstant fart ger kraftjämvikt längs backen.", String.raw`\[F=mg\sin4{,}0^\circ+2500=10{,}72\ \mathrm{kN}\]`, ""],
+    ["b", "Motoreffekten är", String.raw`\[P=Fv=10\,720\cdot15=161\ \mathrm{kW}\]`, ""],
+    ["c", "På 2,0 km uträttas", String.raw`\[W=Fs=10\,720\cdot2000=21{,}44\ \mathrm{MJ}\]`, ""],
+    ["d", "Höjdökningen är \(2000\sin4^\circ=139{,}5\ \mathrm m\).", String.raw`\[\Delta E_p=16{,}44\ \mathrm{MJ}\]\[\frac{16{,}44}{21{,}44}=76{,}7\,\%\]`, ""]
+  ], String.raw`Drivkraft \(10{,}72\ \mathrm{kN}\), effekt \(161\ \mathrm{kW}\), arbete \(21{,}44\ \mathrm{MJ}\); \(76{,}7\,\%\) blir lägesenergi.`),
+  "5.100": byggFacitListaV2([
+    ["a", "Farter från fall- och studshöjderna:", String.raw`\[v_i=-\sqrt{2g\cdot2{,}50}=-7{,}01\ \mathrm{m/s}\]\[v_f=+\sqrt{2g\cdot1{,}60}=+5{,}61\ \mathrm{m/s}\]`, ""],
+    ["b", "Med uppåt positivt blir", String.raw`\[\Delta p=m(v_f-v_i)=0{,}045(5{,}61+7{,}01)=0{,}568\ \mathrm{kg\,m/s}\]`, ""],
+    ["c", "Golvet måste ge impulsen utöver tyngdkraftens lilla nedåtriktade impuls.", String.raw`\[N_{\mathrm{med}}=\frac{\Delta p}{\Delta t}+mg=\frac{0{,}568}{0{,}00080}+0{,}441\approx710\ \mathrm N\]`, ""],
+    ["d", "Energin är proportionell mot höjden.", String.raw`\[1-\frac{1{,}60}{2{,}50}=0{,}36=36\,\%\]`, ""]
+  ], String.raw`Farten är \(7{,}01\ \mathrm{m/s}\) nedåt före och \(5{,}61\ \mathrm{m/s}\) uppåt efter. \(\Delta p=0{,}568\ \mathrm{kg\,m/s}\), markkraften cirka \(710\ \mathrm N\), och \(36\,\%\) av energin försvinner.`),
+  "5.101": byggFacitListaV2([
+    ["a", "Konstant fallfart betyder att luftmotståndet balanserar tyngden.", String.raw`\[F_L=mg=85\cdot9{,}82=835\ \mathrm N\]`, ""],
+    ["b", "Effekten och energin under 40 s är", String.raw`\[P=F_Lv=835\cdot6{,}0=5{,}01\ \mathrm{kW}\]\[E=Pt=5{,}01\cdot40=200\ \mathrm{kJ}\]`, ""],
+    ["c", "Kontroll: fallhöjden är \(6{,}0\cdot40=240\ \mathrm m\), och \(mgh=200\ \mathrm{kJ}\).", "", ""],
+    ["d", "Vid landningen är nettokraftens impuls \(mv\). Markkraften måste dessutom balansera tyngden.", String.raw`\[F_{\mathrm{net}}=\frac{85\cdot6{,}0}{0{,}25}=2{,}04\ \mathrm{kN}\]\[N=F_{\mathrm{net}}+mg=2{,}88\ \mathrm{kN}\]`, ""]
+  ], String.raw`Luftmotstånd \(835\ \mathrm N\), värmeeffekt \(5{,}01\ \mathrm{kW}\), energi \(200\ \mathrm{kJ}\). Vid landningen är nettobromskraften \(2{,}04\ \mathrm{kN}\) och markkraften \(2{,}88\ \mathrm{kN}\).`),
+  "5.102": byggFacitListaV2([
+    ["a", "Vid den oelastiska stöten:", String.raw`\[2{,}0\cdot4{,}0=5{,}0v\Rightarrow v=1{,}60\ \mathrm{m/s}\]\[E_i=16\ \mathrm J,\quad E_f=6{,}4\ \mathrm J\]`, "Alltså försvinner 9,6 J."],
+    ["b", "Kontrollera de givna elastiska farterna.", String.raw`\[p_f=2(-0{,}80)+3(3{,}2)=8{,}0\ \mathrm{kg\,m/s}\]\[E_f=\frac{2(0{,}80)^2}{2}+\frac{3(3{,}2)^2}{2}=16\ \mathrm J\]`, ""],
+    ["c", "Den stillastående 3,0-kilogramsvagnen får impulsen 4,8 Ns oelastiskt och 9,6 Ns elastiskt.", String.raw`\[\frac{F_{\mathrm{el}}}{F_{\mathrm{oel}}}=2\]`, "Vid samma kontakttid blir kraften dubbelt så stor i den elastiska stöten." ]
+  ], String.raw`Oelastiskt: \(v=1{,}60\ \mathrm{m/s}\) och \(9{,}6\ \mathrm J\) försvinner. Elastiskt: \(-0{,}80\) och \(3{,}2\ \mathrm{m/s}\); kraften på den andra vagnen blir dubbelt så stor.`),
+  "5.103": byggFacitListaV2([
+    ["a", "Fjäderenergin blir den första vagnens rörelseenergi.", String.raw`\[E_f=\frac{250\cdot0{,}12^2}{2}=1{,}80\ \mathrm J\]\[v_1=\sqrt{\frac{2E_f}{0{,}80}}=2{,}121\ \mathrm{m/s}\]`, ""],
+    ["b", "I den oelastiska stöten bevaras rörelsemängden.", String.raw`\[v=\frac{0{,}80\cdot2{,}121}{2{,}00}=0{,}849\ \mathrm{m/s}\]\[E_{k,f}=0{,}720\ \mathrm J\]`, "Alltså försvinner 1,08 J, eller 60 procent."],
+    ["c", "Friktionen tar sedan upp de återstående 0,720 J.", String.raw`\[\mu=\frac{E_{k,f}}{mgs}=\frac{0{,}720}{2{,}00\cdot9{,}82\cdot1{,}5}=0{,}0244\]`, ""]
+  ], String.raw`Före stöten \(2{,}121\ \mathrm{m/s}\), efter \(0{,}849\ \mathrm{m/s}\); \(1{,}08\ \mathrm J\) försvinner och \(\mu=0{,}0244\).`),
+  "5.104": byggFacitListaV2([
+    ["a", "Kastaren får motsatt rörelsemängd mot bollen.", String.raw`\[v_1=-\frac{2{,}0\cdot6{,}0}{60}=-0{,}200\ \mathrm{m/s}\]`, ""],
+    ["b", "Vid fångsten fastnar bollen hos personen på 75 kg.", String.raw`\[v_2=\frac{2{,}0\cdot6{,}0}{75+2{,}0}=0{,}1558\ \mathrm{m/s}\]`, ""],
+    ["c", "Efter fångsten är totalsumman", String.raw`\[p_{\mathrm{tot}}=60(-0{,}200)+77(0{,}1558)=0\]`, ""],
+    ["d", "Energierna efter kast respektive fångst är", String.raw`\[E_{\mathrm{efter\ kast}}=37{,}2\ \mathrm J\]\[E_{\mathrm{efter\ fångst}}=2{,}13\ \mathrm J\]`, "Kastaren tillför energi; vid fångsten blir cirka 35,1 J värme och deformation." ]
+  ], String.raw`Kastaren får \(0{,}200\ \mathrm{m/s}\) bakåt och mottagaren \(0{,}1558\ \mathrm{m/s}\) framåt. Total p är noll; energin minskar från \(37{,}2\) till \(2{,}13\ \mathrm J\) vid fångsten.`),
+  "5.105": byggFacitListaV2([
+    ["a", "Vid \(t=4{,}0\ \mathrm s\) är farten 16 m/s.", String.raw`\[E_k=\frac{1000\cdot16^2}{2}=128\ \mathrm{kJ}\]`, ""],
+    ["b", "Mellan 5,0 och 6,0 s sjunker farten från 16 till 0 m/s.", String.raw`\[a=-16\ \mathrm{m/s^2},\qquad F=-16\ \mathrm{kN}\]`, ""],
+    ["c", "Arean under fart–tid-grafen är", String.raw`\[s=\frac{4\cdot16}{2}+1\cdot16+\frac{1\cdot16}{2}=56\ \mathrm m\]`, ""],
+    ["d", "Bromskraftens arbete under sista fasen är", String.raw`\[W=\Delta E_k=0-128=-128\ \mathrm{kJ}\]`, ""]
+  ], String.raw`\(E_k=128\ \mathrm{kJ}\), bromskraften \(16\ \mathrm{kN}\), sträckan \(56\ \mathrm m\), och bromsarbetet \(-128\ \mathrm{kJ}\).`),
+  "5.106": byggFacitListaV2([
+    ["a", "Energin från höjden 0,30 m ger", String.raw`\[v=\sqrt{2gh}=2{,}43\ \mathrm{m/s}\]`, ""],
+    ["b", "I bottenläget ger snörkraft minus tyngd centripetalkraften.", String.raw`\[S-mg=\frac{mv^2}{L}\]\[S=0{,}50\left(9{,}82+\frac{2{,}43^2}{1{,}6}\right)=6{,}75\ \mathrm N\]`, ""],
+    ["c", "Utan förluster når pendeln samma höjd, 0,30 m, på andra sidan.", "", ""],
+    ["d", "I botten är rörelsemängdens storlek", String.raw`\[p=mv=0{,}50\cdot2{,}43=1{,}21\ \mathrm{kg\,m/s}\]`, ""]
+  ], String.raw`Farten är \(2{,}43\ \mathrm{m/s}\), snörkraften \(6{,}75\ \mathrm N\), återgångshöjden \(0{,}30\ \mathrm m\), och rörelsemängden \(1{,}21\ \mathrm{kg\,m/s}\).`),
+  "5.107": byggFacitListaV2([
+    ["a", "Volymflödet ger massflödet.", String.raw`\[\dot m=\rho\dot V=1000\cdot5{,}0=5000\ \mathrm{kg/s}\]`, ""],
+    ["b", "Den maximala hydrauliska effekten från fallhöjden är", String.raw`\[P_{\max}=\dot mgh=5000\cdot9{,}82\cdot18=884\ \mathrm{kW}\]`, ""],
+    ["c", "Verkningsgraden blir", String.raw`\[\eta=\frac{800}{884}=0{,}905=90{,}5\,\%\]`, ""],
+    ["d", "Om vattnets hastighetskomponent i strålens riktning minskar från 12 m/s till noll blir kraften", String.raw`\[F=\dot m\Delta v=5000\cdot12=60\ \mathrm{kN}\]`, "Den tidigare kontrollen \(P=Fv\) är inte giltig här, eftersom v i det sambandet ska vara turbinhjulets kontaktpunkts fart, inte strålens infartshastighet." ]
+  ], String.raw`Massflödet är \(5000\ \mathrm{kg/s}\), maximal effekt \(884\ \mathrm{kW}\), verkningsgrad \(90{,}5\,\%\), och kraften i stoppmodellen \(60\ \mathrm{kN}\).`),
+  "5.108": byggFacitListaV2([
+    ["a", "Farten har samma storlek före och efter.", String.raw`\[E_k=\frac{0{,}40\cdot3{,}0^2}{2}=1{,}80\ \mathrm J\]`, ""],
+    ["b", "Välj riktningen mot väggen som positiv: \(p_i=+1{,}20\) och \(p_f=-1{,}20\ \mathrm{kg\,m/s}\).", String.raw`\[\Delta p=-2{,}40\ \mathrm{kg\,m/s}\]`, ""],
+    ["c", "Tolv millisekunder är 0,012 s.", String.raw`\[F_{\mathrm{med}}=\frac{\Delta p}{\Delta t}=-200\ \mathrm N\]`, ""],
+    ["d", "Rörelsemängd är en vektor; samma fart men motsatt riktning ger motsatt rörelsemängd.", "", "För hela systemet boll–vägg–jord bevaras total rörelsemängd." ]
+  ], String.raw`Rörelseenergin är \(1{,}80\ \mathrm J\) både före och efter. Rörelsemängden ändras \(2{,}40\ \mathrm{kg\,m/s}\), och kraften är \(200\ \mathrm N\) från väggen.`),
+  "5.109": byggFacitListaV2([
+    ["a", "Ekipagets massa är 2300 kg.", String.raw`\[p=2300\cdot25=57\,500\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Den totala rörelseenergin är", String.raw`\[E_k=\frac{2300\cdot25^2}{2}=718{,}75\ \mathrm{kJ}\]`, ""],
+    ["c", "Vid konstant fart balanserar drivkraften motståndet.", String.raw`\[F_{\mathrm{mot}}=\frac Pv=\frac{22\,000}{25}=880\ \mathrm N\]`, ""],
+    ["d", "Under inbromsningen tas rörelseenergin upp över 60 m.", String.raw`\[F_{\mathrm{broms}}=\frac{E_k}{s}=\frac{718\,750}{60}=12{,}0\ \mathrm{kN}\]`, ""]
+  ], String.raw`\(p=57\,500\ \mathrm{kg\,m/s}\), \(E_k=718{,}75\ \mathrm{kJ}\), motstånd \(880\ \mathrm N\), och genomsnittlig bromskraft cirka \(12{,}0\ \mathrm{kN}\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_BLANDAT_KAP5_V2_DEL1[uppgift.id]) uppgift.s = FACIT_BLANDAT_KAP5_V2_DEL1[uppgift.id];
+}
+
+const FACIT_BLANDAT_KAP5_V2_DEL2 = {
+  "5.111": byggFacitListaV2([
+    ["a", "Fjäderenergin blir vagnens rörelseenergi.", String.raw`\[E_f=\frac{400\cdot0{,}15^2}{2}=4{,}50\ \mathrm J\]\[v_1=\sqrt{\frac{2E_f}{0{,}50}}=4{,}243\ \mathrm{m/s}\]`, ""],
+    ["b", "Vagnarna fastnar och rörelsemängden bevaras.", String.raw`\[v=\frac{0{,}50\cdot4{,}243}{2{,}00}=1{,}061\ \mathrm{m/s}\]`, ""],
+    ["c", "Efter stöten är", String.raw`\[E_{k,f}=\frac{2{,}00\cdot1{,}061^2}{2}=1{,}125\ \mathrm J\]\[\frac{1{,}125}{4{,}50}=25{,}0\,\%\]`, ""],
+    ["d", "Friktionen tar upp den återstående energin.", String.raw`\[s=\frac{1{,}125}{0{,}030\cdot2{,}00\cdot9{,}82}=1{,}91\ \mathrm m\]`, ""]
+  ], String.raw`Farten före stöten är \(4{,}243\ \mathrm{m/s}\), efter \(1{,}061\ \mathrm{m/s}\); \(25{,}0\,\%\) av energin återstår och glidsträckan är \(1{,}91\ \mathrm m\).`),
+  "5.112": byggFacitListaV2([
+    ["a", "Vid 5,0 m/s är motorns kraft \(P/v\). Nettokraften efter rullmotstånd blir", String.raw`\[F_{\mathrm{net}}=\frac{6000}{5{,}0}-80=1120\ \mathrm N\]`, ""],
+    ["b", "Vid gränsfarten är nettokraften noll.", String.raw`\[\frac P{v_{\max}}=80\Rightarrow v_{\max}=75\ \mathrm{m/s}\]`, ""],
+    ["c", "Rörelseenergin där är", String.raw`\[E_k=\frac{850\cdot75^2}{2}=2{,}39\ \mathrm{MJ}\]`, ""],
+    ["d", "Med uppgiftens grova approximation att accelerationen är konstant och lika med värdet vid 5,0 m/s:", String.raw`\[a\approx\frac{1120}{850}=1{,}318\ \mathrm{m/s^2}\]\[t\approx\frac{5{,}0}{1{,}318}=3{,}79\ \mathrm s\]`, "I verkligheten varierar kraften som \(P/v\), så approximationen är mycket grov nära vila." ]
+  ], String.raw`Nettokraften är \(1120\ \mathrm N\), gränsfarten \(75\ \mathrm{m/s}\), energin \(2{,}39\ \mathrm{MJ}\), och den begärda approximationen ger \(3{,}79\ \mathrm s\).`),
+  "5.114": byggFacitListaV2([
+    ["a", "Första pulsens area är", String.raw`\[I_1=200\cdot2{,}0=400\ \mathrm{Ns}\]`, ""],
+    ["b", "Fartändring är impuls dividerad med massa.", String.raw`\[v(2)=\frac{400}{2{,}0}=200\ \mathrm{m/s}\]\[I_2=250\cdot2{,}0=500\ \mathrm{Ns}\]\[v(5)=200+\frac{500}{2{,}0}=450\ \mathrm{m/s}\]`, ""],
+    ["c", "Vid 5,0 s är", String.raw`\[E_k=\frac{2{,}0\cdot450^2}{2}=202{,}5\ \mathrm{kJ}\]`, ""],
+    ["d", "Mellan 5,0 och 6,0 s är kraften noll, så fart och rörelseenergi förblir konstanta.", "", ""]
+  ], String.raw`\(I_1=400\ \mathrm{Ns}\), \(v(2)=200\ \mathrm{m/s}\), \(v(5)=450\ \mathrm{m/s}\), och \(E_k(5)=202{,}5\ \mathrm{kJ}\).`),
+  "5.115": byggFacitListaV2([
+    ["a", "När bilarna fastnar:", String.raw`\[v=\frac{1000\cdot20}{2200}=9{,}091\ \mathrm{m/s}\]\[\Delta E=200-90{,}91=109{,}09\ \mathrm{kJ}\]`, ""],
+    ["b", "För en elastisk endimensionell stöt mot en stillastående bil:", String.raw`\[v_A=\frac{1000-1200}{2200}\cdot20=-1{,}818\ \mathrm{m/s}\]\[v_B=\frac{2\cdot1000}{2200}\cdot20=18{,}18\ \mathrm{m/s}\]`, ""],
+    ["c", "Bil B:s energier är 49,59 kJ respektive 198,35 kJ.", String.raw`\[\frac{s_{\mathrm{el}}}{s_{\mathrm{oel}}}=\frac{198{,}35}{49{,}59}=4{,}00\]`, ""]
+  ], String.raw`Oelastiskt: \(9{,}091\ \mathrm{m/s}\) och \(109{,}09\ \mathrm{kJ}\) förlust. Elastiskt: \(v_A=-1{,}818\), \(v_B=18{,}18\ \mathrm{m/s}\); B:s bromssträcka blir fyra gånger längre.`),
+  "5.117": byggFacitListaV2([
+    ["a", "Efter stöten omvandlas den gemensamma rörelseenergin till lägesenergi.", String.raw`\[v=\sqrt{2gh}=\sqrt{2\cdot9{,}82\cdot0{,}18}=1{,}880\ \mathrm{m/s}\]`, ""],
+    ["b", "I stöten bevaras rörelsemängden.", String.raw`\[0{,}012u=2{,}012\cdot1{,}880\Rightarrow u=315\ \mathrm{m/s}\]`, ""],
+    ["c", "Energierna före och direkt efter är", String.raw`\[E_i\approx596\ \mathrm J,\qquad E_f=3{,}56\ \mathrm J\]\[\Delta E\approx592\ \mathrm J\]`, ""],
+    ["d", "Energi bevaras under pendelns uppsving men inte i den oelastiska kollisionen.", "", "Därför måste rörelsemängden användas för själva träffen." ]
+  ], String.raw`Gemensam fart \(1{,}880\ \mathrm{m/s}\), kulfart cirka \(315\ \mathrm{m/s}\), och cirka \(592\ \mathrm J\) förloras i stöten.`),
+  "5.118": byggFacitListaV2([
+    ["a", "Skjutkraften är gasens rörelsemängdsflöde.", String.raw`\[F=\dot m u=80\cdot3000=240\ \mathrm{kN}\]`, ""],
+    ["b", "I startögonblicket är massan 20 000 kg.", String.raw`\[a_0=\frac{240\,000}{20\,000}=12\ \mathrm{m/s^2}\]`, ""],
+    ["c", "Gasstrålens kinetiska effekt relativt raketen är", String.raw`\[P_{\mathrm{jet}}=\frac12\dot m u^2=\frac12\cdot80\cdot3000^2=360\ \mathrm{MW}\]`, "Motorns mekaniska effekt på själva raketen är \(Fv\) och är noll exakt i startögonblicket."],
+    ["d", "När 4000 kg förbrukats är massan 16 000 kg. Upprepad rörelsemängdsbalans för små gasportioner ger raketekvationen.", String.raw`\[\Delta v=u\ln\frac{m_0}{m}=3000\ln\frac{20\,000}{16\,000}=669\ \mathrm{m/s}\]`, "Att behandla all gas som om den lämnade samtidigt ger 750 m/s och är bara en grov, felaktig approximation." ]
+  ], String.raw`Skjutkraft \(240\ \mathrm{kN}\), startacceleration \(12\ \mathrm{m/s^2}\), jet-effekt \(360\ \mathrm{MW}\), och fart efter halva bränslemassan cirka \(669\ \mathrm{m/s}\).`),
+  "5.119": byggFacitListaV2([
+    ["a", "Vid konstant fart balanserar vajern tyngdkomponenten och friktionen.", String.raw`\[F=mg(\sin25^\circ+0{,}04\cos25^\circ)=383\ \mathrm N\]`, ""],
+    ["b", "Varje resa tar \(800/2{,}0=400\ \mathrm s\). Med fyra åkare per minut finns i medeltal \((4/60)400=26{,}7\) åkare samtidigt i backen.", String.raw`\[P_{\mathrm{tot}}=26{,}7\cdot383\cdot2{,}0=20{,}4\ \mathrm{kW}\]`, ""],
+    ["c", "Per person blir höjden 338 m. Energifördelningen är", String.raw`\[E_p=282\ \mathrm{kJ},\quad W_f=24{,}3\ \mathrm{kJ},\quad W=306\ \mathrm{kJ}\]\[\frac{E_p}{W}=92{,}1\,\%,\qquad\frac{W_f}{W}=7{,}9\,\%\]`, ""],
+    ["d", "När vajern stannar är \(mg\sin25^\circ=352\ \mathrm N\), mycket större än \(0{,}04mg\cos25^\circ=30{,}3\ \mathrm N\).", "", "Med det givna friktionstalet glider åkarna nedåt." ]
+  ], String.raw`Vajerkraften är \(383\ \mathrm N\) per person och den stationära totaleffekten cirka \(20{,}4\ \mathrm{kW}\), inte 3,1 kW. Cirka \(92{,}1\,\%\) blir lägesenergi.`),
+  "5.120": byggFacitListaV2([
+    ["a", "Startenergin är", String.raw`\[E_{k,1}=\frac{6{,}0\cdot4{,}5^2}{2}=60{,}75\ \mathrm J\]`, ""],
+    ["b", "Efter 8,0 m är", String.raw`\[E_{k,2}=\frac{6{,}0\cdot3{,}0^2}{2}=27{,}0\ \mathrm J\]`, ""],
+    ["c", "Friktionen tar upp 33,75 J.", String.raw`\[f=\frac{33{,}75}{8{,}0}=4{,}22\ \mathrm N\]`, ""],
+    ["d", "På plan bana är \(N=mg\).", String.raw`\[\mu=\frac{4{,}22}{6{,}0\cdot9{,}82}=0{,}0716\]`, ""]
+  ], String.raw`Energierna är \(60{,}75\) och \(27{,}0\ \mathrm J\), friktionen \(4{,}22\ \mathrm N\), och \(\mu=0{,}0716\).`),
+  "5.121": byggFacitListaV2([
+    ["a", "Före paddeltaget:", String.raw`\[p_i=95\cdot2{,}5=237{,}5\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Impulsen adderas framåt.", String.raw`\[p_f=237{,}5+60=297{,}5\ \mathrm{kg\,m/s}\]`, ""],
+    ["c", "Farten blir", String.raw`\[v_f=\frac{297{,}5}{95}=3{,}13\ \mathrm{m/s}\]`, ""],
+    ["d", "Medelkraften är", String.raw`\[F=\frac{60}{0{,}80}=75\ \mathrm N\]`, ""]
+  ], String.raw`\(p_i=237{,}5\), \(p_f=297{,}5\ \mathrm{kg\,m/s}\), \(v_f=3{,}13\ \mathrm{m/s}\), och \(F=75\ \mathrm N\).`),
+  "5.122": byggFacitListaV2([
+    ["a", "Före kopplingen är", String.raw`\[p_i=40\,000\cdot1{,}5=60\,000\ \mathrm{kg\,m/s}\]`, ""],
+    ["b", "Efteråt rör sig 60 000 kg tillsammans.", String.raw`\[v=\frac{60\,000}{60\,000}=1{,}0\ \mathrm{m/s}\]`, ""],
+    ["c", "Energierna är 45,0 kJ före och 30,0 kJ efter.", String.raw`\[\Delta E=15{,}0\ \mathrm{kJ}\]`, ""],
+    ["d", "Vagnen får impulsen \(20\,000\ \mathrm{Ns}\) under 0,50 s.", String.raw`\[F=40\ \mathrm{kN}\]`, ""]
+  ], String.raw`\(p=60\,000\ \mathrm{kg\,m/s}\), \(v=1{,}0\ \mathrm{m/s}\), energiförlust \(15{,}0\ \mathrm{kJ}\), och kraft \(40\ \mathrm{kN}\).`),
+  "5.123": byggFacitListaV2([
+    ["a", "Frigjord lägesenergi:", String.raw`\[\Delta E_p=80\cdot9{,}82\cdot12=9427\ \mathrm J\]`, ""],
+    ["b", "Slutlig rörelseenergi:", String.raw`\[E_k=\frac{80\cdot12^2}{2}=5760\ \mathrm J\]`, ""],
+    ["c", "Förlusten är", String.raw`\[E_{\mathrm{förlust}}=9427-5760=3667\ \mathrm J\]`, ""],
+    ["d", "Över 90 m motsvarar det", String.raw`\[F_{\mathrm{mot}}=\frac{3667}{90}=40{,}7\ \mathrm N\]`, ""]
+  ], String.raw`\(9{,}43\ \mathrm{kJ}\) frigörs, \(5{,}76\ \mathrm{kJ}\) blir rörelseenergi, \(3{,}67\ \mathrm{kJ}\) förloras och medelmotståndet är \(40{,}7\ \mathrm N\).`),
+  "5.124": byggFacitListaV2([
+    ["a", "Massan är \(25\ \mathrm g=0{,}025\ \mathrm{kg}\).", String.raw`\[v=\sqrt{\frac{2E}{m}}=\sqrt{\frac{24}{0{,}025}}=31{,}0\ \mathrm{m/s}\]`, ""],
+    ["b", "Rörelsemängden är", String.raw`\[p=mv=0{,}7746\ \mathrm{kg\,m/s}\]`, ""],
+    ["c", "Medelkraften under 0,040 s blir", String.raw`\[F=\frac p{\Delta t}=19{,}4\ \mathrm N\]`, ""],
+    ["d", "Vid lodrätt skott:", String.raw`\[h=\frac{E}{mg}=\frac{12}{0{,}025\cdot9{,}82}=48{,}9\ \mathrm m\]`, ""]
+  ], String.raw`\(v=31{,}0\ \mathrm{m/s}\), \(p=0{,}775\ \mathrm{kg\,m/s}\), \(F=19{,}4\ \mathrm N\), och \(h=48{,}9\ \mathrm m\).`),
+  "5.125": byggFacitListaV2([
+    ["a", "Massflödet av personer är", String.raw`\[\dot m=\frac{30\cdot65}{60}=32{,}5\ \mathrm{kg/s}\]`, ""],
+    ["b", "Nyttig lyfteffekt:", String.raw`\[P=\dot mgh=32{,}5\cdot9{,}82\cdot6{,}0=1915\ \mathrm W\]`, ""],
+    ["c", "På en timme:", String.raw`\[E=1915\cdot3600=6{,}89\ \mathrm{MJ}=1{,}915\ \mathrm{kWh}\]`, ""],
+    ["d", "Eleffekten blir", String.raw`\[P_{\mathrm{el}}=\frac{1915}{0{,}70}=2{,}74\ \mathrm{kW}\]`, ""]
+  ], String.raw`Massflöde \(32{,}5\ \mathrm{kg/s}\), nyttig effekt \(1{,}915\ \mathrm{kW}\), timenergi \(6{,}89\ \mathrm{MJ}\), och eleffekt \(2{,}74\ \mathrm{kW}\).`),
+  "5.126": byggFacitListaV2([
+    ["a", "Startenergin är", String.raw`\[E_k=\frac{75\cdot14^2}{2}=7350\ \mathrm J\]`, ""],
+    ["b", "Arbetet över 22 m ger", String.raw`\[F=\frac{7350}{22}=334\ \mathrm N\]`, ""],
+    ["c", "På plan mark:", String.raw`\[\mu=\frac{334}{75\cdot9{,}82}=0{,}454\]`, ""],
+    ["d", "Vid konstant retardation är medelfarten 7,0 m/s.", String.raw`\[t=\frac{22}{7{,}0}=3{,}14\ \mathrm s\]`, ""]
+  ], String.raw`\(E_k=7{,}35\ \mathrm{kJ}\), \(F=334\ \mathrm N\), \(\mu=0{,}454\), och \(t=3{,}14\ \mathrm s\).`),
+  "5.127": byggFacitListaV2([
+    ["1", "Fjäderenergi och friktionsarbete:", String.raw`\[E_f=\frac{900\cdot0{,}15^2}{2}=10{,}125\ \mathrm J\]\[W_f=0{,}12\cdot1{,}8\cdot9{,}82\cdot2{,}4=5{,}091\ \mathrm J\]`, ""],
+    ["2", "Farten före stöten blir", String.raw`\[v_1=\sqrt{\frac{2(10{,}125-5{,}091)}{1{,}8}}=2{,}365\ \mathrm{m/s}\]`, ""],
+    ["3", "I stöten bevaras rörelsemängden.", String.raw`\[v=\frac{1{,}8\cdot2{,}365}{3{,}0}=1{,}419\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Vagnarnas gemensamma fart blir cirka \(1{,}42\ \mathrm{m/s}\).`),
+  "5.128": byggFacitListaV2([
+    ["1", "Accelerationen ur rörelsen är", String.raw`\[a=\frac{v^2}{2s}=\frac{3{,}0^2}{2\cdot6{,}0}=0{,}75\ \mathrm{m/s^2}\]`, ""],
+    ["2", "Kraftbalans längs planet:", String.raw`\[F=ma+mg\sin15^\circ+\mu mg\cos15^\circ\]\[F=33{,}75+114{,}3+106{,}7=254{,}8\ \mathrm N\]`, ""],
+    ["3", "Momentaneffekten i slutet är", String.raw`\[P=Fv=254{,}8\cdot3{,}0=764\ \mathrm W\]`, ""]
+  ], String.raw`Dragkraftens effekt i slutet är cirka \(764\ \mathrm W\).`),
+  "5.129": byggFacitListaV2([
+    ["1", "Den träffade puckens fart vid elastisk stöt är", String.raw`\[v_2=\frac{2m_1}{m_1+m_2}v_0=\frac{2\cdot0{,}25}{0{,}65}\cdot3{,}2=2{,}462\ \mathrm{m/s}\]`, ""],
+    ["2", "Andelen överförd energi blir", String.raw`\[\frac{E_2}{E_i}=\frac{m_2v_2^2}{m_1v_0^2}=\frac{4m_1m_2}{(m_1+m_2)^2}=0{,}947\]`, ""]
+  ], String.raw`Cirka \(94{,}7\,\%\) av den första puckens rörelseenergi överförs till den andra.`),
+  "5.130": byggFacitListaV2([
+    ["1", "Accelerationen och linkraften är", String.raw`\[a=\frac{2{,}0}{3{,}0}=0{,}667\ \mathrm{m/s^2}\]\[S=m(g+a)=900(9{,}82+0{,}667)=9438\ \mathrm N\]`, ""],
+    ["2", "Effekten är störst i slutet av accelerationen när farten är 2,0 m/s.", String.raw`\[P_{\mathrm{nyttig,max}}=Sv=18{,}88\ \mathrm{kW}\]\[P_{\mathrm{el,max}}=\frac{18{,}88}{0{,}80}=23{,}6\ \mathrm{kW}\]`, ""]
+  ], String.raw`Motorn tar som mest upp cirka \(23{,}6\ \mathrm{kW}\) elektrisk effekt.`),
+  "5.131": byggFacitListaV2([
+    ["1", "Startenergin och friktionsarbetet är", String.raw`\[E_{k,0}=\frac{6{,}0\cdot4{,}0^2}{2}=48{,}0\ \mathrm J\]\[W_f=0{,}15\cdot6{,}0\cdot9{,}82\cdot3{,}0=26{,}51\ \mathrm J\]`, ""],
+    ["2", "Kvar vid fjädern är 21,49 J.", String.raw`\[\frac{kx^2}{2}=21{,}49\Rightarrow x=\sqrt{\frac{2\cdot21{,}49}{1200}}=0{,}189\ \mathrm m\]`, ""]
+  ], String.raw`Fjädern trycks ihop cirka \(0{,}189\ \mathrm m=18{,}9\ \mathrm{cm}\).`),
+  "5.132": byggFacitListaV2([
+    ["a", "Under de första 18 m är fallet fritt.", String.raw`\[v=\sqrt{2g\cdot18}=18{,}8\ \mathrm{m/s}\]`, ""],
+    ["b", "I lägsta punkten är farten noll. Med förlängningen x:", String.raw`\[mg(18+x)=\frac{kx^2}{2}\Rightarrow x=32{,}13\ \mathrm m\]\[y_{\min}=18+32{,}13=50{,}13\ \mathrm m\]`, ""],
+    ["c", "Största snörkraften är", String.raw`\[F_{\max}=kx=62\cdot32{,}13=1{,}99\ \mathrm{kN}=3{,}12mg\]`, ""],
+    ["d", "Farten är störst när accelerationen är noll, alltså när \(kx=mg\).", String.raw`\[x=\frac{mg}{k}=10{,}30\ \mathrm m\]\[v_{\max}=\sqrt{\frac{2[mg(18+x)-kx^2/2]}m}=21{,}3\ \mathrm{m/s}\]`, "Det sker 28,3 m under bron." ]
+  ], String.raw`Vid snörkontakt är farten \(18{,}8\ \mathrm{m/s}\). Lägsta punkten ligger \(50{,}1\ \mathrm m\) under bron, största snörkraften är \(1{,}99\ \mathrm{kN}\), och maxfarten \(21{,}3\ \mathrm{m/s}\).`),
+  "5.133": byggFacitListaV2([
+    ["a", "I högsta punkten är klossens relativa hastighet längs kilen noll, så de har samma vågräta fart.", String.raw`\[0{,}80\cdot5{,}0=(0{,}80+2{,}4)v\Rightarrow v=1{,}25\ \mathrm{m/s}\]`, ""],
+    ["b", "Energiskillnaden blir klossens lägesenergi.", String.raw`\[10{,}0-\frac{3{,}2\cdot1{,}25^2}{2}=0{,}80gh\Rightarrow h=0{,}955\ \mathrm m\]`, ""],
+    ["c", "När klossen lämnar kilen igen bevaras både horisontell rörelsemängd och energi.", String.raw`\[v_{\mathrm{kloss}}=-2{,}5\ \mathrm{m/s},\qquad v_{\mathrm{kil}}=+2{,}5\ \mathrm{m/s}\]`, "Kontroll ger \(p=4{,}0\ \mathrm{kg\,m/s}\) och \(E_k=10{,}0\ \mathrm J\), samma som före." ]
+  ], String.raw`Gemensam toppfart \(1{,}25\ \mathrm{m/s}\), höjd \(0{,}955\ \mathrm m\); vid utgången får klossen \(-2{,}5\) och kilen \(+2{,}5\ \mathrm{m/s}\).`),
+  "5.134": byggFacitListaV2([
+    ["a", "Efter 10 s har \(12\cdot10=120\ \mathrm{kg}\) sand tillkommit utan vågrät rörelsemängd.", String.raw`\[200\cdot4{,}0=(200+120)v\Rightarrow v=2{,}50\ \mathrm{m/s}\]`, ""],
+    ["b", "För konstant fart måste kraften ge nytillkommen sand rörelsemängd.", String.raw`\[F=\dot m v=12\cdot4{,}0=48\ \mathrm N\]\[P=Fv=192\ \mathrm W\]`, ""],
+    ["c", "Sandens kinetiska energitillväxt är", String.raw`\[\dot E_k=\frac12\dot m v^2=\frac12\cdot12\cdot4{,}0^2=96\ \mathrm W\]`, "De övriga 96 W blir värme i den oelastiska infångningen av sanden." ]
+  ], String.raw`Efter 10 s är farten \(2{,}50\ \mathrm{m/s}\). För konstant 4,0 m/s krävs \(48\ \mathrm N\) och \(192\ \mathrm W\); 96 W blir rörelseenergi och 96 W värme.`),
+  "5.165": byggFacitListaV2([
+    ["a", "Dragkraftens arbete:", String.raw`\[W_D=55\cdot12=660\ \mathrm J\]`, ""],
+    ["b", "Friktionens arbete är negativt.", String.raw`\[W_f=-30\cdot12=-360\ \mathrm J\]`, ""],
+    ["c", "Nettoarbetet blir rörelseenergi.", String.raw`\[E_k=660-360=300\ \mathrm J\]`, ""],
+    ["d", "Farten är", String.raw`\[v=\sqrt{\frac{2\cdot300}{18}}=5{,}77\ \mathrm{m/s}\]`, ""]
+  ], String.raw`Arbetena är \(+660\) och \(-360\ \mathrm J\), rörelseenergin \(300\ \mathrm J\), och farten \(5{,}77\ \mathrm{m/s}\).`),
+  "5.166": byggFacitListaV2([
+    ["a", "Startenergin är", String.raw`\[E_p=3{,}0\cdot9{,}82\cdot8{,}0=235{,}7\ \mathrm J\]`, ""],
+    ["b", "Fart och rörelsemängd före nedslaget:", String.raw`\[v=\sqrt{2gh}=12{,}53\ \mathrm{m/s}\]\[p=mv=37{,}6\ \mathrm{kg\,m/s}\]`, ""],
+    ["c", "Nettobromskraftens storlek är \(E_k/s\). Sandens uppåtriktade kraft måste dessutom balansera tyngden.", String.raw`\[F_{\mathrm{net}}=\frac{235{,}7}{0{,}15}=1{,}571\ \mathrm{kN}\]\[N=F_{\mathrm{net}}+mg=1{,}60\ \mathrm{kN}\]`, ""]
+  ], String.raw`\(E_p=235{,}7\ \mathrm J\), \(v=12{,}53\ \mathrm{m/s}\), \(p=37{,}6\ \mathrm{kg\,m/s}\); sandens genomsnittliga kraft är cirka \(1{,}60\ \mathrm{kN}\) uppåt.`),
+  "5.167": byggFacitListaV2([
+    ["a", "Farten före studsen är", String.raw`\[v_i=\sqrt{2g\cdot1{,}8}=5{,}95\ \mathrm{m/s}\]`, ""],
+    ["b", "Farten efter studsen är", String.raw`\[v_f=\sqrt{2g\cdot1{,}1}=4{,}65\ \mathrm{m/s}\]`, ""],
+    ["c", "Energiförlusten är", String.raw`\[\Delta E=mg(1{,}8-1{,}1)=1{,}375\ \mathrm J\]`, ""],
+    ["d", "Andelen blir", String.raw`\[\frac{0{,}70}{1{,}8}=38{,}9\,\%\]`, ""]
+  ], String.raw`Farten är \(5{,}95\ \mathrm{m/s}\) före och \(4{,}65\ \mathrm{m/s}\) efter; \(1{,}38\ \mathrm J\), alltså \(38{,}9\,\%\), försvinner.`),
+  "5.168": byggFacitListaV2([
+    ["a", "Ekipagets rörelseenergi är", String.raw`\[E_k=\frac{90\cdot7{,}0^2}{2}=2205\ \mathrm J\]`, ""],
+    ["b", "Över 12 m blir medelkraften", String.raw`\[F=\frac{2205}{12}=183{,}8\ \mathrm N\]`, ""],
+    ["c", "Retardationens storlek är", String.raw`\[a=\frac{183{,}8}{90}=2{,}04\ \mathrm{m/s^2}\]`, ""],
+    ["d", "Vid konstant retardation är medelfarten 3,5 m/s.", String.raw`\[t=\frac{12}{3{,}5}=3{,}43\ \mathrm s\]`, ""]
+  ], String.raw`\(E_k=2{,}205\ \mathrm{kJ}\), \(F=183{,}8\ \mathrm N\), retardation \(2{,}04\ \mathrm{m/s^2}\), och tid \(3{,}43\ \mathrm s\).`),
+  "5.169": byggFacitListaV2([
+    ["a", "Fjäderenergin är", String.raw`\[E_f=\frac{500\cdot0{,}12^2}{2}=3{,}60\ \mathrm J\]`, ""],
+    ["b", "Kulans massa är 0,080 kg.", String.raw`\[v=\sqrt{\frac{2E_f}{m}}=9{,}49\ \mathrm{m/s}\]`, ""],
+    ["c", "Rörelsemängden blir", String.raw`\[p=0{,}080\cdot9{,}49=0{,}759\ \mathrm{kg\,m/s}\]`, ""],
+    ["d", "Stighöjden är", String.raw`\[h=\frac{E_f}{mg}=4{,}58\ \mathrm m\]`, ""]
+  ], String.raw`\(E_f=3{,}60\ \mathrm J\), \(v=9{,}49\ \mathrm{m/s}\), \(p=0{,}759\ \mathrm{kg\,m/s}\), och \(h=4{,}58\ \mathrm m\).`),
+  "5.170": byggFacitListaV2([
+    ["a", "Konstant stighastighet ger kraftjämvikt.", String.raw`\[F=mg=1{,}8\cdot9{,}82=17{,}68\ \mathrm N\]`, ""],
+    ["b", "Nyttig effekt:", String.raw`\[P_n=Fv=17{,}68\cdot4{,}0=70{,}7\ \mathrm W\]`, ""],
+    ["c", "Batterieffekten är", String.raw`\[P_b=\frac{70{,}7}{0{,}55}=128{,}5\ \mathrm W\]`, ""],
+    ["d", "Batteritiden blir", String.raw`\[t=\frac{40\ \mathrm{Wh}}{128{,}5\ \mathrm W}=0{,}311\ \mathrm h=18{,}7\ \mathrm{min}\]`, ""]
+  ], String.raw`Lyftkraft \(17{,}68\ \mathrm N\), nyttig effekt \(70{,}7\ \mathrm W\), batterieffekt \(128{,}5\ \mathrm W\), och ideal stigtid \(18{,}7\ \mathrm{min}\).`),
+  "5.171": byggFacitListaV2([
+    ["1", "Bevara mekanisk energi från hoppögonblicket till vattenytan.", String.raw`\[\frac{mv_0^2}{2}+mgh=\frac{mv^2}{2}\]`, ""],
+    ["2", "Massan förkortas bort.", String.raw`\[v=\sqrt{v_0^2+2gh}=\sqrt{2{,}0^2+2\cdot9{,}82\cdot3{,}0}=7{,}93\ \mathrm{m/s}\]`, "Den initiala riktningen påverkar tiden och banan, men inte slutfartens storlek." ]
+  ], String.raw`Personen når vattnet med farten cirka \(7{,}93\ \mathrm{m/s}\).`),
+  "5.172": byggFacitListaV2([
+    ["a", "Kulans massa är 0,020 kg och stoppsträckan 0,080 m.", String.raw`\[E_k=\frac{0{,}020\cdot150^2}{2}=225\ \mathrm J\]\[F=\frac{225}{0{,}080}=2813\ \mathrm N\]`, ""],
+    ["b", "Impulsen stoppar kulan.", String.raw`\[\Delta t=\frac{mv}{F}=\frac{0{,}020\cdot150}{2813}=1{,}07\ \mathrm{ms}\]`, ""]
+  ], String.raw`Den genomsnittliga bromskraften är cirka \(2{,}81\ \mathrm{kN}\), och inbromsningen tar \(1{,}07\ \mathrm{ms}\).`),
+  "5.173": byggFacitListaV2([
+    ["a", "Bollen startar från vila och kontakttiden är 0,0090 s.", String.raw`\[F_{\mathrm{med}}=\frac{m\Delta v}{\Delta t}=\frac{0{,}43\cdot25}{0{,}0090}=1{,}19\ \mathrm{kN}\]`, ""],
+    ["b", "Överförd energi och medeleffekt är", String.raw`\[E_k=\frac{0{,}43\cdot25^2}{2}=134{,}4\ \mathrm J\]\[P_{\mathrm{med}}=\frac{134{,}4}{0{,}0090}=14{,}9\ \mathrm{kW}\]`, ""]
+  ], String.raw`Medelkraften är \(1{,}19\ \mathrm{kN}\), och medeleffekten under sparken \(14{,}9\ \mathrm{kW}\).`),
+  "5.174": byggFacitListaV2([
+    ["a", "I den friktionsfria banan omvandlas lägesenergin till rörelseenergi.", String.raw`\[v_1=\sqrt{2g\cdot0{,}80}=3{,}964\ \mathrm{m/s}\]`, ""],
+    ["b", "I den oelastiska stöten bevaras rörelsemängden.", String.raw`\[v=\frac{2{,}0\cdot3{,}964}{5{,}0}=1{,}586\ \mathrm{m/s}\]`, ""],
+    ["c", "Friktionen tar därefter upp den gemensamma rörelseenergin över 1,2 m.", String.raw`\[\mu mgs=\frac{mv^2}{2}\Rightarrow\mu=\frac{v^2}{2gs}=\frac{1{,}586^2}{2\cdot9{,}82\cdot1{,}2}=0{,}1067\]`, ""]
+  ], String.raw`Farten längst ned är \(3{,}964\ \mathrm{m/s}\), efter stöten \(1{,}586\ \mathrm{m/s}\), och friktionstalet \(\mu\approx0{,}107\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_BLANDAT_KAP5_V2_DEL2[uppgift.id]) uppgift.s = FACIT_BLANDAT_KAP5_V2_DEL2[uppgift.id];
+}
+
+const FACIT_VATSKETRYCK_V2 = {
+  "6.1": byggFacitListaV2([
+    ["1", "Vid den största sughöjden är trycket ovanför vattenpelaren i idealfallet vakuum. Atmosfärstrycket måste då bära hela pelaren.", String.raw`\[p_{\mathrm{atm}}=\rho gh\Rightarrow h=\frac{p_{\mathrm{atm}}}{\rho g}\]`, ""],
+    ["2", "Sätt in normalt lufttryck och vattnets densitet.", String.raw`\[h=\frac{101325}{998\cdot9{,}82}=10{,}34\ \mathrm m\]`, "I verkligheten blir höjden något mindre på grund av bland annat vattnets ångtryck och förluster." ]
+  ], String.raw`Den teoretiska gränsen är cirka \(10{,}3\ \mathrm m\). Det är lufttrycket som pressar upp vattnet; en pump kan inte skapa lägre tryck än vakuum.`),
+  "6.3": byggFacitListaV2([
+    ["a", "Övertrycket bestäms av höjdskillnaden till vattenytan.", String.raw`\[p=\rho gh=998\cdot9{,}82\cdot32=3{,}14\cdot10^5\ \mathrm{Pa}=314\ \mathrm{kPa}\]`, ""],
+    ["b", "Eftersom 1 bar är \(10^5\ \mathrm{Pa}\):", String.raw`\[p=\frac{3{,}14\cdot10^5}{10^5}=3{,}14\ \mathrm{bar}\]`, ""],
+    ["c", "Behållarens form ändrar inte det hydrostatiska trycket.", String.raw`\[p=\rho g h\]`, "Endast densiteten, tyngdaccelerationen och nivåskillnaden ingår." ]
+  ], String.raw`Övertrycket är \(314\ \mathrm{kPa}\approx3{,}1\ \mathrm{bar}\). Tankens form påverkar inte trycket.`),
+  "6.8": byggFacitListaV2([
+    ["a", "Den största höjden fås när hela ledningstrycket har omvandlats till hydrostatiskt tryck.", String.raw`\[h_{\max}=\frac{p}{\rho g}=\frac{3{,}0\cdot10^5}{998\cdot9{,}82}=30{,}6\ \mathrm m\]`, ""],
+    ["b", "På 8,0 m höjd har trycket minskat med \(\rho gh\).", String.raw`\[p_8=3{,}0\cdot10^5-998\cdot9{,}82\cdot8{,}0=2{,}22\cdot10^5\ \mathrm{Pa}\]`, "Det motsvarar cirka 2,2 bar utan hänsyn till strömningsförluster." ]
+  ], String.raw`Vattnet kan teoretiskt stiga \(30{,}6\ \mathrm m\). Ja, trycket räcker till duschen; cirka \(2{,}2\ \mathrm{bar}\) återstår statiskt.`),
+  "6.9": byggFacitListaV2([
+    ["a", "Omvandla millimeter kvicksilver till pascal.", String.raw`\[p=120\cdot133{,}3=15996\ \mathrm{Pa}=16{,}0\ \mathrm{kPa}\]`, ""],
+    ["b", "Trycket minskar när man går uppåt i en vätska.", String.raw`\[\Delta p=\rho gh=1060\cdot9{,}82\cdot0{,}40=4{,}16\ \mathrm{kPa}\]\[p_{\mathrm{hjärna}}=16{,}0-4{,}16=11{,}8\ \mathrm{kPa}\]`, String.raw`Detta är ungefär \(11{,}8\cdot1000/133{,}3=88{,}8\ \mathrm{mmHg}\).`],
+    ["c", "När man reser sig ökar höjdskillnaden snabbt. Innan blodkärl och puls hinner kompensera kan hjärnans blodtryck och blodflöde tillfälligt bli för låga.", "", "Det kan ge yrsel eller svimning." ]
+  ], String.raw`\(120\ \mathrm{mmHg}=16{,}0\ \mathrm{kPa}\), och på hjärnans nivå blir trycket cirka \(11{,}8\ \mathrm{kPa}=89\ \mathrm{mmHg}\).`),
+  "6.10": byggFacitListaV2([
+    ["a", "Den 2,5 m höga blodpelaren ger tryckskillnaden", String.raw`\[\Delta p=\rho gh=1060\cdot9{,}82\cdot2{,}5=2{,}60\cdot10^4\ \mathrm{Pa}\]\[\Delta p=\frac{26023}{133{,}3}=195\ \mathrm{mmHg}\]`, ""],
+    ["b", "Hjärttrycket måste både ge hjärnans önskade tryck och övervinna höjdskillnaden.", String.raw`\[p_{\mathrm{hjärta}}=90+195=285\ \mathrm{mmHg}\]`, ""],
+    ["c", "När huvudet sänks hamnar hjärnan lägre och det hydrostatiska bidraget byter verkan: trycket i huvudet riskerar att bli mycket högt.", "", "Giraffens cirkulationssystem har tryckreglerande anpassningar som skyddar hjärnan." ]
+  ], String.raw`Det extra trycket är cirka \(26{,}0\ \mathrm{kPa}=195\ \mathrm{mmHg}\), så hjärtat behöver ungefär \(285\ \mathrm{mmHg}\).`),
+  "6.26": byggFacitListaV2([
+    ["1", "Vätsketrycket på djupet \(h\) är", String.raw`\[p=\rho gh\]`, ""],
+    ["2", "Sätt in \(h=5{,}0\ \mathrm m\).", String.raw`\[p=998\cdot9{,}82\cdot5{,}0=4{,}90\cdot10^4\ \mathrm{Pa}\]`, "" ]
+  ], String.raw`Vätsketrycket är cirka \(49\ \mathrm{kPa}\).`),
+  "6.30": byggFacitListaV2([
+    ["a", "Vattnets bidrag är", String.raw`\[p_v=998\cdot9{,}82\cdot30=2{,}94\cdot10^5\ \mathrm{Pa}=294\ \mathrm{kPa}\]`, ""],
+    ["b", "Totaltrycket är lufttryck plus vätsketryck.", String.raw`\[p_{\mathrm{tot}}=101+294=395\ \mathrm{kPa}\]`, "" ]
+  ], String.raw`Vätsketrycket är \(294\ \mathrm{kPa}\) och totaltrycket \(395\ \mathrm{kPa}\).`),
+  "6.31": byggFacitListaV2([
+    ["a", "Vid botten är djupet 1,5 m.", String.raw`\[p_{\max}=998\cdot9{,}82\cdot1{,}5=14{,}7\ \mathrm{kPa}\]`, ""],
+    ["b", "Trycket ökar linjärt från noll till \(p_{\max}\), så medeltrycket är hälften.", String.raw`\[p_{\mathrm{med}}=\frac{p_{\max}}2=7{,}35\ \mathrm{kPa}\]`, ""],
+    ["c", "Luckans area är \(A=2{,}0\cdot1{,}5=3{,}0\ \mathrm{m^2}\).", String.raw`\[F=p_{\mathrm{med}}A=7350\cdot3{,}0=2{,}21\cdot10^4\ \mathrm N\]`, "" ]
+  ], String.raw`Bottentrycket är \(14{,}7\ \mathrm{kPa}\), medeltrycket \(7{,}35\ \mathrm{kPa}\) och kraften cirka \(22\ \mathrm{kN}\).`),
+  "6.32": byggFacitListaV2([
+    ["a", "På samma horisontella nivå i vattnet måste trycken vara lika.", String.raw`\[\rho_o gh_o=\rho_v gh_v\Rightarrow h_v=\frac{820}{998}\cdot5{,}0=4{,}11\ \mathrm{cm}\]`, ""],
+    ["b", "Oljan har lägre densitet än vatten.", String.raw`\[\rho_o<\rho_v\Rightarrow h_o>h_v\]`, "Den lättare vätskan behöver en högre pelare för samma tryck." ]
+  ], String.raw`Vattenytan står \(4{,}1\ \mathrm{cm}\) över gränsytan. Vätskorna står olika högt eftersom deras densiteter är olika.`),
+  "6.33": byggFacitListaV2([
+    ["a", "I jämvikt står de fria vattenytorna på samma höjd.", "", ""],
+    ["b", "Om höjderna skilde sig skulle bottenanslutningen ha olika tryck från de två sidorna.", String.raw`\[p_1=p_2\Rightarrow \rho gh_1=\rho gh_2\Rightarrow h_1=h_2\]`, "Vattnet strömmar tills detta villkor är uppfyllt."],
+    ["c", "Form och tvärsnittsarea påverkar volymen som krävs, men inte jämviktshöjden.", "", "" ]
+  ], String.raw`Vattenytorna hamnar lika högt, oberoende av behållarnas form och storlek.`),
+  "6.43": byggFacitListaV2([
+    ["a", "Vätsketrycket på 2,5 m djup är", String.raw`\[p_v=998\cdot9{,}82\cdot2{,}5=24{,}5\ \mathrm{kPa}\]`, ""],
+    ["b", "Lägg till atmosfärstrycket.", String.raw`\[p_{\mathrm{tot}}=24{,}5+101{,}3=125{,}8\ \mathrm{kPa}\]`, "" ]
+  ], String.raw`Vätsketrycket är \(24{,}5\ \mathrm{kPa}\) och totaltrycket cirka \(126\ \mathrm{kPa}\).`),
+  "6.44": byggFacitListaV2([
+    ["a", "Samma bottentryck med en lägre pelare kräver högre densitet. Vattenpelaren är 28 cm och är därför den tätare vätskan.", "", ""],
+    ["b", "Trycken vid mötesytan sätts lika.", String.raw`\[\rho_vgh_v=\rho_xgh_x\Rightarrow \rho_x=998\frac{28}{34}=822\ \mathrm{kg/m^3}\]`, "" ]
+  ], String.raw`Vatten har högst densitet. Den okända vätskans densitet är cirka \(822\ \mathrm{kg/m^3}\).`),
+  "6.52": byggFacitListaV2([
+    ["a", "Rörets radie är 0,0040 m.", String.raw`\[V=\pi r^2h=\pi(0{,}0040)^2\cdot4{,}0=2{,}01\cdot10^{-4}\ \mathrm{m^3}=0{,}201\ \mathrm L\]`, ""],
+    ["b", "Pelaren ger övertrycket", String.raw`\[p=\rho gh=998\cdot9{,}82\cdot4{,}0=39{,}2\ \mathrm{kPa}\]`, ""],
+    ["c", "Trycket verkar över hela lockets area.", String.raw`\[F=pA=39162\cdot0{,}28=1{,}10\cdot10^4\ \mathrm N\]`, ""],
+    ["d", "Det hydrostatiska trycket bestäms av pelarens höjd, inte av dess volym. Det stora locket omvandlar därför trycket till en stor kraft.", "", "Detta är den hydrostatiska paradoxen, ofta visad med Pascals tunna." ]
+  ], String.raw`Röret rymmer bara \(0{,}20\ \mathrm L\), men ger \(39\ \mathrm{kPa}\) och därmed ungefär \(11\ \mathrm{kN}\) mot locket.`),
+  "6.61": byggFacitListaV2([
+    ["a", "För 3,5 m vatten:", String.raw`\[p=998\cdot9{,}82\cdot3{,}5=34{,}3\ \mathrm{kPa}\]`, ""],
+    ["b", "För 5,0 m vatten:", String.raw`\[p=998\cdot9{,}82\cdot5{,}0=49{,}0\ \mathrm{kPa}\]`, ""],
+    ["c", "Byt densiteten till olivoljans.", String.raw`\[p=916\cdot9{,}82\cdot3{,}5=31{,}5\ \mathrm{kPa}\]`, "" ]
+  ], String.raw`Trycken blir \(34\ \mathrm{kPa}\), \(49\ \mathrm{kPa}\) respektive \(31\ \mathrm{kPa}\).`),
+  "6.62": byggFacitListaV2([
+    ["1", "Klockans angivna vätsketryck sätts lika med \(\rho gh\).", String.raw`\[h=\frac{p}{\rho g}\]`, ""],
+    ["2", "Sätt in \(p=700\ \mathrm{kPa}\).", String.raw`\[h=\frac{700000}{998\cdot9{,}82}=71{,}4\ \mathrm m\]`, "" ]
+  ], String.raw`Enligt uppgiften motsvarar trycket ett djup på cirka \(71\ \mathrm m\).`),
+  "6.63": byggFacitListaV2([
+    ["a", "Vattnets tryckbidrag är 34,3 kPa.", String.raw`\[p_{\mathrm{tot}}=101{,}3+998\cdot9{,}82\cdot3{,}5/1000=135{,}6\ \mathrm{kPa}\]`, ""],
+    ["b", "Dubbelt totaltryck kräver att vätsketrycket är ett atmosfärstryck.", String.raw`\[p_{\mathrm{atm}}+\rho gh=2p_{\mathrm{atm}}\Rightarrow h=\frac{101300}{998\cdot9{,}82}=10{,}34\ \mathrm m\]`, "" ]
+  ], String.raw`Totaltrycket vid botten är cirka \(136\ \mathrm{kPa}\). Det fördubblas på ungefär \(10{,}3\ \mathrm m\) djup.`),
+  "6.64": byggFacitListaV2([
+    ["a", "En styv, tät låda som stängdes vid ytan behåller lufttrycket från ytan.", String.raw`\[p_{\mathrm{in}}=101{,}3\ \mathrm{kPa}\]`, ""],
+    ["b", "Utanför tillkommer vattnets tryck.", String.raw`\[p_{\mathrm{ut}}=101{,}3+\frac{998\cdot9{,}82\cdot6{,}0}{1000}=160{,}1\ \mathrm{kPa}\]`, ""],
+    ["c", "Nettokraften bestäms av tryckskillnaden. För en lodrät sida vars mitt ligger på 6,0 m djup är medeltryckskillnaden \(58{,}8\ \mathrm{kPa}\).", String.raw`\[A=0{,}50^2=0{,}25\ \mathrm{m^2}\]\[F_{\mathrm{net}}=(p_{\mathrm{ut}}-p_{\mathrm{in}})A=58800\cdot0{,}25=14{,}7\ \mathrm{kN}\]`, "" ]
+  ], String.raw`Lufttrycket inne är \(101{,}3\ \mathrm{kPa}\), totaltrycket ute cirka \(160\ \mathrm{kPa}\), och nettokraften mot en sida cirka \(15\ \mathrm{kN}\).`),
+  "6.65": byggFacitListaV2([
+    ["a", "Enligt Pascals princip överförs en pålagd tryckökning oförminskad genom den instängda vätskan. Den verkar därför också uppåt på den stora kolven.", "", ""],
+    ["b", "Den lilla kolvens area är \(A_1=\pi r_1^2\).", String.raw`\[p=\frac{F_1}{A_1}=\frac{100}{\pi(0{,}015)^2}=1{,}41\cdot10^5\ \mathrm{Pa}\]`, ""],
+    ["c", "Samma tryck verkar på den stora kolven.", String.raw`\[F_2=p\pi r_2^2=1{,}4147\cdot10^5\pi(0{,}050)^2=1{,}11\cdot10^3\ \mathrm N\]`, "" ]
+  ], String.raw`Tryckökningen är \(141\ \mathrm{kPa}\), vilket ger kraften \(1{,}11\ \mathrm{kN}\) på den stora kolven.`),
+  "6.66": byggFacitListaV2([
+    ["1", "Trycket är lika i båda cylindrarna.", String.raw`\[\frac{F_1}{A_1}=\frac{F_2}{A_2}\]`, "Tyngdaccelerationen förkortas bort eftersom båda krafterna är tyngdkrafter."],
+    ["2", "Arean är proportionell mot radien i kvadrat.", String.raw`\[\frac{\pi R^2}{\pi r^2}=\frac{900}{70}\Rightarrow R=r\sqrt{\frac{900}{70}}\]\[R=1{,}0\sqrt{12{,}857}=3{,}59\ \mathrm{cm}\]`, "" ]
+  ], String.raw`Den stora cylinderns radie behöver vara cirka \(3{,}6\ \mathrm{cm}\).`),
+  "6.67": byggFacitListaV2([
+    ["1", "Trycken vid vätskornas mötesyta är lika.", String.raw`\[\rho_xgh_x=\rho_vgh_v\]`, ""],
+    ["2", "Lös ut den okända densiteten.", String.raw`\[\rho_x=998\frac{7{,}5}{9{,}0}=832\ \mathrm{kg/m^3}\]`, "Den högre pelaren får lägre densitet, vilket stämmer med resultatet." ]
+  ], String.raw`Den okända vätskans densitet är cirka \(832\ \mathrm{kg/m^3}\).`),
+  "6.68": byggFacitListaV2([
+    ["1", "Låt \(h_v\) vara vattenpelaren och \(h_t\) pelaren med densiteten \(1{,}25\ \mathrm{g/cm^3}\).", String.raw`\[1{,}00h_v=1{,}25h_t,\qquad h_v+h_t=24\]`, ""],
+    ["2", "Sätt \(h_v=1{,}25h_t\) i summan.", String.raw`\[2{,}25h_t=24\Rightarrow h_t=10{,}7\ \mathrm{cm}\]\[h_v=24-10{,}7=13{,}3\ \mathrm{cm}\]`, "" ]
+  ], String.raw`Den tyngre vätskans höjd är \(10{,}7\ \mathrm{cm}\) och vattenpelarens \(13{,}3\ \mathrm{cm}\).`),
+  "6.69": byggFacitListaV2([
+    ["a", "Cirkelns radie är 0,60 m och luftpelarens tyngd ger tryckkraften \(pA\).", String.raw`\[A=\pi(0{,}60)^2=1{,}131\ \mathrm{m^2}\]\[m=\frac{pA}{g}=\frac{101300\cdot1{,}131}{9{,}82}=1{,}17\cdot10^4\ \mathrm{kg}\]`, ""],
+    ["b", "Marken belastas faktiskt av atmosfärstrycket, men fasta material kan bära sådana tryck genom inre spänningar och deformeras därför bara mycket lite. Samma lufttryck verkar dessutom på föremål från alla riktningar.", "", "" ]
+  ], String.raw`Luftpelarens massa är cirka \(1{,}2\cdot10^4\ \mathrm{kg}\), ungefär 12 ton. Marken bär lasten med sina inre mekaniska spänningar.`),
+  "6.70": byggFacitListaV2([
+    ["a", "Flaskan försluts vid ungefär 70 kPa. Vid havsnivån är yttertrycket cirka 101 kPa, alltså större än innertrycket.", String.raw`\[\Delta p\approx101-70=31\ \mathrm{kPa}\]`, "Flaskan trycks ihop tills tryck och plastens elastiska krafter ger jämvikt."],
+    ["b", "På berget minskar yttertrycket igen. Den instängda luften kan då expandera och pressa flaskan utåt.", "", "Den återtar helt eller delvis sin form om plasten inte har fått en bestående deformation." ]
+  ], String.raw`Flaskan trycks ihop vid havsnivån och expanderar igen när den tas tillbaka till berget.`),
+  "6.101": byggFacitListaV2([
+    ["a", "Bottentrycket bestäms av vattendjupet.", String.raw`\[p=998\cdot9{,}82\cdot0{,}60=5{,}88\ \mathrm{kPa}\]`, ""],
+    ["b", "Bottenarean är", String.raw`\[A=0{,}80\cdot0{,}35=0{,}280\ \mathrm{m^2}\]`, ""],
+    ["c", "Vattnets tryckkraft blir", String.raw`\[F=pA=5880\cdot0{,}280=1{,}65\cdot10^3\ \mathrm N\]`, "" ]
+  ], String.raw`\(p=5{,}88\ \mathrm{kPa}\), \(A=0{,}280\ \mathrm{m^2}\) och \(F\approx1{,}65\ \mathrm{kN}\).`),
+  "6.102": byggFacitListaV2([
+    ["a", "Sätt vätsketrycket lika med ett atmosfärstryck.", String.raw`\[\rho gh=p_{\mathrm{atm}}\Rightarrow h=\frac{101300}{998\cdot9{,}82}=10{,}34\ \mathrm m\]`, ""],
+    ["b", "Totaltrycket är summan av de två lika stora bidragen.", String.raw`\[p_{\mathrm{tot}}=101{,}3+101{,}3=202{,}6\ \mathrm{kPa}\]`, "" ]
+  ], String.raw`Djupet är cirka \(10{,}3\ \mathrm m\), och totaltrycket där är cirka \(203\ \mathrm{kPa}\).`),
+  "6.103": byggFacitListaV2([
+    ["a", "Använd \(p=\rho gh\) med \(h=2{,}0\ \mathrm m\).", String.raw`\[p_{\mathrm{etanol}}=789\cdot9{,}82\cdot2{,}0=15{,}5\ \mathrm{kPa}\]\[p_{\mathrm{olja}}=920\cdot9{,}82\cdot2{,}0=18{,}1\ \mathrm{kPa}\]\[p_{\mathrm{vatten}}=998\cdot9{,}82\cdot2{,}0=19{,}6\ \mathrm{kPa}\]\[p_{\mathrm{Hg}}=13600\cdot9{,}82\cdot2{,}0=267\ \mathrm{kPa}\]`, ""],
+    ["b", "När \(g\) och djupet är samma är trycket direkt proportionellt mot densiteten.", String.raw`\[p\propto\rho\]`, "" ]
+  ], String.raw`Trycken är \(15{,}5\), \(18{,}1\), \(19{,}6\) och \(267\ \mathrm{kPa}\). På samma djup avgör densiteten skillnaden.`),
+  "6.104": byggFacitListaV2([
+    ["a", "Vätsketrycket på 15 m djup är", String.raw`\[p_v=998\cdot9{,}82\cdot15=147\ \mathrm{kPa}\]`, ""],
+    ["b", "Totaltrycket inkluderar lufttrycket.", String.raw`\[p_{\mathrm{tot}}=147+101=248\ \mathrm{kPa}\]`, ""],
+    ["c", "Jämför med normalt lufttryck.", String.raw`\[\frac{248}{101}=2{,}46\]`, "" ]
+  ], String.raw`Vätsketrycket är \(147\ \mathrm{kPa}\), totaltrycket \(248\ \mathrm{kPa}\), alltså cirka \(2{,}5\) atmosfärstryck.`),
+  "6.105": byggFacitListaV2([
+    ["a", "Fönstrets mittdjup ger medeltrycket över den symmetriska ytan.", String.raw`\[p=998\cdot9{,}82\cdot3{,}0=29{,}4\ \mathrm{kPa}\]`, ""],
+    ["b", "Radien är 0,20 m.", String.raw`\[A=\pi r^2=\pi(0{,}20)^2=0{,}1257\ \mathrm{m^2}\]`, ""],
+    ["c", "Nettokraften från vattnets övertryck blir", String.raw`\[F=pA=29401\cdot0{,}1257=3{,}70\cdot10^3\ \mathrm N\]`, "" ]
+  ], String.raw`Trycket är \(29{,}4\ \mathrm{kPa}\), arean \(0{,}126\ \mathrm{m^2}\) och kraften cirka \(3{,}70\ \mathrm{kN}\).`),
+  "6.106": byggFacitListaV2([
+    ["1", "Den verksamma nivåskillnaden är", String.raw`\[h=28-9{,}0=19\ \mathrm m\]`, ""],
+    ["2", "Kranens statiska övertryck blir", String.raw`\[p=998\cdot9{,}82\cdot19=1{,}86\cdot10^5\ \mathrm{Pa}=1{,}86\ \mathrm{bar}\]`, "Rörens form och längd påverkar inte det statiska trycket, men strömning kan ge ytterligare tryckförluster." ]
+  ], String.raw`Övertrycket i kranen är cirka \(186\ \mathrm{kPa}=1{,}9\ \mathrm{bar}\).`),
+  "6.107": byggFacitListaV2([
+    ["1", "Nivåskillnaden är \(h=18\ \mathrm{mm}=0{,}018\ \mathrm m\).", String.raw`\[\Delta p=\rho gh\]`, ""],
+    ["2", "Sätt in kvicksilvrets densitet.", String.raw`\[\Delta p=13600\cdot9{,}82\cdot0{,}018=2{,}40\cdot10^3\ \mathrm{Pa}\]`, "Kvicksilvret står högre på den öppna sidan, vilket visar att gastrycket är högre än lufttrycket." ]
+  ], String.raw`Gasens övertryck är cirka \(2{,}4\ \mathrm{kPa}\).`),
+  "6.108": byggFacitListaV2([
+    ["1", "Vid ideal maximal sughöjd gäller", String.raw`\[h=\frac{p_{\mathrm{atm}}}{\rho g}\]`, ""],
+    ["2", "För etanol och vatten fås", String.raw`\[h_e=\frac{101300}{789\cdot9{,}82}=13{,}08\ \mathrm m\]\[h_v=\frac{101300}{998\cdot9{,}82}=10{,}34\ \mathrm m\]`, ""],
+    ["3", "Skillnaden är", String.raw`\[\Delta h=13{,}08-10{,}34=2{,}74\ \mathrm m\]`, "Den lägre densiteten gör att en högre etanolpelare behövs för samma tryck." ]
+  ], String.raw`Etanol kan teoretiskt sugas cirka \(13{,}1\ \mathrm m\), vilket är \(2{,}7\ \mathrm m\) högre än vatten.`),
+  "6.109": byggFacitListaV2([
+    ["a", "Trycket vid botten är", String.raw`\[p_{\max}=998\cdot9{,}82\cdot2{,}5=24{,}5\ \mathrm{kPa}\]`, ""],
+    ["b", "Den linjära tryckprofilens medelvärde är halva bottentrycket. Väggarean är \(25\cdot2{,}5=62{,}5\ \mathrm{m^2}\).", String.raw`\[p_{\mathrm{med}}=12{,}25\ \mathrm{kPa}\]\[F=p_{\mathrm{med}}A=12250\cdot62{,}5=7{,}66\cdot10^5\ \mathrm N\]`, ""],
+    ["c", "Resultanten går genom den triangulära tryckfördelningens tyngdpunkt.", String.raw`\[y=\frac{2h}{3}=\frac{2\cdot2{,}5}{3}=1{,}67\ \mathrm m\]`, "Detta är djupet under vattenytan, eller 0,83 m över botten." ]
+  ], String.raw`Bottentrycket är \(24{,}5\ \mathrm{kPa}\), medeltrycket \(12{,}3\ \mathrm{kPa}\), kraften \(766\ \mathrm{kN}\), och angreppsdjupet \(1{,}67\ \mathrm m\).`),
+  "6.110": byggFacitListaV2([
+    ["a", "Vid gränsytan bidrar endast oljelagret.", String.raw`\[p_g=920\cdot9{,}82\cdot0{,}20=1{,}81\ \mathrm{kPa}\]`, ""],
+    ["b", "Vid botten adderas bidraget från 0,30 m vatten.", String.raw`\[p_b=1807+998\cdot9{,}82\cdot0{,}30=4747\ \mathrm{Pa}=4{,}75\ \mathrm{kPa}\]`, ""],
+    ["c", "Ekvivalent vattendjup fås ur \(p_b=\rho_vgh\).", String.raw`\[h=\frac{4747}{998\cdot9{,}82}=0{,}485\ \mathrm m\]`, "" ]
+  ], String.raw`Övertrycket är \(1{,}81\ \mathrm{kPa}\) vid gränsen och \(4{,}75\ \mathrm{kPa}\) vid botten, motsvarande \(0{,}485\ \mathrm m\) rent vatten.`),
+  "6.133": byggFacitListaV2([
+    ["a", "Vätsketrycket på 4,5 m djup är", String.raw`\[p_v=998\cdot9{,}82\cdot4{,}5=44{,}1\ \mathrm{kPa}\]`, ""],
+    ["b", "Lägg till lufttrycket vid ytan.", String.raw`\[p_{\mathrm{tot}}=44{,}1+101=145{,}1\ \mathrm{kPa}\]`, ""],
+    ["c", "Jämför totaltrycket med normalt lufttryck.", String.raw`\[\frac{145{,}1}{101}=1{,}44\]`, "" ]
+  ], String.raw`Vätsketrycket är \(44{,}1\ \mathrm{kPa}\), totaltrycket \(145\ \mathrm{kPa}\), alltså cirka \(1{,}44\) atmosfärstryck.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_VATSKETRYCK_V2[uppgift.id]) uppgift.s = FACIT_VATSKETRYCK_V2[uppgift.id];
+}
+
+const FACIT_TRYCK_V2 = {
+  "6.2": byggFacitListaV2([
+    ["1", "Trycket är tyngdkraft delad med kontaktyta. Klackens area är \(1{,}0\ \mathrm{cm^2}=1{,}0\cdot10^{-4}\ \mathrm{m^2}\).", String.raw`\[p_k=\frac{55\cdot9{,}82}{1{,}0\cdot10^{-4}}=5{,}40\ \mathrm{MPa}\]`, ""],
+    ["2", "Elefantens sammanlagda fotyta är \(800\ \mathrm{cm^2}=0{,}0800\ \mathrm{m^2}\).", String.raw`\[p_e=\frac{4000\cdot9{,}82}{0{,}0800}=491\ \mathrm{kPa}\]`, ""],
+    ["3", "Jämför trycken.", String.raw`\[\frac{p_k}{p_e}=\frac{5{,}40\cdot10^6}{4{,}91\cdot10^5}=11{,}0\]`, "" ]
+  ], String.raw`Stilettklacken ger cirka \(5{,}4\ \mathrm{MPa}\), ungefär 11 gånger elefantens \(491\ \mathrm{kPa}\).`),
+  "6.7": byggFacitListaV2([
+    ["a", "I idealfallet är trycket under sugproppen noll. Tryckskillnaden blir då hela lufttrycket.", String.raw`\[A=\pi(0{,}040)^2=5{,}03\cdot10^{-3}\ \mathrm{m^2}\]\[F=\Delta pA=101000\cdot5{,}03\cdot10^{-3}=508\ \mathrm N\]`, ""],
+    ["b", "Det är atmosfärstrycket på utsidan som pressar proppen mot väggen. På insidan saknas nästan helt ett mottryck.", "", "Verklig lossningskraft blir mindre på grund av kvarvarande luft, läckage och deformation." ]
+  ], String.raw`Den idealiska lossningskraften är cirka \(509\ \mathrm N\). Proppen hålls fast av tryckskillnaden mot atmosfären.`),
+  "6.11": byggFacitListaV2([
+    ["a", "Pedalens hävarm fyrdubblar kraften till huvudcylindern.", String.raw`\[F_h=4\cdot200=800\ \mathrm N\]\[p=\frac{F_h}{A_h}=\frac{800}{2{,}0\cdot10^{-4}}=4{,}0\cdot10^6\ \mathrm{Pa}\]`, ""],
+    ["b", "Trycket överförs till varje bromskolv enligt Pascals princip.", String.raw`\[F_b=pA_b=4{,}0\cdot10^6\cdot12\cdot10^{-4}=4{,}8\cdot10^3\ \mathrm N\]`, ""],
+    ["c", "Bromsvätskan är nästan inkompressibel, medan en luftbubbla komprimeras. En del av pedalrörelsen skulle då gå åt till att pressa ihop gasen.", "", "Pedalen känns svampig och bromskraften byggs upp sämre." ]
+  ], String.raw`Trycket blir \(4{,}0\ \mathrm{MPa}\) och kraften \(4{,}8\ \mathrm{kN}\) per bromsok. Luftbubblor måste undvikas eftersom gas kan komprimeras.`),
+  "6.23": byggFacitListaV2([
+    ["a", "Personens tyngdkraft är \(F=70\cdot9{,}82=687\ \mathrm N\).", String.raw`\[p_{\mathrm{skor}}=\frac{687}{0{,}040}=17{,}2\ \mathrm{kPa}\]`, ""],
+    ["b", "Med skidor fördelas samma kraft över 0,30 m².", String.raw`\[p_{\mathrm{skidor}}=\frac{687}{0{,}30}=2{,}29\ \mathrm{kPa}\]`, ""],
+    ["c", "Den större arean sänker trycket så att snön lättare kan bära personen utan att ge vika.", "", "" ]
+  ], String.raw`Trycket är \(17\ \mathrm{kPa}\) med skor och \(2{,}3\ \mathrm{kPa}\) med skidor.`),
+  "6.24": byggFacitListaV2([
+    ["a", "Två cirkulära sugar ger den sammanlagda arean", String.raw`\[A=2\pi(0{,}060)^2=2{,}262\cdot10^{-2}\ \mathrm{m^2}\]\[F_{\max}=pA=101000\cdot2{,}262\cdot10^{-2}=2{,}285\cdot10^3\ \mathrm N\]`, ""],
+    ["b", "Den motsvarande massan är", String.raw`\[m=\frac{F}{g}=\frac{2285}{9{,}82}=233\ \mathrm{kg}\]`, ""],
+    ["c", "Beräkningen antar perfekt vakuum, helt täta och jämnt belastade sugar. Smuts, läckage, rörelser och ett enskilt fel kräver stor säkerhetsmarginal.", "", "" ]
+  ], String.raw`Sugarna kan idealiskt bära cirka \(2{,}3\ \mathrm{kN}\), motsvarande \(233\ \mathrm{kg}\).`),
+  "6.25": byggFacitListaV2([
+    ["a", "Anta jämn lastfördelning. Ett däck bär en fjärdedel av bilens tyngd.", String.raw`\[F_d=\frac{1400\cdot9{,}82}{4}=3437\ \mathrm N\]\[A=\frac{F_d}{p}=\frac{3437}{2{,}2\cdot10^5}=1{,}56\cdot10^{-2}\ \mathrm{m^2}=156\ \mathrm{cm^2}\]`, "Däcktrycket används som övertryck i denna approximation."],
+    ["b", "Om däcktrycket höjs behöver samma last en mindre kontaktyta, eftersom \(A=F/p\).", "", ""],
+    ["c", "För lågt tryck ger större deformation varje varv. Hysteres i gummit utvecklar värme och kan skada däcket vid hög fart.", "", "" ]
+  ], String.raw`Kontaktytan är ungefär \(156\ \mathrm{cm^2}\) per däck. Högre tryck minskar arean; för lågt tryck ökar värmeutvecklingen.`),
+  "6.27": byggFacitListaV2([
+    ["1", "Den sammanlagda arean är", String.raw`\[A=4\cdot3{,}0\ \mathrm{cm^2}=12\ \mathrm{cm^2}=1{,}2\cdot10^{-3}\ \mathrm{m^2}\]`, ""],
+    ["2", "Bordets tyngd fördelas över benen.", String.raw`\[p=\frac{mg}{A}=\frac{18\cdot9{,}82}{1{,}2\cdot10^{-3}}=1{,}47\cdot10^5\ \mathrm{Pa}\]`, "" ]
+  ], String.raw`Bordet ger trycket cirka \(147\ \mathrm{kPa}\).`),
+  "6.28": byggFacitListaV2([
+    ["a", "Sängens golvyta är \(2{,}0\cdot1{,}6=3{,}2\ \mathrm{m^2}\).", String.raw`\[p_s=\frac{400\cdot9{,}82}{3{,}2}=1{,}23\ \mathrm{kPa}\]`, ""],
+    ["b", "Personens tryck är", String.raw`\[p_p=\frac{70\cdot9{,}82}{0{,}040}=17{,}2\ \mathrm{kPa}\]\[\frac{p_p}{p_s}=14{,}0\]`, ""],
+    ["c", "Trots lågt lokalt tryck är den permanenta totalbelastningen stor. Bjälklagets bärförmåga och lastfördelning måste därför kontrolleras.", "", "" ]
+  ], String.raw`Sängen ger cirka \(1{,}2\ \mathrm{kPa}\); personen ger \(17\ \mathrm{kPa}\), omkring 14 gånger mer lokalt.`),
+  "6.29": byggFacitListaV2([
+    ["a", "Anta att vikten fördelas jämnt över alla 2000 spikar.", String.raw`\[A=2000\cdot1{,}0\cdot10^{-6}=2{,}0\cdot10^{-3}\ \mathrm{m^2}\]\[p=\frac{70\cdot9{,}82}{A}=3{,}44\cdot10^5\ \mathrm{Pa}\]`, ""],
+    ["b", "På en enda spik blir arean 2000 gånger mindre.", String.raw`\[p_1=\frac{687}{1{,}0\cdot10^{-6}}=6{,}87\cdot10^8\ \mathrm{Pa}=687\ \mathrm{MPa}\]`, ""],
+    ["c", "Många spikar fördelar lasten och håller trycket per spets mycket lägre. En ensam spets koncentrerar hela kraften och kan tränga igenom huden.", "", "" ]
+  ], String.raw`Trycket blir cirka \(344\ \mathrm{kPa}\) över 2000 spikar men \(687\ \mathrm{MPa}\) på en enda.`),
+  "6.42": byggFacitListaV2([
+    ["a", "Varje sugkopps radie är 0,050 m.", String.raw`\[A=\pi(0{,}050)^2=7{,}854\cdot10^{-3}\ \mathrm{m^2}\]\[F=pA=101000\cdot7{,}854\cdot10^{-3}=793\ \mathrm N\]`, ""],
+    ["b", "Två koppar ger idealiskt 1587 N, medan skivans tyngd är \(40\cdot9{,}82=393\ \mathrm N\).", String.raw`\[\frac{2F}{mg}=\frac{1587}{393}=4{,}04\]`, ""],
+    ["c", "Damm skapar läckvägar. När luft kommer in ökar trycket under koppen och den hållande tryckskillnaden minskar.", "", "" ]
+  ], String.raw`Varje kopp kan idealiskt bära cirka \(794\ \mathrm N\); tillsammans är det ungefär fyra gånger skivans tyngd.`),
+  "6.47": byggFacitListaV2([
+    ["a", "Lådan är stilla, så normalkraften balanserar tyngden.", String.raw`\[N=mg=25\cdot9{,}82=245{,}5\ \mathrm N\]`, ""],
+    ["b", "Trycket mot golvet är", String.raw`\[p=\frac{N}{A}=\frac{245{,}5}{0{,}25}=982\ \mathrm{Pa}\]`, ""],
+    ["c", "När arean halveras men kraften är oförändrad fördubblas trycket.", String.raw`\[p'=\frac{N}{A/2}=2p=1964\ \mathrm{Pa}\]`, "" ]
+  ], String.raw`Normalkraften är \(246\ \mathrm N\), trycket \(982\ \mathrm{Pa}\), och på högkant blir det \(1{,}96\ \mathrm{kPa}\).`),
+  "6.48": byggFacitListaV2([
+    ["1", "Omvandla arean.", String.raw`\[1{,}80\ \mathrm{cm^2}=1{,}80\cdot10^{-4}\ \mathrm{m^2}\]`, ""],
+    ["2", "Använd \(p=F/A\).", String.raw`\[p=\frac{22}{1{,}80\cdot10^{-4}}=1{,}22\cdot10^5\ \mathrm{Pa}\]`, "" ]
+  ], String.raw`Trycket blir cirka \(122\ \mathrm{kPa}\).`),
+  "6.51": byggFacitListaV2([
+    ["a", "Pumpkolvens radie är 0,010 m.", String.raw`\[A_1=\pi(0{,}010)^2=3{,}142\cdot10^{-4}\ \mathrm{m^2}\]\[p=\frac{250}{A_1}=7{,}96\cdot10^5\ \mathrm{Pa}\]`, ""],
+    ["b", "Lyftkolvens radie är 0,045 m.", String.raw`\[A_2=\pi(0{,}045)^2=6{,}362\cdot10^{-3}\ \mathrm{m^2}\]\[F_2=pA_2=5{,}06\cdot10^3\ \mathrm N\]`, ""],
+    ["c", "Bevara den undanträngda oljevolymen.", String.raw`\[A_1s_1=A_2s_2\Rightarrow s_2=25\left(\frac{20}{90}\right)^2=1{,}23\ \mathrm{mm}\]`, ""],
+    ["d", "I en ideal domkraft bevaras arbetet.", String.raw`\[W_1=250\cdot0{,}025=6{,}25\ \mathrm J\]\[W_2=5062\cdot0{,}001235=6{,}25\ \mathrm J\]`, "Kraftvinsten betalas med en motsvarande kortare lyftsträcka." ]
+  ], String.raw`Trycket är \(796\ \mathrm{kPa}\), lyftkraften \(5{,}06\ \mathrm{kN}\), lyfthöjden \(1{,}23\ \mathrm{mm}\), och arbetet \(6{,}25\ \mathrm J\) på båda sidor.`),
+  "6.55": byggFacitListaV2([
+    ["1", "Kubens tyngd och bottenarea är", String.raw`\[F=9{,}2\cdot9{,}82=90{,}3\ \mathrm N,\qquad A=0{,}25^2=0{,}0625\ \mathrm{m^2}\]`, ""],
+    ["2", "Trycket blir", String.raw`\[p=\frac{90{,}3}{0{,}0625}=1445\ \mathrm{Pa}\]`, "" ]
+  ], String.raw`Kuben påverkar golvet med cirka \(1{,}4\ \mathrm{kPa}\).`),
+  "6.56": byggFacitListaV2([
+    ["a", "Bottenarean är \((0{,}10)^2=0{,}010\ \mathrm{m^2}\).", String.raw`\[F=pA=2400\cdot0{,}010=24\ \mathrm N\]`, ""],
+    ["b", "Kraften är lådans tyngd.", String.raw`\[m=\frac{F}{g}=\frac{24}{9{,}82}=2{,}44\ \mathrm{kg}\]`, "" ]
+  ], String.raw`Kraften är \(24\ \mathrm N\) och massan cirka \(2{,}4\ \mathrm{kg}\).`),
+  "6.57": byggFacitListaV2([
+    ["a", "Tryckkraften är kubens tyngd.", String.raw`\[A=\frac{mg}{p}=\frac{6{,}0\cdot9{,}82}{5800}=1{,}016\cdot10^{-2}\ \mathrm{m^2}\]`, ""],
+    ["b", "Sidlängden är \(a=\sqrt A=0{,}1008\ \mathrm m\), så volymen är \(a^3\).", String.raw`\[\rho=\frac{m}{a^3}=\frac{6{,}0}{(0{,}1008)^3}=5{,}86\cdot10^3\ \mathrm{kg/m^3}\]`, "" ]
+  ], String.raw`Sidarean är cirka \(0{,}0102\ \mathrm{m^2}=1{,}02\ \mathrm{dm^2}\), och densiteten \(5{,}9\cdot10^3\ \mathrm{kg/m^3}\).`),
+  "6.58": byggFacitListaV2([
+    ["1", "Blockets tyngd är", String.raw`\[F=18\cdot9{,}82=176{,}8\ \mathrm N\]`, ""],
+    ["2", "För ytan \(20\times30\ \mathrm{cm}\):", String.raw`\[A=0{,}060\ \mathrm{m^2},\qquad p=\frac{176{,}8}{0{,}060}=2{,}95\ \mathrm{kPa}\]`, ""],
+    ["3", "För ytorna \(20\times50\) och \(30\times50\ \mathrm{cm}\):", String.raw`\[p_{0{,}10}=1{,}77\ \mathrm{kPa},\qquad p_{0{,}15}=1{,}18\ \mathrm{kPa}\]`, ""],
+    ["4", "När kraften är konstant gäller", String.raw`\[p=\frac FA\Rightarrow p\propto\frac1A\]`, "" ]
+  ], String.raw`Trycken är \(2{,}9\), \(1{,}8\) och \(1{,}2\ \mathrm{kPa}\). Trycket är omvänt proportionellt mot anliggningsarean.`),
+  "6.59": byggFacitListaV2([
+    ["a", "Eftersom \(1\ \mathrm{bar}=10^5\ \mathrm{Pa}\) och \(1\ \mathrm{mbar}=10^{-3}\ \mathrm{bar}\):", String.raw`\[1\ \mathrm{mbar}=10^2\ \mathrm{Pa}=100\ \mathrm{Pa}\]`, ""],
+    ["b", "Omvandla megapascal till bar.", String.raw`\[45\ \mathrm{MPa}=45\cdot10^6\ \mathrm{Pa}=450\ \mathrm{bar}\]`, "" ]
+  ], String.raw`\(1\ \mathrm{mbar}=100\ \mathrm{Pa}\) och \(45\ \mathrm{MPa}=450\ \mathrm{bar}\).`),
+  "6.60": byggFacitListaV2([
+    ["a", "Trycket från halva pappret är lika stort som från hela pappret.", "", ""],
+    ["b", "När pappret delas halveras både massan och kontaktytan.", String.raw`\[p'=\frac{(F/2)}{(A/2)}=\frac FA=p\]`, "Detta förutsätter samma material och tjocklek samt att pappret ligger plant." ]
+  ], String.raw`Trycket är oförändrat eftersom kraft och area minskar i samma proportion.`),
+  "6.91": byggFacitListaV2([
+    ["a", "Tyngdkraften är", String.raw`\[F=mg=4500\cdot9{,}82=4{,}419\cdot10^4\ \mathrm N=44{,}2\ \mathrm{kN}\]`, ""],
+    ["b", "Fyra fötter ger", String.raw`\[A=4\cdot0{,}12=0{,}48\ \mathrm{m^2}\]`, ""],
+    ["c", "Marktrycket blir", String.raw`\[p=\frac{F}{A}=\frac{44190}{0{,}48}=92{,}1\ \mathrm{kPa}\]`, "" ]
+  ], String.raw`Tyngdkraften är \(44{,}2\ \mathrm{kN}\), arean \(0{,}48\ \mathrm{m^2}\), och trycket cirka \(92\ \mathrm{kPa}\).`),
+  "6.92": byggFacitListaV2([
+    ["1", "Använd \(1\ \mathrm{kPa}=10^3\ \mathrm{Pa}\) och \(1\ \mathrm{bar}=100\ \mathrm{kPa}\).", "", ""],
+    ["2", "Första och andra raden:", String.raw`\[250\ \mathrm{kPa}=2{,}50\cdot10^5\ \mathrm{Pa}=2{,}5\ \mathrm{bar}\]\[3{,}0\ \mathrm{bar}=300\ \mathrm{kPa}=3{,}0\cdot10^5\ \mathrm{Pa}\]`, ""],
+    ["3", "Tredje och fjärde raden:", String.raw`\[101300\ \mathrm{Pa}=101{,}3\ \mathrm{kPa}=1{,}013\ \mathrm{bar}\]\[50\ \mathrm{kPa}=5{,}0\cdot10^4\ \mathrm{Pa}=0{,}50\ \mathrm{bar}\]`, "" ]
+  ], String.raw`De saknade värdena är \(2{,}50\cdot10^5\ \mathrm{Pa}\), \(2{,}5\ \mathrm{bar}\), \(300\ \mathrm{kPa}\), \(3{,}0\cdot10^5\ \mathrm{Pa}\), \(101{,}3\ \mathrm{kPa}\), \(1{,}013\ \mathrm{bar}\), \(5{,}0\cdot10^4\ \mathrm{Pa}\) och \(0{,}50\ \mathrm{bar}\).`),
+  "6.93": byggFacitListaV2([
+    ["a", "Omvandla kilopascal till pascal.", String.raw`\[20\ \mathrm{kPa}=2{,}0\cdot10^4\ \mathrm{Pa}\]`, ""],
+    ["b", "Övertrycket ger nettokraften på locket.", String.raw`\[F=pA=20000\cdot0{,}020=400\ \mathrm N\]`, ""],
+    ["c", "Motsvarande massa är", String.raw`\[m=\frac Fg=\frac{400}{9{,}82}=40{,}7\ \mathrm{kg}\]`, "" ]
+  ], String.raw`Trycket är \(20000\ \mathrm{Pa}\), kraften \(400\ \mathrm N\), motsvarande ungefär \(41\ \mathrm{kg}\).`),
+  "6.94": byggFacitListaV2([
+    ["a", "Personens tyngdkraft är", String.raw`\[F=65\cdot9{,}82=638\ \mathrm N\]`, ""],
+    ["b", "För att inte överstiga \(2{,}0\ \mathrm{kPa}\) krävs minst", String.raw`\[A_{\mathrm{tot}}=\frac Fp=\frac{638}{2000}=0{,}319\ \mathrm{m^2}\]`, ""],
+    ["c", "Två lika stora skidor delar arean.", String.raw`\[A_{\mathrm{skida}}=\frac{0{,}319}{2}=0{,}160\ \mathrm{m^2}\]`, "" ]
+  ], String.raw`Tyngdkraften är \(638\ \mathrm N\). Skidorna behöver tillsammans minst \(0{,}32\ \mathrm{m^2}\), alltså \(0{,}16\ \mathrm{m^2}\) vardera.`),
+  "6.95": byggFacitListaV2([
+    ["a", "Tegelstenens tyngd är", String.raw`\[F=3{,}2\cdot9{,}82=31{,}4\ \mathrm N\]`, ""],
+    ["b", "Kontaktytorna är", String.raw`\[A_A=0{,}12\cdot0{,}25=0{,}030\ \mathrm{m^2}\]\[A_B=0{,}060\cdot0{,}25=0{,}015\ \mathrm{m^2}\]\[A_C=0{,}060\cdot0{,}12=0{,}0072\ \mathrm{m^2}\]`, ""],
+    ["c", "Dividera samma tyngdkraft med respektive area.", String.raw`\[p_A=1{,}05\ \mathrm{kPa},\qquad p_B=2{,}09\ \mathrm{kPa},\qquad p_C=4{,}36\ \mathrm{kPa}\]`, "" ]
+  ], String.raw`Tyngdkraften är \(31{,}4\ \mathrm N\). Trycken i läge A, B och C är cirka \(1{,}0\), \(2{,}1\) och \(4{,}4\ \mathrm{kPa}\).`),
+  "6.96": byggFacitListaV2([
+    ["1", "Enligt Pascals princip gäller \(F_1/A_1=F_2/A_2\). Areaförhållandet kan tas direkt från diametrarna.", String.raw`\[\frac{A_2}{A_1}=\left(\frac{200}{25}\right)^2=64\]`, ""],
+    ["2", "Lyftkraften och motsvarande massa blir", String.raw`\[F_2=300\cdot64=19200\ \mathrm N\]\[m=\frac{19200}{9{,}82}=1{,}96\cdot10^3\ \mathrm{kg}\]`, "" ]
+  ], String.raw`Pressen kan idealiskt lyfta \(19{,}2\ \mathrm{kN}\), motsvarande en last på cirka \(1{,}96\ \mathrm{ton}\).`),
+  "6.97": byggFacitListaV2([
+    ["1", "Snöskoterns två band har arean", String.raw`\[A_s=2\cdot0{,}38\cdot1{,}2=0{,}912\ \mathrm{m^2}\]\[p_s=\frac{280\cdot9{,}82}{0{,}912}=3{,}02\ \mathrm{kPa}\]`, ""],
+    ["2", "Personens tryck är", String.raw`\[p_p=\frac{70\cdot9{,}82}{0{,}040}=17{,}2\ \mathrm{kPa}\]`, ""],
+    ["3", "Kvoten blir", String.raw`\[\frac{p_p}{p_s}=5{,}70\]`, "" ]
+  ], String.raw`Snöskoterns marktryck är cirka \(5{,}7\) gånger lägre än personens.`),
+  "6.98": byggFacitListaV2([
+    ["1", "Radien är 0,030 m och idealiskt är tryckskillnaden 101 kPa.", String.raw`\[A=\pi(0{,}030)^2=2{,}827\cdot10^{-3}\ \mathrm{m^2}\]`, ""],
+    ["2", "Den största bärkraften och massan blir", String.raw`\[F=pA=101000\cdot2{,}827\cdot10^{-3}=285{,}6\ \mathrm N\]\[m=\frac{F}{g}=29{,}1\ \mathrm{kg}\]`, "" ]
+  ], String.raw`Sugkoppen kan idealiskt bära ungefär \(29\ \mathrm{kg}\). Verklig säker last är mindre.`),
+  "6.99": byggFacitListaV2([
+    ["a", "Arean är \(40\ \mathrm{cm^2}=4{,}0\cdot10^{-3}\ \mathrm{m^2}\).", String.raw`\[N=\Delta pA=101000\cdot4{,}0\cdot10^{-3}=404\ \mathrm N\]`, ""],
+    ["b", "På den lodräta väggen bär den statiska friktionen lasten.", String.raw`\[mg\leq \mu N\Rightarrow m_{\max}=\frac{0{,}60\cdot404}{9{,}82}=24{,}7\ \mathrm{kg}\]`, ""],
+    ["c", "I taket verkar tryckkraften direkt mot tyngden i stället för att bara skapa friktion.", String.raw`\[m_{\max,\,tak}=\frac{404}{9{,}82}=41{,}1\ \mathrm{kg}\]`, "" ]
+  ], String.raw`Normalkraften är \(404\ \mathrm N\). På väggen kan friktionen bära cirka \(25\ \mathrm{kg}\); i taket blir den idealiska gränsen \(41\ \mathrm{kg}\).`),
+  "6.100": byggFacitListaV2([
+    ["a", "Kraftförstärkningen är areaförhållandet.", String.raw`\[\frac{F_2}{F_1}=\frac{A_2}{A_1}=\frac{120}{4{,}0}=30\]`, ""],
+    ["b", "Lyftkolvens volymökning är", String.raw`\[V=A_2h_2=120\cdot15=1800\ \mathrm{cm^3}\]`, ""],
+    ["c", "Samma vätskevolym måste lämna pumpcylindern.", String.raw`\[s_1=\frac{V}{A_1}=\frac{1800}{4{,}0}=450\ \mathrm{cm}\]\[n=\frac{450}{25}=18\]`, ""],
+    ["4", "Idealt bevaras arbetet: den 30-faldiga kraften kräver 30 gånger längre sammanlagd pumpsträcka.", "", "" ]
+  ], String.raw`Kraften förstärks 30 gånger. Volymen är \(1800\ \mathrm{cm^3}\), pumpsträckan \(450\ \mathrm{cm}\), alltså 18 pumptag.`),
+  "6.134": byggFacitListaV2([
+    ["a", "Tyngdkraften på fiskare och utrustning är", String.raw`\[F=92\cdot9{,}82=903\ \mathrm N\]`, ""],
+    ["b", "Med stövlarnas sammanlagda sulyta blir trycket", String.raw`\[p=\frac{903}{0{,}064}=14{,}1\ \mathrm{kPa}\]`, ""],
+    ["c", "Detta överskrider bottnens gräns \(10\ \mathrm{kPa}\), så bottnen bär inte.", "", ""],
+    ["d", "Med vadarplattorna blir trycket", String.raw`\[p'=\frac{903}{0{,}20}=4{,}52\ \mathrm{kPa}\]`, "Beräkningen bortser från vattnets lyftkraft eftersom nedsänkt volym inte anges; lyftkraften skulle sänka trycket ytterligare." ]
+  ], String.raw`Tyngdkraften är \(903\ \mathrm N\). Trycket är \(14{,}1\ \mathrm{kPa}\) med stövlar och \(4{,}52\ \mathrm{kPa}\) med plattor; bottnen bär bara i det senare fallet.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_TRYCK_V2[uppgift.id]) uppgift.s = FACIT_TRYCK_V2[uppgift.id];
+}
+
+const FACIT_GASLAGEN_V2 = {
+  "6.4": byggFacitListaV2([
+    ["a", "Totaltrycket är atmosfärstryck plus vattnets övertryck.", String.raw`\[p_2=101{,}3+\frac{998\cdot9{,}82\cdot20}{1000}=297\ \mathrm{kPa}\]`, ""],
+    ["b", "Temperaturen antas konstant, så Boyles lag gäller.", String.raw`\[p_1V_1=p_2V_2\Rightarrow V_2=\frac{101{,}3\cdot6{,}0}{297}=2{,}05\ \mathrm L\]`, ""],
+    ["c", "En apparatdykare andas in luft vid omgivningens höga tryck. Under uppstigning sjunker trycket och luften expanderar enligt \(pV=\text{konstant}\).", "", "Om luften inte får lämna lungorna kan expansionen orsaka allvarlig lungöverexpansion." ]
+  ], String.raw`På 20 m är totaltrycket cirka \(297\ \mathrm{kPa}\), och lungvolymen blir cirka \(2{,}0\ \mathrm L\). En apparatdykare får aldrig hålla andan under uppstigning.`),
+  "6.12": byggFacitListaV2([
+    ["a", "Omvandla bar till pascal.", String.raw`\[p=200\cdot10^5=2{,}0\cdot10^7\ \mathrm{Pa}\]`, ""],
+    ["b", "Ventilarean är \(3{,}0\ \mathrm{cm^2}=3{,}0\cdot10^{-4}\ \mathrm{m^2}\).", String.raw`\[F=pA=2{,}0\cdot10^7\cdot3{,}0\cdot10^{-4}=6{,}0\cdot10^3\ \mathrm N\]`, "Beräkningen använder flasktrycket som övertryck; om 200 bar avser absoluttryck blir nettokraften nästan densamma." ]
+  ], String.raw`Trycket är \(2{,}0\cdot10^7\ \mathrm{Pa}\), och kraften på ventilen cirka \(6{,}0\ \mathrm{kN}\).`),
+  "6.19": byggFacitListaV2([
+    ["1", "Sambandet är \(T(\mathrm K)=t({}^{\circ}\mathrm C)+273{,}15\).", "", ""],
+    ["a", String.raw`\(25\,{}^{\circ}\mathrm C\):`, String.raw`\[T=25+273{,}15=298{,}15\ \mathrm K\approx298\ \mathrm K\]`, ""],
+    ["b", String.raw`\(-40\,{}^{\circ}\mathrm C\):`, String.raw`\[T=-40+273{,}15=233{,}15\ \mathrm K\approx233\ \mathrm K\]`, ""],
+    ["c", String.raw`\(195\ \mathrm K\):`, String.raw`\[t=195-273{,}15=-78{,}15\,{}^{\circ}\mathrm C\approx-78\,{}^{\circ}\mathrm C\]`, "" ]
+  ], String.raw`Temperaturerna är \(298\ \mathrm K\), \(233\ \mathrm K\) och \(-78\,{}^{\circ}\mathrm C\).`),
+  "6.20": byggFacitListaV2([
+    ["a", "Vid konstant volym och gasmängd gäller \(p/T=\text{konstant}\). Temperaturerna är \(278{,}15\) K och \(308{,}15\) K.", String.raw`\[p_2=p_1\frac{T_2}{T_1}=2{,}5\frac{308{,}15}{278{,}15}=2{,}77\ \mathrm{bar}\]`, "Detta svar gäller om uppgiftens 2,5 bar är absoluttryck."],
+    ["2", "Däcktryck avläses i praktiken ofta som övertryck. Med \(p_{\mathrm{atm}}\approx1{,}0\ \mathrm{bar}\) blir då \(p_{1,\mathrm{abs}}=3{,}5\ \mathrm{bar}\).", String.raw`\[p_{2,\mathrm{abs}}=3{,}5\frac{308{,}15}{278{,}15}=3{,}88\ \mathrm{bar}\]\[p_{2,\mathrm{över}}=3{,}88-1{,}0=2{,}88\ \mathrm{bar}\]`, "Detta är den relevanta tolkningen för en vanlig däckmanometer."],
+    ["b", "Gaslagen kräver absolut temperatur. Kelvin börjar vid absoluta nollpunkten, så temperaturkvoter beskriver molekylernas termiska energi korrekt.", "", "Celsiusskalan har en godtycklig nollpunkt och får inte användas i kvoter." ]
+  ], String.raw`Om 2,5 bar är absoluttryck blir svaret \(2{,}77\ \mathrm{bar}\). Om det är normalt däckövertryck blir det nya övertrycket cirka \(2{,}88\ \mathrm{bar}\).`),
+  "6.21": byggFacitListaV2([
+    ["a", "Isoterm kompression ger", String.raw`\[p_2=\frac{p_1V_1}{V_2}=\frac{101\cdot20}{8{,}0}=252{,}5\ \mathrm{kPa}\]`, ""],
+    ["b", "Atmosfären trycker på kolvens utsida, så handen behöver bara balansera tryckskillnaden.", String.raw`\[\Delta p=252{,}5-101=151{,}5\ \mathrm{kPa}\]\[F=\Delta pA=151500\cdot1{,}8\cdot10^{-4}=27{,}3\ \mathrm N\]`, "Friktion i sprutan är försummad." ]
+  ], String.raw`Trycket i sprutan är cirka \(253\ \mathrm{kPa}\), och den extra kolvkraften cirka \(27\ \mathrm N\).`),
+  "6.22": byggFacitListaV2([
+    ["a", "På botten är totaltrycket", String.raw`\[p_b=101{,}3+\frac{998\cdot9{,}82\cdot12}{1000}=218{,}9\ \mathrm{kPa}\]`, ""],
+    ["b", "Vid oförändrad temperatur gäller Boyles lag.", String.raw`\[V_y=V_b\frac{p_b}{p_y}=1{,}0\frac{218{,}9}{101{,}3}=2{,}16\ \mathrm{cm^3}\]`, ""],
+    ["c", "När trycket sjunker expanderar bubblan. Den undantränger då mer vatten och får större lyftkraft \(F_A=\rho gV\).", "", "Farten ökar tills växande strömningsmotstånd balanserar nettokraften; den behöver därför inte accelerera obegränsat." ]
+  ], String.raw`Bottentrycket är cirka \(219\ \mathrm{kPa}\), och bubblan blir cirka \(2{,}2\ \mathrm{cm^3}\) vid ytan.`),
+  "6.38": byggFacitListaV2([
+    ["1", "Temperaturen är konstant, så \(p_1V_1=p_2V_2\).", "", ""],
+    ["2", "Räkna om gasmängden till volym vid 1,0 bar.", String.raw`\[V_2=\frac{p_1V_1}{p_2}=\frac{180\cdot12}{1{,}0}=2160\ \mathrm L\]`, "" ]
+  ], String.raw`Gasen motsvarar \(2160\ \mathrm L\) vid \(1{,}0\ \mathrm{bar}\).`),
+  "6.39": byggFacitListaV2([
+    ["a", "Vid samma tryck är densiteten omvänt proportionell mot absoluta temperaturen.", String.raw`\[\rho_2=\rho_1\frac{T_1}{T_2}=1{,}29\frac{273{,}15}{353{,}15}=0{,}998\ \mathrm{kg/m^3}\]`, ""],
+    ["b", "Den maximala nettolyftförmågan per kubikmeter, innan hölje och last räknas, motsvarar densitetsskillnaden.", String.raw`\[\Delta m=(1{,}29-0{,}998)\cdot1=0{,}292\ \mathrm{kg}\]`, "Det motsvarar lyftkraften \(0{,}292g\approx2{,}87\ \mathrm N\)."],
+    ["c", "Ytterligare uppvärmning minskar densiteten, men vinsten per grad avtar eftersom \(\rho\propto1/T\). Dessutom begränsas temperaturen av materialets hållfasthet och brandsäkerhet.", "", "" ]
+  ], String.raw`Den varma luftens densitet är cirka \(1{,}00\ \mathrm{kg/m^3}\), vilket ger en bruttolyftförmåga på cirka \(0{,}29\ \mathrm{kg/m^3}\).`),
+  "6.40": byggFacitListaV2([
+    ["a", "Viktens kraft verkar över kolvarean \(15\ \mathrm{cm^2}=1{,}5\cdot10^{-3}\ \mathrm{m^2}\).", String.raw`\[\Delta p=\frac{mg}{A}=\frac{25\cdot9{,}82}{1{,}5\cdot10^{-3}}=164\ \mathrm{kPa}\]`, ""],
+    ["b", "Gastrycket balanserar både lufttrycket och viktens bidrag.", String.raw`\[p_2=101+164=265\ \mathrm{kPa}\]`, ""],
+    ["c", "Vid konstant temperatur gäller \(p_1V_1=p_2V_2\).", String.raw`\[V_2=500\frac{101}{265}=191\ \mathrm{mL}\]`, "Kolvens egen tyngd och friktion försummas." ]
+  ], String.raw`Tryckökningen är \(164\ \mathrm{kPa}\), totaltrycket \(265\ \mathrm{kPa}\), och volymen cirka \(191\ \mathrm{mL}\).`),
+  "6.41": byggFacitListaV2([
+    ["a", "Ballongen är tät, så substansmängden \(n\) är oförändrad. \(p\), \(V\) och \(T\) ändras.", "", "Även gaskonstanten \(R\) är naturligtvis konstant."],
+    ["b", "Använd den allmänna gaslagen för samma gasmängd.", String.raw`\[\frac{p_1V_1}{T_1}=\frac{p_2V_2}{T_2}\Rightarrow V_2=2{,}0\frac{101}{54}\frac{255{,}15}{293{,}15}=3{,}26\ \mathrm L\]`, ""],
+    ["c", "Tryckfallet ensamt skulle ge \(2{,}0\cdot101/54=3{,}74\ \mathrm L\). Den lägre temperaturen minskar detta till 3,26 L.", "", "Tryckförändringen påverkar alltså mest." ]
+  ], String.raw`Endast gasmängden är oförändrad bland \(p,V,T,n\). Volymen blir cirka \(3{,}3\ \mathrm L\), främst på grund av det lägre trycket.`),
+  "6.50": byggFacitListaV2([
+    ["a", "Vid samma temperatur motsvarar flaskans innehåll vid 1 bar", String.raw`\[V_{1\,\mathrm{bar}}=12\cdot200=2400\ \mathrm L\]`, ""],
+    ["b", "På 20 m måste samma lungvolym fyllas med 2,9 gånger så mycket gas räknat vid ytan.", String.raw`\[q=20\cdot2{,}9=58\ \mathrm{L/min}\]`, ""],
+    ["c", "Den idealiserade tiden blir", String.raw`\[t=\frac{2400}{58}=41{,}4\ \mathrm{min}\]`, "I verklig dykplanering lämnas reservtryck och förbrukningen varierar, så användbar tid är kortare." ]
+  ], String.raw`Flaskan innehåller motsvarande \(2400\ \mathrm L\) ytluft. Förbrukningen blir cirka \(58\ \mathrm{L/min}\), vilket idealiskt ger \(41\ \mathrm{min}\).`),
+  "6.54": byggFacitListaV2([
+    ["a", "Den slutliga gasmängden uttryckt som luftvolym vid 101 kPa är", String.raw`\[V_{101}=\frac{400\cdot1{,}6}{101}=6{,}34\ \mathrm L\]`, ""],
+    ["b", "Däcket innehåller redan motsvarande 1,6 L vid 101 kPa. Det som ska tillföras är därför \(6{,}34-1{,}6=4{,}74\) L.", String.raw`\[n=\frac{4{,}74}{0{,}35}=13{,}5\Rightarrow14\ \text{hela pumptag}\]`, ""],
+    ["c", "Efter 14 tag blir absoluttrycket", String.raw`\[p=101\frac{1{,}6+14\cdot0{,}35}{1{,}6}=410\ \mathrm{kPa}\]\[p_{\mathrm{över}}=410-101=309\ \mathrm{kPa}\]`, "" ]
+  ], String.raw`Det behövs motsvarande \(6{,}34\ \mathrm L\) normalluft och 14 hela pumptag. Manometern visar då cirka \(309\ \mathrm{kPa}=3{,}09\ \mathrm{bar}\).`),
+  "6.81": byggFacitListaV2([
+    ["1", "Lägg till 273,15 till varje celsiustemperatur.", String.raw`\[25+273{,}15=298{,}15\ \mathrm K\]\[150+273{,}15=423{,}15\ \mathrm K\]\[-40+273{,}15=233{,}15\ \mathrm K\]\[480+273{,}15=753{,}15\ \mathrm K\]`, "" ]
+  ], String.raw`Temperaturerna är ungefär \(298\), \(423\), \(233\) och \(753\ \mathrm K\).`),
+  "6.82": byggFacitListaV2([
+    ["1", "Subtrahera 273,15 från varje kelvintemperatur.", String.raw`\[90-273{,}15=-183{,}15\,{}^{\circ}\mathrm C\]\[350-273{,}15=76{,}85\,{}^{\circ}\mathrm C\]\[0-273{,}15=-273{,}15\,{}^{\circ}\mathrm C\]\[1500-273{,}15=1226{,}85\,{}^{\circ}\mathrm C\]`, "" ]
+  ], String.raw`Temperaturerna är cirka \(-183\,{}^{\circ}\mathrm C\), \(77\,{}^{\circ}\mathrm C\), \(-273{,}15\,{}^{\circ}\mathrm C\) och \(1227\,{}^{\circ}\mathrm C\).`),
+  "6.83": byggFacitListaV2([
+    ["a", "Lådan är tät och styv. Därför är gasmängden \(n\) och volymen \(V\) oförändrade; \(R\) är en konstant. Tryck och temperatur ändras.", "", ""],
+    ["b", "Temperaturerna i kelvin är", String.raw`\[T_1=18+273{,}15=291{,}15\ \mathrm K\]\[T_2=45+273{,}15=318{,}15\ \mathrm K\]`, ""],
+    ["c", "Vid konstant \(n\) och \(V\) gäller \(p/T=\text{konstant}\).", String.raw`\[p_2=101{,}3\frac{318{,}15}{291{,}15}=110{,}7\ \mathrm{kPa}\]`, "" ]
+  ], String.raw`\(n\) och \(V\) är oförändrade. Temperaturerna är \(291\) och \(318\ \mathrm K\), och sluttrycket cirka \(111\ \mathrm{kPa}\).`),
+  "6.84": byggFacitListaV2([
+    ["a", "Ballongen är tät, så \(n\) är konstant. Den är böjlig och omgivningstrycket ändras inte, så gastrycket \(p\) kan betraktas som konstant.", "", ""],
+    ["b", "Temperaturerna är \(285{,}15\) K och \(303{,}15\) K. Vid konstant tryck gäller \(V/T=\text{konstant}\).", String.raw`\[V_2=3{,}0\frac{303{,}15}{285{,}15}=3{,}19\ \mathrm{dm^3}\]`, "" ]
+  ], String.raw`Gasmängd och tryck är oförändrade. Ballongens volym blir cirka \(3{,}2\ \mathrm{dm^3}\).`),
+  "6.85": byggFacitListaV2([
+    ["1", "Rummet är tätt och styvt, så \(n\) och \(V\) är konstanta. Då gäller \(p/T=\text{konstant}\).", String.raw`\[T_2=T_1\frac{p_2}{p_1}\]`, ""],
+    ["2", "Med \(T_1=22+273{,}15=295{,}15\ \mathrm K\):", String.raw`\[T_2=295{,}15\frac{97}{100}=286{,}30\ \mathrm K\]\[t_2=286{,}30-273{,}15=13{,}15\,{}^{\circ}\mathrm C\]`, "" ]
+  ], String.raw`Den nya temperaturen är cirka \(286\ \mathrm K=13\,{}^{\circ}\mathrm C\).`),
+  "6.86": byggFacitListaV2([
+    ["1", "Temperatur och gasmängd är oförändrade, så Boyles lag gäller.", String.raw`\[p_1V_1=p_2V_2\]`, ""],
+    ["2", "Lös ut den nya volymen.", String.raw`\[V_2=50\frac{98}{103}=47{,}6\ \mathrm L\]`, "" ]
+  ], String.raw`Påsens volym blir cirka \(48\ \mathrm L\).`),
+  "6.87": byggFacitListaV2([
+    ["1", "Vid konstant tryck gäller \(V_2/V_1=T_2/T_1\). För en sfär är \(V\propto r^3\).", String.raw`\[\left(\frac{r_2}{r_1}\right)^3=\frac{308{,}15}{293{,}15}\]`, ""],
+    ["2", "Ta kubikroten.", String.raw`\[r_2=12{,}0\left(\frac{308{,}15}{293{,}15}\right)^{1/3}=12{,}20\ \mathrm{cm}\]`, "" ]
+  ], String.raw`Ballongens radie blir cirka \(12{,}2\ \mathrm{cm}\).`),
+  "6.88": byggFacitListaV2([
+    ["a", "Den nya volymen är \(V_2=0{,}75V_1\). Vid konstant temperatur gäller", String.raw`\[p_2=p_1\frac{V_1}{V_2}=\frac{p_1}{0{,}75}=1{,}333p_1\]`, "Trycket ökar alltså med 33,3 %."],
+    ["b", "Massan är oförändrad och densiteten är \(\rho=m/V\).", String.raw`\[\rho_2=\frac{m}{0{,}75V_1}=1{,}333\rho_1\]`, "Densiteten ökar också med 33,3 %." ]
+  ], String.raw`Både trycket och densiteten ökar med cirka \(33\,\%\).`),
+  "6.89": byggFacitListaV2([
+    ["1", "Lådan är öppen, så gas kan lämna den. Vid konstant temperatur gäller för ideal gas", String.raw`\[\rho\propto\frac{n}{V}=\frac{p}{RT}\Rightarrow\rho\propto p\]`, ""],
+    ["2", "Trycket före var 12 % större än efter: \(p_f=1{,}12p_e\).", String.raw`\[\frac{\rho_e}{\rho_f}=\frac{p_e}{p_f}=\frac1{1{,}12}=0{,}893\]`, "Densiteten minskar med \(1-0{,}893=0{,}107\), alltså 10,7 %." ]
+  ], String.raw`Luftens densitet minskar med cirka \(11\,\%\).`),
+  "6.121": byggFacitListaV2([
+    ["a", "När temperaturen och gasmängden är konstanta gäller Boyles lag.", String.raw`\[p_1V_1=p_2V_2\]`, ""],
+    ["b", "Lös ut sluttrycket.", String.raw`\[p_2=120\frac{3{,}0}{1{,}2}=300\ \mathrm{kPa}\]`, "Volymen blir 40 % av den ursprungliga och trycket därför 2,5 gånger större." ]
+  ], String.raw`Sambandet är \(pV=\text{konstant}\), och sluttrycket blir \(300\ \mathrm{kPa}\).`),
+  "6.122": byggFacitListaV2([
+    ["a", "Temperaturerna i kelvin är", String.raw`\[T_1=293{,}15\ \mathrm K,\qquad T_2=333{,}15\ \mathrm K\]`, ""],
+    ["b", "Vid konstant volym gäller \(p/T=\text{konstant}\).", String.raw`\[p_2=150\frac{333{,}15}{293{,}15}=170{,}46\ \mathrm{bar}\]`, ""],
+    ["c", "Den relativa ökningen är", String.raw`\[\frac{170{,}46-150}{150}\cdot100=13{,}6\,\%\]`, "" ]
+  ], String.raw`Temperaturerna är \(293{,}15\) och \(333{,}15\ \mathrm K\). Trycket blir cirka \(170\ \mathrm{bar}\), en ökning med \(13{,}6\,\%\).`),
+  "6.123": byggFacitListaV2([
+    ["a", "Temperaturerna är", String.raw`\[T_1=293{,}15\ \mathrm K,\qquad T_2=255{,}15\ \mathrm K\]`, ""],
+    ["b", "Vid konstant tryck gäller Charles lag.", String.raw`\[\frac{V_1}{T_1}=\frac{V_2}{T_2}\Rightarrow V_2=2{,}0\frac{255{,}15}{293{,}15}=1{,}74\ \mathrm L\]`, "" ]
+  ], String.raw`Ballongen får volymen cirka \(1{,}7\ \mathrm L\).`),
+  "6.124": byggFacitListaV2([
+    ["1", "För samma gasmängd gäller", String.raw`\[\frac{p_1V_1}{T_1}=\frac{p_2V_2}{T_2}\]`, ""],
+    ["Rad 1", "Temperaturen är oförändrad.", String.raw`\[V_2=\frac{100\cdot2{,}0}{200}=1{,}0\ \mathrm L\]`, ""],
+    ["Rad 2", "Volymen är oförändrad.", String.raw`\[p_2=200\frac{500}{250}=400\ \mathrm{kPa}\]`, ""],
+    ["Rad 3", "Lös ut sluttemperaturen.", String.raw`\[T_2=300\frac{100\cdot9{,}0}{150\cdot4{,}0}=450\ \mathrm K\]`, "" ]
+  ], String.raw`De saknade värdena är \(1{,}0\ \mathrm L\), \(400\ \mathrm{kPa}\) och \(450\ \mathrm K\).`),
+  "6.125": byggFacitListaV2([
+    ["a", "Temperaturen och gasmängden är konstanta.", String.raw`\[V_2=V_1\frac{p_1}{p_2}=0{,}50\frac{101}{75}=0{,}673\ \mathrm L\]`, ""],
+    ["b", "Volymökningen i procent är", String.raw`\[\frac{0{,}673-0{,}50}{0{,}50}\cdot100=34{,}7\,\%\]`, "" ]
+  ], String.raw`Volymen blir cirka \(0{,}67\ \mathrm L\), en ökning med ungefär \(35\,\%\).`),
+  "6.126": byggFacitListaV2([
+    ["1", "Gasens mängd uttryckt som volym vid 1,0 bar är", String.raw`\[V_{1\,\mathrm{bar}}=\frac{8{,}0\cdot50}{1{,}0}=400\ \mathrm L\]`, ""],
+    ["2", "När tanken har sjunkit till omgivningens 1,0 bar finns fortfarande 50 L gas i tanken räknat vid detta tryck.", String.raw`\[V_{\mathrm{användbar}}=400-50=350\ \mathrm L\]`, "" ]
+  ], String.raw`Tanken innehåller motsvarande \(400\ \mathrm L\) normalluft, varav \(350\ \mathrm L\) kan tas ut innan trycket når 1,0 bar.`),
+  "6.127": byggFacitListaV2([
+    ["1", "Efter öppning fyller gasen båda behållarna.", String.raw`\[V_2=4{,}0+6{,}0=10{,}0\ \mathrm L\]`, ""],
+    ["2", "Vid konstant temperatur och oförändrad gasmängd gäller", String.raw`\[p_2=\frac{p_1V_1}{V_2}=\frac{300\cdot4{,}0}{10{,}0}=120\ \mathrm{kPa}\]`, "Den andra behållaren antas vara vakuumtömd, inte fylld med luft." ]
+  ], String.raw`Jämviktstrycket blir \(120\ \mathrm{kPa}\).`),
+  "6.128": byggFacitListaV2([
+    ["1", "Slutlig gasmängd uttryckt som luft vid 100 kPa är", String.raw`\[V_{100}=1{,}5\frac{350}{100}=5{,}25\ \mathrm L\]`, ""],
+    ["2", "Däcket innehåller redan 1,5 L normalluft, så pumpen behöver tillföra", String.raw`\[\Delta V=5{,}25-1{,}5=3{,}75\ \mathrm L\]`, ""],
+    ["3", "Antalet ideala pumptag är", String.raw`\[n=\frac{3{,}75}{0{,}60}=6{,}25\]`, "Sex tag räcker inte; det krävs därför 7 hela pumptag." ]
+  ], String.raw`Det krävs 7 hela pumptag. Luften som redan finns i däcket måste räknas med.`),
+  "6.129": byggFacitListaV2([
+    ["a", "Vid svävning är den undanträngda uteluftens massa lika med ballongens totala massa.", String.raw`\[\rho_uV=\rho_iV+m\Rightarrow \rho_i=\rho_u-\frac mV\]\[\rho_i=1{,}29-\frac{600}{2200}=1{,}017\ \mathrm{kg/m^3}\]`, ""],
+    ["b", "Vid samma tryck gäller \(\rho T=\text{konstant}\).", String.raw`\[T_i=T_u\frac{\rho_u}{\rho_i}=288{,}15\frac{1{,}29}{1{,}017}=365{,}4\ \mathrm K\]\[t_i=365{,}4-273{,}15=92{,}3\,{}^{\circ}\mathrm C\]`, "" ]
+  ], String.raw`Den varma luften får ha densiteten högst \(1{,}02\ \mathrm{kg/m^3}\), vilket kräver ungefär \(92\,{}^{\circ}\mathrm C\).`),
+  "6.130": byggFacitListaV2([
+    ["a", "Vikten ger ett extra tryck över den lättrörliga kolven.", String.raw`\[\Delta p=\frac{15\cdot9{,}82}{20\cdot10^{-4}}=73{,}65\ \mathrm{kPa}\]\[p_2=101+73{,}65=174{,}65\ \mathrm{kPa}\]`, ""],
+    ["b", "Jämför ursprungstillståndet med slutläget efter belastning och uppvärmning.", String.raw`\[V_2=V_1\frac{p_1}{p_2}\frac{T_2}{T_1}=1{,}2\frac{101}{174{,}65}\frac{353{,}15}{293{,}15}=0{,}836\ \mathrm L\]`, ""],
+    ["c", "Volymen har minskat med \(1{,}200-0{,}836=0{,}364\ \mathrm L=364\ \mathrm{cm^3}\).", String.raw`\[\Delta h=\frac{\Delta V}{A}=\frac{364}{20}=18{,}2\ \mathrm{cm}\]`, "Kolven har flyttats nedåt; belastningens kompression är större än uppvärmningens expansion." ]
+  ], String.raw`Gastrycket är \(175\ \mathrm{kPa}\), slutvolymen \(0{,}836\ \mathrm L\), och kolven ligger cirka \(18\ \mathrm{cm}\) lägre än från början.`),
+  "6.136": byggFacitListaV2([
+    ["1", "Totaltrycket på 12 m djup är", String.raw`\[p_1=101+\frac{998\cdot9{,}82\cdot12}{1000}=218{,}6\ \mathrm{kPa}\]`, ""],
+    ["2", "Temperaturen antas konstant, så \(p_1V_1=p_2V_2\).", String.raw`\[V_2=6{,}0\frac{218{,}6}{101}=12{,}99\ \mathrm{cm^3}\]`, "Simblåsan blir mer än dubbelt så stor vid den snabba uppstigningen." ]
+  ], String.raw`Simblåsans volym vid ytan blir cirka \(13\ \mathrm{cm^3}\).`),
+  "6.138": byggFacitListaV2([
+    ["1", "Gaslagen kräver absoluttryck och kelvin. Startens övertryck är 0,25 bar = 25 kPa.", String.raw`\[p_{1,\mathrm{abs}}=101+25=126\ \mathrm{kPa}\]\[T_1=281{,}15\ \mathrm K,\qquad T_2=301{,}15\ \mathrm K\]`, ""],
+    ["2", "Vid konstant volym gäller \(p/T=\text{konstant}\).", String.raw`\[p_{2,\mathrm{abs}}=126\frac{301{,}15}{281{,}15}=134{,}96\ \mathrm{kPa}\]`, ""],
+    ["3", "Manometern visar övertrycket.", String.raw`\[p_{2,\mathrm{över}}=134{,}96-101=33{,}96\ \mathrm{kPa}=0{,}340\ \mathrm{bar}\]`, "" ]
+  ], String.raw`Övertrycket på eftermiddagen blir cirka \(0{,}34\ \mathrm{bar}\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_GASLAGEN_V2[uppgift.id]) uppgift.s = FACIT_GASLAGEN_V2[uppgift.id];
+}
+
+const FACIT_ARKIMEDES_V2_DEL1 = {
+  "6.5": byggFacitListaV2([
+    ["a", "Ett flytande isberg har lyftkraft lika stor som tyngdkraften.", String.raw`\[\rho_{\mathrm{hav}}gV_{\mathrm{under}}=\rho_{\mathrm{is}}gV\]\[\frac{V_{\mathrm{under}}}{V}=\frac{917}{1025}=0{,}895\]`, ""],
+    ["b", "Isberget tränger redan undan havsvatten med samma massa som isberget. I den vanliga idealmodellen får smältvattnet därför precis plats i den undanträngda volymen.", "", "Havsnivån ändras inte i idealmodellen. I verkligheten finns en mycket liten korrigering eftersom smält sötvatten och saltvatten har olika densitet."],
+    ["c", "Grönlands inlandsis vilar på land. När den smälter tillförs havet vatten som inte tidigare trängde undan havsvatten.", "", "Därför höjs havsnivån." ]
+  ], String.raw`Cirka \(89{,}5\,\%\) av isberget är under ytan. Flytande havsis ger ingen nivåhöjning i idealmodellen, men landis som smälter tillför nytt vatten till havet.`),
+  "6.6": byggFacitListaV2([
+    ["a", "Lyftkraften motsvarar tyngden av den undanträngda luften. Dess massa är", String.raw`\[m_{\mathrm{luft}}=\rho_{\mathrm{luft}}V=1{,}29\cdot520=670{,}8\ \mathrm{kg}\]`, ""],
+    ["b", "Heliumet har massan \(0{,}178\cdot520=92{,}6\ \mathrm{kg}\). Massan som återstår för hölje, korg, utrustning och passagerare är", String.raw`\[m_{\mathrm{bär}}=670{,}8-92{,}6=578{,}2\ \mathrm{kg}\]`, ""],
+    ["c", "Den befintliga lasten är 600 kg, alltså större än bärförmågan.", String.raw`\[m_{\mathrm{barlast}}=600-578{,}2=21{,}8\ \mathrm{kg}\]`, "För att få en tydlig uppåtriktad resultant måste något mer än gränsvärdet kastas." ]
+  ], String.raw`Ballongen tränger undan \(671\ \mathrm{kg}\) luft och kan bära \(578\ \mathrm{kg}\) utöver heliumet. Minst cirka \(22\ \mathrm{kg}\) måste kastas.`),
+  "6.13": byggFacitListaV2([
+    ["a", "Volymen är \(350\ \mathrm{cm^3}=3{,}50\cdot10^{-4}\ \mathrm{m^3}\).", String.raw`\[F_A=\rho gV=998\cdot9{,}82\cdot3{,}50\cdot10^{-4}=3{,}43\ \mathrm N\]`, ""],
+    ["b", "Den undanträngda vattenmassan är", String.raw`\[m=\rho V=998\cdot3{,}50\cdot10^{-4}=0{,}349\ \mathrm{kg}\]`, "" ]
+  ], String.raw`Lyftkraften är cirka \(3{,}4\ \mathrm N\), motsvarande tyngden av \(0{,}35\ \mathrm{kg}\) vatten.`),
+  "6.14": byggFacitListaV2([
+    ["a", "För en flytande kropp gäller att nedsänkt volymandel är densitetskvoten.", String.raw`\[f=\frac{\rho_k}{\rho_v}=\frac{600}{998}=0{,}601\]`, ""],
+    ["b", "Den nedsänkta höjden är \(0{,}601\cdot12=7{,}21\ \mathrm{cm}\).", String.raw`\[h_{\mathrm{över}}=12-7{,}21=4{,}79\ \mathrm{cm}\]`, "" ]
+  ], String.raw`Cirka \(60\,\%\) ligger under ytan och \(4{,}8\ \mathrm{cm}\) sticker upp.`),
+  "6.15": byggFacitListaV2([
+    ["a", "Den extra undanträngda vattenmassan ska vara lika med lastens massa.", String.raw`\[\Delta V=\frac{m}{\rho}=\frac{450}{998}=0{,}451\ \mathrm{m^3}\]`, ""],
+    ["b", "Med vattenlinjearean 6,0 m² blir djupökningen", String.raw`\[\Delta h=\frac{\Delta V}{A}=\frac{0{,}451}{6{,}0}=0{,}0752\ \mathrm m=7{,}52\ \mathrm{cm}\]`, ""],
+    ["c", "Båtens egen vikt balanserades redan av dess ursprungliga undanträngning. Bara den tillkommande lasten kräver extra volym.", "", "" ]
+  ], String.raw`Lasten kräver \(0{,}451\ \mathrm{m^3}\) extra undanträngning, så båten sjunker cirka \(7{,}5\ \mathrm{cm}\).`),
+  "6.16": byggFacitListaV2([
+    ["a", "Bollens volym är \(1{,}5\ \mathrm L=1{,}5\cdot10^{-3}\ \mathrm{m^3}\).", String.raw`\[F_A=998\cdot9{,}82\cdot1{,}5\cdot10^{-3}=14{,}70\ \mathrm N\]`, ""],
+    ["b", "Tyngdkraften är \(mg=0{,}20\cdot9{,}82=1{,}964\ \mathrm N\).", String.raw`\[F_{\mathrm{res}}=14{,}70-1{,}964=12{,}74\ \mathrm N\quad\text{uppåt}\]`, ""],
+    ["c", "I den idealiserade modellen utan vattenmotstånd och tillagd vattenmassa:", String.raw`\[a=\frac{F_{\mathrm{res}}}{m}=\frac{12{,}74}{0{,}20}=63{,}7\ \mathrm{m/s^2}\]`, "" ]
+  ], String.raw`Lyftkraften är \(14{,}7\ \mathrm N\), resultanten \(12{,}7\ \mathrm N\) uppåt och den idealiska startaccelerationen \(64\ \mathrm{m/s^2}\).`),
+  "6.17": byggFacitListaV2([
+    ["a", "Hydrometern sjunker tills den undanträngda vätskans tyngd är lika stor som hydrometerns tyngd. Högre densitet kräver mindre undanträngd volym.", "", ""],
+    ["b", "Om den graderade delen har konstant tvärsnitt är nedsänkningsdjupet proportionellt mot volymen och omvänt proportionellt mot densiteten.", String.raw`\[h_2=h_1\frac{\rho_1}{\rho_2}=8{,}0\frac{998}{1030}=7{,}75\ \mathrm{cm}\]`, ""],
+    ["c", "Densiteten är proportionell mot \(1/h\), inte mot \(h\).", String.raw`\[h\propto\frac1\rho\]`, "Skalan i densitet blir därför inte linjär; vid högre densitet ligger markeringarna tätare." ]
+  ], String.raw`Hydrometern sjunker cirka \(7{,}8\ \mathrm{cm}\) i havsvatten. Densitetsskalan är inte linjär.`),
+  "6.18": byggFacitListaV2([
+    ["a", "Lastens extra undanträngda vattenvolym är", String.raw`\[\Delta V=\frac{3000}{998}=3{,}006\ \mathrm{m^3}\]`, ""],
+    ["b", "Pråmens vattenlinjearea är \(12\cdot4{,}0=48\ \mathrm{m^2}\).", String.raw`\[\Delta h=\frac{3{,}006}{48}=0{,}0626\ \mathrm m=6{,}26\ \mathrm{cm}\]`, "" ]
+  ], String.raw`Lasten tränger undan \(3{,}01\ \mathrm{m^3}\) extra vatten och sänker pråmen cirka \(6{,}3\ \mathrm{cm}\).`),
+  "6.34": byggFacitListaV2([
+    ["a", "Sidlängden är 0,080 m.", String.raw`\[V=a^3=(0{,}080)^3=5{,}12\cdot10^{-4}\ \mathrm{m^3}\]`, ""],
+    ["b", "Den helt nedsänkta kuben tränger undan samma volym vatten.", String.raw`\[F_A=998\cdot9{,}82\cdot5{,}12\cdot10^{-4}=5{,}02\ \mathrm N\]`, "" ]
+  ], String.raw`Volymen är \(5{,}12\cdot10^{-4}\ \mathrm{m^3}\), och lyftkraften cirka \(5{,}0\ \mathrm N\).`),
+  "6.35": byggFacitListaV2([
+    ["a", "Massan undanträngd kall luft är", String.raw`\[m_u=1{,}29\cdot3{,}0=3{,}87\ \mathrm{kg}\]`, ""],
+    ["b", "Den varma luftens massa är", String.raw`\[m_i=1{,}00\cdot3{,}0=3{,}00\ \mathrm{kg}\]`, ""],
+    ["c", "Skillnaden är den ideala bruttolasten om ballonghöljet försummas.", String.raw`\[m_{\mathrm{last}}=3{,}87-3{,}00=0{,}87\ \mathrm{kg}\]`, "" ]
+  ], String.raw`Ballongen undantränger \(3{,}87\ \mathrm{kg}\) luft, innehåller \(3{,}00\ \mathrm{kg}\) varm luft och kan idealiskt lyfta \(0{,}87\ \mathrm{kg}\).`),
+  "6.36": byggFacitListaV2([
+    ["a", "I sötvatten ger jämvikt", String.raw`\[\rho_k=0{,}70\rho_v=0{,}70\cdot998=699\ \mathrm{kg/m^3}\]`, ""],
+    ["b", "I havsvatten blir nedsänkt andel", String.raw`\[f=\frac{\rho_k}{\rho_h}=\frac{698{,}6}{1025}=0{,}682\]`, "" ]
+  ], String.raw`Klossens densitet är cirka \(699\ \mathrm{kg/m^3}\), och i havsvatten ligger cirka \(68\,\%\) under ytan.`),
+  "6.37": byggFacitListaV2([
+    ["a", "Nej. Den flytande isen tränger undan en vattenmassa som är lika stor som isens massa. När isen smälter blir den samma massa vatten och fyller den undanträngda volymen.", "", ""],
+    ["b", "En instängd luftbubbla ändrar inte slutsatsen. Isens och luftens sammanlagda tyngd bestämmer undanträngningen före smältning; efteråt lämnar luften systemet och isens smältvatten tar motsvarande plats.", "", "Luftens massa är dessutom mycket liten."],
+    ["c", "När stenen ligger i isen bidrar hela stenens tyngd till undanträngningen. Efter smältning sjunker stenen och tränger bara undan sin egen volym.", String.raw`\[\frac{m_s}{\rho_v}>\frac{m_s}{\rho_s}\quad\text{när}\quad\rho_s>\rho_v\]`, "Vattennivån sjunker därför." ]
+  ], String.raw`Rent isvatten rinner inte över, och en luftbubbla ändrar inte detta. Med en sten i isen sjunker vattennivån efter smältningen.`),
+  "6.45": byggFacitListaV2([
+    ["a", "Av figuren ligger ungefär 65 % av klossens volym under ytan.", String.raw`\[f\approx0{,}65\]`, ""],
+    ["b", "För en flytande kloss gäller \(\rho_k=f\rho_v\).", String.raw`\[\rho_k\approx0{,}65\cdot998=649\ \mathrm{kg/m^3}\]`, "Avläsningen är ungefärlig eftersom den görs ur figuren." ]
+  ], String.raw`Cirka \(65\,\%\) ligger under ytan, vilket ger densiteten ungefär \(650\ \mathrm{kg/m^3}\).`),
+  "6.46": byggFacitListaV2([
+    ["a", "Klossens densitet 650 kg/m³ är lägre än densiteten hos alla tre vätskorna.", "", "Den flyter därför i bensin, vatten och kvicksilver."],
+    ["b", "I bensin blir andelen", String.raw`\[f_b=\frac{650}{740}=0{,}878\approx88\,\%\]`, ""],
+    ["c", "I kvicksilver blir andelen", String.raw`\[f_{Hg}=\frac{650}{13600}=0{,}0478\approx4{,}8\,\%\]`, "" ]
+  ], String.raw`Klossen flyter i alla tre. Cirka \(88\,\%\) ligger under bensinytan och \(4{,}8\,\%\) under kvicksilverytan.`),
+  "6.49": byggFacitListaV2([
+    ["a", "Flaskan tränger undan \(25\ \mathrm{cm^3}=25\cdot10^{-6}\ \mathrm{m^3}\) vatten när den är helt nedsänkt.", String.raw`\[F_A=998\cdot9{,}82\cdot25\cdot10^{-6}=0{,}245\ \mathrm N\]`, ""],
+    ["b", "Tyngdkraften är", String.raw`\[F_g=0{,}018\cdot9{,}82=0{,}177\ \mathrm N\]`, ""],
+    ["c", "Eftersom \(F_A>F_g\) är resultanten uppåt när flaskan är helt nedsänkt.", "", "Den stiger och flyter sedan med bara en del av volymen under ytan." ]
+  ], String.raw`Lyftkraften är \(0{,}245\ \mathrm N\) och tyngdkraften \(0{,}177\ \mathrm N\); flaskan flyter.`),
+  "6.53": byggFacitListaV2([
+    ["a", "Minskningen av dynamometerkraften är lyftkraften.", String.raw`\[F_A=2{,}45-2{,}28=0{,}170\ \mathrm N\]`, ""],
+    ["b", "Arkimedes princip ger volymen.", String.raw`\[V=\frac{F_A}{\rho_vg}=\frac{0{,}170}{998\cdot9{,}82}=1{,}735\cdot10^{-5}\ \mathrm{m^3}=17{,}35\ \mathrm{cm^3}\]`, ""],
+    ["c", "Massan fås av tyngden i luft.", String.raw`\[m=\frac{2{,}45}{9{,}82}=0{,}2495\ \mathrm{kg}\]\[\rho=\frac{m}{V}=1{,}438\cdot10^4\ \mathrm{kg/m^3}\]`, ""],
+    ["d", "Densiteten är tydligt lägre än guldets \(19300\ \mathrm{kg/m^3}\).", "", "Kronan är alltså inte av rent guld, under antagandet att inga luftfickor finns." ]
+  ], String.raw`Lyftkraften är \(0{,}170\ \mathrm N\), volymen \(17{,}35\ \mathrm{cm^3}\) och densiteten \(14{,}4\cdot10^3\ \mathrm{kg/m^3}\). Kronan är inte rent guld.`),
+  "6.71": byggFacitListaV2([
+    ["1", "Kulan är helt nedsänkt och undantränger \(3{,}0\ \mathrm{cm^3}=3{,}0\cdot10^{-6}\ \mathrm{m^3}\) vatten.", String.raw`\[F_A=\rho_vgV\]`, ""],
+    ["2", "Sätt in värdena.", String.raw`\[F_A=998\cdot9{,}82\cdot3{,}0\cdot10^{-6}=2{,}94\cdot10^{-2}\ \mathrm N\]`, "Järnets densitet behövs inte för lyftkraften när volymen redan är känd." ]
+  ], String.raw`Lyftkraften är cirka \(0{,}029\ \mathrm N=29\ \mathrm{mN}\).`),
+  "6.72": byggFacitListaV2([
+    ["1", "Kubens volym är", String.raw`\[V=(2{,}0\ \mathrm{cm})^3=8{,}0\ \mathrm{cm^3}=8{,}0\cdot10^{-6}\ \mathrm{m^3}\]`, ""],
+    ["2", "Lyftkraften i etanol blir", String.raw`\[F_A=789\cdot9{,}82\cdot8{,}0\cdot10^{-6}=6{,}20\cdot10^{-2}\ \mathrm N\]`, "" ]
+  ], String.raw`Lyftkraften är cirka \(0{,}062\ \mathrm N=62\ \mathrm{mN}\).`),
+  "6.73": byggFacitListaV2([
+    ["a", "Ett homogent föremål kan flyta om dess medeldensitet inte överstiger vätskans.", String.raw`\[\rho_{\max}=0{,}789\ \mathrm{g/cm^3}\]`, "Vid exakt samma densitet är föremålet neutralt och kan sväva helt nedsänkt."],
+    ["b", "Träets densitet är lägre än etanolens, så det flyter. Nedsänkt andel blir", String.raw`\[f=\frac{0{,}60}{0{,}789}=0{,}760\]`, "Cirka 24 % av volymen sticker upp." ]
+  ], String.raw`Den största densiteten är \(0{,}789\ \mathrm{g/cm^3}\). Trä med \(0{,}60\ \mathrm{g/cm^3}\) flyter med cirka \(76\,\%\) under ytan.`),
+  "6.74": byggFacitListaV2([
+    ["a", "På plankan verkar tyngdkraft nedåt och vattnets lyftkraft uppåt.", "", ""],
+    ["b", "Plankan flyter stilla, alltså är kraftresultanten noll.", String.raw`\[\sum F=0\]`, ""],
+    ["c", "Lyftkraften balanserar tyngden.", String.raw`\[F_A=mg=2{,}4\cdot9{,}82=23{,}6\ \mathrm N\]`, ""],
+    ["d", "Den undanträngda vattenmassan är 2,4 kg.", String.raw`\[V_{\mathrm{under}}=\frac{m}{\rho_v}=\frac{2{,}4}{998}=2{,}405\cdot10^{-3}\ \mathrm{m^3}=2{,}4\ \mathrm{dm^3}\]`, "" ]
+  ], String.raw`Krafterna är tyngdkraft och lyftkraft, båda \(23{,}6\ \mathrm N\). Resultanten är noll och den nedsänkta volymen \(2{,}4\ \mathrm{dm^3}\).`),
+  "6.75": byggFacitListaV2([
+    ["a", "Använd järnets densitet \(7{,}87\ \mathrm{g/cm^3}\).", String.raw`\[V=\frac{m}{\rho}=\frac{90}{7{,}87}=11{,}44\ \mathrm{cm^3}\]`, ""],
+    ["b", "Lyftkraften i vatten är", String.raw`\[F_A=998\cdot9{,}82\cdot11{,}44\cdot10^{-6}=0{,}112\ \mathrm N\]`, ""],
+    ["c", "Dynamometern visar den skenbara tyngden.", String.raw`\[F_D=mg-F_A=0{,}090\cdot9{,}82-0{,}112=0{,}772\ \mathrm N\]`, "" ]
+  ], String.raw`Volymen är \(11{,}4\ \mathrm{cm^3}\), lyftkraften \(0{,}112\ \mathrm N\), och dynamometern visar cirka \(0{,}77\ \mathrm N\).`),
+  "6.76": byggFacitListaV2([
+    ["1", "Ballongens volym är", String.raw`\[V=\frac43\pi(0{,}20)^3=3{,}351\cdot10^{-2}\ \mathrm{m^3}\]`, ""],
+    ["2", "Undanträngd luftmassa och heliummassa är", String.raw`\[m_{\mathrm{luft}}=1{,}29V=43{,}23\ \mathrm g\]\[m_{\mathrm{He}}=0{,}18V=6{,}03\ \mathrm g\]`, ""],
+    ["3", "Subtrahera heliumets och plastens massa från den undanträngda luftmassan.", String.raw`\[m_{\mathrm{last}}=43{,}23-6{,}03-4{,}0=33{,}2\ \mathrm g\]`, "" ]
+  ], String.raw`Ballongen kan idealiskt lyfta ungefär \(33\ \mathrm g\) extra massa.`),
+  "6.77": byggFacitListaV2([
+    ["a", "Utslaget i luft ger tyngden.", String.raw`\[m=\frac{5{,}6}{9{,}82}=0{,}570\ \mathrm{kg}\]`, ""],
+    ["b", "Utslagsminskningen är lyftkraften.", String.raw`\[F_A=5{,}6-3{,}4=2{,}2\ \mathrm N\]`, ""],
+    ["c", "Föremålets volym fås av undanträngt vatten.", String.raw`\[V=\frac{2{,}2}{998\cdot9{,}82}=2{,}245\cdot10^{-4}\ \mathrm{m^3}=0{,}2245\ \mathrm{dm^3}\]`, ""],
+    ["d", "Densiteten blir", String.raw`\[\rho=\frac{0{,}570}{2{,}245\cdot10^{-4}}=2{,}54\cdot10^3\ \mathrm{kg/m^3}\]`, "" ]
+  ], String.raw`Massan är \(0{,}570\ \mathrm{kg}\), lyftkraften \(2{,}2\ \mathrm N\), volymen \(0{,}224\ \mathrm{dm^3}\) och densiteten \(2{,}5\cdot10^3\ \mathrm{kg/m^3}\).`),
+  "6.78": byggFacitListaV2([
+    ["1", "Mutterns volym är \(V=m/\rho_s\). Dynamometern visar tyngden minus lyftkraften.", String.raw`\[F_D=mg-\rho_vg\frac{m}{\rho_s}=mg\left(1-\frac{\rho_v}{\rho_s}\right)\]`, ""],
+    ["2", "Densiteterna kan användas i samma enhet.", String.raw`\[m=\frac{0{,}55}{9{,}82\left(1-0{,}998/7{,}85\right)}=0{,}0642\ \mathrm{kg}\]`, "" ]
+  ], String.raw`Mutterns massa är cirka \(64\ \mathrm g\).`),
+  "6.79": byggFacitListaV2([
+    ["a", "I vertikal jämvikt balanserar normalkraften och luftens lyftkraft tyngden.", String.raw`\[N+F_A=mg\Rightarrow N=mg-F_A\]`, ""],
+    ["b", "Luftens lyftkraft är", String.raw`\[F_A=1{,}29\cdot9{,}82\cdot0{,}068=0{,}861\ \mathrm N\]\[mg=70\cdot9{,}82=687{,}4\ \mathrm N\]`, ""],
+    ["3", "Den relativa minskningen blir", String.raw`\[\frac{F_A}{mg}\cdot100=\frac{0{,}861}{687{,}4}\cdot100=0{,}125\,\%\]`, "" ]
+  ], String.raw`Normalkraften blir \(N\approx686{,}5\ \mathrm N\), cirka \(0{,}13\,\%\) mindre än tyngdkraften.`),
+  "6.80": byggFacitListaV2([
+    ["1", "Ballongen tränger undan luftvolymen \(V\), så lyftkraften är", String.raw`\[F_A=\rho_{\mathrm{luft}}gV\]`, ""],
+    ["2", "Gasens egen tyngd är", String.raw`\[F_g=\rho_{\mathrm{gas}}gV\]`, ""],
+    ["3", "Den uppåtriktade kraft som återstår för den extra vikten är skillnaden.", String.raw`\[F_{\mathrm{netto}}=gV(\rho_{\mathrm{luft}}-\rho_{\mathrm{gas}})\]`, ""],
+    ["4", "Vid gränsen för jämvikt är denna lika med viktens tyngd.", String.raw`\[m_{\mathrm{vikt}}g=gV(\rho_{\mathrm{luft}}-\rho_{\mathrm{gas}})\Rightarrow m_{\mathrm{vikt}}=V(\rho_{\mathrm{luft}}-\rho_{\mathrm{gas}})\]`, "" ]
+  ], String.raw`Formeln \(m_{\mathrm{vikt}}=V(\rho_{\mathrm{luft}}-\rho_{\mathrm{gas}})\) följer direkt av kraftjämvikt.`),
+  "6.90": byggFacitListaV2([
+    ["a", "På klossen verkar tyngdkraften nedåt och vattnets lyftkraft uppåt.", `<span class="fig"><svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 360 230" role="img" aria-label="Friläggning av en flytande kloss med lyftkraft uppåt och tyngdkraft nedåt"><rect x="120" y="82" width="120" height="72" rx="4" fill="#EDEEF1" stroke="#2B2527" stroke-width="3"/><line x1="32" y1="118" x2="328" y2="118" stroke="#2F6B8F" stroke-width="3" stroke-dasharray="8 7"/><line x1="180" y1="104" x2="180" y2="38" stroke="#2F6B8F" stroke-width="4"/><polygon points="180,24 171,42 189,42" fill="#2F6B8F"/><text x="194" y="48" font-family="IBM Plex Mono" font-size="18" fill="#2F6B8F">F_A</text><line x1="180" y1="134" x2="180" y2="198" stroke="#B43123" stroke-width="4"/><polygon points="180,212 171,194 189,194" fill="#B43123"/><text x="194" y="198" font-family="IBM Plex Mono" font-size="18" fill="#B43123">mg</text><text x="180" y="110" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" fill="#2B2527">kloss</text></svg></span>`, ""],
+    ["b", "Klossen flyter stilla, så krafterna är lika stora och motriktade.", String.raw`\[F_A=mg,\qquad\sum F=0\]`, ""],
+    ["c", "När klossen trycks ned ökar den nedsänkta volymen och därmed lyftkraften.", String.raw`\[F_A=\rho_vgV_{\mathrm{under}}\]`, "När handen släpper blir resultanten uppåt och klossen rör sig tillbaka mot jämviktsläget." ]
+  ], String.raw`Tyngdkraften verkar nedåt och lyftkraften uppåt. I jämvikt är de lika stora; vid nedtryckning ökar lyftkraften.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_ARKIMEDES_V2_DEL1[uppgift.id]) uppgift.s = FACIT_ARKIMEDES_V2_DEL1[uppgift.id];
+}
+
+const FACIT_ARKIMEDES_V2_DEL2 = {
+  "6.111": byggFacitListaV2([
+    ["a", "En kubikcentimeter är \(10^{-6}\ \mathrm{m^3}\).", String.raw`\[V=250\cdot10^{-6}=2{,}50\cdot10^{-4}\ \mathrm{m^3}\]`, ""],
+    ["b", "Den undanträngda vattenmassan är", String.raw`\[m_v=\rho_vV=998\cdot2{,}50\cdot10^{-4}=0{,}2495\ \mathrm{kg}\]`, ""],
+    ["c", "Lyftkraften är tyngden av detta vatten.", String.raw`\[F_A=m_vg=0{,}2495\cdot9{,}82=2{,}45\ \mathrm N\]`, "" ]
+  ], String.raw`Volymen är \(2{,}50\cdot10^{-4}\ \mathrm{m^3}\), undanträngd vattenmassa \(0{,}250\ \mathrm{kg}\), och lyftkraften \(2{,}45\ \mathrm N\).`),
+  "6.112": byggFacitListaV2([
+    ["a", "Dynamometerns utslag minskar med lyftkraften.", String.raw`\[F_A=12{,}0-7{,}5=4{,}5\ \mathrm N\]`, ""],
+    ["b", "Använd Arkimedes princip.", String.raw`\[V=\frac{F_A}{\rho_vg}=\frac{4{,}5}{998\cdot9{,}82}=4{,}592\cdot10^{-4}\ \mathrm{m^3}\]`, String.raw`Det är \(459\ \mathrm{cm^3}\).`],
+    ["c", "Tyngden i luft ger massan.", String.raw`\[m=\frac{12{,}0}{9{,}82}=1{,}222\ \mathrm{kg}\]\[\rho=\frac{1{,}222}{4{,}592\cdot10^{-4}}=2{,}66\cdot10^3\ \mathrm{kg/m^3}\]`, "" ]
+  ], String.raw`Lyftkraften är \(4{,}5\ \mathrm N\), volymen \(4{,}59\cdot10^{-4}\ \mathrm{m^3}\), och densiteten cirka \(2{,}7\cdot10^3\ \mathrm{kg/m^3}\).`),
+  "6.113": byggFacitListaV2([
+    ["1", "För ett flytande föremål är nedsänkt andel \(f=\rho_k/\rho_v\).", "", ""],
+    ["2", "Beräkna varje densitetskvot.", String.raw`\[f_{\mathrm{kork}}=\frac{240}{998}=24{,}0\,\%\]\[f_{\mathrm{tall}}=\frac{520}{998}=52{,}1\,\%\]\[f_{\mathrm{ek}}=\frac{750}{998}=75{,}2\,\%\]\[f_{\mathrm{is}}=\frac{917}{998}=91{,}9\,\%\]`, ""],
+    ["b", "Andelen bestäms av förhållandet mellan föremålets medeldensitet och vätskans densitet.", "", "Formen kan påverka orientering och stabilitet, men inte den totala nedsänkta volymandelen i denna modell." ]
+  ], String.raw`Andelarna under ytan är cirka \(24\,\%\), \(52\,\%\), \(75\,\%\) och \(92\,\%\).`),
+  "6.114": byggFacitListaV2([
+    ["a", "När flotten är precis helt nedsänkt är den undanträngda volymen 0,80 m³.", String.raw`\[F_{A,\max}=998\cdot0{,}80\cdot9{,}82=7{,}84\cdot10^3\ \mathrm N\]`, ""],
+    ["b", "Flottens massa och tyngd är", String.raw`\[m_f=25\cdot0{,}80=20\ \mathrm{kg}\]\[F_f=20\cdot9{,}82=196\ \mathrm N\]`, ""],
+    ["c", "Vid gränsen bär återstående lyftkraft lasten.", String.raw`\[m_{\mathrm{last}}=\frac{F_{A,\max}-F_f}{g}=\frac{7840-196}{9{,}82}=778\ \mathrm{kg}\]`, "" ]
+  ], String.raw`Maximal lyftkraft är \(7{,}84\ \mathrm{kN}\), flottens tyngd \(196\ \mathrm N\), och maximal last cirka \(778\ \mathrm{kg}\).`),
+  "6.115": byggFacitListaV2([
+    ["a", "Den nedsänkta höjden är", String.raw`\[h_{\mathrm{under}}=20-8{,}0=12\ \mathrm{cm}\]`, ""],
+    ["b", "För en kloss med konstant tvärsnitt är volymandelen samma som höjdandelen.", String.raw`\[f=\frac{12}{20}=0{,}60=60\,\%\]`, ""],
+    ["c", "Flytjämvikt ger \(\rho_k=f\rho_v\).", String.raw`\[\rho_k=0{,}60\cdot998=599\ \mathrm{kg/m^3}\]`, "" ]
+  ], String.raw`\(12\ \mathrm{cm}\), alltså \(60\,\%\), ligger under ytan. Densiteten är cirka \(599\ \mathrm{kg/m^3}\).`),
+  "6.116": byggFacitListaV2([
+    ["1", "När ubåten är helt nedsänkt motsvarar den största statiska lyftkraften massan av 2000 m³ havsvatten.", String.raw`\[m_{\mathrm{undan}}=\rho V=1025\cdot2000=2{,}050\cdot10^6\ \mathrm{kg}\]`, ""],
+    ["2", "För neutral flytkraft måste ubåtens totala massa bli lika stor.", String.raw`\[m_{\mathrm{barlast}}=2{,}050\cdot10^6-1{,}80\cdot10^6=2{,}50\cdot10^5\ \mathrm{kg}\]`, "För att faktiskt accelerera nedåt behöver den ta in något mer än detta gränsvärde." ]
+  ], String.raw`Ubåten måste ta in cirka \(2{,}5\cdot10^5\ \mathrm{kg}=250\ \mathrm{ton}\) vatten för neutral flytkraft.`),
+  "6.117": byggFacitListaV2([
+    ["1", "Bestäm först klossens densitet ur läget i sötvatten.", String.raw`\[\rho_k=0{,}75\cdot998=748{,}5\ \mathrm{kg/m^3}\]`, ""],
+    ["2", "I havsvatten blir nedsänkt andel", String.raw`\[f_h=\frac{\rho_k}{\rho_h}=\frac{748{,}5}{1025}=0{,}730\]`, "" ]
+  ], String.raw`I havsvatten ligger cirka \(73\,\%\) av klossen under ytan.`),
+  "6.118": byggFacitListaV2([
+    ["1", "Ballongen undantränger luftmassan", String.raw`\[m_{\mathrm{luft}}=1{,}29\cdot8{,}0=10{,}32\ \mathrm{kg}\]`, ""],
+    ["2", "Heliumet har massan", String.raw`\[m_{\mathrm{He}}=0{,}179\cdot8{,}0=1{,}432\ \mathrm{kg}\]`, ""],
+    ["3", "Utrustningens maximala massa fås efter att både helium och hölje räknats bort.", String.raw`\[m_{\mathrm{utr}}=10{,}32-1{,}432-1{,}2=7{,}688\ \mathrm{kg}\]`, "" ]
+  ], String.raw`Ballongen kan idealiskt lyfta cirka \(7{,}7\ \mathrm{kg}\) mätutrustning.`),
+  "6.119": byggFacitListaV2([
+    ["a", "Precis flytande och helt nedsänkt betyder att medeldensiteten är lika med vattnets.", String.raw`\[V_{\mathrm{tot}}=\frac{m}{\rho_v}=\frac{2{,}0}{998}=2{,}004\cdot10^{-3}\ \mathrm{m^3}=2{,}004\ \mathrm L\]`, ""],
+    ["b", "Järnmaterialets egen volym är", String.raw`\[V_{\mathrm{järn}}=\frac{2{,}0}{7870}=2{,}541\cdot10^{-4}\ \mathrm{m^3}=0{,}254\ \mathrm L\]`, ""],
+    ["c", "Hålrummet är skillnaden.", String.raw`\[V_{\mathrm{hål}}=2{,}004-0{,}254=1{,}750\ \mathrm L\]`, "" ]
+  ], String.raw`Totalvolymen är \(2{,}00\ \mathrm L\), järnet upptar \(0{,}254\ \mathrm L\), och hålrummet cirka \(1{,}75\ \mathrm L\).`),
+  "6.120": byggFacitListaV2([
+    ["a", "Den helt nedsänkta klossen tränger undan 0,020 m³ vatten.", String.raw`\[F_A=998\cdot0{,}020\cdot9{,}82=196{,}0\ \mathrm N\]`, ""],
+    ["b", "Klossens massa och tyngd är", String.raw`\[m=30\cdot0{,}020=0{,}60\ \mathrm{kg}\]\[F_g=0{,}60\cdot9{,}82=5{,}89\ \mathrm N\]`, ""],
+    ["c", "Utan vattenmotstånd eller tillagd vattenmassa blir startresultanten och accelerationen", String.raw`\[F_{\mathrm{res}}=196{,}0-5{,}89=190{,}1\ \mathrm N\]\[a=\frac{190{,}1}{0{,}60}=317\ \mathrm{m/s^2}\]`, ""],
+    ["d", "I verkligheten måste klossen accelerera omgivande vatten och möter snabbt ett stort strömningsmotstånd. Den idealiska beräkningen gäller bara i en förenklad ögonblicksmodell.", "", "" ]
+  ], String.raw`Lyftkraften är \(196\ \mathrm N\), tyngdkraften \(5{,}89\ \mathrm N\), och den förenklade startaccelerationen \(317\ \mathrm{m/s^2}\) uppåt.`),
+  "6.131": byggFacitListaV2([
+    ["a", "När flötet är precis helt nedsänkt undantränger det \(12\ \mathrm{cm^3}\) vatten.", String.raw`\[F_{A,\max}=998\cdot12\cdot10^{-6}\cdot9{,}82=0{,}1176\ \mathrm N\]`, ""],
+    ["b", "Flötets egen tyngd är", String.raw`\[F_g=0{,}0024\cdot9{,}82=0{,}0236\ \mathrm N\]`, ""],
+    ["c", "Skillnaden kan bära sänkets skenbara tyngd enligt uppgiftens förenklade lasttolkning.", String.raw`\[F_{\mathrm{last}}=0{,}1176-0{,}0236=0{,}0940\ \mathrm N\]`, ""],
+    ["d", "Motsvarande massa är", String.raw`\[m=\frac{0{,}0940}{9{,}82}=9{,}58\ \mathrm g\]`, "Om sänket är nedsänkt får det egen lyftkraft; då kan dess verkliga massa vara något större. Densitet saknas för den korrigeringen." ]
+  ], String.raw`Maximal lyftkraft är \(0{,}118\ \mathrm N\), flötets tyngd \(0{,}0236\ \mathrm N\), och kvarvarande bärkraft \(0{,}0940\ \mathrm N\), motsvarande \(9{,}6\ \mathrm g\).`),
+  "6.132": byggFacitListaV2([
+    ["a", "Blysänkets volym är", String.raw`\[V_{Pb}=\frac{8{,}0\ \mathrm g}{11{,}340\ \mathrm{g/cm^3}}=0{,}705\ \mathrm{cm^3}\]`, ""],
+    ["b", "Volframsänkets volym är", String.raw`\[V_W=\frac{8{,}0}{19{,}300}=0{,}415\ \mathrm{cm^3}\]`, ""],
+    ["c", "Lyftkrafterna blir", String.raw`\[F_{A,Pb}=998\cdot9{,}82\cdot0{,}705\cdot10^{-6}=6{,}91\ \mathrm{mN}\]\[F_{A,W}=998\cdot9{,}82\cdot0{,}415\cdot10^{-6}=4{,}06\ \mathrm{mN}\]`, ""],
+    ["d", "Båda har samma tyngd, men volfram tränger undan mindre vatten och får mindre lyftkraft.", String.raw`\[F_{\mathrm{sken},Pb}=78{,}6-6{,}91=71{,}6\ \mathrm{mN}\]\[F_{\mathrm{sken},W}=78{,}6-4{,}06=74{,}5\ \mathrm{mN}\]`, "Volframsänket känns därför tyngst i vatten." ]
+  ], String.raw`Volymerna är \(0{,}705\) och \(0{,}415\ \mathrm{cm^3}\); lyftkrafterna \(6{,}91\) och \(4{,}06\ \mathrm{mN}\). Volframsänket känns tyngst.`),
+  "6.135": byggFacitListaV2([
+    ["1", "När 20 % sticker upp är \(0{,}80\cdot9{,}0=7{,}2\ \mathrm{cm^3}\) av flötet nedsänkt.", String.raw`\[F_{A,f}=998\cdot9{,}82\cdot7{,}2\cdot10^{-6}=0{,}07056\ \mathrm N\]`, ""],
+    ["2", "Flötets egen tyngd är", String.raw`\[F_{g,f}=0{,}0018\cdot9{,}82=0{,}01768\ \mathrm N\]`, ""],
+    ["3", "Ett helt nedsänkt blysänke med massa \(m\) har skenbar tyngd", String.raw`\[F_{\mathrm{sken}}=mg-\rho_vg\frac{m}{\rho_{Pb}}=mg\left(1-\frac{998}{11340}\right)\]`, ""],
+    ["4", "Kraftjämvikt ger", String.raw`\[m\,9{,}82\left(1-\frac{998}{11340}\right)=0{,}07056-0{,}01768\]\[m=5{,}90\cdot10^{-3}\ \mathrm{kg}\]`, "" ]
+  ], String.raw`Sänkenas sammanlagda massa ska vara cirka \(5{,}9\ \mathrm g\).`),
+  "6.137": byggFacitListaV2([
+    ["a", "Radien är \(0{,}70\ \mathrm{mm}=7{,}0\cdot10^{-4}\ \mathrm m\).", String.raw`\[V=\pi r^2l=\pi(7{,}0\cdot10^{-4})^2\cdot27=4{,}156\cdot10^{-5}\ \mathrm{m^3}\]`, String.raw`Det är \(41{,}6\ \mathrm{cm^3}\).`],
+    ["b", "Massorna fås av \(m=\rho V\).", String.raw`\[m_f=850V=0{,}0353\ \mathrm{kg}=35{,}3\ \mathrm g\]\[m_s=1200V=0{,}0499\ \mathrm{kg}=49{,}9\ \mathrm g\]`, ""],
+    ["c", "För flytlinan är nedsänkt andel", String.raw`\[f=\frac{850}{998}=0{,}852=85{,}2\,\%\]`, ""],
+    ["d", "Sjunklinans skenbara tyngd är tyngd minus lyftkraft.", String.raw`\[F_{\mathrm{sken}}=(1200-998)Vg=0{,}0824\ \mathrm N\]`, "" ]
+  ], String.raw`Volymen är \(4{,}16\cdot10^{-5}\ \mathrm{m^3}\). Linorna väger \(35{,}3\) respektive \(49{,}9\ \mathrm g\); flytlinan ligger \(85\,\%\) under ytan och sjunklinans skenbara tyngd är \(0{,}082\ \mathrm N\).`),
+  "6.139": byggFacitListaV2([
+    ["a", "Flakets volym är \(V=3{,}0\cdot0{,}12=0{,}36\ \mathrm{m^3}\). Precis helt nedsänkt blir lyftkraften maximal enligt kriteriet.", String.raw`\[F_{A,\max}=998\cdot0{,}36\cdot9{,}82=3{,}528\ \mathrm{kN}\]`, ""],
+    ["b", "Isens egen massa är \(917\cdot0{,}36=330{,}12\ \mathrm{kg}\). Kvarvarande massbärförmåga är", String.raw`\[m_p=998\cdot0{,}36-917\cdot0{,}36=(998-917)0{,}36=29{,}2\ \mathrm{kg}\]`, ""],
+    ["c", "För en person på 85 kg krävs", String.raw`\[(\rho_v-\rho_i)Ah=85\]\[h=\frac{85}{(998-917)\cdot3{,}0}=0{,}350\ \mathrm m\]`, "Detta är en ideal beräkning för ett fritt flak och inte ett säkerhetsråd för verklig is." ]
+  ], String.raw`Maximal lyftkraft är \(3{,}53\ \mathrm{kN}\). Flaket kan bära cirka \(29\ \mathrm{kg}\); för 85 kg krävs idealiskt cirka \(0{,}35\ \mathrm m\) tjocklek.`),
+  "6.140": byggFacitListaV2([
+    ["a", "Två tredjedelar av flötet ska vara nedsänkt: \(V_{u}=10\ \mathrm{cm^3}\).", String.raw`\[F_{A,f}=998\cdot9{,}82\cdot10\cdot10^{-6}=0{,}09800\ \mathrm N\]`, ""],
+    ["b", "Betets volym är \(m/\rho_b\). Dess skenbara tyngd blir", String.raw`\[F_{\mathrm{sken},b}=m_bg\left(1-\frac{\rho_v}{\rho_b}\right)\]\[F_{\mathrm{sken},b}=0{,}0012\cdot9{,}82\left(1-\frac{998}{1050}\right)=5{,}84\cdot10^{-4}\ \mathrm N\]`, "Den är liten eftersom betets densitet bara är ungefär 5 % större än vattnets."],
+    ["c", "Flötets tyngd är \(0{,}0030\cdot9{,}82=0{,}02946\ \mathrm N\). Ett blysänke med massa \(m_s\) har skenbar tyngd \(m_sg(1-998/11340)\).", String.raw`\[m_s=\frac{0{,}09800-0{,}02946-0{,}000584}{9{,}82(1-998/11340)}=7{,}59\cdot10^{-3}\ \mathrm{kg}\]`, ""],
+    ["d", "Utan betet skulle man få", String.raw`\[m_s'=\frac{0{,}09800-0{,}02946}{9{,}82(1-998/11340)}=7{,}65\ \mathrm g\]\[\Delta m=7{,}65-7{,}59=0{,}065\ \mathrm g\]`, String.raw`Felet är cirka \(0{,}86\,\%\).`]
+  ], String.raw`Flötets lyftkraft är \(0{,}0980\ \mathrm N\), betets skenbara tyngd \(0{,}000584\ \mathrm N\), och sänket ska väga cirka \(7{,}59\ \mathrm g\). Att bortse från betet ger \(0{,}065\ \mathrm g\) fel.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_ARKIMEDES_V2_DEL2[uppgift.id]) uppgift.s = FACIT_ARKIMEDES_V2_DEL2[uppgift.id];
+}
+
+const FACIT_VARME_V2 = {
+  "7.1": byggFacitListaV2([
+    ["a", "Vattenvolymen är \(12\cdot8=96\ \mathrm L\), alltså ungefär 96 kg. Temperaturökningen är 30 K.", String.raw`\[Q=mc\Delta T=96\cdot4180\cdot30=1{,}204\cdot10^7\ \mathrm J\]\[Q=\frac{1{,}204\cdot10^7}{3{,}6\cdot10^6}=3{,}34\ \mathrm{kWh}\]`, ""],
+    ["b", "Energikostnaden blir", String.raw`\[C=3{,}34\cdot2{,}50=8{,}36\ \mathrm{kr}\]`, ""],
+    ["c", "Tre av åtta minuter sparas varje dag.", String.raw`\[C_{\mathrm{år}}=8{,}36\frac38\cdot365=1{,}14\cdot10^3\ \mathrm{kr}\]`, "Beräkningen bortser från förluster och fasta kostnader." ]
+  ], String.raw`Duschen kräver cirka \(12{,}0\ \mathrm{MJ}=3{,}34\ \mathrm{kWh}\) och kostar \(8{,}4\ \mathrm{kr}\). Tre minuter kortare dusch sparar cirka \(1150\ \mathrm{kr/år}\).`),
+  "7.2": byggFacitListaV2([
+    ["1", "Vattnets massa är cirka 1,7 kg och temperaturökningen \(100-20=80\ \mathrm K\).", String.raw`\[Q=1{,}7\cdot4180\cdot80=568480\ \mathrm J\]`, ""],
+    ["2", "Endast 90 % av eleffekten värmer vattnet.", String.raw`\[P_{\mathrm{nyttig}}=0{,}90\cdot2000=1800\ \mathrm W\]\[t=\frac QP=\frac{568480}{1800}=316\ \mathrm s\]`, "" ]
+  ], String.raw`Den idealiserade koktiden är cirka \(316\ \mathrm s=5{,}3\ \mathrm{min}\).`),
+  "7.3": byggFacitListaV2([
+    ["a", "En liter luft är \(10^{-3}\ \mathrm{m^3}\) och har massan \(1{,}0\cdot10^{-3}\ \mathrm{kg}\).", String.raw`\[Q_{\mathrm{luft}}=1005\cdot0{,}0010\cdot70=70{,}4\ \mathrm J\]`, ""],
+    ["2", "En liter vatten har massan ungefär 1,0 kg.", String.raw`\[Q_{\mathrm{vatten}}=4180\cdot1{,}0\cdot70=2{,}926\cdot10^5\ \mathrm J=293\ \mathrm{kJ}\]`, ""],
+    ["b", "Energin per liter skiljer med faktorn", String.raw`\[\frac{292600}{70{,}4}\approx4160\]`, "Vatten leder dessutom värme till huden mycket effektivare än luft, vilket gör energiöverföringen snabb och brännskadan allvarlig." ]
+  ], String.raw`En liter luft avger cirka \(70\ \mathrm J\), medan en liter vatten avger \(293\ \mathrm{kJ}\), drygt 4000 gånger mer.`),
+  "7.4": byggFacitListaV2([
+    ["a", "Verkningsgraden är nyttig effekt delad med tillförd effekt.", String.raw`\[P_{\mathrm{in}}=\frac{40}{0{,}30}=133\ \mathrm{kW}\]`, ""],
+    ["b", "Resten blir i denna energibalans spillvärme.", String.raw`\[P_{\mathrm{spill}}=133-40=93{,}3\ \mathrm{kW}\]`, ""],
+    ["c", "För kylvattnet gäller \(P=\dot m c\Delta T\).", String.raw`\[\dot m=\frac{60000}{4180\cdot8}=1{,}79\ \mathrm{kg/s}\]`, "" ]
+  ], String.raw`Bränsleeffekten är \(133\ \mathrm{kW}\), spillvärmen \(93\ \mathrm{kW}\), och det erforderliga kylvattenflödet cirka \(1{,}8\ \mathrm{kg/s}\).`),
+  "7.8": byggFacitListaV2([
+    ["a", "Värmefaktorn är \(\mathrm{COP}=Q_{\mathrm{värme}}/W_{\mathrm{el}}\).", String.raw`\[E_{\mathrm{el}}=\frac{15000}{3{,}5}=4286\ \mathrm{kWh/år}\]`, ""],
+    ["b", "Jämfört med direktel sparas \(15000-4286=10714\ \mathrm{kWh}\).", String.raw`\[C_{\mathrm{spar}}=10714\cdot2{,}50=26786\ \mathrm{kr/år}\]`, ""],
+    ["c", "Nej. Värmepumpen tillför både elenergi och värme som tas från omgivningen.", String.raw`\[Q_{\mathrm{inomhus}}=W_{\mathrm{el}}+Q_{\mathrm{utomhus}}\]`, "Den skapar inte energi utan transporterar värme." ]
+  ], String.raw`Elförbrukningen är cirka \(4300\ \mathrm{kWh/år}\) och besparingen ungefär \(27000\ \mathrm{kr/år}\). Energiprincipen är uppfylld.`),
+  "7.9": byggFacitListaV2([
+    ["a", "Temperaturskillnaden är \(20-(-2)=22\ \mathrm K\).", String.raw`\[P=UA\Delta T=1{,}2\cdot2{,}4\cdot22=63{,}36\ \mathrm W\]`, ""],
+    ["b", "Under 2000 timmar blir energin", String.raw`\[E=0{,}06336\cdot2000=126{,}7\ \mathrm{kWh}\]`, ""],
+    ["c", "Med \(U=0{,}8\) blir effekten \(42{,}24\ \mathrm W\).", String.raw`\[\Delta E=(0{,}06336-0{,}04224)\cdot2000=42{,}2\ \mathrm{kWh}\]`, "" ]
+  ], String.raw`Förlusten är \(63\ \mathrm W\) och \(127\ \mathrm{kWh}\) under perioden. Treglasfönstret sparar cirka \(42\ \mathrm{kWh}\).`),
+  "7.10": byggFacitListaV2([
+    ["a", "Anta samma specifika värmekapacitet för kaffe och mjölk och inga värmeförluster under blandningen.", String.raw`\[T=\frac{m_kT_k+m_mT_m}{m_k+m_m}=\frac{200\cdot90+30\cdot5}{230}=78{,}9\,{}^{\circ}\mathrm C\]`, ""],
+    ["b", "Om mjölken hälls i direkt sänks kaffets temperatur tidigt. Temperaturskillnaden mot rummet blir då mindre, vilket minskar värmeflödet under väntetiden.", "", "Därför blir drycken normalt varmast efter tio minuter om mjölken hälls i direkt, under uppgiftens förenklade antaganden." ]
+  ], String.raw`Blandningstemperaturen direkt är cirka \(79\,{}^{\circ}\mathrm C\). Häll i mjölken direkt för högst temperatur efter väntetiden.`),
+  "7.11": byggFacitListaV2([
+    ["a", "Jordens tvärsnitt \(\pi R^2\) tar emot strålningen, som i medel fördelas över ytan \(4\pi R^2\).", String.raw`\[I_{\mathrm{med}}=\frac{1361}{4}=340{,}25\ \mathrm{W/m^2}\]`, ""],
+    ["b", "Andelen \(1-0{,}30=0{,}70\) absorberas.", String.raw`\[I_{\mathrm{abs}}=0{,}70\cdot340{,}25=238{,}2\ \mathrm{W/m^2}\]`, ""],
+    ["c", "Högre albedo reflekterar mer solenergi och sänker jämviktstemperaturen. Mer is, snö eller vissa moln kan höja albedot.", "", "Minskad isyta sänker albedot och kan förstärka uppvärmning genom positiv återkoppling." ]
+  ], String.raw`Medelinstrålningen är \(340\ \mathrm{W/m^2}\), varav cirka \(238\ \mathrm{W/m^2}\) absorberas. Högre albedo kyler jorden.`),
+  "7.12": byggFacitListaV2([
+    ["a", "Sätt luftpelarens värmekapacitet lika med en kubikmeter vattens.", String.raw`\[1000\cdot4180=1{,}29\,h\cdot1005\]\[h=\frac{4{,}18\cdot10^6}{1{,}29\cdot1005}=3224\ \mathrm m\]`, ""],
+    ["b", "Havet kan lagra mycket energi med liten temperaturändring. Det värms och kyls därför långsamt och jämnar ut lufttemperaturen nära kusten över årstiderna.", "", "Fasomvandling, strömmar och blandning förstärker också havets klimatutjämnande roll." ]
+  ], String.raw`Det krävs en luftpelare ungefär \(3{,}2\ \mathrm{km}\) hög. Havets stora värmekapacitet dämpar kustklimatets temperatursvängningar.`),
+  "7.13": byggFacitListaV2([
+    ["a", "Temperaturfallet är \(85-62=23\ \mathrm K\).", String.raw`\[Q=mc\Delta T=0{,}50\cdot4180\cdot23=48070\ \mathrm J\]`, ""],
+    ["b", "Energin har överförts till termosens material och omgivningen genom värmeledning, strålning och viss konvektion.", "", "En termos minskar värmeöverföringen men gör den inte noll." ]
+  ], String.raw`Kaffet har avgett cirka \(48\ \mathrm{kJ}\) till termosen och omgivningen.`),
+  "7.17": byggFacitListaV2([
+    ["1", "Använd \(Q=mc\Delta T\).", String.raw`\[Q=2{,}5\cdot460\cdot60=69000\ \mathrm J\]`, "" ]
+  ], String.raw`Det krävs \(69\ \mathrm{kJ}\).`),
+  "7.18": byggFacitListaV2([
+    ["a", "Effekten är energi per tid. Med massflödet \(\dot m\) gäller", String.raw`\[P=c\dot m\Delta T=4180\cdot0{,}80\cdot12=40128\ \mathrm W\]`, ""],
+    ["b", "På en timme blir energin", String.raw`\[E=Pt=40128\cdot3600=1{,}4446\cdot10^8\ \mathrm J\]\[E=40{,}128\ \mathrm{kWh}\]`, "" ]
+  ], String.raw`Effekten är cirka \(40\ \mathrm{kW}\), och på en timme överförs \(144\ \mathrm{MJ}=40\ \mathrm{kWh}\).`),
+  "7.19": byggFacitListaV2([
+    ["a", "Solfångaren tar upp 45 % av infallande effekt.", String.raw`\[P=4{,}0\cdot700\cdot0{,}45=1260\ \mathrm W\]`, ""],
+    ["b", "150 liter vatten har massan cirka 150 kg.", String.raw`\[Q=150\cdot4180\cdot10=6{,}27\cdot10^6\ \mathrm J\]\[t=\frac{6{,}27\cdot10^6}{1260}=4976\ \mathrm s=82{,}9\ \mathrm{min}\]`, ""],
+    ["c", "I verkligheten varierar instrålningen och en del värme förloras från solfångare, rör och tank samtidigt som vattnet värms.", "", "" ]
+  ], String.raw`Den upptagna effekten är \(1{,}26\ \mathrm{kW}\), och ideal uppvärmningstid cirka \(83\ \mathrm{min}\).`),
+  "7.20": byggFacitListaV2([
+    ["a", "Ett dygn är 86400 s.", String.raw`\[E=Pt=100\cdot86400=8{,}64\ \mathrm{MJ}=2{,}40\ \mathrm{kWh}\]`, ""],
+    ["b", "För att balansera 2,0 kW värmeförlust krävs", String.raw`\[N=\frac{2000}{100}=20\ \text{personer}\]`, ""],
+    ["c", "Personer avger även koldioxid, vattenånga och luktämnen. Temperaturbalans garanterar därför inte god luftkvalitet.", "", "Ventilation behövs även när personernas värme täcker värmeförlusten." ]
+  ], String.raw`En person avger \(8{,}64\ \mathrm{MJ}=2{,}40\ \mathrm{kWh}\) per dygn. Cirka 20 personer ger 2,0 kW.`),
+  "7.27": byggFacitListaV2([
+    ["a", "Läs av cirka 85 °C vid start och 64 °C efter 10 minuter.", String.raw`\[\Delta T_{0-10}=85-64=21\,{}^{\circ}\mathrm C\]`, ""],
+    ["b", "Mellan 50 och 60 minuter visar grafen ungefär 29 respektive 26 °C.", String.raw`\[\Delta T_{50-60}=29-26=3\,{}^{\circ}\mathrm C\]`, ""],
+    ["c", "Värmeflödet minskar när temperaturskillnaden mellan kaffet och rummet minskar. Kurvan närmar sig därför rumstemperaturen 20 °C allt långsammare.", "", "" ]
+  ], String.raw`Kaffet svalnar cirka \(21\,{}^{\circ}\mathrm C\) de första tio minuterna men bara \(3\,{}^{\circ}\mathrm C\) under de sista tio.`),
+  "7.28": byggFacitListaV2([
+    ["a", "Luftmassan är", String.raw`\[m=\rho V=1{,}2\cdot12=14{,}4\ \mathrm{kg}\]`, ""],
+    ["b", "Energin för att värma enbart luften 60 K är", String.raw`\[Q=14{,}4\cdot1005\cdot60=8{,}683\cdot10^5\ \mathrm J\]`, ""],
+    ["c", "Utan värmeförlust blir tiden", String.raw`\[t=\frac{Q}{P}=\frac{868320}{6000}=144{,}7\ \mathrm s=2{,}41\ \mathrm{min}\]`, "I en verklig bastu tar väggar, lavar och stenmagasin mycket mer energi än luften och värme läcker ut." ]
+  ], String.raw`Luftmassan är \(14{,}4\ \mathrm{kg}\), energin \(868\ \mathrm{kJ}\), och den idealiserade tiden \(2{,}4\ \mathrm{min}\).`),
+  "7.30": byggFacitListaV2([
+    ["a", "Vattnet värms \(22{,}5-18{,}0=4{,}5\ \mathrm K\).", String.raw`\[Q_v=0{,}400\cdot4180\cdot4{,}5=7524\ \mathrm J\]`, ""],
+    ["b", "Om all metallens avgivna energi går till vattnet kyls metallen \(100-22{,}5=77{,}5\ \mathrm K\).", String.raw`\[c_m=\frac{Q_v}{m_m\Delta T_m}=\frac{7524}{0{,}250\cdot77{,}5}=388\ \mathrm{J/(kg\,K)}\]`, ""],
+    ["c", "Värdet ligger närmast koppars \(385\ \mathrm{J/(kg\,K)}\).", "", ""],
+    ["d", "Om kärlet också tar upp energi har metallen avgett mer än de 7524 J som räknades till vattnet.", "", "Det beräknade värdet för metallens specifika värmekapacitet blir därför för lågt." ]
+  ], String.raw`Vattnet tar upp \(7{,}52\ \mathrm{kJ}\). Metallen får \(c\approx388\ \mathrm{J/(kg\,K)}\) och är troligen koppar; kärlets uppvärmning gör det beräknade värdet för lågt.`),
+  "7.31": byggFacitListaV2([
+    ["a", "Temperaturskillnaden är 18 K.", String.raw`\[P_v=0{,}25\cdot95\cdot18=427{,}5\ \mathrm W\]\[P_f=1{,}2\cdot18\cdot18=388{,}8\ \mathrm W\]`, ""],
+    ["b", "Säsongen är \(210\cdot24=5040\ \mathrm h\).", String.raw`\[E=(0{,}4275+0{,}3888)\cdot5040=4114\ \mathrm{kWh}\]`, ""],
+    ["c", "Fönstrens andel av den beräknade transmissionsförlusten är", String.raw`\[\frac{388{,}8}{427{,}5+388{,}8}=47{,}6\,\%\]`, ""],
+    ["d", "Med \(U=0{,}9\) minskar fönstereffekten med", String.raw`\[\Delta P=(1{,}2-0{,}9)\cdot18\cdot18=97{,}2\ \mathrm W\]\[\Delta E=0{,}0972\cdot5040=490\ \mathrm{kWh}\]\[\Delta C=490\cdot2{,}50=1225\ \mathrm{kr}\]`, "" ]
+  ], String.raw`Väggar och fönster förlorar \(428\) respektive \(389\ \mathrm W\); totalt \(4{,}11\ \mathrm{MWh}\). Fönstren står för \(47{,}6\,\%\), och bytet sparar cirka \(1225\ \mathrm{kr/år}\).`),
+  "7.33": byggFacitListaV2([
+    ["1", "Använd den givna enheten kJ/(kg·K) direkt.", String.raw`\[Q=mc\Delta T=3{,}0\cdot0{,}385\cdot60=69{,}3\ \mathrm{kJ}\]`, "" ]
+  ], String.raw`Det krävs cirka \(69\ \mathrm{kJ}\).`),
+  "7.34": byggFacitListaV2([
+    ["a", "\(4{,}0\ \mathrm{dl}=0{,}40\ \mathrm L\) vatten har massan cirka 0,40 kg. Temperaturökningen är 72 K.", String.raw`\[Q=0{,}40\cdot4180\cdot72=1{,}204\cdot10^5\ \mathrm J\]`, ""],
+    ["b", "Med ideal effektöverföring gäller", String.raw`\[t=\frac{Q}{P}=\frac{120384}{2000}=60{,}2\ \mathrm s\]`, "" ]
+  ], String.raw`Det krävs cirka \(120\ \mathrm{kJ}\), vilket idealiskt tar \(60\ \mathrm s\).`),
+  "7.35": byggFacitListaV2([
+    ["a", "När termisk jämvikt med uteluften nås har vattnet samma temperatur som omgivningen.", String.raw`\[T_f=12\,{}^{\circ}\mathrm C\]`, ""],
+    ["b", "Temperaturfallet är \(50-12=38\ \mathrm K\).", String.raw`\[m=\frac{Q}{c\Delta T}=\frac{120\ \mathrm{kJ}}{4{,}18\ \mathrm{kJ/(kg\,K)}\cdot38\ \mathrm K}=0{,}756\ \mathrm{kg}\]`, "" ]
+  ], String.raw`Sluttemperaturen är \(12\,{}^{\circ}\mathrm C\), och vattenmassan cirka \(0{,}76\ \mathrm{kg}\).`),
+  "7.36": byggFacitListaV2([
+    ["a", "Massan är 0,600 kg och energin 32 kJ.", String.raw`\[c=\frac{Q}{m\Delta T}=\frac{32}{0{,}600\cdot120}=0{,}444\ \mathrm{kJ/(kg\,K)}\]`, ""],
+    ["b", "Värdet ligger nära järns specifika värmekapacitet, ungefär \(0{,}45\ \mathrm{kJ/(kg\,K)}\).", "", "Materialidentifieringen är ungefärlig eftersom flera legeringar kan ha liknande värde." ]
+  ], String.raw`\(c\approx0{,}44\ \mathrm{kJ/(kg\,K)}\); metallen kan vara järn eller stål.`),
+  "7.37": byggFacitListaV2([
+    ["a", "Åtta minuter är 480 s.", String.raw`\[E=Pt=400\cdot480=192000\ \mathrm J=192\ \mathrm{kJ}\]`, ""],
+    ["b", "Fyra liter vatten har massan cirka 4,0 kg.", String.raw`\[\Delta T=\frac{Q}{mc}=\frac{192000}{4{,}0\cdot4180}=11{,}48\ \mathrm K\]\[T_f=12+11{,}48=23{,}5\,{}^{\circ}\mathrm C\]`, ""],
+    ["c", "En del energi värmer hinken och doppvärmaren och en del överförs till omgivningen.", "", "Därför blir den verkliga vattentemperaturen lägre." ]
+  ], String.raw`Värmaren avger \(192\ \mathrm{kJ}\). Idealt blir vattnet \(23{,}5\,{}^{\circ}\mathrm C\).`),
+  "7.38": byggFacitListaV2([
+    ["a", "Vid samma temperatur kan en liter vatten lagra tusentals gånger mer termisk energi än en liter luft. Vatten har också mycket bättre värmeöverföring till huden.", "", "Därför överför 85-gradigt vatten snabbt en farlig energimängd, medan torr luft gör det betydligt långsammare."],
+    ["b", "Temperatur är ett mått på ett systems termiska tillstånd. I en ideal gas är den proportionell mot molekylernas genomsnittliga translationsenergi.", String.raw`\[\langle E_{k,\mathrm{trans}}\rangle=\frac32k_BT\]`, "I fasta ämnen och vätskor fördelas energin även på vibrationer och växelverkningar." ]
+  ], String.raw`Vatten bränner mer eftersom energiöverföringen är mycket större och snabbare. Temperatur beskriver systemets termiska tillstånd, kopplat till partiklarnas mikroskopiska energi.`),
+  "7.39": byggFacitListaV2([
+    ["a", "Kelvin fås genom att lägga till 273,15.", String.raw`\[210+273{,}15=483{,}15\ \mathrm K\]`, ""],
+    ["b", "Celsius fås genom att subtrahera 273,15.", String.raw`\[450-273{,}15=176{,}85\,{}^{\circ}\mathrm C\]`, ""],
+    ["c", "Vid 0 K befinner sig systemet i sitt lägsta möjliga energitillstånd och kan inte avge ytterligare termisk energi.", "", "Kvantmekanisk nollpunktsrörelse kan finnas kvar; 0 K betyder alltså inte bokstavligen att all partikelrörelse upphör." ]
+  ], String.raw`\(210\,{}^{\circ}\mathrm C=483\ \mathrm K\) och \(450\ \mathrm K=177\,{}^{\circ}\mathrm C\). Absoluta nollpunkten är den lägsta möjliga temperaturen.`),
+  "7.40": byggFacitListaV2([
+    ["a", "Fyra kubikdecimeter vatten har massan cirka 4,0 kg. Temperaturökningen är 60 K.", String.raw`\[Q=4{,}0\cdot4180\cdot60=1{,}0032\cdot10^6\ \mathrm J\]`, ""],
+    ["b", "Sätt samma energi lika med ökningen i lägesenergi för en sten på 1200 kg.", String.raw`\[mgh=Q\Rightarrow h=\frac{1{,}0032\cdot10^6}{1200\cdot9{,}82}=85{,}1\ \mathrm m\]`, "" ]
+  ], String.raw`Vattnet kräver cirka \(1{,}00\ \mathrm{MJ}\), samma energi som att lyfta stenen ungefär \(85\ \mathrm m\).`),
+  "7.41": byggFacitListaV2([
+    ["a", "Järnplattan känns kallast eftersom dess höga värmeledningsförmåga för bort energi från handen snabbare än trä. Känslan avgörs av värmeflödet, inte bara temperaturen.", "", ""],
+    ["b", "Det går inte att avgöra entydigt av uppgiften vilken hel platta som når rumstemperatur först. Uppvärmningstiden beror på geometri, massa, värmekapacitet, värmeledningsförmåga och värmeöverföringen till luften.", "", "Järn får snabbare jämn temperatur inuti materialet, men det betyder inte automatiskt att hela plattan når rumstemperatur först." ]
+  ], String.raw`Järn känns kallast. Vilken platta som når rumstemperatur först kan inte bestämmas utan fler uppgifter; det tidigare enkla svaret ”järn” följer inte av värmeledningsförmågan ensam.`),
+  "7.42": byggFacitListaV2([
+    ["a", "Använd \(c=0{,}46\ \mathrm{kJ/(kg\,K)}\).", String.raw`\[Q=mc\Delta T=15\cdot0{,}46\cdot35=241{,}5\ \mathrm{kJ}\]`, ""],
+    ["b", "Tio minuter är 600 s.", String.raw`\[P_{\mathrm{med}}=\frac{241500}{600}=402{,}5\ \mathrm W\]`, "" ]
+  ], String.raw`Stålbiten avger cirka \(242\ \mathrm{kJ}\), med medeleffekten cirka \(403\ \mathrm W\).`),
+  "7.43": byggFacitListaV2([
+    ["1", "Vattnets massa är 0,400 kg. I det isolerade systemet är vattnets upptagna värme lika med järnets avgivna.", String.raw`\[m_vc_v(T-15)=m_jc_j(95-T)\]`, ""],
+    ["2", "Sätt in \(c_v=4{,}18\) och \(c_j=0{,}449\ \mathrm{kJ/(kg\,K)}\).", String.raw`\[0{,}400\cdot4{,}18(T-15)=0{,}250\cdot0{,}449(95-T)\]`, ""],
+    ["3", "Lös ekvationen.", String.raw`\[1{,}672T-25{,}08=10{,}6638-0{,}11225T\]\[T=20{,}00\,{}^{\circ}\mathrm C\]`, "" ]
+  ], String.raw`Järnet och vattnet får sluttemperaturen cirka \(20{,}0\,{}^{\circ}\mathrm C\).`),
+  "7.44": byggFacitListaV2([
+    ["1", "Utgå från 1,00 liter blandning och anta att volymerna är additiva. Metanolvolymen är 0,25 L och vattenvolymen 0,75 L.", String.raw`\[m_m=0{,}25\cdot0{,}79=0{,}1975\ \mathrm{kg},\qquad m_v=0{,}750\ \mathrm{kg}\]`, ""],
+    ["2", "Blandningens värmekapacitet är summan av komponenternas, och den specifika värmekapaciteten fås per total massa.", String.raw`\[c=\frac{m_mc_m+m_vc_v}{m_m+m_v}\]\[c=\frac{0{,}1975\cdot2{,}53+0{,}750\cdot4{,}18}{0{,}9475}=3{,}837\ \mathrm{kJ/(kg\,K)}\]`, "" ]
+  ], String.raw`Blandningens specifika värmekapacitet är cirka \(3{,}8\ \mathrm{kJ/(kg\,K)}\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_VARME_V2[uppgift.id]) uppgift.s = FACIT_VARME_V2[uppgift.id];
+}
+
+const FACIT_FASANDRING_V2 = {
+  "7.5": byggFacitListaV2([
+    ["a", "Drycken behandlas som vatten och avger energi när den kyls 20 K.", String.raw`\[Q_d=0{,}250\cdot4180\cdot20=20900\ \mathrm J\]`, ""],
+    ["2", "Varje kilogram is tar först upp smältvärme och därefter värme när smältvattnet värms från 0 till 5 °C.", String.raw`\[q_i=l_s+c_v\Delta T=334000+4180\cdot5=354900\ \mathrm{J/kg}\]`, ""],
+    ["3", "Energibalansen ger ismassan.", String.raw`\[m_i=\frac{Q_d}{q_i}=\frac{20900}{354900}=0{,}0589\ \mathrm{kg}\]`, ""],
+    ["b", "Is tar upp den stora smältentalpin utan att temperaturen stiger. Nollgradigt flytande vatten kan bara ta upp \(c\Delta T\) under uppvärmningen.", String.raw`\[\frac{334+20{,}9}{20{,}9}\approx17\]`, "För samma uppvärmning till 5 °C är isen alltså ungefär 17 gånger effektivare per kilogram än 0-gradigt vatten, inte bara fyra gånger." ]
+  ], String.raw`Det behövs cirka \(59\ \mathrm g\) is. Effektiviteten kommer främst från isens stora smältentalpi.`),
+  "7.6": byggFacitListaV2([
+    ["a", "När vatten fryser frigörs smältentalpin samtidigt som vattnet och isen ligger nära 0 °C. Den avgivna energin motverkar att knopparnas temperatur sjunker långt under noll.", "", "Skyddet kräver att nytt vatten fortsätter frysa; redan genomfrusen is producerar ingen ytterligare latent värme."],
+    ["b", "För 1,0 kg vatten är den frigjorda energin", String.raw`\[Q=ml_s=1{,}0\cdot334=334\ \mathrm{kJ}\]`, ""],
+    ["c", "Vid en värmeförlust på 40 J/s räcker energin", String.raw`\[t=\frac{334000}{40}=8350\ \mathrm s=2{,}32\ \mathrm h\]`, "" ]
+  ], String.raw`Frysningen avger \(334\ \mathrm{kJ}\) och kan idealiskt balansera \(40\ \mathrm W\) i cirka \(2{,}3\ \mathrm h\).`),
+  "7.7": byggFacitListaV2([
+    ["1", "Kyl det flytande vattnet från 20 till 0 °C.", String.raw`\[Q_1=1{,}0\cdot4180\cdot20=83{,}6\ \mathrm{kJ}\]`, ""],
+    ["2", "Frys vattnet vid 0 °C.", String.raw`\[Q_2=1{,}0\cdot334=334\ \mathrm{kJ}\]`, ""],
+    ["3", "Kyl isen från 0 till \(-18\,{}^{\circ}\mathrm C\).", String.raw`\[Q_3=1{,}0\cdot2100\cdot18=37{,}8\ \mathrm{kJ}\]`, ""],
+    ["4", "Summera energibidragen.", String.raw`\[Q_{\mathrm{tot}}=83{,}6+334+37{,}8=455{,}4\ \mathrm{kJ}\]`, "" ]
+  ], String.raw`Frysen måste transportera bort cirka \(455\ \mathrm{kJ}\).`),
+  "7.14": byggFacitListaV2([
+    ["a", "Det kokande vattnet kyls \(100-37=63\ \mathrm K\).", String.raw`\[Q_v=0{,}100\cdot4180\cdot63=26{,}3\ \mathrm{kJ}\]`, ""],
+    ["b", "Ångan kondenserar först och det bildade vattnet kyls sedan till 37 °C.", String.raw`\[Q_{\mathrm{ånga}}=0{,}100\cdot2260+26{,}3=252{,}3\ \mathrm{kJ}\]`, ""],
+    ["c", "Energikvoten är", String.raw`\[\frac{252{,}3}{26{,}3}=9{,}59\]`, "Ångan avger alltså nästan tio gånger mer energi, huvudsakligen vid kondensationen på huden." ]
+  ], String.raw`Vattnet avger \(26\ \mathrm{kJ}\), medan ångan avger cirka \(252\ \mathrm{kJ}\). Därför ger ånga mycket allvarligare brännskador.`),
+  "7.15": byggFacitListaV2([
+    ["1", "Smält isen vid 0 °C.", String.raw`\[Q_1=0{,}250\cdot334=83{,}5\ \mathrm{kJ}\]`, ""],
+    ["2", "Värm därefter 0,250 kg vatten 20 K.", String.raw`\[Q_2=0{,}250\cdot4{,}18\cdot20=20{,}9\ \mathrm{kJ}\]`, ""],
+    ["3", "Total energi är", String.raw`\[Q_{\mathrm{tot}}=83{,}5+20{,}9=104{,}4\ \mathrm{kJ}\]`, "" ]
+  ], String.raw`Det krävs cirka \(104\ \mathrm{kJ}\).`),
+  "7.16": byggFacitListaV2([
+    ["a", "Kondensationen frigör ångbildningsentalpin.", String.raw`\[Q=ml_v=0{,}0050\cdot2260=11{,}3\ \mathrm{kJ}\]`, ""],
+    ["b", "Om all energin går till 0,200 kg dryck blir temperaturökningen", String.raw`\[\Delta T=\frac{11{,}3}{0{,}200\cdot4{,}18}=13{,}5\ \mathrm K\]`, "Detta är en ideal övre gräns; glas och omgivning tar också upp energi."],
+    ["c", "Efter regn kan vatten avdunsta. Förångningen kräver energi som tas från marken och luften, vilket ger avdunstningskylning.", "", "Även kallare nedvindar från åskmolnet kan bidra till temperaturfallet." ]
+  ], String.raw`Kondensen avger \(11{,}3\ \mathrm{kJ}\), vilket idealiskt skulle värma drycken \(13{,}5\,{}^{\circ}\mathrm C\). Avdunstning efter regn kyler omgivningen.`),
+  "7.21": byggFacitListaV2([
+    ["1", "Vattnet är redan vid kokpunkten, så endast fasomvandlingen behöver räknas.", String.raw`\[Q=ml_v=0{,}40\cdot2260=904\ \mathrm{kJ}\]`, "" ]
+  ], String.raw`Det krävs \(904\ \mathrm{kJ}\).`),
+  "7.22": byggFacitListaV2([
+    ["a", "Temperaturökningen till smältpunkten är \(660-20=640\ \mathrm K\).", String.raw`\[Q_1=mc\Delta T=2{,}0\cdot900\cdot640=1{,}152\ \mathrm{MJ}\]`, ""],
+    ["b", "Själva smältningen kräver", String.raw`\[Q_2=ml_s=2{,}0\cdot397=794\ \mathrm{kJ}\]`, ""],
+    ["c", "Summera.", String.raw`\[Q_{\mathrm{tot}}=1{,}152+0{,}794=1{,}946\ \mathrm{MJ}\]`, "" ]
+  ], String.raw`Uppvärmningen kräver \(1{,}15\ \mathrm{MJ}\), smältningen \(0{,}794\ \mathrm{MJ}\), totalt cirka \(1{,}95\ \mathrm{MJ}\).`),
+  "7.23": byggFacitListaV2([
+    ["a", "Det latenta värmelagret i 1,0 kg salt är direkt", String.raw`\[Q_s=1{,}0\cdot200=200\ \mathrm{kJ}\]`, ""],
+    ["b", "För 1,0 kg vatten som värms 20 K:", String.raw`\[Q_v=1{,}0\cdot4{,}18\cdot20=83{,}6\ \mathrm{kJ}\]`, ""],
+    ["c", "Saltet lagrar mycket energi vid nästan konstant temperatur runt 32 °C. Nackdelen är att nyttan är knuten till just detta temperaturområde och att materialet måste kapslas och tåla många cykler.", "", "" ]
+  ], String.raw`Saltet lagrar \(200\ \mathrm{kJ/kg}\) vid smältning, mot vattnets \(83{,}6\ \mathrm{kJ/kg}\) för 20 K uppvärmning.`),
+  "7.24": byggFacitListaV2([
+    ["a", "Tre energibidrag ska bort.", String.raw`\[Q_1=1{,}5\cdot4180\cdot20=125{,}4\ \mathrm{kJ}\]\[Q_2=1{,}5\cdot334=501\ \mathrm{kJ}\]\[Q_3=1{,}5\cdot2100\cdot18=56{,}7\ \mathrm{kJ}\]\[Q_{\mathrm{tot}}=683{,}1\ \mathrm{kJ}\]`, ""],
+    ["b", "Med konstant bortförd effekt 90 W blir tiden", String.raw`\[t=\frac{683100}{90}=7590\ \mathrm s=2{,}11\ \mathrm h\]`, ""],
+    ["c", "Temperaturen står stilla vid 0 °C under själva frysningen. Den bortförda energin ändrar då fas och bindningsstruktur, inte temperatur.", "", "" ]
+  ], String.raw`Totalt ska \(683\ \mathrm{kJ}\) bort, vilket idealiskt tar \(2{,}1\ \mathrm h\). Temperaturen är konstant under frysningen vid 0 °C.`),
+  "7.25": byggFacitListaV2([
+    ["a", "Horisontella platåer visar fasändring vid konstant temperatur. Av diagrammet avläses", String.raw`\[T_s\approx80\,{}^{\circ}\mathrm C,\qquad T_k\approx210\,{}^{\circ}\mathrm C\]`, ""],
+    ["b", "Smältplatån omfattar cirka 40 kJ för massan 0,200 kg.", String.raw`\[l_s=\frac{40}{0{,}200}=200\ \mathrm{kJ/kg}\]`, ""],
+    ["c", "Även kokplatån omfattar cirka 40 kJ.", String.raw`\[l_v=\frac{40}{0{,}200}=200\ \mathrm{kJ/kg}\]`, "Avläsningarna har den noggrannhet som grafen medger." ]
+  ], String.raw`Smältpunkten är cirka \(80\,{}^{\circ}\mathrm C\), kokpunkten \(210\,{}^{\circ}\mathrm C\), och båda fasentalpierna cirka \(200\ \mathrm{kJ/kg}\).`),
+  "7.26": byggFacitListaV2([
+    ["a", "För att värma 0,500 kg is från \(-20\) till 0 °C krävs", String.raw`\[Q_1=0{,}500\cdot2100\cdot20=21{,}0\ \mathrm{kJ}\]`, ""],
+    ["b", "Av diagrammet pågår smältningen från cirka 21 till 188 kJ.", String.raw`\[Q_s=188-21=167\ \mathrm{kJ}\]`, ""],
+    ["c", "Smältentalpin blir", String.raw`\[l_s=\frac{167}{0{,}500}=334\ \mathrm{kJ/kg}\]`, "Det stämmer med tabellvärdet." ]
+  ], String.raw`Isen börjar smälta efter \(21\ \mathrm{kJ}\). Smältningen tar \(167\ \mathrm{kJ}\), motsvarande \(334\ \mathrm{kJ/kg}\).`),
+  "7.29": byggFacitListaV2([
+    ["a", "Vattnet är redan vid kokpunkten.", String.raw`\[Q=ml_v=1{,}5\cdot2260=3390\ \mathrm{kJ}=3{,}39\ \mathrm{MJ}\]`, ""],
+    ["b", "Den nyttiga effekten är \(0{,}75\cdot1800=1350\ \mathrm W\).", String.raw`\[t=\frac{3{,}390\cdot10^6}{1350}=2511\ \mathrm s=41{,}9\ \mathrm{min}\]`, ""],
+    ["c", "Vid kokpunkten används energin till fasomvandlingen från vätska till gas. Så länge flytande vatten finns kvar stiger inte temperaturen i idealmodellen.", "", "" ]
+  ], String.raw`Det krävs \(3{,}39\ \mathrm{MJ}\), och kokningen tar idealiskt cirka \(42\ \mathrm{min}\).`),
+  "7.32": byggFacitListaV2([
+    ["a", "Värm först 0,40 kg is från \(-8\) till 0 °C och smält den sedan.", String.raw`\[Q_{i,0}=0{,}40\cdot2100\cdot8{,}0=6{,}72\ \mathrm{kJ}\]\[Q_s=0{,}40\cdot334=133{,}6\ \mathrm{kJ}\]\[Q_{i,\mathrm{allt}}=140{,}3\ \mathrm{kJ}\]`, ""],
+    ["b", "Vattnet kan avge följande energi när det kyls till 0 °C:", String.raw`\[Q_v=1{,}0\cdot4180\cdot25=104{,}5\ \mathrm{kJ}\]`, ""],
+    ["c", "Efter att isen värmts till 0 °C återstår \(104{,}5-6{,}72=97{,}78\ \mathrm{kJ}\) för smältning.", String.raw`\[m_{\mathrm{smält}}=\frac{97{,}78}{334}=0{,}2928\ \mathrm{kg}\]`, ""],
+    ["4", "All is smälter inte, så sluttemperaturen måste vara 0 °C.", String.raw`\[m_{\mathrm{is,kvar}}=0{,}400-0{,}2928=0{,}107\ \mathrm{kg}\]\[m_{\mathrm{vatten}}=1{,}0+0{,}2928=1{,}293\ \mathrm{kg}\]`, "" ]
+  ], String.raw`Slutet innehåller cirka \(1{,}29\ \mathrm{kg}\) vatten och \(0{,}11\ \mathrm{kg}\) is, allt vid \(0\,{}^{\circ}\mathrm C\).`),
+  "7.45": byggFacitListaV2([
+    ["1", "Isen är redan vid smältpunkten, så endast smältentalpin behövs.", String.raw`\[Q=ml_s=0{,}800\cdot334=267{,}2\ \mathrm{kJ}\]`, "" ]
+  ], String.raw`Det krävs cirka \(267\ \mathrm{kJ}\).`),
+  "7.46": byggFacitListaV2([
+    ["a", "Silvermassan är 0,080 kg och temperaturökningen \(962-20=942\ \mathrm K\).", String.raw`\[Q_1=mc\Delta T=0{,}080\cdot0{,}234\cdot942=17{,}63\ \mathrm{kJ}\]`, ""],
+    ["b", "Smältningen kräver ytterligare", String.raw`\[Q_s=0{,}080\cdot105=8{,}40\ \mathrm{kJ}\]\[Q_{\mathrm{tot}}=17{,}63+8{,}40=26{,}03\ \mathrm{kJ}\]`, "" ]
+  ], String.raw`Uppvärmningen kräver \(17{,}6\ \mathrm{kJ}\), och totalt behövs cirka \(26{,}0\ \mathrm{kJ}\).`),
+  "7.47": byggFacitListaV2([
+    ["a", "Värm 0,080 kg is 6,0 K.", String.raw`\[Q_1=0{,}080\cdot2{,}1\cdot6{,}0=1{,}008\ \mathrm{kJ}\]`, ""],
+    ["b", "Smältningen kräver", String.raw`\[Q_2=0{,}080\cdot334=26{,}72\ \mathrm{kJ}\]`, ""],
+    ["c", "Med perfekt effektöverföring blir tiden", String.raw`\[t=\frac{(1{,}008+26{,}72)\cdot10^3}{150}=184{,}9\ \mathrm s=3{,}08\ \mathrm{min}\]`, "" ]
+  ], String.raw`Det krävs \(1{,}01\ \mathrm{kJ}\) för uppvärmning och \(26{,}7\ \mathrm{kJ}\) för smältning. Idealt tar det \(3{,}1\ \mathrm{min}\).`),
+  "7.48": byggFacitListaV2([
+    ["a", "Temperaturökningen är \(100-18=82\ \mathrm K\).", String.raw`\[Q_1=1{,}8\cdot4{,}18\cdot82=617\ \mathrm{kJ}\]`, ""],
+    ["b", "Förångningen vid 100 °C kräver", String.raw`\[Q_2=1{,}8\cdot2260=4068\ \mathrm{kJ}=4{,}07\ \mathrm{MJ}\]`, ""],
+    ["c", "Jämför bidragen.", String.raw`\[\frac{Q_2}{Q_1}=6{,}59\]`, "Förångningen kräver alltså ungefär 6,6 gånger mer energi än uppvärmningen till kokpunkten." ]
+  ], String.raw`Uppvärmningen kräver \(617\ \mathrm{kJ}\), och förångningen ytterligare \(4{,}07\ \mathrm{MJ}\).`),
+  "7.49": byggFacitListaV2([
+    ["a", "Ångbildningsentalpin är energin per massa.", String.raw`\[l_v=\frac Qm=\frac{4{,}0\ \mathrm{MJ}}{5{,}0\ \mathrm{kg}}=0{,}80\ \mathrm{MJ/kg}=800\ \mathrm{kJ/kg}\]`, ""],
+    ["b", "Ett värde omkring \(800\ \mathrm{kJ/kg}\) kan exempelvis motsvara glykol i en förenklad tabelljämförelse.", "", "En entydig ämnesbestämning kan inte göras från latent värme ensam." ]
+  ], String.raw`Ångbildningsentalpin är \(800\ \mathrm{kJ/kg}\). Vätskan kan exempelvis vara glykol, men uppgiften bestämmer inte ämnet entydigt.`),
+  "7.50": byggFacitListaV2([
+    ["1", "Kubens volym och massa är", String.raw`\[V=(3{,}0)^3=27\ \mathrm{cm^3}\]\[m=27\cdot0{,}917=24{,}76\ \mathrm g=0{,}02476\ \mathrm{kg}\]`, ""],
+    ["2", "Värm isen från \(-15\) till 0 °C.", String.raw`\[Q_1=0{,}02476\cdot2{,}1\cdot15=0{,}780\ \mathrm{kJ}\]`, ""],
+    ["3", "Smält den därefter.", String.raw`\[Q_2=0{,}02476\cdot334=8{,}27\ \mathrm{kJ}\]\[Q_{\mathrm{tot}}=9{,}05\ \mathrm{kJ}\]`, "" ]
+  ], String.raw`Det krävs cirka \(9{,}1\ \mathrm{kJ}\) för att värma och smälta iskuben.`),
+  "7.51": byggFacitListaV2([
+    ["a", "Tre liter vatten har massan cirka 3,0 kg.", String.raw`\[Q_1=3{,}0\cdot4{,}18\cdot5{,}0=62{,}7\ \mathrm{kJ}\]`, ""],
+    ["b", "Vid frysningen avges", String.raw`\[Q_2=3{,}0\cdot334=1002\ \mathrm{kJ}\]`, ""],
+    ["c", "Isen kyls sedan 3,0 K.", String.raw`\[Q_3=3{,}0\cdot2{,}1\cdot3{,}0=18{,}9\ \mathrm{kJ}\]`, ""],
+    ["d", "Total avgiven värme blir", String.raw`\[Q_{\mathrm{tot}}=62{,}7+1002+18{,}9=1083{,}6\ \mathrm{kJ}\]`, "" ]
+  ], String.raw`Bidragen är \(62{,}7\ \mathrm{kJ}\), \(1{,}002\ \mathrm{MJ}\) och \(18{,}9\ \mathrm{kJ}\); totalt cirka \(1{,}08\ \mathrm{MJ}\).`),
+  "7.52": byggFacitListaV2([
+    ["a", "Smält först 0,120 kg is och värm sedan all vattenmassa \(0{,}250+0{,}120=0{,}370\ \mathrm{kg}\) från 0 till 18 °C.", String.raw`\[Q_s=0{,}120\cdot334=40{,}08\ \mathrm{kJ}\]\[Q_v=0{,}370\cdot4{,}18\cdot18=27{,}84\ \mathrm{kJ}\]\[Q_{\mathrm{nyttig}}=67{,}92\ \mathrm{kJ}\]`, ""],
+    ["b", "Den elektriska energin under \(3{,}5\ \mathrm{min}=210\ \mathrm s\) är", String.raw`\[E_{\mathrm{el}}=800\cdot210=168\ \mathrm{kJ}\]\[\eta=\frac{67{,}92}{168}=0{,}404\]`, "" ]
+  ], String.raw`Vatten och is tar upp cirka \(67{,}9\ \mathrm{kJ}\). Mikrovågsugnens verkningsgrad i försöket är cirka \(40\,\%\).`),
+  "7.53": byggFacitListaV2([
+    ["1", "Isens totala massa är 0,050 kg. Först värms den från \(-18\) till 0 °C och smälts.", String.raw`\[Q_i=0{,}050\cdot2{,}1\cdot18+0{,}050\cdot334=18{,}59\ \mathrm{kJ}\]`, ""],
+    ["2", "Det ursprungliga vattnet kan avge \(0{,}300\cdot4{,}18\cdot22=27{,}59\ \mathrm{kJ}\) till 0 °C, så all is smälter.", "", ""],
+    ["3", "Vid sluttemperaturen \(T\) gäller energibalansen", String.raw`\[0{,}300\cdot4{,}18(22-T)=18{,}59+0{,}050\cdot4{,}18T\]`, ""],
+    ["4", "Lösning ger", String.raw`\[T=6{,}15\,{}^{\circ}\mathrm C\]`, "Värme till glaset och omgivningen försummas." ]
+  ], String.raw`Sluttemperaturen blir cirka \(6{,}2\,{}^{\circ}\mathrm C\).`),
+  "7.54": byggFacitListaV2([
+    ["1", "Värm isen från \(-10\) till 0 °C.", String.raw`\[Q_1=0{,}80\cdot2{,}1\cdot10=16{,}8\ \mathrm{kJ}\]`, ""],
+    ["2", "Smält isen.", String.raw`\[Q_2=0{,}80\cdot334=267{,}2\ \mathrm{kJ}\]`, ""],
+    ["3", "Värm vattnet från 0 till 100 °C.", String.raw`\[Q_3=0{,}80\cdot4{,}18\cdot100=334{,}4\ \mathrm{kJ}\]`, ""],
+    ["4", "Förånga vattnet vid 100 °C.", String.raw`\[Q_4=0{,}80\cdot2260=1808\ \mathrm{kJ}\]\[Q_{\mathrm{tot}}=2426\ \mathrm{kJ}\]`, "" ]
+  ], String.raw`Det krävs totalt cirka \(2{,}43\ \mathrm{MJ}\), varav förångningen står för ungefär tre fjärdedelar.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_FASANDRING_V2[uppgift.id]) uppgift.s = FACIT_FASANDRING_V2[uppgift.id];
+}
+
+const FACIT_KRETSAR_V2 = {
+  "8.1": byggFacitListaV2([
+    ["a", "Laddningstiden är \(90\ \mathrm{min}=5400\ \mathrm s\).", String.raw`\[E=UIt=5{,}0\cdot2{,}0\cdot5400=5{,}4\cdot10^4\ \mathrm J=15\ \mathrm{Wh}\]`, ""],
+    ["b", "Kapaciteten \(4000\ \mathrm{mAh}=4{,}0\ \mathrm{Ah}\) motsvarar laddningen \(Q=4{,}0\cdot3600=14400\ \mathrm C\).", String.raw`\[E_b=QU=14400\cdot3{,}7=5{,}328\cdot10^4\ \mathrm J=14{,}8\ \mathrm{Wh}\]`, ""],
+    ["c", "De nominella värdena är nästan lika, men verklig laddspänning och ström varierar under laddningen och en del energi blir värme i elektronik och batteri.", "", "Därför kan man inte tolka 5,0 V och 2,0 A som konstant lagrad effekt under hela tiden." ]
+  ], String.raw`Laddaren överför nominellt \(54\ \mathrm{kJ}=15\ \mathrm{Wh}\). Batteriets märkenergi är cirka \(53\ \mathrm{kJ}=14{,}8\ \mathrm{Wh}\).`),
+  "8.3": byggFacitListaV2([
+    ["a", "Strömmen går genom 25 m kabel ut och 25 m tillbaka, alltså \(L=50\ \mathrm m\). Arean är \(1{,}5\cdot10^{-6}\ \mathrm{m^2}\).", String.raw`\[R=\rho\frac LA=1{,}72\cdot10^{-8}\frac{50}{1{,}5\cdot10^{-6}}=0{,}573\ \Omega\]`, ""],
+    ["b", "Spänningsfallet är", String.raw`\[\Delta U=IR=10\cdot0{,}573=5{,}73\ \mathrm V\]`, ""],
+    ["c", "Värmeeffekten i kabeln blir", String.raw`\[P=I^2R=10^2\cdot0{,}573=57{,}3\ \mathrm W\]`, ""],
+    ["d", "Samma elektriska effekt utvecklas oavsett om kabeln är rullad, men en hoprullad kabel avger värmen sämre och delar värme mellan tätt liggande varv.", "", "Temperaturen kan därför bli så hög att isoleringen skadas." ]
+  ], String.raw`Kabelresistansen är \(0{,}573\ \Omega\), spänningsfallet \(5{,}73\ \mathrm V\), och värmeeffekten \(57\ \mathrm W\).`),
+  "8.8": byggFacitListaV2([
+    ["a", "Använd \(I=U/R\).", String.raw`\[I_{\mathrm{torr}}=\frac{230}{100000}=2{,}3\ \mathrm{mA}\]\[I_{\mathrm{våt}}=\frac{230}{1000}=0{,}230\ \mathrm A=230\ \mathrm{mA}\]`, ""],
+    ["b", "I den förenklade modellen ligger 2,3 mA långt under 100 mA, medan 230 mA ligger klart över.", "", "Den verkliga risken beror starkt på strömväg, kontakttid, frekvens och individuell resistans; nätspänning ska alltid betraktas som farlig."],
+    ["c", "Vatten och god jordkontakt kan sänka kroppens resistans kraftigt. Därför krävs bland annat jordfelsbrytare, skyddsutjämning och särskilda installationszoner i våtutrymmen.", "", "" ]
+  ], String.raw`Den beräknade strömmen är \(2{,}3\ \mathrm{mA}\) med torr hud och \(230\ \mathrm{mA}\) med våt hud; det senare är akut livsfarligt.`),
+  "8.26": byggFacitListaV2([
+    ["a", "Strömmen är \(25\ \mathrm{mA}=0{,}025\ \mathrm A\).", String.raw`\[U=RI=470\cdot0{,}025=11{,}75\ \mathrm V\]`, ""],
+    ["b", "Effekten blir", String.raw`\[P=UI=11{,}75\cdot0{,}025=0{,}2938\ \mathrm W\]`, "" ]
+  ], String.raw`Spänningen är cirka \(11{,}8\ \mathrm V\), och effekten \(0{,}29\ \mathrm W\).`),
+  "8.27": byggFacitListaV2([
+    ["a", "Tre minuter är 180 s.", String.raw`\[Q=It=0{,}80\cdot180=144\ \mathrm C\]`, ""],
+    ["b", "Varje elektron har laddningsbeloppet \(e=1{,}602\cdot10^{-19}\ \mathrm C\).", String.raw`\[N=\frac Qe=\frac{144}{1{,}602\cdot10^{-19}}=8{,}99\cdot10^{20}\]`, "" ]
+  ], String.raw`Laddningen är \(144\ \mathrm C\), motsvarande cirka \(9{,}0\cdot10^{20}\) elektroner.`),
+  "8.28": byggFacitListaV2([
+    ["a", "Den nya längden är \(2L\) och arean \(A/2\).", String.raw`\[R'=\rho\frac{2L}{A/2}=4\rho\frac LA=4R=48\ \Omega\]`, ""],
+    ["b", "Dubbel längd ger faktorn 2 och halverad area ytterligare faktorn 2. Tillsammans blir resistansen fyra gånger större.", "", ""],
+    ["c", "Resistansen kan halveras genom att halvera längden, dubbla arean eller välja ett material med halva resistiviteten, om övriga storheter hålls konstanta.", String.raw`\[R=\rho\frac LA\]`, "" ]
+  ], String.raw`Den nya resistansen är \(48\ \Omega\). Halva resistansen fås exempelvis med halva längden eller dubbla arean.`),
+  "8.36": byggFacitListaV2([
+    ["a", "Ohms lag ger", String.raw`\[R=\frac UI=\frac{6{,}0}{0{,}25}=24\ \Omega\]`, ""],
+    ["b", "Effekten är", String.raw`\[P=UI=6{,}0\cdot0{,}25=1{,}5\ \mathrm W\]`, "" ]
+  ], String.raw`Resistansen är \(24\ \Omega\), och effekten \(1{,}5\ \mathrm W\).`),
+  "8.37": byggFacitListaV2([
+    ["a", "En amperetimme är 3600 coulomb.", String.raw`\[Q=2{,}0\cdot3600=7200\ \mathrm C\]`, ""],
+    ["b", "Den nominella energin är", String.raw`\[E=QU=7200\cdot9{,}0=64800\ \mathrm J=64{,}8\ \mathrm{kJ}\]`, ""],
+    ["c", "Vid konstant ström 0,150 A blir den idealiska tiden", String.raw`\[t=\frac{2{,}0\ \mathrm{Ah}}{0{,}150\ \mathrm A}=13{,}33\ \mathrm h\]`, "" ]
+  ], String.raw`Batteriet rymmer \(7200\ \mathrm C\) och nominellt \(64{,}8\ \mathrm{kJ}\); det räcker idealiskt cirka \(13{,}3\ \mathrm h\).`),
+  "8.38": byggFacitListaV2([
+    ["a", "Strömmen vid märkdrift är", String.raw`\[I=\frac PU=\frac{1500}{230}=6{,}52\ \mathrm A\]`, ""],
+    ["b", "Värmeslingans resistans är", String.raw`\[R=\frac{U^2}{P}=\frac{230^2}{1500}=35{,}27\ \Omega\]`, ""],
+    ["c", "Om resistansen antas konstant gäller \(P=U^2/R\). Halverad spänning ger en fjärdedel av effekten.", String.raw`\[P_{115}=1500\left(\frac{115}{230}\right)^2=375\ \mathrm W\]`, "" ]
+  ], String.raw`Strömmen är \(6{,}52\ \mathrm A\), resistansen \(35{,}3\ \Omega\), och vid 115 V blir effekten \(375\ \mathrm W\).`),
+  "8.39": byggFacitListaV2([
+    ["a", "Den varma resistansen fås av driftspänning och driftström.", String.raw`\[R_{\mathrm{varm}}=\frac{230}{0{,}26}=884{,}6\ \Omega\]`, ""],
+    ["b", "Jämför med den kalla resistansen.", String.raw`\[\frac{R_{\mathrm{varm}}}{R_{\mathrm{kall}}}=\frac{884{,}6}{30}=29{,}5\]`, ""],
+    ["c", "Precis vid tillslag är glödtråden kall. Den idealiska initialströmmen blir", String.raw`\[I_0=\frac{230}{30}=7{,}67\ \mathrm A\]`, "I praktiken begränsas förloppet av ledningar och uppvärmningen sker snabbt, men strömstöten förklarar varför glödlampor ofta går sönder vid tändning." ]
+  ], String.raw`Den varma resistansen är cirka \(885\ \Omega\), ungefär 30 gånger den kalla. Startströmmen kan kortvarigt närma sig \(7{,}7\ \mathrm A\).`),
+  "8.61": byggFacitListaV2([
+    ["a", "Ohms lag ger", String.raw`\[I=\frac UR=\frac{230}{52}=4{,}42\ \mathrm A\]`, ""],
+    ["b", "Effekten kan beräknas med \(P=U^2/R\).", String.raw`\[P=\frac{230^2}{52}=1017\ \mathrm W\]`, "" ]
+  ], String.raw`Strömmen är \(4{,}42\ \mathrm A\), och effekten cirka \(1{,}02\ \mathrm{kW}\).`),
+  "8.75": byggFacitListaV2([
+    ["1", "Laddningen är \(15\ \mathrm{mC}=0{,}015\ \mathrm C\).", String.raw`\[I=\frac Qt=\frac{0{,}015}{5{,}0}=0{,}0030\ \mathrm A\]`, "" ]
+  ], String.raw`Strömmen är \(3{,}0\ \mathrm{mA}\).`),
+  "8.76": byggFacitListaV2([
+    ["a", "Laddningen under 30 s är", String.raw`\[Q=It=0{,}40\cdot30=12\ \mathrm C\]`, ""],
+    ["b", "Antalet elektroner är laddningen delad med elementarladdningen.", String.raw`\[N=\frac{12}{1{,}602\cdot10^{-19}}=7{,}49\cdot10^{19}\]`, "" ]
+  ], String.raw`Det passerar \(12\ \mathrm C\), motsvarande cirka \(7{,}5\cdot10^{19}\) elektroner.`),
+  "8.77": byggFacitListaV2([
+    ["1", "Laddningen är \(8{,}0\ \mathrm{kC}=8000\ \mathrm C\).", String.raw`\[E=QU=8000\cdot1{,}5=12000\ \mathrm J\]`, "" ]
+  ], String.raw`Det krävs \(12\ \mathrm{kJ}\).`),
+  "8.78": byggFacitListaV2([
+    ["a", "Spänningen är energi per laddning.", String.raw`\[U=\frac EQ=\frac{45000}{5000}=9{,}0\ \mathrm V\]`, ""],
+    ["b", "Strömmen är \(250\ \mathrm{mA}=0{,}250\ \mathrm A\).", String.raw`\[t=\frac QI=\frac{5000}{0{,}250}=20000\ \mathrm s=5{,}56\ \mathrm h\]`, "" ]
+  ], String.raw`Batterispänningen är \(9{,}0\ \mathrm V\), och urladdningen tar idealiskt cirka \(5{,}6\ \mathrm h\).`),
+  "8.79": byggFacitListaV2([
+    ["a", "Ohms lag ger", String.raw`\[I=\frac UR=\frac{1{,}5}{400}=3{,}75\cdot10^{-3}\ \mathrm A\]`, ""],
+    ["b", "Lös i stället ut resistansen.", String.raw`\[R=\frac UI=\frac{230}{0{,}50}=460\ \Omega\]`, "" ]
+  ], String.raw`Strömmen är \(3{,}8\ \mathrm{mA}\), och den önskade resistansen \(460\ \Omega\).`),
+  "8.80": byggFacitListaV2([
+    ["a", "Radien är \(0{,}50\ \mathrm{mm}=5{,}0\cdot10^{-4}\ \mathrm m\).", String.raw`\[A=\pi r^2=\pi(5{,}0\cdot10^{-4})^2=7{,}854\cdot10^{-7}\ \mathrm{m^2}\]\[R=\rho\frac LA=1{,}7\cdot10^{-8}\frac{2{,}5}{7{,}854\cdot10^{-7}}=0{,}0541\ \Omega\]`, ""],
+    ["b", "Spänningen för 0,15 A blir", String.raw`\[U=RI=0{,}0541\cdot0{,}15=8{,}12\cdot10^{-3}\ \mathrm V\]`, "" ]
+  ], String.raw`Trådens resistans är \(54\ \mathrm{m\Omega}\), och den nödvändiga spänningen \(8{,}1\ \mathrm{mV}\).`),
+  "8.81": byggFacitListaV2([
+    ["1", "Lös först ut tvärsnittsarean ur \(R=\rho L/A\).", String.raw`\[A=\frac{\rho L}{R}=\frac{1{,}6\cdot10^{-8}\cdot0{,}25}{8{,}0\cdot10^{-3}}=5{,}0\cdot10^{-7}\ \mathrm{m^2}\]`, ""],
+    ["2", "För ett cirkulärt tvärsnitt är \(A=\pi r^2\).", String.raw`\[r=\sqrt{\frac A\pi}=3{,}99\cdot10^{-4}\ \mathrm m\]\[d=2r=7{,}98\cdot10^{-4}\ \mathrm m\]`, "" ]
+  ], String.raw`Trådens diameter ska vara cirka \(0{,}80\ \mathrm{mm}\).`),
+  "8.82": byggFacitListaV2([
+    ["a", "Kapaciteten delad med strömmen ger tiden i timmar.", String.raw`\[t=\frac{2{,}5\ \mathrm{Ah}}{1{,}5\ \mathrm A}=1{,}667\ \mathrm h\]`, String.raw`Det är \(1\ \mathrm h\ 40\ \mathrm{min}\).`],
+    ["b", "En amperetimme är 3600 C.", String.raw`\[Q=2{,}5\cdot3600=9000\ \mathrm C=9{,}0\ \mathrm{kC}\]`, "" ]
+  ], String.raw`Batteriet räcker idealiskt \(1\ \mathrm h\ 40\ \mathrm{min}\), och \(2{,}5\ \mathrm{Ah}=9{,}0\ \mathrm{kC}\).`),
+  "8.83": byggFacitListaV2([
+    ["a", "Rita \(U\) på y-axeln och \(I\) i ampere på x-axeln. Ohms lag \(U=RI\) visar att linjens lutning är resistansen.", String.raw`\[R=\frac{\Delta U}{\Delta I}\]`, "En linjeanpassning använder alla mätpunkter och minskar inverkan av mätfel."],
+    ["b", "Punkterna ger nästan samma kvot.", String.raw`\[\frac{3{,}0}{0{,}012}=250\ \Omega,\quad\frac{5{,}0}{0{,}020}=250\ \Omega,\quad\frac{7{,}2}{0{,}029}=248\ \Omega\]`, "En anpassning genom origo ger cirka 249 Ω." ]
+  ], String.raw`Linjens lutning är resistansen, \(R\approx249\ \Omega\), alltså ungefär \(250\ \Omega\).`),
+  "8.84": byggFacitListaV2([
+    ["1", "För respektive kabel gäller \(R=\rho L/A\). Bilda kvoten och använd \(R_g=R_k/8\), \(L_g=3L_k\).", String.raw`\[\frac{A_g}{A_k}=\frac{\rho_g}{\rho_k}\frac{L_g}{L_k}\frac{R_k}{R_g}=\frac{2{,}4}{1{,}7}\cdot3\cdot8=33{,}88\]`, ""],
+    ["2", "Tvärsnittsarea är proportionell mot diameter i kvadrat.", String.raw`\[\frac{d_g}{d_k}=\sqrt{\frac{A_g}{A_k}}=\sqrt{33{,}88}=5{,}82\]`, "" ]
+  ], String.raw`Guldkabelns diameter måste vara cirka \(5{,}8\) gånger kopparkabelns.`),
+  "8.108": byggFacitListaV2([
+    ["a", "Amperemetern antas ideal och ser samma ström som resistorn.", String.raw`\[I=\frac UR=\frac{6{,}0}{330}=0{,}01818\ \mathrm A\]`, ""],
+    ["b", "Effekten i resistorn blir", String.raw`\[P=UI=6{,}0\cdot0{,}01818=0{,}109\ \mathrm W\]`, "" ]
+  ], String.raw`Amperemetern visar \(18{,}2\ \mathrm{mA}\), och resistorn utvecklar \(109\ \mathrm{mW}\).`),
+  "8.109": byggFacitListaV2([
+    ["a", "Två minuter är 120 s.", String.raw`\[Q=It=0{,}35\cdot120=42\ \mathrm C\]`, ""],
+    ["b", "Antalet elektroner blir", String.raw`\[N=\frac{42}{1{,}602\cdot10^{-19}}=2{,}62\cdot10^{20}\]`, "" ]
+  ], String.raw`Laddningen är \(42\ \mathrm C\), motsvarande \(2{,}62\cdot10^{20}\) elektroner.`),
+  "8.110": byggFacitListaV2([
+    ["a", "Diametern 0,50 mm ger radien \(2{,}50\cdot10^{-4}\ \mathrm m\).", String.raw`\[A=\pi r^2=\pi(2{,}50\cdot10^{-4})^2=1{,}963\cdot10^{-7}\ \mathrm{m^2}\]`, ""],
+    ["b", "Trådens resistans är", String.raw`\[R=\rho\frac LA=1{,}72\cdot10^{-8}\frac{8{,}0}{1{,}963\cdot10^{-7}}=0{,}701\ \Omega\]`, ""],
+    ["c", "Vid 3,0 A blir spänningsfallet", String.raw`\[\Delta U=IR=3{,}0\cdot0{,}701=2{,}10\ \mathrm V\]`, "" ]
+  ], String.raw`Arean är \(1{,}96\cdot10^{-7}\ \mathrm{m^2}\), resistansen \(0{,}701\ \Omega\), och spänningsfallet \(2{,}10\ \mathrm V\).`),
+  "8.111": byggFacitListaV2([
+    ["a", "Sätt ut mätpunkterna med ström i ampere på x-axeln och spänning på y-axeln.", `<span class="fig"><svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 430 280" role="img" aria-label="Diagram över spänning som funktion av ström"><line x1="68" y1="232" x2="390" y2="232" stroke="#2B2527" stroke-width="3"/><polygon points="402,232 386,224 386,240" fill="#2B2527"/><line x1="68" y1="232" x2="68" y2="34" stroke="#2B2527" stroke-width="3"/><polygon points="68,22 60,38 76,38" fill="#2B2527"/><text x="393" y="258" font-family="IBM Plex Mono" font-size="16" fill="#2B2527">I (mA)</text><text x="28" y="35" font-family="IBM Plex Mono" font-size="16" fill="#2B2527">U (V)</text><line x1="68" y1="232" x2="362" y2="48" stroke="#2F6B8F" stroke-width="3"/><g fill="#B43123"><circle cx="142" cy="186" r="5"/><circle cx="215" cy="140" r="5"/><circle cx="289" cy="94" r="5"/><circle cx="362" cy="48" r="5"/></g><g font-family="IBM Plex Mono" font-size="13" fill="#5C575E"><text x="136" y="250">20</text><text x="209" y="250">40</text><text x="283" y="250">60</text><text x="356" y="250">80</text><text x="42" y="190">1,36</text><text x="42" y="144">2,72</text><text x="42" y="98">4,08</text><text x="42" y="52">5,44</text></g></svg></span>`, ""],
+    ["b", "Ohms lag är \(U=RI\), så linjens lutning \(\Delta U/\Delta I\) är resistansen.", "", ""],
+    ["c", "Använd två väl separerade punkter.", String.raw`\[R=\frac{5{,}44-1{,}36}{(80-20)\cdot10^{-3}}=68{,}0\ \Omega\]`, "" ]
+  ], String.raw`Grafen är en rät linje genom origo. Lutningen, och därmed resistansen, är \(68\ \Omega\).`),
+  "8.112": byggFacitListaV2([
+    ["a", "Märkströmmen vid exakt 12 V är", String.raw`\[I_{\mathrm{märkt}}=\frac PU=\frac{24}{12}=2{,}0\ \mathrm A\]`, ""],
+    ["b", "Strömmen går 15 m ut och 15 m tillbaka.", String.raw`\[R_k=1{,}72\cdot10^{-8}\frac{30}{1{,}0\cdot10^{-6}}=0{,}516\ \Omega\]`, ""],
+    ["c", "För en självkonsekvent uppskattning behandlas lampan som resistansen \(R_l=U^2/P=6{,}0\ \Omega\). Kabel och lampa ligger i serie.", String.raw`\[I=\frac{12}{6{,}0+0{,}516}=1{,}842\ \mathrm A\]\[\Delta U_k=IR_k=0{,}950\ \mathrm V\]\[U_l=12-0{,}950=11{,}05\ \mathrm V\]`, "Lampans verkliga resistans kan ändras med temperaturen, men denna modell är bättre än att samtidigt anta både 2,0 A och lägre lampspänning." ]
+  ], String.raw`Märkströmmen är \(2{,}0\ \mathrm A\) och kabelresistansen \(0{,}516\ \Omega\). Med lampan modellerad som \(6{,}0\ \Omega\) blir strömmen \(1{,}84\ \mathrm A\), kabelns spänningsfall \(0{,}95\ \mathrm V\), och lampans spänning \(11{,}05\ \mathrm V\).`),
+  "8.113": byggFacitListaV2([
+    ["a", "Kapaciteten 2,0 Ah motsvarar", String.raw`\[Q=2{,}0\cdot3600=7200\ \mathrm C\]`, ""],
+    ["b", "Den nominella energin är", String.raw`\[E=QU=7200\cdot3{,}7=26640\ \mathrm J=26{,}6\ \mathrm{kJ}\]`, ""],
+    ["c", "Ideal drifttid vid 0,45 A:", String.raw`\[t=\frac{2{,}0}{0{,}45}=4{,}44\ \mathrm h\]`, "" ]
+  ], String.raw`Laddningen är \(7200\ \mathrm C\), energin \(26{,}6\ \mathrm{kJ}\), och drifttiden idealiskt \(4{,}4\ \mathrm h\).`),
+  "8.156": byggFacitListaV2([
+    ["a", "Eftersom \(1\ \mathrm{mm}=10^{-3}\ \mathrm m\):", String.raw`\[1{,}0\ \mathrm{mm^2}=1{,}0\cdot10^{-6}\ \mathrm{m^2}\]`, ""],
+    ["b", "För den ursprungliga tråden:", String.raw`\[R=1{,}7\cdot10^{-8}\frac{10}{1{,}0\cdot10^{-6}}=0{,}170\ \Omega\]`, ""],
+    ["c", "Dubbel längd ger dubbel resistans.", String.raw`\[R_{20}=0{,}340\ \Omega\]`, ""],
+    ["d", "Dubbel area ger halv resistans.", String.raw`\[R_{2A}=0{,}085\ \Omega\]`, "" ]
+  ], String.raw`Arean är \(1{,}0\cdot10^{-6}\ \mathrm{m^2}\). Resistanserna blir \(0{,}170\ \Omega\), \(0{,}340\ \Omega\) och \(0{,}085\ \Omega\).`),
+  "8.157": byggFacitListaV2([
+    ["a", "Av grafen avläses vid 30 mA", String.raw`\[U=3{,}0\ \mathrm V\]`, ""],
+    ["b", "Med denna punkt fås", String.raw`\[R=\frac UI=\frac{3{,}0}{0{,}030}=100\ \Omega\]`, ""],
+    ["c", "Grafens lutning kan tas mellan origo och punkten 60 mA, 6,0 V.", String.raw`\[R=\frac{\Delta U}{\Delta I}=\frac{6{,}0}{0{,}060}=100\ \Omega\]`, ""],
+    ["d", "En rät linje genom origo betyder att \(U/I\) är konstant. Resistorn följer alltså Ohms lag med konstant resistans i mätområdet.", "", "" ]
+  ], String.raw`Vid 30 mA är spänningen \(3{,}0\ \mathrm V\). Både kvoten och grafens lutning ger \(R=100\ \Omega\).`),
+  "8.158": byggFacitListaV2([
+    ["a", "Daglig energi är effekt gånger tid.", String.raw`\[E_d=2{,}0\cdot3{,}0=6{,}0\ \mathrm{kWh}\]`, ""],
+    ["b", "På 30 dagar blir det", String.raw`\[E_m=6{,}0\cdot30=180\ \mathrm{kWh}\]`, ""],
+    ["c", "Kostnaden blir", String.raw`\[C=180\cdot2{,}50=450\ \mathrm{kr}\]`, ""],
+    ["d", "Strömmen vid 230 V är", String.raw`\[I=\frac PU=\frac{2000}{230}=8{,}70\ \mathrm A\]`, "" ]
+  ], String.raw`Elementet använder \(6{,}0\ \mathrm{kWh/dag}\), \(180\ \mathrm{kWh/månad}\), kostar \(450\ \mathrm{kr}\), och drar \(8{,}7\ \mathrm A\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_KRETSAR_V2[uppgift.id]) uppgift.s = FACIT_KRETSAR_V2[uppgift.id];
+}
+
+const FACIT_EMS_V2 = {
+  "8.2": byggFacitListaV2([
+    ["a", "Effektskillnaden är \(60-9=51\ \mathrm W\). Under ett år är lampan tänd \(4\cdot365=1460\ \mathrm h\).", String.raw`\[\Delta E=0{,}051\cdot1460=74{,}46\ \mathrm{kWh}\]`, ""],
+    ["b", "Kostnadsbesparingen blir", String.raw`\[\Delta C=74{,}46\cdot2{,}50=186\ \mathrm{kr/år}\]`, ""],
+    ["c", "Återbetalningstiden är", String.raw`\[t=\frac{45}{186}=0{,}242\ \mathrm{år}=2{,}9\ \mathrm{månader}\]`, "" ]
+  ], String.raw`LED-lampan sparar cirka \(74{,}5\ \mathrm{kWh}\) och \(186\ \mathrm{kr}\) per år. Den är återbetald efter ungefär tre månader.`),
+  "8.5": byggFacitListaV2([
+    ["a", "Startmotorn och batteriets inre resistans ligger i serie.", String.raw`\[I_{20}=\frac{12{,}6}{0{,}020+0{,}012}=393{,}8\ \mathrm A\]\[I_{-20}=\frac{12{,}6}{0{,}020+0{,}030}=252\ \mathrm A\]`, ""],
+    ["b", "Polspänningen är spänningen över startmotorn.", String.raw`\[U_{20}=I_{20}R=393{,}8\cdot0{,}020=7{,}88\ \mathrm V\]\[U_{-20}=252\cdot0{,}020=5{,}04\ \mathrm V\]`, ""],
+    ["c", "Motoreffekten sjunker kraftigt.", String.raw`\[P_{20}=I_{20}^2R=3{,}10\ \mathrm{kW}\]\[P_{-20}=I_{-20}^2R=1{,}27\ \mathrm{kW}\]`, "Samtidigt är motoroljan trögare och förbränningsmotorn kräver större startmoment i kyla." ]
+  ], String.raw`Startströmmen blir cirka \(394\ \mathrm A\) vid 20 °C och \(252\ \mathrm A\) vid −20 °C. Polspänningen sjunker från \(7{,}88\) till \(5{,}04\ \mathrm V\).`),
+  "8.6": byggFacitListaV2([
+    ["a", "Räckvidden fås av tillgänglig energi dividerad med förbrukning per 100 km.", String.raw`\[s=\frac{60}{18}\cdot100=333\ \mathrm{km}\]`, ""],
+    ["b", "Vid 80 km/h tar 100 km \(100/80=1{,}25\ \mathrm h\).", String.raw`\[E_{\mathrm{värme}}=2{,}0\cdot1{,}25=2{,}50\ \mathrm{kWh/100\,km}\]`, ""],
+    ["c", "Den nya förbrukningen är \(18+2{,}5=20{,}5\ \mathrm{kWh/100\,km}\).", String.raw`\[s_v=\frac{60}{20{,}5}\cdot100=293\ \mathrm{km}\]`, "Detta isolerar kupévärmarens effekt; kyla kan dessutom påverka batteri och rullmotstånd." ]
+  ], String.raw`Normal räckvidd är cirka \(333\ \mathrm{km}\). Värmaren tillför \(2{,}5\ \mathrm{kWh/100\,km}\), och vinterräckvidden blir cirka \(293\ \mathrm{km}\).`),
+  "8.10": byggFacitListaV2([
+    ["a", "Maximal effekt vid märkströmmen 10 A är", String.raw`\[P=UI=230\cdot10=2300\ \mathrm W\]`, ""],
+    ["b", "Apparaterna kräver tillsammans 2800 W.", String.raw`\[I=\frac{2800}{230}=12{,}17\ \mathrm A\]`, "Det överskrider 10 A, så de kan inte köras samtidigt på denna säkrade grupp."],
+    ["c", "Säkringen bryter kretsen innan ledningarna når en temperatur som kan skada isoleringen eller orsaka brand.", "", "Den är dimensionerad som överströmsskydd för kabeln." ]
+  ], String.raw`Gruppen klarar nominellt \(2{,}30\ \mathrm{kW}\). Vattenkokare och brödrost kräver \(12{,}2\ \mathrm A\), så säkringen löser.`),
+  "8.13": byggFacitListaV2([
+    ["a", "Den infallande solenergin per sekund är instrålning gånger area.", String.raw`\[P_{\mathrm{in}}=800\cdot1{,}7=1360\ \mathrm W\]`, ""],
+    ["b", "Panelens elektriska uteffekt är", String.raw`\[P_{\mathrm{el}}=UI=22{,}5\cdot9{,}0=202{,}5\ \mathrm W\]`, ""],
+    ["c", "Verkningsgraden blir", String.raw`\[\eta=\frac{P_{\mathrm{el}}}{P_{\mathrm{in}}}=\frac{202{,}5}{1360}=0{,}1489\]`, "" ]
+  ], String.raw`Panelen träffas av \(1{,}36\ \mathrm{kW}\), ger \(203\ \mathrm W\) elektriskt och har verkningsgraden cirka \(14{,}9\,\%\).`),
+  "8.14": byggFacitListaV2([
+    ["a", "Med uppgiftens resistansangivelse för hela överföringsledningen blir", String.raw`\[R=0{,}050\cdot200=10\ \Omega\]`, "Om 0,050 Ω/km i stället avser varje ledare måste returledningen också räknas och resistansen fördubblas."],
+    ["b", "Vid 400 kV kräver 100 MW strömmen", String.raw`\[I=\frac PU=\frac{100\cdot10^6}{400\cdot10^3}=250\ \mathrm A\]\[P_f=I^2R=250^2\cdot10=0{,}625\ \mathrm{MW}\]`, String.raw`Det är \(0{,}625\,\%\) av 100 MW.`],
+    ["c", "Vid 20 kV skulle samma enkla beräkning kräva", String.raw`\[I=\frac{100\cdot10^6}{20\cdot10^3}=5000\ \mathrm A\]\[P_f=5000^2\cdot10=250\ \mathrm{MW}\]`, "Resultatet visar att antagandet att 100 MW samtidigt når lasten vid 20 kV är omöjligt med denna ledning: spänningsfall och förlust blir för stora. Hög överföringsspänning minskar strömmen och därmed \(I^2R\)-förlusten." ]
+  ], String.raw`Ledningsresistansen är \(10\ \Omega\). Vid 400 kV blir strömmen \(250\ \mathrm A\) och förlusten \(0{,}625\ \mathrm{MW}\); vid 20 kV visar modellen den orimliga förlusten \(250\ \mathrm{MW}\).`),
+  "8.15": byggFacitListaV2([
+    ["a", "En puls på 0,20 J varje sekund ger medeleffekten", String.raw`\[P_{\mathrm{med}}=Ef=0{,}20\cdot1=0{,}20\ \mathrm W\]`, ""],
+    ["b", "Spänningen ensam avgör inte skaderisken. Elstängselaggregatet begränsar energin, laddningen, strömmen och pulstiden, med lång paus mellan pulserna.", "", "Ett godkänt elstängsel är konstruerat för korta begränsade pulser, men 5 kV är inte generellt ofarligt. Felaktig utrustning eller särskilda medicinska omständigheter kan vara farliga. Vägguttaget kan däremot leverera farlig ström kontinuerligt." ]
+  ], String.raw`Medeleffekten är \(0{,}20\ \mathrm W\). Elstängslets risk begränsas av den mycket korta och energibegränsade pulsen, inte av att 5000 V i sig skulle vara ofarligt.`),
+  "8.44": byggFacitListaV2([
+    ["a", "Märkströmmen är", String.raw`\[I=\frac PU=\frac{21}{12}=1{,}75\ \mathrm A\]`, ""],
+    ["b", "Den varma glödtrådens resistans blir", String.raw`\[R=\frac UI=\frac{12}{1{,}75}=6{,}86\ \Omega\]`, "" ]
+  ], String.raw`Lampan drar \(1{,}75\ \mathrm A\), och resistansen när den lyser är cirka \(6{,}9\ \Omega\).`),
+  "8.45": byggFacitListaV2([
+    ["a", "Medel­effekten över året är \(0{,}30\cdot120=36\ \mathrm W\).", String.raw`\[E=0{,}036\cdot24\cdot365=315{,}4\ \mathrm{kWh}\]`, ""],
+    ["b", "Årskostnaden blir", String.raw`\[C=315{,}4\cdot2{,}50=788\ \mathrm{kr}\]`, ""],
+    ["c", "Ett varmare kök ökar temperaturskillnaden mot kylutrymmet och därmed värmeinflödet. Kompressorn måste då gå en större andel av tiden.", "", "" ]
+  ], String.raw`Kylskåpet använder cirka \(315\ \mathrm{kWh/år}\), vilket kostar ungefär \(790\ \mathrm{kr}\).`),
+  "8.46": byggFacitListaV2([
+    ["a", "För ett batteri under urladdning gäller \(U=\mathcal E-rI\). Subtrahera mätningarna.", String.raw`\[1{,}45-1{,}30=r(0{,}90-0{,}30)\Rightarrow r=0{,}250\ \Omega\]`, ""],
+    ["b", "Sätt in en mätpunkt.", String.raw`\[\mathcal E=U+rI=1{,}45+0{,}250\cdot0{,}30=1{,}525\ \mathrm V\]`, ""],
+    ["c", "Vid 1,5 A förutsäger den linjära modellen", String.raw`\[U=1{,}525-0{,}250\cdot1{,}5=1{,}150\ \mathrm V\]`, "" ]
+  ], String.raw`Den inre resistansen är \(0{,}250\ \Omega\), emsen \(1{,}525\ \mathrm V\), och vid 1,5 A blir polspänningen \(1{,}15\ \mathrm V\).`),
+  "8.63": byggFacitListaV2([
+    ["a", "I serie adderas ems och inre resistans.", String.raw`\[\mathcal E_s=3\cdot1{,}5=4{,}5\ \mathrm V,\qquad r_s=3\cdot0{,}4=1{,}2\ \Omega\]\[I_s=\frac{4{,}5}{6+1{,}2}=0{,}625\ \mathrm A\]`, ""],
+    ["b", "För tre identiska parallellkopplade batterier är emsen 1,5 V och den ekvivalenta inre resistansen \(0{,}4/3\).", String.raw`\[I_p=\frac{1{,}5}{6+0{,}4/3}=0{,}2446\ \mathrm A\]`, ""],
+    ["c", "Effekten i 6-ohmsresistorn är", String.raw`\[P_s=6(0{,}625)^2=2{,}34\ \mathrm W\]\[P_p=6(0{,}2446)^2=0{,}359\ \mathrm W\]`, "" ]
+  ], String.raw`Strömmen blir \(0{,}625\ \mathrm A\) i serie och \(0{,}245\ \mathrm A\) parallellt. Seriekopplingen ger störst lasteffekt, \(2{,}34\ \mathrm W\).`),
+  "8.66": byggFacitListaV2([
+    ["a", "Med en lampa är den yttre resistansen 12 Ω.", String.raw`\[I_1=\frac{4{,}5}{12+1{,}2}=0{,}3409\ \mathrm A\]\[U_1=I_1\cdot12=4{,}091\ \mathrm V\]\[P_1=\frac{U_1^2}{12}=1{,}395\ \mathrm W\]`, ""],
+    ["b", "Två parallella lampor ger 6,0 Ω och tre ger 4,0 Ω.", String.raw`\[U_2=4{,}5\frac{6{,}0}{6{,}0+1{,}2}=3{,}75\ \mathrm V,\qquad P_{\mathrm{per},2}=\frac{3{,}75^2}{12}=1{,}172\ \mathrm W\]\[U_3=4{,}5\frac{4{,}0}{4{,}0+1{,}2}=3{,}462\ \mathrm V,\qquad P_{\mathrm{per},3}=0{,}999\ \mathrm W\]`, ""],
+    ["c", "Fler parallellgrenar sänker den yttre resistansen. Totalströmmen ökar och det inre spänningsfallet \(rI\) blir större, så polspänningen och effekten per lampa sjunker.", "", "" ]
+  ], String.raw`Polspänningen blir \(4{,}09\), \(3{,}75\) och \(3{,}46\ \mathrm V\) för en, två och tre lampor; effekten per lampa sjunker från \(1{,}39\) till \(1{,}17\) och \(1{,}00\ \mathrm W\).`),
+  "8.92": byggFacitListaV2([
+    ["a", "Strömmen är 0,050 A.", String.raw`\[P=UI=1{,}5\cdot0{,}050=0{,}075\ \mathrm W\]`, ""],
+    ["b", "Resistansen är", String.raw`\[R=\frac UI=\frac{1{,}5}{0{,}050}=30\ \Omega\]`, "" ]
+  ], String.raw`Effekten är \(75\ \mathrm{mW}\), och resistansen \(30\ \Omega\).`),
+  "8.93": byggFacitListaV2([
+    ["a", "Använd \(P=RI^2\) med \(R=1500\ \Omega\) och \(I=0{,}180\ \mathrm A\).", String.raw`\[P=1500(0{,}180)^2=48{,}6\ \mathrm W\]`, ""],
+    ["b", "Lös ut strömmen ur samma samband.", String.raw`\[I=\sqrt{\frac PR}=\sqrt{\frac{20}{800}}=0{,}158\ \mathrm A\]`, "" ]
+  ], String.raw`Effekten är cirka \(49\ \mathrm W\), och den andra lampan behöver strömmen \(0{,}16\ \mathrm A\).`),
+  "8.94": byggFacitListaV2([
+    ["a", "Yttre och inre resistans ligger i serie med emsen.", String.raw`\[I=\frac{\mathcal E}{R+r}=\frac{1{,}5}{1{,}2+0{,}40}=0{,}9375\ \mathrm A\]`, ""],
+    ["b", "Spänningen över den yttre resistorn är", String.raw`\[U_R=IR=0{,}9375\cdot1{,}2=1{,}125\ \mathrm V\]`, ""],
+    ["c", "Batteriets polspänning är samma spänning som över den yttre kretsen.", String.raw`\[U_p=\mathcal E-rI=1{,}5-0{,}40\cdot0{,}9375=1{,}125\ \mathrm V\]`, "" ]
+  ], String.raw`Strömmen är \(0{,}938\ \mathrm A\). Resistorspänningen och polspänningen är båda cirka \(1{,}13\ \mathrm V\).`),
+  "8.95": byggFacitListaV2([
+    ["a", "Den totala resistansen vid 2,0 A är", String.raw`\[R+r=\frac{\mathcal E}{I}=\frac{1{,}5}{2{,}0}=0{,}75\ \Omega\]\[R=0{,}75-0{,}250=0{,}500\ \Omega\]`, ""],
+    ["b", "Vid ideal kortslutning är den yttre resistansen noll.", String.raw`\[I_k=\frac{\mathcal E}{r}=\frac{1{,}5}{0{,}250}=6{,}0\ \mathrm A\]`, "" ]
+  ], String.raw`Resistorn är \(0{,}50\ \Omega\), och den idealiserade kortslutningsströmmen \(6{,}0\ \mathrm A\).`),
+  "8.96": byggFacitListaV2([
+    ["a", "Lasteffekten är", String.raw`\[P_R=RI^2=R\left(\frac{\mathcal E}{R+r}\right)^2=\frac{\mathcal E^2R}{(R+r)^2}\]`, "Den är maximal när lastresistansen är lika med den inre resistansen: \(R=r=0{,}600\ \Omega\)."],
+    ["b", "Vid denna anpassning blir strömmen", String.raw`\[I=\frac{1{,}5}{0{,}600+0{,}600}=1{,}25\ \mathrm A\]\[P_R=0{,}600(1{,}25)^2=0{,}9375\ \mathrm W\]`, "Hälften av batteriets effekt förloras då internt; maximal effekt är inte samma sak som maximal verkningsgrad." ]
+  ], String.raw`Resistorn ska vara \(0{,}60\ \Omega\), och maximal lasteffekt blir cirka \(0{,}94\ \mathrm W\).`),
+  "8.97": byggFacitListaV2([
+    ["a", "Elektrisk energi under 3,5 s är", String.raw`\[E_{\mathrm{el}}=UIt=3{,}0\cdot0{,}60\cdot3{,}5=6{,}30\ \mathrm J\]`, ""],
+    ["b", "Det nyttiga lyftarbetet är", String.raw`\[W=mgh=0{,}700\cdot9{,}82\cdot0{,}50=3{,}437\ \mathrm J\]`, ""],
+    ["c", "Verkningsgraden blir", String.raw`\[\eta=\frac{W}{E_{\mathrm{el}}}=\frac{3{,}437}{6{,}30}=0{,}546\]`, "" ]
+  ], String.raw`Motorn förbrukar \(6{,}30\ \mathrm J\), utför \(3{,}44\ \mathrm J\) nyttigt arbete och har verkningsgraden cirka \(55\,\%\).`),
+  "8.98": byggFacitListaV2([
+    ["a", "För ett belastat batteri gäller \(U=\mathcal E-rI\). En linjär anpassning till samtliga fyra mätpunkter ger", String.raw`\[U=1{,}520-0{,}400I\]`, ""],
+    ["b", "Skärningen med U-axeln vid \(I=0\) är emsen.", String.raw`\[\mathcal E=1{,}520\ \mathrm V\]`, ""],
+    ["c", "Linjens negativa lutning är \(-r\).", String.raw`\[r=0{,}400\ \Omega\]`, ""],
+    ["d", "Vid kortslutning är polspänningen noll.", String.raw`\[0=1{,}520-0{,}400I_k\Rightarrow I_k=3{,}80\ \mathrm A\]`, "" ]
+  ], String.raw`Anpassningen är \(U=1{,}520-0{,}400I\). Emsen är \(1{,}520\ \mathrm V\), den inre resistansen \(0{,}400\ \Omega\), och kortslutningsströmmen \(3{,}80\ \mathrm A\).`),
+  "8.99": byggFacitListaV2([
+    ["1", "Mats använder 9,0 V som om hela spänningen låg över den yttre resistorn. Ett verkligt batteri har inre resistans \(r\), så", String.raw`\[I=\frac{\mathcal E}{R+r}\]`, ""],
+    ["2", "Om exempelvis \(r=0{,}50\ \Omega\) blir strömmen", String.raw`\[I=\frac{9{,}0}{0{,}10+0{,}50}=15\ \mathrm A\]`, ""],
+    ["3", "Den stora strömmen ger också intern värmeeffekt \(P_i=I^2r\) och sänkt polspänning.", "", "Både batteri och resistor måste tåla effektutvecklingen; en lågohmig koppling kan vara en farlig kortslutning." ]
+  ], String.raw`Felet är att batteriets inre resistans och spänningsfall har försummats. Strömmen bestäms av hela kretsens resistans, inte bara den köpta resistorn.`),
+  "8.162": byggFacitListaV2([
+    ["a", "Det inre spänningsfallet är", String.raw`\[U_i=rI=0{,}50\cdot1{,}2=0{,}60\ \mathrm V\]`, ""],
+    ["b", "Vid urladdning är polspänningen ems minus inre spänningsfall.", String.raw`\[U_p=9{,}0-0{,}60=8{,}40\ \mathrm V\]`, ""],
+    ["c", "Den yttre resistansen blir", String.raw`\[R=\frac{U_p}{I}=\frac{8{,}40}{1{,}2}=7{,}0\ \Omega\]`, ""],
+    ["d", "När strömmen är noll försvinner det inre spänningsfallet.", String.raw`\[I=0\Rightarrow U_p=\mathcal E=9{,}0\ \mathrm V\]`, "" ]
+  ], String.raw`Det inre spänningsfallet är \(0{,}60\ \mathrm V\), polspänningen \(8{,}40\ \mathrm V\), och den yttre resistansen \(7{,}0\ \Omega\). Obelastad polspänning är \(9{,}0\ \mathrm V\).`),
+  "8.163": byggFacitListaV2([
+    ["a", "Vid ideal kortslutning återstår endast den inre resistansen.", String.raw`\[I_k=\frac{1{,}5}{0{,}30}=5{,}0\ \mathrm A\]`, ""],
+    ["b", "Med en yttre resistor på 2,7 Ω blir", String.raw`\[I=\frac{1{,}5}{2{,}7+0{,}30}=0{,}500\ \mathrm A\]`, ""],
+    ["c", "Polspänningen är", String.raw`\[U_p=1{,}5-0{,}30\cdot0{,}500=1{,}35\ \mathrm V\]`, ""],
+    ["d", "Vid kortslutning utvecklas effekten inne i batteriet.", String.raw`\[P_i=I_k^2r=5{,}0^2\cdot0{,}30=7{,}5\ \mathrm W\]`, "Det kan snabbt ge farlig temperaturökning och skada batteriet." ]
+  ], String.raw`Kortslutningsströmmen är \(5{,}0\ \mathrm A\). Med 2,7 Ω blir strömmen \(0{,}500\ \mathrm A\) och polspänningen \(1{,}35\ \mathrm V\).`),
+  "8.164": byggFacitListaV2([
+    ["a", "Batteriets totala energiomvandling per sekund är", String.raw`\[P_{\mathrm{tot}}=\mathcal EI=12\cdot3{,}0=36\ \mathrm W\]`, ""],
+    ["b", "Den interna förlusteffekten är", String.raw`\[P_i=rI^2=0{,}40\cdot3{,}0^2=3{,}6\ \mathrm W\]`, ""],
+    ["c", "Yttre kretsen får resten.", String.raw`\[P_y=36-3{,}6=32{,}4\ \mathrm W\]`, String.raw`Kontroll: \(U_p=12-0{,}40\cdot3{,}0=10{,}8\ \mathrm V\) och \(U_pI=32{,}4\ \mathrm W\).`],
+    ["d", "Verkningsgraden blir", String.raw`\[\eta=\frac{P_y}{P_{\mathrm{tot}}}=\frac{32{,}4}{36}=0{,}900\]`, "" ]
+  ], String.raw`Total effekt är \(36\ \mathrm W\), intern förlust \(3{,}6\ \mathrm W\), yttre effekt \(32{,}4\ \mathrm W\), och verkningsgraden \(90\,\%\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_EMS_V2[uppgift.id]) uppgift.s = FACIT_EMS_V2[uppgift.id];
+}
+
+const FACIT_KOPPLINGAR_V2_DEL1 = {
+  "8.4": byggFacitListaV2([
+    ["a", "Tjugo lika seriekopplade lampor delar lika på spänningen.", String.raw`\[U_l=\frac{230}{20}=11{,}5\ \mathrm V\]`, ""],
+    ["b", "Totalströmmen är \(I=P/U=15/230=0{,}06522\ \mathrm A\).", String.raw`\[R_{\mathrm{tot}}=\frac{230}{0{,}06522}=3527\ \Omega\]\[R_l=\frac{3527}{20}=176{,}3\ \Omega\]`, ""],
+    ["c", "Om en sockel kortsluter en lampa återstår 19 lika resistanser.", String.raw`\[U_l'=\frac{230}{19}=12{,}11\ \mathrm V\]\[P_{\mathrm{tot}}'=\frac{230^2}{19\cdot176{,}3}=15{,}79\ \mathrm W\]`, "De övriga lamporna får högre spänning och effekt och kan därför slitas snabbare." ]
+  ], String.raw`Varje lampa har \(11{,}5\ \mathrm V\) och cirka \(176\ \Omega\). Efter en kortslutning får de övriga cirka \(12{,}1\ \mathrm V\) vardera.`),
+  "8.16": byggFacitListaV2([
+    ["a", "Vid seriekoppling adderas resistanserna.", String.raw`\[R_e=220+330=550\ \Omega\]`, ""],
+    ["b", "Samma ström går genom båda.", String.raw`\[I=\frac{9{,}0}{550}=0{,}01636\ \mathrm A\]`, ""],
+    ["c", "Delspänningarna blir", String.raw`\[U_{220}=I\cdot220=3{,}60\ \mathrm V\]\[U_{330}=I\cdot330=5{,}40\ \mathrm V\]`, "Summan är 9,0 V." ]
+  ], String.raw`Ersättningsresistansen är \(550\ \Omega\), strömmen \(16{,}4\ \mathrm{mA}\), och delspänningarna \(3{,}6\) respektive \(5{,}4\ \mathrm V\).`),
+  "8.17": byggFacitListaV2([
+    ["a", "För två parallella resistorer gäller", String.raw`\[R_e=\frac{R_1R_2}{R_1+R_2}=\frac{220\cdot330}{220+330}=132\ \Omega\]`, ""],
+    ["b", "Totalströmmen blir", String.raw`\[I=\frac{9{,}0}{132}=0{,}06818\ \mathrm A\]`, ""],
+    ["c", "Parallellkopplingen ger ytterligare en strömväg. För samma spänning blir totalströmmen summan av grenströmmarna och därmed större än genom någon enskild resistor.", String.raw`\[R_e=\frac UI_{\mathrm{tot}}<R_{\min}\]`, "" ]
+  ], String.raw`Ersättningsresistansen är \(132\ \Omega\), och totalströmmen cirka \(68\ \mathrm{mA}\).`),
+  "8.18": byggFacitListaV2([
+    ["a", "Parallellparet ger", String.raw`\[R_p=\frac{200\cdot300}{200+300}=120\ \Omega\]`, ""],
+    ["b", "Det ligger i serie med 100 Ω.", String.raw`\[R_{\mathrm{tot}}=100+120=220\ \Omega\]`, ""],
+    ["c", "Strömmen genom batteriet och 100-ohmsresistorn är", String.raw`\[I=\frac{12}{220}=54{,}55\ \mathrm{mA}\]`, ""],
+    ["d", "Spänningen över parallelldelen blir", String.raw`\[U_p=IR_p=0{,}05455\cdot120=6{,}545\ \mathrm V\]`, "" ]
+  ], String.raw`\(R_p=120\ \Omega\), \(R_{\mathrm{tot}}=220\ \Omega\), \(I=54{,}5\ \mathrm{mA}\), och parallelldelens spänning \(6{,}55\ \mathrm V\).`),
+  "8.19": byggFacitListaV2([
+    ["a", "I parallellkopplingen ligger hela batterispänningen över varje lampa. I seriekopplingen får varje identisk lampa en tredjedel.", String.raw`\[P\propto U^2\quad\text{för konstant }R\]`, "Varje lampa lyser därför starkast i krets B."],
+    ["b", "Tre parallella lampor tar betydligt större total effekt än tre i serie, så batteriet tar slut snabbast i krets B.", "", ""],
+    ["c", "Om en serielampa går av bryts den enda strömvägen och alla slocknar. Om en parallellampa går av finns de andra grenarna kvar och övriga lampor fortsätter lysa.", "", "" ]
+  ], String.raw`Varje lampa lyser starkast och batteriet töms snabbast i parallellkopplingen. Ett avbrott släcker alla i serie men bara den trasiga lampan parallellt.`),
+  "8.20": byggFacitListaV2([
+    ["a", "Totalresistansen fås ur Ohms lag.", String.raw`\[R_{\mathrm{tot}}=\frac{12}{0{,}050}=240\ \Omega\]`, ""],
+    ["b", "Resistanserna är seriekopplade.", String.raw`\[R_x=240-150=90\ \Omega\]`, ""],
+    ["c", "Samma ström går genom båda, så \(P=RI^2\).", String.raw`\[P_{150}=150(0{,}050)^2=0{,}375\ \mathrm W\]\[P_{90}=90(0{,}050)^2=0{,}225\ \mathrm W\]`, "" ]
+  ], String.raw`Totalresistansen är \(240\ \Omega\), den okända \(90\ \Omega\), och effekterna \(0{,}375\) respektive \(0{,}225\ \mathrm W\).`),
+  "8.40": byggFacitListaV2([
+    ["a", "Serieresistanser adderas.", String.raw`\[R_e=47+68=115\ \Omega\]`, ""],
+    ["b", "Kretsströmmen är", String.raw`\[I=\frac{6{,}0}{115}=0{,}05217\ \mathrm A\]`, ""],
+    ["c", "Det finns bara en strömväg i en seriekoppling, så samma ström går genom båda resistorerna.", "", "" ]
+  ], String.raw`Ersättningsresistansen är \(115\ \Omega\), och strömmen \(52\ \mathrm{mA}\) genom båda.`),
+  "8.41": byggFacitListaV2([
+    ["a", "Båda grenarna har 12 V.", String.raw`\[I_{100}=\frac{12}{100}=120\ \mathrm{mA},\qquad I_{150}=\frac{12}{150}=80\ \mathrm{mA}\]`, ""],
+    ["b", "Kirchhoffs strömlag ger", String.raw`\[I_{\mathrm{tot}}=120+80=200\ \mathrm{mA}\]`, ""],
+    ["c", "Ur totalströmmen respektive parallellformeln:", String.raw`\[R_e=\frac{12}{0{,}200}=60\ \Omega\]\[R_e=\frac{100\cdot150}{100+150}=60\ \Omega\]`, "" ]
+  ], String.raw`Grenströmmarna är \(120\) och \(80\ \mathrm{mA}\), totalströmmen \(200\ \mathrm{mA}\), och ersättningsresistansen \(60\ \Omega\).`),
+  "8.42": byggFacitListaV2([
+    ["a", "Två lika 90-ohmsresistorer parallellt ger", String.raw`\[R_p=\frac{90}{2}=45\ \Omega\]`, ""],
+    ["b", "Med den tredje i serie blir", String.raw`\[R_{\mathrm{tot}}=90+45=135\ \Omega\]`, ""],
+    ["c", "Totalströmmen och spänningen över serieresistorn är", String.raw`\[I=\frac{9{,}0}{135}=66{,}67\ \mathrm{mA}\]\[U_3=I\cdot90=6{,}0\ \mathrm V\]`, "" ]
+  ], String.raw`Parallelldelen är \(45\ \Omega\), totalresistansen \(135\ \Omega\), och den ensamma resistorn har \(6{,}0\ \mathrm V\).`),
+  "8.43": byggFacitListaV2([
+    ["a", "Strömmen är 0,030 A.", String.raw`\[R_1=\frac{4{,}5}{0{,}030}=150\ \Omega\]`, ""],
+    ["b", "Kirchhoffs spänningslag ger", String.raw`\[U_2=12-4{,}5=7{,}5\ \mathrm V\]`, ""],
+    ["c", "Samma ström går genom den andra resistorn.", String.raw`\[R_2=\frac{7{,}5}{0{,}030}=250\ \Omega\]`, "" ]
+  ], String.raw`\(R_1=150\ \Omega\), \(U_2=7{,}5\ \mathrm V\), och \(R_2=250\ \Omega\).`),
+  "8.51": byggFacitListaV2([
+    ["a", "Resistorerna ligger efter varandra i samma strömväg: en seriekoppling.", "", ""],
+    ["b", "Ersättningsresistansen är", String.raw`\[R_e=120+180=300\ \Omega\]`, ""],
+    ["c", "Strömmen blir", String.raw`\[I=\frac{9{,}0}{300}=0{,}030\ \mathrm A\]`, "" ]
+  ], String.raw`Det är en seriekoppling med \(R_e=300\ \Omega\) och \(I=30\ \mathrm{mA}\).`),
+  "8.52": byggFacitListaV2([
+    ["a", "Båda resistorerna är kopplade mellan samma två punkter.", String.raw`\[U_1=U_2=6{,}0\ \mathrm V\]`, ""],
+    ["b", "Grenströmmarna blir", String.raw`\[I_1=\frac{6{,}0}{200}=30\ \mathrm{mA},\qquad I_2=\frac{6{,}0}{300}=20\ \mathrm{mA}\]`, ""],
+    ["c", "Ersättningsresistansen är", String.raw`\[R_e=\frac{200\cdot300}{200+300}=120\ \Omega\]`, "" ]
+  ], String.raw`Båda har \(6{,}0\ \mathrm V\). Strömmarna är \(30\) och \(20\ \mathrm{mA}\), och \(R_e=120\ \Omega\).`),
+  "8.53": byggFacitListaV2([
+    ["a", "De två 100-ohmsresistorerna parallellt ger", String.raw`\[R_p=\frac{100}{2}=50\ \Omega\]`, ""],
+    ["b", "Med \(R_1=50\ \Omega\) i serie blir", String.raw`\[R_{\mathrm{tot}}=50+50=100\ \Omega\]`, ""],
+    ["c", "Totalströmmen är 0,12 A.", String.raw`\[U_1=IR_1=0{,}12\cdot50=6{,}0\ \mathrm V\]`, "" ]
+  ], String.raw`Parallelldelen är \(50\ \Omega\), totalresistansen \(100\ \Omega\), och spänningen över \(R_1\) är \(6{,}0\ \mathrm V\).`),
+  "8.54": byggFacitListaV2([
+    ["a", "En amperemeter kopplas i serie så att samma ström som ska mätas passerar mätaren. Dess resistans ska vara mycket liten.", "", ""],
+    ["b", "Med ideal amperemeter ligger 12 V över resistorn.", String.raw`\[R=\frac{12}{0{,}040}=300\ \Omega\]`, ""],
+    ["c", "Effekten är", String.raw`\[P=UI=12\cdot0{,}040=0{,}480\ \mathrm W\]`, "" ]
+  ], String.raw`Amperemetern ska ligga i serie. Resistansen är \(300\ \Omega\), och effekten \(0{,}48\ \mathrm W\).`),
+  "8.55": byggFacitListaV2([
+    ["a", "Totalresistansen är", String.raw`\[R_{\mathrm{tot}}=\frac{24}{0{,}20}=120\ \Omega\]`, ""],
+    ["b", "Spänningen över \(R_1\) och parallelldelen blir", String.raw`\[U_1=0{,}20\cdot80=16\ \mathrm V\]\[U_p=24-16=8{,}0\ \mathrm V\]`, ""],
+    ["c", "Parallelldelens resistans är \(120-80=40\ \Omega\). Två lika parallella resistorer har halva individvärdet.", String.raw`\[R_2=R_3=2\cdot40=80\ \Omega\]`, "" ]
+  ], String.raw`Totalresistansen är \(120\ \Omega\). \(R_1\) har \(16\ \mathrm V\), parallelldelen \(8{,}0\ \mathrm V\), och \(R_2=R_3=80\ \Omega\).`),
+  "8.62": byggFacitListaV2([
+    ["a", "Resistorerna är i serie.", String.raw`\[I=\frac{9{,}0}{150+220}=24{,}32\ \mathrm{mA}\]`, ""],
+    ["b", "Spänningen över \(R_1\) är", String.raw`\[U_1=0{,}02432\cdot150=3{,}65\ \mathrm V\]`, ""],
+    ["c", "En voltmeter kopplas parallellt med \(R_1\), alltså en anslutning på vardera sidan om resistorn.", "", "" ]
+  ], String.raw`Amperemetern visar \(24{,}3\ \mathrm{mA}\), och \(R_1\) har \(3{,}65\ \mathrm V\). Voltmetern kopplas parallellt med \(R_1\).`),
+  "8.64": byggFacitListaV2([
+    ["a", "Med öppen brytare är resistorerna i serie.", String.raw`\[I_o=\frac{12}{40+60}=0{,}120\ \mathrm A\]`, ""],
+    ["b", "Delspänningarna är", String.raw`\[U_1=0{,}120\cdot40=4{,}8\ \mathrm V,\qquad U_2=0{,}120\cdot60=7{,}2\ \mathrm V\]`, ""],
+    ["c", "Sluten brytare kortsluter \(R_2\).", String.raw`\[I_s=\frac{12}{40}=0{,}300\ \mathrm A\]`, "Genom \(R_2\) går då ingen ström och spänningen över den är noll."],
+    ["d", "Effekten i \(R_1\) före och efter är", String.raw`\[P_o=40(0{,}120)^2=0{,}576\ \mathrm W\]\[P_s=40(0{,}300)^2=3{,}60\ \mathrm W\]\[\frac{P_s}{P_o}=6{,}25\]`, "" ]
+  ], String.raw`Öppen brytare: \(I=0{,}120\ \mathrm A\), \(U_1=4{,}8\ \mathrm V\), \(U_2=7{,}2\ \mathrm V\). Sluten: \(I=0{,}300\ \mathrm A\), och effekten i \(R_1\) blir 6,25 gånger större.`),
+  "8.85": byggFacitListaV2([
+    ["a", "Resistorerna är i serie.", String.raw`\[R_e=280+120=400\ \Omega\]`, ""],
+    ["b", "Kretsströmmen är", String.raw`\[I=\frac{6{,}0}{400}=15\ \mathrm{mA}\]`, ""],
+    ["c", "Spänningarna fördelas proportionellt mot resistanserna.", String.raw`\[U_{280}=0{,}015\cdot280=4{,}2\ \mathrm V\]\[U_{120}=0{,}015\cdot120=1{,}8\ \mathrm V\]`, "" ]
+  ], String.raw`\(R_e=400\ \Omega\), \(I=15\ \mathrm{mA}\), och spänningarna är \(4{,}2\) respektive \(1{,}8\ \mathrm V\).`),
+  "8.86": byggFacitListaV2([
+    ["a", "Parallellgrenar har samma spänning.", String.raw`\[U_1=U_2=3{,}0\ \mathrm V\]`, ""],
+    ["b", "Grenströmmarna är", String.raw`\[I_{400}=7{,}5\ \mathrm{mA},\qquad I_{600}=5{,}0\ \mathrm{mA}\]`, ""],
+    ["c", "Ersättningsresistans och kontroll:", String.raw`\[R_e=\frac{400\cdot600}{400+600}=240\ \Omega\]\[I_{\mathrm{tot}}=\frac{3{,}0}{240}=12{,}5\ \mathrm{mA}=7{,}5+5{,}0\ \mathrm{mA}\]`, "" ]
+  ], String.raw`Båda har \(3{,}0\ \mathrm V\); strömmarna är \(7{,}5\) och \(5{,}0\ \mathrm{mA}\), och \(R_e=240\ \Omega\).`),
+  "8.87": byggFacitListaV2([
+    ["a", "Amperemetern kopplas i serie med resistorn så att all ström genom resistorn även går genom mätaren.", "", ""],
+    ["b", "Voltmetern kopplas parallellt över resistorn, mellan samma två punkter.", "", ""],
+    ["c", "Amperemeterns resistans ska vara nära noll så att den inte sänker kretsströmmen. Voltmetern ska omvänt ha mycket hög resistans för att dra försumbar ström.", "", "" ]
+  ], String.raw`Amperemeter kopplas i serie och ska ha låg resistans; voltmeter kopplas parallellt och ska ha hög resistans.`),
+  "8.88": byggFacitListaV2([
+    ["a", "Av figuren är \(R_1\) och \(R_2\) seriekopplade i samma gren.", String.raw`\[R_{12}=100+200=300\ \Omega\]`, ""],
+    ["b", "Denna 300-ohmsgren ligger parallellt med \(R_3=300\ \Omega\).", String.raw`\[R_e=\frac{300}{2}=150\ \Omega\]`, ""],
+    ["c", "Batteriströmmen blir", String.raw`\[I=\frac{9{,}0}{150}=60\ \mathrm{mA}\]`, "" ]
+  ], String.raw`\(R_{12}=300\ \Omega\), hela kretsen \(150\ \Omega\), och batteriströmmen \(60\ \mathrm{mA}\).`),
+  "8.89": byggFacitListaV2([
+    ["a", "\(R_2\) och \(R_3\) är parallella.", String.raw`\[R_{23}=\frac{300\cdot600}{300+600}=200\ \Omega\]`, ""],
+    ["b", "Med \(R_1\) i serie blir \(R_{\mathrm{tot}}=150+200=350\ \Omega\).", String.raw`\[I=\frac{12}{350}=34{,}29\ \mathrm{mA}\]`, ""],
+    ["c", "Spänningen över parallelldelen är", String.raw`\[U_{23}=IR_{23}=0{,}03429\cdot200=6{,}857\ \mathrm V\]`, ""],
+    ["d", "Strömmen genom \(R_2\) blir", String.raw`\[I_2=\frac{6{,}857}{300}=22{,}86\ \mathrm{mA}\]`, "" ]
+  ], String.raw`\(R_{23}=200\ \Omega\), batteriströmmen \(34{,}3\ \mathrm{mA}\), parallelldelens spänning \(6{,}86\ \mathrm V\), och \(I_2=22{,}9\ \mathrm{mA}\).`),
+  "8.90": byggFacitListaV2([
+    ["1", "Spänningen \(U\) är samma över båda parallellgrenarna, medan strömmarna adderas.", String.raw`\[I=I_1+I_2\]`, ""],
+    ["2", "Använd Ohms lag i varje term.", String.raw`\[\frac{U}{R_e}=\frac{U}{R_1}+\frac{U}{R_2}\]`, ""],
+    ["3", "Dividera med \(U\) och lös vid behov ut \(R_e\).", String.raw`\[\frac1{R_e}=\frac1{R_1}+\frac1{R_2}\]\[R_e=\frac{R_1R_2}{R_1+R_2}\]`, "" ]
+  ], String.raw`För två parallella resistorer gäller \(1/R_e=1/R_1+1/R_2\), alltså \(R_e=R_1R_2/(R_1+R_2)\).`),
+  "8.91": byggFacitListaV2([
+    ["a", "Med en resistor är \(I=U/R\). För \(n\) lika resistorer i serie är \(R_s=nR\).", String.raw`\[I_s=\frac{U}{nR}=\frac In\]`, ""],
+    ["b", "För \(n\) lika resistorer parallellt är \(R_p=R/n\).", String.raw`\[I_p=\frac{U}{R/n}=nI\]`, "Batteriets inre resistans och strömbegränsning är försummade." ]
+  ], String.raw`Seriekoppling ger strömmen \(I/n\), medan parallellkoppling idealiskt ger \(nI\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_KOPPLINGAR_V2_DEL1[uppgift.id]) uppgift.s = FACIT_KOPPLINGAR_V2_DEL1[uppgift.id];
+}
+
+const FACIT_KOPPLINGAR_V2_DEL2 = {
+  "8.123": byggFacitListaV2([
+    ["a", "Serieresistanser adderas.", String.raw`\[R_e=150+250=400\ \Omega\]`, ""],
+    ["b", "Kretsströmmen är", String.raw`\[I=\frac{12}{400}=0{,}030\ \mathrm A\]`, ""],
+    ["c", "Samma ström ger delspänningarna", String.raw`\[U_1=150\cdot0{,}030=4{,}5\ \mathrm V\]\[U_2=250\cdot0{,}030=7{,}5\ \mathrm V\]`, ""],
+    ["d", "Kontroll med Kirchhoffs spänningslag:", String.raw`\[U_1+U_2=4{,}5+7{,}5=12{,}0\ \mathrm V\]`, "" ]
+  ], String.raw`\(R_e=400\ \Omega\), \(I=30\ \mathrm{mA}\), \(U_1=4{,}5\ \mathrm V\) och \(U_2=7{,}5\ \mathrm V\).`),
+  "8.124": byggFacitListaV2([
+    ["a", "Parallellgrenarna ligger direkt över batteriet.", String.raw`\[U_1=U_2=9{,}0\ \mathrm V\]`, ""],
+    ["b", "Grenströmmarna är", String.raw`\[I_1=\frac{9{,}0}{300}=30\ \mathrm{mA},\qquad I_2=\frac{9{,}0}{600}=15\ \mathrm{mA}\]`, ""],
+    ["c", "Totalströmmen är summan.", String.raw`\[I=30+15=45\ \mathrm{mA}\]`, ""],
+    ["d", "Ersättningsresistansen blir", String.raw`\[R_e=\frac{9{,}0}{0{,}045}=200\ \Omega\]`, "" ]
+  ], String.raw`Båda har \(9{,}0\ \mathrm V\); strömmarna är \(30\) och \(15\ \mathrm{mA}\), totalströmmen \(45\ \mathrm{mA}\), och \(R_e=200\ \Omega\).`),
+  "8.125": byggFacitListaV2([
+    ["a", "Totalresistansen är", String.raw`\[R_e=100+150+250=500\ \Omega\]`, ""],
+    ["b", "Strömmen blir", String.raw`\[I=\frac{10}{500}=20\ \mathrm{mA}\]`, ""],
+    ["c", "Delspänningarna är", String.raw`\[U_1=2{,}0\ \mathrm V,\qquad U_2=3{,}0\ \mathrm V,\qquad U_3=5{,}0\ \mathrm V\]`, ""],
+    ["d", "Andelen över \(R_3\) är", String.raw`\[\frac{U_3}{U}=\frac{5{,}0}{10}=50\,\%\]`, "" ]
+  ], String.raw`\(R_e=500\ \Omega\), \(I=20\ \mathrm{mA}\), delspänningarna \(2{,}0\), \(3{,}0\) och \(5{,}0\ \mathrm V\); \(R_3\) får 50 %.`),
+  "8.126": byggFacitListaV2([
+    ["a", "Alla tre parallellgrenar har batterispänningen.", String.raw`\[U_1=U_2=U_3=6{,}0\ \mathrm V\]`, ""],
+    ["b", "Grenströmmarna blir", String.raw`\[I_1=60\ \mathrm{mA},\qquad I_2=I_3=30\ \mathrm{mA}\]`, ""],
+    ["c", "Totalströmmen är", String.raw`\[I=60+30+30=120\ \mathrm{mA}\]`, ""],
+    ["d", "Båda metoderna ger samma värde.", String.raw`\[R_e=\frac{6{,}0}{0{,}120}=50\ \Omega\]\[\frac1{R_e}=\frac1{100}+\frac1{200}+\frac1{200}=\frac1{50}\]`, "" ]
+  ], String.raw`Varje gren har \(6{,}0\ \mathrm V\); strömmarna är \(60\), \(30\) och \(30\ \mathrm{mA}\), totalströmmen \(120\ \mathrm{mA}\), och \(R_e=50\ \Omega\).`),
+  "8.127": byggFacitListaV2([
+    ["a", "I serie adderas resistorerna.", String.raw`\[R_e=220+330=550\ \Omega\]`, ""],
+    ["b", "Strömmen är", String.raw`\[I=\frac{11}{550}=20\ \mathrm{mA}\]`, ""],
+    ["c", "Effekterna blir", String.raw`\[P_1=220(0{,}020)^2=0{,}088\ \mathrm W\]\[P_2=330(0{,}020)^2=0{,}132\ \mathrm W\]`, ""],
+    ["d", "Batteriets effekt är", String.raw`\[P=UI=11\cdot0{,}020=0{,}220\ \mathrm W=P_1+P_2\]`, "" ]
+  ], String.raw`\(R_e=550\ \Omega\), \(I=20\ \mathrm{mA}\), \(P_1=0{,}088\ \mathrm W\), \(P_2=0{,}132\ \mathrm W\), och total effekt \(0{,}220\ \mathrm W\).`),
+  "8.128": byggFacitListaV2([
+    ["a", "Varje 470-ohmsresistor har 4,7 V.", String.raw`\[I_1=I_2=\frac{4{,}7}{470}=10\ \mathrm{mA}\]`, ""],
+    ["b", "Totalströmmen är", String.raw`\[I=10+10=20\ \mathrm{mA}\]`, ""],
+    ["c", "Två lika parallella resistorer ger", String.raw`\[R_e=\frac{470}{2}=235\ \Omega\]`, ""],
+    ["d", "Tre lika parallellt ger", String.raw`\[R_e'=\frac{470}{3}=156{,}7\ \Omega\]`, "" ]
+  ], String.raw`Varje gren leder \(10\ \mathrm{mA}\), totalt \(20\ \mathrm{mA}\); två resistorer ger \(235\ \Omega\) och tre ger cirka \(157\ \Omega\).`),
+  "8.129": byggFacitListaV2([
+    ["a", "Samma ström 30 mA går genom \(R_1\).", String.raw`\[U_1=120\cdot0{,}030=3{,}6\ \mathrm V\]`, ""],
+    ["b", "Den återstående delspänningen är", String.raw`\[U_2=9{,}0-3{,}6=5{,}4\ \mathrm V\]`, ""],
+    ["c", "Den okända resistansen blir", String.raw`\[R_2=\frac{5{,}4}{0{,}030}=180\ \Omega\]`, ""],
+    ["d", "Kontroll från hela kretsen:", String.raw`\[R_e=\frac{9{,}0}{0{,}030}=300\ \Omega=120+180\ \Omega\]`, "" ]
+  ], String.raw`\(U_1=3{,}6\ \mathrm V\), \(U_2=5{,}4\ \mathrm V\), \(R_2=180\ \Omega\), och \(R_e=300\ \Omega\).`),
+  "8.130": byggFacitListaV2([
+    ["a", "Voltmetern är parallell med både resistorerna och batteriet och antas ideal.", String.raw`\[U_V=6{,}0\ \mathrm V\]`, ""],
+    ["b", "Grenströmmarna är", String.raw`\[I_1=\frac{6{,}0}{200}=30\ \mathrm{mA},\qquad I_2=\frac{6{,}0}{300}=20\ \mathrm{mA}\]`, ""],
+    ["c", "Batteriströmmen blir", String.raw`\[I=30+20=50\ \mathrm{mA}\]`, ""],
+    ["d", "Ersättningsresistansen är", String.raw`\[R_e=\frac{6{,}0}{0{,}050}=120\ \Omega\]`, "" ]
+  ], String.raw`Voltmetern visar \(6{,}0\ \mathrm V\). Grenströmmarna är \(30\) och \(20\ \mathrm{mA}\), totalströmmen \(50\ \mathrm{mA}\), och \(R_e=120\ \Omega\).`),
+  "8.131": byggFacitListaV2([
+    ["a", "Kretsens ersättningsresistans är", String.raw`\[R_e=\frac{6{,}0}{0{,}025}=240\ \Omega\]`, ""],
+    ["b", "Resistorerna är i serie.", String.raw`\[R_2=240-80=160\ \Omega\]`, ""],
+    ["c", "Delspänningarna blir", String.raw`\[U_1=80\cdot0{,}025=2{,}0\ \mathrm V,\qquad U_2=160\cdot0{,}025=4{,}0\ \mathrm V\]`, ""],
+    ["d", "Samma ström går genom båda och \(P=RI^2\), så den större \(R_2\) utvecklar mest effekt.", "", "Dubbelt motstånd ger här dubbel effekt." ]
+  ], String.raw`\(R_e=240\ \Omega\), \(R_2=160\ \Omega\), spänningarna \(2{,}0\) och \(4{,}0\ \mathrm V\); \(R_2\) utvecklar mest effekt.`),
+  "8.132": byggFacitListaV2([
+    ["a", "Över \(R_1\) ligger 12 V.", String.raw`\[I_1=\frac{12}{400}=30\ \mathrm{mA}\]`, ""],
+    ["b", "Grenströmmarna summerar till 45 mA.", String.raw`\[I_2=45-30=15\ \mathrm{mA}\]`, ""],
+    ["c", "Den okända resistorn är", String.raw`\[R_2=\frac{12}{0{,}015}=800\ \Omega\]`, ""],
+    ["d", "Ersättningsresistansen blir", String.raw`\[R_e=\frac{12}{0{,}045}=266{,}7\ \Omega\]`, "Den är mindre än både 400 Ω och 800 Ω, som den ska vara parallellt." ]
+  ], String.raw`\(I_1=30\ \mathrm{mA}\), \(I_2=15\ \mathrm{mA}\), \(R_2=800\ \Omega\), och \(R_e\approx267\ \Omega\).`),
+  "8.133": byggFacitListaV2([
+    ["a", "Tre lika serieresistorer ger", String.raw`\[R_e=3\cdot150=450\ \Omega\]`, ""],
+    ["b", "Strömmen är", String.raw`\[I=\frac{9{,}0}{450}=20\ \mathrm{mA}\]`, ""],
+    ["c", "Lika resistanser delar lika på spänningen.", String.raw`\[U_l=\frac{9{,}0}{3}=3{,}0\ \mathrm V\]`, ""],
+    ["d", "När en ersätts med ledning återstår 300 Ω.", String.raw`\[I'=\frac{9{,}0}{300}=30\ \mathrm{mA}\]`, "" ]
+  ], String.raw`\(R_e=450\ \Omega\), \(I=20\ \mathrm{mA}\), och varje resistor har \(3{,}0\ \mathrm V\). Med två kvar blir strömmen \(30\ \mathrm{mA}\).`),
+  "8.134": byggFacitListaV2([
+    ["a", "Grenarna har 5,0 V.", String.raw`\[I_1=\frac{5{,}0}{100}=50\ \mathrm{mA},\qquad I_2=\frac{5{,}0}{1000}=5{,}0\ \mathrm{mA}\]`, ""],
+    ["b", "Totalströmmen är", String.raw`\[I=55\ \mathrm{mA}\]`, ""],
+    ["c", "Ersättningsresistansen är", String.raw`\[R_e=\frac{5{,}0}{0{,}055}=90{,}9\ \Omega\]`, ""],
+    ["d", "Andelen genom \(R_1\) är", String.raw`\[\frac{50}{55}=90{,}9\,\%\]`, "Den minsta resistansen dominerar en parallellkoppling och drar största strömmen." ]
+  ], String.raw`Grenströmmarna är \(50\) och \(5{,}0\ \mathrm{mA}\), totalt \(55\ \mathrm{mA}\); \(R_e=90{,}9\ \Omega\), och \(90{,}9\,\%\) går genom \(R_1\).`),
+  "8.135": byggFacitListaV2([
+    ["a", "Totalresistansen är 600 Ω.", String.raw`\[I=\frac{12}{600}=20\ \mathrm{mA}\]`, ""],
+    ["b", "Batteriets effekt är", String.raw`\[P=UI=12\cdot0{,}020=0{,}240\ \mathrm W\]`, ""],
+    ["c", "Fem minuter är 300 s.", String.raw`\[E=Pt=0{,}240\cdot300=72\ \mathrm J\]`, ""],
+    ["d", "I serie fördelas energin proportionellt mot resistansen.", String.raw`\[E_2=R_2I^2t=400(0{,}020)^2\cdot300=48\ \mathrm J\]`, "" ]
+  ], String.raw`Strömmen är \(20\ \mathrm{mA}\), effekten \(0{,}240\ \mathrm W\), total energi \(72\ \mathrm J\), varav \(48\ \mathrm J\) i \(R_2\).`),
+  "8.136": byggFacitListaV2([
+    ["1", "Parallellkopplingen av 200 Ω och 300 Ω ger", String.raw`\[R_{23}=\frac{200\cdot300}{200+300}=120\ \Omega\]`, ""],
+    ["2", "Med \(R_1=120\ \Omega\) i serie blir totalresistansen 240 Ω och totalströmmen", String.raw`\[I=\frac{12}{240}=50\ \mathrm{mA}\]`, ""],
+    ["3", "Parallelldelen har spänningen", String.raw`\[U_{23}=IR_{23}=0{,}050\cdot120=6{,}0\ \mathrm V\]`, ""],
+    ["4", "Effekten i \(R_3\) är", String.raw`\[P_3=\frac{U_{23}^2}{R_3}=\frac{6{,}0^2}{300}=0{,}120\ \mathrm W\]`, "" ]
+  ], String.raw`Effekten i \(R_3\) är \(0{,}12\ \mathrm W\).`),
+  "8.137": byggFacitListaV2([
+    ["1", "De tre parallellgrenarnas ersättningsresistans är", String.raw`\[\frac1{R_p}=\frac1{200}+\frac1{300}+\frac1{600}=\frac1{100}\Rightarrow R_p=100\ \Omega\]`, ""],
+    ["2", "Med \(R_1=100\ \Omega\) i serie blir totalresistansen 200 Ω.", String.raw`\[I=\frac{12}{200}=60\ \mathrm{mA}\]`, ""],
+    ["3", "De lika stora seriedelarna delar spänningen, så parallelldelen har 6,0 V.", String.raw`\[I_4=\frac{6{,}0}{600}=10\ \mathrm{mA}\]`, String.raw`Kontroll: \(30+20+10=60\ \mathrm{mA}\).`]
+  ], String.raw`Strömmen genom \(R_4\) är \(10\ \mathrm{mA}\).`),
+  "8.138": byggFacitListaV2([
+    ["1", "Vänster parallellgren består av \(R_2+R_3=150+250=400\ \Omega\), lika med \(R_4\).", String.raw`\[R_p=\frac{400}{2}=200\ \Omega\]`, ""],
+    ["2", "Med \(R_1=100\ \Omega\) i serie blir totalresistansen 300 Ω.", String.raw`\[I=\frac{12}{300}=40\ \mathrm{mA}\]`, ""],
+    ["3", "Parallelldelen får \(U_p=I\cdot200=8{,}0\ \mathrm V\). Strömmen i vänster gren är 20 mA.", String.raw`\[U_3=0{,}020\cdot250=5{,}0\ \mathrm V\]`, "" ]
+  ], String.raw`Spänningen över \(R_3\) är \(5{,}0\ \mathrm V\).`),
+  "8.139": byggFacitListaV2([
+    ["1", "Amperemetern visar strömmen genom \(R_3=600\ \Omega\).", String.raw`\[U_p=R_3I_3=600\cdot0{,}0080=4{,}8\ \mathrm V\]`, ""],
+    ["2", "Samma spänning ligger över \(R_2=300\ \Omega\).", String.raw`\[I_2=\frac{4{,}8}{300}=16\ \mathrm{mA}\]`, ""],
+    ["3", "Totalströmmen genom \(R_1\) är \(16+8=24\ \mathrm{mA}\).", String.raw`\[U_1=150\cdot0{,}024=3{,}6\ \mathrm V\]`, ""],
+    ["4", "Batterispänningen är summan.", String.raw`\[\mathcal E=U_1+U_p=3{,}6+4{,}8=8{,}4\ \mathrm V\]`, "" ]
+  ], String.raw`Batteriets spänning är \(8{,}4\ \mathrm V\).`),
+  "8.140": byggFacitListaV2([
+    ["1", "Parallelldelen ger", String.raw`\[R_{23}=\frac{100\cdot400}{100+400}=80\ \Omega\]`, ""],
+    ["2", "Totalresistansen är \(100+80=180\ \Omega\), så totalströmmen är 0,100 A.", String.raw`\[P_1=100(0{,}100)^2=1{,}00\ \mathrm W\]`, ""],
+    ["3", "Parallelldelen får \(U_p=0{,}100\cdot80=8{,}0\ \mathrm V\).", String.raw`\[P_2=\frac{8{,}0^2}{100}=0{,}64\ \mathrm W\]\[P_3=\frac{8{,}0^2}{400}=0{,}16\ \mathrm W\]`, String.raw`Kontroll: \(1{,}00+0{,}64+0{,}16=1{,}80\ \mathrm W=UI\).`]
+  ], String.raw`\(R_1\) utvecklar störst effekt: \(P_1=1{,}00\ \mathrm W\), \(P_2=0{,}64\ \mathrm W\), \(P_3=0{,}16\ \mathrm W\).`),
+  "8.141": byggFacitListaV2([
+    ["a", "Totalresistansen är \(12/0{,}040=300\ \Omega\). Parallelldelen måste därför vara \(300-100=200\ \Omega\).", String.raw`\[\frac1{200}=\frac1{300}+\frac1{R_3}\Rightarrow R_3=600\ \Omega\]`, ""],
+    ["b", "Parallelldelens spänning är \(U_p=0{,}040\cdot200=8{,}0\ \mathrm V\).", String.raw`\[P_3=\frac{U_p^2}{R_3}=\frac{64}{600}=0{,}1067\ \mathrm W\]`, "" ]
+  ], String.raw`\(R_3=600\ \Omega\), och den utvecklar cirka \(0{,}107\ \mathrm W\).`),
+  "8.142": byggFacitListaV2([
+    ["a", "Med öppen brytare går strömmen genom båda resistorerna i serie.", String.raw`\[I_o=\frac{12}{100+200}=40\ \mathrm{mA}\]`, "Med sluten brytare kortsluts \(R_2\)."],
+    ["2", "Då återstår endast \(R_1\).", String.raw`\[I_s=\frac{12}{100}=120\ \mathrm{mA}\]`, ""],
+    ["b", "Strömmen genom \(R_1\) tredubblas, så effekten blir nio gånger större.", String.raw`\[P_o=100(0{,}040)^2=0{,}16\ \mathrm W\]\[P_s=100(0{,}120)^2=1{,}44\ \mathrm W\]\[\frac{P_s}{P_o}=9\]`, "" ]
+  ], String.raw`Batteriströmmen är \(40\ \mathrm{mA}\) öppen och \(120\ \mathrm{mA}\) sluten. Effekten i \(R_1\) blir nio gånger större.`),
+  "8.153": byggFacitListaV2([
+    ["a", "Parallellkopplade lampor ligger över samma två batteripoler.", String.raw`\[U_1=U_2=12\ \mathrm V\]`, ""],
+    ["b", "Märkströmmarna är", String.raw`\[I_1=\frac{24}{12}=2{,}0\ \mathrm A,\qquad I_2=\frac{12}{12}=1{,}0\ \mathrm A\]`, ""],
+    ["c", "Batteriströmmen är summan.", String.raw`\[I=3{,}0\ \mathrm A\]`, ""],
+    ["d", "Driftresistanserna blir", String.raw`\[R_1=\frac{12}{2{,}0}=6{,}0\ \Omega,\qquad R_2=\frac{12}{1{,}0}=12\ \Omega\]`, "" ]
+  ], String.raw`Båda har \(12\ \mathrm V\). Strömmarna är \(2{,}0\) och \(1{,}0\ \mathrm A\), totalt \(3{,}0\ \mathrm A\); resistanserna är \(6{,}0\) och \(12\ \Omega\).`),
+  "8.154": byggFacitListaV2([
+    ["a", "Kirchhoffs första lag säger att summan av strömmar in i en knut är lika med summan ut.", String.raw`\[\sum I_{\mathrm{in}}=\sum I_{\mathrm{ut}}\]`, "Det uttrycker laddningens bevarande."],
+    ["b", "Använd strömbalansen.", String.raw`\[450=180+I_2+120\Rightarrow I_2=150\ \mathrm{mA}\]`, ""],
+    ["c", "Andelen i gren 1 är", String.raw`\[\frac{180}{450}=0{,}40=40\,\%\]`, ""],
+    ["d", "Om grenarna ligger över en ideal spänningskälla och gren 2 bryts är spänningen över gren 1 och 3 oförändrad. Då är \(I_1=180\) mA och \(I_3=120\) mA som tidigare, medan totalströmmen blir 300 mA.", "", "Med en verklig källa med inre resistans kan spänningen och därmed grenströmmarna ändras något." ]
+  ], String.raw`\(I_2=150\ \mathrm{mA}\), och 40 % går i gren 1. När gren 2 bryts är de andra grenströmmarna oförändrade i idealmodellen.`),
+  "8.155": byggFacitListaV2([
+    ["a", "Före inkopplingen finns bara 200 Ω.", String.raw`\[I_f=\frac{12}{200}=60\ \mathrm{mA}\]`, ""],
+    ["b", "Efter parallellkopplingen blir", String.raw`\[R_e=\frac{200\cdot300}{200+300}=120\ \Omega\]`, ""],
+    ["c", "Totalströmmen blir", String.raw`\[I_{\mathrm{tot}}=\frac{12}{120}=100\ \mathrm{mA}\]`, ""],
+    ["d", "Den första resistorn har fortfarande 12 V över sig.", String.raw`\[I_1=\frac{12}{200}=60\ \mathrm{mA}\]`, "Den nya grenen tillför 40 mA. Detta gäller för ett idealiskt 12-voltsbatteri." ]
+  ], String.raw`Före: \(60\ \mathrm{mA}\). Efter: \(R_e=120\ \Omega\) och totalström \(100\ \mathrm{mA}\); den första grenen leder fortfarande \(60\ \mathrm{mA}\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_KOPPLINGAR_V2_DEL2[uppgift.id]) uppgift.s = FACIT_KOPPLINGAR_V2_DEL2[uppgift.id];
+}
+
+const FACIT_POTENTIAL_V2 = {
+  "8.7": byggFacitListaV2([
+    ["a", "Elektrisk energi är laddning gånger potentialskillnad.", String.raw`\[E=QU=20\cdot100\cdot10^6=2{,}0\cdot10^9\ \mathrm J\]`, ""],
+    ["b", "Omvandla med \(1\ \mathrm{kWh}=3{,}6\cdot10^6\ \mathrm J\).", String.raw`\[E=\frac{2{,}0\cdot10^9}{3{,}6\cdot10^6}=556\ \mathrm{kWh}\]`, "Det motsvarar exempelvis flera veckors hushållsel för en villa, men energin frigörs på mycket kort tid och kan inte enkelt tas till vara."],
+    ["c", "Om ett homogent fält på 3 MV/m antas blir", String.raw`\[d=\frac UE=\frac{100\cdot10^6}{3\cdot10^6}=33\ \mathrm m\]`, "Moln ligger mycket högre. En verklig blixt utvecklas stegvis genom joniserade, förgrenade kanaler och fältet är starkt ojämnt; den enkla homogena modellen gäller därför inte över hela avståndet." ]
+  ], String.raw`Blixten frigör cirka \(2{,}0\ \mathrm{GJ}=556\ \mathrm{kWh}\). Den homogena genomslagsmodellen ger \(33\ \mathrm m\), men verklig blixtbildning sker stegvis i ojämna fält.`),
+  "8.12": byggFacitListaV2([
+    ["a", "Resistorerna är i serie.", String.raw`\[I=\frac{12}{100+200}=40\ \mathrm{mA}\]`, ""],
+    ["b", "Delspänningarna är", String.raw`\[U_1=0{,}040\cdot100=4{,}0\ \mathrm V\]\[U_2=0{,}040\cdot200=8{,}0\ \mathrm V\]`, ""],
+    ["c", "Mellanpunkten definieras som 0 V. I strömriktningen sjunker potentialen, så polen på \(R_1\)-sidan ligger på +4,0 V och polen på \(R_2\)-sidan på −8,0 V.", String.raw`\[V_+=+4{,}0\ \mathrm V,\qquad V_-=-8{,}0\ \mathrm V\]`, String.raw`Skillnaden är \(V_+-V_-=12\ \mathrm V\).`]
+  ], String.raw`Strömmen är \(40\ \mathrm{mA}\), delspänningarna \(4{,}0\) och \(8{,}0\ \mathrm V\), och batteripolernas potentialer \(+4{,}0\) respektive \(-8{,}0\ \mathrm V\).`),
+  "8.31": byggFacitListaV2([
+    ["a", "Totalresistansen är 900 Ω.", String.raw`\[I=\frac{9{,}0}{900}=10\ \mathrm{mA}\]`, ""],
+    ["b", "När minuspolen är jordad och 600-ohmsresistorn sitter mot jord ger den potentialhöjningen till mellanpunkten.", String.raw`\[V_m=0+0{,}010\cdot600=+6{,}0\ \mathrm V\]`, ""],
+    ["c", "Om pluspolen i stället väljs till 0 V flyttas alla potentialer ned 9,0 V.", String.raw`\[V_m'=6{,}0-9{,}0=-3{,}0\ \mathrm V\]`, "Spänningarna i kretsen ändras inte; endast referensnivån flyttas." ]
+  ], String.raw`Strömmen är \(10\ \mathrm{mA}\). Mellanpunkten ligger på \(+6{,}0\ \mathrm V\) med jordad minuspol och \(-3{,}0\ \mathrm V\) med jordad pluspol.`),
+  "8.49": byggFacitListaV2([
+    ["a", "Tre lika serieresistorer delar batterispänningen lika.", String.raw`\[U_R=\frac{12}{3}=4{,}0\ \mathrm V\]`, ""],
+    ["b", "Med minuspolen på 0 V stiger potentialen stegvis mot pluspolen.", String.raw`\[V_1=4{,}0\ \mathrm V,\qquad V_2=8{,}0\ \mathrm V\]`, ""],
+    ["c", "Potential är ett referensberoende värde i en punkt. Spänning är potentialskillnaden mellan två punkter och påverkas inte av var nollnivån väljs.", String.raw`\[U_{AB}=V_A-V_B\]`, "" ]
+  ], String.raw`Varje resistor har \(4{,}0\ \mathrm V\). Mellanpunkterna ligger på \(4{,}0\) och \(8{,}0\ \mathrm V\) relativt jord.`),
+  "8.50": byggFacitListaV2([
+    ["a", "Elektronen får rörelseenergin lika med elementarladdningen gånger spänningen.", String.raw`\[E_k=eU=1{,}602\cdot10^{-19}\cdot250=4{,}005\cdot10^{-17}\ \mathrm J\]`, String.raw`Det är \(250\ \mathrm{eV}\).`],
+    ["b", "Icke-relativistiskt gäller \(E_k=mv^2/2\).", String.raw`\[v=\sqrt{\frac{2E_k}{m_e}}=\sqrt{\frac{2\cdot4{,}005\cdot10^{-17}}{9{,}109\cdot10^{-31}}}=9{,}38\cdot10^6\ \mathrm{m/s}\]`, ""],
+    ["c", "Jämför med ljushastigheten.", String.raw`\[\frac vc=\frac{9{,}38\cdot10^6}{2{,}998\cdot10^8}=0{,}0313=3{,}13\,\%\]`, "Den klassiska formeln är tillräckligt noggrann vid denna fart." ]
+  ], String.raw`Elektronen får \(4{,}01\cdot10^{-17}\ \mathrm J=250\ \mathrm{eV}\), farten \(9{,}38\cdot10^6\ \mathrm{m/s}\), cirka \(3{,}1\,\%\) av ljushastigheten.`),
+  "8.103": byggFacitListaV2([
+    ["a", "Resistorerna är i serie.", String.raw`\[I=\frac{9{,}0}{200+400}=15\ \mathrm{mA}\]`, ""],
+    ["b", "Delspänningarna blir", String.raw`\[U_{200}=0{,}015\cdot200=3{,}0\ \mathrm V\]\[U_{400}=0{,}015\cdot400=6{,}0\ \mathrm V\]`, ""],
+    ["c", "Minuspolen är jordad. Punkten A vid pluspolen har 9,0 V. Efter spänningsfallet över 200 Ω återstår", String.raw`\[V_A=9{,}0\ \mathrm V,\qquad V_B=9{,}0-3{,}0=6{,}0\ \mathrm V\]`, "" ]
+  ], String.raw`Strömmen är \(15\ \mathrm{mA}\), delspänningarna \(3{,}0\) och \(6{,}0\ \mathrm V\), samt \(V_A=9{,}0\ \mathrm V\) och \(V_B=6{,}0\ \mathrm V\).`),
+  "8.116": byggFacitListaV2([
+    ["a", "Spänningen från A till B är potentialskillnaden.", String.raw`\[U_{AB}=V_A-V_B=7{,}5-(-2{,}5)=10{,}0\ \mathrm V\]`, ""],
+    ["b", "Konventionell ström går genom resistorn från högre till lägre potential.", String.raw`\[I=\frac{10{,}0}{250}=0{,}040\ \mathrm A\]`, "Alltså 40 mA från A mot B."],
+    ["c", "För att göra B till 0 V adderas 2,5 V till båda potentialerna.", String.raw`\[V_A'=10{,}0\ \mathrm V,\qquad V_B'=0\ \mathrm V\]`, "" ]
+  ], String.raw`Spänningen är \(10{,}0\ \mathrm V\), strömmen \(40\ \mathrm{mA}\) från A till B. Med B jordad blir potentialerna 10,0 V och 0 V.`),
+  "8.117": byggFacitListaV2([
+    ["a", "Båda partiklarna har laddningsbeloppet \(e\) och får samma rörelseenergi.", String.raw`\[E_k=eU=1{,}602\cdot10^{-19}\cdot400=6{,}408\cdot10^{-17}\ \mathrm J=400\ \mathrm{eV}\]`, ""],
+    ["b", "Elektronens fart blir", String.raw`\[v_e=\sqrt{\frac{2E_k}{m_e}}=1{,}186\cdot10^7\ \mathrm{m/s}\]`, ""],
+    ["c", "Vid samma energi gäller \(v\propto1/\sqrt m\).", String.raw`\[\frac{v_e}{v_p}=\sqrt{\frac{m_p}{m_e}}=42{,}8\]\[v_p=2{,}77\cdot10^5\ \mathrm{m/s}\]`, "Elektronen och protonen accelererar åt motsatta håll eftersom deras laddningar har olika tecken." ]
+  ], String.raw`Båda får \(400\ \mathrm{eV}\). Elektronen når \(1{,}19\cdot10^7\ \mathrm{m/s}\) och rör sig cirka 43 gånger snabbare än protonen.`),
+  "8.118": byggFacitListaV2([
+    ["a", "Att flytta en positiv laddning från negativ till positiv platta ökar dess elektriska lägesenergi.", String.raw`\[W=qU=5{,}0\cdot10^{-9}\cdot200=1{,}00\cdot10^{-6}\ \mathrm J\]`, ""],
+    ["b", "I det homogena fältet ökar potentialen linjärt med avståndet. Halvvägs är potentialskillnaden 100 V.", String.raw`\[W_{1/2}=5{,}0\cdot10^{-9}\cdot100=5{,}00\cdot10^{-7}\ \mathrm J\]`, ""],
+    ["c", "Det elektrostatiska fältet är konservativt. Arbetet beror bara på start- och slutpotential, inte på vägen mellan dem.", String.raw`\[W=q(V_f-V_i)\]`, "" ]
+  ], String.raw`Arbetet är \(1{,}00\ \mu\mathrm J\) hela vägen och \(0{,}500\ \mu\mathrm J\) halvvägs. Vägen saknar betydelse.`),
+  "8.143": byggFacitListaV2([
+    ["1", "Vandra medurs i den antagna strömriktningen. Batterierna motverkar varandra.", String.raw`\[12-100I-4{,}0-300I=0\]`, ""],
+    ["2", "Lös ekvationen.", String.raw`\[400I=8{,}0\Rightarrow I=0{,}020\ \mathrm A\]`, "Det positiva tecknet visar att den antagna medurs riktningen är korrekt. Det svagare batteriet tar emot ström i sin pluspol och laddas." ]
+  ], String.raw`Strömmen är \(20\ \mathrm{mA}\) medurs.`),
+  "8.144": byggFacitListaV2([
+    ["a", "I den angivna slingan samverkar batterierna. Potentialvandringen blir", String.raw`\[6{,}0-150I+9{,}0-350I=0\]\[I=\frac{15}{500}=0{,}030\ \mathrm A\]`, ""],
+    ["b", "Spänningen över \(R_2\) är", String.raw`\[U_2=R_2I=350\cdot0{,}030=10{,}5\ \mathrm V\]`, "" ]
+  ], String.raw`Strömmen är \(30\ \mathrm{mA}\), och spänningen över \(R_2\) är \(10{,}5\ \mathrm V\).`),
+  "8.145": byggFacitListaV2([
+    ["1", "Batterierna motverkar varandra. Potentialvandring i strömriktningen ger", String.raw`\[12-100(0{,}015)-6{,}0-R_2(0{,}015)=0\]`, ""],
+    ["2", "Lös ut \(R_2\).", String.raw`\[4{,}5=0{,}015R_2\Rightarrow R_2=300\ \Omega\]`, String.raw`Kontroll: \((12-6{,}0)/(100+300)=0{,}015\ \mathrm A\).`]
+  ], String.raw`\(R_2=300\ \Omega\).`),
+  "8.146": byggFacitListaV2([
+    ["a", "Laddarens ems överstiger batteriets med 2,0 V.", String.raw`\[14-20I-12=0\Rightarrow I=0{,}100\ \mathrm A\]`, ""],
+    ["b", "Effektbalansen är", String.raw`\[P_{\mathrm{laddare}}=14\cdot0{,}100=1{,}40\ \mathrm W\]\[P_{\mathrm{batteri}}=12\cdot0{,}100=1{,}20\ \mathrm W\]\[P_R=20(0{,}100)^2=0{,}200\ \mathrm W\]`, String.raw`Kontroll: \(1{,}20+0{,}20=1{,}40\ \mathrm W\).`]
+  ], String.raw`Laddströmmen är \(100\ \mathrm{mA}\). Laddaren avger \(1{,}40\ \mathrm W\), batteriet tar upp \(1{,}20\ \mathrm W\), och \(0{,}20\ \mathrm W\) blir värme.`),
+  "8.147": byggFacitListaV2([
+    ["a", "Batteriernas algebraiska drivspänning i den antagna riktningen är \(9{,}0-4{,}5+3{,}0=7{,}5\ \mathrm V\).", String.raw`\[9{,}0-100I-150I-4{,}5+3{,}0=0\]\[I=\frac{7{,}5}{250}=0{,}030\ \mathrm A\]`, ""],
+    ["b", "Spänningen över \(R_1\) blir", String.raw`\[U_1=100\cdot0{,}030=3{,}0\ \mathrm V\]`, "" ]
+  ], String.raw`Strömmen är \(30\ \mathrm{mA}\) i pilens riktning, och \(R_1\) har \(3{,}0\ \mathrm V\).`),
+  "8.148": byggFacitListaV2([
+    ["1", "Mittgrenens ström är \(I_3=60\ \mathrm{mA}\), så spänningsfallet över \(R_3\) är \(100\cdot0{,}060=6{,}0\ \mathrm V\). Vänster slinga:", String.raw`\[12-150I_1-6{,}0=0\Rightarrow I_1=40\ \mathrm{mA}\]`, ""],
+    ["2", "Höger slinga:", String.raw`\[9{,}0-150I_2-6{,}0=0\Rightarrow I_2=20\ \mathrm{mA}\]`, ""],
+    ["3", "Knutpunktskontroll:", String.raw`\[I_1+I_2=40+20=60\ \mathrm{mA}=I_3\]`, "" ]
+  ], String.raw`\(I_1=40\ \mathrm{mA}\) och \(I_2=20\ \mathrm{mA}\); summan stämmer med \(I_3=60\ \mathrm{mA}\).`),
+  "8.149": byggFacitListaV2([
+    ["a", "Knutpunktslagen och de två slingekvationerna är", String.raw`\[I_1+I_2=I_3\]\[12-100I_1-200I_3=0\]\[6{,}0-100I_2-200I_3=0\]`, ""],
+    ["b", "Ur slingorna fås \(I_1=0{,}12-2I_3\) och \(I_2=0{,}060-2I_3\).", String.raw`\[I_3=0{,}18-4I_3\Rightarrow I_3=36\ \mathrm{mA}\]\[I_1=48\ \mathrm{mA},\qquad I_2=-12\ \mathrm{mA}\]`, ""],
+    ["c", "Det negativa \(I_2\) betyder att verklig ström går motsatt den ritade pilen, alltså nedåt i den högra grenen. Det starkare batteriet driver då ström in i det svagare batteriets pluspol, så det laddas.", "", String.raw`Kontroll: \(48+(-12)=36\ \mathrm{mA}\).`]
+  ], String.raw`\(I_1=48\ \mathrm{mA}\), \(I_2=-12\ \mathrm{mA}\) och \(I_3=36\ \mathrm{mA}\). Minustecknet visar omvänd strömriktning i gren 2.`),
+  "8.150": byggFacitListaV2([
+    ["a", "Ekvationssystemet är", String.raw`\[I_1+I_2=I_3\]\[12-150I_1-100I_3=0\]\[9{,}0-150I_2-100I_3=0\]`, ""],
+    ["2", "Lösning ger", String.raw`\[I_3=60\ \mathrm{mA},\qquad I_1=40\ \mathrm{mA},\qquad I_2=20\ \mathrm{mA}\]`, ""],
+    ["b", "Effekten i mittresistorn är", String.raw`\[P_3=100(0{,}060)^2=0{,}360\ \mathrm W\]`, ""],
+    ["c", "Batterierna avger", String.raw`\[P_{E1}=12\cdot0{,}040=0{,}480\ \mathrm W\]\[P_{E2}=9{,}0\cdot0{,}020=0{,}180\ \mathrm W\]`, String.raw`Tillfört \(0{,}660\ \mathrm W\). Resistorernas summan är \(150(0{,}040)^2+150(0{,}020)^2+0{,}360=0{,}660\ \mathrm W\).`]
+  ], String.raw`\(I_1=40\), \(I_2=20\) och \(I_3=60\ \mathrm{mA}\). \(R_3\) utvecklar \(0{,}360\ \mathrm W\); batterierna avger \(0{,}480\) och \(0{,}180\ \mathrm W\), med korrekt energibalans.`),
+  "8.151": byggFacitListaV2([
+    ["a", "Använd knutpunkt och två slingor.", String.raw`\[I_1+I_2=I_3\]\[12-300I_1-100I_3=0\]\[8{,}0-50I_2-100I_3=0\]`, ""],
+    ["2", "Lösningen blir", String.raw`\[I_3=60\ \mathrm{mA},\qquad I_1=20\ \mathrm{mA},\qquad I_2=40\ \mathrm{mA}\]`, ""],
+    ["b", "Mittgrenens spänning är", String.raw`\[U_3=100\cdot0{,}060=6{,}0\ \mathrm V\]`, ""],
+    ["c", "Det svagare 8-voltsbatteriet har bara 50 Ω i sin gren. Efter att den gemensamma nodspänningen 6,0 V räknats bort återstår 2,0 V över 50 Ω, medan 12-voltsgrenen har 6,0 V över 300 Ω.", String.raw`\[\frac{2{,}0}{50}=40\ \mathrm{mA}>\frac{6{,}0}{300}=20\ \mathrm{mA}\]`, "Det levererar därför dubbelt så stor ström, inte sex gånger så stor." ]
+  ], String.raw`\(I_1=20\), \(I_2=40\), \(I_3=60\ \mathrm{mA}\), och mittgrenens spänning är \(6{,}0\ \mathrm V\). Den lägre grenresistansen gör att 8-voltsbatteriet levererar mest ström.`),
+  "8.152": byggFacitListaV2([
+    ["a", "Ekvationerna med de markerade riktningarna är", String.raw`\[I_1+I_2=I_3\]\[12-100I_1-2{,}0-50I_3=0\]\[9{,}0-150I_2-2{,}0-50I_3=0\]`, ""],
+    ["2", "Lös systemet.", String.raw`\[I_3=80\ \mathrm{mA},\qquad I_1=60\ \mathrm{mA},\qquad I_2=20\ \mathrm{mA}\]`, ""],
+    ["b", "Strömmen går in i mittbatteriets pluspol, så batteriet tar upp effekt.", String.raw`\[P_{\mathrm{ladd}}=E_3I_3=2{,}0\cdot0{,}080=0{,}160\ \mathrm W\]`, String.raw`Resistorn i samma gren utvecklar dessutom \(50(0{,}080)^2=0{,}320\ \mathrm W\).`]
+  ], String.raw`\(I_1=60\), \(I_2=20\) och \(I_3=80\ \mathrm{mA}\). Mittbatteriet laddas med effekten \(0{,}160\ \mathrm W\).`),
+  "8.165": byggFacitListaV2([
+    ["a", "Från batteriets minuspol till pluspol stiger potentialen med emsen, här 9,0 V.", "", ""],
+    ["b", "Genom en resistor i strömriktningen sjunker potentialen med \(RI\).", "", ""],
+    ["c", "Efter ett helt varv är potentialändringarnas summa noll.", String.raw`\[9{,}0-100I-200I=0\Rightarrow I=30\ \mathrm{mA}\]`, ""],
+    ["d", "Delspänningarna blir", String.raw`\[U_1=100\cdot0{,}030=3{,}0\ \mathrm V\]\[U_2=200\cdot0{,}030=6{,}0\ \mathrm V\]`, "" ]
+  ], String.raw`Potentialen stiger 9,0 V över batteriet och sjunker över resistorerna. Strömmen är \(30\ \mathrm{mA}\), med delspänningarna \(3{,}0\) och \(6{,}0\ \mathrm V\).`),
+  "8.166": byggFacitListaV2([
+    ["a", "Seriekopplingen har 600 Ω.", String.raw`\[I=\frac{12}{600}=20\ \mathrm{mA}\]`, ""],
+    ["b", "Delspänningarna är", String.raw`\[U_1=200\cdot0{,}020=4{,}0\ \mathrm V,\qquad U_2=400\cdot0{,}020=8{,}0\ \mathrm V\]`, ""],
+    ["c", "Jordad minuspol har 0 V, så pluspolen har", String.raw`\[V_+=12\ \mathrm V\]`, ""],
+    ["d", "Från pluspolen till A sjunker potentialen 4,0 V över \(R_1\).", String.raw`\[V_A=12-4{,}0=8{,}0\ \mathrm V\]`, "" ]
+  ], String.raw`Strömmen är \(20\ \mathrm{mA}\), delspänningarna \(4{,}0\) och \(8{,}0\ \mathrm V\), pluspolen \(12\ \mathrm V\), och \(V_A=8{,}0\ \mathrm V\).`),
+  "8.167": byggFacitListaV2([
+    ["a", "Potentialskillnaden mellan A och B är", String.raw`\[U_{AB}=12-7{,}0=5{,}0\ \mathrm V\]`, ""],
+    ["b", "Mellan B och C är", String.raw`\[U_{BC}=7{,}0-0=7{,}0\ \mathrm V\]`, ""],
+    ["c", "Strömmen genom 250 Ω går från högre till lägre potential.", String.raw`\[I=\frac{5{,}0}{250}=20\ \mathrm{mA}\]`, "Alltså från A mot B."],
+    ["d", "Om A jordas subtraheras 12 V från alla potentialer.", String.raw`\[V_A'=0\ \mathrm V,\qquad V_B'=-5{,}0\ \mathrm V,\qquad V_C'=-12\ \mathrm V\]`, "Alla potentialskillnader och strömmar är oförändrade." ]
+  ], String.raw`\(U_{AB}=5{,}0\ \mathrm V\), \(U_{BC}=7{,}0\ \mathrm V\), och strömmen är \(20\ \mathrm{mA}\) från A till B. Med A jordad blir potentialerna 0, −5,0 och −12 V.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_POTENTIAL_V2[uppgift.id]) uppgift.s = FACIT_POTENTIAL_V2[uppgift.id];
+}
+
+const FACIT_LADDNING_V2_DEL1 = {
+  "8.9": byggFacitListaV2([
+    ["a", "Använd elementarladdningens belopp.", String.raw`\[n=\frac{|Q|}{e}=\frac{8{,}0\cdot10^{-9}}{1{,}602\cdot10^{-19}}=4{,}99\cdot10^{10}\]`, "Minustecknet visar att ballongen har ett elektronöverskott."],
+    ["b", "Elektronerna har överförts från håret till ballongen. Håret får därför lika stor positiv nettoladdning.", "", "Den totala laddningen bevaras; den flyttas mellan materialen."]
+  ], String.raw`Ballongen har fått cirka \(5{,}0\cdot10^{10}\) överskottselektroner från håret.`),
+  "8.21": byggFacitListaV2([
+    ["1", "Skriv om avståndet och laddningarna till SI-enheter.", String.raw`\[r=0{,}040\ \mathrm m,\quad q_1=5{,}0\cdot10^{-9}\ \mathrm C,\quad q_2=8{,}0\cdot10^{-9}\ \mathrm C\]`, ""],
+    ["2", "Coulombs lag ger kraftens storlek.", String.raw`\[F=k\frac{|q_1q_2|}{r^2}=8{,}99\cdot10^9\frac{(5{,}0\cdot10^{-9})(8{,}0\cdot10^{-9})}{(0{,}040)^2}\]`, String.raw`\[F=2{,}25\cdot10^{-4}\ \mathrm N=225\ \mu\mathrm N\]`],
+    ["3", "Laddningarna har samma tecken, så kulorna stöter bort varandra.", "", "Krafterna på kulorna är lika stora och motriktade."]
+  ], String.raw`Kraften är \(2{,}25\cdot10^{-4}\ \mathrm N\), repellerande.`),
+  "8.22": byggFacitListaV2([
+    ["a", "Fenomenet kallas influens, eller elektrostatisk induktion.", "", "Klotets totala laddning är fortfarande noll."],
+    ["b", "Metallens rörliga ledningselektroner stöts bort av den negativa staven och samlas på klotets bortre sida. Sidan närmast staven får elektronunderskott och blir positiv.", "", "Protonerna är bundna i atomkärnorna och flyttar sig inte genom metallen."],
+    ["c", "När staven tas bort försvinner den yttre påverkan. Elektronerna sprids jämnt över klotet igen, som åter blir neutralt överallt.", "", ""]
+  ], "Det är influens: elektronerna flyttas till bortre sidan och fördelas jämnt igen när staven tas bort."),
+  "8.23": byggFacitListaV2([
+    ["1", "A och B är positiva, så A repellerar B åt höger.", String.raw`\[F_{AB}=k\frac{(6{,}0\cdot10^{-9})^2}{(0{,}050)^2}=1{,}2946\cdot10^{-4}\ \mathrm N\]`, ""],
+    ["2", "B är positiv och C negativ, så C attraherar B åt höger. Samma laddningsbelopp och avstånd ger samma kraft.", String.raw`\[F_{CB}=1{,}2946\cdot10^{-4}\ \mathrm N\]`, ""],
+    ["3", "Krafterna har samma riktning och ska adderas.", String.raw`\[F_{\mathrm{res}}=F_{AB}+F_{CB}=2{,}589\cdot10^{-4}\ \mathrm N\]`, ""]
+  ], String.raw`Den resulterande kraften på B är \(2{,}6\cdot10^{-4}\ \mathrm N=259\ \mu\mathrm N\) åt höger.`),
+  "8.24": byggFacitListaV2([
+    ["a", "Den totala laddningen bevaras och fördelas lika mellan två likadana kulor.", String.raw`\[Q_{\mathrm{tot}}=12-4{,}0=8{,}0\ \mu\mathrm C\]`, String.raw`\[Q'=\frac{8{,}0}{2}=+4{,}0\ \mu\mathrm C\]`],
+    ["b", "Ingen laddning har försvunnit. Elektroner har bara flyttats mellan kulorna tills de fick samma potential.", "", "Totalladdningen är +8,0 µC både före och efter."],
+    ["c", "Efteråt är båda kulorna positivt laddade och stöter därför bort varandra.", "", ""]
+  ], String.raw`Vardera kulan får \(+4{,}0\ \mu\mathrm C\); laddningen bevaras och kraften blir repellerande.`),
+  "8.25": byggFacitListaV2([
+    ["1", "Mellan två positiva laddningar är fälten motriktade. Låt punkten ligga (x) cm från A och (10-x) cm från B.", String.raw`\[k\frac{9{,}0}{x^2}=k\frac{4{,}0}{(10-x)^2}\]`, ""],
+    ["2", "Ta den positiva kvadratroten och lös.", String.raw`\[\frac3x=\frac2{10-x}\Rightarrow30-3x=2x\Rightarrow x=6{,}0\ \mathrm{cm}\]`, "Punkten ligger alltså 4,0 cm från den svagare laddningen B."],
+    ["b", "Den tredje laddningens storlek och tecken påverkar inte var nettokraften blir noll.", String.raw`\[F_{\mathrm{res}}=qE_{\mathrm{res}}=0\quad\text{när}\quad E_{\mathrm{res}}=0\]`, "Tecknet ändrar krafternas riktningar samtidigt men inte nollpunkten."]
+  ], String.raw`Punkten ligger \(6{,}0\ \mathrm{cm}\) från A, alltså \(4{,}0\ \mathrm{cm}\) från B. Resultatet är oberoende av testladdningen.`),
+  "8.32": byggFacitListaV2([
+    ["1", "Ett överskott av elektroner ger negativ laddning.", String.raw`\[Q=n(-e)\]`, ""],
+    ["2", "Sätt in antalet elektroner.", String.raw`\[Q=(3{,}0\cdot10^{13})(-1{,}602\cdot10^{-19})=-4{,}806\cdot10^{-6}\ \mathrm C\]`, ""]
+  ], String.raw`Föremålets laddning är \(-4{,}8\ \mu\mathrm C\).`),
+  "8.33": byggFacitListaV2([
+    ["a", "Coulombs lag vid (r=0{,}030\ \mathrm m) ger", String.raw`\[F=k\frac{|q_1q_2|}{r^2}=8{,}99\cdot10^9\frac{(6{,}0\cdot10^{-9})(9{,}0\cdot10^{-9})}{(0{,}030)^2}=5{,}394\cdot10^{-4}\ \mathrm N\]`, ""],
+    ["b", "Kraften är omvänt proportionell mot (r^2). Dubbelt avstånd ger", String.raw`\[F'=\frac F{2^2}=1{,}35\cdot10^{-4}\ \mathrm N\]`, ""],
+    ["c", "Om båda laddningarna fördubblas blir produkten fyra gånger större.", String.raw`\[F''=(2)(2)F=4F=2{,}16\cdot10^{-3}\ \mathrm N\]`, ""]
+  ], String.raw`Kraften är \(539\ \mu\mathrm N\); vid dubbelt avstånd \(135\ \mu\mathrm N\), och med båda laddningarna dubblerade \(2{,}16\ \mathrm{mN}\).`),
+  "8.34": byggFacitListaV2([
+    ["a", "Den negativa staven repellerar elektroskopets ledningselektroner ned i bladen. Båda bladen får samma slags laddning och repellerar därför varandra.", "", "Detta är influens."],
+    ["b", "Bladen får ett elektronöverskott och blir negativa. Metallkulan närmast staven får motsvarande elektronunderskott och blir positiv.", "", "Elektroskopets nettoladdning är fortfarande noll."],
+    ["c", "När staven förs bort fördelas elektronerna jämnt igen. Repulsionen mellan bladen försvinner och de faller ihop.", "", ""]
+  ], "Bladen blir negativt laddade genom influens och spretar. När staven tas bort faller de ihop igen."),
+  "8.35": byggFacitListaV2([
+    ["a", "Den elektriska kraftens storlek är", String.raw`\[F_e=|q|E=(8{,}0\cdot10^{-16})(1{,}2\cdot10^5)=9{,}6\cdot10^{-11}\ \mathrm N\]`, ""],
+    ["b", "Droppen svävar, så krafterna balanserar: (F_e=mg).", String.raw`\[m=\frac{F_e}{g}=\frac{9{,}6\cdot10^{-11}}{9{,}82}=9{,}78\cdot10^{-12}\ \mathrm{kg}\]`, String.raw`Det är cirka \(9{,}8\ \mathrm{ng}\).`],
+    ["c", "När fältet slås av försvinner den elektriska kraften. Tyngdkraften blir då obalanserad och droppen faller.", "", ""]
+  ], String.raw`\(F_e=9{,}6\cdot10^{-11}\ \mathrm N\), massan är \(9{,}8\cdot10^{-12}\ \mathrm{kg}\), och droppen faller när fältet stängs av.`),
+  "8.56": byggFacitListaV2([
+    ["a", "Båda kulorna är positiva, så kraften är repellerande.", "", ""],
+    ["b", "Avståndet är 5,0 cm = 0,050 m. Coulombs lag ger", String.raw`\[F=8{,}99\cdot10^9\frac{(4{,}0\cdot10^{-9})(6{,}0\cdot10^{-9})}{(0{,}050)^2}=8{,}63\cdot10^{-5}\ \mathrm N\]`, ""]
+  ], String.raw`Kraften är repellerande och har storleken \(8{,}6\cdot10^{-5}\ \mathrm N=86\ \mu\mathrm N\).`),
+  "8.57": byggFacitListaV2([
+    ["a", "Den negativa mittkulan attraheras av båda positiva grannarna: den vänstra drar åt vänster och den högra åt höger.", "", ""],
+    ["b", "Laddningsbeloppen och avstånden är lika, så de två krafterna är lika stora.", String.raw`\[F_v=F_h=k\frac{(5{,}0\cdot10^{-9})(3{,}0\cdot10^{-9})}{(0{,}040)^2}=84{,}3\ \mu\mathrm N\]`, String.raw`Eftersom riktningarna är motsatta blir \(F_{\mathrm{res}}=F_h-F_v=0\).`]
+  ], String.raw`Grannarna drar åt var sitt håll med \(84\ \mu\mathrm N\), så den resulterande kraften är \(0\ \mathrm N\).`),
+  "8.58": byggFacitListaV2([
+    ["1", "Mellan de positiva laddningarna är fälten motriktade. Låt (x) vara avståndet från 8,0-nC-laddningen.", String.raw`\[k\frac{8{,}0}{x^2}=k\frac{2{,}0}{(12-x)^2}\]`, ""],
+    ["2", "Ta den positiva kvadratroten och lös.", String.raw`\[\frac{\sqrt8}{x}=\frac{\sqrt2}{12-x}\Rightarrow\frac2x=\frac1{12-x}\Rightarrow x=8{,}0\ \mathrm{cm}\]`, ""],
+    ["b", "Punkten ligger närmare 2,0-nC-laddningen eftersom dess svagare fält måste kompenseras med ett kortare avstånd.", "", ""]
+  ], String.raw`Fältet är noll \(8{,}0\ \mathrm{cm}\) från 8,0-nC-laddningen, alltså \(4{,}0\ \mathrm{cm}\) från 2,0-nC-laddningen.`),
+  "8.67": byggFacitListaV2([
+    ["a", "Den vänstra positiva laddningen repellerar 5,0-nC-laddningen åt höger.", String.raw`\[F_x=8{,}99\cdot10^9\frac{(4{,}0\cdot10^{-9})(5{,}0\cdot10^{-9})}{(0{,}030)^2}=2{,}00\cdot10^{-4}\ \mathrm N\]`, ""],
+    ["b", "Den övre negativa laddningen attraherar den nedre högra laddningen uppåt.", String.raw`\[F_y=8{,}99\cdot10^9\frac{(6{,}0\cdot10^{-9})(5{,}0\cdot10^{-9})}{(0{,}040)^2}=1{,}69\cdot10^{-4}\ \mathrm N\]`, ""],
+    ["c", "Krafterna är vinkelräta.", String.raw`\[F_{\mathrm{res}}=\sqrt{F_x^2+F_y^2}=2{,}62\cdot10^{-4}\ \mathrm N\]`, String.raw`\[\alpha=\tan^{-1}\!\left(\frac{F_y}{F_x}\right)=40{,}2^\circ\]`]
+  ], String.raw`Resultanten är \(2{,}6\cdot10^{-4}\ \mathrm N\), riktad cirka \(40^\circ\) över horisontalplanet åt höger.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_LADDNING_V2_DEL1[uppgift.id]) uppgift.s = FACIT_LADDNING_V2_DEL1[uppgift.id];
+}
+
+const FACIT_LADDNING_V2_DEL2 = {
+  "8.68": byggFacitListaV2([
+    ["a", "Extra elektroner ger negativ nettoladdning.", String.raw`\[Q=-ne=-(1{,}20\cdot10^4)(1{,}602\cdot10^{-19})=-1{,}922\cdot10^{-15}\ \mathrm C\]`, ""],
+    ["b", "Antalet överskottselektroner är laddningsbeloppet dividerat med elementarladdningen.", String.raw`\[n=\frac{|Q|}{e}=\frac{2{,}5\cdot10^{-9}}{1{,}602\cdot10^{-19}}=1{,}56\cdot10^{10}\]`, ""]
+  ], String.raw`Laddningen är \(-1{,}9\cdot10^{-15}\ \mathrm C\), och \(-2{,}5\ \mathrm{nC}\) motsvarar cirka \(1{,}6\cdot10^{10}\) överskottselektroner.`),
+  "8.69": byggFacitListaV2([
+    ["a", "Atomkärnan innehåller protoner med laddningen (+e) och neutroner med laddningen 0. Utanför kärnan finns elektroner med laddningen (-e).", String.raw`\[e=1{,}602\cdot10^{-19}\ \mathrm C\]`, ""],
+    ["b", "En vanlig neutral atom har lika många protoner som elektroner. Deras laddningar är lika stora men har motsatta tecken och tar därför ut varandra.", String.raw`\[Q=Ne-N e=0\]`, ""]
+  ], "Atomen består av protoner (+e), neutroner (0) och elektroner (−e). Den är neutral när antalet protoner och elektroner är lika."),
+  "8.70": byggFacitListaV2([
+    ["a", "Skriv (r=0{,}080\ \mathrm m) och använd Coulombs lag.", String.raw`\[F=8{,}99\cdot10^9\frac{(6{,}0\cdot10^{-9})(5{,}0\cdot10^{-9})}{(0{,}080)^2}=4{,}21\cdot10^{-5}\ \mathrm N\]`, ""],
+    ["b", "Båda laddningarna är positiva, så kraften är repellerande. Varje partikel påverkas bort från den andra med lika stor kraft.", "", "Det följer av Newtons tredje lag."],
+    ["c", "När avståndet fördubblas blir kraften en fjärdedel.", String.raw`\[F'=\frac F4=1{,}05\cdot10^{-5}\ \mathrm N\]`, ""]
+  ], String.raw`Varje partikel påverkas av \(42\ \mu\mathrm N\) bort från den andra. Vid dubbelt avstånd blir kraften cirka \(11\ \mu\mathrm N\).`),
+  "8.71": byggFacitListaV2([
+    ["1", "Använd laddningsbeloppen i Coulombs lag och lös ut avståndet.", String.raw`\[F=k\frac{|q_1q_2|}{r^2}\Rightarrow r=\sqrt{\frac{k|q_1q_2|}{F}}\]`, ""],
+    ["2", "Sätt in SI-enheterna.", String.raw`\[r=\sqrt{\frac{(8{,}99\cdot10^9)(3{,}0\cdot10^{-9})(4{,}0\cdot10^{-9})}{4{,}5\cdot10^{-3}}}=4{,}90\cdot10^{-3}\ \mathrm m\]`, "Det motsatta tecknet förklarar att kraften är attraktiv men påverkar inte beräkningen av storleken."]
+  ], String.raw`Avståndet är \(4{,}9\ \mathrm{mm}\).`),
+  "8.72": byggFacitListaV2([
+    ["a", "För två likadana ledande kulor bevaras totalladdningen och delas lika efter kontakten.", String.raw`\[Q_{\mathrm{tot}}=12-8{,}0=4{,}0\ \mathrm{nC}\]
+\[Q'=\frac{4{,}0}{2}=+2{,}0\ \mathrm{nC}\]`, ""],
+    ["b", "Efteråt är båda kulorna positiva. Vid (r=0{,}040\ \mathrm m) blir", String.raw`\[F=8{,}99\cdot10^9\frac{(2{,}0\cdot10^{-9})^2}{(0{,}040)^2}=2{,}25\cdot10^{-5}\ \mathrm N\]`, "Kraften är repellerande."]
+  ], String.raw`Vardera kulan får \(+2{,}0\ \mathrm{nC}\). Kraften blir \(22\ \mu\mathrm N\), repellerande.`),
+  "8.73": byggFacitListaV2([
+    ["a", "Den negativa staven repellerar metallens rörliga elektroner till blockets bortre ände. Den närmaste änden får elektronunderskott och blir positiv, medan blockets nettoladdning förblir noll.", "", "Detta är influens."],
+    ["b", "När staven förs bort finns inget yttre fält som håller laddningarna åtskilda. Elektronerna fördelas jämnt igen och polariseringen försvinner.", "", "En permanent nettoladdning skulle kräva exempelvis jordning medan staven är kvar."],
+    ["c", "I plast kan laddningar inte röra sig fritt genom hela föremålet. Molekylerna kan däremot polariseras svagt, så en lokal laddningsförskjutning kan uppstå.", "", ""]
+  ], "Metallen polariseras genom influens och återgår när staven tas bort. I plast blir effekten lokal eftersom materialet är en isolator."),
+  "8.74": byggFacitListaV2([
+    ["a", "Den elektriska repulsionen mellan protonerna är", String.raw`\[F_e=k\frac{e^2}{r^2}=8{,}99\cdot10^9\frac{(1{,}602\cdot10^{-19})^2}{(0{,}010)^2}=2{,}31\cdot10^{-24}\ \mathrm N\]`, ""],
+    ["b", "Gravitationskraften är attraktiv.", String.raw`\[F_g=G\frac{m_p^2}{r^2}=6{,}674\cdot10^{-11}\frac{(1{,}673\cdot10^{-27})^2}{(0{,}010)^2}=1{,}87\cdot10^{-60}\ \mathrm N\]`, ""],
+    ["c", "Kvoten visar storleksordningen.", String.raw`\[\frac{F_e}{F_g}=\frac{2{,}31\cdot10^{-24}}{1{,}87\cdot10^{-60}}=1{,}24\cdot10^{36}\]`, "Avståndet förkortas bort i kvoten, så samma jämförelse gäller vid alla avstånd där de klassiska lagarna används."]
+  ], String.raw`\(F_e=2{,}3\cdot10^{-24}\ \mathrm N\) och \(F_g=1{,}9\cdot10^{-60}\ \mathrm N\). Den elektriska kraften är cirka \(1{,}2\cdot10^{36}\) gånger större.`),
+  "8.119": byggFacitListaV2([
+    ["a", "Laddningarna är båda positiva, så de repellerar varandra.", "", ""],
+    ["b", "Med (r=0{,}060\ \mathrm m) ger Coulombs lag", String.raw`\[F=8{,}99\cdot10^9\frac{(7{,}0\cdot10^{-9})(5{,}0\cdot10^{-9})}{(0{,}060)^2}=8{,}74\cdot10^{-5}\ \mathrm N\]`, "Krafterna är lika stora och motriktade enligt Newtons tredje lag."]
+  ], String.raw`Kraften är repellerande och har storleken \(87\ \mu\mathrm N\) på vardera kulan.`),
+  "8.120": byggFacitListaV2([
+    ["a", "Den positiva vänsterkulan repellerar den positiva mittkulan åt höger. Den negativa högerkulan attraherar mittkulan åt höger.", "", "Båda bidragen har alltså samma riktning."],
+    ["b", "Kraften från vänsterkulan blir", String.raw`\[F_v=8{,}99\cdot10^9\frac{(5{,}0\cdot10^{-9})(2{,}0\cdot10^{-9})}{(0{,}030)^2}=99{,}9\ \mu\mathrm N\]`, ""],
+    ["2", "Kraften från högerkulan blir", String.raw`\[F_h=8{,}99\cdot10^9\frac{(4{,}0\cdot10^{-9})(2{,}0\cdot10^{-9})}{(0{,}050)^2}=28{,}8\ \mu\mathrm N\]`, ""],
+    ["c", "Adderar man bidragen fås", String.raw`\[F_{\mathrm{res}}=99{,}9+28{,}8=128{,}7\ \mu\mathrm N\]`, ""]
+  ], String.raw`Den resulterande kraften på mittkulan är \(129\ \mu\mathrm N\) åt höger.`),
+  "8.121": byggFacitListaV2([
+    ["a", "Före kontakten är (r=0{,}050\ \mathrm m).", String.raw`\[F_1=8{,}99\cdot10^9\frac{(8{,}0\cdot10^{-6})(2{,}0\cdot10^{-6})}{(0{,}050)^2}=57{,}5\ \mathrm N\]`, ""],
+    ["b", "Kulorna är likadana, så totalladdningen delas lika.", String.raw`\[Q'=\frac{8{,}0+2{,}0}{2}=5{,}0\ \mu\mathrm C\]`, ""],
+    ["c", "Efteråt blir kraften", String.raw`\[F_2=8{,}99\cdot10^9\frac{(5{,}0\cdot10^{-6})^2}{(0{,}050)^2}=89{,}9\ \mathrm N\]`, ""],
+    ["d", "Totalladdningen är oförändrad, men produkten av laddningarna ökar.", String.raw`\[(8{,}0)(2{,}0)=16<25=(5{,}0)(5{,}0)\]`, "Därför ökar Coulombkraften."]
+  ], String.raw`Kraften ökar från cirka \(58\ \mathrm N\) till \(90\ \mathrm N\), och vardera kulan har efteråt \(+5{,}0\ \mu\mathrm C\).`),
+  "8.122": byggFacitListaV2([
+    ["a", "Vänsterkulan repellerar den övre högra kulan horisontellt åt höger. Med avståndet 4,0 cm blir", String.raw`\[F_x=8{,}99\cdot10^9\frac{1{,}50\cdot10^{-17}}{(0{,}040)^2}=8{,}43\cdot10^{-5}\ \mathrm N\]`, ""],
+    ["b", "Den nedre kulan repellerar den övre rakt uppåt. Med avståndet 3,0 cm blir", String.raw`\[F_y=8{,}99\cdot10^9\frac{1{,}50\cdot10^{-17}}{(0{,}030)^2}=1{,}50\cdot10^{-4}\ \mathrm N\]`, ""],
+    ["c", "Bidragen är vinkelräta.", String.raw`\[F=\sqrt{F_x^2+F_y^2}=1{,}72\cdot10^{-4}\ \mathrm N\]`, String.raw`\[\alpha=\tan^{-1}\!\left(\frac{F_y}{F_x}\right)=60{,}6^\circ\]`]
+  ], String.raw`Resultanten är \(172\ \mu\mathrm N\), riktad cirka \(61^\circ\) uppåt från horisontalplanet åt höger.`),
+  "8.159": byggFacitListaV2([
+    ["a", "Båda laddningarna är positiva, så kraften är repellerande.", "", ""],
+    ["b", "Vid (r=0{,}030\ \mathrm m) är", String.raw`\[F=8{,}99\cdot10^9\frac{(4{,}0\cdot10^{-9})(6{,}0\cdot10^{-9})}{(0{,}030)^2}=2{,}40\cdot10^{-4}\ \mathrm N\]`, ""],
+    ["c", "Dubbelt avstånd ger en fjärdedel av kraften.", String.raw`\[F'=\frac{F}{4}=5{,}99\cdot10^{-5}\ \mathrm N\]`, ""],
+    ["d", "Coulombkraften är omvänt proportionell mot avståndets kvadrat.", String.raw`\[F\propto\frac1{r^2}\]`, "Till exempel ger tre gånger större avstånd en niondel så stor kraft."]
+  ], String.raw`Kraften är repellerande: \(0{,}240\ \mathrm{mN}\) vid 3,0 cm och \(0{,}060\ \mathrm{mN}\) vid 6,0 cm.`),
+  "8.160": byggFacitListaV2([
+    ["a", "När laddningarna är lika stora kan Coulombs lag skrivas", String.raw`\[F=k\frac{q^2}{r^2}\]`, ""],
+    ["b", "Lös ut (q^2) och sätt in SI-enheterna.", String.raw`\[q^2=\frac{Fr^2}{k}=\frac{(5{,}0\cdot10^{-4})(0{,}060)^2}{8{,}99\cdot10^9}=2{,}00\cdot10^{-16}\ \mathrm{C^2}\]`, ""],
+    ["c", "Ta den positiva roten eftersom laddningarnas storlek söks.", String.raw`\[q=\sqrt{2{,}00\cdot10^{-16}}=1{,}415\cdot10^{-8}\ \mathrm C=14{,}1\ \mathrm{nC}\]`, ""],
+    ["d", "Antalet elementarladdningar är", String.raw`\[n=\frac q e=\frac{1{,}415\cdot10^{-8}}{1{,}602\cdot10^{-19}}=8{,}83\cdot10^{10}\]`, ""]
+  ], String.raw`Vardera kulan har laddningen cirka \(+14\ \mathrm{nC}\), motsvarande \(8{,}8\cdot10^{10}\) elementarladdningar.`),
+  "8.161": byggFacitListaV2([
+    ["a", "Laddningarna har olika tecken, så kraften är attraherande och riktad mot den andra kulan.", "", ""],
+    ["b", "Med (r=0{,}040\ \mathrm m) blir kraftens storlek", String.raw`\[F=8{,}99\cdot10^9\frac{(5{,}0\cdot10^{-9})(5{,}0\cdot10^{-9})}{(0{,}040)^2}=1{,}40\cdot10^{-4}\ \mathrm N\]`, ""],
+    ["c", "Den högra kulan påverkas av samma kraftstorlek, men i motsatt riktning.", "", "Detta gäller enligt Newtons tredje lag, även om laddningarnas belopp inte hade varit lika."],
+    ["d", "Om båda laddningarna fördubblas fyrdubblas produkten (q_1q_2).", String.raw`\[F'=4F=5{,}62\cdot10^{-4}\ \mathrm N\]`, ""]
+  ], String.raw`Kraften är attraktiv och \(0{,}140\ \mathrm{mN}\) på vardera kulan. Dubbleras båda laddningarna blir den \(0{,}562\ \mathrm{mN}\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_LADDNING_V2_DEL2[uppgift.id]) uppgift.s = FACIT_LADDNING_V2_DEL2[uppgift.id];
+}
+
+const FACIT_FALT_V2 = {
+  "8.11": byggFacitListaV2([
+    ["a", "Kraften på en laddning i ett elektriskt fält är", String.raw`\[F_e=|q|E=(1{,}0\cdot10^{-15})(1{,}0\cdot10^6)=1{,}0\cdot10^{-9}\ \mathrm N\]`, ""],
+    ["b", "Tyngdkraften blir", String.raw`\[F_g=mg=(5{,}0\cdot10^{-12})(9{,}82)=4{,}91\cdot10^{-11}\ \mathrm N\]`, ""],
+    ["c", "Jämför krafterna.", String.raw`\[\frac{F_e}{F_g}=\frac{1{,}0\cdot10^{-9}}{4{,}91\cdot10^{-11}}\approx20\]`, "Det elektriska fältet kan snabbt ändras och riktas mot bestämda punkter. Därför kan tonerpartikeln styras mycket mer än den påverkas av tyngdkraften."]
+  ], String.raw`Den elektriska kraften är \(1{,}0\cdot10^{-9}\ \mathrm N\), tyngdkraften \(4{,}9\cdot10^{-11}\ \mathrm N\); elfältet ger ungefär 20 gånger större kraft.`),
+  "8.29": byggFacitListaV2([
+    ["1", "Mellan parallella plattor är fältet ungefär homogent. Skriv avståndet i meter.", String.raw`\[d=4{,}0\ \mathrm{mm}=4{,}0\cdot10^{-3}\ \mathrm m\]`, ""],
+    ["2", "Använd sambandet mellan spänning, fältstyrka och avstånd.", String.raw`\[E=\frac Ud=\frac{230}{4{,}0\cdot10^{-3}}=5{,}75\cdot10^4\ \mathrm{V/m}\]`, ""]
+  ], String.raw`Fältstyrkan är \(5{,}8\cdot10^4\ \mathrm{V/m}=58\ \mathrm{kV/m}\).`),
+  "8.30": byggFacitListaV2([
+    ["a", "Utanför en liten sfäriskt symmetrisk laddning används punktladdningsfältet.", String.raw`\[E=k\frac{|Q|}{r^2}=8{,}99\cdot10^9\frac{25\cdot10^{-9}}{(0{,}080)^2}=3{,}51\cdot10^4\ \mathrm{V/m}\]`, ""],
+    ["b", "16 cm är dubbelt så långt bort. Eftersom (E\propto1/r^2) blir", String.raw`\[E_{16}=\frac{E_8}{2^2}=8{,}78\cdot10^3\ \mathrm{V/m}\]`, ""],
+    ["c", "Fältstyrkan avtar med kvadraten på avståndet.", String.raw`\[E\propto\frac1{r^2}\]`, ""]
+  ], String.raw`Fältstyrkan är \(35\ \mathrm{kV/m}\) vid 8,0 cm och \(8{,}8\ \mathrm{kV/m}\) vid 16 cm.`),
+  "8.47": byggFacitListaV2([
+    ["1", "Skriv plattavståndet i meter.", String.raw`\[d=2{,}5\ \mathrm{cm}=0{,}025\ \mathrm m\]`, ""],
+    ["2", "Det homogena fältets styrka är", String.raw`\[E=\frac Ud=\frac{60}{0{,}025}=2{,}4\cdot10^3\ \mathrm{V/m}\]`, ""]
+  ], String.raw`Fältstyrkan är \(2{,}4\ \mathrm{kV/m}\).`),
+  "8.48": byggFacitListaV2([
+    ["1", "Kraftens storlek fås av (F=|q|E).", String.raw`\[F=(3{,}0\cdot10^{-9})(5{,}0\cdot10^3)=1{,}5\cdot10^{-5}\ \mathrm N\]`, ""],
+    ["2", "Eftersom laddningen är positiv är kraften riktad i fältets riktning.", "", ""]
+  ], String.raw`Kraften är \(1{,}5\cdot10^{-5}\ \mathrm N=15\ \mu\mathrm N\), i fältets riktning.`),
+  "8.59": byggFacitListaV2([
+    ["a", "Elektriska fältlinjer pekar från positiv till negativ platta, alltså nedåt i figuren.", "", "Detta är riktningen för kraften på en positiv testladdning."],
+    ["b", "Plattavståndet är (4{,}0\ \mathrm{cm}=0{,}040\ \mathrm m).", String.raw`\[E=\frac Ud=\frac{120}{0{,}040}=3{,}0\cdot10^3\ \mathrm{V/m}\]`, ""]
+  ], String.raw`Fältet pekar nedåt och har styrkan \(3{,}0\ \mathrm{kV/m}\).`),
+  "8.60": byggFacitListaV2([
+    ["a", "Med (d=5{,}0\ \mathrm{cm}=0{,}050\ \mathrm m) blir", String.raw`\[E=\frac Ud=\frac{200}{0{,}050}=4{,}0\cdot10^3\ \mathrm{V/m}\]`, ""],
+    ["b", "Kraftens storlek är", String.raw`\[F=|q|E=(5{,}0\cdot10^{-9})(4{,}0\cdot10^3)=2{,}0\cdot10^{-5}\ \mathrm N\]`, ""],
+    ["c", "Fältet pekar från den positiva mot den negativa plattan. Eftersom kulan är negativ blir kraften motsatt fältet, alltså uppåt mot den positiva plattan.", String.raw`\[\vec F=q\vec E\]`, ""]
+  ], String.raw`Fältstyrkan är \(4{,}0\ \mathrm{kV/m}\), kraften \(20\ \mu\mathrm N\), riktad uppåt mot den positiva plattan.`),
+  "8.65": byggFacitListaV2([
+    ["a", "Fältet mellan plattorna är", String.raw`\[E=\frac Ud=\frac{60}{0{,}012}=5{,}0\cdot10^3\ \mathrm{V/m}\]`, ""],
+    ["b", "Kraftens storlek och elektronens acceleration blir", String.raw`\[F=eE=(1{,}602\cdot10^{-19})(5{,}0\cdot10^3)=8{,}01\cdot10^{-16}\ \mathrm N\]
+\[a=\frac F{m_e}=\frac{8{,}01\cdot10^{-16}}{9{,}109\cdot10^{-31}}=8{,}79\cdot10^{14}\ \mathrm{m/s^2}\]`, "Accelerationen är mot den positiva plattan, alltså motsatt fältet."],
+    ["c", "Den horisontella hastigheten antas konstant. Tiden mellan plattorna är", String.raw`\[t=\frac{L}{v_x}=\frac{0{,}040}{2{,}0\cdot10^7}=2{,}0\cdot10^{-9}\ \mathrm s\]`, String.raw`\[y=\frac{at^2}{2}=\frac{(8{,}79\cdot10^{14})(2{,}0\cdot10^{-9})^2}{2}=1{,}76\cdot10^{-3}\ \mathrm m\]`],
+    ["d", "Elektronens tyngdkraft är", String.raw`\[F_g=m_eg=8{,}94\cdot10^{-30}\ \mathrm N\]`, String.raw`Den elektriska kraften är cirka \(9\cdot10^{13}\) gånger större, så tyngdkraften kan försummas.`]
+  ], String.raw`\(E=5{,}0\ \mathrm{kV/m}\), \(a=8{,}8\cdot10^{14}\ \mathrm{m/s^2}\) mot plusplattan och avböjningen är \(1{,}8\ \mathrm{mm}\).`),
+  "8.100": byggFacitListaV2([
+    ["1", "Fältstyrkans storlek är kraft per laddningsbelopp.", String.raw`\[E=\frac F{|q|}=\frac{48\cdot10^{-6}}{8{,}0\cdot10^{-9}}=6{,}0\cdot10^3\ \mathrm{V/m}\]`, ""],
+    ["2", "Minustecknet på laddningen påverkar kraftens riktning, inte den beräknade fältstyrkans storlek.", "", "Kraften på partikeln är motsatt fältets riktning."]
+  ], String.raw`Fältstyrkan är \(6{,}0\ \mathrm{kV/m}\).`),
+  "8.101": byggFacitListaV2([
+    ["a", "Plattavståndet är 2,5 cm = 0,025 m.", String.raw`\[E=\frac Ud=\frac{12}{0{,}025}=480\ \mathrm{V/m}\]`, ""],
+    ["b", "Kraftens storlek blir", String.raw`\[F=|q|E=(4{,}0\cdot10^{-9})(480)=1{,}92\cdot10^{-6}\ \mathrm N\]`, ""],
+    ["c", "Fältet pekar från plusplattan till minusplattan. En negativ laddning påverkas åt motsatt håll, alltså mot den positiva plattan.", String.raw`\[\vec F=q\vec E\]`, ""]
+  ], String.raw`\(E=480\ \mathrm{V/m}\), \(F=1{,}9\ \mu\mathrm N\), riktad mot den positiva plattan.`),
+  "8.102": byggFacitListaV2([
+    ["a", "För (Q=25\ \mathrm{nC}), testladdningen (q=1{,}0\ \mathrm C) och (r=0{,}040\ \mathrm m) ger Coulombs lag", String.raw`\[F=k\frac{|Qq|}{r^2}=8{,}99\cdot10^9\frac{(25\cdot10^{-9})(1{,}0)}{(0{,}040)^2}=1{,}40\cdot10^5\ \mathrm N\]`, ""],
+    ["b", "Fältstyrkan är kraft per testladdning.", String.raw`\[E=\frac Fq=1{,}40\cdot10^5\ \mathrm{V/m}\]`, ""],
+    ["c", "När avståndet fördubblas blir punktladdningsfältet en fjärdedel.", String.raw`\[E_{8\,\mathrm{cm}}=\frac{1{,}40\cdot10^5}{4}=3{,}51\cdot10^4\ \mathrm{V/m}\]`, ""]
+  ], String.raw`Vid 4,0 cm är \(F=1{,}4\cdot10^5\ \mathrm N\) på testladdningen och \(E=1{,}4\cdot10^5\ \mathrm{V/m}\). Vid 8,0 cm är \(E=3{,}5\cdot10^4\ \mathrm{V/m}\).`),
+  "8.104": byggFacitListaV2([
+    ["1", "Bestäm först fältstyrkan från kraften på elektronen.", String.raw`\[E=\frac F e=\frac{7{,}2\cdot10^{-16}}{1{,}602\cdot10^{-19}}=4{,}49\cdot10^3\ \mathrm{V/m}\]`, ""],
+    ["2", "För parallella plattor gäller (E=U/d).", String.raw`\[d=\frac UE=\frac{180}{4{,}49\cdot10^3}=4{,}01\cdot10^{-2}\ \mathrm m\]`, ""]
+  ], String.raw`Avståndet mellan plattorna är \(4{,}0\ \mathrm{cm}\).`),
+  "8.105": byggFacitListaV2([
+    ["1", "Placera en positiv testladdning (q) på avståndet (r) från laddningen (Q). Coulombs lag ger kraftens storlek", String.raw`\[F=k\frac{|Qq|}{r^2}\]`, ""],
+    ["2", "Fältstyrka definieras som kraft per positiv testladdning.", String.raw`\[E=\frac F{|q|}=\frac1{|q|}\,k\frac{|Qq|}{r^2}=k\frac{|Q|}{r^2}\]`, ""],
+    ["3", "Som vektor pekar fältet radiellt utåt om (Q>0) och radiellt inåt om (Q<0).", String.raw`\[\vec E=k\frac{Q}{r^2}\,\hat{\mathbf r}\]`, "Testladdningen förkortas bort, vilket visar att fältet är en egenskap hos källaddningen och platsen."]
+  ], String.raw`Fältstyrkan från en punktladdning är \(E=k|Q|/r^2\), med riktning ut från positiv och in mot negativ laddning.`),
+  "8.106": byggFacitListaV2([
+    ["1", "Accelerationen 80 Gm/s² är (8{,}0\cdot10^{10}\ \mathrm{m/s^2}). Kraften på protonen måste vara", String.raw`\[F=ma=(1{,}673\cdot10^{-27})(8{,}0\cdot10^{10})=1{,}338\cdot10^{-16}\ \mathrm N\]`, ""],
+    ["2", "Eftersom protonens laddning är (e) krävs fältstyrkan", String.raw`\[E=\frac F e=\frac{1{,}338\cdot10^{-16}}{1{,}602\cdot10^{-19}}=835\ \mathrm{V/m}\]`, ""],
+    ["3", "Med plattavståndet 0,050 m blir spänningen", String.raw`\[U=Ed=(835)(0{,}050)=41{,}8\ \mathrm V\]`, ""]
+  ], String.raw`Spänningen ska vara cirka \(42\ \mathrm V\).`),
+  "8.107": byggFacitListaV2([
+    ["a", "Fel. Fältlinjer lämnar positiva laddningar, inte går in mot dem.", "", ""],
+    ["b", "Rätt. Kraften på en negativ laddning får motsatt riktning mot fältet.", String.raw`\[\vec F=q\vec E,\qquad q<0\]`, ""],
+    ["c", "Rätt i den vanliga fältlinjebeskrivningen: fältlinjer går in mot negativa laddningar.", "", "De kan också börja eller sluta i oändligheten när motsatt laddning saknas i den ritade situationen."],
+    ["d", "Fel. En positiv laddning påverkas i fältlinjernas riktning.", "", ""]
+  ], "Påståendena b och c är korrekta."),
+  "8.114": byggFacitListaV2([
+    ["a", "Plattavståndet är 3,0 cm = 0,030 m.", String.raw`\[E=\frac Ud=\frac{90}{0{,}030}=3{,}0\cdot10^3\ \mathrm{V/m}\]`, ""],
+    ["b", "Om avståndet fördubblas medan spänningen är oförändrad får man", String.raw`\[E'=\frac{U}{2d}=\frac E2=1{,}5\cdot10^3\ \mathrm{V/m}\]`, ""]
+  ], String.raw`Fältstyrkan är först \(3{,}0\ \mathrm{kV/m}\) och halveras till \(1{,}5\ \mathrm{kV/m}\).`),
+  "8.115": byggFacitListaV2([
+    ["a", "Kraftens storlek är", String.raw`\[F_e=|q|E=(4{,}0\cdot10^{-9})(3000)=1{,}20\cdot10^{-5}\ \mathrm N\]`, ""],
+    ["b", "Sätt denna kraft lika med en tyngdkraft.", String.raw`\[m=\frac{F_e}{g}=\frac{1{,}20\cdot10^{-5}}{9{,}82}=1{,}22\cdot10^{-6}\ \mathrm{kg}=1{,}22\ \mathrm{mg}\]`, ""],
+    ["c", "Den elektriska kraften motsvarar alltså tyngden av cirka 1,2 mg. För en laddad partikel vars verkliga massa är mycket mindre än detta kan elfältet helt dominera tyngdkraften.", "", ""]
+  ], String.raw`Kraften är \(1{,}20\cdot10^{-5}\ \mathrm N\), lika stor som tyngden av cirka \(1{,}2\ \mathrm{mg}\).`),
+  "8.168": byggFacitListaV2([
+    ["a", "Omvandla plattavståndet.", String.raw`\[d=1{,}5\ \mathrm{cm}=0{,}015\ \mathrm m\]`, ""],
+    ["b", "Fältstyrkan mellan plattorna är", String.raw`\[E=\frac Ud=\frac{300}{0{,}015}=2{,}0\cdot10^4\ \mathrm{V/m}\]`, ""],
+    ["c", "Kraften på 4,0 nC blir", String.raw`\[F=qE=(4{,}0\cdot10^{-9})(2{,}0\cdot10^4)=8{,}0\cdot10^{-5}\ \mathrm N\]`, ""],
+    ["d", "En positiv laddning påverkas i fältets riktning, från den positiva övre plattan mot den negativa undre plattan: nedåt.", "", ""]
+  ], String.raw`\(d=0{,}015\ \mathrm m\), \(E=2{,}0\cdot10^4\ \mathrm{V/m}\), \(F=8{,}0\cdot10^{-5}\ \mathrm N\), riktad nedåt.`),
+  "8.169": byggFacitListaV2([
+    ["a", "Den positiva laddningen påverkas i fältets riktning, uppåt.", String.raw`\[F_e=qE=(4{,}0\cdot10^{-9})(8000)=3{,}20\cdot10^{-5}\ \mathrm N\]`, ""],
+    ["b", "Tyngdkraften verkar nedåt.", String.raw`\[F_g=mg=(2{,}0\cdot10^{-9})(9{,}82)=1{,}96\cdot10^{-8}\ \mathrm N\]`, ""],
+    ["c", "Välj uppåt som positiv riktning.", String.raw`\[F_{\mathrm{res}}=F_e-F_g=3{,}20\cdot10^{-5}-1{,}96\cdot10^{-8}=3{,}198\cdot10^{-5}\ \mathrm N\]`, "Resultanten är uppåt."],
+    ["d", "Newtons andra lag ger", String.raw`\[a=\frac{F_{\mathrm{res}}}{m}=\frac{3{,}198\cdot10^{-5}}{2{,}0\cdot10^{-9}}=1{,}60\cdot10^4\ \mathrm{m/s^2}\]`, ""]
+  ], String.raw`\(F_e=3{,}2\cdot10^{-5}\ \mathrm N\) uppåt, \(F_g=2{,}0\cdot10^{-8}\ \mathrm N\) nedåt. Resultanten är cirka \(3{,}2\cdot10^{-5}\ \mathrm N\) uppåt och \(a=1{,}6\cdot10^4\ \mathrm{m/s^2}\).`),
+  "8.170": byggFacitListaV2([
+    ["a", "Fältriktningen definieras som kraftens riktning på en positiv testladdning. En positiv testladdning repelleras av kulan, så linjerna pekar utåt.", "", ""],
+    ["b", "Fältet är starkast närmast kulan. Det visas genom att fältlinjerna ligger tätast där.", "", ""],
+    ["c", "På 2,0 cm avstånd gäller", String.raw`\[E=k\frac Q{r^2}=8{,}99\cdot10^9\frac{40\cdot10^{-9}}{(0{,}020)^2}=8{,}99\cdot10^5\ \mathrm{V/m}\]`, ""],
+    ["d", "När avståndet fördubblas till 4,0 cm blir fältstyrkan en fjärdedel.", String.raw`\[E_{4\,\mathrm{cm}}=\frac{8{,}99\cdot10^5}{4}=2{,}25\cdot10^5\ \mathrm{V/m}\]`, ""]
+  ], String.raw`Fältet pekar utåt och är starkast nära kulan. \(E(2{,}0\ \mathrm{cm})=9{,}0\cdot10^5\ \mathrm{V/m}\) och \(E(4{,}0\ \mathrm{cm})=2{,}2\cdot10^5\ \mathrm{V/m}\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_FALT_V2[uppgift.id]) uppgift.s = FACIT_FALT_V2[uppgift.id];
+}
+
+const FACIT_AKTIVITET_V2_DEL1 = {
+  "9.1": byggFacitListaV2([
+    ["a", "Enheten becquerel anger antal sönderfall per sekund.", String.raw`\[1\ \mathrm{Bq}=1\ \text{sönderfall/s}\]`, "Aktiviteten 15 Bq betyder därför i genomsnitt 15 sönderfall varje sekund."],
+    ["b", "Ett år är ungefär 365,25 dygn.", String.raw`\[t=365{,}25\cdot24\cdot3600=3{,}156\cdot10^7\ \mathrm s\]`, String.raw`\[N_{\mathrm{sönderfall}}=At=15\cdot3{,}156\cdot10^7=4{,}73\cdot10^8\]`]
+  ], String.raw`Aktiviteten motsvarar 15 sönderfall per sekund och cirka \(4{,}7\cdot10^8\) sönderfall under ett år.`),
+  "9.3": byggFacitListaV2([
+    ["1", "Aktiviteten följer samma halveringslag som antalet radioaktiva kärnor.", String.raw`\[A=A_0\,2^{-t/T_{1/2}}\]`, ""],
+    ["a", "Efter 10 år blir", String.raw`\[A=37\cdot2^{-10/432}=36{,}4\ \mathrm{kBq}\]`, ""],
+    ["b", "Efter 100 år blir", String.raw`\[A=37\cdot2^{-100/432}=31{,}5\ \mathrm{kBq}\]`, ""],
+    ["c", "Halveringstiden är mycket längre än en brandvarares brukstid. Aktiviteten och därmed jonisationsströmmen förändras därför bara lite under användningen.", "", ""]
+  ], String.raw`Aktiviteten är \(36{,}4\ \mathrm{kBq}\) efter 10 år och \(31{,}5\ \mathrm{kBq}\) efter 100 år. Den långa halveringstiden ger stabil funktion.`),
+  "9.4": byggFacitListaV2([
+    ["a", "Från 09:00 till 12:30 går 210 minuter.", String.raw`\[A=20\cdot2^{-210/110}=5{,}33\ \mathrm{GBq}\]`, "Det motsvarar 1,91 halveringstider."],
+    ["b", "Efter lång transport återstår för liten aktivitet. Efter ett dygn är andelen", String.raw`\[2^{-1440/110}=1{,}15\cdot10^{-4}=0{,}0115\,\%\]`, "Fluor-18 behöver därför produceras nära den plats där det ska användas."],
+    ["c", "Tio dygn vore logistiskt enklare men medicinskt sämre: radionukliden skulle bestråla patienten långt efter undersökningen.", "", "En kort halveringstid ger hög aktivitet vid undersökningen men liten kvarvarande stråldos efteråt."]
+  ], String.raw`Klockan 12:30 återstår cirka \(5{,}3\ \mathrm{GBq}\). Kort halveringstid kräver lokal produktion men minskar patientens långvariga stråldos.`),
+  "9.5": byggFacitListaV2([
+    ["a", "Aktivitet per volym multipliceras med rummets volym.", String.raw`\[A=(300\ \mathrm{Bq/m^3})(120\ \mathrm{m^3})=3{,}60\cdot10^4\ \mathrm{Bq}\]`, ""],
+    ["b", "Minskningen från 300 till 200 Bq/m³ är 100 Bq/m³.", String.raw`\[\frac{300-200}{300}\cdot100\,\%=33{,}3\,\%\]`, ""],
+    ["c", "Radon sönderfaller, men nytt radon kan samtidigt tränga in från mark och byggnad. Då kan halten närma sig en jämviktsnivå i stället för att halveras ostört.", "", "Tillförseln måste minskas eller radonet föras bort, exempelvis genom tätning, radonsug eller ventilation." ]
+  ], String.raw`I luften sker cirka \(36\,000\) sönderfall per sekund. Halten behöver sänkas med \(33\,\%\); att bara vänta räcker inte vid kontinuerlig radontillförsel.`),
+  "9.11": byggFacitListaV2([
+    ["a", "I tabellen går aktiviteten från 800 till 400 Bq på 20 min och från 400 till 200 Bq på ytterligare 20 min.", String.raw`\[T_{1/2}=20\ \mathrm{min}=1200\ \mathrm s\]`, ""],
+    ["b", "Sönderfallskonstanten är", String.raw`\[\lambda=\frac{\ln2}{T_{1/2}}=\frac{0{,}693}{1200}=5{,}78\cdot10^{-4}\ \mathrm{s^{-1}}\]`, ""],
+    ["c", "60 minuter är tre halveringstider.", String.raw`\[A=800\cdot2^{-3}=100\ \mathrm{Bq}\]`, ""]
+  ], String.raw`\(T_{1/2}=20\ \mathrm{min}\), \(\lambda=5{,}8\cdot10^{-4}\ \mathrm{s^{-1}}\) och \(A(60\ \mathrm{min})=100\ \mathrm{Bq}\).`),
+  "9.18": byggFacitListaV2([
+    ["a", "Halveringstiden i sekunder är", String.raw`\[T_{1/2}=8{,}0\cdot86400=6{,}912\cdot10^5\ \mathrm s\]`, String.raw`\[\lambda=\frac{\ln2}{T_{1/2}}=1{,}003\cdot10^{-6}\ \mathrm{s^{-1}}\]`],
+    ["b", "Aktiviteten fås av (A=\lambda N).", String.raw`\[A=(1{,}003\cdot10^{-6})(5{,}0\cdot10^{15})=5{,}02\cdot10^9\ \mathrm{Bq}\]`, ""],
+    ["c", "24 dygn är tre halveringstider.", String.raw`\[A_{24}=\frac{5{,}02}{2^3}=0{,}627\ \mathrm{GBq}\]`, ""]
+  ], String.raw`\(\lambda=1{,}0\cdot10^{-6}\ \mathrm{s^{-1}}\), begynnelseaktiviteten är \(5{,}0\ \mathrm{GBq}\) och efter 24 dygn cirka \(0{,}63\ \mathrm{GBq}\).`),
+  "9.27": byggFacitListaV2([
+    ["1", "Varje intervall på 5,27 år halverar aktiviteten.", String.raw`\[A=A_0\,2^{-t/5{,}27}\]`, ""],
+    ["a", "Efter en halveringstid:", String.raw`\[A=\frac{40}{2}=20\ \mathrm{kBq}\]`, ""],
+    ["b", "10,5 år är ungefär två halveringstider.", String.raw`\[A\approx\frac{40}{2^2}=10\ \mathrm{kBq}\]`, ""],
+    ["c", "15,8 år är ungefär tre halveringstider.", String.raw`\[A\approx\frac{40}{2^3}=5{,}0\ \mathrm{kBq}\]`, ""]
+  ], String.raw`Aktiviteterna är ungefär \(20\ \mathrm{kBq}\), \(10\ \mathrm{kBq}\) och \(5{,}0\ \mathrm{kBq}\).`),
+  "9.28": byggFacitListaV2([
+    ["a", "Följ halveringarna.", String.raw`\[800\to400\to200\ \mathrm{Bq}\]`, "Det är två halveringstider."],
+    ["b", "Två halveringstider tar 14 timmar.", String.raw`\[T_{1/2}=\frac{14}{2}=7{,}0\ \mathrm h\]`, ""],
+    ["c", "Ytterligare 14 timmar innebär två nya halveringar.", String.raw`\[A=\frac{200}{2^2}=50\ \mathrm{Bq}\]`, ""]
+  ], String.raw`Minskningen motsvarar två halveringstider, \(T_{1/2}=7{,}0\ \mathrm h\), och efter ytterligare 14 h återstår \(50\ \mathrm{Bq}\).`),
+  "9.29": byggFacitListaV2([
+    ["a", "Skriv halveringstiden i sekunder.", String.raw`\[T_{1/2}=6{,}0\cdot3600=21600\ \mathrm s\]`, String.raw`\[\lambda=\frac{\ln2}{21600}=3{,}21\cdot10^{-5}\ \mathrm{s^{-1}}\]`],
+    ["b", "Ur (A=\lambda N) fås", String.raw`\[N=\frac A\lambda=\frac{4{,}0\cdot10^3}{3{,}21\cdot10^{-5}}=1{,}25\cdot10^8\]`, ""]
+  ], String.raw`\(\lambda=3{,}2\cdot10^{-5}\ \mathrm{s^{-1}}\), och preparatet innehåller cirka \(1{,}2\cdot10^8\) radioaktiva kärnor.`),
+  "9.30": byggFacitListaV2([
+    ["a", "En fjärdedel är två successiva halveringar.", String.raw`\[1\to\frac12\to\frac14=2^{-2}\]`, ""],
+    ["b", "Åldern är två halveringstider.", String.raw`\[t=2(1{,}25\cdot10^9)=2{,}50\cdot10^9\ \mathrm{år}\]`, ""],
+    ["c", "Man måste känna till den ursprungliga argonmängden och anta att det radiogena argon som bildats har stannat i mineralet, samt att kalium eller argon inte senare har tillförts eller försvunnit.", "", "Argon är en gas och kan läcka ut om bergarten värms; då kan den beräknade åldern bli för låg." ]
+  ], String.raw`Två halveringstider har gått och berget är cirka \(2{,}5\) miljarder år gammalt, förutsatt att systemet varit slutet för kalium och argon.`),
+  "9.37": byggFacitListaV2([
+    ["a", "Läs av när aktiviteten har minskat från 800 till 400 Bq.", String.raw`\[T_{1/2}=20\ \mathrm{min}\]`, ""],
+    ["b", "80 minuter motsvarar fyra halveringstider.", String.raw`\[A=800\cdot2^{-4}=50\ \mathrm{Bq}\]`, ""],
+    ["c", "Under varje ny halveringstid sönderfaller hälften av de kärnor som då återstår. Exponentialfunktionen närmar sig därför noll asymptotiskt.", String.raw`\[A(t)=A_0e^{-\lambda t}>0\quad\text{för ändligt }t\]`, "I ett verkligt preparat med ett ändligt antal kärnor upphör aktiviteten till slut när den sista kärnan sönderfallit, men modellen är kontinuerlig." ]
+  ], String.raw`Halveringstiden är \(20\ \mathrm{min}\), och efter 80 min väntas \(50\ \mathrm{Bq}\). Den kontinuerliga modellen närmar sig noll utan att nå den.`),
+  "9.38": byggFacitListaV2([
+    ["a", "Kurva X går från 600 till 300 Bq på 20 dygn.", String.raw`\[T_{1/2,X}=20\ \mathrm{dygn}\]`, ""],
+    ["b", "Kurva Y går från 400 till 200 Bq på 80 dygn.", String.raw`\[T_{1/2,Y}=80\ \mathrm{dygn}\]`, ""],
+    ["c", "Aktiviteterna är lika där kurvorna skär varandra. Avläsningen ger ungefär", String.raw`\[t\approx26\ \mathrm{dygn},\qquad A\approx250\ \mathrm{Bq}\]`, ""]
+  ], String.raw`\(T_{1/2,X}=20\ \mathrm{dygn}\), \(T_{1/2,Y}=80\ \mathrm{dygn}\), och aktiviteterna är lika efter cirka 26 dygn.`),
+  "9.41": byggFacitListaV2([
+    ["a", "24 dygn motsvarar", String.raw`\[n=\frac{24}{8{,}0}=3\ \text{halveringstider}\]`, ""],
+    ["b", "Aktiviteten halveras tre gånger.", String.raw`\[A=400\cdot2^{-3}=50\ \mathrm{MBq}\]`, ""],
+    ["c", "Nukliden behöver finnas kvar tillräckligt länge för att ge terapeutisk effekt i sköldkörteln, men inte så länge att patienten får onödig stråldos under lång tid.", "", "Några dygn är en avvägning mellan behandlingstid och efterföljande strålskydd." ]
+  ], String.raw`Efter tre halveringstider, alltså 24 dygn, återstår \(50\ \mathrm{MBq}\).`),
+  "9.43": byggFacitListaV2([
+    ["a", "Sönderfallskonstanten i år⁻¹ är", String.raw`\[\lambda=\frac{\ln2}{5730}=1{,}210\cdot10^{-4}\ \mathrm{år^{-1}}\]`, ""],
+    ["b", "Aktivitetskvoten är 0,52. Lös exponentiallagen efter tiden.", String.raw`\[\frac A{A_0}=e^{-\lambda t}=0{,}52\]
+\[t=-\frac{\ln(0{,}52)}{\lambda}=5{,}40\cdot10^3\ \mathrm{år}\]`, ""],
+    ["c", "Efter 50 000 år har nästan nio halveringstider gått.", String.raw`\[2^{-50000/5730}=2{,}36\cdot10^{-3}=0{,}236\,\%\]`, "Den lilla kvarvarande signalen blir svår att skilja från bakgrund och påverkas starkt av mycket små föroreningar med yngre kol." ]
+  ], String.raw`\(\lambda=1{,}21\cdot10^{-4}\ \mathrm{år^{-1}}\), och träet är cirka \(5{,}4\cdot10^3\) år gammalt. Mycket gamla prov innehåller för lite kol-14 för säker mätning.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_AKTIVITET_V2_DEL1[uppgift.id]) uppgift.s = FACIT_AKTIVITET_V2_DEL1[uppgift.id];
+}
+
+const FACIT_AKTIVITET_V2_DEL2A = {
+  "9.55": byggFacitListaV2([
+    ["a", "24 minuter är två halveringstider.", String.raw`\[m=20\cdot2^{-24/12}=5{,}0\ \mu\mathrm g\]`, ""],
+    ["b", "36 minuter är tre halveringstider.", String.raw`\[m=20\cdot2^{-36/12}=2{,}5\ \mu\mathrm g\]`, "Blylådan påverkar inte sönderfallshastigheten; den skärmar bara av en del av strålningen." ]
+  ], String.raw`Efter 24 minuter återstår \(5{,}0\ \mu\mathrm g\), och efter 36 minuter \(2{,}5\ \mu\mathrm g\).`),
+  "9.56": byggFacitListaV2([
+    ["a", "60 minuter är tre halveringstider. Bakåt i tiden fördubblas aktiviteten tre gånger.", String.raw`\[A_{-60}=4{,}0\cdot2^3=32\ \mathrm{kBq}\]`, ""],
+    ["b", "500 Bq är 0,50 kBq. Följ tre halveringar från nuvärdet.", String.raw`\[4{,}0\to2{,}0\to1{,}0\to0{,}50\ \mathrm{kBq}\]`, String.raw`Tiden är \(3\cdot20=60\ \mathrm{min}\).`]
+  ], String.raw`Aktiviteten var \(32\ \mathrm{kBq}\) 60 minuter tidigare och når \(500\ \mathrm{Bq}\) efter 60 minuter.`),
+  "9.57": byggFacitListaV2([
+    ["a", "Skriv halveringstiden i sekunder.", String.raw`\[T_{1/2}=2{,}4\cdot60=144\ \mathrm s\]\[\lambda=\frac{\ln2}{144}=4{,}81\cdot10^{-3}\ \mathrm{s^{-1}}\]`, ""],
+    ["b", "Aktiviteten är sönderfallskonstanten gånger antalet kvarvarande kärnor.", String.raw`\[A=\lambda N=(4{,}81\cdot10^{-3})(5{,}0\cdot10^6)=2{,}41\cdot10^4\ \mathrm{Bq}\]`, ""]
+  ], String.raw`\(\lambda=4{,}8\cdot10^{-3}\ \mathrm{s^{-1}}\), och aktiviteten är cirka \(24\ \mathrm{kBq}\).`),
+  "9.58": byggFacitListaV2([
+    ["1", "Kol-14-datering kräver organiskt material som tog upp kol medan organismen levde och som sedan slutade utbyta kol med omgivningen.", "", ""],
+    ["2", "Träskålen uppfyller villkoren: trädet tog upp kol-14 när det levde, och efter avverkningen började halten minska genom sönderfall.", "", ""],
+    ["3", "Järngrytan är inte organiskt kolmaterial. Dinosauriefossilet är miljontals år gammalt, så mätbart kol-14 har försvunnit. Den levande mannen tar fortfarande upp kol och kan därför inte dateras med metoden.", "", ""]
+  ], "Av alternativen kan träskålen från 1600-talet åldersbestämmas med kol-14-metoden."),
+  "9.79": byggFacitListaV2([
+    ["1", "För varje halveringstid ökar tiden med 15 minuter, medan både andelen och aktiviteten halveras.", String.raw`\[A_j=640\cdot2^{-j}\]`, ""],
+    ["2", "De fyra raderna blir", String.raw`\[\begin{array}{c|c|c|c}j&t\ (\mathrm{min})&\text{andel kvar}&A\ (\mathrm{Bq})\\ \hline1&15&50\,\%&320\\2&30&25\,\%&160\\3&45&12{,}5\,\%&80\\4&60&6{,}25\,\%&40\end{array}\]`, ""]
+  ], String.raw`Tabellen fylls med: 15 min–50 %–320 Bq; 30 min–25 %–160 Bq; 45 min–12,5 %–80 Bq; 60 min–6,25 %–40 Bq.`),
+  "9.80": byggFacitListaV2([
+    ["a", "Antalet halveringstider är", String.raw`\[j=\frac{t}{T_{1/2}}=\frac{12}{3{,}0}=4\]`, ""],
+    ["b", "Aktiviteten halveras fyra gånger.", String.raw`\[A=6{,}4\cdot2^{-4}=\frac{6{,}4}{16}=0{,}40\ \mathrm{kBq}\]`, ""]
+  ], String.raw`12 timmar är fyra halveringstider, och då återstår \(0{,}40\ \mathrm{kBq}=400\ \mathrm{Bq}\).`),
+  "9.81": byggFacitListaV2([
+    ["a", "Minskningsfaktorn är", String.raw`\[\frac{800}{50}=16\]`, ""],
+    ["b", "Eftersom (16=2^4) motsvarar minskningen fyra halveringstider.", String.raw`\[800\cdot2^{-4}=50\ \mathrm{Bq}\]`, ""],
+    ["c", "Tiden blir", String.raw`\[t=4(20)=80\ \mathrm{min}\]`, ""]
+  ], String.raw`Aktiviteten har minskat 16 gånger, vilket är fyra halveringstider eller \(80\ \mathrm{min}\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_AKTIVITET_V2_DEL2A[uppgift.id]) uppgift.s = FACIT_AKTIVITET_V2_DEL2A[uppgift.id];
+}
+
+const FACIT_AKTIVITET_V2_DEL2B = {
+  "9.82": byggFacitListaV2([
+    ["a", "Omvandla dygnen till sekunder.", String.raw`\[T_{1/2}=5{,}0\cdot24\cdot3600=4{,}32\cdot10^5\ \mathrm s\]`, ""],
+    ["b", "Sönderfallskonstanten är", String.raw`\[\lambda=\frac{\ln2}{T_{1/2}}=\frac{0{,}693}{4{,}32\cdot10^5}=1{,}60\cdot10^{-6}\ \mathrm{s^{-1}}\]`, ""],
+    ["c", "Använd (A=\lambda N) och 2,0 kBq = 2000 Bq.", String.raw`\[N=\frac A\lambda=\frac{2000}{1{,}604\cdot10^{-6}}=1{,}25\cdot10^9\]`, ""]
+  ], String.raw`\(T_{1/2}=4{,}32\cdot10^5\ \mathrm s\), \(\lambda=1{,}60\cdot10^{-6}\ \mathrm{s^{-1}}\), och \(N\approx1{,}2\cdot10^9\) kärnor.`),
+  "9.83": byggFacitListaV2([
+    ["a", "Kurvan börjar vid", String.raw`\[A_0=400\ \mathrm{Bq}\]`, ""],
+    ["b", "Halva begynnelseaktiviteten, 200 Bq, nås efter 6,0 timmar.", String.raw`\[T_{1/2}=6{,}0\ \mathrm h\]`, ""],
+    ["c", "18 timmar är tre halveringstider.", String.raw`\[A=400\cdot2^{-3}=50\ \mathrm{Bq}\]`, ""],
+    ["d", "24 timmar motsvarar", String.raw`\[j=\frac{24}{6{,}0}=4\ \text{halveringstider}\]`, String.raw`Då skulle aktiviteten vara \(400/2^4=25\ \mathrm{Bq}\).`]
+  ], String.raw`Begynnelseaktiviteten är \(400\ \mathrm{Bq}\), halveringstiden \(6{,}0\ \mathrm h\), aktiviteten efter 18 h \(50\ \mathrm{Bq}\), och 24 h är fyra halveringstider.`),
+  "9.84": byggFacitListaV2([
+    ["1", "20 dygn är inte ett helt antal halveringstider.", String.raw`\[j=\frac{20}{8{,}0}=2{,}5\]`, ""],
+    ["2", "Använd halveringslagen.", String.raw`\[A=12\cdot2^{-2{,}5}=2{,}12\ \mathrm{kBq}\]`, "Efter två halveringstider vore aktiviteten 3,0 kBq och efter tre 1,5 kBq, så resultatet ligger rimligt däremellan." ]
+  ], String.raw`Efter 20 dygn är aktiviteten cirka \(2{,}1\ \mathrm{kBq}\).`),
+  "9.85": byggFacitListaV2([
+    ["1", "Sätt in aktivitetskvoten i halveringslagen.", String.raw`\[\frac{1{,}2}{5{,}0}=2^{-30/T_{1/2}}\]`, ""],
+    ["2", "Logaritmera och lös ut halveringstiden.", String.raw`\[\ln(0{,}24)=-\frac{30}{T_{1/2}}\ln2\]\[T_{1/2}=-\frac{30\ln2}{\ln(0{,}24)}=14{,}57\ \mathrm h\]`, ""],
+    ["3", "Kontroll: två halveringstider är 29,1 h och skulle ge 1,25 kBq, nära 1,2 kBq efter 30 h.", "", ""]
+  ], String.raw`Halveringstiden är cirka \(14{,}6\ \mathrm h\).`),
+  "9.86": byggFacitListaV2([
+    ["1", "Skriv halveringstiden i sekunder.", String.raw`\[T_{1/2}=30(3{,}156\cdot10^7)=9{,}468\cdot10^8\ \mathrm s\]`, ""],
+    ["2", "Sönderfallskonstanten är", String.raw`\[\lambda=\frac{\ln2}{T_{1/2}}=7{,}32\cdot10^{-10}\ \mathrm{s^{-1}}\]`, ""],
+    ["3", "Aktiviteten blir", String.raw`\[A=\lambda N=(7{,}32\cdot10^{-10})(3{,}0\cdot10^{18})=2{,}20\cdot10^9\ \mathrm{Bq}\]`, "Den långa halveringstiden kompenseras av det mycket stora antalet kärnor." ]
+  ], String.raw`Preparatets aktivitet är cirka \(2{,}2\cdot10^9\ \mathrm{Bq}=2{,}2\ \mathrm{GBq}\).`),
+  "9.87": byggFacitListaV2([
+    ["a", "De oberoende processernas bortförselhastigheter adderas.", String.raw`\[\lambda_{\mathrm{eff}}=\lambda_{\mathrm{fys}}+\lambda_{\mathrm{bio}}\]`, String.raw`Med \(\lambda=\ln2/T\) fås \[\frac1{T_{\mathrm{eff}}}=\frac1{T_{\mathrm{fys}}}+\frac1{T_{\mathrm{bio}}}\]`],
+    ["1", "Sätt in halveringstiderna.", String.raw`\[\frac1{T_{\mathrm{eff}}}=\frac1{8{,}0}+\frac1{80}=0{,}1375\ \mathrm{dygn^{-1}}\]\[T_{\mathrm{eff}}=7{,}27\ \mathrm{dygn}\]`, ""],
+    ["b", "Efter 30 dygn är andelen kvar", String.raw`\[\frac N{N_0}=2^{-30/7{,}27}=0{,}0573=5{,}73\,\%\]`, ""],
+    ["c", "Summan av två positiva bortförselkonstanter är större än var och en separat. Därför går den samlade processen snabbare och den effektiva halveringstiden blir kortare än båda delarnas.", "", ""]
+  ], String.raw`\(T_{\mathrm{eff}}=7{,}3\ \mathrm{dygn}\), och efter 30 dygn återstår cirka \(5{,}7\,\%\).`),
+  "9.88": byggFacitListaV2([
+    ["a", "Substansmängden och antalet kärnor är", String.raw`\[n=\frac{m}{M}=\frac{1{,}0}{226}=4{,}425\cdot10^{-3}\ \mathrm{mol}\]\[N=nN_A=(4{,}425\cdot10^{-3})(6{,}022\cdot10^{23})=2{,}66\cdot10^{21}\]`, ""],
+    ["b", "Halveringstiden i sekunder och sönderfallskonstanten är", String.raw`\[T_{1/2}=1600(3{,}156\cdot10^7)=5{,}050\cdot10^{10}\ \mathrm s\]\[\lambda=\frac{\ln2}{T_{1/2}}=1{,}37\cdot10^{-11}\ \mathrm{s^{-1}}\]`, ""],
+    ["c", "Aktiviteten blir", String.raw`\[A=\lambda N=(1{,}373\cdot10^{-11})(2{,}664\cdot10^{21})=3{,}66\cdot10^{10}\ \mathrm{Bq}\]`, String.raw`Det ligger nära \(3{,}7\cdot10^{10}\ \mathrm{Bq}\), den aktivitet som den äldre enheten curie knöts till.`]
+  ], String.raw`\(N=2{,}66\cdot10^{21}\) kärnor, \(\lambda=1{,}37\cdot10^{-11}\ \mathrm{s^{-1}}\), och aktiviteten är cirka \(3{,}7\cdot10^{10}\ \mathrm{Bq}\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_AKTIVITET_V2_DEL2B[uppgift.id]) uppgift.s = FACIT_AKTIVITET_V2_DEL2B[uppgift.id];
+}
+
+const FACIT_STRALNING_V2 = {
+  "9.2": byggFacitListaV2([
+    ["a", "En elektron som accelereras genom 60 kV får som mest rörelseenergin", String.raw`\[E_{\max}=eU=(1{,}602\cdot10^{-19})(60\cdot10^3)=9{,}61\cdot10^{-15}\ \mathrm J\]`, String.raw`Eftersom 1 eV är energin från 1 V blir detta \(60\ \mathrm{keV}\).`],
+    ["b", "Fotonenergin och våglängden hänger ihop genom (E=hc/\lambda).", String.raw`\[\lambda_{\min}=\frac{hc}{E_{\max}}=\frac{(6{,}626\cdot10^{-34})(2{,}998\cdot10^8)}{9{,}61\cdot10^{-15}}=2{,}07\cdot10^{-11}\ \mathrm m\]`, ""],
+    ["c", "En foton kan inte få mer energi än den infallande elektronen kan avge. Hela elektronens rörelseenergi ger därför den övre fotonenergin och den kortaste möjliga våglängden.", "", ""]
+  ], String.raw`Maximal fotonenergi är \(60\ \mathrm{keV}=9{,}6\cdot10^{-15}\ \mathrm J\), vilket motsvarar \(\lambda_{\min}=21\ \mathrm{pm}\).`),
+  "9.7": byggFacitListaV2([
+    ["a", "Absorberad dos är absorberad energi per massa.", String.raw`\[D=\frac Em=\frac{3{,}0\cdot10^{-3}}{60}=5{,}0\cdot10^{-5}\ \mathrm{Gy}=50\ \mu\mathrm{Gy}\]`, ""],
+    ["b", "Ekvivalent dos är absorberad dos gånger strålningens viktfaktor.", String.raw`\[H=w_RD=(1)(50\ \mu\mathrm{Gy})=50\ \mu\mathrm{Sv}\]`, ""]
+  ], String.raw`Den absorberade dosen är \(50\ \mu\mathrm{Gy}\), och den ekvivalenta dosen \(50\ \mu\mathrm{Sv}\).`),
+  "9.12": byggFacitListaV2([
+    ["a", "Ur definitionen av gray fås energin.", String.raw`\[E=Dm=(2{,}0\ \mathrm{J/kg})(0{,}15\ \mathrm{kg})=0{,}30\ \mathrm J\]`, ""],
+    ["b", "Om all energi antas bli värme blir temperaturökningen", String.raw`\[\Delta T=\frac{E}{mc}=\frac{0{,}30}{(0{,}15)(4180)}=4{,}8\cdot10^{-4}\ ^\circ\mathrm C\]`, "Den biologiska effekten beror alltså inte på märkbar uppvärmning."],
+    ["c", "Strålningen riktas mot tumören i stället för att fördelas över hela kroppen. Fraktioneringen i 30 behandlingar låter frisk vävnad reparera en större del av skadorna mellan tillfällena.", "", "Behandlingseffekten kommer främst från jonisation och DNA-skador, inte värme." ]
+  ], String.raw`Tumören absorberar \(0{,}30\ \mathrm J\) per behandling och värms bara \(4{,}8\cdot10^{-4}\ ^\circ\mathrm C\). Behandlingen fungerar genom lokal, fraktionerad bestrålning.`),
+  "9.13": byggFacitListaV2([
+    ["a", "Fördela årsdosen över 365 dygn.", String.raw`\[H_{\mathrm{dygn}}=\frac{2{,}4\ \mathrm{mSv}}{365}=0{,}00658\ \mathrm{mSv}=6{,}58\ \mu\mathrm{Sv}\]`, ""],
+    ["b", "Lungröntgens 0,1 mSv är 100 µSv.", String.raw`\[\frac{100}{6{,}58}=15{,}2\ \text{dygn}\]`, ""],
+    ["c", "En lungröntgen motsvarar ungefär 15 dygns genomsnittlig bakgrund och den angivna flygresan ungefär 7,6 dygn. Båda är små jämfört med ett helt års bakgrundsdos.", String.raw`\[\frac{50}{6{,}58}=7{,}6\ \text{dygn}\]`, ""]
+  ], String.raw`Bakgrundsdosen är cirka \(6{,}6\ \mu\mathrm{Sv/dygn}\). En lungröntgen motsvarar cirka 15 dygn och den angivna flygresan cirka 7,6 dygn.`),
+  "9.14": byggFacitListaV2([
+    ["a", "3,6 cm är tre halvvärdestjocklekar.", String.raw`\[\frac I{I_0}=2^{-3}=\frac18=12{,}5\,\%\]`, ""],
+    ["b", "6,0 cm är fem halvvärdestjocklekar.", String.raw`\[\frac I{I_0}=2^{-5}=\frac1{32}=3{,}125\,\%\]`, ""],
+    ["c", "I den kontinuerliga dämpningsmodellen multipliceras intensiteten med en positiv faktor för varje skikt. Den närmar sig därför noll men blir inte exakt noll för en ändlig tjocklek.", "", "Avskärmning dimensioneras till en tillräckligt låg nivå." ]
+  ], String.raw`Cirka \(12{,}5\,\%\) passerar 3,6 cm och \(3{,}1\,\%\) passerar 6,0 cm. En ändlig skärm ger inte exakt noll i modellen.`),
+  "9.15": byggFacitListaV2([
+    ["a", "För en liten isotrop källa används inversa kvadratlagen.", String.raw`\[\dot H_3=120\left(\frac{1{,}0}{3{,}0}\right)^2=13{,}3\ \mu\mathrm{Sv/h}\]`, ""],
+    ["b", "Lös avståndslagen efter (r).", String.raw`\[5{,}0=120\left(\frac{1{,}0}{r}\right)^2\Rightarrow r=\sqrt{24}=4{,}90\ \mathrm m\]`, ""],
+    ["c", "Att öka avståndet är ofta den enklaste och billigaste åtgärden när arbetsuppgiften tillåter det, eftersom dosraten minskar med avståndet i kvadrat.", "", "I praktiken kombineras kort tid, stort avstånd och lämplig avskärmning; vilken åtgärd som kostar minst beror på situationen." ]
+  ], String.raw`Dosraten är \(13\ \mu\mathrm{Sv/h}\) vid 3,0 m och \(5{,}0\ \mu\mathrm{Sv/h}\) vid cirka 4,9 m. Avstånd är ofta billigast när det är praktiskt möjligt.`),
+  "9.44": byggFacitListaV2([
+    ["a", "Beräkna varje bidrag med (H=w_RD).", String.raw`\[H_\gamma=(1)(0{,}80)=0{,}80\ \mathrm{mSv}\]\[H_\alpha=(20)(0{,}15)=3{,}0\ \mathrm{mSv}\]`, ""],
+    ["b", "Summera bidragen.", String.raw`\[H_{\mathrm{tot}}=0{,}80+3{,}0=3{,}8\ \mathrm{mSv}\]`, ""],
+    ["c", "Alfapartiklar har mycket kort räckvidd och hög jonisationstäthet. Utanför kroppen stoppas de lätt, men inandat radon placerar de alfastrålande ämnena inne i lungvävnaden, där energin avges lokalt.", "", "Viktfaktorn beskriver större biologisk skada per absorberad joule." ]
+  ], String.raw`Gamma bidrar med \(0{,}80\ \mathrm{mSv}\), alfa med \(3{,}0\ \mathrm{mSv}\), totalt \(3{,}8\ \mathrm{mSv}\).`),
+  "9.89": byggFacitListaV2([
+    ["a", "Absorberad dos är energi per bestrålad massa.", String.raw`\[D=\frac Em=\frac{0{,}25}{70}=3{,}57\cdot10^{-3}\ \mathrm{Gy}\]`, ""],
+    ["b", "Omvandla gray till milligray.", String.raw`\[3{,}57\cdot10^{-3}\ \mathrm{Gy}=3{,}57\ \mathrm{mGy}\]`, ""]
+  ], String.raw`Dosen är \(3{,}6\cdot10^{-3}\ \mathrm{Gy}=3{,}6\ \mathrm{mGy}\).`),
+  "9.90": byggFacitListaV2([
+    ["a", "För gammastrålning är viktfaktorn 1.", String.raw`\[H_\gamma=w_RD=(1)(4{,}0)=4{,}0\ \mathrm{mSv}\]`, ""],
+    ["b", "För alfastrålning är viktfaktorn 20.", String.raw`\[H_\alpha=(20)(4{,}0)=80\ \mathrm{mSv}\]`, ""],
+    ["c", "Alfapartiklar är tunga och dubbelt laddade. De växelverkar starkt och avger energin tätt längs en kort bana, vilket ger koncentrerade DNA-skador.", "", "Detta gäller när alfakällan finns i eller mycket nära levande vävnad." ]
+  ], String.raw`Gamma ger \(4{,}0\ \mathrm{mSv}\), medan samma absorberade alfados ger \(80\ \mathrm{mSv}\).`),
+  "9.91": byggFacitListaV2([
+    ["1", "Använd sambandet (H=w_RD) rad för rad.", String.raw`\[H_\gamma=(1)(2{,}5)=2{,}5\ \mathrm{mSv}\]`, ""],
+    ["2", "För beta är viktfaktorn 1.", String.raw`\[D_\beta=\frac{8{,}0}{1}=8{,}0\ \mathrm{mGy}\]`, ""],
+    ["3", "För alfa blir", String.raw`\[H_\alpha=(20)(0{,}30)=6{,}0\ \mathrm{mSv}\]`, ""],
+    ["4", "Neutronernas viktfaktor fås av", String.raw`\[w_R=\frac{15}{1{,}5}=10\]`, ""]
+  ], String.raw`De saknade värdena är \(2{,}5\ \mathrm{mSv}\), \(8{,}0\ \mathrm{mGy}\), \(6{,}0\ \mathrm{mSv}\) och viktfaktorn 10.`),
+  "9.92": byggFacitListaV2([
+    ["a", "På 40 år blir dosen", String.raw`\[H=40(2{,}4)=96\ \mathrm{mSv}\]`, ""],
+    ["b", "Dosen per dygn är", String.raw`\[H_d=\frac{2{,}4\cdot1000}{365}=6{,}58\ \mu\mathrm{Sv}\]`, ""],
+    ["c", "Den angivna flygdosen motsvarar", String.raw`\[\frac{30}{6{,}58}=4{,}56\ \text{dygn}\]`, ""]
+  ], String.raw`På 40 år blir dosen \(96\ \mathrm{mSv}\), per dygn cirka \(6{,}6\ \mu\mathrm{Sv}\), och flygresan motsvarar cirka 4,6 dygn.`),
+  "9.93": byggFacitListaV2([
+    ["a", "Vid dubbelt avstånd blir dosraten en fjärdedel.", String.raw`\[\dot H_2=200\left(\frac12\right)^2=50\ \mu\mathrm{Sv/h}\]`, ""],
+    ["b", "Vid fyra gånger avståndet blir den en sextondel.", String.raw`\[\dot H_4=200\left(\frac14\right)^2=12{,}5\ \mu\mathrm{Sv/h}\]`, ""],
+    ["c", "Lös efter avståndet.", String.raw`\[8{,}0=200\left(\frac1r\right)^2\Rightarrow r=\sqrt{25}=5{,}0\ \mathrm m\]`, ""]
+  ], String.raw`Dosraten är \(50\ \mu\mathrm{Sv/h}\) vid 2,0 m, \(12{,}5\ \mu\mathrm{Sv/h}\) vid 4,0 m och \(8{,}0\ \mu\mathrm{Sv/h}\) vid 5,0 m.`),
+  "9.94": byggFacitListaV2([
+    ["a", "Alfastrålning stoppas av papper eller hudens yttersta lager.", "", ""],
+    ["b", "Gammastrålning är mest genomträngande och kräver tjocka skikt av exempelvis bly eller betong för kraftig dämpning.", "", "Skärmen minskar intensiteten gradvis i stället för att ge en skarp stoppgräns."],
+    ["c", "Alfapartikeln är tung och har laddningen +2e. Den joniserar tätt, förlorar energin snabbt och får därför kort räckvidd.", "", "Samma täta energiavsättning gör alfa biologiskt farlig när källan hamnar inuti kroppen." ]
+  ], "Alfa stoppas av papper, medan gamma kräver kraftig avskärmning. Alfas korta räckvidd beror på stark växelverkan och tät jonisation."),
+  "9.95": byggFacitListaV2([
+    ["a", "2,4 cm är två halvvärdestjocklekar.", String.raw`\[\frac I{I_0}=2^{-2}=25\,\%\]`, ""],
+    ["b", "6,0 cm är fem halvvärdestjocklekar.", String.raw`\[\frac I{I_0}=2^{-5}=3{,}125\,\%\]`, ""],
+    ["c", "Sätt den passerande andelen till 0,010.", String.raw`\[0{,}010=2^{-x/1{,}2}\Rightarrow x=1{,}2\frac{\ln(100)}{\ln2}=7{,}97\ \mathrm{cm}\]`, ""]
+  ], String.raw`Efter 2,4 cm återstår \(25\,\%\), efter 6,0 cm \(3{,}1\,\%\), och för 1 % krävs cirka \(8{,}0\ \mathrm{cm}\) bly.`),
+  "9.96": byggFacitListaV2([
+    ["1", "Vid 3,0 m blir dosraten", String.raw`\[\dot H=480\left(\frac{1{,}0}{3{,}0}\right)^2=53{,}3\ \mu\mathrm{Sv/h}\]`, ""],
+    ["2", "Den maximala dosen 1,0 mSv är 1000 µSv.", String.raw`\[t=\frac H{\dot H}=\frac{1000}{53{,}3}=18{,}75\ \mathrm h\]`, "Detta antar oförändrad geometri och dosrat under hela tiden." ]
+  ], String.raw`Personen kan arbeta där i högst cirka \(19\ \mathrm h\).`),
+  "9.97": byggFacitListaV2([
+    ["1", "Den nödvändiga dämpningsfaktorn är", String.raw`\[\frac{640}{20}=32=2^5\]`, ""],
+    ["2", "Det krävs därför fem halvvärdestjocklekar.", String.raw`\[x=5(1{,}2)=6{,}0\ \mathrm{cm}\]`, "Vid exakt 6,0 cm blir dosraten 20 µSv/h." ]
+  ], String.raw`Det behövs \(6{,}0\ \mathrm{cm}\) bly.`),
+  "9.98": byggFacitListaV2([
+    ["1", "Beräkna de tre ekvivalenta dosbidragen.", String.raw`\[H_\gamma=(1)(1{,}5)=1{,}5\ \mathrm{mSv}\]\[H_n=(10)(0{,}20)=2{,}0\ \mathrm{mSv}\]\[H_\alpha=(20)(0{,}050)=1{,}0\ \mathrm{mSv}\]`, ""],
+    ["2", "Summera bidragen.", String.raw`\[H_{\mathrm{tot}}=1{,}5+2{,}0+1{,}0=4{,}5\ \mathrm{mSv}\]`, ""],
+    ["3", "Alfastrålningen ger störst ekvivalent dos per absorberad milligray eftersom viktfaktorn är 20. I just denna blandning ger neutronerna ändå det största absoluta bidraget, 2,0 mSv.", "", ""]
+  ], String.raw`Den totala ekvivalenta dosen är \(4{,}5\ \mathrm{mSv}\). Alfa bidrar mest per absorberad dos; neutronerna ger här det största enskilda dosbidraget.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_STRALNING_V2[uppgift.id]) uppgift.s = FACIT_STRALNING_V2[uppgift.id];
+}
+
+const FACIT_KARNREAKTIONER_V2_DEL1 = {
+  "9.6": byggFacitListaV2([
+    ["a", "Effekt är energi per sekund. Med (E=mc^2) blir massomvandlingen per sekund", String.raw`\[\frac{\Delta m}{\Delta t}=\frac{P}{c^2}=\frac{3{,}85\cdot10^{26}}{(2{,}998\cdot10^8)^2}=4{,}28\cdot10^9\ \mathrm{kg/s}\]`, ""],
+    ["b", "Ett år är 3,156·10⁷ s.", String.raw`\[\Delta m_{\mathrm{år}}=(4{,}28\cdot10^9)(3{,}156\cdot10^7)=1{,}35\cdot10^{17}\ \mathrm{kg}\]`, ""],
+    ["c", "På 4,6 miljarder år blir massan och andelen", String.raw`\[\Delta m=(1{,}35\cdot10^{17})(4{,}6\cdot10^9)=6{,}22\cdot10^{26}\ \mathrm{kg}\]\[\frac{\Delta m}{M_\odot}\cdot100\,\%=0{,}0313\,\%\]`, "Beräkningen antar att solens utstrålade effekt varit konstant på dagens nivå." ]
+  ], String.raw`Solen omvandlar cirka \(4{,}3\cdot10^9\ \mathrm{kg/s}\), eller \(1{,}35\cdot10^{17}\ \mathrm{kg/år}\). På 4,6 miljarder år motsvarar det cirka \(0{,}031\,\%\) av solmassan.`),
+  "9.8": byggFacitListaV2([
+    ["a", "Omvandla elektronvolt till joule.", String.raw`\[E_f=(200\cdot10^6)(1{,}602\cdot10^{-19})=3{,}204\cdot10^{-11}\ \mathrm J\]`, ""],
+    ["b", "Antalet fissioner för 1,0 J är", String.raw`\[N=\frac{1{,}0}{3{,}204\cdot10^{-11}}=3{,}12\cdot10^{10}\]`, ""],
+    ["c", "Om alla 2,56·10²¹ kärnor fissionerar blir energin", String.raw`\[E=(2{,}56\cdot10^{21})(3{,}204\cdot10^{-11})=8{,}20\cdot10^{10}\ \mathrm J\]`, ""]
+  ], String.raw`En fission ger \(3{,}20\cdot10^{-11}\ \mathrm J\). Det krävs \(3{,}1\cdot10^{10}\) fissioner per joule, och 1,0 g U-235 ger cirka \(8{,}2\cdot10^{10}\ \mathrm J\).`),
+  "9.9": byggFacitListaV2([
+    ["a", "Verkningsgraden är elektrisk effekt dividerad med termisk effekt.", String.raw`\[P_{\mathrm{term}}=\frac{P_{\mathrm{el}}}{\eta}=\frac{1000\ \mathrm{MW}}{0{,}33}=3{,}03\cdot10^3\ \mathrm{MW}\]`, ""],
+    ["b", "Årsenergin blir", String.raw`\[E_{\mathrm{term}}=P_{\mathrm{term}}t=(3{,}03\cdot10^9)(3{,}156\cdot10^7)=9{,}56\cdot10^{16}\ \mathrm J\]`, ""],
+    ["c", "Dividera med energin per gram U-235.", String.raw`\[m=\frac{9{,}56\cdot10^{16}}{8{,}2\cdot10^{10}}=1{,}17\cdot10^6\ \mathrm g=1{,}17\ \mathrm{ton}\]`, "Detta är en idealiserad beräkning där den angivna energin per gram används direkt och kraftverket antas gå med full effekt hela året." ]
+  ], String.raw`Reaktorns termiska effekt är cirka \(3{,}0\ \mathrm{GW}\), årsenergin \(9{,}6\cdot10^{16}\ \mathrm J\), och den idealiserade U-235-förbrukningen cirka \(1{,}2\ \mathrm{ton/år}\).`),
+  "9.10": byggFacitListaV2([
+    ["a", "Massdefekten är skillnaden mellan fyra väteatomers massa och heliumatomens massa.", String.raw`\[\Delta m=4(1{,}007825)-4{,}002603=0{,}028697\ \mathrm u\]`, ""],
+    ["b", "Energin som motsvarar massdefekten är", String.raw`\[Q=(0{,}028697)(931{,}5)=26{,}73\ \mathrm{MeV}\]`, "En liten del förs bort av neutriner i proton–protonkedjan; resten värmer solen och strålas så småningom ut."],
+    ["c", "Andelen av utgångsmassan är", String.raw`\[\frac{0{,}028697}{4(1{,}007825)}\cdot100\,\%=0{,}712\,\%\]`, ""]
+  ], String.raw`Massdefekten är \(0{,}02870\ \mathrm u\), energin \(26{,}7\ \mathrm{MeV}\), och cirka \(0{,}71\,\%\) av vätemassan omvandlas till energi.`),
+  "9.16": byggFacitListaV2([
+    ["a", "Vid alfasönderfall minskar masstalet med 4 och atomnumret med 2.", String.raw`\[{}^{226}_{88}\mathrm{Ra}\rightarrow{}^{222}_{86}\mathrm{Rn}+{}^{4}_{2}\mathrm{He}\]`, ""],
+    ["b", "Vid beta-minus ökar atomnumret med 1 medan masstalet är oförändrat.", String.raw`\[{}^{32}_{15}\mathrm P\rightarrow{}^{32}_{16}\mathrm S+{}^{0}_{-1}e+\bar\nu_e\]`, ""]
+  ], String.raw`De saknade produkterna är \({}^{222}_{86}\mathrm{Rn}\) respektive en elektron \({}^{0}_{-1}e\).`),
+  "9.17": byggFacitListaV2([
+    ["a", "Tre alfasönderfall tar bort totalt 12 nukleoner.", String.raw`\[A_f=A-3\cdot4=A-12\]`, ""],
+    ["b", "Tre alfa sänker atomnumret med 6 och två beta-minus höjer det med 2.", String.raw`\[Z_f=Z-3\cdot2+2\cdot1=Z-4\]`, ""],
+    ["c", "Vid beta-minus omvandlas en neutron till en proton, en elektron och en antineutrino.", String.raw`\[n\rightarrow p+e^-+\bar\nu_e\]`, "Antalet nukleoner är oförändrat, så masstalet ändras inte." ]
+  ], String.raw`Slutprodukten har masstalet \(A-12\) och atomnumret \(Z-4\).`),
+  "9.23": byggFacitListaV2([
+    ["a", "Bevara masstal och atomnummer vid alfasönderfallet.", String.raw`\[{}^{210}_{84}\mathrm{Po}\rightarrow{}^{206}_{82}\mathrm{Pb}+{}^{4}_{2}\mathrm{He}\]`, ""],
+    ["b", "Kobolt-60 genomgår beta-minus-sönderfall.", String.raw`\[{}^{60}_{27}\mathrm{Co}\rightarrow{}^{60}_{28}\mathrm{Ni}+{}^{0}_{-1}e+\bar\nu_e\]`, ""]
+  ], String.raw`De saknade produkterna är \({}^{206}_{82}\mathrm{Pb}\) och en beta-minus-partikel \({}^{0}_{-1}e\).`),
+  "9.24": byggFacitListaV2([
+    ["a", "Masskillnaden omvandlas till energi.", String.raw`\[Q=(0{,}0056)(931{,}5)=5{,}216\ \mathrm{MeV}\]`, ""],
+    ["b", "Omvandla MeV till joule.", String.raw`\[Q=(5{,}216\cdot10^6)(1{,}602\cdot10^{-19})=8{,}36\cdot10^{-13}\ \mathrm J\]`, ""],
+    ["c", "Energin fördelas som rörelseenergi hos dotterkärnan och utsända partiklar samt, beroende på sönderfallet, foton- eller neutrinoenergi.", "", "Energi och rörelsemängd bevaras." ]
+  ], String.raw`Det frigörs \(5{,}2\ \mathrm{MeV}=8{,}4\cdot10^{-13}\ \mathrm J\).`),
+  "9.25": byggFacitListaV2([
+    ["a", "Bevara det totala masstalet.", String.raw`\[235+1=140+A+2\Rightarrow A=94\]`, ""],
+    ["b", "Bevara den elektriska laddningen, alltså atomnumret.", String.raw`\[92=54+Z\Rightarrow Z=38\]`, String.raw`Atomnummer 38 är strontium: \({}^{94}_{38}\mathrm{Sr}\).`],
+    ["c", "De två frigjorda neutronerna kan orsaka nya fissioner och skapa en kedjereaktion. I en reaktor regleras neutronantalet med bland annat styrstavar och moderator.", "", "En kritisk reaktor håller i genomsnitt en ny fission igång per tidigare fission." ]
+  ], String.raw`Den okända kärnan är \({}^{94}_{38}\mathrm{Sr}\). Neutronerna gör en kontrollerad kedjereaktion möjlig.`),
+  "9.26": byggFacitListaV2([
+    ["a", "Endast alfasönderfall ändrar masstalet.", String.raw`\[n_\alpha=\frac{232-208}{4}=6\]`, ""],
+    ["b", "Torium har atomnummer 90 och bly 82. Efter sex alfa är atomnumret 78; varje beta-minus höjer det med 1.", String.raw`\[90-2\cdot6+n_{\beta^-}=82\Rightarrow n_{\beta^-}=4\]`, ""],
+    ["c", "Start- och slutkärnan bestämmer bara nettot av alla ändringar. Ordningen beror på vilka mellankärnor som bildas och vilka sönderfall de faktiskt kan genomgå.", "", ""]
+  ], String.raw`Sönderfallskedjan innehåller totalt 6 alfa- och 4 beta-minus-sönderfall. Ordningen kan inte bestämmas enbart från start och slut.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_KARNREAKTIONER_V2_DEL1[uppgift.id]) uppgift.s = FACIT_KARNREAKTIONER_V2_DEL1[uppgift.id];
+}
+
+const FACIT_KARNREAKTIONER_V2_DEL2 = {
+  "9.39": byggFacitListaV2([
+    ["a", "Kurvan har sitt maximum nära masstalet 56, i området kring järn och nickel.", String.raw`\[A\approx56\]`, ""],
+    ["b", "Hög bindningsenergi per nukleon betyder att mycket energi krävs för att skilja kärnans nukleoner åt. Kärnan är därför starkt bunden.", "", ""],
+    ["c", "Fusion av lätta kärnor och fission av mycket tunga kärnor flyttar produkterna uppåt på kurvan, mot högre bindningsenergi per nukleon.", "", "Ökningen i total bindningsenergi frigörs som bland annat rörelseenergi och strålning." ]
+  ], String.raw`Kurvan är högst kring \(A\approx56\). Både fusion av lätta kärnor och fission av tunga kärnor frigör energi genom att produkterna blir starkare bundna.`),
+  "9.42": byggFacitListaV2([
+    ["a", "Dividera fissionsenergin med energin per liter bensin.", String.raw`\[V=\frac{8{,}20\cdot10^{10}}{32\cdot10^6}=2{,}56\cdot10^3\ \mathrm L\]`, ""],
+    ["b", "Vid 0,60 liter per mil blir körsträckan", String.raw`\[s=\frac{2562{,}5}{0{,}60}=4{,}27\cdot10^3\ \mathrm{mil}=4{,}27\cdot10^4\ \mathrm{km}\]`, ""],
+    ["c", "Ett enda gram U-235 motsvarar i denna idealiserade jämförelse mer än 2500 liter bensin. Kärnbränslets mycket höga energitäthet gör att bränslemängden och transportbehovet blir små jämfört med fossila bränslen.", "", "Verkliga anläggningar har olika verkningsgrader och allt kärnbränsle fissionerar inte." ]
+  ], String.raw`1,0 g U-235 motsvarar cirka \(2{,}56\cdot10^3\) liter bensin, vilket skulle räcka ungefär \(4270\) mil.`),
+  "9.45": byggFacitListaV2([
+    ["a", "Massdefekten i deuterium–tritium-reaktionen är", String.raw`\[\Delta m=(2{,}014102+3{,}016049)-(4{,}002603+1{,}008665)=0{,}018883\ \mathrm u\]`, String.raw`\[Q=(0{,}018883)(931{,}5)=17{,}59\ \mathrm{MeV}\]`],
+    ["b", "En reaktion förbrukar bränslemassan", String.raw`\[m_r=(5{,}030151)(1{,}66054\cdot10^{-27})=8{,}352\cdot10^{-27}\ \mathrm{kg}\]`, String.raw`\[N=\frac{1}{m_r}=1{,}197\cdot10^{26}\]`],
+    ["2", "Energin per reaktion är 2,818·10⁻¹² J. För ett kilogram blir", String.raw`\[E_{1\,\mathrm{kg}}=(1{,}197\cdot10^{26})(17{,}59)(1{,}602\cdot10^{-13})=3{,}37\cdot10^{14}\ \mathrm J\]`, ""],
+    ["c", "Fission av ett kilogram U-235 ger enligt uppgiften 8,2·10¹³ J.", String.raw`\[\frac{3{,}37\cdot10^{14}}{8{,}2\cdot10^{13}}=4{,}11\]`, "D–T-fusion ger alltså cirka fyra gånger mer energi per kilogram bränsle. Den stora tekniska utmaningen är att skapa och kontrollera ett tillräckligt hett plasma." ]
+  ], String.raw`\(\Delta m=0{,}018883\ \mathrm u\), \(Q=17{,}6\ \mathrm{MeV}\) och cirka \(3{,}4\cdot10^{14}\ \mathrm{J/kg}\), ungefär fyra gånger U-235-värdet i uppgiften.`),
+  "9.46": byggFacitListaV2([
+    ["a", "Sönderfall kan ske spontant när produkterna har lägre total vilomassa och därmed lägre total energi än moderkärnan.", String.raw`\[Q=(m_{\mathrm{före}}-m_{\mathrm{efter}})c^2>0\]`, "Masskillnaden blir rörelseenergi och ibland foton- eller neutrinoenergi."],
+    ["b", "Massdefekt är en masskillnad som motsvarar bindningsenergi eller frigjord reaktionsenergi. För en kärna jämförs kärnans massa med massan av fria nukleoner; i en reaktion jämförs utgångs- och slutprodukternas totala massor.", String.raw`\[E=\Delta mc^2\]`, ""]
+  ], "Energi frigörs när slutprodukternas totala massa är mindre. Massdefekten är denna masskillnad och motsvarar energin genom E = Δmc²."),
+  "9.47": byggFacitListaV2([
+    ["a", "Vid beta-plus avges en positron och en elektronneutrino.", String.raw`\[p\rightarrow n+e^++\nu_e\]`, ""],
+    ["b", "Vid alfasönderfall avges en helium-4-kärna med två protoner och två neutroner.", String.raw`\[{}^4_2\mathrm{He}\]`, ""],
+    ["c", "Vid beta-minus avges en elektron och en elektronantineutrino.", String.raw`\[n\rightarrow p+e^-+\bar\nu_e\]`, ""],
+    ["d", "Vid gammasönderfall avges en högenergetisk foton när en exciterad kärna går till ett lägre energitillstånd.", String.raw`\[X^*\rightarrow X+\gamma\]`, "Masstal och atomnummer ändras inte." ]
+  ], "β⁺ avger positron och neutrino, α en heliumkärna, β⁻ elektron och antineutrino, och γ en foton."),
+  "9.48": byggFacitListaV2([
+    ["a", "Radium-226 avger en alfapartikel.", String.raw`\[{}^{226}_{88}\mathrm{Ra}\rightarrow{}^{222}_{86}\mathrm{Rn}+{}^4_2\mathrm{He}\]`, ""],
+    ["b", "Fosfor-32 genomgår beta-minus-sönderfall.", String.raw`\[{}^{32}_{15}\mathrm P\rightarrow{}^{32}_{16}\mathrm S+{}^0_{-1}e+\bar\nu_e\]`, "Kontroll: både masstal och elektrisk laddning är bevarade." ]
+  ], String.raw`Reaktionerna ger \({}^{222}_{86}\mathrm{Rn}\) respektive \({}^{32}_{16}\mathrm S\).`),
+  "9.49": byggFacitListaV2([
+    ["a", "En elektron från atomskalet fångas in av kärnan. En proton omvandlas då till en neutron och en elektronneutrino.", String.raw`\[p+e^-\rightarrow n+\nu_e\]`, "Masstalet är oförändrat medan atomnumret minskar med 1."],
+    ["b", "För järn-55 blir reaktionen", String.raw`\[{}^{55}_{26}\mathrm{Fe}+{}^0_{-1}e\rightarrow{}^{55}_{25}\mathrm{Mn}+\nu_e\]`, ""]
+  ], String.raw`Elektroninfångningen ger \({}^{55}_{25}\mathrm{Mn}\) och en neutrino.`),
+  "9.50": byggFacitListaV2([
+    ["a", "Plutonium-239 genomgår alfa-sönderfall.", String.raw`\[{}^{239}_{94}\mathrm{Pu}\rightarrow{}^{235}_{92}\mathrm U+{}^4_2\mathrm{He}\]`, ""],
+    ["b", "Beta-plus sänker atomnumret med 1.", String.raw`\[{}^{22}_{11}\mathrm{Na}\rightarrow{}^{22}_{10}\mathrm{Ne}+e^++\nu_e\]`, ""],
+    ["c", "Baklänges från kväve-14 vid beta-minus fås kol-14.", String.raw`\[{}^{14}_{6}\mathrm C\rightarrow{}^{14}_{7}\mathrm N+e^-+\bar\nu_e\]`, ""],
+    ["d", "Den saknade partikeln är en elektron.", String.raw`\[{}^{60}_{27}\mathrm{Co}\rightarrow{}^{60}_{28}\mathrm{Ni}+e^-+\bar\nu_e\]`, ""]
+  ], String.raw`De saknade delarna är \({}^{235}_{92}\mathrm U\), \({}^{22}_{10}\mathrm{Ne}\), \({}^{14}_{6}\mathrm C\) och \(e^-\).`),
+  "9.51": byggFacitListaV2([
+    ["a", "Massminskningen omvandlas till energi enligt mass–energisambandet. Energin fördelas mellan sönderfallsprodukterna.", String.raw`\[Q=\Delta mc^2\]`, ""],
+    ["b", "Med omvandlingsfaktorn för atommassenheten blir", String.raw`\[Q=(0{,}002815)(931{,}5)=2{,}622\ \mathrm{MeV}\]`, ""],
+    ["c", "Omvandla till joule.", String.raw`\[Q=(2{,}622)(1{,}602\cdot10^{-13})=4{,}20\cdot10^{-13}\ \mathrm J\]`, ""]
+  ], String.raw`Det frigörs \(2{,}62\ \mathrm{MeV}=4{,}2\cdot10^{-13}\ \mathrm J\).`),
+  "9.52": byggFacitListaV2([
+    ["1", "Reaktionsformeln är", String.raw`\[{}^{210}_{84}\mathrm{Po}\rightarrow{}^{206}_{82}\mathrm{Pb}+{}^4_2\mathrm{He}\]`, ""],
+    ["2", "Massdefekten från atommassorna blir", String.raw`\[\Delta m=209{,}982874-(205{,}974465+4{,}002603)=0{,}005806\ \mathrm u\]`, "Elektronmassorna tar ut varandra eftersom 84 elektroner finns på båda sidor sammanlagt."],
+    ["3", "Den frigjorda energin är", String.raw`\[Q=(0{,}005806)(931{,}5)=5{,}41\ \mathrm{MeV}\]`, ""]
+  ], String.raw`Polonium-210 sönderfaller till bly-206 och en alfapartikel och frigör cirka \(5{,}41\ \mathrm{MeV}\).`),
+  "9.53": byggFacitListaV2([
+    ["1", "Uran-238 avger först en alfapartikel.", String.raw`\[{}^{238}_{92}\mathrm U\rightarrow{}^{234}_{90}\mathrm{Th}+{}^4_2\mathrm{He}\]`, ""],
+    ["2", "Torium-234 genomgår beta-minus-sönderfall.", String.raw`\[{}^{234}_{90}\mathrm{Th}\rightarrow{}^{234}_{91}\mathrm{Pa}+e^-+\bar\nu_e\]`, ""],
+    ["3", "Protaktinium-234 genomgår ännu ett beta-minus-sönderfall.", String.raw`\[{}^{234}_{91}\mathrm{Pa}\rightarrow{}^{234}_{92}\mathrm U+e^-+\bar\nu_e\]`, "Kedjan har då nått uran-234, som frågan efterfrågar." ]
+  ], String.raw`Kedjan är \({}^{238}\mathrm U\xrightarrow{\alpha}{}^{234}\mathrm{Th}\xrightarrow{\beta^-}{}^{234}\mathrm{Pa}\xrightarrow{\beta^-}{}^{234}\mathrm U\).`),
+  "9.54": byggFacitListaV2([
+    ["1", "Av totalt 4n sönderfall är förhållandet alfa till beta-minus 3:1. Därför sker 3n alfa- och n beta-minus-sönderfall.", String.raw`\[N_\alpha=3n,\qquad N_{\beta^-}=n\]`, ""],
+    ["2", "Endast alfa ändrar masstalet, med −4 per sönderfall.", String.raw`\[A_f=A-4(3n)=A-12n\]`, ""],
+    ["3", "Atomnumret minskar med 2 per alfa och ökar med 1 per beta-minus.", String.raw`\[Z_f=Z-2(3n)+n=Z-5n\]`, ""]
+  ], String.raw`Efter sönderfallen är masstalet \(A-12n\) och antalet protoner \(Z-5n\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_KARNREAKTIONER_V2_DEL2[uppgift.id]) uppgift.s = FACIT_KARNREAKTIONER_V2_DEL2[uppgift.id];
+}
+
+const FACIT_KARNREAKTIONER_V2_DEL3 = {
+  "9.69": byggFacitListaV2([
+    ["a", "Alfa minskar masstalet med 4 och atomnumret med 2.", String.raw`\[{}^{238}_{92}\mathrm U\rightarrow{}^{234}_{90}\mathrm{Th}+{}^4_2\mathrm{He}\]`, ""],
+    ["b", "Beta-minus omvandlar en neutron till en proton.", String.raw`\[{}^{14}_{6}\mathrm C\rightarrow{}^{14}_{7}\mathrm N+e^-+\bar\nu_e\]`, ""],
+    ["c", "Beta-plus omvandlar en proton till en neutron.", String.raw`\[{}^{22}_{11}\mathrm{Na}\rightarrow{}^{22}_{10}\mathrm{Ne}+e^++\nu_e\]`, ""],
+    ["d", "Vid elektroninfångning tas en elektron upp av kärnan.", String.raw`\[{}^{7}_{4}\mathrm{Be}+e^-\rightarrow{}^{7}_{3}\mathrm{Li}+\nu_e\]`, ""]
+  ], "Reaktionsformlerna bevarar både masstal och elektrisk laddning och innehåller rätt neutrino eller antineutrino."),
+  "9.70": byggFacitListaV2([
+    ["a", "Ändringarna följer direkt av hur protoner och neutroner omvandlas eller lämnar kärnan.", String.raw`\[\begin{array}{c|cc}\text{sönderfall}&\Delta A&\Delta Z\\\hline\alpha&-4&-2\\\beta^-&0&+1\\\beta^+&0&-1\\\text{elektroninfångning}&0&-1\end{array}\]`, ""],
+    ["b", "Både beta-plus och elektroninfångning omvandlar en proton till en neutron. Därför får dotterkärnan samma A och Z i båda fallen.", "", "Skillnaden ligger i om en positron avges eller en elektron fångas in." ]
+  ], String.raw`För alfa är \((\Delta A,\Delta Z)=(-4,-2)\); för beta-minus \((0,+1)\); för beta-plus och elektroninfångning \((0,-1)\).`),
+  "9.71": byggFacitListaV2([
+    ["a", "Skillnaden i masstal och atomnummer är 4 respektive 2.", String.raw`\[{}^{210}_{83}\mathrm{Bi}\rightarrow{}^{206}_{81}\mathrm{Tl}+{}^4_2\mathrm{He}\]`, ""],
+    ["b", "Beta-minus höjer atomnumret från 38 till 39.", String.raw`\[{}^{90}_{38}\mathrm{Sr}\rightarrow{}^{90}_{39}\mathrm Y+e^-+\bar\nu_e\]`, ""],
+    ["c", "Den utsända positiva beta-partikeln är en positron.", String.raw`\[{}^{18}_{9}\mathrm F\rightarrow{}^{18}_{8}\mathrm O+e^++\nu_e\]`, ""],
+    ["d", "Vid elektroninfångning är moderkärnans atomnummer ett större än dotterkärnans.", String.raw`\[{}^{125}_{53}\mathrm I+e^-\rightarrow{}^{125}_{52}\mathrm{Te}+\nu_e\]`, ""]
+  ], String.raw`De saknade delarna är \({}^4_2\mathrm{He}\), \({}^{90}_{39}\mathrm Y\), \(e^+\) och \({}^{125}_{53}\mathrm I\).`),
+  "9.72": byggFacitListaV2([
+    ["a", "Vid beta-minus omvandlas en neutron.", String.raw`\[n\rightarrow p+e^-+\bar\nu_e\]`, ""],
+    ["b", "Vid beta-plus omvandlas en proton.", String.raw`\[p\rightarrow n+e^++\nu_e\]`, ""],
+    ["c", "Masstalet räknar nukleoner. En nukleon byter typ, men antalet protoner plus neutroner förblir detsamma.", "", ""],
+    ["d", "Elektronen fanns inte lagrad i kärnan. Den skapas i beta-minus-processen tillsammans med antineutrinon.", "", "Kärnans beståndsdelar beskrivs här som protoner och neutroner." ]
+  ], "Vid β⁻ blir en neutron en proton; vid β⁺ blir en proton en neutron. Masstalet ändras inte, och betaelektronen skapas i sönderfallet."),
+  "9.73": byggFacitListaV2([
+    ["a", "Reaktionsformeln är", String.raw`\[{}^{226}_{88}\mathrm{Ra}\rightarrow{}^{222}_{86}\mathrm{Rn}+{}^4_2\mathrm{He}\]`, ""],
+    ["b", "Produkternas sammanlagda atommassa är", String.raw`\[m_f=222{,}017578+4{,}002602=226{,}020180\ \mathrm u\]`, ""],
+    ["c", "Massminskningen blir", String.raw`\[\Delta m=226{,}025410-226{,}020180=0{,}005230\ \mathrm u\]`, ""],
+    ["d", "Den frigjorda energin är", String.raw`\[Q=(0{,}005230)(931{,}5)=4{,}872\ \mathrm{MeV}\]`, "Elektronmassorna tar ut varandra när atommassor används: 88 elektroner före och 86 + 2 efter." ]
+  ], String.raw`Produkternas massa är \(226{,}020180\ \mathrm u\), massdefekten \(0{,}005230\ \mathrm u\), och energin \(4{,}87\ \mathrm{MeV}\).`),
+  "9.74": byggFacitListaV2([
+    ["1", "Reaktionen är beta-plus-sönderfall.", String.raw`\[{}^{22}_{11}\mathrm{Na}\rightarrow{}^{22}_{10}\mathrm{Ne}+e^++\nu_e\]`, ""],
+    ["2", "När atommassor används måste två elektronmassor dras bort.", String.raw`\[\Delta m=21{,}994437-21{,}991385-2(0{,}000549)=0{,}001954\ \mathrm u\]`, ""],
+    ["3", "Q-värdet blir", String.raw`\[Q=(0{,}001954)(931{,}5)=1{,}820\ \mathrm{MeV}\]`, "Utan korrektionen skulle resultatet bli för högt, eftersom både positronmassan och skillnaden i atomernas elektronantal måste hanteras." ]
+  ], String.raw`Beta-plus-sönderfallet frigör cirka \(1{,}82\ \mathrm{MeV}\).`),
+  "9.75": byggFacitListaV2([
+    ["1", "Elektroninfångningen kan skrivas", String.raw`\[{}^{55}_{26}\mathrm{Fe}+e^-\rightarrow{}^{55}_{25}\mathrm{Mn}+\nu_e\]`, ""],
+    ["2", "Med neutrala atomers massor blir Q-värdet direkt masskillnaden.", String.raw`\[Q=(54{,}938292-54{,}938049)(931{,}5)=0{,}2264\ \mathrm{MeV}\]`, ""],
+    ["3", "Den infångade elektronen ingår redan i moderatomens atommassa, och dotteratomen har en elektron mindre. Elektronantalet balanseras därför utan en korrektion på två elektronmassor.", "", "Små skillnader i elektronernas bindningsenergi kan påverka en mer precis beräkning." ]
+  ], String.raw`Det frigörs cirka \(0{,}226\ \mathrm{MeV}=226\ \mathrm{keV}\).`),
+  "9.76": byggFacitListaV2([
+    ["1", "En protonrik lätt kärna går mot stabilitet genom beta-plus eller elektroninfångning; en neutronrik kärna genom beta-minus.", "", ""],
+    ["2", "Kol-11 och syre-15 är protonrika.", String.raw`\[{}^{11}_{6}\mathrm C\xrightarrow{\beta^+}{}^{11}_{5}\mathrm B\]\[{}^{15}_{8}\mathrm O\xrightarrow{\beta^+}{}^{15}_{7}\mathrm N\]`, ""],
+    ["3", "Kol-14 och fosfor-32 är neutronrika.", String.raw`\[{}^{14}_{6}\mathrm C\xrightarrow{\beta^-}{}^{14}_{7}\mathrm N\]\[{}^{32}_{15}\mathrm P\xrightarrow{\beta^-}{}^{32}_{16}\mathrm S\]`, ""]
+  ], String.raw`C-11 och O-15 sönderfaller sannolikt med \(\beta^+\); C-14 och P-32 med \(\beta^-\). Dotterkärnorna är B-11, N-15, N-14 och S-32.`),
+  "9.77": byggFacitListaV2([
+    ["a", "Massdefekten och Q-värdet är", String.raw`\[\Delta m=209{,}982874-205{,}974465-4{,}002602=0{,}005807\ \mathrm u\]\[Q=(0{,}005807)(931{,}5)=5{,}409\ \mathrm{MeV}\]`, ""],
+    ["b", "Moderkärnan är i vila, så produkterna får lika stora motriktade rörelsemängder.", String.raw`\[p_\alpha=p_{\mathrm{Pb}}=p,\qquad E_k=\frac{p^2}{2m}\]`, String.raw`Därför \(E_\alpha/E_{\mathrm{Pb}}=m_{\mathrm{Pb}}/m_\alpha\).`],
+    ["c", "Energifördelningen blir", String.raw`\[E_\alpha=Q\frac{m_{\mathrm{Pb}}}{m_{\mathrm{Pb}}+m_\alpha}=5{,}306\ \mathrm{MeV}\]\[E_{\mathrm{Pb}}=Q-E_\alpha=0{,}103\ \mathrm{MeV}\]`, "Alfapartikeln får ungefär 98,1 % av energin." ]
+  ], String.raw`Totalt frigörs \(5{,}41\ \mathrm{MeV}\). Alfapartikeln får cirka \(5{,}31\ \mathrm{MeV}\) och rekylkärnan \(0{,}10\ \mathrm{MeV}\).`),
+  "9.78": byggFacitListaV2([
+    ["a", "För beta-minus kan neutrala atommassor subtraheras direkt.", String.raw`\[Q_{\beta^-}=(39{,}963998-39{,}962591)(931{,}5)=1{,}311\ \mathrm{MeV}\]`, ""],
+    ["b", "För elektroninfångning blir", String.raw`\[Q_{\mathrm{EC}}=(39{,}963998-39{,}962383)(931{,}5)=1{,}504\ \mathrm{MeV}\]`, ""],
+    ["2", "För beta-plus dras två elektronmassor bort.", String.raw`\[Q_{\beta^+}=[0{,}001615-2(0{,}000549)](931{,}5)=0{,}482\ \mathrm{MeV}\]`, ""],
+    ["c", "Beta-plus kräver en atomär masskillnad större än två elektronmassor.", String.raw`\[\Delta Mc^2>2m_ec^2=1{,}022\ \mathrm{MeV}\]`, "Om masskillnaden låg mellan 0 och 1,022 MeV skulle elektroninfångning kunna ha positivt Q-värde medan beta-plus vore energetiskt omöjligt." ]
+  ], String.raw`\(Q_{\beta^-}=1{,}31\ \mathrm{MeV}\), \(Q_{\mathrm{EC}}=1{,}50\ \mathrm{MeV}\) och \(Q_{\beta^+}=0{,}48\ \mathrm{MeV}\).`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_KARNREAKTIONER_V2_DEL3[uppgift.id]) uppgift.s = FACIT_KARNREAKTIONER_V2_DEL3[uppgift.id];
+}
+
+const FACIT_NUKLIDER_V2_DEL1 = {
+  "9.19": byggFacitListaV2([
+    ["a", "Atomnumret är antalet protoner.", String.raw`\[Z=38\Rightarrow N_p=38\]`, ""],
+    ["b", "Masstalet är summan av protoner och neutroner.", String.raw`\[N_n=A-Z=90-38=52\]`, ""],
+    ["c", "En neutral atom har lika många elektroner som protoner.", String.raw`\[N_e=38\]`, ""]
+  ], "Strontium-90 har 38 protoner, 52 neutroner och, som neutral atom, 38 elektroner."),
+  "9.20": byggFacitListaV2([
+    ["a", "I nuklidbeteckningen är 207 masstalet A, antalet nukleoner, och 82 atomnumret Z, antalet protoner.", String.raw`\[{}^{A}_{Z}X={} ^{207}_{82}\mathrm{Pb}\]`, ""],
+    ["b", "Antalet neutroner är", String.raw`\[N=A-Z=207-82=125\]`, ""],
+    ["c", "Samma atomnummer 82 betyder fortfarande bly. Med 125 neutroner blir masstalet 82 + 125 = 207.", String.raw`\[{}^{207}_{82}\mathrm{Pb}=\text{bly-207}\]`, "Det är alltså samma nuklid som den som redan står i frågan." ]
+  ], "207 är masstalet och 82 atomnumret. Kärnan har 125 neutroner, och nukliden med Z = 82 och 125 neutroner är bly-207."),
+  "9.21": byggFacitListaV2([
+    ["1", "Helium-4 har två protoner och två neutroner. När atommassor används representeras varje proton tillsammans med en elektron av en väteatommassa.", String.raw`\[m_{\mathrm{delar}}=2(1{,}007825)+2(1{,}008665)=4{,}032980\ \mathrm u\]`, ""],
+    ["2", "Massdefekten är", String.raw`\[\Delta m=4{,}032980-4{,}002603=0{,}030377\ \mathrm u\]`, ""],
+    ["3", "Total bindningsenergi och bindningsenergi per nukleon blir", String.raw`\[E_b=(0{,}030377)(931{,}5)=28{,}30\ \mathrm{MeV}\]\[\frac{E_b}{A}=\frac{28{,}30}{4}=7{,}07\ \mathrm{MeV/nukleon}\]`, ""]
+  ], String.raw`Massdefekten är \(0{,}03038\ \mathrm u\), total bindningsenergi \(28{,}3\ \mathrm{MeV}\), och \(7{,}07\ \mathrm{MeV}\) per nukleon.`),
+  "9.22": byggFacitListaV2([
+    ["a", "Neutronöverskottet är", String.raw`\[126-82=44\]`, ""],
+    ["b", "Den starka kärnkraften binder protoner och neutroner på mycket korta avstånd. Den elektriska Coulombrepulsionen mellan de positivt laddade protonerna verkar destabiliserande.", "", ""],
+    ["c", "Extra neutroner bidrar till den starka bindningen utan att tillföra elektrisk repulsion. Det hjälper stora kärnor att motverka den ökande proton–proton-repulsionen.", "", "Den starka kärnkraften är kortverkande och mättas, medan varje proton repelleras av många andra protoner." ]
+  ], "Bly-208 har 44 fler neutroner än protoner. Neutronöverskottet ökar kärnbindningen utan att öka den elektriska repulsionen."),
+  "9.31": byggFacitListaV2([
+    ["a", "Varianter med samma atomnummer men olika masstal kallas isotoper.", "", ""],
+    ["b", "Väte har en proton, så neutronantalet är A − 1.", String.raw`\[{}^1\mathrm H:0,\qquad{}^2\mathrm H:1,\qquad{}^3\mathrm H:2\ \text{neutroner}\]`, ""],
+    ["c", "Neutrala isotoper har samma antal elektroner och därmed nästan samma elektronstruktur, som styr kemiska reaktioner.", "", "Masskillnaden kan ändå ge små isotopeffekter och påverkar kärnans stabilitet." ]
+  ], "De är isotoper och har 0, 1 respektive 2 neutroner. Samma elektronstruktur ger nästan samma kemiska egenskaper."),
+  "9.32": byggFacitListaV2([
+    ["a", "Omvandla 12,000 u till kilogram.", String.raw`\[m=(12{,}000)(1{,}66054\cdot10^{-27})=1{,}99265\cdot10^{-26}\ \mathrm{kg}\]`, ""],
+    ["b", "Atommassenheten ger hanterliga tal nära masstalet. I kilogram skulle atomernas massor skrivas med mycket små tiopotenser.", "", "Dessutom definieras 1 u som en tolftedel av massan hos en neutral kol-12-atom i grundtillstånd." ]
+  ], String.raw`En kol-12-atom har massan \(1{,}99\cdot10^{-26}\ \mathrm{kg}\). Enheten u gör atomära massor lättare att jämföra och räkna med.`),
+  "9.33": byggFacitListaV2([
+    ["a", "Substansmängden i 1,0 g järn är", String.raw`\[n=\frac{m}{M}=\frac{1{,}0}{55{,}85}=1{,}7905\cdot10^{-2}\ \mathrm{mol}\]`, String.raw`\[N=nN_A=(1{,}7905\cdot10^{-2})(6{,}022\cdot10^{23})=1{,}078\cdot10^{22}\]`],
+    ["b", "Antalet är proportionellt mot massan.", String.raw`\[N_{3{,}5}=3{,}5(1{,}078\cdot10^{22})=3{,}77\cdot10^{22}\]`, ""]
+  ], String.raw`1,0 g järn innehåller \(1{,}08\cdot10^{22}\) atomer och en 3,5-g-spik cirka \(3{,}8\cdot10^{22}\) atomer.`),
+  "9.34": byggFacitListaV2([
+    ["a", "Järn-56 har 26 protoner.", String.raw`\[N_n=A-Z=56-26=30\]`, ""],
+    ["b", "Beståndsdelarnas atommassor ger", String.raw`\[\Delta m=26(1{,}007825)+30(1{,}008665)-55{,}934936=0{,}528464\ \mathrm u\]`, ""],
+    ["c", "Bindningsenergin blir", String.raw`\[E_b=(0{,}528464)(931{,}5)=492{,}25\ \mathrm{MeV}\]\[\frac{E_b}{A}=\frac{492{,}25}{56}=8{,}79\ \mathrm{MeV/nukleon}\]`, ""]
+  ], String.raw`Järn-56 har 30 neutroner, massdefekten \(0{,}5285\ \mathrm u\), och bindningsenergin \(8{,}79\ \mathrm{MeV}\) per nukleon.`),
+  "9.35": byggFacitListaV2([
+    ["a", "Hög bindningsenergi per nukleon betyder att nukleonerna i genomsnitt är hårt bundna och att mycket energi krävs för att helt skilja kärnan i fria protoner och neutroner.", "", ""],
+    ["b", "När lätta kärnor fusionerar kan produkten få högre bindningsenergi per nukleon. Ökningen i total bindningsenergi frigörs.", "", ""],
+    ["c", "När en mycket tung kärna fissionerar kan fragmenten också få högre bindningsenergi per nukleon, närmare kurvans maximum kring järn–nickel.", "", "I båda fallen går systemet till lägre total vilomassa och lägre inre energi." ]
+  ], "Hög bindningsenergi per nukleon betyder stark bindning. Fusion av lätta kärnor och fission av tunga kärnor frigör energi när produkterna hamnar högre på bindningsenergikurvan."),
+  "9.36": byggFacitListaV2([
+    ["a", "En neutral syreatom har åtta elektroner. När två försvinner återstår", String.raw`\[N_e=8-2=6\]`, ""],
+    ["b", "Åtta protoner och sex elektroner ger nettoladdningen", String.raw`\[Q=(8-6)e=+2e=+3{,}204\cdot10^{-19}\ \mathrm C\]`, String.raw`Jonen skrivs \(\mathrm{O}^{2+}\).`],
+    ["c", "Kärnan har inte förändrats; endast atomens elektronskal har ändrats. Kärnan har fortfarande åtta protoner och åtta neutroner och är fortfarande syre-16.", "", ""]
+  ], String.raw`Jonen har 6 elektroner och laddningen \(+2e\); kärnan är oförändrad.`),
+  "9.40": byggFacitListaV2([
+    ["a", "Antalet neutroner är A − Z.", String.raw`\[{}^{14}\mathrm C:8,\quad{}^{40}\mathrm K:21,\quad{}^{131}\mathrm I:78,\quad{}^{137}\mathrm{Cs}:82\]`, ""],
+    ["b", "Jämför neutronantalet med protonantalet.", String.raw`\[N-Z:2,\ 2,\ 25,\ 27\]`, "Cesium-137 har det största neutronöverskottet." ]
+  ], "Neutronantalen är 8, 21, 78 och 82. Cesium-137 har störst neutronöverskott: 27 fler neutroner än protoner.")
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_NUKLIDER_V2_DEL1[uppgift.id]) uppgift.s = FACIT_NUKLIDER_V2_DEL1[uppgift.id];
+}
+
+const FACIT_NUKLIDER_V2_DEL2 = {
+  "9.59": byggFacitListaV2([
+    ["a", "För en neutral atom gäller protoner = elektroner = Z och neutroner = A − Z.", String.raw`\[\begin{array}{c|ccc}\text{nuklid}&p&n&e^-\\\hline{}^{14}_{6}\mathrm C&6&8&6\\{}^{23}_{11}\mathrm{Na}&11&12&11\\{}^{60}_{27}\mathrm{Co}&27&33&27\\{}^{235}_{92}\mathrm U&92&143&92\end{array}\]`, ""],
+    ["b", "Inget av talen anger neutronantalet direkt. Det övre är masstalet A och det undre atomnumret Z.", String.raw`\[N_n=A-Z\]`, ""]
+  ], "Tabellen blir C-14: 6, 8, 6; Na-23: 11, 12, 11; Co-60: 27, 33, 27; U-235: 92, 143, 92. Neutronantalet räknas som A − Z."),
+  "9.60": byggFacitListaV2([
+    ["a", "Alla syreisotoper har Z = 8.", String.raw`\[{}^{16}_{8}\mathrm O:8p+8n,\quad{}^{17}_{8}\mathrm O:8p+9n,\quad{}^{18}_{8}\mathrm O:8p+10n\]`, ""],
+    ["b", "Gemensamt är åtta protoner, vilket gör dem till syre. Neutronantal och därmed masstal skiljer sig.", "", ""],
+    ["c", "Neutrala atomer av alla tre isotoperna har åtta elektroner och nästan samma elektronstruktur, som styr kemin.", "", "Isotopmassan kan ge små skillnader i exempelvis reaktionshastighet, men grundläggande kemiska egenskaper är desamma." ]
+  ], "O-16, O-17 och O-18 har 8 protoner samt 8, 9 respektive 10 neutroner. Samma elektronstruktur ger nästan samma kemi."),
+  "9.61": byggFacitListaV2([
+    ["a", "Väteatomens massa innehåller en proton och en elektron; detta passar deuteriumatomens massa, som också innehåller en elektron.", String.raw`\[m_{\mathrm{delar}}=m({}^1\mathrm H)+m_n=1{,}007825+1{,}008665=2{,}016490\ \mathrm u\]`, ""],
+    ["b", "Massdefekten är", String.raw`\[\Delta m=2{,}016490-2{,}014102=0{,}002388\ \mathrm u\]`, ""],
+    ["c", "Bindningsenergin blir", String.raw`\[E_b=(0{,}002388)(931{,}5)=2{,}224\ \mathrm{MeV}\]`, ""],
+    ["d", "Deuteriumkärnan har två nukleoner.", String.raw`\[\frac{E_b}{A}=\frac{2{,}224}{2}=1{,}112\ \mathrm{MeV/nukleon}\]`, ""]
+  ], String.raw`Beståndsdelarna väger \(2{,}016490\ \mathrm u\), massdefekten är \(0{,}002388\ \mathrm u\), bindningsenergin \(2{,}224\ \mathrm{MeV}\) och \(1{,}11\ \mathrm{MeV}\) per nukleon.`),
+  "9.62": byggFacitListaV2([
+    ["a", "Litium-7 har Z = 3 och A = 7.", String.raw`\[N_p=3,\qquad N_n=7-3=4\]`, ""],
+    ["b", "Beståndsdelarnas atommassor och massdefekten är", String.raw`\[m_{\mathrm{delar}}=3(1{,}007825)+4(1{,}008665)=7{,}058135\ \mathrm u\]\[\Delta m=7{,}058135-7{,}016003=0{,}042132\ \mathrm u\]`, ""],
+    ["c", "Bindningsenergin per nukleon blir", String.raw`\[\frac{E_b}{A}=\frac{(0{,}042132)(931{,}5)}{7}=5{,}61\ \mathrm{MeV/nukleon}\]`, ""]
+  ], String.raw`Kärnan har 3 protoner och 4 neutroner. Massdefekten är \(0{,}042132\ \mathrm u\), och bindningsenergin \(5{,}61\ \mathrm{MeV}\) per nukleon.`),
+  "9.63": byggFacitListaV2([
+    ["1", "Använd (m_{\mathrm{kg}}=m_{\mathrm u}(1{,}66054\cdot10^{-27})) och (E=m_{\mathrm u}(931{,}5)).", "", ""],
+    ["2", "De tre raderna blir", String.raw`\[\begin{array}{c|c|c}m\ (\mathrm u)&m\ (\mathrm{kg})&E\ (\mathrm{MeV})\\\hline1{,}000000&1{,}66054\cdot10^{-27}&931{,}5\\0{,}030000&4{,}98162\cdot10^{-29}&27{,}945\\4{,}002602&6{,}64648\cdot10^{-27}&3728{,}42\end{array}\]`, ""]
+  ], "Tabellen ger 1,66054·10⁻²⁷ kg och 931,5 MeV; 4,98162·10⁻²⁹ kg och 27,945 MeV; 6,64648·10⁻²⁷ kg och 3728,42 MeV."),
+  "9.64": byggFacitListaV2([
+    ["1", "Kol-12 har sex protoner och sex neutroner. Väteatommassan används för proton plus motsvarande elektron.", String.raw`\[m_{\mathrm{delar}}=6(1{,}007825)+6(1{,}008665)=12{,}098940\ \mathrm u\]`, ""],
+    ["2", "Massdefekten är", String.raw`\[\Delta m=12{,}098940-12{,}000000=0{,}098940\ \mathrm u\]`, ""],
+    ["3", "Bindningsenergin per nukleon blir", String.raw`\[\frac{E_b}{A}=\frac{(0{,}098940)(931{,}5)}{12}=7{,}680\ \mathrm{MeV/nukleon}\]`, ""]
+  ], String.raw`Kol-12 har bindningsenergin \(7{,}68\ \mathrm{MeV}\) per nukleon.`),
+  "9.65": byggFacitListaV2([
+    ["1", "För helium-4 är massdefekten", String.raw`\[\Delta m_{\mathrm{He}}=2(1{,}007825)+2(1{,}008665)-4{,}002602=0{,}030378\ \mathrm u\]`, String.raw`\[\frac{E_b}{A}=\frac{(0{,}030378)(931{,}5)}4=7{,}07\ \mathrm{MeV/nukleon}\]`],
+    ["2", "Uran-238 har 92 protoner och 146 neutroner.", String.raw`\[\Delta m_{\mathrm U}=92(1{,}007825)+146(1{,}008665)-238{,}050788=1{,}934202\ \mathrm u\]`, String.raw`\[\frac{E_b}{A}=\frac{(1{,}934202)(931{,}5)}{238}=7{,}57\ \mathrm{MeV/nukleon}\]`],
+    ["3", "Uran-238 är något hårdare bundet per nukleon än helium-4, men båda ligger under maximum kring järn–nickel.", "", "Det är därför energi kan frigöras genom fusion från heliumområdets lättare kärnor och genom fission av mycket tunga kärnor." ]
+  ], String.raw`Helium-4 har \(7{,}07\ \mathrm{MeV/nukleon}\) och U-238 \(7{,}57\ \mathrm{MeV/nukleon}\). U-238 är hårdare bundet per nukleon.`),
+  "9.66": byggFacitListaV2([
+    ["1", "Massdefekten i atommassenheter är", String.raw`\[\Delta m=\frac{E_b}{931{,}5}=\frac{492}{931{,}5}=0{,}52818\ \mathrm u\]`, ""],
+    ["2", "Omvandla till kilogram.", String.raw`\[\Delta m=(0{,}52818)(1{,}66054\cdot10^{-27})=8{,}77\cdot10^{-28}\ \mathrm{kg}\]`, ""],
+    ["3", "Bindningsenergin per nukleon är", String.raw`\[\frac{E_b}{A}=\frac{492}{56}=8{,}79\ \mathrm{MeV/nukleon}\]`, ""]
+  ], String.raw`Massdefekten är \(0{,}528\ \mathrm u=8{,}77\cdot10^{-28}\ \mathrm{kg}\), och bindningsenergin \(8{,}79\ \mathrm{MeV}\) per nukleon.`),
+  "9.67": byggFacitListaV2([
+    ["a", "Två deuteriumkärnor innehåller totalt fyra nukleoner. Skillnaden i total bindningsenergi är", String.raw`\[Q=4(7{,}07)-4(1{,}11)=23{,}84\ \mathrm{MeV}\]`, ""],
+    ["b", "Vid fission ökar bindningsenergin per nukleon med 8,5 − 7,57 MeV.", String.raw`\[Q=238(8{,}50-7{,}57)=221{,}3\ \mathrm{MeV}\]`, ""],
+    ["c", "Båda processerna flyttar nukleoner mot bindningsenergikurvans maximum. Lätta kärnor når starkare bindning genom fusion och tunga genom fission.", "", "Fusionen ger här mer energi per nukleon, medan fissionen omfattar fler nukleoner och därför ger större energi per enskild reaktion." ]
+  ], String.raw`Fusionen frigör cirka \(23{,}8\ \mathrm{MeV}\), och den idealiserade U-238-fissionen cirka \(221\ \mathrm{MeV}\).`),
+  "9.68": byggFacitListaV2([
+    ["a", "Kärnradien för A = 56 blir", String.raw`\[r=(1{,}2)(56^{1/3})\ \mathrm{fm}=4{,}59\ \mathrm{fm}=4{,}59\cdot10^{-15}\ \mathrm m\]`, String.raw`\[V=\frac{4\pi r^3}{3}=4{,}05\cdot10^{-43}\ \mathrm{m^3}\]`],
+    ["b", "Kärnans massa kan uppskattas med atommassan; elektronernas lilla massa försummas här.", String.raw`\[m=(55{,}935)(1{,}66054\cdot10^{-27})=9{,}29\cdot10^{-26}\ \mathrm{kg}\]\[\rho=\frac mV=2{,}29\cdot10^{17}\ \mathrm{kg/m^3}\]`, ""],
+    ["c", "Jämfört med fast järn är tätheten", String.raw`\[\frac{2{,}29\cdot10^{17}}{7870}=2{,}91\cdot10^{13}\]`, "Nästan all atommassa är koncentrerad i den mycket lilla kärnan, medan elektronmolnet upptar nästan hela atomens volym." ]
+  ], String.raw`\(r=4{,}59\ \mathrm{fm}\), \(V=4{,}05\cdot10^{-43}\ \mathrm{m^3}\), \(m=9{,}29\cdot10^{-26}\ \mathrm{kg}\), och \(\rho=2{,}29\cdot10^{17}\ \mathrm{kg/m^3}\), cirka \(2{,}9\cdot10^{13}\) gånger fast järn.`)
+};
+
+for (const uppgift of window.BANK) {
+  if (FACIT_NUKLIDER_V2_DEL2[uppgift.id]) uppgift.s = FACIT_NUKLIDER_V2_DEL2[uppgift.id];
+}
