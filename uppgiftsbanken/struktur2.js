@@ -11,6 +11,7 @@ window.OMR2 = {
   "pendlar": "Pendlar",
   "vagrorelser": "Vågrörelser",
   "ljudvagor": "Ljudvågor",
+  "interferens": "Interferens",
   "ljud_horsel": "Ljud och hörsel",
   "extrema_frekvenser": "Ljud med extrema frekvenser",
   "vagor": "Vågor"
