@@ -820,7 +820,8 @@ table.data th{background:var(--sunken);font-weight:600}
 }
 .ru-stäng:hover{background:var(--sunken);color:var(--ink)}
 .ru-stäng svg{width:17px;height:17px}
-.ru-body{padding:20px;overflow:auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);gap:20px}
+.ru-body{padding:20px;overflow:auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);gap:20px;align-items:start}
+.ru-vänster{display:flex;flex-direction:column;gap:18px;min-width:0}
 .ru-sektion{min-width:0}
 .ru-label{
   display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px;
@@ -838,8 +839,8 @@ table.data th{background:var(--sunken);font-weight:600}
   min-height:220px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--canvas);
   display:block;overflow:auto
 }
-.ru-bildbox .fig{display:block;margin:0;max-width:none;width:100%}
-.ru-bildbox .fig svg,.ru-bildbox .fig img{display:block;max-width:none;max-height:none;width:100%;height:auto;margin:0}
+.ru-bildbox .fig{display:block;margin:0 auto;max-width:100%;width:auto}
+.ru-bildbox .fig svg,.ru-bildbox .fig img{display:block;max-width:100%;max-height:260px;width:auto;height:auto;margin:0 auto}
 .ru-ingenbild{font-size:12px;color:var(--muted);text-align:center}
 .ru-bildverktyg{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
 .ru-bildverktyg .knapp{padding:7px 10px;font-size:11.5px}
@@ -864,7 +865,9 @@ table.data th{background:var(--sunken);font-weight:600}
   .redigera-uppgift{padding:10px}
   .ru-dialog{width:100%;max-height:calc(100vh - 20px)}
   .ru-body{grid-template-columns:1fr;padding:16px}
+  .ru-vänster{gap:14px}
   .ru-text{min-height:180px}
+  #ruFacit{min-height:130px!important}
 }
 
 
@@ -1235,6 +1238,7 @@ table.data th{background:var(--sunken);font-weight:600}
     </div>
 
     <div class="ru-body">
+      <div class="ru-vänster">
       <section class="ru-sektion">
         <label class="ru-label" for="ruText">
           <span>Uppgiftstext</span>
@@ -1251,15 +1255,16 @@ table.data th{background:var(--sunken);font-weight:600}
       <section class="ru-sektion">
         <label class="ru-label" for="ruFacit">
           <span>Facit</span>
-          <span class="ru-hjälp">Skriv i klartext — <strong>svar</strong> markeras med **dubbla asterisker**</span>
+          <span class="ru-hjälp">Markera svar med **dubbla asterisker**</span>
         </label>
-        <textarea class="ru-text" id="ruFacit" style="min-height:90px"></textarea>
+        <textarea class="ru-text" id="ruFacit" style="min-height:150px"></textarea>
         <div class="ru-kopiera-rad">
           <button class="knapp tyst liten" id="ruKopieraFacit" type="button">
             Kopiera facit
           </button>
         </div>
       </section>
+      </div>
 
       <section class="ru-sektion">
           <span class="ru-hjälp" id="ruBildstatus"></span>
