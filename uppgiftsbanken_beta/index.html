@@ -1168,9 +1168,14 @@ table.data th{background:var(--sunken);font-weight:600}
    Den här slutliga regeln ersätter tidigare vertikal centrering. Det gör
    att rubrik och första kortraden aldrig hamnar ovanför viewporten när
    antalet kurser växer.
+
+   OBS: display får INTE vara !important här. Appen växlar vy genom att sätta
+   hidden på #kursval. Om .kursval också har display:block!important vinner
+   den senare regeln över [hidden]{display:none!important}, och kursväljaren
+   ligger då kvar ovanpå banken trots att startaKurs() har körts.
    ═══════════════════════════════════════════════════════════════════════ */
 .kursval{
-  display:block!important;
+  display:block;
   overflow-y:auto!important;
   padding:clamp(24px,3.2vh,38px) clamp(24px,4vw,56px) 54px!important;
 }
@@ -1289,6 +1294,10 @@ table.data th{background:var(--sunken);font-weight:600}
   .kurskort{min-height:0!important;padding:18px 18px 16px 24px!important}
   .kk-namn{font-size:21px!important}
 }
+
+/* hidden måste alltid kunna stänga kursväljaren när en kurs öppnas.
+   Högre specificitet än .kursval gör regeln robust även vid framtida CSS-ändringar. */
+.kursval[hidden]{display:none!important}
 
 /* ── enkelt lösenordsskydd för den statiska sidan ── */
 body.password-locked{overflow:hidden}
@@ -1905,7 +1914,7 @@ $('#kvKort').addEventListener('click',e=>{
   const kurs=KURSER.find(x=>x.id===kort.dataset.kurs);
   if(kurs)väljKurs(kurs,kort);
 });
-const BANK_VERSION='2026-08-27-2115';
+const BANK_VERSION='2026-08-27-2125';
 function laddaSkript(src){
   return new Promise((ok,fel)=>{
     const s=document.createElement('script');
