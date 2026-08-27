@@ -22,6 +22,7 @@
   --ui:'Instrument Sans',system-ui,sans-serif;
   --las:'Atkinson Hyperlegible',system-ui,sans-serif;
   --mono:'IBM Plex Mono',monospace;
+  --ma1-röd:#BF3A2E; --ma1-gul:#E3B52B; --ma1-grön:#2E7D52; --ma1-blå:#2C62A8;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -120,7 +121,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 
   position:relative;isolation:isolate;overflow:hidden;
   display:flex;flex-direction:column;text-align:left;
-  min-height:242px;padding:21px 22px 18px 28px;
+  min-height:212px;padding:19px 21px 17px 27px;
   font-family:inherit;color:var(--ink);cursor:pointer;
   background:
     radial-gradient(130% 92% at 100% 0%,color-mix(in oklab,var(--acc) 10%,transparent),transparent 62%),
@@ -164,7 +165,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .kurskort:hover .kk-rygg{width:9px}
 
 /* ── kortets innehåll ── */
-.kk-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:flex-end;gap:16px}
+.kk-top{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
 .kk-index{
   display:inline-flex;align-items:center;gap:9px;min-width:0;
   font-family:var(--mono);font-size:9.5px;font-weight:600;
@@ -180,7 +181,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
   box-shadow:0 0 0 4px color-mix(in oklab,var(--acc) 12%,transparent);
 }
 .kk-number{
-  font-size:40px;line-height:.8;font-weight:700;letter-spacing:-.07em;
+  font-size:37px;line-height:.86;font-weight:700;letter-spacing:-.07em;
   font-variant-numeric:tabular-nums;user-select:none;
   color:color-mix(in oklab,var(--acc) 16%,#EFEEF1);
   transition:color .28s ease;
@@ -188,14 +189,15 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .kurskort:hover .kk-number{color:color-mix(in oklab,var(--acc) 32%,#EFEEF1)}
 
 .kk-namn{
-  position:relative;z-index:1;margin:19px 0 0;
-  font-size:24px;line-height:1.04;font-weight:700;letter-spacing:-.042em;color:#1E1A1C;
+  position:relative;z-index:1;margin:0;
+  flex:1 1 auto;min-width:0;max-width:12.5ch;text-wrap:balance;
+  font-size:23px;line-height:1.06;font-weight:700;letter-spacing:-.042em;color:#1E1A1C;
 }
 
 /* kapitelchips */
 .kk-taggar{
   position:relative;z-index:1;display:flex;flex-wrap:wrap;align-content:flex-start;
-  gap:5px;margin-top:14px;
+  gap:5px;margin-top:12px;
 }
 .kk-tag{
   display:inline-flex;align-items:center;min-height:26px;padding:4px 10px;
@@ -213,7 +215,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 /* foten */
 .kk-fot{
   position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;
-  gap:16px;margin-top:auto;padding-top:16px;border-top:1px solid rgba(43,37,39,.07);
+  gap:16px;margin-top:auto;padding-top:14px;border-top:1px solid rgba(43,37,39,.07);
 }
 .kk-status{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:600;color:var(--ink-2)}
 .kk-status::before{
@@ -270,9 +272,10 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
   .kv-brandname{font-size:clamp(18px,5.9vw,27px);letter-spacing:-.038em}
   .kv-brandmeta{margin-top:7px;font-size:10px;letter-spacing:.09em}
   .kv-sektionstopp span{display:none}
-  .kurskort{padding:22px 20px 18px 26px;border-radius:20px}
-  .kk-namn{margin-top:18px;font-size:24px}
-  .kk-number{font-size:34px}
+  .kurskort{min-height:0;padding:20px 18px 17px 24px;border-radius:20px}
+  .kk-top{gap:14px}
+  .kk-namn{font-size:21px;max-width:none}
+  .kk-number{font-size:31px}
   .kk-taggar{gap:5px;margin-top:14px}
   .kk-utgivare{display:none}
 }
@@ -351,7 +354,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .panel::-webkit-scrollbar-track{background:transparent}
 
 /* ── vänster: områden ── */
-.vänster{background:var(--surface);border-right:1px solid var(--line);padding:16px 12px 40px}
+.vänster{background:color-mix(in oklab,var(--kurs-accent,#B43123) 7%,#fff);border-right:1px solid var(--line);padding:16px 12px 40px;transition:background .35s ease}
 .sök{position:relative;margin:0 4px 14px}
 .sök input{width:100%;border:1px solid var(--line);background:var(--canvas);border-radius:var(--r-s);
   padding:9px 12px 9px 33px;font-size:13.5px}
@@ -370,9 +373,46 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .ma-inriktning[hidden]{display:none!important}
 .ma-inriktning .variantfilter{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .ma-inriktning button{border:1px solid var(--line);background:var(--surface);border-radius:var(--r-s);
-  padding:8px 0;font-size:12.5px;font-weight:700;cursor:pointer;color:var(--muted);transition:.15s}
+  padding:8px 0;font-size:12.5px;font-weight:700;cursor:pointer;color:var(--muted);
+  transition:background .15s,border-color .15s,color .15s,box-shadow .15s}
 .ma-inriktning button:hover{border-color:#D3D1D6;color:var(--ink)}
-.ma-inriktning button[aria-pressed="true"]{background:var(--ed-tint);color:var(--ed-dark);border-color:transparent}
+.ma-inriktning button[aria-pressed="true"]{border-color:transparent}
+.ma-inriktning button[data-ma-kurs="1a"]{
+  color:#8E2A1E;
+  background:linear-gradient(165deg,
+    color-mix(in oklab,var(--ma1-gul) 18%,#fff) 0 47%,
+    color-mix(in oklab,var(--ma1-röd) 16%,#fff) 53% 100%);
+}
+.ma-inriktning button[data-ma-kurs="1a"]:hover{
+  border-color:color-mix(in oklab,var(--ma1-röd) 18%,rgba(43,37,39,.14));
+}
+.ma-inriktning button[data-ma-kurs="1a"][aria-pressed="true"]{
+  color:#7E2216;
+  background:linear-gradient(165deg,
+    color-mix(in oklab,var(--ma1-gul) 36%,#fff) 0 47%,
+    color-mix(in oklab,var(--ma1-röd) 30%,#fff) 53% 100%);
+  box-shadow:0 0 0 1px rgba(255,255,255,.45) inset;
+}
+.ma-inriktning button[data-ma-kurs="1b"]{
+  color:var(--ma1-grön);
+  background:color-mix(in oklab,var(--ma1-grön) 11%,#fff);
+}
+.ma-inriktning button[data-ma-kurs="1b"]:hover{border-color:color-mix(in oklab,var(--ma1-grön) 20%,rgba(43,37,39,.14))}
+.ma-inriktning button[data-ma-kurs="1b"][aria-pressed="true"]{
+  color:#1F5E3C;
+  background:color-mix(in oklab,var(--ma1-grön) 23%,#fff);
+  box-shadow:0 0 0 1px rgba(255,255,255,.45) inset;
+}
+.ma-inriktning button[data-ma-kurs="1c"]{
+  color:var(--ma1-blå);
+  background:color-mix(in oklab,var(--ma1-blå) 10%,#fff);
+}
+.ma-inriktning button[data-ma-kurs="1c"]:hover{border-color:color-mix(in oklab,var(--ma1-blå) 20%,rgba(43,37,39,.14))}
+.ma-inriktning button[data-ma-kurs="1c"][aria-pressed="true"]{
+  color:#234F89;
+  background:color-mix(in oklab,var(--ma1-blå) 20%,#fff);
+  box-shadow:0 0 0 1px rgba(255,255,255,.45) inset;
+}
 .kapgrupp{margin-bottom:4px}
 .kaprad{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;cursor:pointer;
   padding:7px 8px;border-radius:var(--r-s);text-align:left;font-weight:600;font-size:13.5px;color:var(--ink)}
@@ -1388,9 +1428,9 @@ function ritaKursval(){
             style="--acc:${k.färg};--rygg:${kursrygg(k)}" aria-label="Öppna ${k.titel}">
       <span class="kk-rygg" aria-hidden="true"></span>
       <span class="kk-top">
+        <span class="kk-namn">${k.titel}</span>
         <span class="kk-number" aria-hidden="true">0${k.siffra}</span>
       </span>
-      <span class="kk-namn">${k.titel}</span>
       <span class="kk-taggar">${(k.taggar||[]).map(t=>`<span class="kk-tag">${t}</span>`).join('')}</span>
       <span class="kk-fot">
         <span class="kk-status">${k.data?`${k.data.bank.length} uppgifter redo`:'Öppna kursen'}</span>
