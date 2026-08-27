@@ -1289,13 +1289,122 @@ table.data th{background:var(--sunken);font-weight:600}
   .kurskort{min-height:0!important;padding:18px 18px 16px 24px!important}
   .kk-namn{font-size:21px!important}
 }
+
+/* ── enkelt lösenordsskydd för den statiska sidan ── */
+body.password-locked{overflow:hidden}
+body.password-locked > :not(#passwordGate){visibility:hidden}
+.password-gate{
+  position:fixed;inset:0;z-index:10000;display:grid;place-items:center;
+  padding:24px;background:var(--canvas);color:var(--ink)
+}
+.password-gate[hidden]{display:none}
+.password-card{
+  width:min(410px,100%);padding:30px;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r-l);box-shadow:var(--sh-3)
+}
+.password-brand{display:flex;align-items:center;gap:13px;margin-bottom:24px}
+.password-brand img{width:50px;height:50px;object-fit:contain}
+.password-brand-text{display:grid;gap:2px}
+.password-brand-title{font-size:17px;font-weight:750;line-height:1.2}
+.password-brand-subtitle{font-size:12.5px;color:var(--muted)}
+.password-card h1{margin:0 0 7px;font-size:25px;line-height:1.2}
+.password-card > p{margin:0 0 22px;color:var(--ink-2);line-height:1.55}
+.password-card label{display:block;margin-bottom:7px;font-size:13px;font-weight:700}
+.password-row{display:flex;gap:8px}
+.password-row input{
+  min-width:0;flex:1;height:44px;padding:0 13px;color:var(--ink);
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-s);
+  font:inherit;outline:none
+}
+.password-row input:focus{border-color:var(--ed);box-shadow:0 0 0 3px var(--ed-ring)}
+.password-row button{
+  height:44px;padding:0 18px;border:0;border-radius:var(--r-s);cursor:pointer;
+  color:#fff;background:var(--ed);font:700 14px var(--ui)
+}
+.password-row button:hover{background:var(--ed-dark)}
+.password-error{min-height:20px;margin:9px 0 0!important;color:var(--ed-dark)!important;font-size:13px}
+@media (max-width:480px){
+  .password-card{padding:24px 20px}
+  .password-row{display:grid}
+  .password-row button{width:100%}
+}
+
 </style>
 <!-- KaTeX för matematikrendering -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
 </head>
-<body>
+<body class="password-locked">
+
+<section class="password-gate" id="passwordGate" aria-labelledby="passwordTitle">
+  <form class="password-card" id="passwordForm">
+    <div class="password-brand">
+      <img src="logo.png" alt="Erik Dahlbergsgymnasiet">
+      <div class="password-brand-text">
+        <span class="password-brand-title">Erik Dahlbergsgymnasiets uppgiftsbank</span>
+        <span class="password-brand-subtitle">Fysik 1–2 · Matematik nivå 1–2 · Fortsättning nivå 1–2 · Fördjupning nivå 1</span>
+      </div>
+    </div>
+    <h1 id="passwordTitle">Ange lösenord</h1>
+    <p>Skriv lösenordet för att öppna uppgiftsbanken.</p>
+    <label for="passwordInput">Lösenord</label>
+    <div class="password-row">
+      <input id="passwordInput" name="password" type="password" autocomplete="current-password" required autofocus>
+      <button type="submit">Öppna sidan</button>
+    </div>
+    <p class="password-error" id="passwordError" role="alert" aria-live="polite"></p>
+  </form>
+</section>
+
+<script>
+(() => {
+  const SESSION_KEY = 'ed-uppgiftsbank-auth-v1';
+  const PASSWORD_HASH = 'e745af8533088ae5a3fd104c17f2d4434e51c0372c1f0b95910f6506814bbfed';
+  const gate = document.getElementById('passwordGate');
+  const form = document.getElementById('passwordForm');
+  const input = document.getElementById('passwordInput');
+  const error = document.getElementById('passwordError');
+
+  function arUpplast(){
+    try{return sessionStorage.getItem(SESSION_KEY)==='1'}catch{return false}
+  }
+  function markeraUpplast(){
+    try{sessionStorage.setItem(SESSION_KEY,'1')}catch{}
+  }
+  function oppnaSidan(){
+    document.body.classList.remove('password-locked');
+    gate.hidden = true;
+  }
+  async function sha256(text){
+    const data = new TextEncoder().encode(text.normalize('NFC'));
+    const digest = await crypto.subtle.digest('SHA-256',data);
+    return Array.from(new Uint8Array(digest),byte => byte.toString(16).padStart(2,'0')).join('');
+  }
+
+  if(arUpplast()){
+    oppnaSidan();
+    return;
+  }
+
+  form.addEventListener('submit',async event => {
+    event.preventDefault();
+    error.textContent = '';
+    try{
+      if(await sha256(input.value)===PASSWORD_HASH){
+        markeraUpplast();
+        oppnaSidan();
+      }else{
+        input.value = '';
+        error.textContent = 'Fel lösenord. Försök igen.';
+        input.focus();
+      }
+    }catch{
+      error.textContent = 'Lösenordskontrollen kunde inte starta i den här webbläsaren.';
+    }
+  });
+})();
+</script>
 
 <!-- ═══ kursväljaren ═══
      Kurserna definieras i KURSER längst ned i skriptet. Varje kurs har sina
@@ -1796,10 +1905,14 @@ $('#kvKort').addEventListener('click',e=>{
   const kurs=KURSER.find(x=>x.id===kort.dataset.kurs);
   if(kurs)väljKurs(kurs,kort);
 });
+const BANK_VERSION='2026-08-27-2115';
 function laddaSkript(src){
   return new Promise((ok,fel)=>{
     const s=document.createElement('script');
-    s.src=src; s.onload=()=>ok(); s.onerror=()=>fel(new Error(src));
+    /* Versionsparametern hindrar webbläsaren/GitHub Pages från att återanvända
+       en gammal struktur- eller uppgiftsfil efter en ny commit. */
+    s.src=src+(src.includes('?')?'&':'?')+'v='+encodeURIComponent(BANK_VERSION);
+    s.onload=()=>ok(); s.onerror=()=>fel(new Error(src));
     document.head.appendChild(s);
   });
 }
@@ -1810,7 +1923,13 @@ function hämtaGlobal(namn){
 }
 async function väljKurs(kurs,kort){
   $('#kvFel').hidden=true;
-  if(kurs.data){ startaKurs(kurs); return; }
+
+  /* Om kursen redan är inläst ska inget laddningssteg göras om. */
+  if(kurs.data){
+    startaKurs(kurs);
+    return;
+  }
+
   kort.classList.add('laddar');
   let status=kort.querySelector('.kk-status');
   if(!status){
@@ -1819,6 +1938,11 @@ async function väljKurs(kurs,kort){
     kort.querySelector('.kk-fot').prepend(status);
   }
   status.textContent='Läser in…';
+
+  /* Här fångas ENDAST fel vid filinläsningen. Kursstarten ligger avsiktligt
+     utanför try-blocket, så ett fel i bankvyn aldrig kan feltolkas som att
+     filerna saknas eller lämna användaren kvar på ett kort som bara säger
+     ”uppgifter redo”. */
   try{
     for(const f of kurs.filer) await laddaSkript(f);
     const bank=hämtaGlobal(kurs.globaler.bank);
@@ -1829,19 +1953,22 @@ async function väljKurs(kurs,kort){
     const grupp=kurs.globaler.grupp?hämtaGlobal(kurs.globaler.grupp):null;
     if(!Array.isArray(bank)||!kapnamn||!omr) throw new Error('data saknas');
     kurs.data={bank,kapnamn,kapnamnSpar:kapnamnSpar||null,omr,spar:spar||null,grupp:grupp||null};
-    startaKurs(kurs);
   }catch(e){
+    console.error('Kunde inte läsa in kursfilerna',e);
+    kort.classList.remove('laddar');
+    status.textContent='Kunde inte läsa in kursen';
     $('#kvFel').innerHTML=`<b>${kurs.titel} kunde inte läsas in.</b><br>
       Kontrollera att <code>${kurs.filer.join('</code> och <code>')}</code> ligger i samma mapp
-      som sidan, och att de sätter
-      <code>window.${kurs.globaler.bank}</code>,
-      <code>window.${kurs.globaler.kapnamn}</code> och
-      <code>window.${kurs.globaler.omr}</code>.`;
+      som sidan. Tekniskt fel: <code>${String(e?.message||e)}</code>`;
     $('#kvFel').hidden=false;
-  }finally{
-    kort.classList.remove('laddar');
-    ritaKursval();
+    return;
   }
+
+  /* Filinläsningen är klar. Rita INTE om kursväljaren här — gå direkt in i
+     banken. Detta är den viktiga skillnaden mot den tidigare versionen. */
+  kort.classList.remove('laddar');
+  status.textContent=`${kurs.data.bank.length} uppgifter redo`;
+  startaKurs(kurs);
 }
 function visaKursval(){
   AKTIV=null;
@@ -1857,23 +1984,33 @@ function visaKursval(){
 }
 function startaKurs(kurs){
   AKTIV=kurs; DB=kurs.data;
-  DB.bank.forEach(x=>{ if(!x.familj) x.familj=x.id.replace(/[a-z]$/,''); });
-  state.omr.clear(); state.blad=[]; state.sök='';
-  state.nivåer=new Set(['E','C','A']); state.sorteraNivå=false; state.visaPoäng=false;
-  state.spår=kurs.defaultSpår||(kurs.spår?.[0]?.id||null);
-  $('#sökfält').value=''; $('#visaPoäng').checked=false;
-  $('#sorteraKnapp').setAttribute('aria-pressed','false');
-  $('#sorteraLabel').textContent='Sortera: ID';
-  $$('.nivåfilter button').forEach(b=>b.setAttribute('aria-pressed','true'));
-  $('#slumpaAntal').value=12;
 
-  /* Byt vy direkt. Framför allt Fysik-bankerna är stora och om hela listan
-     byggs innan webbläsaren får måla ser klicket annars ut att inte fungera. */
+  /* Växla vy FÖRST. Om något oväntat fel finns i en enskild uppgift ska
+     användaren ändå lämna kursväljaren och få ett synligt fel inne i banken,
+     aldrig fastna på ett kort som säger ”redo”. */
   $('#kursval').hidden=true;
   document.querySelector('.top').hidden=false;
   document.querySelector('.arbetsyta').hidden=false;
   $('#lista').innerHTML='<div class="tomt"><h3>Läser in kursen…</h3><p>Uppgifterna förbereds.</p></div>';
   $('#träffar').textContent='';
+
+  try{
+    DB.bank.forEach(x=>{
+      if(!x.familj) x.familj=String(x.id??'').replace(/[a-z]$/,'');
+    });
+    state.omr.clear(); state.blad=[]; state.sök='';
+    state.nivåer=new Set(['E','C','A']); state.sorteraNivå=false; state.visaPoäng=false;
+    state.spår=kurs.defaultSpår||(kurs.spår?.[0]?.id||null);
+    $('#sökfält').value=''; $('#visaPoäng').checked=false;
+    $('#sorteraKnapp').setAttribute('aria-pressed','false');
+    $('#sorteraLabel').textContent='Sortera: ID';
+    $$('.nivåfilter button').forEach(b=>b.setAttribute('aria-pressed','true'));
+    $('#slumpaAntal').value=12;
+  }catch(err){
+    console.error('Fel vid initiering av kursen',err);
+    $('#lista').innerHTML=`<div class="tomt"><h3>Kursen kunde inte initieras</h3><p>${String(err?.message||err)}</p></div>`;
+    return;
+  }
 
   requestAnimationFrame(()=>{
     try{
