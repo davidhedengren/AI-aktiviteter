@@ -2328,8 +2328,9 @@ function körSlumpa(){
   const blandad=pool.slice().sort(()=>Math.random()-.5);
   const fam=new Set(), kand={E:[],C:[],A:[]};
   for(const x of blandad){
-    if(fam.has(x.familj))continue;
-    fam.add(x.familj);
+    const familj=x.familj||x.id;
+    if(fam.has(familj))continue;
+    fam.add(familj);
     if(kand[x.niva]) kand[x.niva].push(x);
   }
 
