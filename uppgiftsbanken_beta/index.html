@@ -1150,6 +1150,134 @@ table.data th{background:var(--sunken);font-weight:600}
   }
 }
 
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   STARTSIDA · kompakt, toppförankrad och ämnesindelad
+   Den här slutliga regeln ersätter tidigare vertikal centrering. Det gör
+   att rubrik och första kortraden aldrig hamnar ovanför viewporten när
+   antalet kurser växer.
+   ═══════════════════════════════════════════════════════════════════════ */
+.kursval{
+  display:block!important;
+  overflow-y:auto!important;
+  padding:clamp(24px,3.2vh,38px) clamp(24px,4vw,56px) 54px!important;
+}
+.kv-inner{
+  width:min(1180px,100%)!important;
+  min-height:0!important;
+  margin:0 auto!important;
+  display:block!important;
+}
+.kv-nav{
+  min-height:0!important;
+  margin:0 0 28px!important;
+  justify-content:flex-start!important;
+}
+.kv-brand{gap:18px!important}
+.kv-logo-shell{
+  width:68px!important;height:68px!important;border-radius:19px!important;
+}
+.kv-logo-shell img{width:61px!important;height:61px!important}
+.kv-brandname{
+  display:block!important;
+  font-size:clamp(27px,2.8vw,39px)!important;
+  line-height:1.02!important;
+  letter-spacing:-.045em!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+.kv-brandmeta{
+  display:block!important;
+  margin-top:7px!important;
+  font-size:10.5px!important;
+  letter-spacing:.11em!important;
+}
+.kv-kurssektion{width:100%!important}
+.kv-sektionstopp{margin:0 0 13px!important;padding:0 2px!important}
+.kv-sektionstopp{display:none!important}
+.kv-sektionstopp h2{font-size:9.5px!important;letter-spacing:.16em!important}
+.kv-kort{display:block!important}
+
+.kv-grupp{width:100%}
+.kv-grupp + .kv-grupp{
+  margin-top:34px;
+  padding-top:29px;
+  border-top:1px solid rgba(43,37,39,.09);
+}
+.kv-grupphuvud{
+  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  margin:0 2px 13px;
+}
+.kv-grupphuvud h3{
+  margin:0;font-size:16px;line-height:1.2;font-weight:750;
+  letter-spacing:-.025em;color:#2B2527;
+}
+.kv-grupphuvud span{
+  font-family:var(--mono);font-size:9px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);
+}
+.kv-kortgrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:24px;
+}
+
+.kurskort{
+  min-height:198px!important;
+  padding:17px 18px 15px 24px!important;
+  border-radius:20px!important;
+}
+.kk-top{align-items:center!important;gap:12px!important}
+.kk-index{font-size:8.5px!important;letter-spacing:.12em!important}
+.kk-index::before{width:7px!important;height:7px!important;box-shadow:0 0 0 3px color-mix(in oklab,var(--acc) 10%,transparent)!important}
+.kk-number{font-size:34px!important;line-height:.82!important}
+.kk-namn{
+  margin:14px 0 0!important;
+  font-size:22px!important;
+  line-height:1.04!important;
+  letter-spacing:-.038em!important;
+}
+.kk-taggar{margin-top:11px!important;gap:5px!important;max-width:100%!important}
+.kk-tag{
+  min-height:22px!important;
+  padding:3px 7px!important;
+  font-size:7.9px!important;
+  line-height:1.2!important;
+}
+.kk-fot{
+  min-height:36px!important;
+  margin-top:auto!important;
+  padding-top:9px!important;
+}
+.kk-status{font-size:10px!important}
+.kk-action{
+  width:34px!important;height:34px!important;flex:0 0 34px!important;
+}
+.kk-action svg{width:17px!important;height:17px!important}
+.kk-byggstamp{
+  right:14px!important;top:48px!important;
+  padding:4px 7px 3px!important;
+  font-size:7.5px!important;
+  transform:rotate(4deg)!important;
+}
+
+@media(max-width:920px){
+  .kv-kortgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+}
+@media(max-width:620px){
+  .kursval{padding:20px 18px 40px!important}
+  .kv-nav{margin-bottom:24px!important}
+  .kv-logo-shell{width:58px!important;height:58px!important;border-radius:16px!important}
+  .kv-logo-shell img{width:52px!important;height:52px!important}
+  .kv-brand{gap:14px!important}
+  .kv-brandname{font-size:clamp(22px,7vw,29px)!important}
+  .kv-kortgrid{grid-template-columns:1fr;gap:14px}
+  .kv-grupp + .kv-grupp{margin-top:28px;padding-top:24px}
+  .kurskort{min-height:0!important;padding:18px 18px 16px 24px!important}
+  .kk-namn{font-size:21px!important}
+}
 </style>
 <!-- KaTeX för matematikrendering -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
@@ -1462,9 +1590,9 @@ const KURSER=[
       {id:'2c',etikett:'2c',färg:'#2C62A8'}
     ],
     defaultSpår:'2c',
-    taggar:['Ekvationssystem och algebra','Andragradsfunktioner','Statistik och normalfördelning','Logik, bevis och geometri','Modellering och problemlösning'],
+    taggar:['Algebra','Algebra och icke-linjära modeller','Statistik','Geometri'],
     filer:['strukturma2.js','uppgifterma2.js'],
-    globaler:{bank:'BANKMA2',kapnamn:'KAPNAMNMA2',omr:'OMRMA2',spar:'SPARMA2'}
+    globaler:{bank:'BANKMA2',kapnamn:'KAPNAMNMA2',kapnamnSpar:'KAPNAMNMA2SPAR',omr:'OMRMA2',spar:'SPARMA2'}
   },
   {
     id:'mato1', underUppbyggnad:true, titel:'Matematik – fortsättning nivå 1', siffra:'1', färg:'#2C62A8',
@@ -1520,6 +1648,10 @@ function hörTillSpår(x,spår=aktivtSpår()){
   return x.kurs.includes(spår);
 }
 function variantBank(){ return DB.bank.filter(x=>hörTillSpår(x)); }
+function kapitelNamn(k){
+  const sp=aktivtSpår();
+  return (sp&&DB.kapnamnSpar?.[sp]?.[k]) || DB.kapnamn?.[k] || ('Kapitel '+k);
+}
 function områdeSynligtFörSpår(k,o){
   const spår=aktivtSpår();
   if(!spår) return true;
@@ -1601,7 +1733,7 @@ function LOS(html){
 
 /* ═══ kursväljaren ═══ */
 function ritaKursval(){
-  $('#kvKort').innerHTML=KURSER.map(k=>`
+  const kortHTML=k=>`
     <button class="kurskort" type="button" data-kurs="${k.id}" data-ready="${!!k.data}" aria-label="Öppna ${k.titel}" style="--acc:${k.färg||'#B43123'};--rygg:${k.rygg||k.färg||'#B43123'}">
       <span class="kk-rygg" aria-hidden="true"></span>
       ${k.underUppbyggnad?`<span class="kk-byggstamp" aria-label="Under uppbyggnad">Under uppbyggnad</span>`:''}
@@ -1619,7 +1751,21 @@ function ritaKursval(){
           </svg>
         </span>
       </span>
-    </button>`).join('');
+    </button>`;
+
+  const grupper=[
+    {namn:'Fysik',kurser:KURSER.filter(k=>k.id.startsWith('fy'))},
+    {namn:'Matematik',kurser:KURSER.filter(k=>!k.id.startsWith('fy'))}
+  ].filter(g=>g.kurser.length);
+
+  $('#kvKort').innerHTML=grupper.map(g=>`
+    <section class="kv-grupp" aria-label="${g.namn}">
+      <div class="kv-grupphuvud">
+        <h3>${g.namn}</h3>
+        <span>${g.kurser.length} ${g.kurser.length===1?'kurs':'kurser'}</span>
+      </div>
+      <div class="kv-kortgrid">${g.kurser.map(kortHTML).join('')}</div>
+    </section>`).join('');
 
   $$('.kurskort').forEach(kort=>{
     kort.addEventListener('pointermove',e=>{
@@ -1659,8 +1805,9 @@ async function väljKurs(kurs,kort){
     const kapnamn=hämtaGlobal(kurs.globaler.kapnamn);
     const omr=hämtaGlobal(kurs.globaler.omr);
     const spar=kurs.globaler.spar?hämtaGlobal(kurs.globaler.spar):null;
+    const kapnamnSpar=kurs.globaler.kapnamnSpar?hämtaGlobal(kurs.globaler.kapnamnSpar):null;
     if(!Array.isArray(bank)||!kapnamn||!omr) throw new Error('data saknas');
-    kurs.data={bank,kapnamn,omr,spar:spar||null};
+    kurs.data={bank,kapnamn,kapnamnSpar:kapnamnSpar||null,omr,spar:spar||null};
     startaKurs(kurs);
   }catch(e){
     $('#kvFel').innerHTML=`<b>${kurs.titel} kunde inte läsas in.</b><br>
@@ -1717,7 +1864,7 @@ function byggTräd(){
     return `<div class="kapgrupp" data-kap="${k}">
       <button class="kaprad" data-fäll="${k}">
         <svg class="pil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-        <span class="nr">${k}</span><span>${DB.kapnamn[k]||('Kapitel '+k)}</span>
+        <span class="nr">${k}</span><span>${kapitelNamn(k)}</span>
         <span class="antal">${kapAntal}</span>
       </button>
       <div class="omrlista">${omrs.map(o=>{

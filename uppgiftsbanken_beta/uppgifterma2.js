@@ -1,40 +1,40 @@
-/* uppgifterma2.js — startuppgifter: en uppgift per delområde för att göra strukturen synlig.
-   Dessa är avsiktligt enkla demonstrationsuppgifter medan kursbanken byggs ut. */
+/* uppgifterma2.js — startuppgifter för den boknära Matematik nivå 2-strukturen.
+   En enkel E-uppgift per synligt delområde; banken är fortfarande under uppbyggnad. */
 window.BANKMA2 = [
   {
     "id": "1.01",
     "kap": 1,
-    "omr": "rata_linjens_ekvation",
+    "omr": "negativa_tal_prioritering",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Bestäm \\(k\\) och \\(m\\) för linjen \\(y=3x-5\\).</p>",
-    "s": "<p><strong>\\(k=3\\)</strong> och <strong>\\(m=-5\\)</strong>.</p>",
+    "t": "<p>Beräkna \\(-3+2\\cdot5\\).</p>",
+    "s": "<p>Multiplikation först: \\(2\\cdot5=10\\). Då blir \\(-3+10=\\)<strong>7</strong>.</p>",
     "kurs": [
-      "2a"
+      "2b",
+      "2c"
     ]
   },
   {
     "id": "1.02",
     "kap": 1,
-    "omr": "bestamma_linjara_funktioner",
+    "omr": "brakraking",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En linje går genom punkterna \\((1,4)\\) och \\((3,10)\\). Bestäm linjens ekvation.</p>",
-    "s": "<p>\\(k=(10-4)/(3-1)=3\\). Med \\(4=3\\cdot1+m\\) fås \\(m=1\\). <strong>\\(y=3x+1\\)</strong>.</p>",
+    "t": "<p>Beräkna \\(\\frac34+\\frac18\\).</p>",
+    "s": "<p>\\(\\frac34=\\frac68\\), alltså \\(\\frac68+\\frac18=\\)<strong>\\(\\frac78\\)</strong>.</p>",
     "kurs": [
-      "2a"
+      "2b"
     ]
   },
   {
     "id": "1.03",
     "kap": 1,
-    "omr": "linjara_ekvationssystem",
+    "omr": "algebraiska_uttryck",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Lös ekvationssystemet \\(x+y=7\\) och \\(x-y=1\\).</p>",
-    "s": "<p>Adderar man ekvationerna fås \\(2x=8\\), alltså \\(x=4\\). Då är \\(y=3\\). <strong>\\((x,y)=(4,3)\\)</strong>.</p>",
+    "t": "<p>Förenkla \\(4x+7-2x+3\\).</p>",
+    "s": "<p>Samla liknande termer: <strong>\\(2x+10\\)</strong>.</p>",
     "kurs": [
-      "2a",
       "2b",
       "2c"
     ]
@@ -42,23 +42,36 @@ window.BANKMA2 = [
   {
     "id": "1.04",
     "kap": 1,
-    "omr": "potensfunktioner",
+    "omr": "ekvationer",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Funktionen är \\(f(x)=2x^3\\). Beräkna \\(f(2)\\).</p>",
-    "s": "<p>\\(f(2)=2\\cdot2^3=16\\). <strong>16</strong>.</p>",
+    "t": "<p>Lös ekvationen \\(5x-7=18\\).</p>",
+    "s": "<p>\\(5x=25\\), alltså <strong>\\(x=5\\)</strong>.</p>",
     "kurs": [
-      "2a"
+      "2b",
+      "2c"
     ]
   },
   {
     "id": "1.05",
     "kap": 1,
-    "omr": "potensekvationer",
+    "omr": "ekvationer_digitala_verktyg",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Lös ekvationen \\(x^3=125\\).</p>",
-    "s": "<p><strong>\\(x=5\\)</strong> eftersom \\(5^3=125\\).</p>",
+    "t": "<p>Använd ett digitalt verktyg för att lösa \\(3^x=20\\). Ange svaret med två decimaler.</p>",
+    "s": "<p><strong>\\(x\\approx2{,}73\\)</strong>.</p>",
+    "kurs": [
+      "2b"
+    ]
+  },
+  {
+    "id": "1.06",
+    "kap": 1,
+    "omr": "rata_linjens_ekvation",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm \\(k\\) och \\(m\\) i \\(y=-2x+5\\).</p>",
+    "s": "<p><strong>\\(k=-2\\)</strong> och <strong>\\(m=5\\)</strong>.</p>",
     "kurs": [
       "2a",
       "2b",
@@ -66,9 +79,461 @@ window.BANKMA2 = [
     ]
   },
   {
-    "id": "1.06",
+    "id": "1.07",
     "kap": 1,
-    "omr": "logaritmer",
+    "omr": "linjara_representationer",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Funktionen \\(y=3x+2\\). Vilket värde får \\(y\\) när \\(x=4\\)?</p>",
+    "s": "<p>\\(y=3\\cdot4+2=\\)<strong>14</strong>.</p>",
+    "kurs": [
+      "2b"
+    ]
+  },
+  {
+    "id": "1.08",
+    "kap": 1,
+    "omr": "bestamma_linjara_funktioner",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En linje går genom \\((0,2)\\) och \\((3,8)\\). Bestäm linjens ekvation.</p>",
+    "s": "<p>\\(k=(8-2)/3=2\\) och \\(m=2\\). <strong>\\(y=2x+2\\)</strong>.</p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "1.09",
+    "kap": 1,
+    "omr": "linjar_regression",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Punkterna \\((1,3)\\), \\((2,5)\\) och \\((3,7)\\) ligger på en rät linje. Bestäm regressionslinjen.</p>",
+    "s": "<p>Punkterna följer exakt <strong>\\(y=2x+1\\)</strong>.</p>",
+    "kurs": [
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "1.10",
+    "kap": 1,
+    "omr": "korrelation_koefficient",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Ett datamaterial har korrelationskoefficienten \\(r=-0{,}94\\). Beskriv sambandet.</p>",
+    "s": "<p>Det finns ett <strong>starkt negativt linjärt samband</strong>.</p>",
+    "kurs": [
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "1.11",
+    "kap": 1,
+    "omr": "linjara_ekvationssystem",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös systemet \\(x+y=9\\) och \\(x-y=3\\).</p>",
+    "s": "<p>Adderar man ekvationerna fås \\(2x=12\\), alltså \\(x=6\\) och \\(y=3\\). <strong>\\((6,3)\\)</strong>.</p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "1.12",
+    "kap": 1,
+    "omr": "substitutionsmetoden",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös med substitution: \\(y=2x+1\\) och \\(x+y=10\\).</p>",
+    "s": "<p>\\(x+2x+1=10\\Rightarrow x=3\\). Då \\(y=7\\). <strong>\\((3,7)\\)</strong>.</p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "1.13",
+    "kap": 1,
+    "omr": "additionsmetoden",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös med additionsmetoden: \\(2x+y=11\\) och \\(2x-y=5\\).</p>",
+    "s": "<p>Addering ger \\(4x=16\\Rightarrow x=4\\), och då \\(y=3\\). <strong>\\((4,3)\\)</strong>.</p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "1.14",
+    "kap": 1,
+    "omr": "ekvationssystem_tre_obekanta",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös systemet \\(x+y+z=6\\), \\(x=1\\) och \\(y=2\\).</p>",
+    "s": "<p>\\(1+2+z=6\\Rightarrow\\) <strong>\\(z=3\\)</strong>. Lösningen är \\((1,2,3)\\).</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "1.15",
+    "kap": 1,
+    "omr": "speciella_ekvationssystem",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Hur många lösningar har systemet \\(y=2x+1\\) och \\(y=2x-3\\)?</p>",
+    "s": "<p>Linjerna har samma lutning men olika \\(m\\)-värden och är parallella. <strong>Ingen lösning.</strong></p>",
+    "kurs": [
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "1.16",
+    "kap": 1,
+    "omr": "ekvationssystem_tillampningar",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Två tal har summan 20 och differensen 4. Bestäm talen.</p>",
+    "s": "<p>\\(x+y=20\\), \\(x-y=4\\). Då \\(2x=24\\Rightarrow x=12\\) och \\(y=8\\). <strong>12 och 8.</strong></p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "1.17",
+    "kap": 1,
+    "omr": "programmering_numerisk_ekvationslosning",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En loop testar heltalen \\(x=0,1,2,\\ldots\\) tills \\(x^2\\ge25\\). Vilket värde blir det första som uppfyller villkoret?</p>",
+    "s": "<p><strong>\\(x=5\\)</strong>.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "1.18",
+    "kap": 1,
+    "omr": "multiplicera_parenteser",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Utveckla \\((x+2)(x+5)\\).</p>",
+    "s": "<p><strong>\\(x^2+7x+10\\)</strong>.</p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "1.19",
+    "kap": 1,
+    "omr": "konjugatregeln",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Förenkla \\((x+6)(x-6)\\).</p>",
+    "s": "<p>Med konjugatregeln: <strong>\\(x^2-36\\)</strong>.</p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "1.20",
+    "kap": 1,
+    "omr": "kvadreringsreglerna",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Utveckla \\((x+4)^2\\).</p>",
+    "s": "<p><strong>\\(x^2+8x+16\\)</strong>.</p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "1.21",
+    "kap": 1,
+    "omr": "faktorisering",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Faktorisera \\(x^2+5x\\).</p>",
+    "s": "<p>Bryt ut \\(x\\): <strong>\\(x(x+5)\\)</strong>.</p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "2.01",
+    "kap": 2,
+    "omr": "enkla_andragradsekvationer",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös \\(x^2=49\\).</p>",
+    "s": "<p><strong>\\(x=7\\)</strong> eller <strong>\\(x=-7\\)</strong>.</p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "2.02",
+    "kap": 2,
+    "omr": "kvadratkomplettering",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Skriv \\(x^2+6x\\) som en kvadrat minus en konstant.</p>",
+    "s": "<p>\\(x^2+6x=(x+3)^2-9\\). <strong>\\((x+3)^2-9\\)</strong>.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "2.03",
+    "kap": 2,
+    "omr": "losningsformel_andragrad",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös \\(x^2-5x+6=0\\).</p>",
+    "s": "<p>Faktorisering ger \\((x-2)(x-3)=0\\). <strong>\\(x=2\\)</strong> eller <strong>\\(x=3\\)</strong>.</p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "2.04",
+    "kap": 2,
+    "omr": "mer_om_andragradsekvationer",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös \\(2x^2-8=0\\).</p>",
+    "s": "<p>\\(2x^2=8\\Rightarrow x^2=4\\). <strong>\\(x=\\pm2\\)</strong>.</p>",
+    "kurs": [
+      "2b"
+    ]
+  },
+  {
+    "id": "2.05",
+    "kap": 2,
+    "omr": "samband_roter_koefficienter",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Ekvationen \\(x^2-7x+12=0\\) har rötterna 3 och 4. Jämför rötternas summa med koefficienten framför \\(x\\).</p>",
+    "s": "<p>\\(3+4=7\\), vilket är motsatt tecken till \\(-7\\). <strong>Rotsumman är 7.</strong></p>",
+    "kurs": [
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "2.06",
+    "kap": 2,
+    "omr": "andragradsekvationer_tillampningar",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En rektangel har sidorna \\(x\\) och \\(x+2\\) och arean 48. Bestäm \\(x\\).</p>",
+    "s": "<p>\\(x(x+2)=48\\Rightarrow x^2+2x-48=0\\). Den positiva lösningen är <strong>\\(x=6\\)</strong>.</p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "2.07",
+    "kap": 2,
+    "omr": "programmering_andragrad",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Ett program använder diskriminanten \\(D=b^2-4ac\\). Beräkna \\(D\\) för \\(x^2-6x+5=0\\).</p>",
+    "s": "<p>\\(D=(-6)^2-4\\cdot1\\cdot5=36-20=\\)<strong>16</strong>.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "2.08",
+    "kap": 2,
+    "omr": "rotekvationer",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös \\(\\sqrt{x+1}=4\\).</p>",
+    "s": "<p>Kvadrera: \\(x+1=16\\). <strong>\\(x=15\\)</strong>.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "2.09",
+    "kap": 2,
+    "omr": "funktionsskrivsatt_rep",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Om \\(f(x)=2x+3\\), beräkna \\(f(4)\\).</p>",
+    "s": "<p>\\(f(4)=2\\cdot4+3=\\)<strong>11</strong>.</p>",
+    "kurs": [
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "2.10",
+    "kap": 2,
+    "omr": "andragradsfunktioner",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Är \\(f(x)=3x^2-2x+1\\) en andragradsfunktion? Motivera kort.</p>",
+    "s": "<p><strong>Ja.</strong> Högsta exponenten på \\(x\\) är 2 och koefficienten framför \\(x^2\\) är inte noll.</p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "2.11",
+    "kap": 2,
+    "omr": "andragradsfunktion_graf",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>För \\(f(x)=x^2\\), ange punkten på grafen när \\(x=-3\\).</p>",
+    "s": "<p>\\(f(-3)=9\\). Punkten är <strong>\\((-3,9)\\)</strong>.</p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "2.12",
+    "kap": 2,
+    "omr": "symmetrilinje_extrempunkt",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm symmetrilinjen för \\(f(x)=(x-2)^2+5\\).</p>",
+    "s": "<p><strong>\\(x=2\\)</strong>. Funktionens minimipunkt är \\((2,5)\\).</p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "2.13",
+    "kap": 2,
+    "omr": "fran_graf_till_formel",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En parabel har nollställena \\(x=1\\) och \\(x=4\\) och går genom \\((0,4)\\). Bestäm en formel.</p>",
+    "s": "<p>\\(f(x)=a(x-1)(x-4)\\). Vid \\(x=0\\): \\(4=4a\\Rightarrow a=1\\). <strong>\\(f(x)=(x-1)(x-4)\\)</strong>.</p>",
+    "kurs": [
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "2.14",
+    "kap": 2,
+    "omr": "andragradsfunktioner_tillampningar",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Höjden ges av \\(h(t)=-5t^2+20t\\). När är höjden som störst?</p>",
+    "s": "<p>Symmetrilinjen är \\(t=-b/(2a)=-20/(2\\cdot-5)=\\)<strong>2 s</strong>.</p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "2.15",
+    "kap": 2,
+    "omr": "potensregler",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Förenkla \\(x^3\\cdot x^5\\).</p>",
+    "s": "<p><strong>\\(x^8\\)</strong>.</p>",
+    "kurs": [
+      "2a",
+      "2b"
+    ]
+  },
+  {
+    "id": "2.16",
+    "kap": 2,
+    "omr": "potensfunktioner",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna \\(f(3)\\) för \\(f(x)=2x^2\\).</p>",
+    "s": "<p>\\(2\\cdot3^2=\\)<strong>18</strong>.</p>",
+    "kurs": [
+      "2a"
+    ]
+  },
+  {
+    "id": "2.17",
+    "kap": 2,
+    "omr": "potensekvationer",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös \\(x^3=64\\).</p>",
+    "s": "<p><strong>\\(x=4\\)</strong>.</p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "2.18",
+    "kap": 2,
+    "omr": "exponentialfunktioner",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Beräkna \\(f(3)\\) för \\(f(x)=5\\cdot2^x\\).</p>",
+    "s": "<p>\\(5\\cdot2^3=\\)<strong>40</strong>.</p>",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "2.19",
+    "kap": 2,
+    "omr": "exponentialgraf",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Funktionen \\(f(x)=2^x\\). Vilken punkt skär grafen \\(y\\)-axeln i?</p>",
+    "s": "<p>Vid \\(x=0\\) är \\(f(0)=1\\). <strong>\\((0,1)\\)</strong>.</p>",
+    "kurs": [
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "2.20",
+    "kap": 2,
+    "omr": "logaritmbegreppet",
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Beräkna \\(\\log_{10}(1000)\\).</p>",
@@ -79,13 +544,26 @@ window.BANKMA2 = [
     ]
   },
   {
-    "id": "1.07",
-    "kap": 1,
+    "id": "2.21",
+    "kap": 2,
+    "omr": "logaritmlagar",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Förenkla \\(\\log a+\\log b\\).</p>",
+    "s": "<p><strong>\\(\\log(ab)\\)</strong>.</p>",
+    "kurs": [
+      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "2.22",
+    "kap": 2,
     "omr": "exponentialekvationer",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Lös ekvationen \\(2^x=16\\).</p>",
-    "s": "<p><strong>\\(x=4\\)</strong> eftersom \\(2^4=16\\).</p>",
+    "t": "<p>Lös \\(2^x=32\\).</p>",
+    "s": "<p><strong>\\(x=5\\)</strong>.</p>",
     "kurs": [
       "2a",
       "2b",
@@ -93,219 +571,39 @@ window.BANKMA2 = [
     ]
   },
   {
-    "id": "1.08",
-    "kap": 1,
+    "id": "2.23",
+    "kap": 2,
     "omr": "jamfora_exponential_potens",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Vilken av funktionerna \\(f(x)=2^x\\) och \\(g(x)=x^2\\) är en exponentialfunktion?</p>",
-    "s": "<p><strong>\\(f(x)=2^x\\)</strong> är exponentialfunktionen. I en exponentialfunktion finns variabeln i exponenten.</p>",
+    "t": "<p>Vilken är en potensekvation: \\(x^3=27\\) eller \\(3^x=27\\)?</p>",
+    "s": "<p><strong>\\(x^3=27\\)</strong> är potensekvationen. \\(3^x=27\\) är en exponentialekvation.</p>",
     "kurs": [
       "2b",
       "2c"
     ]
   },
   {
-    "id": "1.09",
-    "kap": 1,
-    "omr": "konjugatregeln",
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Förenkla \\((x+4)(x-4)\\) med konjugatregeln.</p>",
-    "s": "<p>\\((x+4)(x-4)=x^2-16\\). <strong>\\(x^2-16\\)</strong>.</p>",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ]
-  },
-  {
-    "id": "1.10",
-    "kap": 1,
-    "omr": "kvadreringsreglerna",
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Utveckla \\((x+3)^2\\).</p>",
-    "s": "<p>\\((x+3)^2=x^2+6x+9\\). <strong>\\(x^2+6x+9\\)</strong>.</p>",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ]
-  },
-  {
-    "id": "1.11",
-    "kap": 1,
-    "omr": "andragradsfunktioner",
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Är \\(f(x)=2x^2-3x+1\\) en andragradsfunktion? Motivera kort.</p>",
-    "s": "<p><strong>Ja.</strong> Högsta exponenten för \\(x\\) är 2 och koefficienten framför \\(x^2\\) är skild från noll.</p>",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ]
-  },
-  {
-    "id": "1.12",
-    "kap": 1,
-    "omr": "symmetrilinje_extrempunkt",
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Bestäm symmetrilinjen för \\(f(x)=x^2-6x+5\\).</p>",
-    "s": "<p>\\(x=-b/(2a)=6/2=3\\). <strong>Symmetrilinjen är \\(x=3\\).</strong></p>",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ]
-  },
-  {
-    "id": "1.13",
-    "kap": 1,
-    "omr": "nollstallen",
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Bestäm nollställena till \\(f(x)=x^2-9\\).</p>",
-    "s": "<p>\\(x^2=9\\). <strong>\\(x=-3\\) och \\(x=3\\)</strong>.</p>",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ]
-  },
-  {
-    "id": "1.14",
-    "kap": 1,
-    "omr": "andragradsekvationer",
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Lös \\(x^2-5x+6=0\\).</p>",
-    "s": "<p>\\((x-2)(x-3)=0\\). <strong>\\(x=2\\) eller \\(x=3\\)</strong>.</p>",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ]
-  },
-  {
-    "id": "1.15",
-    "kap": 1,
-    "omr": "rotekvationer",
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Lös \\(\\sqrt{x+1}=4\\).</p>",
-    "s": "<p>Kvadrera båda leden: \\(x+1=16\\). <strong>\\(x=15\\)</strong>.</p>",
-    "kurs": [
-      "2c"
-    ]
-  },
-  {
-    "id": "2.01",
+    "id": "2.24",
     "kap": 2,
-    "omr": "lagesmatt",
+    "omr": "regressionsanalys_olika_modeller",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Talen är 2, 4, 4, 7 och 8. Bestäm medianen.</p>",
-    "s": "<p>Det mittersta talet är <strong>4</strong>.</p>",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ]
-  },
-  {
-    "id": "2.02",
-    "kap": 2,
-    "omr": "spridningsmatt",
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Talen är 3, 5, 8 och 11. Bestäm variationsbredden.</p>",
-    "s": "<p>\\(11-3=8\\). <strong>Variationsbredden är 8.</strong></p>",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ]
-  },
-  {
-    "id": "2.03",
-    "kap": 2,
-    "omr": "percentiler",
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>I ett sorterat material ligger värdet 72 vid 90:e percentilen. Vad betyder det?</p>",
-    "s": "<p>Ungefär <strong>90 % av observationerna är högst 72</strong> och ungefär 10 % är större.</p>",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ]
-  },
-  {
-    "id": "2.04",
-    "kap": 2,
-    "omr": "standardavvikelse",
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Två datamängder har samma medelvärde. Den ena har standardavvikelsen 2 och den andra 9. Vilken är mest utspridd?</p>",
-    "s": "<p>Datamängden med standardavvikelsen <strong>9</strong> är mest utspridd.</p>",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ]
-  },
-  {
-    "id": "2.05",
-    "kap": 2,
-    "omr": "normalfordelning",
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>I en normalfördelning är medelvärdet 50. Var ligger fördelningens symmetriaxel?</p>",
-    "s": "<p>Vid <strong>\\(x=50\\)</strong>.</p>",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ]
-  },
-  {
-    "id": "2.06",
-    "kap": 2,
-    "omr": "normalfordelning_berakningar",
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En normalfördelad variabel har \\(\\mu=100\\) och \\(\\sigma=10\\). Ange intervallet en standardavvikelse från medelvärdet.</p>",
-    "s": "<p><strong>90 till 110</strong>.</p>",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ]
-  },
-  {
-    "id": "2.07",
-    "kap": 2,
-    "omr": "regressionsanalys",
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Ett spridningsdiagram visar ett ungefär linjärt samband. Vilken typ av regressionsmodell är då naturlig att börja med?</p>",
-    "s": "<p>En <strong>linjär regressionsmodell</strong>.</p>",
+    "t": "<p>Data växer med ungefär samma procent varje år. Vilken modelltyp är oftast lämplig: linjär eller exponentiell?</p>",
+    "s": "<p><strong>Exponentiell modell</strong>, eftersom en ungefär konstant procentuell förändring motsvarar en konstant förändringsfaktor.</p>",
     "kurs": [
       "2b",
       "2c"
     ]
   },
   {
-    "id": "2.08",
+    "id": "2.25",
     "kap": 2,
-    "omr": "korrelationskoefficient",
+    "omr": "modellval_regression",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En undersökning ger korrelationskoefficienten \\(r=-0,93\\). Beskriv sambandet.</p>",
-    "s": "<p>Det finns ett <strong>starkt negativt linjärt samband</strong>.</p>",
+    "t": "<p>En regressionsmodell har \\(R^2=0{,}98\\). En annan har \\(R^2=0{,}61\\). Vilken passar datan bäst enligt \\(R^2\\)?</p>",
+    "s": "<p><strong>Modellen med \\(R^2=0{,}98\\)</strong>.</p>",
     "kurs": [
       "2b",
       "2c"
@@ -314,217 +612,465 @@ window.BANKMA2 = [
   {
     "id": "3.01",
     "kap": 3,
-    "omr": "implikation",
+    "omr": "lagesmatt",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Skriv med ord vad \\(x>5\\Rightarrow x>2\\) betyder.</p>",
-    "s": "<p><strong>Om \\(x>5\\), så är \\(x>2\\).</strong></p>",
+    "t": "<p>Bestäm medelvärdet av 4, 6, 6 och 8.</p>",
+    "s": "<p>\\((4+6+6+8)/4=\\)<strong>6</strong>.</p>",
     "kurs": [
-      "2b",
-      "2c"
+      "2a",
+      "2b"
     ]
   },
   {
     "id": "3.02",
     "kap": 3,
-    "omr": "ekvivalens",
+    "omr": "kvartiler_percentiler",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Är påståendena \\(x=4\\) och \\(2x=8\\) ekvivalenta?</p>",
-    "s": "<p><strong>Ja.</strong> De har exakt samma lösningsmängd.</p>",
+    "t": "<p>I ett sorterat material ligger 25 % av observationerna under första kvartilen. Vilken percentil motsvarar första kvartilen?</p>",
+    "s": "<p><strong>25:e percentilen.</strong></p>",
     "kurs": [
-      "2b",
-      "2c"
+      "2a",
+      "2b"
     ]
   },
   {
     "id": "3.03",
     "kap": 3,
-    "omr": "definition_sats_bevis",
+    "omr": "ladagram",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Vilket av orden definition, sats och bevis beskriver ett matematiskt påstående som kan visas vara sant?</p>",
-    "s": "<p>En <strong>sats</strong> är ett matematiskt påstående som kan bevisas.</p>",
+    "t": "<p>I ett lådagram är medianen 12 och övre kvartilen 17. Hur stor är sträckan mellan medianen och övre kvartilen?</p>",
+    "s": "<p><strong>5</strong>.</p>",
     "kurs": [
-      "2b",
-      "2c"
+      "2a",
+      "2b"
     ]
   },
   {
     "id": "3.04",
     "kap": 3,
-    "omr": "geometriska_satser",
+    "omr": "standardavvikelse",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Två parallella linjer skärs av en transversal. En alternatvinkel är \\(58^\\circ\\). Hur stor är den andra alternatvinkeln?</p>",
-    "s": "<p><strong>\\(58^\\circ\\)</strong>.</p>",
+    "t": "<p>Två grupper har samma medelvärde. Grupp A har standardavvikelsen 2 och grupp B 7. Vilken grupp har störst spridning?</p>",
+    "s": "<p><strong>Grupp B</strong>.</p>",
     "kurs": [
-      "2b",
-      "2c"
+      "2a",
+      "2b"
     ]
   },
   {
     "id": "3.05",
     "kap": 3,
-    "omr": "vinklar_likformighet",
+    "omr": "normalfordelat_material",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Två trianglar är likformiga. En sida 4 cm i den lilla motsvarar 10 cm i den stora. Bestäm skalfaktorn från liten till stor.</p>",
-    "s": "<p>\\(10/4=2,5\\). <strong>Skalfaktorn är 2,5.</strong></p>",
+    "t": "<p>Ett normalfördelat material har medelvärdet 100. Var ligger fördelningens symmetriaxel?</p>",
+    "s": "<p>Vid <strong>100</strong>.</p>",
     "kurs": [
-      "2b",
-      "2c"
+      "2a",
+      "2b"
     ]
   },
   {
     "id": "3.06",
     "kap": 3,
-    "omr": "pythagoras",
+    "omr": "normalfordelning_digitala_verktyg",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En rätvinklig triangel har kateterna 6 cm och 8 cm. Bestäm hypotenusan.</p>",
-    "s": "<p>\\(c=\\sqrt{6^2+8^2}=10\\). <strong>10 cm</strong>.</p>",
+    "t": "<p>Ett normalfördelat material har \\(\\mu=50\\) och \\(\\sigma=5\\). Ange intervallet \\(\\mu\\pm\\sigma\\).</p>",
+    "s": "<p><strong>45 till 55</strong>.</p>",
     "kurs": [
       "2a",
-      "2b",
-      "2c"
+      "2b"
     ]
   },
   {
     "id": "3.07",
     "kap": 3,
-    "omr": "pythagoras_koordinatsystem",
+    "omr": "geometriska_begrepp_definitioner",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Bestäm avståndet mellan \\((1,2)\\) och \\((4,6)\\).</p>",
-    "s": "<p>\\(\\sqrt{(4-1)^2+(6-2)^2}=\\sqrt{25}=5\\). <strong>5</strong>.</p>",
+    "t": "<p>Vad kallas två vinklar vars summa är \\(180^\\circ\\)?</p>",
+    "s": "<p><strong>Supplementvinklar.</strong></p>",
     "kurs": [
-      "2a",
-      "2b",
+      "2c"
+    ]
+  },
+  {
+    "id": "3.08",
+    "kap": 3,
+    "omr": "sats_bevis",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Vad är skillnaden mellan en matematisk sats och ett bevis?</p>",
+    "s": "<p>En <strong>sats</strong> är ett påstående; ett <strong>bevis</strong> visar logiskt varför satsen är sann.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "3.09",
+    "kap": 3,
+    "omr": "implikation_ekvivalens",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Är påståendet ”om \\(x=2\\), så är \\(x^2=4\\)” en implikation eller en ekvivalens?</p>",
+    "s": "<p>Det är en <strong>implikation</strong>.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "3.10",
+    "kap": 3,
+    "omr": "yttervinkelsatsen",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Två motstående inre vinklar i en triangel är \\(45^\\circ\\) och \\(70^\\circ\\). Bestäm yttervinkeln vid den tredje hörnpunkten.</p>",
+    "s": "<p>Yttervinkeln är summan av de två motstående inre vinklarna: <strong>\\(115^\\circ\\)</strong>.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "3.11",
+    "kap": 3,
+    "omr": "randvinkel_medelpunkt",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En medelpunktsvinkel över en båge är \\(100^\\circ\\). Hur stor är en randvinkel över samma båge?</p>",
+    "s": "<p><strong>\\(50^\\circ\\)</strong>.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "3.12",
+    "kap": 3,
+    "omr": "pythagoras",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En rätvinklig triangel har kateterna 6 cm och 8 cm. Bestäm hypotenusan.</p>",
+    "s": "<p>\\(c=\\sqrt{6^2+8^2}=\\sqrt{100}=\\)<strong>10 cm</strong>.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "3.13",
+    "kap": 3,
+    "omr": "likformighet",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Två likformiga trianglar har skalfaktorn 3. En sida i den mindre triangeln är 4 cm. Hur lång är motsvarande sida i den större?</p>",
+    "s": "<p><strong>12 cm</strong>.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "3.14",
+    "kap": 3,
+    "omr": "topptriangel_transversal",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En linje är parallell med en sida i en triangel och skär de två andra sidorna. Vilken viktig egenskap får den mindre triangeln?</p>",
+    "s": "<p>Den mindre triangeln är <strong>likformig</strong> med den stora.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "3.15",
+    "kap": 3,
+    "omr": "bevis_likformighet",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Två trianglar har två par lika stora vinklar. Vad kan du dra för slutsats?</p>",
+    "s": "<p>Trianglarna är <strong>likformiga</strong> enligt vinkel–vinkel.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "3.16",
+    "kap": 3,
+    "omr": "kordasatsen_biskarningssatsen",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Två kordor skär varandra. Den ena delas i längderna 2 och 6, den andra i 3 och \\(x\\). Bestäm \\(x\\).</p>",
+    "s": "<p>\\(2\\cdot6=3x\\Rightarrow\\) <strong>\\(x=4\\)</strong>.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "3.17",
+    "kap": 3,
+    "omr": "avstandsformeln_mittpunktsformeln",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm mittpunkten mellan \\((2,4)\\) och \\((8,10)\\).</p>",
+    "s": "<p>\\(((2+8)/2,(4+10)/2)=\\)<strong>\\((5,7)\\)</strong>.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "3.18",
+    "kap": 3,
+    "omr": "koordinatgeometri_problemlosning",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm avståndet mellan \\((0,0)\\) och \\((3,4)\\).</p>",
+    "s": "<p>\\(\\sqrt{3^2+4^2}=\\)<strong>5</strong>.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "3.19",
+    "kap": 3,
+    "omr": "programmering_avstandsformeln",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Ett program beräknar \\(\\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\\). Vad blir resultatet för punkterna \\((1,1)\\) och \\((4,5)\\)?</p>",
+    "s": "<p>\\(\\sqrt{3^2+4^2}=\\)<strong>5</strong>.</p>",
+    "kurs": [
       "2c"
     ]
   },
   {
     "id": "4.01",
     "kap": 4,
-    "omr": "digital_ekvationslosning",
+    "omr": "geometriska_begrepp_definitioner",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Använd ett digitalt verktyg för att lösa \\(x^2-2=0\\). Ange lösningarna med tre decimaler.</p>",
-    "s": "<p><strong>\\(x\\approx-1,414\\) och \\(x\\approx1,414\\)</strong>.</p>",
+    "t": "<p>Vad kallas två vinklar vars summa är \\(180^\\circ\\)?</p>",
+    "s": "<p><strong>Supplementvinklar.</strong></p>",
     "kurs": [
-      "2a",
-      "2b",
-      "2c"
+      "2b"
     ]
   },
   {
     "id": "4.02",
     "kap": 4,
-    "omr": "digitala_verktyg",
+    "omr": "sats_bevis",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Du vill snabbt rita graferna till två funktioner och hitta deras skärningspunkt. Nämn ett lämpligt digitalt arbetssätt.</p>",
-    "s": "<p>Rita båda funktionerna i ett <strong>grafritande digitalt verktyg</strong> och använd verktygets funktion för skärningspunkt.</p>",
+    "t": "<p>Vad är skillnaden mellan en matematisk sats och ett bevis?</p>",
+    "s": "<p>En <strong>sats</strong> är ett påstående; ett <strong>bevis</strong> visar logiskt varför satsen är sann.</p>",
     "kurs": [
-      "2a",
-      "2b",
-      "2c"
+      "2b"
     ]
   },
   {
     "id": "4.03",
     "kap": 4,
-    "omr": "programmering",
+    "omr": "implikation_ekvivalens",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Ett program ska beräkna summan \\(1+2+\\dots+100\\). Vilken typ av programmeringsstruktur är naturlig att använda?</p>",
-    "s": "<p>En <strong>loop</strong> som går igenom talen 1 till 100 och summerar dem.</p>",
+    "t": "<p>Är påståendet ”om \\(x=2\\), så är \\(x^2=4\\)” en implikation eller en ekvivalens?</p>",
+    "s": "<p>Det är en <strong>implikation</strong>.</p>",
     "kurs": [
-      "2c"
+      "2b"
     ]
   },
   {
     "id": "4.04",
     "kap": 4,
-    "omr": "problemlosning",
+    "omr": "yttervinkelsatsen",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En biograf säljer vuxenbiljetter för 140 kr och ungdomsbiljetter för 90 kr. Totalt säljs 20 biljetter för 2 300 kr. Ställ upp ett ekvationssystem som kan användas för att bestämma antalet av varje sort.</p>",
-    "s": "<p>Om \\(x\\) är vuxenbiljetter och \\(y\\) ungdomsbiljetter: <strong>\\(x+y=20\\)</strong> och <strong>\\(140x+90y=2300\\)</strong>.</p>",
+    "t": "<p>Två motstående inre vinklar i en triangel är \\(45^\\circ\\) och \\(70^\\circ\\). Bestäm yttervinkeln vid den tredje hörnpunkten.</p>",
+    "s": "<p>Yttervinkeln är summan av de två motstående inre vinklarna: <strong>\\(115^\\circ\\)</strong>.</p>",
     "kurs": [
-      "2a",
-      "2b",
-      "2c"
+      "2b"
     ]
   },
   {
     "id": "4.05",
     "kap": 4,
-    "omr": "modellering",
+    "omr": "randvinkel_medelpunkt",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En taxi tar 55 kr i startavgift och 18 kr per kilometer. Skriv en modell för kostnaden \\(K\\) efter \\(x\\) kilometer.</p>",
-    "s": "<p><strong>\\(K(x)=55+18x\\)</strong>.</p>",
+    "t": "<p>En medelpunktsvinkel över en båge är \\(100^\\circ\\). Hur stor är en randvinkel över samma båge?</p>",
+    "s": "<p><strong>\\(50^\\circ\\)</strong>.</p>",
     "kurs": [
-      "2a",
-      "2b",
-      "2c"
+      "2b"
     ]
   },
   {
     "id": "4.06",
     "kap": 4,
-    "omr": "modellers_begransningar",
+    "omr": "pythagoras",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En linjär modell för ett företags försäljning fungerar väl mellan år 2022 och 2026. Varför bör man vara försiktig med att använda den för år 2050?</p>",
-    "s": "<p>Det är en <strong>lång extrapolation</strong>. Sambandet kan förändras utanför det område där modellen anpassades.</p>",
+    "t": "<p>En rätvinklig triangel har kateterna 6 cm och 8 cm. Bestäm hypotenusan.</p>",
+    "s": "<p>\\(c=\\sqrt{6^2+8^2}=\\sqrt{100}=\\)<strong>10 cm</strong>.</p>",
     "kurs": [
       "2a",
-      "2b",
-      "2c"
+      "2b"
     ]
   },
   {
     "id": "4.07",
     "kap": 4,
-    "omr": "hallbar_utveckling",
+    "omr": "likformighet",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En skola minskar sin elanvändning från 120 MWh till 102 MWh per år. Hur stor är minskningen i procent?</p>",
-    "s": "<p>\\((120-102)/120=0,15\\). <strong>15 %</strong>.</p>",
+    "t": "<p>Två likformiga trianglar har skalfaktorn 3. En sida i den mindre triangeln är 4 cm. Hur lång är motsvarande sida i den större?</p>",
+    "s": "<p><strong>12 cm</strong>.</p>",
     "kurs": [
-      "2a",
-      "2b",
-      "2c"
+      "2b"
     ]
   },
   {
     "id": "4.08",
     "kap": 4,
-    "omr": "kritisk_granskning",
+    "omr": "topptriangel_transversal",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En annons säger: ”Risken halverades”, från 2 personer av 1000 till 1 person av 1000. Hur stor är den absoluta riskminskningen?</p>",
-    "s": "<p>\\(2/1000-1/1000=1/1000\\). <strong>0,1 procentenhet</strong>.</p>",
+    "t": "<p>En linje är parallell med en sida i en triangel och skär de två andra sidorna. Vilken viktig egenskap får den mindre triangeln?</p>",
+    "s": "<p>Den mindre triangeln är <strong>likformig</strong> med den stora.</p>",
     "kurs": [
-      "2a",
-      "2b",
-      "2c"
+      "2b"
     ]
   },
   {
     "id": "4.09",
     "kap": 4,
-    "omr": "matematikens_historia",
+    "omr": "bevis_likformighet",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Logaritmer utvecklades bland annat för att förenkla omfattande beräkningar. Vilken räkneoperation kan logaritmer omvandla till addition?</p>",
-    "s": "<p><strong>Multiplikation</strong>, eftersom \\(\\log(ab)=\\log a+\\log b\\).</p>",
+    "t": "<p>Två trianglar har två par lika stora vinklar. Vad kan du dra för slutsats?</p>",
+    "s": "<p>Trianglarna är <strong>likformiga</strong> enligt vinkel–vinkel.</p>",
+    "kurs": [
+      "2b"
+    ]
+  },
+  {
+    "id": "4.10",
+    "kap": 4,
+    "omr": "kordasatsen_biskarningssatsen",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Två kordor skär varandra. Den ena delas i längderna 2 och 6, den andra i 3 och \\(x\\). Bestäm \\(x\\).</p>",
+    "s": "<p>\\(2\\cdot6=3x\\Rightarrow\\) <strong>\\(x=4\\)</strong>.</p>",
+    "kurs": [
+      "2b"
+    ]
+  },
+  {
+    "id": "4.11",
+    "kap": 4,
+    "omr": "avstandsformeln_mittpunktsformeln",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm mittpunkten mellan \\((2,4)\\) och \\((8,10)\\).</p>",
+    "s": "<p>\\(((2+8)/2,(4+10)/2)=\\)<strong>\\((5,7)\\)</strong>.</p>",
     "kurs": [
       "2a",
-      "2b",
+      "2b"
+    ]
+  },
+  {
+    "id": "4.12",
+    "kap": 4,
+    "omr": "koordinatgeometri_problemlosning",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm avståndet mellan \\((0,0)\\) och \\((3,4)\\).</p>",
+    "s": "<p>\\(\\sqrt{3^2+4^2}=\\)<strong>5</strong>.</p>",
+    "kurs": [
+      "2a",
+      "2b"
+    ]
+  },
+  {
+    "id": "4.13",
+    "kap": 4,
+    "omr": "lagesmatt",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Bestäm medelvärdet av 4, 6, 6 och 8.</p>",
+    "s": "<p>\\((4+6+6+8)/4=\\)<strong>6</strong>.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "4.14",
+    "kap": 4,
+    "omr": "kvartiler_percentiler",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>I ett sorterat material ligger 25 % av observationerna under första kvartilen. Vilken percentil motsvarar första kvartilen?</p>",
+    "s": "<p><strong>25:e percentilen.</strong></p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "4.15",
+    "kap": 4,
+    "omr": "ladagram",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>I ett lådagram är medianen 12 och övre kvartilen 17. Hur stor är sträckan mellan medianen och övre kvartilen?</p>",
+    "s": "<p><strong>5</strong>.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "4.16",
+    "kap": 4,
+    "omr": "standardavvikelse",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Två grupper har samma medelvärde. Grupp A har standardavvikelsen 2 och grupp B 7. Vilken grupp har störst spridning?</p>",
+    "s": "<p><strong>Grupp B</strong>.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "4.17",
+    "kap": 4,
+    "omr": "programmering_medelvarde",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Listan är [2, 4, 6]. Ett program ökar varje tal med 3. Vad blir det nya medelvärdet?</p>",
+    "s": "<p>Den nya listan är [5, 7, 9] och medelvärdet blir <strong>7</strong>.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "4.18",
+    "kap": 4,
+    "omr": "normalfordelat_material",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Ett normalfördelat material har medelvärdet 100. Var ligger fördelningens symmetriaxel?</p>",
+    "s": "<p>Vid <strong>100</strong>.</p>",
+    "kurs": [
+      "2c"
+    ]
+  },
+  {
+    "id": "4.19",
+    "kap": 4,
+    "omr": "normalfordelning_digitala_verktyg",
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Ett normalfördelat material har \\(\\mu=50\\) och \\(\\sigma=5\\). Ange intervallet \\(\\mu\\pm\\sigma\\).</p>",
+    "s": "<p><strong>45 till 55</strong>.</p>",
+    "kurs": [
       "2c"
     ]
   },
@@ -534,8 +1080,8 @@ window.BANKMA2 = [
     "omr": "yrkesspecifika_begrepp_metoder",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En yrkesritning använder skalan 1:50. En sträcka är 8 cm på ritningen. Hur lång är den i verkligheten?</p>",
-    "s": "<p>\\(8\\cdot50=400\\) cm. <strong>4,0 m</strong>.</p>",
+    "t": "<p>En ritning har skalan 1:50. En sträcka är 8 cm på ritningen. Hur lång är den i verkligheten?</p>",
+    "s": "<p>\\(8\\cdot50=400\\) cm = <strong>4,0 m</strong>.</p>",
     "kurs": [
       "2a"
     ]
@@ -546,8 +1092,8 @@ window.BANKMA2 = [
     "omr": "verktyg_arbetslivet",
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Du ska göra många likadana kostnadsberäkningar med olika indata. Vilket digitalt verktyg är särskilt lämpligt?</p>",
-    "s": "<p>Ett <strong>kalkylprogram</strong>, där formler kan återanvändas för många rader.</p>",
+    "t": "<p>Ett kalkylblad innehåller värdena 12, 15 och 18. Vilken formeltyp använder du för att beräkna deras medelvärde?</p>",
+    "s": "<p>Använd en <strong>medelvärdesfunktion</strong>, till exempel MEDEL/AVERAGE.</p>",
     "kurs": [
       "2a"
     ]
