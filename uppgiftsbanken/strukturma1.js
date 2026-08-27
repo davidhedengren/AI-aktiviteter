@@ -96,6 +96,10 @@ window.OMRMA1 = {
     "kostnadsberakningar": "Kostnadsberäkningar",
     "sakerhetsmarginaler": "Säkerhetsmarginaler",
     "yrkesformler": "Yrkesrelaterade formler",
-    "yrkesverktyg": "Matematiska hjälpmedel i arbetslivet"
+    "yrkesverktyg": "Matematiska hjälpmedel i arbetslivet",
+    "lakemedelsberakning": "Läkemedelsberäkning",
+    "koncentration_spadning": "Koncentration, lösningar och spädning",
+    "volym_flode": "Volym, flöde och kapacitet",
+    "ror_fall_vinklar": "Rörlängder, fall och vinklar"
   }
 };
