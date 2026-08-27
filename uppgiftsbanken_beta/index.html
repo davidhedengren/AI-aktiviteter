@@ -354,7 +354,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .panel::-webkit-scrollbar-track{background:transparent}
 
 /* ── vänster: områden ── */
-.vänster{background:color-mix(in oklab,var(--kurs-accent,#B43123) 7%,#fff);border-right:1px solid var(--line);padding:16px 12px 40px;transition:background .35s ease}
+.vänster{background:var(--kurs-panel-bg,color-mix(in oklab,var(--kurs-accent,#B43123) 7%,#fff));border-right:1px solid var(--line);padding:16px 12px 40px;transition:background .35s ease}
 .sök{position:relative;margin:0 4px 14px}
 .sök input{width:100%;border:1px solid var(--line);background:var(--canvas);border-radius:var(--r-s);
   padding:9px 12px 9px 33px;font-size:13.5px}
@@ -364,10 +364,20 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
   color:var(--muted);margin:0 0 8px;padding:0 8px;font-weight:600}
 .nivåfilter{display:flex;gap:6px;margin:0 4px 18px}
 .nivåfilter button{flex:1;border:1px solid var(--line);background:var(--surface);border-radius:var(--r-s);
-  padding:7px 0;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--muted);transition:.15s}
-.nivåfilter button[aria-pressed="true"].E{background:var(--nE-bg);color:var(--nE);border-color:transparent}
-.nivåfilter button[aria-pressed="true"].C{background:var(--nC-bg);color:var(--nC);border-color:transparent}
-.nivåfilter button[aria-pressed="true"].A{background:var(--nA-bg);color:var(--nA);border-color:transparent}
+  padding:7px 0;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--muted);
+  transition:background .15s,border-color .15s,color .15s,box-shadow .15s}
+.nivåfilter button[aria-pressed="true"].E{
+  background:var(--nE-bg);color:var(--nE);border-color:color-mix(in oklab,var(--nE) 38%,#cfd7d2);
+  box-shadow:0 0 0 1.5px color-mix(in oklab,var(--nE) 22%,transparent) inset;
+}
+.nivåfilter button[aria-pressed="true"].C{
+  background:var(--nC-bg);color:var(--nC);border-color:color-mix(in oklab,var(--nC) 38%,#cfd6df);
+  box-shadow:0 0 0 1.5px color-mix(in oklab,var(--nC) 22%,transparent) inset;
+}
+.nivåfilter button[aria-pressed="true"].A{
+  background:var(--nA-bg);color:var(--nA);border-color:color-mix(in oklab,var(--nA) 38%,#d8d1dc);
+  box-shadow:0 0 0 1.5px color-mix(in oklab,var(--nA) 22%,transparent) inset;
+}
 
 .ma-inriktning{margin:0 4px 18px}
 .ma-inriktning[hidden]{display:none!important}
@@ -488,7 +498,7 @@ table.data th{background:var(--sunken);font-weight:600}
 .tomt p{margin:0;font-size:13.5px;max-width:34ch;margin-inline:auto}
 
 /* ── höger: övningsbladet ── */
-.höger{background:color-mix(in oklab,var(--kurs-accent,#B43123) 7%,#fff);border-left:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden;transition:background .35s ease}
+.höger{background:var(--kurs-panel-bg,color-mix(in oklab,var(--kurs-accent,#B43123) 7%,#fff));border-left:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden;transition:background .35s ease}
 .bladtopp{padding:20px 18px 16px;border-bottom:1px solid var(--line-2)}
 .bladtopp h2{margin:0 0 13px;font-size:15px;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
 .fält{display:flex;flex-direction:column;gap:8px}
@@ -1364,6 +1374,30 @@ const state={omr:new Set(),nivåer:new Set(['E','C','A']),sök:'',blad:[],visaPo
 const NIVÅORDNING={E:0,C:1,A:2};
 const nyckel=x=>x.kap+':'+x.omr;
 const ärMatematik=()=>AKTIV?.id==='ma1';
+
+/* Kursfärgen följer även matematikens inriktning.
+   1a har två bokfärger och får därför en mycket svag diagonal gul/röd ton. */
+function uppdateraKursTema(){
+  if(!AKTIV)return;
+  let accent=AKTIV.färg||'#B43123';
+  let panel=`color-mix(in oklab,${accent} 7%,#fff)`;
+
+  if(ärMatematik()){
+    if(state.maKurs==='1a'){
+      accent='#BF3A2E';
+      panel='linear-gradient(165deg,color-mix(in oklab,#E3B52B 8%,#fff) 0 48%,color-mix(in oklab,#BF3A2E 7%,#fff) 52% 100%)';
+    }else if(state.maKurs==='1b'){
+      accent='#2E7D52';
+      panel='color-mix(in oklab,#2E7D52 7%,#fff)';
+    }else{
+      accent='#2C62A8';
+      panel='color-mix(in oklab,#2C62A8 7%,#fff)';
+    }
+  }
+
+  document.documentElement.style.setProperty('--kurs-accent',accent);
+  document.documentElement.style.setProperty('--kurs-panel-bg',panel);
+}
 function hörTillMaKurs(x,kurs=state.maKurs){
   if(!ärMatematik()) return true;
   if(!Array.isArray(x.kurs)||!x.kurs.length) return true;
@@ -1505,11 +1539,11 @@ function visaKursval(){
 }
 function startaKurs(kurs){
   AKTIV=kurs; DB=kurs.data;
-  document.documentElement.style.setProperty('--kurs-accent',kurs.färg||'#B43123');
   DB.bank.forEach(x=>{ if(!x.familj) x.familj=x.id.replace(/[a-z]$/,''); });
   state.omr.clear(); state.blad=[]; state.sök='';
   state.nivåer=new Set(['E','C','A']); state.sorteraNivå=false; state.visaPoäng=false;
   if(kurs.id==='ma1') state.maKurs='1c';
+  uppdateraKursTema();
   $('#maInriktning').hidden=kurs.id!=='ma1';
   $$('[data-ma-kurs]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.maKurs===state.maKurs));
   $('#sökfält').value=''; $('#visaPoäng').checked=false;
@@ -1560,6 +1594,7 @@ function byggTräd(){
 $$('[data-ma-kurs]').forEach(b=>b.addEventListener('click',()=>{
   if(!ärMatematik()||b.dataset.maKurs===state.maKurs)return;
   state.maKurs=b.dataset.maKurs;
+  uppdateraKursTema();
   state.omr.clear();
   state.blad=state.blad.filter(x=>hörTillMaKurs(x));
   $$('[data-ma-kurs]').forEach(k=>k.setAttribute('aria-pressed',k.dataset.maKurs===state.maKurs));
