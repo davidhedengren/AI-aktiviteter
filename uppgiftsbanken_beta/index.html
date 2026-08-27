@@ -1773,9 +1773,18 @@ function ritaKursval(){
       kort.style.setProperty('--mx',`${e.clientX-r.left}px`);
       kort.style.setProperty('--my',`${e.clientY-r.top}px`);
     });
-    kort.addEventListener('click',()=>väljKurs(KURSER.find(x=>x.id===kort.dataset.kurs),kort));
   });
 }
+
+/* Ett enda delegerat klicklyssnare på kursytan är robustare än att binda om
+   klick på varje kort efter varje rendering. Den fungerar även när korten
+   byggs om efter att en kursfil har lästs in. */
+$('#kvKort').addEventListener('click',e=>{
+  const kort=e.target.closest('.kurskort');
+  if(!kort)return;
+  const kurs=KURSER.find(x=>x.id===kort.dataset.kurs);
+  if(kurs)väljKurs(kurs,kort);
+});
 function laddaSkript(src){
   return new Promise((ok,fel)=>{
     const s=document.createElement('script');
@@ -1845,11 +1854,28 @@ function startaKurs(kurs){
   $('#sorteraLabel').textContent='Sortera: ID';
   $$('.nivåfilter button').forEach(b=>b.setAttribute('aria-pressed','true'));
   $('#slumpaAntal').value=12;
-  byggSpårfilter(); uppdateraKursTema(); uppdateraKursRubriker(); byggTräd();
+
+  /* Byt vy direkt. Framför allt Fysik-bankerna är stora och om hela listan
+     byggs innan webbläsaren får måla ser klicket annars ut att inte fungera. */
   $('#kursval').hidden=true;
   document.querySelector('.top').hidden=false;
   document.querySelector('.arbetsyta').hidden=false;
-  rita(); ritaBlad();
+  $('#lista').innerHTML='<div class="tomt"><h3>Läser in kursen…</h3><p>Uppgifterna förbereds.</p></div>';
+  $('#träffar').textContent='';
+
+  requestAnimationFrame(()=>{
+    try{
+      byggSpårfilter();
+      uppdateraKursTema();
+      uppdateraKursRubriker();
+      byggTräd();
+      rita();
+      ritaBlad();
+    }catch(err){
+      console.error('Kunde inte starta kursen',err);
+      $('#lista').innerHTML=`<div class="tomt"><h3>Kursen kunde inte öppnas</h3><p>${String(err?.message||err)}</p></div>`;
+    }
+  });
 }
 
 /* ── vänsterpanelen ── */
