@@ -106,26 +106,8 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 }
 
 /* ── rutnätet ── */
-.kv-kort{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-/* Ett ensamt kort på sista raden breddar sig i stället för att bli föräldralöst.
-   Det breda kortet byter samtidigt till en tvåspaltig insida så att ytan
-   används i stället för att bara sträckas ut. */
-.kurskort:last-child:nth-child(odd){
-  grid-column:1/-1;
-  min-height:232px;
-  display:grid;
-  grid-template-columns:minmax(0,372px) minmax(0,1fr);
-  grid-template-areas:
-    "topp   topp"
-    "namn   taggar"
-    "fot    fot";
-  align-content:start;
-  column-gap:36px;
-}
-.kurskort:last-child:nth-child(odd) .kk-top{grid-area:topp}
-.kurskort:last-child:nth-child(odd) .kk-namn{grid-area:namn}
-.kurskort:last-child:nth-child(odd) .kk-taggar{grid-area:taggar;align-self:start;margin-top:26px}
-.kurskort:last-child:nth-child(odd) .kk-fot{grid-area:fot;margin-top:24px}
+.kv-kort{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+/* Alla kurskort har samma storlek. */
 
 /* ── kortet ── */
 .kurskort{
@@ -138,7 +120,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 
   position:relative;isolation:isolate;overflow:hidden;
   display:flex;flex-direction:column;text-align:left;
-  min-height:270px;padding:24px 26px 20px 32px;
+  min-height:242px;padding:21px 22px 18px 28px;
   font-family:inherit;color:var(--ink);cursor:pointer;
   background:
     radial-gradient(130% 92% at 100% 0%,color-mix(in oklab,var(--acc) 10%,transparent),transparent 62%),
@@ -206,14 +188,14 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .kurskort:hover .kk-number{color:color-mix(in oklab,var(--acc) 32%,#EFEEF1)}
 
 .kk-namn{
-  position:relative;z-index:1;margin:22px 0 0;
-  font-size:27px;line-height:1.04;font-weight:700;letter-spacing:-.042em;color:#1E1A1C;
+  position:relative;z-index:1;margin:19px 0 0;
+  font-size:24px;line-height:1.04;font-weight:700;letter-spacing:-.042em;color:#1E1A1C;
 }
 
 /* kapitelchips */
 .kk-taggar{
   position:relative;z-index:1;display:flex;flex-wrap:wrap;align-content:flex-start;
-  gap:6px;margin-top:17px;
+  gap:5px;margin-top:14px;
 }
 .kk-tag{
   display:inline-flex;align-items:center;min-height:26px;padding:4px 10px;
@@ -274,14 +256,12 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 
 /* ── responsivt ── */
 @media (max-width:900px){
-  .kv-inner{width:min(680px,100%)}
+  .kv-inner{width:min(720px,100%)}
+  .kv-kort{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+}
+@media (max-width:620px){
   .kv-kort{grid-template-columns:1fr}
   .kurskort{min-height:0}
-  .kurskort:last-child:nth-child(odd){
-    grid-column:auto;display:flex;column-gap:0;
-  }
-  .kurskort:last-child:nth-child(odd) .kk-taggar{margin-top:17px}
-  .kurskort:last-child:nth-child(odd) .kk-fot{margin-top:auto}
 }
 @media (max-width:560px){
   .kv-logo-shell{width:64px;height:64px;border-radius:19px}
@@ -468,7 +448,7 @@ table.data th{background:var(--sunken);font-weight:600}
 .tomt p{margin:0;font-size:13.5px;max-width:34ch;margin-inline:auto}
 
 /* ── höger: övningsbladet ── */
-.höger{background:color-mix(in oklab,var(--kurs-accent,#B43123) 4%,#fff);border-left:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden;transition:background .35s ease}
+.höger{background:color-mix(in oklab,var(--kurs-accent,#B43123) 7%,#fff);border-left:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden;transition:background .35s ease}
 .bladtopp{padding:20px 18px 16px;border-bottom:1px solid var(--line-2)}
 .bladtopp h2{margin:0 0 13px;font-size:15px;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
 .fält{display:flex;flex-direction:column;gap:8px}
@@ -525,7 +505,7 @@ table.data th{background:var(--sunken);font-weight:600}
 .bverktyg button:hover{background:var(--sunken);color:var(--ink)}
 .bverktyg button.bort:hover{background:var(--ed-tint);color:var(--ed)}
 .bverktyg svg{width:13px;height:13px}
-.bladfot{padding:16px 18px 20px;border-top:1px solid var(--line-2);background:color-mix(in oklab,var(--kurs-accent,#B43123) 4%,#fff);transition:background .35s ease}
+.bladfot{padding:16px 18px 20px;border-top:1px solid var(--line-2);background:color-mix(in oklab,var(--kurs-accent,#B43123) 7%,#fff);transition:background .35s ease}
 .exportrad{display:flex;gap:9px}
 .exportrad .knapp{flex:1;justify-content:center;padding:11px 14px;border-radius:11px;font-weight:600}
 .exportrad .knapp.primär{box-shadow:0 2px 8px rgba(180,49,35,.22)}
