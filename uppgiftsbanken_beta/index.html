@@ -670,6 +670,17 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 @media(max-width:980px){.kv-kort{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:680px){.kv-kort{grid-template-columns:1fr}}
 
+/* ── valfria underrubriker i strukturträdet ── */
+.omrgrupp{margin:2px 0 5px 12px}
+.omrgrupprad{display:flex;align-items:center;gap:7px;width:calc(100% - 2px);background:rgba(255,255,255,.42);border:1px solid transparent;cursor:pointer;padding:6px 7px;border-radius:8px;text-align:left;font-size:12.25px;font-weight:650;color:var(--ink-2);transition:background .13s,border-color .13s,color .13s}
+.omrgrupprad:hover{background:var(--surface);border-color:var(--line);color:var(--ink)}
+.omrgrupprad .gp-pil{width:10px;height:10px;color:var(--muted);transition:transform .18s;flex:none}
+.omrgrupprad .antal{margin-left:auto;font-family:var(--mono);font-size:10px;font-weight:400;color:var(--muted)}
+.omrgrupp.stängd .gp-pil{transform:rotate(-90deg)}
+.omrgrupp.stängd .omrunderlista{display:none}
+.omrunderlista{padding-top:2px}
+.omrunderlista .omrad{padding-left:22px;font-size:12.6px}
+.omrunderlista .omrad[aria-pressed="true"]::before{left:10px}
 .kapgrupp{margin-bottom:4px}
 .kaprad{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;cursor:pointer;
   padding:7px 8px;border-radius:var(--r-s);text-align:left;font-weight:600;font-size:13.5px;color:var(--ink)}
@@ -1592,7 +1603,7 @@ const KURSER=[
     defaultSpår:'2c',
     taggar:['Algebra','Algebra och icke-linjära modeller','Statistik','Geometri'],
     filer:['strukturma2.js','uppgifterma2.js'],
-    globaler:{bank:'BANKMA2',kapnamn:'KAPNAMNMA2',kapnamnSpar:'KAPNAMNMA2SPAR',omr:'OMRMA2',spar:'SPARMA2'}
+    globaler:{bank:'BANKMA2',kapnamn:'KAPNAMNMA2',kapnamnSpar:'KAPNAMNMA2SPAR',omr:'OMRMA2',spar:'SPARMA2',grupp:'GRUPPMA2'}
   },
   {
     id:'mato1', underUppbyggnad:true, titel:'Matematik – fortsättning nivå 1', siffra:'1', färg:'#2C62A8',
@@ -1602,9 +1613,9 @@ const KURSER=[
       {id:'1c',etikett:'1c',färg:'#2C62A8'}
     ],
     defaultSpår:'1c',
-    taggar:['Rationella uttryck och polynom','Derivata och extremvärden','Integraler','Trigonometri','Digitala verktyg och modellering'],
+    taggar:['Algebra och funktioner','Derivata','Integraler','Trigonometri / optimering','Problemlösning och modellering'],
     filer:['strukturmato1.js','uppgiftermato1.js'],
-    globaler:{bank:'BANKMATO1',kapnamn:'KAPNAMNMATO1',omr:'OMRMATO1',spar:'SPARMATO1'}
+    globaler:{bank:'BANKMATO1',kapnamn:'KAPNAMNMATO1',kapnamnSpar:'KAPNAMNMATO1SPAR',omr:'OMRMATO1',spar:'SPARMATO1',grupp:'GRUPPMATO1'}
   },
   {
     id:'mato2', underUppbyggnad:true, titel:'Matematik – fortsättning nivå 2', siffra:'2', färg:'#2C62A8', rygg:'#2C62A8',
@@ -1815,8 +1826,9 @@ async function väljKurs(kurs,kort){
     const omr=hämtaGlobal(kurs.globaler.omr);
     const spar=kurs.globaler.spar?hämtaGlobal(kurs.globaler.spar):null;
     const kapnamnSpar=kurs.globaler.kapnamnSpar?hämtaGlobal(kurs.globaler.kapnamnSpar):null;
+    const grupp=kurs.globaler.grupp?hämtaGlobal(kurs.globaler.grupp):null;
     if(!Array.isArray(bank)||!kapnamn||!omr) throw new Error('data saknas');
-    kurs.data={bank,kapnamn,kapnamnSpar:kapnamnSpar||null,omr,spar:spar||null};
+    kurs.data={bank,kapnamn,kapnamnSpar:kapnamnSpar||null,omr,spar:spar||null,grupp:grupp||null};
     startaKurs(kurs);
   }catch(e){
     $('#kvFel').innerHTML=`<b>${kurs.titel} kunde inte läsas in.</b><br>
@@ -1884,6 +1896,36 @@ function byggTräd(){
   const kapitel=Object.keys(DB.omr||{}).filter(k=>
     Object.keys(DB.omr[k]||{}).some(o=>områdeSynligtFörSpår(k,o))
   ).sort((a,b)=>Number(a)-Number(b));
+
+  const områdesknapp=(k,o)=>{
+    const antal=vb.filter(x=>String(x.kap)===String(k)&&x.omr===o).length;
+    return `<button class="omrad" data-omr="${k}:${o}" aria-pressed="${state.omr.has(k+':'+o)}">
+      <span>${DB.omr[k][o]}</span><span class="antal">${antal}</span></button>`;
+  };
+
+  const grupperFör=(k,omrs)=>{
+    const sp=aktivtSpår();
+    const defs=(sp&&DB.grupp?.[sp]?.[k]) || (!sp&&Array.isArray(DB.grupp?.[k])?DB.grupp[k]:null);
+    if(!Array.isArray(defs)||!defs.length) return omrs.map(o=>områdesknapp(k,o)).join('');
+    const använda=new Set();
+    const html=defs.map(g=>{
+      const gos=(g.omr||[]).filter(o=>omrs.includes(o));
+      if(!gos.length) return '';
+      gos.forEach(o=>använda.add(o));
+      const antal=vb.filter(x=>String(x.kap)===String(k)&&gos.includes(x.omr)).length;
+      const öppen=gos.some(o=>state.omr.has(k+':'+o));
+      return `<div class="omrgrupp${öppen?'':' stängd'}" data-grupp="${k}:${g.id||''}">
+        <button class="omrgrupprad" type="button">
+          <svg class="gp-pil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          <span>${g.namn||g.id}</span><span class="antal">${antal}</span>
+        </button>
+        <div class="omrunderlista">${gos.map(o=>områdesknapp(k,o)).join('')}</div>
+      </div>`;
+    }).join('');
+    const rest=omrs.filter(o=>!använda.has(o));
+    return html+rest.map(o=>områdesknapp(k,o)).join('');
+  };
+
   $('#träd').innerHTML=kapitel.map(k=>{
     const omrs=Object.keys(DB.omr[k]||{}).filter(o=>områdeSynligtFörSpår(k,o));
     const kapAntal=vb.filter(x=>String(x.kap)===String(k)).length;
@@ -1893,14 +1935,11 @@ function byggTräd(){
         <span class="nr">${k}</span><span>${kapitelNamn(k)}</span>
         <span class="antal">${kapAntal}</span>
       </button>
-      <div class="omrlista">${omrs.map(o=>{
-        const antal=vb.filter(x=>String(x.kap)===String(k)&&x.omr===o).length;
-        return `<button class="omrad" data-omr="${k}:${o}" aria-pressed="false">
-          <span>${DB.omr[k][o]}</span><span class="antal">${antal}</span></button>`;
-      }).join('')}</div>
+      <div class="omrlista">${grupperFör(k,omrs)}</div>
     </div>`;
   }).join('');
   $$('.kaprad').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('stängd')));
+  $$('.omrgrupprad').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('stängd')));
   $$('.omrad').forEach(b=>b.addEventListener('click',()=>{
     const v=b.dataset.omr;
     if(state.omr.has(v)) state.omr.delete(v); else state.omr.add(v);

@@ -467,3 +467,430 @@ window.SPARMA2 = {
     ]
   }
 };
+
+
+window.GRUPPMA2 = {
+  "2a": {
+    "1": [
+      {
+        "id": "linmod",
+        "namn": "Linjära modeller",
+        "omr": [
+          "rata_linjens_ekvation",
+          "bestamma_linjara_funktioner"
+        ]
+      },
+      {
+        "id": "linsys",
+        "namn": "Linjära ekvationssystem",
+        "omr": [
+          "linjara_ekvationssystem",
+          "substitutionsmetoden",
+          "additionsmetoden",
+          "ekvationssystem_tillampningar"
+        ]
+      },
+      {
+        "id": "parentes",
+        "namn": "Uttryck med parenteser",
+        "omr": [
+          "multiplicera_parenteser",
+          "konjugatregeln",
+          "kvadreringsreglerna",
+          "faktorisering"
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "andraeq",
+        "namn": "Andragradsekvationer",
+        "omr": [
+          "enkla_andragradsekvationer",
+          "losningsformel_andragrad",
+          "andragradsekvationer_tillampningar"
+        ]
+      },
+      {
+        "id": "andrafn",
+        "namn": "Andragradsfunktioner",
+        "omr": [
+          "andragradsfunktioner",
+          "andragradsfunktion_graf",
+          "symmetrilinje_extrempunkt",
+          "andragradsfunktioner_tillampningar"
+        ]
+      },
+      {
+        "id": "potexp",
+        "namn": "Potens- och exponentialfunktioner",
+        "omr": [
+          "potensregler",
+          "potensfunktioner",
+          "potensekvationer",
+          "exponentialfunktioner",
+          "exponentialekvationer"
+        ]
+      }
+    ],
+    "3": [
+      {
+        "id": "lage",
+        "namn": "Lägesmått och spridningsmått",
+        "omr": [
+          "lagesmatt",
+          "kvartiler_percentiler",
+          "ladagram",
+          "standardavvikelse"
+        ]
+      },
+      {
+        "id": "normal",
+        "namn": "Normalfördelning",
+        "omr": [
+          "normalfordelat_material",
+          "normalfordelning_digitala_verktyg"
+        ]
+      }
+    ],
+    "4": [
+      {
+        "id": "koord",
+        "namn": "Geometri och koordinatsystem",
+        "omr": [
+          "pythagoras",
+          "avstandsformeln_mittpunktsformeln",
+          "koordinatgeometri_problemlosning"
+        ]
+      }
+    ],
+    "5": [
+      {
+        "id": "yrke",
+        "namn": "Program- och yrkesspecifikt innehåll",
+        "omr": [
+          "yrkesspecifika_begrepp_metoder",
+          "verktyg_arbetslivet"
+        ]
+      }
+    ]
+  },
+  "2b": {
+    "1": [
+      {
+        "id": "rep",
+        "namn": "Repetition",
+        "omr": [
+          "negativa_tal_prioritering",
+          "brakraking",
+          "algebraiska_uttryck",
+          "ekvationer",
+          "ekvationer_digitala_verktyg"
+        ]
+      },
+      {
+        "id": "linmod",
+        "namn": "Linjära modeller",
+        "omr": [
+          "rata_linjens_ekvation",
+          "linjara_representationer",
+          "bestamma_linjara_funktioner",
+          "linjar_regression",
+          "korrelation_koefficient"
+        ]
+      },
+      {
+        "id": "linsys",
+        "namn": "Linjära ekvationssystem",
+        "omr": [
+          "linjara_ekvationssystem",
+          "substitutionsmetoden",
+          "additionsmetoden",
+          "speciella_ekvationssystem",
+          "ekvationssystem_tillampningar"
+        ]
+      },
+      {
+        "id": "parentes",
+        "namn": "Uttryck med parenteser",
+        "omr": [
+          "multiplicera_parenteser",
+          "konjugatregeln",
+          "kvadreringsreglerna",
+          "faktorisering"
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "andraeq",
+        "namn": "Andragradsekvationer",
+        "omr": [
+          "enkla_andragradsekvationer",
+          "losningsformel_andragrad",
+          "mer_om_andragradsekvationer",
+          "samband_roter_koefficienter",
+          "andragradsekvationer_tillampningar"
+        ]
+      },
+      {
+        "id": "andrafn",
+        "namn": "Andragradsfunktioner",
+        "omr": [
+          "funktionsskrivsatt_rep",
+          "andragradsfunktioner",
+          "andragradsfunktion_graf",
+          "symmetrilinje_extrempunkt",
+          "fran_graf_till_formel",
+          "andragradsfunktioner_tillampningar"
+        ]
+      },
+      {
+        "id": "potexp",
+        "namn": "Potens- och exponentialfunktioner",
+        "omr": [
+          "potensregler",
+          "potensekvationer",
+          "exponentialfunktioner",
+          "exponentialgraf"
+        ]
+      },
+      {
+        "id": "log",
+        "namn": "Logaritmer",
+        "omr": [
+          "logaritmbegreppet",
+          "logaritmlagar",
+          "exponentialekvationer",
+          "jamfora_exponential_potens"
+        ]
+      },
+      {
+        "id": "reg",
+        "namn": "Regressionsanalys",
+        "omr": [
+          "regressionsanalys_olika_modeller",
+          "modellval_regression"
+        ]
+      }
+    ],
+    "3": [
+      {
+        "id": "lage",
+        "namn": "Lägesmått och spridningsmått",
+        "omr": [
+          "lagesmatt",
+          "kvartiler_percentiler",
+          "ladagram",
+          "standardavvikelse"
+        ]
+      },
+      {
+        "id": "normal",
+        "namn": "Normalfördelning",
+        "omr": [
+          "normalfordelat_material",
+          "normalfordelning_digitala_verktyg"
+        ]
+      }
+    ],
+    "4": [
+      {
+        "id": "logik",
+        "namn": "Logik och bevis",
+        "omr": [
+          "geometriska_begrepp_definitioner",
+          "sats_bevis",
+          "implikation_ekvivalens"
+        ]
+      },
+      {
+        "id": "geo1",
+        "namn": "Klassiska satser i geometri I",
+        "omr": [
+          "yttervinkelsatsen",
+          "randvinkel_medelpunkt",
+          "pythagoras"
+        ]
+      },
+      {
+        "id": "geo2",
+        "namn": "Klassiska satser i geometri II",
+        "omr": [
+          "likformighet",
+          "topptriangel_transversal",
+          "bevis_likformighet",
+          "kordasatsen_biskarningssatsen"
+        ]
+      },
+      {
+        "id": "koord",
+        "namn": "Koordinatgeometri",
+        "omr": [
+          "avstandsformeln_mittpunktsformeln",
+          "koordinatgeometri_problemlosning"
+        ]
+      }
+    ]
+  },
+  "2c": {
+    "1": [
+      {
+        "id": "rep",
+        "namn": "Repetition",
+        "omr": [
+          "negativa_tal_prioritering",
+          "algebraiska_uttryck",
+          "ekvationer"
+        ]
+      },
+      {
+        "id": "linmod",
+        "namn": "Linjära modeller",
+        "omr": [
+          "rata_linjens_ekvation",
+          "bestamma_linjara_funktioner",
+          "linjar_regression",
+          "korrelation_koefficient"
+        ]
+      },
+      {
+        "id": "linsys",
+        "namn": "Linjära ekvationssystem",
+        "omr": [
+          "linjara_ekvationssystem",
+          "substitutionsmetoden",
+          "additionsmetoden",
+          "ekvationssystem_tre_obekanta",
+          "speciella_ekvationssystem",
+          "ekvationssystem_tillampningar",
+          "programmering_numerisk_ekvationslosning"
+        ]
+      },
+      {
+        "id": "parentes",
+        "namn": "Uttryck med parenteser",
+        "omr": [
+          "multiplicera_parenteser",
+          "konjugatregeln",
+          "kvadreringsreglerna",
+          "faktorisering"
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "andraeq",
+        "namn": "Andragradsekvationer och rotekvationer",
+        "omr": [
+          "enkla_andragradsekvationer",
+          "kvadratkomplettering",
+          "losningsformel_andragrad",
+          "samband_roter_koefficienter",
+          "andragradsekvationer_tillampningar",
+          "programmering_andragrad",
+          "rotekvationer"
+        ]
+      },
+      {
+        "id": "andrafn",
+        "namn": "Andragradsfunktioner",
+        "omr": [
+          "funktionsskrivsatt_rep",
+          "andragradsfunktioner",
+          "andragradsfunktion_graf",
+          "symmetrilinje_extrempunkt",
+          "fran_graf_till_formel",
+          "andragradsfunktioner_tillampningar"
+        ]
+      },
+      {
+        "id": "potexp",
+        "namn": "Potens- och exponentialfunktioner",
+        "omr": [
+          "potensekvationer",
+          "exponentialfunktioner",
+          "exponentialgraf"
+        ]
+      },
+      {
+        "id": "log",
+        "namn": "Logaritmer",
+        "omr": [
+          "logaritmbegreppet",
+          "logaritmlagar",
+          "exponentialekvationer",
+          "jamfora_exponential_potens"
+        ]
+      },
+      {
+        "id": "reg",
+        "namn": "Regressionsanalys",
+        "omr": [
+          "regressionsanalys_olika_modeller",
+          "modellval_regression"
+        ]
+      }
+    ],
+    "3": [
+      {
+        "id": "logik",
+        "namn": "Bevis och logik",
+        "omr": [
+          "geometriska_begrepp_definitioner",
+          "sats_bevis",
+          "implikation_ekvivalens"
+        ]
+      },
+      {
+        "id": "geo1",
+        "namn": "Klassiska satser i geometri I",
+        "omr": [
+          "yttervinkelsatsen",
+          "randvinkel_medelpunkt",
+          "pythagoras"
+        ]
+      },
+      {
+        "id": "geo2",
+        "namn": "Klassiska satser i geometri II",
+        "omr": [
+          "likformighet",
+          "topptriangel_transversal",
+          "bevis_likformighet",
+          "kordasatsen_biskarningssatsen"
+        ]
+      },
+      {
+        "id": "koord",
+        "namn": "Koordinatgeometri",
+        "omr": [
+          "avstandsformeln_mittpunktsformeln",
+          "koordinatgeometri_problemlosning",
+          "programmering_avstandsformeln"
+        ]
+      }
+    ],
+    "4": [
+      {
+        "id": "lage",
+        "namn": "Lägesmått och spridningsmått",
+        "omr": [
+          "lagesmatt",
+          "kvartiler_percentiler",
+          "ladagram",
+          "standardavvikelse",
+          "programmering_medelvarde"
+        ]
+      },
+      {
+        "id": "normal",
+        "namn": "Normalfördelning",
+        "omr": [
+          "normalfordelat_material",
+          "normalfordelning_digitala_verktyg"
+        ]
+      }
+    ]
+  }
+};
