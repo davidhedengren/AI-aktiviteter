@@ -1,4 +1,4 @@
-/* strukturma2.js — kapitel 5 ombyggt till tydliga programspecifika tillämpningar. */
+/* strukturma2.js — kapitel, områden, kursspår och visningsgrupper för Matematik nivå 2. */
 
 window.KAPNAMNMA2 = {
   "1": "Algebra",
@@ -366,4 +366,46 @@ window.SPARMA2 = {
     ]
   }
 };
-window.GRUPPMA2 = {};
+window.GRUPPMA2 = {
+  "1": [
+    {
+      "id": "ekvationssystem",
+      "namn": "Ekvationssystem",
+      "omr": [
+        "linjara_ekvationssystem",
+        "grafisk_losning_ekvationssystem",
+        "substitutionsmetoden",
+        "additionsmetoden",
+        "ekvationssystem_tre_obekanta",
+        "speciella_ekvationssystem",
+        "ekvationssystem_tillampningar"
+      ]
+    }
+  ],
+  "2": [
+    {
+      "id": "andragradsekvationer",
+      "namn": "Andragradsekvationer",
+      "omr": [
+        "enkla_andragradsekvationer",
+        "nollproduktmetoden",
+        "kvadratkomplettering",
+        "losningsformel_andragrad",
+        "mer_om_andragradsekvationer",
+        "samband_roter_koefficienter",
+        "andragradsekvationer_tillampningar"
+      ]
+    },
+    {
+      "id": "andragradsfunktioner",
+      "namn": "Andragradsfunktioner",
+      "omr": [
+        "andragradsfunktioner",
+        "andragradsfunktion_graf",
+        "symmetrilinje_extrempunkt",
+        "fran_graf_till_formel",
+        "andragradsfunktioner_tillampningar"
+      ]
+    }
+  ]
+};
