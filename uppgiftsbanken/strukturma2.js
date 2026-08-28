@@ -1,0 +1,442 @@
+/* strukturma2.js — gemensam struktur för Matematik nivå 2a, 2b och 2c.
+   Ämnesplanen styr vilka områden som hör till respektive spår via SPARMA2.
+
+   Designprincip:
+   - samma kapitelnummer betyder alltid samma innehåll i 2a, 2b och 2c
+   - kapitel 3 = Geometri och kapitel 4 = Statistik i samtliga spår
+   - områden listas direkt under kapitlet; inga extra utfällbara undergrupper
+   - repetition och fördjupning får finnas när de är didaktiskt användbara,
+     men kurskopplingarna ska inte tolkas som att allt är uttryckligt centralt innehåll
+   - digitala verktyg, modellering, problemlösning, kritisk granskning och
+     matematikhistoria integreras främst i uppgifterna inom respektive område
+*/
+
+window.KAPNAMNMA2 = {
+  "1": "Algebra",
+  "2": "Algebra och icke-linjära modeller",
+  "3": "Geometri",
+  "4": "Statistik",
+  "5": "Program- och yrkesspecifikt innehåll"
+};
+
+window.KAPNAMNMA2SPAR = {
+  "2a": {
+    "1": "Algebra",
+    "2": "Algebra och icke-linjära modeller",
+    "3": "Geometri",
+    "4": "Statistik",
+    "5": "Program- och yrkesspecifikt innehåll"
+  },
+  "2b": {
+    "1": "Algebra",
+    "2": "Algebra och icke-linjära modeller",
+    "3": "Geometri",
+    "4": "Statistik"
+  },
+  "2c": {
+    "1": "Algebra",
+    "2": "Algebra och icke-linjära modeller",
+    "3": "Geometri",
+    "4": "Statistik"
+  }
+};
+
+window.OMRMA2 = {
+  "1": {
+    "negativa_tal_prioritering": "Negativa tal och prioriteringsregler",
+    "brakraking": "Beräkningar med bråk",
+    "algebraiska_uttryck": "Algebraiska uttryck",
+    "ekvationer": "Ekvationer",
+    "ekvationer_digitala_verktyg": "Ekvationer med digitala verktyg",
+    "rata_linjens_ekvation": "Räta linjens ekvation",
+    "linjara_representationer": "Räta linjer: formel, tabell och graf",
+    "bestamma_linjara_funktioner": "Bestämma linjära funktioner",
+    "linjar_regression": "Linjär regression",
+    "korrelation_koefficient": "Korrelation och korrelationskoefficient",
+    "linjara_ekvationssystem": "Linjära ekvationssystem",
+    "grafisk_losning_ekvationssystem": "Grafisk lösning av ekvationssystem",
+    "substitutionsmetoden": "Substitutionsmetoden",
+    "additionsmetoden": "Additionsmetoden",
+    "ekvationssystem_tre_obekanta": "Ekvationssystem med tre obekanta",
+    "speciella_ekvationssystem": "Ekvationssystem med ingen eller oändligt många lösningar",
+    "ekvationssystem_tillampningar": "Tillämpningar och problemlösning med ekvationssystem",
+    "programmering_numerisk_ekvationslosning": "Programmering och numerisk ekvationslösning",
+    "multiplicera_parenteser": "Multiplikation av parentesuttryck",
+    "konjugatregeln": "Konjugatregeln",
+    "kvadreringsreglerna": "Kvadreringsreglerna",
+    "faktorisering": "Faktorisering"
+  },
+  "2": {
+    "enkla_andragradsekvationer": "Enkla andragradsekvationer",
+    "kvadratkomplettering": "Kvadratkomplettering",
+    "losningsformel_andragrad": "Lösningsformel för andragradsekvationer",
+    "mer_om_andragradsekvationer": "Andragradsekvationer – fördjupning",
+    "samband_roter_koefficienter": "Samband mellan rötter och koefficienter",
+    "andragradsekvationer_tillampningar": "Tillämpningar och problemlösning med andragradsekvationer",
+    "programmering_andragrad": "Programmering och andragradsekvationer",
+    "rotekvationer": "Rotekvationer",
+    "funktionsskrivsatt_rep": "Funktioner och funktionsskrivsätt – repetition",
+    "andragradsfunktioner": "Andragradsfunktioner",
+    "andragradsfunktion_graf": "Andragradsfunktionens graf",
+    "symmetrilinje_extrempunkt": "Symmetrilinje, extrempunkt och största/minsta värde",
+    "fran_graf_till_formel": "Från graf till formel",
+    "andragradsfunktioner_tillampningar": "Problemlösning med andragradsfunktioner",
+    "potensregler": "Potenser och potensregler",
+    "potensfunktioner": "Potensfunktioner",
+    "exponentialfunktioner": "Exponentialfunktioner",
+    "exponentialgraf": "Exponentialfunktioners grafer",
+    "logaritmbegreppet": "Logaritmbegreppet",
+    "logaritmlagar": "Logaritmlagar",
+    "exponentialekvationer": "Exponentialekvationer",
+    "potensekvationer": "Potensekvationer",
+    "jamfora_exponential_potens": "Jämföra exponential- och potensekvationer",
+    "regressionsanalys_olika_modeller": "Regressionsanalys med olika modeller",
+    "modellval_regression": "Modellval och bestämning av regressionsmodell"
+  },
+  "3": {
+    "geometriska_begrepp_definitioner": "Geometriska begrepp och definitioner",
+    "sats_bevis": "Sats och bevis",
+    "implikation_ekvivalens": "Implikation och ekvivalens",
+    "yttervinkelsatsen": "Yttervinkelsatsen",
+    "randvinkel_medelpunkt": "Randvinklar och medelpunktsvinklar",
+    "pythagoras": "Pythagoras sats",
+    "likformighet": "Likformighet",
+    "topptriangel_transversal": "Topptriangelsatsen och transversalsatsen",
+    "bevis_likformighet": "Bevis och resonemang med likformighet",
+    "kordasatsen_biskarningssatsen": "Kordasatsen och bisekantsatsen",
+    "avstandsformeln_mittpunktsformeln": "Avståndsformeln och mittpunktsformeln",
+    "koordinatgeometri_problemlosning": "Koordinatgeometri – problemlösning",
+    "programmering_avstandsformeln": "Programmering och koordinatgeometri"
+  },
+  "4": {
+    "lagesmatt": "Medelvärde, median och typvärde",
+    "kvartiler_percentiler": "Kvartiler och percentiler",
+    "ladagram": "Lådagram",
+    "standardavvikelse": "Standardavvikelse",
+    "normalfordelat_material": "Normalfördelning och normalfördelat material",
+    "normalfordelning_digitala_verktyg": "Normalfördelning med digitala verktyg",
+    "programmering_medelvarde": "Programmering och statistisk databearbetning"
+  },
+  "5": {
+    "yrkesspecifika_begrepp_metoder": "Yrkesspecifika matematiska begrepp och metoder",
+    "verktyg_arbetslivet": "Matematiska hjälpmedel och verktyg i arbetslivet"
+  }
+};
+
+window.SPARMA2 = {
+  "1": {
+    "negativa_tal_prioritering": [
+      "2b",
+      "2c"
+    ],
+    "brakraking": [
+      "2b",
+      "2c"
+    ],
+    "algebraiska_uttryck": [
+      "2b",
+      "2c"
+    ],
+    "ekvationer": [
+      "2b",
+      "2c"
+    ],
+    "ekvationer_digitala_verktyg": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "rata_linjens_ekvation": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "linjara_representationer": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "bestamma_linjara_funktioner": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "linjar_regression": [
+      "2b",
+      "2c"
+    ],
+    "korrelation_koefficient": [
+      "2b",
+      "2c"
+    ],
+    "linjara_ekvationssystem": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "grafisk_losning_ekvationssystem": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "substitutionsmetoden": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "additionsmetoden": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "ekvationssystem_tre_obekanta": [
+      "2c"
+    ],
+    "speciella_ekvationssystem": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "ekvationssystem_tillampningar": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "programmering_numerisk_ekvationslosning": [
+      "2c"
+    ],
+    "multiplicera_parenteser": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "konjugatregeln": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "kvadreringsreglerna": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "faktorisering": [
+      "2a",
+      "2b",
+      "2c"
+    ]
+  },
+  "2": {
+    "enkla_andragradsekvationer": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "kvadratkomplettering": [
+      "2c"
+    ],
+    "losningsformel_andragrad": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "mer_om_andragradsekvationer": [
+      "2b",
+      "2c"
+    ],
+    "samband_roter_koefficienter": [
+      "2b",
+      "2c"
+    ],
+    "andragradsekvationer_tillampningar": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "programmering_andragrad": [
+      "2c"
+    ],
+    "rotekvationer": [
+      "2c"
+    ],
+    "funktionsskrivsatt_rep": [
+      "2b",
+      "2c"
+    ],
+    "andragradsfunktioner": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "andragradsfunktion_graf": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "symmetrilinje_extrempunkt": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "fran_graf_till_formel": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "andragradsfunktioner_tillampningar": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "potensregler": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "potensfunktioner": [
+      "2a"
+    ],
+    "exponentialfunktioner": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "exponentialgraf": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "logaritmbegreppet": [
+      "2b",
+      "2c"
+    ],
+    "logaritmlagar": [
+      "2b",
+      "2c"
+    ],
+    "exponentialekvationer": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "potensekvationer": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "jamfora_exponential_potens": [
+      "2b",
+      "2c"
+    ],
+    "regressionsanalys_olika_modeller": [
+      "2b",
+      "2c"
+    ],
+    "modellval_regression": [
+      "2b",
+      "2c"
+    ]
+  },
+  "3": {
+    "geometriska_begrepp_definitioner": [
+      "2b",
+      "2c"
+    ],
+    "sats_bevis": [
+      "2b",
+      "2c"
+    ],
+    "implikation_ekvivalens": [
+      "2b",
+      "2c"
+    ],
+    "yttervinkelsatsen": [
+      "2b",
+      "2c"
+    ],
+    "randvinkel_medelpunkt": [
+      "2b",
+      "2c"
+    ],
+    "pythagoras": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "likformighet": [
+      "2b",
+      "2c"
+    ],
+    "topptriangel_transversal": [
+      "2b",
+      "2c"
+    ],
+    "bevis_likformighet": [
+      "2b",
+      "2c"
+    ],
+    "kordasatsen_biskarningssatsen": [
+      "2b",
+      "2c"
+    ],
+    "avstandsformeln_mittpunktsformeln": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "koordinatgeometri_problemlosning": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "programmering_avstandsformeln": [
+      "2c"
+    ]
+  },
+  "4": {
+    "lagesmatt": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "kvartiler_percentiler": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "ladagram": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "standardavvikelse": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "normalfordelat_material": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "normalfordelning_digitala_verktyg": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "programmering_medelvarde": [
+      "2c"
+    ]
+  },
+  "5": {
+    "yrkesspecifika_begrepp_metoder": [
+      "2a"
+    ],
+    "verktyg_arbetslivet": [
+      "2a"
+    ]
+  }
+};
+
+window.GRUPPMA2 = {};
+
