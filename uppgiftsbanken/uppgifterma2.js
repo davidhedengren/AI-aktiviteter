@@ -1,8 +1,4 @@
-/* uppgifterma2.js — reviderad Matematik nivå 2-bank.
-   Kapitel 1 rensat från rena nivå 1-områden.
-   Regression och korrelation flyttade till statistik.
-   Kapitel 3 SVG-figurer kvalitetssäkrade och korrigerade.
-*/
+/* uppgifterma2.js — reviderad nivå-2-bank: programmering borttagen, potensnivå höjd, GeoGebra integrerat i digitala lösningar och normalfördelning. */
 window.BANKMA2 = [
   {
     "id": "1.10",
@@ -211,7 +207,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Graferna till två räta linjer visas i koordinatsystemet.</p><span class=\"fig smal\"><svg width=\"430\" height=\"390\" viewBox=\"0 0 430 390\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"388\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"350.00\" x2=\"48.00\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"87.78\" y1=\"350.00\" x2=\"87.78\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"127.56\" y1=\"350.00\" x2=\"127.56\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"167.33\" y1=\"350.00\" x2=\"167.33\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"207.11\" y1=\"350.00\" x2=\"207.11\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"246.89\" y1=\"350.00\" x2=\"246.89\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"286.67\" y1=\"350.00\" x2=\"286.67\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"326.44\" y1=\"350.00\" x2=\"326.44\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"366.22\" y1=\"350.00\" x2=\"366.22\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"406.00\" y1=\"350.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"350.00\" x2=\"406.00\" y2=\"350.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"320.00\" x2=\"406.00\" y2=\"320.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"290.00\" x2=\"406.00\" y2=\"290.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"260.00\" x2=\"406.00\" y2=\"260.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"230.00\" x2=\"406.00\" y2=\"230.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"200.00\" x2=\"406.00\" y2=\"200.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"170.00\" x2=\"406.00\" y2=\"170.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"140.00\" x2=\"406.00\" y2=\"140.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"110.00\" x2=\"406.00\" y2=\"110.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"80.00\" x2=\"406.00\" y2=\"80.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"50.00\" x2=\"406.00\" y2=\"50.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"20.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"260.00\" x2=\"416.00\" y2=\"260.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M 416.00 260.00 l -8 -4 l 0 8 z\" fill=\"#2B2527\"/><line x1=\"167.33\" y1=\"350.00\" x2=\"167.33\" y2=\"10.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M 167.33 10.00 l -4 8 l 8 0 z\" fill=\"#2B2527\"/><line x1=\"48.00\" y1=\"256.00\" x2=\"48.00\" y2=\"264.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"48.00\" y=\"277.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">-3</text><line x1=\"87.78\" y1=\"256.00\" x2=\"87.78\" y2=\"264.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"87.78\" y=\"277.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">-2</text><line x1=\"127.56\" y1=\"256.00\" x2=\"127.56\" y2=\"264.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"127.56\" y=\"277.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">-1</text><line x1=\"207.11\" y1=\"256.00\" x2=\"207.11\" y2=\"264.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"207.11\" y=\"277.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">1</text><line x1=\"246.89\" y1=\"256.00\" x2=\"246.89\" y2=\"264.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"246.89\" y=\"277.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">2</text><line x1=\"286.67\" y1=\"256.00\" x2=\"286.67\" y2=\"264.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"286.67\" y=\"277.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">3</text><line x1=\"326.44\" y1=\"256.00\" x2=\"326.44\" y2=\"264.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"326.44\" y=\"277.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">4</text><line x1=\"366.22\" y1=\"256.00\" x2=\"366.22\" y2=\"264.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"366.22\" y=\"277.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">5</text><line x1=\"406.00\" y1=\"256.00\" x2=\"406.00\" y2=\"264.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"406.00\" y=\"277.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">6</text><line x1=\"163.33\" y1=\"350.00\" x2=\"171.33\" y2=\"350.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"158.33\" y=\"353.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">-3</text><line x1=\"163.33\" y1=\"320.00\" x2=\"171.33\" y2=\"320.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"158.33\" y=\"323.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">-2</text><line x1=\"163.33\" y1=\"290.00\" x2=\"171.33\" y2=\"290.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"158.33\" y=\"293.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">-1</text><line x1=\"163.33\" y1=\"230.00\" x2=\"171.33\" y2=\"230.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"158.33\" y=\"233.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">1</text><line x1=\"163.33\" y1=\"200.00\" x2=\"171.33\" y2=\"200.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"158.33\" y=\"203.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">2</text><line x1=\"163.33\" y1=\"170.00\" x2=\"171.33\" y2=\"170.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"158.33\" y=\"173.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">3</text><line x1=\"163.33\" y1=\"140.00\" x2=\"171.33\" y2=\"140.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"158.33\" y=\"143.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">4</text><line x1=\"163.33\" y1=\"110.00\" x2=\"171.33\" y2=\"110.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"158.33\" y=\"113.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">5</text><line x1=\"163.33\" y1=\"80.00\" x2=\"171.33\" y2=\"80.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"158.33\" y=\"83.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">6</text><line x1=\"163.33\" y1=\"50.00\" x2=\"171.33\" y2=\"50.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"158.33\" y=\"53.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">7</text><line x1=\"163.33\" y1=\"20.00\" x2=\"171.33\" y2=\"20.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"158.33\" y=\"23.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">8</text><text x=\"159.33\" y=\"276.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">0</text><line x1=\"48.00\" y1=\"320.00\" x2=\"406.00\" y2=\"50.00\" stroke=\"#B43123\" stroke-width=\"2.7\" stroke-linecap=\"round\"/><text x=\"358.27\" y=\"62.00\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\" font-weight=\"600\" fill=\"#B43123\">L₁</text><line x1=\"147.44\" y1=\"20.00\" x2=\"366.22\" y2=\"350.00\" stroke=\"#2A5D9E\" stroke-width=\"2.7\" stroke-linecap=\"round\"/><text x=\"163.36\" y=\"50.00\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\" font-weight=\"600\" fill=\"#2A5D9E\">L₂</text><circle cx=\"246.89\" cy=\"170.00\" r=\"4.3\" fill=\"#2B2527\"/><text x=\"419.00\" y=\"264.00\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\" font-weight=\"600\" fill=\"#2B2527\">x</text><text x=\"174.33\" y=\"8.00\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\" font-weight=\"600\" fill=\"#2B2527\">y</text></svg></span><p>a) Bestäm ekvationssystemets lösning.<br>b) Förklara kort varför skärningspunkten är lösningen.</p>",
-    "s": "<p>Linjerna skär varandra i punkten \\((2,3)\\).</p><p>I skärningspunkten har båda linjerna samma \\(x\\)-värde och samma \\(y\\)-värde. Punkten uppfyller därför båda ekvationerna samtidigt.</p><p><strong>Lösningen är \\((2,3)\\).</strong></p>",
+    "s": "<p>Linjerna skär varandra i punkten \\((2,3)\\).</p><p>I skärningspunkten har båda linjerna samma \\(x\\)-värde och samma \\(y\\)-värde. Punkten uppfyller därför båda ekvationerna samtidigt.</p><p><strong>Lösningen är \\((2,3)\\).</strong></p><p><strong>GeoGebra:</strong> Skriv in de två linjernas ekvationer i grafvyn. Lösningen till ekvationssystemet är koordinaterna för linjernas skärningspunkt. Zooma så att skärningen syns tydligt och klicka på punkten för att läsa av koordinaterna.</p>",
     "familj": "ekvationssystem_grafisk_skarning"
   },
   {
@@ -374,19 +370,6 @@ window.BANKMA2 = [
     "t": "<p>På en konsert kommer 300 personer in. Vuxenbiljetten kostar 180 kr och ungdomsbiljetten 120 kr. Några personer har fribiljett.</p><p>Antalet fribiljetter är hälften av antalet ungdomsbiljetter. De betalande biljetterna ger totalt 43 200 kr.</p><p>Bestäm hur många vuxenbiljetter, ungdomsbiljetter och fribiljetter som används.</p>",
     "s": "<p>Låt \\(v\\) vara antal vuxenbiljetter, \\(u\\) antal ungdomsbiljetter och \\(f\\) antal fribiljetter.</p><p>\\(v+u+f=300\\), \\(180v+120u=43200\\) och \\(f=\\frac u2\\).</p><p>Sätt in \\(f=\\frac u2\\): \\(v+1,5u=300\\).</p><p>Intäktsekvationen kan delas med 60: \\(3v+2u=720\\).</p><p>Multiplicera den första med 3: \\(3v+4,5u=900\\). Subtraktion ger \\(2,5u=180\\), alltså \\(u=72\\).</p><p>Då \\(f=36\\) och \\(v=300-72-36=192\\).</p><p><strong>192 vuxenbiljetter, 72 ungdomsbiljetter och 36 fribiljetter.</strong></p>",
     "familj": "ekvationssystem_dold_modell_tre_biljettyper"
-  },
-  {
-    "id": "1.40",
-    "kap": 1,
-    "omr": "programmering_numerisk_ekvationslosning",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/3/0",
-    "t": "<p>Följande algoritm används för att ringa in lösningen till ekvationen \\(2x+1=12\\).</p><pre style='font-family:IBM Plex Mono,monospace;font-size:12px;background:#EDEEF1;padding:10px;border-radius:8px'>a = 0\nb = 10\nupprepa 3 gånger:\n    m = (a+b)/2\n    om 2m+1 &lt; 12:\n        a = m\n    annars:\n        b = m</pre><p>Vilket intervall \\([a,b]\\) finns lösningen i efter tre varv? Visa hur intervallet ändras.</p>",
-    "s": "<p>Start: \\([0,10]\\).</p><p>Varv 1: \\(m=5\\). Då \\(2\\cdot5+1=11&lt;12\\), så intervallet blir \\([5,10]\\).</p><p>Varv 2: \\(m=7,5\\). Då är vänsterledet 16, så intervallet blir \\([5,7,5]\\).</p><p>Varv 3: \\(m=6,25\\). Då är vänsterledet 13,5, så intervallet blir \\([5,6,25]\\).</p><p><strong>Efter tre varv ligger lösningen i intervallet \\([5,6,25]\\).</strong></p>",
-    "familj": "programmering_intervallhalvering_linjar_ekvation"
   },
   {
     "id": "1.41",
@@ -610,7 +593,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Två linjer visas.</p><span class=\"fig smal\"><svg width=\"430\" height=\"370\" viewBox=\"0 0 430 370\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"368\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"48.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"80.55\" y1=\"330.00\" x2=\"80.55\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"113.09\" y1=\"330.00\" x2=\"113.09\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"145.64\" y1=\"330.00\" x2=\"145.64\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"178.18\" y1=\"330.00\" x2=\"178.18\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"210.73\" y1=\"330.00\" x2=\"210.73\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"243.27\" y1=\"330.00\" x2=\"243.27\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"275.82\" y1=\"330.00\" x2=\"275.82\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"308.36\" y1=\"330.00\" x2=\"308.36\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"340.91\" y1=\"330.00\" x2=\"340.91\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"373.45\" y1=\"330.00\" x2=\"373.45\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"406.00\" y1=\"330.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"406.00\" y2=\"330.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"304.17\" x2=\"406.00\" y2=\"304.17\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"278.33\" x2=\"406.00\" y2=\"278.33\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"252.50\" x2=\"406.00\" y2=\"252.50\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"226.67\" x2=\"406.00\" y2=\"226.67\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"200.83\" x2=\"406.00\" y2=\"200.83\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"175.00\" x2=\"406.00\" y2=\"175.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"149.17\" x2=\"406.00\" y2=\"149.17\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"123.33\" x2=\"406.00\" y2=\"123.33\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"97.50\" x2=\"406.00\" y2=\"97.50\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"71.67\" x2=\"406.00\" y2=\"71.67\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"45.83\" x2=\"406.00\" y2=\"45.83\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"20.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"226.67\" x2=\"406.00\" y2=\"226.67\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"48.00\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-4</text><text x=\"80.55\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-3</text><text x=\"113.09\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-2</text><text x=\"145.64\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-1</text><text x=\"210.73\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"243.27\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"275.82\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"308.36\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"340.91\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"373.45\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"406.00\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><line x1=\"178.18\" y1=\"330.00\" x2=\"178.18\" y2=\"20.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"170.18\" y=\"333.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-4</text><text x=\"170.18\" y=\"307.17\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-3</text><text x=\"170.18\" y=\"281.33\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-2</text><text x=\"170.18\" y=\"255.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-1</text><text x=\"170.18\" y=\"203.83\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"170.18\" y=\"178.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"170.18\" y=\"152.17\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"170.18\" y=\"126.33\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"170.18\" y=\"100.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"170.18\" y=\"74.67\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"170.18\" y=\"48.83\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><text x=\"170.18\" y=\"23.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">8</text><line x1=\"48.00\" y1=\"45.83\" x2=\"406.00\" y2=\"330.00\" stroke=\"#B43123\" stroke-width=\"2.7\"/><text x=\"64.27\" y=\"61.33\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" font-weight=\"600\" fill=\"#B43123\">L₁</text><line x1=\"48.00\" y1=\"304.17\" x2=\"406.00\" y2=\"20.00\" stroke=\"#2A5D9E\" stroke-width=\"2.7\"/><text x=\"344.16\" y=\"32.92\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">L₂</text><circle cx=\"210.73\" cy=\"175.00\" r=\"4\" fill=\"#2B2527\"/><text x=\"217.73\" y=\"168.00\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" font-weight=\"600\">P</text></svg></span><p>Bestäm systemets lösning.</p>",
-    "s": "<p>Lösningen är den punkt där de två graferna skär varandra.</p><p>Linjerna skär varandra i \\((1,2)\\).</p><p><strong>Lösningen är \\((1,2)\\).</strong></p>",
+    "s": "<p>Lösningen är den punkt där de två graferna skär varandra.</p><p>Linjerna skär varandra i \\((1,2)\\).</p><p><strong>Lösningen är \\((1,2)\\).</strong></p><p><strong>GeoGebra:</strong> Skriv in de två linjernas ekvationer i grafvyn. Lösningen till ekvationssystemet är koordinaterna för linjernas skärningspunkt. Zooma så att skärningen syns tydligt och klicka på punkten för att läsa av koordinaterna.</p>",
     "familj": "r2_system_graf"
   },
   {
@@ -655,19 +638,6 @@ window.BANKMA2 = [
     "t": "<p>Lös systemet.</p><p>\\(\\begin{cases}x+y+z=15\\\\x+y=9\\\\y+z=11\\end{cases}\\)</p>",
     "s": "<p>Eliminera en variabel i två steg så att systemet först reduceras till två ekvationer med två obekanta.</p><p>Första minus andra ger \\(z=6\\). Då \\(y=5\\), och \\(x=4\\).</p><p><strong>\\((4,5,6)\\).</strong></p>",
     "familj": "r2_tre_obekanta"
-  },
-  {
-    "id": "1.66",
-    "kap": 1,
-    "omr": "programmering_numerisk_ekvationslosning",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Ett program testar heltalsvärden på \\(x\\) från 0 och uppåt tills \\(5x+2\\ge37\\).</p><p>Vilket är det första värdet programmet stannar vid?</p>",
-    "s": "<p>Följ algoritmens steg och använd teckenbyte eller intervallförminskning för att ringa in lösningen.</p><p>\\(5x+2\\ge37\\Rightarrow5x\\ge35\\Rightarrow x\\ge7\\).</p><p><strong>Programmet stannar vid \\(x=7\\).</strong></p>",
-    "familj": "r2_programmering_sok"
   },
   {
     "id": "1.67",
@@ -818,19 +788,6 @@ window.BANKMA2 = [
     "t": "<p>Bestäm \\(a\\) så att systemet</p><p>\\(\\begin{cases}y=ax+4\\\\2y=6x+8\\end{cases}\\)</p><p>har oändligt många lösningar. Vad händer om \\(a\\) har något annat värde?</p>",
     "s": "<p>Den andra ekvationen ger \\(y=3x+4\\).</p><p>För samma linje måste \\(a=3\\).</p><p>Om \\(a\\ne3\\) har linjerna olika lutning och skär varandra en gång.</p><p><strong>\\(a=3\\); annars exakt en lösning.</strong></p>",
     "familj": "r2_system_parameter_cases"
-  },
-  {
-    "id": "1.82",
-    "kap": 1,
-    "omr": "programmering_numerisk_ekvationslosning",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Ett program testar \\(x=0,1,2,\\dots\\) och stannar när \\(|4x-31|&lt;2\\).</p><p>Vilket är det första heltalsvärdet där programmet stannar?</p>",
-    "s": "<p>Följ algoritmens steg och använd teckenbyte eller intervallförminskning för att ringa in lösningen.</p><p>Testa kring \\(31/4=7,75\\).</p><p>För \\(x=7\\): \\(|28-31|=3\\), nej. För \\(x=8\\): \\(|32-31|=1&lt;2\\).</p><p><strong>\\(x=8\\).</strong></p>",
-    "familj": "r2_programmering_tolerans"
   },
   {
     "id": "1.83",
@@ -1084,7 +1041,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Linjerna \\(L_1\\) och \\(L_2\\) visas i koordinatsystemet.</p><span class=\"fig smal\"><svg width=\"430\" height=\"370\" viewBox=\"0 0 430 370\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"368\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"48.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"87.78\" y1=\"330.00\" x2=\"87.78\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"127.56\" y1=\"330.00\" x2=\"127.56\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"167.33\" y1=\"330.00\" x2=\"167.33\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"207.11\" y1=\"330.00\" x2=\"207.11\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"246.89\" y1=\"330.00\" x2=\"246.89\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"286.67\" y1=\"330.00\" x2=\"286.67\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"326.44\" y1=\"330.00\" x2=\"326.44\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"366.22\" y1=\"330.00\" x2=\"366.22\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"406.00\" y1=\"330.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"406.00\" y2=\"330.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"299.00\" x2=\"406.00\" y2=\"299.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"268.00\" x2=\"406.00\" y2=\"268.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"237.00\" x2=\"406.00\" y2=\"237.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"206.00\" x2=\"406.00\" y2=\"206.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"175.00\" x2=\"406.00\" y2=\"175.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"144.00\" x2=\"406.00\" y2=\"144.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"113.00\" x2=\"406.00\" y2=\"113.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"82.00\" x2=\"406.00\" y2=\"82.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"51.00\" x2=\"406.00\" y2=\"51.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"20.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"268.00\" x2=\"406.00\" y2=\"268.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"48.00\" y=\"285.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-2</text><text x=\"87.78\" y=\"285.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-1</text><text x=\"167.33\" y=\"285.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"207.11\" y=\"285.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"246.89\" y=\"285.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"286.67\" y=\"285.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"326.44\" y=\"285.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"366.22\" y=\"285.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"406.00\" y=\"285.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><line x1=\"127.56\" y1=\"330.00\" x2=\"127.56\" y2=\"20.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"119.56\" y=\"333.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-2</text><text x=\"119.56\" y=\"302.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-1</text><text x=\"119.56\" y=\"240.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"119.56\" y=\"209.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"119.56\" y=\"178.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"119.56\" y=\"147.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"119.56\" y=\"116.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"119.56\" y=\"85.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"119.56\" y=\"54.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><text x=\"119.56\" y=\"23.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">8</text><line x1=\"48.00\" y1=\"51.00\" x2=\"406.00\" y2=\"330.00\" stroke=\"#B43123\" stroke-width=\"2.7\"/><text x=\"55.96\" y=\"63.40\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" font-weight=\"600\" fill=\"#B43123\">L₁</text><line x1=\"48.00\" y1=\"299.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#2A5D9E\" stroke-width=\"2.7\"/><text x=\"334.40\" y=\"29.30\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">L₂</text><circle cx=\"207.11\" cy=\"175.00\" r=\"4\" fill=\"#2B2527\"/><text x=\"213.11\" y=\"168.00\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" font-weight=\"600\">P</text></svg></span><p>Bestäm systemets lösning.</p>",
-    "s": "<p>Lösningen är den punkt där de två graferna skär varandra.</p><p>Linjerna skär varandra i punkten \\((2,3)\\).</p><p><strong>Lösningen är \\((2,3)\\).</strong></p>",
+    "s": "<p>Lösningen är den punkt där de två graferna skär varandra.</p><p>Linjerna skär varandra i punkten \\((2,3)\\).</p><p><strong>Lösningen är \\((2,3)\\).</strong></p><p><strong>GeoGebra:</strong> Skriv in de två linjernas ekvationer i grafvyn. Lösningen till ekvationssystemet är koordinaterna för linjernas skärningspunkt. Zooma så att skärningen syns tydligt och klicka på punkten för att läsa av koordinaterna.</p>",
     "familj": "r3_system_graph_1"
   },
   {
@@ -1234,7 +1191,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Två linjer visas i koordinatsystemet.</p><span class=\"fig smal\"><svg width=\"430\" height=\"370\" viewBox=\"0 0 430 370\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"368\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"48.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"77.83\" y1=\"330.00\" x2=\"77.83\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"107.67\" y1=\"330.00\" x2=\"107.67\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"137.50\" y1=\"330.00\" x2=\"137.50\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"167.33\" y1=\"330.00\" x2=\"167.33\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"197.17\" y1=\"330.00\" x2=\"197.17\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"227.00\" y1=\"330.00\" x2=\"227.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"256.83\" y1=\"330.00\" x2=\"256.83\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"286.67\" y1=\"330.00\" x2=\"286.67\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"316.50\" y1=\"330.00\" x2=\"316.50\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"346.33\" y1=\"330.00\" x2=\"346.33\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"376.17\" y1=\"330.00\" x2=\"376.17\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"406.00\" y1=\"330.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"406.00\" y2=\"330.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"304.17\" x2=\"406.00\" y2=\"304.17\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"278.33\" x2=\"406.00\" y2=\"278.33\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"252.50\" x2=\"406.00\" y2=\"252.50\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"226.67\" x2=\"406.00\" y2=\"226.67\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"200.83\" x2=\"406.00\" y2=\"200.83\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"175.00\" x2=\"406.00\" y2=\"175.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"149.17\" x2=\"406.00\" y2=\"149.17\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"123.33\" x2=\"406.00\" y2=\"123.33\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"97.50\" x2=\"406.00\" y2=\"97.50\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"71.67\" x2=\"406.00\" y2=\"71.67\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"45.83\" x2=\"406.00\" y2=\"45.83\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"20.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"226.67\" x2=\"406.00\" y2=\"226.67\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"48.00\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-4</text><text x=\"77.83\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-3</text><text x=\"107.67\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-2</text><text x=\"137.50\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-1</text><text x=\"197.17\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"227.00\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"256.83\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"286.67\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"316.50\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"346.33\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"376.17\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><text x=\"406.00\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">8</text><line x1=\"167.33\" y1=\"330.00\" x2=\"167.33\" y2=\"20.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"159.33\" y=\"333.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-4</text><text x=\"159.33\" y=\"307.17\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-3</text><text x=\"159.33\" y=\"281.33\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-2</text><text x=\"159.33\" y=\"255.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-1</text><text x=\"159.33\" y=\"203.83\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"159.33\" y=\"178.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"159.33\" y=\"152.17\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"159.33\" y=\"126.33\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"159.33\" y=\"100.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"159.33\" y=\"74.67\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"159.33\" y=\"48.83\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><text x=\"159.33\" y=\"23.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">8</text><line x1=\"48.00\" y1=\"175.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#B43123\" stroke-width=\"2.7\"/><text x=\"358.27\" y=\"32.92\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" font-weight=\"600\" fill=\"#B43123\">L₁</text><line x1=\"48.00\" y1=\"252.50\" x2=\"406.00\" y2=\"97.50\" stroke=\"#2A5D9E\" stroke-width=\"2.7\"/><text x=\"358.27\" y=\"76.83\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">L₂</text></svg></span><p>Har systemet någon lösning? Förklara kort.</p>",
-    "s": "<p>Lösningen är den punkt där de två graferna skär varandra.</p><p>Linjerna är parallella och skär inte varandra.</p><p><strong>Systemet har ingen lösning.</strong></p>",
+    "s": "<p>Lösningen är den punkt där de två graferna skär varandra.</p><p>Linjerna är parallella och skär inte varandra.</p><p><strong>Systemet har ingen lösning.</strong></p><p><strong>GeoGebra:</strong> Skriv in de två linjernas ekvationer i grafvyn. Lösningen till ekvationssystemet är koordinaterna för linjernas skärningspunkt. Zooma så att skärningen syns tydligt och klicka på punkten för att läsa av koordinaterna.</p>",
     "familj": "r3_system_graph_parallel"
   },
   {
@@ -1339,7 +1296,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/3/0",
     "t": "<p>Linjerna i grafen motsvarar ett ekvationssystem.</p><span class=\"fig smal\"><svg width=\"430\" height=\"370\" viewBox=\"0 0 430 370\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"368\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"48.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"83.80\" y1=\"330.00\" x2=\"83.80\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"119.60\" y1=\"330.00\" x2=\"119.60\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"155.40\" y1=\"330.00\" x2=\"155.40\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"191.20\" y1=\"330.00\" x2=\"191.20\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"227.00\" y1=\"330.00\" x2=\"227.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"262.80\" y1=\"330.00\" x2=\"262.80\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"298.60\" y1=\"330.00\" x2=\"298.60\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"334.40\" y1=\"330.00\" x2=\"334.40\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"370.20\" y1=\"330.00\" x2=\"370.20\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"406.00\" y1=\"330.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"406.00\" y2=\"330.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"304.17\" x2=\"406.00\" y2=\"304.17\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"278.33\" x2=\"406.00\" y2=\"278.33\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"252.50\" x2=\"406.00\" y2=\"252.50\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"226.67\" x2=\"406.00\" y2=\"226.67\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"200.83\" x2=\"406.00\" y2=\"200.83\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"175.00\" x2=\"406.00\" y2=\"175.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"149.17\" x2=\"406.00\" y2=\"149.17\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"123.33\" x2=\"406.00\" y2=\"123.33\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"97.50\" x2=\"406.00\" y2=\"97.50\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"71.67\" x2=\"406.00\" y2=\"71.67\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"45.83\" x2=\"406.00\" y2=\"45.83\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"20.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"226.67\" x2=\"406.00\" y2=\"226.67\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"48.00\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-3</text><text x=\"83.80\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-2</text><text x=\"119.60\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-1</text><text x=\"191.20\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"227.00\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"262.80\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"298.60\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"334.40\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"370.20\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"406.00\" y=\"243.67\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><line x1=\"155.40\" y1=\"330.00\" x2=\"155.40\" y2=\"20.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"147.40\" y=\"333.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-4</text><text x=\"147.40\" y=\"307.17\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-3</text><text x=\"147.40\" y=\"281.33\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-2</text><text x=\"147.40\" y=\"255.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-1</text><text x=\"147.40\" y=\"203.83\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"147.40\" y=\"178.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"147.40\" y=\"152.17\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"147.40\" y=\"126.33\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"147.40\" y=\"100.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"147.40\" y=\"74.67\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"147.40\" y=\"48.83\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><text x=\"147.40\" y=\"23.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">8</text><line x1=\"48.00\" y1=\"45.83\" x2=\"406.00\" y2=\"304.17\" stroke=\"#B43123\" stroke-width=\"2.7\"/><text x=\"62.32\" y=\"61.33\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" font-weight=\"600\" fill=\"#B43123\">L₁</text><line x1=\"48.00\" y1=\"200.83\" x2=\"406.00\" y2=\"71.67\" stroke=\"#2A5D9E\" stroke-width=\"2.7\"/><text x=\"359.46\" y=\"63.92\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">L₂</text></svg></span><p>Bestäm lösningen och avgör sedan vilket system som passar grafen bäst.</p><p>A) \\(\\begin{cases}y=-x+4\\\\y=0,5x+2\\end{cases}\\)<br>B) \\(\\begin{cases}y=-x+4\\\\y=0,5x+1\\end{cases}\\)</p>",
-    "s": "<p>Skärningspunkten är \\((2,2)\\). Linje 1 har ekvationen \\(y=-x+4\\). Linje 2 går genom \\((0,1)\\) och \\((2,2)\\), alltså \\(y=0,5x+1\\).</p><p><strong>System B och lösningen \\((2,2)\\).</strong></p>",
+    "s": "<p>Skärningspunkten är \\((2,2)\\). Linje 1 har ekvationen \\(y=-x+4\\). Linje 2 går genom \\((0,1)\\) och \\((2,2)\\), alltså \\(y=0,5x+1\\).</p><p><strong>System B och lösningen \\((2,2)\\).</strong></p><p><strong>GeoGebra:</strong> Skriv in de två linjernas ekvationer i grafvyn. Lösningen till ekvationssystemet är koordinaterna för linjernas skärningspunkt. Zooma så att skärningen syns tydligt och klicka på punkten för att läsa av koordinaterna.</p>",
     "familj": "r3_system_graph_choose"
   },
   {
@@ -1384,19 +1341,6 @@ window.BANKMA2 = [
     "t": "<p>Grafen visar funktionen \\(f\\).</p><span class=\"fig smal\"><svg width=\"430\" height=\"370\" viewBox=\"0 0 430 370\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"368\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"48.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"80.55\" y1=\"330.00\" x2=\"80.55\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"113.09\" y1=\"330.00\" x2=\"113.09\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"145.64\" y1=\"330.00\" x2=\"145.64\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"178.18\" y1=\"330.00\" x2=\"178.18\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"210.73\" y1=\"330.00\" x2=\"210.73\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"243.27\" y1=\"330.00\" x2=\"243.27\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"275.82\" y1=\"330.00\" x2=\"275.82\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"308.36\" y1=\"330.00\" x2=\"308.36\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"340.91\" y1=\"330.00\" x2=\"340.91\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"373.45\" y1=\"330.00\" x2=\"373.45\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"406.00\" y1=\"330.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"406.00\" y2=\"330.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"307.86\" x2=\"406.00\" y2=\"307.86\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"285.71\" x2=\"406.00\" y2=\"285.71\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"263.57\" x2=\"406.00\" y2=\"263.57\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"241.43\" x2=\"406.00\" y2=\"241.43\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"219.29\" x2=\"406.00\" y2=\"219.29\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"197.14\" x2=\"406.00\" y2=\"197.14\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"175.00\" x2=\"406.00\" y2=\"175.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"152.86\" x2=\"406.00\" y2=\"152.86\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"130.71\" x2=\"406.00\" y2=\"130.71\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"108.57\" x2=\"406.00\" y2=\"108.57\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"86.43\" x2=\"406.00\" y2=\"86.43\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"64.29\" x2=\"406.00\" y2=\"64.29\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"42.14\" x2=\"406.00\" y2=\"42.14\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"20.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"241.43\" x2=\"406.00\" y2=\"241.43\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"48.00\" y=\"258.43\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-3</text><text x=\"80.55\" y=\"258.43\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-2</text><text x=\"113.09\" y=\"258.43\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-1</text><text x=\"178.18\" y=\"258.43\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"210.73\" y=\"258.43\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"243.27\" y=\"258.43\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"275.82\" y=\"258.43\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"308.36\" y=\"258.43\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"340.91\" y=\"258.43\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"373.45\" y=\"258.43\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><text x=\"406.00\" y=\"258.43\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">8</text><line x1=\"145.64\" y1=\"330.00\" x2=\"145.64\" y2=\"20.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"137.64\" y=\"333.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-4</text><text x=\"137.64\" y=\"310.86\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-3</text><text x=\"137.64\" y=\"288.71\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-2</text><text x=\"137.64\" y=\"266.57\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">-1</text><text x=\"137.64\" y=\"222.29\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"137.64\" y=\"200.14\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"137.64\" y=\"178.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"137.64\" y=\"155.86\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"137.64\" y=\"133.71\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"137.64\" y=\"111.57\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"137.64\" y=\"89.43\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><text x=\"137.64\" y=\"67.29\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">8</text><text x=\"137.64\" y=\"45.14\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">9</text><text x=\"137.64\" y=\"23.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">10</text><line x1=\"48.00\" y1=\"285.71\" x2=\"406.00\" y2=\"42.14\" stroke=\"#2A5D9E\" stroke-width=\"2.7\"/><text x=\"379.96\" y=\"35.50\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" font-weight=\"600\" fill=\"#2A5D9E\">f</text></svg></span><p>Bestäm en ekvation för funktionen och använd den sedan för att bestämma \\(f(6,5)\\).</p>",
     "s": "<p>Linjen går genom \\((0,1)\\) och \\((2,3)\\), så \\(k=1\\) och \\(m=1\\).</p><p>Alltså \\(f(x)=x+1\\). Då \\(f(6,5)=7,5\\).</p><p><strong>\\(f(x)=x+1\\) och \\(f(6,5)=7,5\\).</strong></p>",
     "familj": "r3_line_graph_function_value"
-  },
-  {
-    "id": "1.133",
-    "kap": 1,
-    "omr": "programmering_numerisk_ekvationslosning",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Ett program testar heltal \\(x=0,1,2,\\dots\\) tills olikheten \\(3x+5\\ge41\\) blir sann.</p><p>Vilket värde stannar programmet vid? Förklara kort.</p>",
-    "s": "<p>Följ algoritmens steg och använd teckenbyte eller intervallförminskning för att ringa in lösningen.</p><p>\\(3x\\ge36\\Rightarrow x\\ge12\\).</p><p><strong>Programmet stannar vid \\(x=12\\).</strong></p>",
-    "familj": "r3_program_search_1"
   },
   {
     "id": "1.134",
@@ -1487,19 +1431,6 @@ window.BANKMA2 = [
     "t": "<p>Systemet</p><p>\\(\\begin{cases}(a+1)x+2y=5\\\\2(a+1)x+4y=b\\end{cases}\\)</p><p>kan ha ingen lösning eller oändligt många lösningar. Beskriv alla värden på \\(a\\) och \\(b\\) i de två fallen.</p>",
     "s": "<p>Den andra ekvationens vänsterled är dubbelt så stort som den första. Om även högerledet är dubbelt, alltså \\(b=10\\), beskriver ekvationerna samma linje och systemet har oändligt många lösningar. Om \\(b\\ne10\\) blir linjerna parallella och olika.</p><p><strong>Oändligt många lösningar för alla \\(a\\) när \\(b=10\\). Ingen lösning för alla \\(a\\) när \\(b\\ne10\\).</strong></p>",
     "familj": "r3_A_system_two_params"
-  },
-  {
-    "id": "1.142",
-    "kap": 1,
-    "omr": "programmering_numerisk_ekvationslosning",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>Ett program testar heltal \\(x=0,1,2,\\dots\\) och stannar vid första värdet som uppfyller båda villkoren</p><p>\\(2x+1\\ge17\\) och \\(5x-4\\le31\\).</p><p>Vilket värde stannar programmet vid? Finns det fler heltal som också uppfyller villkoren?</p>",
-    "s": "<p>Första villkoret ger \\(x\\ge8\\). Andra ger \\(5x\\le35\\Rightarrow x\\le7\\). Inget heltal kan uppfylla båda villkoren samtidigt.</p><p><strong>Programmet stannar aldrig. Det finns inga heltal som uppfyller båda villkoren.</strong></p>",
-    "familj": "r3_A_program_contradiction"
   },
   {
     "id": "1.143",
@@ -2176,7 +2107,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>De två linjerna i figuren beskriver ett ekvationssystem.</p><span class=\"fig smal\"><svg width=\"420\" height=\"300\" viewBox=\"0 0 420 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"418\" height=\"298\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"45.0\" y1=\"265.0\" x2=\"45.0\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"77.3\" y1=\"265.0\" x2=\"77.3\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"109.5\" y1=\"265.0\" x2=\"109.5\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"141.8\" y1=\"265.0\" x2=\"141.8\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"174.1\" y1=\"265.0\" x2=\"174.1\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"206.4\" y1=\"265.0\" x2=\"206.4\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"238.6\" y1=\"265.0\" x2=\"238.6\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"270.9\" y1=\"265.0\" x2=\"270.9\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"303.2\" y1=\"265.0\" x2=\"303.2\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"335.5\" y1=\"265.0\" x2=\"335.5\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"367.7\" y1=\"265.0\" x2=\"367.7\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"400.0\" y1=\"265.0\" x2=\"400.0\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"265.0\" x2=\"400.0\" y2=\"265.0\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"247.4\" x2=\"400.0\" y2=\"247.4\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"229.7\" x2=\"400.0\" y2=\"229.7\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"212.1\" x2=\"400.0\" y2=\"212.1\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"194.4\" x2=\"400.0\" y2=\"194.4\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"176.8\" x2=\"400.0\" y2=\"176.8\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"159.1\" x2=\"400.0\" y2=\"159.1\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"141.5\" x2=\"400.0\" y2=\"141.5\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"123.9\" x2=\"400.0\" y2=\"123.9\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"106.2\" x2=\"400.0\" y2=\"106.2\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"88.6\" x2=\"400.0\" y2=\"88.6\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"70.9\" x2=\"400.0\" y2=\"70.9\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"53.3\" x2=\"400.0\" y2=\"53.3\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"35.6\" x2=\"400.0\" y2=\"35.6\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"18.0\" x2=\"400.0\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"194.4\" x2=\"400.0\" y2=\"194.4\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"45.0\" y=\"209.4\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">-3</text><text x=\"77.3\" y=\"209.4\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">-2</text><text x=\"109.5\" y=\"209.4\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">-1</text><text x=\"174.1\" y=\"209.4\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">1</text><text x=\"206.4\" y=\"209.4\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">2</text><text x=\"238.6\" y=\"209.4\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">3</text><text x=\"270.9\" y=\"209.4\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">4</text><text x=\"303.2\" y=\"209.4\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">5</text><text x=\"335.5\" y=\"209.4\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">6</text><text x=\"367.7\" y=\"209.4\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">7</text><text x=\"400.0\" y=\"209.4\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">8</text><line x1=\"141.8\" y1=\"265.0\" x2=\"141.8\" y2=\"18.0\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"134.8\" y=\"268.0\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">-4</text><text x=\"134.8\" y=\"250.4\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">-3</text><text x=\"134.8\" y=\"232.7\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">-2</text><text x=\"134.8\" y=\"215.1\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">-1</text><text x=\"134.8\" y=\"179.8\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">1</text><text x=\"134.8\" y=\"162.1\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">2</text><text x=\"134.8\" y=\"144.5\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">3</text><text x=\"134.8\" y=\"126.9\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">4</text><text x=\"134.8\" y=\"109.2\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">5</text><text x=\"134.8\" y=\"91.6\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">6</text><text x=\"134.8\" y=\"73.9\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">7</text><text x=\"134.8\" y=\"56.3\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">8</text><text x=\"134.8\" y=\"38.6\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">9</text><text x=\"134.8\" y=\"21.0\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">10</text><path d=\"M 45.0 185.6 L 46.8 185.1 L 48.6 184.6 L 50.4 184.1 L 52.1 183.7 L 53.9 183.2 L 55.7 182.7 L 57.5 182.2 L 59.3 181.7 L 61.1 181.2 L 62.8 180.7 L 64.6 180.2 L 66.4 179.8 L 68.2 179.3 L 70.0 178.8 L 71.8 178.3 L 73.5 177.8 L 75.3 177.3 L 77.1 176.8 L 78.9 176.3 L 80.7 175.9 L 82.5 175.4 L 84.2 174.9 L 86.0 174.4 L 87.8 173.9 L 89.6 173.4 L 91.4 172.9 L 93.2 172.4 L 94.9 172.0 L 96.7 171.5 L 98.5 171.0 L 100.3 170.5 L 102.1 170.0 L 103.9 169.5 L 105.7 169.0 L 107.4 168.5 L 109.2 168.1 L 111.0 167.6 L 112.8 167.1 L 114.6 166.6 L 116.4 166.1 L 118.1 165.6 L 119.9 165.1 L 121.7 164.6 L 123.5 164.2 L 125.3 163.7 L 127.1 163.2 L 128.8 162.7 L 130.6 162.2 L 132.4 161.7 L 134.2 161.2 L 136.0 160.7 L 137.8 160.3 L 139.5 159.8 L 141.3 159.3 L 143.1 158.8 L 144.9 158.3 L 146.7 157.8 L 148.5 157.3 L 150.3 156.8 L 152.0 156.4 L 153.8 155.9 L 155.6 155.4 L 157.4 154.9 L 159.2 154.4 L 161.0 153.9 L 162.7 153.4 L 164.5 152.9 L 166.3 152.4 L 168.1 152.0 L 169.9 151.5 L 171.7 151.0 L 173.4 150.5 L 175.2 150.0 L 177.0 149.5 L 178.8 149.0 L 180.6 148.5 L 182.4 148.1 L 184.1 147.6 L 185.9 147.1 L 187.7 146.6 L 189.5 146.1 L 191.3 145.6 L 193.1 145.1 L 194.8 144.6 L 196.6 144.2 L 198.4 143.7 L 200.2 143.2 L 202.0 142.7 L 203.8 142.2 L 205.6 141.7 L 207.3 141.2 L 209.1 140.7 L 210.9 140.3 L 212.7 139.8 L 214.5 139.3 L 216.3 138.8 L 218.0 138.3 L 219.8 137.8 L 221.6 137.3 L 223.4 136.8 L 225.2 136.4 L 227.0 135.9 L 228.7 135.4 L 230.5 134.9 L 232.3 134.4 L 234.1 133.9 L 235.9 133.4 L 237.7 132.9 L 239.4 132.5 L 241.2 132.0 L 243.0 131.5 L 244.8 131.0 L 246.6 130.5 L 248.4 130.0 L 250.2 129.5 L 251.9 129.0 L 253.7 128.6 L 255.5 128.1 L 257.3 127.6 L 259.1 127.1 L 260.9 126.6 L 262.6 126.1 L 264.4 125.6 L 266.2 125.1 L 268.0 124.7 L 269.8 124.2 L 271.6 123.7 L 273.3 123.2 L 275.1 122.7 L 276.9 122.2 L 278.7 121.7 L 280.5 121.2 L 282.3 120.8 L 284.0 120.3 L 285.8 119.8 L 287.6 119.3 L 289.4 118.8 L 291.2 118.3 L 293.0 117.8 L 294.7 117.3 L 296.5 116.9 L 298.3 116.4 L 300.1 115.9 L 301.9 115.4 L 303.7 114.9 L 305.5 114.4 L 307.2 113.9 L 309.0 113.4 L 310.8 113.0 L 312.6 112.5 L 314.4 112.0 L 316.2 111.5 L 317.9 111.0 L 319.7 110.5 L 321.5 110.0 L 323.3 109.5 L 325.1 109.1 L 326.9 108.6 L 328.6 108.1 L 330.4 107.6 L 332.2 107.1 L 334.0 106.6 L 335.8 106.1 L 337.6 105.6 L 339.3 105.2 L 341.1 104.7 L 342.9 104.2 L 344.7 103.7 L 346.5 103.2 L 348.3 102.7 L 350.1 102.2 L 351.8 101.7 L 353.6 101.2 L 355.4 100.8 L 357.2 100.3 L 359.0 99.8 L 360.8 99.3 L 362.5 98.8 L 364.3 98.3 L 366.1 97.8 L 367.9 97.3 L 369.7 96.9 L 371.5 96.4 L 373.2 95.9 L 375.0 95.4 L 376.8 94.9 L 378.6 94.4 L 380.4 93.9 L 382.2 93.4 L 383.9 93.0 L 385.7 92.5 L 387.5 92.0 L 389.3 91.5 L 391.1 91.0 L 392.9 90.5 L 394.6 90.0 L 396.4 89.5 L 398.2 89.1 L 400.0 88.6\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.6\"/><path d=\"M 78.9 18.9 L 80.7 19.9 L 82.5 20.8 L 84.2 21.8 L 86.0 22.8 L 87.8 23.8 L 89.6 24.7 L 91.4 25.7 L 93.2 26.7 L 94.9 27.7 L 96.7 28.6 L 98.5 29.6 L 100.3 30.6 L 102.1 31.6 L 103.9 32.5 L 105.7 33.5 L 107.4 34.5 L 109.2 35.5 L 111.0 36.4 L 112.8 37.4 L 114.6 38.4 L 116.4 39.4 L 118.1 40.3 L 119.9 41.3 L 121.7 42.3 L 123.5 43.3 L 125.3 44.2 L 127.1 45.2 L 128.8 46.2 L 130.6 47.2 L 132.4 48.1 L 134.2 49.1 L 136.0 50.1 L 137.8 51.1 L 139.5 52.0 L 141.3 53.0 L 143.1 54.0 L 144.9 55.0 L 146.7 55.9 L 148.5 56.9 L 150.3 57.9 L 152.0 58.9 L 153.8 59.8 L 155.6 60.8 L 157.4 61.8 L 159.2 62.8 L 161.0 63.7 L 162.7 64.7 L 164.5 65.7 L 166.3 66.7 L 168.1 67.6 L 169.9 68.6 L 171.7 69.6 L 173.4 70.6 L 175.2 71.5 L 177.0 72.5 L 178.8 73.5 L 180.6 74.5 L 182.4 75.5 L 184.1 76.4 L 185.9 77.4 L 187.7 78.4 L 189.5 79.4 L 191.3 80.3 L 193.1 81.3 L 194.8 82.3 L 196.6 83.3 L 198.4 84.2 L 200.2 85.2 L 202.0 86.2 L 203.8 87.2 L 205.6 88.1 L 207.3 89.1 L 209.1 90.1 L 210.9 91.1 L 212.7 92.0 L 214.5 93.0 L 216.3 94.0 L 218.0 95.0 L 219.8 95.9 L 221.6 96.9 L 223.4 97.9 L 225.2 98.9 L 227.0 99.8 L 228.7 100.8 L 230.5 101.8 L 232.3 102.8 L 234.1 103.7 L 235.9 104.7 L 237.7 105.7 L 239.4 106.7 L 241.2 107.6 L 243.0 108.6 L 244.8 109.6 L 246.6 110.6 L 248.4 111.5 L 250.2 112.5 L 251.9 113.5 L 253.7 114.5 L 255.5 115.4 L 257.3 116.4 L 259.1 117.4 L 260.9 118.4 L 262.6 119.3 L 264.4 120.3 L 266.2 121.3 L 268.0 122.3 L 269.8 123.2 L 271.6 124.2 L 273.3 125.2 L 275.1 126.2 L 276.9 127.1 L 278.7 128.1 L 280.5 129.1 L 282.3 130.1 L 284.0 131.0 L 285.8 132.0 L 287.6 133.0 L 289.4 134.0 L 291.2 134.9 L 293.0 135.9 L 294.7 136.9 L 296.5 137.9 L 298.3 138.8 L 300.1 139.8 L 301.9 140.8 L 303.7 141.8 L 305.5 142.7 L 307.2 143.7 L 309.0 144.7 L 310.8 145.7 L 312.6 146.6 L 314.4 147.6 L 316.2 148.6 L 317.9 149.6 L 319.7 150.5 L 321.5 151.5 L 323.3 152.5 L 325.1 153.5 L 326.9 154.4 L 328.6 155.4 L 330.4 156.4 L 332.2 157.4 L 334.0 158.3 L 335.8 159.3 L 337.6 160.3 L 339.3 161.3 L 341.1 162.2 L 342.9 163.2 L 344.7 164.2 L 346.5 165.2 L 348.3 166.1 L 350.1 167.1 L 351.8 168.1 L 353.6 169.1 L 355.4 170.0 L 357.2 171.0 L 359.0 172.0 L 360.8 173.0 L 362.5 173.9 L 364.3 174.9 L 366.1 175.9 L 367.9 176.9 L 369.7 177.8 L 371.5 178.8 L 373.2 179.8 L 375.0 180.8 L 376.8 181.8 L 378.6 182.7 L 380.4 183.7 L 382.2 184.7 L 383.9 185.7 L 385.7 186.6 L 387.5 187.6 L 389.3 188.6 L 391.1 189.6 L 392.9 190.5 L 394.6 191.5 L 396.4 192.5 L 398.2 193.5 L 400.0 194.4\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2.6\"/><circle cx=\"270.9\" cy=\"123.9\" r=\"4\" fill=\"#222\"/></svg></span><p>a) Bestäm lösningen grafiskt.<br>b) Förklara vad lösningen betyder.</p>",
-    "s": "<p>Linjerna skär varandra i punkten \\((4,4)\\).</p><p><strong>a) \\((x,y)=(4,4)\\).</strong></p><p>Skärningspunkten är den punkt som uppfyller båda ekvationerna samtidigt.</p>",
+    "s": "<p>Linjerna skär varandra i punkten \\((4,4)\\).</p><p><strong>a) \\((x,y)=(4,4)\\).</strong></p><p>Skärningspunkten är den punkt som uppfyller båda ekvationerna samtidigt.</p><p><strong>GeoGebra:</strong> Skriv in de två linjernas ekvationer i grafvyn. Lösningen till ekvationssystemet är koordinaterna för linjernas skärningspunkt. Zooma så att skärningen syns tydligt och klicka på punkten för att läsa av koordinaterna.</p>",
     "familj": "np2_grafiskt_system"
   },
   {
@@ -2266,7 +2197,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Lös ekvationssystemet grafiskt.</p><span class=\"fig smal\"><svg width=\"420\" height=\"300\" viewBox=\"0 0 420 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"418\" height=\"298\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"45.0\" y1=\"265.0\" x2=\"45.0\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"80.5\" y1=\"265.0\" x2=\"80.5\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"116.0\" y1=\"265.0\" x2=\"116.0\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"151.5\" y1=\"265.0\" x2=\"151.5\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"187.0\" y1=\"265.0\" x2=\"187.0\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"222.5\" y1=\"265.0\" x2=\"222.5\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"258.0\" y1=\"265.0\" x2=\"258.0\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"293.5\" y1=\"265.0\" x2=\"293.5\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"329.0\" y1=\"265.0\" x2=\"329.0\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"364.5\" y1=\"265.0\" x2=\"364.5\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"400.0\" y1=\"265.0\" x2=\"400.0\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"265.0\" x2=\"400.0\" y2=\"265.0\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"242.5\" x2=\"400.0\" y2=\"242.5\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"220.1\" x2=\"400.0\" y2=\"220.1\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"197.6\" x2=\"400.0\" y2=\"197.6\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"175.2\" x2=\"400.0\" y2=\"175.2\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"152.7\" x2=\"400.0\" y2=\"152.7\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"130.3\" x2=\"400.0\" y2=\"130.3\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"107.8\" x2=\"400.0\" y2=\"107.8\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"85.4\" x2=\"400.0\" y2=\"85.4\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"62.9\" x2=\"400.0\" y2=\"62.9\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"40.5\" x2=\"400.0\" y2=\"40.5\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"18.0\" x2=\"400.0\" y2=\"18.0\" stroke=\"#E8E7EA\"/><line x1=\"45.0\" y1=\"220.1\" x2=\"400.0\" y2=\"220.1\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"45.0\" y=\"235.1\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">-2</text><text x=\"80.5\" y=\"235.1\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">-1</text><text x=\"151.5\" y=\"235.1\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">1</text><text x=\"187.0\" y=\"235.1\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">2</text><text x=\"222.5\" y=\"235.1\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">3</text><text x=\"258.0\" y=\"235.1\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">4</text><text x=\"293.5\" y=\"235.1\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">5</text><text x=\"329.0\" y=\"235.1\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">6</text><text x=\"364.5\" y=\"235.1\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">7</text><text x=\"400.0\" y=\"235.1\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">8</text><line x1=\"116.0\" y1=\"265.0\" x2=\"116.0\" y2=\"18.0\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"109.0\" y=\"268.0\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">-2</text><text x=\"109.0\" y=\"245.5\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">-1</text><text x=\"109.0\" y=\"200.6\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">1</text><text x=\"109.0\" y=\"178.2\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">2</text><text x=\"109.0\" y=\"155.7\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">3</text><text x=\"109.0\" y=\"133.3\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">4</text><text x=\"109.0\" y=\"110.8\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">5</text><text x=\"109.0\" y=\"88.4\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">6</text><text x=\"109.0\" y=\"65.9\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">7</text><text x=\"109.0\" y=\"43.5\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">8</text><text x=\"109.0\" y=\"21.0\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">9</text><path d=\"M 45.0 242.5 L 46.8 241.4 L 48.6 240.3 L 50.4 239.2 L 52.1 238.0 L 53.9 236.9 L 55.7 235.8 L 57.5 234.6 L 59.3 233.5 L 61.1 232.4 L 62.8 231.3 L 64.6 230.1 L 66.4 229.0 L 68.2 227.9 L 70.0 226.7 L 71.8 225.6 L 73.5 224.5 L 75.3 223.4 L 77.1 222.2 L 78.9 221.1 L 80.7 220.0 L 82.5 218.8 L 84.2 217.7 L 86.0 216.6 L 87.8 215.5 L 89.6 214.3 L 91.4 213.2 L 93.2 212.1 L 94.9 211.0 L 96.7 209.8 L 98.5 208.7 L 100.3 207.6 L 102.1 206.4 L 103.9 205.3 L 105.7 204.2 L 107.4 203.1 L 109.2 201.9 L 111.0 200.8 L 112.8 199.7 L 114.6 198.5 L 116.4 197.4 L 118.1 196.3 L 119.9 195.2 L 121.7 194.0 L 123.5 192.9 L 125.3 191.8 L 127.1 190.6 L 128.8 189.5 L 130.6 188.4 L 132.4 187.3 L 134.2 186.1 L 136.0 185.0 L 137.8 183.9 L 139.5 182.7 L 141.3 181.6 L 143.1 180.5 L 144.9 179.4 L 146.7 178.2 L 148.5 177.1 L 150.3 176.0 L 152.0 174.8 L 153.8 173.7 L 155.6 172.6 L 157.4 171.5 L 159.2 170.3 L 161.0 169.2 L 162.7 168.1 L 164.5 166.9 L 166.3 165.8 L 168.1 164.7 L 169.9 163.6 L 171.7 162.4 L 173.4 161.3 L 175.2 160.2 L 177.0 159.0 L 178.8 157.9 L 180.6 156.8 L 182.4 155.7 L 184.1 154.5 L 185.9 153.4 L 187.7 152.3 L 189.5 151.1 L 191.3 150.0 L 193.1 148.9 L 194.8 147.8 L 196.6 146.6 L 198.4 145.5 L 200.2 144.4 L 202.0 143.2 L 203.8 142.1 L 205.6 141.0 L 207.3 139.9 L 209.1 138.7 L 210.9 137.6 L 212.7 136.5 L 214.5 135.4 L 216.3 134.2 L 218.0 133.1 L 219.8 132.0 L 221.6 130.8 L 223.4 129.7 L 225.2 128.6 L 227.0 127.5 L 228.7 126.3 L 230.5 125.2 L 232.3 124.1 L 234.1 122.9 L 235.9 121.8 L 237.7 120.7 L 239.4 119.6 L 241.2 118.4 L 243.0 117.3 L 244.8 116.2 L 246.6 115.0 L 248.4 113.9 L 250.2 112.8 L 251.9 111.7 L 253.7 110.5 L 255.5 109.4 L 257.3 108.3 L 259.1 107.1 L 260.9 106.0 L 262.6 104.9 L 264.4 103.8 L 266.2 102.6 L 268.0 101.5 L 269.8 100.4 L 271.6 99.2 L 273.3 98.1 L 275.1 97.0 L 276.9 95.9 L 278.7 94.7 L 280.5 93.6 L 282.3 92.5 L 284.0 91.3 L 285.8 90.2 L 287.6 89.1 L 289.4 88.0 L 291.2 86.8 L 293.0 85.7 L 294.7 84.6 L 296.5 83.4 L 298.3 82.3 L 300.1 81.2 L 301.9 80.1 L 303.7 78.9 L 305.5 77.8 L 307.2 76.7 L 309.0 75.5 L 310.8 74.4 L 312.6 73.3 L 314.4 72.2 L 316.2 71.0 L 317.9 69.9 L 319.7 68.8 L 321.5 67.6 L 323.3 66.5 L 325.1 65.4 L 326.9 64.3 L 328.6 63.1 L 330.4 62.0 L 332.2 60.9 L 334.0 59.7 L 335.8 58.6 L 337.6 57.5 L 339.3 56.4 L 341.1 55.2 L 342.9 54.1 L 344.7 53.0 L 346.5 51.9 L 348.3 50.7 L 350.1 49.6 L 351.8 48.5 L 353.6 47.3 L 355.4 46.2 L 357.2 45.1 L 359.0 44.0 L 360.8 42.8 L 362.5 41.7 L 364.3 40.6 L 366.1 39.4 L 367.9 38.3 L 369.7 37.2 L 371.5 36.1 L 373.2 34.9 L 375.0 33.8 L 376.8 32.7 L 378.6 31.5 L 380.4 30.4 L 382.2 29.3 L 383.9 28.2 L 385.7 27.0 L 387.5 25.9 L 389.3 24.8 L 391.1 23.6 L 392.9 22.5 L 394.6 21.4 L 396.4 20.3 L 398.2 19.1 L 400.0 18.0\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.7\"/><path d=\"M 45.0 107.8 L 46.8 108.4 L 48.6 108.9 L 50.4 109.5 L 52.1 110.1 L 53.9 110.6 L 55.7 111.2 L 57.5 111.8 L 59.3 112.3 L 61.1 112.9 L 62.8 113.5 L 64.6 114.0 L 66.4 114.6 L 68.2 115.2 L 70.0 115.7 L 71.8 116.3 L 73.5 116.8 L 75.3 117.4 L 77.1 118.0 L 78.9 118.5 L 80.7 119.1 L 82.5 119.7 L 84.2 120.2 L 86.0 120.8 L 87.8 121.4 L 89.6 121.9 L 91.4 122.5 L 93.2 123.1 L 94.9 123.6 L 96.7 124.2 L 98.5 124.7 L 100.3 125.3 L 102.1 125.9 L 103.9 126.4 L 105.7 127.0 L 107.4 127.6 L 109.2 128.1 L 111.0 128.7 L 112.8 129.3 L 114.6 129.8 L 116.4 130.4 L 118.1 130.9 L 119.9 131.5 L 121.7 132.1 L 123.5 132.6 L 125.3 133.2 L 127.1 133.8 L 128.8 134.3 L 130.6 134.9 L 132.4 135.5 L 134.2 136.0 L 136.0 136.6 L 137.8 137.2 L 139.5 137.7 L 141.3 138.3 L 143.1 138.8 L 144.9 139.4 L 146.7 140.0 L 148.5 140.5 L 150.3 141.1 L 152.0 141.7 L 153.8 142.2 L 155.6 142.8 L 157.4 143.4 L 159.2 143.9 L 161.0 144.5 L 162.7 145.1 L 164.5 145.6 L 166.3 146.2 L 168.1 146.7 L 169.9 147.3 L 171.7 147.9 L 173.4 148.4 L 175.2 149.0 L 177.0 149.6 L 178.8 150.1 L 180.6 150.7 L 182.4 151.3 L 184.1 151.8 L 185.9 152.4 L 187.7 153.0 L 189.5 153.5 L 191.3 154.1 L 193.1 154.6 L 194.8 155.2 L 196.6 155.8 L 198.4 156.3 L 200.2 156.9 L 202.0 157.5 L 203.8 158.0 L 205.6 158.6 L 207.3 159.2 L 209.1 159.7 L 210.9 160.3 L 212.7 160.9 L 214.5 161.4 L 216.3 162.0 L 218.0 162.5 L 219.8 163.1 L 221.6 163.7 L 223.4 164.2 L 225.2 164.8 L 227.0 165.4 L 228.7 165.9 L 230.5 166.5 L 232.3 167.1 L 234.1 167.6 L 235.9 168.2 L 237.7 168.8 L 239.4 169.3 L 241.2 169.9 L 243.0 170.4 L 244.8 171.0 L 246.6 171.6 L 248.4 172.1 L 250.2 172.7 L 251.9 173.3 L 253.7 173.8 L 255.5 174.4 L 257.3 175.0 L 259.1 175.5 L 260.9 176.1 L 262.6 176.6 L 264.4 177.2 L 266.2 177.8 L 268.0 178.3 L 269.8 178.9 L 271.6 179.5 L 273.3 180.0 L 275.1 180.6 L 276.9 181.2 L 278.7 181.7 L 280.5 182.3 L 282.3 182.9 L 284.0 183.4 L 285.8 184.0 L 287.6 184.5 L 289.4 185.1 L 291.2 185.7 L 293.0 186.2 L 294.7 186.8 L 296.5 187.4 L 298.3 187.9 L 300.1 188.5 L 301.9 189.1 L 303.7 189.6 L 305.5 190.2 L 307.2 190.8 L 309.0 191.3 L 310.8 191.9 L 312.6 192.4 L 314.4 193.0 L 316.2 193.6 L 317.9 194.1 L 319.7 194.7 L 321.5 195.3 L 323.3 195.8 L 325.1 196.4 L 326.9 197.0 L 328.6 197.5 L 330.4 198.1 L 332.2 198.7 L 334.0 199.2 L 335.8 199.8 L 337.6 200.3 L 339.3 200.9 L 341.1 201.5 L 342.9 202.0 L 344.7 202.6 L 346.5 203.2 L 348.3 203.7 L 350.1 204.3 L 351.8 204.9 L 353.6 205.4 L 355.4 206.0 L 357.2 206.6 L 359.0 207.1 L 360.8 207.7 L 362.5 208.2 L 364.3 208.8 L 366.1 209.4 L 367.9 209.9 L 369.7 210.5 L 371.5 211.1 L 373.2 211.6 L 375.0 212.2 L 376.8 212.8 L 378.6 213.3 L 380.4 213.9 L 382.2 214.4 L 383.9 215.0 L 385.7 215.6 L 387.5 216.1 L 389.3 216.7 L 391.1 217.3 L 392.9 217.8 L 394.6 218.4 L 396.4 219.0 L 398.2 219.5 L 400.0 220.1\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2.7\"/><circle cx=\"187.0\" cy=\"152.7\" r=\"4.2\" fill=\"#222\"/></svg></span>",
-    "s": "<p>Lösningen är linjernas skärningspunkt.</p><p>Av grafen avläses skärningen till \\((2,3)\\).</p><p><strong>\\((x,y)=(2,3)\\).</strong></p>",
+    "s": "<p>Lösningen är linjernas skärningspunkt.</p><p>Av grafen avläses skärningen till \\((2,3)\\).</p><p><strong>\\((x,y)=(2,3)\\).</strong></p><p><strong>GeoGebra:</strong> Skriv in de två linjernas ekvationer i grafvyn. Lösningen till ekvationssystemet är koordinaterna för linjernas skärningspunkt. Zooma så att skärningen syns tydligt och klicka på punkten för att läsa av koordinaterna.</p>",
     "familj": "np3_grafiskt_system_svg"
   },
   {
@@ -2450,32 +2381,6 @@ window.BANKMA2 = [
     "familj": "parabel_symmetri_max"
   },
   {
-    "id": "2.09",
-    "kap": 2,
-    "omr": "potensregler",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "3/0/0",
-    "t": "<p>Förenkla. Skriv svaret som en potens.</p><p>a) \\(x^4\\cdot x^7\\)<br>b) \\(\\frac{a^9}{a^3}\\)<br>c) \\((y^3)^4\\)</p>",
-    "s": "<p>Använd potenslagarna stegvis och förenkla exponenterna innan du skriver slutsvaret.</p><p><strong>a) \\(x^{11}\\)</strong></p><p><strong>b) \\(a^6\\)</strong></p><p><strong>c) \\(y^{12}\\)</strong></p>",
-    "familj": "potensregler_mangd"
-  },
-  {
-    "id": "2.10",
-    "kap": 2,
-    "omr": "potensfunktioner",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En kvadrats area kan beskrivas med potensfunktionen \\(A(s)=s^2\\), där \\(s\\) är sidlängden i cm.</p><p>a) Bestäm \\(A(7)\\).<br>b) Vilken sidlängd har en kvadrat med arean 121 cm²?</p>",
-    "s": "<p>Sätt in de kända punkterna i \\(y=ax^n\\) och jämför ekvationerna för att bestämma exponent och konstant.</p><p>a) \\(A(7)=49\\).</p><p>b) \\(s^2=121\\Rightarrow s=11\\), eftersom en längd är positiv.</p><p><strong>a) 49 cm², b) 11 cm.</strong></p>",
-    "familj": "potensfunktion_kvadrat"
-  },
-  {
     "id": "2.11",
     "kap": 2,
     "omr": "exponentialfunktioner",
@@ -2543,23 +2448,8 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "1/0/0",
     "t": "<p>Lös ekvationen \\(500\\cdot1,12^x=900\\) med ett digitalt verktyg. Svara med en decimal.</p>",
-    "s": "<p>Isolera exponentialuttrycket och använd sedan logaritmer för att få ner exponenten.</p><p>En digital lösning ger \\(x\\approx5,19\\).</p><p><strong>\\(x\\approx5,2\\).</strong></p>",
+    "s": "<p>Isolera exponentialuttrycket och använd sedan logaritmer för att få ner exponenten.</p><p>En digital lösning ger \\(x\\approx5,19\\).</p><p><strong>\\(x\\approx5,2\\).</strong></p><p><strong>GeoGebra:</strong> Använd CAS. Skriv ekvationen och använd <code>Lös</code> om ett exakt symboliskt svar är rimligt. När ett numeriskt decimalvärde söks använder du <code>NLös</code>. Exempel: <code>NLös(vänsterled=högerled)</code>. Kontrollera att den lösning du använder ligger i det intervall som är relevant för uppgiften.</p>",
     "familj": "exp_eq_digital_2a"
-  },
-  {
-    "id": "2.16",
-    "kap": 2,
-    "omr": "potensekvationer",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Lös ekvationerna.</p><p>a) \\(x^3=64\\)<br>b) \\(x^4=81\\)</p>",
-    "s": "<p>Isolera potensen och ta därefter motsvarande rot. Tänk på att jämna potenser kan ge två reella lösningar.</p><p><strong>a) \\(x=4\\).</strong></p><p>b) Eftersom exponenten är jämn finns två reella lösningar: <strong>\\(x=\\pm3\\).</strong></p>",
-    "familj": "potensekvationer_grund"
   },
   {
     "id": "2.17",
@@ -2714,7 +2604,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>Två modeller är</p><p>\\(f(x)=4x^2\\) och \\(g(x)=3\\cdot1,5^x\\), där \\(x\\ge5\\).</p><p>Använd ett digitalt verktyg för att bestämma det minsta heltalsvärdet på \\(x\\) där \\(g(x)&gt;f(x)\\).</p>",
-    "s": "<p>Kontroll nära övergången ger \\(g(13)\\approx583,9\\) och \\(f(13)=676\\), så \\(g(13)&lt;f(13)\\).</p><p>För \\(x=14\\) är \\(g(14)\\approx875,8\\) och \\(f(14)=784\\), så \\(g(14)&gt;f(14)\\).</p><p><strong>Det minsta heltalet är \\(x=14\\).</strong></p>",
+    "s": "<p>Kontroll nära övergången ger \\(g(13)\\approx583,9\\) och \\(f(13)=676\\), så \\(g(13)&lt;f(13)\\).</p><p>För \\(x=14\\) är \\(g(14)\\approx875,8\\) och \\(f(14)=784\\), så \\(g(14)&gt;f(14)\\).</p><p><strong>Det minsta heltalet är \\(x=14\\).</strong></p><p><strong>GeoGebra:</strong> Använd CAS. Skriv ekvationen och använd <code>Lös</code> om ett exakt symboliskt svar är rimligt. När ett numeriskt decimalvärde söks använder du <code>NLös</code>. Exempel: <code>NLös(vänsterled=högerled)</code>. Kontrollera att den lösning du använder ligger i det intervall som är relevant för uppgiften.</p>",
     "familj": "potens_vs_exponential_heltal"
   },
   {
@@ -3021,34 +2911,6 @@ window.BANKMA2 = [
     "familj": "r2_parabel_function_values"
   },
   {
-    "id": "2.49",
-    "kap": 2,
-    "omr": "potensregler",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "3/0/0",
-    "t": "<p>Förenkla.</p><p>a) \\(x^3x^5\\)<br>b) \\(\\frac{a^8}{a^2}\\)<br>c) \\((b^2)^5\\)</p>",
-    "s": "<p>Använd potenslagarna stegvis och förenkla exponenterna innan du skriver slutsvaret.</p><p><strong>a) \\(x^8\\)</strong></p><p><strong>b) \\(a^6\\)</strong></p><p><strong>c) \\(b^{10}\\)</strong></p>",
-    "familj": "r2_potensregler"
-  },
-  {
-    "id": "2.50",
-    "kap": 2,
-    "omr": "potensfunktioner",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Volymen av en kub är \\(V(s)=s^3\\).</p><p>a) Bestäm \\(V(4)\\).<br>b) Vilken sidlängd har en kub med volymen 125 cm³?</p>",
-    "s": "<p>Sätt in de kända punkterna i \\(y=ax^n\\) och jämför ekvationerna för att bestämma exponent och konstant.</p><p><strong>a) 64 cm³.</strong></p><p><strong>b) 5 cm.</strong></p>",
-    "familj": "r2_potens_kub"
-  },
-  {
     "id": "2.51",
     "kap": 2,
     "omr": "exponentialfunktioner",
@@ -3130,23 +2992,8 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "1/0/0",
     "t": "<p>Lös \\(1200\\cdot0,92^x=700\\) med digitalt verktyg. Svara med en decimal.</p>",
-    "s": "<p>Isolera exponentialuttrycket och använd sedan logaritmer för att få ner exponenten.</p><p>Digital lösning ger \\(x\\approx6,5\\).</p><p><strong>\\(x\\approx6,5\\).</strong></p>",
+    "s": "<p>Isolera exponentialuttrycket och använd sedan logaritmer för att få ner exponenten.</p><p>Digital lösning ger \\(x\\approx6,5\\).</p><p><strong>\\(x\\approx6,5\\).</strong></p><p><strong>GeoGebra:</strong> Använd CAS. Skriv ekvationen och använd <code>Lös</code> om ett exakt symboliskt svar är rimligt. När ett numeriskt decimalvärde söks använder du <code>NLös</code>. Exempel: <code>NLös(vänsterled=högerled)</code>. Kontrollera att den lösning du använder ligger i det intervall som är relevant för uppgiften.</p>",
     "familj": "r2_exp_eq_digital"
-  },
-  {
-    "id": "2.57",
-    "kap": 2,
-    "omr": "potensekvationer",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Lös.</p><p>a) \\(x^5=32\\)<br>b) \\(x^2=20\\)</p>",
-    "s": "<p>Isolera potensen och ta därefter motsvarande rot. Tänk på att jämna potenser kan ge två reella lösningar.</p><p><strong>a) \\(x=2\\).</strong></p><p><strong>b) \\(x=\\pm2\\sqrt5\\).</strong></p>",
-    "familj": "r2_potensekvation"
   },
   {
     "id": "2.58",
@@ -3592,21 +3439,6 @@ window.BANKMA2 = [
     "familj": "r3_parabola_values_1"
   },
   {
-    "id": "2.89",
-    "kap": 2,
-    "omr": "potensregler",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "3/0/0",
-    "t": "<p>Förenkla.</p><p>a) \\(a^4a^3\\)<br>b) \\(\\frac{x^9}{x^4}\\)<br>c) \\((m^3)^2\\)</p>",
-    "s": "<p>Använd potenslagarna stegvis och förenkla exponenterna innan du skriver slutsvaret.</p><p><strong>a) \\(a^7\\)</strong></p><p><strong>b) \\(x^5\\)</strong></p><p><strong>c) \\(m^6\\)</strong></p>",
-    "familj": "r3_potensregler_1"
-  },
-  {
     "id": "2.90",
     "kap": 2,
     "omr": "exponentialgraf",
@@ -3693,21 +3525,6 @@ window.BANKMA2 = [
     "familj": "r3_exp_eq_1"
   },
   {
-    "id": "2.96",
-    "kap": 2,
-    "omr": "potensekvationer",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Lös.</p><p>a) \\(x^3=125\\)<br>b) \\(x^2=45\\)</p>",
-    "s": "<p>Isolera potensen och ta därefter motsvarande rot. Tänk på att jämna potenser kan ge två reella lösningar.</p><p><strong>a) \\(x=5\\).</strong></p><p><strong>b) \\(x=\\pm3\\sqrt5\\).</strong></p>",
-    "familj": "r3_potenseq_1"
-  },
-  {
     "id": "2.97",
     "kap": 2,
     "omr": "rotekvationer",
@@ -3733,19 +3550,6 @@ window.BANKMA2 = [
     "t": "<p>Funktionen är \\(g(x)=3x^2-2x+1\\).</p><p>Bestäm \\(g(-1)\\).</p>",
     "s": "<p>Sätt in det givna x-värdet i funktionsuttrycket, eller sätt funktionsvärdet lika med det givna talet och lös ekvationen.</p><p>\\(g(-1)=3+2+1=6\\).</p><p><strong>6.</strong></p>",
     "familj": "r3_funktionsnotation_1"
-  },
-  {
-    "id": "2.99",
-    "kap": 2,
-    "omr": "potensfunktioner",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Arean av en kvadrat ges av \\(A(s)=s^2\\).</p><p>a) Bestäm \\(A(7)\\).<br>b) Vilken sidlängd har en kvadrat med arean 64 cm²?</p>",
-    "s": "<p>Sätt in de kända punkterna i \\(y=ax^n\\) och jämför ekvationerna för att bestämma exponent och konstant.</p><p><strong>a) 49 cm².</strong></p><p><strong>b) 8 cm.</strong></p>",
-    "familj": "r3_power_square_1"
   },
   {
     "id": "2.100",
@@ -4763,84 +4567,6 @@ window.BANKMA2 = [
     "familj": "r4_A_168"
   },
   {
-    "id": "2.169",
-    "kap": 2,
-    "omr": "programmering_andragrad",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Ett program testar heltal \\(x=-10,-9,\\dots,10\\) och skriver ut de värden som uppfyller \\(x^2-5x+6=0\\). Vilka värden skrivs ut?</p>",
-    "s": "<p>Översätt först programmets test eller formel till den matematiska andragradsekvationen.</p><p><strong>\\(x=2\\) och \\(x=3\\).</strong></p>",
-    "familj": "gap_prog_quad_1"
-  },
-  {
-    "id": "2.170",
-    "kap": 2,
-    "omr": "programmering_andragrad",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Ett program beräknar \\(f(x)=x^2-4x-5\\) för heltal. Vilka heltalsvärden ger \\(f(x)=0\\)?</p>",
-    "s": "<p>Översätt först programmets test eller formel till den matematiska andragradsekvationen.</p><p><strong>\\(x=-1\\) och \\(x=5\\).</strong></p>",
-    "familj": "gap_prog_quad_2"
-  },
-  {
-    "id": "2.171",
-    "kap": 2,
-    "omr": "programmering_andragrad",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Ett program söker den minsta punkten på \\(f(x)=x^2-6x+11\\) genom att testa heltal. Vilket heltal \\(x\\) ger minsta värdet?</p>",
-    "s": "<p>Översätt först programmets test eller formel till den matematiska andragradsekvationen.</p><p><strong>\\(x=3\\).</strong></p>",
-    "familj": "gap_prog_quad_3"
-  },
-  {
-    "id": "2.172",
-    "kap": 2,
-    "omr": "programmering_andragrad",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Ett program testar om \\((x-4)(x+2)=0\\) för heltal mellan −10 och 10. Vilka värden hittas?</p>",
-    "s": "<p>Översätt först programmets test eller formel till den matematiska andragradsekvationen.</p><p><strong>\\(x=-2\\) och \\(x=4\\).</strong></p>",
-    "familj": "gap_prog_quad_4"
-  },
-  {
-    "id": "2.173",
-    "kap": 2,
-    "omr": "programmering_andragrad",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Ett program använder formeln <code>D=b*b-4*a*c</code>. Vad betyder det om programmet får \\(D=0\\)?</p>",
-    "s": "<p>Översätt först programmets test eller formel till den matematiska andragradsekvationen.</p><p><strong>Andragradsekvationen har en dubbel reell rot.</strong></p>",
-    "familj": "gap_prog_quad_5"
-  },
-  {
-    "id": "2.174",
-    "kap": 2,
-    "omr": "programmering_andragrad",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Ett program jämför \\(f(x)=x^2\\) och \\(g(x)=4x\\) för heltal 0–10. För vilka heltal är funktionerna lika?</p>",
-    "s": "<p>Översätt först programmets test eller formel till den matematiska andragradsekvationen.</p><p>\\(x^2=4x\\Rightarrow x(x-4)=0\\).</p><p><strong>\\(x=0\\) och \\(x=4\\).</strong></p>",
-    "familj": "gap_prog_quad_6"
-  },
-  {
     "id": "2.175",
     "kap": 2,
     "omr": "funktionsskrivsatt_rep",
@@ -5009,66 +4735,6 @@ window.BANKMA2 = [
     "familj": "gap_log_basic_6"
   },
   {
-    "id": "2.187",
-    "kap": 2,
-    "omr": "potensregler",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Förenkla \\(\\frac{x^7}{x^3}\\).</p>",
-    "s": "<p>Använd potenslagarna stegvis och förenkla exponenterna innan du skriver slutsvaret.</p><p><strong>\\(x^4\\).</strong></p>",
-    "familj": "gap_power_rule_1"
-  },
-  {
-    "id": "2.188",
-    "kap": 2,
-    "omr": "potensregler",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Förenkla \\(a^5a^2\\).</p>",
-    "s": "<p>Använd potenslagarna stegvis och förenkla exponenterna innan du skriver slutsvaret.</p><p><strong>\\(a^7\\).</strong></p>",
-    "familj": "gap_power_rule_2"
-  },
-  {
-    "id": "2.189",
-    "kap": 2,
-    "omr": "potensregler",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Förenkla \\((m^4)^3\\).</p>",
-    "s": "<p>Använd potenslagarna stegvis och förenkla exponenterna innan du skriver slutsvaret.</p><p><strong>\\(m^{12}\\).</strong></p>",
-    "familj": "gap_power_rule_3"
-  },
-  {
-    "id": "2.190",
-    "kap": 2,
-    "omr": "potensregler",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Förenkla \\(\\frac{b^9}{b^5}\\).</p>",
-    "s": "<p>Använd potenslagarna stegvis och förenkla exponenterna innan du skriver slutsvaret.</p><p><strong>\\(b^4\\).</strong></p>",
-    "familj": "gap_power_rule_4"
-  },
-  {
     "id": "2.191",
     "kap": 2,
     "omr": "potensregler",
@@ -5097,66 +4763,6 @@ window.BANKMA2 = [
     "t": "<p>Förenkla \\(\\frac{6a^5}{2a^2}\\).</p>",
     "s": "<p>Använd potenslagarna stegvis och förenkla exponenterna innan du skriver slutsvaret.</p><p><strong>\\(3a^3\\).</strong></p>",
     "familj": "gap_power_rule_6"
-  },
-  {
-    "id": "2.193",
-    "kap": 2,
-    "omr": "potensekvationer",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös \\(x^3=64\\).</p>",
-    "s": "<p>Isolera potensen och ta därefter motsvarande rot. Tänk på att jämna potenser kan ge två reella lösningar.</p><p><strong>\\(x=4\\).</strong></p>",
-    "familj": "gap_power_eq_1"
-  },
-  {
-    "id": "2.194",
-    "kap": 2,
-    "omr": "potensekvationer",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös \\(x^4=16\\).</p>",
-    "s": "<p>Isolera potensen och ta därefter motsvarande rot. Tänk på att jämna potenser kan ge två reella lösningar.</p><p><strong>\\(x=\\pm2\\).</strong></p>",
-    "familj": "gap_power_eq_2"
-  },
-  {
-    "id": "2.195",
-    "kap": 2,
-    "omr": "potensekvationer",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös \\(x^5=32\\).</p>",
-    "s": "<p>Isolera potensen och ta därefter motsvarande rot. Tänk på att jämna potenser kan ge två reella lösningar.</p><p><strong>\\(x=2\\).</strong></p>",
-    "familj": "gap_power_eq_3"
-  },
-  {
-    "id": "2.196",
-    "kap": 2,
-    "omr": "potensekvationer",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös \\(x^2=81\\).</p>",
-    "s": "<p>Isolera potensen och ta därefter motsvarande rot. Tänk på att jämna potenser kan ge två reella lösningar.</p><p><strong>\\(x=\\pm9\\).</strong></p>",
-    "familj": "gap_power_eq_4"
   },
   {
     "id": "2.197",
@@ -5497,51 +5103,6 @@ window.BANKMA2 = [
     "familj": "fokus_log_lagar_A"
   },
   {
-    "id": "2.221",
-    "kap": 2,
-    "omr": "potensregler",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Förenkla \\(x^4x^7\\).</p>",
-    "s": "<p>Använd potenslagarna stegvis och förenkla exponenterna innan du skriver slutsvaret.</p><p><strong>\\(x^{11}\\).</strong></p>",
-    "familj": "fokus_potensregel_1"
-  },
-  {
-    "id": "2.222",
-    "kap": 2,
-    "omr": "potensregler",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Förenkla \\(\\frac{a^9}{a^3}\\).</p>",
-    "s": "<p>Använd potenslagarna stegvis och förenkla exponenterna innan du skriver slutsvaret.</p><p><strong>\\(a^6\\).</strong></p>",
-    "familj": "fokus_potensregel_2"
-  },
-  {
-    "id": "2.223",
-    "kap": 2,
-    "omr": "potensregler",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Förenkla \\((m^2)^5\\).</p>",
-    "s": "<p>Använd potenslagarna stegvis och förenkla exponenterna innan du skriver slutsvaret.</p><p><strong>\\(m^{10}\\).</strong></p>",
-    "familj": "fokus_potensregel_3"
-  },
-  {
     "id": "2.224",
     "kap": 2,
     "omr": "potensregler",
@@ -5617,36 +5178,6 @@ window.BANKMA2 = [
     "familj": "fokus_potensregel_parameter_A"
   },
   {
-    "id": "2.229",
-    "kap": 2,
-    "omr": "potensekvationer",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös \\(x^3=216\\).</p>",
-    "s": "<p>Isolera potensen och ta därefter motsvarande rot. Tänk på att jämna potenser kan ge två reella lösningar.</p><p><strong>\\(x=6\\).</strong></p>",
-    "familj": "fokus_potensekvation_1"
-  },
-  {
-    "id": "2.230",
-    "kap": 2,
-    "omr": "potensekvationer",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös \\(x^2=121\\).</p>",
-    "s": "<p>Isolera potensen och ta därefter motsvarande rot. Tänk på att jämna potenser kan ge två reella lösningar.</p><p><strong>\\(x=\\pm11\\).</strong></p>",
-    "familj": "fokus_potensekvation_2"
-  },
-  {
     "id": "2.231",
     "kap": 2,
     "omr": "potensekvationer",
@@ -5660,21 +5191,6 @@ window.BANKMA2 = [
     "t": "<p>Lös \\(4x^2=81\\).</p>",
     "s": "<p>Isolera potensen och ta därefter motsvarande rot. Tänk på att jämna potenser kan ge två reella lösningar.</p><p><strong>\\(x=\\pm\\frac92\\).</strong></p>",
     "familj": "fokus_potensekvation_3"
-  },
-  {
-    "id": "2.232",
-    "kap": 2,
-    "omr": "potensekvationer",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös \\(x^4=81\\).</p>",
-    "s": "<p>Isolera potensen och ta därefter motsvarande rot. Tänk på att jämna potenser kan ge två reella lösningar.</p><p><strong>\\(x=\\pm3\\).</strong></p>",
-    "familj": "fokus_potensekvation_4"
   },
   {
     "id": "2.233",
@@ -6096,7 +5612,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Lös med digitalt verktyg: \\(5\\cdot1,12^x=18\\).</p>",
-    "s": "<p>Dividera med 5: \\(1,12^x=3,6\\).</p><p>Med logaritmer: \\(x=\\frac{\\lg3,6}{\\lg1,12}\\approx11,3\\).</p><p><strong>\\(x\\approx11,3\\).</strong></p>",
+    "s": "<p>Dividera med 5: \\(1,12^x=3,6\\).</p><p>Med logaritmer: \\(x=\\frac{\\lg3,6}{\\lg1,12}\\approx11,3\\).</p><p><strong>\\(x\\approx11,3\\).</strong></p><p><strong>GeoGebra:</strong> Använd CAS. Skriv ekvationen och använd <code>Lös</code> om ett exakt symboliskt svar är rimligt. När ett numeriskt decimalvärde söks använder du <code>NLös</code>. Exempel: <code>NLös(vänsterled=högerled)</code>. Kontrollera att den lösning du använder ligger i det intervall som är relevant för uppgiften.</p>",
     "familj": "np2_exp_ekvation_digital"
   },
   {
@@ -7315,6 +6831,107 @@ window.BANKMA2 = [
     "familj": "quad_problem_perimeter_area_interval"
   },
   {
+    "id": "2.344",
+    "kap": 2,
+    "omr": "potensregler",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Förenkla så långt som möjligt:</p><p>\\(\\frac{(3x^2y)^2\\cdot x}{9x^2y}\\), där \\(x\\ne0\\) och \\(y\\ne0\\).</p>",
+    "s": "<p>Börja med potensen av produkten:</p><p>\\((3x^2y)^2=9x^4y^2\\).</p><p>Då blir uttrycket \\(\\frac{9x^5y^2}{9x^2y}\\).</p><p>Förkorta koefficienterna och subtrahera exponenterna:</p><p>\\(x^{5-2}y^{2-1}=x^3y\\).</p><p><strong>Svaret är \\(x^3y\\).</strong></p>",
+    "familj": "revision_potensregler_sammansatt"
+  },
+  {
+    "id": "2.345",
+    "kap": 2,
+    "omr": "potensregler",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm heltalet \\(n\\) så att</p><p>\\(\\frac{(x^n)^2\\cdot x^3}{x^{n-1}}=x^{10}\\)</p><p>för alla \\(x\\ne0\\).</p>",
+    "s": "<p>Vänsterledets exponent blir \\(2n+3-(n-1)=n+4\\).</p><p>För att uttrycken ska vara lika för alla \\(x\\ne0\\) måste exponenterna vara lika:</p><p>\\(n+4=10\\).</p><p><strong>\\(n=6\\).</strong></p>",
+    "familj": "revision_potensregler_parameter"
+  },
+  {
+    "id": "2.346",
+    "kap": 2,
+    "omr": "potensfunktioner",
+    "kurs": [
+      "2a"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Tabellen beskriver en potensfunktion \\(y=ax^n\\).</p><table><tr><th>\\(x\\)</th><td>1</td><td>2</td><td>3</td></tr><tr><th>\\(y\\)</th><td>4</td><td>16</td><td>36</td></tr></table><p>Bestäm \\(a\\) och \\(n\\).</p>",
+    "s": "<p>När \\(x=1\\) fås \\(a=4\\).</p><p>Med \\(x=2\\): \\(16=4\\cdot2^n\\Rightarrow2^n=4\\).</p><p><strong>\\(n=2\\) och funktionen är \\(y=4x^2\\).</strong></p>",
+    "familj": "revision_potensfunktion_tabell"
+  },
+  {
+    "id": "2.347",
+    "kap": 2,
+    "omr": "potensfunktioner",
+    "kurs": [
+      "2a"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En potensfunktion \\(y=ax^n\\) går genom punkterna \\((2,12)\\) och \\((4,48)\\).</p><p>Bestäm funktionen.</p>",
+    "s": "<p>Punkterna ger \\(12=a2^n\\) och \\(48=a4^n\\).</p><p>Dividera den andra ekvationen med den första:</p><p>\\(4=\\left(\\frac42\\right)^n=2^n\\), alltså \\(n=2\\).</p><p>\\(12=4a\\Rightarrow a=3\\).</p><p><strong>\\(y=3x^2\\).</strong></p>",
+    "familj": "revision_potensfunktion_tva_punkter"
+  },
+  {
+    "id": "2.348",
+    "kap": 2,
+    "omr": "potensekvationer",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös ekvationen \\((x-2)^3=64\\).</p>",
+    "s": "<p>Ta kubikroten ur båda leden:</p><p>\\(x-2=4\\).</p><p><strong>\\(x=6\\).</strong></p>",
+    "familj": "revision_potensekvation_forskjuten"
+  },
+  {
+    "id": "2.349",
+    "kap": 2,
+    "omr": "potensekvationer",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Lös ekvationen \\(3x^4=48\\).</p>",
+    "s": "<p>Dividera med 3:</p><p>\\(x^4=16\\).</p><p>Eftersom exponenten är jämn finns två reella lösningar:</p><p><strong>\\(x=-2\\) eller \\(x=2\\).</strong></p>",
+    "familj": "revision_potensekvation_jamn_potens"
+  },
+  {
+    "id": "2.350",
+    "kap": 2,
+    "omr": "potensekvationer",
+    "kurs": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm alla reella lösningar till \\(x^6=64x^2\\).</p>",
+    "s": "<p>Flytta allt till ena sidan:</p><p>\\(x^6-64x^2=0\\).</p><p>Faktorisera:</p><p>\\(x^2(x^4-64)=0\\).</p><p>Första faktorn ger \\(x=0\\). Den andra ger \\(x^4=64\\), alltså \\(x=\\pm\\sqrt[4]{64}=\\pm2\\sqrt2\\).</p><p><strong>\\(x=0\\) eller \\(x=\\pm2\\sqrt2\\).</strong></p>",
+    "familj": "revision_potensekvation_faktorisering"
+  },
+  {
     "id": "3.01",
     "kap": 3,
     "omr": "geometriska_begrepp_definitioner",
@@ -7642,19 +7259,6 @@ window.BANKMA2 = [
     "t": "<p>Punkterna \\(A=(2,5)\\), \\(B=(8,1)\\) och \\(C=(-2,-1)\\) bildar en triangel.</p><p>Undersök med beräkningar om triangeln är rätvinklig.</p>",
     "s": "<p>Beräkna kvadrerade sidlängder:</p><p>\\(AB^2=6^2+(-4)^2=52\\).</p><p>\\(AC^2=(-4)^2+(-6)^2=52\\).</p><p>\\(BC^2=(-10)^2+(-2)^2=104\\).</p><p>Eftersom \\(52+52=104\\) gäller Pythagoras sats.</p><p><strong>Triangeln är rätvinklig vid \\(A\\).</strong></p>",
     "familj": "koord_klassificera_rätvinklig"
-  },
-  {
-    "id": "3.24",
-    "kap": 3,
-    "omr": "programmering_avstandsformeln",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Ett program ska beräkna avståndet mellan \\((x_1,y_1)\\) och \\((x_2,y_2)\\). En elev skriver</p><pre style='font-family:IBM Plex Mono,monospace;font-size:12px;background:#EDEEF1;padding:10px;border-radius:8px'>d = sqrt(x2-x1**2 + y2-y1**2)</pre><p>Förklara vad som är fel och skriv en korrekt formel.</p>",
-    "s": "<p>Skillnaderna i koordinater måste först bildas och sedan kvadreras. I elevens uttryck kvadreras bara \\(x_1\\) och \\(y_1\\).</p><p><strong>En korrekt formel är \\(d=\\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\\).</strong></p>",
-    "familj": "programmering_avstand_felanalys"
   },
   {
     "id": "3.25",
@@ -8068,19 +7672,6 @@ window.BANKMA2 = [
     "t": "<p>Punkterna \\(A=(0,0)\\), \\(B=(6,2)\\) och \\(C=(2,6)\\) bildar en triangel.</p><p>Undersök om triangeln är likbent.</p>",
     "s": "<p>\\(AB^2=6^2+2^2=40\\).</p><p>\\(AC^2=2^2+6^2=40\\).</p><p>Alltså \\(AB=AC\\).</p><p><strong>Ja, triangeln är likbent med lika sidor \\(AB\\) och \\(AC\\).</strong></p>",
     "familj": "r2_coord_isosceles"
-  },
-  {
-    "id": "3.54",
-    "kap": 3,
-    "omr": "programmering_avstandsformeln",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Ett program räknar avståndet mellan två punkter men använder</p><pre style='font-family:IBM Plex Mono,monospace;font-size:12px;background:#EDEEF1;padding:10px;border-radius:8px'>d = (x2-x1)**2 + (y2-y1)**2</pre><p>Vad beräknar programmet egentligen, och vad saknas?</p>",
-    "s": "<p>Beräkna först skillnaden i x-led och y-led och använd sedan Pythagoras i avståndsformeln.</p><p>Programmet beräknar avståndet i kvadrat.</p><p>För det riktiga avståndet måste kvadratroten tas.</p><p><strong>\\(d=\\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\\).</strong></p>",
-    "familj": "r2_programming_distance_squared"
   },
   {
     "id": "3.55",
@@ -8499,19 +8090,6 @@ window.BANKMA2 = [
     "familj": "r3_logic_square_rhombus"
   },
   {
-    "id": "3.84",
-    "kap": 3,
-    "omr": "programmering_avstandsformeln",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Ett program beräknar avståndet mellan \\((x_1,y_1)\\) och \\((x_2,y_2)\\) med formeln</p><pre style='font-family:IBM Plex Mono,monospace;font-size:12px;background:#EDEEF1;padding:10px;border-radius:8px'>d = sqrt((x2-x1)^2 + (y2-y1)^2)</pre><p>Vad blir avståndet mellan \\((2,-1)\\) och \\((5,3)\\)?</p>",
-    "s": "<p>Beräkna först skillnaden i x-led och y-led och använd sedan Pythagoras i avståndsformeln.</p><p>\\(d=\\sqrt{3^2+4^2}=5\\).</p><p><strong>5.</strong></p>",
-    "familj": "r3_program_distance_1"
-  },
-  {
     "id": "3.85",
     "kap": 3,
     "omr": "sats_bevis",
@@ -8763,84 +8341,6 @@ window.BANKMA2 = [
     "t": "<p>I triangeln gäller \\(DE\\parallel BC\\). \\(AD=4\\), \\(DB=8\\) och \\(DE=5\\). Bestäm \\(BC\\).</p>",
     "s": "<p>Eftersom linjerna är parallella blir trianglarna likformiga. Sätt upp en proportion mellan motsvarande sidor.</p><p>Skalfaktorn från lilla till stora triangeln är \\(\\frac{12}{4}\\).</p><p><strong>\\(BC=15\\).</strong></p>",
     "familj": "gap_top_triangle_6"
-  },
-  {
-    "id": "3.103",
-    "kap": 3,
-    "omr": "programmering_avstandsformeln",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Ett program använder avståndsformeln för punkterna \\(A=(0, 0)\\) och \\(B=(3, 4)\\). Vilket avstånd ska programmet ge?</p>",
-    "s": "<p>Beräkna först skillnaden i x-led och y-led och använd sedan Pythagoras i avståndsformeln.</p><p><strong>5.</strong></p>",
-    "familj": "gap_program_distance_1"
-  },
-  {
-    "id": "3.104",
-    "kap": 3,
-    "omr": "programmering_avstandsformeln",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Ett program använder avståndsformeln för punkterna \\(A=(1, 2)\\) och \\(B=(5, 5)\\). Vilket avstånd ska programmet ge?</p>",
-    "s": "<p>Beräkna först skillnaden i x-led och y-led och använd sedan Pythagoras i avståndsformeln.</p><p><strong>5.</strong></p>",
-    "familj": "gap_program_distance_2"
-  },
-  {
-    "id": "3.105",
-    "kap": 3,
-    "omr": "programmering_avstandsformeln",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Ett program använder avståndsformeln för punkterna \\(A=(-2, 1)\\) och \\(B=(4, 9)\\). Vilket avstånd ska programmet ge?</p>",
-    "s": "<p>Beräkna först skillnaden i x-led och y-led och använd sedan Pythagoras i avståndsformeln.</p><p><strong>10.</strong></p>",
-    "familj": "gap_program_distance_3"
-  },
-  {
-    "id": "3.106",
-    "kap": 3,
-    "omr": "programmering_avstandsformeln",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Ett program använder avståndsformeln för punkterna \\(A=(3, -1)\\) och \\(B=(3, 6)\\). Vilket avstånd ska programmet ge?</p>",
-    "s": "<p>Beräkna först skillnaden i x-led och y-led och använd sedan Pythagoras i avståndsformeln.</p><p><strong>7.</strong></p>",
-    "familj": "gap_program_distance_4"
-  },
-  {
-    "id": "3.107",
-    "kap": 3,
-    "omr": "programmering_avstandsformeln",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Ett program använder avståndsformeln för punkterna \\(A=(-4, -3)\\) och \\(B=(2, 5)\\). Vilket avstånd ska programmet ge?</p>",
-    "s": "<p>Beräkna först skillnaden i x-led och y-led och använd sedan Pythagoras i avståndsformeln.</p><p><strong>10.</strong></p>",
-    "familj": "gap_program_distance_5"
-  },
-  {
-    "id": "3.108",
-    "kap": 3,
-    "omr": "programmering_avstandsformeln",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Ett program använder avståndsformeln för punkterna \\(A=(2, 7)\\) och \\(B=(8, -1)\\). Vilket avstånd ska programmet ge?</p>",
-    "s": "<p>Beräkna först skillnaden i x-led och y-led och använd sedan Pythagoras i avståndsformeln.</p><p><strong>10.</strong></p>",
-    "familj": "gap_program_distance_6"
   },
   {
     "id": "3.109",
@@ -9328,7 +8828,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Använd ett digitalt verktyg och bestäm medelvärde och populationsstandardavvikelse för</p><p>6, 8, 9, 9, 11, 17.</p><p>Svara med en decimal.</p>",
-    "s": "<p>Medelvärdet är \\(10,0\\).</p><p>Populationsstandardavvikelsen är \\(\\sqrt{\\frac{(6-10)^2+(8-10)^2+(9-10)^2+(9-10)^2+(11-10)^2+(17-10)^2}{6}}=\\sqrt{12}\\approx3,5\\).</p><p><strong>Medelvärde 10,0 och standardavvikelse cirka 3,5.</strong></p>",
+    "s": "<p>Medelvärdet är \\(10,0\\).</p><p>Populationsstandardavvikelsen är \\(\\sqrt{\\frac{(6-10)^2+(8-10)^2+(9-10)^2+(9-10)^2+(11-10)^2+(17-10)^2}{6}}=\\sqrt{12}\\approx3,5\\).</p><p><strong>Medelvärde 10,0 och standardavvikelse cirka 3,5.</strong></p><p><strong>GeoGebra:</strong> Lägg värdena i en lista eller i kalkylbladet och använd envariabelanalys för att läsa av medelvärde och standardavvikelse. Kontrollera att du använder populationsstandardavvikelse när uppgiften frågar efter hela materialets standardavvikelse.</p>",
     "familj": "standardavvikelse_digital_lista"
   },
   {
@@ -9343,7 +8843,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>En variabel är normalfördelad med medelvärdet 70 och standardavvikelsen 6.</p><span class=\"fig\"><svg width=\"500\" height=\"240\" viewBox=\"0 0 500 240\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"1\" y=\"1\" width=\"498\" height=\"238\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"45.0\" y1=\"192\" x2=\"475.0\" y2=\"192\" stroke=\"#2B2527\" stroke-width=\"1.8\"/><path d=\"M 45.0 191.7 L 47.4 191.7 L 49.8 191.6 L 52.2 191.6 L 54.6 191.5 L 56.9 191.4 L 59.3 191.4 L 61.7 191.3 L 64.1 191.2 L 66.5 191.1 L 68.9 191.0 L 71.3 190.8 L 73.7 190.7 L 76.1 190.5 L 78.4 190.4 L 80.8 190.2 L 83.2 189.9 L 85.6 189.7 L 88.0 189.4 L 90.4 189.1 L 92.8 188.8 L 95.2 188.4 L 97.6 188.1 L 99.9 187.6 L 102.3 187.2 L 104.7 186.7 L 107.1 186.1 L 109.5 185.5 L 111.9 184.9 L 114.3 184.2 L 116.7 183.5 L 119.1 182.7 L 121.4 181.8 L 123.8 180.9 L 126.2 179.9 L 128.6 178.8 L 131.0 177.7 L 133.4 176.5 L 135.8 175.2 L 138.2 173.8 L 140.6 172.4 L 142.9 170.8 L 145.3 169.2 L 147.7 167.5 L 150.1 165.8 L 152.5 163.9 L 154.9 161.9 L 157.3 159.9 L 159.7 157.8 L 162.1 155.5 L 164.4 153.2 L 166.8 150.8 L 169.2 148.4 L 171.6 145.8 L 174.0 143.2 L 176.4 140.5 L 178.8 137.8 L 181.2 134.9 L 183.6 132.1 L 185.9 129.1 L 188.3 126.2 L 190.7 123.2 L 193.1 120.1 L 195.5 117.1 L 197.9 114.0 L 200.3 111.0 L 202.7 107.9 L 205.1 104.9 L 207.4 101.8 L 209.8 98.9 L 212.2 95.9 L 214.6 93.1 L 217.0 90.2 L 219.4 87.5 L 221.8 84.9 L 224.2 82.3 L 226.6 79.9 L 228.9 77.6 L 231.3 75.4 L 233.7 73.4 L 236.1 71.5 L 238.5 69.7 L 240.9 68.1 L 243.3 66.7 L 245.7 65.5 L 248.1 64.4 L 250.4 63.6 L 252.8 62.9 L 255.2 62.4 L 257.6 62.1 L 260.0 62.0 L 262.4 62.1 L 264.8 62.4 L 267.2 62.9 L 269.6 63.6 L 271.9 64.4 L 274.3 65.5 L 276.7 66.7 L 279.1 68.1 L 281.5 69.7 L 283.9 71.5 L 286.3 73.4 L 288.7 75.4 L 291.1 77.6 L 293.4 79.9 L 295.8 82.3 L 298.2 84.9 L 300.6 87.5 L 303.0 90.2 L 305.4 93.1 L 307.8 95.9 L 310.2 98.9 L 312.6 101.8 L 314.9 104.9 L 317.3 107.9 L 319.7 111.0 L 322.1 114.0 L 324.5 117.1 L 326.9 120.1 L 329.3 123.2 L 331.7 126.2 L 334.1 129.1 L 336.4 132.1 L 338.8 134.9 L 341.2 137.8 L 343.6 140.5 L 346.0 143.2 L 348.4 145.8 L 350.8 148.4 L 353.2 150.8 L 355.6 153.2 L 357.9 155.5 L 360.3 157.8 L 362.7 159.9 L 365.1 161.9 L 367.5 163.9 L 369.9 165.8 L 372.3 167.5 L 374.7 169.2 L 377.1 170.8 L 379.4 172.4 L 381.8 173.8 L 384.2 175.2 L 386.6 176.5 L 389.0 177.7 L 391.4 178.8 L 393.8 179.9 L 396.2 180.9 L 398.6 181.8 L 400.9 182.7 L 403.3 183.5 L 405.7 184.2 L 408.1 184.9 L 410.5 185.5 L 412.9 186.1 L 415.3 186.7 L 417.7 187.2 L 420.1 187.6 L 422.4 188.1 L 424.8 188.4 L 427.2 188.8 L 429.6 189.1 L 432.0 189.4 L 434.4 189.7 L 436.8 189.9 L 439.2 190.2 L 441.6 190.4 L 443.9 190.5 L 446.3 190.7 L 448.7 190.8 L 451.1 191.0 L 453.5 191.1 L 455.9 191.2 L 458.3 191.3 L 460.7 191.4 L 463.1 191.4 L 465.4 191.5 L 467.8 191.6 L 470.2 191.6 L 472.6 191.7 L 475.0 191.7\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.7\"/><line x1=\"75.7\" y1=\"187\" x2=\"75.7\" y2=\"197\" stroke=\"#2B2527\"/><text x=\"75.7\" y=\"212\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">52</text><line x1=\"137.1\" y1=\"187\" x2=\"137.1\" y2=\"197\" stroke=\"#2B2527\"/><text x=\"137.1\" y=\"212\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">58</text><line x1=\"198.6\" y1=\"187\" x2=\"198.6\" y2=\"197\" stroke=\"#2B2527\"/><text x=\"198.6\" y=\"212\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">64</text><line x1=\"260.0\" y1=\"187\" x2=\"260.0\" y2=\"197\" stroke=\"#2B2527\"/><text x=\"260.0\" y=\"212\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">70</text><line x1=\"321.4\" y1=\"187\" x2=\"321.4\" y2=\"197\" stroke=\"#2B2527\"/><text x=\"321.4\" y=\"212\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">76</text><line x1=\"382.9\" y1=\"187\" x2=\"382.9\" y2=\"197\" stroke=\"#2B2527\"/><text x=\"382.9\" y=\"212\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">82</text><line x1=\"444.3\" y1=\"187\" x2=\"444.3\" y2=\"197\" stroke=\"#2B2527\"/><text x=\"444.3\" y=\"212\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">88</text></svg></span><p>Mellan vilka två värden ligger ungefär 68 % av observationerna?</p>",
-    "s": "<p>Ungefär 68 % ligger inom en standardavvikelse från medelvärdet.</p><p>\\(70-6=64\\) och \\(70+6=76\\).</p><p><strong>Mellan 64 och 76.</strong></p>",
+    "s": "<p>Ungefär 68 % ligger inom en standardavvikelse från medelvärdet.</p><p>\\(70-6=64\\) och \\(70+6=76\\).</p><p><strong>Mellan 64 och 76.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
     "familj": "normal_68_intervall"
   },
   {
@@ -9358,7 +8858,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Vikten hos en produkt är normalfördelad med medelvärdet 500 g och standardavvikelsen 10 g.</p><p>Ungefär hur stor andel väger mellan 480 g och 520 g?</p>",
-    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>Intervallet ligger två standardavvikelser på vardera sidan om medelvärdet.</p><p><strong>Ungefär 95,4 %.</strong></p>",
+    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>Intervallet ligger två standardavvikelser på vardera sidan om medelvärdet.</p><p><strong>Ungefär 95,4 %.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Välj vänstersvans, högersvans eller intervall beroende på frågan och skriv in gränsvärdet/gränsvärdena. Sannolikheten visas direkt. För en vänstersannolikhet kan du också skriva <code>Normalfördelning(μ, σ, x)</code>.</p>",
     "familj": "normal_95_intervall"
   },
   {
@@ -9373,7 +8873,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Resultaten på ett test är normalfördelade med medelvärdet 60 och standardavvikelsen 8. Totalt skriver 400 personer testet.</p><p>Ungefär hur många får ett resultat över 68?</p>",
-    "s": "<p>68 är en standardavvikelse över medelvärdet. Ungefär 15,9 % ligger över detta värde.</p><p>\\(0,159\\cdot400\\approx64\\).</p><p><strong>Cirka 64 personer.</strong></p>",
+    "s": "<p>68 är en standardavvikelse över medelvärdet. Ungefär 15,9 % ligger över detta värde.</p><p>\\(0,159\\cdot400\\approx64\\).</p><p><strong>Cirka 64 personer.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
     "familj": "normal_over_mu_plus_sigma"
   },
   {
@@ -9448,7 +8948,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>En normalfördelning har \\(\\mu=100\\) och \\(\\sigma=15\\).</p><p>Använd ett digitalt verktyg för att bestämma \\(P(X&lt;120)\\). Svara med tre decimaler.</p>",
-    "s": "<p>Standardiserat är \\(z=(120-100)/15\\approx1,333\\).</p><p>Normalfördelningen ger \\(P(X&lt;120)\\approx0,909\\).</p><p><strong>0,909.</strong></p>",
+    "s": "<p>Standardiserat är \\(z=(120-100)/15\\approx1,333\\).</p><p>Normalfördelningen ger \\(P(X&lt;120)\\approx0,909\\).</p><p><strong>0,909.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Välj vänstersvans, högersvans eller intervall beroende på frågan och skriv in gränsvärdet/gränsvärdena. Sannolikheten visas direkt. För en vänstersannolikhet kan du också skriva <code>Normalfördelning(μ, σ, x)</code>.</p>",
     "familj": "normal_digital_cdf"
   },
   {
@@ -9465,19 +8965,6 @@ window.BANKMA2 = [
     "t": "<p>Alla värden i ett datamaterial ökas med 5.</p><p>Hur påverkas medelvärdet och standardavvikelsen?</p>",
     "s": "<p>Medelvärdet ökar med 5. Avstånden mellan varje värde och medelvärdet ändras inte.</p><p><strong>Medelvärdet ökar med 5 och standardavvikelsen är oförändrad.</strong></p>",
     "familj": "standardavvikelse_addition"
-  },
-  {
-    "id": "4.15",
-    "kap": 4,
-    "omr": "programmering_medelvarde",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Programmet ska beräkna medelvärdet av listan <code>[4, 7, 9, 12]</code>.</p><pre style='font-family:IBM Plex Mono,monospace;font-size:12px;background:#EDEEF1;padding:10px;border-radius:8px'>summa = 0\nför tal i lista:\n    summa = summa + tal\nmedel = summa / 4</pre><p>Vilket värde får variabeln <code>medel</code>?</p>",
-    "s": "<p>Summera alla värden och dividera med antalet värden; i programkod motsvarar det summa delat med listans längd.</p><p>Summan är \\(4+7+9+12=32\\).</p><p>\\(32/4=8\\).</p><p><strong>medel = 8.</strong></p>",
-    "familj": "programmering_medelvarde_trace"
   },
   {
     "id": "4.16",
@@ -9536,7 +9023,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/3/0",
     "t": "<p>Vikten på fiskar i en odling antas vara normalfördelad med medelvärdet 820 g och standardavvikelsen 60 g. Totalt finns 500 fiskar.</p><p>Uppskatta hur många som väger mellan 760 g och 940 g utan digitalt verktyg.</p>",
-    "s": "<p>760 g är \\(\\mu-\\sigma\\) och 940 g är \\(\\mu+2\\sigma\\).</p><p>Från \\(-1\\sigma\\) till \\(+1\\sigma\\) ligger cirka 68,2 %. Mellan \\(+1\\sigma\\) och \\(+2\\sigma\\) ligger cirka \\((95,4-68,2)/2=13,6\\) %.</p><p>Totalt cirka 81,8 %.</p><p>\\(0,818\\cdot500\\approx409\\).</p><p><strong>Cirka 409 fiskar.</strong></p>",
+    "s": "<p>760 g är \\(\\mu-\\sigma\\) och 940 g är \\(\\mu+2\\sigma\\).</p><p>Från \\(-1\\sigma\\) till \\(+1\\sigma\\) ligger cirka 68,2 %. Mellan \\(+1\\sigma\\) och \\(+2\\sigma\\) ligger cirka \\((95,4-68,2)/2=13,6\\) %.</p><p>Totalt cirka 81,8 %.</p><p>\\(0,818\\cdot500\\approx409\\).</p><p><strong>Cirka 409 fiskar.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
     "familj": "normal_osymmetriskt_intervall_empirisk"
   },
   {
@@ -9551,7 +9038,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/3/0",
     "t": "<p>Åldrarna i en stor grupp kan approximeras med en normalfördelning. Man vet att ungefär 95,4 % ligger mellan 22 och 38 år och att intervallet är symmetriskt kring medelvärdet.</p><p>Bestäm medelvärde och standardavvikelse.</p>",
-    "s": "<p>Medelvärdet är mittpunkten: \\((22+38)/2=30\\).</p><p>95,4 % motsvarar ungefär intervallet \\(\\mu\\pm2\\sigma\\).</p><p>Avståndet från 30 till 38 är 8, alltså \\(2\\sigma=8\\Rightarrow\\sigma=4\\).</p><p><strong>\\(\\mu=30\\), \\(\\sigma=4\\).</strong></p>",
+    "s": "<p>Medelvärdet är mittpunkten: \\((22+38)/2=30\\).</p><p>95,4 % motsvarar ungefär intervallet \\(\\mu\\pm2\\sigma\\).</p><p>Avståndet från 30 till 38 är 8, alltså \\(2\\sigma=8\\Rightarrow\\sigma=4\\).</p><p><strong>\\(\\mu=30\\), \\(\\sigma=4\\).</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Om \\(\\sigma\\) är det okända värdet kan du i CAS skriva den kumulativa normalfördelningen som en ekvation och använda <code>NLös</code>, till exempel <code>NLös(Normalfördelning(μ, s, gräns)=p, s)</code>.</p>",
     "familj": "normal_baklanges_mu_sigma_95"
   },
   {
@@ -9600,19 +9087,6 @@ window.BANKMA2 = [
     "familj": "lage_outlier_lon"
   },
   {
-    "id": "4.24",
-    "kap": 4,
-    "omr": "programmering_medelvarde",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/3/0",
-    "t": "<p>Ett program ska beräkna medelvärdet men ger för lågt svar:</p><pre style='font-family:IBM Plex Mono,monospace;font-size:12px;background:#EDEEF1;padding:10px;border-radius:8px'>summa = 0\nför tal i lista:\n    summa = summa + tal\n    medel = summa / antal</pre><p>Förklara varför det är olämpligt att beräkna <code>medel</code> inne i loopen och skriv en bättre struktur.</p>",
-    "s": "<p>Under loopen är summan ännu inte färdig. Variabeln <code>medel</code> räknas därför om med ofullständig summa efter varje tal.</p><p>Även om sista värdet kan bli rätt i vissa program är beräkningen onödig och lätt att använda för tidigt.</p><p><strong>Beräkna först hela summan i loopen och sätt sedan <code>medel = summa / antal</code> efter loopen.</strong></p>",
-    "familj": "programmering_medelvarde_loop_fel"
-  },
-  {
     "id": "4.25",
     "kap": 4,
     "omr": "lagesmatt",
@@ -9639,7 +9113,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/2",
     "t": "<p>Vikten på en produkt antas vara normalfördelad med medelvärdet 84,0 g. Av 1000 produkter väger ungefär 25 mer än 90,0 g.</p><p>Bestäm standardavvikelsen med ett digitalt verktyg.</p>",
-    "s": "<p>Andelen över 90 g är \\(25/1000=0,025\\). Då är 90 g ungefär den 97,5:e percentilen, vilket motsvarar \\(z\\approx1,960\\).</p><p>\\(\\frac{90-84}{\\sigma}=1,960\\).</p><p>\\(\\sigma\\approx6/1,960\\approx3,06\\).</p><p><strong>Standardavvikelsen är cirka 3,1 g.</strong></p>",
+    "s": "<p>Andelen över 90 g är \\(25/1000=0,025\\). Då är 90 g ungefär den 97,5:e percentilen, vilket motsvarar \\(z\\approx1,960\\).</p><p>\\(\\frac{90-84}{\\sigma}=1,960\\).</p><p>\\(\\sigma\\approx6/1,960\\approx3,06\\).</p><p><strong>Standardavvikelsen är cirka 3,1 g.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Om \\(\\sigma\\) är det okända värdet kan du i CAS skriva den kumulativa normalfördelningen som en ekvation och använda <code>NLös</code>, till exempel <code>NLös(Normalfördelning(μ, s, gräns)=p, s)</code>.</p>",
     "familj": "normal_baklanges_sigma_tail"
   },
   {
@@ -9654,7 +9128,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/2",
     "t": "<p>Resultaten på ett prov antas vara normalfördelade med standardavvikelsen 12 poäng. 10 % av eleverna får mer än 86 poäng.</p><p>Bestäm medelvärdet med ett digitalt verktyg.</p>",
-    "s": "<p>Om 10 % ligger över 86 ligger 90 % under. Den 90:e percentilen i standardnormalfördelningen är \\(z\\approx1,282\\).</p><p>\\(86=\\mu+1,282\\cdot12\\).</p><p>\\(\\mu\\approx86-15,38=70,62\\).</p><p><strong>Medelvärdet är cirka 70,6 poäng.</strong></p>",
+    "s": "<p>Om 10 % ligger över 86 ligger 90 % under. Den 90:e percentilen i standardnormalfördelningen är \\(z\\approx1,282\\).</p><p>\\(86=\\mu+1,282\\cdot12\\).</p><p>\\(\\mu\\approx86-15,38=70,62\\).</p><p><strong>Medelvärdet är cirka 70,6 poäng.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Om \\(\\sigma\\) är det okända värdet kan du i CAS skriva den kumulativa normalfördelningen som en ekvation och använda <code>NLös</code>, till exempel <code>NLös(Normalfördelning(μ, s, gräns)=p, s)</code>.</p>",
     "familj": "normal_baklanges_mu_percentil"
   },
   {
@@ -9804,7 +9278,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>En normalfördelning har medelvärdet 40 och standardavvikelsen 5.</p><span class=\"fig\"><svg width=\"500\" height=\"240\" viewBox=\"0 0 500 240\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"1\" y=\"1\" width=\"498\" height=\"238\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"45.0\" y1=\"192\" x2=\"475.0\" y2=\"192\" stroke=\"#2B2527\" stroke-width=\"1.8\"/><path d=\"M 45.0 191.7 L 47.4 191.7 L 49.8 191.6 L 52.2 191.6 L 54.6 191.5 L 56.9 191.4 L 59.3 191.4 L 61.7 191.3 L 64.1 191.2 L 66.5 191.1 L 68.9 191.0 L 71.3 190.8 L 73.7 190.7 L 76.1 190.5 L 78.4 190.4 L 80.8 190.2 L 83.2 189.9 L 85.6 189.7 L 88.0 189.4 L 90.4 189.1 L 92.8 188.8 L 95.2 188.4 L 97.6 188.1 L 99.9 187.6 L 102.3 187.2 L 104.7 186.7 L 107.1 186.1 L 109.5 185.5 L 111.9 184.9 L 114.3 184.2 L 116.7 183.5 L 119.1 182.7 L 121.4 181.8 L 123.8 180.9 L 126.2 179.9 L 128.6 178.8 L 131.0 177.7 L 133.4 176.5 L 135.8 175.2 L 138.2 173.8 L 140.6 172.4 L 142.9 170.8 L 145.3 169.2 L 147.7 167.5 L 150.1 165.8 L 152.5 163.9 L 154.9 161.9 L 157.3 159.9 L 159.7 157.8 L 162.1 155.5 L 164.4 153.2 L 166.8 150.8 L 169.2 148.4 L 171.6 145.8 L 174.0 143.2 L 176.4 140.5 L 178.8 137.8 L 181.2 134.9 L 183.6 132.1 L 185.9 129.1 L 188.3 126.2 L 190.7 123.2 L 193.1 120.1 L 195.5 117.1 L 197.9 114.0 L 200.3 111.0 L 202.7 107.9 L 205.1 104.9 L 207.4 101.8 L 209.8 98.9 L 212.2 95.9 L 214.6 93.1 L 217.0 90.2 L 219.4 87.5 L 221.8 84.9 L 224.2 82.3 L 226.6 79.9 L 228.9 77.6 L 231.3 75.4 L 233.7 73.4 L 236.1 71.5 L 238.5 69.7 L 240.9 68.1 L 243.3 66.7 L 245.7 65.5 L 248.1 64.4 L 250.4 63.6 L 252.8 62.9 L 255.2 62.4 L 257.6 62.1 L 260.0 62.0 L 262.4 62.1 L 264.8 62.4 L 267.2 62.9 L 269.6 63.6 L 271.9 64.4 L 274.3 65.5 L 276.7 66.7 L 279.1 68.1 L 281.5 69.7 L 283.9 71.5 L 286.3 73.4 L 288.7 75.4 L 291.1 77.6 L 293.4 79.9 L 295.8 82.3 L 298.2 84.9 L 300.6 87.5 L 303.0 90.2 L 305.4 93.1 L 307.8 95.9 L 310.2 98.9 L 312.6 101.8 L 314.9 104.9 L 317.3 107.9 L 319.7 111.0 L 322.1 114.0 L 324.5 117.1 L 326.9 120.1 L 329.3 123.2 L 331.7 126.2 L 334.1 129.1 L 336.4 132.1 L 338.8 134.9 L 341.2 137.8 L 343.6 140.5 L 346.0 143.2 L 348.4 145.8 L 350.8 148.4 L 353.2 150.8 L 355.6 153.2 L 357.9 155.5 L 360.3 157.8 L 362.7 159.9 L 365.1 161.9 L 367.5 163.9 L 369.9 165.8 L 372.3 167.5 L 374.7 169.2 L 377.1 170.8 L 379.4 172.4 L 381.8 173.8 L 384.2 175.2 L 386.6 176.5 L 389.0 177.7 L 391.4 178.8 L 393.8 179.9 L 396.2 180.9 L 398.6 181.8 L 400.9 182.7 L 403.3 183.5 L 405.7 184.2 L 408.1 184.9 L 410.5 185.5 L 412.9 186.1 L 415.3 186.7 L 417.7 187.2 L 420.1 187.6 L 422.4 188.1 L 424.8 188.4 L 427.2 188.8 L 429.6 189.1 L 432.0 189.4 L 434.4 189.7 L 436.8 189.9 L 439.2 190.2 L 441.6 190.4 L 443.9 190.5 L 446.3 190.7 L 448.7 190.8 L 451.1 191.0 L 453.5 191.1 L 455.9 191.2 L 458.3 191.3 L 460.7 191.4 L 463.1 191.4 L 465.4 191.5 L 467.8 191.6 L 470.2 191.6 L 472.6 191.7 L 475.0 191.7\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.7\"/><line x1=\"75.7\" y1=\"187\" x2=\"75.7\" y2=\"197\" stroke=\"#2B2527\"/><text x=\"75.7\" y=\"212\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">25</text><line x1=\"137.1\" y1=\"187\" x2=\"137.1\" y2=\"197\" stroke=\"#2B2527\"/><text x=\"137.1\" y=\"212\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">30</text><line x1=\"198.6\" y1=\"187\" x2=\"198.6\" y2=\"197\" stroke=\"#2B2527\"/><text x=\"198.6\" y=\"212\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">35</text><line x1=\"260.0\" y1=\"187\" x2=\"260.0\" y2=\"197\" stroke=\"#2B2527\"/><text x=\"260.0\" y=\"212\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">40</text><line x1=\"321.4\" y1=\"187\" x2=\"321.4\" y2=\"197\" stroke=\"#2B2527\"/><text x=\"321.4\" y=\"212\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">45</text><line x1=\"382.9\" y1=\"187\" x2=\"382.9\" y2=\"197\" stroke=\"#2B2527\"/><text x=\"382.9\" y=\"212\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">50</text><line x1=\"444.3\" y1=\"187\" x2=\"444.3\" y2=\"197\" stroke=\"#2B2527\"/><text x=\"444.3\" y=\"212\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">55</text></svg></span><p>Mellan vilka värden ligger ungefär 95,4 %?</p>",
-    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>Ungefär 95,4 % ligger inom två standardavvikelser.</p><p>\\(40\\pm10\\).</p><p><strong>Mellan 30 och 50.</strong></p>",
+    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>Ungefär 95,4 % ligger inom två standardavvikelser.</p><p>\\(40\\pm10\\).</p><p><strong>Mellan 30 och 50.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
     "familj": "r2_normal_95"
   },
   {
@@ -9819,7 +9293,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "1/0/0",
     "t": "<p>En normalfördelning har \\(\\mu=120\\) och \\(\\sigma=10\\).</p><p>Ungefär hur stor andel ligger över 130?</p>",
-    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>130 är en standardavvikelse över medelvärdet.</p><p><strong>Ungefär 15,9 %.</strong></p>",
+    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>130 är en standardavvikelse över medelvärdet.</p><p><strong>Ungefär 15,9 %.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Välj vänstersvans, högersvans eller intervall beroende på frågan och skriv in gränsvärdet/gränsvärdena. Sannolikheten visas direkt. För en vänstersannolikhet kan du också skriva <code>Normalfördelning(μ, σ, x)</code>.</p>",
     "familj": "r2_normal_tail"
   },
   {
@@ -9834,7 +9308,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Anta \\(X\\sim N(50,8)\\). Använd digitalt verktyg och bestäm \\(P(X&lt;60)\\). Svara med tre decimaler.</p>",
-    "s": "<p>Standardisera vid behov eller använd normalfördelningsfunktionen i det digitala verktyget med rätt medelvärde och standardavvikelse.</p><p>\\(z=(60-50)/8=1,25\\).</p><p><strong>\\(P(X&lt;60)\\approx0,894\\).</strong></p>",
+    "s": "<p>Standardisera vid behov eller använd normalfördelningsfunktionen i det digitala verktyget med rätt medelvärde och standardavvikelse.</p><p>\\(z=(60-50)/8=1,25\\).</p><p><strong>\\(P(X&lt;60)\\approx0,894\\).</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Välj vänstersvans, högersvans eller intervall beroende på frågan och skriv in gränsvärdet/gränsvärdena. Sannolikheten visas direkt. För en vänstersannolikhet kan du också skriva <code>Normalfördelning(μ, σ, x)</code>.</p>",
     "familj": "r2_normal_cdf"
   },
   {
@@ -9909,21 +9383,8 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>En stor grupp har normalfördelade resultat med \\(\\mu=70\\) och \\(\\sigma=4\\). Cirka hur stor andel ligger mellan 66 och 74?</p>",
-    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>Intervallet är \\(\\mu\\pm\\sigma\\).</p><p><strong>Ungefär 68,2 %.</strong></p>",
+    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>Intervallet är \\(\\mu\\pm\\sigma\\).</p><p><strong>Ungefär 68,2 %.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Välj vänstersvans, högersvans eller intervall beroende på frågan och skriv in gränsvärdet/gränsvärdena. Sannolikheten visas direkt. För en vänstersannolikhet kan du också skriva <code>Normalfördelning(μ, σ, x)</code>.</p>",
     "familj": "r2_normal_68"
-  },
-  {
-    "id": "4.45",
-    "kap": 4,
-    "omr": "programmering_medelvarde",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Ett program har listan <code>[3, 6, 7, 8, 11]</code>. Det summerar talen och delar med antalet.</p><p>Vilket medelvärde får programmet?</p>",
-    "s": "<p>Summera alla värden och dividera med antalet värden; i programkod motsvarar det summa delat med listans längd.</p><p>Summan är 35 och antalet 5.</p><p><strong>7.</strong></p>",
-    "familj": "r2_program_mean"
   },
   {
     "id": "4.46",
@@ -9997,7 +9458,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>En produkt väger i genomsnitt 250 g. Ungefär 95,4 % av produkterna väger mellan 238 g och 262 g och vikterna antas vara normalfördelade.</p><p>Bestäm standardavvikelsen.</p>",
-    "s": "<p>Intervallet är symmetriskt och sträcker sig 12 g från medelvärdet.</p><p>95,4 % motsvarar ungefär \\(\\mu\\pm2\\sigma\\).</p><p>\\(2\\sigma=12\\Rightarrow\\sigma=6\\).</p><p><strong>6 g.</strong></p>",
+    "s": "<p>Intervallet är symmetriskt och sträcker sig 12 g från medelvärdet.</p><p>95,4 % motsvarar ungefär \\(\\mu\\pm2\\sigma\\).</p><p>\\(2\\sigma=12\\Rightarrow\\sigma=6\\).</p><p><strong>6 g.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Om \\(\\sigma\\) är det okända värdet kan du i CAS skriva den kumulativa normalfördelningen som en ekvation och använda <code>NLös</code>, till exempel <code>NLös(Normalfördelning(μ, s, gräns)=p, s)</code>.</p>",
     "familj": "r2_normal_back_sigma"
   },
   {
@@ -10012,7 +9473,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>En normalfördelning har \\(\\mu=100\\) och \\(\\sigma=12\\). Totalt finns 800 observationer.</p><p>Uppskatta utan digitalt verktyg hur många som ligger mellan 88 och 124.</p>",
-    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>88 är \\(\\mu-\\sigma\\), 124 är \\(\\mu+2\\sigma\\).</p><p>Andelen är cirka \\(68,2+13,6=81,8\\) %.</p><p>\\(0,818\\cdot800\\approx654\\).</p><p><strong>Cirka 654 observationer.</strong></p>",
+    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>88 är \\(\\mu-\\sigma\\), 124 är \\(\\mu+2\\sigma\\).</p><p>Andelen är cirka \\(68,2+13,6=81,8\\) %.</p><p>\\(0,818\\cdot800\\approx654\\).</p><p><strong>Cirka 654 observationer.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
     "familj": "r2_normal_asymmetric"
   },
   {
@@ -10029,19 +9490,6 @@ window.BANKMA2 = [
     "t": "<p>Två grupper har samma median 20. Grupp A har \\(Q_1=18\\), \\(Q_3=22\\). Grupp B har \\(Q_1=11\\), \\(Q_3=29\\).</p><p>Jämför gruppernas mittersta 50 % och förklara vilken grupp som är mer samlad.</p>",
     "s": "<p>Läs av min, första kvartil, median, tredje kvartil och max innan du jämför spridningen.</p><p>A har kvartilavstånd \\(22-18=4\\). B har \\(29-11=18\\).</p><p><strong>Grupp A är betydligt mer samlad i de mittersta 50 %.</strong></p>",
     "familj": "r2_box_compare"
-  },
-  {
-    "id": "4.53",
-    "kap": 4,
-    "omr": "programmering_medelvarde",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Ett program ska räkna medelvärdet av en lista men delar summan med <code>antal-1</code>.</p><p>Vad blir felet om listan har 8 värden och summan är 140?</p>",
-    "s": "<p>Summera alla värden och dividera med antalet värden; i programkod motsvarar det summa delat med listans längd.</p><p>Rätt medelvärde är \\(140/8=17,5\\).</p><p>Programmet ger \\(140/7=20\\).</p><p><strong>Programmet ger 20 i stället för 17,5.</strong></p>",
-    "familj": "r2_program_mean_bug"
   },
   {
     "id": "4.54",
@@ -10100,7 +9548,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/2",
     "t": "<p>I en normalfördelning är 10:e percentilen 60 och 90:e percentilen 84.</p><p>Bestäm medelvärdet och standardavvikelsen med ett digitalt verktyg.</p>",
-    "s": "<p>10:e och 90:e percentilen ligger symmetriskt kring medelvärdet, så \\(\\mu=(60+84)/2=72\\).</p><p>För 90:e percentilen är \\(z\\approx1,282\\).</p><p>\\(84=72+1,282\\sigma\\Rightarrow\\sigma\\approx9,36\\).</p><p><strong>\\(\\mu=72\\), \\(\\sigma\\approx9,4\\).</strong></p>",
+    "s": "<p>10:e och 90:e percentilen ligger symmetriskt kring medelvärdet, så \\(\\mu=(60+84)/2=72\\).</p><p>För 90:e percentilen är \\(z\\approx1,282\\).</p><p>\\(84=72+1,282\\sigma\\Rightarrow\\sigma\\approx9,36\\).</p><p><strong>\\(\\mu=72\\), \\(\\sigma\\approx9,4\\).</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). När ett gränsvärde/percentil söks väljer du vänster- eller högersvans och matar in den givna sannolikheten; GeoGebra flyttar då gränsen. Alternativt kan kommandot <code>InverseNormal(μ, σ, p)</code> användas för en vänstersannolikhet \\(p\\).</p>",
     "familj": "r2_A_normal_tva_symmetriska_percentiler"
   },
   {
@@ -10115,7 +9563,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/2",
     "t": "<p>I en normalfördelning är 25:e percentilen 42 och 90:e percentilen 68.</p><p>Bestäm medelvärdet och standardavvikelsen med ett digitalt verktyg.</p>",
-    "s": "<p>Standardnormalvärdena är ungefär \\(z_{0,25}=-0,674\\) och \\(z_{0,90}=1,282\\).</p><p>Alltså</p><p>\\(42=\\mu-0,674\\sigma\\)</p><p>\\(68=\\mu+1,282\\sigma\\).</p><p>Subtraktion ger \\(26=1,956\\sigma\\Rightarrow\\sigma\\approx13,29\\).</p><p>\\(\\mu\\approx42+0,674\\cdot13,29\\approx50,96\\).</p><p><strong>\\(\\mu\\approx51,0\\), \\(\\sigma\\approx13,3\\).</strong></p>",
+    "s": "<p>Standardnormalvärdena är ungefär \\(z_{0,25}=-0,674\\) och \\(z_{0,90}=1,282\\).</p><p>Alltså</p><p>\\(42=\\mu-0,674\\sigma\\)</p><p>\\(68=\\mu+1,282\\sigma\\).</p><p>Subtraktion ger \\(26=1,956\\sigma\\Rightarrow\\sigma\\approx13,29\\).</p><p>\\(\\mu\\approx42+0,674\\cdot13,29\\approx50,96\\).</p><p><strong>\\(\\mu\\approx51,0\\), \\(\\sigma\\approx13,3\\).</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). När ett gränsvärde/percentil söks väljer du vänster- eller högersvans och matar in den givna sannolikheten; GeoGebra flyttar då gränsen. Alternativt kan kommandot <code>InverseNormal(μ, σ, p)</code> användas för en vänstersannolikhet \\(p\\).</p>",
     "familj": "r2_A_normal_tva_osymmetriska_percentiler"
   },
   {
@@ -10235,7 +9683,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>En normalfördelning har \\(\\mu=50\\) och \\(\\sigma=8\\). Mellan vilka värden ligger ungefär 68,2 %?</p>",
-    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>Inom en standardavvikelse: \\(50\\pm8\\).</p><p><strong>Mellan 42 och 58.</strong></p>",
+    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>Inom en standardavvikelse: \\(50\\pm8\\).</p><p><strong>Mellan 42 och 58.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
     "familj": "r3_normal_68_1"
   },
   {
@@ -10280,7 +9728,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "1/0/0",
     "t": "<p>En normalfördelning har \\(\\mu=100\\) och \\(\\sigma=12\\). Ungefär hur stor andel ligger över 112?</p>",
-    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>112 ligger en standardavvikelse över medelvärdet.</p><p><strong>Ungefär 15,9 %.</strong></p>",
+    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>112 ligger en standardavvikelse över medelvärdet.</p><p><strong>Ungefär 15,9 %.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Välj vänstersvans, högersvans eller intervall beroende på frågan och skriv in gränsvärdet/gränsvärdena. Sannolikheten visas direkt. För en vänstersannolikhet kan du också skriva <code>Normalfördelning(μ, σ, x)</code>.</p>",
     "familj": "r3_normal_tail_1"
   },
   {
@@ -10295,7 +9743,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "1/0/0",
     "t": "<p>Anta \\(X\\sim N(40,5)\\). Bestäm med digitalt verktyg \\(P(X&lt;45)\\).</p>",
-    "s": "<p>Standardisera vid behov eller använd normalfördelningsfunktionen i det digitala verktyget med rätt medelvärde och standardavvikelse.</p><p>\\(z=1\\).</p><p><strong>\\(P(X&lt;45)\\approx0,841\\).</strong></p>",
+    "s": "<p>Standardisera vid behov eller använd normalfördelningsfunktionen i det digitala verktyget med rätt medelvärde och standardavvikelse.</p><p>\\(z=1\\).</p><p><strong>\\(P(X&lt;45)\\approx0,841\\).</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Välj vänstersvans, högersvans eller intervall beroende på frågan och skriv in gränsvärdet/gränsvärdena. Sannolikheten visas direkt. För en vänstersannolikhet kan du också skriva <code>Normalfördelning(μ, σ, x)</code>.</p>",
     "familj": "r3_normal_cdf_1"
   },
   {
@@ -10324,22 +9772,9 @@ window.BANKMA2 = [
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Kurvan visar en normalfördelning med centrum vid 50.</p><span class=\"fig smal\"><svg width=\"500\" height=\"240\" viewBox=\"0 0 500 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"498\" height=\"238\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"200.00\" x2=\"48.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"55.13\" y1=\"200.00\" x2=\"55.13\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"62.27\" y1=\"200.00\" x2=\"62.27\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"69.40\" y1=\"200.00\" x2=\"69.40\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"76.53\" y1=\"200.00\" x2=\"76.53\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"83.67\" y1=\"200.00\" x2=\"83.67\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"90.80\" y1=\"200.00\" x2=\"90.80\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"97.93\" y1=\"200.00\" x2=\"97.93\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"105.07\" y1=\"200.00\" x2=\"105.07\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"112.20\" y1=\"200.00\" x2=\"112.20\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"119.33\" y1=\"200.00\" x2=\"119.33\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"126.47\" y1=\"200.00\" x2=\"126.47\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"133.60\" y1=\"200.00\" x2=\"133.60\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"140.73\" y1=\"200.00\" x2=\"140.73\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"147.87\" y1=\"200.00\" x2=\"147.87\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"155.00\" y1=\"200.00\" x2=\"155.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"162.13\" y1=\"200.00\" x2=\"162.13\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"169.27\" y1=\"200.00\" x2=\"169.27\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"176.40\" y1=\"200.00\" x2=\"176.40\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"183.53\" y1=\"200.00\" x2=\"183.53\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"190.67\" y1=\"200.00\" x2=\"190.67\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"197.80\" y1=\"200.00\" x2=\"197.80\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"204.93\" y1=\"200.00\" x2=\"204.93\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"212.07\" y1=\"200.00\" x2=\"212.07\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"219.20\" y1=\"200.00\" x2=\"219.20\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"226.33\" y1=\"200.00\" x2=\"226.33\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"233.47\" y1=\"200.00\" x2=\"233.47\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"240.60\" y1=\"200.00\" x2=\"240.60\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"247.73\" y1=\"200.00\" x2=\"247.73\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"254.87\" y1=\"200.00\" x2=\"254.87\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"262.00\" y1=\"200.00\" x2=\"262.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"269.13\" y1=\"200.00\" x2=\"269.13\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"276.27\" y1=\"200.00\" x2=\"276.27\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"283.40\" y1=\"200.00\" x2=\"283.40\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"290.53\" y1=\"200.00\" x2=\"290.53\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"297.67\" y1=\"200.00\" x2=\"297.67\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"304.80\" y1=\"200.00\" x2=\"304.80\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"311.93\" y1=\"200.00\" x2=\"311.93\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"319.07\" y1=\"200.00\" x2=\"319.07\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"326.20\" y1=\"200.00\" x2=\"326.20\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"333.33\" y1=\"200.00\" x2=\"333.33\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"340.47\" y1=\"200.00\" x2=\"340.47\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"347.60\" y1=\"200.00\" x2=\"347.60\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"354.73\" y1=\"200.00\" x2=\"354.73\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"361.87\" y1=\"200.00\" x2=\"361.87\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"369.00\" y1=\"200.00\" x2=\"369.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"376.13\" y1=\"200.00\" x2=\"376.13\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"383.27\" y1=\"200.00\" x2=\"383.27\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"390.40\" y1=\"200.00\" x2=\"390.40\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"397.53\" y1=\"200.00\" x2=\"397.53\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"404.67\" y1=\"200.00\" x2=\"404.67\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"411.80\" y1=\"200.00\" x2=\"411.80\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"418.93\" y1=\"200.00\" x2=\"418.93\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"426.07\" y1=\"200.00\" x2=\"426.07\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"433.20\" y1=\"200.00\" x2=\"433.20\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"440.33\" y1=\"200.00\" x2=\"440.33\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"447.47\" y1=\"200.00\" x2=\"447.47\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"454.60\" y1=\"200.00\" x2=\"454.60\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"461.73\" y1=\"200.00\" x2=\"461.73\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"468.87\" y1=\"200.00\" x2=\"468.87\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"476.00\" y1=\"200.00\" x2=\"476.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"200.00\" x2=\"476.00\" y2=\"200.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"50.00\" x2=\"476.00\" y2=\"50.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"200.00\" x2=\"476.00\" y2=\"200.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"48.00\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">20</text><text x=\"55.13\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">21</text><text x=\"62.27\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">22</text><text x=\"69.40\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">23</text><text x=\"76.53\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">24</text><text x=\"83.67\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">25</text><text x=\"90.80\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">26</text><text x=\"97.93\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">27</text><text x=\"105.07\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">28</text><text x=\"112.20\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">29</text><text x=\"119.33\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">30</text><text x=\"126.47\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">31</text><text x=\"133.60\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">32</text><text x=\"140.73\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">33</text><text x=\"147.87\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">34</text><text x=\"155.00\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">35</text><text x=\"162.13\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">36</text><text x=\"169.27\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">37</text><text x=\"176.40\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">38</text><text x=\"183.53\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">39</text><text x=\"190.67\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">40</text><text x=\"197.80\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">41</text><text x=\"204.93\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">42</text><text x=\"212.07\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">43</text><text x=\"219.20\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">44</text><text x=\"226.33\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">45</text><text x=\"233.47\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">46</text><text x=\"240.60\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">47</text><text x=\"247.73\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">48</text><text x=\"254.87\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">49</text><text x=\"262.00\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">50</text><text x=\"269.13\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">51</text><text x=\"276.27\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">52</text><text x=\"283.40\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">53</text><text x=\"290.53\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">54</text><text x=\"297.67\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">55</text><text x=\"304.80\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">56</text><text x=\"311.93\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">57</text><text x=\"319.07\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">58</text><text x=\"326.20\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">59</text><text x=\"333.33\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">60</text><text x=\"340.47\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">61</text><text x=\"347.60\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">62</text><text x=\"354.73\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">63</text><text x=\"361.87\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">64</text><text x=\"369.00\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">65</text><text x=\"376.13\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">66</text><text x=\"383.27\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">67</text><text x=\"390.40\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">68</text><text x=\"397.53\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">69</text><text x=\"404.67\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">70</text><text x=\"411.80\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">71</text><text x=\"418.93\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">72</text><text x=\"426.07\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">73</text><text x=\"433.20\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">74</text><text x=\"440.33\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">75</text><text x=\"447.47\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">76</text><text x=\"454.60\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">77</text><text x=\"461.73\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">78</text><text x=\"468.87\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">79</text><text x=\"476.00\" y=\"217.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">80</text><path d=\"M 48.00 199.87 L 49.95 199.85 L 51.89 199.83 L 53.84 199.81 L 55.78 199.78 L 57.73 199.75 L 59.67 199.72 L 61.62 199.68 L 63.56 199.64 L 65.51 199.60 L 67.45 199.55 L 69.40 199.50 L 71.35 199.43 L 73.29 199.37 L 75.24 199.29 L 77.18 199.21 L 79.13 199.12 L 81.07 199.02 L 83.02 198.90 L 84.96 198.78 L 86.91 198.65 L 88.85 198.50 L 90.80 198.33 L 92.75 198.16 L 94.69 197.96 L 96.64 197.75 L 98.58 197.51 L 100.53 197.26 L 102.47 196.99 L 104.42 196.69 L 106.36 196.36 L 108.31 196.01 L 110.25 195.63 L 112.20 195.22 L 114.15 194.77 L 116.09 194.29 L 118.04 193.78 L 119.98 193.22 L 121.93 192.62 L 123.87 191.98 L 125.82 191.30 L 127.76 190.57 L 129.71 189.79 L 131.65 188.95 L 133.60 188.07 L 135.55 187.12 L 137.49 186.12 L 139.44 185.06 L 141.38 183.93 L 143.33 182.74 L 145.27 181.48 L 147.22 180.16 L 149.16 178.76 L 151.11 177.29 L 153.05 175.75 L 155.00 174.14 L 156.95 172.45 L 158.89 170.68 L 160.84 168.83 L 162.78 166.91 L 164.73 164.91 L 166.67 162.83 L 168.62 160.68 L 170.56 158.45 L 172.51 156.14 L 174.45 153.76 L 176.40 151.30 L 178.35 148.78 L 180.29 146.18 L 182.24 143.52 L 184.18 140.80 L 186.13 138.02 L 188.07 135.19 L 190.02 132.30 L 191.96 129.36 L 193.91 126.39 L 195.85 123.38 L 197.80 120.34 L 199.75 117.27 L 201.69 114.18 L 203.64 111.09 L 205.58 107.99 L 207.53 104.89 L 209.47 101.80 L 211.42 98.73 L 213.36 95.68 L 215.31 92.67 L 217.25 89.70 L 219.20 86.77 L 221.15 83.91 L 223.09 81.11 L 225.04 78.39 L 226.98 75.74 L 228.93 73.19 L 230.87 70.73 L 232.82 68.38 L 234.76 66.15 L 236.71 64.03 L 238.65 62.04 L 240.60 60.18 L 242.55 58.47 L 244.49 56.90 L 246.44 55.48 L 248.38 54.21 L 250.33 53.11 L 252.27 52.16 L 254.22 51.39 L 256.16 50.78 L 258.11 50.35 L 260.05 50.09 L 262.00 50.00 L 263.95 50.09 L 265.89 50.35 L 267.84 50.78 L 269.78 51.39 L 271.73 52.16 L 273.67 53.11 L 275.62 54.21 L 277.56 55.48 L 279.51 56.90 L 281.45 58.47 L 283.40 60.18 L 285.35 62.04 L 287.29 64.03 L 289.24 66.15 L 291.18 68.38 L 293.13 70.73 L 295.07 73.19 L 297.02 75.74 L 298.96 78.39 L 300.91 81.11 L 302.85 83.91 L 304.80 86.77 L 306.75 89.70 L 308.69 92.67 L 310.64 95.68 L 312.58 98.73 L 314.53 101.80 L 316.47 104.89 L 318.42 107.99 L 320.36 111.09 L 322.31 114.18 L 324.25 117.27 L 326.20 120.34 L 328.15 123.38 L 330.09 126.39 L 332.04 129.36 L 333.98 132.30 L 335.93 135.19 L 337.87 138.02 L 339.82 140.80 L 341.76 143.52 L 343.71 146.18 L 345.65 148.78 L 347.60 151.30 L 349.55 153.76 L 351.49 156.14 L 353.44 158.45 L 355.38 160.68 L 357.33 162.83 L 359.27 164.91 L 361.22 166.91 L 363.16 168.83 L 365.11 170.68 L 367.05 172.45 L 369.00 174.14 L 370.95 175.75 L 372.89 177.29 L 374.84 178.76 L 376.78 180.16 L 378.73 181.48 L 380.67 182.74 L 382.62 183.93 L 384.56 185.06 L 386.51 186.12 L 388.45 187.12 L 390.40 188.07 L 392.35 188.95 L 394.29 189.79 L 396.24 190.57 L 398.18 191.30 L 400.13 191.98 L 402.07 192.62 L 404.02 193.22 L 405.96 193.78 L 407.91 194.29 L 409.85 194.77 L 411.80 195.22 L 413.75 195.63 L 415.69 196.01 L 417.64 196.36 L 419.58 196.69 L 421.53 196.99 L 423.47 197.26 L 425.42 197.51 L 427.36 197.75 L 429.31 197.96 L 431.25 198.16 L 433.20 198.33 L 435.15 198.50 L 437.09 198.65 L 439.04 198.78 L 440.98 198.90 L 442.93 199.02 L 444.87 199.12 L 446.82 199.21 L 448.76 199.29 L 450.71 199.37 L 452.65 199.43 L 454.60 199.50 L 456.55 199.55 L 458.49 199.60 L 460.44 199.64 L 462.38 199.68 L 464.33 199.72 L 466.27 199.75 L 468.22 199.78 L 470.16 199.81 L 472.11 199.83 L 474.05 199.85 L 476.00 199.87\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.8\"/><text x=\"354.73\" y=\"113.00\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" font-weight=\"600\" fill=\"#B43123\">N</text></svg></span><p>Vilket värde ligger ungefär två standardavvikelser under medelvärdet om \\(\\sigma=8\\)?</p>",
-    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>\\(50-2\\cdot8=34\\).</p><p><strong>34.</strong></p>",
+    "t": "<p>Kurvan visar en normalfördelning med centrum vid 50.</p><span class=\"fig smal\"><svg width=\"470\" height=\"270\" viewBox=\"0 0 470 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"468\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"45.0\" y1=\"222\" x2=\"450.0\" y2=\"222\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"45.0\" y1=\"222\" x2=\"45.0\" y2=\"230\" stroke=\"#2B2527\" stroke-width=\"1.3\"/><text x=\"45.0\" y=\"246\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">20</text><line x1=\"78.8\" y1=\"222\" x2=\"78.8\" y2=\"227\" stroke=\"#2B2527\" stroke-width=\"1.3\"/><line x1=\"112.5\" y1=\"222\" x2=\"112.5\" y2=\"230\" stroke=\"#2B2527\" stroke-width=\"1.3\"/><text x=\"112.5\" y=\"246\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">30</text><line x1=\"146.2\" y1=\"222\" x2=\"146.2\" y2=\"227\" stroke=\"#2B2527\" stroke-width=\"1.3\"/><line x1=\"180.0\" y1=\"222\" x2=\"180.0\" y2=\"230\" stroke=\"#2B2527\" stroke-width=\"1.3\"/><text x=\"180.0\" y=\"246\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">40</text><line x1=\"213.8\" y1=\"222\" x2=\"213.8\" y2=\"227\" stroke=\"#2B2527\" stroke-width=\"1.3\"/><line x1=\"247.5\" y1=\"222\" x2=\"247.5\" y2=\"230\" stroke=\"#2B2527\" stroke-width=\"1.3\"/><text x=\"247.5\" y=\"246\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">50</text><line x1=\"281.2\" y1=\"222\" x2=\"281.2\" y2=\"227\" stroke=\"#2B2527\" stroke-width=\"1.3\"/><line x1=\"315.0\" y1=\"222\" x2=\"315.0\" y2=\"230\" stroke=\"#2B2527\" stroke-width=\"1.3\"/><text x=\"315.0\" y=\"246\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">60</text><line x1=\"348.8\" y1=\"222\" x2=\"348.8\" y2=\"227\" stroke=\"#2B2527\" stroke-width=\"1.3\"/><line x1=\"382.5\" y1=\"222\" x2=\"382.5\" y2=\"230\" stroke=\"#2B2527\" stroke-width=\"1.3\"/><text x=\"382.5\" y=\"246\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">70</text><line x1=\"416.2\" y1=\"222\" x2=\"416.2\" y2=\"227\" stroke=\"#2B2527\" stroke-width=\"1.3\"/><line x1=\"450.0\" y1=\"222\" x2=\"450.0\" y2=\"230\" stroke=\"#2B2527\" stroke-width=\"1.3\"/><text x=\"450.0\" y=\"246\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">80</text><path d=\"M 45.0 221.9 L 46.4 221.8 L 47.7 221.8 L 49.1 221.8 L 50.4 221.8 L 51.8 221.8 L 53.1 221.8 L 54.5 221.7 L 55.8 221.7 L 57.2 221.7 L 58.5 221.7 L 59.9 221.6 L 61.3 221.6 L 62.6 221.6 L 64.0 221.5 L 65.3 221.5 L 66.7 221.4 L 68.0 221.4 L 69.4 221.3 L 70.7 221.3 L 72.1 221.2 L 73.4 221.1 L 74.8 221.1 L 76.2 221.0 L 77.5 220.9 L 78.9 220.8 L 80.2 220.7 L 81.6 220.6 L 82.9 220.5 L 84.3 220.4 L 85.6 220.3 L 87.0 220.1 L 88.3 220.0 L 89.7 219.8 L 91.1 219.7 L 92.4 219.5 L 93.8 219.3 L 95.1 219.1 L 96.5 218.9 L 97.8 218.7 L 99.2 218.4 L 100.5 218.2 L 101.9 217.9 L 103.2 217.6 L 104.6 217.3 L 106.0 217.0 L 107.3 216.7 L 108.7 216.3 L 110.0 215.9 L 111.4 215.5 L 112.7 215.1 L 114.1 214.7 L 115.4 214.2 L 116.8 213.7 L 118.1 213.2 L 119.5 212.7 L 120.9 212.1 L 122.2 211.5 L 123.6 210.9 L 124.9 210.2 L 126.3 209.5 L 127.6 208.8 L 129.0 208.1 L 130.3 207.3 L 131.7 206.5 L 133.0 205.6 L 134.4 204.7 L 135.8 203.8 L 137.1 202.8 L 138.5 201.8 L 139.8 200.8 L 141.2 199.7 L 142.5 198.6 L 143.9 197.4 L 145.2 196.2 L 146.6 195.0 L 147.9 193.7 L 149.3 192.3 L 150.7 191.0 L 152.0 189.5 L 153.4 188.1 L 154.7 186.6 L 156.1 185.0 L 157.4 183.4 L 158.8 181.8 L 160.1 180.1 L 161.5 178.4 L 162.8 176.6 L 164.2 174.8 L 165.6 173.0 L 166.9 171.1 L 168.3 169.2 L 169.6 167.2 L 171.0 165.2 L 172.3 163.2 L 173.7 161.1 L 175.0 159.0 L 176.4 156.9 L 177.7 154.7 L 179.1 152.5 L 180.5 150.3 L 181.8 148.0 L 183.2 145.8 L 184.5 143.5 L 185.9 141.2 L 187.2 138.9 L 188.6 136.5 L 189.9 134.2 L 191.3 131.8 L 192.6 129.5 L 194.0 127.1 L 195.4 124.8 L 196.7 122.4 L 198.1 120.1 L 199.4 117.7 L 200.8 115.4 L 202.1 113.1 L 203.5 110.8 L 204.8 108.6 L 206.2 106.3 L 207.5 104.1 L 208.9 102.0 L 210.3 99.8 L 211.6 97.7 L 213.0 95.7 L 214.3 93.7 L 215.7 91.7 L 217.0 89.8 L 218.4 88.0 L 219.7 86.2 L 221.1 84.5 L 222.4 82.8 L 223.8 81.2 L 225.2 79.7 L 226.5 78.3 L 227.9 76.9 L 229.2 75.6 L 230.6 74.4 L 231.9 73.3 L 233.3 72.3 L 234.6 71.3 L 236.0 70.5 L 237.3 69.7 L 238.7 69.0 L 240.1 68.5 L 241.4 68.0 L 242.8 67.6 L 244.1 67.3 L 245.5 67.1 L 246.8 67.0 L 248.2 67.0 L 249.5 67.1 L 250.9 67.3 L 252.2 67.6 L 253.6 68.0 L 254.9 68.5 L 256.3 69.0 L 257.7 69.7 L 259.0 70.5 L 260.4 71.3 L 261.7 72.3 L 263.1 73.3 L 264.4 74.4 L 265.8 75.6 L 267.1 76.9 L 268.5 78.3 L 269.8 79.7 L 271.2 81.2 L 272.6 82.8 L 273.9 84.5 L 275.3 86.2 L 276.6 88.0 L 278.0 89.8 L 279.3 91.7 L 280.7 93.7 L 282.0 95.7 L 283.4 97.7 L 284.7 99.8 L 286.1 102.0 L 287.5 104.1 L 288.8 106.3 L 290.2 108.6 L 291.5 110.8 L 292.9 113.1 L 294.2 115.4 L 295.6 117.7 L 296.9 120.1 L 298.3 122.4 L 299.6 124.8 L 301.0 127.1 L 302.4 129.5 L 303.7 131.8 L 305.1 134.2 L 306.4 136.5 L 307.8 138.9 L 309.1 141.2 L 310.5 143.5 L 311.8 145.8 L 313.2 148.0 L 314.5 150.3 L 315.9 152.5 L 317.3 154.7 L 318.6 156.9 L 320.0 159.0 L 321.3 161.1 L 322.7 163.2 L 324.0 165.2 L 325.4 167.2 L 326.7 169.2 L 328.1 171.1 L 329.4 173.0 L 330.8 174.8 L 332.2 176.6 L 333.5 178.4 L 334.9 180.1 L 336.2 181.8 L 337.6 183.4 L 338.9 185.0 L 340.3 186.6 L 341.6 188.1 L 343.0 189.5 L 344.3 191.0 L 345.7 192.3 L 347.1 193.7 L 348.4 195.0 L 349.8 196.2 L 351.1 197.4 L 352.5 198.6 L 353.8 199.7 L 355.2 200.8 L 356.5 201.8 L 357.9 202.8 L 359.2 203.8 L 360.6 204.7 L 362.0 205.6 L 363.3 206.5 L 364.7 207.3 L 366.0 208.1 L 367.4 208.8 L 368.7 209.5 L 370.1 210.2 L 371.4 210.9 L 372.8 211.5 L 374.1 212.1 L 375.5 212.7 L 376.9 213.2 L 378.2 213.7 L 379.6 214.2 L 380.9 214.7 L 382.3 215.1 L 383.6 215.5 L 385.0 215.9 L 386.3 216.3 L 387.7 216.7 L 389.0 217.0 L 390.4 217.3 L 391.8 217.6 L 393.1 217.9 L 394.5 218.2 L 395.8 218.4 L 397.2 218.7 L 398.5 218.9 L 399.9 219.1 L 401.2 219.3 L 402.6 219.5 L 403.9 219.7 L 405.3 219.8 L 406.7 220.0 L 408.0 220.1 L 409.4 220.3 L 410.7 220.4 L 412.1 220.5 L 413.4 220.6 L 414.8 220.7 L 416.1 220.8 L 417.5 220.9 L 418.8 221.0 L 420.2 221.1 L 421.6 221.1 L 422.9 221.2 L 424.3 221.3 L 425.6 221.3 L 427.0 221.4 L 428.3 221.4 L 429.7 221.5 L 431.0 221.5 L 432.4 221.6 L 433.7 221.6 L 435.1 221.6 L 436.5 221.7 L 437.8 221.7 L 439.2 221.7 L 440.5 221.7 L 441.9 221.8 L 443.2 221.8 L 444.6 221.8 L 445.9 221.8 L 447.3 221.8 L 448.6 221.8 L 450.0 221.9\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"3\"/><line x1=\"247.5\" y1=\"222\" x2=\"247.5\" y2=\"212\" stroke=\"#2A5D9E\" stroke-width=\"2\"/><text x=\"247.5\" y=\"262\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">μ = 50</text></svg></span><p>Vilket värde ligger ungefär två standardavvikelser under medelvärdet om \\(\\sigma=8\\)?</p>",
+    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>\\(50-2\\cdot8=34\\).</p><p><strong>34.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
     "familj": "r3_normal_graph_1"
-  },
-  {
-    "id": "4.73",
-    "kap": 4,
-    "omr": "programmering_medelvarde",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Ett program beräknar medelvärdet för listan <code>[4, 6, 10, 12]</code>. Vilket värde får programmet?</p>",
-    "s": "<p>Summera alla värden och dividera med antalet värden; i programkod motsvarar det summa delat med listans längd.</p><p>Summan är 32 och antalet 4.</p><p><strong>8.</strong></p>",
-    "familj": "r3_prog_mean_1"
   },
   {
     "id": "4.74",
@@ -10443,7 +9878,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>En normalfördelning har medelvärdet 70. Ungefär 95,4 % av värdena ligger mellan 58 och 82. Bestäm standardavvikelsen.</p>",
-    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>Intervallet är \\(\\mu\\pm2\\sigma\\). Avståndet är 12.</p><p>\\(2\\sigma=12\\Rightarrow \\sigma=6\\).</p><p><strong>6.</strong></p>",
+    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p>Intervallet är \\(\\mu\\pm2\\sigma\\). Avståndet är 12.</p><p>\\(2\\sigma=12\\Rightarrow \\sigma=6\\).</p><p><strong>6.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Om \\(\\sigma\\) är det okända värdet kan du i CAS skriva den kumulativa normalfördelningen som en ekvation och använda <code>NLös</code>, till exempel <code>NLös(Normalfördelning(μ, s, gräns)=p, s)</code>.</p>",
     "familj": "r3_normal_back_sigma_1"
   },
   {
@@ -10458,7 +9893,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Anta \\(X\\sim N(120,15)\\). Bestäm med digitalt verktyg sannolikheten att \\(X\\) ligger mellan 105 och 135.</p>",
-    "s": "<p>Standardisera vid behov eller använd normalfördelningsfunktionen i det digitala verktyget med rätt medelvärde och standardavvikelse.</p><p>Det motsvarar ungefär \\(\\mu\\pm\\sigma\\).</p><p><strong>\\(P(105&lt;X&lt;135)\\approx0,683\\).</strong></p>",
+    "s": "<p>Standardisera vid behov eller använd normalfördelningsfunktionen i det digitala verktyget med rätt medelvärde och standardavvikelse.</p><p>Det motsvarar ungefär \\(\\mu\\pm\\sigma\\).</p><p><strong>\\(P(105&lt;X&lt;135)\\approx0,683\\).</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Välj vänstersvans, högersvans eller intervall beroende på frågan och skriv in gränsvärdet/gränsvärdena. Sannolikheten visas direkt. För en vänstersannolikhet kan du också skriva <code>Normalfördelning(μ, σ, x)</code>.</p>",
     "familj": "r3_normal_interval_1"
   },
   {
@@ -10475,19 +9910,6 @@ window.BANKMA2 = [
     "t": "<p>Två grupper har samma median 18. Grupp A har \\(Q_1=16\\) och \\(Q_3=20\\). Grupp B har \\(Q_1=10\\) och \\(Q_3=26\\). Jämför spridningen i de mittersta 50 %.</p>",
     "s": "<p>Läs av min, första kvartil, median, tredje kvartil och max innan du jämför spridningen.</p><p>Kvartilavståndet för A är 4 och för B är 16.</p><p><strong>Grupp A är mycket mer samlad i de mittersta 50 %.</strong></p>",
     "familj": "r3_box_compare_1"
-  },
-  {
-    "id": "4.83",
-    "kap": 4,
-    "omr": "programmering_medelvarde",
-    "kurs": [
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Ett program räknar ut medelvärdet men glömmer att dela med antalet värden. För listan <code>[2, 5, 9, 12]</code>, vilket tal skriver programmet ut och vad borde det skriva ut?</p>",
-    "s": "<p>Summera alla värden och dividera med antalet värden; i programkod motsvarar det summa delat med listans längd.</p><p>Det skriver ut summan 28. Rätt medelvärde är \\(28/4=7\\).</p><p><strong>Felaktigt 28, korrekt 7.</strong></p>",
-    "familj": "r3_prog_bug_1"
   },
   {
     "id": "4.84",
@@ -10546,7 +9968,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>I en normalfördelning är 90:e percentilen 64 och 10:e percentilen 40. Bestäm medelvärdet och standardavvikelsen.</p>",
-    "s": "<p>Percentilerna ligger symmetriskt kring medelvärdet, så \\(\\mu=(64+40)/2=52\\).</p><p>För 90:e percentilen är \\(z\\approx1,282\\). Då \\(64=52+1,282\\sigma\\), alltså \\(\\sigma\\approx9,36\\).</p><p><strong>\\(\\mu=52\\), \\(\\sigma\\approx9,4\\).</strong></p>",
+    "s": "<p>Percentilerna ligger symmetriskt kring medelvärdet, så \\(\\mu=(64+40)/2=52\\).</p><p>För 90:e percentilen är \\(z\\approx1,282\\). Då \\(64=52+1,282\\sigma\\), alltså \\(\\sigma\\approx9,36\\).</p><p><strong>\\(\\mu=52\\), \\(\\sigma\\approx9,4\\).</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). När ett gränsvärde/percentil söks väljer du vänster- eller högersvans och matar in den givna sannolikheten; GeoGebra flyttar då gränsen. Alternativt kan kommandot <code>InverseNormal(μ, σ, p)</code> användas för en vänstersannolikhet \\(p\\).</p>",
     "familj": "r3_A_normal_two_percentiles_1"
   },
   {
@@ -10576,7 +9998,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>En normalfördelad variabel har standardavvikelsen 7. 5 % av observationerna är större än 61. Bestäm medelvärdet.</p>",
-    "s": "<p>61 är 95:e percentilen, alltså \\(z\\approx1,645\\).</p><p>\\(61=\\mu+1,645\\cdot7\\). Därför \\(\\mu\\approx49,5\\).</p><p><strong>Medelvärdet är cirka 49,5.</strong></p>",
+    "s": "<p>61 är 95:e percentilen, alltså \\(z\\approx1,645\\).</p><p>\\(61=\\mu+1,645\\cdot7\\). Därför \\(\\mu\\approx49,5\\).</p><p><strong>Medelvärdet är cirka 49,5.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Om \\(\\sigma\\) är det okända värdet kan du i CAS skriva den kumulativa normalfördelningen som en ekvation och använda <code>NLös</code>, till exempel <code>NLös(Normalfördelning(μ, s, gräns)=p, s)</code>.</p>",
     "familj": "r3_A_normal_inverse_mean_1"
   },
   {
@@ -10651,7 +10073,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "1/0/0",
     "t": "<p>En normalfördelning har \\(\\mu=30\\), \\(\\sigma=4\\). Mellan vilka värden ligger ungefär 95,4 %?</p>",
-    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p><strong>Mellan 22 och 38.</strong></p>",
+    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p><strong>Mellan 22 och 38.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
     "familj": "gap_stats_4"
   },
   {
@@ -10666,7 +10088,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/1/0",
     "t": "<p>Anta \\(X\\sim N(80,10)\\). Bestäm \\(P(70&lt;X&lt;90)\\).</p>",
-    "s": "<p>Standardisera vid behov eller använd normalfördelningsfunktionen i det digitala verktyget med rätt medelvärde och standardavvikelse.</p><p><strong>Ungefär 0,683.</strong></p>",
+    "s": "<p>Standardisera vid behov eller använd normalfördelningsfunktionen i det digitala verktyget med rätt medelvärde och standardavvikelse.</p><p><strong>Ungefär 0,683.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
     "familj": "gap_stats_5"
   },
   {
@@ -10726,7 +10148,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>En normalfördelning har medelvärde 200. Ungefär 68,2 % ligger mellan 188 och 212. Bestäm standardavvikelsen.</p>",
-    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p><strong>12.</strong></p>",
+    "s": "<p>Relatera intervallet till antal standardavvikelser från medelvärdet och använd 68–95–99,7-regeln när den är tillämplig.</p><p><strong>12.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Om \\(\\sigma\\) är det okända värdet kan du i CAS skriva den kumulativa normalfördelningen som en ekvation och använda <code>NLös</code>, till exempel <code>NLös(Normalfördelning(μ, s, gräns)=p, s)</code>.</p>",
     "familj": "gap_stats_9"
   },
   {
@@ -10741,7 +10163,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>I en normalfördelning är medelvärdet 50 och 90:e percentilen 62. Bestäm standardavvikelsen.</p>",
-    "s": "<p>Standardisera vid behov eller använd normalfördelningsfunktionen i det digitala verktyget med rätt medelvärde och standardavvikelse.</p><p>\\(z_{0,90}\\approx1,282\\). \\(12=1,282\\sigma\\).</p><p><strong>\\(\\sigma\\approx9,36\\).</strong></p>",
+    "s": "<p>Standardisera vid behov eller använd normalfördelningsfunktionen i det digitala verktyget med rätt medelvärde och standardavvikelse.</p><p>\\(z_{0,90}\\approx1,282\\). \\(12=1,282\\sigma\\).</p><p><strong>\\(\\sigma\\approx9,36\\).</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). När ett gränsvärde/percentil söks väljer du vänster- eller högersvans och matar in den givna sannolikheten; GeoGebra flyttar då gränsen. Alternativt kan kommandot <code>InverseNormal(μ, σ, p)</code> användas för en vänstersannolikhet \\(p\\).</p>",
     "familj": "gap_stats_10"
   },
   {
@@ -10785,7 +10207,7 @@ window.BANKMA2 = [
     ],
     "niva": "A",
     "poang": "0/0/3",
-    "t": "<p>Två gruppers resultat visas i lådagrammen.</p><span class=\"fig smal\"><svg width=\"420\" height=\"220\" viewBox=\"0 0 420 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"418\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"73.6\" y1=\"30\" x2=\"73.6\" y2=\"190\" stroke=\"#F0EFF2\"/><text x=\"73.6\" y=\"205\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">1</text><line x1=\"97.1\" y1=\"30\" x2=\"97.1\" y2=\"190\" stroke=\"#F0EFF2\"/><text x=\"97.1\" y=\"205\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">2</text><line x1=\"120.7\" y1=\"30\" x2=\"120.7\" y2=\"190\" stroke=\"#F0EFF2\"/><text x=\"120.7\" y=\"205\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">3</text><line x1=\"144.3\" y1=\"30\" x2=\"144.3\" y2=\"190\" stroke=\"#F0EFF2\"/><text x=\"144.3\" y=\"205\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">4</text><line x1=\"167.9\" y1=\"30\" x2=\"167.9\" y2=\"190\" stroke=\"#F0EFF2\"/><text x=\"167.9\" y=\"205\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">5</text><line x1=\"191.4\" y1=\"30\" x2=\"191.4\" y2=\"190\" stroke=\"#F0EFF2\"/><text x=\"191.4\" y=\"205\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">6</text><line x1=\"215.0\" y1=\"30\" x2=\"215.0\" y2=\"190\" stroke=\"#F0EFF2\"/><text x=\"215.0\" y=\"205\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">7</text><line x1=\"238.6\" y1=\"30\" x2=\"238.6\" y2=\"190\" stroke=\"#F0EFF2\"/><text x=\"238.6\" y=\"205\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">8</text><line x1=\"262.1\" y1=\"30\" x2=\"262.1\" y2=\"190\" stroke=\"#F0EFF2\"/><text x=\"262.1\" y=\"205\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">9</text><line x1=\"285.7\" y1=\"30\" x2=\"285.7\" y2=\"190\" stroke=\"#F0EFF2\"/><text x=\"285.7\" y=\"205\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">10</text><line x1=\"309.3\" y1=\"30\" x2=\"309.3\" y2=\"190\" stroke=\"#F0EFF2\"/><text x=\"309.3\" y=\"205\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">11</text><line x1=\"332.9\" y1=\"30\" x2=\"332.9\" y2=\"190\" stroke=\"#F0EFF2\"/><text x=\"332.9\" y=\"205\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">12</text><line x1=\"356.4\" y1=\"30\" x2=\"356.4\" y2=\"190\" stroke=\"#F0EFF2\"/><text x=\"356.4\" y=\"205\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">13</text><line x1=\"144.3\" y1=\"80\" x2=\"332.9\" y2=\"80\" stroke=\"#2B2527\" stroke-width=\"2\"/><rect x=\"191.4\" y=\"64\" width=\"70.7\" height=\"32\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2\"/><line x1=\"215.0\" y1=\"64\" x2=\"215.0\" y2=\"96\" stroke=\"#2A5D9E\" stroke-width=\"2\"/><line x1=\"144.3\" y1=\"70\" x2=\"144.3\" y2=\"90\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"332.9\" y1=\"70\" x2=\"332.9\" y2=\"90\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"16\" y=\"84\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><line x1=\"120.7\" y1=\"140\" x2=\"309.3\" y2=\"140\" stroke=\"#2B2527\" stroke-width=\"2\"/><rect x=\"167.9\" y=\"124\" width=\"117.9\" height=\"32\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2\"/><line x1=\"215.0\" y1=\"124\" x2=\"215.0\" y2=\"156\" stroke=\"#B43123\" stroke-width=\"2\"/><line x1=\"120.7\" y1=\"130\" x2=\"120.7\" y2=\"150\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"309.3\" y1=\"130\" x2=\"309.3\" y2=\"150\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"16\" y=\"144\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text></svg></span><p>Avgör vilka av följande påståenden som säkert är sanna.</p><p>I. Grupp B har större kvartilavstånd än grupp A.<br>II. Minst 25 % av resultaten i grupp A är 9 eller större.<br>III. Minst hälften av resultaten i grupp B ligger mellan 5 och 10.</p>",
+    "t": "<p>Två gruppers resultat visas i lådagrammen.</p><span class=\"fig smal\"><svg width=\"460\" height=\"250\" viewBox=\"0 0 460 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"458\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"58.0\" y1=\"30\" x2=\"58.0\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"58.0\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">1</text><line x1=\"89.8\" y1=\"30\" x2=\"89.8\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"89.8\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">2</text><line x1=\"121.7\" y1=\"30\" x2=\"121.7\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"121.7\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">3</text><line x1=\"153.5\" y1=\"30\" x2=\"153.5\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"153.5\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">4</text><line x1=\"185.3\" y1=\"30\" x2=\"185.3\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"185.3\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">5</text><line x1=\"217.2\" y1=\"30\" x2=\"217.2\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"217.2\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">6</text><line x1=\"249.0\" y1=\"30\" x2=\"249.0\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"249.0\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">7</text><line x1=\"280.8\" y1=\"30\" x2=\"280.8\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"280.8\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">8</text><line x1=\"312.7\" y1=\"30\" x2=\"312.7\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"312.7\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">9</text><line x1=\"344.5\" y1=\"30\" x2=\"344.5\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"344.5\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">10</text><line x1=\"376.3\" y1=\"30\" x2=\"376.3\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"376.3\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">11</text><line x1=\"408.2\" y1=\"30\" x2=\"408.2\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"408.2\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">12</text><line x1=\"440.0\" y1=\"30\" x2=\"440.0\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"440.0\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">13</text><text x=\"18\" y=\"80\" font-family=\"IBM Plex Mono,monospace\" font-size=\"13\">A</text><line x1=\"153.5\" y1=\"75\" x2=\"408.2\" y2=\"75\" stroke=\"#2B2527\" stroke-width=\"2.2\"/><rect x=\"217.2\" y=\"53\" width=\"95.5\" height=\"44\" fill=\"#E8EEF7\" stroke=\"#2A5D9E\" stroke-width=\"2.3\"/><line x1=\"249.0\" y1=\"53\" x2=\"249.0\" y2=\"97\" stroke=\"#B43123\" stroke-width=\"2.4\"/><line x1=\"153.5\" y1=\"61\" x2=\"153.5\" y2=\"89\" stroke=\"#2B2527\" stroke-width=\"2.2\"/><line x1=\"408.2\" y1=\"61\" x2=\"408.2\" y2=\"89\" stroke=\"#2B2527\" stroke-width=\"2.2\"/><text x=\"18\" y=\"185\" font-family=\"IBM Plex Mono,monospace\" font-size=\"13\">B</text><line x1=\"121.7\" y1=\"180\" x2=\"376.3\" y2=\"180\" stroke=\"#2B2527\" stroke-width=\"2.2\"/><rect x=\"185.3\" y=\"158\" width=\"159.2\" height=\"44\" fill=\"#E8EEF7\" stroke=\"#2A5D9E\" stroke-width=\"2.3\"/><line x1=\"249.0\" y1=\"158\" x2=\"249.0\" y2=\"202\" stroke=\"#B43123\" stroke-width=\"2.4\"/><line x1=\"121.7\" y1=\"166\" x2=\"121.7\" y2=\"194\" stroke=\"#2B2527\" stroke-width=\"2.2\"/><line x1=\"376.3\" y1=\"166\" x2=\"376.3\" y2=\"194\" stroke=\"#2B2527\" stroke-width=\"2.2\"/></svg></span><p>Avgör vilka av följande påståenden som säkert är sanna.</p><p>I. Grupp B har större kvartilavstånd än grupp A.<br>II. Minst 25 % av resultaten i grupp A är 9 eller större.<br>III. Minst hälften av resultaten i grupp B ligger mellan 5 och 10.</p>",
     "s": "<p>I grupp A är kvartilavståndet \\(9-6=3\\). I grupp B är kvartilavståndet \\(10-5=5\\).</p><p><strong>I är sann.</strong></p><p>Eftersom \\(Q_3=9\\) i grupp A ligger minst 25 % av resultaten på eller över 9.</p><p><strong>II är sann.</strong></p><p>I grupp B ligger de mittersta 50 % mellan \\(Q_1=5\\) och \\(Q_3=10\\).</p><p><strong>III är också sann.</strong></p><p><strong>Alla tre påståendena är säkert sanna.</strong></p>",
     "familj": "A_boxplot_reasoning_three_statements"
   },
@@ -10801,7 +10223,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/2",
     "t": "<p>En variabel är normalfördelad med medelvärdet 70 och standardavvikelsen 8.</p><p>Bestäm det symmetriska intervall kring medelvärdet som innehåller 80 % av alla värden.</p>",
-    "s": "<p>80 % i mitten innebär 10 % i vardera svansen. Då är \\(z\\approx1,2816\\).</p><p>Intervallet blir \\(70\\pm1,2816\\cdot8\\approx70\\pm10,25\\).</p><p><strong>Det sökta intervallet är ungefär 59,7 till 80,3.</strong></p>",
+    "s": "<p>80 % i mitten innebär 10 % i vardera svansen. Då är \\(z\\approx1,2816\\).</p><p>Intervallet blir \\(70\\pm1,2816\\cdot8\\approx70\\pm10,25\\).</p><p><strong>Det sökta intervallet är ungefär 59,7 till 80,3.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Om \\(\\sigma\\) är det okända värdet kan du i CAS skriva den kumulativa normalfördelningen som en ekvation och använda <code>NLös</code>, till exempel <code>NLös(Normalfördelning(μ, s, gräns)=p, s)</code>.</p>",
     "familj": "A_normal_symmetric_80_percent"
   },
   {
@@ -10816,7 +10238,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/2",
     "t": "<p>En mätserie antas vara normalfördelad. Medelvärdet är 250. Det är känt att 10 % av mätvärdena är större än 288.</p><p>Bestäm standardavvikelsen.</p>",
-    "s": "<p>Om 10 % ligger över 288 så är 288 den 90:e percentilen. Då är \\(z\\approx1,2816\\).</p><p>Alltså gäller \\(288=250+1,2816\\sigma\\).</p><p>\\(38=1,2816\\sigma\\Rightarrow\\sigma\\approx29,6\\).</p><p><strong>Standardavvikelsen är ungefär 29,6.</strong></p>",
+    "s": "<p>Om 10 % ligger över 288 så är 288 den 90:e percentilen. Då är \\(z\\approx1,2816\\).</p><p>Alltså gäller \\(288=250+1,2816\\sigma\\).</p><p>\\(38=1,2816\\sigma\\Rightarrow\\sigma\\approx29,6\\).</p><p><strong>Standardavvikelsen är ungefär 29,6.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Om \\(\\sigma\\) är det okända värdet kan du i CAS skriva den kumulativa normalfördelningen som en ekvation och använda <code>NLös</code>, till exempel <code>NLös(Normalfördelning(μ, s, gräns)=p, s)</code>.</p>",
     "familj": "A_normal_inverse_sigma"
   },
   {
@@ -10831,7 +10253,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "1/0/0",
     "t": "<p><strong>Endast svar.</strong> Tre normalfördelningskurvor A–C har samma medelvärde.</p><span class=\"fig smal\"><svg width=\"460\" height=\"250\" viewBox=\"0 0 460 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"458\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"45\" y1=\"205\" x2=\"430\" y2=\"205\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M 45.0 205.0 L 45.5 205.0 L 46.0 205.0 L 46.4 205.0 L 46.9 205.0 L 47.4 205.0 L 47.9 205.0 L 48.4 205.0 L 48.9 204.9 L 49.3 204.9 L 49.8 204.9 L 50.3 204.9 L 50.8 204.9 L 51.3 204.9 L 51.7 204.9 L 52.2 204.9 L 52.7 204.9 L 53.2 204.9 L 53.7 204.9 L 54.1 204.9 L 54.6 204.9 L 55.1 204.9 L 55.6 204.9 L 56.1 204.9 L 56.6 204.9 L 57.0 204.9 L 57.5 204.9 L 58.0 204.9 L 58.5 204.9 L 59.0 204.9 L 59.4 204.9 L 59.9 204.9 L 60.4 204.9 L 60.9 204.9 L 61.4 204.9 L 61.8 204.9 L 62.3 204.9 L 62.8 204.8 L 63.3 204.8 L 63.8 204.8 L 64.2 204.8 L 64.7 204.8 L 65.2 204.8 L 65.7 204.8 L 66.2 204.8 L 66.7 204.8 L 67.1 204.8 L 67.6 204.8 L 68.1 204.8 L 68.6 204.8 L 69.1 204.8 L 69.5 204.8 L 70.0 204.7 L 70.5 204.7 L 71.0 204.7 L 71.5 204.7 L 72.0 204.7 L 72.4 204.7 L 72.9 204.7 L 73.4 204.7 L 73.9 204.7 L 74.4 204.6 L 74.8 204.6 L 75.3 204.6 L 75.8 204.6 L 76.3 204.6 L 76.8 204.6 L 77.2 204.6 L 77.7 204.6 L 78.2 204.5 L 78.7 204.5 L 79.2 204.5 L 79.7 204.5 L 80.1 204.5 L 80.6 204.5 L 81.1 204.4 L 81.6 204.4 L 82.1 204.4 L 82.5 204.4 L 83.0 204.4 L 83.5 204.3 L 84.0 204.3 L 84.5 204.3 L 84.9 204.3 L 85.4 204.3 L 85.9 204.2 L 86.4 204.2 L 86.9 204.2 L 87.3 204.2 L 87.8 204.1 L 88.3 204.1 L 88.8 204.1 L 89.3 204.0 L 89.8 204.0 L 90.2 204.0 L 90.7 203.9 L 91.2 203.9 L 91.7 203.9 L 92.2 203.8 L 92.6 203.8 L 93.1 203.8 L 93.6 203.7 L 94.1 203.7 L 94.6 203.7 L 95.1 203.6 L 95.5 203.6 L 96.0 203.5 L 96.5 203.5 L 97.0 203.5 L 97.5 203.4 L 97.9 203.4 L 98.4 203.3 L 98.9 203.3 L 99.4 203.2 L 99.9 203.2 L 100.3 203.1 L 100.8 203.1 L 101.3 203.0 L 101.8 202.9 L 102.3 202.9 L 102.8 202.8 L 103.2 202.8 L 103.7 202.7 L 104.2 202.6 L 104.7 202.6 L 105.2 202.5 L 105.6 202.4 L 106.1 202.4 L 106.6 202.3 L 107.1 202.2 L 107.6 202.1 L 108.0 202.0 L 108.5 202.0 L 109.0 201.9 L 109.5 201.8 L 110.0 201.7 L 110.4 201.6 L 110.9 201.5 L 111.4 201.4 L 111.9 201.4 L 112.4 201.3 L 112.9 201.2 L 113.3 201.1 L 113.8 201.0 L 114.3 200.8 L 114.8 200.7 L 115.3 200.6 L 115.7 200.5 L 116.2 200.4 L 116.7 200.3 L 117.2 200.2 L 117.7 200.0 L 118.2 199.9 L 118.6 199.8 L 119.1 199.7 L 119.6 199.5 L 120.1 199.4 L 120.6 199.3 L 121.0 199.1 L 121.5 199.0 L 122.0 198.8 L 122.5 198.7 L 123.0 198.5 L 123.4 198.4 L 123.9 198.2 L 124.4 198.0 L 124.9 197.9 L 125.4 197.7 L 125.9 197.5 L 126.3 197.4 L 126.8 197.2 L 127.3 197.0 L 127.8 196.8 L 128.3 196.6 L 128.7 196.4 L 129.2 196.2 L 129.7 196.0 L 130.2 195.8 L 130.7 195.6 L 131.1 195.4 L 131.6 195.2 L 132.1 195.0 L 132.6 194.8 L 133.1 194.6 L 133.6 194.3 L 134.0 194.1 L 134.5 193.9 L 135.0 193.6 L 135.5 193.4 L 136.0 193.1 L 136.4 192.9 L 136.9 192.6 L 137.4 192.4 L 137.9 192.1 L 138.4 191.8 L 138.8 191.5 L 139.3 191.3 L 139.8 191.0 L 140.3 190.7 L 140.8 190.4 L 141.2 190.1 L 141.7 189.8 L 142.2 189.5 L 142.7 189.2 L 143.2 188.9 L 143.7 188.6 L 144.1 188.2 L 144.6 187.9 L 145.1 187.6 L 145.6 187.2 L 146.1 186.9 L 146.5 186.6 L 147.0 186.2 L 147.5 185.9 L 148.0 185.5 L 148.5 185.1 L 148.9 184.8 L 149.4 184.4 L 149.9 184.0 L 150.4 183.6 L 150.9 183.2 L 151.4 182.8 L 151.8 182.4 L 152.3 182.0 L 152.8 181.6 L 153.3 181.2 L 153.8 180.8 L 154.2 180.4 L 154.7 179.9 L 155.2 179.5 L 155.7 179.1 L 156.2 178.6 L 156.7 178.2 L 157.1 177.7 L 157.6 177.3 L 158.1 176.8 L 158.6 176.3 L 159.1 175.9 L 159.5 175.4 L 160.0 174.9 L 160.5 174.4 L 161.0 173.9 L 161.5 173.4 L 161.9 172.9 L 162.4 172.4 L 162.9 171.9 L 163.4 171.4 L 163.9 170.9 L 164.3 170.4 L 164.8 169.8 L 165.3 169.3 L 165.8 168.8 L 166.3 168.2 L 166.8 167.7 L 167.2 167.1 L 167.7 166.6 L 168.2 166.0 L 168.7 165.4 L 169.2 164.9 L 169.6 164.3 L 170.1 163.7 L 170.6 163.1 L 171.1 162.6 L 171.6 162.0 L 172.0 161.4 L 172.5 160.8 L 173.0 160.2 L 173.5 159.6 L 174.0 159.0 L 174.5 158.4 L 174.9 157.7 L 175.4 157.1 L 175.9 156.5 L 176.4 155.9 L 176.9 155.3 L 177.3 154.6 L 177.8 154.0 L 178.3 153.4 L 178.8 152.7 L 179.3 152.1 L 179.8 151.5 L 180.2 150.8 L 180.7 150.2 L 181.2 149.5 L 181.7 148.9 L 182.2 148.2 L 182.6 147.6 L 183.1 146.9 L 183.6 146.3 L 184.1 145.6 L 184.6 144.9 L 185.0 144.3 L 185.5 143.6 L 186.0 142.9 L 186.5 142.3 L 187.0 141.6 L 187.4 140.9 L 187.9 140.3 L 188.4 139.6 L 188.9 138.9 L 189.4 138.3 L 189.9 137.6 L 190.3 136.9 L 190.8 136.3 L 191.3 135.6 L 191.8 134.9 L 192.3 134.3 L 192.7 133.6 L 193.2 133.0 L 193.7 132.3 L 194.2 131.6 L 194.7 131.0 L 195.2 130.3 L 195.6 129.7 L 196.1 129.0 L 196.6 128.4 L 197.1 127.7 L 197.6 127.1 L 198.0 126.4 L 198.5 125.8 L 199.0 125.1 L 199.5 124.5 L 200.0 123.9 L 200.4 123.2 L 200.9 122.6 L 201.4 122.0 L 201.9 121.3 L 202.4 120.7 L 202.9 120.1 L 203.3 119.5 L 203.8 118.9 L 204.3 118.3 L 204.8 117.7 L 205.3 117.1 L 205.7 116.5 L 206.2 115.9 L 206.7 115.4 L 207.2 114.8 L 207.7 114.2 L 208.1 113.7 L 208.6 113.1 L 209.1 112.6 L 209.6 112.0 L 210.1 111.5 L 210.6 111.0 L 211.0 110.4 L 211.5 109.9 L 212.0 109.4 L 212.5 108.9 L 213.0 108.4 L 213.4 107.9 L 213.9 107.4 L 214.4 107.0 L 214.9 106.5 L 215.4 106.0 L 215.8 105.6 L 216.3 105.1 L 216.8 104.7 L 217.3 104.3 L 217.8 103.9 L 218.2 103.5 L 218.7 103.1 L 219.2 102.7 L 219.7 102.3 L 220.2 101.9 L 220.7 101.5 L 221.1 101.2 L 221.6 100.8 L 222.1 100.5 L 222.6 100.2 L 223.1 99.8 L 223.5 99.5 L 224.0 99.2 L 224.5 98.9 L 225.0 98.7 L 225.5 98.4 L 225.9 98.1 L 226.4 97.9 L 226.9 97.6 L 227.4 97.4 L 227.9 97.2 L 228.4 97.0 L 228.8 96.8 L 229.3 96.6 L 229.8 96.4 L 230.3 96.2 L 230.8 96.1 L 231.2 95.9 L 231.7 95.8 L 232.2 95.7 L 232.7 95.5 L 233.2 95.4 L 233.7 95.4 L 234.1 95.3 L 234.6 95.2 L 235.1 95.1 L 235.6 95.1 L 236.1 95.0 L 236.5 95.0 L 237.0 95.0 L 237.5 95.0 L 238.0 95.0 L 238.5 95.0 L 238.9 95.0 L 239.4 95.1 L 239.9 95.1 L 240.4 95.2 L 240.9 95.3 L 241.3 95.4 L 241.8 95.4 L 242.3 95.5 L 242.8 95.7 L 243.3 95.8 L 243.8 95.9 L 244.2 96.1 L 244.7 96.2 L 245.2 96.4 L 245.7 96.6 L 246.2 96.8 L 246.6 97.0 L 247.1 97.2 L 247.6 97.4 L 248.1 97.6 L 248.6 97.9 L 249.1 98.1 L 249.5 98.4 L 250.0 98.7 L 250.5 98.9 L 251.0 99.2 L 251.5 99.5 L 251.9 99.8 L 252.4 100.2 L 252.9 100.5 L 253.4 100.8 L 253.9 101.2 L 254.3 101.5 L 254.8 101.9 L 255.3 102.3 L 255.8 102.7 L 256.3 103.1 L 256.8 103.5 L 257.2 103.9 L 257.7 104.3 L 258.2 104.7 L 258.7 105.1 L 259.2 105.6 L 259.6 106.0 L 260.1 106.5 L 260.6 107.0 L 261.1 107.4 L 261.6 107.9 L 262.0 108.4 L 262.5 108.9 L 263.0 109.4 L 263.5 109.9 L 264.0 110.4 L 264.5 111.0 L 264.9 111.5 L 265.4 112.0 L 265.9 112.6 L 266.4 113.1 L 266.9 113.7 L 267.3 114.2 L 267.8 114.8 L 268.3 115.4 L 268.8 115.9 L 269.3 116.5 L 269.7 117.1 L 270.2 117.7 L 270.7 118.3 L 271.2 118.9 L 271.7 119.5 L 272.1 120.1 L 272.6 120.7 L 273.1 121.3 L 273.6 122.0 L 274.1 122.6 L 274.6 123.2 L 275.0 123.9 L 275.5 124.5 L 276.0 125.1 L 276.5 125.8 L 277.0 126.4 L 277.4 127.1 L 277.9 127.7 L 278.4 128.4 L 278.9 129.0 L 279.4 129.7 L 279.9 130.3 L 280.3 131.0 L 280.8 131.6 L 281.3 132.3 L 281.8 133.0 L 282.3 133.6 L 282.7 134.3 L 283.2 134.9 L 283.7 135.6 L 284.2 136.3 L 284.7 136.9 L 285.1 137.6 L 285.6 138.3 L 286.1 138.9 L 286.6 139.6 L 287.1 140.3 L 287.6 140.9 L 288.0 141.6 L 288.5 142.3 L 289.0 142.9 L 289.5 143.6 L 290.0 144.3 L 290.4 144.9 L 290.9 145.6 L 291.4 146.3 L 291.9 146.9 L 292.4 147.6 L 292.8 148.2 L 293.3 148.9 L 293.8 149.5 L 294.3 150.2 L 294.8 150.8 L 295.2 151.5 L 295.7 152.1 L 296.2 152.7 L 296.7 153.4 L 297.2 154.0 L 297.7 154.6 L 298.1 155.3 L 298.6 155.9 L 299.1 156.5 L 299.6 157.1 L 300.1 157.7 L 300.5 158.4 L 301.0 159.0 L 301.5 159.6 L 302.0 160.2 L 302.5 160.8 L 302.9 161.4 L 303.4 162.0 L 303.9 162.6 L 304.4 163.1 L 304.9 163.7 L 305.4 164.3 L 305.8 164.9 L 306.3 165.4 L 306.8 166.0 L 307.3 166.6 L 307.8 167.1 L 308.2 167.7 L 308.7 168.2 L 309.2 168.8 L 309.7 169.3 L 310.2 169.8 L 310.6 170.4 L 311.1 170.9 L 311.6 171.4 L 312.1 171.9 L 312.6 172.4 L 313.1 172.9 L 313.5 173.4 L 314.0 173.9 L 314.5 174.4 L 315.0 174.9 L 315.5 175.4 L 315.9 175.9 L 316.4 176.3 L 316.9 176.8 L 317.4 177.3 L 317.9 177.7 L 318.3 178.2 L 318.8 178.6 L 319.3 179.1 L 319.8 179.5 L 320.3 179.9 L 320.8 180.4 L 321.2 180.8 L 321.7 181.2 L 322.2 181.6 L 322.7 182.0 L 323.2 182.4 L 323.6 182.8 L 324.1 183.2 L 324.6 183.6 L 325.1 184.0 L 325.6 184.4 L 326.1 184.8 L 326.5 185.1 L 327.0 185.5 L 327.5 185.9 L 328.0 186.2 L 328.5 186.6 L 328.9 186.9 L 329.4 187.2 L 329.9 187.6 L 330.4 187.9 L 330.9 188.2 L 331.3 188.6 L 331.8 188.9 L 332.3 189.2 L 332.8 189.5 L 333.3 189.8 L 333.8 190.1 L 334.2 190.4 L 334.7 190.7 L 335.2 191.0 L 335.7 191.3 L 336.2 191.5 L 336.6 191.8 L 337.1 192.1 L 337.6 192.4 L 338.1 192.6 L 338.6 192.9 L 339.0 193.1 L 339.5 193.4 L 340.0 193.6 L 340.5 193.9 L 341.0 194.1 L 341.4 194.3 L 341.9 194.6 L 342.4 194.8 L 342.9 195.0 L 343.4 195.2 L 343.9 195.4 L 344.3 195.6 L 344.8 195.8 L 345.3 196.0 L 345.8 196.2 L 346.3 196.4 L 346.7 196.6 L 347.2 196.8 L 347.7 197.0 L 348.2 197.2 L 348.7 197.4 L 349.2 197.5 L 349.6 197.7 L 350.1 197.9 L 350.6 198.0 L 351.1 198.2 L 351.6 198.4 L 352.0 198.5 L 352.5 198.7 L 353.0 198.8 L 353.5 199.0 L 354.0 199.1 L 354.4 199.3 L 354.9 199.4 L 355.4 199.5 L 355.9 199.7 L 356.4 199.8 L 356.9 199.9 L 357.3 200.0 L 357.8 200.2 L 358.3 200.3 L 358.8 200.4 L 359.3 200.5 L 359.7 200.6 L 360.2 200.7 L 360.7 200.8 L 361.2 201.0 L 361.7 201.1 L 362.1 201.2 L 362.6 201.3 L 363.1 201.4 L 363.6 201.4 L 364.1 201.5 L 364.6 201.6 L 365.0 201.7 L 365.5 201.8 L 366.0 201.9 L 366.5 202.0 L 367.0 202.0 L 367.4 202.1 L 367.9 202.2 L 368.4 202.3 L 368.9 202.4 L 369.4 202.4 L 369.8 202.5 L 370.3 202.6 L 370.8 202.6 L 371.3 202.7 L 371.8 202.8 L 372.2 202.8 L 372.7 202.9 L 373.2 202.9 L 373.7 203.0 L 374.2 203.1 L 374.7 203.1 L 375.1 203.2 L 375.6 203.2 L 376.1 203.3 L 376.6 203.3 L 377.1 203.4 L 377.5 203.4 L 378.0 203.5 L 378.5 203.5 L 379.0 203.5 L 379.5 203.6 L 379.9 203.6 L 380.4 203.7 L 380.9 203.7 L 381.4 203.7 L 381.9 203.8 L 382.4 203.8 L 382.8 203.8 L 383.3 203.9 L 383.8 203.9 L 384.3 203.9 L 384.8 204.0 L 385.2 204.0 L 385.7 204.0 L 386.2 204.1 L 386.7 204.1 L 387.2 204.1 L 387.6 204.2 L 388.1 204.2 L 388.6 204.2 L 389.1 204.2 L 389.6 204.3 L 390.1 204.3 L 390.5 204.3 L 391.0 204.3 L 391.5 204.3 L 392.0 204.4 L 392.5 204.4 L 392.9 204.4 L 393.4 204.4 L 393.9 204.4 L 394.4 204.5 L 394.9 204.5 L 395.3 204.5 L 395.8 204.5 L 396.3 204.5 L 396.8 204.5 L 397.3 204.6 L 397.8 204.6 L 398.2 204.6 L 398.7 204.6 L 399.2 204.6 L 399.7 204.6 L 400.2 204.6 L 400.6 204.6 L 401.1 204.7 L 401.6 204.7 L 402.1 204.7 L 402.6 204.7 L 403.0 204.7 L 403.5 204.7 L 404.0 204.7 L 404.5 204.7 L 405.0 204.7 L 405.5 204.8 L 405.9 204.8 L 406.4 204.8 L 406.9 204.8 L 407.4 204.8 L 407.9 204.8 L 408.3 204.8 L 408.8 204.8 L 409.3 204.8 L 409.8 204.8 L 410.3 204.8 L 410.8 204.8 L 411.2 204.8 L 411.7 204.8 L 412.2 204.8 L 412.7 204.9 L 413.2 204.9 L 413.6 204.9 L 414.1 204.9 L 414.6 204.9 L 415.1 204.9 L 415.6 204.9 L 416.0 204.9 L 416.5 204.9 L 417.0 204.9 L 417.5 204.9 L 418.0 204.9 L 418.4 204.9 L 418.9 204.9 L 419.4 204.9 L 419.9 204.9 L 420.4 204.9 L 420.9 204.9 L 421.3 204.9 L 421.8 204.9 L 422.3 204.9 L 422.8 204.9 L 423.3 204.9 L 423.7 204.9 L 424.2 204.9 L 424.7 204.9 L 425.2 204.9 L 425.7 204.9 L 426.1 204.9 L 426.6 205.0 L 427.1 205.0 L 427.6 205.0 L 428.1 205.0 L 428.6 205.0 L 429.0 205.0 L 429.5 205.0 L 430.0 205.0\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2.3\"/><path d=\"M 45.0 200.9 L 45.5 200.9 L 46.0 200.8 L 46.4 200.8 L 46.9 200.7 L 47.4 200.6 L 47.9 200.6 L 48.4 200.5 L 48.9 200.5 L 49.3 200.4 L 49.8 200.3 L 50.3 200.3 L 50.8 200.2 L 51.3 200.2 L 51.7 200.1 L 52.2 200.0 L 52.7 200.0 L 53.2 199.9 L 53.7 199.8 L 54.1 199.7 L 54.6 199.7 L 55.1 199.6 L 55.6 199.5 L 56.1 199.5 L 56.6 199.4 L 57.0 199.3 L 57.5 199.2 L 58.0 199.2 L 58.5 199.1 L 59.0 199.0 L 59.4 198.9 L 59.9 198.9 L 60.4 198.8 L 60.9 198.7 L 61.4 198.6 L 61.8 198.5 L 62.3 198.5 L 62.8 198.4 L 63.3 198.3 L 63.8 198.2 L 64.2 198.1 L 64.7 198.0 L 65.2 198.0 L 65.7 197.9 L 66.2 197.8 L 66.7 197.7 L 67.1 197.6 L 67.6 197.5 L 68.1 197.4 L 68.6 197.3 L 69.1 197.2 L 69.5 197.1 L 70.0 197.0 L 70.5 196.9 L 71.0 196.8 L 71.5 196.7 L 72.0 196.6 L 72.4 196.5 L 72.9 196.4 L 73.4 196.3 L 73.9 196.2 L 74.4 196.1 L 74.8 196.0 L 75.3 195.9 L 75.8 195.8 L 76.3 195.7 L 76.8 195.6 L 77.2 195.5 L 77.7 195.4 L 78.2 195.3 L 78.7 195.2 L 79.2 195.1 L 79.7 194.9 L 80.1 194.8 L 80.6 194.7 L 81.1 194.6 L 81.6 194.5 L 82.1 194.4 L 82.5 194.2 L 83.0 194.1 L 83.5 194.0 L 84.0 193.9 L 84.5 193.8 L 84.9 193.6 L 85.4 193.5 L 85.9 193.4 L 86.4 193.2 L 86.9 193.1 L 87.3 193.0 L 87.8 192.9 L 88.3 192.7 L 88.8 192.6 L 89.3 192.5 L 89.8 192.3 L 90.2 192.2 L 90.7 192.1 L 91.2 191.9 L 91.7 191.8 L 92.2 191.6 L 92.6 191.5 L 93.1 191.4 L 93.6 191.2 L 94.1 191.1 L 94.6 190.9 L 95.1 190.8 L 95.5 190.6 L 96.0 190.5 L 96.5 190.3 L 97.0 190.2 L 97.5 190.0 L 97.9 189.9 L 98.4 189.7 L 98.9 189.6 L 99.4 189.4 L 99.9 189.3 L 100.3 189.1 L 100.8 189.0 L 101.3 188.8 L 101.8 188.7 L 102.3 188.5 L 102.8 188.3 L 103.2 188.2 L 103.7 188.0 L 104.2 187.8 L 104.7 187.7 L 105.2 187.5 L 105.6 187.3 L 106.1 187.2 L 106.6 187.0 L 107.1 186.8 L 107.6 186.7 L 108.0 186.5 L 108.5 186.3 L 109.0 186.2 L 109.5 186.0 L 110.0 185.8 L 110.4 185.6 L 110.9 185.4 L 111.4 185.3 L 111.9 185.1 L 112.4 184.9 L 112.9 184.7 L 113.3 184.5 L 113.8 184.4 L 114.3 184.2 L 114.8 184.0 L 115.3 183.8 L 115.7 183.6 L 116.2 183.4 L 116.7 183.2 L 117.2 183.1 L 117.7 182.9 L 118.2 182.7 L 118.6 182.5 L 119.1 182.3 L 119.6 182.1 L 120.1 181.9 L 120.6 181.7 L 121.0 181.5 L 121.5 181.3 L 122.0 181.1 L 122.5 180.9 L 123.0 180.7 L 123.4 180.5 L 123.9 180.3 L 124.4 180.1 L 124.9 179.9 L 125.4 179.7 L 125.9 179.5 L 126.3 179.3 L 126.8 179.1 L 127.3 178.9 L 127.8 178.7 L 128.3 178.5 L 128.7 178.3 L 129.2 178.0 L 129.7 177.8 L 130.2 177.6 L 130.7 177.4 L 131.1 177.2 L 131.6 177.0 L 132.1 176.8 L 132.6 176.6 L 133.1 176.3 L 133.6 176.1 L 134.0 175.9 L 134.5 175.7 L 135.0 175.5 L 135.5 175.3 L 136.0 175.0 L 136.4 174.8 L 136.9 174.6 L 137.4 174.4 L 137.9 174.2 L 138.4 173.9 L 138.8 173.7 L 139.3 173.5 L 139.8 173.3 L 140.3 173.1 L 140.8 172.8 L 141.2 172.6 L 141.7 172.4 L 142.2 172.2 L 142.7 171.9 L 143.2 171.7 L 143.7 171.5 L 144.1 171.3 L 144.6 171.0 L 145.1 170.8 L 145.6 170.6 L 146.1 170.4 L 146.5 170.1 L 147.0 169.9 L 147.5 169.7 L 148.0 169.4 L 148.5 169.2 L 148.9 169.0 L 149.4 168.7 L 149.9 168.5 L 150.4 168.3 L 150.9 168.1 L 151.4 167.8 L 151.8 167.6 L 152.3 167.4 L 152.8 167.1 L 153.3 166.9 L 153.8 166.7 L 154.2 166.4 L 154.7 166.2 L 155.2 166.0 L 155.7 165.8 L 156.2 165.5 L 156.7 165.3 L 157.1 165.1 L 157.6 164.8 L 158.1 164.6 L 158.6 164.4 L 159.1 164.1 L 159.5 163.9 L 160.0 163.7 L 160.5 163.4 L 161.0 163.2 L 161.5 163.0 L 161.9 162.8 L 162.4 162.5 L 162.9 162.3 L 163.4 162.1 L 163.9 161.8 L 164.3 161.6 L 164.8 161.4 L 165.3 161.2 L 165.8 160.9 L 166.3 160.7 L 166.8 160.5 L 167.2 160.3 L 167.7 160.0 L 168.2 159.8 L 168.7 159.6 L 169.2 159.4 L 169.6 159.1 L 170.1 158.9 L 170.6 158.7 L 171.1 158.5 L 171.6 158.2 L 172.0 158.0 L 172.5 157.8 L 173.0 157.6 L 173.5 157.4 L 174.0 157.1 L 174.5 156.9 L 174.9 156.7 L 175.4 156.5 L 175.9 156.3 L 176.4 156.0 L 176.9 155.8 L 177.3 155.6 L 177.8 155.4 L 178.3 155.2 L 178.8 155.0 L 179.3 154.8 L 179.8 154.6 L 180.2 154.4 L 180.7 154.1 L 181.2 153.9 L 181.7 153.7 L 182.2 153.5 L 182.6 153.3 L 183.1 153.1 L 183.6 152.9 L 184.1 152.7 L 184.6 152.5 L 185.0 152.3 L 185.5 152.1 L 186.0 151.9 L 186.5 151.7 L 187.0 151.5 L 187.4 151.3 L 187.9 151.1 L 188.4 151.0 L 188.9 150.8 L 189.4 150.6 L 189.9 150.4 L 190.3 150.2 L 190.8 150.0 L 191.3 149.8 L 191.8 149.6 L 192.3 149.5 L 192.7 149.3 L 193.2 149.1 L 193.7 148.9 L 194.2 148.8 L 194.7 148.6 L 195.2 148.4 L 195.6 148.2 L 196.1 148.1 L 196.6 147.9 L 197.1 147.7 L 197.6 147.6 L 198.0 147.4 L 198.5 147.2 L 199.0 147.1 L 199.5 146.9 L 200.0 146.8 L 200.4 146.6 L 200.9 146.4 L 201.4 146.3 L 201.9 146.1 L 202.4 146.0 L 202.9 145.8 L 203.3 145.7 L 203.8 145.6 L 204.3 145.4 L 204.8 145.3 L 205.3 145.1 L 205.7 145.0 L 206.2 144.9 L 206.7 144.7 L 207.2 144.6 L 207.7 144.5 L 208.1 144.3 L 208.6 144.2 L 209.1 144.1 L 209.6 144.0 L 210.1 143.8 L 210.6 143.7 L 211.0 143.6 L 211.5 143.5 L 212.0 143.4 L 212.5 143.3 L 213.0 143.1 L 213.4 143.0 L 213.9 142.9 L 214.4 142.8 L 214.9 142.7 L 215.4 142.6 L 215.8 142.5 L 216.3 142.4 L 216.8 142.3 L 217.3 142.2 L 217.8 142.1 L 218.2 142.1 L 218.7 142.0 L 219.2 141.9 L 219.7 141.8 L 220.2 141.7 L 220.7 141.7 L 221.1 141.6 L 221.6 141.5 L 222.1 141.4 L 222.6 141.4 L 223.1 141.3 L 223.5 141.2 L 224.0 141.2 L 224.5 141.1 L 225.0 141.0 L 225.5 141.0 L 225.9 140.9 L 226.4 140.9 L 226.9 140.8 L 227.4 140.8 L 227.9 140.7 L 228.4 140.7 L 228.8 140.7 L 229.3 140.6 L 229.8 140.6 L 230.3 140.5 L 230.8 140.5 L 231.2 140.5 L 231.7 140.5 L 232.2 140.4 L 232.7 140.4 L 233.2 140.4 L 233.7 140.4 L 234.1 140.3 L 234.6 140.3 L 235.1 140.3 L 235.6 140.3 L 236.1 140.3 L 236.5 140.3 L 237.0 140.3 L 237.5 140.3 L 238.0 140.3 L 238.5 140.3 L 238.9 140.3 L 239.4 140.3 L 239.9 140.3 L 240.4 140.3 L 240.9 140.3 L 241.3 140.4 L 241.8 140.4 L 242.3 140.4 L 242.8 140.4 L 243.3 140.5 L 243.8 140.5 L 244.2 140.5 L 244.7 140.5 L 245.2 140.6 L 245.7 140.6 L 246.2 140.7 L 246.6 140.7 L 247.1 140.7 L 247.6 140.8 L 248.1 140.8 L 248.6 140.9 L 249.1 140.9 L 249.5 141.0 L 250.0 141.0 L 250.5 141.1 L 251.0 141.2 L 251.5 141.2 L 251.9 141.3 L 252.4 141.4 L 252.9 141.4 L 253.4 141.5 L 253.9 141.6 L 254.3 141.7 L 254.8 141.7 L 255.3 141.8 L 255.8 141.9 L 256.3 142.0 L 256.8 142.1 L 257.2 142.1 L 257.7 142.2 L 258.2 142.3 L 258.7 142.4 L 259.2 142.5 L 259.6 142.6 L 260.1 142.7 L 260.6 142.8 L 261.1 142.9 L 261.6 143.0 L 262.0 143.1 L 262.5 143.3 L 263.0 143.4 L 263.5 143.5 L 264.0 143.6 L 264.5 143.7 L 264.9 143.8 L 265.4 144.0 L 265.9 144.1 L 266.4 144.2 L 266.9 144.3 L 267.3 144.5 L 267.8 144.6 L 268.3 144.7 L 268.8 144.9 L 269.3 145.0 L 269.7 145.1 L 270.2 145.3 L 270.7 145.4 L 271.2 145.6 L 271.7 145.7 L 272.1 145.8 L 272.6 146.0 L 273.1 146.1 L 273.6 146.3 L 274.1 146.4 L 274.6 146.6 L 275.0 146.8 L 275.5 146.9 L 276.0 147.1 L 276.5 147.2 L 277.0 147.4 L 277.4 147.6 L 277.9 147.7 L 278.4 147.9 L 278.9 148.1 L 279.4 148.2 L 279.9 148.4 L 280.3 148.6 L 280.8 148.8 L 281.3 148.9 L 281.8 149.1 L 282.3 149.3 L 282.7 149.5 L 283.2 149.6 L 283.7 149.8 L 284.2 150.0 L 284.7 150.2 L 285.1 150.4 L 285.6 150.6 L 286.1 150.8 L 286.6 151.0 L 287.1 151.1 L 287.6 151.3 L 288.0 151.5 L 288.5 151.7 L 289.0 151.9 L 289.5 152.1 L 290.0 152.3 L 290.4 152.5 L 290.9 152.7 L 291.4 152.9 L 291.9 153.1 L 292.4 153.3 L 292.8 153.5 L 293.3 153.7 L 293.8 153.9 L 294.3 154.1 L 294.8 154.4 L 295.2 154.6 L 295.7 154.8 L 296.2 155.0 L 296.7 155.2 L 297.2 155.4 L 297.7 155.6 L 298.1 155.8 L 298.6 156.0 L 299.1 156.3 L 299.6 156.5 L 300.1 156.7 L 300.5 156.9 L 301.0 157.1 L 301.5 157.4 L 302.0 157.6 L 302.5 157.8 L 302.9 158.0 L 303.4 158.2 L 303.9 158.5 L 304.4 158.7 L 304.9 158.9 L 305.4 159.1 L 305.8 159.4 L 306.3 159.6 L 306.8 159.8 L 307.3 160.0 L 307.8 160.3 L 308.2 160.5 L 308.7 160.7 L 309.2 160.9 L 309.7 161.2 L 310.2 161.4 L 310.6 161.6 L 311.1 161.8 L 311.6 162.1 L 312.1 162.3 L 312.6 162.5 L 313.1 162.8 L 313.5 163.0 L 314.0 163.2 L 314.5 163.4 L 315.0 163.7 L 315.5 163.9 L 315.9 164.1 L 316.4 164.4 L 316.9 164.6 L 317.4 164.8 L 317.9 165.1 L 318.3 165.3 L 318.8 165.5 L 319.3 165.8 L 319.8 166.0 L 320.3 166.2 L 320.8 166.4 L 321.2 166.7 L 321.7 166.9 L 322.2 167.1 L 322.7 167.4 L 323.2 167.6 L 323.6 167.8 L 324.1 168.1 L 324.6 168.3 L 325.1 168.5 L 325.6 168.7 L 326.1 169.0 L 326.5 169.2 L 327.0 169.4 L 327.5 169.7 L 328.0 169.9 L 328.5 170.1 L 328.9 170.4 L 329.4 170.6 L 329.9 170.8 L 330.4 171.0 L 330.9 171.3 L 331.3 171.5 L 331.8 171.7 L 332.3 171.9 L 332.8 172.2 L 333.3 172.4 L 333.8 172.6 L 334.2 172.8 L 334.7 173.1 L 335.2 173.3 L 335.7 173.5 L 336.2 173.7 L 336.6 173.9 L 337.1 174.2 L 337.6 174.4 L 338.1 174.6 L 338.6 174.8 L 339.0 175.0 L 339.5 175.3 L 340.0 175.5 L 340.5 175.7 L 341.0 175.9 L 341.4 176.1 L 341.9 176.3 L 342.4 176.6 L 342.9 176.8 L 343.4 177.0 L 343.9 177.2 L 344.3 177.4 L 344.8 177.6 L 345.3 177.8 L 345.8 178.0 L 346.3 178.3 L 346.7 178.5 L 347.2 178.7 L 347.7 178.9 L 348.2 179.1 L 348.7 179.3 L 349.2 179.5 L 349.6 179.7 L 350.1 179.9 L 350.6 180.1 L 351.1 180.3 L 351.6 180.5 L 352.0 180.7 L 352.5 180.9 L 353.0 181.1 L 353.5 181.3 L 354.0 181.5 L 354.4 181.7 L 354.9 181.9 L 355.4 182.1 L 355.9 182.3 L 356.4 182.5 L 356.9 182.7 L 357.3 182.9 L 357.8 183.1 L 358.3 183.2 L 358.8 183.4 L 359.3 183.6 L 359.7 183.8 L 360.2 184.0 L 360.7 184.2 L 361.2 184.4 L 361.7 184.5 L 362.1 184.7 L 362.6 184.9 L 363.1 185.1 L 363.6 185.3 L 364.1 185.4 L 364.6 185.6 L 365.0 185.8 L 365.5 186.0 L 366.0 186.2 L 366.5 186.3 L 367.0 186.5 L 367.4 186.7 L 367.9 186.8 L 368.4 187.0 L 368.9 187.2 L 369.4 187.3 L 369.8 187.5 L 370.3 187.7 L 370.8 187.8 L 371.3 188.0 L 371.8 188.2 L 372.2 188.3 L 372.7 188.5 L 373.2 188.7 L 373.7 188.8 L 374.2 189.0 L 374.7 189.1 L 375.1 189.3 L 375.6 189.4 L 376.1 189.6 L 376.6 189.7 L 377.1 189.9 L 377.5 190.0 L 378.0 190.2 L 378.5 190.3 L 379.0 190.5 L 379.5 190.6 L 379.9 190.8 L 380.4 190.9 L 380.9 191.1 L 381.4 191.2 L 381.9 191.4 L 382.4 191.5 L 382.8 191.6 L 383.3 191.8 L 383.8 191.9 L 384.3 192.1 L 384.8 192.2 L 385.2 192.3 L 385.7 192.5 L 386.2 192.6 L 386.7 192.7 L 387.2 192.9 L 387.6 193.0 L 388.1 193.1 L 388.6 193.2 L 389.1 193.4 L 389.6 193.5 L 390.1 193.6 L 390.5 193.8 L 391.0 193.9 L 391.5 194.0 L 392.0 194.1 L 392.5 194.2 L 392.9 194.4 L 393.4 194.5 L 393.9 194.6 L 394.4 194.7 L 394.9 194.8 L 395.3 194.9 L 395.8 195.1 L 396.3 195.2 L 396.8 195.3 L 397.3 195.4 L 397.8 195.5 L 398.2 195.6 L 398.7 195.7 L 399.2 195.8 L 399.7 195.9 L 400.2 196.0 L 400.6 196.1 L 401.1 196.2 L 401.6 196.3 L 402.1 196.4 L 402.6 196.5 L 403.0 196.6 L 403.5 196.7 L 404.0 196.8 L 404.5 196.9 L 405.0 197.0 L 405.5 197.1 L 405.9 197.2 L 406.4 197.3 L 406.9 197.4 L 407.4 197.5 L 407.9 197.6 L 408.3 197.7 L 408.8 197.8 L 409.3 197.9 L 409.8 198.0 L 410.3 198.0 L 410.8 198.1 L 411.2 198.2 L 411.7 198.3 L 412.2 198.4 L 412.7 198.5 L 413.2 198.5 L 413.6 198.6 L 414.1 198.7 L 414.6 198.8 L 415.1 198.9 L 415.6 198.9 L 416.0 199.0 L 416.5 199.1 L 417.0 199.2 L 417.5 199.2 L 418.0 199.3 L 418.4 199.4 L 418.9 199.5 L 419.4 199.5 L 419.9 199.6 L 420.4 199.7 L 420.9 199.7 L 421.3 199.8 L 421.8 199.9 L 422.3 200.0 L 422.8 200.0 L 423.3 200.1 L 423.7 200.2 L 424.2 200.2 L 424.7 200.3 L 425.2 200.3 L 425.7 200.4 L 426.1 200.5 L 426.6 200.5 L 427.1 200.6 L 427.6 200.6 L 428.1 200.7 L 428.6 200.8 L 429.0 200.8 L 429.5 200.9 L 430.0 200.9\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.3\"/><path d=\"M 45.0 205.0 L 45.5 205.0 L 46.0 205.0 L 46.4 205.0 L 46.9 205.0 L 47.4 205.0 L 47.9 205.0 L 48.4 205.0 L 48.9 205.0 L 49.3 205.0 L 49.8 205.0 L 50.3 205.0 L 50.8 205.0 L 51.3 205.0 L 51.7 205.0 L 52.2 205.0 L 52.7 205.0 L 53.2 205.0 L 53.7 205.0 L 54.1 205.0 L 54.6 205.0 L 55.1 205.0 L 55.6 205.0 L 56.1 205.0 L 56.6 205.0 L 57.0 205.0 L 57.5 205.0 L 58.0 205.0 L 58.5 205.0 L 59.0 205.0 L 59.4 205.0 L 59.9 205.0 L 60.4 205.0 L 60.9 205.0 L 61.4 205.0 L 61.8 205.0 L 62.3 205.0 L 62.8 205.0 L 63.3 205.0 L 63.8 205.0 L 64.2 205.0 L 64.7 205.0 L 65.2 205.0 L 65.7 205.0 L 66.2 205.0 L 66.7 205.0 L 67.1 205.0 L 67.6 205.0 L 68.1 205.0 L 68.6 205.0 L 69.1 205.0 L 69.5 205.0 L 70.0 205.0 L 70.5 205.0 L 71.0 205.0 L 71.5 205.0 L 72.0 205.0 L 72.4 205.0 L 72.9 205.0 L 73.4 205.0 L 73.9 205.0 L 74.4 205.0 L 74.8 205.0 L 75.3 205.0 L 75.8 205.0 L 76.3 205.0 L 76.8 205.0 L 77.2 205.0 L 77.7 205.0 L 78.2 205.0 L 78.7 205.0 L 79.2 205.0 L 79.7 205.0 L 80.1 205.0 L 80.6 205.0 L 81.1 205.0 L 81.6 205.0 L 82.1 205.0 L 82.5 205.0 L 83.0 205.0 L 83.5 205.0 L 84.0 205.0 L 84.5 205.0 L 84.9 205.0 L 85.4 205.0 L 85.9 205.0 L 86.4 205.0 L 86.9 205.0 L 87.3 205.0 L 87.8 205.0 L 88.3 205.0 L 88.8 205.0 L 89.3 205.0 L 89.8 205.0 L 90.2 205.0 L 90.7 205.0 L 91.2 205.0 L 91.7 205.0 L 92.2 205.0 L 92.6 205.0 L 93.1 205.0 L 93.6 205.0 L 94.1 205.0 L 94.6 205.0 L 95.1 205.0 L 95.5 205.0 L 96.0 205.0 L 96.5 205.0 L 97.0 205.0 L 97.5 205.0 L 97.9 205.0 L 98.4 205.0 L 98.9 205.0 L 99.4 205.0 L 99.9 205.0 L 100.3 205.0 L 100.8 205.0 L 101.3 205.0 L 101.8 205.0 L 102.3 205.0 L 102.8 205.0 L 103.2 205.0 L 103.7 205.0 L 104.2 205.0 L 104.7 205.0 L 105.2 205.0 L 105.6 205.0 L 106.1 205.0 L 106.6 205.0 L 107.1 205.0 L 107.6 205.0 L 108.0 205.0 L 108.5 205.0 L 109.0 205.0 L 109.5 205.0 L 110.0 205.0 L 110.4 205.0 L 110.9 205.0 L 111.4 204.9 L 111.9 204.9 L 112.4 204.9 L 112.9 204.9 L 113.3 204.9 L 113.8 204.9 L 114.3 204.9 L 114.8 204.9 L 115.3 204.9 L 115.7 204.9 L 116.2 204.9 L 116.7 204.9 L 117.2 204.9 L 117.7 204.9 L 118.2 204.9 L 118.6 204.9 L 119.1 204.9 L 119.6 204.9 L 120.1 204.9 L 120.6 204.8 L 121.0 204.8 L 121.5 204.8 L 122.0 204.8 L 122.5 204.8 L 123.0 204.8 L 123.4 204.8 L 123.9 204.8 L 124.4 204.8 L 124.9 204.7 L 125.4 204.7 L 125.9 204.7 L 126.3 204.7 L 126.8 204.7 L 127.3 204.7 L 127.8 204.6 L 128.3 204.6 L 128.7 204.6 L 129.2 204.6 L 129.7 204.6 L 130.2 204.5 L 130.7 204.5 L 131.1 204.5 L 131.6 204.4 L 132.1 204.4 L 132.6 204.4 L 133.1 204.4 L 133.6 204.3 L 134.0 204.3 L 134.5 204.3 L 135.0 204.2 L 135.5 204.2 L 136.0 204.1 L 136.4 204.1 L 136.9 204.0 L 137.4 204.0 L 137.9 203.9 L 138.4 203.9 L 138.8 203.8 L 139.3 203.8 L 139.8 203.7 L 140.3 203.6 L 140.8 203.6 L 141.2 203.5 L 141.7 203.4 L 142.2 203.4 L 142.7 203.3 L 143.2 203.2 L 143.7 203.1 L 144.1 203.0 L 144.6 202.9 L 145.1 202.8 L 145.6 202.7 L 146.1 202.6 L 146.5 202.5 L 147.0 202.4 L 147.5 202.3 L 148.0 202.2 L 148.5 202.1 L 148.9 201.9 L 149.4 201.8 L 149.9 201.6 L 150.4 201.5 L 150.9 201.3 L 151.4 201.2 L 151.8 201.0 L 152.3 200.8 L 152.8 200.7 L 153.3 200.5 L 153.8 200.3 L 154.2 200.1 L 154.7 199.9 L 155.2 199.7 L 155.7 199.5 L 156.2 199.2 L 156.7 199.0 L 157.1 198.8 L 157.6 198.5 L 158.1 198.3 L 158.6 198.0 L 159.1 197.7 L 159.5 197.4 L 160.0 197.1 L 160.5 196.8 L 161.0 196.5 L 161.5 196.2 L 161.9 195.8 L 162.4 195.5 L 162.9 195.1 L 163.4 194.8 L 163.9 194.4 L 164.3 194.0 L 164.8 193.6 L 165.3 193.2 L 165.8 192.8 L 166.3 192.3 L 166.8 191.9 L 167.2 191.4 L 167.7 190.9 L 168.2 190.5 L 168.7 190.0 L 169.2 189.4 L 169.6 188.9 L 170.1 188.4 L 170.6 187.8 L 171.1 187.2 L 171.6 186.6 L 172.0 186.0 L 172.5 185.4 L 173.0 184.8 L 173.5 184.1 L 174.0 183.5 L 174.5 182.8 L 174.9 182.1 L 175.4 181.4 L 175.9 180.7 L 176.4 179.9 L 176.9 179.1 L 177.3 178.4 L 177.8 177.6 L 178.3 176.8 L 178.8 175.9 L 179.3 175.1 L 179.8 174.2 L 180.2 173.3 L 180.7 172.4 L 181.2 171.5 L 181.7 170.6 L 182.2 169.6 L 182.6 168.6 L 183.1 167.7 L 183.6 166.6 L 184.1 165.6 L 184.6 164.6 L 185.0 163.5 L 185.5 162.4 L 186.0 161.3 L 186.5 160.2 L 187.0 159.1 L 187.4 157.9 L 187.9 156.8 L 188.4 155.6 L 188.9 154.4 L 189.4 153.2 L 189.9 151.9 L 190.3 150.7 L 190.8 149.4 L 191.3 148.1 L 191.8 146.8 L 192.3 145.5 L 192.7 144.2 L 193.2 142.8 L 193.7 141.5 L 194.2 140.1 L 194.7 138.7 L 195.2 137.3 L 195.6 135.9 L 196.1 134.5 L 196.6 133.0 L 197.1 131.6 L 197.6 130.1 L 198.0 128.6 L 198.5 127.1 L 199.0 125.7 L 199.5 124.1 L 200.0 122.6 L 200.4 121.1 L 200.9 119.6 L 201.4 118.0 L 201.9 116.5 L 202.4 114.9 L 202.9 113.4 L 203.3 111.8 L 203.8 110.2 L 204.3 108.7 L 204.8 107.1 L 205.3 105.5 L 205.7 103.9 L 206.2 102.4 L 206.7 100.8 L 207.2 99.2 L 207.7 97.6 L 208.1 96.0 L 208.6 94.5 L 209.1 92.9 L 209.6 91.3 L 210.1 89.8 L 210.6 88.2 L 211.0 86.7 L 211.5 85.2 L 212.0 83.6 L 212.5 82.1 L 213.0 80.6 L 213.4 79.1 L 213.9 77.6 L 214.4 76.2 L 214.9 74.7 L 215.4 73.3 L 215.8 71.8 L 216.3 70.4 L 216.8 69.0 L 217.3 67.7 L 217.8 66.3 L 218.2 65.0 L 218.7 63.6 L 219.2 62.4 L 219.7 61.1 L 220.2 59.8 L 220.7 58.6 L 221.1 57.4 L 221.6 56.2 L 222.1 55.1 L 222.6 54.0 L 223.1 52.9 L 223.5 51.8 L 224.0 50.8 L 224.5 49.8 L 225.0 48.8 L 225.5 47.8 L 225.9 46.9 L 226.4 46.0 L 226.9 45.2 L 227.4 44.4 L 227.9 43.6 L 228.4 42.8 L 228.8 42.1 L 229.3 41.5 L 229.8 40.8 L 230.3 40.2 L 230.8 39.6 L 231.2 39.1 L 231.7 38.6 L 232.2 38.2 L 232.7 37.8 L 233.2 37.4 L 233.7 37.0 L 234.1 36.7 L 234.6 36.5 L 235.1 36.3 L 235.6 36.1 L 236.1 35.9 L 236.5 35.8 L 237.0 35.8 L 237.5 35.8 L 238.0 35.8 L 238.5 35.8 L 238.9 35.9 L 239.4 36.1 L 239.9 36.3 L 240.4 36.5 L 240.9 36.7 L 241.3 37.0 L 241.8 37.4 L 242.3 37.8 L 242.8 38.2 L 243.3 38.6 L 243.8 39.1 L 244.2 39.6 L 244.7 40.2 L 245.2 40.8 L 245.7 41.5 L 246.2 42.1 L 246.6 42.8 L 247.1 43.6 L 247.6 44.4 L 248.1 45.2 L 248.6 46.0 L 249.1 46.9 L 249.5 47.8 L 250.0 48.8 L 250.5 49.8 L 251.0 50.8 L 251.5 51.8 L 251.9 52.9 L 252.4 54.0 L 252.9 55.1 L 253.4 56.2 L 253.9 57.4 L 254.3 58.6 L 254.8 59.8 L 255.3 61.1 L 255.8 62.4 L 256.3 63.6 L 256.8 65.0 L 257.2 66.3 L 257.7 67.7 L 258.2 69.0 L 258.7 70.4 L 259.2 71.8 L 259.6 73.3 L 260.1 74.7 L 260.6 76.2 L 261.1 77.6 L 261.6 79.1 L 262.0 80.6 L 262.5 82.1 L 263.0 83.6 L 263.5 85.2 L 264.0 86.7 L 264.5 88.2 L 264.9 89.8 L 265.4 91.3 L 265.9 92.9 L 266.4 94.5 L 266.9 96.0 L 267.3 97.6 L 267.8 99.2 L 268.3 100.8 L 268.8 102.4 L 269.3 103.9 L 269.7 105.5 L 270.2 107.1 L 270.7 108.7 L 271.2 110.2 L 271.7 111.8 L 272.1 113.4 L 272.6 114.9 L 273.1 116.5 L 273.6 118.0 L 274.1 119.6 L 274.6 121.1 L 275.0 122.6 L 275.5 124.1 L 276.0 125.7 L 276.5 127.1 L 277.0 128.6 L 277.4 130.1 L 277.9 131.6 L 278.4 133.0 L 278.9 134.5 L 279.4 135.9 L 279.9 137.3 L 280.3 138.7 L 280.8 140.1 L 281.3 141.5 L 281.8 142.8 L 282.3 144.2 L 282.7 145.5 L 283.2 146.8 L 283.7 148.1 L 284.2 149.4 L 284.7 150.7 L 285.1 151.9 L 285.6 153.2 L 286.1 154.4 L 286.6 155.6 L 287.1 156.8 L 287.6 157.9 L 288.0 159.1 L 288.5 160.2 L 289.0 161.3 L 289.5 162.4 L 290.0 163.5 L 290.4 164.6 L 290.9 165.6 L 291.4 166.6 L 291.9 167.7 L 292.4 168.6 L 292.8 169.6 L 293.3 170.6 L 293.8 171.5 L 294.3 172.4 L 294.8 173.3 L 295.2 174.2 L 295.7 175.1 L 296.2 175.9 L 296.7 176.8 L 297.2 177.6 L 297.7 178.4 L 298.1 179.1 L 298.6 179.9 L 299.1 180.7 L 299.6 181.4 L 300.1 182.1 L 300.5 182.8 L 301.0 183.5 L 301.5 184.1 L 302.0 184.8 L 302.5 185.4 L 302.9 186.0 L 303.4 186.6 L 303.9 187.2 L 304.4 187.8 L 304.9 188.4 L 305.4 188.9 L 305.8 189.4 L 306.3 190.0 L 306.8 190.5 L 307.3 190.9 L 307.8 191.4 L 308.2 191.9 L 308.7 192.3 L 309.2 192.8 L 309.7 193.2 L 310.2 193.6 L 310.6 194.0 L 311.1 194.4 L 311.6 194.8 L 312.1 195.1 L 312.6 195.5 L 313.1 195.8 L 313.5 196.2 L 314.0 196.5 L 314.5 196.8 L 315.0 197.1 L 315.5 197.4 L 315.9 197.7 L 316.4 198.0 L 316.9 198.3 L 317.4 198.5 L 317.9 198.8 L 318.3 199.0 L 318.8 199.2 L 319.3 199.5 L 319.8 199.7 L 320.3 199.9 L 320.8 200.1 L 321.2 200.3 L 321.7 200.5 L 322.2 200.7 L 322.7 200.8 L 323.2 201.0 L 323.6 201.2 L 324.1 201.3 L 324.6 201.5 L 325.1 201.6 L 325.6 201.8 L 326.1 201.9 L 326.5 202.1 L 327.0 202.2 L 327.5 202.3 L 328.0 202.4 L 328.5 202.5 L 328.9 202.6 L 329.4 202.7 L 329.9 202.8 L 330.4 202.9 L 330.9 203.0 L 331.3 203.1 L 331.8 203.2 L 332.3 203.3 L 332.8 203.4 L 333.3 203.4 L 333.8 203.5 L 334.2 203.6 L 334.7 203.6 L 335.2 203.7 L 335.7 203.8 L 336.2 203.8 L 336.6 203.9 L 337.1 203.9 L 337.6 204.0 L 338.1 204.0 L 338.6 204.1 L 339.0 204.1 L 339.5 204.2 L 340.0 204.2 L 340.5 204.3 L 341.0 204.3 L 341.4 204.3 L 341.9 204.4 L 342.4 204.4 L 342.9 204.4 L 343.4 204.4 L 343.9 204.5 L 344.3 204.5 L 344.8 204.5 L 345.3 204.6 L 345.8 204.6 L 346.3 204.6 L 346.7 204.6 L 347.2 204.6 L 347.7 204.7 L 348.2 204.7 L 348.7 204.7 L 349.2 204.7 L 349.6 204.7 L 350.1 204.7 L 350.6 204.8 L 351.1 204.8 L 351.6 204.8 L 352.0 204.8 L 352.5 204.8 L 353.0 204.8 L 353.5 204.8 L 354.0 204.8 L 354.4 204.8 L 354.9 204.9 L 355.4 204.9 L 355.9 204.9 L 356.4 204.9 L 356.9 204.9 L 357.3 204.9 L 357.8 204.9 L 358.3 204.9 L 358.8 204.9 L 359.3 204.9 L 359.7 204.9 L 360.2 204.9 L 360.7 204.9 L 361.2 204.9 L 361.7 204.9 L 362.1 204.9 L 362.6 204.9 L 363.1 204.9 L 363.6 204.9 L 364.1 205.0 L 364.6 205.0 L 365.0 205.0 L 365.5 205.0 L 366.0 205.0 L 366.5 205.0 L 367.0 205.0 L 367.4 205.0 L 367.9 205.0 L 368.4 205.0 L 368.9 205.0 L 369.4 205.0 L 369.8 205.0 L 370.3 205.0 L 370.8 205.0 L 371.3 205.0 L 371.8 205.0 L 372.2 205.0 L 372.7 205.0 L 373.2 205.0 L 373.7 205.0 L 374.2 205.0 L 374.7 205.0 L 375.1 205.0 L 375.6 205.0 L 376.1 205.0 L 376.6 205.0 L 377.1 205.0 L 377.5 205.0 L 378.0 205.0 L 378.5 205.0 L 379.0 205.0 L 379.5 205.0 L 379.9 205.0 L 380.4 205.0 L 380.9 205.0 L 381.4 205.0 L 381.9 205.0 L 382.4 205.0 L 382.8 205.0 L 383.3 205.0 L 383.8 205.0 L 384.3 205.0 L 384.8 205.0 L 385.2 205.0 L 385.7 205.0 L 386.2 205.0 L 386.7 205.0 L 387.2 205.0 L 387.6 205.0 L 388.1 205.0 L 388.6 205.0 L 389.1 205.0 L 389.6 205.0 L 390.1 205.0 L 390.5 205.0 L 391.0 205.0 L 391.5 205.0 L 392.0 205.0 L 392.5 205.0 L 392.9 205.0 L 393.4 205.0 L 393.9 205.0 L 394.4 205.0 L 394.9 205.0 L 395.3 205.0 L 395.8 205.0 L 396.3 205.0 L 396.8 205.0 L 397.3 205.0 L 397.8 205.0 L 398.2 205.0 L 398.7 205.0 L 399.2 205.0 L 399.7 205.0 L 400.2 205.0 L 400.6 205.0 L 401.1 205.0 L 401.6 205.0 L 402.1 205.0 L 402.6 205.0 L 403.0 205.0 L 403.5 205.0 L 404.0 205.0 L 404.5 205.0 L 405.0 205.0 L 405.5 205.0 L 405.9 205.0 L 406.4 205.0 L 406.9 205.0 L 407.4 205.0 L 407.9 205.0 L 408.3 205.0 L 408.8 205.0 L 409.3 205.0 L 409.8 205.0 L 410.3 205.0 L 410.8 205.0 L 411.2 205.0 L 411.7 205.0 L 412.2 205.0 L 412.7 205.0 L 413.2 205.0 L 413.6 205.0 L 414.1 205.0 L 414.6 205.0 L 415.1 205.0 L 415.6 205.0 L 416.0 205.0 L 416.5 205.0 L 417.0 205.0 L 417.5 205.0 L 418.0 205.0 L 418.4 205.0 L 418.9 205.0 L 419.4 205.0 L 419.9 205.0 L 420.4 205.0 L 420.9 205.0 L 421.3 205.0 L 421.8 205.0 L 422.3 205.0 L 422.8 205.0 L 423.3 205.0 L 423.7 205.0 L 424.2 205.0 L 424.7 205.0 L 425.2 205.0 L 425.7 205.0 L 426.1 205.0 L 426.6 205.0 L 427.1 205.0 L 427.6 205.0 L 428.1 205.0 L 428.6 205.0 L 429.0 205.0 L 429.5 205.0 L 430.0 205.0\" fill=\"none\" stroke=\"#555\" stroke-width=\"2.3\"/><text x=\"232\" y=\"42\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">C</text><text x=\"265\" y=\"90\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><text x=\"312\" y=\"150\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text></svg></span><p>Vilken har minst standardavvikelse?</p>",
-    "s": "<p>Minst standardavvikelse ger den smalaste och högsta kurvan.</p><p><strong>Kurva C.</strong></p>",
+    "s": "<p>Minst standardavvikelse ger den smalaste och högsta kurvan.</p><p><strong>Kurva C.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
     "familj": "np_typ_normal_kurva_sd"
   },
   {
@@ -10846,7 +10268,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>En normalfördelad variabel har medelvärdet 64. Det är känt att ungefär 95,4 % av värdena ligger mellan 52 och 76.</p><p>Bestäm standardavvikelsen och ungefär hur stor andel som ligger över 76.</p>",
-    "s": "<p>Intervallet är symmetriskt kring 64 och sträcker sig 12 enheter åt varje håll.</p><p>95,4 % motsvarar ungefär \\(\\mu\\pm2\\sigma\\).</p><p>Alltså \\(2\\sigma=12\\Rightarrow\\sigma=6\\).</p><p>Utanför intervallet ligger 4,6 %, fördelat lika i båda svansarna.</p><p><strong>Standardavvikelsen är 6 och cirka 2,3 % ligger över 76.</strong></p>",
+    "s": "<p>Intervallet är symmetriskt kring 64 och sträcker sig 12 enheter åt varje håll.</p><p>95,4 % motsvarar ungefär \\(\\mu\\pm2\\sigma\\).</p><p>Alltså \\(2\\sigma=12\\Rightarrow\\sigma=6\\).</p><p>Utanför intervallet ligger 4,6 %, fördelat lika i båda svansarna.</p><p><strong>Standardavvikelsen är 6 och cirka 2,3 % ligger över 76.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Om \\(\\sigma\\) är det okända värdet kan du i CAS skriva den kumulativa normalfördelningen som en ekvation och använda <code>NLös</code>, till exempel <code>NLös(Normalfördelning(μ, s, gräns)=p, s)</code>.</p>",
     "familj": "np_typ_normal_95_och_svans"
   },
   {
@@ -10860,7 +10282,7 @@ window.BANKMA2 = [
     ],
     "niva": "A",
     "poang": "0/0/2",
-    "t": "<p>Ett datamaterial med sju heltalsvärden får följande lådagram före och efter att ett åttonde värde läggs till.</p><span class=\"fig smal\"><svg width=\"460\" height=\"240\" viewBox=\"0 0 460 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"458\" height=\"238\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55\" y1=\"35\" x2=\"55\" y2=\"195\" stroke=\"#F0EFF2\"/><text x=\"55\" y=\"218\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">0</text><line x1=\"85\" y1=\"35\" x2=\"85\" y2=\"195\" stroke=\"#F0EFF2\"/><text x=\"85\" y=\"218\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">1</text><line x1=\"115\" y1=\"35\" x2=\"115\" y2=\"195\" stroke=\"#F0EFF2\"/><text x=\"115\" y=\"218\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">2</text><line x1=\"145\" y1=\"35\" x2=\"145\" y2=\"195\" stroke=\"#F0EFF2\"/><text x=\"145\" y=\"218\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">3</text><line x1=\"175\" y1=\"35\" x2=\"175\" y2=\"195\" stroke=\"#F0EFF2\"/><text x=\"175\" y=\"218\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">4</text><line x1=\"205\" y1=\"35\" x2=\"205\" y2=\"195\" stroke=\"#F0EFF2\"/><text x=\"205\" y=\"218\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">5</text><line x1=\"235\" y1=\"35\" x2=\"235\" y2=\"195\" stroke=\"#F0EFF2\"/><text x=\"235\" y=\"218\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">6</text><line x1=\"265\" y1=\"35\" x2=\"265\" y2=\"195\" stroke=\"#F0EFF2\"/><text x=\"265\" y=\"218\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">7</text><line x1=\"295\" y1=\"35\" x2=\"295\" y2=\"195\" stroke=\"#F0EFF2\"/><text x=\"295\" y=\"218\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">8</text><line x1=\"325\" y1=\"35\" x2=\"325\" y2=\"195\" stroke=\"#F0EFF2\"/><text x=\"325\" y=\"218\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">9</text><line x1=\"355\" y1=\"35\" x2=\"355\" y2=\"195\" stroke=\"#F0EFF2\"/><text x=\"355\" y=\"218\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">10</text><line x1=\"385\" y1=\"35\" x2=\"385\" y2=\"195\" stroke=\"#F0EFF2\"/><text x=\"385\" y=\"218\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">11</text><line x1=\"415\" y1=\"35\" x2=\"415\" y2=\"195\" stroke=\"#F0EFF2\"/><text x=\"415\" y=\"218\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">12</text><text x=\"12\" y=\"84\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">före</text><line x1=\"115\" y1=\"80\" x2=\"355\" y2=\"80\" stroke=\"#2B2527\" stroke-width=\"2\"/><rect x=\"175\" y=\"64\" width=\"120\" height=\"32\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2\"/><line x1=\"235\" y1=\"64\" x2=\"235\" y2=\"96\" stroke=\"#B43123\" stroke-width=\"2\"/><line x1=\"115\" y1=\"70\" x2=\"115\" y2=\"90\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"355\" y1=\"70\" x2=\"355\" y2=\"90\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"12\" y=\"154\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">efter</text><line x1=\"115\" y1=\"150\" x2=\"415\" y2=\"150\" stroke=\"#2B2527\" stroke-width=\"2\"/><rect x=\"175\" y=\"134\" width=\"150\" height=\"32\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2\"/><line x1=\"235\" y1=\"134\" x2=\"235\" y2=\"166\" stroke=\"#B43123\" stroke-width=\"2\"/><line x1=\"115\" y1=\"140\" x2=\"115\" y2=\"160\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"415\" y1=\"140\" x2=\"415\" y2=\"160\" stroke=\"#2B2527\" stroke-width=\"2\"/></svg></span><p>Ge ett möjligt värde på den åttonde observationen och motivera att det kan ge förändringen i figuren.</p>",
+    "t": "<p>Ett datamaterial med sju heltalsvärden får följande lådagram före och efter att ett åttonde värde läggs till.</p><span class=\"fig smal\"><svg width=\"460\" height=\"250\" viewBox=\"0 0 460 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"458\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"58.0\" y1=\"30\" x2=\"58.0\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"58.0\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">0</text><line x1=\"89.8\" y1=\"30\" x2=\"89.8\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"89.8\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">1</text><line x1=\"121.7\" y1=\"30\" x2=\"121.7\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"121.7\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">2</text><line x1=\"153.5\" y1=\"30\" x2=\"153.5\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"153.5\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">3</text><line x1=\"185.3\" y1=\"30\" x2=\"185.3\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"185.3\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">4</text><line x1=\"217.2\" y1=\"30\" x2=\"217.2\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"217.2\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">5</text><line x1=\"249.0\" y1=\"30\" x2=\"249.0\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"249.0\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">6</text><line x1=\"280.8\" y1=\"30\" x2=\"280.8\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"280.8\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">7</text><line x1=\"312.7\" y1=\"30\" x2=\"312.7\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"312.7\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">8</text><line x1=\"344.5\" y1=\"30\" x2=\"344.5\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"344.5\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">9</text><line x1=\"376.3\" y1=\"30\" x2=\"376.3\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"376.3\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">10</text><line x1=\"408.2\" y1=\"30\" x2=\"408.2\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"408.2\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">11</text><line x1=\"440.0\" y1=\"30\" x2=\"440.0\" y2=\"205\" stroke=\"#ECECEF\"/><text x=\"440.0\" y=\"234\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">12</text><text x=\"18\" y=\"80\" font-family=\"IBM Plex Mono,monospace\" font-size=\"13\">före</text><line x1=\"121.7\" y1=\"75\" x2=\"376.3\" y2=\"75\" stroke=\"#2B2527\" stroke-width=\"2.2\"/><rect x=\"185.3\" y=\"53\" width=\"127.3\" height=\"44\" fill=\"#E8EEF7\" stroke=\"#2A5D9E\" stroke-width=\"2.3\"/><line x1=\"249.0\" y1=\"53\" x2=\"249.0\" y2=\"97\" stroke=\"#B43123\" stroke-width=\"2.4\"/><line x1=\"121.7\" y1=\"61\" x2=\"121.7\" y2=\"89\" stroke=\"#2B2527\" stroke-width=\"2.2\"/><line x1=\"376.3\" y1=\"61\" x2=\"376.3\" y2=\"89\" stroke=\"#2B2527\" stroke-width=\"2.2\"/><text x=\"18\" y=\"185\" font-family=\"IBM Plex Mono,monospace\" font-size=\"13\">efter</text><line x1=\"121.7\" y1=\"180\" x2=\"440.0\" y2=\"180\" stroke=\"#2B2527\" stroke-width=\"2.2\"/><rect x=\"185.3\" y=\"158\" width=\"159.2\" height=\"44\" fill=\"#E8EEF7\" stroke=\"#2A5D9E\" stroke-width=\"2.3\"/><line x1=\"249.0\" y1=\"158\" x2=\"249.0\" y2=\"202\" stroke=\"#B43123\" stroke-width=\"2.4\"/><line x1=\"121.7\" y1=\"166\" x2=\"121.7\" y2=\"194\" stroke=\"#2B2527\" stroke-width=\"2.2\"/><line x1=\"440.0\" y1=\"166\" x2=\"440.0\" y2=\"194\" stroke=\"#2B2527\" stroke-width=\"2.2\"/></svg></span><p>Ge ett möjligt värde på den åttonde observationen och motivera att det kan ge förändringen i figuren.</p>",
     "s": "<p>Ett möjligt ursprungsmaterial är \\(2,4,4,6,8,8,10\\), vilket ger min 2, median 6 och max 10 med kvartiler omkring 4 och 8.</p><p>Om värdet 12 läggs till blir max 12 och övre delen av materialet flyttas upp, vilket kan ge \\(Q_3=9\\) samtidigt som medianen ligger kvar vid 6.</p><p><strong>Ett möjligt åttonde värde är 12.</strong></p><p>Andra svar kan också vara möjliga om de motiveras med ett konkret datamaterial.</p>",
     "familj": "np_typ_ladagram_baklanges"
   },
@@ -10891,7 +10313,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/2",
     "t": "<p>En normalfördelad variabel har standardavvikelsen 12. 5 % av värdena ligger över 87.</p><p>Bestäm medelvärdet.</p>",
-    "s": "<p>87 är den 95:e percentilen. För standardnormalfördelningen är \\(z_{0,95}\\approx1,645\\).</p><p>\\(87=\\mu+1,645\\cdot12\\).</p><p>\\(\\mu\\approx87-19,74=67,26\\).</p><p><strong>Medelvärdet är cirka 67,3.</strong></p>",
+    "s": "<p>87 är den 95:e percentilen. För standardnormalfördelningen är \\(z_{0,95}\\approx1,645\\).</p><p>\\(87=\\mu+1,645\\cdot12\\).</p><p>\\(\\mu\\approx87-19,74=67,26\\).</p><p><strong>Medelvärdet är cirka 67,3.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Om \\(\\sigma\\) är det okända värdet kan du i CAS skriva den kumulativa normalfördelningen som en ekvation och använda <code>NLös</code>, till exempel <code>NLös(Normalfördelning(μ, s, gräns)=p, s)</code>.</p>",
     "familj": "np_typ_invers_normal_medel"
   },
   {
@@ -10966,7 +10388,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>En normalfördelad variabel har \\(\\mu=100\\) och \\(\\sigma=15\\).</p><p>Ungefär mellan vilka värden ligger 95,4 % av observationerna?</p>",
-    "s": "<p>95,4 % ligger ungefär inom två standardavvikelser från medelvärdet.</p><p>\\(100\\pm2\\cdot15=100\\pm30\\).</p><p><strong>Mellan 70 och 130.</strong></p>",
+    "s": "<p>95,4 % ligger ungefär inom två standardavvikelser från medelvärdet.</p><p>\\(100\\pm2\\cdot15=100\\pm30\\).</p><p><strong>Mellan 70 och 130.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
     "familj": "np2_normal_95_rutin"
   },
   {
@@ -10981,7 +10403,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>Anta \\(X\\sim N(50,8)\\). Bestäm med digitalt verktyg \\(P(X&gt;62)\\).</p>",
-    "s": "<p>Standardisera: \\(z=(62-50)/8=1,5\\).</p><p>\\(P(Z&gt;1,5)\\approx0,0668\\).</p><p><strong>Ungefär 0,067, alltså 6,7 %.</strong></p>",
+    "s": "<p>Standardisera: \\(z=(62-50)/8=1,5\\).</p><p>\\(P(Z&gt;1,5)\\approx0,0668\\).</p><p><strong>Ungefär 0,067, alltså 6,7 %.</strong></p><p><strong>GeoGebra:</strong> Använd det digitala verktyget i GeoGebra och kontrollera resultatet mot grafen eller den matematiska modellen.</p>",
     "familj": "np2_normal_hogersvans"
   },
   {
@@ -10996,7 +10418,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/3",
     "t": "<p>En normalfördelad variabel har medelvärdet 80. Det är känt att 25 % av värdena är större än 92.</p><p>Bestäm standardavvikelsen.</p>",
-    "s": "<p>Om 25 % ligger över 92 så är 92 den 75:e percentilen.</p><p>För standardnormalfördelningen är \\(z_{0,75}\\approx0,6745\\).</p><p>\\(92=80+0,6745\\sigma\\).</p><p>\\(12=0,6745\\sigma\\Rightarrow\\sigma\\approx17,8\\).</p><p><strong>Standardavvikelsen är cirka 17,8.</strong></p>",
+    "s": "<p>Om 25 % ligger över 92 så är 92 den 75:e percentilen.</p><p>För standardnormalfördelningen är \\(z_{0,75}\\approx0,6745\\).</p><p>\\(92=80+0,6745\\sigma\\).</p><p>\\(12=0,6745\\sigma\\Rightarrow\\sigma\\approx17,8\\).</p><p><strong>Standardavvikelsen är cirka 17,8.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Om \\(\\sigma\\) är det okända värdet kan du i CAS skriva den kumulativa normalfördelningen som en ekvation och använda <code>NLös</code>, till exempel <code>NLös(Normalfördelning(μ, s, gräns)=p, s)</code>.</p>",
     "familj": "np2_normal_invers_75"
   },
   {
@@ -11071,7 +10493,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Kurvan visar en normalfördelning med medelvärde 60. Markeringarna 40 och 80 ligger två standardavvikelser från medelvärdet.</p><span class=\"fig smal\"><svg width=\"440\" height=\"245\" viewBox=\"0 0 440 245\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"438\" height=\"243\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"40\" y1=\"205\" x2=\"405\" y2=\"205\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M 40.0 203.4 L 41.2 203.3 L 42.4 203.2 L 43.7 203.1 L 44.9 203.0 L 46.1 202.8 L 47.3 202.7 L 48.5 202.6 L 49.7 202.4 L 51.0 202.3 L 52.2 202.1 L 53.4 202.0 L 54.6 201.8 L 55.8 201.6 L 57.0 201.4 L 58.2 201.2 L 59.5 201.0 L 60.7 200.8 L 61.9 200.6 L 63.1 200.3 L 64.3 200.1 L 65.5 199.8 L 66.8 199.5 L 68.0 199.2 L 69.2 198.9 L 70.4 198.6 L 71.6 198.3 L 72.8 198.0 L 74.1 197.6 L 75.3 197.2 L 76.5 196.9 L 77.7 196.5 L 78.9 196.0 L 80.2 195.6 L 81.4 195.2 L 82.6 194.7 L 83.8 194.2 L 85.0 193.7 L 86.2 193.2 L 87.5 192.7 L 88.7 192.1 L 89.9 191.5 L 91.1 190.9 L 92.3 190.3 L 93.5 189.7 L 94.8 189.0 L 96.0 188.3 L 97.2 187.6 L 98.4 186.9 L 99.6 186.1 L 100.8 185.4 L 102.1 184.6 L 103.3 183.8 L 104.5 182.9 L 105.7 182.0 L 106.9 181.2 L 108.1 180.2 L 109.3 179.3 L 110.6 178.3 L 111.8 177.3 L 113.0 176.3 L 114.2 175.3 L 115.4 174.2 L 116.6 173.1 L 117.9 172.0 L 119.1 170.8 L 120.3 169.6 L 121.5 168.4 L 122.7 167.2 L 124.0 166.0 L 125.2 164.7 L 126.4 163.4 L 127.6 162.1 L 128.8 160.7 L 130.0 159.3 L 131.2 157.9 L 132.5 156.5 L 133.7 155.1 L 134.9 153.6 L 136.1 152.1 L 137.3 150.6 L 138.6 149.0 L 139.8 147.5 L 141.0 145.9 L 142.2 144.3 L 143.4 142.7 L 144.6 141.1 L 145.9 139.4 L 147.1 137.8 L 148.3 136.1 L 149.5 134.4 L 150.7 132.7 L 151.9 131.0 L 153.2 129.3 L 154.4 127.6 L 155.6 125.8 L 156.8 124.1 L 158.0 122.3 L 159.2 120.6 L 160.4 118.8 L 161.7 117.1 L 162.9 115.3 L 164.1 113.5 L 165.3 111.8 L 166.5 110.0 L 167.8 108.3 L 169.0 106.6 L 170.2 104.8 L 171.4 103.1 L 172.6 101.4 L 173.8 99.7 L 175.1 98.0 L 176.3 96.4 L 177.5 94.7 L 178.7 93.1 L 179.9 91.5 L 181.1 89.9 L 182.3 88.4 L 183.6 86.9 L 184.8 85.4 L 186.0 83.9 L 187.2 82.4 L 188.4 81.0 L 189.7 79.7 L 190.9 78.3 L 192.1 77.0 L 193.3 75.8 L 194.5 74.6 L 195.7 73.4 L 197.0 72.2 L 198.2 71.1 L 199.4 70.1 L 200.6 69.1 L 201.8 68.1 L 203.0 67.2 L 204.3 66.4 L 205.5 65.6 L 206.7 64.8 L 207.9 64.1 L 209.1 63.5 L 210.3 62.9 L 211.5 62.3 L 212.8 61.8 L 214.0 61.4 L 215.2 61.0 L 216.4 60.7 L 217.6 60.5 L 218.8 60.3 L 220.1 60.1 L 221.3 60.0 L 222.5 60.0 L 223.7 60.0 L 224.9 60.1 L 226.2 60.3 L 227.4 60.5 L 228.6 60.7 L 229.8 61.0 L 231.0 61.4 L 232.2 61.8 L 233.5 62.3 L 234.7 62.9 L 235.9 63.5 L 237.1 64.1 L 238.3 64.8 L 239.5 65.6 L 240.8 66.4 L 242.0 67.2 L 243.2 68.1 L 244.4 69.1 L 245.6 70.1 L 246.8 71.1 L 248.0 72.2 L 249.3 73.4 L 250.5 74.6 L 251.7 75.8 L 252.9 77.0 L 254.1 78.3 L 255.3 79.7 L 256.6 81.0 L 257.8 82.4 L 259.0 83.9 L 260.2 85.4 L 261.4 86.9 L 262.6 88.4 L 263.9 89.9 L 265.1 91.5 L 266.3 93.1 L 267.5 94.7 L 268.7 96.4 L 269.9 98.0 L 271.2 99.7 L 272.4 101.4 L 273.6 103.1 L 274.8 104.8 L 276.0 106.6 L 277.2 108.3 L 278.5 110.0 L 279.7 111.8 L 280.9 113.5 L 282.1 115.3 L 283.3 117.1 L 284.5 118.8 L 285.8 120.6 L 287.0 122.3 L 288.2 124.1 L 289.4 125.8 L 290.6 127.6 L 291.9 129.3 L 293.1 131.0 L 294.3 132.7 L 295.5 134.4 L 296.7 136.1 L 297.9 137.8 L 299.1 139.4 L 300.4 141.1 L 301.6 142.7 L 302.8 144.3 L 304.0 145.9 L 305.2 147.5 L 306.4 149.0 L 307.7 150.6 L 308.9 152.1 L 310.1 153.6 L 311.3 155.1 L 312.5 156.5 L 313.8 157.9 L 315.0 159.3 L 316.2 160.7 L 317.4 162.1 L 318.6 163.4 L 319.8 164.7 L 321.1 166.0 L 322.3 167.2 L 323.5 168.4 L 324.7 169.6 L 325.9 170.8 L 327.1 172.0 L 328.4 173.1 L 329.6 174.2 L 330.8 175.3 L 332.0 176.3 L 333.2 177.3 L 334.4 178.3 L 335.7 179.3 L 336.9 180.2 L 338.1 181.2 L 339.3 182.0 L 340.5 182.9 L 341.7 183.8 L 342.9 184.6 L 344.2 185.4 L 345.4 186.1 L 346.6 186.9 L 347.8 187.6 L 349.0 188.3 L 350.2 189.0 L 351.5 189.7 L 352.7 190.3 L 353.9 190.9 L 355.1 191.5 L 356.3 192.1 L 357.6 192.7 L 358.8 193.2 L 360.0 193.7 L 361.2 194.2 L 362.4 194.7 L 363.6 195.2 L 364.8 195.6 L 366.1 196.0 L 367.3 196.5 L 368.5 196.9 L 369.7 197.2 L 370.9 197.6 L 372.2 198.0 L 373.4 198.3 L 374.6 198.6 L 375.8 198.9 L 377.0 199.2 L 378.2 199.5 L 379.4 199.8 L 380.7 200.1 L 381.9 200.3 L 383.1 200.6 L 384.3 200.8 L 385.5 201.0 L 386.8 201.2 L 388.0 201.4 L 389.2 201.6 L 390.4 201.8 L 391.6 202.0 L 392.8 202.1 L 394.1 202.3 L 395.3 202.4 L 396.5 202.6 L 397.7 202.7 L 398.9 202.8 L 400.1 203.0 L 401.4 203.1 L 402.6 203.2 L 403.8 203.3 L 405.0 203.4\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.6\"/><line x1=\"100.8\" y1=\"205\" x2=\"100.8\" y2=\"95\" stroke=\"#777\" stroke-width=\"1.3\" stroke-dasharray=\"4 4\"/><text x=\"100.8\" y=\"223\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">40</text><line x1=\"222.5\" y1=\"205\" x2=\"222.5\" y2=\"95\" stroke=\"#777\" stroke-width=\"1.3\" stroke-dasharray=\"4 4\"/><text x=\"222.5\" y=\"223\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">60</text><line x1=\"344.2\" y1=\"205\" x2=\"344.2\" y2=\"95\" stroke=\"#777\" stroke-width=\"1.3\" stroke-dasharray=\"4 4\"/><text x=\"344.2\" y=\"223\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">80</text></svg></span><p>a) Bestäm standardavvikelsen.<br>b) Ungefär hur stor andel ligger mellan 40 och 80?</p>",
-    "s": "<p>Avståndet från 60 till 80 är 20, vilket motsvarar \\(2\\sigma\\).</p><p>Alltså \\(\\sigma=10\\).</p><p>Inom två standardavvikelser ligger ungefär 95,4 %.</p><p><strong>a) 10. b) cirka 95,4 %.</strong></p>",
+    "s": "<p>Avståndet från 60 till 80 är 20, vilket motsvarar \\(2\\sigma\\).</p><p>Alltså \\(\\sigma=10\\).</p><p>Inom två standardavvikelser ligger ungefär 95,4 %.</p><p><strong>a) 10. b) cirka 95,4 %.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Om \\(\\sigma\\) är det okända värdet kan du i CAS skriva den kumulativa normalfördelningen som en ekvation och använda <code>NLös</code>, till exempel <code>NLös(Normalfördelning(μ, s, gräns)=p, s)</code>.</p>",
     "familj": "np3_normal_svg_95"
   },
   {
@@ -11086,7 +10508,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>En normalfördelad variabel har \\(\\mu=100\\) och \\(\\sigma=12\\).</p><p>Ungefär hur många av 600 observationer förväntas ligga utanför intervallet 76–124?</p>",
-    "s": "<p>Intervallet är \\(100\\pm24=\\mu\\pm2\\sigma\\).</p><p>Ungefär 95,4 % ligger inom intervallet, alltså 4,6 % utanför.</p><p>\\(0,046\\cdot600=27,6\\).</p><p><strong>Ungefär 28 observationer.</strong></p>",
+    "s": "<p>Intervallet är \\(100\\pm24=\\mu\\pm2\\sigma\\).</p><p>Ungefär 95,4 % ligger inom intervallet, alltså 4,6 % utanför.</p><p>\\(0,046\\cdot600=27,6\\).</p><p><strong>Ungefär 28 observationer.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
     "familj": "np3_normal_utanfor_2sigma"
   },
   {
@@ -11101,7 +10523,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/3",
     "t": "<p>En normalfördelad variabel har medelvärdet 75. Det är känt att 90 % av värdena är mindre än 91.</p><p>Bestäm standardavvikelsen.</p>",
-    "s": "<p>91 är den 90:e percentilen. För standardnormalfördelningen är \\(z_{0,90}\\approx1,2816\\).</p><p>\\(91=75+1,2816\\sigma\\).</p><p>\\(16=1,2816\\sigma\\Rightarrow\\sigma\\approx12,48\\).</p><p><strong>Standardavvikelsen är cirka 12,5.</strong></p>",
+    "s": "<p>91 är den 90:e percentilen. För standardnormalfördelningen är \\(z_{0,90}\\approx1,2816\\).</p><p>\\(91=75+1,2816\\sigma\\).</p><p>\\(16=1,2816\\sigma\\Rightarrow\\sigma\\approx12,48\\).</p><p><strong>Standardavvikelsen är cirka 12,5.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Om \\(\\sigma\\) är det okända värdet kan du i CAS skriva den kumulativa normalfördelningen som en ekvation och använda <code>NLös</code>, till exempel <code>NLös(Normalfördelning(μ, s, gräns)=p, s)</code>.</p>",
     "familj": "np3_normal_invers_sigma"
   },
   {
@@ -11115,7 +10537,7 @@ window.BANKMA2 = [
     ],
     "niva": "A",
     "poang": "0/0/3",
-    "t": "<p>Lådagrammet har minvärde 2, \\(Q_1=4\\), median 6, \\(Q_3=9\\) och maxvärde 11.</p><span class=\"fig smal\"><svg width=\"450\" height=\"235\" viewBox=\"0 0 450 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"448\" height=\"233\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"50\" y1=\"35\" x2=\"50\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"50\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">0</text><line x1=\"78\" y1=\"35\" x2=\"78\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"78\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">1</text><line x1=\"106\" y1=\"35\" x2=\"106\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"106\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">2</text><line x1=\"134\" y1=\"35\" x2=\"134\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"134\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">3</text><line x1=\"162\" y1=\"35\" x2=\"162\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"162\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">4</text><line x1=\"190\" y1=\"35\" x2=\"190\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"190\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">5</text><line x1=\"218\" y1=\"35\" x2=\"218\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"218\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">6</text><line x1=\"246\" y1=\"35\" x2=\"246\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"246\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">7</text><line x1=\"274\" y1=\"35\" x2=\"274\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"274\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">8</text><line x1=\"302\" y1=\"35\" x2=\"302\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"302\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">9</text><line x1=\"330\" y1=\"35\" x2=\"330\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"330\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">10</text><line x1=\"358\" y1=\"35\" x2=\"358\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"358\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">11</text><line x1=\"386\" y1=\"35\" x2=\"386\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"386\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">12</text><line x1=\"106\" y1=\"105\" x2=\"358\" y2=\"105\" stroke=\"#2B2527\" stroke-width=\"2\"/><rect x=\"162\" y=\"83\" width=\"140\" height=\"44\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2\"/><line x1=\"218\" y1=\"83\" x2=\"218\" y2=\"127\" stroke=\"#B43123\" stroke-width=\"2\"/><line x1=\"106\" y1=\"93\" x2=\"106\" y2=\"117\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"358\" y1=\"93\" x2=\"358\" y2=\"117\" stroke=\"#2B2527\" stroke-width=\"2\"/></svg></span><p>Konstruera ett möjligt sorterat datamaterial med nio heltalsvärden som ger dessa fem värden.</p>",
+    "t": "<p>Lådagrammet har minvärde 2, \\(Q_1=4\\), median 6, \\(Q_3=9\\) och maxvärde 11.</p><span class=\"fig smal\"><svg width=\"460\" height=\"180\" viewBox=\"0 0 460 180\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"458\" height=\"178\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"58.0\" y1=\"30\" x2=\"58.0\" y2=\"135\" stroke=\"#ECECEF\"/><text x=\"58.0\" y=\"164\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">0</text><line x1=\"89.8\" y1=\"30\" x2=\"89.8\" y2=\"135\" stroke=\"#ECECEF\"/><text x=\"89.8\" y=\"164\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">1</text><line x1=\"121.7\" y1=\"30\" x2=\"121.7\" y2=\"135\" stroke=\"#ECECEF\"/><text x=\"121.7\" y=\"164\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">2</text><line x1=\"153.5\" y1=\"30\" x2=\"153.5\" y2=\"135\" stroke=\"#ECECEF\"/><text x=\"153.5\" y=\"164\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">3</text><line x1=\"185.3\" y1=\"30\" x2=\"185.3\" y2=\"135\" stroke=\"#ECECEF\"/><text x=\"185.3\" y=\"164\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">4</text><line x1=\"217.2\" y1=\"30\" x2=\"217.2\" y2=\"135\" stroke=\"#ECECEF\"/><text x=\"217.2\" y=\"164\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">5</text><line x1=\"249.0\" y1=\"30\" x2=\"249.0\" y2=\"135\" stroke=\"#ECECEF\"/><text x=\"249.0\" y=\"164\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">6</text><line x1=\"280.8\" y1=\"30\" x2=\"280.8\" y2=\"135\" stroke=\"#ECECEF\"/><text x=\"280.8\" y=\"164\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">7</text><line x1=\"312.7\" y1=\"30\" x2=\"312.7\" y2=\"135\" stroke=\"#ECECEF\"/><text x=\"312.7\" y=\"164\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">8</text><line x1=\"344.5\" y1=\"30\" x2=\"344.5\" y2=\"135\" stroke=\"#ECECEF\"/><text x=\"344.5\" y=\"164\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">9</text><line x1=\"376.3\" y1=\"30\" x2=\"376.3\" y2=\"135\" stroke=\"#ECECEF\"/><text x=\"376.3\" y=\"164\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">10</text><line x1=\"408.2\" y1=\"30\" x2=\"408.2\" y2=\"135\" stroke=\"#ECECEF\"/><text x=\"408.2\" y=\"164\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">11</text><line x1=\"440.0\" y1=\"30\" x2=\"440.0\" y2=\"135\" stroke=\"#ECECEF\"/><text x=\"440.0\" y=\"164\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">12</text><line x1=\"121.7\" y1=\"75\" x2=\"408.2\" y2=\"75\" stroke=\"#2B2527\" stroke-width=\"2.2\"/><rect x=\"185.3\" y=\"53\" width=\"159.2\" height=\"44\" fill=\"#E8EEF7\" stroke=\"#2A5D9E\" stroke-width=\"2.3\"/><line x1=\"249.0\" y1=\"53\" x2=\"249.0\" y2=\"97\" stroke=\"#B43123\" stroke-width=\"2.4\"/><line x1=\"121.7\" y1=\"61\" x2=\"121.7\" y2=\"89\" stroke=\"#2B2527\" stroke-width=\"2.2\"/><line x1=\"408.2\" y1=\"61\" x2=\"408.2\" y2=\"89\" stroke=\"#2B2527\" stroke-width=\"2.2\"/></svg></span><p>Konstruera ett möjligt sorterat datamaterial med nio heltalsvärden som ger dessa fem värden.</p>",
     "s": "<p>Med nio värden är det femte värdet medianen, alltså 6.</p><p>För de fyra första ska medianen vara 4; för de fyra sista ska medianen vara 9.</p><p>Ett möjligt material är</p><p>\\(2,3,5,5,6,8,10,10,11\\).</p><p>Första kvartilen är \\((3+5)/2=4\\) och tredje kvartilen är \\((8+10)/2=9\\).</p><p><strong>Detta är ett möjligt svar.</strong></p>",
     "familj": "np3_ladagram_konstruera"
   },
@@ -11284,7 +10706,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/3/0",
     "t": "<p>Tabellen visar antal timmars träning \\(x\\) och ett resultat \\(y\\).</p><table class='data'><tr><th>x</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr><tr><th>y</th><td>48</td><td>54</td><td>61</td><td>67</td><td>70</td></tr></table><p>a) Bestäm en linjär regressionsmodell med ett digitalt verktyg.<br>b) Använd modellen för att uppskatta \\(y\\) när \\(x=8\\).<br>c) Förklara varför uppskattningen bör användas försiktigt.</p>",
-    "s": "<p>a) Regressionen ger ungefär \\(y=5,7x+42,9\\).</p><p>b) \\(y(8)=5,7\\cdot8+42,9=88,5\\).</p><p>c) Mätvärdena ligger endast mellan \\(x=1\\) och \\(x=5\\). Värdet vid \\(x=8\\) är en extrapolation, så vi vet inte om det linjära sambandet fortsätter så långt.</p><p><strong>Modell: \\(y\\approx5,7x+42,9\\), prognos \\(88,5\\), men prognosen är osäker eftersom den ligger utanför dataintervallet.</strong></p>",
+    "s": "<p>a) Regressionen ger ungefär \\(y=5,7x+42,9\\).</p><p>b) \\(y(8)=5,7\\cdot8+42,9=88,5\\).</p><p>c) Mätvärdena ligger endast mellan \\(x=1\\) och \\(x=5\\). Värdet vid \\(x=8\\) är en extrapolation, så vi vet inte om det linjära sambandet fortsätter så långt.</p><p><strong>Modell: \\(y\\approx5,7x+42,9\\), prognos \\(88,5\\), men prognosen är osäker eftersom den ligger utanför dataintervallet.</strong></p><p><strong>GeoGebra:</strong> Lägg x- och y-värden i två kolumner i kalkylbladet, markera dem och öppna tvåvariabelanalys. Välj den regressionsmodell som uppgiften efterfrågar och läs av modellen samt eventuellt \\(R^2\\). Rita gärna modellen tillsammans med punkterna för att kontrollera passformen.</p>",
     "familj": "regression_data_extrapolation"
   },
   {
@@ -11605,7 +11027,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/3",
     "t": "<p>En maskin mäter automatiskt längden på 200 detaljer. Kalkylbladet visar medelvärdet 40,02 mm och standardavvikelsen 0,06 mm. Ritningen kräver 40,00 ± 0,10 mm.</p><p>En kollega säger: ”Standardavvikelsen är bara 0,06 mm, så nästan alla detaljer måste vara godkända.”</p><p>Bedöm påståendet. Anta inte normalfördelning om du inte kan motivera den.</p>",
-    "s": "<p>Standardavvikelsen beskriver spridningen kring medelvärdet men säger inte exakt hur stor andel som ligger inom ett visst toleransintervall utan mer information om fördelningen.</p><p>Dessutom ligger medelvärdet 0,02 mm över målvärdet, så toleransintervallet är inte symmetriskt kring medelvärdet.</p><p>Om normalfördelning kunde motiveras skulle man kunna uppskatta andelen, men den informationen är inte given.</p><p><strong>Påståendet är därför inte tillräckligt underbyggt.</strong></p>",
+    "s": "<p>Standardavvikelsen beskriver spridningen kring medelvärdet men säger inte exakt hur stor andel som ligger inom ett visst toleransintervall utan mer information om fördelningen.</p><p>Dessutom ligger medelvärdet 0,02 mm över målvärdet, så toleransintervallet är inte symmetriskt kring medelvärdet.</p><p>Om normalfördelning kunde motiveras skulle man kunna uppskatta andelen, men den informationen är inte given.</p><p><strong>Påståendet är därför inte tillräckligt underbyggt.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
     "familj": "verktyg_kvalitetsdata_kritisk_granskning"
   },
   {
@@ -11813,7 +11235,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/3",
     "t": "<p>En verkstad mäter diametern på 500 delar. Medelvärdet är 20,04 mm och standardavvikelsen 0,03 mm. Godkänt intervall är 19,95–20,05 mm.</p><p>En kollega säger: ”Standardavvikelsen är liten, så nästan alla delar måste vara godkända.”</p><p>Bedöm påståendet. Förklara vilken ytterligare information som behövs för att uppskatta andelen godkända och varför toleransintervallets läge är viktigt.</p>",
-    "s": "<p>Standardavvikelsen beskriver spridningen men räcker inte ensam för att bestämma hur stor andel som ligger i ett visst intervall.</p><p>Man behöver bland annat veta hur fördelningen ser ut, till exempel om en normalfördelning är rimlig.</p><p>Dessutom ligger medelvärdet 20,04 nära den övre toleransgränsen 20,05. Intervallet är därför starkt osymmetriskt kring medelvärdet.</p><p><strong>Påståendet är inte tillräckligt underbyggt utan information om fördelningen och en analys av toleransgränserna.</strong></p>",
+    "s": "<p>Standardavvikelsen beskriver spridningen men räcker inte ensam för att bestämma hur stor andel som ligger i ett visst intervall.</p><p>Man behöver bland annat veta hur fördelningen ser ut, till exempel om en normalfördelning är rimlig.</p><p>Dessutom ligger medelvärdet 20,04 nära den övre toleransgränsen 20,05. Intervallet är därför starkt osymmetriskt kring medelvärdet.</p><p><strong>Påståendet är inte tillräckligt underbyggt utan information om fördelningen och en analys av toleransgränserna.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Välj vänstersvans, högersvans eller intervall beroende på frågan och skriv in gränsvärdet/gränsvärdena. Sannolikheten visas direkt. För en vänstersannolikhet kan du också skriva <code>Normalfördelning(μ, σ, x)</code>.</p>",
     "familj": "r2_A_yrke_kvalitet_modellkritik"
   },
   {
@@ -11930,7 +11352,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "1/0/0",
     "t": "<p>Ett digitalt verktyg visar att en maskin varit igång 2,75 timmar. Hur många minuter är det?</p>",
-    "s": "<p>Tolka först vad cellreferenserna eller formeln betyder matematiskt och kontrollera sedan beräkningen.</p><p>\\(2,75\\cdot60=165\\).</p><p><strong>165 minuter.</strong></p>",
+    "s": "<p>Tolka först vad cellreferenserna eller formeln betyder matematiskt och kontrollera sedan beräkningen.</p><p>\\(2,75\\cdot60=165\\).</p><p><strong>165 minuter.</strong></p><p><strong>GeoGebra:</strong> Använd det digitala verktyget i GeoGebra och kontrollera resultatet mot grafen eller den matematiska modellen.</p>",
     "familj": "r3_voc_time_1"
   },
   {
@@ -12281,7 +11703,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>En normalfördelad försäljning har medelvärdet 500 enheter och standardavvikelsen 40 enheter.</p><p>Mellan vilka värden ligger ungefär 68,2 % av månaderna?</p>",
-    "s": "<p>Formulera först den matematiska modellen för kostnad, intäkt, förändring eller statistik innan du räknar vidare.</p><p><strong>Mellan 460 och 540 enheter.</strong></p>",
+    "s": "<p>Formulera först den matematiska modellen för kostnad, intäkt, förändring eller statistik innan du räknar vidare.</p><p><strong>Mellan 460 och 540 enheter.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
     "familj": "program_ekonomi_normalfordelning_68"
   },
   {
@@ -12450,7 +11872,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>En mätserie är normalfördelad med medelvärdet 100 och standardavvikelsen 8.</p><p>Mellan vilka värden ligger ungefär 68,2 % av mätningarna?</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p><strong>Mellan 92 och 108.</strong></p>",
+    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p><strong>Mellan 92 och 108.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
     "familj": "program_vard_normal_68"
   },
   {
@@ -12567,7 +11989,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>En normalfördelad variabel har medelvärdet 80 och standardavvikelsen 6.</p><p>Ungefär hur stor andel ligger mellan 68 och 92?</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p>Intervallet är \\(\\mu\\pm2\\sigma\\).</p><p><strong>Ungefär 95,4 %.</strong></p>",
+    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p>Intervallet är \\(\\mu\\pm2\\sigma\\).</p><p><strong>Ungefär 95,4 %.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Välj vänstersvans, högersvans eller intervall beroende på frågan och skriv in gränsvärdet/gränsvärdena. Sannolikheten visas direkt. För en vänstersannolikhet kan du också skriva <code>Normalfördelning(μ, σ, x)</code>.</p>",
     "familj": "program_vard_normal_95"
   },
   {
@@ -12606,7 +12028,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/2",
     "t": "<p>En mätvariabel antas vara normalfördelad med medelvärdet 50. Det är känt att 95:e percentilen är 66.</p><p>Bestäm standardavvikelsen med digitalt verktyg.</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p>95:e percentilen motsvarar \\(z\\approx1,645\\).</p><p>\\(66=50+1,645\\sigma\\Rightarrow\\sigma\\approx9,73\\).</p><p><strong>Standardavvikelsen är cirka 9,7.</strong></p>",
+    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p>95:e percentilen motsvarar \\(z\\approx1,645\\).</p><p>\\(66=50+1,645\\sigma\\Rightarrow\\sigma\\approx9,73\\).</p><p><strong>Standardavvikelsen är cirka 9,7.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). När ett gränsvärde/percentil söks väljer du vänster- eller högersvans och matar in den givna sannolikheten; GeoGebra flyttar då gränsen. Alternativt kan kommandot <code>InverseNormal(μ, σ, p)</code> användas för en vänstersannolikhet \\(p\\).</p>",
     "familj": "program_vard_normal_inverse"
   },
   {
@@ -12684,7 +12106,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/2",
     "t": "<p>En mätvariabel antas vara normalfördelad med medelvärdet 72 och standardavvikelsen 6.</p><p>Bestäm det värde \\(k\\) så att 90 % av alla mätvärden ligger under \\(k\\).</p>",
-    "s": "<p>Vi söker den 90:e percentilen. För standardnormalfördelningen är \\(z\\approx1,2816\\).</p><p>Då blir \\(k=72+1,2816\\cdot6\\approx79,7\\).</p><p><strong>\\(k\\approx79,7\\).</strong></p>",
+    "s": "<p>Vi söker den 90:e percentilen. För standardnormalfördelningen är \\(z\\approx1,2816\\).</p><p>Då blir \\(k=72+1,2816\\cdot6\\approx79,7\\).</p><p><strong>\\(k\\approx79,7\\).</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). När ett gränsvärde/percentil söks väljer du vänster- eller högersvans och matar in den givna sannolikheten; GeoGebra flyttar då gränsen. Alternativt kan kommandot <code>InverseNormal(μ, σ, p)</code> användas för en vänstersannolikhet \\(p\\).</p>",
     "familj": "A_vard_normal_90_percentile"
   },
   {
@@ -12723,7 +12145,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>En mätserie från 200 personer kan antas vara normalfördelad med medelvärdet 50 och standardavvikelsen 5.</p><p>Ungefär hur många personer förväntas ha värden mellan 40 och 60?</p>",
-    "s": "<p>40 och 60 ligger två standardavvikelser från medelvärdet: \\(50\\pm2\\cdot5\\).</p><p>I en normalfördelning ligger ungefär 95,4 % inom två standardavvikelser.</p><p>\\(0,954\\cdot200=190,8\\).</p><p><strong>Ungefär 191 personer.</strong></p>",
+    "s": "<p>40 och 60 ligger två standardavvikelser från medelvärdet: \\(50\\pm2\\cdot5\\).</p><p>I en normalfördelning ligger ungefär 95,4 % inom två standardavvikelser.</p><p>\\(0,954\\cdot200=190,8\\).</p><p><strong>Ungefär 191 personer.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
     "familj": "np_typ_vard_normal_antal"
   },
   {
@@ -12736,7 +12158,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/2",
     "t": "<p>Två olika modeller beskriver samma avtagande storhet under de första sex timmarna:</p><p>\\(A(t)=90-8t\\) och \\(B(t)=90\\cdot0,90^t\\).</p><p>Efter hur lång tid skiljer modellerna sig med minst 15 enheter? Använd digitalt verktyg och tolka svaret.</p>",
-    "s": "<p>Vi söker första \\(t\\ge0\\) där \\(|A(t)-B(t)|\\ge15\\).</p><p>Med digitalt verktyg kan man rita båda funktionerna eller lösa \\(|90-8t-90\\cdot0,90^t|=15\\).</p><p>Den första gränsen fås ungefär vid \\(t\\approx8.6\\) timmar.</p><p><strong>Efter ungefär 8.6 timmar skiljer modellerna sig med minst 15 enheter.</strong></p><p>Det visar också att modellvalet blir allt viktigare när man går utanför det korta intervall där modellerna ligger nära varandra.</p>",
+    "s": "<p>Vi söker första \\(t\\ge0\\) där \\(|A(t)-B(t)|\\ge15\\).</p><p>Med digitalt verktyg kan man rita båda funktionerna eller lösa \\(|90-8t-90\\cdot0,90^t|=15\\).</p><p>Den första gränsen fås ungefär vid \\(t\\approx8.6\\) timmar.</p><p><strong>Efter ungefär 8.6 timmar skiljer modellerna sig med minst 15 enheter.</strong></p><p>Det visar också att modellvalet blir allt viktigare när man går utanför det korta intervall där modellerna ligger nära varandra.</p><p><strong>GeoGebra:</strong> Använd det digitala verktyget i GeoGebra och kontrollera resultatet mot grafen eller den matematiska modellen.</p>",
     "familj": "np_typ_vard_jamfora_modeller"
   },
   {
@@ -12788,7 +12210,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>En mätvariabel antas vara normalfördelad med medelvärdet 72 och standardavvikelsen 6.</p><p>Ungefär hur många av 500 observationer förväntas ligga mellan 60 och 84?</p>",
-    "s": "<p>60 och 84 ligger två standardavvikelser från medelvärdet.</p><p>Ungefär 95,4 % ligger inom \\(\\mu\\pm2\\sigma\\).</p><p>\\(0,954\\cdot500=477\\).</p><p><strong>Ungefär 477 observationer.</strong></p>",
+    "s": "<p>60 och 84 ligger två standardavvikelser från medelvärdet.</p><p>Ungefär 95,4 % ligger inom \\(\\mu\\pm2\\sigma\\).</p><p>\\(0,954\\cdot500=477\\).</p><p><strong>Ungefär 477 observationer.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
     "familj": "np2_vard_normal_antal"
   },
   {
@@ -12853,7 +12275,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/3",
     "t": "<p>En normalfördelad mätvariabel har medelvärdet 68 och standardavvikelsen 7. En grupp består av 900 observationer.</p><p>Bestäm ungefär vilket gränsvärde \\(k\\) som gör att cirka 90 observationer ligger över \\(k\\).</p>",
-    "s": "<p>90 av 900 är 10 %, så 90 % ska ligga under \\(k\\).</p><p>Det betyder att \\(k\\) är den 90:e percentilen.</p><p>\\(z_{0,90}\\approx1,2816\\).</p><p>\\(k=68+1,2816\\cdot7\\approx76,97\\).</p><p><strong>\\(k\\approx77,0\\).</strong></p>",
+    "s": "<p>90 av 900 är 10 %, så 90 % ska ligga under \\(k\\).</p><p>Det betyder att \\(k\\) är den 90:e percentilen.</p><p>\\(z_{0,90}\\approx1,2816\\).</p><p>\\(k=68+1,2816\\cdot7\\approx76,97\\).</p><p><strong>\\(k\\approx77,0\\).</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). När ett gränsvärde/percentil söks väljer du vänster- eller högersvans och matar in den givna sannolikheten; GeoGebra flyttar då gränsen. Alternativt kan kommandot <code>InverseNormal(μ, σ, p)</code> användas för en vänstersannolikhet \\(p\\).</p>",
     "familj": "np3_vard_percentil_antal"
   },
   {

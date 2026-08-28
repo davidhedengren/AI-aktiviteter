@@ -1,7 +1,4 @@
-/* strukturma2.js — gemensam struktur för Matematik nivå 2a, 2b och 2c.
-   Reviderad så att rena nivå 1-områden har tagits bort ur kapitel 1,
-   och regression/korrelation ligger under statistik.
-*/
+/* strukturma2.js — Matematik nivå 2a/2b/2c, reviderad utan programmeringsområden. */
 
 window.KAPNAMNMA2 = {
   "1": "Algebra",
@@ -22,7 +19,6 @@ window.OMRMA2 = {
     "ekvationssystem_tre_obekanta": "Ekvationssystem med tre obekanta",
     "speciella_ekvationssystem": "Ekvationssystem med ingen eller oändligt många lösningar",
     "ekvationssystem_tillampningar": "Tillämpningar och problemlösning med ekvationssystem",
-    "programmering_numerisk_ekvationslosning": "Programmering och numerisk ekvationslösning",
     "multiplicera_parenteser": "Multiplikation av parentesuttryck",
     "konjugatregeln": "Konjugatregeln",
     "kvadreringsreglerna": "Kvadreringsreglerna",
@@ -36,7 +32,6 @@ window.OMRMA2 = {
     "mer_om_andragradsekvationer": "Andragradsekvationer – fördjupning",
     "samband_roter_koefficienter": "Samband mellan rötter och koefficienter",
     "andragradsekvationer_tillampningar": "Tillämpningar och problemlösning med andragradsekvationer",
-    "programmering_andragrad": "Programmering och andragradsekvationer",
     "rotekvationer": "Rotekvationer",
     "funktionsskrivsatt_rep": "Funktioner och funktionsskrivsätt – repetition",
     "andragradsfunktioner": "Andragradsfunktioner",
@@ -68,8 +63,7 @@ window.OMRMA2 = {
     "bevis_likformighet": "Bevis och resonemang med likformighet",
     "kordasatsen_biskarningssatsen": "Kordasatsen och bisekantsatsen",
     "avstandsformeln_mittpunktsformeln": "Avståndsformeln och mittpunktsformeln",
-    "koordinatgeometri_problemlosning": "Koordinatgeometri – problemlösning",
-    "programmering_avstandsformeln": "Programmering och koordinatgeometri"
+    "koordinatgeometri_problemlosning": "Koordinatgeometri – problemlösning"
   },
   "4": {
     "lagesmatt": "Medelvärde, median och typvärde",
@@ -79,8 +73,7 @@ window.OMRMA2 = {
     "korrelation_koefficient": "Korrelation och korrelationskoefficient",
     "standardavvikelse": "Standardavvikelse",
     "normalfordelat_material": "Normalfördelning och normalfördelat material",
-    "normalfordelning_digitala_verktyg": "Normalfördelning med digitala verktyg",
-    "programmering_medelvarde": "Programmering och statistisk databearbetning"
+    "normalfordelning_digitala_verktyg": "Normalfördelning med digitala verktyg"
   },
   "5": {
     "yrkesspecifika_begrepp_metoder": "Yrkesspecifika matematiska begrepp och metoder",
@@ -139,9 +132,6 @@ window.SPARMA2 = {
       "2b",
       "2c"
     ],
-    "programmering_numerisk_ekvationslosning": [
-      "2c"
-    ],
     "multiplicera_parenteser": [
       "2a",
       "2b",
@@ -193,9 +183,6 @@ window.SPARMA2 = {
     "andragradsekvationer_tillampningar": [
       "2a",
       "2b",
-      "2c"
-    ],
-    "programmering_andragrad": [
       "2c"
     ],
     "rotekvationer": [
@@ -330,9 +317,6 @@ window.SPARMA2 = {
       "2a",
       "2b",
       "2c"
-    ],
-    "programmering_avstandsformeln": [
-      "2c"
     ]
   },
   "4": {
@@ -372,9 +356,6 @@ window.SPARMA2 = {
     "normalfordelning_digitala_verktyg": [
       "2a",
       "2b",
-      "2c"
-    ],
-    "programmering_medelvarde": [
       "2c"
     ]
   },
