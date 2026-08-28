@@ -1,11 +1,11 @@
-/* strukturma2.js — Matematik nivå 2a/2b/2c, reviderad utan programmeringsområden. */
+/* strukturma2.js — kapitel 5 ombyggt till tydliga programspecifika tillämpningar. */
 
 window.KAPNAMNMA2 = {
   "1": "Algebra",
   "2": "Algebra och icke-linjära modeller",
   "3": "Geometri",
   "4": "Statistik",
-  "5": "Program- och yrkesspecifikt innehåll"
+  "5": "Programspecifika tillämpningar"
 };
 window.OMRMA2 = {
   "1": {
@@ -76,8 +76,6 @@ window.OMRMA2 = {
     "normalfordelning_digitala_verktyg": "Normalfördelning med digitala verktyg"
   },
   "5": {
-    "yrkesspecifika_begrepp_metoder": "Yrkesspecifika matematiska begrepp och metoder",
-    "verktyg_arbetslivet": "Matematiska hjälpmedel och verktyg i arbetslivet",
     "ekonomiprogrammet": "Ekonomiprogrammet",
     "vard_omsorgsprogrammet": "Vård- och omsorgsprogrammet"
   }
@@ -360,12 +358,6 @@ window.SPARMA2 = {
     ]
   },
   "5": {
-    "yrkesspecifika_begrepp_metoder": [
-      "2a"
-    ],
-    "verktyg_arbetslivet": [
-      "2a"
-    ],
     "ekonomiprogrammet": [
       "2b"
     ],

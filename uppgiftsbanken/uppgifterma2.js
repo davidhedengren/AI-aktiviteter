@@ -1,4 +1,4 @@
-/* uppgifterma2.js — reviderad nivå-2-bank: programmering borttagen, potensnivå höjd, GeoGebra integrerat i digitala lösningar och normalfördelning. */
+/* uppgifterma2.js — programspecifika tillämpningar helt ombyggda för Matematik nivå 2. */
 window.BANKMA2 = [
   {
     "id": "1.10",
@@ -10838,1110 +10838,668 @@ window.BANKMA2 = [
   {
     "id": "5.01",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En ramp stiger 0,72 m på en horisontell sträcka av 9,0 m.</p><span class=\"fig\"><svg width=\"460\" height=\"260\" viewBox=\"0 0 460 260\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"1\" y=\"1\" width=\"458\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n    <line x1=\"35\" y1=\"205\" x2=\"415\" y2=\"205\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n    <line x1=\"55\" y1=\"205\" x2=\"385\" y2=\"178.6\" stroke=\"#B43123\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n    <line x1=\"385\" y1=\"178.6\" x2=\"385\" y2=\"205\" stroke=\"#9A959C\" stroke-width=\"1.5\" stroke-dasharray=\"4 3\"/>\n    <text x=\"200.0\" y=\"230\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\" fill=\"#5C575E\">9,0 m</text>\n    <text x=\"393\" y=\"195.8\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\" fill=\"#5C575E\">0,72 m</text>\n    </svg></span><p>Bestäm rampens lutning i procent.</p>",
-    "s": "<p>Lutning i procent beräknas som \\(\\frac{\\text{höjdskillnad}}{\\text{horisontell sträcka}}\\cdot100\\).</p><p>\\(\\frac{0,72}{9,0}\\cdot100=8,0\\).</p><p><strong>Lutningen är 8,0 %.</strong></p>",
-    "familj": "yrke_ramp_lutning_procent"
+    "t": "<p>Ett företag säljer två abonnemang. Standard kostar 180 kr per månad och Premium 260 kr per månad. Under en kampanj tecknas 70 abonnemang och månadsintäkten blir 15 400 kr.</p><p>Bestäm hur många abonnemang av varje sort som tecknas.</p>",
+    "s": "<p>Låt \\(x\\) vara antalet Standard och \\(y\\) antalet Premium.</p><p>\\(x+y=70\\)</p><p>\\(180x+260y=15400\\).</p><p>Subtrahera \\(180(x+y)=12600\\) från intäktsekvationen:</p><p>\\(80y=2800\\Rightarrow y=35\\).</p><p>Då är \\(x=35\\).</p><p><strong>35 Standard och 35 Premium.</strong></p>",
+    "familj": "ekonomi_system_abonnemang"
   },
   {
     "id": "5.02",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En ritning är gjord i skala 1:50. På ritningen är en vägg 84 mm lång.</p><p>Hur lång är väggen i verkligheten? Svara i meter.</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>\\(84\\cdot50=4200\\) mm = 4,2 m.</p><p><strong>Väggen är 4,2 m lång.</strong></p>",
-    "familj": "yrke_skala_ritning"
+    "t": "<p>Ett företag placerar sammanlagt 240 000 kr i två investeringar A och B. Efter ett år har A ökat med 8 % och B med 4 %. Det sammanlagda värdet är då 253 200 kr.</p><p>Bestäm hur mycket som placerades i A respektive B.</p>",
+    "s": "<p>Låt \\(x\\) vara beloppet i A och \\(y\\) beloppet i B.</p><p>\\(x+y=240000\\)</p><p>\\(1,08x+1,04y=253200\\).</p><p>Multiplicera den första ekvationen med 1,04:</p><p>\\(1,04x+1,04y=249600\\).</p><p>Subtraktion ger \\(0,04x=3600\\Rightarrow x=90000\\).</p><p>Då är \\(y=150000\\).</p><p><strong>90 000 kr placerades i A och 150 000 kr i B.</strong></p>",
+    "familj": "ekonomi_system_tva_investeringar"
   },
   {
     "id": "5.03",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En färg räcker till 8,5 m² per liter. Ett rum har 42 m² väggyta som ska målas två gånger.</p><p>Hur många liter färg behövs minst? Bortse från spill.</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>Total målad yta är \\(2\\cdot42=84\\) m².</p><p>\\(84/8,5\\approx9,88\\).</p><p><strong>Minst cirka 9,9 liter färg behövs.</strong></p>",
-    "familj": "yrke_farg_tackformaga"
+    "t": "<p>Ett kapital modelleras med \\(K(t)=50\\,000\\cdot1,045^t\\).</p><p>Efter hur många år har kapitalet passerat 70 000 kr? Använd GeoGebra.</p>",
+    "s": "<p><strong>GeoGebra:</strong> Öppna CAS och skriv <code>NLös(50000*1.045^t=70000)</code>.</p><p>GeoGebra ger \\(t\\approx7,65\\).</p><p><strong>Kapitalet passerar 70 000 kr under det åttonde året.</strong></p>",
+    "familj": "ekonomi_exponential_tid"
   },
   {
     "id": "5.04",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Ett storkök använder 2,8 kg ris till 35 portioner.</p><p>Hur mycket ris behövs till 90 portioner om mängden per portion är densamma?</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>Per portion behövs \\(2,8/35=0,08\\) kg.</p><p>\\(90\\cdot0,08=7,2\\) kg.</p><p><strong>7,2 kg ris.</strong></p>",
-    "familj": "yrke_storkok_proportion"
+    "t": "<p>Värdet på en maskin modelleras med \\(V(t)=320\\,000\\cdot0,82^t\\).</p><p>Efter hur många hela år är värdet första gången under 150 000 kr?</p>",
+    "s": "<p><strong>GeoGebra:</strong> Skriv <code>NLös(320000*0.82^t=150000)</code> i CAS.</p><p>Gränsen fås vid \\(t\\approx3,82\\).</p><p><strong>Efter 4 hela år.</strong></p>",
+    "familj": "ekonomi_vardeminskning_tid"
   },
   {
     "id": "5.05",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
     "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>En transportlåda är 60 cm lång, 40 cm bred och 35 cm hög.</p><p>Bestäm volymen i liter.</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>Volymen är \\(60\\cdot40\\cdot35=84000\\) cm³.</p><p>1000 cm³ = 1 liter.</p><p><strong>84 liter.</strong></p>",
-    "familj": "yrke_logistik_volym"
+    "poang": "2/0/0",
+    "t": "<p>Ett företags vinst modelleras med \\(V(x)=-x^2+90x-1400\\).</p><p>För vilka två produktionsnivåer är vinsten 0?</p>",
+    "s": "<p>Lös \\(-x^2+90x-1400=0\\), alltså \\(x^2-90x+1400=0\\).</p><p>Med <strong>pq-formeln</strong>:</p><p>\\(x=45\\pm\\sqrt{2025-1400}=45\\pm25\\).</p><p><strong>\\(x=20\\) och \\(x=70\\).</strong></p>",
+    "familj": "ekonomi_vinst_nollstallen"
   },
   {
     "id": "5.06",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En maskin får enligt ritningen ha diametern \\(25,00\\pm0,08\\) mm.</p><p>Mellan vilka två värden är diametern godkänd?</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>Minsta godkända värde är \\(25,00-0,08=24,92\\) mm.</p><p>Största är \\(25,00+0,08=25,08\\) mm.</p><p><strong>24,92–25,08 mm.</strong></p>",
-    "familj": "yrke_tolerans_intervall"
+    "t": "<p>Vinsten modelleras med \\(V(x)=-2x^2+160x-1800\\).</p><p>Bestäm den produktionsnivå som ger maximal vinst.</p>",
+    "s": "<p>Parabeln är nedåtvänd. Symmetrilinjen ligger vid \\(x=40\\), eftersom</p><p>\\(V(x)=-2(x-40)^2+1400\\).</p><p><strong>Maximal vinst fås vid 40 enheter.</strong></p>",
+    "familj": "ekonomi_vinst_extrempunkt"
   },
   {
     "id": "5.07",
     "kap": 5,
-    "omr": "verktyg_arbetslivet",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>I ett kalkylblad står priset per meter i cell B2 och längden i meter i C2. Momssatsen 25 % står i D2 som talet 0,25.</p><p>Skriv en formel för totalpriset inklusive moms.</p>",
-    "s": "<p>Tolka först vad cellreferenserna eller formeln betyder matematiskt och kontrollera sedan beräkningen.</p><p>Pris före moms är \\(B2\\cdot C2\\). För att lägga till moms multipliceras med \\(1+D2\\).</p><p><strong><code>=B2*C2*(1+D2)</code></strong></p>",
-    "familj": "verktyg_kalkylblad_moms"
+    "t": "<p>En regressionsanalys ger modellen \\(y=12,4x+310\\), där \\(x\\) är reklamkostnaden i tusen kronor och \\(y\\) är försäljningen i tusen kronor.</p><p>Tolka talen 12,4 och 310.</p>",
+    "s": "<p>Riktningskoefficienten 12,4 betyder att modellen förutsäger ungefär 12,4 tusen kronor högre försäljning när reklamkostnaden ökar med 1 tusen kronor.</p><p>Konstanttermen 310 är modellens uppskattning av försäljningen när reklamkostnaden är 0.</p>",
+    "familj": "ekonomi_regression_tolkning"
   },
   {
     "id": "5.08",
     "kap": 5,
-    "omr": "verktyg_arbetslivet",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
     "niva": "E",
-    "poang": "3/0/0",
-    "t": "<p>En digital mätare visar 12,46 mm. Mätaren har upplösningen 0,01 mm.</p><p>Vilket av följande är rimligt att skriva som mätvärde?</p><p>A) 12,460000 mm &nbsp; B) 12,46 mm &nbsp; C) 12 mm</p>",
-    "s": "<p>Tolka först vad cellreferenserna eller formeln betyder matematiskt och kontrollera sedan beräkningen.</p><p>Mätaren visar hundradels millimeter. Fler decimaler än mätaren kan visa antyder en precision som inte finns.</p><p><strong>B) 12,46 mm.</strong></p>",
-    "familj": "verktyg_matprecision"
+    "poang": "2/0/0",
+    "t": "<p>Ett datamaterial har korrelationskoefficienten \\(r=-0,91\\).</p><p>Beskriv sambandet.</p>",
+    "s": "<p>Värdet ligger nära −1.</p><p><strong>Det finns ett starkt negativt linjärt samband:</strong> när den ena variabeln ökar tenderar den andra att minska.</p>",
+    "familj": "ekonomi_korrelation_tolkning"
   },
   {
     "id": "5.09",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>En ramp får ha högst 5,0 % lutning. Höjdskillnaden är 0,84 m.</p><p>a) Hur lång måste den horisontella sträckan minst vara?<br>b) Om det bara finns 15 m tillgängligt, uppfylls kravet?</p>",
-    "s": "<p>\\(5,0=\\frac{0,84}{x}\\cdot100\\Rightarrow x=\\frac{84}{5}=16,8\\) m.</p><p>Med 15 m blir lutningen \\(0,84/15\\cdot100=5,6\\) %.</p><p><strong>a) Minst 16,8 m. b) Nej, 15 m ger 5,6 %.</strong></p>",
-    "familj": "yrke_ramp_krav_baklanges"
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En månadsförsäljning kan antas vara normalfördelad med medelvärdet 520 och standardavvikelsen 40.</p><p>Bestäm med GeoGebra sannolikheten att försäljningen överstiger 600.</p>",
+    "s": "<p><strong>GeoGebra:</strong> Öppna Sannolikhetskalkylatorn, välj Normal, sätt \\(\\mu=520\\), \\(\\sigma=40\\) och välj högersvans från 600.</p><p>Resultatet är ungefär \\(0,0228\\).</p><p><strong>Sannolikheten är cirka 2,3 %.</strong></p>",
+    "familj": "ekonomi_normal_hogersvans"
   },
   {
     "id": "5.10",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "C",
-    "poang": "0/3/0",
-    "t": "<p>En skiva är 2,4 m × 1,2 m. I ett hörn ska en öppning på 0,6 m × 0,4 m tas bort.</p><span class=\"fig smal\"><svg width=\"430\" height=\"300\" viewBox=\"0 0 430 300\" xmlns=\"http://www.w3.org/2000/svg\">\n<rect x=\"1\" y=\"1\" width=\"428\" height=\"298\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<rect x=\"65\" y=\"55\" width=\"300\" height=\"150\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<rect x=\"290\" y=\"155\" width=\"75\" height=\"50\" fill=\"#fff\" stroke=\"#B43123\" stroke-width=\"2.5\"/>\n<text x=\"185\" y=\"42\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\" fill=\"#5C575E\">2,4 m</text>\n<text x=\"30\" y=\"135\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\" fill=\"#5C575E\">1,2 m</text>\n<text x=\"295\" y=\"145\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" fill=\"#B43123\">0,6 m</text>\n<text x=\"372\" y=\"184\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" fill=\"#B43123\">0,4 m</text>\n</svg></span><p>Materialet kostar 310 kr per m². Beräkna materialvärdet för den del av skivan som blir kvar.</p>",
-    "s": "<p>Hela skivans area är \\(2,4\\cdot1,2=2,88\\) m².</p><p>Öppningen har area \\(0,6\\cdot0,4=0,24\\) m².</p><p>Kvar: \\(2,88-0,24=2,64\\) m².</p><p>Kostnad: \\(2,64\\cdot310=818,40\\) kr.</p><p><strong>Materialvärdet är 818,40 kr.</strong></p>",
-    "familj": "yrke_skiva_utskarning_kostnad"
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En normalfördelad försäljning har medelvärdet 1 200 och standardavvikelsen 150.</p><p>Bestäm den 90:e percentilen med GeoGebra.</p>",
+    "s": "<p><strong>GeoGebra:</strong> Använd Sannolikhetskalkylatorn eller <code>InverseNormal(1200,150,0.90)</code>.</p><p>Gränsen blir cirka 1392.</p><p><strong>90:e percentilen är ungefär 1 392.</strong></p>",
+    "familj": "ekonomi_normal_percentil"
   },
   {
     "id": "5.11",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Ett golv är 68 m². Golvplattorna säljs i paket som täcker 1,44 m². Man räknar med 8 % extra material för spill.</p><p>Hur många hela paket måste beställas?</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>Med spill behövs \\(68\\cdot1,08=73,44\\) m².</p><p>\\(73,44/1,44=51\\).</p><p><strong>51 paket.</strong></p>",
-    "familj": "yrke_golv_spill_paket"
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Förenkla \\(\\lg(25x)-\\lg x\\), där \\(x&gt;0\\).</p>",
+    "s": "<p>Använd logaritmlagen för kvot:</p><p>\\(\\lg(25x)-\\lg x=\\lg(25)\\).</p><p><strong>Svaret är \\(\\lg25\\).</strong></p>",
+    "familj": "ekonomi_logaritmlag"
   },
   {
     "id": "5.12",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "C",
-    "poang": "0/3/0",
-    "t": "<p>En verkstad följer kostnaden för en viss produktion. Vid 40 tillverkade delar är kostnaden 3 200 kr och vid 90 delar är kostnaden 5 450 kr.</p><p>Anta en linjär kostnadsmodell. Bestäm modellen och tolka både riktningskoefficienten och konstanttermen.</p>",
-    "s": "<p>\\(k=(5450-3200)/(90-40)=2250/50=45\\) kr per del.</p><p>\\(3200=45\\cdot40+m\\Rightarrow m=1400\\).</p><p><strong>\\(K(x)=45x+1400\\).</strong> 45 kr är den rörliga kostnaden per del och 1400 kr är modellens fasta kostnad.</p>",
-    "familj": "yrke_kostnadsmodell_tva_punkter"
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Ett företags index modelleras med \\(I(t)=100\\cdot1,06^t\\).</p><p>Efter hur lång tid når index värdet 150? Lös med logaritmer.</p>",
+    "s": "<p>\\(100\\cdot1,06^t=150\\Rightarrow1,06^t=1,5\\).</p><p>Logaritmera båda leden:</p><p>\\(t\\lg1,06=\\lg1,5\\).</p><p>\\(t=\\frac{\\lg1,5}{\\lg1,06}\\approx6,96\\).</p><p><strong>Index når 150 efter ungefär 7,0 tidsperioder.</strong></p>",
+    "familj": "ekonomi_exponentialekvation_logaritm"
   },
   {
     "id": "5.13",
     "kap": 5,
-    "omr": "verktyg_arbetslivet",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
     "niva": "C",
-    "poang": "0/3/0",
-    "t": "<p>Två offerter för att hyra ett verktyg är</p><p>A: 480 kr i startavgift + 95 kr per dag.<br>B: 820 kr i startavgift + 70 kr per dag.</p><p>Bestäm från och med hur många hela hyresdagar offert B är billigare.</p>",
-    "s": "<p>Jämför: \\(820+70d&lt;480+95d\\).</p><p>\\(340&lt;25d\\Rightarrow d&gt;13,6\\).</p><p>För hela dagar blir första värdet 14.</p><p><strong>Från och med 14 dagar är B billigare.</strong></p>",
-    "familj": "verktyg_hyra_jamfora_linjar"
+    "poang": "0/2/0",
+    "t": "<p>Efterfrågan på en vara modelleras med \\(q=300-p\\), där \\(p\\) är priset i kronor. Intäkten är \\(I=pq\\).</p><p>Bestäm vilket pris som ger maximal intäkt.</p>",
+    "s": "<p>\\(I(p)=p(300-p)=-p^2+300p\\).</p><p>Parabelns topp ligger vid \\(p=150\\).</p><p><strong>Priset 150 kr ger maximal intäkt.</strong></p>",
+    "familj": "ekonomi_pris_intakt_optimering"
   },
   {
     "id": "5.14",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>En rektangulär arbetsyta ska byggas mot en befintlig vägg, så bara tre sidor behöver kantlist. Det finns 18 m kantlist.</p><p>Arbetsytan måste vara minst 36 m² och bredden vinkelrätt mot väggen får högst vara 6,0 m.</p><p>Bestäm alla möjliga bredder.</p>",
-    "s": "<p>Låt bredden vara \\(x\\). Den tredje sidan blir \\(18-2x\\).</p><p>Arean är \\(A=x(18-2x)\\). Kravet \\(A\\ge36\\) ger</p><p>\\(-2x^2+18x-36\\ge0\\Rightarrow x^2-9x+18\\le0\\).</p><p>Rötterna är 3 och 6. Olikheten gäller mellan rötterna.</p><p>Breddkravet \\(x\\le6\\) ändrar inte intervallet.</p><p><strong>Alla bredder \\(3,0\\le x\\le6,0\\) m fungerar.</strong></p>",
-    "familj": "yrke_arbetsyta_flera_villkor"
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Vinsten modelleras med \\(V(x)=-x^2+100x-1600\\).</p><p>För vilka produktionsnivåer är vinsten positiv?</p>",
+    "s": "<p>Gränserna fås ur \\(x^2-100x+1600=0\\).</p><p>Med pq-formeln: \\(x=50\\pm\\sqrt{2500-1600}=50\\pm30\\).</p><p>Rötterna är 20 och 80. Den ursprungliga vinstparabeln är nedåtvänd.</p><p><strong>Vinsten är positiv för \\(20&lt;x&lt;80\\).</strong></p>",
+    "familj": "ekonomi_vinst_intervall"
   },
   {
     "id": "5.15",
     "kap": 5,
-    "omr": "verktyg_arbetslivet",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>En maskin mäter automatiskt längden på 200 detaljer. Kalkylbladet visar medelvärdet 40,02 mm och standardavvikelsen 0,06 mm. Ritningen kräver 40,00 ± 0,10 mm.</p><p>En kollega säger: ”Standardavvikelsen är bara 0,06 mm, så nästan alla detaljer måste vara godkända.”</p><p>Bedöm påståendet. Anta inte normalfördelning om du inte kan motivera den.</p>",
-    "s": "<p>Standardavvikelsen beskriver spridningen kring medelvärdet men säger inte exakt hur stor andel som ligger inom ett visst toleransintervall utan mer information om fördelningen.</p><p>Dessutom ligger medelvärdet 0,02 mm över målvärdet, så toleransintervallet är inte symmetriskt kring medelvärdet.</p><p>Om normalfördelning kunde motiveras skulle man kunna uppskatta andelen, men den informationen är inte given.</p><p><strong>Påståendet är därför inte tillräckligt underbyggt.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
-    "familj": "verktyg_kvalitetsdata_kritisk_granskning"
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Två finansieringsalternativ har kostnaderna \\(A(x)=18\\,000+220x\\) och \\(B(x)=30\\,000+160x\\).</p><p>Från vilken nivå \\(x\\) är alternativ B billigare?</p>",
+    "s": "<p>Sätt modellerna lika:</p><p>\\(18000+220x=30000+160x\\Rightarrow60x=12000\\Rightarrow x=200\\).</p><p>Eftersom B har lägre lutning är B billigare efter skärningen.</p><p><strong>B är billigare för \\(x&gt;200\\).</strong></p>",
+    "familj": "ekonomi_tva_kostnadsmodeller"
   },
   {
     "id": "5.16",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>Ett företag packar två typer av lådor på en lastbil. Typ A väger 18 kg och tar 0,060 m³. Typ B väger 30 kg och tar 0,040 m³.</p><p>Lasten får väga högst 1 020 kg och ta högst 2,00 m³. Företaget vill lasta exakt 40 lådor.</p><p>Bestäm alla heltalskombinationer av A- och B-lådor som uppfyller båda begränsningarna.</p>",
-    "s": "<p>Låt \\(a\\) och \\(b\\) vara antalen. \\(a+b=40\\), alltså \\(b=40-a\\).</p><p>Vikt: \\(18a+30(40-a)\\le1020\\Rightarrow1200-12a\\le1020\\Rightarrow a\\ge15\\).</p><p>Volym: \\(0,060a+0,040(40-a)\\le2,00\\Rightarrow1,60+0,020a\\le2,00\\Rightarrow a\\le20\\).</p><p>Eftersom antalen är heltal kan \\(a=15,16,17,18,19,20\\). Då är \\(b=25,24,23,22,21,20\\).</p><p><strong>Möjliga par \\((A,B)\\) är (15,25), (16,24), (17,23), (18,22), (19,21) och (20,20).</strong></p>",
-    "familj": "yrke_logistik_tva_begransningar"
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Ett företags omsättning är 4,0 miljoner kr år 0 och 5,76 miljoner kr år 4. Anta exponentiell utveckling.</p><p>Bestäm en modell.</p>",
+    "s": "<p>Skriv \\(O(t)=4,0\\cdot a^t\\).</p><p>\\(5,76=4,0a^4\\Rightarrow a^4=1,44\\).</p><p>\\(a=1,44^{1/4}\\approx1,0954\\).</p><p><strong>En modell är \\(O(t)=4,0\\cdot1,0954^t\\) miljoner kr.</strong></p>",
+    "familj": "ekonomi_exponentialmodell_tva_tidpunkter"
   },
   {
     "id": "5.17",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En kabel är 18,5 m lång. Vid montering behövs 7 % extra för spill.</p><p>Hur lång kabel bör beställas?</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>\\(18,5\\cdot1,07=19,795\\).</p><p><strong>Minst cirka 19,8 m.</strong></p>",
-    "familj": "r2_y_cable_waste"
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Följande försäljning har registrerats:</p><table><tr><th>månad</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr><tr><th>försäljning</th><td>82</td><td>96</td><td>113</td><td>133</td><td>157</td></tr></table><p>Undersök i GeoGebra om en linjär eller exponentiell modell är rimligast.</p>",
+    "s": "<p><strong>GeoGebra:</strong> Lägg värdena i kalkylbladet, markera dem och öppna tvåvariabelanalys. Jämför linjär och exponentiell regression samt residualerna.</p><p>Kvoterna mellan värdena är ungefär konstanta, cirka 1,17–1,18, medan differenserna växer.</p><p><strong>En exponentiell modell är därför rimligast.</strong></p>",
+    "familj": "ekonomi_modellval_regression"
   },
   {
     "id": "5.18",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En ritning är i skala 1:25. En sträcka är 136 mm på ritningen.</p><p>Hur lång är sträckan i verkligheten? Svara i meter.</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>\\(136\\cdot25=3400\\) mm = 3,4 m.</p><p><strong>3,4 m.</strong></p>",
-    "familj": "r2_y_scale"
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Ett datamaterial visar stark positiv korrelation mellan reklamkostnad och försäljning. En chef säger: ”Det bevisar att varje extra reklamkrona orsakar högre försäljning.”</p><p>Bedöm påståendet.</p>",
+    "s": "<p>Korrelation visar ett samband, inte automatiskt orsak.</p><p>Andra faktorer kan påverka båda variablerna, och sambandet kan också vara mer komplicerat.</p><p><strong>Påståendet är för starkt.</strong></p>",
+    "familj": "ekonomi_korrelation_kausalitet"
   },
   {
     "id": "5.19",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Ett golv är 7,5 m långt och 4,2 m brett.</p><p>Bestäm arean.</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>\\(7,5\\cdot4,2=31,5\\).</p><p><strong>31,5 m².</strong></p>",
-    "familj": "r2_y_floor_area"
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En normalfördelad resultatvariabel har medelvärdet 80. Det är känt att 90 % av värdena ligger under 95.</p><p>Bestäm standardavvikelsen med GeoGebra.</p>",
+    "s": "<p>95 är den 90:e percentilen.</p><p><strong>GeoGebra:</strong> Skriv i CAS <code>NLös(Normalfördelning(80,s,95)=0.90,s)</code>, eller använd 90:e percentilen i Sannolikhetskalkylatorn och justera \\(\\sigma\\).</p><p>\\(\\sigma\\approx11,7\\).</p><p><strong>Standardavvikelsen är cirka 11,7.</strong></p>",
+    "familj": "ekonomi_normal_okand_sigma"
   },
   {
     "id": "5.20",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En dunk innehåller 12 liter koncentrat. Blandningen ska bestå av 20 % koncentrat.</p><p>Hur stor total mängd färdig blandning kan göras?</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>\\(0,20V=12\\Rightarrow V=60\\).</p><p><strong>60 liter.</strong></p>",
-    "familj": "r2_y_mixture_percent"
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En normalfördelad försäljning har standardavvikelsen 60. 10 % av månaderna har försäljning över 720.</p><p>Bestäm medelvärdet med GeoGebra.</p>",
+    "s": "<p>720 är den 90:e percentilen.</p><p><strong>GeoGebra:</strong> Skriv <code>NLös(Normalfördelning(m,60,720)=0.90,m)</code>.</p><p>GeoGebra ger \\(m\\approx643,1\\).</p><p><strong>Medelvärdet är cirka 643.</strong></p>",
+    "familj": "ekonomi_normal_okant_medel"
   },
   {
     "id": "5.21",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>En ramp stiger 1,20 m på 12,0 m horisontell sträcka.</p><span class=\"fig\"><svg width=\"460\" height=\"260\" viewBox=\"0 0 460 260\" xmlns=\"http://www.w3.org/2000/svg\">\n<rect x=\"1\" y=\"1\" width=\"458\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"45\" y1=\"205\" x2=\"410\" y2=\"205\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"70\" y1=\"205\" x2=\"380\" y2=\"174\" stroke=\"#B43123\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n<line x1=\"380\" y1=\"174\" x2=\"380\" y2=\"205\" stroke=\"#9A959C\" stroke-width=\"1.5\" stroke-dasharray=\"4 3\"/>\n<text x=\"202\" y=\"230\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\" fill=\"#5C575E\">12,0 m</text>\n<text x=\"389\" y=\"194\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\" fill=\"#5C575E\">1,20 m</text>\n</svg></span><p>Bestäm lutningen i procent.</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>\\(1,20/12,0\\cdot100=10\\).</p><p><strong>10 %.</strong></p>",
-    "familj": "r2_y_slope"
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Ett företag säljer \\(x\\) enheter till priset \\(p=220-0,5x\\) kronor per enhet. Den rörliga kostnaden är 40 kr per enhet och den fasta kostnaden är 8 000 kr.</p><p>Bestäm en vinstfunktion.</p>",
+    "s": "<p>Intäkten är \\(I=x(220-0,5x)=220x-0,5x^2\\).</p><p>Kostnaden är \\(K=8000+40x\\).</p><p>Alltså</p><p><strong>\\(V(x)=-0,5x^2+180x-8000\\).</strong></p>",
+    "familj": "ekonomi_vinstmodell_från_efterfragan"
   },
   {
     "id": "5.22",
     "kap": 5,
-    "omr": "verktyg_arbetslivet",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>I ett kalkylblad står antal i B3 och pris per styck i C3.</p><p>Skriv en formel för kostnaden i D3.</p>",
-    "s": "<p>Tolka först vad cellreferenserna eller formeln betyder matematiskt och kontrollera sedan beräkningen.</p><p><strong><code>=B3*C3</code></strong></p>",
-    "familj": "r2_y_spreadsheet_basic"
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Två typer av kampanjer används. Kampanj A kostar 12 000 kr och kampanj B 20 000 kr. Företaget genomför 14 kampanjer för totalt 216 000 kr.</p><p>Bestäm antalet av varje typ.</p>",
+    "s": "<p>Låt \\(x\\) vara antal A och \\(y\\) antal B.</p><p>\\(x+y=14\\)</p><p>\\(12000x+20000y=216000\\).</p><p>Dividera den andra ekvationen med 4000: \\(3x+5y=54\\).</p><p>Med \\(x=14-y\\): \\(42-3y+5y=54\\Rightarrow y=6\\).</p><p><strong>8 kampanjer A och 6 kampanjer B.</strong></p>",
+    "familj": "ekonomi_system_kampanjer"
   },
   {
     "id": "5.23",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En maskin tillverkar 48 delar på 12 minuter med jämn takt.</p><p>Hur många delar tillverkas på 35 minuter?</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>Takten är 4 delar/minut.</p><p>\\(4\\cdot35=140\\).</p><p><strong>140 delar.</strong></p>",
-    "familj": "r2_y_rate"
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En modell för en marknad är \\(M(t)=200t^2\\) och en annan är \\(N(t)=500\\cdot1,3^t\\).</p><p>Förklara varför det inte räcker att jämföra modellerna vid \\(t=1\\) för att avgöra vilken som är störst på lång sikt.</p>",
+    "s": "<p>En potensfunktion och en exponentialfunktion kan dominera i olika intervall.</p><p>Exponentialfunktionen multipliceras med en konstant faktor och kommer på lång sikt att växa snabbare än en andragradspotens.</p><p><strong>En jämförelse vid ett enda tidigt värde säger därför inte vilken modell som blir störst senare.</strong></p>",
+    "familj": "ekonomi_potens_exponential_resonemang"
   },
   {
     "id": "5.24",
     "kap": 5,
-    "omr": "verktyg_arbetslivet",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En mätare har upplösningen 0,1 °C och visar 23,7 °C.</p><p>Vilket värde bör du normalt rapportera: 23,7 °C eller 23,700 °C? Förklara kort.</p>",
-    "s": "<p>Tolka först vad cellreferenserna eller formeln betyder matematiskt och kontrollera sedan beräkningen.</p><p><strong>23,7 °C.</strong> Extra decimaler skulle ge sken av högre precision än mätaren har.</p>",
-    "familj": "r2_y_measurement_precision"
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>En regressionsmodell har \\(R^2=0,99\\) på data från fem år. En analytiker använder modellen för att förutsäga ett värde 30 år framåt.</p><p>Ge två matematiska skäl till att prognosen ändå kan vara osäker.</p>",
+    "s": "<p>Ett högt \\(R^2\\) visar god anpassning till de observerade punkterna, men inte att modellen fortsätter gälla.</p><p>30 år framåt är dessutom en lång extrapolation.</p><p><strong>Modelltypen kan upphöra att vara rimlig och extrapolationen förstorar osäkerheten.</strong></p>",
+    "familj": "ekonomi_modellkritik_extrapolation"
   },
   {
     "id": "5.25",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "C",
-    "poang": "0/3/0",
-    "t": "<p>En vägg är 6,0 m bred och 3,4 m hög. En dörröppning är 1,6 m bred och 2,4 m hög.</p><span class=\"fig smal\"><svg width=\"440\" height=\"290\" viewBox=\"0 0 440 290\" xmlns=\"http://www.w3.org/2000/svg\">\n<rect x=\"1\" y=\"1\" width=\"438\" height=\"288\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<rect x=\"65\" y=\"55\" width=\"300\" height=\"170\" fill=\"#F7F7F8\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<rect x=\"115\" y=\"105\" width=\"80\" height=\"120\" fill=\"#fff\" stroke=\"#B43123\" stroke-width=\"2.5\"/>\n<text x=\"190\" y=\"42\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\" fill=\"#5C575E\">6,0 m</text>\n<text x=\"28\" y=\"145\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\" fill=\"#5C575E\">3,4 m</text>\n<text x=\"128\" y=\"96\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" fill=\"#B43123\">1,6 m</text>\n<text x=\"82\" y=\"170\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" fill=\"#B43123\">2,4 m</text>\n</svg></span><p>Väggen ska målas två gånger. Färgen räcker till 8,0 m² per liter. Hur många liter färg behövs minst? Bortse från annat spill.</p>",
-    "s": "<p>Väggarea \\(6,0\\cdot3,4=20,4\\) m².</p><p>Dörrarea \\(1,6\\cdot2,4=3,84\\) m².</p><p>Yta per strykning \\(20,4-3,84=16,56\\) m². Två strykningar ger 33,12 m².</p><p>\\(33,12/8,0=4,14\\).</p><p><strong>Minst cirka 4,2 liter färg.</strong></p>",
-    "familj": "r2_y_wall_paint"
+    "niva": "A",
+    "poang": "0/0/3",
+    "t": "<p>Efterfrågan på en produkt modelleras med \\(q=600-kp\\), där \\(p\\) är priset i kronor och \\(k&gt;0\\) är en konstant. Den rörliga kostnaden är 40 kr per enhet och de fasta kostnaderna är 12 000 kr.</p><p>Företaget vet att den maximala vinsten uppnås när priset är 140 kr.</p><p>Bestäm \\(k\\) och den maximala vinsten.</p>",
+    "s": "<p>Vinsten är intäkt minus kostnad:</p><p>\\(V(p)=p(600-kp)-[12000+40(600-kp)]\\).</p><p>Förenkla:</p><p>\\(V(p)=-kp^2+(600+40k)p-36000\\).</p><p>Parabelns symmetrilinje är</p><p>\\(p=\\frac{600+40k}{2k}\\).</p><p>Maximal vinst fås vid \\(p=140\\), alltså</p><p>\\(\\frac{600+40k}{2k}=140\\Rightarrow600+40k=280k\\Rightarrow k=2,5\\).</p><p>Vid priset 140 blir efterfrågan \\(q=600-2,5\\cdot140=250\\).</p><p>Vinsten blir \\((140-40)\\cdot250-12000=13000\\).</p><p><strong>\\(k=2,5\\) och maximal vinst är 13 000 kr.</strong></p>",
+    "familj": "ekonomi_parameter_optimal_prissattning_A"
   },
   {
     "id": "5.26",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>En lastbil får lasta högst 1 600 kg. Varje pall väger 85 kg och föraren med utrustning räknas som 120 kg av lastkapaciteten.</p><p>Hur många hela pallar kan lastas?</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>Kvar för pallar: \\(1600-120=1480\\) kg.</p><p>\\(1480/85\\approx17,41\\).</p><p><strong>Högst 17 hela pallar.</strong></p>",
-    "familj": "r2_y_logistics_capacity"
+    "t": "<p>En regressionsanalys av fem datapunkter ger stark positiv korrelation. En sjätte punkt ligger långt från de övriga.</p><span class=\"fig smal\"><svg width=\"440\" height=\"290\" viewBox=\"0 0 440 290\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"438\" height=\"288\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.0\" y1=\"252.0\" x2=\"48.0\" y2=\"20.0\" stroke=\"#ECECEF\"/><line x1=\"100.9\" y1=\"252.0\" x2=\"100.9\" y2=\"20.0\" stroke=\"#ECECEF\"/><line x1=\"153.7\" y1=\"252.0\" x2=\"153.7\" y2=\"20.0\" stroke=\"#ECECEF\"/><line x1=\"206.6\" y1=\"252.0\" x2=\"206.6\" y2=\"20.0\" stroke=\"#ECECEF\"/><line x1=\"259.4\" y1=\"252.0\" x2=\"259.4\" y2=\"20.0\" stroke=\"#ECECEF\"/><line x1=\"312.3\" y1=\"252.0\" x2=\"312.3\" y2=\"20.0\" stroke=\"#ECECEF\"/><line x1=\"365.1\" y1=\"252.0\" x2=\"365.1\" y2=\"20.0\" stroke=\"#ECECEF\"/><line x1=\"418.0\" y1=\"252.0\" x2=\"418.0\" y2=\"20.0\" stroke=\"#ECECEF\"/><line x1=\"48.0\" y1=\"252.0\" x2=\"418.0\" y2=\"252.0\" stroke=\"#ECECEF\"/><line x1=\"48.0\" y1=\"226.2\" x2=\"418.0\" y2=\"226.2\" stroke=\"#ECECEF\"/><line x1=\"48.0\" y1=\"200.4\" x2=\"418.0\" y2=\"200.4\" stroke=\"#ECECEF\"/><line x1=\"48.0\" y1=\"174.7\" x2=\"418.0\" y2=\"174.7\" stroke=\"#ECECEF\"/><line x1=\"48.0\" y1=\"148.9\" x2=\"418.0\" y2=\"148.9\" stroke=\"#ECECEF\"/><line x1=\"48.0\" y1=\"123.1\" x2=\"418.0\" y2=\"123.1\" stroke=\"#ECECEF\"/><line x1=\"48.0\" y1=\"97.3\" x2=\"418.0\" y2=\"97.3\" stroke=\"#ECECEF\"/><line x1=\"48.0\" y1=\"71.6\" x2=\"418.0\" y2=\"71.6\" stroke=\"#ECECEF\"/><line x1=\"48.0\" y1=\"45.8\" x2=\"418.0\" y2=\"45.8\" stroke=\"#ECECEF\"/><line x1=\"48.0\" y1=\"20.0\" x2=\"418.0\" y2=\"20.0\" stroke=\"#ECECEF\"/><line x1=\"48.0\" y1=\"252.0\" x2=\"418.0\" y2=\"252.0\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"48.0\" y1=\"252.0\" x2=\"48.0\" y2=\"20.0\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"100.9\" cy=\"200.4\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"153.7\" cy=\"174.7\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"206.6\" cy=\"148.9\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"259.4\" cy=\"123.1\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"312.3\" cy=\"97.3\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"365.1\" cy=\"226.2\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"371.1\" y=\"219.2\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">P</text></svg></span><p>Förklara varför det är olämpligt att bara rapportera korrelationskoefficienten utan att visa diagrammet.</p>",
+    "s": "<p>En korrelationskoefficient sammanfattar bara det linjära sambandet med ett tal.</p><p>Den avvikande punkten kan få stort inflytande på \\(r\\), och diagrammet visar struktur som talet döljer.</p><p><strong>Diagrammet behövs för att upptäcka avvikare och bedöma om ett linjärt samband över huvud taget är rimligt.</strong></p>",
+    "familj": "ekonomi_korrelation_avvikare_A"
   },
   {
     "id": "5.27",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
     "niva": "C",
-    "poang": "0/3/0",
-    "t": "<p>En leverantör tar 1 250 kr i fast avgift och 38 kr per enhet. En annan tar 650 kr i fast avgift och 46 kr per enhet.</p><p>Från och med hur många hela enheter är den första leverantören billigare?</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>\\(1250+38x&lt;650+46x\\).</p><p>\\(600&lt;8x\\Rightarrow x&gt;75\\).</p><p>För heltal blir första värdet 76.</p><p><strong>Från 76 enheter.</strong></p>",
-    "familj": "r2_y_suppliers"
+    "poang": "0/2/0",
+    "t": "<p>En normalfördelad månadsvinst har medelvärdet 240 000 kr och standardavvikelsen 35 000 kr. Företaget vill sätta en budgetgräns så att endast 5 % av månaderna ligger under gränsen.</p><p>Bestäm gränsen med GeoGebra.</p>",
+    "s": "<p><strong>GeoGebra:</strong> använd <code>InverseNormal(240000,35000,0.05)</code>.</p><p>Gränsen blir cirka 182 400 kr.</p><p><strong>En lämplig 5-procentsgräns är ungefär 182 000 kr.</strong></p>",
+    "familj": "ekonomi_normal_5procent_A"
   },
   {
     "id": "5.28",
     "kap": 5,
-    "omr": "verktyg_arbetslivet",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
     "niva": "C",
     "poang": "0/3/0",
-    "t": "<p>Ett kalkylblad visar kostnaden med formeln <code>=B2*C2</code>. När formeln kopieras nedåt ska priset i cell C2 vara samma för alla rader, medan antalet i kolumn B ska ändras.</p><p>Hur bör cellreferensen till priset skrivas?</p>",
-    "s": "<p>Tolka först vad cellreferenserna eller formeln betyder matematiskt och kontrollera sedan beräkningen.</p><p>Priset ska låsas med absolut referens.</p><p><strong><code>=B2*$C$2</code></strong></p>",
-    "familj": "r2_y_absolute_reference"
+    "t": "<p>Vinsten modelleras med \\(V(x)=-3x^2+240x-2700\\). Företaget kan bara producera hela tiotal enheter och vill ha minst 1 500 kr i vinst.</p><p>Vilka produktionsnivåer är möjliga?</p>",
+    "s": "<p>Kravet ger \\(-3x^2+240x-2700\\ge1500\\).</p><p>Dela med −3 och vänd olikheten:</p><p>\\(x^2-80x+1400\\le0\\).</p><p>Pq-formeln ger \\(x=40\\pm10\\sqrt2\\approx25,9\\) och \\(54,1\\).</p><p>Hela tiotal i intervallet är 30, 40 och 50.</p><p><strong>Möjliga nivåer är 30, 40 eller 50 enheter.</strong></p>",
+    "familj": "ekonomi_vinst_heltal_A"
   },
   {
     "id": "5.29",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Ett recept för 24 portioner använder 3,6 kg potatis och 1,8 liter sås. Till ett evenemang behövs 70 portioner.</p><p>Beräkna mängderna och avrunda uppåt till närmaste 0,1 kg respektive 0,1 liter.</p>",
-    "s": "<p>Skalfaktorn är \\(70/24\\approx2,9167\\).</p><p>Potatis: \\(3,6\\cdot70/24=10,5\\) kg.</p><p>Sås: \\(1,8\\cdot70/24=5,25\\) liter, avrundat uppåt 5,3 liter.</p><p><strong>10,5 kg potatis och 5,3 liter sås.</strong></p>",
-    "familj": "r2_y_catering_scale"
+    "niva": "A",
+    "poang": "0/0/3",
+    "t": "<p>Två investeringar modelleras med \\(A(t)=80\\,000\\cdot1,055^t\\) och \\(B(t)=105\\,000+3\\,000t\\).</p><p>Bestäm med GeoGebra när investering A första gången blir mer värd än B. Diskutera också en begränsning med jämförelsen.</p>",
+    "s": "<p><strong>GeoGebra:</strong> skriv båda funktionerna och använd skärningspunkten i grafvyn, eller <code>NLös(80000*1.055^t=105000+3000t)</code>.</p><p>Den relevanta positiva skärningen ligger vid \\(t\\approx9,61\\).</p><p><strong>A blir mer värd än B strax efter 9,61 år.</strong></p><p>Jämförelsen bygger på att samma ränta respektive linjära ökning fortsätter under hela perioden. Det antagandet kan vara osäkert.</p>",
+    "familj": "ekonomi_jamfor_investeringar_A"
   },
   {
     "id": "5.30",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "ekonomiprogrammet",
     "kurs": [
-      "2a"
+      "2b"
     ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>Ett golv kräver minst 74 m² material. Paket A täcker 2,0 m² och kostar 500 kr. Paket B täcker 3,0 m² och kostar 780 kr. Det finns högst 19 paket A i lager.</p><p>Bestäm den billigaste kombinationen av hela paket som täcker minst 74 m².</p>",
-    "s": "<p>19 paket A täcker 38 m². Då behövs 36 m² till, alltså 12 paket B. Det täcker exakt 74 m² och kostar \\(19\\cdot500+12\\cdot780=18\\,860\\) kr.</p><p>För att visa att detta är billigast räcker det att jämföra de andra möjliga restfallen. 18 A kräver 13 B och kostar 19 140 kr. 17 A kräver 14 B och kostar 19 420 kr. 16 A kräver 14 B och kostar 18 920 kr.</p><p>Om antalet A därefter minskas med 3 måste två extra B läggas till för att ersätta samma 6 m². Kostnaden ändras då med \\(2\\cdot780-3\\cdot500=60\\) kr uppåt. Därför kan inget lägre antal A bli billigare.</p><p><strong>Billigast är 19 paket A och 12 paket B, totalt 18 860 kr.</strong></p>",
-    "familj": "r2_A_yrke_heltalspaket_minimikostnad"
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Ett företag har två produktgrupper. Totalt säljs 600 enheter. Grupp A ger 80 kr i täckningsbidrag per enhet och grupp B 120 kr. Totalt täckningsbidrag är 60 000 kr.</p><p>Företaget påstår att minst hälften av försäljningen måste vara grupp B. Undersök påståendet.</p>",
+    "s": "<p>Låt \\(x\\) vara antal A och \\(y\\) antal B.</p><p>\\(x+y=600\\)</p><p>\\(80x+120y=60000\\).</p><p>Dividera med 40: \\(2x+3y=1500\\).</p><p>Sätt \\(x=600-y\\): \\(1200-2y+3y=1500\\Rightarrow y=300\\).</p><p><strong>Exakt hälften är grupp B. Påståendet ”minst hälften” är alltså sant, men här blir andelen precis 50 %.</strong></p>",
+    "familj": "ekonomi_system_granska_pastaende_A"
   },
   {
     "id": "5.31",
     "kap": 5,
-    "omr": "verktyg_arbetslivet",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>En verkstad mäter diametern på 500 delar. Medelvärdet är 20,04 mm och standardavvikelsen 0,03 mm. Godkänt intervall är 19,95–20,05 mm.</p><p>En kollega säger: ”Standardavvikelsen är liten, så nästan alla delar måste vara godkända.”</p><p>Bedöm påståendet. Förklara vilken ytterligare information som behövs för att uppskatta andelen godkända och varför toleransintervallets läge är viktigt.</p>",
-    "s": "<p>Standardavvikelsen beskriver spridningen men räcker inte ensam för att bestämma hur stor andel som ligger i ett visst intervall.</p><p>Man behöver bland annat veta hur fördelningen ser ut, till exempel om en normalfördelning är rimlig.</p><p>Dessutom ligger medelvärdet 20,04 nära den övre toleransgränsen 20,05. Intervallet är därför starkt osymmetriskt kring medelvärdet.</p><p><strong>Påståendet är inte tillräckligt underbyggt utan information om fördelningen och en analys av toleransgränserna.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Välj vänstersvans, högersvans eller intervall beroende på frågan och skriv in gränsvärdet/gränsvärdena. Sannolikheten visas direkt. För en vänstersannolikhet kan du också skriva <code>Normalfördelning(μ, σ, x)</code>.</p>",
-    "familj": "r2_A_yrke_kvalitet_modellkritik"
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>På två avdelningar arbetar sammanlagt 32 personer. På avdelning A arbetar 6 fler än på avdelning B.</p><p>Bestäm hur många som arbetar på varje avdelning.</p>",
+    "s": "<p>Låt \\(x\\) vara antal på A och \\(y\\) antal på B.</p><p>\\(x+y=32\\), \\(x-y=6\\).</p><p>Addition ger \\(2x=38\\Rightarrow x=19\\).</p><p><strong>19 på A och 13 på B.</strong></p>",
+    "familj": "vard_system_personal"
   },
   {
     "id": "5.32",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>En verkstad köper 6,0 m långa metallstänger. Till en beställning behövs 11 bitar som är 2,0 m och 10 bitar som är 1,5 m. Bortse från sågspill.</p><p>Bestäm minsta möjliga antal stänger och ge ett kapningsförslag som visar att antalet räcker.</p>",
-    "s": "<p>Den totala längden är \\(11\\cdot2,0+10\\cdot1,5=37\\) m.</p><p>Sex stänger ger bara 36 m, så minst 7 stänger krävs.</p><p>Ett kapningsförslag med 7 stänger är:</p><p>3 stänger: tre 2,0 m-bitar på varje → 9 långa bitar.</p><p>1 stång: två 2,0 m-bitar + en 1,5 m-bit → de sista 2 långa och 1 kort.</p><p>3 stänger: tre 1,5 m-bitar på varje → 9 korta bitar.</p><p>Totalt blir det 11 långa och 10 korta bitar.</p><p><strong>Minsta antal är 7 stänger.</strong></p>",
-    "familj": "r2_A_yrke_kapoptimering_bevis"
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Antalet besök i en verksamhet modelleras under en dag med \\(B(t)=18t+42\\), där \\(t\\) är antal timmar efter öppning.</p><p>Tolka 18 och 42.</p>",
+    "s": "<p>42 är modellens startvärde vid \\(t=0\\).</p><p>18 betyder att modellen ökar med 18 besök per timme.</p>",
+    "familj": "vard_linjar_modell_tolkning"
   },
   {
     "id": "5.33",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En verkstad debiterar 450 kr i startavgift och 320 kr per arbetstimme.</p><p>a) Skriv en kostnadsmodell.<br>b) Bestäm kostnaden för 3 timmar.</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>\\(K(t)=450+320t\\).</p><p>\\(K(3)=1410\\).</p><p><strong>Modell: \\(450+320t\\). Kostnad 1 410 kr.</strong></p>",
-    "familj": "r3_voc_workshop_1"
+    "t": "<p>En simulerad mätstorhet avtar enligt \\(M(t)=160\\cdot0,86^t\\).</p><p>Efter hur många timmar har värdet sjunkit under 80? Använd GeoGebra.</p>",
+    "s": "<p><strong>GeoGebra:</strong> skriv <code>NLös(160*0.86^t=80)</code>.</p><p>Gränsen fås vid \\(t\\approx4,60\\).</p><p><strong>Efter ungefär 4,6 timmar, alltså efter 5 hela timmar om man räknar hela timmar.</strong></p>",
+    "familj": "vard_exponential_grans"
   },
   {
     "id": "5.34",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En plåtskiva är rektangulär med måtten 2,4 m och 1,8 m.</p><p>a) Bestäm arean.<br>b) Hur många sådana skivor behövs för att täcka 17,3 m² om inget spill räknas?</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>Area \\(=2,4\\cdot1,8=4,32\\).</p><p>\\(17,3/4,32\\approx4,0\\), så minst 5 skivor behövs.</p><p><strong>4,32 m² och 5 skivor.</strong></p>",
-    "familj": "r3_voc_sheet_area_1"
+    "t": "<p>En sensor följer potensmodellen \\(S(x)=3x^2\\).</p><p>Bestäm \\(S(4)\\) och det positiva \\(x\\)-värde som ger \\(S(x)=75\\).</p>",
+    "s": "<p>\\(S(4)=3\\cdot16=48\\).</p><p>\\(3x^2=75\\Rightarrow x^2=25\\).</p><p>Det positiva värdet är \\(x=5\\).</p><p><strong>\\(S(4)=48\\), \\(x=5\\).</strong></p>",
+    "familj": "vard_potensfunktion_sensor"
   },
   {
     "id": "5.35",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En maskin minskar sitt energibehov med 12 % efter en justering. Förbrukningen var 250 kWh per vecka. Bestäm den nya förbrukningen.</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>\\(250\\cdot0,88=220\\).</p><p><strong>220 kWh per vecka.</strong></p>",
-    "familj": "r3_voc_percent_energy_1"
+    "t": "<p>Lös potensekvationen \\((x-1)^3=125\\).</p>",
+    "s": "<p>Ta kubikroten:</p><p>\\(x-1=5\\).</p><p><strong>\\(x=6\\).</strong></p>",
+    "familj": "vard_potensekvation"
   },
   {
     "id": "5.36",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En lastpall väger 18 kg och varje kartong på pallen väger 7,5 kg. Skriv ett uttryck för pallens totala vikt med \\(x\\) kartonger.</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p><strong>\\(V(x)=18+7,5x\\).</strong></p>",
-    "familj": "r3_voc_pallet_1"
+    "t": "<p>En aktivitetsyta har arean \\(A(x)=-x^2+12x\\).</p><p>Bestäm den största möjliga arean.</p>",
+    "s": "<p>\\(A(x)=-(x-6)^2+36\\).</p><p><strong>Största möjliga area är 36 areaenheter.</strong></p>",
+    "familj": "vard_andragrad_maxarea"
   },
   {
     "id": "5.37",
     "kap": 5,
-    "omr": "verktyg_arbetslivet",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Ett kalkylblad innehåller formeln <code>=B2*1,25</code>. Cell B2 innehåller 640. Vilket värde räknar kalkylbladet ut?</p>",
-    "s": "<p>Tolka först vad cellreferenserna eller formeln betyder matematiskt och kontrollera sedan beräkningen.</p><p>\\(640\\cdot1,25=800\\).</p><p><strong>800.</strong></p>",
-    "familj": "r3_voc_spreadsheet_1"
+    "t": "<p>En rektangulär träningsmatta har arean 60 m². Längden är 7 m större än bredden.</p><p>Bestäm måtten.</p>",
+    "s": "<p>Låt bredden vara \\(x\\). Då är längden \\(x+7\\).</p><p>\\(x(x+7)=60\\Rightarrow x^2+7x-60=0\\).</p><p>Med pq-formeln: \\(x=-3,5\\pm\\sqrt{12,25+60}=-3,5\\pm8,5\\).</p><p><strong>Måtten är 5 m × 12 m.</strong></p>",
+    "familj": "vard_andragrad_rektangel"
   },
   {
     "id": "5.38",
     "kap": 5,
-    "omr": "verktyg_arbetslivet",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>En budgetpost höjs från 8 000 kr till 8 600 kr. Med hur många procent höjs den?</p>",
-    "s": "<p>Tolka först vad cellreferenserna eller formeln betyder matematiskt och kontrollera sedan beräkningen.</p><p>Ökningen är 600 kr. \\(600/8000=0,075\\).</p><p><strong>7,5 %.</strong></p>",
-    "familj": "r3_voc_budget_percent_1"
+    "poang": "2/0/0",
+    "t": "<p>En normalfördelad mätserie har medelvärdet 70 och standardavvikelsen 5.</p><p>Mellan vilka värden ligger ungefär 95,4 % av observationerna?</p>",
+    "s": "<p>95,4 % ligger ungefär inom två standardavvikelser:</p><p>\\(70\\pm2\\cdot5\\).</p><p><strong>Mellan 60 och 80.</strong></p><p><strong>GeoGebra:</strong> kontrollera i Sannolikhetskalkylatorn med \\(\\mu=70\\), \\(\\sigma=5\\) och intervallet 60–80.</p>",
+    "familj": "vard_normal_95"
   },
   {
     "id": "5.39",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>En färgburk räcker till 6 m². Hur många burkar behövs för att måla 31 m²?</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>\\(31/6\\approx5,17\\), alltså behövs 6 burkar.</p><p><strong>6 burkar.</strong></p>",
-    "familj": "r3_voc_paint_1"
+    "poang": "2/0/0",
+    "t": "<p>En normalfördelad reaktionstid har medelvärdet 420 ms och standardavvikelsen 35 ms.</p><p>Bestäm med GeoGebra sannolikheten att en observation är mindre än 385 ms.</p>",
+    "s": "<p><strong>GeoGebra:</strong> välj Normal i Sannolikhetskalkylatorn, sätt \\(\\mu=420\\), \\(\\sigma=35\\), välj vänstersvans och gränsen 385.</p><p>Sannolikheten är cirka 0,159.</p><p><strong>Cirka 15,9 %.</strong></p>",
+    "familj": "vard_normal_vanstersvans"
   },
   {
     "id": "5.40",
     "kap": 5,
-    "omr": "verktyg_arbetslivet",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Ett digitalt verktyg visar att en maskin varit igång 2,75 timmar. Hur många minuter är det?</p>",
-    "s": "<p>Tolka först vad cellreferenserna eller formeln betyder matematiskt och kontrollera sedan beräkningen.</p><p>\\(2,75\\cdot60=165\\).</p><p><strong>165 minuter.</strong></p><p><strong>GeoGebra:</strong> Använd det digitala verktyget i GeoGebra och kontrollera resultatet mot grafen eller den matematiska modellen.</p>",
-    "familj": "r3_voc_time_1"
+    "poang": "2/0/0",
+    "t": "<p>En normalfördelad mätserie har medelvärdet 50 och standardavvikelsen 8.</p><p>Bestäm den 75:e percentilen med GeoGebra.</p>",
+    "s": "<p><strong>GeoGebra:</strong> använd <code>InverseNormal(50,8,0.75)</code> eller Sannolikhetskalkylatorn.</p><p>Resultatet blir cirka 55,4.</p><p><strong>75:e percentilen är ungefär 55,4.</strong></p>",
+    "familj": "vard_normal_percentil"
   },
   {
     "id": "5.41",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
-    "niva": "C",
-    "poang": "0/3/0",
-    "t": "<p>Ett företag har fasta kostnader på 18 000 kr per månad och rörliga kostnader på 145 kr per produkt.</p><p>a) Skriv en kostnadsfunktion.<br>b) Hur många produkter kan tillverkas om kostnaden högst får vara 54 250 kr?</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>\\(K(x)=18000+145x\\).</p><p>\\(18000+145x\\le54250\\Rightarrow145x\\le36250\\Rightarrow x\\le250\\).</p><p><strong>a) \\(K(x)=18000+145x\\). b) Högst 250 produkter.</strong></p>",
-    "familj": "r3_voc_cost_limit_1"
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Två mätserier har samma medelvärde. Serie A har standardavvikelsen 3,2 och serie B 8,7.</p><p>Vilken serie har störst spridning?</p>",
+    "s": "<p>Större standardavvikelse betyder större spridning kring medelvärdet.</p><p><strong>Serie B har störst spridning.</strong></p>",
+    "familj": "vard_standardavvikelse_tolkning"
   },
   {
     "id": "5.42",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>En behållare är 2,5 m lång, 1,2 m bred och 0,8 m hög. Den fylls till 75 %. Bestäm volymen vätska i liter.</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>Total volym är \\(2,5\\cdot1,2\\cdot0,8=2,4\\) m³.</p><p>75 % ger \\(1,8\\) m³, alltså 1 800 liter.</p><p><strong>1 800 liter.</strong></p>",
-    "familj": "r3_voc_volume_1"
+    "t": "<p>Ett rektangulärt rum är 7,0 m långt och 4,5 m brett.</p><span class=\"fig smal\"><svg width=\"420\" height=\"280\" viewBox=\"0 0 420 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"418\" height=\"278\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"70\" y=\"45\" width=\"280\" height=\"180\" fill=\"#FAFAFB\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"70\" y1=\"225\" x2=\"350\" y2=\"45\" stroke=\"#B43123\" stroke-width=\"2.5\" stroke-dasharray=\"6 4\"/><text x=\"188\" y=\"148\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">diagonal</text><text x=\"190\" y=\"248\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">7,0 m</text><text x=\"357\" y=\"140\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">4,5 m</text></svg></span><p>Bestäm rummets diagonal.</p>",
+    "s": "<p>Med Pythagoras:</p><p>\\(d=\\sqrt{7,0^2+4,5^2}=\\sqrt{69,25}\\approx8,32\\).</p><p><strong>Diagonalen är cirka 8,3 m.</strong></p>",
+    "familj": "vard_pythagoras_rum"
   },
   {
     "id": "5.43",
     "kap": 5,
-    "omr": "verktyg_arbetslivet",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>I ett kalkylblad ska priset utan moms beräknas om till pris med 25 % moms. Förklara varför formeln <code>=A2+0,25</code> är fel och skriv en korrekt formel.</p>",
-    "s": "<p>Formeln lägger bara till 0,25 kr. Man måste multiplicera priset med 1,25.</p><p><strong>En korrekt formel är <code>=A2*1,25</code>.</strong></p>",
-    "familj": "r3_voc_formula_explain_1"
+    "t": "<p>Två personalkategorier arbetar ett kvällspass. Totalt arbetar 14 personer i 96 timmar. Grupp A arbetar 8 timmar per person och grupp B 6 timmar per person.</p><p>Hur många personer finns i varje grupp?</p>",
+    "s": "<p>Låt \\(x\\) vara antal i A och \\(y\\) antal i B.</p><p>\\(x+y=14\\)</p><p>\\(8x+6y=96\\).</p><p>Subtrahera \\(6(x+y)=84\\): \\(2x=12\\Rightarrow x=6\\).</p><p><strong>6 personer i A och 8 i B.</strong></p>",
+    "familj": "vard_system_personaltimmar"
   },
   {
     "id": "5.44",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>En maskin tappar 8 % i värde per år. Värdet idag är 120 000 kr. Efter hur många år har värdet sjunkit under 80 000 kr?</p>",
-    "s": "<p>Modell: \\(V(t)=120000\\cdot0,92^t\\).</p><p>Vi söker \\(120000\\cdot0,92^t&lt;80000\\Rightarrow0,92^t&lt;2/3\\).</p><p>Det ger \\(t\\approx4,87\\).</p><p><strong>Efter 5 år.</strong></p>",
-    "familj": "r3_voc_depreciation_1"
+    "t": "<p>En rektangulär aktivitetsyta ska ha omkretsen 28 m. Bestäm de mått som ger största möjliga area.</p>",
+    "s": "<p>Låt ena sidan vara \\(x\\). Den andra är \\(14-x\\).</p><p>\\(A(x)=x(14-x)=-x^2+14x\\).</p><p>Parabelns topp ligger vid \\(x=7\\).</p><p><strong>Största area fås för 7 m × 7 m.</strong></p>",
+    "familj": "vard_optimering_aktivitet"
   },
   {
     "id": "5.45",
     "kap": 5,
-    "omr": "verktyg_arbetslivet",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>En digital mätare visar 14,8 A vid 230 V.</p><p>a) Bestäm effekten.<br>b) Avgör om säkringen 10 A räcker.</p>",
-    "s": "<p>Tolka först vad cellreferenserna eller formeln betyder matematiskt och kontrollera sedan beräkningen.</p><p>\\(P=UI=230\\cdot14,8=3404\\) W.</p><p>Strömmen 14,8 A är större än 10 A.</p><p><strong>a) 3 404 W. b) Nej, säkringen räcker inte.</strong></p>",
-    "familj": "r3_voc_power_1"
+    "t": "<p>En simulerad mätstorhet är 120 vid \\(t=0\\) och 87 vid \\(t=3\\). Anta exponentiell utveckling.</p><p>Bestäm en modell.</p>",
+    "s": "<p>Skriv \\(M(t)=120a^t\\).</p><p>\\(87=120a^3\\Rightarrow a^3=0,725\\).</p><p>\\(a\\approx0,898\\).</p><p><strong>En modell är \\(M(t)=120\\cdot0,898^t\\).</strong></p>",
+    "familj": "vard_exponentialmodell_tva_tidpunkter"
   },
   {
     "id": "5.46",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "C",
-    "poang": "0/3/0",
-    "t": "<p>Två leverantörer säljer samma typ av markskiva. Leverantör A tar 1 800 kr i frakt och 145 kr per skiva. Leverantör B tar 600 kr i frakt och 165 kr per skiva. För hur många skivor blir A billigare än B?</p>",
-    "s": "<p>Jämför \\(1800+145x&lt;600+165x\\).</p><p>\\(1200&lt;20x\\Rightarrow x&gt;60\\).</p><p><strong>Leverantör A blir billigare när man köper fler än 60 skivor.</strong></p>",
-    "familj": "r3_voc_compare_suppliers_1"
+    "poang": "0/2/0",
+    "t": "<p>En potensfunktion \\(y=ax^n\\) går genom punkterna \\((2,20)\\) och \\((6,180)\\).</p><p>Bestäm funktionen.</p>",
+    "s": "<p>\\(20=a2^n\\), \\(180=a6^n\\).</p><p>Dividera: \\(9=3^n\\Rightarrow n=2\\).</p><p>\\(20=4a\\Rightarrow a=5\\).</p><p><strong>\\(y=5x^2\\).</strong></p>",
+    "familj": "vard_potensmodell_tva_punkter"
   },
   {
     "id": "5.47",
     "kap": 5,
-    "omr": "verktyg_arbetslivet",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "C",
-    "poang": "0/3/0",
-    "t": "<p>Ett kalkylblad ska ge slutpriset efter rabatt och därefter moms. En elev använder formeln <code>=A2*(1-0,15+0,25)</code>. Förklara varför formeln är fel och skriv en korrekt formel om rabatt ska dras först och moms sedan läggas på.</p>",
-    "s": "<p>Rabatt och moms ska inte slås ihop till en enda procentuell förändring på det sättet. Först ska priset multipliceras med 0,85 och därefter med 1,25.</p><p><strong>Korrekt formel är <code>=A2*0,85*1,25</code>.</strong></p>",
-    "familj": "r3_voc_discount_tax_1"
+    "poang": "0/2/0",
+    "t": "<p>En normalfördelad mätvariabel har medelvärdet 72. Det är känt att 90 % av värdena ligger under 82.</p><p>Bestäm standardavvikelsen med GeoGebra.</p>",
+    "s": "<p><strong>GeoGebra:</strong> skriv <code>NLös(Normalfördelning(72,s,82)=0.90,s)</code>.</p><p>Resultatet blir \\(s\\approx7,80\\).</p><p><strong>Standardavvikelsen är cirka 7,8.</strong></p>",
+    "familj": "vard_normal_okand_sigma"
   },
   {
     "id": "5.48",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>En rektangulär informationsskylt ska ha arean 1,5 m². Höjden ska vara 0,5 m kortare än bredden.</p><p>Bestäm skyltens bredd och höjd.</p>",
-    "s": "<p>Låt bredden vara \\(x\\) meter. Då är höjden \\(x-0,5\\).</p><p>\\(x(x-0,5)=1,5\\Rightarrow x^2-0,5x-1,5=0\\).</p><p>Rötterna är \\(x=1,5\\) och \\(x=-1\\). Den negativa förkastas.</p><p><strong>Bredden är 1,5 m och höjden 1,0 m.</strong></p>",
-    "familj": "reviderad_yrke_andragrad_skylt"
+    "t": "<p>En normalfördelad mätvariabel har standardavvikelsen 6. 5 % av värdena ligger över 84.</p><p>Bestäm medelvärdet med GeoGebra.</p>",
+    "s": "<p>84 är den 95:e percentilen.</p><p><strong>GeoGebra:</strong> skriv <code>NLös(Normalfördelning(m,6,84)=0.95,m)</code>.</p><p>Resultatet är \\(m\\approx74,1\\).</p><p><strong>Medelvärdet är cirka 74,1.</strong></p>",
+    "familj": "vard_normal_okant_medel"
   },
   {
-    "id": "5.049",
+    "id": "5.49",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>En ritning är i skala 1:50. En längd är 84 mm på ritningen. Hur lång är den i verkligheten?</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>\\(84\\cdot50=4200\\) mm = 4,2 m.</p><p><strong>4,2 m.</strong></p>",
-    "familj": "gap_voc_1"
-  },
-  {
-    "id": "5.050",
-    "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>En beställning kräver 36 m kabel. Lägg till 8 % spill. Hur mycket bör beställas?</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>\\(36\\cdot1,08=38,88\\).</p><p><strong>38,9 m.</strong></p>",
-    "familj": "gap_voc_2"
-  },
-  {
-    "id": "5.051",
-    "kap": 5,
-    "omr": "verktyg_arbetslivet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>I ett kalkylblad står priset i B2 och antalet i C2. Skriv formeln för totalsumman.</p>",
-    "s": "<p>Tolka först vad cellreferenserna eller formeln betyder matematiskt och kontrollera sedan beräkningen.</p><p><strong><code>=B2*C2</code></strong></p>",
-    "familj": "gap_voc_3"
-  },
-  {
-    "id": "5.052",
-    "kap": 5,
-    "omr": "verktyg_arbetslivet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Cell A2 innehåller 250. Vad ger formeln <code>=A2*0,8</code>?</p>",
-    "s": "<p>Tolka först vad cellreferenserna eller formeln betyder matematiskt och kontrollera sedan beräkningen.</p><p><strong>200.</strong></p>",
-    "familj": "gap_voc_4"
-  },
-  {
-    "id": "5.053",
-    "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>En vägg är 5,4 m bred och 2,6 m hög. Ett fönster är 1,4 m × 1,2 m. Bestäm ytan som ska målas.</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>\\(5,4\\cdot2,6-1,4\\cdot1,2=12,36\\).</p><p><strong>12,36 m².</strong></p>",
-    "familj": "gap_voc_5"
-  },
-  {
-    "id": "5.054",
-    "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>En maskin kostar 150 000 kr och tappar 10 % i värde per år. Bestäm värdet efter 4 år.</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>\\(150000\\cdot0,9^4\\approx98415\\).</p><p><strong>Cirka 98 400 kr.</strong></p>",
-    "familj": "gap_voc_6"
-  },
-  {
-    "id": "5.055",
-    "kap": 5,
-    "omr": "verktyg_arbetslivet",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>Ett kalkylblad ska alltid använda momssatsen i cell D1 när en formel kopieras nedåt. Hur skrivs referensen till D1?</p>",
-    "s": "<p>Tolka först vad cellreferenserna eller formeln betyder matematiskt och kontrollera sedan beräkningen.</p><p><strong><code>$D$1</code></strong></p>",
-    "familj": "gap_voc_7"
+    "t": "<p>Ett resultatmaterial har kvartilerna \\(Q_1=42\\), median 51 och \\(Q_3=63\\).</p><p>En elev säger: ”Minst 75 % av observationerna ligger mellan 42 och 63.” Bedöm påståendet.</p>",
+    "s": "<p>Intervallet från \\(Q_1\\) till \\(Q_3\\) innehåller de mittersta 50 % av observationerna.</p><p><strong>Påståendet är fel; ungefär 50 %, inte minst 75 %, ligger mellan kvartilerna.</strong></p>",
+    "familj": "vard_kvartil_resonemang"
   },
   {
-    "id": "5.056",
+    "id": "5.50",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>Två leverantörer tar \\(K_A=900+45x\\) och \\(K_B=1500+37x\\). Vid vilket antal enheter är kostnaden lika?</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>\\(900+45x=1500+37x\\Rightarrow8x=600\\Rightarrow x=75\\).</p><p><strong>75 enheter.</strong></p>",
-    "familj": "gap_voc_8"
+    "t": "<p>I ett koordinatsystem ligger två stationer i punkterna \\(A(1,2)\\) och \\(B(9,8)\\).</p><p>Bestäm mittpunkten och avståndet mellan stationerna.</p>",
+    "s": "<p>Mittpunkten är \\(M((1+9)/2,(2+8)/2)=(5,5)\\).</p><p>Avståndet är \\(\\sqrt{(9-1)^2+(8-2)^2}=\\sqrt{100}=10\\).</p><p><strong>Mittpunkt \\((5,5)\\), avstånd 10.</strong></p>",
+    "familj": "vard_koordinater_mittpunkt_avstand"
   },
   {
-    "id": "5.057",
+    "id": "5.51",
     "kap": 5,
-    "omr": "yrkesspecifika_begrepp_metoder",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
-    ],
-    "niva": "A",
-    "poang": "0/0/2",
-    "t": "<p>Ett företag får 80 kr i intäkt per produkt. Kostnaden är \\(K(x)=4200+52x\\). Bestäm minsta heltalsantal produkter som ger vinst.</p>",
-    "s": "<p>Översätt situationen till en matematisk modell och håll reda på enheter genom hela beräkningen.</p><p>\\(80x&gt;4200+52x\\Rightarrow28x&gt;4200\\Rightarrow x&gt;150\\).</p><p><strong>Minst 151 produkter.</strong></p>",
-    "familj": "gap_voc_9"
-  },
-  {
-    "id": "5.058",
-    "kap": 5,
-    "omr": "verktyg_arbetslivet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "A",
-    "poang": "0/0/2",
-    "t": "<p>En rapport visar bara medelvärdet av fem mätningar. Förklara varför det kan vara otillräckligt för att bedöma stabiliteten i processen.</p>",
-    "s": "<p><strong>Medelvärdet säger inget om spridningen. Man behöver även information som standardavvikelse, variationsbredd eller själva mätvärdena.</strong></p>",
-    "familj": "gap_voc_10"
-  },
-  {
-    "id": "5.059",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Ett företag har en fast månadskostnad på 18 000 kr och en rörlig kostnad på 42 kr per såld enhet.</p><p>a) Skriv kostnadsfunktionen \\(K(x)\\).<br>b) Bestäm kostnaden för 650 enheter.</p>",
-    "s": "<p>Formulera först den matematiska modellen för kostnad, intäkt, förändring eller statistik innan du räknar vidare.</p><p>\\(K(x)=18000+42x\\).</p><p>\\(K(650)=18000+42\\cdot650=45\\,300\\).</p><p><strong>a) \\(K(x)=18000+42x\\). b) 45 300 kr.</strong></p>",
-    "familj": "program_ekonomi_kostnadsfunktion"
-  },
-  {
-    "id": "5.060",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Priset på en tjänst är 1 250 kr och höjs med 6 %.</p><p>Bestäm det nya priset.</p>",
-    "s": "<p>Formulera först den matematiska modellen för kostnad, intäkt, förändring eller statistik innan du räknar vidare.</p><p>\\(1250\\cdot1,06=1325\\).</p><p><strong>1 325 kr.</strong></p>",
-    "familj": "program_ekonomi_procent_pris"
-  },
-  {
-    "id": "5.061",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En investering på 20 000 kr ökar med 4,5 % per år.</p><p>a) Skriv en exponentialmodell.<br>b) Bestäm värdet efter 6 år.</p>",
-    "s": "<p>Formulera först den matematiska modellen för kostnad, intäkt, förändring eller statistik innan du räknar vidare.</p><p>\\(V(t)=20000\\cdot1,045^t\\).</p><p>\\(V(6)\\approx26\\,045\\).</p><p><strong>Modell: \\(20000\\cdot1,045^t\\). Efter 6 år cirka 26 000 kr.</strong></p>",
-    "familj": "program_ekonomi_investering_exponential"
-  },
-  {
-    "id": "5.062",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Ett företag säljer två abonnemang. Bas kostar 120 kr och Plus 180 kr. Under en dag säljs 50 abonnemang för totalt 7 200 kr.</p><p>Hur många av varje sort säljs?</p>",
-    "s": "<p>Formulera först den matematiska modellen för kostnad, intäkt, förändring eller statistik innan du räknar vidare.</p><p>\\(b+p=50\\), \\(120b+180p=7200\\).</p><p>Det ger \\(p=20\\) och \\(b=30\\).</p><p><strong>30 Bas och 20 Plus.</strong></p>",
-    "familj": "program_ekonomi_ekvationssystem_forsaljning"
-  },
-  {
-    "id": "5.063",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En regressionsmodell för månadens försäljning är \\(y=48x+1250\\), där \\(x\\) är antal kampanjdagar.</p><p>Vad betyder talen 48 och 1 250?</p>",
-    "s": "<p>Formulera först den matematiska modellen för kostnad, intäkt, förändring eller statistik innan du räknar vidare.</p><p><strong>48 är den beräknade ökningen per kampanjdag och 1 250 är modellens värde när \\(x=0\\).</strong></p>",
-    "familj": "program_ekonomi_regression_tolkning"
-  },
-  {
-    "id": "5.064",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Ett företags resultat under fem månader är 82, 91, 87, 95 och 100 tusen kronor.</p><p>Bestäm medelvärdet.</p>",
-    "s": "<p>Formulera först den matematiska modellen för kostnad, intäkt, förändring eller statistik innan du räknar vidare.</p><p>Summan är 455.</p><p><strong>Medelvärdet är 91 tusen kronor.</strong></p>",
-    "familj": "program_ekonomi_medelvarde"
-  },
-  {
-    "id": "5.065",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En butik har ett påslag som modelleras med \\(P(x)=1,30x\\), där \\(x\\) är inköpspriset.</p><p>Bestäm försäljningspriset när inköpspriset är 480 kr.</p>",
-    "s": "<p>Formulera först den matematiska modellen för kostnad, intäkt, förändring eller statistik innan du räknar vidare.</p><p>\\(P(480)=624\\).</p><p><strong>624 kr.</strong></p>",
-    "familj": "program_ekonomi_linjar_modell"
-  },
-  {
-    "id": "5.066",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>En vara tappar 18 % av sitt värde per år. Skriv förändringsfaktorn.</p>",
-    "s": "<p>Formulera först den matematiska modellen för kostnad, intäkt, förändring eller statistik innan du räknar vidare.</p><p><strong>Förändringsfaktorn är 0,82.</strong></p>",
-    "familj": "program_ekonomi_vardeminskning_faktor"
-  },
-  {
-    "id": "5.067",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En normalfördelad försäljning har medelvärdet 500 enheter och standardavvikelsen 40 enheter.</p><p>Mellan vilka värden ligger ungefär 68,2 % av månaderna?</p>",
-    "s": "<p>Formulera först den matematiska modellen för kostnad, intäkt, förändring eller statistik innan du räknar vidare.</p><p><strong>Mellan 460 och 540 enheter.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
-    "familj": "program_ekonomi_normalfordelning_68"
-  },
-  {
-    "id": "5.068",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Företag A har kostnaden \\(K_A(x)=12000+55x\\). Företag B har \\(K_B(x)=18000+43x\\).</p><p>Från och med hur många hela enheter är B billigare?</p>",
-    "s": "<p>Formulera först den matematiska modellen för kostnad, intäkt, förändring eller statistik innan du räknar vidare.</p><p>\\(18000+43x&lt;12000+55x\\Rightarrow6000&lt;12x\\Rightarrow x&gt;500\\).</p><p><strong>Från 501 enheter.</strong></p>",
-    "familj": "program_ekonomi_brytpunkt_kostnader"
-  },
-  {
-    "id": "5.069",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Intäkten för en produkt modelleras av \\(I(x)=-2x^2+240x\\), där \\(x\\) är antal sålda tiotal produkter.</p><p>Bestäm det värde på \\(x\\) som ger störst intäkt och den största intäkten.</p>",
-    "s": "<p>Parabelns topp ligger vid \\(x=-240/(2\\cdot-2)=60\\).</p><p>\\(I(60)=7200\\).</p><p><strong>Störst intäkt fås vid \\(x=60\\), och är 7 200 i modellens enhet.</strong></p>",
-    "familj": "program_ekonomi_andragrad_intakt"
-  },
-  {
-    "id": "5.070",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>En investering växer från 40 000 kr till 52 000 kr på fyra år. Anta exponentiell tillväxt.</p><p>Bestäm den årliga förändringsfaktorn.</p>",
-    "s": "<p>\\(40000a^4=52000\\Rightarrow a=(1,3)^{1/4}\\approx1,068\\).</p><p><strong>Förändringsfaktorn är cirka 1,068, alltså ungefär 6,8 % per år.</strong></p>",
-    "familj": "program_ekonomi_exponential_baklanges"
-  },
-  {
-    "id": "5.071",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Två butiker har samma genomsnittliga dagsförsäljning. Butik A har standardavvikelsen 4,5 och butik B 13,2.</p><p>Vad säger detta om försäljningen i de två butikerna?</p>",
-    "s": "<p>Formulera först den matematiska modellen för kostnad, intäkt, förändring eller statistik innan du räknar vidare.</p><p><strong>Butik A har jämnare dagsförsäljning. Butik B varierar betydligt mer kring samma medelvärde.</strong></p>",
-    "familj": "program_ekonomi_standardavvikelse_tolkning"
-  },
-  {
-    "id": "5.072",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
     ],
     "niva": "C",
     "poang": "0/3/0",
-    "t": "<p>En linjär regressionsmodell för ett företags omsättning bygger på data från de senaste 8 åren. En elev använder modellen för att uppskatta omsättningen om 35 år.</p><p>Förklara varför prognosen bör behandlas försiktigt.</p>",
-    "s": "<p><strong>35 år ligger långt utanför dataintervallet. Det är extrapolation, och den linjära utvecklingen behöver inte fortsätta så länge.</strong></p>",
-    "familj": "program_ekonomi_regression_extrapolation"
+    "t": "<p>En simulerad mätmodell \\(M(t)=100\\cdot0,93^t\\) passar väl under de första 8 timmarna. En elev använder den för att beräkna värdet efter 200 timmar.</p><p>Förklara varför resultatet bör behandlas försiktigt.</p>",
+    "s": "<p>Modellen är bara verifierad under ett kort tidsintervall.</p><p>Att använda den vid 200 timmar är en mycket lång extrapolation.</p><p><strong>Den matematiska beräkningen går att göra, men modellens antagande om samma procentuella förändring kan vara orimligt långt utanför mätområdet.</strong></p>",
+    "familj": "vard_modellkritik_extrapolation"
   },
   {
-    "id": "5.073",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>En produkt säljs för \\(p\\) kronor. Antalet sålda enheter modelleras som \\(600-2p\\).</p><p>Skriv en modell för intäkten och bestäm vilket pris som ger störst intäkt.</p>",
-    "s": "<p>Formulera först den matematiska modellen för kostnad, intäkt, förändring eller statistik innan du räknar vidare.</p><p>\\(I(p)=p(600-2p)=-2p^2+600p\\).</p><p>Toppunkten ligger vid \\(p=150\\).</p><p><strong>Priset 150 kr ger störst intäkt.</strong></p>",
-    "familj": "program_ekonomi_pris_efterfragan"
-  },
-  {
-    "id": "5.074",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "A",
-    "poang": "0/0/2",
-    "t": "<p>Ett företags vinst modelleras av \\(V(x)=-3x^2+270x-3600\\).</p><p>Bestäm för vilka värden på \\(x\\) vinsten är positiv och tolka svaret.</p>",
-    "s": "<p>\\(-3x^2+270x-3600&gt;0\\). Dividera med −3 och vänd olikheten: \\(x^2-90x+1200&lt;0\\).</p><p>Rötterna är \\(45\\pm5\\sqrt{33}\\approx16,3\\) och \\(73,7\\).</p><p><strong>Vinsten är positiv för ungefär \\(16,3&lt;x&lt;73,7\\). Om \\(x\\) måste vara heltal: 17–73.</strong></p>",
-    "familj": "program_ekonomi_vinst_intervall"
-  },
-  {
-    "id": "5.075",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>En exponentialmodell och en linjär modell ger nästan samma prognos för ett företags försäljning de närmaste två åren. Exponentialmodellen har något högre \\(R^2\\).</p><p>Förklara varför det ändå kan vara rimligt att välja den linjära modellen.</p>",
-    "s": "<p><strong>Ett högre \\(R^2\\) är inte ensamt avgörande. Man bör också väga in residualer, enkelhet, rimlighet i sammanhanget och hur modellen ska användas. En linjär modell kan vara mer stabil och rimlig för ett begränsat prognosintervall.</strong></p>",
-    "familj": "program_ekonomi_modellval_resonemang"
-  },
-  {
-    "id": "5.076",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>Ett företag har två produkter. Produkt A ger 80 kr i täckningsbidrag och produkt B 120 kr. Företaget kan tillverka högst 140 produkter och vill få minst 13 200 kr i täckningsbidrag.</p><p>Bestäm alla heltalskombinationer \\((a,b)\\) som uppfyller villkoren och har exakt 140 produkter.</p>",
-    "s": "<p>Villkoret \\(a+b=140\\). Dessutom \\(80a+120b\\ge13200\\).</p><p>Sätt \\(a=140-b\\): \\(11200+40b\\ge13200\\Rightarrow b\\ge50\\).</p><p><strong>Alla heltalskombinationer med \\(a+b=140\\) och \\(50\\le b\\le140\\) fungerar.</strong></p>",
-    "familj": "program_ekonomi_flera_villkor"
-  },
-  {
-    "id": "5.077",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>En vätskemängd är 1 200 ml och minskar med 15 %.</p><p>Bestäm den nya mängden.</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p>\\(1200\\cdot0,85=1020\\).</p><p><strong>1 020 ml.</strong></p>",
-    "familj": "program_vard_procent_mangd"
-  },
-  {
-    "id": "5.078",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>En mätserie är 72, 76, 74, 78 och 75.</p><p>Bestäm medelvärdet.</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p>Summan är 375.</p><p><strong>Medelvärdet är 75.</strong></p>",
-    "familj": "program_vard_medelvarde"
-  },
-  {
-    "id": "5.079",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En population av bakterier ökar med 20 % per timme och är från början 500.</p><p>a) Skriv en modell.<br>b) Bestäm antalet efter 4 timmar.</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p>\\(N(t)=500\\cdot1,20^t\\).</p><p>\\(N(4)\\approx1037\\).</p><p><strong>Modell: \\(500\\cdot1,20^t\\). Efter 4 timmar cirka 1 037.</strong></p>",
-    "familj": "program_vard_bakterier_exponential"
-  },
-  {
-    "id": "5.080",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En mätserie är normalfördelad med medelvärdet 100 och standardavvikelsen 8.</p><p>Mellan vilka värden ligger ungefär 68,2 % av mätningarna?</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p><strong>Mellan 92 och 108.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
-    "familj": "program_vard_normal_68"
-  },
-  {
-    "id": "5.081",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En vätskenivå beskrivs med \\(V(t)=750-25t\\), där \\(t\\) är antal timmar.</p><p>Vad betyder talen 750 och −25?</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p><strong>750 är startvärdet. −25 betyder att mängden minskar med 25 enheter per timme.</strong></p>",
-    "familj": "program_vard_linjar_tolkning"
-  },
-  {
-    "id": "5.082",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Två avdelningar har tillsammans 46 patienter. På avdelning A finns 8 fler än på avdelning B.</p><p>Hur många finns på varje avdelning?</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p>\\(A+B=46\\), \\(A=B+8\\).</p><p>\\(2B+8=46\\Rightarrow B=19\\), \\(A=27\\).</p><p><strong>A: 27, B: 19.</strong></p>",
-    "familj": "program_vard_ekvationssystem_bemanning"
-  },
-  {
-    "id": "5.083",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>En koncentration minskar med 6 % per timme. Skriv förändringsfaktorn.</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p><strong>0,94.</strong></p>",
-    "familj": "program_vard_forandringsfaktor"
-  },
-  {
-    "id": "5.084",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>En grupp har mätvärdena 18, 20, 21, 22, 22, 24, 27.</p><p>Bestäm medianen.</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p><strong>Medianen är 22.</strong></p>",
-    "familj": "program_vard_median"
-  },
-  {
-    "id": "5.085",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En modell är \\(y=2,5x+68\\).</p><p>Bestäm \\(y\\) när \\(x=12\\).</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p>\\(y=30+68=98\\).</p><p><strong>98.</strong></p>",
-    "familj": "program_vard_linjar_berakning"
-  },
-  {
-    "id": "5.086",
+    "id": "5.52",
     "kap": 5,
     "omr": "vard_omsorgsprogrammet",
     "kurs": [
@@ -11949,12 +11507,12 @@ window.BANKMA2 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>En mätserie från 30 personer har medelvärdet 74. En ny person med värdet 92 läggs till.</p><p>Bestäm det nya medelvärdet.</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p>Gamla summan är \\(30\\cdot74=2220\\). Ny summa är 2312.</p><p>\\(2312/31\\approx74,58\\).</p><p><strong>Cirka 74,6.</strong></p>",
-    "familj": "program_vard_nytt_medelvarde"
+    "t": "<p>Lådagrammet beskriver väntetider i minuter.</p><span class=\"fig smal\"><svg width=\"440\" height=\"190\" viewBox=\"0 0 440 190\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"438\" height=\"188\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55.0\" y1=\"35\" x2=\"55.0\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"55.0\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">2</text><line x1=\"71.6\" y1=\"35\" x2=\"71.6\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"71.6\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">3</text><line x1=\"88.2\" y1=\"35\" x2=\"88.2\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"88.2\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">4</text><line x1=\"104.8\" y1=\"35\" x2=\"104.8\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"104.8\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">5</text><line x1=\"121.4\" y1=\"35\" x2=\"121.4\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"121.4\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">6</text><line x1=\"138.0\" y1=\"35\" x2=\"138.0\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"138.0\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">7</text><line x1=\"154.5\" y1=\"35\" x2=\"154.5\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"154.5\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">8</text><line x1=\"171.1\" y1=\"35\" x2=\"171.1\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"171.1\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">9</text><line x1=\"187.7\" y1=\"35\" x2=\"187.7\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"187.7\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">10</text><line x1=\"204.3\" y1=\"35\" x2=\"204.3\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"204.3\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">11</text><line x1=\"220.9\" y1=\"35\" x2=\"220.9\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"220.9\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">12</text><line x1=\"237.5\" y1=\"35\" x2=\"237.5\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"237.5\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">13</text><line x1=\"254.1\" y1=\"35\" x2=\"254.1\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"254.1\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">14</text><line x1=\"270.7\" y1=\"35\" x2=\"270.7\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"270.7\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">15</text><line x1=\"287.3\" y1=\"35\" x2=\"287.3\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"287.3\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">16</text><line x1=\"303.9\" y1=\"35\" x2=\"303.9\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"303.9\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">17</text><line x1=\"320.5\" y1=\"35\" x2=\"320.5\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"320.5\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">18</text><line x1=\"337.0\" y1=\"35\" x2=\"337.0\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"337.0\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">19</text><line x1=\"353.6\" y1=\"35\" x2=\"353.6\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"353.6\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">20</text><line x1=\"370.2\" y1=\"35\" x2=\"370.2\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"370.2\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">21</text><line x1=\"386.8\" y1=\"35\" x2=\"386.8\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"386.8\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">22</text><line x1=\"403.4\" y1=\"35\" x2=\"403.4\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"403.4\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">23</text><line x1=\"420.0\" y1=\"35\" x2=\"420.0\" y2=\"135\" stroke=\"#F0EFF2\"/><text x=\"420.0\" y=\"160\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"9\">24</text><line x1=\"88.2\" y1=\"85\" x2=\"386.8\" y2=\"85\" stroke=\"#2B2527\" stroke-width=\"2.2\"/><rect x=\"138.0\" y=\"63\" width=\"116.1\" height=\"44\" fill=\"#E8EEF7\" stroke=\"#2A5D9E\" stroke-width=\"2.3\"/><line x1=\"187.7\" y1=\"63\" x2=\"187.7\" y2=\"107\" stroke=\"#B43123\" stroke-width=\"2.4\"/><line x1=\"88.2\" y1=\"71\" x2=\"88.2\" y2=\"99\" stroke=\"#2B2527\" stroke-width=\"2.2\"/><line x1=\"386.8\" y1=\"71\" x2=\"386.8\" y2=\"99\" stroke=\"#2B2527\" stroke-width=\"2.2\"/></svg></span><p>Bestäm medianen, kvartilavståndet och variationsbredden.</p>",
+    "s": "<p>Medianen är 10.</p><p>Kvartilavståndet är \\(14-7=7\\).</p><p>Variationsbredden är \\(22-4=18\\).</p><p><strong>Median 10, kvartilavstånd 7, variationsbredd 18.</strong></p>",
+    "familj": "vard_ladagram_avlasning"
   },
   {
-    "id": "5.087",
+    "id": "5.53",
     "kap": 5,
     "omr": "vard_omsorgsprogrammet",
     "kurs": [
@@ -11962,77 +11520,25 @@ window.BANKMA2 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>En mängd minskar exponentiellt. Efter 2 timmar är den 640 och efter 5 timmar 320.</p><p>Bestäm förändringsfaktorn per timme.</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p>\\(640a^3=320\\Rightarrow a^3=0,5\\Rightarrow a\\approx0,794\\).</p><p><strong>Förändringsfaktorn är cirka 0,794.</strong></p>",
-    "familj": "program_vard_exponential_baklanges"
+    "t": "<p>Två transportlag gör tillsammans 38 besök. Lag A gör 4 fler besök än lag B.</p><p>Bestäm antalet besök per lag och kontrollera svaret med ett ekvationssystem.</p>",
+    "s": "<p>Låt \\(x\\) och \\(y\\) vara antal besök.</p><p>\\(x+y=38\\), \\(x-y=4\\).</p><p>Addition ger \\(2x=42\\Rightarrow x=21\\).</p><p>\\(y=17\\).</p><p><strong>Lag A: 21, lag B: 17.</strong></p>",
+    "familj": "vard_system_besok"
   },
   {
-    "id": "5.088",
+    "id": "5.54",
     "kap": 5,
     "omr": "vard_omsorgsprogrammet",
     "kurs": [
       "2a"
     ],
     "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Två grupper har samma medelvärde på en mätning. Grupp A har standardavvikelsen 3,1 och grupp B 9,4.</p><p>Vilken grupp är mer jämn? Förklara.</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p><strong>Grupp A. Den mindre standardavvikelsen betyder att värdena ligger närmare medelvärdet.</strong></p>",
-    "familj": "program_vard_standardavvikelse"
+    "poang": "0/3/0",
+    "t": "<p>En andragradsmodell är \\(Q(x)=-x^2+18x-56\\).</p><p>För vilka \\(x\\)-värden är \\(Q(x)&gt;0\\)?</p>",
+    "s": "<p>Gränserna fås ur \\(x^2-18x+56=0\\).</p><p>Pq-formeln ger \\(x=9\\pm\\sqrt{81-56}=9\\pm5\\), alltså 4 och 14.</p><p>Den ursprungliga parabeln är nedåtvänd.</p><p><strong>\\(Q(x)&gt;0\\) för \\(4&lt;x&lt;14\\).</strong></p>",
+    "familj": "vard_andragrad_intervall"
   },
   {
-    "id": "5.089",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>En normalfördelad variabel har medelvärdet 80 och standardavvikelsen 6.</p><p>Ungefär hur stor andel ligger mellan 68 och 92?</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p>Intervallet är \\(\\mu\\pm2\\sigma\\).</p><p><strong>Ungefär 95,4 %.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Välj vänstersvans, högersvans eller intervall beroende på frågan och skriv in gränsvärdet/gränsvärdena. Sannolikheten visas direkt. För en vänstersannolikhet kan du också skriva <code>Normalfördelning(μ, σ, x)</code>.</p>",
-    "familj": "program_vard_normal_95"
-  },
-  {
-    "id": "5.090",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>En linjär modell för en mätserie är \\(y=1,4x+70\\), byggd på värden för \\(0\\le x\\le10\\).</p><p>En elev använder modellen för \\(x=50\\). Bedöm om resultatet bör ses som säkert.</p>",
-    "s": "<p><strong>Nej. \\(x=50\\) ligger långt utanför mätintervallet. Det är extrapolation, och det finns inget stöd för att sambandet fortsätter linjärt så långt.</strong></p>",
-    "familj": "program_vard_modellkritik_linjar"
-  },
-  {
-    "id": "5.091",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>En resursmodell för två arbetslag är \\(x+y=28\\) och \\(6x+4y=144\\), där \\(x\\) och \\(y\\) är antal arbetspass av två slag.</p><p>Bestäm \\(x\\) och \\(y\\).</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p>\\(y=28-x\\). \\(6x+4(28-x)=144\\Rightarrow2x=32\\Rightarrow x=16\\), \\(y=12\\).</p><p><strong>\\(x=16\\), \\(y=12\\).</strong></p>",
-    "familj": "program_vard_ekvationssystem_resurser"
-  },
-  {
-    "id": "5.092",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "A",
-    "poang": "0/0/2",
-    "t": "<p>En mätvariabel antas vara normalfördelad med medelvärdet 50. Det är känt att 95:e percentilen är 66.</p><p>Bestäm standardavvikelsen med digitalt verktyg.</p>",
-    "s": "<p>Identifiera först vilken matematisk modell eller statistisk metod som passar situationen och håll isär matematik och tolkning.</p><p>95:e percentilen motsvarar \\(z\\approx1,645\\).</p><p>\\(66=50+1,645\\sigma\\Rightarrow\\sigma\\approx9,73\\).</p><p><strong>Standardavvikelsen är cirka 9,7.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). När ett gränsvärde/percentil söks väljer du vänster- eller högersvans och matar in den givna sannolikheten; GeoGebra flyttar då gränsen. Alternativt kan kommandot <code>InverseNormal(μ, σ, p)</code> användas för en vänstersannolikhet \\(p\\).</p>",
-    "familj": "program_vard_normal_inverse"
-  },
-  {
-    "id": "5.093",
+    "id": "5.55",
     "kap": 5,
     "omr": "vard_omsorgsprogrammet",
     "kurs": [
@@ -12040,103 +11546,12 @@ window.BANKMA2 = [
     ],
     "niva": "A",
     "poang": "0/0/3",
-    "t": "<p>En mängd beskrivs av en exponentialmodell under de första 8 timmarna. Modellen passar mätningarna mycket bra. En elev säger att modellen därför kan användas för att beräkna mängden efter 10 dygn.</p><p>Bedöm slutsatsen.</p>",
-    "s": "<p><strong>Slutsatsen är inte säker. 10 dygn ligger mycket långt utanför mätintervallet. Även en modell som passar väl inom 8 timmar kan bli orimlig vid lång extrapolation, särskilt om villkoren förändras.</strong></p>",
-    "familj": "program_vard_exponential_modellkritik"
+    "t": "<p>Två arbetslag A och B består tillsammans av 20 personer. Antalet möjliga par med en person från A och en från B är 96.</p><p>En arbetsdag kostar 3 360 kr per person i A och 2 880 kr per person i B. Den totala personalkostnaden den aktuella dagen är 61 440 kr.</p><p>Bestäm hur många personer som finns i varje arbetslag.</p>",
+    "s": "<p>Låt \\(x\\) vara antal personer i A. Då finns \\(20-x\\) personer i B.</p><p>Antalet möjliga A–B-par är</p><p>\\(x(20-x)=96\\).</p><p>Det ger \\(x^2-20x+96=0\\).</p><p>Med pq-formeln:</p><p>\\(x=10\\pm\\sqrt{100-96}=10\\pm2\\).</p><p>Det ger två möjliga fördelningar: \\((A,B)=(8,12)\\) eller \\((12,8)\\).</p><p>Kontrollera kostnaden:</p><p>För \\((8,12)\\): \\(8\\cdot3360+12\\cdot2880=61440\\).</p><p>Den andra fördelningen ger 63 360 kr.</p><p><strong>Alltså består A av 8 personer och B av 12 personer.</strong></p>",
+    "familj": "vard_dold_andragrad_personal_A"
   },
   {
-    "id": "5.094",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>Två grupper har samma medelvärde 75. Grupp A har liten standardavvikelse och grupp B stor standardavvikelse.</p><p>En person säger: ”Då är nästan alla i grupp A närmare 75 än nästan alla i grupp B.” Bedöm påståendet.</p>",
-    "s": "<p><strong>Mindre standardavvikelse betyder mindre genomsnittlig spridning, men standardavvikelsen ensam bestämmer inte hur varje enskilt värde ligger. Påståendet är därför för starkt formulerat.</strong></p>",
-    "familj": "program_vard_statistik_resonemang"
-  },
-  {
-    "id": "5.095",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>För en vara gäller att efterfrågan kan modelleras med \\(q=300-p\\), där \\(p\\) är priset i kronor och \\(q\\) antalet sålda enheter.</p><p>Den totala kostnaden är \\(K=6000+20q\\).</p><span class=\"fig smal\"><svg width=\"380\" height=\"300\" viewBox=\"0 0 380 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"378\" height=\"298\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"52.0\" y1=\"262.0\" x2=\"52.0\" y2=\"18.0\" stroke=\"#E4E3E6\"/><text x=\"52.0\" y=\"225.8\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">0</text><line x1=\"90.5\" y1=\"262.0\" x2=\"90.5\" y2=\"18.0\" stroke=\"#E4E3E6\"/><text x=\"90.5\" y=\"225.8\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">40</text><line x1=\"129.0\" y1=\"262.0\" x2=\"129.0\" y2=\"18.0\" stroke=\"#E4E3E6\"/><text x=\"129.0\" y=\"225.8\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">80</text><line x1=\"167.5\" y1=\"262.0\" x2=\"167.5\" y2=\"18.0\" stroke=\"#E4E3E6\"/><text x=\"167.5\" y=\"225.8\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">120</text><line x1=\"206.0\" y1=\"262.0\" x2=\"206.0\" y2=\"18.0\" stroke=\"#E4E3E6\"/><text x=\"206.0\" y=\"225.8\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">160</text><line x1=\"244.5\" y1=\"262.0\" x2=\"244.5\" y2=\"18.0\" stroke=\"#E4E3E6\"/><text x=\"244.5\" y=\"225.8\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">200</text><line x1=\"283.0\" y1=\"262.0\" x2=\"283.0\" y2=\"18.0\" stroke=\"#E4E3E6\"/><text x=\"283.0\" y=\"225.8\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">240</text><line x1=\"321.5\" y1=\"262.0\" x2=\"321.5\" y2=\"18.0\" stroke=\"#E4E3E6\"/><text x=\"321.5\" y=\"225.8\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">280</text><line x1=\"360.0\" y1=\"262.0\" x2=\"360.0\" y2=\"18.0\" stroke=\"#E4E3E6\"/><text x=\"360.0\" y=\"225.8\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">320</text><line x1=\"52.0\" y1=\"262.0\" x2=\"360.0\" y2=\"262.0\" stroke=\"#E4E3E6\"/><text x=\"44.0\" y=\"265.0\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">-4k</text><line x1=\"52.0\" y1=\"234.9\" x2=\"360.0\" y2=\"234.9\" stroke=\"#E4E3E6\"/><text x=\"44.0\" y=\"237.9\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">-2k</text><line x1=\"52.0\" y1=\"207.8\" x2=\"360.0\" y2=\"207.8\" stroke=\"#E4E3E6\"/><line x1=\"52.0\" y1=\"180.7\" x2=\"360.0\" y2=\"180.7\" stroke=\"#E4E3E6\"/><text x=\"44.0\" y=\"183.7\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">2k</text><line x1=\"52.0\" y1=\"153.6\" x2=\"360.0\" y2=\"153.6\" stroke=\"#E4E3E6\"/><text x=\"44.0\" y=\"156.6\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">4k</text><line x1=\"52.0\" y1=\"126.4\" x2=\"360.0\" y2=\"126.4\" stroke=\"#E4E3E6\"/><text x=\"44.0\" y=\"129.4\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">6k</text><line x1=\"52.0\" y1=\"99.3\" x2=\"360.0\" y2=\"99.3\" stroke=\"#E4E3E6\"/><text x=\"44.0\" y=\"102.3\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">8k</text><line x1=\"52.0\" y1=\"72.2\" x2=\"360.0\" y2=\"72.2\" stroke=\"#E4E3E6\"/><text x=\"44.0\" y=\"75.2\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">10k</text><line x1=\"52.0\" y1=\"45.1\" x2=\"360.0\" y2=\"45.1\" stroke=\"#E4E3E6\"/><text x=\"44.0\" y=\"48.1\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">12k</text><line x1=\"52.0\" y1=\"18.0\" x2=\"360.0\" y2=\"18.0\" stroke=\"#E4E3E6\"/><text x=\"44.0\" y=\"21.0\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">14k</text><line x1=\"52.0\" y1=\"207.8\" x2=\"360.0\" y2=\"207.8\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"52.0\" y1=\"262.0\" x2=\"52.0\" y2=\"18.0\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M 52.0 370.4 L 53.0 366.1 L 53.9 361.8 L 54.9 357.5 L 55.9 353.3 L 56.8 349.0 L 57.8 344.8 L 58.8 340.7 L 59.7 336.5 L 60.7 332.4 L 61.7 328.3 L 62.6 324.2 L 63.6 320.2 L 64.6 316.2 L 65.5 312.2 L 66.5 308.2 L 67.4 304.3 L 68.4 300.4 L 69.4 296.5 L 70.3 292.7 L 71.3 288.9 L 72.3 285.1 L 73.2 281.3 L 74.2 277.6 L 75.2 273.9 L 76.1 270.2 L 77.1 266.5 L 78.1 262.9 L 79.0 259.3 L 80.0 255.7 L 81.0 252.2 L 81.9 248.7 L 82.9 245.2 L 83.9 241.7 L 84.8 238.3 L 85.8 234.9 L 86.8 231.5 L 87.7 228.1 L 88.7 224.8 L 89.7 221.5 L 90.6 218.2 L 91.6 215.0 L 92.6 211.7 L 93.5 208.6 L 94.5 205.4 L 95.4 202.3 L 96.4 199.1 L 97.4 196.1 L 98.3 193.0 L 99.3 190.0 L 100.3 187.0 L 101.2 184.0 L 102.2 181.1 L 103.2 178.1 L 104.1 175.2 L 105.1 172.4 L 106.1 169.5 L 107.0 166.7 L 108.0 164.0 L 109.0 161.2 L 109.9 158.5 L 110.9 155.8 L 111.9 153.1 L 112.8 150.4 L 113.8 147.8 L 114.8 145.2 L 115.7 142.7 L 116.7 140.1 L 117.7 137.6 L 118.6 135.1 L 119.6 132.7 L 120.6 130.3 L 121.5 127.9 L 122.5 125.5 L 123.4 123.1 L 124.4 120.8 L 125.4 118.5 L 126.3 116.3 L 127.3 114.0 L 128.3 111.8 L 129.2 109.6 L 130.2 107.5 L 131.2 105.4 L 132.1 103.3 L 133.1 101.2 L 134.1 99.1 L 135.0 97.1 L 136.0 95.1 L 137.0 93.2 L 137.9 91.2 L 138.9 89.3 L 139.9 87.4 L 140.8 85.6 L 141.8 83.7 L 142.8 81.9 L 143.7 80.2 L 144.7 78.4 L 145.7 76.7 L 146.6 75.0 L 147.6 73.4 L 148.6 71.7 L 149.5 70.1 L 150.5 68.5 L 151.4 67.0 L 152.4 65.4 L 153.4 63.9 L 154.3 62.5 L 155.3 61.0 L 156.3 59.6 L 157.2 58.2 L 158.2 56.8 L 159.2 55.5 L 160.1 54.2 L 161.1 52.9 L 162.1 51.7 L 163.0 50.4 L 164.0 49.2 L 165.0 48.1 L 165.9 46.9 L 166.9 45.8 L 167.9 44.7 L 168.8 43.6 L 169.8 42.6 L 170.8 41.6 L 171.7 40.6 L 172.7 39.7 L 173.7 38.7 L 174.6 37.8 L 175.6 37.0 L 176.6 36.1 L 177.5 35.3 L 178.5 34.5 L 179.4 33.7 L 180.4 33.0 L 181.4 32.3 L 182.3 31.6 L 183.3 31.0 L 184.3 30.3 L 185.2 29.7 L 186.2 29.2 L 187.2 28.6 L 188.1 28.1 L 189.1 27.6 L 190.1 27.1 L 191.0 26.7 L 192.0 26.3 L 193.0 25.9 L 193.9 25.6 L 194.9 25.2 L 195.9 24.9 L 196.8 24.7 L 197.8 24.4 L 198.8 24.2 L 199.7 24.0 L 200.7 23.8 L 201.7 23.7 L 202.6 23.6 L 203.6 23.5 L 204.6 23.5 L 205.5 23.4 L 206.5 23.4 L 207.4 23.5 L 208.4 23.5 L 209.4 23.6 L 210.3 23.7 L 211.3 23.8 L 212.3 24.0 L 213.2 24.2 L 214.2 24.4 L 215.2 24.7 L 216.1 24.9 L 217.1 25.2 L 218.1 25.6 L 219.0 25.9 L 220.0 26.3 L 221.0 26.7 L 221.9 27.1 L 222.9 27.6 L 223.9 28.1 L 224.8 28.6 L 225.8 29.2 L 226.8 29.7 L 227.7 30.3 L 228.7 31.0 L 229.7 31.6 L 230.6 32.3 L 231.6 33.0 L 232.6 33.7 L 233.5 34.5 L 234.5 35.3 L 235.4 36.1 L 236.4 37.0 L 237.4 37.8 L 238.3 38.7 L 239.3 39.7 L 240.3 40.6 L 241.2 41.6 L 242.2 42.6 L 243.2 43.6 L 244.1 44.7 L 245.1 45.8 L 246.1 46.9 L 247.0 48.1 L 248.0 49.2 L 249.0 50.4 L 249.9 51.7 L 250.9 52.9 L 251.9 54.2 L 252.8 55.5 L 253.8 56.8 L 254.8 58.2 L 255.7 59.6 L 256.7 61.0 L 257.7 62.5 L 258.6 63.9 L 259.6 65.4 L 260.6 67.0 L 261.5 68.5 L 262.5 70.1 L 263.4 71.7 L 264.4 73.4 L 265.4 75.0 L 266.3 76.7 L 267.3 78.4 L 268.3 80.2 L 269.2 81.9 L 270.2 83.7 L 271.2 85.6 L 272.1 87.4 L 273.1 89.3 L 274.1 91.2 L 275.0 93.2 L 276.0 95.1 L 277.0 97.1 L 277.9 99.1 L 278.9 101.2 L 279.9 103.3 L 280.8 105.4 L 281.8 107.5 L 282.8 109.6 L 283.7 111.8 L 284.7 114.0 L 285.7 116.3 L 286.6 118.5 L 287.6 120.8 L 288.6 123.1 L 289.5 125.5 L 290.5 127.9 L 291.4 130.3 L 292.4 132.7 L 293.4 135.1 L 294.3 137.6 L 295.3 140.1 L 296.3 142.7 L 297.2 145.2 L 298.2 147.8 L 299.2 150.4 L 300.1 153.1 L 301.1 155.8 L 302.1 158.5 L 303.0 161.2 L 304.0 164.0 L 305.0 166.7 L 305.9 169.5 L 306.9 172.4 L 307.9 175.2 L 308.8 178.1 L 309.8 181.1 L 310.8 184.0 L 311.7 187.0 L 312.7 190.0 L 313.7 193.0 L 314.6 196.1 L 315.6 199.1 L 316.6 202.3 L 317.5 205.4 L 318.5 208.6 L 319.4 211.7 L 320.4 215.0 L 321.4 218.2 L 322.3 221.5 L 323.3 224.8 L 324.3 228.1 L 325.2 231.5 L 326.2 234.9 L 327.2 238.3 L 328.1 241.7 L 329.1 245.2 L 330.1 248.7 L 331.0 252.2 L 332.0 255.7 L 333.0 259.3 L 333.9 262.9 L 334.9 266.5 L 335.9 270.2 L 336.8 273.9 L 337.8 277.6 L 338.8 281.3 L 339.7 285.1 L 340.7 288.9 L 341.7 292.7 L 342.6 296.5 L 343.6 300.4 L 344.6 304.3 L 345.5 308.2 L 346.5 312.2 L 347.4 316.2 L 348.4 320.2 L 349.4 324.2 L 350.3 328.3 L 351.3 332.4 L 352.3 336.5 L 353.2 340.7 L 354.2 344.8 L 355.2 349.0 L 356.1 353.3 L 357.1 357.5 L 358.1 361.8 L 359.0 366.1 L 360.0 370.4\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.6\"/><circle cx=\"100.1\" cy=\"187.4\" r=\"4\" fill=\"#2A5D9E\"/><circle cx=\"206.0\" cy=\"23.4\" r=\"4\" fill=\"#2A5D9E\"/><circle cx=\"311.9\" cy=\"187.4\" r=\"4\" fill=\"#2A5D9E\"/><text x=\"214.0\" y=\"15.4\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">topp</text></svg></span><p>a) Bestäm en modell för vinsten \\(V(p)\\).</p><p>b) För vilka priser blir vinsten positiv?</p><p>c) Vilket pris ger maximal vinst?</p>",
-    "s": "<p>Intäkten är \\(I(p)=pq=p(300-p)=300p-p^2\\).</p><p>Kostnaden blir \\(K(p)=6000+20(300-p)=12000-20p\\).</p><p>Vinsten är därför \\(V(p)=I-K=-p^2+320p-12000\\).</p><p>För positiv vinst krävs \\(-p^2+320p-12000&gt;0\\), alltså \\(p^2-320p+12000&lt;0\\).</p><p>Det faktoriseras till \\((p-50)(p-270)&lt;0\\).</p><p><strong>Vinsten är positiv för \\(50&lt;p&lt;270\\).</strong></p><p>Parabelns topp ligger vid \\(p=\\frac{320}{2}=160\\).</p><p><strong>Maximal vinst fås vid priset 160 kr.</strong></p>",
-    "familj": "A_ekonomi_profit_quadratic_interval"
-  },
-  {
-    "id": "5.096",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "A",
-    "poang": "0/0/2",
-    "t": "<p>Ett kapital växer från 100 000 kr till 121 000 kr på två år. Anta att samma procentuella ökning sker varje år.</p><p>a) Bestäm den årliga förändringsfaktorn.</p><p>b) Efter hur många år har kapitalet passerat 200 000 kr?</p>",
-    "s": "<p>Vi har \\(100000a^2=121000\\), alltså \\(a^2=1,21\\Rightarrow a=1,1\\).</p><p>För att passera 200 000 kr krävs \\(100000\\cdot1,1^n&gt;200000\\), alltså \\(1,1^n&gt;2\\).</p><p>Det ger \\(n&gt;\\frac{\\lg2}{\\lg1,1}\\approx7,27\\).</p><p><strong>Kapitalet passerar 200 000 kr efter 8 år.</strong></p>",
-    "familj": "A_ekonomi_growth_and_time"
-  },
-  {
-    "id": "5.097",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>En koncentration modelleras med \\(C(t)=80\\cdot0,85^t\\), där \\(t\\) är tiden i timmar.</p><p>Bestäm under vilken tid koncentrationen ligger mellan 20 och 35.</p>",
-    "s": "<p>Vi söker när \\(20\\le80\\cdot0,85^t\\le35\\).</p><p>Dividera med 80: \\(0,25\\le0,85^t\\le0,4375\\).</p><p>Eftersom funktionen avtar fås gränserna genom att lösa likheterna.</p><p>\\(0,85^t=0,4375\\Rightarrow t\\approx\\frac{\\lg(0,4375)}{\\lg(0,85)}\\approx5,11\\).</p><p>\\(0,85^t=0,25\\Rightarrow t\\approx\\frac{\\lg(0,25)}{\\lg(0,85)}\\approx8,53\\).</p><p><strong>Koncentrationen ligger mellan 20 och 35 ungefär från 5,1 timmar till 8,5 timmar.</strong></p>",
-    "familj": "A_vard_exponential_interval"
-  },
-  {
-    "id": "5.098",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "A",
-    "poang": "0/0/2",
-    "t": "<p>En mätvariabel antas vara normalfördelad med medelvärdet 72 och standardavvikelsen 6.</p><p>Bestäm det värde \\(k\\) så att 90 % av alla mätvärden ligger under \\(k\\).</p>",
-    "s": "<p>Vi söker den 90:e percentilen. För standardnormalfördelningen är \\(z\\approx1,2816\\).</p><p>Då blir \\(k=72+1,2816\\cdot6\\approx79,7\\).</p><p><strong>\\(k\\approx79,7\\).</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). När ett gränsvärde/percentil söks väljer du vänster- eller högersvans och matar in den givna sannolikheten; GeoGebra flyttar då gränsen. Alternativt kan kommandot <code>InverseNormal(μ, σ, p)</code> användas för en vänstersannolikhet \\(p\\).</p>",
-    "familj": "A_vard_normal_90_percentile"
-  },
-  {
-    "id": "5.099",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>En verksamhets omsättning har under sex år vuxit ungefär exponentiellt. En modell ger \\(R^2=0,995\\).</p><p>Chefen vill använda modellen för att förutsäga omsättningen 25 år framåt.</p><p>Ge två matematiska skäl till att prognosen ändå är osäker.</p>",
-    "s": "<p>Ett högt \\(R^2\\) visar att modellen passar de observerade åren väl, men garanterar inte att samma utveckling fortsätter.</p><p>25 år är dessutom en lång extrapolation utanför dataintervallet.</p><p><strong>Två skäl är alltså extrapolationen och att ett högt \\(R^2\\) inte bevisar att modelltypen fortsätter vara giltig.</strong></p>",
-    "familj": "np_typ_ekonomi_modellkritik"
-  },
-  {
-    "id": "5.100",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>Ett företag säljer en produkt för \\(p\\) kr. Efterfrågan modelleras av \\(q=500-2p\\). Den rörliga kostnaden är 40 kr per produkt och de fasta kostnaderna är 8 000 kr.</p><p>Bestäm vilket pris som ger maximal vinst och hur stor den maximala vinsten är.</p>",
-    "s": "<p>Intäkten är \\(I=pq=p(500-2p)=500p-2p^2\\).</p><p>Kostnaden är \\(K=8000+40q=8000+40(500-2p)=28000-80p\\).</p><p>Vinsten blir</p><p>\\(V=I-K=-2p^2+580p-28000\\).</p><p>Toppunkten ligger vid \\(p=-580/(2\\cdot-2)=145\\).</p><p>\\(V(145)=-2\\cdot145^2+580\\cdot145-28000=14050\\).</p><p><strong>Priset 145 kr ger maximal vinst 14 050 kr.</strong></p>",
-    "familj": "np_typ_ekonomi_vinstoptimering"
-  },
-  {
-    "id": "5.101",
+    "id": "5.56",
     "kap": 5,
     "omr": "vard_omsorgsprogrammet",
     "kurs": [
@@ -12144,129 +11559,12 @@ window.BANKMA2 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>En mätserie från 200 personer kan antas vara normalfördelad med medelvärdet 50 och standardavvikelsen 5.</p><p>Ungefär hur många personer förväntas ha värden mellan 40 och 60?</p>",
-    "s": "<p>40 och 60 ligger två standardavvikelser från medelvärdet: \\(50\\pm2\\cdot5\\).</p><p>I en normalfördelning ligger ungefär 95,4 % inom två standardavvikelser.</p><p>\\(0,954\\cdot200=190,8\\).</p><p><strong>Ungefär 191 personer.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
-    "familj": "np_typ_vard_normal_antal"
+    "t": "<p>En normalfördelad reaktionstid har medelvärdet 430 ms och standardavvikelsen 45 ms. I en grupp med 800 observationer vill man hitta en gräns så att ungefär 80 observationer ligger över gränsen.</p><p>Bestäm gränsen med GeoGebra.</p>",
+    "s": "<p>80 av 800 är 10 %, alltså ska gränsen vara den 90:e percentilen.</p><p><strong>GeoGebra:</strong> använd <code>InverseNormal(430,45,0.90)</code>.</p><p>Gränsen blir cirka 487,7 ms.</p><p><strong>En lämplig gräns är cirka 488 ms.</strong></p>",
+    "familj": "vard_normal_forvantat_antal_A"
   },
   {
-    "id": "5.102",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "A",
-    "poang": "0/0/2",
-    "t": "<p>Två olika modeller beskriver samma avtagande storhet under de första sex timmarna:</p><p>\\(A(t)=90-8t\\) och \\(B(t)=90\\cdot0,90^t\\).</p><p>Efter hur lång tid skiljer modellerna sig med minst 15 enheter? Använd digitalt verktyg och tolka svaret.</p>",
-    "s": "<p>Vi söker första \\(t\\ge0\\) där \\(|A(t)-B(t)|\\ge15\\).</p><p>Med digitalt verktyg kan man rita båda funktionerna eller lösa \\(|90-8t-90\\cdot0,90^t|=15\\).</p><p>Den första gränsen fås ungefär vid \\(t\\approx8.6\\) timmar.</p><p><strong>Efter ungefär 8.6 timmar skiljer modellerna sig med minst 15 enheter.</strong></p><p>Det visar också att modellvalet blir allt viktigare när man går utanför det korta intervall där modellerna ligger nära varandra.</p><p><strong>GeoGebra:</strong> Använd det digitala verktyget i GeoGebra och kontrollera resultatet mot grafen eller den matematiska modellen.</p>",
-    "familj": "np_typ_vard_jamfora_modeller"
-  },
-  {
-    "id": "5.103",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Ett företag har intäktsfunktionen \\(I(x)=240x\\) och kostnadsfunktionen \\(K(x)=18000+150x\\).</p><p>Bestäm hur många produkter som måste säljas för att intäkt och kostnad ska vara lika.</p>",
-    "s": "<p>Sätt \\(I(x)=K(x)\\):</p><p>\\(240x=18000+150x\\).</p><p>\\(90x=18000\\Rightarrow x=200\\).</p><p><strong>200 produkter.</strong></p>",
-    "familj": "np2_ekonomi_brytpunkt"
-  },
-  {
-    "id": "5.104",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>En försäljning ökar från 1,8 miljoner kr till 2,4 miljoner kr på tre år. Anta exponentiell utveckling.</p><p>Bestäm den genomsnittliga årliga procentuella ökningen.</p>",
-    "s": "<p>Låt förändringsfaktorn vara \\(a\\).</p><p>\\(1,8a^3=2,4\\Rightarrow a^3=4/3\\).</p><p>\\(a=(4/3)^{1/3}\\approx1,1006\\).</p><p><strong>Den årliga ökningen är cirka 10,1 %.</strong></p>",
-    "familj": "np2_ekonomi_genomsnittlig_tillvaxt"
-  },
-  {
-    "id": "5.105",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>Efterfrågan på en vara modelleras av \\(q=400-2p\\), där \\(p\\) är priset i kronor. Kostnaden är \\(K=5000+50q\\).</p><p>Bestäm det prisintervall där företaget gör vinst.</p>",
-    "s": "<p>Intäkten är \\(I=pq=p(400-2p)=400p-2p^2\\).</p><p>Kostnaden är \\(5000+50(400-2p)=25000-100p\\).</p><p>Vinsten blir \\(V=-2p^2+500p-25000\\).</p><p>Vi vill ha \\(V&gt;0\\). Dividera med −2 och vänd olikheten:</p><p>\\(p^2-250p+12500&lt;0\\).</p><p>Rötterna är \\(p=125\\pm25\\sqrt5\\approx69,1\\) och \\(180,9\\).</p><p><strong>Företaget gör vinst för ungefär \\(69,1&lt;p&lt;180,9\\) kr.</strong></p>",
-    "familj": "np2_ekonomi_vinstintervall"
-  },
-  {
-    "id": "5.106",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>En mätvariabel antas vara normalfördelad med medelvärdet 72 och standardavvikelsen 6.</p><p>Ungefär hur många av 500 observationer förväntas ligga mellan 60 och 84?</p>",
-    "s": "<p>60 och 84 ligger två standardavvikelser från medelvärdet.</p><p>Ungefär 95,4 % ligger inom \\(\\mu\\pm2\\sigma\\).</p><p>\\(0,954\\cdot500=477\\).</p><p><strong>Ungefär 477 observationer.</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). Använd gärna kalkylatorn för att kontrollera 68–95–99,7-regeln genom att välja intervallet \\(\\mu\\pm\\sigma\\), \\(\\mu\\pm2\\sigma\\) eller \\(\\mu\\pm3\\sigma\\).</p>",
-    "familj": "np2_vard_normal_antal"
-  },
-  {
-    "id": "5.107",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "A",
-    "poang": "0/0/2",
-    "t": "<p>En storhet minskar enligt modellen \\(M(t)=120\\cdot0,88^t\\).</p><p>Bestäm den första hela timme då modellen ger ett värde under 50 och förklara varför svaret måste avrundas uppåt.</p>",
-    "s": "<p>Vi löser \\(120\\cdot0,88^t&lt;50\\), alltså \\(0,88^t&lt;5/12\\).</p><p>Med logaritmer fås \\(t&gt;\\frac{\\lg(5/12)}{\\lg0,88}\\approx6,85\\).</p><p>Vi söker första <em>hela</em> timme som uppfyller villkoret.</p><p><strong>Det blir efter 7 timmar. Man måste avrunda uppåt eftersom värdet först då säkert har passerat under 50.</strong></p>",
-    "familj": "np2_vard_exponential_heltalstid"
-  },
-  {
-    "id": "5.108",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Ett företag har kostnaden \\(K(x)=15000+85x\\) och intäkten \\(I(x)=145x\\).</p><p>Bestäm företagets nollpunkt och tolka resultatet.</p>",
-    "s": "<p>Vid nollpunkten är intäkt och kostnad lika:</p><p>\\(145x=15000+85x\\).</p><p>\\(60x=15000\\Rightarrow x=250\\).</p><p><strong>Nollpunkten är 250 produkter. Vid denna försäljning är vinsten 0 kr.</strong></p>",
-    "familj": "np3_ekonomi_nollpunkt"
-  },
-  {
-    "id": "5.109",
-    "kap": 5,
-    "omr": "ekonomiprogrammet",
-    "kurs": [
-      "2b"
-    ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>Efterfrågan på en produkt modelleras med \\(q=360-2p\\), där \\(p\\) är priset i kronor. Kostnaden är \\(K=7200+40q\\).</p><p>Bestäm det pris som ger maximal vinst och den maximala vinsten.</p>",
-    "s": "<p>Intäkten är \\(I=pq=p(360-2p)=360p-2p^2\\).</p><p>Kostnaden är \\(7200+40(360-2p)=21600-80p\\).</p><p>Vinsten blir \\(V=-2p^2+440p-21600\\).</p><p>Toppunkten ligger vid \\(p=-440/(2\\cdot-2)=110\\).</p><p>\\(V(110)=-2\\cdot12100+48400-21600=2600\\).</p><p><strong>Priset 110 kr ger maximal vinst 2 600 kr.</strong></p>",
-    "familj": "np3_ekonomi_vinstoptimering"
-  },
-  {
-    "id": "5.110",
-    "kap": 5,
-    "omr": "vard_omsorgsprogrammet",
-    "kurs": [
-      "2a"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>En storhet beskrivs av \\(M(t)=180\\cdot0,82^t\\).</p><p>Bestäm den första hela timmen då värdet är mindre än 50.</p>",
-    "s": "<p>Gränsen fås ur \\(180\\cdot0,82^t=50\\).</p><p>\\(t=\\frac{\\lg(50/180)}{\\lg0,82}\\approx6,45\\).</p><p>Första hela timmen efter gränsen är 7.</p><p><strong>Efter 7 timmar.</strong></p>",
-    "familj": "np3_vard_exponential_grans"
-  },
-  {
-    "id": "5.111",
+    "id": "5.57",
     "kap": 5,
     "omr": "vard_omsorgsprogrammet",
     "kurs": [
@@ -12274,21 +11572,47 @@ window.BANKMA2 = [
     ],
     "niva": "A",
     "poang": "0/0/3",
-    "t": "<p>En normalfördelad mätvariabel har medelvärdet 68 och standardavvikelsen 7. En grupp består av 900 observationer.</p><p>Bestäm ungefär vilket gränsvärde \\(k\\) som gör att cirka 90 observationer ligger över \\(k\\).</p>",
-    "s": "<p>90 av 900 är 10 %, så 90 % ska ligga under \\(k\\).</p><p>Det betyder att \\(k\\) är den 90:e percentilen.</p><p>\\(z_{0,90}\\approx1,2816\\).</p><p>\\(k=68+1,2816\\cdot7\\approx76,97\\).</p><p><strong>\\(k\\approx77,0\\).</strong></p><p><strong>GeoGebra:</strong> Öppna <em>Sannolikhetskalkylatorn</em>, välj fördelningen <em>Normal</em> och skriv in uppgiftens medelvärde \\(\\mu\\) och standardavvikelse \\(\\sigma\\). När ett gränsvärde/percentil söks väljer du vänster- eller högersvans och matar in den givna sannolikheten; GeoGebra flyttar då gränsen. Alternativt kan kommandot <code>InverseNormal(μ, σ, p)</code> användas för en vänstersannolikhet \\(p\\).</p>",
-    "familj": "np3_vard_percentil_antal"
+    "t": "<p>Två modeller beskriver samma mätstorhet: \\(A(t)=120-7t\\) och \\(B(t)=120\\cdot0,94^t\\).</p><p>Bestäm med GeoGebra den första positiva tidpunkt då modellerna skiljer 15 enheter. Förklara varför resultatet inte säger vilken modell som är ”rätt”.</p>",
+    "s": "<p><strong>GeoGebra:</strong> rita båda modellerna och använd <code>NLös(abs((120-7t)-120*0.94^t)=15)</code>.</p><p>Den första positiva lösningen är cirka 10.1 timmar.</p><p><strong>Modellerna skiljer då 15 enheter.</strong></p><p>Beräkningen jämför två antagna modeller; den avgör inte vilken som bäst beskriver verkligheten utan nya data.</p>",
+    "familj": "vard_jamfora_modeller_A"
   },
   {
-    "id": "5.112",
+    "id": "5.58",
     "kap": 5,
-    "omr": "ekonomiprogrammet",
+    "omr": "vard_omsorgsprogrammet",
     "kurs": [
-      "2b"
+      "2a"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>En rektangulär aktivitetsyta ska byggas längs en befintlig vägg. Stängsel behövs på tre sidor och det finns 44 m stängsel.</p><p>Ytan måste vara minst 200 m². Bestäm alla möjliga längder på de två korta sidorna.</p>",
+    "s": "<p>Låt kortsidorna vara \\(x\\). Den tredje sidan är \\(44-2x\\).</p><p>Arean är \\(A=x(44-2x)\\).</p><p>Kravet ger \\(-2x^2+44x\\ge200\\).</p><p>Dela med −2 och vänd olikheten: \\(x^2-22x+100\\le0\\).</p><p>Pq-formeln ger \\(x=11\\pm\\sqrt{121-100}=11\\pm\\sqrt{21}\\).</p><p><strong>\\(11-\\sqrt{21}\\le x\\le11+\\sqrt{21}\\), cirka 6,42–15,58 m.</strong></p>",
+    "familj": "vard_optimering_olikhet_A"
+  },
+  {
+    "id": "5.59",
+    "kap": 5,
+    "omr": "vard_omsorgsprogrammet",
+    "kurs": [
+      "2a"
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>En modell för ett företags försäljning har mycket små residualer för åren 2022–2026. Företaget använder ändå modellen för en prognos till år 2050.</p><p>Förklara varför små residualer i de kända åren inte gör långtidsprognosen säker.</p>",
-    "s": "<p>Små residualer visar att modellen passar de observerade värdena bra.</p><p>De säger däremot inte att samma samband fortsätter långt utanför dataintervallet.</p><p><strong>2050-prognosen är en lång extrapolation och kan därför vara osäker trots små residualer i de kända åren.</strong></p>",
-    "familj": "np3_ekonomi_residual_extrapolation"
+    "t": "<p>Punkten \\(P\\) ligger på linjen \\(y=x+1\\) och ska ligga lika långt från stationerna \\(A(1,7)\\) och \\(B(7,3)\\).</p><p>Bestäm \\(P\\).</p>",
+    "s": "<p>Sätt \\(P=(t,t+1)\\).</p><p>Likhet mellan de kvadrerade avstånden ger</p><p>\\((t-1)^2+(t-6)^2=(t-7)^2+(t-2)^2\\).</p><p>Utveckling ger \\(2t^2-14t+37=2t^2-18t+53\\).</p><p>\\(4t=16\\Rightarrow t=4\\).</p><p><strong>\\(P=(4,5)\\).</strong></p>",
+    "familj": "vard_koordinat_lika_avstand_A"
+  },
+  {
+    "id": "5.60",
+    "kap": 5,
+    "omr": "vard_omsorgsprogrammet",
+    "kurs": [
+      "2a"
+    ],
+    "niva": "A",
+    "poang": "0/0/3",
+    "t": "<p>En verksamhet har fem års data. En exponentialmodell passar de fem punkterna något bättre än en linjär modell, men skillnaden i passform är liten.</p><p>Beskriv tre saker du bör undersöka innan du väljer modell för en lång prognos.</p>",
+    "s": "<p>Man bör bland annat undersöka residualernas mönster, om modelltypen är rimlig i sammanhanget och hur långt utanför dataintervallet prognosen ska göras.</p><p>Det är också relevant att kontrollera om en enskild avvikare påverkar resultatet.</p><p><strong>Modellval bör alltså bygga på mer än bara vilket anpassningsmått som är marginellt bäst.</strong></p>",
+    "familj": "vard_modellval_kritik_A"
   }
 ];
