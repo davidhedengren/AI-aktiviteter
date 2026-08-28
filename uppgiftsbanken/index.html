@@ -1203,12 +1203,12 @@ table.data th{background:var(--sunken);font-weight:600}
 }
 .kv-brand{gap:18px!important}
 .kv-logo-shell{
-  width:68px!important;height:68px!important;border-radius:19px!important;
+  width:74px!important;height:74px!important;border-radius:20px!important;
 }
-.kv-logo-shell img{width:61px!important;height:61px!important}
+.kv-logo-shell img{width:66px!important;height:66px!important}
 .kv-brandname{
   display:block!important;
-  font-size:clamp(27px,2.8vw,39px)!important;
+  font-size:clamp(30px,3vw,43px)!important;
   line-height:1.02!important;
   letter-spacing:-.045em!important;
   white-space:normal!important;
@@ -1352,15 +1352,154 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
   .password-row button{width:100%}
 }
 
+
+
+/* ── Startsida · visuell förfining ──
+   Bokfärgerna i kurskortens vänsterkant behålls oförändrade.
+   Övriga färger används som ett neutralt gränssnittslager och representerar inte matematikspår. */
+.kursval{
+  background:
+    radial-gradient(880px 560px at 3% -6%,rgba(180,49,35,.15),transparent 66%),
+    radial-gradient(760px 520px at 98% 2%,rgba(18,128,142,.10),transparent 67%),
+    radial-gradient(850px 620px at 94% 102%,rgba(44,98,168,.09),transparent 70%),
+    linear-gradient(180deg,#F6F1EC 0%,#F2EFEC 48%,#F4F1EE 100%)!important;
+}
+.kursval::before{
+  opacity:.30!important;
+  background-image:
+    linear-gradient(rgba(70,59,54,.024) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(70,59,54,.024) 1px,transparent 1px)!important;
+  background-size:64px 64px!important;
+}
+.kv-inner{width:min(1220px,100%)!important}
+.kv-nav{margin-bottom:18px!important}
+.kv-logo-shell{
+  background:rgba(255,253,250,.90)!important;
+  border-color:rgba(83,67,59,.09)!important;
+  box-shadow:0 1px 2px rgba(54,43,38,.04),0 12px 30px rgba(54,43,38,.07)!important;
+}
+.kv-brandname{color:#282123!important}
+.kv-brandmeta{display:none!important}
+
+.kv-designhero{
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 150px;
+  gap:22px;
+  align-items:center;
+  overflow:hidden;
+  margin:0 0 27px;
+  padding:20px 27px 21px;
+  min-height:106px;
+  border:1px solid rgba(75,61,55,.095);
+  border-radius:23px;
+  background:linear-gradient(135deg,rgba(255,253,250,.96),rgba(255,255,255,.78));
+  box-shadow:0 12px 38px rgba(61,48,42,.055),0 2px 5px rgba(61,48,42,.025);
+}
+.kv-designhero::before{
+  content:"";position:absolute;right:-62px;top:-112px;width:250px;height:250px;border-radius:50%;
+  border:44px solid rgba(180,49,35,.045);pointer-events:none;
+}
+.kv-designhero::after{
+  content:"";position:absolute;right:92px;bottom:-125px;width:220px;height:220px;border-radius:50%;
+  background:rgba(18,128,142,.035);pointer-events:none;
+}
+.kv-designhero-copy{position:relative;z-index:2;max-width:800px}
+.kv-designhero-eyebrow,.kv-designhero p{display:none!important}
+.kv-designhero h2{
+  margin:0;max-width:760px;font-size:clamp(29px,2.75vw,38px);line-height:1.06;
+  letter-spacing:-.045em;color:#30282A;font-weight:720;text-wrap:balance;
+}
+.kv-designhero h2 span{color:#9F3027}
+.kv-designhero-art{
+  position:relative;z-index:2;height:82px;width:130px;justify-self:end;
+}
+.kv-designhero-art span{
+  position:absolute;display:block;width:64px;height:78px;border-radius:9px;
+  background:rgba(255,253,250,.92);border:1px solid rgba(76,63,58,.12);
+  box-shadow:0 8px 20px rgba(61,48,42,.07);
+}
+.kv-designhero-art span::before{
+  content:"";position:absolute;left:12px;right:12px;top:16px;height:2px;border-radius:99px;background:rgba(180,49,35,.52);
+  box-shadow:0 11px 0 rgba(76,63,58,.13),0 22px 0 rgba(76,63,58,.10),0 33px 0 rgba(76,63,58,.08);
+}
+.kv-designhero-art span:nth-child(1){left:7px;top:8px;transform:rotate(-8deg)}
+.kv-designhero-art span:nth-child(2){left:34px;top:1px;transform:rotate(2deg)}
+.kv-designhero-art span:nth-child(3){left:61px;top:10px;transform:rotate(9deg)}
+.kv-grupp + .kv-grupp{
+  margin-top:38px!important;padding-top:31px!important;border-top:0!important;position:relative;
+}
+.kv-grupp + .kv-grupp::before{
+  content:"";position:absolute;left:2px;right:2px;top:0;height:1px;
+  background:linear-gradient(90deg,rgba(180,49,35,.30),rgba(18,128,142,.18) 48%,rgba(44,98,168,.12),transparent 88%);
+}
+.kv-grupphuvud{margin:0 3px 15px!important}
+.kv-grupphuvud h3{font-size:19px!important;letter-spacing:-.035em!important;color:#30282A!important}
+.kv-grupphuvud span{
+  padding:5px 8px;border:1px solid rgba(76,63,58,.08);border-radius:999px;
+  background:rgba(255,252,248,.70);color:#786F6B!important;font-size:8.5px!important;
+}
+.kv-kortgrid{gap:19px!important}
+
+.kurskort{
+  min-height:210px!important;
+  padding:20px 21px 17px 28px!important;
+  border:1px solid rgba(71,58,52,.105)!important;
+  border-radius:22px!important;
+  background:
+    linear-gradient(148deg,rgba(255,255,255,.98) 0%,rgba(255,253,250,.94) 58%,rgba(249,246,242,.91) 100%)!important;
+  box-shadow:0 1px 2px rgba(52,42,37,.025),0 14px 34px rgba(52,42,37,.06)!important;
+}
+.kurskort:hover{
+  transform:translateY(-6px)!important;
+  background:linear-gradient(148deg,#fff 0%,rgba(255,253,250,.98) 58%,rgba(249,246,242,.96) 100%)!important;
+  box-shadow:0 22px 52px rgba(52,42,37,.11),0 3px 8px rgba(52,42,37,.04)!important;
+}
+.kurskort .kk-rygg{width:8px!important;box-shadow:inset -1px 0 rgba(255,255,255,.28),2px 0 12px rgba(35,29,27,.055)!important}
+.kurskort:hover .kk-rygg{width:11px!important}
+.kk-index{color:#756D69!important}
+.kk-number{
+  font-size:39px!important;color:rgba(140,116,105,.115)!important;font-weight:760!important;
+}
+.kurskort:hover .kk-number{color:rgba(180,49,35,.13)!important}
+.kk-namn{margin-top:17px!important;font-size:23px!important;color:#282123!important}
+.kk-taggar{gap:6px!important;margin-top:13px!important}
+.kk-tag{
+  min-height:23px!important;padding:3px 8px!important;
+  border-color:rgba(87,73,66,.075)!important;
+  background:rgba(243,239,234,.78)!important;
+  color:#6E6561!important;font-size:8px!important;
+}
+.kurskort:hover .kk-tag{
+  border-color:color-mix(in oklab,var(--acc) 16%,rgba(87,73,66,.075))!important;
+  background:color-mix(in oklab,var(--acc) 4%,#F7F3EF)!important;
+}
+.kk-fot{padding-top:13px!important}
+.kk-status{color:#625A56!important;font-weight:650!important}
+.kk-action{
+  background:#30292B!important;color:#fff!important;
+  box-shadow:0 5px 14px rgba(48,41,43,.13);
+}
+.kurskort:hover .kk-action{background:var(--acc)!important;transform:scale(1.07)!important}
+
+@media(max-width:920px){
+  .kv-designhero{grid-template-columns:1fr 120px;padding:19px 23px}
+  .kv-designhero-art{transform:scale(.88);transform-origin:right center}
+}
+@media(max-width:680px){
+  .kv-designhero{display:block;margin-bottom:24px;padding:19px 20px 20px;border-radius:20px;min-height:0}
+  .kv-designhero-art{display:none}
+  .kv-designhero h2{font-size:clamp(27px,8vw,35px)}
+}
 </style>
 <!-- KaTeX för matematikrendering -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
 </head>
-<body class="password-locked">
+<body>
 
-<section class="password-gate" id="passwordGate" aria-labelledby="passwordTitle">
+<section class="password-gate" id="passwordGate" hidden aria-labelledby="passwordTitle">
   <form class="password-card" id="passwordForm">
     <div class="password-brand">
       <img src="logo.png" alt="Erik Dahlbergsgymnasiet">
@@ -1437,10 +1576,18 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
         <span class="kv-logo-shell"><img src="logo.png" alt="Erik Dahlbergsgymnasiet"></span>
         <span class="kv-brandtext">
           <span class="kv-brandname">Erik Dahlbergsgymnasiets uppgiftsbank</span>
-          <span class="kv-brandmeta">Välj kurs för att skapa övningsblad</span>
         </span>
       </div>
     </header>
+
+    <section class="kv-designhero" aria-label="Introduktion">
+      <div class="kv-designhero-copy">
+        <h2>Bygg ett <span>prov eller övningsblad.</span></h2>
+      </div>
+      <div class="kv-designhero-art" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+    </section>
 
     <section class="kv-kurssektion" aria-labelledby="kvKurserRubrik">
       <div class="kv-sektionstopp">
