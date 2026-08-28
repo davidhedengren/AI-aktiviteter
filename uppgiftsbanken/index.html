@@ -31,7 +31,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 ::selection{background:var(--ed-ring)}
 [hidden]{display:none!important}
 
-/* ── kursväljaren · premium 2026 ── */
+/* ── Kursväljare · grundlayout ── */
 .kursval{
   position:fixed;inset:0;z-index:100;overflow:auto;
   display:block;padding:clamp(22px,4vw,54px);
@@ -129,7 +129,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 }
 @media (max-width:420px){.kursval{padding:16px}.kv-brandname{font-size:12.5px}.kv-brandmeta{font-size:8.5px}.kv-hero{padding-top:45px}.kurskort{padding:21px}.kk-taggar{gap:5px}}
 
-/* ── kursväljaren · renare variant ── */
+/* ── Kursväljare · kortlayout ── */
 .kursval{
   display:grid;
   place-items:center;
@@ -268,7 +268,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 }
 
 
-/* ── slutlig finjustering av kursväljaren ── */
+/* ── Kursväljare · responsiv justering ── */
 .kv-inner{width:min(1080px,100%)}
 .kv-brandname{
   font-size:clamp(30px,3vw,44px);
@@ -311,7 +311,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 }
 
 
-/* ── kursväljare · compact editorial pass ── */
+/* ── Kursväljare · kompakt layout ── */
 .kursval{
   padding:clamp(24px,3.3vw,48px);
 }
@@ -438,7 +438,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 }
 
 
-/* ── v2 · ren CTA och tydligare pil ── */
+/* ── Kurskort · åtgärdsknapp ── */
 .kk-fot{
   flex-direction:row;
   align-items:flex-end;
@@ -483,7 +483,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 }
 
 
-/* ── v3 · optiskt centrerad kortpil ── */
+/* ── Kurskort · pilcentrering ── */
 .kk-action{
   width:42px;
   height:42px;
@@ -503,7 +503,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 }
 
 
-/* ── v4 · faktisk högerplacering och centrerad pil ── */
+/* ── Kurskort · högerställd åtgärdsknapp ── */
 .kk-fot{
   display:flex;
   flex-direction:row;
@@ -511,7 +511,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
   width:100%;
 }
 .kk-action{
-  margin-left:auto;            /* alltid längst till höger, även utan status */
+  margin-left:auto;            /* Placerar åtgärdsknappen längst till höger. */
   width:42px;
   height:42px;
   flex:0 0 42px;
@@ -534,7 +534,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 }
 
 
-/* ── v5 · längre pil ── */
+/* ── Kurskort · pilstorlek ── */
 .kk-action svg{
   width:21px;
   height:21px;
@@ -543,18 +543,33 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
   transform:none!important;
 }
 
-/* ── tillfällig statusstämpel för matematikkurser som byggs ut ── */
+/* ── Statusstämpel för kurser under uppbyggnad ── */
 .kk-byggstamp{
-  position:absolute;z-index:5;right:18px;top:58px;pointer-events:none;
-  padding:5px 9px 4px;border:1.5px solid rgba(142,37,25,.48);border-radius:6px;
-  background:rgba(255,248,246,.90);color:#8E2519;
-  font-family:var(--mono);font-size:8.5px;font-weight:700;line-height:1;
-  letter-spacing:.10em;text-transform:uppercase;
-  transform:rotate(5deg);box-shadow:0 1px 0 rgba(142,37,25,.08);
-  opacity:.88;
+  position:absolute;
+  z-index:7;
+  left:50%;
+  top:54%;
+  width:170%;
+  pointer-events:none;
+  padding:12px 0 10px;
+  border:3px solid rgba(142,37,25,.58);
+  border-radius:10px;
+  background:rgba(255,248,246,.86);
+  color:#8E2519;
+  font-family:var(--mono);
+  font-size:22px;
+  font-weight:800;
+  line-height:1;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-align:center;
+  transform:translate(-50%,-50%) rotate(-31deg);
+  box-shadow:0 2px 0 rgba(142,37,25,.10);
+  opacity:.92;
 }
 .kurskort:hover .kk-byggstamp{opacity:1}
-@media(max-width:620px){.kk-byggstamp{right:17px;top:56px}}
+@media(max-width:920px){.kk-byggstamp{width:182%;font-size:19px;padding:10px 0 8px}}
+@media(max-width:620px){.kk-byggstamp{width:195%;font-size:15px;padding:8px 0 6px;top:56%}}
 
 /* ── topprad ── */
 .top{height:80px;background:var(--surface);border-bottom:1px solid var(--line);
@@ -768,7 +783,7 @@ table.data th{background:var(--sunken);font-weight:600}
 .fält .rad{display:flex;gap:8px}
 .fält .rad input{flex:1;min-width:0}
 
-/* signaturen: poängmätaren */
+/* Poängmätare */
 .mätare{padding:19px 18px;border-bottom:1px solid var(--line-2)}
 .mätarhuvud{display:flex;align-items:flex-end;gap:8px;margin-bottom:14px}
 .summa{font-family:var(--ui);font-size:32px;font-weight:800;letter-spacing:-.035em;line-height:1;
@@ -875,7 +890,7 @@ table.data th{background:var(--sunken);font-weight:600}
 .ru-stäng svg{width:17px;height:17px}
 .ru-body{padding:20px;overflow:auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);gap:20px;align-items:start}
 .ru-vänster{display:flex;flex-direction:column;gap:18px;min-width:0}
-/* Facit ligger hopfällt så att man inte råkar ändra det av misstag. */
+/* Facit är hopfällt som standard för att minska oavsiktliga ändringar. */
 .ru-facit-fäll{border:1px solid var(--line);border-radius:12px;background:var(--surface)}
 .ru-facit-topp{
   display:flex;align-items:center;gap:9px;padding:11px 13px;cursor:pointer;
@@ -942,7 +957,7 @@ table.data th{background:var(--sunken);font-weight:600}
 }
 
 
-/* ── mobilfix för uppgiftsredigeraren ── */
+/* ── Mobilanpassning för uppgiftsredigeraren ── */
 .redigera-uppgift{
   min-height:100dvh;
 }
@@ -1013,7 +1028,7 @@ table.data th{background:var(--sunken);font-weight:600}
 .fig[style*="width"] svg,.fig[style*="width"] img{width:100%;max-width:none;height:auto}
 
 
-/* ── robust figurstorlek: relativt figurens ursprungsbredd ── */
+/* ── Figurstorlek relativt figurens ursprungsbredd ── */
 .fig[data-bildskala]{
   display:block!important;
   width:min(var(--bildbredd,520px),100%)!important;
@@ -1035,7 +1050,7 @@ table.data th{background:var(--sunken);font-weight:600}
   height:auto!important;
 }
 @media print{
-  /* Viktigt: aldrig bredare än utskriftskolumnen, annars skalar Chrome ned hela sidan. */
+  /* Begränsar figurbredden till utskriftskolumnen för att undvika nedskalning av hela sidan. */
   #utskrift .fig[data-bildskala]{
     display:block!important;
     width:min(var(--bildbredd,120mm),100%)!important;
@@ -1148,7 +1163,7 @@ table.data th{background:var(--sunken);font-weight:600}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
-/* Slutlig utskriftsregel för redigerad figurstorlek. */
+/* Utskriftsregel för redigerad figurstorlek. */
 @media print{
   #utskrift .fig[data-bildskala]{
     display:block!important;
@@ -1165,14 +1180,10 @@ table.data th{background:var(--sunken);font-weight:600}
 
 /* ═══════════════════════════════════════════════════════════════════════
    STARTSIDA · kompakt, toppförankrad och ämnesindelad
-   Den här slutliga regeln ersätter tidigare vertikal centrering. Det gör
-   att rubrik och första kortraden aldrig hamnar ovanför viewporten när
-   antalet kurser växer.
+   Layouten håller rubrik och kurskort inom viewporten när antalet kurser ökar.
 
-   OBS: display får INTE vara !important här. Appen växlar vy genom att sätta
-   hidden på #kursval. Om .kursval också har display:block!important vinner
-   den senare regeln över [hidden]{display:none!important}, och kursväljaren
-   ligger då kvar ovanpå banken trots att startaKurs() har körts.
+   Egenskapen display ska inte använda !important här eftersom #kursval
+   döljs med attributet hidden när en kurs öppnas.
    ═══════════════════════════════════════════════════════════════════════ */
 .kursval{
   display:block;
@@ -1273,10 +1284,14 @@ table.data th{background:var(--sunken);font-weight:600}
 }
 .kk-action svg{width:17px!important;height:17px!important}
 .kk-byggstamp{
-  right:14px!important;top:48px!important;
-  padding:4px 7px 3px!important;
-  font-size:7.5px!important;
-  transform:rotate(4deg)!important;
+  left:50%!important;
+  top:54%!important;
+  right:auto!important;
+  width:170%!important;
+  padding:12px 0 10px!important;
+  font-size:22px!important;
+  text-align:center!important;
+  transform:translate(-50%,-50%) rotate(-31deg)!important;
 }
 
 @media(max-width:920px){
@@ -1295,11 +1310,10 @@ table.data th{background:var(--sunken);font-weight:600}
   .kk-namn{font-size:21px!important}
 }
 
-/* hidden måste alltid kunna stänga kursväljaren när en kurs öppnas.
-   Högre specificitet än .kursval gör regeln robust även vid framtida CSS-ändringar. */
+/* Säkerställer att attributet hidden kan dölja kursväljaren när en kurs öppnas. */
 .kursval[hidden]{display:none!important}
 
-/* ── enkelt lösenordsskydd för den statiska sidan ── */
+/* ── Lösenordsskydd för den statiska sidan ── */
 body.password-locked{overflow:hidden}
 body.password-locked > :not(#passwordGate){visibility:hidden}
 .password-gate{
@@ -1415,9 +1429,7 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
 })();
 </script>
 
-<!-- ═══ kursväljaren ═══
-     Kurserna definieras i KURSER längst ned i skriptet. Varje kurs har sina
-     egna filer och sina egna globala namn, så att två kurser aldrig krockar. -->
+<!-- Kursväljare: varje kurs definieras i KURSER med separata filer och globala namn. -->
 <div class="kursval" id="kursval">
   <div class="kv-inner">
     <header class="kv-nav" aria-label="Uppgiftsbanken">
@@ -1925,7 +1937,7 @@ function laddaSkript(src){
     document.head.appendChild(s);
   });
 }
-/* Läser en global oavsett om filen använder window.NAMN eller const NAMN. */
+/* Läser kursens globala data oavsett om den exponeras via window eller global deklaration. */
 function hämtaGlobal(namn){
   if(namn in window && window[namn]!==undefined) return window[namn];
   try{ return (0,eval)(namn); }catch(e){ return undefined; }
@@ -1933,7 +1945,7 @@ function hämtaGlobal(namn){
 async function väljKurs(kurs,kort){
   $('#kvFel').hidden=true;
 
-  /* Om kursen redan är inläst ska inget laddningssteg göras om. */
+  /* Hoppar över filinläsning för kurser som redan är laddade. */
   if(kurs.data){
     startaKurs(kurs);
     return;
@@ -1948,10 +1960,8 @@ async function väljKurs(kurs,kort){
   }
   status.textContent='Läser in…';
 
-  /* Här fångas ENDAST fel vid filinläsningen. Kursstarten ligger avsiktligt
-     utanför try-blocket, så ett fel i bankvyn aldrig kan feltolkas som att
-     filerna saknas eller lämna användaren kvar på ett kort som bara säger
-     ”uppgifter redo”. */
+  /* Felhanteringen omfattar endast filinläsningen. Kursstarten hanteras separat
+     så att fel i bankvyn inte rapporteras som saknade kursfiler. */
   try{
     for(const f of kurs.filer) await laddaSkript(f);
     const bank=hämtaGlobal(kurs.globaler.bank);
@@ -1973,8 +1983,7 @@ async function väljKurs(kurs,kort){
     return;
   }
 
-  /* Filinläsningen är klar. Rita INTE om kursväljaren här — gå direkt in i
-     banken. Detta är den viktiga skillnaden mot den tidigare versionen. */
+  /* När filinläsningen är klar öppnas banken direkt utan omrendering av kursväljaren. */
   kort.classList.remove('laddar');
   status.textContent=`${kurs.data.bank.length} uppgifter redo`;
   startaKurs(kurs);
@@ -1994,9 +2003,7 @@ function visaKursval(){
 function startaKurs(kurs){
   AKTIV=kurs; DB=kurs.data;
 
-  /* Växla vy FÖRST. Om något oväntat fel finns i en enskild uppgift ska
-     användaren ändå lämna kursväljaren och få ett synligt fel inne i banken,
-     aldrig fastna på ett kort som säger ”redo”. */
+  /* Vyn växlas innan uppgiftsrenderingen så att renderingsfel kan visas i bankvyn. */
   $('#kursval').hidden=true;
   document.querySelector('.top').hidden=false;
   document.querySelector('.arbetsyta').hidden=false;
@@ -2162,7 +2169,7 @@ function rita(){
       </div>
     </article>`).join('');
 
-  /* rendera KaTeX i uppgiftstexterna direkt */
+  /* Renderar KaTeX i uppgiftstexterna. */
   renderKatex($('#lista'));
 
   $$('.kort').forEach(k=>{
@@ -2297,7 +2304,7 @@ function htmlTillRedigerbarText(html){
   const d=document.createElement('div');
   d.innerHTML=utanFigur(html);
   d.querySelectorAll('br').forEach(br=>br.replaceWith('\n'));
-  /* Konvertera <strong> till **text** */
+  /* Konverterar <strong> till **text**. */
   d.querySelectorAll('strong').forEach(el=>{
     el.replaceWith('**'+el.textContent+'**');
   });
@@ -2337,7 +2344,7 @@ function textTillFacitHTML(text){
 
 function redigerbarTextTillHTML(text){
   const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  /* Konvertera **text** till <strong> (görs efter esc för säkerhets skull) */
+  /* Konverterar **text** till <strong> efter HTML-escaping. */
   const bold=s=>esc(s).replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
   const rader=text.replace(/\r/g,'').split('\n');
   let out='', lista=[];
@@ -2371,8 +2378,7 @@ function figurStorlekUrHTML(figHTML){
 }
 function mätBildBas(){
   if(urBildBas>0)return urBildBas;
-  /* Läs figurens naturliga bredd ur SVG:ns egna attribut, inte ur den
-     nedskalade förhandsvisningen — annars blir referensbredden fel. */
+  /* Läser figurens naturliga bredd från SVG-attributen i stället för den skalade förhandsvisningen. */
   const box=document.createElement('div');
   box.innerHTML=urBildHTML||'';
   const svg=box.querySelector('svg');
@@ -2421,8 +2427,7 @@ function ritaUrBild(){
     if(fig){
       const bas=urBildBas||mätBildBas();
       const px=Math.round(bas*(urBildBredd/100)*10)/10;
-      /* Bilden visas i sin valda skala. Boxen har fast höjd och scrollar,
-         så stora figurer tar inte över dialogen. */
+      /* Bilden visas i vald skala i en behållare med fast höjd och rullning. */
       fig.style.display='block';
       fig.style.width=px+'px';
       fig.style.maxWidth='none';
@@ -2457,7 +2462,7 @@ function öppnaUppgiftsredigering(x,frånBlad=false){
   $('#ruId').textContent=x.id+' · '+(DB.omr[x.kap]?.[x.omr]||'');
   $('#ruText').value=htmlTillRedigerbarText(x.t);
   $('#ruFacit').value=facitTillText(x.s||'');
-  /* Facit börjar alltid hopfällt så att det inte ändras av misstag. */
+  /* Facit öppnas hopfällt för att minska oavsiktliga ändringar. */
   $('#ruFacitFäll').open=false;
   const facitRader=$('#ruFacit').value.split('\n').filter(r=>r.trim()).length;
   $('#ruFacitStatus').textContent=facitRader
@@ -2591,7 +2596,7 @@ async function kopieraFacit(){
   setTimeout(()=>$('#ruKopieraFacit').textContent='Kopiera facit',1200);
 }
 $('#ruKopieraFacit').addEventListener('click',kopieraFacit);
-/* Håll radräknaren i rubriken aktuell medan man skriver. */
+/* Uppdaterar radräknaren medan texten redigeras. */
 $('#ruFacit').addEventListener('input',()=>{
   const n=$('#ruFacit').value.split('\n').filter(r=>r.trim()).length;
   $('#ruFacitStatus').textContent=n?n+(n===1?' rad':' rader'):'tomt';
@@ -2629,10 +2634,9 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&!UR.hidden){e.stopImmediatePropagation();stängUppgiftsredigering();}
 });
 
-/* ── ändra poäng och nivå ──
-   Läraren klickar på nivåmärket eller poängen och justerar E, C och A var för sig.
-   Nivån räknas om direkt: uppgiften hamnar på den högsta nivå som har minst lika
-   många poäng som nivåerna under sig. Lika många A-poäng som C-poäng ger A-nivå. */
+/* ── Ändra poäng och nivå ──
+   E-, C- och A-poäng justeras separat. Nivån räknas om direkt utifrån
+   den högsta nivå som uppfyller poängvillkoren. */
 const REDTITEL='Klicka för att ändra poäng och nivå';
 const PR=$('#poängred');
 let redigerar=null;
@@ -2666,7 +2670,7 @@ function ritaPR(){
   });
   $('#prÅterställ').disabled=!ändrad(x);
 }
-/* uppdaterar märkena på plats så att kortet inte ritas om under fingret */
+/* Uppdaterar nivå- och poängmärken utan att rendera om hela kortet. */
 function patchaMärken(x){
   document.querySelectorAll('.kort[data-id="'+x.id+'"]').forEach(k=>{
     const n=k.querySelector('.nivå');
@@ -2757,8 +2761,7 @@ function körSlumpa(){
   const n=Math.max(1,Math.min(40,parseInt($('#slumpaAntal').value,10)||12));
   $('#slumpaAntal').value=n;
 
-  /* Blanda forst och plocka bort uppgifter ur samma familj, sa att
-     kandidatlistorna redan ar avdubblade nar kvoterna raknas ut. */
+  /* Blandar kandidater och tar bort dubbletter inom samma familj före kvotberäkningen. */
   const blandad=pool.slice().sort(()=>Math.random()-.5);
   const fam=new Set(), kand={E:[],C:[],A:[]};
   for(const x of blandad){
@@ -2767,8 +2770,7 @@ function körSlumpa(){
     if(kand[x.niva]) kand[x.niva].push(x);
   }
 
-  /* Fordela bara over de nivaer som faktiskt finns i urvalet. Har laren
-     filtrerat pa enbart E ska alla n uppgifter tas darifran. */
+  /* Fördelar uppgifter endast över de nivåer som finns i det aktuella urvalet. */
   const vikt={E:5,C:4,A:3};
   const nivaer=['E','C','A'].filter(k=>kand[k].length);
   const ut=[];
@@ -2781,7 +2783,7 @@ function körSlumpa(){
       rest.push([k,exakt-Math.floor(exakt)]);
     });
     rest.sort((a,b)=>b[1]-a[1]);
-    /* Dela ut resterande platser, och hoppa over nivaer som tagit slut. */
+    /* Fördelar återstående platser och hoppar över nivåer utan fler kandidater. */
     let kvar=n-nivaer.reduce((s,k)=>s+mal[k],0);
     let varv=0;
     while(kvar>0&&varv<nivaer.length*40){
@@ -2791,7 +2793,7 @@ function körSlumpa(){
     }
     nivaer.forEach(k=>ut.push(...kand[k].slice(0,mal[k])));
 
-    /* Ryck in uppgifter fran ovriga nivaer om nagon niva tog slut. */
+    /* Fyller återstående platser från övriga nivåer om en nivå saknar tillräckligt många uppgifter. */
     if(ut.length<n){
       const har=new Set(ut.map(x=>x.id));
       for(const k of nivaer){
@@ -2841,13 +2843,10 @@ function trimmaUtskriftsFigurer(root){
       const b=svg.getBBox();
       if(!b||!isFinite(b.x)||!isFinite(b.y)||b.width<=0||b.height<=0)return;
 
-      /* getBBox mäter bara geometrin och räknar varken in linjebredd,
-         pilspetsar eller textens överhäng. Marginalen måste därför vara
-         rejäl, annars kapas pilspetsar och etiketter i kanterna. */
+      /* getBBox mäter geometrin men inte linjebredd, pilspetsar eller textöverhäng; en extra marginal förhindrar beskärning. */
       const pad=Math.max(8,b.width*.04,b.height*.04);
 
-      /* Krymp aldrig innanför figurens egen viewBox — den är redan satt
-         med korrekta marginaler när figuren ritades. */
+      /* Figurens egen viewBox behålls som minsta beskärningsområde för att bevara avsedda marginaler. */
       const vb=(svg.getAttribute('viewBox')||'').split(/[\s,]+/).map(Number);
       let x=b.x-pad, y=b.y-pad, w=b.width+2*pad, h=b.height+2*pad;
       if(vb.length===4&&vb.every(isFinite)&&vb[2]>0&&vb[3]>0){
@@ -2901,7 +2900,7 @@ function bladHTML({facit}){
 $('#expPdf').addEventListener('click',()=>{
   const u=$('#utskrift');
   u.innerHTML=bladHTML({facit:$('#taMedFacit').checked});
-  /* KaTeX måste renderas medan elementet är i DOM:en, innan geometrin mäts */
+  /* Renderar KaTeX i DOM innan elementets geometri mäts. */
   renderKatex(u);
 
   // Första frame: DOM + SVG läggs ut.
@@ -2998,7 +2997,7 @@ $('#expWord').addEventListener('click',()=>{
       .komm{margin-left:24pt;color:#333}
     
 
-/* ── slutlig statusstämpel · stor diagonal över hela kortet ── */
+/* ── Statusstämpel · stor diagonal över hela kortet ── */
 .kk-byggstamp{
   position:absolute!important;
   z-index:6!important;
@@ -3048,7 +3047,7 @@ $('#expWord').addEventListener('click',()=>{
   setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},400);
 });
 
-/* ── KaTeX: kör på alla öppna facit efter att listan ritats om ── */
+/* ── KaTeX · öppna facit efter omrendering ── */
 function renderKatex(root){
   if(!window.renderMathInElement) return;
   renderMathInElement(root||document.body,{
@@ -3059,10 +3058,10 @@ function renderKatex(root){
     throwOnError:false
   });
 }
-/* Kör när KaTeX-scriptet är laddat (defer, så det händer efter DOMContentLoaded) */
+/* Initierar KaTeX efter att skriptet har laddats. */
 window.addEventListener('load',()=>{ if(window.renderMathInElement) renderKatex(); });
 
-/* ── igång ── */
+/* ── Initiering ── */
 $('#bDatum').value=new Date().toLocaleDateString('sv-SE');
 ritaKursval();
 </script>
