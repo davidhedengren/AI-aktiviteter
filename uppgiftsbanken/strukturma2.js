@@ -1,14 +1,6 @@
 /* strukturma2.js — gemensam struktur för Matematik nivå 2a, 2b och 2c.
-   Ämnesplanen styr vilka områden som hör till respektive spår via SPARMA2.
-
-   Designprincip:
-   - samma kapitelnummer betyder alltid samma innehåll i 2a, 2b och 2c
-   - kapitel 3 = Geometri och kapitel 4 = Statistik i samtliga spår
-   - områden listas direkt under kapitlet; inga extra utfällbara undergrupper
-   - repetition och fördjupning får finnas när de är didaktiskt användbara,
-     men kurskopplingarna ska inte tolkas som att allt är uttryckligt centralt innehåll
-   - digitala verktyg, modellering, problemlösning, kritisk granskning och
-     matematikhistoria integreras främst i uppgifterna inom respektive område
+   Reviderad så att rena nivå 1-områden har tagits bort ur kapitel 1,
+   och regression/korrelation ligger under statistik.
 */
 
 window.KAPNAMNMA2 = {
@@ -18,41 +10,11 @@ window.KAPNAMNMA2 = {
   "4": "Statistik",
   "5": "Program- och yrkesspecifikt innehåll"
 };
-
-window.KAPNAMNMA2SPAR = {
-  "2a": {
-    "1": "Algebra",
-    "2": "Algebra och icke-linjära modeller",
-    "3": "Geometri",
-    "4": "Statistik",
-    "5": "Program- och yrkesspecifikt innehåll"
-  },
-  "2b": {
-    "1": "Algebra",
-    "2": "Algebra och icke-linjära modeller",
-    "3": "Geometri",
-    "4": "Statistik"
-  },
-  "2c": {
-    "1": "Algebra",
-    "2": "Algebra och icke-linjära modeller",
-    "3": "Geometri",
-    "4": "Statistik"
-  }
-};
-
 window.OMRMA2 = {
   "1": {
-    "negativa_tal_prioritering": "Negativa tal och prioriteringsregler",
-    "brakraking": "Beräkningar med bråk",
-    "algebraiska_uttryck": "Algebraiska uttryck",
-    "ekvationer": "Ekvationer",
-    "ekvationer_digitala_verktyg": "Ekvationer med digitala verktyg",
     "rata_linjens_ekvation": "Räta linjens ekvation",
     "linjara_representationer": "Räta linjer: formel, tabell och graf",
     "bestamma_linjara_funktioner": "Bestämma linjära funktioner",
-    "linjar_regression": "Linjär regression",
-    "korrelation_koefficient": "Korrelation och korrelationskoefficient",
     "linjara_ekvationssystem": "Linjära ekvationssystem",
     "grafisk_losning_ekvationssystem": "Grafisk lösning av ekvationssystem",
     "substitutionsmetoden": "Substitutionsmetoden",
@@ -113,6 +75,8 @@ window.OMRMA2 = {
     "lagesmatt": "Medelvärde, median och typvärde",
     "kvartiler_percentiler": "Kvartiler och percentiler",
     "ladagram": "Lådagram",
+    "linjar_regression": "Linjär regression",
+    "korrelation_koefficient": "Korrelation och korrelationskoefficient",
     "standardavvikelse": "Standardavvikelse",
     "normalfordelat_material": "Normalfördelning och normalfördelat material",
     "normalfordelning_digitala_verktyg": "Normalfördelning med digitala verktyg",
@@ -125,30 +89,8 @@ window.OMRMA2 = {
     "vard_omsorgsprogrammet": "Vård- och omsorgsprogrammet"
   }
 };
-
 window.SPARMA2 = {
   "1": {
-    "negativa_tal_prioritering": [
-      "2b",
-      "2c"
-    ],
-    "brakraking": [
-      "2b",
-      "2c"
-    ],
-    "algebraiska_uttryck": [
-      "2b",
-      "2c"
-    ],
-    "ekvationer": [
-      "2b",
-      "2c"
-    ],
-    "ekvationer_digitala_verktyg": [
-      "2a",
-      "2b",
-      "2c"
-    ],
     "rata_linjens_ekvation": [
       "2a",
       "2b",
@@ -161,14 +103,6 @@ window.SPARMA2 = {
     ],
     "bestamma_linjara_funktioner": [
       "2a",
-      "2b",
-      "2c"
-    ],
-    "linjar_regression": [
-      "2b",
-      "2c"
-    ],
-    "korrelation_koefficient": [
       "2b",
       "2c"
     ],
@@ -417,6 +351,14 @@ window.SPARMA2 = {
       "2b",
       "2c"
     ],
+    "linjar_regression": [
+      "2b",
+      "2c"
+    ],
+    "korrelation_koefficient": [
+      "2b",
+      "2c"
+    ],
     "standardavvikelse": [
       "2a",
       "2b",
@@ -452,4 +394,3 @@ window.SPARMA2 = {
   }
 };
 window.GRUPPMA2 = {};
-

@@ -1,132 +1,9 @@
-/* uppgifterma2.js — pq-reviderade facit och utbyggnad av markerade andragradsområden. */
+/* uppgifterma2.js — reviderad Matematik nivå 2-bank.
+   Kapitel 1 rensat från rena nivå 1-områden.
+   Regression och korrelation flyttade till statistik.
+   Kapitel 3 SVG-figurer kvalitetssäkrade och korrigerade.
+*/
 window.BANKMA2 = [
-  {
-    "id": "1.01",
-    "kap": 1,
-    "omr": "negativa_tal_prioritering",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "3/0/0",
-    "t": "<p>Beräkna utan digitala hjälpmedel.</p><p>a) \\(-4+3(2-7)\\)<br>b) \\(18/(-3)-2(-4)\\)<br>c) \\(-2^2+(-2)^2\\)</p>",
-    "s": "<p>a) Parentesen först: \\(2-7=-5\\). Då blir \\(-4+3\\cdot(-5)=-19\\).</p><p>b) \\(18/(-3)=-6\\) och \\(-2(-4)=8\\). Summan blir \\(2\\).</p><p>c) \\(-2^2=-(2^2)=-4\\), medan \\((-2)^2=4\\). Summan blir \\(0\\).</p><p><strong>Svar: a) −19, b) 2, c) 0.</strong></p>",
-    "familj": "prioritering_negativa_flera_steg"
-  },
-  {
-    "id": "1.02",
-    "kap": 1,
-    "omr": "negativa_tal_prioritering",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Mira beräknar \\(-3^2+2(-4)\\) och får svaret 1. Hon har räknat \\(-3^2\\) som 9.</p><p>Förklara vad som är fel och beräkna uttrycket korrekt.</p>",
-    "s": "<p>Potensen beräknas före minustecknet: \\(-3^2=-(3^2)=-9\\).</p><p>Därför är \\(-3^2+2(-4)=-9-8=-17\\).</p><p><strong>Miras fel är att hon behandlar \\(-3^2\\) som \\((-3)^2\\). Rätt svar är −17.</strong></p>",
-    "familj": "prioritering_negativ_potens_felanalys"
-  },
-  {
-    "id": "1.03",
-    "kap": 1,
-    "omr": "brakraking",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "3/0/0",
-    "t": "<p>Beräkna och svara i förkortad form.</p><p>a) \\(\\frac56-\\frac38\\)<br>b) \\(-\\frac35\\cdot\\frac{10}{9}\\)<br>c) \\(\\frac7{12}\\div\\frac{14}{9}\\)</p>",
-    "s": "<p>a) \\(\\frac56-\\frac38=\\frac{20}{24}-\\frac9{24}=\\frac{11}{24}\\).</p><p>b) \\(-\\frac35\\cdot\\frac{10}{9}=-\\frac{30}{45}=-\\frac23\\).</p><p>c) \\(\\frac7{12}\\cdot\\frac9{14}=\\frac38\\).</p><p><strong>Svar: a) \\(\\frac{11}{24}\\), b) \\(-\\frac23\\), c) \\(\\frac38\\).</strong></p>",
-    "familj": "brak_flera_raknesatt"
-  },
-  {
-    "id": "1.04",
-    "kap": 1,
-    "omr": "brakraking",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>En tank är fylld till \\(\\frac35\\) av sin volym. Därefter används \\(\\frac14\\) av vattnet som finns i tanken. Då återstår 18 liter.</p><p>Hur stor är tankens hela volym?</p>",
-    "s": "<p>Efter att en fjärdedel har använts återstår \\(\\frac34\\) av vattnet som fanns i tanken.</p><p>Om \\(\\frac34\\) motsvarar 18 liter, fanns det \\(18\\cdot\\frac43=24\\) liter före användningen.</p><p>Dessa 24 liter är \\(\\frac35\\) av tankens volym.</p><p>\\(V=24\\cdot\\frac53=40\\).</p><p><strong>Tankens volym är 40 liter.</strong></p>",
-    "familj": "brak_baklanges_volym"
-  },
-  {
-    "id": "1.05",
-    "kap": 1,
-    "omr": "algebraiska_uttryck",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Förenkla så långt som möjligt.</p><p>\\(3(2x-y)-2(x+3y)+4\\)</p>",
-    "s": "<p>Förenkla stegvis: multiplicera in i parenteserna och samla sedan liknande termer.</p><p>Multiplicera in i parenteserna:</p><p>\\(6x-3y-2x-6y+4\\).</p><p>Samla termer av samma sort:</p><p><strong>\\(4x-9y+4\\)</strong>.</p>",
-    "familj": "algebra_uttryck_tva_variabler_parenteser"
-  },
-  {
-    "id": "1.06",
-    "kap": 1,
-    "omr": "algebraiska_uttryck",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Uttrycket är</p><p>\\(A(x)=3(2x-a)-2(x+4)+bx\\).</p><p>Bestäm \\(b\\) så att värdet av \\(A(x)\\) inte beror på \\(x\\). Bestäm sedan värdet av uttrycket när \\(a=-1\\).</p>",
-    "s": "<p>Förenkla:</p><p>\\(A(x)=6x-3a-2x-8+bx=(4+b)x-3a-8\\).</p><p>För att uttrycket inte ska bero på \\(x\\) måste koefficienten framför \\(x\\) vara 0:</p><p>\\(4+b=0\\Rightarrow b=-4\\).</p><p>När \\(a=-1\\) blir värdet \\(-3(-1)-8=-5\\).</p><p><strong>\\(b=-4\\) och uttryckets värde är −5.</strong></p>",
-    "familj": "algebra_parameter_oberoende_av_x"
-  },
-  {
-    "id": "1.07",
-    "kap": 1,
-    "omr": "ekvationer",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Lös ekvationerna.</p><p>a) \\(4(2x-3)=3x+13\\)<br>b) \\(\\frac{x-2}{3}+\\frac{x+1}{2}=5\\)</p>",
-    "s": "<p>a) \\(8x-12=3x+13\\Rightarrow5x=25\\Rightarrow x=5\\).</p><p>b) Multiplicera med 6: \\(2(x-2)+3(x+1)=30\\). Då \\(5x-1=30\\), alltså \\(x=\\frac{31}{5}\\).</p><p><strong>Svar: a) \\(x=5\\), b) \\(x=\\frac{31}{5}\\).</strong></p>",
-    "familj": "ekvationer_parentes_och_brak"
-  },
-  {
-    "id": "1.08",
-    "kap": 1,
-    "omr": "ekvationer",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Ekvationen</p><p>\\((a-2)x+6=4x+a\\)</p><p>ska vara sann för alla värden på \\(x\\). Bestäm \\(a\\).</p>",
-    "s": "<p>För att ekvationen ska vara sann för alla \\(x\\) måste både koefficienterna framför \\(x\\) och de konstanta termerna vara lika.</p><p>\\(a-2=4\\Rightarrow a=6\\).</p><p>Konstanterna ger samtidigt \\(6=a\\), vilket också ger \\(a=6\\).</p><p><strong>\\(a=6\\).</strong></p>",
-    "familj": "ekvation_parameter_identitet"
-  },
-  {
-    "id": "1.09",
-    "kap": 1,
-    "omr": "ekvationer_digitala_verktyg",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Använd ett digitalt verktyg för att lösa ekvationen</p><p>\\(\\frac{18}{x+2}=4,6\\).</p><p>Svara med två decimaler.</p>",
-    "s": "<p>Använd ekvationslösaren och kontrollera gärna lösningen genom att sätta in värdet i ursprungsekvationen.</p><p>En digital lösning ger \\(x\\approx1,913\\).</p><p><strong>\\(x\\approx1,91\\).</strong></p>",
-    "familj": "digital_ekvation_brak"
-  },
   {
     "id": "1.10",
     "kap": 1,
@@ -276,76 +153,6 @@ window.BANKMA2 = [
     "t": "<p>En linjär funktion \\(f(x)=kx+m\\) uppfyller \\(f(p)=q\\) och \\(f(q)=p\\), där \\(p\\ne q\\).</p><p>Visa att \\(k=-1\\). Bestäm sedan \\(f\\!\\left(\\frac{p+q}{2}\\right)\\).</p>",
     "s": "<p>Villkoren ger \\(kp+m=q\\) och \\(kq+m=p\\).</p><p>Subtrahera ekvationerna:</p><p>\\(k(p-q)=q-p=-(p-q)\\).</p><p>Eftersom \\(p\\ne q\\) kan vi dividera med \\(p-q\\), vilket ger \\(k=-1\\).</p><p>Sätt in i till exempel första ekvationen: \\(-p+m=q\\Rightarrow m=p+q\\).</p><p>Därför är \\(f(x)=-x+p+q\\).</p><p>\\(f\\!\\left(\\frac{p+q}{2}\\right)=-\\frac{p+q}{2}+p+q=\\frac{p+q}{2}\\).</p><p><strong>\\(k=-1\\) och \\(f((p+q)/2)=(p+q)/2\\).</strong></p>",
     "familj": "linjar_generell_byter_plats_pa_tal"
-  },
-  {
-    "id": "1.20",
-    "kap": 1,
-    "omr": "linjar_regression",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En linjär regression ger modellen</p><p>\\(y=1,8x+42\\)</p><p>där \\(x\\) är antal träningspass och \\(y\\) är resultatet på ett test.</p><p>a) Tolka talet 1,8 i modellen.<br>b) Vilket resultat förutsäger modellen efter 10 träningspass?</p>",
-    "s": "<p>a) Modellen säger att testresultatet ökar med ungefär 1,8 enheter för varje extra träningspass.</p><p>b) \\(y=1,8\\cdot10+42=60\\).</p><p><strong>Ökning cirka 1,8 enheter per pass; modellen ger resultatet 60 efter 10 pass.</strong></p>",
-    "familj": "regression_tolka_lutning_och_prognos"
-  },
-  {
-    "id": "1.21",
-    "kap": 1,
-    "omr": "korrelation_koefficient",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "3/0/0",
-    "t": "<p>Spridningsdiagrammet visar ett samband mellan två variabler.</p><span class=\"fig smal\"><svg width=\"410\" height=\"370\" viewBox=\"0 0 410 370\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"408\" height=\"368\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"48.00\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"85.56\" y1=\"330.00\" x2=\"85.56\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"123.11\" y1=\"330.00\" x2=\"123.11\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"160.67\" y1=\"330.00\" x2=\"160.67\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"198.22\" y1=\"330.00\" x2=\"198.22\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"235.78\" y1=\"330.00\" x2=\"235.78\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"273.33\" y1=\"330.00\" x2=\"273.33\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"310.89\" y1=\"330.00\" x2=\"310.89\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"348.44\" y1=\"330.00\" x2=\"348.44\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"386.00\" y1=\"330.00\" x2=\"386.00\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"386.00\" y2=\"330.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"295.56\" x2=\"386.00\" y2=\"295.56\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"261.11\" x2=\"386.00\" y2=\"261.11\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"226.67\" x2=\"386.00\" y2=\"226.67\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"192.22\" x2=\"386.00\" y2=\"192.22\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"157.78\" x2=\"386.00\" y2=\"157.78\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"123.33\" x2=\"386.00\" y2=\"123.33\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"88.89\" x2=\"386.00\" y2=\"88.89\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"54.44\" x2=\"386.00\" y2=\"54.44\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"20.00\" x2=\"386.00\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"396.00\" y2=\"330.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M 396.00 330.00 l -8 -4 l 0 8 z\" fill=\"#2B2527\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"48.00\" y2=\"10.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M 48.00 10.00 l -4 8 l 8 0 z\" fill=\"#2B2527\"/><line x1=\"85.56\" y1=\"326.00\" x2=\"85.56\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"85.56\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">1</text><line x1=\"123.11\" y1=\"326.00\" x2=\"123.11\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"123.11\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">2</text><line x1=\"160.67\" y1=\"326.00\" x2=\"160.67\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"160.67\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">3</text><line x1=\"198.22\" y1=\"326.00\" x2=\"198.22\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"198.22\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">4</text><line x1=\"235.78\" y1=\"326.00\" x2=\"235.78\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"235.78\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">5</text><line x1=\"273.33\" y1=\"326.00\" x2=\"273.33\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"273.33\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">6</text><line x1=\"310.89\" y1=\"326.00\" x2=\"310.89\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"310.89\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">7</text><line x1=\"348.44\" y1=\"326.00\" x2=\"348.44\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"348.44\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">8</text><line x1=\"386.00\" y1=\"326.00\" x2=\"386.00\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"386.00\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">9</text><line x1=\"44.00\" y1=\"295.56\" x2=\"52.00\" y2=\"295.56\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"299.06\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">1</text><line x1=\"44.00\" y1=\"261.11\" x2=\"52.00\" y2=\"261.11\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"264.61\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">2</text><line x1=\"44.00\" y1=\"226.67\" x2=\"52.00\" y2=\"226.67\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"230.17\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">3</text><line x1=\"44.00\" y1=\"192.22\" x2=\"52.00\" y2=\"192.22\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"195.72\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">4</text><line x1=\"44.00\" y1=\"157.78\" x2=\"52.00\" y2=\"157.78\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"161.28\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">5</text><line x1=\"44.00\" y1=\"123.33\" x2=\"52.00\" y2=\"123.33\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"126.83\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">6</text><line x1=\"44.00\" y1=\"88.89\" x2=\"52.00\" y2=\"88.89\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"92.39\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">7</text><line x1=\"44.00\" y1=\"54.44\" x2=\"52.00\" y2=\"54.44\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"57.94\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">8</text><line x1=\"44.00\" y1=\"20.00\" x2=\"52.00\" y2=\"20.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"23.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">9</text><text x=\"40.00\" y=\"346.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">0</text><circle cx=\"85.56\" cy=\"54.44\" r=\"4.5\" fill=\"#2A5D9E\"/><circle cx=\"123.11\" cy=\"95.78\" r=\"4.5\" fill=\"#2A5D9E\"/><circle cx=\"160.67\" cy=\"82.00\" r=\"4.5\" fill=\"#2A5D9E\"/><circle cx=\"198.22\" cy=\"147.44\" r=\"4.5\" fill=\"#2A5D9E\"/><circle cx=\"235.78\" cy=\"161.22\" r=\"4.5\" fill=\"#2A5D9E\"/><circle cx=\"273.33\" cy=\"223.22\" r=\"4.5\" fill=\"#2A5D9E\"/><circle cx=\"310.89\" cy=\"199.11\" r=\"4.5\" fill=\"#2A5D9E\"/><circle cx=\"348.44\" cy=\"268.00\" r=\"4.5\" fill=\"#2A5D9E\"/><text x=\"399.00\" y=\"334.00\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\" font-weight=\"600\" fill=\"#2B2527\">x</text><text x=\"55.00\" y=\"8.00\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\" font-weight=\"600\" fill=\"#2B2527\">y</text></svg></span><p>Vilket värde ligger närmast korrelationskoefficienten?</p><p>A) \\(-0,95\\) &nbsp; B) \\(-0,50\\) &nbsp; C) \\(0\\) &nbsp; D) \\(0,50\\) &nbsp; E) \\(0,95\\)</p>",
-    "s": "<p>Korrelationskoefficienten beskriver styrkan och riktningen i ett linjärt samband; värden nära \\(\\pm1\\) betyder starkt linjärt samband.</p><p>Punkterna ligger nära en fallande rät linje. Sambandet är därför starkt negativt.</p><p><strong>A) \\(r\\approx-0,95\\).</strong></p>",
-    "familj": "korrelation_spridningsdiagram_valj_r"
-  },
-  {
-    "id": "1.22",
-    "kap": 1,
-    "omr": "linjar_regression",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/3/0",
-    "t": "<p>Tabellen visar antal timmars träning \\(x\\) och ett resultat \\(y\\).</p><table class='data'><tr><th>x</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr><tr><th>y</th><td>48</td><td>54</td><td>61</td><td>67</td><td>70</td></tr></table><p>a) Bestäm en linjär regressionsmodell med ett digitalt verktyg.<br>b) Använd modellen för att uppskatta \\(y\\) när \\(x=8\\).<br>c) Förklara varför uppskattningen bör användas försiktigt.</p>",
-    "s": "<p>a) Regressionen ger ungefär \\(y=5,7x+42,9\\).</p><p>b) \\(y(8)=5,7\\cdot8+42,9=88,5\\).</p><p>c) Mätvärdena ligger endast mellan \\(x=1\\) och \\(x=5\\). Värdet vid \\(x=8\\) är en extrapolation, så vi vet inte om det linjära sambandet fortsätter så långt.</p><p><strong>Modell: \\(y\\approx5,7x+42,9\\), prognos \\(88,5\\), men prognosen är osäker eftersom den ligger utanför dataintervallet.</strong></p>",
-    "familj": "regression_data_extrapolation"
-  },
-  {
-    "id": "1.23",
-    "kap": 1,
-    "omr": "korrelation_koefficient",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/3/0",
-    "t": "<p>Under åtta sommarveckor finns ett tydligt positivt samband mellan försäljningen av glass och antalet personer som behöver hjälp vid badplatser. Korrelationskoefficienten är \\(r=0,88\\).</p><p>Kan man därför säga att ökad glassförsäljning orsakar fler räddningsinsatser? Förklara och ge en möjlig annan förklaring till sambandet.</p>",
-    "s": "<p>Nej. En hög korrelation visar att variablerna samvarierar, men den visar inte att den ena orsakar den andra.</p><p>En möjlig bakomliggande variabel är temperaturen. Varma dagar kan både öka glassförsäljningen och göra att fler personer badar.</p><p><strong>Korrelation innebär inte automatiskt orsakssamband.</strong></p>",
-    "familj": "korrelation_kausalitet_tredje_variabel"
-  },
-  {
-    "id": "1.24",
-    "kap": 1,
-    "omr": "linjar_regression",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>Ett företag undersöker sambandet mellan antal utbildningstimmar \\(x\\) och antal producerade enheter \\(y\\). För 14 anställda, där \\(2\\le x\\le8\\), får man</p><p>\\(y=3,2x+48\\) och \\(r=0,96\\).</p><p>Chefen säger:</p><p>1. ”En person med 30 utbildningstimmar kommer att producera 144 enheter.”<br>2. ”Eftersom \\(r\\) är så högt visar undersökningen att fler utbildningstimmar orsakar högre produktion.”</p><p>Bedöm båda påståendena och motivera.</p>",
-    "s": "<p>Modellen ger visserligen \\(3,2\\cdot30+48=144\\), men \\(x=30\\) ligger långt utanför mätområdet 2–8. Det är en stor extrapolation och därför finns det inget bra stöd för att använda modellen så långt.</p><p>Det höga värdet på \\(r\\) visar ett starkt linjärt samband i datamaterialet, men inte ett orsakssamband. Andra faktorer kan påverka både utbildningstid och produktion.</p><p><strong>Inget av påståendena är tillräckligt motiverat av undersökningen.</strong></p>",
-    "familj": "regression_modellkritik_extrapolation_kausalitet"
   },
   {
     "id": "1.25",
@@ -702,77 +509,6 @@ window.BANKMA2 = [
     "familj": "identitet_parameter_matcha_koefficienter"
   },
   {
-    "id": "1.49",
-    "kap": 1,
-    "omr": "negativa_tal_prioritering",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "3/0/0",
-    "t": "<p>Beräkna.</p><p>a) \\(-7+2(5-9)\\)<br>b) \\(3-(-4)^2\\)<br>c) \\(18-3\\cdot(-2)^2\\)</p>",
-    "s": "<p>Följ prioriteringsreglerna: potenser först, därefter multiplikation/division och sist addition/subtraktion.</p><p>a) \\(-7+2(-4)=-15\\).</p><p>b) \\(3-16=-13\\).</p><p>c) \\(18-3\\cdot4=6\\).</p><p><strong>Svar: a) −15, b) −13, c) 6.</strong></p>",
-    "familj": "r2_prioritering_mix"
-  },
-  {
-    "id": "1.50",
-    "kap": 1,
-    "omr": "brakraking",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "3/0/0",
-    "t": "<p>Beräkna och förkorta.</p><p>a) \\(\\frac34+\\frac5{12}\\)<br>b) \\(\\frac78-\\frac13\\)<br>c) \\(\\frac56\\cdot\\frac9{10}\\)</p>",
-    "s": "<p>a) \\(\\frac9{12}+\\frac5{12}=\\frac{14}{12}=\\frac76\\).</p><p>b) \\(\\frac{21}{24}-\\frac8{24}=\\frac{13}{24}\\).</p><p>c) \\(\\frac{45}{60}=\\frac34\\).</p><p><strong>a) \\(\\frac76\\), b) \\(\\frac{13}{24}\\), c) \\(\\frac34\\).</strong></p>",
-    "familj": "r2_brak_mangd"
-  },
-  {
-    "id": "1.51",
-    "kap": 1,
-    "omr": "algebraiska_uttryck",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "3/0/0",
-    "t": "<p>Förenkla.</p><p>a) \\(5x-2+3x+7\\)<br>b) \\(4(2x-3)-x\\)<br>c) \\(2a-3b-(5a+b)\\)</p>",
-    "s": "<p>Förenkla stegvis: multiplicera in i parenteserna och samla sedan liknande termer.</p><p><strong>a) \\(8x+5\\)</strong></p><p><strong>b) \\(7x-12\\)</strong></p><p><strong>c) \\(-3a-4b\\)</strong></p>",
-    "familj": "r2_algebra_mangd"
-  },
-  {
-    "id": "1.52",
-    "kap": 1,
-    "omr": "ekvationer",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "3/0/0",
-    "t": "<p>Lös.</p><p>a) \\(7x-9=26\\)<br>b) \\(3(x+4)=2x+17\\)<br>c) \\(\\frac{x}{4}+3=8\\)</p>",
-    "s": "<p>Gör samma operation i båda leden tills variabeln står ensam.</p><p><strong>a) \\(x=5\\)</strong></p><p><strong>b) \\(x=5\\)</strong></p><p><strong>c) \\(x=20\\)</strong></p>",
-    "familj": "r2_ekvationer_mangd"
-  },
-  {
-    "id": "1.53",
-    "kap": 1,
-    "omr": "ekvationer_digitala_verktyg",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Använd ett digitalt verktyg för att lösa \\(7,5x-2,8=19,4\\).</p><p>Svara med två decimaler.</p>",
-    "s": "<p>Använd ekvationslösaren och kontrollera gärna lösningen genom att sätta in värdet i ursprungsekvationen.</p><p>\\(7,5x=22,2\\), alltså \\(x=2,96\\).</p><p><strong>\\(x=2,96\\).</strong></p>",
-    "familj": "r2_digital_linjar"
-  },
-  {
     "id": "1.54",
     "kap": 1,
     "omr": "rata_linjens_ekvation",
@@ -816,34 +552,6 @@ window.BANKMA2 = [
     "t": "<p>Bestäm ekvationen för linjen som går genom \\((2,7)\\) och \\((6,15)\\).</p>",
     "s": "<p>Bestäm först riktningskoefficienten från två kända punkter och använd sedan en punkt för att bestämma konstanttermen.</p><p>\\(k=(15-7)/(6-2)=2\\).</p><p>\\(7=2\\cdot2+m\\Rightarrow m=3\\).</p><p><strong>\\(y=2x+3\\).</strong></p>",
     "familj": "r2_linjar_tva_punkter"
-  },
-  {
-    "id": "1.57",
-    "kap": 1,
-    "omr": "linjar_regression",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En regressionsmodell är \\(y=4,6x+28\\).</p><p>a) Bestäm modellens värde när \\(x=12\\).<br>b) Tolka konstanten 28.</p>",
-    "s": "<p>a) \\(4,6\\cdot12+28=83,2\\).</p><p>b) Modellen ger värdet 28 när \\(x=0\\).</p><p><strong>a) 83,2. b) Startvärdet i modellen är 28.</strong></p>",
-    "familj": "r2_regression_tolka"
-  },
-  {
-    "id": "1.58",
-    "kap": 1,
-    "omr": "korrelation_koefficient",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Spridningsdiagrammet visas nedan.</p><span class=\"fig smal\"><svg width=\"430\" height=\"370\" viewBox=\"0 0 430 370\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"368\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"48.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"87.78\" y1=\"330.00\" x2=\"87.78\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"127.56\" y1=\"330.00\" x2=\"127.56\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"167.33\" y1=\"330.00\" x2=\"167.33\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"207.11\" y1=\"330.00\" x2=\"207.11\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"246.89\" y1=\"330.00\" x2=\"246.89\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"286.67\" y1=\"330.00\" x2=\"286.67\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"326.44\" y1=\"330.00\" x2=\"326.44\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"366.22\" y1=\"330.00\" x2=\"366.22\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"406.00\" y1=\"330.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"406.00\" y2=\"330.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"299.00\" x2=\"406.00\" y2=\"299.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"268.00\" x2=\"406.00\" y2=\"268.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"237.00\" x2=\"406.00\" y2=\"237.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"206.00\" x2=\"406.00\" y2=\"206.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"175.00\" x2=\"406.00\" y2=\"175.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"144.00\" x2=\"406.00\" y2=\"144.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"113.00\" x2=\"406.00\" y2=\"113.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"82.00\" x2=\"406.00\" y2=\"82.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"51.00\" x2=\"406.00\" y2=\"51.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"20.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"416.00\" y2=\"330.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"87.78\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"127.56\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"167.33\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"207.11\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"246.89\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"286.67\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"326.44\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><text x=\"366.22\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">8</text><text x=\"406.00\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">9</text><line x1=\"48.00\" y1=\"330.00\" x2=\"48.00\" y2=\"10.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"40.00\" y=\"302.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"40.00\" y=\"271.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"40.00\" y=\"240.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"40.00\" y=\"209.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"40.00\" y=\"178.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"40.00\" y=\"147.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"40.00\" y=\"116.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><text x=\"40.00\" y=\"85.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">8</text><text x=\"40.00\" y=\"54.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">9</text><text x=\"40.00\" y=\"23.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">10</text><circle cx=\"87.78\" cy=\"261.80\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"127.56\" cy=\"243.20\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"167.33\" cy=\"202.90\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"207.11\" cy=\"178.10\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"246.89\" cy=\"144.00\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"286.67\" cy=\"128.50\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"326.44\" cy=\"85.10\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"366.22\" cy=\"69.60\" r=\"4.3\" fill=\"#2A5D9E\"/></svg></span><p>Vilket värde är rimligast för korrelationskoefficienten: 0,05, 0,55 eller 0,96?</p>",
-    "s": "<p>Korrelationskoefficienten beskriver styrkan och riktningen i ett linjärt samband; värden nära \\(\\pm1\\) betyder starkt linjärt samband.</p><p>Punkterna ligger nära en stigande rät linje.</p><p><strong>0,96 är rimligast.</strong></p>",
-    "familj": "r2_korrelation_graf"
   },
   {
     "id": "1.59",
@@ -1052,48 +760,6 @@ window.BANKMA2 = [
     "familj": "r2_linjar_taxi"
   },
   {
-    "id": "1.73",
-    "kap": 1,
-    "omr": "brakraking",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>En behållare är fylld till \\(\\frac78\\). Efter att 18 liter tappats ur är den fylld till \\(\\frac58\\).</p><p>Hur stor är behållaren?</p>",
-    "s": "<p>Skriv först bråken med lämplig gemensam nämnare eller använd regeln för multiplikation/division av bråk.</p><p>Skillnaden är \\(\\frac28=\\frac14\\) av hela volymen.</p><p>\\(\\frac14V=18\\Rightarrow V=72\\).</p><p><strong>72 liter.</strong></p>",
-    "familj": "r2_brak_baklanges"
-  },
-  {
-    "id": "1.74",
-    "kap": 1,
-    "omr": "algebraiska_uttryck",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Uttrycket \\(4(x-a)-2(2x+b)\\) ska ha värdet 10 för alla \\(x\\).</p><p>Ge ett par \\((a,b)\\) som fungerar och beskriv sambandet mellan alla möjliga par.</p>",
-    "s": "<p>Uttrycket förenklas till \\(-4a-2b\\).</p><p>Kravet är \\(-4a-2b=10\\), alltså \\(2a+b=-5\\).</p><p>Ett exempel är \\(a=0,b=-5\\).</p><p><strong>Alla par som uppfyller \\(2a+b=-5\\) fungerar.</strong></p>",
-    "familj": "r2_algebra_parameter_relation"
-  },
-  {
-    "id": "1.75",
-    "kap": 1,
-    "omr": "ekvationer",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>För vilket värde på \\(a\\) har ekvationen \\(a(x-2)=3x+6\\) lösningen \\(x=5\\)?</p>",
-    "s": "<p>Gör samma operation i båda leden tills variabeln står ensam.</p><p>Sätt in \\(x=5\\): \\(3a=21\\Rightarrow a=7\\).</p><p><strong>\\(a=7\\).</strong></p>",
-    "familj": "r2_ekvation_parameter_given_solution"
-  },
-  {
     "id": "1.76",
     "kap": 1,
     "omr": "linjara_representationer",
@@ -1107,34 +773,6 @@ window.BANKMA2 = [
     "t": "<p>En linjär funktion har \\(f(2)=9\\) och \\(f(7)=-1\\).</p><p>Bestäm det \\(x\\)-värde där \\(f(x)=5\\).</p>",
     "s": "<p>Jämför hur mycket y förändras när x ökar. Det ger riktningskoefficienten och därefter kan konstanttermen bestämmas.</p><p>\\(k=(-1-9)/(7-2)=-2\\).</p><p>\\(9=-4+m\\Rightarrow m=13\\), så \\(f(x)=-2x+13\\).</p><p>\\(-2x+13=5\\Rightarrow x=4\\).</p><p><strong>\\(x=4\\).</strong></p>",
     "familj": "r2_linjar_baklanges"
-  },
-  {
-    "id": "1.77",
-    "kap": 1,
-    "omr": "linjar_regression",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/3/0",
-    "t": "<p>En linjär regressionsmodell är \\(y=2,4x+31\\). Den bygger på data för \\(5\\le x\\le18\\).</p><p>En elev använder modellen för \\(x=40\\). Beräkna modellens värde och bedöm sedan om prognosen är rimlig att lita på.</p>",
-    "s": "<p>Modellen ger \\(2,4\\cdot40+31=127\\).</p><p>Men \\(x=40\\) ligger långt utanför dataintervallet. Det är en extrapolation.</p><p><strong>Modellvärdet är 127, men prognosen är osäker.</strong></p>",
-    "familj": "r2_regression_extrapolation"
-  },
-  {
-    "id": "1.78",
-    "kap": 1,
-    "omr": "korrelation_koefficient",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Ett datamaterial ger \\(r=-0,92\\).</p><p>Förklara vad detta säger om sambandet och vad det inte säger.</p>",
-    "s": "<p>Det visar ett starkt negativt linjärt samband.</p><p>Det visar inte att den ena variabeln orsakar förändringen i den andra.</p><p><strong>Starkt negativt samband, men inget bevis för orsak.</strong></p>",
-    "familj": "r2_korrelation_tolkning"
   },
   {
     "id": "1.79",
@@ -1285,20 +923,6 @@ window.BANKMA2 = [
     "familj": "r2_system_tjanster"
   },
   {
-    "id": "1.89",
-    "kap": 1,
-    "omr": "algebraiska_uttryck",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "A",
-    "poang": "0/0/2",
-    "t": "<p>En linjär funktion \\(f(x)=kx+m\\) uppfyller</p><p>\\(f(f(x))=4x+9\\)</p><p>för alla reella \\(x\\). Dessutom är \\(f(0)&gt;0\\).</p><p>Bestäm \\(f(x)\\).</p>",
-    "s": "<p>\\(f(f(x))=k(kx+m)+m=k^2x+m(k+1)\\).</p><p>Därför måste \\(k^2=4\\), alltså \\(k=2\\) eller \\(k=-2\\).</p><p>Om \\(k=2\\): \\(3m=9\\Rightarrow m=3\\).</p><p>Om \\(k=-2\\): \\(-m=9\\Rightarrow m=-9\\), men då är \\(f(0)&lt;0\\).</p><p><strong>\\(f(x)=2x+3\\).</strong></p>",
-    "familj": "r2_A_linjar_sammansatt_funktion"
-  },
-  {
     "id": "1.90",
     "kap": 1,
     "omr": "rata_linjens_ekvation",
@@ -1312,20 +936,6 @@ window.BANKMA2 = [
     "t": "<p>En linjär funktion \\(f(x)=kx+m\\) uppfyller</p><p>\\(f(f(x))=x\\)</p><p>för alla reella \\(x\\). Dessutom gäller \\(f(2)=7\\).</p><p>Bestäm funktionen.</p>",
     "s": "<p>\\(f(f(x))=k^2x+m(k+1)\\).</p><p>För att detta ska vara \\(x\\) måste \\(k^2=1\\) och \\(m(k+1)=0\\).</p><p>Om \\(k=1\\) måste \\(m=0\\), men då är \\(f(2)=2\\), vilket inte stämmer.</p><p>Alltså \\(k=-1\\). Då ger \\(f(2)=7\\): \\(-2+m=7\\Rightarrow m=9\\).</p><p><strong>\\(f(x)=-x+9\\).</strong></p>",
     "familj": "r2_A_linjar_involution"
-  },
-  {
-    "id": "1.91",
-    "kap": 1,
-    "omr": "linjar_regression",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>En linjär modell för batterikapacitet är \\(C(n)=100-1,8n\\), där \\(n\\) är antal hundra laddningscykler. Modellen bygger på mätningar för \\(0\\le n\\le10\\), och korrelationskoefficienten är \\(r=-0,98\\).</p><p>En rapport säger:</p><p>1. ”Batteriet har exakt 0 % kapacitet när modellen når 0.”<br>2. ”Det höga värdet på \\(|r|\\) visar att laddningscyklerna ensamma orsakar hela minskningen.”</p><p>Bedöm båda påståendena.</p>",
-    "s": "<p>Modellen når 0 när \\(100-1,8n=0\\Rightarrow n\\approx55,6\\). Det ligger långt utanför det uppmätta intervallet \\(0\\le n\\le10\\), så det är en mycket lång extrapolation. Modellen behöver inte fortsätta linjärt så långt.</p><p>\\(r=-0,98\\) visar ett starkt negativt linjärt samband i mätningarna, men korrelation visar inte att en enda faktor orsakar hela förändringen.</p><p><strong>Inget av påståendena är tillräckligt underbyggt.</strong></p>",
-    "familj": "r2_A_linjar_modellkritik_tva_pastanden"
   },
   {
     "id": "1.92",
@@ -1368,9 +978,9 @@ window.BANKMA2 = [
     ],
     "niva": "A",
     "poang": "0/0/3",
-    "t": "<p>Ett café säljer kaffe, te och juice. Kaffe kostar 32 kr, te 28 kr och juice 24 kr. Under en timme säljs 45 drycker för 1 260 kr. Antalet kaffe är 5 fler än antalet juice.</p><p>Bestäm hur många av varje dryck som säljs.</p>",
-    "s": "<p>Låt \\(k,t,j\\) vara antalen.</p><p>\\(k+t+j=45\\), \\(32k+28t+24j=1260\\), \\(k=j+5\\).</p><p>Sätt in \\(k=j+5\\). Då \\(t=40-2j\\).</p><p>\\(32(j+5)+28(40-2j)+24j=1260\\).</p><p>\\(32j+160+1120-56j+24j=1260\\Rightarrow1280=1260\\).</p><p>Det blir en motsägelse. <strong>Uppgifterna kan alltså inte stämma samtidigt.</strong></p>",
-    "familj": "r2_system_inkonsistent_kontext"
+    "t": "<p>Ett café säljer kaffe, te och juice. Kaffe kostar 34 kr, te 28 kr och juice 24 kr. Under en timme säljs 45 drycker för 1 320 kr. Antalet kaffe är 5 fler än antalet juice.</p><p>Bestäm hur många av varje dryck som säljs.</p>",
+    "s": "<p>Låt \\(k\\), \\(t\\) och \\(j\\) vara antalet kaffe, te respektive juice.</p><p>Då gäller</p><p>\\(k+t+j=45\\)</p><p>\\(34k+28t+24j=1320\\)</p><p>\\(k=j+5\\).</p><p>Sätt in \\(k=j+5\\) i den första ekvationen:</p><p>\\((j+5)+t+j=45\\Rightarrow t=40-2j\\).</p><p>Sätt nu in i prisekvationen:</p><p>\\(34(j+5)+28(40-2j)+24j=1320\\).</p><p>\\(34j+170+1120-56j+24j=1320\\Rightarrow 2j+1290=1320\\).</p><p>\\(2j=30\\Rightarrow j=15\\).</p><p>Då är \\(k=20\\) och \\(t=10\\).</p><p><strong>Det säljs 20 kaffe, 10 te och 15 juice.</strong></p>",
+    "familj": "r2_system_cafe_tre_drycker_losbar"
   },
   {
     "id": "1.95",
@@ -1401,77 +1011,6 @@ window.BANKMA2 = [
     "t": "<p>Två udda heltal skiljer 2 från varandra. Skriv dem som \\(2n-1\\) och \\(2n+1\\).</p><p>a) Visa att skillnaden mellan deras kvadrater alltid är delbar med 8.<br>b) Bestäm när skillnaden dessutom är delbar med 16.</p>",
     "s": "<p>För varje uttryck: hitta den största faktor som finns i alla termer, bryt ut den framför parentesen och kontrollera genom att multiplicera tillbaka.</p><p>Skillnaden är</p><p>\\((2n+1)^2-(2n-1)^2=8n\\).</p><p>Därför är den alltid delbar med 8.</p><p>Den är delbar med 16 precis när \\(8n\\) är delbart med 16, alltså när \\(n\\) är jämnt.</p><p><strong>a) Alltid delbar med 8. b) Delbar med 16 precis när \\(n\\) är jämnt.</strong></p>",
     "familj": "r2_A_udda_kvadrater_delbarhet"
-  },
-  {
-    "id": "1.97",
-    "kap": 1,
-    "omr": "negativa_tal_prioritering",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "3/0/0",
-    "t": "<p>Beräkna.</p><p>a) \\(-4+3\\cdot(-2)\\)<br>b) \\(12-(-3)^2\\)<br>c) \\(-5-2(4-9)\\)</p>",
-    "s": "<p>Följ prioriteringsreglerna: potenser först, därefter multiplikation/division och sist addition/subtraktion.</p><p>a) \\(-4-6=-10\\).</p><p>b) \\(12-9=3\\).</p><p>c) \\(-5-2(-5)=5\\).</p><p><strong>Svar: a) −10, b) 3, c) 5.</strong></p>",
-    "familj": "r3_prioritering_mix_1"
-  },
-  {
-    "id": "1.98",
-    "kap": 1,
-    "omr": "brakraking",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "3/0/0",
-    "t": "<p>Beräkna och förkorta.</p><p>a) \\(\\frac{2}{5}+\\frac{3}{10}\\)<br>b) \\(\\frac{11}{12}-\\frac14\\)<br>c) \\(\\frac{6}{7}\\cdot\\frac{14}{15}\\)</p>",
-    "s": "<p>a) \\(\\frac{4}{10}+\\frac{3}{10}=\\frac{7}{10}\\).</p><p>b) \\(\\frac{11}{12}-\\frac{3}{12}=\\frac{8}{12}=\\frac23\\).</p><p>c) \\(\\frac{84}{105}=\\frac45\\).</p><p><strong>a) \\(\\frac{7}{10}\\), b) \\(\\frac23\\), c) \\(\\frac45\\).</strong></p>",
-    "familj": "r3_brak_mangd_1"
-  },
-  {
-    "id": "1.99",
-    "kap": 1,
-    "omr": "algebraiska_uttryck",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "3/0/0",
-    "t": "<p>Förenkla.</p><p>a) \\(7x-4+5x+9\\)<br>b) \\(3(2a-5)-4a\\)<br>c) \\(5m-(2m-7)\\)</p>",
-    "s": "<p>Förenkla stegvis: multiplicera in i parenteserna och samla sedan liknande termer.</p><p><strong>a) \\(12x+5\\)</strong></p><p><strong>b) \\(2a-15\\)</strong></p><p><strong>c) \\(3m+7\\)</strong></p>",
-    "familj": "r3_algebra_mangd_1"
-  },
-  {
-    "id": "1.100",
-    "kap": 1,
-    "omr": "ekvationer",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "3/0/0",
-    "t": "<p>Lös.</p><p>a) \\(9x-7=29\\)<br>b) \\(4(x-2)=3x+5\\)<br>c) \\(\\frac{x}{5}-4=3\\)</p>",
-    "s": "<p>Gör samma operation i båda leden tills variabeln står ensam.</p><p><strong>a) \\(x=4\\)</strong></p><p><strong>b) \\(x=13\\)</strong></p><p><strong>c) \\(x=35\\)</strong></p>",
-    "familj": "r3_ekvationer_mangd_1"
-  },
-  {
-    "id": "1.101",
-    "kap": 1,
-    "omr": "ekvationer_digitala_verktyg",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Använd ett digitalt verktyg för att lösa \\(4,8x+3,7=28,9\\).</p><p>Svara med två decimaler.</p>",
-    "s": "<p>Använd ekvationslösaren och kontrollera gärna lösningen genom att sätta in värdet i ursprungsekvationen.</p><p>\\(4,8x=25,2\\Rightarrow x=5,25\\).</p><p><strong>\\(x=5,25\\).</strong></p>",
-    "familj": "r3_digital_linjar_1"
   },
   {
     "id": "1.102",
@@ -1534,20 +1073,6 @@ window.BANKMA2 = [
     "familj": "r3_line_two_points_1"
   },
   {
-    "id": "1.106",
-    "kap": 1,
-    "omr": "linjar_regression",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>En linjär regressionsmodell är \\(y=1,8x+24\\).</p><p>a) Bestäm modellens värde när \\(x=15\\).<br>b) Vad betyder talet 1,8 i modellen?</p>",
-    "s": "<p>Tolka först regressionslinjens lutning och konstantterm i sammanhanget innan du gör beräkningen.</p><p>a) \\(1,8\\cdot15+24=51\\).</p><p>b) När \\(x\\) ökar med 1 ökar modellens värde med 1,8.</p><p><strong>a) 51. b) Ökningen per enhet i \\(x\\) är 1,8.</strong></p>",
-    "familj": "r3_regression_tolkning_1"
-  },
-  {
     "id": "1.107",
     "kap": 1,
     "omr": "grafisk_losning_ekvationssystem",
@@ -1606,20 +1131,6 @@ window.BANKMA2 = [
     "t": "<p>Lös med additionsmetoden.</p><p>\\(\\begin{cases}5x+2y=16\\\\3x-2y=8\\end{cases}\\)</p>",
     "s": "<p>Multiplicera vid behov någon ekvation så att en variabel kan elimineras när ekvationerna adderas eller subtraheras.</p><p>Addera: \\(8x=24\\Rightarrow x=3\\). Sätt in: \\(15+2y=16\\Rightarrow y=0,5\\).</p><p><strong>\\((3,0,5)\\).</strong></p>",
     "familj": "r3_addition_1"
-  },
-  {
-    "id": "1.111",
-    "kap": 1,
-    "omr": "korrelation_koefficient",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Spridningsdiagrammet visas nedan.</p><span class=\"fig smal\"><svg width=\"430\" height=\"370\" viewBox=\"0 0 430 370\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"368\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"48.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"87.78\" y1=\"330.00\" x2=\"87.78\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"127.56\" y1=\"330.00\" x2=\"127.56\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"167.33\" y1=\"330.00\" x2=\"167.33\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"207.11\" y1=\"330.00\" x2=\"207.11\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"246.89\" y1=\"330.00\" x2=\"246.89\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"286.67\" y1=\"330.00\" x2=\"286.67\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"326.44\" y1=\"330.00\" x2=\"326.44\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"366.22\" y1=\"330.00\" x2=\"366.22\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"406.00\" y1=\"330.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"406.00\" y2=\"330.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"299.00\" x2=\"406.00\" y2=\"299.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"268.00\" x2=\"406.00\" y2=\"268.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"237.00\" x2=\"406.00\" y2=\"237.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"206.00\" x2=\"406.00\" y2=\"206.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"175.00\" x2=\"406.00\" y2=\"175.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"144.00\" x2=\"406.00\" y2=\"144.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"113.00\" x2=\"406.00\" y2=\"113.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"82.00\" x2=\"406.00\" y2=\"82.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"51.00\" x2=\"406.00\" y2=\"51.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"20.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"406.00\" y2=\"330.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"87.78\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"127.56\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"167.33\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"207.11\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"246.89\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"286.67\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"326.44\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><text x=\"366.22\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">8</text><text x=\"406.00\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">9</text><line x1=\"48.00\" y1=\"330.00\" x2=\"48.00\" y2=\"20.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"40.00\" y=\"302.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"40.00\" y=\"271.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"40.00\" y=\"240.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"40.00\" y=\"209.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"40.00\" y=\"178.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"40.00\" y=\"147.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"40.00\" y=\"116.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><text x=\"40.00\" y=\"85.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">8</text><text x=\"40.00\" y=\"54.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">9</text><text x=\"40.00\" y=\"23.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">10</text><circle cx=\"87.78\" cy=\"66.50\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"127.56\" cy=\"103.70\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"167.33\" cy=\"122.30\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"207.11\" cy=\"156.40\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"246.89\" cy=\"193.60\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"286.67\" cy=\"209.10\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"326.44\" cy=\"243.20\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"366.22\" cy=\"261.80\" r=\"4.3\" fill=\"#2A5D9E\"/></svg></span><p>Vilket värde är rimligast för korrelationskoefficienten: −0,94, −0,34 eller 0,91?</p>",
-    "s": "<p>Korrelationskoefficienten beskriver styrkan och riktningen i ett linjärt samband; värden nära \\(\\pm1\\) betyder starkt linjärt samband.</p><p>Punkterna ligger nära en fallande rät linje.</p><p><strong>Det rimliga värdet är −0,94.</strong></p>",
-    "familj": "r3_corr_graph_negative"
   },
   {
     "id": "1.112",
@@ -1757,34 +1268,6 @@ window.BANKMA2 = [
     "familj": "r3_conjugate_1"
   },
   {
-    "id": "1.121",
-    "kap": 1,
-    "omr": "algebraiska_uttryck",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Förenkla uttrycket \\(3(x-a)-2(x+4a)+5\\). Bestäm sedan \\(a\\) så att uttrycket blir lika med \\(x-9\\) för alla \\(x\\).</p>",
-    "s": "<p>Uttrycket blir \\(x-11a+5\\). För att detta ska vara \\(x-9\\) krävs \\(-11a+5=-9\\Rightarrow a=14/11\\).</p><p><strong>\\(a=14/11\\).</strong></p>",
-    "familj": "r3_expr_identity_param"
-  },
-  {
-    "id": "1.122",
-    "kap": 1,
-    "omr": "ekvationer",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>För vilket värde på \\(a\\) har ekvationen \\(2x+a=5(x-1)\\) lösningen \\(x=4\\)?</p>",
-    "s": "<p>Gör samma operation i båda leden tills variabeln står ensam.</p><p>Sätt in \\(x=4\\): \\(8+a=15\\Rightarrow a=7\\).</p><p><strong>\\(a=7\\).</strong></p>",
-    "familj": "r3_eq_param_solution"
-  },
-  {
     "id": "1.123",
     "kap": 1,
     "omr": "linjara_representationer",
@@ -1813,34 +1296,6 @@ window.BANKMA2 = [
     "t": "<p>En linje skär \\(y\\)-axeln i 4 och \\(x\\)-axeln i −2.</p><p>Bestäm linjens ekvation.</p>",
     "s": "<p>Bestäm först riktningskoefficienten från två kända punkter och använd sedan en punkt för att bestämma konstanttermen.</p><p>Punkterna är \\((0,4)\\) och \\((-2,0)\\). \\(k=(4-0)/(0-(-2))=2\\).</p><p><strong>\\(y=2x+4\\).</strong></p>",
     "familj": "r3_line_axis_intercepts"
-  },
-  {
-    "id": "1.125",
-    "kap": 1,
-    "omr": "linjar_regression",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/3/0",
-    "t": "<p>En regressionsmodell för en plants höjd är \\(h(t)=3,2t+14\\), där \\(t\\) mäts i veckor. Modellen bygger på mätningar för \\(0\\le t\\le 8\\).</p><p>En elev använder modellen för \\(t=20\\). Beräkna modellens värde och bedöm om prognosen är säker.</p>",
-    "s": "<p>\\(h(20)=3,2\\cdot20+14=78\\).</p><p>Men 20 ligger långt utanför mätområdet 0–8, så detta är extrapolation och osäkert.</p><p><strong>Modellvärdet är 78, men prognosen är osäker.</strong></p>",
-    "familj": "r3_regression_extrapolate_1"
-  },
-  {
-    "id": "1.126",
-    "kap": 1,
-    "omr": "korrelation_koefficient",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/3/0",
-    "t": "<p>Två variabler har korrelationskoefficienten \\(r=0,88\\).</p><p>Förklara vad detta säger om sambandet och varför man ändå bör vara försiktig med att dra slutsatsen att den ena variabeln orsakar den andra.</p>",
-    "s": "<p>Värdet visar ett starkt positivt linjärt samband. Men korrelation visar inte orsakssamband; andra faktorer kan påverka båda variablerna.</p><p><strong>Starkt samband, men inget bevis för orsak.</strong></p>",
-    "familj": "r3_corr_reasoning_1"
   },
   {
     "id": "1.127",
@@ -1989,20 +1444,6 @@ window.BANKMA2 = [
     "familj": "r3_factor_equation_1"
   },
   {
-    "id": "1.137",
-    "kap": 1,
-    "omr": "algebraiska_uttryck",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "A",
-    "poang": "0/0/1",
-    "t": "<p>Bestäm talen \\(a\\) och \\(b\\) så att identiteten</p><p>\\((x+a)^2-(x-b)^2=10x+9\\)</p><p>gäller för alla reella \\(x\\).</p>",
-    "s": "<p>Utveckla: \\((x+a)^2-(x-b)^2=2(a+b)x+(a^2-b^2)\\).</p><p>Därför gäller \\(a+b=5\\) och \\((a-b)(a+b)=9\\). Eftersom \\(a+b=5\\) fås \\(a-b=9/5\\).</p><p>Lösning ger \\(a=17/5\\), \\(b=8/5\\).</p><p><strong>\\(a=17/5\\), \\(b=8/5\\).</strong></p>",
-    "familj": "r3_A_identity_two_params"
-  },
-  {
     "id": "1.138",
     "kap": 1,
     "omr": "bestamma_linjara_funktioner",
@@ -2016,20 +1457,6 @@ window.BANKMA2 = [
     "t": "<p>En linjär funktion \\(f(x)=kx+m\\) uppfyller \\(f(1)=3\\) och \\(f(f(x))=4x+3\\) för alla \\(x\\).</p><p>Bestäm funktionen.</p>",
     "s": "<p>\\(f(f(x))=k(kx+m)+m=k^2x+m(k+1)\\).</p><p>Därför \\(k^2=4\\), så \\(k=2\\) eller \\(k=-2\\).</p><p>Om \\(k=2\\) ger \\(f(1)=3\\) att \\(2+m=3\\Rightarrow m=1\\). Då blir \\(m(k+1)=3\\), vilket stämmer.</p><p>Om \\(k=-2\\) ger \\(-2+m=3\\Rightarrow m=5\\), men då blir \\(m(k+1)=-5\\), vilket inte stämmer.</p><p><strong>\\(f(x)=2x+1\\).</strong></p>",
     "familj": "r3_A_linear_composition"
-  },
-  {
-    "id": "1.139",
-    "kap": 1,
-    "omr": "linjar_regression",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "A",
-    "poang": "0/0/3",
-    "t": "<p>En linjär modell för temperaturen i ett kylt rum är \\(T(t)=24-1,6t\\), där \\(t\\) är timmar efter start. Modellen bygger på data för \\(0\\le t\\le6\\).</p><p>En person använder modellen och säger att rummet når −20 °C efter 27,5 timmar och därför måste ha den temperaturen då.</p><p>Bedöm resonemanget.</p>",
-    "s": "<p>Lösningen till \\(24-1,6t=-20\\) är \\(t=27,5\\) timmar. Men detta ligger långt utanför intervallet där modellen byggts upp. Det är därför en extrapolation och modellen behöver inte gälla där. Temperaturen kan också påverkas av andra faktorer och inte fortsätta minska linjärt.</p><p><strong>Beräkningen är korrekt inom modellen, men slutsatsen om verkligheten är inte säker.</strong></p>",
-    "familj": "r3_A_regression_model_critique"
   },
   {
     "id": "1.140",
@@ -2283,96 +1710,6 @@ window.BANKMA2 = [
     "t": "<p>Lös systemet med substitutionsmetoden.</p><p>\\(\\begin{cases}x=2-y\\\\4x+3y=11\\end{cases}\\)</p>",
     "s": "<p>Ersätt den ena variabeln med uttrycket från den andra ekvationen. Lös sedan den nya ekvationen med en variabel.</p><p><strong>\\(x=5\\), \\(y=-3\\).</strong></p>",
     "familj": "gap_substitution_6"
-  },
-  {
-    "id": "1.157",
-    "kap": 1,
-    "omr": "ekvationer_digitala_verktyg",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös med digitalt verktyg.</p><p>\\(3,7x+8,4=25,05\\)</p>",
-    "s": "<p>Använd ekvationslösaren och kontrollera gärna lösningen genom att sätta in värdet i ursprungsekvationen.</p><p><strong>\\(x=4,5\\).</strong></p>",
-    "familj": "gap_digital_eq_1"
-  },
-  {
-    "id": "1.158",
-    "kap": 1,
-    "omr": "ekvationer_digitala_verktyg",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös med digitalt verktyg.</p><p>\\(12,6-2,4x=3,0\\)</p>",
-    "s": "<p>Använd ekvationslösaren och kontrollera gärna lösningen genom att sätta in värdet i ursprungsekvationen.</p><p><strong>\\(x=4\\).</strong></p>",
-    "familj": "gap_digital_eq_2"
-  },
-  {
-    "id": "1.159",
-    "kap": 1,
-    "omr": "ekvationer_digitala_verktyg",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös med digitalt verktyg.</p><p>\\(0,85x+2,3=9,1\\)</p>",
-    "s": "<p>Använd ekvationslösaren och kontrollera gärna lösningen genom att sätta in värdet i ursprungsekvationen.</p><p><strong>\\(x=8\\).</strong></p>",
-    "familj": "gap_digital_eq_3"
-  },
-  {
-    "id": "1.160",
-    "kap": 1,
-    "omr": "ekvationer_digitala_verktyg",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös med digitalt verktyg.</p><p>\\(5,2(x-1,5)=18,2\\)</p>",
-    "s": "<p>Använd ekvationslösaren och kontrollera gärna lösningen genom att sätta in värdet i ursprungsekvationen.</p><p><strong>\\(x=5\\).</strong></p>",
-    "familj": "gap_digital_eq_4"
-  },
-  {
-    "id": "1.161",
-    "kap": 1,
-    "omr": "ekvationer_digitala_verktyg",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös med digitalt verktyg.</p><p>\\(2,75x-6,5=10\\)</p>",
-    "s": "<p>Använd ekvationslösaren och kontrollera gärna lösningen genom att sätta in värdet i ursprungsekvationen.</p><p><strong>\\(x=6\\).</strong></p>",
-    "familj": "gap_digital_eq_5"
-  },
-  {
-    "id": "1.162",
-    "kap": 1,
-    "omr": "ekvationer_digitala_verktyg",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös med digitalt verktyg.</p><p>\\(14,4=1,8x+3,6\\)</p>",
-    "s": "<p>Använd ekvationslösaren och kontrollera gärna lösningen genom att sätta in värdet i ursprungsekvationen.</p><p><strong>\\(x=6\\).</strong></p>",
-    "familj": "gap_digital_eq_6"
   },
   {
     "id": "1.163",
@@ -2693,126 +2030,6 @@ window.BANKMA2 = [
     "familj": "fokus_substitution_parameter_A"
   },
   {
-    "id": "1.185",
-    "kap": 1,
-    "omr": "ekvationer_digitala_verktyg",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös ekvationen med digitalt verktyg.</p><p>\\(7,4x+5,6=38,9\\)</p>",
-    "s": "<p>Använd ekvationslösaren och kontrollera gärna lösningen genom att sätta in värdet i ursprungsekvationen.</p><p><strong>\\(x=4,5\\).</strong></p>",
-    "familj": "fokus_digital_eq_1"
-  },
-  {
-    "id": "1.186",
-    "kap": 1,
-    "omr": "ekvationer_digitala_verktyg",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös ekvationen med digitalt verktyg.</p><p>\\(18,2-3,6x=2,0\\)</p>",
-    "s": "<p>Använd ekvationslösaren och kontrollera gärna lösningen genom att sätta in värdet i ursprungsekvationen.</p><p><strong>\\(x=4,5\\).</strong></p>",
-    "familj": "fokus_digital_eq_2"
-  },
-  {
-    "id": "1.187",
-    "kap": 1,
-    "omr": "ekvationer_digitala_verktyg",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös ekvationen med digitalt verktyg.</p><p>\\(2,75(x-1,2)=9,9\\)</p>",
-    "s": "<p>Använd ekvationslösaren och kontrollera gärna lösningen genom att sätta in värdet i ursprungsekvationen.</p><p><strong>\\(x=4,8\\).</strong></p>",
-    "familj": "fokus_digital_eq_3"
-  },
-  {
-    "id": "1.188",
-    "kap": 1,
-    "omr": "ekvationer_digitala_verktyg",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös ekvationen med digitalt verktyg.</p><p>\\(0,64x+7,2=18,72\\)</p>",
-    "s": "<p>Använd ekvationslösaren och kontrollera gärna lösningen genom att sätta in värdet i ursprungsekvationen.</p><p><strong>\\(x=18\\).</strong></p>",
-    "familj": "fokus_digital_eq_4"
-  },
-  {
-    "id": "1.189",
-    "kap": 1,
-    "omr": "ekvationer_digitala_verktyg",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös ekvationen med digitalt verktyg.</p><p>\\(5,5-1,25x=-3,25\\)</p>",
-    "s": "<p>Använd ekvationslösaren och kontrollera gärna lösningen genom att sätta in värdet i ursprungsekvationen.</p><p><strong>\\(x=7\\).</strong></p>",
-    "familj": "fokus_digital_eq_5"
-  },
-  {
-    "id": "1.190",
-    "kap": 1,
-    "omr": "ekvationer_digitala_verktyg",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös ekvationen med digitalt verktyg.</p><p>\\(3,2x+4,1=1,7x+19,1\\)</p>",
-    "s": "<p>Använd ekvationslösaren och kontrollera gärna lösningen genom att sätta in värdet i ursprungsekvationen.</p><p><strong>\\(x=10\\).</strong></p>",
-    "familj": "fokus_digital_eq_6"
-  },
-  {
-    "id": "1.191",
-    "kap": 1,
-    "omr": "ekvationer_digitala_verktyg",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p>Lös ekvationen med digitalt verktyg.</p><p>\\(6,8(x-2,5)=2,3x+12,35\\)</p>",
-    "s": "<p>Använd ekvationslösaren och kontrollera gärna lösningen genom att sätta in värdet i ursprungsekvationen.</p><p><strong>\\(x=6,5\\).</strong></p>",
-    "familj": "fokus_digital_eq_7"
-  },
-  {
-    "id": "1.192",
-    "kap": 1,
-    "omr": "ekvationer_digitala_verktyg",
-    "kurs": [
-      "2a",
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>En digital lösare ger \\(x=7,25\\) som lösning till ekvationen \\(ax+4,8=26,55\\).</p><p>Bestäm \\(a\\).</p>",
-    "s": "<p>Använd ekvationslösaren och kontrollera gärna lösningen genom att sätta in värdet i ursprungsekvationen.</p><p>\\(7,25a+4,8=26,55\\Rightarrow7,25a=21,75\\Rightarrow a=3\\).</p><p><strong>\\(a=3\\).</strong></p>",
-    "familj": "fokus_digital_eq_parameter_A"
-  },
-  {
     "id": "1.193",
     "kap": 1,
     "omr": "bestamma_linjara_funktioner",
@@ -2826,20 +2043,6 @@ window.BANKMA2 = [
     "t": "<p>I koordinatsystemet ligger punkten <strong>P(2,10)</strong> på en rät linje. Linjen skär båda axlarna i positiva delar av axlarna.</p><span class=\"fig smal\"><svg width=\"360\" height=\"280\" viewBox=\"0 0 360 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"278\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"246.0\" x2=\"40.0\" y2=\"20.0\" stroke=\"#E4E3E6\"/><line x1=\"73.3\" y1=\"246.0\" x2=\"73.3\" y2=\"20.0\" stroke=\"#E4E3E6\"/><line x1=\"106.7\" y1=\"246.0\" x2=\"106.7\" y2=\"20.0\" stroke=\"#E4E3E6\"/><line x1=\"140.0\" y1=\"246.0\" x2=\"140.0\" y2=\"20.0\" stroke=\"#E4E3E6\"/><line x1=\"173.3\" y1=\"246.0\" x2=\"173.3\" y2=\"20.0\" stroke=\"#E4E3E6\"/><line x1=\"206.7\" y1=\"246.0\" x2=\"206.7\" y2=\"20.0\" stroke=\"#E4E3E6\"/><line x1=\"240.0\" y1=\"246.0\" x2=\"240.0\" y2=\"20.0\" stroke=\"#E4E3E6\"/><line x1=\"273.3\" y1=\"246.0\" x2=\"273.3\" y2=\"20.0\" stroke=\"#E4E3E6\"/><line x1=\"306.7\" y1=\"246.0\" x2=\"306.7\" y2=\"20.0\" stroke=\"#E4E3E6\"/><line x1=\"340.0\" y1=\"246.0\" x2=\"340.0\" y2=\"20.0\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"246.0\" x2=\"340.0\" y2=\"246.0\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"231.9\" x2=\"340.0\" y2=\"231.9\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"217.8\" x2=\"340.0\" y2=\"217.8\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"203.6\" x2=\"340.0\" y2=\"203.6\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"189.5\" x2=\"340.0\" y2=\"189.5\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"175.4\" x2=\"340.0\" y2=\"175.4\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"161.2\" x2=\"340.0\" y2=\"161.2\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"147.1\" x2=\"340.0\" y2=\"147.1\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"133.0\" x2=\"340.0\" y2=\"133.0\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"118.9\" x2=\"340.0\" y2=\"118.9\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"104.8\" x2=\"340.0\" y2=\"104.8\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"90.6\" x2=\"340.0\" y2=\"90.6\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"76.5\" x2=\"340.0\" y2=\"76.5\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"62.4\" x2=\"340.0\" y2=\"62.4\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"48.2\" x2=\"340.0\" y2=\"48.2\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"34.1\" x2=\"340.0\" y2=\"34.1\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"20.0\" x2=\"340.0\" y2=\"20.0\" stroke=\"#E4E3E6\"/><line x1=\"40.0\" y1=\"217.8\" x2=\"340.0\" y2=\"217.8\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"73.3\" y1=\"246.0\" x2=\"73.3\" y2=\"20.0\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"106.7\" y=\"233.8\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">1</text><text x=\"140.0\" y=\"233.8\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">2</text><text x=\"173.3\" y=\"233.8\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">3</text><text x=\"206.7\" y=\"233.8\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">4</text><text x=\"240.0\" y=\"233.8\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">5</text><text x=\"273.3\" y=\"233.8\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">6</text><text x=\"306.7\" y=\"233.8\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">7</text><text x=\"340.0\" y=\"233.8\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">8</text><text x=\"65.3\" y=\"206.6\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">1</text><text x=\"65.3\" y=\"192.5\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">2</text><text x=\"65.3\" y=\"178.4\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">3</text><text x=\"65.3\" y=\"164.2\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">4</text><text x=\"65.3\" y=\"150.1\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">5</text><text x=\"65.3\" y=\"136.0\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">6</text><text x=\"65.3\" y=\"121.9\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">7</text><text x=\"65.3\" y=\"107.8\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">8</text><text x=\"65.3\" y=\"93.6\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">9</text><text x=\"65.3\" y=\"79.5\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">10</text><text x=\"65.3\" y=\"65.4\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">11</text><text x=\"65.3\" y=\"51.2\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">12</text><text x=\"65.3\" y=\"37.1\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">13</text><text x=\"65.3\" y=\"23.0\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">14</text><circle cx=\"140.0\" cy=\"76.5\" r=\"4.5\" fill=\"#2A5D9E\"/><text x=\"148.0\" y=\"68.5\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">P(2,10)</text></svg></span><p>Triangeln som bildas av linjen och koordinataxlarna har arean 45 areaenheter.</p><p>Bestäm alla möjliga ekvationer för linjen.</p>",
     "s": "<p>Skriv linjen på interceptform \\(\\frac{x}{a}+\\frac{y}{b}=1\\), där \\(a\\) och \\(b\\) är positiva skärningar med axlarna.</p><p>Arean ger \\(\\frac{ab}{2}=45\\Rightarrow ab=90\\).</p><p>Punkten \\((2,10)\\) ligger på linjen, alltså \\(\\frac{2}{a}+\\frac{10}{b}=1\\).</p><p>Med \\(b=\\frac{90}{a}\\) fås \\(\\frac{2}{a}+\\frac{a}{9}=1\\).</p><p>Multiplicera med \\(9a\\): \\(18+a^2=9a\\Rightarrow a^2-9a+18=0\\).</p><p>\\((a-3)(a-6)=0\\), alltså \\(a=3\\) eller \\(a=6\\).</p><p>Då blir \\(b=30\\) respektive \\(b=15\\).</p><p><strong>Ekvationerna är \\(y=-10x+30\\) eller \\(y=-2,5x+15\\).</strong></p>",
     "familj": "A_line_point_area_two_solutions"
-  },
-  {
-    "id": "1.194",
-    "kap": 1,
-    "omr": "korrelation_koefficient",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "A",
-    "poang": "0/0/2",
-    "t": "<p>Två datamaterial visas i figuren.</p><span class=\"fig smal\"><svg width=\"420\" height=\"220\" viewBox=\"0 0 420 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"418\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"20\" y=\"20\" width=\"170\" height=\"170\" fill=\"none\" stroke=\"#E4E3E6\"/><line x1=\"48.3\" y1=\"20\" x2=\"48.3\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"20\" y1=\"48.3\" x2=\"190\" y2=\"48.3\" stroke=\"#F0EFF2\"/><line x1=\"76.7\" y1=\"20\" x2=\"76.7\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"20\" y1=\"76.7\" x2=\"190\" y2=\"76.7\" stroke=\"#F0EFF2\"/><line x1=\"105.0\" y1=\"20\" x2=\"105.0\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"20\" y1=\"105.0\" x2=\"190\" y2=\"105.0\" stroke=\"#F0EFF2\"/><line x1=\"133.3\" y1=\"20\" x2=\"133.3\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"20\" y1=\"133.3\" x2=\"190\" y2=\"133.3\" stroke=\"#F0EFF2\"/><line x1=\"161.7\" y1=\"20\" x2=\"161.7\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"20\" y1=\"161.7\" x2=\"190\" y2=\"161.7\" stroke=\"#F0EFF2\"/><line x1=\"20\" y1=\"190\" x2=\"190\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"1.8\"/><line x1=\"20\" y1=\"20\" x2=\"20\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"1.8\"/><text x=\"26\" y=\"36\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><rect x=\"230\" y=\"20\" width=\"170\" height=\"170\" fill=\"none\" stroke=\"#E4E3E6\"/><line x1=\"258.3\" y1=\"20\" x2=\"258.3\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"230\" y1=\"48.3\" x2=\"400\" y2=\"48.3\" stroke=\"#F0EFF2\"/><line x1=\"286.7\" y1=\"20\" x2=\"286.7\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"230\" y1=\"76.7\" x2=\"400\" y2=\"76.7\" stroke=\"#F0EFF2\"/><line x1=\"315.0\" y1=\"20\" x2=\"315.0\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"230\" y1=\"105.0\" x2=\"400\" y2=\"105.0\" stroke=\"#F0EFF2\"/><line x1=\"343.3\" y1=\"20\" x2=\"343.3\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"230\" y1=\"133.3\" x2=\"400\" y2=\"133.3\" stroke=\"#F0EFF2\"/><line x1=\"371.7\" y1=\"20\" x2=\"371.7\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"230\" y1=\"161.7\" x2=\"400\" y2=\"161.7\" stroke=\"#F0EFF2\"/><line x1=\"230\" y1=\"190\" x2=\"400\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"1.8\"/><line x1=\"230\" y1=\"20\" x2=\"230\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"1.8\"/><text x=\"236\" y=\"36\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"35\" cy=\"155\" r=\"4\" fill=\"#2A5D9E\"/><circle cx=\"55\" cy=\"137\" r=\"4\" fill=\"#2A5D9E\"/><circle cx=\"75\" cy=\"120\" r=\"4\" fill=\"#2A5D9E\"/><circle cx=\"95\" cy=\"104\" r=\"4\" fill=\"#2A5D9E\"/><circle cx=\"115\" cy=\"87\" r=\"4\" fill=\"#2A5D9E\"/><circle cx=\"135\" cy=\"70\" r=\"4\" fill=\"#2A5D9E\"/><circle cx=\"110\" cy=\"155\" r=\"4\" fill=\"#2A5D9E\"/><circle cx=\"245\" cy=\"155\" r=\"4\" fill=\"#B43123\"/><circle cx=\"265\" cy=\"150\" r=\"4\" fill=\"#B43123\"/><circle cx=\"285\" cy=\"138\" r=\"4\" fill=\"#B43123\"/><circle cx=\"305\" cy=\"118\" r=\"4\" fill=\"#B43123\"/><circle cx=\"325\" cy=\"90\" r=\"4\" fill=\"#B43123\"/><circle cx=\"345\" cy=\"55\" r=\"4\" fill=\"#B43123\"/></svg></span><p>a) Vilket material bör ha korrelationskoefficienten som ligger närmast 1?</p><p>b) Förklara vad som händer med korrelationskoefficienten i material A om den ensamma avvikande punkten tas bort.</p>",
-    "s": "<p>Material A ligger i huvudsak nära en stigande rät linje, medan material B är stigande men tydligt böjt.</p><p>Korrelationskoefficienten mäter hur väl ett <em>linjärt</em> samband stämmer.</p><p>Därför bör <strong>material A</strong> ha \\(r\\)-värdet närmast 1.</p><p>Om den avvikande punkten i A tas bort blir sambandet ännu mer linjärt.</p><p><strong>Då ökar korrelationskoefficienten och kommer ännu närmare 1.</strong></p>",
-    "familj": "A_correlation_linear_vs_curved"
   },
   {
     "id": "1.195",
@@ -2932,20 +2135,6 @@ window.BANKMA2 = [
     "familj": "np_typ_dold_ekvation_pris_antal"
   },
   {
-    "id": "1.201",
-    "kap": 1,
-    "omr": "algebraiska_uttryck",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Två tal skiljer 1. Visa att differensen mellan kvadraten av det större talet och kvadraten av det mindre talet alltid är lika med summan av talen.</p>",
-    "s": "<p>Låt det mindre talet vara \\(x\\). Då är det större \\(x+1\\).</p><p>Differensen mellan kvadraterna är</p><p>\\((x+1)^2-x^2=x^2+2x+1-x^2=2x+1\\).</p><p>Summan av talen är</p><p>\\(x+(x+1)=2x+1\\).</p><p><strong>Uttrycken är lika för alla \\(x\\), så påståendet är visat.</strong></p>",
-    "familj": "np_typ_generellt_algebraresonemang"
-  },
-  {
     "id": "1.202",
     "kap": 1,
     "omr": "bestamma_linjara_funktioner",
@@ -2961,20 +2150,6 @@ window.BANKMA2 = [
     "familj": "np_typ_linje_avstandsvillkor"
   },
   {
-    "id": "1.203",
-    "kap": 1,
-    "omr": "korrelation_koefficient",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Ett spridningsdiagram visar ett tydligt positivt men böjt samband. En elev säger: ”Korrelationskoefficienten måste därför vara nära 1.”</p><p>Bedöm påståendet.</p>",
-    "s": "<p>Korrelationskoefficienten mäter styrkan i ett <em>linjärt</em> samband.</p><p>Ett tydligt böjt samband kan vara starkt utan att \\(r\\) ligger nära 1.</p><p><strong>Påståendet behöver alltså inte vara sant.</strong></p>",
-    "familj": "np_typ_korrelation_linjaritet"
-  },
-  {
     "id": "1.204",
     "kap": 1,
     "omr": "faktorisering",
@@ -2988,20 +2163,6 @@ window.BANKMA2 = [
     "t": "<p><strong>Endast svar.</strong> Faktorisera \\(6x^2-24\\) så långt som möjligt.</p>",
     "s": "<p>Bryt först ut 6: \\(6(x^2-4)\\).</p><p>Använd sedan konjugatregeln baklänges: \\(x^2-4=(x-2)(x+2)\\).</p><p><strong>\\(6(x-2)(x+2)\\).</strong></p>",
     "familj": "np_typ_faktorisering_kort"
-  },
-  {
-    "id": "1.205",
-    "kap": 1,
-    "omr": "algebraiska_uttryck",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p><strong>Endast svar.</strong> Förenkla \\(4(2x-3)-3(x+5)\\).</p>",
-    "s": "<p>Multiplicera in i parenteserna: \\(8x-12-3x-15\\).</p><p>Samla liknande termer.</p><p><strong>\\(5x-27\\).</strong></p>",
-    "familj": "np2_kort_algebra_parenteser"
   },
   {
     "id": "1.206",
@@ -3064,34 +2225,6 @@ window.BANKMA2 = [
     "familj": "np2_system_parameter_fullklassificering"
   },
   {
-    "id": "1.210",
-    "kap": 1,
-    "omr": "linjar_regression",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>En linjär regressionsmodell är \\(y=3,6x+42\\). Datamaterialet innehåller endast värden för \\(2\\le x\\le9\\).</p><p>En elev använder modellen för att beräkna \\(y\\) när \\(x=30\\). Vad bör eleven skriva tillsammans med sitt svar?</p>",
-    "s": "<p>Beräkningen går att göra, men \\(x=30\\) ligger långt utanför dataintervallet.</p><p>Det är extrapolation, så osäkerheten är stor.</p><p><strong>Eleven bör tydligt ange att prognosen är osäker eftersom den bygger på lång extrapolation.</strong></p>",
-    "familj": "np2_regression_extrapolation"
-  },
-  {
-    "id": "1.211",
-    "kap": 1,
-    "omr": "korrelation_koefficient",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "A",
-    "poang": "0/0/2",
-    "t": "<p>Spridningsdiagrammet visar sju punkter som nästan ligger på en rät linje och en avvikande punkt P.</p><span class=\"fig smal\"><svg width=\"420\" height=\"260\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"418\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"45\" y1=\"215\" x2=\"385\" y2=\"215\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"45\" y1=\"45\" x2=\"45\" y2=\"215\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"82.8\" cy=\"177.2\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"120.6\" cy=\"158.3\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"158.3\" cy=\"139.4\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"196.1\" cy=\"120.6\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"233.9\" cy=\"101.7\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"271.7\" cy=\"82.8\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"309.4\" cy=\"63.9\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"347.2\" cy=\"196.1\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"354.2\" y=\"190.1\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">P</text></svg></span><p>Förklara varför korrelationskoefficienten kan förändras mycket om P tas bort, trots att bara en av åtta punkter tas bort.</p>",
-    "s": "<p>Korrelationskoefficienten påverkas av hur väl hela punktmolnet följer ett linjärt mönster.</p><p>P ligger långt från den trend som övriga punkter följer och får därför stort inflytande på den linjära samvariationen.</p><p><strong>En enda stark avvikare kan därför sänka eller förändra \\(r\\) tydligt, även i ett ganska litet material.</strong></p>",
-    "familj": "np2_korrelation_avvikare"
-  },
-  {
     "id": "1.212",
     "kap": 1,
     "omr": "kvadreringsreglerna",
@@ -3105,48 +2238,6 @@ window.BANKMA2 = [
     "t": "<p><strong>Endast svar.</strong> Utveckla \\((3x-2)^2\\).</p>",
     "s": "<p>Använd \\((a-b)^2=a^2-2ab+b^2\\).</p><p><strong>\\(9x^2-12x+4\\).</strong></p>",
     "familj": "np2_kvadreringsregel_kort"
-  },
-  {
-    "id": "1.213",
-    "kap": 1,
-    "omr": "ekvationer",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>Lös ekvationen \\(\\frac{x-1}{3}+\\frac{x+2}{4}=5\\).</p>",
-    "s": "<p>Multiplicera båda leden med 12:</p><p>\\(4(x-1)+3(x+2)=60\\).</p><p>\\(4x-4+3x+6=60\\Rightarrow7x+2=60\\).</p><p>\\(7x=58\\).</p><p><strong>\\(x=\\frac{58}{7}\\).</strong></p>",
-    "familj": "np2_ekvation_brak"
-  },
-  {
-    "id": "1.214",
-    "kap": 1,
-    "omr": "negativa_tal_prioritering",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "1/0/0",
-    "t": "<p><strong>Endast svar.</strong> Beräkna \\(-2^4+3(-2)^2-18/3\\).</p>",
-    "s": "<p>Potenser beräknas före tecknet framför: \\(-2^4=-16\\), medan \\((-2)^2=4\\).</p><p>Uttrycket blir \\(-16+12-6\\).</p><p><strong>Svaret är \\(-10\\).</strong></p>",
-    "familj": "np3_negativa_prioritering"
-  },
-  {
-    "id": "1.215",
-    "kap": 1,
-    "omr": "brakraking",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "E",
-    "poang": "2/0/0",
-    "t": "<p>Lös ekvationen \\(\\frac{x-1}{3}-\\frac{x+2}{4}=\\frac12\\).</p>",
-    "s": "<p>Multiplicera alla led med 12:</p><p>\\(4(x-1)-3(x+2)=6\\).</p><p>\\(4x-4-3x-6=6\\Rightarrow x-10=6\\).</p><p><strong>\\(x=16\\).</strong></p>",
-    "familj": "np3_brakekvation"
   },
   {
     "id": "1.216",
@@ -3192,34 +2283,6 @@ window.BANKMA2 = [
     "t": "<p>För vilka värden på \\(a\\) har systemet</p><p>\\(\\begin{cases}(a+2)x+3y=6\\\\2x+(a+3)y=6\\end{cases}\\)</p><p>a) exakt en lösning<br>b) ingen lösning<br>c) oändligt många lösningar?</p>",
     "s": "<p>Systemet saknar unik lösning när koefficienterna blir proportionella:</p><p>\\((a+2)(a+3)-6=0\\).</p><p>Det ger \\(a^2+5a=0\\Rightarrow a=0\\) eller \\(a=-5\\).</p><p>För \\(a=0\\) blir båda ekvationerna \\(2x+3y=6\\), alltså oändligt många lösningar.</p><p>För \\(a=-5\\) blir ekvationerna \\(-3x+3y=6\\) och \\(2x-2y=6\\). De beskriver parallella olika linjer, alltså ingen lösning.</p><p><strong>Exakt en lösning för \\(a\\ne0,-5\\); ingen lösning för \\(a=-5\\); oändligt många för \\(a=0\\).</strong></p>",
     "familj": "np3_system_parameter_klassificering"
-  },
-  {
-    "id": "1.219",
-    "kap": 1,
-    "omr": "linjar_regression",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "C",
-    "poang": "0/2/0",
-    "t": "<p>En regressionsmodell är \\(y=4,2x+18\\). För \\(x=7\\) är det uppmätta värdet 44.</p><p>Bestäm residualen och tolka den.</p>",
-    "s": "<p>Modellens värde är \\(4,2\\cdot7+18=47,4\\).</p><p>Residual = observerat − modellerat = \\(44-47,4=-3,4\\).</p><p><strong>Residualen är −3,4. Modellen överskattar alltså det observerade värdet med 3,4 enheter.</strong></p>",
-    "familj": "np3_regression_residual"
-  },
-  {
-    "id": "1.220",
-    "kap": 1,
-    "omr": "korrelation_koefficient",
-    "kurs": [
-      "2b",
-      "2c"
-    ],
-    "niva": "A",
-    "poang": "0/0/2",
-    "t": "<p>Spridningsdiagrammet visar ett tydligt positivt linjärt mönster med en avvikande punkt P.</p><span class=\"fig smal\"><svg width=\"430\" height=\"250\" viewBox=\"0 0 430 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"45\" y1=\"205\" x2=\"385\" y2=\"205\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"45\" y1=\"40\" x2=\"45\" y2=\"205\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"79.0\" cy=\"180.2\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"113.0\" cy=\"168.7\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"147.0\" cy=\"152.2\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"181.0\" cy=\"137.4\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"215.0\" cy=\"122.5\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"249.0\" cy=\"102.7\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"283.0\" cy=\"89.5\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"317.0\" cy=\"172.0\" r=\"4.3\" fill=\"#2A5D9E\"/><text x=\"324.0\" y=\"166.0\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">P</text></svg></span><p>En elev säger: ”Eftersom sju av åtta punkter följer linjen kan P nästan inte påverka korrelationskoefficienten.” Bedöm påståendet.</p>",
-    "s": "<p>Korrelationskoefficienten beror inte bara på hur många punkter som följer trenden utan också på hur långt punkterna ligger från den linjära strukturen.</p><p>P ligger långt från huvudmönstret och kan därför få stort inflytande på samvariationen.</p><p><strong>Påståendet är fel. En enda stark avvikare kan påverka \\(r\\) tydligt i ett litet material.</strong></p>",
-    "familj": "np3_korrelation_avvikare"
   },
   {
     "id": "1.221",
@@ -8362,7 +7425,7 @@ window.BANKMA2 = [
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>I triangeln är \\(DE\\parallel BC\\). På sidan \\(AB\\) är \\(AD=6\\) cm och \\(DB=4\\) cm. Dessutom är \\(DE=7,2\\) cm.</p><span class=\"fig smal\"><svg width=\"430\" height=\"300\" viewBox=\"0 0 430 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"298\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<path d=\"M 215 35 L 55 260 L 375 260 Z\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"119.0\" y1=\"170.0\" x2=\"311.0\" y2=\"170.0\" stroke=\"#B43123\" stroke-width=\"2.5\"/>\n<text x=\"211\" y=\"27\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">A</text>\n<text x=\"40\" y=\"265\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">B</text>\n<text x=\"381\" y=\"265\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">C</text>\n<text x=\"101.0\" y=\"170.0\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">D</text>\n<text x=\"319.0\" y=\"170.0\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">E</text>\n<text x=\"143.0\" y=\"102.5\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" fill=\"#5C575E\">6</text>\n<text x=\"63.0\" y=\"215.0\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" fill=\"#5C575E\">4</text>\n<text x=\"190.0\" y=\"162.0\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" fill=\"#B43123\">DE = 7,2</text>\n</svg></span><p>Bestäm \\(BC\\).</p>",
+    "t": "<p>I triangeln är \\(DE\\parallel BC\\). På sidan \\(AB\\) är \\(AD=6\\) cm och \\(DB=4\\) cm. Dessutom är \\(DE=7,2\\) cm.</p><span class=\"fig smal\"><svg width=\"420\" height=\"300\" viewBox=\"0 0 420 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"418\" height=\"298\" rx=\"12\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"210\" y1=\"40\" x2=\"80\" y2=\"250\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"210\" y1=\"40\" x2=\"350\" y2=\"250\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"80\" y1=\"250\" x2=\"350\" y2=\"250\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"132.0\" y1=\"166.0\" x2=\"294.0\" y2=\"166.0\" stroke=\"#B43123\" stroke-width=\"2.8\"/><circle cx=\"210\" cy=\"40\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"202\" y=\"28\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><circle cx=\"80\" cy=\"250\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"64\" y=\"272\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"350\" cy=\"250\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"360\" y=\"272\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">C</text><circle cx=\"132.0\" cy=\"166.0\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"118.0\" y=\"164.0\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">D</text><circle cx=\"294.0\" cy=\"166.0\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"304.0\" y=\"164.0\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">E</text><text x=\"155.0\" y=\"99.0\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">6</text><text x=\"90.0\" y=\"214.0\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">4</text><text x=\"213.0\" y=\"158.0\" fill=\"#B43123\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">DE = 7,2</text></svg></span><p>Bestäm \\(BC\\).</p>",
     "s": "<p>\\(AB=10\\) cm. Trianglarna \\(ADE\\) och \\(ABC\\) är likformiga.</p><p>\\(\\frac{DE}{BC}=\\frac{AD}{AB}=\\frac6{10}\\).</p><p>\\(BC=7,2\\cdot\\frac{10}{6}=12\\).</p><p><strong>\\(BC=12\\) cm.</strong></p>",
     "familj": "topptriangel_langd"
   },
@@ -8759,7 +7822,7 @@ window.BANKMA2 = [
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>I figuren är \\(DE\\parallel BC\\). Punkten \\(D\\) är mittpunkt på \\(AB\\), så \\(AD=DB=5\\) cm. Dessutom är \\(DE=8\\) cm.</p><span class=\"fig smal\"><svg width=\"430\" height=\"310\" viewBox=\"0 0 430 310\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"308\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<path d=\"M 215 35 L 55 265 L 375 265 Z\" fill=\"#fff\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"135.0\" y1=\"150.0\" x2=\"295.0\" y2=\"150.0\" stroke=\"#B43123\" stroke-width=\"2.5\"/>\n<text x=\"205\" y=\"27\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">A</text>\n<text x=\"43\" y=\"279\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">B</text>\n<text x=\"381\" y=\"279\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">C</text>\n<text x=\"117.0\" y=\"150.0\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">D</text>\n<text x=\"303.0\" y=\"150.0\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">E</text>\n<text x=\"116\" y=\"110\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" fill=\"#5C575E\">5 cm</text>\n<text x=\"85\" y=\"215\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" fill=\"#5C575E\">5 cm</text>\n<text x=\"187.0\" y=\"142.0\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\" fill=\"#B43123\">DE = 8 cm</text>\n</svg></span><p>Bestäm \\(BC\\).</p>",
+    "t": "<p>I figuren är \\(DE\\parallel BC\\). Punkten \\(D\\) är mittpunkt på \\(AB\\), så \\(AD=DB=5\\) cm. Dessutom är \\(DE=8\\) cm.</p><span class=\"fig smal\"><svg width=\"420\" height=\"300\" viewBox=\"0 0 420 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"418\" height=\"298\" rx=\"12\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"210\" y1=\"35\" x2=\"80\" y2=\"250\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"210\" y1=\"35\" x2=\"350\" y2=\"250\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"80\" y1=\"250\" x2=\"350\" y2=\"250\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"145.0\" y1=\"142.5\" x2=\"280.0\" y2=\"142.5\" stroke=\"#B43123\" stroke-width=\"2.8\"/><circle cx=\"210\" cy=\"35\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"202\" y=\"23\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><circle cx=\"80\" cy=\"250\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"64\" y=\"272\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"350\" cy=\"250\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"360\" y=\"272\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">C</text><circle cx=\"145.0\" cy=\"142.5\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"131.0\" y=\"140.5\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">D</text><circle cx=\"280.0\" cy=\"142.5\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"290.0\" y=\"140.5\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">E</text><text x=\"161.5\" y=\"84.75\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">5 cm</text><text x=\"96.5\" y=\"202.25\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">5 cm</text><text x=\"212.5\" y=\"134.5\" fill=\"#B43123\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">DE = 8 cm</text></svg></span><p>Bestäm \\(BC\\).</p>",
     "s": "<p>Eftersom linjerna är parallella blir trianglarna likformiga. Sätt upp en proportion mellan motsvarande sidor.</p><p>Den lilla triangeln har skalfaktorn \\(1/2\\) jämfört med den stora.</p><p>\\(BC=2\\cdot DE=16\\).</p><p><strong>16 cm.</strong></p>",
     "familj": "r2_top_triangle_midpoint"
   },
@@ -9789,7 +8852,7 @@ window.BANKMA2 = [
     ],
     "niva": "A",
     "poang": "0/0/3",
-    "t": "<p>I den rätvinkliga triangeln är \\(CD\\) höjd mot hypotenusan \\(AB\\).</p><span class=\"fig smal\"><svg width=\"360\" height=\"250\" viewBox=\"0 0 360 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"40\" y1=\"200\" x2=\"300\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"40\" y1=\"200\" x2=\"90\" y2=\"40\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"300\" y1=\"200\" x2=\"90\" y2=\"40\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"90\" y1=\"40\" x2=\"90\" y2=\"200\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M 94 49 L 104 62 L 90 71\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><path d=\"M 90 186 L 104 186 L 104 200\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"1.6\"/><circle cx=\"40\" cy=\"200\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"28\" y=\"215\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><circle cx=\"300\" cy=\"200\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"308\" y=\"215\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"90\" cy=\"40\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"80\" y=\"32\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">C</text><circle cx=\"90\" cy=\"200\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"82\" y=\"218\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">D</text><text x=\"60\" y=\"215\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">p</text><text x=\"190\" y=\"215\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">q</text><text x=\"98\" y=\"125\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">h</text></svg></span><p>Visa med likformighet att \\(h^2=pq\\).</p>",
+    "t": "<p>I den rätvinkliga triangeln är \\(CD\\) höjd mot hypotenusan \\(AB\\).</p><span class=\"fig smal\"><svg width=\"420\" height=\"300\" viewBox=\"0 0 420 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"418\" height=\"298\" rx=\"12\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"80\" y1=\"220\" x2=\"160\" y2=\"122\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"160\" y1=\"122\" x2=\"280\" y2=\"220\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"80\" y1=\"220\" x2=\"280\" y2=\"220\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"160\" y1=\"122\" x2=\"160\" y2=\"220\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><circle cx=\"80\" cy=\"220\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"64\" y=\"240\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><circle cx=\"280\" cy=\"220\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"290\" y=\"240\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"160\" cy=\"122\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"150\" y=\"110\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">C</text><circle cx=\"160\" cy=\"220\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"152\" y=\"242\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">D</text><text x=\"120.0\" y=\"240\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">p</text><text x=\"220.0\" y=\"240\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">q</text><text x=\"144\" y=\"171.0\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"14\">h</text><path d=\"M 160 208 L 172 208 L 172 220\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"1.8\"/><path d=\"M 148.6 135.9 L 162.6 147.3 L 173.9 133.4\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"1.8\"/></svg></span><p>Visa med likformighet att \\(h^2=pq\\).</p>",
     "s": "<p>Trianglarna \\(\\triangle ACD\\) och \\(\\triangle CDB\\) är båda rätvinkliga och dessutom likformiga.</p><p>Av likformigheten följer proportionen \\(\\frac{h}{p}=\\frac{q}{h}\\).</p><p>Multiplicera korsvis: \\(h^2=pq\\).</p><p><strong>Alltså gäller \\(h^2=pq\\).</strong></p>",
     "familj": "A_similarity_proof_altitude_hypotenuse"
   },
@@ -9803,7 +8866,7 @@ window.BANKMA2 = [
     ],
     "niva": "A",
     "poang": "0/0/3",
-    "t": "<p>I triangeln gäller \\(DE\\parallel BC\\).</p><span class=\"fig smal\"><svg width=\"360\" height=\"260\" viewBox=\"0 0 360 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"358\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"60\" y1=\"40\" x2=\"40\" y2=\"220\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"60\" y1=\"40\" x2=\"300\" y2=\"220\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"40\" y1=\"220\" x2=\"300\" y2=\"220\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"48\" y1=\"148\" x2=\"156\" y2=\"148\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"60\" cy=\"40\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"46\" y=\"32\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><circle cx=\"40\" cy=\"220\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"28\" y=\"238\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"300\" cy=\"220\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"308\" y=\"238\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">C</text><circle cx=\"48\" cy=\"148\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"32\" y=\"148\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">D</text><circle cx=\"156\" cy=\"148\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"164\" y=\"148\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">E</text><text x=\"52\" y=\"100\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">4</text><text x=\"39\" y=\"187\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">6</text><text x=\"95\" y=\"140\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">x</text><text x=\"220\" y=\"140\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">9</text><text x=\"170\" y=\"150\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">DE ∥ BC</text></svg></span><p>Bestäm \\(x\\) och arean av hela triangeln \\(ABC\\), om arean av triangeln \\(ADE\\) är 24 areaenheter.</p>",
+    "t": "<p>I triangeln gäller \\(DE\\parallel BC\\). Det är givet att \\(AD=4\\), \\(DB=6\\), \\(AE=x\\) och \\(EC=9\\).</p><span class=\"fig smal\"><svg width=\"420\" height=\"300\" viewBox=\"0 0 420 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"418\" height=\"298\" rx=\"12\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"110\" y1=\"35\" x2=\"85\" y2=\"250\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"110\" y1=\"35\" x2=\"345\" y2=\"250\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"85\" y1=\"250\" x2=\"345\" y2=\"250\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"100.0\" y1=\"121.0\" x2=\"204.0\" y2=\"121.0\" stroke=\"#B43123\" stroke-width=\"2.8\"/><circle cx=\"110\" cy=\"35\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"102\" y=\"23\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><circle cx=\"85\" cy=\"250\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"69\" y=\"272\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"345\" cy=\"250\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"355\" y=\"272\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">C</text><circle cx=\"100.0\" cy=\"121.0\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"86.0\" y=\"119.0\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">D</text><circle cx=\"204.0\" cy=\"121.0\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"214.0\" y=\"119.0\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">E</text><text x=\"95.0\" y=\"78.0\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">4</text><text x=\"82.5\" y=\"195.5\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">6</text><text x=\"175.0\" y=\"70.0\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">x</text><text x=\"286.5\" y=\"189.5\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">9</text></svg></span><p>Bestäm \\(x\\) och arean av hela triangeln \\(ABC\\), om arean av triangeln \\(ADE\\) är 24 areaenheter.</p>",
     "s": "<p>\\(AB=4+6=10\\).</p><p>Eftersom \\(DE\\parallel BC\\) är \\(\\triangle ADE\\) och \\(\\triangle ABC\\) likformiga.</p><p>Skalfaktorn är \\(\\frac{AB}{AD}=\\frac{10}{4}=\\frac52\\).</p><p>Därför gäller \\(\\frac{AC}{AE}=\\frac52\\). Med \\(AC=x+9\\) fås \\(\\frac{x+9}{x}=\\frac52\\).</p><p>Det ger \\(2x+18=5x\\Rightarrow x=6\\).</p><p>Areor skalar med kvadraten på skalfaktorn: \\(\\text{area}(ABC)=24\\cdot\\left(\\frac52\\right)^2=150\\).</p><p><strong>\\(x=6\\) och arean av \\(ABC\\) är 150.</strong></p>",
     "familj": "A_transversal_length_and_area"
   },
@@ -9817,7 +8880,7 @@ window.BANKMA2 = [
     ],
     "niva": "A",
     "poang": "0/0/3",
-    "t": "<p>Från punkten \\(P\\) dras en tangent \\(PT\\) till cirkeln och en sekant som skär cirkeln i \\(A\\) och \\(B\\).</p><span class=\"fig smal\"><svg width=\"380\" height=\"260\" viewBox=\"0 0 380 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"378\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><circle cx=\"220\" cy=\"130\" r=\"60\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"40\" y1=\"190\" x2=\"173.7\" y2=\"167.2\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"40\" y1=\"190\" x2=\"278\" y2=\"103\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"220\" y1=\"130\" x2=\"173.7\" y2=\"167.2\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"40\" cy=\"190\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"28\" y=\"208\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">P</text><circle cx=\"160\" cy=\"190\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"152\" y=\"208\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><circle cx=\"278\" cy=\"103\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"286\" y=\"98\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"173.7\" cy=\"167.2\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"165.7\" y=\"159.2\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">T</text><circle cx=\"220\" cy=\"130\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"212\" y=\"122\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">O</text><path d=\"M 163.7 169.2 L 161.7 157.2 L 173.7 155.2\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"1.5\"/><text x=\"92\" y=\"200\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">4</text><text x=\"205\" y=\"150\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">6</text><text x=\"120\" y=\"160\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">16</text></svg></span><p>Det är givet att \\(PA=4\\), \\(PB=16\\) och cirkelns radie är 6.</p><p>a) Bestäm tangentens längd \\(PT\\).<br>b) Bestäm avståndet \\(OP\\) från centrum till punkten \\(P\\).</p>",
+    "t": "<p>Från punkten \\(P\\) dras en tangent \\(PT\\) till cirkeln och en sekant som skär cirkeln i \\(A\\) och \\(B\\).</p><span class=\"fig smal\"><svg width=\"420\" height=\"300\" viewBox=\"0 0 420 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"418\" height=\"298\" rx=\"12\" fill=\"#fff\" stroke=\"#E4E3E6\"/><circle cx=\"270\" cy=\"140\" r=\"62\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2.2\"/><line x1=\"55\" y1=\"210\" x2=\"228\" y2=\"186\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"55\" y1=\"210\" x2=\"330\" y2=\"118\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"270\" y1=\"140\" x2=\"228\" y2=\"186\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><circle cx=\"55\" cy=\"210\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"41\" y=\"232\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">P</text><circle cx=\"212\" cy=\"160\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"200\" y=\"178\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><circle cx=\"330\" cy=\"118\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"340\" y=\"108\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"228\" cy=\"186\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"216\" y=\"176\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">T</text><circle cx=\"270\" cy=\"140\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"258\" y=\"128\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">O</text><path d=\"M 222 178 L 228 190 L 240 184\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"1.8\"/><text x=\"125.5\" y=\"193.0\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">4</text><text x=\"182.5\" y=\"156.0\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">16</text><text x=\"259.0\" y=\"167.0\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">6</text></svg></span><p>Det är givet att \\(PA=4\\), \\(PB=16\\) och cirkelns radie är 6.</p><p>a) Bestäm tangentens längd \\(PT\\).<br>b) Bestäm avståndet \\(OP\\) från centrum till punkten \\(P\\).</p>",
     "s": "<p>Tangent-sekant-satsen ger \\(PT^2=PA\\cdot PB\\).</p><p>Alltså \\(PT^2=4\\cdot16=64\\), så \\(PT=8\\).</p><p>Eftersom radien är vinkelrät mot tangenten blir \\(\\triangle OPT\\) rätvinklig.</p><p>Med Pythagoras fås \\(OP^2=6^2+8^2=100\\), alltså \\(OP=10\\).</p><p><strong>a) \\(PT=8\\). b) \\(OP=10\\).</strong></p>",
     "familj": "A_tangent_secant_and_center_distance"
   },
@@ -9959,7 +9022,7 @@ window.BANKMA2 = [
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>I figuren är \\(DE\\parallel AB\\).</p><span class=\"fig smal\"><svg width=\"380\" height=\"280\" viewBox=\"0 0 380 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"378\" height=\"278\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55\" y1=\"225\" x2=\"320\" y2=\"225\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"55\" y1=\"225\" x2=\"105\" y2=\"35\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"320\" y1=\"225\" x2=\"105\" y2=\"35\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"77\" y1=\"140\" x2=\"205\" y2=\"140\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"55\" cy=\"225\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"41\" y=\"243\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><circle cx=\"320\" cy=\"225\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"328\" y=\"243\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"105\" cy=\"35\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"97\" y=\"27\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">C</text><circle cx=\"77\" cy=\"140\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"63\" y=\"142\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">D</text><circle cx=\"205\" cy=\"140\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"213\" y=\"142\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">E</text><text x=\"80\" y=\"92\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">3</text><text x=\"68\" y=\"188\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">5</text><text x=\"128\" y=\"132\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">6</text><text x=\"225\" y=\"132\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">DE ∥ AB</text></svg></span><p>Det är givet att \\(CD=3\\), \\(DA=5\\) och \\(DE=6\\). Bestäm \\(AB\\).</p>",
+    "t": "<p>I figuren är \\(DE\\parallel AB\\).</p><span class=\"fig smal\"><svg width=\"420\" height=\"300\" viewBox=\"0 0 420 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"418\" height=\"298\" rx=\"12\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"140\" y1=\"35\" x2=\"80\" y2=\"250\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"140\" y1=\"35\" x2=\"350\" y2=\"250\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"80\" y1=\"250\" x2=\"350\" y2=\"250\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"117.5\" y1=\"115.625\" x2=\"218.75\" y2=\"115.625\" stroke=\"#B43123\" stroke-width=\"2.8\"/><circle cx=\"80\" cy=\"250\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"64\" y=\"272\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><circle cx=\"350\" cy=\"250\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"360\" y=\"272\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"140\" cy=\"35\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"132\" y=\"23\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">C</text><circle cx=\"117.5\" cy=\"115.625\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"103.5\" y=\"113.625\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">D</text><circle cx=\"218.75\" cy=\"115.625\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"228.75\" y=\"113.625\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">E</text><text x=\"110.75\" y=\"71.3125\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">3</text><text x=\"80.75\" y=\"188.8125\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">5</text><text x=\"168.125\" y=\"107.625\" fill=\"#B43123\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">6</text></svg></span><p>Det är givet att \\(CD=3\\), \\(DA=5\\) och \\(DE=6\\). Bestäm \\(AB\\).</p>",
     "s": "<p>Trianglarna \\(CDE\\) och \\(CAB\\) är likformiga.</p><p>\\(CA=3+5=8\\).</p><p>Skalfaktorn från lilla till stora triangeln är \\(8/3\\).</p><p>\\(AB=6\\cdot8/3=16\\).</p><p><strong>\\(AB=16\\).</strong></p>",
     "familj": "np2_likformighet_transversal"
   },
@@ -9973,7 +9036,7 @@ window.BANKMA2 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>Två kordor skär varandra i punkten P.</p><span class=\"fig smal\"><svg width=\"380\" height=\"280\" viewBox=\"0 0 380 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"378\" height=\"278\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><circle cx=\"190\" cy=\"140\" r=\"95\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"105\" y1=\"140\" x2=\"275\" y2=\"140\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"190\" y1=\"55\" x2=\"190\" y2=\"225\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"105\" cy=\"140\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"89\" y=\"144\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><circle cx=\"275\" cy=\"140\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"283\" y=\"144\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"190\" cy=\"55\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"185\" y=\"47\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">C</text><circle cx=\"190\" cy=\"225\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"185\" y=\"243\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">D</text><circle cx=\"190\" cy=\"140\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"198\" y=\"132\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">P</text><text x=\"140\" y=\"130\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">4</text><text x=\"235\" y=\"130\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">9</text><text x=\"198\" y=\"95\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">6</text><text x=\"198\" y=\"190\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">x</text></svg></span><p>Bestäm \\(x\\).</p>",
+    "t": "<p>Två kordor skär varandra i punkten \\(P\\).</p><span class=\"fig smal\"><svg width=\"420\" height=\"300\" viewBox=\"0 0 420 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"418\" height=\"298\" rx=\"12\" fill=\"#fff\" stroke=\"#E4E3E6\"/><circle cx=\"220\" cy=\"145\" r=\"92\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2.2\"/><line x1=\"110\" y1=\"160\" x2=\"335\" y2=\"160\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"210\" y1=\"82\" x2=\"210\" y2=\"260\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><circle cx=\"110\" cy=\"160\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"94\" y=\"164\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><circle cx=\"335\" cy=\"160\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"345\" y=\"164\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"210\" cy=\"82\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"202\" y=\"70\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">C</text><circle cx=\"210\" cy=\"260\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"202\" y=\"282\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">D</text><circle cx=\"210\" cy=\"160\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"220\" y=\"150\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">P</text><text x=\"160.0\" y=\"148\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">4</text><text x=\"272.5\" y=\"148\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">9</text><text x=\"228\" y=\"121.0\" fill=\"#444\" text-anchor=\"start\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">6</text><text x=\"228\" y=\"210.0\" fill=\"#444\" text-anchor=\"start\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">x</text></svg></span><p>Bestäm \\(x\\).</p>",
     "s": "<p>Kordasatsen ger \\(AP\\cdot PB=CP\\cdot PD\\).</p><p>\\(4\\cdot9=6x\\).</p><p>\\(36=6x\\).</p><p><strong>\\(x=6\\).</strong></p>",
     "familj": "np2_korda_figur"
   },
@@ -10103,7 +9166,7 @@ window.BANKMA2 = [
     ],
     "niva": "A",
     "poang": "0/0/3",
-    "t": "<p>I triangeln gäller \\(DE\\parallel AB\\).</p><span class=\"fig smal\"><svg width=\"390\" height=\"280\" viewBox=\"0 0 390 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"388\" height=\"278\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"55\" y1=\"225\" x2=\"335\" y2=\"225\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"55\" y1=\"225\" x2=\"105\" y2=\"35\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"335\" y1=\"225\" x2=\"105\" y2=\"35\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"75\" y1=\"150\" x2=\"210\" y2=\"150\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"55\" cy=\"225\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"41\" y=\"243\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><circle cx=\"335\" cy=\"225\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"343\" y=\"243\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"105\" cy=\"35\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"97\" y=\"27\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">C</text><circle cx=\"75\" cy=\"150\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"61\" y=\"150\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">D</text><circle cx=\"210\" cy=\"150\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"218\" y=\"150\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">E</text><text x=\"76\" y=\"96\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">4</text><text x=\"62\" y=\"192\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">6</text><text x=\"125\" y=\"142\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">5</text></svg></span><p>Det är givet att \\(CD=4\\), \\(DA=6\\) och \\(DE=5\\). Arean av triangeln \\(CDE\\) är 20.</p><p>Bestäm \\(AB\\) och arean av hela triangeln \\(CAB\\).</p>",
+    "t": "<p>I triangeln gäller \\(DE\\parallel AB\\).</p><span class=\"fig smal\"><svg width=\"420\" height=\"300\" viewBox=\"0 0 420 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"418\" height=\"298\" rx=\"12\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"140\" y1=\"35\" x2=\"80\" y2=\"250\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"140\" y1=\"35\" x2=\"350\" y2=\"250\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"80\" y1=\"250\" x2=\"350\" y2=\"250\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"116.0\" y1=\"121.0\" x2=\"224.0\" y2=\"121.0\" stroke=\"#B43123\" stroke-width=\"2.8\"/><circle cx=\"80\" cy=\"250\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"64\" y=\"272\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><circle cx=\"350\" cy=\"250\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"360\" y=\"272\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"140\" cy=\"35\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"132\" y=\"23\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">C</text><circle cx=\"116.0\" cy=\"121.0\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"102.0\" y=\"119.0\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">D</text><circle cx=\"224.0\" cy=\"121.0\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"234.0\" y=\"119.0\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">E</text><text x=\"110.0\" y=\"74.0\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">4</text><text x=\"80.0\" y=\"191.5\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">6</text><text x=\"170.0\" y=\"113.0\" fill=\"#B43123\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">5</text></svg></span><p>Det är givet att \\(CD=4\\), \\(DA=6\\) och \\(DE=5\\). Arean av triangeln \\(CDE\\) är 20.</p><p>Bestäm \\(AB\\) och arean av hela triangeln \\(CAB\\).</p>",
     "s": "<p>\\(CA=4+6=10\\). Skalfaktorn från den lilla till den stora triangeln är \\(10/4=2,5\\).</p><p>Därför \\(AB=5\\cdot2,5=12,5\\).</p><p>Areor skalar med kvadraten på längdskalfaktorn:</p><p>\\(20\\cdot2,5^2=20\\cdot6,25=125\\).</p><p><strong>\\(AB=12,5\\) och arean är 125.</strong></p>",
     "familj": "np3_transversal_area"
   },
@@ -10131,7 +9194,7 @@ window.BANKMA2 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>Två kordor skär varandra i punkten P.</p><span class=\"fig smal\"><svg width=\"380\" height=\"280\" viewBox=\"0 0 380 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"378\" height=\"278\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><circle cx=\"190\" cy=\"140\" r=\"95\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"105\" y1=\"140\" x2=\"275\" y2=\"140\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"190\" y1=\"55\" x2=\"190\" y2=\"225\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"105\" cy=\"140\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"89\" y=\"144\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><circle cx=\"275\" cy=\"140\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"283\" y=\"144\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"190\" cy=\"55\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"185\" y=\"47\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">C</text><circle cx=\"190\" cy=\"225\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"185\" y=\"243\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">D</text><circle cx=\"190\" cy=\"140\" r=\"3.5\" fill=\"#2A5D9E\"/><text x=\"198\" y=\"132\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">P</text><text x=\"140\" y=\"130\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">3</text><text x=\"235\" y=\"130\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">12</text><text x=\"198\" y=\"95\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">x</text><text x=\"198\" y=\"190\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">x+5</text></svg></span><p>Bestäm \\(x\\).</p>",
+    "t": "<p>Två kordor skär varandra i punkten \\(P\\).</p><span class=\"fig smal\"><svg width=\"420\" height=\"300\" viewBox=\"0 0 420 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"418\" height=\"298\" rx=\"12\" fill=\"#fff\" stroke=\"#E4E3E6\"/><circle cx=\"220\" cy=\"145\" r=\"92\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"2.2\"/><line x1=\"110\" y1=\"160\" x2=\"335\" y2=\"160\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><line x1=\"210\" y1=\"82\" x2=\"210\" y2=\"260\" stroke=\"#2B2527\" stroke-width=\"2.4\"/><circle cx=\"110\" cy=\"160\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"94\" y=\"164\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><circle cx=\"335\" cy=\"160\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"345\" y=\"164\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"210\" cy=\"82\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"202\" y=\"70\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">C</text><circle cx=\"210\" cy=\"260\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"202\" y=\"282\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">D</text><circle cx=\"210\" cy=\"160\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"220\" y=\"150\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">P</text><text x=\"160.0\" y=\"148\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">3</text><text x=\"272.5\" y=\"148\" fill=\"#444\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">12</text><text x=\"228\" y=\"121.0\" fill=\"#444\" text-anchor=\"start\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">x</text><text x=\"228\" y=\"210.0\" fill=\"#444\" text-anchor=\"start\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">x+5</text></svg></span><p>Bestäm \\(x\\).</p>",
     "s": "<p>Kordasatsen ger \\(AP\\cdot PB=CP\\cdot PD\\).</p><p>\\(3\\cdot12=x(x+5)\\).</p><p>\\(x^2+5x-36=0=(x-4)(x+9)\\).</p><p>Längden måste vara positiv.</p><p><strong>\\(x=4\\).</strong></p>",
     "familj": "np3_korda_andragrad"
   },
@@ -12055,6 +11118,300 @@ window.BANKMA2 = [
     "t": "<p>Lådagrammet har minvärde 2, \\(Q_1=4\\), median 6, \\(Q_3=9\\) och maxvärde 11.</p><span class=\"fig smal\"><svg width=\"450\" height=\"235\" viewBox=\"0 0 450 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"448\" height=\"233\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"50\" y1=\"35\" x2=\"50\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"50\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">0</text><line x1=\"78\" y1=\"35\" x2=\"78\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"78\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">1</text><line x1=\"106\" y1=\"35\" x2=\"106\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"106\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">2</text><line x1=\"134\" y1=\"35\" x2=\"134\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"134\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">3</text><line x1=\"162\" y1=\"35\" x2=\"162\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"162\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">4</text><line x1=\"190\" y1=\"35\" x2=\"190\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"190\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">5</text><line x1=\"218\" y1=\"35\" x2=\"218\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"218\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">6</text><line x1=\"246\" y1=\"35\" x2=\"246\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"246\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">7</text><line x1=\"274\" y1=\"35\" x2=\"274\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"274\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">8</text><line x1=\"302\" y1=\"35\" x2=\"302\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"302\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">9</text><line x1=\"330\" y1=\"35\" x2=\"330\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"330\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">10</text><line x1=\"358\" y1=\"35\" x2=\"358\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"358\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">11</text><line x1=\"386\" y1=\"35\" x2=\"386\" y2=\"180\" stroke=\"#F0EFF2\"/><text x=\"386\" y=\"210\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\">12</text><line x1=\"106\" y1=\"105\" x2=\"358\" y2=\"105\" stroke=\"#2B2527\" stroke-width=\"2\"/><rect x=\"162\" y=\"83\" width=\"140\" height=\"44\" fill=\"none\" stroke=\"#2A5D9E\" stroke-width=\"2\"/><line x1=\"218\" y1=\"83\" x2=\"218\" y2=\"127\" stroke=\"#B43123\" stroke-width=\"2\"/><line x1=\"106\" y1=\"93\" x2=\"106\" y2=\"117\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"358\" y1=\"93\" x2=\"358\" y2=\"117\" stroke=\"#2B2527\" stroke-width=\"2\"/></svg></span><p>Konstruera ett möjligt sorterat datamaterial med nio heltalsvärden som ger dessa fem värden.</p>",
     "s": "<p>Med nio värden är det femte värdet medianen, alltså 6.</p><p>För de fyra första ska medianen vara 4; för de fyra sista ska medianen vara 9.</p><p>Ett möjligt material är</p><p>\\(2,3,5,5,6,8,10,10,11\\).</p><p>Första kvartilen är \\((3+5)/2=4\\) och tredje kvartilen är \\((8+10)/2=9\\).</p><p><strong>Detta är ett möjligt svar.</strong></p>",
     "familj": "np3_ladagram_konstruera"
+  },
+  {
+    "id": "4.126",
+    "kap": 4,
+    "omr": "korrelation_koefficient",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "3/0/0",
+    "t": "<p>Spridningsdiagrammet visar ett samband mellan två variabler.</p><span class=\"fig smal\"><svg width=\"410\" height=\"370\" viewBox=\"0 0 410 370\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"408\" height=\"368\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"48.00\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"85.56\" y1=\"330.00\" x2=\"85.56\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"123.11\" y1=\"330.00\" x2=\"123.11\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"160.67\" y1=\"330.00\" x2=\"160.67\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"198.22\" y1=\"330.00\" x2=\"198.22\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"235.78\" y1=\"330.00\" x2=\"235.78\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"273.33\" y1=\"330.00\" x2=\"273.33\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"310.89\" y1=\"330.00\" x2=\"310.89\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"348.44\" y1=\"330.00\" x2=\"348.44\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"386.00\" y1=\"330.00\" x2=\"386.00\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"386.00\" y2=\"330.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"295.56\" x2=\"386.00\" y2=\"295.56\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"261.11\" x2=\"386.00\" y2=\"261.11\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"226.67\" x2=\"386.00\" y2=\"226.67\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"192.22\" x2=\"386.00\" y2=\"192.22\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"157.78\" x2=\"386.00\" y2=\"157.78\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"123.33\" x2=\"386.00\" y2=\"123.33\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"88.89\" x2=\"386.00\" y2=\"88.89\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"54.44\" x2=\"386.00\" y2=\"54.44\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"20.00\" x2=\"386.00\" y2=\"20.00\" stroke=\"#E4E3E6\" stroke-width=\"1\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"396.00\" y2=\"330.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M 396.00 330.00 l -8 -4 l 0 8 z\" fill=\"#2B2527\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"48.00\" y2=\"10.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><path d=\"M 48.00 10.00 l -4 8 l 8 0 z\" fill=\"#2B2527\"/><line x1=\"85.56\" y1=\"326.00\" x2=\"85.56\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"85.56\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">1</text><line x1=\"123.11\" y1=\"326.00\" x2=\"123.11\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"123.11\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">2</text><line x1=\"160.67\" y1=\"326.00\" x2=\"160.67\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"160.67\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">3</text><line x1=\"198.22\" y1=\"326.00\" x2=\"198.22\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"198.22\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">4</text><line x1=\"235.78\" y1=\"326.00\" x2=\"235.78\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"235.78\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">5</text><line x1=\"273.33\" y1=\"326.00\" x2=\"273.33\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"273.33\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">6</text><line x1=\"310.89\" y1=\"326.00\" x2=\"310.89\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"310.89\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">7</text><line x1=\"348.44\" y1=\"326.00\" x2=\"348.44\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"348.44\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">8</text><line x1=\"386.00\" y1=\"326.00\" x2=\"386.00\" y2=\"334.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"386.00\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">9</text><line x1=\"44.00\" y1=\"295.56\" x2=\"52.00\" y2=\"295.56\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"299.06\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">1</text><line x1=\"44.00\" y1=\"261.11\" x2=\"52.00\" y2=\"261.11\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"264.61\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">2</text><line x1=\"44.00\" y1=\"226.67\" x2=\"52.00\" y2=\"226.67\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"230.17\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">3</text><line x1=\"44.00\" y1=\"192.22\" x2=\"52.00\" y2=\"192.22\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"195.72\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">4</text><line x1=\"44.00\" y1=\"157.78\" x2=\"52.00\" y2=\"157.78\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"161.28\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">5</text><line x1=\"44.00\" y1=\"123.33\" x2=\"52.00\" y2=\"123.33\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"126.83\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">6</text><line x1=\"44.00\" y1=\"88.89\" x2=\"52.00\" y2=\"88.89\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"92.39\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">7</text><line x1=\"44.00\" y1=\"54.44\" x2=\"52.00\" y2=\"54.44\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"57.94\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">8</text><line x1=\"44.00\" y1=\"20.00\" x2=\"52.00\" y2=\"20.00\" stroke=\"#2B2527\" stroke-width=\"1.2\"/><text x=\"39.00\" y=\"23.50\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10.5\" fill=\"#5C575E\">9</text><text x=\"40.00\" y=\"346.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">0</text><circle cx=\"85.56\" cy=\"54.44\" r=\"4.5\" fill=\"#2A5D9E\"/><circle cx=\"123.11\" cy=\"95.78\" r=\"4.5\" fill=\"#2A5D9E\"/><circle cx=\"160.67\" cy=\"82.00\" r=\"4.5\" fill=\"#2A5D9E\"/><circle cx=\"198.22\" cy=\"147.44\" r=\"4.5\" fill=\"#2A5D9E\"/><circle cx=\"235.78\" cy=\"161.22\" r=\"4.5\" fill=\"#2A5D9E\"/><circle cx=\"273.33\" cy=\"223.22\" r=\"4.5\" fill=\"#2A5D9E\"/><circle cx=\"310.89\" cy=\"199.11\" r=\"4.5\" fill=\"#2A5D9E\"/><circle cx=\"348.44\" cy=\"268.00\" r=\"4.5\" fill=\"#2A5D9E\"/><text x=\"399.00\" y=\"334.00\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\" font-weight=\"600\" fill=\"#2B2527\">x</text><text x=\"55.00\" y=\"8.00\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\" font-weight=\"600\" fill=\"#2B2527\">y</text></svg></span><p>Vilket värde ligger närmast korrelationskoefficienten?</p><p>A) \\(-0,95\\) &nbsp; B) \\(-0,50\\) &nbsp; C) \\(0\\) &nbsp; D) \\(0,50\\) &nbsp; E) \\(0,95\\)</p>",
+    "s": "<p>Korrelationskoefficienten beskriver styrkan och riktningen i ett linjärt samband; värden nära \\(\\pm1\\) betyder starkt linjärt samband.</p><p>Punkterna ligger nära en fallande rät linje. Sambandet är därför starkt negativt.</p><p><strong>A) \\(r\\approx-0,95\\).</strong></p>",
+    "familj": "korrelation_spridningsdiagram_valj_r"
+  },
+  {
+    "id": "4.127",
+    "kap": 4,
+    "omr": "korrelation_koefficient",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Under åtta sommarveckor finns ett tydligt positivt samband mellan försäljningen av glass och antalet personer som behöver hjälp vid badplatser. Korrelationskoefficienten är \\(r=0,88\\).</p><p>Kan man därför säga att ökad glassförsäljning orsakar fler räddningsinsatser? Förklara och ge en möjlig annan förklaring till sambandet.</p>",
+    "s": "<p>Nej. En hög korrelation visar att variablerna samvarierar, men den visar inte att den ena orsakar den andra.</p><p>En möjlig bakomliggande variabel är temperaturen. Varma dagar kan både öka glassförsäljningen och göra att fler personer badar.</p><p><strong>Korrelation innebär inte automatiskt orsakssamband.</strong></p>",
+    "familj": "korrelation_kausalitet_tredje_variabel"
+  },
+  {
+    "id": "4.128",
+    "kap": 4,
+    "omr": "korrelation_koefficient",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Spridningsdiagrammet visas nedan.</p><span class=\"fig smal\"><svg width=\"430\" height=\"370\" viewBox=\"0 0 430 370\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"368\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"48.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"87.78\" y1=\"330.00\" x2=\"87.78\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"127.56\" y1=\"330.00\" x2=\"127.56\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"167.33\" y1=\"330.00\" x2=\"167.33\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"207.11\" y1=\"330.00\" x2=\"207.11\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"246.89\" y1=\"330.00\" x2=\"246.89\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"286.67\" y1=\"330.00\" x2=\"286.67\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"326.44\" y1=\"330.00\" x2=\"326.44\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"366.22\" y1=\"330.00\" x2=\"366.22\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"406.00\" y1=\"330.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"406.00\" y2=\"330.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"299.00\" x2=\"406.00\" y2=\"299.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"268.00\" x2=\"406.00\" y2=\"268.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"237.00\" x2=\"406.00\" y2=\"237.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"206.00\" x2=\"406.00\" y2=\"206.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"175.00\" x2=\"406.00\" y2=\"175.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"144.00\" x2=\"406.00\" y2=\"144.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"113.00\" x2=\"406.00\" y2=\"113.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"82.00\" x2=\"406.00\" y2=\"82.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"51.00\" x2=\"406.00\" y2=\"51.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"20.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"416.00\" y2=\"330.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"87.78\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"127.56\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"167.33\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"207.11\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"246.89\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"286.67\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"326.44\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><text x=\"366.22\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">8</text><text x=\"406.00\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">9</text><line x1=\"48.00\" y1=\"330.00\" x2=\"48.00\" y2=\"10.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"40.00\" y=\"302.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"40.00\" y=\"271.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"40.00\" y=\"240.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"40.00\" y=\"209.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"40.00\" y=\"178.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"40.00\" y=\"147.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"40.00\" y=\"116.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><text x=\"40.00\" y=\"85.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">8</text><text x=\"40.00\" y=\"54.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">9</text><text x=\"40.00\" y=\"23.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">10</text><circle cx=\"87.78\" cy=\"261.80\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"127.56\" cy=\"243.20\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"167.33\" cy=\"202.90\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"207.11\" cy=\"178.10\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"246.89\" cy=\"144.00\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"286.67\" cy=\"128.50\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"326.44\" cy=\"85.10\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"366.22\" cy=\"69.60\" r=\"4.3\" fill=\"#2A5D9E\"/></svg></span><p>Vilket värde är rimligast för korrelationskoefficienten: 0,05, 0,55 eller 0,96?</p>",
+    "s": "<p>Korrelationskoefficienten beskriver styrkan och riktningen i ett linjärt samband; värden nära \\(\\pm1\\) betyder starkt linjärt samband.</p><p>Punkterna ligger nära en stigande rät linje.</p><p><strong>0,96 är rimligast.</strong></p>",
+    "familj": "r2_korrelation_graf"
+  },
+  {
+    "id": "4.129",
+    "kap": 4,
+    "omr": "korrelation_koefficient",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Ett datamaterial ger \\(r=-0,92\\).</p><p>Förklara vad detta säger om sambandet och vad det inte säger.</p>",
+    "s": "<p>Det visar ett starkt negativt linjärt samband.</p><p>Det visar inte att den ena variabeln orsakar förändringen i den andra.</p><p><strong>Starkt negativt samband, men inget bevis för orsak.</strong></p>",
+    "familj": "r2_korrelation_tolkning"
+  },
+  {
+    "id": "4.130",
+    "kap": 4,
+    "omr": "korrelation_koefficient",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>Spridningsdiagrammet visas nedan.</p><span class=\"fig smal\"><svg width=\"430\" height=\"370\" viewBox=\"0 0 430 370\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"368\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"48.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"87.78\" y1=\"330.00\" x2=\"87.78\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"127.56\" y1=\"330.00\" x2=\"127.56\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"167.33\" y1=\"330.00\" x2=\"167.33\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"207.11\" y1=\"330.00\" x2=\"207.11\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"246.89\" y1=\"330.00\" x2=\"246.89\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"286.67\" y1=\"330.00\" x2=\"286.67\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"326.44\" y1=\"330.00\" x2=\"326.44\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"366.22\" y1=\"330.00\" x2=\"366.22\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"406.00\" y1=\"330.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"406.00\" y2=\"330.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"299.00\" x2=\"406.00\" y2=\"299.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"268.00\" x2=\"406.00\" y2=\"268.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"237.00\" x2=\"406.00\" y2=\"237.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"206.00\" x2=\"406.00\" y2=\"206.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"175.00\" x2=\"406.00\" y2=\"175.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"144.00\" x2=\"406.00\" y2=\"144.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"113.00\" x2=\"406.00\" y2=\"113.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"82.00\" x2=\"406.00\" y2=\"82.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"51.00\" x2=\"406.00\" y2=\"51.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"20.00\" x2=\"406.00\" y2=\"20.00\" stroke=\"#E4E3E6\"/><line x1=\"48.00\" y1=\"330.00\" x2=\"406.00\" y2=\"330.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"87.78\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"127.56\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"167.33\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"207.11\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"246.89\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"286.67\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"326.44\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><text x=\"366.22\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">8</text><text x=\"406.00\" y=\"347.00\" text-anchor=\"middle\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">9</text><line x1=\"48.00\" y1=\"330.00\" x2=\"48.00\" y2=\"20.00\" stroke=\"#2B2527\" stroke-width=\"2\"/><text x=\"40.00\" y=\"302.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">1</text><text x=\"40.00\" y=\"271.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">2</text><text x=\"40.00\" y=\"240.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">3</text><text x=\"40.00\" y=\"209.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">4</text><text x=\"40.00\" y=\"178.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">5</text><text x=\"40.00\" y=\"147.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">6</text><text x=\"40.00\" y=\"116.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">7</text><text x=\"40.00\" y=\"85.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">8</text><text x=\"40.00\" y=\"54.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">9</text><text x=\"40.00\" y=\"23.00\" text-anchor=\"end\" font-family=\"IBM Plex Mono,monospace\" font-size=\"10\" fill=\"#5C575E\">10</text><circle cx=\"87.78\" cy=\"66.50\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"127.56\" cy=\"103.70\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"167.33\" cy=\"122.30\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"207.11\" cy=\"156.40\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"246.89\" cy=\"193.60\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"286.67\" cy=\"209.10\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"326.44\" cy=\"243.20\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"366.22\" cy=\"261.80\" r=\"4.3\" fill=\"#2A5D9E\"/></svg></span><p>Vilket värde är rimligast för korrelationskoefficienten: −0,94, −0,34 eller 0,91?</p>",
+    "s": "<p>Korrelationskoefficienten beskriver styrkan och riktningen i ett linjärt samband; värden nära \\(\\pm1\\) betyder starkt linjärt samband.</p><p>Punkterna ligger nära en fallande rät linje.</p><p><strong>Det rimliga värdet är −0,94.</strong></p>",
+    "familj": "r3_corr_graph_negative"
+  },
+  {
+    "id": "4.131",
+    "kap": 4,
+    "omr": "korrelation_koefficient",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Två variabler har korrelationskoefficienten \\(r=0,88\\).</p><p>Förklara vad detta säger om sambandet och varför man ändå bör vara försiktig med att dra slutsatsen att den ena variabeln orsakar den andra.</p>",
+    "s": "<p>Värdet visar ett starkt positivt linjärt samband. Men korrelation visar inte orsakssamband; andra faktorer kan påverka båda variablerna.</p><p><strong>Starkt samband, men inget bevis för orsak.</strong></p>",
+    "familj": "r3_corr_reasoning_1"
+  },
+  {
+    "id": "4.132",
+    "kap": 4,
+    "omr": "korrelation_koefficient",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p>Två datamaterial visas i figuren.</p><span class=\"fig smal\"><svg width=\"420\" height=\"220\" viewBox=\"0 0 420 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"418\" height=\"218\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><rect x=\"20\" y=\"20\" width=\"170\" height=\"170\" fill=\"none\" stroke=\"#E4E3E6\"/><line x1=\"48.3\" y1=\"20\" x2=\"48.3\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"20\" y1=\"48.3\" x2=\"190\" y2=\"48.3\" stroke=\"#F0EFF2\"/><line x1=\"76.7\" y1=\"20\" x2=\"76.7\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"20\" y1=\"76.7\" x2=\"190\" y2=\"76.7\" stroke=\"#F0EFF2\"/><line x1=\"105.0\" y1=\"20\" x2=\"105.0\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"20\" y1=\"105.0\" x2=\"190\" y2=\"105.0\" stroke=\"#F0EFF2\"/><line x1=\"133.3\" y1=\"20\" x2=\"133.3\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"20\" y1=\"133.3\" x2=\"190\" y2=\"133.3\" stroke=\"#F0EFF2\"/><line x1=\"161.7\" y1=\"20\" x2=\"161.7\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"20\" y1=\"161.7\" x2=\"190\" y2=\"161.7\" stroke=\"#F0EFF2\"/><line x1=\"20\" y1=\"190\" x2=\"190\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"1.8\"/><line x1=\"20\" y1=\"20\" x2=\"20\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"1.8\"/><text x=\"26\" y=\"36\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">A</text><rect x=\"230\" y=\"20\" width=\"170\" height=\"170\" fill=\"none\" stroke=\"#E4E3E6\"/><line x1=\"258.3\" y1=\"20\" x2=\"258.3\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"230\" y1=\"48.3\" x2=\"400\" y2=\"48.3\" stroke=\"#F0EFF2\"/><line x1=\"286.7\" y1=\"20\" x2=\"286.7\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"230\" y1=\"76.7\" x2=\"400\" y2=\"76.7\" stroke=\"#F0EFF2\"/><line x1=\"315.0\" y1=\"20\" x2=\"315.0\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"230\" y1=\"105.0\" x2=\"400\" y2=\"105.0\" stroke=\"#F0EFF2\"/><line x1=\"343.3\" y1=\"20\" x2=\"343.3\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"230\" y1=\"133.3\" x2=\"400\" y2=\"133.3\" stroke=\"#F0EFF2\"/><line x1=\"371.7\" y1=\"20\" x2=\"371.7\" y2=\"190\" stroke=\"#F0EFF2\"/><line x1=\"230\" y1=\"161.7\" x2=\"400\" y2=\"161.7\" stroke=\"#F0EFF2\"/><line x1=\"230\" y1=\"190\" x2=\"400\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"1.8\"/><line x1=\"230\" y1=\"20\" x2=\"230\" y2=\"190\" stroke=\"#2B2527\" stroke-width=\"1.8\"/><text x=\"236\" y=\"36\" font-family=\"IBM Plex Mono,monospace\" font-size=\"12\">B</text><circle cx=\"35\" cy=\"155\" r=\"4\" fill=\"#2A5D9E\"/><circle cx=\"55\" cy=\"137\" r=\"4\" fill=\"#2A5D9E\"/><circle cx=\"75\" cy=\"120\" r=\"4\" fill=\"#2A5D9E\"/><circle cx=\"95\" cy=\"104\" r=\"4\" fill=\"#2A5D9E\"/><circle cx=\"115\" cy=\"87\" r=\"4\" fill=\"#2A5D9E\"/><circle cx=\"135\" cy=\"70\" r=\"4\" fill=\"#2A5D9E\"/><circle cx=\"110\" cy=\"155\" r=\"4\" fill=\"#2A5D9E\"/><circle cx=\"245\" cy=\"155\" r=\"4\" fill=\"#B43123\"/><circle cx=\"265\" cy=\"150\" r=\"4\" fill=\"#B43123\"/><circle cx=\"285\" cy=\"138\" r=\"4\" fill=\"#B43123\"/><circle cx=\"305\" cy=\"118\" r=\"4\" fill=\"#B43123\"/><circle cx=\"325\" cy=\"90\" r=\"4\" fill=\"#B43123\"/><circle cx=\"345\" cy=\"55\" r=\"4\" fill=\"#B43123\"/></svg></span><p>a) Vilket material bör ha korrelationskoefficienten som ligger närmast 1?</p><p>b) Förklara vad som händer med korrelationskoefficienten i material A om den ensamma avvikande punkten tas bort.</p>",
+    "s": "<p>Material A ligger i huvudsak nära en stigande rät linje, medan material B är stigande men tydligt böjt.</p><p>Korrelationskoefficienten mäter hur väl ett <em>linjärt</em> samband stämmer.</p><p>Därför bör <strong>material A</strong> ha \\(r\\)-värdet närmast 1.</p><p>Om den avvikande punkten i A tas bort blir sambandet ännu mer linjärt.</p><p><strong>Då ökar korrelationskoefficienten och kommer ännu närmare 1.</strong></p>",
+    "familj": "A_correlation_linear_vs_curved"
+  },
+  {
+    "id": "4.133",
+    "kap": 4,
+    "omr": "korrelation_koefficient",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Ett spridningsdiagram visar ett tydligt positivt men böjt samband. En elev säger: ”Korrelationskoefficienten måste därför vara nära 1.”</p><p>Bedöm påståendet.</p>",
+    "s": "<p>Korrelationskoefficienten mäter styrkan i ett <em>linjärt</em> samband.</p><p>Ett tydligt böjt samband kan vara starkt utan att \\(r\\) ligger nära 1.</p><p><strong>Påståendet behöver alltså inte vara sant.</strong></p>",
+    "familj": "np_typ_korrelation_linjaritet"
+  },
+  {
+    "id": "4.134",
+    "kap": 4,
+    "omr": "korrelation_koefficient",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p>Spridningsdiagrammet visar sju punkter som nästan ligger på en rät linje och en avvikande punkt P.</p><span class=\"fig smal\"><svg width=\"420\" height=\"260\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"418\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"45\" y1=\"215\" x2=\"385\" y2=\"215\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"45\" y1=\"45\" x2=\"45\" y2=\"215\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"82.8\" cy=\"177.2\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"120.6\" cy=\"158.3\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"158.3\" cy=\"139.4\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"196.1\" cy=\"120.6\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"233.9\" cy=\"101.7\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"271.7\" cy=\"82.8\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"309.4\" cy=\"63.9\" r=\"4.2\" fill=\"#2A5D9E\"/><circle cx=\"347.2\" cy=\"196.1\" r=\"4.2\" fill=\"#2A5D9E\"/><text x=\"354.2\" y=\"190.1\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">P</text></svg></span><p>Förklara varför korrelationskoefficienten kan förändras mycket om P tas bort, trots att bara en av åtta punkter tas bort.</p>",
+    "s": "<p>Korrelationskoefficienten påverkas av hur väl hela punktmolnet följer ett linjärt mönster.</p><p>P ligger långt från den trend som övriga punkter följer och får därför stort inflytande på den linjära samvariationen.</p><p><strong>En enda stark avvikare kan därför sänka eller förändra \\(r\\) tydligt, även i ett ganska litet material.</strong></p>",
+    "familj": "np2_korrelation_avvikare"
+  },
+  {
+    "id": "4.135",
+    "kap": 4,
+    "omr": "korrelation_koefficient",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/0/2",
+    "t": "<p>Spridningsdiagrammet visar ett tydligt positivt linjärt mönster med en avvikande punkt P.</p><span class=\"fig smal\"><svg width=\"430\" height=\"250\" viewBox=\"0 0 430 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect x=\"1\" y=\"1\" width=\"428\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/><line x1=\"45\" y1=\"205\" x2=\"385\" y2=\"205\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"45\" y1=\"40\" x2=\"45\" y2=\"205\" stroke=\"#2B2527\" stroke-width=\"2\"/><circle cx=\"79.0\" cy=\"180.2\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"113.0\" cy=\"168.7\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"147.0\" cy=\"152.2\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"181.0\" cy=\"137.4\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"215.0\" cy=\"122.5\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"249.0\" cy=\"102.7\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"283.0\" cy=\"89.5\" r=\"4.3\" fill=\"#2A5D9E\"/><circle cx=\"317.0\" cy=\"172.0\" r=\"4.3\" fill=\"#2A5D9E\"/><text x=\"324.0\" y=\"166.0\" font-family=\"IBM Plex Mono,monospace\" font-size=\"11\">P</text></svg></span><p>En elev säger: ”Eftersom sju av åtta punkter följer linjen kan P nästan inte påverka korrelationskoefficienten.” Bedöm påståendet.</p>",
+    "s": "<p>Korrelationskoefficienten beror inte bara på hur många punkter som följer trenden utan också på hur långt punkterna ligger från den linjära strukturen.</p><p>P ligger långt från huvudmönstret och kan därför få stort inflytande på samvariationen.</p><p><strong>Påståendet är fel. En enda stark avvikare kan påverka \\(r\\) tydligt i ett litet material.</strong></p>",
+    "familj": "np3_korrelation_avvikare"
+  },
+  {
+    "id": "4.136",
+    "kap": 4,
+    "omr": "linjar_regression",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En linjär regression ger modellen</p><p>\\(y=1,8x+42\\)</p><p>där \\(x\\) är antal träningspass och \\(y\\) är resultatet på ett test.</p><p>a) Tolka talet 1,8 i modellen.<br>b) Vilket resultat förutsäger modellen efter 10 träningspass?</p>",
+    "s": "<p>a) Modellen säger att testresultatet ökar med ungefär 1,8 enheter för varje extra träningspass.</p><p>b) \\(y=1,8\\cdot10+42=60\\).</p><p><strong>Ökning cirka 1,8 enheter per pass; modellen ger resultatet 60 efter 10 pass.</strong></p>",
+    "familj": "regression_tolka_lutning_och_prognos"
+  },
+  {
+    "id": "4.137",
+    "kap": 4,
+    "omr": "linjar_regression",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Tabellen visar antal timmars träning \\(x\\) och ett resultat \\(y\\).</p><table class='data'><tr><th>x</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr><tr><th>y</th><td>48</td><td>54</td><td>61</td><td>67</td><td>70</td></tr></table><p>a) Bestäm en linjär regressionsmodell med ett digitalt verktyg.<br>b) Använd modellen för att uppskatta \\(y\\) när \\(x=8\\).<br>c) Förklara varför uppskattningen bör användas försiktigt.</p>",
+    "s": "<p>a) Regressionen ger ungefär \\(y=5,7x+42,9\\).</p><p>b) \\(y(8)=5,7\\cdot8+42,9=88,5\\).</p><p>c) Mätvärdena ligger endast mellan \\(x=1\\) och \\(x=5\\). Värdet vid \\(x=8\\) är en extrapolation, så vi vet inte om det linjära sambandet fortsätter så långt.</p><p><strong>Modell: \\(y\\approx5,7x+42,9\\), prognos \\(88,5\\), men prognosen är osäker eftersom den ligger utanför dataintervallet.</strong></p>",
+    "familj": "regression_data_extrapolation"
+  },
+  {
+    "id": "4.138",
+    "kap": 4,
+    "omr": "linjar_regression",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/0/3",
+    "t": "<p>Ett företag undersöker sambandet mellan antal utbildningstimmar \\(x\\) och antal producerade enheter \\(y\\). För 14 anställda, där \\(2\\le x\\le8\\), får man</p><p>\\(y=3,2x+48\\) och \\(r=0,96\\).</p><p>Chefen säger:</p><p>1. ”En person med 30 utbildningstimmar kommer att producera 144 enheter.”<br>2. ”Eftersom \\(r\\) är så högt visar undersökningen att fler utbildningstimmar orsakar högre produktion.”</p><p>Bedöm båda påståendena och motivera.</p>",
+    "s": "<p>Modellen ger visserligen \\(3,2\\cdot30+48=144\\), men \\(x=30\\) ligger långt utanför mätområdet 2–8. Det är en stor extrapolation och därför finns det inget bra stöd för att använda modellen så långt.</p><p>Det höga värdet på \\(r\\) visar ett starkt linjärt samband i datamaterialet, men inte ett orsakssamband. Andra faktorer kan påverka både utbildningstid och produktion.</p><p><strong>Inget av påståendena är tillräckligt motiverat av undersökningen.</strong></p>",
+    "familj": "regression_modellkritik_extrapolation_kausalitet"
+  },
+  {
+    "id": "4.139",
+    "kap": 4,
+    "omr": "linjar_regression",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En regressionsmodell är \\(y=4,6x+28\\).</p><p>a) Bestäm modellens värde när \\(x=12\\).<br>b) Tolka konstanten 28.</p>",
+    "s": "<p>a) \\(4,6\\cdot12+28=83,2\\).</p><p>b) Modellen ger värdet 28 när \\(x=0\\).</p><p><strong>a) 83,2. b) Startvärdet i modellen är 28.</strong></p>",
+    "familj": "r2_regression_tolka"
+  },
+  {
+    "id": "4.140",
+    "kap": 4,
+    "omr": "linjar_regression",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>En linjär regressionsmodell är \\(y=2,4x+31\\). Den bygger på data för \\(5\\le x\\le18\\).</p><p>En elev använder modellen för \\(x=40\\). Beräkna modellens värde och bedöm sedan om prognosen är rimlig att lita på.</p>",
+    "s": "<p>Modellen ger \\(2,4\\cdot40+31=127\\).</p><p>Men \\(x=40\\) ligger långt utanför dataintervallet. Det är en extrapolation.</p><p><strong>Modellvärdet är 127, men prognosen är osäker.</strong></p>",
+    "familj": "r2_regression_extrapolation"
+  },
+  {
+    "id": "4.141",
+    "kap": 4,
+    "omr": "linjar_regression",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/0/3",
+    "t": "<p>En linjär modell för batterikapacitet är \\(C(n)=100-1,8n\\), där \\(n\\) är antal hundra laddningscykler. Modellen bygger på mätningar för \\(0\\le n\\le10\\), och korrelationskoefficienten är \\(r=-0,98\\).</p><p>En rapport säger:</p><p>1. ”Batteriet har exakt 0 % kapacitet när modellen når 0.”<br>2. ”Det höga värdet på \\(|r|\\) visar att laddningscyklerna ensamma orsakar hela minskningen.”</p><p>Bedöm båda påståendena.</p>",
+    "s": "<p>Modellen når 0 när \\(100-1,8n=0\\Rightarrow n\\approx55,6\\). Det ligger långt utanför det uppmätta intervallet \\(0\\le n\\le10\\), så det är en mycket lång extrapolation. Modellen behöver inte fortsätta linjärt så långt.</p><p>\\(r=-0,98\\) visar ett starkt negativt linjärt samband i mätningarna, men korrelation visar inte att en enda faktor orsakar hela förändringen.</p><p><strong>Inget av påståendena är tillräckligt underbyggt.</strong></p>",
+    "familj": "r2_A_linjar_modellkritik_tva_pastanden"
+  },
+  {
+    "id": "4.142",
+    "kap": 4,
+    "omr": "linjar_regression",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "t": "<p>En linjär regressionsmodell är \\(y=1,8x+24\\).</p><p>a) Bestäm modellens värde när \\(x=15\\).<br>b) Vad betyder talet 1,8 i modellen?</p>",
+    "s": "<p>Tolka först regressionslinjens lutning och konstantterm i sammanhanget innan du gör beräkningen.</p><p>a) \\(1,8\\cdot15+24=51\\).</p><p>b) När \\(x\\) ökar med 1 ökar modellens värde med 1,8.</p><p><strong>a) 51. b) Ökningen per enhet i \\(x\\) är 1,8.</strong></p>",
+    "familj": "r3_regression_tolkning_1"
+  },
+  {
+    "id": "4.143",
+    "kap": 4,
+    "omr": "linjar_regression",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>En regressionsmodell för en plants höjd är \\(h(t)=3,2t+14\\), där \\(t\\) mäts i veckor. Modellen bygger på mätningar för \\(0\\le t\\le 8\\).</p><p>En elev använder modellen för \\(t=20\\). Beräkna modellens värde och bedöm om prognosen är säker.</p>",
+    "s": "<p>\\(h(20)=3,2\\cdot20+14=78\\).</p><p>Men 20 ligger långt utanför mätområdet 0–8, så detta är extrapolation och osäkert.</p><p><strong>Modellvärdet är 78, men prognosen är osäker.</strong></p>",
+    "familj": "r3_regression_extrapolate_1"
+  },
+  {
+    "id": "4.144",
+    "kap": 4,
+    "omr": "linjar_regression",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/0/3",
+    "t": "<p>En linjär modell för temperaturen i ett kylt rum är \\(T(t)=24-1,6t\\), där \\(t\\) är timmar efter start. Modellen bygger på data för \\(0\\le t\\le6\\).</p><p>En person använder modellen och säger att rummet når −20 °C efter 27,5 timmar och därför måste ha den temperaturen då.</p><p>Bedöm resonemanget.</p>",
+    "s": "<p>Lösningen till \\(24-1,6t=-20\\) är \\(t=27,5\\) timmar. Men detta ligger långt utanför intervallet där modellen byggts upp. Det är därför en extrapolation och modellen behöver inte gälla där. Temperaturen kan också påverkas av andra faktorer och inte fortsätta minska linjärt.</p><p><strong>Beräkningen är korrekt inom modellen, men slutsatsen om verkligheten är inte säker.</strong></p>",
+    "familj": "r3_A_regression_model_critique"
+  },
+  {
+    "id": "4.145",
+    "kap": 4,
+    "omr": "linjar_regression",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En linjär regressionsmodell är \\(y=3,6x+42\\). Datamaterialet innehåller endast värden för \\(2\\le x\\le9\\).</p><p>En elev använder modellen för att beräkna \\(y\\) när \\(x=30\\). Vad bör eleven skriva tillsammans med sitt svar?</p>",
+    "s": "<p>Beräkningen går att göra, men \\(x=30\\) ligger långt utanför dataintervallet.</p><p>Det är extrapolation, så osäkerheten är stor.</p><p><strong>Eleven bör tydligt ange att prognosen är osäker eftersom den bygger på lång extrapolation.</strong></p>",
+    "familj": "np2_regression_extrapolation"
+  },
+  {
+    "id": "4.146",
+    "kap": 4,
+    "omr": "linjar_regression",
+    "kurs": [
+      "2b",
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En regressionsmodell är \\(y=4,2x+18\\). För \\(x=7\\) är det uppmätta värdet 44.</p><p>Bestäm residualen och tolka den.</p>",
+    "s": "<p>Modellens värde är \\(4,2\\cdot7+18=47,4\\).</p><p>Residual = observerat − modellerat = \\(44-47,4=-3,4\\).</p><p><strong>Residualen är −3,4. Modellen överskattar alltså det observerade värdet med 3,4 enheter.</strong></p>",
+    "familj": "np3_regression_residual"
   },
   {
     "id": "5.01",
