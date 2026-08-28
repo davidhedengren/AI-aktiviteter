@@ -1415,7 +1415,17 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
   background:rgba(18,128,142,.035);pointer-events:none;
 }
 .kv-designhero-copy{position:relative;z-index:2;max-width:800px}
-.kv-designhero-eyebrow,.kv-designhero p{display:none!important}
+.kv-designhero-eyebrow{display:none!important}
+.kv-designhero .kv-designhero-sub{
+  display:block!important;
+  margin:8px 0 0;
+  font-family:var(--sans);
+  font-size:14px;
+  line-height:1.35;
+  font-weight:500;
+  letter-spacing:.005em;
+  color:#777075;
+}
 .kv-designhero h2{
   margin:0;max-width:760px;font-size:clamp(29px,2.75vw,38px);line-height:1.06;
   letter-spacing:-.045em;color:#30282A;font-weight:720;text-wrap:balance;
@@ -1515,7 +1525,7 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
       <img src="logo.png" alt="Erik Dahlbergsgymnasiet">
       <div class="password-brand-text">
         <span class="password-brand-title">Erik Dahlbergsgymnasiets uppgiftsbank</span>
-        <span class="password-brand-subtitle">Fysik 1–2 · Matematik nivå 1–2 · Fortsättning nivå 1–2 · Fördjupning nivå 1</span>
+        <span class="password-brand-subtitle">Fysik nivå 1–2 · Matematik nivå 1–2 · Fortsättning nivå 1–2 · Fördjupning nivå 1</span>
       </div>
     </div>
     <h1 id="passwordTitle">Ange lösenord</h1>
@@ -1593,6 +1603,7 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
     <section class="kv-designhero" aria-label="Introduktion">
       <div class="kv-designhero-copy">
         <h2>Bygg ett <span>prov eller övningsblad.</span></h2>
+        <p class="kv-designhero-sub">Välj kurs för att börja</p>
       </div>
       <div class="kv-designhero-art" aria-hidden="true">
         <span></span><span></span><span></span>
@@ -1855,13 +1866,13 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
    måste vara unika mellan kurserna, annars krockar deklarationerna. */
 const KURSER=[
   {
-    id:'fy1', titel:'Fysik 1', siffra:'1', färg:'#12808E', rygg:'#12808E',
+    id:'fy1', titel:'Fysik nivå 1', siffra:'1', färg:'#12808E', rygg:'#12808E',
     taggar:['Fysikens grunder','Rörelse','Kraft','Energi och rörelsemängd','Tryck','Värme och temperatur','Elektricitet','Partikel- och kärnfysik'],
     filer:['struktur.js','uppgifter.js'],
     globaler:{bank:'BANK',kapnamn:'KAPNAMN',omr:'OMR'}
   },
   {
-    id:'fy2', titel:'Fysik 2', siffra:'2', färg:'#0A5163', rygg:'#0A5163',
+    id:'fy2', titel:'Fysik nivå 2', siffra:'2', färg:'#0A5163', rygg:'#0A5163',
     taggar:['Rörelse och krafter','Ljud och andra mekaniska vågor','Elektromagnetism','Vågor och partiklar','Astrofysik','Relativitetsteori'],
     filer:['struktur2.js','uppgifter2.js'],
     globaler:{bank:'BANK2',kapnamn:'KAPNAMN2',omr:'OMR2'}
