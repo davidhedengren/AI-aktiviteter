@@ -68,6 +68,7 @@ window.OMRMA2 = {
   },
   "2": {
     "enkla_andragradsekvationer": "Enkla andragradsekvationer",
+    "nollproduktmetoden": "Nollproduktmetoden",
     "kvadratkomplettering": "Kvadratkomplettering",
     "losningsformel_andragrad": "Lösningsformel för andragradsekvationer",
     "mer_om_andragradsekvationer": "Andragradsekvationer – fördjupning",
@@ -119,7 +120,9 @@ window.OMRMA2 = {
   },
   "5": {
     "yrkesspecifika_begrepp_metoder": "Yrkesspecifika matematiska begrepp och metoder",
-    "verktyg_arbetslivet": "Matematiska hjälpmedel och verktyg i arbetslivet"
+    "verktyg_arbetslivet": "Matematiska hjälpmedel och verktyg i arbetslivet",
+    "ekonomiprogrammet": "Ekonomiprogrammet",
+    "vard_omsorgsprogrammet": "Vård- och omsorgsprogrammet"
   }
 };
 
@@ -228,6 +231,11 @@ window.SPARMA2 = {
   },
   "2": {
     "enkla_andragradsekvationer": [
+      "2a",
+      "2b",
+      "2c"
+    ],
+    "nollproduktmetoden": [
       "2a",
       "2b",
       "2c"
@@ -434,9 +442,14 @@ window.SPARMA2 = {
     ],
     "verktyg_arbetslivet": [
       "2a"
+    ],
+    "ekonomiprogrammet": [
+      "2b"
+    ],
+    "vard_omsorgsprogrammet": [
+      "2a"
     ]
   }
 };
-
 window.GRUPPMA2 = {};
 
