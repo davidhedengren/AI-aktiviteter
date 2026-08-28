@@ -1711,7 +1711,7 @@ const KURSER=[
     globaler:{bank:'BANKMA1',kapnamn:'KAPNAMNMA1',omr:'OMRMA1'}
   },
   {
-    id:'ma2', underUppbyggnad:true, titel:'Matematik nivå 2', siffra:'2', färg:'#2C62A8',
+    id:'ma2', titel:'Matematik nivå 2', siffra:'2', färg:'#2C62A8',
     rygg:'linear-gradient(90deg,#BF3A2E 0 50%,#E3B52B 50% 100%) top/100% 33.333% no-repeat,linear-gradient(#2E7D52 0 0) center/100% 33.334% no-repeat,linear-gradient(#2C62A8 0 0) bottom/100% 33.333% no-repeat',
     spår:[
       {id:'2a',etikett:'2a',färg:'#BF3A2E',bakgrund:'linear-gradient(165deg,color-mix(in oklab,#E3B52B 28%,#fff) 0 47%,color-mix(in oklab,#BF3A2E 23%,#fff) 53% 100%)'},
@@ -2996,7 +2996,50 @@ $('#expWord').addEventListener('click',()=>{
       .steg{margin:3pt 0 3pt 24pt}
       .stegnr{font-weight:bold;color:#B43123;margin-right:8pt}
       .komm{margin-left:24pt;color:#333}
-    </style></head><body>${kropp}</body></html>`;
+    
+
+/* ── slutlig statusstämpel · stor diagonal över hela kortet ── */
+.kk-byggstamp{
+  position:absolute!important;
+  z-index:6!important;
+  left:-14%!important;
+  right:auto!important;
+  top:48%!important;
+  width:128%!important;
+  padding:11px 0 10px!important;
+  border:0!important;
+  border-top:2px solid rgba(142,37,25,.55)!important;
+  border-bottom:2px solid rgba(142,37,25,.55)!important;
+  border-radius:0!important;
+  background:rgba(255,247,244,.90)!important;
+  color:#8E2519!important;
+  box-shadow:0 3px 14px rgba(142,37,25,.10)!important;
+  font-family:var(--mono)!important;
+  font-size:13px!important;
+  font-weight:700!important;
+  line-height:1.05!important;
+  letter-spacing:.18em!important;
+  text-align:center!important;
+  text-transform:uppercase!important;
+  white-space:nowrap!important;
+  pointer-events:none!important;
+  opacity:.94!important;
+  transform:translateY(-50%) rotate(-11deg)!important;
+  transform-origin:center center!important;
+}
+.kurskort:hover .kk-byggstamp{opacity:1!important}
+@media(max-width:620px){
+  .kk-byggstamp{
+    left:-18%!important;
+    width:136%!important;
+    top:49%!important;
+    padding:10px 0 9px!important;
+    font-size:11.5px!important;
+    letter-spacing:.15em!important;
+    transform:translateY(-50%) rotate(-10deg)!important;
+  }
+}
+</style></head><body>${kropp}</body></html>`;
   const namn=($('#bTitel').value||'Övningsblad').replace(/[^\wåäöÅÄÖ -]/g,'').trim()||'Övningsblad';
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob(['\ufeff'+doc],{type:'application/msword'}));
