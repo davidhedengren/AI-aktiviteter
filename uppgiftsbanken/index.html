@@ -1514,12 +1514,144 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
 
 
 /* ── Mobil layout ───────────────────────────────────────────
-   Begränsar alla paneler och figurer till den tillgängliga skärmbredden. */
+   En enda vertikal scroll används på telefon. Figurer får krympa
+   till kortets bredd utan att skapa egna scroll-/overflowytor. */
 @media (max-width:680px){
-  html,body{
+  html{
+    height:auto!important;
+    min-height:100%;
+    overflow-x:clip!important;
+    overflow-y:auto!important;
+  }
+  body{
     width:100%;
     max-width:100%;
-    overflow-x:hidden;
+    height:auto!important;
+    min-height:100dvh;
+    overflow:visible!important;
+  }
+
+  .arbetsyta{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    height:auto!important;
+    overflow:visible!important;
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+
+  .panel,
+  .vänster,
+  .mitten,
+  .höger{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    height:auto!important;
+    max-height:none!important;
+    overflow:visible!important;
+    overscroll-behavior:auto!important;
+  }
+
+  .vänster{
+    padding:13px 10px 22px;
+  }
+  .mitten{
+    padding:0 8px 40px;
+  }
+
+  /* Sticky-huvud i en mycket lång mobilkolumn ger ingen tydlig vinst
+     och undviks för stabilare touch-scroll. */
+  .mittopp{
+    position:static!important;
+    padding:12px 2px 10px;
+  }
+
+  .kort{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    grid-template-columns:20px minmax(0,1fr)!important;
+    gap:9px;
+    padding:12px 10px;
+    border-radius:11px;
+
+    /* Gör att Chrome på mobil inte behöver layouta och måla alla
+       hundratals uppgiftskort och SVG:er samtidigt. */
+    content-visibility:auto;
+    contain-intrinsic-size:auto 280px;
+  }
+  .kort > *{
+    min-width:0;
+  }
+
+  .kortmeta{
+    gap:7px;
+    margin-bottom:6px;
+  }
+  .område{
+    flex:1 1 150px;
+    min-width:0;
+  }
+  .poäng{
+    margin-left:0;
+  }
+
+  .kroppen{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    font-size:14px;
+    line-height:1.58;
+    overflow:visible!important;
+    overflow-wrap:anywhere;
+    touch-action:pan-y;
+  }
+
+  /* .fig är ett span i många uppgifter. På mobil måste det vara block
+     för att max-width ska kunna begränsa SVG:n korrekt. */
+  .kroppen .fig,
+  .kroppen .fig.smal,
+  .kroppen .fig.bred,
+  .kroppen .fig[style*="width"],
+  .kroppen .fig[data-bildskala]{
+    display:block!important;
+    width:auto!important;
+    max-width:100%!important;
+    min-width:0!important;
+    margin:10px 0!important;
+    overflow:visible!important;
+    touch-action:pan-y!important;
+  }
+
+  .kroppen .fig svg,
+  .kroppen .fig img,
+  .kroppen svg,
+  .kroppen img,
+  .kroppen .fig[style*="width"] svg,
+  .kroppen .fig[style*="width"] img,
+  .kroppen .fig[data-bildskala] svg,
+  .kroppen .fig[data-bildskala] img{
+    display:block!important;
+    width:auto!important;
+    max-width:100%!important;
+    height:auto!important;
+    margin-left:0!important;
+    margin-right:auto!important;
+    touch-action:pan-y!important;
+  }
+
+  table.data{
+    display:block;
+    width:100%;
+    max-width:100%;
+    overflow-x:auto;
+    overflow-y:visible;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .facit{
+    max-width:100%;
   }
 
   .top{
@@ -1547,126 +1679,6 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
     font-size:12px;
   }
 
-  .arbetsyta,
-  .panel,
-  .vänster,
-  .mitten,
-  .höger{
-    width:100%;
-    max-width:100%;
-    min-width:0;
-  }
-
-  .arbetsyta{
-    grid-template-columns:minmax(0,1fr);
-  }
-
-  .vänster{
-    padding:13px 10px 22px;
-  }
-
-  .mitten{
-    padding:0 8px 40px;
-    overflow-x:hidden;
-  }
-
-  .mittopp{
-    padding:12px 2px 10px;
-    gap:8px;
-  }
-
-  .kort{
-    width:100%;
-    max-width:100%;
-    min-width:0;
-    grid-template-columns:20px minmax(0,1fr);
-    gap:9px;
-    padding:12px 10px;
-    border-radius:11px;
-  }
-  .kort > *{min-width:0}
-
-  .kortmeta{
-    gap:7px;
-    margin-bottom:6px;
-  }
-  .område{
-    flex:1 1 150px;
-    min-width:0;
-  }
-  .poäng{
-    margin-left:0;
-  }
-
-  .kroppen{
-    min-width:0;
-    max-width:100%;
-    font-size:14px;
-    line-height:1.58;
-    overflow-wrap:anywhere;
-  }
-  .kroppen p,
-  .kroppen li{
-    max-width:100%;
-  }
-
-  /* .fig är ofta ett span i uppgiftsbanken.
-     Som block kan dess maxbredd faktiskt begränsa SVG:n på telefon. */
-  .kroppen .fig{
-    display:block!important;
-    width:100%!important;
-    max-width:100%!important;
-    min-width:0!important;
-    margin:10px 0!important;
-    overflow:hidden;
-  }
-  .kroppen .fig.smal,
-  .kroppen .fig.bred{
-    width:100%!important;
-    max-width:100%!important;
-  }
-  .kroppen .fig svg,
-  .kroppen .fig img,
-  .kroppen svg,
-  .kroppen img{
-    display:block!important;
-    width:auto!important;
-    max-width:100%!important;
-    height:auto!important;
-    margin-left:0!important;
-    margin-right:auto!important;
-  }
-
-  /* Manuellt storleksändrade bilder får aldrig tvinga sidan bredare än skärmen. */
-  .kroppen .fig[style*="width"],
-  .kroppen .fig[data-bildskala]{
-    width:100%!important;
-    max-width:100%!important;
-  }
-  .kroppen .fig[style*="width"] svg,
-  .kroppen .fig[style*="width"] img,
-  .kroppen .fig[data-bildskala] svg,
-  .kroppen .fig[data-bildskala] img{
-    width:100%!important;
-    max-width:100%!important;
-  }
-
-  table.data{
-    display:block;
-    width:100%;
-    max-width:100%;
-    overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
-  }
-
-  .facit{
-    max-width:100%;
-    overflow-x:auto;
-  }
-
-  .höger{
-    overflow:hidden;
-  }
   .bladlista,
   .bladtopp,
   .mätare,
@@ -1686,7 +1698,6 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
   .mitten{padding-left:6px;padding-right:6px}
   .kort{padding:11px 8px;gap:8px}
   .kroppen{font-size:13.5px}
-  .mittopp .kryss{padding-right:9px}
 }
 
 </style>
