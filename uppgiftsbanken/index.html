@@ -2415,7 +2415,7 @@ function byggTräd(){
 
   const grupperFör=(k,omrs)=>{
     const sp=aktivtSpår();
-    const defs=(sp&&DB.grupp?.[sp]?.[k]) || (!sp&&Array.isArray(DB.grupp?.[k])?DB.grupp[k]:null);
+    const defs=(sp&&DB.grupp?.[sp]?.[k]) || (Array.isArray(DB.grupp?.[k])?DB.grupp[k]:null);
     if(!Array.isArray(defs)||!defs.length) return omrs.map(o=>områdesknapp(k,o)).join('');
     const använda=new Set();
     const html=defs.map(g=>{
