@@ -22,6 +22,13 @@
   --ui:'Instrument Sans',system-ui,sans-serif;
   --las:'Atkinson Hyperlegible',system-ui,sans-serif;
   --mono:'IBM Plex Mono',monospace;
+
+  /* Vänsterpanelen tonas efter valt matematikspår.
+     För kurser utan spår används den neutrala standardytan. */
+  --sidebar-bg:var(--surface);
+  --sidebar-bg-2:var(--surface);
+  --sidebar-hover:var(--canvas);
+  --sidebar-line:var(--line);
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -642,20 +649,49 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .panel::-webkit-scrollbar-track{background:transparent}
 
 /* ── vänster: områden ── */
-.vänster{background:var(--surface);border-right:1px solid var(--line);padding:16px 12px 40px}
+.vänster{
+  background:linear-gradient(180deg,var(--sidebar-bg) 0%,var(--sidebar-bg-2) 100%);
+  border-right:1px solid var(--sidebar-line);
+  padding:16px 12px 40px;
+  transition:background .22s ease,border-color .22s ease;
+}
 .sök{position:relative;margin:0 4px 14px}
-.sök input{width:100%;border:1px solid var(--line);background:var(--canvas);border-radius:var(--r-s);
-  padding:9px 12px 9px 33px;font-size:13.5px}
+.sök input{width:100%;border:1px solid var(--sidebar-line);background:color-mix(in oklab,var(--sidebar-bg) 58%,#fff);border-radius:var(--r-s);
+  padding:9px 12px 9px 33px;font-size:13.5px;transition:background .15s,border-color .15s,box-shadow .15s}
 .sök input::placeholder{color:var(--muted)}
 .sök svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--muted)}
 .etikett{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--muted);margin:0 0 8px;padding:0 8px;font-weight:600}
 .nivåfilter{display:flex;gap:6px;margin:0 4px 18px}
-.nivåfilter button{flex:1;border:1px solid var(--line);background:var(--surface);border-radius:var(--r-s);
-  padding:7px 0;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--muted);transition:.15s}
-.nivåfilter button[aria-pressed="true"].E{background:var(--nE-bg);color:var(--nE);border-color:transparent}
-.nivåfilter button[aria-pressed="true"].C{background:var(--nC-bg);color:var(--nC);border-color:transparent}
-.nivåfilter button[aria-pressed="true"].A{background:var(--nA-bg);color:var(--nA);border-color:transparent}
+.nivåfilter button{
+  flex:1;
+  min-height:35px;
+  border:2px solid color-mix(in oklab,var(--sidebar-line) 72%,transparent);
+  background:color-mix(in oklab,var(--sidebar-bg) 35%,#fff);
+  border-radius:var(--r-s);
+  padding:6px 0;
+  font-size:12.5px;
+  font-weight:600;
+  cursor:pointer;
+  color:var(--muted);
+  transition:background .15s,border-color .15s,color .15s,box-shadow .15s,transform .08s;
+}
+.nivåfilter button:hover{
+  border-color:color-mix(in oklab,var(--ink-2) 28%,var(--sidebar-line));
+  color:var(--ink);
+}
+.nivåfilter button[aria-pressed="true"].E{
+  background:var(--nE-bg);color:var(--nE);border-color:var(--nE);
+  box-shadow:0 0 0 1px color-mix(in oklab,var(--nE) 18%,transparent) inset;
+}
+.nivåfilter button[aria-pressed="true"].C{
+  background:var(--nC-bg);color:var(--nC);border-color:var(--nC);
+  box-shadow:0 0 0 1px color-mix(in oklab,var(--nC) 18%,transparent) inset;
+}
+.nivåfilter button[aria-pressed="true"].A{
+  background:var(--nA-bg);color:var(--nA);border-color:var(--nA);
+  box-shadow:0 0 0 1px color-mix(in oklab,var(--nA) 18%,transparent) inset;
+}
 
 /* ── matematikspår ── */
 .spar-inriktning{margin:0 4px 18px}
@@ -696,7 +732,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
   transition:background .13s,border-color .13s,color .13s;
   overflow:hidden;
 }
-.omrgrupprad:hover{background:var(--surface);border-color:var(--line);color:var(--ink)}
+.omrgrupprad:hover{background:var(--sidebar-hover);border-color:var(--sidebar-line);color:var(--ink)}
 .omrgruppfäll{
   width:100%;
   min-height:36px;
@@ -723,7 +759,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .kapgrupp{margin-bottom:4px}
 .kaprad{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;cursor:pointer;
   padding:7px 8px;border-radius:var(--r-s);text-align:left;font-weight:600;font-size:13.5px;color:var(--ink)}
-.kaprad:hover{background:var(--canvas)}
+.kaprad:hover{background:var(--sidebar-hover)}
 .kaprad .pil{width:12px;height:12px;color:var(--muted);transition:transform .18s}
 .kapgrupp.stängd .pil{transform:rotate(-90deg)}
 .kaprad .nr{font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500}
@@ -733,7 +769,7 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 .omrad{display:flex;align-items:center;gap:9px;width:100%;background:none;border:none;cursor:pointer;
   padding:6px 8px 6px 14px;border-radius:var(--r-s);text-align:left;font-size:13px;color:var(--ink-2);
   position:relative;transition:background .13s,color .13s}
-.omrad:hover{background:var(--canvas);color:var(--ink)}
+.omrad:hover{background:var(--sidebar-hover);color:var(--ink)}
 .omrad[aria-pressed="true"]{background:var(--ed-tint);color:var(--ed-dark);font-weight:500}
 .omrad[aria-pressed="true"]::before{content:"";position:absolute;left:3px;top:7px;bottom:7px;width:2.5px;
   border-radius:2px;background:var(--ed)}
@@ -2182,6 +2218,21 @@ function uppdateraKursTema(){
   rot.style.setProperty('--ed-dark',`color-mix(in oklab,${accent} 82%,#171317)`);
   rot.style.setProperty('--ed-tint',`color-mix(in oklab,${accent} 9%,#fff)`);
   rot.style.setProperty('--ed-ring',`color-mix(in oklab,${accent} 20%,transparent)`);
+
+  /* Bara matematikkurser med spår får den färgade vänsterpanelen.
+     Tonen hålls låg så att text, knappar och uppgiftsområden fortfarande
+     känns neutrala och lätta att läsa. */
+  if(sp){
+    rot.style.setProperty('--sidebar-bg',`color-mix(in oklab,${accent} 6%,#fff)`);
+    rot.style.setProperty('--sidebar-bg-2',`color-mix(in oklab,${accent} 3%,#fff)`);
+    rot.style.setProperty('--sidebar-hover',`color-mix(in oklab,${accent} 10%,#fff)`);
+    rot.style.setProperty('--sidebar-line',`color-mix(in oklab,${accent} 18%,#E4E3E6)`);
+  }else{
+    rot.style.setProperty('--sidebar-bg','var(--surface)');
+    rot.style.setProperty('--sidebar-bg-2','var(--surface)');
+    rot.style.setProperty('--sidebar-hover','var(--canvas)');
+    rot.style.setProperty('--sidebar-line','var(--line)');
+  }
 }
 function byggSpårfilter(){
   const wrap=$('#sparInriktning'), låda=$('#sparKnappar');
@@ -2365,6 +2416,10 @@ function visaKursval(){
   document.documentElement.style.setProperty('--ed-dark','#8E2519');
   document.documentElement.style.setProperty('--ed-tint','#FBF0EE');
   document.documentElement.style.setProperty('--ed-ring','rgba(180,49,35,.18)');
+  document.documentElement.style.setProperty('--sidebar-bg','var(--surface)');
+  document.documentElement.style.setProperty('--sidebar-bg-2','var(--surface)');
+  document.documentElement.style.setProperty('--sidebar-hover','var(--canvas)');
+  document.documentElement.style.setProperty('--sidebar-line','var(--line)');
   document.querySelector('.top').hidden=true;
   document.querySelector('.arbetsyta').hidden=true;
   $('#kursval').hidden=false;
