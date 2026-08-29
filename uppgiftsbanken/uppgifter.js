@@ -18308,3 +18308,205 @@ function kodaOlikhetsteckenIMatematikF1V6(html) {
 for (const uppgift of window.BANK) {
   uppgift.s = kodaOlikhetsteckenIMatematikF1V6(uppgift.s);
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Kvalitetsgranskning Fysik 1 — facit och nivåkalibrering 2026-08-29
+   - Nivåer har jämförts mot uppladdade kursprov/områdesprov och rättningsmallar.
+   - Facit som hade pedagogiska luckor har förtydligats utan att ändra uppgiftens ID/område.
+   - ID-ordning och områdestillhörighet är oförändrade.
+   ═══════════════════════════════════════════════════════════════════════════ */
+(function kvalitetsgranskningFysik1_20260829(){
+  const NIVAJUSTERINGAR_TILL_C = new Set([
+    "2.48","2.65","2.79","2.15","2.56","2.52","2.46",
+    "3.125","3.112","3.157","3.31","3.47","3.69","3.114","3.85","3.98","3.20","3.110","3.63",
+    "4.58","4.26","4.56","4.229","4.189","4.103","4.101","4.87","4.255","4.148",
+    "5.27","5.41","5.136","5.1",
+    "6.100","6.108","6.18","6.127","6.123",
+    "7.24","7.10","7.44","7.34","7.15","7.20",
+    "8.8","8.162","8.163","8.10","8.22","8.129","8.153","8.169",
+    "9.1","9.84","9.78","9.67","9.73","9.5"
+  ]);
+
+  for (const uppgift of window.BANK) {
+    if (NIVAJUSTERINGAR_TILL_C.has(uppgift.id)) uppgift.niva = "C";
+  }
+
+  const hitta = id => window.BANK.find(u => u.id === id);
+
+  // 2.63: gör den förenklade hållfasthetsmodellen explicit så att uppgiften
+  // prövar skalning i stället för att ge en missvisande modell av verklig knäckning.
+  {
+    const u = hitta("2.63");
+    if (u) {
+      u.t = String.raw`<p>En modell av en bropelare byggs i skala 1:20. Modellpelaren har massan 0,80 kg och klarar som mest en tryckkraft på 12 kN.</p>
+<p>I en <strong>förenklad hållfasthetsmodell</strong> antar vi att den maximala tryckkraft som en geometriskt likformig pelare klarar är proportionell mot pelarens tvärsnittsarea.</p>
+<ol><li>Bestäm vilken massa den fullskaliga pelaren får om den byggs av samma material.</li>
+<li>Bestäm hur stor maximal tryckkraft den fullskaliga pelaren klarar enligt modellen.</li>
+<li>Jämför hur pelarens egen tyngd och dess maximala tryckkraft skalar. Förklara varför stora konstruktioner inte kan förstoras geometriskt utan att hållfastheten blir ett större problem.</li></ol>`;
+      u.s = byggFacitListaV2([
+        ["a", "Alla längder blir 20 gånger större. Volymen, och därmed massan när materialet är samma, skalar med längdskalan i tredje potens.", String.raw`\[m_{\text{stor}}=0{,}80\cdot20^3=0{,}80\cdot8000=6400\ \mathrm{kg}\]`, "Det är kubiklagen som gör att massan växer mycket snabbt när alla längder förstoras."],
+        ["b", "Tvärsnittsarean skalar med längdskalan i andra potens. Enligt den förenklade modell som anges i uppgiften blir därför bärförmågan", String.raw`\[F_{\max,\text{stor}}=12\,000\cdot20^2=12\,000\cdot400=4{,}8\cdot10^6\ \mathrm N\]`, String.raw`Alltså cirka \(4{,}8\ \mathrm{MN}\).`],
+        ["c", "Egenvikten är proportionell mot massan och växer alltså med faktorn 8000, medan den tillåtna tryckkraften bara växer med faktorn 400.", String.raw`\[\frac{8000}{400}=20\]`, "Den fullskaliga pelaren får därför tjugo gånger sämre marginal mellan egenvikt och bärförmåga än modellen. Detta är den viktiga kvadrat–kubik-insikten. I verkliga pelare kan dessutom exempelvis knäckning göra skalningen ännu mer komplicerad; här använder vi uttryckligen den förenklade areamodellen i uppgiften."]
+      ], String.raw`Massan blir \(6{,}4\cdot10^3\ \mathrm{kg}\) och den maximala tryckkraften \(4{,}8\ \mathrm{MN}\). Egenvikten växer snabbare än bärförmågan när konstruktionen skalas upp.`);
+    }
+  }
+
+  // 3.58: förtydliga varför en oändlig geometrisk summa används.
+  {
+    const u = hitta("3.58");
+    if (u) {
+      u.s = byggFacitListaV2([
+        ["a", "Efter varje studs når bollen 64 % av föregående höjd. Första studshöjden blir därför", String.raw`\[h_1=1{,}80\cdot0{,}64=1{,}152\ \mathrm m\]`, "Varje ny studshöjd fås genom att multiplicera den föregående med 0,64."],
+        ["b", "Efter fem studsar har faktorn 0,64 använts fem gånger.", String.raw`\[h_5=1{,}80\cdot0{,}64^5=0{,}193\ \mathrm m\]`, String.raw`Det är cirka \(19\ \mathrm{cm}\).`],
+        ["c", "Bollen färdas först 1,80 m nedåt. Därefter går den både upp och ned för varje studshöjd. Eftersom studshöjderna fortsätter i samma geometriska mönster och vi söker den sammanlagda sträckan för alla framtida studsar behöver vi summan av en oändlig geometrisk serie.", String.raw`\[S_h=1{,}80(0{,}64+0{,}64^2+\cdots)=1{,}80\frac{0{,}64}{1-0{,}64}=3{,}20\ \mathrm m\]`, String.raw`Varje studshöjd passeras två gånger, en gång upp och en gång ned.`],
+        ["d", "Den totala sträckan blir därför", String.raw`\[s_{\text{tot}}=1{,}80+2S_h=1{,}80+2\cdot3{,}20=8{,}20\ \mathrm m\]`, "Avrundningsskillnader kan ge ungefär 8,2 m."]
+      ], String.raw`Första studshöjden är \(1{,}15\ \mathrm m\), den femte cirka \(0{,}19\ \mathrm m\), och den sammanlagda sträckan när alla studsar räknas med är cirka \(8{,}2\ \mathrm m\).`);
+    }
+  }
+
+  // 5.169: gör den kontinuerliga massförlusten transparent och ge den formel
+  // som annars ligger utanför normal Fysik 1-algebra.
+  {
+    const u = hitta("5.169");
+    if (u) {
+      u.t = String.raw`<p>En raket har vid starten den totala massan 20 ton. Motorn kastar ut gas bakåt med hastigheten 3,0 km/s relativt raketen. Under starten förbrukas bränsle med 80 kg/s.</p>
+<ol><li>Bestäm raketmotorns dragkraft.</li>
+<li>Bestäm raketens acceleration precis vid starten om luftmotståndet försummas men tyngdkraften räknas med.</li>
+<li>Hur stor rörelseenergi får den utkastade gasen per sekund? Jämför detta med motorns mekaniska effekt på raketen precis i startögonblicket.</li>
+<li>Efter en tid har 4,0 ton bränsle kastats ut. Uppskatta raketens hastighetsökning på grund av utströmningen. För denna delfråga får du använda raketekvationen \(\Delta v=u\ln(m_0/m)\), som följer av rörelsemängdens bevarande när raketens massa förändras kontinuerligt. Bortse här från tyngdkraft och luftmotstånd.</li></ol>`;
+      u.s = byggFacitListaV2([
+        ["a", "Varje sekund kastas 80 kg gas bakåt med farten 3000 m/s relativt raketen. Gasens rörelsemängd bakåt per sekund ger lika stor ändring av raketens rörelsemängd framåt.", String.raw`\[F=\dot m\,u=80\cdot3000=2{,}40\cdot10^5\ \mathrm N\]`, String.raw`Dragkraften är alltså \(240\ \mathrm{kN}\).`],
+        ["b", "Vid starten är massan 20 ton = 20 000 kg. Raketen påverkas uppåt av dragkraften och nedåt av tyngdkraften.", String.raw`\[F_{\text{res}}=F-mg=240\,000-20\,000\cdot9{,}82=43\,600\ \mathrm N\]`, String.raw`\[a=\frac{F_{\text{res}}}{m}=\frac{43\,600}{20\,000}=2{,}18\ \mathrm{m/s^2}\]`, "Det är accelerationen relativt marken precis i starten. Att bara använda F/m skulle glömma tyngdkraften."],
+        ["c", "Gasens kinetiska energi som skapas varje sekund är", String.raw`\[P_{\text{gas}}=\frac12\dot m u^2=\frac12\cdot80\cdot3000^2=3{,}60\cdot10^8\ \mathrm W\]`, String.raw`Det är \(360\ \mathrm{MW}\). Motorns mekaniska effekt på själva raketen är däremot \(P=Fv\). Precis i startögonblicket är \(v=0\), så denna effekt är då \(0\ \mathrm W\).`, "Det är inte en motsägelse: energin går i startögonblicket framför allt till den utkastade gasens rörelseenergi. När raketen fått fart blir även Fv på raketen större."],
+        ["d", "Efter att 4,0 ton bränsle lämnat raketen har massan minskat från 20 ton till 16 ton. Eftersom ny gas kastas ut hela tiden medan raketens massa samtidigt förändras kan man inte behandla hela gasmassan som en enda vanlig tvåkroppskollision. Använd den givna raketekvationen.", String.raw`\[\Delta v=u\ln\!\left(\frac{m_0}{m}\right)=3000\ln\!\left(\frac{20\,000}{16\,000}\right)=669\ \mathrm{m/s}\]`, String.raw`Hastighetsökningen blir cirka \(6{,}7\cdot10^2\ \mathrm{m/s}\) när tyngdkraft och luftmotstånd försummas.`]
+      ], String.raw`Dragkraften är \(240\ \mathrm{kN}\). Startaccelerationen blir cirka \(2{,}18\ \mathrm{m/s^2}\). Gasen får \(360\ \mathrm{MJ}\) rörelseenergi per sekund, och den idealiserade hastighetsökningen efter 4,0 ton förbrukat bränsle är cirka \(669\ \mathrm{m/s}\).`);
+    }
+  }
+
+  // 8.13: ersätt påståendet "max vid R=r" med en faktisk motivering.
+  {
+    const u = hitta("8.13");
+    if (u) {
+      u.s = byggFacitListaV2([
+        ["a", "Batteriets polspänning över lasten är \(U=IR\), och strömmen genom hela seriekretsen är", String.raw`\[I=\frac{\mathcal E}{R+r}\]`, "Därför kan effekten i den yttre resistorn skrivas enbart som en funktion av R."],
+        ["b", "Effekten i lasten blir", String.raw`\[P_R=I^2R=\frac{\mathcal E^2R}{(R+r)^2}\]`, "Nu återstår att visa vid vilket R detta uttryck blir störst."],
+        ["c", String.raw`Sätt \(x=R/r\). Då är`, String.raw`\[P_R=\frac{\mathcal E^2}{r}\frac{x}{(1+x)^2}\]`, String.raw`Eftersom \((x-1)^2\ge 0\) gäller \((1+x)^2\ge4x\). Alltså är \(x/(1+x)^2\le1/4\), och likhet fås endast när \(x=1\). Därför är effekten maximal när \(R=r\).`],
+        ["d", "Med värdena i uppgiften blir alltså", String.raw`\[R=r=0{,}60\ \Omega\]`, String.raw`\[P_{\max}=\frac{\mathcal E^2}{4r}=\frac{1{,}50^2}{4\cdot0{,}60}=0{,}938\ \mathrm W\]`, "Vid maximal effekt förbrukas lika stor effekt i batteriets inre resistans som i lasten. Maximal uteffekt innebär därför inte maximal verkningsgrad."]
+      ], String.raw`Den yttre effekten är maximal när \(R=r=0{,}60\ \Omega\). Då är den maximala effekten cirka \(0{,}94\ \mathrm W\).`);
+    }
+  }
+
+  // 9.67: språkfel + tydligare fysikalisk förklaring.
+  {
+    const u = hitta("9.67");
+    if (u) {
+      u.s = byggFacitListaV2([
+        ["1", "Protonerna i kärnan är positivt laddade och repellerar därför varandra elektriskt. Ju fler protoner kärnan innehåller, desto större blir den samlade elektriska frånstötningen.", "", "Den elektriska kraften är långräckviddig och verkar mellan alla protoner."],
+        ["2", "Den starka kärnkraften kan binda både protoner och neutroner, men den verkar bara över mycket korta avstånd mellan närliggande nukleoner.", "", "När kärnan blir stor räcker alltså inte den starka kraftens korta räckvidd till för att kompensera protonernas växande repulsion lika effektivt."],
+        ["3", "Extra neutroner bidrar till den attraktiva starka kärnkraften utan att samtidigt lägga till elektrisk repulsion.", "", "Därför behöver tunga stabila kärnor normalt fler neutroner än protoner. Blir neutronöverskottet eller protonöverskottet för stort kan kärnan i stället bli instabil och sönderfalla."]
+      ], "I lätta stabila kärnor är antalet protoner och neutroner ofta ungefär lika. I tyngre kärnor krävs ett neutronöverskott för att den starka kärnkraften ska kunna motverka protonernas elektriska repulsion.");
+    }
+  }
+
+  // Kör samma matematikstädning på de facit som ersatts efter bankens ordinarie slutpass.
+  if (typeof kodaOlikhetsteckenIMatematikF1V6 === "function") {
+    for (const id of ["2.63","3.58","5.169","8.13","9.67"]) {
+      const u = hitta(id);
+      if (u?.s) u.s = kodaOlikhetsteckenIMatematikF1V6(u.s);
+    }
+  }
+})();
+
+
+/* Korrigering efter slutkontroll av de pedagogiska facitändringarna ovan. */
+(function slutkontrollFacitFysik1_20260829(){
+  const hitta = id => window.BANK.find(u => u.id === id);
+
+  {
+    const u = hitta("2.63");
+    if (u) {
+      u.t = String.raw`<p>En bro byggs först som en modell i skala 1:20, av samma material som den riktiga bron ska byggas av. Modellen väger 45 kg, och en av modellens pelare klarar tryckkraften 12 kN.</p>
+<p>I en <strong>förenklad hållfasthetsmodell</strong> antar vi att den maximala tryckkraft som en geometriskt likformig pelare klarar är proportionell mot pelarens tvärsnittsarea.</p>
+<ol><li>Vilken massa får den färdiga bron?</li>
+<li>Vilken tryckkraft klarar motsvarande pelare i den färdiga bron enligt modellen?</li>
+<li>Modellen bär sin egen tyngd med god marginal. Gör den riktiga bron det? Jämför säkerhetsmarginalerna och förklara varför uppskalning blir ett hållfasthetsproblem.</li></ol>`;
+      u.s = byggFacitListaV2([
+        ["a", "Alla längder blir 20 gånger större. Eftersom bron är geometriskt likformig växer volymen med längdskalan i tredje potens. Samma material innebär att massan skalar på samma sätt.", String.raw`\[m_{\text{stor}}=45\cdot20^3=45\cdot8000=3{,}60\cdot10^5\ \mathrm{kg}\]`, String.raw`Den färdiga bron får alltså massan \(360\ \mathrm{ton}\).`],
+        ["b", "Tvärsnittsarean växer med längdskalan i andra potens. Enligt den uttryckligen angivna förenklade modellen skalar därför pelarens maximala tryckkraft med faktorn \(20^2\).", String.raw`\[F_{\max,\text{stor}}=12\,000\cdot20^2=4{,}80\cdot10^6\ \mathrm N\]`, String.raw`Det motsvarar \(4{,}8\ \mathrm{MN}\).`],
+        ["c", "Jämför maximal bärförmåga med konstruktionens egen tyngd. För modellen blir säkerhetsmarginalen", String.raw`\[\frac{12\,000}{45\cdot9{,}82}=27{,}2\]`, "För den fullskaliga bron blir motsvarande kvot"],
+        ["", "", String.raw`\[\frac{4{,}80\cdot10^6}{(3{,}60\cdot10^5)\cdot9{,}82}=1{,}36\]`, "Bron bär alltså fortfarande sin egen tyngd enligt den förenklade modellen, men marginalen har sjunkit från ungefär 27 till bara 1,4. Orsaken är att egenvikten växer med skalfaktorn i kubik medan den antagna bärförmågan bara växer med skalfaktorn i kvadrat. I verkliga konstruktioner påverkar även exempelvis knäckning och material-/geometrieffekter hållfastheten."]
+      ], String.raw`Den färdiga bron får massan \(3{,}60\cdot10^5\ \mathrm{kg}\), pelaren klarar \(4{,}8\ \mathrm{MN}\) enligt modellen och säkerhetsmarginalen mot egenvikten minskar kraftigt vid uppskalningen.`);
+    }
+  }
+
+  {
+    const u = hitta("3.58");
+    if (u) {
+      u.s = byggFacitListaV2([
+        ["a", "I högsta läget efter varje studs är bollen momentant stilla, så den mekaniska energin där är lägesenergin \(mgh\). Energin är därför proportionell mot studshöjden.", String.raw`\[r=\frac{E_{n+1}}{E_n}=\frac{h_{n+1}}{h_n}=\frac{1{,}15}{1{,}80}=0{,}6389\]`, "Alltså återstår cirka 63,9 % av energin efter varje studs; cirka 36,1 % förloras."],
+        ["b", "Efter fem studsar har höjden multiplicerats med samma faktor fem gånger.", String.raw`\[h_5=1{,}80\,r^5=1{,}80(0{,}6389)^5=0{,}192\ \mathrm m\]`, String.raw`Bollen når alltså ungefär \(0{,}19\ \mathrm m\) efter den femte studsen.`],
+        ["c", "Bollen faller först 1,80 m. Därefter passerar den varje studshöjd två gånger: en gång upp och en gång ned. Studshöjderna bildar en geometrisk följd, och eftersom vi söker sträckan ända tills studshöjden går mot noll används den oändliga geometriska summan.", String.raw`\[S_h=1{,}80(r+r^2+r^3+\cdots)=1{,}80\frac{r}{1-r}\]`, "Den totala sträckan är första fallet plus två gånger summan av alla studshöjder."],
+        ["", "", String.raw`\[s_{\text{tot}}=1{,}80+2\cdot1{,}80\frac{0{,}6389}{1-0{,}6389}=8{,}17\ \mathrm m\]`, ""]
+      ], String.raw`Efter varje studs återstår cirka \(63{,}9\,\%\) av energin. Efter fem studsar når bollen cirka \(0{,}19\ \mathrm m\), och den totala färdsträckan blir cirka \(8{,}2\ \mathrm m\).`);
+    }
+  }
+
+  {
+    const u = hitta("5.169");
+    if (u) {
+      u.t = String.raw`<p>En rymdraket med massan 20 000 kg (inklusive bränsle) befinner sig i rymden, långt från gravitationskällor. Motorerna sprutar ut 80 kg gas per sekund med farten 3000 m/s relativt raketen. Raketen startar från vila.</p>
+<ol><li>Hur stor är skjutkraften (thrusten) på raketen?</li>
+<li>Vilken acceleration får raketen i startögonblicket?</li>
+<li>Hur stor rörelseenergi får den utkastade gasen per sekund? Jämför med motorns mekaniska effekt på själva raketen precis i startögonblicket.</li>
+<li>Hur stor fartökning har raketen fått när 4000 kg bränsle har förbrukats? För denna delfråga får du använda raketekvationen \(\Delta v=u\ln(m_0/m)\), som följer av rörelsemängdens bevarande när raketens massa förändras kontinuerligt.</li></ol>`;
+      u.s = byggFacitListaV2([
+        ["a", "Varje sekund får 80 kg gas rörelsemängd bakåt. Ändringen av gasens rörelsemängd per sekund ger en lika stor motriktad kraft på raketen.", String.raw`\[F=\dot m\,u=80\cdot3000=2{,}40\cdot10^5\ \mathrm N\]`, String.raw`Skjutkraften är \(240\ \mathrm{kN}\).`],
+        ["b", "Rymdraketen befinner sig enligt uppgiften långt från gravitationskällor och luftmotstånd försummas. Skjutkraften är därför den resulterande kraften i startögonblicket.", String.raw`\[a_0=\frac{F}{m_0}=\frac{240\,000}{20\,000}=12\ \mathrm{m/s^2}\]`, "När bränsle förbrukas minskar massan, så accelerationen blir inte konstant även om massflödet och utströmningsfarten hålls konstanta."],
+        ["c", "Gasens kinetiska energi som skapas per sekund, räknad i raketens momentana referenssystem, är", String.raw`\[P_{\text{gas}}=\frac12\dot m u^2=\frac12\cdot80\cdot3000^2=3{,}60\cdot10^8\ \mathrm W\]`, String.raw`Det är \(360\ \mathrm{MW}\). Effekten som skjutkraften överför till själva raketens translationsrörelse är däremot \(P_{\text{raket}}=Fv\). Precis vid starten är \(v=0\), så den är då \(0\ \mathrm W\).`, "Skillnaden visar varför man måste vara tydlig med vilken kropps energi man talar om i ett raketsystem."],
+        ["d", "När 4000 kg bränsle har kastats ut återstår massan \(m=16\,000\ \mathrm{kg}\). Den kontinuerliga massförlusten gör att en enda vanlig tvåkroppskollision inte räcker; den givna raketekvationen sammanfattar de successiva rörelsemängdsbalanserna.", String.raw`\[\Delta v=3000\ln\!\left(\frac{20\,000}{16\,000}\right)=669\ \mathrm{m/s}\]`, String.raw`Eftersom raketen startar från vila blir dess fart här cirka \(669\ \mathrm{m/s}\).`]
+      ], String.raw`Skjutkraften är \(240\ \mathrm{kN}\), startaccelerationen \(12\ \mathrm{m/s^2}\), gasstrålens kinetiska effekt \(360\ \mathrm{MW}\), och fartökningen efter 4000 kg förbrukat bränsle cirka \(669\ \mathrm{m/s}\).`);
+    }
+  }
+
+  {
+    const u = hitta("9.67");
+    if (u) {
+      u.s = byggFacitListaV2([
+        ["a", "Neutronöverskottet fås direkt som skillnaden mellan antalet neutroner och protoner.", String.raw`\[126-82=44\]`, "Bly-208 har alltså 44 fler neutroner än protoner."],
+        ["b", "Den starka kärnkraften verkar attraktivt mellan nukleoner på mycket korta avstånd och håller ihop kärnan. Protonerna är samtidigt positivt laddade och repellerar varandra elektriskt.", "", "Den elektriska repulsionen vill alltså slita isär kärnan, medan den starka kärnkraften binder den."],
+        ["c", "När protonantalet ökar blir den elektriska repulsionen allt viktigare. Extra neutroner bidrar till den starka kärnkraftens bindning utan att tillföra någon elektrisk repulsion.", "", "Därför behöver tunga stabila kärnor normalt ett neutronöverskott. Den starka kärnkraften är kortverkande, medan den elektriska repulsionen verkar över längre avstånd i kärnan."]
+      ], "Bly-208 har 44 fler neutroner än protoner. Neutronöverskottet hjälper den starka kärnkraften att balansera den ökande elektriska repulsionen mellan många protoner.");
+    }
+  }
+
+  if (typeof kodaOlikhetsteckenIMatematikF1V6 === "function") {
+    for (const id of ["2.63","3.58","5.169","9.67"]) {
+      const u = hitta(id);
+      if (u?.s) u.s = kodaOlikhetsteckenIMatematikF1V6(u.s);
+    }
+  }
+})();
+
+
+/* Synka poängprofilen med de nivåändringar som gjordes i kvalitetsgranskningen. */
+(function synkaPoangEfterNivagranskningFysik1_20260829(){
+  const ids = new Set([
+    "2.48","2.65","2.79","2.15","2.56","2.52","2.46",
+    "3.125","3.112","3.157","3.31","3.47","3.69","3.114","3.85","3.98","3.20","3.110","3.63",
+    "4.58","4.26","4.56","4.229","4.189","4.103","4.101","4.87","4.255","4.148",
+    "5.27","5.41","5.136","5.1",
+    "6.100","6.108","6.18","6.127","6.123",
+    "7.24","7.10","7.44","7.34","7.15","7.20",
+    "8.8","8.162","8.163","8.10","8.22","8.129","8.153","8.169",
+    "9.1","9.84","9.78","9.67","9.73","9.5"
+  ]);
+  for (const u of window.BANK) {
+    if (!ids.has(u.id)) continue;
+    const m = String(u.poang || "").match(/(\d+)\/(\d+)\/(\d+)/);
+    if (!m) continue;
+    const e = Number(m[1]), c = Number(m[2]), a = Number(m[3]);
+    u.poang = `(${e}/${c+a}/0)`;
+    u.niva = "C";
+  }
+})();
