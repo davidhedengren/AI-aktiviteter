@@ -687,20 +687,34 @@ button,input,select{font-family:inherit;font-size:inherit;color:inherit}
 
 /* ── valfria underrubriker i strukturträdet ── */
 .omrgrupp{margin:2px 0 5px 12px}
-.omrgrupprad{display:flex;align-items:center;width:calc(100% - 2px);background:rgba(255,255,255,.42);border:1px solid transparent;border-radius:8px;color:var(--ink-2);transition:background .13s,border-color .13s,color .13s;overflow:hidden}
+.omrgrupprad{
+  width:calc(100% - 2px);
+  background:rgba(255,255,255,.42);
+  border:1px solid transparent;
+  border-radius:8px;
+  color:var(--ink-2);
+  transition:background .13s,border-color .13s,color .13s;
+  overflow:hidden;
+}
 .omrgrupprad:hover{background:var(--surface);border-color:var(--line);color:var(--ink)}
-.omrgruppfäll{width:28px;height:34px;flex:0 0 28px;display:grid;place-items:center;border:0;background:transparent;color:var(--muted);cursor:pointer;padding:0}
-.omrgruppfäll:hover{color:var(--ink)}
-.omrgruppfäll .gp-pil{width:10px;height:10px;transition:transform .18s}
-.omrgruppval{min-width:0;flex:1;display:flex;align-items:center;gap:8px;border:0;background:transparent;cursor:pointer;padding:6px 7px 6px 2px;text-align:left;font:inherit;color:inherit}
-.omrgruppval .gp-check{width:15px;height:15px;flex:0 0 15px;border:1.5px solid #B9B6BC;border-radius:4px;background:#fff;display:grid;place-items:center;transition:background .13s,border-color .13s}
-.omrgruppval .gp-check::after{content:"";width:7px;height:4px;border-left:1.8px solid #fff;border-bottom:1.8px solid #fff;transform:rotate(-45deg) translateY(-1px);opacity:0}
-.omrgruppval[aria-pressed="true"] .gp-check{background:var(--ed);border-color:var(--ed)}
-.omrgruppval[aria-pressed="true"] .gp-check::after{opacity:1}
-.omrgruppval[data-mixed="true"] .gp-check{background:var(--ed-tint);border-color:var(--ed)}
-.omrgruppval[data-mixed="true"] .gp-check::after{width:7px;height:0;border:0;border-top:2px solid var(--ed);transform:none;opacity:1}
-.omrgruppval .gp-namn{font-size:12.25px;font-weight:650;line-height:1.25}
-.omrgruppval .antal{margin-left:auto;font-family:var(--mono);font-size:10px;font-weight:400;color:var(--muted)}
+.omrgruppfäll{
+  width:100%;
+  min-height:36px;
+  display:grid;
+  grid-template-columns:16px minmax(0,1fr) auto;
+  align-items:center;
+  gap:8px;
+  border:0;
+  background:transparent;
+  color:inherit;
+  cursor:pointer;
+  padding:6px 8px;
+  text-align:left;
+  font:inherit;
+}
+.omrgruppfäll .gp-pil{width:10px;height:10px;color:var(--muted);transition:transform .18s}
+.omrgruppfäll .gp-namn{font-size:12.25px;font-weight:650;line-height:1.25}
+.omrgruppfäll .antal{font-family:var(--mono);font-size:10px;font-weight:400;color:var(--muted)}
 .omrgrupp.stängd .omrgruppfäll .gp-pil{transform:rotate(-90deg)}
 .omrgrupp.stängd .omrunderlista{display:none}
 .omrunderlista{padding-top:2px}
@@ -2424,17 +2438,11 @@ function byggTräd(){
       gos.forEach(o=>använda.add(o));
       const antal=vb.filter(x=>String(x.kap)===String(k)&&gos.includes(x.omr)).length;
       const valda=gos.filter(o=>state.omr.has(k+':'+o)).length;
-      const allaValda=valda===gos.length;
-      const delvisValda=valda>0&&!allaValda;
       const öppen=valda>0;
-      const gruppvärden=gos.map(o=>k+':'+o).join('|');
       return `<div class="omrgrupp${öppen?'':' stängd'}" data-grupp="${k}:${g.id||''}">
         <div class="omrgrupprad">
           <button class="omrgruppfäll" type="button" aria-label="Fäll ut eller ihop ${g.namn||g.id}">
             <svg class="gp-pil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <button class="omrgruppval" type="button" data-gruppval="${gruppvärden}" aria-pressed="${allaValda}" data-mixed="${delvisValda}">
-            <span class="gp-check" aria-hidden="true"></span>
             <span class="gp-namn">${g.namn||g.id}</span>
             <span class="antal">${antal}</span>
           </button>
@@ -2458,37 +2466,12 @@ function byggTräd(){
       <div class="omrlista">${grupperFör(k,omrs)}</div>
     </div>`;
   }).join('');
-  const uppdateraGruppstatus=()=>{
-    $$('.omrgrupp').forEach(g=>{
-      const värden=[...g.querySelectorAll('.omrad')].map(b=>b.dataset.omr);
-      const valda=värden.filter(v=>state.omr.has(v)).length;
-      const alla=värden.length>0&&valda===värden.length;
-      const delvis=valda>0&&!alla;
-      const välj=g.querySelector('.omrgruppval');
-      if(välj){
-        välj.setAttribute('aria-pressed',alla);
-        välj.dataset.mixed=String(delvis);
-      }
-    });
-  };
-
-  $$('.kaprad').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('stängd')));
+    $$('.kaprad').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('stängd')));
   $$('.omrgruppfäll').forEach(b=>b.addEventListener('click',()=>b.closest('.omrgrupp').classList.toggle('stängd')));
-  $$('.omrgruppval').forEach(b=>b.addEventListener('click',()=>{
-    const värden=(b.dataset.gruppval||'').split('|').filter(Boolean);
-    const allaValda=värden.length>0&&värden.every(v=>state.omr.has(v));
-    värden.forEach(v=>{ if(allaValda) state.omr.delete(v); else state.omr.add(v); });
-    const grupp=b.closest('.omrgrupp');
-    if(!allaValda) grupp?.classList.remove('stängd');
-    grupp?.querySelectorAll('.omrad').forEach(knapp=>knapp.setAttribute('aria-pressed',state.omr.has(knapp.dataset.omr)));
-    uppdateraGruppstatus();
-    rita();
-  }));
   $$('.omrad').forEach(b=>b.addEventListener('click',()=>{
     const v=b.dataset.omr;
     if(state.omr.has(v)) state.omr.delete(v); else state.omr.add(v);
     b.setAttribute('aria-pressed',state.omr.has(v));
-    uppdateraGruppstatus();
     rita();
   }));
   document.querySelectorAll('.kapgrupp').forEach((g,i)=>{ if(i>2) g.classList.add('stängd'); });
