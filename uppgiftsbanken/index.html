@@ -2,7 +2,7 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Erik Dahlbergsgymnasiets uppgiftsbank</title>
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1511,6 +1511,184 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
   .kv-designhero-art{display:none}
   .kv-designhero h2{font-size:clamp(27px,8vw,35px)}
 }
+
+
+/* ── Mobil layout ───────────────────────────────────────────
+   Begränsar alla paneler och figurer till den tillgängliga skärmbredden. */
+@media (max-width:680px){
+  html,body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+  }
+
+  .top{
+    height:auto;
+    min-height:64px;
+    padding:9px 10px;
+    gap:7px;
+    flex-wrap:wrap;
+  }
+  .märke{
+    flex:1 1 210px;
+    min-width:0;
+  }
+  .märke img{height:34px}
+  .titel h1{
+    font-size:15px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .titel span{font-size:8.5px}
+  .top .fyll{display:none}
+  .top .knapp{
+    padding:7px 9px;
+    font-size:12px;
+  }
+
+  .arbetsyta,
+  .panel,
+  .vänster,
+  .mitten,
+  .höger{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+  }
+
+  .arbetsyta{
+    grid-template-columns:minmax(0,1fr);
+  }
+
+  .vänster{
+    padding:13px 10px 22px;
+  }
+
+  .mitten{
+    padding:0 8px 40px;
+    overflow-x:hidden;
+  }
+
+  .mittopp{
+    padding:12px 2px 10px;
+    gap:8px;
+  }
+
+  .kort{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    grid-template-columns:20px minmax(0,1fr);
+    gap:9px;
+    padding:12px 10px;
+    border-radius:11px;
+  }
+  .kort > *{min-width:0}
+
+  .kortmeta{
+    gap:7px;
+    margin-bottom:6px;
+  }
+  .område{
+    flex:1 1 150px;
+    min-width:0;
+  }
+  .poäng{
+    margin-left:0;
+  }
+
+  .kroppen{
+    min-width:0;
+    max-width:100%;
+    font-size:14px;
+    line-height:1.58;
+    overflow-wrap:anywhere;
+  }
+  .kroppen p,
+  .kroppen li{
+    max-width:100%;
+  }
+
+  /* .fig är ofta ett span i uppgiftsbanken.
+     Som block kan dess maxbredd faktiskt begränsa SVG:n på telefon. */
+  .kroppen .fig{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    margin:10px 0!important;
+    overflow:hidden;
+  }
+  .kroppen .fig.smal,
+  .kroppen .fig.bred{
+    width:100%!important;
+    max-width:100%!important;
+  }
+  .kroppen .fig svg,
+  .kroppen .fig img,
+  .kroppen svg,
+  .kroppen img{
+    display:block!important;
+    width:auto!important;
+    max-width:100%!important;
+    height:auto!important;
+    margin-left:0!important;
+    margin-right:auto!important;
+  }
+
+  /* Manuellt storleksändrade bilder får aldrig tvinga sidan bredare än skärmen. */
+  .kroppen .fig[style*="width"],
+  .kroppen .fig[data-bildskala]{
+    width:100%!important;
+    max-width:100%!important;
+  }
+  .kroppen .fig[style*="width"] svg,
+  .kroppen .fig[style*="width"] img,
+  .kroppen .fig[data-bildskala] svg,
+  .kroppen .fig[data-bildskala] img{
+    width:100%!important;
+    max-width:100%!important;
+  }
+
+  table.data{
+    display:block;
+    width:100%;
+    max-width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .facit{
+    max-width:100%;
+    overflow-x:auto;
+  }
+
+  .höger{
+    overflow:hidden;
+  }
+  .bladlista,
+  .bladtopp,
+  .mätare,
+  .bladfot{
+    min-width:0;
+    max-width:100%;
+  }
+  .exportrad{
+    flex-wrap:wrap;
+  }
+  .exportrad .knapp{
+    flex:1 1 140px;
+  }
+}
+
+@media (max-width:390px){
+  .mitten{padding-left:6px;padding-right:6px}
+  .kort{padding:11px 8px;gap:8px}
+  .kroppen{font-size:13.5px}
+  .mittopp .kryss{padding-right:9px}
+}
+
 </style>
 <!-- KaTeX för matematikrendering -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
