@@ -1,7 +1,7 @@
 /* strukturmato2.js — Matematik – fortsättning nivå 2.
-   Strukturen följer i första hand bokens kapitelordning och underrubriker,
-   men är filtrerad mot centralt innehåll i aktuell ämnesplan.
-   I uppgiftsbanken visas spåret som 2c. */
+   Förenklad struktur med färre, bredare områden.
+   Kapitelordningen följer boken och innehållet är filtrerat mot aktuell ämnesplan.
+   Mer detaljerade uppgiftstyper finns kvar i familj-taggarna. */
 
 window.KAPNAMNMATO2 = {
   "1": "Trigonometri",
@@ -12,61 +12,33 @@ window.KAPNAMNMATO2 = {
 
 window.OMRMATO2 = {
   "1": {
-    "enhetscirkeln": "Enhetscirkeln och trigonometriska värden",
-    "trig_ekvationer_grunder": "Trigonometriska ekvationer – grunder",
-    "symmetrier_enhetscirkeln": "Symmetrier i enhetscirkeln",
-    "trig_ettan": "Trigonometriska ettan",
-    "additionsformler": "Additions- och subtraktionsformler",
-    "dubbla_vinkeln": "Formler för dubbla vinkeln",
-    "trig_identiteter": "Trigonometriska identiteter och bevis",
-    "sinus_cosinusfunktioner": "Sinus- och cosinusfunktioner",
+    "enhetscirkeln": "Enhetscirkeln",
+    "trig_formler": "Trigonometriska formler",
     "trig_ekvationer": "Trigonometriska ekvationer",
-    "bestamma_trig_funktion": "Bestämma trigonometriska funktioner",
-    "fasforskjutning": "Fasförskjutning och graftransformationer",
-    "sinus_cosinus_kombination": "Uttryck av typen a sin x + b cos x",
-    "tangensfunktionen": "Tangensfunktionen",
+    "trig_funktioner": "Trigonometriska funktioner",
     "radianer": "Radianer",
-    "trig_modeller": "Trigonometriska modeller och tillämpningar"
+    "trig_modeller": "Tillämpningar och modeller"
   },
   "2": {
-    "deriveringsregler_repetition": "Repetition av deriveringsregler",
-    "sammansatta_funktioner": "Sammansatta funktioner",
-    "logaritmfunktioner": "Logaritmfunktioner",
-    "derivata_sin_cos": "Derivatan av sinus, cosinus och tangens",
-    "kedjeregeln": "Kedjeregeln",
-    "produktregeln": "Produktregeln",
-    "kvotregeln": "Kvotregeln",
-    "derivata_exp_log": "Derivatan av exponential- och logaritmfunktioner",
-    "derivata_grafer": "Derivata och grafer",
-    "tillampningar_derivata": "Tillämpningar av deriveringsregler",
-    "grafskissning": "Skissa grafer med derivata",
-    "asymptoter": "Asymptoter och dominerande termer"
+    "deriveringsregler": "Deriveringsregler",
+    "kedjeregel_sammansatta": "Sammansatta funktioner och kedjeregeln",
+    "derivator_specialfunktioner": "Derivata av exponential-, logaritm- och trigonometriska funktioner",
+    "tillampningar_derivata": "Tillämpningar av derivata",
+    "grafer_asymptoter": "Grafer och asymptoter"
   },
   "3": {
-    "primitiva_funktioner": "Primitiva funktioner",
-    "integralberakning": "Integralberäkningar",
-    "area_integraler": "Integraler och area",
-    "area_mellan_kurvor": "Area mellan kurvor",
-    "integraler_storheter": "Integraler och beräkning av storheter",
-    "tathetsfunktioner": "Täthetsfunktioner",
-    "sannolikhetsfordelning": "Sannolikhetsfördelningar med integraler",
-    "rotationsvolymer": "Rotationsvolymer",
-    "integral_modellering": "Integraler i modellering och problemlösning"
+    "integralberakning": "Primitiva funktioner och integralberäkningar",
+    "area_integraler": "Area med integraler",
+    "integral_tillampningar": "Integraler i tillämpningar",
+    "sannolikhetsintegraler": "Täthetsfunktioner och sannolikhet",
+    "rotationsvolymer": "Rotationsvolymer"
   },
   "4": {
-    "imaginara_enheten": "Den imaginära enheten",
-    "rakning_komplexa": "Räkning med komplexa tal",
-    "konjugat_absolutbelopp": "Konjugat och absolutbelopp",
+    "komplex_aritmetik": "Räkning med komplexa tal",
     "komplexa_talplanet": "Det komplexa talplanet",
-    "polar_form": "Polär form",
-    "rakning_polar_form": "Multiplikation och division i polär form",
-    "de_moivre": "de Moivres formel",
-    "potensekvationer_komplexa": "Potensekvationer med komplexa tal",
-    "eulers_formel": "Eulers formel",
-    "polynomdivision": "Polynomdivision",
-    "faktorsatsen": "Faktorsatsen",
-    "polynomekvationer": "Polynomekvationer",
-    "komplexa_losningar": "Komplexa lösningar till ekvationer"
+    "polar_exponentiell": "Polär och exponentiell form",
+    "potenser_rotter": "Potenser och rötter",
+    "polynom_komplexa": "Polynom och komplexa lösningar"
   }
 };
 
