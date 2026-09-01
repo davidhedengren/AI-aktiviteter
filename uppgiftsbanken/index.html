@@ -1756,9 +1756,9 @@ body.password-locked > :not(#passwordGate){visibility:hidden}
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
 </head>
-<body>
+<body class="password-locked">
 
-<section class="password-gate" id="passwordGate" hidden aria-labelledby="passwordTitle">
+<section class="password-gate" id="passwordGate" aria-labelledby="passwordTitle">
   <form class="password-card" id="passwordForm">
     <div class="password-brand">
       <img src="logo.png" alt="Erik Dahlbergsgymnasiet">
@@ -2143,7 +2143,7 @@ const KURSER=[
     globaler:{bank:'BANKMA2',kapnamn:'KAPNAMNMA2',kapnamnSpar:'KAPNAMNMA2SPAR',omr:'OMRMA2',spar:'SPARMA2',grupp:'GRUPPMA2'}
   },
   {
-    id:'mato1', underUppbyggnad:true, titel:'Matematik – fortsättning nivå 1', siffra:'1', färg:'#2C62A8',
+    id:'mato1', titel:'Matematik – fortsättning nivå 1', siffra:'1', färg:'#2C62A8',
     rygg:'linear-gradient(#2E7D52 0 50%,#2C62A8 50% 100%)',
     spår:[
       {id:'1b',etikett:'1b',färg:'#2E7D52'},
