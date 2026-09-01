@@ -1,5 +1,7 @@
 /* uppgiftermato2.js — Matematik – fortsättning nivå 2.
-   Kvalitetsgranskad version: tydligare språk och utförligare facit. */
+   Utbyggd med 48 problemlösningsuppgifter på främst C- och A-nivå.
+   Språket är granskat för att matematiken, inte ovanliga ord, ska stå för svårigheten.
+   Facit innehåller centrala metodval och viktiga mellanled. */
 
 window.BANKMATO2 = [
   {
@@ -135,6 +137,19 @@ window.BANKMATO2 = [
   {
     "id": "1.11",
     "kap": 1,
+    "omr": "trig_modeller",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Grafen visar höjden för en stol på en roterande åkattraktion under ett varv.</p><span class=\"fig\"><svg width=\"450\" height=\"250\" viewBox=\"0 0 450 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"448\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"212\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"147.0\" y1=\"20\" x2=\"147.0\" y2=\"212\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"242.0\" y1=\"20\" x2=\"242.0\" y2=\"212\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"337.0\" y1=\"20\" x2=\"337.0\" y2=\"212\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"432.0\" y1=\"20\" x2=\"432.0\" y2=\"212\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"188.0\" x2=\"432\" y2=\"188.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"152.0\" x2=\"432\" y2=\"152.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"116.0\" x2=\"432\" y2=\"116.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"80.0\" x2=\"432\" y2=\"80.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"44.0\" x2=\"432\" y2=\"44.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"212\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"52\" y1=\"212.0\" x2=\"432\" y2=\"212.0\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<text x=\"52.0\" y=\"236\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">0</text>\n<text x=\"147.0\" y=\"236\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">3</text>\n<text x=\"242.0\" y=\"236\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">6</text>\n<text x=\"337.0\" y=\"236\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">9</text>\n<text x=\"432.0\" y=\"236\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">12</text>\n<text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">2</text>\n<text x=\"44\" y=\"120.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">8</text>\n<text x=\"44\" y=\"48.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">14</text>\n<path d=\"M52.0,116.0 L53.6,114.1 L55.2,112.2 L56.8,110.4 L58.3,108.5 L59.9,106.6 L61.5,104.7 L63.1,102.9 L64.7,101.0 L66.2,99.2 L67.8,97.4 L69.4,95.6 L71.0,93.8 L72.6,92.0 L74.2,90.2 L75.8,88.4 L77.3,86.7 L78.9,85.0 L80.5,83.3 L82.1,81.6 L83.7,80.0 L85.2,78.4 L86.8,76.8 L88.4,75.2 L90.0,73.7 L91.6,72.2 L93.2,70.7 L94.8,69.2 L96.3,67.8 L97.9,66.4 L99.5,65.1 L101.1,63.8 L102.7,62.5 L104.2,61.3 L105.8,60.0 L107.4,58.9 L109.0,57.8 L110.6,56.7 L112.2,55.6 L113.8,54.6 L115.3,53.6 L116.9,52.7 L118.5,51.8 L120.1,51.0 L121.7,50.2 L123.2,49.5 L124.8,48.8 L126.4,48.1 L128.0,47.5 L129.6,47.0 L131.2,46.5 L132.8,46.0 L134.3,45.6 L135.9,45.2 L137.5,44.9 L139.1,44.6 L140.7,44.4 L142.2,44.2 L143.8,44.1 L145.4,44.0 L147.0,44.0 L148.6,44.0 L150.2,44.1 L151.8,44.2 L153.3,44.4 L154.9,44.6 L156.5,44.9 L158.1,45.2 L159.7,45.6 L161.2,46.0 L162.8,46.5 L164.4,47.0 L166.0,47.5 L167.6,48.1 L169.2,48.8 L170.8,49.5 L172.3,50.2 L173.9,51.0 L175.5,51.8 L177.1,52.7 L178.7,53.6 L180.2,54.6 L181.8,55.6 L183.4,56.7 L185.0,57.8 L186.6,58.9 L188.2,60.0 L189.8,61.3 L191.3,62.5 L192.9,63.8 L194.5,65.1 L196.1,66.4 L197.7,67.8 L199.2,69.2 L200.8,70.7 L202.4,72.2 L204.0,73.7 L205.6,75.2 L207.2,76.8 L208.8,78.4 L210.3,80.0 L211.9,81.6 L213.5,83.3 L215.1,85.0 L216.7,86.7 L218.2,88.4 L219.8,90.2 L221.4,92.0 L223.0,93.8 L224.6,95.6 L226.2,97.4 L227.8,99.2 L229.3,101.0 L230.9,102.9 L232.5,104.7 L234.1,106.6 L235.7,108.5 L237.2,110.4 L238.8,112.2 L240.4,114.1 L242.0,116.0 L243.6,117.9 L245.2,119.8 L246.8,121.6 L248.3,123.5 L249.9,125.4 L251.5,127.3 L253.1,129.1 L254.7,131.0 L256.2,132.8 L257.8,134.6 L259.4,136.4 L261.0,138.2 L262.6,140.0 L264.2,141.8 L265.8,143.6 L267.3,145.3 L268.9,147.0 L270.5,148.7 L272.1,150.4 L273.7,152.0 L275.2,153.6 L276.8,155.2 L278.4,156.8 L280.0,158.3 L281.6,159.8 L283.2,161.3 L284.8,162.8 L286.3,164.2 L287.9,165.6 L289.5,166.9 L291.1,168.2 L292.7,169.5 L294.2,170.7 L295.8,172.0 L297.4,173.1 L299.0,174.2 L300.6,175.3 L302.2,176.4 L303.8,177.4 L305.3,178.4 L306.9,179.3 L308.5,180.2 L310.1,181.0 L311.7,181.8 L313.2,182.5 L314.8,183.2 L316.4,183.9 L318.0,184.5 L319.6,185.0 L321.2,185.5 L322.8,186.0 L324.3,186.4 L325.9,186.8 L327.5,187.1 L329.1,187.4 L330.7,187.6 L332.2,187.8 L333.8,187.9 L335.4,188.0 L337.0,188.0 L338.6,188.0 L340.2,187.9 L341.8,187.8 L343.3,187.6 L344.9,187.4 L346.5,187.1 L348.1,186.8 L349.7,186.4 L351.2,186.0 L352.8,185.5 L354.4,185.0 L356.0,184.5 L357.6,183.9 L359.2,183.2 L360.8,182.5 L362.3,181.8 L363.9,181.0 L365.5,180.2 L367.1,179.3 L368.7,178.4 L370.2,177.4 L371.8,176.4 L373.4,175.3 L375.0,174.2 L376.6,173.1 L378.2,172.0 L379.8,170.7 L381.3,169.5 L382.9,168.2 L384.5,166.9 L386.1,165.6 L387.7,164.2 L389.2,162.8 L390.8,161.3 L392.4,159.8 L394.0,158.3 L395.6,156.8 L397.2,155.2 L398.8,153.6 L400.3,152.0 L401.9,150.4 L403.5,148.7 L405.1,147.0 L406.7,145.3 L408.2,143.6 L409.8,141.8 L411.4,140.0 L413.0,138.2 L414.6,136.4 L416.2,134.6 L417.8,132.8 L419.3,131.0 L420.9,129.1 L422.5,127.3 L424.1,125.4 L425.7,123.5 L427.2,121.6 L428.8,119.8 L430.4,117.9 L432.0,116.0\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\"/>\n<text x=\"420\" y=\"225\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">tid (s)</text><text x=\"64\" y=\"32\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">höjd (m)</text>\n</svg></span><p>a) Bestäm en funktion på formen \\(h(t)=A\\sin(kt)+B\\) som beskriver grafen.<br>b) Under hur lång tid av ett varv är höjden större än 11 m?</p>",
+    "s": "<p><strong>Idé:</strong> Läs först av medellinje, amplitud och period från grafen.</p><p>Största värdet är 14 och minsta är 2. Därför är</p><p>\\[A=\\frac{14-2}{2}=6,\\qquad B=\\frac{14+2}{2}=8.\\]</p><p>Perioden är 12 s, alltså</p><p>\\[k=\\frac{2\\pi}{12}=\\frac{\\pi}{6}.\\]</p><p>Grafen startar i medellinjen och stiger, så en möjlig modell är</p><p>\\[\\boxed{h(t)=8+6\\sin\\left(\\frac{\\pi t}{6}\\right)}.\\]</p><p>För b) löser vi</p><p>\\[8+6\\sin\\left(\\frac{\\pi t}{6}\\right)>11\\]</p><p>vilket ger \\(\\sin(\\pi t/6)>1/2\\). Under ett varv gäller då</p><p>\\[1<t<5.\\]</p><p><strong>Höjden är alltså större än 11 m under 4 sekunder.</strong></p>",
+    "familj": "problem_trig_akattraktion"
+  },
+  {
+    "id": "1.12",
+    "kap": 1,
     "omr": "enhetscirkeln",
     "kurs": [
       "2c"
@@ -146,7 +161,7 @@ window.BANKMATO2 = [
     "familj": "proc_enhetscirkel_grader_2"
   },
   {
-    "id": "1.12",
+    "id": "1.13",
     "kap": 1,
     "omr": "bestamma_trig_funktion",
     "kurs": [
@@ -159,7 +174,7 @@ window.BANKMATO2 = [
     "familj": "sinusfunktion_extrempunkter_a"
   },
   {
-    "id": "1.13",
+    "id": "1.14",
     "kap": 1,
     "omr": "bestamma_trig_funktion",
     "kurs": [
@@ -172,7 +187,7 @@ window.BANKMATO2 = [
     "familj": "sinusfunktion_fran_graf"
   },
   {
-    "id": "1.14",
+    "id": "1.15",
     "kap": 1,
     "omr": "trig_ekvationer",
     "kurs": [
@@ -185,7 +200,7 @@ window.BANKMATO2 = [
     "familj": "trig_parameter_antal_amplitud"
   },
   {
-    "id": "1.15",
+    "id": "1.16",
     "kap": 1,
     "omr": "trig_ekvationer_grunder",
     "kurs": [
@@ -198,7 +213,7 @@ window.BANKMATO2 = [
     "familj": "trigekv_grunder_mix4"
   },
   {
-    "id": "1.16",
+    "id": "1.17",
     "kap": 1,
     "omr": "fasforskjutning",
     "kurs": [
@@ -211,7 +226,7 @@ window.BANKMATO2 = [
     "familj": "fasforskjutning_egenskaper"
   },
   {
-    "id": "1.17",
+    "id": "1.18",
     "kap": 1,
     "omr": "symmetrier_enhetscirkeln",
     "kurs": [
@@ -224,7 +239,7 @@ window.BANKMATO2 = [
     "familj": "proc_symmetrier_periodicitet_2"
   },
   {
-    "id": "1.18",
+    "id": "1.19",
     "kap": 1,
     "omr": "symmetrier_enhetscirkeln",
     "kurs": [
@@ -237,7 +252,7 @@ window.BANKMATO2 = [
     "familj": "enhetscirkel_symmetri_3_4_5"
   },
   {
-    "id": "1.19",
+    "id": "1.20",
     "kap": 1,
     "omr": "additionsformler",
     "kurs": [
@@ -250,7 +265,20 @@ window.BANKMATO2 = [
     "familj": "proc_additionsformler_utveckla"
   },
   {
-    "id": "1.20",
+    "id": "1.21",
+    "kap": 1,
+    "omr": "tangensfunktionen",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>En strålkastare står 8 m från en rak vägg. När strålen har vridits vinkeln \\(\\theta\\) från riktningen rakt mot väggen träffar ljuspunkten väggen \\(x\\) meter från mittpunkten.</p><span class=\"fig\"><svg width=\"430\" height=\"235\" viewBox=\"0 0 430 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"428\" height=\"233\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n\n<line x1=\"75\" y1=\"45\" x2=\"355\" y2=\"45\" stroke=\"#2B2527\" stroke-width=\"5\"/>\n<text x=\"215\" y=\"30\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">vägg</text>\n<circle cx=\"215\" cy=\"175\" r=\"12\" fill=\"#EDEEF1\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"215\" y1=\"175\" x2=\"215\" y2=\"45\" stroke=\"#7B858A\" stroke-width=\"1.6\" stroke-dasharray=\"5 4\"/>\n<line x1=\"215\" y1=\"175\" x2=\"315\" y2=\"45\" stroke=\"#B43123\" stroke-width=\"2.4\"/>\n<path d=\"M215 143 A32 32 0 0 1 235 150\" fill=\"none\" stroke=\"#268FA3\" stroke-width=\"2\"/>\n<text x=\"239\" y=\"145\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#268FA3\">θ</text>\n<line x1=\"225\" y1=\"175\" x2=\"225\" y2=\"45\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<text x=\"235\" y=\"112\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">8 m</text>\n<line x1=\"215\" y1=\"60\" x2=\"315\" y2=\"60\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<text x=\"265\" y=\"77\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">x</text>\n<circle cx=\"315\" cy=\"45\" r=\"5\" fill=\"#B43123\"/>\n\n</svg></span><p>a) Visa att \\(x=8\\tan\\theta\\).<br>b) Strålkastaren vrids med konstant vinkelhastighet \\(\\pi/12\\) rad/s från \\(\\theta=0\\). Hur lång tid tar det innan ljuspunkten för första gången är 12 m från mittpunkten?</p>",
+    "s": "<p>a) Figuren ger en rätvinklig triangel där den närliggande kateten är 8 och den motstående är \\(x\\). Därför</p><p>\\[\\tan\\theta=\\frac{x}{8}\\Rightarrow \\boxed{x=8\\tan\\theta}.\\]</p><p>b) Sätt \\(x=12\\):</p><p>\\[12=8\\tan\\theta\\Rightarrow \\tan\\theta=1,5.\\]</p><p>Första positiva vinkeln är</p><p>\\[\\theta=\\arctan(1,5)\\approx0,9828.\\]</p><p>Vinkeln efter \\(t\\) sekunder är \\(\\theta=(\\pi/12)t\\). Alltså</p><p>\\[t=\\frac{12\\theta}{\\pi}\\approx\\frac{12\\cdot0,9828}{\\pi}\\approx3,75.\\]</p><p><strong>Det tar cirka 3,75 s.</strong></p>",
+    "familj": "problem_trig_stralkastare"
+  },
+  {
+    "id": "1.22",
     "kap": 1,
     "omr": "trig_ekvationer",
     "kurs": [
@@ -263,7 +291,7 @@ window.BANKMATO2 = [
     "familj": "proc_trigekv_multiple_argument"
   },
   {
-    "id": "1.21",
+    "id": "1.23",
     "kap": 1,
     "omr": "fasforskjutning",
     "kurs": [
@@ -276,7 +304,7 @@ window.BANKMATO2 = [
     "familj": "fas_transformation_e"
   },
   {
-    "id": "1.22",
+    "id": "1.24",
     "kap": 1,
     "omr": "trig_ekvationer",
     "kurs": [
@@ -289,7 +317,7 @@ window.BANKMATO2 = [
     "familj": "trig_parameter_sin_kvadrat_antal"
   },
   {
-    "id": "1.23",
+    "id": "1.25",
     "kap": 1,
     "omr": "trig_ettan",
     "kurs": [
@@ -302,7 +330,7 @@ window.BANKMATO2 = [
     "familj": "proc_trigettan_forenkla_3"
   },
   {
-    "id": "1.24",
+    "id": "1.26",
     "kap": 1,
     "omr": "enhetscirkeln",
     "kurs": [
@@ -315,7 +343,7 @@ window.BANKMATO2 = [
     "familj": "enhetscirkel_avlasning"
   },
   {
-    "id": "1.25",
+    "id": "1.27",
     "kap": 1,
     "omr": "radianer",
     "kurs": [
@@ -328,7 +356,7 @@ window.BANKMATO2 = [
     "familj": "radianer_omvandling"
   },
   {
-    "id": "1.26",
+    "id": "1.28",
     "kap": 1,
     "omr": "trig_identiteter",
     "kurs": [
@@ -341,7 +369,7 @@ window.BANKMATO2 = [
     "familj": "identitet_dubbelvinkel_tan"
   },
   {
-    "id": "1.27",
+    "id": "1.29",
     "kap": 1,
     "omr": "additionsformler",
     "kurs": [
@@ -354,7 +382,7 @@ window.BANKMATO2 = [
     "familj": "proc_additionsformler_15_75"
   },
   {
-    "id": "1.28",
+    "id": "1.30",
     "kap": 1,
     "omr": "tangensfunktionen",
     "kurs": [
@@ -367,7 +395,7 @@ window.BANKMATO2 = [
     "familj": "tangens_2x_e"
   },
   {
-    "id": "1.29",
+    "id": "1.31",
     "kap": 1,
     "omr": "trig_ettan",
     "kurs": [
@@ -380,7 +408,20 @@ window.BANKMATO2 = [
     "familj": "proc_trigettan_kvadrant_2"
   },
   {
-    "id": "1.30",
+    "id": "1.32",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>Ekvationen</p><p>\\[\\sin 2x=a\\sin x\\]</p><p>studeras i intervallet \\(0\\le x<2\\pi\\), där \\(a\\) är ett reellt tal.</p><p>Bestäm alla värden på \\(a\\) som gör att ekvationen har exakt fyra olika lösningar i intervallet. Motivera.</p>",
+    "s": "<p><strong>Nyckelsteg:</strong> Använd formeln \\(\\sin 2x=2\\sin x\\cos x\\) och faktorisera.</p><p>\\[2\\sin x\\cos x=a\\sin x\\]</p><p>\\[\\sin x(2\\cos x-a)=0.\\]</p><p>Den första faktorn ger alltid</p><p>\\[x=0\\quad\\text{eller}\\quad x=\\pi,\\]</p><p>alltså två lösningar.</p><p>Den andra faktorn ger</p><p>\\[\\cos x=\\frac a2.\\]</p><p>Den ekvationen har två ytterligare lösningar i \\(0\\le x<2\\pi\\) precis när</p><p>\\[\\left|\\frac a2\\right|<1.\\]</p><p>Vid \\(a=2\\) blir den nya lösningen \\(x=0\\), som redan finns, och vid \\(a=-2\\) blir den \\(x=\\pi\\), som också redan finns. För \\(|a|>2\\) saknas lösningar från den andra faktorn.</p><p><strong>Alltså fås exakt fyra olika lösningar när \\(\\boxed{-2<a<2}\\).</strong></p>",
+    "familj": "problem_trig_parameter_antal_losningar"
+  },
+  {
+    "id": "1.33",
     "kap": 1,
     "omr": "additionsformler",
     "kurs": [
@@ -393,7 +434,7 @@ window.BANKMATO2 = [
     "familj": "additionsformel_exakta_varden"
   },
   {
-    "id": "1.31",
+    "id": "1.34",
     "kap": 1,
     "omr": "symmetrier_enhetscirkeln",
     "kurs": [
@@ -406,7 +447,7 @@ window.BANKMATO2 = [
     "familj": "proc_trig_symmetrier_1"
   },
   {
-    "id": "1.32",
+    "id": "1.35",
     "kap": 1,
     "omr": "sinus_cosinusfunktioner",
     "kurs": [
@@ -419,7 +460,7 @@ window.BANKMATO2 = [
     "familj": "proc_trigfunktion_max_min"
   },
   {
-    "id": "1.33",
+    "id": "1.36",
     "kap": 1,
     "omr": "trig_ettan",
     "kurs": [
@@ -432,7 +473,7 @@ window.BANKMATO2 = [
     "familj": "trigettan_kvadranter_rutin"
   },
   {
-    "id": "1.34",
+    "id": "1.37",
     "kap": 1,
     "omr": "fasforskjutning",
     "kurs": [
@@ -445,7 +486,7 @@ window.BANKMATO2 = [
     "familj": "fas_graf"
   },
   {
-    "id": "1.35",
+    "id": "1.38",
     "kap": 1,
     "omr": "additionsformler",
     "kurs": [
@@ -458,7 +499,7 @@ window.BANKMATO2 = [
     "familj": "proc_additionsformler_exakt_2"
   },
   {
-    "id": "1.36",
+    "id": "1.39",
     "kap": 1,
     "omr": "additionsformler",
     "kurs": [
@@ -471,7 +512,7 @@ window.BANKMATO2 = [
     "familj": "addition_exakta_15_75_105"
   },
   {
-    "id": "1.37",
+    "id": "1.40",
     "kap": 1,
     "omr": "radianer",
     "kurs": [
@@ -484,7 +525,7 @@ window.BANKMATO2 = [
     "familj": "radian_baglangd_svg"
   },
   {
-    "id": "1.38",
+    "id": "1.41",
     "kap": 1,
     "omr": "additionsformler",
     "kurs": [
@@ -497,7 +538,20 @@ window.BANKMATO2 = [
     "familj": "addition_rutin_exakt"
   },
   {
-    "id": "1.39",
+    "id": "1.42",
+    "kap": 1,
+    "omr": "trig_identiteter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Visa att</p><p>\\[\\frac{1-\\cos 2x}{\\sin 2x}=\\tan x\\]</p><p>för alla \\(x\\) där vänsterledet är definierat.</p>",
+    "s": "<p><strong>Idé:</strong> Skriv både täljaren och nämnaren med formler för dubbla vinkeln.</p><p>\\[1-\\cos 2x=1-(1-2\\sin^2x)=2\\sin^2x\\]</p><p>och</p><p>\\[\\sin 2x=2\\sin x\\cos x.\\]</p><p>Därför</p><p>\\[\\frac{1-\\cos 2x}{\\sin 2x}=\\frac{2\\sin^2x}{2\\sin x\\cos x}=\\frac{\\sin x}{\\cos x}=\\tan x.\\]</p><p>Förenklingen är tillåten för de \\(x\\)-värden där ursprungsuttrycket är definierat.</p>",
+    "familj": "problem_trig_identitet_dubbel"
+  },
+  {
+    "id": "1.43",
     "kap": 1,
     "omr": "trig_identiteter",
     "kurs": [
@@ -510,7 +564,7 @@ window.BANKMATO2 = [
     "familj": "identitet_addition_symmetri"
   },
   {
-    "id": "1.40",
+    "id": "1.44",
     "kap": 1,
     "omr": "fasforskjutning",
     "kurs": [
@@ -523,7 +577,7 @@ window.BANKMATO2 = [
     "familj": "proc_fasforskjutning_las_av"
   },
   {
-    "id": "1.41",
+    "id": "1.45",
     "kap": 1,
     "omr": "additionsformler",
     "kurs": [
@@ -536,7 +590,7 @@ window.BANKMATO2 = [
     "familj": "proc_additionsformler_utveckla_2"
   },
   {
-    "id": "1.42",
+    "id": "1.46",
     "kap": 1,
     "omr": "radianer",
     "kurs": [
@@ -549,7 +603,7 @@ window.BANKMATO2 = [
     "familj": "proc_radian_grad_omvandling"
   },
   {
-    "id": "1.43",
+    "id": "1.47",
     "kap": 1,
     "omr": "trig_modeller",
     "kurs": [
@@ -562,7 +616,7 @@ window.BANKMATO2 = [
     "familj": "trigmodell_konsistens_a"
   },
   {
-    "id": "1.44",
+    "id": "1.48",
     "kap": 1,
     "omr": "sinus_cosinus_kombination",
     "kurs": [
@@ -575,7 +629,7 @@ window.BANKMATO2 = [
     "familj": "sin_cos_5_12_kombination"
   },
   {
-    "id": "1.45",
+    "id": "1.49",
     "kap": 1,
     "omr": "additionsformler",
     "kurs": [
@@ -588,7 +642,7 @@ window.BANKMATO2 = [
     "familj": "additionsformler_exakta_varden"
   },
   {
-    "id": "1.46",
+    "id": "1.50",
     "kap": 1,
     "omr": "trig_identiteter",
     "kurs": [
@@ -601,7 +655,7 @@ window.BANKMATO2 = [
     "familj": "identitet_domän_a"
   },
   {
-    "id": "1.47",
+    "id": "1.51",
     "kap": 1,
     "omr": "dubbla_vinkeln",
     "kurs": [
@@ -614,7 +668,7 @@ window.BANKMATO2 = [
     "familj": "proc_dubbelvinkel_standard_2"
   },
   {
-    "id": "1.48",
+    "id": "1.52",
     "kap": 1,
     "omr": "trig_ekvationer",
     "kurs": [
@@ -627,7 +681,20 @@ window.BANKMATO2 = [
     "familj": "trigekv_faktorisering_sin2x"
   },
   {
-    "id": "1.49",
+    "id": "1.53",
+    "kap": 1,
+    "omr": "bestamma_trig_funktion",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Grafen visar en funktion \\(f(x)=A\\cos(kx)+B\\).</p><span class=\"fig\"><svg width=\"450\" height=\"250\" viewBox=\"0 0 450 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"448\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"212\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"147.0\" y1=\"20\" x2=\"147.0\" y2=\"212\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"242.0\" y1=\"20\" x2=\"242.0\" y2=\"212\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"337.0\" y1=\"20\" x2=\"337.0\" y2=\"212\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"432.0\" y1=\"20\" x2=\"432.0\" y2=\"212\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"188.0\" x2=\"432\" y2=\"188.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"164.0\" x2=\"432\" y2=\"164.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"116.0\" x2=\"432\" y2=\"116.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"44.0\" x2=\"432\" y2=\"44.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"212\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"52\" y1=\"164.0\" x2=\"432\" y2=\"164.0\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<text x=\"52.0\" y=\"236\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">0</text>\n<text x=\"147.0\" y=\"236\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">π</text>\n<text x=\"242.0\" y=\"236\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">2π</text>\n<text x=\"337.0\" y=\"236\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">3π</text>\n<text x=\"432.0\" y=\"236\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">4π</text>\n<text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">−1</text>\n<text x=\"44\" y=\"120.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">2</text>\n<text x=\"44\" y=\"48.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">5</text>\n<path d=\"M52.0,44.0 L53.6,44.0 L55.2,44.1 L56.8,44.2 L58.3,44.4 L59.9,44.6 L61.5,44.9 L63.1,45.2 L64.7,45.6 L66.2,46.0 L67.8,46.5 L69.4,47.0 L71.0,47.5 L72.6,48.1 L74.2,48.8 L75.8,49.5 L77.3,50.2 L78.9,51.0 L80.5,51.8 L82.1,52.7 L83.7,53.6 L85.2,54.6 L86.8,55.6 L88.4,56.7 L90.0,57.8 L91.6,58.9 L93.2,60.0 L94.8,61.3 L96.3,62.5 L97.9,63.8 L99.5,65.1 L101.1,66.4 L102.7,67.8 L104.2,69.2 L105.8,70.7 L107.4,72.2 L109.0,73.7 L110.6,75.2 L112.2,76.8 L113.8,78.4 L115.3,80.0 L116.9,81.6 L118.5,83.3 L120.1,85.0 L121.7,86.7 L123.2,88.4 L124.8,90.2 L126.4,92.0 L128.0,93.8 L129.6,95.6 L131.2,97.4 L132.8,99.2 L134.3,101.0 L135.9,102.9 L137.5,104.7 L139.1,106.6 L140.7,108.5 L142.2,110.4 L143.8,112.2 L145.4,114.1 L147.0,116.0 L148.6,117.9 L150.2,119.8 L151.8,121.6 L153.3,123.5 L154.9,125.4 L156.5,127.3 L158.1,129.1 L159.7,131.0 L161.2,132.8 L162.8,134.6 L164.4,136.4 L166.0,138.2 L167.6,140.0 L169.2,141.8 L170.8,143.6 L172.3,145.3 L173.9,147.0 L175.5,148.7 L177.1,150.4 L178.7,152.0 L180.2,153.6 L181.8,155.2 L183.4,156.8 L185.0,158.3 L186.6,159.8 L188.2,161.3 L189.8,162.8 L191.3,164.2 L192.9,165.6 L194.5,166.9 L196.1,168.2 L197.7,169.5 L199.2,170.7 L200.8,172.0 L202.4,173.1 L204.0,174.2 L205.6,175.3 L207.2,176.4 L208.8,177.4 L210.3,178.4 L211.9,179.3 L213.5,180.2 L215.1,181.0 L216.7,181.8 L218.2,182.5 L219.8,183.2 L221.4,183.9 L223.0,184.5 L224.6,185.0 L226.2,185.5 L227.8,186.0 L229.3,186.4 L230.9,186.8 L232.5,187.1 L234.1,187.4 L235.7,187.6 L237.2,187.8 L238.8,187.9 L240.4,188.0 L242.0,188.0 L243.6,188.0 L245.2,187.9 L246.7,187.8 L248.3,187.6 L249.9,187.4 L251.5,187.1 L253.1,186.8 L254.7,186.4 L256.2,186.0 L257.8,185.5 L259.4,185.0 L261.0,184.5 L262.6,183.9 L264.2,183.2 L265.8,182.5 L267.3,181.8 L268.9,181.0 L270.5,180.2 L272.1,179.3 L273.7,178.4 L275.2,177.4 L276.8,176.4 L278.4,175.3 L280.0,174.2 L281.6,173.1 L283.2,172.0 L284.8,170.7 L286.3,169.5 L287.9,168.2 L289.5,166.9 L291.1,165.6 L292.7,164.2 L294.2,162.8 L295.8,161.3 L297.4,159.8 L299.0,158.3 L300.6,156.8 L302.2,155.2 L303.8,153.6 L305.3,152.0 L306.9,150.4 L308.5,148.7 L310.1,147.0 L311.7,145.3 L313.2,143.6 L314.8,141.8 L316.4,140.0 L318.0,138.2 L319.6,136.4 L321.2,134.6 L322.7,132.8 L324.3,131.0 L325.9,129.1 L327.5,127.3 L329.1,125.4 L330.7,123.5 L332.2,121.6 L333.8,119.8 L335.4,117.9 L337.0,116.0 L338.6,114.1 L340.2,112.2 L341.8,110.4 L343.3,108.5 L344.9,106.6 L346.5,104.7 L348.1,102.9 L349.7,101.0 L351.3,99.2 L352.8,97.4 L354.4,95.6 L356.0,93.8 L357.6,92.0 L359.2,90.2 L360.7,88.4 L362.3,86.7 L363.9,85.0 L365.5,83.3 L367.1,81.6 L368.7,80.0 L370.2,78.4 L371.8,76.8 L373.4,75.2 L375.0,73.7 L376.6,72.2 L378.2,70.7 L379.8,69.2 L381.3,67.8 L382.9,66.4 L384.5,65.1 L386.1,63.8 L387.7,62.5 L389.2,61.3 L390.8,60.0 L392.4,58.9 L394.0,57.8 L395.6,56.7 L397.2,55.6 L398.8,54.6 L400.3,53.6 L401.9,52.7 L403.5,51.8 L405.1,51.0 L406.7,50.2 L408.2,49.5 L409.8,48.8 L411.4,48.1 L413.0,47.5 L414.6,47.0 L416.2,46.5 L417.8,46.0 L419.3,45.6 L420.9,45.2 L422.5,44.9 L424.1,44.6 L425.7,44.4 L427.2,44.2 L428.8,44.1 L430.4,44.0 L432.0,44.0\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\"/>\n<text x=\"423\" y=\"224\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">x</text>\n</svg></span><p>a) Bestäm \\(A\\), \\(k\\) och \\(B\\).<br>b) Bestäm funktionens nollställen i intervallet \\(0\\le x\\le4\\pi\\). Svara med \\(\\arccos\\) eller med tre decimaler.</p>",
+    "s": "<p>a) Grafen har största värdet 5 och minsta värdet −1. Alltså</p><p>\\[A=\\frac{5-(-1)}2=3,\\qquad B=\\frac{5+(-1)}2=2.\\]</p><p>Avståndet mellan två toppar är \\(4\\pi\\), så perioden är \\(4\\pi\\). Därför</p><p>\\[k=\\frac{2\\pi}{4\\pi}=\\frac12.\\]</p><p>Eftersom grafen har en topp vid \\(x=0\\) blir</p><p>\\[\\boxed{f(x)=3\\cos(x/2)+2}.\\]</p><p>b) Nollställen fås ur</p><p>\\[3\\cos(x/2)+2=0\\Rightarrow \\cos(x/2)=-\\frac23.\\]</p><p>Sätt \\(\\alpha=\\arccos(-2/3)\\). Då ligger \\(x/2\\) i intervallet \\([0,2\\pi]\\), och lösningarna är</p><p>\\[\\frac x2=\\alpha\\quad\\text{eller}\\quad \\frac x2=2\\pi-\\alpha.\\]</p><p>Alltså</p><p>\\[\\boxed{x=2\\alpha\\ \\text{eller}\\ x=4\\pi-2\\alpha}.\\]</p><p>Numeriskt: \\(x\\approx4,601\\) och \\(x\\approx7,965\\).</p>",
+    "familj": "problem_trig_bestam_graf"
+  },
+  {
+    "id": "1.54",
     "kap": 1,
     "omr": "bestamma_trig_funktion",
     "kurs": [
@@ -640,7 +707,7 @@ window.BANKMATO2 = [
     "familj": "trigmodell_bestam"
   },
   {
-    "id": "1.50",
+    "id": "1.55",
     "kap": 1,
     "omr": "sinus_cosinus_kombination",
     "kurs": [
@@ -653,7 +720,7 @@ window.BANKMATO2 = [
     "familj": "asin_bcos_omskrivning"
   },
   {
-    "id": "1.51",
+    "id": "1.56",
     "kap": 1,
     "omr": "tangensfunktionen",
     "kurs": [
@@ -666,7 +733,7 @@ window.BANKMATO2 = [
     "familj": "tangens_period_asymptot"
   },
   {
-    "id": "1.52",
+    "id": "1.57",
     "kap": 1,
     "omr": "radianer",
     "kurs": [
@@ -679,7 +746,7 @@ window.BANKMATO2 = [
     "familj": "radian_rutin_flera"
   },
   {
-    "id": "1.53",
+    "id": "1.58",
     "kap": 1,
     "omr": "dubbla_vinkeln",
     "kurs": [
@@ -692,7 +759,7 @@ window.BANKMATO2 = [
     "familj": "proc_dubbelvinkel_berakna_2"
   },
   {
-    "id": "1.54",
+    "id": "1.59",
     "kap": 1,
     "omr": "sinus_cosinusfunktioner",
     "kurs": [
@@ -705,7 +772,7 @@ window.BANKMATO2 = [
     "familj": "triggraf_avlasning_amp_period_svg"
   },
   {
-    "id": "1.55",
+    "id": "1.60",
     "kap": 1,
     "omr": "trig_modeller",
     "kurs": [
@@ -718,7 +785,7 @@ window.BANKMATO2 = [
     "familj": "stralkastare_tangensmodell_svg"
   },
   {
-    "id": "1.56",
+    "id": "1.61",
     "kap": 1,
     "omr": "trig_ettan",
     "kurs": [
@@ -731,7 +798,7 @@ window.BANKMATO2 = [
     "familj": "trigettan_rutinpaket"
   },
   {
-    "id": "1.57",
+    "id": "1.62",
     "kap": 1,
     "omr": "symmetrier_enhetscirkeln",
     "kurs": [
@@ -744,7 +811,7 @@ window.BANKMATO2 = [
     "familj": "kvadrant_tecken_e"
   },
   {
-    "id": "1.58",
+    "id": "1.63",
     "kap": 1,
     "omr": "dubbla_vinkeln",
     "kurs": [
@@ -757,7 +824,20 @@ window.BANKMATO2 = [
     "familj": "dubbelvinkel_rutin"
   },
   {
-    "id": "1.59",
+    "id": "1.64",
+    "kap": 1,
+    "omr": "radianer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En cirkelsektor har radien 9 cm och båglängden 12 cm.</p><span class=\"fig\"><svg width=\"400\" height=\"250\" viewBox=\"0 0 400 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"398\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n\n<circle cx=\"170\" cy=\"150\" r=\"5\" fill=\"#2B2527\"/>\n<line x1=\"170\" y1=\"150\" x2=\"275\" y2=\"150\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"170\" y1=\"150\" x2=\"232\" y2=\"65\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<path d=\"M275 150 A105 105 0 0 0 232 65\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"4\"/>\n<path d=\"M205 150 A35 35 0 0 0 191 122\" fill=\"none\" stroke=\"#268FA3\" stroke-width=\"2\"/>\n<text x=\"206\" y=\"120\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#268FA3\">v</text>\n<text x=\"221\" y=\"166\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">9 cm</text>\n<text x=\"264\" y=\"94\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#B43123\">båglängd 12 cm</text>\n<line x1=\"275\" y1=\"150\" x2=\"232\" y2=\"65\" stroke=\"#268FA3\" stroke-width=\"1.5\" stroke-dasharray=\"5 4\"/>\n<text x=\"275\" y=\"111\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">rak sträcka</text>\n\n</svg></span><p>a) Bestäm medelpunktsvinkeln i radianer.<br>b) Bestäm längden på den raka sträckan mellan bågens ändpunkter. Svara med en decimal.</p>",
+    "s": "<p>a) För en vinkel i radianer gäller \\(s=rv\\). Därför</p><p>\\[v=\\frac sr=\\frac{12}{9}=\\boxed{\\frac43\\text{ rad}}.\\]</p><p>b) Radierna och den raka sträckan bildar en likbent triangel. Halverar vi triangeln får vi en rätvinklig triangel med vinkel \\(v/2=2/3\\). Halva den raka sträckan är därför</p><p>\\[9\\sin(2/3).\\]</p><p>Hela den raka sträckan blir</p><p>\\[2\\cdot9\\sin(2/3)\\approx11,1\\text{ cm}.\\]</p><p><strong>Den raka sträckan är cirka 11,1 cm.</strong></p>",
+    "familj": "problem_radian_korda"
+  },
+  {
+    "id": "1.65",
     "kap": 1,
     "omr": "trig_ekvationer_grunder",
     "kurs": [
@@ -770,7 +850,7 @@ window.BANKMATO2 = [
     "familj": "proc_trigekv_grader_standard_3"
   },
   {
-    "id": "1.60",
+    "id": "1.66",
     "kap": 1,
     "omr": "enhetscirkeln",
     "kurs": [
@@ -783,7 +863,7 @@ window.BANKMATO2 = [
     "familj": "enhetscirkel_tre_kvadranter_svg"
   },
   {
-    "id": "1.61",
+    "id": "1.67",
     "kap": 1,
     "omr": "trig_identiteter",
     "kurs": [
@@ -796,7 +876,7 @@ window.BANKMATO2 = [
     "familj": "kallmaterial_halvvinkel_bevis"
   },
   {
-    "id": "1.62",
+    "id": "1.68",
     "kap": 1,
     "omr": "trig_ekvationer",
     "kurs": [
@@ -809,7 +889,7 @@ window.BANKMATO2 = [
     "familj": "proc_trigekv_faktorisering"
   },
   {
-    "id": "1.63",
+    "id": "1.69",
     "kap": 1,
     "omr": "trig_ekvationer_grunder",
     "kurs": [
@@ -822,7 +902,7 @@ window.BANKMATO2 = [
     "familj": "proc_trigekv_generella_1"
   },
   {
-    "id": "1.64",
+    "id": "1.70",
     "kap": 1,
     "omr": "dubbla_vinkeln",
     "kurs": [
@@ -835,7 +915,7 @@ window.BANKMATO2 = [
     "familj": "proc_dubbla_vinkeln_standard"
   },
   {
-    "id": "1.65",
+    "id": "1.71",
     "kap": 1,
     "omr": "trig_ekvationer_grunder",
     "kurs": [
@@ -848,7 +928,7 @@ window.BANKMATO2 = [
     "familj": "proc_trigekv_radian_standard_3"
   },
   {
-    "id": "1.66",
+    "id": "1.72",
     "kap": 1,
     "omr": "sinus_cosinusfunktioner",
     "kurs": [
@@ -861,7 +941,7 @@ window.BANKMATO2 = [
     "familj": "sinus_egenskaper_rutin"
   },
   {
-    "id": "1.67",
+    "id": "1.73",
     "kap": 1,
     "omr": "tangensfunktionen",
     "kurs": [
@@ -874,7 +954,20 @@ window.BANKMATO2 = [
     "familj": "tangens_3x_rutin"
   },
   {
-    "id": "1.68",
+    "id": "1.74",
+    "kap": 1,
+    "omr": "fasforskjutning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "t": "<p>En funktion har formen</p><p>\\[f(x)=A\\sin(x+v)+B,\\qquad A>0.\\]</p><p>Funktionens största värde är 7 och minsta värde är −1. Dessutom gäller \\(f(0)=3\\) och grafen är växande vid \\(x=0\\).</p><p>Bestäm en möjlig formel för \\(f\\).</p>",
+    "s": "<p>Största och minsta värde ger amplitud och medellinje:</p><p>\\[A=\\frac{7-(-1)}2=4,\\qquad B=\\frac{7+(-1)}2=3.\\]</p><p>Alltså \\(f(x)=4\\sin(x+v)+3\\).</p><p>Villkoret \\(f(0)=3\\) ger</p><p>\\[4\\sin v+3=3\\Rightarrow \\sin v=0.\\]</p><p>Så \\(v=n\\pi\\). Men grafen är växande vid \\(x=0\\). Derivatan är</p><p>\\[f'(x)=4\\cos(x+v),\\]</p><p>så vi behöver \\(f'(0)=4\\cos v>0\\). Det gäller när \\(v\\) är en multipel av \\(2\\pi\\).</p><p>En enklaste möjlig formel är därför</p><p>\\[\\boxed{f(x)=4\\sin x+3}.\\]</p>",
+    "familj": "problem_trig_fas_villkor"
+  },
+  {
+    "id": "1.75",
     "kap": 1,
     "omr": "trig_identiteter",
     "kurs": [
@@ -887,7 +980,7 @@ window.BANKMATO2 = [
     "familj": "kallmaterial_identitet_dubbelvinkel"
   },
   {
-    "id": "1.69",
+    "id": "1.76",
     "kap": 1,
     "omr": "trig_modeller",
     "kurs": [
@@ -900,7 +993,7 @@ window.BANKMATO2 = [
     "familj": "trigmodell_graf_tröskel_a"
   },
   {
-    "id": "1.70",
+    "id": "1.77",
     "kap": 1,
     "omr": "bestamma_trig_funktion",
     "kurs": [
@@ -913,7 +1006,7 @@ window.BANKMATO2 = [
     "familj": "trigfunktion_extrempunkter"
   },
   {
-    "id": "1.71",
+    "id": "1.78",
     "kap": 1,
     "omr": "trig_ekvationer",
     "kurs": [
@@ -926,7 +1019,7 @@ window.BANKMATO2 = [
     "familj": "proc_trigekv_transformerade_2"
   },
   {
-    "id": "1.72",
+    "id": "1.79",
     "kap": 1,
     "omr": "trig_ekvationer",
     "kurs": [
@@ -939,7 +1032,7 @@ window.BANKMATO2 = [
     "familj": "trigekv_substitution"
   },
   {
-    "id": "1.73",
+    "id": "1.80",
     "kap": 1,
     "omr": "dubbla_vinkeln",
     "kurs": [
@@ -952,7 +1045,7 @@ window.BANKMATO2 = [
     "familj": "tan_till_dubbelvinkel"
   },
   {
-    "id": "1.74",
+    "id": "1.81",
     "kap": 1,
     "omr": "sinus_cosinus_kombination",
     "kurs": [
@@ -965,7 +1058,7 @@ window.BANKMATO2 = [
     "familj": "proc_asin_bcos_omskrivning"
   },
   {
-    "id": "1.75",
+    "id": "1.82",
     "kap": 1,
     "omr": "trig_ettan",
     "kurs": [
@@ -978,7 +1071,7 @@ window.BANKMATO2 = [
     "familj": "proc_trig_ettan_pythtriplar"
   },
   {
-    "id": "1.76",
+    "id": "1.83",
     "kap": 1,
     "omr": "radianer",
     "kurs": [
@@ -991,7 +1084,7 @@ window.BANKMATO2 = [
     "familj": "radian_grad_mix4"
   },
   {
-    "id": "1.77",
+    "id": "1.84",
     "kap": 1,
     "omr": "sinus_cosinusfunktioner",
     "kurs": [
@@ -1004,7 +1097,20 @@ window.BANKMATO2 = [
     "familj": "proc_trigfunktion_parametrar_3"
   },
   {
-    "id": "1.78",
+    "id": "1.85",
+    "kap": 1,
+    "omr": "additionsformler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>a) Bestäm det exakta värdet av \\(\\cos75^\\circ\\) med en additionsformel.<br>b) Bestäm därefter det exakta värdet av \\(\\sin15^\\circ\\).</p>",
+    "s": "<p>a) Skriv \\(75^\\circ=45^\\circ+30^\\circ\\):</p><p>\\[\\cos75^\\circ=\\cos45^\\circ\\cos30^\\circ-\\sin45^\\circ\\sin30^\\circ\\]</p><p>\\[=\\frac{\\sqrt2}{2}\\frac{\\sqrt3}{2}-\\frac{\\sqrt2}{2}\\frac12=\\boxed{\\frac{\\sqrt6-\\sqrt2}{4}}.\\]</p><p>b) Eftersom \\(\\sin15^\\circ=\\cos75^\\circ\\) fås</p><p>\\[\\boxed{\\sin15^\\circ=\\frac{\\sqrt6-\\sqrt2}{4}}.\\]</p>",
+    "familj": "problem_additionsformel_exakt"
+  },
+  {
+    "id": "1.86",
     "kap": 1,
     "omr": "radianer",
     "kurs": [
@@ -1017,7 +1123,7 @@ window.BANKMATO2 = [
     "familj": "radian_baglangd_sektor"
   },
   {
-    "id": "1.79",
+    "id": "1.87",
     "kap": 1,
     "omr": "trig_identiteter",
     "kurs": [
@@ -1030,7 +1136,7 @@ window.BANKMATO2 = [
     "familj": "identitet_dubbelvinkel"
   },
   {
-    "id": "1.80",
+    "id": "1.88",
     "kap": 1,
     "omr": "trig_modeller",
     "kurs": [
@@ -1043,7 +1149,7 @@ window.BANKMATO2 = [
     "familj": "trigmodell_andel_period"
   },
   {
-    "id": "1.81",
+    "id": "1.89",
     "kap": 1,
     "omr": "trig_ekvationer",
     "kurs": [
@@ -1056,7 +1162,7 @@ window.BANKMATO2 = [
     "familj": "trigekv_parameter_antal_losningar"
   },
   {
-    "id": "1.82",
+    "id": "1.90",
     "kap": 1,
     "omr": "trig_modeller",
     "kurs": [
@@ -1069,7 +1175,7 @@ window.BANKMATO2 = [
     "familj": "pariserhjul_modell_a"
   },
   {
-    "id": "1.83",
+    "id": "1.91",
     "kap": 1,
     "omr": "bestamma_trig_funktion",
     "kurs": [
@@ -1082,7 +1188,7 @@ window.BANKMATO2 = [
     "familj": "proc_bestamma_trig_funktion_2"
   },
   {
-    "id": "1.84",
+    "id": "1.92",
     "kap": 1,
     "omr": "trig_ekvationer_grunder",
     "kurs": [
@@ -1095,7 +1201,7 @@ window.BANKMATO2 = [
     "familj": "trigekv_grader_e2"
   },
   {
-    "id": "1.85",
+    "id": "1.93",
     "kap": 1,
     "omr": "sinus_cosinusfunktioner",
     "kurs": [
@@ -1108,7 +1214,7 @@ window.BANKMATO2 = [
     "familj": "sinusfunktion_egenskaper"
   },
   {
-    "id": "1.86",
+    "id": "1.94",
     "kap": 1,
     "omr": "trig_ekvationer",
     "kurs": [
@@ -1121,7 +1227,7 @@ window.BANKMATO2 = [
     "familj": "trigekvation_parameter_antal"
   },
   {
-    "id": "1.87",
+    "id": "1.95",
     "kap": 1,
     "omr": "enhetscirkeln",
     "kurs": [
@@ -1134,7 +1240,20 @@ window.BANKMATO2 = [
     "familj": "enhetscirkel_standardvarden"
   },
   {
-    "id": "1.88",
+    "id": "1.96",
+    "kap": 1,
+    "omr": "sinus_cosinus_kombination",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>Bestäm det största värdet av</p><p>\\[5\\sin x-12\\cos x\\]</p><p>och ange alla \\(x\\) där det största värdet antas.</p><p>Motivera genom att skriva om uttrycket som en enda sinusfunktion.</p>",
+    "s": "<p>Vi söker en omskrivning</p><p>\\[5\\sin x-12\\cos x=R\\sin(x-v).\\]</p><p>Eftersom</p><p>\\[R\\sin(x-v)=R\\cos v\\sin x-R\\sin v\\cos x\\]</p><p>behöver</p><p>\\[R\\cos v=5,\\qquad R\\sin v=12.\\]</p><p>Därför</p><p>\\[R=\\sqrt{5^2+12^2}=13.\\]</p><p>Välj \\(v\\) så att \\(\\cos v=5/13\\) och \\(\\sin v=12/13\\). Då</p><p>\\[5\\sin x-12\\cos x=13\\sin(x-v).\\]</p><p>Största möjliga värde är därför \\(13\\), och det fås när</p><p>\\[\\sin(x-v)=1\\Rightarrow x-v=\\frac\\pi2+2\\pi n.\\]</p><p><strong>Alltså är maxvärdet \\(\\boxed{13}\\), för \\(\\boxed{x=v+\\pi/2+2\\pi n}\\), där \\(v=\\arctan(12/5)\\).</strong></p>",
+    "familj": "problem_trig_kombination_max"
+  },
+  {
+    "id": "1.97",
     "kap": 1,
     "omr": "trig_modeller",
     "kurs": [
@@ -1147,7 +1266,7 @@ window.BANKMATO2 = [
     "familj": "stralkastare_tangensmodell"
   },
   {
-    "id": "1.89",
+    "id": "1.98",
     "kap": 1,
     "omr": "fasforskjutning",
     "kurs": [
@@ -1160,7 +1279,7 @@ window.BANKMATO2 = [
     "familj": "proc_fasforskjutning_avlasa_2"
   },
   {
-    "id": "1.90",
+    "id": "1.99",
     "kap": 1,
     "omr": "trig_ekvationer",
     "kurs": [
@@ -1173,7 +1292,7 @@ window.BANKMATO2 = [
     "familj": "kallmaterial_trigekv_tan"
   },
   {
-    "id": "1.91",
+    "id": "1.100",
     "kap": 1,
     "omr": "bestamma_trig_funktion",
     "kurs": [
@@ -1186,7 +1305,7 @@ window.BANKMATO2 = [
     "familj": "bestam_trigfunktion_graf_svg2"
   },
   {
-    "id": "1.92",
+    "id": "1.101",
     "kap": 1,
     "omr": "trig_ekvationer_grunder",
     "kurs": [
@@ -1199,7 +1318,7 @@ window.BANKMATO2 = [
     "familj": "kallmaterial_trigekv_rutinpaket"
   },
   {
-    "id": "1.93",
+    "id": "1.102",
     "kap": 1,
     "omr": "sinus_cosinus_kombination",
     "kurs": [
@@ -1212,7 +1331,7 @@ window.BANKMATO2 = [
     "familj": "sin_cos_kombination_exakt"
   },
   {
-    "id": "1.94",
+    "id": "1.103",
     "kap": 1,
     "omr": "trig_identiteter",
     "kurs": [
@@ -1225,7 +1344,7 @@ window.BANKMATO2 = [
     "familj": "identitet_summa_via_addition_a"
   },
   {
-    "id": "1.95",
+    "id": "1.104",
     "kap": 1,
     "omr": "fasforskjutning",
     "kurs": [
@@ -1238,7 +1357,7 @@ window.BANKMATO2 = [
     "familj": "proc_fasforskjutning_faktorisera_2"
   },
   {
-    "id": "1.96",
+    "id": "1.105",
     "kap": 1,
     "omr": "bestamma_trig_funktion",
     "kurs": [
@@ -1251,7 +1370,20 @@ window.BANKMATO2 = [
     "familj": "bestam_trig_extremdata"
   },
   {
-    "id": "1.97",
+    "id": "1.106",
+    "kap": 1,
+    "omr": "trig_ekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Lös ekvationen</p><p>\\[2\\cos^2x-3\\sin x=0\\]</p><p>för \\(0\\le x<2\\pi\\).</p>",
+    "s": "<p><strong>Idé:</strong> Skriv \\(\\cos^2x=1-\\sin^2x\\) så att ekvationen bara innehåller sinus.</p><p>\\[2(1-\\sin^2x)-3\\sin x=0\\]</p><p>\\[2\\sin^2x+3\\sin x-2=0.\\]</p><p>Faktorisera:</p><p>\\[(2\\sin x-1)(\\sin x+2)=0.\\]</p><p>Den andra faktorn kan inte vara noll eftersom \\(-1\\le\\sin x\\le1\\). Alltså</p><p>\\[\\sin x=\\frac12.\\]</p><p>I intervallet får vi</p><p>\\[\\boxed{x=\\frac\\pi6\\ \\text{eller}\\ x=\\frac{5\\pi}6}.\\]</p>",
+    "familj": "problem_trig_ekvation_substitution"
+  },
+  {
+    "id": "1.107",
     "kap": 1,
     "omr": "dubbla_vinkeln",
     "kurs": [
@@ -1264,7 +1396,7 @@ window.BANKMATO2 = [
     "familj": "proc_dubbla_vinkeln_forenkling"
   },
   {
-    "id": "1.98",
+    "id": "1.108",
     "kap": 1,
     "omr": "trig_ekvationer_grunder",
     "kurs": [
@@ -1277,7 +1409,7 @@ window.BANKMATO2 = [
     "familj": "proc_trigekv_interval_grader"
   },
   {
-    "id": "1.99",
+    "id": "1.109",
     "kap": 1,
     "omr": "trig_ekvationer",
     "kurs": [
@@ -1290,7 +1422,7 @@ window.BANKMATO2 = [
     "familj": "trigekv_kvadratisk_sin"
   },
   {
-    "id": "1.100",
+    "id": "1.110",
     "kap": 1,
     "omr": "tangensfunktionen",
     "kurs": [
@@ -1303,7 +1435,7 @@ window.BANKMATO2 = [
     "familj": "tangens_graf"
   },
   {
-    "id": "1.101",
+    "id": "1.111",
     "kap": 1,
     "omr": "tangensfunktionen",
     "kurs": [
@@ -1316,7 +1448,7 @@ window.BANKMATO2 = [
     "familj": "proc_tangens_period_asymptot_2"
   },
   {
-    "id": "1.102",
+    "id": "1.112",
     "kap": 1,
     "omr": "enhetscirkeln",
     "kurs": [
@@ -1329,7 +1461,7 @@ window.BANKMATO2 = [
     "familj": "proc_trig_enhetscirkel_exakta_2"
   },
   {
-    "id": "1.103",
+    "id": "1.113",
     "kap": 1,
     "omr": "tangensfunktionen",
     "kurs": [
@@ -1342,7 +1474,7 @@ window.BANKMATO2 = [
     "familj": "proc_tangens_period_asymptot"
   },
   {
-    "id": "1.104",
+    "id": "1.114",
     "kap": 1,
     "omr": "radianer",
     "kurs": [
@@ -1355,7 +1487,7 @@ window.BANKMATO2 = [
     "familj": "radianer_rutin_2"
   },
   {
-    "id": "1.105",
+    "id": "1.115",
     "kap": 1,
     "omr": "dubbla_vinkeln",
     "kurs": [
@@ -1368,7 +1500,7 @@ window.BANKMATO2 = [
     "familj": "dubbla_vinkeln_ekvation"
   },
   {
-    "id": "1.106",
+    "id": "1.116",
     "kap": 1,
     "omr": "bestamma_trig_funktion",
     "kurs": [
@@ -1381,7 +1513,20 @@ window.BANKMATO2 = [
     "familj": "bestam_trig_graf_a2"
   },
   {
-    "id": "1.107",
+    "id": "1.117",
+    "kap": 1,
+    "omr": "enhetscirkeln",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Punkten \\(P\\) ligger på enhetscirkeln och har koordinaterna</p><p>\\[P=\\left(-\\frac{\\sqrt3}{2},\\frac12\\right).\\]</p><span class=\"fig\"><svg width=\"360\" height=\"300\" viewBox=\"0 0 360 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"358\" height=\"298\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"99.3\" y1=\"20.0\" x2=\"99.3\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"193.5\" y1=\"20.0\" x2=\"193.5\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"287.7\" y1=\"20.0\" x2=\"287.7\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"61.6\" y1=\"236.7\" x2=\"325.4\" y2=\"236.7\" stroke=\"#E8EEF0\"/>\n<line x1=\"61.6\" y1=\"142.5\" x2=\"325.4\" y2=\"142.5\" stroke=\"#E8EEF0\"/>\n<line x1=\"61.6\" y1=\"48.3\" x2=\"325.4\" y2=\"48.3\" stroke=\"#E8EEF0\"/>\n<line x1=\"61.6\" y1=\"142.5\" x2=\"325.4\" y2=\"142.5\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"193.5\" y1=\"20.0\" x2=\"193.5\" y2=\"265.0\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<circle cx=\"193.5\" cy=\"142.5\" r=\"94.2\" fill=\"#F8FAFB\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<circle cx=\"111.9\" cy=\"95.4\" r=\"4.5\" fill=\"#B43123\"/>\n<text x=\"118.9\" y=\"88.4\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#B43123\">P</text>\n<text x=\"322.4\" y=\"135.5\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">Re</text>\n<text x=\"200.5\" y=\"32.0\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">Im</text>\n</svg></span><p>Låt \\(v\\) vara vinkeln från positiva x-axeln till \\(OP\\), där \\(0\\le v<2\\pi\\).</p><p>a) Bestäm \\(v\\).<br>b) Bestäm \\(\\sin 2v\\) exakt.</p>",
+    "s": "<p>a) Koordinaterna ger \\(\\cos v=-\\sqrt3/2\\) och \\(\\sin v=1/2\\). Punkten ligger i andra kvadranten, alltså</p><p>\\[\\boxed{v=\\frac{5\\pi}{6}}.\\]</p><p>b) Använd dubbla vinkeln:</p><p>\\[\\sin2v=2\\sin v\\cos v=2\\cdot\\frac12\\cdot\\left(-\\frac{\\sqrt3}{2}\\right)=\\boxed{-\\frac{\\sqrt3}{2}}.\\]</p>",
+    "familj": "problem_enhetscirkel_dubbelvinkel"
+  },
+  {
+    "id": "1.118",
     "kap": 1,
     "omr": "radianer",
     "kurs": [
@@ -1394,7 +1539,7 @@ window.BANKMATO2 = [
     "familj": "proc_radian_grad_3"
   },
   {
-    "id": "1.108",
+    "id": "1.119",
     "kap": 1,
     "omr": "sinus_cosinus_kombination",
     "kurs": [
@@ -1407,7 +1552,7 @@ window.BANKMATO2 = [
     "familj": "asin_bcos_3_4"
   },
   {
-    "id": "1.109",
+    "id": "1.120",
     "kap": 1,
     "omr": "dubbla_vinkeln",
     "kurs": [
@@ -1420,7 +1565,7 @@ window.BANKMATO2 = [
     "familj": "kallmaterial_dubbelvinkel_bevis"
   },
   {
-    "id": "1.110",
+    "id": "1.121",
     "kap": 1,
     "omr": "symmetrier_enhetscirkeln",
     "kurs": [
@@ -1433,7 +1578,7 @@ window.BANKMATO2 = [
     "familj": "exakta_trigvarden"
   },
   {
-    "id": "1.111",
+    "id": "1.122",
     "kap": 1,
     "omr": "trig_ekvationer_grunder",
     "kurs": [
@@ -1446,7 +1591,7 @@ window.BANKMATO2 = [
     "familj": "trigekv_grunder_radianer"
   },
   {
-    "id": "1.112",
+    "id": "1.123",
     "kap": 1,
     "omr": "trig_identiteter",
     "kurs": [
@@ -1459,7 +1604,7 @@ window.BANKMATO2 = [
     "familj": "kallmaterial_identitet_sin_tan"
   },
   {
-    "id": "1.113",
+    "id": "1.124",
     "kap": 1,
     "omr": "radianer",
     "kurs": [
@@ -1472,7 +1617,7 @@ window.BANKMATO2 = [
     "familj": "proc_radian_bage_sektor_2"
   },
   {
-    "id": "1.114",
+    "id": "1.125",
     "kap": 1,
     "omr": "symmetrier_enhetscirkeln",
     "kurs": [
@@ -1485,7 +1630,7 @@ window.BANKMATO2 = [
     "familj": "enhetscirkel_symmetri_figur"
   },
   {
-    "id": "1.115",
+    "id": "1.126",
     "kap": 1,
     "omr": "enhetscirkeln",
     "kurs": [
@@ -1498,7 +1643,20 @@ window.BANKMATO2 = [
     "familj": "enhetscirkel_exakta_varden_ny"
   },
   {
-    "id": "1.116",
+    "id": "1.127",
+    "kap": 1,
+    "omr": "trig_modeller",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>Två modeller för vattennivån i en hamn är</p><p>\\[h_A(t)=2+1,2\\cos\\left(\\frac{\\pi t}{6}\\right)\\]</p><p>och</p><p>\\[h_B(t)=2+0,8\\cos\\left(\\frac{\\pi(t-1)}6\\right),\\]</p><p>där \\(t\\) mäts i timmar.</p><span class=\"fig\"><svg width=\"450\" height=\"250\" viewBox=\"0 0 450 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"448\" height=\"248\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"212\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"147.0\" y1=\"20\" x2=\"147.0\" y2=\"212\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"242.0\" y1=\"20\" x2=\"242.0\" y2=\"212\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"337.0\" y1=\"20\" x2=\"337.0\" y2=\"212\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"432.0\" y1=\"20\" x2=\"432.0\" y2=\"212\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"180.0\" x2=\"432\" y2=\"180.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"116.0\" x2=\"432\" y2=\"116.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"52.0\" x2=\"432\" y2=\"52.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"212\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<text x=\"52.0\" y=\"236\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">0</text>\n<text x=\"147.0\" y=\"236\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">3</text>\n<text x=\"242.0\" y=\"236\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">6</text>\n<text x=\"337.0\" y=\"236\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">9</text>\n<text x=\"432.0\" y=\"236\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">12</text>\n<text x=\"44\" y=\"184.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">1</text>\n<text x=\"44\" y=\"120.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">2</text>\n<text x=\"44\" y=\"56.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">3</text>\n<path d=\"M52.0,39.2 L53.6,39.2 L55.2,39.3 L56.8,39.4 L58.3,39.6 L59.9,39.9 L61.5,40.1 L63.1,40.5 L64.7,40.9 L66.2,41.3 L67.8,41.8 L69.4,42.4 L71.0,43.0 L72.6,43.6 L74.2,44.3 L75.8,45.0 L77.3,45.8 L78.9,46.7 L80.5,47.6 L82.1,48.5 L83.7,49.5 L85.2,50.5 L86.8,51.6 L88.4,52.7 L90.0,53.9 L91.6,55.1 L93.2,56.3 L94.8,57.6 L96.3,58.9 L97.9,60.3 L99.5,61.7 L101.1,63.1 L102.7,64.6 L104.2,66.1 L105.8,67.7 L107.4,69.2 L109.0,70.9 L110.6,72.5 L112.2,74.2 L113.8,75.9 L115.3,77.6 L116.9,79.4 L118.5,81.1 L120.1,82.9 L121.7,84.8 L123.2,86.6 L124.8,88.5 L126.4,90.4 L128.0,92.3 L129.6,94.2 L131.2,96.1 L132.8,98.1 L134.3,100.0 L135.9,102.0 L137.5,104.0 L139.1,106.0 L140.7,108.0 L142.2,110.0 L143.8,112.0 L145.4,114.0 L147.0,116.0 L148.6,118.0 L150.2,120.0 L151.8,122.0 L153.3,124.0 L154.9,126.0 L156.5,128.0 L158.1,130.0 L159.7,132.0 L161.2,133.9 L162.8,135.9 L164.4,137.8 L166.0,139.7 L167.6,141.6 L169.2,143.5 L170.8,145.4 L172.3,147.2 L173.9,149.1 L175.5,150.9 L177.1,152.6 L178.7,154.4 L180.2,156.1 L181.8,157.8 L183.4,159.5 L185.0,161.1 L186.6,162.8 L188.2,164.3 L189.8,165.9 L191.3,167.4 L192.9,168.9 L194.5,170.3 L196.1,171.7 L197.7,173.1 L199.2,174.4 L200.8,175.7 L202.4,176.9 L204.0,178.1 L205.6,179.3 L207.2,180.4 L208.8,181.5 L210.3,182.5 L211.9,183.5 L213.5,184.4 L215.1,185.3 L216.7,186.2 L218.2,187.0 L219.8,187.7 L221.4,188.4 L223.0,189.0 L224.6,189.6 L226.2,190.2 L227.8,190.7 L229.3,191.1 L230.9,191.5 L232.5,191.9 L234.1,192.1 L235.7,192.4 L237.2,192.6 L238.8,192.7 L240.4,192.8 L242.0,192.8 L243.6,192.8 L245.2,192.7 L246.8,192.6 L248.3,192.4 L249.9,192.1 L251.5,191.9 L253.1,191.5 L254.7,191.1 L256.2,190.7 L257.8,190.2 L259.4,189.6 L261.0,189.0 L262.6,188.4 L264.2,187.7 L265.8,187.0 L267.3,186.2 L268.9,185.3 L270.5,184.4 L272.1,183.5 L273.7,182.5 L275.2,181.5 L276.8,180.4 L278.4,179.3 L280.0,178.1 L281.6,176.9 L283.2,175.7 L284.8,174.4 L286.3,173.1 L287.9,171.7 L289.5,170.3 L291.1,168.9 L292.7,167.4 L294.2,165.9 L295.8,164.3 L297.4,162.8 L299.0,161.1 L300.6,159.5 L302.2,157.8 L303.8,156.1 L305.3,154.4 L306.9,152.6 L308.5,150.9 L310.1,149.1 L311.7,147.2 L313.2,145.4 L314.8,143.5 L316.4,141.6 L318.0,139.7 L319.6,137.8 L321.2,135.9 L322.8,133.9 L324.3,132.0 L325.9,130.0 L327.5,128.0 L329.1,126.0 L330.7,124.0 L332.2,122.0 L333.8,120.0 L335.4,118.0 L337.0,116.0 L338.6,114.0 L340.2,112.0 L341.8,110.0 L343.3,108.0 L344.9,106.0 L346.5,104.0 L348.1,102.0 L349.7,100.0 L351.2,98.1 L352.8,96.1 L354.4,94.2 L356.0,92.3 L357.6,90.4 L359.2,88.5 L360.8,86.6 L362.3,84.8 L363.9,82.9 L365.5,81.1 L367.1,79.4 L368.7,77.6 L370.2,75.9 L371.8,74.2 L373.4,72.5 L375.0,70.9 L376.6,69.2 L378.2,67.7 L379.8,66.1 L381.3,64.6 L382.9,63.1 L384.5,61.7 L386.1,60.3 L387.7,58.9 L389.2,57.6 L390.8,56.3 L392.4,55.1 L394.0,53.9 L395.6,52.7 L397.2,51.6 L398.8,50.5 L400.3,49.5 L401.9,48.5 L403.5,47.6 L405.1,46.7 L406.7,45.8 L408.2,45.0 L409.8,44.3 L411.4,43.6 L413.0,43.0 L414.6,42.4 L416.2,41.8 L417.8,41.3 L419.3,40.9 L420.9,40.5 L422.5,40.1 L424.1,39.9 L425.7,39.6 L427.2,39.4 L428.8,39.3 L430.4,39.2 L432.0,39.2\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.3\"/>\n<path d=\"M52.0,71.7 L53.6,71.0 L55.2,70.4 L56.8,69.8 L58.3,69.2 L59.9,68.7 L61.5,68.2 L63.1,67.7 L64.7,67.3 L66.2,66.9 L67.8,66.5 L69.4,66.2 L71.0,65.9 L72.6,65.7 L74.2,65.4 L75.8,65.2 L77.3,65.1 L78.9,65.0 L80.5,64.9 L82.1,64.8 L83.7,64.8 L85.2,64.8 L86.8,64.9 L88.4,65.0 L90.0,65.1 L91.6,65.2 L93.2,65.4 L94.8,65.7 L96.3,65.9 L97.9,66.2 L99.5,66.5 L101.1,66.9 L102.7,67.3 L104.2,67.7 L105.8,68.2 L107.4,68.7 L109.0,69.2 L110.6,69.8 L112.2,70.4 L113.8,71.0 L115.3,71.7 L116.9,72.3 L118.5,73.1 L120.1,73.8 L121.7,74.6 L123.2,75.4 L124.8,76.2 L126.4,77.1 L128.0,78.0 L129.6,78.9 L131.2,79.8 L132.8,80.8 L134.3,81.7 L135.9,82.7 L137.5,83.8 L139.1,84.8 L140.7,85.9 L142.2,87.0 L143.8,88.1 L145.4,89.2 L147.0,90.4 L148.6,91.6 L150.2,92.8 L151.8,94.0 L153.3,95.2 L154.9,96.4 L156.5,97.7 L158.1,98.9 L159.7,100.2 L161.2,101.5 L162.8,102.7 L164.4,104.0 L166.0,105.4 L167.6,106.7 L169.2,108.0 L170.8,109.3 L172.3,110.6 L173.9,112.0 L175.5,113.3 L177.1,114.7 L178.7,116.0 L180.2,117.3 L181.8,118.7 L183.4,120.0 L185.0,121.4 L186.6,122.7 L188.2,124.0 L189.8,125.3 L191.3,126.6 L192.9,128.0 L194.5,129.3 L196.1,130.5 L197.7,131.8 L199.2,133.1 L200.8,134.3 L202.4,135.6 L204.0,136.8 L205.6,138.0 L207.2,139.2 L208.8,140.4 L210.3,141.6 L211.9,142.8 L213.5,143.9 L215.1,145.0 L216.7,146.1 L218.2,147.2 L219.8,148.2 L221.4,149.3 L223.0,150.3 L224.6,151.2 L226.2,152.2 L227.8,153.1 L229.3,154.0 L230.9,154.9 L232.5,155.8 L234.1,156.6 L235.7,157.4 L237.2,158.2 L238.8,158.9 L240.4,159.7 L242.0,160.3 L243.6,161.0 L245.2,161.6 L246.8,162.2 L248.3,162.8 L249.9,163.3 L251.5,163.8 L253.1,164.3 L254.7,164.7 L256.2,165.1 L257.8,165.5 L259.4,165.8 L261.0,166.1 L262.6,166.3 L264.2,166.6 L265.8,166.8 L267.3,166.9 L268.9,167.0 L270.5,167.1 L272.1,167.2 L273.7,167.2 L275.2,167.2 L276.8,167.1 L278.4,167.0 L280.0,166.9 L281.6,166.8 L283.2,166.6 L284.8,166.3 L286.3,166.1 L287.9,165.8 L289.5,165.5 L291.1,165.1 L292.7,164.7 L294.2,164.3 L295.8,163.8 L297.4,163.3 L299.0,162.8 L300.6,162.2 L302.2,161.6 L303.8,161.0 L305.3,160.3 L306.9,159.7 L308.5,158.9 L310.1,158.2 L311.7,157.4 L313.2,156.6 L314.8,155.8 L316.4,154.9 L318.0,154.0 L319.6,153.1 L321.2,152.2 L322.8,151.2 L324.3,150.3 L325.9,149.3 L327.5,148.2 L329.1,147.2 L330.7,146.1 L332.2,145.0 L333.8,143.9 L335.4,142.8 L337.0,141.6 L338.6,140.4 L340.2,139.2 L341.8,138.0 L343.3,136.8 L344.9,135.6 L346.5,134.3 L348.1,133.1 L349.7,131.8 L351.2,130.5 L352.8,129.3 L354.4,128.0 L356.0,126.6 L357.6,125.3 L359.2,124.0 L360.8,122.7 L362.3,121.4 L363.9,120.0 L365.5,118.7 L367.1,117.3 L368.7,116.0 L370.2,114.7 L371.8,113.3 L373.4,112.0 L375.0,110.6 L376.6,109.3 L378.2,108.0 L379.8,106.7 L381.3,105.4 L382.9,104.0 L384.5,102.7 L386.1,101.5 L387.7,100.2 L389.2,98.9 L390.8,97.7 L392.4,96.4 L394.0,95.2 L395.6,94.0 L397.2,92.8 L398.8,91.6 L400.3,90.4 L401.9,89.2 L403.5,88.1 L405.1,87.0 L406.7,85.9 L408.2,84.8 L409.8,83.8 L411.4,82.7 L413.0,81.7 L414.6,80.8 L416.2,79.8 L417.8,78.9 L419.3,78.0 L420.9,77.1 L422.5,76.2 L424.1,75.4 L425.7,74.6 L427.2,73.8 L428.8,73.1 L430.4,72.3 L432.0,71.7\" fill=\"none\" stroke=\"#268FA3\" stroke-width=\"2.3\"/>\n<text x=\"347\" y=\"37\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#B43123\">modell A</text><text x=\"347\" y=\"55\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#268FA3\">modell B</text>\n</svg></span><p>Bestäm den första tidpunkten efter \\(t=0\\) då modellerna ger samma vattennivå. Lös algebraiskt och svara med två decimaler.</p>",
+    "s": "<p>Sätt modellerna lika och låt \\(u=\\pi t/6\\):</p><p>\\[1,2\\cos u=0,8\\cos(u-\\pi/6).\\]</p><p>Dividera med 0,8:</p><p>\\[1,5\\cos u=\\cos(u-\\pi/6).\\]</p><p>Använd subtraktionsformeln:</p><p>\\[\\cos(u-\\pi/6)=\\frac{\\sqrt3}{2}\\cos u+\\frac12\\sin u.\\]</p><p>Därför</p><p>\\[\\left(1,5-\\frac{\\sqrt3}{2}\\right)\\cos u=\\frac12\\sin u.\\]</p><p>För den första positiva lösningen kan vi dividera med \\(\\cos u\\):</p><p>\\[\\tan u=3-\\sqrt3.\\]</p><p>Alltså</p><p>\\[u=\\arctan(3-\\sqrt3)\\approx0,903.\\]</p><p>Eftersom \\(u=\\pi t/6\\):</p><p>\\[t=\\frac{6u}{\\pi}\\approx1,72.\\]</p><p><strong>Modellerna ger samma nivå första gången efter cirka \\(\\boxed{1,72\\text{ h}}\\).</strong></p>",
+    "familj": "problem_trig_tva_modeller"
+  },
+  {
+    "id": "1.128",
     "kap": 1,
     "omr": "sinus_cosinus_kombination",
     "kurs": [
@@ -1511,7 +1669,7 @@ window.BANKMATO2 = [
     "familj": "asin_bcos_omskrivning"
   },
   {
-    "id": "1.117",
+    "id": "1.129",
     "kap": 1,
     "omr": "trig_modeller",
     "kurs": [
@@ -1524,7 +1682,7 @@ window.BANKMATO2 = [
     "familj": "gondol_modell_troskel_svg"
   },
   {
-    "id": "1.118",
+    "id": "1.130",
     "kap": 1,
     "omr": "trig_ettan",
     "kurs": [
@@ -1537,7 +1695,7 @@ window.BANKMATO2 = [
     "familj": "proc_trig_ettan_forenkla"
   },
   {
-    "id": "1.119",
+    "id": "1.131",
     "kap": 1,
     "omr": "sinus_cosinus_kombination",
     "kurs": [
@@ -1550,7 +1708,7 @@ window.BANKMATO2 = [
     "familj": "proc_asinx_bcosx_omskrivning_2"
   },
   {
-    "id": "1.120",
+    "id": "1.132",
     "kap": 1,
     "omr": "trig_ekvationer_grunder",
     "kurs": [
@@ -1563,7 +1721,7 @@ window.BANKMATO2 = [
     "familj": "trigekv_standard_radian"
   },
   {
-    "id": "1.121",
+    "id": "1.133",
     "kap": 1,
     "omr": "sinus_cosinusfunktioner",
     "kurs": [
@@ -1576,7 +1734,7 @@ window.BANKMATO2 = [
     "familj": "proc_trigfunktion_amp_period"
   },
   {
-    "id": "1.122",
+    "id": "1.134",
     "kap": 1,
     "omr": "trig_ekvationer",
     "kurs": [
@@ -1589,7 +1747,7 @@ window.BANKMATO2 = [
     "familj": "kallmaterial_trigekv_sin2x_cosx"
   },
   {
-    "id": "1.123",
+    "id": "1.135",
     "kap": 1,
     "omr": "trig_ettan",
     "kurs": [
@@ -1602,7 +1760,7 @@ window.BANKMATO2 = [
     "familj": "trigettan_rutin"
   },
   {
-    "id": "1.124",
+    "id": "1.136",
     "kap": 1,
     "omr": "sinus_cosinusfunktioner",
     "kurs": [
@@ -1615,7 +1773,7 @@ window.BANKMATO2 = [
     "familj": "trigfunktion_lasa_parametrar"
   },
   {
-    "id": "1.125",
+    "id": "1.137",
     "kap": 1,
     "omr": "bestamma_trig_funktion",
     "kurs": [
@@ -1766,12 +1924,25 @@ window.BANKMATO2 = [
     ],
     "niva": "C",
     "poang": "0/3/0",
+    "t": "<p>Kurvan \\(y=\\ln x+x^2\\) har en tangent i punkten där \\(x=1\\).</p><p>a) Bestäm tangentens ekvation.<br>b) Tangenten skär koordinataxlarna. Bestäm arean av triangeln som bildas av tangenten och koordinataxlarna.</p>",
+    "s": "<p>a) Funktionen är \\(f(x)=\\ln x+x^2\\). Då</p><p>\\[f'(x)=\\frac1x+2x.\\]</p><p>Vid \\(x=1\\) är \\(f(1)=1\\) och \\(f'(1)=3\\). Tangenten blir</p><p>\\[y-1=3(x-1)\\Rightarrow \\boxed{y=3x-2}.\\]</p><p>b) Skärningen med x-axeln fås av \\(0=3x-2\\), alltså \\(x=2/3\\). Skärningen med y-axeln är \\(y=-2\\).</p><p>Triangelns bas och höjd har längderna \\(2/3\\) respektive 2. Arean är</p><p>\\[A=\\frac12\\cdot\\frac23\\cdot2=\\boxed{\\frac23}.\\]</p>",
+    "familj": "problem_derivata_tangent_triangel"
+  },
+  {
+    "id": "2.12",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
     "t": "<p>En rektangel ligger i första kvadranten med två sidor längs koordinataxlarna. Det övre högra hörnet ligger på parabeln</p>\n<p>\\[\ny=12-x^2.\n\\]</p><span class=\"fig\"><svg width=\"430\" height=\"270\" viewBox=\"0 0 430 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rektangel under parabeln y lika med 12 minus x kvadrat\">\n<rect x=\"1\" y=\"1\" width=\"428\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"55.0\" y1=\"30\" x2=\"55.0\" y2=\"225\" stroke=\"#D9E6E9\"/>\n<text x=\"55.0\" y=\"241\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">0</text>\n<line x1=\"140.0\" y1=\"30\" x2=\"140.0\" y2=\"225\" stroke=\"#D9E6E9\"/>\n<text x=\"140.0\" y=\"241\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">1</text>\n<line x1=\"225.0\" y1=\"30\" x2=\"225.0\" y2=\"225\" stroke=\"#D9E6E9\"/>\n<text x=\"225.0\" y=\"241\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">2</text>\n<line x1=\"310.0\" y1=\"30\" x2=\"310.0\" y2=\"225\" stroke=\"#D9E6E9\"/>\n<text x=\"310.0\" y=\"241\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">3</text>\n<line x1=\"395.0\" y1=\"30\" x2=\"395.0\" y2=\"225\" stroke=\"#D9E6E9\"/>\n<text x=\"395.0\" y=\"241\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">4</text>\n<line x1=\"55\" y1=\"225.0\" x2=\"395\" y2=\"225.0\" stroke=\"#D9E6E9\"/>\n<line x1=\"55\" y1=\"195.0\" x2=\"395\" y2=\"195.0\" stroke=\"#D9E6E9\"/>\n<text x=\"47\" y=\"198.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">2</text>\n<line x1=\"55\" y1=\"165.0\" x2=\"395\" y2=\"165.0\" stroke=\"#D9E6E9\"/>\n<text x=\"47\" y=\"168.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">4</text>\n<line x1=\"55\" y1=\"135.0\" x2=\"395\" y2=\"135.0\" stroke=\"#D9E6E9\"/>\n<text x=\"47\" y=\"138.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">6</text>\n<line x1=\"55\" y1=\"105.0\" x2=\"395\" y2=\"105.0\" stroke=\"#D9E6E9\"/>\n<text x=\"47\" y=\"108.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">8</text>\n<line x1=\"55\" y1=\"75.0\" x2=\"395\" y2=\"75.0\" stroke=\"#D9E6E9\"/>\n<text x=\"47\" y=\"78.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">10</text>\n<line x1=\"55\" y1=\"45.0\" x2=\"395\" y2=\"45.0\" stroke=\"#D9E6E9\"/>\n<text x=\"47\" y=\"48.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#5C575E\">12</text>\n<line x1=\"55\" y1=\"225\" x2=\"395\" y2=\"225\" stroke=\"#2B2527\" stroke-width=\"1.8\"/>\n<line x1=\"55\" y1=\"225\" x2=\"55\" y2=\"30\" stroke=\"#2B2527\" stroke-width=\"1.8\"/>\n<polyline points=\"55.00,45.00 56.34,45.00 57.68,45.01 59.02,45.03 60.35,45.06 61.69,45.09 63.03,45.13 64.37,45.18 65.71,45.24 67.05,45.30 68.38,45.37 69.72,45.45 71.06,45.54 72.40,45.63 73.74,45.73 75.08,45.84 76.41,45.95 77.75,46.07 79.09,46.20 80.43,46.34 81.77,46.49 83.11,46.64 84.44,46.80 85.78,46.97 87.12,47.14 88.46,47.32 89.80,47.51 91.14,47.71 92.48,47.92 93.81,48.13 95.15,48.35 96.49,48.57 97.83,48.81 99.17,49.05 100.51,49.30 101.84,49.56 103.18,49.82 104.52,50.09 105.86,50.37 107.20,50.66 108.54,50.95 109.87,51.25 111.21,51.56 112.55,51.88 113.89,52.20 115.23,52.53 116.57,52.87 117.90,53.22 119.24,53.57 120.58,53.93 121.92,54.30 123.26,54.67 124.60,55.06 125.94,55.45 127.27,55.84 128.61,56.25 129.95,56.66 131.29,57.08 132.63,57.51 133.97,57.95 135.30,58.39 136.64,58.84 137.98,59.30 139.32,59.76 140.66,60.23 142.00,60.71 143.33,61.20 144.67,61.69 146.01,62.20 147.35,62.71 148.69,63.22 150.03,63.75 151.37,64.28 152.70,64.82 154.04,65.37 155.38,65.92 156.72,66.48 158.06,67.05 159.40,67.63 160.73,68.21 162.07,68.80 163.41,69.40 164.75,70.01 166.09,70.62 167.43,71.24 168.76,71.87 170.10,72.51 171.44,73.15 172.78,73.80 174.12,74.46 175.46,75.12 176.79,75.80 178.13,76.48 179.47,77.17 180.81,77.86 182.15,78.56 183.49,79.27 184.83,79.99 186.16,80.72 187.50,81.45 188.84,82.19 190.18,82.94 191.52,83.69 192.86,84.45 194.19,85.22 195.53,86.00 196.87,86.79 198.21,87.58 199.55,88.38 200.89,89.19 202.22,90.00 203.56,90.82 204.90,91.65 206.24,92.49 207.58,93.33 208.92,94.18 210.25,95.04 211.59,95.91 212.93,96.78 214.27,97.66 215.61,98.55 216.95,99.45 218.29,100.35 219.62,101.26 220.96,102.18 222.30,103.11 223.64,104.04 224.98,104.98 226.32,105.93 227.65,106.89 228.99,107.85 230.33,108.82 231.67,109.80 233.01,110.79 234.35,111.78 235.68,112.78 237.02,113.79 238.36,114.80 239.70,115.82 241.04,116.85 242.38,117.89 243.71,118.94 245.05,119.99 246.39,121.05 247.73,122.12 249.07,123.19 250.41,124.27 251.75,125.36 253.08,126.46 254.42,127.57 255.76,128.68 257.10,129.80 258.44,130.92 259.78,132.06 261.11,133.20 262.45,134.35 263.79,135.51 265.13,136.67 266.47,137.84 267.81,139.02 269.14,140.21 270.48,141.40 271.82,142.60 273.16,143.81 274.50,145.03 275.84,146.25 277.17,147.48 278.51,148.72 279.85,149.97 281.19,151.22 282.53,152.48 283.87,153.75 285.21,155.02 286.54,156.31 287.88,157.60 289.22,158.89 290.56,160.20 291.90,161.51 293.24,162.83 294.57,164.16 295.91,165.50 297.25,166.84 298.59,168.19 299.93,169.55 301.27,170.91 302.60,172.28 303.94,173.66 305.28,175.05 306.62,176.44 307.96,177.85 309.30,179.26 310.63,180.67 311.97,182.10 313.31,183.53 314.65,184.97 315.99,186.42 317.33,187.87 318.67,189.33 320.00,190.80 321.34,192.28 322.68,193.76 324.02,195.25 325.36,196.75 326.70,198.26 328.03,199.77 329.37,201.29 330.71,202.82 332.05,204.36 333.39,205.90 334.73,207.45 336.06,209.01 337.40,210.57 338.74,212.15 340.08,213.73 341.42,215.32 342.76,216.91 344.10,218.51 345.43,220.12 346.77,221.74 348.11,223.37 349.45,225.00\" fill=\"none\" stroke=\"#268FA3\" stroke-width=\"2.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>\n<rect x=\"55.0\" y=\"105.0\" width=\"170.0\" height=\"120.0\" fill=\"#EAF4F6\" stroke=\"#2B2527\" stroke-width=\"1.8\"/>\n<circle cx=\"225.0\" cy=\"105.0\" r=\"4.5\" fill=\"#268FA3\"/>\n<text x=\"284.5\" y=\"150.0\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">y = 12 - x²</text>\n</svg></span><p>Bestäm rektangelns största möjliga area och dess sidlängder.</p>",
     "s": "<p>Rektangelns bredd är \\(x\\) och höjden \\(12-x^2\\). Arean är därför</p>\n<p>\\[\nA(x)=x(12-x^2)=12x-x^3,\\qquad 0\\le x\\le\\sqrt{12}.\n\\]</p>\n<p>Derivera:</p>\n<p>\\[\nA'(x)=12-3x^2.\n\\]</p>\n<p>\\[\nA'(x)=0\n\\Rightarrow x^2=4\n\\Rightarrow x=2\n\\]</p>\n<p>eftersom \\(x\\ge0\\).</p>\n<p>Höjden blir</p>\n<p>\\[\n12-2^2=8.\n\\]</p>\n<p>Arean blir</p>\n<p>\\[\nA=2\\cdot8=16.\n\\]</p>\n<p><strong>Största area är 16 areaenheter. Rektangelns sidor är 2 och 8.</strong></p>",
     "familj": "optimering_rektangel_parabel"
   },
   {
-    "id": "2.12",
+    "id": "2.13",
     "kap": 2,
     "omr": "derivata_exp_log",
     "kurs": [
@@ -1784,7 +1955,7 @@ window.BANKMATO2 = [
     "familj": "logexp_rutin3"
   },
   {
-    "id": "2.13",
+    "id": "2.14",
     "kap": 2,
     "omr": "grafskissning",
     "kurs": [
@@ -1797,7 +1968,7 @@ window.BANKMATO2 = [
     "familj": "grafskiss_ln_minus_linjar"
   },
   {
-    "id": "2.14",
+    "id": "2.15",
     "kap": 2,
     "omr": "produktregeln",
     "kurs": [
@@ -1810,7 +1981,7 @@ window.BANKMATO2 = [
     "familj": "produktregel_mix_niva2"
   },
   {
-    "id": "2.15",
+    "id": "2.16",
     "kap": 2,
     "omr": "grafskissning",
     "kurs": [
@@ -1823,7 +1994,7 @@ window.BANKMATO2 = [
     "familj": "grafskiss_polynom"
   },
   {
-    "id": "2.16",
+    "id": "2.17",
     "kap": 2,
     "omr": "derivata_sin_cos",
     "kurs": [
@@ -1836,7 +2007,7 @@ window.BANKMATO2 = [
     "familj": "proc_deriv_trig_4"
   },
   {
-    "id": "2.17",
+    "id": "2.18",
     "kap": 2,
     "omr": "derivata_sin_cos",
     "kurs": [
@@ -1849,7 +2020,7 @@ window.BANKMATO2 = [
     "familj": "derivata_trig_tan_rutin4"
   },
   {
-    "id": "2.18",
+    "id": "2.19",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -1862,7 +2033,7 @@ window.BANKMATO2 = [
     "familj": "laser_related_rates_a"
   },
   {
-    "id": "2.19",
+    "id": "2.20",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -1875,7 +2046,7 @@ window.BANKMATO2 = [
     "familj": "kabel_olika_kostnader_optimering_a"
   },
   {
-    "id": "2.20",
+    "id": "2.21",
     "kap": 2,
     "omr": "grafskissning",
     "kurs": [
@@ -1888,7 +2059,20 @@ window.BANKMATO2 = [
     "familj": "parameter_stationara_kubik_a"
   },
   {
-    "id": "2.21",
+    "id": "2.22",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>En rektangel är symmetrisk kring y-axeln. De övre hörnen ligger på parabeln</p><p>\\[y=12-x^2\\]</p><p>och de nedre hörnen ligger på x-axeln.</p><span class=\"fig\"><svg width=\"430\" height=\"270\" viewBox=\"0 0 430 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"428\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"97.0\" y1=\"20\" x2=\"97.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"142.0\" y1=\"20\" x2=\"142.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"187.0\" y1=\"20\" x2=\"187.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"232.0\" y1=\"20\" x2=\"232.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"277.0\" y1=\"20\" x2=\"277.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"322.0\" y1=\"20\" x2=\"322.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"367.0\" y1=\"20\" x2=\"367.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"412.0\" y1=\"20\" x2=\"412.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"232.0\" x2=\"412\" y2=\"232.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"166.8\" x2=\"412\" y2=\"166.8\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"101.5\" x2=\"412\" y2=\"101.5\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"36.3\" x2=\"412\" y2=\"36.3\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"232.0\" y1=\"20\" x2=\"232.0\" y2=\"232\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"52\" y1=\"232.0\" x2=\"412\" y2=\"232.0\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<text x=\"97.0\" y=\"256\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">−3</text>\n<text x=\"232.0\" y=\"256\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">0</text>\n<text x=\"367.0\" y=\"256\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">3</text>\n<text x=\"44\" y=\"170.8\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">4</text>\n<text x=\"44\" y=\"105.5\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">8</text>\n<text x=\"44\" y=\"40.3\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">12</text>\n<path d=\"M52.0,297.2 L53.5,292.9 L55.0,288.6 L56.5,284.3 L58.0,280.1 L59.5,275.9 L61.0,271.8 L62.5,267.7 L64.0,263.6 L65.5,259.6 L67.0,255.6 L68.5,251.6 L70.0,247.7 L71.5,243.8 L73.0,239.9 L74.5,236.1 L76.0,232.3 L77.5,228.5 L79.0,224.8 L80.5,221.1 L82.0,217.5 L83.5,213.9 L85.0,210.3 L86.5,206.8 L88.0,203.3 L89.5,199.8 L91.0,196.4 L92.5,193.0 L94.0,189.7 L95.5,186.4 L97.0,183.1 L98.5,179.8 L100.0,176.6 L101.5,173.5 L103.0,170.3 L104.5,167.2 L106.0,164.2 L107.5,161.1 L109.0,158.1 L110.5,155.2 L112.0,152.3 L113.5,149.4 L115.0,146.5 L116.5,143.7 L118.0,141.0 L119.5,138.2 L121.0,135.5 L122.5,132.9 L124.0,130.2 L125.5,127.6 L127.0,125.1 L128.5,122.6 L130.0,120.1 L131.5,117.6 L133.0,115.2 L134.5,112.9 L136.0,110.5 L137.5,108.2 L139.0,106.0 L140.5,103.7 L142.0,101.5 L143.5,99.4 L145.0,97.3 L146.5,95.2 L148.0,93.1 L149.5,91.1 L151.0,89.1 L152.5,87.2 L154.0,85.3 L155.5,83.4 L157.0,81.6 L158.5,79.8 L160.0,78.1 L161.5,76.3 L163.0,74.6 L164.5,73.0 L166.0,71.4 L167.5,69.8 L169.0,68.3 L170.5,66.8 L172.0,65.3 L173.5,63.9 L175.0,62.5 L176.5,61.1 L178.0,59.8 L179.5,58.5 L181.0,57.3 L182.5,56.0 L184.0,54.9 L185.5,53.7 L187.0,52.6 L188.5,51.5 L190.0,50.5 L191.5,49.5 L193.0,48.6 L194.5,47.6 L196.0,46.7 L197.5,45.9 L199.0,45.1 L200.5,44.3 L202.0,43.6 L203.5,42.8 L205.0,42.2 L206.5,41.5 L208.0,40.9 L209.5,40.4 L211.0,39.9 L212.5,39.4 L214.0,38.9 L215.5,38.5 L217.0,38.1 L218.5,37.8 L220.0,37.5 L221.5,37.2 L223.0,37.0 L224.5,36.8 L226.0,36.6 L227.5,36.5 L229.0,36.4 L230.5,36.3 L232.0,36.3 L233.5,36.3 L235.0,36.4 L236.5,36.5 L238.0,36.6 L239.5,36.8 L241.0,37.0 L242.5,37.2 L244.0,37.5 L245.5,37.8 L247.0,38.1 L248.5,38.5 L250.0,38.9 L251.5,39.4 L253.0,39.9 L254.5,40.4 L256.0,40.9 L257.5,41.5 L259.0,42.2 L260.5,42.8 L262.0,43.6 L263.5,44.3 L265.0,45.1 L266.5,45.9 L268.0,46.7 L269.5,47.6 L271.0,48.6 L272.5,49.5 L274.0,50.5 L275.5,51.5 L277.0,52.6 L278.5,53.7 L280.0,54.9 L281.5,56.0 L283.0,57.3 L284.5,58.5 L286.0,59.8 L287.5,61.1 L289.0,62.5 L290.5,63.9 L292.0,65.3 L293.5,66.8 L295.0,68.3 L296.5,69.8 L298.0,71.4 L299.5,73.0 L301.0,74.6 L302.5,76.3 L304.0,78.1 L305.5,79.8 L307.0,81.6 L308.5,83.4 L310.0,85.3 L311.5,87.2 L313.0,89.1 L314.5,91.1 L316.0,93.1 L317.5,95.2 L319.0,97.3 L320.5,99.4 L322.0,101.5 L323.5,103.7 L325.0,106.0 L326.5,108.2 L328.0,110.5 L329.5,112.9 L331.0,115.2 L332.5,117.6 L334.0,120.1 L335.5,122.6 L337.0,125.1 L338.5,127.6 L340.0,130.2 L341.5,132.9 L343.0,135.5 L344.5,138.2 L346.0,141.0 L347.5,143.7 L349.0,146.5 L350.5,149.4 L352.0,152.3 L353.5,155.2 L355.0,158.1 L356.5,161.1 L358.0,164.2 L359.5,167.2 L361.0,170.3 L362.5,173.5 L364.0,176.6 L365.5,179.8 L367.0,183.1 L368.5,186.4 L370.0,189.7 L371.5,193.0 L373.0,196.4 L374.5,199.8 L376.0,203.3 L377.5,206.8 L379.0,210.3 L380.5,213.9 L382.0,217.5 L383.5,221.1 L385.0,224.8 L386.5,228.5 L388.0,232.3 L389.5,236.1 L391.0,239.9 L392.5,243.8 L394.0,247.7 L395.5,251.6 L397.0,255.6 L398.5,259.6 L400.0,263.6 L401.5,267.7 L403.0,271.8 L404.5,275.9 L406.0,280.1 L407.5,284.3 L409.0,288.6 L410.5,292.9 L412.0,297.2\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\"/>\n<rect x=\"142\" y=\"102\" width=\"180\" height=\"130\" fill=\"#DCEFF3\" fill-opacity=\"0.65\" stroke=\"#268FA3\" stroke-width=\"2\"/><text x=\"215\" y=\"88\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">rektangel</text>\n</svg></span><p>Bestäm rektangelns största möjliga area.</p>",
+    "s": "<p>Låt det övre högra hörnet ha koordinaterna \\((x,12-x^2)\\), där \\(0<x<\\sqrt{12}\\).</p><p>Rektangelns bredd är \\(2x\\) och höjden är \\(12-x^2\\). Alltså</p><p>\\[A(x)=2x(12-x^2)=24x-2x^3.\\]</p><p>Derivera:</p><p>\\[A'(x)=24-6x^2.\\]</p><p>Extrempunkten fås när</p><p>\\[24-6x^2=0\\Rightarrow x^2=4\\Rightarrow x=2.\\]</p><p>Eftersom arean är 0 vid intervallets ändpunkter och positiv däremellan ger denna punkt maximum.</p><p>\\[A(2)=4(12-4)=32.\\]</p><p><strong>Den största möjliga arean är \\(\\boxed{32}\\) areaenheter.</strong></p>",
+    "familj": "problem_derivata_rektangel_parabel"
+  },
+  {
+    "id": "2.23",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -1901,7 +2085,7 @@ window.BANKMATO2 = [
     "familj": "parameter_tangent_ln"
   },
   {
-    "id": "2.22",
+    "id": "2.24",
     "kap": 2,
     "omr": "kedjeregeln",
     "kurs": [
@@ -1914,7 +2098,7 @@ window.BANKMATO2 = [
     "familj": "proc_kedjeregel_potenser_3"
   },
   {
-    "id": "2.23",
+    "id": "2.25",
     "kap": 2,
     "omr": "derivata_sin_cos",
     "kurs": [
@@ -1927,7 +2111,7 @@ window.BANKMATO2 = [
     "familj": "trigderivata_rutin_fyra"
   },
   {
-    "id": "2.24",
+    "id": "2.26",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -1940,7 +2124,7 @@ window.BANKMATO2 = [
     "familj": "kallmaterial_related_rates_cirkel"
   },
   {
-    "id": "2.25",
+    "id": "2.27",
     "kap": 2,
     "omr": "derivata_exp_log",
     "kurs": [
@@ -1953,7 +2137,7 @@ window.BANKMATO2 = [
     "familj": "proc_deriv_exp_2"
   },
   {
-    "id": "2.26",
+    "id": "2.28",
     "kap": 2,
     "omr": "logaritmfunktioner",
     "kurs": [
@@ -1966,7 +2150,7 @@ window.BANKMATO2 = [
     "familj": "bevis_ln_olikhet_derivata_a"
   },
   {
-    "id": "2.27",
+    "id": "2.29",
     "kap": 2,
     "omr": "kvotregeln",
     "kurs": [
@@ -1979,7 +2163,7 @@ window.BANKMATO2 = [
     "familj": "kvot_rutin_fyra"
   },
   {
-    "id": "2.28",
+    "id": "2.30",
     "kap": 2,
     "omr": "kedjeregeln",
     "kurs": [
@@ -1992,7 +2176,7 @@ window.BANKMATO2 = [
     "familj": "proc_kedja_exp_log_trig_2"
   },
   {
-    "id": "2.29",
+    "id": "2.31",
     "kap": 2,
     "omr": "sammansatta_funktioner",
     "kurs": [
@@ -2005,7 +2189,7 @@ window.BANKMATO2 = [
     "familj": "sammansatt_ln_graf_c_svg"
   },
   {
-    "id": "2.30",
+    "id": "2.32",
     "kap": 2,
     "omr": "kedjeregeln",
     "kurs": [
@@ -2018,7 +2202,20 @@ window.BANKMATO2 = [
     "familj": "kedjeregel_graf_a"
   },
   {
-    "id": "2.31",
+    "id": "2.33",
+    "kap": 2,
+    "omr": "derivata_exp_log",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Funktionen</p><p>\\[f(x)=x^2+a\\ln x+b\\]</p><p>har tangenten \\(y=5x-3\\) vid \\(x=1\\).</p><p>Bestäm konstanterna \\(a\\) och \\(b\\).</p>",
+    "s": "<p>Eftersom tangenten gäller vid \\(x=1\\) måste både funktionsvärdet och derivatan stämma där.</p><p>Tangentens värde vid \\(x=1\\) är \\(5-3=2\\). Alltså</p><p>\\[f(1)=1+b=2\\Rightarrow b=1.\\]</p><p>Derivatan är</p><p>\\[f'(x)=2x+\\frac a x.\\]</p><p>Tangentens lutning är 5, så</p><p>\\[f'(1)=2+a=5\\Rightarrow a=3.\\]</p><p><strong>\\(\\boxed{a=3,\\ b=1}\\).</strong></p>",
+    "familj": "problem_derivata_param_tangent"
+  },
+  {
+    "id": "2.34",
     "kap": 2,
     "omr": "logaritmfunktioner",
     "kurs": [
@@ -2031,7 +2228,7 @@ window.BANKMATO2 = [
     "familj": "ln_domain_deriv"
   },
   {
-    "id": "2.32",
+    "id": "2.35",
     "kap": 2,
     "omr": "kedjeregeln",
     "kurs": [
@@ -2044,7 +2241,7 @@ window.BANKMATO2 = [
     "familj": "proc_kedja_potenser_1"
   },
   {
-    "id": "2.33",
+    "id": "2.36",
     "kap": 2,
     "omr": "logaritmfunktioner",
     "kurs": [
@@ -2057,7 +2254,7 @@ window.BANKMATO2 = [
     "familj": "logaritmfunktion_egenskaper"
   },
   {
-    "id": "2.34",
+    "id": "2.37",
     "kap": 2,
     "omr": "produktregeln",
     "kurs": [
@@ -2070,7 +2267,7 @@ window.BANKMATO2 = [
     "familj": "proc_produktregel_4"
   },
   {
-    "id": "2.35",
+    "id": "2.38",
     "kap": 2,
     "omr": "derivata_sin_cos",
     "kurs": [
@@ -2083,7 +2280,7 @@ window.BANKMATO2 = [
     "familj": "trigderiv_rutin"
   },
   {
-    "id": "2.36",
+    "id": "2.39",
     "kap": 2,
     "omr": "grafskissning",
     "kurs": [
@@ -2096,7 +2293,7 @@ window.BANKMATO2 = [
     "familj": "parameter_kubik_utan_extrema"
   },
   {
-    "id": "2.37",
+    "id": "2.40",
     "kap": 2,
     "omr": "kedjeregeln",
     "kurs": [
@@ -2109,7 +2306,7 @@ window.BANKMATO2 = [
     "familj": "kedja_mix_niva2"
   },
   {
-    "id": "2.38",
+    "id": "2.41",
     "kap": 2,
     "omr": "derivata_grafer",
     "kurs": [
@@ -2122,7 +2319,7 @@ window.BANKMATO2 = [
     "familj": "derivatagraf_a"
   },
   {
-    "id": "2.39",
+    "id": "2.42",
     "kap": 2,
     "omr": "derivata_grafer",
     "kurs": [
@@ -2135,7 +2332,7 @@ window.BANKMATO2 = [
     "familj": "derivatagraf_tecken_parabel"
   },
   {
-    "id": "2.40",
+    "id": "2.43",
     "kap": 2,
     "omr": "produktregeln",
     "kurs": [
@@ -2148,7 +2345,20 @@ window.BANKMATO2 = [
     "familj": "proc_produktregel_faktorisera_2"
   },
   {
-    "id": "2.41",
+    "id": "2.44",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>Punkten \\(A=(0,3)\\) ligger ovanför parabeln \\(y=x^2\\).</p><span class=\"fig\"><svg width=\"420\" height=\"270\" viewBox=\"0 0 420 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"418\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"110.3\" y1=\"20\" x2=\"110.3\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"168.7\" y1=\"20\" x2=\"168.7\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"227.0\" y1=\"20\" x2=\"227.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"285.3\" y1=\"20\" x2=\"285.3\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"343.7\" y1=\"20\" x2=\"343.7\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"402.0\" y1=\"20\" x2=\"402.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"232.0\" x2=\"402\" y2=\"232.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"196.7\" x2=\"402\" y2=\"196.7\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"161.3\" x2=\"402\" y2=\"161.3\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"126.0\" x2=\"402\" y2=\"126.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"90.7\" x2=\"402\" y2=\"90.7\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"55.3\" x2=\"402\" y2=\"55.3\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"20.0\" x2=\"402\" y2=\"20.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"227.0\" y1=\"20\" x2=\"227.0\" y2=\"232\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"52\" y1=\"232.0\" x2=\"402\" y2=\"232.0\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<text x=\"110.3\" y=\"256\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">−2</text>\n<text x=\"227.0\" y=\"256\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">0</text>\n<text x=\"343.7\" y=\"256\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">2</text>\n<text x=\"44\" y=\"200.7\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">1</text>\n<text x=\"44\" y=\"130.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">3</text>\n<text x=\"44\" y=\"59.3\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">5</text>\n<path d=\"M52.0,-86.0 L53.5,-80.7 L54.9,-75.5 L56.4,-70.3 L57.8,-65.2 L59.3,-60.1 L60.7,-55.0 L62.2,-50.0 L63.7,-45.0 L65.1,-40.1 L66.6,-35.2 L68.0,-30.4 L69.5,-25.6 L71.0,-20.8 L72.4,-16.1 L73.9,-11.5 L75.3,-6.9 L76.8,-2.3 L78.2,2.2 L79.7,6.7 L81.2,11.2 L82.6,15.6 L84.1,19.9 L85.5,24.2 L87.0,28.5 L88.5,32.7 L89.9,36.9 L91.4,41.0 L92.8,45.1 L94.3,49.1 L95.8,53.1 L97.2,57.1 L98.7,61.0 L100.1,64.9 L101.6,68.7 L103.0,72.4 L104.5,76.2 L106.0,79.9 L107.4,83.5 L108.9,87.1 L110.3,90.7 L111.8,94.2 L113.2,97.6 L114.7,101.1 L116.2,104.4 L117.6,107.8 L119.1,111.1 L120.5,114.3 L122.0,117.5 L123.5,120.7 L124.9,123.8 L126.4,126.9 L127.8,129.9 L129.3,132.9 L130.8,135.8 L132.2,138.7 L133.7,141.5 L135.1,144.4 L136.6,147.1 L138.0,149.8 L139.5,152.5 L141.0,155.1 L142.4,157.7 L143.9,160.3 L145.3,162.7 L146.8,165.2 L148.2,167.6 L149.7,170.0 L151.2,172.3 L152.6,174.6 L154.1,176.8 L155.5,179.0 L157.0,181.1 L158.5,183.2 L159.9,185.3 L161.4,187.3 L162.8,189.2 L164.3,191.2 L165.8,193.0 L167.2,194.9 L168.7,196.7 L170.1,198.4 L171.6,200.1 L173.0,201.8 L174.5,203.4 L176.0,204.9 L177.4,206.5 L178.9,208.0 L180.3,209.4 L181.8,210.8 L183.2,212.1 L184.7,213.4 L186.2,214.7 L187.6,215.9 L189.1,217.1 L190.5,218.2 L192.0,219.3 L193.5,220.3 L194.9,221.3 L196.4,222.3 L197.8,223.2 L199.3,224.0 L200.8,224.8 L202.2,225.6 L203.7,226.3 L205.1,227.0 L206.6,227.7 L208.0,228.3 L209.5,228.8 L211.0,229.3 L212.4,229.8 L213.9,230.2 L215.3,230.6 L216.8,230.9 L218.2,231.2 L219.7,231.4 L221.2,231.6 L222.6,231.8 L224.1,231.9 L225.5,232.0 L227.0,232.0 L228.5,232.0 L229.9,231.9 L231.4,231.8 L232.8,231.6 L234.3,231.4 L235.8,231.2 L237.2,230.9 L238.7,230.6 L240.1,230.2 L241.6,229.8 L243.0,229.3 L244.5,228.8 L246.0,228.3 L247.4,227.7 L248.9,227.0 L250.3,226.3 L251.8,225.6 L253.3,224.8 L254.7,224.0 L256.2,223.2 L257.6,222.3 L259.1,221.3 L260.5,220.3 L262.0,219.3 L263.5,218.2 L264.9,217.1 L266.4,215.9 L267.8,214.7 L269.3,213.4 L270.8,212.1 L272.2,210.8 L273.7,209.4 L275.1,208.0 L276.6,206.5 L278.0,204.9 L279.5,203.4 L281.0,201.8 L282.4,200.1 L283.9,198.4 L285.3,196.7 L286.8,194.9 L288.2,193.0 L289.7,191.2 L291.2,189.2 L292.6,187.3 L294.1,185.3 L295.5,183.2 L297.0,181.1 L298.5,179.0 L299.9,176.8 L301.4,174.6 L302.8,172.3 L304.3,170.0 L305.8,167.6 L307.2,165.2 L308.7,162.7 L310.1,160.3 L311.6,157.7 L313.0,155.1 L314.5,152.5 L316.0,149.8 L317.4,147.1 L318.9,144.4 L320.3,141.5 L321.8,138.7 L323.2,135.8 L324.7,132.9 L326.2,129.9 L327.6,126.9 L329.1,123.8 L330.5,120.7 L332.0,117.5 L333.5,114.3 L334.9,111.1 L336.4,107.8 L337.8,104.4 L339.3,101.1 L340.8,97.6 L342.2,94.2 L343.7,90.7 L345.1,87.1 L346.6,83.5 L348.0,79.9 L349.5,76.2 L351.0,72.4 L352.4,68.7 L353.9,64.9 L355.3,61.0 L356.8,57.1 L358.2,53.1 L359.7,49.1 L361.2,45.1 L362.6,41.0 L364.1,36.9 L365.5,32.7 L367.0,28.5 L368.5,24.2 L369.9,19.9 L371.4,15.6 L372.8,11.2 L374.3,6.7 L375.8,2.2 L377.2,-2.3 L378.7,-6.9 L380.1,-11.5 L381.6,-16.1 L383.0,-20.8 L384.5,-25.6 L386.0,-30.4 L387.4,-35.2 L388.9,-40.1 L390.3,-45.0 L391.8,-50.0 L393.2,-55.0 L394.7,-60.1 L396.2,-65.2 L397.6,-70.3 L399.1,-75.5 L400.5,-80.7 L402.0,-86.0\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\"/>\n<circle cx=\"210\" cy=\"126\" r=\"5\" fill=\"#268FA3\"/><text x=\"220\" y=\"121\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">A=(0,3)</text>\n</svg></span><p>Bestäm det kortaste avståndet från \\(A\\) till en punkt på parabeln.</p>",
+    "s": "<p>Låt punkten på parabeln vara \\(P=(x,x^2)\\). Avståndet uppfyller</p><p>\\[AP^2=x^2+(x^2-3)^2.\\]</p><p>Det räcker att minimera kvadraten av avståndet:</p><p>\\[D(x)=x^2+(x^2-3)^2.\\]</p><p>Derivera:</p><p>\\[D'(x)=2x+4x(x^2-3)=2x(2x^2-5).\\]</p><p>Kritiska punkter är \\(x=0\\) och \\(x=\\pm\\sqrt{5/2}\\).</p><p>\\[D(0)=9,\\]</p><p>medan för \\(x^2=5/2\\):</p><p>\\[D=\\frac52+\\left(\\frac52-3\\right)^2=\\frac52+\\frac14=\\frac{11}{4}.\\]</p><p>Det minsta avståndet är därför</p><p>\\[\\boxed{\\frac{\\sqrt{11}}2}.\\]</p>",
+    "familj": "problem_derivata_kortaste_avstand"
+  },
+  {
+    "id": "2.45",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -2161,7 +2371,7 @@ window.BANKMATO2 = [
     "familj": "optimering_cylinder_fast_volym"
   },
   {
-    "id": "2.42",
+    "id": "2.46",
     "kap": 2,
     "omr": "produktregeln",
     "kurs": [
@@ -2174,7 +2384,7 @@ window.BANKMATO2 = [
     "familj": "produkt_tangent_x2exp"
   },
   {
-    "id": "2.43",
+    "id": "2.47",
     "kap": 2,
     "omr": "sammansatta_funktioner",
     "kurs": [
@@ -2187,7 +2397,7 @@ window.BANKMATO2 = [
     "familj": "sammansatt_kedja"
   },
   {
-    "id": "2.44",
+    "id": "2.48",
     "kap": 2,
     "omr": "deriveringsregler_repetition",
     "kurs": [
@@ -2200,7 +2410,7 @@ window.BANKMATO2 = [
     "familj": "deriv_rutin_fyra"
   },
   {
-    "id": "2.45",
+    "id": "2.49",
     "kap": 2,
     "omr": "derivata_exp_log",
     "kurs": [
@@ -2213,7 +2423,7 @@ window.BANKMATO2 = [
     "familj": "kallmaterial_log_exp_derivata"
   },
   {
-    "id": "2.46",
+    "id": "2.50",
     "kap": 2,
     "omr": "kvotregeln",
     "kurs": [
@@ -2226,7 +2436,7 @@ window.BANKMATO2 = [
     "familj": "proc_kvotregel_4"
   },
   {
-    "id": "2.47",
+    "id": "2.51",
     "kap": 2,
     "omr": "grafskissning",
     "kurs": [
@@ -2239,7 +2449,7 @@ window.BANKMATO2 = [
     "familj": "grafskiss_asymptoter_derivata"
   },
   {
-    "id": "2.48",
+    "id": "2.52",
     "kap": 2,
     "omr": "asymptoter",
     "kurs": [
@@ -2252,7 +2462,7 @@ window.BANKMATO2 = [
     "familj": "kallmaterial_asymptoter_rutin"
   },
   {
-    "id": "2.49",
+    "id": "2.53",
     "kap": 2,
     "omr": "produktregeln",
     "kurs": [
@@ -2265,7 +2475,7 @@ window.BANKMATO2 = [
     "familj": "produkt_rutin_fyra"
   },
   {
-    "id": "2.50",
+    "id": "2.54",
     "kap": 2,
     "omr": "produktregeln",
     "kurs": [
@@ -2278,7 +2488,20 @@ window.BANKMATO2 = [
     "familj": "proc_produktregeln_2"
   },
   {
-    "id": "2.51",
+    "id": "2.55",
+    "kap": 2,
+    "omr": "asymptoter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>Undersök funktionen</p><p>\\[f(x)=\\frac{x^2+1}{x-1}.\\]</p><p>a) Bestäm funktionens lodräta och sneda asymptot.<br>b) Bestäm funktionens extrempunkter och ange om de är maximi- eller minimipunkter.</p>",
+    "s": "<p>a) Nämnaren blir noll vid \\(x=1\\), medan täljaren inte blir noll där. Alltså är \\(x=1\\) en lodrät asymptot.</p><p>Polynomdivision ger</p><p>\\[f(x)=x+1+\\frac{2}{x-1}.\\]</p><p>När \\(|x|\\) blir stor går den sista termen mot 0. Den sneda asymptoten är därför</p><p>\\[\\boxed{y=x+1}.\\]</p><p>b) Derivera den omskrivna formen:</p><p>\\[f'(x)=1-\\frac{2}{(x-1)^2}.\\]</p><p>\\[f'(x)=0\\Rightarrow (x-1)^2=2\\Rightarrow x=1\\pm\\sqrt2.\\]</p><p>För \\(x<1\\) växlar derivatan från positiv till negativ vid \\(1-\\sqrt2\\), alltså är där en maximipunkt. För \\(x>1\\) växlar derivatan från negativ till positiv vid \\(1+\\sqrt2\\), alltså är där en minimipunkt.</p><p>Funktionsvärdena fås enklast från \\(x+1+2/(x-1)\\):</p><p>\\[f(1-\\sqrt2)=2-2\\sqrt2,\\qquad f(1+\\sqrt2)=2+2\\sqrt2.\\]</p><p><strong>Maxpunkt: \\((1-\\sqrt2,\\,2-2\\sqrt2)\\). Minpunkt: \\((1+\\sqrt2,\\,2+2\\sqrt2)\\).</strong></p>",
+    "familj": "problem_asymptot_extrem_rationell"
+  },
+  {
+    "id": "2.56",
     "kap": 2,
     "omr": "derivata_sin_cos",
     "kurs": [
@@ -2291,7 +2514,7 @@ window.BANKMATO2 = [
     "familj": "proc_deriv_trig_kedja"
   },
   {
-    "id": "2.52",
+    "id": "2.57",
     "kap": 2,
     "omr": "kvotregeln",
     "kurs": [
@@ -2304,7 +2527,7 @@ window.BANKMATO2 = [
     "familj": "proc_kvotregel_forenkla_2"
   },
   {
-    "id": "2.53",
+    "id": "2.58",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -2317,7 +2540,7 @@ window.BANKMATO2 = [
     "familj": "vindturbin_optimering_modell"
   },
   {
-    "id": "2.54",
+    "id": "2.59",
     "kap": 2,
     "omr": "deriveringsregler_repetition",
     "kurs": [
@@ -2330,7 +2553,7 @@ window.BANKMATO2 = [
     "familj": "derivata_rutin_fyra_delar"
   },
   {
-    "id": "2.55",
+    "id": "2.60",
     "kap": 2,
     "omr": "derivata_grafer",
     "kurs": [
@@ -2343,7 +2566,7 @@ window.BANKMATO2 = [
     "familj": "derivatagraf_tecken_och_lutning_a"
   },
   {
-    "id": "2.56",
+    "id": "2.61",
     "kap": 2,
     "omr": "sammansatta_funktioner",
     "kurs": [
@@ -2356,7 +2579,7 @@ window.BANKMATO2 = [
     "familj": "sammansatta_funktioner_defmangd"
   },
   {
-    "id": "2.57",
+    "id": "2.62",
     "kap": 2,
     "omr": "derivata_grafer",
     "kurs": [
@@ -2369,7 +2592,7 @@ window.BANKMATO2 = [
     "familj": "derivata_avlas_graf"
   },
   {
-    "id": "2.58",
+    "id": "2.63",
     "kap": 2,
     "omr": "sammansatta_funktioner",
     "kurs": [
@@ -2382,7 +2605,7 @@ window.BANKMATO2 = [
     "familj": "proc_sammansatta_funktioner_3"
   },
   {
-    "id": "2.59",
+    "id": "2.64",
     "kap": 2,
     "omr": "grafskissning",
     "kurs": [
@@ -2395,7 +2618,7 @@ window.BANKMATO2 = [
     "familj": "parameter_log_resonemang_a"
   },
   {
-    "id": "2.60",
+    "id": "2.65",
     "kap": 2,
     "omr": "deriveringsregler_repetition",
     "kurs": [
@@ -2408,7 +2631,20 @@ window.BANKMATO2 = [
     "familj": "proc_deriv_repetition_2"
   },
   {
-    "id": "2.61",
+    "id": "2.66",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>En plattform \\(P\\) ligger 4 km rakt ut från kustpunkten \\(A\\). En station \\(B\\) ligger 10 km längs kusten från \\(A\\).</p><span class=\"fig\"><svg width=\"470\" height=\"270\" viewBox=\"0 0 470 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"468\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n\n<line x1=\"65\" y1=\"210\" x2=\"410\" y2=\"210\" stroke=\"#2B2527\" stroke-width=\"4\"/>\n<text x=\"390\" y=\"231\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">kust</text>\n<circle cx=\"95\" cy=\"75\" r=\"7\" fill=\"#B43123\"/>\n<text x=\"108\" y=\"72\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#B43123\">plattform P</text>\n<circle cx=\"95\" cy=\"210\" r=\"5\" fill=\"#2B2527\"/><text x=\"84\" y=\"229\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">A</text>\n<circle cx=\"365\" cy=\"210\" r=\"5\" fill=\"#2B2527\"/><text x=\"361\" y=\"229\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">B</text>\n<circle cx=\"150\" cy=\"210\" r=\"5\" fill=\"#268FA3\"/><text x=\"145\" y=\"229\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">L</text>\n<line x1=\"95\" y1=\"75\" x2=\"150\" y2=\"210\" stroke=\"#268FA3\" stroke-width=\"2.5\"/>\n<line x1=\"150\" y1=\"210\" x2=\"365\" y2=\"210\" stroke=\"#B43123\" stroke-width=\"5\"/>\n<line x1=\"95\" y1=\"75\" x2=\"95\" y2=\"210\" stroke=\"#7B858A\" stroke-dasharray=\"5 4\"/>\n<text x=\"105\" y=\"145\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">4 km</text>\n<text x=\"230\" y=\"202\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">AB = 10 km</text>\n<text x=\"123\" y=\"198\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">x</text>\n\n</svg></span><p>En ledning ska dras från \\(P\\) till en punkt \\(L\\) på kusten och sedan vidare längs kusten till \\(B\\). Undervattensledningen kostar tre gånger så mycket per kilometer som ledningen på land.</p><p>Hur långt från \\(A\\) ska \\(L\\) ligga för att totalkostnaden ska bli så liten som möjligt?</p>",
+    "s": "<p>Låt \\(x=AL\\), där \\(0\\le x\\le10\\). Då är undervattenssträckan</p><p>\\[PL=\\sqrt{x^2+4^2}=\\sqrt{x^2+16}\\]</p><p>och landsträckan är \\(10-x\\).</p><p>Om landkostnaden per km sätts till 1 kostnadsenhet blir totalkostnaden</p><p>\\[K(x)=3\\sqrt{x^2+16}+10-x.\\]</p><p>Derivera:</p><p>\\[K'(x)=\\frac{3x}{\\sqrt{x^2+16}}-1.\\]</p><p>Sätt derivatan till 0:</p><p>\\[\\frac{3x}{\\sqrt{x^2+16}}=1.\\]</p><p>Kvadrering ger</p><p>\\[9x^2=x^2+16\\Rightarrow8x^2=16\\Rightarrow x=\\sqrt2.\\]</p><p>Endast den positiva lösningen passar. Derivatan går från negativ till positiv, så detta ger minimum.</p><p><strong>Ledningen ska gå i land cirka \\(\\boxed{1,41\\text{ km}}\\) från \\(A\\).</strong></p>",
+    "familj": "problem_derivata_ledning_kostnad"
+  },
+  {
+    "id": "2.67",
     "kap": 2,
     "omr": "produktregeln",
     "kurs": [
@@ -2421,7 +2657,7 @@ window.BANKMATO2 = [
     "familj": "proc_produktregeln_3"
   },
   {
-    "id": "2.62",
+    "id": "2.68",
     "kap": 2,
     "omr": "grafskissning",
     "kurs": [
@@ -2434,7 +2670,7 @@ window.BANKMATO2 = [
     "familj": "grafskiss_log_minus_linjär_a"
   },
   {
-    "id": "2.63",
+    "id": "2.69",
     "kap": 2,
     "omr": "produktregeln",
     "kurs": [
@@ -2447,7 +2683,7 @@ window.BANKMATO2 = [
     "familj": "produkt_e_minus_x_tangent"
   },
   {
-    "id": "2.64",
+    "id": "2.70",
     "kap": 2,
     "omr": "derivata_exp_log",
     "kurs": [
@@ -2460,7 +2696,7 @@ window.BANKMATO2 = [
     "familj": "proc_deriv_log_exp_sammansatt_3"
   },
   {
-    "id": "2.65",
+    "id": "2.71",
     "kap": 2,
     "omr": "logaritmfunktioner",
     "kurs": [
@@ -2473,7 +2709,7 @@ window.BANKMATO2 = [
     "familj": "ln_funktion_dom_tangent"
   },
   {
-    "id": "2.66",
+    "id": "2.72",
     "kap": 2,
     "omr": "derivata_sin_cos",
     "kurs": [
@@ -2486,7 +2722,7 @@ window.BANKMATO2 = [
     "familj": "trigderivata_temperatur"
   },
   {
-    "id": "2.67",
+    "id": "2.73",
     "kap": 2,
     "omr": "produktregeln",
     "kurs": [
@@ -2499,7 +2735,7 @@ window.BANKMATO2 = [
     "familj": "produkt_rutin2"
   },
   {
-    "id": "2.68",
+    "id": "2.74",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -2512,7 +2748,7 @@ window.BANKMATO2 = [
     "familj": "kallmaterial_related_rates_kub"
   },
   {
-    "id": "2.69",
+    "id": "2.75",
     "kap": 2,
     "omr": "derivata_exp_log",
     "kurs": [
@@ -2525,7 +2761,7 @@ window.BANKMATO2 = [
     "familj": "deriv_exp_log_blandad"
   },
   {
-    "id": "2.70",
+    "id": "2.76",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -2538,7 +2774,20 @@ window.BANKMATO2 = [
     "familj": "proc_tangent_parabel_2"
   },
   {
-    "id": "2.71",
+    "id": "2.77",
+    "kap": 2,
+    "omr": "derivata_grafer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Grafen visar derivatan \\(f'\\) till en funktion \\(f\\).</p><span class=\"fig\"><svg width=\"430\" height=\"270\" viewBox=\"0 0 430 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"428\" height=\"268\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"97.0\" y1=\"20\" x2=\"97.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"142.0\" y1=\"20\" x2=\"142.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"187.0\" y1=\"20\" x2=\"187.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"232.0\" y1=\"20\" x2=\"232.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"277.0\" y1=\"20\" x2=\"277.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"322.0\" y1=\"20\" x2=\"322.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"367.0\" y1=\"20\" x2=\"367.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"412.0\" y1=\"20\" x2=\"412.0\" y2=\"232\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"201.7\" x2=\"412\" y2=\"201.7\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"141.1\" x2=\"412\" y2=\"141.1\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"80.6\" x2=\"412\" y2=\"80.6\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"20.0\" x2=\"412\" y2=\"20.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"187.0\" y1=\"20\" x2=\"187.0\" y2=\"232\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"52\" y1=\"141.1\" x2=\"412\" y2=\"141.1\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<text x=\"142.0\" y=\"256\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">−1</text>\n<text x=\"187.0\" y=\"256\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">0</text>\n<text x=\"322.0\" y=\"256\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">3</text>\n<text x=\"44\" y=\"205.7\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">−4</text>\n<text x=\"44\" y=\"84.6\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">4</text>\n<path d=\"M52.0,-40.6 L53.5,-36.6 L55.0,-32.6 L56.5,-28.6 L58.0,-24.7 L59.5,-20.8 L61.0,-16.9 L62.5,-13.1 L64.0,-9.3 L65.5,-5.6 L67.0,-1.9 L68.5,1.8 L70.0,5.5 L71.5,9.1 L73.0,12.7 L74.5,16.2 L76.0,19.7 L77.5,23.2 L79.0,26.7 L80.5,30.1 L82.0,33.5 L83.5,36.8 L85.0,40.1 L86.5,43.4 L88.0,46.7 L89.5,49.9 L91.0,53.0 L92.5,56.2 L94.0,59.3 L95.5,62.4 L97.0,65.4 L98.5,68.4 L100.0,71.4 L101.5,74.4 L103.0,77.3 L104.5,80.2 L106.0,83.0 L107.5,85.8 L109.0,88.6 L110.5,91.3 L112.0,94.0 L113.5,96.7 L115.0,99.3 L116.5,102.0 L118.0,104.5 L119.5,107.1 L121.0,109.6 L122.5,112.1 L124.0,114.5 L125.5,116.9 L127.0,119.3 L128.5,121.6 L130.0,123.9 L131.5,126.2 L133.0,128.4 L134.5,130.6 L136.0,132.8 L137.5,134.9 L139.0,137.0 L140.5,139.1 L142.0,141.1 L143.5,143.1 L145.0,145.1 L146.5,147.0 L148.0,148.9 L149.5,150.8 L151.0,152.7 L152.5,154.5 L154.0,156.2 L155.5,158.0 L157.0,159.7 L158.5,161.3 L160.0,162.9 L161.5,164.5 L163.0,166.1 L164.5,167.6 L166.0,169.1 L167.5,170.6 L169.0,172.0 L170.5,173.4 L172.0,174.8 L173.5,176.1 L175.0,177.4 L176.5,178.7 L178.0,179.9 L179.5,181.1 L181.0,182.3 L182.5,183.4 L184.0,184.5 L185.5,185.5 L187.0,186.6 L188.5,187.6 L190.0,188.5 L191.5,189.4 L193.0,190.3 L194.5,191.2 L196.0,192.0 L197.5,192.8 L199.0,193.6 L200.5,194.3 L202.0,195.0 L203.5,195.6 L205.0,196.3 L206.5,196.9 L208.0,197.4 L209.5,197.9 L211.0,198.4 L212.5,198.9 L214.0,199.3 L215.5,199.7 L217.0,200.0 L218.5,200.4 L220.0,200.6 L221.5,200.9 L223.0,201.1 L224.5,201.3 L226.0,201.4 L227.5,201.6 L229.0,201.6 L230.5,201.7 L232.0,201.7 L233.5,201.7 L235.0,201.6 L236.5,201.6 L238.0,201.4 L239.5,201.3 L241.0,201.1 L242.5,200.9 L244.0,200.6 L245.5,200.4 L247.0,200.0 L248.5,199.7 L250.0,199.3 L251.5,198.9 L253.0,198.4 L254.5,197.9 L256.0,197.4 L257.5,196.9 L259.0,196.3 L260.5,195.6 L262.0,195.0 L263.5,194.3 L265.0,193.6 L266.5,192.8 L268.0,192.0 L269.5,191.2 L271.0,190.3 L272.5,189.4 L274.0,188.5 L275.5,187.6 L277.0,186.6 L278.5,185.5 L280.0,184.5 L281.5,183.4 L283.0,182.3 L284.5,181.1 L286.0,179.9 L287.5,178.7 L289.0,177.4 L290.5,176.1 L292.0,174.8 L293.5,173.4 L295.0,172.0 L296.5,170.6 L298.0,169.1 L299.5,167.6 L301.0,166.1 L302.5,164.5 L304.0,162.9 L305.5,161.3 L307.0,159.7 L308.5,158.0 L310.0,156.2 L311.5,154.5 L313.0,152.7 L314.5,150.8 L316.0,148.9 L317.5,147.0 L319.0,145.1 L320.5,143.1 L322.0,141.1 L323.5,139.1 L325.0,137.0 L326.5,134.9 L328.0,132.8 L329.5,130.6 L331.0,128.4 L332.5,126.2 L334.0,123.9 L335.5,121.6 L337.0,119.3 L338.5,116.9 L340.0,114.5 L341.5,112.1 L343.0,109.6 L344.5,107.1 L346.0,104.5 L347.5,102.0 L349.0,99.3 L350.5,96.7 L352.0,94.0 L353.5,91.3 L355.0,88.6 L356.5,85.8 L358.0,83.0 L359.5,80.2 L361.0,77.3 L362.5,74.4 L364.0,71.4 L365.5,68.4 L367.0,65.4 L368.5,62.4 L370.0,59.3 L371.5,56.2 L373.0,53.0 L374.5,49.9 L376.0,46.7 L377.5,43.4 L379.0,40.1 L380.5,36.8 L382.0,33.5 L383.5,30.1 L385.0,26.7 L386.5,23.2 L388.0,19.7 L389.5,16.2 L391.0,12.7 L392.5,9.1 L394.0,5.5 L395.5,1.8 L397.0,-1.9 L398.5,-5.6 L400.0,-9.3 L401.5,-13.1 L403.0,-16.9 L404.5,-20.8 L406.0,-24.7 L407.5,-28.6 L409.0,-32.6 L410.5,-36.6 L412.0,-40.6\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\"/>\n<text x=\"345\" y=\"45\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#B43123\">y = f′(x)</text>\n</svg></span><p>a) På vilka intervall är \\(f\\) växande respektive avtagande?<br>b) Vilka x-värden ger extrempunkter för \\(f\\), och vilken typ av extrempunkt är det?</p>",
+    "s": "<p>Funktionen \\(f\\) är växande där \\(f'(x)>0\\) och avtagande där \\(f'(x)<0\\).</p><p>Grafen för \\(f'\\) skär x-axeln vid \\(x=-1\\) och \\(x=3\\). Den ligger över x-axeln för \\(x<-1\\) och \\(x>3\\), och under x-axeln för \\(-1<x<3\\).</p><p>Alltså är \\(f\\)</p><p>\\[\\text{växande för }x<-1\\text{ och }x>3,\\]</p><p>\\[\\text{avtagande för }-1<x<3.\\]</p><p>Vid \\(x=-1\\) går derivatan från positiv till negativ: <strong>maximipunkt</strong>.</p><p>Vid \\(x=3\\) går derivatan från negativ till positiv: <strong>minimipunkt</strong>.</p>",
+    "familj": "problem_derivatagraf_tecken"
+  },
+  {
+    "id": "2.78",
     "kap": 2,
     "omr": "asymptoter",
     "kurs": [
@@ -2551,7 +2800,7 @@ window.BANKMATO2 = [
     "familj": "asymptot_rutin"
   },
   {
-    "id": "2.72",
+    "id": "2.79",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -2564,7 +2813,7 @@ window.BANKMATO2 = [
     "familj": "trigderiv_tillampning"
   },
   {
-    "id": "2.73",
+    "id": "2.80",
     "kap": 2,
     "omr": "kvotregeln",
     "kurs": [
@@ -2577,7 +2826,7 @@ window.BANKMATO2 = [
     "familj": "kvotregeln_rutin"
   },
   {
-    "id": "2.74",
+    "id": "2.81",
     "kap": 2,
     "omr": "deriveringsregler_repetition",
     "kurs": [
@@ -2590,7 +2839,7 @@ window.BANKMATO2 = [
     "familj": "derivata_bl_blandad_rutin"
   },
   {
-    "id": "2.75",
+    "id": "2.82",
     "kap": 2,
     "omr": "deriveringsregler_repetition",
     "kurs": [
@@ -2603,7 +2852,7 @@ window.BANKMATO2 = [
     "familj": "proc_deriv_varde_1"
   },
   {
-    "id": "2.76",
+    "id": "2.83",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -2616,7 +2865,7 @@ window.BANKMATO2 = [
     "familj": "proc_stationara_punkter_2"
   },
   {
-    "id": "2.77",
+    "id": "2.84",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -2629,7 +2878,7 @@ window.BANKMATO2 = [
     "familj": "oppen_lada_c2"
   },
   {
-    "id": "2.78",
+    "id": "2.85",
     "kap": 2,
     "omr": "kedjeregeln",
     "kurs": [
@@ -2642,7 +2891,7 @@ window.BANKMATO2 = [
     "familj": "proc_kedja_exp_1"
   },
   {
-    "id": "2.79",
+    "id": "2.86",
     "kap": 2,
     "omr": "asymptoter",
     "kurs": [
@@ -2655,7 +2904,7 @@ window.BANKMATO2 = [
     "familj": "asymptot_konstruera"
   },
   {
-    "id": "2.80",
+    "id": "2.87",
     "kap": 2,
     "omr": "derivata_exp_log",
     "kurs": [
@@ -2668,7 +2917,20 @@ window.BANKMATO2 = [
     "familj": "tangent_xlnx"
   },
   {
-    "id": "2.81",
+    "id": "2.88",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>En modell har formen</p><p>\\[f(x)=ax e^{-bx},\\qquad a>0,\\ b>0.\\]</p><p>Grafen har sitt största värde 12 när \\(x=4\\).</p><p>Bestäm \\(a\\) och \\(b\\).</p>",
+    "s": "<p>Derivatan är</p><p>\\[f'(x)=a e^{-bx}(1-bx).\\]</p><p>Eftersom \\(a e^{-bx}>0\\) fås extrempunkten när</p><p>\\[1-bx=0.\\]</p><p>Maxpunkten ligger vid \\(x=4\\), alltså</p><p>\\[1-4b=0\\Rightarrow \\boxed{b=\\frac14}.\\]</p><p>Nu använder vi att \\(f(4)=12\\):</p><p>\\[4a e^{-1}=12\\Rightarrow a=3e.\\]</p><p><strong>\\(\\boxed{a=3e,\\ b=1/4}\\).</strong></p>",
+    "familj": "problem_derivata_expmodell_param"
+  },
+  {
+    "id": "2.89",
     "kap": 2,
     "omr": "kvotregeln",
     "kurs": [
@@ -2681,7 +2943,7 @@ window.BANKMATO2 = [
     "familj": "proc_kvotregeln_blandad_c"
   },
   {
-    "id": "2.82",
+    "id": "2.90",
     "kap": 2,
     "omr": "derivata_grafer",
     "kurs": [
@@ -2694,7 +2956,7 @@ window.BANKMATO2 = [
     "familj": "proc_derivata_teckenintervall_2"
   },
   {
-    "id": "2.83",
+    "id": "2.91",
     "kap": 2,
     "omr": "sammansatta_funktioner",
     "kurs": [
@@ -2707,7 +2969,7 @@ window.BANKMATO2 = [
     "familj": "proc_sammansatta_funktioner_eval"
   },
   {
-    "id": "2.84",
+    "id": "2.92",
     "kap": 2,
     "omr": "kedjeregeln",
     "kurs": [
@@ -2720,7 +2982,7 @@ window.BANKMATO2 = [
     "familj": "proc_kedja_trig_1"
   },
   {
-    "id": "2.85",
+    "id": "2.93",
     "kap": 2,
     "omr": "kedjeregeln",
     "kurs": [
@@ -2733,7 +2995,7 @@ window.BANKMATO2 = [
     "familj": "proc_kedja_blandad_c"
   },
   {
-    "id": "2.86",
+    "id": "2.94",
     "kap": 2,
     "omr": "produktregeln",
     "kurs": [
@@ -2746,7 +3008,7 @@ window.BANKMATO2 = [
     "familj": "proc_produktregeln_faktorisera_c"
   },
   {
-    "id": "2.87",
+    "id": "2.95",
     "kap": 2,
     "omr": "derivata_exp_log",
     "kurs": [
@@ -2759,7 +3021,7 @@ window.BANKMATO2 = [
     "familj": "proc_deriv_exp_log_forenkla_c"
   },
   {
-    "id": "2.88",
+    "id": "2.96",
     "kap": 2,
     "omr": "grafskissning",
     "kurs": [
@@ -2772,7 +3034,7 @@ window.BANKMATO2 = [
     "familj": "proc_grafskiss_kubik_2"
   },
   {
-    "id": "2.89",
+    "id": "2.97",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -2785,7 +3047,7 @@ window.BANKMATO2 = [
     "familj": "modell_te_minus_exp_max_c"
   },
   {
-    "id": "2.90",
+    "id": "2.98",
     "kap": 2,
     "omr": "asymptoter",
     "kurs": [
@@ -2798,7 +3060,20 @@ window.BANKMATO2 = [
     "familj": "asymptot_hole_c"
   },
   {
-    "id": "2.91",
+    "id": "2.99",
+    "kap": 2,
+    "omr": "grafskissning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>Visa att funktionen</p><p>\\[f(x)=(x^2+1)e^{-x}\\]</p><p>är avtagande för alla reella \\(x\\), trots att grafen har en horisontell tangent vid ett x-värde. Bestäm också detta x-värde.</p>",
+    "s": "<p>Derivera med produktregeln:</p><p>\\[f'(x)=2xe^{-x}-(x^2+1)e^{-x}.\\]</p><p>Bryt ut \\(e^{-x}\\):</p><p>\\[f'(x)=e^{-x}(2x-x^2-1)=-e^{-x}(x-1)^2.\\]</p><p>Eftersom \\(e^{-x}>0\\) och \\((x-1)^2\\ge0\\) gäller</p><p>\\[f'(x)\\le0\\]</p><p>för alla \\(x\\). Derivatan är bara 0 när \\(x=1\\).</p><p>Alltså är funktionen avtagande hela tiden. Vid \\(x=1\\) blir tangenten horisontell, men derivatan byter inte tecken där, så punkten är ingen maximi- eller minimipunkt.</p><p><strong>Den horisontella tangenten finns vid \\(\\boxed{x=1}\\).</strong></p>",
+    "familj": "problem_derivata_horisontell_utan_extrem"
+  },
+  {
+    "id": "2.100",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -2811,7 +3086,7 @@ window.BANKMATO2 = [
     "familj": "relaterade_hastigheter_ballong"
   },
   {
-    "id": "2.92",
+    "id": "2.101",
     "kap": 2,
     "omr": "kedjeregeln",
     "kurs": [
@@ -2824,7 +3099,7 @@ window.BANKMATO2 = [
     "familj": "kedja_rutin_fyra"
   },
   {
-    "id": "2.93",
+    "id": "2.102",
     "kap": 2,
     "omr": "kvotregeln",
     "kurs": [
@@ -2837,7 +3112,7 @@ window.BANKMATO2 = [
     "familj": "kvot_rutin2"
   },
   {
-    "id": "2.94",
+    "id": "2.103",
     "kap": 2,
     "omr": "grafskissning",
     "kurs": [
@@ -2850,7 +3125,7 @@ window.BANKMATO2 = [
     "familj": "proc_andraderivata_konkavitet_2"
   },
   {
-    "id": "2.95",
+    "id": "2.104",
     "kap": 2,
     "omr": "derivata_sin_cos",
     "kurs": [
@@ -2863,7 +3138,7 @@ window.BANKMATO2 = [
     "familj": "proc_deriv_trig_standard"
   },
   {
-    "id": "2.96",
+    "id": "2.105",
     "kap": 2,
     "omr": "asymptoter",
     "kurs": [
@@ -2876,7 +3151,7 @@ window.BANKMATO2 = [
     "familj": "asymptot_polynomdivision_rutin"
   },
   {
-    "id": "2.97",
+    "id": "2.106",
     "kap": 2,
     "omr": "derivata_grafer",
     "kurs": [
@@ -2889,7 +3164,7 @@ window.BANKMATO2 = [
     "familj": "derivatagraf_tecken"
   },
   {
-    "id": "2.98",
+    "id": "2.107",
     "kap": 2,
     "omr": "deriveringsregler_repetition",
     "kurs": [
@@ -2902,7 +3177,7 @@ window.BANKMATO2 = [
     "familj": "derivata_repetition_rutin4"
   },
   {
-    "id": "2.99",
+    "id": "2.108",
     "kap": 2,
     "omr": "produktregeln",
     "kurs": [
@@ -2915,7 +3190,7 @@ window.BANKMATO2 = [
     "familj": "produkt_kvot_paket"
   },
   {
-    "id": "2.100",
+    "id": "2.109",
     "kap": 2,
     "omr": "asymptoter",
     "kurs": [
@@ -2928,7 +3203,20 @@ window.BANKMATO2 = [
     "familj": "proc_asymptoter_rationella_3"
   },
   {
-    "id": "2.101",
+    "id": "2.110",
+    "kap": 2,
+    "omr": "logaritmfunktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>Undersök ekvationen</p><p>\\[\\ln x=\\frac x3,\\qquad x>0.\\]</p><p>Visa att ekvationen har exakt två lösningar. Bestäm därefter lösningarna med tre decimaler med hjälp av ett digitalt verktyg.</p>",
+    "s": "<p>Sätt</p><p>\\[h(x)=\\ln x-\\frac x3.\\]</p><p>Då motsvarar ekvationens lösningar nollställena till \\(h\\). Derivatan är</p><p>\\[h'(x)=\\frac1x-\\frac13.\\]</p><p>Derivatan är positiv för \\(0<x<3\\), noll vid \\(x=3\\) och negativ för \\(x>3\\). Funktionen har alltså ett enda maximum vid \\(x=3\\).</p><p>\\[h(3)=\\ln3-1>0.\\]</p><p>Samtidigt gäller \\(h(x)\\to-\\infty\\) när \\(x\\to0^+\\) och även när \\(x\\to\\infty\\). Eftersom \\(h\\) är kontinuerlig måste grafen därför skära x-axeln en gång före maxpunkten och en gång efter. Några fler nollställen kan inte finnas eftersom funktionen är strikt växande respektive strikt avtagande på dessa intervall.</p><p>Med digital ekvationslösning fås</p><p>\\[\\boxed{x\\approx1,857\\quad\\text{och}\\quad x\\approx4,536}.\\]</p>",
+    "familj": "problem_log_antal_losningar"
+  },
+  {
+    "id": "2.111",
     "kap": 2,
     "omr": "asymptoter",
     "kurs": [
@@ -2941,7 +3229,7 @@ window.BANKMATO2 = [
     "familj": "asymptoter_polynomdivision_c"
   },
   {
-    "id": "2.102",
+    "id": "2.112",
     "kap": 2,
     "omr": "kedjeregeln",
     "kurs": [
@@ -2954,7 +3242,7 @@ window.BANKMATO2 = [
     "familj": "kedjeregel_rutin4"
   },
   {
-    "id": "2.103",
+    "id": "2.113",
     "kap": 2,
     "omr": "derivata_exp_log",
     "kurs": [
@@ -2967,7 +3255,7 @@ window.BANKMATO2 = [
     "familj": "proc_deriv_ln_1"
   },
   {
-    "id": "2.104",
+    "id": "2.114",
     "kap": 2,
     "omr": "asymptoter",
     "kurs": [
@@ -2980,7 +3268,7 @@ window.BANKMATO2 = [
     "familj": "proc_asymptoter_rutin_mix"
   },
   {
-    "id": "2.105",
+    "id": "2.115",
     "kap": 2,
     "omr": "deriveringsregler_repetition",
     "kurs": [
@@ -2993,7 +3281,7 @@ window.BANKMATO2 = [
     "familj": "proc_deriv_tangentlutning"
   },
   {
-    "id": "2.106",
+    "id": "2.116",
     "kap": 2,
     "omr": "asymptoter",
     "kurs": [
@@ -3006,7 +3294,7 @@ window.BANKMATO2 = [
     "familj": "proc_sneda_asymptoter_2"
   },
   {
-    "id": "2.107",
+    "id": "2.117",
     "kap": 2,
     "omr": "kvotregeln",
     "kurs": [
@@ -3019,7 +3307,7 @@ window.BANKMATO2 = [
     "familj": "proc_kvotregeln_2"
   },
   {
-    "id": "2.108",
+    "id": "2.118",
     "kap": 2,
     "omr": "kvotregeln",
     "kurs": [
@@ -3032,7 +3320,7 @@ window.BANKMATO2 = [
     "familj": "proc_kvotregeln_1"
   },
   {
-    "id": "2.109",
+    "id": "2.119",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -3045,7 +3333,7 @@ window.BANKMATO2 = [
     "familj": "optimering_hage_a_c"
   },
   {
-    "id": "2.110",
+    "id": "2.120",
     "kap": 2,
     "omr": "logaritmfunktioner",
     "kurs": [
@@ -3058,7 +3346,20 @@ window.BANKMATO2 = [
     "familj": "proc_ln_definitionsmangd"
   },
   {
-    "id": "2.111",
+    "id": "2.121",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>En rektangulär kartong ska göras av ett papper som är 30 cm × 20 cm. Kvadrater med sidan \\(x\\) cm klipps bort i hörnen och kanterna viks upp.</p><span class=\"fig\"><svg width=\"430\" height=\"280\" viewBox=\"0 0 430 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"428\" height=\"278\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n\n<rect x=\"65\" y=\"45\" width=\"300\" height=\"190\" fill=\"#F4F5F7\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<g fill=\"#FBF0EE\" stroke=\"#B43123\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\">\n<rect x=\"65\" y=\"45\" width=\"42\" height=\"42\"/><rect x=\"323\" y=\"45\" width=\"42\" height=\"42\"/><rect x=\"65\" y=\"193\" width=\"42\" height=\"42\"/><rect x=\"323\" y=\"193\" width=\"42\" height=\"42\"/>\n</g>\n<line x1=\"65\" y1=\"250\" x2=\"365\" y2=\"250\" stroke=\"#268FA3\" stroke-width=\"1.6\"/>\n<text x=\"215\" y=\"269\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">30 cm</text>\n<line x1=\"385\" y1=\"45\" x2=\"385\" y2=\"235\" stroke=\"#268FA3\" stroke-width=\"1.6\"/>\n<text x=\"397\" y=\"144\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">20 cm</text>\n<text x=\"85\" y=\"70\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#B43123\">x</text>\n<text x=\"215\" y=\"145\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">hörnen klipps bort</text>\n\n</svg></span><p>Bestäm \\(x\\) så att kartongens volym blir så stor som möjligt. Svara med två decimaler.</p>",
+    "s": "<p>Efter vikningen blir höjden \\(x\\), längden \\(30-2x\\) och bredden \\(20-2x\\). Därför</p><p>\\[V(x)=x(30-2x)(20-2x),\\qquad 0<x<10.\\]</p><p>Utveckla eller derivera som produkt:</p><p>\\[V'(x)=4(3x^2-50x+150).\\]</p><p>Sätt \\(V'(x)=0\\):</p><p>\\[3x^2-50x+150=0.\\]</p><p>\\[x=\\frac{25\\pm5\\sqrt7}{3}.\\]</p><p>Den större lösningen ligger utanför intervallet \\(0<x<10\\). Den användbara lösningen är</p><p>\\[x=\\frac{25-5\\sqrt7}{3}\\approx3,92.\\]</p><p>Volymen går mot 0 vid intervallets ändar, så denna inre extrempunkt ger maximum.</p><p><strong>\\(\\boxed{x\\approx3,92\\text{ cm}}\\).</strong></p>",
+    "familj": "problem_derivata_kartong"
+  },
+  {
+    "id": "2.122",
     "kap": 2,
     "omr": "asymptoter",
     "kurs": [
@@ -3071,7 +3372,7 @@ window.BANKMATO2 = [
     "familj": "asymptot_rutin_svg_ny"
   },
   {
-    "id": "2.112",
+    "id": "2.123",
     "kap": 2,
     "omr": "logaritmfunktioner",
     "kurs": [
@@ -3084,7 +3385,7 @@ window.BANKMATO2 = [
     "familj": "proc_ln_definitionsmangd_2"
   },
   {
-    "id": "2.113",
+    "id": "2.124",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -3097,7 +3398,7 @@ window.BANKMATO2 = [
     "familj": "optimering_affisch_marginaler_svg"
   },
   {
-    "id": "2.114",
+    "id": "2.125",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -3110,7 +3411,7 @@ window.BANKMATO2 = [
     "familj": "relaterade_hastigheter_ballong_a"
   },
   {
-    "id": "2.115",
+    "id": "2.126",
     "kap": 2,
     "omr": "sammansatta_funktioner",
     "kurs": [
@@ -3123,7 +3424,7 @@ window.BANKMATO2 = [
     "familj": "sammansatt_fran_graf_tangent"
   },
   {
-    "id": "2.116",
+    "id": "2.127",
     "kap": 2,
     "omr": "derivata_sin_cos",
     "kurs": [
@@ -3136,7 +3437,7 @@ window.BANKMATO2 = [
     "familj": "derivata_sincos_rutin2"
   },
   {
-    "id": "2.117",
+    "id": "2.128",
     "kap": 2,
     "omr": "asymptoter",
     "kurs": [
@@ -3149,7 +3450,7 @@ window.BANKMATO2 = [
     "familj": "asymptot_skarning_resonemang_c"
   },
   {
-    "id": "2.118",
+    "id": "2.129",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -3162,7 +3463,7 @@ window.BANKMATO2 = [
     "familj": "proc_optimering_standard_2"
   },
   {
-    "id": "2.119",
+    "id": "2.130",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -3175,7 +3476,7 @@ window.BANKMATO2 = [
     "familj": "kallmaterial_tangent_exp"
   },
   {
-    "id": "2.120",
+    "id": "2.131",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -3188,7 +3489,20 @@ window.BANKMATO2 = [
     "familj": "optimering_lada_a"
   },
   {
-    "id": "2.121",
+    "id": "2.132",
+    "kap": 2,
+    "omr": "tillampningar_derivata",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>En periodisk effekt beskrivs under ett dygn av</p><p>\\[P(t)=200+80\\sin\\left(\\frac{\\pi t}{6}\\right),\\qquad 0\\le t\\le24,\\]</p><p>där \\(P\\) mäts i watt och \\(t\\) i timmar.</p><p>Bestäm den största möjliga förändringshastigheten för effekten och ange när under dygnet den inträffar.</p>",
+    "s": "<p>Derivera:</p><p>\\[P'(t)=80\\cdot\\frac\\pi6\\cos\\left(\\frac{\\pi t}{6}\\right)=\\frac{40\\pi}{3}\\cos\\left(\\frac{\\pi t}{6}\\right).\\]</p><p>Den största positiva förändringshastigheten fås när cosinus är 1.</p><p>\\[P'_{\\max}=\\boxed{\\frac{40\\pi}{3}\\approx41,9\\text{ W/h}}.\\]</p><p>I intervallet \\(0\\le t\\le24\\) är cosinus 1 när \\(t=0,12,24\\).</p><p><strong>Den största ökningen sker vid \\(t=0\\), 12 och 24 timmar.</strong></p>",
+    "familj": "problem_derivata_periodisk_forandring"
+  },
+  {
+    "id": "2.133",
     "kap": 2,
     "omr": "kedjeregeln",
     "kurs": [
@@ -3201,7 +3515,7 @@ window.BANKMATO2 = [
     "familj": "kedja_rutin2"
   },
   {
-    "id": "2.122",
+    "id": "2.134",
     "kap": 2,
     "omr": "derivata_sin_cos",
     "kurs": [
@@ -3214,7 +3528,7 @@ window.BANKMATO2 = [
     "familj": "harledning_tangensderivata"
   },
   {
-    "id": "2.123",
+    "id": "2.135",
     "kap": 2,
     "omr": "kvotregeln",
     "kurs": [
@@ -3227,7 +3541,7 @@ window.BANKMATO2 = [
     "familj": "kvot_ln_tangent"
   },
   {
-    "id": "2.124",
+    "id": "2.136",
     "kap": 2,
     "omr": "deriveringsregler_repetition",
     "kurs": [
@@ -3240,7 +3554,7 @@ window.BANKMATO2 = [
     "familj": "proc_deriv_blandad_5"
   },
   {
-    "id": "2.125",
+    "id": "2.137",
     "kap": 2,
     "omr": "derivata_grafer",
     "kurs": [
@@ -3253,7 +3567,7 @@ window.BANKMATO2 = [
     "familj": "derivata_graf_tecken_e"
   },
   {
-    "id": "2.126",
+    "id": "2.138",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -3266,7 +3580,7 @@ window.BANKMATO2 = [
     "familj": "optimering_rektangel_under_parabel"
   },
   {
-    "id": "2.127",
+    "id": "2.139",
     "kap": 2,
     "omr": "tillampningar_derivata",
     "kurs": [
@@ -3279,7 +3593,7 @@ window.BANKMATO2 = [
     "familj": "optimering_rektangel"
   },
   {
-    "id": "2.128",
+    "id": "2.140",
     "kap": 2,
     "omr": "produktregeln",
     "kurs": [
@@ -3292,7 +3606,7 @@ window.BANKMATO2 = [
     "familj": "produktregel_rutin3"
   },
   {
-    "id": "2.129",
+    "id": "2.141",
     "kap": 2,
     "omr": "produktregeln",
     "kurs": [
@@ -3305,7 +3619,7 @@ window.BANKMATO2 = [
     "familj": "proc_produktregeln_1"
   },
   {
-    "id": "2.130",
+    "id": "2.142",
     "kap": 2,
     "omr": "logaritmfunktioner",
     "kurs": [
@@ -3437,6 +3751,19 @@ window.BANKMATO2 = [
   {
     "id": "3.10",
     "kap": 3,
+    "omr": "integraler_storheter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Grafen visar ett vattenflöde in i en tank under 10 minuter. Mellan markerade punkter ändras flödet linjärt.</p><span class=\"fig\"><svg width=\"440\" height=\"260\" viewBox=\"0 0 440 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"438\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"222\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"126.0\" y1=\"20\" x2=\"126.0\" y2=\"222\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"200.0\" y1=\"20\" x2=\"200.0\" y2=\"222\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"274.0\" y1=\"20\" x2=\"274.0\" y2=\"222\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"348.0\" y1=\"20\" x2=\"348.0\" y2=\"222\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"422.0\" y1=\"20\" x2=\"422.0\" y2=\"222\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"222.0\" x2=\"422\" y2=\"222.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"164.3\" x2=\"422\" y2=\"164.3\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"106.6\" x2=\"422\" y2=\"106.6\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"48.9\" x2=\"422\" y2=\"48.9\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"222\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"52\" y1=\"222.0\" x2=\"422\" y2=\"222.0\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<text x=\"52.0\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">0</text>\n<text x=\"126.0\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">2</text>\n<text x=\"274.0\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">6</text>\n<text x=\"422.0\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">10</text>\n<text x=\"44\" y=\"168.3\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">4</text>\n<text x=\"44\" y=\"110.6\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">8</text>\n<text x=\"44\" y=\"52.9\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">12</text>\n<polyline points=\"52,222 126,49 274,49 422,164\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"3\"/><circle cx=\"52\" cy=\"222\" r=\"4\" fill=\"#B43123\"/><circle cx=\"126\" cy=\"49\" r=\"4\" fill=\"#B43123\"/><circle cx=\"274\" cy=\"49\" r=\"4\" fill=\"#B43123\"/><circle cx=\"422\" cy=\"165\" r=\"4\" fill=\"#B43123\"/><text x=\"65\" y=\"35\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">flöde (L/min)</text><text x=\"415\" y=\"225\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">tid (min)</text>\n</svg></span><p>a) Hur mycket vatten har runnit in efter 10 minuter?<br>b) Bestäm medelflödet under de 10 minuterna.</p>",
+    "s": "<p><strong>Idé:</strong> Den tillförda volymen är arean under flödesgrafen.</p><p>0–2 min: en trapets med höjderna 0 och 12:</p><p>\\[V_1=\\frac{0+12}{2}\\cdot2=12\\text{ L}.\\]</p><p>2–6 min: rektangel:</p><p>\\[V_2=12\\cdot4=48\\text{ L}.\\]</p><p>6–10 min: trapets med höjderna 12 och 4:</p><p>\\[V_3=\\frac{12+4}{2}\\cdot4=32\\text{ L}.\\]</p><p>Totalt</p><p>\\[V=12+48+32=\\boxed{92\\text{ L}}.\\]</p><p>Medelflödet blir total volym dividerad med tid:</p><p>\\[\\frac{92}{10}=\\boxed{9,2\\text{ L/min}}.\\]</p>",
+    "familj": "problem_integral_flodesgraf"
+  },
+  {
+    "id": "3.11",
+    "kap": 3,
     "omr": "area_integraler",
     "kurs": [
       "2c"
@@ -3448,7 +3775,7 @@ window.BANKMATO2 = [
     "familj": "proc_integral_vs_area"
   },
   {
-    "id": "3.11",
+    "id": "3.12",
     "kap": 3,
     "omr": "primitiva_funktioner",
     "kurs": [
@@ -3461,7 +3788,7 @@ window.BANKMATO2 = [
     "familj": "proc_primitiva_1"
   },
   {
-    "id": "3.12",
+    "id": "3.13",
     "kap": 3,
     "omr": "tathetsfunktioner",
     "kurs": [
@@ -3474,7 +3801,7 @@ window.BANKMATO2 = [
     "familj": "tathet_triangel_e"
   },
   {
-    "id": "3.13",
+    "id": "3.14",
     "kap": 3,
     "omr": "primitiva_funktioner",
     "kurs": [
@@ -3487,7 +3814,7 @@ window.BANKMATO2 = [
     "familj": "primitiv_rutin2"
   },
   {
-    "id": "3.14",
+    "id": "3.15",
     "kap": 3,
     "omr": "sannolikhetsfordelning",
     "kurs": [
@@ -3500,7 +3827,7 @@ window.BANKMATO2 = [
     "familj": "proc_sannolikhet_tathet_1"
   },
   {
-    "id": "3.15",
+    "id": "3.16",
     "kap": 3,
     "omr": "primitiva_funktioner",
     "kurs": [
@@ -3513,7 +3840,7 @@ window.BANKMATO2 = [
     "familj": "proc_primitiv_villkor_2"
   },
   {
-    "id": "3.16",
+    "id": "3.17",
     "kap": 3,
     "omr": "integral_modellering",
     "kurs": [
@@ -3526,7 +3853,7 @@ window.BANKMATO2 = [
     "familj": "solcell_parabel_energi_c"
   },
   {
-    "id": "3.17",
+    "id": "3.18",
     "kap": 3,
     "omr": "area_mellan_kurvor",
     "kurs": [
@@ -3539,7 +3866,7 @@ window.BANKMATO2 = [
     "familj": "area_linje_parabel"
   },
   {
-    "id": "3.18",
+    "id": "3.19",
     "kap": 3,
     "omr": "sannolikhetsfordelning",
     "kurs": [
@@ -3552,7 +3879,20 @@ window.BANKMATO2 = [
     "familj": "tathet_2x_e"
   },
   {
-    "id": "3.19",
+    "id": "3.20",
+    "kap": 3,
+    "omr": "area_mellan_kurvor",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>Kurvorna</p><p>\\[y=x^2\\quad\\text{och}\\quad y=kx,\\qquad k>0,\\]</p><p>innesluter ett område.</p><p>Bestäm \\(k\\) så att områdets area är \\(4,5\\) areaenheter.</p>",
+    "s": "<p>Skärningspunkterna fås av</p><p>\\[x^2=kx\\Rightarrow x=0\\quad\\text{eller}\\quad x=k.\\]</p><p>För \\(0<x<k\\) ligger linjen över parabeln. Arean är därför</p><p>\\[A=\\int_0^k(kx-x^2)\\,dx.\\]</p><p>\\[A=\\left[\\frac{kx^2}{2}-\\frac{x^3}{3}\\right]_0^k=\\frac{k^3}{2}-\\frac{k^3}{3}=\\frac{k^3}{6}.\\]</p><p>Villkoret \\(A=4,5=9/2\\) ger</p><p>\\[\\frac{k^3}{6}=\\frac92\\Rightarrow k^3=27.\\]</p><p><strong>\\(\\boxed{k=3}\\).</strong></p>",
+    "familj": "problem_integral_area_parameter"
+  },
+  {
+    "id": "3.21",
     "kap": 3,
     "omr": "rotationsvolymer",
     "kurs": [
@@ -3565,7 +3905,7 @@ window.BANKMATO2 = [
     "familj": "rotation_bricka"
   },
   {
-    "id": "3.20",
+    "id": "3.22",
     "kap": 3,
     "omr": "area_integraler",
     "kurs": [
@@ -3578,7 +3918,7 @@ window.BANKMATO2 = [
     "familj": "proc_area_teckenbyte_1"
   },
   {
-    "id": "3.21",
+    "id": "3.23",
     "kap": 3,
     "omr": "integralberakning",
     "kurs": [
@@ -3591,7 +3931,7 @@ window.BANKMATO2 = [
     "familj": "proc_bestamda_integraler_4"
   },
   {
-    "id": "3.22",
+    "id": "3.24",
     "kap": 3,
     "omr": "primitiva_funktioner",
     "kurs": [
@@ -3604,7 +3944,7 @@ window.BANKMATO2 = [
     "familj": "proc_primitiva_kedjeformer"
   },
   {
-    "id": "3.23",
+    "id": "3.25",
     "kap": 3,
     "omr": "area_integraler",
     "kurs": [
@@ -3617,7 +3957,7 @@ window.BANKMATO2 = [
     "familj": "integral_graf_tecknad_area"
   },
   {
-    "id": "3.24",
+    "id": "3.26",
     "kap": 3,
     "omr": "integraler_storheter",
     "kurs": [
@@ -3630,7 +3970,7 @@ window.BANKMATO2 = [
     "familj": "integral_hastighet"
   },
   {
-    "id": "3.25",
+    "id": "3.27",
     "kap": 3,
     "omr": "integraler_storheter",
     "kurs": [
@@ -3643,7 +3983,7 @@ window.BANKMATO2 = [
     "familj": "proc_integral_flode_1"
   },
   {
-    "id": "3.26",
+    "id": "3.28",
     "kap": 3,
     "omr": "rotationsvolymer",
     "kurs": [
@@ -3656,7 +3996,7 @@ window.BANKMATO2 = [
     "familj": "rotation_linje_xaxel"
   },
   {
-    "id": "3.27",
+    "id": "3.29",
     "kap": 3,
     "omr": "integralberakning",
     "kurs": [
@@ -3669,7 +4009,20 @@ window.BANKMATO2 = [
     "familj": "proc_integraler_exp_ln_trig_3"
   },
   {
-    "id": "3.28",
+    "id": "3.30",
+    "kap": 3,
+    "omr": "tathetsfunktioner",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>En slumpvariabel \\(X\\) har täthetsfunktionen</p><p>\\[f(x)=kx(4-x),\\qquad 0\\le x\\le4,\\]</p><p>och \\(f(x)=0\\) annars.</p><p>a) Bestäm \\(k\\).<br>b) Bestäm \\(P(1\\le X\\le3)\\).</p>",
+    "s": "<p>a) Arean under en täthetsfunktion ska vara 1:</p><p>\\[\\int_0^4kx(4-x)\\,dx=1.\\]</p><p>\\[k\\int_0^4(4x-x^2)\\,dx=k\\left[2x^2-\\frac{x^3}{3}\\right]_0^4=k\\frac{32}{3}=1.\\]</p><p>Alltså</p><p>\\[\\boxed{k=\\frac3{32}}.\\]</p><p>b)</p><p>\\[P(1\\le X\\le3)=\\int_1^3\\frac3{32}x(4-x)\\,dx=\\boxed{\\frac{11}{16}\\approx0,688}.\\]</p>",
+    "familj": "problem_tathet_parabel"
+  },
+  {
+    "id": "3.31",
     "kap": 3,
     "omr": "area_integraler",
     "kurs": [
@@ -3682,7 +4035,7 @@ window.BANKMATO2 = [
     "familj": "kallmaterial_cos3x_area"
   },
   {
-    "id": "3.29",
+    "id": "3.32",
     "kap": 3,
     "omr": "sannolikhetsfordelning",
     "kurs": [
@@ -3695,7 +4048,7 @@ window.BANKMATO2 = [
     "familj": "tathetsfamilj_parameter_a"
   },
   {
-    "id": "3.30",
+    "id": "3.33",
     "kap": 3,
     "omr": "area_integraler",
     "kurs": [
@@ -3708,7 +4061,7 @@ window.BANKMATO2 = [
     "familj": "sinus_signed_vs_area"
   },
   {
-    "id": "3.31",
+    "id": "3.34",
     "kap": 3,
     "omr": "integralberakning",
     "kurs": [
@@ -3721,7 +4074,7 @@ window.BANKMATO2 = [
     "familj": "integral_rutin_fyra"
   },
   {
-    "id": "3.32",
+    "id": "3.35",
     "kap": 3,
     "omr": "integral_modellering",
     "kurs": [
@@ -3734,7 +4087,7 @@ window.BANKMATO2 = [
     "familj": "integral_intervall_maxbredd_a"
   },
   {
-    "id": "3.33",
+    "id": "3.36",
     "kap": 3,
     "omr": "integralberakning",
     "kurs": [
@@ -3747,7 +4100,7 @@ window.BANKMATO2 = [
     "familj": "proc_integraler_trig_kedja_2"
   },
   {
-    "id": "3.34",
+    "id": "3.37",
     "kap": 3,
     "omr": "integral_modellering",
     "kurs": [
@@ -3760,7 +4113,7 @@ window.BANKMATO2 = [
     "familj": "glidande_integral_max"
   },
   {
-    "id": "3.35",
+    "id": "3.38",
     "kap": 3,
     "omr": "primitiva_funktioner",
     "kurs": [
@@ -3773,7 +4126,20 @@ window.BANKMATO2 = [
     "familj": "primitiva_rutin_fyra_delar"
   },
   {
-    "id": "3.36",
+    "id": "3.39",
+    "kap": 3,
+    "omr": "sannolikhetsfordelning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>En väntetid \\(X\\) har täthetsfunktionen</p><p>\\[f(x)=k(1+x),\\qquad 0\\le x\\le2.\\]</p><p>a) Bestäm \\(k\\).<br>b) Bestäm medianen \\(m\\), alltså det värde som uppfyller \\(P(X\\le m)=0,5\\).</p>",
+    "s": "<p>a) Normaliseringsvillkoret är</p><p>\\[\\int_0^2k(1+x)\\,dx=1.\\]</p><p>\\[k\\left[x+\\frac{x^2}{2}\\right]_0^2=4k=1\\Rightarrow \\boxed{k=\\frac14}.\\]</p><p>b) Medianen uppfyller</p><p>\\[\\int_0^m\\frac14(1+x)\\,dx=\\frac12.\\]</p><p>\\[\\frac14\\left(m+\\frac{m^2}{2}\\right)=\\frac12.\\]</p><p>Multiplicera med 8:</p><p>\\[m^2+2m-4=0.\\]</p><p>\\[m=-1\\pm\\sqrt5.\\]</p><p>Endast den positiva lösningen ligger i intervallet:</p><p>\\[\\boxed{m=\\sqrt5-1\\approx1,236}.\\]</p>",
+    "familj": "problem_tathet_median"
+  },
+  {
+    "id": "3.40",
     "kap": 3,
     "omr": "integralberakning",
     "kurs": [
@@ -3786,7 +4152,7 @@ window.BANKMATO2 = [
     "familj": "integral_rutin4"
   },
   {
-    "id": "3.37",
+    "id": "3.41",
     "kap": 3,
     "omr": "sannolikhetsfordelning",
     "kurs": [
@@ -3799,7 +4165,7 @@ window.BANKMATO2 = [
     "familj": "tathetsfunktion_bestam_k"
   },
   {
-    "id": "3.38",
+    "id": "3.42",
     "kap": 3,
     "omr": "rotationsvolymer",
     "kurs": [
@@ -3812,7 +4178,7 @@ window.BANKMATO2 = [
     "familj": "rotationsvolym_avskuren_kula_a"
   },
   {
-    "id": "3.39",
+    "id": "3.43",
     "kap": 3,
     "omr": "area_integraler",
     "kurs": [
@@ -3825,7 +4191,7 @@ window.BANKMATO2 = [
     "familj": "proc_area_under_kurva_3"
   },
   {
-    "id": "3.40",
+    "id": "3.44",
     "kap": 3,
     "omr": "integralberakning",
     "kurs": [
@@ -3838,7 +4204,7 @@ window.BANKMATO2 = [
     "familj": "integral_graf_geometrisk_e_svg"
   },
   {
-    "id": "3.41",
+    "id": "3.45",
     "kap": 3,
     "omr": "primitiva_funktioner",
     "kurs": [
@@ -3851,7 +4217,7 @@ window.BANKMATO2 = [
     "familj": "proc_primitiva_begynnelsevillkor"
   },
   {
-    "id": "3.42",
+    "id": "3.46",
     "kap": 3,
     "omr": "rotationsvolymer",
     "kurs": [
@@ -3864,7 +4230,7 @@ window.BANKMATO2 = [
     "familj": "vas_rotationsvolym_tva_radier_a"
   },
   {
-    "id": "3.43",
+    "id": "3.47",
     "kap": 3,
     "omr": "integralberakning",
     "kurs": [
@@ -3877,7 +4243,7 @@ window.BANKMATO2 = [
     "familj": "proc_integral_bestamd_1"
   },
   {
-    "id": "3.44",
+    "id": "3.48",
     "kap": 3,
     "omr": "integralberakning",
     "kurs": [
@@ -3890,7 +4256,20 @@ window.BANKMATO2 = [
     "familj": "integral_noll_langsta_intervall_a"
   },
   {
-    "id": "3.45",
+    "id": "3.49",
+    "kap": 3,
+    "omr": "rotationsvolymer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Området mellan kurvorna \\(y=\\sqrt{x}\\) och \\(y=x\\) för \\(0\\le x\\le1\\) roteras kring x-axeln.</p><span class=\"fig\"><svg width=\"400\" height=\"280\" viewBox=\"0 0 400 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"398\" height=\"278\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"242\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"123.7\" y1=\"20\" x2=\"123.7\" y2=\"242\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"195.5\" y1=\"20\" x2=\"195.5\" y2=\"242\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"267.2\" y1=\"20\" x2=\"267.2\" y2=\"242\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"339.0\" y1=\"20\" x2=\"339.0\" y2=\"242\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"242.0\" x2=\"382\" y2=\"242.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"193.7\" x2=\"382\" y2=\"193.7\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"145.5\" x2=\"382\" y2=\"145.5\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"97.2\" x2=\"382\" y2=\"97.2\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"49.0\" x2=\"382\" y2=\"49.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"242\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"52\" y1=\"242.0\" x2=\"382\" y2=\"242.0\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<text x=\"52.0\" y=\"266\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">0</text>\n<text x=\"339.0\" y=\"266\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">1</text>\n<text x=\"44\" y=\"246.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">0</text>\n<text x=\"44\" y=\"53.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">1</text>\n<path d=\"M52.0,242.0 L53.4,228.6 L54.8,223.1 L56.1,218.9 L57.5,215.3 L58.9,212.1 L60.2,209.3 L61.6,206.6 L63.0,204.2 L64.4,201.9 L65.8,199.7 L67.1,197.7 L68.5,195.7 L69.9,193.8 L71.2,192.0 L72.6,190.2 L74.0,188.5 L75.4,186.9 L76.8,185.3 L78.1,183.8 L79.5,182.2 L80.9,180.8 L82.2,179.3 L83.6,177.9 L85.0,176.5 L86.4,175.2 L87.8,173.9 L89.1,172.6 L90.5,171.3 L91.9,170.0 L93.2,168.8 L94.6,167.6 L96.0,166.4 L97.4,165.2 L98.8,164.1 L100.1,162.9 L101.5,161.8 L102.9,160.7 L104.2,159.6 L105.6,158.5 L107.0,157.5 L108.4,156.4 L109.8,155.4 L111.1,154.4 L112.5,153.4 L113.9,152.4 L115.2,151.4 L116.6,150.4 L118.0,149.4 L119.4,148.5 L120.8,147.5 L122.1,146.6 L123.5,145.6 L124.9,144.7 L126.2,143.8 L127.6,142.9 L129.0,142.0 L130.4,141.1 L131.8,140.2 L133.1,139.4 L134.5,138.5 L135.9,137.6 L137.2,136.8 L138.6,135.9 L140.0,135.1 L141.4,134.3 L142.8,133.4 L144.1,132.6 L145.5,131.8 L146.9,131.0 L148.2,130.2 L149.6,129.4 L151.0,128.6 L152.4,127.8 L153.8,127.0 L155.1,126.3 L156.5,125.5 L157.9,124.7 L159.2,124.0 L160.6,123.2 L162.0,122.5 L163.4,121.7 L164.8,121.0 L166.1,120.3 L167.5,119.5 L168.9,118.8 L170.2,118.1 L171.6,117.4 L173.0,116.6 L174.4,115.9 L175.8,115.2 L177.1,114.5 L178.5,113.8 L179.9,113.1 L181.2,112.4 L182.6,111.8 L184.0,111.1 L185.4,110.4 L186.8,109.7 L188.1,109.0 L189.5,108.4 L190.9,107.7 L192.2,107.0 L193.6,106.4 L195.0,105.7 L196.4,105.1 L197.8,104.4 L199.1,103.8 L200.5,103.1 L201.9,102.5 L203.2,101.8 L204.6,101.2 L206.0,100.6 L207.4,100.0 L208.8,99.3 L210.1,98.7 L211.5,98.1 L212.9,97.5 L214.2,96.8 L215.6,96.2 L217.0,95.6 L218.4,95.0 L219.8,94.4 L221.1,93.8 L222.5,93.2 L223.9,92.6 L225.2,92.0 L226.6,91.4 L228.0,90.8 L229.4,90.2 L230.8,89.6 L232.1,89.1 L233.5,88.5 L234.9,87.9 L236.2,87.3 L237.6,86.7 L239.0,86.2 L240.4,85.6 L241.8,85.0 L243.1,84.5 L244.5,83.9 L245.9,83.3 L247.2,82.8 L248.6,82.2 L250.0,81.6 L251.4,81.1 L252.7,80.5 L254.1,80.0 L255.5,79.4 L256.9,78.9 L258.2,78.3 L259.6,77.8 L261.0,77.3 L262.4,76.7 L263.8,76.2 L265.1,75.6 L266.5,75.1 L267.9,74.6 L269.2,74.0 L270.6,73.5 L272.0,73.0 L273.4,72.4 L274.8,71.9 L276.1,71.4 L277.5,70.9 L278.9,70.4 L280.2,69.8 L281.6,69.3 L283.0,68.8 L284.4,68.3 L285.8,67.8 L287.1,67.3 L288.5,66.7 L289.9,66.2 L291.2,65.7 L292.6,65.2 L294.0,64.7 L295.4,64.2 L296.8,63.7 L298.1,63.2 L299.5,62.7 L300.9,62.2 L302.2,61.7 L303.6,61.2 L305.0,60.7 L306.4,60.2 L307.8,59.8 L309.1,59.3 L310.5,58.8 L311.9,58.3 L313.2,57.8 L314.6,57.3 L316.0,56.8 L317.4,56.4 L318.8,55.9 L320.1,55.4 L321.5,54.9 L322.9,54.4 L324.2,54.0 L325.6,53.5 L327.0,53.0 L328.4,52.5 L329.8,52.1 L331.1,51.6 L332.5,51.1 L333.9,50.7 L335.2,50.2 L336.6,49.7 L338.0,49.3 L339.4,48.8 L340.8,48.4 L342.1,47.9 L343.5,47.4 L344.9,47.0 L346.2,46.5 L347.6,46.1 L349.0,45.6 L350.4,45.2 L351.8,44.7 L353.1,44.2 L354.5,43.8 L355.9,43.3 L357.2,42.9 L358.6,42.5 L360.0,42.0 L361.4,41.6 L362.8,41.1 L364.1,40.7 L365.5,40.2 L366.9,39.8 L368.2,39.3 L369.6,38.9 L371.0,38.5 L372.4,38.0 L373.8,37.6 L375.1,37.2 L376.5,36.7 L377.9,36.3 L379.2,35.8 L380.6,35.4 L382.0,35.0\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\"/>\n<path d=\"M52.0,242.0 L53.4,241.1 L54.8,240.2 L56.1,239.2 L57.5,238.3 L58.9,237.4 L60.2,236.4 L61.6,235.5 L63.0,234.6 L64.4,233.7 L65.8,232.8 L67.1,231.8 L68.5,230.9 L69.9,230.0 L71.2,229.0 L72.6,228.1 L74.0,227.2 L75.4,226.3 L76.8,225.4 L78.1,224.4 L79.5,223.5 L80.9,222.6 L82.2,221.7 L83.6,220.7 L85.0,219.8 L86.4,218.9 L87.8,218.0 L89.1,217.0 L90.5,216.1 L91.9,215.2 L93.2,214.2 L94.6,213.3 L96.0,212.4 L97.4,211.5 L98.8,210.6 L100.1,209.6 L101.5,208.7 L102.9,207.8 L104.2,206.8 L105.6,205.9 L107.0,205.0 L108.4,204.1 L109.8,203.2 L111.1,202.2 L112.5,201.3 L113.9,200.4 L115.2,199.4 L116.6,198.5 L118.0,197.6 L119.4,196.7 L120.8,195.8 L122.1,194.8 L123.5,193.9 L124.9,193.0 L126.2,192.0 L127.6,191.1 L129.0,190.2 L130.4,189.3 L131.8,188.4 L133.1,187.4 L134.5,186.5 L135.9,185.6 L137.2,184.6 L138.6,183.7 L140.0,182.8 L141.4,181.9 L142.8,181.0 L144.1,180.0 L145.5,179.1 L146.9,178.2 L148.2,177.2 L149.6,176.3 L151.0,175.4 L152.4,174.5 L153.8,173.6 L155.1,172.6 L156.5,171.7 L157.9,170.8 L159.2,169.8 L160.6,168.9 L162.0,168.0 L163.4,167.1 L164.8,166.2 L166.1,165.2 L167.5,164.3 L168.9,163.4 L170.2,162.4 L171.6,161.5 L173.0,160.6 L174.4,159.7 L175.8,158.8 L177.1,157.8 L178.5,156.9 L179.9,156.0 L181.2,155.0 L182.6,154.1 L184.0,153.2 L185.4,152.3 L186.8,151.3 L188.1,150.4 L189.5,149.5 L190.9,148.6 L192.2,147.6 L193.6,146.7 L195.0,145.8 L196.4,144.9 L197.8,143.9 L199.1,143.0 L200.5,142.1 L201.9,141.2 L203.2,140.2 L204.6,139.3 L206.0,138.4 L207.4,137.5 L208.8,136.5 L210.1,135.6 L211.5,134.7 L212.9,133.8 L214.2,132.9 L215.6,131.9 L217.0,131.0 L218.4,130.1 L219.8,129.2 L221.1,128.2 L222.5,127.3 L223.9,126.4 L225.2,125.5 L226.6,124.5 L228.0,123.6 L229.4,122.7 L230.8,121.7 L232.1,120.8 L233.5,119.9 L234.9,119.0 L236.2,118.0 L237.6,117.1 L239.0,116.2 L240.4,115.3 L241.8,114.3 L243.1,113.4 L244.5,112.5 L245.9,111.6 L247.2,110.7 L248.6,109.7 L250.0,108.8 L251.4,107.9 L252.7,107.0 L254.1,106.0 L255.5,105.1 L256.9,104.2 L258.2,103.2 L259.6,102.3 L261.0,101.4 L262.4,100.5 L263.8,99.5 L265.1,98.6 L266.5,97.7 L267.9,96.8 L269.2,95.8 L270.6,94.9 L272.0,94.0 L273.4,93.1 L274.8,92.2 L276.1,91.2 L277.5,90.3 L278.9,89.4 L280.2,88.5 L281.6,87.5 L283.0,86.6 L284.4,85.7 L285.8,84.8 L287.1,83.8 L288.5,82.9 L289.9,82.0 L291.2,81.0 L292.6,80.1 L294.0,79.2 L295.4,78.3 L296.8,77.3 L298.1,76.4 L299.5,75.5 L300.9,74.6 L302.2,73.7 L303.6,72.7 L305.0,71.8 L306.4,70.9 L307.8,70.0 L309.1,69.0 L310.5,68.1 L311.9,67.2 L313.2,66.2 L314.6,65.3 L316.0,64.4 L317.4,63.5 L318.8,62.5 L320.1,61.6 L321.5,60.7 L322.9,59.8 L324.2,58.8 L325.6,57.9 L327.0,57.0 L328.4,56.1 L329.8,55.1 L331.1,54.2 L332.5,53.3 L333.9,52.4 L335.2,51.5 L336.6,50.5 L338.0,49.6 L339.4,48.7 L340.8,47.8 L342.1,46.8 L343.5,45.9 L344.9,45.0 L346.2,44.0 L347.6,43.1 L349.0,42.2 L350.4,41.3 L351.8,40.4 L353.1,39.4 L354.5,38.5 L355.9,37.6 L357.2,36.6 L358.6,35.7 L360.0,34.8 L361.4,33.9 L362.8,33.0 L364.1,32.0 L365.5,31.1 L366.9,30.2 L368.2,29.2 L369.6,28.3 L371.0,27.4 L372.4,26.5 L373.8,25.6 L375.1,24.6 L376.5,23.7 L377.9,22.8 L379.2,21.8 L380.6,20.9 L382.0,20.0\" fill=\"none\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<text x=\"282\" y=\"74\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#B43123\">y=√x</text><text x=\"290\" y=\"122\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">y=x</text>\n</svg></span><p>Bestäm rotationskroppens volym exakt.</p>",
+    "s": "<p>På intervallet \\(0\\le x\\le1\\) gäller \\(\\sqrt{x}\\ge x\\). Vid rotation kring x-axeln blir därför den yttre radien \\(\\sqrt{x}\\) och den inre radien \\(x\\).</p><p>\\[V=\\pi\\int_0^1\\left((\\sqrt{x})^2-x^2\\right)dx.\\]</p><p>\\[V=\\pi\\int_0^1(x-x^2)dx=\\pi\\left[\\frac{x^2}{2}-\\frac{x^3}{3}\\right]_0^1.\\]</p><p>\\[V=\\pi\\left(\\frac12-\\frac13\\right)=\\boxed{\\frac\\pi6}.\\]</p>",
+    "familj": "problem_rotation_mellan_kurvor"
+  },
+  {
+    "id": "3.50",
     "kap": 3,
     "omr": "area_integraler",
     "kurs": [
@@ -3903,7 +4282,7 @@ window.BANKMATO2 = [
     "familj": "proc_geometrisk_area_tecken_2"
   },
   {
-    "id": "3.46",
+    "id": "3.51",
     "kap": 3,
     "omr": "integral_modellering",
     "kurs": [
@@ -3916,7 +4295,7 @@ window.BANKMATO2 = [
     "familj": "reservoar_nettoflode_c"
   },
   {
-    "id": "3.47",
+    "id": "3.52",
     "kap": 3,
     "omr": "rotationsvolymer",
     "kurs": [
@@ -3929,7 +4308,7 @@ window.BANKMATO2 = [
     "familj": "rotation_kring_horisontell_linje_svg"
   },
   {
-    "id": "3.48",
+    "id": "3.53",
     "kap": 3,
     "omr": "tathetsfunktioner",
     "kurs": [
@@ -3942,7 +4321,7 @@ window.BANKMATO2 = [
     "familj": "proc_tathet_normalisering_1"
   },
   {
-    "id": "3.49",
+    "id": "3.54",
     "kap": 3,
     "omr": "tathetsfunktioner",
     "kurs": [
@@ -3955,7 +4334,7 @@ window.BANKMATO2 = [
     "familj": "kallmaterial_tathetsfunktion_exp"
   },
   {
-    "id": "3.50",
+    "id": "3.55",
     "kap": 3,
     "omr": "integraler_storheter",
     "kurs": [
@@ -3968,7 +4347,7 @@ window.BANKMATO2 = [
     "familj": "integral_hastighet_totalstracka"
   },
   {
-    "id": "3.51",
+    "id": "3.56",
     "kap": 3,
     "omr": "area_mellan_kurvor",
     "kurs": [
@@ -3981,7 +4360,7 @@ window.BANKMATO2 = [
     "familj": "proc_area_mellan_kurvor_3"
   },
   {
-    "id": "3.52",
+    "id": "3.57",
     "kap": 3,
     "omr": "area_mellan_kurvor",
     "kurs": [
@@ -3994,7 +4373,7 @@ window.BANKMATO2 = [
     "familj": "area_parabel_linje_c_svg"
   },
   {
-    "id": "3.53",
+    "id": "3.58",
     "kap": 3,
     "omr": "rotationsvolymer",
     "kurs": [
@@ -4007,7 +4386,20 @@ window.BANKMATO2 = [
     "familj": "rotation_parabel_axel_y5_c_svg"
   },
   {
-    "id": "3.54",
+    "id": "3.59",
+    "kap": 3,
+    "omr": "rotationsvolymer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>En vas kan modelleras genom att området mellan två kurvor roteras kring x-axeln. Ytterkanten och innerkanten beskrivs av</p><p>\\[y_{yttre}=2+0,2x^2\\]</p><p>och</p><p>\\[y_{inre}=1,5+0,15x^2,\\qquad 0\\le x\\le4.\\]</p><span class=\"fig\"><svg width=\"410\" height=\"280\" viewBox=\"0 0 410 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"408\" height=\"278\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"242\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"133.0\" y1=\"20\" x2=\"133.0\" y2=\"242\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"213.9\" y1=\"20\" x2=\"213.9\" y2=\"242\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"294.9\" y1=\"20\" x2=\"294.9\" y2=\"242\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"375.8\" y1=\"20\" x2=\"375.8\" y2=\"242\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"242.0\" x2=\"392\" y2=\"242.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"202.4\" x2=\"392\" y2=\"202.4\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"162.7\" x2=\"392\" y2=\"162.7\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"123.1\" x2=\"392\" y2=\"123.1\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"83.4\" x2=\"392\" y2=\"83.4\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"43.8\" x2=\"392\" y2=\"43.8\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"242\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"52\" y1=\"242.0\" x2=\"392\" y2=\"242.0\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<text x=\"52.0\" y=\"266\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">0</text>\n<text x=\"213.9\" y=\"266\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">2</text>\n<text x=\"375.8\" y=\"266\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">4</text>\n<text x=\"44\" y=\"186.5\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">1,5</text>\n<text x=\"44\" y=\"166.7\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">2</text>\n<text x=\"44\" y=\"47.8\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">5</text>\n<path d=\"M52.0,162.7 L53.4,162.7 L54.8,162.7 L56.2,162.7 L57.7,162.7 L59.1,162.7 L60.5,162.6 L61.9,162.6 L63.3,162.6 L64.8,162.5 L66.2,162.5 L67.6,162.4 L69.0,162.4 L70.4,162.3 L71.8,162.2 L73.2,162.2 L74.7,162.1 L76.1,162.0 L77.5,161.9 L78.9,161.8 L80.3,161.7 L81.8,161.6 L83.2,161.5 L84.6,161.4 L86.0,161.3 L87.4,161.2 L88.8,161.1 L90.2,160.9 L91.7,160.8 L93.1,160.7 L94.5,160.5 L95.9,160.4 L97.3,160.2 L98.8,160.1 L100.2,159.9 L101.6,159.7 L103.0,159.6 L104.4,159.4 L105.8,159.2 L107.2,159.0 L108.7,158.8 L110.1,158.6 L111.5,158.4 L112.9,158.2 L114.3,158.0 L115.8,157.8 L117.2,157.6 L118.6,157.4 L120.0,157.1 L121.4,156.9 L122.8,156.6 L124.2,156.4 L125.7,156.1 L127.1,155.9 L128.5,155.6 L129.9,155.4 L131.3,155.1 L132.8,154.8 L134.2,154.5 L135.6,154.3 L137.0,154.0 L138.4,153.7 L139.8,153.4 L141.2,153.1 L142.7,152.8 L144.1,152.5 L145.5,152.1 L146.9,151.8 L148.3,151.5 L149.8,151.2 L151.2,150.8 L152.6,150.5 L154.0,150.1 L155.4,149.8 L156.8,149.4 L158.2,149.1 L159.7,148.7 L161.1,148.3 L162.5,147.9 L163.9,147.6 L165.3,147.2 L166.8,146.8 L168.2,146.4 L169.6,146.0 L171.0,145.6 L172.4,145.2 L173.8,144.8 L175.2,144.3 L176.7,143.9 L178.1,143.5 L179.5,143.0 L180.9,142.6 L182.3,142.2 L183.8,141.7 L185.2,141.3 L186.6,140.8 L188.0,140.3 L189.4,139.9 L190.8,139.4 L192.2,138.9 L193.7,138.4 L195.1,137.9 L196.5,137.5 L197.9,137.0 L199.3,136.5 L200.7,135.9 L202.2,135.4 L203.6,134.9 L205.0,134.4 L206.4,133.9 L207.8,133.3 L209.2,132.8 L210.7,132.3 L212.1,131.7 L213.5,131.2 L214.9,130.6 L216.3,130.0 L217.8,129.5 L219.2,128.9 L220.6,128.3 L222.0,127.7 L223.4,127.2 L224.8,126.6 L226.3,126.0 L227.7,125.4 L229.1,124.8 L230.5,124.2 L231.9,123.6 L233.3,122.9 L234.8,122.3 L236.2,121.7 L237.6,121.0 L239.0,120.4 L240.4,119.8 L241.8,119.1 L243.2,118.5 L244.7,117.8 L246.1,117.1 L247.5,116.5 L248.9,115.8 L250.3,115.1 L251.8,114.4 L253.2,113.8 L254.6,113.1 L256.0,112.4 L257.4,111.7 L258.8,111.0 L260.2,110.2 L261.7,109.5 L263.1,108.8 L264.5,108.1 L265.9,107.4 L267.3,106.6 L268.8,105.9 L270.2,105.1 L271.6,104.4 L273.0,103.6 L274.4,102.9 L275.8,102.1 L277.2,101.3 L278.7,100.6 L280.1,99.8 L281.5,99.0 L282.9,98.2 L284.3,97.4 L285.8,96.6 L287.2,95.8 L288.6,95.0 L290.0,94.2 L291.4,93.4 L292.8,92.5 L294.2,91.7 L295.7,90.9 L297.1,90.0 L298.5,89.2 L299.9,88.4 L301.3,87.5 L302.8,86.6 L304.2,85.8 L305.6,84.9 L307.0,84.0 L308.4,83.2 L309.8,82.3 L311.2,81.4 L312.7,80.5 L314.1,79.6 L315.5,78.7 L316.9,77.8 L318.3,76.9 L319.8,76.0 L321.2,75.1 L322.6,74.1 L324.0,73.2 L325.4,72.3 L326.8,71.3 L328.2,70.4 L329.7,69.4 L331.1,68.5 L332.5,67.5 L333.9,66.6 L335.3,65.6 L336.8,64.6 L338.2,63.6 L339.6,62.7 L341.0,61.7 L342.4,60.7 L343.8,59.7 L345.2,58.7 L346.7,57.7 L348.1,56.7 L349.5,55.6 L350.9,54.6 L352.3,53.6 L353.8,52.6 L355.2,51.5 L356.6,50.5 L358.0,49.4 L359.4,48.4 L360.8,47.3 L362.3,46.3 L363.7,45.2 L365.1,44.1 L366.5,43.0 L367.9,42.0 L369.3,40.9 L370.8,39.8 L372.2,38.7 L373.6,37.6 L375.0,36.5 L376.4,35.4 L377.8,34.3 L379.2,33.1 L380.7,32.0 L382.1,30.9 L383.5,29.8 L384.9,28.6 L386.3,27.5 L387.8,26.3 L389.2,25.2 L390.6,24.0 L392.0,22.9\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.6\"/>\n<path d=\"M52.0,182.5 L53.4,182.5 L54.8,182.5 L56.2,182.5 L57.7,182.5 L59.1,182.5 L60.5,182.5 L61.9,182.4 L63.3,182.4 L64.8,182.4 L66.2,182.4 L67.6,182.3 L69.0,182.3 L70.4,182.2 L71.8,182.2 L73.2,182.1 L74.7,182.1 L76.1,182.0 L77.5,181.9 L78.9,181.9 L80.3,181.8 L81.8,181.7 L83.2,181.7 L84.6,181.6 L86.0,181.5 L87.4,181.4 L88.8,181.3 L90.2,181.2 L91.7,181.1 L93.1,181.0 L94.5,180.9 L95.9,180.8 L97.3,180.7 L98.8,180.6 L100.2,180.4 L101.6,180.3 L103.0,180.2 L104.4,180.0 L105.8,179.9 L107.2,179.8 L108.7,179.6 L110.1,179.5 L111.5,179.3 L112.9,179.2 L114.3,179.0 L115.8,178.8 L117.2,178.7 L118.6,178.5 L120.0,178.3 L121.4,178.2 L122.8,178.0 L124.2,177.8 L125.7,177.6 L127.1,177.4 L128.5,177.2 L129.9,177.0 L131.3,176.8 L132.8,176.6 L134.2,176.4 L135.6,176.2 L137.0,176.0 L138.4,175.8 L139.8,175.5 L141.2,175.3 L142.7,175.1 L144.1,174.8 L145.5,174.6 L146.9,174.4 L148.3,174.1 L149.8,173.9 L151.2,173.6 L152.6,173.4 L154.0,173.1 L155.4,172.8 L156.8,172.6 L158.2,172.3 L159.7,172.0 L161.1,171.7 L162.5,171.5 L163.9,171.2 L165.3,170.9 L166.8,170.6 L168.2,170.3 L169.6,170.0 L171.0,169.7 L172.4,169.4 L173.8,169.1 L175.2,168.8 L176.7,168.4 L178.1,168.1 L179.5,167.8 L180.9,167.5 L182.3,167.1 L183.8,166.8 L185.2,166.4 L186.6,166.1 L188.0,165.8 L189.4,165.4 L190.8,165.0 L192.2,164.7 L193.7,164.3 L195.1,164.0 L196.5,163.6 L197.9,163.2 L199.3,162.8 L200.7,162.5 L202.2,162.1 L203.6,161.7 L205.0,161.3 L206.4,160.9 L207.8,160.5 L209.2,160.1 L210.7,159.7 L212.1,159.3 L213.5,158.9 L214.9,158.5 L216.3,158.0 L217.8,157.6 L219.2,157.2 L220.6,156.7 L222.0,156.3 L223.4,155.9 L224.8,155.4 L226.3,155.0 L227.7,154.5 L229.1,154.1 L230.5,153.6 L231.9,153.2 L233.3,152.7 L234.8,152.2 L236.2,151.8 L237.6,151.3 L239.0,150.8 L240.4,150.3 L241.8,149.8 L243.2,149.3 L244.7,148.9 L246.1,148.4 L247.5,147.9 L248.9,147.4 L250.3,146.8 L251.8,146.3 L253.2,145.8 L254.6,145.3 L256.0,144.8 L257.4,144.2 L258.8,143.7 L260.2,143.2 L261.7,142.6 L263.1,142.1 L264.5,141.6 L265.9,141.0 L267.3,140.5 L268.8,139.9 L270.2,139.3 L271.6,138.8 L273.0,138.2 L274.4,137.6 L275.8,137.1 L277.2,136.5 L278.7,135.9 L280.1,135.3 L281.5,134.7 L282.9,134.2 L284.3,133.6 L285.8,133.0 L287.2,132.4 L288.6,131.7 L290.0,131.1 L291.4,130.5 L292.8,129.9 L294.2,129.3 L295.7,128.7 L297.1,128.0 L298.5,127.4 L299.9,126.8 L301.3,126.1 L302.8,125.5 L304.2,124.8 L305.6,124.2 L307.0,123.5 L308.4,122.9 L309.8,122.2 L311.2,121.5 L312.7,120.9 L314.1,120.2 L315.5,119.5 L316.9,118.9 L318.3,118.2 L319.8,117.5 L321.2,116.8 L322.6,116.1 L324.0,115.4 L325.4,114.7 L326.8,114.0 L328.2,113.3 L329.7,112.6 L331.1,111.9 L332.5,111.1 L333.9,110.4 L335.3,109.7 L336.8,109.0 L338.2,108.2 L339.6,107.5 L341.0,106.7 L342.4,106.0 L343.8,105.3 L345.2,104.5 L346.7,103.7 L348.1,103.0 L349.5,102.2 L350.9,101.5 L352.3,100.7 L353.8,99.9 L355.2,99.1 L356.6,98.4 L358.0,97.6 L359.4,96.8 L360.8,96.0 L362.3,95.2 L363.7,94.4 L365.1,93.6 L366.5,92.8 L367.9,92.0 L369.3,91.2 L370.8,90.3 L372.2,89.5 L373.6,88.7 L375.0,87.9 L376.4,87.0 L377.8,86.2 L379.2,85.4 L380.7,84.5 L382.1,83.7 L383.5,82.8 L384.9,82.0 L386.3,81.1 L387.8,80.2 L389.2,79.4 L390.6,78.5 L392.0,77.6\" fill=\"none\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<text x=\"270\" y=\"56\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#B43123\">ytterkant</text><text x=\"277\" y=\"91\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#268FA3\">innerkant</text>\n</svg></span><p>Bestäm volymen material som behövs enligt modellen. Svara både exakt och med en decimal.</p>",
+    "s": "<p>Vid varje \\(x\\) fås en ring. Yttre radien är \\(2+0,2x^2\\) och inre radien är \\(1,5+0,15x^2\\).</p><p>\\[V=\\pi\\int_0^4\\left[(2+0,2x^2)^2-(1,5+0,15x^2)^2\\right]dx.\\]</p><p>Förenkla integranden:</p><p>\\[(2+0,2x^2)^2-(1,5+0,15x^2)^2=\\frac74+\\frac7{20}x^2+\\frac7{400}x^4.\\]</p><p>Därför</p><p>\\[V=\\pi\\left[\\frac74x+\\frac7{60}x^3+\\frac7{2000}x^5\\right]_0^4=\\boxed{\\frac{6769\\pi}{375}}.\\]</p><p>Numeriskt blir detta</p><p>\\[\\boxed{V\\approx56,7}\\]</p><p>volymenheter.</p>",
+    "familj": "problem_rotation_vas_material"
+  },
+  {
+    "id": "3.60",
     "kap": 3,
     "omr": "integralberakning",
     "kurs": [
@@ -4020,7 +4412,7 @@ window.BANKMATO2 = [
     "familj": "proc_integral_kedjeformer_c"
   },
   {
-    "id": "3.55",
+    "id": "3.61",
     "kap": 3,
     "omr": "integral_modellering",
     "kurs": [
@@ -4033,7 +4425,7 @@ window.BANKMATO2 = [
     "familj": "medelvarde_integral_temperatur"
   },
   {
-    "id": "3.56",
+    "id": "3.62",
     "kap": 3,
     "omr": "area_integraler",
     "kurs": [
@@ -4046,7 +4438,7 @@ window.BANKMATO2 = [
     "familj": "area_halvering_parameter_c"
   },
   {
-    "id": "3.57",
+    "id": "3.63",
     "kap": 3,
     "omr": "area_mellan_kurvor",
     "kurs": [
@@ -4059,7 +4451,7 @@ window.BANKMATO2 = [
     "familj": "proc_area_skarning_parabel_linje_2"
   },
   {
-    "id": "3.58",
+    "id": "3.64",
     "kap": 3,
     "omr": "area_mellan_kurvor",
     "kurs": [
@@ -4072,7 +4464,7 @@ window.BANKMATO2 = [
     "familj": "area_mellan_parabel_linje"
   },
   {
-    "id": "3.59",
+    "id": "3.65",
     "kap": 3,
     "omr": "area_mellan_kurvor",
     "kurs": [
@@ -4085,7 +4477,7 @@ window.BANKMATO2 = [
     "familj": "proc_area_mellan_kurvor_1"
   },
   {
-    "id": "3.60",
+    "id": "3.66",
     "kap": 3,
     "omr": "area_mellan_kurvor",
     "kurs": [
@@ -4098,7 +4490,7 @@ window.BANKMATO2 = [
     "familj": "area_sin_cos_symmetri_svg"
   },
   {
-    "id": "3.61",
+    "id": "3.67",
     "kap": 3,
     "omr": "integralberakning",
     "kurs": [
@@ -4111,7 +4503,7 @@ window.BANKMATO2 = [
     "familj": "integral_parameter_linjar"
   },
   {
-    "id": "3.62",
+    "id": "3.68",
     "kap": 3,
     "omr": "primitiva_funktioner",
     "kurs": [
@@ -4124,7 +4516,20 @@ window.BANKMATO2 = [
     "familj": "proc_primitiva_2"
   },
   {
-    "id": "3.63",
+    "id": "3.69",
+    "kap": 3,
+    "omr": "integraler_storheter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Effekten från en solpanel under 12 timmar modelleras av</p><p>\\[P(t)=600\\sin\\left(\\frac{\\pi t}{12}\\right),\\qquad 0\\le t\\le12,\\]</p><p>där \\(P\\) mäts i watt och \\(t\\) i timmar.</p><p>Hur mycket energi produceras under de 12 timmarna? Svara i kWh med två decimaler.</p>",
+    "s": "<p>Energin fås genom att integrera effekten över tiden:</p><p>\\[E=\\int_0^{12}600\\sin\\left(\\frac{\\pi t}{12}\\right)dt.\\]</p><p>En primitiv funktion är</p><p>\\[-\\frac{7200}{\\pi}\\cos\\left(\\frac{\\pi t}{12}\\right).\\]</p><p>Alltså</p><p>\\[E=\\frac{14400}{\\pi}\\text{ Wh}\\approx4583,7\\text{ Wh}.\\]</p><p>\\[\\boxed{E\\approx4,58\\text{ kWh}}.\\]</p>",
+    "familj": "problem_integral_solenergi"
+  },
+  {
+    "id": "3.70",
     "kap": 3,
     "omr": "integraler_storheter",
     "kurs": [
@@ -4137,7 +4542,7 @@ window.BANKMATO2 = [
     "familj": "proc_integral_hastighet_2"
   },
   {
-    "id": "3.64",
+    "id": "3.71",
     "kap": 3,
     "omr": "area_mellan_kurvor",
     "kurs": [
@@ -4150,7 +4555,7 @@ window.BANKMATO2 = [
     "familj": "proc_area_mellan_skarningar_c"
   },
   {
-    "id": "3.65",
+    "id": "3.72",
     "kap": 3,
     "omr": "primitiva_funktioner",
     "kurs": [
@@ -4163,7 +4568,7 @@ window.BANKMATO2 = [
     "familj": "primitiv_trig_exp_log_e"
   },
   {
-    "id": "3.66",
+    "id": "3.73",
     "kap": 3,
     "omr": "area_integraler",
     "kurs": [
@@ -4176,7 +4581,7 @@ window.BANKMATO2 = [
     "familj": "area_parameter_a"
   },
   {
-    "id": "3.67",
+    "id": "3.74",
     "kap": 3,
     "omr": "rotationsvolymer",
     "kurs": [
@@ -4189,7 +4594,7 @@ window.BANKMATO2 = [
     "familj": "rotation_kon_e"
   },
   {
-    "id": "3.68",
+    "id": "3.75",
     "kap": 3,
     "omr": "integralberakning",
     "kurs": [
@@ -4202,7 +4607,7 @@ window.BANKMATO2 = [
     "familj": "proc_integral_trig_1"
   },
   {
-    "id": "3.69",
+    "id": "3.76",
     "kap": 3,
     "omr": "integraler_storheter",
     "kurs": [
@@ -4215,7 +4620,7 @@ window.BANKMATO2 = [
     "familj": "proc_integral_effekt_energi_2"
   },
   {
-    "id": "3.70",
+    "id": "3.77",
     "kap": 3,
     "omr": "sannolikhetsfordelning",
     "kurs": [
@@ -4228,7 +4633,7 @@ window.BANKMATO2 = [
     "familj": "tathet_2x_intervall"
   },
   {
-    "id": "3.71",
+    "id": "3.78",
     "kap": 3,
     "omr": "rotationsvolymer",
     "kurs": [
@@ -4241,7 +4646,20 @@ window.BANKMATO2 = [
     "familj": "rotation_parabel_kring_y4"
   },
   {
-    "id": "3.72",
+    "id": "3.79",
+    "kap": 3,
+    "omr": "integral_modellering",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>Låt</p><p>\\[C=\\int_a^b(x-1)(5-x)\\,dx,\\qquad 0\\le a<b\\le6.\\]</p><p>Bestäm det största möjliga värdet av intervallets längd \\(b-a\\) om \\(C=0\\).</p>",
+    "s": "<p>Sätt</p><p>\\[F(x)=\\int (x-1)(5-x)dx=-\\frac{x^3}{3}+3x^2-5x.\\]</p><p>Villkoret \\(C=0\\) betyder \\(F(b)=F(a)\\).</p><p>Funktionen \\(F\\) är avtagande på \\([0,1]\\), växande på \\([1,5]\\) och avtagande på \\([5,6]\\), eftersom \\(F'(x)=(x-1)(5-x)\\).</p><p>Två olika punkter kan ha samma \\(F\\)-värde bara om de ligger på olika delar av grafen där \\(F\\) växer eller avtar. För den vänstra delen \\([0,1]\\) och mittdelen blir avståndet störst när den vänstra punkten flyttas ända till \\(a=0\\). På motsvarande sätt blir största avståndet mellan mittdelen och den högra delen när \\(b=6\\). På grund av symmetrin får de två fallen samma längd.</p><p>Ta därför \\(a=0\\). Då krävs \\(F(b)=F(0)=0\\):</p><p>\\[-\\frac{b^3}{3}+3b^2-5b=0.\\]</p><p>För \\(b>0\\):</p><p>\\[b^2-9b+15=0.\\]</p><p>Den lösning som ligger i intervallet är</p><p>\\[b=\\frac{9-\\sqrt{21}}{2}.\\]</p><p>Alltså är den största möjliga längden</p><p>\\[\\boxed{b-a=\\frac{9-\\sqrt{21}}2\\approx2,21}.\\]</p>",
+    "familj": "problem_integral_noll_parameter_intervall"
+  },
+  {
+    "id": "3.80",
     "kap": 3,
     "omr": "area_integraler",
     "kurs": [
@@ -4254,7 +4672,7 @@ window.BANKMATO2 = [
     "familj": "area_triangel_integral"
   },
   {
-    "id": "3.73",
+    "id": "3.81",
     "kap": 3,
     "omr": "integral_modellering",
     "kurs": [
@@ -4267,7 +4685,7 @@ window.BANKMATO2 = [
     "familj": "integral_effekt_sol"
   },
   {
-    "id": "3.74",
+    "id": "3.82",
     "kap": 3,
     "omr": "primitiva_funktioner",
     "kurs": [
@@ -4280,7 +4698,7 @@ window.BANKMATO2 = [
     "familj": "primitiv_rutin_fyra"
   },
   {
-    "id": "3.75",
+    "id": "3.83",
     "kap": 3,
     "omr": "integral_modellering",
     "kurs": [
@@ -4293,7 +4711,7 @@ window.BANKMATO2 = [
     "familj": "proc_integral_inflode_2"
   },
   {
-    "id": "3.76",
+    "id": "3.84",
     "kap": 3,
     "omr": "integral_modellering",
     "kurs": [
@@ -4306,7 +4724,7 @@ window.BANKMATO2 = [
     "familj": "solpanel_energi_integral"
   },
   {
-    "id": "3.77",
+    "id": "3.85",
     "kap": 3,
     "omr": "integralberakning",
     "kurs": [
@@ -4319,7 +4737,7 @@ window.BANKMATO2 = [
     "familj": "proc_integral_bestamd_2"
   },
   {
-    "id": "3.78",
+    "id": "3.86",
     "kap": 3,
     "omr": "integralberakning",
     "kurs": [
@@ -4332,7 +4750,7 @@ window.BANKMATO2 = [
     "familj": "bestamda_integraler_rutin"
   },
   {
-    "id": "3.79",
+    "id": "3.87",
     "kap": 3,
     "omr": "integraler_storheter",
     "kurs": [
@@ -4345,7 +4763,7 @@ window.BANKMATO2 = [
     "familj": "flodesgraf_trapets_total"
   },
   {
-    "id": "3.80",
+    "id": "3.88",
     "kap": 3,
     "omr": "primitiva_funktioner",
     "kurs": [
@@ -4358,7 +4776,20 @@ window.BANKMATO2 = [
     "familj": "primitiver_blandad_rutin"
   },
   {
-    "id": "3.81",
+    "id": "3.89",
+    "kap": 3,
+    "omr": "integraler_storheter",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>En partikels hastighet ges av</p><p>\\[v(t)=t^2-4t+3,\\qquad 0\\le t\\le4.\\]</p><span class=\"fig\"><svg width=\"420\" height=\"260\" viewBox=\"0 0 420 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"418\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"222\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"139.5\" y1=\"20\" x2=\"139.5\" y2=\"222\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"227.0\" y1=\"20\" x2=\"227.0\" y2=\"222\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"314.5\" y1=\"20\" x2=\"314.5\" y2=\"222\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"402.0\" y1=\"20\" x2=\"402.0\" y2=\"222\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"188.3\" x2=\"402\" y2=\"188.3\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"154.7\" x2=\"402\" y2=\"154.7\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"121.0\" x2=\"402\" y2=\"121.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"87.3\" x2=\"402\" y2=\"87.3\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"53.7\" x2=\"402\" y2=\"53.7\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52.0\" y1=\"20\" x2=\"52.0\" y2=\"222\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"52\" y1=\"154.7\" x2=\"402\" y2=\"154.7\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<text x=\"52.0\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">0</text>\n<text x=\"139.5\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">1</text>\n<text x=\"227.0\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">2</text>\n<text x=\"314.5\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">3</text>\n<text x=\"402.0\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">4</text>\n<text x=\"44\" y=\"192.3\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">−1</text>\n<text x=\"44\" y=\"158.7\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">0</text>\n<text x=\"44\" y=\"57.7\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">3</text>\n<path d=\"M52.0,53.7 L53.5,55.9 L54.9,58.1 L56.4,60.3 L57.8,62.5 L59.3,64.7 L60.8,66.8 L62.2,68.9 L63.7,71.0 L65.1,73.1 L66.6,75.2 L68.0,77.2 L69.5,79.3 L71.0,81.3 L72.4,83.3 L73.9,85.2 L75.3,87.2 L76.8,89.1 L78.2,91.0 L79.7,92.9 L81.2,94.8 L82.6,96.7 L84.1,98.5 L85.5,100.3 L87.0,102.1 L88.5,103.9 L89.9,105.7 L91.4,107.4 L92.8,109.2 L94.3,110.9 L95.8,112.6 L97.2,114.3 L98.7,115.9 L100.1,117.5 L101.6,119.2 L103.0,120.8 L104.5,122.3 L106.0,123.9 L107.4,125.5 L108.9,127.0 L110.3,128.5 L111.8,130.0 L113.2,131.4 L114.7,132.9 L116.2,134.3 L117.6,135.7 L119.1,137.1 L120.5,138.5 L122.0,139.9 L123.5,141.2 L124.9,142.5 L126.4,143.8 L127.8,145.1 L129.3,146.4 L130.8,147.6 L132.2,148.8 L133.7,150.0 L135.1,151.2 L136.6,152.4 L138.0,153.5 L139.5,154.7 L141.0,155.8 L142.4,156.9 L143.9,157.9 L145.3,159.0 L146.8,160.0 L148.2,161.1 L149.7,162.1 L151.2,163.0 L152.6,164.0 L154.1,165.0 L155.5,165.9 L157.0,166.8 L158.5,167.7 L159.9,168.5 L161.4,169.4 L162.8,170.2 L164.3,171.0 L165.8,171.8 L167.2,172.6 L168.7,173.4 L170.1,174.1 L171.6,174.8 L173.0,175.5 L174.5,176.2 L176.0,176.9 L177.4,177.5 L178.9,178.1 L180.3,178.8 L181.8,179.3 L183.2,179.9 L184.7,180.5 L186.2,181.0 L187.6,181.5 L189.1,182.0 L190.5,182.5 L192.0,182.9 L193.5,183.4 L194.9,183.8 L196.4,184.2 L197.8,184.6 L199.3,185.0 L200.8,185.3 L202.2,185.6 L203.7,185.9 L205.1,186.2 L206.6,186.5 L208.0,186.8 L209.5,187.0 L211.0,187.2 L212.4,187.4 L213.9,187.6 L215.3,187.7 L216.8,187.9 L218.2,188.0 L219.7,188.1 L221.2,188.2 L222.6,188.2 L224.1,188.3 L225.5,188.3 L227.0,188.3 L228.5,188.3 L229.9,188.3 L231.4,188.2 L232.8,188.2 L234.3,188.1 L235.8,188.0 L237.2,187.9 L238.7,187.7 L240.1,187.6 L241.6,187.4 L243.0,187.2 L244.5,187.0 L246.0,186.8 L247.4,186.5 L248.9,186.2 L250.3,185.9 L251.8,185.6 L253.2,185.3 L254.7,185.0 L256.2,184.6 L257.6,184.2 L259.1,183.8 L260.5,183.4 L262.0,182.9 L263.5,182.5 L264.9,182.0 L266.4,181.5 L267.8,181.0 L269.3,180.5 L270.8,179.9 L272.2,179.3 L273.7,178.8 L275.1,178.1 L276.6,177.5 L278.0,176.9 L279.5,176.2 L281.0,175.5 L282.4,174.8 L283.9,174.1 L285.3,173.4 L286.8,172.6 L288.2,171.8 L289.7,171.0 L291.2,170.2 L292.6,169.4 L294.1,168.5 L295.5,167.7 L297.0,166.8 L298.5,165.9 L299.9,165.0 L301.4,164.0 L302.8,163.0 L304.3,162.1 L305.8,161.1 L307.2,160.0 L308.7,159.0 L310.1,157.9 L311.6,156.9 L313.0,155.8 L314.5,154.7 L316.0,153.5 L317.4,152.4 L318.9,151.2 L320.3,150.0 L321.8,148.8 L323.2,147.6 L324.7,146.4 L326.2,145.1 L327.6,143.8 L329.1,142.5 L330.5,141.2 L332.0,139.9 L333.5,138.5 L334.9,137.1 L336.4,135.7 L337.8,134.3 L339.3,132.9 L340.8,131.4 L342.2,130.0 L343.7,128.5 L345.1,127.0 L346.6,125.5 L348.0,123.9 L349.5,122.3 L351.0,120.8 L352.4,119.2 L353.9,117.5 L355.3,115.9 L356.8,114.3 L358.2,112.6 L359.7,110.9 L361.2,109.2 L362.6,107.4 L364.1,105.7 L365.5,103.9 L367.0,102.1 L368.5,100.3 L369.9,98.5 L371.4,96.7 L372.8,94.8 L374.3,92.9 L375.8,91.0 L377.2,89.1 L378.7,87.2 L380.1,85.2 L381.6,83.3 L383.0,81.3 L384.5,79.3 L386.0,77.2 L387.4,75.2 L388.9,73.1 L390.3,71.0 L391.8,68.9 L393.2,66.8 L394.7,64.7 L396.2,62.5 L397.6,60.3 L399.1,58.1 L400.5,55.9 L402.0,53.7\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\"/>\n<text x=\"60\" y=\"34\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">v(t)</text>\n</svg></span><p>a) Bestäm partikelns förflyttning under tidsintervallet.<br>b) Bestäm den totala sträcka som partikeln rör sig.</p>",
+    "s": "<p>a) Förflyttningen fås genom att integrera hastigheten. När hastigheten är negativ bidrar den negativt:</p><p>\\[\\int_0^4(t^2-4t+3)dt=\\left[\\frac{t^3}{3}-2t^2+3t\\right]_0^4=\\boxed{\\frac43}.\\]</p><p>b) För den totala sträckan måste vi ta hänsyn till när hastigheten är negativ.</p><p>\\[v(t)=(t-1)(t-3),\\]</p><p>så \\(v>0\\) på \\([0,1]\\) och \\([3,4]\\), medan \\(v<0\\) på \\([1,3]\\).</p><p>Sträckan blir därför</p><p>\\[\\int_0^1v(t)dt-\\int_1^3v(t)dt+\\int_3^4v(t)dt=\\boxed{4}.\\]</p><p><strong>Förflyttning: \\(4/3\\). Total sträcka: 4.</strong></p>",
+    "familj": "problem_integral_forflyttning_stracka"
+  },
+  {
+    "id": "3.90",
     "kap": 3,
     "omr": "integralberakning",
     "kurs": [
@@ -4371,7 +4802,7 @@ window.BANKMATO2 = [
     "familj": "proc_integral_medelvarde_2"
   },
   {
-    "id": "3.82",
+    "id": "3.91",
     "kap": 3,
     "omr": "area_mellan_kurvor",
     "kurs": [
@@ -4384,7 +4815,7 @@ window.BANKMATO2 = [
     "familj": "area_sin_cos_c"
   },
   {
-    "id": "3.83",
+    "id": "3.92",
     "kap": 3,
     "omr": "area_mellan_kurvor",
     "kurs": [
@@ -4397,7 +4828,7 @@ window.BANKMATO2 = [
     "familj": "area_mellan_rutin"
   },
   {
-    "id": "3.84",
+    "id": "3.93",
     "kap": 3,
     "omr": "tathetsfunktioner",
     "kurs": [
@@ -4410,7 +4841,7 @@ window.BANKMATO2 = [
     "familj": "tathet_parabel_k_probability"
   },
   {
-    "id": "3.85",
+    "id": "3.94",
     "kap": 3,
     "omr": "integraler_storheter",
     "kurs": [
@@ -4423,7 +4854,7 @@ window.BANKMATO2 = [
     "familj": "proc_integral_hastighet_1"
   },
   {
-    "id": "3.86",
+    "id": "3.95",
     "kap": 3,
     "omr": "integraler_storheter",
     "kurs": [
@@ -4436,7 +4867,7 @@ window.BANKMATO2 = [
     "familj": "flodesgraf_integral"
   },
   {
-    "id": "3.87",
+    "id": "3.96",
     "kap": 3,
     "omr": "tathetsfunktioner",
     "kurs": [
@@ -4449,7 +4880,7 @@ window.BANKMATO2 = [
     "familj": "proc_tathet_linjart_2"
   },
   {
-    "id": "3.88",
+    "id": "3.97",
     "kap": 3,
     "omr": "tathetsfunktioner",
     "kurs": [
@@ -4462,7 +4893,20 @@ window.BANKMATO2 = [
     "familj": "tathet_symmetrisk_parabel_a"
   },
   {
-    "id": "3.89",
+    "id": "3.98",
+    "kap": 3,
+    "omr": "area_integraler",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Området mellan linjen \\(y=c\\), parabeln \\(y=x^2\\) och y-axeln ligger i första kvadranten.</p><p>Bestäm \\(c>0\\) så att områdets area är 18 areaenheter.</p>",
+    "s": "<p>Linjen och parabeln skär varandra när \\(x^2=c\\), alltså vid \\(x=\\sqrt c\\) i första kvadranten.</p><p>Arean är</p><p>\\[A=\\int_0^{\\sqrt c}(c-x^2)dx.\\]</p><p>\\[A=\\left[cx-\\frac{x^3}{3}\\right]_0^{\\sqrt c}=c^{3/2}-\\frac{c^{3/2}}3=\\frac23c^{3/2}.\\]</p><p>Sätt arean lika med 18:</p><p>\\[\\frac23c^{3/2}=18\\Rightarrow c^{3/2}=27.\\]</p><p>\\[\\boxed{c=9}.\\]</p>",
+    "familj": "problem_integral_area_horisontell_parameter"
+  },
+  {
+    "id": "3.99",
     "kap": 3,
     "omr": "tathetsfunktioner",
     "kurs": [
@@ -4475,7 +4919,7 @@ window.BANKMATO2 = [
     "familj": "tathet_linjar"
   },
   {
-    "id": "3.90",
+    "id": "3.100",
     "kap": 3,
     "omr": "area_integraler",
     "kurs": [
@@ -4488,7 +4932,7 @@ window.BANKMATO2 = [
     "familj": "area_tolkning_e2"
   },
   {
-    "id": "3.91",
+    "id": "3.101",
     "kap": 3,
     "omr": "rotationsvolymer",
     "kurs": [
@@ -4501,7 +4945,7 @@ window.BANKMATO2 = [
     "familj": "rotation_brickor_forskjuten_axel_a"
   },
   {
-    "id": "3.92",
+    "id": "3.102",
     "kap": 3,
     "omr": "sannolikhetsfordelning",
     "kurs": [
@@ -4514,7 +4958,7 @@ window.BANKMATO2 = [
     "familj": "tathet_exponential"
   },
   {
-    "id": "3.93",
+    "id": "3.103",
     "kap": 3,
     "omr": "tathetsfunktioner",
     "kurs": [
@@ -4527,7 +4971,7 @@ window.BANKMATO2 = [
     "familj": "proc_tathet_avtagande_2"
   },
   {
-    "id": "3.94",
+    "id": "3.104",
     "kap": 3,
     "omr": "integralberakning",
     "kurs": [
@@ -4540,7 +4984,7 @@ window.BANKMATO2 = [
     "familj": "integral_rutin2"
   },
   {
-    "id": "3.95",
+    "id": "3.105",
     "kap": 3,
     "omr": "integraler_storheter",
     "kurs": [
@@ -4553,7 +4997,7 @@ window.BANKMATO2 = [
     "familj": "flodesgraf_integral_svg"
   },
   {
-    "id": "3.96",
+    "id": "3.106",
     "kap": 3,
     "omr": "integraler_storheter",
     "kurs": [
@@ -4566,7 +5010,7 @@ window.BANKMATO2 = [
     "familj": "integral_nettoflode_a"
   },
   {
-    "id": "3.97",
+    "id": "3.107",
     "kap": 3,
     "omr": "rotationsvolymer",
     "kurs": [
@@ -4579,7 +5023,20 @@ window.BANKMATO2 = [
     "familj": "rotationsvolym_yaxel_a"
   },
   {
-    "id": "3.98",
+    "id": "3.108",
+    "kap": 3,
+    "omr": "rotationsvolymer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>Området mellan parabeln \\(y=x^2\\) och linjen \\(y=4\\), för \\(-2\\le x\\le2\\), roteras kring linjen \\(y=5\\).</p><span class=\"fig\"><svg width=\"420\" height=\"280\" viewBox=\"0 0 420 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"418\" height=\"278\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"81.2\" y1=\"20\" x2=\"81.2\" y2=\"242\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"154.1\" y1=\"20\" x2=\"154.1\" y2=\"242\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"227.0\" y1=\"20\" x2=\"227.0\" y2=\"242\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"299.9\" y1=\"20\" x2=\"299.9\" y2=\"242\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"372.8\" y1=\"20\" x2=\"372.8\" y2=\"242\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"242.0\" x2=\"402\" y2=\"242.0\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"201.6\" x2=\"402\" y2=\"201.6\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"161.3\" x2=\"402\" y2=\"161.3\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"120.9\" x2=\"402\" y2=\"120.9\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"80.5\" x2=\"402\" y2=\"80.5\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"52\" y1=\"40.2\" x2=\"402\" y2=\"40.2\" stroke=\"#E8EEF0\" stroke-width=\"1\"/>\n<line x1=\"227.0\" y1=\"20\" x2=\"227.0\" y2=\"242\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"52\" y1=\"242.0\" x2=\"402\" y2=\"242.0\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<text x=\"81.2\" y=\"266\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">−2</text>\n<text x=\"227.0\" y=\"266\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">0</text>\n<text x=\"372.8\" y=\"266\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">2</text>\n<text x=\"44\" y=\"84.5\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">4</text>\n<text x=\"44\" y=\"44.2\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">5</text>\n<path d=\"M52.0,9.5 L53.5,13.4 L54.9,17.2 L56.4,21.0 L57.8,24.7 L59.3,28.5 L60.8,32.2 L62.2,35.8 L63.7,39.5 L65.1,43.1 L66.6,46.6 L68.0,50.2 L69.5,53.7 L71.0,57.2 L72.4,60.6 L73.9,64.0 L75.3,67.4 L76.8,70.7 L78.2,74.0 L79.7,77.3 L81.2,80.5 L82.6,83.8 L84.1,86.9 L85.5,90.1 L87.0,93.2 L88.5,96.3 L89.9,99.3 L91.4,102.4 L92.8,105.3 L94.3,108.3 L95.8,111.2 L97.2,114.1 L98.7,117.0 L100.1,119.8 L101.6,122.6 L103.0,125.3 L104.5,128.1 L106.0,130.8 L107.4,133.4 L108.9,136.1 L110.3,138.7 L111.8,141.2 L113.2,143.8 L114.7,146.3 L116.2,148.7 L117.6,151.2 L119.1,153.6 L120.5,156.0 L122.0,158.3 L123.5,160.6 L124.9,162.9 L126.4,165.1 L127.8,167.3 L129.3,169.5 L130.8,171.7 L132.2,173.8 L133.7,175.9 L135.1,177.9 L136.6,179.9 L138.0,181.9 L139.5,183.9 L141.0,185.8 L142.4,187.7 L143.9,189.5 L145.3,191.4 L146.8,193.2 L148.2,194.9 L149.7,196.6 L151.2,198.3 L152.6,200.0 L154.1,201.6 L155.5,203.2 L157.0,204.8 L158.5,206.3 L159.9,207.8 L161.4,209.3 L162.8,210.7 L164.3,212.1 L165.8,213.5 L167.2,214.9 L168.7,216.2 L170.1,217.4 L171.6,218.7 L173.0,219.9 L174.5,221.1 L176.0,222.2 L177.4,223.3 L178.9,224.4 L180.3,225.5 L181.8,226.5 L183.2,227.5 L184.7,228.4 L186.2,229.3 L187.6,230.2 L189.1,231.1 L190.5,231.9 L192.0,232.7 L193.5,233.5 L194.9,234.2 L196.4,234.9 L197.8,235.5 L199.3,236.2 L200.8,236.8 L202.2,237.3 L203.7,237.9 L205.1,238.4 L206.6,238.8 L208.0,239.3 L209.5,239.7 L211.0,240.0 L212.4,240.4 L213.9,240.7 L215.3,241.0 L216.8,241.2 L218.2,241.4 L219.7,241.6 L221.2,241.7 L222.6,241.9 L224.1,241.9 L225.5,242.0 L227.0,242.0 L228.5,242.0 L229.9,241.9 L231.4,241.9 L232.8,241.7 L234.3,241.6 L235.8,241.4 L237.2,241.2 L238.7,241.0 L240.1,240.7 L241.6,240.4 L243.0,240.0 L244.5,239.7 L246.0,239.3 L247.4,238.8 L248.9,238.4 L250.3,237.9 L251.8,237.3 L253.2,236.8 L254.7,236.2 L256.2,235.5 L257.6,234.9 L259.1,234.2 L260.5,233.5 L262.0,232.7 L263.5,231.9 L264.9,231.1 L266.4,230.2 L267.8,229.3 L269.3,228.4 L270.8,227.5 L272.2,226.5 L273.7,225.5 L275.1,224.4 L276.6,223.3 L278.0,222.2 L279.5,221.1 L281.0,219.9 L282.4,218.7 L283.9,217.4 L285.3,216.2 L286.8,214.9 L288.2,213.5 L289.7,212.1 L291.2,210.7 L292.6,209.3 L294.1,207.8 L295.5,206.3 L297.0,204.8 L298.5,203.2 L299.9,201.6 L301.4,200.0 L302.8,198.3 L304.3,196.6 L305.8,194.9 L307.2,193.2 L308.7,191.4 L310.1,189.5 L311.6,187.7 L313.0,185.8 L314.5,183.9 L316.0,181.9 L317.4,179.9 L318.9,177.9 L320.3,175.9 L321.8,173.8 L323.2,171.7 L324.7,169.5 L326.2,167.3 L327.6,165.1 L329.1,162.9 L330.5,160.6 L332.0,158.3 L333.5,156.0 L334.9,153.6 L336.4,151.2 L337.8,148.7 L339.3,146.3 L340.8,143.8 L342.2,141.2 L343.7,138.7 L345.1,136.1 L346.6,133.4 L348.0,130.8 L349.5,128.1 L351.0,125.3 L352.4,122.6 L353.9,119.8 L355.3,117.0 L356.8,114.1 L358.3,111.2 L359.7,108.3 L361.2,105.3 L362.6,102.4 L364.1,99.3 L365.5,96.3 L367.0,93.2 L368.5,90.1 L369.9,86.9 L371.4,83.8 L372.8,80.5 L374.3,77.3 L375.8,74.0 L377.2,70.7 L378.7,67.4 L380.1,64.0 L381.6,60.6 L383.0,57.2 L384.5,53.7 L386.0,50.2 L387.4,46.6 L388.9,43.1 L390.3,39.5 L391.8,35.8 L393.3,32.2 L394.7,28.5 L396.2,24.7 L397.6,21.0 L399.1,17.2 L400.5,13.4 L402.0,9.5\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.4\"/>\n<path d=\"M52.0,80.5 L53.5,80.5 L54.9,80.5 L56.4,80.5 L57.8,80.5 L59.3,80.5 L60.8,80.5 L62.2,80.5 L63.7,80.5 L65.1,80.5 L66.6,80.5 L68.0,80.5 L69.5,80.5 L71.0,80.5 L72.4,80.5 L73.9,80.5 L75.3,80.5 L76.8,80.5 L78.2,80.5 L79.7,80.5 L81.2,80.5 L82.6,80.5 L84.1,80.5 L85.5,80.5 L87.0,80.5 L88.5,80.5 L89.9,80.5 L91.4,80.5 L92.8,80.5 L94.3,80.5 L95.8,80.5 L97.2,80.5 L98.7,80.5 L100.1,80.5 L101.6,80.5 L103.0,80.5 L104.5,80.5 L106.0,80.5 L107.4,80.5 L108.9,80.5 L110.3,80.5 L111.8,80.5 L113.2,80.5 L114.7,80.5 L116.2,80.5 L117.6,80.5 L119.1,80.5 L120.5,80.5 L122.0,80.5 L123.5,80.5 L124.9,80.5 L126.4,80.5 L127.8,80.5 L129.3,80.5 L130.8,80.5 L132.2,80.5 L133.7,80.5 L135.1,80.5 L136.6,80.5 L138.0,80.5 L139.5,80.5 L141.0,80.5 L142.4,80.5 L143.9,80.5 L145.3,80.5 L146.8,80.5 L148.2,80.5 L149.7,80.5 L151.2,80.5 L152.6,80.5 L154.1,80.5 L155.5,80.5 L157.0,80.5 L158.5,80.5 L159.9,80.5 L161.4,80.5 L162.8,80.5 L164.3,80.5 L165.8,80.5 L167.2,80.5 L168.7,80.5 L170.1,80.5 L171.6,80.5 L173.0,80.5 L174.5,80.5 L176.0,80.5 L177.4,80.5 L178.9,80.5 L180.3,80.5 L181.8,80.5 L183.2,80.5 L184.7,80.5 L186.2,80.5 L187.6,80.5 L189.1,80.5 L190.5,80.5 L192.0,80.5 L193.5,80.5 L194.9,80.5 L196.4,80.5 L197.8,80.5 L199.3,80.5 L200.8,80.5 L202.2,80.5 L203.7,80.5 L205.1,80.5 L206.6,80.5 L208.0,80.5 L209.5,80.5 L211.0,80.5 L212.4,80.5 L213.9,80.5 L215.3,80.5 L216.8,80.5 L218.2,80.5 L219.7,80.5 L221.2,80.5 L222.6,80.5 L224.1,80.5 L225.5,80.5 L227.0,80.5 L228.5,80.5 L229.9,80.5 L231.4,80.5 L232.8,80.5 L234.3,80.5 L235.8,80.5 L237.2,80.5 L238.7,80.5 L240.1,80.5 L241.6,80.5 L243.0,80.5 L244.5,80.5 L246.0,80.5 L247.4,80.5 L248.9,80.5 L250.3,80.5 L251.8,80.5 L253.2,80.5 L254.7,80.5 L256.2,80.5 L257.6,80.5 L259.1,80.5 L260.5,80.5 L262.0,80.5 L263.5,80.5 L264.9,80.5 L266.4,80.5 L267.8,80.5 L269.3,80.5 L270.8,80.5 L272.2,80.5 L273.7,80.5 L275.1,80.5 L276.6,80.5 L278.0,80.5 L279.5,80.5 L281.0,80.5 L282.4,80.5 L283.9,80.5 L285.3,80.5 L286.8,80.5 L288.2,80.5 L289.7,80.5 L291.2,80.5 L292.6,80.5 L294.1,80.5 L295.5,80.5 L297.0,80.5 L298.5,80.5 L299.9,80.5 L301.4,80.5 L302.8,80.5 L304.3,80.5 L305.8,80.5 L307.2,80.5 L308.7,80.5 L310.1,80.5 L311.6,80.5 L313.0,80.5 L314.5,80.5 L316.0,80.5 L317.4,80.5 L318.9,80.5 L320.3,80.5 L321.8,80.5 L323.2,80.5 L324.7,80.5 L326.2,80.5 L327.6,80.5 L329.1,80.5 L330.5,80.5 L332.0,80.5 L333.5,80.5 L334.9,80.5 L336.4,80.5 L337.8,80.5 L339.3,80.5 L340.8,80.5 L342.2,80.5 L343.7,80.5 L345.1,80.5 L346.6,80.5 L348.0,80.5 L349.5,80.5 L351.0,80.5 L352.4,80.5 L353.9,80.5 L355.3,80.5 L356.8,80.5 L358.3,80.5 L359.7,80.5 L361.2,80.5 L362.6,80.5 L364.1,80.5 L365.5,80.5 L367.0,80.5 L368.5,80.5 L369.9,80.5 L371.4,80.5 L372.8,80.5 L374.3,80.5 L375.8,80.5 L377.2,80.5 L378.7,80.5 L380.1,80.5 L381.6,80.5 L383.0,80.5 L384.5,80.5 L386.0,80.5 L387.4,80.5 L388.9,80.5 L390.3,80.5 L391.8,80.5 L393.3,80.5 L394.7,80.5 L396.2,80.5 L397.6,80.5 L399.1,80.5 L400.5,80.5 L402.0,80.5\" fill=\"none\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M52.0,40.2 L53.5,40.2 L54.9,40.2 L56.4,40.2 L57.8,40.2 L59.3,40.2 L60.8,40.2 L62.2,40.2 L63.7,40.2 L65.1,40.2 L66.6,40.2 L68.0,40.2 L69.5,40.2 L71.0,40.2 L72.4,40.2 L73.9,40.2 L75.3,40.2 L76.8,40.2 L78.2,40.2 L79.7,40.2 L81.2,40.2 L82.6,40.2 L84.1,40.2 L85.5,40.2 L87.0,40.2 L88.5,40.2 L89.9,40.2 L91.4,40.2 L92.8,40.2 L94.3,40.2 L95.8,40.2 L97.2,40.2 L98.7,40.2 L100.1,40.2 L101.6,40.2 L103.0,40.2 L104.5,40.2 L106.0,40.2 L107.4,40.2 L108.9,40.2 L110.3,40.2 L111.8,40.2 L113.2,40.2 L114.7,40.2 L116.2,40.2 L117.6,40.2 L119.1,40.2 L120.5,40.2 L122.0,40.2 L123.5,40.2 L124.9,40.2 L126.4,40.2 L127.8,40.2 L129.3,40.2 L130.8,40.2 L132.2,40.2 L133.7,40.2 L135.1,40.2 L136.6,40.2 L138.0,40.2 L139.5,40.2 L141.0,40.2 L142.4,40.2 L143.9,40.2 L145.3,40.2 L146.8,40.2 L148.2,40.2 L149.7,40.2 L151.2,40.2 L152.6,40.2 L154.1,40.2 L155.5,40.2 L157.0,40.2 L158.5,40.2 L159.9,40.2 L161.4,40.2 L162.8,40.2 L164.3,40.2 L165.8,40.2 L167.2,40.2 L168.7,40.2 L170.1,40.2 L171.6,40.2 L173.0,40.2 L174.5,40.2 L176.0,40.2 L177.4,40.2 L178.9,40.2 L180.3,40.2 L181.8,40.2 L183.2,40.2 L184.7,40.2 L186.2,40.2 L187.6,40.2 L189.1,40.2 L190.5,40.2 L192.0,40.2 L193.5,40.2 L194.9,40.2 L196.4,40.2 L197.8,40.2 L199.3,40.2 L200.8,40.2 L202.2,40.2 L203.7,40.2 L205.1,40.2 L206.6,40.2 L208.0,40.2 L209.5,40.2 L211.0,40.2 L212.4,40.2 L213.9,40.2 L215.3,40.2 L216.8,40.2 L218.2,40.2 L219.7,40.2 L221.2,40.2 L222.6,40.2 L224.1,40.2 L225.5,40.2 L227.0,40.2 L228.5,40.2 L229.9,40.2 L231.4,40.2 L232.8,40.2 L234.3,40.2 L235.8,40.2 L237.2,40.2 L238.7,40.2 L240.1,40.2 L241.6,40.2 L243.0,40.2 L244.5,40.2 L246.0,40.2 L247.4,40.2 L248.9,40.2 L250.3,40.2 L251.8,40.2 L253.2,40.2 L254.7,40.2 L256.2,40.2 L257.6,40.2 L259.1,40.2 L260.5,40.2 L262.0,40.2 L263.5,40.2 L264.9,40.2 L266.4,40.2 L267.8,40.2 L269.3,40.2 L270.8,40.2 L272.2,40.2 L273.7,40.2 L275.1,40.2 L276.6,40.2 L278.0,40.2 L279.5,40.2 L281.0,40.2 L282.4,40.2 L283.9,40.2 L285.3,40.2 L286.8,40.2 L288.2,40.2 L289.7,40.2 L291.2,40.2 L292.6,40.2 L294.1,40.2 L295.5,40.2 L297.0,40.2 L298.5,40.2 L299.9,40.2 L301.4,40.2 L302.8,40.2 L304.3,40.2 L305.8,40.2 L307.2,40.2 L308.7,40.2 L310.1,40.2 L311.6,40.2 L313.0,40.2 L314.5,40.2 L316.0,40.2 L317.4,40.2 L318.9,40.2 L320.3,40.2 L321.8,40.2 L323.2,40.2 L324.7,40.2 L326.2,40.2 L327.6,40.2 L329.1,40.2 L330.5,40.2 L332.0,40.2 L333.5,40.2 L334.9,40.2 L336.4,40.2 L337.8,40.2 L339.3,40.2 L340.8,40.2 L342.2,40.2 L343.7,40.2 L345.1,40.2 L346.6,40.2 L348.0,40.2 L349.5,40.2 L351.0,40.2 L352.4,40.2 L353.9,40.2 L355.3,40.2 L356.8,40.2 L358.3,40.2 L359.7,40.2 L361.2,40.2 L362.6,40.2 L364.1,40.2 L365.5,40.2 L367.0,40.2 L368.5,40.2 L369.9,40.2 L371.4,40.2 L372.8,40.2 L374.3,40.2 L375.8,40.2 L377.2,40.2 L378.7,40.2 L380.1,40.2 L381.6,40.2 L383.0,40.2 L384.5,40.2 L386.0,40.2 L387.4,40.2 L388.9,40.2 L390.3,40.2 L391.8,40.2 L393.3,40.2 L394.7,40.2 L396.2,40.2 L397.6,40.2 L399.1,40.2 L400.5,40.2 L402.0,40.2\" fill=\"none\" stroke=\"#5C575E\" stroke-width=\"1.6\" stroke-dasharray=\"6 4\"/>\n<text x=\"292\" y=\"40\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">rotationsaxel y=5</text>\n</svg></span><p>Bestäm rotationskroppens volym exakt.</p>",
+    "s": "<p>Rotationsaxeln ligger ovanför hela området. För ett givet \\(x\\) är avståndet från axeln \\(y=5\\) till parabeln</p><p>\\[R=5-x^2\\]</p><p>och avståndet till linjen \\(y=4\\) är</p><p>\\[r=1.\\]</p><p>Tvärsnittsarean blir därför</p><p>\\[\\pi(R^2-r^2)=\\pi\\left((5-x^2)^2-1\\right).\\]</p><p>Volymen är</p><p>\\[V=\\pi\\int_{-2}^{2}\\left((5-x^2)^2-1\\right)dx.\\]</p><p>Utveckla:</p><p>\\[(5-x^2)^2-1=x^4-10x^2+24.\\]</p><p>Eftersom integranden är jämn:</p><p>\\[V=2\\pi\\int_0^2(x^4-10x^2+24)dx\\]</p><p>\\[=2\\pi\\left[\\frac{x^5}{5}-\\frac{10x^3}{3}+24x\\right]_0^2=\\boxed{\\frac{832\\pi}{15}}.\\]</p>",
+    "familj": "problem_rotation_annan_axel"
+  },
+  {
+    "id": "3.109",
     "kap": 3,
     "omr": "primitiva_funktioner",
     "kurs": [
@@ -4592,7 +5049,7 @@ window.BANKMATO2 = [
     "familj": "primitiv_begynnelsevillkor_e"
   },
   {
-    "id": "3.99",
+    "id": "3.110",
     "kap": 3,
     "omr": "sannolikhetsfordelning",
     "kurs": [
@@ -4605,7 +5062,7 @@ window.BANKMATO2 = [
     "familj": "proc_sannolikhet_tathet_2"
   },
   {
-    "id": "3.100",
+    "id": "3.111",
     "kap": 3,
     "omr": "rotationsvolymer",
     "kurs": [
@@ -4618,7 +5075,7 @@ window.BANKMATO2 = [
     "familj": "rotation_rutin"
   },
   {
-    "id": "3.101",
+    "id": "3.112",
     "kap": 3,
     "omr": "integralberakning",
     "kurs": [
@@ -4631,7 +5088,7 @@ window.BANKMATO2 = [
     "familj": "proc_integral_polynom_1"
   },
   {
-    "id": "3.102",
+    "id": "3.113",
     "kap": 3,
     "omr": "rotationsvolymer",
     "kurs": [
@@ -4644,7 +5101,7 @@ window.BANKMATO2 = [
     "familj": "rotation_parabel_e_svg"
   },
   {
-    "id": "3.103",
+    "id": "3.114",
     "kap": 3,
     "omr": "area_integraler",
     "kurs": [
@@ -4657,7 +5114,7 @@ window.BANKMATO2 = [
     "familj": "integral_parameter_intervall_a"
   },
   {
-    "id": "3.104",
+    "id": "3.115",
     "kap": 3,
     "omr": "primitiva_funktioner",
     "kurs": [
@@ -4670,7 +5127,7 @@ window.BANKMATO2 = [
     "familj": "primitiv_rutin4"
   },
   {
-    "id": "3.105",
+    "id": "3.116",
     "kap": 3,
     "omr": "rotationsvolymer",
     "kurs": [
@@ -4683,7 +5140,7 @@ window.BANKMATO2 = [
     "familj": "proc_rotationsvolym_skivor_3"
   },
   {
-    "id": "3.106",
+    "id": "3.117",
     "kap": 3,
     "omr": "integraler_storheter",
     "kurs": [
@@ -4696,7 +5153,20 @@ window.BANKMATO2 = [
     "familj": "massdensitet_stang_integral_c"
   },
   {
-    "id": "3.107",
+    "id": "3.118",
+    "kap": 3,
+    "omr": "sannolikhetsfordelning",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>För \\(a>0\\) ges en familj av täthetsfunktioner av</p><p>\\[f_a(x)=a x^{a-1},\\qquad 0<x\\le1,\\]</p><p>För en viss funktion i familjen gäller</p><p>\\[P\\left(X<\\frac12\\right)=\\frac18.\\]</p><p>a) Bestäm \\(a\\).<br>b) Bestäm därefter \\(P(X>3/4)\\).</p>",
+    "s": "<p>Värdet i den enskilda punkten \\(x=0\\) påverkar inte någon integral. Först kan vi kontrollera att integralen över intervallet är 1:</p><p>\\[\\int_0^1a x^{a-1}dx=[x^a]_0^1=1.\\]</p><p>a) Sannolikheten är</p><p>\\[P\\left(X<\\frac12\\right)=\\int_0^{1/2}a x^{a-1}dx=\\left(\\frac12\\right)^a.\\]</p><p>Villkoret ger</p><p>\\[\\left(\\frac12\\right)^a=\\frac18=\\left(\\frac12\\right)^3,\\]</p><p>så \\(\\boxed{a=3}\\).</p><p>b) Då är fördelningsfunktionen på intervallet \\(F(x)=x^3\\). Därför</p><p>\\[P(X>3/4)=1-F(3/4)=1-\\left(\\frac34\\right)^3=1-\\frac{27}{64}=\\boxed{\\frac{37}{64}}.\\]</p>",
+    "familj": "problem_tathet_parameterfamilj"
+  },
+  {
+    "id": "3.119",
     "kap": 3,
     "omr": "tathetsfunktioner",
     "kurs": [
@@ -4709,7 +5179,7 @@ window.BANKMATO2 = [
     "familj": "tathet_kx2_c"
   },
   {
-    "id": "3.108",
+    "id": "3.120",
     "kap": 3,
     "omr": "integral_modellering",
     "kurs": [
@@ -4722,7 +5192,7 @@ window.BANKMATO2 = [
     "familj": "reservoar_nettoflode_integral_a"
   },
   {
-    "id": "3.109",
+    "id": "3.121",
     "kap": 3,
     "omr": "integraler_storheter",
     "kurs": [
@@ -4735,7 +5205,7 @@ window.BANKMATO2 = [
     "familj": "flodesgraf_trapets_e_svg"
   },
   {
-    "id": "3.110",
+    "id": "3.122",
     "kap": 3,
     "omr": "rotationsvolymer",
     "kurs": [
@@ -4748,7 +5218,7 @@ window.BANKMATO2 = [
     "familj": "proc_rotation_forskjuten_axel_2"
   },
   {
-    "id": "3.111",
+    "id": "3.123",
     "kap": 3,
     "omr": "integraler_storheter",
     "kurs": [
@@ -4761,7 +5231,7 @@ window.BANKMATO2 = [
     "familj": "hastighet_forflyttning_totalstracka"
   },
   {
-    "id": "3.112",
+    "id": "3.124",
     "kap": 3,
     "omr": "rotationsvolymer",
     "kurs": [
@@ -4774,7 +5244,7 @@ window.BANKMATO2 = [
     "familj": "proc_rotation_brickor_2"
   },
   {
-    "id": "3.113",
+    "id": "3.125",
     "kap": 3,
     "omr": "integral_modellering",
     "kurs": [
@@ -4787,7 +5257,7 @@ window.BANKMATO2 = [
     "familj": "proc_integral_nettoforandring_2"
   },
   {
-    "id": "3.114",
+    "id": "3.126",
     "kap": 3,
     "omr": "rotationsvolymer",
     "kurs": [
@@ -4800,7 +5270,7 @@ window.BANKMATO2 = [
     "familj": "rotation_forskjuten_axel_c"
   },
   {
-    "id": "3.115",
+    "id": "3.127",
     "kap": 3,
     "omr": "rotationsvolymer",
     "kurs": [
@@ -4932,6 +5402,19 @@ window.BANKMATO2 = [
   {
     "id": "4.10",
     "kap": 4,
+    "omr": "komplexa_talplanet",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Bestäm alla komplexa tal \\(z\\) som uppfyller</p><p>\\[|z-(2+i)|=3.\\]</p><span class=\"fig\"><svg width=\"420\" height=\"300\" viewBox=\"0 0 420 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"418\" height=\"298\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"101.0\" y1=\"20.0\" x2=\"101.0\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"131.6\" y1=\"20.0\" x2=\"131.6\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"162.2\" y1=\"20.0\" x2=\"162.2\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"192.9\" y1=\"20.0\" x2=\"192.9\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"223.5\" y1=\"20.0\" x2=\"223.5\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"254.1\" y1=\"20.0\" x2=\"254.1\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"284.8\" y1=\"20.0\" x2=\"284.8\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"315.4\" y1=\"20.0\" x2=\"315.4\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"346.0\" y1=\"20.0\" x2=\"346.0\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"265.0\" x2=\"346.0\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"234.4\" x2=\"346.0\" y2=\"234.4\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"203.8\" x2=\"346.0\" y2=\"203.8\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"173.1\" x2=\"346.0\" y2=\"173.1\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"142.5\" x2=\"346.0\" y2=\"142.5\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"111.9\" x2=\"346.0\" y2=\"111.9\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"81.2\" x2=\"346.0\" y2=\"81.2\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"50.6\" x2=\"346.0\" y2=\"50.6\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"20.0\" x2=\"346.0\" y2=\"20.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"173.1\" x2=\"346.0\" y2=\"173.1\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"162.2\" y1=\"20.0\" x2=\"162.2\" y2=\"265.0\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<circle cx=\"223.5\" cy=\"142.5\" r=\"91.9\" fill=\"#FBF0EE\" stroke=\"#B43123\" stroke-width=\"2\"/>\n<circle cx=\"223.5\" cy=\"142.5\" r=\"4.5\" fill=\"#B43123\"/>\n<text x=\"230.5\" y=\"135.5\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#B43123\">2+i</text>\n<text x=\"343.0\" y=\"166.1\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">Re</text>\n<text x=\"169.2\" y=\"32.0\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">Im</text>\n</svg></span><p>a) Beskriv lösningsmängden geometriskt.<br>b) Bestäm de lösningar som ligger på den reella axeln.</p>",
+    "s": "<p>a) Uttrycket \\(|z-(2+i)|\\) är avståndet från punkten \\(z\\) till punkten \\(2+i\\) i det komplexa talplanet. Villkoret beskriver därför en <strong>cirkel med centrum \\((2,1)\\) och radie 3</strong>.</p><p>b) På den reella axeln är imaginärdelen 0. Sätt \\(z=x\\):</p><p>\\[|x-(2+i)|=3.\\]</p><p>Kvadrera avståndet:</p><p>\\[(x-2)^2+1^2=9.\\]</p><p>\\[(x-2)^2=8\\Rightarrow x=2\\pm2\\sqrt2.\\]</p><p><strong>De reella lösningarna är \\(\\boxed{z=2\\pm2\\sqrt2}\\).</strong></p>",
+    "familj": "problem_complex_lokus_cirkel"
+  },
+  {
+    "id": "4.11",
+    "kap": 4,
     "omr": "komplexa_losningar",
     "kurs": [
       "2c"
@@ -4943,7 +5426,7 @@ window.BANKMATO2 = [
     "familj": "konjugatrot_c2"
   },
   {
-    "id": "4.11",
+    "id": "4.12",
     "kap": 4,
     "omr": "polar_form",
     "kurs": [
@@ -4956,7 +5439,7 @@ window.BANKMATO2 = [
     "familj": "polar_rutin3"
   },
   {
-    "id": "4.12",
+    "id": "4.13",
     "kap": 4,
     "omr": "potensekvationer_komplexa",
     "kurs": [
@@ -4969,7 +5452,7 @@ window.BANKMATO2 = [
     "familj": "fjarderot_polar_c"
   },
   {
-    "id": "4.13",
+    "id": "4.14",
     "kap": 4,
     "omr": "konjugat_absolutbelopp",
     "kurs": [
@@ -4982,7 +5465,7 @@ window.BANKMATO2 = [
     "familj": "komplex_konjugat_geometri"
   },
   {
-    "id": "4.14",
+    "id": "4.15",
     "kap": 4,
     "omr": "rakning_komplexa",
     "kurs": [
@@ -4995,7 +5478,7 @@ window.BANKMATO2 = [
     "familj": "proc_complex_multiplikation_3"
   },
   {
-    "id": "4.15",
+    "id": "4.16",
     "kap": 4,
     "omr": "polynomdivision",
     "kurs": [
@@ -5008,7 +5491,7 @@ window.BANKMATO2 = [
     "familj": "polynomdivision_rutin_c"
   },
   {
-    "id": "4.16",
+    "id": "4.17",
     "kap": 4,
     "omr": "komplexa_talplanet",
     "kurs": [
@@ -5021,7 +5504,7 @@ window.BANKMATO2 = [
     "familj": "komplex_ort_apollonius"
   },
   {
-    "id": "4.17",
+    "id": "4.18",
     "kap": 4,
     "omr": "komplexa_talplanet",
     "kurs": [
@@ -5034,7 +5517,7 @@ window.BANKMATO2 = [
     "familj": "komplex_lokus_cirkel_skarning"
   },
   {
-    "id": "4.18",
+    "id": "4.19",
     "kap": 4,
     "omr": "potensekvationer_komplexa",
     "kurs": [
@@ -5047,7 +5530,7 @@ window.BANKMATO2 = [
     "familj": "fjarderot_16_talplan_svg"
   },
   {
-    "id": "4.19",
+    "id": "4.20",
     "kap": 4,
     "omr": "rakning_polar_form",
     "kurs": [
@@ -5060,7 +5543,20 @@ window.BANKMATO2 = [
     "familj": "polar_mult_div_ny"
   },
   {
-    "id": "4.20",
+    "id": "4.21",
+    "kap": 4,
+    "omr": "komplexa_talplanet",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>Bestäm och beskriv mängden av komplexa tal \\(z\\) som uppfyller</p><p>\\[|z-2|=2|z+1|.\\]</p><span class=\"fig\"><svg width=\"420\" height=\"300\" viewBox=\"0 0 420 300\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"418\" height=\"298\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"101.0\" y1=\"20.0\" x2=\"101.0\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"131.6\" y1=\"20.0\" x2=\"131.6\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"162.2\" y1=\"20.0\" x2=\"162.2\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"192.9\" y1=\"20.0\" x2=\"192.9\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"223.5\" y1=\"20.0\" x2=\"223.5\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"254.1\" y1=\"20.0\" x2=\"254.1\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"284.8\" y1=\"20.0\" x2=\"284.8\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"315.4\" y1=\"20.0\" x2=\"315.4\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"346.0\" y1=\"20.0\" x2=\"346.0\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"265.0\" x2=\"346.0\" y2=\"265.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"234.4\" x2=\"346.0\" y2=\"234.4\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"203.8\" x2=\"346.0\" y2=\"203.8\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"173.1\" x2=\"346.0\" y2=\"173.1\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"142.5\" x2=\"346.0\" y2=\"142.5\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"111.9\" x2=\"346.0\" y2=\"111.9\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"81.2\" x2=\"346.0\" y2=\"81.2\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"50.6\" x2=\"346.0\" y2=\"50.6\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"20.0\" x2=\"346.0\" y2=\"20.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"101.0\" y1=\"142.5\" x2=\"346.0\" y2=\"142.5\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"254.1\" y1=\"20.0\" x2=\"254.1\" y2=\"265.0\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<circle cx=\"192.9\" cy=\"142.5\" r=\"61.2\" fill=\"#FBF0EE\" stroke=\"#B43123\" stroke-width=\"2\"/>\n<circle cx=\"315.4\" cy=\"142.5\" r=\"4.5\" fill=\"#268FA3\"/>\n<text x=\"322.4\" y=\"135.5\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">2</text>\n<circle cx=\"223.5\" cy=\"142.5\" r=\"4.5\" fill=\"#268FA3\"/>\n<text x=\"230.5\" y=\"135.5\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">−1</text>\n<text x=\"343.0\" y=\"135.5\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">Re</text>\n<text x=\"261.1\" y=\"32.0\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">Im</text>\n</svg></span><p>Härled cirkelns ekvation och ange centrum och radie.</p>",
+    "s": "<p>Sätt \\(z=x+iy\\). Då är</p><p>\\[|z-2|^2=(x-2)^2+y^2\\]</p><p>och</p><p>\\[|z+1|^2=(x+1)^2+y^2.\\]</p><p>Kvadrera villkoret:</p><p>\\[(x-2)^2+y^2=4\\left((x+1)^2+y^2\\right).\\]</p><p>Utveckla:</p><p>\\[x^2-4x+4+y^2=4x^2+8x+4+4y^2.\\]</p><p>Samla termer:</p><p>\\[x^2+4x+y^2=0.\\]</p><p>Kvadratkomplettera:</p><p>\\[(x+2)^2+y^2=4.\\]</p><p><strong>Lösningsmängden är alltså cirkeln med centrum \\(\\boxed{(-2,0)}\\) och radie \\(\\boxed{2}\\).</strong></p>",
+    "familj": "problem_complex_apollonius"
+  },
+  {
+    "id": "4.22",
     "kap": 4,
     "omr": "rakning_komplexa",
     "kurs": [
@@ -5073,7 +5569,7 @@ window.BANKMATO2 = [
     "familj": "proc_complex_division_3"
   },
   {
-    "id": "4.21",
+    "id": "4.23",
     "kap": 4,
     "omr": "imaginara_enheten",
     "kurs": [
@@ -5086,7 +5582,7 @@ window.BANKMATO2 = [
     "familj": "proc_i_forenkla_1"
   },
   {
-    "id": "4.22",
+    "id": "4.24",
     "kap": 4,
     "omr": "polar_form",
     "kurs": [
@@ -5099,7 +5595,7 @@ window.BANKMATO2 = [
     "familj": "polar_rutin"
   },
   {
-    "id": "4.23",
+    "id": "4.25",
     "kap": 4,
     "omr": "polynomekvationer",
     "kurs": [
@@ -5112,7 +5608,7 @@ window.BANKMATO2 = [
     "familj": "polynom_parameter_multipla_rotter_a"
   },
   {
-    "id": "4.24",
+    "id": "4.26",
     "kap": 4,
     "omr": "imaginara_enheten",
     "kurs": [
@@ -5125,7 +5621,7 @@ window.BANKMATO2 = [
     "familj": "i_potenser_rutin"
   },
   {
-    "id": "4.25",
+    "id": "4.27",
     "kap": 4,
     "omr": "rakning_komplexa",
     "kurs": [
@@ -5138,7 +5634,7 @@ window.BANKMATO2 = [
     "familj": "komplex_rutin_fyra"
   },
   {
-    "id": "4.26",
+    "id": "4.28",
     "kap": 4,
     "omr": "konjugat_absolutbelopp",
     "kurs": [
@@ -5151,7 +5647,7 @@ window.BANKMATO2 = [
     "familj": "proc_complex_konjugat_abs_3"
   },
   {
-    "id": "4.27",
+    "id": "4.29",
     "kap": 4,
     "omr": "komplexa_talplanet",
     "kurs": [
@@ -5164,7 +5660,7 @@ window.BANKMATO2 = [
     "familj": "komplexplan_summa"
   },
   {
-    "id": "4.28",
+    "id": "4.30",
     "kap": 4,
     "omr": "polynomdivision",
     "kurs": [
@@ -5177,7 +5673,20 @@ window.BANKMATO2 = [
     "familj": "polynomdivision_fjardegrad_e"
   },
   {
-    "id": "4.29",
+    "id": "4.31",
+    "kap": 4,
+    "omr": "komplexa_talplanet",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Varje komplext tal räknas om med regeln</p><p>\\[w=(1+i)z-2.\\]</p><p>Triangelns hörn är \\(z_1=0\\), \\(z_2=2\\) och \\(z_3=2i\\).</p><span class=\"fig\"><svg width=\"450\" height=\"320\" viewBox=\"0 0 450 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"448\" height=\"318\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"61.8\" y1=\"20.0\" x2=\"61.8\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"106.0\" y1=\"20.0\" x2=\"106.0\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"150.2\" y1=\"20.0\" x2=\"150.2\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"194.3\" y1=\"20.0\" x2=\"194.3\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"238.5\" y1=\"20.0\" x2=\"238.5\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"282.7\" y1=\"20.0\" x2=\"282.7\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"326.8\" y1=\"20.0\" x2=\"326.8\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"371.0\" y1=\"20.0\" x2=\"371.0\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"415.2\" y1=\"20.0\" x2=\"415.2\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"61.8\" y1=\"285.0\" x2=\"415.2\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"61.8\" y1=\"240.8\" x2=\"415.2\" y2=\"240.8\" stroke=\"#E8EEF0\"/>\n<line x1=\"61.8\" y1=\"196.7\" x2=\"415.2\" y2=\"196.7\" stroke=\"#E8EEF0\"/>\n<line x1=\"61.8\" y1=\"152.5\" x2=\"415.2\" y2=\"152.5\" stroke=\"#E8EEF0\"/>\n<line x1=\"61.8\" y1=\"108.3\" x2=\"415.2\" y2=\"108.3\" stroke=\"#E8EEF0\"/>\n<line x1=\"61.8\" y1=\"64.2\" x2=\"415.2\" y2=\"64.2\" stroke=\"#E8EEF0\"/>\n<line x1=\"61.8\" y1=\"20.0\" x2=\"415.2\" y2=\"20.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"61.8\" y1=\"196.7\" x2=\"415.2\" y2=\"196.7\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"282.7\" y1=\"20.0\" x2=\"282.7\" y2=\"285.0\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"282.7\" y1=\"196.7\" x2=\"371.0\" y2=\"196.7\" stroke=\"#7B858A\" stroke-width=\"2\"/>\n<line x1=\"371.0\" y1=\"196.7\" x2=\"282.7\" y2=\"108.3\" stroke=\"#7B858A\" stroke-width=\"2\"/>\n<line x1=\"282.7\" y1=\"108.3\" x2=\"282.7\" y2=\"196.7\" stroke=\"#7B858A\" stroke-width=\"2\"/>\n<line x1=\"194.3\" y1=\"196.7\" x2=\"282.7\" y2=\"108.3\" stroke=\"#B43123\" stroke-width=\"2\"/>\n<line x1=\"282.7\" y1=\"108.3\" x2=\"106.0\" y2=\"108.3\" stroke=\"#B43123\" stroke-width=\"2\"/>\n<line x1=\"106.0\" y1=\"108.3\" x2=\"194.3\" y2=\"196.7\" stroke=\"#B43123\" stroke-width=\"2\"/>\n<circle cx=\"282.7\" cy=\"196.7\" r=\"4.5\" fill=\"#2B2527\"/>\n<text x=\"289.7\" y=\"189.7\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">z₁</text>\n<circle cx=\"371.0\" cy=\"196.7\" r=\"4.5\" fill=\"#2B2527\"/>\n<text x=\"378.0\" y=\"189.7\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">z₂</text>\n<circle cx=\"282.7\" cy=\"108.3\" r=\"4.5\" fill=\"#B43123\"/>\n<text x=\"289.7\" y=\"101.3\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#B43123\">z₃ = w₂</text>\n<circle cx=\"194.3\" cy=\"196.7\" r=\"4.5\" fill=\"#B43123\"/>\n<text x=\"201.3\" y=\"189.7\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#B43123\">w₁</text>\n<circle cx=\"106.0\" cy=\"108.3\" r=\"4.5\" fill=\"#B43123\"/>\n<text x=\"113.0\" y=\"101.3\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#B43123\">w₃</text>\n<text x=\"412.2\" y=\"189.7\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">Re</text>\n<text x=\"289.7\" y=\"32.0\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">Im</text>\n</svg></span><p>a) Bestäm bilderna \\(w_1,w_2,w_3\\).<br>b) Beskriv hur multiplikationen med \\(1+i\\) förändrar längder och vinklar innan förskjutningen \\(-2\\) görs.</p>",
+    "s": "<p>a)</p><p>\\[w_1=(1+i)\\cdot0-2=\\boxed{-2}.\\]</p><p>\\[w_2=(1+i)\\cdot2-2=2+2i-2=\\boxed{2i}.\\]</p><p>\\[w_3=(1+i)\\cdot2i-2=2i+2i^2-2=\\boxed{-4+2i}.\\]</p><p>b) Talet \\(1+i\\) har absolutbelopp \\(\\sqrt2\\) och argument \\(\\pi/4\\). Multiplikation med \\(1+i\\) <strong>förlänger därför alla längder med faktorn \\(\\sqrt2\\) och roterar figuren \\(45^\\circ\\) moturs</strong>. Därefter flyttar termen \\(-2\\) hela figuren två enheter åt vänster.</p>",
+    "familj": "problem_complex_avbildning_triangel"
+  },
+  {
+    "id": "4.32",
     "kap": 4,
     "omr": "potensekvationer_komplexa",
     "kurs": [
@@ -5190,7 +5699,7 @@ window.BANKMATO2 = [
     "familj": "kubikrot_8_svg_c"
   },
   {
-    "id": "4.30",
+    "id": "4.33",
     "kap": 4,
     "omr": "de_moivre",
     "kurs": [
@@ -5203,7 +5712,7 @@ window.BANKMATO2 = [
     "familj": "de_moivre_potens"
   },
   {
-    "id": "4.31",
+    "id": "4.34",
     "kap": 4,
     "omr": "eulers_formel",
     "kurs": [
@@ -5216,7 +5725,7 @@ window.BANKMATO2 = [
     "familj": "euler_rutin"
   },
   {
-    "id": "4.32",
+    "id": "4.35",
     "kap": 4,
     "omr": "rakning_komplexa",
     "kurs": [
@@ -5229,7 +5738,7 @@ window.BANKMATO2 = [
     "familj": "proc_complex_linjar_ekvation_2"
   },
   {
-    "id": "4.33",
+    "id": "4.36",
     "kap": 4,
     "omr": "komplexa_talplanet",
     "kurs": [
@@ -5242,7 +5751,7 @@ window.BANKMATO2 = [
     "familj": "komplexplan_z_minus2_3"
   },
   {
-    "id": "4.34",
+    "id": "4.37",
     "kap": 4,
     "omr": "rakning_komplexa",
     "kurs": [
@@ -5255,7 +5764,7 @@ window.BANKMATO2 = [
     "familj": "komplex_division_konjugat"
   },
   {
-    "id": "4.35",
+    "id": "4.38",
     "kap": 4,
     "omr": "komplexa_talplanet",
     "kurs": [
@@ -5268,7 +5777,7 @@ window.BANKMATO2 = [
     "familj": "komplex_avbildning_affin_area"
   },
   {
-    "id": "4.36",
+    "id": "4.39",
     "kap": 4,
     "omr": "polar_form",
     "kurs": [
@@ -5281,7 +5790,7 @@ window.BANKMATO2 = [
     "familj": "proc_polar_till_rekt_1"
   },
   {
-    "id": "4.37",
+    "id": "4.40",
     "kap": 4,
     "omr": "komplexa_losningar",
     "kurs": [
@@ -5294,7 +5803,20 @@ window.BANKMATO2 = [
     "familj": "andragrad_komplex"
   },
   {
-    "id": "4.38",
+    "id": "4.41",
+    "kap": 4,
+    "omr": "polynomekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>Ett tredjegradspolynom \\(p(z)\\) har reella koefficienter. Koefficienten framför \\(z^3\\) är 1. Två av rötterna är</p><p>\\[z=1+2i\\quad\\text{och}\\quad z=-3.\\]</p><p>Bestäm polynomet.</p>",
+    "s": "<p>Eftersom polynomet har reella koefficienter måste den komplexa konjugerade roten \\(1-2i\\) också vara en rot.</p><p>Rötterna är alltså</p><p>\\[1+2i,\\quad1-2i,\\quad-3.\\]</p><p>Eftersom koefficienten framför \\(z^3\\) är 1 blir</p><p>\\[p(z)=(z-(1+2i))(z-(1-2i))(z+3).\\]</p><p>De två första faktorerna kan multipliceras som konjugat:</p><p>\\[(z-1-2i)(z-1+2i)=(z-1)^2+4=z^2-2z+5.\\]</p><p>Alltså</p><p>\\[p(z)=(z^2-2z+5)(z+3).\\]</p><p>\\[\\boxed{p(z)=z^3+z^2-z+15}.\\]</p>",
+    "familj": "problem_complex_bygg_polynom"
+  },
+  {
+    "id": "4.42",
     "kap": 4,
     "omr": "komplexa_talplanet",
     "kurs": [
@@ -5307,7 +5829,7 @@ window.BANKMATO2 = [
     "familj": "proc_complex_rotation_i_2"
   },
   {
-    "id": "4.39",
+    "id": "4.43",
     "kap": 4,
     "omr": "potensekvationer_komplexa",
     "kurs": [
@@ -5320,7 +5842,7 @@ window.BANKMATO2 = [
     "familj": "potensekv_cis"
   },
   {
-    "id": "4.40",
+    "id": "4.44",
     "kap": 4,
     "omr": "polynomekvationer",
     "kurs": [
@@ -5333,7 +5855,7 @@ window.BANKMATO2 = [
     "familj": "proc_polynomekv_faktorisering_c"
   },
   {
-    "id": "4.41",
+    "id": "4.45",
     "kap": 4,
     "omr": "faktorsatsen",
     "kurs": [
@@ -5346,7 +5868,7 @@ window.BANKMATO2 = [
     "familj": "faktorsats_kubik_fullstandig"
   },
   {
-    "id": "4.42",
+    "id": "4.46",
     "kap": 4,
     "omr": "polynomekvationer",
     "kurs": [
@@ -5359,7 +5881,7 @@ window.BANKMATO2 = [
     "familj": "polynom_konjugat_dubbelrot"
   },
   {
-    "id": "4.43",
+    "id": "4.47",
     "kap": 4,
     "omr": "rakning_komplexa",
     "kurs": [
@@ -5372,7 +5894,7 @@ window.BANKMATO2 = [
     "familj": "proc_complex_mult_1"
   },
   {
-    "id": "4.44",
+    "id": "4.48",
     "kap": 4,
     "omr": "polar_form",
     "kurs": [
@@ -5385,7 +5907,7 @@ window.BANKMATO2 = [
     "familj": "proc_rect_till_polar_3"
   },
   {
-    "id": "4.45",
+    "id": "4.49",
     "kap": 4,
     "omr": "polynomdivision",
     "kurs": [
@@ -5398,7 +5920,7 @@ window.BANKMATO2 = [
     "familj": "polynomdivision_exakt_ny"
   },
   {
-    "id": "4.46",
+    "id": "4.50",
     "kap": 4,
     "omr": "konjugat_absolutbelopp",
     "kurs": [
@@ -5411,7 +5933,7 @@ window.BANKMATO2 = [
     "familj": "abs_konjugat_5_12"
   },
   {
-    "id": "4.47",
+    "id": "4.51",
     "kap": 4,
     "omr": "rakning_polar_form",
     "kurs": [
@@ -5424,7 +5946,20 @@ window.BANKMATO2 = [
     "familj": "polar_multiplikation_division_c2"
   },
   {
-    "id": "4.48",
+    "id": "4.52",
+    "kap": 4,
+    "omr": "potensekvationer_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Lös ekvationen</p><p>\\[z^4=-16\\]</p><p>och markera lösningarna i det komplexa talplanet.</p><span class=\"fig\"><svg width=\"380\" height=\"310\" viewBox=\"0 0 380 310\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"378\" height=\"308\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"76.0\" y1=\"20.0\" x2=\"76.0\" y2=\"275.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"118.5\" y1=\"20.0\" x2=\"118.5\" y2=\"275.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"161.0\" y1=\"20.0\" x2=\"161.0\" y2=\"275.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"203.5\" y1=\"20.0\" x2=\"203.5\" y2=\"275.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"246.0\" y1=\"20.0\" x2=\"246.0\" y2=\"275.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"288.5\" y1=\"20.0\" x2=\"288.5\" y2=\"275.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"331.0\" y1=\"20.0\" x2=\"331.0\" y2=\"275.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"76.0\" y1=\"275.0\" x2=\"331.0\" y2=\"275.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"76.0\" y1=\"232.5\" x2=\"331.0\" y2=\"232.5\" stroke=\"#E8EEF0\"/>\n<line x1=\"76.0\" y1=\"190.0\" x2=\"331.0\" y2=\"190.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"76.0\" y1=\"147.5\" x2=\"331.0\" y2=\"147.5\" stroke=\"#E8EEF0\"/>\n<line x1=\"76.0\" y1=\"105.0\" x2=\"331.0\" y2=\"105.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"76.0\" y1=\"62.5\" x2=\"331.0\" y2=\"62.5\" stroke=\"#E8EEF0\"/>\n<line x1=\"76.0\" y1=\"20.0\" x2=\"331.0\" y2=\"20.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"76.0\" y1=\"147.5\" x2=\"331.0\" y2=\"147.5\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"203.5\" y1=\"20.0\" x2=\"203.5\" y2=\"275.0\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<circle cx=\"203.5\" cy=\"147.5\" r=\"85.0\" fill=\"none\" stroke=\"#7B858A\" stroke-width=\"2\"/>\n<circle cx=\"263.6\" cy=\"87.4\" r=\"4.5\" fill=\"#B43123\"/>\n<circle cx=\"143.4\" cy=\"87.4\" r=\"4.5\" fill=\"#B43123\"/>\n<circle cx=\"143.4\" cy=\"207.6\" r=\"4.5\" fill=\"#B43123\"/>\n<circle cx=\"263.6\" cy=\"207.6\" r=\"4.5\" fill=\"#B43123\"/>\n<text x=\"328.0\" y=\"140.5\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">Re</text>\n<text x=\"210.5\" y=\"32.0\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">Im</text>\n</svg></span>",
+    "s": "<p>Skriv högerledet i polär form:</p><p>\\[-16=16\\left(\\cos(\\pi+2\\pi n)+i\\sin(\\pi+2\\pi n)\\right).\\]</p><p>Fjärderötterna får absolutbelopp</p><p>\\[\\sqrt[4]{16}=2\\]</p><p>och argument</p><p>\\[\\frac{\\pi+2\\pi n}{4}=\\frac\\pi4+\\frac{n\\pi}{2},\\qquad n=0,1,2,3.\\]</p><p>Alltså är rötterna</p><p>\\[2\\operatorname{cis}\\frac\\pi4,\\quad2\\operatorname{cis}\\frac{3\\pi}4,\\quad2\\operatorname{cis}\\frac{5\\pi}4,\\quad2\\operatorname{cis}\\frac{7\\pi}4.\\]</p><p>I rektangulär form:</p><p>\\[\\boxed{\\sqrt2+i\\sqrt2,\\ -\\sqrt2+i\\sqrt2,\\ -\\sqrt2-i\\sqrt2,\\ \\sqrt2-i\\sqrt2}.\\]</p>",
+    "familj": "problem_complex_fjarderot_negativ"
+  },
+  {
+    "id": "4.53",
     "kap": 4,
     "omr": "rakning_polar_form",
     "kurs": [
@@ -5437,7 +5972,7 @@ window.BANKMATO2 = [
     "familj": "proc_polar_abs_arg_rules"
   },
   {
-    "id": "4.49",
+    "id": "4.54",
     "kap": 4,
     "omr": "komplexa_losningar",
     "kurs": [
@@ -5450,7 +5985,7 @@ window.BANKMATO2 = [
     "familj": "andragrad_komplex_rutin3"
   },
   {
-    "id": "4.50",
+    "id": "4.55",
     "kap": 4,
     "omr": "polar_form",
     "kurs": [
@@ -5463,7 +5998,7 @@ window.BANKMATO2 = [
     "familj": "proc_polar_till_rect_3"
   },
   {
-    "id": "4.51",
+    "id": "4.56",
     "kap": 4,
     "omr": "eulers_formel",
     "kurs": [
@@ -5476,7 +6011,7 @@ window.BANKMATO2 = [
     "familj": "euler_formel_rutin"
   },
   {
-    "id": "4.52",
+    "id": "4.57",
     "kap": 4,
     "omr": "imaginara_enheten",
     "kurs": [
@@ -5489,7 +6024,7 @@ window.BANKMATO2 = [
     "familj": "i_potenser_e"
   },
   {
-    "id": "4.53",
+    "id": "4.58",
     "kap": 4,
     "omr": "faktorsatsen",
     "kurs": [
@@ -5502,7 +6037,7 @@ window.BANKMATO2 = [
     "familj": "faktorsats_rutin_e2"
   },
   {
-    "id": "4.54",
+    "id": "4.59",
     "kap": 4,
     "omr": "polynomekvationer",
     "kurs": [
@@ -5515,7 +6050,7 @@ window.BANKMATO2 = [
     "familj": "poly_given_root"
   },
   {
-    "id": "4.55",
+    "id": "4.60",
     "kap": 4,
     "omr": "eulers_formel",
     "kurs": [
@@ -5528,7 +6063,7 @@ window.BANKMATO2 = [
     "familj": "euler_harled_cos_sin_c"
   },
   {
-    "id": "4.56",
+    "id": "4.61",
     "kap": 4,
     "omr": "rakning_polar_form",
     "kurs": [
@@ -5541,7 +6076,20 @@ window.BANKMATO2 = [
     "familj": "proc_polar_mult_div_3"
   },
   {
-    "id": "4.57",
+    "id": "4.62",
+    "kap": 4,
+    "omr": "rakning_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Bestäm det reella talet \\(a\\) så att det komplexa talet</p><p>\\[\\frac{a+i}{2-i}\\]</p><p>har argument \\(45^\\circ\\).</p>",
+    "s": "<p>Förläng med nämnarens konjugat:</p><p>\\[\\frac{a+i}{2-i}=\\frac{(a+i)(2+i)}{5}.\\]</p><p>Utveckla täljaren:</p><p>\\[(a+i)(2+i)=(2a-1)+(a+2)i.\\]</p><p>Ett tal med argument \\(45^\\circ\\) har lika stor positiv realdel och imaginärdel. Därför krävs</p><p>\\[2a-1=a+2.\\]</p><p>\\[\\boxed{a=3}.\\]</p><p>Kontroll: Då blir talet \\((5+5i)/5=1+i\\), som har argument \\(45^\\circ\\).</p>",
+    "familj": "problem_complex_argument_parameter"
+  },
+  {
+    "id": "4.63",
     "kap": 4,
     "omr": "komplexa_talplanet",
     "kurs": [
@@ -5554,7 +6102,7 @@ window.BANKMATO2 = [
     "familj": "talplan_rutin_e2"
   },
   {
-    "id": "4.58",
+    "id": "4.64",
     "kap": 4,
     "omr": "polar_form",
     "kurs": [
@@ -5567,7 +6115,7 @@ window.BANKMATO2 = [
     "familj": "polarform_mix_ny3"
   },
   {
-    "id": "4.59",
+    "id": "4.65",
     "kap": 4,
     "omr": "polynomdivision",
     "kurs": [
@@ -5580,7 +6128,7 @@ window.BANKMATO2 = [
     "familj": "proc_polynomdivision_1"
   },
   {
-    "id": "4.60",
+    "id": "4.66",
     "kap": 4,
     "omr": "komplexa_talplanet",
     "kurs": [
@@ -5593,7 +6141,7 @@ window.BANKMATO2 = [
     "familj": "komplex_avbildning_rotation_skala_c_svg"
   },
   {
-    "id": "4.61",
+    "id": "4.67",
     "kap": 4,
     "omr": "komplexa_talplanet",
     "kurs": [
@@ -5606,7 +6154,7 @@ window.BANKMATO2 = [
     "familj": "multiplikation_i_rotation"
   },
   {
-    "id": "4.62",
+    "id": "4.68",
     "kap": 4,
     "omr": "de_moivre",
     "kurs": [
@@ -5619,7 +6167,7 @@ window.BANKMATO2 = [
     "familj": "proc_demoivre_potenser_3"
   },
   {
-    "id": "4.63",
+    "id": "4.69",
     "kap": 4,
     "omr": "polar_form",
     "kurs": [
@@ -5632,7 +6180,7 @@ window.BANKMATO2 = [
     "familj": "polar_form_fran_rektangular"
   },
   {
-    "id": "4.64",
+    "id": "4.70",
     "kap": 4,
     "omr": "faktorsatsen",
     "kurs": [
@@ -5645,7 +6193,7 @@ window.BANKMATO2 = [
     "familj": "proc_faktorsatsen_kontroll_1"
   },
   {
-    "id": "4.65",
+    "id": "4.71",
     "kap": 4,
     "omr": "imaginara_enheten",
     "kurs": [
@@ -5658,7 +6206,20 @@ window.BANKMATO2 = [
     "familj": "proc_i_potenser_3"
   },
   {
-    "id": "4.66",
+    "id": "4.72",
+    "kap": 4,
+    "omr": "de_moivre",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "t": "<p>Beräkna exakt</p><p>\\[(1+i\\sqrt3)^6.\\]</p><p>Använd polär form och de Moivres formel.</p>",
+    "s": "<p>Talet \\(1+i\\sqrt3\\) har absolutbelopp 2 och argument \\(\\pi/3\\):</p><p>\\[1+i\\sqrt3=2\\operatorname{cis}\\frac\\pi3.\\]</p><p>Med de Moivres formel:</p><p>\\[(1+i\\sqrt3)^6=2^6\\operatorname{cis}\\left(6\\cdot\\frac\\pi3\\right)=64\\operatorname{cis}(2\\pi).\\]</p><p>\\[\\boxed{(1+i\\sqrt3)^6=64}.\\]</p>",
+    "familj": "problem_demoivre_exakt"
+  },
+  {
+    "id": "4.73",
     "kap": 4,
     "omr": "konjugat_absolutbelopp",
     "kurs": [
@@ -5671,7 +6232,7 @@ window.BANKMATO2 = [
     "familj": "konjugat_abs_rutin"
   },
   {
-    "id": "4.67",
+    "id": "4.74",
     "kap": 4,
     "omr": "komplexa_losningar",
     "kurs": [
@@ -5684,7 +6245,7 @@ window.BANKMATO2 = [
     "familj": "andragrad_komplexa_minus3_2i"
   },
   {
-    "id": "4.68",
+    "id": "4.75",
     "kap": 4,
     "omr": "potensekvationer_komplexa",
     "kurs": [
@@ -5697,7 +6258,7 @@ window.BANKMATO2 = [
     "familj": "proc_complex_potensekvationer_3"
   },
   {
-    "id": "4.69",
+    "id": "4.76",
     "kap": 4,
     "omr": "rakning_polar_form",
     "kurs": [
@@ -5710,7 +6271,7 @@ window.BANKMATO2 = [
     "familj": "polar_mult_div"
   },
   {
-    "id": "4.70",
+    "id": "4.77",
     "kap": 4,
     "omr": "konjugat_absolutbelopp",
     "kurs": [
@@ -5723,7 +6284,7 @@ window.BANKMATO2 = [
     "familj": "proc_complex_abs_relationer"
   },
   {
-    "id": "4.71",
+    "id": "4.78",
     "kap": 4,
     "omr": "komplexa_talplanet",
     "kurs": [
@@ -5736,7 +6297,7 @@ window.BANKMATO2 = [
     "familj": "komplex_lokus_cirkel_linje_a"
   },
   {
-    "id": "4.72",
+    "id": "4.79",
     "kap": 4,
     "omr": "polynomekvationer",
     "kurs": [
@@ -5749,7 +6310,7 @@ window.BANKMATO2 = [
     "familj": "polynomekvation_komplexa_roots"
   },
   {
-    "id": "4.73",
+    "id": "4.80",
     "kap": 4,
     "omr": "faktorsatsen",
     "kurs": [
@@ -5762,7 +6323,7 @@ window.BANKMATO2 = [
     "familj": "faktorsats_kubik_tre_rotter"
   },
   {
-    "id": "4.74",
+    "id": "4.81",
     "kap": 4,
     "omr": "potensekvationer_komplexa",
     "kurs": [
@@ -5775,7 +6336,20 @@ window.BANKMATO2 = [
     "familj": "proc_complex_fjarderot_2"
   },
   {
-    "id": "4.75",
+    "id": "4.82",
+    "kap": 4,
+    "omr": "potensekvationer_komplexa",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>Ekvationen</p><p>\\[z^6=64\\]</p><p>har sex komplexa lösningar.</p><p>a) Bestäm lösningarna i polär form.<br>b) Förklara geometriskt varför summan av alla sex lösningar är 0.</p>",
+    "s": "<p>a) Skriv \\(64=64\\operatorname{cis}(2\\pi n)\\). Sjätterötterna har absolutbelopp 2 och argument</p><p>\\[\\frac{2\\pi n}{6}=\\frac{n\\pi}{3},\\qquad n=0,1,2,3,4,5.\\]</p><p>Alltså</p><p>\\[\\boxed{z_n=2\\operatorname{cis}\\left(\\frac{n\\pi}{3}\\right),\\quad n=0,\\ldots,5}.\\]</p><p>b) Punkterna ligger jämnt fördelade på en cirkel med radie 2, alltså i hörnen på en regelbunden sexhörning med centrum i origo. Varje rot har en rot rakt mittemot sig. Dessa motsatta par summerar till 0.</p><p>Det finns tre sådana par, så <strong>summan av alla sex rötter är \\(\\boxed{0}\\)</strong>.</p>",
+    "familj": "problem_complex_rotter_symmetri"
+  },
+  {
+    "id": "4.83",
     "kap": 4,
     "omr": "rakning_komplexa",
     "kurs": [
@@ -5788,7 +6362,7 @@ window.BANKMATO2 = [
     "familj": "komplex_rakning_fyra"
   },
   {
-    "id": "4.76",
+    "id": "4.84",
     "kap": 4,
     "omr": "polynomdivision",
     "kurs": [
@@ -5801,7 +6375,7 @@ window.BANKMATO2 = [
     "familj": "polynomdivision_rutin"
   },
   {
-    "id": "4.77",
+    "id": "4.85",
     "kap": 4,
     "omr": "polar_form",
     "kurs": [
@@ -5814,7 +6388,7 @@ window.BANKMATO2 = [
     "familj": "polar_minus_sqrt3_i"
   },
   {
-    "id": "4.78",
+    "id": "4.86",
     "kap": 4,
     "omr": "konjugat_absolutbelopp",
     "kurs": [
@@ -5827,7 +6401,7 @@ window.BANKMATO2 = [
     "familj": "konjugat_abs_system"
   },
   {
-    "id": "4.79",
+    "id": "4.87",
     "kap": 4,
     "omr": "polar_form",
     "kurs": [
@@ -5840,7 +6414,7 @@ window.BANKMATO2 = [
     "familj": "proc_polar_rekt_till_polar_1"
   },
   {
-    "id": "4.80",
+    "id": "4.88",
     "kap": 4,
     "omr": "eulers_formel",
     "kurs": [
@@ -5853,7 +6427,7 @@ window.BANKMATO2 = [
     "familj": "proc_euler_till_rect_2"
   },
   {
-    "id": "4.81",
+    "id": "4.89",
     "kap": 4,
     "omr": "faktorsatsen",
     "kurs": [
@@ -5866,7 +6440,7 @@ window.BANKMATO2 = [
     "familj": "faktorsats_tva_rotter_e"
   },
   {
-    "id": "4.82",
+    "id": "4.90",
     "kap": 4,
     "omr": "faktorsatsen",
     "kurs": [
@@ -5879,7 +6453,7 @@ window.BANKMATO2 = [
     "familj": "faktorsats_parameter"
   },
   {
-    "id": "4.83",
+    "id": "4.91",
     "kap": 4,
     "omr": "de_moivre",
     "kurs": [
@@ -5892,7 +6466,7 @@ window.BANKMATO2 = [
     "familj": "demoivre_rutin_e"
   },
   {
-    "id": "4.84",
+    "id": "4.92",
     "kap": 4,
     "omr": "komplexa_talplanet",
     "kurs": [
@@ -5905,7 +6479,20 @@ window.BANKMATO2 = [
     "familj": "komplex_mittnormal_a"
   },
   {
-    "id": "4.85",
+    "id": "4.93",
+    "kap": 4,
+    "omr": "faktorsatsen",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Polynomet</p><p>\\[p(z)=z^3+az^2+bz-6\\]</p><p>är delbart med både \\(z-2\\) och \\(z+1\\).</p><p>a) Bestäm \\(a\\) och \\(b\\).<br>b) Lös därefter ekvationen \\(p(z)=0\\).</p>",
+    "s": "<p>Eftersom \\(z-2\\) är en faktor gäller \\(p(2)=0\\):</p><p>\\[8+4a+2b-6=0\\Rightarrow2a+b=-1.\\]</p><p>Eftersom \\(z+1\\) är en faktor gäller \\(p(-1)=0\\):</p><p>\\[-1+a-b-6=0\\Rightarrow a-b=7.\\]</p><p>Lös ekvationssystemet:</p><p>\\[a=2,\\qquad b=-5.\\]</p><p>Då</p><p>\\[p(z)=z^3+2z^2-5z-6.\\]</p><p>Två faktorer är redan kända:</p><p>\\[p(z)=(z-2)(z+1)(z+3).\\]</p><p><strong>\\(\\boxed{a=2,\\ b=-5}\\) och rötterna är \\(\\boxed{2,-1,-3}\\).</strong></p>",
+    "familj": "problem_faktorsats_tva_villkor"
+  },
+  {
+    "id": "4.94",
     "kap": 4,
     "omr": "imaginara_enheten",
     "kurs": [
@@ -5918,7 +6505,7 @@ window.BANKMATO2 = [
     "familj": "i_potenser_och_reciprok"
   },
   {
-    "id": "4.86",
+    "id": "4.95",
     "kap": 4,
     "omr": "polynomdivision",
     "kurs": [
@@ -5931,7 +6518,7 @@ window.BANKMATO2 = [
     "familj": "proc_polynomdivision_3"
   },
   {
-    "id": "4.87",
+    "id": "4.96",
     "kap": 4,
     "omr": "rakning_komplexa",
     "kurs": [
@@ -5944,7 +6531,7 @@ window.BANKMATO2 = [
     "familj": "proc_complex_add_sub_1"
   },
   {
-    "id": "4.88",
+    "id": "4.97",
     "kap": 4,
     "omr": "komplexa_talplanet",
     "kurs": [
@@ -5957,7 +6544,7 @@ window.BANKMATO2 = [
     "familj": "komplex_lokus_cirkel"
   },
   {
-    "id": "4.89",
+    "id": "4.98",
     "kap": 4,
     "omr": "komplexa_losningar",
     "kurs": [
@@ -5970,7 +6557,7 @@ window.BANKMATO2 = [
     "familj": "polynom_parameter_konjugatroots_a"
   },
   {
-    "id": "4.90",
+    "id": "4.99",
     "kap": 4,
     "omr": "rakning_komplexa",
     "kurs": [
@@ -5983,7 +6570,7 @@ window.BANKMATO2 = [
     "familj": "proc_complex_lin_ekvationer_c"
   },
   {
-    "id": "4.91",
+    "id": "4.100",
     "kap": 4,
     "omr": "komplexa_talplanet",
     "kurs": [
@@ -5996,7 +6583,7 @@ window.BANKMATO2 = [
     "familj": "apollonius_lokus_a_svg"
   },
   {
-    "id": "4.92",
+    "id": "4.101",
     "kap": 4,
     "omr": "faktorsatsen",
     "kurs": [
@@ -6009,7 +6596,7 @@ window.BANKMATO2 = [
     "familj": "proc_faktorsatsen_kontroll_3"
   },
   {
-    "id": "4.93",
+    "id": "4.102",
     "kap": 4,
     "omr": "de_moivre",
     "kurs": [
@@ -6022,7 +6609,20 @@ window.BANKMATO2 = [
     "familj": "demoivre_exakta_potenser_c"
   },
   {
-    "id": "4.94",
+    "id": "4.103",
+    "kap": 4,
+    "omr": "polynomekvationer",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>Ett fjärdegradspolynom \\(p(z)\\) har reella koefficienter och koefficienten framför \\(z^4\\) är 1. Talet \\(1+2i\\) är en rot och \\(-2\\) är en annan rot. Dessutom gäller \\(p(0)=30\\).</p><p>Bestäm samtliga rötter och skriv polynomet i faktoriserad form.</p>",
+    "s": "<p>Eftersom koefficienterna är reella är även \\(1-2i\\) en rot.</p><p>Låt den fjärde roten vara \\(r\\), som måste vara reell eftersom de tre andra rötterna redan består av ett konjugatpar och en reell rot.</p><p>Eftersom koefficienten framför \\(z^4\\) är 1 kan vi skriva</p><p>\\[p(z)=(z-(1+2i))(z-(1-2i))(z+2)(z-r).\\]</p><p>Sätt \\(z=0\\):</p><p>\\[p(0)=(-(1+2i))(-(1-2i))\\cdot2\\cdot(-r).\\]</p><p>De två första faktorerna ger \\(|1+2i|^2=5\\). Alltså</p><p>\\[30=5\\cdot2\\cdot(-r)=-10r\\Rightarrow r=-3.\\]</p><p>Rötterna är därför</p><p>\\[\\boxed{1+2i,\\ 1-2i,\\ -2,\\ -3}.\\]</p><p>Faktoriserad form:</p><p>\\[\\boxed{p(z)=((z-1)^2+4)(z+2)(z+3)}.\\]</p>",
+    "familj": "problem_complex_polynom_infer_rot"
+  },
+  {
+    "id": "4.104",
     "kap": 4,
     "omr": "komplexa_talplanet",
     "kurs": [
@@ -6035,7 +6635,7 @@ window.BANKMATO2 = [
     "familj": "komplex_plan_konjugat_i_svg"
   },
   {
-    "id": "4.95",
+    "id": "4.105",
     "kap": 4,
     "omr": "eulers_formel",
     "kurs": [
@@ -6048,7 +6648,7 @@ window.BANKMATO2 = [
     "familj": "eulerform_potens_c"
   },
   {
-    "id": "4.96",
+    "id": "4.106",
     "kap": 4,
     "omr": "potensekvationer_komplexa",
     "kurs": [
@@ -6061,7 +6661,7 @@ window.BANKMATO2 = [
     "familj": "femterot_32_geometri_summa"
   },
   {
-    "id": "4.97",
+    "id": "4.107",
     "kap": 4,
     "omr": "rakning_polar_form",
     "kurs": [
@@ -6074,7 +6674,7 @@ window.BANKMATO2 = [
     "familj": "polar_och_rektangulart_invers_c"
   },
   {
-    "id": "4.98",
+    "id": "4.108",
     "kap": 4,
     "omr": "faktorsatsen",
     "kurs": [
@@ -6087,7 +6687,7 @@ window.BANKMATO2 = [
     "familj": "proc_faktorsats_parameter_2"
   },
   {
-    "id": "4.99",
+    "id": "4.109",
     "kap": 4,
     "omr": "potensekvationer_komplexa",
     "kurs": [
@@ -6100,7 +6700,7 @@ window.BANKMATO2 = [
     "familj": "kubikrot_minus8i"
   },
   {
-    "id": "4.100",
+    "id": "4.110",
     "kap": 4,
     "omr": "de_moivre",
     "kurs": [
@@ -6113,7 +6713,7 @@ window.BANKMATO2 = [
     "familj": "demoivre_rutin"
   },
   {
-    "id": "4.101",
+    "id": "4.111",
     "kap": 4,
     "omr": "potensekvationer_komplexa",
     "kurs": [
@@ -6126,7 +6726,7 @@ window.BANKMATO2 = [
     "familj": "proc_complex_potensekv_standard_c"
   },
   {
-    "id": "4.102",
+    "id": "4.112",
     "kap": 4,
     "omr": "potensekvationer_komplexa",
     "kurs": [
@@ -6139,7 +6739,20 @@ window.BANKMATO2 = [
     "familj": "komplexa_fjarderotter_a"
   },
   {
-    "id": "4.103",
+    "id": "4.113",
+    "kap": 4,
+    "omr": "komplexa_talplanet",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "t": "<p>Tre punkter i det komplexa talplanet motsvarar</p><p>\\[z_1=1+i,\\qquad z_2=5+i,\\qquad z_3=3+4i.\\]</p><span class=\"fig\"><svg width=\"420\" height=\"310\" viewBox=\"0 0 420 310\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"418\" height=\"308\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"70.5\" y1=\"20.0\" x2=\"70.5\" y2=\"275.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"121.5\" y1=\"20.0\" x2=\"121.5\" y2=\"275.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"172.5\" y1=\"20.0\" x2=\"172.5\" y2=\"275.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"223.5\" y1=\"20.0\" x2=\"223.5\" y2=\"275.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"274.5\" y1=\"20.0\" x2=\"274.5\" y2=\"275.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"325.5\" y1=\"20.0\" x2=\"325.5\" y2=\"275.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"376.5\" y1=\"20.0\" x2=\"376.5\" y2=\"275.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"70.5\" y1=\"275.0\" x2=\"376.5\" y2=\"275.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"70.5\" y1=\"224.0\" x2=\"376.5\" y2=\"224.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"70.5\" y1=\"173.0\" x2=\"376.5\" y2=\"173.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"70.5\" y1=\"122.0\" x2=\"376.5\" y2=\"122.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"70.5\" y1=\"71.0\" x2=\"376.5\" y2=\"71.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"70.5\" y1=\"20.0\" x2=\"376.5\" y2=\"20.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"70.5\" y1=\"275.0\" x2=\"376.5\" y2=\"275.0\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"70.5\" y1=\"20.0\" x2=\"70.5\" y2=\"275.0\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"121.5\" y1=\"224.0\" x2=\"325.5\" y2=\"224.0\" stroke=\"#268FA3\" stroke-width=\"2\"/>\n<line x1=\"325.5\" y1=\"224.0\" x2=\"223.5\" y2=\"71.0\" stroke=\"#268FA3\" stroke-width=\"2\"/>\n<line x1=\"223.5\" y1=\"71.0\" x2=\"121.5\" y2=\"224.0\" stroke=\"#268FA3\" stroke-width=\"2\"/>\n<circle cx=\"121.5\" cy=\"224.0\" r=\"4.5\" fill=\"#B43123\"/>\n<text x=\"128.5\" y=\"217.0\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#B43123\">z₁</text>\n<circle cx=\"325.5\" cy=\"224.0\" r=\"4.5\" fill=\"#B43123\"/>\n<text x=\"332.5\" y=\"217.0\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#B43123\">z₂</text>\n<circle cx=\"223.5\" cy=\"71.0\" r=\"4.5\" fill=\"#B43123\"/>\n<text x=\"230.5\" y=\"64.0\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#B43123\">z₃</text>\n<text x=\"373.5\" y=\"268.0\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">Re</text>\n<text x=\"77.5\" y=\"32.0\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">Im</text>\n</svg></span><p>a) Bestäm triangelns sidlängder.<br>b) Bestäm triangelns area.</p>",
+    "s": "<p>a) Avstånd mellan komplexa tal fås med absolutbeloppet av differensen.</p><p>\\[|z_2-z_1|=|4|=4.\\]</p><p>\\[|z_3-z_1|=|2+3i|=\\sqrt{2^2+3^2}=\\sqrt{13}.\\]</p><p>\\[|z_3-z_2|=|-2+3i|=\\sqrt{13}.\\]</p><p>Triangeln är alltså likbent med sidlängderna \\(4,\\sqrt{13},\\sqrt{13}\\).</p><p>b) Basen från \\(z_1\\) till \\(z_2\\) är horisontell och har längd 4. Punkten \\(z_3\\) ligger 3 enheter ovanför baslinjen. Därför</p><p>\\[A=\\frac12\\cdot4\\cdot3=\\boxed{6}.\\]</p>",
+    "familj": "problem_complex_triangel_area"
+  },
+  {
+    "id": "4.114",
     "kap": 4,
     "omr": "polar_form",
     "kurs": [
@@ -6152,7 +6765,7 @@ window.BANKMATO2 = [
     "familj": "polarform_rutin3"
   },
   {
-    "id": "4.104",
+    "id": "4.115",
     "kap": 4,
     "omr": "polynomekvationer",
     "kurs": [
@@ -6165,7 +6778,7 @@ window.BANKMATO2 = [
     "familj": "proc_polynomekvationer_faktor_3"
   },
   {
-    "id": "4.105",
+    "id": "4.116",
     "kap": 4,
     "omr": "de_moivre",
     "kurs": [
@@ -6178,7 +6791,7 @@ window.BANKMATO2 = [
     "familj": "proc_de_moivre_potenser_1"
   },
   {
-    "id": "4.106",
+    "id": "4.117",
     "kap": 4,
     "omr": "rakning_polar_form",
     "kurs": [
@@ -6191,7 +6804,7 @@ window.BANKMATO2 = [
     "familj": "polar_rakning_expform_e"
   },
   {
-    "id": "4.107",
+    "id": "4.118",
     "kap": 4,
     "omr": "polynomdivision",
     "kurs": [
@@ -6204,7 +6817,7 @@ window.BANKMATO2 = [
     "familj": "polynomdivision_rutin2"
   },
   {
-    "id": "4.108",
+    "id": "4.119",
     "kap": 4,
     "omr": "rakning_komplexa",
     "kurs": [
@@ -6217,7 +6830,7 @@ window.BANKMATO2 = [
     "familj": "proc_complex_division_1"
   },
   {
-    "id": "4.109",
+    "id": "4.120",
     "kap": 4,
     "omr": "polynomekvationer",
     "kurs": [
@@ -6230,7 +6843,7 @@ window.BANKMATO2 = [
     "familj": "polynom_parameter_konjugat_vieta"
   },
   {
-    "id": "4.110",
+    "id": "4.121",
     "kap": 4,
     "omr": "polynomekvationer",
     "kurs": [
@@ -6243,7 +6856,7 @@ window.BANKMATO2 = [
     "familj": "proc_kubik_given_rot_2"
   },
   {
-    "id": "4.111",
+    "id": "4.122",
     "kap": 4,
     "omr": "rakning_komplexa",
     "kurs": [
@@ -6256,7 +6869,7 @@ window.BANKMATO2 = [
     "familj": "komplex_rutin_ny4"
   },
   {
-    "id": "4.112",
+    "id": "4.123",
     "kap": 4,
     "omr": "rakning_komplexa",
     "kurs": [
@@ -6269,7 +6882,20 @@ window.BANKMATO2 = [
     "familj": "komplex_rutin4"
   },
   {
-    "id": "4.113",
+    "id": "4.124",
+    "kap": 4,
+    "omr": "komplexa_talplanet",
+    "kurs": [
+      "2c"
+    ],
+    "niva": "A",
+    "poang": "0/1/3",
+    "t": "<p>Bestäm det komplexa tal \\(z\\) som både uppfyller</p><p>\\[\\arg(z-1)=\\frac\\pi4\\]</p><p>och</p><p>\\[|z|=\\sqrt{10}.\\]</p><span class=\"fig\"><svg width=\"430\" height=\"320\" viewBox=\"0 0 430 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\">\n<rect x=\"1\" y=\"1\" width=\"428\" height=\"318\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"87.7\" y1=\"20.0\" x2=\"87.7\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"120.8\" y1=\"20.0\" x2=\"120.8\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"154.0\" y1=\"20.0\" x2=\"154.0\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"187.1\" y1=\"20.0\" x2=\"187.1\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"220.2\" y1=\"20.0\" x2=\"220.2\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"253.3\" y1=\"20.0\" x2=\"253.3\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"286.5\" y1=\"20.0\" x2=\"286.5\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"319.6\" y1=\"20.0\" x2=\"319.6\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"352.7\" y1=\"20.0\" x2=\"352.7\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"87.7\" y1=\"285.0\" x2=\"369.3\" y2=\"285.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"87.7\" y1=\"251.9\" x2=\"369.3\" y2=\"251.9\" stroke=\"#E8EEF0\"/>\n<line x1=\"87.7\" y1=\"218.8\" x2=\"369.3\" y2=\"218.8\" stroke=\"#E8EEF0\"/>\n<line x1=\"87.7\" y1=\"185.6\" x2=\"369.3\" y2=\"185.6\" stroke=\"#E8EEF0\"/>\n<line x1=\"87.7\" y1=\"152.5\" x2=\"369.3\" y2=\"152.5\" stroke=\"#E8EEF0\"/>\n<line x1=\"87.7\" y1=\"119.4\" x2=\"369.3\" y2=\"119.4\" stroke=\"#E8EEF0\"/>\n<line x1=\"87.7\" y1=\"86.2\" x2=\"369.3\" y2=\"86.2\" stroke=\"#E8EEF0\"/>\n<line x1=\"87.7\" y1=\"53.1\" x2=\"369.3\" y2=\"53.1\" stroke=\"#E8EEF0\"/>\n<line x1=\"87.7\" y1=\"20.0\" x2=\"369.3\" y2=\"20.0\" stroke=\"#E8EEF0\"/>\n<line x1=\"87.7\" y1=\"152.5\" x2=\"369.3\" y2=\"152.5\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"220.2\" y1=\"20.0\" x2=\"220.2\" y2=\"285.0\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<circle cx=\"220.2\" cy=\"152.5\" r=\"104.8\" fill=\"none\" stroke=\"#7B858A\" stroke-width=\"2\"/>\n<line x1=\"253.3\" y1=\"152.5\" x2=\"352.7\" y2=\"53.1\" stroke=\"#B43123\" stroke-width=\"2\"/>\n<circle cx=\"253.3\" cy=\"152.5\" r=\"4.5\" fill=\"#268FA3\"/>\n<text x=\"260.3\" y=\"145.5\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#268FA3\">1</text>\n<text x=\"366.3\" y=\"145.5\" text-anchor=\"end\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">Re</text>\n<text x=\"227.2\" y=\"32.0\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#2B2527\">Im</text>\n</svg></span><p>Med argumentet menas här vinkeln i intervallet \\(-\\pi<\\arg z\\le\\pi\\).</p>",
+    "s": "<p>Villkoret \\(\\arg(z-1)=\\pi/4\\) betyder att vektorn från punkten 1 till punkten \\(z=x+iy\\) har lutningen 1 och pekar uppåt åt höger.</p><p>Alltså</p><p>\\[y=x-1,\\qquad x>1.\\]</p><p>Villkoret \\(|z|=\\sqrt{10}\\) ger</p><p>\\[x^2+y^2=10.\\]</p><p>Sätt in \\(y=x-1\\):</p><p>\\[x^2+(x-1)^2=10\\]</p><p>\\[2x^2-2x-9=0.\\]</p><p>\\[x=\\frac{1\\pm\\sqrt{19}}2.\\]</p><p>Eftersom \\(x>1\\) väljs den positiva lösningen:</p><p>\\[x=\\frac{1+\\sqrt{19}}2.\\]</p><p>Då</p><p>\\[y=x-1=\\frac{\\sqrt{19}-1}{2}.\\]</p><p><strong>\\[\\boxed{z=\\frac{1+\\sqrt{19}}2+i\\frac{\\sqrt{19}-1}{2}}.\\]</strong></p>",
+    "familj": "problem_complex_argument_cirkel_skarning"
+  },
+  {
+    "id": "4.125",
     "kap": 4,
     "omr": "de_moivre",
     "kurs": [
@@ -6282,7 +6908,7 @@ window.BANKMATO2 = [
     "familj": "de_moivre_potens_sex"
   },
   {
-    "id": "4.114",
+    "id": "4.126",
     "kap": 4,
     "omr": "polynomekvationer",
     "kurs": [
@@ -6295,7 +6921,7 @@ window.BANKMATO2 = [
     "familj": "polynom_fran_rotter_konjugat_c"
   },
   {
-    "id": "4.115",
+    "id": "4.127",
     "kap": 4,
     "omr": "eulers_formel",
     "kurs": [
@@ -6308,7 +6934,7 @@ window.BANKMATO2 = [
     "familj": "euler_konjugat_summa"
   },
   {
-    "id": "4.116",
+    "id": "4.128",
     "kap": 4,
     "omr": "komplexa_losningar",
     "kurs": [
@@ -6321,7 +6947,7 @@ window.BANKMATO2 = [
     "familj": "proc_andragrad_complex_3"
   },
   {
-    "id": "4.117",
+    "id": "4.129",
     "kap": 4,
     "omr": "faktorsatsen",
     "kurs": [
@@ -6334,7 +6960,7 @@ window.BANKMATO2 = [
     "familj": "faktorsats_faktorisering"
   },
   {
-    "id": "4.118",
+    "id": "4.130",
     "kap": 4,
     "omr": "de_moivre",
     "kurs": [
@@ -6347,7 +6973,7 @@ window.BANKMATO2 = [
     "familj": "demoivre_tiondepotens_c"
   },
   {
-    "id": "4.119",
+    "id": "4.131",
     "kap": 4,
     "omr": "komplexa_losningar",
     "kurs": [
@@ -6360,7 +6986,7 @@ window.BANKMATO2 = [
     "familj": "proc_konjugerade_rotter_2"
   },
   {
-    "id": "4.120",
+    "id": "4.132",
     "kap": 4,
     "omr": "konjugat_absolutbelopp",
     "kurs": [
@@ -6373,7 +6999,7 @@ window.BANKMATO2 = [
     "familj": "proc_complex_konjugat_abs_1"
   },
   {
-    "id": "4.121",
+    "id": "4.133",
     "kap": 4,
     "omr": "komplexa_talplanet",
     "kurs": [
