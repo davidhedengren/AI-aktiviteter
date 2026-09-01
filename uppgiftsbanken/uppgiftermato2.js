@@ -127,7 +127,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Bestäm exakt.</p><p>a) \\(\\sin 30^\\circ\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos 120^\\circ\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\sin 225^\\circ\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\cos 330^\\circ\\)</p>",
-    "s": "<p><strong>Metod:</strong> Använd motsvarande vinkeln i första kvadranten och tecknet i respektive kvadrant.</p><p>a) <strong>\\(\\frac12\\)</strong><br>b) <strong>\\(-\\frac12\\)</strong><br>c) <strong>\\(-\\frac{\\sqrt2}{2}\\)</strong><br>d) <strong>\\(\\frac{\\sqrt3}{2}\\)</strong></p>",
+    "s": "<p><strong>Metod:</strong> Använd motsvarande vinkeln i första kvadranten och tecknet i respektive kvadrant.</p><p>a) <strong>\\(\\frac12\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(-\\frac12\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(-\\frac{\\sqrt2}{2}\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(\\frac{\\sqrt3}{2}\\)</strong></p>",
     "familj": "proc_trig_enhetscirkel_exakta_1"
   },
   {
@@ -179,7 +179,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Bestäm exakt.</p><p>a) \\(\\cos 150^\\circ\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\sin 225^\\circ\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\tan 330^\\circ\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\cos 270^\\circ\\)</p>",
-    "s": "<p><strong>Metod:</strong> Använd standardvinklarna i enhetscirkeln och kontrollera tecknet i rätt kvadrant.</p><p>a) <strong>\\(-\\frac{\\sqrt3}{2}\\)</strong>.<br>b) <strong>\\(-\\frac{\\sqrt2}{2}\\)</strong>.<br>c) <strong>\\(-\\frac{1}{\\sqrt3}=-\\frac{\\sqrt3}{3}\\)</strong>.<br>d) <strong>0</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Använd standardvinklarna i enhetscirkeln och kontrollera tecknet i rätt kvadrant.</p><p>a) <strong>\\(-\\frac{\\sqrt3}{2}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(-\\frac{\\sqrt2}{2}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(-\\frac{1}{\\sqrt3}=-\\frac{\\sqrt3}{3}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>0</strong>.</p>",
     "familj": "proc_enhetscirkel_grader_2"
   },
   {
@@ -283,7 +283,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Utveckla uttrycken.</p><p>a) \\(\\sin(x+30^\\circ)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\sin(x-45^\\circ)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\cos(x+60^\\circ)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\cos(x-30^\\circ)\\)</p>",
-    "s": "<p>a) <strong>\\(\\frac{\\sqrt3}{2}\\sin x+\\frac12\\cos x\\)</strong><br>b) <strong>\\(\\frac{\\sqrt2}{2}\\sin x-\\frac{\\sqrt2}{2}\\cos x\\)</strong><br>c) <strong>\\(\\frac12\\cos x-\\frac{\\sqrt3}{2}\\sin x\\)</strong><br>d) <strong>\\(\\frac{\\sqrt3}{2}\\cos x+\\frac12\\sin x\\)</strong></p>",
+    "s": "<p>a) <strong>\\(\\frac{\\sqrt3}{2}\\sin x+\\frac12\\cos x\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(\\frac{\\sqrt2}{2}\\sin x-\\frac{\\sqrt2}{2}\\cos x\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\frac12\\cos x-\\frac{\\sqrt3}{2}\\sin x\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(\\frac{\\sqrt3}{2}\\cos x+\\frac12\\sin x\\)</strong></p>",
     "familj": "proc_additionsformler_utveckla"
   },
   {
@@ -348,7 +348,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Förenkla så långt som möjligt.</p><p>a) \\(\\sin^2x+\\cos^2x+\\sin^2x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(1-\\sin^2x+\\cos^2x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\frac{1-\\sin^2x}{\\cos^2x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\frac{\\sin^2x}{1-\\cos^2x}\\)</p>",
-    "s": "<p><strong>Metod:</strong> Använd \\(\\sin^2x+\\cos^2x=1\\) och kontrollera eventuella nämnare.</p><p>Använd \\(\\sin^2x+\\cos^2x=1\\).</p><p>a) \\(1+\\sin^2x\\).<br>b) \\(2\\cos^2x\\).<br>c) <strong>1</strong>, där \\(\\cos x\\ne0\\).<br>d) <strong>1</strong>, där \\(\\sin x\\ne0\\).</p>",
+    "s": "<p><strong>Metod:</strong> Använd \\(\\sin^2x+\\cos^2x=1\\) och kontrollera eventuella nämnare.</p><p>Använd \\(\\sin^2x+\\cos^2x=1\\).</p><p>a) \\(1+\\sin^2x\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(2\\cos^2x\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>1</strong>, där \\(\\cos x\\ne0\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>1</strong>, där \\(\\sin x\\ne0\\).</p>",
     "familj": "proc_trigettan_forenkla_3"
   },
   {
@@ -426,7 +426,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "3/0/0",
     "t": "<p>För vinkeln \\(v\\) gäller \\(\\sin v=\\frac35\\).</p><p>a) Bestäm \\(\\cos v\\) om \\(v\\) ligger i första kvadranten.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(\\cos v\\) om \\(v\\) ligger i andra kvadranten.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(\\tan v\\) i båda fallen.</p>",
-    "s": "<p>Trigonometriska ettan ger \\(\\cos^2v=1-9/25=16/25\\), alltså \\(|\\cos v|=4/5\\).</p><p>a) <strong>\\(\\cos v=4/5\\)</strong>.<br>b) <strong>\\(\\cos v=-4/5\\)</strong>.<br>c) Första kvadranten: <strong>\\(\\tan v=3/4\\)</strong>. Andra kvadranten: <strong>\\(\\tan v=-3/4\\)</strong>.</p>",
+    "s": "<p>Trigonometriska ettan ger \\(\\cos^2v=1-9/25=16/25\\), alltså \\(|\\cos v|=4/5\\).</p><p>a) <strong>\\(\\cos v=4/5\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(\\cos v=-4/5\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Första kvadranten: <strong>\\(\\tan v=3/4\\)</strong>. Andra kvadranten: <strong>\\(\\tan v=-3/4\\)</strong>.</p>",
     "familj": "proc_trigettan_kvadrant_2"
   },
   {
@@ -478,7 +478,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Bestäm största och minsta värde.</p><p>a) \\(f(x)=7+3\\sin x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(g(x)=2-5\\cos x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(h(x)=-4+2\\sin(3x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(p(x)=6\\cos(2x)-1\\)</p>",
-    "s": "<p><strong>Metod:</strong> Läs av amplitud och medellinje direkt. Perioden fås från faktorn framför \\(x\\).</p><p>a) <strong>10 och 4</strong>.<br>b) <strong>7 och −3</strong>.<br>c) <strong>−2 och −6</strong>.<br>d) <strong>5 och −7</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Läs av amplitud och medellinje direkt. Perioden fås från faktorn framför \\(x\\).</p><p>a) <strong>10 och 4</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>7 och −3</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>−2 och −6</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>5 och −7</strong>.</p>",
     "familj": "proc_trigfunktion_max_min"
   },
   {
@@ -621,7 +621,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Beskriv fasförskjutningen jämfört med \\(y=\\sin x\\).</p><p>a) \\(y=\\sin(x-\\frac\\pi3)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(y=\\sin(x+\\frac\\pi4)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(y=2\\cos(x-\\frac\\pi6)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(y=3\\sin(2x-\\pi)\\)</p>",
-    "s": "<p>a) <strong>\\(\\frac\\pi3\\) åt höger</strong>.<br>b) <strong>\\(\\frac\\pi4\\) åt vänster</strong>.<br>c) <strong>\\(\\frac\\pi6\\) åt höger</strong> (för cosinuskurvan).<br>d) \\(2x-\\pi=2(x-\\frac\\pi2)\\), alltså <strong>\\(\\frac\\pi2\\) åt höger</strong>.</p>",
+    "s": "<p>a) <strong>\\(\\frac\\pi3\\) åt höger</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(\\frac\\pi4\\) åt vänster</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\frac\\pi6\\) åt höger</strong> (för cosinuskurvan).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(2x-\\pi=2(x-\\frac\\pi2)\\), alltså <strong>\\(\\frac\\pi2\\) åt höger</strong>.</p>",
     "familj": "proc_fasforskjutning_las_av"
   },
   {
@@ -712,7 +712,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Förenkla med formler för dubbla vinkeln.</p><p>a) \\(2\\sin x\\cos x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos^2x-\\sin^2x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(2\\cos^2x-1\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(1-2\\sin^2x\\)</p>",
-    "s": "<p><strong>Metod:</strong> Matcha uttrycket mot formlerna \\(\\sin2x=2\\sin x\\cos x\\) och \\(\\cos2x=\\cos^2x-\\sin^2x=1-2\\sin^2x=2\\cos^2x-1\\).</p><p>Alla uttryck är standardformer för dubbla vinkeln.</p><p>a) <strong>\\(\\sin2x\\)</strong>.<br>b) <strong>\\(\\cos2x\\)</strong>.<br>c) <strong>\\(\\cos2x\\)</strong>.<br>d) <strong>\\(\\cos2x\\)</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Matcha uttrycket mot formlerna \\(\\sin2x=2\\sin x\\cos x\\) och \\(\\cos2x=\\cos^2x-\\sin^2x=1-2\\sin^2x=2\\cos^2x-1\\).</p><p>Alla uttryck är standardformer för dubbla vinkeln.</p><p>a) <strong>\\(\\sin2x\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(\\cos2x\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\cos2x\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(\\cos2x\\)</strong>.</p>",
     "familj": "proc_dubbelvinkel_standard_2"
   },
   {
@@ -790,7 +790,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Omvandla.</p><p>a) \\(30^\\circ\\) till radianer<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(135^\\circ\\) till radianer<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(5\\pi/6\\) rad till grader<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(7\\pi/4\\) rad till grader</p>",
-    "s": "<p><strong>Metod:</strong> Använd \\(180^\\circ=\\pi\\) rad.</p><p>a) \\(\\pi/6\\)<br>b) \\(3\\pi/4\\)<br>c) \\(150^\\circ\\)<br>d) \\(315^\\circ\\)</p>",
+    "s": "<p><strong>Metod:</strong> Använd \\(180^\\circ=\\pi\\) rad.</p><p>a) \\(\\pi/6\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(3\\pi/4\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(150^\\circ\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(315^\\circ\\)</p>",
     "familj": "radian_rutin_flera"
   },
   {
@@ -907,7 +907,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Lös i intervallet \\(0^\\circ\\le x&lt;360^\\circ\\).</p><p>a) \\(\\sin x=\\frac{\\sqrt3}{2}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos x=-\\frac12\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\tan x=\\sqrt3\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\sin x=-1\\)</p>",
-    "s": "<p><strong>Metod:</strong> Bestäm motsvarande vinkeln i första kvadranten och välj de kvadranter där funktionen har rätt tecken.</p><p>a) <strong>\\(x=60^\\circ,120^\\circ\\)</strong>.<br>b) <strong>\\(x=120^\\circ,240^\\circ\\)</strong>.<br>c) <strong>\\(x=60^\\circ,240^\\circ\\)</strong>.<br>d) <strong>\\(x=270^\\circ\\)</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Bestäm motsvarande vinkeln i första kvadranten och välj de kvadranter där funktionen har rätt tecken.</p><p>a) <strong>\\(x=60^\\circ,120^\\circ\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(x=120^\\circ,240^\\circ\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(x=60^\\circ,240^\\circ\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(x=270^\\circ\\)</strong>.</p>",
     "familj": "proc_trigekv_grader_standard_3"
   },
   {
@@ -959,7 +959,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Ange alla lösningar i grader.</p><p>a) \\(\\sin x=0\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos x=0\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\tan x=\\sqrt3\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\cos x=1\\)</p>",
-    "s": "<p>a) <strong>\\(x=180^\\circ n\\)</strong>.<br>b) <strong>\\(x=90^\\circ+180^\\circ n\\)</strong>.<br>c) <strong>\\(x=60^\\circ+180^\\circ n\\)</strong>.<br>d) <strong>\\(x=360^\\circ n\\)</strong>, där \\(n\\in\\mathbb Z\\).</p>",
+    "s": "<p>a) <strong>\\(x=180^\\circ n\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(x=90^\\circ+180^\\circ n\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(x=60^\\circ+180^\\circ n\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(x=360^\\circ n\\)</strong>, där \\(n\\in\\mathbb Z\\).</p>",
     "familj": "proc_trigekv_generella_1"
   },
   {
@@ -972,7 +972,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Skriv om med formler för dubbla vinkeln.</p><p>a) \\(2\\sin x\\cos x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos^2x-\\sin^2x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(1-2\\sin^2x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(2\\cos^2x-1\\)</p>",
-    "s": "<p><strong>Metod:</strong> Matcha uttrycket mot formlerna \\(\\sin2x=2\\sin x\\cos x\\) och \\(\\cos2x=\\cos^2x-\\sin^2x=1-2\\sin^2x=2\\cos^2x-1\\).</p><p>Alla uttryck är standardformer för dubbla vinkeln.</p><p>a) <strong>\\(\\sin 2x\\)</strong><br>b) <strong>\\(\\cos 2x\\)</strong><br>c) <strong>\\(\\cos 2x\\)</strong><br>d) <strong>\\(\\cos 2x\\)</strong></p>",
+    "s": "<p><strong>Metod:</strong> Matcha uttrycket mot formlerna \\(\\sin2x=2\\sin x\\cos x\\) och \\(\\cos2x=\\cos^2x-\\sin^2x=1-2\\sin^2x=2\\cos^2x-1\\).</p><p>Alla uttryck är standardformer för dubbla vinkeln.</p><p>a) <strong>\\(\\sin 2x\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(\\cos 2x\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\cos 2x\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(\\cos 2x\\)</strong></p>",
     "familj": "proc_dubbla_vinkeln_standard"
   },
   {
@@ -985,7 +985,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Lös i intervallet \\(0\\le x&lt;2\\pi\\).</p><p>a) \\(\\cos x=\\frac12\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\sin x=-\\frac{\\sqrt2}{2}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\tan x=1\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\cos x=0\\)</p>",
-    "s": "<p><strong>Metod:</strong> Bestäm motsvarande vinkeln i första kvadranten och välj de kvadranter där funktionen har rätt tecken.</p><p>a) <strong>\\(x=\\pi/3,5\\pi/3\\)</strong>.<br>b) <strong>\\(x=5\\pi/4,7\\pi/4\\)</strong>.<br>c) <strong>\\(x=\\pi/4,5\\pi/4\\)</strong>.<br>d) <strong>\\(x=\\pi/2,3\\pi/2\\)</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Bestäm motsvarande vinkeln i första kvadranten och välj de kvadranter där funktionen har rätt tecken.</p><p>a) <strong>\\(x=\\pi/3,5\\pi/3\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(x=5\\pi/4,7\\pi/4\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(x=\\pi/4,5\\pi/4\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(x=\\pi/2,3\\pi/2\\)</strong>.</p>",
     "familj": "proc_trigekv_radian_standard_3"
   },
   {
@@ -998,7 +998,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>För funktionen \\(f(x)=3\\sin(2x)-4\\), där \\(x\\) mäts i radianer, bestäm</p><p>a) amplituden<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) perioden<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) medellinjen<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) största och minsta värde.</p>",
-    "s": "<p><strong>Metod:</strong> Läs av amplitud och medellinje direkt. Perioden fås från faktorn framför \\(x\\).</p><p>a) 3.<br>b) \\(T=2\\pi/2=\\pi\\).<br>c) \\(y=-4\\).<br>d) Största värde \\(-1\\), minsta \\(-7\\).</p>",
+    "s": "<p><strong>Metod:</strong> Läs av amplitud och medellinje direkt. Perioden fås från faktorn framför \\(x\\).</p><p>a) 3.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(T=2\\pi/2=\\pi\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(y=-4\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Största värde \\(-1\\), minsta \\(-7\\).</p>",
     "familj": "sinus_egenskaper_rutin"
   },
   {
@@ -1349,7 +1349,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "3/0/0",
     "t": "<p>Bestäm exakt.</p><p>a) \\(\\sin 30^\\circ\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos 120^\\circ\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\tan 225^\\circ\\)</p>",
-    "s": "<p><strong>Metod:</strong> Använd standardvinklarna i enhetscirkeln och kontrollera tecknet i rätt kvadrant.</p><p>a) <strong>\\(1/2\\)</strong><br>b) <strong>\\(-1/2\\)</strong><br>c) <strong>\\(1\\)</strong></p>",
+    "s": "<p><strong>Metod:</strong> Använd standardvinklarna i enhetscirkeln och kontrollera tecknet i rätt kvadrant.</p><p>a) <strong>\\(1/2\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(-1/2\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(1\\)</strong></p>",
     "familj": "enhetscirkel_standardvarden"
   },
   {
@@ -1518,7 +1518,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Lös i intervallet \\(0^\\circ\\le x&lt;360^\\circ\\).</p><p>a) \\(2\\sin x=\\sqrt3\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(3\\cos x=-\\frac32\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\tan x=-1\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(4\\cos x=0\\)</p>",
-    "s": "<p><strong>Metod:</strong> Bestäm motsvarande vinkeln i första kvadranten och välj de kvadranter där funktionen har rätt tecken.</p><p>a) <strong>\\(60^\\circ,120^\\circ\\)</strong>.<br>b) <strong>\\(120^\\circ,240^\\circ\\)</strong>.<br>c) <strong>\\(135^\\circ,315^\\circ\\)</strong>.<br>d) <strong>\\(90^\\circ,270^\\circ\\)</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Bestäm motsvarande vinkeln i första kvadranten och välj de kvadranter där funktionen har rätt tecken.</p><p>a) <strong>\\(60^\\circ,120^\\circ\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(120^\\circ,240^\\circ\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(135^\\circ,315^\\circ\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(90^\\circ,270^\\circ\\)</strong>.</p>",
     "familj": "proc_trigekv_interval_grader"
   },
   {
@@ -1570,7 +1570,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Bestäm exakt.</p><p>a) \\(\\tan 45^\\circ\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\tan 135^\\circ\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\sin 300^\\circ\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\cos 240^\\circ\\)</p>",
-    "s": "<p><strong>Metod:</strong> Använd standardvinklarna i enhetscirkeln och kontrollera tecknet i rätt kvadrant.</p><p>a) <strong>1</strong><br>b) <strong>−1</strong><br>c) <strong>\\(-\\frac{\\sqrt3}{2}\\)</strong><br>d) <strong>\\(-\\frac12\\)</strong></p>",
+    "s": "<p><strong>Metod:</strong> Använd standardvinklarna i enhetscirkeln och kontrollera tecknet i rätt kvadrant.</p><p>a) <strong>1</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>−1</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(-\\frac{\\sqrt3}{2}\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(-\\frac12\\)</strong></p>",
     "familj": "proc_trig_enhetscirkel_exakta_2"
   },
   {
@@ -1583,7 +1583,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>För varje funktion, ange period och alla lodräta asymptoter.</p><p>a) \\(y=\\tan x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(y=\\tan(2x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(y=\\tan(x-\\frac\\pi4)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(y=2\\tan(3x)+1\\)</p>",
-    "s": "<p>a) period <strong>\\(\\pi\\)</strong>, asymptoter <strong>\\(x=\\frac\\pi2+n\\pi\\)</strong>.<br>b) period <strong>\\(\\frac\\pi2\\)</strong>, asymptoter <strong>\\(x=\\frac\\pi4+n\\frac\\pi2\\)</strong>.<br>c) period <strong>\\(\\pi\\)</strong>, asymptoter <strong>\\(x=\\frac{3\\pi}{4}+n\\pi\\)</strong>.<br>d) period <strong>\\(\\frac\\pi3\\)</strong>, asymptoter <strong>\\(x=\\frac\\pi6+n\\frac\\pi3\\)</strong>.</p>",
+    "s": "<p>a) period <strong>\\(\\pi\\)</strong>, asymptoter <strong>\\(x=\\frac\\pi2+n\\pi\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) period <strong>\\(\\frac\\pi2\\)</strong>, asymptoter <strong>\\(x=\\frac\\pi4+n\\frac\\pi2\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) period <strong>\\(\\pi\\)</strong>, asymptoter <strong>\\(x=\\frac{3\\pi}{4}+n\\pi\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) period <strong>\\(\\frac\\pi3\\)</strong>, asymptoter <strong>\\(x=\\frac\\pi6+n\\frac\\pi3\\)</strong>.</p>",
     "familj": "proc_tangens_period_asymptot"
   },
   {
@@ -1648,7 +1648,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Omvandla.</p><p>a) \\(30^\\circ\\) till radianer<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(135^\\circ\\) till radianer<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(5\\pi/6\\) rad till grader<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(7\\pi/4\\) rad till grader.</p>",
-    "s": "<p><strong>Metod:</strong> Använd \\(180^\\circ=\\pi\\) rad och multiplicera med rätt omvandlingsfaktor.</p><p>a) <strong>\\(\\pi/6\\)</strong>.<br>b) <strong>\\(3\\pi/4\\)</strong>.<br>c) <strong>150°</strong>.<br>d) <strong>315°</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Använd \\(180^\\circ=\\pi\\) rad och multiplicera med rätt omvandlingsfaktor.</p><p>a) <strong>\\(\\pi/6\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(3\\pi/4\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>150°</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>315°</strong>.</p>",
     "familj": "proc_radian_grad_3"
   },
   {
@@ -1752,7 +1752,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Bestäm exakt.</p><p>a) \\(\\sin\\frac{7\\pi}{6}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos\\frac{5\\pi}{3}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\tan\\frac{3\\pi}{4}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\cos\\pi+\\sin\\frac{3\\pi}{2}\\)</p>",
-    "s": "<p><strong>Metod:</strong> Använd standardvinklarna i enhetscirkeln och kontrollera tecknet i rätt kvadrant.</p><p>a) <strong>\\(-\\frac12\\)</strong><br>b) <strong>\\(\\frac12\\)</strong><br>c) <strong>\\(-1\\)</strong><br>d) \\(-1-1=\\)<strong>−2</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Använd standardvinklarna i enhetscirkeln och kontrollera tecknet i rätt kvadrant.</p><p>a) <strong>\\(-\\frac12\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(\\frac12\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(-1\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(-1-1=\\)<strong>−2</strong>.</p>",
     "familj": "enhetscirkel_exakta_varden_ny"
   },
   {
@@ -1830,7 +1830,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Lös i intervallet \\(0\\le x&lt;2\\pi\\).</p><p>a) \\(\\sin x=1/2\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos x=-\\sqrt2/2\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\tan x=-1\\)</p>",
-    "s": "<p><strong>Metod:</strong> Bestäm motsvarande vinkeln i första kvadranten och välj de kvadranter där funktionen har rätt tecken.</p><p>a) \\(x=\\pi/6,5\\pi/6\\).<br>b) \\(x=3\\pi/4,5\\pi/4\\).<br>c) \\(x=3\\pi/4,7\\pi/4\\).</p>",
+    "s": "<p><strong>Metod:</strong> Bestäm motsvarande vinkeln i första kvadranten och välj de kvadranter där funktionen har rätt tecken.</p><p>a) \\(x=\\pi/6,5\\pi/6\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(x=3\\pi/4,5\\pi/4\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(x=3\\pi/4,7\\pi/4\\).</p>",
     "familj": "trigekv_standard_radian"
   },
   {
@@ -1843,7 +1843,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>För varje funktion, ange amplitud, period och medellinje.</p><p>a) \\(y=4\\sin x+2\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(y=3\\cos(2x)-1\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(y=-5\\sin(\\tfrac{x}{2})\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(y=2\\cos(3x)+4\\)</p>",
-    "s": "<p>a) amplitud <strong>4</strong>, period <strong>\\(2\\pi\\)</strong>, medellinje <strong>\\(y=2\\)</strong>.<br>b) amplitud <strong>3</strong>, period <strong>\\(\\pi\\)</strong>, medellinje <strong>\\(y=-1\\)</strong>.<br>c) amplitud <strong>5</strong>, period <strong>\\(4\\pi\\)</strong>, medellinje <strong>\\(y=0\\)</strong>.<br>d) amplitud <strong>2</strong>, period <strong>\\(\\frac{2\\pi}{3}\\)</strong>, medellinje <strong>\\(y=4\\)</strong>.</p>",
+    "s": "<p>a) amplitud <strong>4</strong>, period <strong>\\(2\\pi\\)</strong>, medellinje <strong>\\(y=2\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) amplitud <strong>3</strong>, period <strong>\\(\\pi\\)</strong>, medellinje <strong>\\(y=-1\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) amplitud <strong>5</strong>, period <strong>\\(4\\pi\\)</strong>, medellinje <strong>\\(y=0\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) amplitud <strong>2</strong>, period <strong>\\(\\frac{2\\pi}{3}\\)</strong>, medellinje <strong>\\(y=4\\)</strong>.</p>",
     "familj": "proc_trigfunktion_amp_period"
   },
   {
@@ -1882,7 +1882,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>För funktionen \\(f(x)=3\\cos(2x-\\pi)+1\\), bestäm</p><p>a) amplituden<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) perioden<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) största värdet<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) minsta värdet.</p>",
-    "s": "<p><strong>Metod:</strong> Läs av amplitud och medellinje direkt. Perioden fås från faktorn framför \\(x\\).</p><p>Eftersom \\(f(x)=3\\cos(2x-\\pi)+1\\) är amplituden 3 och medellinjen \\(y=1\\).</p><p>a) <strong>3</strong><br>b) \\(T=2\\pi/2=\\)<strong>\\(\\pi\\)</strong><br>c) <strong>4</strong><br>d) <strong>−2</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Läs av amplitud och medellinje direkt. Perioden fås från faktorn framför \\(x\\).</p><p>Eftersom \\(f(x)=3\\cos(2x-\\pi)+1\\) är amplituden 3 och medellinjen \\(y=1\\).</p><p>a) <strong>3</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(T=2\\pi/2=\\)<strong>\\(\\pi\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>4</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>−2</strong>.</p>",
     "familj": "trigfunktion_lasa_parametrar"
   },
   {
@@ -1973,7 +1973,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Förenkla.</p><p>a) \\(1-\\sin^2x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(1-\\cos^2x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\frac{1-\\cos^2x}{\\sin x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\sin^2x+2\\cos^2x-1\\)</p>",
-    "s": "<p>a) <strong>\\(\\cos^2x\\)</strong><br>b) <strong>\\(\\sin^2x\\)</strong><br>c) <strong>\\(\\sin x\\)</strong>, där uttrycket är definierat.<br>d) \\(\\sin^2x+\\cos^2x+\\cos^2x-1=\\)<strong>\\(\\cos^2x\\)</strong>.</p>",
+    "s": "<p>a) <strong>\\(\\cos^2x\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(\\sin^2x\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\sin x\\)</strong>, där uttrycket är definierat.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\sin^2x+\\cos^2x+\\cos^2x-1=\\)<strong>\\(\\cos^2x\\)</strong>.</p>",
     "familj": "proc_trig_ettan_forenkla"
   },
   {
@@ -1986,7 +1986,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Bestäm det saknade värdet. Ange tecken med hjälp av den angivna kvadranten.</p><p>a) \\(\\sin x=\\frac35\\), första kvadranten. Bestäm \\(\\cos x\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos x=-\\frac5{13}\\), andra kvadranten. Bestäm \\(\\sin x\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\sin x=-\\frac8{17}\\), fjärde kvadranten. Bestäm \\(\\cos x\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\cos x=-\\frac7{25}\\), tredje kvadranten. Bestäm \\(\\sin x\\).</p>",
-    "s": "<p><strong>Metod:</strong> Använd \\(\\sin^2x+\\cos^2x=1\\) och kontrollera eventuella nämnare.</p><p>Använd \\(\\sin^2x+\\cos^2x=1\\).</p><p>a) <strong>\\(\\frac45\\)</strong><br>b) <strong>\\(\\frac{12}{13}\\)</strong><br>c) <strong>\\(\\frac{15}{17}\\)</strong><br>d) <strong>\\(-\\frac{24}{25}\\)</strong></p>",
+    "s": "<p><strong>Metod:</strong> Använd \\(\\sin^2x+\\cos^2x=1\\) och kontrollera eventuella nämnare.</p><p>Använd \\(\\sin^2x+\\cos^2x=1\\).</p><p>a) <strong>\\(\\frac45\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(\\frac{12}{13}\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\frac{15}{17}\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(-\\frac{24}{25}\\)</strong></p>",
     "familj": "proc_trig_ettan_pythtriplar"
   },
   {
@@ -2038,7 +2038,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "3/0/0",
     "t": "<p>Förenkla med formler för dubbla vinkeln.</p><p>a) \\(2\\sin x\\cos x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(2\\cos^2x-1\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(1-2\\sin^2x\\)</p>",
-    "s": "<p><strong>Metod:</strong> Matcha uttrycket mot formlerna \\(\\sin2x=2\\sin x\\cos x\\) och \\(\\cos2x=\\cos^2x-\\sin^2x=1-2\\sin^2x=2\\cos^2x-1\\).</p><p>a) <strong>\\(\\sin2x\\)</strong><br>b) <strong>\\(\\cos2x\\)</strong><br>c) <strong>\\(\\cos2x\\)</strong></p>",
+    "s": "<p><strong>Metod:</strong> Matcha uttrycket mot formlerna \\(\\sin2x=2\\sin x\\cos x\\) och \\(\\cos2x=\\cos^2x-\\sin^2x=1-2\\sin^2x=2\\cos^2x-1\\).</p><p>a) <strong>\\(\\sin2x\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(\\cos2x\\)</strong><br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\cos2x\\)</strong></p>",
     "familj": "dubbelvinkel_rutin"
   },
   {
@@ -2207,7 +2207,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Derivera.</p><p>a) \\(f(x)=7x^5-3x^2+4\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(g(x)=\\frac{4}{x^2}+3\\sqrt{x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(h(x)=5e^x-2x^3\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(p(x)=6x^{-3}+x\\)</p>",
-    "s": "<p>a) <strong>\\(f'(x)=35x^4-6x\\)</strong>.<br>b) \\(4x^{-2}+3x^{1/2}\\Rightarrow\\) <strong>\\(g'(x)=-8x^{-3}+\\frac{3}{2\\sqrt{x}}\\)</strong>.<br>c) <strong>\\(h'(x)=5e^x-6x^2\\)</strong>.<br>d) <strong>\\(p'(x)=-18x^{-4}+1\\)</strong>.</p>",
+    "s": "<p>a) <strong>\\(f'(x)=35x^4-6x\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(4x^{-2}+3x^{1/2}\\Rightarrow\\) <strong>\\(g'(x)=-8x^{-3}+\\frac{3}{2\\sqrt{x}}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(h'(x)=5e^x-6x^2\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(p'(x)=-18x^{-4}+1\\)</strong>.</p>",
     "familj": "proc_deriv_repetition_1"
   },
   {
@@ -2519,7 +2519,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Derivera.</p><p>a) \\(e^{5x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(3e^{-x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(e^{x^2+2x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(2+e^{\\sqrt{x}}\\)</p>",
-    "s": "<p>a) <strong>\\(5e^{5x}\\)</strong>.<br>b) <strong>\\(-3e^{-x}\\)</strong>.<br>c) <strong>\\((2x+2)e^{x^2+2x}\\)</strong>.<br>d) <strong>\\(\\frac{e^{\\sqrt{x}}}{2\\sqrt{x}}\\)</strong>.</p>",
+    "s": "<p>a) <strong>\\(5e^{5x}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(-3e^{-x}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\((2x+2)e^{x^2+2x}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(\\frac{e^{\\sqrt{x}}}{2\\sqrt{x}}\\)</strong>.</p>",
     "familj": "proc_deriv_exp_2"
   },
   {
@@ -2623,7 +2623,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Derivera med kedjeregeln.</p><p>a) \\((3x+1)^5\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\((2-x)^7\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\sqrt{4x+3}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\((x^2+1)^4\\)</p>",
-    "s": "<p><strong>Metod:</strong> Derivera den yttre funktionen och multiplicera med derivatan av den inre funktionen.</p><p>a) <strong>\\(15(3x+1)^4\\)</strong>.<br>b) <strong>\\(-7(2-x)^6\\)</strong>.<br>c) <strong>\\(\\frac{2}{\\sqrt{4x+3}}\\)</strong>.<br>d) <strong>\\(8x(x^2+1)^3\\)</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Derivera den yttre funktionen och multiplicera med derivatan av den inre funktionen.</p><p>a) <strong>\\(15(3x+1)^4\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(-7(2-x)^6\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\frac{2}{\\sqrt{4x+3}}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(8x(x^2+1)^3\\)</strong>.</p>",
     "familj": "proc_kedja_potenser_1"
   },
   {
@@ -2870,7 +2870,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Derivera.</p><p>a) \\(x^2e^x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(x\\ln x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(x^3\\sin x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\((2x-1)e^{2x}\\)</p>",
-    "s": "<p><strong>Metod:</strong> Använd produktregeln \\((uv)'=u'v+uv'\\).</p><p>a) \\(e^x(x^2+2x)\\)<br>b) \\(\\ln x+1\\)<br>c) \\(3x^2\\sin x+x^3\\cos x\\)<br>d) \\(2e^{2x}+2(2x-1)e^{2x}=4xe^{2x}\\)</p>",
+    "s": "<p><strong>Metod:</strong> Använd produktregeln \\((uv)'=u'v+uv'\\).</p><p>a) \\(e^x(x^2+2x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\ln x+1\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(3x^2\\sin x+x^3\\cos x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(2e^{2x}+2(2x-1)e^{2x}=4xe^{2x}\\)</p>",
     "familj": "produkt_rutin_fyra"
   },
   {
@@ -2883,7 +2883,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Derivera.</p><p>a) \\((2x-1)e^x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(x^2\\cos x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\sqrt{x}\\,\\ln x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\((x^2+1)\\sin x\\)</p>",
-    "s": "<p><strong>Metod:</strong> Använd produktregeln \\((uv)'=u'v+uv'\\).</p><p>a) <strong>\\((2x+1)e^x\\)</strong>.<br>b) <strong>\\(2x\\cos x-x^2\\sin x\\)</strong>.<br>c) <strong>\\(\\frac{\\ln x+2}{2\\sqrt{x}}\\)</strong>.<br>d) <strong>\\(2x\\sin x+(x^2+1)\\cos x\\)</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Använd produktregeln \\((uv)'=u'v+uv'\\).</p><p>a) <strong>\\((2x+1)e^x\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(2x\\cos x-x^2\\sin x\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\frac{\\ln x+2}{2\\sqrt{x}}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(2x\\sin x+(x^2+1)\\cos x\\)</strong>.</p>",
     "familj": "proc_produktregeln_2"
   },
   {
@@ -2922,7 +2922,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Derivera.</p><p>a) \\(\\sin(5x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos(4x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\tan(3x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(2\\cos(\\pi x)\\)</p>",
-    "s": "<p>a) <strong>\\(5\\cos5x\\)</strong>.<br>b) <strong>\\(-4\\sin4x\\)</strong>.<br>c) <strong>\\(\\frac{3}{\\cos^2(3x)}\\)</strong>.<br>d) <strong>\\(-2\\pi\\sin(\\pi x)\\)</strong>.</p>",
+    "s": "<p>a) <strong>\\(5\\cos5x\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(-4\\sin4x\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\frac{3}{\\cos^2(3x)}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(-2\\pi\\sin(\\pi x)\\)</strong>.</p>",
     "familj": "proc_deriv_trig_kedja"
   },
   {
@@ -3039,7 +3039,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Derivera och förenkla.</p><p>a) \\(f(x)=3x^4+2x-9\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(g(x)=\\frac{5}{x}+x^2\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(h(x)=2\\sqrt{x}-\\frac{1}{x^3}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(q(x)=4e^x+7\\)</p>",
-    "s": "<p>a) <strong>\\(12x^3+2\\)</strong>.<br>b) <strong>\\(-\\frac5{x^2}+2x\\)</strong>.<br>c) <strong>\\(\\frac1{\\sqrt{x}}+\\frac3{x^4}\\)</strong>.<br>d) <strong>\\(4e^x\\)</strong>.</p>",
+    "s": "<p>a) <strong>\\(12x^3+2\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(-\\frac5{x^2}+2x\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\frac1{\\sqrt{x}}+\\frac3{x^4}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(4e^x\\)</strong>.</p>",
     "familj": "proc_deriv_repetition_2"
   },
   {
@@ -3078,7 +3078,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Derivera.</p><p>a) \\(xe^{2x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(x\\ln x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(e^x\\cos x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\((3x+2)\\sin(2x)\\)</p>",
-    "s": "<p><strong>Metod:</strong> Använd produktregeln \\((uv)'=u'v+uv'\\).</p><p>a) <strong>\\(e^{2x}(1+2x)\\)</strong>.<br>b) <strong>\\(\\ln x+1\\)</strong>.<br>c) <strong>\\(e^x(\\cos x-\\sin x)\\)</strong>.<br>d) <strong>\\(3\\sin2x+2(3x+2)\\cos2x\\)</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Använd produktregeln \\((uv)'=u'v+uv'\\).</p><p>a) <strong>\\(e^{2x}(1+2x)\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(\\ln x+1\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(e^x(\\cos x-\\sin x)\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(3\\sin2x+2(3x+2)\\cos2x\\)</strong>.</p>",
     "familj": "proc_produktregeln_3"
   },
   {
@@ -3286,7 +3286,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Bestäm derivatans värde.</p><p>a) \\(f(x)=x^3-2x\\), bestäm \\(f'(2)\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(g(x)=4\\sqrt{x}\\), bestäm \\(g'(4)\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(h(x)=e^x+x^2\\), bestäm \\(h'(0)\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(p(x)=\\frac3x\\), bestäm \\(p'(-1)\\).</p>",
-    "s": "<p>a) \\(f'(x)=3x^2-2\\Rightarrow\\) <strong>10</strong>.<br>b) \\(g'(x)=2/\\sqrt{x}\\Rightarrow\\) <strong>1</strong>.<br>c) \\(h'(x)=e^x+2x\\Rightarrow\\) <strong>1</strong>.<br>d) \\(p'(x)=-3/x^2\\Rightarrow\\) <strong>−3</strong>.</p>",
+    "s": "<p>a) \\(f'(x)=3x^2-2\\Rightarrow\\) <strong>10</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(g'(x)=2/\\sqrt{x}\\Rightarrow\\) <strong>1</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(h'(x)=e^x+2x\\Rightarrow\\) <strong>1</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(p'(x)=-3/x^2\\Rightarrow\\) <strong>−3</strong>.</p>",
     "familj": "proc_deriv_varde_1"
   },
   {
@@ -3325,7 +3325,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Derivera.</p><p>a) \\(e^{3x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(e^{x^2}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(e^{2x-5}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(5e^{-2x}\\)</p>",
-    "s": "<p><strong>Metod:</strong> Derivera den yttre funktionen och multiplicera med derivatan av den inre funktionen.</p><p>a) <strong>\\(3e^{3x}\\)</strong>.<br>b) <strong>\\(2xe^{x^2}\\)</strong>.<br>c) <strong>\\(2e^{2x-5}\\)</strong>.<br>d) <strong>\\(-10e^{-2x}\\)</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Derivera den yttre funktionen och multiplicera med derivatan av den inre funktionen.</p><p>a) <strong>\\(3e^{3x}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(2xe^{x^2}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(2e^{2x-5}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(-10e^{-2x}\\)</strong>.</p>",
     "familj": "proc_kedja_exp_1"
   },
   {
@@ -3377,7 +3377,7 @@ window.BANKMATO2 = [
     "niva": "C",
     "poang": "0/4/0",
     "t": "<p>Derivera.</p><p>a) \\(\\frac{(x+1)^2}{x^2+1}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\frac{e^{2x}}{x+1}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\frac{\\sin x}{1+\\cos x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\frac{x\\ln x}{x+1}\\)</p>",
-    "s": "<p>a) <strong>\\(\\frac{2(x+1)(1-x)}{(x^2+1)^2}\\)</strong>.<br>b) <strong>\\(\\frac{e^{2x}(2x+1)}{(x+1)^2}\\)</strong>.<br>c) <strong>\\(\\frac{1}{1+\\cos x}\\)</strong>, där uttrycket är definierat, eftersom täljaren blir \\(\\cos x(1+\\cos x)+\\sin^2x=1+\\cos x\\).<br>d) <strong>\\(\\frac{x+\\ln x+1}{(x+1)^2}\\)</strong>.</p>",
+    "s": "<p>a) <strong>\\(\\frac{2(x+1)(1-x)}{(x^2+1)^2}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(\\frac{e^{2x}(2x+1)}{(x+1)^2}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\frac{1}{1+\\cos x}\\)</strong>, där uttrycket är definierat, eftersom täljaren blir \\(\\cos x(1+\\cos x)+\\sin^2x=1+\\cos x\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(\\frac{x+\\ln x+1}{(x+1)^2}\\)</strong>.</p>",
     "familj": "proc_kvotregeln_blandad_c"
   },
   {
@@ -3416,7 +3416,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Derivera.</p><p>a) \\(\\sin(4x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\cos(3x-1)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\sin(x^2)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\cos(2x^2+1)\\)</p>",
-    "s": "<p><strong>Metod:</strong> Derivera den yttre funktionen och multiplicera med derivatan av den inre funktionen.</p><p>a) <strong>\\(4\\cos4x\\)</strong>.<br>b) <strong>\\(-3\\sin(3x-1)\\)</strong>.<br>c) <strong>\\(2x\\cos(x^2)\\)</strong>.<br>d) <strong>\\(-4x\\sin(2x^2+1)\\)</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Derivera den yttre funktionen och multiplicera med derivatan av den inre funktionen.</p><p>a) <strong>\\(4\\cos4x\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(-3\\sin(3x-1)\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(2x\\cos(x^2)\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(-4x\\sin(2x^2+1)\\)</strong>.</p>",
     "familj": "proc_kedja_trig_1"
   },
   {
@@ -3442,7 +3442,7 @@ window.BANKMATO2 = [
     "niva": "C",
     "poang": "0/4/0",
     "t": "<p>Derivera och faktorisera svaret där det är lämpligt.</p><p>a) \\(x^2e^{-x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(x(1+x)^5\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\sin x\\cos x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(x^2\\ln(x^2)\\)<br>för \\(x>0\\)</p>",
-    "s": "<p><strong>Metod:</strong> Bestäm de två faktorerna och använd produktregeln \\((uv)' = u'v+uv'\\). Förenkla därefter.</p><p>a) <strong>\\(xe^{-x}(2-x)\\)</strong>.<br>b) <strong>\\((1+x)^4(1+6x)\\)</strong>.<br>c) <strong>\\(\\cos^2x-\\sin^2x=\\cos2x\\)</strong>.<br>d) Eftersom \\(\\ln(x^2)=2\\ln x\\): <strong>\\(4x\\ln x+2x=2x(2\\ln x+1)\\)</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Bestäm de två faktorerna och använd produktregeln \\((uv)' = u'v+uv'\\). Förenkla därefter.</p><p>a) <strong>\\(xe^{-x}(2-x)\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\((1+x)^4(1+6x)\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\cos^2x-\\sin^2x=\\cos2x\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Eftersom \\(\\ln(x^2)=2\\ln x\\): <strong>\\(4x\\ln x+2x=2x(2\\ln x+1)\\)</strong>.</p>",
     "familj": "proc_produktregeln_faktorisera_c"
   },
   {
@@ -3455,7 +3455,7 @@ window.BANKMATO2 = [
     "niva": "C",
     "poang": "0/4/0",
     "t": "<p>Derivera och förenkla.</p><p>a) \\(\\ln(e^{3x}+1)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(e^{\\ln x}\\)<br>för \\(x>0\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\ln\\sqrt{x}\\)<br>för \\(x>0\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(e^{2\\ln x}\\)<br>för \\(x>0\\)</p>",
-    "s": "<p><strong>Metod:</strong> Avgör om uttrycket kräver produktregel, kvotregel eller kedjeregel innan du deriverar.</p><p>a) <strong>\\(\\frac{3e^{3x}}{e^{3x}+1}\\)</strong>.<br>b) \\(e^{\\ln x}=x\\Rightarrow\\) <strong>1</strong>.<br>c) \\(\\ln\\sqrt{x}=\\frac12\\ln x\\Rightarrow\\) <strong>\\(\\frac1{2x}\\)</strong>.<br>d) \\(e^{2\\ln x}=x^2\\Rightarrow\\) <strong>\\(2x\\)</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Avgör om uttrycket kräver produktregel, kvotregel eller kedjeregel innan du deriverar.</p><p>a) <strong>\\(\\frac{3e^{3x}}{e^{3x}+1}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(e^{\\ln x}=x\\Rightarrow\\) <strong>1</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\ln\\sqrt{x}=\\frac12\\ln x\\Rightarrow\\) <strong>\\(\\frac1{2x}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(e^{2\\ln x}=x^2\\Rightarrow\\) <strong>\\(2x\\)</strong>.</p>",
     "familj": "proc_deriv_exp_log_forenkla_c"
   },
   {
@@ -3533,7 +3533,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Derivera med kedjeregeln.</p><p>a) \\((3x-2)^5\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(e^{4x+1}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\ln(2x+5)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\sin(3x-1)\\)</p>",
-    "s": "<p><strong>Metod:</strong> Derivera den yttre funktionen och multiplicera med derivatan av den inre funktionen.</p><p>a) \\(15(3x-2)^4\\)<br>b) \\(4e^{4x+1}\\)<br>c) \\(2/(2x+5)\\)<br>d) \\(3\\cos(3x-1)\\)</p>",
+    "s": "<p><strong>Metod:</strong> Derivera den yttre funktionen och multiplicera med derivatan av den inre funktionen.</p><p>a) \\(15(3x-2)^4\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(4e^{4x+1}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(2/(2x+5)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(3\\cos(3x-1)\\)</p>",
     "familj": "kedja_rutin_fyra"
   },
   {
@@ -3728,7 +3728,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Bestäm funktionens asymptoter.</p><p>a) \\(f(x)=\\frac{3}{x-2}+1\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(g(x)=\\frac{2x+1}{x+4}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(h(x)=2x-3+\\frac1x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(p(x)=\\frac{x^2+1}{x-1}\\)</p>",
-    "s": "<p>a) <strong>\\(x=2\\), \\(y=1\\)</strong>.<br>b) lodrät <strong>\\(x=-4\\)</strong>, vågrät <strong>\\(y=2\\)</strong>.<br>c) lodrät <strong>\\(x=0\\)</strong>, sned <strong>\\(y=2x-3\\)</strong>.<br>d) Polynomdivision ger \\(p(x)=x+1+\\frac2{x-1}\\). Alltså <strong>\\(x=1\\)</strong> och <strong>\\(y=x+1\\)</strong>.</p>",
+    "s": "<p>a) <strong>\\(x=2\\), \\(y=1\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) lodrät <strong>\\(x=-4\\)</strong>, vågrät <strong>\\(y=2\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) lodrät <strong>\\(x=0\\)</strong>, sned <strong>\\(y=2x-3\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Polynomdivision ger \\(p(x)=x+1+\\frac2{x-1}\\). Alltså <strong>\\(x=1\\)</strong> och <strong>\\(y=x+1\\)</strong>.</p>",
     "familj": "proc_asymptoter_rutin_mix"
   },
   {
@@ -3741,7 +3741,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "3/0/0",
     "t": "<p>Bestäm tangentens lutning till grafen.</p><p>a) \\(y=x^2+3x\\) vid \\(x=1\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(y=x^3\\) vid \\(x=-2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(y=2e^x\\) vid \\(x=0\\).</p>",
-    "s": "<p>a) \\(y'=2x+3\\Rightarrow\\)<strong>5</strong>.<br>b) \\(y'=3x^2\\Rightarrow\\)<strong>12</strong>.<br>c) \\(y'=2e^x\\Rightarrow\\)<strong>2</strong>.</p>",
+    "s": "<p>a) \\(y'=2x+3\\Rightarrow\\)<strong>5</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(y'=3x^2\\Rightarrow\\)<strong>12</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(y'=2e^x\\Rightarrow\\)<strong>2</strong>.</p>",
     "familj": "proc_deriv_tangentlutning"
   },
   {
@@ -3793,7 +3793,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Derivera med kvotregeln.</p><p>a) \\(\\frac{x}{x+2}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\frac{x^2}{x-1}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\frac{e^x}{x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\frac{\\sin x}{x}\\)</p>",
-    "s": "<p>a) <strong>\\(\\frac{2}{(x+2)^2}\\)</strong>.<br>b) <strong>\\(\\frac{x(x-2)}{(x-1)^2}\\)</strong>.<br>c) <strong>\\(\\frac{e^x(x-1)}{x^2}\\)</strong>.<br>d) <strong>\\(\\frac{x\\cos x-\\sin x}{x^2}\\)</strong>.</p>",
+    "s": "<p>a) <strong>\\(\\frac{2}{(x+2)^2}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(\\frac{x(x-2)}{(x-1)^2}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\frac{e^x(x-1)}{x^2}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(\\frac{x\\cos x-\\sin x}{x^2}\\)</strong>.</p>",
     "familj": "proc_kvotregeln_1"
   },
   {
@@ -3819,7 +3819,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Bestäm definitionsmängden.</p><p>a) \\(f(x)=\\ln(x-3)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(g(x)=\\ln(7-x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(h(x)=\\ln(x^2-4)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(p(x)=\\ln(2x+5)\\)</p>",
-    "s": "<p>Argumentet till \\(\\ln\\) måste vara positivt.</p><p>a) <strong>\\(x>3\\)</strong>.<br>b) <strong>\\(x&lt;7\\)</strong>.<br>c) \\(x^2>4\\Rightarrow\\) <strong>\\(x&lt;-2\\) eller \\(x>2\\)</strong>.<br>d) <strong>\\(x>-\\frac52\\)</strong>.</p>",
+    "s": "<p>Argumentet till \\(\\ln\\) måste vara positivt.</p><p>a) <strong>\\(x>3\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(x&lt;7\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(x^2>4\\Rightarrow\\) <strong>\\(x&lt;-2\\) eller \\(x>2\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(x>-\\frac52\\)</strong>.</p>",
     "familj": "proc_ln_definitionsmangd"
   },
   {
@@ -4105,7 +4105,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Derivera med produktregeln.</p><p>a) \\(x^2e^x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(x\\sin x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\((x+1)\\cos x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(x^3\\ln x\\)</p>",
-    "s": "<p><strong>Metod:</strong> Använd produktregeln \\((uv)'=u'v+uv'\\).</p><p>a) <strong>\\(e^x(x^2+2x)\\)</strong>.<br>b) <strong>\\(\\sin x+x\\cos x\\)</strong>.<br>c) <strong>\\(\\cos x-(x+1)\\sin x\\)</strong>.<br>d) <strong>\\(x^2(3\\ln x+1)\\)</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Använd produktregeln \\((uv)'=u'v+uv'\\).</p><p>a) <strong>\\(e^x(x^2+2x)\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(\\sin x+x\\cos x\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\cos x-(x+1)\\sin x\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(x^2(3\\ln x+1)\\)</strong>.</p>",
     "familj": "proc_produktregeln_1"
   },
   {
@@ -4118,7 +4118,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Lös ekvationerna.</p><p>a) \\(\\ln x=0\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\ln x=2\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\ln(x-1)=\\ln5\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(2\\ln x=\\ln16\\)</p>",
-    "s": "<p>a) <strong>\\(x=1\\)</strong>.<br>b) <strong>\\(x=e^2\\)</strong>.<br>c) <strong>\\(x=6\\)</strong>.<br>d) \\(\\ln(x^2)=\\ln16\\) och \\(x>0\\), alltså <strong>\\(x=4\\)</strong>.</p>",
+    "s": "<p>a) <strong>\\(x=1\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(x=e^2\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(x=6\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\ln(x^2)=\\ln16\\) och \\(x>0\\), alltså <strong>\\(x=4\\)</strong>.</p>",
     "familj": "proc_ln_ekvationer"
   },
   {
@@ -4144,7 +4144,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Låt \\(f(x)=2x-1\\) och \\(g(x)=x^2+3\\). Bestäm.</p><p>a) \\((f\\circ g)(x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\((g\\circ f)(x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\((f\\circ g)(2)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\((g\\circ f)(-1)\\)</p>",
-    "s": "<p>a) \\(f(g(x))=2(x^2+3)-1=\\)<strong>\\(2x^2+5\\)</strong>.<br>b) \\(g(f(x))=(2x-1)^2+3=\\)<strong>\\(4x^2-4x+4\\)</strong>.<br>c) <strong>13</strong>.<br>d) \\(f(-1)=-3\\), så <strong>12</strong>.</p>",
+    "s": "<p>a) \\(f(g(x))=2(x^2+3)-1=\\)<strong>\\(2x^2+5\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(g(f(x))=(2x-1)^2+3=\\)<strong>\\(4x^2-4x+4\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>13</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(f(-1)=-3\\), så <strong>12</strong>.</p>",
     "familj": "proc_sammansatta_funktioner_eval"
   },
   {
@@ -4248,7 +4248,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Derivera och förenkla.</p><p>a) \\(\\frac{2x+1}{x-3}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\frac{x^2+1}{x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\frac{\\ln x}{x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\frac{\\cos x}{e^x}\\)</p>",
-    "s": "<p>a) <strong>\\(-\\frac7{(x-3)^2}\\)</strong>.<br>b) \\(x+1/x\\Rightarrow\\) <strong>\\(1-1/x^2\\)</strong>.<br>c) <strong>\\(\\frac{1-\\ln x}{x^2}\\)</strong>.<br>d) \\(e^{-x}\\cos x\\Rightarrow\\) <strong>\\(-e^{-x}(\\sin x+\\cos x)\\)</strong>.</p>",
+    "s": "<p>a) <strong>\\(-\\frac7{(x-3)^2}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(x+1/x\\Rightarrow\\) <strong>\\(1-1/x^2\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\frac{1-\\ln x}{x^2}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(e^{-x}\\cos x\\Rightarrow\\) <strong>\\(-e^{-x}(\\sin x+\\cos x)\\)</strong>.</p>",
     "familj": "proc_kvotregeln_2"
   },
   {
@@ -4261,7 +4261,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Derivera.</p><p>a) \\(\\frac{x}{x+2}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\frac{e^x}{x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\frac{\\ln x}{x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\frac{\\sin x}{x^2}\\)</p>",
-    "s": "<p><strong>Metod:</strong> Använd kvotregeln och förenkla först efter deriveringen.</p><p>a) \\(2/(x+2)^2\\)<br>b) \\(e^x(x-1)/x^2\\)<br>c) \\((1-\\ln x)/x^2\\)<br>d) \\((x\\cos x-2\\sin x)/x^3\\)</p>",
+    "s": "<p><strong>Metod:</strong> Använd kvotregeln och förenkla först efter deriveringen.</p><p>a) \\(2/(x+2)^2\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(e^x(x-1)/x^2\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\((1-\\ln x)/x^2\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\((x\\cos x-2\\sin x)/x^3\\)</p>",
     "familj": "kvot_rutin_fyra"
   },
   {
@@ -4404,7 +4404,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "3/0/0",
     "t": "<p>Beräkna arean mellan grafen och x-axeln på det angivna intervallet.</p><p>a) \\(y=x+2\\)<br>för \\(0\\le x\\le3\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(y=4-x\\)<br>för \\(0\\le x\\le4\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(y=x^2\\)<br>för \\(0\\le x\\le2\\).</p>",
-    "s": "<p>Funktionerna är icke-negativa på intervallen.</p><p>a) \\(\\int_0^3(x+2)dx=\\)<strong>\\(\\frac{21}{2}\\)</strong> a.e.<br>b) \\(\\int_0^4(4-x)dx=\\)<strong>8</strong> a.e.<br>c) \\(\\int_0^2x^2dx=\\)<strong>\\(\\frac83\\)</strong> a.e.</p>",
+    "s": "<p>Funktionerna är icke-negativa på intervallen.</p><p>a) \\(\\int_0^3(x+2)dx=\\)<strong>\\(\\frac{21}{2}\\)</strong> a.e.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\int_0^4(4-x)dx=\\)<strong>8</strong> a.e.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\int_0^2x^2dx=\\)<strong>\\(\\frac83\\)</strong> a.e.</p>",
     "familj": "proc_area_under_graf_1"
   },
   {
@@ -4495,7 +4495,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Avgör om den bestämda integralen direkt ger en geometrisk area eller en tecknad area, och beräkna värdet.</p><p>a) \\(\\int_0^2(x+1)dx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\int_{-1}^1x\\,dx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\int_0^\\pi\\sin x\\,dx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\int_0^{2\\pi}\\sin x\\,dx\\)</p>",
-    "s": "<p>a) Funktionen är positiv: integral och geometrisk area är <strong>4</strong>.<br>b) Integralen är en tecknad area och blir <strong>0</strong>; geometrisk area är inte 0.<br>c) Funktionen är icke-negativ: <strong>2</strong> är även geometrisk area.<br>d) Integralen är tecknad area och blir <strong>0</strong>; positiv och negativ del tar ut varandra.</p>",
+    "s": "<p>a) Funktionen är positiv: integral och geometrisk area är <strong>4</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Integralen är en tecknad area och blir <strong>0</strong>; geometrisk area är inte 0.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Funktionen är icke-negativ: <strong>2</strong> är även geometrisk area.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Integralen är tecknad area och blir <strong>0</strong>; positiv och negativ del tar ut varandra.</p>",
     "familj": "proc_integral_vs_area"
   },
   {
@@ -4508,7 +4508,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Bestäm en primitiv funktion.</p><p>a) \\(f(x)=6x^2\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(f(x)=4x^3-2x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(f(x)=3e^x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(f(x)=\\frac{5}{x}\\)<br>för \\(x>0\\)</p>",
-    "s": "<p>a) <strong>\\(F(x)=2x^3+C\\)</strong>.<br>b) <strong>\\(F(x)=x^4-x^2+C\\)</strong>.<br>c) <strong>\\(F(x)=3e^x+C\\)</strong>.<br>d) <strong>\\(F(x)=5\\ln x+C\\)</strong>.</p>",
+    "s": "<p>a) <strong>\\(F(x)=2x^3+C\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(F(x)=x^4-x^2+C\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(F(x)=3e^x+C\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(F(x)=5\\ln x+C\\)</strong>.</p>",
     "familj": "proc_primitiva_1"
   },
   {
@@ -4547,7 +4547,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>En kontinuerlig slumpvariabel har täthetsfunktionen \\(f(x)=\\frac{x}{8}\\) för \\(0\\le x\\le4\\), och \\(f(x)=0\\) annars. Beräkna.</p><p>a) \\(P(X\\le2)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(P(1\\le X\\le3)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(P(X>3)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(P(X=2)\\)</p>",
-    "s": "<p>a) \\(\\int_0^2x/8\\,dx=\\)<strong>\\(\\frac14\\)</strong>.<br>b) \\([x^2/16]_1^3=(9-1)/16=\\)<strong>\\(\\frac12\\)</strong>.<br>c) \\(1-P(X\\le3)=1-9/16=\\)<strong>\\(\\frac7{16}\\)</strong>.<br>d) För en kontinuerlig fördelning är <strong>\\(P(X=2)=0\\)</strong>.</p>",
+    "s": "<p>a) \\(\\int_0^2x/8\\,dx=\\)<strong>\\(\\frac14\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\([x^2/16]_1^3=(9-1)/16=\\)<strong>\\(\\frac12\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(1-P(X\\le3)=1-9/16=\\)<strong>\\(\\frac7{16}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) För en kontinuerlig fördelning är <strong>\\(P(X=2)=0\\)</strong>.</p>",
     "familj": "proc_sannolikhet_tathet_1"
   },
   {
@@ -4677,7 +4677,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Bestäm en primitiv funktion och kontrollera genom derivering.</p><p>a) \\(3x^2+4\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(2x^{-3}-5x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(e^{2x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\cos(3x)\\)</p>",
-    "s": "<p>a) <strong>\\(x^3+4x+C\\)</strong>.<br>b) <strong>\\(-x^{-2}-\\frac52x^2+C\\)</strong>.<br>c) <strong>\\(\\frac12e^{2x}+C\\)</strong>.<br>d) <strong>\\(\\frac13\\sin3x+C\\)</strong>. Derivering av respektive svar ger tillbaka uttrycket som integreras.</p>",
+    "s": "<p>a) <strong>\\(x^3+4x+C\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(-x^{-2}-\\frac52x^2+C\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(\\frac12e^{2x}+C\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(\\frac13\\sin3x+C\\)</strong>. Derivering av respektive svar ger tillbaka uttrycket som integreras.</p>",
     "familj": "proc_primitiva_kedjeformer"
   },
   {
@@ -5028,7 +5028,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Bestäm \\(F(x)\\) om \\(F'\\) och ett funktionsvärde är givna.</p><p>a) \\(F'(x)=2x\\), \\(F(0)=3\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(F'(x)=3x^2\\), \\(F(1)=5\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(F'(x)=e^x\\), \\(F(0)=0\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(F'(x)=\\cos x\\), \\(F(\\pi/2)=4\\).</p>",
-    "s": "<p>a) \\(F=x^2+C\\), \\(C=3\\): <strong>\\(F=x^2+3\\)</strong>.<br>b) \\(F=x^3+C\\), \\(1+C=5\\): <strong>\\(F=x^3+4\\)</strong>.<br>c) \\(F=e^x+C\\), \\(1+C=0\\): <strong>\\(F=e^x-1\\)</strong>.<br>d) \\(F=\\sin x+C\\), \\(1+C=4\\): <strong>\\(F=\\sin x+3\\)</strong>.</p>",
+    "s": "<p>a) \\(F=x^2+C\\), \\(C=3\\): <strong>\\(F=x^2+3\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(F=x^3+C\\), \\(1+C=5\\): <strong>\\(F=x^3+4\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(F=e^x+C\\), \\(1+C=0\\): <strong>\\(F=e^x-1\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(F=\\sin x+C\\), \\(1+C=4\\): <strong>\\(F=\\sin x+3\\)</strong>.</p>",
     "familj": "proc_primitiva_begynnelsevillkor"
   },
   {
@@ -5236,7 +5236,7 @@ window.BANKMATO2 = [
     "niva": "C",
     "poang": "0/4/0",
     "t": "<p>Beräkna exakt.</p><p>a) \\(\\int_0^1 e^{2x}\\,dx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\int_0^{\\pi/4}\\sin(2x)\\,dx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\int_0^{\\pi/6}\\cos(3x)\\,dx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\int_0^1(3x+1)^2\\,dx\\)</p>",
-    "s": "<p>a) En primitiv funktion är \\(\\frac12e^{2x}\\): <strong>\\(\\frac{e^2-1}{2}\\)</strong>.<br>b) En primitiv funktion är \\(-\\frac12\\cos2x\\): <strong>\\(\\frac12\\)</strong>.<br>c) En primitiv funktion är \\(\\frac13\\sin3x\\): <strong>\\(\\frac13\\)</strong>.<br>d) En primitiv funktion är \\((3x+1)^3/9\\): <strong>7</strong>.</p>",
+    "s": "<p>a) En primitiv funktion är \\(\\frac12e^{2x}\\): <strong>\\(\\frac{e^2-1}{2}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) En primitiv funktion är \\(-\\frac12\\cos2x\\): <strong>\\(\\frac12\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) En primitiv funktion är \\(\\frac13\\sin3x\\): <strong>\\(\\frac13\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) En primitiv funktion är \\((3x+1)^3/9\\): <strong>7</strong>.</p>",
     "familj": "proc_integral_kedjeformer_c"
   },
   {
@@ -5301,7 +5301,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "3/0/0",
     "t": "<p>Beräkna arean mellan kurvorna.</p><p>a) \\(y=3x\\) och \\(y=x\\)<br>för \\(0\\le x\\le2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(y=x+4\\) och \\(y=2x\\)<br>för \\(0\\le x\\le4\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(y=4\\) och \\(y=x^2\\)<br>för \\(0\\le x\\le2\\).</p>",
-    "s": "<p>a) \\(\\int_0^2(3x-x)dx=\\)<strong>4</strong> a.e.<br>b) \\(x+4\\ge2x\\) på intervallet: \\(\\int_0^4(4-x)dx=\\)<strong>8</strong> a.e.<br>c) \\(\\int_0^2(4-x^2)dx=\\)<strong>\\(\\frac{16}{3}\\)</strong> a.e.</p>",
+    "s": "<p>a) \\(\\int_0^2(3x-x)dx=\\)<strong>4</strong> a.e.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(x+4\\ge2x\\) på intervallet: \\(\\int_0^4(4-x)dx=\\)<strong>8</strong> a.e.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\int_0^2(4-x^2)dx=\\)<strong>\\(\\frac{16}{3}\\)</strong> a.e.</p>",
     "familj": "proc_area_mellan_kurvor_1"
   },
   {
@@ -5561,7 +5561,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Bestäm en primitiv funktion.</p><p>a) \\(f(x)=6x^2-4x+3\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(g(x)=5e^x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(h(x)=4\\cos x\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(p(x)=3/x\\)<br>för \\(x>0\\)</p>",
-    "s": "<p>a) \\(F(x)=2x^3-2x^2+3x+C\\)<br>b) \\(G(x)=5e^x+C\\)<br>c) \\(H(x)=4\\sin x+C\\)<br>d) \\(P(x)=3\\ln x+C\\)</p>",
+    "s": "<p>a) \\(F(x)=2x^3-2x^2+3x+C\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(G(x)=5e^x+C\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(H(x)=4\\sin x+C\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(P(x)=3\\ln x+C\\)</p>",
     "familj": "primitiv_rutin_fyra"
   },
   {
@@ -5600,7 +5600,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Beräkna exakt.</p><p>a) \\(\\int_{-1}^{1}x^2\\,dx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\int_{-2}^{2}x^3\\,dx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\int_1^4\\frac1{\\sqrt{x}}\\,dx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\int_1^e\\frac1x\\,dx\\)</p>",
-    "s": "<p>a) <strong>\\(\\frac23\\)</strong>.<br>b) Uttrycket som integreras är udda över ett symmetriskt intervall: <strong>0</strong>.<br>c) \\([2\\sqrt{x}]_1^4=4-2=\\)<strong>2</strong>.<br>d) \\([\\ln x]_1^e=\\)<strong>1</strong>.</p>",
+    "s": "<p>a) <strong>\\(\\frac23\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Uttrycket som integreras är udda över ett symmetriskt intervall: <strong>0</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\([2\\sqrt{x}]_1^4=4-2=\\)<strong>2</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\([\\ln x]_1^e=\\)<strong>1</strong>.</p>",
     "familj": "proc_integral_bestamd_2"
   },
   {
@@ -5717,7 +5717,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "3/0/0",
     "t": "<p>En hastighet \\(v(t)\\) anges i m/s. Bestäm förflyttningen.</p><p>a) \\(v(t)=3t\\)<br>för \\(0\\le t\\le4\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(v(t)=8-2t\\)<br>för \\(0\\le t\\le3\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(v(t)=5\\)<br>för \\(2\\le t\\le7\\).</p>",
-    "s": "<p>Förflyttning ges av \\(\\int v(t)dt\\).</p><p>a) \\(\\int_0^4 3t dt=\\)<strong>24 m</strong>.<br>b) \\(\\int_0^3(8-2t)dt=24-9=\\)<strong>15 m</strong>.<br>c) \\(\\int_2^7 5dt=\\)<strong>25 m</strong>.</p>",
+    "s": "<p>Förflyttning ges av \\(\\int v(t)dt\\).</p><p>a) \\(\\int_0^4 3t dt=\\)<strong>24 m</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\int_0^3(8-2t)dt=24-9=\\)<strong>15 m</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\int_2^7 5dt=\\)<strong>25 m</strong>.</p>",
     "familj": "proc_integral_hastighet_1"
   },
   {
@@ -5951,7 +5951,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Beräkna.</p><p>a) \\(\\int_0^2(4-x^2)\\,dx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\int_0^3(6-2x)\\,dx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\int_{-1}^2(2x+3)\\,dx\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\int_0^1(3x^2-2x+1)\\,dx\\)</p>",
-    "s": "<p>a) \\([4x-x^3/3]_0^2=\\)<strong>\\(\\frac{16}{3}\\)</strong>.<br>b) \\([6x-x^2]_0^3=\\)<strong>9</strong>.<br>c) \\([x^2+3x]_{-1}^2=10-(-2)=\\)<strong>12</strong>.<br>d) \\([x^3-x^2+x]_0^1=\\)<strong>1</strong>.</p>",
+    "s": "<p>a) \\([4x-x^3/3]_0^2=\\)<strong>\\(\\frac{16}{3}\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\([6x-x^2]_0^3=\\)<strong>9</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\([x^2+3x]_{-1}^2=10-(-2)=\\)<strong>12</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\([x^3-x^2+x]_0^1=\\)<strong>1</strong>.</p>",
     "familj": "proc_integral_polynom_1"
   },
   {
@@ -6289,7 +6289,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "3/0/0",
     "t": "<p>För varje funktion anges att \\(f(x)=kx^n\\) på intervallet och \\(f(x)=0\\) utanför. Bestäm \\(k\\) så att \\(f\\) blir en täthetsfunktion.</p><p>a) \\(f(x)=k\\)<br>för \\(0\\le x\\le4\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(f(x)=kx\\)<br>för \\(0\\le x\\le2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(f(x)=kx^2\\)<br>för \\(0\\le x\\le3\\).</p>",
-    "s": "<p>En täthetsfunktion ska ha total integral 1.</p><p>a) \\(4k=1\\Rightarrow\\) <strong>\\(k=\\frac14\\)</strong>.<br>b) \\(k[x^2/2]_0^2=2k=1\\Rightarrow\\) <strong>\\(k=\\frac12\\)</strong>.<br>c) \\(k[x^3/3]_0^3=9k=1\\Rightarrow\\) <strong>\\(k=\\frac19\\)</strong>.</p>",
+    "s": "<p>En täthetsfunktion ska ha total integral 1.</p><p>a) \\(4k=1\\Rightarrow\\) <strong>\\(k=\\frac14\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(k[x^2/2]_0^2=2k=1\\Rightarrow\\) <strong>\\(k=\\frac12\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(k[x^3/3]_0^3=9k=1\\Rightarrow\\) <strong>\\(k=\\frac19\\)</strong>.</p>",
     "familj": "proc_tathet_normalisering_1"
   },
   {
@@ -6367,7 +6367,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "3/0/0",
     "t": "<p>Ett inflöde \\(q(t)\\) mäts i liter per minut. Bestäm den tillförda volymen.</p><p>a) \\(q(t)=20\\)<br>för \\(0\\le t\\le8\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(q(t)=10+2t\\)<br>för \\(0\\le t\\le5\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(q(t)=30-t\\)<br>för \\(0\\le t\\le10\\).</p>",
-    "s": "<p>a) <strong>160 liter</strong>.<br>b) \\(\\int_0^5(10+2t)dt=50+25=\\)<strong>75 liter</strong>.<br>c) \\(\\int_0^{10}(30-t)dt=300-50=\\)<strong>250 liter</strong>.</p>",
+    "s": "<p>a) <strong>160 liter</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\int_0^5(10+2t)dt=50+25=\\)<strong>75 liter</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\int_0^{10}(30-t)dt=300-50=\\)<strong>250 liter</strong>.</p>",
     "familj": "proc_integral_flode_1"
   },
   {
@@ -6484,7 +6484,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Beräkna.</p><p>a) \\((5+3i)+(-2+7i)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\((4-6i)-(1+2i)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(-3(2-i)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(2(1+4i)-(3-i)\\)</p>",
-    "s": "<p><strong>Metod:</strong> Räkna realdelar och imaginärdelar var för sig och använd \\(i^2=-1\\).</p><p>a) <strong>\\(3+10i\\)</strong>.<br>b) <strong>\\(3-8i\\)</strong>.<br>c) <strong>\\(-6+3i\\)</strong>.<br>d) \\(2+8i-3+i=\\boxed{-1+9i}\\).</p>",
+    "s": "<p><strong>Metod:</strong> Räkna realdelar och imaginärdelar var för sig och använd \\(i^2=-1\\).</p><p>a) <strong>\\(3+10i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(3-8i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(-6+3i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(2+8i-3+i=\\boxed{-1+9i}\\).</p>",
     "familj": "proc_complex_add_sub_3"
   },
   {
@@ -6497,7 +6497,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Beräkna i polär form.</p><p>a) \\(2\\left(\\cos(\\pi/6)+i\\sin(\\pi/6)\\right)\\cdot3\\left(\\cos(\\pi/4)+i\\sin(\\pi/4)\\right)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\frac{8\\left(\\cos(5\\pi/6)+i\\sin(5\\pi/6)\\right)}{2\\left(\\cos(\\pi/3)+i\\sin(\\pi/3)\\right)}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(5\\left(\\cos(7\\pi/6)+i\\sin(7\\pi/6)\\right)\\cdot2\\left(\\cos(5\\pi/6)+i\\sin(5\\pi/6)\\right)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\frac{6\\left(\\cos(3\\pi/2)+i\\sin(3\\pi/2)\\right)}{3\\left(\\cos(\\pi/2)+i\\sin(\\pi/2)\\right)}\\)</p>",
-    "s": "<p>a) <strong>\\(6\\left(\\cos(5\\pi/12)+i\\sin(5\\pi/12)\\right)\\)</strong>.<br>b) <strong>\\(4\\left(\\cos(\\pi/2)+i\\sin(\\pi/2)\\right)=4i\\)</strong>.<br>c) Argumentet blir \\(2\\pi\\): <strong>10</strong>.<br>d) <strong>\\(2\\left(\\cos(\\pi)+i\\sin(\\pi)\\right)=-2\\)</strong>.</p>",
+    "s": "<p>a) <strong>\\(6\\left(\\cos(5\\pi/12)+i\\sin(5\\pi/12)\\right)\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(4\\left(\\cos(\\pi/2)+i\\sin(\\pi/2)\\right)=4i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Argumentet blir \\(2\\pi\\): <strong>10</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(2\\left(\\cos(\\pi)+i\\sin(\\pi)\\right)=-2\\)</strong>.</p>",
     "familj": "proc_polar_mult_div_1"
   },
   {
@@ -6692,7 +6692,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "3/0/0",
     "t": "<p>Skriv på polär form med \\(0\\le\\theta&lt;2\\pi\\).</p><p>a) \\(1+i\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(-1+i\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(-2i\\)</p>",
-    "s": "<p>a) \\(\\sqrt2(\\cos\\frac\\pi4+i\\sin\\frac\\pi4)\\).<br>b) \\(\\sqrt2(\\cos\\frac{3\\pi}4+i\\sin\\frac{3\\pi}4)\\).<br>c) \\(2(\\cos\\frac{3\\pi}2+i\\sin\\frac{3\\pi}2)\\).</p>",
+    "s": "<p>a) \\(\\sqrt2(\\cos\\frac\\pi4+i\\sin\\frac\\pi4)\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\sqrt2(\\cos\\frac{3\\pi}4+i\\sin\\frac{3\\pi}4)\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(2(\\cos\\frac{3\\pi}2+i\\sin\\frac{3\\pi}2)\\).</p>",
     "familj": "polar_rutin"
   },
   {
@@ -6731,7 +6731,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Beräkna och svara på formen \\(a+bi\\).</p><p>a) \\((3-2i)+(5+7i)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\((4+i)(2-3i)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\frac{5+i}{1-i}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\((2+3i)^2\\)</p>",
-    "s": "<p><strong>Metod:</strong> Räkna realdelar och imaginärdelar var för sig och använd \\(i^2=-1\\).</p><p>a) \\(8+5i\\).<br>b) \\(11-10i\\).<br>c) Multiplicera med \\(1+i\\): \\(\\frac{(5+i)(1+i)}2=2+3i\\).<br>d) \\(-5+12i\\).</p>",
+    "s": "<p><strong>Metod:</strong> Räkna realdelar och imaginärdelar var för sig och använd \\(i^2=-1\\).</p><p>a) \\(8+5i\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(11-10i\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Multiplicera med \\(1+i\\): \\(\\frac{(5+i)(1+i)}2=2+3i\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(-5+12i\\).</p>",
     "familj": "komplex_rutin_fyra"
   },
   {
@@ -6926,7 +6926,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Skriv på formen \\(a+bi\\).</p><p>a) \\(2\\left(\\cos(0)+i\\sin(0)\\right)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(4\\left(\\cos(\\pi/2)+i\\sin(\\pi/2)\\right)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(6\\left(\\cos(\\pi)+i\\sin(\\pi)\\right)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(2\\sqrt2\\left(\\cos(7\\pi/4)+i\\sin(7\\pi/4)\\right)\\)</p>",
-    "s": "<p>a) <strong>2</strong>.<br>b) <strong>\\(4i\\)</strong>.<br>c) <strong>−6</strong>.<br>d) \\(2\\sqrt2(\\frac{\\sqrt2}{2}-i\\frac{\\sqrt2}{2})=\\)<strong>\\(2-2i\\)</strong>.</p>",
+    "s": "<p>a) <strong>2</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(4i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>−6</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(2\\sqrt2(\\frac{\\sqrt2}{2}-i\\frac{\\sqrt2}{2})=\\)<strong>\\(2-2i\\)</strong>.</p>",
     "familj": "proc_polar_till_rekt_1"
   },
   {
@@ -6965,7 +6965,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Multiplikation med \\(i\\) motsvarar en rotation \\(90^\\circ\\) moturs i det komplexa talplanet.</p><p>Bestäm \\(iz\\).</p><p>a) \\(z=3+2i\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(z=-4+i\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(z=2-5i\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(z=-1-3i\\)</p>",
-    "s": "<p>Använd \\(i(a+bi)=-b+ai\\).</p><p>a) <strong>\\(-2+3i\\)</strong>.<br>b) <strong>\\(-1-4i\\)</strong>.<br>c) <strong>\\(5+2i\\)</strong>.<br>d) <strong>\\(3-i\\)</strong>.</p>",
+    "s": "<p>Använd \\(i(a+bi)=-b+ai\\).</p><p>a) <strong>\\(-2+3i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(-1-4i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(5+2i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(3-i\\)</strong>.</p>",
     "familj": "proc_complex_rotation_i_2"
   },
   {
@@ -7030,7 +7030,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Multiplicera och skriv svaret på formen \\(a+bi\\).</p><p>a) \\((2+3i)(4-i)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\((1-2i)^2\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\((3+i)(3-i)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(i(5-4i)\\)</p>",
-    "s": "<p><strong>Metod:</strong> Räkna realdelar och imaginärdelar var för sig och använd \\(i^2=-1\\).</p><p>a) \\(8-2i+12i-3i^2=\\)<strong>\\(11+10i\\)</strong>.<br>b) \\(1-4i+4i^2=\\)<strong>\\(-3-4i\\)</strong>.<br>c) \\(9-i^2=\\)<strong>10</strong>.<br>d) \\(5i-4i^2=\\)<strong>\\(4+5i\\)</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Räkna realdelar och imaginärdelar var för sig och använd \\(i^2=-1\\).</p><p>a) \\(8-2i+12i-3i^2=\\)<strong>\\(11+10i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(1-4i+4i^2=\\)<strong>\\(-3-4i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(9-i^2=\\)<strong>10</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(5i-4i^2=\\)<strong>\\(4+5i\\)</strong>.</p>",
     "familj": "proc_complex_mult_1"
   },
   {
@@ -7108,7 +7108,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Bestäm absolutbelopp och argument för resultatet utan att först gå över till rektangulär form.</p><p>a) \\(z_1=3\\left(\\cos(20^\\circ)+i\\sin(20^\\circ)\\right)\\), \\(z_2=2\\left(\\cos(40^\\circ)+i\\sin(40^\\circ)\\right)\\). Bestäm \\(z_1z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(z_1/z_2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(z_2^2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Bestäm \\(1/z_1\\).</p>",
-    "s": "<p>a) absolutbelopp <strong>6</strong>, argument <strong>60°</strong>.<br>b) absolutbelopp <strong>\\(3/2\\)</strong>, argument <strong>−20°</strong> (eller 340°).<br>c) absolutbelopp <strong>4</strong>, argument <strong>80°</strong>.<br>d) absolutbelopp <strong>\\(1/3\\)</strong>, argument <strong>−20°</strong> (eller 340°).</p>",
+    "s": "<p>a) absolutbelopp <strong>6</strong>, argument <strong>60°</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) absolutbelopp <strong>\\(3/2\\)</strong>, argument <strong>−20°</strong> (eller 340°).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) absolutbelopp <strong>4</strong>, argument <strong>80°</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) absolutbelopp <strong>\\(1/3\\)</strong>, argument <strong>−20°</strong> (eller 340°).</p>",
     "familj": "proc_polar_abs_arg_rules"
   },
   {
@@ -7355,7 +7355,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Använd faktorsatsen och avgör om den angivna faktorn verkligen är en faktor.</p><p>a) \\(p(x)=x^3-4x+3\\), \\(x-1\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(p(x)=x^3+2x^2-x-2\\), \\(x+2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(p(x)=2x^3-x^2-8x+4\\), \\(x-2\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(p(x)=x^4-5x^2+4\\), \\(x-3\\).</p>",
-    "s": "<p><strong>Metod:</strong> Sätt in det nollställe som hör ihop med faktorn. Om värdet blir 0 är uttrycket en faktor.</p><p>a) \\(p(1)=1-4+3=0\\): <strong>ja</strong>.<br>b) \\(p(-2)=-8+8+2-2=0\\): <strong>ja</strong>.<br>c) \\(p(2)=16-4-16+4=0\\): <strong>ja</strong>.<br>d) \\(p(3)=81-45+4=40\\ne0\\): <strong>nej</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Sätt in det nollställe som hör ihop med faktorn. Om värdet blir 0 är uttrycket en faktor.</p><p>a) \\(p(1)=1-4+3=0\\): <strong>ja</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(p(-2)=-8+8+2-2=0\\): <strong>ja</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(p(2)=16-4-16+4=0\\): <strong>ja</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(p(3)=81-45+4=40\\ne0\\): <strong>nej</strong>.</p>",
     "familj": "proc_faktorsatsen_kontroll_1"
   },
   {
@@ -7368,7 +7368,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Beräkna.</p><p>a) \\(i^7\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(i^{24}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(i^{43}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(i^{2027}\\)</p>",
-    "s": "<p>Potenser av \\(i\\) har period 4.</p><p>a) <strong>\\(-i\\)</strong>.<br>b) <strong>1</strong>.<br>c) <strong>\\(-i\\)</strong>.<br>d) \\(2027\\equiv3\\pmod4\\Rightarrow\\)<strong>\\(-i\\)</strong>.</p>",
+    "s": "<p>Potenser av \\(i\\) har period 4.</p><p>a) <strong>\\(-i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>1</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(-i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(2027\\equiv3\\pmod4\\Rightarrow\\)<strong>\\(-i\\)</strong>.</p>",
     "familj": "proc_i_potenser_3"
   },
   {
@@ -7394,7 +7394,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>För \\(z=-3+4i\\), bestäm</p><p>a) \\(\\bar z\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(|z|\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(z\\bar z\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(1/z\\) på formen \\(a+bi\\).</p>",
-    "s": "<p><strong>Metod:</strong> Konjugatet byter tecken på imaginärdelen. Absolutbeloppet fås med Pythagoras sats.</p><p>a) \\(-3-4i\\).<br>b) 5.<br>c) 25.<br>d) \\(1/z=\\bar z/|z|^2=(-3-4i)/25\\).</p>",
+    "s": "<p><strong>Metod:</strong> Konjugatet byter tecken på imaginärdelen. Absolutbeloppet fås med Pythagoras sats.</p><p>a) \\(-3-4i\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) 5.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) 25.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(1/z=\\bar z/|z|^2=(-3-4i)/25\\).</p>",
     "familj": "konjugat_abs_rutin"
   },
   {
@@ -7459,7 +7459,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Förenkla.</p><p>a) \\(z\\bar z\\) då \\(z=2-3i\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(|1-\\sqrt3 i|\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\overline{4+7i}\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(|-6+8i|^2\\).</p>",
-    "s": "<p><strong>Metod:</strong> Konjugatet byter tecken på imaginärdelen. Absolutbeloppet fås med Pythagoras sats.</p><p>a) \\(|z|^2=4+9=\\)<strong>13</strong>.<br>b) \\(\\sqrt{1+3}=\\)<strong>2</strong>.<br>c) <strong>\\(4-7i\\)</strong>.<br>d) \\(36+64=\\)<strong>100</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Konjugatet byter tecken på imaginärdelen. Absolutbeloppet fås med Pythagoras sats.</p><p>a) \\(|z|^2=4+9=\\)<strong>13</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\sqrt{1+3}=\\)<strong>2</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(4-7i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(36+64=\\)<strong>100</strong>.</p>",
     "familj": "proc_complex_abs_relationer"
   },
   {
@@ -7602,7 +7602,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Skriv i polär form med argument i intervallet \\(0\\le\\theta&lt;2\\pi\\).</p><p>a) \\(1+i\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(-1+i\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(-\\sqrt3-i\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(2i\\)</p>",
-    "s": "<p>a) \\(|z|=\\sqrt2\\), \\(\\theta=\\pi/4\\): <strong>\\(\\sqrt2\\left(\\cos(\\pi/4)+i\\sin(\\pi/4)\\right)\\)</strong>.<br>b) <strong>\\(\\sqrt2\\left(\\cos(3\\pi/4)+i\\sin(3\\pi/4)\\right)\\)</strong>.<br>c) \\(|z|=2\\), tredje kvadranten med motsvarande vinkel i första kvadranten \\(\\pi/6\\): <strong>\\(2\\left(\\cos(7\\pi/6)+i\\sin(7\\pi/6)\\right)\\)</strong>.<br>d) <strong>\\(2\\left(\\cos(\\pi/2)+i\\sin(\\pi/2)\\right)\\)</strong>.</p>",
+    "s": "<p>a) \\(|z|=\\sqrt2\\), \\(\\theta=\\pi/4\\): <strong>\\(\\sqrt2\\left(\\cos(\\pi/4)+i\\sin(\\pi/4)\\right)\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(\\sqrt2\\left(\\cos(3\\pi/4)+i\\sin(3\\pi/4)\\right)\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(|z|=2\\), tredje kvadranten med motsvarande vinkel i första kvadranten \\(\\pi/6\\): <strong>\\(2\\left(\\cos(7\\pi/6)+i\\sin(7\\pi/6)\\right)\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(2\\left(\\cos(\\pi/2)+i\\sin(\\pi/2)\\right)\\)</strong>.</p>",
     "familj": "proc_polar_rekt_till_polar_1"
   },
   {
@@ -7719,7 +7719,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Beräkna och skriv svaret på formen \\(a+bi\\).</p><p>a) \\((3+5i)+(2-7i)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\((4-3i)-(1+6i)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(-2(3-i)+(5+4i)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\((1+i)+(1-i)\\)</p>",
-    "s": "<p><strong>Metod:</strong> Räkna realdelar och imaginärdelar var för sig och använd \\(i^2=-1\\).</p><p>a) <strong>\\(5-2i\\)</strong>.<br>b) <strong>\\(3-9i\\)</strong>.<br>c) \\(-6+2i+5+4i=\\)<strong>\\(-1+6i\\)</strong>.<br>d) <strong>2</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Räkna realdelar och imaginärdelar var för sig och använd \\(i^2=-1\\).</p><p>a) <strong>\\(5-2i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(3-9i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(-6+2i+5+4i=\\)<strong>\\(-1+6i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>2</strong>.</p>",
     "familj": "proc_complex_add_sub_1"
   },
   {
@@ -8005,7 +8005,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Använd de Moivres formel.</p><p>a) \\([2\\left(\\cos(\\pi/6)+i\\sin(\\pi/6)\\right)]^3\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\([3\\left(\\cos(\\pi/4)+i\\sin(\\pi/4)\\right)]^2\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\([\\left(\\cos(2\\pi/3)+i\\sin(2\\pi/3)\\right)]^4\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\([2\\left(\\cos(5\\pi/6)+i\\sin(5\\pi/6)\\right)]^2\\)</p>",
-    "s": "<p>a) <strong>\\(8\\left(\\cos(\\pi/2)+i\\sin(\\pi/2)\\right)=8i\\)</strong>.<br>b) <strong>\\(9\\left(\\cos(\\pi/2)+i\\sin(\\pi/2)\\right)=9i\\)</strong>.<br>c) \\(\\left(\\cos(8\\pi/3)+i\\sin(8\\pi/3)\\right)=\\)<strong>\\(\\left(\\cos(2\\pi/3)+i\\sin(2\\pi/3)\\right)\\)</strong>.<br>d) \\(4\\left(\\cos(5\\pi/3)+i\\sin(5\\pi/3)\\right)=\\)<strong>\\(2-2\\sqrt3 i\\)</strong>.</p>",
+    "s": "<p>a) <strong>\\(8\\left(\\cos(\\pi/2)+i\\sin(\\pi/2)\\right)=8i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(9\\left(\\cos(\\pi/2)+i\\sin(\\pi/2)\\right)=9i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\left(\\cos(8\\pi/3)+i\\sin(8\\pi/3)\\right)=\\)<strong>\\(\\left(\\cos(2\\pi/3)+i\\sin(2\\pi/3)\\right)\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(4\\left(\\cos(5\\pi/3)+i\\sin(5\\pi/3)\\right)=\\)<strong>\\(2-2\\sqrt3 i\\)</strong>.</p>",
     "familj": "proc_de_moivre_potenser_1"
   },
   {
@@ -8044,7 +8044,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Dividera och skriv svaret på formen \\(a+bi\\).</p><p>a) \\(\\frac{3+i}{1-i}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\frac{5}{2+i}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\frac{4-2i}{1+2i}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\frac{i}{1+i}\\)</p>",
-    "s": "<p>Förläng med nämnarens konjugat.</p><p>a) \\(\\frac{(3+i)(1+i)}2=\\)<strong>\\(1+2i\\)</strong>.<br>b) \\(\\frac{5(2-i)}5=\\)<strong>\\(2-i\\)</strong>.<br>c) \\(\\frac{(4-2i)(1-2i)}5=\\frac{-10i}{5}=\\)<strong>\\(-2i\\)</strong>.<br>d) \\(\\frac{i(1-i)}2=\\)<strong>\\(\\frac12+\\frac12i\\)</strong>.</p>",
+    "s": "<p>Förläng med nämnarens konjugat.</p><p>a) \\(\\frac{(3+i)(1+i)}2=\\)<strong>\\(1+2i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\frac{5(2-i)}5=\\)<strong>\\(2-i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\frac{(4-2i)(1-2i)}5=\\frac{-10i}{5}=\\)<strong>\\(-2i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\frac{i(1-i)}2=\\)<strong>\\(\\frac12+\\frac12i\\)</strong>.</p>",
     "familj": "proc_complex_division_1"
   },
   {
@@ -8239,7 +8239,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>För varje tal, bestäm konjugatet och absolutbeloppet.</p><p>a) \\(3+4i\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(-5+12i\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(8-15i\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(-7-24i\\)</p>",
-    "s": "<p><strong>Metod:</strong> Konjugatet byter tecken på imaginärdelen. Absolutbeloppet fås med Pythagoras sats.</p><p>a) konjugat <strong>\\(3-4i\\)</strong>, absolutbelopp <strong>5</strong>.<br>b) <strong>\\(-5-12i\\)</strong>, <strong>13</strong>.<br>c) <strong>\\(8+15i\\)</strong>, <strong>17</strong>.<br>d) <strong>\\(-7+24i\\)</strong>, <strong>25</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Konjugatet byter tecken på imaginärdelen. Absolutbeloppet fås med Pythagoras sats.</p><p>a) konjugat <strong>\\(3-4i\\)</strong>, absolutbelopp <strong>5</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(-5-12i\\)</strong>, <strong>13</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(8+15i\\)</strong>, <strong>17</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(-7+24i\\)</strong>, <strong>25</strong>.</p>",
     "familj": "proc_complex_konjugat_abs_1"
   },
   {
@@ -8330,7 +8330,7 @@ window.BANKMATO2 = [
     "niva": "E",
     "poang": "4/0/0",
     "t": "<p>Skriv på formen \\(a+bi\\) med hjälp av Eulers formel.</p><p>a) \\(e^{i\\pi}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(e^{i\\pi/2}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(2e^{i3\\pi/4}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(3e^{-i\\pi/6}\\)</p>",
-    "s": "<p>Använd \\(e^{i\\theta}=\\cos\\theta+i\\sin\\theta\\).</p><p>a) <strong>\\(-1\\)</strong>.<br>b) <strong>\\(i\\)</strong>.<br>c) <strong>\\(-\\sqrt2+\\sqrt2i\\)</strong>.<br>d) <strong>\\(\\frac{3\\sqrt3}{2}-\\frac32i\\)</strong>.</p>",
+    "s": "<p>Använd \\(e^{i\\theta}=\\cos\\theta+i\\sin\\theta\\).</p><p>a) <strong>\\(-1\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) <strong>\\(i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>\\(-\\sqrt2+\\sqrt2i\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) <strong>\\(\\frac{3\\sqrt3}{2}-\\frac32i\\)</strong>.</p>",
     "familj": "proc_euler_till_rect_2"
   },
   {
@@ -8657,7 +8657,7 @@ window.BANKMATO2 = [
   ],
   "niva": "E",
   "poang": "4/0/0",
-  "t": "<p>Omvandla.</p><p>a) \\(\\frac{7\\pi}{6}\\) rad till grader<br><span style=\"display:inline-block;height:0.32rem\"></span>b) \\(\\frac{5\\pi}{3}\\) rad till grader<br><span style=\"display:inline-block;height:0.32rem\"></span>c) \\(210^\\circ\\) till radianer<br><span style=\"display:inline-block;height:0.32rem\"></span>d) \\(330^\\circ\\) till radianer</p>",
+  "t": "<p>Omvandla.</p><p>a) \\(\\frac{7\\pi}{6}\\) rad till grader<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\frac{5\\pi}{3}\\) rad till grader<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(210^\\circ\\) till radianer<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(330^\\circ\\) till radianer</p>",
   "s": "<p>Använd sambandet \\(180^\\circ=\\pi\\) rad.</p><p>a) \\(\\frac{7\\pi}{6}\\cdot\\frac{180^\\circ}{\\pi}=\\boxed{210^\\circ}\\).</p><p>b) \\(\\frac{5\\pi}{3}\\cdot\\frac{180^\\circ}{\\pi}=\\boxed{300^\\circ}\\).</p><p>c) \\(210^\\circ\\cdot\\frac{\\pi}{180^\\circ}=\\boxed{7\\pi/6}\\).</p><p>d) \\(330^\\circ\\cdot\\frac{\\pi}{180^\\circ}=\\boxed{11\\pi/6}\\).</p>",
   "familj": "radianer_omvandling_rutin_7"
 },
@@ -8670,7 +8670,7 @@ window.BANKMATO2 = [
   ],
   "niva": "C",
   "poang": "0/2/0",
-  "t": "<p>En cirkel har radien 9,0 cm och en cirkelsektor har medelpunktsvinkeln \\(1,4\\) rad.</p><p>a) Bestäm sektorns båglängd.<br><span style=\"display:inline-block;height:0.32rem\"></span>b) Bestäm sektorns area.</p>",
+  "t": "<p>En cirkel har radien 9,0 cm och en cirkelsektor har medelpunktsvinkeln \\(1,4\\) rad.</p><p>a) Bestäm sektorns båglängd.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm sektorns area.</p>",
   "s": "<p><strong>Formler från formelbladet:</strong> När vinkeln mäts i radianer gäller \\(b=vr\\) och \\(A=vr^2/2\\).</p><p>a) \\(b=1,4\\cdot9,0=\\boxed{12,6\\text{ cm}}\\).</p><p>b) \\(A=\\frac{1,4\\cdot9,0^2}{2}=56,7\\). Alltså \\(\\boxed{56,7\\text{ cm}^2}\\).</p>",
   "familj": "radianer_sektor_tillampning_4"
 },
@@ -8683,7 +8683,7 @@ window.BANKMATO2 = [
   ],
   "niva": "C",
   "poang": "0/2/1",
-  "t": "<p>Ett hjul med radien 0,32 m roterar med 3,5 varv per sekund.</p><p>a) Bestäm hur många radianer hjulet roterar på en sekund.<br><span style=\"display:inline-block;height:0.32rem\"></span>b) Hur långt rör sig en punkt på hjulets kant under en sekund?</p>",
+  "t": "<p>Ett hjul med radien 0,32 m roterar med 3,5 varv per sekund.</p><p>a) Bestäm hur många radianer hjulet roterar på en sekund.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Hur långt rör sig en punkt på hjulets kant under en sekund?</p>",
   "s": "<p>a) Ett varv är \\(2\\pi\\) rad. På en sekund roterar hjulet därför \\(3,5\\cdot2\\pi=\\boxed{7\\pi\\text{ rad}}\\).</p><p>b) På formelbladet finns båglängden \\(b=vr\\). Här är \\(v=7\\pi\\) och \\(r=0,32\\):</p><p>\\[b=7\\pi\\cdot0,32=2,24\\pi\\approx\\boxed{7,04\\text{ m}}.\\]</p>",
   "familj": "radianer_rotation_hjul_1"
 },
@@ -8696,7 +8696,7 @@ window.BANKMATO2 = [
   ],
   "niva": "E",
   "poang": "3/0/0",
-  "t": "<p>En periodisk storhet beskrivs av</p><p>\\[f(t)=7+3\\sin\\left(\\frac{\\pi}{4}(t-2)\\right).\\]</p><p>Bestäm funktionens</p><p>a) medellinje<br><span style=\"display:inline-block;height:0.32rem\"></span>b) amplitud<br><span style=\"display:inline-block;height:0.32rem\"></span>c) period.</p>",
+  "t": "<p>En periodisk storhet beskrivs av</p><p>\\[f(t)=7+3\\sin\\left(\\frac{\\pi}{4}(t-2)\\right).\\]</p><p>Bestäm funktionens</p><p>a) medellinje<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) amplitud<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) period.</p>",
   "s": "<p>a) Konstanten utanför sinusdelen är medellinjen: \\(\\boxed{y=7}\\).</p><p>b) Amplituden är \\(\\boxed{3}\\).</p><p>c) För \\(\\sin(kt)\\) är perioden \\(2\\pi/k\\). Här är \\(k=\\pi/4\\), så</p><p>\\[T=\\frac{2\\pi}{\\pi/4}=\\boxed{8}.\\]</p>",
   "familj": "trig_modell_parametrar_rutin_4"
 },
@@ -8761,7 +8761,7 @@ window.BANKMATO2 = [
   ],
   "niva": "E",
   "poang": "4/0/0",
-  "t": "<p>Derivera.</p><p>a) \\(\\ln(1+x^2)\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>b) \\(e^{\\sin x}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>c) \\((2+e^x)^4\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>d) \\(\\cos(x^3)\\)</p>",
+  "t": "<p>Derivera.</p><p>a) \\(\\ln(1+x^2)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(e^{\\sin x}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\((2+e^x)^4\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\cos(x^3)\\)</p>",
   "s": "<p><strong>Formel från formelbladet:</strong> Kedjeregeln.</p><p>a) \\(\\boxed{\\frac{2x}{1+x^2}}\\).</p><p>b) \\(\\boxed{e^{\\sin x}\\cos x}\\).</p><p>c) \\(\\boxed{4(2+e^x)^3e^x}\\).</p><p>d) \\(\\boxed{-3x^2\\sin(x^3)}\\).</p>",
   "familj": "kedjeregel_blandad_rutin_8"
 },
@@ -8813,7 +8813,7 @@ window.BANKMATO2 = [
   ],
   "niva": "C",
   "poang": "0/3/0",
-  "t": "<p>Funktionen ges av</p><p>\\[f(x)=2x-1+\\frac{6}{x+3}.\\]</p><p>a) Bestäm funktionens vertikala asymptot.<br><span style=\"display:inline-block;height:0.32rem\"></span>b) Bestäm funktionens linjära asymptot.<br><span style=\"display:inline-block;height:0.32rem\"></span>c) Förklara hur uttryckets form gör att asymptoterna kan läsas av.</p>",
+  "t": "<p>Funktionen ges av</p><p>\\[f(x)=2x-1+\\frac{6}{x+3}.\\]</p><p>a) Bestäm funktionens vertikala asymptot.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm funktionens linjära asymptot.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Förklara hur uttryckets form gör att asymptoterna kan läsas av.</p>",
   "s": "<p>a) Nämnaren i bråket blir 0 när \\(x=-3\\). Där finns den vertikala asymptoten \\(\\boxed{x=-3}\\).</p><p>b) När \\(|x|\\) blir stort går \\(6/(x+3)\\) mot 0. Då närmar sig \\(f(x)\\) linjen \\(2x-1\\). Den linjära asymptoten är därför \\(\\boxed{y=2x-1}\\).</p><p>c) Funktionen är redan skriven som en linjär del plus en term som går mot 0 för stora \\(|x|\\). Samtidigt visar nämnaren direkt var den vertikala asymptoten finns.</p>",
   "familj": "asymptoter_form_linjart_plus_braak_3"
 },
@@ -8904,7 +8904,7 @@ window.BANKMATO2 = [
   ],
   "niva": "E",
   "poang": "4/0/0",
-  "t": "<p>Utför polynomdivision.</p><p>a) \\(\\frac{x^2+5x+6}{x+2}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>b) \\(\\frac{x^3-8}{x-2}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>c) \\(\\frac{2x^3+x^2-8x-4}{x+2}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>d) \\(\\frac{3x^3-10x^2+x+6}{x-3}\\)</p>",
+  "t": "<p>Utför polynomdivision.</p><p>a) \\(\\frac{x^2+5x+6}{x+2}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\frac{x^3-8}{x-2}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\frac{2x^3+x^2-8x-4}{x+2}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\frac{3x^3-10x^2+x+6}{x-3}\\)</p>",
   "s": "<p>a) \\(x^2+5x+6=(x+2)(x+3)\\), alltså \\(\\boxed{x+3}\\).</p><p>b) Divisionen ger \\(\\boxed{x^2+2x+4}\\).</p><p>c) Divisionen ger \\(\\boxed{2x^2-3x-2}\\).</p><p>d) Divisionen ger \\(\\boxed{3x^2-x-2}\\).</p><p>I samtliga fall är resten 0.</p>",
   "familj": "polynomdivision_mangdtraning_4"
 },
@@ -8917,7 +8917,7 @@ window.BANKMATO2 = [
   ],
   "niva": "E",
   "poang": "2/1/0",
-  "t": "<p>Figuren visar en polynomdivision. Fyll i rutorna A–F och ange kvoten.</p><span class=\"fig\"><svg width=\"590\" height=\"345\" viewBox=\"0 0 590 345\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Polynomdivision med tomma rutor att fylla i\">\n<rect x=\"1\" y=\"1\" width=\"588\" height=\"343\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<text x=\"65\" y=\"77\" font-family=\"serif\" font-size=\"19\">x + 2</text>\n<path d=\"M130 52 H545 M130 52 V83\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"1.8\"/>\n<text x=\"150\" y=\"78\" font-family=\"serif\" font-size=\"19\">2x³ + 3x² - 8x - 12</text>\n<text x=\"183\" y=\"34\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">A</text><rect x=\"165\" y=\"38\" width=\"70\" height=\"28\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<text x=\"288\" y=\"34\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">B</text><rect x=\"270\" y=\"38\" width=\"70\" height=\"28\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<text x=\"393\" y=\"34\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">C</text><rect x=\"375\" y=\"38\" width=\"70\" height=\"28\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<text x=\"143\" y=\"118\" font-family=\"serif\" font-size=\"18\">-</text><text x=\"175\" y=\"111\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">D</text><rect x=\"165\" y=\"92\" width=\"200\" height=\"30\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<line x1=\"150\" y1=\"130\" x2=\"385\" y2=\"130\" stroke=\"#5C575E\"/>\n<text x=\"205\" y=\"158\" font-family=\"serif\" font-size=\"18\">-x² - 8x</text>\n<text x=\"195\" y=\"199\" font-family=\"serif\" font-size=\"18\">-</text><text x=\"230\" y=\"191\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">E</text><rect x=\"220\" y=\"173\" width=\"190\" height=\"30\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<line x1=\"205\" y1=\"211\" x2=\"430\" y2=\"211\" stroke=\"#5C575E\"/>\n<text x=\"275\" y=\"239\" font-family=\"serif\" font-size=\"18\">-6x - 12</text>\n<text x=\"265\" y=\"279\" font-family=\"serif\" font-size=\"18\">-</text><text x=\"300\" y=\"271\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">F</text><rect x=\"290\" y=\"253\" width=\"175\" height=\"30\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<line x1=\"275\" y1=\"291\" x2=\"480\" y2=\"291\" stroke=\"#5C575E\"/>\n<text x=\"370\" y=\"321\" text-anchor=\"middle\" font-family=\"serif\" font-size=\"18\">0</text>\n</svg></span>",
+  "t": "<p>Figuren visar en polynomdivision. Fyll i rutorna A–F och ange kvoten.</p><span class=\"fig\"><svg width=\"620\" height=\"365\" viewBox=\"0 0 620 365\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Polynomdivision i uppställning med dividend till vänster och divisor samt kvot till höger\">\n<rect x=\"1\" y=\"1\" width=\"618\" height=\"363\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<!-- dividend and divisor in textbook orientation -->\n<text x=\"42\" y=\"54\" font-family=\"serif\" font-size=\"19\">2x³ + 3x² - 8x - 12</text>\n<line x1=\"386\" y1=\"28\" x2=\"386\" y2=\"104\" stroke=\"#2B2527\" stroke-width=\"1.8\"/>\n<text x=\"410\" y=\"54\" font-family=\"serif\" font-size=\"19\">x + 2</text>\n<line x1=\"386\" y1=\"68\" x2=\"575\" y2=\"68\" stroke=\"#2B2527\" stroke-width=\"1.5\"/>\n<!-- quotient blanks -->\n<text x=\"411\" y=\"91\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">A</text><rect x=\"403\" y=\"96\" width=\"54\" height=\"27\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<text x=\"474\" y=\"91\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">B</text><rect x=\"466\" y=\"96\" width=\"48\" height=\"27\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<text x=\"532\" y=\"91\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">C</text><rect x=\"524\" y=\"96\" width=\"48\" height=\"27\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<!-- long division working -->\n<text x=\"30\" y=\"101\" font-family=\"serif\" font-size=\"18\">-</text><text x=\"60\" y=\"88\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">D</text><rect x=\"52\" y=\"94\" width=\"220\" height=\"30\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<line x1=\"42\" y1=\"132\" x2=\"300\" y2=\"132\" stroke=\"#5C575E\" stroke-width=\"1\"/>\n<text x=\"95\" y=\"160\" font-family=\"serif\" font-size=\"18\">-x² - 8x</text>\n<text x=\"83\" y=\"204\" font-family=\"serif\" font-size=\"18\">-</text><text x=\"112\" y=\"190\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">E</text><rect x=\"104\" y=\"196\" width=\"205\" height=\"30\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<line x1=\"94\" y1=\"234\" x2=\"330\" y2=\"234\" stroke=\"#5C575E\" stroke-width=\"1\"/>\n<text x=\"160\" y=\"262\" font-family=\"serif\" font-size=\"18\">-6x - 12</text>\n<text x=\"148\" y=\"304\" font-family=\"serif\" font-size=\"18\">-</text><text x=\"178\" y=\"291\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">F</text><rect x=\"170\" y=\"297\" width=\"190\" height=\"30\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<line x1=\"158\" y1=\"333\" x2=\"380\" y2=\"333\" stroke=\"#5C575E\" stroke-width=\"1\"/>\n<text x=\"274\" y=\"355\" text-anchor=\"middle\" font-family=\"serif\" font-size=\"17\">0</text>\n</svg></span>",
   "s": "<p>Första termen i kvoten fås av \\(2x^3/x=2x^2\\). Alltså är A \\(2x^2\\).</p><p>Multiplicera: \\(2x^2(x+2)=2x^3+4x^2\\). Det är D.</p><p>Efter subtraktionen återstår \\(-x^2-8x\\). Nästa kvotterm är \\(-x\\), alltså B \\(-x\\). Produkten blir \\(-x^2-2x\\), vilket är E.</p><p>Efter nästa subtraktion återstår \\(-6x-12\\). Sista kvottermen är \\(-6\\), alltså C \\(-6\\), och F är \\(-6x-12\\).</p><p>Kvoten är därför \\(\\boxed{2x^2-x-6}\\) och resten är 0.</p>",
   "familj": "polynomdivision_algoritm_luckor_svg_1"
 },
@@ -8930,7 +8930,7 @@ window.BANKMATO2 = [
   ],
   "niva": "E",
   "poang": "4/0/0",
-  "t": "<p>Utför polynomdivision och ange både kvot och rest.</p><p>a) \\(\\frac{x^2+2x+5}{x+1}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>b) \\(\\frac{2x^3-3x+1}{x-1}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>c) \\(\\frac{x^3+x^2+x+1}{x+2}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>d) \\(\\frac{3x^2+4x-2}{x-2}\\)</p>",
+  "t": "<p>Utför polynomdivision och ange både kvot och rest.</p><p>a) \\(\\frac{x^2+2x+5}{x+1}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\frac{2x^3-3x+1}{x-1}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\frac{x^3+x^2+x+1}{x+2}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(\\frac{3x^2+4x-2}{x-2}\\)</p>",
   "s": "<p>a) Kvot \\(x+1\\), rest 4.</p><p>b) Kom ihåg den saknade \\(x^2\\)-termen: \\(2x^3+0x^2-3x+1\\). Kvot \\(2x^2+2x-1\\), rest 0.</p><p>c) Kvot \\(x^2-x+3\\), rest \\(-5\\).</p><p>d) Kvot \\(3x+10\\), rest 18.</p>",
   "familj": "polynomdivision_kvot_rest_4"
 },
@@ -8943,7 +8943,7 @@ window.BANKMATO2 = [
   ],
   "niva": "E",
   "poang": "3/0/0",
-  "t": "<p>Skriv resultatet på formen \\(P(x)=(x-a)Q(x)+r\\).</p><p>a) Dividera \\(x^3+4x^2+x-6\\) med \\(x-1\\).<br><span style=\"display:inline-block;height:0.32rem\"></span>b) Dividera \\(x^3-2x^2+5\\) med \\(x+1\\).<br><span style=\"display:inline-block;height:0.32rem\"></span>c) Dividera \\(2x^2-3x+7\\) med \\(x-2\\).</p>",
+  "t": "<p>Skriv resultatet på formen \\(P(x)=(x-a)Q(x)+r\\).</p><p>a) Dividera \\(x^3+4x^2+x-6\\) med \\(x-1\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Dividera \\(x^3-2x^2+5\\) med \\(x+1\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Dividera \\(2x^2-3x+7\\) med \\(x-2\\).</p>",
   "s": "<p>a) Kvoten är \\(x^2+5x+6\\) och resten 0:</p><p>\\[\\boxed{x^3+4x^2+x-6=(x-1)(x^2+5x+6)}.\\]</p><p>b) Skriv först \\(x^3-2x^2+0x+5\\). Division ger kvoten \\(x^2-3x+3\\) och resten 2:</p><p>\\[\\boxed{P=(x+1)(x^2-3x+3)+2}.\\]</p><p>c) Kvoten är \\(2x+1\\) och resten 9:</p><p>\\[\\boxed{P=(x-2)(2x+1)+9}.\\]</p>",
   "familj": "polynomdivision_identitet_kvot_rest_1"
 },
@@ -8969,7 +8969,7 @@ window.BANKMATO2 = [
   ],
   "niva": "C",
   "poang": "0/3/0",
-  "t": "<p>Polynomet</p><p>\\[P(x)=x^3+ax^2-5x-6\\]</p><p>är delbart med \\(x-2\\).</p><p>a) Bestäm \\(a\\).<br><span style=\"display:inline-block;height:0.32rem\"></span>b) Utför därefter divisionen.</p>",
+  "t": "<p>Polynomet</p><p>\\[P(x)=x^3+ax^2-5x-6\\]</p><p>är delbart med \\(x-2\\).</p><p>a) Bestäm \\(a\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Utför därefter divisionen.</p>",
   "s": "<p>a) Eftersom divisionen ska ge resten 0 måste \\(P(2)=0\\):</p><p>\\[8+4a-10-6=0\\Rightarrow4a-8=0\\Rightarrow\\boxed{a=2}.\\]</p><p>b) Dividera \\(x^3+2x^2-5x-6\\) med \\(x-2\\). Kvoten blir</p><p>\\[\\boxed{x^2+4x+3}.\\]</p>",
   "familj": "polynomdivision_parameter_faktor_2"
 },
@@ -8982,7 +8982,7 @@ window.BANKMATO2 = [
   ],
   "niva": "E",
   "poang": "2/1/0",
-  "t": "<p>Utför polynomdivision.</p><p>a) \\(\\frac{x^4-5x^2+4}{x^2-1}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>b) \\(\\frac{x^4+3x^2+2}{x^2+1}\\)</p>",
+  "t": "<p>Utför polynomdivision.</p><p>a) \\(\\frac{x^4-5x^2+4}{x^2-1}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\frac{x^4+3x^2+2}{x^2+1}\\)</p>",
   "s": "<p>a) Första termen blir \\(x^4/x^2=x^2\\). Divisionen ger \\(\\boxed{x^2-4}\\) med rest 0.</p><p>b) Divisionen ger \\(\\boxed{x^2+2}\\) med rest 0.</p>",
   "familj": "polynomdivision_kvadratisk_namnare_1"
 },
@@ -8995,7 +8995,7 @@ window.BANKMATO2 = [
   ],
   "niva": "E",
   "poang": "1/2/0",
-  "t": "<p>Fyll i de tre tomma rutorna i polynomdivisionen.</p><span class=\"fig\"><svg width=\"590\" height=\"315\" viewBox=\"0 0 590 315\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Polynomdivision med kvot och rest där några värden saknas\">\n<rect x=\"1\" y=\"1\" width=\"588\" height=\"313\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<text x=\"65\" y=\"78\" font-family=\"serif\" font-size=\"19\">x - 2</text>\n<path d=\"M130 52 H545 M130 52 V84\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"1.8\"/>\n<text x=\"150\" y=\"79\" font-family=\"serif\" font-size=\"19\">x³ + 2x² - 5x + 1</text>\n<text x=\"190\" y=\"34\" font-family=\"serif\" font-size=\"18\">x² +</text><rect x=\"240\" y=\"15\" width=\"62\" height=\"28\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/><text x=\"311\" y=\"34\" font-family=\"serif\" font-size=\"18\">x +</text><rect x=\"350\" y=\"15\" width=\"62\" height=\"28\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<text x=\"145\" y=\"116\" font-family=\"serif\" font-size=\"17\">-(x³ - 2x²)</text><line x1=\"150\" y1=\"126\" x2=\"350\" y2=\"126\" stroke=\"#5C575E\"/>\n<text x=\"205\" y=\"154\" font-family=\"serif\" font-size=\"17\">4x² - 5x</text>\n<text x=\"198\" y=\"193\" font-family=\"serif\" font-size=\"17\">-(4x² - 8x)</text><line x1=\"205\" y1=\"203\" x2=\"405\" y2=\"203\" stroke=\"#5C575E\"/>\n<text x=\"275\" y=\"231\" font-family=\"serif\" font-size=\"17\">3x + 1</text>\n<text x=\"267\" y=\"270\" font-family=\"serif\" font-size=\"17\">-(3x - 6)</text><line x1=\"275\" y1=\"280\" x2=\"440\" y2=\"280\" stroke=\"#5C575E\"/>\n<text x=\"360\" y=\"305\" text-anchor=\"middle\" font-family=\"serif\" font-size=\"17\">rest = </text><rect x=\"395\" y=\"286\" width=\"52\" height=\"24\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n</svg></span><p>Ange sedan kvot och rest.</p>",
+  "t": "<p>Fyll i de tre tomma rutorna i polynomdivisionen.</p><span class=\"fig\"><svg width=\"620\" height=\"330\" viewBox=\"0 0 620 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Polynomdivision i uppställning med dividend till vänster och divisor samt kvot till höger\">\n<rect x=\"1\" y=\"1\" width=\"618\" height=\"328\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<text x=\"42\" y=\"54\" font-family=\"serif\" font-size=\"19\">x³ + 2x² - 5x + 1</text>\n<line x1=\"365\" y1=\"28\" x2=\"365\" y2=\"106\" stroke=\"#2B2527\" stroke-width=\"1.8\"/>\n<text x=\"390\" y=\"54\" font-family=\"serif\" font-size=\"19\">x - 2</text>\n<line x1=\"365\" y1=\"68\" x2=\"575\" y2=\"68\" stroke=\"#2B2527\" stroke-width=\"1.5\"/>\n<!-- quotient: x² + A x + B -->\n<text x=\"390\" y=\"104\" font-family=\"serif\" font-size=\"18\">x² +</text>\n<text x=\"448\" y=\"87\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">A</text><rect x=\"440\" y=\"92\" width=\"48\" height=\"27\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<text x=\"495\" y=\"104\" font-family=\"serif\" font-size=\"18\">x +</text>\n<text x=\"544\" y=\"87\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">B</text><rect x=\"536\" y=\"92\" width=\"42\" height=\"27\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<!-- working -->\n<text x=\"30\" y=\"103\" font-family=\"serif\" font-size=\"17\">-(x³ - 2x²)</text>\n<line x1=\"42\" y1=\"114\" x2=\"285\" y2=\"114\" stroke=\"#5C575E\"/>\n<text x=\"96\" y=\"142\" font-family=\"serif\" font-size=\"17\">4x² - 5x</text>\n<text x=\"84\" y=\"184\" font-family=\"serif\" font-size=\"17\">-(4x² - 8x)</text>\n<line x1=\"96\" y1=\"195\" x2=\"310\" y2=\"195\" stroke=\"#5C575E\"/>\n<text x=\"162\" y=\"223\" font-family=\"serif\" font-size=\"17\">3x + 1</text>\n<text x=\"150\" y=\"265\" font-family=\"serif\" font-size=\"17\">-(3x - 6)</text>\n<line x1=\"162\" y1=\"276\" x2=\"330\" y2=\"276\" stroke=\"#5C575E\"/>\n<text x=\"190\" y=\"309\" font-family=\"serif\" font-size=\"17\">rest =</text>\n<text x=\"251\" y=\"288\" font-family=\"sans-serif\" font-size=\"10.5\" fill=\"#5C575E\">C</text><rect x=\"243\" y=\"292\" width=\"48\" height=\"27\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n</svg></span><p>Ange sedan kvot och rest.</p>",
   "s": "<p>Först: \\(x^3/x=x^2\\). Efter första subtraktionen fås \\(4x^2-5x\\), så nästa kvotterm är \\(4x\\). Efter nästa subtraktion återstår \\(3x+1\\), så sista kvottermen är 3.</p><p>Produkten \\(3(x-2)=3x-6\\) lämnar resten \\(1-(-6)=7\\).</p><p>Rutorna ska alltså innehålla \\(4\\), \\(3\\) och \\(7\\).</p><p>\\[\\boxed{\\frac{x^3+2x^2-5x+1}{x-2}=x^2+4x+3+\\frac{7}{x-2}}.\\]</p>",
   "familj": "polynomdivision_algoritm_luckor_svg_2"
 },
@@ -9021,7 +9021,7 @@ window.BANKMATO2 = [
   ],
   "niva": "E",
   "poang": "3/0/0",
-  "t": "<p>Utför divisionerna. Skriv in saknade termer med koefficienten 0 innan du börjar.</p><p>a) \\(\\frac{x^3-7x+6}{x-1}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>b) \\(\\frac{2x^3+5x-3}{x+2}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>c) \\(\\frac{x^4-5x^2+4}{x-1}\\)</p>",
+  "t": "<p>Utför divisionerna. Skriv in saknade termer med koefficienten 0 innan du börjar.</p><p>a) \\(\\frac{x^3-7x+6}{x-1}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\frac{2x^3+5x-3}{x+2}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(\\frac{x^4-5x^2+4}{x-1}\\)</p>",
   "s": "<p>a) Skriv \\(x^3+0x^2-7x+6\\). Kvoten blir \\(\\boxed{x^2+x-6}\\), rest 0.</p><p>b) Skriv \\(2x^3+0x^2+5x-3\\). Kvoten blir \\(2x^2-4x+13\\) och resten \\(-29\\).</p><p>c) Skriv \\(x^4+0x^3-5x^2+0x+4\\). Kvoten blir \\(x^3+x^2-4x-4\\), rest 0.</p>",
   "familj": "polynomdivision_saknade_termer_1"
 },
@@ -9086,7 +9086,7 @@ window.BANKMATO2 = [
   ],
   "niva": "E",
   "poang": "2/0/0",
-  "t": "<p>Kontrollera polynomdivisionen genom multiplikation.</p><p>a) \\(x^3-8=(x-2)(x^2+2x+4)\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>b) \\(x^3+x^2+x+1=(x+2)(x^2-x+3)-5\\)</p>",
+  "t": "<p>Kontrollera polynomdivisionen genom multiplikation.</p><p>a) \\(x^3-8=(x-2)(x^2+2x+4)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(x^3+x^2+x+1=(x+2)(x^2-x+3)-5\\)</p>",
   "s": "<p>a) Multiplicera:</p><p>\\[(x-2)(x^2+2x+4)=x^3+2x^2+4x-2x^2-4x-8=x^3-8.\\]</p><p>Likheten stämmer.</p><p>b) \\[(x+2)(x^2-x+3)-5=x^3+x^2+x+6-5=x^3+x^2+x+1.\\]</p><p>Även den likheten stämmer.</p>",
   "familj": "polynomdivision_kontroll_multiplikation_1"
 },
@@ -9112,7 +9112,7 @@ window.BANKMATO2 = [
   ],
   "niva": "E",
   "poang": "2/1/0",
-  "t": "<p>Utför polynomdivision.</p><p>a) \\(\\frac{x^4+3x^2+2}{x^2+1}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>b) \\(\\frac{2x^4-5x^2+3}{x^2-1}\\)</p>",
+  "t": "<p>Utför polynomdivision.</p><p>a) \\(\\frac{x^4+3x^2+2}{x^2+1}\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(\\frac{2x^4-5x^2+3}{x^2-1}\\)</p>",
   "s": "<p>a) Kvoten är \\(\\boxed{x^2+2}\\), rest 0.</p><p>b) Första termen är \\(2x^2\\). Divisionen ger därefter konstanttermen \\(-3\\):</p><p>\\[(x^2-1)(2x^2-3)=2x^4-5x^2+3.\\]</p><p>Alltså är kvoten \\(\\boxed{2x^2-3}\\), rest 0.</p>",
   "familj": "polynomdivision_kvadratisk_divisor_2"
 },
