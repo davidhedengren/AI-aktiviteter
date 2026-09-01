@@ -30,7 +30,7 @@ window.OMRMATO2 = {
     "integralberakning": "Primitiva funktioner och integralberäkningar",
     "area_integraler": "Area med integraler",
     "integral_tillampningar": "Integraler i tillämpningar",
-    "sannolikhetsintegraler": "Täthetsfunktioner och sannolikhet",
+    "sannolikhetsintegraler": "Täthetsfunktioner och normalfördelning",
     "rotationsvolymer": "Rotationsvolymer"
   },
   "4": {
@@ -38,7 +38,7 @@ window.OMRMATO2 = {
     "komplexa_talplanet": "Det komplexa talplanet",
     "polar_exponentiell": "Polär och exponentiell form",
     "potenser_rotter": "Potenser och rötter",
-    "polynom_komplexa": "Polynom och komplexa lösningar"
+    "polynom_komplexa": "Polynom, polynomdivision och komplexa rötter"
   }
 };
 

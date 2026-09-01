@@ -8647,4 +8647,512 @@ window.BANKMATO2 = [
     "familj": "komplexplan_lokus_mittnormal_2"
   }
 
+,
+{
+  "id": "1.171",
+  "kap": 1,
+  "omr": "radianer",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "E",
+  "poang": "4/0/0",
+  "t": "<p>Omvandla.</p><p>a) \\(\\frac{7\\pi}{6}\\) rad till grader<br><span style=\"display:inline-block;height:0.32rem\"></span>b) \\(\\frac{5\\pi}{3}\\) rad till grader<br><span style=\"display:inline-block;height:0.32rem\"></span>c) \\(210^\\circ\\) till radianer<br><span style=\"display:inline-block;height:0.32rem\"></span>d) \\(330^\\circ\\) till radianer</p>",
+  "s": "<p>Använd sambandet \\(180^\\circ=\\pi\\) rad.</p><p>a) \\(\\frac{7\\pi}{6}\\cdot\\frac{180^\\circ}{\\pi}=\\boxed{210^\\circ}\\).</p><p>b) \\(\\frac{5\\pi}{3}\\cdot\\frac{180^\\circ}{\\pi}=\\boxed{300^\\circ}\\).</p><p>c) \\(210^\\circ\\cdot\\frac{\\pi}{180^\\circ}=\\boxed{7\\pi/6}\\).</p><p>d) \\(330^\\circ\\cdot\\frac{\\pi}{180^\\circ}=\\boxed{11\\pi/6}\\).</p>",
+  "familj": "radianer_omvandling_rutin_7"
+},
+{
+  "id": "1.172",
+  "kap": 1,
+  "omr": "radianer",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/2/0",
+  "t": "<p>En cirkel har radien 9,0 cm och en cirkelsektor har medelpunktsvinkeln \\(1,4\\) rad.</p><p>a) Bestäm sektorns båglängd.<br><span style=\"display:inline-block;height:0.32rem\"></span>b) Bestäm sektorns area.</p>",
+  "s": "<p><strong>Formler från formelbladet:</strong> När vinkeln mäts i radianer gäller \\(b=vr\\) och \\(A=vr^2/2\\).</p><p>a) \\(b=1,4\\cdot9,0=\\boxed{12,6\\text{ cm}}\\).</p><p>b) \\(A=\\frac{1,4\\cdot9,0^2}{2}=56,7\\). Alltså \\(\\boxed{56,7\\text{ cm}^2}\\).</p>",
+  "familj": "radianer_sektor_tillampning_4"
+},
+{
+  "id": "1.173",
+  "kap": 1,
+  "omr": "radianer",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/2/1",
+  "t": "<p>Ett hjul med radien 0,32 m roterar med 3,5 varv per sekund.</p><p>a) Bestäm hur många radianer hjulet roterar på en sekund.<br><span style=\"display:inline-block;height:0.32rem\"></span>b) Hur långt rör sig en punkt på hjulets kant under en sekund?</p>",
+  "s": "<p>a) Ett varv är \\(2\\pi\\) rad. På en sekund roterar hjulet därför \\(3,5\\cdot2\\pi=\\boxed{7\\pi\\text{ rad}}\\).</p><p>b) På formelbladet finns båglängden \\(b=vr\\). Här är \\(v=7\\pi\\) och \\(r=0,32\\):</p><p>\\[b=7\\pi\\cdot0,32=2,24\\pi\\approx\\boxed{7,04\\text{ m}}.\\]</p>",
+  "familj": "radianer_rotation_hjul_1"
+},
+{
+  "id": "1.174",
+  "kap": 1,
+  "omr": "trig_modeller",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "E",
+  "poang": "3/0/0",
+  "t": "<p>En periodisk storhet beskrivs av</p><p>\\[f(t)=7+3\\sin\\left(\\frac{\\pi}{4}(t-2)\\right).\\]</p><p>Bestäm funktionens</p><p>a) medellinje<br><span style=\"display:inline-block;height:0.32rem\"></span>b) amplitud<br><span style=\"display:inline-block;height:0.32rem\"></span>c) period.</p>",
+  "s": "<p>a) Konstanten utanför sinusdelen är medellinjen: \\(\\boxed{y=7}\\).</p><p>b) Amplituden är \\(\\boxed{3}\\).</p><p>c) För \\(\\sin(kt)\\) är perioden \\(2\\pi/k\\). Här är \\(k=\\pi/4\\), så</p><p>\\[T=\\frac{2\\pi}{\\pi/4}=\\boxed{8}.\\]</p>",
+  "familj": "trig_modell_parametrar_rutin_4"
+},
+{
+  "id": "1.175",
+  "kap": 1,
+  "omr": "trig_modeller",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>En sinusformad modell har största värdet 18 och minsta värdet 6. Perioden är 10 tidsenheter. Vid \\(t=2\\) passerar grafen sin medellinje i stigande riktning.</p><p>Bestäm en möjlig modell på formen</p><p>\\[f(t)=m+A\\sin(k(t-c)).\\]</p>",
+  "s": "<p>Medellinjen är</p><p>\\[m=\\frac{18+6}{2}=12.\\]</p><p>Amplituden är</p><p>\\[A=\\frac{18-6}{2}=6.\\]</p><p>Perioden 10 ger \\(k=2\\pi/10=\\pi/5\\).</p><p>När en sinuskurva passerar medellinjen i stigande riktning kan argumentet sättas till 0. Det sker vid \\(t=2\\), alltså kan \\(c=2\\).</p><p>En möjlig modell är därför</p><p>\\[\\boxed{f(t)=12+6\\sin\\left(\\frac{\\pi}{5}(t-2)\\right)}.\\]</p>",
+  "familj": "trig_modell_bestam_funktion_4"
+},
+{
+  "id": "1.176",
+  "kap": 1,
+  "omr": "trig_modeller",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>Höjden \\(h\\) meter för en gondol i ett pariserhjul modelleras av</p><p>\\[h(t)=18-14\\cos\\left(\\frac{\\pi}{20}t\\right),\\qquad 0\\le t\\le40,\\]</p><p>där \\(t\\) mäts i sekunder.</p><p>Bestäm de tider under det första varvet då gondolen är 25 m över marken. Svara med en decimals noggrannhet.</p>",
+  "s": "<p>Sätt \\(h(t)=25\\):</p><p>\\[18-14\\cos\\left(\\frac{\\pi t}{20}\\right)=25.\\]</p><p>Då fås</p><p>\\[\\cos\\left(\\frac{\\pi t}{20}\\right)=-\\frac12.\\]</p><p>Under ett varv är vinklarna \\(2\\pi/3\\) och \\(4\\pi/3\\). Alltså</p><p>\\[\\frac{\\pi t}{20}=\\frac{2\\pi}{3}\\Rightarrow t=\\frac{40}{3}\\approx13,3\\]</p><p>och</p><p>\\[\\frac{\\pi t}{20}=\\frac{4\\pi}{3}\\Rightarrow t=\\frac{80}{3}\\approx26,7.\\]</p><p>Gondolen är på 25 m höjd efter \\(\\boxed{13,3\\text{ s}}\\) och \\(\\boxed{26,7\\text{ s}}\\).</p>",
+  "familj": "trig_modell_pariserhjul_4"
+},
+{
+  "id": "1.177",
+  "kap": 1,
+  "omr": "trig_modeller",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "A",
+  "poang": "0/1/3",
+  "t": "<p>Två sensorer registrerar samma periodiska rörelse. Modellerna är</p><p>\\[f(t)=4+2\\sin\\left(\\frac{\\pi}{3}t\\right)\\]</p><p>och</p><p>\\[g(t)=4+2\\cos\\left(\\frac{\\pi}{3}t\\right).\\]</p><p>Bestäm den första positiva tiden då sensorerna visar samma värde. Förklara också varför samma tidsmellanrum återkommer mellan sådana tillfällen.</p>",
+  "s": "<p>Vi löser \\(f(t)=g(t)\\):</p><p>\\[\\sin\\left(\\frac{\\pi t}{3}\\right)=\\cos\\left(\\frac{\\pi t}{3}\\right).\\]</p><p>Där båda leden är definierade kan vi skriva \\(\\tan u=1\\), där \\(u=\\pi t/3\\). Då</p><p>\\[u=\\frac{\\pi}{4}+n\\pi.\\]</p><p>Alltså</p><p>\\[\\frac{\\pi t}{3}=\\frac{\\pi}{4}+n\\pi\\Rightarrow t=\\frac34+3n.\\]</p><p>Den första positiva tiden är \\(\\boxed{t=0,75}\\).</p><p>Tangens har perioden \\(\\pi\\), vilket här motsvarar \\(3\\) tidsenheter. Därför återkommer samma tidsmellanrum på 3 tidsenheter.</p>",
+  "familj": "trig_modell_tva_signaler_1"
+},
+{
+  "id": "1.178",
+  "kap": 1,
+  "omr": "trig_formler",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/2/1",
+  "t": "<p>Skriv uttrycket</p><p>\\[3\\sin x+4\\cos x\\]</p><p>på formen \\(c\\sin(x+v)\\), där \\(c>0\\) och \\(0<v<\\pi/2\\). Bestäm \\(c\\) och \\(v\\).</p>",
+  "s": "<p><strong>Formel från formelbladet:</strong> \\(a\\sin x+b\\cos x=c\\sin(x+v)\\), där \\(c=\\sqrt{a^2+b^2}\\) och \\(\\tan v=b/a\\).</p><p>Här är \\(a=3\\) och \\(b=4\\). Därför</p><p>\\[c=\\sqrt{3^2+4^2}=5.\\]</p><p>Vidare</p><p>\\[\\tan v=\\frac43\\Rightarrow v=\\arctan\\frac43\\approx0,927\\text{ rad}.\\]</p><p>Alltså</p><p>\\[\\boxed{3\\sin x+4\\cos x=5\\sin(x+0,927)}\\]</p><p>eller exakt \\(v=\\arctan(4/3)\\).</p>",
+  "familj": "sincos_kombination_formelblad_4"
+},
+{
+  "id": "2.174",
+  "kap": 2,
+  "omr": "kedjeregel_sammansatta",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "E",
+  "poang": "4/0/0",
+  "t": "<p>Derivera.</p><p>a) \\(\\ln(1+x^2)\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>b) \\(e^{\\sin x}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>c) \\((2+e^x)^4\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>d) \\(\\cos(x^3)\\)</p>",
+  "s": "<p><strong>Formel från formelbladet:</strong> Kedjeregeln.</p><p>a) \\(\\boxed{\\frac{2x}{1+x^2}}\\).</p><p>b) \\(\\boxed{e^{\\sin x}\\cos x}\\).</p><p>c) \\(\\boxed{4(2+e^x)^3e^x}\\).</p><p>d) \\(\\boxed{-3x^2\\sin(x^3)}\\).</p>",
+  "familj": "kedjeregel_blandad_rutin_8"
+},
+{
+  "id": "2.175",
+  "kap": 2,
+  "omr": "kedjeregel_sammansatta",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/2/0",
+  "t": "<p>Kurvan \\(y=\\ln(2x+1)\\) har en tangent där \\(x=1\\).</p><p>Bestäm tangentens ekvation.</p>",
+  "s": "<p>Funktionen är \\(f(x)=\\ln(2x+1)\\). Med kedjeregeln:</p><p>\\[f'(x)=\\frac{2}{2x+1}.\\]</p><p>Vid \\(x=1\\) är \\(f(1)=\\ln3\\) och \\(f'(1)=2/3\\).</p><p>Tangentens ekvation blir</p><p>\\[y-\\ln3=\\frac23(x-1).\\]</p><p>Alltså till exempel</p><p>\\[\\boxed{y=\\frac23x+\\ln3-\\frac23}.\\]</p>",
+  "familj": "kedjeregel_log_tangent_1"
+},
+{
+  "id": "2.176",
+  "kap": 2,
+  "omr": "deriveringsregler",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/2/0",
+  "t": "<p>Derivera och förenkla.</p><p>\\[f(x)=x^2e^{3x}.\\]</p>",
+  "s": "<p><strong>Formler från formelbladet:</strong> Produktregeln och kedjeregeln.</p><p>\\[f'(x)=2xe^{3x}+x^2\\cdot3e^{3x}.\\]</p><p>Bryt ut \\(xe^{3x}\\):</p><p>\\[\\boxed{f'(x)=xe^{3x}(2+3x)}.\\]</p>",
+  "familj": "produkt_kedja_exp_3"
+},
+{
+  "id": "2.177",
+  "kap": 2,
+  "omr": "deriveringsregler",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/2/1",
+  "t": "<p>Derivera</p><p>\\[f(x)=\\frac{\\sin x}{1+\\cos x}.\\]</p><p>Förenkla derivatan så långt som möjligt där funktionen är definierad.</p>",
+  "s": "<p><strong>Formel från formelbladet:</strong> Kvotregeln.</p><p>\\[f'(x)=\\frac{\\cos x(1+\\cos x)-\\sin x(-\\sin x)}{(1+\\cos x)^2}.\\]</p><p>Täljaren blir</p><p>\\[\\cos x+\\cos^2x+\\sin^2x=1+\\cos x\\]</p><p>med trigonometriska ettan. Därför</p><p>\\[f'(x)=\\frac{1+\\cos x}{(1+\\cos x)^2}=\\boxed{\\frac{1}{1+\\cos x}}.\\]</p><p>Förenklingen gäller där ursprungsfunktionen är definierad, alltså där \\(1+\\cos x\\ne0\\).</p>",
+  "familj": "kvotregel_trig_forenkling_2"
+},
+{
+  "id": "2.178",
+  "kap": 2,
+  "omr": "grafer_asymptoter",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>Funktionen ges av</p><p>\\[f(x)=2x-1+\\frac{6}{x+3}.\\]</p><p>a) Bestäm funktionens vertikala asymptot.<br><span style=\"display:inline-block;height:0.32rem\"></span>b) Bestäm funktionens linjära asymptot.<br><span style=\"display:inline-block;height:0.32rem\"></span>c) Förklara hur uttryckets form gör att asymptoterna kan läsas av.</p>",
+  "s": "<p>a) Nämnaren i bråket blir 0 när \\(x=-3\\). Där finns den vertikala asymptoten \\(\\boxed{x=-3}\\).</p><p>b) När \\(|x|\\) blir stort går \\(6/(x+3)\\) mot 0. Då närmar sig \\(f(x)\\) linjen \\(2x-1\\). Den linjära asymptoten är därför \\(\\boxed{y=2x-1}\\).</p><p>c) Funktionen är redan skriven som en linjär del plus en term som går mot 0 för stora \\(|x|\\). Samtidigt visar nämnaren direkt var den vertikala asymptoten finns.</p>",
+  "familj": "asymptoter_form_linjart_plus_braak_3"
+},
+{
+  "id": "3.159",
+  "kap": 3,
+  "omr": "sannolikhetsintegraler",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "E",
+  "poang": "2/0/0",
+  "t": "<p>Figuren visar en normalfördelningskurva. Det markerade området ligger mellan \\(\\mu-\\sigma\\) och \\(\\mu+\\sigma\\).</p><span class=\"fig\"><svg width=\"500\" height=\"290\" viewBox=\"0 0 500 290\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Normalfördelningskurva med markerade standardavvikelser\">\n<rect x=\"1\" y=\"1\" width=\"498\" height=\"288\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"133.5\" y1=\"45\" x2=\"133.5\" y2=\"225\" stroke=\"#E7EBEE\" stroke-width=\"1\"/><line x1=\"195.5\" y1=\"45\" x2=\"195.5\" y2=\"225\" stroke=\"#E7EBEE\" stroke-width=\"1\"/><line x1=\"257.5\" y1=\"45\" x2=\"257.5\" y2=\"225\" stroke=\"#E7EBEE\" stroke-width=\"1\"/><line x1=\"319.5\" y1=\"45\" x2=\"319.5\" y2=\"225\" stroke=\"#E7EBEE\" stroke-width=\"1\"/><line x1=\"381.5\" y1=\"45\" x2=\"381.5\" y2=\"225\" stroke=\"#E7EBEE\" stroke-width=\"1\"/>\n<polygon points=\"195.5,225.0 196.0,130.2 199.0,125.7 202.0,121.2 205.0,116.7 208.0,112.3 211.0,108.0 214.0,103.8 217.0,99.8 220.0,95.9 223.0,92.2 226.0,88.8 229.0,85.5 232.0,82.6 235.0,79.9 238.0,77.5 241.0,75.4 244.0,73.6 247.0,72.2 250.0,71.1 253.0,70.4 256.0,70.0 259.0,70.0 262.0,70.4 265.0,71.1 268.0,72.2 271.0,73.6 274.0,75.4 277.0,77.5 280.0,79.9 283.0,82.6 286.0,85.5 289.0,88.8 292.0,92.2 295.0,95.9 298.0,99.8 301.0,103.8 304.0,108.0 307.0,112.3 310.0,116.7 313.0,121.2 316.0,125.7 319.0,130.2 319.5,225.0\" fill=\"#DCEFF3\" fill-opacity=\"0.75\" stroke=\"none\"/>\n<line x1=\"45\" y1=\"225\" x2=\"472\" y2=\"225\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<polyline points=\"55.0,224.3 58.0,224.1 61.0,224.0 64.0,223.8 67.0,223.6 70.0,223.4 73.0,223.1 76.0,222.9 79.0,222.5 82.0,222.2 85.0,221.8 88.0,221.3 91.0,220.8 94.0,220.2 97.0,219.6 100.0,218.8 103.0,218.1 106.0,217.2 109.0,216.2 112.0,215.1 115.0,214.0 118.0,212.7 121.0,211.3 124.0,209.7 127.0,208.1 130.0,206.3 133.0,204.4 136.0,202.3 139.0,200.0 142.0,197.7 145.0,195.1 148.0,192.4 151.0,189.6 154.0,186.5 157.0,183.3 160.0,180.0 163.0,176.5 166.0,172.8 169.0,169.0 172.0,165.1 175.0,161.0 178.0,156.9 181.0,152.6 184.0,148.2 187.0,143.8 190.0,139.3 193.0,134.8 196.0,130.2 199.0,125.7 202.0,121.2 205.0,116.7 208.0,112.3 211.0,108.0 214.0,103.8 217.0,99.8 220.0,95.9 223.0,92.2 226.0,88.8 229.0,85.5 232.0,82.6 235.0,79.9 238.0,77.5 241.0,75.4 244.0,73.6 247.0,72.2 250.0,71.1 253.0,70.4 256.0,70.0 259.0,70.0 262.0,70.4 265.0,71.1 268.0,72.2 271.0,73.6 274.0,75.4 277.0,77.5 280.0,79.9 283.0,82.6 286.0,85.5 289.0,88.8 292.0,92.2 295.0,95.9 298.0,99.8 301.0,103.8 304.0,108.0 307.0,112.3 310.0,116.7 313.0,121.2 316.0,125.7 319.0,130.2 322.0,134.8 325.0,139.3 328.0,143.8 331.0,148.2 334.0,152.6 337.0,156.9 340.0,161.0 343.0,165.1 346.0,169.0 349.0,172.8 352.0,176.5 355.0,180.0 358.0,183.3 361.0,186.5 364.0,189.6 367.0,192.4 370.0,195.1 373.0,197.7 376.0,200.0 379.0,202.3 382.0,204.4 385.0,206.3 388.0,208.1 391.0,209.7 394.0,211.3 397.0,212.7 400.0,214.0 403.0,215.1 406.0,216.2 409.0,217.2 412.0,218.1 415.0,218.8 418.0,219.6 421.0,220.2 424.0,220.8 427.0,221.3 430.0,221.8 433.0,222.2 436.0,222.5 439.0,222.9 442.0,223.1 445.0,223.4 448.0,223.6 451.0,223.8 454.0,224.0 457.0,224.1 460.0,224.3\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n<text x=\"133.5\" y=\"247\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">μ-2σ</text><text x=\"195.5\" y=\"247\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">μ-σ</text><text x=\"257.5\" y=\"247\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">μ</text><text x=\"319.5\" y=\"247\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">μ+σ</text><text x=\"381.5\" y=\"247\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">μ+2σ</text>\n</svg></span><p>Ungefär hur stor andel av observationerna ligger i det markerade området?</p>",
+  "s": "<p>På formelbladets normalfördelningskurva framgår att området från \\(\\mu-\\sigma\\) till \\(\\mu\\) är cirka 34,1 % och lika stort på andra sidan.</p><p>\\[34,1\\%+34,1\\%=\\boxed{68,2\\%}.\\]</p>",
+  "familj": "normalfordelning_en_sigma_1"
+},
+{
+  "id": "3.160",
+  "kap": 3,
+  "omr": "sannolikhetsintegraler",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/2/0",
+  "t": "<p>En stor grupp mätvärden är ungefär normalfördelad med medelvärdet 50 och standardavvikelsen 4. Gruppen innehåller 1 200 mätvärden.</p><p>Ungefär hur många värden ligger mellan 46 och 58?</p>",
+  "s": "<p>Här är \\(46=\\mu-\\sigma\\) och \\(58=\\mu+2\\sigma\\).</p><p>På formelbladets normalfördelningskurva motsvarar området från \\(\\mu-\\sigma\\) till \\(\\mu+2\\sigma\\)</p><p>\\[34,1\\%+34,1\\%+13,6\\%=81,8\\%.\\]</p><p>Antalet blir ungefär</p><p>\\[0,818\\cdot1200=981,6.\\]</p><p>Alltså ungefär \\(\\boxed{982}\\) mätvärden.</p>",
+  "familj": "normalfordelning_antal_osymmetriskt_1"
+},
+{
+  "id": "3.161",
+  "kap": 3,
+  "omr": "sannolikhetsintegraler",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "E",
+  "poang": "1/1/0",
+  "t": "<p>Kurvorna A och B är normalfördelningskurvor med samma medelvärde.</p><span class=\"fig\"><svg width=\"500\" height=\"285\" viewBox=\"0 0 500 285\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Två normalfördelningskurvor med samma medelvärde och olika spridning\">\n<rect x=\"1\" y=\"1\" width=\"498\" height=\"283\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"45\" y1=\"225\" x2=\"472\" y2=\"225\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<line x1=\"258\" y1=\"40\" x2=\"258\" y2=\"225\" stroke=\"#DDE3E6\" stroke-dasharray=\"5 4\"/>\n<polyline points=\"45.0,225.0 48.0,225.0 51.0,225.0 54.0,225.0 57.0,224.9 60.0,224.9 63.0,224.9 66.0,224.9 69.0,224.9 72.0,224.8 75.0,224.8 78.0,224.7 81.0,224.7 84.0,224.6 87.0,224.5 90.0,224.4 93.0,224.3 96.0,224.1 99.0,223.9 102.0,223.7 105.0,223.5 108.0,223.2 111.0,222.8 114.0,222.4 117.0,221.9 120.0,221.3 123.0,220.7 126.0,219.9 129.0,219.1 132.0,218.1 135.0,217.0 138.0,215.7 141.0,214.3 144.0,212.7 147.0,211.0 150.0,209.0 153.0,206.8 156.0,204.4 159.0,201.8 162.0,198.9 165.0,195.7 168.0,192.3 171.0,188.7 174.0,184.8 177.0,180.6 180.0,176.1 183.0,171.4 186.0,166.5 189.0,161.3 192.0,156.0 195.0,150.4 198.0,144.7 201.0,138.8 204.0,132.9 207.0,126.9 210.0,120.9 213.0,114.9 216.0,109.1 219.0,103.3 222.0,97.7 225.0,92.3 228.0,87.2 231.0,82.4 234.0,78.0 237.0,73.9 240.0,70.4 243.0,67.3 246.0,64.7 249.0,62.7 252.0,61.2 255.0,60.3 258.0,60.0 261.0,60.3 264.0,61.2 267.0,62.7 270.0,64.7 273.0,67.3 276.0,70.4 279.0,73.9 282.0,78.0 285.0,82.4 288.0,87.2 291.0,92.3 294.0,97.7 297.0,103.3 300.0,109.1 303.0,114.9 306.0,120.9 309.0,126.9 312.0,132.9 315.0,138.8 318.0,144.7 321.0,150.4 324.0,156.0 327.0,161.3 330.0,166.5 333.0,171.4 336.0,176.1 339.0,180.6 342.0,184.8 345.0,188.7 348.0,192.3 351.0,195.7 354.0,198.9 357.0,201.8 360.0,204.4 363.0,206.8 366.0,209.0 369.0,211.0 372.0,212.7 375.0,214.3 378.0,215.7 381.0,217.0 384.0,218.1 387.0,219.1 390.0,219.9 393.0,220.7 396.0,221.3 399.0,221.9 402.0,222.4 405.0,222.8 408.0,223.2 411.0,223.5 414.0,223.7 417.0,223.9 420.0,224.1 423.0,224.3 426.0,224.4 429.0,224.5 432.0,224.6 435.0,224.7 438.0,224.7 441.0,224.8 444.0,224.8 447.0,224.9 450.0,224.9 453.0,224.9 456.0,224.9 459.0,224.9 462.0,225.0 465.0,225.0 468.0,225.0\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.6\"/>\n<polyline points=\"45.0,221.1 48.0,220.7 51.0,220.2 54.0,219.8 57.0,219.3 60.0,218.8 63.0,218.2 66.0,217.6 69.0,216.9 72.0,216.2 75.0,215.5 78.0,214.7 81.0,213.8 84.0,212.9 87.0,211.9 90.0,210.9 93.0,209.8 96.0,208.7 99.0,207.5 102.0,206.2 105.0,204.8 108.0,203.4 111.0,201.9 114.0,200.4 117.0,198.8 120.0,197.1 123.0,195.3 126.0,193.5 129.0,191.6 132.0,189.7 135.0,187.7 138.0,185.6 141.0,183.4 144.0,181.2 147.0,179.0 150.0,176.7 153.0,174.3 156.0,171.9 159.0,169.5 162.0,167.0 165.0,164.6 168.0,162.0 171.0,159.5 174.0,156.9 177.0,154.4 180.0,151.8 183.0,149.3 186.0,146.8 189.0,144.3 192.0,141.8 195.0,139.4 198.0,137.0 201.0,134.7 204.0,132.4 207.0,130.2 210.0,128.1 213.0,126.1 216.0,124.1 219.0,122.3 222.0,120.6 225.0,118.9 228.0,117.4 231.0,116.1 234.0,114.8 237.0,113.7 240.0,112.7 243.0,111.9 246.0,111.2 249.0,110.7 252.0,110.3 255.0,110.1 258.0,110.0 261.0,110.1 264.0,110.3 267.0,110.7 270.0,111.2 273.0,111.9 276.0,112.7 279.0,113.7 282.0,114.8 285.0,116.1 288.0,117.4 291.0,118.9 294.0,120.6 297.0,122.3 300.0,124.1 303.0,126.1 306.0,128.1 309.0,130.2 312.0,132.4 315.0,134.7 318.0,137.0 321.0,139.4 324.0,141.8 327.0,144.3 330.0,146.8 333.0,149.3 336.0,151.8 339.0,154.4 342.0,156.9 345.0,159.5 348.0,162.0 351.0,164.6 354.0,167.0 357.0,169.5 360.0,171.9 363.0,174.3 366.0,176.7 369.0,179.0 372.0,181.2 375.0,183.4 378.0,185.6 381.0,187.7 384.0,189.7 387.0,191.6 390.0,193.5 393.0,195.3 396.0,197.1 399.0,198.8 402.0,200.4 405.0,201.9 408.0,203.4 411.0,204.8 414.0,206.2 417.0,207.5 420.0,208.7 423.0,209.8 426.0,210.9 429.0,211.9 432.0,212.9 435.0,213.8 438.0,214.7 441.0,215.5 444.0,216.2 447.0,216.9 450.0,217.6 453.0,218.2 456.0,218.8 459.0,219.3 462.0,219.8 465.0,220.2 468.0,220.7\" fill=\"none\" stroke=\"#268FA3\" stroke-width=\"2.6\"/>\n<text x=\"305\" y=\"85\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#B43123\">A</text>\n<text x=\"355\" y=\"145\" font-family=\"sans-serif\" font-size=\"13\" fill=\"#268FA3\">B</text>\n<text x=\"258\" y=\"246\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">μ</text>\n</svg></span><p>Vilken fördelning har störst standardavvikelse? Motivera kort.</p>",
+  "s": "<p>Kurva B är bredare och lägre. När standardavvikelsen är större sprids värdena mer kring medelvärdet.</p><p>Därför har \\(\\boxed{B}\\) störst standardavvikelse.</p>",
+  "familj": "normalfordelning_jamfor_sigma_1"
+},
+{
+  "id": "3.162",
+  "kap": 3,
+  "omr": "sannolikhetsintegraler",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/2/1",
+  "t": "<p>En normalfördelad storhet har medelvärdet \\(\\mu=70\\) och standardavvikelsen \\(\\sigma=5\\).</p><span class=\"fig\"><svg width=\"500\" height=\"290\" viewBox=\"0 0 500 290\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Normalfördelningskurva med markerade standardavvikelser\">\n<rect x=\"1\" y=\"1\" width=\"498\" height=\"288\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"133.5\" y1=\"45\" x2=\"133.5\" y2=\"225\" stroke=\"#E7EBEE\" stroke-width=\"1\"/><line x1=\"195.5\" y1=\"45\" x2=\"195.5\" y2=\"225\" stroke=\"#E7EBEE\" stroke-width=\"1\"/><line x1=\"257.5\" y1=\"45\" x2=\"257.5\" y2=\"225\" stroke=\"#E7EBEE\" stroke-width=\"1\"/><line x1=\"319.5\" y1=\"45\" x2=\"319.5\" y2=\"225\" stroke=\"#E7EBEE\" stroke-width=\"1\"/><line x1=\"381.5\" y1=\"45\" x2=\"381.5\" y2=\"225\" stroke=\"#E7EBEE\" stroke-width=\"1\"/>\n<polygon points=\"195.5,225.0 196.0,130.2 199.0,125.7 202.0,121.2 205.0,116.7 208.0,112.3 211.0,108.0 214.0,103.8 217.0,99.8 220.0,95.9 223.0,92.2 226.0,88.8 229.0,85.5 232.0,82.6 235.0,79.9 238.0,77.5 241.0,75.4 244.0,73.6 247.0,72.2 250.0,71.1 253.0,70.4 256.0,70.0 259.0,70.0 262.0,70.4 265.0,71.1 268.0,72.2 271.0,73.6 274.0,75.4 277.0,77.5 280.0,79.9 283.0,82.6 286.0,85.5 289.0,88.8 292.0,92.2 295.0,95.9 298.0,99.8 301.0,103.8 304.0,108.0 307.0,112.3 310.0,116.7 313.0,121.2 316.0,125.7 319.0,130.2 322.0,134.8 325.0,139.3 328.0,143.8 331.0,148.2 334.0,152.6 337.0,156.9 340.0,161.0 343.0,165.1 346.0,169.0 349.0,172.8 352.0,176.5 355.0,180.0 358.0,183.3 361.0,186.5 364.0,189.6 367.0,192.4 370.0,195.1 373.0,197.7 376.0,200.0 379.0,202.3 381.5,225.0\" fill=\"#DCEFF3\" fill-opacity=\"0.75\" stroke=\"none\"/>\n<line x1=\"45\" y1=\"225\" x2=\"472\" y2=\"225\" stroke=\"#2B2527\" stroke-width=\"1.6\"/>\n<polyline points=\"55.0,224.3 58.0,224.1 61.0,224.0 64.0,223.8 67.0,223.6 70.0,223.4 73.0,223.1 76.0,222.9 79.0,222.5 82.0,222.2 85.0,221.8 88.0,221.3 91.0,220.8 94.0,220.2 97.0,219.6 100.0,218.8 103.0,218.1 106.0,217.2 109.0,216.2 112.0,215.1 115.0,214.0 118.0,212.7 121.0,211.3 124.0,209.7 127.0,208.1 130.0,206.3 133.0,204.4 136.0,202.3 139.0,200.0 142.0,197.7 145.0,195.1 148.0,192.4 151.0,189.6 154.0,186.5 157.0,183.3 160.0,180.0 163.0,176.5 166.0,172.8 169.0,169.0 172.0,165.1 175.0,161.0 178.0,156.9 181.0,152.6 184.0,148.2 187.0,143.8 190.0,139.3 193.0,134.8 196.0,130.2 199.0,125.7 202.0,121.2 205.0,116.7 208.0,112.3 211.0,108.0 214.0,103.8 217.0,99.8 220.0,95.9 223.0,92.2 226.0,88.8 229.0,85.5 232.0,82.6 235.0,79.9 238.0,77.5 241.0,75.4 244.0,73.6 247.0,72.2 250.0,71.1 253.0,70.4 256.0,70.0 259.0,70.0 262.0,70.4 265.0,71.1 268.0,72.2 271.0,73.6 274.0,75.4 277.0,77.5 280.0,79.9 283.0,82.6 286.0,85.5 289.0,88.8 292.0,92.2 295.0,95.9 298.0,99.8 301.0,103.8 304.0,108.0 307.0,112.3 310.0,116.7 313.0,121.2 316.0,125.7 319.0,130.2 322.0,134.8 325.0,139.3 328.0,143.8 331.0,148.2 334.0,152.6 337.0,156.9 340.0,161.0 343.0,165.1 346.0,169.0 349.0,172.8 352.0,176.5 355.0,180.0 358.0,183.3 361.0,186.5 364.0,189.6 367.0,192.4 370.0,195.1 373.0,197.7 376.0,200.0 379.0,202.3 382.0,204.4 385.0,206.3 388.0,208.1 391.0,209.7 394.0,211.3 397.0,212.7 400.0,214.0 403.0,215.1 406.0,216.2 409.0,217.2 412.0,218.1 415.0,218.8 418.0,219.6 421.0,220.2 424.0,220.8 427.0,221.3 430.0,221.8 433.0,222.2 436.0,222.5 439.0,222.9 442.0,223.1 445.0,223.4 448.0,223.6 451.0,223.8 454.0,224.0 457.0,224.1 460.0,224.3\" fill=\"none\" stroke=\"#B43123\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n<text x=\"133.5\" y=\"247\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">μ-2σ</text><text x=\"195.5\" y=\"247\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">μ-σ</text><text x=\"257.5\" y=\"247\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">μ</text><text x=\"319.5\" y=\"247\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">μ+σ</text><text x=\"381.5\" y=\"247\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">μ+2σ</text>\n</svg></span><p>Bestäm med hjälp av formelbladets normalfördelningskurva en ungefärlig sannolikhet för</p><p>\\[65\\le X\\le80.\\]</p>",
+  "s": "<p>Gränserna är \\(65=\\mu-\\sigma\\) och \\(80=\\mu+2\\sigma\\).</p><p>Det aktuella området består av tre delar på formelbladet:</p><p>\\[34,1\\%+34,1\\%+13,6\\%=\\boxed{81,8\\%}.\\]</p><p>Alltså är sannolikheten ungefär \\(\\boxed{0,818}\\).</p>",
+  "familj": "normalfordelning_intervall_formelblad_1"
+},
+{
+  "id": "3.163",
+  "kap": 3,
+  "omr": "area_integraler",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/2/1",
+  "t": "<p>Kurvorna \\(y=x^2\\) och \\(y=4-x^2\\) begränsar ett område.</p><p>Bestäm områdets area.</p>",
+  "s": "<p>Skärningspunkterna fås av</p><p>\\[x^2=4-x^2\\Rightarrow2x^2=4\\Rightarrow x=\\pm\\sqrt2.\\]</p><p>På intervallet ligger \\(4-x^2\\) ovanför \\(x^2\\). Därför</p><p>\\[A=\\int_{-\\sqrt2}^{\\sqrt2}(4-2x^2)\\,dx.\\]</p><p>Integranden är jämn, så man kan också skriva</p><p>\\[A=2\\int_0^{\\sqrt2}(4-2x^2)\\,dx=2\\left[4x-\\frac{2x^3}{3}\\right]_0^{\\sqrt2}.\\]</p><p>Eftersom \\((\\sqrt2)^3=2\\sqrt2\\) fås</p><p>\\[A=2\\left(4\\sqrt2-\\frac{4\\sqrt2}{3}\\right)=\\boxed{\\frac{16\\sqrt2}{3}}.\\]</p>",
+  "familj": "area_mellan_tva_parabler_3"
+},
+{
+  "id": "3.164",
+  "kap": 3,
+  "omr": "rotationsvolymer",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>Området i första kvadranten begränsas av \\(x=y^2\\), y-axeln och linjen \\(y=2\\). Området roteras kring y-axeln.</p><p>Bestäm rotationskroppens volym.</p>",
+  "s": "<p><strong>Formel från formelbladet:</strong> Vid rotation kring y-axeln gäller \\(V=\\pi\\int_a^b x^2\\,dy\\).</p><p>Här är \\(x=y^2\\), så</p><p>\\[V=\\pi\\int_0^2(y^2)^2\\,dy=\\pi\\int_0^2y^4\\,dy.\\]</p><p>\\[V=\\pi\\left[\\frac{y^5}{5}\\right]_0^2=\\boxed{\\frac{32\\pi}{5}}.\\]</p>",
+  "familj": "rotation_yaxel_yvariabel_4"
+},
+{
+  "id": "4.165",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "E",
+  "poang": "4/0/0",
+  "t": "<p>Utför polynomdivision.</p><p>a) \\(\\frac{x^2+5x+6}{x+2}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>b) \\(\\frac{x^3-8}{x-2}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>c) \\(\\frac{2x^3+x^2-8x-4}{x+2}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>d) \\(\\frac{3x^3-10x^2+x+6}{x-3}\\)</p>",
+  "s": "<p>a) \\(x^2+5x+6=(x+2)(x+3)\\), alltså \\(\\boxed{x+3}\\).</p><p>b) Divisionen ger \\(\\boxed{x^2+2x+4}\\).</p><p>c) Divisionen ger \\(\\boxed{2x^2-3x-2}\\).</p><p>d) Divisionen ger \\(\\boxed{3x^2-x-2}\\).</p><p>I samtliga fall är resten 0.</p>",
+  "familj": "polynomdivision_mangdtraning_4"
+},
+{
+  "id": "4.166",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "E",
+  "poang": "2/1/0",
+  "t": "<p>Figuren visar en polynomdivision. Fyll i rutorna A–F och ange kvoten.</p><span class=\"fig\"><svg width=\"590\" height=\"345\" viewBox=\"0 0 590 345\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Polynomdivision med tomma rutor att fylla i\">\n<rect x=\"1\" y=\"1\" width=\"588\" height=\"343\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<text x=\"65\" y=\"77\" font-family=\"serif\" font-size=\"19\">x + 2</text>\n<path d=\"M130 52 H545 M130 52 V83\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"1.8\"/>\n<text x=\"150\" y=\"78\" font-family=\"serif\" font-size=\"19\">2x³ + 3x² - 8x - 12</text>\n<text x=\"183\" y=\"34\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">A</text><rect x=\"165\" y=\"38\" width=\"70\" height=\"28\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<text x=\"288\" y=\"34\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">B</text><rect x=\"270\" y=\"38\" width=\"70\" height=\"28\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<text x=\"393\" y=\"34\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">C</text><rect x=\"375\" y=\"38\" width=\"70\" height=\"28\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<text x=\"143\" y=\"118\" font-family=\"serif\" font-size=\"18\">-</text><text x=\"175\" y=\"111\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">D</text><rect x=\"165\" y=\"92\" width=\"200\" height=\"30\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<line x1=\"150\" y1=\"130\" x2=\"385\" y2=\"130\" stroke=\"#5C575E\"/>\n<text x=\"205\" y=\"158\" font-family=\"serif\" font-size=\"18\">-x² - 8x</text>\n<text x=\"195\" y=\"199\" font-family=\"serif\" font-size=\"18\">-</text><text x=\"230\" y=\"191\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">E</text><rect x=\"220\" y=\"173\" width=\"190\" height=\"30\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<line x1=\"205\" y1=\"211\" x2=\"430\" y2=\"211\" stroke=\"#5C575E\"/>\n<text x=\"275\" y=\"239\" font-family=\"serif\" font-size=\"18\">-6x - 12</text>\n<text x=\"265\" y=\"279\" font-family=\"serif\" font-size=\"18\">-</text><text x=\"300\" y=\"271\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#5C575E\">F</text><rect x=\"290\" y=\"253\" width=\"175\" height=\"30\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<line x1=\"275\" y1=\"291\" x2=\"480\" y2=\"291\" stroke=\"#5C575E\"/>\n<text x=\"370\" y=\"321\" text-anchor=\"middle\" font-family=\"serif\" font-size=\"18\">0</text>\n</svg></span>",
+  "s": "<p>Första termen i kvoten fås av \\(2x^3/x=2x^2\\). Alltså är A \\(2x^2\\).</p><p>Multiplicera: \\(2x^2(x+2)=2x^3+4x^2\\). Det är D.</p><p>Efter subtraktionen återstår \\(-x^2-8x\\). Nästa kvotterm är \\(-x\\), alltså B \\(-x\\). Produkten blir \\(-x^2-2x\\), vilket är E.</p><p>Efter nästa subtraktion återstår \\(-6x-12\\). Sista kvottermen är \\(-6\\), alltså C \\(-6\\), och F är \\(-6x-12\\).</p><p>Kvoten är därför \\(\\boxed{2x^2-x-6}\\) och resten är 0.</p>",
+  "familj": "polynomdivision_algoritm_luckor_svg_1"
+},
+{
+  "id": "4.167",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "E",
+  "poang": "4/0/0",
+  "t": "<p>Utför polynomdivision och ange både kvot och rest.</p><p>a) \\(\\frac{x^2+2x+5}{x+1}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>b) \\(\\frac{2x^3-3x+1}{x-1}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>c) \\(\\frac{x^3+x^2+x+1}{x+2}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>d) \\(\\frac{3x^2+4x-2}{x-2}\\)</p>",
+  "s": "<p>a) Kvot \\(x+1\\), rest 4.</p><p>b) Kom ihåg den saknade \\(x^2\\)-termen: \\(2x^3+0x^2-3x+1\\). Kvot \\(2x^2+2x-1\\), rest 0.</p><p>c) Kvot \\(x^2-x+3\\), rest \\(-5\\).</p><p>d) Kvot \\(3x+10\\), rest 18.</p>",
+  "familj": "polynomdivision_kvot_rest_4"
+},
+{
+  "id": "4.168",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "E",
+  "poang": "3/0/0",
+  "t": "<p>Skriv resultatet på formen \\(P(x)=(x-a)Q(x)+r\\).</p><p>a) Dividera \\(x^3+4x^2+x-6\\) med \\(x-1\\).<br><span style=\"display:inline-block;height:0.32rem\"></span>b) Dividera \\(x^3-2x^2+5\\) med \\(x+1\\).<br><span style=\"display:inline-block;height:0.32rem\"></span>c) Dividera \\(2x^2-3x+7\\) med \\(x-2\\).</p>",
+  "s": "<p>a) Kvoten är \\(x^2+5x+6\\) och resten 0:</p><p>\\[\\boxed{x^3+4x^2+x-6=(x-1)(x^2+5x+6)}.\\]</p><p>b) Skriv först \\(x^3-2x^2+0x+5\\). Division ger kvoten \\(x^2-3x+3\\) och resten 2:</p><p>\\[\\boxed{P=(x+1)(x^2-3x+3)+2}.\\]</p><p>c) Kvoten är \\(2x+1\\) och resten 9:</p><p>\\[\\boxed{P=(x-2)(2x+1)+9}.\\]</p>",
+  "familj": "polynomdivision_identitet_kvot_rest_1"
+},
+{
+  "id": "4.169",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>Polynomet är</p><p>\\[P(x)=x^3-3x^2-4x+12.\\]</p><p>Undersök med polynomdivision vilka av \\(x-2\\), \\(x+1\\) och \\(x-3\\) som är faktorer till \\(P(x)\\).</p>",
+  "s": "<p>Dividera med varje uttryck.</p><p>Med \\(x-2\\) blir resten 0, så \\(x-2\\) är en faktor.</p><p>Med \\(x+1\\) blir resten 12, så \\(x+1\\) är inte en faktor.</p><p>Med \\(x-3\\) blir resten 0, så \\(x-3\\) är en faktor.</p><p>Alltså är \\(\\boxed{x-2\\text{ och }x-3}\\) faktorer.</p>",
+  "familj": "polynomdivision_faktortest_2"
+},
+{
+  "id": "4.170",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>Polynomet</p><p>\\[P(x)=x^3+ax^2-5x-6\\]</p><p>är delbart med \\(x-2\\).</p><p>a) Bestäm \\(a\\).<br><span style=\"display:inline-block;height:0.32rem\"></span>b) Utför därefter divisionen.</p>",
+  "s": "<p>a) Eftersom divisionen ska ge resten 0 måste \\(P(2)=0\\):</p><p>\\[8+4a-10-6=0\\Rightarrow4a-8=0\\Rightarrow\\boxed{a=2}.\\]</p><p>b) Dividera \\(x^3+2x^2-5x-6\\) med \\(x-2\\). Kvoten blir</p><p>\\[\\boxed{x^2+4x+3}.\\]</p>",
+  "familj": "polynomdivision_parameter_faktor_2"
+},
+{
+  "id": "4.171",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "E",
+  "poang": "2/1/0",
+  "t": "<p>Utför polynomdivision.</p><p>a) \\(\\frac{x^4-5x^2+4}{x^2-1}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>b) \\(\\frac{x^4+3x^2+2}{x^2+1}\\)</p>",
+  "s": "<p>a) Första termen blir \\(x^4/x^2=x^2\\). Divisionen ger \\(\\boxed{x^2-4}\\) med rest 0.</p><p>b) Divisionen ger \\(\\boxed{x^2+2}\\) med rest 0.</p>",
+  "familj": "polynomdivision_kvadratisk_namnare_1"
+},
+{
+  "id": "4.172",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "E",
+  "poang": "1/2/0",
+  "t": "<p>Fyll i de tre tomma rutorna i polynomdivisionen.</p><span class=\"fig\"><svg width=\"590\" height=\"315\" viewBox=\"0 0 590 315\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Polynomdivision med kvot och rest där några värden saknas\">\n<rect x=\"1\" y=\"1\" width=\"588\" height=\"313\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<text x=\"65\" y=\"78\" font-family=\"serif\" font-size=\"19\">x - 2</text>\n<path d=\"M130 52 H545 M130 52 V84\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"1.8\"/>\n<text x=\"150\" y=\"79\" font-family=\"serif\" font-size=\"19\">x³ + 2x² - 5x + 1</text>\n<text x=\"190\" y=\"34\" font-family=\"serif\" font-size=\"18\">x² +</text><rect x=\"240\" y=\"15\" width=\"62\" height=\"28\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/><text x=\"311\" y=\"34\" font-family=\"serif\" font-size=\"18\">x +</text><rect x=\"350\" y=\"15\" width=\"62\" height=\"28\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n<text x=\"145\" y=\"116\" font-family=\"serif\" font-size=\"17\">-(x³ - 2x²)</text><line x1=\"150\" y1=\"126\" x2=\"350\" y2=\"126\" stroke=\"#5C575E\"/>\n<text x=\"205\" y=\"154\" font-family=\"serif\" font-size=\"17\">4x² - 5x</text>\n<text x=\"198\" y=\"193\" font-family=\"serif\" font-size=\"17\">-(4x² - 8x)</text><line x1=\"205\" y1=\"203\" x2=\"405\" y2=\"203\" stroke=\"#5C575E\"/>\n<text x=\"275\" y=\"231\" font-family=\"serif\" font-size=\"17\">3x + 1</text>\n<text x=\"267\" y=\"270\" font-family=\"serif\" font-size=\"17\">-(3x - 6)</text><line x1=\"275\" y1=\"280\" x2=\"440\" y2=\"280\" stroke=\"#5C575E\"/>\n<text x=\"360\" y=\"305\" text-anchor=\"middle\" font-family=\"serif\" font-size=\"17\">rest = </text><rect x=\"395\" y=\"286\" width=\"52\" height=\"24\" rx=\"4\" fill=\"#fff\" stroke=\"#268FA3\" stroke-width=\"1.5\"/>\n</svg></span><p>Ange sedan kvot och rest.</p>",
+  "s": "<p>Först: \\(x^3/x=x^2\\). Efter första subtraktionen fås \\(4x^2-5x\\), så nästa kvotterm är \\(4x\\). Efter nästa subtraktion återstår \\(3x+1\\), så sista kvottermen är 3.</p><p>Produkten \\(3(x-2)=3x-6\\) lämnar resten \\(1-(-6)=7\\).</p><p>Rutorna ska alltså innehålla \\(4\\), \\(3\\) och \\(7\\).</p><p>\\[\\boxed{\\frac{x^3+2x^2-5x+1}{x-2}=x^2+4x+3+\\frac{7}{x-2}}.\\]</p>",
+  "familj": "polynomdivision_algoritm_luckor_svg_2"
+},
+{
+  "id": "4.173",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/2/1",
+  "t": "<p>Polynomet \\(P(x)=x^3-2x^2-5x+6\\) har nollstället \\(x=1\\).</p><p>Använd polynomdivision för att faktorisera \\(P(x)\\) fullständigt.</p>",
+  "s": "<p>Eftersom \\(x=1\\) är ett nollställe är \\(x-1\\) en faktor. Dividera:</p><p>\\[\\frac{x^3-2x^2-5x+6}{x-1}=x^2-x-6.\\]</p><p>Andragradspolynomet faktoriseras:</p><p>\\[x^2-x-6=(x-3)(x+2).\\]</p><p>Alltså</p><p>\\[\\boxed{P(x)=(x-1)(x-3)(x+2)}.\\]</p>",
+  "familj": "polynomdivision_faktorisering_kand_rot_4"
+},
+{
+  "id": "4.174",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "E",
+  "poang": "3/0/0",
+  "t": "<p>Utför divisionerna. Skriv in saknade termer med koefficienten 0 innan du börjar.</p><p>a) \\(\\frac{x^3-7x+6}{x-1}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>b) \\(\\frac{2x^3+5x-3}{x+2}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>c) \\(\\frac{x^4-5x^2+4}{x-1}\\)</p>",
+  "s": "<p>a) Skriv \\(x^3+0x^2-7x+6\\). Kvoten blir \\(\\boxed{x^2+x-6}\\), rest 0.</p><p>b) Skriv \\(2x^3+0x^2+5x-3\\). Kvoten blir \\(2x^2-4x+13\\) och resten \\(-29\\).</p><p>c) Skriv \\(x^4+0x^3-5x^2+0x+4\\). Kvoten blir \\(x^3+x^2-4x-4\\), rest 0.</p>",
+  "familj": "polynomdivision_saknade_termer_1"
+},
+{
+  "id": "4.175",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/2/0",
+  "t": "<p>Vid en polynomdivision är divisorn \\(x-2\\), kvoten \\(3x^2+x-4\\) och resten 5.</p><p>Bestäm polynomet \\(P(x)\\) som dividerades.</p>",
+  "s": "<p>Divisionen innebär</p><p>\\[P(x)=(x-2)(3x^2+x-4)+5.\\]</p><p>Multiplicera:</p><p>\\[(x-2)(3x^2+x-4)=3x^3-5x^2-6x+8.\\]</p><p>Lägg till resten:</p><p>\\[\\boxed{P(x)=3x^3-5x^2-6x+13}.\\]</p>",
+  "familj": "polynomdivision_baklanges_1"
+},
+{
+  "id": "4.176",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>Bestäm \\(k\\) så att \\(x-2\\) är en faktor till</p><p>\\[P(x)=2x^3+kx^2-11x+6.\\]</p><p>Utför sedan polynomdivisionen.</p>",
+  "s": "<p>Om \\(x-2\\) är en faktor ska resten vara 0. Därför:</p><p>\\[P(2)=16+4k-22+6=4k=0.\\]</p><p>Alltså \\(\\boxed{k=0}\\).</p><p>Dividera därefter \\(2x^3-11x+6\\) med \\(x-2\\). Kom ihåg termen \\(0x^2\\):</p><p>\\[\\boxed{Q(x)=2x^2+4x-3}.\\]</p>",
+  "familj": "polynomdivision_parameter_k_3"
+},
+{
+  "id": "4.177",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "E",
+  "poang": "2/0/0",
+  "t": "<p>Dividera</p><p>\\[x^3-7x+6\\]</p><p>med \\(x-1\\). Visa tydligt hur du hanterar att termen med \\(x^2\\) saknas.</p>",
+  "s": "<p>Skriv polynomet som</p><p>\\[x^3+0x^2-7x+6.\\]</p><p>Divisionen ger</p><p>\\[\\boxed{x^2+x-6}\\]</p><p>och resten 0. Nollkoefficienten behövs för att termer av samma grad ska hamna under varandra i uppställningen.</p>",
+  "familj": "polynomdivision_nollkoefficient_1"
+},
+{
+  "id": "4.178",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/2/1",
+  "t": "<p>En elev dividerar \\(x^3+x^2-4x+1\\) med \\(x-2\\) och skriver att kvoten är \\(x^2+3x+1\\) och resten 3.</p><p>Kontrollera elevens svar och rätta det om det är fel.</p>",
+  "s": "<p>Kontrollera genom att multiplicera tillbaka:</p><p>\\[(x-2)(x^2+3x+1)+3=x^3+x^2-5x+1,\\]</p><p>vilket inte är det ursprungliga polynomet.</p><p>Den korrekta divisionen ger</p><p>\\[x^3+x^2-4x+1=(x-2)(x^2+3x+2)+5.\\]</p><p>Alltså är kvoten \\(\\boxed{x^2+3x+2}\\) och resten \\(\\boxed{5}\\).</p>",
+  "familj": "polynomdivision_felsokning_1"
+},
+{
+  "id": "4.179",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "E",
+  "poang": "2/0/0",
+  "t": "<p>Kontrollera polynomdivisionen genom multiplikation.</p><p>a) \\(x^3-8=(x-2)(x^2+2x+4)\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>b) \\(x^3+x^2+x+1=(x+2)(x^2-x+3)-5\\)</p>",
+  "s": "<p>a) Multiplicera:</p><p>\\[(x-2)(x^2+2x+4)=x^3+2x^2+4x-2x^2-4x-8=x^3-8.\\]</p><p>Likheten stämmer.</p><p>b) \\[(x+2)(x^2-x+3)-5=x^3+x^2+x+6-5=x^3+x^2+x+1.\\]</p><p>Även den likheten stämmer.</p>",
+  "familj": "polynomdivision_kontroll_multiplikation_1"
+},
+{
+  "id": "4.180",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/1",
+  "t": "<p>Ekvationen</p><p>\\[x^4-2x^3-7x^2+8x+12=0\\]</p><p>har roten \\(x=2\\).</p><p>Använd polynomdivision och bestäm samtliga reella rötter.</p>",
+  "s": "<p>Eftersom \\(x=2\\) är en rot dividerar vi med \\(x-2\\):</p><p>\\[\\frac{x^4-2x^3-7x^2+8x+12}{x-2}=x^3-7x-6.\\]</p><p>Prova enkla heltalsrötter i kubiken. \\(x=3\\) ger 0, så dividera med \\(x-3\\):</p><p>\\[\\frac{x^3-7x-6}{x-3}=x^2+3x+2=(x+1)(x+2).\\]</p><p>Rötterna är därför</p><p>\\[\\boxed{x=2,\\ 3,\\ -1,\\ -2}.\\]</p>",
+  "familj": "polynomdivision_losa_fjardegrad_2"
+},
+{
+  "id": "4.181",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "E",
+  "poang": "2/1/0",
+  "t": "<p>Utför polynomdivision.</p><p>a) \\(\\frac{x^4+3x^2+2}{x^2+1}\\)<br><span style=\"display:inline-block;height:0.32rem\"></span>b) \\(\\frac{2x^4-5x^2+3}{x^2-1}\\)</p>",
+  "s": "<p>a) Kvoten är \\(\\boxed{x^2+2}\\), rest 0.</p><p>b) Första termen är \\(2x^2\\). Divisionen ger därefter konstanttermen \\(-3\\):</p><p>\\[(x^2-1)(2x^2-3)=2x^4-5x^2+3.\\]</p><p>Alltså är kvoten \\(\\boxed{2x^2-3}\\), rest 0.</p>",
+  "familj": "polynomdivision_kvadratisk_divisor_2"
+},
+{
+  "id": "4.182",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "E",
+  "poang": "2/0/0",
+  "t": "<p>Dividera</p><p>\\[6x^3+x^2-10x+4\\]</p><p>med \\(2x-1\\).</p>",
+  "s": "<p>Första kvottermen är \\(6x^3/(2x)=3x^2\\). Fortsatt division ger termerna \\(2x\\) och \\(-4\\).</p><p>Kontroll:</p><p>\\[(2x-1)(3x^2+2x-4)=6x^3+x^2-10x+4.\\]</p><p>Alltså är kvoten \\(\\boxed{3x^2+2x-4}\\) och resten 0.</p>",
+  "familj": "polynomdivision_ledande_koefficient_1"
+},
+{
+  "id": "4.183",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>Utför polynomdivision och ange kvot och rest:</p><p>\\[\\frac{2x^4-3x^3-11x^2+12x+9}{x^2-3}.\\]</p>",
+  "s": "<p>Dividera ledande termer stegvis.</p><p>Först: \\(2x^4/x^2=2x^2\\). Efter subtraktion återstår \\(-3x^3-5x^2+12x+9\\).</p><p>Nästa term är \\(-3x\\). Efter subtraktion återstår \\(-5x^2+3x+9\\).</p><p>Nästa term är \\(-5\\). Efter subtraktion återstår \\(3x-6\\).</p><p>Därför är</p><p>\\[\\boxed{Q(x)=2x^2-3x-5,\\qquad r(x)=3x-6}.\\]</p>",
+  "familj": "polynomdivision_kvadratisk_med_rest_2"
+},
+{
+  "id": "4.184",
+  "kap": 4,
+  "omr": "polynom_komplexa",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>När polynomet</p><p>\\[P(x)=2x^3+ax^2+bx+6\\]</p><p>divideras med \\(x+1\\) blir resten 0. Kvoten har formen</p><p>\\[2x^2-5x+c.\\]</p><p>Bestäm \\(a\\), \\(b\\) och \\(c\\).</p>",
+  "s": "<p>Eftersom resten är 0 gäller</p><p>\\[P(x)=(x+1)(2x^2-5x+c).\\]</p><p>Multiplicera:</p><p>\\[(x+1)(2x^2-5x+c)=2x^3-3x^2+(c-5)x+c.\\]</p><p>Jämför koefficienterna med \\(2x^3+ax^2+bx+6\\):</p><p>\\[a=-3,\\qquad c=6,\\qquad b=c-5=1.\\]</p><p>Alltså \\(\\boxed{a=-3,\\ b=1,\\ c=6}\\).</p>",
+  "familj": "polynomdivision_koefficientjamforelse_1"
+}
 ];
