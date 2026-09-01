@@ -2258,7 +2258,7 @@ window.BANKMATO2 = [
     ],
     "niva": "E",
     "poang": "3/0/0",
-    "t": "<p>Låt \\(f(x)=x^2+1\\) och \\(g(x)=3x-2\\).</p><p>a) Bestäm \\((f\\circ g)(x)\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\((g\\circ f)(x)\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\((f\\circ g)'(2)\\).</p>",
+    "t": "<p>Låt \\(f(x)=x^2+1\\) och \\(g(x)=3x-2\\).</p><p>a) Bestäm \\(f(g(x))\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(g(f(x))\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm derivatan av \\(f(g(x))\\) vid \\(x=2\\).</p>",
     "s": "<p>a) \\(f(g(x))=(3x-2)^2+1=\\)<strong>\\(9x^2-12x+5\\)</strong>.</p><p>b) \\(g(f(x))=3(x^2+1)-2=\\)<strong>\\(3x^2+1\\)</strong>.</p><p>c) Derivatan av \\(9x^2-12x+5\\) är \\(18x-12\\). Vid \\(x=2\\): <strong>24</strong>.</p>",
     "familj": "sammansatt_rutin2"
   },
@@ -2284,7 +2284,7 @@ window.BANKMATO2 = [
     ],
     "niva": "E",
     "poang": "4/0/0",
-    "t": "<p>Låt \\(f(x)=2x-1\\) och \\(g(x)=x^2+3\\).</p><p>a) Bestäm \\((f\\circ g)(x)\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\((g\\circ f)(x)\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\((f\\circ g)(2)\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Derivera \\((g\\circ f)(x)\\).</p>",
+    "t": "<p>Låt \\(f(x)=2x-1\\) och \\(g(x)=x^2+3\\).</p><p>a) Bestäm \\(f(g(x))\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(g(f(x))\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(f(g(2))\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Derivera \\(g(f(x))\\).</p>",
     "s": "<p>a) <strong>\\(2x^2+5\\)</strong>.</p><p>b) \\(g(2x-1)=(2x-1)^2+3=\\)<strong>\\(4x^2-4x+4\\)</strong>.</p><p>c) \\(2\\cdot4+5=\\)<strong>13</strong>.</p><p>d) <strong>\\(8x-4\\)</strong>.</p>",
     "familj": "sammansatta_funktioner_rutin"
   },
@@ -2778,7 +2778,7 @@ window.BANKMATO2 = [
     ],
     "niva": "C",
     "poang": "0/3/0",
-    "t": "<p>Funktionerna är \\(f(x)=x^2-4x\\) och \\(g(x)=x+1\\).</p><p>Bestäm alla \\(x\\) som uppfyller \\((f\\circ g)(x)=5\\).</p>",
+    "t": "<p>Funktionerna är \\(f(x)=x^2-4x\\) och \\(g(x)=x+1\\).</p><p>Bestäm alla \\(x\\) som uppfyller \\(f(g(x))=5\\).</p>",
     "s": "<p>Först bildas den sammansatta funktionen:</p><p>\\[f(g(x))=(x+1)^2-4(x+1)=x^2-2x-3.\\]</p><p>Sätt lika med 5:</p><p>\\[x^2-2x-3=5\\Rightarrow x^2-2x-8=0.\\]</p><p>Faktorisera: \\((x-4)(x+2)=0\\). Alltså \\(\\boxed{x=4\\text{ eller }x=-2}\\).</p>",
     "familj": "gap_sammansatta_ekvation"
   },
@@ -2986,8 +2986,8 @@ window.BANKMATO2 = [
     ],
     "niva": "C",
     "poang": "1/2/0",
-    "t": "<p>Låt</p>\n<p>\\[\nf(x)=\\sqrt{x+1},\\qquad g(x)=x^2-4.\n\\]</p>\n<p>a) Bestäm \\((f\\circ g)(x)\\) och dess definitionsmängd.<br>\nb) Bestäm \\((g\\circ f)(x)\\) och dess definitionsmängd.</p>",
-    "s": "<p>a)</p>\n<p>\\[\n(f\\circ g)(x)=f(x^2-4)=\\sqrt{x^2-3}.\n\\]</p>\n<p>För att roten ska vara definierad krävs</p>\n<p>\\[\nx^2-3\\ge0\n\\Rightarrow |x|\\ge\\sqrt3.\n\\]</p>\n<p>Alltså <strong>\\(x\\le-\\sqrt3\\) eller \\(x\\ge\\sqrt3\\)</strong>.</p>\n<p>b)</p>\n<p>\\[\n(g\\circ f)(x)=g(\\sqrt{x+1})=(\\sqrt{x+1})^2-4=x-3.\n\\]</p>\n<p>Men sammansättningen är bara definierad där \\(f\\) är definierad, alltså</p>\n<p><strong>\\(x\\ge-1\\)</strong>.</p>",
+    "t": "<p>Låt</p>\n<p>\\[\nf(x)=\\sqrt{x+1},\\qquad g(x)=x^2-4.\n\\]</p>\n<p>a) Bestäm \\(f(g(x))\\) och dess definitionsmängd.<br>\nb) Bestäm \\(g(f(x))\\) och dess definitionsmängd.</p>",
+    "s": "<p>a)</p>\n<p>\\[\nf(g(x))=f(x^2-4)=\\sqrt{x^2-3}.\n\\]</p>\n<p>För att roten ska vara definierad krävs</p>\n<p>\\[\nx^2-3\\ge0\n\\Rightarrow |x|\\ge\\sqrt3.\n\\]</p>\n<p>Alltså <strong>\\(x\\le-\\sqrt3\\) eller \\(x\\ge\\sqrt3\\)</strong>.</p>\n<p>b)</p>\n<p>\\[\ng(f(x))=g(\\sqrt{x+1})=(\\sqrt{x+1})^2-4=x-3.\n\\]</p>\n<p>Men sammansättningen är bara definierad där \\(f\\) är definierad, alltså</p>\n<p><strong>\\(x\\ge-1\\)</strong>.</p>",
     "familj": "sammansatta_funktioner_defmangd"
   },
   {
@@ -3012,7 +3012,7 @@ window.BANKMATO2 = [
     ],
     "niva": "E",
     "poang": "4/0/0",
-    "t": "<p>Låt \\(f(x)=2x-3\\) och \\(g(x)=x^2+1\\).</p><p>Bestäm</p><p>a) \\((f\\circ g)(x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\((g\\circ f)(x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\((f\\circ g)(2)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\((g\\circ f)(2)\\).</p>",
+    "t": "<p>Låt \\(f(x)=2x-3\\) och \\(g(x)=x^2+1\\).</p><p>Bestäm</p><p>a) \\(f(g(x))\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(g(f(x))\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(f(g(2))\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(g(f(2))\\).</p>",
     "s": "<p>a) \\(f(g(x))=2(x^2+1)-3=\\boxed{2x^2-1}\\).</p><p>b) \\(g(f(x))=(2x-3)^2+1=\\boxed{4x^2-12x+10}\\).</p><p>c) \\(2\\cdot4-1=\\boxed{7}\\).</p><p>d) \\(16-24+10=\\boxed{2}\\).</p><p><strong>Insikt:</strong> Sammansättningarnas ordning spelar roll.</p>",
     "familj": "gap_sammansatta_komposition"
   },
@@ -3402,7 +3402,7 @@ window.BANKMATO2 = [
     ],
     "niva": "E",
     "poang": "3/0/0",
-    "t": "<p>Låt \\(f(x)=\\sqrt{x+4}\\) och \\(g(x)=3x-1\\).</p><p>a) Bestäm \\((f\\circ g)(x)\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm definitionsmängden för \\(f\\circ g\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Beräkna \\((f\\circ g)(2)\\).</p>",
+    "t": "<p>Låt \\(f(x)=\\sqrt{x+4}\\) och \\(g(x)=3x-1\\).</p><p>a) Bestäm \\(f(g(x))\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm definitionsmängden för \\(f(g(x))\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Beräkna \\(f(g(2))\\).</p>",
     "s": "<p>a) \\(f(g(x))=\\sqrt{3x-1+4}=\\boxed{\\sqrt{3x+3}}\\).</p><p>b) Rotens innehåll måste vara minst 0: \\(3x+3\\ge0\\Rightarrow\\boxed{x\\ge-1}\\).</p><p>c) \\(\\sqrt9=\\boxed{3}\\).</p>",
     "familj": "gap_sammansatta_rot_domain"
   },
@@ -4130,7 +4130,7 @@ window.BANKMATO2 = [
     ],
     "niva": "E",
     "poang": "4/0/0",
-    "t": "<p>Låt \\(f(x)=2x+1\\) och \\(g(x)=x^2-3\\).</p><p>a) Bestäm \\(f(g(x))\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(g(f(x))\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\((f\\circ g)(2)\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Derivera \\(g(f(x))\\).</p>",
+    "t": "<p>Låt \\(f(x)=2x+1\\) och \\(g(x)=x^2-3\\).</p><p>a) Bestäm \\(f(g(x))\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm \\(g(f(x))\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) Bestäm \\(f(g(2))\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) Derivera \\(g(f(x))\\).</p>",
     "s": "<p>a) \\(f(g(x))=2(x^2-3)+1=\\boxed{2x^2-5}\\).</p><p>b) \\(g(f(x))=(2x+1)^2-3=\\boxed{4x^2+4x-2}\\).</p><p>c) \\(g(2)=1\\), \\(f(1)=3\\), alltså <strong>3</strong>.</p><p>d) \\(g(f(x))=(2x+1)^2-3\\Rightarrow\\boxed{8x+4}\\).</p>",
     "familj": "proc_sammansatta_funktioner_3"
   },
@@ -4143,7 +4143,7 @@ window.BANKMATO2 = [
     ],
     "niva": "E",
     "poang": "4/0/0",
-    "t": "<p>Låt \\(f(x)=2x-1\\) och \\(g(x)=x^2+3\\). Bestäm.</p><p>a) \\((f\\circ g)(x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\((g\\circ f)(x)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\((f\\circ g)(2)\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\((g\\circ f)(-1)\\)</p>",
+    "t": "<p>Låt \\(f(x)=2x-1\\) och \\(g(x)=x^2+3\\). Bestäm.</p><p>a) \\(f(g(x))\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(g(f(x))\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) \\(f(g(2))\\)<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(g(f(-1))\\)</p>",
     "s": "<p>a) \\(f(g(x))=2(x^2+3)-1=\\)<strong>\\(2x^2+5\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) \\(g(f(x))=(2x-1)^2+3=\\)<strong>\\(4x^2-4x+4\\)</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>c) <strong>13</strong>.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>d) \\(f(-1)=-3\\), så <strong>12</strong>.</p>",
     "familj": "proc_sammansatta_funktioner_eval"
   },
@@ -4156,8 +4156,8 @@ window.BANKMATO2 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>Låt \\(f(x)=x^2+1\\) och \\(g(x)=\\ln x\\).</p><p>a) Bestäm \\((g\\circ f)(x)\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Derivera den sammansatta funktionen på två sätt: direkt och med kedjeregeln skriven som \\(g'(f(x))f'(x)\\).</p>",
-    "s": "<p><strong>Metod:</strong> Bestäm den yttre och den inre funktionen. Kedjeregeln innebär att den yttre derivatan multipliceras med den inre derivatan.</p><p>a) \\((g\\circ f)(x)=\\ln(x^2+1)\\).</p><p>b) Direkt: \\(2x/(x^2+1)\\). Med kedjeregeln: \\(g'(f(x))f'(x)=1/(x^2+1)\\cdot2x\\), samma resultat.</p>",
+    "t": "<p>Låt \\(f(x)=x^2+1\\) och \\(g(x)=\\ln x\\).</p><p>a) Bestäm \\(g(f(x))\\).<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Derivera den sammansatta funktionen på två sätt: direkt och med kedjeregeln skriven som \\(g'(f(x))f'(x)\\).</p>",
+    "s": "<p><strong>Metod:</strong> Bestäm den yttre och den inre funktionen. Kedjeregeln innebär att den yttre derivatan multipliceras med den inre derivatan.</p><p>a) \\(g(f(x))=\\ln(x^2+1)\\).</p><p>b) Direkt: \\(2x/(x^2+1)\\). Med kedjeregeln: \\(g'(f(x))f'(x)=1/(x^2+1)\\cdot2x\\), samma resultat.</p>",
     "familj": "sammansatt_kedja"
   },
   {
@@ -10192,4 +10192,135 @@ window.BANKMATO2 = [
     "s": "<p>a) \\(i(2-i)=2i-i^2=\\boxed{1+2i}\\).</p><p>b) Talet \\(i\\) har absolutbelopp 1 och argument \\(\\pi/2\\). Multiplikation med \\(i\\) vrider därför alla punkter \\(90^\\circ\\) moturs kring origo utan att ändra avståndet till origo.</p>",
     "familj": "komplexplan_rotation_i_3"
   }
+,
+{
+  "id": "2.179",
+  "kap": 2,
+  "omr": "tillampningar_derivata",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>En cirkelformad mossfläck växer utåt. Radien ökar med 18 cm per år.</p><span class=\"fig\"><svg width=\"390\" height=\"230\" viewBox=\"0 0 390 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med radien r markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"228\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"180\" cy=\"116\" r=\"76\" fill=\"#EAF4E8\" stroke=\"#5C7D58\" stroke-width=\"2.2\"/>\n<circle cx=\"180\" cy=\"116\" r=\"3.5\" fill=\"#2B2527\"/>\n<line x1=\"180\" y1=\"116\" x2=\"250\" y2=\"86\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M250 86 l-10 1 5 8 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"92\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n<text x=\"180\" y=\"214\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">cirkelns storlek förändras med tiden</text>\n</svg></span><p>Bestäm hur snabbt mossfläckens area ökar när radien är 75 cm.</p>",
+  "s": "<p><strong>Formel från formelbladet:</strong> Kedjeregeln. Arean beror på radien, och radien beror på tiden, så</p><p>\\[\\frac{dA}{dt}=\\frac{dA}{dr}\\cdot\\frac{dr}{dt}.\\]</p><p>För en cirkel är \\(A=\\pi r^2\\), så</p><p>\\[\\frac{dA}{dr}=2\\pi r.\\]</p><p>Vi räknar i meter: \\(r=0,75\\) m och \\(dr/dt=0,18\\) m/år.</p><p>\\[\\frac{dA}{dt}=2\\pi\\cdot0,75\\cdot0,18=0,27\\pi\\approx0,85.\\]</p><p><strong>Arean ökar med ungefär \\(\\boxed{0,85\\text{ m}^2/\\text{år}}\\).</strong></p>",
+  "familj": "forandringshastighet_cirkel_area_1"
+},
+{
+  "id": "2.180",
+  "kap": 2,
+  "omr": "tillampningar_derivata",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>En tunn oljefläck på vattenytan antas vara cirkelformad. Vid ett visst ögonblick är radien 8,0 m och fläckens area ökar med 40 m²/min.</p><span class=\"fig\"><svg width=\"390\" height=\"230\" viewBox=\"0 0 390 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med radien r markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"228\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"180\" cy=\"116\" r=\"76\" fill=\"#EAF4E8\" stroke=\"#5C7D58\" stroke-width=\"2.2\"/>\n<circle cx=\"180\" cy=\"116\" r=\"3.5\" fill=\"#2B2527\"/>\n<line x1=\"180\" y1=\"116\" x2=\"250\" y2=\"86\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M250 86 l-10 1 5 8 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"92\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n<text x=\"180\" y=\"214\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">cirkelns storlek förändras med tiden</text>\n</svg></span><p>Bestäm hur snabbt radien ökar vid detta ögonblick.</p>",
+  "s": "<p>För cirkeln gäller \\(A=\\pi r^2\\).</p><p><strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dA}{dt}=\\frac{dA}{dr}\\frac{dr}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>Sätt in \\(dA/dt=40\\) och \\(r=8\\):</p><p>\\[40=16\\pi\\frac{dr}{dt}.\\]</p><p>Alltså</p><p>\\[\\frac{dr}{dt}=\\frac{40}{16\\pi}=\\frac{2,5}{\\pi}\\approx0,80.\\]</p><p><strong>Radien ökar med ungefär \\(\\boxed{0,80\\text{ m/min}}\\).</strong></p>",
+  "familj": "forandringshastighet_cirkel_radie_2"
+},
+{
+  "id": "2.181",
+  "kap": 2,
+  "omr": "tillampningar_derivata",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>En klotformad ballong blåses upp. Radien ökar med 0,60 cm/s.</p><span class=\"fig\"><svg width=\"390\" height=\"240\" viewBox=\"0 0 390 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Klot med radien r markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"238\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"182\" cy=\"118\" r=\"76\" fill=\"#E6F1F7\" stroke=\"#527C91\" stroke-width=\"2.2\"/>\n<ellipse cx=\"182\" cy=\"118\" rx=\"76\" ry=\"25\" fill=\"none\" stroke=\"#9DB7C4\" stroke-width=\"1.2\" stroke-dasharray=\"5 4\"/>\n<line x1=\"182\" y1=\"118\" x2=\"242\" y2=\"74\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M242 74 l-10 2 6 8 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"88\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n</svg></span><p>Hur snabbt ökar ballongens volym när radien är 12 cm?</p>",
+  "s": "<p>Volymen av ett klot är</p><p>\\[V=\\frac{4\\pi r^3}{3}.\\]</p><p>Eftersom \\(V\\) beror på \\(r\\), som i sin tur beror på tiden, använder vi <strong>kedjeregeln från formelbladet</strong>:</p><p>\\[\\frac{dV}{dt}=\\frac{dV}{dr}\\frac{dr}{dt}.\\]</p><p>\\[\\frac{dV}{dr}=4\\pi r^2.\\]</p><p>Vid \\(r=12\\) cm och \\(dr/dt=0,60\\) cm/s:</p><p>\\[\\frac{dV}{dt}=4\\pi\\cdot12^2\\cdot0,60=345,6\\pi\\approx1086.\\]</p><p><strong>Volymen ökar med ungefär \\(\\boxed{1,09\\cdot10^3\\text{ cm}^3/\\text{s}}\\).</strong></p>",
+  "familj": "forandringshastighet_klot_volym_1"
+},
+{
+  "id": "2.182",
+  "kap": 2,
+  "omr": "tillampningar_derivata",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>En klotformad isbit smälter. När radien är 5,0 cm minskar isbitens yta med 20 cm²/min.</p><span class=\"fig\"><svg width=\"390\" height=\"240\" viewBox=\"0 0 390 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Klot med radien r markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"238\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"182\" cy=\"118\" r=\"76\" fill=\"#E6F1F7\" stroke=\"#527C91\" stroke-width=\"2.2\"/>\n<ellipse cx=\"182\" cy=\"118\" rx=\"76\" ry=\"25\" fill=\"none\" stroke=\"#9DB7C4\" stroke-width=\"1.2\" stroke-dasharray=\"5 4\"/>\n<line x1=\"182\" y1=\"118\" x2=\"242\" y2=\"74\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M242 74 l-10 2 6 8 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"88\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n</svg></span><p>Bestäm hur snabbt radien minskar vid detta ögonblick.</p>",
+  "s": "<p>Ytan av ett klot är \\(A=4\\pi r^2\\). Då</p><p>\\[\\frac{dA}{dr}=8\\pi r.\\]</p><p><strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dA}{dt}=\\frac{dA}{dr}\\frac{dr}{dt}.\\]</p><p>Eftersom ytan minskar är \\(dA/dt=-20\\). Vid \\(r=5\\):</p><p>\\[-20=8\\pi\\cdot5\\frac{dr}{dt}.\\]</p><p>\\[\\frac{dr}{dt}=-\\frac{1}{2\\pi}\\approx-0,159.\\]</p><p><strong>Radien minskar alltså med ungefär \\(\\boxed{0,16\\text{ cm/min}}\\).</strong></p>",
+  "familj": "forandringshastighet_klot_radie_2"
+},
+{
+  "id": "2.183",
+  "kap": 2,
+  "omr": "tillampningar_derivata",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>En kubformad modell förstoras så att sidlängden ökar med 0,30 cm/s.</p><span class=\"fig\"><svg width=\"390\" height=\"245\" viewBox=\"0 0 390 245\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kub med sidlängden s markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"243\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<polygon points=\"125,78 238,78 292,42 180,42\" fill=\"#F0F5F7\" stroke=\"#5C6570\" stroke-width=\"2\"/>\n<polygon points=\"238,78 292,42 292,154 238,190\" fill=\"#E2EDF1\" stroke=\"#5C6570\" stroke-width=\"2\"/>\n<rect x=\"125\" y=\"78\" width=\"113\" height=\"112\" fill=\"#EAF3F6\" stroke=\"#5C6570\" stroke-width=\"2\"/>\n<line x1=\"125\" y1=\"207\" x2=\"238\" y2=\"207\" stroke=\"#268FA3\" stroke-width=\"2\"/>\n<path d=\"M125 207 l9 -5 v10 z\" fill=\"#268FA3\"/><path d=\"M238 207 l-9 -5 v10 z\" fill=\"#268FA3\"/>\n<text x=\"182\" y=\"226\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">s</text>\n</svg></span><p>Bestäm hur snabbt kubens volym ökar när sidlängden är 8,0 cm.</p>",
+  "s": "<p>Låt sidlängden vara \\(s\\). Volymen är \\(V=s^3\\), alltså</p><p>\\[\\frac{dV}{ds}=3s^2.\\]</p><p><strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dV}{dt}=\\frac{dV}{ds}\\frac{ds}{dt}=3s^2\\frac{ds}{dt}.\\]</p><p>Vid \\(s=8,0\\) cm och \\(ds/dt=0,30\\) cm/s:</p><p>\\[\\frac{dV}{dt}=3\\cdot8^2\\cdot0,30=57,6.\\]</p><p><strong>Volymen ökar med \\(\\boxed{57,6\\text{ cm}^3/\\text{s}}\\).</strong></p>",
+  "familj": "forandringshastighet_kub_volym_1"
+},
+{
+  "id": "2.184",
+  "kap": 2,
+  "omr": "tillampningar_derivata",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>En kvadratisk ljusbild på en vägg växer men behåller sin form. När sidlängden är 3,0 m ökar bildens area med 1,8 m²/s.</p><p>a) Bestäm \\(dA/ds\\) när \\(s=3,0\\) m.<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) Bestäm hur snabbt sidlängden ökar vid samma ögonblick.</p>",
+  "s": "<p>För en kvadrat är \\(A=s^2\\).</p><p>a) \\[\\frac{dA}{ds}=2s.\\]</p><p>Vid \\(s=3,0\\) m är</p><p>\\[\\boxed{\\frac{dA}{ds}=6,0\\text{ m}}.\\]</p><p>b) <strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dA}{dt}=\\frac{dA}{ds}\\frac{ds}{dt}.\\]</p><p>Alltså</p><p>\\[1,8=6,0\\frac{ds}{dt}\\Rightarrow \\frac{ds}{dt}=\\boxed{0,30\\text{ m/s}}.\\]</p>",
+  "familj": "forandringshastighet_kvadrat_sida_1"
+},
+{
+  "id": "2.185",
+  "kap": 2,
+  "omr": "tillampningar_derivata",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>En cylindrisk bassäng har den konstanta höjden 1,5 m. Bassängens radie ökar med 4,0 cm/min när den vecklas ut.</p><span class=\"fig\"><svg width=\"390\" height=\"255\" viewBox=\"0 0 390 255\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cylinder med radie r och fast höjd h\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"253\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<ellipse cx=\"185\" cy=\"60\" rx=\"78\" ry=\"24\" fill=\"#E8F3F6\" stroke=\"#527C91\" stroke-width=\"2\"/>\n<path d=\"M107 60 L107 188 M263 60 L263 188\" stroke=\"#527C91\" stroke-width=\"2\"/>\n<ellipse cx=\"185\" cy=\"188\" rx=\"78\" ry=\"24\" fill=\"#E8F3F6\" stroke=\"#527C91\" stroke-width=\"2\"/>\n<line x1=\"185\" y1=\"60\" x2=\"250\" y2=\"60\" stroke=\"#268FA3\" stroke-width=\"2\"/>\n<path d=\"M250 60 l-9 -5 v10 z\" fill=\"#268FA3\"/>\n<text x=\"218\" y=\"50\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n<line x1=\"287\" y1=\"60\" x2=\"287\" y2=\"188\" stroke=\"#5C575E\" stroke-width=\"1.6\"/>\n<path d=\"M287 60 l-5 9 h10 z M287 188 l-5 -9 h10 z\" fill=\"#5C575E\"/>\n<text x=\"300\" y=\"129\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#5C575E\">h</text>\n</svg></span><p>Bestäm hur snabbt bassängens volym ökar när radien är 2,0 m.</p>",
+  "s": "<p>Eftersom höjden är konstant kan volymen skrivas som en funktion av radien:</p><p>\\[V=\\pi r^2h=1,5\\pi r^2.\\]</p><p>Då</p><p>\\[\\frac{dV}{dr}=3\\pi r.\\]</p><p>Omvandla först \\(4,0\\) cm/min till \\(0,040\\) m/min. <strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dV}{dt}=\\frac{dV}{dr}\\frac{dr}{dt}=3\\pi\\cdot2,0\\cdot0,040=0,24\\pi.\\]</p><p><strong>Volymen ökar med ungefär \\(\\boxed{0,75\\text{ m}^3/\\text{min}}\\).</strong></p>",
+  "familj": "forandringshastighet_cylinder_volym_1"
+},
+{
+  "id": "2.186",
+  "kap": 2,
+  "omr": "tillampningar_derivata",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>En hög med sand behåller formen av en kon där höjden hela tiden är tre gånger basradien, alltså \\(h=3r\\).</p><span class=\"fig\"><svg width=\"390\" height=\"260\" viewBox=\"0 0 390 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Kon med höjden h och basradien r\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"258\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<path d=\"M185 35 L95 205 L275 205 Z\" fill=\"#F4EFE2\" stroke=\"#8B7655\" stroke-width=\"2\"/>\n<ellipse cx=\"185\" cy=\"205\" rx=\"90\" ry=\"20\" fill=\"#EFE4C7\" stroke=\"#8B7655\" stroke-width=\"2\"/>\n<line x1=\"185\" y1=\"35\" x2=\"185\" y2=\"205\" stroke=\"#5C575E\" stroke-width=\"1.5\" stroke-dasharray=\"5 4\"/>\n<text x=\"195\" y=\"123\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#5C575E\">h = 3r</text>\n<line x1=\"185\" y1=\"205\" x2=\"270\" y2=\"205\" stroke=\"#268FA3\" stroke-width=\"2\"/>\n<path d=\"M270 205 l-9 -5 v10 z\" fill=\"#268FA3\"/>\n<text x=\"226\" y=\"195\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n</svg></span><p>Sand tillförs med 0,12 m³/min. Bestäm hur snabbt basradien ökar när \\(r=0,80\\) m.</p>",
+  "s": "<p><strong>Första steget:</strong> Skriv volymen som en funktion av \\(r\\).</p><p>Konens volym är</p><p>\\[V=\\frac{\\pi r^2h}{3}.\\]</p><p>Eftersom \\(h=3r\\) får vi</p><p>\\[V=\\frac{\\pi r^2(3r)}{3}=\\pi r^3.\\]</p><p>Därför</p><p>\\[\\frac{dV}{dr}=3\\pi r^2.\\]</p><p><strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dV}{dt}=\\frac{dV}{dr}\\frac{dr}{dt}.\\]</p><p>Vid \\(r=0,80\\) m:</p><p>\\[0,12=3\\pi(0,80)^2\\frac{dr}{dt}=1,92\\pi\\frac{dr}{dt}.\\]</p><p>\\[\\frac{dr}{dt}=\\frac{0,12}{1,92\\pi}=\\frac{0,0625}{\\pi}\\approx0,0199\\text{ m/min}.\\]</p><p><strong>Basradien ökar med ungefär \\(\\boxed{2,0\\text{ cm/min}}\\).</strong></p>",
+  "familj": "forandringshastighet_kon_radie_1"
+},
+{
+  "id": "2.187",
+  "kap": 2,
+  "omr": "tillampningar_derivata",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>Ett radarsystem söker av ett cirkelformat område. Sökningens radie ökar med 0,40 km/min.</p><span class=\"fig\"><svg width=\"390\" height=\"230\" viewBox=\"0 0 390 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkel med radien r markerad\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"228\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"180\" cy=\"116\" r=\"76\" fill=\"#EAF4E8\" stroke=\"#5C7D58\" stroke-width=\"2.2\"/>\n<circle cx=\"180\" cy=\"116\" r=\"3.5\" fill=\"#2B2527\"/>\n<line x1=\"180\" y1=\"116\" x2=\"250\" y2=\"86\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M250 86 l-10 1 5 8 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"92\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n<text x=\"180\" y=\"214\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">cirkelns storlek förändras med tiden</text>\n</svg></span><p>När radien är 6,0 km:</p><p>a) bestäm \\(dA/dr\\),<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) bestäm hur snabbt det avsökta området ökar.</p>",
+  "s": "<p>Arean är \\(A=\\pi r^2\\).</p><p>a) \\[\\frac{dA}{dr}=2\\pi r.\\]</p><p>Vid \\(r=6,0\\) km:</p><p>\\[\\boxed{\\frac{dA}{dr}=12\\pi\\text{ km}}.\\]</p><p>b) <strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dA}{dt}=\\frac{dA}{dr}\\frac{dr}{dt}=12\\pi\\cdot0,40=\\boxed{4,8\\pi\\text{ km}^2/\\text{min}}\\approx15,1\\text{ km}^2/\\text{min}.\\]</p>",
+  "familj": "forandringshastighet_radar_area_1"
+},
+{
+  "id": "2.188",
+  "kap": 2,
+  "omr": "tillampningar_derivata",
+  "kurs": [
+    "2c"
+  ],
+  "niva": "C",
+  "poang": "0/3/0",
+  "t": "<p>Efter en sten träffat en stilla vattenyta sprids en cirkelformad våg utåt. Omkretsen av den yttersta vågfronten ökar med 5,0 m/s.</p><span class=\"fig\"><svg width=\"390\" height=\"235\" viewBox=\"0 0 390 235\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cirkelformad våg med radien r\">\n<rect x=\"1\" y=\"1\" width=\"388\" height=\"233\" rx=\"10\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<circle cx=\"182\" cy=\"116\" r=\"76\" fill=\"#EEF7FA\" stroke=\"#527C91\" stroke-width=\"2.3\"/>\n<circle cx=\"182\" cy=\"116\" r=\"58\" fill=\"none\" stroke=\"#A7C6D3\" stroke-width=\"1.2\"/>\n<circle cx=\"182\" cy=\"116\" r=\"40\" fill=\"none\" stroke=\"#C8DDE5\" stroke-width=\"1.2\"/>\n<line x1=\"182\" y1=\"116\" x2=\"252\" y2=\"116\" stroke=\"#268FA3\" stroke-width=\"2.2\"/>\n<path d=\"M252 116 l-9 -5 v10 z\" fill=\"#268FA3\"/>\n<text x=\"216\" y=\"106\" font-family=\"sans-serif\" font-size=\"14\" fill=\"#268FA3\">r</text>\n<text x=\"182\" y=\"218\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5C575E\">den yttersta vågfronten är en cirkel</text>\n</svg></span><p>När vågfrontens radie är 4,0 m:</p><p>a) bestäm hur snabbt radien ökar,<br><span aria-hidden=\"true\" style=\"display:block;height:7px\"></span>b) bestäm hur snabbt arean innanför vågfronten ökar.</p>",
+  "s": "<p>a) Omkretsen är \\(C=2\\pi r\\), så</p><p>\\[\\frac{dC}{dr}=2\\pi.\\]</p><p><strong>Kedjeregeln från formelbladet</strong> ger</p><p>\\[\\frac{dC}{dt}=\\frac{dC}{dr}\\frac{dr}{dt}.\\]</p><p>Därför</p><p>\\[5,0=2\\pi\\frac{dr}{dt}\\Rightarrow \\boxed{\\frac{dr}{dt}=\\frac{5}{2\\pi}\\approx0,80\\text{ m/s}}.\\]</p><p>b) Arean är \\(A=\\pi r^2\\). Då</p><p>\\[\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}.\\]</p><p>Vid \\(r=4,0\\) m:</p><p>\\[\\frac{dA}{dt}=2\\pi\\cdot4\\cdot\\frac{5}{2\\pi}=\\boxed{20\\text{ m}^2/\\text{s}}.\\]</p><p><strong>Insikt:</strong> Samma förändringshastighet för radien kan kopplas vidare till flera andra storheter.</p>",
+  "familj": "forandringshastighet_vagfront_tva_steg_1"
+}
 ];
