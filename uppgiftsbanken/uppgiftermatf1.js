@@ -1,6 +1,8 @@
 /* uppgiftermatf1.js — Matematik – fördjupning nivå 1.
-   Bevisdelen omfattar direkta bevis, indirekta bevis (kontraposition och
-   motsägelsebevis) samt induktionsbevis.
+   Inom partiell integration innehåller många rutinuppgifter nu flera deluppgifter
+   (a–c) för att ge effektiv mängdträning inom samma metodfamilj.
+   Figurer används endast när de tillför matematisk information.
+   Bevisdelen omfattar direkta, indirekta och induktionsbevis.
    Samtliga Venn-diagram är renderingskontrollerade.
    Alla SVG-id:n är unika per figur.
    Grafteori ingår inte eftersom det inte längre hör till den aktuella ämnesplanen. */
@@ -1492,7 +1494,7 @@ window.BANKMATF1 = [
     "niva": "C",
     "typ": "bestämma viss term",
     "poang": "0/2/0",
-    "t": "<span class=\"fig\"><svg height=\"230\" width=\"420\" viewBox=\"0 0 420 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Flagga med tre lodräta fält\">\n<rect width=\"420\" height=\"230\" fill=\"white\"/>\n<rect x=\"65\" y=\"45\" width=\"290\" height=\"140\" fill=\"none\" stroke=\"#333\" stroke-width=\"2.5\"/>\n<line x1=\"161.7\" y1=\"45\" x2=\"161.7\" y2=\"185\" stroke=\"#555\" stroke-width=\"2\"/>\n<line x1=\"258.3\" y1=\"45\" x2=\"258.3\" y2=\"185\" stroke=\"#555\" stroke-width=\"2\"/>\n<text x=\"102\" y=\"122\" font-size=\"20\">fält 1</text><text x=\"194\" y=\"122\" font-size=\"20\">fält 2</text><text x=\"291\" y=\"122\" font-size=\"20\">fält 3</text>\n</svg></span><p>Bestäm termen som innehåller \\(x^4\\) i utvecklingen av \\((2x-1)^7\\).</p>",
+    "t": "<p>Bestäm termen som innehåller \\(x^4\\) i utvecklingen av \\((2x-1)^7\\).</p>",
     "s": "<p>En allmän term är</p><p>\\[\\binom7k(2x)^{7-k}(-1)^k.\\]</p><p>För \\(x^4\\) krävs \\(7-k=4\\), alltså \\(k=3\\). Termen blir</p><p>\\[\\binom73(2x)^4(-1)^3=-35\\cdot16x^4=-560x^4.\\]</p><p><strong>Termen är \\(-560x^4\\)</strong>.</p>",
     "id": "1.144"
   },
@@ -3180,40 +3182,40 @@ window.BANKMATF1 = [
     "kap": 3,
     "omr": "partiell_integration",
     "niva": "E",
-    "typ": "partiell integration av x e^x",
-    "poang": "2/0/0",
-    "t": "<p>Beräkna \\(\\displaystyle\\int xe^x\\,dx\\).</p>",
-    "s": "<p><strong>Metod:</strong> Välj delarna så att den ena faktorn blir enklare när den deriveras och den andra är lätt att integrera.</p><p>Välj \\(u=x\\), \\(dv=e^x dx\\). Då \\(du=dx\\), \\(v=e^x\\): <strong>\\(xe^x-e^x+C=e^x(x-1)+C\\)</strong>.</p>",
+    "typ": "partiell integration – exponentialfunktioner",
+    "poang": "3/0/0",
+    "t": "<p>Bestäm integralerna.</p>\n<ol type=\"a\">\n<li>\\(\\displaystyle \\int xe^x\\,dx\\)</li>\n<li>\\(\\displaystyle \\int xe^{2x}\\,dx\\)</li>\n<li>\\(\\displaystyle \\int xe^{-x}\\,dx\\)</li>\n</ol>",
+    "s": "<p><strong>Metod:</strong> I alla tre deluppgifterna väljer vi \\(u=x\\). Då blir \\(du=dx\\), medan exponentialfunktionen integreras.</p>\n<p><strong>a)</strong> Välj \\(u=x\\), \\(dv=e^x\\,dx\\). Då är \\(v=e^x\\).</p>\n<p>\\[\n\\int xe^x\\,dx=xe^x-\\int e^x\\,dx\n=xe^x-e^x+C.\n\\]</p>\n<p><strong>Svar:</strong> \\(\\boxed{e^x(x-1)+C}\\)</p>\n<p><strong>b)</strong> Nu är \\(v=\\frac12e^{2x}\\).</p>\n<p>\\[\n\\int xe^{2x}\\,dx\n=\\frac{x}{2}e^{2x}-\\frac12\\int e^{2x}\\,dx\n=\\frac{x}{2}e^{2x}-\\frac14e^{2x}+C.\n\\]</p>\n<p><strong>Svar:</strong> \\(\\boxed{e^{2x}\\left(\\frac{x}{2}-\\frac14\\right)+C}\\)</p>\n<p><strong>c)</strong> Här är \\(v=-e^{-x}\\).</p>\n<p>\\[\n\\int xe^{-x}\\,dx\n=-xe^{-x}+\\int e^{-x}\\,dx\n=-xe^{-x}-e^{-x}+C.\n\\]</p>\n<p><strong>Svar:</strong> \\(\\boxed{-(x+1)e^{-x}+C}\\)</p>",
     "id": "3.02"
   },
   {
     "kap": 3,
     "omr": "partiell_integration",
     "niva": "C",
-    "typ": "partiell integration logaritm",
-    "poang": "0/2/0",
-    "t": "<p>Beräkna \\(\\displaystyle\\int \\ln x\\,dx\\), \\(x>0\\).</p>",
-    "s": "<p><strong>Metod:</strong> Välj delarna så att den ena faktorn blir enklare när den deriveras och den andra är lätt att integrera.</p><p>Skriv \\(\\ln x=1\\cdot\\ln x\\). Med \\(u=\\ln x\\), \\(dv=dx\\) fås \\(du=dx/x\\), \\(v=x\\):</p><p><strong>\\(x\\ln x-x+C\\)</strong>.</p>",
+    "typ": "partiell integration – logaritmer",
+    "poang": "1/2/0",
+    "t": "<p>Bestäm integralerna. Anta \\(x>0\\).</p>\n<ol type=\"a\">\n<li>\\(\\displaystyle \\int \\ln x\\,dx\\)</li>\n<li>\\(\\displaystyle \\int \\ln(2x)\\,dx\\)</li>\n<li>\\(\\displaystyle \\int x\\ln x\\,dx\\)</li>\n</ol>",
+    "s": "<p><strong>Idé:</strong> När integranden bara innehåller en logaritm skriver vi den som \\(1\\cdot\\ln(\\ldots)\\). Då kan \\(1\\) integreras och logaritmen deriveras.</p>\n<p><strong>a)</strong> Välj \\(u=\\ln x\\), \\(dv=dx\\). Då är \\(du=\\frac1x\\,dx\\) och \\(v=x\\).</p>\n<p>\\[\n\\int\\ln x\\,dx=x\\ln x-\\int 1\\,dx\n=x\\ln x-x+C.\n\\]</p>\n<p><strong>b)</strong> Välj \\(u=\\ln(2x)\\), \\(dv=dx\\). Eftersom \\(\\frac{d}{dx}\\ln(2x)=\\frac1x\\) får vi</p>\n<p>\\[\n\\int\\ln(2x)\\,dx=x\\ln(2x)-x+C.\n\\]</p>\n<p><strong>c)</strong> Välj \\(u=\\ln x\\), \\(dv=x\\,dx\\). Då är \\(du=\\frac1x\\,dx\\) och \\(v=\\frac{x^2}{2}\\).</p>\n<p>\\[\n\\int x\\ln x\\,dx\n=\\frac{x^2}{2}\\ln x-\\frac12\\int x\\,dx\n=\\frac{x^2}{2}\\ln x-\\frac{x^2}{4}+C.\n\\]</p>",
     "id": "3.03"
   },
   {
     "kap": 3,
     "omr": "partiell_integration",
     "niva": "E",
-    "typ": "partiell integration trigonometrisk funktion",
-    "poang": "2/0/0",
-    "t": "<p>Bestäm</p><p>\\[\\int x\\cos x\\,dx.\\]</p>",
-    "s": "<p><strong>Metod:</strong> Välj delarna så att den ena faktorn blir enklare när den deriveras och den andra är lätt att integrera.</p><p>Välj \\(u=x\\) och \\(dv=\\cos x\\,dx\\). Då är \\(du=dx\\) och \\(v=\\sin x\\).</p><p>\\[\\int x\\cos x\\,dx=x\\sin x-\\int\\sin x\\,dx=x\\sin x+\\cos x+C.\\]</p>",
+    "typ": "partiell integration – trigonometriska funktioner",
+    "poang": "3/0/0",
+    "t": "<p>Bestäm integralerna.</p>\n<ol type=\"a\">\n<li>\\(\\displaystyle \\int x\\cos x\\,dx\\)</li>\n<li>\\(\\displaystyle \\int x\\sin x\\,dx\\)</li>\n<li>\\(\\displaystyle \\int x\\cos(2x)\\,dx\\)</li>\n</ol>",
+    "s": "<p><strong>Metod:</strong> Välj \\(u=x\\). Då försvinner \\(x\\) när vi deriverar \\(u\\), vilket gör den återstående integralen enklare.</p>\n<p><strong>a)</strong> \\(u=x\\), \\(dv=\\cos x\\,dx\\), alltså \\(v=\\sin x\\).</p>\n<p>\\[\n\\int x\\cos x\\,dx=x\\sin x-\\int\\sin x\\,dx\n=\\boxed{x\\sin x+\\cos x+C}.\n\\]</p>\n<p><strong>b)</strong> \\(u=x\\), \\(dv=\\sin x\\,dx\\), alltså \\(v=-\\cos x\\).</p>\n<p>\\[\n\\int x\\sin x\\,dx=-x\\cos x+\\int\\cos x\\,dx\n=\\boxed{-x\\cos x+\\sin x+C}.\n\\]</p>\n<p><strong>c)</strong> \\(u=x\\), \\(dv=\\cos(2x)\\,dx\\), alltså \\(v=\\frac12\\sin(2x)\\).</p>\n<p>\\[\n\\int x\\cos(2x)\\,dx\n=\\frac{x}{2}\\sin(2x)-\\frac12\\int\\sin(2x)\\,dx\n=\\boxed{\\frac{x}{2}\\sin(2x)+\\frac14\\cos(2x)+C}.\n\\]</p>",
     "id": "3.14"
   },
   {
     "kap": 3,
     "omr": "partiell_integration",
     "niva": "C",
-    "typ": "partiell integration med logaritm",
-    "poang": "0/2/0",
-    "t": "<p>Bestäm</p><p>\\[\\int x^2\\ln x\\,dx,\\qquad x>0.\\]</p>",
-    "s": "<p>Välj \\(u=\\ln x\\) och \\(dv=x^2dx\\). Då är \\(du=dx/x\\) och \\(v=x^3/3\\).</p><p>\\[\\int x^2\\ln x\\,dx=\\frac{x^3}{3}\\ln x-\\frac13\\int x^2dx\\]</p><p>\\[=\\frac{x^3}{3}\\ln x-\\frac{x^3}{9}+C.\\]</p>",
+    "typ": "partiell integration – polynom gånger logaritm",
+    "poang": "0/3/0",
+    "t": "<p>Bestäm integralerna. Anta \\(x>0\\).</p>\n<ol type=\"a\">\n<li>\\(\\displaystyle \\int x^2\\ln x\\,dx\\)</li>\n<li>\\(\\displaystyle \\int x^3\\ln x\\,dx\\)</li>\n<li>\\(\\displaystyle \\int x^2\\ln(2x)\\,dx\\)</li>\n</ol>",
+    "s": "<p><strong>Metod:</strong> Logaritmen blir enklare när den deriveras, så vi väljer logaritmen som \\(u\\) i alla tre deluppgifterna.</p>\n<p><strong>a)</strong> \\(u=\\ln x\\), \\(dv=x^2dx\\). Då är \\(du=\\frac1x dx\\), \\(v=\\frac{x^3}{3}\\).</p>\n<p>\\[\n\\int x^2\\ln x\\,dx\n=\\frac{x^3}{3}\\ln x-\\frac13\\int x^2dx\n=\\boxed{\\frac{x^3}{3}\\ln x-\\frac{x^3}{9}+C}.\n\\]</p>\n<p><strong>b)</strong> \\(u=\\ln x\\), \\(dv=x^3dx\\). Då är \\(v=\\frac{x^4}{4}\\).</p>\n<p>\\[\n\\int x^3\\ln x\\,dx\n=\\frac{x^4}{4}\\ln x-\\frac14\\int x^3dx\n=\\boxed{\\frac{x^4}{4}\\ln x-\\frac{x^4}{16}+C}.\n\\]</p>\n<p><strong>c)</strong> Eftersom \\(\\frac{d}{dx}\\ln(2x)=\\frac1x\\) fungerar samma val:</p>\n<p>\\[\n\\int x^2\\ln(2x)\\,dx\n=\\frac{x^3}{3}\\ln(2x)-\\frac13\\int x^2dx\n=\\boxed{\\frac{x^3}{3}\\ln(2x)-\\frac{x^3}{9}+C}.\n\\]</p>",
     "id": "3.15"
   },
   {
@@ -3230,10 +3232,10 @@ window.BANKMATF1 = [
     "kap": 3,
     "omr": "partiell_integration",
     "niva": "E",
-    "typ": "partiell integration x gånger exponential",
-    "poang": "2/0/0",
-    "t": "<p>Bestäm \\(\\int xe^{2x}\\,dx\\).</p>",
-    "s": "<p>Välj \\(u=x\\), \\(dv=e^{2x}dx\\). Då \\(du=dx\\) och \\(v=\\frac12e^{2x}\\).</p><p>\\[\\int xe^{2x}dx=\\frac{x}{2}e^{2x}-\\frac12\\int e^{2x}dx=\\frac{x}{2}e^{2x}-\\frac14e^{2x}+C.\\]</p>",
+    "typ": "partiell integration – exponentialfunktion med olika exponenter",
+    "poang": "3/0/0",
+    "t": "<p>Bestäm integralerna.</p>\n<ol type=\"a\">\n<li>\\(\\displaystyle \\int xe^{2x}\\,dx\\)</li>\n<li>\\(\\displaystyle \\int xe^{3x}\\,dx\\)</li>\n<li>\\(\\displaystyle \\int xe^{-2x}\\,dx\\)</li>\n</ol>",
+    "s": "<p>I samtliga fall väljer vi \\(u=x\\), så att \\(du=dx\\).</p>\n<p><strong>a)</strong></p>\n<p>\\[\n\\int xe^{2x}dx\n=\\frac{x}{2}e^{2x}-\\frac14e^{2x}+C\n=\\boxed{e^{2x}\\left(\\frac{x}{2}-\\frac14\\right)+C}.\n\\]</p>\n<p><strong>b)</strong></p>\n<p>\\[\n\\int xe^{3x}dx\n=\\frac{x}{3}e^{3x}-\\frac19e^{3x}+C\n=\\boxed{e^{3x}\\left(\\frac{x}{3}-\\frac19\\right)+C}.\n\\]</p>\n<p><strong>c)</strong> Här är \\(\\int e^{-2x}dx=-\\frac12e^{-2x}\\).</p>\n<p>\\[\n\\int xe^{-2x}dx\n=-\\frac{x}{2}e^{-2x}-\\frac14e^{-2x}+C\n=\\boxed{-e^{-2x}\\left(\\frac{x}{2}+\\frac14\\right)+C}.\n\\]</p>",
     "id": "3.30"
   },
   {
@@ -3260,30 +3262,30 @@ window.BANKMATF1 = [
     "kap": 3,
     "omr": "partiell_integration",
     "niva": "E",
-    "typ": "bestämd integral med partiell integration",
-    "poang": "2/0/0",
-    "t": "<p>Beräkna \\(\\int_0^1 xe^x\\,dx\\).</p>",
-    "s": "<p>En primitiv funktion är \\((x-1)e^x\\). Därför</p><p>\\[\\int_0^1xe^x\\,dx=[(x-1)e^x]_0^1=0-(-1)=1.\\]</p>",
+    "typ": "bestämda integraler med partiell integration",
+    "poang": "3/0/0",
+    "t": "<p>Beräkna integralerna.</p>\n<ol type=\"a\">\n<li>\\(\\displaystyle \\int_0^1 xe^x\\,dx\\)</li>\n<li>\\(\\displaystyle \\int_0^1 xe^{2x}\\,dx\\)</li>\n<li>\\(\\displaystyle \\int_0^{\\pi/2}x\\cos x\\,dx\\)</li>\n</ol>",
+    "s": "<p><strong>a)</strong> En primitiv funktion är \\((x-1)e^x\\).</p>\n<p>\\[\n\\int_0^1xe^x\\,dx=[(x-1)e^x]_0^1=0-(-1)=\\boxed{1}.\n\\]</p>\n<p><strong>b)</strong> En primitiv funktion är \\(e^{2x}\\left(\\frac{x}{2}-\\frac14\\right)\\).</p>\n<p>\\[\n\\int_0^1xe^{2x}\\,dx\n=\\left[e^{2x}\\left(\\frac{x}{2}-\\frac14\\right)\\right]_0^1\n=\\frac{e^2}{4}+\\frac14\n=\\boxed{\\frac{e^2+1}{4}}.\n\\]</p>\n<p><strong>c)</strong> En primitiv funktion är \\(x\\sin x+\\cos x\\).</p>\n<p>\\[\n\\int_0^{\\pi/2}x\\cos x\\,dx\n=[x\\sin x+\\cos x]_0^{\\pi/2}\n=\\frac{\\pi}{2}-1.\n\\]</p>\n<p><strong>Svar:</strong> \\(\\boxed{\\frac{\\pi}{2}-1}\\)</p>",
     "id": "3.33"
   },
   {
     "kap": 3,
     "omr": "partiell_integration",
     "niva": "C",
-    "typ": "två steg partiell integration",
-    "poang": "0/2/0",
-    "t": "<p>Bestäm \\(\\int x^2e^x\\,dx\\).</p>",
-    "s": "<p>Första partiella integreringen med \\(u=x^2\\), \\(dv=e^xdx\\) ger</p><p>\\[x^2e^x-\\int2xe^xdx.\\]</p><p>Integrera den återstående integralen partiellt igen:</p><p>\\[\\int2xe^xdx=2(xe^x-e^x).\\]</p><p>Alltså</p><p>\\[\\int x^2e^xdx=e^x(x^2-2x+2)+C.\\]</p>",
+    "typ": "partiell integration flera gånger",
+    "poang": "0/3/0",
+    "t": "<p>Bestäm integralerna.</p>\n<ol type=\"a\">\n<li>\\(\\displaystyle \\int x^2e^x\\,dx\\)</li>\n<li>\\(\\displaystyle \\int x^2e^{2x}\\,dx\\)</li>\n<li>\\(\\displaystyle \\int x^3e^x\\,dx\\)</li>\n</ol>",
+    "s": "<p><strong>Idé:</strong> När polynomet har grad 2 eller 3 behöver vi använda partiell integration flera gånger.</p>\n<p><strong>a)</strong></p>\n<p>\\[\n\\int x^2e^x dx=x^2e^x-\\int2xe^x dx.\n\\]</p>\n<p>Eftersom \\(\\int xe^x dx=xe^x-e^x\\) får vi</p>\n<p>\\[\n\\boxed{\\int x^2e^x dx=e^x(x^2-2x+2)+C}.\n\\]</p>\n<p><strong>b)</strong> Första steget ger</p>\n<p>\\[\n\\int x^2e^{2x}dx=\\frac{x^2}{2}e^{2x}-\\int xe^{2x}dx.\n\\]</p>\n<p>Och \\(\\int xe^{2x}dx=e^{2x}\\left(\\frac{x}{2}-\\frac14\\right)\\). Alltså</p>\n<p>\\[\n\\boxed{\\int x^2e^{2x}dx\n=e^{2x}\\left(\\frac{x^2}{2}-\\frac{x}{2}+\\frac14\\right)+C}.\n\\]</p>\n<p><strong>c)</strong> Först</p>\n<p>\\[\n\\int x^3e^x dx=x^3e^x-3\\int x^2e^x dx.\n\\]</p>\n<p>Använd resultatet från a):</p>\n<p>\\[\n\\boxed{\\int x^3e^x dx=e^x(x^3-3x^2+6x-6)+C}.\n\\]</p>",
     "id": "3.34"
   },
   {
     "kap": 3,
     "omr": "partiell_integration",
     "niva": "E",
-    "typ": "x cos 2x",
-    "poang": "2/0/0",
-    "t": "<p>Bestäm \\(\\int x\\cos(2x)\\,dx\\).</p>",
-    "s": "<p>Välj \\(u=x\\), \\(dv=\\cos(2x)dx\\), så \\(v=\\frac12\\sin2x\\):</p><p>\\[\\int x\\cos2x dx=\\frac{x}{2}\\sin2x+\\frac14\\cos2x+C.\\]</p>",
+    "typ": "partiell integration – trigonometriska funktioner med faktor",
+    "poang": "3/0/0",
+    "t": "<p>Bestäm integralerna.</p>\n<ol type=\"a\">\n<li>\\(\\displaystyle \\int x\\cos(2x)\\,dx\\)</li>\n<li>\\(\\displaystyle \\int x\\sin(2x)\\,dx\\)</li>\n<li>\\(\\displaystyle \\int x\\sin(3x)\\,dx\\)</li>\n</ol>",
+    "s": "<p>Välj \\(u=x\\) i samtliga deluppgifter.</p>\n<p><strong>a)</strong></p>\n<p>\\[\n\\boxed{\\int x\\cos(2x)dx=\\frac{x}{2}\\sin(2x)+\\frac14\\cos(2x)+C}.\n\\]</p>\n<p><strong>b)</strong> Här är \\(v=-\\frac12\\cos(2x)\\).</p>\n<p>\\[\n\\int x\\sin(2x)dx\n=-\\frac{x}{2}\\cos(2x)+\\frac12\\int\\cos(2x)dx\n\\]</p>\n<p>\\[\n=\\boxed{-\\frac{x}{2}\\cos(2x)+\\frac14\\sin(2x)+C}.\n\\]</p>\n<p><strong>c)</strong> Här är \\(v=-\\frac13\\cos(3x)\\).</p>\n<p>\\[\n\\boxed{\\int x\\sin(3x)dx=-\\frac{x}{3}\\cos(3x)+\\frac19\\sin(3x)+C}.\n\\]</p>",
     "id": "3.55"
   },
   {
@@ -3300,30 +3302,30 @@ window.BANKMATF1 = [
     "kap": 3,
     "omr": "partiell_integration",
     "niva": "C",
-    "typ": "x ln x bestämd",
-    "poang": "0/2/0",
-    "t": "<p>Beräkna \\(\\int_1^e x\\ln x\\,dx\\).</p>",
-    "s": "<p>Partiell integration ger</p><p>\\[\\int x\\ln x dx=\\frac{x^2}{2}\\ln x-\\frac{x^2}{4}.\\]</p><p>Därför</p><p>\\[\\left[\\frac{x^2}{2}\\ln x-\\frac{x^2}{4}\\right]_1^e=\\frac{e^2}{4}+\\frac14=\\frac{e^2+1}{4}.\\]</p>",
+    "typ": "bestämda integraler med logaritmer",
+    "poang": "0/3/0",
+    "t": "<p>Beräkna integralerna.</p>\n<ol type=\"a\">\n<li>\\(\\displaystyle \\int_1^e x\\ln x\\,dx\\)</li>\n<li>\\(\\displaystyle \\int_1^e \\ln x\\,dx\\)</li>\n<li>\\(\\displaystyle \\int_1^e x^2\\ln x\\,dx\\)</li>\n</ol>",
+    "s": "<p><strong>a)</strong> En primitiv funktion är</p>\n<p>\\[\n\\frac{x^2}{2}\\ln x-\\frac{x^2}{4}.\n\\]</p>\n<p>Därför</p>\n<p>\\[\n\\int_1^e x\\ln x\\,dx\n=\\left[\\frac{x^2}{2}\\ln x-\\frac{x^2}{4}\\right]_1^e\n=\\boxed{\\frac{e^2+1}{4}}.\n\\]</p>\n<p><strong>b)</strong></p>\n<p>\\[\n\\int_1^e\\ln x\\,dx=[x\\ln x-x]_1^e\n=0-(-1)=\\boxed{1}.\n\\]</p>\n<p><strong>c)</strong> En primitiv funktion är</p>\n<p>\\[\n\\frac{x^3}{3}\\ln x-\\frac{x^3}{9}.\n\\]</p>\n<p>Därför</p>\n<p>\\[\n\\int_1^e x^2\\ln x\\,dx\n=\\frac{2e^3}{9}+\\frac19\n=\\boxed{\\frac{2e^3+1}{9}}.\n\\]</p>",
     "id": "3.57"
   },
   {
     "kap": 3,
     "omr": "partiell_integration",
     "niva": "C",
-    "typ": "x2 sin x",
-    "poang": "0/2/0",
-    "t": "<p>Bestäm \\(\\int x^2\\sin x\\,dx\\).</p>",
-    "s": "<p>Integrera partiellt två gånger:</p><p>\\[\\int x^2\\sin xdx=-x^2\\cos x+\\int2x\\cos xdx.\\]</p><p>\\[\\int2x\\cos xdx=2x\\sin x+2\\cos x.\\]</p><p>Alltså</p><p><strong>\\(-x^2\\cos x+2x\\sin x+2\\cos x+C\\)</strong>.</p>",
+    "typ": "partiell integration flera gånger med trigonometriska funktioner",
+    "poang": "0/3/0",
+    "t": "<p>Bestäm integralerna.</p>\n<ol type=\"a\">\n<li>\\(\\displaystyle \\int x^2\\sin x\\,dx\\)</li>\n<li>\\(\\displaystyle \\int x^2\\cos x\\,dx\\)</li>\n<li>\\(\\displaystyle \\int x^3\\sin x\\,dx\\)</li>\n</ol>",
+    "s": "<p><strong>a)</strong> Integrera partiellt två gånger:</p>\n<p>\\[\n\\int x^2\\sin x\\,dx\n=-x^2\\cos x+\\int2x\\cos x\\,dx.\n\\]</p>\n<p>\\[\n\\int2x\\cos x\\,dx=2x\\sin x+2\\cos x.\n\\]</p>\n<p>Alltså</p>\n<p>\\[\n\\boxed{-x^2\\cos x+2x\\sin x+2\\cos x+C}.\n\\]</p>\n<p><strong>b)</strong></p>\n<p>\\[\n\\int x^2\\cos x\\,dx\n=x^2\\sin x-\\int2x\\sin x\\,dx.\n\\]</p>\n<p>Eftersom \\(\\int x\\sin x\\,dx=-x\\cos x+\\sin x\\) fås</p>\n<p>\\[\n\\boxed{x^2\\sin x+2x\\cos x-2\\sin x+C}.\n\\]</p>\n<p><strong>c)</strong></p>\n<p>\\[\n\\int x^3\\sin x\\,dx\n=-x^3\\cos x+3\\int x^2\\cos x\\,dx.\n\\]</p>\n<p>Använd resultatet från b):</p>\n<p>\\[\n\\boxed{-x^3\\cos x+3x^2\\sin x+6x\\cos x-6\\sin x+C}.\n\\]</p>",
     "id": "3.58"
   },
   {
     "kap": 3,
     "omr": "partiell_integration",
     "niva": "E",
-    "typ": "x cos x bestämd",
-    "poang": "2/0/0",
-    "t": "<p>Beräkna \\(\\int_0^{\\pi}x\\cos x\\,dx\\).</p>",
-    "s": "<p>Primitiv funktion är \\(x\\sin x+\\cos x\\). Därför</p><p>\\[[x\\sin x+\\cos x]_0^{\\pi}=(-1)-(1)=-2.\\]</p>",
+    "typ": "bestämda integraler med partiell integration och trigonometriska funktioner",
+    "poang": "3/0/0",
+    "t": "<p>Beräkna integralerna.</p>\n<ol type=\"a\">\n<li>\\(\\displaystyle \\int_0^{\\pi}x\\cos x\\,dx\\)</li>\n<li>\\(\\displaystyle \\int_0^{\\pi}x\\sin x\\,dx\\)</li>\n<li>\\(\\displaystyle \\int_0^{\\pi/2}x\\cos x\\,dx\\)</li>\n</ol>",
+    "s": "<p><strong>a)</strong> En primitiv funktion är \\(x\\sin x+\\cos x\\).</p>\n<p>\\[\n[x\\sin x+\\cos x]_0^\\pi=(-1)-1=\\boxed{-2}.\n\\]</p>\n<p><strong>b)</strong> En primitiv funktion är \\(-x\\cos x+\\sin x\\).</p>\n<p>\\[\n[-x\\cos x+\\sin x]_0^\\pi=\\pi-0=\\boxed{\\pi}.\n\\]</p>\n<p><strong>c)</strong></p>\n<p>\\[\n[x\\sin x+\\cos x]_0^{\\pi/2}\n=\\frac{\\pi}{2}-1.\n\\]</p>\n<p><strong>Svar:</strong> \\(\\boxed{\\frac{\\pi}{2}-1}\\)</p>",
     "id": "3.76"
   },
   {
