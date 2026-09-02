@@ -61,7 +61,7 @@ window.OMRMA2 = {
     "likformighet": "Likformighet",
     "topptriangel_transversal": "Topptriangelsatsen och transversalsatsen",
     "bevis_likformighet": "Bevis och resonemang med likformighet",
-    "kordasatsen_biskarningssatsen": "Kordasatsen och bisekantsatsen",
+    "kordasatsen_biskarningssatsen": "Kordasatsen",
     "avstandsformeln_mittpunktsformeln": "Avståndsformeln och mittpunktsformeln",
     "koordinatgeometri_problemlosning": "Koordinatgeometri – problemlösning"
   },
@@ -77,7 +77,8 @@ window.OMRMA2 = {
   },
   "5": {
     "ekonomiprogrammet": "Ekonomiprogrammet",
-    "vard_omsorgsprogrammet": "Vård- och omsorgsprogrammet"
+    "vard_omsorgsprogrammet": "Vård- och omsorgsprogrammet",
+    "vvs_fastighetsprogrammet": "VVS- och fastighetsprogrammet"
   }
 };
 window.SPARMA2 = {
@@ -362,6 +363,9 @@ window.SPARMA2 = {
       "2b"
     ],
     "vard_omsorgsprogrammet": [
+      "2a"
+    ],
+    "vvs_fastighetsprogrammet": [
       "2a"
     ]
   }
