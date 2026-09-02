@@ -3,6 +3,8 @@
    med den aktuella ämnesplanen som gräns för vilket innehåll som ingår.
    SVG-figurer har width/height-attribut i samma stil som övriga banker.
    Figurstorlek begränsas därefter av de gemensamma figurreglerna i index.html.
+   I facit används konkreta formuleringar vid kongruensräkning:
+   t.ex. "resten vid division med 5" i stället för "reducera modulo modulen".
    I facit används SVG endast när figuren tillför ny lösningsinformation.
    Grafteori ingår inte eftersom det inte längre hör till den aktuella ämnesplanen. */
 
@@ -2214,7 +2216,7 @@ window.BANKMATF1 = [
     "typ": "bestämma restklass",
     "poang": "1/0/0",
     "t": "<p>Bestäm \\(n\\) om \\(29\\equiv n\\pmod5\\) och \\(0\\le n&lt;5\\).</p>",
-    "s": "<p><strong>Metod:</strong> Kongruens beskriver resten vid division med modulen.</p><p>Att bestämma \\(n\\) här betyder att hitta resten när 29 divideras med 5.</p><p>\\[29=5\\cdot5+4.\\]</p><p>Resten är 4, alltså <strong>\\(n=4\\)</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> Här arbetar vi modulo 5, alltså tittar vi på resten vid division med 5.</p><p>\\[29=5\\cdot5+4.\\]</p><p>Resten är 4. Därför gäller</p><p>\\[29\\equiv4\\pmod5.\\]</p><p>Alltså är <strong>\\(n=4\\)</strong>.</p>",
     "id": "2.19"
   },
   {
@@ -2224,7 +2226,7 @@ window.BANKMATF1 = [
     "typ": "förenkla produkt modulo",
     "poang": "1/0/0",
     "t": "<p>Förenkla \\(21\\cdot102\\pmod4\\).</p>",
-    "s": "<p><strong>Idé:</strong> Reducera faktorerna modulo 4 innan du multiplicerar.</p><p>\\[21\\equiv1\\pmod4,\\qquad102\\equiv2\\pmod4.\\]</p><p>Därför</p><p>\\[21\\cdot102\\equiv1\\cdot2\\equiv\\mathbf2\\pmod4.\\]</p>",
+    "s": "<p><strong>Metod:</strong> Ersätt först varje faktor med dess rest vid division med 4. Det gör talen mindre men ändrar inte vilken rest produkten får.</p><p>\\[21\\equiv1\\pmod4,\\qquad102\\equiv2\\pmod4.\\]</p><p>Därför</p><p>\\[21\\cdot102\\equiv1\\cdot2\\equiv\\mathbf2\\pmod4.\\]</p><p>Alltså är resten <strong>2</strong>.</p>",
     "id": "2.20"
   },
   {
@@ -2234,7 +2236,7 @@ window.BANKMATF1 = [
     "typ": "ge exempel på kongruenta tal",
     "poang": "1/0/0",
     "t": "<p>Ge två olika heltal som är kongruenta med 7 modulo 9. Motivera.</p>",
-    "s": "<p><strong>Metod:</strong> Kongruens beskriver resten vid division med modulen.</p><p>Exempel: <strong>16 och 25</strong>. Skillnaderna \\(16-7=9\\) och \\(25-7=18\\) är delbara med 9.</p>",
+    "s": "<p>Två tal är kongruenta modulo 9 om de ger samma rest vid division med 9.</p><p>Talet 7 ger förstås resten 7. Vi kan därför lägga till eller dra bort multiplar av 9 utan att ändra resten.</p><p>Exempel:</p><p>\\[7+9=16,\\qquad 7+18=25.\\]</p><p>Alltså är till exempel <strong>16 och 25</strong> kongruenta med 7 modulo 9.</p><p>Kontroll: \\(16-7=9\\) och \\(25-7=18\\), som båda är delbara med 9.</p>",
     "id": "2.21"
   },
   {
@@ -2244,7 +2246,7 @@ window.BANKMATF1 = [
     "typ": "multiplikation modulo",
     "poang": "1/0/0",
     "t": "<p>Beräkna \\(18\\cdot33\\pmod{16}\\).</p>",
-    "s": "<p><strong>Metod:</strong> Reducera talen modulo modulen innan du räknar vidare.</p><p>Reducera först varje faktor modulo 16:</p><p>\\[18\\equiv2\\pmod{16},\\qquad33\\equiv1\\pmod{16}.\\]</p><p>Alltså</p><p>\\[18\\cdot33\\equiv2\\cdot1\\equiv\\mathbf2\\pmod{16}.\\]</p>",
+    "s": "<p><strong>Metod:</strong> Eftersom vi arbetar modulo 16 kan vi först ersätta varje faktor med dess rest vid division med 16.</p><p>\\[18\\equiv2\\pmod{16},\\qquad33\\equiv1\\pmod{16}.\\]</p><p>Då blir</p><p>\\[18\\cdot33\\equiv2\\cdot1\\equiv\\mathbf2\\pmod{16}.\\]</p><p>Alltså är resten <strong>2</strong>.</p>",
     "id": "2.22"
   },
   {
@@ -2254,7 +2256,7 @@ window.BANKMATF1 = [
     "typ": "rest vid division",
     "poang": "1/0/0",
     "t": "<p>Beräkna \\(21\\pmod2\\).</p>",
-    "s": "<p><strong>Metod:</strong> Kongruens beskriver resten vid division med modulen.</p><p>Modulo 2 finns bara resterna 0 och 1. Eftersom 21 är udda kan det skrivas \\(21=2\\cdot10+1\\).</p><p>Alltså är <strong>\\(21\\equiv1\\pmod2\\)</strong>.</p>",
+    "s": "<p>Här arbetar vi modulo 2, alltså tittar vi på resten vid division med 2.</p><p>Eftersom 21 är udda kan vi skriva</p><p>\\[21=2\\cdot10+1.\\]</p><p>Resten är därför 1, alltså</p><p><strong>\\(21\\equiv1\\pmod2\\)</strong>.</p>",
     "id": "2.23"
   },
   {
@@ -2274,7 +2276,7 @@ window.BANKMATF1 = [
     "typ": "tolka kongruensnotation",
     "poang": "2/0/0",
     "t": "<p>Förklara med ord vad följande betyder.</p><ol type=\"a\"><li>\\(38\\equiv3\\pmod5\\)</li><li>\\(17\\equiv23\\pmod3\\)</li></ol>",
-    "s": "<p><strong>Metod:</strong> Kongruens beskriver resten vid division med modulen.</p><ol type=\"a\"><li>38 och 3 ger samma rest vid division med 5; ekvivalent är \\(38-3\\) delbart med 5.</li><li>17 och 23 ger samma rest vid division med 3; \\(17-23=-6\\) är delbart med 3.</li></ol>",
+    "s": "<p><strong>a)</strong> \\(38\\equiv3\\pmod5\\) betyder att 38 och 3 ger samma rest vid division med 5. Det kan också kontrolleras genom att skillnaden</p><p>\\[38-3=35\\]</p><p>är delbar med 5.</p><p><strong>b)</strong> \\(17\\equiv23\\pmod3\\) betyder att 17 och 23 ger samma rest vid division med 3. Skillnaden</p><p>\\[17-23=-6\\]</p><p>är delbar med 3.</p>",
     "id": "2.25"
   },
   {
@@ -2344,7 +2346,7 @@ window.BANKMATF1 = [
     "typ": "blandad kongruensberäkning",
     "poang": "2/1/0",
     "t": "<p>Förenkla \\(23+39\\cdot12\\pmod5\\) så långt som möjligt.</p>",
-    "s": "<p><strong>Metod:</strong> Reducera talen modulo modulen innan du räknar vidare.</p><p>\\(23\\equiv3\\), \\(39\\equiv4\\) och \\(12\\equiv2\\pmod5\\). Därför</p><p>\\[3+4\\cdot2=11\\equiv\\mathbf1\\pmod5.\\]</p>",
+    "s": "<p><strong>Metod:</strong> Vi arbetar modulo 5. Ersätt därför 23, 39 och 12 med deras respektive rester vid division med 5:</p><p>\\[23\\equiv3,\\qquad39\\equiv4,\\qquad12\\equiv2\\pmod5.\\]</p><p>Uttrycket får då samma rest som</p><p>\\[3+4\\cdot2=11.\\]</p><p>Eftersom \\(11\\equiv1\\pmod5\\) blir svaret <strong>1</strong>.</p>",
     "id": "2.27"
   },
   {
@@ -2374,7 +2376,7 @@ window.BANKMATF1 = [
     "typ": "bestämma slutsiffra med modularitet",
     "poang": "0/2/0",
     "t": "<p>Bestäm slutsiffran i \\(7^{2026}\\).</p>",
-    "s": "<p><strong>Metod:</strong> Reducera talen modulo modulen innan du räknar vidare.</p><p>Potenser av 7 modulo 10 går i cykeln \\(7,9,3,1\\) med period 4. Eftersom \\(2026\\equiv2\\pmod4\\) är slutsiffran samma som för \\(7^2\\): <strong>9</strong>.</p>",
+    "s": "<p><strong>Metod:</strong> För att bestämma slutsiffran räcker det att undersöka potenserna av 7 modulo 10.</p><p>\\[7^1\\equiv7,\\qquad7^2\\equiv9,\\qquad7^3\\equiv3,\\qquad7^4\\equiv1\\pmod{10}.\\]</p><p>Därefter upprepas samma fyra slutsiffror. Eftersom</p><p>\\[2026=4\\cdot506+2,\\]</p><p>har \\(7^{2026}\\) samma slutsiffra som \\(7^2\\).</p><p>Alltså är slutsiffran <strong>9</strong>.</p>",
     "id": "2.30"
   },
   {
@@ -2454,7 +2456,7 @@ window.BANKMATF1 = [
     "typ": "lösa simultana kongruenser",
     "poang": "0/1/2",
     "t": "<p>Bestäm det minsta positiva heltalet \\(x\\) som uppfyller</p><p>\\[x\\equiv2\\pmod5,\\qquad x\\equiv4\\pmod7.\\]</p>",
-    "s": "<p><strong>Metod:</strong> Reducera talen modulo modulen innan du räknar vidare.</p><p>Skriv \\(x=5k+2\\). Kravet modulo 7 ger \\(5k+2\\equiv4\\), alltså \\(5k\\equiv2\\pmod7\\). Inversen till 5 modulo 7 är 3, så \\(k\\equiv6\\pmod7\\). Minsta \\(k=6\\) ger <strong>\\(x=32\\)</strong>.</p>",
+    "s": "<p>Villkoret \\(x\\equiv2\\pmod5\\) betyder att \\(x\\) kan skrivas</p><p>\\[x=5k+2\\]</p><p>för något heltal \\(k\\ge0\\).</p><p>Det andra villkoret kräver att</p><p>\\[5k+2\\equiv4\\pmod7,\\]</p><p>alltså</p><p>\\[5k\\equiv2\\pmod7.\\]</p><p>Eftersom \\(5\\cdot3=15\\equiv1\\pmod7\\) kan vi multiplicera båda leden med 3:</p><p>\\[k\\equiv6\\pmod7.\\]</p><p>Det minsta icke-negativa värdet är därför \\(k=6\\). Då får vi</p><p>\\[x=5\\cdot6+2=32.\\]</p><p>Kontroll: \\(32\\) ger resten 2 vid division med 5 och resten 4 vid division med 7.</p><p>Alltså är <strong>\\(x=32\\)</strong>.</p>",
     "id": "2.32"
   },
   {
@@ -2464,7 +2466,7 @@ window.BANKMATF1 = [
     "typ": "stor exponent modulo",
     "poang": "0/2/0",
     "t": "<p>Bestäm resten när \\(3^{2026}+5^{2026}\\) divideras med 7.</p>",
-    "s": "<p>För potenser modulo 7 kan exponenten reduceras med period 6. Eftersom \\(2026\\equiv4\\pmod6\\) får vi</p><p>\\[3^{2026}\\equiv3^4=81\\equiv4\\pmod7\\]</p><p>och</p><p>\\[5^{2026}\\equiv5^4=625\\equiv2\\pmod7.\\]</p><p>Summan är \\(4+2=6\\). Resten är alltså <strong>6</strong>.</p>",
+    "s": "<p>Vi behöver bara hålla reda på resterna vid division med 7.</p><p>För båda baserna gäller</p><p>\\[3^6\\equiv1\\pmod7,\\qquad5^6\\equiv1\\pmod7.\\]</p><p>Därför upprepas resterna efter sex exponentsteg i den här beräkningen. Eftersom</p><p>\\[2026=6\\cdot337+4\\]</p><p>räcker det att beräkna fjärde potensen:</p><p>\\[3^{2026}\\equiv3^4=81\\equiv4\\pmod7,\\]</p><p>\\[5^{2026}\\equiv5^4=625\\equiv2\\pmod7.\\]</p><p>Summan ger då</p><p>\\[4+2=6.\\]</p><p>Resten är alltså <strong>6</strong>.</p>",
     "id": "2.57"
   },
   {
@@ -2475,7 +2477,7 @@ window.BANKMATF1 = [
     "poang": "2/0/0",
     "id": "2.65",
     "t": "<p>Förenkla \\(17\\cdot 23\\pmod 5\\).</p>",
-    "s": "<p>Vi reducerar faktorerna modulo 5:</p><p>\\[17\\equiv 2\\pmod 5,\\qquad 23\\equiv 3\\pmod 5.\\]</p><p>Då blir</p><p>\\[17\\cdot 23\\equiv 2\\cdot 3=6\\equiv 1\\pmod 5.\\]</p><p><strong>Svaret är \\(1\\pmod 5\\).</strong></p>"
+    "s": "<p><strong>Metod:</strong> Vi arbetar modulo 5, så vi ersätter först faktorerna med deras rester vid division med 5:</p><p>\\[17\\equiv2\\pmod5,\\qquad23\\equiv3\\pmod5.\\]</p><p>Då får produkten samma rest som</p><p>\\[2\\cdot3=6\\equiv1\\pmod5.\\]</p><p>Alltså är resten <strong>1</strong>.</p>"
   },
   {
     "kap": 2,
