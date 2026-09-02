@@ -78,7 +78,8 @@ window.OMRMA2 = {
   "5": {
     "ekonomiprogrammet": "Ekonomiprogrammet",
     "vard_omsorgsprogrammet": "Vård- och omsorgsprogrammet",
-    "vvs_fastighetsprogrammet": "VVS- och fastighetsprogrammet"
+    "vvs_fastighetsprogrammet": "VVS- och fastighetsprogrammet",
+    "samhallsvetenskapsprogrammet": "Samhällsvetenskapsprogrammet"
   }
 };
 window.SPARMA2 = {
@@ -367,6 +368,9 @@ window.SPARMA2 = {
     ],
     "vvs_fastighetsprogrammet": [
       "2a"
+    ],
+    "samhallsvetenskapsprogrammet": [
+      "2b"
     ]
   }
 };

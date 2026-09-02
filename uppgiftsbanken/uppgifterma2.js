@@ -16318,5 +16318,447 @@ window.BANKMA2 = [
     "t": "<p>Till en installation behövs sammanlagt 52 m färdig rördragning: kopparrör och PEX-rör. Vid inköp räknar montören med 10 % extra kopparrör och 5 % extra PEX-rör för spill. Koppar kostar 110 kr/m och PEX 55 kr/m. Den beräknade materialkostnaden är 4 268 kr.</p><p>Bestäm hur många meter av den färdiga rördragningen som är koppar respektive PEX.</p>",
     "s": "<p>Låt \\(x\\) vara färdig kopparlängd och \\(y\\) färdig PEX-längd. Då är \\[x+y=52.\\]</p><p>Inköpskostnaden blir \\(1{,}10x\\cdot110+1{,}05y\\cdot55\\), alltså \\[121x+57{,}75y=4268.\\]</p><p>Sätt \\(y=52-x\\): \\[121x+57{,}75(52-x)=4268.\\]</p><p>Det ger \\(63{,}25x=1265\\), så \\(x=20\\) och \\(y=32\\).</p><p><strong>Svar: 20 m koppar och 32 m PEX i den färdiga installationen.</strong></p>",
     "id": "5.102"
+  },
+  {
+    "id": "5.103",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "familj": "samhall_enkat_svarsbortfall_system",
+    "t": "<p>En kommun skickar en enkät till 500 personer. Av de yngre svarar 60 % och av de äldre svarar 80 %. Totalt kommer 350 svar in.</p><p>Bestäm hur många yngre respektive äldre personer enkäten skickades till.</p>",
+    "s": "<p>Låt \\(x\\) vara antalet yngre och \\(y\\) antalet äldre.</p><p>\\[\\begin{cases}x+y=500\\\\0{,}60x+0{,}80y=350\\end{cases}\\]</p><p>Multiplicera den andra ekvationen med 100 och förenkla: \\(60x+80y=35000\\). Multiplicera den första med 60: \\(60x+60y=30000\\).</p><p>Subtraktion ger \\(20y=5000\\), alltså \\(y=250\\). Då är \\(x=250\\).</p><p><strong>Enkäten skickades till 250 yngre och 250 äldre.</strong></p>"
+  },
+  {
+    "id": "5.104",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "familj": "samhall_valdeltagande_linjar_modell",
+    "t": "<p>I en fiktiv kommun modelleras valdeltagandet med</p><p>\\[V(t)=72{,}4+0{,}6t,\\]</p><p>där \\(V\\) anges i procent och \\(t\\) är antal valperioder efter startåret.</p><ol><li>Bestäm \\(V(5)\\).</li><li>Tolka talet 0,6 i modellen.</li></ol>",
+    "s": "<p>\\(V(5)=72{,}4+0{,}6\\cdot5=75{,}4\\).</p><p>Riktningskoefficienten 0,6 betyder att modellen ökar med 0,6 procentenheter per valperiod.</p><p><strong>75,4 %; modellen ökar med 0,6 procentenheter per valperiod.</strong></p>"
+  },
+  {
+    "id": "5.105",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "familj": "samhall_medier_rackvidd_exponential_log",
+    "t": "<p>En redaktion följer hur många personer som nås av en ny digital nyhetssatsning. Under den första perioden används modellen</p><p>\\[R(t)=12000\\cdot1{,}09^t,\\]</p><p>där \\(t\\) mäts i månader.</p><ol><li>Efter hur många månader är räckvidden enligt modellen 20 000 personer? Lös med logaritmer.</li><li>Förklara varför modellen bör användas försiktigt för en prognos flera år framåt.</li></ol>",
+    "s": "<p>Sätt \\(R(t)=20000\\): \\(12000\\cdot1{,}09^t=20000\\).</p><p>\\[t=\\frac{\\lg(20000/12000)}{\\lg1{,}09}\\approx5{,}93.\\]</p><p>Modellen bygger på utvecklingen under en begränsad period. Publikens beteende, plattformar och redaktionens arbetssätt kan förändras.</p><p><strong>Cirka 5,9 månader. En lång prognos ligger utanför det observerade intervallet och är därför osäker.</strong></p>"
+  },
+  {
+    "id": "5.106",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "familj": "samhall_enkat_bortfall_viktning",
+    "t": "<p>En samhällsvetenskaplig undersökning skickas till 600 personer. Gruppen 18–29 år har svarsfrekvens 70 % och gruppen 30 år eller äldre har svarsfrekvens 90 %. Totalt kommer 468 svar in.</p><p>Bland de svarande i den yngre gruppen stödjer 50 % ett förslag. Bland de svarande i den äldre gruppen stödjer 75 % förslaget.</p><ol><li>Bestäm hur många personer ur varje åldersgrupp som ingick i det ursprungliga urvalet.</li><li>Beräkna andelen stöd bland de 468 inkomna svaren.</li><li>Beräkna i stället en gruppvägd andel där de två grupperna får den vikt de hade i det ursprungliga urvalet. Förklara varför de två resultaten skiljer sig.</li></ol>",
+    "s": "<p>Låt \\(x\\) vara antalet 18–29 år och \\(y\\) antalet 30 år eller äldre.</p><p>\\[\\begin{cases}x+y=600\\\\0{,}70x+0{,}90y=468\\end{cases}\\]</p><p>Subtraktion efter lämplig multiplikation ger \\(y=240\\) och \\(x=360\\). Antalet svar blir då \\(252\\) respektive \\(216\\).</p><p>Stöd bland de inkomna svaren: \\(0{,}50\\cdot252+0{,}75\\cdot216=288\\). Andelen är \\(288/468\\approx61{,}5\\%\\).</p><p>I ursprungsurvalet utgör yngre 60 % och äldre 40 %. Den gruppvägda andelen blir \\(0{,}60\\cdot50\\%+0{,}40\\cdot75\\%=60\\%\\).</p><p>Skillnaden uppstår eftersom den äldre gruppen har högre svarsfrekvens och därför får större vikt bland de inkomna svaren än i det ursprungliga urvalet.</p><p><strong>360 yngre och 240 äldre; andel bland de inkomna svaren cirka 61,5 %, gruppvägd andel 60 %.</strong></p>"
+  },
+  {
+    "id": "5.107",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "familj": "samhall_normal_attityd_intervall",
+    "t": "<p>I en stor enkät är ett sammanvägt attitydmått ungefär normalfördelat med medelvärdet 50 och standardavvikelsen 8.</p><p>Ungefär hur stor andel ligger mellan 42 och 58? Använd normalfördelningsfiguren på formelbladet.</p>",
+    "s": "<p>42 och 58 är \\(\\mu-\\sigma\\) respektive \\(\\mu+\\sigma\\). Formelbladet visar 34,1 % på vardera sidan om medelvärdet inom en standardavvikelse.</p><p>\\[34{,}1\\%+34{,}1\\%=68{,}2\\%.\\]</p><p><strong>Cirka 68,2 %.</strong></p>"
+  },
+  {
+    "id": "5.108",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "familj": "samhall_lokalnyheter_regression",
+    "t": "<p>I en mindre studie undersöks sambandet mellan hur många dagar per vecka personer tar del av lokala nyheter och resultatet på ett kunskapstest om kommunen.</p><table class=\"data\"><tr><th>Dagar/vecka, x</th><th>Testpoäng, y</th></tr><tr><td>1</td><td>42</td></tr><tr><td>2</td><td>48</td></tr><tr><td>3</td><td>53</td></tr><tr><td>4</td><td>57</td></tr><tr><td>5</td><td>62</td></tr></table><ol><li>Bestäm en linjär regressionsmodell med ett digitalt verktyg.</li><li>Tolka modellens riktningskoefficient.</li><li>Använd modellen för att uppskatta testpoängen vid 6 dagar per vecka.</li></ol>",
+    "s": "<p>Linjär regression ger ungefär \\(y=4{,}9x+37{,}7\\).</p><p>Riktningskoefficienten 4,9 betyder att modellen förknippar en extra dag per vecka med cirka 4,9 högre testpoäng.</p><p>\\(y(6)=4{,}9\\cdot6+37{,}7=67{,}1\\).</p><p><strong>Modell: \\(y\\approx4{,}9x+37{,}7\\). Vid 6 dagar blir modellvärdet cirka 67 poäng.</strong></p>"
+  },
+  {
+    "id": "5.109",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "familj": "samhall_enkat_webb_telefon_system",
+    "t": "<p>En undersökning får 320 svar. Ett webbsvar beräknas ta 2 minuter att behandla och ett telefonsvar 6 minuter. Den sammanlagda behandlingstiden är 960 minuter.</p><p>Bestäm antalet webbsvar och telefonsvar.</p>",
+    "s": "<p>Låt \\(x\\) vara webbsvar och \\(y\\) telefonsvar.</p><p>\\[\\begin{cases}x+y=320\\\\2x+6y=960\\end{cases}\\]</p><p>Dubbel den första ekvationen: \\(2x+2y=640\\). Subtraktion ger \\(4y=320\\), alltså \\(y=80\\). Då är \\(x=240\\).</p><p><strong>240 webbsvar och 80 telefonsvar.</strong></p>"
+  },
+  {
+    "id": "5.110",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "familj": "samhall_gruppundersokning_standardavvikelse",
+    "t": "<p>Två grupper svarar på samma fråga på en skala från 1 till 10.</p><table class=\"data\"><tr><th>Grupp A</th><th>Grupp B</th></tr><tr><td>4</td><td>2</td></tr><tr><td>5</td><td>4</td></tr><tr><td>5</td><td>5</td></tr><tr><td>6</td><td>6</td></tr><tr><td>5</td><td>8</td></tr></table><ol><li>Bestäm medelvärde och standardavvikelse för båda grupperna med ett digitalt verktyg.</li><li>Vilken grupp har mest samlade svar kring medelvärdet? Motivera.</li></ol>",
+    "s": "<p>Båda grupperna har medelvärdet 5,0.</p><p>Ett digitalt verktyg ger standardavvikelse ungefär \\(0{,}63\\) för grupp A och \\(2{,}00\\) för grupp B.</p><p>Grupp A har mindre standardavvikelse och svaren ligger därför mer samlade kring medelvärdet.</p><p><strong>Grupp A har mest samlade svar.</strong></p>"
+  },
+  {
+    "id": "5.111",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "familj": "samhall_befolkning_modellval_regression",
+    "t": "<p>Befolkningen i en fiktiv kommun mäts vartannat år. \\(t\\) är antal år efter startåret och \\(P\\) anges i tusental.</p><table class=\"data\"><tr><th>t</th><th>P</th></tr><tr><td>0</td><td>50,0</td></tr><tr><td>2</td><td>52,0</td></tr><tr><td>4</td><td>54,1</td></tr><tr><td>6</td><td>56,3</td></tr></table><ol><li>Bestäm både en linjär och en exponential regressionsmodell med ett digitalt verktyg.</li><li>Beräkna båda modellernas prognos för \\(t=20\\).</li><li>Förklara varför det är svårt att avgöra vilken modell som är bäst enbart utifrån de fyra mätpunkterna.</li></ol>",
+    "s": "<p>En linjär regression ger ungefär \\(P=49{,}95+1{,}05t\\). En exponential regression ger ungefär \\(P=49{,}99\\cdot1{,}01998^t\\).</p><p>För \\(t=20\\) ger den linjära modellen cirka \\(70{,}95\\) tusen och exponentialmodellen cirka \\(74{,}25\\) tusen.</p><p>Båda modellerna ligger mycket nära de fyra observerade värdena. Skillnaden blir tydligare först långt utanför mätintervallet, där båda prognoserna dessutom är mer osäkra.</p><p><strong>Cirka 71,0 tusen respektive 74,3 tusen vid \\(t=20\\); data räcker inte för ett säkert långsiktigt modellval.</strong></p>"
+  },
+  {
+    "id": "5.112",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "familj": "samhall_digital_nyhet_exponential_varde",
+    "t": "<p>Antalet läsare som nås av en digital artikel modelleras under de första timmarna med</p><p>\\[L(t)=18000\\cdot1{,}12^t.\\]</p><p>Beräkna modellens värde efter 4 timmar.</p>",
+    "s": "<p>\\(L(4)=18000\\cdot1{,}12^4\\approx28323\\).</p><p><strong>Cirka 28 300 läsare.</strong></p>"
+  },
+  {
+    "id": "5.113",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "familj": "samhall_korrelation_orsak",
+    "t": "<p>I en studie är korrelationskoefficienten mellan hur ofta personer tar del av politiska nyheter och hur ofta de deltar i samhällsdebatter \\(r=0{,}82\\).</p><p>En skribent drar slutsatsen att mer nyhetsläsning orsakar ett större deltagande i samhällsdebatter. Bedöm slutsatsen.</p>",
+    "s": "<p>Ett värde nära 1 visar ett starkt positivt linjärt samband i materialet, men korrelation visar inte i sig orsak.</p><p>Till exempel kan ett redan stort samhällsintresse göra att en person både läser mer nyheter och deltar oftare i debatter.</p><p><strong>Slutsatsen om orsak är inte motiverad enbart av korrelationskoefficienten.</strong></p>"
+  },
+  {
+    "id": "5.114",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "familj": "samhall_karta_avstand_pythagoras",
+    "t": "<p>På en förenklad kommunkarta ligger ett bibliotek i \\(A=(2,1)\\) och ett medborgarkontor i \\(B=(8,9)\\). Koordinaterna anges i kilometer.</p><p>Beräkna det raka avståndet mellan platserna.</p>",
+    "s": "<p>Avståndsformeln ger</p><p>\\[d=\\sqrt{(8-2)^2+(9-1)^2}=\\sqrt{36+64}=10.\\]</p><p><strong>Avståndet är 10 km.</strong></p>"
+  },
+  {
+    "id": "5.115",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "familj": "samhall_normal_percentil_digital",
+    "t": "<p>Ett enkätresultat är ungefär normalfördelat med medelvärdet 50 och standardavvikelsen 10.</p><p>Bestäm med ett digitalt verktyg det gränsvärde som 90 % av resultaten ligger under.</p>",
+    "s": "<p>Gränsen är den 90:e percentilen. Använd normalfördelningens sannolikhetskalkylator med medelvärde 50 och standardavvikelse 10 och bestäm värdet som har 0,90 av arean till vänster.</p><p>Det ger ungefär \\(62{,}8\\).</p><p><strong>Gränsvärdet är cirka 62,8.</strong></p>"
+  },
+  {
+    "id": "5.116",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "familj": "samhall_karta_mittpunkt",
+    "t": "<p>Två mötesplatser på en karta har koordinaterna \\(A=(2,4)\\) och \\(B=(10,8)\\).</p><p>Bestäm mittpunkten på sträckan \\(AB\\).</p>",
+    "s": "<p>Mittpunktsformeln ger</p><p>\\[M=\\left(\\frac{2+10}{2},\\frac{4+8}{2}\\right)=(6,6).\\]</p><p><strong>Mittpunkten är \\((6,6)\\).</strong></p>"
+  },
+  {
+    "id": "5.117",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "familj": "samhall_samrad_kvadratisk_modell",
+    "t": "<p>En kommun testar olika antal påminnelser inför ett digitalt samråd. En förenklad modell för antalet svar är</p><p>\\[S(x)=-2x^2+24x+40,\\]</p><p>där \\(x\\) är antalet påminnelser i modellen.</p><ol><li>Bestäm modellens största värde.</li><li>För vilka värden på \\(x\\) är modellens värde minst 100?</li></ol>",
+    "s": "<p>Skriv modellen med en kvadrat:</p><p>\\[S(x)=-2(x^2-12x)+40=-2((x-6)^2-36)+40=-2(x-6)^2+112.\\]</p><p>Eftersom \\((x-6)^2\\ge0\\) är modellens största värde 112, och det fås när \\(x=6\\).</p><p>Kravet \\(S(x)\\ge100\\) ger \\(-2x^2+24x+40\\ge100\\), alltså \\(x^2-12x+30\\le0\\).</p><p>Nollställena är \\(x=6\\pm\\sqrt6\\approx3{,}55\\) och \\(8{,}45\\). Uttrycket är högst 0 mellan nollställena.</p><p><strong>Största modellvärdet är 112. Matematiskt fås minst 100 för ungefär \\(3{,}55\\le x\\le8{,}45\\). Eftersom \\(x\\) är antal påminnelser motsvarar det 4–8 påminnelser.</strong></p>"
+  },
+  {
+    "id": "5.118",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "familj": "samhall_servicepunkt_koordinater",
+    "t": "<p>En kommun överväger en informationspunkt längs en huvudgata som i koordinatsystemet har ekvationen \\(x=6\\). Två bostadsområden representeras av \\(A=(1,2)\\) och \\(B=(9,6)\\). Informationspunkten \\(P\\) ska ligga lika långt från A som från B.</p><span class=\"fig\"><svg width=\"560\" height=\"420\" viewBox=\"0 0 560 420\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Koordinatsystem med två bostadsområden och en vertikal huvudgata x lika med 6\">\n<rect x=\"1\" y=\"1\" width=\"558\" height=\"418\" rx=\"12\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<g stroke=\"#E9E8EB\" stroke-width=\"1\"><line x1=\"60\" y1=\"40\" x2=\"60\" y2=\"360\"/><line x1=\"100\" y1=\"40\" x2=\"100\" y2=\"360\"/><line x1=\"140\" y1=\"40\" x2=\"140\" y2=\"360\"/><line x1=\"180\" y1=\"40\" x2=\"180\" y2=\"360\"/><line x1=\"220\" y1=\"40\" x2=\"220\" y2=\"360\"/><line x1=\"260\" y1=\"40\" x2=\"260\" y2=\"360\"/><line x1=\"300\" y1=\"40\" x2=\"300\" y2=\"360\"/><line x1=\"340\" y1=\"40\" x2=\"340\" y2=\"360\"/><line x1=\"380\" y1=\"40\" x2=\"380\" y2=\"360\"/><line x1=\"420\" y1=\"40\" x2=\"420\" y2=\"360\"/><line x1=\"460\" y1=\"40\" x2=\"460\" y2=\"360\"/><line x1=\"60\" y1=\"360\" x2=\"460\" y2=\"360\"/><line x1=\"60\" y1=\"320\" x2=\"460\" y2=\"320\"/><line x1=\"60\" y1=\"280\" x2=\"460\" y2=\"280\"/><line x1=\"60\" y1=\"240\" x2=\"460\" y2=\"240\"/><line x1=\"60\" y1=\"200\" x2=\"460\" y2=\"200\"/><line x1=\"60\" y1=\"160\" x2=\"460\" y2=\"160\"/><line x1=\"60\" y1=\"120\" x2=\"460\" y2=\"120\"/><line x1=\"60\" y1=\"80\" x2=\"460\" y2=\"80\"/><line x1=\"60\" y1=\"40\" x2=\"460\" y2=\"40\"/></g>\n<line x1=\"60\" y1=\"360\" x2=\"485\" y2=\"360\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"60\" y1=\"380\" x2=\"60\" y2=\"25\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"300\" y1=\"40\" x2=\"300\" y2=\"360\" stroke=\"#B43123\" stroke-width=\"2.5\" stroke-dasharray=\"7 5\"/>\n<text x=\"307\" y=\"62\" class=\"fig-etikett\">huvudgata x = 6</text>\n<circle cx=\"100\" cy=\"280\" r=\"6\" fill=\"#2A5D9E\"/><text x=\"82\" y=\"302\" class=\"fig-namn\">A</text>\n<circle cx=\"420\" cy=\"120\" r=\"6\" fill=\"#2A5D9E\"/><text x=\"430\" y=\"112\" class=\"fig-namn\">B</text>\n<text x=\"60\" y=\"382\" text-anchor=\"middle\" class=\"fig-num\">0</text><text x=\"140\" y=\"382\" text-anchor=\"middle\" class=\"fig-num\">2</text><text x=\"220\" y=\"382\" text-anchor=\"middle\" class=\"fig-num\">4</text><text x=\"300\" y=\"382\" text-anchor=\"middle\" class=\"fig-num\">6</text><text x=\"380\" y=\"382\" text-anchor=\"middle\" class=\"fig-num\">8</text><text x=\"460\" y=\"382\" text-anchor=\"middle\" class=\"fig-num\">10</text><text x=\"48\" y=\"365\" text-anchor=\"end\" class=\"fig-num\">0</text><text x=\"48\" y=\"285\" text-anchor=\"end\" class=\"fig-num\">2</text><text x=\"48\" y=\"205\" text-anchor=\"end\" class=\"fig-num\">4</text><text x=\"48\" y=\"125\" text-anchor=\"end\" class=\"fig-num\">6</text><text x=\"48\" y=\"45\" text-anchor=\"end\" class=\"fig-num\">8</text><text x=\"492\" y=\"365\" class=\"fig-num\">x</text><text x=\"49\" y=\"24\" class=\"fig-num\">y</text>\n</svg></span><ol><li>Bestäm koordinaterna för \\(P\\).</li><li>Beräkna avståndet från \\(P\\) till vart och ett av områdena.</li></ol>",
+    "s": "<p>Skriv \\(P=(6,y)\\). Villkoret \\(PA=PB\\) ger</p><p>\\[(6-1)^2+(y-2)^2=(6-9)^2+(y-6)^2.\\]</p><p>\\(25+(y-2)^2=9+(y-6)^2\\). Efter utveckling fås \\(8y=16\\), alltså \\(y=2\\).</p><p>Alltså \\(P=(6,2)\\). Avståndet till A blir 5 längdenheter. Till B blir avståndet \\(\\sqrt{3^2+4^2}=5\\).</p><p><strong>\\(P=(6,2)\\), och avståndet till vardera området är 5 längdenheter.</strong></p>"
+  },
+  {
+    "id": "5.119",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "familj": "samhall_regression_tolkning",
+    "t": "<p>I en studie av kommuninformation används regressionsmodellen</p><p>\\[y=2{,}4x+31,\\]</p><p>där \\(x\\) är antal informationskontakter under en månad och \\(y\\) är ett kunskapsresultat i poäng.</p><p>Tolka talen 2,4 och 31 i modellen.</p>",
+    "s": "<p>Riktningskoefficienten 2,4 betyder att modellen förknippar en extra informationskontakt med cirka 2,4 högre poäng.</p><p>Konstanten 31 är modellens värde när \\(x=0\\).</p><p><strong>2,4 är förändringen per extra kontakt och 31 är modellvärdet vid 0 kontakter.</strong></p>"
+  },
+  {
+    "id": "5.120",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "familj": "samhall_parallella_trendlinjer",
+    "t": "<p>Två fiktiva kommuner har modellerna</p><p>\\[A(t)=68+0{,}4t,\\qquad B(t)=72+0{,}4t,\\]</p><p>för ett procenttal som följs över tid.</p><ol><li>Finns det något värde på \\(t\\) där modellerna ger samma resultat?</li><li>Tolka svaret i sammanhanget.</li></ol>",
+    "s": "<p>Sätt modellerna lika: \\(68+0{,}4t=72+0{,}4t\\). När \\(0{,}4t\\) subtraheras från båda led återstår \\(68=72\\), vilket är omöjligt.</p><p>Linjerna har samma riktningskoefficient men olika konstant och är därför parallella.</p><p><strong>Nej. Modellerna behåller en skillnad på 4 procentenheter hela tiden.</strong></p>"
+  },
+  {
+    "id": "5.121",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "familj": "samhall_mediearkiv_logaritm",
+    "t": "<p>Antalet sökbara dokument i ett digitalt mediearkiv modelleras med</p><p>\\[D(t)=5000\\cdot10^{0{,}2t}.\\]</p><p>Efter hur lång tid är modellens värde 50 000?</p>",
+    "s": "<p>Sätt \\(D(t)=50000\\): \\(5000\\cdot10^{0{,}2t}=50000\\), alltså \\(10^{0{,}2t}=10\\).</p><p>Därför är \\(0{,}2t=1\\) och \\(t=5\\).</p><p><strong>Efter 5 tidsenheter.</strong></p>"
+  },
+  {
+    "id": "5.122",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "familj": "samhall_befolkning_linjar_exponential_jamforelse",
+    "t": "<p>Två modeller används för befolkningen i ett område, där \\(t\\) är antal år efter startåret:</p><p>\\[L(t)=20000+400t,\\qquad E(t)=20000\\cdot1{,}02^t.\\]</p><ol><li>Beräkna båda modellernas värden efter 10 år.</li><li>Vilken modell ger då störst befolkning?</li><li>Förklara en viktig skillnad mellan modellernas antaganden.</li></ol>",
+    "s": "<p>\\(L(10)=24000\\).</p><p>\\(E(10)=20000\\cdot1{,}02^{10}\\approx24380\\).</p><p>Den linjära modellen antar samma ökning i antal varje år. Exponentialmodellen antar samma procentuella ökning varje år.</p><p><strong>Efter 10 år: 24 000 respektive cirka 24 380; exponentialmodellen är större.</strong></p>"
+  },
+  {
+    "id": "5.123",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "familj": "samhall_ladagram_avlasning",
+    "t": "<p>Ett lådagram visar hur personer i en enkät bedömer förtroendet för lokal samhällsinformation på en skala från 0 till 10.</p><span class=\"fig smal\"><svg width=\"520\" height=\"190\" viewBox=\"0 0 520 190\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Lådagram från 0 till 10\">\n<rect x=\"1\" y=\"1\" width=\"518\" height=\"188\" rx=\"12\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n<line x1=\"55\" y1=\"135\" x2=\"465\" y2=\"135\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"55\" y1=\"130\" x2=\"55\" y2=\"140\" stroke=\"#2B2527\"/><text x=\"55\" y=\"158\" text-anchor=\"middle\" class=\"fig-num\">0</text><line x1=\"96\" y1=\"130\" x2=\"96\" y2=\"140\" stroke=\"#2B2527\"/><text x=\"96\" y=\"158\" text-anchor=\"middle\" class=\"fig-num\">1</text><line x1=\"137\" y1=\"130\" x2=\"137\" y2=\"140\" stroke=\"#2B2527\"/><text x=\"137\" y=\"158\" text-anchor=\"middle\" class=\"fig-num\">2</text><line x1=\"178\" y1=\"130\" x2=\"178\" y2=\"140\" stroke=\"#2B2527\"/><text x=\"178\" y=\"158\" text-anchor=\"middle\" class=\"fig-num\">3</text><line x1=\"219\" y1=\"130\" x2=\"219\" y2=\"140\" stroke=\"#2B2527\"/><text x=\"219\" y=\"158\" text-anchor=\"middle\" class=\"fig-num\">4</text><line x1=\"260\" y1=\"130\" x2=\"260\" y2=\"140\" stroke=\"#2B2527\"/><text x=\"260\" y=\"158\" text-anchor=\"middle\" class=\"fig-num\">5</text><line x1=\"301\" y1=\"130\" x2=\"301\" y2=\"140\" stroke=\"#2B2527\"/><text x=\"301\" y=\"158\" text-anchor=\"middle\" class=\"fig-num\">6</text><line x1=\"342\" y1=\"130\" x2=\"342\" y2=\"140\" stroke=\"#2B2527\"/><text x=\"342\" y=\"158\" text-anchor=\"middle\" class=\"fig-num\">7</text><line x1=\"383\" y1=\"130\" x2=\"383\" y2=\"140\" stroke=\"#2B2527\"/><text x=\"383\" y=\"158\" text-anchor=\"middle\" class=\"fig-num\">8</text><line x1=\"424\" y1=\"130\" x2=\"424\" y2=\"140\" stroke=\"#2B2527\"/><text x=\"424\" y=\"158\" text-anchor=\"middle\" class=\"fig-num\">9</text><line x1=\"465\" y1=\"130\" x2=\"465\" y2=\"140\" stroke=\"#2B2527\"/><text x=\"465\" y=\"158\" text-anchor=\"middle\" class=\"fig-num\">10</text><line x1=\"96\" y1=\"80\" x2=\"424\" y2=\"80\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<line x1=\"96\" y1=\"67\" x2=\"96\" y2=\"93\" stroke=\"#2B2527\" stroke-width=\"2\"/><line x1=\"424\" y1=\"67\" x2=\"424\" y2=\"93\" stroke=\"#2B2527\" stroke-width=\"2\"/>\n<rect x=\"178\" y=\"55\" width=\"164\" height=\"50\" fill=\"#EAF0F8\" stroke=\"#2A5D9E\" stroke-width=\"2\"/>\n<line x1=\"260\" y1=\"55\" x2=\"260\" y2=\"105\" stroke=\"#2A5D9E\" stroke-width=\"3\"/>\n</svg></span><ol><li>Bestäm medianen.</li><li>Bestäm kvartilavståndet.</li></ol>",
+    "s": "<p>Medianen markeras av linjen inne i lådan och är 5.</p><p>Nedre kvartil är 3 och övre kvartil är 7. Kvartilavståndet är \\(7-3=4\\).</p><p><strong>Median 5 och kvartilavstånd 4.</strong></p>"
+  },
+  {
+    "id": "5.124",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "familj": "samhall_enkat_urval_viktat_medel",
+    "t": "<p>I en kommun utgör grupp A 60 % av befolkningen och grupp B 40 %. I en undersökning är medelvärdet på en fråga 7,2 i grupp A och 6,1 i grupp B.</p><p>I det faktiska svarsunderlaget råkar 80 % komma från grupp A och 20 % från grupp B.</p><ol><li>Beräkna medelvärdet om svaren vägs efter svarsunderlagets fördelning.</li><li>Beräkna i stället medelvärdet om grupperna vägs efter kommunens befolkningsfördelning.</li><li>Förklara vad skillnaden visar.</li></ol>",
+    "s": "<p>Svarsunderlagets medelvärde blir \\(0{,}80\\cdot7{,}2+0{,}20\\cdot6{,}1=6{,}98\\).</p><p>Vägt efter befolkningen blir värdet \\(0{,}60\\cdot7{,}2+0{,}40\\cdot6{,}1=6{,}76\\).</p><p>Skillnaden visar att en grupp som är överrepresenterad bland svaren kan påverka det sammanlagda resultatet.</p><p><strong>6,98 respektive 6,76.</strong></p>"
+  },
+  {
+    "id": "5.125",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "familj": "samhall_korrelation_befolkningsstorlek",
+    "t": "<p>En journalist jämför fyra kommuner och får följande data.</p><table class=\"data\"><tr><th>Invånare (tusental)</th><th>Biblioteksbesök (tusental)</th><th>Anmälda serviceärenden</th></tr><tr><td>20</td><td>30</td><td>160</td></tr><tr><td>40</td><td>60</td><td>320</td></tr><tr><td>60</td><td>90</td><td>480</td></tr><tr><td>80</td><td>120</td><td>640</td></tr></table><ol><li>Bestäm korrelationskoefficienten mellan biblioteksbesök och serviceärenden.</li><li>Journalisten skriver: ”Fler biblioteksbesök leder till fler serviceärenden.” Bedöm slutsatsen genom att även jämföra uppgifterna med kommunernas storlek.</li></ol>",
+    "s": "<p>De två kolumnerna är exakt proportionella, så den linjära korrelationskoefficienten är \\(r=1\\).</p><p>Men båda antalen ökar också exakt proportionellt med invånarantalet. Biblioteksbesöken är \\(1{,}5\\) per invånare i samtliga kommuner och serviceärendena är 8 per 1000 invånare i samtliga kommuner.</p><p>Sambandet mellan de två råa antalen kan därför förklaras av kommunstorleken. Korrelationen visar inte att biblioteksbesök orsakar serviceärenden.</p><p><strong>\\(r=1\\), men slutsatsen om orsak stöds inte; invånarantalet förklarar den gemensamma ökningen i råa antal.</strong></p>"
+  },
+  {
+    "id": "5.126",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "familj": "samhall_medborgardialog_kvadrat_max",
+    "t": "<p>Inför en medborgardialog modelleras antalet deltagare med</p><p>\\[D(x)=-4x^2+48x+120.\\]</p><p>Här är \\(x\\) antal veckor före dialogen som informationsinsatsen startar. Bestäm modellens största värde och vilket \\(x\\)-värde det fås för.</p>",
+    "s": "<p>Kvadratkomplettera:</p><p>\\[D(x)=-4(x^2-12x)+120=-4((x-6)^2-36)+120=-4(x-6)^2+264.\\]</p><p>Eftersom \\((x-6)^2\\ge0\\) är det största möjliga modellvärdet 264. Det fås när \\(x=6\\).</p><p><strong>Största modellvärdet är 264 och fås vid \\(x=6\\).</strong></p>"
+  },
+  {
+    "id": "5.127",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "familj": "samhall_normal_forvantat_antal",
+    "t": "<p>Ett mått i en stor undersökning antas vara normalfördelat. Av 1 200 personer vill man uppskatta hur många som ligger inom två standardavvikelser från medelvärdet.</p><p>Använd normalfördelningsfiguren på formelbladet.</p>",
+    "s": "<p>Mellan \\(\\mu-2\\sigma\\) och \\(\\mu+2\\sigma\\) ligger enligt figuren</p><p>\\[2\\cdot(34{,}1\\%+13{,}6\\%)=95{,}4\\%.\\]</p><p>\\(0{,}954\\cdot1200=1144{,}8\\).</p><p><strong>Ungefär 1 145 personer.</strong></p>"
+  },
+  {
+    "id": "5.128",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "familj": "samhall_percentil_tolkning",
+    "t": "<p>I ett källkritikstest inom en mediestudie ligger en persons resultat vid den 75:e percentilen.</p><p>Förklara vad det betyder.</p>",
+    "s": "<p>Den 75:e percentilen är ett värde som ungefär 75 % av observationerna ligger på eller under.</p><p><strong>Personens resultat ligger ungefär lika högt eller högre än 75 % av resultaten.</strong></p>"
+  },
+  {
+    "id": "5.129",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "familj": "samhall_befolkning_exponentialmodell_tva_punkter",
+    "t": "<p>Befolkningen i ett område var 42 000 personer vid startåret och 46 400 personer fem år senare. Anta att utvecklingen under perioden kan beskrivas med en exponentialfunktion.</p><ol><li>Bestäm en modell \\(P(t)=C\\cdot a^t\\).</li><li>Beräkna modellens värde efter 10 år.</li><li>Ange den årliga procentuella förändringen enligt modellen.</li></ol>",
+    "s": "<p>Eftersom \\(P(0)=42000\\) är \\(C=42000\\).</p><p>\\[42000a^5=46400\\Rightarrow a=\\sqrt[5]{46400/42000}\\approx1{,}02013.\\]</p><p>Alltså \\(P(t)\\approx42000\\cdot1{,}02013^t\\). Efter 10 år blir modellvärdet cirka \\(51261\\).</p><p>Förändringsfaktorn motsvarar ungefär 2,01 % ökning per år.</p><p><strong>\\(P(t)\\approx42000\\cdot1{,}02013^t\\), cirka 51 300 personer efter 10 år och cirka 2,0 % per år.</strong></p>"
+  },
+  {
+    "id": "5.130",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "familj": "samhall_debatt_deltagande_andragrad_nollstallen",
+    "t": "<p>I en mediestudie beskriver \\(I(x)=-x^2+10x\\) skillnaden mellan två informationskanalers modellerade räckvidd.</p><p>När \\(I(x)=0\\) ger modellerna samma räckvidd. Bestäm dessa \\(x\\)-värden.</p>",
+    "s": "<p>Faktorisera: \\(I(x)=x(10-x)\\).</p><p>Nollproduktmetoden ger \\(x=0\\) eller \\(x=10\\).</p><p><strong>Modellerna ger samma räckvidd vid \\(x=0\\) och \\(x=10\\).</strong></p>"
+  },
+  {
+    "id": "5.131",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "familj": "samhall_mediespridning_potens_exponential",
+    "t": "<p>Två modeller används för den sammanlagda räckvidden för ett medieinnehåll under de första 20 timmarna:</p><p>\\[P(t)=400t^2,\\qquad E(t)=1500\\cdot1{,}3^t.\\]</p><ol><li>Bestäm med GeoGebra när modellerna ger samma värde.</li><li>Beskriv under vilka tidsintervall respektive modell ger störst värde.</li><li>Förklara varför en jämförelse mellan modellerna bör begränsas till det intervall där de har prövats mot data.</li></ol>",
+    "s": "<p>Lös \\(400t^2=1500\\cdot1{,}3^t\\) grafiskt eller med ett digitalt verktyg. Det ger ungefär \\(t=2{,}80\\) och \\(t=16{,}19\\).</p><p>Exponentialmodellen ligger högre före cirka 2,80 timmar och efter cirka 16,19 timmar. Potensmodellen ligger högre däremellan.</p><p>Utanför det observerade intervallet kan båda modellerna ge utveckling som inte motsvarar verkligt användarbeteende.</p><p><strong>Skärningar vid cirka 2,80 h och 16,19 h; modellernas relativa storlek växlar vid dessa punkter.</strong></p>"
+  },
+  {
+    "id": "5.132",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "A",
+    "poang": "0/1/2",
+    "familj": "samhall_normalmodell_granskning",
+    "t": "<p>Ett attitydmått i en undersökning har medelvärdet 50 och standardavvikelsen 10. En analytiker antar att resultaten är normalfördelade.</p><p>I ett material med 1 000 personer ligger 870 personer mellan 30 och 70.</p><ol><li>Hur många personer skulle normalfördelningsmodellen ungefär förutsäga mellan 30 och 70? Använd formelbladet.</li><li>Jämför modellen med det observerade utfallet.</li><li>Bedöm om uppgifterna ger skäl att kontrollera normalfördelningsantagandet närmare.</li></ol>",
+    "s": "<p>Intervallet 30–70 är \\(\\mu\\pm2\\sigma\\). Formelbladet ger cirka 95,4 % inom två standardavvikelser.</p><p>Modellen förutsäger därför \\(0{,}954\\cdot1000=954\\) personer. Det observerade antalet är 870, alltså 84 färre.</p><p>Skillnaden är tydlig. Den visar inte ensam exakt hur fördelningen ser ut, men den ger goda skäl att undersöka om normalfördelningsmodellen passar materialet.</p><p><strong>Modellen förutsäger cirka 954 personer, jämfört med 870 observerade; modellantagandet bör granskas närmare.</strong></p>"
+  },
+  {
+    "id": "5.133",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "familj": "samhall_digital_kanal_aldersgrupper_system",
+    "t": "<p>Vid ett kommunalt samråd deltar 420 personer. Bland deltagare under 30 år väljer 62 % en digital kanal, medan 38 % av deltagarna som är 30 år eller äldre gör det. Totalt väljer 210 personer den digitala kanalen.</p><p>Bestäm hur många deltagare som tillhör respektive åldersgrupp.</p>",
+    "s": "<p>Låt \\(x\\) vara antalet under 30 år och \\(y\\) antalet 30 år eller äldre.</p><p>\\[\\begin{cases}x+y=420\\\\0{,}62x+0{,}38y=210\\end{cases}\\]</p><p>Sätt \\(y=420-x\\): \\(0{,}62x+0{,}38(420-x)=210\\).</p><p>\\(0{,}24x=50{,}4\\), alltså \\(x=210\\) och \\(y=210\\).</p><p><strong>210 personer i vardera gruppen.</strong></p>"
+  },
+  {
+    "id": "5.134",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "E",
+    "poang": "2/0/0",
+    "familj": "samhall_tva_trender_skarning",
+    "t": "<p>Två modeller för andelen som använder två olika informationskanaler är</p><p>\\[A(t)=30+2t,\\qquad B(t)=48-t,\\]</p><p>där andelarna anges i procent.</p><p>Bestäm när modellerna ger samma andel och vilken andel det är.</p>",
+    "s": "<p>Sätt modellerna lika: \\(30+2t=48-t\\). Då \\(3t=18\\), så \\(t=6\\).</p><p>Andelen blir \\(A(6)=30+12=42\\).</p><p><strong>Efter 6 tidsenheter, då båda modellerna ger 42 %.</strong></p>"
+  },
+  {
+    "id": "5.135",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "C",
+    "poang": "0/3/0",
+    "familj": "samhall_kartskala_omrade",
+    "t": "<p>På en tematisk karta i skala 1:25 000 upptar ett stadsområde 18 cm².</p><ol><li>Bestäm områdets verkliga area i km².</li><li>Samma område ritas på en ny karta i skala 1:10 000. Hur stor area upptar området på den nya kartan?</li></ol>",
+    "s": "<p>I skala 1:25 000 motsvarar 1 cm 250 m. Därför motsvarar 1 cm² \\(250^2=62500\\) m² = 0,0625 km².</p><p>Områdets area är \\(18\\cdot0{,}0625=1{,}125\\) km².</p><p>I skala 1:10 000 motsvarar 1 cm 100 m och 1 cm² motsvarar 10 000 m² = 0,01 km². Därför blir kartarean \\(1{,}125/0{,}01=112{,}5\\) cm².</p><p><strong>1,125 km² i verkligheten och 112,5 cm² på kartan i skala 1:10 000.</strong></p>"
+  },
+  {
+    "id": "5.136",
+    "kap": 5,
+    "omr": "samhallsvetenskapsprogrammet",
+    "kurs": [
+      "2b"
+    ],
+    "niva": "C",
+    "poang": "0/2/0",
+    "familj": "samhall_ladagram_jamforelse",
+    "t": "<p>För två områden har följande värden lästs av ur lådagram från en enkät på skalan 0–10:</p><table class=\"data\"><tr><th></th><th>Min</th><th>Nedre kvartil</th><th>Median</th><th>Övre kvartil</th><th>Max</th></tr><tr><td>Område A</td><td>1</td><td>4</td><td>6</td><td>8</td><td>10</td></tr><tr><td>Område B</td><td>2</td><td>5</td><td>6</td><td>7</td><td>9</td></tr></table><ol><li>Jämför medianerna.</li><li>Bestäm kvartilavståndet för båda områdena.</li><li>En elev säger: ”Område B har högre typiskt resultat och större spridning.” Bedöm påståendet utifrån uppgifterna.</li></ol>",
+    "s": "<p>Båda områdena har medianen 6.</p><p>Kvartilavståndet är \\(8-4=4\\) för A och \\(7-5=2\\) för B.</p><p>Påståendet stämmer inte. Medianerna är lika, och de mittersta 50 % av svaren är mer utspridda i A än i B.</p><p><strong>Samma median, men större kvartilavstånd i område A.</strong></p>"
   }
 ];
