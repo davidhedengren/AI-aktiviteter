@@ -908,7 +908,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/2",
     "t": "<p>Bestäm alla värden på \\(a\\) för vilka systemet</p><p>\\(\\begin{cases}ax+2y=8\\\\3x+(a-1)y=9\\end{cases}\\)</p><p>inte har exakt en lösning.</p>",
-    "s": "<p>Eliminera \\(y\\) utan att använda någon ny metod utanför kursen. Multiplicera den första ekvationen med \\(a-1\\) och den andra med 2:</p><p>\\(a(a-1)x+2(a-1)y=8(a-1)\\)</p><p>\\(6x+2(a-1)y=18\\).</p><p>Subtraktion ger</p><p>\\([a(a-1)-6]x=8(a-1)-18\\).</p><p>Systemet kan bara förlora sin entydiga lösning när koefficienten framför \\(x\\) blir 0:</p><p>\\(a(a-1)-6=0\\Rightarrow a^2-a-6=0=(a-3)(a+2)\\).</p><p>Alltså \\(a=3\\) eller \\(a=-2\\). Kontroll i ursprungssystemet visar i båda fallen två parallella, olika linjer, alltså ingen lösning.</p><p><strong>Systemet har inte exakt en lösning för \\(a=3\\) eller \\(a=-2\\).</strong></p>",
+    "s": "<p>Eliminera \\(y\\) utan att använda någon ny metod utanför kursen. Multiplicera den första ekvationen med \\(a-1\\) och den andra med 2:</p><p>\\(a(a-1)x+2(a-1)y=8(a-1)\\)</p><p>\\(6x+2(a-1)y=18\\).</p><p>Subtraktion ger</p><p>\\([a(a-1)-6]x=8(a-1)-18\\).</p><p>Systemet kan bara sluta ha exakt en lösning när koefficienten framför \\(x\\) blir 0:</p><p>\\(a(a-1)-6=0\\Rightarrow a^2-a-6=0=(a-3)(a+2)\\).</p><p>Alltså \\(a=3\\) eller \\(a=-2\\). Kontroll i ursprungssystemet visar i båda fallen två parallella, olika linjer, alltså ingen lösning.</p><p><strong>Systemet har inte exakt en lösning för \\(a=3\\) eller \\(a=-2\\).</strong></p>",
     "familj": "fokus_addition_parameter_A"
   },
   {
@@ -953,8 +953,8 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/1/2",
     "familj": "r13_sysapp_02",
-    "t": "<p>Två företag hyr ut samma typ av släp. Företag A tar en fast avgift och 18 kr per kilometer. Företag B tar en annan fast avgift och 12 kr per kilometer.</p><p>Vid 40 km kostar A 80 kr mindre än B. Vid 90 km kostar A 220 kr mer än B.</p><p>Går det att bestämma företagens fasta avgifter entydigt? Motivera ditt svar.</p>",
-    "s": "<p>Låt de fasta avgifterna vara \\(a\\) respektive \\(b\\).</p><p>Vid 40 km gäller \\(a+18\\cdot40=b+12\\cdot40-80\\), alltså \\(a-b=-320\\).</p><p>Vid 90 km gäller \\(a+18\\cdot90=b+12\\cdot90+220\\), vilket också ger \\(a-b=-320\\).</p><p>De två uppgifterna ger alltså samma enda villkor. Det går inte att bestämma \\(a\\) och \\(b\\) var för sig.</p><p><strong>De fasta avgifterna kan inte bestämmas entydigt. Man kan bara säga att A:s fasta avgift är 320 kr lägre än B:s.</strong></p>"
+    "t": "<p>Två företag hyr ut samma typ av släp. Företag A tar en fast avgift och 18 kr per kilometer. Företag B tar en annan fast avgift och 12 kr per kilometer.</p><p>Vid 40 km kostar A 80 kr mindre än B. Vid 90 km kostar A 220 kr mer än B.</p><p>Går det att bestämma de två fasta avgifterna var för sig? Motivera ditt svar.</p>",
+    "s": "<p>Låt de fasta avgifterna vara \\(a\\) respektive \\(b\\).</p><p>Vid 40 km gäller \\(a+18\\cdot40=b+12\\cdot40-80\\), alltså \\(a-b=-320\\).</p><p>Vid 90 km gäller \\(a+18\\cdot90=b+12\\cdot90+220\\), vilket också ger \\(a-b=-320\\).</p><p>De två uppgifterna ger alltså samma enda villkor. Det går inte att bestämma \\(a\\) och \\(b\\) var för sig.</p><p><strong>De fasta avgifterna kan inte bestämmas var för sig. Man kan bara säga att A:s fasta avgift är 320 kr lägre än B:s.</strong></p>"
   },
   {
     "id": "1.65",
@@ -1042,7 +1042,7 @@ window.BANKMA2 = [
     "poang": "2/0/0",
     "familj": "r12_fakt_02",
     "t": "<p>Faktorisera</p><p>\\[x^2-14x+49.\\]</p>",
-    "s": "<p>Uttrycket är en fullständig kvadrat eftersom \\(49=7^2\\) och mitttermen är \\(-2\\cdot x\\cdot 7\\).</p><p><strong>\\(x^2-14x+49=(x-7)^2\\)</strong></p>"
+    "s": "<p>Använd kvadreringsregeln baklänges:</p><p>\\[(x-7)^2=x^2-14x+49.\\]</p><p><strong>\\(x^2-14x+49=(x-7)^2\\)</strong></p>"
   },
   {
     "id": "1.71",
@@ -2638,8 +2638,8 @@ window.BANKMA2 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>Uttrycket \\(x^2+px+49\\) kan skrivas som en perfekt kvadrat \\((x+a)^2\\).</p><p>Bestäm alla möjliga värden på \\(p\\).</p>",
-    "s": "<p>Eftersom konstanten är 49 måste \\(a=7\\) eller \\(a=-7\\).</p><p>\\((x+7)^2=x^2+14x+49\\) och \\((x-7)^2=x^2-14x+49\\).</p><p><strong>\\(p=14\\) eller \\(p=-14\\).</strong></p>",
+    "t": "<p>Uttrycket \\(x^2+px+49\\) kan skrivas på formen \\((x+a)^2\\).</p><p>Bestäm alla möjliga värden på \\(p\\).</p>",
+    "s": "<p>Eftersom konstanten är 49 måste \\(a=7\\) eller \\(a=-7\\).</p><p>Med kvadreringsregeln får vi</p><p>\\[(x+7)^2=x^2+14x+49\\]</p><p>och</p><p>\\[(x-7)^2=x^2-14x+49.\\]</p><p><strong>\\(p=14\\) eller \\(p=-14\\).</strong></p>",
     "familj": "kvadreringsregel_baklanges_parameter"
   },
   {
@@ -3829,7 +3829,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/3/0",
     "t": "<p>En linjär modell och en exponentialmodell följer datapunkter för \\(1\\le x\\le6\\). Exponentialmodellen ligger något närmare punkterna.</p><p>Är exponentialmodellen automatiskt bäst för att förutsäga värdet vid \\(x=50\\)? Motivera.</p>",
-    "s": "<p>Nej. Värdet \\(x=50\\) ligger mycket långt utanför intervallet 1–6 där mätningarna gjordes.</p><p>Små skillnader mellan modellerna i mätintervallet kan växa till mycket stora skillnader långt utanför intervallet.</p><p><strong>Modellvalet måste därför också motiveras utifrån sammanhanget och om modellens fortsatta utveckling är rimlig.</strong></p>",
+    "s": "<p>Nej. Värdet \\(x=50\\) ligger mycket långt utanför intervallet 1–6 där mätningarna gjordes.</p><p>Små skillnader mellan modellerna i mätintervallet kan växa till mycket stora skillnader långt utanför intervallet.</p><p><strong>Valet av modell måste därför också motiveras utifrån sammanhanget och om modellens fortsatta utveckling är rimlig.</strong></p>",
     "familj": "fill_regression_r2_extrapolation"
   },
   {
@@ -3984,8 +3984,8 @@ window.BANKMA2 = [
     ],
     "niva": "A",
     "poang": "0/0/3",
-    "t": "<p>En linjär modell och en exponentialmodell följer samma datamaterial ungefär lika väl under en kort mätperiod.</p><p>En elev väljer direkt exponentialmodellen för en prognos 30 år framåt.</p><p>Förklara varför modellvalet behöver motiveras bättre. Nämn minst tre saker som bör undersökas.</p>",
-    "s": "<p>Man bör bland annat undersöka</p><p>• hur väl respektive graf följer datapunkterna och om skillnaderna mellan mätvärden och modellvärden visar något mönster,<br>• hur långt prognosen ligger utanför den tidsperiod där mätningar finns,<br>• om en konstant procentuell förändring är rimlig under så lång tid.</p><p>Även ändrade villkor i verkligheten kan göra en modell olämplig.</p><p><strong>Modellvalet kan därför inte avgöras enbart av att en modell råkar ligga något närmare de uppmätta punkterna.</strong></p>",
+    "t": "<p>En linjär modell och en exponentialmodell följer samma datamaterial ungefär lika väl under en kort mätperiod.</p><p>En elev väljer direkt exponentialmodellen för en prognos 30 år framåt.</p><p>Förklara varför valet av modell behöver motiveras bättre. Nämn minst tre saker som bör undersökas.</p>",
+    "s": "<p>Man bör bland annat undersöka</p><p>• hur väl respektive graf följer datapunkterna och om skillnaderna mellan mätvärden och modellvärden visar något mönster,<br>• hur långt prognosen ligger utanför den tidsperiod där mätningar finns,<br>• om en konstant procentuell förändring är rimlig under så lång tid.</p><p>Även ändrade villkor i verkligheten kan göra en modell olämplig.</p><p><strong>Valet av modell kan därför inte avgöras enbart av att en modell råkar ligga något närmare de uppmätta punkterna.</strong></p>",
     "familj": "r3_A_model_critique_1"
   },
   {
@@ -4101,7 +4101,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>En odling innehåller från början 240 bakterier. Antalet ökar med 18 % per timme.</p><p>a) Skriv en exponentialfunktion \\(N(t)\\).<br>b) Hur många bakterier finns enligt modellen efter 6 timmar?</p>",
-    "s": "<p>Tillväxtfaktorn är 1,18.</p><p>\\(N(t)=240\\cdot1,18^t\\).</p><p>\\(N(6)\\approx648\\).</p><p><strong>\\(N(t)=240\\cdot1,18^t\\), cirka 648 bakterier efter 6 timmar.</strong></p>",
+    "s": "<p>förändringsfaktorn är 1,18.</p><p>\\(N(t)=240\\cdot1,18^t\\).</p><p>\\(N(6)\\approx648\\).</p><p><strong>\\(N(t)=240\\cdot1,18^t\\), cirka 648 bakterier efter 6 timmar.</strong></p>",
     "familj": "exp_tillvaxt_bakterier"
   },
   {
@@ -4129,7 +4129,7 @@ window.BANKMA2 = [
     "poang": "0/2/0",
     "familj": "r13_rot_01",
     "t": "<p>Lös ekvationen</p><p>\\[\\sqrt{x+5}=x-1.\\]</p>",
-    "s": "<p>Högerledet måste vara minst 0, alltså \\(x\\ge1\\).</p><p>Kvadrera båda leden:</p><p>\\[x+5=(x-1)^2=x^2-2x+1.\\]</p><p>\\[x^2-3x-4=0\\Rightarrow (x-4)(x+1)=0.\\]</p><p>Kandidaterna är 4 och -1, men endast \\(x=4\\) uppfyller ursprungsekvationen.</p><p><strong>\\(x=4\\)</strong></p>"
+    "s": "<p>Högerledet måste vara minst 0, alltså \\(x\\ge1\\).</p><p>Kvadrera båda leden:</p><p>\\[x+5=(x-1)^2=x^2-2x+1.\\]</p><p>\\[x^2-3x-4=0\\Rightarrow (x-4)(x+1)=0.\\]</p><p>De möjliga lösningarna efter kvadreringen är 4 och -1, men endast \\(x=4\\) uppfyller ursprungsekvationen.</p><p><strong>\\(x=4\\)</strong></p>"
   },
   {
     "id": "2.39",
@@ -4392,7 +4392,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>Lös ekvationen \\(7\\cdot1,3^x=20\\) med logaritmer.</p><p>Svara med två decimaler.</p>",
-    "s": "<p>Dela med 7:</p><p>\\(1,3^x=\\frac{20}{7}\\).</p><p>Logaritmera: \\(x\\lg1,3=\\lg\\left(\\frac{20}{7}\\right)\\).</p><p>\\(x=\\frac{\\lg(20/7)}{\\lg1,3}\\approx4,0014\\).</p><p><strong>\\(x\\approx4,00\\)</strong></p>",
+    "s": "<p>Dela med 7:</p><p>\\(1,3^x=\\frac{20}{7}\\).</p><p>Ta \\(\\lg\\) av båda leden: \\(x\\lg1,3=\\lg\\left(\\frac{20}{7}\\right)\\).</p><p>\\(x=\\frac{\\lg(20/7)}{\\lg1,3}\\approx4,0014\\).</p><p><strong>\\(x\\approx4,00\\)</strong></p>",
     "familj": "r7_exp_04"
   },
   {
@@ -4578,7 +4578,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>En linjär modell och en exponentialmodell har anpassats till samma datamaterial. Exponentialmodellens graf ligger något närmare de flesta datapunkterna.</p><p>Är exponentialmodellen automatiskt bäst? Förklara vad mer du bör kontrollera.</p>",
-    "s": "<p>Nej. Man bör även kontrollera om skillnaderna mellan mätvärden och modellvärden visar ett systematiskt mönster, vilket intervall data täcker och om modellens sätt att förändras är rimligt i sammanhanget.</p><p>Om modellen ska användas långt utanför mätintervallet blir den bedömningen särskilt viktig.</p><p><strong>Att ligga något närmare datapunkterna räcker inte ensamt för att avgöra modellvalet.</strong></p>",
+    "s": "<p>Nej. Man bör även kontrollera om skillnaderna mellan mätvärden och modellvärden visar ett systematiskt mönster, vilket intervall data täcker och om modellens sätt att förändras är rimligt i sammanhanget.</p><p>Om modellen ska användas långt utanför mätintervallet blir den bedömningen särskilt viktig.</p><p><strong>Att ligga något närmare datapunkterna räcker inte ensamt för att avgöra vilken modell som bör väljas.</strong></p>",
     "familj": "r2_regression_model_choice"
   },
   {
@@ -4719,8 +4719,8 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/1/3",
     "familj": "r13_modell_01",
-    "t": "<p>En forskargrupp mäter ett index vid fem tidpunkter.</p><table class=\"data\"><tr><th>t</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr><tr><td>Index</td><td>20,0</td><td>24,1</td><td>28,8</td><td>34,7</td><td>41,5</td></tr></table><p>Både en linjär och en exponentiell modell ger relativt god anpassning under de fem mätningarna. Indexet kan däremot aldrig överstiga 100.</p><p>Välj en av modellerna för en prognos två tidsenheter framåt och diskutera sedan varför ingen av modellerna bör användas långt in i framtiden.</p>",
-    "s": "<p>Mätvärdena har ungefär samma procentuella ökning, så en exponentiell modell är rimlig för en kort prognos. En regression ger ungefär \\(I(t)=20{,}0\\cdot1{,}20^t\\).</p><p>Två tidsenheter efter sista mätningen är \\(t=6\\), vilket ger \\(I(6)\\approx59{,}7\\).</p><p>På lång sikt fortsätter exponentiell modellen att växa utan gräns och skulle så småningom ge värden över 100, vilket strider mot villkoret. Den linjära modellen gör också det om den används tillräckligt länge.</p><p><strong>En kort exponentialprognos ger cirka 60. Ingen av modellerna är rimlig långt fram eftersom indexet har en övre gräns på 100.</strong></p>"
+    "t": "<p>En forskargrupp mäter ett index på skalan 0–100 vid fem tidpunkter.</p><table class=\"data\"><tr><th>t</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr><tr><td>Index</td><td>20,0</td><td>24,1</td><td>28,8</td><td>34,7</td><td>41,5</td></tr></table><p>Både en linjär och en exponentiell modell passar de fem mätvärdena ganska väl. Indexet kan däremot aldrig överstiga 100.</p><p>Välj en av modellerna för en prognos två tidsenheter framåt och förklara sedan varför ingen av modellerna bör användas långt in i framtiden.</p>",
+    "s": "<p>Mätvärdena har ungefär samma procentuella ökning, så en exponentialmodell är rimlig för en kort prognos. Med ett digitalt verktyg kan modellen bestämmas till ungefär \\(I(t)=20{,}0\\cdot1{,}20^t\\).</p><p>Två tidsenheter efter sista mätningen är \\(t=6\\), vilket ger \\(I(6)\\approx59{,}7\\).</p><p>På lång sikt fortsätter exponentialmodellen att växa utan gräns och skulle så småningom ge värden över 100, vilket strider mot villkoret. Den linjära modellen gör också det om den används tillräckligt länge.</p><p><strong>En kort prognos med exponentialmodellen ger cirka 60. Ingen av modellerna är rimlig långt fram eftersom indexet har en övre gräns på 100.</strong></p>"
   },
   {
     "id": "2.80",
@@ -4792,7 +4792,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/1/0",
     "t": "<p>Bestäm det minsta värdet för \\(f(x)=x^2+6x+14\\) genom kvadratkomplettering.</p>",
-    "s": "<p>\\(f(x)=(x+3)^2+5\\).</p><p>Eftersom kvadraten minst är 0 är det minsta värdet 5.</p><p><strong>Minvärdet är 5 vid \\(x=-3\\).</strong></p>",
+    "s": "<p>\\(f(x)=(x+3)^2+5\\).</p><p>Eftersom en kvadrat är minst 0 är det minsta värdet 5.</p><p><strong>Det minsta värdet är 5 och fås vid \\(x=-3\\).</strong></p>",
     "familj": "r2_square_complete_min"
   },
   {
@@ -5024,8 +5024,8 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/3/0",
     "familj": "r13_reg_01",
-    "t": "<p>En mätserie visas i tabellen.</p><table class=\"data\"><tr><th>x</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr><tr><td>y</td><td>4,1</td><td>6,0</td><td>9,2</td><td>13,7</td><td>20,6</td></tr></table><ol><li>Bestäm en linjär och en exponentiell regressionsmodell.</li><li>Avgör vilken modell som passar mätvärdena bäst i det givna intervallet.</li></ol>",
-    "s": "<p>Med ett digitalt verktyg fås ungefär en linjär modell \\(y=4{,}07x-1{,}49\\) och en exponentiell modell \\(y=2{,}7\\cdot1{,}50^x\\).</p><p>Mätvärdena ökar med allt större skillnader men ungefär samma faktor. Exponentialmodellen följer därför punkterna bättre.</p><p><strong>Exponentialmodellen är lämpligast för de givna mätvärdena.</strong></p>"
+    "t": "<p>En mätserie visas i tabellen.</p><table class=\"data\"><tr><th>x</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr><tr><td>y</td><td>4,1</td><td>6,0</td><td>9,2</td><td>13,7</td><td>20,6</td></tr></table><ol><li>Bestäm en linjär regressionsmodell och en exponentialmodell.</li><li>Avgör vilken modell som passar mätvärdena bäst i det givna intervallet.</li></ol>",
+    "s": "<p>Med ett digitalt verktyg fås ungefär en linjär regressionsmodell \\(y=4{,}07x-1{,}49\\) och en exponentialmodell \\(y=2{,}7\\cdot1{,}50^x\\).</p><p>Mätvärdena ökar med allt större skillnader men ungefär samma faktor. Exponentialmodellen följer därför punkterna bättre.</p><p><strong>Exponentialmodellen passar de givna mätvärdena bäst.</strong></p>"
   },
   {
     "id": "2.101",
@@ -5068,7 +5068,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/1/0",
     "t": "<p>Bestäm \\(a\\) så att \\(x^2+ax+16=0\\) har exakt en reell lösning.</p>",
-    "s": "<p>För en dubbelrot måste uttrycket kunna skrivas som \\((x\\pm4)^2\\).</p><p>Det ger \\(a=8\\) eller \\(a=-8\\).</p><p><strong>\\(a=\\pm8\\).</strong></p>",
+    "s": "<p>Ekvationen ska ha exakt en reell lösning. Då måste vänsterledet kunna skrivas som en kvadrat som blir 0 för ett enda värde på \\(x\\).</p><p>\\[x^2+8x+16=(x+4)^2\\]</p><p>och</p><p>\\[x^2-8x+16=(x-4)^2.\\]</p><p><strong>\\(a=8\\) eller \\(a=-8\\).</strong></p>",
     "familj": "r2_andra_double_root_two"
   },
   {
@@ -5141,8 +5141,8 @@ window.BANKMA2 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>En bakteriekultur är 4 000 efter 2 timmar och 9 000 efter 5 timmar. Anta exponentiell tillväxt.</p><p>Bestäm tillväxtfaktorn per timme.</p>",
-    "s": "<p>Mellan 2 timmar och 5 timmar går det 3 timmar. Med tillväxtfaktorn \\(a\\) får vi</p><p>\\(4000a^3=9000\\).</p><p>Dividera med 4000:</p><p>\\(a^3=2,25\\Rightarrow a=\\sqrt[3]{2,25}\\approx1,31\\).</p><p><strong>Tillväxtfaktorn är ungefär 1,31 per timme.</strong></p>",
+    "t": "<p>En bakteriekultur är 4 000 efter 2 timmar och 9 000 efter 5 timmar. Anta exponentiell tillväxt.</p><p>Bestäm förändringsfaktorn per timme.</p>",
+    "s": "<p>Mellan 2 timmar och 5 timmar går det 3 timmar. Med förändringsfaktorn \\(a\\) får vi</p><p>\\(4000a^3=9000\\).</p><p>Dividera med 4000:</p><p>\\(a^3=2,25\\Rightarrow a=\\sqrt[3]{2,25}\\approx1,31\\).</p><p><strong>förändringsfaktorn är ungefär 1,31 per timme.</strong></p>",
     "familj": "r3_exp_factor_1"
   },
   {
@@ -5297,7 +5297,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/3",
     "t": "<p>En population mäts under sex år. En linjär modell och en exponentialmodell ger nästan samma värden under mätperioden. Exponentialmodellen ligger något närmare datapunkterna.</p><p>En elev väljer därför exponentialmodellen för en prognos 40 år framåt.</p><p>Förklara varför valet behöver motiveras bättre. Nämn minst tre saker som bör vägas in.</p>",
-    "s": "<p>Man bör undersöka hur väl modellerna följer punkterna, hur avvikelserna mellan mätvärden och modellvärden ser ut och hur långt prognosen ligger utanför mätperioden.</p><p>Dessutom måste man bedöma om det finns sakliga skäl att tro att en konstant procentuell tillväxt kan fortsätta i 40 år. Begränsade resurser eller ändrade villkor kan göra exponentialmodellen orimlig.</p><p><strong>Modellvalet kräver både jämförelse med data och en rimlighetsbedömning av situationen.</strong></p>",
+    "s": "<p>Man bör undersöka hur väl modellerna följer punkterna, hur avvikelserna mellan mätvärden och modellvärden ser ut och hur långt prognosen ligger utanför mätperioden.</p><p>Dessutom måste man bedöma om det finns sakliga skäl att tro att en konstant procentuell tillväxt kan fortsätta i 40 år. Begränsade resurser eller ändrade villkor kan göra exponentialmodellen orimlig.</p><p><strong>För att välja modell behöver man både jämföra med data och bedöma om modellen är rimlig i situationen.</strong></p>",
     "familj": "r2_A_modellval_flera_kriterier"
   },
   {
@@ -6026,7 +6026,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/1/0",
     "t": "<p>För vilket värde på \\(a\\) har ekvationen \\(x^2-6x+a=0\\) exakt en reell lösning?</p>",
-    "s": "<p>En andragradsekvation har exakt en reell lösning när den har en dubbelrot.</p><p>\\(x^2-6x+a\\) får dubbelroten 3 när uttrycket är \\((x-3)^2\\).</p><p>\\((x-3)^2=x^2-6x+9\\).</p><p><strong>\\(a=9\\).</strong></p>",
+    "s": "<p>Ekvationen ska ha exakt en reell lösning. Med kvadreringsregeln får vi</p><p>\\[(x-3)^2=x^2-6x+9.\\]</p><p>Om \\(a=9\\) blir ekvationen \\((x-3)^2=0\\), som bara har lösningen \\(x=3\\).</p><p><strong>\\(a=9\\).</strong></p>",
     "familj": "r4_C_159"
   },
   {
@@ -6652,7 +6652,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/1/2",
     "t": "<p>En elev påstår: ”Om \\(f(2)=6\\) och \\(f(4)=12\\), då måste \\(f(x)=3x\\).”</p><p>Avgör om påståendet är sant. Om det är falskt, ge ett konkret motexempel och förklara vad extra information som skulle göra slutsatsen säker.</p>",
-    "s": "<p>Påståendet är <strong>falskt</strong>. Exempelvis \\(f(x)=3x+(x-2)(x-4)\\) ger fortfarande \\(f(2)=6\\) och \\(f(4)=12\\), men är inte \\(3x\\).</p><p>Om man dessutom vet att <strong>f är linjär</strong>, bestämmer två punkter funktionen entydigt och då blir \\(f(x)=3x\\).</p>",
+    "s": "<p>Påståendet är <strong>falskt</strong>. Exempelvis \\(f(x)=3x+(x-2)(x-4)\\) ger fortfarande \\(f(2)=6\\) och \\(f(4)=12\\), men är inte \\(3x\\).</p><p>Om man dessutom vet att <strong>f är linjär</strong>, bestämmer två punkter den räta linjen och då blir \\(f(x)=3x\\).</p>",
     "familj": "ma1rep_2_272_extra2_func_counterexample"
   },
   {
@@ -6778,7 +6778,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "1/0/0",
     "t": "<p>Lös ekvationen \\(3\\cdot1,08^x=6\\). Svara med en decimal.</p>",
-    "s": "<p>Dividera först med 3:</p><p>\\(1,08^x=2\\).</p><p>Logaritmera båda leden:</p><p>\\(x\\lg1,08=\\lg2\\).</p><p>\\(x=\\frac{\\lg2}{\\lg1,08}\\approx9,01\\).</p><p><strong>\\(x\\approx9,0\\).</strong></p>",
+    "s": "<p>Dividera först med 3:</p><p>\\(1,08^x=2\\).</p><p>Ta \\(\\lg\\) av båda leden:</p><p>\\(x\\lg1,08=\\lg2\\).</p><p>\\(x=\\frac{\\lg2}{\\lg1,08}\\approx9,01\\).</p><p><strong>\\(x\\approx9,0\\).</strong></p>",
     "familj": "exp_eq_log_direkt"
   },
   {
@@ -6792,7 +6792,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>Låt \\(a&gt;0\\) och \\(a\\ne1\\). Ekvationen \\(a^x=5\\) har lösningen \\(x=u\\).</p><p>Visa utan att beräkna \\(u\\) att lösningen till \\(a^x=125\\) är \\(x=3u\\).</p>",
-    "s": "<p>Eftersom \\(a^u=5\\) gäller \\(a^{3u}=(a^u)^3=5^3=125\\). Exponentialfunktionen är entydig, så lösningen till \\(a^x=125\\) är \\(x=3u\\).</p><p><strong>Alltså är lösningen \\(x=3u\\).</strong></p>",
+    "s": "<p>Eftersom \\(a^u=5\\) gäller \\(a^{3u}=(a^u)^3=5^3=125\\). Eftersom en exponentialfunktion med \\(a>1\\) är växande och med \\(0<a<1\\) är avtagande kan ekvationen ha högst en lösning. Alltså är lösningen till \\(a^x=125\\) \\(x=3u\\).</p><p><strong>Alltså är lösningen \\(x=3u\\).</strong></p>",
     "familj": "r3_A_exp_reasoning_1"
   },
   {
@@ -6806,7 +6806,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "1/0/0",
     "t": "<p>Lös \\(2\\cdot1,15^x=5\\). Svara med en decimal.</p>",
-    "s": "<p>Dividera med 2:</p><p>\\(1,15^x=2,5\\).</p><p>Logaritmera båda leden:</p><p>\\(x\\lg1,15=\\lg2,5\\).</p><p>\\(x=\\frac{\\lg2,5}{\\lg1,15}\\approx6,56\\).</p><p><strong>\\(x\\approx6,6\\).</strong></p>",
+    "s": "<p>Dividera med 2:</p><p>\\(1,15^x=2,5\\).</p><p>Ta \\(\\lg\\) av båda leden:</p><p>\\(x\\lg1,15=\\lg2,5\\).</p><p>\\(x=\\frac{\\lg2,5}{\\lg1,15}\\approx6,56\\).</p><p><strong>\\(x\\approx6,6\\).</strong></p>",
     "familj": "r2_exp_eq_log"
   },
   {
@@ -6895,7 +6895,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>En bakteriekultur beskrivs av modellen \\(N(t)=120\\cdot1,18^t\\), där \\(t\\) mäts i timmar.</p><p>Efter hur många timmar passerar antalet bakterier 300?</p>",
-    "s": "<p>Vi sätter \\(N(t)=300\\):</p><p>\\(120\\cdot1,18^t=300\\).</p><p>Dividera med 120:</p><p>\\(1,18^t=2,5\\).</p><p>Logaritmera båda leden:</p><p>\\(t\\lg1,18=\\lg2,5\\).</p><p>\\(t=\\frac{\\lg2,5}{\\lg1,18}\\approx5,54\\).</p><p><strong>Antalet passerar 300 efter ungefär 5,5 timmar.</strong></p>",
+    "s": "<p>Vi sätter \\(N(t)=300\\):</p><p>\\(120\\cdot1,18^t=300\\).</p><p>Dividera med 120:</p><p>\\(1,18^t=2,5\\).</p><p>Ta \\(\\lg\\) av båda leden:</p><p>\\(t\\lg1,18=\\lg2,5\\).</p><p>\\(t=\\frac{\\lg2,5}{\\lg1,18}\\approx5,54\\).</p><p><strong>Antalet passerar 300 efter ungefär 5,5 timmar.</strong></p>",
     "familj": "exponentialekvation_bakterier_passerar_300"
   },
   {
@@ -7027,7 +7027,7 @@ window.BANKMA2 = [
     "poang": "0/2/0",
     "familj": "r13_extrem_02",
     "t": "<p>En andragradsfunktion har symmetrilinjen \\(x=4\\). Grafen går genom punkten \\((1,10)\\), och funktionens värde i symmetrilinjen är 1.</p><p>Bestäm funktionen.</p>",
-    "s": "<p>Eftersom symmetrilinjen är \\(x=4\\) och extremvärdet är 1 kan funktionen skrivas</p><p>\\[f(x)=a(x-4)^2+1.\\]</p><p>Punkten \\((1,10)\\) ligger på grafen:</p><p>\\[10=a(1-4)^2+1=9a+1.\\]</p><p>Alltså \\(a=1\\).</p><p><strong>\\(f(x)=(x-4)^2+1=x^2-8x+17\\).</strong></p>"
+    "s": "<p>Eftersom symmetrilinjen är \\(x=4\\) och funktionens minsta värde är 1 ligger minimipunkten i \\((4,1)\\).</p><p>Funktionen kan därför skrivas</p><p>\\[f(x)=a(x-4)^2+1.\\]</p><p>Punkten \\((1,10)\\) ligger på grafen:</p><p>\\[10=a(1-4)^2+1=9a+1.\\]</p><p>Alltså \\(a=1\\).</p><p><strong>\\(f(x)=(x-4)^2+1=x^2-8x+17\\).</strong></p>"
   },
   {
     "id": "2.239",
@@ -7141,7 +7141,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>Bestäm \\(k\\) så att ekvationen \\(x^2-6x+k=0\\) har exakt en reell lösning. Bestäm också lösningen.</p>",
-    "s": "<p>En dubbelrot fås när vänsterledet är en perfekt kvadrat.</p><p>\\(x^2-6x+k=(x-3)^2\\) när \\(k=9\\).</p><p>Då är \\((x-3)^2=0\\).</p><p><strong>\\(k=9\\) och lösningen är \\(x=3\\).</strong></p>",
+    "s": "<p>Ekvationen ska ha exakt en reell lösning. Använd kvadreringsregeln:</p><p>\\[(x-3)^2=x^2-6x+9.\\]</p><p>Därför ska \\(k=9\\). Ekvationen blir då \\((x-3)^2=0\\).</p><p><strong>\\(k=9\\) och lösningen är \\(x=3\\).</strong></p>",
     "familj": "andra_parameter_dubbelrot"
   },
   {
@@ -9934,7 +9934,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/3",
     "t": "<p>Lös ekvationen \\(5\\cdot2^{x-1}=3^{x+1}\\) och svara exakt med logaritmer.</p><p>Förklara varför ekvationen har högst en lösning.</p>",
-    "s": "<p>Skriv om vänsterledet: \\(5\\cdot2^{x-1}=\\frac52\\cdot2^x\\). Högerledet är \\(3\\cdot3^x\\).</p><p>Dividera med \\(3\\cdot2^x\\):</p><p>\\(\\frac56=\\left(\\frac32\\right)^x\\).</p><p>Logaritmera:</p><p>\\(x\\lg(3/2)=\\lg(5/6)\\).</p><p><strong>\\(x=\\frac{\\lg(5/6)}{\\lg(3/2)}\\).</strong></p><p>Eftersom \\((3/2)^x\\) är strikt växande kan det anta värdet \\(5/6\\) för högst ett \\(x\\). Därför finns högst en lösning.</p>",
+    "s": "<p>Skriv om vänsterledet: \\(5\\cdot2^{x-1}=\\frac52\\cdot2^x\\). Högerledet är \\(3\\cdot3^x\\).</p><p>Dividera med \\(3\\cdot2^x\\):</p><p>\\(\\frac56=\\left(\\frac32\\right)^x\\).</p><p>Ta \\(\\lg\\) av båda leden:</p><p>\\(x\\lg(3/2)=\\lg(5/6)\\).</p><p><strong>\\(x=\\frac{\\lg(5/6)}{\\lg(3/2)}\\).</strong></p><p>Eftersom \\((3/2)^x\\) är strikt växande kan det anta värdet \\(5/6\\) för högst ett \\(x\\). Därför finns högst en lösning.</p>",
     "familj": "r9_exp_eq_exakt_monotoni"
   },
   {
@@ -9963,7 +9963,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>Låt \\(a&gt;0\\) och \\(a\\ne1\\). Ekvationen \\(a^x=2\\) har lösningen \\(x=u\\).</p><p>Visa utan att beräkna \\(u\\) att lösningen till \\(a^x=4\\) är \\(x=2u\\).</p>",
-    "s": "<p>Eftersom \\(a^u=2\\) gäller</p><p>\\(a^{2u}=(a^u)^2=2^2=4\\).</p><p>För \\(a&gt;0\\), \\(a\\ne1\\), är exponentialfunktionen entydig, så detta är lösningen.</p><p><strong>Lösningen är \\(x=2u\\).</strong></p>",
+    "s": "<p>Eftersom \\(a^u=2\\) gäller</p><p>\\(a^{2u}=(a^u)^2=2^2=4\\).</p><p>För \\(a&gt;1\\) är exponentialfunktionen växande och för \\(0&lt;a&lt;1\\) är den avtagande. Ekvationen kan därför ha högst en lösning, så detta är lösningen.</p><p><strong>Lösningen är \\(x=2u\\).</strong></p>",
     "familj": "r2_A_exponential_generellt_resonemang"
   },
   {
@@ -9977,7 +9977,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "1/0/0",
     "t": "<p>Lös \\(3\\cdot1,2^x=9\\). Svara med en decimal.</p>",
-    "s": "<p>Dividera med 3:</p><p>\\(1,2^x=3\\).</p><p>Logaritmera:</p><p>\\(x\\lg1,2=\\lg3\\).</p><p>\\(x=\\frac{\\lg3}{\\lg1,2}\\approx6,03\\).</p><p><strong>\\(x\\approx6,0\\).</strong></p>",
+    "s": "<p>Dividera med 3:</p><p>\\(1,2^x=3\\).</p><p>Ta \\(\\lg\\) av båda leden:</p><p>\\(x\\lg1,2=\\lg3\\).</p><p>\\(x=\\frac{\\lg3}{\\lg1,2}\\approx6,03\\).</p><p><strong>\\(x\\approx6,0\\).</strong></p>",
     "familj": "r3_exp_eq_1"
   },
   {
@@ -10005,7 +10005,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Förklara skillnaden mellan att lösa \\(x^3=20\\) och \\(3^x=20\\).</p>",
-    "s": "<p>De två ekvationerna ser liknande ut, men x har olika roller och därför används olika metoder.</p><p><strong>1. \\(x^3=20\\) är en potensekvation.</strong> Här är x basen. För att frigöra x tar man kubikroten ur båda leden:</p><p>\\(x=\\sqrt[3]{20}\\approx2,71\\).</p><p><strong>2. \\(3^x=20\\) är en exponentialekvation.</strong> Här står x i exponenten. Då kan man logaritmera båda leden:</p><p>\\(\\lg(3^x)=\\lg20\\).</p><p>Med logaritmlagen \\(\\lg(a^x)=x\\lg a\\) får vi</p><p>\\(x\\lg3=\\lg20\\Rightarrow x=\\frac{\\lg20}{\\lg3}\\approx2,73\\).</p><p><strong>Potensekvationen löses alltså med en rot, medan exponentialekvationen löses med logaritmer (eller med exempelvis GeoGebra).</strong></p>",
+    "s": "<p>De två ekvationerna ser liknande ut, men x har olika roller och därför används olika metoder.</p><p><strong>1. \\(x^3=20\\) är en potensekvation.</strong> Här är x basen. För att frigöra x tar man kubikroten ur båda leden:</p><p>\\(x=\\sqrt[3]{20}\\approx2,71\\).</p><p><strong>2. \\(3^x=20\\) är en exponentialekvation.</strong> Här står x i exponenten. Då kan man ta \\(\\lg\\) av båda leden:</p><p>\\(\\lg(3^x)=\\lg20\\).</p><p>Med logaritmlagen \\(\\lg(a^x)=x\\lg a\\) får vi</p><p>\\(x\\lg3=\\lg20\\Rightarrow x=\\frac{\\lg20}{\\lg3}\\approx2,73\\).</p><p><strong>Potensekvationen löses alltså med en rot, medan exponentialekvationen löses med logaritmer (eller med exempelvis GeoGebra).</strong></p>",
     "familj": "gap_compare_exp_power_4"
   },
   {
@@ -10117,7 +10117,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/3/0",
     "t": "<p>En restaurang säljer \\(x\\) luncher per dag. Vinsten modelleras med \\(V(x)=-x^2+140x-3600\\).</p><p>Bestäm för vilka hela antal luncher vinsten är positiv.</p>",
-    "s": "<p>Vi löser först gränsekvationen \\(-x^2+140x-3600=0\\), alltså</p><p>\\(x^2-140x+3600=0\\).</p><p>Med <strong>pq-formeln</strong>:</p><p>\\(x=70\\pm\\sqrt{4900-3600}=70\\pm10\\sqrt{13}\\approx33,94\\) och \\(106,06\\).</p><p>Vinsten är positiv mellan rötterna.</p><p><strong>För hela antal luncher: 34–106 luncher.</strong></p>",
+    "s": "<p>Vi bestämmer först gränsen genom att lösa \\(-x^2+140x-3600=0\\), alltså</p><p>\\(x^2-140x+3600=0\\).</p><p>Med <strong>pq-formeln</strong>:</p><p>\\(x=70\\pm\\sqrt{4900-3600}=70\\pm10\\sqrt{13}\\approx33,94\\) och \\(106,06\\).</p><p>Vinsten är positiv mellan rötterna.</p><p><strong>För hela antal luncher: 34–106 luncher.</strong></p>",
     "familj": "quad_problem_profit_integer_interval"
   },
   {
@@ -10259,7 +10259,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/1/2",
     "familj": "r13A_potens_skala",
-    "t": "<p>För en viss typ av 3D-utskriven testdel används modellen \\(m(s)=C s^a\\), där \\(m\\) är materialmängden i gram och \\(s\\) är en dimensionslös skalfaktor.</p><p>Vid \\(s=2\\) används 18 g material och vid \\(s=8\\) används 144 g.</p><p>Bestäm en potensmodell och använd den för att uppskatta vilken skalfaktor som ger 80 g material. Digitalt verktyg får användas.</p>",
+    "t": "<p>För en viss typ av 3D-utskriven testdel används modellen \\(m(s)=Cs^a\\), där \\(m\\) är materialmängden i gram.</p><p>Talet \\(s\\) anger skalan: \\(s=2\\) betyder att alla längdmått är dubbelt så stora som för originaldelen.</p><p>Vid \\(s=2\\) används 18 g material och vid \\(s=8\\) används 144 g.</p><p>Bestäm en potensmodell och använd den för att uppskatta vilket värde på \\(s\\) som ger 80 g material. Digitalt verktyg får användas.</p>",
     "s": "<p>Sätt in de två mätpunkterna i \\(m=C s^a\\). Kvoten ger</p><p>\\[\\frac{144}{18}=\\left(\\frac82\\right)^a\\Rightarrow 8=4^a.\\]</p><p>Eftersom \\(4^{1{,}5}=8\\) är \\(a=1{,}5\\).</p><p>Ur \\(18=C\\cdot2^{1{,}5}\\) fås \\(C\\approx6{,}364\\). Modellen blir alltså \\(m(s)\\approx6{,}364s^{1{,}5}\\).</p><p>Lös \\(6{,}364s^{1{,}5}=80\\) digitalt. Då fås \\(s\\approx5{,}41\\).</p><p><strong>En modell är \\(m(s)\\approx6{,}364s^{1{,}5}\\), och 80 g motsvarar ungefär \\(s=5{,}4\\).</strong></p>"
   },
   {
@@ -10578,7 +10578,7 @@ window.BANKMA2 = [
     "poang": "0/2/0",
     "familj": "r12_mer_a2_02",
     "t": "<p>Bestäm \\(k\\) så att ekvationen</p><p>\\[x^2+6x+k=0\\]</p><p>får exakt en lösning.</p>",
-    "s": "<p>En andragradsekvation får exakt en lösning när diskriminanten är 0.</p><p>\\[6^2-4\\cdot 1\\cdot k=0\\Rightarrow 36-4k=0.\\]</p><p>Därför är \\(k=9\\).</p><p><strong>\\(k=9\\)</strong></p>"
+    "s": "<p>Använd pq-formeln. För ekvationen \\(x^2+6x+k=0\\) är \\(p=6\\) och \\(q=k\\):</p><p>\\[x=-3\\pm\\sqrt{9-k}.\\]</p><p>Ekvationen har exakt en lösning när uttrycket under rottecknet är 0.</p><p>\\[9-k=0\\Rightarrow k=9.\\]</p><p><strong>\\(k=9\\)</strong></p>"
   },
   {
     "id": "2.487",
@@ -10749,8 +10749,8 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "1/0/0",
     "familj": "r12_log_02",
-    "t": "<p>Skriv om sambandet \\(\\lg x=2{,}7\\) till exponentialform.</p>",
-    "s": "<p>Definitionen av tiologaritmen ger</p><p><strong>\\(x=10^{2{,}7}\\)</strong></p>"
+    "t": "<p>Skriv om sambandet \\(\\lg x=2{,}7\\) på formen \\(x=10^a\\).</p>",
+    "s": "<p>På formelbladet står sambandet \\(10^a=x\\Leftrightarrow a=\\lg x\\).</p><p>Här är \\(a=2{,}7\\).</p><p><strong>\\(x=10^{2{,}7}\\)</strong></p>"
   },
   {
     "id": "2.499",
@@ -10778,7 +10778,7 @@ window.BANKMA2 = [
     "poang": "0/2/0",
     "familj": "r12_log_04",
     "t": "<p>Lös ekvationen</p><p>\\[\\lg x=-0{,}3.\\]</p>",
-    "s": "<p>Skriv om till exponentialform:</p><p>\\[x=10^{-0{,}3}.\\]</p><p>Med räknare fås \\(x\\approx 0{,}50\\).</p><p><strong>\\(x\\approx 0{,}50\\)</strong></p>"
+    "s": "<p>Använd sambandet på formelbladet \\(10^a=x\\Leftrightarrow a=\\lg x\\).</p><p>Av \\(\\lg x=-0{,}3\\) följer</p><p>\\[x=10^{-0{,}3}.\\]</p><p>Med räknare fås \\(x\\approx0{,}50\\).</p><p><strong>\\(x\\approx0{,}50\\)</strong></p>"
   },
   {
     "id": "2.501",
@@ -10896,7 +10896,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>Lös ekvationen \\(5\\cdot1,4^x=12\\cdot1,1^x\\). Svara med två decimaler.</p>",
-    "s": "<p>Dividera båda leden med \\(5\\cdot1,1^x\\):</p><p>\\(\\left(\\frac{1,4}{1,1}\\right)^x=\\frac{12}{5}\\).</p><p>Logaritmera:</p><p>\\(x\\lg(1,4/1,1)=\\lg(12/5)\\).</p><p>\\(x=\\frac{\\lg(2,4)}{\\lg(14/11)}\\approx3,63\\).</p><p><strong>\\(x\\approx3,63\\).</strong></p>",
+    "s": "<p>Dividera båda leden med \\(5\\cdot1,1^x\\):</p><p>\\(\\left(\\frac{1,4}{1,1}\\right)^x=\\frac{12}{5}\\).</p><p>Ta \\(\\lg\\) av båda leden:</p><p>\\(x\\lg(1,4/1,1)=\\lg(12/5)\\).</p><p>\\(x=\\frac{\\lg(2,4)}{\\lg(14/11)}\\approx3,63\\).</p><p><strong>\\(x\\approx3,63\\).</strong></p>",
     "familj": "r9_exp_eq_tva_modeller"
   },
   {
@@ -10924,7 +10924,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/3",
     "t": "<p>Två modeller beskriver antalet användare av två tjänster:</p><p>\\[A(t)=180\\cdot1,05^t,\\qquad B(t)=120\\cdot1,09^t\\]</p><p>där \\(t\\) är antal år.</p><p>Bestäm den första hela årstidpunkten då modell \\(B\\) ger ett större värde än modell \\(A\\). Visa hur du räknar.</p>",
-    "s": "<p>Gränsen fås när modellerna är lika:</p><p>\\(180\\cdot1,05^t=120\\cdot1,09^t\\).</p><p>Dela med \\(120\\cdot1,05^t\\):</p><p>\\(1,5=\\left(\\frac{1,09}{1,05}\\right)^t\\).</p><p>Logaritmera:</p><p>\\(t=\\frac{\\lg1,5}{\\lg(1,09/1,05)}\\approx10,845\\).</p><p>Efter denna tidpunkt är \\(B(t)>A(t)\\). Den första hela årstidpunkten är därför <strong>11 år</strong>.</p>",
+    "s": "<p>Gränsen fås när modellerna är lika:</p><p>\\(180\\cdot1,05^t=120\\cdot1,09^t\\).</p><p>Dela med \\(120\\cdot1,05^t\\):</p><p>\\(1,5=\\left(\\frac{1,09}{1,05}\\right)^t\\).</p><p>Ta \\(\\lg\\) av båda leden:</p><p>\\(t=\\frac{\\lg1,5}{\\lg(1,09/1,05)}\\approx10,845\\).</p><p>Efter denna tidpunkt är \\(B(t)>A(t)\\). Den första hela årstidpunkten är därför <strong>11 år</strong>.</p>",
     "familj": "r7_exp_05"
   },
   {
@@ -11612,7 +11612,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>Två likformiga trianglar har areorna 54 cm² och 96 cm². En sida i den mindre triangeln är 9 cm.</p><p>Bestäm motsvarande sida i den större triangeln exakt.</p>",
-    "s": "<p>För likformiga figurer är areafaktorn kvadraten på längdfaktorn.</p><p>Areafaktorn från den mindre till den större triangeln är</p><p>\\(\\frac{96}{54}=\\frac{16}{9}\\).</p><p>Längdfaktorn är därför</p><p>\\(k=\\sqrt{16/9}=4/3\\).</p><p>Den motsvarande sidan blir \\(9\\cdot4/3=12\\).</p><p><strong>Sidan är 12 cm.</strong></p>",
+    "s": "<p>För likformiga figurer gäller enligt formelbladet</p><p>\\[\\text{Areaskalan}=(\\text{Längdskalan})^2.\\]</p><p>Areaskalan från den mindre till den större triangeln är</p><p>\\(\\frac{96}{54}=\\frac{16}{9}\\).</p><p>Längdskalan är därför</p><p>\\(\\sqrt{16/9}=4/3\\).</p><p>Den motsvarande sidan blir \\(9\\cdot4/3=12\\).</p><p><strong>Sidan är 12 cm.</strong></p>",
     "familj": "r3_A_similarity_area_1"
   },
   {
@@ -11939,7 +11939,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/3",
     "t": "<p>Två trianglar har lika stor vinkel mellan två kända sidor. I den första är sidorna kring vinkeln 6 och 10. I den andra är de 9 och 15.</p><p>Visa att trianglarna är likformiga och förklara varför det inte behövs någon information om den tredje sidan.</p>",
-    "s": "<p>Sidkvoterna kring den lika vinkeln är</p><p>\\(9/6=15/10=1,5\\).</p><p>Två motsvarande sidor är alltså proportionella och den mellanliggande vinkeln är lika.</p><p><strong>Trianglarna är likformiga enligt sida–vinkel–sida.</strong></p><p>När detta kriterium är uppfyllt följer proportionaliteten för den tredje sidan automatiskt.</p>",
+    "s": "<p>Jämför sidkvoterna kring den lika vinkeln:</p><p>\\(9/6=15/10=1,5\\).</p><p>Två par motsvarande sidor har alltså samma längdskala och vinkeln mellan dem är lika stor.</p><p><strong>Trianglarna är därför likformiga enligt sida–vinkel–sida.</strong></p><p>När detta villkor är uppfyllt får även det tredje sidparet samma längdskala.</p>",
     "familj": "fill_similarity_sas_A"
   },
   {
@@ -12526,8 +12526,8 @@ window.BANKMA2 = [
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Förklara begreppet <strong>median i en triangel</strong>.</p>",
-    "s": "<p><strong>En sträcka från ett hörn till mittpunkten på motstående sida.</strong></p>",
+    "t": "<p>Förklara vad som menas med <strong>likbelägna vinklar</strong> när en linje skär två parallella linjer.</p>",
+    "s": "<p>Likbelägna vinklar ligger i motsvarande läge vid de två skärningspunkterna.</p><p>När en linje skär två parallella linjer är de likbelägna vinklarna lika stora.</p>",
     "familj": "gap_geo_def_1"
   },
   {
@@ -12540,8 +12540,8 @@ window.BANKMA2 = [
     ],
     "niva": "E",
     "poang": "2/0/0",
-    "t": "<p>Förklara begreppet <strong>normal</strong>.</p>",
-    "s": "<p><strong>En linje som är vinkelrät mot en given linje eller kurva i en punkt.</strong></p>",
+    "t": "<p>Förklara vad som menas med <strong>alternatvinklar</strong> när en linje skär två parallella linjer.</p>",
+    "s": "<p>Alternatvinklar ligger mellan de parallella linjerna och på varsin sida om den skärande linjen.</p><p>När en linje skär två parallella linjer är alternatvinklarna lika stora.</p>",
     "familj": "gap_geo_def_6"
   },
   {
@@ -13880,8 +13880,8 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "familj": "r12_geomdef_01",
-    "t": "<p>Förklara kort vad som menas med</p><p>a) tangent,<br>b) sekant,<br>c) korda.</p>",
-    "s": "<p><strong>a)</strong> En tangent är en linje som har exakt en gemensam punkt med cirkeln.</p><p><strong>b)</strong> En sekant är en linje som skär cirkeln i två punkter.</p><p><strong>c)</strong> En korda är en sträcka vars ändpunkter ligger på cirkeln.</p>"
+    "t": "<p>Förklara kort vad som menas med</p><p>a) korda,<br>b) bisektris,<br>c) transversal.</p>",
+    "s": "<p><strong>a)</strong> En korda är en sträcka vars båda ändpunkter ligger på en cirkel.</p><p><strong>b)</strong> En bisektris delar en vinkel i två lika stora vinklar.</p><p><strong>c)</strong> En transversal är en linje som skär två andra linjer.</p>"
   },
   {
     "id": "3.190",
@@ -16358,7 +16358,7 @@ window.BANKMA2 = [
     "poang": "0/1/2",
     "familj": "r13_korr_02",
     "t": "<p>Fyra skolor jämförs. För varje skola anges antal elever och antal utlånade biblioteksböcker under en månad.</p><table class=\"data\"><tr><th>Elever</th><th>Biblioteksutlån</th></tr><tr><td>200</td><td>600</td></tr><tr><td>400</td><td>1200</td></tr><tr><td>600</td><td>1800</td></tr><tr><td>800</td><td>2400</td></tr></table><p>En elev beräknar en perfekt positiv korrelation och drar slutsatsen att större skolor får varje elev att låna fler böcker. Bedöm slutsatsen.</p>",
-    "s": "<p>Antalet utlån är exakt tre gånger elevantalet i varje skola. Därför är korrelationen mellan de två råa antalen perfekt positiv.</p><p>Men antalet utlån per elev är \\(600/200=1200/400=1800/600=2400/800=3\\) i alla skolor.</p><p>Det finns alltså inget stöd i materialet för att en elev lånar fler böcker på en större skola.</p><p><strong>Slutsatsen är fel. Den perfekta korrelationen beror här på att båda råa antalen ökar med skolans storlek.</strong></p>"
+    "s": "<p>Antalet utlån är exakt tre gånger elevantalet i varje skola. Därför är korrelationen mellan de två angivna antalen perfekt positiv.</p><p>Men antalet utlån per elev är \\(600/200=1200/400=1800/600=2400/800=3\\) i alla skolor.</p><p>Det finns alltså inget stöd i materialet för att en elev lånar fler böcker på en större skola.</p><p><strong>Slutsatsen är fel. Den perfekta korrelationen beror här på att båda de angivna antalen ökar med skolans storlek.</strong></p>"
   },
   {
     "id": "4.151",
@@ -16619,7 +16619,7 @@ window.BANKMA2 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>I ett datamaterial finns ett tydligt positivt linjärt samband, men en punkt ligger långt från de andra som en avvikande observation.</p><p>Förklara hur den avvikande punkten kan påverka</p><p>a) korrelationskoefficienten</p><p>b) regressionslinjen.</p>",
+    "t": "<p>I ett datamaterial finns ett tydligt positivt linjärt samband, men en punkt ligger långt från de andra som en punkt som ligger tydligt utanför det övriga mönstret.</p><p>Förklara hur den avvikande punkten kan påverka</p><p>a) korrelationskoefficienten</p><p>b) regressionslinjen.</p>",
     "s": "<p>a) En avvikande punkt som inte följer mönstret brukar försvaga det linjära sambandet. Därför blir korrelationskoefficienten ofta mindre i absolutbelopp.</p><p>b) Regressionslinjen försöker ta hänsyn till alla punkter. En tydlig avvikande punkt kan därför dra linjen mot sig, så att både riktningskoefficient och skärning förändras.</p><p><strong>En avvikande punkt kan alltså både minska korrelationen och flytta regressionslinjen märkbart.</strong></p>",
     "familj": "korrelation_outlier_paverkan_pa_r_och_linjen"
   },
@@ -16881,7 +16881,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Ett företag sätter av 180 000 kr till en framtida expansion. Kapitalet antas öka med 5 % per år och modelleras med \\(K(t)=180000\\cdot1,05^t\\).</p><p>Efter hur många år är kapitalet 230 000 kr? Lös med logaritmer.</p>",
-    "s": "<p>Sätt \\(K(t)=230000\\):</p><p>\\(180000\\cdot1,05^t=230000\\).</p><p>Dividera med 180 000:</p><p>\\(1,05^t=\\frac{230}{180}\\).</p><p>Logaritmera båda led:</p><p>\\(t\\lg1,05=\\lg(230/180)\\).</p><p>\\(t=\\frac{\\lg(230/180)}{\\lg1,05}\\approx5,02\\).</p><p><strong>Kapitalet når 230 000 kr efter cirka 5,0 år.</strong></p>",
+    "s": "<p>Sätt \\(K(t)=230000\\):</p><p>\\(180000\\cdot1,05^t=230000\\).</p><p>Dividera med 180 000:</p><p>\\(1,05^t=\\frac{230}{180}\\).</p><p>Ta \\(\\lg\\) av båda leden:</p><p>\\(t\\lg1,05=\\lg(230/180)\\).</p><p>\\(t=\\frac{\\lg(230/180)}{\\lg1,05}\\approx5,02\\).</p><p><strong>Kapitalet når 230 000 kr efter cirka 5,0 år.</strong></p>",
     "familj": "ekonomi_expansion_logaritm"
   },
   {
@@ -16946,7 +16946,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>En marknadsavdelning jämför reklamkostnad \\(x\\) (tusen kr) med antal nya kunder \\(y\\).</p><table class=\"data\"><tr><th>\\(x\\)</th><td>8</td><td>10</td><td>12</td><td>14</td><td>16</td></tr><tr><th>\\(y\\)</th><td>125</td><td>143</td><td>162</td><td>181</td><td>201</td></tr></table><p>a) Bestäm korrelationskoefficienten med GeoGebra.</p><p>En sjätte kampanj hade \\(x=18\\) och \\(y=150\\).</p><p>b) Bestäm korrelationskoefficienten när även den kampanjen tas med.</p><p>c) Förklara vad jämförelsen visar om hur en avvikande datapunkt kan påverka korrelationskoefficienten.</p>",
-    "s": "<p>a) För de fem första kampanjerna blir \\(r\\approx1,00\\), alltså ett mycket starkt positivt linjärt samband.</p><p>b) När punkten \\((18,150)\\) tas med blir \\(r\\approx0,62\\).</p><p>c) Den sjätte punkten ligger långt från det mönster som de övriga punkterna följer. Därför minskar korrelationskoefficienten tydligt.</p><p><strong>En enda avvikande observation kan alltså förändra den uppmätta korrelationen mycket.</strong></p>",
+    "s": "<p>a) För de fem första kampanjerna blir \\(r\\approx1,00\\), alltså ett mycket starkt positivt linjärt samband.</p><p>b) När punkten \\((18,150)\\) tas med blir \\(r\\approx0,62\\).</p><p>c) Den sjätte punkten ligger långt från det mönster som de övriga punkterna följer. Därför minskar korrelationskoefficienten tydligt.</p><p><strong>En enda punkt som ligger tydligt utanför det övriga mönstret kan alltså förändra den uppmätta korrelationen mycket.</strong></p>",
     "familj": "ekonomi_marknadsdata_avvikande_kampanj"
   },
   {
@@ -16971,7 +16971,7 @@ window.BANKMA2 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>Ett företag säljer två abonnemang. Under en månad säljs totalt 420 abonnemang. Täckningsbidraget är 140 kr för Bas och 220 kr för Premium, och det totala täckningsbidraget blir 75 600 kr.</p><p>a) Bestäm hur många abonnemang av varje sort som såldes.</p><p>b) Företagets mål är att minst 45 % av de sålda abonnemangen ska vara Premium. Uppfylldes målet?</p>",
+    "t": "<p>Ett företag säljer två abonnemang. Under en månad säljs totalt 420 abonnemang. Täckningsbidraget per abonnemang, alltså priset minus den rörliga kostnaden per abonnemang, är 140 kr för Bas och 220 kr för Premium, och det totala täckningsbidraget blir 75 600 kr.</p><p>a) Bestäm hur många abonnemang av varje sort som såldes.</p><p>b) Företagets mål är att minst 45 % av de sålda abonnemangen ska vara Premium. Uppfylldes målet?</p>",
     "s": "<p>Låt \\(x\\) vara Bas och \\(y\\) Premium.</p><p>\\[\\begin{cases}x+y=420\\\\140x+220y=75600\\end{cases}\\]</p><p>Sätt \\(x=420-y\\):</p><p>\\(140(420-y)+220y=75600\\).</p><p>\\(58800+80y=75600\\), så \\(y=210\\) och \\(x=210\\).</p><p>Andelen Premium är \\(210/420=0,50=50\\%\\).</p><p><strong>210 Bas och 210 Premium. Målet uppfylldes eftersom 50 % var Premium.</strong></p>",
     "familj": "ekonomi_produktmix_tackningsbidrag"
   },
@@ -17049,8 +17049,8 @@ window.BANKMA2 = [
     ],
     "niva": "C",
     "poang": "0/3/0",
-    "t": "<p>Ett företag följer försäljningen av en ny produkt under de första sex månaderna.</p><table class=\"data\"><tr><th>Månad</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr><tr><th>Försäljning</th><td>82</td><td>91</td><td>103</td><td>116</td><td>132</td><td>150</td></tr></table><p>a) Gör både linjär och exponentiell regression i GeoGebra. Vilken modell följer de sex värdena bäst?</p><p>b) Använd den modellen för att uppskatta försäljningen månad 8.</p><p>c) Förklara varför prognosen ändå bör tolkas försiktigt.</p>",
-    "s": "<p>a) En linjär regression ger ungefär \\(y=13,6x+64,7\\). En exponentiell regression ger ungefär \\(y=71,84\\cdot1,129^x\\).</p><p>För dessa sex punkter ligger den exponentiella modellen tydligare närmare mätvärdena.</p><p>b) Med exponentialmodellen blir \\(y(8)\\approx190\\).</p><p>c) Modellen bygger bara på de första sex månaderna. Efterfrågan kan till exempel plana ut när marknaden mättas.</p><p><strong>Exponentiell modell är rimligast för de givna punkterna och ger cirka 190 enheter månad 8, men prognosen är osäker utanför den observerade perioden.</strong></p>",
+    "t": "<p>Ett företag följer försäljningen av en ny produkt under de första sex månaderna.</p><table class=\"data\"><tr><th>Månad</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr><tr><th>Försäljning</th><td>82</td><td>91</td><td>103</td><td>116</td><td>132</td><td>150</td></tr></table><p>a) Bestäm med GeoGebra en linjär regressionsmodell och en exponentialmodell. Vilken modell följer de sex värdena bäst?</p><p>b) Använd den modellen för att uppskatta försäljningen månad 8.</p><p>c) Förklara varför prognosen ändå bör tolkas försiktigt.</p>",
+    "s": "<p>a) Linjär regression ger ungefär \\(y=13,6x+64,7\\). En exponentialmodell blir ungefär \\(y=71,84\\cdot1,129^x\\).</p><p>För dessa sex punkter ligger exponentialmodellen tydligare närmare mätvärdena.</p><p>b) Med exponentialmodellen blir \\(y(8)\\approx190\\).</p><p>c) Modellen bygger bara på de första sex månaderna. Efterfrågan kan förändras på ett annat sätt senare.</p><p><strong>Exponentialmodellen passar de givna punkterna bäst och ger cirka 190 enheter månad 8, men prognosen är osäker utanför den observerade perioden.</strong></p>",
     "familj": "ekonomi_forsaljning_regressionsmodell"
   },
   {
@@ -17063,7 +17063,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Ett nystartat företag modellerar antalet aktiva kunder med \\(K(t)=1200\\cdot1,08^t\\), där \\(t\\) är antal år.</p><p>Efter hur lång tid passerar modellen 2 000 kunder? Lös med logaritmer.</p>",
-    "s": "<p>Lös gränsekvationen \\(1200\\cdot1,08^t=2000\\).</p><p>\\(1,08^t=\\frac{5}{3}\\).</p><p>\\(t=\\frac{\\lg(5/3)}{\\lg1,08}\\approx6,64\\).</p><p><strong>Modellen passerar 2 000 kunder efter cirka 6,6 år.</strong></p>",
+    "s": "<p>Sätt modellens värde lika med gränsvärdet och lös \\(1200\\cdot1,08^t=2000\\).</p><p>\\(1,08^t=\\frac{5}{3}\\).</p><p>\\(t=\\frac{\\lg(5/3)}{\\lg1,08}\\approx6,64\\).</p><p><strong>Modellen passerar 2 000 kunder efter cirka 6,6 år.</strong></p>",
     "familj": "ekonomi_kundbas_exponentialekvation"
   },
   {
@@ -17076,7 +17076,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/2/0",
     "t": "<p>Tiden för att hantera en viss typ av kundorder kan beskrivas med en normalfördelning med medelvärdet 18 minuter och standardavvikelsen 4 minuter.</p><p>a) Bestäm med GeoGebra sannolikheten att en order tar mer än 24 minuter.</p><p>b) Bestäm den 90:e percentilen.</p><p>c) Ungefär hur många av 200 order kan förväntas ta mer än 24 minuter enligt modellen?</p>",
-    "s": "<p>a) Med normalfördelningens sannolikhetskalkylator fås \\(P(X>24)\\approx0,0668\\), alltså cirka 6,7 %.</p><p>b) Den 90:e percentilen är ungefär 23,1 minuter.</p><p>c) \\(200\\cdot0,0668\\approx13,4\\).</p><p><strong>Cirka 6,7 %, 90:e percentilen cirka 23,1 min och ungefär 13–14 order av 200.</strong></p>",
+    "s": "<p>a) Med normalfördelningens sannolikhetskalkylator fås sannolikheten ungefär 0,0668, alltså cirka 6,7 %.</p><p>b) Den 90:e percentilen är ungefär 23,1 minuter.</p><p>c) \\(200\\cdot0,0668\\approx13,4\\).</p><p><strong>Cirka 6,7 %, 90:e percentilen cirka 23,1 min och ungefär 13–14 order av 200.</strong></p>",
     "familj": "ekonomi_orderhantering_normal"
   },
   {
@@ -17089,7 +17089,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Efterfrågan på en vara modelleras med \\(q=800-10p\\), där \\(p\\) är priset i kronor och \\(q\\) antal sålda enheter.</p><p>Intäkten blir då \\(I(p)=p(800-10p)\\).</p><p>Bestäm det pris som ger störst intäkt och beräkna den största intäkten enligt modellen.</p>",
-    "s": "<p>\\(I(p)=-10p^2+800p\\).</p><p>Symmetrilinjen är \\(p=-\\frac{800}{2(-10)}=40\\).</p><p>\\(I(40)=-10\\cdot40^2+800\\cdot40=16000\\).</p><p><strong>Priset 40 kr ger den största intäkten, 16 000 kr.</strong></p>",
+    "s": "<p>Intäkten är</p><p>\\[I(p)=-10p^2+800p=-10p(p-80).\\]</p><p>Nollställena är \\(p=0\\) och \\(p=80\\). Symmetrilinjen ligger mitt emellan nollställena, alltså vid \\(p=40\\).</p><p>\\[I(40)=-10\\cdot40^2+800\\cdot40=16000.\\]</p><p><strong>Priset 40 kr ger den största intäkten, 16 000 kr.</strong></p>",
     "familj": "ekonomi_intakt_maximum"
   },
   {
@@ -17140,8 +17140,8 @@ window.BANKMA2 = [
     ],
     "niva": "A",
     "poang": "0/0/3",
-    "t": "<p>Ett företag testar en prisstrategi för en produkt. Efterfrågan modelleras med</p><p>\\[q=1500-20p,\\]</p><p>där \\(p\\) är priset i kronor och \\(q\\) antal sålda enheter per månad. Den rörliga kostnaden är 25 kr per enhet och de fasta kostnaderna är 5 000 kr per månad.</p><p>a) Ställ upp en funktion för månadens vinst \\(V(p)\\).</p><p>b) Bestäm vilket pris som maximerar vinsten enligt modellen och beräkna den maximala vinsten.</p><p>c) Ledningen kräver minst 7 000 kr i vinst och priset ska vara ett helt antal kronor. Bestäm alla priser som uppfyller kravet.</p>",
-    "s": "<p>a) Vinsten är intäkt minus rörliga och fasta kostnader:</p><p>\\(V=(p-25)(1500-20p)-5000\\).</p><p>Utveckla:</p><p>\\(V(p)=-20p^2+2000p-42500\\).</p><p>b) Symmetrilinjen är \\(p=-\\frac{2000}{2(-20)}=50\\). Då \\(V(50)=7500\\).</p><p>c) Lös \\(V(p)\\ge7000\\):</p><p>\\(-20p^2+2000p-49500\\ge0\\).</p><p>Dividera med \\(-20\\) och vänd olikheten: \\(p^2-100p+2475\\le0\\).</p><p>Nollställena är \\(p=45\\) och \\(p=55\\). Parabeln är högst 0 mellan dem.</p><p><strong>a) \\(V(p)=-20p^2+2000p-42500\\). b) 50 kr ger maximal vinst 7 500 kr. c) Heltalspriserna 45–55 kr uppfyller kravet.</strong></p>",
+    "t": "<p>Ett företag testar en prisstrategi för en produkt. Efterfrågan modelleras med</p><p>\\[q=1500-20p,\\]</p><p>där \\(p\\) är priset i kronor och \\(q\\) antal sålda enheter per månad. Den rörliga kostnaden är 25 kr per enhet och de fasta kostnaderna är 5 000 kr per månad.</p><p>a) Ställ upp en funktion för månadens vinst \\(V(p)\\).</p><p>b) Bestäm vilket pris som ger den största vinsten enligt modellen och beräkna den största vinsten.</p><p>c) Ledningen kräver minst 7 000 kr i vinst och priset ska vara ett helt antal kronor. Bestäm alla priser som uppfyller kravet.</p>",
+    "s": "<p>a) Vinsten är intäkt minus rörliga och fasta kostnader:</p><p>\\[V(p)=(p-25)(1500-20p)-5000=-20p^2+2000p-42500.\\]</p><p>b) Skriv om uttrycket med kvadratkomplettering:</p><p>\\[V(p)=-20(p^2-100p)-42500=-20(p-50)^2+7500.\\]</p><p>Eftersom \\((p-50)^2\\ge0\\) blir det största värdet 7 500 när \\(p=50\\).</p><p>c) Kravet \\(V(p)\\ge7000\\) ger</p><p>\\[-20p^2+2000p-49500\\ge0.\\]</p><p>Dividera med \\(-20\\) och vänd olikhetstecknet:</p><p>\\[p^2-100p+2475\\le0.\\]</p><p>Nollställena är \\(p=45\\) och \\(p=55\\). Parabeln ligger under eller på x-axeln mellan nollställena.</p><p><strong>a) \\(V(p)=-20p^2+2000p-42500\\). b) 50 kr ger den största vinsten, 7 500 kr. c) Heltalspriserna 45–55 kr uppfyller kravet.</strong></p>",
     "familj": "ekonomi_prissattning_vinst_A"
   },
   {
@@ -17167,7 +17167,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Fakturabeloppen för en viss kundgrupp kan beskrivas med en normalfördelning med medelvärdet 12 500 kr och standardavvikelsen 2 400 kr.</p><p>Bestäm med GeoGebra sannolikheten att ett fakturabelopp är större än 15 000 kr.</p>",
-    "s": "<p>Använd normalfördelningens sannolikhetskalkylator med medelvärde 12 500 och standardavvikelse 2 400.</p><p>\\(P(X>15000)\\approx0,149\\).</p><p><strong>Sannolikheten är cirka 14,9 %.</strong></p>",
+    "s": "<p>Använd normalfördelningens sannolikhetskalkylator med medelvärde 12 500 och standardavvikelse 2 400.</p><p>Sannolikheten att beloppet är större än 15 000 kr blir ungefär 0,149.</p><p><strong>Sannolikheten är cirka 14,9 %.</strong></p>",
     "familj": "ekonomi_fakturabelopp_normal"
   },
   {
@@ -17179,7 +17179,7 @@ window.BANKMA2 = [
     ],
     "niva": "C",
     "poang": "0/2/0",
-    "t": "<p>Ett företag säljer totalt 500 produkter av typ A och B under en kampanj. Täckningsbidraget är 60 kr per A-produkt och 110 kr per B-produkt. Det totala täckningsbidraget är 42 500 kr.</p><p>Försäljningschefen påstår att mer än hälften av de sålda produkterna måste ha varit typ B.</p><p>Undersök om påståendet stämmer.</p>",
+    "t": "<p>Ett företag säljer totalt 500 produkter av typ A och B under en kampanj. Täckningsbidraget per produkt, alltså priset minus den rörliga kostnaden per produkt, är 60 kr per A-produkt och 110 kr per B-produkt. Det totala täckningsbidraget är 42 500 kr.</p><p>Försäljningschefen påstår att mer än hälften av de sålda produkterna måste ha varit typ B.</p><p>Undersök om påståendet stämmer.</p>",
     "s": "<p>Låt \\(x\\) vara antal A och \\(y\\) antal B.</p><p>\\[\\begin{cases}x+y=500\\\\60x+110y=42500\\end{cases}\\]</p><p>Sätt \\(x=500-y\\): \\(60(500-y)+110y=42500\\).</p><p>\\(30000+50y=42500\\), så \\(y=250\\) och \\(x=250\\).</p><p>Typ B utgör \\(250/500=50\\%\\).</p><p><strong>Påståendet stämmer inte. Exakt hälften var typ B.</strong></p>",
     "familj": "ekonomi_produktmix_pastaende"
   },
@@ -17206,7 +17206,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/3/0",
     "t": "<p>En linjär regressionsmodell beskriver sambandet mellan ett företags marknadsföringsbudget och antal nya kunder under fem kampanjperioder mycket väl. En analytiker använder modellen för att förutsäga utfallet för en marknadsföringsbudget som är tre gånger större än den största budgeten i datamaterialet.</p><p>Ge två matematiska skäl till att prognosen bör behandlas försiktigt.</p>",
-    "s": "<p>Prognosen ligger långt utanför intervallet där modellen har jämförts med data. Det finns därför inget stöd i de fem observationerna för att sambandet fortsätter vara linjärt där.</p><p>Dessutom kan sambandet förändras när budgeten blir mycket större, till exempel genom att ytterligare annonsering ger mindre effekt än tidigare.</p><p><strong>En god anpassning inom det observerade intervallet garanterar inte en god prognos långt utanför intervallet.</strong></p>",
+    "s": "<p>Prognosen ligger långt utanför intervallet där modellen har jämförts med data. Det finns därför inget stöd i de fem observationerna för att sambandet fortsätter vara linjärt där.</p><p>Dessutom kan sambandet förändras när budgeten blir mycket större, till exempel genom att ytterligare annonsering ger mindre effekt än tidigare.</p><p><strong>En god hur väl modellen passar mätvärdena inom det observerade intervallet garanterar inte en god prognos långt utanför intervallet.</strong></p>",
     "familj": "ekonomi_marknadsprognos_modellkritik"
   },
   {
@@ -17219,7 +17219,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/3",
     "t": "<p>En butik modellerar den dagliga efterfrågan på en produkt som normalfördelad med medelvärdet 240 enheter och standardavvikelsen 35 enheter.</p><p>a) Butiken har 300 enheter tillgängliga varje morgon. Bestäm med GeoGebra sannolikheten att dagens efterfrågan är större än lagret.</p><p>b) Bestäm hur stort morgonlager som krävs enligt modellen för att efterfrågan ska överstiga lagret endast 2,5 % av dagarna.</p><p>c) Under 250 försäljningsdagar, ungefär hur många dagar motsvarar 2,5 %? Förklara också en begränsning med att använda normalfördelningsmodellen som enda underlag för lagerbeslut.</p>",
-    "s": "<p>a) Med medelvärde 240 och standardavvikelse 35 ger GeoGebra \\(P(X>300)\\approx0,0433\\), alltså cirka 4,3 %.</p><p>b) Gränsen ska ha 97,5 % av fördelningen till vänster. GeoGebra ger ungefär \\(308,6\\). Ett heltalslager behöver därför vara cirka 309 enheter.</p><p>c) \\(0,025\\cdot250=6,25\\), alltså ungefär 6 dagar.</p><p>Modellen kan till exempel missa säsongsvariation, kampanjer eller plötsliga förändringar i efterfrågan.</p><p><strong>Cirka 4,3 %, cirka 309 enheter och ungefär 6 dagar av 250.</strong></p>",
+    "s": "<p>a) Med medelvärde 240 och standardavvikelse 35 ger GeoGebra sannolikheten cirka 0,0433, alltså cirka 4,3 %, för att efterfrågan är större än 300 enheter.</p><p>b) Gränsen ska ha 97,5 % av fördelningen till vänster. GeoGebra ger ungefär 308,6. Ett heltalslager behöver därför vara cirka 309 enheter.</p><p>c) \\(0,025\\cdot250=6,25\\), alltså ungefär 6 dagar.</p><p>Modellen kan till exempel missa säsongsvariation, kampanjer eller plötsliga förändringar i efterfrågan.</p><p><strong>Cirka 4,3 %, cirka 309 enheter och ungefär 6 dagar av 250.</strong></p>",
     "familj": "ekonomi_lager_normal_A"
   },
   {
@@ -17232,7 +17232,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/3/0",
     "t": "<p>Ett företag använder modellen \\(p=95-0,05q\\) för sambandet mellan pris \\(p\\) och försäljningsvolym \\(q\\). Den rörliga kostnaden är 35 kr per enhet och den fasta kostnaden är 8 000 kr.</p><p>a) Visa att vinsten kan skrivas</p><p>\\[V(q)=-0,05q^2+60q-8000.\\]</p><p>b) Bestäm vilken försäljningsvolym som ger störst vinst enligt modellen och beräkna vinsten.</p>",
-    "s": "<p>a) Vinsten är \\((p-35)q-8000\\). Sätt in \\(p=95-0,05q\\):</p><p>\\(V=(60-0,05q)q-8000=-0,05q^2+60q-8000\\).</p><p>b) Symmetrilinjen är \\(q=-\\frac{60}{2(-0,05)}=600\\).</p><p>\\(V(600)=-0,05\\cdot600^2+60\\cdot600-8000=10000\\).</p><p><strong>600 enheter ger enligt modellen maximal vinst 10 000 kr.</strong></p>",
+    "s": "<p>a) Vinsten är \\((p-35)q-8000\\). Sätt in \\(p=95-0{,}05q\\):</p><p>\\[V(q)=(60-0{,}05q)q-8000=-0{,}05q^2+60q-8000.\\]</p><p>b) Kvadratkomplettera:</p><p>\\[V(q)=-0{,}05(q^2-1200q)-8000=-0{,}05(q-600)^2+10000.\\]</p><p>Eftersom \\((q-600)^2\\ge0\\) blir det största värdet 10 000 när \\(q=600\\).</p><p><strong>600 enheter ger enligt modellen den största vinsten, 10 000 kr.</strong></p>",
     "familj": "ekonomi_volym_pris_vinst"
   },
   {
@@ -17245,7 +17245,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>En inventarie värderas i en kalkyl enligt \\(V(t)=320000\\cdot0,82^t\\), där \\(t\\) är antal år.</p><p>Efter hur många hela år är modellvärdet första gången under 150 000 kr?</p>",
-    "s": "<p>Lös gränsekvationen \\(320000\\cdot0,82^t=150000\\) med logaritmer eller GeoGebra.</p><p>Den ger \\(t\\approx3,82\\).</p><p>Efter 3 hela år är värdet fortfarande över gränsen, men efter 4 år har det passerat under.</p><p><strong>Efter 4 hela år.</strong></p>",
+    "s": "<p>Sätt modellens värde lika med gränsvärdet och lös \\(320000\\cdot0,82^t=150000\\) med logaritmer eller GeoGebra.</p><p>Den ger \\(t\\approx3,82\\).</p><p>Efter 3 hela år är värdet fortfarande över gränsen, men efter 4 år har det passerat under.</p><p><strong>Efter 4 hela år.</strong></p>",
     "familj": "ekonomi_inventarie_gransvarde"
   },
   {
@@ -17310,7 +17310,7 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/3/0",
     "t": "<p>Batterinivån i ett digitalt hjälpmedel följs under ett arbetspass. En förenklad modell är</p><p>\\[B(t)=100\\cdot0,90^t,\\]</p><p>där \\(B\\) är batterinivån i procent och \\(t\\) är timmar.</p><p>a) Bestäm med GeoGebra när modellen första gången går under 40 %.</p><p>b) Modellen bygger på mätningar under de första 10 timmarna. Förklara varför ett modellvärde efter 30 timmar bör tolkas försiktigt.</p>",
-    "s": "<p>a) Lös gränsekvationen \\(100\\cdot0,90^t=40\\) med GeoGebra. Det ger \\(t\\approx8,70\\).</p><p>Alltså går modellen under 40 % efter cirka 8,7 timmar.</p><p>b) Modellen har bara jämförts med data under de första 10 timmarna. Batteriets verkliga urladdning kan ändras, och en lång prognos ligger långt utanför det observerade intervallet.</p><p><strong>Cirka 8,7 timmar; långtidsprognosen är osäker eftersom modellen används långt utanför mätintervallet.</strong></p>",
+    "s": "<p>a) Sätt modellens värde lika med gränsvärdet och lös \\(100\\cdot0,90^t=40\\) med GeoGebra. Det ger \\(t\\approx8,70\\).</p><p>Alltså går modellen under 40 % efter cirka 8,7 timmar.</p><p>b) Modellen har bara jämförts med data under de första 10 timmarna. Batteriets verkliga urladdning kan ändras, och en lång prognos ligger långt utanför det observerade intervallet.</p><p><strong>Cirka 8,7 timmar; långtidsprognosen är osäker eftersom modellen används långt utanför mätintervallet.</strong></p>",
     "familj": "vard_hjalpmedel_batterimodell"
   },
   {
@@ -17401,7 +17401,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "t": "<p>Batterinivån i ett kommunikationshjälpmedel modelleras under ett arbetspass med</p><p>\\[B(t)=100\\cdot0,88^t.\\]</p><p>Bestäm med GeoGebra efter hur många timmar modellen första gången går under 50 %.</p>",
-    "s": "<p>Lös gränsekvationen \\(100\\cdot0,88^t=50\\) med GeoGebra.</p><p>Det ger \\(t\\approx5,42\\).</p><p><strong>Modellen går under 50 % efter cirka 5,4 timmar.</strong></p>",
+    "s": "<p>Sätt modellens värde lika med gränsvärdet och lös \\(100\\cdot0,88^t=50\\) med GeoGebra.</p><p>Det ger \\(t\\approx5,42\\).</p><p><strong>Modellen går under 50 % efter cirka 5,4 timmar.</strong></p>",
     "familj": "vard_kommunikationshjalpmedel_batteri"
   },
   {
@@ -17505,7 +17505,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/3",
     "t": "<p>En daglig verksamhet planerar en rektangulär aktivitetsyta med omkretsen 30 m. I planeringsskissen reserveras en 1 m bred fri passage längs alla fyra sidor inne i rektangeln.</p><p>Låt den ena yttersidan vara \\(x\\) meter.</p><p>a) Ställ upp en funktion för arean \\(U(x)\\) av den del som återstår innanför passagen.</p><p>b) Bestäm yttermåtten som ger största möjliga sådan area.</p><p>c) Beräkna den största arean innanför passagen.</p>",
-    "s": "<p>Om den ena yttersidan är \\(x\\), är den andra \\(15-x\\).</p><p>Passagen tar 1 m på varje sida, så den inre rektangeln får sidorna \\(x-2\\) och \\(13-x\\).</p><p>a) \\(U(x)=(x-2)(13-x)=-x^2+15x-26\\).</p><p>b) Symmetrilinjen är \\(x=-\\frac{15}{2(-1)}=7,5\\). Den andra yttersidan är också \\(15-7,5=7,5\\).</p><p>c) Den inre ytan är då \\(5,5\\cdot5,5=30,25\\) m².</p><p><strong>\\(U(x)=-x^2+15x-26\\); yttermått 7,5 m × 7,5 m; största inre area 30,25 m².</strong></p>",
+    "s": "<p>Om den ena yttersidan är \\(x\\), är den andra \\(15-x\\). Passagen tar 1 m på varje sida, så den inre rektangeln får sidorna \\(x-2\\) och \\(13-x\\).</p><p>a) \\(U(x)=(x-2)(13-x)=-x^2+15x-26\\).</p><p>b) Kvadratkomplettera:</p><p>\\[U(x)=-(x-7{,}5)^2+30{,}25.\\]</p><p>Det största värdet fås när \\(x=7{,}5\\). Den andra yttersidan är då också \\(15-7{,}5=7{,}5\\).</p><p>c) Den inre ytan är \\(5{,}5\\cdot5{,}5=30{,}25\\) m².</p><p><strong>\\(U(x)=-x^2+15x-26\\); yttermått 7,5 m × 7,5 m; största inre area 30,25 m².</strong></p>",
     "familj": "vard_aktivitetsrum_passage_A"
   },
   {
@@ -17583,7 +17583,7 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/0/3",
     "t": "<p>Inför en utbildningsdag delas 20 medarbetare i två team A och B. I en samarbetsövning ska varje person i A kunna bilda ett par med varje person i B. Det ger 96 möjliga par.</p><p>a) Bestäm hur många personer som finns i de två teamen.</p><p>b) Team A ska vara det större teamet. Hur många personer finns då i A?</p><p>c) Visa med en andragradsfunktion att antalet möjliga par aldrig kan bli större än 100 när totalt 20 personer delas i två team.</p>",
-    "s": "<p>a) Låt A ha \\(x\\) personer. Då har B \\(20-x\\).</p><p>Antalet par blir \\(x(20-x)=96\\).</p><p>\\(-x^2+20x-96=0\\), eller \\(x^2-20x+96=0\\).</p><p>\\((x-8)(x-12)=0\\), så teamstorlekarna är 8 och 12.</p><p>b) Det större teamet A har 12 personer.</p><p>c) Funktionen \\(P(x)=-x^2+20x\\) har symmetrilinjen \\(x=10\\). Där är \\(P(10)=100\\). Eftersom parabeln är nedåtvänd är detta det största värdet.</p><p><strong>Teamstorlekarna är 12 och 8; maximalt kan 100 sådana par bildas.</strong></p>",
+    "s": "<p>a) Låt A ha \\(x\\) personer. Då har B \\(20-x\\).</p><p>Antalet par blir \\(x(20-x)=96\\).</p><p>\\(-x^2+20x-96=0\\), eller \\(x^2-20x+96=0\\).</p><p>\\((x-8)(x-12)=0\\), så teamstorlekarna är 8 och 12.</p><p>b) Det större teamet A har 12 personer.</p><p>c) Funktionen \\(P(x)=-x^2+20x\\) har symmetrilinjen \\(x=10\\). Där är \\(P(10)=100\\). Eftersom parabeln är nedåtvänd är detta det största värdet.</p><p><strong>Teamstorlekarna är 12 och 8; som mest kan 100 sådana par bildas.</strong></p>",
     "familj": "vard_teamarbete_parningar_A"
   },
   {
@@ -17660,8 +17660,8 @@ window.BANKMA2 = [
     ],
     "niva": "A",
     "poang": "0/0/3",
-    "t": "<p>Efterfrågan på en produkt modelleras med \\(q=a-20p\\), där \\(p\\) är priset i kronor och \\(a\\) är en konstant. Den rörliga kostnaden är 40 kr per enhet och de fasta kostnaderna är 12 000 kr.</p><p>Företaget vet att vinstfunktionen enligt modellen har sin maximipunkt när \\(p=70\\).</p><p>a) Bestäm konstanten \\(a\\).</p><p>b) Bestäm hur många enheter som då säljs enligt modellen och beräkna den maximala vinsten.</p><p>c) Bestäm det största pris som modellen över huvud taget tillåter om efterfrågan inte får vara negativ.</p>",
-    "s": "<p>Vinsten är</p><p>\\(V=(p-40)(a-20p)-12000=-20p^2+(a+800)p-40a-12000\\).</p><p>a) Symmetrilinjen är \\(p=-\\frac{a+800}{2(-20)}=\\frac{a+800}{40}\\).</p><p>Eftersom maximipunkten ligger vid \\(p=70\\): \\(\\frac{a+800}{40}=70\\). Då \\(a=2000\\).</p><p>b) \\(q=2000-20\\cdot70=600\\). Vinsten blir \\((70-40)\\cdot600-12000=6000\\) kr.</p><p>c) \\(q\\ge0\\Rightarrow2000-20p\\ge0\\Rightarrow p\\le100\\).</p><p><strong>\\(a=2000\\), 600 enheter, maximal vinst 6 000 kr och modellens högsta möjliga pris är 100 kr.</strong></p>",
+    "t": "<p>Efterfrågan på en produkt modelleras med \\(q=a-20p\\), där \\(p\\) är priset i kronor och \\(a\\) är en konstant. Den rörliga kostnaden är 40 kr per enhet och de fasta kostnaderna är 12 000 kr.</p><p>Företaget vet att vinstfunktionen enligt modellen har sin maximipunkt när \\(p=70\\).</p><p>a) Bestäm konstanten \\(a\\).</p><p>b) Bestäm hur många enheter som då säljs enligt modellen och beräkna den största vinsten.</p><p>c) Bestäm det största pris som modellen över huvud taget tillåter om efterfrågan inte får vara negativ.</p>",
+    "s": "<p>Vinsten är</p><p>\\[V(p)=(p-40)(a-20p)-12000.\\]</p><p>a) Maximipunkten ligger vid \\(p=70\\). På grund av symmetrin måste därför \\(V(69)=V(71)\\).</p><p>\\[29(a-1380)-12000=31(a-1420)-12000.\\]</p><p>Det ger \\(29a-40020=31a-44020\\), alltså \\(a=2000\\).</p><p>b) \\(q=2000-20\\cdot70=600\\). Vinsten blir \\((70-40)\\cdot600-12000=6000\\) kr.</p><p>c) Efterfrågan får inte vara negativ:</p><p>\\[2000-20p\\ge0\\Rightarrow p\\le100.\\]</p><p><strong>\\(a=2000\\), 600 enheter, största vinst 6 000 kr och modellens högsta möjliga pris 100 kr.</strong></p>",
     "familj": "ekonomi_prissattning_parameter_A"
   },
   {
@@ -17803,7 +17803,7 @@ window.BANKMA2 = [
       "2a"
     ],
     "familj": "vvs_fastighet_vent_tryckfall_potens",
-    "t": "<p>Vid injustering av en ventilationskanal används den förenklade modellen \\[\\Delta p=0{,}018q^2,\\] där \\(q\\) är luftflödet i L/s och \\(\\Delta p\\) är tryckfallet i Pa.</p><ol><li>Beräkna tryckfallet när \\(q=120\\) L/s.</li><li>Bestäm luftflödet när tryckfallet är 200 Pa.</li></ol>",
+    "t": "<p>När luftflödet i en ventilationskanal justeras används den förenklade modellen \\[\\Delta p=0{,}018q^2,\\] där \\(q\\) är luftflödet i L/s och \\(\\Delta p\\) är tryckfallet i Pa.</p><ol><li>Beräkna tryckfallet när \\(q=120\\) L/s.</li><li>Bestäm luftflödet när tryckfallet är 200 Pa.</li></ol>",
     "s": "<p>För \\(q=120\\): \\[\\Delta p=0{,}018\\cdot120^2=259{,}2.\\]</p><p>När \\(\\Delta p=200\\) får vi potensekvationen \\[0{,}018q^2=200\\Rightarrow q^2=11111{,}1.\\]</p><p>Eftersom luftflödet är positivt: \\[q\\approx105{,}4.\\]</p><p><strong>Svar: 259,2 Pa och cirka 105 L/s.</strong></p>",
     "id": "5.73"
   },
@@ -17959,8 +17959,8 @@ window.BANKMA2 = [
       "2a"
     ],
     "familj": "vvs_fastighet_potensmodell_kanaldiameter",
-    "t": "<p>I en förenklad dimensioneringsmodell gäller \\[Q=12d^2,\\] där \\(Q\\) är ett luftflöde och \\(d\\) är en positiv dimensionsvariabel.</p><p>Bestäm \\(d\\) när \\(Q=300\\).</p>",
-    "s": "<p>Sätt in \\(Q=300\\): \\[300=12d^2\\Rightarrow d^2=25.\\]</p><p>Eftersom \\(d\\) är positiv blir \\(d=5\\).</p><p><strong>Svar: \\(d=5\\).</strong></p>",
+    "t": "<p>För en ventilationskanal används den förenklade modellen</p><p>\\[Q=12d^2,\\]</p><p>där \\(Q\\) är luftflödet i L/s och \\(d\\) är kanalens diameter i dm.</p><p>Bestäm kanalens diameter när \\(Q=300\\) L/s.</p>",
+    "s": "<p>Sätt in \\(Q=300\\):</p><p>\\[300=12d^2\\Rightarrow d^2=25.\\]</p><p>En diameter är positiv, så \\(d=5\\).</p><p><strong>Kanalen har diametern 5 dm.</strong></p>",
     "id": "5.85"
   },
   {
@@ -17985,7 +17985,7 @@ window.BANKMA2 = [
       "2a"
     ],
     "familj": "vvs_fastighet_tilluft_system",
-    "t": "<p>Vid injustering ska två delar av en byggnad tillsammans få 960 L/s tilluft. Den ena delen ska få 160 L/s mer än den andra.</p><p>Bestäm luftflödet till de två delarna.</p>",
+    "t": "<p>När ventilationssystemet ställs in ska två delar av en byggnad tillsammans få 960 L/s tilluft. Den ena delen ska få 160 L/s mer än den andra.</p><p>Bestäm luftflödet till de två delarna.</p>",
     "s": "<p>Låt \\(x\\) och \\(y\\) vara luftflödena. Då gäller \\[x+y=960,\\qquad x-y=160.\\]</p><p>Adderar vi ekvationerna får vi \\(2x=1120\\), alltså \\(x=560\\). Då är \\(y=400\\).</p><p><strong>Svar: 560 L/s och 400 L/s.</strong></p>",
     "id": "5.87"
   },
@@ -18037,8 +18037,8 @@ window.BANKMA2 = [
       "2a"
     ],
     "familj": "vvs_fastighet_isolering_ekonomimodell",
-    "t": "<p>För en viss rörsträcka används en förenklad modell för den årliga nettobesparingen \\(N\\) i kronor när isoleringens tjocklek är \\(x\\) cm: \\[N(x)=-4x^2+90x-80,\\qquad 0\\le x\\le20.\\]</p><ol><li>Bestäm vilken isoleringstjocklek som ger störst nettobesparing enligt modellen och beräkna den största besparingen.</li><li>Bestäm ungefär från vilken tjocklek nettobesparingen blir positiv inom det angivna intervallet.</li><li>Ge en anledning till att modellen inte bör användas för godtyckligt stora värden på \\(x\\).</li></ol>",
-    "s": "<p>Bestäm först nollställena:</p><p>\\[-4x^2+90x-80=0.\\]</p><p>Dividera med \\(-4\\):</p><p>\\[x^2-22{,}5x+20=0.\\]</p><p>Med pq-formeln fås ungefär</p><p>\\[x_1\\approx0{,}93,\\qquad x_2\\approx21{,}57.\\]</p><p>En parabel är symmetrisk. Symmetrilinjen ligger mitt emellan nollställena:</p><p>\\[x=\\frac{0{,}93+21{,}57}{2}\\approx11{,}25.\\]</p><p>Eftersom koefficienten framför \\(x^2\\) är negativ ligger maximipunkten där. Då är</p><p>\\[N(11{,}25)=426{,}25.\\]</p><p>Inom modellens intervall \\(0\\le x\\le20\\) blir nettobesparingen positiv efter det första nollstället, alltså för tjocklekar större än cirka 0,93 cm.</p><p>Modellen är endast avsedd för intervallet 0–20 cm. Dessutom är den en förenkling; kostnader och energibesparing behöver inte fortsätta följa samma samband för mycket stora tjocklekar.</p><p><strong>Svar: max vid 11,25 cm, cirka 426 kr/år; positiv nettobesparing från cirka 0,93 cm inom modellintervallet.</strong></p>",
+    "t": "<p>För en viss rörsträcka används en förenklad modell för den årliga nettobesparingen \\(N\\) i kronor, alltså besparingen efter att kostnaderna har räknats bort, när isoleringens tjocklek är \\(x\\) cm: \\[N(x)=-4x^2+90x-80,\\qquad 0\\le x\\le20.\\]</p><ol><li>Bestäm vilken isoleringstjocklek som ger störst nettobesparing enligt modellen och beräkna den största besparingen.</li><li>Bestäm ungefär från vilken tjocklek nettobesparingen blir positiv inom det angivna intervallet.</li><li>Ge en anledning till att modellen inte bör användas för godtyckligt stora värden på \\(x\\).</li></ol>",
+    "s": "<p>Bestäm först nollställena:</p><p>\\[-4x^2+90x-80=0.\\]</p><p>Dividera med \\(-4\\):</p><p>\\[x^2-22{,}5x+20=0.\\]</p><p>Med pq-formeln fås ungefär</p><p>\\[x_1\\approx0{,}93,\\qquad x_2\\approx21{,}57.\\]</p><p>En parabel är symmetrisk. Symmetrilinjen ligger mitt emellan nollställena:</p><p>\\[x=\\frac{0{,}93+21{,}57}{2}\\approx11{,}25.\\]</p><p>Eftersom parabeln är vänd nedåt ligger maximipunkten där. Då är</p><p>\\[N(11{,}25)=426{,}25.\\]</p><p>Inom modellens intervall \\(0\\le x\\le20\\) blir nettobesparingen positiv efter det första nollstället, alltså för tjocklekar större än cirka 0,93 cm.</p><p>Modellen är endast avsedd för intervallet 0–20 cm. Dessutom är den en förenkling; kostnader och energibesparing behöver inte fortsätta följa samma samband för mycket stora tjocklekar.</p><p><strong>Den största nettobesparingen fås vid 11,25 cm och är cirka 426 kr/år. Nettobesparingen är positiv från cirka 0,93 cm inom modellintervallet.</strong></p>",
     "id": "5.91"
   },
   {
@@ -18128,7 +18128,7 @@ window.BANKMA2 = [
       "2a"
     ],
     "familj": "vvs_fastighet_vent_parallelgrenar",
-    "t": "<p>En huvudkanal delar sig i två parallella ventilationsgrenar. Det totala luftflödet ska vara 300 L/s. I en förenklad modell är tryckfallen \\[\\Delta p_1=0{,}008q_1^2,\\qquad \\Delta p_2=0{,}018q_2^2.\\] När systemet är injusterat ska de två grenarna ha samma tryckfall.</p><span class=\"fig bred\"><svg width=\"620\" height=\"300\" viewBox=\"0 0 620 300\" role=\"img\" aria-label=\"Ventilationskanal som delar sig i två parallella grenar\">\n    <rect x=\"15\" y=\"15\" width=\"590\" height=\"270\" rx=\"12\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n    <path d=\"M65 150 H220 M220 150 C260 150 260 85 310 85 H545 M220 150 C260 150 260 215 310 215 H545\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"12\" stroke-linecap=\"round\"/>\n    <path d=\"M90 150 h80\" stroke=\"#B43123\" stroke-width=\"3\"/><path d=\"m170 150 -12 -7 v14 z\" fill=\"#B43123\"/>\n    <path d=\"M350 85 h100\" stroke=\"#2C62A8\" stroke-width=\"3\"/><path d=\"m450 85 -12 -7 v14 z\" fill=\"#2C62A8\"/>\n    <path d=\"M350 215 h100\" stroke=\"#0F6B4F\" stroke-width=\"3\"/><path d=\"m450 215 -12 -7 v14 z\" fill=\"#0F6B4F\"/>\n    <text x=\"102\" y=\"132\" font-family=\"IBM Plex Mono,monospace\" font-size=\"14\" fill=\"#B43123\">300 L/s</text>\n    <text x=\"380\" y=\"67\" font-family=\"IBM Plex Mono,monospace\" font-size=\"14\" fill=\"#2C62A8\">q₁</text>\n    <text x=\"380\" y=\"198\" font-family=\"IBM Plex Mono,monospace\" font-size=\"14\" fill=\"#0F6B4F\">q₂</text>\n    </svg></span><p>Bestäm luftflödet i varje gren och det gemensamma tryckfallet. Visa hur du använder båda villkoren.</p>",
+    "t": "<p>En huvudkanal delar sig i två parallella ventilationsgrenar. Det totala luftflödet ska vara 300 L/s. I en förenklad modell är tryckfallen \\[\\Delta p_1=0{,}008q_1^2,\\qquad \\Delta p_2=0{,}018q_2^2.\\] När systemet är inställt ska de två grenarna ha samma tryckfall.</p><span class=\"fig bred\"><svg width=\"620\" height=\"300\" viewBox=\"0 0 620 300\" role=\"img\" aria-label=\"Ventilationskanal som delar sig i två parallella grenar\">\n    <rect x=\"15\" y=\"15\" width=\"590\" height=\"270\" rx=\"12\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n    <path d=\"M65 150 H220 M220 150 C260 150 260 85 310 85 H545 M220 150 C260 150 260 215 310 215 H545\" fill=\"none\" stroke=\"#2B2527\" stroke-width=\"12\" stroke-linecap=\"round\"/>\n    <path d=\"M90 150 h80\" stroke=\"#B43123\" stroke-width=\"3\"/><path d=\"m170 150 -12 -7 v14 z\" fill=\"#B43123\"/>\n    <path d=\"M350 85 h100\" stroke=\"#2C62A8\" stroke-width=\"3\"/><path d=\"m450 85 -12 -7 v14 z\" fill=\"#2C62A8\"/>\n    <path d=\"M350 215 h100\" stroke=\"#0F6B4F\" stroke-width=\"3\"/><path d=\"m450 215 -12 -7 v14 z\" fill=\"#0F6B4F\"/>\n    <text x=\"102\" y=\"132\" font-family=\"IBM Plex Mono,monospace\" font-size=\"14\" fill=\"#B43123\">300 L/s</text>\n    <text x=\"380\" y=\"67\" font-family=\"IBM Plex Mono,monospace\" font-size=\"14\" fill=\"#2C62A8\">q₁</text>\n    <text x=\"380\" y=\"198\" font-family=\"IBM Plex Mono,monospace\" font-size=\"14\" fill=\"#0F6B4F\">q₂</text>\n    </svg></span><p>Bestäm luftflödet i varje gren och det gemensamma tryckfallet. Visa hur du använder båda villkoren.</p>",
     "s": "<p>Vi har två villkor: \\[q_1+q_2=300\\] och \\[0{,}008q_1^2=0{,}018q_2^2.\\]</p><p>Dividera den andra ekvationen med 0,008: \\[q_1^2=2{,}25q_2^2.\\]</p><p>Flödena är positiva, så \\[q_1=1{,}5q_2.\\]</p><p>Sätt in i totalflödet: \\[1{,}5q_2+q_2=300\\Rightarrow2{,}5q_2=300.\\]</p><p>Därmed \\(q_2=120\\) L/s och \\(q_1=180\\) L/s. Tryckfallet blir \\[\\Delta p=0{,}008\\cdot180^2=259{,}2\\,\\mathrm{Pa}.\\]</p><p><strong>Svar: \\(q_1=180\\) L/s, \\(q_2=120\\) L/s och gemensamt tryckfall 259,2 Pa.</strong></p>",
     "id": "5.98"
   },
@@ -18154,7 +18154,7 @@ window.BANKMA2 = [
       "2a"
     ],
     "familj": "vvs_fastighet_filter_tryckfall_bestam_potens",
-    "t": "<p>För ett rent ventilationsfilter används modellen \\[\\Delta p=Cq^2.\\] Vid luftflödet 150 L/s mäts tryckfallet till 90 Pa.</p><ol><li>Bestäm konstanten \\(C\\).</li><li>En varningsgräns är satt till 160 Pa. Vid vilket luftflöde når modellen denna gräns?</li></ol>",
+    "t": "<p>För ett rent ventilationsfilter används modellen \\[\\Delta p=Cq^2.\\] Vid luftflödet 150 L/s mäts tryckfallet till 90 Pa.</p><ol><li>Bestäm konstanten \\(C\\).</li><li>I uppgiften används 160 Pa som en given gräns. Vid vilket luftflöde når modellen denna gräns?</li></ol>",
     "s": "<p>Sätt in mätningen: \\[90=C\\cdot150^2.\\]</p><p>Alltså \\[C=\\frac{90}{22500}=0{,}004.\\]</p><p>Vid 160 Pa gäller \\[160=0{,}004q^2\\Rightarrow q^2=40000.\\]</p><p>Det positiva luftflödet är \\(q=200\\).</p><p><strong>Svar: \\(C=0{,}004\\) och luftflödet 200 L/s.</strong></p>",
     "id": "5.100"
   },
@@ -18168,7 +18168,7 @@ window.BANKMA2 = [
     ],
     "familj": "vvs_fastighet_kanal_tvarsnitt_andragrad",
     "t": "<p>Ett rektangulärt kanaltvärsnitt ska ha omkretsen 2,8 m. Om bredden är \\(x\\) meter blir höjden \\(1{,}4-x\\) meter.</p><span class=\"fig smal\"><svg width=\"500\" height=\"300\" viewBox=\"0 0 500 300\" role=\"img\" aria-label=\"Rektangulärt ventilationskanaltvärsnitt\">\n    <rect x=\"15\" y=\"15\" width=\"470\" height=\"270\" rx=\"12\" fill=\"#fff\" stroke=\"#E4E3E6\"/>\n    <rect x=\"135\" y=\"70\" width=\"240\" height=\"150\" fill=\"#EDF2F7\" stroke=\"#2B2527\" stroke-width=\"3\"/>\n    <line x1=\"135\" y1=\"240\" x2=\"375\" y2=\"240\" stroke=\"#B43123\" stroke-width=\"2\"/>\n    <line x1=\"135\" y1=\"232\" x2=\"135\" y2=\"248\" stroke=\"#B43123\" stroke-width=\"2\"/><line x1=\"375\" y1=\"232\" x2=\"375\" y2=\"248\" stroke=\"#B43123\" stroke-width=\"2\"/>\n    <text x=\"225\" y=\"263\" font-family=\"IBM Plex Mono,monospace\" font-size=\"15\" fill=\"#B43123\">x m</text>\n    <line x1=\"400\" y1=\"70\" x2=\"400\" y2=\"220\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n    <line x1=\"392\" y1=\"70\" x2=\"408\" y2=\"70\" stroke=\"#2C62A8\" stroke-width=\"2\"/><line x1=\"392\" y1=\"220\" x2=\"408\" y2=\"220\" stroke=\"#2C62A8\" stroke-width=\"2\"/>\n    <text x=\"410\" y=\"150\" font-family=\"IBM Plex Mono,monospace\" font-size=\"15\" fill=\"#2C62A8\">(1,4 - x) m</text>\n    </svg></span><ol><li>Bestäm de två möjliga måttparen om tvärsnittsarean ska vara \\(0{,}45\\,\\mathrm{m^2}\\).</li><li>Bestäm den största möjliga arean och avgör om \\(0{,}50\\,\\mathrm{m^2}\\) är möjlig med denna omkrets.</li></ol>",
-    "s": "<p>Arean är \\[A(x)=x(1{,}4-x)=-x^2+1{,}4x.\\]</p><p>För \\(A=0{,}45\\): \\[x^2-1{,}4x+0{,}45=0.\\]</p><p>Lösningarna är \\(x=0{,}50\\) och \\(x=0{,}90\\). Måttparen blir därför 0,50 m × 0,90 m respektive 0,90 m × 0,50 m.</p><p>Parabelns symmetrilinje är \\(x=0{,}70\\). Där blir maxarean \\[A(0{,}70)=0{,}49\\,\\mathrm{m^2}.\\]</p><p>Eftersom 0,50 m² är större än maxvärdet 0,49 m² är den arean inte möjlig med omkretsen 2,8 m.</p>",
+    "s": "<p>Arean är \\[A(x)=x(1{,}4-x)=-x^2+1{,}4x.\\]</p><p>För \\(A=0{,}45\\): \\[x^2-1{,}4x+0{,}45=0.\\]</p><p>Lösningarna är \\(x=0{,}50\\) och \\(x=0{,}90\\). Måttparen blir därför 0,50 m × 0,90 m respektive 0,90 m × 0,50 m.</p><p>Parabelns symmetrilinje är \\(x=0{,}70\\). Där blir den största arean \\[A(0{,}70)=0{,}49\\,\\mathrm{m^2}.\\]</p><p>Eftersom 0,50 m² är större än det största värdet 0,49 m² är den arean inte möjlig med omkretsen 2,8 m.</p>",
     "id": "5.101"
   },
   {
@@ -18233,8 +18233,8 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/1/2",
     "familj": "samhall_enkat_bortfall_viktning",
-    "t": "<p>En samhällsvetenskaplig undersökning skickas till 600 personer. Gruppen 18–29 år har svarsfrekvens 70 % och gruppen 30 år eller äldre har svarsfrekvens 90 %. Totalt kommer 468 svar in.</p><p>Bland de svarande i den yngre gruppen stödjer 50 % ett förslag. Bland de svarande i den äldre gruppen stödjer 75 % förslaget.</p><ol><li>Bestäm hur många personer ur varje åldersgrupp som ingick i det ursprungliga urvalet.</li><li>Beräkna andelen stöd bland de 468 inkomna svaren.</li><li>Beräkna i stället en gruppvägd andel där de två grupperna får den vikt de hade i det ursprungliga urvalet. Förklara varför de två resultaten skiljer sig.</li></ol>",
-    "s": "<p>Låt \\(x\\) vara antalet 18–29 år och \\(y\\) antalet 30 år eller äldre.</p><p>\\[\\begin{cases}x+y=600\\\\0{,}70x+0{,}90y=468\\end{cases}\\]</p><p>Subtraktion efter lämplig multiplikation ger \\(y=240\\) och \\(x=360\\). Antalet svar blir då \\(252\\) respektive \\(216\\).</p><p>Stöd bland de inkomna svaren: \\(0{,}50\\cdot252+0{,}75\\cdot216=288\\). Andelen är \\(288/468\\approx61{,}5\\%\\).</p><p>I ursprungsurvalet utgör yngre 60 % och äldre 40 %. Den gruppvägda andelen blir \\(0{,}60\\cdot50\\%+0{,}40\\cdot75\\%=60\\%\\).</p><p>Skillnaden uppstår eftersom den äldre gruppen har högre svarsfrekvens och därför får större vikt bland de inkomna svaren än i det ursprungliga urvalet.</p><p><strong>360 yngre och 240 äldre; andel bland de inkomna svaren cirka 61,5 %, gruppvägd andel 60 %.</strong></p>"
+    "t": "<p>En samhällsvetenskaplig undersökning skickas till 600 personer. Gruppen 18–29 år har svarsfrekvens 70 % och gruppen 30 år eller äldre har svarsfrekvens 90 %. Totalt kommer 468 svar in.</p><p>Bland de svarande i den yngre gruppen stödjer 50 % ett förslag. Bland de svarande i den äldre gruppen stödjer 75 % förslaget.</p><ol><li>Bestäm hur många personer ur varje åldersgrupp som ingick i det ursprungliga urvalet.</li><li>Beräkna andelen stöd bland de 468 inkomna svaren.</li><li>Beräkna i stället andelen stöd när de två åldersgrupperna får samma andelar som de hade i det ursprungliga urvalet. Förklara varför de två beräknade andelarna skiljer sig.</li></ol>",
+    "s": "<p>Låt \\(x\\) vara antalet 18–29 år och \\(y\\) antalet 30 år eller äldre.</p><p>\\[\\begin{cases}x+y=600\\\\0{,}70x+0{,}90y=468\\end{cases}\\]</p><p>Lös ekvationssystemet med additionsmetoden. Då fås \\(x=360\\) och \\(y=240\\). Antalet svar blir då 252 respektive 216.</p><p>Stöd bland de inkomna svaren: \\(0{,}50\\cdot252+0{,}75\\cdot216=288\\). Andelen är \\(288/468\\approx61{,}5\\%\\).</p><p>I ursprungsurvalet utgör yngre 60 % och äldre 40 %. Om de andelarna används blir stödet</p><p>\\[0{,}60\\cdot50\\%+0{,}40\\cdot75\\%=60\\%.\\]</p><p>Resultaten skiljer sig eftersom den äldre gruppen har högre svarsfrekvens och därför utgör en större andel av de inkomna svaren än av det ursprungliga urvalet.</p><p><strong>360 yngre och 240 äldre; cirka 61,5 % bland de inkomna svaren och 60 % när ursprungsurvalets gruppandelar används.</strong></p>"
   },
   {
     "id": "5.107",
@@ -18246,7 +18246,7 @@ window.BANKMA2 = [
     "niva": "E",
     "poang": "2/0/0",
     "familj": "samhall_normal_attityd_intervall",
-    "t": "<p>I en stor enkät är ett sammanvägt attitydmått ungefär normalfördelat med medelvärdet 50 och standardavvikelsen 8.</p><p>Ungefär hur stor andel ligger mellan 42 och 58? Använd normalfördelningsfiguren på formelbladet.</p>",
+    "t": "<p>I en stor enkät är ett attitydmått ungefär normalfördelat med medelvärdet 50 och standardavvikelsen 8.</p><p>Ungefär hur stor andel ligger mellan 42 och 58? Använd normalfördelningsfiguren på formelbladet.</p>",
     "s": "<p>42 och 58 är \\(\\mu-\\sigma\\) respektive \\(\\mu+\\sigma\\). Formelbladet visar 34,1 % på vardera sidan om medelvärdet inom en standardavvikelse.</p><p>\\[34{,}1\\%+34{,}1\\%=68{,}2\\%.\\]</p><p><strong>Cirka 68,2 %.</strong></p>"
   },
   {
@@ -18298,8 +18298,8 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/1/2",
     "familj": "samhall_befolkning_modellval_regression",
-    "t": "<p>Befolkningen i en fiktiv kommun mäts vartannat år. \\(t\\) är antal år efter startåret och \\(P\\) anges i tusental.</p><table class=\"data\"><tr><th>t</th><th>P</th></tr><tr><td>0</td><td>50,0</td></tr><tr><td>2</td><td>52,0</td></tr><tr><td>4</td><td>54,1</td></tr><tr><td>6</td><td>56,3</td></tr></table><ol><li>Bestäm både en linjär och en exponential regressionsmodell med ett digitalt verktyg.</li><li>Beräkna båda modellernas prognos för \\(t=20\\).</li><li>Förklara varför det är svårt att avgöra vilken modell som är bäst enbart utifrån de fyra mätpunkterna.</li></ol>",
-    "s": "<p>En linjär regression ger ungefär \\(P=49{,}95+1{,}05t\\). En exponential regression ger ungefär \\(P=49{,}99\\cdot1{,}01998^t\\).</p><p>För \\(t=20\\) ger den linjära modellen cirka \\(70{,}95\\) tusen och exponentialmodellen cirka \\(74{,}25\\) tusen.</p><p>Båda modellerna ligger mycket nära de fyra observerade värdena. Skillnaden blir tydligare först långt utanför mätintervallet, där båda prognoserna dessutom är mer osäkra.</p><p><strong>Cirka 71,0 tusen respektive 74,3 tusen vid \\(t=20\\); data räcker inte för ett säkert långsiktigt modellval.</strong></p>"
+    "t": "<p>Befolkningen i en fiktiv kommun mäts vartannat år. \\(t\\) är antal år efter startåret och \\(P\\) anges i tusental.</p><table class=\"data\"><tr><th>t</th><th>P</th></tr><tr><td>0</td><td>50,0</td></tr><tr><td>2</td><td>52,0</td></tr><tr><td>4</td><td>54,1</td></tr><tr><td>6</td><td>56,3</td></tr></table><ol><li>Bestäm med ett digitalt verktyg en linjär regressionsmodell och en exponentialmodell.</li><li>Beräkna båda modellernas prognos för \\(t=20\\).</li><li>Förklara varför det är svårt att avgöra vilken modell som är bäst enbart utifrån de fyra mätpunkterna.</li></ol>",
+    "s": "<p>En linjär regressionsmodell blir ungefär \\(P=49{,}95+1{,}05t\\). En exponentialmodell blir ungefär \\(P=49{,}99\\cdot1{,}01998^t\\).</p><p>För \\(t=20\\) ger den linjära modellen cirka \\(70{,}95\\) tusen och exponentialmodellen cirka \\(74{,}25\\) tusen.</p><p>Båda modellerna ligger mycket nära de fyra observerade värdena. Skillnaden blir tydligare först långt utanför mätintervallet, där båda prognoserna dessutom är mer osäkra.</p><p><strong>Cirka 71,0 tusen respektive 74,3 tusen vid \\(t=20\\); de fyra mätvärdena räcker inte för att säkert välja en modell för långtidsprognoser.</strong></p>"
   },
   {
     "id": "5.112",
@@ -18467,8 +18467,8 @@ window.BANKMA2 = [
     "niva": "C",
     "poang": "0/3/0",
     "familj": "samhall_enkat_urval_viktat_medel",
-    "t": "<p>I en kommun utgör grupp A 60 % av befolkningen och grupp B 40 %. I en undersökning är medelvärdet på en fråga 7,2 i grupp A och 6,1 i grupp B.</p><p>I det faktiska svarsunderlaget råkar 80 % komma från grupp A och 20 % från grupp B.</p><ol><li>Beräkna medelvärdet om svaren vägs efter svarsunderlagets fördelning.</li><li>Beräkna i stället medelvärdet om grupperna vägs efter kommunens befolkningsfördelning.</li><li>Förklara vad skillnaden visar.</li></ol>",
-    "s": "<p>Svarsunderlagets medelvärde blir \\(0{,}80\\cdot7{,}2+0{,}20\\cdot6{,}1=6{,}98\\).</p><p>Vägt efter befolkningen blir värdet \\(0{,}60\\cdot7{,}2+0{,}40\\cdot6{,}1=6{,}76\\).</p><p>Skillnaden visar att en grupp som är överrepresenterad bland svaren kan påverka det sammanlagda resultatet.</p><p><strong>6,98 respektive 6,76.</strong></p>"
+    "t": "<p>I en kommun utgör grupp A 60 % av befolkningen och grupp B 40 %. I en undersökning är medelvärdet på en fråga 7,2 i grupp A och 6,1 i grupp B.</p><p>I det faktiska svarsunderlaget kommer 80 % av svaren från grupp A och 20 % från grupp B.</p><ol><li>Beräkna ett gemensamt medelvärde när grupp A står för 80 % och grupp B för 20 %.</li><li>Beräkna i stället ett gemensamt medelvärde när grupp A står för 60 % och grupp B för 40 %, som i kommunens befolkning.</li><li>Förklara vad skillnaden mellan resultaten visar.</li></ol>",
+    "s": "<p>Med svarsunderlagets fördelning blir medelvärdet \\(0{,}80\\cdot7{,}2+0{,}20\\cdot6{,}1=6{,}98\\).</p><p>Med befolkningens fördelning blir medelvärdet \\(0{,}60\\cdot7{,}2+0{,}40\\cdot6{,}1=6{,}76\\).</p><p>Skillnaden visar att en grupp som utgör en större andel av svaren än av befolkningen kan påverka det sammanlagda resultatet.</p><p><strong>6,98 respektive 6,76.</strong></p>"
   },
   {
     "id": "5.125",
@@ -18481,7 +18481,7 @@ window.BANKMA2 = [
     "poang": "0/1/2",
     "familj": "samhall_korrelation_befolkningsstorlek",
     "t": "<p>En journalist jämför fyra kommuner och får följande data.</p><table class=\"data\"><tr><th>Invånare (tusental)</th><th>Biblioteksbesök (tusental)</th><th>Anmälda serviceärenden</th></tr><tr><td>20</td><td>30</td><td>160</td></tr><tr><td>40</td><td>60</td><td>320</td></tr><tr><td>60</td><td>90</td><td>480</td></tr><tr><td>80</td><td>120</td><td>640</td></tr></table><ol><li>Bestäm korrelationskoefficienten mellan biblioteksbesök och serviceärenden.</li><li>Journalisten skriver: ”Fler biblioteksbesök leder till fler serviceärenden.” Bedöm slutsatsen genom att även jämföra uppgifterna med kommunernas storlek.</li></ol>",
-    "s": "<p>De två kolumnerna är exakt proportionella, så den linjära korrelationskoefficienten är \\(r=1\\).</p><p>Men båda antalen ökar också exakt proportionellt med invånarantalet. Biblioteksbesöken är \\(1{,}5\\) per invånare i samtliga kommuner och serviceärendena är 8 per 1000 invånare i samtliga kommuner.</p><p>Sambandet mellan de två råa antalen kan därför förklaras av kommunstorleken. Korrelationen visar inte att biblioteksbesök orsakar serviceärenden.</p><p><strong>\\(r=1\\), men slutsatsen om orsak stöds inte; invånarantalet förklarar den gemensamma ökningen i råa antal.</strong></p>"
+    "s": "<p>De två kolumnerna är exakt proportionella, så den linjära korrelationskoefficienten är \\(r=1\\).</p><p>Men båda antalen ökar också exakt proportionellt med invånarantalet. Biblioteksbesöken är \\(1{,}5\\) per invånare i samtliga kommuner och serviceärendena är 8 per 1000 invånare i samtliga kommuner.</p><p>Sambandet mellan de två angivna antalen kan därför förklaras av kommunstorleken. Korrelationen visar inte att biblioteksbesök orsakar serviceärenden.</p><p><strong>\\(r=1\\), men slutsatsen om orsak stöds inte; invånarantalet förklarar den gemensamma ökningen i de angivna antalen.</strong></p>"
   },
   {
     "id": "5.126",
@@ -18571,8 +18571,8 @@ window.BANKMA2 = [
     "niva": "A",
     "poang": "0/1/2",
     "familj": "samhall_normalmodell_granskning",
-    "t": "<p>Ett attitydmått i en undersökning har medelvärdet 50 och standardavvikelsen 10. En analytiker antar att resultaten är normalfördelade.</p><p>I ett material med 1 000 personer ligger 870 personer mellan 30 och 70.</p><ol><li>Hur många personer skulle normalfördelningsmodellen ungefär förutsäga mellan 30 och 70? Använd formelbladet.</li><li>Jämför modellen med det observerade utfallet.</li><li>Bedöm om uppgifterna ger skäl att kontrollera normalfördelningsantagandet närmare.</li></ol>",
-    "s": "<p>Intervallet 30–70 är \\(\\mu\\pm2\\sigma\\). Formelbladet ger cirka 95,4 % inom två standardavvikelser.</p><p>Modellen förutsäger därför \\(0{,}954\\cdot1000=954\\) personer. Det observerade antalet är 870, alltså 84 färre.</p><p>Skillnaden är tydlig. Den visar inte ensam exakt hur fördelningen ser ut, men den ger goda skäl att undersöka om normalfördelningsmodellen passar materialet.</p><p><strong>Modellen förutsäger cirka 954 personer, jämfört med 870 observerade; modellantagandet bör granskas närmare.</strong></p>"
+    "t": "<p>Ett attitydmått i en undersökning har medelvärdet 50 och standardavvikelsen 10. En analytiker antar att resultaten är normalfördelade.</p><p>I ett material med 1 000 personer ligger 870 personer mellan 30 och 70.</p><ol><li>Hur många personer skulle normalfördelningsmodellen ungefär förutsäga mellan 30 och 70? Använd formelbladet.</li><li>Jämför modellens resultat med det faktiska antalet 870.</li><li>Bedöm om uppgifterna ger skäl att kontrollera närmare om normalfördelning är en rimlig modell för resultaten.</li></ol>",
+    "s": "<p>Intervallet 30–70 är \\(\\mu\\pm2\\sigma\\). Formelbladet ger cirka 95,4 % inom två standardavvikelser.</p><p>Modellen förutsäger därför \\(0{,}954\\cdot1000=954\\) personer. Det observerade antalet är 870, alltså 84 färre.</p><p>Skillnaden är tydlig. Den visar inte ensam exakt hur fördelningen ser ut, men den ger goda skäl att undersöka om normalfördelningsmodellen passar materialet.</p><p><strong>Modellen förutsäger cirka 954 personer, jämfört med 870 observerade; det bör kontrolleras närmare om normalfördelning är en rimlig modell.</strong></p>"
   },
   {
     "id": "5.133",
